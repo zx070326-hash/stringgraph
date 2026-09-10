@@ -35,6 +35,11 @@ import StringFormal.NoGhost.DDF
   `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + a·b - m + (m+1)·½ b·b) V_{J-m}` 在真空上的特例
   （用 `V_J|k⟩ = Φ_J` 与 `m ≥ 1` 时 `L_m^{(a)}|k⟩ = 0`），与 `formal/TODO.md` (3) 记录的
   文献形式逐项相符；权 `h = ½ (b·b) = α' k_0²`，DDF 归一化 `k_0² = 0` 使其为零。
+* `Fock.Lop_zero_apply_creaExp` — `m = 0` 的情形 `L_0 Φ_J = (α'k² + J) Φ_J`。它**不是**上式在
+  `m = 0` 的特例：`m ≥ 1` 时 `j = 0` 与 `j = m` 是两项、各出 `½ (a·b)`，`m = 0` 时二者并成
+  一项 `½ :α_0·α_0: = ½ (a·a)`，且中间段为空。把 `m = 0` 代入上式会得到错误的
+  `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 的齐次元，这一条直接由
+  `Fock.Lop_zero_apply_of_mem_levelSubmodule`（`L_0 = α'k² + N`）得到。
 * `Fock.Lop_one_apply_creaExp_one` / `Fock.Lop_one_apply_creaExp_one_via_mode` —
   `m = J = 1` 的两条独立计算（Sugawara 求和 vs. 对易子 `Fock.Lop_apply_mode_one`），
   给出同一答案 `(a · b) |k⟩`，用来交叉验证上面的常数。
@@ -46,9 +51,10 @@ import StringFormal.NoGhost.DDF
 
 ## 尚缺（本文件的最终目标尚未完成）
 
-* `m = 0` 与 `m < 0`。上面的分段计算只对 `m ≥ 1` 成立：`m = 0` 时 `j = 0` 与 `j = m`
-  两项重合（结果里的 `2 · ½ (a · b)` 变成 `½ (a·b + a·b)` 的另一种配平，且中间段为空），
-  `m < 0` 时中间段被"双产生"段取代。本轮未做。
+* `m < 0`。这不只是"分段计算换个写法"：`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，所以真空上的等式
+  **不再**形如 `L_m Φ_J = c · Φ_{J-m}`——共形权恒等式右边多出 `V_J L_m^{(a)}|k⟩` 一项，
+  它是真正含产生算子的向量。要处理 `m < 0` 必须把 `vertexOsc`（而不只是 `creaExp`）
+  一起搬过来。本轮未做。
 * `[L_m, V_K]` 的共形权公式。上面只是**真空上**的作用；一般态上的对易子还要把
   `NoGhost/VertexOperator.lean` 的 `vertexOsc`（湮灭半 `vertexAnn`）一起搬过来。
 * 因此本文件目前**不**支撑图上任何 `formalized` 的推导；以上都是将来共形权推导的中间步。
@@ -529,6 +535,29 @@ theorem Lop_apply_creaExp_of_pos_shifted (η a b : Fin D → R) (hη : ∀ μ, �
   rw [hsum]
   congr 1
   linear_combination (-(∑ μ : Fin D, η μ * b μ * b μ)) * two_mul_invTwo R
+
+/-- **The `m = 0` case**, which is *not* the `m = 0` specialisation of
+`Fock.Lop_apply_creaExp_of_pos`: `L_0 Φ_J = (α' k² + J) Φ_J`.
+
+The two formulas genuinely differ.  For `m ≥ 1` the indices `j = 0` and `j = m` of the
+Sugawara sum are distinct and each contributes `½ (a · b)`; at `m = 0` they coincide into the
+single term `½ :α_0 · α_0: = ½ (a · a)`, and the middle region `1 ≤ j ≤ m - 1` is empty.
+Substituting `m = 0` into `Fock.Lop_apply_creaExp_of_pos` would give the wrong value
+`a · b - ½ (b · b) + J` instead of `½ (a · a) + J`, so the hypothesis `0 < m` there is
+essential.
+
+Since `Φ_J` is homogeneous of level `J` (`Fock.creaExp_mem_levelSubmodule`), this case is just
+`Fock.Lop_zero_apply_of_mem_levelSubmodule`, i.e. `L_0 = α' k² + N`. -/
+theorem Lop_zero_apply_creaExp (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (J : ℤ) :
+    Lop η a 0 (creaExp η b J)
+      = (invTwo R * zeroModeSq η a + (J : R)) • creaExp η b J := by
+  rcases lt_or_ge J 0 with hJ | hJ
+  · rw [creaExp_of_neg η b hJ, map_zero, smul_zero]
+  · obtain ⟨N, rfl⟩ : ∃ N : ℕ, J = (N : ℤ) := ⟨J.toNat, (Int.toNat_of_nonneg hJ).symm⟩
+    rw [Lop_zero_apply_of_mem_levelSubmodule η a hη (creaExp_mem_levelSubmodule η b rfl)]
+    congr 1
+    push_cast
+    ring
 
 end LopCreaExp
 

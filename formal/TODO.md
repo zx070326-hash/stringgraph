@@ -240,9 +240,14 @@
       交叉验证：`Fock.Lop_one_apply_creaExp_one`（由上式）与
       `Fock.Lop_one_apply_creaExp_one_via_mode`（由对易子 `Lop_apply_mode_one`）
       在 `m = J = 1` 给出同一答案。无 sorry，公理只有标准三条。
-    - [ ] (3c) `m = 0` 与 `m < 0` 的真空等式：**未做**。上面的五段分解只对 `m ≥ 1` 成立
-      （`m = 0` 时 `j = 0` 与 `j = m` 两项重合、中间段为空；`m < 0` 时中间段变成双产生段）。
-      注意 `m ≤ 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，所以真空归约本身也要改写。
+    - [x] (3c) `m = 0`：`Fock.Lop_zero_apply_creaExp`，`L_0 Φ_J = (α'k² + J) Φ_J`。
+      **数学要点**：它不是 (3b) 在 `m = 0` 的特例——`m ≥ 1` 时 `j = 0` 与 `j = m` 是两项、
+      各出 `½ (a·b)`，`m = 0` 时并成一项 `½ (a·a)`，把 `m = 0` 代入 (3b) 会得到错误的
+      `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 齐次元，这条直接由已有的
+      `Fock.Lop_zero_apply_of_mem_levelSubmodule` 得到。
+    - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
+      共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
+      第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
     - [ ] (3d) 由 `vertexOsc_unique` 从 (3b) 得到完整的 `[L_m, V_J]`：**未做**。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
