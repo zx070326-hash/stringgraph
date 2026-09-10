@@ -1,0 +1,40 @@
+id: spectrum.open-string-requires-closed-string--via-closed-channel-pole
+target: spectrum.open-string-requires-closed-string
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.cylinder-tadpole-divergence-is-infrared
+    note: |
+      提供 k^μ = 0 时的 1/0 型发散及其「两个 tadpole 夹一个闭弦传播子」的机制；
+      本卡做的事就是把它推广到 k^μ ≠ 0，从而把发散变成极点。
+  - id: spectrum.cylinder-closed-channel-open-closed-duality
+    note: 提供大 s 渐近展开，(7.4.10) 的 exp(−α'k²s/2) 就是给这个展开加的动量因子。
+  - id: spectrum.amplitude-poles-from-vertex-operator-ope
+    inferred: true
+    note: |
+      **inferred: true**。「振幅在 k² = m² 处的极点 ⟺ 存在该中间态」这一判据在本图的落点
+      是树级那张卡（第 6 章，由 OPE 读出极点）。原书在 §7.4 这里**不引任何式号**，
+      只说「a resonance corresponding to propagation over long spacetime distances」。
+      单圈的通道分解与树级的 OPE 极点不是同一个论证，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.10) 及其上下文, p.225–226"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E34，L1（原书页图逐字）。
+summary: |
+  给圆柱两端加开弦顶点算子后，从一条边界流向另一条的时空动量 k^μ 一般不为零。
+  长圆柱（s → ∞）的渐近里因此多出 exp(−α'k²s/2)（(7.4.10)），
+  于是 ∫^∞ ds 的无质量项从 ∫ds·1（发散）变成 ∫ds exp(−α'k²s/2) ∝ 1/k²——
+  一个位于 k² = 0 的极点。极点意味着中间态是**在壳的无质量闭弦**，
+  即开弦散射可以经由闭弦中间态发生。故开弦理论的谱里必须有闭弦。
+gaps:
+  - "**原书没有写出带顶点算子的单圈振幅**：只给了大 s 渐近多出的因子 (7.4.10)。
+     完整的单圈开弦散射振幅（含顶点算子位置积分）在本章从未写出。"
+  - "**「极点 ⇒ 存在中间态」的判据在本处无出处**（见 inferred 边的说明）。"
+  - "**继承 spectrum.cylinder-tadpole-divergence-is-infrared 的悬空一步**：
+     圆盘 tadpole 非零（§6.6）在本图没有节点。"
+  - "**「as claimed in chapter 3」的那条断言未核对**（抽取记录 §3.1），
+     故本卡与第 3 章之间没有图内的边。"
+notes: |
+  由 curator 于 2026-09-11 建立。唯一的 inferred 边是「极点 ⇒ 中间态」判据的落点。
+author: curator-polchinski-ch7
+created: "2026-09-11"

@@ -16,13 +16,26 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§5.1, eq. (5.1.15), p.148（基本域 F₀：−½ ≤ Re τ ≤ ½ 且 |τ| ≥ 1）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E72，L1（读到 schrans-2020
-      笔记 p.248；**未核对 Polchinski 原书**）。
-      ⚠ 抽取记录逐字转引了 [S] 对**原书论证完备性**的评价：
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E72（初建时 L1：读到 schrans-2020
+      笔记 p.248）。
+
+      【**原书核实 2026-09-11（curator-polchinski-ch7，经 researcher 的 ch.7 抽取 §0.1 步骤 6 / #E24 备注 2）**】
+      **式号、页码、内容三者全部经 Cambridge Books Online 原书页图（ch.5 PDF p.4 = 印刷 p.148）
+      L1 确认无误**，先前的「未核对 Polchinski 原书」限定**由此撤销**。
+
+      ⓘ **同时取得原书自身对论证完备性的措辞（比第三方评价更强的证据）**，p.148 逐字：
+        「Using the modular transformations (5.1.13), **it can be shown that** every τ is equivalent
+         to exactly one point in the region F₀ shown in figure 5.2 … except on the boundaries which
+         are identified as shown in the figure.」
+      ——**「it can be shown」，无证明**。故本卡 statement 里的「边界的认同在本书中未被严格处理」
+      现在有了**原书自身**的依据，不再只依赖 [S] 的第三方评价。
+      同页另一句有用：「Because of the identifications one should think of F₀ as being
+      **rolled up, and open only at Im τ → ∞**.」
+
+      ⚠ 保留原有的 [S] 评价记录（第三方，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」）：
       「we have argued that F₀ is the fundamental domain of the modular group,
       we have been quite cavalier about the boundaries of F₀. Those who are interested in
       a more detailed approach are referred to Zwiebach's book, section 26.6 of the second edition.」
-      这是第三方评价，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」。
 tags: [worldsheet, torus, modular-group, moduli, fundamental-domain]
 notes: |
   数学上正确的陈述与证明按 [S] 的指路在 Zwiebach 2nd ed. §26.6；
@@ -31,5 +44,20 @@ notes: |
 
   下游意义：S-矩阵主公式 worldsheet.string-s-matrix 里的模积分写作 ∫_F d^μ t，
   「在基本域上积分」正是靠这条命题才不会重复计数；环面（单圈）情形的 F 就是这里的 F₀。
+
+  **⚠ 原书内部的写法不一致（curator-polchinski-ch7, 2026-09-11，两处都 L1）**：
+  本卡用的是 §5.1 (5.1.15) 的**闭区域** −½ ≤ Re τ ≤ ½、|τ| ≥ 1（附边界认同）；
+  而 §7.3 (7.3.14)（p.219）用的是**开区域** |τ| > 1、|τ₁| < ½、τ₂ > 0。
+  两者差一层零测度边界，**原书没有说明为什么 §7.3 改用开区域**
+  （合理猜测是要一个「边界不重复计数」的代表元集合，但这是抽取者的推断，原书未写）。
+  对积分值无影响，对「基本域」的严格表述有影响。见
+  literature/extractions/polchinski-1998-v1-ch7.md 的 Q1，以及
+  spectrum.one-loop-uv-finiteness-from-modular-invariance（它引的是 (7.3.14) 的开区域版本）。
+
+  **下游新增（2026-09-11）**：spectrum.one-loop-torus-amplitude、
+  spectrum.one-loop-uv-finiteness-from-modular-invariance、
+  worldsheet.modular-truncation-breaks-brst-decoupling 三条都依赖本卡；
+  其中最后一条的内容正是「F₀ 的表观边界成对认同 ⇒ 面项抵消」，
+  故**本卡边界认同的不严格性直接传导到那条一致性论证**。
 author: curator-polchinski-ch5
 created: "2026-09-11"

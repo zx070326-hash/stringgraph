@@ -1,0 +1,38 @@
+id: spectrum.cylinder-closed-channel-open-closed-duality--via-eta-modular-transformation
+target: spectrum.cylinder-closed-channel-open-closed-duality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-cylinder-amplitude
+    note: 提供被重写的对象 (7.4.1)：iV₂₆n²∫(dt/2t)(8π²α't)^{−13}η(it)^{−24}。
+  - id: math.dedekind-eta-modular-transformation
+    note: |
+      提供 (1)：η(it) = t^{−1/2}η(i/t)（原书 (7.4.2) 处逐字引 (7.2.44)）。
+      **这是本推导的支点**：没有 η 的 S 变换，t → 0 的行为「在两种表示里都看不出来」
+      （原书 §7.2 逐字：「The q → 1 behavior is not manifest in either form, because an infinite
+      number of terms contribute. It can be obtained from the τ → −1/τ modular transformation」）。
+  - id: math.dedekind-eta-function
+    note: 提供乘积表示，用于 (3) 的展开 exp(2s)∏[1−exp(−2ns)]^{−24} = exp(2s) + 24 + O(exp(−2s))。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.2)–(7.4.4) 与 p.223 末段, p.223–224"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E30，L1（原书页图逐字）。
+summary: |
+  用 η(it) = t^{−1/2}η(i/t) 把 (7.4.1) 的被积函数从「短开弦圈」的变量换到「长闭弦线」的变量，
+  再换元 s = π/t，测度 dt/2t 与 t 的幂次合并，得 (7.4.3)。
+  在新变量下把 η(is/π)^{−24} 按乘积展开（s → ∞ 即 t → 0）：
+  领头项 exp(2s) 是闭弦快子，次项常数 24 是无质量闭弦态，其余指数压制。
+  这些项正是「在完备的闭弦态集合上展开」应有的渐近，故 t → 0 的区域应读作**长闭弦传播**，
+  而不是短距离效应。
+gaps:
+  - "**「should actually be interpreted as a long-distance effect」是解释性判断**：
+     模变换与展开这两步可机械验证，但「因此发散是 IR 而非 UV」的结论要靠通道解释
+     （见 spectrum.cylinder-tadpole-divergence-is-infrared 的极点论证）。"
+  - "**依赖 η 的 S 变换，而它在来源中零证明**（math.dedekind-eta-modular-transformation）。"
+  - "**(3) 的展开原书只给到 O(exp(−2s))**，没有给出一般项与余项估计。"
+  - "**边界态 |B⟩ 的算符表示归一化未定**（原书逐字「except that the normalization of |B⟩ is
+     undetermined」），且它与 (7.4.3) 的一致性被留作习题 7.14 ⇒ 本图**没有**算符侧的独立验证。"
+notes: |
+  由 curator 于 2026-09-11 建立。三条依赖边全为实边。
+author: curator-polchinski-ch7
+created: "2026-09-11"

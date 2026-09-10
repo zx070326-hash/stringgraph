@@ -1,0 +1,60 @@
+id: spectrum.bosonic-unoriented-tadpole-cancellation-so8192--via-three-surface-sum
+target: spectrum.bosonic-unoriented-tadpole-cancellation-so8192
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-cylinder-amplitude
+    note: |
+      提供圆柱的无质量 tadpole。⚠ 相加时用的是**无取向理论**的版本，即那张卡的表达式再乘 ½
+      （(7.4.3) 的 1/2π → 1/4π）；该 ½ 的依据是 (7.4.14) 下方那句「there is an extra ½ in both the
+      torus and cylinder amplitudes in the unoriented theory」，记在
+      spectrum.one-loop-klein-bottle-amplitude 的 statement (1) 里。
+      贡献 ∝ n²（两条边界各一个 Chan–Paton 迹）。
+  - id: spectrum.one-loop-klein-bottle-amplitude
+    note: 提供 Klein 瓶的无质量 tadpole，(7.4.19) 给贡献 ∝ 2²⁶。
+  - id: spectrum.one-loop-mobius-amplitude
+    note: |
+      提供 Möbius 带的无质量 tadpole，(7.4.23) 给交叉项 ∓2·2¹³n——**其中的 ∓ 正是 SO/Sp 的
+      净贡献 ±n**（那张卡的 (3)）。
+  - id: spectrum.cylinder-closed-channel-open-closed-duality
+    note: |
+      提供「无质量项的系数是 24」这个公共因子（(7.4.4) 的常数项），即 (7.4.24) 分子里的 24V₂₆。
+  - id: spectrum.cylinder-tadpole-divergence-is-infrared
+    note: |
+      提供「这些 ∫₀^∞ ds 型发散就是 tadpole（圆盘/RP₂ 上单闭弦顶点算子振幅）」这一解释，
+      没有它，(7.4.24) 只是一个发散积分而不是「tadpole 之和」。
+  - id: spectrum.chan-paton-gauge-group
+    convention_map: |
+      记号换算：原书写 Sp(k)、n = 2k；本图该卡写 USp(n)（n = Chan–Paton 指标数）。**USp(n) = Sp(n/2)**。
+    note: 提供 SO(n) / USp(n) 两支的存在与 Chan–Paton 指标数 n 的含义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.24), p.229；三个曲面的输入见 (7.4.3)(7.4.19)(7.4.23)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E38，L1（原书页图逐字，单页重渲染复核）。
+summary: |
+  把三个曲面的**无质量** tadpole（长圆柱表示里 ∫₀^∞ ds 的常数项）相加，
+  公共因子是 i·24·V₂₆/(4π(8π²α')¹³)：
+    圆柱（无取向，含额外 ½）：  + n²
+    Klein 瓶：                 + 2²⁶
+    Möbius 带：                ∓ 2·2¹³ n
+  和为 2²⁶ ∓ 2¹⁴ n + n² = (2¹³ ∓ n)²，即 (7.4.24)。
+  故总 tadpole ∝ (2¹³ ∓ n)，在 SO(n) 支取 n = 2¹³ = 8192 时为零：
+  圆盘 tadpole 与射影平面 tadpole 相消。
+  ⓘ 上面的配平已由抽取者独立复算（抽取记录 §0.4），并据此确认页图上的 24V₂₆ 读数。
+gaps:
+  - "**「相消」只在无质量项这一层**：领头的闭弦快子发散（∫ds e^{2s}）不相消，只能靠解析延拓
+     定义（spectrum.cylinder-tadpole-divergence-is-infrared 的 (1)），而延拓后的能量密度是复的
+     （抽取记录 #E25 的逐字）。因此「SO(8192) 时 tadpole 为零」**不等于**该理论的单圈振幅有限。"
+  - "**Möbius 带那一项的 ± 号未逐一验证**（继承自 spectrum.one-loop-mobius-amplitude 的 gaps）。"
+  - "**整体符号约定**：本章 bc 部门的整体符号是人为设为正的
+     （worldsheet.bc-ghost-torus-partition-function），三个曲面的相对符号因此不是独立算出的。"
+  - "**「作者判定玻色弦这一支 probably 无特殊意义」**：这不是缺口而是来源的自评，
+     但引用本卡时必须带上（已写进目标陈述）。"
+  - "**与超弦 SO(32) 无任何论证连接**：原书只有一句「the analogous cancellation for SO(32) in
+     superstring theory does」，无计算、无式号、无引用。**任何 8192 → 32 的推广都是本图之外的推断。**"
+notes: |
+  由 curator 于 2026-09-11 建立。六条依赖边全为实边（三个曲面卡 + 24 的来源 + tadpole 解释 +
+  Chan–Paton 群），其中 Chan–Paton 那条带 convention_map（Sp(k) ↔ USp(n)）。
+author: curator-polchinski-ch7
+created: "2026-09-11"
