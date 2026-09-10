@@ -5,6 +5,7 @@ Authors: stringgraph lean-formalizer
 -/
 import Mathlib.Tactic.FieldSimp
 import Mathlib.Tactic.Ring
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Ten-dimensional anomaly twelve-forms: the purely algebraic content
@@ -223,5 +224,47 @@ theorem iib_gravitational_anomaly_solutions (a b c : ℤ) :
     (-495 * a + b + 992 * c = 0 ∧ 225 * a + b - 448 * c = 0 ∧ -63 * a + b + 128 * c = 0)
       ↔ (a = 2 * c ∧ b = -2 * c) := by
   omega
+
+/-- The three linear conditions of `iib_gravitational_anomaly_solutions` really are the
+condition that the twelve-form *vanish as a polynomial*, not merely a convenient
+repackaging: the three monomials `tr R₂⁶`, `tr R₂⁴ tr R₂²`, `[tr R₂²]³` are independent,
+so `Î` vanishes for all values of the traces exactly when all three coefficients do.
+
+The forward direction is by evaluation at `(tr R₂², tr R₂⁴, tr R₂⁶) = (0,0,1), (1,1,0),
+(1,0,0)`. Note this is a statement about the *formal* twelve-form. For a fixed spacetime
+dimension the wedge monomials of a curvature two-form need not be pointwise independent;
+the physics argument treats them as independent, and that is what is formalised. -/
+theorem iib_anomaly_polynomial_vanishes_iff (a b c : K) :
+    (∀ trR2 trR4 trR6 : K, IhatIIB a b c trR2 trR4 trR6 = 0)
+      ↔ (-495 * a + b + 992 * c = 0 ∧ 225 * a + b - 448 * c = 0
+          ∧ -63 * a + b + 128 * c = 0) := by
+  constructor
+  · intro h
+    have h1 := h 0 0 1
+    have h2 := h 1 1 0
+    have h3 := h 1 0 0
+    unfold IhatIIB Ihat8 Ihat56 IhatSD at h1 h2 h3
+    refine ⟨by linear_combination 725760 * h1, ?_, by linear_combination 1327104 * h3⟩
+    linear_combination 552960 * h2 - 552960 * h3
+  · rintro ⟨e1, e2, e3⟩ trR2 trR4 trR6
+    unfold IhatIIB Ihat8 Ihat56 IhatSD
+    linear_combination (trR6 / 725760) * e1 + (trR4 * trR2 / 552960) * e2
+      + (trR2 ^ 3 / 1327104) * e3
+
+/-- **The complete statement of Polchinski (12.2.14).** For an integer chiral field
+content — `a` gravitinos **56**, `b` Majorana–Weyl fermions **8**, `c` self-dual tensors
+`[5]₊`, each counted net of parity conjugates — the total `d = 10` purely gravitational
+anomaly twelve-form vanishes identically **iff** `a = 2c` and `b = -2c`.
+
+Type IIB is the case `c = 1`, and `iib_gravitational_anomaly_cancels` is that instance. -/
+theorem iib_gravitational_anomaly_free_iff (a b c : ℤ) :
+    (∀ trR2 trR4 trR6 : K, IhatIIB (a : K) (b : K) (c : K) trR2 trR4 trR6 = 0)
+      ↔ (a = 2 * c ∧ b = -2 * c) := by
+  rw [iib_anomaly_polynomial_vanishes_iff, ← iib_gravitational_anomaly_solutions a b c]
+  constructor
+  · rintro ⟨h1, h2, h3⟩
+    exact ⟨by exact_mod_cast h1, by exact_mod_cast h2, by exact_mod_cast h3⟩
+  · rintro ⟨h1, h2, h3⟩
+    exact ⟨by exact_mod_cast h1, by exact_mod_cast h2, by exact_mod_cast h3⟩
 
 end StringFormal.Math
