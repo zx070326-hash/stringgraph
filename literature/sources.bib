@@ -34,8 +34,11 @@
   title   = {Compatibility of the dual Pomeron with unitarity and the absence of ghosts in the dual resonance model},
   journal = {Physics Letters B},
   volume  = {40},
+  number  = {2},
   pages   = {235--238},
-  year    = {1972}
+  year    = {1972},
+  doi     = {10.1016/0370-2693(72)90420-0},
+  note    = {卷/期/页/DOI 已核实（Crossref + INSPIRE 74899）。正文未获取（ScienceDirect 403、CERN CDS 反爬）：文中是否有 "Theorem 1" 未核实，间接证据指向无编号。摘要只给 d <= 26，不提 intercept；无 D>26 反例。见 extractions/brst-cohomology-sources.md §3。}
 }
 
 @article{brower-1972,
@@ -43,8 +46,33 @@
   title   = {Spectrum-generating algebra and no-ghost theorem for the dual model},
   journal = {Physical Review D},
   volume  = {6},
+  number  = {6},
   pages   = {1655--1662},
-  year    = {1972}
+  year    = {1972},
+  doi     = {10.1103/PhysRevD.6.1655},
+  note    = {卷/期/页/DOI 已核实（INSPIRE 74322 + ADS 1972PhRvD...6.1655B）。正文未获取（APS 403）。摘要把结果限定在 unit Regge intercept（a=1），不支持把 "(D<=25, a<=1) 或 (D=26, a=1)" 两分支表述归给本文。见 extractions/brst-cohomology-sources.md §4。}
+}
+
+@article{brower-thorn-1971,
+  author  = {Brower, Richard C. and Thorn, Charles B.},
+  title   = {Eliminating spurious states from the dual resonance model},
+  journal = {Nuclear Physics B},
+  volume  = {31},
+  pages   = {163--182},
+  year    = {1971},
+  doi     = {10.1016/0550-3213(71)90452-4},
+  note    = {Goddard 2008 综述把「D>26 时物理态中出现鬼」归给本文；但本文摘要只提 leading nine trajectories，未出现维数条件。矛盾未裁决，正文未读。}
+}
+
+@article{thorn-1987,
+  author  = {Thorn, Charles B.},
+  title   = {A detailed study of the physical state conditions in covariantly quantized string theories},
+  journal = {Nuclear Physics B},
+  volume  = {286},
+  pages   = {61--77},
+  year    = {1987},
+  doi     = {10.1016/0550-3213(87)90431-7},
+  note    = {元数据来自 nLab 引用条目，未与出版方交叉核对。Thorn 本人（arXiv:1110.5510）称此文把 1972 年的无鬼定理证明 substantially streamlined。查 a<=1 归属的首选目标。}
 }
 
 @article{kac-1979,
@@ -68,20 +96,56 @@
 @article{fgz-1986,
   author  = {Frenkel, Igor B. and Garland, Howard and Zuckerman, Gregg J.},
   title   = {Semi-infinite cohomology and string theory},
-  journal = {Proceedings of the National Academy of Sciences},
+  journal = {Proceedings of the National Academy of Sciences of the United States of America},
   volume  = {83},
+  number  = {22},
   pages   = {8442--8446},
-  year    = {1986}
+  year    = {1986},
+  doi     = {10.1073/pnas.83.22.8442},
+  note    = {全文已核实（PMC386946 扫描页五页逐页读毕）。无鬼定理 = Theorem 2.8 的第二个同构（作者自己指认）；消灭定理+维数公式 = Theorem 2.7；c=26 见 Proposition 2.1(i) 与 §2.1 的假设 pi(c)=26，文中无 "Q^2=0 iff c=26" 型编号陈述，D=26 是假设不是结论。见 extractions/brst-cohomology-sources.md §1。}
 }
 
 @article{lian-zuckerman-1989,
   author  = {Lian, Bong H. and Zuckerman, Gregg J.},
-  title   = {BRST cohomology of the supra-Virasoro algebras},
+  title   = {BRST cohomology of the super-Virasoro algebras},
   journal = {Communications in Mathematical Physics},
   volume  = {125},
+  number  = {2},
   pages   = {301--335},
   year    = {1989},
-  note    = {标题据记忆登记，未与期刊原文核对；卷/页由 reviewer 指定。定理编号未核实，引用处已标注。}
+  doi     = {10.1007/BF01217910},
+  note    = {标题已订正并核实（Project Euclid 卷期目录 + Crossref）：是 super-Virasoro，不是 supra-Virasoro。卷/期/页已核实。内容是 RNS 超弦（FGZ 1986 的超对称推广），不是玻色弦 c=26，勿用于玻色弦结论。全文在付费墙后，定理编号未核实。见 extractions/brst-cohomology-sources.md §2。}
+}
+
+@article{lian-zuckerman-1993,
+  author  = {Lian, Bong H. and Zuckerman, Gregg J.},
+  title   = {New perspectives on the BRST-algebraic structure of string theory},
+  journal = {Communications in Mathematical Physics},
+  volume  = {154},
+  number  = {3},
+  pages   = {613--646},
+  year    = {1993},
+  doi     = {10.1007/BF02102111},
+  note    = {元数据经 Crossref 核实。与 lian-zuckerman-1989 是不同论文，登记以防混淆。内容未抽取。}
+}
+
+@article{kato-ogawa-1983,
+  author  = {Kato, Mitsuhiro and Ogawa, Kaku},
+  title   = {Covariant quantization of string based on {BRS} invariance},
+  journal = {Nuclear Physics B},
+  volume  = {212},
+  pages   = {443--460},
+  year    = {1983},
+  doi     = {10.1016/0550-3213(83)90680-6},
+  note    = {元数据已核实（INSPIRE；卷页由 FGZ 1986 参考文献 5 独立佐证）。摘要确认 D=26 与截距 a=1 是 BRS 荷幂零的必然结果，并自称给出无鬼定理证明。是否已写成「BRST 上同调 == 旧协变物理态」的同构形式，正文未获取（ScienceDirect 403），未核实。定理编号未核实。见 extractions/brst-cohomology-sources.md §6。}
+}
+
+@misc{goddard-2008,
+  author = {Goddard, Peter},
+  title  = {From Dual Models to String Theory},
+  year   = {2008},
+  eprint = {0802.3249},
+  note   = {arXiv physics.hist-ph；作者本人的历史综述，是 goddard-thorn-1972 与 brower-1972 适用范围的二手证据来源。}
 }
 
 @article{green-schwarz-1984,
