@@ -301,7 +301,18 @@
             （检索后端曾误报「Main definitions include locality」；逐字读官方文档页后不成立——是把 TODO 读成 Definitions。）
             **=> 图里任何顶点代数/局域性节点现在都不能标 formalized，最高只能到 rigorous。**
             另注意本文 [L_m,L_n] 的中心项写成 ((m^3-m)/12) delta_{m,-n}，与 schottenloher-2008 的 (m/12)(m^2-1) delta_{m+n}
-            是同一式但记法不同，**约定要对齐**。见 extractions/math-sources.md §12。}
+            是同一式但记法不同，**约定要对齐**。见 extractions/math-sources.md §12。
+            **第三轮补充（researcher 2026-09-11）：(7) 本文与其仓库都没有 H^2(Vir) = 0、没有「Vir 完美」、没有「万有中心扩张」。**
+            两条独立证据：(a) Table 1 列出的全部条目里，涉及二阶上同调的只有 **Theorem 6.2 = H^2(**Witt**) 一维**，
+            没有任何 Virasoro 侧的上同调/完美性/万有性条目（L1，第二轮全文阅读记录）；
+            (b) 仓库目录 github.com/kkytola/VirasoroProject/tree/master/VirasoroProject 的 Lean 文件清单为
+            CentralChargeCalc / CentralExtension / Commutator / CyclicTripleSum / FockSpace / FockSpaceSugawara / HeisenbergAlgebra /
+            IndexTri / IsCentralExtension / LieAlgebraModuleUEA / LieAlgebraRepresentationOfBasis / LieCohomologySmallDegree / LieVerma /
+            SectionSES / Sugawara / VermaModule / VirasoroAlgebra / VirasoroCocycle / VirasoroVerma / WittAlgebra / **WittAlgebraCohomology**
+            （+ ToMathlib/）——**有 WittAlgebraCohomology.lean，没有任何 Virasoro 上同调文件**（L4，只读了文件名，未读内容）。
+            **=> 图节点 math.virasoro-universal-central-extension 目前最高只能到 rigorous；
+            而 worldsheet.virasoro-unique-central-extension（H^2(Witt) 一维）已由本文形式化。两条在形式化程度上不对称。**
+            见 extractions/math-sources.md 第 21.4 节。}
 }
 
 @misc{headrick-2008,
@@ -380,7 +391,31 @@
                **两个疑点**：(a) p.180 正文两处写「Theorem 10.5」「property 5 in Lemma 10.5」，
                但 10.5 是 delta 恒等式引理、没有 property 4/5，**几乎肯定应为 Theorem 10.10**，勿照抄；
                (b) Theorem 10.10 第 5 条求和下限在页图上疑似 j=1，而第 2-4 条均为 j=0，**引用前须复核原页**。
-               **其余章节的编号仍未核实，原限制照旧。** 见 extractions/math-sources.md §11。}
+               **其余章节的编号仍未核实，原限制照旧。** 见 extractions/math-sources.md §11。
+               **第三轮补充（researcher 2026-09-11）：第 4 章与第 5 章的编号限制也已解除（L1，两章逐页读图）。**
+               获取途径同上，同目录下 04_..._Ch04_... 与 05_..._Ch05_... （**该目录挂了全 11 章 + Prelims/Intro/Appendix/Index/References**）。
+               **Ch. 4「Central Extensions of Lie Algebras and Bargmann's Theorem」= LNP 759, pp. 63-73**
+               （页脚 DOI 10.1007/978-3-540-68628-6_5——**又一次章号 4 / DOI 后缀 _5 的错位**；PDF 页 = 书页 - 62）：
+               Definition 4.1, p.63（中心扩张）；Definition 4.2, p.67（**分裂 / 平凡扩张**）；Remark 4.3, p.67（线性 beta 与 Theta；beta 分裂 iff Theta = 0）；
+               Definition 4.4, p.68（**2-上循环**）；**Lemma 4.5, p.68**（三条分类：每个中心扩张来自上循环 / 每个上循环生成中心扩张 /
+               **该扩张分裂（从而平凡）iff 存在 mu in Hom(g,a) 使 Theta(X,Y) = mu([X,Y])**）；
+               Definition 4.6, p.69（Alt^2 / Z^2 / B^2 / **H^2(g,a) := Z^2/B^2**）；
+               **Remark 4.7, p.69** 逐字「The cohomology group H^2(g,a) is in one-to-one correspondence with the set of equivalence classes
+               of central extensions of g by a.」；**Theorem 4.8, p.69**（Bargmann，假设 H^2(Lie G, R) = 0）。
+               另有 Heisenberg 代数 H := C[T,T^{-1}] + CZ 的中心扩张 (4.1), p.65 与仿射化 (4.2), p.66。
+               **Ch. 5「The Virasoro Algebra」= LNP 759, pp. 75-85**（页脚 DOI ..._6，章号 5；PDF 页 = 书页 - 74）：
+               **Theorem 5.1, p.79** 全文只有一行「[GF68] H^2(W, C) isomorphic to C.」（后接三步证明至 p.82：omega in Z^2 / omega not in B^2 /
+               Theta in Z^2 => 存在 lambda 使 Theta ~ lambda omega），其内 Remark 逐字说 1/12 这个因子「is in accordance with the zeta function
+               regularization using the Riemann zeta function, cf. [GSW87, p. 96]」；
+               **Definition 5.2, p.82**：Vir = W + CZ，[L_n,L_m] = (n-m)L_{n+m} + delta_{n+m}(n/12)(n^2-1)Z，[L_n,Z] = 0；
+               **Theorem 5.3, p.83**（Diff_+(S) 无复化）；**Theorem 5.4, p.84**（**不存在以 Vir-hat 为李代数的复李群**）。
+               **=> worldsheet.virasoro-unique-central-extension 的 loc 现在可以写死为
+               「Ch. 5, Theorem 5.1, p. 79；定义见 Definition 5.2, p. 82；『中心扩张等价类 <-> H^2』见 Ch. 4, Remark 4.7, p. 69」。**
+               **★ 明确的否定结论：第 4、5 两章通读，没有任何一处陈述 H^2(Vir, C) = 0，也没有「Vir 是万有中心扩张」这个措辞**
+               （章首只说 Vir 是 W 的 "essentially unique nontrivial central extension"，那是 H^2(Witt) 那条，不是 H^2(Vir) 那条）。
+               **不要拿本书当 math.virasoro-universal-central-extension 的来源**——那条的来源是 feldvoss-siciliano-2025 Lemma 2.6。
+               本书 Theorem 5.1 把 H^2(W,C) 同构于 C 归给 [GF68] = gelfand-fuks-1968（元数据分歧见该条 note）。
+               见 extractions/math-sources.md 第 20 节。}
 }
 
 @misc{schrans-2020,
@@ -517,6 +552,174 @@
                **注意 Kac 全书是形式分布演算**：勘误表 (4.11.6) 里的「associativity property in the domain |z| > |w|」
                指的是选 i_{z,w} 这种形式展开，**不是解析收敛域**，极易误读。
                见 extractions/math-sources.md §10 与 §13。}
+}
+
+% ---------------------------------------------------------------------------
+% H^2(Vir) = 0 / 万有中心扩张（researcher 2026-09-11 第三轮登记；
+% 抽取记录见 extractions/math-sources.md 的 "§ H²(Vir) = 0 / 万有中心扩张" 一节，第 15-23 节）
+% ---------------------------------------------------------------------------
+
+@misc{feldvoss-siciliano-2025,
+  author        = {Feldvoss, J{\"o}rg and Siciliano, Salvatore},
+  title         = {Lie algebras whose derivation algebras are simple},
+  year          = {2025},
+  eprint        = {2501.15560},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.RA},
+  note          = {**全文已核实（2026-09-11，researcher，13 页逐页读毕）**，获取途径 arxiv.org/pdf/2501.15560 落盘 225 KB 后 Read 带 pages。
+                   v1，2025-01-26（正文脚注「Date: January 26, 2025.」）。**是否已被期刊接受：未核实（L0）**——若已发表编号可能变，本条 loc 写死的是 v1。
+                   **本条是图节点 math.virasoro-universal-central-extension（H^2(Vir, k) = 0）的首选来源。**
+                   **可引用的编号结果（均 L1 逐字）**：
+                   **Lemma 2.6, p. 7** 逐字为「Let V denote the Virasoro algebra over a field F of characteristic zero. Then H^1(V,F) = H^2(V,F) = 0.
+                   In particular, the Virasoro algebra V is a universal central extension of the two-sided Witt algebra W.」，**带完整证明**
+                   （完美性：[d_0,d_n] = n d_n 给 d_n (n != 0)；[d_-1,d_1] = 2d_0 给 d_0；[d_-2,d_2] = 4d_0 + (1/2)c 给中心元 c。
+                   H^2 部分用 Lemma 2.4 证明里的同一条长正合序列，外加 H^1(W,F) = 0 与 dim H^2(W,F) = 1，后者引 [24] = schlichenmaier-2014）。
+                   同页给出 V 的定义式 [d_m,d_n] = (n-m)d_{m+n} + delta_{m+n,0}(1/12)(n-1)n(n+1)c；
+                   作者自陈「The first part of the next result is well-known (see [24, Remark 6.4] and [12, Section 5.1])」。
+                   **Corollary 2.7, p. 7**：特征零时 W 与 V 是双边 Witt 代数 W 的**唯一两个**覆盖代数（up to isomorphism）。
+                   **Lemma 2.1, p. 4**：H^2(L,F) = 0 的李代数最多有一个覆盖代数。**Lemma 2.2 / Corollary 2.3, p. 5**：一般覆盖代数理论。
+                   **Proposition 1.2, p. 4**：特征零时 H^2(W_r, F) = 0 且 H^2(K_{2r+1}, F) = 0（**单边** Witt 代数没有中心扩张——与双边的 dim H^2 = 1 相反，注意别撞车）。
+                   **p. 5 正文（本条最有价值的一段之一）**逐字：「It is well known that a Lie algebra L over a field F has a universal central extension
+                   if, and only if, L is perfect (see [31, Theorem 7.9.2]). Moreover, we conclude from [4, Lemma 3.1] and [31, Lemma 7.9.3] that a central
+                   extension 0 -> Chat -> Lhat -> L -> 0 is universal exactly when H^1(Lhat,F) = H^2(Lhat,F) = 0.」
+                   （[31] = weibel-1994，[4] = block-1968；**这条双条件是两条引用合起来的，不得单独归给任一方**。）
+                   **Remark 3.4(2), p. 10** 另引 [31, Theorem 7.9.2] 说 Chat isomorphic to H_2(g,F)。
+                   **★ 红旗（最容易引错的一条）：Lemma 2.4, p. 6 是特征 p > 3 的*受限* Virasoro 代数**
+                   （V := sum_{n=-1}^{p-2} F e_n + F z，**有限维**），与复 Virasoro 代数不是同一对象；
+                   其前一句逐字「The next result is perhaps well known. But since we could not find a suitable reference, we include its proof」
+                   **是针对 char p 版本说的，不是针对 Lemma 2.6**。配套的 Corollary 2.5 亦为 char p。**图里绝不能把 2.4 当来源。**
+                   **括号约定**：本文用 (n-m) 且中心项按第二指标写，与 conv.virasoro-standard（Polchinski 系 (m-n) + (c/12)m(m^2-1)）不同；
+                   但 H^2 对同构不变，**结论与符号约定无关**，statement 里不要照抄本文的括号式。
+                   **脚注 3, p. 7** 逐字说明 Mathieu [21] 把「Virasoro algebra」用于双边 Witt 代数本身，本文则按通行习惯把万有中心扩张叫 Virasoro。
+                   见 extractions/math-sources.md 第 16 节。}
+}
+
+@article{schlichenmaier-2014,
+  author  = {Schlichenmaier, Martin},
+  title   = {An elementary proof of the vanishing of the second cohomology of the {W}itt and {V}irasoro algebra with values in the adjoint module},
+  journal = {Forum Mathematicum},
+  volume  = {26},
+  number  = {3},
+  pages   = {913--929},
+  year    = {2014},
+  eprint  = {1111.6625},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。元数据（刊/卷/期/页/MR 3200354）经**两份独立参考文献逐字核实**
+             （feldvoss-siciliano-2025 的 [24] 与 ecker-schlichenmaier-2018 的 [31]），**未与出版方直接核对**。
+             **我实际读的是 arXiv:1111.6625v4（14 页，落盘 181 KB，读 pp.10-14）**，页眉「VANISHING OF THE SECOND COHOMOLOGY OF THE VIRASORO ALGEBRA」，
+             章节为 1 Introduction / 2 The algebras / 3 Cohomology and Deformations / 4 The degree decomposition / 5 Degree zero for the Witt algebra / 6 Extension to the Virasoro algebra。
+             **版本陷阱（必读）：v4 的时间戳是 2011-2012，期刊版是 2014，两者编号是否一致未核实（L0）。loc 必须写死 arXiv:1111.6625v4。**
+             **可引用的编号结果（均 L1 逐字，均在 arXiv v4）**：
+             **Remark 6.4, p. 13** 是全文**唯一**明写 H^2(Virasoro; 平凡模) = 0 的地方，逐字：「The calculations of Lemma 6.2 and Lemma 6.3
+             showed H^2(V; K) = {0}. From Section 5 we know H^2(W; W) = {0}. Hence, also H^2(V; V) = {0}.」，并给出长正合序列 (6.20)
+             ... -> H^2(V;K) -> H^2(V;V) -> H^2(V;W) -> ...；
+             **Lemma 6.2, p. 12**：psi(x,t) = 0 for all x in V（(6.12)）；**Lemma 6.3, p. 12**：上循环 psi' 恒为零；
+             **Proposition 6.1, p. 10**：任一 psi in C^2(V,V) 有同调等价的 psi-tilde 使 nu 复合后落在 C^2(W,W)。
+             **★ 使用限制**：(1) **本文的标题与主定理是 adjoint 模**（§6 开头式 (6.1) 是 H^2(V,V) = 0）；
+             H^2(V;K) = 0 是证明中途的**副产品**（p.12 逐字：「the component function psi_{x,y} : V x V -> K is a Lie algebra 2-cocycle for V
+             with values in the trivial module」）。
+             (2) **本文没有任何一条编号定理陈述 H^2(Vir, C) = 0**——想引这句话只能引 Remark 6.4；想引证明则是 Lemma 6.2 + Lemma 6.3，
+             而那两条的陈述里不出现 H^2。**禁止写「Schlichenmaier, Theorem: H^2(Vir,C)=0」。**
+             见 extractions/math-sources.md 第 17 节。}
+}
+
+@misc{ecker-schlichenmaier-2018,
+  author        = {Ecker, Jill and Schlichenmaier, Martin},
+  title         = {The vanishing of the low-dimensional cohomology of the {W}itt and the {V}irasoro algebra},
+  year          = {2018},
+  eprint        = {1707.06106},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.RA},
+  note          = {**已核实（2026-09-11，researcher）**：读的是 **arXiv:1707.06106v2**（26 页，落盘 287 KB；读 pp.1-8, 17-21, 24-26）。
+                   正文脚注逐字「Date: v1: 19.07.2017; v2: 31.01.2018.」，页边戳 26 Mar 2018。**是否已发表：未核实（L0）。**
+                   （feldvoss-siciliano-2025 的 [12] 逐字把它记作「Preprint (26 pages), available as arXiv:1707.06106v2 [math.RA], March 26, 2018」。）
+                   **本条对图最大的价值是 §5.1, p. 19 的低维上同调总表（L1 逐字）**：
+                   H^0(V,K) = K、H^0(V,V) = K t；H^1(V,K) = {0}（正文逐字「obtained from the fact that the Virasoro algebra is a perfect Lie algebra」）、
+                   H^1(V,V) = {0}；**H^2(V,K) = {0} 与 H^2(V,V) = {0}，正文逐字「The results for the second cohomology were shown by
+                   Schlichenmaier [31]」（[31] = schlichenmaier-2014）**；并明确指出 **dim H^3(V,K) = 1、dim H^3(V,V) = 1**
+                   （「Hence, the third cohomology of the Virasoro algebra is not zero, but one-dimensional.」）。
+                   **⚠ §5.1 的这些都是 summary 小节里的无编号显示式，loc 只能写「§5.1, p. 19」，不得编定理号。**
+                   **带编号的结果（均 L1 逐字）**：**Theorem 4.1, p. 7**（H^3(W,W) = {0}，char 0，adjoint）；
+                   **Theorem 5.2.1, p. 19**（dim H^3(W,K) = dim H^3(V,K) = 1，平凡模）；**Theorem 5.2.2, p. 20**（dim H^3(V,V) = 1）；
+                   **Theorem A.1.1, p. 21**（H^1(W,W) = {0}）；Proposition 4.1.1 / 4.2.1 / A.1.1.1；
+                   Remark 5.2.1（H^3 由 **Godbillon-Vey 3-上循环**的代数化生成）；Remark 5.2.2（Hochschild-Serre 谱序列的替代证明）。
+                   **一般解释公式（p. 5, §3.3.2-3.3.3，无编号，L1 逐字）**：H^1(L,K) = (L/[L,L])^*、H^1(L,L) = Der(L)/ad = Out(L)；
+                   「The second cohomology group H^2(L,K) with values in the trivial module classifies central extensions of L up to equivalence.」
+                   **★ 方法论警告（p. 2，L1 逐字，对本项目有用）**：连续上同调 H^*(Vect(S^1), Vect(S^1)) = {0} **不能**靠稠密性论证推出
+                   Witt 代数的**代数**上同调消失——「this reasoning is not sound, as the argument using density is only valid when considering
+                   the sub-complex formed by the continuous cohomology of the Lie algebra.」
+                   **=> 图里若用 Vect(S^1) 的 Gelfand-Fuks 结果支持 Witt/Vir 的代数陈述，必须标 inferred: true。**
+                   括号约定：本文 Witt [e_n,e_m] = (m-n)e_{n+m}；Vir [e-hat_n, e-hat_m] = (m-n)e-hat_{n+m} - (1/12)(n^3-n)delta t（**中心项带负号**）。
+                   见 extractions/math-sources.md 第 18 节。}
+}
+
+@book{weibel-1994,
+  author    = {Weibel, Charles A.},
+  title     = {An Introduction to Homological Algebra},
+  series    = {Cambridge Studies in Advanced Mathematics},
+  volume    = {38},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {1994},
+  note      = {由 researcher 于 2026-09-11 登记。**正文一页未读（L0）。** 用途：李代数万有中心扩张的一般定理（§7.9）。
+               **本条目登记的是「编号存在 + 内容由转引确定」这种混合证据状态，引用时必须照实标注。**
+               **编号（L4，但做过控制实验）**：Google Books（volume id flm-dBXfZ_gC）
+               查 "Theorem 7.9.2" -> **p.249**，查 "Lemma 7.9.3" -> **p.249**（同页，合理）；
+               控制查询 "Universal Central Extensions" -> p.198（命中的是**第 6 章**同名小节 §6.9，即**群**的万有中心扩张，不是 §7.9）；
+               **故意无意义的控制查询返回「无命中」而不是回落页 => 控制通过**，上面两个页码是真实命中。
+               （注意：这修正了 extractions/math-sources.md §9.2 的结论——Google Books「无命中回落固定页」是**按卷**行为，
+               每次都必须自带无意义控制查询。）
+               **内容（L3，来自 feldvoss-siciliano-2025 的逐字引用）**：
+               **Theorem 7.9.2** = (a)「a Lie algebra L over a field F has a universal central extension if, and only if, L is perfect」
+               + (b)「Chat is isomorphic to H_2(g,F), the second homology space of g with coefficients in the trivial module F」；
+               **Lemma 7.9.3** 与 **block-1968 的 Lemma 3.1** 合起来给出「a central extension 0 -> Chat -> Lhat -> L -> 0 is universal
+               exactly when H^1(Lhat,F) = H^2(Lhat,F) = 0」。
+               **⚠ 禁令：不得把这条双条件单独归给 Weibel Lemma 7.9.3，也不得单独归给 Block；要么两条一起引，要么引
+               feldvoss-siciliano-2025 p.5 那句话本身。**
+               另有 **Corollary 7.9.5**（有限维半单李代数 centrally closed），**仅 L4 检索后端转述，未做控制，不要用**。
+               **作者勘误表对 §7.9 无帮助（否定结论，L1）**：读了 www.math.umd.edu/~jmr/602/bookerrors.pdf
+               （5 页，标题逐字「Corrections to "Intro. to Homological Algebra" by C. Weibel / Cambridge University Press, paperback version, 1995」），
+               第 7 章相关条目只有 p.226（Exercise 7.3.5）与 p.238（自由李代数 / H^2(g,M) = 0 那条），**完全没有 §7.9**。
+               作者页 sites.math.rutgers.edu/~weibel/Hbook-corrections.html 只挂链接、无正文。
+               **待 lead 裁决**：检索里出现的挂在 sas.rochester.edu 大学域名下的 Weibel 全本 PDF，
+               是否属于 literature/CLAUDE.md 规则 1 排除的「非官方全本扫描」（本轮按既定口径未打开）。
+               见 extractions/math-sources.md 第 19 节与 Q14。}
+}
+
+@article{block-1968,
+  author  = {Block, Richard E.},
+  title   = {On the extensions of {L}ie algebras},
+  journal = {Canadian Journal of Mathematics},
+  volume  = {20},
+  pages   = {1439--1450},
+  year    = {1968},
+  note    = {由 researcher 于 2026-09-11 登记。元数据 L1 抄自 feldvoss-siciliano-2025 参考文献 [4]，
+             **未与出版方交叉核对**。**内容未核实（L0）。**
+             登记理由：feldvoss-siciliano-2025 p.5 把「中心扩张是万有的 iff H^1(Lhat,F) = H^2(Lhat,F) = 0」这条双条件
+             归给 **[4, Lemma 3.1] 与 weibel-1994 的 Lemma 7.9.3 两者合起来**；
+             要诚实地引这条双条件就必须同时引本条。**Lemma 3.1 的正文措辞未核实，不得代写。**
+             同文另引 [4, Theorem 5.1]（char p > 3 的 Zassenhaus 代数 W(1,n) 有唯一非分裂中心扩张），与特征零无关。
+             见 extractions/math-sources.md 第 19.2 节与 Q15。}
+}
+
+@article{gelfand-fuks-1968,
+  author  = {Gelfand, Israel M. and Fuks, Dmitry B.},
+  title   = {Cohomology of the {L}ie algebra of vector fields on a circle},
+  journal = {Functional Analysis and Its Applications},
+  volume  = {2},
+  year    = {1968},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             登记理由：schottenloher-2008 的 **Theorem 5.1（H^2(W, C) 同构于 C）逐字把该结果归给 [GF68]**，
+             而图节点 worldsheet.virasoro-unique-central-extension 现有三个来源里**没有原始出处**。
+             **⚠ 页码/刊名在两份独立参考文献之间不一致，本轮未裁决**：
+             (a) schottenloher-2008 的 [GF68] 逐字为「I.M. Gelfand and D.B. Fuks. Cohomology of the Lie algebra of vector fields
+             of a circle. *Funct. Anal. Appl.* **2** (1968), 342-343.」；
+             (b) ecker-schlichenmaier-2018 的 [15] 逐字为「I. M. Gelfand and D. B. Fuks, *Cohomologies of the Lie algebra of vector
+             fields on the circle*, Funkcional. Anal. i Prilozen. **2** (1968), no. 4, 92-93. MR 0245035」。
+             最可能的解释是 (b) 是俄文原刊、(a) 是英译本的页码（同一篇），**但这只是推断，未核实**。
+             标题的单复数（Cohomology / Cohomologies）与 "of a circle" / "on the circle" 亦有分歧。
+             **引用前请先裁决用哪一套元数据；本条目暂按 (b) 的卷号 2 与年份 1968 记，页码留空。**
+             见 extractions/math-sources.md 第 20.2 节与第 21.1 节。}
 }
 
 @misc{kac-1999-corrections,
