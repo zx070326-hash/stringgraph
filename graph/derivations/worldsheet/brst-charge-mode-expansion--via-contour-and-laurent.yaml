@@ -1,0 +1,54 @@
+id: worldsheet.brst-charge-mode-expansion--via-contour-and-laurent
+target: worldsheet.brst-charge-mode-expansion
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-current-bosonic-string
+  - id: worldsheet.brst-quantization
+    note: "提供 b_n、c_n 的模式展开与 {b_m, c_n} = δ_{m+n,0}、受限模条件，以及待比对的模式定义式。"
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: "提供 T^m(z) = Σ_n L^m_n z^{−n−2} 的 Laurent 展开，本推导用它把 c T^m 项的围道积分算成 Σ_n c_n L^m_{−n}。"
+  - id: worldsheet.bc-ghost-normal-ordering-constant
+    note: "提供 a^g = −1（λ = 2 的 bc 系统），即末项 − c_0 的系数。"
+  - id: worldsheet.ope-commutator-dictionary
+    inferred: true
+    note: |
+      本推导用"围道积分把流变成荷、再用 OPE/围道变形读出模式关系"这一套字典。
+      Polchinski §4.3 在原地并不回指该字典的推导位置（§2.6 的 (2.6.14) 型围道变形），
+      本图未核实是否有显式回指，故按项目规则标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.3)（j_B）→ eq. (4.3.7)（Q_B 的模式展开），p.131–132"
+    note: 式号经 schrans-2020 目录核实；表达式未核对原书。抽取记录 polchinski-1998-v1.md#E62、#E63。
+  - ref: polchinski-1998-v1
+    loc: "§2.7，eq. (2.7.21)（a^g = λ(1−λ)/2）"
+    note: 式号经 schrans-2020 目录核实；a^g = −1 的逐字证据见抽取记录 §1.1 脚注 [†a^g]。
+summary: |
+  三项逐项算围道积分 Q_B = ∮ (dz/2πi) j_B(z)，代入
+    c(z) = Σ_n c_n z^{−n+1},  b(z) = Σ_n b_n z^{−n−2},  T^m(z) = Σ_n L^m_n z^{−n−2}。
+
+  1. **c T^m 项**：Σ_{m,n} c_m L^m_n ∮ (dz/2πi) z^{−m+1−n−2}，围道积分挑出 z^{−1} 项，
+     即 −m − n = 0，得 Σ_n c_n L^m_{−n}。
+
+  2. **: b c ∂c : 项**：同样逐项展开并挑 z^{−1}，鬼场三次项给
+     Σ_{m,n} ((m − n)/2) : c_m c_n b_{−m−n} :。系数 (m − n)/2 来自 ∂c 带下的模式指标
+     与 : c_m c_n : 关于两个指标的反对称化（c_m c_n = − c_n c_m）。
+
+  3. **(3/2) ∂²c 项**：∮ (dz/2πi) ∂²c(z) = 0（单值函数的全导数），无贡献。
+     故该项的系数不进入 Q_B（见 worldsheet.brst-current-bosonic-string (a)）。
+
+  4. **正规序常数**：把 2 中的三次项按正规序重排会产生一个正比于 c_0 的 c 数项，
+     其系数就是 bc 系统的正规序常数 a^g；由 worldsheet.bc-ghost-normal-ordering-constant
+     的 a^g = λ(1−λ)/2 在 λ = 2 处 a^g = −1，末项为 − c_0。
+     一致性核对（schrans-2020 [4.226]）：由此得到的 Q_B 作用在 |ψ⟩ ⊗ |↓⟩ 上给
+     Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})|ψ⟩ ⊗ |↓⟩，其 n = 0 项正是 (L^m_0 − 1)，即 a = 1。
+
+  5. 与 worldsheet.brst-quantization 的模式定义逐项比对：三项完全一致（该节点写的
+     a^g c_0 在 a^g = −1 时即 − c_0）。故两个 Q_B 是同一个算符。
+gaps:
+  - "「围道积分 + Laurent 展开逐项交换」这一步是形式操作：模式和与围道积分的换序、正规序重排的合法性在来源中未论证。按 lead 2026-09-10 的裁决，凡靠围道变形/OPE 得到算子关系的推导一律 physical-argument，gaps 写明「OPE 级数收敛与围道变形合法性在来源中未证明」。此处正是该情形。"
+  - "第 2 步中 (m − n)/2 的系数与 j_B 中 : b c ∂c : 的归一化绑定，而 j_B 的表达式**未核对原书**（抽取记录 E62 的表达式栏）。本图的做法是：以 worldsheet.brst-quantization 的模式式为准（那一侧有 fgz-1986 Proposition 2.1 的数学支撑），本推导论证的是「存在一个使两者一致的 j_B 归一化」。若原书归一化不同，需要调整 j_B 而非模式式。"
+  - "第 4 步把「三次鬼场项正规序重排产生的常数」直接等同于 bc 系统的 a^g。这个等同在来源中未逐字论证；schrans-2020 只给出结果 [4.225]。本图未核实。"
+  - "只覆盖开弦/全纯侧，不覆盖闭弦的反全纯部分。"
+author: curator
+created: "2026-09-11"

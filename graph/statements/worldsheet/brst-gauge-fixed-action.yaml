@@ -1,0 +1,71 @@
+id: worldsheet.brst-gauge-fixed-action
+kind: definition
+status: rigorous
+title: 一般（闭）规范系统的 BRST 规范固定作用量与 BRST 变换
+statement: |
+  **适用范围**：本节点讲的是**一般规范系统**，不专属世界面理论；放在 worldsheet area 只因为
+  本图目前没有 qft/general area（见 notes）。
+
+  设有场 φ^i 与经典作用量 S_cl[φ]，其规范对称性由生成元 δ_α（α 取规范指标）给出：
+    δφ^i = i ε^α (δ_α φ^i)，
+  并设规范代数**闭**且结构常数 f^γ_{αβ} 与场无关（"闭规范代数"）：
+    [δ_α, δ_β] = i f^γ_{αβ} δ_γ，   f^γ_{αβ} = − f^γ_{βα}。
+  取一组规范固定函数 F^A(φ)。引入
+    鬼场 c^α（Grassmann 奇，鬼数 +1）、
+    反鬼场 b_A（Grassmann 奇，鬼数 −1）、
+    Nakanishi–Lautrup 辅助场 B_A（Grassmann 偶，鬼数 0）。
+
+  **规范固定后的量子作用量**定义为
+    S_q = S_1 + S_2 + S_3,
+    S_1 = S_cl[φ],
+    S_2 = − i B_A F^A(φ),
+    S_3 = b_A c^α (δ_α F^A)(φ)。
+
+  **BRST 变换**（ε 是 Grassmann 奇的常参数，δ_B 记 ε 已乘上的整体变换）定义为
+    δ_B φ^i = − i ε c^α (δ_α φ^i),
+    δ_B B_A = 0,
+    δ_B b_A = ε B_A,
+    δ_B c^α = (i/2) ε f^α_{βγ} c^β c^γ。
+
+  **鬼数**：gh(φ^i) = gh(B_A) = 0，gh(c^α) = +1，gh(b_A) = −1；δ_B 把鬼数提高 1
+  （ε 记鬼数 −1 时 δ_B 保鬼数，两种记法等价）。
+
+  记号与归一化说明：上式的 ± 与 i 的位置是**本节点固定的一套自洽归一化**，
+  它被选来使 worldsheet.brst-invariance-of-gauge-fixed-action 的
+  δ_B(b_A F^A) = i ε (S_2 + S_3) 成立（该恒等式的逐步验算写在该命题的推导里）。
+  Polchinski §4.2 的归一化可能与此相差整体符号或 i 的位置，本图**未核对原书**；
+  下游命题（BRST 不变性、幂零性、规范选择无关性）的内容不依赖这些约定选择。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2（p.126 起），eq. (4.2.6)、(4.2.7)、(4.2.8)，p.126–127；鬼数守恒见 p.127"
+    note: |
+      式号经 schrans-2020 目录核实（`4.9–4.12 p 126–127`），**表达式本身未核实**，未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E59。本节点写出的 S_1/S_2/S_3
+      与 δ_B 的显式形式是标准教科书形式，符号归一化由本节点自行固定（见 statement 末段）。
+  - ref: kato-ogawa-1983
+    loc: "摘要（BRS 不变性原理下的协变正则量子化）；正文未获取，定理编号未核实"
+    note: |
+      逐字摘要见 worldsheet.critical-dimension-brst 的同名 source。本条只登记"用 BRS
+      不变性原理做协变量子化"这一框架的物理来源，不承载本节点的显式表达式。
+tags: [brst, gauge-fixing, ghosts, quantization]
+notes: |
+  **area 选择是权宜之计**：本节点的内容是一般量子场论的（任何闭规范代数），
+  与世界面无关。`graph/schema/areas.yaml` 目前没有合适的 area（最接近的 `consistency`
+  语义也不对）。curator 建议 lead 考虑新增 `qft`（"一般规范系统与 BRST 形式"）area，
+  并把本节点、worldsheet.brst-invariance-of-gauge-fixed-action、
+  worldsheet.brst-gauge-choice-independence、worldsheet.brst-charge-general-constraint-algebra、
+  worldsheet.brst-nilpotency-from-jacobi、worldsheet.brst-point-particle-cohomology 六个节点迁过去
+  （id 迁移需按 graph/CLAUDE.md 走"新建 + superseded_by"，故本轮不自行动手）。
+
+  **本节点只覆盖闭规范代数**（结构常数与场无关）。开规范代数（结构"常数"依赖场，如
+  超引力）需要 Batalin–Vilkovisky 形式与额外的高阶鬼场项，δ_B 只在运动方程上幂零；
+  本图无相关节点。抽取记录 E60 的"注意"一栏提到这一点。
+
+  与 worldsheet.brst-quantization 的关系：那是弦的**正则/模式**版 BRST（Q_B 的模式展开），
+  本节点是**拉氏量/路径积分**版的一般框架。两者是同一形式的两种表述，本图**不**在它们之间
+  连 uses 边：连了会把 brst-quantization 的 rigorous（纯代数路线）拉低到本节点下游的
+  路径积分论证水平，理由与 brst-quantization 的 notes 中"是否 uses bc-ghost-cft"的裁断相同。
+  弦的 j_B（worldsheet.brst-current-bosonic-string）则确实取本框架为出发点。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,49 @@
+id: worldsheet.brst-point-particle-cohomology
+kind: proposition
+title: 点粒子 BRST 上同调重现 Klein–Gordon 质量壳条件
+statement: |
+  取相对论性点粒子（einbein 形式，worldsheet.point-particle-einbein-action）作为规范系统：
+  规范对称性是世界线重参数化，**唯一**的一阶约束是
+    G = (1/2)(p² + m²)     （度规 mostly-plus，p² = η^{μν}p_μ p_ν，故壳上 p² = − m²）。
+  只有一个约束，结构常数 f = 0（阿贝尔），故按
+  worldsheet.brst-charge-general-constraint-algebra
+    Q_B = c G = (1/2) c (p² + m²)，
+  鬼场部门是一对零模 b、c，{b, c} = 1，b² = c² = 0，其表示是二维 Clifford 模
+    H_gh = span{ |↓⟩, |↑⟩ },   b|↓⟩ = 0,  c|↓⟩ = |↑⟩,  c|↑⟩ = 0,  b|↑⟩ = |↓⟩，
+  gh(|↑⟩) = gh(|↓⟩) + 1。取物质空间 H_m 为动量表象中的函数空间，G 作为乘法算符。
+  由 f = 0 与 c² = 0 直接有 Q_B² = 0。
+
+  断言：BRST 上同调 H(Q_B) = ker Q_B / im Q_B 在 H_m ⊗ H_gh 上分解为两个鬼数扇区，
+
+  (1) **低鬼数扇区（|↓⟩）**：
+        H^{gh(|↓⟩)}(Q_B) = { |ψ⟩ ⊗ |↓⟩ : (p² + m²)|ψ⟩ = 0 }，
+      即恰是 Klein–Gordon 方程的解空间。（该扇区中没有恰当态：Q_B 把整个复形映进 |↑⟩ 扇区。）
+
+  (2) **高鬼数扇区（|↑⟩）**：
+        H^{gh(|↑⟩)}(Q_B) = H_m / (p² + m²) H_m，
+      因为 |↑⟩ 扇区的每个态都是 Q_B-闭的（c² = 0），而恰当态恰是 (p²+m²)H_m ⊗ |↑⟩。
+
+  本命题**不**断言 (2) 中的商空间与质量壳上的函数空间同构——那要看 H_m 取哪个函数空间
+  （对光滑函数芽成立，对多项式或 Schwartz 类需分别论证），本图不覆盖。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.20)（结构常数）、(4.2.22)（BRST 变换）、(4.2.23)（BRST 作用量）、(4.2.25)（规范固定作用量的 BRST 变换）、(4.2.26)（正则对易关系），p.129–130"
+    note: |
+      式号经 schrans-2020 目录核实（`4.14–4.18 p 129–130`），表达式未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E61：「其 BRST 上同调重现
+      Klein–Gordon 的质量壳条件」。**Polchinski 是否把 (1)(2) 两个扇区分开写、
+      是否讨论商空间 H_m/(p²+m²)H_m，未核实**；(2) 的显式写法是本节点补的。
+tags: [brst, cohomology, point-particle, quantization]
+notes: |
+  为什么值得单建节点：这是全图中**唯一一个可以完全写清楚、有限维鬼场、无中心扩张**的
+  BRST 上同调实例，是 worldsheet.no-ghost-theorem-brst 的最小模型，也适合作为
+  formalizer 的热身岛（鬼场部门是 2 维 Clifford 模，Q_B 是 2×2 上三角矩阵乘以一个标量算符）。
+
+  与弦的情形的对照：弦有无穷多个约束 L^m_n、非阿贝尔（Virasoro）、带中心扩张、
+  鬼场部门无穷维；本例把这三样全部关掉，剩下的骨架（"上同调 = 约束的解"）依然可见。
+
+  鬼数归一化：本节点只写相对鬼数 gh(|↑⟩) = gh(|↓⟩) + 1，不固定绝对值，
+  以免与 worldsheet.brst-quantization（gh(|↓⟩) = 1）或 Polchinski（gh(|↓⟩) = −1/2）冲突。
+author: curator
+created: "2026-09-11"

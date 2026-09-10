@@ -1,0 +1,66 @@
+id: worldsheet.brst-current-bosonic-string
+kind: definition
+status: physical-argument
+title: "玻色弦的 BRST 流 j_B = c T^m + : b c ∂c : + (3/2) ∂²c"
+statement: |
+  设定：物质部门是中心荷 c^m 的二维共形场论，全纯能动张量 T^m(z)；鬼场是权 (λ, 1−λ) = (2, −1)
+  的 bc 系统（worldsheet.bc-ghost-cft、worldsheet.brst-quantization 的记号），
+  其能动张量记 T^g(z)。复坐标与全纯约定按 conv.worldsheet-complex-coords。
+  中心荷写作上标 c^m（物质）、c^g = −26（鬼场），以免与鬼场 c(z) 撞号。
+
+  **BRST 流**定义为全纯流
+    j_B(z) = c(z) T^m(z) + : b(z) c(z) ∂c(z) : + (3/2) ∂²c(z)，
+  **BRST 荷**为其等时（径向）围道积分
+    Q_B = ∮ (dz / 2πi) j_B(z)     （闭弦另加反全纯部分，本节点只写全纯侧/开弦）。
+
+  两条与归一化有关的说明，均属本节点的显式声明：
+
+  (a) **末项是全导数，不改变 Q_B**：∮ (dz/2πi) ∂²c(z) = 0（单值函数的全导数沿闭围道积分为零）。
+      因此 (3/2) 这个系数不影响 Q_B，也不影响任何由 Q_B 定义的上同调；
+      它的作用只是把 j_B 调成主场（在总中心荷为零时），见
+      worldsheet.brst-current-primary-iff-total-central-charge-zero。
+      **本图未核对原书的 3/2**（抽取记录 E62 明确标"j_B 的具体表达式未核实，尤其 3/2 这个
+      全导数项的系数"）；由 (a)，凡只用到 Q_B 的下游节点都不受该系数取值影响。
+
+  (b) **与 (1/2) c T^g 写法的关系**：常见的等价写法 j_B = c T^m + (1/2) : c T^g : 与上式
+      相差一个全导数项（因 T^g = : (∂b) c : − 2 ∂(: b c :) 型表达式），故给出同一个 Q_B。
+      本节点取 Polchinski 型写法。
+uses:
+  - worldsheet.bc-ghost-cft
+  - worldsheet.traceless-holomorphic-energy-momentum
+uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3（p.131 起），eq. (4.3.1)（弦的 BRST 变换）、eq. (4.3.3)（BRST 流），p.131"
+    note: |
+      式号经 schrans-2020 目录核实（`4.19 p 131: Eq (4.3.1)`、`4.21 p 131: Eq (4.3.3) The BRST
+      Current for the Bosonic String`），**表达式未核实**（尤其 3/2 的系数）。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E62。
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.4)（j_B 与 b、c、物质算子的 OPE），p.132"
+    note: 式号经 schrans-2020 目录核实（`4.22 p 132`），表达式未核实。
+tags: [brst, bosonic-string, ghosts, cft, current]
+notes: |
+  **status: physical-argument 的理由**：本节点是定义，但它经由 uses 依赖
+  worldsheet.bc-ghost-cft 与 worldsheet.traceless-holomorphic-energy-momentum
+  （两者都走 OPE / 路径积分路线，有效状态被 OPE 收敛性封顶）。按 docs/STATUS_LEVELS.md，
+  定义的有效状态等同于其依赖的最低等级，因此这里如实写 physical-argument
+  而不是 rigorous——本节点确实是"共形场论算子表达式"层面的对象，不是纯代数对象。
+
+  **不 uses worldsheet.brst-gauge-fixed-action**：j_B 的这条**公式**不是从 S_q 定义出来的，
+  它是"把一般规范系统的 BRST 变换用到 Polyakov 作用量后读出的 Noether 流"这一**推导**的结果。
+  本图把该推导记在 worldsheet.brst-charge-mode-expansion 与
+  worldsheet.brst-current-primary-iff-total-central-charge-zero 的来源里，
+  不在定义卡上连 uses 边（uses 的语义是"定义中直接用到"）。
+
+  **与 worldsheet.brst-quantization 的分工（重要）**：那里的 Q_B 是**直接由模式展开定义**的
+  （纯代数、rigorous、受限模）；本节点的 Q_B 是**由流的围道积分定义**的（CFT 语言）。
+  两者相等是一条**命题**，不是定义，已单独建节点
+  worldsheet.brst-charge-mode-expansion。**本节点刻意不 uses brst-quantization**，
+  否则会把那条代数路线的 rigorous 拉低（与 brst-quantization 的 notes 中
+  "是否 uses bc-ghost-cft" 的裁断同理）。
+
+  记号冲突提醒：鬼场 c(z)、其模 c_n、中心荷 c^m/c^g 三者共用字母 c。
+  本图统一用上标写中心荷、下标写模式，见 worldsheet.brst-quantization 的记号约定段。
+author: curator
+created: "2026-09-11"

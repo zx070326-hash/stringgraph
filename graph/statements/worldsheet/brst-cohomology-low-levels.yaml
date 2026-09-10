@@ -1,0 +1,76 @@
+id: worldsheet.brst-cohomology-low-levels
+kind: proposition
+title: BRST 相对上同调在第 0、1 能级上的显式计算，与旧协变谱一致
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization（D = 26 个自由玻色子，Q_B，鬼场基态 |↓⟩，
+  鬼数归一化 gh(|0⟩) = 0、gh(|↓⟩) = 1）、worldsheet.bc-ghost-hermitian-conjugation
+  （⟨Ψ,Ψ'⟩_rel := ⟨Ψ|c_0|Ψ'⟩，⟨↓|c_0|↓⟩ = 1）与 worldsheet.brst-preserves-relative-complex
+  （相对复形 C_rel(k) = {Ψ : b_0Ψ = 0, L_0Ψ = 0}，L_0 = L^m_0 + L^g_0 − 1）。
+  固定动量 k ≠ 0，截距按 conv.intercept-sign-a 的 a = 1，α' 按 conv.alpha-prime-regge。
+
+  **L^g_0 的记号约定（重要，两个不同的算符）**：本节点与 §4.3 的其余 BRST 节点里的 L^g_0
+  指**不含正规序常数**的鬼场 level 算符，正规序参照取鬼场基态 |↓⟩，
+    L^g_0 = Σ_{j > 0} j ( b_{−j} c_j + c_{−j} b_j ),   故 L^g_0|↓⟩ = 0；
+  常数 a^g = −1 被单独写出（Q_B 的末项 −c_0，或 L_0 = L^m_0 + L^g_0 − 1 中的 −1）。
+  worldsheet.bc-ghost-normal-ordering-constant 里的 L^g_0 是**共形正规序**的那一个，
+  满足 L^g_0|↓⟩ = a^g|↓⟩ = −|↓⟩。两者相差常数 a^g：本节点的 L^g_0 = 那里的 L^g_0 − a^g。
+  引用时必须指明取的是哪一个。
+
+  **level 0（总能级 N = 0）**：C_rel(k) 在该能级上一维，由 |0;k⟩ ⊗ |↓⟩ 张成（鬼数 1）。
+    (1) 条件 L_0 = 0 即 α'k² − 1 = 0，故 α'm² = −1（快子）；
+    (2) 该态自动 Q_B-闭（由 worldsheet.brst-charge-on-ghost-ground-state，
+        Q_B(|ψ⟩⊗|↓⟩) 的 n = 0 项正比于 (L^m_0 − 1)|ψ⟩ = 0），
+        且该能级无鬼数 0 的相对态，故无恰当态；上同调一维，与 OCQ 的快子一致。
+
+  **level 1（总能级 N = 1）**：C_rel(k) 在该能级上 **28 维**，按鬼数分成三段
+      C⁰ = span{ b_{−1}|0;k⟩ ⊗ |↓⟩ }               （1 维，鬼数 0）
+      C¹ = { e_μ α^μ_{−1}|0;k⟩ ⊗ |↓⟩ : e ∈ C^26 }  （26 维，鬼数 1）
+      C² = span{ c_{−1}|0;k⟩ ⊗ |↓⟩ }               （1 维，鬼数 2）
+    （c_0 激发被 b_0Ψ = 0 排除，故每段的鬼场部分只到 b_{−1}、c_{−1}。）
+    (3) 条件 L_0 = 0 在该能级给 α'k² = 0，即无质量；
+    (4) ⟨·,·⟩_rel 在这 28 维空间上**不定**：C¹ 与自身配对为 Minkowski 内积 e·e′
+        （mostly-plus 下 η^{00} = −1，时间方向偏振模为负——**负模态确实存在于复形中**），
+        C⁰ 与 C² 互相配对，各自与自身配对为零；
+    (5) Q_B|_{C¹} : C¹ → C²，其核由 e·k = 0 给出（25 维）；
+        Q_B|_{C⁰} : C⁰ → C¹，其像是 span{(k·α_{−1})|0;k⟩ ⊗ |↓⟩}（k ≠ 0 时 1 维），
+        对应偏振的规范等价 e^μ ∼ e^μ + λ k^μ；
+    (6) 故相对上同调
+          H⁰ = 0,   H¹ = 25 − 1 = 24 维,   H² = 0，
+        即**集中在鬼数 1**；H¹ 上 ⟨·,·⟩_rel **正定**，恰是无质量矢量的 24 个横向偏振，
+        与 OCQ 在 a = 1、D = 26 时的结果一致（worldsheet.open-string-intercept 的刻画 (b)(c)）。
+
+  结论：在最低两个能级上，BRST 相对上同调与旧协变物理谱逐条一致，
+  且 (4)→(6) 把"复形不定 → 上同调正定"的机制完整演了一遍。
+
+  本命题**只覆盖 level 0 与 level 1**，不是无鬼定理（全能级断言见
+  worldsheet.no-ghost-theorem-brst），也不覆盖 k = 0 扇区。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.23)（level 0 质量壳）、(4.3.24)（level 0 物理态条件）、(4.3.25)（level 1 质量壳）、(4.3.26)（负范数态的存在）、(4.3.27)（level 1 物理态条件），p.135"
+    note: |
+      式号经 schrans-2020 目录核实（`4.34–4.38 p 135`，五条全部有条目），
+      **表达式未核实，原书未核对**。抽取记录 literature/extractions/polchinski-1998-v1.md#E67
+      的"文献自称的严格程度"栏标注为「显式计算」（措辞未核实），
+      "结果与 OCQ（E56）一致"是抽取记录的原话。
+      **本节点的鬼数分段（C⁰/C¹/C²）、维数 28 = 1 + 26 + 1、以及 25 − 1 = 24 的计数
+      是本项目自行做出的，不出自抽取记录。**
+tags: [brst, cohomology, bosonic-string, spectrum, critical-dimension]
+notes: |
+  这是无鬼定理的**最小可验证实例**：全能级版本（worldsheet.no-ghost-theorem-brst）
+  需要 light-cone number 分级与三角矩阵论证，而这里只是三段有限维复形上的线性代数。
+  对形式化而言，它是比无鬼定理低得多的第一个台阶（level 1 只有 28 维），
+  值得作为 formalizer 在 BRST 方向的候选目标。
+
+  **注意 level 1 的相对复形是 28 维不是 27 维**：容易漏掉的是鬼数 0 的 b_{−1}|0;k⟩⊗|↓⟩
+  与鬼数 2 的 c_{−1}|0;k⟩⊗|↓⟩ 两个鬼场激发方向。它们不是装饰——
+  正是 C⁰ 提供了规范等价 e ∼ e + λk（(5) 的第二半），而 C² 提供了横向条件 e·k = 0
+  的落点；把它们漏掉就得不到 24。
+
+  D = 26 在本命题中的作用：(6) 的"24 = D − 2"依赖 D = 26 吗？**不依赖**——
+  level 1 的计数对任意 D 都给 D − 2，与 OCQ 在 a = 1 时的结果一致
+  （worldsheet.open-string-intercept 的 notes 已指出 a = 1 的三条刻画对任意 D ≥ 4 成立）。
+  D = 26 在本能级上的作用只是保证 Q_B² = 0 使上同调有定义。真正区分 D 的是 level 2 及以上，
+  见 worldsheet.ocq-level-two-scalar-norm。本节点写 D = 26 是为让 Q_B² = 0 成立。
+author: curator
+created: "2026-09-11"

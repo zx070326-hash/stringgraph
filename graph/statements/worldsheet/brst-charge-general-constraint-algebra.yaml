@@ -1,0 +1,59 @@
+id: worldsheet.brst-charge-general-constraint-algebra
+kind: definition
+status: rigorous
+title: 一般（一阶、无中心扩张）约束代数的 BRST 荷 Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k
+statement: |
+  **适用范围**：一般约束系统，不专属世界面理论（area 选择见 notes）。
+
+  设有一组一阶约束 G_i（i 取约束指标），在泊松括号/对易子下闭合成一个**无中心扩张**的李代数：
+    [G_i, G_j] = f_{ij}^k G_k,     f_{ij}^k = − f_{ji}^k,
+  结构常数 f_{ij}^k 是数（与相空间坐标无关）。对每个约束引入一对 Grassmann 奇的鬼场算符
+    c^i（鬼数 +1）、b_i（鬼数 −1），满足 Clifford 型关系
+    {b_i, c^j} = δ_i^j,   {b_i, b_j} = {c^i, c^j} = 0，
+  并设它们与 G_i 对易。
+
+  **BRST 荷**定义为
+    Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k。
+  它是 Grassmann 奇的、鬼数 +1 的算符。
+
+  **鬼场部门的约束**（由上式诱导）：
+    G_i^{gh} := − f_{ij}^k c^j b_k，
+  它满足与 G_i 相同的代数 [G_i^{gh}, G_j^{gh}] = f_{ij}^k G_k^{gh}（伴随表示），
+  于是总约束 G_i^{tot} := G_i + G_i^{gh} 满足 {Q_B, b_i} = G_i^{tot}。
+
+  **良定义性**：当约束指标集无限（如 Virasoro 的 i ∈ Z）时，上式的和只在**受限模**上
+  逐项有限，即对每个 v 存在 N 使 G_i v = b_i v = c^i v = 0 对所有 i > N。
+  本节点在这一假设下把 Q_B 视为良定义的奇算符（与 worldsheet.brst-quantization 中
+  对弦的处理同一条件）。
+
+  归一化说明：上式的符号与 1/2 因子是本节点固定的一套自洽归一化，选来使
+  {Q_B, b_i} = G_i^{tot} 与"Q_B² = 0 ⟺ Jacobi"（worldsheet.brst-nilpotency-from-jacobi）成立。
+  Polchinski §4.3 (4.3.15)–(4.3.16) 的归一化未核对原书；抽取记录 E65 的"表达式"栏标注未核实。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.15)（约束代数 [G_i, G_j] = f_{ij}^k G_k）、eq. (4.3.16)（一般 BRST 荷的幂零条件），p.133"
+    note: |
+      式号经 schrans-2020 目录核实（`4.28`、`4.29 p 133`），**表达式未核实**。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E65。
+  - ref: fgz-1986
+    loc: "§1（半无限上同调微分 d 的构造，公式 [1.3] 之前后）；Proposition 1.2"
+    note: |
+      数学侧的同一构造：分次李代数的半无限上同调微分。编号已核实
+      （literature/extractions/brst-cohomology-sources.md §1.2）。FGZ 用 Λ^∞_* 上的
+      Clifford 模实现鬼场部门，本节点的 {b_i, c^j} = δ_i^j 与之对应。
+tags: [brst, constraints, ghosts, quantization]
+notes: |
+  **area 选择是权宜之计**，同 worldsheet.brst-gauge-fixed-action 的 notes：本节点内容与
+  世界面无关，建议 lead 考虑新增 `qft` area 后迁移。
+
+  **本节点的约束代数无中心扩张**。玻色弦的 G_i = L^m_i 满足带中心项的 Virasoro 代数，
+  因此弦的 Q_B（worldsheet.brst-quantization）比本节点的 Q_B 多一个正规序常数项 a^g c_0，
+  且幂零性多出中心荷条件。两者的关系是"本节点是无中心版的模板"，
+  弦的版本**不**由本节点通过 uses 边导出（那会掩盖中心项这个关键差别）。
+
+  {Q_B, b_i} = G_i^{tot} 这条一般恒等式在弦上的特例是 {Q_B, b_m} = L^{tot}_m，
+  已单独建节点 worldsheet.brst-anticommutator-b-mode（因为弦上还牵涉正规序常数 a^g，
+  不是本节点的直接推论）。
+author: curator
+created: "2026-09-11"

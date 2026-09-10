@@ -1,0 +1,59 @@
+id: worldsheet.brst-current-primary-iff-total-central-charge-zero
+kind: proposition
+title: BRST 流 j_B 是权 1 的主场当且仅当总中心荷为零（c^m + c^g = 0，即 c^m = 26）
+statement: |
+  设定与记号沿用 worldsheet.brst-current-bosonic-string（j_B = c T^m + : b c ∂c : + (3/2)∂²c）
+  与 worldsheet.brst-quantization（c^g = −26）。记总能动张量 T^tot = T^m + T^g，
+  总中心荷 c^tot = c^m + c^g = c^m − 26。则
+
+  T^tot(z) j_B(w) 的 OPE 中，除去权 1 主场应有的两项 j_B(w)/(z−w)² + ∂j_B(w)/(z−w) 之外，
+  唯一存在的额外奇异项是**四阶**极点，其系数正比于 c^tot：
+    T^tot(z) j_B(w) = ((c^m − 26)/2) · c(w)/(z−w)⁴ + j_B(w)/(z−w)² + ∂j_B(w)/(z−w) + 正则项，
+  其中 (c^m − 26)/2 = c^tot/2。
+
+  **极点阶数由权计数唯一确定**：T(z)O(w) 展开中 (z−w)^{−n} 的系数场是 (L_{n−2}O)(w)，
+  权为 h_O − (n − 2)。取 O = j_B（h = 1）：n = 4 的系数场权为 −1，
+  而权 −1、鬼数 1 的场正是 c；n = 3 的系数场权为 0、鬼数 1，只能正比于 ∂c
+  （权 0 的另一个候选 : bc : 鬼数为 0，被排除）。**三阶极点的系数与 c^tot 无关**，
+  它是否为零取决于 j_B 中全导数项的系数：只有取 (3/2)∂²c 时它恰好为零。
+  因此
+    j_B 是权 1 的主场  ⟺  c^tot = 0  ⟺  c^m = 26，
+  对 D 个平坦自由玻色子即 D = 26。
+
+  本命题是 worldsheet.critical-dimension-brst（Q_B² = 0 ⟺ c^m = 26）的**伴随事实**，
+  不是它的推论也不蕴含它：j_B 的主场性是关于**流**的陈述，Q_B 的幂零性是关于**荷**的陈述。
+  两者在 Polchinski §4.3 相邻出现，共享同一个"总中心荷为零"的根源。
+uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.11)（BRST 流作为主场），p.133"
+    note: |
+      式号经 schrans-2020 目录核实（`4.27 p 133: Eq (4.3.11) The BRST Current as a Primary
+      Field`），其描述为「j_B 只有在 c^tot = 0 时才是主场」。**表达式未核实，原书未核对。**
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E64 的备注。
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.4)（j_B 与 b、c、物质算子的 OPE），p.132"
+    note: 式号经 schrans-2020 目录核实（`4.22 p 132`），表达式未核实。
+tags: [brst, cft, primary-field, critical-dimension, bosonic-string]
+notes: |
+  为什么值得单建节点：这是"D = 26"在图中的**第四种表现形式**（前三种：光锥洛伦兹不变性、
+  Weyl 反常抵消、Q_B² = 0），而且它是最贴近 CFT 语言的一种——
+  "规范固定后的理论是共形不变的"这句话的算子版本。
+  注意本图**不**把它作为 worldsheet.critical-dimension-bosonic 的第四条推导：
+  worldsheet.critical-dimension-bosonic 的陈述写死了"三种独立意义"
+  （见 docs/ROADMAP.md 待拆清单），加第四条需要新建 v2，那是 lead 的活。
+  本节点只把这条事实登记进图。
+
+  **"⟺ c^tot = 0"依赖 3/2 这个系数，2026-09-11 更正**：初稿把与 c^tot 成正比的奇异项
+  错写成三阶极点，并声称"该断言对任何全导数项系数的取法都成立"。reviewer-ch4 指出两处都错：
+  按上面的权计数，c(w) 只能配 (z−w)^{−4}，与 c^tot 成正比的是四阶极点；而三阶极点的系数场
+  是 ∂c，与 c^tot **无关**，它恰好被 (3/2)∂²c 中的 3/2 消掉。
+  若把全导数项的系数改成别的值，三阶极点不再消失，j_B 即使在 c^tot = 0 时也不是主场，
+  "主场 ⟺ c^tot = 0"随之失效。故本节点的断言**只在 j_B 取 (3/2)∂²c 归一化下成立**，
+  这正是 worldsheet.brst-current-bosonic-string 里写死那个系数的理由。
+  本图仍未核对原书的 3/2（抽取记录 E62 明确列为未核实），这一点不变。
+
+  与 worldsheet.brst-current-bosonic-string (a) 的关系：全导数项不影响 Q_B，
+  但**影响 j_B 是否为主场**。这两句话不矛盾：主场性是流的性质，不是荷的性质。
+author: curator
+created: "2026-09-11"

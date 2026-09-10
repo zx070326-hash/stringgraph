@@ -1,0 +1,61 @@
+id: worldsheet.brst-nilpotency-from-jacobi
+kind: proposition
+title: 闭规范代数的 BRST 变换幂零 δ_B² = 0，其条件是结构常数满足 Jacobi 恒等式
+statement: |
+  设定与归一化沿用 worldsheet.brst-gauge-fixed-action（场 φ^i、鬼 c^α、反鬼 b_A、
+  辅助场 B_A；规范代数闭且结构常数 f^γ_{αβ} 与场无关）。取两个反对易的 Grassmann 奇参数
+  ε_1、ε_2，δ_B(ε) 记参数为 ε 的 BRST 变换。则
+
+  (1) 在 b_A 与 B_A 上，δ_B(ε_1) δ_B(ε_2) = 0 恒成立（不需要任何条件）：
+      δ_B B_A = 0，δ_B b_A = εB_A ⇒ δ_B(ε_1)δ_B(ε_2) b_A = ε_2 δ_B(ε_1) B_A = 0。
+
+  (2) 在 c^α 上，δ_B(ε_1) δ_B(ε_2) c^α = 0 **当且仅当**结构常数满足 Jacobi 恒等式
+        f^δ_{α[β} f^α_{γη]} = 0     （对 β, γ, η 全反对称化），
+      等价地 (f^·_{··}) 是一个李代数的结构常数。
+
+  (3) 在 φ^i 上，δ_B(ε_1) δ_B(ε_2) φ^i = 0 当规范代数按
+      [δ_β, δ_γ] = i f^α_{βγ} δ_α 闭合（结构常数与场无关）。
+
+  故：**规范代数是（有限维或无限维）李代数** ⟺ δ_B² = 0 在全部场上成立。
+  正则表述下等价于 BRST 荷满足 Q_B² = (1/2){Q_B, Q_B} = 0（Q_B 是 Grassmann 奇）。
+
+  ⚠ 本命题的前提是规范代数**无中心扩张**。当约束代数有中心扩张（Virasoro 的情形），
+  Jacobi 恒等式对无中心的部分仍成立，但 δ_B² 会出现正比于中心荷的剩余项，
+  幂零性转而要求总中心荷为零；那是 worldsheet.critical-dimension-brst 与
+  worldsheet.brst-nilpotent-at-c26 的内容，**不由本命题覆盖**。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.13)（BRST 荷幂零），p.128"
+    note: |
+      式号经 schrans-2020 目录核实（`4.13 p 128: Eq (4.2.13) The BRST Charge is Nilpotent`），
+      表达式未核对原书。抽取记录 literature/extractions/polchinski-1998-v1.md#E60。
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.15)、(4.3.16)，p.133（一般约束代数 [G_i, G_j] = f_{ij}^k G_k 下 Q_B 幂零 ⟺ Jacobi）"
+    note: |
+      式号经 schrans-2020 目录核实（`4.28 p 133: Eq (4.3.15) The Algebra Satisfied by the
+      Constraints`、`4.29 p 133: Eq (4.3.16) The Nilpotency of the General BRST Charge`），
+      **表达式未核实**。抽取记录 polchinski-1998-v1.md#E65。
+  - ref: fgz-1986
+    loc: "Proposition 1.2（d² = 0，前提 H²(g) = 0、γ = 0 写在正文而非命题里）"
+    note: |
+      数学侧的对应陈述：半无限上同调微分的平方为零。编号已核实
+      （literature/extractions/brst-cohomology-sources.md §1.2）。FGZ 的 Proposition 1.2
+      是**一般分次李代数**的陈述，不含中心荷条件——正与本命题"李代数 ⟹ 幂零"的方向一致，
+      而中心扩张带来的额外条件在 FGZ 里是通过"假设 π(c) = 26"绕开的。
+tags: [brst, nilpotency, gauge-fixing, quantization]
+notes: |
+  本命题是抽取记录 E60（一般 δ_B² = 0）与 E65（一般约束代数的 Q_B 幂零 ⟺ Jacobi）
+  的合并：两处说的是同一件事的拉氏量版与哈密顿版，Polchinski 分两节写只是因为
+  §4.2 用作用量语言、§4.3 用约束语言。**这不是"一个节点两个命题"**——
+  (1)(2)(3) 是同一个断言 δ_B² = 0 在三类场上的分解，其中 (2) 是唯一带条件的一条。
+  若 reviewer 认为拉氏量版与哈密顿版应分开，可拆；curator 认为合并更符合"一个命题"。
+
+  Q_B 的显式表达式（哈密顿版）另立定义节点 worldsheet.brst-charge-general-constraint-algebra。
+
+  **与 Virasoro 情形的接口（重要）**：玻色弦的约束代数是带中心扩张的 Virasoro 代数，
+  故本命题**不**直接给出弦的 Q_B² = 0。弦的情形里 Jacobi 恒等式自动满足
+  （Virasoro 是李代数），但中心项给出额外的、非平凡的障碍，
+  消去它才得 c^m = 26。把这两件事混为一谈是常见错误，本节点的 ⚠ 段专为此写。
+author: curator
+created: "2026-09-11"

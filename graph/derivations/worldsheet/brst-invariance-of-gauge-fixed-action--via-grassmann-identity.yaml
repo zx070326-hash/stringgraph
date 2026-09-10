@@ -1,0 +1,41 @@
+id: worldsheet.brst-invariance-of-gauge-fixed-action--via-grassmann-identity
+target: worldsheet.brst-invariance-of-gauge-fixed-action
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-gauge-fixed-action
+  - id: worldsheet.brst-nilpotency-from-jacobi
+    note: "(2) 的第二半（BRST 恰当项的变分为零）直接用 δ_B² = 0。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.6)、(4.2.7)，p.126–127"
+    note: 式号经 schrans-2020 目录核实；表达式与符号未核对原书。抽取记录 polchinski-1998-v1.md#E59。
+summary: |
+  **(1) 的逐步验算**（用 worldsheet.brst-gauge-fixed-action 固定的归一化；ε、b_A、c^α 均 Grassmann 奇）：
+    δ_B ( b_A F^A ) = (δ_B b_A) F^A + b_A (δ_B F^A)
+                    = ε B_A F^A + b_A ( ∂_i F^A · δ_B φ^i )
+                    = ε B_A F^A + b_A ( −i ε c^α (δ_α F^A) )
+                    = ε B_A F^A + i ε b_A c^α (δ_α F^A)          [把 ε 移过 b_A 出一个 −1]
+                    = i ε ( −i B_A F^A + b_A c^α (δ_α F^A) )
+                    = i ε ( S_2 + S_3 )。
+  这里用了 δ_α F^A := (∂_i F^A)(δ_α φ^i)，即规范固定函数在规范变换下的变分。
+
+  **(2)**：
+    - S_1 = S_cl[φ] 的变分：δ_Bφ^i = −iεc^α δ_αφ^i 就是取规范参数 ε^α = −ε c^α 的规范变换
+      （c^α 是常数意义上的"参数"，只是 Grassmann 奇），S_cl 规范不变 ⇒ δ_B S_1 = 0。
+    - S_2 + S_3 由 (1) 等于 (−i/ε)·δ_B(b_A F^A) 形式的 BRST 恰当项，
+      故 δ_B(S_2 + S_3) ∝ δ_B²(b_A F^A) = 0。
+    合起来 δ_B S_q = 0。
+
+  **(3)**：按 worldsheet.brst-gauge-fixed-action 的鬼数指派，S_2 的鬼数是 0 + 0 = 0，
+  S_3 的鬼数是 (−1) + (+1) + 0 = 0，S_1 显然 0，故 S_q 鬼数为 0。
+gaps:
+  - "本推导只处理**作用量**的 BRST 不变性，不处理路径积分**测度**的不变性；后者是 BRST 反常问题，本图无节点。这是本推导标 physical-argument 而非 proof 的主要理由之一。"
+  - "\"S_cl 规范不变 ⇒ δ_B S_1 = 0\" 一步默认可以把常数 Grassmann 参数 ε^α 换成场 c^α 而规范变换的形式不变；对闭规范代数这是形式上成立的，但在场论中它是形式操作（涉及泛函导数与积分换序），未严格化。"
+  - "所有符号与 i 的位置取自 worldsheet.brst-gauge-fixed-action 自行固定的归一化，**未与 Polchinski §4.2 原书核对**（抽取记录 E59 的表达式栏标注未核实）。若原书归一化不同，(1) 的右端常数因子会变，(2)(3) 不变。"
+notes: |
+  (1) 本身是有限步 Grassmann 代数恒等式，若单独成节点可争取 rigorous；
+  但本推导把 (1)(2)(3) 打包在一条命题下，而 (2) 依赖场论层面的形式操作，
+  按 docs/STATUS_LEVELS.md「不确定时选低的那级」整条取 physical-argument。
+author: curator
+created: "2026-09-11"

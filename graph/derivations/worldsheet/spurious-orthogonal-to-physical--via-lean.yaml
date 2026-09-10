@@ -1,0 +1,113 @@
+id: worldsheet.spurious-orthogonal-to-physical--via-lean
+target: worldsheet.spurious-orthogonal-to-physical
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ocq-spurious-states
+    inferred: false
+    note: |
+      提供伪态空间 S 本身。Lean 对应物是
+      `Fock.spuriousSubmodule η a := ⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range (Lop η a (-n))`。
+      **与该定义卡不完全一致**：Lean 的子模不含质量壳条件 (L_0 − a)|χ⟩ = 0，
+      故严格更大（S = spuriousSubmodule ⊓ ker(L_0 − a)）。因为本推导要证的是"伪态 ⊥ 物理态"，
+      在更大的空间上成立蕴含在 S 上成立，所以这个差异使 Lean 侧**更强**，不构成缺口——
+      但它使该定义卡本身不能填 `formal.lean_decl`，详见那里的 notes。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      提供 H_phys 与其根基 H_0：Lean 里 `Fock.physSubmodule η a a₀` 与
+      `Fock.nullSubmodule η a a₀ = physSubmodule ⊓ orthComplement η physSubmodule`，
+      即该定义卡的 formal.lean_decl 所指的对象。字面依赖（同文件定义）。
+  - id: worldsheet.virasoro-generators-adjoint
+    inferred: false
+    note: |
+      提供本推导的**唯一实质输入** L_{−n}^† = L_n（`Fock.pairing_Lop_left`：
+      ⟨L_m ψ, φ⟩ = ⟨ψ, L_{−m} φ⟩）。`spuriousSubmodule_le_orthComplement` 的证明就是
+      它加上物理态条件 L_n φ = 0 (n ≥ 1) 的一行组合。字面依赖（同文件，逐条调用）。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      提供双线性型 `Fock.pairing` 本身（正交补 `orthComplement`、H_0 的定义、
+      以及"零态零范数"`Fock.pairing_self_eq_zero_of_mem_nullSubmodule` 都以它为底）。
+      本推导只用该节点陈述 (1)（型的存在唯一与伴随关系），不用 (2)(3)(4)。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.{orthComplement, mem_orthComplement, nullSubmodule, mem_nullSubmodule, spuriousSubmodule, Lop_neg_mem_spuriousSubmodule, spuriousSubmodule_le_orthComplement, spurious_inf_physSubmodule_le_nullSubmodule, pairing_self_eq_zero_of_mem_nullSubmodule, nullSubmodule_le_physSubmodule}"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      被调用的上游声明：`Fock.pairing_Lop_left`（同文件）、
+      `Fock.Lop_apply_eq_zero_of_mem_physSubmodule`（同文件）。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
+      以及 2c8b577 已由 lead 合并进 main。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)、(4.1.9)，p.122"
+    note: |
+      **不承载本推导的论证**，只作对照：Polchinski 在 (4.1.8) 一步写下
+      ⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0，在 (4.1.9) 断言加零态不改变内积。
+      式号经 schrans-2020 目录核实，未核对原书。抽取记录 polchinski-1998-v1.md#E55。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/PhysicalStates.lean 的 `Null` 一节。
+  与走文献路线的 worldsheet.spurious-orthogonal-to-physical--via-virasoro-adjoint 是
+  **同一命题的两条独立推导**：那条自行论证 L_n† = L_{−n}，本条把它作为已形式化的输入取用。
+
+  **陈述 (1)（伪态 ⊥ 物理态）** = `Fock.spuriousSubmodule_le_orthComplement`：
+    spuriousSubmodule η a ≤ orthComplement η (physSubmodule η a a₀)。
+  证明三行：把上确界拆开（`iSup_le` 两次）化为"对每个 n ≥ 1 与每个 ψ，
+  L_{−n}ψ 与所有物理态 φ 正交"；再用 `pairing_Lop_left η a (-n) ψ φ` 把
+  ⟨L_{−n}ψ, φ⟩ 换成 ⟨ψ, L_n φ⟩（`neg_neg` 处理指标符号），最后
+  `Lop_apply_eq_zero_of_mem_physSubmodule hφ hn` 给 L_n φ = 0 (n ≥ 1)，`map_zero` 收尾。
+  这正是 Polchinski (4.1.8) 的那一行，只是每一步都被检查过。
+
+  **陈述 (2) 前半（N ⊆ H_0）** = `Fock.spurious_inf_physSubmodule_le_nullSubmodule`：
+    spuriousSubmodule η a ⊓ physSubmodule η a a₀ ≤ nullSubmodule η a a₀，
+  由 `nullSubmodule = physSubmodule ⊓ orthComplement physSubmodule` 的定义与上一条直接拼出。
+  "零态范数为零"是 `pairing_self_eq_zero_of_mem_nullSubmodule`（把零态自己代进它与
+  所有物理态正交的那一条）。
+  具体形式 `Fock.Lop_neg_apply_mem_nullSubmodule`：若 L_{−n}ψ（n ≥ 1）恰好是物理态，
+  它就是零态。
+
+  **量词与陈述的对照**：Lean 的 `spuriousSubmodule` 不带质量壳条件，故它证的是
+  比陈述 (1) **更强**的版本（对所有 L_{−n} 的像，不只是在壳的那些）；
+  陈述 (1) 是它在 ker(L_0 − a) 上的限制。同理 (2) 前半也随之更强。
+gaps:
+  - |
+    (i) **陈述 (2) 的后半在 Lean 里没有具名引理**：
+    ⟨ψ + χ | ψ' + χ'⟩ = ⟨ψ | ψ'⟩（χ, χ' ∈ N）以及"Fock 内积在 H_phys/N 上诱导良定义的形式"
+    未被打包成声明。它由 `pairing` 的双线性与 `mem_nullSubmodule` 一步展开即得，
+    但**本推导不能声称它已被机器检查**。若要让 formalized 覆盖整条陈述，需补这条引理。
+  - |
+    (ii) **Lean 的 spuriousSubmodule 不带质量壳条件**（见上）。方向对本推导有利
+    （证的更强），但意味着 worldsheet.ocq-spurious-states 那张定义卡与 Lean 的对象不重合，
+    该卡因此没有填 `formal.lean_decl`。
+  - |
+    (iii) **双线性型而非 Hermitian 形式**（继承 worldsheet.virasoro-generators-adjoint--via-lean
+    的 gaps (i)、worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    "零范数"是 R-双线性型意义下的 ⟨χ,χ⟩ = 0；复 Fock 空间上的 Hermitian 版本未形式化。
+  - |
+    (iv) **不给反包含 H_0 ⊆ N**。PhysicalStates.lean 文件头 "Mathematical gaps" 第 2 条明确
+    记为未证；那是无鬼定理难的那一半。目标陈述本身也不断言它。
+  - |
+    (v) **逐动量扇区、代数版、对角 η、R 为交换 ℚ-代数**：继承
+    worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii)。没有位置算符 x^μ，没有对 k 的直积分，
+    故"固定动量扇区 F(k)"在 Lean 侧是全局参数而非分解指标。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
+
+  【有效状态是 rigorous 不是 formalized】本推导 status: formalized，但目标节点的有效状态被
+  依赖 worldsheet.ocq-spurious-states（定义卡，status: rigorous）压到 rigorous。
+  原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，与 Lean 的 `Fock.spuriousSubmodule` 不重合，
+  故没填 formal.lean_decl。本推导实际用的是 Lean 那个更大的子模。
+  这一记账效应也传到 worldsheet.physical-states-level-one（该节点在 main 上是 formalized，
+  接上本条链后变 rigorous），处理办法见那条推导 notes 里给 lead 的两个选项。
+
+  本推导由 curator 于 2026-09-11 按 reviewer-ch4 的建议建立，与
+  worldsheet.physical-states-level-one--via-lean 属同一批 Lean 对接。
+  它使 worldsheet.spurious-orthogonal-to-physical 同时挂两条推导：
+  文献路线（rigorous）与 Lean 路线（formalized）；按 docs/STATUS_LEVELS.md，
+  节点取最强的一条，故该陈述的有效状态由本推导决定（受 gaps (i) 的限制，见上）。
+author: curator
+created: "2026-09-11"

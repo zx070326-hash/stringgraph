@@ -1,0 +1,36 @@
+id: worldsheet.brst-gauge-choice-independence
+kind: proposition
+title: 改变规范固定条件等于给作用量加一个 BRST 恰当项，故 BRST 不变态之间的振幅与规范选择无关
+statement: |
+  设定与归一化沿用 worldsheet.brst-gauge-fixed-action。设两组规范固定函数 F^A 与
+  F'^A = F^A + δF^A 给出两个量子作用量 S_q[F] 与 S_q[F']。则
+
+  (1) 两者之差是 BRST 恰当的：
+        S_q[F'] − S_q[F] = − i δ_B ( b_A δF^A ) / ε，
+      即（在 worldsheet.brst-invariance-of-gauge-fixed-action (1) 的意义下）
+      规范固定项与鬼场项的改变量整体是一个 BRST 变分。
+
+  (2) 于是，若被插入的算符（外态）都是 BRST 闭的（δ_B 作用为零）且路径积分测度 BRST 不变，
+      则期望值与规范选择无关：
+        ⟨ 0 | T{ O_1 ⋯ O_n } | 0 ⟩_{F'} = ⟨ 0 | T{ O_1 ⋯ O_n } | 0 ⟩_F。
+      等价的算符表述：BRST 恰当态 Q_B|Λ⟩ 与所有 BRST 闭态正交，
+      故物理振幅只依赖上同调类 [·] ∈ ker Q_B / im Q_B。
+
+  本命题的 (2) **假设**路径积分测度的 BRST 不变（无 BRST 反常）。该假设不在本图中论证。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.8)（改变规范固定条件 = 加 BRST 恰当项，故物理振幅与规范选择无关），p.127"
+    note: |
+      式号经 schrans-2020 目录核实（`4.9–4.12 p 126–127`），表达式未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E59。
+tags: [brst, gauge-fixing, quantization, amplitudes]
+notes: |
+  这是"为什么 BRST 上同调才是物理态空间"的论证的路径积分侧。
+  算符侧的对应事实（Q_B 恰当态与闭态正交，需要 Q_B 关于内积自伴）依赖鬼场的厄米共轭约定，
+  见 worldsheet.bc-ghost-hermitian-conjugation。
+
+  本命题给的是"规范无关性"，**不**给"BRST 上同调 = 物理态空间"这一识别；
+  后者对弦的情形是 worldsheet.brst-cohomology-equals-ocq-physical。
+author: curator
+created: "2026-09-11"

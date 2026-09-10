@@ -1,0 +1,71 @@
+id: worldsheet.brst-charge-on-ghost-ground-state
+kind: proposition
+title: "Q_B(|ψ⟩ ⊗ |↓⟩) = Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})(|ψ⟩ ⊗ |↓⟩)：BRST 闭 ⟺ 旧协变物理态条件（a = 1）"
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization：Q_B 的模式展开、bc 系统权 λ = 2、
+  鬼场基态 |↓⟩（b_n|↓⟩ = c_n|↓⟩ = 0 ∀ n > 0，b_0|↓⟩ = 0，c_0|↓⟩ = |↑⟩）、
+  鬼场正规序常数 a^g = −1、受限模。设物质态 |ψ⟩ 属于物质受限模 V_m（不必是最高权态）。
+  截距记号按 conv.intercept-sign-a。
+
+  **L^g_0 的记号约定（重要，两个不同的算符）**：本节点与 §4.3 的其余 BRST 节点里的 L^g_0
+  指**不含正规序常数**的鬼场 level 算符，正规序参照取 |↓⟩，故 L^g_0|↓⟩ = 0；
+  常数 a^g = −1 被单独写成 Q_B 的末项 −c_0。
+  worldsheet.bc-ghost-normal-ordering-constant 里的 L^g_0 是**共形正规序**的那一个，
+  满足 L^g_0|↓⟩ = a^g|↓⟩ = −|↓⟩。两者相差常数 a^g。引用时必须指明取的是哪一个。
+  同理，Q_B 三次鬼场项里的 : … : 也是以 |↓⟩ 为参照的正规序（c_0 是产生子、b_0 是湮灭子）。
+
+  则
+
+  (1) **显式作用公式**：
+        Q_B ( |ψ⟩ ⊗ |↓⟩ ) = Σ_{n ≥ 0} c_{−n} ( L^m_n − δ_{n,0} ) |ψ⟩ ⊗ |↓⟩,
+      即只有 n ≥ 0 的项存活（n < 0 的项被 |↓⟩ 上的湮灭条件杀掉），
+      三次鬼场项在 |↓⟩ 上无贡献，末项 a^g c_0 = − c_0 给出 n = 0 处的 −1。
+
+  (2) **推论（BRST 闭 ⟺ OCQ 物理态，a = 1）**：由 {c_{−n}}_{n≥0} 在鬼场 Fock 空间上
+      作用于 |↓⟩ 的像线性无关，
+        Q_B ( |ψ⟩ ⊗ |↓⟩ ) = 0
+        ⟺  L^m_n|ψ⟩ = 0 ∀ n > 0  且  (L^m_0 − 1)|ψ⟩ = 0
+        ⟺  |ψ⟩ ∈ H_phys（worldsheet.old-covariant-physical-states，截距 a = 1）。
+
+  本命题**不**需要 c^m = 26，也**不**断言任何上同调层面的结论
+  （"每个上同调类都有 |ψ⟩⊗|↓⟩ 型代表元"与"恰当性 ⟺ 零模态"是
+  worldsheet.brst-cohomology-equals-ocq-physical 的内容，严格强于本命题）。
+uses_conventions: [conv.virasoro-standard, conv.intercept-sign-a, conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.7)（Q_B 的模式展开）及其在 |↓⟩ 上的作用，p.132"
+    note: |
+      式号经 schrans-2020 目录核实（`4.24`、`4.25 p 132`）。schrans-2020 §4.46 的 [4.226]
+      **逐字**给出 Q_B|ψ,↓⟩ = Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})|ψ,↓⟩
+      （抽取记录 literature/extractions/polchinski-1998-v1.md#E63 的备注原文）。
+      **[4.226] 是 schrans-2020 自己的编号，对应的原书式号未核实；原书未核对。**
+  - ref: polchinski-1998-v1
+    loc: "§2.7，eq. (2.7.21)（a^g = λ(1−λ)/2，λ = 2 给 −1）"
+    note: 式号经 schrans-2020 目录核实；逐字证据见抽取记录 §1.1 脚注 [†a^g]。
+tags: [brst, bosonic-string, ghosts, intercept, old-covariant, quantization]
+notes: |
+  【a = 1 的来源，2026-09-11 从陈述 (3) 移到此处】原 (3) 断言"a = 1 在 BRST 形式中不是被
+  推出来的，而是由 a^g = −1 编码的：若把 a^g 保持一般值，(2) 的第二个条件变成
+  (L^m_0 + a^g)|ψ⟩ = 0，即 a = −a^g；λ = 2 的 bc 系统给 a^g = λ(1−λ)/2 = −1，故 a = 1"。
+  这一条是**对 (1)(2) 的解读**，不是独立的新断言：a^g = −1 已经写死在
+  worldsheet.brst-quantization 的定义里，(1) 的 −δ_{n,0} 就是它。
+  把它留在陈述里会逼本推导连一条到 worldsheet.bc-ghost-normal-ordering-constant 的边，
+  而那条边会把本节点与下游的 worldsheet.brst-cohomology-low-levels 一起压到
+  physical-argument（该节点的 a^g = −1 经态-算子同构论证），换来的却不是新内容。
+  故按 reviewer-ch4 的建议移到 notes，并删去那条边。
+  另注：worldsheet.bc-ghost-normal-ordering-constant 的**陈述只断言 λ = 2 时 a^g = −1**，
+  一般公式 a^g = λ(1−λ)/2 **不在它的陈述内**（只出现在它的来源定位与等价刻画里）；
+  上面引用一般公式时，引的是 Polchinski (2.7.21)，不是那个节点。
+
+  这是**旧协变量子化与 BRST 量子化之间最基本的那一格字典**，也是抽取记录 E63 备注里那句
+  「这就是 a = 1 在 BRST 语言中的出现方式」的节点化。图里此前只有强得多的
+  worldsheet.brst-cohomology-equals-ocq-physical（FGZ Theorem 2.8 第一个同构，
+  含"每个类都有此型代表元"与"恰当 ⟺ 零模态"），没有这条**弱而直接**的版本。
+  弱版本的价值：它不依赖 D = 26、不依赖任何数学文献的定理，只是一行模式计算，
+  因此可以作为形式化的第一个 BRST 目标。
+
+  与 worldsheet.brst-cohomology-equals-ocq-physical 的关系：那条陈述里
+  「ι 良定义（即 Q_B(|ψ⟩ ⊗ |↓⟩) = 0）」这一步正是本命题的 (2) 的一半；
+  本轮**不改动**那条陈述，只是把它默默用到的前提提出来独立成节点。
+author: curator
+created: "2026-09-11"

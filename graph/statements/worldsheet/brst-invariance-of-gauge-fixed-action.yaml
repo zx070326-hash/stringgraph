@@ -1,0 +1,39 @@
+id: worldsheet.brst-invariance-of-gauge-fixed-action
+kind: proposition
+title: 规范固定后的量子作用量 BRST 不变，且规范固定项 + 鬼场项是 BRST 恰当的
+statement: |
+  设定与归一化沿用 worldsheet.brst-gauge-fixed-action（闭规范代数，结构常数 f^γ_{αβ}
+  与场无关且满足 Jacobi 恒等式；场 φ^i、鬼 c^α、反鬼 b_A、辅助场 B_A；
+  S_q = S_1 + S_2 + S_3；BRST 变换 δ_B）。则
+
+  (1) **BRST 恰当性**：
+        δ_B ( b_A F^A(φ) ) = i ε ( S_2 + S_3 )。
+      即规范固定项与鬼场项之和是 BRST 变分（"BRST 恰当"）。
+
+  (2) **BRST 不变性**：
+        δ_B S_q = 0。
+      理由结构：S_1 = S_cl[φ] 在 δ_Bφ^i = −iεc^α δ_αφ^i 下不变，因为那是参数取
+      ε^α = −ε c^α 的规范变换而 S_cl 规范不变；S_2 + S_3 = −i δ_B(b_A F^A)/ε 由 (1)
+      是 BRST 恰当项，再由 δ_B² = 0（worldsheet.brst-nilpotency-from-jacobi）其变分为零。
+
+  (3) **鬼数守恒**：S_q 的每一项鬼数为 0，故 gh 是 S_q 的一个整体 U(1) 对称性的荷。
+
+  本命题**不**断言测度的 BRST 不变（那是路径积分层面的问题，属反常分析）；
+  也不断言开规范代数的情形。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.6)（δ_B S_q = 0）、eq. (4.2.7)（δ_B(b_A F^A) = iε(S_2 + S_3)），p.126–127；鬼数守恒 p.127"
+    note: |
+      式号经 schrans-2020 目录核实（`4.9–4.12 p 126–127`），表达式与符号未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E59。
+tags: [brst, gauge-fixing, ghosts, quantization]
+notes: |
+  (1) 是纯代数恒等式（Grassmann 重排），(2) 的第一半用到 S_cl 的规范不变性（假设），
+  第二半用到 δ_B² = 0。因此本命题在逻辑上位于 worldsheet.brst-nilpotency-from-jacobi 之后。
+
+  这条是 BRST 方法的全部要点所在：它把"规范固定"这一看似破坏对称性的操作，
+  换成"保留一个新的整体费米对称性"，从而使 worldsheet.brst-gauge-choice-independence
+  （物理量与规范选择无关）成为可能。
+author: curator
+created: "2026-09-11"

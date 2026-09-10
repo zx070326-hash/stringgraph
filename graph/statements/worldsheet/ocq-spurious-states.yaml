@@ -1,0 +1,70 @@
+id: worldsheet.ocq-spurious-states
+kind: definition
+status: rigorous
+title: 旧协变量子化中的伪态（spurious）与 Polchinski 意义下的零态（null）
+statement: |
+  设定沿用 worldsheet.old-covariant-physical-states：D 个自由玻色子 X^μ 的 Fock 空间 F（度规
+  mostly-plus，模式 α^μ_n，(α^μ_n)† = α^μ_{-n}），其上由 Sugawara 型构造给出的 Virasoro 生成元
+  L_n（中心荷 c = D，conv.virasoro-standard），截距记号取 conv.intercept-sign-a 的 a
+  （物理态条件 (L_0 - a)|ψ⟩ = 0，Polchinski 的 A 与之换算为 a = -A），固定动量 k 的扇区 F(k)。
+  物理态空间
+    H_phys(k) = {|ψ⟩ ∈ F(k) : (L_0 - a)|ψ⟩ = 0, L_n|ψ⟩ = 0 ∀ n > 0}。
+
+  **伪态（spurious state）**：|χ⟩ ∈ F(k) 称为伪态，若存在 |χ_n⟩ ∈ F(k)（n ≥ 1，
+  只有有限多个非零）使
+    |χ⟩ = Σ_{n ≥ 1} L_{-n} |χ_n⟩，
+  且 |χ⟩ 本身满足质量壳条件 (L_0 - a)|χ⟩ = 0。
+  等价地：伪态是 F(k) 中满足质量壳条件、且落在正模 Virasoro 生成元 L_{-n}（n ≥ 1）像空间
+  Σ_{n≥1} L_{-n} F(k) 中的向量。记该空间为 S(k)。
+  （求和指标写 n 而不是 Polchinski (4.1.8) 的 k，以免与动量标签 k 撞号。
+  "有限多个非零"是本节点显式补上的限定：Fock 空间的 L_0 分级中每一级有限维，故一个固定级数
+  的伪态只用到有限多个 |χ_n⟩；不加此限定则无穷和无定义。）
+
+  **零态（null state，Polchinski 意义）**：既是物理态又是伪态的向量，即
+    N(k) := H_phys(k) ∩ S(k)。
+
+  ⚠ 与 worldsheet.old-covariant-physical-states 中"零模态"的差别（本节点显式记录）：
+  那里把零模态定义为 H_phys 的**根基**（radical）
+    H_0(k) = {|χ⟩ ∈ H_phys(k) : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys(k)}。
+  本节点的 N(k) ⊆ H_0(k)（这是 worldsheet.spurious-orthogonal-to-physical 的内容），
+  但反包含 H_0(k) ⊆ N(k)（"每个零范数物理态都是伪态"）**不是定义的一部分**，
+  它是一条独立的、非平凡的命题（本图尚未建节点），在文献中通常只在 D = 26、a = 1
+  的临界情形被断言。凡引用"零态"时必须指明取的是哪一个定义。
+uses:
+  - worldsheet.old-covariant-physical-states
+  - worldsheet.virasoro-algebra-v2
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)、(4.1.9)，p.122"
+    note: |
+      式号经第三方伴读笔记目录核实（schrans-2020：`4.1/4.2 p 122: Eq (4.1.8)/(4.1.9)
+      Spurious States, I/II`），**未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E55。
+      Polchinski 写 |χ⟩ = Σ_{k≥1} L_{-k}|χ_k⟩（其求和指标为 k）并说"既是物理态又是伪态的即 null 态"；
+      本节点的"有限多个非零"限定与"N ⊆ H_0 是命题不是定义"的区分是本项目补上的，不出自原书。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2（spurious states、zero-norm states）"
+    note: GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
+tags: [bosonic-string, quantization, old-covariant, spurious, null-state]
+notes: |
+  本节点只给定义，不断言任何包含关系。三条相关命题分别是：
+    - worldsheet.spurious-orthogonal-to-physical：伪态与所有物理态正交（故 N ⊆ H_0）；
+    - "H_0 ⊆ N"（临界情形下的逆包含）：**本图尚未建节点**，需要 Kac 行列式 / 奇异向量
+      理论或 no-ghost 定理级的输入，来源候选 kac-1979 / feigin-fuchs-1982 / thorn-1984；
+    - worldsheet.ocq-level-two-scalar-norm：第二能级的显式模公式。
+
+  记号：求和指标已写作 n（2026-09-11 按 reviewer-ch4 的建议从 k 改过来），
+  k 只用作动量标签。Polchinski (4.1.8) 原文两者都写 k。
+
+  【与 Lean 的对应，2026-09-11】formal/StringFormal/NoGhost/PhysicalStates.lean 中的
+  `StringFormal.NoGhost.Fock.spuriousSubmodule η a := ⨆ n : ℤ, ⨆ _ : 0 < n, range (Lop η a (-n))`
+  与本节点的 S(k) **不是同一个对象**，故本节点**不填** `formal.lean_decl`：
+    (a) Lean 的那个子模**不含质量壳条件** (L_0 − a)|χ⟩ = 0（注释里也写明 "does not depend
+        on the intercept"），本节点的 S(k) 含；因此 Lean 的子模严格更大，
+        S(k) = spuriousSubmodule ⊓ ker(L_0 − a)。
+    (b) Lean 的 Fock 空间是固定零模参数 a : Fin D → R 的代数版，没有对动量 k 的直和/直积分，
+        故"F(k) 的 k"在 Lean 侧是全局参数而不是分解指标。
+  依赖本节点的形式化结论（worldsheet.spurious-orthogonal-to-physical--via-lean）不受影响：
+  Lean 证的是**更强**的无质量壳版本，蕴含本节点这一版。
+author: curator
+created: "2026-09-11"

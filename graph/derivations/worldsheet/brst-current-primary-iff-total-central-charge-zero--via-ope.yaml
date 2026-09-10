@@ -1,0 +1,52 @@
+id: worldsheet.brst-current-primary-iff-total-central-charge-zero--via-ope
+target: worldsheet.brst-current-primary-iff-total-central-charge-zero
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-current-bosonic-string
+  - id: worldsheet.primary-field
+    note: "提供权 h 主场的判据（T(z)O(w) 只有二阶与一阶极点），本命题的\"是否主场\"按此判据。"
+  - id: worldsheet.tt-ope-central-charge
+    note: "提供 T(z)T(w) OPE 中的 c/2·(z−w)^{−4} 项，是三阶极点系数正比于 c^tot 的来源。"
+  - id: worldsheet.bc-ghost-central-charge
+    note: "提供 c^g = −3(2λ−1)² + 1 = −26（λ = 2），把 c^tot = c^m + c^g 写成 c^m − 26。"
+  - id: worldsheet.operator-product-expansion
+    note: "本推导整体是 OPE 层面的计算。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.11)，p.133"
+    note: 式号经 schrans-2020 目录核实；表达式未核实，原书未核对。抽取记录 polchinski-1998-v1.md#E64 备注。
+summary: |
+  **先做权计数，定出可能出现的奇异项**。T 权 2、j_B 权 1、c 权 −1、∂c 权 0。
+  T(z)O(w) 展开中 (z−w)^{−n} 的系数场是 (L_{n−2}O)(w)，权为 h_O − (n − 2)。对 O = j_B：
+    n = 4 ⇒ 权 −1、鬼数 1 ⇒ 只能 ∝ c(w)；
+    n = 3 ⇒ 权 0、鬼数 1 ⇒ 只能 ∝ ∂c(w)（权 0 的 : bc : 鬼数为 0，排除）；
+    n = 2, 1 ⇒ 主场应有的 j_B、∂j_B。
+  n ≥ 5 的系数场权 ≤ −2，鬼场部门无此场，故不出现。所以只有两个"多余"极点：n = 4 与 n = 3。
+
+  **逐项算这两个系数**：
+
+  1. **T^m 与 j_B 中 c T^m 的缩并**：T^m(z)T^m(w) 的 OPE 给 (c^m/2)(z−w)^{−4}，
+     乘上 j_B 里的 c(w) 得 (c^m/2) c(w)/(z−w)⁴；T^m 的 h = 2 项与 ∂T^m 项组装进
+     j_B/(z−w)² 与 ∂j_B/(z−w)。
+  2. **T^g 与鬼场项 : bc∂c : 的缩并**：同样给出正比于 c^g = −26 的四阶极点
+     (c^g/2) c(w)/(z−w)⁴，以及 j_B 的二阶/一阶极点的鬼场部分；此外还留下一个
+     **与中心荷无关**的三阶极点 B·∂c(w)/(z−w)³。
+  3. **(3/2)∂²c 项**：c 是权 −1 的一次场，T^tot(z)∂²c(w) 的 OPE 给出固定的三阶极点贡献
+     （以及并入 n = 2, 1 的部分）。(3/2) 这个系数正是选来使它与第 2 步的 B·∂c/(z−w)³
+     **恰好相消**的——这就是那一项存在的全部理由。
+
+  合并：三阶极点在（且仅在）全导数项取 (3/2)∂²c 时为零；四阶极点的系数是
+  (c^m + c^g)/2 = c^tot/2，与全导数项无关。故
+    T^tot(z) j_B(w) ∼ (c^tot/2) c(w)/(z−w)⁴ + j_B(w)/(z−w)² + ∂j_B(w)/(z−w)。
+  由 worldsheet.primary-field 的判据，j_B 是权 1 主场 ⟺ 四阶极点消失 ⟺ c^tot = 0。
+  再由 worldsheet.bc-ghost-central-charge 的 c^g = −26 得 c^m = 26；
+  对 D 个平坦自由玻色子（worldsheet.free-boson-central-charge-d 的 c^m = D）即 D = 26。
+gaps:
+  - "按 lead 2026-09-10 的裁决：凡靠围道变形 + OPE 得到算子关系的推导一律 physical-argument。OPE 级数收敛与围道变形合法性在来源中未证明。"
+  - "本推导的结论**依赖 j_B 中全导数项取 (3/2)∂²c**：三阶极点（系数场 ∂c）与 c^tot 无关，只有 3/2 这个取值使它为零；换成别的系数则 j_B 在 c^tot = 0 时也不是主场。而 3/2 本身**未核对原书**（抽取记录 E62 的表达式栏）。因此本推导证的是「在 3/2 归一化下，主场 ⟺ c^tot = 0」，不是对任意全导数项系数都成立的断言。"
+  - "第 2、3 步中三阶极点两个贡献的具体系数（第 2 步的 B 与第 3 步来自 (3/2)∂²c 的那一项）本 summary 未算出数值，只论证了它们与 c^tot 无关且按构造相消。逐项系数需核对原书 (4.3.11)。"
+  - "第 1、2 步的缩并在本 summary 中是叙述性的，未逐项写出。schrans-2020 目录只给条目名 `The BRST Current as a Primary Field`，没有可引的中间步骤；本图未核对原书 (4.3.11)。"
+  - "本推导不给出 Q_B² = 0 ⟺ c^m = 26（那是 worldsheet.critical-dimension-brst--via-nilpotency，走模式代数而非 OPE）。两条路线互相独立，本图不把它们互相依赖。"
+author: curator
+created: "2026-09-11"
