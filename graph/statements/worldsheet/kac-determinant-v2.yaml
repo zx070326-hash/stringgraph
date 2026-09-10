@@ -68,8 +68,27 @@ sources:
       ⇒ 「行列式公式首发在 LNP 94 还是 ICM」**本项目未裁决**；本卡同时列出两条，
       **不表示对首发权做出判断**。
   - ref: polchinski-1998-v1
-    loc: "§2.9"
-    note: "抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式未核实，主来源为 schottenloher-2008 / feigin-fuchs-1982。"
+    loc: "**negative evidence（不是内容来源）**：§2.9 不含本公式；书末 References pp.353–358 的字母表**无 Kac 条目、无 Feigin–Fuchs 条目**；第 4 章注记 p.350 列的无鬼定理证明里**没有「用 Kac 行列式」这条路线**"
+    note: |
+      抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式此前记为「未核实」，主来源为
+      schottenloher-2008 / feigin-fuchs-1982。
+
+      **【2026-09-11 两重独立确认，本条降级为纯 negative evidence】**
+      (1) 第六轮 L1 页图（§12.4）：**§2.9 确实不讲 Verma 模，也不讲 Kac 行列式**，
+          Q5 的 negative evidence 升级为 L1 确认。
+      (2) 第七轮 L1 页图（§13.2(b)(c)）：**书末字母表 pp.353–358**
+          — p.353–354 Faddeev → Fradkin → Freeman → Frenkel → Friedan 之间**无 Feigin/Fuchs 条目**；
+          — p.355 Kato → Kawai → Kazakov → Kiritsis → Klebanov → Kugo 之间**无 Kac 条目**；
+          — p.358 Thorn 名下只有 Thorn (1987) 与 Thorn (1989)，**`thorn-1985`
+            (A Proof of the No-Ghost Theorem Using the Kac Determinant) 不在**；
+          — p.350 第 4 章注记列的证明是 Brower/GT（OCQ）与 Kato–Ogawa/Freeman–Olive/FGZ/Thorn(1987)（BRST），
+            **完全不提「用 Kac 行列式证无鬼定理」**。
+      ⇒ **本卡（以及 worldsheet.kac-determinant）不得挂任何 polchinski-1998-v1 的 loc 作为内容来源。**
+      本条 source 仅作为「Polchinski Vol.1 在正文与参考文献两个层面都不接触这条线」的记录保留。
+      ⚠ 按 p.347 的免责声明（「To represent accurately the contributions of all who have worked in
+      these many areas is an undertaking beyond the scope of this book.」），
+      **这条 negative evidence 不构成对 Kac / Feigin–Fuchs / Thorn 1985 的任何评价**，
+      只说明 Polchinski 没把它们当本书的入口文献。
 tags: [cft, representation-theory]
 notes: |
   【本卡的来历：worldsheet.kac-determinant 的换代（2026-09-11，curator-verma-followups）】
