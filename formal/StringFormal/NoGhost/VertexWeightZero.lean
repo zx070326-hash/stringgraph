@@ -72,6 +72,27 @@ lemma zeroModeSq_add (η a b : Fin D → R) :
   refine Finset.sum_congr rfl fun μ _ => ?_
   ring
 
+/-- **The `m = 0` identity on the vacuum**, with the zero mode shifted by the vertex momentum:
+
+`L_0^{(a+b)} Φ_J = (J + ½ (a·a) + a·b + ½ (b·b)) Φ_J`,
+
+where `Φ_J = creaExp η b J`.  Compare `Fock.Lop_apply_creaExp_of_pos_shifted`, which for `m ≥ 1`
+gives `(J - m + a·b + ½ (m+1)(b·b)) Φ_{J-m}`: at `m = 0` that expression would read
+`(J + a·b + ½ (b·b)) Φ_J`, i.e. it is **short by `½ (a·a)`**.  The missing term is exactly
+`L_0^{(a)} |k⟩ = ½ (a·a) |k⟩` (`Fock.Lop_zero_apply_one`), which for `m ≥ 1` vanishes and so
+never appears there.  In the commutator `L_0^{(a+b)} V_J - V_J L_0^{(a)}` the two effects cancel,
+which is why the final coefficient still lies on the general polynomial (see
+`Fock.lie_Lop_vertexOsc_zero`).
+
+Since `Φ_J` is homogeneous of level `J`, this is `L_0 = α' k² + N` at momentum `a + b`. -/
+theorem Lop_apply_creaExp_zero_shifted (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (J : ℤ) :
+    Lop η (a + b) 0 (creaExp η b J)
+      = ((J : R) + invTwo R * zeroModeSq η a + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * (∑ μ : Fin D, η μ * b μ * b μ)) • creaExp η b J := by
+  rw [Lop_zero_apply_creaExp η (a + b) b hη J, zeroModeSq_add]
+  congr 1
+  linear_combination (∑ μ : Fin D, η μ * a μ * b μ) * two_mul_invTwo R
+
 end LopVacuumZero
 
 end Fock
