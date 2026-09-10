@@ -20,6 +20,19 @@ depends_on:
       模式路线与 OPE 路线的 L_0 分别用产生-湮灭正规序与共形正规序定义，二者相差 a^X；
       只有 a^X = 0 才能说「两条路线定出的是同一个 L_0」，从而中心项可以直接比较。
       a^X ≠ 0 会在 [L_m, L_n] 的中心项里留下 m 相关的移位。
+  - id: worldsheet.normal-ordering-modes-agree
+    inferred: false
+    note: |
+      **本步骤此前只以散文写在本推导的边注与 gaps 里，2026-09-11 提为独立节点**
+      （docs/ROADMAP.md 待建清单）。本推导实际用到的是它的 **X 半边**：
+      断言 (ii)「L_m^{(共形)} = L_m^{(产生-湮灭)} 对一切 m ≠ 0」与 (iv)「中心荷与正规序无关」，
+      加上 (iii) 的 a^X = 0 把 m = 0 也对上。没有这一步，本推导第 4 段
+      「把 OPE 翻译成 L_m 的对易关系」得到的 c 与 worldsheet.virasoro-generators-free-boson
+      那组 L_m 的中心荷是两个不同对象。
+      来源同 §2.7 (2.7.5)–(2.7.11)（与上面两条边同一段落）。
+      ⚠ 该节点同时覆盖鬼场部门，故本边把整条 bc 鬼场链牵进本推导的依赖闭包；
+      这是**过量依赖**（对 effective status 无影响，两条链都是 physical-argument）。
+      若要收紧，按该节点 notes 的建议新建只含 X 半边的弱节点，不要改它的 statement。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（**式号未核实，无页码锚点**）；用到的 TT OPE 形式见 §2.4 约 (2.4.24)–(2.4.25)"
@@ -47,8 +60,10 @@ gaps:
   - "来源定位最弱的一条：c = D 的公式号在抽取记录中既无式号也无页码锚点（Q4）。
      在人工核对原书之前，本推导的 sources[].loc 只是区间猜测。"
   - "「OPE 定出的 c」与「模式定义的 L_m 的中心荷」之间的等同，现已根据 §2.7 (2.7.5)–(2.7.8)
-     标为非 inferred（reviewer-ch23），但它依赖 a^X = 0
-     （worldsheet.normal-ordering-constant-ax）才能把两种正规序的 L_0 认同。
+     标为非 inferred（reviewer-ch23）；**该步骤自 2026-09-11 起由独立节点
+     worldsheet.normal-ordering-modes-agree 承载**（此前只是本条 gap 里的散文）。
+     它依赖 a^X = 0（worldsheet.normal-ordering-constant-ax）才能把两种正规序的 L_0 认同，
+     且该节点自身封顶在 physical-argument（其 (iii) 用态-算子同构）。
      独立于此的模式路线见 worldsheet.free-boson-central-charge-d--via-mode-algebra。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

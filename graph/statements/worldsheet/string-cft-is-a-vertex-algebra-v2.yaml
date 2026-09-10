@@ -80,6 +80,15 @@ sources:
       本节点就是把这个隐含假定显式化。
 tags: [cft, vertex-algebra, ope, locality, gap, bottleneck, open]
 notes: |
+  **statement 里「两种正规序至多相差一个 c-数、故给出同一组 L_m」一段现有独立节点**
+  （curator 2026-09-11，docs/ROADMAP.md 待建清单）：见 **worldsheet.normal-ordering-modes-agree**
+  （断言 (i) 差是 c-数、(ii) L_m 对 m ≠ 0 逐字相同、(iii) L_0 差 a^X = 0 / a^g = -1、
+  (iv) 中心荷与正规序无关），推导 --via-self-contraction，来源 Polchinski §2.7 (2.7.7)–(2.7.21)。
+  本节点的 statement **不改**（已冻结），此处只加指针：statement 中 ⚠ 段落的内容与该节点一致，
+  但该节点另有 (iv) 与依赖记账。**本节点仍不写 depends_on 指向它**——本节点无推导（有效状态 open，
+  刻意为之），依赖只能挂在推导上；且如 statement 所说，局域性对加 c-数不敏感，
+  真正需要该节点的是任何把 T 与 L_0 谱或中心荷挂钩的**下游**推导。
+
   **本节点无推导，有效状态为 open——这是刻意的。** 它是 OPE 严格化路线的真正瓶颈根（math-sources.md §13.3、Q13）：
   数学侧的定理（形式局域性的等价刻画、顶点代数结合性、复解析局域性 ⇒ OPE 收敛）遍地都是且都干净，
   **缺的是「弦论那个具体理论满足这些定理的假设」这一步**。本轮检索没有找到任何文献证明 D 分量洛伦兹号差

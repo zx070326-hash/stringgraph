@@ -1,0 +1,156 @@
+id: worldsheet.normal-ordering-modes-agree--via-self-contraction
+target: worldsheet.normal-ordering-modes-agree
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.conformal-normal-ordering
+    inferred: false
+    note: |
+      提供共形正规序的定义与自缩并的显式值：X 部门的缩并
+      ⟨X^μ(z_1,z̄_1) X^ν(z_2,z̄_2)⟩ = -(α'/2) η^{μν} ln|z_12|^2，
+      对 z_1、z_2 各求一次 ∂ 即得本推导用到的 ⟨∂X^μ(z) ∂X^ν(z')⟩ = -(α'/2) η^{μν} / (z-z')^2。
+      "共形正规序 = 减去自缩并"这一句正是断言 (i)(ii) 中"差是 c-数"的来源。
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    inferred: false
+    note: |
+      给出 (a) 情形被比较的那个具体双线性场 T^X = -(1/α') :∂X^μ ∂X_μ:，
+      且该节点的 : … : 明确是共形正规序，故它就是本推导里的 T^{X,(c)}。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      给出 (a) 情形的另一侧：产生-湮灭正规序的定义 :α_p α_q:（p ≤ q 不换序）与
+      L_m^{(a)} = (1/2) Σ_n :α_{m-n}·α_n:，以及振子代数 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}。
+      该节点 statement 自己就写明"两个 α 只在 p + q = 0 时不对易，故该正规序只影响 m = 0 项"，
+      这正是本推导断言 (ii) 的一半。
+  - id: worldsheet.energy-momentum-laurent-modes
+    inferred: false
+    note: |
+      定义共形序一侧的 L_m^{(c)} = ∮ (dz/2πi) z^{m+1} T(z)。没有它，"两种正规序的 Laurent 模"
+      这句话里的前一半无定义。**curator 补入（不在任务书给出的依赖表里）**：
+      本命题的整个内容是把两个 L_m 定义对起来，两侧的定义都必须在依赖里。
+      来源同 §2.6 (2.6.7)–(2.6.8) 与 §2.7 (2.7.5)–(2.7.8)。
+  - id: worldsheet.bc-ghost-cft
+    inferred: false
+    note: |
+      给出 (b) 情形的 T^g = :(∂b)c: - λ ∂(:bc:)、λ = 2 的模展开与 {b_m, c_n} = δ_{m+n,0}，
+      以及 b(z)c(0) ∼ 1/z 这条自缩并（鬼场一侧"减去自缩并"的具体内容）。
+      **curator 补入（不在任务书给出的依赖表里）**：陈述里的 (b) 半边若不引它，
+      T^g 的表达式在本节点内无出处。来源 §2.5 (2.5.11)、§2.7 (2.7.17)。
+  - id: worldsheet.normal-ordering-constant-ax
+    inferred: false
+    note: |
+      提供断言 (iii) 中 X 部门的常数值 a^X = 0。本推导**不重新论证**该值
+      （它自己的论证是态-算子同构，见 worldsheet.normal-ordering-constant-ax--via-state-operator），
+      只把它接到 (i)(ii) 给出的"差只是 L_0 上的一个常数"这一结构上。
+      来源 §2.7 (2.7.9)，值经 schrans-2020 目录核实。
+  - id: worldsheet.bc-ghost-normal-ordering-constant
+    inferred: false
+    note: |
+      提供断言 (iii) 中鬼场部门的常数值 a^g = -1（以 |↓⟩ 为产生-湮灭真空）。同样只是引用。
+      来源 §2.7 (2.7.21)；**数值未经第三方核对源确认**，见该节点 sources 与本推导 gaps。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)（L_0 的共形正规序写法）、(2.7.9)（a^X = 0）、(2.7.11)（产生-湮灭正规序的定义），p.59–60"
+    note: |
+      本条承载 (a) 半边。核实等级按抽取记录 literature/extractions/polchinski-1998-v1.md **E42**：
+      位置 §2.7、三个式号与 p.59–60 均标 `[已核实]`（核对源 schrans-2020 目录条目
+      `2.50`/`2.51`/`2.52`），且 `2.51 p 59: Eq. (2.7.9) a^X = 0` 的标题直接含值。
+      **未核实**：这几式的原文措辞与"文献自称的严格程度"（E42 标 `【措辞未核实】`）。
+      Polchinski 在 (2.7.11) 前后正是把 L_m 的两种写法并置，本推导 (i)(ii) 的内容
+      在书中以"两种正规序只在 m = 0 上差一个常数"的形式出现，但**书中未把它单列为一条命题**。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.19)（鬼场 L^g_n，产生-湮灭序）、(2.7.21)（a^g），p.61；模式反对易关系 (2.7.17)，p.61"
+    note: |
+      本条承载 (b) 半边。核实等级按抽取记录 **E43**：位置 §2.7、式号 (2.7.17)–(2.7.24)、
+      p.61–62 均标 `[已核实]`（schrans-2020 目录 `2.55`–`2.62`）；
+      **但 E43 原文陈述里的 a^g = 0 是误记**，正确值 -1，见 E43 的「订正（2026-09-10）」：
+      依据是 schrans-2020 [2.148] `a^g = ½λ(1-λ)`（λ=2 ⇒ -1）与 [2.147] 的
+      `2a^g|↓⟩ = [L_1, L_{-1}]|↓⟩ = -λ(λ-1)|↓⟩`，加 reviewer-ch23 的独立重算。
+      **仍未核实**：Polchinski (2.7.21) 的原文是否就写成一般 λ 的 ½λ(1-λ)（E43 明记不要越过这一步）。
+  - ref: polchinski-1998-v1
+    loc: "§2.2, eq. (2.2.5)、(2.2.8)、(2.2.10)（共形正规序、自缩并、交叉缩并），p.39–40"
+    note: |
+      本条承载"共形正规序 = 减去自缩并"这一定义本身（抽取记录 E28 一带；
+      五处公式号经 schrans-2020 目录核实，具体表达式为忠实转述、未核对原书）。
+summary: |
+  记两种正规序为 : … :_c（共形，减自缩并）与 : … :_a（产生-湮灭，负模在左）。
+
+  **第一步：差是 c-数（断言 (i)）。**
+  两种正规序都是把**同一个**算子乘积减去某个东西：
+  · 共形序减去自缩并，自缩并是两点函数，是 c-数；
+  · 产生-湮灭序减去把湮灭模移到右边所产生的（反）对易子，(反)对易子在自由场里也是 c-数。
+  故 : AB :_c - : AB :_a 是 c-数。对 T^{X} 与 T^{g} 这两个双线性场逐项应用即得 (i)。
+
+  **第二步：c-数只落在 m = 0（断言 (ii)）。**
+  把两个减除项都展成模。
+  · X 部门：∂X^μ(z) = -i(α'/2)^{1/2} Σ_m α^μ_m z^{-m-1}。
+    产生-湮灭序的减除项来自 [α^μ_m, α^ν_{-m}] = m η^{μν}（m > 0），求和给出
+      -(α'/2) η^{μν} Σ_{m≥1} m z^{-m-1} z'^{m-1} = -(α'/2) η^{μν} / (z-z')^2  (|z| > |z'|),
+    这**恰好**是共形序减去的自缩并 ⟨∂X^μ(z) ∂X^ν(z')⟩。两个减除项相等，故 f(z) ≡ 0，
+    即 X 部门两种正规序给出的是同一个场、同一组模——这与 a^X = 0 是同一件事的两种说法。
+  · 一般地（含鬼场部门）：两个减除项都只由**模指标之和为零**的那些对贡献
+    （自缩并展开成 Σ_m z^{-m-…} z'^{m-…}，产生-湮灭的(反)对易子同样只在指标相消时非零），
+    而这样的对在 T(z) = Σ_m L_m z^{-m-2} 里只出现在 m = 0 项。
+    故 f(z) = a z^{-2}，(ii) 得证；等价地 L_m^{(c)} = L_m^{(a)} (m ≠ 0)。
+    鬼场部门 f(z) ≢ 0 的根源是：共形序减的是 SL(2,C) 不变真空 |0⟩ 上的两点函数 b(z)c(0) ∼ 1/z，
+    产生-湮灭序减的是 |↓⟩ = c_1|0⟩ 上的，两个真空不同。
+
+  **第三步：常数的值（断言 (iii)）。**
+  引用两条既有命题：X 部门 a = a^X = 0（worldsheet.normal-ordering-constant-ax，
+  由态-算子同构：单位算子 ↔ 基态，L_0|0⟩ = 0），
+  鬼场部门 a = a^g = -1（worldsheet.bc-ghost-normal-ordering-constant，
+  |↓⟩ ↔ c(0)，权 1 - λ = -1）。本推导不重算这两个值。
+
+  **第四步：中心荷（断言 (iv)）。**
+  纯代数验算，三种指标情形逐一展开（细节写在目标节点的 notes 里）：
+  把 L_0 平移常数 a 只在 [L_m, L_{-m}] 上加出 2ma δ_{m+n,0}，它是 Virasoro 2-上循环的上边缘，
+  不改变 m^3 项的系数，故中心荷 c 与正规序无关。
+gaps:
+  - "**第二步的模求和是形式的**：Σ_{m≥1} m z^{-m-1} z'^{m-1} = 1/(z-z')^2 只在 |z| > |z'| 的
+     展开意义下成立，且把它认同为共形序减去的两点函数用到了径向排序与 OPE 的收敛
+     （worldsheet.operator-product-expansion 中未被证明的有限收敛半径）。
+     在形式分布的框架里这一步是干净的（见 worldsheet.ope-pole-mode-commutator-dictionary），
+     但那要求先把共形正规序也翻译成形式分布语言，本图尚未做。"
+  - "**(iii) 的两个数值都来自态-算子同构**（worldsheet.state-operator-isomorphism，
+     在来源中是路径积分构造而非定理），故本推导的有效状态无论如何封顶在 physical-argument；
+     即使 (i)(ii)(iv) 被 reviewer 复核为初等代数，也不会把整条推导抬到 rigorous。
+     要抬高，正确做法是新建一个**不含 (iii)** 的弱节点。"
+  - "**a^g = -1 没有第二个独立文献源**（抽取记录 E43 订正段落明记：Headrick 讲义本轮未取到全文，
+     schrans-2020 §2.80 的结论句本身是笔误）。本推导继承该缺口。"
+  - "**共形正规序节点只对自由标量写**：worldsheet.conformal-normal-ordering 的 statement 开头是
+     『对自由标量理论』，把它用到 bc 系统（费米、一阶、b(z)c(0) ∼ 1/z）是本推导做的**外推**。
+     外推本身是标准的（减去自缩并的组合规则对任意自由场都一样，费米场换序带负号），
+     但图上没有承载它的节点。若要消掉这条 gap，应把 conformal-normal-ordering 推广
+     或新建一个 bc 版的正规序定义卡。"
+  - "**书中没有把本命题单列**：Polchinski §2.7 是在计算过程中并置两种写法，不是陈述并证明
+     一条『两种正规序给出同一组 L_m』的命题。本节点的**陈述形式**是本图的整理，
+     不是来源的逐字断言；来源支撑的是其中每一步的计算。"
+notes: |
+  **kind 与 status 的选取（与任务书的偏差，curator 2026-09-11）**：
+  任务书要求 `kind: proof` + `status: physical-argument`，但 tools/stringgraph/validate.py:127
+  规定 `kind: proof requires status formalized or rigorous`，二者不能并存。
+  因此本推导写 `kind: physical-argument` + `status: physical-argument`，
+  与"先标 physical-argument"的实质要求一致。
+
+  **待 reviewer 复核后可否升级**：(i)(ii)(iv) 三条确是初等模式代数（有限步、无解析输入），
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，reviewer 独立复核后本可标 rigorous。
+  **但本推导仍不应升级**，因为 (iii) 依赖态-算子同构（见 gaps 第 2 条），
+  升级只会制造一个"标了 rigorous 却被依赖拉回 physical-argument"的假象。
+  真正的升级路径是拆节点：把 (i)(ii)(iv) 单独立一张弱卡（不含常数的值），
+  在那张卡上走 rigorous，并请 reviewer 记 `reviewer-verified: <agent>, <date>`。
+  在此之前请勿手改本推导的 status。
+
+  **给 reviewer 的复核清单**（三点最值得挑）：
+  (1) 第二步里"两个减除项相等"（X 部门）的系数：本推导用
+      ∂X^μ(z) = -i(α'/2)^{1/2} Σ_m α^μ_m z^{-m-1} 与 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，
+      算出 -(α'/2) η^{μν}/(z-z')^2，与 worldsheet.conformal-normal-ordering 的
+      -(α'/2) η^{μν} ln|z_12|^2 求两次导一致。∂X 的归一化常数 -i(α'/2)^{1/2}
+      **在本图中没有独立节点**（worldsheet.virasoro-generators-free-boson 只给 α_0 = (2α')^{1/2}p），
+      是本推导内联写出的，请一并复核。
+  (2) 断言 (ii) 对鬼场部门：T^g = :(∂b)c: - λ∂(:bc:) 里 ∂ 作用在正规序积上，
+      "只有指标和为零的对贡献"这一句是否仍逐字成立（导数只改变 z 的幂次，不改变哪些对不对易，
+      故本推导认为成立）。
+  (3) 断言 (iv) 中"2ma δ_{m+n,0} 是上边缘"的措辞：它确实可由 L_0 ↦ L_0 + a 消去，
+      但请确认这不被误读成"a 可以随便丢掉"——在固定了共形序 L_0 的物理约定后 a 是有意义的量。
+author: curator
+created: "2026-09-11"
