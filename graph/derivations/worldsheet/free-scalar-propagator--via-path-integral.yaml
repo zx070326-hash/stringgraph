@@ -1,0 +1,27 @@
+id: worldsheet.free-scalar-propagator--via-path-integral
+target: worldsheet.free-scalar-propagator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-scalar-cft-action
+  - id: worldsheet.laplacian-log-contact-term
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1，约 eq. (2.1.20)–(2.1.22)（传播子）；(2.1.24)（接触项恒等式，已核实）"
+    note: 传播子的公式号未核实，只有区间约束；见 polchinski-1998-v1.md E25。
+summary: |
+  自由（高斯）路径积分的两点函数是运动算子的格林函数：由 S = (1/2πα') ∫ d^2 z ∂X·∂̄X 得
+  运动算子为 (1/πα') ∂∂̄，故 ⟨X^μ(z,z̄) X^ν(0,0)⟩ 满足
+    (1/(π α')) ∂ ∂̄ G^{μν}(z, z̄) = -η^{μν} δ^2(z, z̄)。
+  代入 worldsheet.laplacian-log-contact-term 的 ∂∂̄ ln|z|^2 = 2π δ^2(z,z̄) 即得
+    G^{μν}(z, z̄) = -(α'/2) η^{μν} ln|z|^2。
+  作为算子乘积展开，这就是两个 X 的唯一奇异项，其余为正规序积的 Taylor 级数。
+gaps:
+  - "高斯路径积分本身在数学上未定义：二维自由标量的欧氏测度虽有严格构造（自由场的高斯测度），
+     但 Polchinski 用的是形式化的 ∫ DX e^{-S}，且靶空间号差 mostly-plus 使 X^0 方向的
+     『高斯权重』发散（e^{+...}），书中不讨论这一点。故本推导为 physical-argument。"
+  - "从两点函数过渡到『算子乘积展开』（在任意其它插入存在时逐项成立）用的是
+     worldsheet.operator-product-expansion 所刻画的展开，其收敛性在来源中未证明。"
+  - "传播子的公式号未核实，归一化系数 -(α'/2) 只有抽取记录的『内容确认』，需人工核对原书。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

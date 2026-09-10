@@ -1,0 +1,29 @@
+id: worldsheet.traceless-holomorphic-energy-momentum
+kind: proposition
+title: 共形不变蕴含 T^a_a = 0，能动张量分解为全纯与反全纯部分
+statement: |
+  设二维理论在经典层面 Weyl（共形）不变。则其能动张量无迹：
+    T^a_a = 0,  在复坐标下即 T_{z z̄} = T_{z̄ z} = 0。
+  与守恒律 ∂^a T_{ab} = 0 联立得
+    ∂̄ T_{zz} = 0,  ∂ T_{z̄z̄} = 0,
+  即 T(z) ≡ T_{zz} 是全纯的、T̄(z̄) ≡ T_{z̄z̄} 是反全纯的（在算子插入之外）。
+
+  ⚠ 适用范围：本条是**经典/形式**陈述。在量子层面 ⟨T^a_a⟩ = 0 一般不成立，
+  而是正比于中心荷与世界面曲率（worldsheet.weyl-anomaly-trace）；
+  在平坦世界面上迹反常不显现，故 §2 的全纯性论证在平坦背景下仍被使用。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4（p.43 起），eq. (2.4.1)（能动张量无迹）、(2.4.2)（分解为全纯与反全纯部分）"
+    note: |
+      两个公式号经 schrans-2020 目录核实（`2.16 p 43`、`2.17 p 43`）。
+      「量子层面只对 c = 0 才有 T^a_a = 0」这一限定是抽取者在 E31 备注中加的，
+      **不是 Polchinski 在此处的措辞**；本图把它写进陈述的适用范围以免被误用。
+tags: [cft, conformal-invariance, energy-momentum-tensor, holomorphy]
+notes: |
+  这条是全部「全纯性」技术（Laurent 展开、围道变形、Virasoro 模）的前提。
+  它与 worldsheet.weyl-anomaly-trace 之间有张力：后者说迹在弯曲世界面上正比于 c R。
+  两者的相容方式是——平坦世界面 R = 0 时迹反常不出现，§2 的所有 OPE 都在平坦背景上算。
+  日后若要严格化，这个「平坦背景」限定必须显式化到陈述里。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

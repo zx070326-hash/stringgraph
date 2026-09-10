@@ -1,0 +1,26 @@
+id: worldsheet.ward-identity
+kind: proposition
+title: Ward 恒等式：守恒流的围道积分给出算子的变换
+statement: |
+  设理论有连续对称性，其 Noether 流为 j_a（欧氏世界面，复分量 j = j_z、j̄ = j_z̄），流守恒
+  ∂^a j_a = 0，即 ∂̄ j + ∂ j̄ = 0。则对任意局域算子 A(0,0)，
+    (1/(2π i)) ∮_C ( dz  j(z) - dz̄  j̄(z̄) ) A(0, 0) = (1/ε) δA(0, 0),
+  其中 C 是绕 A 的插入点的小围道，δA 是 A 在该对称性的无穷小变换（参数 ε）。
+  等价地，变换律完全由流与算子的 OPE 的**单极点系数**决定：
+    j(z) A(0, 0) ∼ (1/z) · (1/ε) δA(0, 0) + （正则项）。
+  该恒等式在期望值中成立，即左右两侧插入任意其它算子（在 C 之外）给出相同的关联函数。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.3（p.41 起），eq. (2.3.5)（Ward 恒等式）、(2.3.11)（与守恒流的 OPE 决定变换律），另 (2.3.14) 为时空平移下顶点算子的变换"
+    note: |
+      三个公式号经 schrans-2020 目录核实（`2.12 p 41`、`2.13 p 42`、`2.14 p 43`）。
+      围道方向、因子 1/2πi 与 ε 的放置为忠实转述，**未核对原书**，符号约定可能有差异。
+tags: [cft, ward-identity, noether, ope]
+notes: |
+  本节点是「对称性 ⇒ 算子代数」的转换器：它把连续对称性变成 OPE 的极点结构，
+  下游的能动张量（worldsheet.energy-momentum-tensor-free-scalar）、主场
+  （worldsheet.primary-field）与围道-对易子字典（worldsheet.ope-commutator-dictionary）
+  都建立在它之上。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

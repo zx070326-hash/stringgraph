@@ -1,0 +1,43 @@
+id: worldsheet.tt-ope-central-charge
+kind: definition
+status: rigorous
+title: TT 算子乘积展开与中心荷 c 的定义
+statement: |
+  设 T(z) 是二维共形场论的全纯能动张量。其与自身的算子乘积展开的最一般形式为
+    T(z) T(0) ∼ c/(2 z^4) + (2/z^2) T(0) + (1/z) ∂T(0),
+  其中常数 c 称为该理论的**中心荷**（反全纯部门同理给出 c̄）。
+  二阶与一阶极点的系数（2 与 1）由 T 自身是权 (2,0) 算子这一事实固定；
+  四阶极点的系数是理论的一个不变量，即 c 的定义。三阶极点因 T 的对称性而缺席。
+
+  归一化：本式与 conv.virasoro-standard 相容，即由此定义的 c 与 Virasoro 代数
+  [L_m, L_n] = (m-n)L_{m+n} + (c/12) m(m^2-1) δ_{m+n,0} 中的 c 是同一个数，
+  从而单个自由玻色子给 c = 1。
+uses:
+  - worldsheet.primary-field
+  - worldsheet.traceless-holomorphic-energy-momentum
+  - worldsheet.operator-product-expansion
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4，TT OPE 约 eq. (2.4.24)–(2.4.25)（**式号未核实**，只知在已核实的 (2.4.23)/(2.4.27) 附近），p.48"
+    note: |
+      TT OPE 本身的公式号在抽取记录中标为未核实（见 polchinski-1998-v1.md E33 与第 3 节清单）；
+      其邻近的 (2.4.23)（T 的共形变换）与 (2.4.27)（Schwarzian 导数）已经 schrans-2020 核实。
+      系数 c/2、2、1 为忠实转述。
+tags: [cft, central-charge, ope, energy-momentum-tensor, definition]
+notes: |
+  本节点是「中心荷」在本图中的**定义点**。它与 conv.virasoro-standard 的关系是：
+  约定节点固定 Virasoro 代数的归一化，本节点给出同一个 c 的 OPE 刻画，
+  两者的一致性由 worldsheet.ope-commutator-dictionary（围道变形字典）建立。
+
+  下游用到本定义的节点：
+    worldsheet.free-boson-central-charge-d（c = D）
+    worldsheet.bc-ghost-central-charge（c = -26）
+    worldsheet.beta-gamma-central-charge（c = +11）
+    worldsheet.linear-dilaton-central-charge（c = D + 6α'V·V）
+  中心荷不随共形变换改变、且是常数这一点另有节点：
+  worldsheet.weyl-anomaly-central-charge-constant（Wess–Zumino 相容性）。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

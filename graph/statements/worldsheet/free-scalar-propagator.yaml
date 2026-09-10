@@ -1,0 +1,28 @@
+id: worldsheet.free-scalar-propagator
+kind: proposition
+title: 自由标量的传播子与 XX OPE：X^μ(z,z̄) X^ν(0,0) ∼ -(α'/2) η^{μν} ln|z|^2
+statement: |
+  对 worldsheet.free-scalar-cft-action 定义的自由标量理论，两个 X 的乘积在路径积分期望值中
+  满足算子乘积展开
+    X^μ(z, z̄) X^ν(0, 0) ∼ -(α'/2) η^{μν} ln|z|^2 + :X^μ X^ν:(0,0) + …,
+  即奇异部分（缩并 / 传播子）为 -(α'/2) η^{μν} ln|z|^2。
+  等价地，格林函数满足 (2/α') ∂ ∂̄ ⟨X^μ(z,z̄) X^ν(0,0)⟩ = -2π η^{μν} δ^2(z, z̄)。
+  符号约定：η mostly-plus，故时间方向 μ = ν = 0 的缩并与空间方向反号。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1，传播子约 eq. (2.1.20)–(2.1.22)（必在已核实的 (2.1.23) 之前）"
+    note: |
+      **公式号未核实**：抽取记录只能给出区间约束（(2.1.23) 已被 schrans-2020 核实为「运动方程作为算子方程」，
+      故传播子在其之前）。见 literature/extractions/polchinski-1998-v1.md E25 与第 3 节未核实清单。
+      归一化 -(α'/2) η^{μν} ln|z|^2 的内容本身在抽取记录第 1.1 节被列为「内容确认，式号未核实」。
+tags: [cft, free-field, ope, propagator]
+notes: |
+  这条给出的是**归一化**，不只是函数形式：系数 -(α'/2) 与 conv.alpha-prime-regge、
+  conv.worldsheet-complex-coords 绑定，换 d^2 z 的 Jacobian 或换 α' 归一化都会改变它。
+  下游的一切自由场 OPE（能动张量、中心荷 c = D、鬼场以外的全部）都由它经 Wick 缩并生成。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

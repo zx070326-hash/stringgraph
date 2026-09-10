@@ -1,0 +1,30 @@
+id: worldsheet.schwarzian-transformation-of-t
+kind: proposition
+title: 能动张量不是主场：共形变换下多出 Schwarzian 导数项
+statement: |
+  设 T(z) 是中心荷 c 的共形场论的全纯能动张量（worldsheet.tt-ope-central-charge）。
+  在共形变换 z → w(z) 下，
+    T'(w) = (∂w/∂z)^{-2} [ T(z) - (c/12) S(w; z) ],
+  其中 S(w; z) 是 w 作为 z 的函数的 Schwarzian 导数
+    S(w; z) = w'''/w' - (3/2) (w''/w')^2,   ' ≡ d/dz。
+  故 T 是权 (2,0) 的算子但**不是主场**：附加项正比于中心荷 c，
+  在 c = 0 或对 SL(2,C) 变换（w = (az+b)/(cz+d)，其 Schwarzian 恒为零）时消失。
+  等价的常见写法是 T'(w) = (∂z/∂w)^2 T(z) + (c/12) S(z; w)，
+  两者由 Schwarzian 的反演恒等式 S(z; w) = -(∂w/∂z)^{-2} S(w; z) 相联。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.23)（T 的共形变换）、(2.4.27)（Schwarzian 导数），p.48"
+    note: |
+      两个公式号经 schrans-2020 目录核实（`2.25 p 48`、`2.26 p 48`）。
+      **系数 -(c/12) 与 Schwarzian 的具体写法为忠实转述，未核对原书**；
+      不同文献在此处的符号与因子（c/12 vs c/6）随 T 的归一化而异。
+tags: [cft, central-charge, schwarzian, energy-momentum-tensor]
+notes: |
+  这条的下游用途：柱面与平面之间的 T 的关系（worldsheet.cylinder-plane-l0-shift），
+  即指数映射 w = ln z 下的 Schwarzian 给出 L_0 的 -c/24 移位。
+  这是「Casimir 能量 / 正规序常数」在 CFT 中的几何来源。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"
