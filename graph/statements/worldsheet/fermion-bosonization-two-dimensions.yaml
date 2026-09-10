@@ -1,0 +1,112 @@
+id: worldsheet.fermion-bosonization-two-dimensions
+kind: proposition
+title: "二维玻色化：一对（复化的）Majorana–Weyl 世界面费米子等价于一个全纯标量，ψ ≅ e^{iH}、ψ̄ ≅ e^{−iH}"
+statement: |
+  【设定与记号】
+    - 费米侧：两个全纯 Majorana–Weyl 世界面费米子 ψ¹, ψ²，OPE 按 conv.metric-mostly-plus
+      归一为 ψ^μ(z)ψ^ν(0) ∼ η^{μν}/z（(10.1.7)，此处 μ, ν ∈ {1,2} 为类空方向，故 η^{μν} = δ^{μν}）。
+      取复组合
+        ψ  = 2^{−1/2}(ψ¹ + i ψ²),    ψ̄ = 2^{−1/2}(ψ¹ − i ψ²)        （(10.3.8)）
+      （⚠ 这里的上划线是**复组合的标号**，不是 conv.ope-tilde-notation 里的反全纯部门或欧氏伴随。）
+    - 玻色侧：一个全纯标量 H(z)，按 conv.nonembedding-scalar-normalization 归一
+      （H(z)H(0) ∼ −ln z），其基本算子是 e^{± i H}。
+    - `≅` 的语义按 conv.ope-tilde-notation：**equivalent to**（原书 Notation 页的分工），
+      即"两个理论的算子在全部相关关联函数中可以互相替换"，而**不是**恒等式。
+
+  【断言 (1)：OPE 逐条同形】e^{±iH} 的三条 OPE（(10.3.6a,b,c)）与复费米子 ψ, ψ̄ 的三条 OPE
+  （(10.3.9a,b,c)）**同形**（原书逐字：所引 (10.3.9) 与 (10.3.6) 的对应是逐条的）。
+
+  【断言 (2)：算子字典】由断言 (1) 得到等价
+        ψ(z)  ≅  e^{i H(z)},        ψ̄(z)  ≅  e^{− i H(z)}          （(10.3.10)）
+  并且这个等价**可以扩展到全部局域算子**（原书逐字："the equivalence of the theories can be
+  extended to all local operators"）。特别地
+        ψ ψ̄  ≅  i ∂H,        T_B^ψ  ≅  T_B^H                        （(10.3.13)）
+  （左式是费米子数流与能动张量的等同）。原书对这一整件事的命名逐字：
+  "This rather surprising equivalence is known as *bosonization*."
+
+  【断言 (3)：算符层面与统计】在算符（而非关联函数）层面
+        ψ(z)  ≅  ° e^{i H(z)} °                                      （(10.3.14)）
+  （`° °` 是创生-湮灭正规序，原书 p. 7 的记号），且玻色化后的算子**确实反对易**（(10.3.15)），
+  这一点由 Campbell–Baker–Hausdorff 公式（Vol.1 **(6.7.23)**）与 Vol.1 **(8.2.21)** 得到。
+
+  【断言 (4)：配分函数相等】费米侧与玻色侧的配分函数逐项相等（(10.3.17) = (10.3.18)，
+  另见 (10.3.19)）。原书对这条的定位逐字：
+  "**We know indirectly that these must be equal**, since we can use the OPE to construct an
+   analog in the fermionic theory for any local operator of the bosonic theory and vice versa"；
+  "in fact the equality of (10.3.17) and (10.3.18) **follows from the equality of the product and
+   sum expressions for theta functions, section 7.2**"。
+
+  【断言 (5)：推广到一般曲面（原书的断言，条件苛刻）】原书逐字：
+  "Note that while bosonization was derived for the sphere, **the sewing construction from
+   chapter 9 guarantees that it holds on all Riemann surfaces**, provided that we make
+   equivalent projections on the spectra."
+  本卡把它照记为断言，**不**独立支持它：本图没有 sewing 构造的节点。
+
+  【本命题不断言的内容】
+    (1) **不**断言"等价"的精确数学含义。原书用 `≅`（equivalent to），既没有给出两个理论之间
+        态空间的同构、也没有给出算子代数的同构陈述。**这是本卡最重要的未定处。**
+    (2) **不**断言手征（纯全纯）玻色子 H 的存在性/构造（见 worldsheet.exponential-scalar-sphere-correlator）。
+    (3) **不**断言费米侧与玻色侧的**中心荷**相等作为独立事实（它是断言 (2) 的 T_B^ψ ≅ T_B^H 的推论；
+        数值核对见 notes）。
+    (4) **不**断言 theta 函数的乘积式 = 求和式（Vol.1 §7.2）。本图无该节点。
+    (5) **不**断言多种费米子并存时的正确算符定义——那需要 cocycle，见
+        worldsheet.vertex-operator-cocycle（原书 §10.3 脚注 2 明说这是一处被延后修补的漏洞）。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.metric-mostly-plus
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. **(10.3.5)**（H H OPE）、**(10.3.6a,b,c)**（e^{±iH} 的 OPE）、**(10.3.8)**（ψ, ψ̄ 的复组合）、**(10.3.9a,b,c)**（复费米子的 OPE，与 (10.3.6) 同形）、**(10.3.10)**（ψ ≅ e^{iH}, ψ̄ ≅ e^{−iH}）、**(10.3.13)**（ψψ̄ ≅ i∂H, T_B^ψ ≅ T_B^H）、**(10.3.14)**（算符层面 ° °）、**(10.3.15)**（反对易）、**(10.3.17)/(10.3.18)/(10.3.19)**（配分函数）, pp. 11–13"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E25；抽取者逐页读了
+      原书 §10.3 的页图，式号与公式内容均直接看到）。
+      statement 里加粗引号内的四处英文均为该记录「文献自称的严格程度」栏的逐字转录。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. **(10.1.7)**, p. 2（ψ^μ(z)ψ^ν(0) ∼ η^{μν}/z 的归一化）"
+    note: L1 一手（抽取记录 §1.1「ψψ OPE」栏）。费米侧的归一化由此固定。
+  - ref: polchinski-1998-v1
+    loc: "**(6.7.23)**（Campbell–Baker–Hausdorff）、**(8.2.21)**（缠绕/格点顶点算子的算符乘积）"
+    note: |
+      式号出自 Vol.2 §10.3 正文对 Vol.1 的**明写**引用（L1，E25「文献列出的依赖」栏）。
+      ⚠ **Vol.1 侧未核实**：本图没有 (6.7.23) 或 (8.2.21) 的节点，
+      也未核对这两式在 Vol.1 中的内容。故断言 (3) 的这一步在图上无支撑，见 derivation 的 gaps。
+  - ref: polchinski-1998-v1
+    loc: "**§7.2**（theta 函数的乘积式与求和式）、**第 9 章**（sewing 构造）"
+    note: |
+      同样出自 Vol.2 §10.3 的明写引用（L1，E25）。两处 Vol.1 侧均**未核实**、本图**无节点**：
+      §7.2 支撑断言 (4)，第 9 章支撑断言 (5)。见 derivation 的 gaps。
+tags: [cft, bosonization, free-field, fermion, superstring, worldsheet]
+notes: |
+  ★【本卡填的是本图一处最大的结构性空白】在本卡之前，本图**完全没有玻色化节点**，
+  而 Vol.2 第 10、11 章有多处论证的**唯一手段**是玻色化：
+    - worldsheet.heterotic-so32-ope-local-and-closed（原书逐字 'easily verified by means of
+      bosonization'，此前零支撑，本轮接到本卡）；
+    - worldsheet.rns-fermion-number-operator 的**鬼场**部分（F = e^{lφ} 的荷 l，经 βγ 玻色化，
+      见 worldsheet.beta-gamma-bosonization）；
+    - worldsheet.superstring-sector-consistency-conditions 里 (10.6.4) 的相位
+      （依赖自旋场的分支切割与 cocycle）。
+
+  【中心荷的数值核对（本图内部，非原书文字）】玻色侧一个标量 c = 1；
+  费米侧两个 Majorana–Weyl 费米子 c = 2 × (1/2) = 1。相符。
+  同样地 h(e^{iH}) = 1/2（按 conv.nonembedding-scalar-normalization 的换算 h = q²/2，q = 1），
+  等于费米子 ψ 的权 1/2。**这两条是本图做的算术核对，原书在 §10.3 未逐字写出**，
+  故只记在 notes，不进 statement。
+
+  【"等价"缺少数学陈述，是本卡最该被后续工作收紧的地方】
+  原书的 `≅` 只有 Notation 页的一句 'equivalent to'。数学侧的严格版本是
+  「秩 1 偶格顶点算子代数 ≅ 一对自由费米子的 Clifford 顶点超代数」这一类命题
+  （boson–fermion correspondence），文献里是定理级的（Frenkel–Lepowsky–Meurman、
+  Frenkel–Ben-Zvi 等）。
+  → 建议后续任务：在 math 区建「boson–fermion correspondence（格顶点代数版）」节点，
+    给本卡加一条 rigorous 的独立推导路线，并写清与 Polchinski 的 `≅` 的接口
+    （尤其是：数学定理讲的是**顶点代数同构**，Polchinski 讲的是**关联函数与配分函数相等**，
+    两者不是同一条命题）。
+
+  【与 §10.6 的接口】本卡的 ψ ≅ e^{iH} 是 §10.6 (10.6.4) 那个相位公式的技术前提之一
+  （R 扇区顶点算子是 e^{±iH/2} 型，带分支切割）。
+  见 worldsheet.spin-field-vertex-operators 与 worldsheet.vertex-operator-cocycle。
+author: curator
+created: "2026-09-11"

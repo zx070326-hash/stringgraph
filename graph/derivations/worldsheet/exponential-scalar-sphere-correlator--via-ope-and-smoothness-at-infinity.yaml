@@ -1,0 +1,61 @@
+id: worldsheet.exponential-scalar-sphere-correlator--via-ope-and-smoothness-at-infinity
+target: worldsheet.exponential-scalar-sphere-correlator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-scalar-propagator
+    inferred: false
+    note: |
+      供给 H H ∼ −ln z 这条二点函数：它是自由标量传播子在
+      「α' = 2、单个标量、只取全纯一半」下的特例。
+      原书在 (10.3.5) 下方**显式**把这条归一化与嵌入坐标的 α' 联系起来
+      （'corresponding to α' = 2 for the embedding coordinates'），故此边不标 inferred。
+    convention_map: |
+      上游 worldsheet.free-scalar-propagator 用 conv.alpha-prime-regge：
+        X^μ(z, z̄) X^ν(0,0) ∼ −(α'/2) η^{μν} ln|z|²。
+      本卡用 conv.nonembedding-scalar-normalization：
+        H(z) H(0) ∼ − ln z。
+      三步换算：(i) α' = 2；(ii) 取单个标量（D = 1，η^{μν} → 1，无时空指标，无 mostly-plus 符号问题）；
+      (iii) 只取全纯一半（ln|z|² = ln z + ln z̄ ⟶ ln z）。
+      合起来 −(α'/2)·1·ln z |_{α'=2} = −ln z ✓。
+  - id: worldsheet.free-scalar-cft-action
+    inferred: true
+    note: |
+      **inferred**：原书 §10.3 只写下 H 的 OPE (10.3.5)，**不写 H 的作用量**，
+      也不说 H 是哪个理论的场。本边记的是「本图把 H 理解为一个自由标量 CFT 的场」这一读法，
+      在 (10.3.5) 处找不到对应论证。
+      ⚠ 更强的问题：H 被当成**纯全纯（手征）**标量使用，而 worldsheet.free-scalar-cft-action
+      定义的是非手征的实标量。手征约化在原书与本图都未处理，见 gaps。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. (10.3.5)、(10.3.6a,b,c)、(10.3.7) 与 (10.3.7) 上方一句, pp. 11–12"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E25）。
+      逐字：'The poles and zeros in the OPE together with smoothness at infinity determine
+      the expectation values of these operators on the sphere, up to an overall normalization.'
+  - ref: polchinski-1998-v2
+    loc: "§10「Exercises」, exercise 10.7, pp. 43–44"
+    note: L1 一手（E49）。断言 (2) 的论证被推给这道习题。
+  - ref: headrick-2008
+    loc: "Problem 10.7"
+    note: |
+      L1（E25 备注）。[H] 给出 Liouville 型唯一性论证；**本推导未逐步核对该解答**。
+summary: |
+  论证骨架（原书 §10.3 的写法）：
+    (1) 由 H H ∼ −ln z 与 Wick 缩并（conv.nonembedding-scalar-normalization）读出
+        e^{iε_1 H(z)} e^{iε_2 H(0)} 的 OPE：奇异/零因子是 z^{ε_1 ε_2}（(10.3.6)）。
+    (2) 候选表达式 Π_{i<j} z_ij^{ε_i ε_j} 在每一对 z_i → z_j 处**恰好**再现 (1) 的极点/零点阶数，
+        且当 Σ_i ε_i = 0 时在 z_i → ∞ 处表现"恰当"（每个 z_i 的总幂次为 Σ_{j≠i} ε_i ε_j = −ε_i²，
+        与该点算子的权 ε_i²/2 相容）。
+    (3) 断言：(1) 的极点/零点数据加上 (2) 的无穷远行为把期望值唯一确定到总归一化。
+  **第 (3) 步是本推导的全部弱点**：原书正文只给结论，把验证推给 exercise 10.7。
+  Headrick 的解答走 Liouville 路线：候选式与真值之比是无极点的整函数、
+  在无穷远趋于常数，故为常数。
+gaps:
+  - "**唯一性（断言 (2)）在原书正文无证明**，逐字推给 exercise 10.7。按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位，本推导只能取 physical-argument。"
+  - "**Liouville 论证未在本图复核**：[H] Problem 10.7 的解答本轮只确认「存在且走 Liouville 路线」（抽取记录 E25 备注，L1），未逐步核对。这是把本卡升到 rigorous 的唯一已知入口。"
+  - "**手征玻色子未定义**：H(z) 被当成只有全纯部分的标量场。原书 §10.3 不讨论其零模、自对偶格或路径积分定义；本图无对应节点。这是玻色化整块最深的未形式化处，下游每张卡都继承它。"
+  - "**荷守恒 Σ_i ε_i = 0 的来源未给**：原书把它与 (10.3.7) 一并写出，不给零模积分的推理。"
+  - "**总归一化常数未定**：原书明说只确定到 'an overall normalization'，本推导亦不定它。"
+author: curator
+created: "2026-09-11"

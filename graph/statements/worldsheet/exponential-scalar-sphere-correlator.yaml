@@ -1,0 +1,80 @@
+id: worldsheet.exponential-scalar-sphere-correlator
+kind: proposition
+title: "球面上指数标量算子的期望值 ⟨Π_i e^{iε_i H(z_i)}⟩_{S²} = Π_{i<j} z_ij^{ε_i ε_j}（Σ_i ε_i = 0），且 OPE + 无穷远光滑性把它唯一确定到总归一化"
+statement: |
+  【设定】取一个全纯世界面标量 H(z)，按 conv.nonembedding-scalar-normalization 归一：
+    H(z) H(0) ∼ − ln z。
+  记 z_ij := z_i − z_j。
+
+  【断言 (1)：期望值的形式】球面上一组指数算子的期望值为
+    ⟨ Π_i e^{i ε_i H(z_i)} ⟩_{S²}  =  Π_{i<j} z_ij^{ε_i ε_j},
+  当且仅当荷守恒 Σ_i ε_i = 0；荷不守恒时期望值为零。
+
+  【断言 (2)：唯一性】上式**被下列两条数据唯一确定，至多相差一个总归一化常数**：
+    (a) 指数算子之间的 OPE（即各 z_ij → 0 处的极点与零点阶数 ε_i ε_j），
+    (b) 期望值在 z_i → ∞ 处的光滑性（"smoothness at infinity"）。
+  原书对这一点的逐字表述（(10.3.7) 上方）：
+    "The poles and zeros in the OPE together with **smoothness at infinity determine** the
+     expectation values of these operators on the sphere, up to an overall normalization."
+
+  【本命题不断言的内容】
+    (1) **不**断言断言 (2) 的证明。原书把它推给 **exercise 10.7**（逐字题干：
+        "Verify that the expectation value (10.3.7) has the appropriate behavior as z_i → ∞,
+         and show that together with the OPE this determines the result up to normalization."），
+        正文不做。Headrick 解答手册（headrick-2008，Problem 10.7）给的是 Liouville 型论证
+        （两边之比是整函数且在无穷远趋于常数 ⇒ 常数），见 derivation 的 gaps。
+    (2) **不**断言 H 作为手征（纯全纯）玻色子的存在性/构造。原书在 (10.3.5) 处只写下全纯 OPE，
+        不讨论手征玻色子的零模、自对偶格与配分函数的定义问题。
+    (3) **不**断言这个期望值在别的曲面（环面等）上的形式。
+    (4) **不**断言总归一化常数的值。
+
+  【本卡为什么单列】抽取记录 E25 的备注明确建议：
+  「这是全章严格性最可疑的一块之一：'smoothness at infinity determines' 是物理论证；
+    …**这条论证本身是可以数学化的**，但书里放在习题。→ curator 若建 bosonization 节点，
+    …并把 (10.3.7) 的唯一性单列。」
+  单列的实际作用：worldsheet.fermion-bosonization-two-dimensions 的论证以本卡为前提，
+  而本卡是那条论证链上**唯一一处原则上可以升到 rigorous** 的环节（Liouville 型论证）。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. **(10.3.5)**（H H OPE）、**(10.3.6a,b,c)**（e^{±iH} 的 OPE）、**(10.3.7)**（球面期望值与 Σ_i ε_i = 0）, pp. 11–12；唯一性的逐字句在 (10.3.7) 上方"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E25；
+      抽取者逐页读了原书 §10.3 的页图，式号与公式内容均直接看到）。
+  - ref: polchinski-1998-v2
+    loc: "§10「Exercises」, **exercise 10.7**, pp. 43–44（逐字题干见 statement）"
+    note: |
+      L1 一手（抽取记录 E49，该节习题清单逐字节选）。
+      ★ 这是「原书把断言 (2) 的论证推给读者」的直接证据，故 derivation 只能取
+      physical-argument（docs/STATUS_LEVELS.md 的「断言 + 骨架」档位）。
+  - ref: headrick-2008
+    loc: "Problem 10.7"
+    note: |
+      L1（抽取记录 E25 备注：抽取者逐页读到 [H] 的解答页图）。
+      **[H] 是独立第二源**，给出的是 Liouville 型唯一性论证。
+      ⚠ 本卡只把它记为「论证存在于何处」，**未**核对其每一步；
+      若日后要把本卡升到 rigorous，必须由 reviewer 独立复核 [H] 的解答
+      并按 docs/STATUS_LEVELS.md 的 rigorous 例外条款在 derivation 的 notes 记
+      `reviewer-verified: <agent>, <date>`。
+tags: [cft, bosonization, free-field, sphere-correlator, vertex-operator, exponential-operator]
+notes: |
+  【与本图既有自由标量节点的关系】worldsheet.free-scalar-propagator 给的是
+  X^μ(z,z̄) X^ν(0,0) ∼ −(α'/2) η^{μν} ln|z|²（conv.alpha-prime-regge）。
+  本卡的 H H ∼ −ln z 是它在「α' = 2、单个标量、只取全纯一半」下的特例
+  （见 conv.nonembedding-scalar-normalization 的换算字典 (3)）。
+  derivation 里的那条边写了 convention_map。
+
+  【荷守恒 Σ_i ε_i = 0 的地位】原书把它与 (10.3.7) 写在一起。它是 H 的平移不变性
+  （零模积分）的推论，但**原书在此处不给这个推理**，本卡照记为断言的一部分。
+
+  【手征玻色子的定义问题是真实的 gap】把 H(z) 当成一个只有全纯部分的场，
+  在数学上需要额外结构（手征玻色子/格顶点代数）。Polchinski 全章不讨论，
+  本图也没有对应节点。这条 gap 在下游每一张玻色化卡的 derivation 里都重复出现，
+  是玻色化整块**最深的**未形式化处。
+  → 建议后续任务：从数学侧（格顶点算子代数，如 flm-1988、frenkel-benzvi-2004）
+    建一组 math 区节点，把「秩 1 格顶点代数」严格化，再与本卡做接口。
+author: curator
+created: "2026-09-11"

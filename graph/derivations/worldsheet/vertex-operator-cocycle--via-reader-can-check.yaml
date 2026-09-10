@@ -1,0 +1,57 @@
+id: worldsheet.vertex-operator-cocycle--via-reader-can-check
+target: worldsheet.vertex-operator-cocycle
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.fermion-bosonization-two-dimensions
+    inferred: false
+    note: |
+      供给被修正的对象：指数算子 e^{ikH} 及其算子层面的正规序写法 ° e^{iH} °（(10.3.14)）
+      与"玻色化后的算子确实反对易"这一单个复费米子情形的结论（(10.3.15)）。
+      §10.3 脚注 2 **明写**多种费米子时该结论失效、需要 cocycle，
+      故本卡与那张卡的关系在原书里是显式的。
+  - id: worldsheet.exponential-scalar-sphere-correlator
+    inferred: true
+    note: |
+      **inferred**：断言 (1) 的相位 z^{−k∘k′} 来自指数算子两点函数的幂次
+      （在球面期望值 Π_{i<j} z_ij^{ε_iε_j} 里就是 z^{ε_1ε_2}）。
+      原书 §10.4 末**不**引用 (10.3.7)，直接写下相位。
+      本边记的是本图对相位来源的读法；且 (10.3.7) 是单个 H 的情形，
+      (10.4.26) 是格点动量的多个 H_L/H_R 情形，**推广本身原书不写**。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4 末, eq. (10.4.26)–(10.4.28), pp. 19–20"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E32）。
+      **原书这一段的全部论证就是三条公式加一句** 'The reader can check that vertex operators
+      with even k ∘ k now commute with all vertex operators, and those with odd k ∘ k
+      anticommute among themselves.'
+  - ref: polchinski-1998-v2
+    loc: "§10.3, 脚注 2, p. 14"
+    note: L1 一手（E26 备注）。作者指出漏洞并预告本节修补。
+  - ref: polchinski-1998-v1
+    loc: "§8.4（k ∘ k′ 的记号）、(8.2.22)（简单情形的 cocycle）"
+    note: |
+      式号出自 Vol.2 的明写引用（L1，E32）。**Vol.1 侧本图无节点、内容未核实**，
+      而 (10.4.28) 无法脱离 §8.4 的记号被使用。见 gaps。
+summary: |
+  原书 §10.4 末的全部论证：
+    (1) 写下一般的格点动量指数算子 exp(ik_L·H_L + ik_R·H_R)（(10.4.26)）。
+    (2) 指出朴素的算子乘积在交换次序时带相位 z^{−k∘k′}，故统计不正确。
+    (3) 写下带 cocycle 的正确定义 C_k(α_0) ° exp(…) °（(10.4.27)），
+        cocycle 因子由 (10.4.28) 给出，并说这"推广了简单情形 (8.2.22)"。
+    (4) 断言修正后：偶 k∘k 的算子与一切顶点算子交换，奇 k∘k 的算子互相反对易——
+        **逐字 'The reader can check'，正文不验证**。
+  本推导按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位取 physical-argument
+  （骨架清楚、关键步骤只有断言；结论本身在数学侧是定理级的，见 target 的 notes），
+  **不**取 conjecture。
+gaps:
+  - "**断言 (3) 的验证是 'The reader can check'**：原书正文不做。这是本推导的核心 gap，也是原则上最容易升级的一环（有限步代数，给定 §8.4 的记号后是纯计算）。"
+  - "**(10.4.28) 的记号未核实，公式当前不可计算**：`k ∘ k′` 出自 Vol.1 §8.4（本图无节点、未核实）；`n_α`、`α_{0β}` 的含义抽取记录未给，target 的 statement 里给了一个读法但明确标为本图的推测。→ 已在 target 的 notes 记为公开问题 Q1–Q3，建议交 researcher。"
+  - "**Vol.1 (8.2.22) 未核实**：它被 §10.3 脚注 2 与 §10.4 两处引为'简单情形'，是判断 (10.4.28) 是否正确推广的唯一对照点。"
+  - "**相位 z^{−k∘k′} 的来源原书不给**：断言 (1) 直接写下相位，不做推导；本图把它读成两点函数幂次的推论（那条边标了 inferred）。"
+  - "**cocycle 条件本身不被讨论**：C_k 是否满足结合律所需的 2-cocycle 条件、在同调类内是否唯一，原书完全不谈。数学侧有定理（格顶点代数），本图无节点。"
+  - "**与 (10.6.4) 的换算缺失**：§10.6 的相位是按 F（自旋场个数）与 α（扇区）写的，(10.4.28) 是按格点动量写的。两套写法的换算原书不给，本图亦未做，故 worldsheet.superstring-sector-consistency-conditions 的 (10.6.4) 相位仍未被本卡推导出来。"
+  - "**继承上游的核心 gap**：'等价' 无数学陈述、手征玻色子未定义（见 worldsheet.fermion-bosonization-two-dimensions 的 gaps）。"
+author: curator
+created: "2026-09-11"
