@@ -25,6 +25,7 @@ statement: |
       得到另一组基（同一分拆的另一种代表元），维数结论不变。
   (c) 本节点**未形式化**，见推导的 gaps（Mathlib v4.33.1 无 PBW 定理）。
 uses_conventions: [conv.virasoro-standard]
+superseded_by: math.verma-module-free-over-negative-part
 sources:
   - ref: kac-1979
     loc: "§1（Verma 模的构造与逆变形式；PBW 基是其行列式表述的前提）；**分节号未核实**，且 sources.bib 对本 key 指向哪一篇 Kac 存疑"
@@ -38,6 +39,34 @@ sources:
       缺 V(c,h) ≠ 0，并指出 Mathlib v4.33.1 没有 PBW 定理。提交 b138286。
 tags: [cft, representation-theory, verma-module, pbw]
 notes: |
+  **★ 换代记录（2026-09-11，lead 裁决）：本卡 superseded_by math.verma-module-free-over-negative-part，
+  推导 worldsheet.verma-module-pbw-basis--via-pbw 已删除，本卡不再有推导（有效状态 open）。**
+  理由：两张卡的数学内容重叠到几乎逐条对应——本卡的 (1)(2)(3) 就是那张卡的 (1)(2)(3)(4)，
+  而**那张卡的来源更好**：本卡的三条 sources（kac-1979 分节号未核实且 sources.bib 对该 key 指向哪一篇存疑；
+  kac-raina-1987 只到「主题」一级；stringformal-2026 只是形式化状态的登记，不是证明）**没有一条是可核实的
+  命题级定位**；math.verma-module-free-over-negative-part 的来源 virasoro-lean-2025 §12 p.11 是
+  researcher 逐页读图的 L1 逐字转录（虽然那句话**无编号**，但页码与原文可核）。
+  合并方向因此是「worldsheet 卡 → math 卡」，不是反过来。
+
+  **合并时本卡有两处内容没有被上游承载，已分别安置**：
+  (i) **形式特征标** Σ_N p(N) q^{h+N} = q^h ∏_{n≥1}(1−q^n)^{-1}（本卡 (2) 的末句）。
+      math 卡只给 dim_F V_N = p(N)，不写特征标。二者之间差一个 Euler 分拆生成函数恒等式
+      （形式幂级数层面的标准恒等式，**本图没有为它建节点也没有登记来源**）。
+      真正用到特征标的下游是 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman，
+      该条已在自己的 gaps 里登记这一步。
+  (ii) **下标排序写法**：本卡写 L_{-n_1}…L_{-n_k}|c,h⟩（n_1 ≥ … ≥ n_k ≥ 1），math 卡按来源写
+      L_{-n_m}…L_{-n_1}|c,h⟩（1 ≤ n_1 ≤ … ≤ n_m）。**这是同一组基元**，只是把下标序列反过来标号
+      （k = m，本卡的 n_i = math 卡的 n_{m+1-i}），因子从左到右的实际排列（大下标在左）完全一致。
+      已记入 math.verma-module-free-over-negative-part--via-pbw-theorem 的 notes。
+  被删推导中的 Lean 记账（straightening 已形式化 / 线性无关未形式化 / Mathlib 无 PBW /
+  wordWeight 度量的更正）也已并入该 math 推导的 gaps。
+
+  **原先指向本卡的三条 depends_on 已在同一提交里改指 math 卡**：
+  worldsheet.kac-determinant--via-feigin-fuchs、worldsheet.no-ghost-theorem-brst--via-fgz、
+  worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman。
+  ⚠ 本卡的 statement 文本按项目原则 1 **不改**；下面「引用本卡片还是 v2？」的分派规则中
+  「引本卡片」一律读作「引 math.verma-module-free-over-negative-part」。
+
   【本卡片是 worldsheet.verma-module 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单）
   旧卡把「构造 + 分级」（已在 Lean 中完成）与「PBW 基 + dim = p(N)」（未形式化、依赖
   Mathlib 尚无的 PBW 定理）写在同一张定义卡上。现构造部分见

@@ -68,7 +68,8 @@ gaps:
     **只是 PBW 的「≤」一半**。线性无关（dim V_N ≥ p(N)，等价于 U(Vir_-) 的 PBW 加诱导模自由性）
     **未证**，Mathlib v4.33.1 没有 PBW 定理。因此本推导与 V(c,h) = 0 相容：
     目标陈述在 V(c,h) = 0 时是空洞真。V(c,h) ≠ 0 与 dim = p(N) 归
-    worldsheet.verma-module-pbw-basis（rigorous，未形式化）。
+    **math.verma-module-free-over-negative-part**（rigorous，未形式化；2026-09-11 起它取代
+    worldsheet.verma-module-pbw-basis，后者已 superseded_by 它）。
   - |
     **p(N) 的具体数值不可计算**：`Fintype.card (Nat.Partition N)` 经 `Fintype.ofSurjective`
     从 `Composition N` 构造，`decide` 归约不了。它按定义就是分拆函数，但目标陈述 (4)
@@ -83,12 +84,13 @@ notes: |
   以及 11b4c0f 已由 lead 合并进 main。
 
   【formalizer 对证明计划的更正】formal/TODO.md 与 worldsheet.verma-module-pbw-basis--via-pbw
-  原先写的计划是「对（词长, 逆序数）双重归纳」。**这个计划不成立**：Leibniz 律的第二项
+  （该推导 2026-09-11 已随两张 Verma 基卡的合并删除，本条已并入
+  math.verma-module-free-over-negative-part--via-pbw-theorem 的 gaps）原先写的计划是「对（词长, 逆序数）双重归纳」。**这个计划不成立**：Leibniz 律的第二项
   [L_a, L_b] X = (a − b) L_{a+b} X 词长减 1，但其逆序数不受控制，且后续对
   L_b (L_a X) 的嵌套整理会产生比原尾巴更长的词，双重归纳的度量不单调。
   实际使用的度量是单一自然数 wordMeasure = (−Σ_i i·a_i).toNat，两种改写步都使它严格下降；
   并且 `straighten` 的结论必须带「输出有序词测度 ≤ 输入词测度」这一上界，才能让
-  嵌套整理被归纳假设覆盖。已同步写进 --via-pbw 的 gaps。
+  嵌套整理被归纳假设覆盖。已同步写进 math.verma-module-free-over-negative-part--via-pbw-theorem 的 gaps。
 
   【基环】(1)(2)(3) 对任意交换 ℚ-代数 R 成立；(4) 需特征零域 K（finrank 理论）。
   目标陈述按此分别限定。

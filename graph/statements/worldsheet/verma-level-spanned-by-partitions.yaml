@@ -55,13 +55,18 @@ sources:
     note: |
       文献侧不把 straightening 单列为命题——它是 PBW 定理证明的「张成」一半，
       教科书里作为 PBW 的一部分一并陈述。本节点把它拆出来单列，是因为这一半已被机器证明
-      而另一半（线性无关）没有；见 worldsheet.verma-module-pbw-basis 的推导 gaps。
+      而另一半（线性无关）没有；见 math.verma-module-free-over-negative-part--via-pbw-theorem 的 gaps
+      （2026-09-11 起 worldsheet.verma-module-pbw-basis 已 superseded_by math.verma-module-free-over-negative-part）。
 tags: [cft, representation-theory, verma-module, pbw, straightening, formalized]
 notes: |
-  【与 worldsheet.verma-module-pbw-basis 的分工】那张卡是完整的 PBW 结论
+  【与 math.verma-module-free-over-negative-part 的分工】那张卡是完整的 PBW 结论
   （有序词构成**基**、dim = p(N)、V ≠ 0），rigorous 未形式化。本卡片只是它的
-  「≤」一半（张成），formalized。那张卡的推导 --via-pbw 现在 depends_on 本卡片：
-  它的第 (2)(3) 步中「有序词张成」这一半由本卡片提供，剩下「线性无关」才是 PBW 真正的输入。
+  「≤」一半（张成），formalized。那张卡的推导 --via-pbw-theorem 现在 depends_on 本卡片：
+  它 summary (2)(3) 中「有序词张成」这一半由本卡片提供，剩下「线性无关」才是 PBW 真正的输入。
+  ⚠ **本卡 statement（范围说明那两句）里写的 worldsheet.verma-module-pbw-basis 已于 2026-09-11
+  superseded_by math.verma-module-free-over-negative-part**（两卡内容逐条重叠，后者来源更好，
+  其推导 --via-pbw 已删除）。陈述文本按项目原则 1 不改，读到那两句时一律读作新卡。
+  记法差别只有基元下标的标号顺序（旧卡 n_1 ≥ … ≥ n_k，新卡 1 ≤ n_1 ≤ … ≤ n_m），同一组基元。
 
   【formalizer 的三点说明】（2026-09-11，formal/TODO.md pbw-verma (a) 与 VermaPBW.lean 文件头）
   1. (1)(2)(3) 的**张成**结论对任意交换 ℚ-代数 R 成立（`section Span` / `section Level`

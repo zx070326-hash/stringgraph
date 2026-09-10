@@ -59,7 +59,9 @@ sources:
       （"seems to forget to note that π is injective on W"），但那是证明内部的细节，不影响本节点的结论。
 tags: [algebra, lie-algebra, universal-enveloping-algebra, pbw, math-input]
 notes: |
-  **本节点为什么存在**：worldsheet.verma-module-pbw-basis--via-pbw 原先在 gaps 里写着
+  **本节点为什么存在**：worldsheet.verma-module-pbw-basis--via-pbw（该推导已于 2026-09-11 随
+  两张 Verma 基卡的合并删除，其剩余内容并入 math.verma-module-free-over-negative-part--via-pbw-theorem）
+  原先在 gaps 里写着
   「PBW 定理本身在 literature/sources.bib 中没有条目」。researcher 第三轮把 (A) PBW 本体
   定位到了带编号的来源，而 (B) Virasoro Verma 模那一半在文献里**没有编号**
   （见 math.verma-module-free-over-negative-part）。把两者分成两张卡，是为了不让
