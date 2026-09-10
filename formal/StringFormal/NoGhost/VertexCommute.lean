@@ -164,6 +164,24 @@ theorem vertexOsc_apply_creaExp_of_dotVec_zero (η b b' : Fin D → R)
     Finset.sum_singleton, vertexAnn_creaExp_of_dotVec_zero η b b' hdot K 0, if_pos rfl,
     add_zero]
 
+/-- `V^{(b)}_J` commutes with multiplication by the coherent-state coefficient `Φ^{b'}_c` of
+an orthogonal momentum.  (For `P = 1` this specialises to
+`vertexOsc_apply_creaExp_of_dotVec_zero`.)  This is the form in which the no-contraction
+lemma will be used to bound the support of the same-point product
+`Σ_{J+K=L} V^{(b)}_J V^{(b')}_K`. -/
+theorem vertexOsc_creaExp_mul_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec η b' b = 0)
+    (c J : ℤ) (P : Fock D R) :
+    vertexOsc η b J (creaExp η b' c * P) = creaExp η b' c * vertexOsc η b J P := by
+  classical
+  rw [vertexOsc_apply η b J (creaExp η b' c * P) (s := vertexIdx b P) (fun L hL => by
+        rw [vertexAnn_creaExp_mul_of_dotVec_zero η b b' hdot c L P,
+          vertexAnn_apply_eq_zero_of_notMem_vertexIdx b P hL, mul_zero]),
+    vertexOsc_apply η b J P (fun L hL => vertexAnn_apply_eq_zero_of_notMem_vertexIdx b P hL),
+    Finset.mul_sum]
+  exact Finset.sum_congr rfl fun L _ => by
+    rw [vertexAnn_creaExp_mul_of_dotVec_zero η b b' hdot c L P]
+    ring
+
 omit [Algebra ℚ R] in
 /-- **Two-index form of `Fock.eq_zero_of_vertex_recursion`.**  A doubly indexed family of
 endomorphisms obeying the creation-mode recursion of a *product* of two vertex operators
