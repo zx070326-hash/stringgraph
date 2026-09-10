@@ -85,7 +85,10 @@ StringFormal/
   NoGhost/TowerPairing.lean   动量塔上的双线性型 towerPairing = Σ_j ⟨·_j,·_j⟩（BilinForm）：层间正交、
                             对称、towerShift/towerMode/towerLop 的伴随（见文件头 gaps）
   NoGhost/VertexWeight.lean   顶点算子共形权：creaExp 欧拉递推、真空上 L_m Φ_J（m ≥ 0）、**m ≥ 1 的 [L_m, V_J] 恒等式**（lie_Lop_vertexOsc_of_pos）与塔上版本（k_0²=0 时 [L_m, V^{(n)}_K] = (K−m)V^{(n)}_{K−m}）
-  NoGhost/VertexWeightNeg.lean  **m < 0 半**：L_m 真空显式和、Φ_J 真空关系、lie_Lop_vertexOsc_of_neg；合并版 lie_Lop_vertexOsc_of_ne（**所有 m ≠ 0**）。m = 0 是真正例外（Sugawara j=0 与 j=m 项重合）；塔版 m<0 未做
+  NoGhost/VertexWeightNeg.lean  **m < 0 半**：L_m 真空显式和、Φ_J 真空关系、lie_Lop_vertexOsc_of_neg；合并版 lie_Lop_vertexOsc_of_ne（m ≠ 0）
+  NoGhost/VertexWeightZero.lean  m = 0：lie_Lop_vertexOsc_zero；**合并版 lie_Lop_vertexOsc（每个 m ∈ ℤ，同一多项式系数）**。m = 0 只是真空引理不同（差 ½a·a，在对易子里抵消）
+  NoGhost/DDFOperatorNeg.lean  塔版 lie_towerLop_towerVertex_of_ne（m ≠ 0）；**lie_towerLop_ddfOp_of_ne：[L_m, A^ε_n] = 0 对所有 m ≠ 0**（窗口两端各留 |m| 余量）；剩塔版 m = 0
+  NoGhost/TowerPhysical.lean  塔上物理子模 towerPositiveModeSubmodule / towerL0Submodule / towerPhysSubmodule（**统一截距 a₀**：塔上 L_0 在层 j 已用该层动量，条件 α'k² + j + N = a₀ 选出反对角线）；**ddfOp_mem_towerPositiveModeSubmodule**（A^ε_n 保持正模条件）；保持 L_0 条件待 m = 0 括号
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、
