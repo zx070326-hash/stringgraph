@@ -140,8 +140,49 @@
   pages   = {441--445},
   year    = {1979}
 ,
-  note    = {疑点（researcher 2026-09-10）：FGZ 1986 参考文献 10 引的是 Kac, Proc. ICM Helsinki 1978, Vol. 1, 299--304，可能不是同一篇；Kac 行列式公式的首发出处待核实。
-             第二轮补充：lian-zuckerman-1991 参考文献 [K1] 逐字为「Kac, V. G.: Contravariant form for infinite-dimensional Lie algebras and superalgebras. Lecture Notes in Physics, Vol. 94, p. 441. Berlin, Heidelberg, New York: Springer 1979」，**独立佐证本条的 LNP 94 / p.441**。但这没有排除 ICM 1978 与 LNP 94 是同一内容的两个版本，**疑点未裁决**。}
+  note    = {**元数据已由作者本人的出版目录核实（L1，researcher 2026-09-11）**：
+             https://math.mit.edu/~kac/publications.pdf 的 "Publications" 第 30 条逐字为
+             「Contravariant form for infinite dimensional Lie algebras and superalgebras, *Lecture Notes in Physics* **94** (1979), 441-445.」
+             （注意作者自己写的是 "infinite dimensional" 无连字符；Springer 页与 LZ 1991 用 "infinite-dimensional"。）
+             该文是 Lecture Notes in Physics 94 = *Group Theoretical Methods in Physics*（Austin 1978,
+             eds. Beiglboeck/Boehm/Takasugi）的一章，DOI 10.1007/3-540-09238-2_102（L3，Springer 页面元数据，正文认证墙）。
+             **★ 身份疑点已结案：本条与 ICM Helsinki 那篇不是同一篇，是两篇独立论文。**
+             同一份作者目录第 32 条另有「Highest weight representations of infinite dimensional Lie algebras,
+             *Proceedings of ICM, Helsinki* **1978** (1980), 299-304.」——已单独登记为 **kac-1980-icm**。
+             FGZ 1986 ref 10 与 Schottenloher [Kac80] 引的是那一篇，**不要再把它算到本条头上**。
+             **谁把行列式公式归给本条**：Feigin-Fuchs 1982 俄文原刊参考文献 [2] 逐字就是本条
+             （「Kac V. G. Contravariant form for infinite-dimensional Lie algebras and superalgebras. Lecture Notes Phys.
+             V. 94, 1979, p. 441-445.」），且其 **Теорема 3.1 标注 «(см. [2])»**（L1，见 extractions/math-sources.md §34.2）；
+             lian-zuckerman-1991 [K1] 亦然（前轮 L1）。
+             **谁不归给本条**：Schottenloher 2008 的 Theorem 6.12 归给 [Kac80] = ICM 那篇。
+             ⇒ 「Virasoro 行列式公式首发在 LNP 94 还是 ICM」**仍未裁决**（两篇正文都未获取）。
+             **⚠ 正文未获取，内部编号 L0：图里的 `loc` 不得写 "Theorem 1"，只能写 pp. 441-445。**
+             取正文的两条已知死路：link.springer.com/chapter/... 303 认证墙；archive.org 无 Austin 1978 那卷。}
+}
+
+@article{kac-1980-icm,
+  author    = {Kac, Victor G.},
+  title     = {Highest weight representations of infinite dimensional {L}ie algebras},
+  booktitle = {Proceedings of the International Congress of Mathematicians (Helsinki, 1978)},
+  journal   = {Proceedings of the International Congress of Mathematicians, Helsinki 1978},
+  publisher = {Academia Scientiarum Fennica},
+  pages     = {299--304},
+  year      = {1980},
+  note      = {**新增（researcher 2026-09-11），为的是把它与 kac-1979（LNP 94）彻底分开。**
+               元数据 L1：作者本人出版目录 https://math.mit.edu/~kac/publications.pdf 第 32 条逐字
+               「Highest weight representations of infinite dimensional Lie algebras, *Proceedings of ICM,
+               Helsinki* **1978** (1980), 299-304.」——**会议 1978 年开，论文集 1980 年出版**，
+               因此文献里 1978 与 1980 两种年份都能见到；本 key 取出版年 1980。
+               第二来源 L1：Schottenloher LNP 759 第 6 章参考文献「[Kac80] V. Kac. Highest weight representations of
+               infinite dimensional Lie algebras. In: *Proc. Intern. Congress Helsinki*, Acad. Sci. Fenn., 299-304, 1980.」
+               **用途**：(a) fgz-1986 的参考文献 10 指的是本条（见 extractions/brst-cohomology-sources.md §1.5）；
+               (b) schottenloher-2008 Theorem 6.12（Kac 行列式）把定理归给本条。
+               **内容完全未核实（L0）**：本条正文是否含 Virasoro 的行列式公式**未知**，
+               这也是 worldsheet.kac-determinant 归属问题的最后一块拼图。
+               取正文的已知死路：IMU 官方扫描 mathunion.org/fileadmin/ICM/Proceedings/ICM1978.1/ICM1978.1.ocr.pdf
+               **30 MB，超出 WebFetch 10 MB 上限**；archive.org 的两个副本
+               （proceedingsofint0001inte_c4t9 / _n1u1）**fulltext/inside.php 与 _djvu.txt 均 403**（借阅限制卷）。
+               见 extractions/math-sources.md §34.1、§34.10 Q24。}
 }
 
 @article{kac-kazhdan-1979,
@@ -151,8 +192,12 @@
   volume  = {34},
   pages   = {97--108},
   year    = {1979},
-  note    = {元数据来自 lian-zuckerman-1991 参考文献 [KK]（逐字：「Kac, V. G., Kazhdan, D. A.: Structure of representations with highest weights of infinite dimensional Lie algebras. Adv. Math. 34, 97 (1979)」），**起始页 97 已核实，终页 108 未与出版方核对**，标题的 highest weight(s) 单复数亦未核对。
-             登记理由：LZ 1991 Theorem 3.5(ii) 的两分支条件最终归结为 Verma 模 M(26-D, 1-h) 的半正定性，其判定用的正是 Kac--Kazhdan 行列式公式（LZ Lemma 3.17、Remark 3.15）。是图中 worldsheet.kac-determinant 节点的候选一手来源。内容未核实。}
+  note    = {元数据来自 lian-zuckerman-1991 参考文献 [KK]（逐字：「Kac, V. G., Kazhdan, D. A.: Structure of representations with highest weights of infinite dimensional Lie algebras. Adv. Math. 34, 97 (1979)」）。
+             **2026-09-11 更新（researcher，L1）：终页 108 已由作者本人出版目录确认**——
+             https://math.mit.edu/~kac/publications.pdf 第 31 条逐字「(with D. Kazhdan) Structure of representations with
+             highest weight of infinite dimensional Lie algebras, *Advances in Math.* **34** (1979), 97-108.」
+             **同时确认标题里是单数 "highest weight"**（LZ 抄成了 "highest weights"）。
+             登记理由：LZ 1991 Theorem 3.5(ii) 的两分支条件最终归结为 Verma 模 M(26-D, 1-h) 的半正定性，其判定用的正是 Kac--Kazhdan 行列式公式（LZ Lemma 3.17、Remark 3.15）。是图中 worldsheet.kac-determinant 节点的候选一手来源。内容未核实（正文未获取）。}
 }
 
 @book{kac-raina-1987,
@@ -165,7 +210,12 @@
   isbn      = {9789971503963},
   note      = {**内容与编号均未核实（L0）。** 未获取正文：worldscientific.com 书页 403，Google Books 只回页码不回 snippet。
                **版本陷阱（必读）**：第 1 版 = 本条（Adv. Ser. Math. Phys. 2, 1987, 145 页, ISBN 9971503964 / 9789971503963，讲座 1985-12..1986-01 于 TIFR），**约 12 讲**；第 2 版 = Kac, Raina & Rozhkovskaya, Adv. Ser. Math. Phys. 29, World Scientific 2013, ISBN 9789814522199，**18 讲**（Lecture 1 p.1 / 2 p.11 / 3 p.19 / 4 p.31 / 5 p.45 / 6 p.55 / 7 p.65 / 8 p.77 / 9 p.89 / 10 p.101 / 11 p.113 / 12 p.123 / 13 p.135 / 14 p.151 / 15 p.163 / 16 p.175 / 17 p.191 / 18 p.211）。**两版讲号与命题号不可互换**，从第 2 版查到的编号不得填进引本条的节点。
-               针对「自由玻色子 Fock 空间上 L_n = 1/2 sum :a_(n-k) a_k: 满足 c = 1 的 Virasoro 关系」这条：**本书里的 Lecture 号与命题号未能核实，不要猜**。已核实的可替代来源见 virasoro-lean-2025（Theorem 10.1 / Corollary 10.2）。见 extractions/primary-sources-round2.md §5。}
+               针对「自由玻色子 Fock 空间上 L_n = 1/2 sum :a_(n-k) a_k: 满足 c = 1 的 Virasoro 关系」这条：**本书里的 Lecture 号与命题号未能核实，不要猜**。已核实的可替代来源见 virasoro-lean-2025（Theorem 10.1 / Corollary 10.2）。见 extractions/primary-sources-round2.md §5。
+               **2026-09-11 补（researcher）**：本轮首次拿到一条 L1 证据说明本书**被当作 Kac 行列式的证明出处**——
+               schottenloher-2008 第 6 章 Theorem 6.12 之后紧接一句「A proof can be found in **[KR87]** or [CdG94], for example.」，
+               其参考文献 [KR87] 逐字即本条（World Scientific, Singapore, 1987）。
+               **但书内讲号/命题号仍未核实、版本陷阱依旧**，图里引本条时 `loc` **只能写主题**（「Kac 行列式的证明」），
+               不得写 Lecture / Theorem 号。见 extractions/math-sources.md §34.6。}
 }
 % merged note from duplicate kac-raina-1987 entry (2026-09-11 lead dedupe):
 % 由 curator 于 2026-09-10 登记。用途：自由玻色子（振子）Fock 空间上
@@ -183,7 +233,52 @@
   journal = {Functional Analysis and Its Applications},
   volume  = {16},
   pages   = {114--126},
-  year    = {1982}
+  year    = {1982},
+  doi     = {10.1007/BF01081626},
+  note    = {**俄文原刊全文已核实（L1，researcher 2026-09-11，17 页逐页读图）。**
+             获取途径：Math-Net.Ru `https://www.mathnet.ru/php/getFT.phtml?jrnid=faa&paperid=1619&what=fullt`
+             （落盘 2 MB 扫描 PDF -> Read pages 读图；**PDF 页 = 俄文刊页 - 46**）；元数据页 `mathnet.ru/eng/faa1619`。
+             俄文原刊：Функц. анализ и его прил. **16**:2 (1982), **47-63**（标题词序是
+             «Кососимметрические инвариантные дифференциальные операторы…»）；英译 Funct. Anal. Appl. 16:2 (1982) 114-126；
+             MR 659165；Zbl 0505.58031；收稿 1981-09-15。
+             **★ 图里要的那条 = §3.2 «Теорема Каца» 的 Теорема 3.1（俄文原刊第 58 页），证明在 §4.2
+             «Доказательство теоремы 3.1»（第 62 页）。**原图 loc 写的「§2（完整证明）」**是错的**——
+             §2 讲的是不变算子与特殊向量的对应及主系统的渐近解。
+             Теорема 3.1 原文形式（逐字）：det^2 M_{h,c}(k) = C * prod_{i=1}^{k} prod_{j|i} Phi_{j,i/j}(h,c)^{p(k-i)}，
+             其中 Phi_{a,b}(h,c) = (h + (1/24)(a^2-1)(c-13) + (1/2)(ab-1)) * (h + (1/24)(b^2-1)(c-13) + (1/2)(ab-1))
+             + (a^2-b^2)^2/16，「где C — **ненулевая** константа」。
+             **四个易错点**：(1) 左边是 **det 的平方**；(2) Phi_{a,b} = (h-h_{a,b})(h-h_{b,a}) 的无根号展开（已数值验算两点）；
+             (3) **C 只被断言「非零」，没有断言「正」**；(4) 扫描件上 Phi 首个下标字形 i/j 难分辨，
+             按 prod_{j|i} 只能是 Phi_{j,i/j}（字形 L2 + 数学强制）。h、c 取**任意复数**（p.57 明写），
+             故本条比 schottenloher-2008 Theorem 6.12（限 c,h in R 的 Hermite 形式）更贴合图卡。
+             **作者自述（p.47，L1）**：主定理是 Теорема 1.1（不变算子分类）；«Эта проблема приводимости решена
+             в 1979 г. Кацем [2]» + «позволяют дать **новое доказательство** теоремы Каца» + «§ 4 содержит
+             доказательство теоремы Каца» ⇒ **作者自称给的是「新证明」，并把可约性问题的解决归给 Kac 1979；
+             「第一个完整证明」是二手说法，不是作者自称。**
+             **参考文献 [2] 逐字 = kac-1979（LNP 94, 1979, 441-445）**，本文不引 ICM 那篇。
+             **未核实**：英译本（114-126）的编号与页码是否与俄文一致（Theorem 3.1 线性换算约在英译 p.122，**不得写进图**）；
+             俄文 p.59 首句「доказательство теоремы ?.1 не опубликовано」的定理号字形判读为 2.1 但语义指向 3.1（未裁决）。
+             见 extractions/math-sources.md §34.2。}
+}
+
+@article{feigin-fuchs-1984,
+  author  = {Feigin, Boris L. and Fuchs, Dmitry B.},
+  title   = {Verma modules over the Virasoro algebra},
+  journal = {Functional Analysis and Its Applications},
+  volume  = {17},
+  number  = {3},
+  pages   = {241--242},
+  year    = {1984},
+  note    = {**登记备用，内容未核实（L0）。** 与 feigin-fuchs-1982 是**两篇不同的论文**，不要混。
+             俄文原刊：Б. Л. Фейгин, Д. Б. Фукс, «Модули Верма над алгеброй Вирасоро»,
+             Функц. анализ и его прил. **17**:3 (**1983**), 91-92（Math-Net.Ru `mathnet.ru/rus/faa1570`，L2）；
+             **英译年份分歧**：Math-Net.Ru 记英译为 Funct. Anal. Appl. 17:3 (**1983**) 241-242，
+             而 virasoro-lean-2025 的参考文献 [FF84] 逐字写 「Functional Analysis and Its Applications, 17(3):241-242, **1984**」（L1）。
+             本 key 取 1984 以对齐 Kytola 的引用；**引用时把两种年份都写上**。
+             登记理由：Kytola arXiv:2510.21741 §14 把「Feigin-Fuks structure theorem for Verma modules over the
+             Virasoro algebra [FF84, VZ90, IK10]」列为**尚未形式化的下一个目标**，本条是那条链的一手出处之一。
+             另一出处 [VZ90] = Vershik & Zhelobenko (eds.), *Representation of Lie groups and related topics*,
+             Adv. Stud. Contemp. Math. 7, Gordon and Breach, 1990（含 Feigin-Fuchs 的长篇综述，**未登记，未核实**）。}
 }
 
 @article{fgz-1986,
@@ -257,7 +352,174 @@
   title  = {From Dual Models to String Theory},
   year   = {2008},
   eprint = {0802.3249},
-  note   = {arXiv physics.hist-ph；作者本人的历史综述，是 goddard-thorn-1972 与 brower-1972 适用范围的二手证据来源。}
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.hist-ph},
+  note   = {arXiv physics.hist-ph；作者本人的历史综述，是 goddard-thorn-1972 与 brower-1972 适用范围的二手证据来源。
+            **第二轮补充（researcher 2026-09-11）：全文已核实（L1，34 页 PDF 落盘后 Read 带 pages 逐页读图；本轮读 pp.1-2, 9-20, 29-34）。**
+            获取途径 arxiv.org/pdf/0802.3249（v1，2008-02-22）。
+            **★ 重要修正：旧 note 与旧图节点都记本文「不给编号」，这对无鬼定理成立，对两条 DDF 对易关系不成立。**
+            两条关系在本文中都是**带编号的显示公式**（不是 Theorem/Proposition）：
+            **§5「Spectrum Generating Algebra」, p.11, eq. (5.4)** 逐字 `[L_m, A^i_n] = 0.`（**对 m 无限制**），
+            引出句逐字「The DDF operators, A^i_n, are well-defined on states of momentum p, such that k·p = 1 and they can be
+            used to generate physical states because they commute with the Virasoro algebra,」；
+            **§5, p.11, eq. (5.5)** 逐字 `[A^i_m, A^j_n] = m delta^{ij} delta_{m,-n},  1 <= i,j <= D-2.`
+            **A^i_n 的定义在 §5, p.11, eq. (5.1)-(5.3)**：(5.1) `A^i_n = eps^i_mu A^mu_n,  A^mu_n = (1/2pi i) oint P^mu(z) V(nk,z) dz`；
+            (5.2) `V(alpha,z) = :exp{i alpha . Q(z)}:`；(5.3) `Q^mu(z) = q^mu - i p^mu log z + i sum_{n!=0}(1/n)a^mu_n z^{-n}, P^mu = i dQ^mu/dz`。
+            (5.1) 后正文**逐字同时给出两条偏振条件**：「orthonormal polarization vectors for a photon of momentum k, i.e.
+            **eps^i . eps^j = delta^{ij}, k . eps^i = 0**」——这正是图节点 ddf-transverse-oscillator-algebra 的 notes 说
+            「v4 没写出的隐含前提」，现已有逐字来源。
+            **★ 号差优势：§1, p.1, (1.1) 后逐字「g^{mu nu} … taken to have signature (-,+,+,+)」= mostly-plus，
+            与 conv.metric-mostly-plus 一致，引用无需换算**（GSW 是 mostly-minus，需换算）。同处 (1.1) 给 `[a^mu_m,a^nu_n]=m g^{mu nu} delta_{m,-n}`、`a^{mu+}_n = a^mu_{-n}`。
+            **★ 归属信息（对图很重要）**：作者本人把 (5.5) 归给参考文献 **[43] R.C. Brower and P. Goddard, Physical States in the
+            Dual Resonance Model, Proc. Int. School of Physics "Enrico Fermi" Course LIV (Academic Press, 1973) 98-110** 与
+            **[44] R.C. Brower and P. Goddard, Collinear Algebra for the Dual Model, Nucl. Phys. B40 (1972) 437-444**，
+            **不归给 goddard-thorn-1972**；A^i_n 的定义归给 [42] = Del Giudice-Di Vecchia-Fubini, Ann. Phys. 70 (1972) 378-398。
+            GT 1972 = 其 [45]，对应的是**无鬼定理本身**（§6, p.15, eq. (6.4) `|psi> = |f> + |n>`，**无编号**，
+            逐字「we were able to prove the No-Ghost Theorem [45]: For D = 26, if |psi> is a physical state … it can be written in the form」，
+            并逐字「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.」）。
+            GT 证明真正用的代数是 **§6, p.15, eq. (6.3)**：`[L_m,K_n] = -n K_{m+n}`、`[K_m,K_n]=0`，**不是** A^i_n 的对易关系。
+            **反面信息（横向性之必要）：§5, p.12, eq. (5.6)** 逐字「the longitudinal components, A-tilde_n = k-tilde_mu A^mu_n,
+            **fail to commute with the Virasoro algebra**」，`[L_m, A-tilde_n] = -(1/2)m(m+1)n Phi^n_m`；(5.7) `[A-tilde_m,A-tilde_n]=(m-n)A-tilde_{m+n}+m^3 delta_{m,-n}`。
+            **注意这是「不与 Virasoro 对易」的失效，不是「模态和发散」的失效，两者不可混引。**
+            Brower 路线见 §6, p.16, (6.5)-(6.7)：(6.7) 逐字 `[L_m, A^L_n] = 0,  [A^L_m, A^i_n] = -n A^i_{m+n}`（后者与 gebert-nicolai-1995 (3.31)/(3.43) 同型，跨来源独立佐证）。
+            **使用限制：本文是历史综述，(5.4)/(5.5) 均为陈述、无证明、无「we prove」。** 引它只升「可追溯性」，**不足以把节点 status 提上 physical-argument 之上**。
+            另：参考文献 [32] 逐字佐证 thorn-1985 的元数据（MSRI 论文集 411-417）；[46] 佐证 brower-1972 卷页；[29] 佐证 brower-thorn-1971 卷页。
+            **元数据疑点**：其 [34] 逐字为「B.L. Feigen and D.B. Fuchs, Skew-symmetric differential operators on the line and Verma modules
+            over the Virasoro algebra, Funct. Anal. and Appl. **17** (1982) 114.」，与本 bib 的 feigin-fuchs-1982（vol. 16, 114-126, 1982）
+            及 virasoro-lean-2025 note 里的「17(3):241-242 (1984)」**三方不一致，未裁决**（作者姓亦拼作 "Feigen"）。
+            见 extractions/gsw-1987-v1.md §2。}
+}
+
+@article{gebert-nicolai-1995,
+  author  = {Gebert, Reinhold W. and Nicolai, Hermann},
+  title   = {On {$E_{10}$} and the {DDF} construction},
+  journal = {Communications in Mathematical Physics},
+  volume  = {172},
+  number  = {3},
+  pages   = {571--622},
+  year    = {1995},
+  eprint  = {hep-th/9406175},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1）**：读 pp. 571-572, 579-583, 593-600。
+             获取途径 **https://pure.mpg.de/rest/items/item_153125_1/component/file_153124/content**（MPG repository，
+             返回**出版方排版的期刊 PDF，页码即期刊页码**，落盘 2.5 MB 后 Read 带 pages 读图）。
+             **注意 arxiv.org/pdf/hep-th/9406175 本轮返回 HTTP 404。** 标题页记「Received 20 July 1994 / in revised form 28 October 1994」。
+             **本条对图的核心价值：它把两条 DDF 对易关系放进纯顶点代数（形式级数）框架，全程不用围道形变、不用收敛性。**
+             **可引用的编号结果（均 L1 逐字）**：
+             **§2.1, p. 582, eq. (2.55)-(2.57)**——(2.55) 定义权 Delta 的 primary state `(L_(n) - delta_{n0}Delta)psi = 0, all n >= 0`；
+             (2.56) `[L_(n), Y(psi,z)] = z^n {z d/dz + (n+1)Delta} Y(psi,z)`；
+             **★ (2.57) `[L_(n), psi_m] = {(Delta-1)(n+1) - m} psi_{m+n}   for all m,n in Z`**，引出句逐字「We immediately infer from (2.41) that, for psi in R_(Delta),」。
+             **取 Delta = 1、m = 0 即得「权 1 primary 的零模与所有 L_n 对易」**——这是图中 ope-commutator-dictionary 那一步的可形式化替代。
+             其推导链**全部带编号且全在公理体系内**：**(2.36) Jacobi identity（顶点代数公理）** => **(2.38) commutator formula
+             `[psi_m, phi_n] = sum_{i>=0} C(m,i)(psi_i phi)_{m+n-i}`**（正文逐字：(2.37)/(2.38) 是 (2.36) 的 m=0 与 l=0 特例）
+             => **(2.41) `[L_(n), Y(phi,z)] = sum_{i>=-1} C(n+1,i+1) Y(L_(i)phi, z) z^{n-i}`**（逐字「Taking Res_{z_0}[Res_{z_1}[z_1^n (Jacobi identity)]] in the special case psi = omega」）
+             => (2.56)/(2.57)。另 **(2.32) Regularity 公理 `psi_n phi = 0` for n sufficiently large**（p.579）。
+             **§3.1, p. 593, eq. (3.2)-(3.3)**：**transversal DDF operator 定义为零模** `A^xi_m := (xi(-1)e^{mk})_0 = Res_z[Y(xi(-1)e^{mk},z)] = Res_z[xi(z)Y(e^{mk},z)]`，
+             逐字「where normal ordering in the last line is unnecessary due to **xi.k = 0**」；前置 (3.1) 给物理态的李括号。
+             **§3.1, p. 594, eq. (3.4)** `[A^xi_m, A^eta_n] = m(xi.eta) delta_{m+n,0}(k(-1))_0 = m(xi.eta) delta_{m+n,0} k(0)`
+             ——**★ 右端显式保留 k(0) = k.alpha_0**，同页逐字说明只有在 `k.r = 1` 时才「realize precisely the algebra of d-2 transversal oscillators」。
+             **这直接回应了图中推导 ddf-transverse-oscillator-algebra--via-conformal-weight 的 gaps 第 1 条**（「右端为何不带 alpha'/k.p 因子」）。
+             **§3.1, p. 594, eq. (3.5)** `[L_(n), A^xi_m] = 0   for all n, m in Z`，引出句逐字「Moreover, **it is clear from (2.57)** that these
+             operators commute with the Virasoro algebra」——**量词是 for all n，含 n = 0**，与 goddard-2008 (5.4) 一致，
+             与 tomassini-2008 (2.38) 的 `m != 0` 版本**不同**（原因见 extractions/gsw-1987-v1.md §5：塔 vs 固定纤维）。
+             **§3.2-§3.3 的纵向侧**：(3.18) DDF vertex operators；(3.19) 权 1 primary 变换律；(3.20) 纵向 Virasoro `L-frak_m`；
+             (3.29) `[L-frak_m, L-frak_n] = (m-n)L-frak_{m+n} + 2(m^3-m)delta_{m+n,0}k(0)`，逐字「central charge c_L = 24 … **universal** in the sense that
+             its central charge **does not depend on the dimension of the lattice**」；(3.31) `[L-frak_m, A^xi_n] = -n A^xi_{n+m}`；
+             (3.42) `script-L_n := (1/2) sum_i sum_m :A^i_m A^i_{n-m}:`（c = d-2）；(3.43) `[script-L_m, A^i_n] = -n A^i_{n+m}`；
+             (3.44) `A^-_n := L-frak_n - script-L_n`；(3.45) `[A^i_m, A^-_n] = 0`；
+             (3.46) `[A^-_m, A^-_n] = (m-n)A^-_{m+n} + ((26-d)/12)(m^3-m)delta_{m+n,0}`；
+             **(3.48) `P_(1)(r) = S(t-hat^-) tensor V(26-d, 0)`**——无鬼定理的**张量积分解**形式（横向 Fock (x) Virasoro Verma），
+             与 lian-zuckerman-1991 Theorem 3.5(i) 同构。**常设假设 `r.k = 1` 写在 (3.29) 之前，引用必带。**
+             §3.2 末 p.599 逐字：「we can always find d-2 **orthonormal** vectors xi_i, 1 <= i <= d-2, **orthogonal to both r and k**」
+             ——**比图节点多一条 `eps.p = 0`（与态动量正交），图中 ddf-operators-v5 只要求 eps.k_0 = 0，是否为真缺口未裁决**。
+             **★ summability（对 ddf-transversality-gives-local-finiteness 直接相关）**：**摘要逐字**「we find it necessary … **to admit
+             non-summable operators (in the sense of the vertex algebra formalism)**」；**§3.1, p. 595** 逐字「…the above series is
+             **not (algebraically) summable on the whole space F**. In particular, it is **not summable on the vacuum state 1 = |0>**」。
+             **⚠ 但该不可加和性是 (3.12) 的纵向 log 级数、机制是动量条件 s.k = r.k，不是横向的 eps.k_0 != 0。
+             两者是不同的失效模式，不可互引为来源。** 横向侧在本文中由**正规性公理 (2.32) 直接保证**，无需单独证明。
+             **模式约定陷阱**：(2.31) `Y(psi,z) = sum_n psi_n z^{-n-1}` 与 (2.47) 的按权移位展开 `sum_n psi_(n) z^{-n-Delta}` 是两套，
+             由 (2.48) `psi_n = psi_(n+1-Delta_psi)` 换算；**(2.57) 里的 psi_m 是 (2.31) 型**，混用会差一个移位。
+             **未核实（L0）**：参考文献 [26]（无鬼定理）与 [27] 的具体身份（参考文献页未读），**不得代写**；第 4 章与附录 A 未读。
+             见 extractions/gsw-1987-v1.md §4。}
+}
+
+@misc{tomassini-2008,
+  author        = {Tomassini, Luca},
+  title         = {Local aspects of free open bosonic string field theory},
+  year          = {2008},
+  eprint        = {0812.0213},
+  archivePrefix = {arXiv},
+  primaryClass  = {math-ph},
+  note          = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1）**：arxiv.org/pdf/0812.0213 落盘 221.5 KB 后 Read 带 pages，读 pp. 1, 6-10。
+                   **v1，2008-12-01**（标题页另印「November 10, 2018」，是 arXiv 重编译时间戳，**不是版本日期，勿照抄**）。
+                   Dipartimento di Matematica, Universita di Roma "Tor Vergata"。**是否已发表：未核实（L0）**，loc 写死 v1。
+                   **★ 本条是目前找到的唯一一份把 DDF 对易关系写成带编号定理并给出完整证明的公开文献。**
+                   **可引用的编号结果（均 L1 逐字）**：
+                   **Definition 2.3, p. 9, eq. (2.37)**：`A^i_n(p) = V^i_n(n k(p))` if `k(p) != 0`，`= 0` if `k(p) = 0`，
+                   逐字「are called **transverse DDF operators**」；定义在 `K = L^2(R^d, F, dp)` 的每个纤维 `K_p ~ F` 上。
+                   **★ Theorem 2.4, p. 9（带证明，止于 p.10 的 QED 方框）**，其 **eq. (2.38) 一次给出六条关系**：
+                   `[A^i_n, A^j_m] = delta_{ij} m delta_{m+n} . I`；
+                   **`[L_m, A^i_n] = 0,  m != 0`**；
+                   **`[L_0, A^i_n] = -n A^i_n`**；
+                   **`(A^i_n)^dagger = A^i_{-n}`**；
+                   `A^i_n Omega = 0  (n > 0)`；`A^i_0 = p^i`。
+                   定理陈述前半逐字：「The transverse DDF operators A^i_n (i = 1..., d-2) are are well defined on the invariant domain
+                   D_0^{p+} (x) F_0 and are closed operators on the domain D(A^i_n) = {psi in K : psi(p) in D(A^i_n(p)) a.e. p,
+                   int_{R^d} ||A^i_n(p)psi(p)||^2 dp < infinity}」（「are are」是原文重复排印）。
+                   证明自陈依赖 **(2.34)**（p.8，**在假设 k^2 = 0 下**的一般关系）+ L_m 保持定义域。
+                   **★ 良定义性/有限和：证明第一步逐字**「application of any of the A^i_n's to vectors f (x) chi in D_0^{p+} (x) F_0 results in a
+                   **finite** sum of terms of the form」——**这是「A^i_n 在代数 Fock 空间上是有限和」的带编号来源**，
+                   其有限性来自 **(2.31) `U_n(k)psi = 0` for n sufficiently large**（正规性），**不是**从 eps.k_0 = 0 推出的能级上界。
+                   **★★ 三条硬使用限制（引用前必读）**：
+                   (1) **他的 DDF 算子是「修改版」，作者自陈与经典定义 fundamentally different。** Remark 2, p.10 逐字：
+                   「**This is fundamentally different from the classical definition** …, since our "modified" DDF operators
+                   **leave the single fiber K_p of K invariant and do not commute with L_0**. This fact also implies that DDF states …
+                   **do not necessarily satisfy the Klein-Gordon constraint L_0 psi = 0**」。
+                   **这就是 (2.38) 里 `[L_m, A^i_n] = 0` 只对 m != 0 成立的原因** —— 与 goddard-2008 (5.4)、gebert-nicolai-1995 (3.5)
+                   的 for-all-m 版本**不矛盾但不同源**（那两家是动量塔，本文是固定纤维）。
+                   **把本条挂到 worldsheet.ddf-commute-with-virasoro 会与该节点的「对所有 m」量词冲突，除非 note 写明这一点。**
+                   (2) **横向条件写法不同**：他写 `k^i = 0 for i = 1,...,d-2` 且 `k.p = -1`（(2.34) 后正文逐字），
+                   不是图里的 `eps.k_0 = 0` 与 `2 alpha' k_0.p = 1`。正交归一横向标架下等价，**但该等价是本项目的推断**。
+                   (3) **号差未声明（L0）**：p.1 只说「the usual "string theoretic" signature of the Minkowski metric」。
+                   由 (2.34) 的 `-eta^{mu nu}` 化到 (2.38) 的 `+delta_{ij}` **推断**为 mostly-minus，
+                   这也解释了 `k.p = -1` 与 Goddard `k.p = +1` 的符号差。**此为推断，不是原文陈述。**
+                   另可引：**(2.42), p.10**：`L_m A^{i_1}_{-n_1}...A^{i_k}_{-n_k}(f (x) Omega) = 0, m > 0` 与
+                   `L_0 ... = (1/2)(p^2 - 2b + 2 sum_l n_l)(f (x) Omega)`；**(2.43)** 质量壳记账。
+                   **p. 7 另有一条可用的二手佐证（L3）**：逐字「The fact that the indefinite inner product restricts to a positive definite one on
+                   H^{phys} when **d = 26 and b = 1** is the content of the famous no-ghost theorem of **Brower [18], Goddard and Thorn [19]**,
+                   as reformulated in [2].」——同时给出 D = 26 与截距 b = 1 两个条件。
+                   **未核实（L0）**：其 [2]/[7]/[17]/[20]/[24] 的身份；§3 及以后各节。
+                   见 extractions/gsw-1987-v1.md §3。}
+}
+
+@incollection{brower-goddard-1973,
+  author    = {Brower, Richard C. and Goddard, Peter},
+  title     = {Physical States in the Dual Resonance Model},
+  booktitle = {Proceedings of the International School of Physics ``Enrico Fermi'' Course LIV},
+  publisher = {Academic Press},
+  address   = {New York and London},
+  pages     = {98--110},
+  year      = {1973},
+  note      = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取，本轮未尝试。**
+               元数据 **L1 逐字抄自 goddard-2008 参考文献 [43]**（arXiv:0802.3249v1, p.31），**未与出版方交叉核对**。
+               登记理由：goddard-2008 §5, p.11 把 **`[A^i_m, A^j_n] = m delta^{ij} delta_{m,-n}` 这条对易关系归给本文与 brower-goddard-1972（其 [43,44]）**，
+               **不归给 goddard-thorn-1972**。图中三个 DDF 节点目前把该关系挂在 GT 1972 上（loc「eq. (3)-(6)」，式号未核实），
+               按本条证据那条边的正当性被削弱（见 extractions/gsw-1987-v1.md Q7 与 §9 第 (6) 条）。
+               **⚠ 本条只能作为「来源如此归属」的指针出现在 note/gaps 里，不得承载论证，不得代写其内容。**}
+}
+
+@article{brower-goddard-1972,
+  author  = {Brower, Richard C. and Goddard, Peter},
+  title   = {Collinear Algebra for the Dual Model},
+  journal = {Nuclear Physics B},
+  volume  = {40},
+  pages   = {437--444},
+  year    = {1972},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取，本轮未尝试。**
+             元数据 **L1 逐字抄自 goddard-2008 参考文献 [44]**（arXiv:0802.3249v1, p.31），**未与出版方交叉核对**（期号/DOI 未取）。
+             登记理由同 brower-goddard-1973：与它一起被 goddard-2008 指认为横向 DDF 对易关系 (5.5) 的出处，
+             并同时被指认为纵向关系 (5.7) `[A-tilde_m, A-tilde_n] = (m-n)A-tilde_{m+n} + m^3 delta_{m,-n}` 的出处。
+             **⚠ 只作指针，不承载论证。** 注意与 brower-1972（Phys. Rev. D6, 1655，单作者）**是不同论文，勿混。**}
 }
 
 @article{green-schwarz-1984,
@@ -266,7 +528,90 @@
   journal = {Physics Letters B},
   volume  = {149},
   pages   = {117--122},
-  year    = {1984}
+  year    = {1984},
+  note    = {**全文已核实（2026-09-11，researcher，六页逐页读图）** → extractions/green-schwarz-1984.md（E1--E20）。
+             预印本 CALT-68-1182（1984-09），**预印本题名为 "...GAUGE THEORY REQUIRE SO(32)"**（INSPIRE 15583 的 titles 字段两条并存）。
+             获取途径：archive.org 重印文集 `modern-kaluza-klein-theories`（Appelquist--Chodos--Freund eds., 1987）pp.608--613，
+             走 fulltext/inside.php 定位 + BookReaderImages.php 逐页取图（scale=1）。
+             **★ 年份订正（2026-09-11 第二轮，由 alvarez-gaume-witten-1984 抽取推出）**：
+             GS 参考文献 [3] 把 Alvarez-Gaume--Witten 印作「Nucl. Phys. B234 (**1983**) 269」，
+             此前记为「GS 误印」——**该判定已推翻**。AGW 原刊页眉逐字就是「Nuclear Physics B234 (**1983**) 269--330」（L1 核实），
+             GS 只是照抄。通行引法（Elsevier DOI / INSPIRE）作 1984。**两边都不算错，note 里说明即可。**
+             四条最易误引的边界（详见抽取记录）：
+             (1) **E8 x E8 不是 GS 独立发现**（致谢逐字：早期版本 "the cancellation of the other anomalies in that theory was overlooked"；
+             群论输入来自 Chapline--Slansky，独立作出同一观察的是 Dixon--Harvey--Witten 与 Thierry-Mieg）；
+             (2) **「只有 SO(32) 与 E8 x E8」不属于本文**（原文只说 "We only discuss SO(N), USp(N) and E8 x E8 explicitly"，摘要是充分条件）；
+             (3) **所有数值系数外包给 alvarez-gaume-witten-1984**（常数 c、(20) 的三系数、(22) 的相对归一化，GS 明说 "can be deduced from eq. (63) of ref. [3]"）；
+             (4) **`B ^ X_8` 记号不出现在原文**（原文是分开的 S_1 (18) / S_2 (21) / S_3 (23)），**杂化弦也不属于本文**（原文说 E8 x E8 超弦 "has not yet been constructed"）。
+             符号陷阱：GS (4) 是 `H = dB + omega^0_{3Y} - omega^0_{3L}`，与 Bilal (12.14) **两个 CS 项整体反号**。}
+}
+
+@article{alvarez-gaume-witten-1984,
+  author  = {Alvarez-Gaum{\'e}, Luis and Witten, Edward},
+  title   = {Gravitational anomalies},
+  journal = {Nuclear Physics B},
+  volume  = {234},
+  number  = {2},
+  pages   = {269--330},
+  year    = {1984},
+  doi     = {10.1016/0550-3213(84)90066-X},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，62 页逐页读图，无遗漏）** → extractions/alvarez-gaume-witten-1984.md。
+             INSPIRE recid **192309**；报告号 **HUTP-83/A039**；`external_system_identifiers` 含 **KEKSCAN 84-02-145**；Received 7 October 1983。
+             获取途径：**McGill 大学 PHYS 675 课程页的原刊逐页扫描件**
+             https://www.physics.mcgill.ca/~keshav/675/gaumewitten.pdf （3.2 MB / 62 页；WebFetch 落盘后 Read 带 pages 读图）。
+             INSPIRE 的 documents / urls 两字段皆空。重印于 *Current Algebra and Anomalies*（Treiman--Jackiw--Zumino--Witten eds.,
+             Princeton UP / World Scientific 1985）**Princeton 版 pp. 451--514**，但 archive.org 上那份（currentalgebraan0000unse）
+             是借阅制、fulltext/inside.php **403**，**GS 用的 archive.org BookReader 路线对借阅制 item 不适用**。
+             **★ 年份陷阱（必读）：本文印刷页眉逐字为「Nuclear Physics B234 (1983) 269--330」，而 DOI/INSPIRE/通行引法作 1984。**
+             本条按通行引法登记 1984；引用 green-schwarz-1984 的 ref [3] 写 1983 时不要判为 GS 的错。
+             **可引用的编号结果（均 L1 逐字）**：
+             **eq. (63), p. 306** = green-schwarz-1984 指名引用的那条，混合规范--引力反常的生成公式
+             `I_{1/2} = -S Tr(T_L^{a_1}...T_L^{a_r}) (i/(2pi)^{n/2}) R(eps,p) prod_{i=1}^{n/2} (x_i/2)/sinh(x_i/2)`，
+             配套使用说明在 **p. 307 首句**：「Eq. (63) is to be expanded to order 1/2(n+2) - r in the x_i」；
+             **eq. (83), p. 315**（Pontryagin 类与 Tr R^{2k} 的换算：p1 = -Tr R^2/2，p2 = -Tr R^4/4 + (Tr R^2)^2/8，
+             p3 = -Tr R^6/6 + Tr R^2 Tr R^4/8 - (Tr R^2)^3/48）；
+             **eq. (82), p. 314**（A-hat 多项式的 Pontryagin 展开）；**eq. (114), p. 325**（三种自旋的生成函数 + 关键脚注）；
+             **eq. (117)/(118)/(119)/(120), pp. 326--328**（二/六/十/十四维的反常多项式）——
+             其中 **(119)** 是十维的三条：Ihat_{1/2} = (-31p1^3+44p1p2-16p3)/967680、
+             Ihat_{3/2} = (225p1^3-1620p1p2+7920p3)/967680、Ihat_A = (-256p1^3+1664p1p2-7936p3)/967680，
+             原文结论「the minimal solution is remarkably simple: -Ihat_{1/2} + Ihat_{3/2} + Ihat_A = 0」；
+             **eq. (110)/(112), pp. 324--325**（Fujikawa 路线的 ch(F)·A-hat(R)，与 (63) 等价的另一条独立推导）；
+             **eq. (32)/(38)/(56)**（自旋 1/2 / 3/2 / 自对偶张量的纯引力反常生成函数）。
+             **★ 三条硬性使用限制**：
+             (1) **本文从不固定反常的整体归一** —— (114) 逐字「apart from a factor common to the three cases」。
+             因此 **green-schwarz-1984 的常数 c 不在本文里**，**GS (22) 的十维混合十二形式也不在本文里**
+             （p. 328 末句逐字：「We will not explore here the phenomenological consequences of mixed gauge-gravitational anomalies.」）。
+             本文只给配方（p. 325：「Explicit expressions for the combined anomalies can be obtained by combining (112)
+             with the expression for A-hat(M) in (82)-(84).」）。GS 说的是 "deduced from"，措辞准确，不要读成 "given in"。
+             (2) **本文没有下降方程、没有 Chern--Simons 形式 omega^0_{2n+1} / omega^1_{2n}**（唯一提 CS 的是 p.309 一段散文）。
+             ⇒ **本文不是 GS 那套 H = dB + omega_{3Y} - omega_{3L} 符号约定的源头**；源头是本文参考文献 [7] 里的
+             「B. Zumino, W. Yong-Shi and A. Zee (Univ. Washington preprint, 1983)」= GS ref [9] = Zumino--Wu--Zee, Nucl. Phys. B239 (1984) 477。
+             (3) **本文引言 pp. 271--272 逐字预言 type I 超弦「are presumably anomalous」，并说「Introduction of a gauge group
+             cannot remove the gravitational anomaly, as one may see from formulae of sect. 12」——这正是 green-schwarz-1984 推翻的那句。**
+             **但两者不矛盾**：本文全篇只考虑「不同自旋的场之间相消」，GS 的出路是加**局域抵消项**，在本文框架之外。
+             **不得把本文标 refuted，也不得在 GS 节点上把本文列为「被推翻的依赖」。** 见抽取记录 E2 / Q-A4。
+             **★ 抽取者复算的关键结果（两篇文献之间缺失的那一步，两边原文都没写）**：
+             取「一个左手自旋 3/2 + 一个反手自旋 1/2 + n 个左手自旋 1/2」的组合 Ihat_{3/2} + (n-1)Ihat_{1/2}，
+             用 (83) 换到 tr R^{2k} 基，得到的十二形式与 **GS 1984 eq. (20) 的五个系数逐一相差同一个因子 -48**
+             （T2^3 常数部 / T2^3 的 n 部 / T2T4 常数部 / T2T4 的 n 部 / T6 部，全部 = -48）。
+             **=> green-schwarz-1984.md 的 Q3 完全闭合：GS (20) 可由本文 (119)+(83) 机械导出，「n = 496」就是 p3 系数 7936-16n 的唯一零点。**
+             该 -48 即 (114) 留空的 "common factor" 在 GS 归一下的取值。**注意这验证的是「相对归一化」，不是绝对归一化**
+             （GS 用 Minkowski 实反对称曲率、本文欧氏化，两者可能差 i 的幂次，但那只影响整体常数）。见抽取记录 §5.1。
+             **★ 数值系数的可靠性（作者自陈）**：致谢逐字「P. Ginsparg ... for writing a computer program to generate the
+             complicated power series expansions in sects. 11 and 12」，§12 首页脚注逐字「We are grateful to P. Ginsparg for
+             correcting a variety of numerical errors in an earlier version of this section.」
+             ⇒ **(82)(92)(99)-(101)(106)(117)-(120) 全是 CAS 输出且发表前出过错**，是理想的 Lean 形式化目标（抽取记录 §5）。
+             已做的两条独立核验：**内部**（图式路线 §6-§9 与 Fujikawa 路线 §11 的结果互洽）；
+             **外部**（自旋 1/2 支 = Hirzebruch A-hat genus，与 Harvard Math 272b (2005) 讲义 *The A-hat class*
+             https://abel.math.harvard.edu/archive/272b_spring_05/handouts/A-roof/A-roof.pdf 的 A1--A4 逐系数相符，L1；
+             **该讲义是匿名 CAS 输出，只作旁证，不宜作图节点的 canonical 数学来源**；canonical 应取 Hirzebruch 原书，本轮未获取）。
+             **读图存疑处（引用前须复核，详见抽取记录 §3）**：
+             (38) 的求和下限印作 j=0，**判为误排，应为 j=1**（同页上方无编号式、(65)、(114) 三处都是 j=1，且语义要求 n 项）；
+             (61) 的求积指标与上限撞用字母 k；p.306 的展开阶数印作 "1/2(n+2) - k"，而 p.307 清晰印作 "- r"（应以 p.307 为准）；
+             (101) 末项系数经与 (119) 交叉核对定为 **11/21**（不是 11/24）；
+             (114) 脚注末句的「sects. 9 and 10」与本文节标题对不上（1/8 实出自 §8 的 (56) 与 §11 的 (105)）；
+             编号 (104) 与 (113) 通读未见；p.325 自引「the formulas in (1)」应为 (114)。
+             **号差**：p.283 逐字「Our signature is (+ - - - ...)」——**显式声明**，与 green-schwarz-1984（号差未声明）不同。}
 }
 
 @article{maldacena-1997,
@@ -276,7 +621,46 @@
   volume  = {2},
   pages   = {231--252},
   year    = {1998},
-  eprint  = {hep-th/9711200}
+  eprint  = {hep-th/9711200},
+  note    = {**版本戳（curator 2026-09-11 记）：本项目挂在本 key 上的所有 loc 一律锚定
+             arXiv:hep-th/9711200**v3** (22 Jan 1998)**，即 researcher 于 2026-09-11 逐页读毕的
+             22 页 PDF（页边条纹逐字 `arXiv:hep-th/9711200v3  22 Jan 1998`，页眉报告号 HUTP-97/A097；
+             论文页码 p.N = PDF 第 N+1 页）。上面登记的 ATMP 2 (1998) 231--252 发表版**式号未与 v3 核对**
+             （抽取记录 U1）。又：作者在 v3 致谢里逐字写 「I thank the authors of [64] for pointing out
+             a sign error.」，即 v1/v2 有一处符号错误已在 v3 修正，**具体位置本项目未查**（抽取记录 U2）；
+             故引用具体式子时必须写死 v3。全文抽取见 extractions/maldacena-1997.md。}
+}
+
+@article{gubser-klebanov-polyakov-1998,
+  author  = {Gubser, Steven S. and Klebanov, Igor R. and Polyakov, Alexander M.},
+  title   = {Gauge theory correlators from noncritical string theory},
+  journal = {Physics Letters B},
+  volume  = {428},
+  pages   = {105--114},
+  year    = {1998},
+  eprint  = {hep-th/9802109},
+  note    = {**未读，仅登记**（curator 2026-09-11）。登记理由：与 witten-1998-ads 一起是
+             「两边配分函数/关联函数字典」`Z_string[φ_0] = ⟨exp ∫ φ_0 O⟩` 的真正出处；
+             Maldacena 1997 全文（22 页逐页核实）**没有任何配分函数陈述**，旧节点 duality.ads-cft
+             把该字典挂到 maldacena-1997 属于溯源错误（extractions/maldacena-1997.md Q7、§5.5 红线清单）。
+             本条**尚无抽取记录，任何图节点都不得引用它**，等有人真正读过并写出
+             extractions/gubser-klebanov-polyakov-1998.md 之后才可作为 `ref` 使用。
+             书目字段取自 Maldacena 抽取记录中转录的 arXiv 编号与通行著录，**未逐字核对原文**。}
+}
+
+@article{witten-1998-ads,
+  author  = {Witten, Edward},
+  title   = {Anti-de Sitter space and holography},
+  journal = {Advances in Theoretical and Mathematical Physics},
+  volume  = {2},
+  pages   = {253--291},
+  year    = {1998},
+  eprint  = {hep-th/9802150},
+  note    = {**未读，仅登记**（curator 2026-09-11）。登记理由同 gubser-klebanov-polyakov-1998：
+             配分函数型 AdS/CFT 字典的出处，晚于 maldacena-1997 且不在其 65 条参考文献里。
+             本条**尚无抽取记录，任何图节点都不得引用它**。
+             key 带 `-ads` 后缀以便日后登记 Witten 的其他文献。
+             书目字段**未逐字核对原文**。}
 }
 
 @misc{virasoro-lean-2025,
@@ -300,7 +684,7 @@
             of_coeff、comp 等声明，但 **Locality 与 Residue products 写在模块 docstring 的 TODO 段里，尚未实现**。
             （检索后端曾误报「Main definitions include locality」；逐字读官方文档页后不成立——是把 TODO 读成 Definitions。）
             **=> 图里任何顶点代数/局域性节点现在都不能标 formalized，最高只能到 rigorous。**
-            另注意本文 [L_m,L_n] 的中心项写成 ((m^3-m)/12) delta_{m,-n}，与 schottenloher-2008 的 (m/12)(m^2-1) delta_{m+n}
+            另注意本文 [L_m,L_n] 的中心项写成 ((m^3-m)/12) delta_{m,-n}，与 schottenloher-2008 的 (m/12)(m^2-1) delta_{m+n
             是同一式但记法不同，**约定要对齐**。见 extractions/math-sources.md §12。
             **第三轮补充（researcher 2026-09-11，读毕 §12/§13/§14，见 extractions/math-sources.md §16）**：
             **本文是目前唯一已核实的、针对 Virasoro Verma 模 PBW 基的可引来源。**
@@ -346,7 +730,16 @@
             （+ ToMathlib/）——**有 WittAlgebraCohomology.lean，没有任何 Virasoro 上同调文件**（L4，只读了文件名，未读内容）。
             **=> 图节点 math.virasoro-universal-central-extension 目前最高只能到 rigorous；
             而 worldsheet.virasoro-unique-central-extension（H^2(Witt) 一维）已由本文形式化。两条在形式化程度上不对称。**
-            见 extractions/math-sources.md 第 21.4 节。}
+            见 extractions/math-sources.md 第 21.4 节。
+            **第四轮补充（researcher 2026-09-11，为 Kac 行列式查证）：本文与其仓库都没有 Shapovalov（逆变）形式，
+            也没有 Kac 行列式。** 三条证据：(a) Table 1（p.2）七行主结果里没有任何双线性/Hermite 形式或行列式条目；
+            (b) 仓库 21 个 .lean 文件名里没有 ShapovalovForm / KacDeterminant / SingularVector（2026-09-11 重读文件清单）；
+            (c) **§14 "Conclusions and outlook"（p.12）逐字把它列为未来工作**：「For Virasoro algebra representation theory,
+            a significant project could aim at a formal proof of the **Feigin-Fuks structure theorem for Verma modules over
+            the Virasoro algebra [FF84, VZ90, IK10]**, which is foundational to numerous topics in conformal field theory.」
+            **=> worldsheet.kac-determinant 不能标 formalized，上限 rigorous**（缺口比 PBW 那条更深：连形式本身都没形式化）。
+            [FF84] 已单独登记为 **feigin-fuchs-1984**；[VZ90] = Vershik-Zhelobenko (eds.) 1990，未登记。
+            见 extractions/math-sources.md §34.7。}
 }
 
 @misc{headrick-2008,
@@ -453,7 +846,7 @@
                **即 Definition 10.9 是 Theorem 10.10 第 4 条的记号前提，两者在书上是连着的。**
                书上 p.177 另给出 iota 展开式 iota_{z,w} 1/(z-w)^{j+1} = Sum_{m>=0} (m choose j) z^{-m-1} w^{m-j}，
                iota_{w,z} 1/(z-w)^{j+1} = - Sum_{m>=1} (-m choose j) z^{m-1} w^{-m-j}，
-               以及 D^j delta(z-w) = iota_{z,w} 1/(z-w)^{j+1} - iota_{w,z} 1/(z-w)^{j+1} = Sum (m choose j) z^{-m-1} w^{m-j}
+               以及 D^j delta(z-w) = iota_{z,w} 1/(z-w)^{j+1} - iota_{w,z} 1/(z-w)^{j+1} = Sum (m choose j) z^{-m-1} w^{m-j
                （最后一式是结案 (b) 的技术支点）。}
                **第三轮补充（researcher 2026-09-11）：第 4 章与第 5 章的编号限制也已解除（L1，两章逐页读图）。**
                获取途径同上，同目录下 04_..._Ch04_... 与 05_..._Ch05_... （**该目录挂了全 11 章 + Prelims/Intro/Appendix/Index/References**）。
@@ -478,7 +871,38 @@
                （章首只说 Vir 是 W 的 "essentially unique nontrivial central extension"，那是 H^2(Witt) 那条，不是 H^2(Vir) 那条）。
                **不要拿本书当 math.virasoro-universal-central-extension 的来源**——那条的来源是 feldvoss-siciliano-2025 Lemma 2.6。
                本书 Theorem 5.1 把 H^2(W,C) 同构于 C 归给 [GF68] = gelfand-fuks-1968（元数据分歧见该条 note）。
-               见 extractions/math-sources.md 第 20 节。}
+               见 extractions/math-sources.md 第 20 节。
+               **第四轮补充（researcher 2026-09-11）：第 6 章的编号限制也已解除（L1，全章 12 页逐页读图）。**
+               获取途径同上（06_..._Ch06_...；**PDF 页 = 书页 - 86**）。
+               **Ch. 6「Representation Theory of the Virasoro Algebra」= LNP 759, pp. 91-102**
+               （页脚 DOI 10.1007/978-3-540-68628-6_7——**第三次出现「章号 6 / DOI 后缀 _7」错位**，
+               `loc` 一律写「Ch. 6, LNP 759, pp. 91-102」，不要用 DOI 后缀推章号）。
+               章内结构：6.1 Unitary and Highest-Weight Representations (p.91)；6.2 Verma Modules (p.92)；
+               **6.3 The Kac Determinant (p.95)**；6.4 Indecomposability and Irreducibility (p.99)；
+               6.5 Projective Representations of Diff_+(S) (p.100)；References (p.102)。
+               章首第一句逐字「Most of the results in this chapter can be found in [Kac80].」
+               **可引编号（L1 逐字）**：
+               **Theorem 6.8, p.96**（Hermite 形式 H 的存在唯一性：H(v0,v0)=1、H(L_n v,w)=H(v,L_{-n}w)、H(Zv,w)=H(v,Zw)；
+               L_0 本征空间两两正交；**ker H 是 M 的极大真子模**）；
+               **Definition 6.11, p.97**（P(N) := dim V_N，A^N_{ij} := H(b_i,b_j)）；
+               **★ Theorem 6.12, p.98 = Kac 行列式**逐字：「[Kac80] The Kac determinant det A^N depends on (c,h) as follows:
+               det A^N(c,h) = K_N prod_{p,q in N, pq <= N} (h - h_{p,q}(c))^{P(N-pq)}, where **K_N >= 0** is a constant which
+               does not depend on (c,h), the P(M) is as in Definition 6.11, and
+               h_{p,q}(c) := (1/48)((13-c)(p^2+q^2) + sqrt((c-1)(c-25))(p^2-q^2) - 24pq - 2 + 2c).」
+               紧接一句「**A proof can be found in [KR87] or [CdG94], for example.**」；
+               Corollary 6.10, p.97（H 半正定 => c >= 0 且 h >= 0）；Remark 6.9, p.97；
+               **Theorem 6.13, p.98-99**（酉性完全分类；第 2 条给 minimal model 参数化 c(m)=1-6/(m(m+1))、
+               h_{p,q}(m)=(((m+1)p-mq)^2-1)/(4m(m+1))，1 <= p <= q < m）；Theorem 6.17, p.100；Theorem 6.18, p.100。
+               **⚠ 引 Theorem 6.12 必须同时写清三条限制**：(a) Theorem 6.8 起假设 **c,h in R**，A^N 是 **Hermite** 形式的
+               Gram 矩阵，不是复 (c,h) 的双线性 Shapovalov 形式；(b) 书上写 **K_N >= 0**，没写 > 0；
+               (c) 本书把该定理归给 **[Kac80] = ICM Helsinki 那篇（见 kac-1980-icm）**，并把证明外包给 [KR87]/[CdG94]，
+               **全章不引 Feigin-Fuchs**。
+               章末参考文献逐字（p.102）：「[Kac80] V. Kac. Highest weight representations of infinite dimensional Lie algebras.
+               In: Proc. Intern. Congress Helsinki, Acad. Sci. Fenn., 299-304, 1980.」「[KR87] V. Kac and A.K. Raina.
+               Highest Weight Representations of Infinite Dimensional Lie Algebras. World Scientific, Singapore, 1987.」
+               「[CdG94] F. Constantinescu and H.F. de Groote. Geometrische und Algebraische Methoden der Physik:
+               Supermannigfaltigkeiten und Virasoro-Algebren. Teubner, Stuttgart, 1994.」
+               见 extractions/math-sources.md §34.3。}
 }
 
 @misc{schrans-2020,
@@ -765,6 +1189,27 @@
              见 extractions/math-sources.md 第 19.2 节与 Q15。}
 }
 
+@article{hochschild-serre-1953,
+  author  = {Hochschild, Gerhard and Serre, Jean-Pierre},
+  title   = {Cohomology of {L}ie algebras},
+  journal = {Annals of Mathematics (2)},
+  volume  = {57},
+  number  = {3},
+  pages   = {591--603},
+  year    = {1953},
+  note    = {由 curator 于 2026-09-11 登记。**仅登记，正文未读（L0），序列形式未核实。**
+             元数据 L1 抄自 feldvoss-siciliano-2025 参考文献 [18]（extractions/math-sources.md 第 25.4 节逐字），
+             **未与出版方交叉核对**。
+             登记理由：feldvoss-siciliano-2025 Lemma 2.6 的 H^2 那一半只写「same arguments as in the proof of
+             Lemma 2.4」，而 Lemma 2.4 的证明用的是本文的长正合序列（该文引 **[18, Theorem 7]**）。
+             math.virasoro-universal-central-extension--via-feldvoss-siciliano 的 gaps 第 6 条
+             「Hochschild-Serre 长正合序列未展开」需要一个可引的 key，本条就是那个 key。
+             **⚠ 使用限制**：本项目没有读到 Theorem 7 的正文，**不知道那条长正合序列的具体形式**
+             （是谱序列的低次项正合列还是别的），也不知道它对无限维李代数的适用条件。
+             因此本条**只能出现在 gaps / note 里作为「来源如此引用」的指针**，
+             **不得**作为任何推导的论证承载来源，也不得代写 Theorem 7 的措辞。}
+}
+
 @article{gelfand-fuks-1968,
   author  = {Gelfand, Israel M. and Fuks, Dmitry B.},
   title   = {Cohomology of the {L}ie algebra of vector fields on a circle},
@@ -885,4 +1330,74 @@
             (2) 记号段写「L is a Lie algebra over F (possibly infinite dimensional)」是**讲者自己的设定**，
             不等于 Humphreys 原书的假设；(3) 这是第三方讲稿，权威性低于原书，只用于「内容是什么」，
             不用于「编号是什么」。见 extractions/math-sources.md §15.4。}
+}
+
+% ---------------------------------------------------------------------------
+% PBW 的「任意李代数 / 任意基环」来源（researcher 2026-09-11 第四轮登记；
+% 抽取记录见 extractions/math-sources.md §33。用途：撤 math.pbw-theorem 下游那条 inferred 边）
+% ---------------------------------------------------------------------------
+
+@misc{lakos-2024-pbw,
+  author        = {Lakos, Gyula},
+  title         = {Some proofs of the {P}oincar\'e--{B}irkhoff--{W}itt theorem and related matters},
+  year          = {2024},
+  eprint        = {1812.04896},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.RA},
+  note          = {由 researcher 于 2026-09-11 登记。**v2（2024-07-23）全文可取，本轮 L1 逐页读了 p.1-6 与 p.16-22（含全部参考文献）**：
+                   arxiv.org/pdf/1812.04896 落盘 301.4 KB 后用 Read 带 pages 读图（PDF 页 = 论文页，共 22 页）。
+                   Alfred Renyi Institute of Mathematics（文末 Email address: lakos@renyi.hu）。
+                   **⚠ 版本陷阱，必须写死 v2**：v2 的 comments 逐字为「22 pages, **Part 3 of original submission
+                   arXiv:1812.04896v1, rewritten**」，v1（2018-12-12）是另一份更长稿件的一部分，**编号几乎肯定不同**。
+                   **⚠ 未发表**：abs 页无 journal-ref，只有 arXiv 自发 DOI 10.48550/arXiv.1812.04896（读取日期 2026-09-11）；
+                   自称 expository paper。MSC: Primary 17B35; Secondary 17B01, 16S30。
+                   **本条目在本项目里承担的用途只有一个，但很关键：它是目前唯一一条
+                   「带编号 + 前提逐字 + 对任意（含无限维）李代数与任意幺交换环成立 + 全文可读」的 PBW 来源，
+                   用来撤销 math.verma-module-free-over-negative-part--via-pbw-theorem 那条因「适用范围」而挂的 inferred。**
+                   **可引用的编号结果**：**Proposition 6.1（书上 p.16）逐字：「The PBW theorem holds if 𝔤 is a free K-module.」**
+                   （带完整证明，跨 p.16-17，走 Magnus-Witt 路线；Magnus-Witt 定理是本篇的 Theorem 1.5/1.6/1.7, p.5）。
+                   **第二条独立证明**：Appendix A「The Witt-Lazard proof of the global PBW theorems」的
+                   **Corollary A.4(f)（书上 p.20）**「⊗𝔤 = ⊗_η𝔤 ⊕ J𝔤」，其后正文逐字「In particular, we find the
+                   statement of the PBW theorem in (f).」，并在同页 (III) 段逐字说明「in case (i), ⊗_η𝔤 = ⊗_≤𝔤」。
+                   **⚠ 引用限制 1：Prop 6.1 的主语「the PBW theorem」是在 Introduction 里定义的，loc 必须同时指 p.1-2。**
+                   那里的逐字前提是「Assume that **K is a unital commutative ring**, and 𝔤 is a K-module with a compatible
+                   Lie-ring structure; i. e. 𝔤 is a Lie K-algebra (also called: Lie ring over K)」——**全文无任何有限维假设**；
+                   局部形式 = 「the maps 𝒎^{(n)} : ⊙^n𝔤 → 𝒰^n𝔤/𝒰^{n-1}𝔤 are isomorphisms」（= 图节点的分次形式）；
+                   全局形式 (i)（p.2）= 「𝒎_≤ : ⊗_≤𝔤 → 𝒰𝔤 (a restriction of 𝒎) is an isomorphism of K-modules」，
+                   其中基 {g_α : α ∈ A} 的**索引集 A 任意**、只要求给一个序 ≤（= 图节点的有序单项式基）；
+                   同页逐字给出两者等价：「its injectivity is equivalent to the local version of PBW theorem」。
+                   **⚠ 引用限制 2：不得把基环放宽到任意交换环。** 本篇 p.2 逐字列出成立的情形
+                   (i) K 是域 / 𝔤 自由 / 𝔤 是循环模的直和；(i') K 是 PID 或 Dedekind 环；(ii) ℚ ⊂ K；(ii') …，
+                   并逐字写「**But there are counterexamples** (see Sirsov [39], Cartier [8], Cohn [11])」。
+                   **⚠ 引用限制 3：这是未发表的 expository preprint，权威性低于教科书。**
+                   建议与 humphreys-1972 **并列**使用（教科书给权威与完整证明，本篇给适用范围），不要取代它。
+                   记号对照：本篇 𝒰𝔤 / ⊙^n𝔤 / ⊗_≤𝔤 / J𝔤 ↔ 图节点 U(L) / S(L) 的 n 次分量 / 有序单项式张成 / 关系理想。
+                   见 extractions/math-sources.md §33.2。}
+}
+
+@misc{garrett-2011-pbw,
+  author = {Garrett, Paul},
+  title  = {{P}oincar\'e--{B}irkhoff--{W}itt theorem},
+  year   = {2011},
+  note   = {由 researcher 于 2026-09-11 登记。公开讲稿（日期页眉逐字「April 8, 2011」），**全文已核实（L1，4 页逐页读毕）**：
+            https://www-users.cse.umn.edu/~garrett/m/algebra/pbw.pdf （WebFetch 落盘 93.7 KB 后 Read）。
+            **用途与 swanson-2015-pbw 相同，且受同一条裁决约束（lead 2026-09-11：个人笔记只作核对源，不进 sources[]）。**
+            它的价值在于**「无限维适用性」的第三条旁证**（前两条是 ardizzoni-2010 与 swanson-2015-pbw）：
+            该讲稿的定理**带编号且不限维数**——「**[0.0.1] Theorem**: For any basis {x_i : i in I} of a Lie algebra g
+            with *ordered* index set I, the monomials x_{i_1}^{e_1} ... x_{i_n}^{e_n} (with i_1 < ... < i_n, and integers
+            e_i > 0) form a *basis* for the enveloping algebra Ug.」「**[0.0.2] Corollary**: The natural map of a Lie algebra
+            to its universal enveloping algebra is an *injection*.」
+            p.1 逐字「The following argument does not use any further properties of the Lie algebra g, so *must* be general.」
+            p.2 逐字「The hard part of the argument is basically from Jacobson, and applies to **not-necessarily
+            finite-dimensional** Lie algebras over arbitrary fields of characteristic 0. The assumption of characteristic 0
+            is not directly used; rather, the proper definition of Lie algebra in positive characteristic includes further
+            conditions, which we ignore.」
+            另 p.1 逐字给出四条书目（可作为找一手书的地图）：N. Bourbaki, Groupes et algebres de Lie, Chap. 1,
+            Paris: Hermann, 1960；N. Jacobson, Lie Algebras, Dover, 1962；J. Humphreys, GTM 9, 1972；
+            V.S. Varadarajan, Lie Groups, Lie Algebras, and their Representations, Springer, 1974/1984；
+            并逐字说「a somewhat different argument is given in Bourbaki, and by Humphreys」。
+            **⚠ 三条使用限制**：(1) 编号 [0.0.1]/[0.0.2] 是本讲稿自己的编号，**不是任何教科书的编号，不可搬运**；
+            (2) 「char 0」是讲者自己的设定，而图节点没有特征限制——**不要把这条限制反向读进图**；
+            (3) 个人讲稿，权威性低于 lakos-2024-pbw 与教科书，只用于「无限维也成立」这一点的旁证。
+            见 extractions/math-sources.md §33.5。}
 }

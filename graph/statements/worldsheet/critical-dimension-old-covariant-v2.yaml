@@ -1,0 +1,95 @@
+id: worldsheet.critical-dimension-old-covariant-v2
+kind: proposition
+title: 旧协变临界维数判据：(D, a) = (26, 1) 时 H_phys/H_0 与横向 Fock 空间等距同构；D > 26、a = 1 时存在负模物理态
+statement: |
+  设 H_phys 是 worldsheet.old-covariant-physical-states 定义的 D 维自由玻色开弦旧协变物理态空间
+  （(L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 ∀ n > 0；截距记号 a 按 conv.intercept-sign-a），
+  H_0 = {|χ⟩ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys} 是其零模态（伪态）子空间。
+  Fock 内积由 (α^μ_n)^† = α^μ_{-n} 与 η_{μν}（conv.metric-mostly-plus）诱导，在 Fock 空间上不定。
+
+  【全局动量限定】下述 (A)(B) 的一切断言都只在**非退化动量扇区**上作出：零动量 p = 0 一律
+  不在范围内；在已固定类光参考方向 k_0 的语境（即 (A) 的逐塔表述）中进一步排除 k_0·p = 0。
+  这条限定是本命题所依赖的 DDF 构造所需，不可省略。
+
+  (A) 设 D = 26 且 a = 1。则在上述扇区上：
+      (A1) Fock 内积在 H_phys 上半正定：对每个 k_0·p ≠ 0 的动量 p 与每个 |ψ⟩ ∈ H_phys(p)，
+           有 ⟨ψ|ψ⟩ ≥ 0；
+      (A2) 商空间 H_phys/H_0 上由 Fock 内积诱导的内积正定；
+      (A3) 逐动量塔地，H_phys/H_0 与 24 个横向（DDF）振子生成的 Fock 空间 H^⊥ 之间存在
+           **等距同构**（保内积的线性双射，且保能级 N 分级）。
+      （(A1)–(A3) 的精确逐塔表述、k_0 的归一化 2α' k_0·p = 1、以及分级的含义，
+       见 worldsheet.no-ghost-theorem-v4 第 (1) 条；本卡片不重述，只把它改写为
+       「临界维数判据」的形式。）
+
+  (B) 设 D > 26 且 a = 1。则存在**非零**动量 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0
+      （即存在负模物理态）。量词 p ≠ 0 不可省：p = 0 处对任意 D（包括 D = 26）都有负模物理态。
+
+  【本命题不断言什么】
+  (i)  **D ≤ 25 一侧不作任何断言**（无论 a 取何值）。特别地，本卡片**不**断言「D < 26 时
+       H_phys/H_0 不能与横向 Fock 空间等距同构」，也不断言那里半正定或不半正定。
+       亚临界区域的已知结果走另一条路线（补充模 + BRST 相对上同调，附带 D ≥ 2 与三条动量假设），
+       见 worldsheet.no-ghost-theorem-subcritical。
+  (ii) 不断言 D = 26、a ≠ 1 的情形。
+  (iii) 本卡片不使用「退耦」「不幺正」等在自由弦态空间命题中无可操作定义的措辞：
+       (A) 的内容是等距同构，(B) 的内容是负模态的存在性。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: goddard-thorn-1972
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      原先写的 "Theorem 1（D = 26, a = 1 的等号情形）" 已撤下：2026-09-10 核实
+      （literature/extractions/brst-cohomology-sources.md §3.1）表明该编号无任何来源支持。
+      摘要不提 intercept（Veneziano 模型以 α_0 = 1 为前提），本条只覆盖 a = 1。
+  - ref: brower-1972
+    loc: "摘要（INSPIRE 74322；正文未获取，节号未核实）：鬼态 'decouple for unit Regge intercept'；'a critical dimension D = 26'，其上有鬼、其下无鬼"
+    note: |
+      摘要把结果限定在 unit Regge intercept，即 a = 1，不支持任意 a ≤ 1 的两分支表述
+      （brst-cohomology-sources.md §4.1）。正文未获取（APS 403）。
+      ⚠ 摘要中 'below which there are no ghosts' 那一半（D < 26）**不被本卡片采用**：
+      本卡片对 D ≤ 25 不作断言，见陈述的【本命题不断言什么】(i)。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（教科书版本：DDF 态张成物理态模零模态）"
+    note: |
+      GSW 用 mostly-minus 号差，已转写为 conv.metric-mostly-plus。
+      按核实（brst-cohomology-sources.md §5.1/§5.3）无鬼定理与 spectrum-generating algebra
+      属 §2.3.3（p.102–112），§2.3.2 是 'Construction of transverse physical states'（p.100–101）。
+      式号未核实。
+tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
+notes: |
+  【本卡片换代 worldsheet.critical-dimension-old-covariant】（curator，2026-09-11，依
+  docs/ROADMAP.md 待拆清单，lead 已同意）旧卡有两处问题，都在 ms.no-ghost-theorem 审计 B2/B3
+  与旧卡自身的 notes 中已登记，但因「不改已提交陈述」而只能挂账：
+    (1) 旧卡末句「D < 26 时内积仍半正定，但 H_0 的维数不足以把 H_phys 约化到横向 Fock 空间，
+        谱不具备 (c) 的形式」**不被其唯一依赖 worldsheet.no-ghost-theorem-v4 支撑**：
+        v4（同 v3/v2）只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)，对 D ≤ 25 不作断言。
+        「H_0 的维数不足」本身也不是精确表述。本卡片直接删去该句，改为显式声明
+        「D ≤ 25 不作断言」。
+    (2) 旧卡的标题与结论句用「零模态退耦」「谱在洛伦兹协变的意义下幺正」「不幺正」等措辞，
+        「退耦」在自由弦态空间命题中无可操作定义（审计 B2/B3）。本卡片一律改写为
+        「H_phys/H_0 与横向 Fock 空间等距同构」与「存在负模物理态」。
+  另外，本卡片把 v4 的**全局动量限定**（p ≠ 0；固定 k_0 时 k_0·p ≠ 0）与 (B) 的 p ≠ 0 量词
+  写进陈述——旧卡完全没有这些限定，而其推导 --via-no-ghost 的 summary 里明写
+  「本陈述未写这些限制」。这是本次换代顺带修掉的第三处不忠实。
+
+  旧卡 worldsheet.critical-dimension-old-covariant 的 statement 文本一字未动，只加
+  superseded_by 与一段 notes（根 CLAUDE.md 原则 1）。推导相应换代为
+  worldsheet.critical-dimension-old-covariant-v2--via-no-ghost，depends_on 仍是
+  worldsheet.no-ghost-theorem-v4（不变）。
+
+  【sources 的变化】旧卡的第三条来源 goddard-2008（逐字「The No-Ghost Theorem follows for
+  D < 26 by embedding in the D = 26 case.」）在本卡片中**删除**：它是旧卡末句关于 D < 26 的
+  唯一依据，而本卡片不再断言 D < 26 的任何事。它仍留在推导 --via-no-ghost 的 gaps 记载中，
+  作为「若日后要为 D < 26 单建节点，其推导应写成『嵌入 D = 26』并引该综述」的线索。
+  brower-1972 的摘要含 D < 26 无鬼的那一半，本卡片同样不采用（已在该条 source 的 note 标注）。
+
+  【与四路线汇总卡片的关系】worldsheet.critical-dimension-bosonic-v2 的 (II) 早已按
+  规范措辞写成「(26,1) 处等距同构、D > 26 有负模态、D ≤ 25 不作断言」，并在其
+  --via-four-routes 的 depends_on note 中显式声明「刻意不采用旧卡陈述末句关于 D < 26 的说法」。
+  本卡片换代后，该声明不再需要——(II) 的文字与本卡片的陈述现已一致，
+  四路线推导的 depends_on 已改指本卡片。
+
+  【本卡片与 worldsheet.no-ghost-theorem-v4 的分工】v4 是无鬼定理本身（含逐塔的精确表述、
+  DDF 构造、归一化与分级）；本卡片只是把 v4 的等号情形改写成「临界维数判据」的形式，
+  不含新的物理输入，也不重述 v4 的技术细节。需要精确表述的下游请直接引 v4。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,78 @@
+id: holography.ads5-cft4-duality-v2
+kind: proposition
+title: AdS/CFT 对偶猜想（Maldacena 1997 的 D3 情形，逐字表述）
+statement: |
+  Maldacena 1997 §2 (p.4) 的猜想句，逐字（原文斜体部分即下引号内全部内容）：
+
+    "Type IIB string theory on (AdS_5 × S^5)_N plus some appropriate boundary conditions
+     (and possibly also some boundary degrees of freedom) is dual to N=4 d=3+1 U(N)
+     super-Yang-Mills."
+
+  中译：IIB 型弦论在 (AdS_5 × S^5)_N 上，加上某些适当的边界条件
+  （可能还要加上某些边界自由度），与 3+1 维 N=4 U(N) 超 Yang–Mills 理论对偶。
+
+  下标 N 表示两个"半径"在 Planck 单位下正比于 N^{1/4}。
+  参数字典取与规范场耦合归一化无关的形式：
+
+    R^4 / α'^2 = 4π g N，
+
+  其中 R 是 S^5 的半径（等于 AdS_5 的半径），g 是 IIB 弦耦合，N 是 D3 膜数。
+
+  本陈述不含任何算子对应或配分函数关系；"对偶"在此只取原文给出的含义。
+  边界条件在原文中明确未指定。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: maldacena-1997
+    loc: |
+      arXiv:hep-th/9711200v3, §2, p.4：
+      "We have started with a quantum theory and we have seen that it includes gravity so it is natural
+      to think that this correspondence goes beyond the supergravity approximation. We are led to the
+      conjecture that Type IIB string theory on (AdS_5 × S^5)_N plus some appropriate boundary
+      conditions (and possibly also some boundary degrees of freedom) is dual to N=4 d=3+1 U(N)
+      super-Yang-Mills."
+    note: |
+      参数字典 R^4/α'^2 = 4πgN 的原文依据有两处：(2.3) 之后 p.3 的 R^2_sph/α' = √(4πgN)，
+      与 p.6 的 "including the fact that R̃^4 = 4πgN"。
+      同页紧接猜想句的复耦合关系为 1/g²_YM + iθ/8π² = (1/2π)(1/g + iχ/2π)，见本卡 notes。
+tags: [holography, ads-cft, duality, conjecture, d3-brane]
+notes: |
+  from: maldacena-1997#E16（另见 #E1、#E5、#E11、#E17、#E21、#E45、Q6、Q7、Q8）。
+
+  【status 的原文背书】原文对该对应关系自称 conjecture 共 9 处（Abstract、§1 p.1、§2 p.4、§2 p.5、
+  §3.1 p.9、§4 p.12、§4 p.13、§5.1 p.14、§6 p.16）。"we argue" 全文只用于"超引力解在大 N 下可信"
+  这一步（§1 p.1），不用于对偶本身；"propose/proposal" 主要用于另一件事（用大 N 场论给出 M/弦论的
+  非微扰定义）。因此 conjecture 是原文逐字措辞，不是编者判断。
+
+  【逐字保留的两个限定语】"plus some appropriate boundary conditions" 与
+  "(and possibly also some boundary degrees of freedom)" 是猜想句的组成部分，不得省略；
+  旧卡 duality.ads-cft 的"完全等价"丢掉了这两处限定。
+
+  【耦合字典的因子警告】原文只给这一个关系（§2, p.4）：
+    1/g²_YM + i θ/8π² = (1/2π)(1/g + i χ/2π)，χ 为 RR 标量。
+  取实部得 g²_YM = 2πg，与 R^4/α'^2 = 4πgN 合起来是 R^4/α'^2 = 2 g²_YM N；
+  取虚部得 θ = 2χ。这与今日教科书常写的 g²_YM = 4πg_s、R^4/α'^2 = g²_YM N ≡ λ、θ = 2πχ
+  相差因子 2（抽取记录 Q2，根源疑为生成元迹归一化，未核实）。
+  故本卡陈述里只写约定无关的 R^4/α'^2 = 4πgN，不写 4πg_s，不写 λ。
+  修好这件事的正道是新建规范场耦合归一化约定卡（researcher 建议的 conv.ym-coupling-normalization），
+  按 lead 裁决（2026-09-11）本轮不建，先在此记账。
+
+  【记号红线】原文写 U(N) 不是 SU(N)；写 SO(2,4)×SO(6) 不是 SO(4,2)；全文没有 PSU(2,2|4)；
+  全文没有配分函数陈述 Z_string[φ_0] = ⟨exp∫φ_0 O⟩（那是 1998 年的 GKP hep-th/9802109 与
+  Witten hep-th/9802150，晚于本文且不在本文 65 条参考文献里，本卡不引这两篇）；
+  符号 λ 在原文里是共形标度因子（§2 p.7），不是 't Hooft 耦合，原文称 't Hooft 耦合为
+  "the effective coupling gN"。
+
+  【没有拆成"'t Hooft 极限版"与"有限 N 版"】原文的猜想句本身不带任何 N 限定；
+  "The above conjecture becomes nontrivial for large N" 与 't Hooft 极限（g→0, gN 固定 ≫ 1）
+  在原文里是对同一条猜想的评注与推论，不是两条不同强度的猜想。
+  若后续有人要拆成两卡，按抽取记录 Q8，那属于编者的组织选择，必须在新卡上标 inferred: true。
+
+  【与旧卡的关系】本卡取代 duality.ads-cft（后者的 SU(N)、配分函数句、"完全等价"三处与原文不符）。
+  区从 duality 移到 holography，理由是 graph/schema/areas.yaml 对 holography 的描述就是
+  "AdS/CFT、黑洞熵、Ryu–Takayanagi、岛公式"；id 不可改，故用换代而非改名（lead 裁决 2026-09-11）。
+
+  【版本】所有 loc 锚定 arXiv:hep-th/9711200v3 (22 Jan 1998)；
+  ATMP 2 (1998) 231–252 发表版的式号未核对（抽取记录 U1）。
+  v1/v2 有一处已被作者致谢承认的符号错误，v3 已改，具体位置未查（抽取记录 U2）。
+author: curator
+created: "2026-09-11"

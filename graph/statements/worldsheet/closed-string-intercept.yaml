@@ -1,0 +1,103 @@
+id: worldsheet.closed-string-intercept
+kind: proposition
+title: 闭弦截距的临界值 (a, ã) = (1, 1)（只断言截距取值与由此得到的质量壳形式）
+statement: |
+  考虑 D 维平坦时空中的自由玻色**闭弦**（worldsheet.closed-string-mode-expansion）。
+  左行与右行各有一个能级算符与一个正规序常数
+    N = Σ_{n≥1} α^i_{-n} α^i_n,   Ñ = Σ_{n≥1} ᾱ^i_{-n} ᾱ^i_n   （i = 2..D-1），
+  质量壳条件为 (α'/2) m² = N + Ñ - a - ã（worldsheet.closed-string-mass-formula；
+  截距记号 a = -A、ã = -Ã 按 conv.intercept-sign-a，Polchinski 写 A、Ã），
+  且物理态满足 level matching N = Ñ（worldsheet.closed-string-level-matching）。
+
+  **本命题断言：一致性要求**
+    a = ã = 1，
+  于是质量壳条件化为
+    α' m² / 4 = N - a = Ñ - ã   （即 α' m² = 4(N - 1)）。
+
+  这里的「一致性」指下列 (a)(c) 中任一条（在 a = ã 与 level matching 之下，每条都等价于
+  a = ã = 1，且与 D 的取值无关）：
+    (a) 第一激发级（N = Ñ = 1）的态是**无质量**的；
+    (c) level (1,1) 的独立态 α^i_{-1} ᾱ^j_{-1}|0;k⟩（i, j = 2..D-1，共 (D-2)² 个）构成
+        **无质量**小群 SO(D-2) 的二阶张量表示，而不是有质量小群 SO(D-1) 的某个表示；
+        该张量按 SO(D-2) 分解为
+          无迹对称（引力子）⊕ 反对称（B 场）⊕ 迹（dilaton）。
+  第三条刻画（旧协变一侧）为：
+    (b) level (1,1) 的第一批伪态——形如 L_{-1}(ζ̄·ᾱ_{-1}|0;k⟩) ∝ (k·α_{-1})(ζ̄·ᾱ_{-1})|0;k⟩
+        与 L̄_{-1}(ζ·α_{-1}|0;k⟩) ∝ (ζ·α_{-1})(k·ᾱ_{-1})|0;k⟩ 的态——本身满足闭弦旧协变
+        物理态条件（因而是零模态），从而极化张量有规范自由度
+          e_{μν} → e_{μν} + k_μ ζ̄_ν + ζ_μ k_ν  （k·ζ = k·ζ̄ = 0）。
+    ⚠ (b) 是按开弦的对应刻画（worldsheet.open-string-intercept-v2 的 (b)）**类比**写出的：
+    它使用闭弦旧协变量子化的物理态条件（(L_0 - a)|ψ⟩ = (L̄_0 - ã)|ψ⟩ = 0 与
+    L_n|ψ⟩ = L̄_n|ψ⟩ = 0, n > 0），而**本图尚无闭弦 OCQ 物理态空间的节点**，
+    本卡片现有的唯一推导（--via-light-cone-representation）也**不**论证 (b)。
+    需要 (b) 的下游必须等到该推导被建出来；细节见该推导的 gaps。
+
+  【本命题**不**断言什么】
+  (i)   **不**断言 D = 26。上面 (a)(c) 对任意 D ≥ 5 都各自等价于 a = ã = 1
+        （D ≤ 4 的表示计数论证失效，不在范围内）。D = 26 见
+        worldsheet.critical-dimension-bosonic-v2 及其四条路线；那四条路线中
+        (I) 光锥与 (II) 旧协变都是**开弦**的表述。
+  (ii)  **不**断言闭弦的无鬼定理或谱的正定性；本卡片只定截距。
+  (iii) **不**断言 a = ã 本身：左右行的正规序常数相等（A = Ã = -(D-2)/24）是
+        worldsheet.closed-string-mass-formula 的内容，本卡片把它当作输入。
+  (iv)  质量公式 (α'/2) m² = N + Ñ - a - ã 本身**不是**本命题的内容，它是
+        worldsheet.closed-string-mass-formula；level matching N = Ñ 是
+        worldsheet.closed-string-level-matching。本卡片只在这两者之上补一句「a = ã = 1」，
+        并写出代入后的形式。引质量公式请引那两张卡片，引「a = ã = 1」才引本卡片。
+        （这是开弦一侧 worldsheet.open-string-intercept-v2 的同一分工。）
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.intercept-sign-a
+  - conv.worldsheet-coordinate-length
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.8)（闭弦质量公式 m² = (2/α')(N + Ñ + A + Ã)，含 A = Ã = -(D-2)/24；式号与内容已核实）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E22，证据等级 [已核实]：
+      Headrick 习题 1.9 逐字「as are the mass formula (1.4.8), m² = (2/α')(N + Ñ + A + Ã)」。
+      **化简式 m² = (4/α')(N-1) 是否在书中显式出现未核实**（抽取记录 §3 清单）。
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.10)、(1.4.11)（σ 平移生成元与 level matching N = Ñ；式号与内容已核实）"
+    note: |
+      抽取记录 #E23，证据等级 [已核实]：Headrick 习题 1.9 逐字
+      「the generator of σ-translations (1.4.10), P = -(2π/ℓ)(N - Ñ), and (therefore)
+      the level-matching condition (1.4.11), N = Ñ」。
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.4)（闭弦模式展开）、(1.4.6c)/(1.4.6d)（左右行振子对易关系）；式号与内容已核实"
+    note: 抽取记录 #E20、#E21（均 [已核实]）。level (1,1) 的态计数 (D-2)² 用的是这两条。
+  - ref: polchinski-1998-v1
+    loc: "§1.4，第一激发级的谱（无质量、SO(D-2) 二阶张量、引力子/B 场/dilaton 的分解）：**式号与页码均未核实**，硬约束是它落在 (1.4.11) 与 (1.4.19) 之间"
+    note: |
+      **本卡片定位最弱的一处。** 抽取记录 polchinski-1998-v1.md 的 §1.4 条目只覆盖
+      E20（(1.4.4) 模式展开）、E21（(1.4.6c)/(1.4.6d) 对易关系）、E22（(1.4.8) 质量公式）、
+      E23（(1.4.10)/(1.4.11) level matching）、E24（(1.4.19) 世界面宇称与无取向弦），
+      **没有**一条记录覆盖第一激发级的谱与 SO(D-2) 张量分解。
+      故只能给出区间约束：该段必在已核实的 (1.4.11) 之后、已核实的 (1.4.19) 之前。
+      需要人工核对原书补上式号，并确认原书是否显式写出「引力子 / 反对称张量 / dilaton」
+      这三个名字（本卡片按标准教科书表述写出）。
+tags: [bosonic-string, light-cone, intercept, closed-string, spectrum]
+notes: |
+  【为什么单建这张卡片】worldsheet.open-string-intercept-v2 的边界 (ii) 逐字写着
+  「**不**覆盖闭弦。闭弦的对应量是 a = ã = 1（左右各一份），质量壳 α'm²/4 = N - a；
+  需要时另建节点」，worldsheet.critical-dimension-bosonic-v2 的 (V) 也写着
+  「本命题**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳
+  α'm²/4 = N - a，本图未建节点」。本卡片就是那个节点（docs/ROADMAP.md 待拆清单，lead 已同意）。
+  **本卡片不修改上述两张卡片的陈述**：它们说「本图未建节点」是当时的事实记载，
+  按根 CLAUDE.md 原则 1 不改已提交的陈述文本。
+
+  【与开弦卡片的分工与差异】结构上与 worldsheet.open-string-intercept-v2 平行
+  （只断言截距取值，质量公式与 level matching 交给各自的卡片），但有三处实质差异：
+    1. 闭弦有两个截距 a、ã；「a = ã」不是本卡片的断言而是输入
+       （worldsheet.closed-string-mass-formula 由左右行的对称性给出 A = Ã）。
+    2. level (1,1) 的态是**二阶**张量 (D-2)²，其小群论证的计数与开弦的矢量 (D-2) 不同；
+       开弦卡片写「对任意 D ≥ 4」，本卡片写 D ≥ 5（见推导 gaps 的说明）。
+    3. 开弦一侧有两条推导（光锥表示论 + 伪态解耦），本卡片目前**只有光锥表示论一条**，
+       故 (b) 在本图中无支撑（陈述里已显式标注）。补上 (b) 需要先建闭弦 OCQ 物理态条件节点。
+
+  【记号】L̄_n 是右行 Virasoro 生成元（conv.virasoro-standard 的右行副本）。
+  本卡片的 a、ã 是**截距**（(L_0 - a)|ψ⟩ = 0 一侧的记号），与 Polchinski 的 A、Ã
+  相差一个符号，换算 a = -A 由 conv.intercept-sign-a 固定；凡与本卡片连边者都须做该换算。
+author: curator
+created: "2026-09-11"

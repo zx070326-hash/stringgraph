@@ -22,5 +22,32 @@ notes: |
   --via-light-cone-lorentz 与 --via-no-ghost 已删除（各自只覆盖一条），
   改由 --via-three-routes 汇总，其有效状态取三者最弱者。
   引用本节点前请先考虑是否只需要其中某一条：只需要某一条时请直接依赖对应的新节点。
+
+  **【2026-09-11：本卡片已换代 → worldsheet.critical-dimension-bosonic-v2】**（curator。
+  本次**只加 superseded_by 与本段 notes，statement 文本、sources、tags、uses_conventions
+  一字未动**，符合根 CLAUDE.md 原则 1。上面那句「因此不写 superseded_by」由本段取代。）
+
+  换代理由是 ms.critical-dimension-bosonic 起草者在该里程碑 canonical_text 末段列出的
+  四处不一致（D1–D4）：
+    D1 路线数：第四条路线 worldsheet.critical-dimension-weyl-anomaly 已建节点，但本卡的
+       statement 写死「三种」，且 --via-three-routes 的 depends_on 不含它，
+       故 (iv) 在图上没有从本卡出发的支撑路径。
+    D2 「独立」的强度：(iii) 与 (iv) 共享 c^g = −26 与 c^m = D 两个输入，
+       「独立」只能在「论证方式」的意义上成立。
+    D3 a = 1 的归属：本卡把 a = 1 写进三条路线的共同结论，但 (iii)（BRST 幂零）在本图中
+       只给出 c^m = 26，不给 a；(iv) 同样不给 a。
+    D4 开/闭弦与约定：本卡未区分开弦与闭弦（a = 1 是开弦量），且 uses_conventions
+       未声明 conv.intercept-sign-a，而「a = 1」的符号恰恰依赖该约定
+       （Polchinski 的同一命题写作 A = −1）。
+  新卡 worldsheet.critical-dimension-bosonic-v2 按 (I)–(V) 分列四条路线各自的前提与结论，
+  逐条处理 D1–D4，并新增推导 worldsheet.critical-dimension-bosonic-v2--via-four-routes。
+
+  换代的后果：本卡的推导 --via-three-routes **保留不动**（它仍是三路线版本的记账，
+  且其 target 是本卡）。因此本卡在换代后仍有推导、有效状态不变（physical-argument），
+  不会出现在 `stringgraph report` 的 "open propositions" 里。
+  仍依赖本卡的入边只剩 graph/derivations/duality/ads-cft--via-decoupling-limit.yaml，
+  `stringgraph validate` 会对该文件报一条 "depends on superseded statement" 警告；
+  是否改指 v2 留给 lead 裁决（改指等于把它的依赖从三路线合取换成四路线合取）。
+superseded_by: worldsheet.critical-dimension-bosonic-v2
 author: seed
 created: "2026-09-10"

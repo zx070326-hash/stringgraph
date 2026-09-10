@@ -11,17 +11,12 @@ sources:
       因此 status = rigorous（docs/STATUS_LEVELS.md 等级 4：有发表的、数学界接受的完整证明，来源是数学文献）。
       **本项目未取得印本**：§17.3 的定位靠 ardizzoni-2010 的逐字引用与 Google Books 检索互证（见 gaps 第一条），
       §17.3 的**内容**靠 swanson-2015-pbw 的 L1 转述。
+    # lead 2026-09-11：swanson-2015-pbw（研讨班讲稿）按「个人笔记只作核对源」裁决从 sources[] 降为本注；原 loc：\"研讨班讲稿 “§17: The PBW Theorem”，9 页全文（分次版定理 𝔖 → gr 𝔘 同构、有序单项式基推论、U(L) 作为 U(H)-模自由的推论）\"
   - ref: ardizzoni-2010
     loc: "arXiv:1008.4523v2, p. 1 Introduction 第一段；p. 15 References [Hu]"
     note: |
       只用来定位编号与页码，并提供「前提只需全序基」这一措辞。该文本身证的是别的东西
       （PBW 型泛包络代数的刻画），**不作为 PBW 定理的证明来源**。
-  - ref: swanson-2015-pbw
-    loc: "研讨班讲稿 “§17: The PBW Theorem”，9 页全文（分次版定理 𝔖 → gr 𝔘 同构、有序单项式基推论、U(L) 作为 U(H)-模自由的推论）"
-    note: |
-      **本推导 summary 的措辞来源**（L1 全文读毕）。它是「基于 Humphreys §17」的公开讲稿，
-      不是独立的第二份证明；它复述的是同一条论证。用它是因为印本拿不到。
-      **该讲稿的连续编号绝不搬进图**（见目标节点 notes 的硬性禁令）。
 summary: |
   Humphreys §17.3–§17.4 的标准论证，与任何代数教科书一致：
 

@@ -1,0 +1,111 @@
+id: math.witt-algebra-derived-algebra
+kind: proposition
+title: 双边 Witt 代数的导出代数：W(R) = [W(R), W(R)] 当且仅当 2 ∈ R^×（域上 ⟺ char k ≠ 2；W(ℤ)、W(ZMod 2) 是反例）
+statement: |
+  设 R 是**任意**交换环，W(R) 是双边 Witt 代数（math.witt-algebra：以 {ℓ_n : n ∈ Z} 为 R-基的自由
+  R-模，[ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}，约定 conv.virasoro-standard）。则
+
+  **(1) 一致见证（任意交换环，无可逆性假设）**：对每个 n ∈ Z，
+        2 ℓ_n = [ℓ_{n+2}, ℓ_{−2}] − [ℓ_{n+1}, ℓ_{−1}]。
+      （右端两个括号的系数分别是 (n+2) − (−2) = n + 4 与 (n+1) − (−1) = n + 2，两者之差为 2，
+        与 n 无关；故这个见证**不需要按 n 的奇偶分情况**。）
+      特别地 2 ℓ_n ∈ [W(R), W(R)] 对一切 n ∈ Z 成立。
+
+  **(2) 充分条件**：若 2 在 R 中可逆，则 [W(R), W(R)] = W(R)，即 W(R) 完美。
+
+  **(3) 充要条件（sharp）**：[W(R), W(R)] = W(R) ⟺ 2 ∈ R^×。
+      «⟸» 即 (2)。«⟹» 的理由：任一括号 [x, y] 的 ℓ_0-坐标必落在理想 (2) ⊆ R 中
+      （在基向量上，[ℓ_a, ℓ_b] 只在 b = −a 时对 ℓ_0 有贡献，系数为 a − b = 2a ∈ (2)），
+      故 ℓ_0 ∈ [W(R), W(R)] 迫使 1 ∈ (2)，即 2 | 1。
+
+  **(4) 推论与反例**：
+      · R = k 是域时：W(k) 完美 ⟺ char k ≠ 2。特别地 char k = 0 时 W(k) 完美。
+      · W(ℤ) **不**完美（2 在 ℤ 中不可逆）。
+      · W(ZMod 2) **不**完美（那里 2 = 0，(1) 的见证退化为 0 = 0）。
+
+  【本节点明确**不**断言】
+  (a) 关于 H^1(W, k) 的任何事，也不含「完美 ⟺ H^1(−, k) = 0」这条上同调字典。
+      那两条留在 math.witt-algebra-perfect（其 (2) 与「(1) ⟺ (2)」），**未形式化**。
+  (b) 关于 H^2 的任何事（见 worldsheet.virasoro-unique-central-extension），
+      也不涉及 Virasoro 代数（见 math.virasoro-universal-central-extension，
+      其 (1) 的 Lean 对应物是 `VirasoroAlgebra.isPerfect`）。
+  (c) 2 不可逆时导出代数的**完整**描述。它的形状是 ⨁_n I_n ℓ_n，n 奇时 I_n = R、n 偶时 I_n = (2)；
+      Lean 只证了 (3) «⟹» 所需的那一半（任一括号的 ℓ_0-坐标落在 (2) 里），没有给出完整分解。
+  (d) 关于**单边** Witt 代数 W_r = Der(k[x_1,…,x_r]) 的任何事（见 math.witt-algebra 的 notes）。
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.WittAlgebra.derivedSeries_one_eq_top_iff
+  lean_file: StringFormal/Virasoro/WittPerfect.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/WittPerfect.lean :: StringFormal.Virasoro.WittAlgebra.{lie_mem_derivedSeries_one, two_smul_lgen_eq, two_smul_lgen_mem_derivedSeries_one, lgen_mem_derivedSeries_one, derivedSeries_one_eq_top, isPerfect, coord_zero_lie_mem_span_two, derivedSeries_one_eq_top_iff, derivedSeries_one_ne_top_zmod_two, derivedSeries_one_ne_top_int}"
+    note: |
+      本仓库，形式化分支 agent/formalizer/witt-perfect，已由 lead 以 20cc08f 合入 main
+      （无 sorry，公理仅 propext / Classical.choice / Quot.sound）；Lean 4 + Mathlib v4.33.1。逐条对应：
+        (1) 一致见证 → `two_smul_lgen_eq (n : ℤ) : (2 : R) • lgen R n =
+            ⁅lgen R (n + 2), lgen R (-2)⁆ − ⁅lgen R (n + 1), lgen R (-1)⁆`（`[CommRing R]`，无别的假设），
+            配 `two_smul_lgen_mem_derivedSeries_one`；
+        (2) 充分条件 → `derivedSeries_one_eq_top` 与 `isPerfect :
+            ⁅(⊤ : LieIdeal R (WittAlgebra R)), ⊤⁆ = ⊤`（假设 `[Invertible (2 : R)]`）；
+        (3) 充要条件 → `derivedSeries_one_eq_top_iff :
+            derivedSeries R (WittAlgebra R) 1 = ⊤ ↔ IsUnit (2 : R)`（本卡的 lean_decl），
+            其 «⟹» 用 `coord_zero_lie_mem_span_two`（括号的 ℓ_0-坐标 ∈ Ideal.span {2}）；
+        (4) 反例 → `derivedSeries_one_ne_top_zmod_two`、`derivedSeries_one_ne_top_int`。
+      **记号说明**：Mathlib v4.33.1 没有 `LieAlgebra.IsPerfect` 谓词，「完美」在 Lean 里写成
+      `⁅(⊤ : LieIdeal R L), ⊤⁆ = ⊤` 或 `LieAlgebra.derivedSeries R L 1 = ⊤`，二者定义相等
+      （`derivedSeriesOfIdeal` 是 `fun I => ⁅I, I⁆` 的迭代）。
+      **lean_decl 取 `derivedSeries_one_eq_top_iff` 而不是 `isPerfect`**：本卡的标题与陈述 (3)
+      是**充要**形式，`isPerfect` 只是它的 «⟸» 方向再包装。`isPerfect` 已在上面 loc 中列出。
+      **域上 ⟺ char k ≠ 2 与 (4) 的第一条**：由 (3) 加「域中非零元可逆」即得，Lean 里**没有**
+      单独的具名引理（只有 ℤ 与 ZMod 2 两个具体反例）。见 --via-lean 的 gaps (i)。
+      **curator 未自行重跑 `lake build`**；依据是文件头自述、formal/TODO.md 的 `witt-virasoro-perfect`
+      条（已勾选，并逐字记下「2 可逆是必要的」这一数学缺口），以及 20cc08f 已由 lead 合并进 main。
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6 的**证明**中作为已知事实引用（逐字：「in conjunction with `H¹(𝒲, 𝔽) = 0` and `dim_𝔽 H²(𝒲, 𝔽) = 1` (see [24, Section 2])」），p. 7；**无单独编号**"
+    note: |
+      文献侧只覆盖 char 0 的域上的完美性（且是转引，该文对 𝒲 不给证明；它逐字给出的三步计算
+      是对 **𝒱** 的）。逐字引文见 literature/extractions/math-sources.md 第 25.1 节（L1，
+      researcher 2026-09-11 全文核实）。
+      **本卡陈述 (1)(3)(4) 超出文献**：一致见证 2ℓ_n = [ℓ_{n+2}, ℓ_{−2}] − [ℓ_{n+1}, ℓ_{−1}]、
+      「⟺ 2 ∈ R^×」与 ℤ / ZMod 2 反例都是 formalizer 在本仓库做出并机器验证的，
+      **不出自任何已核实的文献**。这不降低本卡的状态（Lean 是比文献更强的证据），
+      但引用时不要写成「文献结果」。
+tags: [algebra, lie-algebra, witt, perfect, formalized]
+notes: |
+  【本卡的来历：math.witt-algebra-perfect 的拆卡（2026-09-11，curator）】
+  旧卡 math.witt-algebra-perfect 把三件事写在一条命题里：
+    (1) 完美性 W = [W, W]；
+    (2) H^1(W, k) = 0；
+    (1) ⟺ (2) 的一般上同调字典 H^1(𝓛, k) = (𝓛/[𝓛, 𝓛])^*。
+  formalizer 于 WittPerfect.lean 机器验证的**只有 (1)**（且比旧卡更强：给出充要条件与反例）。
+  按 docs/STATUS_LEVELS.md「Lean 证明用的对象若与卡片陈述不逐句一致，命题就不该显示为
+  formalized；正确做法是拆卡，让 Lean 对应的那一半成为 formalized」的规定，把 (1) 单列为本卡。
+  旧卡**不换代、statement 一字未动、不填 formal.lean_decl**：它仍承载 (2) 与那条字典
+  （两者在本图与任何 Lean 项目中都未形式化），其推导 math.witt-algebra-perfect--via-bracket-identity
+  已加一条 depends_on 指向本卡。
+
+  【本卡比旧卡强在哪里（三点，都来自 formalizer）】
+  (a) **基环**：旧卡限定 char 0 的域，本卡对任意交换环成立，并给出完美性的**充要**条件。
+  (b) **见证一致**：旧卡推导的第一步是 ℓ_p = (1/p) [ℓ_p, ℓ_0]，它要求 **p 在 R 中可逆**，
+      因此在 char 3 处对 p = 3 失效（更一般地在 char q 处对 q | p 失效）；
+      真正一般的见证是 2 ℓ_p = [ℓ_{p+2}, ℓ_{−2}] − [ℓ_{p+1}, ℓ_{−1}]，只要 2 可逆，
+      且**不需要按 p 的奇偶或模某个素数分情况**。
+  (c) **锐利性**：2 可逆不是技术假设而是**必要**的。旧卡的 notes 写着「是否能放宽到某些正特征，
+      本图未验证，不要顺手推广」——本卡回答了这个问题：能放宽到**所有** char ≠ 2 的域，
+      以及所有 2 可逆的交换环，恰好不能再多。W(ℤ) 与 W(ZMod 2) 是反例。
+
+  【与相邻节点的分工】
+    · math.witt-algebra：定义卡（W(R) 的构造与括号），本卡的唯一图内依赖。
+    · math.witt-algebra-perfect：保留 (2) H^1(W, k) = 0 与「(1) ⟺ (2)」字典，rigorous。
+    · math.virasoro-universal-central-extension：关于 **Vir**（不是 W）的 H^1/H^2 与万有性；
+      其 (1)（Vir 完美，含 C ∈ [Vir, Vir]）在同一 Lean 文件里是
+      `VirasoroAlgebra.isPerfect` 与 `VirasoroAlgebra.cgen_eq`，已在那张卡的 notes 记下指针。
+    · worldsheet.virasoro-unique-central-extension：dim H^2(W, k) = 1，另一个上同调群。
+  四者互不重复。
+
+  【查重】2026-09-11 跑 `stringgraph search witt / perfect / derived`：命中
+  math.witt-algebra（定义）、math.witt-algebra-perfect（旧卡）、
+  math.virasoro-universal-central-extension、worldsheet.virasoro-unique-central-extension。
+  无既有节点承载「完美性的充要条件 / 一致见证 / 正特征反例」。
+author: curator
+created: "2026-09-11"

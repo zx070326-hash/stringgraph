@@ -1,0 +1,82 @@
+id: worldsheet.critical-dimension-weyl-anomaly-v2
+kind: proposition
+title: Weyl 反常抵消（总中心荷为零）当且仅当 c^m = 26（陈述只到 c^m，不含 c^m = D 那一步）
+statement: |
+  记号：中心荷写作上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 的下标记号冲突
+  （沿用 worldsheet.brst-quantization-v2 / worldsheet.critical-dimension-brst-v2 的约定）。
+
+  Weyl 对称性在 Polyakov 表述中是**规范冗余**（不是整体对称性）：它被用来把度规的一个分量
+  消掉（worldsheet.conformal-gauge-fixing）。因此量子层面它必须无反常，否则被规范固定掉的
+  自由度重新出现，破坏理论的一致性（幺正性）。
+
+  按 worldsheet.weyl-anomaly-trace，反常正比于中心荷；按
+  worldsheet.weyl-anomaly-central-charge-constant，该中心荷是常数。
+  Faddeev–Popov 鬼场（worldsheet.faddeev-popov-ghost-action，λ = 2）贡献
+  c^g = -26（worldsheet.bc-ghost-central-charge）。故
+    反常抵消（c^{tot} = c^m + c^g = 0）  ⟺  c^m - 26 = 0  ⟺  c^m = 26。
+
+  【本命题到此为止】本卡片**不**断言 D = 26。由 c^m = 26 过渡到 D = 26 需要额外一步
+    c^m = D  （D 个平坦时空自由标量 X^μ 的中心荷；worldsheet.free-boson-central-charge-d），
+  该步不是本命题的产物，也不写进本命题的陈述；它作为 Weyl 反常路线与 BRST 路线的
+  **公共输入**记在汇总卡片 worldsheet.critical-dimension-bosonic-v2 及其推导
+  --via-four-routes 上。
+
+  ⚠ 「c^m = 26」是比「D = 26」更一般、也更强的陈述：它允许任意中心荷为 26 的物质 CFT
+  （紧化、非几何背景等），平坦的 26 维时空只是其中一个解。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.4 的结尾部分，p.95–96，公式号约在 (3.4.24)–(3.4.32) 区间"
+    note: |
+      **公式号未核实**，只有硬约束：§3.4 = p.90–96（Cambridge frontmatter 目录已核实），
+      且 (3.4.31)「中心荷是常数」被核对源定位在 p.96–97，即接近节末；
+      故该结论的式号只能在 (3.4.31) 前后。抽取记录 E53 与 Q6 明确要求**不要写死式号**。
+      ⚠ **原书此处写的是「c^m = 26」还是直接写「D = 26」仍未核实**（抽取记录 Q6 要求人工核对）。
+      若原书只写 D = 26，则本卡片的陈述（对任意物质 CFT 断言 c^m = 26）强于来源，须相应修订；
+      详见 notes 的【原书措辞未核实】一段。
+  - ref: polchinski-1998-v1
+    loc: "§3.4, eq. (3.4.31)（中心荷为常数，p.96–97，式号已核实）；§2.5, eq. (2.5.12)（c^g = -26，式号已核实）"
+tags: [bosonic-string, critical-dimension, weyl-anomaly, conformal-anomaly]
+notes: |
+  【本卡片换代 worldsheet.critical-dimension-weyl-anomaly】（curator，2026-09-11，依
+  docs/ROADMAP.md 待拆清单，lead 已同意）旧卡陈述的末段是
+    「特别地，物质部门取 D 个平坦时空自由标量 X^μ 时 c^m = D
+      （worldsheet.free-boson-central-charge-d），于是 D = 26。」
+  与 BRST 路线的换代（worldsheet.critical-dimension-brst → -v2）同理：该句把 c^m = D
+  （已 formalized 的独立节点）绑进了 Weyl 反常论证（physical-argument），两者无法分别记账，
+  且与汇总卡片 worldsheet.critical-dimension-bosonic-v2 把 c^m = D 单列为 (III)(IV) 公共输入
+  的做法重复。本卡片删去该句，陈述只到「c^{tot} = 0 ⟺ c^m = 26」。
+  推导相应换代为 worldsheet.critical-dimension-weyl-anomaly-v2--via-anomaly-cancellation，
+  其 depends_on 去掉 worldsheet.free-boson-central-charge-d（那一步不再在陈述里），
+  **保留 worldsheet.bc-ghost-central-charge**（陈述里的 c^g = −26 仍不是该推导算出来的）。
+  旧卡 statement 文本一字未动，只加 superseded_by 与一段 notes（根 CLAUDE.md 原则 1）。
+
+  【原书措辞未核实】抽取记录 Q6 要求人工确认 Polchinski §3.4 末尾写的是「c^m = 26」
+  还是直接写「D = 26」。本卡片按更一般的形式（c^m = 26）陈述。两种情形的后果：
+    · 若原书写 c^m = 26：本卡片与来源逐字对应，无需修订。
+    · 若原书只写 D = 26：本卡片的陈述**强于**来源（对任意 c^m = 26 的物质 CFT 成立，
+      而非只对 D 个平坦标量），须相应修订或补一条覆盖一般物质 CFT 的来源。
+  该疑问自旧卡起就登记在案，本次换代**未**解决它，只把它从陈述末段搬到这里并显式标注。
+
+  **这是 D = 26 的第四条路线**，与图中已有的三条并列：
+    (i)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合
+    (ii)  worldsheet.critical-dimension-old-covariant-v2 旧协变：(26,1) 处等距同构、D > 26 有负模态
+    (iii) worldsheet.critical-dimension-brst-v2          BRST 荷幂零 Q_B^2 = 0 ⟺ c^m = 26
+    (iv)  **本节点**                                     Weyl 反常抵消（总中心荷为零）
+  汇总节点是 worldsheet.critical-dimension-bosonic-v2，其推导 --via-four-routes 已把
+  本节点列为 (IV) 的供边节点。
+
+  与 (iii) 的关系：两者在数学内容上高度接近——(iii) 的条件是「总 Virasoro 的中心扩张为零」，
+  (iv) 的条件是「总中心荷为零」，这是同一个数 c^m - 26 = 0。
+  差别在于**论证方式与所依赖的框架**：(iii) 是模式代数中 {Q_B, Q_B} 的计算（不涉及路径积分测度），
+  (iv) 是路径积分测度的 Weyl 变分（不涉及 BRST 荷）。因此二者是两条独立的证据，
+  但**不是两条完全独立的推导**：它们共享 c^g = -26 这个输入（换代后 c^m = D 那个共享输入
+  已从两卡的陈述中移出，改由汇总卡片承载）。本图未建「(iii) ⟺ (iv)」的等价节点。
+
+  与 (i)(ii) 的关系：那两条给出的是「D = 26 **且** a = 1」，本节点**只给 c^m，不给截距 a**，
+  与 (iii) 相同。a = 1 由 worldsheet.open-string-intercept-v2 独立提供。
+author: curator
+created: "2026-09-11"
