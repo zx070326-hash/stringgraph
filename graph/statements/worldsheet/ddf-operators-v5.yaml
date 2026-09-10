@@ -1,0 +1,151 @@
+id: worldsheet.ddf-operators-v5
+kind: definition
+status: rigorous
+title: DDF 算子的定义（横向指标 i = 2..D-1；类光参考直线 + 归一化 2α' k_0·p = 1）——纯定义，不含对易关系断言
+statement: |
+  横向指标约定与 worldsheet.light-cone-quantization 一致：i = 2..D-1（共 D-2 个横向方向），
+  0、1 方向组成光锥对 ±。
+
+  设 F(p) 是 D 维自由玻色开弦建在动量本征态 |0; p⟩ 上的 Fock 空间（振子 α^μ_n，
+  零模 α^μ_0 = (2α')^{1/2} p^μ，α' 见 conv.alpha-prime-regge）。
+
+  取一条**类光参考方向**，即由某个非零类光向量张成的**去心直线**
+  {λ k_0 : λ ∈ R \ {0}}（k_0^2 = 0），以及横向偏振 ε^i（i = 2..D-1，ε·k_0 = 0）。
+  DDF 算子定义为
+
+    A^i_n := ∮ (dz / 2πi) ∂X^i(z) e^{i n k_0·X(z)}，   i = 2..D-1，n ∈ Z \ {0}，
+
+  其中 k_0 在该直线上的**标度**取为使
+
+    2 α' k_0·p = 1                                                (★)
+
+  （p 是被作用态的动量）。特别地要求 k_0·p ≠ 0。
+
+  关于 (★) 的三点说明，它们是定义的一部分：
+
+  (a) 条件 k_0·p ≠ 0 只依赖 k_0 的**方向（去心直线）**，不依赖标度：k_0 → λ k_0（λ ∈ R \ {0}）
+      仍类光，且 k_0·p ≠ 0 保持成立。标度由 (★) 唯一确定为 λ = 1/(2α' k_0·p)，
+      其**符号随 sign(k_0·p)**：k_0·p < 0 时 λ < 0，归一化后的代表元落在原射线的反向上。
+      这正是本节点把参考方向取成去心直线 {λ k_0 : λ ∈ R \ {0}} 而不是射线 {λ k_0 : λ > 0}
+      的原因；等价的说法是"固定一条射线并额外要求 k_0·p > 0"，但那会人为排除半数动量。
+      归一化之后 (★) 蕴含 k_0·p = 1/(2α') > 0，故任一被归一化的代表元总满足 k_0·p > 0。
+      故"固定 k_0"在本图中一律理解为"固定一条类光去心直线"，标度（含符号）按 (★) 逐塔确定。
+
+  (b) (★) 沿一条 DDF 塔不变：A^i_n 把动量 p 移到 p + n k_0（顶点算子 e^{i n k_0·X} 携带动量
+      n k_0），而 k_0^2 = 0 蕴含 k_0·(p + n k_0) = k_0·p，故若 (★) 对 p 成立则对整条塔
+      {p + n k_0 : n ∈ Z} 同时成立：一次重标度覆盖整条塔。跨塔（k_0·p 取不同值的动量）
+      需要不同的 λ（可以异号），但按 (a) 这不改变扇区 {p : k_0·p ≠ 0}。
+
+  (c) (★) 的来源是单值性：∂X^i(z) e^{i n k_0·X(z)} 与动量 p 的态的 OPE 带因子
+      z^{2α' n k_0·p}（开弦边界归一化），围道积分要良定义需 2α' n k_0·p ∈ Z 对所有 n ∈ Z 成立，
+      即 2α' k_0·p ∈ Z；(★) 取该整数为 1。在 α' = 1/2 的归一化下 (★) 退化为文献常见的
+      k_0·p = 1（worldsheet.ddf-operators-v2 与 GSW 采用的形式）。
+
+  **本节点只定义 A^i_n，不断言它的任何代数性质。** 特别地，
+  [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} **不是**本节点的内容，
+  它们分别是命题节点 worldsheet.ddf-commute-with-virasoro 与
+  worldsheet.ddf-transverse-oscillator-algebra；上式围道积分在代数 Fock 空间上给出
+  良定义的线性算子这一点，是命题节点 worldsheet.ddf-transversality-gives-local-finiteness。
+uses: [worldsheet.virasoro-algebra-v2, worldsheet.old-covariant-physical-states]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      沿用 worldsheet.ddf-operators-v2 的核实结果（literature/extractions/brst-cohomology-sources.md §5.2–5.3）：
+      §2.3.2 的标题是 'Construction of transverse physical states'，只占 p.100–101；DDF 与
+      spectrum-generating algebra 按目录属 §2.3.3（p.102–112），Google Books 全文检索 'DDF'
+      正文首次命中 p.103。章节页码来自 CUP 25 周年版 frontmatter（L4，未逐字核对）+ Google Books
+      页码定位。**式号仍未核实（L0）**。GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
+      GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1，是 (★) 的特例；一般 α' 的形式 (★) 不出自 GSW，见 notes。
+      GSW 也没有逐字讨论参考向量取射线还是直线，说明 (a) 的符号讨论是本项目的补充，见 notes。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实）"
+    note: 式号沿用旧节点 worldsheet.ddf-operators，未与原文核对；GT 1972 正文未获取，未在 literature/extractions/ 登记。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（DDF 构造需要 k_0·p ≠ 0 的注记；页码/式号未核实）"
+    note: |
+      ms.no-ghost-theorem 第一轮审计 B6 指出 Polchinski §4.1 有此注；抽取记录
+      literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
+tags: [bosonic-string, spectrum-generating-algebra, definition]
+notes: |
+  取代 worldsheet.ddf-operators-v4（v4 取代 v3，v3 取代 v2）。按项目规则陈述文本不可变，故新建本节点。
+
+  【相对 v4 的唯一实质改动：拆卡，2026-09-11】
+  v4 是"一卡三事"：A^i_n 的**定义**、命题 [L_m, A^i_n] = 0、命题
+  [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}。三者的论证性质与形式化路径完全不同：
+  定义是"写下一个围道积分"，两条对易关系是需要 OPE / 围道形变的命题。
+  按根 CLAUDE.md 原则「一个节点一个命题」与 docs/ROADMAP.md 的待拆清单（lead 已同意），
+  本节点只保留**定义**部分，删去 v4 末段的两句代数断言，并在 statement 末尾显式声明
+  它们不属于本节点。除此之外，本节点的 statement 与 v4 逐字相同
+  （首段到说明 (c) 一字未动）。
+
+  拆卡的直接后果（诚实登记）：v4 作为一张 `status: rigorous` 的**定义**卡，
+  把两条从未在本图中被独立论证过的对易关系一起带进了 rigorous，
+  下游 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 因此显示为 rigorous。
+  拆开后两条对易关系各自挂 physical-argument 的推导（文献里的论证是 OPE + 围道形变，
+  且现有来源均未核实到式号），无鬼定理 v4 的有效状态相应下降。
+  **这是拆卡暴露出来的既有事实，不是本次改动引入的新弱点。**
+  升级路径见两条命题节点各自的 notes 与 formal/TODO.md 的 `ddf-operators` 项。
+
+  【继承自 v4 的说明，未改动】
+  v4 相对 v3 的改动（参考方向由射线改为去心直线，说明 (a) 显式写出 λ 的符号）保留，
+  理由见 worldsheet.ddf-operators-v4 的 notes（ms.no-ghost-theorem 第三轮审计 A1 附带项 / D2）。
+  v3 相对 v2 的改动（归一化由 k_0·p = 1 改为一般 α' 的 2α' k_0·p = 1；显式引入 F(p) 与零模
+  α^μ_0 = (2α')^{1/2} p^μ；显式写出 A^i_n 把动量移到 p + n k_0；说明 (c) 的单值性理由）
+  同样保留。横向指标范围 i = 2..D-1、参考动量记号 k_0 与态动量记号 p 的区分，与 v2/v3/v4 相同。
+
+  【来源强度】(★) 的一般 α' 形式**没有直接的文献定位**：GSW 与 GT 均在 α' = 1/2（或等价的
+  单位 Regge 斜率）归一化下工作，写的是 k_0·p = 1。本节点把 α' 因子按量纲恢复，依据是说明 (c)
+  的单值性计算（初等，可自洽核验：α' = 1/2 时退化为 k_0·p = 1）。这属于本项目对文献归一化的
+  换算，不是新物理内容；若 researcher 日后拿到 GT 1972 正文或 GSW 原式号，应把 loc 补精确。
+  说明 (a) 中"去心直线 vs 射线"的讨论同样**没有文献定位**：文献通常只写"取一个类光 k_0 使
+  k_0·p ≠ 0 并归一化"，不讨论参数化。这是本项目为可形式化而做的精确化。
+
+  k_0·p = 0 的扇区（特别是 p = 0）DDF 构造退化，需单独处理（第一轮审计 B6）。
+
+  Fock 空间 F(p) 的形式化定义见 worldsheet.bosonic-fock-space（`formal/StringFormal/NoGhost/Fock.lean`，
+  只含振子部分），其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模
+  α^μ_0 = (2α')^{1/2} p^μ 与动量 p（归一化 (★) 的全部内容都关于 p，A^i_n 还把 p 移到 p + n k_0），
+  这部分**尚未形式化**，因此本节点不继承那两个节点的 formalized 状态。
+
+  【Lean 进展 2026-09-11】（自 v4 移入并按拆卡重排。本仓库合并提交 9691057，formal 侧提交 4c12d36，
+  新增 `formal/StringFormal/NoGhost/VertexOperator.lean` 与 `formal/StringFormal/NoGhost/DDF.lean`，
+  两者均无 sorry，公理只有 propext / Classical.choice / Quot.sound；curator 未自行重跑 lake build。）
+  **本节点 status 仍 rigorous，不升 formalized**：A^i_n 本身尚未定义，已形式化的只是它的零件。
+  逐条登记，对照 formal/TODO.md 的 `ddf-operators` 项。
+
+  (1) **顶点算子 :e^{i k_0·X}: 的振子部分已形式化**。在**代数** Fock 空间
+      （worldsheet.bosonic-fock-space 的 `MvPolynomial (Osc D) R`）上，正规序指数的两半都是初等的：
+      产生半 E_-(z) = exp(Σ_{m≥1} (b·α_{-m}/m) z^m) 只是"乘以交换环 Fock D R 的一个显式元素"
+      （`Fock.creaExp`，单项式系数即经典指数权）；湮灭半 E_+(z) = exp(−Σ_{l≥1} (b·α_l/l) z^{-l})
+      的指数是常系数导子，故 E_+ 就是**变量平移** X_{μ,l} ↦ X_{μ,l} − b^μ T^l（`Fock.vertexSub`），
+      一个到 Polynomial (Fock D R) 的代数同态。于是 z^K 系数 `Fock.vertexOsc η b K`
+      逐向量是有限和，**全程不用任何收敛性假设**。这里 b^μ = (2α')^{1/2} k_0^μ 是本节点 k_0 的重标度。
+      核心恒等式：`Fock.lie_mode_vertexOsc`（[α^μ_p, V_K] = b^μ V_{K−p}，p ≠ 0）与双动量形式
+      `Fock.mode_vertexOsc_sub`（左侧模态用参数 a+b、右侧用 a，对**所有** p 含 0 成立）。
+      动量塔 `TowerFock D R = ℤ →₀ Fock D R`（第 j 层动量参数 a + j·b）与移位算子 `towerShift n`
+      （即零模算符 e^{i n k_0·x}）也已形式化，塔上的 `lie_towerMode_towerVertex` 对**所有** p
+      （**含 p = 0**）成立。相对地，单个 Fock 空间上 p = 0 的括号**为零**
+      （`Fock.lie_mode_zero_vertexOsc`）：本节点"A^i_n 把动量 p 移到 p + n k_0"这句在形式化里
+      是**必需**的，没有动量塔就没有正确的零模关系。塔的索引字典是 j = −N（本节点写作 {k − N k_0}）。
+      本节点说明 (b)（k_0² = 0 ⇒ k_0·p 沿塔不变）已形式化为 `dotVec_towerMomentum_right_of_isotropic`。
+
+  (2) **说明 (a) 的存在性部分不可在一般环上形式化，需 R = ℝ。** "存在类光 k_0 使 k_0·p ≠ 0"
+      是关于**实**二次型（洛伦兹号差）的断言，在一般交换环 R 上为假。Lean 侧因此把归一化与类光性
+      作为显式假设引入（`dotVec η b a = 1` 即 2α' k_0·p = 1，`dotVec η b b = 0` 即 k_0² = 0），
+      不证其可满足性（DDF.lean 文件头 "What is NOT here" 第 4 条）。要把说明 (a)
+      （去心直线上的标度与符号选取，含 λ 的符号随 sign(k_0·p)）完整形式化，
+      **必须取 R = ℝ 并引入洛伦兹号差与类光锥**，这是一条独立待办。
+
+  (3) **A^i_n 的定义本身仍无机器验证**（DDF.lean 文件头 "What is NOT here" 第 1 条：
+      `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 未定义）。其模态和在代数 Fock 空间上局部有限
+      这一点，Lean 侧的两条支撑引理已在（`lie_towerMode_towerVertex_of_eq_zero`、
+      `Fock.vertexOsc_apply_eq_zero_of_level`），但组装未做；该内容现由命题节点
+      worldsheet.ddf-transversality-gives-local-finiteness 承载。
+
+  (4) **顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做**（需 E_+ E_- 重排序，且 Lean 侧目前只有
+      R-双线性型，无 sesquilinear 结构）；**x^μ 与 [x^μ, p^ν] 未做**（塔上只有 e^{i n k_0·x}
+      这一个移位，且塔建在固定的 a、b 上，不是全动量空间）。
+author: curator
+created: "2026-09-11"

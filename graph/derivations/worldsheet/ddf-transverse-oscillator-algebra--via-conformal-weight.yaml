@@ -1,0 +1,106 @@
+id: worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight
+target: worldsheet.ddf-transverse-oscillator-algebra
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v5
+    note: 被断言的对象；类光条件 k_0² = 0、横向条件 ε·k_0 = 0 与归一化 2α' k_0·p = 1 都是本论证的输入。
+  - id: worldsheet.free-scalar-propagator
+    inferred: true
+    note: |
+      XX OPE X^μ(z)X^ν(0) ∼ -(α'/2)η^{μν} ln|z|²。两个被积量之间的全部缩并都由它给出；
+      它同时提供 z^{2α' n m k_0·k_0} = 1（k_0² = 0）与 z^{±1}（由归一化 2α' k_0·p = 1）这两个关键幂次。
+      来源处（GSW §2.3.3，式号未核实）不逐条列出这一步，标 inferred。
+  - id: worldsheet.conformal-normal-ordering
+    inferred: true
+    note: |
+      两个指数算符 :e^{i m k_0·X(z)}: 与 :e^{i n k_0·X(w)}: 的重排序（交叉缩并）规则，
+      即 :e^{iA}::e^{iB}: = (z-w)^{2α' m n k_0·k_0} :e^{iA+iB}: 这一类恒等式。
+      k_0² = 0 使该幂次为 0，是「两个顶点算子之间没有分支切割」的原因。同上，标 inferred。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      「OPE ⟹ 模态对易子」的径向排序 + 围道形变步骤：[A^i_m, A^j_n] 由 A^i_m 的围道绕过 A^j_n
+      的围道所扫出的差给出，等于两者 OPE 的单极点留数的围道积分。
+      这是本推导 status 的直接上限（该字典节点自身是 physical-argument）。
+  - id: worldsheet.transverse-oscillator-commutators
+    inferred: true
+    note: |
+      目标陈述断言 DDF 算子的代数**与横向振子代数同型**，δ^{ij} 中的横向正交归一标架
+      （i, j = 2..D-1，ε^i·ε^j = δ^{ij}）与右端 m δ^{ij} δ_{m+n,0} 的形状都取自这条既有节点。
+      本论证并不从它推出目标（DDF 代数是独立计算的结果），只是共用同一套横向标架与同一形状的答案，
+      故标 inferred。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: true
+    note: |
+      单极点留数里出现 ∂X^i 的模态（即 α^i 振子）与 e^{i(m+n)k_0·X} 的组合；
+      m + n ≠ 0 时该组合本身又是一个 DDF 型算子并被证明为零，m + n = 0 时留下 c-数 m δ^{ij}。
+      这一步的记账用到自由玻色子模态的标准约定。来源处不逐条列出，标 inferred。
+  - id: worldsheet.old-covariant-physical-states
+    note: |
+      本目标的断言只在扇区 {p : k_0·p ≠ 0} 的动量塔上作出，而该塔与其上的 Fock 内积、
+      物理态条件由本节点给出；worldsheet.no-ghost-theorem-v4 (1b) 使用本目标时正是在这个空间里。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧的标准论证所在处。定位强度：章节页码 L4/L2（brst-cohomology-sources.md §5.2–5.3），
+      **式号与正文内容 L0**。GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      「谱生成代数」的原始出处链条。四条获取路径全部失败（brst-cohomology-sources.md §3.1）；
+      式号沿用旧节点 worldsheet.ddf-operators，未与原文核对。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（把物理态写成 DDF 态 + 零模物理态，DDF 态按横向振子 Fock 空间计数）"
+    note: |
+      作者本人的历史综述，**预设**本目标（DDF 态按横向振子 Fock 空间计数只有在本代数成立时才对）
+      但不给证明、不给编号（brst-cohomology-sources.md §3.1 第 1 条）。二手证据（L3），不承载论证。
+summary: |
+  标准论证：两个 DDF 算子的围道互相形变，答案由被积量之间的 OPE 单极点留数给出。
+
+  第 1 步（两个被积量的 OPE）。记 O^i_m(z) = ∂X^i(z) e^{i m k_0·X(z)}。用 XX OPE 与
+  指数算符的重排序规则，O^i_m(z) O^j_n(w) 的前因子是 (z-w)^{2α' m n k_0·k_0}；
+  **类光条件 k_0² = 0 使该指数为 0**，故两个顶点算子之间没有分支切割，OPE 是纯洛朗型的，
+  围道形变才有意义。
+
+  第 2 步（缩并逐项）。剩下的奇异性来自三类缩并：
+    (i) ∂X^i(z) 与 ∂X^j(w)：给 -(α'/2) δ^{ij} / (z-w)² 型的二阶极点；
+    (ii) ∂X^i(z) 与 e^{i n k_0·X(w)}：系数 ∝ ε^i·k_0 = 0，**由横向条件消失**；
+    (iii) 对称的 ∂X^j(w) 与 e^{i m k_0·X(z)}：同样 ∝ ε^j·k_0 = 0，消失。
+  于是只剩 (i)，再乘上外面的 e^{i(m+n)k_0·X} 与由 z^{2α' m k_0·p} 型因子提供的整数幂
+  （**归一化 2α' k_0·p = 1 正是让这些幂次成为整数**，见 worldsheet.ddf-operators-v5 说明 (c)）。
+
+  第 3 步（取留数）。按 worldsheet.ope-commutator-dictionary，
+  [A^i_m, A^j_n] = ∮_w (dw/2πi) ∮_w (dz/2πi) O^i_m(z) O^j_n(w)（内围道绕 w），
+  即取 O^i_m(z)O^j_n(w) 的单极点留数再作 w 围道积分。
+  由第 2 步，留数中含 e^{i(m+n)k_0·X(w)}：
+    · m + n ≠ 0：留数本身又是一个横向 DDF 型积分，其 w 围道积分为零（全导数）；
+    · m + n = 0：指数退化为 1，二阶极点 (i) 与外层的 w^{m} 幂次配合，
+      留下纯 c-数 **m δ^{ij}**。
+  合起来即 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}。
+
+  这正是「谱生成代数」一名的由来：{A^i_n} 生成一份 D-2 维自由振子代数，
+  由快子壳上的一个物理态即可生成整塔 DDF 物理态（worldsheet.no-ghost-theorem-v4 第 (1b) 条）。
+gaps:
+  - "**式号与正文均未核实**。两条一手来源（GSW §2.3.3、GT 1972）的 loc 强度分别是 L4/L0 与 L0，正文都未获取。summary 里第 2、3 步的系数与幂次记账是本项目按标准 CFT 规则重建的，**没有逐字来源**；特别是第 3 步 m + n = 0 时右端恰为 m δ^{ij}（而不是 m δ^{ij} 乘某个 α' 或 k_0·p 的因子），依赖归一化 2α' k_0·p = 1，这一记账未与任何原文核对。"
+  - "第 3 步「m + n ≠ 0 时留数的 w 围道积分为零」这一句在 summary 里写成「全导数」，是标准说法；但严格说它需要「留数是某个权 1 主场的导数」这一类论断，本推导未逐步展开。若 reviewer 要求，应把这一步单列。"
+  - "整个论证依赖 worldsheet.ope-commutator-dictionary（physical-argument：径向排序 + 围道变形，未形式化）。这是本推导 status 的直接上限。"
+  - "**Lean 侧完全未起步**。`formal/StringFormal/NoGhost/VertexOperator.lean` 文件头 \"Mathematical gaps\" 第 2 条逐字：「**No operator products.** `V(b, z) V(b', w)` and hence `[A^i_m, A^j_n]` are untouched.」DDF.lean 文件头 \"What is NOT here\" 第 1 条同样说组装与该对易关系都没做。相比之下 worldsheet.ddf-commute-with-virasoro 只差一个基例，本条还需要先有顶点算子的乘积与重排序（E_+ E_- 交换），以及伴随 V(b)_J† = V(−b)_{−J}（Lean 侧目前只有 R-双线性型，无 sesquilinear 结构）。"
+  - "**(A^i_n)† = A^i_{−n} 未被本推导覆盖，本图也无该节点**。worldsheet.no-ghost-theorem-v4 (1b) 计算 H^⊥(k) 上的 Gram 矩阵时需要它（「横向 DDF Fock 空间的 Gram 矩阵是正定的」= 本代数 + 该伴随关系 + 真空归一化）。建议后续单独立卡。"
+  - "k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内：那里 A^i_n 本身没有定义。"
+  - "本推导不覆盖 A^i_n 作为代数算子的良定义性（worldsheet.ddf-transversality-gives-local-finiteness）：走解析围道路线时该问题不出现，走代数路线时它是前置条件。"
+notes: |
+  【本推导的来历】2026-09-11 拆卡：worldsheet.ddf-operators-v4 是一张 `status: rigorous` 的
+  **定义**卡，却在末段断言了本目标（以及 [L_m, A^i_n] = 0）。本推导把实际论证登记下来。
+
+  **status 定级理由**：论证走两个顶点算子的 OPE + 围道形变，不是有限步初等计算，
+  不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；一手来源未核实到式号，
+  也无可引用的数学文献严格证明（kac-raina-1987 的讲号/命题号在本项目中未核实且两版不可互换）。
+  故 physical-argument，**无 reviewer-verified 记录**。
+
+  **推导名 `--via-conformal-weight` 与 worldsheet.ddf-commute-with-virasoro--via-conformal-weight 同名后缀**：
+  两条推导共用同一套 CFT 机器（权与围道形变），但论证内容不同——
+  前者只需 T 与**一个**被积量的 OPE，本条需要**两个**被积量之间的 OPE。
+  沿用同一后缀是为了标明它们出自 v4 的同一段文本、同一处来源。
+author: curator
+created: "2026-09-11"

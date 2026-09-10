@@ -1,0 +1,79 @@
+id: worldsheet.ddf-commute-with-virasoro
+kind: proposition
+title: DDF 算子与全部 Virasoro 生成元对易：[L_m, A^i_n] = 0（∀ m, n）
+statement: |
+  设 A^i_n 是 worldsheet.ddf-operators-v5 定义的 DDF 算子（i = 2..D-1，n ∈ Z \ {0}；
+  类光参考方向 k_0² = 0，横向偏振 ε·k_0 = 0，标度按 2α' k_0·p = 1 逐塔取定，
+  故只在扇区 {p : k_0·p ≠ 0} 上有定义），L_m 是 worldsheet.virasoro-generators-free-boson
+  的自由玻色子 Virasoro 生成元（Sugawara 型，c = D）。则在该扇区的动量塔
+  ⊕_{N ∈ Z} F(p + N k_0) 上
+
+    [L_m, A^i_n] = 0    对所有 m ∈ Z 与所有 n ∈ Z \ {0}。
+
+  这里 L_m 指作用在塔上、逐层用该层动量的算子（第 N 层动量 p + N k_0），
+  A^i_n 把第 N 层送到第 N + n 层；对易子按这一族算子理解。
+
+  推论（本陈述的直接内容，不另立节点）：若 |ψ⟩ 是旧协变物理态
+  （worldsheet.old-covariant-physical-states：(L_0 − a)|ψ⟩ = 0 且 L_m|ψ⟩ = 0 ∀ m > 0），
+  则 A^i_n|ψ⟩ 满足 L_m (A^i_n |ψ⟩) = 0 ∀ m > 0；L_0 一条需连同质量壳记账
+  α'(p + n k_0)² = α' p² + n（由 k_0² = 0 与 2α' k_0·p = 1）一起读，
+  即 A^i_n 把能级移动 −n。因此 DDF 算子把物理态映为物理态。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      与 worldsheet.ddf-operators-v5 同一处来源；本节点承载的是 v4 陈述文本里
+      「DDF 算子与所有 Virasoro 生成元对易，[L_m, A^i_n] = 0（因 k_0² = 0、ε·k_0 = 0
+      使被积量是权 1 primary）」这一句。**式号仍未核实（L0）**；GSW 用 mostly-minus，
+      已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      DDF 算子与谱生成代数的原始出处链条中的一篇。式号沿用旧节点 worldsheet.ddf-operators，
+      未与原文核对（literature/extractions/brst-cohomology-sources.md §3.1：GT 1972 正文四条获取路径全部失败）。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（'physical state = DDF 态 + 零模物理态' 的写法）"
+    note: |
+      作者本人的历史综述。它**预设**了 DDF 态是物理态（即本命题的推论），但**不给证明**，
+      也不给编号（brst-cohomology-sources.md §3.1 第 1 条）。故只作为「本命题是文献中被使用的标准事实」
+      的二手证据，不作为论证来源。
+tags: [bosonic-string, spectrum-generating-algebra, virasoro]
+notes: |
+  【拆卡来源，2026-09-11】本节点是 worldsheet.ddf-operators-v4 的拆分产物之一。
+  v4 是一张 `status: rigorous` 的**定义**卡，却在末段一并断言了本命题与
+  worldsheet.ddf-transverse-oscillator-algebra，于是这两条命题以「定义的一部分」的身份
+  继承了 rigorous，而它们在本图中从未被独立论证过。拆卡后本节点按其**实际论证**
+  （OPE + 围道形变，见推导 --via-conformal-weight）标 physical-argument。
+  docs/ROADMAP.md 待拆清单的 `ddf-operators-v4` 项，lead 已同意。
+
+  【为什么不是 rigorous】docs/STATUS_LEVELS.md 的 rigorous 例外条款要求
+  「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。本命题的标准论证不是有限步初等计算：
+  它走的是「∂X^i e^{i n k_0·X} 是权 1 primary ⟹ 围道积分与 L_m 对易」，用到
+  形式 OPE 与围道形变（T(z) 与被积量的 OPE 只有一阶与二阶极点，且二阶极点系数正比于 k_0² = 0 与 ε·k_0 = 0）。
+  本项目尚未把「围道形变 ⟹ 模态对易」这一步作为可引用的严格节点建起来
+  （最接近的是 worldsheet.ope-pole-mode-commutator-dictionary，但那是形式分布版的模态字典，
+  且它自身不是 formalized 的围道论证）。另外两条一手来源（GSW、GT 1972）的定位都未核实到式号。
+  故 physical-argument。
+
+  【升级路径】
+  (i) 走 Lean：形式化中间恒等式
+      L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m}
+      （两侧 L_m 动量参数不同，这是塔上算子的必然写法），共形权 h = ½ b·b = α' k_0²，
+      故 k_0² = 0 ⇒ h = 0。**归纳步已有**（`Fock.vertexOsc_unique` /
+      `Fock.eq_zero_of_vertex_recursion` 把该恒等式归约为真空上的单条等式，
+      配合 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode`），**基例（L_m 作用在
+      相干态系数 `Fock.creaExp` 上）未做**（VertexOperator.lean 文件头 "Mathematical gaps" 第 1 条、
+      DDF.lean 文件头 "What is NOT here" 第 2 条）。formalizer 正在做
+      `formal/StringFormal/NoGhost/VertexWeight.lean`（截至 9691057 未合并）。
+      **在基例完成前，图中不得把 [L_m, A^i_n] = 0 或「e^{i k_0·X} 权为 0」记为已机器验证。**
+  (ii) 走文献：拿到 GT 1972 正文或 GSW 的式号，或找到数学文献（顶点代数教材）里
+      「权 1 primary 的模态与 Virasoro 对易」的带编号严格陈述。注意 kac-raina-1987 的
+      讲号/命题号在本项目中**未核实且两版不可互换**（见 literature/sources.bib），不得猜编号。
+
+  【与 worldsheet.ddf-transverse-oscillator-algebra 的关系】两条是独立命题：
+  本条只需要被积量是权 1 primary（k_0² = 0、ε·k_0 = 0），不需要任何两个顶点算子的乘积；
+  横向振子代数需要 V(b, z) V(b', w) 的 OPE，形式化路径完全不同（Lean 侧后者尚未起步）。
+  故按「一个节点一个命题」分开。
+author: curator
+created: "2026-09-11"

@@ -157,11 +157,30 @@ def test_seed_graph_validates() -> None:
     assert not errors, "\n".join(str(e) for e in errors)
 
 
-def test_seed_no_ghost_v4_is_rigorous_with_inferred_kac() -> None:
+def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
+    """无鬼定理 v4 的有效状态是 physical-argument，不是 rigorous。
+
+    2026-09-11 拆卡（worldsheet.ddf-operators-v4 → v5 纯定义 + 三条命题）之前，
+    两条 DDF 对易关系写在一张 ``kind: definition`` + ``status: rigorous`` 的卡的
+    陈述文本里，于是以"定义的一部分"的身份把 rigorous 传播上来。
+    拆开后它们各自挂 physical-argument 的推导（论证是 OPE + 围道形变，
+    来源未核实到式号），无鬼定理的有效状态相应下降。
+
+    **这是记账修正，不是论证退步**：推导 --via-goddard-thorn 自身仍标 rigorous。
+    若哪天两条命题之一升到 rigorous/formalized，本测试需要相应更新。
+    """
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
+    # 瓶颈就是拆出来的两条 DDF 命题
+    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "physical-argument"
+    assert (
+        effs["worldsheet.ddf-transverse-oscillator-algebra"].name
+        == "physical-argument"
+    )
+    # 纯定义卡本身不受影响
+    assert effs["worldsheet.ddf-operators-v5"].name == "rigorous"
 
 
 def test_superseded_no_ghost_v2_points_to_v3_but_keeps_its_derivation() -> None:
@@ -204,7 +223,39 @@ def test_superseded_no_ghost_v3_points_to_v4_but_keeps_its_derivation() -> None:
     assert effs["worldsheet.no-ghost-theorem-v3"].name == "rigorous"
     # v4 未被取代，是当前的活节点
     assert g.statements["worldsheet.no-ghost-theorem-v4"].superseded_by is None
-    assert g.statements["worldsheet.ddf-operators-v4"].superseded_by is None
+
+
+def test_ddf_operators_v4_split_into_v5_plus_propositions() -> None:
+    """ddf-operators-v4 被 v5 取代（2026-09-11 拆卡）。
+
+    v4 是"一卡三事"（定义 + 两条对易关系），拆成一张纯定义卡 v5 与三条命题：
+    [L_m, A^i_n] = 0、[A^i_m, A^j_n] = m δδ、以及横向性 ⟹ 模态和局部有限。
+    v3 → v4 的旧链条不动（v3 的 superseded_by 仍指向 v4）。
+    """
+    g = load_graph(ROOT)
+    assert (
+        g.statements["worldsheet.ddf-operators-v4"].superseded_by
+        == "worldsheet.ddf-operators-v5"
+    )
+    assert g.statements["worldsheet.ddf-operators-v5"].superseded_by is None
+    assert g.statements["worldsheet.ddf-operators-v5"].kind == "definition"
+    for sid in (
+        "worldsheet.ddf-commute-with-virasoro",
+        "worldsheet.ddf-transverse-oscillator-algebra",
+        "worldsheet.ddf-transversality-gives-local-finiteness",
+    ):
+        assert g.statements[sid].kind == "proposition"
+        assert g.statements[sid].status is None, "命题的 status 由推导计算，不得手写"
+        assert g.derivations_for(sid), f"{sid} 必须有推导"
+    # 无鬼定理的推导已就地换代：不再依赖 v4，改依赖 v5 + 两条对易命题
+    deriv = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
+    dep_ids = {d.id for d in deriv.depends_on}
+    assert "worldsheet.ddf-operators-v4" not in dep_ids
+    assert {
+        "worldsheet.ddf-operators-v5",
+        "worldsheet.ddf-commute-with-virasoro",
+        "worldsheet.ddf-transverse-oscillator-algebra",
+    } <= dep_ids
 
 
 def test_brst_ocq_equivalence_has_two_independent_derivations() -> None:
