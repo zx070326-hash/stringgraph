@@ -5,6 +5,7 @@ import argparse
 import sys
 from pathlib import Path
 
+from .axioms import check_axioms, format_axioms_report
 from .loader import find_project_root, load_graph
 from .report import format_report, format_why, full_report, search, status_report, to_dot, to_json, why_report
 from .validate import validate
@@ -23,6 +24,23 @@ def main(argv: list[str] | None = None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
 
     sub.add_parser("validate", help="validate the whole graph; exit 1 on errors")
+    p_ax = sub.add_parser(
+        "check-axioms",
+        help="run formal/scripts/check_axioms.lean over every formal.lean_decl; exit 1 on non-standard axioms",
+    )
+    p_ax.add_argument("--json", action="store_true")
+    p_ax.add_argument(
+        "--formalized-only",
+        action="store_true",
+        help="only check declarations that back a `status: formalized` derivation",
+    )
+    p_ax.add_argument(
+        "--decl",
+        action="append",
+        default=[],
+        metavar="NAME",
+        help="check only this declaration name (repeatable)",
+    )
     p_status = sub.add_parser("status", help="effective status of one statement")
     p_status.add_argument("id")
     p_status.add_argument("--json", action="store_true")
@@ -50,6 +68,11 @@ def main(argv: list[str] | None = None) -> int:
               f"{len(g.milestones)} milestones, {len(g.conventions)} conventions: "
               f"{n_err} errors, {n_warn} warnings")
         return 1 if n_err else 0
+
+    if args.cmd == "check-axioms":
+        rep = check_axioms(g, formalized_only=args.formalized_only, only=args.decl)
+        print(to_json(rep) if args.json else format_axioms_report(rep))
+        return int(rep["exit_code"])
 
     if args.cmd == "status":
         if args.id not in g.statements:

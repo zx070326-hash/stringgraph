@@ -6,6 +6,13 @@ from pathlib import Path
 
 import pytest
 
+from stringgraph.axioms import (
+    STANDARD_AXIOMS,
+    check_axioms,
+    collect_decls,
+    format_axioms_report,
+    parse_output,
+)
 from stringgraph.loader import find_project_root, load_graph
 from stringgraph.propagate import compute_all
 from stringgraph.report import format_why, full_report, search, why_report
@@ -618,3 +625,246 @@ def test_report_hides_superseded_open_cards() -> None:
     rep = full_report(g)
     assert "worldsheet.no-ghost-theorem" not in rep["open_propositions"]
     assert any(x.startswith("worldsheet.no-ghost-theorem -> ") for x in rep["superseded"])
+
+
+# ---------------------------------------------------------------- check-axioms
+#
+# The Lean subprocess is mocked everywhere below: pytest must not need a built Mathlib.
+# The real run is `uv run stringgraph check-axioms` after `cd formal && lake build`.
+
+
+@pytest.fixture
+def mini_formal(mini: Path) -> Path:
+    """`mini` plus two nodes carrying `formal.lean_decl` and one `formalized` derivation."""
+    _write(mini, "formal/Fake.lean", "-- placeholder so validate's lean_file check passes\n")
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-f.yaml",
+        """
+        id: worldsheet.def-f
+        kind: definition
+        status: formalized
+        title: F
+        statement: a formalized definition
+        sources: [{ref: ref-a, loc: "2"}]
+        formal:
+          lean_decl: Fake.decl_one
+          lean_file: Fake.lean
+        """,
+    )
+    _write(
+        mini,
+        "graph/statements/worldsheet/prop-g.yaml",
+        """
+        id: worldsheet.prop-g
+        kind: proposition
+        title: G
+        statement: g holds
+        sources: [{ref: ref-b, loc: "thm 2"}]
+        formal:
+          lean_decl: Fake.thm_two
+          lean_file: Fake.lean
+        """,
+    )
+    _write(
+        mini,
+        "graph/derivations/worldsheet/prop-g--via-lean.yaml",
+        """
+        id: worldsheet.prop-g--via-lean
+        target: worldsheet.prop-g
+        kind: proof
+        status: formalized
+        depends_on: [{id: worldsheet.def-f}]
+        sources: [{ref: ref-b, loc: "thm 2"}]
+        summary: by lean
+        """,
+    )
+    return mini
+
+
+def _fake_runner(lines: list[str], code: int = 0, stderr: str = ""):
+    """Stand-in for the Lean subprocess; records the names it was asked about."""
+
+    def run(root: Path, decls: list[str]) -> tuple[int, str, str]:
+        run.decls = list(decls)  # type: ignore[attr-defined]
+        return code, "".join(f"{ln}\n" for ln in lines), stderr
+
+    run.decls = []  # type: ignore[attr-defined]
+    return run
+
+
+def test_mini_formal_validates(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    errors = [p for p in validate(g) if p.severity == "error"]
+    assert not errors, "\n".join(str(e) for e in errors)
+
+
+def test_parse_output_reads_ok_bad_missing() -> None:
+    text = (
+        "# check_axioms: 4 declaration(s), imports: StringFormal\n"
+        "# standard axioms: propext Classical.choice Quot.sound\n"
+        "ok\tA.one\tpropext Classical.choice Quot.sound\n"
+        "ok\tA.two\t\n"
+        "bad\tA.three\tsorryAx propext\n"
+        "missing\tA.four\tno such constant in the imported environment\n"
+        "\n"
+        "# summary: ok=2 bad=1 missing=1\n"
+    )
+    results = {r.decl: r for r in parse_output(text)}
+    assert set(results) == {"A.one", "A.two", "A.three", "A.four"}
+    assert results["A.one"].status == "ok"
+    assert results["A.one"].axioms == list(STANDARD_AXIOMS)
+    assert results["A.one"].nonstandard == []
+    assert results["A.two"].axioms == []
+    assert results["A.three"].status == "bad"
+    assert results["A.three"].nonstandard == ["sorryAx"]
+    assert results["A.four"].status == "missing"
+    assert results["A.four"].axioms == []
+
+
+def test_collect_decls_maps_decls_to_nodes(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    uses = {u.decl: u for u in collect_decls(g)}
+    assert set(uses) == {"Fake.decl_one", "Fake.thm_two"}
+    assert uses["Fake.decl_one"].statements == ["worldsheet.def-f"]
+    assert uses["Fake.decl_one"].lean_files == ["Fake.lean"]
+    assert uses["Fake.decl_one"].formalized_derivations == []
+    assert uses["Fake.thm_two"].formalized_derivations == ["worldsheet.prop-g--via-lean"]
+    # only the declaration a `formalized` derivation rests on
+    assert [u.decl for u in collect_decls(g, formalized_only=True)] == ["Fake.thm_two"]
+
+
+def test_check_axioms_clean_run(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner(
+        [
+            "# check_axioms: 2 declaration(s), imports: StringFormal",
+            "ok\tFake.decl_one\tpropext",
+            "ok\tFake.thm_two\tpropext Classical.choice Quot.sound",
+        ]
+    )
+    rep = check_axioms(g, runner=runner)
+    assert runner.decls == ["Fake.decl_one", "Fake.thm_two"]
+    assert rep["exit_code"] == 0
+    assert rep["problems"] == []
+    assert rep["counts"] == {"checked": 2, "ok": 2, "bad": 0, "missing": 0}
+    # stable JSON keys for agent consumption
+    assert set(rep) >= {
+        "command",
+        "cwd",
+        "standard_axioms",
+        "declarations",
+        "counts",
+        "problems",
+        "exit_code",
+    }
+    entry = rep["declarations"][1]
+    assert set(entry) == {
+        "decl",
+        "status",
+        "axioms",
+        "detail",
+        "statements",
+        "lean_files",
+        "formalized_derivations",
+    }
+    assert entry["decl"] == "Fake.thm_two"
+    assert entry["formalized_derivations"] == ["worldsheet.prop-g--via-lean"]
+    assert "2 declarations checked: 2 ok" in format_axioms_report(rep)
+
+
+def test_check_axioms_sorry_maps_to_statement_and_derivation(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner(
+        ["ok\tFake.decl_one\tpropext", "bad\tFake.thm_two\tpropext sorryAx"],
+        code=1,
+    )
+    rep = check_axioms(g, runner=runner)
+    assert rep["exit_code"] == 1
+    assert rep["counts"]["bad"] == 1
+    wheres = {p["where"] for p in rep["problems"]}
+    assert "graph/statements/worldsheet/prop-g.yaml" in wheres
+    assert "graph/derivations/worldsheet/prop-g--via-lean.yaml" in wheres
+    assert all(p["severity"] == "error" for p in rep["problems"])
+    assert any("sorryAx" in p["message"] for p in rep["problems"])
+    assert any("downgrade this derivation" in p["message"] for p in rep["problems"])
+    # the clean declaration produces no problem
+    assert not any("Fake.decl_one" in p["message"] for p in rep["problems"])
+
+
+def test_check_axioms_missing_decl_is_error(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner(
+        [
+            "missing\tFake.decl_one\tno such constant in the imported environment",
+            "ok\tFake.thm_two\tpropext",
+        ],
+        code=1,
+    )
+    rep = check_axioms(g, runner=runner)
+    assert rep["exit_code"] == 1
+    assert rep["counts"]["missing"] == 1
+    msgs = [
+        p["message"] for p in rep["problems"] if p["where"] == "graph/statements/worldsheet/def-f.yaml"
+    ]
+    assert msgs and "is not a declaration in the built environment" in msgs[0]
+
+
+def test_check_axioms_no_verdict_for_a_requested_decl_is_error(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    rep = check_axioms(g, runner=_fake_runner(["ok\tFake.decl_one\tpropext"]))
+    assert rep["exit_code"] == 1
+    assert any("no verdict for 'Fake.thm_two'" in p["message"] for p in rep["problems"])
+    assert rep["declarations"][1]["status"] == "no-result"
+
+
+def test_check_axioms_reports_unexpected_status(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner(["weird\tFake.decl_one\t", "ok\tFake.thm_two\tpropext"])
+    rep = check_axioms(g, runner=runner)
+    assert rep["exit_code"] == 1
+    assert any("unexpected status 'weird'" in p["message"] for p in rep["problems"])
+
+
+def test_check_axioms_without_lean_toolchain_exits_2(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+
+    def boom(root: Path, decls: list[str]) -> tuple[int, str, str]:
+        raise FileNotFoundError("lake")
+
+    rep = check_axioms(g, runner=boom)
+    assert rep["exit_code"] == 2
+    assert rep["problems"] and "cannot run the checker" in rep["problems"][0]["message"]
+
+
+def test_check_axioms_crash_without_output_exits_2(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner([], code=1, stderr="uncaught exception: unknown package 'StringFormal'")
+    rep = check_axioms(g, runner=runner)
+    assert rep["exit_code"] == 2
+    assert any("without producing any result line" in p["message"] for p in rep["problems"])
+
+
+def test_check_axioms_decl_filter_accepts_names_absent_from_the_graph(mini_formal: Path) -> None:
+    g = load_graph(mini_formal)
+    runner = _fake_runner(
+        ["ok\tFake.thm_two\tpropext", "missing\tOther.decl\tno such constant"], code=1
+    )
+    rep = check_axioms(g, only=["Fake.thm_two", "Other.decl"], runner=runner)
+    assert runner.decls == ["Fake.thm_two", "Other.decl"]
+    assert rep["counts"]["checked"] == 2
+    assert any(p["where"] == "formal.lean_decl Other.decl" for p in rep["problems"])
+
+
+def test_seed_graph_decls_point_at_the_lean_island() -> None:
+    """The real graph's `lean_decl` names are collected and attached to their nodes."""
+    g = load_graph(ROOT)
+    uses = {u.decl: u for u in collect_decls(g)}
+    assert "StringFormal.NoGhost.Fock.lie_Lop_Lop" in uses
+    assert (
+        "worldsheet.free-boson-central-charge-d"
+        in uses["StringFormal.NoGhost.Fock.lie_Lop_Lop"].statements
+    )
+    assert all(u.decl.startswith("StringFormal.") for u in uses.values())
+    formalized = collect_decls(g, formalized_only=True)
+    assert formalized and all(u.formalized_derivations for u in formalized)
