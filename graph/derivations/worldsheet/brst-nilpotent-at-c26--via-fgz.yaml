@@ -13,6 +13,12 @@ summary: |
   2-上循环 γ 可取零。对 Virasoro 代数，鬼场表示的中心荷为 −26（Prop 2.1(i)），故当物质表示
   中心荷为 26 时相对复形上 γ = 0，Prop 1.2 适用，Q_B^2 = 0。
 gaps:
-  - "FGZ 对 H²(g)=0 与 γ=0 的假设在 Virasoro 情形如何具体满足，文中是叙述而非编号命题；细节见 literature/extractions/brst-cohomology-sources.md §1.2。"
+  - "FGZ 对 H²(g)=0 与 γ=0 的假设在 Virasoro 情形如何具体满足，文中是叙述而非编号命题；细节见 literature/extractions/brst-cohomology-sources.md §1.2。
+     **补注（reviewer-batch3 建议项，curator 2026-09-11）**：把 Prop 1.2 用到 g = Vir 上时，「H²(g) = 0」要的是
+     **Virasoro 代数本身作为李代数的二阶上同调消失**，即 H²(Vir, C) = 0——等价于说 Vir 已经是 Witt 代数的
+     **万有中心扩张**（再中心扩张一次不出新东西）。这**不是** worldsheet.virasoro-unique-central-extension 那条命题：
+     后者讲的是 H²(Witt, C) 一维（Witt 恰有一个非平凡一维中心扩张，即 Vir）。两者是不同的上同调群，
+     一个的成立不蕴含另一个。**本图中没有 H²(Vir, C) = 0 的节点**，本推导对这一步无任何来源支撑；
+     要补，需要一条独立的数学节点（标准参考是 Virasoro 是万有中心扩张的证明），并把它加进 depends_on。"
 author: lead
 created: "2026-09-10"

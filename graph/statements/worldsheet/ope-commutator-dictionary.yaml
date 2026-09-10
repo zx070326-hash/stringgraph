@@ -27,5 +27,22 @@ notes: |
   本图中一切「由 OPE 推出算子代数」的推导（Virasoro 代数的自由场实现、Schwarzian 变换、
   自举方程）都经过本节点或与它同构的论证，因而都封顶在 physical-argument。
   若日后要突破这个封顶，需要的是一条独立的、把 OPE 收敛性证明出来（或作为公理引入）的节点。
+
+  **【2026-09-11：严格路线不再挂在本卡上】**（reviewer-batch3 必修第 3 条，curator）。
+  原先挂在本卡上的 worldsheet.ope-commutator-dictionary--via-locality-theorem（Schottenloher Thm 10.10）
+  在自己的 gaps 里承认它**证的比本卡的陈述弱**，现已改挂到新节点
+  **worldsheet.ope-pole-mode-commutator-dictionary**（形式分布版、玻色型），
+  并按 `<statement-id>--via-<method>` 规则更名为 worldsheet.ope-pole-mode-commutator-dictionary--via-locality-theorem。
+  本卡的陈述文本不变（陈述不可变），其唯一推导恢复为
+  worldsheet.ope-commutator-dictionary--via-contour-deformation（physical-argument），有效状态不变。
+
+  **本卡与新节点之间还差什么**（这就是本卡真正的、尚未严格化的剩余内容）：
+  (a) **解析层**：本卡说的是「径向排序 R{A(z)B(w)} 在环域上全纯、|z|>|w| 与 |z|<|w| 两条围道之差 = 绕 w 的小围道、
+      在小围道上取留数」。新节点里对应的是 Res_z 与形式展开 i_{z,w}/i_{w,z} 之差，**纯形式**，
+      不含「两种算子排序互为同一全纯函数的解析延拓」这一断言。把二者接起来正需要
+      math.vertex-algebra-ope-analytic-convergence（前提是复解析局域性）。
+      一句话：本卡 = 新节点 + 「径向排序围道 = 形式分布残数」这一步。
+  (b) **费米推广**：新节点只覆盖玻色型（偶）场；b、c 及任何奇场的反对易子版本需要 Thm 10.10 的超代数版，
+      本轮未核实编号。bc 部门因此仍只有围道那条物理推导。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
