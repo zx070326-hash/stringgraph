@@ -15,6 +15,10 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
 
+### 读大文件的纪律
+
+`Sugawara.lean`（约 1400 行）、`VertexOperator.lean`（约 800 行）、`PhysicalStates.lean`（约 800 行）**不要整文件 Read**：三名 formalizer 曾在"读源文件"阶段停摆。一律 `grep -n "<声明名>"` 定位，再 `sed -n a,bp` 读几十行。任务拆小：一个声明一次提交。
+
 ## 与图的关系
 
 - 图节点通过 `formal.lean_decl` 与 `formal.lean_file` 指向这里的声明。`stringgraph validate` 检查文件存在。
