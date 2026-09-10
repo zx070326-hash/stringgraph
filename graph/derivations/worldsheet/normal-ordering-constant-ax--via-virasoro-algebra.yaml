@@ -1,0 +1,82 @@
+id: worldsheet.normal-ordering-constant-ax--via-virasoro-algebra
+target: worldsheet.normal-ordering-constant-ax
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      只用到无中心荷的 SL(2,R) 子代数 [L_1, L_{−1}] = 2L_0（原书 (2.6.22)）。
+      中心项在 m = 1 处为 (c/12)(1³ − 1) = 0，故本推导**与 c 的值无关**，
+      特别地不依赖 worldsheet.free-boson-central-charge-d。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      提供「产生-湮灭正规序」一侧的 L_m，以及零动量基态 |0;0⟩
+      （α^μ_n|0;0⟩ = 0 对 n > 0，且 α^μ_0|0;0⟩ = 0 因 k = 0）。
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: 提供「共形正规序」一侧的 L_m，即两种写法之差 a^X 的另一半。
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: |
+      把共形正规序的 T(z) 展成 Laurent 模 L_m，是「L_0 有一个有限且可算的正规序常数」
+      这句话的前提（原书 p.59 逐字：「Now the left-hand side has a finite and unambiguous
+      definition in terms of the Laurent coefficients of the `: :`-ordered energy-momentum tensor」）。
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    note: 两种正规序针对的是同一个 T(z) = −(1/α'):∂X^μ∂X_μ:。
+  - id: worldsheet.open-string-doubling-trick
+    inferred: true
+    note: |
+      与 --via-state-operator 同一条边、同一个理由：本推导要定的 a^X 是**开弦** L_0
+      的两种正规序之差（worldsheet.virasoro-generators-free-boson 的物理来源是 §2.7
+      (2.7.25)/(2.7.27) 的开弦 L_m 与 α_0 = (2α')^{1/2}p），而 (2.7.8) 的代数论证发生在
+      无边界的平面上。把半圆围道的 L_m 与整圆围道的 L_m 认同，用的是 doubling trick。
+      **标 inferred 的理由**：原书 p.59 (2.7.7)–(2.7.9) 处读不到对 §2.6 (2.6.28) 的回指；
+      本轮页图核实（§12.1）逐条列出了 §2.7 的全部式号，其中没有这条回指。
+      ⚠ 与 --via-state-operator 不同的是：那里旧记录说「文献列出的依赖不含 E40」，
+      而 §2.7 原文实际回指的是 **(2.6.22)**（SL(2,R) 子代数），不是 (2.6.28)。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, p.59, eq. (2.7.7)–(2.7.9)；关键步骤是 (2.7.8) 2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0，用的子代数是 §2.6 eq. (2.6.22) [L_1, L_{−1}] = 2L_0"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）】原书 p.59：
+        "There are several ways to determine it. **The simplest uses the Virasoro algebra,**
+           2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0 ,   (2.7.8)
+         and so   a^X = 0 .   (2.7.9)"
+      并在 p.73 自陈这是「three honest ways」的第一条。
+      (2.6.22) 逐字给出 [L_0,L_1] = −L_1、[L_0,L_{−1}] = L_{−1}、**[L_1,L_{−1}] = 2L_0**
+      并注明这个 SL(2,R) 子代数**不含中心荷**。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E40、E42/E43/Q11）与 §12.10 表 B 第 14 项。
+summary: |
+  原书 §2.7 定 a^X 的**正文**路线（p.73 自陈的「三种诚实算法」之第一条，且被称为 "the simplest"）。
+
+  把共形正规序的 L_0 写成 (2.7.7)
+    L_0 = α'p²/4 + Σ_{n≥1} α_{−n}·α_n + a^X,
+  即两种正规序之差是 c-数 a^X。取零动量真空 |0;0⟩，右端前两项各自给零，故 L_0|0;0⟩ = a^X|0;0⟩。
+
+  另一方面，由 Virasoro 代数的 SL(2,R) 子代数 (2.6.22)（中心项在此处恒为零）
+    2L_0 = [L_1, L_{−1}],
+  作用在 |0;0⟩ 上：L_1|0;0⟩ = 0（L_1 是降算子，把零动量真空湮灭），
+  而 L_{−1}|0;0⟩ = (2α')^{1/2} k·α_{−1}|0;0⟩ = 0（因 k = 0，见 (4.1.18)）。
+  于是 2a^X|0;0⟩ = 2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0，即 a^X = 0。
+
+  **与 --via-state-operator 的关系**：那条是原书「三种诚实算法」的第三条（p.72–73 + 习题 2.13/2.14），
+  依赖 worldsheet.state-operator-isomorphism；本条**不依赖**它，只用模式代数，
+  因而是一条真正独立的路线。**与 §1.3 的 zeta 路线的关系**：原书 p.73 逐字把 Σ_{n≥1}n → −1/12
+  称为 "a useful mnemonic ... that can be checked by one of the more honest methods"，
+  即 zeta 路线**不在**三条诚实算法之列（见 worldsheet.zeta-regularized-sum-of-integers）。
+gaps:
+  - "**为什么不是 rigorous**：本推导的三个输入里有两个在本图中不是严格的——
+     worldsheet.energy-momentum-laurent-modes（把算子值分布展成 Laurent 模）与
+     worldsheet.conformal-normal-ordering-v2（共形正规序，经 worldsheet.free-scalar-propagator
+     依赖路径积分）。代数步骤本身（2L_0 = [L_1,L_{−1}] 作用在被 L_{±1} 湮灭的态上）是三行有限计算，
+     但它作用的对象不是本图中严格定义的。按 docs/STATUS_LEVELS.md「不确定时选低的那级」取
+     physical-argument。"
+  - "**L_1|0;0⟩ = 0 与 L_{−1}|0;0⟩ = 0 这两步在原书 (2.7.8) 处是默认的**，没有单独写出。
+     前者对任何最高权型真空成立；后者**只在零动量 k = 0 时成立**（一般 k 有
+     L_{−1}|0;k⟩ = (2α')^{1/2}k·α_{−1}|0;k⟩ ≠ 0，即原书 (4.1.18)）。
+     即 (2.7.8) 隐含了『取 k = 0』这个选择，而 a^X 与 k 无关这件事本身没有被论证
+     （它由 a^X 是 c-数这一点保证，而后者又依赖上一条 gap 里的模展开）。本图无对应节点。"
+  - "「两种正规序之差是一个 c-数」这一步（即 (2.7.7) 的成立本身）在本图与原书中都不是被证明的，
+     而是由两种正规序都把 L_0 写成同一个双线性式加常数这一构造性事实给出。"
+  - "开弦 vs 平面的边（worldsheet.open-string-doubling-trick）标了 inferred，
+     且该节点限定在**纯 Neumann** 边界条件；Dirichlet 情形下结论是否逐字不变，本图未验证。"
+author: curator-v1-locs
+created: "2026-09-11"
