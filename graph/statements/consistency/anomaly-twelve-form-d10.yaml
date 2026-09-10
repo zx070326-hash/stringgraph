@@ -89,5 +89,17 @@ notes: |
 
   【4. n 的角色】n 只通过规范群维数进入反常多项式，这一点在
   consistency.gravitational-anomaly-polynomial-d10 里才真正用到（那里 n − 496 出现在系数里）。
+
+  【6. ★ 升维字典的来源缺口：两个新的 L1 来源同样不证（2026-09-11 补记）】
+  上面 sources 里 zumino-wu-zee-1984 那条已记：「2n 维反常 ↔ 2n+2 维不变多项式」这条**升维字典本身
+  仍无任何已核实来源**。本轮两条新读到的 L1 文献**不改变这一点，反而加强它**：
+  · **adams-dewolfe-taylor-2010**（arXiv:1006.1352v2 第二节）：直接写下十二形式 Î₁₂ 与下降关系
+    Î₁₂ = dÎ₁₁、δÎ₁₁ = dÎ₁₀、δ log Z ~ ∫Î₁₀（其 (5)(6)），**不加论证、不给这条字典的引用**；
+  · **polchinski-1998-v2 §12.2**：同样用十二形式 + 下降方程，且**明说本书不做这个计算**
+    （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md **E6** 逐字
+     「we will not repeat it here but just quote the result」）。
+  ⇒ 至此，本图读过的**四条** L1 来源（GS 1984、ADT 2010、Polchinski v2 ch.12，以及只到 L2 的 ZWZ）
+  **全部把这条字典当作已知**。任何以本卡为依赖的推导都应把这一条写进 gaps。
+  ⚠ 本卡的 status（physical-argument）与 statement **不因此改动**。
 author: curator
 created: "2026-09-11"

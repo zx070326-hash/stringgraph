@@ -1,0 +1,47 @@
+id: math.hexagon-odd-twist-count--via-binomial-theorem
+target: math.hexagon-odd-twist-count
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.2.2, p. 165：「…the number of ways in which an odd number of twists can be distributed on the internal legs of a hexagon diagram, which is 32.」"
+    note: |
+      L1。**GSW 只断言结果 32，不给任何计算。** 下面两行证明是本图补出的，
+      属 docs/STATUS_LEVELS.md 的「有限步初等计算」一类，但**尚无 reviewer 独立复核记录**，
+      故本推导按该文件的规定取 physical-argument（见 gaps 末条）。
+summary: |
+  **一般 n 的证明（两行）。** 由二项式定理，对任意 n ≥ 1，
+
+      (1 + x)^n = Σ_{k=0}^{n} C(n,k) x^k。
+
+  取 x = 1：Σ_{k} C(n,k) = 2^n。
+  取 x = −1：Σ_{k} (−1)^k C(n,k) = (1 − 1)^n = 0（这里用到 n ≥ 1）。
+  两式相减再除以 2：
+
+      Σ_{k 奇} C(n,k) = (2^n − 0)/2 = **2^{n−1}**。
+
+  **n = 6 的直接验算。** C(6,1) = 6、C(6,3) = 20、C(6,5) = 6，和为 6 + 20 + 6 = **32 = 2⁵**，
+  与一般公式 2^{6−1} = 32 一致。
+
+  **组合解释**：把「扭转 / 不扭转」的分配等同于子集选取后，「扭转数为奇数」就是「子集基数为奇数」；
+  上式说：n ≥ 1 时奇基数子集与偶基数子集各占一半。
+gaps:
+  - "「六边形图的内线数 = 6」这一步**不在本推导范围内**，也不在目标卡的陈述里：GSW 原文只说「the internal legs of a hexagon diagram」，没有写出 6（抽取记录 literature/extractions/gsw-1987-v2.md §5.4 明记这是抽取者从图形读出的）。要把本卡接到物理侧，必须在那条边上标 inferred。"
+  - "「不可定向六边形图的数目 = 奇数扭转的分配方式数」是 GSW 的物理断言（世界面拓扑的计数），**不是本推导的内容**，本图也没有为它建节点。"
+  - "缺 reviewer 独立复核记录，故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款不取 rigorous。计算本身是二项式定理的两行推论，与 math.tr-f6-coefficient-vanishing、math.mixed-anomaly-trace-conditions-n32 当初的处理一致（那两条经 reviewer 复核后已升 rigorous）。"
+notes: |
+  【档位说明】这是**记账保守**，不是对算术的怀疑：Σ_{k 奇} C(n,k) = 2^{n−1} 是标准二项式恒等式。
+  ⚠ **`kind` 也只能是 physical-argument**：校验器强制「kind: proof ⟹ status ∈ {formalized, rigorous}」，
+  而缺 reviewer 复核记录时 status 只能是 physical-argument。
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，reviewer 独立复核后应**同时**把
+  `kind` 改成 `proof`、`status` 改成 `rigorous`，并在此写 `reviewer-verified: <agent>, <date>`
+  （math.tr-f6-coefficient-vanishing--via-coefficient-inspection 与
+  math.mixed-anomaly-trace-conditions-n32--via-integer-linear-solve 走的正是这条路）；
+  Lean 化（`decide` 或 `Finset` 引理）之后可另加一条 `--via-lean` 的 formalized 推导。
+  **请 reviewer 复核**：本推导的两行代数 + n = 6 的显式相加（6 + 20 + 6 = 32）。
+
+  【本推导没有依赖，是有意的】结论是纯二项式恒等式，不需要图内任何节点；
+  校验器会给出「derivation has no dependencies」的 warning，与 math 区其它初等节点同类。
+author: curator
+created: "2026-09-11"

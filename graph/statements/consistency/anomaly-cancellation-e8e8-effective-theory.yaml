@@ -26,6 +26,16 @@ sources:
   - ref: green-schwarz-1984
     loc: "PLB p.120–121（重印 611–612），(18′)(23′) 与其后总结句；E₈ × E₈ 的处理分布在 (4′)(9c′)(12′)(17′)(18′)(23′) 六处"
     note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E12/E16。
+  - ref: gsw-1987-v2
+    loc: "§10.1（章首引言段）, p. 143（抽取记录 literature/extractions/gsw-1987-v2.md **E1**）：「It also indicates the possible existence of an anomaly-free ten-dimensional superstring theory with gauge group E₈ × E₈, and indeed this clue played a role in stimulating the discovery of the heterotic superstring theory, which was described in chapter 6.」；§10.3, pp. 167–168（**E8**）"
+    note: |
+      **L1 逐页读图**（第 10 章 pp. 141–174；第 13 章正文**未取得，L0**）。
+      ⚠ **本条对 E₈ × E₈ 只提供最弱的支持，不承载本卡的抵消结论**：
+      GSW 第 10 章对 E₈ × E₈ **没有任何计算**，逐字只是「indicates the **possible** existence」；
+      §10.3 关于杂化弦与 type IIB 同样只有「the low-energy analysis **suggests** that the anomalies
+      cancel in the type IIB and heterotic theories」。本卡的有效场论论证仍然全部来自
+      green-schwarz-1984；GSW 自己的低能场论分析在第 13 章（§13.5），**本项目未取得**。
+      **红线**：不得以本条声称第 13 章的措辞或式号（抽取记录 §3.1/§5.5）。
 tags: [anomaly, green-schwarz-mechanism, e8, d10, effective-field-theory, phase2]
 notes: |
   【1. ★ 论证结构与 SO(32) 不同】GS 对 E₈ × E₈ **没有独立验算混合反常**。逐字：

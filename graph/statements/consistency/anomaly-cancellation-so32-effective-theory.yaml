@@ -30,6 +30,21 @@ sources:
   - ref: green-schwarz-1984
     loc: "PLB p.120（重印 611），(23) 之后的总结句；论证分布在 PLB p.119–120（重印 610–611）的 (12c)–(23)"
     note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E9/E10/E13/E14/E15。
+  - ref: gsw-1987-v2
+    loc: "§10.2.3, pp. 166–167 + fig. 10.3（抽取记录 literature/extractions/gsw-1987-v2.md **E7**）：无质量闭弦 B_{μν} 交换树图与低能六边形反常的抵消，含两个顶点的形式 ∂_{[ρ}B_{μν]}tr(A^ρ F^{μν}) 与 ε_{μ₁…μ₁₀}B^{μ₁μ₂}F^{μ₃μ₄}…F^{μ₉μ₁₀}；§10.1.2, p. 149（**E4**）(10.1.11)–(10.1.14) 与其后逐字「(These matters are discussed further in §13.5.3.)」；§10.5, p. 172（**E11**）"
+    note: |
+      **L1 逐页读图**（第 10 章 pp. 141–174；第 13 章正文**未取得，L0**）。
+      **本条是「GS 机制」的教科书级旁证，不是本卡的主来源**：GSW 把这套机制的低能场论分析
+      （即本卡的内容）**整体外包给第 13 章**，逐字「In chapter 13, we will explore this phenomenon
+      systematically from the low-energy point of view, so here we only make a few remarks.」
+      本条实际承载的是两点：
+      (a) fig. 10.3 图注逐字确认树图「is anomalous in just the manner that cancels the usual low-energy
+          hexagon anomaly」——与 GS (18) 的两项对应（B trF⁴ ↔ 四规范粒子顶点；ω⁰_{3Y} 里的 dB 项 ↔ 两规范粒子顶点）。
+          **这一对应是抽取者/curator 的识别，GSW 没有引 GS 的式号。**
+      (b) GSW 逐字给出规范不变性的两难：「the coupling of B to two gauge bosons is gauge invariant only if
+          B transforms nontrivially under Yang–Mills gauge transformations, while the coupling of B to four
+          gauge bosons is gauge invariant only if B does not transform at all」。
+      ⚠ **红线**：不得以本条声称第 13 章的任何式号或措辞（抽取记录 §3.1/§5.5）。
 tags: [anomaly, green-schwarz-mechanism, so32, d10, effective-field-theory, phase2]
 notes: |
   【1. ★ 唯一性冲突，未裁决（抽取记录 E20 / Q1）】本图**不建**「因子化 ⟺ SO(32) 或 E₈ × E₈」的节点：
@@ -41,6 +56,29 @@ notes: |
   · antonelli-2015 说四解的"原始陈述"在 GSW Vol. 2 第 13 章，且 "no proof has explicitly been
     carried out" 直到该文（2015，单作者预印本）。
   三者互相冲突，**留给 auditor / lead 裁决**。
+
+  【1b. ★ 更新（2026-09-11，curator）：已建「四解」卡，且已按 lead 裁决拆成两张】
+  上面第 1 条写于本图尚无分类卡时。现已建两张：
+  · **consistency.d10-four-groups-satisfy-anomaly-conditions**（own status **rigorous**）：
+    SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶ **都满足**两条条件（六阶伴随迹关系 + n = 496），逐一验算；
+  · **consistency.d10-anomaly-conditions-completeness-claim**（**conjecture**）：
+    「**恰是**这四个」的完备性主张，连同 GSW §13.5.3 正文 L0、Bilal「无证明」、
+    Antonelli「自称补证」、Schwarz「the only other」冲突一起记账。
+  （同日稍早曾建 consistency.twelve-form-factorization-solutions 把两者写在一张卡上，
+   经 lead 依 polchinski-1998-v2-ch12 抽取裁决后拆开，旧卡已 superseded。）
+  **两张卡都不挂在 green-schwarz-1984 名下**，故第 1 条关于 GS 原文无唯一性断言的判定不变。
+  **新红线：图中不得写「恰有四个」**——最可靠的一手来源 polchinski-1998-v2 §12.2 p.101 脚注 1
+  只说两条 properties 「hold」，无任何唯一性主张。
+
+  【1c. ★★ 记账红线（2026-09-11，ADT 2010 L1；docs/ROADMAP.md）】
+  「反常十二形式因子化」**不等于**「反常抵消」。按
+  **consistency.abelian-factorization-is-not-cancellation**（Adams–DeWolfe–Taylor 2010，L1）：
+  U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ 虽使十二形式因子化，**GS 抵消项却写不下来**（Y₄ ≠ dH₃，
+  与超对称 + 阿贝尔规范不变性不相容）。
+  ⇒ 本卡（SO(32)，非阿贝尔）的「抵消」结论**不受影响**，但引用四解表时只能说「因子化」。
+  一个直接后果：`vafa-2005` E15 逐字的前提「Both of these theories are consistent as far as anomalies
+  are concerned」在 ADT (2010) 之后不再成立（Vafa 2005 早于 ADT，不算 Vafa 错，
+  但图里不能把那句当成立的陈述用）。
 
   【2. 相关但未建的节点】
   · 树级机制（GS fig. 1）：B tr F⁴ 顶点经 B 传播子连到 H² 项里的 ω⁰_{3Y} dB 顶点，
@@ -55,6 +93,16 @@ notes: |
   **本图不在 green-schwarz-1984 名下建弦论侧节点**；(25) 的求积上限还有读图存疑（抽取记录 §3.2）。
   **杂化弦更与本文无关**：GS 逐字说 E₈ × E₈ 的超弦理论 "has not yet been constructed / formulated"，
   杂化弦是 ghmr-1985。
+
+  【3b. ★ 更新（2026-09-11，curator）：弦论侧已建卡，但只覆盖纯规范单迹部分】
+  GSW Vol. 2 第 10 章是 GS 那个 "elsewhere" 的**教科书版**（pp. 141–174 已 L1 逐页读毕），
+  据此新建了 **consistency.type-i-hexagon-so32-iff**（physical-argument）：
+  type I 单圈**纯规范**六边形的单迹反常 W = W_P + W_N 为零 ⟺ Chan–Paton 群是 SO(32)。
+  ⚠ **适用域比本卡窄得多，两者绝不可混引**：那张卡的候选集只有 Chan–Paton 群 SO(n)/USp(n)/U(n)，
+  且 GSW 第 10 章对**引力反常与混合反常在弦论侧没有做任何计算**——章首 p. 143 逐字
+  「although the relevant calculations have not been performed」，§10.3 pp. 167–168 全段只有
+  「suggests」「should」「It is plausible」（抽取记录 literature/extractions/gsw-1987-v2.md E1/E8）。
+  ⇒ 「十维 N = 1 反常自由规范群唯一是 SO(32)」在本图**仍然没有任何节点承载**。
 
   【4. 作者自陈的结论强度】GS 的结束语是 "it appears very likely that SO(32) superstring theory is
   a consistent quantum theory"——**"appears very likely"，不是定理**。本节点只覆盖有效场论侧的
