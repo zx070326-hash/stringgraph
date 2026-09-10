@@ -32,6 +32,32 @@
   **未做**：`p(N)` 的渐近（Hardy–Ramanujan）；Dedekind `η` 的模性；与 Verma 特征标的接线
   （需要 PBW 下界，见 `pbw-verma` (b)）。
 
+- [x] `mobius-three-point-jacobian`：Möbius 三点固定的 Jacobian。
+  见 `StringFormal/Math/MobiusJacobian.lean` A 节（无 sorry，公理只有标准三条）。
+  `mobius_three_point_jacobian`：任意交换环上 `det (vandermonde z) = (z₂-z₁)(z₃-z₁)(z₃-z₂)`
+  （Mathlib `Matrix.det_vandermonde` 特化 n = 3）；`det_mobius_matrix` 是三个变量写开的版本；
+  `mobius_three_point_jacobian_eq_neg` 记录符号：等于 `-z₁₂z₁₃z₂₃`，文献里的 `|z₁₂z₁₃z₂₃|`
+  是取绝对值后的结果，符号随三点置换翻转，**不是**物理陈述的一部分。
+  `mobius_three_point_det_ne_zero` / `mobius_three_point_fixing_bijective`（域上）：三点两两不同
+  ⟺ 把 `δz = a₀ + a₁z + a₂z²` 的参数映到三点处取值的线性映射是双射，即三点规范固定存在且唯一。
+  建议图节点 `math.mobius-three-point-fixing-jacobian` 的 `lean_decl`。
+  **未做**：这只是无穷小（李代数）层面的陈述。群层面的 `PSL(2,ℝ)` 在三元组上单可迁、
+  Faddeev–Popov 行列式与测度的关系、以及 `|z₁₂z₁₃z₂₃|` 作为体积因子出现在振幅里，都没碰。
+
+- [x] `mandelstam-sum-rule`：`s + t + u = Σ mᵢ²`。
+  见 `StringFormal/Math/MobiusJacobian.lean` B 节（无 sorry，公理只有标准三条）。
+  `mandelstam_sum`：任意模上任意**对称双线性型** `B`，`Σkᵢ = 0`、`B(kᵢ,kᵢ) = -mᵢ²`（mostly-plus）
+  ⟹ `s + t + u = Σ mᵢ²`，其中 `s = -B(k₁+k₂, k₁+k₂)` 等（`mandelstamS/T/U`）。
+  不需要非退化、不需要号差、不需要域、连 2 可逆都不需要——纯运动学。
+  `mandelstam_sum_four_tachyons`：加 `α'mᵢ² = -1` 得 `α'(s+t+u) = -4`；
+  `regge_trajectory_sum_four_tachyons`：`α_c(x) = a + α'x` 时 `Σα_c = 3a - 4`（截距留作参数）；
+  `regge_intercept_sum_four_tachyons`：`a = 1` 时 `Σα_c = -1`。
+  `mandelstam_sum_diagonal_metric`：`Fin D → K` 上对角度规 `η` 的具体版本（与 `DDF.dotVec` 同形，
+  但不 import 该文件）；`minkowskiForm = Matrix.toBilin' (diagonal η)`。
+  建议图节点 `spectrum.mandelstam-invariants-sum-rule` 的 `lean_decl`。
+  **未做**：`s`、`t`、`u` 与散射道的关系（需要 in/out 态与解析延拓，不是代数），
+  Veneziano 振幅本身，以及 `α_c` 是"领头轨迹"这一物理陈述。
+
 ## Virasoro
 
 - [x] `virasoro-lie-instance`：`VirasoroAlgebra R`（`R` 为交换 ℚ-代数）已是真正的 `LieRing` +
