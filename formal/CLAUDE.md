@@ -92,6 +92,7 @@ StringFormal/
   NoGhost/DDFOperatorNeg.lean  塔版 lie_towerLop_towerVertex_of_ne（m ≠ 0）；**lie_towerLop_ddfOp_of_ne：[L_m, A^ε_n] = 0 对所有 m ≠ 0**（窗口两端各留 |m| 余量）；剩塔版 m = 0
   NoGhost/DDFOperatorAll.lean  塔版 lie_towerLop_towerVertex（**每个 m ∈ ℤ**，由 Fock.lie_Lop_vertexOsc 搬运）；**lie_towerLop_ddfOp：[L_m, A^ε_n] = 0 对一切 m**（m = 0 时窗口余量为 0，边带为空，逐项自消）；**ddfOp_mem_towerL0Submodule / ddfOp_mem_towerPhysSubmodule**（A^ε_n 保持塔上物理子空间）
   NoGhost/TowerPhysical.lean  塔上物理子模 towerPositiveModeSubmodule / towerL0Submodule / towerPhysSubmodule（**统一截距 a₀**：塔上 L_0 在层 j 已用该层动量，条件 α'k² + j + N = a₀ 选出反对角线）；**ddfOp_mem_towerPositiveModeSubmodule**（A^ε_n 保持正模条件）；保持 L_0 条件见 DDFOperatorAll.lean
+  NoGhost/VertexCommute.lean  b·b′ = 0 ⇒ 顶点算子对易（vertexOsc_comm_of_dotVec_zero；E₊ 穿过 E₋ 只在此用正交性，E₋E₋ = E₋(b+b′) 对任意动量）；塔上 k_0²=0 ⇒ towerVertex 对易（**k_0² ≠ 0 时有单值性因子，不对易**）；[A,A] 剩同点乘积局部有限性 + 全导数留数
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、

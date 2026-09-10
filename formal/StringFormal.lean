@@ -28,3 +28,4 @@ import StringFormal.NoGhost.TowerPairing
 import StringFormal.NoGhost.QuotientForm
 import StringFormal.NoGhost.LevelTwo
 import StringFormal.NoGhost.TowerPhysical
+import StringFormal.NoGhost.VertexCommute
