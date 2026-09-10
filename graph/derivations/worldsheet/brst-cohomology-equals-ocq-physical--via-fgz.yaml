@@ -1,0 +1,68 @@
+id: worldsheet.brst-cohomology-equals-ocq-physical--via-fgz
+target: worldsheet.brst-cohomology-equals-ocq-physical
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.old-covariant-physical-states
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: fgz-1986
+    loc: "Theorem 2.8，第一个同构：P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p))，p ≠ 0"
+    note: |
+      编号已核实（全文五页逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.3）。
+      原文逐字：「The inclusion of P into (V(R^{25,1}, p) ⊗ Λ^0_∞)^{ℒ_0}, p ≠ 0, induces a
+      unitary isomorphism from P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p)).」
+      "unitary isomorphism" 直接给出本节点要的"保厄米形式"。
+  - ref: fgz-1986
+    loc: "Theorem 1.12（消灭定理）与 Theorem 2.7（(i) H^i_∞ = 0, i ≠ 0；(ii) dim H^0 = p_{(24)}(1 - p·p/2)）"
+    note: |
+      Theorem 2.8 的证明输入：先由一般消灭定理 Theorem 1.12（V 是 n_-free 且带非退化厄米形式时
+      H^m_∞(g, g_0; V) = 0, m ≠ 0）得到上同调集中在单一次数（Theorem 2.7(i)），
+      再由 Euler–Poincaré 型的特征标计算（Proposition 1.3、Proposition 2.4）定出维数。
+      编号已核实。Proposition 2.6 给出 p ≠ 0 时 V(E,p) 是 free ℒ^--module 且横向空间 T 存在，
+      即 Theorem 1.12 的假设在此成立。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      物理来源：首次用 Q_B|ψ⟩ = 0 定义物理态并主张由此得到无鬼定理。核实记录
+      （brst-cohomology-sources.md §6.1）指出该文用物理态/无鬼语言而非上同调语言，
+      是否已写成 ker Q_B / im Q_B ≅ OCQ 物理态的同构形式**未核实**（正文未获取）。
+      本推导标 rigorous 只依据 fgz-1986 Theorem 2.8，不依据本条。
+  - ref: polchinski-1998-v1
+    loc: "§4.4（BRST 上同调与 OCQ 谱的对照；页码/式号未核实）"
+    note: |
+      教科书侧的对照：Polchinski 把 OCQ 物理态嵌入为 |ψ⟩ ⊗ |↓⟩ 并讨论其 BRST 类。
+      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E58 指出 §4.1 是 OCQ 版、
+      §4.4 是 BRST 版，二者等价性本身需另证——即本节点。定位未核实，仅作旁证。
+summary: |
+  FGZ 把玻色弦的 BRST 复形认作 Virasoro 代数 ℒ 相对于 ℒ_0 的半无限（semi-infinite）上同调复形：
+  微分 d 即 Q_B，系数取物质 Fock 模 V(R^{25,1}, p)，鬼场 Fock 空间即半无限形式 Λ^∞_*。
+  在 §2.1 他们**假设** π(c) = 26 Id_V（这是 FGZ 里 D = 26 的地位），此时相对复形上 d^2 = 0
+  由 Proposition 1.2 给出，无需另证幂零判据。
+
+  证明链（编号均已核实）：
+    (1) Proposition 2.6：p ≠ 0 时 V(E, p) 是 free ℒ^--module，且存在被 ℒ^+ 湮灭的正定横向空间 T
+        —— 这验证了消灭定理的假设；
+    (2) Theorem 1.12（消灭定理）+ Theorem 2.7(i)：H^i_∞(ℒ, ℒ_0, V(E,p)) = 0 对 i ≠ 0；
+    (3) Theorem 2.7(ii)：dim H^0_∞ = p_{(24)}(1 - p·p/2)（当该数为非负整数，否则 0）；
+    (4) Theorem 2.8 第一个同构：包含映射 P ↪ (V ⊗ Λ^0_∞)^{ℒ_0} 诱导**酉同构** P/rad P ≅ H^0_∞。
+  第 (4) 步正是本节点的断言：FGZ 的 P 是旧协变物理态空间 H_phys，rad P 是零模态 H_0，
+  H^0_∞ 是相对 BRST 上同调 H_rel（次数差一个常数平移，见陈述的约定换算）。
+  "unitary isomorphism" 一词直接给出保厄米形式，故本节点写"酉同构"而非泛泛的"同构"。
+
+  标 rigorous 的理由：这是发表在 PNAS、由 I. M. Singer 推荐的数学论文中的编号定理，
+  证明在半无限上同调的模范畴中进行（受限模、分级、谱序列），不含路径积分或形式重排；
+  定理编号与措辞已由 researcher 逐页核实。
+  **不**依赖 worldsheet.critical-dimension-brst：FGZ 不需要"Q_B^2 = 0 ⟺ c = 26"这条判据，
+  它把 c = 26 当假设，幂零性由一般的 Proposition 1.2 给出。故本推导的 rigorous
+  不受 critical-dimension-brst--via-nilpotency 降级为 physical-argument 的影响。
+gaps:
+  - "fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.8 的完整证明未在该文展开；本推导标 rigorous 依据的是编号定理的陈述与该文给出的证明梗概（Prop 2.6 → Thm 1.12 → Thm 2.7 → Thm 2.8），完整细节需 FGZ 的后续长文。researcher 未能定位该长文。"
+  - "FGZ 的动量条件是 p ≠ 0，本陈述写 k ≠ 0，二者逐字一致；但本陈述的姊妹节点 worldsheet.no-ghost-theorem-brst 写的是 k^+ ≠ 0。二者等价（类光向量张成 R^{25,1}）这一步是 curator 的初等观察，不出自 FGZ，未在任何来源中查到成文陈述。"
+  - "FGZ 的次数归一化（H^0_∞）与本项目的鬼数归一化（gh = 1）相差常数平移；该平移是本项目按 worldsheet.brst-quantization 的 gh(c_n) = +1 约定推出的，FGZ 未给出鬼数与半无限次数的字典。"
+  - "FGZ 的 P 是否逐字等于 worldsheet.old-covariant-physical-states 定义的 H_phys（含 a = 1 的 L_0 条件写法），未与原文逐字核对；由 Theorem 2.7(ii) 的维数公式 p_{(24)}(1 - p·p/2) 反推的谱与 a = 1 一致，这是间接佐证而非逐字核对。"
+  - "kato-ogawa-1983 是否已给出上同调形式的同构（而不只是「用 Q_B 条件定义物理态并证无鬼」），正文未获取，未核实（brst-cohomology-sources.md §6.1）。本推导把「提出」归 Kato–Ogawa、「严格证明」归 FGZ，这一归属本身依赖该未核实点。"
+  - "本推导不含正定性：H_phys/H_0 与 H_rel 上诱导形式的正定性来自 Theorem 2.8 的第二个同构（横向空间 T ∩ P），属 worldsheet.no-ghost-theorem-brst / worldsheet.no-ghost-theorem-v2。"
+author: curator
+created: "2026-09-10"

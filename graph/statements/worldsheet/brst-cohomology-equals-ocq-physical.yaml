@@ -1,0 +1,76 @@
+id: worldsheet.brst-cohomology-equals-ocq-physical
+kind: proposition
+title: BRST 相对上同调酉同构于旧协变物理态空间：H_rel ≅ H_phys/H_0
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization（权 (2,-1) 的 bc 鬼场、BRST 荷 Q_B、受限模、
+  鬼场基态 |↓⟩ = c_1|0⟩）与 worldsheet.old-covariant-physical-states（H_phys 与零模态 H_0）。
+  物质部门取 D = 26 个自由玻色子 X^μ（度规 conv.metric-mostly-plus，Fock 空间 F(k)），
+  开弦截距取 a = 1，动量固定为 k ≠ 0。因 D = 26 有 Q_B^2 = 0，相对上同调有定义。
+
+  旧协变一侧（a = 1）：
+    H_phys(k) = {|ψ⟩ ∈ F(k) : (L^m_0 - 1)|ψ⟩ = 0, L^m_n|ψ⟩ = 0 ∀ n > 0}，
+    H_0(k)    = {|χ⟩ ∈ H_phys(k) : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys(k)}，
+  商空间 H_phys(k)/H_0(k) 带 Fock 内积诱导的厄米形式。
+
+  BRST 一侧（记号与 worldsheet.no-ghost-theorem-brst 完全一致）：
+    C_rel(k) = {|Ψ⟩ ∈ F(k) ⊗ F_ghost : b_0|Ψ⟩ = 0, L_0|Ψ⟩ = 0}，  L_0 = L^m_0 + L^g_0 - 1，
+    H_rel(k) = ker(Q_B|_{C_rel}) / im(Q_B|_{C_rel})，
+    厄米形式 ⟨Ψ, Ψ'⟩_rel := ⟨Ψ| c_0 |Ψ'⟩（归一化 ⟨↓|c_0|↓⟩ = 1）。
+  鬼场零模归一化同该节点：L^g_0|↓⟩ = 0 且 gh(|0⟩) = 0、gh(c_n) = +1、gh(b_n) = -1，
+  故 gh(|↓⟩) = 1，且在 |ψ⟩ ⊗ |↓⟩ 上 L_0|Ψ⟩ = 0 ⟺ (L^m_0 - 1)|ψ⟩ = 0，即截距 a = 1。
+
+  断言（D = 26，a = 1，k ≠ 0）：把旧协变物理态嵌入相对复形的最低鬼场态、再取上同调类的映射
+    ι : H_phys(k) → H^{gh=1}_rel(k)，  |ψ⟩ ↦ [ |ψ⟩ ⊗ |↓⟩ ]
+  是良定义的（即 Q_B(|ψ⟩ ⊗ |↓⟩) = 0），其核恰为 H_0(k)，且诱导的映射
+    H_phys(k) / H_0(k)  ≅  H^{gh=1}_rel(k)
+  是**保厄米形式的线性双射（酉同构）**。等价地：每个 Q_B-闭的相对上同调类都可由某个旧协变物理态
+  |ψ⟩ ⊗ |↓⟩ 代表，而 |ψ⟩ ⊗ |↓⟩ 是 Q_B-恰当的当且仅当 |ψ⟩ 是零模态。
+
+  本陈述只断言这一个同构，不断言任何一侧的正定性（正定性分别是
+  worldsheet.no-ghost-theorem-v2 与 worldsheet.no-ghost-theorem-brst 的内容），
+  也不断言 D = 26 或 a = 1 由任何原理导出——两者在此都是假设。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: fgz-1986
+    loc: "Theorem 2.8，第一个同构：P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p))，p ≠ 0"
+    note: |
+      原文逐字（p.8446，扫描件转录）：「The inclusion of P into (V(R^{25,1}, p) ⊗ Λ^0_∞)^{ℒ_0},
+      p ≠ 0, induces a unitary isomorphism from P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p)).」
+      编号已核实（全文逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.3）。
+      FGZ 的 P = 物理态子空间，rad P = 零模态（本节点的 H_0），H^0_∞ = 相对半无限上同调
+      （= 相对 BRST 上同调）。注意 FGZ 紧接着写「The second isomorphism of Theorem 2.8 is known
+      as the no-ghost theorem in the physics literature」——即**第二个**同构 T ∩ P ≅ P/rad P
+      才是无鬼定理；本节点取的是**第一个**同构，是上同调与旧协变物理态的识别。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      用 BRS 附加条件 Q_B|ψ⟩ = 0 定义物理态并证明无鬼定理的原始文献，是本命题的物理来源。
+      但核实记录（brst-cohomology-sources.md §6.1）明确指出：该文用的是物理态/无鬼的语言，
+      **不是上同调语言**（H^0 / 相对上同调 / 消灭定理这一套由 FGZ 1986 引入）；
+      它是否给出 ker Q_B / im Q_B ≅ OCQ 物理态形式的同构，正文未获取（ScienceDirect 403），未核实。
+      故本条只作为"提出者"登记，严格版本归 fgz-1986 Theorem 2.8。
+tags: [bosonic-string, brst, cohomology, old-covariant, quantization]
+notes: |
+  这条正是此前多处 gaps（worldsheet.critical-dimension-bosonic--via-three-routes、
+  worldsheet.critical-dimension-old-covariant--via-no-ghost、worldsheet.no-ghost-theorem-brst、
+  worldsheet.no-ghost-theorem-brst--via-fgz）反复提到的"OCQ ↔ BRST 等价（Kato–Ogawa 定理）
+  尚未建节点"。
+
+  与 worldsheet.no-ghost-theorem-brst 的分工：FGZ Theorem 2.8 实际含**两个**同构，
+  本项目按"一个节点一个命题"拆成两条陈述——
+    - 本节点        = 第一个同构 P/rad P ≅ H^0_∞（上同调 ↔ 旧协变物理态，无正定性内容）；
+    - no-ghost-theorem-brst = 第二个同构 T ∩ P ≅ P/rad P 的上同调侧改写
+      （上同调 ≅ 横向空间，含正定性；FGZ 自述"第二个同构才是物理文献里的无鬼定理"）。
+  两者复合给出 H_rel ≅ H^⊥，即 no-ghost-theorem-brst 的断言 (2)(3)。
+
+  约定换算（FGZ → 本项目）：
+    - FGZ 的次数是半无限上同调次数，无鬼定理处集中在 0；本项目用鬼数归一化 gh(|↓⟩) = 1，
+      两者相差常数平移 1。（Polchinski 用第三套：gh(|↓⟩) = -1/2。）
+    - FGZ 的维数公式 p_{(24)}(1 - p·p/2)（Theorem 2.7(ii)/2.8）对应 α' = 1/2、mostly-plus，
+      即 N = 1 - p·p/2 = 1 + m^2/2；本项目 conv.alpha-prime-regge 写 α' m^2 = N - a，
+      在 a = 1、α' = 1/2 下二者一致。
+    - FGZ 的动量条件是 p ≠ 0（不是 k^+ ≠ 0）。二者等价：类光向量张成 R^{25,1}，
+      故 k ≠ 0 时必存在类光 k_0 使 k·k_0 ≠ 0，即总可取到 k^+ ≠ 0 的光锥标架。
+      （这一等价是初等观察，不出自 FGZ；记录在此。）
+author: curator
+created: "2026-09-10"

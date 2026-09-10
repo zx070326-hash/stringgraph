@@ -14,12 +14,30 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
 sources:
   - ref: goddard-thorn-1972
-    loc: "Theorem 1（D = 26, a = 1 的等号情形）"
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      原先写的 "Theorem 1（D = 26, a = 1 的等号情形）" 已撤下：2026-09-10 核实
+      （literature/extractions/brst-cohomology-sources.md §3.1）表明该编号无任何来源支持。
+      摘要不提 intercept（Veneziano 模型以 α_0 = 1 为前提），本条只覆盖 a = 1。
   - ref: brower-1972
-    loc: "独立证明（谱生成代数）"
+    loc: "摘要（INSPIRE 74322；正文未获取，节号未核实）：鬼态 'decouple for unit Regge intercept'；'a critical dimension D = 26'，其上有鬼、其下无鬼"
+    note: |
+      原先写的 "独立证明（谱生成代数）" 不是章节或定理号，违反 graph/CLAUDE.md 的定位要求
+      （ms.no-ghost-theorem 审计 B7），已改为摘要逐字定位。正文未获取（APS 403）。
+      摘要把结果限定在 unit Regge intercept，即 a = 1，不支持任意 a ≤ 1 的两分支表述
+      （brst-cohomology-sources.md §4.1）。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节，逐字：'The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.'"
+    note: |
+      本陈述末句关于 D < 26 的说法的唯一可引用依据（二手，作者本人历史综述，证据等级 L3）。
+      详见推导 worldsheet.critical-dimension-old-covariant--via-no-ghost 的 gaps。
   - ref: gsw-1987-v1
-    loc: "§2.3.2–2.3.3（教科书版本：DDF 态张成物理态模零模态）"
-    note: GSW 用 mostly-minus 号差，已转写为 conv.metric-mostly-plus。
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（教科书版本：DDF 态张成物理态模零模态）"
+    note: |
+      GSW 用 mostly-minus 号差，已转写为 conv.metric-mostly-plus。
+      原先写 "§2.3.2–2.3.3"；按核实（brst-cohomology-sources.md §5.1/§5.3）无鬼定理与
+      spectrum-generating algebra 属 §2.3.3（p.102–112），§2.3.2 是
+      'Construction of transverse physical states'（p.100–101）。式号未核实。
 tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
 notes: |
   这条是"无鬼定理的等号情形"作为临界维数判据的独立表述，即旧汇总节点

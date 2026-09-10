@@ -9,20 +9,33 @@ depends_on:
   - id: worldsheet.verma-module
     inferred: true
     note: |
-      FGZ 的计算用到 Virasoro 模（Fock 模 / Verma 模）的结构结果来定位上同调；
-      PNAS 短文只给结论与证明梗概，未逐条列出所用的表示论输入，故标 inferred。
-      需 researcher 核对 FGZ 的长文版本与 lian-zuckerman-1989 后改为显式依赖或删除。
+      核实后（全文逐页读毕）可以定位到具体位置：FGZ Proposition 2.6 断言 p ≠ 0 时 V(E, p) 是
+      **free ℒ^--module**，这正是 Theorem 1.12（消灭定理）要求的假设，也是本推导需要的表示论输入。
+      仍标 inferred 的理由：FGZ 说的是"物质 Fock 模在负模下自由"，不是本项目 Verma 模节点定义的
+      V(c,h)；由"自由 U(ℒ^-)-模"到"Verma 模"的识别需要额外一步（Fock 模一般不等于 Verma 模），
+      FGZ 未写这一步。若日后为"Fock 模在负模下自由"单建节点，本边应改指向它并去掉 inferred。
 sources:
   - ref: fgz-1986
-    loc: "Theorem 1.2（编号未核实）"
+    loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"
     note: |
-      半无限上同调（= BRST 上同调）在总中心荷为零（c^m = 26）时的计算：
-      相对上同调集中在单一次数并同构于横向 Fock 空间，且内积正定。
-      定理编号沿用 worldsheet.critical-dimension-brst 中对 fgz-1986 的写法（那里引 Theorem 1.1），
-      未与原文核对。PNAS 是公告体裁，完整证明在后续长文与 lian-zuckerman-1989。
-  - ref: lian-zuckerman-1989
-    loc: "§2（节号未核实）"
-    note: 受限模上 BRST 微分与其上同调的数学化处理；节号与定理号未核实，需 researcher 补齐。
+      编号已核实（全文五页逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.3）。
+      FGZ 在该定理后逐字写「The second isomorphism of Theorem 2.8 is known as the no-ghost theorem
+      in the physics literature (8, 9)」，并断言三个空间 T ∩ P、P/rad P、H^0_∞
+      「All three isomorphic spaces are positive definite and have dimension p_{(24)}(1 - p·p/2)」。
+      本节点的断言 (2)(3) 对应两个同构的复合 H^0_∞ ≅ T ∩ P；
+      第一个同构单独立为 worldsheet.brst-cohomology-equals-ocq-physical。
+      原先引的 "Theorem 1.2" 系凭记忆填写，与原文不符，已订正。
+  - ref: fgz-1986
+    loc: "Theorem 2.7（(i) H^i_∞(ℒ, ℒ_0, V(E,p)) = 0 对 i ≠ 0；(ii) dim H^0 = p_{(24)}(1 - p·p/2)），此处已设 D = 26"
+    note: 本节点断言 (1)「上同调集中在单一鬼数」的严格来源；编号已核实。
+  - ref: fgz-1986
+    loc: "Proposition 2.6（D ≥ 2、p ≠ 0 时 V(E,p) 是 free ℒ^--module，且存在被 ℒ^+ 湮灭的正定 T ⊂ V(E,p)）与 Theorem 1.12（消灭定理：V 是 n_--free 且带非退化厄米形式时 H^m_∞(g, g_0; V) = 0, m ≠ 0）"
+    note: |
+      证明链的两个上游输入，编号均已核实。Prop 2.6 验证 Thm 1.12 的假设，Thm 1.12 给出消灭定理，
+      再由 Proposition 1.3（Euler–Poincaré）与 Proposition 2.4 的特征标计算定出维数。
+      （原先此处引的 lian-zuckerman-1989 已删除：该文是 *BRST cohomology of the super-Virasoro
+      algebras*，处理 RNS 超弦（临界值 c = 15），与玻色弦无鬼定理无关，属误引。
+      见 brst-cohomology-sources.md §2.1。）
 summary: |
   FGZ 把 BRST 复形认作 Virasoro 代数的半无限（semi-infinite）上同调复形，
   微分 d 即 Q_B，其 d^2 = 0 恰当 c^m + c^g = 0（worldsheet.critical-dimension-brst）。
@@ -31,10 +44,23 @@ summary: |
   再由该同构保内积得到诱导内积正定。
   与 --via-polchinski-4-4 相比，这里的分级/滤子论证是在有明确定义的（受限）模范畴中做的，
   收敛性问题由模的受限性与分级有限性处理，故可标 rigorous。
+
+  核实后的精确证明链（FGZ 编号均已核实）：
+    Proposition 2.6（p ≠ 0 时 V(E,p) 是 free ℒ^--module，且存在被 ℒ^+ 湮灭的正定 T）
+    → Theorem 1.12（消灭定理）→ Theorem 2.7(i)（H^i_∞ = 0, i ≠ 0）
+    → Theorem 2.7(ii)（dim H^0 = p_{(24)}(1 - p·p/2)，由 Prop 1.3 的 Euler–Poincaré 与 Prop 2.4）
+    → Theorem 2.8（三个空间 T ∩ P、P/rad P、H^0_∞ 两两酉同构且正定）。
+  本节点取的是 H^0_∞ ≅ T ∩ P（两个同构的复合）；FGZ 自述"第二个同构才是物理文献里的无鬼定理"。
+  注意 FGZ 在此**假设** π(c) = 26（§2.1），不需要"Q_B^2 = 0 ⟺ c = 26"这条判据，
+  故本推导的 rigorous 不受 worldsheet.critical-dimension-brst--via-nilpotency 降为
+  physical-argument 的影响；但 depends_on 仍保留 critical-dimension-brst，
+  因为本项目的陈述是用"D = 26 故 Q_B^2 = 0"来保证上同调有定义的，有效状态因此会被拉低。
 gaps:
-  - "fgz-1986 是 PNAS 公告，完整证明在后续长文与 lian-zuckerman-1989；本推导标 rigorous 依据的是这一整条数学文献链，而不是 PNAS 短文本身。"
-  - "两条来源的定理编号/节号均未与原文核对（loc 已标注），在 researcher 补齐前可追溯性不足。"
-  - "FGZ 的定理对物质模的假设（非零动量 / Fock 模的不可约性）与本陈述写的 k^+ ≠ 0 是否逐字一致，未核实；两者在自由玻色子 Fock 模上通常等价，但这一等价本身未验证。"
-  - "本推导不建立 BRST 上同调与旧协变物理态空间的等价（Kato–Ogawa 定理），后者尚未建节点。"
+  - "fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.8 的完整证明未在该文展开；本推导标 rigorous 依据的是已核实的编号定理陈述加该文给出的证明梗概（Prop 2.6 → Thm 1.12 → Thm 2.7 → Thm 2.8）。researcher 未能定位 FGZ 的后续长文。原先此处写「完整证明在后续长文与 lian-zuckerman-1989」是错的：LZ 1989 是 super-Virasoro/RNS 论文，不是本结果的补全。"
+  - "FGZ 的动量条件是 p ≠ 0，本陈述写 k^+ ≠ 0；二者等价（类光向量张成 R^{25,1}，故 k ≠ 0 时必有类光 k_0 使 k·k_0 ≠ 0），但该等价是 curator 的初等观察，未在任何来源中查到成文陈述。"
+  - "FGZ 的次数归一化是半无限次数（H^0_∞），本陈述用鬼数（gh = 1），相差常数平移 1；该平移由本项目的 gh(c_n) = +1 约定推出，FGZ 未给鬼数与半无限次数的字典。"
+  - "FGZ 的横向空间 T 是 V(E,p) 中被 ℒ^+ 湮灭的正定子空间（DDF 型态），本陈述的 H^⊥(k) 是物质振子 α^i_{-n} 生成的 Fock 空间；二者不是同一子空间，只是作为分级内积空间同构。本陈述断言的是等距同构，故不受影响，但「横向空间」的实现与 FGZ 不同。"
+  - "本推导不建立 BRST 上同调与旧协变物理态空间的等价；那是 Theorem 2.8 的第一个同构，已单独立为 worldsheet.brst-cohomology-equals-ocq-physical。"
+  - "FGZ 在 Eq. [2.5]–[2.8] 给了不用横向空间的第二个证明（Euler–Poincaré signature 论证），自述「the simplest and the most conceptual proof」；本项目未登记该证明，它可以成为一条独立的 --via-euler-poincare 推导。"
 author: curator
 created: "2026-09-10"

@@ -38,19 +38,31 @@ sources:
       交叉核对（不是核对原书），证明结构已核实。内积归一化 ⟨↓|c_0|↓⟩ = 1 的具体写法
       与 Polchinski (4.4.23) 的归一化未逐字核对。
   - ref: fgz-1986
-    loc: "Theorem 1.2（编号未核实）"
+    loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"
     note: |
-      半无限上同调版本：c = 26 时相对上同调集中在一个次数上并同构于横向 Fock 空间。
-      定理编号沿用 worldsheet.critical-dimension-brst 的写法（那里引 Theorem 1.1），未与原文核对。
-  - ref: lian-zuckerman-1989
-    loc: "§2（节号未核实）"
-    note: 受限模上 BRST 上同调的数学化处理，是 FGZ 结果的推广与补全；节号未与原文核对。
+      编号已核实（全文五页逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.3）。
+      原文在 Theorem 2.8 之后逐字写：「The second isomorphism of Theorem 2.8 is known as the
+      no-ghost theorem in the physics literature (8, 9).」（ref 8 = goddard-thorn-1972,
+      ref 9 = brower-1972。）Theorem 2.8 断言三个空间 T ∩ P、P/rad P、H^0_∞
+      「All three isomorphic spaces are positive definite and have dimension p_{(24)}(1 - p·p/2)」，
+      条件是 D = 26（V(R^{25,1}, p)）与 p ≠ 0。
+      本节点的断言 (2)(3) 对应两个同构的复合 H^0_∞ ≅ T ∩ P；第一个同构单独立为
+      worldsheet.brst-cohomology-equals-ocq-physical。
+      原先引的 "Theorem 1.2" 系凭记忆填写，与原文不符，已订正。
+  - ref: fgz-1986
+    loc: "Theorem 2.7（(i) p ≠ 0 时 H^i_∞(ℒ, ℒ_0, V(E,p)) = 0 对 i ≠ 0；(ii) dim H^0 = p_{(24)}(1 - p·p/2)），此处已设 D = 26"
+    note: |
+      本节点断言 (1)「上同调集中在单一鬼数」的来源是 Theorem 2.7(i)，不是 Theorem 2.8。
+      编号已核实。（原先此处引的 lian-zuckerman-1989 已删除：该文是
+      *BRST cohomology of the super-Virasoro algebras*，处理 RNS 超弦（临界值 c = 15），
+      与玻色弦无鬼定理无关，属误引。见 brst-cohomology-sources.md §2.1。）
 tags: [bosonic-string, unitarity, brst, cohomology, critical-dimension]
 notes: |
   本节点与 worldsheet.no-ghost-theorem-v2 是**两条不同的陈述**：前者关于 Q_B 的相对上同调，
   后者关于旧协变物理态空间 H_phys/H_0。抽取记录 polchinski-1998-v1 的 E58 备注明确指出
   Polchinski §4.1 陈述的是 OCQ 版本、§4.4 证的是 BRST 版本，二者的等价性
-  （Kato-Ogawa 定理）本身是一条需要论证的命题，尚未建节点。
+  （Kato-Ogawa 定理）本身是一条需要论证的命题，现已建节点：
+  worldsheet.brst-cohomology-equals-ocq-physical（= FGZ Theorem 2.8 的第一个同构）。
 
   本节点断言的是**正定**（不是半正定）：相对上同调已经商掉了 Q_B-恰当态，
   对应 OCQ 侧的"模掉零模态"。
@@ -60,5 +72,28 @@ notes: |
 
   k^+ ≠ 0 的条件与 v2 中 DDF 构造要求的 k·k_0 ≠ 0 是同一类条件（审计 B6）：
   两个版本都在零动量/退化扇区外陈述。
+
+  【与 FGZ Theorem 2.8 的逐条对照（2026-09-10 来源核实后补记，陈述不改）】
+  FGZ Theorem 2.8 逐字：「The inclusion of P into (V(R^{25,1}, p) ⊗ Λ^0_∞)^{ℒ_0}, p ≠ 0, induces
+  a unitary isomorphism from P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p)). The inclusion of T ∩ P into P
+  induces a unitary isomorphism T ∩ P ≅ P/rad P. All three isomorphic spaces are positive definite
+  and have dimension p_{(24)}(1 - (p·p/2)).」出入如下：
+  (a) **次数/鬼数**：FGZ 说上同调集中在半无限次数 0（H^0_∞），本节点说集中在鬼数 1。
+      二者相差常数平移 1，来自本节点取 gh(|0⟩) = 0、gh(|↓⟩) = 1 的归一化；FGZ 未给鬼数字典。
+      不是矛盾，但本节点的 (1) 是把 FGZ 的 Theorem 2.7(i) 换算过来的结果。
+  (b) **动量条件**：FGZ 写 p ≠ 0，本节点写 k^+ ≠ 0。二者等价（类光向量张成 R^{25,1}，
+      故 k ≠ 0 时必有类光 k_0 使 k·k_0 ≠ 0），但该等价是初等观察，不出自 FGZ。
+      这消解了 --via-fgz 原先记的"FGZ 的动量假设与本陈述是否一致未核实"这一缺口。
+  (c) **横向空间的实现**：FGZ 的 T 是 V(E,p) 中被 ℒ^+ 湮灭的正定子空间（Proposition 2.6），
+      即 DDF 型的态；本节点的 H^⊥(k) 是由**物质振子** α^i_{-n} 生成的 Fock 空间中 L_0 = 0 的部分。
+      二者不是同一个子空间，但作为分级内积空间同构（都是 24 个自由横向振子）。
+      本节点断言的是"等距同构"，故断言成立；只是"横向空间"的实现方式与 FGZ 不同。
+  (d) **维数公式**：FGZ 给 dim = p_{(24)}(1 - p·p/2)（Theorem 2.7(ii)/2.8），本节点未写维数公式，
+      只写 L_0 = 0 即 α' k^2 + N - 1 = 0。二者在 α' = 1/2、mostly-plus 下一致
+      （N = 1 - p·p/2 = 1 + m^2/2），无冲突。
+  (e) **正定性**：FGZ 逐字写「positive definite」，与本节点断言 (3) 一致（不是半正定）。
+  (f) FGZ 还给了第二个证明（Eq. [2.5]–[2.8] 的 Euler–Poincaré signature 论证），自述
+      「does not use the existence of the transversal space」。本节点未登记该第二证明，
+      它可以成为一条独立的 --via-euler-poincare 推导。
 author: curator
 created: "2026-09-10"

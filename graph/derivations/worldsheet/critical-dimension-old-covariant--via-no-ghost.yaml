@@ -6,7 +6,17 @@ depends_on:
   - id: worldsheet.no-ghost-theorem-v2
 sources:
   - ref: goddard-thorn-1972
-    loc: "Theorem 1 的等号情形（D = 26, a = 1）及其推论（定理编号未核实）"
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      原先写的 "Theorem 1 的等号情形" 已撤下：2026-09-10 核实
+      （literature/extractions/brst-cohomology-sources.md §3.1）表明该编号无任何来源支持，
+      三条间接证据一致指向文中无编号定理。摘要不提 intercept，本条只覆盖 a = 1。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节，逐字：'The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.'"
+    note: |
+      本陈述末句关于 D < 26 的说法的**唯一**可引用依据（二手，作者本人历史综述，证据等级 L3）：
+      D < 26 的无鬼性不是 1972 年那两篇论文里的独立结果，而是由嵌入 D = 26 的情形得到。
+      该综述通篇在 α_0 = 1 下陈述，完全不讨论 α_0 < 1。
   - ref: gsw-1987-v1
     loc: "§2.3.2–2.3.3"
     note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
@@ -18,7 +28,10 @@ summary: |
   注意 v2 把断言限制在动量满足 k·k_0 ≠ 0 的扇区（DDF 构造所需），本陈述未写该限制。
 gaps:
   - "D < 26 的表述需按 worldsheet.no-ghost-theorem-v2 的措辞规范化（ms.no-ghost-theorem 审计 B2/B3）：本陈述末句写\"H_0 的维数不足以把 H_phys 约化到横向 Fock 空间\"、结论句写\"零模态完全退耦，物理谱在洛伦兹协变的意义下幺正\"，其中\"退耦\"无可操作定义，\"维数不足\"不精确。规范写法是\"H_phys/H_0 与 24 个横向振子的 Fock 空间之间不存在等距同构\"。按审计的精确计算，D ≤ 25 且 a ≤ 1 时半正定成立，故该句在 a = 1 时并不假，问题只在措辞；陈述不可变，此处登记，不新建后继节点。"
-  - "本陈述末句关于 D < 26 的断言不由依赖节点支撑：worldsheet.no-ghost-theorem-v2 按审计 B1 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)，删去了旧节点那条为假的 \"D ≤ 26 且 a ≤ 1 ⇒ 半正定\"（正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)）。D ≤ 25 的无鬼性通常归于 Brower 1972 / Thorn，尚未建节点；建节点后应把它加为本推导的第二条依赖。"
+  - "本陈述末句关于 D < 26 的断言不由依赖节点支撑：worldsheet.no-ghost-theorem-v2 按审计 B1 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)，删去了旧节点那条为假的 \"D ≤ 26 且 a ≤ 1 ⇒ 半正定\"（正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)）。"
+  - "D < 26 的来源归属已核实（brst-cohomology-sources.md §3.2/§4.1）：goddard-thorn-1972 与 brower-1972（按可得的摘要证据）**都只覆盖 a = 1**——GT 摘要完全不提 intercept（Veneziano 模型以 α_0 = 1 为前提），Brower 摘要把结果限定在 unit Regge intercept。D < 26 的无鬼性并非它们的独立结果，而是由**嵌入 D = 26 的情形**得到：Goddard 2008 综述（goddard-2008）逐字「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.」故此前记的\"D ≤ 25 的无鬼性通常归于 Brower 1972 / Thorn，尚未建节点\"这一归属不成立。若要为 D < 26 单建节点，其推导应写成「嵌入 D = 26」，来源引 goddard-2008，且只覆盖 a = 1。"
+  - "a < 1 ⇒ D ≤ 25 这一支**仍无可引用来源**：researcher 检索后端把它当教科书标准表述（L4），但没拿到任何一手或权威二手的成文陈述，按项目纪律不入库。后续候选（按优先级）：GSW Vol.1 §2.3.3（p.102–112）、Polchinski Vol.1 §4.1/§4.4、C. B. Thorn, Nucl. Phys. B 286 (1987) 61–77（bib key thorn-1987，nLab 与 Thorn 本人称其把 1972 年的证明 substantially streamlined）。"
+  - "本陈述是 worldsheet.critical-dimension-bosonic 路线 (ii)（OCQ）的独立表述，与路线 (iii)（BRST 幂零）之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）。本推导不依赖它——它只把无鬼定理的等号情形改写为临界维数判据，不跨路线论证。"
   - "本陈述倒数第二句 \"D > 26 时 (a) 失效\" 未写 a 的取值；依赖节点 worldsheet.no-ghost-theorem-v2 的第 (2) 条只覆盖 a = 1。本推导按 a = 1 理解该句。"
 author: curator-critdim
 created: "2026-09-10"
