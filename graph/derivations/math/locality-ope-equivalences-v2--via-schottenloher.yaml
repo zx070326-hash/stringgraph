@@ -1,5 +1,5 @@
-id: math.locality-ope-equivalences--via-schottenloher
-target: math.locality-ope-equivalences
+id: math.locality-ope-equivalences-v2--via-schottenloher
+target: math.locality-ope-equivalences-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -64,12 +64,15 @@ gaps:
      详见 literature/extractions/math-sources.md §11A.3 与目标节点 notes 的「Q10 结案记录」。
      **这是本推导与被引页面唯一不逐字一致之处，按项目原则 2 永久留痕。**"
   - "**★ 已结案（原「记号的 L0 部分」），仅留痕**：Definition 10.9（:A(z)B(w):）与 p. 177 的
-     A(z)_± 拆分已于 2026-09-11 第三轮逐字转录（math-sources.md §11A.1–§11A.2），
-     并据此更正了目标节点记号段中 ± 标签的方向——**来源的 `-` 是模指标 n ≥ 0 的那一半
-     （z 的负幂），`+` 是 n < 0 的那一半，与物理惯例相反**。
-     summary 的 (2 ⇔ 3)、(3 ⇔ 4) 两步现按来源方向写。作为算符表达式的 :A(z)B(w): 前后不变，
-     等价性本身不受影响。下游 worldsheet.string-cft-is-a-vertex-algebra-v2 仍沿用旧的 ± 标签，
-     其结论不受影响（局域性对正规序选取不敏感），已通过 agora 通知该文件的持有者，见目标节点 notes。"
+     A(z)_± 拆分已于 2026-09-11 第三轮逐字转录（math-sources.md §11A.1–§11A.2）——
+     **来源的 `-` 是模指标 n ≥ 0 的那一半（z 的负幂），`+` 是 n < 0 的那一半，与物理惯例相反**。
+     summary 的 (2 ⇔ 3)、(3 ⇔ 4) 两步按来源方向写。作为算符表达式的 :A(z)B(w): 与旧写法不变，
+     等价性本身不受影响。
+     **本推导原名 math.locality-ope-equivalences--via-schottenloher、原指 math.locality-ope-equivalences（v1）**；
+     v1 的记号段是「按通行定义补写」的相反方向且自相矛盾，按项目原则 1 不得就地改写，
+     故 2026-09-11 由 lead 裁决：v1 恢复原文并 superseded_by v2，本推导改名改指 v2，v1 不留推导。
+     下游 worldsheet.string-cft-is-a-vertex-algebra-v2 与 worldsheet.ope-pole-mode-commutator-dictionary
+     的陈述文本仍沿用 v1 的 ± 标签，其结论不受影响（见目标节点 notes 的「下游一致性核查」）。"
   - "p.179 一处、p.180 两处共**三处**正文写「4 in Lemma 10.5」「our Theorem 10.5」「property 5 in Lemma 10.5」，
      几乎肯定都应为 Theorem 10.10（10.5 是 delta 恒等式引理，没有 property 4/5；math-sources.md §11.4 与 §11A.3 Q12）。
      本推导不引用这三处，只登记以防后人照抄错误编号；这三处同时也是上面第一条判定「第 5 条下限是排印错误」的旁证之一。

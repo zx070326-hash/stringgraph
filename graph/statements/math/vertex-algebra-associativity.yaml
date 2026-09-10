@@ -51,7 +51,8 @@ sources:
       **禁令**：不得写 Kac Theorem 2.3 / Corollary 2.2（math-sources.md §10.3）。
 tags: [vertex-algebra, associativity, ope, formal, math-input]
 notes: |
-  **为什么与 math.locality-ope-equivalences 分开**：那条是关于任意两个局域形式分布的（不需要顶点代数结构），
+  **为什么与 math.locality-ope-equivalences-v2 分开**（该卡的初版 math.locality-ope-equivalences 已 superseded）：
+  那条是关于任意两个局域形式分布的（不需要顶点代数结构），
   结论是 A(z)B(w) 的奇异部分由有限多个 C^j(w) 给出；本条需要完整的顶点代数结构（真空、平移、态-场对应），
   结论是**所有** OPE 系数场 C^j 都是顶点算子 Y(A_{(j)}B, w)——即「OPE 在代数内封闭」。
   二者在 Gui 的箭头图（2026-07-15 版 p.74）里分别对应「Formal variable」节点与「OPE」节点。
