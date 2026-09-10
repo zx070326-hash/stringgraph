@@ -10,13 +10,24 @@ sources:
     loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
     note: 公式号为近似定位。这是教科书式的形式模式计算，未声明受限模限制，也未处理无穷模式和的重排合法性。
   - ref: kato-ogawa-1983
-    loc: "摘要与正文，定理编号未核实"
+    loc: "摘要；正文未获取，定理编号未核实"
     note: |
-      「Q_B^2 = 0 ⟹ D = 26 且 a = 1」的原始来源。摘要逐字有
-      「There an interesting relation between critical dimension and BRS symmetry is noticed」，
-      即 D = 26 与 a = 1 是要求 BRS 荷幂零的必然结果。正文未获取（ScienceDirect 403），
-      定理编号未核实，也未核实它给出的是「⟹」还是「⟺」。见
-      literature/extractions/brst-cohomology-sources.md §6。
+      「Q_B^2 = 0 ⟹ D = 26 且 a = 1」的原始来源。**INSPIRE 记录 177600 的摘要，逐字**
+      （primary-sources-round2.md §6，L2，分段以符合引用长度限制，段间无删节）：
+        "Covariant canonical quantization of the bosonic string is performed, based on the BRS
+         invariance principle." /
+        "Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition
+         Q_B |phys⟩ = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner." /
+        "There an interesting relation between critical dimension and BRS symmetry is noticed;
+         namely, the conditions D = 26 and α_0 = 1 for the space-time dimension D and the
+         zero-intercept α_0 of leading trajectory are required by the nilpotency Q_B² = 0 of
+         the BRS charge." /
+        "In addition, ghost number fractionization is observed in this system."
+      **方向已由此确定为「⟹」**（"are **required by** the nilpotency"），反方向摘要中无陈述。
+      摘要把 D = 26 与 α_0 = 1 一并归给 BRS 幂零性，与本项目「一个节点一个命题」的拆分不同
+      （本推导只定 c^m = 26）。正文未获取（ScienceDirect 403），定理编号未核实。
+      报告号 KUNS 637（INSPIRE，L2；检索后端 L4 对该归属有异议，未裁决）可作为找扫描件的钥匙。
+      见 literature/extractions/primary-sources-round2.md §6 与 brst-cohomology-sources.md §6。
   - ref: fgz-1986
     loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
     note: |
@@ -45,10 +56,18 @@ summary: |
   按 docs/STATUS_LEVELS.md「不确定时选低的那级」，本推导降为 physical-argument。
   这不是说该计算有错——它在受限模上确实是有限代数计算——而是说**目前没有任何已核实的数学来源**
   可以支撑 rigorous 级别的可追溯性。
+
+  【2026-09-10 第二轮核实：状态不变，但唯一的升级候选已排除】
+  当时留下的首选升级候选 lian-zuckerman-1991（一般 Virasoro 的 BRST 上同调，CMP 135, 547–580）
+  已全文核实（primary-sources-round2.md §1.4，L1，34 页逐页读毕），结论是**否定**的：
+  该文同样**没有**「Q² = 0 ⟺ c = 26」型陈述——Proposition 1.11(i) 的 d² = 0 无条件成立且不含 26，
+  26 只在 Proposition 3.3(iii) 以**单向**的 "if" 出现且属鬼系统一侧。
+  与此同时，Kato–Ogawa 摘要的**方向已核实为「⟹」**（"are required by the nilpotency"），
+  反方向无来源。两项都不改变本推导的 physical-argument 状态。
 gaps:
-  - "升级为 rigorous 需要一条已核实定理编号的数学来源。候选：Lian–Zuckerman, *BRST cohomology and highest weight vectors I*, Commun. Math. Phys. 135 (1991) 547–580, DOI 10.1007/BF02104121（bib key lian-zuckerman-1991）——这是**一般 Virasoro**（非 super-Virasoro）的 BRST 上同调论文，比 1989 那篇更可能是正确出处；但**只核实了元数据，内容未核实**（见 brst-cohomology-sources.md §2.3）。次选：Kato–Ogawa 1983 正文（需绕过 ScienceDirect 403）。"
+  - "升级为 rigorous 仍**没有**可用来源。原先列为首选候选的 Lian–Zuckerman, *BRST cohomology and highest weight vectors I*, Commun. Math. Phys. 135 (1991) 547–580（bib key lian-zuckerman-1991）**已全文核实并排除**（primary-sources-round2.md §1.4，L1，34 页逐页读毕）：该文**没有**「Q² = 0 ⟺ c = 26」型编号陈述。Proposition 1.11(i) 的 d² = 0 对任意 V ∈ 𝒪 **无条件**成立，既不含中心荷条件也不含 26；26 在全文出现的**唯一**位置是 Proposition 3.3(iii)，且是**单向**的「(∧_∞𝒢, η) is a 𝒢-module **if** β̄ = −26z′ − L′₀」（该页做过单页重读复核，排印确为 if 不是 iff），并且那是**鬼系统一侧**的量。与 fgz-1986 同型：两篇数学侧文献都为 c = 26 **构造**相对复形，不**推导** c = 26。剩下的次选仍是 kato-ogawa-1983 正文（需绕过 ScienceDirect 403）；再次选是 thorn-1987（Nucl. Phys. B286, 61，摘要称含 BRST 荷 Q 的上同调计算，正文未获取）。"
   - "受限模假设已提升到陈述里，故不再是本推导的隐含缺口；但没有任何一条现有来源在受限模范畴中显式陈述并证明该幂零性判据，无穷模式和重排的合法性只在本项目的节点内部论证过。"
-  - "kato-ogawa-1983 的定理编号未核实，且未核实它给出的是「⟹」还是「⟺」；陈述写的是「当且仅当」，反方向（c^m = 26 ⟹ Q_B^2 = 0）目前只有 Polchinski 的形式计算支撑。"
+  - "kato-ogawa-1983 的定理编号仍未核实（正文未获取）；但**方向已核实为「⟹」**（primary-sources-round2.md §6，INSPIRE 逐字摘要）：原文写「the conditions D = 26 and α_0 = 1 for the space-time dimension D and the zero-intercept α_0 of leading trajectory are **required by** the nilpotency Q_B² = 0 of the BRS charge」，即 Q_B² = 0 ⟹ (D = 26 且 α_0 = 1)（必要性）。**反方向（c^m = 26 ⟹ Q_B² = 0）在该摘要中没有陈述**，目前只有 Polchinski §4.3 的形式计算支撑；而目标陈述写的是「当且仅当」。注：反方向本身另有一个更弱但独立的节点 worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2）。"
   - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构；后者见 worldsheet.brst-cohomology-equals-ocq-physical。"
   - "本推导只定出 c^m = 26（即 D = 26），不定出开弦截距 a = 1；a = 1 由 worldsheet.open-string-intercept 独立给出。注意 Kato–Ogawa 摘要把 D = 26 与 a = 1 一并归给 BRS 幂零性，与本节点的拆分不完全一致（本项目按「一个节点一个命题」拆开）。"
 author: "curator-critdim；curator 按 brst-cohomology-sources.md 核实结果降级并改写 sources"
