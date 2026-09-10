@@ -115,6 +115,27 @@ sources:
       换算 A = -1 ↔ a = 1。§4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
 notes: |
+  【2026-09-11（四）补注：第 (2) 条已有机器验证的独立见证节点；第 (1) 条仍待 DDF】
+  （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）
+  本节点第 (2) 条（D > 26、a = 1 时存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0）现有一条
+  **机器验证的见证**：worldsheet.negative-norm-physical-state-above-26（formalized，
+  lean_decl `StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg`，
+  formal/StringFormal/NoGhost/LevelTwo.lean，合并提交 c32f026）。
+  它在有序域上取质量壳 α'k² = −1（`Fock.exists_zeroModeSq_eq_neg_two`，需 D ≥ 2 与
+  一个类时加一个类空分量）上的 level-2 标量态，验证它是物理态且
+  ⟨ψ₂,ψ₂⟩ = −2(D−26)(D−1)/25 < 0。该卡已加为本节点推导
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的依赖（非 inferred）。
+  **第 (1) 条仍待 DDF**：D = 26 的半正定 (1a) 与逐塔等距同构 (1b) 需要「DDF 态张成
+  H_phys 模零模态」这一核心步骤，Lean 侧连 DDF 算子 A^i_n 本身都还没定义
+  （formal/TODO.md 的 `ddf-operators`、`ddf-spans`）。
+  **本节点的 effective 不因此变化**，仍是 physical-argument：瓶颈在第 (1) 条那侧的两条
+  DDF 对易关系（worldsheet.ddf-commute-with-virasoro、
+  worldsheet.ddf-transverse-oscillator-algebra）与 worldsheet.ddf-operators-adjoint。
+  换句话说：**本节点的两条断言现在处在完全不同的认识论位置**——(2) 有机器证明，
+  (1) 只有物理论证——而节点级的 effective 只能显示两者的下界。
+  （不能给本节点单挂一条「只证 (2)」的 formalized 推导：一条推导须支撑整条陈述。）
+
+  ---
   【2026-09-11 补注：statement 文本内的 ddf-operators-v4 引用应读作 v5；有效状态已下降】
   （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）
 

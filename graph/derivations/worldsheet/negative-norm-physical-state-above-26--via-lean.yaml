@@ -1,0 +1,110 @@
+id: worldsheet.negative-norm-physical-state-above-26--via-lean
+target: worldsheet.negative-norm-physical-state-above-26
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ocq-level-two-scalar-norm-closed-form
+    inferred: false
+    note: |
+      提供本推导的全部实质内容：试探态 `Fock.levelTwoScalar`、它在 a = 1、s = −2、
+      c₂ = (D−1)/5、c₃ = (D+4)/10 处是物理态（`levelTwoScalar_intercept_one_mem_physSubmodule`，
+      该卡第 (6) 条）以及它的模 −2(D−26)(D−1)/25（`pairing_levelTwoScalar_intercept_one`，
+      同条）。本推导只在这两条之上补「取一个 α_0·α_0 = −2 的动量」与「D > 26 时该有理式为负」
+      两步。字面依赖（同一文件、逐条调用）。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      提供结论中的 H_phys 本身（`Fock.physSubmodule η a a₀`，该定义卡的 formal.lean_decl）：
+      目标第 (2)(3) 条断言的成员关系就是关于它的。字面依赖。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      提供结论中的型 `Fock.pairing` 本身（⟨ψ,ψ⟩ < 0 里的 ⟨·,·⟩）。
+      本推导只用该节点的陈述 (1)（型的存在唯一与伴随关系）；它的第 (4) 条（不定性）
+      是**全 Fock 空间**上的断言，与本目标（物理态子空间上的负模态）不同，本推导不用它。
+      字面依赖。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间 `Fock D K`、mostly-plus 的度规 `Fock.minkowski D K` 及其两条求值引理
+      （`minkowski_timelike` = −1、`minkowski_spacelike` = +1），目标第 (1) 条的显式动量
+      （a^0 = 3/2、a^1 = 1/2）就是在它们之上算出 α_0·α_0 = −2 的。字面依赖。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{exists_zeroModeSq_eq_neg_two, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule, exists_mem_physSubmodule_pairing_self_neg}（末尾另有 D = 27、K = ℚ 的具体 example）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 ea303c5（"formal: add the D>26 ghost
+      (explicit negative-norm level-two physical state)"），合并进 main 的提交 c32f026。
+      全文 grep `sorry` 零命中。
+  - ref: brower-thorn-1971
+    loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
+    note: |
+      **文献侧的候选归属，不是本推导的证据**：本推导的证明全在本仓库的 Lean 文件里，
+      与 Brower–Thorn 的论证（谱生成代数 / 纵向算子）没有共享内容。
+      列在此处是为了记录「D > 26 出鬼」在文献中的归属状态，见
+      literature/extractions/brst-cohomology-sources.md §3.2。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/LevelTwo.lean 的 `Ghost` 一节。三步：
+
+  1. **动量**（`exists_zeroModeSq_eq_neg_two`，目标第 (1) 条）。在 D ≥ 2 的有序域上显式取
+     a^0 = 3/2、a^1 = 1/2、其余分量为 0，用 `Finset.sum_subset` 把
+     `zeroModeSq (minkowski D K) a = Σ_μ η^{μμ}(a^μ)²` 的求和缩到 {0,1} 两项，
+     再用 `minkowski_timelike`（η^{00} = −1）与 `minkowski_spacelike`（η^{11} = +1）
+     得 −9/4 + 1/4 = −2。**用两个分量是必须的**：单分量要求 (a^0)² = 2，在 ℚ 上无解
+     （见目标 notes）。
+
+  2. **该动量上的物理态与其模**（目标第 (2) 条）。
+     `levelTwoScalar_intercept_one_mem_physSubmodule`：把 s = −2 代入
+     worldsheet.ocq-level-two-scalar-norm-closed-form 第 (2) 条的三个条件，
+     质量壳 ½(−2) + 2 = 1 = a 成立，(V1) 2 + 2(D−1)/5 + 2(D+4)/10·(−2) = 0 与
+     (V2) D + 2(D−1)/5·(−2) + (D+4)/10·(−2) = 0 由 `field_simp; ring` 验证。
+     `pairing_levelTwoScalar_intercept_one`：把 s = −2 与两个系数代入该卡第 (1) 条的
+     ⟨ψ₂,ψ₂⟩ = 2D + 2s c₂² + 2s²c₃² + 4s c₃，`field_simp; ring` 得 −2(D−26)(D−1)/25。
+
+  3. **拼装**（`exists_mem_physSubmodule_pairing_self_neg`，目标第 (3) 条）。
+     由 D > 26 在有序域上得 (D : K) > 26（`exact_mod_cast`），
+     故分子 −2(D−26)(D−1) < 0（`nlinarith`）、分母 25 > 0，`div_neg_iff` 给
+     ⟨ψ₂,ψ₂⟩ < 0。见证 (b, ψ₂) 即目标的 ∃。
+     文件末尾另有一条具体的 `example`：D = 27、K = ℚ 时物理态子空间含鬼。
+gaps:
+  - |
+    (i) **目标第 (4) 条（见证动量非零）在 Lean 中未单列为定理**。
+    `exists_mem_physSubmodule_pairing_self_neg` 的结论只写 ∃ b ψ，没有把
+    `zeroModeSq (minkowski D K) b = -2` 一并输出；α_0 ≠ 0 是由第 (1) 条的
+    α_0·α_0 = −2 ≠ 0 得到的两行推论（b = 0 ⟹ zeroModeSq = 0）。
+    这一步没有机器检查，但用到的第 (1) 条本身（`exists_zeroModeSq_eq_neg_two`）是定理。
+    **对下游要紧**：worldsheet.no-ghost-theorem-v4 第 (2) 条的量词就是 p ≠ 0，
+    若日后要把那一条完全机器化，应请 formalizer 把 `zeroModeSq b = -2`（或直接 `b ≠ 0`）
+    加进 `exists_mem_physSubmodule_pairing_self_neg` 的结论。
+  - |
+    (ii) **只覆盖 a = 1**。「D > 26 时对任意截距 a 均有负模态」未证，也无可核实的文献来源。
+  - |
+    (iii) **只给一个见证**。不给负模态的个数、不给能级 N ≥ 3、不给非标量部分。
+  - |
+    (iv) **需要域与有序结构**。第 (1) 条的动量构造用了除法（3/2、1/2）与序（判负）。
+    在一般有序交换环上第 (1) 条可能失败（ℤ 上 −x² + y² = −2 无解），
+    故本卡不能直接推广到任意有序环——这与
+    worldsheet.fock-indefinite-form--via-lean 的 `pairing_indefinite`（只需有序环）不同。
+  - |
+    (v) **继承整个形式化岛的缺口**：逐动量扇区（无位置算符 x^μ、无对 k 的直积分）、代数版
+    （无完化）、对角 η、R-双线性型而非 Hermitian 半双线性型。
+    因此「负模态」是双线性型意义下的 ⟨ψ,ψ⟩ < 0，不是 Hilbert 空间上的负范数。
+  - |
+    (vi) **公理检查未逐字登记**。formal/TODO.md 的 `negative-norm-above-26` 条目没有像该文件
+    其余条目那样写「无 sorry，公理只有标准三条」；curator 只做了 grep（`sorry` 零命中），
+    **未重跑 `lake build`，也未跑 `uv run stringgraph check-axioms`**。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  本推导依据的是 formal/ 的自述与 formal/TODO.md 的登记，以及 c32f026 已由 lead 合并进 main；
+  公理一项的登记缺失见 gaps (vi)。
+
+  【这条推导为什么值得单列】它把 worldsheet.no-ghost-theorem-v4 第 (2) 条从
+  「本项目的手算 + 无逐字来源的动量量词」变成了机器验证的存在性见证。
+  在此之前，第 (2) 条在图中的支撑是：v4 推导 summary 里的纵向算子构造（文献侧正文未获取）、
+  ms.no-ghost-theorem 前三轮审计的数值复核（脚本未入库）、
+  以及 worldsheet.no-ghost-theorem-subcritical（LZ 1991 Thm 3.5(ii) 的反方向，另一条路线）。
+  现在多了一条不依赖任何文献的、可重跑的构造性证明。
+  **但这不改变 v4 的 effective**（瓶颈在第 (1) 条的 DDF 侧，见 v4 推导的 notes）。
+author: curator
+created: "2026-09-11"
