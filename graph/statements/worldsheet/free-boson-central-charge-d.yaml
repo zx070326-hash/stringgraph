@@ -13,7 +13,21 @@ uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge
   - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.lie_Lop_Lop
+  lean_file: StringFormal/NoGhost/Sugawara.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.lie_Lop_Lop"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189。机器验证的陈述逐字为
+        ⁅Lop η a m, Lop η a n⁆ = (m - n) • Lop η a (m + n)
+          + (if m + n = 0 then (D : R) * Virasoro.centralTerm R m else 0) • LinearMap.id,
+      其中 `Virasoro.centralTerm R m = (1/12) (m³ - m)`，而 m³ - m = m(m² - 1)，
+      故这正是本节点陈述的第一式，中心荷 c = D。
+      带假设 `hη : ∀ μ, η μ * η μ = 1`（η 对角且 η_{μμ} = η^{μμ}），`Fock.minkowski` 满足之。
+      见推导 worldsheet.free-boson-central-charge-d--via-lean 的 gaps。
+      ⚠ 陈述末句「反全纯部门同理给出 c̄ = D」**不在** Lean 里。
   - ref: polchinski-1998-v1
     loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（由 X^μ 的 TT OPE 直接算出 c = 1，D 个给 c = D）"
     note: |
@@ -44,10 +58,15 @@ notes: |
   （见该节点 --via-three-routes 的 gaps 第三条）。**建议 lead 让后续修订把
   critical-dimension-brst 与 critical-dimension-weyl-anomaly 的这一步显式指向本节点。**
 
-  两条推导（lead 裁决 2，2026-09-10）：
+  三条推导：
     --via-ope          Polchinski §2.4 的 TT OPE 路线，physical-argument（OPE 收敛未证）
     --via-mode-algebra 直接对易子计算，**rigorous**（lead 裁决 2026-09-10）：主数学来源改为
                        virasoro-lean-2025 Theorem 10.1 + Corollary 10.2（带编号、开放获取、已 Lean 机器验证），
                        剩下的「c = 1 ⇒ c = D」一步经 reviewer-ch23 独立复核。
+    --via-lean         **formalized**（2026-09-11 新增）：本仓库 Sugawara.lean 里对 D 分量、
+                       带 η 的版本从头证出 c = D，不再依赖「c = 1 ⇒ c = D」那一步外推。
+                       --via-mode-algebra 保留：它是文献路线的记账，且其证明结构
+                       （直接重排求和）与 Lean 走的路线（刚性 + 2-上圈同调递推）不同，
+                       是两条互相独立的论证。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -20,5 +20,42 @@ notes: |
   其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模 x^μ、p^μ
   与动量 k（L_0 = α'p² + Σ_{n≥1} α_{−n}·α_n 以及物理态条件都依赖 k），这部分**尚未形式化**，
   因此本节点不继承那两个节点的 formalized 状态。
+
+  **【2026-09-11 更新：Sugawara.lean 之后，本节点的形式化缺口收窄为两条】**
+  （curator，依据 formal/StringFormal/NoGhost/Sugawara.lean，合并提交 7af81b1；
+  只改本 notes，其余字段未动）
+
+  上面一段的「零模未形式化」现在需要修正：Sugawara.lean 已经把 L_n（含 L_0）定义在
+  worldsheet.bosonic-fock-space 的 F(D,R) 上，零模作为**标量参数** a^μ = (2α')^{1/2} k^μ 出现，
+  并证出 L_0 = α'k² + N（`Fock.Lop_zero_apply_of_mem_levelSubmodule`）与
+  Virasoro 关系 c = D（`Fock.lie_Lop_Lop`）。也就是说，本节点陈述里
+  「Virasoro 生成元 L_n 由 Sugawara 型构造给出，中心荷 c = D」这一句**已经形式化**
+  （见 worldsheet.virasoro-generators-free-boson、worldsheet.free-boson-central-charge-d、
+  worldsheet.fock-space-virasoro-representation）。物理态条件
+  (L_0 − a)|ψ⟩ = 0、L_n|ψ⟩ = 0（n > 0）现在也可以在 Lean 侧逐字写出来（尚未写）。
+
+  **仍然阻塞本节点及整个无鬼定理形式化岛的两条缺口**（formalizer 在 Sugawara.lean
+  文件头 "Mathematical gaps" 第 5 条记录，curator 于此登记）：
+
+  (A) **L_m^† = L_{−m} 未证**。Sugawara.lean 与 Fock.lean 之间没有任何一条把
+      `Fock.Lop` 和 worldsheet.fock-indefinite-form 的 `Fock.pairing` 放进同一个陈述的引理。
+      这一条是**本节点的核心内容所必需**的：「零模态为 H_phys 中与所有物理态内积为零者」
+      这个定义要谈 H_phys 上诱导的内积，而 H_phys 由 L_n 条件切出；
+      没有 L_n^† = L_{−n} 就无法把 L_n 条件与内积联系起来
+      （标准论证「⟨ψ|L_{−n}χ⟩ = ⟨L_n ψ|χ⟩ = 0」整个建立在它之上）。
+      无鬼定理的形式化在此处必须先补上。
+
+  (B) **两种 L_m 定义未被证明等同**。本节点写的是「Sugawara 型构造」，
+      Lean 覆盖的正是这一种（振子双线性 + 产生-湮灭正规序）；
+      但文献里同一批 L_n 也常由全纯 T 的 Laurent 模定义
+      （worldsheet.energy-momentum-laurent-modes，经 OPE 与围道，共形正规序）。
+      Lean 侧没有 T、没有 OPE、没有围道积分，两个定义**没有**被证明给出同一组算子。
+      后果：本节点若被理解为 CFT 侧的 L_n，则不能引用上述 formalized 节点；
+      本图把这两种定义当作同一批算子这件事，目前只写在
+      worldsheet.free-boson-central-charge-d--via-ope 的论证里，没有独立节点。
+
+  另外仍未形式化的：位置算符 x^μ 与对动量 k 的直积分（Lean 只有逐 k 扇区）、
+  截距常数 a 的取值（worldsheet.open-string-intercept，符号约定 conv.intercept-sign-a）。
+  因此本节点**仍不**继承下游那些 formalized 节点的状态。
 author: seed
 created: "2026-09-10"
