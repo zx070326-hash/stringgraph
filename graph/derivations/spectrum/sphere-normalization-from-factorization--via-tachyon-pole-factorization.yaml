@@ -16,11 +16,15 @@ depends_on:
   - id: math.euler-beta-integral
     note: |
       提供「端点发散按亚纯延拓表现为单极点」的机制（|z₄| → ∞ 处取径向积分后是 Beta 型端点）。
-  - id: worldsheet.closed-string-mass-formula
+  - id: spectrum.covariant-external-legs-on-shell
     inferred: true
     note: |
-      标 inferred：提供 α's = −4 就是闭弦 tachyon 上壳这一识别（α'm² = −4）。
-      该节点出自光锥量子化（§1.4），§6.6 不回指它。
+      提供闭弦 tachyon 的质量值 α'm² = −4（该节点第 (2) 条在 N = Ñ = 0 上的实例）。
+      **2026-09-11 改挂（curator-onshell-bridge）**：原先指向 worldsheet.closed-string-mass-formula。
+      **inferred 保留**，理由更窄：本推导用这个质量值的地方是 **s 通道的中间态**
+      （α's = −4 处的极点），而新节点只断言**外线** on-shell，并在【不断言】(c)(f) 里
+      声明不承载「极点 ⟺ 中间态上壳」。数值有节点了，识别仍无节点。
+      （另见本推导第一条 gap：中间态传播子在本图与来源中都没有定义。）
     convention_map: conv.metric-mostly-plus 下 s = −(k₁+k₂)² = m²_int（中间态质量的平方），故 α'm² = −4 ⟺ α's = −4。
 sources:
   - ref: polchinski-1998-v1
