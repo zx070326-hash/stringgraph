@@ -47,5 +47,34 @@ notes: |
   陈述 (2) 的前半（N ⊆ H_0）在 Lean 里是 `spurious_inf_physSubmodule_le_nullSubmodule`，
   后半（加零态不改变内积、商上形式良定义）**没有具名引理**，见该推导的 gaps (i)。
   即：本节点的 formalized 覆盖 (1) 与 (2) 前半，不覆盖 (2) 后半。
+
+  【2026-09-11（二）：拆卡后本卡的定位】（curator，lead 裁决，docs/ROADMAP.md 待拆清单。
+  本次只改 notes 与两条推导的 depends_on，**statement 文本一字未动**。）
+
+  worldsheet.ocq-spurious-states 已拆成两张卡：
+    - worldsheet.spurious-subspace（S = Σ_{n≥1} L_{−n}F，**不带质量壳**，definition，formalized）；
+    - worldsheet.ocq-spurious-states-v2（S(k) = S ∩ ker(L_0 − a) 与零态 N，definition，rigorous）。
+  本卡陈述第一句的「设定与记号沿用 worldsheet.ocq-spurious-states」现应读作 v2
+  （v1 已 superseded_by v2，定义内容不变，只是把一半外包给 spurious-subspace）。
+
+  **本卡是带质量壳的（Polchinski 逐字）版本**：陈述 (1) 的量词跑遍 S(k)，而 S(k) 含质量壳条件。
+  与 Lean 逐字对应的是**无壳**版本，已单列为
+  worldsheet.spurious-subspace-orthogonal-to-physical（proposition，formalized）：
+  `Fock.spuriousSubmodule_le_orthComplement` 证的是 S ⊆ H_phys^⊥（对整个无壳 S），
+  由 S(k) ⊆ S 蕴含本卡 (1)。因此：
+    · 本卡的有效状态是 **rigorous**（被定义卡 v2 封顶），这是 docs/STATUS_LEVELS.md
+      对 definition 传播的预期行为，不是缺陷；
+    · 下游若只需无壳版本（例如 worldsheet.physical-states-level-one--via-lean 第 (3) 条，
+      它调用的 `Lop_neg_apply_mem_nullSubmodule` 链全程不带质量壳），**应改引新卡**，
+      已于本次改毕；
+    · 本卡**独有**、新卡不含的内容是陈述 (2) 的后半（加零态不改变内积、
+      商空间 H_phys/N 上诱导形式良定义），它在 Lean 里没有具名引理。
+
+  **formal.lean_decl 与新卡指向同一条 Lean 定理**（`spuriousSubmodule_le_orthComplement`），
+  这是有意保留的：本卡 (1) 由该定理限制得到，指针有助追溯；
+  但「逐字对应」的那张卡是 worldsheet.spurious-subspace-orthogonal-to-physical。
+  若 reviewer 认为一条 Lean 声明只应被一张卡认领，删本卡的 formal 块即可，
+  代价是 worldsheet.spurious-orthogonal-to-physical--via-lean 必须改为 rigorous
+  （工具要求 status: formalized 的推导其目标必须有 lean_decl）。
 author: curator
 created: "2026-09-11"

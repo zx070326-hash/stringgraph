@@ -3,7 +3,21 @@ target: worldsheet.spurious-orthogonal-to-physical
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.ocq-spurious-states
+  - id: worldsheet.ocq-spurious-states-v2
+    note: |
+      提供目标陈述中的 S(k)（= Σ_{n≥1} L_{−n}F(k) ∩ ker(L_0 − a)）与 N(k)。
+      2026-09-11 由 worldsheet.ocq-spurious-states 换代而来（那张卡已 superseded_by 本卡），
+      定义内容不变：v2 只是把「L_{−n} 像空间」那一半外包给 worldsheet.spurious-subspace。
+  - id: worldsheet.spurious-subspace-orthogonal-to-physical
+    inferred: false
+    note: |
+      **记录「本推导实际证的是无壳版本、目标是它的限制」这件事**（2026-09-11 拆卡时按 lead 指示补边）。
+      依据在本推导自己的 summary 第二步里：那两行计算逐字**没有用到**质量壳条件
+      （summary 已写明「注意这里**不**用到 (L_0 − a)|ψ⟩ = 0」），
+      故它给出的正是无壳命题 S ⊆ H_phys^⊥，目标陈述 (1) 是它到 S(k) ⊆ S 的限制。
+      **本边不使本推导依赖 Lean**：本推导的 summary 仍是一段完整、自足的文献式论证
+      （reviewer-ch4 已复核），同一段论证也可作为新卡的独立推导（尚未建，见 notes）；
+      本边只是把逻辑蕴含关系画进图里，不改变本推导 status: rigorous。
   - id: worldsheet.old-covariant-physical-states
   - id: worldsheet.fock-indefinite-form
     note: |
@@ -46,6 +60,16 @@ gaps:
   - "本推导不给出反包含 H_0 ⊆ N（每个零范数物理态都是伪态）。该方向需要 Kac 行列式 / 奇异向量理论，本图无节点。"
 notes: |
   reviewer-verified: reviewer-ch4, 2026-09-11
+
+  【2026-09-11（二）：拆卡后的改动】worldsheet.ocq-spurious-states 已按 lead 裁决拆成
+  worldsheet.spurious-subspace（无壳 S = Σ_{n≥1} L_{−n}F，definition，formalized）与
+  worldsheet.ocq-spurious-states-v2（S ∩ 质量壳，definition，rigorous）。本推导：
+    · 定义卡的边由 v1 改指 v2（定义内容不变，v1 只是把一半外包出去）；
+    · 新增一条到 worldsheet.spurious-subspace-orthogonal-to-physical 的边，理由见该边的 note；
+    · **summary、gaps、status 一字未动**，论证本身不变。
+  建议（留给 reviewer / lead）：把本推导的 summary 这段文献论证同时挂到新卡
+  worldsheet.spurious-subspace-orthogonal-to-physical 上，作为它的第二条（非 Lean）推导，
+  那样新卡也有独立的文献支撑，本推导对它的依赖就完全不经过 Lean。本轮未做，避免重复陈述。
 
   【status】docs/STATUS_LEVELS.md 的「初等可复核」例外三条已满足：前提（有限和、伴随关系、
   分级有限维）完整写在 worldsheet.ocq-spurious-states 与目标陈述里、论证是两行线性代数且全在

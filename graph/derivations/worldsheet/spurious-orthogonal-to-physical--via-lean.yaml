@@ -3,15 +3,23 @@ target: worldsheet.spurious-orthogonal-to-physical
 kind: proof
 status: formalized
 depends_on:
-  - id: worldsheet.ocq-spurious-states
+  - id: worldsheet.spurious-subspace-orthogonal-to-physical
     inferred: false
     note: |
-      提供伪态空间 S 本身。Lean 对应物是
-      `Fock.spuriousSubmodule η a := ⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range (Lop η a (-n))`。
-      **与该定义卡不完全一致**：Lean 的子模不含质量壳条件 (L_0 − a)|χ⟩ = 0，
-      故严格更大（S = spuriousSubmodule ⊓ ker(L_0 − a)）。因为本推导要证的是"伪态 ⊥ 物理态"，
-      在更大的空间上成立蕴含在 S 上成立，所以这个差异使 Lean 侧**更强**，不构成缺口——
-      但它使该定义卡本身不能填 `formal.lean_decl`，详见那里的 notes。
+      **本推导的全部 Lean 内容现由这张卡承载**（2026-09-11 拆卡后改指）：
+      `Fock.spuriousSubmodule_le_orthComplement`（S ⊆ H_phys^⊥）与
+      `Fock.spurious_inf_physSubmodule_le_nullSubmodule`（S ∩ H_phys ⊆ H_0）
+      逐字是那张卡的 (1) 与 (1′)，它们对**不带质量壳**的整个 S 成立。
+      本推导把它限制到 S(k) = S ∩ ker(L_0 − a) ⊆ S，即得目标陈述的 (1) 与 (2) 前半。
+      限制这一步是包含关系的直接推论（S(k) ⊆ S 按 worldsheet.ocq-spurious-states-v2 的定义即得），
+      在 Lean 中没有单独的引理承载。
+  - id: worldsheet.ocq-spurious-states-v2
+    inferred: false
+    note: |
+      提供目标陈述中的对象 S(k)（= S ∩ ker(L_0 − a)）与 N(k) = H_phys(k) ∩ S(k) 本身。
+      2026-09-11 由 worldsheet.ocq-spurious-states 换代而来（那张卡已 superseded_by 本卡）。
+      **Lean 侧没有这个带质量壳的子模**，故该定义卡是 rigorous；
+      这是本推导 status: formalized 而目标节点有效状态为 rigorous 的**全部**原因，见 notes。
   - id: worldsheet.old-covariant-physical-states
     inferred: false
     note: |
@@ -24,6 +32,8 @@ depends_on:
       提供本推导的**唯一实质输入** L_{−n}^† = L_n（`Fock.pairing_Lop_left`：
       ⟨L_m ψ, φ⟩ = ⟨ψ, L_{−m} φ⟩）。`spuriousSubmodule_le_orthComplement` 的证明就是
       它加上物理态条件 L_n φ = 0 (n ≥ 1) 的一行组合。字面依赖（同文件，逐条调用）。
+      拆卡后这条边也经 worldsheet.spurious-subspace-orthogonal-to-physical 间接可达；
+      保留直接边，因为本推导的 summary 直接引用 `pairing_Lop_left` 的那一步。
   - id: worldsheet.fock-indefinite-form
     inferred: false
     note: |
@@ -79,8 +89,14 @@ gaps:
     但**本推导不能声称它已被机器检查**。若要让 formalized 覆盖整条陈述，需补这条引理。
   - |
     (ii) **Lean 的 spuriousSubmodule 不带质量壳条件**（见上）。方向对本推导有利
-    （证的更强），但意味着 worldsheet.ocq-spurious-states 那张定义卡与 Lean 的对象不重合，
-    该卡因此没有填 `formal.lean_decl`。
+    （证的更强），但意味着带质量壳的定义卡 worldsheet.ocq-spurious-states-v2
+    （及其前身 worldsheet.ocq-spurious-states）与 Lean 的对象不重合，该卡因此没有填
+    `formal.lean_decl`。**2026-09-11 拆卡后**：与 Lean 逐字重合的那一半已单列为
+    worldsheet.spurious-subspace（definition，formalized）与
+    worldsheet.spurious-subspace-orthogonal-to-physical（proposition，formalized）；
+    本推导改为经后者取用 Lean 结论，再限制到质量壳。目标陈述本身仍带质量壳，故本条缺口
+    对**本**推导仍在（限制那一步不在 Lean 里），只是不再阻塞下游：
+    需要无壳版本的下游（worldsheet.physical-states-level-one--via-lean）现直接引新卡。
   - |
     (iii) **双线性型而非 Hermitian 形式**（继承 worldsheet.virasoro-generators-adjoint--via-lean
     的 gaps (i)、worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
@@ -97,12 +113,23 @@ notes: |
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
 
-  【有效状态是 rigorous 不是 formalized】本推导 status: formalized，但目标节点的有效状态被
-  依赖 worldsheet.ocq-spurious-states（定义卡，status: rigorous）压到 rigorous。
+  【有效状态是 rigorous 不是 formalized，这是正确记账】本推导 status: formalized，但目标节点的
+  有效状态被依赖 worldsheet.ocq-spurious-states-v2（定义卡，status: rigorous）压到 rigorous。
   原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，与 Lean 的 `Fock.spuriousSubmodule` 不重合，
-  故没填 formal.lean_decl。本推导实际用的是 Lean 那个更大的子模。
-  这一记账效应也传到 worldsheet.physical-states-level-one（该节点在 main 上是 formalized，
-  接上本条链后变 rigorous），处理办法见那条推导 notes 里给 lead 的两个选项。
+  故没填 formal.lean_decl；本推导实际用的是 Lean 那个更大的子模，再限制回 S(k)。
+  按 docs/STATUS_LEVELS.md 对 definition 传播的规定，这正是希望看到的行为：
+  「Lean 证明用的对象若与卡片定义不逐句一致（如缺质量壳条件），命题就不该显示为 formalized」。
+
+  【2026-09-11（二）：拆卡后的改动】按 lead 裁决（docs/ROADMAP.md 待拆清单）把
+  worldsheet.ocq-spurious-states 拆成 worldsheet.spurious-subspace（无壳 S，formalized）与
+  worldsheet.ocq-spurious-states-v2（S ∩ 质量壳，rigorous）之后：
+    · 与 Lean 逐字对应的命题单列为 worldsheet.spurious-subspace-orthogonal-to-physical
+      （formalized，推导 --via-lean），本推导改为依赖它 + v2 定义卡；
+    · **目标陈述与 summary 一字未动**；本推导的论证不变，只是把「Lean 证的是更强的无壳版本」
+      这一步显式化成一条边；
+    · 此前把 worldsheet.physical-states-level-one 压到 rigorous 的记账效应因此消失：
+      那条推导已改为直接依赖新的无壳命题（它实际调用的正是无壳版的
+      `Lop_neg_apply_mem_nullSubmodule` 链）。
 
   本推导由 curator 于 2026-09-11 按 reviewer-ch4 的建议建立，与
   worldsheet.physical-states-level-one--via-lean 属同一批 Lean 对接。

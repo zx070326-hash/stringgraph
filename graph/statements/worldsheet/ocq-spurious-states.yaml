@@ -1,6 +1,7 @@
 id: worldsheet.ocq-spurious-states
 kind: definition
 status: rigorous
+superseded_by: worldsheet.ocq-spurious-states-v2
 title: 旧协变量子化中的伪态（spurious）与 Polchinski 意义下的零态（null）
 statement: |
   设定沿用 worldsheet.old-covariant-physical-states：D 个自由玻色子 X^μ 的 Fock 空间 F（度规
@@ -66,5 +67,21 @@ notes: |
         故"F(k) 的 k"在 Lean 侧是全局参数而不是分解指标。
   依赖本节点的形式化结论（worldsheet.spurious-orthogonal-to-physical--via-lean）不受影响：
   Lean 证的是**更强**的无质量壳版本，蕴含本节点这一版。
+
+  【2026-09-11（二）：本卡已被换代，superseded_by worldsheet.ocq-spurious-states-v2】
+  （curator，lead 裁决，docs/ROADMAP.md 待拆清单。本次只加 superseded_by 与本段 notes，
+  **statement 文本一字未动**，符合根 CLAUDE.md 原则 1。）
+
+  换代原因就是上一段【与 Lean 的对应】记录的那件事：本卡把两件事写在一张定义卡上——
+    (a) 「L_{−n}（n ≥ 1）像空间之和 Σ_{n≥1} L_{−n}F」；
+    (b) 「再交质量壳 ker(L_0 − a)」。
+  Lean 的 `StringFormal.NoGhost.Fock.spuriousSubmodule` 只对应 (a)（其注释写明
+  "does not depend on the intercept"），故本卡不能填 formal.lean_decl、只能是 rigorous；
+  按 docs/STATUS_LEVELS.md 的 definition 传播规则，这把两条实际由 Lean 承载的下游结论
+  （worldsheet.spurious-orthogonal-to-physical、worldsheet.physical-states-level-one）
+  压到了 rigorous。现拆成：
+    - worldsheet.spurious-subspace（(a)，definition，**formalized**，lean_decl = `Fock.spuriousSubmodule`）；
+    - worldsheet.ocq-spurious-states-v2（(a) ∩ (b) 与零态 N，definition，rigorous，uses 前者）。
+  两条依赖本卡的推导（--via-lean 与 --via-virasoro-adjoint）已改指 v2 或新卡；本卡不再被任何边引用。
 author: curator
 created: "2026-09-11"
