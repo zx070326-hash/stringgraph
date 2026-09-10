@@ -4,7 +4,7 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.brst-quantization
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: fgz-1986
     loc: "Proposition 1.2（d² = 0）；Proposition 2.1(i)（ρ(c) = −26）；§2.1 正文 π(c) = 26 的假设"

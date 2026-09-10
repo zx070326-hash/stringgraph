@@ -4,7 +4,7 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.old-covariant-physical-states
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1（OCQ 伪态/零态分析：第一级给 a = 1，第二级在 a = 1 下给 D = 26）"

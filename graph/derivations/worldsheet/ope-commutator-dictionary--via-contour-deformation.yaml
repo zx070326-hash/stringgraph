@@ -22,7 +22,7 @@ summary: |
   两者相减，在 z 平面上把两条同心围道拼成一条绕 z = w 的小闭围道（Fig. 2.3）。
   在该小围道上代入 A(z)B(w) 的 OPE，只有极点项有留数，逐阶取留数即得模的对易关系。
   对 A = B = T 且 OPE 为 c/(2(z-w)^4) + 2T(w)/(z-w)^2 + ∂T(w)/(z-w)，
-  这一手续给出 Virasoro 代数（worldsheet.virasoro-algebra 的关系式），
+  这一手续给出 Virasoro 代数（worldsheet.virasoro-algebra-v2 的关系式），
   四阶极点的留数正是中心项 (c/12)m(m^2-1)δ_{m+n,0}。
 gaps:
   - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1，2026-09-10）。

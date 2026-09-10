@@ -1,0 +1,64 @@
+id: math.witt-algebra
+kind: definition
+status: formalized
+title: Witt 代数（圆周上多项式向量场的李代数）
+statement: |
+  设 R 是交换环。**Witt 代数** W(R) 是以 {ℓ_n : n ∈ Z} 为基的自由 R-模，
+  其李括号由双线性扩张
+
+    [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}      (m, n ∈ Z)
+
+  给出。该括号满足 [X, X] = 0（交错性）与 Jacobi 恒等式，故 W(R) 是 R 上的李代数。
+  W(R) **不含中心元**：以上关系里没有 δ_{m+n,0} 项。
+
+  几何来源（本节点**不断言**，也不用于任何下游论证）：R = C 时 W(C) 同构于
+  去心复平面上多项式向量场的李代数，对应 ℓ_n ↦ −z^{n+1} d/dz。
+  本节点采取纯代数定义（基 + 结构常数），不含任何解析或几何输入。
+
+  W(R) 的一维中心扩张即 Virasoro 代数（worldsheet.virasoro-algebra-v2）；
+  该扩张在同构意义下唯一这件事是一条**独立命题**，见
+  worldsheet.virasoro-unique-central-extension，不属于本定义。
+uses: []
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.WittAlgebra
+  lean_file: StringFormal/Virasoro/Witt.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Witt.lean :: StringFormal.Virasoro.WittAlgebra；WittAlgebra.{lgen, instLieRing, instLieAlgebra, lie_lgen_lgen}"
+    note: |
+      本仓库，提交 ecc4c5c（"formal: replace Virasoro placeholder with a real
+      LieRing/LieAlgebra instance"）。这是本节点 status: formalized 的依据：
+      载体 `WittAlgebra R := ℤ →₀ R`（自由模）、基 `lgen : Basis ℤ R (WittAlgebra R)`、
+      李代数实例、以及括号关系 `lie_lgen_lgen : ⁅ℓ m, ℓ n⁆ = (m − n) • ℓ (m + n)`
+      逐条对应陈述中的每一句，无 sorry，公理仅 propext / Classical.choice / Quot.sound。
+      **注意**：Lean 侧对任意 `CommRing R` 成立（括号定义成反对称化 A − Aᵀ，
+      故 `lie_self` 由 `sub_self` 得到，不需要 CharZero 或 2 可消）。
+  - ref: virasoro-lean-2025
+    loc: "Witt 代数的定义与其二阶上同调（**节号未核实**；已核实的编号只有 Theorem 6.2 与 Definition 8.1）；Lean 声明 WittAlgebra"
+    note: |
+      本项目 Witt.lean 的**设计**来自 Kytölä 的 VirasoroProject（Apache-2.0，非代码移植），
+      署名见 formal/StringFormal/Virasoro/ATTRIBUTION.md。该文的 Witt 代数假设
+      [Field 𝕜] [CharZero 𝕜]（外加 NoZeroSMulDivisors），比本节点强；
+      本节点按本仓库的实现取任意交换环。
+  - ref: schottenloher-2008
+    loc: "相关章节，编号未核实（Witt 代数 = 圆周上多项式向量场，及其中心扩张）"
+tags: [algebra, lie-algebra, witt, formalized]
+notes: |
+  【为什么单独建卡】worldsheet.virasoro-algebra-v2 的形式化实现是「Witt 代数的中心扩张」，
+  worldsheet.virasoro-unique-central-extension 的陈述则**必须**显式提到 Witt 代数
+  （唯一性是关于 H²(W, R) 的断言）。此前 Witt 代数只在旧卡 worldsheet.virasoro-algebra
+  的陈述文本里被顺带提及，没有节点，无法作为依赖被引用。
+
+  【约定】本节点声明 conv.virasoro-standard，只为固定 (m − n) 这一项的符号
+  （与之相反的约定 [ℓ_m, ℓ_n] = (n − m) ℓ_{m+n} 相当于 ℓ_n ↦ −ℓ_n）。
+  中心项的归一化（c/12）与本节点无关，因为 W(R) 没有中心元。
+
+  【area 选择】放在 math 而不是 worldsheet：这是与弦论无关的纯李代数对象，
+  worldsheet 侧只通过 Virasoro 代数用到它。
+
+  【查重】新增前跑过 `stringgraph search witt / virasoro / cohomology`：
+  图中此前无 Witt 代数节点，唯一相关命中是旧卡 worldsheet.virasoro-algebra
+  在陈述文本中提到「Witt 代数」。
+author: curator
+created: "2026-09-11"

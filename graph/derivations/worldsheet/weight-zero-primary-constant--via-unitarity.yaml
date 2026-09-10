@@ -5,7 +5,7 @@ status: physical-argument
 depends_on:
   - id: worldsheet.descendant-weight-grading
   - id: worldsheet.primary-field
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.state-operator-isomorphism
     note: |
       论证在态与算子之间来回（「L_{-1}|O⟩ = 0 即 ∂O = 0」），需要该同构。

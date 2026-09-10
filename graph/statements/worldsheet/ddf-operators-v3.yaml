@@ -42,7 +42,7 @@ statement: |
     [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
 
   即一个 D-2 维横向自由振子代数。
-uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses: [worldsheet.virasoro-algebra-v2, worldsheet.old-covariant-physical-states]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: gsw-1987-v1

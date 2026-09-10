@@ -1,0 +1,84 @@
+id: worldsheet.virasoro-unique-central-extension--via-witt-cohomology
+target: worldsheet.virasoro-unique-central-extension
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.witt-algebra
+    note: |
+      非 inferred：陈述本身就是关于 W(k) 的二阶上同调的断言，来源在同一对象上工作。
+      **基环差异**：本项目的 math.witt-algebra 对任意交换环 R 定义，来源
+      （virasoro-lean-2025 的 Witt 代数、schottenloher-2008）都取特征零的域；
+      本推导的目标陈述已把假设收紧为「k 是特征零的域」，故不需要 convention_map。
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      非 inferred：陈述 (3) 说非零类给出的李代数同构于 Vir(k)，需要 Vir(k) 的定义，
+      且 Vir(k) 在本项目 Lean 实现中恰好就是由 (1) 中那个上循环 γ 构造的中心扩张
+      （formal/StringFormal/Virasoro/Basic.lean 的 virasoroCocycle），
+      与 virasoro-lean-2025 Definition 8.1 的构造相同。归一化同为 conv.virasoro-standard。
+sources:
+  - ref: virasoro-lean-2025
+    loc: "Theorem 6.2（H^2(witt) 一维；编号已核实）；Lean 声明 WittAlgebra.rank_lieTwoCohomology_eq_one"
+    note: |
+      这是本推导最强的一条来源：Kytölä 的证明是**机器验证**的（VirasoroProject，
+      Apache-2.0，Lean v4.27.0-rc1），且论文全文已由本项目核实（见 sources.bib 本条 note）。
+      **但它在外部仓库，不在本项目 formal/ 中**，按 docs/STATUS_LEVELS.md 对 formalized 的
+      判据（「formal.lean_decl 指向的声明在 formal/ 中无 sorry 编译通过」）不能记为 formalized，
+      故本推导标 rigorous。
+  - ref: virasoro-lean-2025
+    loc: "Virasoro 上循环的上同调非平凡性，即陈述 (1) 中的 [γ] ≠ 0（**编号未核实**：sources.bib 已核实的编号清单里没有这一条）"
+    note: |
+      证据来自本项目 formal/StringFormal/Virasoro/ATTRIBUTION.md 的逐字记录：
+      「VirasoroProject additionally proves that the Virasoro cocycle is cohomologically
+      nontrivial and that H²(Witt, 𝕜) is one-dimensional. **We do not**」。
+      即非平凡性确在该项目中证明，但本项目没有核实它对应论文里的哪个编号。
+  - ref: schottenloher-2008
+    loc: "相关章节，编号未核实（Witt 代数的中心扩张分类）"
+  - ref: kac-raina-1987
+    loc: "Witt 代数的中心扩张这一主题；**不写 Lecture 编号**（sources.bib 的版本陷阱：两版讲号不可互换）"
+summary: |
+  论证的骨架（教科书标准路线，本图不重述细节）：
+
+  (1) 一维中心扩张 0 → k → g → W(k) → 0 与 H^2(W(k), k)（平凡系数）的元素一一对应：
+      取截面 s : W → g，令 γ(X, Y) := [s X, s Y] − s[X, Y] ∈ k，Jacobi 恒等式给出 2-上循环
+      条件；换截面改变 γ 一个 2-上边缘；扩张分裂 ⟺ [γ] = 0。
+
+  (2) 在基 {ℓ_n} 上计算 H^2(W(k), k)：先用上边缘把 γ 归一化成只有 γ(ℓ_m, ℓ_{−m}) 非零
+      （即 γ(ℓ_m, ℓ_n) ∝ δ_{m+n,0}），再由 (ℓ_m, ℓ_n, ℓ_{−m−n}) 三元组的上循环条件解出
+      γ(ℓ_m, ℓ_{−m}) 必为 a m + b (m^3 − m) 的形式；a m 那一支是上边缘（可由重定义
+      ℓ_0 的提升吸收），剩下 b (m^3 − m) 一支给出一维空间。归一化 b = 1/12 即 γ。
+
+  (3) 于是 dim H^2 = 1，[γ] ≠ 0，非零类构成 k^× 轨道；重标度中心元把 λγ 的扩张
+      同构到 γ 的扩张，后者按定义就是 Vir(k)（worldsheet.virasoro-algebra-v2）。
+
+  本图采用的**可核对**依据不是上面的手算，而是 virasoro-lean-2025 Theorem 6.2
+  （H^2 一维，机器验证）加上同一项目对 [γ] ≠ 0 的证明。
+gaps:
+  - "**本项目未形式化**。formal/StringFormal/Virasoro/Basic.lean 的 Status 段与 formal/TODO.md
+     「Virasoro」第一项逐字记录了原因：Mathlib v4.33.1 有 2-上循环
+     （LieModule.Cohomology.twoCocycle）但**没有 2-上边缘与上同调商**，无法直接表述 H^2；
+     需先补 twoCoboundary 或等上游。这正是把定义部分（worldsheet.virasoro-algebra-v2）
+     与本命题拆开的直接原因。"
+  - "**最强来源的证明在外部仓库**。virasoro-lean-2025 / VirasoroProject 的 Lean 证明本项目
+     未运行、未复现；本项目只核实了论文文本与编号。若日后把该证明移植进 formal/，
+     本推导可升级为 formalized（届时需给目标陈述补 formal.lean_decl）。"
+  - "**经典出处未登记**。H^2(W, k) 一维通常归给 Gelfand–Fuchs（1968），本项目
+     literature/sources.bib 中**没有**这条文献，故未作为 source 引用。建议 researcher 登记
+     并核实原文编号，届时本推导可加一条独立的一手来源。"
+  - "**基环范围**。所引来源都在特征零域上工作（VirasoroProject 的 Witt 代数取
+     [Field 𝕜] [CharZero 𝕜]），而本项目 math.witt-algebra / worldsheet.virasoro-algebra-v2
+     的 Lean 实现分别对任意交换环 / 任意 ℚ-代数成立。目标陈述已相应限定在特征零域上；
+     一般 ℚ-代数（例如非域的 ℚ-代数）上的分类**未核实**，不要把本节点用在那种一般性下。"
+  - "**教科书来源的编号全部未核实**（schottenloher-2008、kac-raina-1987），
+     按各自 sources.bib note 的要求只写主题不写编号。因此除 Theorem 6.2 外，
+     本推导的文献定位强度偏低。"
+notes: |
+  【拆卡记录，2026-09-11】本推导与目标陈述一起，从旧卡 worldsheet.virasoro-algebra
+  的陈述末句拆出（lead 裁决 2026-09-10，docs/ROADMAP.md 待拆清单）。
+  拆卡的收益：所有只用括号关系的下游节点现在引用 worldsheet.virasoro-algebra-v2
+  （formalized），不再被这条未形式化的唯一性断言压低。
+
+  【status 的选择】按 docs/STATUS_LEVELS.md：4 = rigorous 要求「有发表的、数学界接受的
+  完整证明；来源必须是数学文献或数学物理文献」。virasoro-lean-2025 是数学物理文献且
+  证明经机器验证，Theorem 6.2 的编号已核实，故 rigorous 成立；不取 formalized 的理由见上。
+author: curator
+created: "2026-09-11"

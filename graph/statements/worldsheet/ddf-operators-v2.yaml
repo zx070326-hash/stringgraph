@@ -12,7 +12,7 @@ statement: |
   其中 k_0 归一化使 k_0·p = 1（p 是态的动量，故要求 k_0·p ≠ 0）。
   它们与所有 L_m 对易，且满足 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
   即一个 D-2 维横向振子代数。
-uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses: [worldsheet.virasoro-algebra-v2, worldsheet.old-covariant-physical-states]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: gsw-1987-v1
