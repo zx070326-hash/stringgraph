@@ -8,5 +8,57 @@ canonical_source:
   ref: goddard-thorn-1972
   loc: "Theorem 1"
 audit:
-  status: draft
+  status: back-translated
+  back_translation:
+    by: physics-auditor
+    text: |
+      （仅依据 statement 节点的 statement / uses_conventions 与三条约定节点写成；无 formal_statement，无 Lean 声明。）
+      设 D 个自由玻色子 X^μ 的 Fock 空间 F，度规号差 mostly-plus，Virasoro 代数取标准归一化（自由玻色子 c=1，故 c=D），
+      α' 取 Regge 斜率约定。H_phys ⊂ F 由 (L_0 − a)ψ = 0 与 L_n ψ = 0（所有 n>0）定义，a 为截距常数；
+      "零模态"指 H_phys 中与 H_phys 全体正交的向量。断言有三条：
+      (1) 若 D=26 且 a=1：对任意 ψ ∈ H_phys，Fock 内积 ⟨ψ|ψ⟩ ≥ 0（半正定）；并且商空间 H_phys/（零模态）
+          与 24 个横向振子生成的 Fock 空间同构，该空间即 DDF 算子生成的态空间。
+      (2) 若 D>26：对每一个实数 a，存在 ψ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0。
+      (3) 若 D ≤ 26 且 a ≤ 1：对任意 ψ ∈ H_phys，⟨ψ|ψ⟩ ≥ 0。括号补充："D<26 时零模态不足以退耦、谱在洛伦兹协变的意义下
+          不幺正"——YAML 未给这两句可操作定义，照字面只能翻成：D<26 时零模态子空间比 D=26 时小，商掉零模态后
+          剩下的空间不再与横向 DDF 空间同构，作者把这种情形称为"不幺正"。
+    verdict: drift
+    diff_notes: |
+      参照来源：无网络，Goddard–Thorn 1972 原文未在 literature/extractions 登记，比对依据为审计员对该定理的记忆
+      （GT 1972 Theorem 1；GSW 1987 v1 §2.3.2；Polchinski 1998 v1 §4.1 的 level-2 分析）以及本次会话内的显式计算
+      （graph/build/noghost_check.py，gitignore，不入库：对 level ≤ 3 的 H_phys 在 (D,a) 网格上数值求内积矩阵特征值，
+      并用有理数精确算出 level-2 标量物理态的模）。
+
+      A. canonical_text 与 statement 节点的差异
+      A1. canonical_text 只含 (1)(2) 两条，且 (2) 写作"D>26 时存在负模物理态"，未量化 a；statement 写"对任意 a"。
+          canonical_text 的 (2) 在字面上有歧义（是 a=1 时存在，还是任意 a 均存在），比 statement 弱。
+      A2. canonical_text 完全没有 statement 的第 (3) 条（D ≤ 26 且 a ≤ 1 ⇒ 半正定）。二者不是语义等价：statement 严格强于
+          canonical_text。裁定 drift 而非 wrong，因为核心命题（D=26,a=1 无鬼 + DDF 张成商空间；D>26 有鬼）一致。
+      A3. canonical_text 的 (1)(2) 本身与 GT Theorem 1 的记忆一致：GT 证明 D=26、a=1 时每个物理态 = DDF 态 + 零模态，故内积
+          非负；D>26 时给出显式负模物理态。DDF 态张成的是 H_phys/null，不是 H_phys，两处写法均正确。
+
+      B. statement 节点本身的物理错误（statement 不可变，未改；建议新建节点并 superseded_by）
+      B1. 第 (3) 条为假。level-2 标量物理态 [α_{-1}·α_{-1} + c_2 k·α_{-2} + c_3 (k·α_{-1})^2]|0;k⟩ 的模精确等于
+          (D−1)[16a² + (2D−74)a + 84 − 3D] × 正因子。取 D=26 得 2(D−1)(8a−3)(a−1)，在 3/8 < a < 1 上为负：
+          a=1/2 时模 = −50/49，a=3/4 时 = −25/12，a=9/10 时 = −350/243。level-3 数值检查在 D=26、a ∈ {0, 1/4, 3/8, 1/2, 3/4}
+          均出现负特征值。所以 D=26 时必须 a=1 恰好；"D ≤ 26 且 a ≤ 1"的正确版本是"(D ≤ 25 且 a ≤ 1) 或 (D=26 且 a=1)"
+          （Brower 1972；Thorn 用 Kac 行列式的证明给出同一条件）。level-2 判别式 4(D−1)(D−25) 在 D ≤ 25 时 ≤ 0，与此一致。
+      B2. 括号句"谱不幺正于洛伦兹协变的意义下"混用了"幺正/半正定"与"洛伦兹协变"。D<26、a=1 时 H_phys 内积仍半正定
+          （检查 D=25、24 在 level 2、3 均无负模），谱是幺正的；失去的是"商空间 = 横向 DDF 空间"这一等价性（多出纵向的
+          正模态），以及光锥规范的洛伦兹不变性。应写成"D<26 时零模态更少，H_phys/null 严格大于 DDF 空间，不再与光锥
+          量子化谱等价"，而不是"不幺正"。
+      B3. "零模态不足以退耦"无可操作定义。退耦是相互作用理论（振幅因子化）的概念，本节点是自由弦的态空间命题。
+      B4. 第 (2) 条"对任意 a"：本会话只在 level ≤ 3 验证了部分 a（D=27：level 2 在 0.174<a<1.076 有鬼；a=−1 在 level 3 有鬼；
+          a=−3、−5 在 level ≤ 3 未见鬼）。"任意 a"是文献（Brower 1972 / Thorn）的结论，本次无法独立核实，需抽取记录佐证。
+      B5. 约定 conv.alpha-prime-regge 的定义文本写死了"开弦 α' m² = N − 1"，即 a=1；statement 却对一般 a 陈述。
+          一般 a 时应为 α' m² = N − a。约定与陈述在 a≠1 时不自洽，建议约定文本改为不含 a 的形式。
+      B6. 第 (1) 条的"同构"未说明是等距同构（保内积），且 DDF 构造需要一个与态动量 k 满足 k·k_0 ≠ 0 的类光参考动量 k_0，
+          零动量态需单独处理（Polchinski §4.1 有注）。措辞不严谨，非错误。
+      B7. sources 把 brower-1972 的 loc 写成"独立证明"，不是章节或定理号，违反 graph/CLAUDE.md"来源定位到章节或公式号"。
+
+      C. 建议
+      C1. 在 B1 修正前不应 approved。新建 statement 节点：删去第 (3) 条或改为"(D ≤ 25, a ≤ 1) 或 (D=26, a=1)"，
+          并把 (2) 的"任意 a"以文献抽取记录支撑。
+      C2. canonical_text 若保持只含 (1)(2)，应在 (2) 中显式写明对 a 的量化。
+
 phase: 1
