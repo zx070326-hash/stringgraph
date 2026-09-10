@@ -154,4 +154,23 @@ theorem lie_towerLop_towerVertex_of_neg_normalized (η a b : Fin D → R)
       = ((K : R) - (m : R)) • towerVertex η b n (K - m) :=
   lie_towerLop_towerVertex_of_ne_normalized η a b hη hbb hba hm.ne n K
 
+/-! ### `⁅L_m, A^ε_n⁆ = 0` for every `m ≠ 0` -/
+
+/-- The bracket of `L_m` with a single DDF summand, in telescoping form
+`⁅L_m, α^ε_j V^{(n)}_j⁆ = (j - m) · α^ε_j V^{(n)}_{j-m} - j · α^ε_{m+j} V^{(n)}_j`,
+now for every `m ≠ 0`.  Identical to `lie_towerLop_ddfSummand` except that the weight-`0`
+primary law is taken from `lie_towerLop_towerVertex_of_ne_normalized`; the Leibniz rule and
+`⁅L_m, α^ε_j⁆ = -j α^ε_{m+j}` never cared about the sign of `m`. -/
+theorem lie_towerLop_ddfSummand_of_ne (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) {m : ℤ} (hm : m ≠ 0) (n j : ℤ) :
+    ⁅towerLop η a b m, ddfSummand η a b ε n j⁆
+      = ((j - m : ℤ) : R) • ddfShifted η a b ε n m (j - m)
+        - ((j : ℤ) : R) • ddfShifted η a b ε n m j := by
+  simp only [ddfSummand, ddfShifted, show m + (j - m) = j from by ring]
+  rw [lie_mul_end, lie_towerLop_towerModeVec η a b ε hη m j,
+    lie_towerLop_towerVertex_of_ne_normalized η a b hη hbb hba hm n j,
+    smul_mul_assoc, mul_smul_comm]
+  push_cast
+  module
+
 end StringFormal.NoGhost
