@@ -1,0 +1,26 @@
+id: worldsheet.sigma-translation-generator
+kind: proposition
+title: 闭弦 σ 平移的生成元 P = -(2π/ℓ)(N - Ñ)
+statement: |
+  闭弦的世界面空间坐标是周期的（σ ≅ σ + ℓ），因此存在一个刚性平移对称性
+  σ → σ + s。其 Noether 荷（即在光锥规范物理 Hilbert 空间上生成 σ 平移的算符）为
+    P = -(2π/ℓ) ( N - Ñ ),
+  其中 N、Ñ 分别是右行与左行的能级算符
+  （worldsheet.closed-string-mass-formula 中定义）。
+  特别地，左右行的正规序常数在 P 中相消（因为 A = Ã），故 P 不含 c-数模糊性。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.10)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E23，证据等级 [已核实]：
+      Headrick 习题 1.9「the generator of σ-translations (1.4.10),
+      P = -(2π/ℓ)(N - Ñ)」。
+tags: [bosonic-string, closed-string, symmetry, light-cone]
+notes: |
+  「正规序常数在 P 中相消」这一句是 curator 的补充观察（A = Ã 时 A - Ã = 0），
+  不是抽取记录给出的文献陈述；它解释了为什么 level matching 是 N = Ñ 而不是
+  N + A = Ñ + Ã 之外的什么条件。
+  ℓ 依赖见 conv.worldsheet-coordinate-length：取 ℓ = 2π 时 P = -(N - Ñ)。
+author: curator-polchinski-ch1
+created: "2026-09-10"

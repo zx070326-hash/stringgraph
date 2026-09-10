@@ -1,0 +1,31 @@
+id: worldsheet.closed-string-oscillator-commutators--via-canonical-quantization
+target: worldsheet.closed-string-oscillator-commutators
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.closed-string-mode-expansion
+  - id: worldsheet.light-cone-canonical-commutators
+    note: |
+      该定义节点写的是开弦（σ ∈ [0, ℓ]）的等时对易关系；闭弦情形只是把
+      δ(σ-σ') 换成周期 δ 函数，其余不变。抽取记录未逐字给出闭弦的 ETCR 式号，
+      这一适配由 curator 作出。
+  - id: worldsheet.light-cone-gauge-lagrangian
+    note: 提供共轭动量 Π^i 的形式（闭弦与开弦相同，只差边界条件）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.6c)、(1.4.6d)（闭弦振子对易关系；已核实）"
+    note: 抽取记录 polchinski-1998-v1#E21，Headrick 习题 1.9 逐字引用两个式号。
+summary: |
+  闭弦的横向场按 {exp(2πinσ/ℓ)}_{n∈Z} 展开（周期完备基），
+  周期 δ 函数 δ_ℓ(σ-σ') = (1/ℓ)Σ_{n∈Z} exp(2πin(σ-σ')/ℓ)。
+  把 X^i、Π^i ∝ ∂_τ X^i 的展开代入等时对易关系并逐模比较：
+  由于 exp[+2πin(σ-cτ)/ℓ] 与 exp[-2πin(σ+cτ)/ℓ] 在 τ = 0 时分别对应
+  e^{+2πinσ/ℓ} 与 e^{-2πinσ/ℓ}，而它们在 ∂_τ 下带相反符号的因子，
+  右行系数 α_n 与左行系数 ᾱ_n 分别配对，得两套独立的 [α_m, α_n] = m δ_{m,-n}
+  与 [ᾱ_m, ᾱ_n] = m δ_{m,-n}，交叉对易子为零。
+gaps:
+  - "闭弦的等时对易关系（周期 δ 函数）在抽取记录中没有对应式号；本推导把开弦的 (1.3.24b) 适配到周期情形，这一适配是 curator 作出的，标在依赖的 note 里。"
+  - "无穷模式求和的重排与 δ 函数的模式表示按形式操作处理，同开弦情形。"
+  - "共轭动量的形式继承自光锥规范固定（physical-argument），故有效状态不高于 physical-argument。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

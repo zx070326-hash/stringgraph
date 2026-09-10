@@ -1,0 +1,28 @@
+id: worldsheet.closed-string-mass-formula--via-light-cone-hamiltonian
+target: worldsheet.closed-string-mass-formula
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.closed-string-mode-expansion
+  - id: worldsheet.closed-string-oscillator-commutators
+  - id: worldsheet.light-cone-normal-ordering-constant
+    note: |
+      该节点是对开弦（一组横向振子）陈述的；闭弦对左右各用一次得 A = Ã = -(D-2)/24。
+      抽取记录 #E22 明确写「其中 A = Ã = -(D-2)/24」，故这条边有来源支撑。
+  - id: worldsheet.light-cone-coordinates
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.8)（闭弦质量公式；已核实）"
+    note: 抽取记录 polchinski-1998-v1#E22，Headrick 习题 1.9 逐字引用。
+summary: |
+  与开弦同样地由 m^2 = 2p^+p^- - p^ip^i 出发，把光锥哈密顿量用闭弦模式展开写出。
+  左行与右行各贡献一份自由场哈密顿量，各带一个正规序常数，
+  用闭弦零模归一化 α_0 = ᾱ_0 = (α'/2)^{1/2}p 配平因子，得
+  m^2 = (2/α')(N + Ñ + A + Ã)。左右行的横向振子结构相同故 A = Ã = -(D-2)/24。
+  在 D = 26 与 N = Ñ 下代入即得 α'm^2 = 4(N-1)。
+gaps:
+  - "A = Ã = -(D-2)/24 依赖 ζ/截断正规化，故有效状态不高于 physical-argument。"
+  - "化简式 α'm^2 = 4(N-1) 是否在 Polchinski 书中显式出现未核实（抽取记录 §3 清单）；本推导给出它作为代入 level matching 与 D = 26 的直接推论。"
+  - "整体因子依赖 ℓ、c、τ 的归一化（conv.worldsheet-coordinate-length）；已核实的 (1.4.8) 用作系数的交叉检验。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

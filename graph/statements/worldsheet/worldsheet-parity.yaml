@@ -1,0 +1,35 @@
+id: worldsheet.worldsheet-parity
+kind: definition
+status: rigorous
+title: 世界面宇称算符 Ω 与无取向弦
+statement: |
+  世界面宇称是世界面空间坐标的反射
+    Ω : σ ⟼ ℓ - σ   （开弦，σ ∈ [0, ℓ]）；   Ω : σ ⟼ -σ   （闭弦，σ ≅ σ + ℓ）,
+  提升为 Hilbert 空间上的算符后作用于横向振子模为
+    开弦：Ω α_n^i Ω^{-1} = (-1)^n α_n^i,
+    闭弦：Ω α_n^i Ω^{-1} = ᾱ_n^i,  Ω ᾱ_n^i Ω^{-1} = α_n^i   （交换左右行）。
+  Ω 满足 Ω^2 = 1，故本征值为 ±1。
+  **无取向弦**定义为对 Ω = +1 本征空间的投影，即物理 Hilbert 空间取
+    H_unor = (1 + Ω)/2 · H,
+  等价地只保留在 Ω 下不变的态。
+uses: [worldsheet.open-string-mode-expansion, worldsheet.closed-string-mode-expansion]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.19) 附近（无取向弦）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E24，证据等级 [已核实]（内容）：
+      Schrans 目录「1.14 p 29: Eq. (1.4.19) The Unoriented Strings」，正文推出上述两式。
+      **(1.4.19) 具体对应哪一条式子未逐一核对。** 闭弦上 Ω: σ → -σ 的写法
+      （与开弦 σ → ℓ - σ 的关系）由 curator 按周期性补出。
+tags: [bosonic-string, unoriented, parity, projection, spectrum]
+notes: |
+  抽取记录 #E24 记 Schrans 的提醒：Polchinski 在此处对 X^0、X^1 也写了同样的式子，
+  而「You cannot deduce this in the light-cone gauge」——即 Polchinski 在这里
+  **超出了光锥规范能给出的范围**（光锥规范只给横向分量），属外推。
+  本节点因此只对横向指标 i 陈述 Ω 的作用，把纵向分量的外推留在这条 note 里，
+  不写进陈述。若日后建立协变量子化的闭弦节点，可另建一条覆盖全部 μ 的陈述。
+
+  Ω 与 D 膜、Orientifold 的关系不在本节点范围（属 branes area，Phase 3）。
+author: curator-polchinski-ch1
+created: "2026-09-10"

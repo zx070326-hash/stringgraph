@@ -1,0 +1,25 @@
+id: worldsheet.closed-string-level-matching
+kind: proposition
+title: 闭弦的 level matching 条件 N = Ñ
+statement: |
+  闭弦的世界面上没有标出 σ 的原点，σ 平移 σ → σ + s 不是物理变换而是规范冗余
+  （它是残余规范自由度的一部分）。因此闭弦的物理态必须在 σ 平移下不变，即被
+  σ 平移生成元（worldsheet.sigma-translation-generator）湮灭：
+    P |ψ⟩ = 0   ⟺   ( N - Ñ ) |ψ⟩ = 0   ⟺   N = Ñ.
+  这条约束称为 level matching：闭弦物理态的左行能级与右行能级必须相等。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.11)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E23，证据等级 [已核实]：
+      Headrick 习题 1.9「the generator of σ-translations (1.4.10), P = -(2π/ℓ)(N - Ñ),
+      and (therefore) the level-matching condition (1.4.11), N = Ñ」。
+tags: [bosonic-string, closed-string, constraint, spectrum, level-matching]
+notes: |
+  「σ 平移是规范冗余而非物理对称性」这一步是本条约束的物理输入。
+  在光锥规范中它表现为规范固定没有把 σ 的原点定死（worldsheet.light-cone-gauge
+  的 (LC2) 只定了坐标长度 ℓ）。在协变量子化中同一条件表现为
+  (L_0 - L̄_0)|ψ⟩ = 0；两种表述的等价不在本节点范围。
+author: curator-polchinski-ch1
+created: "2026-09-10"

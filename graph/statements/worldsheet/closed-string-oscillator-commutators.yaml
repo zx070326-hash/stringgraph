@@ -1,0 +1,27 @@
+id: worldsheet.closed-string-oscillator-commutators
+kind: proposition
+title: 闭弦左右行振子的对易关系
+statement: |
+  在光锥规范的正则量子化（worldsheet.light-cone-canonical-commutators，
+  按闭弦周期边界条件适配）下，闭弦模式展开
+  （worldsheet.closed-string-mode-expansion）的振子模满足
+    [ α_m^i, α_n^j ] = m δ^{ij} δ_{m, -n},
+    [ ᾱ_m^i, ᾱ_n^j ] = m δ^{ij} δ_{m, -n},
+    [ α_m^i, ᾱ_n^j ] = 0,
+  即左行与右行是两套互相对易的横向振子代数，各自都是 (D-2) 份 Heisenberg 代数，
+  内积正定。零模满足 [x^i, p^j] = i δ^{ij}。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.6c)、eq. (1.4.6d)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E21，证据等级 [已核实]：
+      Headrick 习题 1.9 逐字引用 (1.4.6c) 与 (1.4.6d)。
+      「左右行互相对易」这一条在抽取记录的陈述里给出，但未指明它对应哪个式号。
+tags: [bosonic-string, quantization, closed-string, oscillator-algebra]
+notes: |
+  Polchinski 把 δ_{m,-n} 写成这个形式，与开弦节点用的 δ_{m+n,0} 恒等。
+  左右行独立正是 level matching（worldsheet.closed-string-level-matching）
+  成为一条非平凡约束的原因。
+author: curator-polchinski-ch1
+created: "2026-09-10"
