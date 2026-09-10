@@ -23,7 +23,7 @@
 - 超弦：Polchinski v2 §10–11 抽取完成（**Cambridge Core 章级 PDF 一手核实，61 条 L1**——同一路线正在清第一卷整张未核实式号清单）；§10 节点转换中。
 - 里程碑：`ms.no-ghost-theorem` 四轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第一轮回译 drift，修复中；`ms.critical-dimension-superstring` 待 §10–11 入图后起草。
 - Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 顶点算子振子部分 / creaExp 递推已机器验证；剩 [L_m, V_K] 共形权（进行中）、DDF 对易关系、张成定理、level-2 负模态（进行中）。
-- 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美；Shapovalov 形式进行中。
+- 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美、**Shapovalov 形式**（唯一性无条件、存在 ⟺ V≠0、N=2 Gram 行列式 = 2h(16h²+2h(c−5)+c) 与 Kac 公式核对通过）、Möbius Jacobian、Mandelstam 和。Kac 行列式来源核实：Feigin–Fuchs 1982 Thm 3.1（Math-Net.Ru 全文）、Schottenloher Thm 6.12；kac-1979（LNP 94）与 kac-1980-icm 是两篇。
 
 ## Phase 2：一致性与对偶子图
 
@@ -32,8 +32,8 @@
 - Lean 岛 2：Green–Schwarz 反常多项式的因子化（代数部分）
 
 ### Phase 2 种子（2026-09-11 已启动）
-- Green–Schwarz 1984 全文抽取完成（archive.org 重印文集路线，本项目首篇 pre-arXiv 正文），consistency 区节点转换中；因子化恒等式 (19) 作为 math 命题是 Lean 岛 2 首选。Alvarez-Gaumé–Witten 1984 eq. (63)（数值系数层唯一来源）抽取中。
-- T 对偶：Polchinski v1 §8 抽取中。
+- Green–Schwarz 1984 全文抽取完成；consistency 区节点分支在审查；因子化恒等式 (19) 等三条纯代数命题 Lean 形式化中（岛 2 种子）。Alvarez-Gaumé–Witten 1984 全文抽取完成（大学课程页扫描件路线）：GS (20) 五个系数经 AGW (119)+(83) 复算一致（差公共因子 −48，两篇原文均未写）；n = 496 是 p₃ 系数唯一零点；常数 c 与 (22) 仍在 Zumino–Wu–Zee 1984（升 P0）。**AGW 不得标 refuted**：其"规范群不能消引力反常"是自旋间相消框架内的结论，GS 出路是局域反项，在该框架外。
+- T 对偶：Polchinski v1 §8 抽取完成，compact/duality/branes 三区首批节点分支在审查（`duality.t-duality-is-cft-isomorphism` 陈述只写谱与算子层，"同一 CFT / 非微扰"原书措辞 L0 待 Cambridge Core 核实）。
 
 ## Phase 3：全息与黑洞
 
