@@ -4629,6 +4629,279 @@ loc = §6.4, eqs. (6.4.19)/(6.4.20)/(6.4.23)/(6.4.24), p.183
 
 ---
 
+## 15. ★ 原书核实（2026-09-11，researcher 第九轮）——§3.2 的欧氏 Euler 数（含边界项）与 Appendix A.2（Grassmann / 鬼场路径积分）
+
+> **不覆盖以上任何条目。** 本节两项都是**定点核实**，不是整章抽取。
+
+### 15.0 本轮获取路线与版本锚定（与 §12.0 / §14.0 同源，只记增量）
+
+**证据等级：L1（原书页图逐字）。** 两份 PDF 都由 Cambridge Core 章级端点直取（本环境持机构订阅），
+文件名规则第八、九次验证成功，**均无需先 fetch abs 页**：
+
+| item | hash | 文件名 | 体积/页数 | PDF 页 ↔ 印刷页 | DOI 后缀 |
+|---|---|---|---|---|---|
+| ch.3 The Polyakov path integral（pp.77–120） | `606E849133B4EE45657DF6128FD1C8C1` | `9780511816079c3_p77-120_CBO.pdf` | 407.8 KB / 44 页 | **PDF 页 = 印刷页 − 76** | **`.006`** |
+| **Appendix A（pp.329–346）** | `D6A09941572ED2451AFC3C5C497F9A9A` | **`9780511816079apx1_p329-346_CBO.pdf`** | 217.8 KB / 18 页 | **PDF 页 = 印刷页 − 328** | **`.013`** |
+
+- **页脚版本锚定（逐字，两份完全相同）**：
+  `Downloaded from https://www.cambridge.org/core. Zhejiang University, on 10 Sep 2026 at 23:22:35,`
+  `subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms.`
+  `https://doi.org/10.1017/CBO9780511816079.006`（App. A 那份的后缀是 `.013`）。
+  ⇒ 与 §12.0 一致：**Cambridge Books Online 数字化本（2005 平装，已含 2000 年 "with corrections"）**。
+- ⚠ **再次印证「别用 DOI 后缀推章号」**：ch.3 ↔ `.006`、App. A ↔ `.013`（§14.0 记的 ch.6 ↔ `.009` 同型）。
+- ⚠ **前置/后置内容文件名前缀例外再次确认**：Appendix A 用 **`apx1`** 而不是 `c<N>`（见 §13.5「取书情报补充」）。
+- 本轮读的页：**ch.3 的 PDF 页 6–7（= 印刷 p.82–83）**；**App. A 的 PDF 页 11–18（= 印刷 pp.339–346）**。
+  §13.1(e) 末尾那句「本轮未读 App. A pp. 339–346 … 若日后要 `bc` 鬼场路径积分的一手依据，需补读」**由本节关闭**。
+
+---
+
+### 15.1 §3.2 pp.82–83：(3.2.1)–(3.2.3b) 与带边界项的 Euler 数
+
+#### (a) ★★ 逐字（p.82，§3.2 开头到 (3.2.3b) 下方那句）
+
+> **3.2 The Polyakov path integral**
+>
+> "We now begin to develop the sum over world-sheets, integrating over the fields of the Polyakov formalism.
+> **We make one change from chapter 1: the Minkowskian world-sheet metric `γ_ab` is replaced with a Euclidean
+> world-sheet metric `g_ab(σ¹,σ²)`, of signature `(+,+)`.** The integral runs over all Euclidean metrics and over
+> all embeddings `X^μ(σ¹,σ²)` of the world-sheet in Minkowski spacetime:"
+>
+> **(3.2.1)** `∫ [dX dg] exp(−S) .`
+>
+> "The Euclidean action is"
+>
+> **(3.2.2)** `S = S_X + λχ ,`
+>
+> "with"
+>
+> **(3.2.3a)** `S_X = (1/4πα') ∫_M d²σ g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ ,`
+>
+> **(3.2.3b)** `χ = (1/4π) ∫_M d²σ g^{1/2} R + (1/2π) ∫_{∂M} ds k .`
+>
+> "**The geodesic curvature `k` was defined in exercise 1.3; note that the boundary is now always spacelike.**"
+
+**三条逐字层面的注意事项（会影响回译审计）：**
+1. **积分号下的顺序是 `∫_{∂M} ds k`（先 `ds` 后 `k`）**，不是常见转写的 `∫_∂ k ds`。系数是 **`1/2π`**。
+2. 体项系数是 **`1/4π`**，测度写作 **`d²σ g^{1/2} R`**（不是 `√g R d²σ` 的排列）。
+3. **(3.2.2) 里 Euler 项以 `+λχ` 进作用量，而权重是 `exp(−S)`** ⇒ 路径积分里出现的是 `e^{−λχ}`
+   （p.83 原书自己写「the `e^{−λχ}` factor in the path integral」，与 (3.2.1)+(3.2.2) 自洽）。
+
+#### (b) ★ 这一条对图的意义：`worldsheet-euler-number`（带边界项版）现在有一手来源
+
+- 旧状态：该卡「带边界项版」**只有 Headrick 习题解答支撑**。
+- **新状态：(3.2.3b), p.82 是原书正文里的等式，L1。** Headrick 可以降为旁证。
+- ⚠ **与 §13.3(d) 的结论并存、不矛盾**：§1.2 的 **(1.2.31) 确实没有边界项**（那是闭世界面版），
+  **带边界项的版本在 §1.2 里只是 exercise 1.3**。本轮找到的是：**原书正文的带边界项写法出现在 §3.2 的 (3.2.3b)，
+  且它把 `k` 的定义仍然外包给 exercise 1.3**。
+  ⇒ 图里若要「`k` 是什么」的定义来源，**Polchinski 正文没有**，只有习题；这一点必须写进 note。
+- ⚠ **号差前提必须一起搬**：(3.2.3b) 所在的整节是**欧氏世界面、号差 `(+,+)`**（p.82 逐字，见上）。
+  与 `conv.worldsheet-euclidean` 对齐；**不要把 (3.2.3b) 挂到闵氏号差的卡片上**。
+
+#### (c) ★ 同页顺带落实的式号与措辞（全部 L1，补 §12 的第 3 章部分）
+
+| 式号 | 页 | 逐字/要点 |
+|---|---|---|
+| (3.2.1) | 82 | `∫[dX dg] exp(−S)`；上方逐字「The integral runs over all Euclidean metrics and over all embeddings … of the world-sheet in Minkowski spacetime」 |
+| (3.2.2) | 82 | `S = S_X + λχ` |
+| (3.2.3a) | 82 | 欧氏 Polyakov 作用量（见上）。原书 p.83 明说「**We have in the action (3.2.3a) left the rotation of `X⁰` implicit**, as in the previous chapter, so as to emphasize the Minkowski nature of spacetime.」 |
+| (3.2.3b) | 82 | 带边界项的 Euler 数（见上） |
+| (3.2.4) | 82 | 点粒子路径积分 `∫[dη dX] exp[ (i/2)∫dτ (η^{−1}Ẋ^μẊ_μ − ηm²) ]` |
+| (3.2.5) | 82 | `η(τ) → e^{−iθ}η(τ) , X⁰(τ) → e^{−iθ}X⁰(τ)` |
+| (3.2.6) | 83 | 转动到底后的欧氏点粒子路径积分 `∫[de dX] exp[ −(1/2)∫dτ ( e^{−1} Σ_{μ=1}^{D} Ẋ^μẊ^μ + em² ) ]` |
+| **(3.2.7)** | **83** | **`g_o² ∼ g_c ∼ e^λ`**（Euler 项控制耦合常数） |
+
+#### (d) ★★ 三条作者自陈的强度措辞（Wick 转动的地位，L1）
+
+1. p.82 逐字：「We will take the Euclidean theory (3.2.1) as our starting point, and we will show how to give it a
+   precise definition and that it defines a consistent spacetime theory with the advertised properties.
+   **However, let us give a brief formal argument that it is equivalent to the Minkowski theory with which we began.**」
+2. p.83 逐字：「The same procedure works for the Polyakov action if we write the metric in terms of a tetrad,
+   `γ_ab = −e⁰_a e⁰_b + e¹_a e¹_b`, and make the same rotation on `e⁰_a`. **This provides a formal justification for
+   the equivalence of the Minkowski and Euclidean path integrals.¹ It has been shown by explicit calculation that
+   they define the same amplitudes, respectively, in the light-cone and conformal gauges.**」
+   ⚠ 「**It has been shown**」是**被动、无引文**（本章正文不带引文，见 §13.3(f)）。
+3. **脚注 1（p.83）逐字**：「In more than two dimensions, things are not so simple because the Hilbert action behaves
+   in a more complicated way under the rotation. No simple rotation damps the path integral. **In particular, the
+   meaning of the Euclidean path integral for four-dimensional gravity is very uncertain.**」
+
+⇒ **欧氏化在本书里是 "brief formal argument"**，与 §13.1 记的 App. A (A.1.31) 一线（Wick 转动只对单自由度 QM 给了论证）
+一致。任何「玻色弦欧氏路径积分 = 闵氏振幅」的节点，**其自身状态封顶 `physical-argument`**，
+且 `depends_on` 应含一条「二维以上不成立」的限定（脚注 1）。
+
+#### (e) ★ `χ` 与 Euler 数的关系：原书是**回指**，不是本节证明的
+
+p.83 逐字：「**We have noted that `χ` is locally a total derivative in two dimensions and therefore depends only on
+the topology of the world-sheet — it is the Euler number of the world-sheet.**」
+
+- 「We have noted」指回 §1.2（E9 / (1.2.31) 一带）。**§3.2 不重证、不引 Gauss–Bonnet、不引任何文献。**
+- 因此「`χ` = Euler 数」这条陈述的一手位置仍是第 1 章，**(3.2.3b) 只提供了带边界项的表达式本身**。
+  两件事在图上应分成两个节点（表达式 / 拓扑不变性），不要合并。
+
+---
+
+### 15.2 Appendix A §A.2 pp.341–345：Grassmann（Berezin）积分与费米路径积分测度
+
+**覆盖：A.2 起于 p.341（在 (A.1.66) 之后），止于 p.345 的 (A.2.29)，随后是 Exercises A.1–A.5（pp.345–346）。全部 L1 逐页读图。**
+
+#### (a) ★ Berezin 积分的定义与其地位（p.341–342）
+
+| 式号 | 逐字 |
+|---|---|
+| (A.2.1a) | `ψ̂|↓⟩ = 0 , χ̂|↓⟩ = |↑⟩` |
+| (A.2.1b) | `ψ̂|↑⟩ = |↓⟩ , χ̂|↑⟩ = 0` |
+| (A.2.1c) | `{ψ̂, χ̂} = 1 , ψ̂² = χ̂² = 0` |
+| (A.2.2) | `{χ_m, ψ_n} = {χ_m, χ_n} = {ψ_m, ψ_n} = 0` |
+| **(A.2.3)** | **`∫dθ = 0 , ∫dθ θ = −∫θ dθ = 1`** |
+| (A.2.4) | `∫dθ (d/dθ)(a+θb) = ∫dθ b = 0`（"the integral of a total derivative is zero"） |
+| (A.2.5) | `∫dθ₁…dθ_n f(θ) = c` |
+| (A.2.6) | `f(θ) = … + θ_n θ_{n−1} … θ₁ c` |
+
+- 定义前的逐字：「There is a natural notion of integration over Grassmann variables, **the Berezin integral**.
+  Notice that if `θ` is a Grassmann variable then `θ² = 0`, and so the most general function of `θ` is of the form `a + θb`.」
+- 定义后的逐字：「Integrals of more general expressions are determined by **requiring the integral to be linear and by
+  defining `dθ` to anticommute with all Grassmann variables**.」
+- p.342 逐字：「Looking back at the discussion of the bosonic path integral, one sees that **all of the properties of
+  ordinary integrals that were used are also true for the Berezin integral: linearity, invariance (except for a sign)
+  under change of order of integration, and integration by parts**.³」
+- **★ 脚注 3（p.342）逐字 —— 这是 Lean 形式化最想要的一句**：
+  「**It is not useful to think of `∫dθ` as an integral in any ordinary sense: it is simply a linear mapping from
+  functions of `θ` to the complex numbers. Since it shares so many of the properties of ordinary integrals, the
+  integral notation is a useful mnemonic.**」
+  ⇒ 图里 `Berezin 积分` 应建成 **definition 节点**（作者自陈是"线性映射"，不是测度论意义的积分），
+  **不要**给它挂任何"积分收敛/可测"型依赖。Mathlib 侧对应的是外代数上的线性泛函，不是 `MeasureTheory`。
+
+#### (b) 相干态、完备性与费米路径积分（pp.342–343）
+
+| 式号 | 内容（逐字或忠实转录） |
+|---|---|
+| (A.2.7a)(A.2.7b) | `|ψ⟩ = |↓⟩ + |↑⟩ψ` ; `ψ̂|ψ⟩ = |ψ⟩ψ` |
+| (A.2.8) | `⟨ψ|ψ'⟩ = ψ − ψ'`（"the Grassmann version of the Dirac delta function"） |
+| (A.2.9)(A.2.10) | `(ψ−ψ')f(ψ) = (ψ−ψ')f(ψ')` ; `∫dψ (ψ−ψ')f(ψ) = f(ψ')` |
+| (A.2.11) | `⟨ψ|ψ̂ = −ψ⟨ψ|`（"a left eigenstate with **opposite sign**"） |
+| **(A.2.12)** | **`∫|ψ⟩ dψ ⟨ψ| = 1`**（完备性；后面 (A.2.17) 靠它拼接时间片） |
+| (A.2.13) | `−∫dχ exp[χ(ψ'−ψ)] = ψ−ψ' = ⟨ψ|ψ'⟩` |
+| (A.2.14) | `⟨ψ|↓⟩ = ψ , ⟨ψ|↑⟩ = −1` |
+| (A.2.15) | `⟨ψ|χ̂|ψ'⟩ = ⟨ψ|↑⟩ = −∫dχ χ exp[χ(ψ'−ψ)]` |
+| (A.2.16) | `−⟨ψ|f(χ̂,ψ̂)|ψ'⟩ = ∫dχ f(χ,ψ') exp[χ(ψ'−ψ)]`；紧跟逐字「This holds for any function `f` **with the prescription that it is written with the `ψ̂` on the right**.」 |
+| **(A.2.17)** | 离散乘积 `⟨ψ_f,T|ψ_i,0⟩ ≈ −∫dχ₀dψ₁dχ₁…dψ_{N−1}dχ_{N−1} exp Σ_{m=0}^{N−1}[−iH(χ_m,ψ_m)ε − χ_m(ψ_{m+1}−ψ_m)]` **→** `∫[dχ dψ] exp{∫₀^T dt [−χψ̇ − iH(χ,ψ)]}` |
+
+- (A.2.17) 下方逐字：「The inconvenient sign in the integral representation has been offset by **reversing the order of
+  Grassmann integrations**. A typical fermionic Hamiltonian is `Ĥ = mχ̂ψ̂`. The corresponding Lagrangian is `L = iχψ̇ − H`.
+  **For such first order Lagrangians the Hamiltonian and Lagrangian formulations coincide**, and the result (A.2.17)
+  is also the Lagrangian path integral.」
+
+#### (c) ★★ 本项目最想要的一段：哪一个内积属于 Faddeev–Popov 鬼场（p.343）
+
+> **(A.2.18a)** `(A) : ⟨↑|↑⟩ = ⟨↓|↓⟩ = 1 , ⟨↑|↓⟩ = ⟨↓|↑⟩ = 0`
+> **(A.2.18b)** `(B) : ⟨↑|↓⟩ = ⟨↓|↑⟩ = 1 , ⟨↑|↑⟩ = ⟨↓|↓⟩ = 0`
+>
+> "Inner product (A) is positive definite and gives `ψ̂† = χ̂`. It is the inner product for an ordinary physical
+> oscillator. **Inner product (B) is not positive, and it makes `ψ̂` and `χ̂` Hermitean. It is the appropriate inner
+> product for the Faddeev–Popov ghost system, as discussed in chapter 4.** The derivation of the path integral was
+> independent of the choice of inner product, but the relations (A.2.14) determine the expansion of `⟨ψ|` in basis
+> states in terms of the inner product."
+
+**对图的三条硬结论：**
+1. **`bc` 鬼场"厄米共轭与内积"那条卡（E66，§4.3 (4.3.26) 一带）现在有了第二个 L1 来源：(A.2.18b), p.343**，
+   而且原书在这里把「鬼场内积非正定」与「`b`,`c` 是厄米的」明确绑在一起。
+2. **原书自陈「路径积分的推导与内积选择无关」** —— 这句话很重要：它意味着
+   **`bc` 路径积分测度不依赖内积的正定性**，非正定内积只影响态空间的解释。
+   任何把「鬼场路径积分」与「非正定内积」画成依赖边的做法，**与原书这句话冲突**。
+3. ⚠ **A.2 通篇没有出现 `b`、`c` 这两个字母，也没有写出 `bc` 系统的作用量。**
+   它给的是**一般费米路径积分**（(A.2.17) / (A.2.24)–(A.2.27)）加上一句「哪个内积属于 FP 鬼」。
+   ⇒ 图里若有节点写「`bc` 鬼场路径积分测度定义于 Appendix A.2」，**措辞过强**，应改为
+   「`bc` 鬼场路径积分所用的一般 Grassmann 测度与行列式规则见 A.2；`bc` 系统本身见 §3.3 / §4.3」。
+
+#### (d) 时间排序、迹与 `(−1)^F`（pp.343–344）
+
+| 式号 | 内容 |
+|---|---|
+| (A.2.19) | `ψ(t)ψ(t') = −ψ(t')ψ(t)` |
+| (A.2.20) | `T[ψ̂(t)ψ̂(t')] ≡ θ(t−t')ψ̂(t)ψ̂(t') − θ(t'−t)ψ̂(t')ψ̂(t)`；逐字「**Note that a minus sign appears in the definition of time-ordering.**」 |
+| (A.2.21) | `Â|i⟩ = |j⟩A_{ji}` |
+| **(A.2.22)** | `∫dψ ⟨ψ|Â|ψ⟩ = A_{↓↓} − A_{↑↑} = Tr[(−1)^F̂ Â]`，"where the fermion number `F̂` has been defined to be **even for `|↓⟩` and odd for `|↑⟩`**" |
+| **(A.2.23)** | `∫dψ ⟨ψ,U|ψ,0⟩ = Tr[(−1)^F̂ exp(−ĤU)]` |
+
+- 紧接的逐字：「**In contrast to the bosonic results (A.1.33) and (A.1.34), the periodic path integral gives the trace
+  weighted by `(−1)^F̂` and the antiperiodic path integral gives the simple trace.**」
+  ⇒ 这是第 7 章环面振幅里「周期/反周期边界条件 ↔ 迹里插不插 `(−1)^F`」的**书内一手依据**
+  （`polchinski-1998-v1-ch7.md` 用得上；本轮未回头核对 ch.7 是否引用了 A.2）。
+
+#### (e) ★ 行列式与测度（pp.344–345）——这是"路径积分测度"真正被定义的地方
+
+| 式号 | 内容 |
+|---|---|
+| (A.2.24) | `⟨1⟩ = ∫[dψ dχ] exp(∫d^dx χΔψ)`，"where we have again switched to the notation of field theory" |
+| (A.2.25a) | `ψ(x) = Σ_i ψ_i Ψ_i(x) , χ(x) = Σ_i χ_i Υ_i(x)` |
+| (A.2.25b) | `ΔΨ_i(x) = λ_i Ψ_i(x) , Δ^T Υ_i(x) = λ_i Υ_i(x)` |
+| (A.2.25c) | `∫d^dx Υ_i(x) Ψ_j(x) = δ_{ij}` |
+| **(A.2.26)** | **`Define [dψ dχ] = ∏_i dψ_i dχ_i`** ⇒ `⟨1⟩ = ∏_i[∫dψ_i dχ_i exp(λ_i χ_i ψ_i)] = ∏_i λ_i = det Δ` |
+| (A.2.27) | `∫[dψ] exp(∫d^dx ψΔψ) = (det Δ)^{1/2}`，"where `Δ` must be **antisymmetric**. These fermionic path integrals are just the **inverse** of the corresponding bosonic integrals." |
+| (A.2.28) | `∫dx∫dy exp(2πiλxy) = 1/λ = [∫dψ∫dχ exp(λχψ)]^{−1}`（"For finite-dimensional integrals we have to be careful about `2π`s"） |
+| **(A.2.29)** | `δ(d^m x d^n θ) = d^m x d^n θ ( Σ_i (∂/∂x_i)δx_i − Σ_j (∂/∂θ_j)δθ_j )`（一般变量替换，**测度变换多一个负号**） |
+
+- (A.2.29) 前的逐字：「A useful result about Berezin integrals: from the definition it follows that **if `θ' = θa` then
+  `dθ' = a^{−1}dθ`. That is, the Jacobian is the inverse of the bosonic case.**」
+- 零模的处理，逐字：「**If `Δ` has zero eigenvalues, the path integral vanishes in the fermionic case and diverges in
+  the bosonic case. When this occurs there is always a good reason, as we will see in practice, and the integrals of
+  interest will have appropriate insertions to give a finite result.**」
+  ⇒ 这正是第 5–6 章里「鬼场零模必须靠插入 `c` 吸收」的书内总原则；**但原书在这里只给"总有好理由"，不给定理**。
+
+#### (f) ★★ 本轮新增两条作者自承缺口（编号续 §13.1(e) 的 #16/#17）
+
+| # | 位置 | 逐字 | 影响 |
+|---|---|---|---|
+| **18** | **p.345** | 「Curiously, we can be more cavalier for functional determinants, where these can be eliminated by rescaling the fields. **Bosonic path integrals actually give the absolute values of determinants, while fermionic path integrals give the determinant with a sign that depends on the precise order of Grassmann factors in the measure. We will fix the sign by hand.**⁴」 | **鬼场行列式的整体符号在本书里是手工定的**，不是从测度推出来的。任何依赖 `det Δ` 符号的结论（FP 行列式、配分函数相对符号）自身状态封顶 `physical-argument`，且**不可形式化为定理** |
+| **19** | **p.345 脚注 4** | 「A fine point: when the world-sheet theory is parity-asymmetric, **even the phase of the path integral is ambiguous**. The point is that `Δ` is not Hermitian in this case, because the Euclidean adjoint includes a time-reversal (which is the same as a parity flip plus Euclidean rotation). One must instead take the determinant of the Hermitian operator `Δ†Δ`, which determines that of `Δ` **only up to a phase**. We will encounter this in section 10.7, for example, where we will have to check that there is a consistent definition of the phase.」 | 手性/无取向世界面上路径积分**相位**未定义；点名 **Vol.2 §10.7** 作为需要"检查存在一致定义"的地方 ⇒ `polchinski-1998-v2.md` 的超弦链上应有对应节点 |
+
+#### (g) 本节的边界（negative evidence，须显式记下）
+
+1. **§A.2 里没有 "rather heuristically" 这类措辞** —— 那句在 **A.1, p.332**（已记于 §13.1(e) #16）。
+   **不要把 A.1 的自陈搬到 A.2 头上。**
+2. **§A.2 不写 `bc` 系统、不写 `β γ` 系统、不出现字母 `b`/`c` 作为鬼场名**（见 (c) 第 3 条）。
+3. **§A.2 不讨论世界面上的鬼场零模计数**（`κ`/`μ`/Riemann–Roch 全在 §5.2），只有 (e) 末尾那句一般性表述。
+4. **本轮未读 App. A 的 pp.329–338（§A.1 的前半）**；(A.1.33)/(A.1.34) 只在 (A.2.23) 下方被引用到，**其本身未核**。
+5. **本轮未回头核对第 7 章是否显式引用 (A.2.23)**（周期/反周期 ↔ `(−1)^F`）。
+
+---
+
+### 15.3 本轮对图的建议
+
+#### A. 必须改 / 可以升级的
+
+| 节点 | 现状 | 建议 |
+|---|---|---|
+| `worldsheet-euler-number`（带边界项版） | 只有 Headrick 习题解答支撑 | **改挂 `polchinski-1998-v1` §3.2, eq. (3.2.3b), p.82（L1）**；Headrick 降为旁证。**同时在 note 里写死号差前提「欧氏世界面，`(+,+)`」与「`k` 的定义只在 exercise 1.3，正文不给」** |
+| `bc` 鬼场路径积分定义（若存在这样的卡） | 声称来源是 App. A.2 | **措辞需弱化**：A.2 给的是一般 Grassmann 测度 `[dψdχ]=∏dψ_i dχ_i` 与 `⟨1⟩=det Δ`（(A.2.24)–(A.2.27)），**不是 `bc` 系统本身**；`bc` 系统在 §3.3/§4.3 |
+| `bc` 鬼场内积非正定（E66 一系） | 来源是 §4.3 | **补第二个 L1 来源 (A.2.18b), p.343**，并加原书那句「the derivation of the path integral was **independent of the choice of inner product**」 |
+| 任何以「欧氏 = 闵氏振幅」为前提的链 | — | 封顶 `physical-argument`；来源 p.82「brief **formal** argument」+ p.83 脚注 1（四维引力"very uncertain"） |
+
+#### B. 建议新增
+
+1. **约定节点**：`conv.worldsheet-euclidean` 的一手 loc **应是 §3.2 p.82 那句「the Minkowskian world-sheet metric
+   `γ_ab` is replaced with a Euclidean world-sheet metric `g_ab`, of signature `(+,+)`」**（此前 §13.1 已把 (A.1.31)
+   排除为该约定的 loc，本轮补上正确的那一条）。
+2. **definition 节点**：Berezin 积分 (A.2.3)，**带脚注 3 的自陈**（"simply a linear mapping … the integral notation
+   is a useful mnemonic"）——这是 `formal/` 里最容易落地的一个小岛（外代数上的线性泛函）。
+3. **作者自承缺口节点 ×2**：#18「行列式符号手工固定」、#19「宇称不对称时路径积分相位不确定，指向 Vol.2 §10.7」。
+4. **陈述节点**：(A.2.23) 周期路径积分 = `Tr[(−1)^F e^{−ĤU}]`、反周期 = 普通迹 —— 第 7 章环面配分函数链的上游。
+
+#### C. 维持原判但要补 note
+
+- 「`χ` 是 Euler 数」的一手位置仍是**第 1 章**，§3.2 只是回指（"We have noted that…"），**不重证、不引 Gauss–Bonnet**。
+- `g_o² ∼ g_c ∼ e^λ` = **(3.2.7), p.83**（若图里有耦合常数与 Euler 数关系的卡，这是它的 loc）。
+
+### 15.4 本轮的 negative evidence
+
+见 §15.2(g)（App. A 侧）与下列（ch.3 侧）：
+
+1. **本轮只读了 ch.3 的 pp.82–83**；`χ = 2 − 2h − b − c` 型的拓扑分类式**未核**（应在 p.84 一带，下一轮顺手可取）。
+2. **(3.2.3b) 的 `R` 的符号约定（`R > 0` 对应球面？）本轮未在 §3.2 找到**；§5.2 里那条「`R` 的符号 = `χ` 的符号
+   不证不引」（§12.7 已记）仍然是唯一相关记录。
+3. **exercise 1.3 本身未读**（它是 `k` 的唯一定义处）。
+
+---
+
 
 
 
