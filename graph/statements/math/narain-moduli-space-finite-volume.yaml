@@ -30,8 +30,18 @@ sources:
     loc: "arXiv:hep-th/0509212v2, §2, p.4（'which is known to be finite [3]'；本文无编号公式）"
     note: "此条只承载'Vafa 把该事实引给 Borel–Harish-Chandra'这一转述，不承载定理本身的论证。"
 tags: [math, arithmetic-group, moduli-space, narain, finite-volume]
+superseded_by: math.narain-moduli-space-finite-volume-v2
 notes: |
   from: vafa-2005#E9、#U3；bib note of borel-harish-chandra-1962。
+
+  【★ 已换代（2026-09-11，curator）】本卡的 statement **缺少条件 d ≥ 2**。Borel–Harish-Chandra
+  型的有限余体积定理要求群的单位连通分支半单，而 arXiv:2006.04839 §4 逐字给出
+  "the identity component of O(c,c) is semisimple iff c ≥ 2" —— 即 d = 1 时本卡的论证路线失效，
+  而本卡的文本对一切 d 断言。Vafa 2005 原文也没有这个限制。按不可变性纪律另建
+  **math.narain-moduli-space-finite-volume-v2**，请使用该卡。
+  同轮的另外两处改动只在 v2 上做：(i) sources.loc 由"未核实"改为篇级
+  `Ann. of Math. 75 (1962) 485`（Crossref L2），未核实的**定理编号**移入 source.note 并写死禁令
+  "不得写 Theorem 9.4"；(ii) 推导 status 由 rigorous 降为 physical-argument（环节 (A)(D) 无来源）。
 
   【★ loc 未核实（本卡最大的弱点）】Borel–Harish-Chandra 1962 的**正文本项目未获取**。
   本卡的 sources.loc 照实写"未核实"，不编定理号（graph/CLAUDE.md 的纪律：不确定编号时照实写，

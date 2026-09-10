@@ -1,0 +1,57 @@
+id: math.narain-moduli-space-finite-volume-v2--via-borel-harish-chandra
+target: math.narain-moduli-space-finite-volume-v2
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: borel-harish-chandra-1962
+    loc: "Ann. of Math. 75 (1962) 485"
+    note: >
+      ★ **篇级定位；正文未获取（L0），定理编号未核实，不得写 "Theorem 9.4"。**
+      定理内容的依据是 L3 转引 arXiv:2006.04839 §4（其 ref [57]）逐字
+      "an arithmetic subgroup of a semisimple algebraic group has a finite volume quotient"；
+      同一处逐字给出本卡的关键条件 "the identity component of O(c,c) is semisimple iff c ≥ 2"。
+      ⚠ 不可与 cocompact 那一支混用（arXiv:2509.09047 引的是余紧那条，Narain 商不紧）。
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.4（'which is known to be finite [3]'）"
+    note: "此条只承载'Vafa 把该事实引给 Borel–Harish-Chandra'这一转述。Vafa 没有写 d ≥ 2。"
+summary: |
+  Borel–Harish-Chandra (1962) 的定理：半单代数群的算术子群在该群中具有有限余体积（在无 Q-特征标
+  等标准条件下）。取 G = SO(d,d;R)、Γ = SO(d,d;Z)、K = SO(d)×SO(d)，即得 Narain 模空间
+  Γ\G/K 的体积有限。
+
+  **限 d ≥ 2**：该定理要求群（的单位连通分支）半单，而 arXiv:2006.04839 §4 逐字给出
+  "the identity component of O(c,c) is semisimple iff c ≥ 2"。d = 1 时前提不成立，本路线失效。
+
+  Vafa 2005 §2 (p.4) 正是把 T^d Narain 模空间的体积有限性引给该文（"which is known to be
+  finite [3]"），并强调 "The existence of T-duality is *crucial* in making this volume finite"
+  ——即有限性来自商掉算术子群 SO(d,d;Z)。
+gaps:
+  - "★ **(A) 无来源**：'SO(d,d;Z) 是 SO(d,d) 中的算术子群' 本项目找不到任何来源；Vafa 直接写出陪集就往下走，不论证。**这一步在本图中是 inferred（推断）而非有据。**"
+  - "★ **(D) 无来源**：'该双陪集就是 Narain 模空间' 是物理侧构造（Narain 1986 PLB 169, 41；Narain–Sarmadi–Witten 1987 NPB 279, 369），这两篇本项目尚未登记，更未抽取。**这一步同样是 inferred。**"
+  - "**来源正文未获取（L0）**：定理的精确表述、编号、所需假设（Q-群的结构条件、无 Q-特征标等）本项目均未核实；loc 只写到篇级，**不得编定理号**"
+  - "定理内容本身只有 L3 转引（arXiv:2006.04839 §4），且该篇尚未登记进 sources.bib"
+  - "d ≥ 2 的必要性只核实到'半单性在 d = 1 失效'这一层；**d = 1 时体积是否仍有限本项目不知道**，本卡对 d = 1 不作断言"
+  - "测度的对应（G 上 Haar 测度诱导到双侧商上的不变测度、与物理侧模空间度规的关系）在任何来源中都未核实"
+notes: |
+  from: vafa-2005#E9、#U3；literature/extractions/math-sources.md §45。
+
+  【★ status 为什么从 v1 的 rigorous 降为 physical-argument】v1 的推导把 status 写成 rigorous，
+  理由是"该数学定理在数学界的地位"。按 lead 口径（rigorous 需带编号定理）与 graph/CLAUDE.md 原则 2
+  （status 写自身论证的严格程度，不写公认程度），这不成立：本推导自身的论证里有两个**完全无来源**的
+  环节 (A)(D)，且被引定理的编号与假设未核实。故降为 physical-argument。
+  **这不是对 Borel–Harish-Chandra 定理的怀疑**，而是对本项目溯源深度的如实记账。
+
+  【升级路径】三件事同时做到才可升 rigorous：
+    1. 取得 Borel–Harish-Chandra 1962 正文（JSTOR/AMS），核实定理编号与假设；
+    2. 补 (A) 的来源（"整点子群是算术子群"，通常是定义的直接推论，但图里仍需一个可引位置）；
+    3. 登记并抽取 Narain 1986 / Narain–Sarmadi–Witten 1987，补 (D)。
+  researcher 另指出第二条独立路线：arXiv:2006.04839 §4 逐字 "This finiteness can be checked
+  directly by building a fundamental domain" —— 对 Narain 情形直接构造基本域，**不经过一般定理，
+  也不需要 (A)**，可能比本路线更快到 rigorous。建议另建 --via-explicit-fundamental-domain。
+
+  【depends_on 为空的原因】(A)(D) 的自然承载者是一张 `math.arithmetic-subgroup-finite-covolume`
+  卡（researcher §45.6 的建议），建它超出本轮改动范围（限 swampland/ 与 math.narain-*/math.cy3-*
+  与新约定），故两个缺口写进 gaps。**这条推导目前没有出边，不会把任何东西抬高。**
+author: curator
+created: "2026-09-11"

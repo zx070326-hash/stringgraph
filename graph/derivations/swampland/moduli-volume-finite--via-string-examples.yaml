@@ -6,11 +6,13 @@ depends_on:
   - id: swampland.moduli-space-volume
     inferred: false
     note: "V_Φ 的正规化定义（V_Φ = V_Φ^Λ|_{Λ→0}）就是猜想句所用的量，同节给出。"
-  - id: math.narain-moduli-space-finite-volume
+  - id: math.narain-moduli-space-finite-volume-v2
     inferred: false
     note: >-
       §2 (p.4) 的 T^d 例子逐字 "which is known to be finite [3]"，[3] = Borel–Harish-Chandra 1962。
       这一支是全文唯一有严格数学来源的例子；但它只覆盖 T^d，不覆盖一般猜想。
+      ⚠ 2026-09-11 换代为 v2：v2 的陈述限 **d ≥ 2**（半单性条件，见该卡），而 **Vafa 的 T^d
+      例子没有排除 d = 1**。即本条边只覆盖 Vafa 例子的 d ≥ 2 部分；d = 1 那一支在本图中无来源。
   - id: conv.moduli-metric-planck-units
 sources:
   - ref: vafa-2005
@@ -22,7 +24,7 @@ summary: |
   1. 10 维 IIB 的复标量 τ：V_τ = ∫d²τ/τ₂²，"If we did not use S-duality of type IIB this would
      indeed be infinite, violating the above conjecture. … With S-duality taken into account this
      volume is indeed finite."
-  2. II 型在 T^d 上：Narain 模空间，"which is known to be finite [3]"（math.narain-moduli-space-finite-volume）；
+  2. II 型在 T^d 上：Narain 模空间，"which is known to be finite [3]"（math.narain-moduli-space-finite-volume-v2）；
      "The existence of T-duality is *crucial* in making this volume finite."
   3. II 型在 K3 上：同型的陪集，"again thanks to the non-trivial T-dualities"。
   4. II 型在 Calabi–Yau 上：向量多重态标量的模空间 —— 原文只到
@@ -33,7 +35,8 @@ gaps:
   - "枚举式证据；作者明确承认不构成证明：§1 逐字 'Even though this by itself does not *prove* the above picture, it makes it look rather plausible.'（vafa-2005#E4）"
   - "Calabi–Yau 一支原文只到 'are believed to be finite in volume'（#E9）；[4] Horne–Moore 与 [5] Todorov 本项目未抽取"
   - "IIB 例子的 V_τ = ∫d²τ/τ₂² **原文没有标出积分区域**；全句逻辑要求在 SL(2,Z) 基本域上取，这是原文的记号省略（#E8 备注）"
-  - "Borel–Harish-Chandra 1962 正文未获取（L0），math.narain-moduli-space-finite-volume 的 loc 写作'未核实'"
+  - "Borel–Harish-Chandra 1962 正文未获取（L0），定理编号未核实；math.narain-moduli-space-finite-volume-v2 的 loc 只到篇级 'Ann. of Math. 75 (1962) 485'，且该卡的推导已由 rigorous 降为 physical-argument（环节 (A)(D) 无来源）"
+  - "★ **Vafa 的 T^d 例子没有排除 d = 1**，而 v2 的陈述限 d ≥ 2（O(d,d) 单位连通分支半单当且仅当 d ≥ 2，arXiv:2006.04839 §4 逐字）；d = 1 那一支在本图中无任何来源"
   - "模空间体积的单位在 Vafa 2005 中未指定；conv.moduli-metric-planck-units 是按 Ooguri–Vafa 2006 的补齐（#Q1）"
   - "方法论自陈：§5 逐字 'The conjectures motivated in this note are motivated from the constructability or lack thereof within string theory.'（#E17）"
 notes: |
