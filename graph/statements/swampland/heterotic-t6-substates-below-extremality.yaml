@@ -1,0 +1,53 @@
+id: swampland.heterotic-t6-substates-below-extremality
+kind: proposition
+title: "SO(32) 杂化弦 on T⁶：Q_L² > Q_R² 时谱中总有 M² = ½Q_L² − 1 的亚极端态"
+statement: |
+  设 SO(32) 杂化弦紧化在 T⁶ 上，模空间一般点处规范群为 U(1)^28；电荷是 28 维矢量
+  Q = (Q_L | Q_R)（Q_L 22 维、Q_R 6 维），落在偶自对偶格上，满足（Arkani-Hamed 等 2006
+  eq. (21)）
+
+    Q_L² − Q_R² ∈ 2Z 。
+
+  在 M_Pl = 1、α' = 4 的归一化下（原文 eqs. (22)–(24)）：
+    极端黑洞：Q_R² − Q_L² > 0 时 BPS，M² = ½Q_R²；Q_L² − Q_R² > 0 时非 BPS，M² = ½Q_L²；
+    微扰杂化弦谱：M² = ½Q_R² + N_R = ½Q_L² + N_L − 1，其中 N_{R,L} 是振子贡献。
+
+  断言（原文 eq. (25) 与其前一句，逐字）：
+
+    "But the string spectrum also guarantees that, as we go down to smaller charges along a
+     basis of directions in charge space, we are guaranteed to find a state with a mass/charge
+     ratio smaller than for extremal BH's. The inequality is saturated for the BPS states which
+     have Q_R² > Q_L², but for Q_L² > Q_R² the extremal black holes have M² = ½Q_L² while there
+     is always a state with mass
+       M² = ½Q_R² = ½Q_L² − 1    (25)
+     since there is a charge vector with Q_L² − Q_R² = 2 on the charge lattice."
+
+  即：在该背景下，沿电荷空间的一组基方向总能找到质荷比小于极端黑洞的态。
+
+  **本卡只断言该背景下的事实，不断言任何普遍性命题。**
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14；Figure 4 图题, p.13"
+  - ref: sen-1995-bh-torus
+    loc: "**未核实**：本项目未获取该文正文（bib note 记为 L0）。eqs. (22)(23) 的极端黑洞解由 arkani-hamed-2006 §4 外包给该文（其 [8]）。"
+tags: [swampland, weak-gravity, heterotic, charge-lattice, black-hole, amnv]
+notes: |
+  from: arkani-hamed-2006#E22（另见 #U3、#Q2）。
+
+  【两套归一化必须同时声明】M_Pl = 1（§3 起）与 **α' = 4**（§4，原文逐字 "where we chose units
+  with α' = 4"）。否则 (24) 与 (25) 里的 −1 无意义。⚠ α' = 4 **与本图 canonical 的
+  conv.alpha-prime-regge 不是同一归一化**；本卡不声明 alpha-prime 族约定，只在此记账，
+  凡把本卡接到用 conv.alpha-prime-regge 的节点上的边必须写 convention_map。
+
+  【(24) 里 −1 的来源】原文逐字 "The −1, coming from the tachyon in the left-moving bosonic
+  string, is crucial."
+
+  【⚠ 原文排印错误】Figure 4 图题首句逐字为 "The charge M of the heterotic string states of
+  charge Q approaches the M = Q line from below"，按内容应为 "The mass M"（抽取记录 #E22 备注 4）。
+
+  【抽取者复算（原文未显式写出）】由 (24) 取 N_L = 0 与 Q_L² − Q_R² = 2 得 N_R = 0 且
+  M² = ½Q_R² = ½Q_L² − 1，比极端黑洞的 ½Q_L² 小 1，与 (25) 一致。**该复算原文没有写出**，
+  在推导中标 inferred: true。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,38 @@
+id: conv.moduli-metric-planck-units
+family: moduli-metric
+title: 模空间度规与距离按 Planck 单位量
+definition: |
+  标量模空间 M 上的度规由标量场的动能项定义（Ooguri–Vafa 2006 §2, p.3 逐字：
+  "Given that points on M are given by the expectation value of scalar fields, we can use
+  their kinetic term to define a metric on M"）。
+
+  两点 p₁, p₂ ∈ M 之间的距离 d(p₁, p₂) 取**最短测地线的长度，按 Planck 单位量**
+  （原文逐字："the distance of the shortest geodesic between them measured in Planck units"）。
+
+  单标量情形的显式归一化（同文 §4.2, p.14 逐字）：
+    ds² = M_Pl^{-2} dφ²,
+  即 φ 的值等于测地长度乘 M_Pl。
+
+  本约定**不**规定时空度规号差（两篇原文都没有给号差），也不涉及 α'。
+canonical: true
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, p.3（'measured in Planck units'）；§4.2, p.14（ds² = M_Pl^{-2}dφ²）"
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.2–3（S = ∫M_P^{d-2}R + g_ij(Φ)∂Φ^i∂Φ^j 与 V_Φ = ∫dΦ√(g(Φ))；本文无编号公式）"
+    note: |
+      **Vafa 2005 没有指定单位**：原文只给作用量 S = ∫M_P^{d-2}R + g_ij(Φ)∂Φ^i∂Φ^j 与
+      V_Φ = ∫dΦ√(g(Φ))，一字未提 g_ij 是否含 M_P 的幂次，因此"体积有限"这句话的内容
+      在原文里是欠定的（抽取记录 vafa-2005#Q1、#U7）。
+      本约定的 canonical 取法来自 Ooguri–Vafa 2006，把它用到 Vafa 2005 的节点上是本项目的补齐，
+      对应的边必须标 inferred: true。
+notes: |
+  from: ooguri-vafa-2006#E8、#E28（§1.2）；vafa-2005#Q1。
+
+  两篇原文的截断记号不同但角色相同：Vafa 2005 用 Λ（EFT 有效于 E ≪ Λ，B^Λ 是被积掉的
+  重激发质量 m ≫ Λ 的区域），Ooguri–Vafa 2006 用 ε（"a fixed scale for the low energy
+  effective theory"）。**两文都没有写出 Λ 与 ε 的关系**（抽取记录 ooguri-vafa-2006#E3 备注 2），
+  本约定也不擅自等同二者。
+
+  ⚠ Ooguri–Vafa 2006 里字母 d 有两种含义：§4.1 的 g_ij^{one-loop} 式里 d 是**时空**维数，
+  §4.2 的 φ̈ + dHφ̇ = 0 里 d 是**空间**维数（抽取记录 §1.1）。引用这两处必须分别说明。

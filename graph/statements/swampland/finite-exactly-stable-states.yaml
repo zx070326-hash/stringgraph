@@ -1,0 +1,49 @@
+id: swampland.finite-exactly-stable-states
+kind: proposition
+title: 精确稳定态的数目在电荷空间的任一给定方向上有限（AMNV §3）
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §3 (p.11–p.12) 提出的一般猜想，逐字（含原文自己的两次
+  修正）：
+
+    "So our mass/charge ratio conjecture (III) can be seen to follow from a very simple general
+     conjecture valid for both charged and uncharged particles: The number of exactly stable
+     particles in a theory of quantum gravity in asymptotically flat space is finite. Actually
+     this statement is not quite correct. Clearly we can have an infinite number of exactly
+     stable BPS states, and many of these are safely bound; consider for instance dyons of
+     electric/magnetic charge (n,1) for large n. However, the number of exactly stable (and
+     safely bound) states *in any given direction in charge space* is finite."
+
+  本图取的是**修正后**的陈述：在渐近平坦时空的量子引力理论中，**在电荷空间的任一给定方向上**，
+  精确稳定（且 safely bound）的态的数目有限。
+
+  两条不得省略的限定：
+  (1) **"in any given direction in charge space" 必须带**；不带这个限定的版本被作者自己判为
+      "not quite correct"（BPS 态可以有无穷多个）；
+  (2) 陈述对带电与不带电粒子都适用（原文 "valid for both charged and uncharged particles"）。
+
+  原文由本条推 (III) 的论证（同处）：若最小荷粒子有 M > Q，则两两之间净力吸引，可不断形成
+  Kepler 束缚态使 (M/Q) 单调下降并渐近趋于 1，而"since (M/Q) is a decreasing function of Q,
+  none of these states can decay into a collection of particles with smaller charges"，即得到
+  **无穷多个精确稳定态**，与本条矛盾。
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.11–p.12（本段无编号公式）"
+tags: [swampland, conjecture, finiteness, stable-states, amnv]
+notes: |
+  from: arkani-hamed-2006#E21（另见 #E3）。
+
+  【与 Vafa 2005 的同族关系（唯一的原文级连接之一）】该文 §1 (p.2) 逐字说本判据
+  "nicely extends some of the finiteness criteria discussed in [1,2] in the context of bounds on
+  the number of massless particles in a gravitational theory"，[1] = vafa-2005。
+  但**原文只说"扩展"，没有给出推导方向**；图中不加本卡与
+  swampland.finite-number-of-matter-fields 之间的推导边（若后续要加，必须 inferred: true）。
+
+  【中性粒子的推论】原文接着说"Even for neutral particles, this implies that the number of
+  massless degrees of freedom is finite"，并把它与 Bekenstein 界的 species problem 相联系。
+  本轮不建该推论节点。
+
+  【本卡自身没有正面证据】原文对它只给"若违反则出现无穷多精确稳定态"的启发式图像与
+  Gell-Mann 极权原理式的动机，没有独立检验。故支持推导只能是 conjecture-support / conjecture。
+author: curator
+created: "2026-09-11"

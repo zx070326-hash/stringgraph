@@ -1,0 +1,52 @@
+id: swampland.ov-conjecture-3-scalar-curvature-negative
+kind: proposition
+title: "Ooguri–Vafa Conjecture 3：无穷远点附近标量曲率非正（dim M > 1 时严格为负）"
+statement: |
+  Ooguri–Vafa 2006 §2 (p.4) 的 Conjecture 3，逐字：
+
+    "Conjecture 3: The scalar curvature near the points at infinity is non-positive. (It is
+     strictly negative if the dimension of the moduli space is greater than 1.)"
+
+  紧随其后的说明（节选，逐字）：
+
+    "The fact that the curvature is negative near infinity is correlated with the fact that
+     there are points infinitely far away, even though the volume is finite.
+     One could consider a stronger conjecture claiming various sectional curvatures being
+     negative near infinity. … However they are not quite the same condition, as for instance,
+     there are points on M arising in string theory where the sectional curvature is positive,
+     as will be noted in the next section. Our conjecture here only refers to the scalar
+     curvature being negative near infinity, which is weaker."
+
+  两条不得省略的限定：
+  (1) **是标量曲率（scalar curvature），不是截面曲率**。原文特意声明更强的截面曲率版本
+      **不成立**（弦论中存在截面曲率为正的点），并说自己这条 "is weaker"。
+      把本条写成截面曲率是实质性错误。
+  (2) 括号里的维数条件是猜想的一部分：dim M > 1 时严格为负，dim M = 1 时只保证非正。
+
+  适用域见 swampland.applicability-domain。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 3, p.4（含其后的说明段）"
+tags: [swampland, conjecture, moduli-space, curvature, ooguri-vafa]
+notes: |
+  from: ooguri-vafa-2006#E11（另见 #E19、#E23、#Q2）。
+
+  【★ 原文三处编号误植（本项目判定，非原文）】§3.1 第一个 Example v（p.9）有两处、§3.2
+  Example b（p.12）有一处，在**曲率**语境里把 "conjecture 3" 印成 "conjecture 2"。
+  判定依据：Conjecture 2 讲轻粒子塔与曲率无关，Conjecture 3 是唯一讲曲率的；且同文
+  §3.2 Example c（p.12）在同样语境里编号正确（"violating conjecture 3"）。
+  **凡本图从那三处取证据的边，必须在 note 写"原文 v1 印作 conjecture 2，按内容判为
+  conjecture 3 的误植（本项目判定）"并标 inferred: true**（抽取记录 #Q2、#U4）。
+
+  【向量多重态曲率符号不必为负】§3.1 逐字 "The curvature of the vector multiplet moduli space
+  is not necessarily negative"，只有**渐近**行为为负。本卡的陈述只讲"无穷远点附近"。
+
+  【4d N=1 例子不可挂本条】§3.1 第二个 Example v（p.10）逐字说 "it is difficult to test the
+  conjecture 3 about the curvature of M"。
+
+  【遍历性不是本条内容】说明段提到负截面曲率紧空间上测地流遍历（引 [6] Anosov 1967，⚠ 该条
+  参考文献把 "Riemannian" 印成 "Romanian"），原文明说自己的猜想"go in that direction"但
+  "not quite the same condition"。本图不建遍历性节点。
+author: curator
+created: "2026-09-11"

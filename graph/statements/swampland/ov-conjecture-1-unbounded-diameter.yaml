@@ -1,0 +1,44 @@
+id: swampland.ov-conjecture-1-unbounded-diameter
+kind: proposition
+title: "Ooguri–Vafa Conjecture 1：模空间的直径无界"
+statement: |
+  Ooguri–Vafa 2006 §2 (p.3) 的 Conjecture 1，逐字：
+
+    "Conjecture 1: Choose any point p₀ ∈ M. For any positive T, there is another point p ∈ M
+     such that d(p,p₀) > T."
+
+  其中 d 是 swampland.moduli-space-distance 定义的（Planck 单位下的最短测地线长度）。
+  前一句正文逐字："We conjecture that the distance can take an arbitrary large value, namely:"
+
+  摘要给出的 swampland 措辞版（**与正文措辞不同**），逐字：
+
+    "we conjecture that … moduli spaces with finite non-zero diameter belong to the swampland."
+
+  三条不得省略的限定：
+  (1) 陈述形式是**直径无界**（对任意 T 存在距离超过 T 的点），**不是**"存在无穷远点"，
+      **也不是**"体积无穷"；
+  (2) 摘要的 "non-zero" 对应适用域条件 dim M ≠ 0（见 swampland.applicability-domain (D3)）：
+      没有模的理论不因本条被判入 swampland；
+  (3) 适用域还要求 Planck 质量有限、时空维数 ≥ 4。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 1, p.3；Abstract（'finite non-zero diameter' 措辞）"
+tags: [swampland, conjecture, moduli-space, distance, diameter, ooguri-vafa]
+notes: |
+  from: ooguri-vafa-2006#E9、#E8、#E1（另见 #Q5）。
+
+  【★ 溯源红线】本条讲**直径**，Vafa 2005 讲**体积**（swampland.moduli-volume-finite）。
+  两者相容但独立：同文 §3.1 Example ii 逐字说 IIB 的 τ 空间"体积有限而通向 i∞ 的测地长度对数
+  发散"。**Vafa 2005 全文没有 distance / diameter / geodesic**；把本条归给 Vafa 2005 是溯源
+  错误（抽取记录 vafa-2005#Q4、ooguri-vafa-2006#Q5）。图中**不加** moduli-volume-finite 与
+  本条之间的推导边。
+
+  【★ 与 Conjecture 2 相互独立】§4.1 末逐字："Indeed it is possible to show that these are
+  independent conjectures and one conjecture does not follow from the other."
+  => 图中**禁止**在本条与 ov-conjecture-2-* 之间加任一方向的 depends_on 边。
+
+  【"Swampland Distance Conjecture"这个名字不在原文】全文只叫它 Conjecture 1/Conjecture 2；
+  本图节点 id 用描述性 slug，不用后来文献的名字。
+author: curator
+created: "2026-09-11"

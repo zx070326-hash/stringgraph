@@ -1,0 +1,41 @@
+id: conv.extremality-normalization
+family: extremality
+title: 极端性归一化：质荷比中的"1"是大极端黑洞的 (M/Q) 比值
+definition: |
+  弱引力型不等式 (M/Q) ≤ 1 中的"1"按 Arkani-Hamed–Motl–Nicolis–Vafa 2006 §3, p.10 的
+  **相对定义**取：逐字 "it is natural to take the (M/Q) ratio that is equal to one for
+  large extremal black holes"。即"1"被定义为**大极端黑洞**的质荷比，不是一个独立给定的常数。
+
+  §3 起工作在 M_Pl = 1 单位下（原文逐字 "Working in M_Pl = 1 units"）。
+
+  ⚠ 该文内部有**两套互不换算**的具体实现：
+    (a) §2.2, p.5–6：黑洞解存在的界写作 M ≥ Q M_Pl，极端黑洞 M = Q M_Pl；
+    (b) §4, eqs. (22)(23), p.13（M_Pl = 1）：BPS 黑洞 M² = ½Q_R²，非 BPS 极端黑洞 M² = ½Q_L²。
+  (a) 与 (b) 相差一个 √2 与电荷格的归一化。**原文没有给出两者的换算**，也没有说 (19) 的"1"
+  在 (22)/(23) 的记号下是什么（抽取记录 arkani-hamed-2006#Q2、#U5）。
+
+  本项目的用法：凡写 (M/Q) ≤ 1 的节点一律取上面的相对定义（在任何电荷归一化下都成立）；
+  凡引 (22)–(25) 的节点必须同时声明 M_Pl = 1 与 α' = 4 两套归一化。
+canonical: true
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.10（'1'的相对定义与 M_Pl = 1）"
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.2, p.5–6（M ≥ QM_Pl 与 extremal black holes have M = QM_Pl）"
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, eqs. (22)(23), p.13（M² = ½Q_R²、M² = ½Q_L²，M_Pl = 1 单位）"
+notes: |
+  from: arkani-hamed-2006#E18、#E11、#E22、#Q2。
+
+  **本约定卡记录的是原文的一处不一致，不是一个已解决的换算。** 任何需要在 (a) 与 (b) 之间
+  换算的推导都必须标 inferred: true 并写明换算是本项目补的。
+
+  同时记下"m ≲ g M_Pl"型不等式在该文的四种写法（抽取记录 #Q1，全部 L1 逐页核实）：
+    1. §2.1, eq. (1), p.4：m_el ≲ g_el M_Pl        （规范耦合 g，关系符 ≲）
+    2. §2.2, p.6：these particles should have m < qM_Pl （粒子电荷 q，关系符 <）
+    3. §3, eq. (19), p.10：(M/Q) ≲ 1                （M_Pl = 1，关系符 ≲）
+    4. §3, (I)(II)(III), p.10：… ≤ 1                （M_Pl = 1，关系符 ≤）
+  另有 Figure 1, p.3 的 G_N < g²/m²、§2.4 eq. (14) 的 T_el ≲ (g²/G_N)^{1/2}、
+  摘要的 Λ = gM_Pl（**等号**，与正文 (4) 的 ≲ 不同）。
+  **原文没有给出 g 与 q 的显式换算**，也**没有任何带精确系数的形式**（无 √2、无 (d−2)/(d−3)）；
+  那些系数是后来文献的内容，本图不得补。

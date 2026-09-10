@@ -1,0 +1,37 @@
+id: math.cy3-cohomology-bounded
+kind: proposition
+title: Calabi–Yau 三折的上同调维数是否一致有界（未解决的数学问题）
+statement: |
+  问题：是否存在常数 C，使得所有 Calabi–Yau 三折 X 的上同调维数 dim H^*(X) ≤ C？
+  等价地：是否**不存在**一列 Calabi–Yau 三折使其上同调维数无界增长？
+
+  本卡断言的是**肯定回答**（存在这样的界）。
+
+  Vafa 2005 §3 (p.5) 对该问题的原文表述，逐字：
+
+    "For example, we do not know of a sequence of Calabi-Yau threefolds for which the
+     dimension of cohomologies can get unboundedly large. It is not known if this is actually
+     a true mathematical fact, but experience with various examples in string theory gives one
+     a strong feeling that this is going to be finite."
+
+  即：截至该文（2005），**这是一个开放的数学问题**，证据形式是"弦论中的经验"。
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3, p.5（本文无编号公式）"
+tags: [math, calabi-yau, cohomology, open-problem, conjecture]
+notes: |
+  from: vafa-2005#E12、#U6。
+
+  【为什么单独建卡】Vafa 的"物质场数目有限"判据压在这个纯数学问题上；把二者写在一张卡上会
+  掩盖"(a) 物质场数 ≤ 上同调维数（可算）"与"(b) 上同调维数有界（开放）"两步强度的巨大差别
+  （抽取记录 vafa-2005#E12 备注）。
+
+  【未核实项】2005 年之后该问题是否有进展**本项目未检索**（抽取记录 vafa-2005#U6 明确把它
+  列为"下一轮专门检索"的对象）。这是 swampland 一线中少见的、可能升到 rigorous 的节点：
+  若有数学文献解决它，本卡应换代并加 kind: proof 的推导。
+
+  【本卡不是 Vafa 的原创猜想】原文只是指出"不知道是否为真数学事实"。本卡把它写成一条待判定
+  的数学命题，是本项目的组织选择；其唯一来源是 Vafa 的这段话，故任何以本卡为依据的边都很弱。
+author: curator
+created: "2026-09-11"

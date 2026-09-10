@@ -1,0 +1,39 @@
+id: swampland.finiteness-criteria-fail-without-gravity--via-decompactification
+target: swampland.finiteness-criteria-fail-without-gravity
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: swampland.moduli-space-volume
+    inferred: false
+    note: "所说的'体积不再有限'用的就是这条正规化定义下的 V_Φ。"
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.4（非紧 toric Calabi–Yau）；§3, p.5–p.6（6 维 A_{N-1} 的 U(N)）"
+summary: |
+  Vafa 2005 自己给出的两个"引力解耦则判据失效"的例子：
+
+  1. 去紧化 / Newton 常数为零（§2, p.4，逐字，⚠ 原文排印 "finte"）："Note that this finiteness
+     property correlates with having a finte Newton's constant in the gravitational sector. In
+     particular if we consider decompactifying the internal geometry, which leads to the lower
+     dimensional gravitational sector to be non-dynamical, with vanishing Newton's constant, the
+     volume of scalar field space is no longer finite. For example consider type II strings on
+     non-compact toric Calabi-Yau manifolds, which leads to vanishing Newton's constant in the
+     lower dimensional theory due to the fact that the internal volume is infinite. This leads to
+     the volume of the scalar moduli space, i.e. moduli space of non-compact toric Calabi-Yau not
+     being finite either (this is a well known fact in the context of geometric engineering …)."
+
+  2. 规范群秩（§3, p.5–6）：非紧局部几何下 6 维 IIA 在 A_{N-1} 奇点上给 U(N)，N 任意大；
+     要有非零 Newton 常数就必须紧化，而 K3 中秩被 20 卡死。
+
+  两例都表明：判据是**引力特有**的限制，不是场论一致性的推论。
+gaps:
+  - "第一例的关键事实原文只说 'this is well known fact in the context of geometric engineering'，**不给来源**（vafa-2005#E10）"
+  - "第二例的 'K3 中秩 ≤ 20' 只写 'it is known that'，**不给来源**（#E13、#U5）"
+  - "两例都只是构造，没有一般性论证说明'凡引力解耦则判据必失效'"
+notes: |
+  from: vafa-2005#E10、#E13。
+  ★ **这两例绝不是 swampland.moduli-volume-finite / gauge-rank-restricted 的 refutation**：
+  那两条猜想句自带"Newton 常数非零"的前提，前提不满足的例子不构成反例。
+author: curator
+created: "2026-09-11"

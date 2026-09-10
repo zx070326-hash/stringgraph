@@ -1,0 +1,33 @@
+id: swampland.rigid-n2-vector-moduli-ricci-positive--via-holomorphic-prepotential
+target: swampland.rigid-n2-vector-moduli-ricci-positive
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b) Rigid Limit of N = 2 Theories in Four Dimensions, p.11–p.12（公式无编号）"
+summary: |
+  全局 N=2 的向量多重态模空间度规为 g_{ij̄} = Im τ_{ij}，τ_{ij} = ∂_i∂_j F(z)（F 全纯的
+  pre-potential）。由此
+    R_{ij̄} = −∂_i∂̄_j log det g = ¼ g^{kl̄} g^{mn̄} (∂_i τ_{km})(∂̄_j τ̄_{l̄n̄})，
+  原文称"which is manifestly positive definite"，并指出"The essential step is to use the fact
+  that g_{ij̄} is the imaginary part of τ_{ij}, which is holomorphic in z."
+
+  原文随后显示这如何由引力解耦极限得到：局部 N=2 的 Kähler 势为
+  K = −log(4F − 4F̄ + z̄^i∂_iF − z^i∂̄_iF̄)（引 [17] de Wit–Van Proeyen），取
+  F(z) = (i/8)M_Pl² + F(z) 并令 M_Pl → ∞，K 展开后度规就退化成全纯 τ_{ij} 的虚部，Ricci 曲率
+  正定。原文下结论："This shows how the conjecture 2 can be violated by taking the decoupling
+  limit M_Pl → ∞."（⚠ 按内容应为 conjecture 3。）
+gaps:
+  - "★ **rigorous 例外候选，但缺 reviewer 复核记录**：按 docs/STATUS_LEVELS.md 的 lead 裁决，前提完整 + 有限步初等计算 + reviewer 独立复核并留 `reviewer-verified` 记录方可标 rigorous；本轮无该记录，故取 physical-argument"
+  - "转录风险：F(z) = (i/8)M_Pl² + F(z) 中左右两个 F 是不同的量（花体 vs 直体），页图字体可区分而纯文本丢失；复核必须回原页图（ooguri-vafa-2006#U5）"
+  - "[17] de Wit–Van Proeyen NPB 245, 89 (1984) 本项目未抽取；Kähler 势的形式外包给它"
+  - "本图无特殊 Kähler 几何 / 全局 N=2 的定义节点，depends_on 为空"
+  - "原文末句的猜想编号误植（印作 conjecture 2，应为 3），本项目判定（#Q2）"
+notes: |
+  from: ooguri-vafa-2006#E23。
+  **请 reviewer 复核** R_{ij̄} = ¼ g^{kl̄}g^{mn̄}(∂_iτ_{km})(∂̄_jτ̄_{l̄n̄}) 这一步；
+  复核通过后本推导可升为 kind: proof / status: rigorous 并在本 notes 写
+  `reviewer-verified: <agent>, <date>`。
+author: curator
+created: "2026-09-11"

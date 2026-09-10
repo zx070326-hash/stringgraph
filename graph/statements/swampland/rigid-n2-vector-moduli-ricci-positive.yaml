@@ -1,0 +1,55 @@
+id: swampland.rigid-n2-vector-moduli-ricci-positive
+kind: proposition
+title: 全局 N=2 理论中向量多重态模空间的 Ricci 曲率正定（引力解耦极限）
+statement: |
+  断言：在 4 维**全局**（非引力）N=2 超对称理论中，向量多重态模空间的 Ricci 曲率**正定**。
+
+  Ooguri–Vafa 2006 §3.2 Example b（p.11–p.12）的原文，逐字（⚠ 原文排印错误
+  "supsersymmetries"，照抄）：
+
+    "We saw in the example v in section 3.1 that, in theories with local N = 2
+     supsersymmetries, the sign of curvature of vector multiplet moduli may be indefinite, but
+     the scalar curvature becomes strictly negative near infinite distance singularities.
+     On the other hand, it is straightforward to see that, in non-gravitational theories with
+     global N = 2 supersymmetry, the Ricci curvature of the vector multiplet moduli space is
+     positive definite. In this case, the metric can be written as
+       g_{ij-bar} = Im tau_{ij},      tau_{ij} = d_i d_j F(z),
+     where F(z) is the pre-potential. The Ricci curvature then is
+       R_{ij-bar} = - d_i d-bar_j log det g
+                  = (1/4) g^{kl-bar} g^{mn-bar} (d_i tau_{km})(d-bar_j tau-bar_{l-bar n-bar}),
+     which is manifestly positive definite. The essential step is to use the fact that
+     g_{ij-bar} is the imaginary part of tau_{ij}, which is holomorphic in z."
+
+  原文接着给出刚性极限的取法（K = −log(4F − 4F̄ + z̄^i ∂_i F − z^i ∂̄_i F̄)，
+  F(z) = (i/8)M_Pl² + F(z)，令 M_Pl → ∞），并下结论（逐字，⚠ 编号误植见 notes）：
+  "This shows how the conjecture 2 can be violated by taking the decoupling limit M_Pl → ∞."
+uses_conventions: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b), p.11–p.12（本段公式无编号）"
+tags: [swampland, n2-supersymmetry, curvature, rigid-limit, gravity-decoupling]
+notes: |
+  from: ooguri-vafa-2006#E23（另见 #U5、#Q2）。
+
+  【status = physical-argument（rigorous 例外候选，待复核）】原文对这一段用的是
+  "it is straightforward to see"、"which is manifestly positive definite"、"This shows how"，
+  **是本文最接近严格论证的一段**：前提写全了（g = Im τ，τ 全纯），计算是有限步复几何。
+  按 docs/STATUS_LEVELS.md 的 lead 裁决（2026-09-10），此类"前提完整 + 有限步初等计算"在
+  **reviewer 独立复核并留 `reviewer-verified` 记录后**可标 rigorous；**缺此记录一律
+  physical-argument**。本轮无复核记录，故取 physical-argument。
+  => **建议 reviewer 复核 R_{ij̄} = ¼ g^{kl̄}g^{mn̄}(∂_iτ_{km})(∂̄_jτ̄_{l̄n̄}) 这一步**，
+  复核后可把 --via-holomorphic-prepotential 升为 kind: proof / status: rigorous。
+
+  【★ 转录风险（复核前必读）】原文式 F(z) = (i/8)M_Pl² + F(z) 中左右两个 F 是**不同的量**
+  （花体 F = 引力理论的 pre-potential，直体 F = 刚性极限的），页图上字体可区分，纯文本转录后
+  丢失。**复核必须回原页图**（抽取记录 #U5）。本卡 statement 中的相应公式已按纯 ASCII 转写
+  （d 表示偏导，tau 表示 τ），同样须回原页核对。
+
+  【★ 原文编号误植】末句 "the conjecture 2 can be violated" 按内容应为 **conjecture 3**
+  （曲率）。这是本项目的判定，非原文（抽取记录 #Q2；同型误植在 §3.1 Example v 有两处）。
+
+  【本卡不反驳任何猜想】它发生在 M_Pl → ∞ 的引力解耦极限，**不在**
+  swampland.applicability-domain 的适用域内，因此挂到
+  swampland.finiteness-criteria-fail-without-gravity，**不是** Conjecture 3 的 refutation。
+author: curator
+created: "2026-09-11"

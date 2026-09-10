@@ -1,0 +1,32 @@
+id: swampland.u1-496-and-u1-248-e8-in-swampland--via-no-known-construction
+target: swampland.u1-496-and-u1-248-e8-in-swampland
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.swampland-definition
+    inferred: false
+    note: "结论的形式是'这两个理论属于 swampland'，用的就是 Vafa 自己的定义。"
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §4, p.6–p.7（本文无编号公式）；p.7 脚注 6"
+summary: |
+  论证只有两步，第二步是否定式经验证据：
+  1. 这两个 10 维 N=1 规范群（U(1)^496 与 U(1)^248 × E₈）"are consistent as far as anomalies are
+     concerned [6]. Thus they both appear to be consistent semiclassically."
+  2. "However, we have no way of constructing either of these theories in string theory. It is
+     hard to believe that they actually exist, though we have no proof of this."
+
+  原文随即写下反例方向："It would be very interesting either to construct these or what is more
+  likely, to find what consistency condition goes wrong with these theories which renders them
+  inconsistent."；脚注 6 记 M. Douglas 的一个提议（假定存在带反对称张量场电荷的 1-brane 并研究
+  其上理论的一致性条件）。
+gaps:
+  - "**溯源矛盾**：原文把'这两个群反常自由'引给 [6] = Green–Schwarz 1984，而本项目对该文的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈，且 dim G = 496 只让 tr R⁶ 项消失；纯 Abel 因子的 Yang–Mills/混合反常检验 GS 1984 没有做（vafa-2005#Q3、#U4）"
+  - "本图**没有** consistency 区节点，故'10d N=1 反常自由的规范群条件'这条上游依赖暂缺；待 gsw-1987-v2 ch.13 抽取并建立 consistency 区后补上，届时标 inferred: true"
+  - "证据形式是'造不出来'（否定式经验证据），原文自陈 'we have no proof of this'"
+  - "原文没有说明'semiclassically consistent'在这里除反常自由外还包含什么（#Q2）"
+notes: |
+  from: vafa-2005#E15。
+  **不得**把"这两个群反常自由"作为 sources 挂到 green-schwarz-1984（见 gaps 第一条）。
+author: curator
+created: "2026-09-11"
