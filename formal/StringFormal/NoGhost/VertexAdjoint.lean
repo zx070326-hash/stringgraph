@@ -72,6 +72,48 @@ theorem pairing_creaExp_one_left (η b : Fin D → R) (hη : ∀ μ, η μ * η 
         coeff_zero_mul_X, coeff_smul, smul_eq_mul, Pi.neg_apply]
       ring
 
+/-- **The creation half of the vertex operator is adjoint to the annihilation half of the
+*opposite* momentum**: `Φ_j(b)^† = Ψ_j(-b)`, where `Φ_j(b)` acts by multiplication by
+`creaExp η b j` and `Ψ_j(c) = vertexAnn c j`.
+
+The sign flip `b ↦ -b` is *not* an artefact of a missing complex conjugation (the form is
+`R`-bilinear, so no coefficient is conjugated): it is forced by the relative minus sign
+between the two halves of the normal-ordered exponential,
+`E_-(z) = exp(+Σ_{m>0} b·α_{-m} z^m/m)` versus `E_+(z) = exp(-Σ_{l>0} b·α_l z^{-l}/l)`.
+Under `α^μ_m ↦ α^μ_{-m}` the first becomes the second with `b` replaced by `-b`. -/
+theorem pairing_creaExp_left (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (j : ℤ)
+    (v w : Fock D R) :
+    pairing η (creaExp η b j * v) w = pairing η v (vertexAnn (-b) j w) := by
+  classical
+  induction v using MvPolynomial.induction_on generalizing j w with
+  | C a =>
+      have h1 : (creaExp η b j * C a : Fock D R) = a • creaExp η b j := by
+        rw [MvPolynomial.smul_eq_C_mul]; exact mul_comm _ _
+      have h2 : (C a : Fock D R) = a • (1 : Fock D R) := by
+        rw [MvPolynomial.smul_eq_C_mul, mul_one]
+      rw [h1, h2, map_smul, LinearMap.smul_apply, smul_eq_mul, map_smul,
+        LinearMap.smul_apply, smul_eq_mul, pairing_creaExp_one_left η b hη,
+        pairing_one_left]
+  | add p q hp hq =>
+      rw [mul_add, map_add (pairing η), LinearMap.add_apply, hp, hq,
+        map_add (pairing η), LinearMap.add_apply]
+  | mul_X p u hp =>
+      have hL : (creaExp η b j * (p * X u) : Fock D R)
+          = creation R u.1 u.2 (creaExp η b j * p) := by
+        rw [creation_apply]; ring
+      have hR : (p * X u : Fock D R) = creation R u.1 u.2 p := by
+        rw [creation_apply, mul_comm]
+      rw [hL, pairing_creation_left, hp, hR, pairing_creation_left, annihilation_vertexAnn]
+
+/-- **The annihilation half is adjoint to the creation half of the opposite momentum**:
+`Ψ_L(b)^† = Φ_L(-b)`.  Obtained from `pairing_creaExp_left` by symmetry of the form. -/
+theorem pairing_vertexAnn_left (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (L : ℤ)
+    (v w : Fock D R) :
+    pairing η (vertexAnn b L v) w = pairing η v (creaExp η (-b) L * w) := by
+  have h := pairing_creaExp_left η (-b) hη L w v
+  rw [neg_neg] at h
+  rw [pairing_comm η v, h, pairing_comm]
+
 end CreaExpAdjoint
 
 end Fock
