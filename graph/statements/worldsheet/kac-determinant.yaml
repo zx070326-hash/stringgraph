@@ -13,7 +13,8 @@ sources:
   - ref: feigin-fuchs-1982
     loc: "完整证明"
   - ref: polchinski-1998-v1
-    loc: "§2.9 (未给证明)"
+    loc: "§2.9"
+    note: "抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式未核实，主来源为 kac-1979 / feigin-fuchs-1982。"
 tags: [cft, representation-theory]
 author: seed
 created: "2026-09-10"

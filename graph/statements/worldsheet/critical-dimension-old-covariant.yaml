@@ -1,0 +1,28 @@
+id: worldsheet.critical-dimension-old-covariant
+kind: proposition
+title: 旧协变量子化中 D = 26、a = 1 时零模态退耦且谱幺正
+statement: |
+  设 H_phys 是 worldsheet.old-covariant-physical-states 定义的旧协变物理态空间，
+  H_0 = {|χ⟩ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys} 是其零模态（伪态）子空间。
+  若 D = 26 且 a = 1，则
+    (a) Fock 内积在 H_phys 上半正定；
+    (b) H_0 恰为规范方向，商空间 H_phys / H_0 上诱导内积正定；
+    (c) H_phys / H_0 同构（作为分级内积空间）于 24 个横向振子生成的 Fock 空间。
+  即：零模态完全退耦，物理谱在洛伦兹协变的意义下幺正。
+  D > 26 时 (a) 失效（存在负模物理态）；D < 26 时内积仍半正定，但 H_0 的维数不足以
+  把 H_phys 约化到横向 Fock 空间，谱不具备 (c) 的形式。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: goddard-thorn-1972
+    loc: "Theorem 1（D = 26, a = 1 的等号情形）"
+  - ref: brower-1972
+    loc: "独立证明（谱生成代数）"
+  - ref: gsw-1987-v1
+    loc: "§2.3.2–2.3.3（教科书版本：DDF 态张成物理态模零模态）"
+    note: GSW 用 mostly-minus 号差，已转写为 conv.metric-mostly-plus。
+tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
+notes: |
+  这条是"无鬼定理的等号情形"作为临界维数判据的独立表述，即旧汇总节点
+  worldsheet.critical-dimension-bosonic 陈述中的第 (ii) 条。
+author: curator-critdim
+created: "2026-09-10"

@@ -1,0 +1,20 @@
+id: worldsheet.critical-dimension-old-covariant--via-no-ghost
+target: worldsheet.critical-dimension-old-covariant
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.no-ghost-theorem
+sources:
+  - ref: goddard-thorn-1972
+    loc: "Theorem 1 的等号情形（D = 26, a = 1）及其推论"
+  - ref: gsw-1987-v1
+    loc: "§2.3.2–2.3.3"
+    note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
+summary: |
+  无鬼定理在 D = 26、a = 1 时断言 H_phys 上内积半正定且 H_phys 模零模态同构于
+  24 个横向振子的 Fock 空间，这正是本陈述的 (a)(b)(c)。D > 26 的负模构造给出反向部分。
+  本推导只是把无鬼定理的等号情形改写为"临界维数判据"的形式，不含新的物理输入。
+gaps:
+  - "D < 26 情形（本陈述最后一句）在 Goddard–Thorn 原文中讨论不完整，通常归于 Brower 及后续工作；该部分的严格性继承自 worldsheet.no-ghost-theorem 自身的 gaps。"
+author: curator-critdim
+created: "2026-09-10"

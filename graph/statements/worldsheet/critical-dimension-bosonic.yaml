@@ -13,5 +13,14 @@ sources:
   - ref: gsw-1987-v1
     loc: "§2.3"
 tags: [bosonic-string, critical-dimension]
+notes: |
+  本节点保留为汇总命题：它断言 (i)(ii)(iii) 三条同时成立，是三个独立节点的合取——
+    (i)   worldsheet.critical-dimension-light-cone
+    (ii)  worldsheet.critical-dimension-old-covariant
+    (iii) worldsheet.critical-dimension-brst
+  因此不写 superseded_by（陈述未被替代，只是被分解）。原先的两条推导
+  --via-light-cone-lorentz 与 --via-no-ghost 已删除（各自只覆盖一条），
+  改由 --via-three-routes 汇总，其有效状态取三者最弱者。
+  引用本节点前请先考虑是否只需要其中某一条：只需要某一条时请直接依赖对应的新节点。
 author: seed
 created: "2026-09-10"

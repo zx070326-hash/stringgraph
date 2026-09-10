@@ -1,0 +1,54 @@
+id: worldsheet.light-cone-quantization
+kind: definition
+status: rigorous
+title: 玻色弦的光锥量子化（开弦）
+statement: |
+  取光锥坐标 x^± = (x^0 ± x^1)/√2 与横向坐标 x^i (i = 2..D-1，共 D-2 个)，
+  内积写作 a·b = -(a^+ b^- + a^- b^+) + a^i b^i。
+  开弦模式展开取 X^μ(τ,σ) = x^μ + 2α' p^μ τ + i(2α')^{1/2} Σ_{n≠0} (α^μ_n/n) e^{-inτ} cos(nσ)，
+  约定 α^μ_0 = (2α')^{1/2} p^μ。
+
+  光锥规范固定残余（共形）规范自由度，取
+    X^+(τ,σ) = x^+ + 2α' p^+ τ，  等价于 α^+_n = 0 (n ≠ 0)，且要求 p^+ ≠ 0。
+  于是 Virasoro 约束 L_n = -α^+_0 α^-_n + L^⊥_n = 0 把 X^- 的振子完全解出：
+    α^-_n = L^⊥_n / ((2α')^{1/2} p^+)          (n ≠ 0)，
+    α^-_0 = (L^⊥_0 - a) / ((2α')^{1/2} p^+)，
+  其中横向 Virasoro 生成元 L^⊥_n = (1/2) Σ_{m∈Z} : α^i_{n-m} α^i_m : （对 i = 2..D-1 求和），
+  a 是 L^⊥_0 的正规序常数，在本定义中作为待定实参数保留。
+
+  独立自由度是零模 (x^i, p^i, x^-, p^+) 与横向振子 α^i_n (i = 2..D-1, n ∈ Z\{0})，
+  正则关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0}，(α^i_n)^† = α^i_{-n}。
+  光锥 Fock 空间
+    H_lc = span{ α^{i_1}_{-n_1} ... α^{i_k}_{-n_k} |0; k^+, k^i⟩ }，  α^i_n |0; k⟩ = 0 (n > 0)，
+  其内积正定：横向振子代数是 D-2 份谐振子代数，不含不定度规方向，故无鬼态需要排除。
+  能级算符 N = Σ_{n≥1} α^i_{-n} α^i_n，把 α^-_0 = (2α')^{1/2} p^- 代回质量壳给出
+    α' m^2 = N - a   （开弦）。
+
+  洛伦兹生成元在 H_lc 上表示为
+    J^{μν} = x^μ p^ν - x^ν p^μ - i Σ_{n≥1} (1/n) (α^μ_{-n} α^ν_n - α^ν_{-n} α^μ_n)，
+  凡出现 α^-_n 处均代入上面的横向表达式；于是 J^{i-} 是横向模式的三次式，
+  其算符排序取正规序。
+uses: [worldsheet.virasoro-algebra]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3（光锥规范）：约 eq. (1.3.8) 规范条件、约 eq. (1.3.22) 开弦模式展开、约 eq. (1.3.32)–(1.3.36) 零点能与质量壳"
+    note: 公式号按 Polchinski 第一卷 §1.3 的编号给出近似位置，未逐条核对印次差异。Polchinski 在 §1.3 直接把正规序常数取为 ζ 正规化的值，本节点把它保留为参数 a。
+  - ref: gsw-1987-v1
+    loc: "§2.3.1（光锥规范、横向振子 Fock 空间、洛伦兹生成元 J^{μν}）"
+    note: GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化；此处已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
+tags: [bosonic-string, quantization, light-cone]
+notes: |
+  本节点只写开弦（题面允许开/闭二选一）。闭弦对应式为
+  规范条件 X^+ = x^+ + α' p^+ τ，α^μ_0 = ᾱ^μ_0 = (α'/2)^{1/2} p^μ，
+  质量壳 α' m^2 / 4 = N - a = Ñ - a（左右能级匹配）；需要时另建节点，不在此混写。
+
+  本节点刻意不固定 a 的值：a = (D-2)/24 来自 ζ 正规化，属于论证而非定义，
+  因此放在 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 的 gaps 里。
+  a = 1 本身是一条独立命题，见 worldsheet.open-string-intercept。
+  这样本定义本身是纯代数的（Fock 空间 + 二次型），可标 rigorous。
+
+  质量壳系数说明：按 conv.alpha-prime-regge（开弦 α' m^2 = N - a，a 为截距）写作 α' m^2 = N - a。
+  文献中出现的 m^2 = (2/α')(N - a) 属于另一套 α' 归一化（或闭弦式的误记），本项目不采用。
+author: curator-critdim
+created: "2026-09-10"
