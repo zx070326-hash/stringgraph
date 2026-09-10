@@ -93,6 +93,42 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
 `consistency.anomaly-cancellation-so32-effective-theory` 承载；
 "只有 `SO(32)` 与 `E₈ × E₈` 因子化" 这类唯一性断言**不是** GS 1984 的结果，图里也没有节点。
 
+### 有限可判定计算（`StringFormal/Math/FiniteCounts.lean`）
+
+同一个岛的算术角落，只 import Mathlib。两项都已完成，无 sorry，公理只有标准三条。
+
+- [x] `hexagon-odd-twist-count`：`hexagon_odd_twist_count`，
+  `∑_{k 奇, k ≤ 6} C(6,k) = 32`（`decide`）。GS 1984 (12c) / GSW v2 p.165 里那个 "32" 的
+  组合来历：六边形六条内线中奇数条带扭转的分布数 = `2⁵`。
+  建议图节点 `math.hexagon-odd-twist-count` 的 `lean_decl`（该卡尚未进 main，见下）。
+  **未做**：这个计数确实是 (12c) 系数来历这件事本身（物理/图层面的断言）。
+
+- [x] `superstring-sector-exhaustion`：namespace `SuperstringSectors`，
+  Polchinski v2 §10.6 (10.6.1)–(10.6.6) 的 `(ℤ₂)⁴` 扇区标签穷举（抽取记录 E40–E44）。
+  `sectors_card`：16 个标签里 10 个扇区非空（level matching），即原文的 "`2¹⁰` combinations"；
+  `mutuallyLocal_iff_even`：本文件的 `ZMod 2` 写法 ⟺ (10.6.5) 的整数偶性写法；
+  `consistentSpectra_eq` / `consistentSpectra_card`：三条件 (a)(b)(c) 的解**恰好十个**；
+  `maximalSpectra_card` / `halfSpectra_ssubset_maximal` / `mem_maximalSpectra_iff`：
+  原文列的六个（IIB/IIA/IIA′/IIB′/0A/0B）= 解集里的**极大**元，另四个是它们的真子群；
+  `maximalSpectra_filter_hasRamondNeveuSchwarz`：含 R–NS 扇区的极大解正好是四个 type II；
+  `tachyonSector_notMem_of_hasRamondNeveuSchwarz` / `tachyonSector_mem_of_not_...`：
+  四个 type II 不含 `(NS−,NS−)` 快子，两个 type 0 都含。
+  建议图节点 `worldsheet.superstring-sector-consistency-solutions` 的 `lean_decl`
+  （该卡尚未进 main，见下）。
+  **数学缺口（给图的建议）**：三条件按原文字面只给出十个解，原文的 "one readily finds the
+  only other solutions" 隐含了第四条未写出的条件——**谱是极大的**（"keeping all sectors
+  with …"，即 (10.6.9)–(10.6.11) 的 GSO 投影写法）。补上极大性后穷举完全正确。
+  推导卡的 `gaps` 里应记这一条，并注明补齐极大性的真正依据是 §10.7 的完整模不变性。
+  **未做**：这些标签穷尽 RNS 弦扇区；`LevelMatched` 背后的 level 计算（此处是定义）；
+  条件 (c) 作为模不变性必要条件的论证；(10.6.7) 的时空反射把 IIA′≅IIA、IIB′≅IIB
+  （故四个 type II 解只是两个物理理论）；type 0 解的模不变性。
+
+- [ ] **图接线待办**（不是 Lean 工作）：`math.hexagon-odd-twist-count` 与
+  `worldsheet.superstring-sector-consistency-solutions` 两张卡在本分支建立时都还不在 main
+  （分别在 `agent/curator/adt-abelian` 与 curator 的 GSO 支上），所以 `formal.lean_decl`
+  / `--via-lean` 推导没有一并提交。卡进 main 后由 lead 或 curator 接线，并跑
+  `uv run stringgraph check-axioms`。
+
 ## Virasoro
 
 - [x] `virasoro-lie-instance`：`VirasoroAlgebra R`（`R` 为交换 ℚ-代数）已是真正的 `LieRing` +
