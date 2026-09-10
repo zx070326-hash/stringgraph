@@ -83,4 +83,4 @@ cd formal && lake build               # 构建 Lean 形式化
 
 ## 当前阶段
 
-见 `docs/ROADMAP.md`。Phase 0 已完成，现在处于 **Phase 1：世界面理论子图**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem-v3`）。
+见 `docs/ROADMAP.md`。Phase 0 已完成，现在处于 **Phase 1：世界面理论子图**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem-v4`）。
