@@ -72,6 +72,9 @@
 - `worldsheet.brst-quantization`（statement 写死 c^g = −26，是命题埋进定义卡；建 v2 改为"鬼场部门为 λ = 2 的 bc 系统，中心荷记 c^g"，不要加 uses 边——会把四个 rigorous 节点拉低）
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
+- `worldsheet.open-string-virasoro-modes-v2`（仍内嵌 doubling trick 命题，reviewer-batch2）
+- `worldsheet.fock-indefinite-form`（"有序域上不定"末句未形式化：加一条平凡 Lean 引理或移到 notes）
+- `worldsheet.brst-cohomology-equals-ocq-physical`（--via-fgz 与 --via-lian-zuckerman 互补而非各自完整；researcher 读 LZ p.566–567 确认典范等距是否由包含映射诱导，否则拆目标）
 - 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载
 
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
