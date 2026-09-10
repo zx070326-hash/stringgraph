@@ -1,5 +1,5 @@
-id: worldsheet.verma-level-shift-by-lowering--via-lean
-target: worldsheet.verma-level-shift-by-lowering
+id: worldsheet.verma-level-shift-by-negative-modes--via-lean
+target: worldsheet.verma-level-shift-by-negative-modes
 kind: proof
 status: formalized
 depends_on:

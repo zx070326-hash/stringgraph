@@ -42,7 +42,7 @@ depends_on:
       **按合成定义**的 V_N；有了它，两种写法在任意 R 上重合，目标 (1)(a) 的 ⊕_N V_N 才是
       对 V_N 而不是对「有序词张成」的陈述。
       ⚠ 只用它的 (3)（张成），**不用** (4) 的维数上界，也不需要它的域假设。
-  - id: worldsheet.verma-level-shift-by-lowering
+  - id: worldsheet.verma-level-shift-by-negative-modes
     inferred: false
     note: |
       **2026-09-11 新增（与该卡同一次提交）**：提供「f_0(L_n v) = 0 (n < 0)」那一步的唯一依据——

@@ -95,7 +95,7 @@ notes: |
     · worldsheet.verma-module-v2：Verma 模上的 L_0 分级（含域上的 ⊕ 与特征子空间刻画）。
       本卡是「任意模、任意词、只要一条本征方程」的那一半，不涉及张成或分解。
     · worldsheet.verma-level-spanned-by-partitions：V_N 由分拆词张成、dim ≤ p(N)。
-    · worldsheet.verma-level-shift-by-lowering（2026-09-11 新增）：Verma 模上
+    · worldsheet.verma-level-shift-by-negative-modes（2026-09-11 新增）：Verma 模上
       L_{−k}(V_N) ⊆ V_{N+k}。那是**子模包含**，本卡是**本征值**；本卡对任意模、任意符号的词，
       那卡只对 Verma 模的负模态。两者互不使用、不重复。
     · math.verma-module-free-over-negative-part：PBW 基、dim V_N = p(N)、V(c,h) ≠ 0。
