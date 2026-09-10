@@ -233,6 +233,175 @@ theorem vertexOsc_vertexOsc_apply_eq_zero_of_notMem_vertexProdIdx (η b b' : Fin
 
 end Window
 
+/-! ### The same-point product
+
+`W_L := Σ_{J+K=L} V^{(b)}_J V^{(b')}_K` is well defined by the previous section.  Both `W_L`
+and `V^{(b+b')}_L` satisfy the creation-mode recursion of `Fock.vertexOsc_unique` for the
+momentum `b + b'`: each `V` shifts its own Laurent index, and after re-indexing one of the
+two correction sums the two shifts merge into `W_{L+n}` with coefficient `b + b'`.  On the
+vacuum `W_L` is the convolution `Σ_{p+q=L} Φ^b_p Φ^{b'}_q`, which is
+`Fock.creaExpPair_eq_creaExp_add`.  Hence `W_L = V^{(b+b')}_L`. -/
+
+section Product
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- Re-indexing a locally finite sum over `ℤ` by a shift.  Both index sets must contain the
+support window `w`; then the shifted and unshifted sums agree. -/
+private lemma sum_add_right_eq_sum {M₀ : Type*} [AddCommMonoid M₀] (g : ℤ → M₀) (n : ℤ)
+    (s w : Finset ℤ) (hg : ∀ K ∉ w, g K = 0) (hws : w ⊆ s) (hwsn : ∀ K ∈ w, K - n ∈ s) :
+    ∑ K ∈ s, g (K + n) = ∑ K ∈ s, g K := by
+  classical
+  have hinj : ∀ x ∈ w, ∀ y ∈ w, x - n = y - n → x = y := fun x _ y _ h => by omega
+  have hsub : w.image (fun x => x - n) ⊆ s := by
+    intro K hK
+    rw [Finset.mem_image] at hK
+    obtain ⟨K₀, hK₀, rfl⟩ := hK
+    exact hwsn K₀ hK₀
+  have h1 : ∑ K ∈ s, g (K + n) = ∑ K ∈ w.image (fun x => x - n), g (K + n) := by
+    refine (Finset.sum_subset hsub ?_).symm
+    intro K _ hK
+    refine hg _ fun hmem => hK ?_
+    rw [Finset.mem_image]
+    exact ⟨K + n, hmem, by omega⟩
+  have h2 : ∑ K ∈ w.image (fun x => x - n), g (K + n) = ∑ K ∈ w, g K := by
+    rw [Finset.sum_image hinj]
+    exact Finset.sum_congr rfl fun K _ => by rw [sub_add_cancel]
+  have h3 : ∑ K ∈ s, g K = ∑ K ∈ w, g K :=
+    (Finset.sum_subset hws fun K _ hK => hg K hK).symm
+  rw [h1, h2, h3]
+
+/-- **The same-point product of two vertex operators with orthogonal momenta**,
+`W_L = Σ_{J+K=L} V^{(b)}_J V^{(b')}_K`, assembled as a locally finite sum over `K`.  The
+hypothesis `b · b' = 0` is what makes the sum locally finite
+(`Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt`). -/
+noncomputable def vertexProduct (η b b' : Fin D → R) (hdot : dotVec η b' b = 0) (L : ℤ) :
+    Module.End R (Fock D R) :=
+  lsumLocFin (fun K : ℤ => vertexOsc η b (L - K) ∘ₗ vertexOsc η b' K) (vertexProdIdx L)
+    (fun P K hK => by
+      rw [LinearMap.comp_apply]
+      exact vertexOsc_vertexOsc_apply_eq_zero_of_notMem_vertexProdIdx η b b' hdot L P hK)
+
+/-- `vertexProduct` is computed by *any* finite index set containing the window. -/
+theorem vertexProduct_apply (η b b' : Fin D → R) (hdot : dotVec η b' b = 0) (L : ℤ)
+    (P : Fock D R) {s : Finset ℤ}
+    (hs : ∀ K : ℤ, -(levelBound P : ℤ) ≤ K → K ≤ L + (levelBound P : ℤ) → K ∈ s) :
+    vertexProduct η b b' hdot L P
+      = ∑ K ∈ s, vertexOsc η b (L - K) (vertexOsc η b' K P) := by
+  classical
+  rw [vertexProduct, lsumLocFin_apply _ _ _ P (s := s) (fun K hK => by
+    rw [LinearMap.comp_apply]
+    refine vertexOsc_vertexOsc_apply_eq_zero_of_notMem_vertexProdIdx η b b' hdot L P ?_
+    intro hmem
+    rw [vertexProdIdx, Finset.mem_Icc] at hmem
+    exact hK (hs K hmem.1 hmem.2))]
+  exact Finset.sum_congr rfl fun K _ => by rw [LinearMap.comp_apply]
+
+/-- **The vacuum value of the same-point product is the convolution of the two coherent-state
+coefficients**, i.e. `Φ^{b+b'}_L` by `Fock.creaExpPair_eq_creaExp_add`. -/
+theorem vertexProduct_apply_one (η b b' : Fin D → R) (hdot : dotVec η b' b = 0) (L : ℤ) :
+    vertexProduct η b b' hdot L (1 : Fock D R) = creaExp η (b + b') L := by
+  classical
+  rw [vertexProduct_apply η b b' hdot L 1 (s := Finset.Icc (0 : ℤ) L)
+      (fun K h1 h2 => by
+        rw [levelBound_one] at h1 h2
+        rw [Finset.mem_Icc]
+        omega)]
+  have hterm : ∀ K ∈ Finset.Icc (0 : ℤ) L,
+      vertexOsc η b (L - K) (vertexOsc η b' K (1 : Fock D R))
+        = creaExp η b' K * creaExp η b (L - K) := by
+    intro K _
+    rw [vertexOsc_apply_one, vertexOsc_apply_creaExp_of_dotVec_zero η b b' hdot (L - K) K,
+      mul_comm]
+  rw [Finset.sum_congr rfl hterm,
+    creaExpPair_eq_sum_Icc η b' b (le_refl (0 : ℤ)) (le_refl L),
+    creaExpPair_eq_creaExp_add η b' b L, add_comm b' b]
+
+/-- **The creation-mode recursion for the same-point product**, with the momentum `b + b'`:
+`V^{(b)}` shifts the index of the left factor and `V^{(b')}` that of the right factor, and
+after re-indexing the second correction sum both become `W_{L+n}`, so the two coefficients
+`b^μ` and `b'^μ` add. -/
+theorem vertexProduct_X_mul (η b b' : Fin D → R) (hdot : dotVec η b' b = 0) (v : Osc D)
+    (L : ℤ) (P : Fock D R) :
+    vertexProduct η b b' hdot L (X v * P)
+      = X v * vertexProduct η b b' hdot L P
+        - (b + b') v.1 • vertexProduct η b b' hdot (L + ((v.2 : ℕ) : ℤ)) P := by
+  classical
+  set n : ℤ := ((v.2 : ℕ) : ℤ) with hndef
+  have hnpos : 0 < n := by rw [hndef]; exact_mod_cast v.2.pos
+  set Mx : ℕ := max (levelBound P) (levelBound (X v * P)) with hMxdef
+  have hM1 : (levelBound P : ℤ) ≤ (Mx : ℤ) := by exact_mod_cast le_max_left _ _
+  have hM2 : (levelBound (X v * P) : ℤ) ≤ (Mx : ℤ) := by exact_mod_cast le_max_right _ _
+  set s : Finset ℤ := Finset.Icc (-(Mx : ℤ) - n) (L + n + (Mx : ℤ) + n) with hsdef
+  have hsmem : ∀ K : ℤ, -(Mx : ℤ) - n ≤ K → K ≤ L + n + (Mx : ℤ) + n → K ∈ s := by
+    intro K h1 h2
+    rw [hsdef, Finset.mem_Icc]
+    exact ⟨h1, h2⟩
+  have hg : ∀ K ∉ vertexProdIdx (L + n) P,
+      vertexOsc η b (L + n - K) (vertexOsc η b' K P) = 0 := fun K hK =>
+    vertexOsc_vertexOsc_apply_eq_zero_of_notMem_vertexProdIdx η b b' hdot (L + n) P hK
+  have hsub : vertexProdIdx (L + n) P ⊆ s := by
+    intro K hK
+    rw [vertexProdIdx, Finset.mem_Icc] at hK
+    exact hsmem K (by omega) (by omega)
+  have hsub2 : ∀ K ∈ vertexProdIdx (L + n) P, K - n ∈ s := by
+    intro K hK
+    rw [vertexProdIdx, Finset.mem_Icc] at hK
+    exact hsmem (K - n) (by omega) (by omega)
+  have hshift0 := sum_add_right_eq_sum
+    (fun J : ℤ => vertexOsc η b (L + n - J) (vertexOsc η b' J P)) n s
+    (vertexProdIdx (L + n) P) hg hsub hsub2
+  have hshift : ∑ K ∈ s, vertexOsc η b (L - K) (vertexOsc η b' (K + n) P)
+      = ∑ K ∈ s, vertexOsc η b (L + n - K) (vertexOsc η b' K P) := by
+    rw [← hshift0]
+    refine Finset.sum_congr rfl fun K _ => ?_
+    show vertexOsc η b (L - K) (vertexOsc η b' (K + n) P)
+      = vertexOsc η b (L + n - (K + n)) (vertexOsc η b' (K + n) P)
+    rw [show L + n - (K + n) = L - K from by ring]
+  have hterm : ∀ K : ℤ, vertexOsc η b (L - K) (vertexOsc η b' K (X v * P))
+      = X v * vertexOsc η b (L - K) (vertexOsc η b' K P)
+        - b v.1 • vertexOsc η b (L + n - K) (vertexOsc η b' K P)
+        - b' v.1 • vertexOsc η b (L - K) (vertexOsc η b' (K + n) P) := by
+    intro K
+    rw [vertexOsc_X_mul η b' v K P, map_sub, map_smul, vertexOsc_X_mul η b v (L - K) _,
+      show L - K + n = L + n - K from by ring]
+  rw [vertexProduct_apply η b b' hdot L (X v * P) (s := s)
+      (fun K h1 h2 => hsmem K (by omega) (by omega)),
+    vertexProduct_apply η b b' hdot L P (s := s)
+      (fun K h1 h2 => hsmem K (by omega) (by omega)),
+    vertexProduct_apply η b b' hdot (L + n) P (s := s)
+      (fun K h1 h2 => hsmem K (by omega) (by omega))]
+  simp only [hterm]
+  rw [Finset.sum_sub_distrib, Finset.sum_sub_distrib, ← Finset.mul_sum, ← Finset.smul_sum,
+    ← Finset.smul_sum, hshift, Pi.add_apply, add_smul]
+  abel
+
+/-- **The same-point product of two vertex operators with orthogonal momenta is the vertex
+operator of the summed momentum**: for `b · b' = 0`,
+`Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`.
+
+This is step (5a) of the DDF transverse algebra.  Orthogonality is used twice and in an
+essential way: once for the local finiteness of the sum
+(`Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt`), once for the vacuum value.  The creation
+halves would multiply correctly for *any* pair of momenta
+(`Fock.creaExpPair_eq_creaExp_add`); it is the annihilation half that contracts. -/
+theorem vertexProduct_eq_vertexOsc_add (η b b' : Fin D → R) (hdot : dotVec η b' b = 0)
+    (L : ℤ) : vertexProduct η b b' hdot L = vertexOsc η (b + b') L :=
+  vertexOsc_unique η (b + b') (vertexProduct η b b' hdot)
+    (fun v J P => vertexProduct_X_mul η b b' hdot v J P)
+    (fun J => vertexProduct_apply_one η b b' hdot J) L
+
+/-- The same statement as an identity between honest finite sums: **any** index set
+containing the window `-levelBound P ≤ K ≤ L + levelBound P` computes
+`Σ_{J+K=L} V^{(b)}_J V^{(b')}_K P = V^{(b+b')}_L P`. -/
+theorem sum_vertexOsc_vertexOsc_of_dotVec_zero (η b b' : Fin D → R)
+    (hdot : dotVec η b' b = 0) (L : ℤ) (P : Fock D R) {s : Finset ℤ}
+    (hs : ∀ K : ℤ, -(levelBound P : ℤ) ≤ K → K ≤ L + (levelBound P : ℤ) → K ∈ s) :
+    ∑ K ∈ s, vertexOsc η b (L - K) (vertexOsc η b' K P) = vertexOsc η (b + b') L P := by
+  rw [← vertexProduct_apply η b b' hdot L P hs, vertexProduct_eq_vertexOsc_add η b b' hdot L]
+
+end Product
+
 end Fock
 
 end StringFormal.NoGhost
