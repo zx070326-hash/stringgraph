@@ -1,0 +1,63 @@
+id: spectrum.veneziano-regge-behavior--via-gamma-asymptotics
+target: spectrum.veneziano-regge-behavior
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.veneziano-amplitude-weak
+    note: 提供三项 Beta 结构（弱形式足够：Regge 幂次不依赖整体前因子）。
+  - id: math.gamma-ratio-asymptotics
+    note: |
+      提供 B(a,b) ∼ Γ(b)a^{−b} 的单参数渐近，本推导的核心。
+      ⚠ 该节点的 gap (3)（arg a = π 方向不在适用域内、Γ(a) 的极点全落在该射线上）
+      **被本推导继承**，见 gaps。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 Regge 极限下 u ≈ −s（t 固定、α'(s+t+u) = −4）这一运动学。
+  - id: worldsheet.leading-regge-trajectory
+    inferred: true
+    note: |
+      标 inferred：提供 α(t) = 1 + α't 的「领头 Regge 轨迹」身份——即
+      「振幅的高能幂次 = 谱上最高自旋态的轨迹」这一识别。
+      该节点讲的是**谱**（S ≤ α'm² + 1，§1.3 (1.3.43)），与 §6.4 的振幅参数不互相引用；
+      两者的等同是本图补出的。
+    convention_map: conv.metric-mostly-plus 下 t = −(k₁+k₃)² = m²_int（t 通道中间态质量的平方），故 α'm² = −1 ⟺ α't = −1，谱上的 α'm² + 1 与振幅参数 1 + α't 在极点处一致。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.27)/(6.4.28)，p.183–184"
+    note: |
+      抽取记录 #E100，L1（schrans-2020 §6.40–§6.41，笔记 p.308–310）。
+      ⚠ 勘误依赖（Q14 第 6 条）：[S] 称原书 Stirling 公式有 typo 并按勘误表更正；
+      **勘误表未取得**，且他转引的形式与标准 Stirling 不符。本推导只用 Γ 商渐近，不受影响。
+summary: |
+  **(1) 运动学。** 质心系中 s = E²、t = (4m² − E²)sin²(θ/2)、u = (4m² − E²)cos²(θ/2)。
+  Regge 极限 s → ∞、t 固定等价于 θ → 0；由 α'(s+t+u) = −4 得 u ≈ −s。
+
+  **(2) 逐项渐近。**
+    𝔅₁ = B(−α(s), −α(t))：第二个参数固定，用 math.gamma-ratio-asymptotics (2) 得
+      𝔅₁ ∼ Γ(−α(t)) · (−α(s))^{α(t)} ∝ s^{α(t)} Γ(−α(t))。
+    𝔅₂ = B(−α(s), −α(u))：两个参数**同时**沿相反方向趋于无穷（−α(u) = α(s) + α(t) + 2），
+      分母 Γ(−α(s)−α(u)) 的宗量 = −α(t) − 2 固定；用反射公式处理 Γ(−α(s))、
+      Γ 商渐近处理 Γ(−α(u))/Γ(1+α(s))，得
+      𝔅₂ ∼ −π s^{α(t)} / ( sin(πα(s)) · Γ(1+α(t)) )，
+      **与 𝔅₁ 同幂次**；只有 Im s ≠ 0 时 1/sin(πα(s)) 指数压低才可忽略。
+      （[S] 写 ∝ s^{−5} → 0，本图不采，见目标陈述 sources.note。）
+    𝔅₃ = B(−α(t), −α(u))：第一个参数固定、第二个 ≈ α's → ∞，同 𝔅₁ 的形式，∼ 𝔅₁。
+  **(3) 合计。** 𝔅₁ + 𝔅₂ + 𝔅₃ ∝ s^{α(t)}Γ(−α(t))，即 (6.4.28)。
+gaps:
+  - "**继承 math.gamma-ratio-asymptotics 的适用域缺口**：Regge 极限让 Beta 的第一个参数
+     沿 **arg a = π** 趋于无穷，而 Γ 商渐近只在 |arg z| ≤ π − δ 成立；更糟的是
+     Γ(−α(s)) 的极点 α(s) = 0,1,2,… 全部落在该射线上（那正是 s 通道的共振塔）。
+     物理做法是让 s 带小虚部或对极点做平均。**本图不把这一步当作已论证。**"
+  - "**𝔅₂ 不能在实 s 轴上被忽略**：reviewer-ch6 复算表明 𝔅₂ 与 𝔅₁ 同幂次，只在 Im s ≠ 0 时
+     被 1/sin(πα(s)) 指数压低。因此 (3) 的合计 ∝ s^{α(t)}Γ(−α(t)) 依赖「s 带小虚部」这一物理默认，
+     与第一条 gap（arg a = π 射线上的极点塔）同源；[S] 的 s^{−5} 本图不采。"
+  - "**弱形式的代价**：由于 spectrum.veneziano-amplitude-weak 不含前因子，
+     本推导只能给出「∝」而不能给出比例常数。"
+  - "**勘误依赖（Q14 第 6 条）**：Stirling 公式的印刷版被 [S] 指为有 typo，
+     且他转引的更正形式本身与标准公式不符；**勘误表未取得**。
+     本推导绕开这一点（只用 Γ 商渐近），但**若有人要复现 [S] 的逐步计算，会撞上这个分歧**。"
+  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude-weak 继承）。"
+notes: |
+  本推导与 spectrum.virasoro-shapiro-regge-behavior 是同一手法的开/闭弦两个版本。
+  两者的幂次差因子 2，但按抽取记录 Q15，**原书是否显式对比未核实**，故本图不建对比节点。
+author: curator-polchinski-ch6
+created: "2026-09-11"

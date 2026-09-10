@@ -47,10 +47,6 @@ sources:
       ⚠ 「取向 / 无取向依弦的类型而定」一句的已核实出处是 §5.3（抽取记录 E80 第 1 条因子说明，
       转录自 schrans-2020 §5.15，笔记 p.255），**不是 §3.1**；抽取记录**没有**记录
       Polchinski 在何处点名 RP²、Klein 瓶等具体不可定向曲面，故本卡不点名任何具体曲面。
-  - ref: schrans-2020
-    loc: "目录条目 `3.1 p 79`（Fig 3.4 Open String Processes）、`3.33 p 100`（Compact Connected Topologies）；§5.15（笔记 p.254–255，(5.3.9) 的九条因子说明）"
-    note: |
-      位置核对来源，非内容来源。
 tags: [worldsheet, path-integral, perturbation-theory, topology, euler-number, s-matrix]
 notes: |
   **为什么 status = physical-argument**：按 docs/STATUS_LEVELS.md，definition 卡的 status
@@ -78,5 +74,8 @@ notes: |
   **不在本卡范围**：λ 由 dilaton 期望值决定（属 §3.7；抽取记录未覆盖 §3.6 之后，
   唯一线索是 E80 转录的 [S] 一句「λ is a parameter, as we will see later, is not independent」）；
   e^{−λχ} 作为耦合常数展开的读法见 worldsheet.euler-number-weights-string-coupling。
+
+  **位置核对源（不入 sources[]，lead 裁决：个人笔记只作核对）**：schrans-2020 目录条目 `3.1 p 79`（Fig 3.4）、`3.33 p 100`（Compact Connected Topologies）；§5.15（笔记 p.254–255，(5.3.9) 九条因子说明）。
+
 author: curator-e47-e48
 created: "2026-09-11"

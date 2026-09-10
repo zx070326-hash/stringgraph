@@ -1,0 +1,61 @@
+id: worldsheet.vertex-operator-brst-variation--via-state-operator
+target: worldsheet.vertex-operator-brst-variation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.state-operator-isomorphism
+    note: |
+      提供「V 产生 L_0^m = 1 的最高权态 ⟹ V 是维数 1 的主场」这一步。
+      ⚠ 见目标节点 notes 与抽取记录 Q18：这是态-算子对应在本书振幅部分三种用法中最弱的一种，
+      不要与 §6.7 的 Hilbert 空间矩阵元用法混为一谈。
+  - id: worldsheet.primary-field
+    note: 提供「维数 1 主场」的定义与它与 T 的 OPE。
+  - id: worldsheet.brst-current-bosonic-string
+    note: 提供 j_B 与 Q_B = ∮(dz/2πi) j_B。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      [Q_B, V(w)] 由 j_B(z)V(w) 的 OPE 经围道变形算出，故依赖围道 ↔ 对易子的字典。
+      按 lead 2026-09-10 裁决，凡靠「围道变形 + OPE」的推导一律 physical-argument。
+  - id: worldsheet.operator-product-expansion
+    note: OPE 及其收敛性假定。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: true
+    note: |
+      inferred：抽取记录 #E85 没有列这条依赖（它只说「V 是维数 1 的主场」）。
+      加它的理由：本推导的关键前提是物质顶点算符对应的态满足 L_0^m = 1（从而
+      V 的权为 1，[Q_B, V] 才能合成全导数），而「物理态满足 (L_0 − a)|ψ⟩ = 0
+      与 L_n|ψ⟩ = 0 (n > 0)」正是本节点给的定义；L_0^m = 1 即 a = 1 的情形
+      （按 conv.intercept-sign-a；且只在 D = 26、a = 1 下与无鬼定理相洽）。
+      本边只承载「物理态条件提供 L_0^m = 1」这一步，不承载 a = 1 的确定。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.5), p.161"
+    note: |
+      抽取记录 #E85，L1（schrans-2020 §5.26–§5.27，笔记 p.264–265）。
+summary: |
+  V 是维数 1 的物质主场（由态-算子对应从 L_0^m = 1 读出）。
+  j_B = cT^m + :bc∂c: + (3/2)∂²c 与 V 的 OPE 中，只有 cT^m 项与 V 有非平凡缩并；
+  T^m(z)V(w) ∼ V/(z−w)² + ∂V/(z−w) 给出
+    j_B(z)V(w) ∼ c(z)[ V(w)/(z−w)² + ∂V(w)/(z−w) ] 。
+  把 c(z) 在 w 处展开并取围道积分，两项合并成全导数：
+    [Q_B, V(w)] = ∂( c V )(w)，即 δ_B V = iε ∂(cV)。
+  维数恰为 1 是关键：其他维数会留下不是全导数的项。
+gaps:
+  - |
+    **围道变形 + OPE**：OPE 级数的收敛性与围道变形的合法性在来源中未被证明
+    （lead 2026-09-10 裁决：此类推导一律 physical-argument）。
+  - |
+    **中间步骤本图无核实**：抽取记录只给出结论式 δ_B V = iε∂(cV) 与「V 是维数 1 主场」这个理由，
+    没有记录 OPE 的计算；上面 summary 的推理是 curator 补的标准计算，不是来源逐字。
+  - |
+    **j_B 表达式中 (3/2)∂²c 的系数本图未核实**（见 worldsheet.brst-current-bosonic-string 的
+    statement (a)：它是全导数，不影响 Q_B，故本推导的结论不受影响）。
+  - |
+    **「V 是维数 1 主场」靠 a = 1**：它由态-算子对应从 L_0^m = 1 读出，
+    而 L_0^m = 1 是老协变/BRST 物理态条件在 a = 1 时的写法。对应的依赖边已挂上
+    （worldsheet.old-covariant-physical-states，inferred，reviewer-ch5 2026-09-11 建议），
+    但**a = 1 与 D = 26 本身不由本推导确定**，它们是未声明的前提。
+  - |
+    **来源强度**：式号 (5.4.5) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

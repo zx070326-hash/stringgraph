@@ -1,0 +1,51 @@
+id: spectrum.chan-paton-factors
+kind: definition
+status: physical-argument
+title: Chan–Paton 因子：开弦端点的指标与厄米矩阵 λ^a
+statement: |
+  给开弦的两个端点各附一个离散指标 i, j ∈ {1,…,n}（**Chan–Paton 指标**）。
+  态基记作 |N; k; i j⟩（N 为振子激发、k 为动量），一般态写成
+    |N; k; a⟩ = Σ_{i,j} |N; k; i j⟩ λ^a_{ij}   （(6.5.1)），
+  其中 λ^a 是 n×n 矩阵（**Chan–Paton 波函数**），a 标记基。
+
+  **(1)（厄米性）** λ^a 必须取**厄米**矩阵：Chan–Paton 指标携带可观测的量子数，
+  相应算符的本征值须为实。取 {λ^a} 为 n×n 厄米矩阵空间的一组基（共 n² 个）。
+
+  **(2)（迹结构）** 世界面上开弦端点的指标沿边界相接（i 与相邻弦的 j 相同并求和），
+  于是每个**循环序**的 n 点振幅带一个迹因子；四点情形
+    tr( λ^{a₁} λ^{a₂} λ^{a₃} λ^{a₄} )   （(6.5.4)）。
+
+  **(3)（不改变世界面动力学）** Chan–Paton 指标不参与世界面场论：
+  它们不出现在作用量里，只在态的标记与振幅的迹因子中出现。
+  因此谱的质量与 Chan–Paton 无关，只有简并度变为 n² 倍。
+
+  **本卡片不断言什么**：不断言规范群是什么（取向弦给 U(n)、无取向弦给 SO(n) 或 USp(n)，
+  见 spectrum.chan-paton-gauge-group）；不给出耦合常数关系（见
+  spectrum.chan-paton-yang-mills-coupling）；不涉及 D 膜解释（属 branes area，本图 Phase 3）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.5, eq. (6.5.1)（CP 波函数 |N;k;a⟩ = Σ|N;k;ij⟩λ^a_{ij}）、(6.5.4)（四点的迹 tr(λ^{a₁}λ^{a₂}λ^{a₃}λ^{a₄})），p.184–189"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E102，等级 **L1（式号）/ L2（表达式）**：
+      式号经 schrans-2020 目录核实，但 (6.5.1)/(6.5.4) 的**表达式只读到目录条目**
+      （抽取记录 §7 明记：「(6.5.1)/(6.5.4)/(6.5.15)/(6.5.16)/(6.5.18)：式号已核实，
+      **表达式只读到 [S] 目录（L2）**」）。
+      有 headrick-2008 背书的是 (6.5.6)/(6.5.9)/(6.5.10)/(6.5.12)/(6.5.14)（L1），
+      本卡片用到的 (6.5.1)/(6.5.4) **不在**其中。
+tags: [spectrum, open-string, chan-paton, gauge-symmetry, definition]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E102 建立。
+
+  **为什么 status = physical-argument**：这是**定义卡**，但它定义的对象是「开弦态的额外标记」，
+  其合法性（不破坏世界面共形不变性、与因子化相容）在来源中是靠**振幅的幺正性检验**支撑的，
+  不是靠一个已定义的数学结构。按 docs/STATUS_LEVELS.md，定义卡若依赖未定义对象取
+  physical-argument。这也与「振幅是路径积分定义的对象」这条本批次的上限一致。
+
+  **⚠ 表达式核实等级低于本批次多数节点**：(6.5.1)/(6.5.4) 只到 **L2**（目录条目级）。
+  本卡片写出的表达式按抽取记录的转述，**未见任何来源逐字抄出**。
+  这与 (6.3.2)/(6.3.4)/(6.6.10) 那几条（有 schrans-2020 + headrick-2008 双源逐字）形成对比。
+author: curator-polchinski-ch6
+created: "2026-09-11"

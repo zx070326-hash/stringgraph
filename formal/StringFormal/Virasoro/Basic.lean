@@ -39,6 +39,10 @@ Convention: `conv.virasoro-standard`
 * `StringFormal.Virasoro.VirasoroAlgebra.toWitt_surjective`,
   `.ofCentre_injective`, `.toWitt_eq_zero_iff`: exactness of
   `0 → R → VirasoroAlgebra R → WittAlgebra R → 0`.
+* `StringFormal.Virasoro.VirasoroAlgebra.span_lgen_cgen_eq_top`: the `L n` together with `C`
+  span `VirasoroAlgebra R` as an `R`-module, via the linear splitting
+  `StringFormal.Virasoro.VirasoroAlgebra.ofWitt` of `toWitt` (a splitting of `R`-modules only;
+  it is *not* a Lie algebra map).
 
 ## Implementation notes
 
@@ -125,6 +129,9 @@ lemma centralTerm_eq (n : ℤ) : centralTerm R n = inv12 R * ((n * (n ^ 2 - 1) :
   rw [centralTerm]
   congr 2
   ring
+
+lemma centralTerm_zero : centralTerm R (0 : ℤ) = 0 := by
+  simp [centralTerm]
 
 /-- Auxiliary bilinear form with `cocycleAux (ℓ m) (ℓ n) = δ_{m+n,0} (m³ - m)/24`.
 The Virasoro cocycle is its antisymmetrisation. -/
@@ -346,6 +353,50 @@ lemma toWitt_eq_zero_iff (X : VirasoroAlgebra R) :
     exact Prod.ext_iff.mpr ⟨h, rfl⟩
   · rintro ⟨r, rfl⟩
     rw [toWitt_ofCentre]
+
+/-! ### The Virasoro algebra is spanned by `L n` and `C` -/
+
+/-- `toProd` upgraded to an `R`-linear equivalence `VirasoroAlgebra R ≃ₗ WittAlgebra R × R`. -/
+noncomputable def toProdₗ : VirasoroAlgebra R ≃ₗ[R] WittAlgebra R × R where
+  toFun := toProd R
+  invFun := (toProd R).symm
+  map_add' := toProd_add R
+  map_smul' := toProd_smul R
+  left_inv := (toProd R).left_inv
+  right_inv := (toProd R).right_inv
+
+/-- The linear (**not** Lie algebra) splitting `WittAlgebra R → VirasoroAlgebra R`,
+`ℓ n ↦ L n`. -/
+noncomputable def ofWitt : WittAlgebra R →ₗ[R] VirasoroAlgebra R :=
+  ((toProdₗ R).symm : WittAlgebra R × R →ₗ[R] VirasoroAlgebra R) ∘ₗ
+    LinearMap.inl R (WittAlgebra R) R
+
+@[simp] lemma toProd_ofWitt (w : WittAlgebra R) : toProd R (ofWitt R w) = (w, 0) := rfl
+
+@[simp] lemma ofWitt_lgen (n : ℤ) : ofWitt R (WittAlgebra.lgen R n) = lgen R n := rfl
+
+/-- The Virasoro algebra is spanned by the generators `L n`, `n : ℤ`, together with the central
+element `C`. -/
+lemma span_lgen_cgen_eq_top :
+    Submodule.span R (insert (cgen R) (Set.range (lgen R))) = ⊤ := by
+  rw [eq_top_iff]
+  intro X _
+  have hX : X = ofWitt R (toWitt R X) + (toProd R X).2 • cgen R := by
+    apply toProd_injective
+    rw [toProd_add, toProd_smul, toProd_cgen, toProd_ofWitt, toWitt_apply]
+    ext <;> simp
+  have hw : toWitt R X ∈ Submodule.span R (Set.range (WittAlgebra.lgen R)) := by
+    rw [(WittAlgebra.lgen R).span_eq]
+    exact Submodule.mem_top
+  have h1 : ofWitt R (toWitt R X) ∈ Submodule.span R (Set.range (lgen R)) := by
+    have hmem : ofWitt R (toWitt R X)
+        ∈ (Submodule.span R (Set.range (WittAlgebra.lgen R))).map (ofWitt R) :=
+      Submodule.mem_map_of_mem hw
+    rwa [Submodule.map_span, ← Set.range_comp,
+      show (ofWitt R ∘ WittAlgebra.lgen R) = lgen R from rfl] at hmem
+  rw [hX]
+  exact Submodule.add_mem _ (Submodule.span_mono (Set.subset_insert _ _) h1)
+    (Submodule.smul_mem _ _ (Submodule.subset_span (Set.mem_insert _ _)))
 
 end VirasoroAlgebra
 

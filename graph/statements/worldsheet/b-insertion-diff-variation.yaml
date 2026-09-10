@@ -1,0 +1,28 @@
+id: worldsheet.b-insertion-diff-variation
+kind: proposition
+title: "b 插入在微分同胚下的变分：δ_ξ(b, ∂_{t^k} ĝ) = −2(P̂₁^T b, ∂_{t^k} ξ)"
+statement: |
+  在 worldsheet.string-s-matrix 的公式 (5.3.9) 中，取无穷小微分同胚 δσ^a = ξ^a，
+  同时 δt^k = 0、δω = 0。则模插入的变分为
+    δ_ξ ( b, ∂_{t^k} ĝ ) = − 2 ( P̂₁^T b, ∂_{t^k} ξ ) 。
+  由鬼场作用量 S_g = (1/2π)(b, P̂₁c)，**b 的运动方程正是** P̂₁^T b = 0
+  （它来自 δS_g/δc = 0）。故在运动方程成立处该变分为零。
+
+  ⚠ 本节点**只**断言这一步：变分等于 −2(P̂₁^T b, ∂_k ξ)，且它在 b 的运动方程处为零。
+  **它不断言 (5.3.9) 整体的微分同胚不变性**——因为 b 的运动方程在 c 插入处有源项
+  （接触项），那属 worldsheet.s-matrix-diff-invariance，强度低得多。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.4), p.160；鬼场作用量 S_g = (1/2π)(b, P̂₁c) 见 §3.3 的 (3.3.21)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E84，L1（读到 schrans-2020 §5.25，
+      笔记 p.263–264；**未核对 Polchinski 原书**）。
+tags: [worldsheet, s-matrix, ghosts, diffeomorphism, moduli]
+notes: |
+  拆卡理由：抽取记录 E84 与「本轮对图的建议」第 2 条都指出 (5.4.4) 是本章最该标低状态的一条，
+  但那个低状态只针对**接触项抵消**那一步。上面这条（变分 = −2(P̂₁^T b, ∂ξ)，b 的运动方程
+  是 P̂₁^T b = 0）在原书里是有计算的，把它单列可以避免把可用的部分一起拖低。
+author: curator-polchinski-ch5
+created: "2026-09-11"

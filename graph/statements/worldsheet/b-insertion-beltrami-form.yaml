@@ -1,0 +1,26 @@
+id: worldsheet.b-insertion-beltrami-form
+kind: proposition
+title: "b 插入的 Beltrami 形式：(1/2π)(b, μ_k) = (1/4π)(b, ∂_{t^k} ĝ)"
+statement: |
+  用 Beltrami 微分（worldsheet.beltrami-differential）可以把 S-矩阵主公式里的模插入重写为
+    (1/4π) ( b, ∂_{t^k} ĝ )  =  (1/2π) ( b, μ_k ) ,
+  因子 2 来自 μ_k 定义里的 ½。在共形规范与复坐标下它化为
+    (1/2π) ∫ d²z  ( b_{zz}  μ_{k  z̄}{}^{z}  +  b_{z̄z̄}  μ_{k  z}{}^{z̄} ) 。
+
+  意义：b 插入本来是「b 与度规的模导数」的配对，改写后是「全纯二次微分 b_zz 与
+  Beltrami 微分 μ_k」的配对——两者是模空间上余切与切向量的自然配对。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.8), p.162"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E86，L1（读到 schrans-2020
+      §5.28–§5.30，笔记 p.265–266；**未核对 Polchinski 原书**）。
+tags: [worldsheet, moduli, beltrami, ghosts, s-matrix]
+notes: |
+  这条是「b 插入 = 模空间上的形式」这个现代说法在本书里的落点，也是弦场论与
+  超弦测度文献里 ∮ b·μ 记号的来源。本图只记录改写本身，不声称模空间上的微分形式理论。
+author: curator-polchinski-ch5
+created: "2026-09-11"

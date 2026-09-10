@@ -1,0 +1,37 @@
+id: math.tr-f6-coefficient-vanishing
+kind: proposition
+title: Ω₁₂ 中 tr F⁶ 的系数 N + 32l：SO(N) 时为零当且仅当 N = 32；USp(N) 时恒不为零
+statement: |
+  在 math.so-usp-adjoint-fundamental-trace-identities 的记号下，
+  Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴ 中 **tr F⁶ 的系数是 N + 32l**。于是
+
+  · **SO(N)**（l = −1）：该系数为 N − 32，**为零当且仅当 N = 32**；
+  · **USp(N)**（l = +1）：该系数为 N + 32 ≥ 33 > 0，对一切 N ≥ 1 **恒不为零**。
+
+  **本节点不断言**：tr F⁶ 项系数为零意味着什么——「该项对应的反常不能由局域反项抵消」
+  是物理判断，由 consistency.anomaly-cancellation-so32-effective-theory 承载。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12c) 与 (13a)(13b)；(12c) 下方逐字「The first term in eq. (12c) corresponds to anomalies that cannot be cancelled by the addition of local interactions to the effective action. However, it is absent if the gauge group is chosen to be SO(32).」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E7/E9）。
+      **SO 一支**：GS 只说 N = 32 时该项 "is absent"（充分方向），"当且仅当" 的另一半
+      （N ≠ 32 时不为零）是从 (12c)(13a) 的线性系数直接读出的，属平凡补足。
+      **USp 一支**：GS 给了 l = +1 却**从未写出**「所以 USp 被排除」；这一步是抽取者的推论
+      （抽取记录 Q4），相应的边在推导里标 inferred。
+tags: [algebra, arithmetic, anomaly, so32, usp, phase2, lean-candidate]
+notes: |
+  【为什么单独建卡】抽取记录 §5.3 列为 Lean 候选 A3，并写明「价值在于它是『为什么是 32』的
+  **唯一**代数入口」——纯规范反常这一路上，SO(32) 之被挑出完全来自这一个线性系数。
+
+  【USp 的第二条排除路径（本图未建节点）】抽取记录 Q4 另注：usp(N) 的伴随维数 N(N+1)/2 = 496
+  给 N = 31，是奇数，而 USp 要求 N 偶，故 USp 也被维数条件排除。
+  **GS 原文同样没有这条**，且它要用到 consistency.gravitational-anomaly-requires-496-fermions
+  的 496。本图暂不建该节点，记在这里备查。
+
+  【status 说明】同 math.mixed-anomaly-trace-conditions-n32：计算平凡，但缺 reviewer 复核记录，
+  按 docs/STATUS_LEVELS.md 取 physical-argument。
+author: curator
+created: "2026-09-11"

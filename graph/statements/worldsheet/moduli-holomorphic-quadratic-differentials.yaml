@@ -1,0 +1,34 @@
+id: worldsheet.moduli-holomorphic-quadratic-differentials
+kind: proposition
+title: "共形规范复坐标下模的方程化为全纯二次微分：∂̄ δ'g_zz = 0"
+statement: |
+  在共形规范（ĝ_ab = δ_ab）与复坐标 z = σ¹ + iσ² 下，一个对称无迹度规变分只有两个独立分量
+  δ'g_zz 与 δ'g_z̄z̄（互为复共轭）。则模的条件
+  （worldsheet.moduli-condition-traceless-transverse 的 (a)(b)）化为
+    ∂_z̄ δ'g_zz = 0 ,     ∂_z δ'g_z̄z̄ = 0 ,
+  即 **δ'g_zz 是全纯的二次微分**（在坐标变换 z → z'(z) 下按 (dz/dz')² 变换）。
+  因此模的数目 μ 等于世界面上处处正则的全纯二次微分空间的实维数。
+
+  ⚠ 与 worldsheet.ckv-holomorphic-in-conformal-gauge 的对偶：CKV 是全纯**向量场**
+  （权 −1），模是全纯**二次微分**（权 +2）。两者权之差为 3，这是 κ − μ = 3χ 里
+  因子 3 的几何来源（本图未把这一观察形式化为节点）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8)（共形规范下的模与共形 Killing 向量）附近, p.152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E73/#E74，L1（读到 schrans-2020 §5.9，
+      笔记 p.249–250，条目 [5.30]：模的方程是 ∂_z̄ δ'g_zz = ∂_z δ'g_z̄z̄ = 0）。
+      ⚠ 式号 (5.2.8) 来自 schrans-2020 目录；原书未核对。原书把模与 CKV 的方程写在同一处，
+      本图拆成两卡，见 worldsheet.ckv-holomorphic-in-conformal-gauge 的 sources note。
+      ⚠ 「按 (dz/dz')² 变换」这一句是 curator 补的标准说法（「二次微分」一词的含义），
+      抽取记录没有记录原书是否这样表述。
+tags: [worldsheet, moduli, conformal-gauge, holomorphic, quadratic-differential]
+notes: |
+  数学上这条正是「Teichmüller 空间的余切空间 = 全纯二次微分空间」；
+  本图**不**声称这个数学陈述，因为来源里没有它，也没有挂数学文献
+  （Farkas–Kra 或 Hubbard 的定理编号本项目未能核实）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

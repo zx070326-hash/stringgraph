@@ -1,0 +1,40 @@
+id: math.euler-beta-integral
+kind: proposition
+title: Euler Beta 积分 B(a,b) = ∫₀¹ t^{a−1}(1−t)^{b−1} dt = Γ(a)Γ(b)/Γ(a+b) 及其极点结构
+statement: |
+  对复参数 a, b 满足 Re a > 0、Re b > 0，积分
+    B(a, b) ≡ ∫₀¹ dt  t^{a−1} (1 − t)^{b−1}
+  绝对收敛，且
+    B(a, b) = Γ(a) Γ(b) / Γ(a + b)。
+  右端把 B 延拓为 (a,b) 的亚纯函数，其奇点全部来自 Γ(a) 与 Γ(b) 的极点：
+  B(a,b) 在 a ∈ {0, −1, −2, …} 与 b ∈ {0, −1, −2, …} 处有**单极点**，
+  在 a = −n（n ∈ Z_{≥0}）附近
+    B(a, b) = [(−1)^n / n!] · Γ(b)/Γ(b − n) · 1/(a + n) + O(1)，
+  别处全纯；B(a,b) = B(b,a)。
+
+  **这条在本图中的用途**：开弦四 tachyon 振幅（Veneziano）的 t 积分正是 B 的 Euler 积分表示，
+  其发散端点 t → 0, 1 对应 B 的极点，物理上被解读为中间态上壳
+  （spectrum.veneziano-amplitude-weak、spectrum.four-tachyon-factorization-disk-normalization）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.21)/(6.4.22)（Euler Beta 函数的积分表示与 Γ 商表示），p.183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E99，等级 **L1（式号与 Beta 表示由 schrans-2020
+      §6.39–§6.41 给出，笔记 p.308–309，逐页读到）**。
+      ⚠ 这是**物理书**的引用位置，不是数学文献；本条命题的数学地位见 notes 与推导 gaps。
+tags: [math, special-functions, beta-function, gamma-function, analytic-continuation]
+notes: |
+  由 curator 于 2026-09-11 在转写 Polchinski 第 6 章时拆出（任务书要求：把振幅推导中的
+  **纯数学部分**拆成 math.* 节点，使它们不被路径积分测度未定义的问题拖累）。
+
+  **⚠ 为什么现在不是 rigorous**：本条内容是经典 Euler 恒等式（任何复分析/特殊函数教材都有完整证明），
+  但按 docs/STATUS_LEVELS.md，`rigorous` 要求**来源是数学文献**，而本图目前**没有登记**任何
+  特殊函数来源（DLMF、Whittaker–Watson、Andrews–Askey–Roy 等都不在 literature/sources.bib）；
+  另一条路——「初等可复核」例外——要求 reviewer 独立复核并留 `reviewer-verified` 记录，也尚未发生。
+  按「status 写自身论证的严格程度，不写公认程度」「不确定选低一级」，暂取 physical-argument。
+  **升级路径（一次动作即可）**：researcher 登记一条数学来源（推荐 NIST DLMF 第 5 章「Gamma Function」，
+  Beta 积分在 §5.12），curator 把它加进推导的 sources 并把 status 改为 rigorous。
+  本次**没有**擅自登记 DLMF：新文献登记需先核对位置，且 literature/sources.bib 当前被另一名
+  curator 的 claim 占用。
+author: curator-polchinski-ch6
+created: "2026-09-11"

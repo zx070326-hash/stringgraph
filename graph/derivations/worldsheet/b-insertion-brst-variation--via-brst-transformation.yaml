@@ -1,0 +1,40 @@
+id: worldsheet.b-insertion-brst-variation--via-brst-transformation
+target: worldsheet.b-insertion-brst-variation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-anticommutator-b-mode
+    note: |
+      提供 {Q_B, b_m} = L^tot_m，即 δ_B b = iε(T^m + T^g) 的模式版本。
+      本推导用的是它的场版本；两者的等价（模式 ↔ 场的 Laurent 展开）在本图中
+      由 worldsheet.energy-momentum-laurent-modes 一类节点承担，此处未显式挂边。
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: 提供 b 插入 (1/4π)(b, ∂_{t^k}ĝ)。
+  - id: worldsheet.string-s-matrix
+    note: 被作 BRST 变分的对象。
+  - id: worldsheet.brst-current-bosonic-string
+    note: 提供 Q_B。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.6), p.161；(4.3.1b)"
+    note: |
+      抽取记录 #E85，L1（schrans-2020 §5.26–§5.27，笔记 p.264–265）。
+summary: |
+  BRST 变换只作用在场上，参考度规 ĝ(t) 是 c 数背景故 δ_B ĝ = 0。
+  于是 δ_B(b, ∂_{t^k}ĝ) = (δ_B b, ∂_{t^k}ĝ)；代入 δ_B b = iε(T^m + T^g)（(4.3.1b)）
+  即得 δ_B(b, ∂_{t^k}ĝ) = iε(T^m + T^g, ∂_{t^k}ĝ)。
+gaps:
+  - |
+    **δ_B b = iε(T^m + T^g) 本图只有模式版本的节点**（worldsheet.brst-anticommutator-b-mode：
+    {Q_B, b_m} = L^tot_m）。从模式版到场版需要 b(z)、T(z) 的 Laurent 展开与逐项对应，
+    本推导没有把这条边挂上，也没有核实 (4.3.1b) 的表达式。
+  - |
+    **「ĝ 不被 BRST 作用」是设定而非结论**：它依赖「规范固定度规是背景、不是动力学场」
+    这一约定。若把 ĝ 的模依赖也量子化（弦场论视角），该步失效。来源未讨论。
+  - |
+    **路径积分层面的形式操作**：δ_B 作为插入在关联函数里的变分，其与测度的相容性
+    （BRST 反常）没有论证。
+  - |
+    **来源强度**：式号 (5.4.6)/(4.3.1b) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

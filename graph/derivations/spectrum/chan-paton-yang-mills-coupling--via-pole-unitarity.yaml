@@ -1,0 +1,65 @@
+id: spectrum.chan-paton-yang-mills-coupling--via-pole-unitarity
+target: spectrum.chan-paton-yang-mills-coupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.chan-paton-factors
+    note: 提供迹因子 tr(λ^{a₁}…λ^{a₄}) 与厄米性；结构常数 f^{abc} = tr([λ^a,λ^b]λ^c) 由它得到。
+  - id: spectrum.massless-open-pole-requires-chan-paton
+    note: |
+      提供本推导的出发点：α's = 0 的极点只在配上不相消的 Chan–Paton 迹时才存在，
+      其留数正比于 tr(λ^{a₁}[λ^{a₂}, …])。没有这一条，就没有可比较的规范玻色子极点。
+  - id: spectrum.four-tachyon-factorization-disk-normalization
+    note: 提供 C_{D₂} = 1/(α'g_o²)（[H] Problem 6.7 明写「using (6.4.14)」）与因子化的比较手法。
+  - id: spectrum.open-string-four-tachyon-amplitude
+    note: 提供带 Chan–Paton 的四点振幅 (6.5.6) 所依据的积分表达式。
+  - id: worldsheet.state-operator-isomorphism
+    inferred: true
+    note: |
+      标 inferred：承载 (1) 末句「态-算子对应给出同一归一化」。
+      [H] 逐字说「The state-operator mapping gives the same normalization」，
+      但没有给出该映射的形式，也没有回指本图 state-operator-isomorphism 的来源（§2.8）。
+      这条边是本图补出的指认。⚠ 按抽取记录 Q18，这是态-算子对应在本章的**第二类**用法
+      （定顶点算子归一化），与第三类（Hilbert 空间形式）强度不同，不得混挂。
+sources:
+  - ref: headrick-2008
+    loc: "Problem 6.7（PDF p.43–45）、Problem 6.9(b)（PDF p.47）"
+    note: |
+      抽取记录 #E102，L1，**本节最强的独立源**（[S] 对 §6.5 只到目录级）。
+      ⚠ 按 lead 裁决：Headrick 习题解答在此作为唯一成文来源被使用，**reviewer 须复核计算**。
+  - ref: polchinski-1998-v1
+    loc: "§6.5, eq. (6.5.6)/(6.5.9)/(6.5.10)/(6.5.12)/(6.5.14)，p.184–189"
+    note: 抽取记录 #E102，式号有 [H] 背书（L1）。
+summary: |
+  **(1) 留数比较（[H] Problem 6.7 的路线）。** 带 Chan–Paton 的四 tachyon 振幅 (6.5.6)
+  在 α's = 0 处的极点留数（用 (6.4.17) 的展开与 (6.4.20) 的 Beta 表示，配 (6.4.14) 的 C_{D₂}）
+  与「两个 tachyon–tachyon–规范玻色子三点振幅 (6.5.10)/(6.5.12) 经无质量矢量传播子相接」
+  的结果相比较。完备性关系 (6.5.9)（对中间态极化求和）用在中间态求和上。
+  两侧系数相等给出 **g'_o = g_o/√(2α')**，即 (6.5.14)。
+
+  **(2) 三点振幅的形式。** 同一比较给出
+  S_{D₂} = −i g'_o (2π)²⁶δ²⁶(Σk)(e₁·k₂₃) tr(λ^{a₁}[λ^{a₂},λ^{a₃}])，
+  其中的对易子结构直接说明中间态按伴随表示组织，f^{abc} = tr([λ^a,λ^b]λ^c)。
+
+  **(3) 低能极限。** 把 (2) 与四规范玻色子振幅在 α' → 0 展开，领头项与 Yang–Mills 的
+  三点/四点树图逐项对应（[H] Problem 6.9(b)：「this single string theory diagram reproduces,
+  at momenta small compared to the string scale, the sum of the field theory Feynman diagrams」）。
+  本推导只作定性记录，不写有效作用量的表达式（那些式号只到 L2）。
+gaps:
+  - "**主要来源是习题解答**：按 lead 裁决，headrick-2008 在此作为唯一成文来源使用，
+     **reviewer 须复核 (1)(2) 的系数比较**；复核后请在此写 reviewer-verified 记录。"
+  - "**「中间态传播子 + 极化求和」在本图没有定义**：与
+     spectrum.four-tachyon-factorization-disk-normalization 同一缺口——因子化的右端用的是
+     场论类比，不是本图已定义的对象。(6.5.9) 的完备性关系本图也没有节点。"
+  - "**(3) 的表达式未核实**：(6.5.15)/(6.5.16)/(6.5.18) 只到 L2；[H] 那句结论是他自己的措辞。
+     本推导只作定性陈述。"
+  - "**态-算子对应的那一句只有 [H] 背书**（见第五条依赖的 inferred 说明）：
+     他说「state-operator mapping gives the same normalization」但没写出映射；
+     本图无法核实这一步的细节。"
+  - "**路径积分测度未定义**、**上游 ch5 节点尚未进入 main**（本批次共有）。"
+  - "**幺正性本身没有节点**：本推导所说的「幺正性定出耦合」，实际做的是**要求**因子化成立
+     并据此定归一化，不是从一条已建立的幺正性陈述出发。"
+notes: |
+  本推导是本批次最依赖 headrick-2008 的一条，也是最需要 reviewer 复核的一条。
+author: curator-polchinski-ch6
+created: "2026-09-11"

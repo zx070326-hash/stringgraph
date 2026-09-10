@@ -1,0 +1,43 @@
+id: worldsheet.metric-variation-operator-p1
+kind: definition
+status: rigorous
+title: "算子 P₁ 及其形式转置 P₁^T"
+statement: |
+  设 (M, g) 是二维 Riemann 流形，∇ 是 g 的 Levi-Civita 联络。
+
+  **算子 P₁** 把向量场 δσ^a 送到对称无迹二阶张量：
+    (P₁ δσ)_ab = ½ ( ∇_a δσ_b + ∇_b δσ_a − g_ab ∇_c δσ^c ) 。
+  由构造它对称且无迹：g^{ab}(P₁δσ)_ab = ∇_c δσ^c − (d/2)∇_c δσ^c = 0（d = 2）。
+
+  **形式转置 P₁^T** 把对称无迹二阶张量 u_ab 送到向量场：
+    (P₁^T u)_a = − ∇^b u_ab 。
+
+  两者之间的配对取 M 上的 L² 内积
+    (u, v) = ∫ d²σ  g^{1/2}  u^{ab} v_ab      （对称无迹张量），
+    (w, x) = ∫ d²σ  g^{1/2}  w^a x_a          （向量场）。
+
+  ⚠ 本卡只定义两个微分算子与配对，**不**断言它们互为伴随（那是
+  worldsheet.p1-formal-adjoint），也**不**断言度规变分的分解公式
+  （那是 worldsheet.diff-weyl-metric-variation）。
+uses: []
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.4)（δg_ab 的分解式，其中定义 (P₁δσ)_ab），p.151；并见 (5.2.5)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E73，L1（读到 schrans-2020
+      §5.6–§5.7 笔记 p.248–249；**未核对 Polchinski 原书**，见抽取记录 §5.0）。
+      ⚠ **P₁^T 的显式表达式 (P₁^T u)_a = −∇^b u_ab 出自 schrans-2020 §5.6–§5.7（核对源）**，
+      抽取记录没有把它锚定到原书的任何一个式号。P₁^T 这个**算子**确实出现在原书 §5.4
+      （b 的运动方程 P̂₁^T b = 0，见 worldsheet.b-insertion-diff-variation），
+      但它的分量公式在本图中只有伴读笔记的背书。
+tags: [worldsheet, moduli, ckv, differential-operator, gauge-fixing]
+notes: |
+  记号说明：本图沿用 Polchinski 的下标 1（P₁ 作用在**权 1** 的对象即向量场上），
+  Polchinski Vol.1 只用到 P₁，不涉及 P_n 的一般族。
+  在共形规范 + 复坐标下 P₁ 的两个非零分量是 (P₁δσ)_zz = ∇_z δσ_z、(P₁δσ)_z̄z̄ = ∇_z̄ δσ_z̄，
+  这正是 worldsheet.ckv-holomorphic-in-conformal-gauge 与
+  worldsheet.moduli-holomorphic-quadratic-differentials 里全纯条件的来源。
+author: curator-polchinski-ch5
+created: "2026-09-11"

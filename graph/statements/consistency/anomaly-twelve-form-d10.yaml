@@ -1,0 +1,67 @@
+id: consistency.anomaly-twelve-form-d10
+kind: definition
+status: physical-argument
+title: 十维手征理论反常的十二形式编码：Ω_{4n} := Tr F^{2n}（GS 1984 的记号，非 B∧X₈ 写法）
+statement: |
+  **场论设定**：十维 N = 1 超引力与超 Yang–Mills 的耦合理论。手征费米子含量为
+  超引力部分的一个左手 spin-3/2 引力微子与一个右手 spin-1/2 场，加上物质部分的
+  n 个左手 spin-1/2 场（n = 规范群维数，因为无质量费米子在伴随表示）。
+
+  **反常的十二形式编码**（GS 1984 §「Anomalies…」一段的做法）：
+  · 十维中的反常来自有**六条或更多外线**、圈上跑手征场的图；
+    外线多于六条的反常由六边形图**唯一决定**，其形式可由 Wess–Zumino 相容条件定出。
+  · 按 Zumino–Wu–Zee 的分析，反常与一个形式上的**十二维规范不变十二形式**相联系。
+    纯规范部分记
+
+        **Ω_{4n} := Tr F^{2n}**    (n = 1, 2, 3)
+
+    即 Ω₄ = Tr F²、Ω₈ = Tr F⁴、Ω₁₂ = Tr F⁶，其中 Tr 是**伴随**表示的迹
+    （conv.gauge-trace-normalization；关于原文 (11) 印作小写 tr 的读图存疑见 notes 第 1 条）。
+    「十二形式」指 Ω₁₂ 这一层——它是 D = 10 中六边形反常对应的那一层。
+  · 由十二形式回到十维的反常，走 consistency.descent-forms-chern-simons 的下降方程：
+    Ω_{12} ⇝ ω⁰_{11} ⇝ ω¹_{10}，反常写成 ∫ω¹_{10}。
+
+  **本卡不含**：
+  (a) 任何**数值总归一化**（GS 把常数 c 与各反常之间的相对归一化外包给 Alvarez-Gaumé–Witten）；
+  (b) 引力部分与混合部分的十二形式（分别见 consistency.gravitational-anomaly-polynomial-d10
+      与 consistency.anomaly-cancellation-so32-effective-theory 里引用的 (22)）；
+  (c) 后世的 X₈ / ∫B ∧ X₈ 打包写法——**那不是 GS 1984 的记号**（见 consistency.gs-counterterms-1984 notes）；
+  (d) 「Ω_{4n} 用基本迹的表达式」——那是纯代数命题
+      math.so-usp-adjoint-fundamental-trace-identities 与 math.e8-adjoint-trace-identities，
+      与本卡的物理内容分开记账。
+uses:
+  - consistency.descent-forms-chern-simons
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 及其上一段：「Anomalies in ten-dimensional gauge theories arise from loop diagrams with six or more external lines and chiral fields circulating around the loop. The anomalies corresponding to diagrams with more than six external lines are uniquely determined by the hexagon diagrams. Their form can be deduced by implementing the Wess–Zumino consistency conditions [8]. The analysis of ref. [9] relates the anomalies to a formal expression in twelve dimensions, namely the gauge-invariant twelve-form Ω₁₂, where …」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E6）。
+      **GS 自己不重做这个推导**，逐字是「can be deduced by」与「The analysis of ref. [9] relates」，
+      即整套「反常 ↔ 十二形式」的对应是引用来的。
+  - ref: wess-zumino-1971
+    loc: "全文（GS ref. [8]，Wess–Zumino 相容条件）"
+    note: 本项目未取得全文（L0）。GS 只引不复述。
+  - ref: zumino-wu-zee-1984
+    loc: "全文（GS ref. [9]，把反常联系到十二形式的分析）"
+    note: 本项目未取得全文（L0）。这是「反常 ↔ 十二形式」这套字典的**唯一**来源。
+tags: [anomaly, hexagon, twelve-form, d10, supergravity, super-yang-mills, green-schwarz]
+notes: |
+  【1. 原文 (11) 的 tr/Tr】GS 的 (11) 在影印件上印作小写 `Ω_{4n} = tr F^{2n}`，
+  但语义上必须是**伴随**迹（否则紧接的 (12a) 就是废话）。本图统一按语义写 **Tr**，
+  这一判读登记在 conv.gauge-trace-normalization 的 notes 第 1 条与抽取记录 §3.1。
+  转引本卡时不要把这当成原文字面。
+
+  【2. 为什么 status 是 physical-argument】本卡定义的是一个**形式上的**十二维对象
+  （"a formal expression in twelve dimensions"，GS 逐字），它与十维反常的对应靠圈图分析与
+  WZ 相容条件，本图未掌握任何严格化版本；且它依赖只定到恰当形式的下降形式卡。
+
+  【3. 不叫 I₁₂】现代文献（bilal-2008）把这个对象写作 Î₁₂ 或 I₁₂ 并打包成 B ∧ X₈；
+  **GS 1984 既没有 I₁₂ 也没有 X₈ 这两个记号**，只有 Ω_{4n} 与三段分开的 S₁ + S₂ + S₃。
+  本卡的标题保留 GS 记号，是为了让「后世打包写法」与「原文写法」在图里可分辨。
+
+  【4. n 的角色】n 只通过规范群维数进入反常多项式，这一点在
+  consistency.gravitational-anomaly-polynomial-d10 里才真正用到（那里 n − 496 出现在系数里）。
+author: curator
+created: "2026-09-11"

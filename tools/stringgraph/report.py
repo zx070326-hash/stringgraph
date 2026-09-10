@@ -5,7 +5,7 @@ import json
 from collections import Counter
 
 from .model import LEVEL, Graph
-from .propagate import Effective, compute_all
+from .propagate import Propagator, Effective, compute_all
 
 _COLORS = {
     "formalized": "#2e7d32",
@@ -30,6 +30,14 @@ def status_report(g: Graph, sid: str) -> dict:
         "best_derivation": eff.best_derivation,
         "assumes": sorted(eff.assumes),
         "conjectures_depended_on": sorted(eff.conjectures),
+        # Per-derivation view: own status vs. effective level after dependencies.
+        # `own_status` above is the max over derivations and can read as "already rigorous"
+        # when the rigorous derivation is in fact throttled by an open dependency.
+        "derivations": [
+            {"id": d.id, "kind": d.kind, "own": d.status,
+             "effective": Propagator(g)._derivation(d).name}
+            for d in g.derivations_for(sid)
+        ] if st.kind == "proposition" else [],
     }
 
 

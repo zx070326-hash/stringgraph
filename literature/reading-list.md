@@ -3,7 +3,7 @@
 | 优先级 | ref | 范围 | 目标 area | 负责 | 状态 |
 |---|---|---|---|---|---|
 | P0 | polchinski-1998-v1 | §1–§6, §8（玻色弦、共形规范、光锥量子化、无鬼定理、模空间与一般亏格 FP、树级振幅；环面紧化与 T 对偶） | worldsheet | researcher | extracted（二手源，需持原书者核对 E34/E53/E58；**§5–§6 于 2026-09-11 追加 E69–E112**，其中 (6.4.23) Veneziano 表达式与 (6.6.23) 开闭弦关系最需核对；**§8 于 2026-09-11 追加 E113–E158**，其中 **(8.3.28) T 对偶「是同一个 CFT」的原文措辞最需核对（Q20）**，其次 (8.4.24)/(8.4.25) 的必要性半句（Q21/Q22）与 (8.7.2) DBI（Q25）。**§8.5 轨形未抽，见 E146**。勘误表风险见 Q14+Q24） |
-| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | extracted（二手源）。**⚠ 2026-09-11：Cambridge Core 路线已证可取 Vol.1 正文 PDF（见下方备忘），建议派一轮把 §3 未核实清单（E34 的 `c=D`、E53 的 §3.4 式号、E58 的无鬼定理措辞、(2.1.1) 的 Wick 旋转、(2.7.21) 的表达式）全部升到 L1** |
+| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | **★★ 原书核实完成（L1，2026-09-11 第六轮）** → `extractions/polchinski-1998-v1.md` **§12**。Q2/Q3/Q4/Q5/Q6/Q7/Q10/Q11/Q12/Q20/Q21/Q22 全部关闭；30 条图节点 loc 修改建议见 §12.10 B 表；15 条作者自承缺口见 C 表。**剩余最高性价比：Appendix A (A.1.31)、书末 References（Goddard–Thorn 是否被引）、§1.2 的 `T=1/(2πα')` 式号** |
 | P0 | lian-zuckerman-1991 | 全文（Thm 2.13/2.25、Cor 2.26/2.28、Thm 3.5） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `extractions/primary-sources-round2.md` §1 |
 | P0 | virasoro-lean-2025 | §9–§12 + App. A.2（Heisenberg、Sugawara c=1、Verma/Fock） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `primary-sources-round2.md` §5.2 |
 | P0 | fgz-1986 | 全文 | worldsheet | researcher | extracted（L1 全文）→ `brst-cohomology-sources.md` §1 |
@@ -44,7 +44,15 @@
 | **P0** | **zumino-wu-zee-1984** | 全文（下降方程 `ω⁰_{2n+1}`/`ω¹_{2n}` 的定义与符号约定；纯规范反常的绝对归一） | consistency | 待分派 | **新增（2026-09-11，由 alvarez-gaume-witten-1984 抽取推出，优先级 P0）**：B. Zumino, Y.-S. Wu, A. Zee, Nucl. Phys. **B239** (1984) 477 = GS ref [9] = AGW ref [7] 的「Univ. Washington preprint, 1983」。**AGW 全文没有下降方程**，所以 (a) GS 常数 `c` 的另一半依赖、(b) `H = dB + ω⁰_{3Y} − ω⁰_{3L}` 的符号约定源头，**都只能在这里**。抽了它，GS 链的数值系数层才可能全闭合。无 arXiv |
 | P1 | eguchi-gilkey-hanson-1980 | Â 多项式（Dirac genus）的定义与 Pontryagin 展开 | consistency | 待分派 | **新增（2026-09-11）**：Phys. Reports **66** (1980) 213 = AGW ref [6]，AGW (82) 的 Â 多项式外包给它。本轮已用 Harvard Math 272b 讲义（匿名 CAS 输出，L1）核对 Â₁–Â₄ 全部相符，但那只作旁证；canonical 数学来源应是 Hirzebruch 或本条 |
 | P1 | green-schwarz-1985-hexagon | 全文 | consistency | 待分派 | **新增（2026-09-11）**：Nucl. Phys. **B255** (1985) 93–114。GS 1984 自陈弦论侧 "details will be presented elsewhere"，Schwarz 2012（arXiv:1201.0981，L1）指认这里就是那个 elsewhere。要给「type I 单圈六边形反常抵消」建节点必须先抽它 |
-| P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1` |
+| P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1`。**2026-09-11 追加理由（researcher，建议 lead 把本行提到 P1）**：`vafa-2005` §4 把「U(1)⁴⁹⁶ 与 U(1)²⁴⁸×E₈ 就反常而言一致」引给 `green-schwarz-1984`，但本项目对 GS 1984 的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈。本章现在同时被 GS 抽取与 Vafa 抽取两处需要，是 swampland↔consistency 接口边的唯一可能来源。见 `extractions/vafa-2005.md` Q3 |
+| **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3） |
+| **P0** | **ooguri-vafa-2006** | 全文（17 页） | swampland | researcher | **extracted（L1 全文 18 页逐页读图，2026-09-11）** → `extractions/ooguri-vafa-2006.md`（E1–E29）。⚠ 读的是 **arXiv v1**，编号必须写死 v1。**Conjecture 0–4 有编号（从 0 起）；全文只有两个编号公式 (1.1) 与 (3.1)；§3.1 有两个 `Example v)` ⇒ loc 不能只写「Example v」。** 四条使用限制：α 不普适（9/8、3/8、8/7、6/7）、Conj 3 是标量曲率非截面曲率、Conj 1 与 2 明确相互独立、「Swampland Distance Conjecture」这个名字不在原文。三处「conjecture 2」按内容应为「conjecture 3」（误植） |
+| **P0** | **arkani-hamed-2006** | 全文（20 页） | swampland | researcher | **extracted（L1 全文 21 页逐页读图，2026-09-11）** → `extractions/arkani-hamed-2006.md`（E1–E27）。⚠ 读的是 **arXiv v2**，且 **§5 与 (28)–(30) 极可能是 v2 新增**（其引用 hep-th/0602178 晚于 v1 日期）。公式 (1)–(30) + sharp 版本 (I)(II)(III) 均可精确引用。**★ 本项目第一条 `status: refuted` 的证据：§3 p.11 作者本人反驳 (I)，逐字「So (I) can't be right.」** 「m ≤ qM_Pl」在文内有四种写法不可互换（Q1）；极端性归一化文内不统一（Q2）；**全文无「Weak Gravity Conjecture」一词** |
+| P1 | wen-witten-1985 | 全文（NPB 261, 651–677） | swampland | 待分派 | **新增（2026-09-11，由 arkani-hamed-2006 抽取推出）**：AMNV §3 p.11 用「半整数荷缠绕弦」反驳其 sharp 版本 (I)。**这是本项目第一条 refuted 节点的一手证据来源**，现在只有 AMNV 的转述级。1985 年无 arXiv，Elsevier 预计 403 |
+| P1 | sen-1995-bh-torus | 全文（hep-th/9411187） | swampland, holography | 待分派 | **新增（2026-09-11）**：AMNV §4 的 (22)(23)（杂化弦 on T⁶ 的极端黑洞质量 M² = ½Q_R² / ½Q_L²）**全部外包给本文**。不抽它，AMNV 全部正面证据的黑洞侧只有转述级。**有 arXiv，取全文成本低，性价比高** |
+| P1 | bagger-witten-1983 | 全文（NPB 222, 1–10），特别是超多重态模空间曲率符号的定理 | swampland | 待分派 | **新增（2026-09-11，由 ooguri-vafa-2006 抽取推出）**：OV §3.1（第一个 Example v，p.9）把「耦合到超引力的超多重态模空间必有负标量曲率」归给本文，并说这是局部 N=2 超对称的**直接后果**。**⇒ 这是 swampland 区最有希望通向 `rigorous` 的物理支点**（若成立，Conjecture 3 在超多重态那一支不只是 conjecture）。1983 年无 arXiv |
+| P2 | borel-harish-chandra-1962 | 全文（Ann. of Math. 75, 485–535） | math, swampland | 待分派 | **新增（2026-09-11）**：**`vafa-2005` 全文唯一引用的严格数学定理**（§2 p.4「T^d 的 Narain 模空间体积有限」）。⇒ swampland 区唯一一条可能通向 `rigorous` 的一手**数学**来源。建议把「T^d Narain 体积有限」单独建卡，不要让它给一般体积猜想升格。⚠ 终页 535 未核实 |
+| P2 | susskind-1995-remnants | 全文（hep-th/9501106） | swampland | 待分派 | **新增（2026-09-11）**：AMNV §2.2 的 remnant 论证与「量子引力无全局对称性」这一前提都引本文，§2.3 的 large-N species problem 也引它。**⇒ 图里「无全局对称性」节点的来源应是本条，不是 AMNV**（后者只引用不论证）。有 arXiv |
 
 ## 已知获取路线备忘
 
@@ -104,6 +112,20 @@
   Vol.2 已取 item hash：contents `07FB90D821053D58A00610479EFE2978`、notation `BACF746050A6F8DC6AE8EF5FA4A6BA28`、
   ch.10 `E69C35DC077FD0BAD6B39479144D4A12`、ch.11 `C4D876C20A83F4E778152B75A219A718`、
   ch.12 `46D902501550C028C94F24884F4B9D7A`、附录 B `872CC69E98F684AFA1019EB2A955BD11`。
+  **Vol.1 全部 item hash（2026-09-11 实得，文件名规则 `9780511816079c<章号>_p<起页>-<止页>_CBO.pdf`，实测 c1–c8 全部命中）：**
+  frontmatter(i–viii) `D8E774D629783EE35C60C78122AF28B5` / contents(ix–xii) `5A6EE61D4E1E712BB9D55D142187A6B6` /
+  foreword(xiii–xiv) `55B6451C35A99B25FE283F4B1AD988A7` / preface(xv–xvii) `BB4B6DFFBB6CA9E785644A9D0693C9CD` /
+  **notation(xviii–xx) `4E431CFB7DE9E03AE982456CC6BA3BE0`（文件名例外：`9780511816079mfm_pxviii-xx_CBO.pdf`）** /
+  ch.1(1–31) `B743D2FD9DFC745DF9A39834989A0BAB` / ch.2(32–76) `5CA151E88B12C248825A262624ADC7D6` /
+  ch.3(77–120) `606E849133B4EE45657DF6128FD1C8C1` / ch.4(121–144) `12E46864E4792BDA6021FD53D3C193E2` /
+  ch.5(145–165) `2619B77DD4AE2BE4D53B5EED5D3BE3C1` / ch.6(166–205) `F440F6B46EB4150F96EAEAFDDF9F0D76` /
+  ch.7(206–230) `1FCFE9B5026DE1E5210F0F62514336B0` / ch.8(231–282) `812E73D34A5F56520ECCAA94F068E1A6` /
+  ch.9(283–328) `8787336CD0569208E89B12D418283685` / **App.A 路径积分(329–346) `D6A09941572ED2451AFC3C5C497F9A9A`** /
+  **References(347–358) `F5E26AFC8AF1D3B0E3F3866E752F8FD2`** / glossary(359–388) `41D8D3C53148B5BFBA313D3C612F7887` /
+  index(389–402) `C125CE5357865125A6B484F68E9EE3AC`。
+  ⚠ **版本锚定**：Core 数字化本是 **Cambridge Books Online（2005 平装，已含 2000 年 "with corrections"）**。
+  → 因此 [S] 说「按 Joe 勘误表更正」的那几处（(5.3.5)、(5.4.10)、(8.6.19) 等），**页图上看到的已经是更正后的文本**，
+  「官方勘误表取不到」这个系统性风险随之大幅降低（KITP 三条 URL 仍 404，但已不再是必需品）。
   ⚠ 注意 `assets.cambridge.org/.../frontmatter/*.pdf` 仍然 **Socket is closed**（与旧记录一致）；**要走 Core 的 `/services/` 端点**。
 - **⚠ Schrans 伴读笔记（[S]）没有第 2 卷版本（2026-09-11 确认）。** hepnotes.com 首页明写该 string 笔记只覆盖
   「the first 8 chapters of volume 1」，`joes-book-2.pdf` 不存在。**别再找。**

@@ -1,0 +1,59 @@
+id: spectrum.veneziano-regge-behavior
+kind: proposition
+title: Veneziano 振幅的 Regge 行为：s → ∞、t 固定时 S ∝ s^{α(t)} Γ(−α(t))
+statement: |
+  取开弦四 tachyon 振幅的 Beta 函数形式（spectrum.veneziano-amplitude-weak），
+  记 α(x) = 1 + α'x 为开弦领头 Regge 轨迹。质心系运动学为
+    s = E²,   t = (4m² − E²) sin²(θ/2),   u = (4m² − E²) cos²(θ/2)   （(6.4.27)）。
+  定义 **Regge 极限**：s → ∞ 而 t 固定（等价地散射角 θ → 0）。则逐项取极限：
+    𝔅₁ = B(−α(s), −α(t)) ∝ s^{α(t)} Γ(−α(t)),
+    𝔅₂ = B(−α(s), −α(u)) ∼ −π s^{α(t)} / ( sin(πα(s)) · Γ(1 + α(t)) )，
+        与 𝔅₁ 同幂次 s^{α(t)}；只有当 s 带非零虚部（Im s ≠ 0）时 1/sin(πα(s)) 指数压低，
+        𝔅₂ 才相对 𝔅₁ 可忽略,
+    𝔅₃ = B(−α(t), −α(u)) ∼ 𝔅₁,
+  故
+    **S_{D₂}  ∝  s^{α(t)} Γ(−α(t))**   （(6.4.28)）。
+  即：**高能小角散射的幂次由 t 通道交换的领头 Regge 轨迹 α(t) 给出**，
+  这是弦论重现 Regge 行为（对偶共振模型的初衷）的地方。
+
+  **本命题不断言什么**：不给出比例常数；不断言 Γ(−α(t)) 的极点（t 通道的态）的留数结构；
+  不与闭弦作对比（见 notes 与 Q15）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.27)（质心系运动学）、(6.4.28)（Regge 行为），p.183–184"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E100，等级 **L1**（schrans-2020 §6.40–§6.41，
+      笔记 p.308–310，逐页读到并逐步复现三项的渐近）。
+      ⚠ **勘误依赖（抽取记录 Q14 第 6 条）**：[S] 脚注 4 逐字「There is **a typo in Joe's book,
+      as per his errata page**. Stirling's formula should read Γ(x+1) = x^x e^{−x}(2/πx)^{1/2}.」
+      **Polchinski 官方勘误表本项目未取得**；且 [S] 转引的这个「更正后」形式**与标准 Stirling 公式
+      不符**（标准是 (2πx)^{1/2}），见 math.gamma-ratio-asymptotics 的 notes。
+      本卡片的结论只用 Γ 商的渐近，与 Stirling 的前因子无关，故不受该分歧影响。
+      ⚠ **𝔅₂ 的幂次，本图不采 [S] 的 s^{−5}**：[S] 给出 𝔅₂ ∝ s^{−5} → 0；
+      reviewer-ch6（2026-09-11）独立复算得 𝔅₂ ∼ −π s^{α(t)}/(sin(πα(s))·Γ(1+α(t)))，
+      与 𝔅₁ 同幂次，仅在 Im s ≠ 0 时被 1/sin(πα(s)) 指数压低。本卡片采 reviewer 的形式。
+  - ref: schrans-2020
+    loc: "§6.40–§6.41（笔记 p.308–310）（核对源）"
+tags: [spectrum, tree-level, open-string, veneziano, regge, asymptotics, high-energy, errata-dependent]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E100 建立。
+
+  **⚠ 与闭弦的因子 2 对比不入陈述**：闭弦的对应结果是 s^{2α_c(t)}
+  （spectrum.virasoro-shapiro-regge-behavior），恰好差因子 2。
+  抽取记录 **Q15 明记：这个对比是抽取者做的，schrans-2020 与 headrick-2008 都没有把两者并列，
+  原书是否显式说「闭弦 Regge 斜率是开弦的一半」未核实。**
+  因此本图**各自建节点，不建「二者差因子 2」的陈述节点**，只在两条卡片的 notes 里互相指认。
+
+  **𝔅₂ 的渐近（reviewer-ch6 复算，2026-09-11）**：由 u = −s − t − 4/α' 得 −α(u) = α(s) + α(t) + 2，
+  于是 B(−α(s), −α(u)) = Γ(−α(s))Γ(−α(u))/Γ(−α(s)−α(u))，分母参数 = −α(t) − 2 固定，
+  两个分子 Γ 的宗量沿相反方向趋于无穷；用反射公式 Γ(−α(s)) = −π/(sin(πα(s))·Γ(1+α(s)))
+  与 Γ 商渐近 Γ(α(s)+α(t)+2)/Γ(1+α(s)) ∼ s^{α(t)+1}，整理得
+  𝔅₂ ∼ −π s^{α(t)}/(sin(πα(s))·Γ(1+α(t)))。**它与 𝔅₁ 同为 s^{α(t)} 幂次**，
+  [S] 的 s^{−5} 与之不符，本图不采（已移入 sources.note）。
+  在物理上取 s 带小虚部时 |1/sin(πα(s))| ∼ e^{−π α' |Im s|} 指数压低，𝔅₂ 才可忽略；
+  这与 math.gamma-ratio-asymptotics 记录的「arg a = π 射线上有极点塔」是同一件事。
+author: curator-polchinski-ch6
+created: "2026-09-11"

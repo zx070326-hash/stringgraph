@@ -1,0 +1,55 @@
+id: conv.gauge-trace-normalization
+family: gauge-trace
+title: 十维反常多项式里的规范场迹归一化：tr（基本表示）与 Tr（伴随表示）
+definition: |
+  **本图对十维反常多项式中的迹与场强采用 Green–Schwarz 1984 的原版归一化，不作任何重标度。**
+
+  · **微分形式**：F ≡ ½ F_{μν} dx^μ ∧ dx^ν = dA + A²。**楔号一律省略**，A² ≡ A ∧ A。
+    因为 F 是**偶次形式**，不同位置的 F 分量在外代数里互相交换，形如 tr F^{2n} 的表达式无序问题。
+  · **规范势**：A = A^a_μ λ^a dx^μ，生成元 λ^a **反厄米**，取**基本表示**
+    （SO(N) / USp(N) 的 N 维表示），尽管理论里的无质量费米子处在**伴随**表示。
+  · **两种迹**（GS 逐字）："The trace of a matrix M is denoted by `tr M` when M is in the
+    fundamental representation and by `Tr M` when M is in the adjoint representation.
+    (Of course, these are identical for E₈.)"
+      - **tr** = 基本（N 维）表示的迹；
+      - **Tr** = 伴随表示的迹；
+      - E₈ 两者相同（E₈ 的最低维表示就是 248 维伴随表示）。
+  · **不含额外重标度**：本约定下 SO(32) 有 Tr F² = 30 tr F²，E₈ 有 Tr = tr。
+  · **引力一路**：自旋联络 ω = ω_μ dx^μ 是切空间代数 SO(9,1) 的 **10 × 10** 矩阵，R = dω + ω²；
+    tr R^{2n} 里的 tr 就是这个 10 × 10 矩阵的迹（GS 在引力项上只用小写 tr）。
+  · **记号 Ω_{4n}**：本图统一写 Ω_{4n} := Tr F^{2n}（伴随迹）。见 notes 第 1 条关于原文 (11) 的读图存疑。
+canonical: true
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118（重印 609），(2)(3) 及其后正文：形式约定、λ 反厄米/基本表示、tr 与 Tr 的逐字定义、ω 为 10×10 与 R = dω + ω²（(8) 后正文）"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md §1.1）。
+      同处还有一句限定全文范围的话：「We only discuss SO(N), USp(N) and E₈ × E₈ explicitly,
+      but other groups can be analyzed in an analogous manner.」
+  - ref: bilal-2008
+    loc: "§12, (12.28)–(12.29)（E₈ 的重标度 tr F² := (1/30) Tr F²，由此 Tr F⁴ = 9(tr F²)²、Tr F⁶ = (75/20)(tr F²)³）"
+    note: |
+      **列在这里是作为对照，不是本约定采用的归一化。** 换算已复算：
+      把 Bilal 的 tr_B F² = Tr F²/30 代入，Tr F⁴ = 9 (Tr F²/30)² = (1/100)(Tr F²)²、
+      Tr F⁶ = (75/20)(Tr F²/30)³ = (1/7200)(Tr F²)³，正是 GS (12b′)(12c′)。
+notes: |
+  【1. 原文 (11) 的 tr/Tr 读图存疑】GS 的 (11) 在影印件上印作小写 **`Ω_{4n} = tr F^{2n}`**
+  （scale=1, 2541×3238，抽取记录 §3.1）。但语义上必须是**伴随**迹：紧接的引导句是
+  「In these cases Ω_{4n} can be reexpressed in terms of fundamental-representation matrices」，
+  (12a) 才把它写成 (N + 2l) tr F²；若 (11) 已经是基本迹，(12a) 就是废话。
+  **本图统一按语义写 Ω_{4n} = Tr F^{2n}**，并在此登记：这一步是本项目的判读，不是原文字面。
+  与之对照，(15) `dω⁰_{2n+1 Y} = tr F^{n+1}` 的 tr **确实**是基本迹（与 (5)(6) 一致）。
+
+  【2. 与 Bilal 2008 的记号陷阱】同一个记号 `tr F²` 在 GS 与 Bilal 里**不是同一个量**（见 sources 第二条）。
+  凡从现代文献抄系数进入本图，必须先做上面的换算。若将来要把 Bilal 的重标度约定入图，
+  应在本 family 内新建 `canonical: false` 的第二个成员，并在跨约定的边上写 convention_map，
+  **不要**改本节点。
+
+  【3. 本 family 不管什么】
+  (a) **度规号差**：GS 全文未显式声明，只由「tangent-space algebra SO(9,1)」间接给出洛伦兹号差；
+      本图**不**替它填 conv.metric-*（抽取记录 §1.3）。
+  (b) **H 的 Chern–Simons 项符号**：GS (4) 是 H = dB + ω⁰_{3Y} − ω⁰_{3L}，
+      Bilal (12.14) 是 H = dB − Q₃(A,F) + β̃ Q₃(ω,R)，**两个 CS 项整体反号**。
+      这条差异记在 consistency.h-field-strength-chern-simons 与 consistency.gs-counterterms-1984 的 notes，
+      本约定节点不承载它（它是定义卡的内容，不是归一化选择）。
+  (c) **α′ 归一化**：GS 只在弦论侧的 (25) 里出现 α′，本图不建那批节点，故与 conv.alpha-prime-regge 无交涉。

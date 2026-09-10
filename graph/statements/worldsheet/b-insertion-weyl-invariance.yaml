@@ -1,0 +1,31 @@
+id: worldsheet.b-insertion-weyl-invariance
+kind: proposition
+title: S-矩阵公式中的 b 插入与 c 插入是 Weyl 不变的
+statement: |
+  在 worldsheet.string-s-matrix 的公式 (5.3.9) 中，鬼场 b_ab 与 c^a 本身是 Weyl 不变的
+  （它们由 δg_ab 的对称无迹部分与 diff 参数 δσ^a 换来，这两者都不带 Weyl 权）。
+  由参考度规的 Weyl 变分
+    δĝ_ab = + 2ω ĝ_ab ,   δĝ^{ab} = − 2ω ĝ^{ab} ,   δ(ĝ^{1/2}) = + 2ω ĝ^{1/2}
+  逐因子计数可知：模插入
+    (b, ∂_{t^k} ĝ) = ∫ d²σ  ĝ^{1/2}  b_ab  ∂_{t^k} ĝ^{ac} ĝ^{bd} …（缩并到 b^{ab}∂_k ĝ_ab 的形式）
+  中，各因子的 Weyl 权相消，故整个 b 插入 Weyl 不变；c^a(σ̂_i) 插入同理。
+
+  换言之，b 插入本身在 Weyl 变换下的变分可被鬼场路径积分的鬼数反常吸收，不带来新的
+  Weyl 破坏。顶点算子的 Weyl 权（要求 (1,1) 主场，即物质态的质量壳条件）是一个**独立的**
+  条件，本卡不覆盖；(5.3.9) 整体的 Weyl 不变性还需要它以及物质 + 鬼场的总中心荷为零。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.3), p.160"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E83，L1（读到 schrans-2020 §5.24，
+      笔记 p.262：「Now it is just a matter of counting」；**未核对 Polchinski 原书**）。
+      ⚠ 本卡 statement 中写出的缩并形式是 curator 为使「权相消」可核对而补的写法，
+      抽取记录只给出结论与三条 Weyl 权，**不是来源逐字**。
+tags: [worldsheet, s-matrix, ghosts, weyl, moduli]
+notes: |
+  这条与 worldsheet.s-matrix-diff-invariance 是 §5.4 的一对：先查 Weyl 不变（容易，是数权），
+  再查 diff 不变（难，原书只有断言）。两者强度差得很远，故分成两卡。
+author: curator-polchinski-ch5
+created: "2026-09-11"

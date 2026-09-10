@@ -162,5 +162,37 @@ notes: |
   但**逐项对应关系相反**，形式化时必须先定死一种。本卡的 V^{(n)}_J 按「z^J 的系数」定义
   （与 Lean 的 `vertexOsc` 一致）。这条只是记号，不影响本命题的任何断言
   （(1) 对**每个** J 成立，与如何求和无关）。已在报告中提请 lead/auditor 择一规范化。
+
+  【2026-09-11（四）：两条此前无节点的前提现已各有承载卡（curator；**只加本段 notes，
+  陈述文本未动**；推导 --via-radial-conjugation 已加两条非 inferred 依赖）】
+  本卡 notes【为什么不是 rigorous】列的两条理由 (i)(ii) 中，第 (i) 条
+  （「『厄米共轭在径向量子化下作用为 z ↦ 1/z̄』这条规则本图**没有节点**」）**已过时**：
+    · 该规则现由 worldsheet.radial-hermitian-conjugation 承载（definition，
+      own status rigorous / effective physical-argument）。其 (4) 还把本卡推导第 1 步里
+      「h ≠ 0 时反射带 h 依赖的指标平移」写成精确形式：在本卡用的「z^J 的系数」指标下
+      反射是 **J ↦ −J − 2h**，只有 h = 0 时才是纯粹的 J ↦ −J；
+    · 本卡 statement 与推导 summary 所用的「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」
+      现由 worldsheet.exponential-vertex-operator-weight 承载（(1)(2)(b)(3)，
+      开弦边界归一化 h = α'k²；effective physical-argument）。
+  **但 status 定级不变，仍是 physical-argument**，理由三条：两张新卡自身的 effective
+  都是 physical-argument；新卡的来源锚点仍弱（radial 卡的 (1) 无任何式号锚点，
+  weight 卡的主来源内容未核对）；且本卡推导**唯一剩下真正无节点的那一步**——
+  同一个算符内部 E_+ 与 E_- 的**重排序**——没有变（文献侧只有分离插入点的
+  Polchinski (6.6.24)，Lean 侧只分别有两半 `Fock.creaExp` / `Fock.vertexSub`、不给换序）。
+  【为什么不是 rigorous】的第 (ii) 条因此**完整保留**。
+  notes【升级路径】(i) 也不变：Lean 侧仍缺塔上的双线性型与本命题本身。
+
+  【2026-09-11 下午（curator，对接 TowerPairing.lean）】本卡 (1) 用到**跨层配对**
+  （V^{(n)}_J 把第 N 层送到第 N+n 层，故等式两侧的配对发生在相邻的不同层之间），
+  而塔上型的「层间正交」是 worldsheet.momentum-tower-fock-space (2) 的**约定式定义**：
+  它现已形式化（那张卡 2026-09-11 下午升为 formalized，lean_decl = `Fock.towerPairing`），
+  但在 Lean 里它是 `towerPairing`（各层配对的**单位权求和**）的**定义**及其在 rung 基上的展开
+  `towerPairing_single_single_of_ne`，**不是物理证明**，也不是 δ^D(p − p′) 正交性的推导。
+  即：本卡引用它时借到的证据是「这套约定自洽、且塔卡的 (4) 由之推出」，不是「已被证明」。
+  连带更新上面【升级路径】(i) 里的「缺两件」：第一件（塔上的双线性型）已由 formalizer 在
+  1a7445e 落地（`Fock.towerPairing` 与三条伴随，其中**跨层的** `towerPairing_towerShift_left`
+  正是本卡 (2)(b) 的 S_n^† = S_{−n}）；现只缺第二件，即本命题本身——TowerPairing.lean
+  文件头 Gaps 第 2 条逐字把它记为未做（"The vertex operator is not yet self-adjoint …
+  graph node `worldsheet.vertex-operator-adjoint`"），因而 A^i_n 的伴随在 Lean 侧仍不可用。
 author: curator
 created: "2026-09-11"

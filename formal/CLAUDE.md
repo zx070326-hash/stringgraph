@@ -13,7 +13,7 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 ### 在 worktree 里构建
 
-worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
+worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）。**格式不是裸的 name→path 映射**，而是 `{"schemaVersion": "1.2.0", "packages": [{"type": "path", "name": "mathlib", "scope": "", "configFile": "lakefile.lean", "manifestFile": "lake-manifest.json", "inherited": false, "dir": "D:/physics/string/formal/.lake/packages/mathlib"}, …]}`，每个依赖一项（mathlib、plausible、LeanSearchClient、importGraph、proofwidgets、aesop、Qq、batteries、Cli 等，按 `lake-manifest.json` 的 packages 列表；非 mathlib 的 `inherited: true`）。**最省事：从任一现存 worktree 复制** `.claude/worktrees/agent-*/formal/.lake/package-overrides.json`（一名 formalizer 曾因写错格式丢了一个编译周期）。编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
 
 ### 读大文件的纪律
 
@@ -36,6 +36,10 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
   这条命令**不在** `validate` 和 pre-commit 里（要起 Lean，太慢），改完 Lean 后自己跑。
 - **禁止**为了让 `validate` 通过而写带 `sorry` 的陈述。没准备好就不写声明，像 `NoGhost/Statement.lean` 那样在文件头写清楚。
 
+## worktree 里跑公理检查的两条坑
+- worktree 的 `lake env` 指向 worktree 自己那份**部分构建**的 mathlib，`lake env lean --run scripts/check_axioms.lean` 默认 `--import StringFormal` 会因缺 olean 崩。**必须加 `--import <你改的模块>`**。
+- 声明名带撇号（如 `foo'`）不能作为命令行参数（bash 吞引号），用 `--all < names.txt`。
+
 ## 目录
 
 ```
@@ -43,14 +47,25 @@ StringFormal/
   Math/EulerPartition.lean  Euler 分拆生成函数 Σ p(N) X^N = ∏_{n≥1}(1-X^n)^{-1}（`PowerSeries`，
                             无逆元形式对任意交换环成立；域上给 `⁻¹` 形式）。独立小岛，不 import 其他子目录
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
-  Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
-  Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
+  Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）；
+                            另含线性劈分 ofWitt/toProdₗ、span_lgen_cgen_eq_top、centralTerm_zero
+                            （2026-09-11 从 Verma.lean 搬来，声明全名不变）
+  Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级、
+                            level 平移 lie_lgen_mem_levelSpan（L_{-k}: V_N → V_{N+k}）
+                            （无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
   Virasoro/VermaPBW.lean    有序词（分拆）张成 Verma 模 level 片，dim V_N ≤ p(N)；线性无关（PBW）未做
   Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
   Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
-  Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
+  Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、
+                            存在性 ⟺ V(c,h)≠0（char-0 域上 hwv≠0 即可构造，
+                            exists_isContravariant_iff_hwv_ne_zero）、N≤2 Gram
+                            （det₂ = 2h(16h²+2h(c−5)+c)）
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
-  Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
+  Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）；开弦/闭弦四快子特化 −4/−16
+  Math/GreenSchwarzAlgebra.lean  Green-Schwarz 1984 的纯代数部分（独立小岛）：十二形式因子化
+                            Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²] 的 SO(32)/E₈ 两支（`[Field K] [CharZero K]`，
+                            系数写 48⁻¹ 而非 algebraMap ℚ）、混合反常迹条件 (N,l) = (32,−1)、
+                            tr F⁶ 系数 N + 32l 的零点与 USp 的非零。迹恒等式本身是图里的独立节点
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
@@ -66,7 +81,7 @@ StringFormal/
                             无 [L_m, V]，无 A^i_n 本身（见文件头 gaps）
   NoGhost/TowerPairing.lean   动量塔上的双线性型 towerPairing = Σ_j ⟨·_j,·_j⟩（BilinForm）：层间正交、
                             对称、towerShift/towerMode/towerLop 的伴随（见文件头 gaps）
-  NoGhost/VertexWeight.lean   顶点算子共形权（进行中）：creaExp 欧拉递推 creaExp_euler 已证；真空上 L_m Φ_J 与 [L_m, V_K] 待做
+  NoGhost/VertexWeight.lean   顶点算子共形权：creaExp 欧拉递推、真空上 L_m Φ_J（m ≥ 0）、**m ≥ 1 的 [L_m, V_J] 恒等式**（lie_Lop_vertexOsc_of_pos）与塔上版本（k_0²=0 时 [L_m, V^{(n)}_K] = (K−m)V^{(n)}_{K−m}）；m < 0 未做
   NoGhost/QuotientForm.lean   H_phys/H_null 上诱导形式：pairing_add_null、nullInPhys、PhysQuot、
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule

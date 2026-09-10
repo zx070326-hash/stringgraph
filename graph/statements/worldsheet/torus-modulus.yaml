@@ -1,0 +1,52 @@
+id: worldsheet.torus-modulus
+kind: definition
+status: rigorous
+title: 模参数为 τ 的平坦环面
+statement: |
+  设 τ 属于上半平面 H = {τ ∈ C : Im τ > 0}，记 τ¹ = Re τ、τ² = Im τ。
+  **模参数（Teichmüller 参数）为 τ 的平坦环面** T²(τ) 定义为复平面对格的商
+    T²(τ) = C / Λ(τ),   Λ(τ) = 2π Z + 2π τ Z,
+  即在复坐标 w 上作认同
+    w ≅ w + 2π m + 2π n τ    (m, n ∈ Z)，
+  并带由 C 上的平坦度规 ds² = dw dw̄ 诱导的度规。
+
+  **等价的「固定周期、改度规」写法**：取实坐标 σ¹, σ² 使周期与 τ 无关，
+    w = σ¹ + τ σ²,    σ^a ≅ σ^a + 2π  (a = 1, 2),
+  则
+    ds² = |dσ¹ + τ dσ²|²,
+  即
+    g_ab = ( (1, τ¹), (τ¹, |τ|²) )     （分量次序 g_11, g_12; g_21, g_22）。
+  于是
+    det g_ab = |τ|² − (τ¹)² = (τ²)² = (Im τ)²,
+  故该度规**正定当且仅当 Im τ ≠ 0**；本定义约定取 Im τ > 0。
+
+  ⚠ 本卡只定义「给定 τ 的平坦环面」这个对象，**不**断言
+  (i) 每个环面度规都能化到这个形式（见 worldsheet.torus-metric-reduces-to-modulus），
+  (ii) 不同的 τ 给出不同的环面（见 worldsheet.torus-modular-equivalence、
+       worldsheet.modular-fundamental-domain）。
+uses: []
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.9)–(5.1.11), p.147"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E69（researcher 第四轮，2026-09-11），
+      证据等级 [已核实] / L1。
+      ⚠ **L1 的含义**（抽取记录 §5.0）：抽取者逐页读到了 schrans-2020 伴读笔记的页图，
+      笔记里确有该式号与该内容；**这不等于核对了 Polchinski 原书**——本项目至今没有该书正文。
+      g_ab = ((1, ½(τ+τ̄)), (½(τ+τ̄), |τ|²)) 与「τ 取实值时 det g = 0，故必须 Im τ > 0」
+      出自 schrans-2020 §5.1（笔记 p.243–244，L1），是核对源，不是原书逐字。
+tags: [worldsheet, torus, moduli, teichmueller, geometry]
+notes: |
+  **一处归一化分歧，需持原书者裁决**：抽取记录 E69 写「等价地可保持周期 σ^a ∈ [0,1]² 不变而改度规：
+  w = σ¹ + τσ²」。但 w = σ¹ + τσ² 配 σ^a 周期 1 只能给出格 Z + τZ，与同一条 E69 前半句的
+  w ≅ w + 2πm + 2πnτ（格 2πZ + 2πτZ）差整体因子 2π。本卡按**周期 2π** 写，使两半自洽；
+  若原书用的是周期 1，则本卡的 Λ(τ) 与周期都应整体除以 2π，**τ 本身与下游一切结论不受影响**
+  （τ 是两个周期之比，与整体标度无关）。
+
+  本卡的 status = rigorous 指**这张定义卡本身**在数学上精确（商群、格、平坦度规都是标准对象），
+  不表示 Polchinski 的推导严格。
+author: curator-polchinski-ch5
+created: "2026-09-11"

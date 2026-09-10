@@ -83,7 +83,12 @@ def main(argv: list[str] | None = None) -> int:
             print(to_json(rep))
         else:
             for k, v in rep.items():
-                print(f"{k}: {', '.join(v) if isinstance(v, list) else v}")
+                if k == "derivations":
+                    print("derivations:")
+                    for d in v:
+                        print(f"  {d['id']}  [{d['kind']}] own={d['own']} effective={d['effective']}")
+                else:
+                    print(f"{k}: {', '.join(v) if isinstance(v, list) else v}")
         return 0
 
     if args.cmd == "why":

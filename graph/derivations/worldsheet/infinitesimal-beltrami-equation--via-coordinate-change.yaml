@@ -1,0 +1,42 @@
+id: worldsheet.infinitesimal-beltrami-equation--via-coordinate-change
+target: worldsheet.infinitesimal-beltrami-equation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.beltrami-differential
+    note: 提供 μ_k 的定义。
+  - id: worldsheet.moduli-holomorphic-quadratic-differentials
+    note: |
+      提供共形规范复坐标下模的描述；本推导在同一套坐标里把 ∂_{t^k}ĝ 换成坐标变换的效应。
+  - id: worldsheet.conformal-gauge-fixing
+    note: 提供每个坐标片上 ĝ ∝ δ_ab 的共形规范（**只局部**，正合本推导逐片工作的方式）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.9)–(5.4.11), p.162"
+    note: |
+      抽取记录 #E86，L1（schrans-2020 §5.28–§5.30 正文，笔记 p.265–266）。
+summary: |
+  在共形规范下每片的度规是 ds² = e^{2ω}dz dz̄。改变模 t^k 时，若同时作坐标变换
+  z' = z + δt^k v_k^z（(5.4.9)），度规的变化中 dz dz̄ 的系数变化可以被 Weyl 因子吸收，
+  剩下不能吸收的是 (dz)² 与 (dz̄)² 的系数——它们正比于 ∂_z̄ v_k^z 与其共轭。
+  按 worldsheet.beltrami-differential 的定义，这正是 μ_k 的两个非零分量，
+  故 μ_{k z̄}{}^{z} = ∂_{z̄} v_k^{z}（(5.4.11)）。
+gaps:
+  - |
+    ⚠ **勘误依赖**：中间一步 (5.4.10) 在印刷版里有误，本推导采伴读者转述的勘误版
+    （「taking into account the correction on Joe's errata page」）。
+    **官方勘误表本项目未取得**，该事实只有 schrans-2020 单源支撑（抽取记录 Q14 第 3 条）。
+  - |
+    **中间步骤本图无核实**：抽取记录只给出 (5.4.9)、(5.4.11) 的内容与「(5.4.10) 需按勘误改」，
+    没有记录 (5.4.10) 本身的表达式。上面 summary 的推理是 curator 补的标准论证，
+    **不是来源逐字**，其中「Weyl 因子吸收 dz dz̄ 系数」一步未核实。
+  - |
+    **整体（多片）结构未论证**：本推导逐片进行，而模的实际内容在过渡函数上
+    （原书 (5.4.12)–(5.4.18)）。抽取记录明说那几式**正文未读（L2）**，
+    本批不建节点，故「逐片方程如何拼成整体陈述」在图中是缺的。
+  - |
+    有限步计算但**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -31,7 +31,7 @@ statement: |
   **(4) 该见证的动量非零。** 由 (1) 的 α_0·α_0 = −2 ≠ 0 立得 α_0 ≠ 0，即 k ≠ 0。
       因此本命题给出的是**非零动量扇区**上的负模态，而不是 p = 0 处那个对任何 D
       （包括 D = 26）都存在的平凡负模态 α^0_{−1}|0;0⟩。
-      （由 α_0·α_0 ≠ 0 推出 α_0 ≠ 0 是两行推论；它在 Lean 中未单列为定理，见推导 gaps (i)。）
+      （α_0 ≠ 0 是 Lean 声明结论的一部分：`b ≠ 0`。）
 
   【本命题**不**断言什么】
   (a) **不**断言 D ≤ 26 时半正定（那是无鬼定理，worldsheet.no-ghost-theorem-v4 第 (1) 条）。
@@ -49,7 +49,7 @@ uses_conventions:
   - conv.virasoro-standard
   - conv.intercept-sign-a
 formal:
-  lean_decl: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg
+  lean_decl: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg'
   lean_file: StringFormal/NoGhost/LevelTwo.lean
 sources:
   - ref: stringformal-2026

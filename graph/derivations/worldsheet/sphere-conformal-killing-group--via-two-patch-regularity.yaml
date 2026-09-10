@@ -1,0 +1,56 @@
+id: worldsheet.sphere-conformal-killing-group--via-two-patch-regularity
+target: worldsheet.sphere-conformal-killing-group
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: |
+      提供两片坐标与过渡函数 u = 1/z，以及由它导出的向量场变换 δu = −z^{−2} δz。
+      没有第二片就没有「在 u = 0 也要正则」这个条件，展开次数就不会被截断。
+      两者同出 §6.1，故不标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1, eq. (6.1.5a)/(6.1.5b)；过渡函数与 δu = −z^{−2}δz 在 (6.1.4a) 附近"
+    note: |
+      抽取记录 #E88/#E89，等级 L1（内容出自 schrans-2020 §6.1–§6.2，笔记 p.275–277，逐页读到）。
+      **(6.1.4a) 是 [S] 正文的交叉引用，(6.1.5a)/(6.1.5b) 是 [S] 给出的式号**；原书未核对。
+  - ref: schrans-2020
+    loc: "§6.2（笔记 p.277）：本推导逐步内容的读取来源（核对源，不单独承载论证）"
+summary: |
+  三步初等计算。
+
+  **(1) 全纯性 + z 片正则 ⇒ Taylor 级数。** 共形 Killing 方程在复坐标下即 ∂̄ δz = 0
+  （加反全纯侧的 ∂ δz̄ = 0），故 δz 是 z 的全纯函数；在 z = 0 处正则给出
+  δz = Σ_{n ≥ 0} a_n z^n，收敛半径至少覆盖 z 片的紧子集。
+
+  **(2) 换片。** 向量场分量按 u = 1/z 变换：δu = (du/dz) δz = −z^{−2} δz = −u² Σ_n a_n u^{−n}
+  = Σ_n a_n u^{2−n}。在 u = 0（即 z = ∞）处正则要求所有负幂次消失，即 2 − n ≥ 0，
+  故 **a_n = 0 对一切 n > 2**，只剩 a₀, a₁, a₂。
+
+  **(3) 指数化。** δz = a₀ + a₁z + a₂z² 分别生成平移、标度 + 旋转、特殊共形（inversion∘平移∘inversion）；
+  三者生成的整体变换群是 Möbius 群 z ↦ (αz + β)/(γz + δ)（αδ − βγ = 1），
+  由于 (α,β,γ,δ) 与其整体反号给出同一变换，群为 PSL(2,C)。实参数计数：3 复 = 6 实 = κ(S₂)。
+gaps:
+  - "**上游 ch5 节点尚未进入 main**：共形 Killing 方程 ∂̄δz = 0 本身（抽取记录 E74，(5.2.7)；
+     ⚠ [S] 目录与正文对该式号自相矛盾，见抽取记录 §5.0）在本图中还没有节点，另一名 curator
+     正在建。本推导把它写进目标陈述的 statement 作前提。**待 ch5 节点合入后补 depends_on 边。**
+     同样地，Riemann–Roch（E75, (5.2.9)）给出的 κ − μ = 3χ = 6 是本结论的独立交叉检验，
+     也待合入后补边。"
+  - "**第 (3) 步『指数化』未论证**：由三个无穷小生成元得到整体群 PSL(2,C)（而不只是其单位分支
+     的李代数 sl(2,C)），需要 S₂ 上共形自同构群的整体分类，本推导与来源都没有做。
+     严格说本推导只证明了 CKV 的**李代数**是 3 维复的，「有限群是 PSL(2,C)」是标准断言。"
+  - "**「δz 在 S₂ 上处处正则」这一 CKV 定义与第 5 章的定义是否逐字一致，未核实**：第 5 章的 CKV
+     是「diff×Weyl 下使度规不变的向量场」的解，与这里的「全局全纯向量场」在共形规范下等价，
+     但这个等价性本图无节点。"
+  - "**PSL(2,C) 这个记号写在原书哪一式未核实**（抽取记录 §7 未核实清单：E90 条目同样问题）。"
+  - "**数学侧无文献来源**：本推导等价于『P¹ 上全局全纯向量场 = sl(2,C)』，这是标准复几何结果，
+     但本图未登记任何复几何/黎曼曲面教材。按 docs/STATUS_LEVELS.md，rigorous 需要数学文献来源，
+     或者按『初等可复核』例外需 reviewer 复核并留 `reviewer-verified` 记录——**两者都没有**，
+     故取 physical-argument。升级路径见目标陈述 notes。"
+notes: |
+  计算本身是有限步初等操作（Taylor 展开 + 换片 + 幂次比较），按 docs/STATUS_LEVELS.md 的
+  rigorous 例外**有资格**升到 rigorous，条件是：(a) reviewer 独立复核并在此处写
+  `reviewer-verified: <agent>, <date>`；(b) 「共形 Killing 方程」这一前提有节点承载（ch5）。
+  在两者齐备前按「不确定选低一级」取 physical-argument。
+author: curator-polchinski-ch6
+created: "2026-09-11"

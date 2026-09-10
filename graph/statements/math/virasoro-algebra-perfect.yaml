@@ -1,0 +1,134 @@
+id: math.virasoro-algebra-perfect
+kind: proposition
+title: Virasoro 代数是完美的：[Vir(R), Vir(R)] = Vir(R)（R 是交换 ℚ-代数），含中心元的显式见证 C = 2[L_2, L_{−2}] − 4[L_1, L_{−1}]
+statement: |
+  设 R 是交换环且是 **ℚ-代数**，Vir(R) 是 worldsheet.virasoro-algebra-v2 定义的 Virasoro 李代数
+  （载体 W(R) ⊕ R，生成元 L_n（n ∈ Z）与中心元 C，括号按 conv.virasoro-standard：
+   [L_m, L_n] = (m − n) L_{m+n} + ((m³ − m)/12) δ_{m+n,0} C，[C, −] = 0）。则：
+
+  (1) **非零模的一致见证**：对每个 n ∈ Z \ {0}，
+
+        2 L_n = [L_{n+2}, L_{−2}] − [L_{n+1}, L_{−1}] 。
+
+      （两个括号的模指标和都是 n ≠ 0，故中心项都消失；系数之差
+        ((n+2) − (−2)) − ((n+1) − (−1)) = (n+4) − (n+2) = 2 与 n 无关，
+        故这个见证**不需要按 n 的奇偶或模某素数分情况**。）
+
+  (2) **零模**：2 L_0 = [L_1, L_{−1}]。
+      （中心项 (1³ − 1)/12 = 0，故这一条同样不含 C。）
+
+  (3) **中心元的显式见证**：
+
+        C = 2 [L_2, L_{−2}] − 4 [L_1, L_{−1}] 。
+
+      （由 [L_2, L_{−2}] = 4 L_0 + (2³ − 2)/12 · C = 4 L_0 + (1/2) C 与 [L_1, L_{−1}] = 2 L_0：
+        2(4L_0 + C/2) − 4(2L_0) = C。这一步是本命题的**非平凡内容**——
+        中心元本身也落在导出代数里，而这正是「Vir 完美」与「W 完美」的差别所在。）
+
+  (4) **完美性**：[Vir(R), Vir(R)] = Vir(R)。
+      等价地（Mathlib v4.33.1 无 `LieAlgebra.IsPerfect` 谓词，两种写法定义相等）
+      `derivedSeries R (Vir R) 1 = ⊤`，即 ⁅(⊤ : LieIdeal R Vir(R)), ⊤⁆ = ⊤。
+      理由：由 (1)(2) 得 2 L_n ∈ [Vir, Vir] 对一切 n ∈ Z，由 (3) 得 C ∈ [Vir, Vir]；
+      2 在 ℚ-代数中可逆，故 L_n ∈ [Vir, Vir]；而 {L_n : n ∈ Z} ∪ {C} 张成 Vir(R)。
+
+  【本节点不断言】——五条边界：
+  (a) **不**断言 H^1(Vir, k) = 0，也**不**含上同调字典 H^1(𝓛, k) ≅ (𝓛/[𝓛,𝓛])^*。
+      那两条留在 math.virasoro-universal-central-extension 的 (2)，**未形式化**。
+      本卡与它们的关系只是「(4) 是那条字典的输入之一」。
+  (b) **不**断言 H^2(Vir, k) = 0，**不**断言 Vir 是 W 的万有中心扩张。
+      那是 math.virasoro-universal-central-extension 的 (2)(3)，rigorous、未形式化。
+  (c) **不**回答基环的锐利性。与 math.witt-algebra-derived-algebra 不同（那里
+      「W(R) 完美 ⟺ 2 ∈ R^×」是充要的），本卡只给**充分**条件 R 是 ℚ-代数。
+      原因：本图与 Lean 侧的 Vir(R) 的**定义本身**就要求 R 是 ℚ-代数
+      （括号里的 (m³ − m)/12，见 worldsheet.virasoro-algebra-v2），
+      故「12 不可逆时 Vir 是否完美」在本图里连提问的对象都还没有。
+      特别地，本卡**不**蕴含也不否证任何关于正特征 Virasoro 代数的断言。
+  (d) **不**涉及双边 Witt 代数 W(R) 的完美性。那是 math.witt-algebra-derived-algebra
+      （对任意交换环，且是充要条件）。两者是不同李代数的不同命题：
+      W 的见证不含中心元（W 没有中心元），Vir 的关键一步恰恰是本卡的 (3)。
+  (e) **不**断言导出代数在 (1)(2)(3) 之外的任何结构（如 Vir/[Vir,Vir] 的形状），
+      也不涉及非平凡系数模。
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.VirasoroAlgebra.isPerfect
+  lean_file: StringFormal/Virasoro/WittPerfect.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/WittPerfect.lean :: StringFormal.Virasoro.VirasoroAlgebra.{lie_mem_derivedSeries_one, two_smul_lgen_eq, two_smul_lgen_zero_eq, cgen_eq, lgen_mem_derivedSeries_one, cgen_mem_derivedSeries_one, derivedSeries_one_eq_top, isPerfect}；辅助 StringFormal.Virasoro.invertibleTwo；上游 StringFormal.Virasoro.VirasoroAlgebra.{lie_lgen_lgen, centralTerm, span_lgen_cgen_eq_top}"
+    note: |
+      本仓库，形式化分支 agent/formalizer/witt-perfect，已由 lead 以 20cc08f 合入 main
+      （无 sorry，公理仅 propext / Classical.choice / Quot.sound）；Lean 4 + Mathlib v4.33.1。
+      逐条对应（全部在 `variable (R : Type*) [CommRing R] [Algebra ℚ R]` 下）：
+        (1) → `two_smul_lgen_eq {n : ℤ} (hn : n ≠ 0) :
+              (2 : R) • lgen R n = ⁅lgen R (n + 2), lgen R (-2)⁆ − ⁅lgen R (n + 1), lgen R (-1)⁆`；
+        (2) → `two_smul_lgen_zero_eq : (2 : R) • lgen R 0 = ⁅lgen R 1, lgen R (-1)⁆`；
+        (3) → `cgen_eq : cgen R = (2 : R) • ⁅lgen R 2, lgen R (-2)⁆ − (4 : R) • ⁅lgen R 1, lgen R (-1)⁆`；
+        (4) → `derivedSeries_one_eq_top : derivedSeries R (VirasoroAlgebra R) 1 = ⊤`
+              与本卡 lean_decl `isPerfect : ⁅(⊤ : LieIdeal R (VirasoroAlgebra R)), ⊤⁆ = ⊤`
+              （后者以 `derivedSeries_one_eq_top R` 为证明项，二者定义相等）。
+      **lean_decl 取 `isPerfect`**：本卡的标题与主结论 (4) 就是完美性本身，(1)(2)(3) 是它的见证。
+      「2 在 ℚ-代数中可逆」由 `StringFormal.Virasoro.invertibleTwo`（`def`，非 `instance`，
+      用 `letI` 引入，以免下游 `Invertible` 菱形）供给；
+      「{L_n} ∪ {C} 张成 Vir(R)」由 `VirasoroAlgebra.span_lgen_cgen_eq_top`
+      （在 `formal/StringFormal/Virasoro/Verma.lean`，故 WittPerfect.lean 为此 import Verma.lean）供给。
+      **记号说明**：Mathlib v4.33.1 没有 `LieAlgebra.IsPerfect` 谓词，「完美」写成
+      `⁅(⊤ : LieIdeal R L), ⊤⁆ = ⊤` 或 `LieAlgebra.derivedSeries R L 1 = ⊤`，二者定义相等。
+      **curator 未自行重跑 `lake build`**；依据是文件头自述「Complete, no `sorry`」、
+      formal/TODO.md 的 `witt-virasoro-perfect` 条（已勾选），以及 20cc08f 已由 lead 合并进 main。
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6 的**证明**第一部分，p. 7（对 𝒱 逐字给出三步括号计算 [d₀, d_n] = n d_n、[d₋₁, d₁] = 2d₀、[d₋₂, d₂] = 4d₀ + ½c）"
+    note: |
+      文献侧的对照来源，全文已由 researcher 于 2026-09-11 逐页核实（13 页，arxiv.org/pdf/2501.15560）；
+      逐字引文见 literature/extractions/math-sources.md 第 25.1 节（L1）。
+      **覆盖面窄于本卡**：该文只在**特征零的域** 𝔽 上工作，本卡对任意交换 ℚ-代数成立；
+      且该文的第一步见证是 [d₀, d_n] = n d_n（需要 **n 在 𝔽 中可逆**，在正特征处会失效），
+      本卡 (1) 用的是与 n 无关的一致见证 2 L_n = [L_{n+2}, L_{−2}] − [L_{n+1}, L_{−1}]。
+      **该文没有把「𝒱 完美」单列为编号陈述**：它出现在 Lemma 2.6 的证明里，
+      而 Lemma 2.6 陈述的是 H¹(𝒱,𝔽) = H²(𝒱,𝔽) = 0 与万有性。
+      **⚠ 不得改引同文 Lemma 2.4**（char p > 3 的受限 Virasoro 代数，不是同一对象）。
+      记号换算：该文用 [d_m, d_n] = (n−m) d_{m+n} + δ_{m+n,0}(1/12)(n−1)n(n+1) c，
+      与 conv.virasoro-standard 差一个生成元重标记，指标次序相反
+      （本图记号下与该文同号的写法是 [L_2, L_{−2}] = 4L_0 + (1/2)C）。
+tags: [algebra, lie-algebra, virasoro, perfect, formalized]
+notes: |
+  【本卡的来历：math.virasoro-universal-central-extension 的拆卡（2026-09-11，curator，lead 裁决）】
+  旧卡 math.virasoro-universal-central-extension 把三件事写在一条命题里：
+    (1) 𝒱 完美（含 C ∈ [𝒱, 𝒱]）；
+    (2) H¹(𝒱, k) = H²(𝒱, k) = 0；
+    (3) 万有性（𝒱 是 𝒲 的万有中心扩张）。
+  formalizer 于 WittPerfect.lean 机器验证的**只有 (1)**。按 docs/STATUS_LEVELS.md
+  「Lean 证明用的对象若与卡片陈述不逐句一致，命题就不该显示为 formalized；
+  正确做法是拆卡，让 Lean 对应的那一半成为 formalized 定义/命题卡」的规定，把 (1) 单列为本卡。
+  旧卡的 notes【陈述 (1) 已形式化】一段逐字写着「若将来要让 (1) 以 formalized 报出，
+  正确做法是把 (1) 单列成卡（做法参照 math.witt-algebra-perfect → math.witt-algebra-derived-algebra
+  的拆法），交 lead 裁决后由 curator 执行」——本卡就是那次执行。
+  **旧卡不换代、statement 一字未动、不填 formal.lean_decl**：它仍承载 (2) 与 (3)
+  （两者在本图与任何已知 Lean 项目中都未形式化），其推导
+  math.virasoro-universal-central-extension--via-feldvoss-siciliano 已加一条 depends_on 指向本卡。
+
+  【与 math.witt-algebra-derived-algebra 的对照（两卡是**平行**的拆卡产物，不可混）】
+    · 对象不同：那卡是双边 Witt 代数 W(R)，本卡是 Virasoro 代数 Vir(R)。
+    · 基环不同：那卡对**任意交换环**成立并给出充要条件「⟺ 2 ∈ R^×」（W(ℤ)、W(ZMod 2) 是反例）；
+      本卡只给充分条件「R 是 ℚ-代数」，因为 Vir(R) 的定义本身就需要 1/12（见边界 (c)）。
+    · 内容不同：本卡多出关键的 (3)（中心元也在导出代数里）。W 没有中心元，那卡自然没有对应物。
+    · 见证同形：两卡的 (1) 都是 2 X_n = [X_{n+2}, X_{−2}] − [X_{n+1}, X_{−1}]，
+      只是 Vir 侧要限定 n ≠ 0（n = 0 时中心项非零，故单列为本卡的 (2)）。
+  两卡在同一个 Lean 文件 WittPerfect.lean 的两个命名空间里，共用同一套证明骨架。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search perfect / 完美 / virasoro / derived`：
+  命中 math.witt-algebra-derived-algebra（W 的导出代数）、math.witt-algebra-perfect（W 的 H¹）、
+  math.virasoro-universal-central-extension（旧卡）、worldsheet.virasoro-unique-central-extension
+  （dim H²(W, k) = 1）。**没有既有节点单独承载「Vir 完美」**。
+
+  【下游】math.virasoro-universal-central-extension--via-feldvoss-siciliano 的第 (1) 步
+  （本次已接线）。经由那条推导间接支撑 worldsheet.brst-nilpotent-at-c26--via-fgz 的
+  「H²(Vir, C) = 0」一步。**注意本卡不改变那条链的有效状态**：旧卡的 (2)(3) 仍未形式化，
+  旧卡整体仍是 rigorous。
+
+  【本卡在图中的价值】它是本图第一条**关于 Virasoro 代数本身的 formalized 命题**
+  （此前 formalized 的 Virasoro 侧节点是定义卡 worldsheet.virasoro-algebra-v2 与
+  Verma 模一族）。外部的 Kytölä VirasoroProject **没有**任何 Virasoro 完美性 / 上同调文件
+  （researcher 2026-09-11 核实其文件清单：只有 WittAlgebraCohomology.lean），
+  故本卡的 Lean 内容在已知范围内是本仓库独有的。
+author: curator
+created: "2026-09-11"

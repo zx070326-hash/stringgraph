@@ -1,0 +1,51 @@
+id: spectrum.sphere-tachyon-expectation-smooth-at-infinity
+kind: proposition
+title: 闭弦 tachyon 期望值在另一坐标片原点光滑（质量壳 α'k² = 4 时），故顶点算子可放到 z = ∞
+statement: |
+  设 S₂ 上 n 个闭弦 tachyon 顶点算子的期望值取 spectrum.sphere-n-tachyon-expectation-value
+  的形式（(6.2.17)/(6.2.31)）。换到第二片坐标 u_i = 1/z_i（worldsheet.tree-level-worldsheet-topologies），
+  用 z_ij = (u_j − u_i)/(u_i u_j) 改写得
+    δ^d(Σ_i k_i) ∏_{i<j} |z_ij|^{α' k_i·k_j}
+      = δ^d(Σ_i k_i) ∏_{i<j} |u_ij|^{α' k_i·k_j} ∏_i |u_i|^{α' k_i²},
+  这里用到 Σ_j k_j = 0 把每个 u_i 的幂次合并成 α' k_i²。
+
+  **结论**：若所有外线满足闭弦 tachyon 的质量壳条件 **α' k_i² = 4**，则 ∏_i|u_i|^{α'k_i²} = ∏_i|u_i|⁴，
+  期望值在 **u_i = 0（即 z_i = ∞）处光滑**（非负整数幂，无极点无支点）。
+  因此把一个顶点算子放到「无穷远」是良定义的操作，这正是用 PSL(2,C) 固定 z₁ = 0、z₂ = 1、
+  z₃ = ∞ 时所需的合法性。
+
+  ⚠ **该结论 on-shell 才成立**：偏离质量壳时 α'k_i² ≠ 4，u_i = 0 处出现非整数幂甚至极点。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.31)（S₂ 上顶点算子期望值由全纯性 + 极点结构 + 动量守恒定死的形式），p.174"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E94，等级 **L1**（(6.2.31) 的用法有第二个独立源）。
+  - ref: headrick-2008
+    loc: "Problem 6.1（PDF p.40）：逐字给出 u = 1/z 的改写与结论"
+    note: |
+      抽取记录 #E94 逐字转录：「In terms of u = 1/z, **(6.2.31)** is …
+      δ^d(Σk_i)∏_{i<j}|1/u_i − 1/u_j|^{α'k_i·k_j} = δ^d(Σk_i)∏_{i<j}|u_ij|^{α'k_i·k_j}∏_i|u_i|^{α'k_i²}」，
+      并结论「Since this is an expectation value of closed-string tachyon vertex operators,
+      **α'k_i² = 4** and the expectation value is **smooth at u_i = 0**」。
+      ⚠ **这是习题解答，不是原书正文**：按 lead 裁决（docs/ROADMAP.md 2026-09-10），
+      Headrick 习题解答在「对某个显式计算是唯一成文来源」时可作为推导的 source，
+      但 **reviewer 须复核计算**。本条正属这种情况（抽取记录 Q17 明记：原书正文是否论证了
+      「把顶点算子送到 z → ∞ 合法」**未核实**，可能只留给习题 6.1）。
+tags: [spectrum, tree-level, sphere, tachyon, mobius, infinity, mass-shell, on-shell]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E94 建立。
+
+  **对图的意义**：这是本图里唯一一条支撑「把一个顶点算子固定到 z = ∞」这一步的陈述。
+  spectrum.closed-string-four-tachyon-integral（(6.6.4)）与开弦的 (6.4.5) 都用了这一步，
+  [S] 只写「the z₃ → ∞ does not cause a problem」而不给论证（抽取记录 Q17）。
+  本卡片把该论证落到 (6.2.31) 的换片检验上，并如实记录它来自习题解答。
+
+  **只对 tachyon 外线成立**：无质量态、激发态的顶点算子带 ∂X 因子，换片时还有额外的
+  Jacobian 幂次，光滑性条件相应改变。本卡片不覆盖那些情形。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -9,8 +9,9 @@ depends_on:
       「{ℓ_n : n ∈ ℤ} 是基」这两件事，别的什么都不用。
       **基环收紧**：该卡对任意交换环 R 定义 W(R)，本推导（与目标陈述）取特征零的域 k。
   - id: math.witt-algebra-derived-algebra
-    inferred: false
+    inferred: true
     note: |
+      【reviewer-batch8 2026-09-11】改为 inferred: true——本推导论证本体不用此边，纯记账（与 batch-4 对 verma-free → level-spanned 的裁决一致）。
       2026-09-11 新增。承载目标陈述的 **(1) 完美性**，且形式更强更正确：
       对任意交换环给出充要条件「[W(R), W(R)] = W(R) ⟺ 2 ∈ R^×」，并给出一致见证
       2 ℓ_n = [ℓ_{n+2}, ℓ_{−2}] − [ℓ_{n+1}, ℓ_{−1}] 与 W(ℤ) / W(ZMod 2) 两个反例。

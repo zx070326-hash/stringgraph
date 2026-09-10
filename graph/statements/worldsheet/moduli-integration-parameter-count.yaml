@@ -1,0 +1,35 @@
+id: worldsheet.moduli-integration-parameter-count
+kind: proposition
+title: "闭可定向亏格 g 曲面带 n 个顶点算子时，S-矩阵公式里的实积分参数总数为 6g − 6 + 2n"
+statement: |
+  设 M 是闭、可定向、亏格 g 的世界面，S-矩阵主公式（worldsheet.string-s-matrix）里有
+  n 个顶点算子。按 worldsheet.gauge-fixed-measure-moduli-and-positions，规范固定后剩下的
+  连续积分变量是 μ 个模 t^k 与 2n − κ 个未被固定的顶点算子坐标。则这两部分的**总数**为
+    μ + (2n − κ) = (μ − κ) + 2n = 6g − 6 + 2n ,
+  其中用到 χ = 2 − 2g 与 κ − μ = 3χ（worldsheet.riemann-roch-kappa-minus-mu）。
+
+  检验：球面 n = 3 ⇒ 0 + (6 − 6) = 0 = 6·0 − 6 + 6 ✓；
+        环面 n = 1 ⇒ 2 + (2 − 2) = 2 = 6·1 − 6 + 2 ✓。
+
+  ⚠ **本节点不是 Polchinski 的 (5.2.9)**，也**不**断言「dim_R M_{g,n} = 6g − 6 + 2n」
+  这一数学命题。它只断言「(5.3.9) 中实积分参数的个数」这一记账事实。
+  区别的关键：(5.2.9) 里的 μ **只数度规的模**，顶点算子位置在 (5.3.9) 里是另一组积分变量。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.9)（κ − μ = 3χ）与 §5.3, eq. (5.3.2)/(5.3.9)（测度 d^μ t d^{2n−κ}σ），p.152–156"
+    note: |
+      ⚠ **本式（6g − 6 + 2n）在抽取记录中被明确标为「抽取者的推导，原书未见此式」**
+      （literature/extractions/polchinski-1998-v1.md 的 **Q12**）。
+      Q12 同时给出建节点的指示：「不要把 6g−6+2n 直接挂到 (5.2.9) 上」，
+      「若确实需要 6g−6+2n，另建一个节点并把上面的换算写在 derivation 里、标 inferred: true」。
+      本卡即按此办理：loc 指向被组合的两个来源式，换算本身在推导里标 inferred。
+tags: [worldsheet, moduli, counting, riemann-roch, s-matrix]
+notes: |
+  与通行的 dim_C M_{g,n} = 3g − 3 + n（实维数 6g − 6 + 2n）在**数值上**一致，
+  但本图**不**声称二者是同一条陈述：后者是关于模空间维数的数学命题，
+  需要数学来源（Farkas–Kra / Hubbard 一类，本项目编号未能核实），本图没有那个节点。
+  若日后要建，应放 `math.` 区（如 `math.riemann-surface-moduli-dimension`）并挂可核实的数学来源。
+author: curator-polchinski-ch5
+created: "2026-09-11"

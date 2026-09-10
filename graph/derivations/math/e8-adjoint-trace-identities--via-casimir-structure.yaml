@@ -1,0 +1,48 @@
+id: math.e8-adjoint-trace-identities--via-casimir-structure
+target: math.e8-adjoint-trace-identities
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: 固定 tr = Tr（E₈ 的最低维表示即伴随表示）与 F 为偶次形式。约定不参与状态传播。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12a′)(12b′)(12c′)；致谢段（PLB p.122 / 重印 613）"
+    note: |
+      **论证形态：直接断言。** GS 给出三条等式，无证明、无出处；
+      致谢里把群论输入归给 G. Chapline 与 R. Slansky 的**私人交流**
+      （逐字：「E₈ has no independent fourth- and sixth-order Casimir invariants」），
+      即文献里根本没有一份可引的证明。抽取记录 E8/E19。
+  - ref: antonelli-2015
+    loc: "Appendix B, p.35（与 GS (12′) 逐字一致，注明取自 GSW Vol. 2）"
+    note: |
+      转引 GSW Vol. 2（本项目未核实，bib 尚无 gsw-1987-v2 条目），不是独立证明。
+  - ref: bilal-2008
+    loc: "§12, (12.28)–(12.29)"
+    note: |
+      重标度约定下的同一组关系；换算已复算（见目标节点 sources 第三条），
+      但该文同样不给证明。
+summary: |
+  **来源的论证形态：直接断言 + 一句群论理由。** 三条等式的内容等价于
+  「e₈ 的不变量环在 4 阶与 6 阶没有独立生成元，故 Tr F⁴、Tr F⁶ 必须正比于 (Tr F²)²、(Tr F²)³」，
+  剩下的只是定出两个系数 1/100 与 1/7200。GS 把前半句归给 Chapline–Slansky 的私人交流，
+  后半句（系数）根本没说来历。
+
+  **本图能独立说的部分**：给定「Tr F⁴ = a (Tr F²)²、Tr F⁶ = b (Tr F²)³ 对某两个有理数 a, b 成立」
+  这一结构性事实，两个系数各由一次取值确定（例如取 F 落在某个 su(2) 子代数里算指标），
+  但**这一步本图没有做，也没有来源做**。
+
+  **一致性检查（本图做的）**：本节点的 (1/100, 1/7200) 与 bilal-2008 在重标度
+  tr_B F² = Tr F²/30 下的 (9, 75/20) 等价：
+    9 (Tr F²/30)² = (9/900)(Tr F²)² = (1/100)(Tr F²)²，
+    (75/20)(Tr F²/30)³ = (3.75/27000)(Tr F²)³ = (1/7200)(Tr F²)³。
+  两个独立来源在换算后逐项一致。
+gaps:
+  - "「e₈ 无独立四阶、六阶 Casimir 不变量」这条结构性事实在本图的**所有**来源里都没有证明：GS 归给私人交流，Antonelli 转引 GSW Vol. 2（未核实），Bilal 不给。"
+  - "系数 1/100 与 1/7200 的来历在任何来源里都没有写出。"
+  - "升级路径：查 E₈ 的基本不变量次数表（通常给为 2, 8, 12, 14, 18, 20, 24, 30），由此可得 4 阶与 6 阶不变量必是 2 阶的幂；再定系数。本图尚未登记任何承载该表的文献。"
+notes: |
+  同 math.so-usp-adjoint-fundamental-trace-identities--via-adjoint-decomposition 的说明：
+  physical-argument 记的是**本图掌握的论证强度**，不是对结论的怀疑。
+author: curator
+created: "2026-09-11"
