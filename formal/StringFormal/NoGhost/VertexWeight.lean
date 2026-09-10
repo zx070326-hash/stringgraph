@@ -561,6 +561,17 @@ theorem Lop_zero_apply_creaExp (η a b : Fin D → R) (hη : ∀ μ, η μ * η 
 
 end LopCreaExp
 
+section LopVertexOsc
+
+variable [Algebra ℚ R]
+
+/-! ### The conformal-weight identity on a general state (`m ≥ 1`)
+
+Work in progress: statements are added one at a time, each with a complete proof.
+-/
+
+end LopVertexOsc
+
 end Fock
 
 end StringFormal.NoGhost
