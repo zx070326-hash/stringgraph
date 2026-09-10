@@ -71,6 +71,17 @@
   - 万有性质 `vermaLift` / `vermaLift_hwv` / `vermaLift_lie` / `eq_of_lie_of_eq_hwv`；
   - 副产品 `adjoin_range_uea_ι_eq_top`（`U(L)` 由 `ι '' L` 生成，Mathlib v4.33.1 没有）。
   **剩余**（不属本项，见下一条与图节点 `notes`）：PBW 基、`dim V_N = p(N)`、`V(c,h) ≠ 0`。
+- [x] `descendant-weight-grading`：`L_0` 对**任意** Virasoro 模中降算符词的作用；对应图节点
+  `worldsheet.descendant-weight-grading`。见 `StringFormal/Virasoro/DescendantGrading.lean`
+  （无 sorry，公理只有标准三条）：`wordActOn R M l v` 是 `L_{n_1}⋯L_{n_k} v` 在任意
+  `[LieRingModule (VirasoroAlgebra R) M]` 上的作用（在 Verma 模上按定义等于 `wordAct`，
+  见 `wordActOn_verma`），`lie_lgen_zero_wordActOn` 给出
+  `⁅L_0, wordActOn l v⁆ = (h - l.sum) • wordActOn l v`；取 `n_i = -k_i` 即图节点的 `h + Σ k_i`。
+  **只用 `⁅L_0, v⁆ = h • v` 这一条假设**：最高权条件 `L_n v = 0 (n>0)` 与中心荷 `c` 都不进入
+  计算（因为 `centralTerm R 0 = 0`）；带 `IsHighestWeightVector` 的版本是推论
+  `lie_lgen_zero_wordActOn_of_isHighestWeightVector`。另有 `vermaLift_wordAct`：这些降算符
+  向量是 Verma 模同名向量在 `vermaLift` 下的像。
+  **未做**（图节点 `gaps` 已记）：这些向量的线性无关、张成性、`M` 的 `L_0` 本征空间分解。
 - [ ] `pbw-verma`：Verma 模的 PBW 基。两半独立，**(a) 已做，(b) 未做**：
   - [x] (a) **straightening**：有序词张成 `V_N`，给出 `dim V_N ≤ p(N)`。
     见 `StringFormal/Virasoro/VermaPBW.lean`（无 sorry，公理只有标准三条）：

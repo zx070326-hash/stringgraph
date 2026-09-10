@@ -4,6 +4,7 @@ import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
 import StringFormal.Virasoro.Verma
 import StringFormal.Virasoro.VermaPBW
+import StringFormal.Virasoro.DescendantGrading
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
