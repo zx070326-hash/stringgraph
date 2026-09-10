@@ -43,5 +43,20 @@ notes: |
     只有 (c,h)=(0,0) 时平凡模现成可用）。所以上面所有已形式化结论都还可能是空洞真。
   建议（留给 curator/lead 裁决）：若希望有一个可以被标 `formalized` 的节点，
   应把"V(c,h) 的构造 + 万有性质 + L_0 分级"拆成独立节点，本节点保留 PBW 基与 p(N) 的断言。
+
+  【已拆分，2026-09-11，curator；lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单】
+  上面 formalizer 建议的拆法已执行，拆成两卡：
+  - worldsheet.verma-module-v2（definition，**formalized**）：V(c,h) = U(Vir)/J(c,h) 的构造、
+    最高权关系、万有性质、负模态张成、L_0 分级（域上还有直和分解与特征子空间刻画）。
+    即 Verma.lean 中确已证明的部分；formal 字段不再留空。
+  - worldsheet.verma-module-pbw-basis（proposition，推导 --via-pbw，**rigorous**）：
+    有序单项式构成基、dim V_N = p(N)、以及 V(c,h) ≠ 0。仍未形式化（Mathlib v4.33.1 无 PBW）。
+
+  **本卡片自 2026-09-11 起冻结**。全图中原先引用本 id 的 `depends_on` 已逐条读上下文改指：
+  用到基/维数/特征标/非零性的三处（kac-determinant--via-feigin-fuchs、
+  no-ghost-theorem-brst--via-fgz、no-ghost-theorem-subcritical--via-lian-zuckerman）
+  改指 worldsheet.verma-module-pbw-basis；没有一处只用到构造与分级，故本批没有改指 v2 的边。
+  本卡片的 `uses` 仍指向同批被取代的 worldsheet.virasoro-algebra，两张旧卡一起冻结成历史快照。
+superseded_by: worldsheet.verma-module-v2
 author: seed
 created: "2026-09-10"

@@ -3,19 +3,24 @@ target: worldsheet.no-ghost-theorem-subcritical
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
     note: |
       LZ 的 𝒢 就是 Virasoro 代数（含中心元 z），Fock 模上的表示由 Proposition 3.1(i) 给出
       π(L_m) = (1/2) Σ_n :α_{m-n}·α_n:、π(z) = D·Id。归一化与 conv.virasoro-standard 一致
       （LZ 的中心荷取值 D 对应自由玻色子每个方向贡献 1）。
-  - id: worldsheet.verma-module
+  - id: worldsheet.verma-module-pbw-basis
     note: |
       非 inferred：LZ Theorem 3.5 证明末句（p.571）逐字把判据归结为「the Verma module
       M(26−D, 1−h) is positive semi-definite」；Remark 3.2(ii) 定义 M(c,h) 为最高权
-      cz′ + hL′₀ 的 Verma 模、L(c,h) 为其不可约商。本项目的 worldsheet.verma-module
+      cz′ + hL′₀ 的 Verma 模、L(c,h) 为其不可约商。本项目的 worldsheet.verma-module-v2
       与之逐条相同（最高权向量、L_n|h⟩ = 0 (n>0)、L₀|h⟩ = h|h⟩、按 L₀ 分级）。
       **约定差异**：本项目记 V(c,h)，LZ 记 M(c,h)；本项目节点的 V(c,h) 与 LZ 的 M(c,h)
       是同一对象，LZ 的 L(c,h) 在本项目图中尚无独立节点（见 gaps）。
+      **2026-09-11 拆卡换代**：本边原指旧卡 worldsheet.verma-module，现改指
+      worldsheet.verma-module-pbw-basis（它 depends_on verma-module-v2，故构造与分级仍在链上）。
+      理由：LZ 用到的不只是构造，还有半正定性判据所依赖的 PBW 基与特征标
+      （Proposition 3.4 的 ch_q V(D,p)、Theorem 3.5 证明末句的 ch_q L 与 sign_q L 比较），
+      即拆分后归入 pbw-basis 的那一半；本推导的 gaps 也已逐字点名 PBW 与 dim V_N = p(N)。
   - id: worldsheet.bosonic-fock-space
     note: |
       非 inferred：LZ (3.2) 逐字把物质模定义为 V(D,p) = sym ⊕_{μ=1}^{D} ⊕_{n=1}^{∞} C α^μ_{-n}，
@@ -146,10 +151,10 @@ gaps:
   - "「LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目 H_phys(p)/H_0(p)」是抽取者的对照解读，LZ 全文无 'old covariant' 字样，故 depends_on 上 worldsheet.old-covariant-physical-states 标 inferred。同理「LZ 的相对复形 = 本项目 b₀ = L₀ = 0 的 BRST 相对复形」也是解读（primary-sources-round2.md §1.4 明示须标 inferred），故 worldsheet.brst-quantization 亦标 inferred。这两条是本推导可追溯性上最软的地方：定理本体逐字可靠，把它翻译到本项目对象上的字典不逐字可靠。"
   - "LZ 的设定与本项目 worldsheet.no-ghost-theorem-v3 的设定在**证明侧**不同：26 > D ≥ 2 分支必须补一个 c = 26 − D 的不可约 Vir 模 L(26−D, 1−h) 才能做 BRST（总中心荷 26）。断言侧不受影响（左端只用 D 个自由玻色子，见目标陈述范围 (b)），但这意味着本推导**不是** v3 的 DDF 论证的推广，形式化时是两条独立路线。D = 26、h = 1 时补充模退化为 L(0,0)（平凡一维），两条路线在临界点重合。"
   - "LZ 的 D ≥ 2 下界（陈述的 (P4)）与对 p 的三条假设 (P1)–(P3) 在 ms.no-ghost-theorem 审计 B1 算出的区域里**没有**对应物；引用本节点覆盖 B1 时必须补上这四条，否则是过度断言。(P2) 与 v3 排除的 k₀·k = 0 扇区是否是同一个排除，未做对照。"
-  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点（worldsheet.verma-module 只到 Verma 模 M(c,h)，且其 PBW 基与 dim V_N = p(N) 尚未形式化）。建议新建 worldsheet.irreducible-highest-weight-module；在此之前本推导借 verma-module 承载这条依赖。"
+  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点（worldsheet.verma-module-v2 与 worldsheet.verma-module-pbw-basis 只到 Verma 模 M(c,h)，且后者的 PBW 基与 dim V_N = p(N) 尚未形式化）。建议新建 worldsheet.irreducible-highest-weight-module；在此之前本推导借 verma-module-pbw-basis 承载这条依赖。"
   - "本推导只承接 Theorem 3.5 的 (i)(ii)。LZ §2 的一般理论（Theorem 2.13 约化公式、Theorem 2.25、Corollary 2.26 消灭定理、Corollary 2.28）本身可以各建节点，本项目暂不拆；目前它们只以 sources 的 loc 形式登记。"
   - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。三条都不影响 Theorem 3.5 本身的逐字条件，但影响本推导 summary 第 (1) 步的转述。"
   - "【2026-09-10 追加】本推导 gaps 与 summary 中对 worldsheet.no-ghost-theorem-v3 的引用，一律可读作对其后继 **worldsheet.no-ghost-theorem-v4** 的引用：v3→v4 只改两处表述（动量限定提到全局前言；第 (2) 条显式写 p ≠ 0）与 DDF 参考方向的参数化（射线 → 去心直线），见 ms.no-ghost-theorem 第三轮审计 B1/A1。唯一需要重读的一点：v4 的第 (2) 条现在也带对 p 的存在量词，故它与本节点断言 (ii) 反方向给出的「存在某个 p 不正定」在量词结构上一致（差别只剩 LZ 还要求 (P1)–(P3)）；本节点陈述里说 v3 的 (2)「不带存在某个 p 的限定」对 v3 仍正确，对 v4 不再适用。"
-  - "从文献到形式化的差距：需要把 (3) 的最后一步（Verma 模 M(c,h) 半正定的 (c,h) 区域）写成可形式化的命题，它等价于 Kac 行列式在该区域非负——本项目 worldsheet.kac-determinant 尚未形式化，worldsheet.verma-module 也缺 PBW（Mathlib v4.33.1 无 PBW）。故本节点短期内不可形式化。"
+  - "从文献到形式化的差距：需要把 (3) 的最后一步（Verma 模 M(c,h) 半正定的 (c,h) 区域）写成可形式化的命题，它等价于 Kac 行列式在该区域非负——本项目 worldsheet.kac-determinant 尚未形式化，worldsheet.verma-module-pbw-basis 也缺 PBW（Mathlib v4.33.1 无 PBW；已形式化的只有构造与分级那一半，即 worldsheet.verma-module-v2）。故本节点短期内不可形式化。"
 author: curator
 created: "2026-09-10"

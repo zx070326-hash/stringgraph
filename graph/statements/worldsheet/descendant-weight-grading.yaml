@@ -9,7 +9,7 @@ statement: |
   特别地，由降算符生成的向量若非零，其 L_0 本征值严格大于 h，
   故 v 生成的最高权模按 L_0 本征值分级为 ⊕_{N ≥ 0} V_{h+N}，其中 V_h 由 v 张成。
 uses:
-  - worldsheet.virasoro-algebra
+  - worldsheet.virasoro-algebra-v2
 uses_conventions: [conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1
@@ -40,5 +40,18 @@ notes: |
   Kac 行列式的正确出处应是 kac-1979 / feigin-fuchs-1982（sources.bib 中已有）。
   这是 negative evidence（核对源是选择性注释，不是完整转录），不能当定论，
   需人工翻 p.68–73 确认。
+
+  【拆卡换代记录，2026-09-11（curator）】
+  (1) 本节点 `uses` 原为 worldsheet.virasoro-algebra，该卡已拆分并标 superseded_by，
+      现就地改指 worldsheet.virasoro-algebra-v2（formalized）。本节点用到的只是
+      括号关系与最高权向量的定义，v2 逐字包含，语义无变化。
+      **陈述文本第一行的括号指针「（worldsheet.virasoro-algebra）」按纪律不改**
+      （改陈述文本等于新建节点）；该 id 仍可解析，其 superseded_by 指向 v2。
+  (2) 上面这条「对既有节点的提醒」已被**部分**处理：worldsheet.verma-module 拆卡后，
+      新卡 worldsheet.verma-module-v2 把 polchinski-1998-v1 §2.9 降格为背景引用并在
+      source note 中逐字记下本条 Q5 的结论，数学侧改以 kac-1979 与本仓库 Lean 文件为准。
+      worldsheet.kac-determinant 的 §2.9 问题**仍未处理**（其推导的 sources 是
+      kac-1979 Theorem 1 与 feigin-fuchs-1982 §2，本身不引 §2.9），
+      「人工翻 p.68–73 确认」这一条仍然挂着，交 researcher。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
