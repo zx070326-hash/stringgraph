@@ -49,6 +49,7 @@
 
 - 动手改文件前 `agora_claim`，路径粒度是子目录或单文件，例如 `graph/statements/worldsheet/**`、`formal/StringFormal/Virasoro/**`。
 - 长任务中定期 `agora_inbox`。结束时 `agora_release` 并 `agora_leave`。
+- **`agora_release` 必须带 `claim_id`**。同一会话派生的子 agent 在总线上可能共享身份，不带 id 的 release 会连带释放别人的 claim（2026-09-10 实际发生过）。
 - 冲突优先 `agora_send` 沟通，`agora_preempt` 只用于 auditor 阻止错误进入里程碑。
 
 ### Git 纪律
