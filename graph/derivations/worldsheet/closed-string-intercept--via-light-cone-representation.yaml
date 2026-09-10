@@ -58,7 +58,7 @@ gaps:
   - "**小群计数在低维失效**：D ≤ 4 时 SO(D-2) 与 SO(D-1) 的表示计数论证不成立（D = 4 时 SO(2) 是阿贝尔群，「二阶张量表示」的分解与计数都退化）。目标陈述限定 D ≥ 5。本项目只关心 D = 26 附近，低维未处理。注：开弦卡片写的是 D ≥ 4，闭弦这里更保守一级，因为论证用的是二阶张量而非矢量。"
   - "**「(D-1)² 个态」这一步是计数式的粗论证**：严格地说需要逐一排除「(D-2)² 个态凑成 SO(D-1) 的某组不可约表示之和」的可能，而不只是比较 (D-2)² 与 (D-1)²。教科书（以及开弦一侧的同型论证）都停在计数层面。本推导照实记为 physical-argument，不主张已排除全部可能。"
   - "**关键一步的来源定位未核实**：第一激发级的谱在 §1.4 的位置（式号与页码）在抽取记录中没有条目，只有区间约束 (1.4.11)–(1.4.19)；且「引力子 / 反对称张量 / dilaton」这三个名字是否在原书此处出现也未核对（本卡片按标准教科书表述写出）。这是本节点最该被人工核对的一处。"
-  - "本推导给出 a = ã = 1，**不**给出 D = 26。闭弦一侧的 D = 26 需要把 a = (D-2)/24（worldsheet.light-cone-normal-ordering-constant，对每行各一份）与 a = 1 联立；图中现有的 worldsheet.critical-dimension-light-cone 是**开弦**的表述，闭弦版本未建节点。"
+  - "本推导给出 a = ã = 1，**不**给出 D = 26。**【2026-09-11 更新：闭弦版本已建节点】**本条原写「图中现有的 worldsheet.critical-dimension-light-cone 是**开弦**的表述，闭弦版本未建节点」——curator 已建 **worldsheet.critical-dimension-light-cone-closed**（闭弦光锥洛伦兹代数闭合 ⟺ D = 26 且 a = ã = 1，左右各一份反常 Δ_n、Δ̃_n，前提 D ≥ 4），其推导 --via-lorentz-algebra-two-copies 的 summary 第二段把本条所说的「把 a = (D-2)/24（worldsheet.light-cone-normal-ordering-constant，对每行各一份）与 a = 1 联立」这条路线显式记到了图上（并把本推导的结论 a = ã = 1 作为该路线的输入边）。⚠ **本推导本身不改**：它仍然只走小群表示论，**不**依赖那张新卡（否则两者互相依赖）；本条 gap 因此仍然有效——需要闭弦 D = 26 的下游请引新卡，不要从本推导推。"
   - "化简式 α'm² = 4(N-1) 是否在 Polchinski 书中显式出现未核实（抽取记录 §3 清单，与 worldsheet.closed-string-mass-formula 的同名 gap 相同）；本推导只把它作为代入 a = ã = 1 与 level matching 的直接结果。"
 notes: |
   【本推导与开弦一侧的对照】结构照搬 worldsheet.open-string-intercept-v2--via-light-cone-representation
