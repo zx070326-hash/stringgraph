@@ -61,7 +61,7 @@ StringFormal/
                             exists_isContravariant_iff_hwv_ne_zero）、N≤2 Gram
                             （det₂ = 2h(16h²+2h(c−5)+c)）
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
-  Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
+  Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）；开弦/闭弦四快子特化 −4/−16
   Math/GreenSchwarzAlgebra.lean  Green-Schwarz 1984 的纯代数部分（独立小岛）：十二形式因子化
                             Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²] 的 SO(32)/E₈ 两支（`[Field K] [CharZero K]`，
                             系数写 48⁻¹ 而非 algebraMap ℚ）、混合反常迹条件 (N,l) = (32,−1)、
