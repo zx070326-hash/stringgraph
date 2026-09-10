@@ -49,6 +49,15 @@ calculated."
   equals (12.2.11)+(12.2.12) assembled per (12.2.27)'s first line.
   Second source: Anastasopoulos–Dijkstra–Trincherini (ADT 2010) eq. (7)+(8), which the
   extraction record verifies is term-by-term identical to (12.2.27)+(12.2.28).
+* `iib_gravitational_anomaly_cancels` — Polchinski (12.2.14), the type IIB content
+  `(n_{3/2}, n_{1/2}, n_A) = (2, -2, 1)` gives zero.
+* `iib_gravitational_anomaly_solutions` — the three integer conditions of (12.2.14)
+  hold iff `n_{3/2} = 2 n_A` and `n_{1/2} = -2 n_A`.
+* `iib_anomaly_polynomial_vanishes_iff`, `iib_gravitational_anomaly_free_iff` — those
+  three conditions are exactly identical vanishing of the twelve-form.
+* `gs_gravitational_twelve_form_eq_polchinski` — the gravitational part of Polchinski
+  (12.2.27) is `-1/96` times Green–Schwarz (1984) eq. (20). A cross-check between two
+  independent sources, not part of either A8 or A9.
 
 ## Conventions
 
@@ -266,5 +275,52 @@ theorem iib_gravitational_anomaly_free_iff (a b c : ℤ) :
     exact ⟨by exact_mod_cast h1, by exact_mod_cast h2, by exact_mod_cast h3⟩
   · rintro ⟨h1, h2, h3⟩
     exact ⟨by exact_mod_cast h1, by exact_mod_cast h2, by exact_mod_cast h3⟩
+
+/-! ### Cross-check against Green–Schwarz (1984) eq. (20) -/
+
+/-- Green–Schwarz (1984) eq. (20), the purely gravitational twelve-form of `d = 10`,
+`N = 1` supergravity coupled to super Yang–Mills with `n` matter fermions, transcribed
+from `consistency.gravitational-anomaly-polynomial-d10`:
+
+```
+− [ 1/32 + (n − 496)/13824 ] (tr R²)³
+− [ 1/8  + (n − 496)/5760  ] tr R² tr R⁴
+− [        (n − 496)/7560  ] tr R⁶
+```
+
+Same chiral content as Polchinski's `Î_I`: one left-handed spin-3/2 gravitino, one
+right-handed spin-1/2 field, and `n` left-handed spin-1/2 fields in the adjoint, `n`
+being the dimension of the gauge group. -/
+noncomputable def GS20Gravitational (n trR2 trR4 trR6 : K) : K :=
+  -(1 / 32 + (n - 496) / 13824) * trR2 ^ 3
+    - (1 / 8 + (n - 496) / 5760) * trR2 * trR4
+    - ((n - 496) / 7560) * trR6
+
+/-- **Green–Schwarz (1984) eq. (20) and Polchinski (12.2.27) are the same polynomial up to
+the single overall factor `-1/96`.**
+
+Setting the gauge traces to zero in `IhatN1Factorized` leaves the purely gravitational
+twelve-form, and it agrees with GS (20) *coefficient by coefficient* — all five
+coefficients, including the two `n`-independent ones (`1/8` and `1/32`) that come from
+`Y₄X₈/768` on Polchinski's side and are not visible as such in GS's presentation.
+
+This is a genuine cross-check between two independent sources whose overall
+normalisations the graph deliberately does not identify: GS 1984 outsources the constant
+`c` (and hence the overall scale) to Alvarez-Gaumé–Witten, whereas Polchinski fixes
+`-i/(2π)⁵` in (12.2.10) without saying where it comes from. That the *whole* gravitational
+polynomial matches with one constant — rather than requiring separate rescalings for the
+`n`-dependent and `n`-independent parts — is evidence that the two normalisations differ
+only by that constant.
+
+Note this is *stronger* than the `3/4` bracket-ratio cross-check against Bilal (2008)
+recorded in the notes of `consistency.gravitational-anomaly-polynomial-d10`: that
+comparison rescales the bracket contents, so it does not test the `n`-independent terms
+against the `n`-dependent ones at a fixed overall scale. Here a single constant `-1/96`
+does all five. -/
+theorem gs_gravitational_twelve_form_eq_polchinski (n trR2 trR4 trR6 : K) :
+    IhatN1Factorized n trR2 trR4 trR6 0 0 0
+      = -(1 / 96) * GS20Gravitational n trR2 trR4 trR6 := by
+  unfold IhatN1Factorized GS20Gravitational Y4 X8
+  ring
 
 end StringFormal.Math
