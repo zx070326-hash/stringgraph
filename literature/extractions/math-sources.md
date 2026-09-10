@@ -4939,3 +4939,587 @@ D. L. Wynter, *An Exposition of the Riemann Roch Theorem for Curves*（Universit
 - **Q34** **不可定向世界面上的对应陈述**（§42.10 第 4 点）——本轮无来源，且图卡的 statement 已经把它包含在内。
 - **Q35** Griffiths–Harris 是否提供**可逐字定位的编号**（§42.6）——先确认这一点再投入额度。
 
+---
+
+# § 伴随–基本迹恒等式的数学来源（供 `math.so-usp-adjoint-fundamental-trace-identities` 与 E₈ 迹恒等式卡）
+
+> 触发：`reviewer-gs1984` 裁定 (c) —— 这两张卡目前只挂 `green-schwarz-1984` (12)(13)/(12′)，
+> 而 GS 原文**给式不给证**（见 `extractions/green-schwarz-1984.md` E7/E8：「直接给出，无任何证明动词，也没有给出处引用」）。
+> 本节的任务是给这两条**纯李代数事实**找**带编号的数学来源**，使它们的推导可以标 `rigorous` 而不被 GS 的陈述式写法压低。
+> 证据等级沿用本文件 §0 的 L0–L4。
+>
+> 状态：**填写中**（本节按 `literature/CLAUDE.md` 规则 3 只追加，不覆盖）。
+
+## 43. so(N) 伴随 ≅ Λ²V、sp(2n) 伴随 ≅ Sym²V 的带编号来源（researcher，2026-09-11）
+
+### 43.0 结论表（先看这张）
+
+| 需要的东西 | 本轮最好的来源 | 等级 | 能不能写进图 |
+|---|---|---|---|
+| **so(n) 的伴随表示 = 二指标反对称张量（= Λ²V）** | Cvitanović, *Group Theory*, **§10.1, eqs. (10.12)–(10.14)**, 书上 pp.122–123 | **L1 逐字** | **能** |
+| **sp(n) 的伴随表示 = 二指标对称张量（= Sym²V）** | Cvitanović, *Group Theory*, **§12.1, eqs. (12.8)–(12.10)**, 书上 p.153 | **L1 逐字** | **能** |
+| 同一事实的数学教科书版 | Fulton–Harris, GTM 129, **Lecture 16**（辛，起 p.238）/ **Lecture 18**（正交，起 p.267） | **L4，只到 Lecture 级** | **只能写 Lecture 号，禁写式号/命题号** |
+| 从伴随 ≅ Λ²/Sym² 推出 GS (12a)(12b)(12c) | 抽取者本轮**手工完整复算**（§43.5），三阶全部对上 | 自验证 | 能，但要标明是本项目自己补的一步 |
+| Lean 现状 | Mathlib 有 `LieAlgebra.Orthogonal.so` / `LieAlgebra.Symplectic.sp`（矩阵定义），**没有** Λ²/Sym² 的模同构，也没有外幂上的迹 | **L1**（读源码） | 见 §43.5(d) |
+
+**一句话**：这两条卡可以走 `rigorous`，但**支撑它的一手来源是 Cvitanović 的 birdtracks 书，不是 Fulton–Harris**——
+FH 本轮只拿到 Lecture 级定位，拿不到任何可搬运的编号。
+
+### 43.1 需求侧：卡片到底要哪一条
+
+`math.so-usp-adjoint-fundamental-trace-identities` 现在挂的唯一来源是 `green-schwarz-1984` (12a)(12b)(12c)+(13a)(13b)，
+而按 `extractions/green-schwarz-1984.md` E7 的记录，GS 原文对这三条式子是
+
+> **直接给出，无任何证明动词**（没有 "we show"、"one can show"、"it follows"），也没有给出处引用
+
+所以 `reviewer-gs1984` 裁定 (c)：要么把状态压到 `physical-argument`，要么补一条**纯数学的**推导。
+补数学推导需要两块砖：
+
+| | 砖 | 性质 |
+|---|---|---|
+| **(A)** | `so(V)` 的伴随表示同构于 `Λ²V`；`sp(V)` 的伴随表示同构于 `Sym²V`（作为该李代数的模） | 结构性事实，需要**外部来源** |
+| **(B)** | 由 (A) 展开 `Tr_{Λ²V} X^k` / `Tr_{Sym²V} X^k`，再用 `tr X^{odd} = 0`，得到 (12a)(12b)(12c) | 纯线性代数，**可自证、可 Lean 化** |
+
+本节只负责 (A) 的来源；(B) 见 §43.5，reviewer 已复核过路线（**不需要 Antonelli 的 `e^F` 路线**）。
+
+### 43.2 ★★ 首选（L1 全文到手、且合法免费）：Cvitanović, *Group Theory: Birdtracks, Lie's, and Exceptional Groups*
+
+#### 43.2.0 版本与获取（可复用）
+
+- 作者自建的 **webbook**：`birdtracks.eu` → `menu.html` 给出 `webbook` 链接 → `birdtracks.eu/version9.0/index.html`
+  → 整本 PDF `birdtracks.eu/version9.0/GroupTheory.pdf`（**4.4 MB，WebFetch 落盘后 `Read(pages=)` 读图，全书可读**）。
+- **每页页眉逐字**：`GroupTheory   version 9.0.1, April 8, 2011`。**引用必须写死这个版本号**——
+  纸本是 Princeton University Press (2008)，webbook 是作者持续更新的版本，**页码/式号未必与 PUP 印本一致**。
+- 合法性：作者本人挂在自己域名上的公开 webbook（PUP 允许），符合 `literature/CLAUDE.md` 规则 1。
+  与 §42 拒用 `webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf`（第三方整书扫描）是**两种不同性质**的东西。
+- 目录（L1，PDF pp.7–10 = 书上 pp.vii–x）里与本节相关的两章：
+  **Chapter 10. Orthogonal groups, p.121**（10.1 Two-index tensors, p.122）；
+  **Chapter 12. Symplectic groups, p.152**（12.1 Two-index tensors, p.153）。
+  PDF 页 = 书上页 + 12。
+
+#### 43.2.1 ★★★ `so(n)`：伴随 = 反对称二指标张量（书上 pp.121–123，L1 逐字）
+
+章首（书上 p.121）先把生成元的反对称性写成编号式：
+
+> The invariance condition (4.36) for the metric tensor
+> `(T_i)_μ^σ g_{σν} + (T_i)_ν^σ g_{μσ} = 0`  **(10.5)**
+> becomes, in this convention, a statement that the `SO(n)` generators are antisymmetric:
+> `(T_i)_{μν} = − (T_i)_{νμ}` .  **(10.6)**
+
+§10.1（书上 p.122）给出 `V ⊗ V` 的完全分解，三个投影算子分别编号：
+
+> traceless symmetric: `(P₂)_{μν,ρσ} = ½(g_{μσ}g_{νρ} + g_{μρ}g_{νσ}) − (1/n) g_{μν}g_{ρσ}`  **(10.10)**
+> singlet: `(P₁)_{μν,ρσ} = (1/n) g_{μν}g_{ρσ}`  **(10.11)**
+> antisymmetric: `(P₃)_{μν,ρσ} = ½(g_{μσ}g_{νρ} − g_{μρ}g_{νσ})`  **(10.12)**
+
+紧接着是**本节要的那句话**（书上 p.122，L1 逐字）：
+
+> "The adjoint rep (9.57) of `SU(n)` is decomposed into the traceless symmetric and the antisymmetric parts.
+> **To determine which of them is the new adjoint rep, we substitute them into the invariance condition (10.5).
+> Only the antisymmetric projection operator satisfies the invariance condition** … so the adjoint rep projection
+> operator for `SO(n)` is"  **(10.13)**
+
+以及维数（书上 p.123）：
+
+> "The dimension of `SO(n)` is given by the trace of the adjoint projection operator:
+> `N = tr P_A = n(n−1)/2` ."  **(10.14)**
+
+⇒ **可写进图的定位**：`Cvitanović, Group Theory (webbook v9.0.1), §10.1, eqs. (10.12)–(10.14), pp.122–123`。
+文献自称的严格程度：**给出了论证**（把三个投影算子代回不变性条件 (10.5)，只有反对称的满足），不是断言式。
+
+#### 43.2.2 ★★★ `sp(n)`：伴随 = 对称二指标张量（书上 pp.152–153，L1 逐字）
+
+章首（书上 p.152）：
+
+> "Symplectic group `Sp(n)` is the group of all transformations that leave invariant a skew symmetric
+> `(p,q) = f_{ab}p^a q^b`:  `f_{ab} = − f_{ba}`, `a,b = 1,2,…n`, `n` even."  **(12.1)**
+> "The invariance condition (4.36) for the symplectic invariant tensor is
+> `(T_i)_{ac} f_{cb} + f_{ac}(T_i)_{cb} = 0` ."  **(12.6)**
+
+§12.1（书上 p.153，L1 逐字）：
+
+> "`Sp(n)` 2-index tensors decompose as
+> singlet: `(P₁)_{ab,cd} = (1/n) f_{ab}f_{cd}`
+> antisymmetric: `(P₂)_{ab,cd} = ½(f_{ad}f_{bc} − f_{ac}f_{bd}) − (1/n) f_{ab}f_{cd}`
+> symmetric: `(P₃)_{ab,cd} = ½(f_{ad}f_{bc} + f_{ac}f_{bd})` "  **(12.8)**
+>
+> "The `SU(n)` adjoint rep (10.14) is now split into traceless symmetric and antisymmetric parts.
+> **The adjoint rep of `Sp(n)` is given by the symmetric subspace, as only `P₃` satisfies the invariance
+> condition (12.6)** … Hence the adjoint rep projection operator for `Sp(n)` is"  **(12.9)**
+>
+> "The dimension of `Sp(n)` is `N = tr P_A = n(n+1)/2` ."  **(12.10)**
+
+⇒ **可写进图的定位**：`Cvitanović, Group Theory (webbook v9.0.1), §12.1, eqs. (12.8)–(12.10), p.153`。
+
+#### 43.2.3 使用限制（诚实记录）
+
+1. **记号不是数学书的记号**：Cvitanović 用 birdtracks 图示 + 投影算子语言，写的是「二指标反对称/对称张量子空间」，
+   **没有出现 `Λ²V` / `Sym²V` 这两个符号**。「反对称二指标张量 = `Λ²V`」这一步是**记号翻译**，
+   转节点时若要写 `Λ²V`，须在 note 里说明这是翻译，或者干脆按原文写「二指标反对称张量表示」。
+2. **`Sp(n)` 的 `n` 是 defining rep 的维数（偶数），不是 GS 的 `USp(N)` 的 `N`**——两者恰好都指 defining rep 维数，
+   `dim = n(n+1)/2` 与 GS 的 `USp(N)`、`l=+1` 一致，但**这是我核对出来的，不是原文写的**。
+3. 该书对 `SO(n)` 只要求「存在可逆对称度规」，**不要求正定**（书上 p.121 逐字：
+   "Our analysis of the reps of `SO(n)` will depend only on the existence of a symmetric metric tensor and its
+   invertability, and not on its eigenvalues. The resulting Clebsch-Gordan series applies both to the compact
+   `SO(n)` and noncompact orthogonal groups, such as the Minkowski group `SO(1,3)`."）——
+   对图**是好消息**：迹恒等式不依赖号差。
+
+### 43.3 Fulton–Harris：本轮**只拿到 Lecture 级定位**，禁写式号
+
+任务书点名 FH「sp 在 §16 找 'the adjoint representation is Sym²V' 逐字与式号 (16.x)、so 在 §18 找 'Λ²V is the adjoint'」。
+**本轮没有拿到任何一句逐字，也没有拿到任何编号。** 证据只有两条，都是页码级：
+
+| 探针 | 返回 | 判读 |
+|---|---|---|
+| Google Books 卷 `6TwmBQAAQBAJ`，`q="Symplectic Lie Algebras"` | **Page 238** | 与 Lecture 16 起始页一致 |
+| 同卷，`q="Orthogonal Lie Algebras"` | **Page 267** | 与 Lecture 18 起始页一致 |
+| 同卷，`q="zzqxjkwmnbv"` / `"zzqxjkwmnbvpl"`（**控制**） | **两次都没有返回任何页码**（摘要器只报「页面上没有结果区」） | 弱通过：至少**没有** §9.2 记的「回落到固定页」病；但摘要器也没给出显式的 "No results" 字样，**不如 Humphreys 卷那次干净** |
+| Springer 书页 `link.springer.com/book/10.1007/978-1-4612-0979-9` | **303 → `idp.springer.com/authorize`** | 与既有记录一致，登录墙，**不是取目录的路** |
+
+Lecture 标题与页范围（**L4**，来自检索后端对 Springer 目录的转述，本轮未见目录页图）：
+`Lecture 16. Symplectic Lie Algebras, pp.238–252`；`Lecture 17. sp₆ℂ and sp₂ₙℂ, pp.253–266`；
+`Lecture 18. Orthogonal Lie Algebras, pp.267–281`；`Lecture 19. so₆ℂ, so₇ℂ, soₘℂ, pp.282–298`；
+`Lecture 20. Spin Representations of soₘℂ, pp.299–315`。
+
+⇒ **硬性禁令（与 §33.3.4、§15.4 同性质）：不得在图里写 `Fulton–Harris (16.x)`、`(18.x)`、`Proposition 16.x`。**
+可以写的最强形式是 `Fulton & Harris, GTM 129, Lecture 18 "Orthogonal Lie Algebras", pp. 267–281`，
+且 note 里必须写「正文未取得，Lecture 号与页范围分别为 L4/两条一致的页码命中」。
+
+### 43.4 未查 / 未能核实的候选（**一律不写进图**）
+
+- **Bourbaki, *Lie* Ch. VIII**（`𝔬(n)`、`𝔰𝔭(2n)` 的标准处理）——**本轮 0 次调用**。Springer 登录墙，
+  且按 §33.3 的教训，即使拿到目录也只能定位到 `no.` 一级。
+- **Humphreys GTM 9**——**不对口**：GTM 9 讲的是抽象半单李代数与根系，`so(V) ≅ Λ²V` 这种「经典李代数的具体模型」
+  不是它的主题（§43.5 需要的 (A) 在 GTM 9 里基本不会以这个形式出现）。
+- **Goodman–Wallach / Procesi / Onishchik–Vinberg / Knapp**——全在 Springer/Birkhäuser 墙后，本轮未尝试。
+- **Kirillov Jr., *An Introduction to Lie Groups and Lie Algebras*（Stony Brook 免费草稿，
+  `math.stonybrook.edu/~kirillov/mat552/liegroups.pdf`，1 MB，本轮已落盘）**——
+  目录 L1 读毕：`Appendix C. Root Systems and Simple Lie Algebras`（§C.2 `B_n = so(2n+1,ℂ)` p.125、
+  §C.3 `C_n = sp(n,ℂ)` p.127、§C.4 `D_n = so(2n,ℂ)` p.128）。**这些附录是按根系/矩阵实现写的，
+  本轮没有在目录级看到任何 `Λ²V` / `Sym²V` 的条目**，正文未逐页核实 ⇒ **判为「未核实、疑似不对口」**。
+
+### 43.5 ★★ 给 curator 的推导改写建议（reviewer 裁定 (c) 的落地）
+
+> 以下 (a)(b) 是**可完全机械验证**的算术，抽取者已逐阶手算通过；(c)(d) 是建议。
+> researcher 不改 `graph/`。
+
+#### (a) 展开公式（reviewer 已复核的那条）
+
+对**任意** `X ∈ End(V)`（`dim V = N`），把 `X` 作用在 `V⊗V` 上的导子写成 `X⊗1 + 1⊗X`（两项对易），则
+
+```
+Tr_{V⊗V}(X⊗1 + 1⊗X)^k = Σ_{j=0}^{k} C(k,j) · tr X^j · tr X^{k−j}        (约定 tr X⁰ = N)
+Tr_{Sym²V} − Tr_{Λ²V}   = 2^k · tr X^k
+```
+
+（第二行：取 `X` 的本征值 `x_1,…,x_N`，则 `Sym²` 上是 `{x_i+x_j}_{i≤j}`、`Λ²` 上是 `{x_i+x_j}_{i<j}`，
+差恰是对角项 `Σ_i (2x_i)^k`。可对角化情形显然，一般情形由稠密性/Zariski 闭包。）
+两式相加减即得**任务书给的那条**：
+
+```
+Tr_{Λ²V}  X^k = ½ [ Σ_j C(k,j) tr X^j tr X^{k−j} − 2^k tr X^k ]
+Tr_{Sym²V} X^k = ½ [ Σ_j C(k,j) tr X^j tr X^{k−j} + 2^k tr X^k ]
+```
+
+#### (b) 代进去，逐阶复算（抽取者本轮全部手算，三阶双分支共六个式子全部对上）
+
+前提：`tr F^{odd} = 0`（见 (c)）。记 `Ω_{2m} := Tr_adj F^{2m}`。
+
+| `k` | `Σ_j C(k,j) tr F^j tr F^{k−j}`（已丢掉奇次迹） | `2^k tr F^k` | `Λ²`（`l = −1`） | `Sym²`（`l = +1`） | 对应 GS |
+|---|---|---|---|---|---|
+| 2 | `2N tr F²` | `4 tr F²` | `(N−2) tr F²` | `(N+2) tr F²` | **(12a)** `Ω₄ = (N+2l) tr F²` ✓ |
+| 4 | `2N tr F⁴ + 6 (tr F²)²` | `16 tr F⁴` | `(N−8) tr F⁴ + 3(tr F²)²` | `(N+8) tr F⁴ + 3(tr F²)²` | **(12b)** `Ω₈ = (N+8l) tr F⁴ + 3(tr F²)²` ✓ |
+| 6 | `2N tr F⁶ + 30 tr F² tr F⁴` | `64 tr F⁶` | `(N−32) tr F⁶ + 15 tr F² tr F⁴` | `(N+32) tr F⁶ + 15 tr F² tr F⁴` | **(12c)** `Ω₁₂ = (N+32l) tr F⁶ + 15 tr F² tr F⁴` ✓ |
+
+（`k=6` 那行里 `C(6,2)=15` 出现两次 ⇒ `30 tr F²tr F⁴`；`C(6,3)(tr F³)² = 20(tr F³)²` 因 `tr F³ = 0` 丢掉。）
+
+⇒ **GS 的 `l = −1` for SO(N) / `l = +1` for USp(N)（(13a)(13b)）在这个语言里不是两条约定，
+而是「伴随 = `Λ²` 还是 `Sym²`」这一个二选一的直接后果。** 这是本轮对图最有价值的一句话。
+
+#### (c) ⚠ **对任务书的一处订正：`tr F^{odd} = 0` 的理由，so 与 sp 不是同一个**
+
+- **`so(N)`**：`F^T = −F` ⇒ `tr F^m = tr (F^m)^T = tr (F^T)^m = (−1)^m tr F^m` ⇒ `m` 奇时为 0。
+  ——任务书给的就是这条，**对 so 正确**。
+- **`sp(2n)`**：`F` **不是**反对称矩阵，而是满足 `F^T J + J F = 0`，即 `F^T = −J F J^{−1}`。
+  于是 `tr F^m = tr (F^T)^m = tr(−JFJ^{−1})^m = (−1)^m tr F^m`，同样给出 `m` 奇时为 0，
+  **但用的是「相似于 −F」而不是「等于 −F^T」**。
+  ⇒ **curator 若照抄任务书的一句「由 `F^T = −F`」，对 USp 分支就是错的。** 必须分两句写，
+  或者写成统一的一句：「`F` 相似于 `−F`（so：经转置；sp：经 `J`-共轭），故奇次迹为零」。
+  （Cvitanović (10.6) 给的正是 so 的反对称性；(12.6) 给的正是 sp 的 `f`-不变性条件，两者可分别引。）
+
+#### (d) 建议的图结构（建议而已，不代 curator 决定）
+
+1. **新 statement `math.so-adjoint-is-exterior-square`**：「设 `V` 上有非退化对称双线性型，则 `so(V)` 的伴随表示
+   同构于 `Λ²V`」。`sources`: `cvitanovic-2008`（`loc: "§10.1, eqs. (10.12)–(10.14), pp.122–123 (webbook v9.0.1)"`），
+   `fulton-harris-1991`（`loc: "Lecture 18, pp. 267–281"`，note 写明「Lecture 级，正文未取得」）。`status: rigorous`。
+2. **新 statement `math.sp-adjoint-is-symmetric-square`**：同上，`Sym²V`；
+   `loc: "§12.1, eqs. (12.8)–(12.10), p.153"` + `fulton-harris-1991` `"Lecture 16, pp. 238–252"`。
+3. **新 statement `math.trace-of-exterior-and-symmetric-square`**：(a) 的两条恒等式（纯线性代数，**无外部来源，
+   `inferred: true` + note 指向本节**；或标 `formalization-target`）。
+4. **新 derivation `math.so-usp-adjoint-fundamental-trace-identities--via-exterior-square`**，
+   `depends_on: [1,2,3, math.odd-traces-vanish-so-sp]`，`status: rigorous`，
+   `gaps:` 写「常数 `3` 与 `15` 是二项式系数 `C(4,2)/2`、`C(6,2)`，已逐阶复算（`literature/extractions/math-sources.md` §43.5(b)）」。
+5. **保留** 现有的挂 `green-schwarz-1984` 的那条 derivation，`status` 按 GS 原文的写法诚实标 `physical-argument`
+   （原文无证明动词）。**两条独立推导挂同一张卡**，正是本项目的 §1 原则。
+
+#### (e) Lean 化与 Mathlib 现状（**L1，读源码 2026-09-11**）
+
+`raw.githubusercontent.com/leanprover-community/mathlib4/master/Mathlib/Algebra/Lie/Classical.lean` 已有：
+`LieAlgebra.SpecialLinear.sl`、**`LieAlgebra.Symplectic.sp`**（对典范斜对称型 `J` 的 skew-adjoint 矩阵）、
+**`LieAlgebra.Orthogonal.so`**（对单位阵的 skew-adjoint 矩阵）、`so'`、`typeB`、`typeD` 及它们之间的等价
+（`soIndefiniteEquiv`、`typeBEquivSo'`、`typeDEquivSo'`）。模块 docstring 逐字给出
+`Aₗ = sl(l+1)`、`Bₗ ≃ so(l+1,l) ≃ so(2l+1)`、`Cₗ = sp(l)`、`Dₗ ≃ so(l,l) ≃ so(2l)`。
+
+**但是**：文件里**没有** `so ≅ Λ²V` / `sp ≅ Sym²V` 的模同构，也没有任何「外幂/对称幂上的迹」结论。
+⇒ **(A) 这块砖在 Mathlib 里不存在，要自己造**；`(a)` 那两条迹恒等式也要自己造。
+⇒ **这两张卡的天花板目前是 `rigorous`，不是 `formalized`。**
+（相较之下 §5.1 的 A1「因子化恒等式 (19)」只是 `ring`/`field_simp`，仍然是更容易的第一块砖。）
+
+### 43.6 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Cvitanović 全书** | `birdtracks.eu` → `menu.html` → `version9.0/index.html` → `version9.0/GroupTheory.pdf` | **成功**（4.4 MB 落盘；读目录 + pp.121–123、152–153） |
+| Fulton–Harris 目录 | `link.springer.com/book/10.1007/978-1-4612-0979-9` | **失败**：303 → `idp.springer.com/authorize` |
+| Fulton–Harris 定位 | Google Books 卷 `6TwmBQAAQBAJ`，四次 `&q=` | **部分**：两条正命中（238/267），控制串两次都无页码返回但也无显式 "No results" |
+| Kirillov 讲义 | `math.stonybrook.edu/~kirillov/mat552/liegroups.pdf` | **成功落盘**（1 MB），目录 L1 读毕；**正文未查**，疑似不对口 |
+| Mathlib 经典李代数 | `raw.githubusercontent.com/.../Mathlib/Algebra/Lie/Classical.lean` | **成功**：有 `so`/`sp`，**无** Λ²/Sym² |
+| Cambridge Core 检索 | `www.cambridge.org/core/search?q=Lie+algebras&filters…` | **HTTP 429**（两次），本轮放弃找 CUP 的李代数教材 |
+| Bourbaki *Lie* Ch. VIII | — | **本轮 0 次调用** |
+
+**未解决 / 留给下一轮**
+
+- **Q36** **Fulton–Harris 的逐字与编号**：`𝔰𝔭₂ₙℂ ≅ Sym²V` 与 `𝔰𝔬ₘℂ ≅ Λ²V` 在 FH 里到底是**编号式**、
+  **无编号显示式**、还是**习题**？目前完全未知（L0）。最省力的下一招：
+  找一篇**逐字引了该编号**的论文/讲义（§28.1 对 Weibel 用过的办法），而不是继续找书。
+- **Q37** `Λ²V` / `Sym²V` 这两个记号在**哪本能拿到的书**里被逐字用于 `so`/`sp` 的伴随？
+  （Cvitanović 用的是投影算子语言，翻译这一步目前挂在本项目自己名下。）
+- **Q38** Bourbaki *Lie* Ch. VIII 是否给出这条并带 `no.` 级定位（若将来能拿到 DNB 目录扫描 `d-nb.info/<IDN>/04`）。
+
+## 44. E₈ 迹恒等式：根系、Chevalley 限制定理与 248 = 120 ⊕ 128 的带编号来源（researcher，2026-09-11）
+
+### 44.0 结论表（先看这张）
+
+| 需要的东西 | 本轮最好的来源 | 等级 | 能不能写进图 |
+|---|---|---|---|
+| **E₈ 根系（240 根的显式列表）** | Humphreys, *Reflection Groups and Coxeter Groups*, **§2.10, 书上 pp.42–43** | **L1 逐字** | **能** |
+| **E₈ 的基本不变量次数 = 2, 8, 12, 14, 18, 20, 24, 30**（⇒ 没有独立的 4 阶、6 阶不变量） | 同书 **§3.7, Table 1, 书上 p.59** | **L1 逐字** | **能** |
+| **Chevalley 定理（反射群的不变量环是多项式环）** | 同书 **§3.5**（作者本人在 p.56/p.58 把它引作 "**Theorem 3.5**"） | **L1** | **能，写 `§3.5, Theorem 3.5`** |
+| **次数与生成元选取无关** | 同书 **§3.7, Proposition, 书上 pp.58–59** | **L1 逐字** | 能（**无编号，只能写「§3.7 的 Proposition」**） |
+| **Chevalley 限制定理（`S(𝔤*)^𝔤 → S(𝔥*)^W` 同构）本身** | Humphreys, GTM 9, **§23「Invariant polynomial functions」** | **L1 的交叉引用 + L4 的页码（p.126）**，**内容未核实** | **只能写 `§23`，不能写 `§23.1` 的编号** |
+| **`Tr F⁴ = (1/100)(Tr F²)²`、`Tr F⁶ = (1/7200)(Tr F²)³` 的独立确认** | van Ritbergen–Schellekens–Vermaseren, **eqs. (176)(177)**（arXiv:hep-ph/9802376 = IJMPA **14** (1999) 41） | **L1 逐字** | **能，且与 GS (12b′)(12c′) 逐位相等** |
+| **248 = 120 ⊕ 128 在 so(16) 下** | 同文 **§5.11, eq. (86)**：`Ch_{E₈,248} = Ch_{D₈,128} + Ch_{D₈,120}` | **L1 逐字** | **能**（比 Slansky 好：免费、带编号） |
+| 从根系直接算出 (12b′)(12c′) | 抽取者本轮**手工完整复算**（§44.7），`k = 2, 4, 6` 全部对上 | 自验证 | 能，且**可脚本化 + 可 Lean 化** |
+
+**一句话**：E₈ 这张卡**不需要**去啃 Bourbaki Planche VII——
+`Humphreys 的 Reflection Groups §2.10 + §3.7 Table 1` 已经把「根系」与「没有 4/6 阶独立不变量」两块砖都以 L1 拿到了，
+而且 §44.7 的复算说明**整条推导可以做成一个纯算术脚本**，reviewer 复核后走 `rigorous` 是可行的。
+
+### 44.1 需求侧：E₈ 卡到底缺什么
+
+GS (12a′)(12b′)(12c′)（见 `extractions/green-schwarz-1984.md` E8）：
+
+> `Ω₄ = tr F²`、`Ω₈ = (1/100)(tr F²)²`、`Ω₁₂ = (1/7200)(tr F²)³`
+> 文献自称的严格程度：**直接给出，无证明、无引用**
+> 致谢里的归属：**"We are grateful to G. Chapline and R. Slansky for pointing out to us that E₈ has no
+> independent fourth- and sixth-order Casimir invariants."**
+
+所以要补的是三块：
+
+| | 砖 | 本节给到哪一步 |
+|---|---|---|
+| **(A)** | `Ad`-不变多项式由它在 Cartan 上的限制决定，且该限制是 `W`-不变的（**Chevalley 限制定理**） | **§44.4，最弱的一环（内容 L0）** |
+| **(B)** | E₈ 的 `W`-不变多项式环由次数 2,8,12,14,18,20,24,30 的生成元自由生成 ⇒ **4 次与 6 次的不变量只能是 `(deg 2)²` 与 `(deg 2)³`** | **§44.3，L1 拿到** |
+| **(C)** | 系数 `1/100`、`1/7200`：对 248 个权求幂和 | **§44.5 + §44.7，两条独立证据** |
+
+### 44.2 ★★★ (B) 的上游：E₈ 根系的显式列表（Humphreys, *Reflection Groups*, §2.10，L1 逐字）
+
+获取途径：**Cambridge Core 章级 PDF（本环境有机构订阅）**。书目页
+`www.cambridge.org/core/books/reflection-groups-and-coxeter-groups/2910C1E00877D33A04A512791B6EDD72`
+给出每个 item 的 hash 与页范围；ch.2 的 PDF 是
+`…/services/aop-cambridge-core/content/view/D2925389A4A9FDD2D6C587F55AAB1CF7/9780511623646c2_p29-48_CBO.pdf/classification_of_finite_reflection_groups.pdf`（1.0 MB，扫描件，`Read(pages=)` 清晰可读）。
+
+**§2.10 的开场（书上 p.41，L1 逐字）**：
+
+> "Denote by `ε₁,…,ε_n` the standard basis of `Rⁿ`. Whenever we write combinations such as `±ε_i ± ε_j` below,
+> it is understood that the signs may be chosen arbitrarily. We shall outline briefly the construction of
+> (crystallographic) root systems of all possible types, **following Chapter VI of Bourbaki [1]** (which should be
+> consulted for further details)."
+
+**E₈ 那一条（书上 pp.42–43，L1 逐字，跨页）**：
+
+> "(E₈) Let `V = R⁸`. The choice of lattice is somewhat subtle. Start with the lattice `L′` consisting of all
+> `Σ c_i ε_i` with `c ∈ Z` and `Σ c_i` even. Then let `L = L′ + Z(½ Σ_{i=1}^{8} ε_i)`. Define `Φ` to be the set of
+> all vectors of squared length 2 in `L`. **So `Φ` consists of 240 roots:**
+> `±ε_i ± ε_j (i < j)`,  `½ Σ_{i=1}^{8} ±ε_i` **(even number of + signs)**.
+> For `Δ` take
+> `α₁ = ½(ε₁ − ε₂ − ε₃ − ε₄ − ε₅ − ε₆ − ε₇ + ε₈)`, `α₂ = ε₁ + ε₂`, `α_i = ε_{i−1} − ε_{i−2} (3 ≤ i ≤ 8)`.
+> Then `α̃ = ε₇ + ε₈`."
+
+**⚠ 一处必须随引用一起写的记号差**：Humphreys 写的是「**even number of `+` signs**」，
+而 Bourbaki Planche VII / 物理文献常见的写法是「偶数个**负**号」。
+**在 8 个符号里，`+` 号个数为偶 ⟺ `−` 号个数为偶**（`8 − 偶 = 偶`），所以两种写法给出**同一个 128 元集合**，
+**不是矛盾**。（本条是抽取者的核对，不是原文的话。）
+
+**同章 Table 2（书上 p.44，L1 逐字）**：`E₈` 一行给 `|W| = 2^14 3^5 5^2 7`、`|Φ| = 240`。
+
+### 44.3 ★★★ (B)：Chevalley 定理 + E₈ 的次数表（同书 §3.5 / §3.7，L1 逐字）
+
+ch.3 的 PDF：hash `1DD151BF79ED7B49783AAA0B265EF54E`，文件名 `9780511623646c3_p49-86_CBO.pdf`（1.8 MB）。
+
+**编号体例（要点）**：本书的 `Theorem` / `Proposition` / `Lemma` **在正文里是不带号的**，
+但**作者自己用「小节号」去引它们**。两处 L1 证据（书上 p.56 与 p.58）：
+
+> "Our proof of **Theorem 3.5** follows closely the original proof in Chevalley [2]."（书上 p.56）
+> "The algebraically independent generators of `R` provided by **Theorem 3.5** need not be uniquely determined…"（书上 p.58）
+
+⇒ **`Humphreys, Reflection Groups, §3.5, Theorem 3.5` 是一个作者认可的、可搬运的定位**
+（与 §33.3.4 禁写「Bourbaki Theorem 1」不同：那次是**没有任何证据**，这次是**作者本人两次这么引**）。
+但 §3.1/§3.2/§3.6/§3.7 里的 `Proposition` **本轮没见到作者用「Proposition 3.x」引过**，
+⇒ **那几条只能写成「§3.7 的 Proposition」，不要写 `Proposition 3.7`。**
+
+**§3.5 之后的定义（书上 p.56，L1 逐字）**：
+
+> "For brevity, we may refer to a set of algebraically independent homogeneous generators of `R` (of positive
+> degree) as a set of **basic invariants** of `R`."
+
+**§3.7「Uniqueness of the degrees」的 Proposition（书上 p.58，L1 逐字）**：
+
+> "**Proposition** *Suppose that `f₁,…,f_n` and `g₁,…,g_n` are two sets of homogeneous, algebraically independent
+> generators of the ring `R` of `W`-invariant polynomials. Denote the respective degrees by `d_i` and `e_i`. Then,
+> after renumbering one of the sets if necessary, we have `d_i = e_i` for all `i`.*"
+
+**★★★ 次数表（书上 p.59，L1 逐字，Table 1「Degrees of basic invariants」的相关行）**：
+
+| Type | `d₁,…,d_n` |
+|---|---|
+| `A_n` | `2, 3, …, n+1` |
+| `B_n` | `2, 4, 6, …, 2n` |
+| `D_n` | `2, 4, 6, …, 2n−2, n` |
+| `E₆` | `2, 5, 6, 8, 9, 12` |
+| `E₇` | `2, 6, 8, 10, 12, 14, 18` |
+| **`E₈`** | **`2, 8, 12, 14, 18, 20, 24, 30`** |
+| `F₄` | `2, 6, 8, 12` |
+| `G₂` | `2, 6` |
+
+表下正文（书上 p.59，L1 逐字，**必须随引用一起写的诚实话**）：
+
+> "At the risk of lessening the suspense, we provide in Table 1 the list of degrees for each type of irreducible `W`.
+> **It will be some time before we succeed in verifying the table completely**, but meanwhile the reader can compare
+> it with the partial results obtained."
+
+⇒ **引用时要注明：Table 1 是「先给结果、后文再验证」的表，不是就地被证明的定理。**
+（本书后续 §3.9–§3.20 与第 4 章才把它补完；本轮**没有**逐条核实那部分。）
+
+**对 E₈ 卡的直接后果**：`d = (2, 8, 12, 14, 18, 20, 24, 30)` 里**没有 4，也没有 6**
+⇒ `W(E₈)`-不变多项式在 4 次与 6 次分量上分别只有一维（由 `f₂²` 和 `f₂³` 张成）
+⇒ 一旦有了 (A)（§44.4），就得到 `Tr F⁴ ∝ (Tr F²)²`、`Tr F⁶ ∝ (Tr F²)³`。
+**这正是 GS 致谢里 Chapline–Slansky 那句「E₈ has no independent fourth- and sixth-order Casimir invariants」的数学内容。**
+
+**顺带（L1，同书 §3.6 remark 与 References）**：Chevalley 定理的原始出处是
+`C. Chevalley, "Invariants of finite groups generated by reflections", Amer. J. Math. 77 (1955), 778–782`
+（书上 p.188 的参考文献表逐字），Humphreys 的证明「follows closely the original proof in Chevalley [2]」。
+
+### 44.4 ⚠ (A) Chevalley **限制**定理：本轮最弱的一环
+
+需要的陈述是：**`𝔤` 上的 `Ad`-不变多项式函数由它在 Cartan 子代数 `𝔥` 上的限制唯一决定，且限制映射是到 `S(𝔥*)^W` 的同构。**
+（注意与 §44.3 的 Chevalley 定理是**两条不同的定理**：那条是关于反射群不变量环的结构，这条是 `𝔤 ↔ 𝔥` 的桥。）
+
+本轮拿到的证据只有两条，**都不足以写编号**：
+
+1. **L1 的交叉引用**（Humphreys 本人，*Reflection Groups*，书上 **p.56**，§3.5 末的 Remark，逐字）：
+   > "*Remark.* When `W` is a Weyl group, a theorem of Harish–Chandra (see **Humphreys [1], §23**) allows one to derive
+   > from Chevalley's Theorem a description of the center of the universal enveloping algebra of a semisimple Lie
+   > algebra over `C`: it too is a polynomial algebra."
+   其中 `Humphreys [1]` 由该书参考文献表（书上 **p.193**，L1 逐字）确定为
+   `J.E. Humphreys, Introduction to Lie Algebras and Representation Theory, Springer, New York, 1972`（= `humphreys-1972`）。
+   ⇒ **「GTM 9 的 §23 讲的正是从 Chevalley 定理往李代数侧过桥」这一点是 L1 的。**
+   ⚠ 但这条 Remark 说的是 **Harish–Chandra 关于 `Z(U(𝔤))` 的定理**，**不是** `S(𝔤*)^𝔤 ≅ S(𝔥*)^W`。两者相关但不同。
+2. **L4 的页码**：Google Books 卷 `mSD4DvUFa6QC`（= GTM 9，**该卷在 §15.3 已做过无意义串控制，返回显式 "No results"，是"诚实卷"**），
+   查询 `"Invariant polynomial functions"` → **Page 126**。与「§23 起于 p.126 附近」相容。
+
+⇒ **可写进图的最强形式**：`Humphreys, GTM 9, §23`，note 写明「小节标题与内容本轮未逐字核实；
+页码 p.126 来自 Google Books 单页命中（L4）；**不得写 `§23.1`**（`.1` 这一级本轮零证据）」。
+⇒ **这是 E₈ 卡真正的瓶颈**：如果 curator 想让 `--via-e8-root-sum` 这条推导干净地走 `rigorous`，
+最好的做法是**绕开 (A)**——见 §44.7/§44.8：直接对 248 个权做幂和，就**不需要**限制定理，
+只需要「`F` 可对角化到 Cartan」这一个（对半单元素平凡、对一般元素用稠密性）的事实。
+
+### 44.5 ★★★ (C) 的独立确认：van Ritbergen–Schellekens–Vermaseren
+
+**文献标识（L1，PDF 首页页眉/侧栏逐字）**：
+`T. van Ritbergen, A.N. Schellekens, J.A.M. Vermaseren, "Group theory factors for Feynman diagrams",
+UM-TH-98-01 / NIKHEF-98-004`；侧栏戳记 `arXiv:hep-ph/9802376v1  20 Feb 1998`；
+arXiv abs 页给出 `Int.J.Mod.Phys.A14:41-96,1999`，47 页。
+（⚠ **PDF 首页正文的日期行印的是 "26 November 2024"** —— 这是 arXiv 重新编译的时间戳，**不是论文日期**；
+引用时用 1998/1999，并把这条坑写进 note。）
+
+**★★★ 附录 A.5「Indices and trace identities for E₈」（PDF p.35，L1 逐字）**：
+
+> Trace identities in the representation (248):
+> `Tr F⁴ = 36 (1/60 Tr F²)²`  **(176)**
+> `Tr F⁶ = 30 (1/60 Tr F²)³`  **(177)**
+> `Tr F¹⁰ = (15/4)(Tr F⁸)(1/60 Tr F²) − (315/4)(1/60 Tr F²)⁵`  **(178)**
+
+**与 GS 的逐位比对（抽取者复算）**：
+
+| | vRSV | 化简 | GS |
+|---|---|---|---|
+| 4 阶 | `36 (Tr F²/60)² = (36/3600)(Tr F²)²` | `= (1/100)(Tr F²)²` | **(12b′) `Ω₈ = (1/100)(tr F²)²`** ✓ |
+| 6 阶 | `30 (Tr F²/60)³ = (30/216000)(Tr F²)³` | `= (1/7200)(Tr F²)³` | **(12c′) `Ω₁₂ = (1/7200)(tr F²)³`** ✓ |
+
+⇒ **GS 的 (12b′)(12c′) 现在有了一个完全独立、可公开获取、带编号的第二来源。**
+且两者的 `tr` 都是 **248 维伴随表示上的迹**（vRSV 明写 "in the representation (248)"；
+GS 侧见 `green-schwarz-1984.md` §1.1「E₈ 伴随即基本，`tr = Tr`」）——**归一化不冲突**。
+
+**顺带取到、curator 可能用得上的（同文，L1）**：
+- **Table 3（PDF p.16）**：`E₈` 的 reference representation `(1,0,0,0,0,0,0,0)`，**Dimension 248**，
+  Indices `60,1,1,1,1,41,199,61`。（第二指标 = `2 × 对偶 Coxeter 数`，同文 §5.12 逐字说明；`E₈` 的 `g = 30` ⇒ 60。）
+- **Table 9（PDF p.38）**「Indices for `E₈`, part one」：`(1,0,…,0)` 248 行的 `I₂/30 = 1`、`I₈ = I₁₂ = I₁₄ = 1`。
+- 文献自称的严格程度：「**all trace identities to order equal to the dual Coxeter number**」（摘要逐字），
+  §5.11 说明 `E₈` 的字符是用**子代数 `D₈`** 展开算出来的（见 §44.6），**不是**从 Weyl 特征标公式硬展
+  （§5.2 逐字解释了为什么 Weyl 公式对 `E₈` 到 30 阶是 "an impossible task"）。
+
+**⚠ 一条我自己发现的、必须标为「抽取者的核对，不是原文错误认定」的疑点**：
+同文 §5.1 的生成函数展开式 **(51)**（反对称张量幂的字符）
+`Ch_{[k]*R}(F) = − Σ_{{n_i,m_i}} Π_i (1/m_i!) ( − Ch_R(n_i F)/n_i )^{m_i}`
+在 `k = 1` 时给出正确的 `Ch_R(F)`，但在 `k = 2` 时按字面展开给出 `½Ch_R(2F) − ½Ch_R(F)²`，
+**与标准的 `Ch_{Λ²R}(F) = ½[Ch_R(F)² − Ch_R(2F)]` 差一个整体符号**（偶 `k` 都差这个号）。
+可能是排印/我读图的问题。⇒ **不要把 (51) 当作 §43.5(a) 展开公式的来源**；
+§43.5(a) 的两条恒等式仍按「本项目自证」处理。
+
+### 44.6 248 = 120 ⊕ 128：最好的免费带编号来源是 vRSV (86)，不是 Slansky
+
+**vRSV §5.11「E₈ characters」（PDF p.22，L1 逐字）**：
+
+> "Here we used the sub-algebra `D₈`, and
+> `Ch_{E₈,248} = Ch_{D₈,128} + Ch_{D₈,120}`  **(86)**
+> `Ch_{E₈,3875} = Ch_{D₈,1920} + Ch_{D₈,1820} + Ch_{D₈,135}`  **(87)**
+> `Ch_{E₈,147250} = Ch_{D₈,60060} + Ch_{D₈,56320} + Ch_{D₈,15360} + Ch_{D₈,7020} + Ch_{D₈,6435} + Ch_{D₈,1920} + Ch_{D₈,135}`  **(88)**"
+
+**必须随引用一起写的作者注（同页，L1 逐字）**：
+
+> "In the first three lines all `D₈` spinor representations must be from the same conjugacy class, which is fixed by
+> the decomposition one chooses for the (248). Since the choice one makes for the class is irrelevant, there is no
+> need for a label to distinguish conjugate spinors."
+
+⇒ `D₈ = so(16)`，`128` = 旋量表示，`120` = `so(16)` 的伴随（`= 16·15/2`）。
+**这就是图里要的 `248 = 120 ⊕ 128`，带编号 (86)，免费可复核。**
+（⚠ 原文写的是字符等式 `Ch_{E₈,248} = Ch_{D₈,128} + Ch_{D₈,120}`，即**分支规则**；
+「120 是 `so(16)` 的伴随子代数」这一句是记号翻译，原文没写。）
+
+**Slansky**：本轮只拿到书目（INSPIRE，L2 逐字）：
+`R. Slansky (Los Alamos), "Group Theory for Unified Model Building", Phys. Rept. 79 (1981) 1–128`。
+**正文一页未取，任何表号（"Table 25" 之类）都是 L0，禁写。**
+建议：如果 vRSV (86) 够用，**就不要引 Slansky 的表号**；Slansky 只作为历史归属（GS 致谢里点了 Slansky）登记。
+
+### 44.7 ★★ 本轮最有价值的一步：从 §44.2 的根系直接算出 (12b′)(12c′)（抽取者手算，全部对上）
+
+> 这一节是**抽取者的复算**，不是任何来源的原文。但它只用 §44.2 的 L1 根系列表，
+> 且**每一步都是二项式展开与求和**，可以脚本化、可以 Lean 化。
+
+**设定**：取 `H ∈ 𝔥`，在 §44.2 的坐标下写成 `x = (x₁,…,x₈)`。伴随表示的权 = 240 个根 + 8 个零权（Cartan 本身），
+所以
+
+```
+Tr_{248} H^k = Σ_{α ∈ Φ} α(H)^k          (k ≥ 1；零权不贡献)
+```
+
+**k = 2**：
+- 向量型根 `±(ε_i ± ε_j)`：`Σ_{i<j} 2[(x_i+x_j)² + (x_i−x_j)²] = 4 Σ_{i<j}(x_i²+x_j²) = 28 Σ x_i²`
+- 旋量型根 `½Σ s_i ε_i`（128 个，符号偶）：`Σ_patterns ¼(Σ s_i x_i)² = 128·¼·Σx_i² = 32 Σ x_i²`
+  （交叉项 `Σ_patterns s_i s_j = 0`：翻转 `s_i` 与某个第三个 `s_k` 保持宇称、改变符号 ⇒ 配对相消）
+- **合计 `Tr F² = 60 Σ x_i²`**（与 vRSV Table 3 的 `I₂ = 60` 一致 ✓）
+
+**k = 4**：
+- 向量型：`28 Σx⁴ + 24 Σ_{i<j} x_i²x_j²`
+- 旋量型：`(128/16)[Σx⁴ + 6Σ_{i<j}x_i²x_j²] = 8Σx⁴ + 48Σ_{i<j}x_i²x_j²`
+- 合计：`36 Σx⁴ + 72 Σ_{i<j}x_i²x_j² = 36 (Σ x_i²)²`
+- ⇒ **`Tr F⁴ = 36 (Σx²)² = 36 (Tr F²/60)² = (1/100)(Tr F²)²`** = **GS (12b′)** ✓ = **vRSV (176)** ✓
+
+**k = 6**：
+- 向量型：`28 Σx⁶ + 60 Σ_{i≠j} x_i⁴x_j²`
+- 旋量型：`2 Σx⁶ + 30 Σ_{i≠j} x_i⁴x_j² + 180 Σ_{i<j<k} x_i²x_j²x_k²`
+- 合计：`30 Σx⁶ + 90 Σ_{i≠j}x_i⁴x_j² + 180 Σ_{i<j<k}x_i²x_j²x_k²`
+- 而 `30(Σx²)³ = 30[Σx⁶ + 3Σ_{i≠j}x_i⁴x_j² + 6Σ_{i<j<k}x_i²x_j²x_k²]` = 同一式
+- ⇒ **`Tr F⁶ = 30 (Σx²)³ = 30 (Tr F²/60)³ = (1/7200)(Tr F²)³`** = **GS (12c′)** ✓ = **vRSV (177)** ✓
+
+**顺带**：`|Φ| + rank = 240 + 8 = 248` ⇒ **`dim E₈ = 248`**，
+即 `green-schwarz-1984.md` §5.4 的 **A4** 那条（`dim E₈` "Mathlib 目前没有"）也能由同一个根系列表得到。
+
+**这条路线的三个好处**：
+1. **绕开 §44.4 的 (A)**：只需要「对 `H ∈ 𝔥` 成立」+「不变多项式由 `𝔥` 上的值决定」的**弱形式**
+   （或者干脆把陈述本身写成「对 `H ∈ 𝔥`」，那就**完全不需要**限制定理）。
+2. `k = 4, 6` 的结论**不依赖** §44.3 的次数表——次数表是「为什么会是这样」的解释，
+   幂和复算是「就是这样」的证明。两者互为独立佐证。
+3. 全程只有有理数算术 ⇒ **脚本枚举 240 个根 + 符号求和，reviewer 复核后可走 `rigorous` 例外**（任务书的提法成立）。
+
+### 44.8 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+1. **新 statement `math.e8-root-system`**：「E₈ 根系由 `±ε_i±ε_j (i<j)` 与 `½Σ±ε_i`（`+` 号个数为偶）共 240 个向量构成」。
+   `sources`: `humphreys-1990-reflection`，`loc: "§2.10 (Construction of root systems), pp. 42–43"`；
+   `bourbaki-lie-4-6`，`loc: "Ch. VI, Planche VII"`，**`note` 必须写「本项目未取得 Bourbaki 原文；
+   该定位来自 Humphreys §2.10 自陈 'following Chapter VI of Bourbaki [1]'，是 L3」**。`status: rigorous`。
+2. **新 statement `math.e8-basic-invariant-degrees`**：「`W(E₈)` 的基本不变量次数为 2,8,12,14,18,20,24,30」。
+   `sources`: `humphreys-1990-reflection`，`loc: "§3.7, Table 1 (Degrees of basic invariants), p. 59"`，
+   `note`: 「原书在表下自陈 'It will be some time before we succeed in verifying the table completely'，
+   完整验证在 §3.9–3.20 与 Ch.4，本项目未逐条核实」。`status: rigorous`。
+3. **新 statement `math.chevalley-invariant-theorem`**（可选）：反射群不变量环是多项式环。
+   `loc: "§3.5, Theorem 3.5"`（作者本人两次这么引，见 §44.3）+ 原始出处 `Chevalley, Amer. J. Math. 77 (1955) 778–782`。
+4. **新 derivation `math.e8-adjoint-trace-identities--via-root-sum`**（**建议作为首选，替代任务书里的
+   `--via-so16-weights`**）：`depends_on: [1]`，论证 = §44.7 的幂和复算，
+   `sources`: `van-ritbergen-1998`（`loc: "App. A.5, eqs. (176)–(177)"`）作为**独立数值确认**。
+   `status: rigorous`，`gaps:` 写「幂和为脚本枚举 + 手算双验；`Tr` 取 248 维伴随」。
+   - **为什么不推荐 `--via-so16-weights`**：248 = 120 ⊕ 128 那条（§44.6）只是把权集合**换一种描述**，
+     算出来的幂和与直接用根系**完全一样**，却多引入一条分支规则和一条「旋量共轭类」的注意事项。
+     若 curator 仍要保留它，`loc` 写 `van-ritbergen-1998, §5.11, eq. (86)`，**并把作者那条共轭类的注一起抄进 note**。
+5. **旧 derivation（挂 `green-schwarz-1984` (12′) 的那条）保留**，`status` 诚实写 `physical-argument`
+   （GS 原文「直接给出，无证明、无引用」）。**两条独立推导挂同一张卡。**
+6. **不要**把 §44.4 的 Chevalley 限制定理做成必需依赖——按 §44.7 的路线它不是必需的。
+   若要建节点，`loc` 只能写 `humphreys-1972, §23`，且 `status` 不高于 `rigorous`、note 写明内容未核实。
+
+### 44.9 `sources.bib` 本轮登记情况
+
+| key | 条目 | 证据等级 | 处理 |
+|---|---|---|---|
+| `cvitanovic-2008` | P. Cvitanović, *Group Theory: Birdtracks, Lie's, and Exceptional Groups*, Princeton U.P. (2008); webbook v9.0.1, April 8, 2011 | **L1 全文** | **新登记** |
+| `humphreys-1990-reflection` | J.E. Humphreys, *Reflection Groups and Coxeter Groups*, Cambridge Studies in Advanced Math. **29**, CUP | **L1 ch.2/ch.3/References 全读** | **新登记** |
+| `van-ritbergen-1998` | T. van Ritbergen, A.N. Schellekens, J.A.M. Vermaseren, *Group theory factors for Feynman diagrams*, IJMPA **14** (1999) 41–96, arXiv:hep-ph/9802376 | **L1 全文（按页读）** | **新登记** |
+| `fulton-harris-1991` | W. Fulton, J. Harris, *Representation Theory: A First Course*, GTM 129, Springer | **正文未取得；Lecture 级 L4** | **登记，note 写死禁令** |
+| `bourbaki-lie-4-6` | N. Bourbaki, *Groupes et algèbres de Lie*, Ch. 4–6, Hermann, Paris, 1968; Masson, Paris, 1981 | **书目为 L1**（Humphreys 参考文献表 p.187 逐字）；**正文 0 页** | **登记，note 写死「只有书目是 L1」** |
+| `humphreys-1972` | **已存在**（§15 登记）。书目由 Humphreys 本人的参考文献表（*Reflection Groups* p.193）L1 再确认 | 内容 L0 | **补 note**（§23 的事） |
+| `slansky-1981` | R. Slansky, *Group Theory for Unified Model Building*, Phys. Rept. **79** (1981) 1–128 | **L2**（INSPIRE 逐字）；正文 0 页 | **登记，note 写死「禁写表号」** |
+| `chevalley-1955` | C. Chevalley, *Invariants of finite groups generated by reflections*, Amer. J. Math. **77** (1955) 778–782 | **L3**（Humphreys 参考文献表 p.188 逐字） | **本轮不登记**（正文未取，且图里暂时用不到） |
+
+### 44.10 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Humphreys *Reflection Groups* 书目页** | `www.cambridge.org/core/product/identifier/9780511623646/type/book` → 书 hash `2910C1E00877D33A04A512791B6EDD72` | **成功**：全部 item hash + 页范围 |
+| **同书 ch.2（pp.29–48）** | Core `/services/…/D2925389A4A9FDD2D6C587F55AAB1CF7/9780511623646c2_p29-48_CBO.pdf/…` | **成功**（1.0 MB，读 pp.41–46） |
+| **同书 ch.3（pp.49–86）** | 同上 `1DD151BF79ED7B49783AAA0B265EF54E/9780511623646c3_p49-86_CBO.pdf` | **成功**（1.8 MB，读 pp.49–60） |
+| **同书 References（pp.185–202）** | ⚠ `…c9_p185-202_CBO.pdf` → **HTTP 404**；正确文件名是 **`9780511623646bib_p185-202_CBO.pdf`** | **成功**（745 KB，读 pp.185–188、192–193） |
+| **vRSV 全文** | `arxiv.org/pdf/hep-ph/9802376` | **成功**（419 KB，47 页，读 pp.1–3, 13–27, 33–38） |
+| **Slansky 书目** | `inspirehep.net/api/literature?q=title%20"…"&fields=titles,authors,publication_info` | **成功**（L2 书目） |
+| Fulton–Harris | 见 §43.6 | 只到 Lecture 级 |
+| DNB 检索 UI | `portal.dnb.de/opac/simpleSearch?query=…` | **失败**：Anubis「Access Denied」（与既有记录一致；`d-nb.info/<IDN>/04` 仍可用，但本轮没有 IDN） |
+
+**方法论新知（值得进 `reading-list.md`）**：
+**Cambridge Core 的后置内容（References/Bibliography）文件名用 `bib`，不是 `c<N>`**——
+与 §「前置内容用 `mfm`」是同一类坑。**推不出来就先 fetch `/core/books/abs/<book-slug>/<item-slug>/<HASH>` 拿 "Save PDF" 链接。**
+另外：**一本 CUP 数学书的 References 章本身就是一个极好的 L1 书目源**——
+本轮就是靠它把 `bourbaki-lie-4-6`（Hermann 1968 / Masson 1981）与 `humphreys-1972` 的著录钉死的。
+
+**未解决 / 留给下一轮**
+
+- **Q39** **Chevalley 限制定理的带编号来源**（§44.4）。GTM 9 §23 的**内容**本轮完全没核到（L0），
+  `§23.1` 这一级零证据。候选入口：(i) 找一篇**逐字引了 `[Hum, §23.1]` 或 `[Hum, Theorem 23.1]`** 的论文；
+  (ii) Google Books 卷 `mSD4DvUFa6QC` 上再跑几个短语（该卷已验证诚实）；
+  (iii) 按 §44.7 的路线**根本不需要它**——先确认 curator 走哪条路，再决定要不要花额度。
+- **Q40** Humphreys *Reflection Groups* Table 1 的**完整验证**在 §3.9–3.20 / Ch.4 的哪一条（本轮只读到 §3.8）。
+  若图里要把「E₈ 次数表」标成 `rigorous`，最好补上这个定位。
+- **Q41** vRSV **式 (51) 的符号**（§44.5 末）：是排印错误、是我读图错误，还是另有约定？
+  影响面很小（图里不用它），但如果将来要引 vRSV 的字符生成函数，必须先结清。
+- **Q42** Fulton–Harris 的逐字（= §43.6 的 Q36），以及 **Bourbaki Planche VII 的正文**（本轮 0 次调用）。
+- **Q43** Slansky 1981 是否有可公开取得的全文（LA-UR 预印本号 / OSTI）——本轮**未查**（WebSearch 额度已耗尽）。
+  按 [[osti-doe-report-fulltext-route]]，`osti.gov` 的 `q="Group theory for unified model building"` 标题短语查询值得一试。
+
