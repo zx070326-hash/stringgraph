@@ -3564,6 +3564,631 @@ as the **canceled propagator argument**.」
 > **提醒**：本轮已把 ch.1/2/3/4/5/6/8 的 PDF 全部落盘（路径见会话 tool-results 目录，会话结束后可能被清理）。
 > **重取只需按 §12.0 的文件名规则再 fetch 一次，不需要重新找 hash。**
 
+---
+
+## 13. ★ 原书核实（2026-09-11，researcher 第七轮）——**§12.10 D 表的前五项**
+
+> **不覆盖 §1–§12 的任何条目。** 本节逐项追加，每项给证据等级、页码、逐字原文。
+> 路线与 §12.0 完全相同（Cambridge Core 章级 PDF + `Read` 读页图），**证据等级默认 `L1（原书页图逐字）`**；
+> 凡本节没提到的条目，其原有等级不变。
+
+| 本节 | §12.10 D 表 # | 目标 | 状态 |
+|---|---|---|---|
+| §13.1 | 1 | Appendix A eq. (A.1.31)：`e^{iS_L} = e^{−S_E}`（`conv.worldsheet-euclidean` 的 Wick 旋转锚点） | **✅ L1；★ 部分推翻：(A.1.31) 不是那个等式** |
+| §13.2 | 2 | References pp.347–358：是否列 Goddard–Thorn 1972 / Brower 1972 / Kato–Ogawa 1983 / Feigin–Fuchs / Kac（Q7(b)） | **✅ L1；★★ Q7(b) 关闭：前三个在，后两个不在** |
+| §13.3 | 3 | §1.2 pp.9–15：`T = 1/(2πα')` 的式号（Q1 最后一环）+ Nambu–Goto / Polyakov 式号 | **✅ L1；★ Q1 关闭：是 (1.2.10)，`(1.2.3)` 确证错误** |
+| §13.4 | — | §2.4 (2.4.17) 一带：`X^μ` 到底是不是主场（`curator-v1-locs` 未裁的歧义） | **✅ L1；★★ 裁决：自由标量 CFT 里 `X^μ` 是主场，图里的 note 写错了** |
+| §13.5 | 8 | §8.2 DDF 的 `k₀`：`q⁻` 还是 `q⁺`（Q23）；若有余力 §8.7 (8.7.2) DBI（Q25） | **✅ L1 两项都做了；Q23 原书=`q⁻`（不裁谁对）；Q25 (8.7.2) 逐字到手** |
+
+**⚠ 本轮新增的取书情报（补 §12.0 的文件名规则）**：**后置内容（附录、参考文献）与正文一样不遵守 `c<N>` 规则**，
+必须先 fetch `…/core/books/abs/string-theory/<item-slug>/<ITEM_HASH>` 取 "Save PDF" 链接。本轮实得两个：
+
+| item | 页 | 文件名 | item-slug |
+|---|---|---|---|
+| Appendix A | 329–346 | **`9780511816079apx1_p329-346_CBO.pdf`** | `appendix-a-a-short-course-on-path-integrals` |
+| References | 347–358 | **`9780511816079bib_p347-358_CBO.pdf`** | `references` |
+
+（对比：Notation = `…mfm_pxviii-xx_CBO.pdf`。所以 Vol.1 的前缀集合至少有 `mfm` / `c<N>` / `apx1` / `bib` 四种。）
+
+---
+
+### 13.1 【原书核实 2026-09-11】Appendix A eq. (A.1.31)——**★ 部分推翻 §12.1 的表述：(A.1.31) 不是 `e^{iS_L} = e^{−S_E}`**
+
+**证据等级：L1（原书页图逐字，App. A pp. 329–338 读完；(A.1.31) 在 p.335）。**
+
+#### (a) (A.1.31) 的逐字原文与确切位置
+
+**位置：Appendix A, §A.1「Bosonic fields」，斜体小标题 *Euclidean path integrals* 之下，p.335。**
+（该小标题起于 p.335 页首；(A.1.31) 在该页下半。）逐字：
+
+> "The weight in the Euclidean path integral is conventionally defined to be `exp(−S_E)`, so the Euclidean action
+> contains a minus sign,
+>
+>   `S_E = ∫ du L_E(q, ∂_u q) = − ∫ du L(q, i∂_u q) .`   (A.1.31)
+>
+> Euclidean path integrals are usually the more well-defined, because the exponential of the action is damped
+> rather than oscillatory. The Minkowski matrix elements can then be obtained by analytic continuation.
+> **In the text our main concern is the Euclidean path integral, which we use to represent the string S-matrix.**"
+
+#### (b) ★★ 必须订正的一点：**「`e^{iS_L} = e^{−S_E}`」这个等式在原书里根本不存在**
+
+- (A.1.31) 是 **`S_E` 的定义式**：`S_E = ∫du L_E(q,∂_u q) = −∫du L(q, i∂_u q)`。
+- 「权重是 `exp(−S_E)`」是 (A.1.31) **上方的散文**，**不是式子的一部分**，而且原书用的词是
+  "**conventionally defined to be**"（约定如此定义），不是「可以证明等于」。
+- 闵氏侧的权重 `exp[(i/ħ)∫dt L]` 在 **(A.1.14)**（p.331），欧氏侧的路径积分表达式在 **(A.1.30)**（p.335），
+  其权重逐字写作 `exp[∫₀^U du L(q, i∂_u q)]`（**指数上没有 `−S_E` 的字样，是 `+∫du L(q,i∂_uq)`**）。
+  **`e^{iS_L} = e^{−S_E}` 只有把 (A.1.14) + (A.1.30) + (A.1.31) 三者串起来才成立，而这个串接原书没有写成一个式子。**
+
+→ **给 `conv.worldsheet-euclidean` 的可执行结论**：
+  - loc 写 **`Appendix A, eq. (A.1.31), p.335`** 是对的（§12.10 B #2 的建议成立）；
+  - 但**节点文本不得写成 `e^{iS_L} = e^{−S_E}`** 并声称这是 (A.1.31)。要么逐字写 (A.1.31) 的 `S_E` 定义式，
+    要么把 `e^{iS_L} = e^{−S_E}` 标 `inferred: true`（由 (A.1.14)/(A.1.30)/(A.1.31) 合成）。
+  - 另建议把「conventionally defined」这个措辞写进 note：**这是约定，不是定理**，
+    与 §12.10 里其它「原书自称 convention」的条目（`d²z ≡ 2dxdy`、`T^{ab}` 差 `−2π`）同类。
+
+#### (c) 与 §2.1 `σ² = iσ⁰` 的接口：原书给的是 **`t = −iu`**，不是 `σ² = iσ⁰`
+
+p.335，*Euclidean path integrals* 小标题下的开头两段（逐字节选）：
+
+> "…one only encounters `exp(−iHΔt)` for positive `Δt`. Now continue analytically by uniformly rotating all times
+> in the complex plane, `t → e^{−iθ}t` for any phase `0 ≤ θ ≤ π`. The real part of the exponent is `−E sinθ Δt`,
+> where `E` is the energy of the intermediate state. Because the Hamiltonian is bounded below for a stable system,
+> the sum over intermediate states is safely convergent and no singularities are encountered — the continued
+> amplitude is well defined.
+>
+> **Taking the times to be purely imaginary, `t = −iu` for real `u`, defines the *Euclidean* amplitudes**, as opposed
+> to the *Minkowski* amplitudes studied above:"（→ (A.1.28) 欧氏、(A.1.29) 闵氏，(A.1.30) 欧氏路径积分）
+
+**两点值得图里记下：**
+1. **原书为 Wick 旋转给了一个真正的论证**（不是纯约定）：`t → e^{−iθ}t` 的均匀转动 + **哈密顿量下有界** ⇒ 中间态求和收敛、无奇点。
+   → 若建节点 `worldsheet.wick-rotation-well-defined`，`status` 可标 `physical-argument`，**依赖「`H` 下有界（稳定系统）」这条假设**，
+   loc = **App. A, p.335，(A.1.27)–(A.1.29) 之间的正文**。⚠ 这是量子力学单自由度的论证，
+   **原书没有说它对世界面 CFT / 弦 S-矩阵也成立**——搬运到世界面要标 `inferred`。
+2. `t = −iu`（App. A）与 `σ² = iσ⁰`（§2.1，见 §12.1 Q10）**方向一致**（`u = it`；`σ²` 即欧氏时间 `u`，`σ⁰` 即闵氏时间 `t`），
+   但**书里从未把这两个记号并排写出**，两者的桥接是抽取者的推断。若图里要连这条边，**标 `inferred: true`**。
+
+#### (d) 本轮顺带落实的 Appendix A 式号（供以后引用，全部 L1）
+
+| 式号 | 内容 | 页 |
+|---|---|---|
+| (A.1.12) | 哈密顿路径积分 `∫[dpdq]exp{(i/ħ)∫₀^T dt[pq̇ − H(p,q)]}` | 331 |
+| **(A.1.14)** | **拉氏路径积分 `⟨q_f,T|q_i,0⟩ = ∫[dq]exp[(i/ħ)∫₀^T dt L(q,q̇)]`**（闵氏权重 `exp(iS/ħ)`） | 331 |
+| (A.1.15) | cutting/sewing 关系；原书称之为 **world-sheet duality** | 332 |
+| (A.1.17)/(A.1.18) | 路径积分插入 ↔ **时序积** `T[Â(t)B̂(t′)]` | 333 |
+| **(A.1.19)–(A.1.21)** | **运动方程作为算子方程 / Schwinger–Dyson 方程 `q(t′)δS/δq(t) = iδ(t−t′)`** | 333–334 |
+| (A.1.27) | 时序积的 Schrödinger 表示 | 335 |
+| (A.1.28)/(A.1.29) | 欧氏振幅 / 闵氏振幅（前者定义为后者到 `t = −iu` 的延拓） | 335 |
+| **(A.1.30)** | **欧氏路径积分 `= ∫[dq]exp[∫₀^U du L(q, i∂_u q)]∏q(u_a)`** | 335 |
+| **(A.1.31)** | **`S_E = ∫du L_E(q,∂_u q) = −∫du L(q, i∂_u q)`** | **335** |
+| (A.1.33)/(A.1.34) | 周期/反周期路径积分 = `Tr exp(−ĤU)` / `Tr[exp(−ĤU)R̂]`；**「twisting 边界条件 = 在迹里插算符」** | 336 |
+| (A.1.36)/(A.1.37) | **欧氏 Heisenberg 算符不厄米**；定义 *Euclidean adjoint* `Ā(u) = Â(−u)†` | 336 |
+| (A.1.48) | `⟨1⟩ = (det Δ/2π)^{−1/2}` | 338 |
+| (A.1.49)/(A.1.50) | 复标量 / 两个实标量：`(det Δ)^{−1}` | 338 |
+
+**⚠ (A.1.19)–(A.1.21) 与 §2.1 的 E26（「运动方程作为算子方程」，§12.10 B #26 已订正为 (2.1.17)）是同一件事的两处**——
+原书 §2.1 的推导正是 App. A 这一套的搬运。若 `worldsheet.eom-as-operator-equation` 要挂完整来源，
+应同时挂 **(A.1.19)–(A.1.21)** 与 **(2.1.17)**。
+
+#### (e) ★ Appendix A 的两条作者自承缺口（补 §12.10 C 表，编号续 15）
+
+| # | 位置 | 逐字 | 影响 |
+|---|---|---|---|
+| **16** | **p.332** | 「The derivation of the path integral formula treated the continuum limit `ε → 0` **rather heuristically**. Renormalization theory is the study of this limiting process, and is rather well understood.」 | **全书的路径积分基础本身是 heuristic 的**，作者明说。任何以「Polyakov 路径积分」为根的链，其根部状态封顶 `physical-argument` |
+| **17** | **p.332** | 「**Actually, we will evaluate explicitly only a few Gaussian path integrals.** We use the path integral primarily to derive some general results, such as operator equations and sewing relations.」 | 说明本书用路径积分的方式是形式操作，不是可积分定义 |
+
+⚠ **本轮未读 App. A pp. 339–346**（含 §A.2 及之后，推测是费米场/Grassmann）。若日后要 `bc` 鬼场路径积分的一手依据，需补读。
+
+---
+
+### 13.2 【原书核实 2026-09-11】书末 References（pp. 347–358）——**★★ Q7(b) 关闭：Polchinski 引了 Goddard–Thorn 与 Brower，且明说自己的证明"loosely patterned on" Kato–Ogawa**
+
+**证据等级：L1（原书页图逐字，pp. 347–358 全 12 页读完）。**
+
+#### (a) ★★ 第 4 章注记（p.350）逐字全文——**这是全项目最想要的一段**
+
+> **Chapter 4**
+>
+> "**Classic proofs of the OCQ no-ghost theorem are Brower (1972) and Goddard & Thorn (1972).** The basic
+> reference on quantization with constraints is Dirac (1950); a review is Henneaux (1985). The BRST symmetry
+> in gauge theory is discussed in modern field theory texts. The structure of its cohomology is discussed in
+> Kugo & Ojima (1979). **The BRST operator for field theory is derived in Kato & Ogawa (1983); our proof of
+> the no-ghost theorem is loosely patterned on the one in that paper.** Other proofs in the BRST context are
+> Freeman & Olive (1986), Frenkel, Garland, & Zuckerman (1986), and Thorn (1987)."
+
+**对 Q7(b) 的裁决：**
+- §12.10 A 表 Q7(b) 记的「**§4.1–§4.4 与全部习题中没有任何引文**」**仍然成立且不必改**——那是关于**正文**的。
+- 但由此**不能**推出「Polchinski 不承认 Goddard–Thorn/Brower」。**书末注记明确把两者列为 "classic proofs"。**
+  这一点与 §13.3(f) 记的编辑方针（p.9「Annotated reference lists appear at the end of each volume」）一致：
+  **本书正文体例就是不放引文，引文全部集中在书末注记。**
+- **★ 归属关系的硬结论**：Polchinski §4.4 的 BRST 证明，**作者本人自陈是 "loosely patterned on" Kato & Ogawa (1983)**，
+  **不是** patterned on Goddard–Thorn。GT/Brower 被归类为 **OCQ**（老协变量子化）的经典证明，与 §4.4 的 BRST 证明**分属两条路线**。
+  → 图里 `worldsheet.no-ghost-theorem-v4`（挂 Polchinski §4.4）与 `goddard-thorn-1972` 之间**不应画成「Polchinski 复述 GT」**；
+    正确的边是 `polchinski §4.4 —(loosely patterned on)→ kato-ogawa-1983`，**且这条边有原书 L1 背书**。
+    GT/Brower 与 §4.1 的 OCQ 陈述（(4.1.20)）之间才是「同一定理的不同证明」关系。
+  ⚠ "**loosely** patterned on" 是原书用词，**不是「follows」也不是「reproduces」**——搬到图里要保留这个限定词。
+
+#### (b) ★ 五个目标条目的完整书目数据（逐字，pp. 353–358 字母表）
+
+| 目标 | 是否在列 | 逐字条目 |
+|---|---|---|
+| **Goddard–Thorn 1972** | **✅ 在** | "Goddard, P., & Thorn, C. B. (1972). *Compatibility of the dual Pomeron with unitarity and the absence of ghosts in the dual resonance model.* **Physics Letters, B40**, 235."（p.354） |
+| **Brower 1972** | **✅ 在** | "Brower, R. C. (1972). *Spectrum-generating algebra and no-ghost theorem for the dual model.* **Physical Review, D6**, 1655."（p.353） |
+| **Kato–Ogawa 1983** | **✅ 在** | "Kato, M., & Ogawa, K. (1983). *Covariant quantization of string based on BRS invariance.* **Nuclear Physics, B212**, 443."（p.355） |
+| **Feigin–Fuchs** | **❌ 不在** | pp.353–354 字母表 Faddeev → Fradkin → Freeman → Frenkel → Friedan **之间没有 Feigin/Fuchs 条目**（negative evidence，L1） |
+| **Kac** | **❌ 不在** | p.355 字母表 Kato → Kawai → Kazakov → Kiritsis → Klebanov → Kugo **之间没有 Kac 条目**（negative evidence，L1） |
+
+**→ 与 §12.10 A 表 Q5 完全一致**：Polchinski Vol.1 **在正文和参考文献两个层面都不接触 Kac 行列式 / Feigin–Fuchs**。
+`worldsheet.kac-determinant` 挂 `kac-1979` / `feigin-fuchs-1982` 的决定**得到第二重独立确认**，
+且**不得**再给它挂任何 `polchinski-1998-v1` 的 loc。
+
+#### (c) ★ 第 4 章注记里另外四条 BRST 无鬼定理证明（全部是本项目可直接登记的一手候选）
+
+| 条目 | 逐字 | 页 |
+|---|---|---|
+| Freeman & Olive (1986) | "*BRS cohomology in string theory and the no-ghost theorem.* **Physics Letters, B175**, 151." | 354 |
+| **Frenkel, Garland, & Zuckerman (1986)** | "*Semi-infinite cohomology and string theory.* **Proceedings of the National Academy of Sciences, 83**, 8442." | 354 |
+| **Thorn (1987)** | "Thorn, C. B. (1987). *A detailed study of the physical state conditions in covariantly quantized string theories.* **Nuclear Physics, B286**, 61." | 358 |
+| Kugo & Ojima (1979) | "*Local covariant operator formulation of non-Abelian gauge theories and quark confinement problem.* **Supplement to Progress of Theoretical Physics, 66**, 1." | 355 |
+| Dirac (1950) | "*Generalized Hamiltonian dynamics.* **Canadian Journal of Mathematics, 2**, 129." | 353 |
+| Henneaux (1985) | "*Hamiltonian form of the path integral for theories with a gauge freedom.* **Physics Reports, 126**, 1." | 355 |
+
+**⚠⚠ 对 `reading-list.md` 里 "thorn-1984 / thorn-1985 易混" 那条的重要补充：Polchinski 引的是第三篇 —— Thorn (1987) Nucl. Phys. B286, 61。**
+**书末字母表里 Thorn 名下只有三条**（p.358 与 p.353/354 交叉）：Chodos & Thorn (1974)、Goddard, Goldstone, Rebbi & Thorn (1973)、
+Goddard & Thorn (1972)、**Thorn (1987) Nucl.Phys.B286,61**、**Thorn (1989) Phys.Rep.175,1（弦场论综述）**。
+**`thorn-1985`（MSRI 论文集，"A proof of the no-ghost theorem using the Kac determinant"）不在 Polchinski 的参考文献里**（negative evidence，L1）。
+→ 即：**Polchinski 完全没有提到「用 Kac 行列式证无鬼定理」这条路线**，与 (b) 的 Kac/Feigin–Fuchs 缺席相互印证。
+
+#### (d) ★ 第 1 章注记（p.349）——**给 `critical-dimension--via-lightcone` 补上了它缺的那个来源**
+
+> **Chapter 1**
+>
+> "…**The classical motion of the string and light-cone quantization are discussed in Goddard, Goldstone, Rebbi,
+> & Thorn (1973) and in the reviews by Rebbi (1974) and Scherk (1975). The first two of these include a careful
+> treatment of Lorentz invariance. The heuristic argument that we have given is based on Brink & Nielsen (1973).**
+> Weinberg (1964) discusses the couplings of massless vector and tensor particles."
+
+**这一段直接闭合 §12.10 C 表 #2 那个缺口**（p.21「We do not wish to spend this much time on light-cone quantization …
+plausible without a complete treatment」）：**原书把「careful treatment of Lorentz invariance」外包给了具体文献**，
+并且**自称自己给的是 "the heuristic argument … based on Brink & Nielsen (1973)"**。
+
+| 条目 | 逐字 | 页 |
+|---|---|---|
+| **Goddard, Goldstone, Rebbi & Thorn (1973)** | "*Quantum dynamics of a massless relativistic string.* **Nuclear Physics, B56**, 109." | 354 |
+| **Brink & Nielsen (1973)** | "*A simple physical interpretation of the critical dimension of spacetime in dual models.* **Physics Letters, B45**, 332." | 353 |
+| Rebbi (1974) | "*Dual models and relativistic quantum strings.* **Physics Reports, 12**, 1." | 357 |
+| Scherk (1975) | "*An introduction to the theory of dual models and strings.* **Reviews of Modern Physics, 47**, 123." | 357 |
+
+→ **对图的可执行建议**：`critical-dimension--via-lightcone` 的 `status` 仍按 §12.10 A 表 Q2 封顶 `physical-argument`
+（因为**本书**给的是 heuristic 论证），但应**新增一条独立 derivation**，`sources` 指向 **GGRT 1973**，
+并在 note 里逐字引 p.349 这两句作为「Polchinski 自己把严格性外包给谁」的书面依据。
+**GGRT 1973 应立即进 `reading-list.md`（建议 P1）与 `sources.bib`**，key 建议 `goddard-goldstone-rebbi-thorn-1973`。
+⚠ 注意 Brink & Nielsen (1973) 是 **Brink, L., & Nielsen, H. B.**，与 §1.2 里 Polyakov 作用量的发现者 "Brink, Di Vecchia, and Howe" **不是同一篇**（见 (f)）。
+
+#### (e) 其它章节注记里对本项目有直接价值的条目（L1 逐字节选）
+
+| 章 | 注记原文（节选） | 用途 |
+|---|---|---|
+| **2**（p.349） | "Friedan, Martinec, & Shenker (1986) covers many of the subjects in this chapter. **Belavin, Polyakov, & Zamolodchikov (1984) is a classic reference on CFT**, but directed at the advanced topics to be treated in chapter 15. Ginsparg (1990) is a review of CFT…" | CFT 章的一手来源；**BPZ 是 Nucl. Phys. B241, 333**（p.352） |
+| **3**（p.349） | "Additional references on the Polyakov path integral are **Polyakov (1981)**, Friedan (1982), and Alvarez (1983). … The basic steps follow the original reference **Faddeev & Popov (1967)**. … **Gravitational anomalies are discussed in Alvarez-Gaumé & Witten (1983).**" | E50 的 FP 一手来源 = **Phys. Lett. B25, 29**；AGW = **Nucl. Phys. B234, 269**（与本项目 `alvarez-gaume-witten-1984` 记忆一致，**注意 Polchinski 标年份 1983 不是 1984**） |
+| **3**（p.349） | "**The linear dilaton theory is discussed as a CFT by Chodos & Thorn (1974)** and as a string background by Myers (1987)." | E35（线性 dilaton CFT）的一手来源 |
+| **5**（p.350） | "**D'Hoker & Phong (1988) is an extensive review** … **The measure on moduli space is obtained in Moore & Nelson (1986) and D'Hoker & Phong (1986)**; see also Alvarez (1983)." | E77/E80 的模空间测度一手来源（**本书正文不证**） |
+| **6**（p.350） | "**The relation of closed to open string tree-level amplitudes is given in Kawai, Lewellen, & Tye (1986).**" | **E108（KLT）的一手来源 = Nucl. Phys. B269, 1** |
+| **8**（p.351） | "**Giveon, Porrati, & Rabinovici (1994) review toroidal compactification and T-duality.** Polchinski (1997) reviews T-duality of open and unoriented strings, and D-branes. Further references on toroidal compactification are **Narain (1986)** and **Narain, Sarmadi, & Witten (1987)**." | E138–E142（Narain）的一手来源 |
+| **9**（p.351） | "…**section 9.1 gives the BRST version of the argument**…" | — |
+
+#### (f) ★ 三条 negative evidence（都会影响图的挂载决策）
+
+1. **Polyakov 作用量的原始发现者不在参考文献里。** §1.2 p.12 正文点名 "Brink, Di Vecchia, and Howe" 与 "Deser and Zumino"（见 §13.3(e)），
+   但字母表 p.353 的 Brink 名下**只有 Brink & Nielsen (1973)**，且**全表没有 Deser 条目、没有 Di Vecchia 条目、没有 Howe 条目**。
+   → **`worldsheet.polyakov-action` 想挂原始文献，Polchinski 帮不上忙**，必须另行检索 BDVH / DZ 1976 的原文。
+2. **Buscher (1987)/(1988) 与 Roček & Verlinde (1992) 在字母表里（p.353 / p.357），但本轮在第 1–9 章的注记段落里没有找到引用它们的句子。**
+   （Buscher 1987 = Phys.Lett. **B194**, 59「A symmetry of the string background field equations」；
+   Buscher 1988 = Phys.Lett. **B201**, 466；Roček & Verlinde 1992 = Nucl.Phys. **B373**, 630, hep-th/9110053。）
+   → 对 Q20 有用：**Vol.1 第 8 章的注记给 T 对偶列的是 Giveon–Porrati–Rabinovici 综述 + Polchinski (1997) TASI，不是 Buscher。**
+   ⚠ 但**这三条书目数据本身是 L1 的**，`sources.bib` 登记 `rocek-verlinde-1992`（§11 Q20 的建议）可以直接用这里的数据。
+   ⚠ **诚实标注**：「注记里没有」是本轮逐段通读 pp.349–352 得到的，但注记是散文，**存在漏读的可能**；
+   若图里要依赖这条 negative evidence，建议复核一次。
+3. **Lovelace (1971)（Phys.Lett. B34, 500，`D = 26` 的历史起点）与 Shapiro (1972)（Phys.Rev. D5, 1945，Virasoro–Shapiro）
+   同样只在字母表里出现（p.355 / p.357），本轮没在第 1–9 章注记里找到引用句。**
+   合理解释是 p.348 的 "A brief history" 一节（该节提到 "the critical dimension (26)" 但**通篇不带引文**）。
+   → **不要**因为「Polchinski 列了 Lovelace 1971」就认为他把 `D=26` 归属给 Lovelace；**书里没有这句话**。
+
+#### (g) 参考文献一节自己的两句方法论声明（L1，值得写进 `sources.bib` 的 note）
+
+p.347 逐字：
+
+> "The literature on the subjects covered in these two volumes easily exceeds 5000 papers, and probably approaches
+> twice that number. **To represent accurately the contributions of all who have worked in these many areas is an
+> undertaking beyond the scope of this book.** Rather, I have tried to assemble a list that is short enough to be
+> useful in developing specific subjects and in giving points of entry to the literature. The resulting list includes
+> many review articles, **plus papers from the original literature where I felt they were needed to supplement the
+> treatment in the text.**"
+
+> "For a list of corrections and other useful information see  `http://www.itp.ucsb.edu/~joep/bigbook.html` ."
+
+**★ 第二句是 §11 Q24 追了很久的官方勘误表 URL 的一手出处。** 逐字是 **`www.itp.ucsb.edu/~joep/bigbook.html`**
+（注意是 **`itp`** 不是 `kitp`，且路径是 **`~joep/bigbook.html`**，不是 `joes-big-book-string` 也不是 `errata`）。
+→ Q24 里记的三条试过的 URL **都不是书上印的那条**。这条应作为**新的、未试过的**候选写进待办
+（本轮不试，researcher 只做文献核实；且 §12.10 A 表 Q24 已说明 Core 版本身含 2000 年 corrections，紧迫性已下降）。
+
+---
+
+### 13.4 【原书核实 2026-09-11】§2.4 (2.4.17) 一带——**★★ 裁决：在自由标量 CFT 里 `X^μ` **是**主场；`primary-field` 卡的 note 写错了**
+
+**证据等级：L1（原书页图逐字，pp. 43–49 全部读完）。**
+
+#### (a) 决定性的一句：**(2.4.17) 正下方，p.47 第一行**
+
+> "**All transform as tensors except `∂²X^μ`.**"
+
+这句话紧跟在 (2.4.17) 的权表之后，**其主语就是 (2.4.17) 里列出的全部五个算符**。逐字转录 (2.4.17)（p.46）：
+
+>   `X^μ`  `(0,0)` ,      `∂X^μ`  `(1,0)` ,
+>   `∂̄X^μ` `(0,1)` ,      `∂²X^μ` `(2,0)` ,     (2.4.17)
+>   `:e^{ik·X}:`  `(α'k²/4, α'k²/4)` .
+
+**→ 结论：Polchinski 明确把 `X^μ` 算作 tensor / primary field，权 `(0,0)`；唯一的例外是 `∂²X^μ`。**
+（原书 p.46 (2.4.15) 上方逐字：「An important special case is a *tensor operator* or *primary field* `𝒪`」——
+**"tensor operator" 与 "primary field" 在本书里是同义词**，所以 "transform as tensors" = "是主场"。）
+
+#### (b) 为什么 (2.4.6) 与 (2.4.7) **不是**「`X^μ` 非主场」的证据——歧义的根源
+
+`curator-v1-locs` 未裁的那个疑点（「(2.4.6) 的 `T·X` OPE 只有单极点」）**本身正是 `h = 0` 主场的定义**：
+
+| 式号 | 逐字 | 说明 |
+|---|---|---|
+| (2.4.14) | `T(z)𝒜(0,0) = … + (h/z²)𝒜(0,0) + (1/z)∂𝒜(0,0) + …` | **一般**算符的 OPE（`…` 表示可能有更奇异项） |
+| **(2.4.16)** | `T(z)𝒪(0,0) = (h/z²)𝒪(0,0) + (1/z)∂𝒪(0,0) + …`，原书紧接一句「**the more singular terms in the general OPE (2.4.14) being absent**」 | **主场**的 OPE |
+| **(2.4.6)** | `T(z)X^μ(0) ∼ (1/z)∂X^μ(0)` , `T̃(z̄)X^μ(0) ∼ (1/z̄)∂̄X^μ(0)` | **就是 (2.4.16) 在 `h = h̃ = 0` 的特例**：`h/z²` 项因 `h=0` 消失，无更奇异项 ⇒ **主场** |
+| (2.4.15) | `𝒪'(z',z̄') = (∂_z z')^{−h}(∂_z̄ z̄')^{−h̃} 𝒪(z,z̄)` | 主场的**有限**变换 |
+| **(2.4.7)** | `δX^μ = −εv(z)∂X^μ − εv(z)*∂̄X^μ` | **就是 (2.4.15) 在 `h = h̃ = 0` 的无穷小形式**（无非齐次项）⇒ **主场** |
+
+**→ `graph` 里 `primary-field` 卡 notes 现写的「`X^μ` 不是主场 ((2.4.7))」是错的，必须删除或改写。**
+(2.4.7) 恰恰是 `X^μ` **是** `(0,0)` 主场的证据，不是反证。
+
+#### (c) ★ 但「`X^μ` 不是 tensor」这句话**在书里确实存在**——只是在**另一个 CFT** 里
+
+**p.49，§2.5「Free CFTs」→ *Linear dilaton CFT*，(2.5.3) 正下方，逐字**：
+
+> "`δX^μ = −εv∂X^μ − εv*∂̄X^μ − (ε/2)α'V^μ[∂v + (∂v)*]` .   (2.5.3)
+>
+> **This is a *different* conformal symmetry of the same action. The field `X^μ` no longer transforms as a tensor,
+> its variation now having an inhomogeneous piece.** Incidentally, the free massless scalar in two dimensions has
+> a remarkably large amount of symmetry — much more than we will have occasion to mention."
+
+**这就是整个歧义的来源**：同一个作用量 (2.1.10) 上有两个不同的共形对称性；
+- **普通自由标量 CFT**（`T` = (2.4.4)）：`X^μ` **是** `(0,0)` 主场（(2.4.6)/(2.4.7)/(2.4.17)）；
+- **线性 dilaton CFT**（`T` = (2.5.1a,b)，`c = D + 6α'V_μV^μ` = (2.5.2)）：`X^μ` **不是** tensor（(2.5.3)，有非齐次项）。
+
+原书 p.49 还明写「**so different values of `V^μ` are to be regarded as different CFTs**」——**两者是不同的 CFT，不是同一个理论的两种说法。**
+
+**→ 对图的可执行动作**：`primary-field` 卡的 note 应改成
+「在自由标量 CFT 中 `X^μ` 是权 `(0,0)` 的主场（§2.4, (2.4.6)/(2.4.7)/(2.4.17) + p.47 "All transform as tensors except `∂²X^μ`"）；
+`X^μ` 不是 tensor 的说法只对**线性 dilaton CFT** 成立（§2.5, (2.5.3), p.49）。**引用时必须声明是哪一个 CFT。**」
+
+#### (d) ★ 同页另一个必须记下的陷阱：正规序乘积**不继承**朴素变换律
+
+p.47，(2.4.21) 一带逐字：
+
+> "Notice that **the conformal transformation properties of normal ordered products are not in general given by the
+> naive transformations of the product.** For example, the transformation law (2.4.7) for `X^μ` would naively imply
+>
+>   `δe^{ik·X} = −εv(z)∂e^{ik·X} − εv(z)*∂̄e^{ik·X}`   (naive)   (2.4.21)
+>
+> for the exponential, **making it a tensor of weight `(0,0)`. The modification is a quantum effect**, due to the
+> renormalization needed to define the product of operators at a point. Specifically it enters here because the
+> subtraction `ln|z₁₂|²` in `: :` makes explicit reference to the coordinate frame."
+
+**→ 这一条对图很重要**：`X^μ` 是 `(0,0)` 主场，**但不能由此推出 `:e^{ik·X}:` 是 `(0,0)`**——它的权是 `(α'k²/4, α'k²/4)`（(2.4.17)/(2.4.19)）。
+**(2.4.21) 是原书唯一一个明确标 "(naive)" 的式号**，本身就是一个「不要这样推」的路标。
+若图里有 `worldsheet.tachyon-vertex-operator-weight` 之类的节点，其依赖**不能**写成「由 `X^μ` 的权推出」。
+
+#### (e) §2.4 其余式号的逐条落实（补 §12.1，全部 L1）
+
+| 式号 | 内容 | 页 |
+|---|---|---|
+| (2.4.1) | `T_{zz̄} = 0`（无迹的复坐标形式） | 43 |
+| (2.4.2) | `∂̄T_{zz} = ∂T_{z̄z̄} = 0` | 43 |
+| (2.4.3) | `T(z) ≡ T_{zz}(z)`, `T̃(z̄) ≡ T_{z̄z̄}(z̄)` | 43 |
+| **(2.4.4)** | `T(z) = −(1/α'):∂X^μ∂X_μ:`, `T̃(z̄) = −(1/α'):∂̄X^μ∂̄X_μ:` | 44 | **✓ 印证 §12.10 B #24** |
+| (2.4.5) | `j(z) = iv(z)T(z)`, `j̃(z̄) = iv(z)*T̃(z̄)` | 44 |
+| (2.4.8) | `X'^μ(z',z̄') = X^μ(z,z̄)`, `z' = f(z)`（**共形变换的定义**） | 44 |
+| (2.4.9) | `z' = ζz`（刚性标度+转动） | 44 |
+| (2.4.11) | `T(z)𝒜(0,0) ∼ Σ_{n≥0} (1/z^{n+1})𝒜^{(n)}(0,0)`（Laurent 展开） | 45 |
+| (2.4.12) | Ward 恒等式给出 `δ𝒜`，**「the operators `𝒜^{(n)}` are determined by the conformal transformation of `𝒜`」** | 46 |
+| (2.4.13) | `𝒜'(z',z̄') = ζ^{−h}ζ̄^{−h̃}𝒜(z,z̄)`（**权 `(h,h̃)` 的定义**） | 46 |
+| (2.4.18)/(2.4.19) | 一般导数积乘指数的权 `(α'k²/4 + Σm_i, α'k²/4 + Σn_j)` | 47 |
+| (2.4.20) | 一般两算符 OPE 的 `z` 依赖被刚性对称性完全定出；原书紧接一句「**they determine the OPEs of *all* fields in terms of those of the primary fields. We will develop this in chapter 15**」 | 47 |
+| (2.4.22)–(2.4.27) | `TT` OPE / `c` / Schwarzian，见 §12.1（本轮复核无误） | 47–48 |
+
+⚠ **(2.4.20) 那句话值得单独记**：「主场的 OPE 决定一切场的 OPE」这条 CFT 基本命题，
+**Polchinski 在 Vol.1 §2.4 只是断言并推迟到第 15 章**（Vol.2）。若图里有对应节点，loc 应写 **§2.4, (2.4.20) 下方, p.47**，
+并标明**本处无证明**。
+
+#### (f) 一条术语约定（p.46 脚注 3，逐字）——影响所有「场 vs 算符」的节点措辞
+
+> "In quantum field theory, one usually distinguishes the fundamental fields (the variables of integration in the
+> path integral) from more general operators which may be composite. Actually, this distinction is primarily useful
+> in weakly coupled field theories in three or more dimensions. It is of little use in CFT, in particular because of
+> equivalences between different field theories, and so **the term *field* is used for any local operator**."
+
+→ 建议写进 `conv.` 或 `primary-field` 的 note：**在本书里「field」= 任意局域算符，不限于路径积分的积分变量。**
+
+---
+
+### 13.5 【原书核实 2026-09-11】§8.2 DDF 的 `k₀`（Q23）与 §8.7 DBI（Q25）——**两个洞都补上了**
+
+**证据等级：L1（原书页图逐字；ch.8 pp. 236–241 与 pp. 268–270）。**
+
+#### (a) ★★ Q23：原书写的是 **`q^−`**，且**这句话没有式号**
+
+**p.240，小标题 *DDF operators* 之下，(8.2.30) 下方的正文，逐字**：
+
+> "Consider the action of the DDF operators on a state of given momentum `q`. The OPE of `V^i(nk_0,z)` with the
+> vertex operator for this state involves `z^{−α'nk_0q^−/2}` and so is **single-valued if we fix `k_0 = 2/α'q^−`**.
+> The contour integral (8.2.29) then defines a sensible operator in this sector."
+
+**三条硬结论：**
+1. **原书（Cambridge Books Online 2005 版，已含 2000 年 corrections）写的确实是 `q^−`。**
+   → Schrans 说「不在 Joe 勘误表上」**得到独立印证**：**到 2005 版为止这一处都没有被改。**
+2. **`k₀ = 2/α'q^−` 在原书里没有式号**，是 p.240 的**行内正文**。
+   （§10 里记的「这条式子的式号本身也不知道」——现在答案是：**根本没有式号**。）
+   → 图里任何引用这条的 loc **只能写 `§8.2, p.240, (8.2.29)–(8.2.30) 下方正文（无式号）`**。
+3. ⚠ **Q23 的「谁对」本轮不裁决**（researcher 不做推断入库），但**原书内部有一处纯转录层面的张力值得记下**：
+   紧邻的 **(8.2.30) 写的是 `p^+`**——
+
+   > `[A^i_m, A^j_n] = mδ^{ij}δ_{m,−n} α'k_0p^+/2` ,   (8.2.30)
+   >
+   > 原书下一句：「which is an oscillator algebra, **up to normalization**.」
+
+   即：**同一段里，对易子的归一化因子用的是 `p^+`，而 `k₀` 的定则用的是 `q^−`。**
+   这是**页图上可直接读到的文本事实**，不是抽取者的推算。
+   → **curator 的可执行动作**：建节点时**两个版本都不写死**（维持 §11 Q23 的裁决），
+     但 note 里必须同时记「原书 p.240 正文 = `q^−`」「原书 (8.2.30) = `p^+`」「[S] 主张应为 `q^+`」三条，
+     并标 `status` 不高于 `physical-argument`。
+   ⚠ **明确标注**：由 (8.2.30) 的 `p^+` 去论证 `k₀` 该用 `q^+`，**是推断，不得作为抽取内容入库**。
+
+#### (b) ★★ 同页的重大收获：**§8.2 自己把 DDF 接到了 (4.4.19)**
+
+p.240，*DDF operators* 段落的**第一句**与**最后一句**，逐字：
+
+> （首句）"We have just seen that the exponential operator can be separated into holomorphic and antiholomorphic
+> parts. This has many applications. **We now use it to tie up a loose end from the end of chapter 4, the DDF operators.**"
+
+> （末句）"The DDF operators, being integrals of `(1,0)` tensors, **commute with the Virasoro generators and so take
+> physical states into physical states.** It follows that we can build physical states by acting with the DDF operators
+> on the oscillator ground state. **The states obtained in this way are in one-to-one correspondence with the light-cone
+> states, and so are a complete set of physical states.** The DDF operators do not involve `X^−` and so these states
+> have no `α^−_{−m}` excitations. **They are therefore the same states given by the more general but less explicit
+> construction (4.4.19).**"
+
+**→ 这是 §12.10 B #22（「DDF ↔ §4.4 的边不必标 inferred」）的第二个、也是更强的一手依据。**
+§12 那条引的是 p.143（第 4 章一侧）；**现在第 8 章一侧也有了，而且原书直接点名式号 (4.4.19)。**
+→ `worldsheet.ddf-operators` ↔ `worldsheet.no-ghost-theorem-v4` 之间的边，
+   loc 可同时写 **§4.4 (4.4.19) + §8.2 p.240**，**`inferred: false`**。
+⚠ 注意原书这里给出的是**「同一组态」**的断言，**不是**「DDF 给出无鬼定理的另一个证明」。**别过度解读。**
+
+#### (c) §8.2 DDF 的全部式号（E125 的逐条落实，全部 L1）
+
+| 式号 | 逐字 | 页 |
+|---|---|---|
+| (8.2.26) | `X^+(z)X^−(0) ∼ (α'/2)ln z` , `X^+(z)X^+(0) ∼ X^−(z)X^−(0) ∼ 0`（并声明 `X^± = 2^{−1/2}(X⁰ ± X¹)`，且「**we drop the subscript `L`**」——**只取全纯部分**） | 240 |
+| **(8.2.27)** | `V^i(nk_0,z) = ∂X^i(z)e^{ink_0X^+(z)}(2/α')^{1/2}`，原书紧接「with `i` transverse are **`(1,0)` primary fields**」 | 240 |
+| (8.2.28) | `V^i(nk_0,z)V^j(mk_0,0) ∼ −(δ^{ij}/z²)e^{i(n+m)k_0X^+(0)} − (ink_0δ^{ij}/z)∂X^+(0)e^{i(n+m)k_0X^+(0)}` | 240 |
+| **(8.2.29)** | **`A^i_n = ∮ (dz/2π) V^i(nk_0,z)`（DDF 算子的定义式）** | 240 |
+| **(8.2.30)** | **`[A^i_m, A^j_n] = mδ^{ij}δ_{m,−n} α'k_0p^+/2`** | 240 |
+| （无式号） | **`k_0 = 2/α'q^−`** | 240 |
+
+⚠ **(8.2.29) 的围道积分测度原书写的是 `dz/2π`，不是 `dz/2πi`**（页图清晰）。搬运时注意。
+⚠ **`X^±` 的 `2^{−1/2}` 因子在这里是明写的**——这与 §12 里记的「§1.3 的 `x^±` 的 `1/√2` 因子未核实」（E10 备注）互补：
+**至少在 §8.2 p.240，Polchinski 用的是带 `2^{−1/2}` 的约定。**
+
+#### (d) ★ Q25：(8.7.2) 的 DBI 作用量**逐字到手**，且原书自己用的词是 "**We claim**"
+
+**p.270，小标题 *The D-brane action* 之下，逐字**：
+
+> "Introduce coordinates `ξ^a`, `a = 0, … p` on the brane. The fields on the brane are the embedding `X^μ(ξ)` and
+> the gauge field `A_a(ξ)`. **We claim that the action is**
+>
+>   `S_p = −T_p ∫ d^{p+1}ξ e^{−Φ}[−det(G_ab + B_ab + 2πα'F_ab)]^{1/2}` ,   (8.7.2)
+>
+> **with `T_p` a constant to be determined later.** Here
+>
+>   `G_ab(ξ) = (∂X^μ/∂ξ^a)(∂X^ν/∂ξ^b)G_μν(X(ξ))` ,  `B_ab(ξ) = (∂X^μ/∂ξ^a)(∂X^ν/∂ξ^b)B_μν(X(ξ))`   (8.7.3)
+>
+> are the induced metric and antisymmetric tensor on the brane.
+>
+> **All features of the action (8.7.2) can be understood from general reasoning.** Considering first just the spacetime
+> metric and the embedding, the simplest and lowest-derivative coordinate-invariant action is the integral of
+> `(−det G_ab)^{1/2}`, the world-volume. …
+>
+> The dilaton dependence `e^{−Φ} ∝ g_c^{−1}` arises because **this is an open string tree-level action.** …"
+
+**对 §11 Q25 的处理（三条订正）：**
+1. **§11 Q25 说「没有任何源从原书抄出 (8.7.2)」——现在有了，逐字如上。**
+   `curator` **可以**把 (8.7.2) 的显式表达式挂到 `polchinski-1998-v1`，loc = **§8.7, eq. (8.7.2), p.270**。
+2. **★ 规范不变组合的符号要改**：原书是 **`G_ab + B_ab + 2πα'F_ab`**（**`B` 与 `2πα'F` 同号**），
+   **不是** §11 Q25 建议的弱陈述里写的「`2πα'F_ab − B_ab`」。**按原书写 `+`。**
+3. **★ 状态判定**：原书的措辞是「**We claim** that the action is …」+「All features … can be understood from
+   **general reasoning**」——**这是明确的物理论证/合理性论证，不是推导**。
+   → `worldsheet.dbi-action` 的 `status` 应为 **`physical-argument`**，note 里逐字引这两句。
+   **不要**因为「原书给了显式式子」就升级状态。
+4. **`T_p` 仍不可引**：原书 (8.7.2) 处只说 "a constant to be determined later"。
+   §11 Q25 里「不得把 `T_p` 的数值挂到 `polchinski-1998-v1`」的禁令**在本轮范围内维持**
+   （本轮**没有**读到 (8.7.20)/(8.7.26)，`τ_p` 与 `T_p` 的归一化关系仍未核实）。
+   ⚠ 但有一处旧记录要松动：**原书 (8.7.2) 用的符号就是 `T_p`**，与 [S] 用的符号相同；
+     所以 §11 Q25 说的「[S] 的 `T_p` 与原书的 `τ_p` 归一化不同」**这个对比是在两个不同式子之间做的**，
+     不是 `T_p` 这个符号本身有问题。
+
+#### (e) §8.7 顺带落实的两条（L1）
+
+| 位置 | 逐字 | 用途 |
+|---|---|---|
+| **p.269** | "Thus the hyperplane is indeed a dynamical object, a **Dirichlet membrane, or *D-brane* for short**. The `p`-dimensional D-brane, from dualizing `25 − p` dimensions, is a D`p`-brane. In this terminology, **the original `U(n)` open string theory contains `n` D25-branes.**" | **「D-brane」一词在 Vol.1 的定义位置** = §8.7, p.269（E154） |
+| **p.269** | "In the superstring, we will use this to argue that D-branes are an essential part of the nonperturbative definition of the theory. **For the bosonic string we will not try to make this argument because there is no strong argument that the theory has a nonperturbative definition.** It is possible that bosonic string theory exists only as a mutilation of superstring theory." | **★ 补 §12.10 C 表的作者自承缺口（编号 18）**：玻色弦的非微扰定义，原书明说没有 |
+| (8.7.1a,b) | `α^μ_{−1}|k;ii⟩`, `𝒱 = i∂_tX^μ` / `α^{25}_{−1}|k;ii⟩`, `𝒱 = i∂_tX^{25} = ∂_nX'^{25}` | E153 的式号 |
+
+---
+
+### 13.9 本轮对图的建议（loc / notes 修改清单）
+
+**按「必须改」→「建议新增」→「维持但补 note」三档排列。列的含义同 §12.10 B。**
+
+#### A. 必须改（本轮证明现有内容是错的）
+
+| # | 节点 / 条目 | 现状 | **改成** | 依据 |
+|---|---|---|---|---|
+| **1** | **`conv.alpha-prime-regge`** | loc = **(1.2.3)** | **`§1.2, eq. (1.2.10), p.11`**；note 加「原书把该关系标为 **exercise 1.1**，正文不推导」 | §13.3(a)。**(1.2.3) 实为点粒子作用量的变分，与 `α'` 无关** |
+| **2** | **`primary-field` 卡 notes** | 「`X^μ` 不是主场 ((2.4.7))」 | **删除。** 改成「自由标量 CFT 中 `X^μ` **是**权 `(0,0)` 主场（(2.4.6)/(2.4.7)/(2.4.17) + p.47 "All transform as tensors except `∂²X^μ`"）；**只有线性 dilaton CFT** 里 `X^μ` 不是 tensor（(2.5.3), p.49）」 | §13.4(a)(b)(c) |
+| **3** | **`conv.worldsheet-euclidean`** | §12.10 B #2 建议的 loc 正确，但若节点文本写作 `e^{iS_L} = e^{−S_E}` 并归给 (A.1.31) | **(A.1.31) 逐字是 `S_E = ∫du L_E(q,∂_uq) = −∫du L(q,i∂_uq)`。** 要么改成这个，要么把 `e^{iS_L}=e^{−S_E}` 标 `inferred: true`（合成自 (A.1.14)+(A.1.30)+(A.1.31)）。note 保留原书用词 "**conventionally defined**" | §13.1(a)(b) |
+| **4** | **E9 / Euler 数** | `χ = (1/4π)∫_M … R + (1/2π)∫_{∂M} ds k` 挂 (1.2.31) | 原书 **(1.2.31) 没有边界项**：`χ = (1/4π)∫_M dτdσ(−γ)^{1/2}R`。带边界项的版本在第 1 章是 **exercise 1.3**；正文版本须改挂 **§3.2 (3.2.3b)** | §13.3(d) |
+| **5** | **E1 / E3 / E6 / E7 的式号** | (1.2.1) / (1.2.9) / (1.2.15)–(1.2.16) / (1.2.19)–(1.2.20) | **(1.2.2) / (1.2.8)+(1.2.9a,b) / (1.2.18) / (1.2.21)** | §13.3(b) 表 |
+| **6** | **DBI 的规范不变组合** | §11 Q25 建议的弱陈述写「`2πα'F_ab − B_ab`」 | 原书 (8.7.2) 是 **`G_ab + B_ab + 2πα'F_ab`（同号 `+`）** | §13.5(d)2 |
+| **7** | **DDF `k₀` 的 loc** | §10 记「式号不知道」 | **原书无式号**；loc 只能写 `§8.2, p.240，(8.2.29)–(8.2.30) 下方正文` | §13.5(a)2 |
+
+#### B. 建议新增
+
+| # | 新节点 / 新来源 | 内容与 loc | 建议 status |
+|---|---|---|---|
+| **8** | **`conv.worldsheet-stress-tensor-normalization`** | 「本书的 `T^{ab}` 比场论通行定义多一个 `−2π`」。loc = **§1.2, eq. (1.2.22) 下方, p.13**（逐字见 §13.3(c)） | convention |
+| **9** | **`worldsheet.wick-rotation-well-defined`** | `t → e^{−iθ}t` 均匀转动 + **`H` 下有界** ⇒ 中间态求和收敛。loc = **App. A, p.335, (A.1.27)–(A.1.29) 之间正文** | `physical-argument`；⚠ 原书只对单自由度量子力学论证，**搬到世界面 CFT 要标 `inferred`** |
+| **10** | **`sources.bib` 新增 `goddard-goldstone-rebbi-thorn-1973`** | "Quantum dynamics of a massless relativistic string." **Nucl. Phys. B56, 109.**（p.354 逐字） | — |
+| **11** | **`critical-dimension--via-lightcone` 新增一条 derivation** | `sources` → GGRT 1973；note 逐字引 p.349「**The first two of these include a careful treatment of Lorentz invariance. The heuristic argument that we have given is based on Brink & Nielsen (1973).**」 | 本书那条仍封顶 `physical-argument`（§12.10 A Q2 不变） |
+| **12** | **`worldsheet.no-ghost-theorem-v4` 的来源关系** | 新增边 / note：**原书自陈 §4.4 的证明 "loosely patterned on" Kato & Ogawa (1983)**（p.350 逐字）；GT 1972 与 Brower 1972 被列为 **OCQ** 的 "classic proofs"，与 §4.4 的 BRST 路线分属两条 | 保留 "loosely" 这个限定词 |
+| **13** | **`sources.bib` 补齐五条书目**（数据见 §13.2(b)(c)） | `brower-1972` = Phys.Rev. **D6**, 1655；`goddard-thorn-1972` = Phys.Lett. **B40**, 235；`kato-ogawa-1983` = Nucl.Phys. **B212**, 443；`freeman-olive-1986` = Phys.Lett. **B175**, 151；`frenkel-garland-zuckerman-1986` = PNAS **83**, 8442；**`thorn-1987` = Nucl.Phys. B286, 61** | — |
+| **14** | **`worldsheet.ddf-operators` ↔ `no-ghost-theorem`** | loc 写 **§4.4 (4.4.19) + §8.2 p.240**，**`inferred: false`**（原书两侧都明写） | §13.5(b) |
+| **15** | **`worldsheet.dbi-action`** | loc = **§8.7, eq. (8.7.2)+(8.7.3), p.270**；逐字表达式见 §13.5(d) | **`physical-argument`**（原书 "We claim … can be understood from general reasoning"）。**`T_p` 的数值仍不可挂** |
+| **16** | **§12.10 C 表续 3 条作者自承缺口** | #16 p.332「continuum limit `ε→0` **rather heuristically**」；#17 p.332「we will evaluate explicitly only a few Gaussian path integrals」；**#18 p.269「there is no strong argument that the theory has a nonperturbative definition」（玻色弦）** | 建议逐条写进相关节点 note |
+
+#### C. 维持原判但要补 note
+
+| # | 条目 | 补什么 |
+|---|---|---|
+| **17** | §12.10 A 表 **Q7(b)** | 「§4.1–§4.4 正文零引文」**结论不变**，但 note 必须加：**这是全书体例**（p.9「Annotated reference lists appear at the end of each volume」），**且书末第 4 章注记确实引了 GT/Brower/Kato–Ogawa**。不加这句会给读者「Polchinski 不承认 GT」的错误印象 |
+| **18** | **`worldsheet.kac-determinant`** | 「不挂 Polchinski」得到**第二重独立确认**：书末字母表 **无 Kac、无 Feigin–Fuchs 条目**（§13.2(b)，L1 negative evidence）。且 **Polchinski 全书不提「用 Kac 行列式证无鬼定理」这条路线**（`thorn-1985` 不在参考文献里） |
+| **19** | **`worldsheet.polyakov-action`** | 原书 p.12 点名 Brink–Di Vecchia–Howe / Deser–Zumino 为发现者，但**书末参考文献里查无此三人**（§13.2(f)1）。→ 想挂原始文献必须另行检索，Polchinski 只能作为**命名归属**的来源 |
+| **20** | **DDF `k₀`（Q23）** | 维持「两个版本都不写死」。note 三条并列：原书正文 `q^−` / 原书 (8.2.30) 用 `p^+` / [S] 主张 `q^+`。**且已确认到 2005 版都没改** |
+| **21** | **主场 OPE 决定一切场的 OPE** | 若有此节点，loc = **§2.4, (2.4.20) 下方, p.47**，并注明**本处只断言、推迟到第 15 章（Vol.2）** |
+| **22** | **`:e^{ik·X}:` 的权** | 依赖**不能**写成「由 `X^μ` 的权推出」——原书 (2.4.21) 明确把那条路标为 "(naive)"，正确来源是 (2.4.17)/(2.4.19) | 
+
+#### D. 本轮**没有**核实、留给下一轮的（更新 §12.10 D 表）
+
+| # | 目标 | 成本 | 价值 |
+|---|---|---|---|
+| 1 | **App. A pp. 339–346**（§A.2 起，推测费米场/Grassmann） | 已下载 | `bc` 鬼场路径积分测度的一手依据 |
+| 2 | **§8.7 pp. 271–276**：(8.7.20)/(8.7.26) 的 `τ_p` 与 (8.7.2) 的 `T_p` 的关系；(8.7.22) 符号（[S] 存疑） | 已下载 ch.8 | **Q25 的后半**（D 膜张力的数值） |
+| 3 | **§3.2（p.83 一带）**：(3.2.3b) 带边界项的 Euler 数 | 已下载 ch.3 | 闭合 §13.9 A#4 |
+| 4 | **§2.2（pp.36–41）**、**§3.1/3.3/3.6/3.7**、**§5.3**、**§6.1–6.3/6.5/6.7**、第 7/9 章 | 见 §12.10 D 表 #4–#7、#9 | 不变 |
+| 5 | **官方勘误表新 URL `www.itp.ucsb.edu/~joep/bigbook.html`**（书上印的原文，见 §13.2(g)） | 1 次 fetch | 此前试的三条 URL 都不是这条；但 Core 版已含 2000 corrections，紧迫性低 |
+| 6 | **复核 Buscher / Roček–Verlinde / Lovelace / Shapiro 是否真的没在第 1–9 章注记里被引** | 重读 pp.349–352 | §13.2(f)2/3 的 negative evidence 可靠性 |
+
+### 13.3 【原书核实 2026-09-11】§1.2（pp. 9–15）——**Q1 关闭：`T = 1/(2πα')` 是 (1.2.10)，`(1.2.3)` 确证是错的**
+
+**证据等级：L1（原书页图逐字，pp. 9–15 全部 7 页读完）。**
+
+#### (a) ★★ Q1 的最后一环：`T = 1/(2πα')` = **(1.2.10)**，p.11
+
+原书 p.11 逐字（(1.2.9a,b) 下方）：
+
+> "where `M` denotes the world-sheet. The constant `α′`, which has units of spacetime-length-squared, is the *Regge slope*, whose significance will be seen later. The tension `T` of the string is related to the Regge slope by
+>
+>   `T = 1/(2πα′)`   (1.2.10)
+>
+> (exercise 1.1)."
+
+**→ `graph/conventions/alpha-prime-regge.yaml` 现写的 `(1.2.3)` 是错的，必须改成 `§1.2, eq. (1.2.10), p.11`。**
+**而 (1.2.3) 实际上是点粒子作用量的变分 `δS_pp = −m ∫ dτ u̇_μ δX^μ`（p.10），与 `α'` 毫无关系。**
+⚠ 顺带：原书把 `T = 1/(2πα')` 本身标为 **exercise 1.1**（"(exercise 1.1)"），
+即**这条关系在正文里没有推导**，只是断言 + 习题。（这与 [H] 习题 1.1(b) 的解答是同一个习题。）
+`α'` 是「Regge slope」的**定义性描述**在同页同处，`α'` 的显式保留约定另见 Notation p.xviii（§12.9）。
+
+#### (b) §1.2 全部式号（E1–E9 的逐条落实，含**五处订正**）
+
+| 式号 | 原书内容（逐字/近逐字） | 页 | 对应条目 |
+|---|---|---|---|
+| (1.2.1) | `X′^μ(τ′(τ)) = X^μ(τ)`（世界线重参数化） | 9 | — |
+| **(1.2.2)** | `S_pp = −m ∫ dτ (−Ẋ^μ Ẋ_μ)^{1/2}` | 10 | **E1 订正**：旧记「约 (1.2.1)」→ **(1.2.2)** |
+| **(1.2.3)** | `δS_pp = −m ∫ dτ u̇_μ δX^μ` | 10 | **就是 `conv.alpha-prime-regge` 误挂的那个式号** |
+| (1.2.4) | `u^μ = Ẋ^μ(−Ẋ^νẊ_ν)^{−1/2}`（归一化 `D`-速度） | 10 | — |
+| (1.2.5) | `S′_pp = ½ ∫ dτ (η^{−1}Ẋ^μẊ_μ − ηm²)` | 10 | **E2 ✓**（式号正确） |
+| (1.2.6) | `η′(τ′)dτ′ = η(τ)dτ` | 11 | — |
+| (1.2.7) | `η² = −Ẋ^μẊ_μ/m²` | 11 | — |
+| **(1.2.8)** | `h_ab = ∂_a X^μ ∂_b X_μ`（诱导度规） | 11 | **E3 订正**：诱导度规是 **(1.2.8)**，不是 (1.2.9) |
+| **(1.2.9a,b)** | `S_NG = ∫_M dτdσ 𝓛_NG` / `𝓛_NG = −(1/2πα')(−det h_ab)^{1/2}` | 11 | **E3 订正**：Nambu–Goto **拆成 a,b 两式**；loc 应写 (1.2.9a,b) |
+| **(1.2.10)** | `T = 1/(2πα')` | 11 | **E4 / Q1 ★** |
+| (1.2.11) | `X′^μ(τ,σ) = Λ^μ_ν X^ν(τ,σ) + a^μ`（Poincaré） | 12 | E7 的第 1 条 |
+| (1.2.12) | `X′^μ(τ′,σ′) = X^μ(τ,σ)`（diff） | 12 | E7 的第 2 条 |
+| (1.2.13) | `S_P[X,γ] = −(1/4πα') ∫_M dτdσ (−γ)^{1/2} γ^{ab} ∂_aX^μ∂_bX_μ` | 12 | **E5 ✓** |
+| (1.2.14) | `δ_γ S_P[X,γ] = −(1/4πα')∫_M dτdσ(−γ)^{1/2}δγ^{ab}(h_ab − ½γ_abγ^{cd}h_cd)` | 12 | E6 |
+| (1.2.15) | `δγ = γγ^{ab}δγ_ab = −γγ_abδγ^{ab}` | 12 | **E6 ✓**（[S] 目录说的「行列式变分」正确） |
+| (1.2.16) | `h_ab = ½γ_abγ^{cd}h_cd` | 12 | E6 |
+| (1.2.17) | `h_ab(−h)^{−1/2} = γ_ab(−γ)^{−1/2}` | 12 | E6 |
+| **(1.2.18)** | `S_P[X,γ] → −(1/2πα')∫dτdσ(−h)^{1/2} = S_NG`（**经典等价的结论式**） | 12 | **E6 订正**：结论是 **(1.2.18)**，旧记「约 (1.2.15)–(1.2.16)」只是中间步 |
+| (1.2.19) | Poincaré 不变性（`X′^μ = Λ^μ_νX^ν+a^μ`, `γ′_ab = γ_ab`） | 13 | E7 |
+| (1.2.20) | diff 不变性 | 13 | E7 |
+| **(1.2.21)** | Weyl 不变性：`X′^μ = X^μ`, **`γ′_ab(τ,σ) = exp(2ω(τ,σ)) γ_ab(τ,σ)`** | 13 | **E7 订正**：Weyl 的式号是 **(1.2.21)**，不是「(1.2.19)–(1.2.20) 附近」 |
+| (1.2.22) | `T^{ab} = −4π(−γ)^{−1/2}(δ/δγ_ab)S_P = −(1/α')(∂^aX^μ∂^bX_μ − ½γ^{ab}∂_cX^μ∂^cX_μ)` | 13 | **新（见 (c)）** |
+| (1.2.23) | `γ_ab(δ/δγ_ab)S_P = 0 ⇒ T^a{}_a = 0` | 13 | — |
+| (1.2.24) | `T_ab = 0`（变 `γ_ab` 的运动方程） | 14 | — |
+| (1.2.25) | `∂_a[(−γ)^{1/2}γ^{ab}∂_bX^μ] = (−γ)^{1/2}∇²X^μ = 0` | 14 | — |
+| (1.2.26) | `−∞ < τ < ∞, 0 ≤ σ ≤ ℓ` | 14 | — |
+| (1.2.27) | `δS_P` 含边界项的完整形式 | 14 | E8 |
+| (1.2.28) | `∂^σX^μ(τ,0) = ∂^σX^μ(τ,ℓ) = 0`（Neumann） | 14 | **E8 ✓** |
+| (1.2.29) | `n^a∂_aX_μ = 0` on `∂M`（协变写法） | 14 | — |
+| (1.2.30a,b) | 闭弦周期性：`X^μ(τ,ℓ)=X^μ(τ,0)`, `∂^σX^μ(τ,ℓ)=∂^σX^μ(τ,0)` / `γ_ab(τ,ℓ)=γ_ab(τ,0)` | 14 | — |
+| **(1.2.31)** | **`χ = (1/4π) ∫_M dτdσ (−γ)^{1/2} R`** | 15 | **E9 重大订正，见 (d)** |
+| (1.2.32) | `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)` | 15 | **E9 ✓**（式号对，形式见 (d)） |
+| (1.2.33) | `S′_P = S_P − λχ = −∫_M dτdσ(−γ)^{1/2}( (1/4πα')γ^{ab}∂_aX^μ∂_bX_μ + (λ/4π)R )` | 15 | — |
+
+#### (c) ★ 新发现的约定陷阱：`T^{ab}` 差 `−2π`
+
+p.13，(1.2.22) 正下方**逐字**：
+
+> "This has an extra factor of `−2π` relative to the usual definition in field theory; this is a standard and convenient convention in string theory."
+
+**→ 建议新增约定节点 `conv.worldsheet-stress-tensor-normalization`**，loc = **§1.2, eq. (1.2.22), p.13**。
+这条与 §2 的 `T(z) = −(1/α'):∂X∂X:`（(2.4.4)，见 §12.10 B #24）是同一套归一化的两个面貌，
+但**只有 p.13 这一句把「与场论差 −2π」讲明**。任何搬运 Polchinski 能动张量公式到别处的节点都必须声明它。
+
+#### (d) ★ E9 的两处实质订正
+
+1. **原书 (1.2.31) 里没有边界项。** 逐字就是 `χ = (1/4π)∫_M dτdσ(−γ)^{1/2}R`。
+   E9 现在写的 `χ = (1/4π)∫_M … R + (1/2π)∫_{∂M} ds k` **不是 (1.2.31)**。
+   原书 p.15 紧接着自己说明了为什么：
+   > "The variation is a total derivative, because `(−γ)^{1/2}∇_a v^a = ∂_a((−γ)^{1/2}v^a)` for any `v^a`.
+   > The integral (1.2.31) is therefore invariant for a world-sheet **without boundary**.
+   > **With boundaries an additional surface term is needed (exercise 1.3).**"
+   → **带边界项的 Euler 数在第 1 章是习题（exercise 1.3），不是正文。** 正文版本见 §3.2 (3.2.3b)（E48，本轮未核）。
+2. **(1.2.32) 原书写成密度形式** `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)`，不是 E9 现写的 `R' = e^{−2ω}(R − 2∇_a∂^aω)`。
+   两者等价（在 2d，`(−γ′)^{1/2} = e^{2ω}(−γ)^{1/2}`），但「与原书逐字一致」的说法要改。
+   ⚠ **诚实标注**：LHS 上 `γ` 的那一撇在本轮页图分辨率下**接近可读极限**；从下一句「The variation is a total derivative」的逻辑看只能是 `γ′`，
+   但若要在图里写死逐字形式，建议再单页复核一次。
+
+#### (e) ★ Polyakov 作用量的命名归属（原书自己给的，无引文编号）
+
+p.12，(1.2.13) 下方**逐字**：
+
+> "This is the **Brink–Di Vecchia–Howe–Deser–Zumino** action, or Polyakov action for short. It was found by Brink,
+> Di Vecchia, and Howe and by Deser and Zumino, in the course of deriving a generalization with local world-sheet
+> supersymmetry. Its virtues, especially for path integral quantization, were emphasized by Polyakov."
+
+**→ E5 应记「原书自己指出这个作用量不是 Polyakov 首创」**；正文里**没有引文编号**（本书正文通例，见 p.9 逐字：
+"Annotated reference lists appear at the end of each volume."）。要给 `worldsheet.polyakov-action` 挂一手来源，
+须去书末 References（见 §13.2）取 Brink–Di Vecchia–Howe / Deser–Zumino / Polyakov 的条目。
+
+#### (f) 顺带：本书正文不带引文，是**明写的编辑方针**
+
+p.9 逐字：「**Annotated reference lists appear at the end of each volume.** I have tried to assemble a selection
+of articles, particularly reviews, that may be useful to the student.」
+→ 这一句是 §12.10 A 表 Q7(b)「§4.1–§4.4 全无引文」的**制度性解释**：正文本来就不放引文。
+所以「§4 不引 Goddard–Thorn」这件事**不能**被解读为 Polchinski 不承认该来源，必须查书末 References（§13.2）。
+
+---
+
+### 13.9 本轮对图的建议（loc / notes 修改清单）
+
+待填。
+
 
 
 
