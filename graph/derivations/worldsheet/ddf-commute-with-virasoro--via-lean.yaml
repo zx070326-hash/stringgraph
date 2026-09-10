@@ -46,7 +46,7 @@ depends_on:
       二者是同一个空间上的算子。
       ⚠ **m = 0 这一支尤其依赖这张卡**：目标卡【推论】里的质量壳记账
       α'(p + n k_0)² = α'p² + n 就是塔上第 j 层动量 p_j = p + j k_0 的算术
-      （Lean `invTwo_mul_zeroModeSq_towerMomentum`）。
+      （Lean `invTwo_mul_zeroModeSq_towerMomentum`，formal/StringFormal/NoGhost/DDF.lean）。
   - id: worldsheet.virasoro-generators-free-boson
     inferred: false
     note: |

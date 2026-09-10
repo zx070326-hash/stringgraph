@@ -42,7 +42,7 @@ depends_on:
       （Lean `levelSubmodule`、`Lop_zero_apply_of_mem_levelSubmodule`）。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（目标声明，第 308 行）；质壳半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）；括号输入 StringFormal.NoGhost.lie_towerLop_ddfOp（第 179 行）。formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / mem_towerPhysSubmodule / towerL0Submodule / mem_towerL0Submodule / towerPositiveModeSubmodule / ddfOp_mem_towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel / invTwo_mul_zeroModeSq_towerMomentum / Lop_zero_apply_of_mem_levelSubmodule"
+    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（目标声明，第 308 行）；质壳半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）；括号输入 StringFormal.NoGhost.lie_towerLop_ddfOp（第 179 行）。formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / mem_towerPhysSubmodule / towerL0Submodule / mem_towerL0Submodule / towerPositiveModeSubmodule / ddfOp_mem_towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel。另：formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.invTwo_mul_zeroModeSq_towerMomentum（α' p_j² = α' p² + j）；formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule（能级 N 上 L_0 的本征值）"
     note: |
       本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。
       **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。

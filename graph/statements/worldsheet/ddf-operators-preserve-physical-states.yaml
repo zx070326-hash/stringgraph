@@ -55,7 +55,7 @@ formal:
   lean_file: StringFormal/NoGhost/DDFOperatorAll.lean
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（本卡 formal.lean_decl，第 308 行）；质壳那一半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）；括号输入 StringFormal.NoGhost.lie_towerLop_ddfOp（第 179 行）。子空间与记账：formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / towerL0Submodule / towerPositiveModeSubmodule / mem_towerPhysSubmodule / ddfOp_mem_towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel / invTwo_mul_zeroModeSq_towerMomentum / Lop_zero_apply_of_mem_levelSubmodule"
+    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（本卡 formal.lean_decl，第 308 行）；质壳那一半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）；括号输入 StringFormal.NoGhost.lie_towerLop_ddfOp（第 179 行）。子空间与记账：formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / towerL0Submodule / towerPositiveModeSubmodule / mem_towerPhysSubmodule / ddfOp_mem_towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel。塔上第 j 层动量的零模平方 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.invTwo_mul_zeroModeSq_towerMomentum；能级本征值 formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule"
     note: |
       本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。语句逐字（去掉隐式参数）：
         `theorem ddfOp_mem_towerPhysSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
