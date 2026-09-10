@@ -19,11 +19,22 @@ uses_conventions:
   - conv.worldsheet-complex-coords
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.3, eq. (2.3.15)（能动张量），p.43"
+    loc: "§2.4, eq. (2.4.4), p.44（逐字：T(z) = −(1/α'):∂X^μ∂X_μ:，T̃(z̄) = −(1/α'):∂̄X^μ∂̄X_μ:）；记号 T(z) ≡ T_{zz}、T̃(z̄) ≡ T_{z̄z̄} 是 (2.4.3)；实坐标的 T_ab 是 (2.3.15b)，Noether 流 j_a = i v^b T_{ab} 是 (2.3.15a)"
     note: |
-      公式号与「这是能动张量」这一身份经 schrans-2020 目录核实
-      （`2.15 p 43: Eq. (2.3.15) The Energy-Momentum Tensor`）；
-      **具体表达式的系数 -(1/α') 未核实**，见 literature/extractions/polchinski-1998-v1.md E30。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——本条订正 loc 并撤销
+      「系数 −(1/α') 未核实」】
+
+      ⚠ **订正**：旧 loc 把本卡的表达式挂在 §2.3 (2.3.15)，位置错了一节。
+      原书 **(2.3.15)** 是实坐标的 Noether 流与能动张量：
+        (2.3.15a) j_a = i v^b T_{ab}
+        (2.3.15b) T_ab = −(1/α'):(∂_aX^μ∂_bX_μ − ½δ_ab ∂_cX^μ∂^cX_μ):
+      本卡陈述的复坐标形式 T(z) = −(1/α'):∂X^μ∂X_μ: 在原书是 **(2.4.4)**。
+      **系数 −(1/α') 现为 L1 逐字核实**（(2.3.15b) 与 (2.4.4) 两处一致）。
+
+      配套落实（同为 L1，供下游节点引用）：
+        (2.4.1) T_{zz̄} = 0（无迹的复坐标形式）；(2.4.2) ∂̄T_{zz} = ∂T_{z̄z̄} = 0；
+        (2.4.3) T(z) ≡ T_{zz}(z)、T̃(z̄) ≡ T_{z̄z̄}(z̄)；(2.4.5) j(z) = iv(z)T(z)。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E30/E31/E32）与 §12.10 表 B 第 24 项。
 tags: [cft, free-field, energy-momentum-tensor, definition]
 notes: |
   系数 -(1/α') 与 conv.alpha-prime-regge、conv.worldsheet-complex-coords 及

@@ -18,6 +18,25 @@ sources:
     note: |
       公式号经 schrans-2020 目录核实（`3.28`–`3.31`, p.96–97）；
       **内容也已核实**：schrans-2020 §3.30、§3.31 的正文逐步复现了 2a_1 = a_4 与 ∂^a C(σ) = 0。
+      【原书核实 2026-09-11（researcher 第六轮）】§3.4 全部式号本轮逐页核过，
+      (3.4.31) 位于 §3.4 的最后一小段（p.96–97），本条 loc 无需改动。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, p.48，(2.4.24) 之后的正文（无式号）+ 脚注 5：\"by considering the commutator of two such transformations one can show that ∂_a c = 0, and it is a general result in quantum field theory that an operator that is independent of position must be a c-number.\""
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**本图此前完全没有这条**】
+
+      「中心荷是常数」在 Polchinski Vol.1 里被论证了**两次，且是两条互相独立的论证**：
+        (a) **§2.4，p.48**（本条）：纯 CFT 内部的论证——考虑两次共形变换的对易子得 ∂_a c = 0，
+            再用「与位置无关的算子必是 c-数」这条量子场论一般结果。**不涉及 Weyl 反常、
+            不涉及弯曲世界面度规**，论证在脚注 5 里。
+        (b) **§3.4，(3.4.31)**（上一条来源）：Weyl 反常的 Wess–Zumino 相容性论证。
+
+      ⚠ **两条不要合并**：本节点的 statement 写的是 (b)（Wess–Zumino 路线，
+      经过 a_1,…,a_5 的参数化），不覆盖 (a)。(a) 是一条**独立的、更早的、前提更弱**的论证，
+      本图目前没有节点，**建议新建**一张陈述卡或给本节点加第二条推导
+      `--via-conformal-commutator`（curator-v1-locs 未建，避免与他人正在改的 §3.4 一带冲突）。
+      在建成之前，本节点的有效状态只反映 (b) 这一条路线。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E34 末段）与 §12.10 表 B 第 6 项附注。
 tags: [worldsheet, weyl-anomaly, central-charge, wess-zumino]
 notes: |
   这条在 D = 26 的论证中的作用常被略过，但它是必要的一环：
