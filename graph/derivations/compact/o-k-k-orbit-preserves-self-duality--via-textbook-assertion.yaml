@@ -1,0 +1,26 @@
+id: compact.o-k-k-orbit-preserves-self-duality--via-textbook-assertion
+target: compact.o-k-k-orbit-preserves-self-duality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.o-k-k-orbit-preserves-evenness
+    note: 同一式 (8.4.25) 的另一半；列这条边表示两半出自同一断言，不表示前者蕴含后者。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.25)，p.252"
+    note: |
+      抽取记录 polchinski-1998-v1#E140/Q22。⚠ 伴读者明说证不出（「Any help is welcome」）；
+      原书是否给论证未核实。
+summary: |
+  **本推导没有可复述的论证。** 原书把「偶自对偶格在 O(k,k;R) 下不变」作为一句断言
+  （(8.4.25)）给出；伴读者只复现出「偶」那一半，对「自对偶」明说不会做，
+  且本项目未取得原书正文以确认原书是否给了论证。
+  本节点存在的目的是把这个缺口显式记账，使依赖它的 compact.narain-moduli-space
+  在报告中显示出真实的证据强度。
+gaps:
+  - "⚠ **没有任何来源给出这一半的论证**：Schrans 明说不会，Headrick 未涉及，原书正文未获取（抽取记录 Q22）。"
+  - "抽取记录里的数学旁注（(ΛΓ)* = (Λ^T)^{−1}Γ* 与 (Λ^T)^{−1} = ηΛη^{−1}）被明确标注为抽取者旁注、不得入库，故本图不采用它作为论证。"
+  - "status 档位待 reviewer-ch5 关于「无论证断言」的裁定。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

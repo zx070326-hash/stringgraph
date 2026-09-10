@@ -1,0 +1,37 @@
+id: compact.self-dual-radius-extra-massless-states
+kind: proposition
+title: 自对偶半径 R = √α' 处出现八个额外的无质量解
+statement: |
+  设 D = 26 的玻色闭弦有一个方向紧化在 R = √α'（conv.compactification-radius）。
+  此时紧化方向的左右动量为 k_L = (α')^{−1/2}(n + w)、k_R = (α')^{−1/2}(n − w)，
+  无质量条件 m² = 0 配合两支质量壳化为**纯整数方程**
+    **4 = (n + w)² + 4N   与   4 = (n − w)² + 4Ñ**   （N, Ñ ∈ Z_{≥0}）。
+  其全部解为：
+    (a) n = w = 0，N = Ñ = 1  ——一般半径处就有的无质量态；
+    (b) (n, w) = (1, 1) 或 (−1, −1)，N = 0，Ñ = 1；
+    (c) (n, w) = (1, −1) 或 (−1, 1)，N = 1，Ñ = 0；
+    (d) (n, w) = (±2, 0) 或 (0, ±2)，N = Ñ = 0。
+  即除 (a) 外还有 **八组** (n, w; N, Ñ) 解，它们只在 R = √α' 处无质量。
+  每组解仍带其剩余振子的极化选择（(b)/(c) 各有一个一阶振子的时空指标）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.8)（R = √α' 的质量壳）、(8.3.9)、(8.3.10)，p.242"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E128，证据等级 L1
+      （Schrans §8.30–§8.31，笔记 p.453–454；他的表 8.2 逐行给出这八组解的
+      (n, w, N, Ñ)、√α' k^{25}_{L,R} 与顶点算子）。
+      (8.3.9) 对应上文的 (b)(c)，(8.3.10) 对应 (d)。
+tags: [compactification, closed-string, winding, torus, spectrum, enhanced-symmetry, self-dual-radius]
+notes: |
+  解的穷举是初等算术：N, Ñ ≥ 0 与 (n ± w)² ≤ 4 给 n ± w ∈ {0, ±2}，
+  且 n + w 与 n − w 同奇偶，四种组合逐一解出即得上表。**这一步是 curator 的复算**
+  （来源只给出结论），若 reviewer 独立复核，本节点的推导可按 docs/STATUS_LEVELS.md
+  的 rigorous 例外升级——但它的上游（质量公式）仍是 physical-argument，
+  有效状态不会因此改变。
+
+  ⚠ 抽取记录 #E128 还记了一条更一般的半径 R = 2(p/q)√α' 的解的分类，
+  但该条转述的条件（「p mod q = 0」）看上去有转写问题，本图**不收**，
+  待有人核对原书 p.242 后再定。
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -1,0 +1,26 @@
+id: compact.kaluza-klein-gravitational-coupling--via-integrating-compact-direction
+target: compact.kaluza-klein-gravitational-coupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.circle-momentum-quantization
+    inferred: true
+    note: |
+      本推导只用到紧化方向的周期长度 2πR，不用动量量子化本身。列这条边是为了把
+      「半径 R 的圆」这个几何设定接到图上——图中没有单独承载「紧化圆的体积是 2πR」
+      的节点（那是 conv.compactification-radius 的内容，约定不参与状态传播）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.11)–(8.1.12)，p.234"
+    note: |
+      抽取记录 polchinski-1998-v1#E118（L1，Schrans §8.8–§8.9，笔记 p.434–435）。
+summary: |
+  若全部场与紧化坐标无关，则 ∫ d^D x = 2πR ∫ d^d x，Einstein–Hilbert 项的
+  d 维系数是 D 维系数乘 2πR，读出 1/κ_d² = 2πR/κ_D²。
+  规范耦合由同一次约化中 F_{μν}F^{μν} 项的系数读出。
+gaps:
+  - "「场对紧化坐标无依赖」是前提，不是结论；它等价于只保留 Kaluza–Klein 零模，把整塔的高模丢掉（compact.kaluza-klein-tower）。原书是否写出这一前提未核实（Schrans 的脚注 5 写了）。"
+  - "规范耦合式 (8.1.11) 依赖 Kaluza–Klein 约化后的 Ricci 标量 (8.1.18) 与含 dilaton 的作用量 (8.1.9)（抽取记录 #E117），本图未建这两张卡；且 (8.1.9) 是勘误依赖（Schrans：√−G 而非 √−G_d，「as per Joe's errata page」）。"
+  - "Schrans 对 (8.1.9) 的复现路线是量纲分析 + 特例定常数 + Mathematica，不是逐项展开；他自己称原书这一步「entirely straightforward albeit exceedingly tedious」。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

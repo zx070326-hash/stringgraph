@@ -1,0 +1,29 @@
+id: compact.o-k-k-orbit-preserves-evenness
+kind: proposition
+title: Λ ∈ O(k,k;R) 把偶格送成偶格
+statement: |
+  设 Γ ⊂ R^{k,k} 是号差 (k,k) 的**偶**格（ℓ∘ℓ ∈ 2Z，compact.narain-lattice 的记号），
+  Λ ∈ O(k,k;R)，即 Λ^T η Λ = η，η = diag(+1,…,+1,−1,…,−1)。则
+    **Γ' = Λ Γ 仍是偶格。**
+  理由是 Λ 按定义保持双线性型：(Λℓ)∘(Λℓ) = ℓ∘ℓ ∈ 2Z。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.25) 的「偶」那一半，p.252"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E140，证据等级 L1
+      （Schrans 笔记 p.478）。Schrans 由 Λ^TηΛ = η 得三个分块关系
+      Λ²_{LL} − Λ²_{RL} = 1、Λ²_{RR} − Λ²_{LR} = 1、Λ_{LL}Λ_{LR} = Λ_{RR}Λ_{RL}，
+      代入 ℓ'∘ℓ' = (ℓ'_L)² − (ℓ'_R)² 化简得 = ℓ∘ℓ ∈ 2Z（[8.260]–[8.264]）。
+tags: [compactification, torus, narain, lattice, o-d-d, moduli]
+notes: |
+  本卡是原书 (8.4.25)（「偶自对偶格在 O(k,k;R) 下不变」）的**可复现的那一半**。
+  另一半（ΛΓ 仍自对偶）见 compact.o-k-k-orbit-preserves-self-duality，
+  伴读者明说证不出、原书是否给了论证也未核实。拆卡的理由与 (8.4.24) 相同：
+  两半的证据强度不同，合成一张卡会掩盖缺口。
+
+  注意 ΛΓ 一般不是**格**的自动事实：ΛΓ 作为 Z-模的像仍离散当且仅当 Λ 保持某个格结构；
+  这里 Λ 是实矩阵作用在秩 2k 的格上，像仍是秩 2k 的格（Λ 可逆）。这一点来源没有明说，
+  记在此。
+author: curator-polchinski-ch8
+created: "2026-09-11"

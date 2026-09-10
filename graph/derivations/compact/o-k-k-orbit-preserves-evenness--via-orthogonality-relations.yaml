@@ -1,0 +1,20 @@
+id: compact.o-k-k-orbit-preserves-evenness--via-orthogonality-relations
+target: compact.o-k-k-orbit-preserves-evenness
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.25)，p.252"
+    note: 抽取记录 polchinski-1998-v1#E140（L1，Schrans 笔记 p.478，[8.260]–[8.264]）。
+summary: |
+  Λ^T η Λ = η 说的正是 Λ 保持双线性型 ℓ∘ℓ' = ℓ^T η ℓ'，故
+  (Λℓ)∘(Λℓ) = ℓ^T Λ^T η Λ ℓ = ℓ^T η ℓ = ℓ∘ℓ ∈ 2Z，即 ΛΓ 仍是偶格。
+  Schrans 的复现是把 Λ 按左右分块、由 Λ^TηΛ = η 得三个分块关系再逐项代入化简，
+  结果相同。
+gaps:
+  - "这一步是一行线性代数、前提完整，但缺 reviewer 独立复核记录，按 docs/STATUS_LEVELS.md 不走 rigorous 例外；有 reviewer 复核后可升 rigorous（但其下游仍被 compact.o-k-k-orbit-preserves-self-duality 压低）。"
+  - "「ΛΓ 仍是秩 2k 的离散格」来源未明说（Λ 可逆故成立）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

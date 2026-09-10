@@ -1,0 +1,25 @@
+id: compact.self-dual-radius-gauge-symmetry-enhancement--via-massless-vector-count
+target: compact.self-dual-radius-gauge-symmetry-enhancement
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.self-dual-radius-extra-massless-states
+  - id: compact.self-dual-radius-su2-current-algebra
+  - id: compact.circle-closed-string-mass-formula
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.3)（一般 R 的无质量谱）、(8.3.9)–(8.3.14)（自对偶点），p.241–243"
+    note: |
+      抽取记录 polchinski-1998-v1#E127/#E128/#E129（L1；结论句是 Schrans 的复述）。
+summary: |
+  一般 R 处 n = w = 0、N = Ñ = 1 的无质量态里含两个矢量（KK 矢量与 B_{μ,25} 矢量），
+  给 U(1) × U(1)。在 R = √α' 处额外的 (n, w) = ±(1,1)、±(1,−1) 解各带一个非紧方向的
+  一阶振子，给出四个新的无质量矢量；全纯侧三个矢量的世界面流闭合成 affine su(2)，
+  反全纯侧同样，故时空规范群增强为 SU(2) × SU(2)，原 U(1) × U(1) 是其极大环面。
+gaps:
+  - "「世界面权 (1,0) 流代数 ⇒ 时空非阿贝尔规范对称性」这一步在原书此处没有独立论证，本图也没有承载它的节点；这是本推导最主要的物理输入。"
+  - "结论句「规范群是 SU(2)×SU(2)」在抽取记录里是 Schrans 的复述，不是原书措辞（#E128）。"
+  - "一般 R 处的无质量谱清单 (8.3.3) 只到 L2（Schrans 目录级），其完整性未在正文级核实。"
+  - "上游质量公式与自对偶点解的枚举均为 physical-argument。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

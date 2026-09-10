@@ -1,0 +1,34 @@
+id: compact.even-lattice-gives-mutual-locality
+kind: proposition
+title: Narain 格是偶格 ⇒ 紧化顶点算子互局域（OPE 单值）
+statement: |
+  在 k 维环面紧化中（compact.narain-lattice 的记号），两个带格动量 ℓ、ℓ' 的顶点算子的
+  OPE 含因子 z^{ℓ_L·ℓ'_L} z̄^{ℓ_R·ℓ'_R}；把 z₁ 绕 z₂ 转一圈（z₁₂ → e^{2πi} z₁₂）
+  产生相位 e^{2πi(ℓ_L·ℓ'_L − ℓ_R·ℓ'_R)}。故
+    **OPE（进而振幅）单值 ⟺ ℓ ∘ ℓ' ∈ Z 对一切 ℓ, ℓ' ∈ Γ**（互局域性）。
+  由恒等式
+    (ℓ + ℓ') ∘ (ℓ + ℓ') − ℓ∘ℓ − ℓ'∘ℓ' = 2 ℓ∘ℓ'
+  可知：若 Γ 是**偶格**（ℓ∘ℓ ∈ 2Z，compact.narain-lattice-is-even），
+  则左边三项都在 2Z 中，故 2ℓ∘ℓ' ∈ 2Z，即 ℓ∘ℓ' ∈ Z。
+  **即「τ → τ + 1 的模不变性」蕴含「顶点算子互局域」。**
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.16)（绕数态顶点算子的 OPE）、(8.4.17)（互绕相位）、(8.4.20)（偶 ⇒ 单值），p.250–251"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E138，证据等级 L1
+      （Schrans §8.57–§8.63，笔记 p.472–475）。
+      一维情形的对应式是 (8.2.20)（相位 exp[2πi(nw' + n'w)]，抽取记录 #E124），
+      在那里 Headrick Problem 8.1 是独立第二源。
+tags: [compactification, torus, narain, lattice, locality, vertex-operator, modular-invariance]
+notes: |
+  由「偶」推「互局域」的那一步（(8.4.20) 的恒等式）是三行代数，前提完整；
+  若 reviewer 独立复核，本节点的推导可按 docs/STATUS_LEVELS.md 的 rigorous 例外升级。
+  但「OPE 相位 = e^{2πi ℓ∘ℓ'}」那一步依赖自由场 OPE 的形式与围道绕行，
+  仍是 physical-argument，故有效状态不会因此改变。
+
+  ⚠ 一维情形的互绕相位 (8.2.12)/(8.2.20) 有源间冲突：Headrick Problem 8.4 逐字
+  「This includes the expected phase factor (8.2.12)—**but unfortunately with the wrong sign!**」
+  （抽取记录 Q24）。本节点不涉及该相位的整体符号，只用到它在 ℓ∘ℓ' ∈ Z 时为 1。
+author: curator-polchinski-ch8
+created: "2026-09-11"

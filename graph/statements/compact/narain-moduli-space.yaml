@@ -1,0 +1,38 @@
+id: compact.narain-moduli-space
+kind: proposition
+title: Narain 模空间 O(k,k;R) / (O(k;R) × O(k;R) × O(k,k;Z))
+statement: |
+  设 D = 26 的玻色闭弦紧化在 k 维环面上（compact.narain-lattice 的记号），
+  并接受「模不变 ⟺ Narain 格 Γ 偶自对偶」。则：
+  (1) 由 compact.o-k-k-orbit-preserves-evenness 与 compact.o-k-k-orbit-preserves-self-duality，
+      全部偶自对偶的 (k,k) 格都可由 O(k,k;R) 作用在一个给定格上得到（单一轨道）；
+  (2) 被 O(k;R) × O(k;R)（分别转动左行与右行）联系的格给出**相同的谱、相同的理论**，
+      故不同理论的空间是 **O(k,k;R) / (O(k;R) × O(k;R))**；
+  (3) 再模掉格自身的离散对称群 O(k,k;Z)（Λ Γ = Γ 的那些 Λ），得到不等价理论的空间
+      **O(k,k;R) / ( O(k;R) × O(k;R) × O(k,k;Z) )**,
+  称为 **Narain 模空间**；其中 **O(k,k;Z) 就是 T 对偶群**。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.28)（模掉 O(k;R)×O(k;R)）与 (8.4.30)（再模掉 O(k,k;Z)），p.253"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E142，
+      内容 L1、**式号 L2**（源内冲突）。
+      ⚠ Schrans **目录**写 8.71 → (8.4.28)、8.72 → (8.4.30)，但其**正文两节标题都写 (8.4.28)**；
+      本图**采目录值**（§8.72 的内容确实是「再模掉 O(k,k,Z)」，与 §8.71 不是同一式），
+      与抽取记录 §9.0 的裁断一致。
+tags: [compactification, torus, narain, moduli-space, t-duality, o-d-d]
+notes: |
+  **本节点的有效状态被两条弱环压住**：compact.o-k-k-orbit-preserves-self-duality
+  （无任何来源给出论证）与 compact.modular-invariance-requires-self-dual-lattice
+  （原书只写 "a little thought shows"）。这正是抽取记录 §11 建议 4 说的
+  「模空间 (8.4.30) 的有效状态被后两条压到最低」。
+
+  **本书此处没有给模空间上的度规或体积**；(8.4.35)/(8.4.39) 给的是**模场的动能项**
+  （抽取记录 #E144，且 Schrans 明说「We will not perform the detailed calculation」），
+  那是另一回事，本图不建卡。
+
+  一条附带事实（Schrans §8.71 正文，L1）：B_{mn} = 0 且每个紧化方向都在 R = √α' 时，
+  规范群是 (SU(2)×SU(2))^k = SU(2)^{2k}。本图不单独建卡。
+author: curator-polchinski-ch8
+created: "2026-09-11"

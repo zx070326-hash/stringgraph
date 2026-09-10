@@ -1,0 +1,42 @@
+id: compact.self-dual-radius-su2-current-algebra
+kind: proposition
+title: 自对偶半径处世界面上出现两套 affine su(2) 流代数
+statement: |
+  设 D = 26 的玻色闭弦有一个方向紧化在 R = √α'（conv.compactification-radius）。
+  在紧化方向的自由玻色子 X^{25} = X^{25}_L + X^{25}_R 上定义三个全纯流
+    j³(z) ∝ ∂X^{25}_L(z),   j^±(z) ∝ exp[± 2 i (α')^{−1/2} X^{25}_L(z)],
+  （等价地写成厄米组合 j¹ = (j^+ + j^-)/2、j² = (j^+ − j^-)/2i；比例常数见 (8.3.12)）。则：
+  (1) 三个流都是共形权 (1, 0) 的主场；
+  (2) 它们的 OPE 在自身内闭合，形如
+        j³(z) j³(w) ∼ 1/(2 (z − w)²),   j³(z) j¹(w) ∼ i j²(w)/(z − w),  （及其循环置换）
+      即闭合成 su(2)；
+  (3) 其 Laurent 模 j^i_m 满足**仿射李代数**
+        **[j^i_m, j^j_n] = (m/2) δ^{ij} δ_{m+n,0} + i ε^{ijk} j^k_{m+n}**.
+  反全纯侧 j̄^i(z̄) 同样给一套，且左右两套互相中性（OPE 无奇异项）。
+  这三个流只在 R = √α' 处有共形权 (1, 0)：j^± 的权是 α' k_L²/4，只有 k_L = ±2/√α' 时才等于 1。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-complex-coords, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.11)/(8.3.12)（流）、(8.3.13)（流的 OPE）、(8.3.14)（仿射李代数），p.243"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E129，证据等级 L1
+      （Schrans §8.32–§8.34，笔记 p.455–456）。
+      ⚠ **式号有源内不一致**：Schrans §8.39 说「(8.3.9) 的顶点算子是 (8.3.11)」，
+      §8.40 又说「From the definition of the j^i and j̄^i in (8.3.11)」，
+      而其目录把 (8.3.12) 标为「The SU(2)×SU(2) Current Algebra」（抽取记录 §10，未裁决）。
+      ⚠ Schrans 只算了两条 OPE（[8.162]–[8.165]），其余他明说留给读者；
+      仿射代数 (8.3.14) 他用 (2.6.14) 逐步导出（[8.166]）。
+tags: [compactification, cft, current-algebra, affine-lie-algebra, enhanced-symmetry, self-dual-radius]
+notes: |
+  本节点只陈述**世界面**的流代数，时空规范群的增强是另一条命题
+  （compact.self-dual-radius-gauge-symmetry-enhancement）。
+
+  中心项 (m/2)δ^{ij} 在标准归一化下对应 level k = 1 的 affine su(2)；
+  **这是 curator 的旁注**，原书此处不展开仿射李代数的一般理论
+  （level、Sugawara、Kac–Moody 表示一律不提，抽取记录 #E129 明记）。
+  比例常数与 j^{1,2} 的具体归一化本图不写死：抽取记录只给出「∝」。
+
+  j^± 的顶点算子正是 compact.self-dual-radius-extra-massless-states 的 (b)(c) 两类解
+  （k_L = ±2/√α'、k_R = 0，即 (n, w) = ±(1, 1)）在全纯侧的部分。
+author: curator-polchinski-ch8
+created: "2026-09-11"

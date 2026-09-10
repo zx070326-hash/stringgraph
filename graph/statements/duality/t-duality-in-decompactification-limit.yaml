@@ -1,0 +1,34 @@
+id: duality.t-duality-in-decompactification-limit
+kind: proposition
+title: T 对偶在 R → ∞ / R' → 0 的极限下仍成立（本书未论证的隐含前提）
+statement: |
+  §8.7 起把 Dp 膜放进**未紧化**的时空中讨论（如 D 膜张力、Born–Infeld 作用量）。
+  这一步隐含地使用了下述断言：
+    **一个未紧化的时空方向可以当作半径 R → ∞ 的紧化方向来处理，
+    其 T 对偶方向（紧化半径 R' = α'/R → 0）与之等价；
+    即 duality.t-duality-is-cft-isomorphism 的结论在 R → 0（或 R → ∞）的极限下仍成立。**
+  本书没有为这一步给出任何论证；它是把「有限半径处的对偶」外推到极限。
+uses_conventions: [conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7（p.268 起，把 D 膜放进未紧化时空的整段讨论）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E154 与 **Q27**。
+      ⚠ 本条**不是原书的陈述**，而是抽取记录建议单列的隐含前提。
+      Schrans 在 §8.116 的脚注 12 逐字提出（笔记 p.546，L1）：
+      「The coordinate X² is not compactified. We can treat this as the limit of a
+      compactified spacetime coordinate with R → ∞. The T-dual coordinate X'² than has
+      compactification radius R → 0. **But do all our arguments about T-duality hold in
+      this limit? I.e. is an uncompactified dimension really equivalent to its T-dual
+      dimension with zero compactification radius?**」
+tags: [t-duality, d-brane, decompactification, limit, hidden-assumption]
+notes: |
+  抽取记录 Q27 明确指出这不是伴读者的糊涂，而是一个**真实的适用范围问题**：
+  duality.t-duality-is-cft-isomorphism 的论证是在固定有限 R 上做的
+  （模式展开、离散谱、格求和都假定 R 有限非零）；
+  R → 0 时绕数态的塔变得连续，谱的结构本身改变。
+
+  本节点的存在只是为了让依赖它的结论（DBI 作用量、T 对偶改变膜维数）在报告中
+  显示出真实的证据强度，而不是把这一步藏起来。
+author: curator-polchinski-ch8
+created: "2026-09-11"

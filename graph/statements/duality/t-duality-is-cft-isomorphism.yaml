@@ -1,0 +1,52 @@
+id: duality.t-duality-is-cft-isomorphism
+kind: proposition
+title: T 对偶把半径 R 与半径 α'/R 的紧化自由玻色子送成同一个世界面理论
+statement: |
+  设玻色闭弦的一个坐标 X = X_L + X_R 紧化在半径 R（conv.compactification-radius），
+  其余坐标不动。定义**对偶坐标**
+    **X' ≡ X_L − X_R**,
+  等价地在右行部分作替换 ᾱ_m ⟼ −ᾱ_m（m ≠ 0）、x_R ⟼ −x_R、p_R ⟼ −p_R。则：
+  (1) 该替换保持右行振子的对易关系 [ᾱ_m, ᾱ_n] = m δ_{m+n,0}，即它是振子代数的一个自同构；
+      它在零模上的唯一效果是把 p_R（即 k_R）反号；
+  (2) 由 duality.t-duality-spectrum-equivalence，k_R 反号也可以由 n ↔ w、R ⟼ α'/R 实现；
+  (3) 因此**半径 R、坐标 X 的紧化自由玻色子**与**半径 α'/R、坐标 X' 的紧化自由玻色子**
+      在下述两个层面逐条对应：
+      (3a) **谱**：态一一对应（n ↔ w，振子不动），质量与 level matching 逐条相同；
+      (3b) **世界面算子**：能动张量 T = −(1/α') ∂X ∂X、T̄ = −(1/α') ∂̄X ∂̄X 在替换下不变，
+           对应顶点算子由同一组 X_L、X_R 构成，故其 OPE 逐项相同。
+  **本陈述的边界**：它只覆盖**单个紧化自由玻色子**（平坦背景、常 dilaton）的情形，
+  不是「T 对偶在任意背景、任意 α' 阶下成立」的陈述。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.28)，p.247；用到 (8.2.16)（X_L、X_R 的模式展开）与 (8.3.27)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E133，证据等级：
+      **式号与页码 L1，原书措辞 L0**。本轮拿到的全部措辞都是 Schrans 的复述
+      （笔记 p.461），抽取者**未能取得原书这一段**。
+      ⚠ 见抽取记录 Q20：无法确认原书用的是「the same CFT」/「exactly equivalent」
+      还是只说了「谱相同」「振幅相同」，也无法确认「非微扰」这个词是否出自原书。
+tags: [t-duality, compactification, cft, closed-string, worldsheet, phase2]
+notes: |
+  **未核实的更强措辞（抽取记录 Q20，本图不写进陈述）**：Schrans 的复述逐字为
+  「the theory with X and X' are exactly the same CFTs, and this is a
+  **non-perturbative** statement, as they have the same OPE and energy-momentum tensor.
+  The two theories related by T-duality are thus the same, also at a non-perturbative level.」
+  ——「**同一个 CFT**」与「**非微扰**」这两句**均未核对原书**，故不进入 statement，
+  只记在此。若日后核实原书确有此措辞，应新建 v2 陈述并把本卡标 superseded_by，
+  不得就地改写本卡的 statement 文本。
+
+  上面的 (3b) 是把 Schrans 给出的理由（「相同的 OPE 与能动张量」）写成可检查的形式；
+  即使这条理由确实出自原书，它给出的也是**世界面 CFT 同构**，而不是
+  「弦论作为时空理论在非微扰层面等价」——后者还需要弦耦合展开之外的输入，
+  本书此处没有给。
+
+  独立的第二条路线（**不作为本卡的 source**）：Headrick 习题解答 Problem 8.3
+  把 X^{25} 的平移对称性规范化（引入世界面规范场 A_a 与 Lagrange 乘子 φ），
+  积掉 A_a 得到 **Buscher 变换规则**（G'_{25,25} = G^{−1}_{25,25}，B_{25μ} ↔ G_{25μ}）。
+  按 lead 裁决（2026-09-10），个人笔记/习题解答不得作为推导 sources[] 承载论证；
+  且它是**习题级**、是路径积分层面的规范化论证而非 CFT 同构的证明，
+  并且 Headrick 明说**没有**计算 dilaton 的移动，细节指向 Roček–Verlinde (1992)。
+  抽取记录 Q20 建议把 rocek-verlinde-1992 登记为独立一手来源候选——本轮未登记。
+author: curator-polchinski-ch8
+created: "2026-09-11"

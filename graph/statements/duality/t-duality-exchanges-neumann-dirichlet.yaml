@@ -1,0 +1,35 @@
+id: duality.t-duality-exchanges-neumann-dirichlet
+kind: proposition
+title: T 对偶把 Neumann 边界条件换成 Dirichlet 边界条件
+statement: |
+  设玻色开弦的一个方向紧化在半径 R，X = X_L + X_R 是该紧化坐标，
+  **对偶坐标**为 X' = X_L − X_R（duality.t-duality-is-cft-isomorphism）。则两者的导数满足
+    **∂_σ X(z, z̄) = − i ∂_τ X'(z, z̄)**   （(8.6.15)；σ、τ 是世界面空间/时间坐标）。
+  因此 X 在端点满足 **Neumann** 条件
+    ∂_σ X(0) = ∂_σ X(π) = 0
+  当且仅当对偶坐标满足
+    ∂_τ X'(0) = ∂_τ X'(π) = 0,
+  即 **X' 在端点不随世界面时间变化——端点被钉死在 X' 的一个固定值上，
+  这正是 Dirichlet 条件**。
+  换言之：在对偶描述中，开弦的端点不再能在对偶方向自由移动。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.15)，p.266"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E151，证据等级 L1
+      （Schrans §8.106，笔记 p.521）。他用 z = e^{−iw} = e^{τ−iσ}、
+      ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄ 逐式复现（[8.469]–[8.471]）。
+tags: [t-duality, open-string, boundary-condition, dirichlet, neumann, d-brane, phase2]
+notes: |
+  **这是本章可信度最高的一条主线**（抽取记录 §11 建议 3）：∂_σX = −i∂_τX' 是两行代数，
+  伴读者完整复现。其意义是：**D 膜在本书里不是新公设，而是同一个世界面理论在
+  对偶描述下 Neumann 条件的像**。
+
+  注意它与开弦「没有绕数因而没有对偶」（compact.open-string-no-winding）不矛盾：
+  开弦的 T 对偶不是把谱映回自身，而是把**边界条件**换掉；被映射的是同一个体
+  （bulk）CFT，变的是边界条件的类型。
+
+  D 膜的定义与端点落在同一超平面这一结论见 branes.d-brane-from-t-duality。
+author: curator-polchinski-ch8
+created: "2026-09-11"

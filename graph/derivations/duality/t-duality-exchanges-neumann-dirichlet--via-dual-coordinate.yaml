@@ -1,0 +1,32 @@
+id: duality.t-duality-exchanges-neumann-dirichlet--via-dual-coordinate
+target: duality.t-duality-exchanges-neumann-dirichlet
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: duality.t-duality-is-cft-isomorphism
+    note: 提供对偶坐标 X' = X_L − X_R 的定义与它给出同一个世界面理论这一事实。
+  - id: worldsheet.open-string-neumann-boundary-condition
+    convention_map: |
+      上游在洛伦兹世界面（conv.worldsheet-lorentzian）上写 ∂^σX^μ = 0；
+      本节点在欧氏世界面复坐标（conv.worldsheet-euclidean / conv.worldsheet-complex-coords）
+      下写同一条件，换算是 z = e^{−iw}、w = σ¹ + iσ², ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄
+      （Schrans [8.469]–[8.471] 用的正是这套）。
+  - id: worldsheet.open-string-doubling-trick
+    inferred: true
+    note: |
+      开弦上「X_L 与 X_R 是同一个全纯场在双倍区域上的两半」这一结构是把 X' = X_L − X_R
+      写成开弦上的局域场的前提。原书在 §8.6 没有回引 doubling trick，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.15)，p.266"
+    note: 抽取记录 polchinski-1998-v1#E151（L1，Schrans §8.106，笔记 p.521，[8.469]–[8.471]）。
+summary: |
+  由 X = X_L + X_R、X' = X_L − X_R 与 ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄ 直接得
+  ∂_σ X = −i(∂X_L − ∂̄X_R) = −i ∂_τ X'。
+  于是 ∂_σX = 0（Neumann）⟺ ∂_τX' = 0（端点处 X' 不随时间变化 = Dirichlet）。
+gaps:
+  - "这一步是两行代数、前提完整，缺 reviewer 独立复核记录，按 docs/STATUS_LEVELS.md 不走 rigorous 例外；有复核后可升 rigorous（但上游 duality.t-duality-is-cft-isomorphism 仍是 physical-argument，有效状态不变）。"
+  - "「∂_τX'|_∂ = 0 ⟺ X'|_∂ = const」这一步（从导数为零到取值固定）在来源中没有单独论证；它需要端点在世界面时间上连通。"
+  - "上游 duality.t-duality-is-cft-isomorphism 的原书措辞未核实（抽取记录 Q20）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

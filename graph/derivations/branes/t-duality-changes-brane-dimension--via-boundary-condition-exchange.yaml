@@ -1,0 +1,27 @@
+id: branes.t-duality-changes-brane-dimension--via-boundary-condition-exchange
+target: branes.t-duality-changes-brane-dimension
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+  - id: duality.t-duality-exchanges-neumann-dirichlet
+  - id: duality.t-duality-in-decompactification-limit
+    inferred: true
+    note: |
+      按抽取记录 Q27 的建议加的边：本条在**未紧化**方向上使用 T 对偶（把 D25 膜逐步
+      对偶成低维膜），这需要「未紧化维 = R → ∞ 的紧化维、其对偶维半径 → 0」这一外推。
+      **本书没有论证这一步，也没有把它写成前提**，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7 附近（Schrans 说在原书 p.269），无式号"
+    note: 抽取记录 polchinski-1998-v1#E155（内容 L1、式号 L0）。
+summary: |
+  T 对偶按 duality.t-duality-exchanges-neumann-dirichlet 逐方向交换 Neumann 与 Dirichlet。
+  膜的世界体维数 p + 1 = 满足 Neumann 的方向数，故每对一个 Neumann 方向作对偶，
+  p 减 1；对一个 Dirichlet 方向作对偶，p 加 1。
+gaps:
+  - "⚠ 在未紧化方向上使用 T 对偶依赖 duality.t-duality-in-decompactification-limit，该节点是 conjecture（本书无论证）。因此本条的有效状态是 conjecture，不是 physical-argument。"
+  - "无式号：Schrans 说这段在原书 p.269，但没有给出式号（抽取记录 §10）。"
+  - "「膜的维数 = Neumann 方向数」这一记账在 branes.d-brane-from-t-duality 的定义里，来源没有把它写成独立命题。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

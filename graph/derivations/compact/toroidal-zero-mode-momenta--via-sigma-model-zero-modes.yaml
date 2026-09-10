@@ -1,0 +1,30 @@
+id: compact.toroidal-zero-mode-momenta--via-sigma-model-zero-modes
+target: compact.toroidal-zero-mode-momenta
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.closed-string-winding-sector
+    note: 一维的绕数边界条件；k 维情形是它对每个紧化方向的直接推广（原书 (8.2.3) → (8.4.4)）。
+  - id: compact.circle-momentum-quantization
+    inferred: true
+    note: |
+      k 维时用的是 p_m = n_m/R（每个紧化方向一条）。抽取记录只在一维情形
+      （(8.1.5)/(8.2.2)）给出这条量子化，k 维的版本没有独立位置，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.4)–(8.4.8)，p.249–250；用到 (3.7.6)（非线性 σ 模型）"
+    note: |
+      抽取记录 polchinski-1998-v1#E136（L1，Schrans §8.48–§8.53，笔记 p.465–467）。
+summary: |
+  把零模位形 X^m = x^m(σ²) + w^m R σ¹ 代入含 G_{mn}、B_{mn} 的非线性 σ 模型作用量
+  (3.7.6)，取 g^{ab} = δ^{ab}，得到零模的一维（时间方向）拉氏量 (8.4.5)。
+  对 ẋ^m 求正则动量得 p_m = (1/α')(G_{mn}v^n + B_{mn}w^n R)；
+  令 p_m = n_m/R 并解出 v_m 即得 v_m = α'n_m/R − B_{mn}w^n R。
+gaps:
+  - "⚠ 勘误依赖：(8.4.5) 最后一项的符号按 Polchinski 勘误表更正（Schrans 明记），而本项目尚未取得勘误表原件（抽取记录 Q24）。"
+  - "⚠ (8.4.8) 的整体符号 Schrans 复现不出（「an overall minus sign that I can't trace」），他靠「这个形式正定所以一定对」接受；本节点因此把哈密顿量写成正定形式而不宣称已验证。"
+  - "Schrans 对 (8.4.5) 的 1/2π 因子存疑（「I am not sure what happens with the factor 1/2π」）。"
+  - "非线性 σ 模型作用量 (3.7.6) 本身在本图中没有节点；把常数 G_{mn}、B_{mn} 背景当作自洽世界面理论（Weyl 不变）也没有在此处论证。"
+  - "「取 g^{ab} = δ^{ab}」是规范选择，其合法性（共形规范可达性）在本图中是既有的 physical-argument 缺口。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

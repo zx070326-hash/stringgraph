@@ -1,0 +1,26 @@
+id: branes.wilson-line-eigenvalues-are-brane-positions--via-dual-coordinate-integration
+target: branes.wilson-line-eigenvalues-are-brane-positions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+  - id: compact.wilson-line-shifts-open-string-momenta
+  - id: duality.t-duality-exchanges-neumann-dirichlet
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.17)–(8.6.19)，p.266–268"
+    note: 抽取记录 polchinski-1998-v1#E152（L1，Schrans §8.107–§8.112，笔记 p.521–526）。
+summary: |
+  把 (8.6.15) 沿 σ¹ ∈ [0, π] 积分：X'(π) − X'(0) = ∫dσ¹ ∂_σ¹X' = i∫dσ¹ ∂_σ¹... 的结果
+  正比于该弦在紧化方向的运动学动量 v_d。无 Wilson 线时 v_d = ℓ/R 给
+  X'(π) − X'(0) = −2πℓR'；带 Wilson 线时 v_d = (2πℓ + θ_i − θ_j)/(2πR)（上游命题）给
+  X'(π) − X'(0) = −(2πℓ − θ_j + θ_i)R'。
+  由于两端点的差只依赖 (i, j) 与 ℓ，可一致地把端点 i 的位置取为 X'(0) = θ_i R'
+  （整体常数任选），即 Wilson 线本征值 = 膜的位置。
+  代入模式展开并用 Dirichlet 条件得 (8.6.19) 的只含 sin 的形式。
+gaps:
+  - "⚠ 勘误依赖：(8.6.19) 最后一项的符号按 Polchinski 勘误表更正（Schrans 明记），本项目尚未取得勘误表（抽取记录 Q24）。"
+  - "⚠ 上游 compact.wilson-line-shifts-open-string-momenta 的电荷指派 (+1, −1) 在来源中未被理解（Schrans Open Questions 第 7 条）；本条的 θ_i − θ_j 结构完全依赖它。"
+  - "「可一致地把端点 i 的位置取为 θ_i R'」用到全部开弦的端点落在同一组超平面上（交叉对称性论证，见 branes.d-brane-from-t-duality 的 source note），本图没有节点承载该论证。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

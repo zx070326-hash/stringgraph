@@ -1,0 +1,20 @@
+id: compact.circle-momentum-quantization--via-single-valuedness
+target: compact.circle-momentum-quantization
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.5) 附近（p.232）"
+    note: |
+      抽取记录 polchinski-1998-v1#E115（L1，Schrans §8.3 笔记 p.421）。
+      式号定位是抽取者做的，见该条的 ⚠。
+summary: |
+  紧化坐标的周期性 x^d ≅ x^d + 2πR 要求基函数 e^{i p_d x^d} 在圆上单值，
+  即 e^{2πi p_d R} = 1，故 p_d R ∈ Z。
+gaps:
+  - "本推导没有依赖：它是从紧化坐标的周期性（由 conv.compactification-radius 定义）出发的一步计算，图中没有更上游的陈述节点承载「圆上的场必须单值」这条要求。"
+  - "「完备基」的精确含义（函数空间、收敛意义）在来源中没有写出；因此不走 docs/STATUS_LEVELS.md 的 rigorous 例外。"
+  - "式号 (8.1.5) 未被任何来源直接认同为这条量子化条件（抽取记录 §10）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

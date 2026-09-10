@@ -1,0 +1,33 @@
+id: compact.narain-moduli-space--via-lattice-orbit
+target: compact.narain-moduli-space
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.narain-lattice-is-even
+  - id: compact.self-dual-lattice-gives-modular-invariance
+  - id: compact.modular-invariance-requires-self-dual-lattice
+    note: |
+      提供「只有偶自对偶格才给模不变理论」这一必要方向；没有它，本节点只描述
+      偶自对偶格给出的那些理论，而不是全部模不变紧化。**该上游在来源中无论证。**
+  - id: compact.o-k-k-orbit-preserves-evenness
+  - id: compact.o-k-k-orbit-preserves-self-duality
+    note: |
+      「全部偶自对偶格构成 O(k,k;R) 的单一轨道」的支点。**该上游在来源中无论证。**
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.28)/(8.4.30)，p.253"
+    note: |
+      抽取记录 polchinski-1998-v1#E142（内容 L1、式号 L2，源内冲突，采目录值）。
+summary: |
+  偶自对偶格的集合被 O(k,k;R) 保持且（按原书）由单一轨道穷尽，故可用 O(k,k;R)
+  参数化全部这样的格。左右各自的转动 O(k;R) × O(k;R) 不改变 ℓ_L²、ℓ_R²，
+  因而不改变谱与理论，应当模掉。最后，把同一个格送回自身的离散变换 O(k,k;Z)
+  给出的是同一个格、同一个理论，也应模掉。剩下的商空间即 Narain 模空间。
+gaps:
+  - "⚠ 「全部偶自对偶格构成单一 O(k,k;R) 轨道」依赖 compact.o-k-k-orbit-preserves-self-duality，**没有任何来源给出论证**；且「轨道传递性」本身（不只是「轨道保持在集合内」）在来源中同样没有论证——(8.4.25) 只说 ΛΓ 仍是偶自对偶格，不说反过来任意两个偶自对偶格都被某个 Λ 联系。"
+  - "⚠ 分类的必要方向依赖 compact.modular-invariance-requires-self-dual-lattice（原书只写 'a little thought shows'）。"
+  - "「被 O(k;R)×O(k;R) 联系的格给出相同的理论」这一步只在谱的层面被论证（ℓ_L²、ℓ_R² 不变）；关联函数层面未验证。"
+  - "式号 (8.4.28)/(8.4.30) 有源内冲突，本图采 Schrans 目录值（抽取记录 §9.0）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

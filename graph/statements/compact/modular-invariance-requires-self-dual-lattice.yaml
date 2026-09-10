@@ -1,0 +1,36 @@
+id: compact.modular-invariance-requires-self-dual-lattice
+kind: proposition
+title: 配分函数对一切 τ 模不变 ⇒ Narain 格自对偶（必要性；原书无论证）
+statement: |
+  设 D = 26 的玻色闭弦紧化在 k 维环面上，Narain 格为 Γ（compact.narain-lattice）。
+  断言：**若紧化部分的配分函数 Z_Γ 对一切 τ 模不变，则 Γ 必须自对偶（Γ* = Γ）。**
+  与 compact.self-dual-lattice-gives-modular-invariance（充分性）合起来，即
+  「模不变 ⟺ Γ 偶自对偶」——这正是 Narain 紧化的分类前提。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.24) 的后半句，p.252"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E139，Q21。
+      ⚠⚠ **原书对这半句只有一句话，没有论证**。Schrans 用引号直接转引原话
+      （笔记 p.477，L1，本章仅有的两处直接转引之一）：
+      「Joe claims that "**a little thought shows that it is also necessary if modular
+      invariance is to hold for all τ**". **Unfortunately that little thought has escaped
+      me so far.**」
+      即：伴读者本人也复现不出这一步。
+tags: [compactification, torus, narain, lattice, modular-invariance, consistency, unproved-assertion]
+notes: |
+  ⚠ **本卡的 status 档位待裁决**：按 docs/STATUS_LEVELS.md 现有等级，「文献给出断言
+  但不给任何论证」既不完全是 physical-argument（没有可复核的物理推理步骤），
+  也不是 conjecture（作者并未把它当猜想提出）。本图**暂标 physical-argument**，
+  等 reviewer-ch5 关于「无论证断言」档位的裁定；若裁定新增或归到 conjecture，
+  本卡的推导 status 应随之下调，届时需新建推导节点而不是就地改 status。
+
+  **对 Narain 链的后果**：(8.4.24) 的这半句是「模不变的紧化恰好由偶自对偶格分类」
+  的必要方向。没有它，compact.narain-moduli-space 只是「偶自对偶格给出的那些理论
+  构成的空间」，而不是「全部模不变紧化的空间」。
+
+  升级路径：这在数学上是标准结论（自对偶性可由 θ 级数的模性质反推），
+  但需要一个真正的数学来源；本项目尚未登记这样的文献。
+author: curator-polchinski-ch8
+created: "2026-09-11"
