@@ -18,7 +18,7 @@ uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasor
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1（OCQ 的第一级与第二级伪态分析；第一级给 a = 1）"
-    note: "抽取记录 polchinski-1998-v1#E57。公式号未逐条核对。"
+    note: "抽取记录 polchinski-1998-v1#E56（level 1，(4.1.16)–(4.1.18) 已核实；lead 2026-09-11 订正：原写 E57，E57 是 level 2）。"
   - ref: polchinski-1998-v1
     loc: "§1.3（光锥谱的第一激发级须为无质量 SO(D-2) 矢量）"
     note: "抽取记录 polchinski-1998-v1#E18。"
@@ -34,8 +34,7 @@ notes: |
 
   闭弦对应的量是 a = ã = 1（左右各一份），质量壳为 α' m^2 / 4 = N - a；需要时另建节点。
 
-  from: polchinski-1998-v1#E57, polchinski-1998-v1#E18
-  （抽取记录文件 literature/extractions/polchinski-1998-v1.md 在本分支中尚不存在，
-   编号由 reviewer/auditor 提供；合并前应确认编号与该文件一致。）
+  from: polchinski-1998-v1#E56（level 1 ⇒ a = 1）, polchinski-1998-v1#E57（level 2）, polchinski-1998-v1#E18
+  （lead 2026-09-11 订正：原只写 E57 且称抽取记录不存在；现文件已在 main，E56 = level 1 已核实，E57 = level 2 式号未核实。）
 author: curator-critdim
 created: "2026-09-10"

@@ -8,7 +8,7 @@ depends_on:
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1（OCQ 伪态/零态分析：第一级给 a = 1，第二级在 a = 1 下给 D = 26）"
-    note: "抽取记录 polchinski-1998-v1#E57。公式号未逐条核对。"
+    note: "抽取记录 polchinski-1998-v1#E56（level 1，a = 1；(4.1.16)–(4.1.18) 已核实）与 #E57（level 2，D = 26；式号未核实）。lead 2026-09-11 订正原 E57 单引。"
   - ref: gsw-1987-v1
     loc: "§2.2.2（伪态与零态的条件）"
     note: 已从 mostly-minus / α'=1/2 转写。
@@ -29,7 +29,7 @@ summary: |
 gaps:
   - "'伪态必须解耦'是幺正性/规范不变性的一致性要求，不是定理；这是本推导记为 physical-argument 而非 proof 的原因。零态条件本身的代数计算是严格的。"
   - "本推导给出 a = 1，不给出 D = 26；D = 26 见 worldsheet.critical-dimension-old-covariant 与 worldsheet.critical-dimension-brst。"
-  - "抽取记录编号 polchinski-1998-v1#E57 由 reviewer 提供，对应的抽取记录文件在本分支中不存在，编号未能自行核对。"
+  - "抽取记录编号已核对（lead 2026-09-11）：level 1 分析是 E56，level 2 是 E57；原 gap 所述文件不存在的情况已不成立。"
   - |
     **【2026-09-11（二）：形式化只覆盖了本推导的一个方向，本推导仍是 physical-argument】**
     （curator，依据 formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577。）
