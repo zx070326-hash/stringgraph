@@ -115,6 +115,8 @@
 - ~~待建：math.virasoro-universal-central-extension~~ 已建（2026-09-11，Feldvoss–Siciliano Lemma 2.6）。`math.witt-algebra-perfect` 与 Hochschild–Serre 登记已完成（2026-09-11）；witt-perfect 的 Lean 形式化已派；PBW 基元模态排列方向（Kytölä 递增 vs 本图递减）待统一。kac-raina 2013 二版是否单独登记待裁。
 - ~~待建：正规序等同节点~~ 已建 `worldsheet.normal-ordering-modes-agree`（2026-09-11）。后续拆：X 半边弱节点（让 c = D 的 OPE 路线不拖进鬼场链）与不含常数值的纯代数弱节点（可走 rigorous 例外）。`conformal-normal-ordering` 已出 v2（任意自由场含费米型，2026-09-11）。
 - 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
+- 待建：**`worldsheet.free-boson-vertex-algebra`**（D 个自由玻色子（不定号差）⊗ C[Z k_0] 的 Heisenberg/格点顶点代数，动量塔为其模；来源 FLM / Kac / Lepowsky–Li）与 **`math.vertex-algebra-jacobi-identity`**（Borcherds 恒等式带编号）。补上后 G–N 推导 `ddf-commute-with-virasoro--via-vertex-algebra-primary` 直接升 rigorous，无鬼定理随之回 rigorous——**这是当前最短的升级路径**（curator-gn-ddf 2026-09-11）。
+- 待处理：Polchinski v1 原书核实（§12.10）30 条 loc 修改、15 条作者自承缺口、Q6（weyl-anomaly-v2 的 c^m=26 应挂 §4.3 (4.3.9)）、Q22 撤销 Narain 压级建议、Q3（OPE 收敛 p.69 有论证）。
 - 待建：**"光锥质量壳 → 协变振幅外线 on-shell"**（§1 光锥谱与 §6 协变振幅外线之间的系统性缺环，§6 分支 6 条 inferred 边全指向它；reviewer-ch6）
 - 待建：`compact.kaluza-klein-metric-ansatz`（(8.1.2)，KK 塔的前提 G^{μd}=0 目前只在陈述文本里）；Chan–Paton 卡就位后 Wilson 线两卡补边
 - 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载

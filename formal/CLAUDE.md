@@ -36,6 +36,10 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
   这条命令**不在** `validate` 和 pre-commit 里（要起 Lean，太慢），改完 Lean 后自己跑。
 - **禁止**为了让 `validate` 通过而写带 `sorry` 的陈述。没准备好就不写声明，像 `NoGhost/Statement.lean` 那样在文件头写清楚。
 
+## worktree 里跑公理检查的两条坑
+- worktree 的 `lake env` 指向 worktree 自己那份**部分构建**的 mathlib，`lake env lean --run scripts/check_axioms.lean` 默认 `--import StringFormal` 会因缺 olean 崩。**必须加 `--import <你改的模块>`**。
+- 声明名带撇号（如 `foo'`）不能作为命令行参数（bash 吞引号），用 `--all < names.txt`。
+
 ## 目录
 
 ```
