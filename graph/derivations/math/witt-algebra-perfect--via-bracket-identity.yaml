@@ -8,6 +8,17 @@ depends_on:
       非 inferred：整条论证只用到该定义卡里的括号关系 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n} 与
       「{ℓ_n : n ∈ ℤ} 是基」这两件事，别的什么都不用。
       **基环收紧**：该卡对任意交换环 R 定义 W(R)，本推导（与目标陈述）取特征零的域 k。
+  - id: math.witt-algebra-derived-algebra
+    inferred: false
+    note: |
+      2026-09-11 新增。承载目标陈述的 **(1) 完美性**，且形式更强更正确：
+      对任意交换环给出充要条件「[W(R), W(R)] = W(R) ⟺ 2 ∈ R^×」，并给出一致见证
+      2 ℓ_n = [ℓ_{n+2}, ℓ_{−2}] − [ℓ_{n+1}, ℓ_{−1}] 与 W(ℤ) / W(ZMod 2) 两个反例。
+      该卡是 formalized（`StringFormal.Virasoro.WittAlgebra.derivedSeries_one_eq_top_iff`）。
+      本推导的 char 0 域情形是它的特例（char k = 0 ⟹ 2 ∈ k^×）。
+      **本推导仍保留 summary 里的手写两行**，因为目标陈述还含 (2) H^1(W, k) = 0
+      与「(1) ⟺ (2)」的字典，那两条新卡不覆盖、也没有任何形式化（见 gaps）。
+      加这条边的效果：目标陈述的 (1) 部分不再只靠本推导的删减重算背书。
 sources:
   - ref: feldvoss-siciliano-2025
     loc: "Lemma 2.6, p. 7：证明里对 **𝒱** 的完美性给出逐字的三步计算；H¹(𝒲, 𝔽) = 0 本身在同一句里作为已知引用（归给 [24, Section 2]），**无单独编号**"
@@ -55,12 +66,25 @@ gaps:
   - "**「(1) ⟺ (2)」的一般公式没有独立节点**。H¹(𝓛, k) = (𝓛 / [𝓛, 𝓛])^* 在本图中只以来源
      （ecker-schlichenmaier-2018 §3.3.2）的形式出现，没有承载它的 statement，故这一步没有图内的边。
      若将来建了「李代数上同调低维公式」节点，本推导应加一条依赖。"
-  - "**未形式化**。Kytölä 的 VirasoroProject 有 WittAlgebraCohomology.lean，
+  - "**(2) H¹(W, k) = 0 与「(1) ⟺ (2)」的字典未形式化；(1) 已形式化**（2026-09-11 改写）。
+     ↓ 原文保留：「Kytölä 的 VirasoroProject 有 WittAlgebraCohomology.lean，
      但 researcher 2026-09-11 核实其文件清单里**没有**完美性 / H¹ 的结果
      （math-sources.md 第 30.4 节）。本仓库 formal/ 也没有。故上限是 rigorous。
      顺带：这是一条**很适合先形式化的**目标——载体 math.witt-algebra 已是 formalized
      （StringFormal.Virasoro.WittAlgebra），(1) 的 Lean 陈述可以完全绕开上同调，
-     只写 `∀ p, lgen p ∈ LieAlgebra.derivedSeries ... 1` 之类。"
+     只写 `∀ p, lgen p ∈ LieAlgebra.derivedSeries ... 1` 之类。」
+     **现状**：上面这条建议已被 formalizer 照做（WittPerfect.lean，分支
+     agent/formalizer/witt-perfect，lead 以 20cc08f 合入 main），并单列为
+     math.witt-algebra-derived-algebra（formalized），本推导已加边指向它。
+     但 (2) 与那条字典**仍然没有任何形式化**（本仓库与 VirasoroProject 都没有），
+     故本推导与目标陈述的上限仍是 rigorous。"
+  - "**本推导 summary 第一步的见证在正特征会失效**（2026-09-11 补记，来自 formalizer 的核对）。
+     summary 写 ℓ_p = (1/p) [ℓ_p, ℓ_0]，这需要 **p 在基环中可逆**：在 char 0 的域上没问题
+     （目标陈述的设定），但在 char 3 处对 p = 3 就失效（一般地 char q 处对 q | p 失效），
+     故这一行**不能**照搬到正特征。真正一般的、不需要按奇偶或模素数分情况的见证是
+     2 ℓ_p = [ℓ_{p+2}, ℓ_{−2}] − [ℓ_{p+1}, ℓ_{−1}]（只要 2 可逆），
+     见 math.witt-algebra-derived-algebra 的 (1)。这不影响本推导在 char 0 下的正确性，
+     记在此处以免有人把这两行推广出去。"
 notes: |
   【status 裁决与复核状态】按 docs/STATUS_LEVELS.md，等级 4 (rigorous) 的例外条款要求推导节点
   在 notes 写 `reviewer-verified: <agent>, <date>`。已由 reviewer-batch5b 复核（见下）。

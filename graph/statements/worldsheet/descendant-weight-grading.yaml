@@ -24,7 +24,37 @@ sources:
       (2.9.3)、(2.9.14)、(2.9.15) 三处。这与既有节点 worldsheet.verma-module 把 loc 写成
       「§2.9」有张力，见本节点 notes。
 tags: [cft, virasoro, highest-weight, representation-theory]
+superseded_by: worldsheet.descendant-weight-grading-v2
 notes: |
+  【本卡已换代（2026-09-11 下午，curator）】接替者
+  worldsheet.descendant-weight-grading-v2（proposition，formalized，
+  lean_decl `StringFormal.Virasoro.lie_lgen_zero_wordActOn`）。
+  换代的**唯一**理由是本卡陈述的末句把两件强弱不同的事写在一条命题里：
+    (i) 本征值公式 L_0 (L_{−k_1}…L_{−k_n} v) = (h + Σ k_i)(…) —— 已形式化，且 Lean 版更强；
+    (ii) 「特别地……其 L_0 本征值**严格大于** h，故 v 生成的最高权模按 L_0 本征值分级为
+         ⊕_{N ≥ 0} V_{h+N}，其中 V_h 由 v 张成」—— **未形式化，且如实登记两处毛病，见下**。
+  v2 只承载 (i)，故可标 formalized；(ii) 的缺口留在本卡这里。
+  **本卡 statement 文本一字未动**（根 CLAUDE.md 原则 1），推导
+  worldsheet.descendant-weight-grading--via-virasoro-commutators（rigorous）保留不删。
+
+  【(ii) 的两处毛病，按 formalizer 的核对逐条登记】
+  (a) **「本征值严格大于 h」在一般基环上无意义**。h ∈ R，R 只是交换环（Lean 里是交换 ℚ-代数），
+      没有序关系。可说的正确内容是「与 h 相差一个**正整数** N = Σ k_i」。
+      进一步，「不同 N 的本征值两两不同」需要 **char R = 0**
+      （h + N = h + N′ ⟹ N = N′ 用到 Nat.cast 单射；Lean 里是 `levelSpan_iSupIndep` 的 CharZero 假设）。
+      本卡陈述把这句写成无条件的，**这是本卡的一处错误**，也是必须换代而非原地修补的理由。
+  (b) **无条件的 ⊕ 分解是错的**。即便对 Verma 模 V(c,h)，worldsheet.verma-module-v2 也只在
+      任意基环上给 **⨆**_N V_N = V(c,h)（`iSup_levelSpan_eq_top`）；内直和 `isInternal_levelSpan`
+      与「V_N 恰是 (h+N)-特征子空间」`levelSpan_eq_eigenspace` 都限定 `[Field K] [CharZero K]`。
+      对一般最高权模连 ⨆ 都要另证。
+  (c) **「V_h 由 v 张成」更强**：它蕴含 v ≠ 0，即模非零，需要 PBW / 自由性输入，
+      见 math.verma-module-free-over-negative-part 的 (4)。本卡与 v2 都不承载它。
+  (d) 顺带（不是毛病，是可加强处）：显式公式**只用 L_0 v = h v**，不用 L_n v = 0 (n > 0)，
+      也不用中心荷（中心项因子 m(m² − 1) 在 m = 0 处为零）。本卡把最高权条件写进前提是
+      多余的假设；v2 已改为只要一条本征方程，并对**任意符号**的词成立。
+
+  ————— 以下为本卡原有 notes，保留 —————
+
   **本节点是纯表示论命题**：它对 Virasoro 代数的任意最高权模成立，不需要幺正性、
   不需要态-算子同构、不需要那个模是不可约的或是 Verma 模。因此它可以标 rigorous
   而不被 CFT 语境里的 physical-argument 节点拖低。

@@ -62,6 +62,31 @@ notes: |
   【特征假设】陈述限定 char k = 0，与 feldvoss-siciliano-2025 的设定一致。
   推导只用到「每个非零整数在 k 中可逆」，故 char 0 是充分的；
   是否能放宽到某些正特征，本图**未验证**，不要顺手推广。
+  ⚠ **2026-09-11 下午：这个问题已被回答**，见下面的【拆卡】一段。
+  答案是：完美性对**一切** 2 可逆的交换环成立（域上即 char k ≠ 2），恰好不能再多；
+  W(ℤ) 与 W(ZMod 2) 是反例。本卡陈述限定 char 0 不改（原则 1），但读到上面那句时请一并读这里。
+
+  【拆卡：只有 (1) 已形式化（2026-09-11 下午，curator）】
+  formalizer 于 formal/StringFormal/Virasoro/WittPerfect.lean（分支 agent/formalizer/witt-perfect，
+  已由 lead 以 20cc08f 合入 main）机器验证的**只有本卡的 (1) 完美性**，且给出比本卡更强的形式：
+    `WittAlgebra.two_smul_lgen_eq`：2 ℓ_n = ⁅ℓ_{n+2}, ℓ_{−2}⁆ − ⁅ℓ_{n+1}, ℓ_{−1}⁆（任意交换环）；
+    `WittAlgebra.isPerfect` / `WittAlgebra.derivedSeries_one_eq_top`（假设 2 可逆）；
+    `WittAlgebra.derivedSeries_one_eq_top_iff`：完美 ⟺ 2 ∈ R^×（**充要**）；
+    `WittAlgebra.derivedSeries_one_ne_top_zmod_two` / `..._ne_top_int`（反例）。
+  本卡的 (2) H^1(W, k) = 0 与「(1) ⟺ (2)」的上同调字典**没有**任何形式化
+  （本仓库没有，Kytölä 的 VirasoroProject 也没有——其 WittAlgebraCohomology.lean 里
+  没有完美性 / H^1 的结果，researcher 2026-09-11 核实，math-sources.md 第 30.4 节）。
+  按 docs/STATUS_LEVELS.md「Lean 证明用的对象若与卡片陈述不逐句一致，命题就不该显示为
+  formalized；正确做法是拆卡，让 Lean 对应的那一半成为 formalized」的规定：
+    · (1) 已单列为 **math.witt-algebra-derived-algebra**（proposition，formalized，
+      lean_decl `StringFormal.Virasoro.WittAlgebra.derivedSeries_one_eq_top_iff`），
+      那张卡承载充要条件与反例；
+    · **本卡不换代、statement 一字未动、不填 formal.lean_decl**，继续承载 (2) 与那条字典；
+    · 本卡的推导 math.witt-algebra-perfect--via-bracket-identity 已加一条 depends_on 指向新卡，
+      故本卡的 (1) 部分现在有形式化背书，但整卡的有效状态仍是 **rigorous**（被 (2) 封顶）。
+      这是正确记账，不是缺陷。
+  ⚠ 本卡陈述【本节点不断言】(a)(b)(c)(d) 与新卡的分工不冲突：新卡同样不碰 H^1/H^2、
+  不碰 Virasoro、不碰单边 Witt。
 
   【记号】来源用 [d_m, d_n] = (n − m) d_{m+n}，本图用 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}
   （conv.virasoro-standard）。二者差一个生成元重标记（d_n ↦ ±ℓ_{±n}），是同一个李代数，

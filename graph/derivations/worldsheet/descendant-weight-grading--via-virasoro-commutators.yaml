@@ -26,6 +26,18 @@ gaps:
      本征值为 h + Σ k_i。"
   - "本推导**不**断言「每个态要么是最高权态、要么是某个最高权态的 descendant」——
      那个分解需要幺正性或完全可约性，不在本节点范围内。"
+  - "**目标陈述末句里无条件的 ⊕ 分解对一般基环是错的，需要 char 0**（2026-09-11 补记）。
+     陈述写「故 v 生成的最高权模按 L_0 本征值分级为 ⊕_{N ≥ 0} V_{h+N}，其中 V_h 由 v 张成」，
+     而本推导的 summary 只证到「各单项式是 L_0 的本征向量、本征值 h + Σ k_i」。要从后者得到
+     **内直和**，必须知道不同 N 的本征值两两不同，即 h + N ≠ h + N′ (N ≠ N′)，这需要
+     char R = 0（形式化侧对应 worldsheet.verma-module-v2 的 `isInternal_levelSpan` /
+     `levelSpan_eq_eigenspace` 的 `[Field K] [CharZero K]` 假设，以及 `levelSpan_iSupIndep`
+     用到的 `Nat.cast_injective`）。在一般交换环上只有 **⨆**（`iSup_levelSpan_eq_top`）。
+     同理陈述里「本征值**严格大于** h」在无序的基环上没有意义。
+     这一条是**目标陈述本身的缺陷**，不是本推导的疏漏；已按纪律换代：目标卡
+     worldsheet.descendant-weight-grading 现 superseded_by
+     worldsheet.descendant-weight-grading-v2（只含本征值公式，formalized），
+     缺口详情记在旧卡 notes。本推导保留，作为该计算的手写记录。"
 notes: |
   reviewer-verified: reviewer-ch23, 2026-09-10。
   按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（lead 裁决 2026-09-10）标 rigorous：

@@ -1,6 +1,6 @@
 id: worldsheet.ocq-spurious-states-v2
 kind: definition
-status: rigorous
+status: formalized
 title: 旧协变量子化中的伪态（Polchinski 意义：S ∩ 质量壳）与零态 N = 伪态 ∩ 物理态
 statement: |
   设定沿用 worldsheet.old-covariant-physical-states 与 worldsheet.spurious-subspace：
@@ -35,7 +35,21 @@ uses:
   - worldsheet.spurious-subspace
   - worldsheet.old-covariant-physical-states
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.spuriousShell
+  lean_file: StringFormal/NoGhost/SpuriousShell.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SpuriousShell.lean :: StringFormal.NoGhost.Fock.{spuriousShell, nullStates, mem_spuriousShell, mem_nullStates, Lop_zero_apply_of_mem_spuriousShell, spuriousShell_le_spuriousSubmodule, physSubmodule_le_ker_Lop_zero_sub, spuriousShell_le_orthComplement, nullStates_eq, nullStates_le_nullSubmodule, nullStates_le_physSubmodule, nullStates_le_spuriousShell, pairing_self_eq_zero_of_mem_nullStates, Lop_neg_apply_mem_nullStates}"
+    note: |
+      本仓库，形式化提交 4cc9f02（"formal: spurious states on the mass shell; descendant grading link"），
+      已由 lead 以 9dd69c0 合入 main；Lean 4 + Mathlib v4.33.1。**逐字对应本卡的定义**：
+        伪态 S(k) = S ∩ ker(L_0 − a) → `Fock.spuriousShell η a a₀ := spuriousSubmodule η a ⊓
+          LinearMap.ker (Lop η a 0 − a₀ • id)`（成员判据 `mem_spuriousShell`）；
+        零态 N(k) = H_phys(k) ∩ S(k) → `Fock.nullStates η a a₀ := spuriousShell ⊓ physSubmodule`。
+      Lean 里截距叫 `a₀`、零模参数（α^μ_0）叫 `a`；本卡陆续使用 Polchinski 系的 a 表截距。
+      文件头自述「Complete, no `sorry`」；**curator 未自行重跑 `lake build`**，
+      依据是 formal/ 的自述、formal/TODO.md 的登记，以及 9dd69c0 已由 lead 合并进 main。
   - ref: polchinski-1998-v1
     loc: "§4.1，eq. (4.1.8)、(4.1.9)，p.122"
     note: |
@@ -58,11 +72,45 @@ notes: |
   现在 (a) 独立成卡 worldsheet.spurious-subspace（formalized），本卡只承担 (b)：S ∩ 质量壳。
   v1 已写 superseded_by 指向本卡；**v1 的 statement 文本一字未动**（根 CLAUDE.md 原则 1）。
 
-  【为什么本卡是 rigorous 而不是 formalized】本卡的对象 S(k) 带质量壳条件，
-  Lean 侧**没有**这个子模（没有 `spuriousSubmodule ⊓ ker (Lop 0 - a₀)` 这样的具名定义），
-  故不填 formal.lean_decl。这不是缺陷而是记账：需要无壳版本的下游结论应引
-  worldsheet.spurious-subspace 与 worldsheet.spurious-subspace-orthogonal-to-physical，
-  需要 Polchinski 逐字定义的下游结论引本卡。
+  【已过期的历史记录：为什么本卡曾是 rigorous 而不是 formalized】
+  以下段落写于 2026-09-11 上午，**已被同日的 SpuriousShell.lean 推翻**；
+  按〈不改已提交节点的历史记账〉的做法原文保留，仅加此抬头标记为过期：
+    「本卡的对象 S(k) 带质量壳条件，Lean 侧**没有**这个子模
+     （没有 `spuriousSubmodule ⊓ ker (Lop 0 - a₀)` 这样的具名定义），故不填 formal.lean_decl。
+     这不是缺陷而是记账：需要无壳版本的下游结论应引 worldsheet.spurious-subspace 与
+     worldsheet.spurious-subspace-orthogonal-to-physical，需要 Polchinski 逐字定义的下游结论引本卡。」
+
+  【现状（2026-09-11 下午，curator）】formalizer 在提交 4cc9f02 新建
+  formal/StringFormal/NoGhost/SpuriousShell.lean，其中的
+    `Fock.spuriousShell η a a₀ := spuriousSubmodule η a ⊓ ker (Lop η a 0 − a₀ • id)`
+  正是上文说「Lean 侧没有」的那个具名子模，`Fock.nullStates := spuriousShell ⊓ physSubmodule`
+  正是本卡的 N(k)。因此本卡自本日起填 formal 并改 status: formalized。
+  上次拆卡把本卡降到 rigorous 的那个理由已不存在；但**拆卡本身仍然是对的**：
+  worldsheet.spurious-subspace（无壳 S）与本卡（S ∩ 质量壳）在 Lean 里确实是两个不同的子模，
+  下游该引哪一张仍然取决于它需不需要质量壳条件，上文那句分派规则照旧有效。
+
+  【本卡陈述里两条有内容的断言各由哪条 Lean 引理承载】本卡是定义卡，但陈述文本内含两句断言：
+    · 「N(k) = H_phys(k) ∩ S（零态的定义对 S 带不带质量壳不敏感）」
+      = `Fock.nullStates_eq`，其唯一输入是 `Fock.physSubmodule_le_ker_Lop_zero_sub`
+      （H_phys ⊆ ker(L_0 − a)，即物理态自动在壳上）；
+    · 「N(k) ⊆ H_0(k)」= `Fock.nullStates_le_nullSubmodule`，配套的
+      `Fock.pairing_self_eq_zero_of_mem_nullStates` 给「零态零范数」。
+      陈述把这一条的**承载**记在 worldsheet.spurious-orthogonal-to-physical 名下，
+      本卡只是引述；Lean 侧两条都在 SpuriousShell.lean 里（后者经 `nullStates_eq` 归结到
+      无壳版的 `spurious_inf_physSubmodule_le_nullSubmodule`）。
+  另有两条本卡不断言、但同文件已证的推论，供下游取用：
+  `Fock.spuriousShell_le_orthComplement`（S(k) ⊥ H_phys）与
+  `Fock.Lop_neg_apply_mem_nullStates`（若 L_{−n}ψ（n ≥ 1）恰为物理态则它是零态）。
+
+  【Lean 侧的缺口（SpuriousShell.lean 文件头 Gaps 的转录；定义卡无 gaps 字段故记在此）】
+  (i) 反包含 H_0(k) ⊆ N(k) **未证**，且不是形式上的小事：它是临界维数命题（D = 26、a = 1）。
+      与陈述里「本图尚未建节点」一致。
+  (ii) **未证** spuriousShell = Σ_{n ≥ 1} L_{−n}（ker(L_0 − a + n)），即不把一个在壳伪态拆成
+      逐个在壳的片段；那需要 S 的 L_0-特征子空间分解，Lean 里没装配。
+      本卡陈述也没有断言这个分解，故不构成不一致；但记在此处以免下游误用。
+  (iii) 逐动量扇区、代数版无位置算符 x^μ、对角 η、R 为交换 ℚ-代数、双线型而非 Hermitian 形式：
+      继承 worldsheet.bosonic-fock-space 与 worldsheet.fock-indefinite-form 的缺口。
+      固定动量扇区 F(k) 在 Lean 侧是全局参数 `a`（= α^μ_0）而非分解指标。
 
   本节点只给定义，不断言任何包含关系。相关命题：
     - worldsheet.spurious-subspace-orthogonal-to-physical：S ⊥ H_phys（无壳版，formalized）；
