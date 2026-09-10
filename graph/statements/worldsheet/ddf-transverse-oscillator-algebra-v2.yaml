@@ -107,6 +107,21 @@ notes: |
     形式化的两条路线：(i) 围道路线需要顶点算子乘积与重排序；(ii) 顶点代数路线需要
     Mathlib 的 Mathlib/Algebra/Vertex/（Locality 仍在 TODO）加零模同态 (2.62)。
 
+  【⚠ statement 里的 worldsheet.ddf-operators-v5 指针：合并 main 后已被 v6 取代（2026-09-11（五）晚，curator）】
+  本卡的 statement 逐字照抄旧卡，因此写的是「worldsheet.ddf-operators-v5 定义的 DDF 算子」。
+  与此同时 main 上（提交 56ca5ac）**v5 已被 worldsheet.ddf-operators-v6 取代**：v6 把 A^i_n 的定义
+  从围道积分改成模态和 A^ε_n = Σ_m (ε·α_m) V^{(n)}_m（与 Lean `StringFormal.NoGhost.ddfOp` 逐句对应，
+  status formalized）。本卡的**依赖边已随 main 自动换代为 v6**（两条推导的 depends_on 都指 v6），
+  只有 statement 与本 notes 里的**文字指针**仍写 v5——按项目原则 1，改陈述文本等于新建卡，
+  故本卡不就地改。
+  **这不影响命题内容**：v5 与 v6 定义的是同一个算子（v6 的模态和就是 v5 围道积分的洛朗展开，
+  见 worldsheet.ddf-contour-equals-mode-sum 一线），两卡的三条结构性前提（k_0² = 0、ε·k_0 = 0、
+  2α' k_0·p = 1）逐字相同。
+  **建议（交 lead / ddf-all-wire 的持有人）**：若要让文字指针也对上，按换代流程新建
+  worldsheet.ddf-transverse-oscillator-algebra-v3（只把 v5 改成 v6，其余逐字），
+  与 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 的同类指针一起做。
+  本任务不做，以免与 ddf-all-wire 分支互相覆盖。
+
   【为什么它对无鬼定理是必需的】worldsheet.no-ghost-theorem-v4 第 (1b) 条断言
   H_phys(k;k_0)/H_0(k;k_0) 与横向 DDF Fock 空间 H^⊥(k) **等距同构**；「H^⊥(k) 上的 Gram 矩阵
   对角正定」这一步以本命题为 (H1)（worldsheet.transverse-ddf-fock-gram-matrix 的假设编号），

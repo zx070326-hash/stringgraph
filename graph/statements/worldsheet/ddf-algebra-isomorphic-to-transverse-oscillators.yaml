@@ -91,6 +91,14 @@ notes: |
   worldsheet.transverse-ddf-fock-gram-matrix 给出，与光锥振子无关。这点已写进该推导
   depends_on 里 v2 那条边的 note。）
 
+  【⚠ statement 里的 worldsheet.ddf-operators-v5 指针：合并 main 后已被 v6 取代】
+  与 worldsheet.ddf-transverse-oscillator-algebra-v2 的同名说明完全相同（见该卡 notes）：
+  main 提交 56ca5ac 把 v5（围道积分定义）换代为 v6（模态和定义，formalized，Lean
+  `StringFormal.NoGhost.ddfOp`）。本卡 statement 的文字指针仍写 v5（与 v2 保持逐字一致），
+  **依赖边不受影响**（本卡的推导只依赖 v2 与 worldsheet.transverse-oscillator-commutators，
+  不直接依赖任何 ddf-operators-* 卡）。两卡定义同一个算子，三条结构性前提逐字相同，
+  故命题内容不变。文字指针的对齐建议与 v2 那条一起做（交 lead / ddf-all-wire 持有人）。
+
   【status 为什么只是 physical-argument】推导 --via-commutation-relations 的论证本身是
   有限步线性代数（两套生成元的对易关系逐字相同 ⟹ 生成元对应的线性映射是李代数同构），
   但按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这要求「前提已完整写出」且
