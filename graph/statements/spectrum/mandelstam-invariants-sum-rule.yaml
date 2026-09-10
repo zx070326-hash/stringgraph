@@ -40,7 +40,7 @@ sources:
           不需要非退化、号差、域，甚至不需要 2 可逆）；
         开弦四 tachyon α'(s+t+u) = −4 → `mandelstam_sum_four_tachyons`（前提 α'm_i² = −1）；
         Minkowski 对角度规的具体版本 → `minkowskiForm` / `mandelstam_sum_diagonal_metric`。
-      ⚠ **闭弦情形 −16/α' 没有单独的 Lean 声明**：它是 `mandelstam_sum` 取 α'm_i² = −4 的一行代入，
+      【2026-09-11 更新，原 ⚠ 已解除】闭弦情形 −16/α' 现由 `mandelstam_sum_four_closed_tachyons`（33ebd33）承载；它是 `mandelstam_sum` 取 α'm_i² = −4 的一行代入，
       formalizer 只写了开弦的特化。见 --via-lean 推导的 gaps。
       另有 `regge_trajectory_sum_four_tachyons`（α_c(x) = a + α'x 时三者之和 = 3a − 4）与
       `regge_intercept_sum_four_tachyons`（a = 1 时 = −1）——**这两条不是本卡的断言**，
