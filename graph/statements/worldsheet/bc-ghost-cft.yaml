@@ -23,6 +23,7 @@ uses:
   - worldsheet.operator-product-expansion
   - worldsheet.primary-field
   - worldsheet.tt-ope-central-charge
+  - worldsheet.conformal-normal-ordering-v2
 uses_conventions:
   - conv.worldsheet-complex-coords
   - conv.virasoro-standard

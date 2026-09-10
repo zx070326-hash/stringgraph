@@ -25,7 +25,7 @@ depends_on:
       XX OPE X^μ(z)X^ν(0) ∼ -(α'/2)η^{μν} ln|z|²。计算 T(z) · [∂X^i(w) e^{i n k_0·X(w)}] 的每一个缩并
       都用它；正是它给出二阶极点系数 ∝ α' n² k_0² 与 ∝ α' n (ε·k_0)。来源处（GSW §2.3.3，式号未核实）
       不逐条列出这一步，标 inferred。
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
     inferred: true
     note: |
       指数算符 :e^{i n k_0·X}: 与 ∂X^i 的交叉缩并规则；没有它无法把 T 与 :e^{i n k_0·X}: 的 OPE
