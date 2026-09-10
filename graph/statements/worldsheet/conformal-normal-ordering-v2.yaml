@@ -1,0 +1,124 @@
+id: worldsheet.conformal-normal-ordering-v2
+kind: definition
+status: rigorous
+title: 任意自由场（含费米型 bc/βγ）的共形正规序：减去自缩并，带费米换序符号
+statement: |
+  **设定。** 设有一族自由（高斯）场 φ_1, …, φ_N，每个 φ_i 带一个 Grassmann 宇称
+  ε_i ∈ {0, 1}（ε = 0 玻色型 / 对易，ε = 1 费米型 / 反对易），并给定两点函数（缩并）
+    ⟨φ_i(x_1) φ_j(x_2)⟩ ≡ G_{ij}(x_1, x_2),
+  它满足与宇称相容的交换对称性
+    G_{ij}(x_1, x_2) = (−1)^{ε_i ε_j} G_{ji}(x_2, x_1)
+  （玻色-玻色与玻色-费米对称，费米-费米反对称）。「自由」在这里的含义就是：
+  所有关联函数由 Wick 定理从 G 生成（worldsheet.operator-product-expansion 的框架内）。
+  本图用到的两个实例：
+    · **X 部门**：φ = X^μ，ε = 0，G^{μν}(z_1, z_2) = −(α'/2) η^{μν} ln|z_{12}|^2
+      （worldsheet.free-scalar-propagator；conv.metric-mostly-plus、conv.alpha-prime-regge）。
+    · **bc 部门**：φ ∈ {b, c}，ε = 1，由 b(z) c(0) ∼ 1/z、c(z) b(0) ∼ 1/z、
+      b b ∼ c c ∼ 0 读出的 G（worldsheet.bc-ghost-cft）。βγ 部门同理，ε = 0 而 G 反号。
+
+  **定义（减去自缩并）。** 正规序 : … : 由下式递归定义：
+    :φ_i(x_1): = φ_i(x_1),
+    φ_{i_1}(x_1) ⋯ φ_{i_n}(x_n)
+      = Σ_{P}  (−1)^{σ(P)}  ( Π_{(a,b) ∈ P} G_{i_a i_b}(x_a, x_b) )  : Π_{c ∉ P} φ_{i_c}(x_c) :,
+  其中 P 跑遍 {1, …, n} 中两两不交的**配对**的集合（含空配对），乘积按下标递增排列。
+  等价的闭式（形式表达式，逐项就是「减去所有自缩并」的组合规则）：
+    :F: = exp( −(1/2) Σ_{i,j} ∫ dx_1 dx_2  G_{ij}(x_1, x_2)  δ_L/δφ_i(x_1)  δ_L/δφ_j(x_2) ) F,
+  费米型场用**左**泛函导数。
+
+  **费米换序符号 (−1)^{σ(P)}（本卡片相对 v1 新增的那一半）。**
+  σ(P) 是把被配对的场两两移到相邻位置所需的**费米型场对换次数**，即：
+  把序列 φ_{i_1} ⋯ φ_{i_n} 重排成
+    ( 配对 (a_1,b_1) 的两个场 ) ( 配对 (a_2,b_2) 的两个场 ) ⋯ ( 未配对的场，保持原相对次序 )
+  这一置换在**只计费米型场**的意义下的符号；等价地，每交换两个相邻的费米型场记一个 (−1)，
+  交换涉及玻色型场记 +1。特别地：
+    · 只有玻色型场时 (−1)^{σ(P)} ≡ 1，本定义逐字退化为 worldsheet.conformal-normal-ordering（v1）。
+    · 两个相邻费米型场的单次缩并 :φ_i(x_1) φ_j(x_2): = φ_i φ_j − G_{ij}(x_1, x_2)（无额外符号），
+      而 :φ_j(x_2) φ_i(x_1): = φ_j φ_i − G_{ji}(x_2, x_1) = −(φ_i φ_j − G_{ij}(x_1,x_2))，
+      与 G 的反对称性一致——即**正规序积与场本身有相同的 Grassmann 宇称与交换规则**。
+    · 三个以上费米场时符号不可省：例如
+      :φ_1 φ_2 φ_3 φ_4: = φ_1φ_2φ_3φ_4 − G_{12}φ_3φ_4 + G_{13}φ_2φ_4 − G_{14}φ_2φ_3
+        − G_{23}φ_1φ_4 + G_{24}φ_1φ_3 − G_{34}φ_1φ_2 + (G_{12}G_{34} − G_{13}G_{24} + G_{14}G_{23}),
+      全为费米型时的符号即上式（Pfaffian 的符号规律）。
+
+  **交叉缩并（乘积规则）。** 两个正规序算子的乘积由**交叉缩并**给出：
+    :F: :G: = Σ_{交叉缩并}  (−1)^{σ}  :( F G 中未缩并的部分 ):,
+  和式只跑「一个来自 F、一个来自 G」的配对（F 内部与 G 内部已被各自的正规序减掉），
+  符号 (−1)^σ 由上一段同一条规则给出。由此可以机械地算出任意自由场算子之间的 OPE。
+
+  **运动方程。** 正规序积满足自由运动方程且**无接触项**：X 部门 ∂∂̄ :X^μ ⋯: = 0；
+  一阶系统 ∂̄ :b ⋯: = 0、∂̄ :c ⋯: = 0。理由同 v1：接触项恰好被减除项抵消。
+
+  **本卡片不断言什么**：
+  (a) 不断言任何具体两点函数的值（那分别是 worldsheet.free-scalar-propagator 与
+      worldsheet.bc-ghost-cft 的事）；
+  (b) 不断言共形正规序与**产生-湮灭正规序**的关系（那是 worldsheet.normal-ordering-modes-agree
+      与两个常数节点 a^X = 0 / a^g = −1）；
+  (c) 不断言 βγ 系统的任何数值（如 c = +11）；本卡只说定义对它同样适用。
+uses:
+  - worldsheet.free-scalar-propagator
+  - worldsheet.operator-equation-of-motion
+  - worldsheet.operator-product-expansion
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.2, eq. (2.2.5)、(2.2.8)（减除与缩并）、(2.2.6) 下方（正规序积满足运动方程）、(2.2.10)（交叉缩并）、(2.2.11)（据此算 OPE），p.39–40"
+    note: |
+      **核实等级（照抽取记录 #E28 写）**：五处公式号全部经 schrans-2020 目录核实
+      （`2.8 p 39: Eq. (2.2.5) and (2.2.8) Subtractions and Contractions`、
+      `2.9 p 39: Below Eq. (2.2.6) Normal Ordered Products Satisfy the Equation of Motion`、
+      `2.10 p 39: Eq. (2.2.10)`、`2.11 p 40: Eq. (2.2.11)`）。
+      **具体表达式为忠实转述，未核对原书**（原书正文在付费墙后，抽取记录 §0）。
+      ⚠ **这一处 loc 只覆盖玻色型（自由标量）**：§2.2 讲的是 X^μ。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.11)（鬼场能动张量 T = :(∂b)c: − λ∂(:bc:)，式号已核实、表达式未核实），p.50–51"
+    note: |
+      **这是「正规序记号确实被用到费米型 bc 系统上」的唯一锚点**，照抽取记录 #E36 的等级写：
+      schrans-2020 目录条目 `2.31 p 51: Eq. (2.5.11) The Ghost Energy-Momentum Tensor`
+      **式号已核实**；但 **T 的具体表达式（(∂b)c − λ∂(bc) 中的系数）未核实**（#E36 备注逐字），
+      因此本条只支持「Polchinski 在 §2.5 对 bc 用了 : … : 记号」这一点。
+      ⚠ **本项目没有核实原书是否把费米换序符号规则写出来**：
+      抽取记录里没有任何一条覆盖「(−1)^{σ(P)}」或等价措辞的条目。
+      故本卡片 statement 里的符号规则是**标准 Wick 定理的费米版本**，
+      由本图按 G 的反对称性补出的措辞，不是来源的逐字断言。这是本卡最弱的一处，见 notes。
+tags: [cft, free-field, normal-ordering, definition, fermionic, bc-system, superseding]
+notes: |
+  【为什么建 v2】worldsheet.normal-ordering-modes-agree--via-self-contraction 的 gaps 里
+  逐字挂着一条：「**共形正规序节点只对自由标量写**：worldsheet.conformal-normal-ordering 的
+  statement 开头是『对自由标量理论』，把它用到 bc 系统（费米、一阶、b(z)c(0) ∼ 1/z）
+  是本推导做的**外推**。……若要消掉这条 gap，应把 conformal-normal-ordering 推广
+  或新建一个 bc 版的正规序定义卡。」本卡片是前一条路：一张覆盖任意自由场的定义卡。
+  按不可违背原则 1，陈述文本不可改，故新建 v2 并把 v1 标 superseded_by。
+
+  【v2 相对 v1 到底多了什么】三件事，其余逐字保留：
+  (1) 设定从「自由标量理论」放宽到「一族带 Grassmann 宇称的自由场 + 一个相容的两点函数」；
+  (2) 显式写出费米换序符号 (−1)^{σ(P)}，并给出四场例子把符号钉死；
+  (3) 明说交叉缩并规则与运动方程条款对一阶费米系统同样成立。
+  **数值上没有任何新断言**：X 部门逐字退化为 v1。
+
+  【status: rigorous 的理由（与 v1 相同）】给定两点函数 G，正规序是**纯组合定义**
+  （对每个多项式算子只涉及有限多项 Wick 缩并，符号是有限置换的符号），不需要额外解析输入。
+  其有效状态自然被 uses 里的 worldsheet.free-scalar-propagator / operator-product-expansion
+  （均为 physical-argument）拉低到 physical-argument——这正是想要的记账方式，
+  与 v1 的有效状态一致，本次换代**不改变任何下游节点的有效状态**。
+
+  【最弱的一处】费米符号规则在本项目的文献核实里**没有对应条目**（见第二条 source 的 note）。
+  它是标准的、且由 G 的反对称性唯一决定，但严格说这一段措辞是本图补的。
+  reviewer 若认为这足以把定义卡压到 physical-argument，请直接改 status 并说明。
+
+  【uses 未改动，且刻意不加 bc-ghost-cft】v2 的 uses 与 v1 逐字相同
+  （free-scalar-propagator、operator-equation-of-motion、operator-product-expansion），
+  以保证换代不动任何有效状态。**没有**把 worldsheet.bc-ghost-cft 加进 uses，理由是：
+  本卡是**参数化**的定义（G 是输入），而 bc-ghost-cft 的 statement 里已经在用 : … : 写 T 与 j
+  却没有声明对正规序卡的依赖——正确的边方向是 **bc-ghost-cft `uses` v2**，
+  反过来会成环。那条边不在本次任务范围内（bc-ghost-cft.yaml 未被本次 claim），
+  留给后续 curator，见报告。
+
+  【查重】新增前跑过 `stringgraph search normal-ordering`：
+  命中的正规序相关节点是 v1、normal-ordering-modes-agree、
+  normal-ordering-constant-ax、bc-ghost-normal-ordering-constant、
+  light-cone-normal-ordering-constant，无一承载「任意自由场的正规序定义」。
+author: curator
+created: "2026-09-11"

@@ -5,7 +5,11 @@ status: physical-argument
 depends_on:
   - id: worldsheet.state-operator-isomorphism
   - id: worldsheet.virasoro-generators-free-boson
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      **换代（curator 2026-09-11）**：原为 worldsheet.conformal-normal-ordering（v1）。
+      v1 的 statement 首句限定「对自由标量理论」，v2 把设定放宽到任意自由场并写出费米换序符号；
+      X 部门逐字退化为 v1，**本推导的内容与有效状态均不变**。
   - id: worldsheet.energy-momentum-laurent-modes
   - id: worldsheet.energy-momentum-tensor-free-scalar
     note: |

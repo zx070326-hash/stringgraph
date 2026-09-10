@@ -3,9 +3,13 @@ target: worldsheet.normal-ordering-modes-agree
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
     inferred: false
     note: |
+      **换代（curator 2026-09-11）**：原为 worldsheet.conformal-normal-ordering（v1）。
+      本推导同时用到 X 部门与**费米型** bc 部门，而 v1 的 statement 首句限定「对自由标量理论」；
+      这正是本推导 gaps 里那条「共形正规序节点只对自由标量写」所说的外推。
+      v2 覆盖任意自由场并显式写出费米换序符号，故那条 gap 已改写（见 gaps）。
       提供共形正规序的定义与自缩并的显式值：X 部门的缩并
       ⟨X^μ(z_1,z̄_1) X^ν(z_2,z̄_2)⟩ = -(α'/2) η^{μν} ln|z_12|^2，
       对 z_1、z_2 各求一次 ∂ 即得本推导用到的 ⟨∂X^μ(z) ∂X^ν(z')⟩ = -(α'/2) η^{μν} / (z-z')^2。
@@ -117,11 +121,14 @@ gaps:
      要抬高，正确做法是新建一个**不含 (iii)** 的弱节点。"
   - "**a^g = -1 没有第二个独立文献源**（抽取记录 E43 订正段落明记：Headrick 讲义本轮未取到全文，
      schrans-2020 §2.80 的结论句本身是笔误）。本推导继承该缺口。"
-  - "**共形正规序节点只对自由标量写**：worldsheet.conformal-normal-ordering 的 statement 开头是
-     『对自由标量理论』，把它用到 bc 系统（费米、一阶、b(z)c(0) ∼ 1/z）是本推导做的**外推**。
-     外推本身是标准的（减去自缩并的组合规则对任意自由场都一样，费米场换序带负号），
-     但图上没有承载它的节点。若要消掉这条 gap，应把 conformal-normal-ordering 推广
-     或新建一个 bc 版的正规序定义卡。"
+  - "~~**共形正规序节点只对自由标量写**~~ **（2026-09-11 已改写）**：原文记的是
+     worldsheet.conformal-normal-ordering（v1）的 statement 开头限定『对自由标量理论』，
+     把它用到 bc 系统（费米、一阶、b(z)c(0) ∼ 1/z）是本推导做的外推，图上没有承载它的节点。
+     现已新建 **worldsheet.conformal-normal-ordering-v2**（任意自由场 + 显式费米换序符号），
+     本推导的依赖已换到 v2，v1 标 superseded_by。
+     **缺口没有被完全消掉，只是下移了一层**：v2 里的费米符号规则 (−1)^{σ(P)} 在本项目的
+     文献核实中**没有对应条目**（抽取记录里没有覆盖它的项，原书正文在付费墙后），
+     是本图按两点函数反对称性补出的措辞。见 v2 第二条 source 的 note 与 notes 的『最弱的一处』。"
   - "**书中没有把本命题单列**：Polchinski §2.7 是在计算过程中并置两种写法，不是陈述并证明
      一条『两种正规序给出同一组 L_m』的命题。本节点的**陈述形式**是本图的整理，
      不是来源的逐字断言；来源支撑的是其中每一步的计算。"
@@ -143,7 +150,7 @@ notes: |
   **给 reviewer 的复核清单**（三点最值得挑）：
   (1) 第二步里"两个减除项相等"（X 部门）的系数：本推导用
       ∂X^μ(z) = -i(α'/2)^{1/2} Σ_m α^μ_m z^{-m-1} 与 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，
-      算出 -(α'/2) η^{μν}/(z-z')^2，与 worldsheet.conformal-normal-ordering 的
+      算出 -(α'/2) η^{μν}/(z-z')^2，与 worldsheet.conformal-normal-ordering-v2 的
       -(α'/2) η^{μν} ln|z_12|^2 求两次导一致。∂X 的归一化常数 -i(α'/2)^{1/2}
       **在本图中没有独立节点**（worldsheet.virasoro-generators-free-boson 只给 α_0 = (2α')^{1/2}p），
       是本推导内联写出的，请一并复核。
