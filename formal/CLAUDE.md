@@ -66,7 +66,7 @@ StringFormal/
                             无 [L_m, V]，无 A^i_n 本身（见文件头 gaps）
   NoGhost/TowerPairing.lean   动量塔上的双线性型 towerPairing = Σ_j ⟨·_j,·_j⟩（BilinForm）：层间正交、
                             对称、towerShift/towerMode/towerLop 的伴随（见文件头 gaps）
-  NoGhost/VertexWeight.lean   顶点算子共形权（进行中）：creaExp 欧拉递推 creaExp_euler 已证；真空上 L_m Φ_J 与 [L_m, V_K] 待做
+  NoGhost/VertexWeight.lean   顶点算子共形权：creaExp 欧拉递推、真空上 L_m Φ_J（m ≥ 0）、**m ≥ 1 的 [L_m, V_J] 恒等式**（lie_Lop_vertexOsc_of_pos）与塔上版本（k_0²=0 时 [L_m, V^{(n)}_K] = (K−m)V^{(n)}_{K−m}）；m < 0 未做
   NoGhost/QuotientForm.lean   H_phys/H_null 上诱导形式：pairing_add_null、nullInPhys、PhysQuot、
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
