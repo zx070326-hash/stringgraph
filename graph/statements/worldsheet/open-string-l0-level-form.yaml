@@ -88,5 +88,20 @@ notes: |
   仍是 physical-argument）两张卡。当时不拆的理由是「(i) 单独看内容太薄」，
   但现在 (i) 有了机器检查的证明，而 (ii) 明确无法形式化，
   合并保存的代价变成了「一条已形式化的结果被一条物理论证封顶且无法记账」。
+
+  **【2026-09-11：已按上述建议拆分，本卡片换代】**（lead 裁决，curator 执行）
+  - 断言 (i) → **worldsheet.open-string-l0-equals-level-plus-mass**（新卡，formalized，
+    推导 --via-lean 指向 `StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule`）。
+    新卡以 **level 分级**指标 N 表述（与 Lean 一致），并把「level = 数算符本征值」
+    这一未形式化的等同列为其明确不断言的边界 (b)。
+  - 断言 (ii)（a^X = 0，共形正规序侧 L_0 与振子式 L_0 相同）→ **不另建新卡**，
+    归 **worldsheet.normal-ordering-constant-ax**（本来就有卡，physical-argument）。
+  - 本卡片写 `superseded_by` 指向新卡；陈述文本与旧推导
+    worldsheet.open-string-l0-level-form--via-zero-mode-substitution **均不改动、保留**。
+  - 需要旧卡完整合取的下游，应同时引 open-string-l0-equals-level-plus-mass 与
+    normal-ordering-constant-ax 两张卡，不要再引本卡片。
+  - 本卡片在换代时无任何 depends_on 入边（只有 notes 文本提及），
+    故换代不改变任何节点的有效状态。
+superseded_by: worldsheet.open-string-l0-equals-level-plus-mass
 author: curator-worldsheet-signature
 created: "2026-09-10"

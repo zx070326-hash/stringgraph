@@ -18,6 +18,18 @@ sources:
       formal/TODO.md 的「无鬼定理岛 / fock-space」记「公理检查：全部声明只用
       propext / Classical.choice / Quot.sound」。**该公理检查目前是形式化者的人工登记，
       没有自动化脚本复核**（formal/TODO.md 基础设施一节的 scripts/check_axioms.lean 未做）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/FockSigned.lean :: StringFormal.NoGhost.Fock.pairing_indefinite（及按目标陈述措辞的有序域版 StringFormal.NoGhost.Fock.pairing_indefinite_field）"
+    note: |
+      本仓库，合并提交 11b4c0f（"merge: Fock form indefinite over ordered rings; Verma level
+      subspaces spanned by partitions (formalizer)"），形式化分支
+      agent/formalizer/straightening-and-indefinite @ 9995a96。这是陈述 (4) 末句
+      「−n < 0 < n 故该型不定」的机器检查（原 gap (v)，2026-09-11 关闭）。同文件的其余声明：
+      `Fock.{pairing_timelike_neg, pairing_spacelike_pos, exists_pairing_self_neg,
+      exists_pairing_self_pos, not_forall_pairing_self_nonneg, not_forall_pairing_self_nonpos,
+      exists_mem_levelSubmodule_pairing_self_neg}`。文件头自述「Complete, no `sorry`」，
+      formal/TODO.md 的 fock-indefinite-over-ordered-ring 一项记「公理只有标准三条」
+      （同样是形式化者的人工登记）。不改 Fock.lean，只加序假设。
   - ref: virasoro-lean-2025
     loc: "Corollary 12.6（带电 Fock 空间 F_α 上的 c = 1 Virasoro 表示）、Theorem 10.1"
     note: |
@@ -50,6 +62,13 @@ summary: |
   5. 陈述 (4)（不定性）：`pairing_X_X` 给 ⟨X_u, X_v⟩ = δ_{uv} · n η^{μμ}；代入
      `minkowski D R = fun μ => if μ = 0 then -1 else 1` 得 `pairing_X_X_minkowski_timelike`
      （= −n）与 `pairing_X_X_minkowski_spacelike`（= +n）。
+
+  6. 陈述 (4) 末句（不定性本身，FockSigned.lean，2026-09-11 补）：在基环上加
+     `[PartialOrder R] [IsStrictOrderedRing R]` 后，由 n ≥ 1 得 −n < 0（`pairing_timelike_neg`，
+     需 D ≥ 1 使 μ = 0 存在）与 0 < n（`pairing_spacelike_pos`，需 D ≥ 2 使 μ = 1 存在），
+     打包为 `pairing_indefinite`：∃ P Q, ⟨P,P⟩ < 0 ∧ 0 < ⟨Q,Q⟩。
+     `pairing_indefinite_field` 是它在 `[Field K] [LinearOrder K] [IsStrictOrderedRing K]` 下的特化，
+     逐字对应陈述「R 是有序域」的措辞。
 gaps:
   - |
     (iii) **只支持对角 η**。Lean 里 η 是 `Fin D → R`（对角元），不是一般对称双线性型。
@@ -61,9 +80,12 @@ gaps:
     但**复情形没有证**。特别地「(α^μ_n)† = α^μ_{−n}」在本节点里是双线性型意义下的伴随，
     不是 Hilbert 空间意义下的 Hermitian 伴随。
   - |
-    (v) 陈述 (4) 末句「−n < 0 < n 故该型不定」在 Lean 中**未单列为定理**：文件在任意
-    `CommRing R` 上工作，没有序结构，只给出两个值 −n 与 +n。从这两个值到「不定」
-    需要 R 是有序域且 D ≥ 2，是一步平凡推理，但没有机器检查。
+    (v) **【已关闭，2026-09-11】** 原文：陈述 (4) 末句「−n < 0 < n 故该型不定」在 Lean 中
+    未单列为定理（Fock.lean 在任意 `CommRing R` 上工作，没有序结构，只给出两个值 −n 与 +n）。
+    现由 formal/StringFormal/NoGhost/FockSigned.lean 的
+    `StringFormal.NoGhost.Fock.pairing_indefinite`（及 `pairing_indefinite_field`）机器检查，
+    见 sources 第二条与 summary 第 6 步。保留此条以存档；本推导的 formalized 状态自此
+    覆盖陈述 (1)–(4) 的**全部**句子。
   - |
     (vi) 本推导继承 worldsheet.bosonic-fock-space 的缺口 (i)（无零模/动量）与 (ii)（未完化）。
     因此本节点**不是**「弦的协变 Hilbert 空间上的 Minkowski 内积」这条陈述，
@@ -77,5 +99,20 @@ notes: |
 
   文献侧（Polchinski / GSW）并没有与本推导对应的论证：他们直接规定内积并计算矩阵元，
   不证唯一性。故本推导的 sources 主项是本仓库，两条文献只挂在陈述节点上作为物理对照。
+
+  【gap (v) 的关闭：序假设比陈述写的弱】（curator 2026-09-11，依据 FockSigned.lean 文件头与
+  formal/TODO.md fock-indefinite-over-ordered-ring 一项）
+  - 陈述 (4) 末句写的是「R 是有序域（如 ℝ）且 D ≥ 2」。Lean 证明**只需有序环**：
+    `[CommRing R] [PartialOrder R] [IsStrictOrderedRing R]`——不需要除法，也不需要全序。
+    有序域版 `pairing_indefinite_field` 只是特化，用来逐字对应陈述措辞。
+  - 维数假设按结论分开：鬼态（负模态）只需 **D ≥ 1**（类时方向 μ = 0 存在），
+    正模态需 **D ≥ 2**（类空方向 μ = 1 存在）；「不定」两者都要，故 D ≥ 2。
+    两个假设都是必要的：D = 0 时空间是 R、型为 ⟨a,b⟩ = ab；D = 1 时型在全空间上半负定。
+  - 附带结论 `exists_mem_levelSubmodule_pairing_self_neg`：**每个** level n ≥ 1 都有负模态态，
+    鬼不集中在某一片。这一条陈述节点没有写，是形式化侧的加强。
+  - Mathlib v4.33.1 **已无 `LinearOrderedField` 类**；「有序域」现写作
+    `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`。陈述节点用自然语言写「有序域」，
+    不受此影响。
+  - FockSigned.lean 继承 Fock.lean 的全部缺口（本推导 gaps (iii)(iv)(vi)）。
 author: curator
 created: "2026-09-10"

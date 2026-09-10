@@ -68,7 +68,8 @@ notes: |
 
   【与 worldsheet.verma-module 的关系】本节点**不**断言 F 是 Verma 模、也不断言最高权或不可约。
   事实上 F 在 α_0 ≠ 0 时是最高权为 α'k² 的 Virasoro 模，但那是另一条命题（且要用到
-  worldsheet.open-string-l0-level-form 的 L_0 = α'k² + N 与 level 分级），本图未建。
+  worldsheet.open-string-l0-equals-level-plus-mass 的 L_0 = α'k² + N 与 level 分级；
+  2026-09-11 前此处写的是 worldsheet.open-string-l0-level-form，该卡已换代），本图未建。
 
   【未覆盖：与内积的相容性】ρ 与 worldsheet.fock-indefinite-form 的双线性型之间
   **没有任何联系被建立**：Sugawara.lean 里没有一条把 `Fock.Lop` 与 `Fock.pairing`
