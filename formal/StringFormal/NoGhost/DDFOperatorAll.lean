@@ -32,7 +32,8 @@ So this file is the `m ≠ 0` file with the hypothesis deleted:
   reason as before (otherwise the coefficient depends on the rung `j`).
 * `lie_towerLop_towerVertex_normalized` — with `2α' k_0 · p = 1` this is the weight-`0` primary
   law `⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`, all `m`.
-* `lie_towerLop_ddfSummand` — the telescoping form, all `m`.
+* `lie_towerLop_ddfSummand_all` — the telescoping form, all `m`.  (The unsuffixed name
+  `lie_towerLop_ddfSummand` is already taken by the `m > 0` version in `DDFOperator.lean`.)
 * **`lie_towerLop_ddfOp`** — `⁅L_m, A^ε_n⁆ = 0` for **every** `m : ℤ`.
 
 ## Why `m = 0` is `0` and not a multiple of `A^ε_n`
@@ -129,5 +130,138 @@ theorem lie_towerLop_towerVertex_normalized (η a b : Fin D → R)
   rw [lie_towerLop_towerVertex η a b hη hbb m n K, hba]
   congr 1
   ring
+
+
+/-! ### `⁅L_m, A^ε_n⁆ = 0` for every `m : ℤ` -/
+
+/-- The bracket of `L_m` with a single DDF summand, in telescoping form
+`⁅L_m, α^ε_j V^{(n)}_j⁆ = (j - m) · α^ε_j V^{(n)}_{j-m} - j · α^ε_{m+j} V^{(n)}_j`,
+now for every `m : ℤ`.  Identical to `lie_towerLop_ddfSummand_of_ne` except that the
+weight-`0` primary law is taken from `lie_towerLop_towerVertex_normalized`; the Leibniz rule
+and `⁅L_m, α^ε_j⁆ = -j α^ε_{m+j}` never cared about the value of `m`.
+
+At `m = 0` the two terms on the right are literally equal, so each summand's bracket vanishes
+on its own — the telescoping below is then trivial rather than merely convergent. -/
+theorem lie_towerLop_ddfSummand_all (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (m n j : ℤ) :
+    ⁅towerLop η a b m, ddfSummand η a b ε n j⁆
+      = ((j - m : ℤ) : R) • ddfShifted η a b ε n m (j - m)
+        - ((j : ℤ) : R) • ddfShifted η a b ε n m j := by
+  simp only [ddfSummand, ddfShifted, show m + (j - m) = j from by ring]
+  rw [lie_mul_end, lie_towerLop_towerModeVec η a b ε hη m j,
+    lie_towerLop_towerVertex_normalized η a b hη hbb hba m n j,
+    smul_mul_assoc, mul_smul_comm]
+  push_cast
+  module
+
+/-- **The DDF operators commute with the whole Virasoro algebra.**
+`⁅L_m, A^ε_n⁆ = 0` for *every* `m : ℤ`, given `k_0² = 0`, `2α' k_0 · p = 1` and transversality
+`ε · k_0 = 0`.  This is the graph node `worldsheet.ddf-commute-with-virasoro` in full.
+
+The proof is the telescoping of `lie_towerLop_ddfOp_of_ne` with the hypothesis `m ≠ 0` simply
+deleted; it was used there only to invoke `lie_towerLop_ddfSummand_of_ne`, which is now
+unconditional.  Writing `G_i = α^ε_{m+i} V^{(n)}_i` and `g i = i • G_i x`, the Leibniz rule
+gives `⁅L_m, α^ε_j V^{(n)}_j⁆ x = g (j - m) - g j`, so the sum over `[lo, up]` collapses to
+`∑_{[lo-m, up-m]} g - ∑_{[lo,up]} g`, and both are compared to the common enlarged window
+`[min lo (lo-m), max up (up-m)]`.  Strips below the window are killed by the vertex-operator
+cut-off (the level cannot go below the vacuum), strips above by the transversality cut-off.
+
+At `m = 0` the two windows coincide, the four boundary strips are empty and the argument
+degenerates to `∑ (g j - g j) = 0`; nothing special has to be said.
+
+Physically: `A^ε_n` is the zero mode of the weight-`1` current `ε·∂X e^{i n k_0·X}`, and the
+zero mode of a weight-`1` current commutes with *all* of Virasoro, `m = 0` included.  It is
+the `m = 0` case that makes DDF states satisfy the `L_0` mass-shell condition automatically. -/
+theorem lie_towerLop_ddfOp (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0)
+    (m n : ℤ) :
+    ⁅towerLop η a b m, ddfOp η a b ε hη hεb n⁆ = 0 := by
+  classical
+  refine LinearMap.ext fun x => ?_
+  obtain ⟨lo, hlox, hloy⟩ : ∃ lo : ℤ,
+      lo + (m.natAbs : ℤ) ≤ n - (towerLevelBound x : ℤ) ∧
+      lo + (m.natAbs : ℤ) ≤ n - (towerLevelBound (towerLop η a b m x) : ℤ) :=
+    ⟨min (n - (towerLevelBound x : ℤ)) (n - (towerLevelBound (towerLop η a b m x) : ℤ))
+        - (m.natAbs : ℤ), by omega, by omega⟩
+  obtain ⟨up, hupx, hupy⟩ : ∃ up : ℤ,
+      (towerModeBound x : ℤ) + (m.natAbs : ℤ) ≤ up ∧
+      (towerModeBound (towerLop η a b m x) : ℤ) + (m.natAbs : ℤ) ≤ up :=
+    ⟨max (towerModeBound x : ℤ) (towerModeBound (towerLop η a b m x) : ℤ) + (m.natAbs : ℤ),
+      by omega, by omega⟩
+  have hwin : ∀ z : TowerFock D R, lo ≤ n - (towerLevelBound z : ℤ) →
+      (towerModeBound z : ℤ) ≤ up → ∀ j ∉ Finset.Icc lo up,
+      ddfSummand η a b ε n j z = 0 := by
+    intro z hz1 hz2 j hj
+    rw [Finset.mem_Icc, not_and, not_le] at hj
+    rw [ddfSummand_eq_ddfShifted]
+    rcases lt_or_ge j lo with h | h
+    · exact ddfShifted_apply_eq_zero_of_lt η a b ε n 0 j z (by omega)
+    · exact ddfShifted_apply_eq_zero_of_gt η a b ε hη hεb n 0 j z (by have := hj h; omega)
+  have hAx := ddfOp_apply η a b ε hη hεb n x (hwin x (by omega) (by omega))
+  have hAy := ddfOp_apply η a b ε hη hεb n (towerLop η a b m x)
+    (hwin _ (by omega) (by omega))
+  set g : ℤ → TowerFock D R := fun i => ((i : ℤ) : R) • ddfShifted η a b ε n m i x with hgdef
+  have hglo : ∀ i : ℤ, i < n - (towerLevelBound x : ℤ) → g i = 0 := by
+    intro i hi
+    simp only [hgdef]
+    rw [ddfShifted_apply_eq_zero_of_lt η a b ε n m i x hi, smul_zero]
+  have hgup : ∀ i : ℤ, (towerModeBound x : ℤ) < m + i → g i = 0 := by
+    intro i hi
+    simp only [hgdef]
+    rw [ddfShifted_apply_eq_zero_of_gt η a b ε hη hεb n m i x hi, smul_zero]
+  have hterm : ∀ j : ℤ, towerLop η a b m (ddfSummand η a b ε n j x)
+      - ddfSummand η a b ε n j (towerLop η a b m x) = g (j - m) - g j := by
+    intro j
+    have h := congrArg (fun T : Module.End R (TowerFock D R) => T x)
+      (lie_towerLop_ddfSummand_all η a b ε hη hbb hba m n j)
+    simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+      LinearMap.smul_apply] at h
+    simp only [hgdef]
+    exact h
+  rw [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    Module.End.mul_apply, LinearMap.zero_apply, hAx, hAy, map_sum, ← Finset.sum_sub_distrib]
+  refine Eq.trans (Finset.sum_congr rfl fun j _ => hterm j) ?_
+  rw [Finset.sum_sub_distrib]
+  have e1 : ∑ j ∈ Finset.Icc lo up, g (j - m) = ∑ j ∈ Finset.Icc (lo - m) (up - m), g j := by
+    refine Finset.sum_nbij' (fun j => j - m) (fun j => j + m) ?_ ?_ ?_ ?_ ?_
+    · intro j hj
+      simp only [Finset.mem_Icc] at hj ⊢
+      omega
+    · intro j hj
+      simp only [Finset.mem_Icc] at hj ⊢
+      omega
+    · intro j _
+      omega
+    · intro j _
+      omega
+    · intro j _
+      rfl
+  have eA : ∑ j ∈ Finset.Icc (lo - m) (up - m), g j
+      = ∑ j ∈ Finset.Icc (min lo (lo - m)) (max up (up - m)), g j := by
+    refine Finset.sum_subset (fun i hi => ?_) (fun i _ hni => ?_)
+    · simp only [Finset.mem_Icc] at hi ⊢
+      omega
+    · simp only [Finset.mem_Icc, not_and, not_le] at hni
+      rcases lt_or_ge i (lo - m) with h | h
+      · exact hglo i (by omega)
+      · exact hgup i (by have := hni h; omega)
+  have eB : ∑ j ∈ Finset.Icc lo up, g j
+      = ∑ j ∈ Finset.Icc (min lo (lo - m)) (max up (up - m)), g j := by
+    refine Finset.sum_subset (fun i hi => ?_) (fun i _ hni => ?_)
+    · simp only [Finset.mem_Icc] at hi ⊢
+      omega
+    · simp only [Finset.mem_Icc, not_and, not_le] at hni
+      rcases lt_or_ge i lo with h | h
+      · exact hglo i (by omega)
+      · exact hgup i (by have := hni h; omega)
+  rw [e1, eA, eB, sub_self]
+
+/-- The remaining case, stated on its own: `⁅L_0, A^ε_n⁆ = 0`.  Together with
+`lie_towerLop_ddfOp_of_pos` and `lie_towerLop_ddfOp_of_neg` this is what
+`lie_towerLop_ddfOp` merges. -/
+theorem lie_towerLop_ddfOp_zero (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) (n : ℤ) :
+    ⁅towerLop η a b 0, ddfOp η a b ε hη hεb n⁆ = 0 :=
+  lie_towerLop_ddfOp η a b ε hη hbb hba hεb 0 n
 
 end StringFormal.NoGhost
