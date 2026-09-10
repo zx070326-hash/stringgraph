@@ -36,6 +36,16 @@ notes: |
   被满足。这与 Ooguri–Vafa §3.2 的"引力解耦反例"性质完全不同（后者前提不满足，不构成反驳，
   见 swampland.finiteness-criteria-fail-without-gravity）。
 
+  【★ 2026-09-11 补正：反驳只靠 SO(32) 旋量那一支】researcher 取到 Wen–Witten NPB 261, 651 (1985)
+  的**逐字摘要（L2）**，结论是否定的：摘要讲 O(10)/E₆ 被 Wilson 线破缺时的最小磁荷与分数电荷，
+  **没有 winding、没有 half-integral、没有 stable、没有 mass 任何一词，设定也不是 SO(32)**。
+  ⇒ AMNV 那句"half-integrally charged winding strings considered by Wen and Witten"是 **AMNV 的
+  刻画**，本项目未在一手材料中证实。图中已把 wen-witten-1985 从
+  swampland.wgc-sharp-form-i--via-so32-spinor 的 sources 移入其 notes/gaps，**不建依赖边**。
+  **反驳本身不受影响**：AMNV 对 SO(32) 旋量那一支不引任何文献，该支自足。
+  SO(32) 谱的一手来源应是 Polchinski Vol.2 §11（相应节点待 agent/curator/polchinski-v2-ch11
+  合并后补边）。
+
   【转录风险】(I) 与 (II) 的下标在页图上是嵌套下标（M_{q_min}、q_{M_min}），纯文本转录易互换；
   引用前须回原页图复核（PDF 第 11 页；抽取记录 #U6）。
 

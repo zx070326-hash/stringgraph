@@ -7,8 +7,9 @@ depends_on:
 sources:
   - ref: arkani-hamed-2006
     loc: "arXiv:hep-th/0601001v2, §3, p.11（逐字 'So (I) can't be right.'）"
-  - ref: wen-witten-1985
-    loc: "**未核实**：正文未获取（L0）。arkani-hamed-2006 §3, p.11 把'半整数荷缠绕弦'的构造引给它（其 [7]）。"
+    note: >-
+      ★ 本推导的**唯一**来源。AMNV 的反例 (a)（SO(32) 旋量）**不引任何文献**，故本条自足；
+      反例 (b)（Wen–Witten）见 notes 与 gaps，本图**不为它建来源条目、也不建依赖边**。
 summary: |
   **作者本人给出的反例**，逐字（⚠ 原文排印 "that have fractionally charges"，照抄）：
 
@@ -20,24 +21,50 @@ summary: |
      Witten [7], that have fractionally charges but are also heavy. So (I) can't be right."
 
   反例是双重的：(a) 弱耦合 SO(32) 杂化弦中 SO(32) 的旋量——精确稳定、在 SO(32) 内的 U(1) 下带
-  最小半整数荷、但很重；(b) Wen–Witten 的半整数荷缠绕弦，同型。
+  最小半整数荷、但很重；(b) Wen–Witten 的半整数荷缠绕弦，AMNV 称与 (a) 同型。
+
+  ⚠ **本推导只采用 (a)**。(b) 的一手材料（Wen–Witten NPB 261, 651）本项目取到的逐字摘要**不含
+  winding / half-integral / stable / mass 任何一词**，设定是 O(10)/E₆ 而非 SO(32) ⇒ (b) 的内容
+  只有 AMNV 的转述，本图不为它建来源条目也不建边（见 notes 与 gaps 第一条）。
+  幸好 **AMNV 对 (a) 不引任何文献**，(a) 单独就足以支撑 "So (I) can't be right."
 
   ★ **反例落在猜想的适用域内**：弦论紧化背景，有动力学引力、Planck 质量有限。这与
   Ooguri–Vafa §3.2 的引力解耦反例（挂在 swampland.finiteness-criteria-fail-without-gravity）
   性质完全不同——那些前提不满足，本条前提满足，**是真反驳**。
 gaps:
-  - "Wen–Witten NPB 261, 651 (1985) 正文本项目未获取（L0）；(b) 目前只有 AMNV 的转述"
+  - "★ **反例 (b)（Wen–Witten）在本图中无来源支撑**：Wen–Witten NPB 261, 651 (1985) 正文本项目未获取（L0）；本轮取到的**逐字摘要（L2）里没有 winding、没有 half-integral、没有 stable、没有 mass 任何一词**，且其设定是 O(10)/E₆ 被 Wilson 线破缺，**不是 SO(32)**。故'半整数荷缠绕弦'是 AMNV 的刻画，本项目**未在 Wen–Witten 一手材料中证实**。本推导**只靠反例 (a)**。"
+  - "反例 (a) 的 SO(32) 旋量谱（质量、在 SO(32) 内 U(1) 下的荷）本图**尚无节点**：Polchinski Vol.2 §11 有一手材料，但相应分支（agent/curator/polchinski-v2-ch11）本轮未合并，故只在 notes 指向，**不建依赖边**"
   - "'重到足以违反界'的**定量估计原文没有给出**：既没有写出 SO(32) 旋量的质量，也没有写出其 M/q 与 1 的具体比较"
-  - "'SO(32) 旋量精确稳定'这一断言原文不给论证"
+  - "'SO(32) 旋量精确稳定'这一断言原文不给论证、不给引用"
+  - "两处'分数电荷'的参照系不同：AMNV 用无量纲 q（M_Pl = 1），Wen–Witten 摘要用电子电荷 e 与 Dirac 量子 2π/e，**两篇都没给换算**"
   - "反例只针对 sharp 版本 (I)（最小荷态），不触及 (II)/(III)"
 notes: |
-  from: arkani-hamed-2006#E19。
+  from: arkani-hamed-2006#E19；2026-09-11 按 literature/extractions/wen-witten-1985.md §5.1 修订。
 
   **本条是本图第一条（截至本次提交是唯一一条）真正的 kind: refutation 推导**，
   它把 swampland.wgc-sharp-form-i 的有效状态打成 refuted（见 tools/stringgraph/propagate.py：
   refutation 推导自身有效严格程度 ≥ physical-argument 即令目标 refuted）。
 
+  【★ 2026-09-11 改动：Wen–Witten 从 sources 移到这里】原先本推导把 wen-witten-1985 列为第二条
+  source（loc 写"未核实"）。researcher 本轮取到该文**逐字摘要（L2）**，结论是**否定的**：
+  摘要讲的是"O(10) 或 E₆ 被 Wilson 线破缺时，最小磁荷是 Dirac 量子 2π/e 的整数倍 n，
+  非禁闭色单态的最小电荷是电子电荷的 1/n"，**全文摘要没有 winding / half-integral / stable /
+  mass 任何一词，设定也不是 SO(32)**。
+  ⇒ AMNV p.11 那句"the half-integrally charged winding strings considered by Wen and Witten [7]"
+  是 **AMNV 的刻画**，本项目未在一手材料中证实。按 CLAUDE.md 原则 5（每条边都要有来源），
+  **不为它建 source 条目，更不建依赖边**；只在此与 gaps 记账。
+  本推导因此**只靠反例 (a)（SO(32) 旋量）**——而 AMNV 对 (a) **不引任何文献**，本条自足。
+
+  【★ SO(32) 谱的正确出处：Polchinski Vol.2 §11（本轮不建边）】反例 (a) 真正需要的一手材料是
+  弱耦合 SO(32) 杂化弦的谱（旋量表示的质量与在 SO(32) 内 U(1) 下的荷）。本项目已有该章的抽取
+  （polchinski-1998-v2 §11，L1），但把它转成图节点的分支 **agent/curator/polchinski-v2-ch11
+  在本轮尚未合并到 main**，目标节点还不存在。
+  ⇒ 本轮**只在此指向，不加 depends_on 边**（加一条指向不存在节点的边会让 validate 报错，
+  且违反"每条边都要有来源"的纪律）。
+  **待 ch11 分支合并后**，应给本推导补一条 depends_on 指向 SO(32) 杂化弦谱的节点，
+  并把"旋量最小半整数荷"这一条从 AMNV 的断言变成有一手来源的边。
+
   status 取 physical-argument 而非 rigorous：反例的定量部分（"heavy"到什么程度）原文未给，
-  且 Wen–Witten 正文未核实。若日后抽取 Wen–Witten 并核实质量估计，可考虑升级。
+  "精确稳定"也无论证。若日后从 Polchinski §11 补上质量与荷的估计，可考虑升级。
 author: curator
 created: "2026-09-11"
