@@ -40,5 +40,8 @@ notes: |
 
   截距 a 的符号约定见 conv.intercept-sign-a（Polchinski 用 A = -a）。
   本节点不断言 a 的取值，那是 worldsheet.open-string-intercept 的内容。
+
+  **待拆**（reviewer-ch23 提出，本轮不拆）：本卡片把「开弦模展开的定义」与
+  「这组模满足的代数关系 / 具体表达式」写在一起；后者是命题，日后若被独立推导或引用应拆出。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

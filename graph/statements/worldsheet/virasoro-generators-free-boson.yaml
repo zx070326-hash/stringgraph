@@ -34,11 +34,13 @@ sources:
       振子对易关系 [α_m, α_n] = m η δ_{m+n,0} 本身出自第 1 章（抽取记录 E14），
       本节点把它作为定义的一部分内联写出，未单独建边。
   - ref: kac-raina-1987
-    loc: "Lecture 2 的 oscillator/Fock 表示部分，**编号未核实**"
+    loc: "Heisenberg 代数的 Fock 表示上的 Virasoro（Sugawara 型）作用；**本项目未核实任何编号，故不给 Lecture 号**"
     note: |
       同一构造在数学文献中的标准位置（Heisenberg 代数的 Fock 表示上的 Virasoro 作用）。
-      **Lecture 编号与定理编号均未核实**，仅作为「这是标准数学构造」的指路，
-      不作为任何断言的可追溯来源。见 sources.bib 中 kac-raina-1987 的 note。
+      **编号未核实，且两个版本的讲号不可互换**（第 1 版 1987 约 12 讲，第 2 版 2013 共 18 讲，researcher 2026-09-10）；
+      仅作为「这是标准数学构造」的指路，不作为任何断言的可追溯来源。
+      带编号的可用替代来源是 virasoro-lean-2025（Theorem 10.1 / Corollary 10.2），见
+      worldsheet.free-boson-central-charge-d--via-mode-algebra。
 tags: [cft, virasoro, fock-space, free-boson, definition, sugawara]
 notes: |
   **lead 裁决 2（2026-09-10）**：把 c = D 拆成两个节点——本节点是 (a)，

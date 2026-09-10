@@ -5,13 +5,16 @@ status: physical-argument
 depends_on:
   - id: worldsheet.free-scalar-cft-action
   - id: worldsheet.laplacian-log-contact-term
+  - id: worldsheet.operator-equation-of-motion
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.1，约 eq. (2.1.20)–(2.1.22)（传播子）；(2.1.24)（接触项恒等式，已核实）"
+    loc: "§2.1，约 eq. (2.1.20)–(2.1.22)：先由场重定义得算子运动方程 (2.1.21)，再解出传播子 (2.1.22)；(2.1.24)（接触项恒等式，已核实）"
     note: 传播子的公式号未核实，只有区间约束；见 polchinski-1998-v1.md E25。
 summary: |
-  自由（高斯）路径积分的两点函数是运动算子的格林函数：由 S = (1/2πα') ∫ d^2 z ∂X·∂̄X 得
-  运动算子为 (1/πα') ∂∂̄，故 ⟨X^μ(z,z̄) X^ν(0,0)⟩ 满足
+  由 worldsheet.operator-equation-of-motion，路径积分中的场重定义给出算子恒等式
+  (2.1.21)：∂∂̄ X^μ 在与其它插入分离处为零，重合时给出 δ^2 接触项。
+  把该恒等式用在两点函数上，即两点函数是运动算子的格林函数：由
+  S = (1/2πα') ∫ d^2 z ∂X·∂̄X 得运动算子为 (1/πα') ∂∂̄，故 ⟨X^μ(z,z̄) X^ν(0,0)⟩ 满足
     (1/(π α')) ∂ ∂̄ G^{μν}(z, z̄) = -η^{μν} δ^2(z, z̄)。
   代入 worldsheet.laplacian-log-contact-term 的 ∂∂̄ ln|z|^2 = 2π δ^2(z,z̄) 即得
     G^{μν}(z, z̄) = -(α'/2) η^{μν} ln|z|^2。
@@ -23,5 +26,9 @@ gaps:
   - "从两点函数过渡到『算子乘积展开』（在任意其它插入存在时逐项成立）用的是
      worldsheet.operator-product-expansion 所刻画的展开，其收敛性在来源中未证明。"
   - "传播子的公式号未核实，归一化系数 -(α'/2) 只有抽取记录的『内容确认』，需人工核对原书。"
+notes: |
+  **依赖方向（reviewer-ch23 裁定）**：Polchinski §2.1 的逻辑顺序是
+  (2.1.21) 算子运动方程 ⇒ (2.1.22) 传播子，不是反过来。
+  据此本推导依赖 worldsheet.operator-equation-of-motion，而后者不再依赖本节点的目标。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

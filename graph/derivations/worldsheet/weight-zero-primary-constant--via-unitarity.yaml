@@ -6,6 +6,11 @@ depends_on:
   - id: worldsheet.descendant-weight-grading
   - id: worldsheet.primary-field
   - id: worldsheet.virasoro-algebra
+  - id: worldsheet.state-operator-isomorphism
+    note: |
+      论证在态与算子之间来回（「L_{-1}|O⟩ = 0 即 ∂O = 0」），需要该同构。
+      原先这条依赖是经 worldsheet.descendant-weight-grading 间接得到的；
+      后者已改写为纯表示论命题、不再依赖态-算子同构，故此处改为显式依赖。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.9, eq. (2.9.15)，p.72（式号经 schrans-2020 核实）"
@@ -20,8 +25,8 @@ gaps:
      只适用于幺正的物质 CFT。本图未在陈述中把这一限定进一步细化，
      引用本节点时须自行检查幺正性前提。"
   - "论证经 worldsheet.state-operator-isomorphism 在态与算子之间来回（『L_{-1}|O⟩ = 0 即 ∂O = 0』），
-     继承其 physical-argument 状态；本推导未把它列为显式依赖，
-     而是通过 worldsheet.descendant-weight-grading 间接依赖。"
+     继承其 physical-argument 状态。已改为**显式依赖**（见 depends_on）：
+     worldsheet.descendant-weight-grading 现已改写为纯表示论命题，不再代为承载这条依赖。"
   - "Polchinski 在此处的具体论证路线未核实（只核实了 (2.9.15) 的式号与标题）；
      本 summary 复述的是标准论证。"
 author: curator-polchinski-ch2-3

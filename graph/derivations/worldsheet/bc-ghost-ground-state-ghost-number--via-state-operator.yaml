@@ -9,9 +9,10 @@ depends_on:
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.7, eq. (2.7.17)、(2.7.18)、(2.7.22)–(2.7.24)，p.61–62（式号经 schrans-2020 核实；-1/2 的数值经 schrans-2020 §4.44 核实）"
-  - ref: schrans-2020
-    loc: "§4.44（逐字引用 |↓⟩ 的鬼数为 -1/2 并指向 (2.7.24)）"
-    note: 第三方笔记，非原书；用于确认数值。
+    note: |
+      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
+      schrans-2020 §4.44 逐字写「the ghost ground state |↓⟩ that has ghost number −1/2, see (2.7.24)」，
+      据此确认 -1/2 这个数值；式号亦经其目录核实。
 summary: |
   (i) 简并性：由 {b_0, c_0} = 1 与 b_0^2 = c_0^2 = 0，零模张成一个二维 Clifford 模。
       「被所有正模湮灭」的条件不能同时要求 b_0 与 c_0 都湮灭（否则与 {b_0,c_0}=1 矛盾），
@@ -25,8 +26,10 @@ gaps:
   - "-1/2 这个偏移的来源是鬼数流的反常共形变换 (2.5.15)–(2.5.17)，
      本图只核实了这些公式的**式号**，未核实其表达式，因此偏移量的推导在本图中不可完全追溯；
      本节点接受它是因为数值 -1/2 本身经 schrans-2020 §4.44 独立确认。"
-  - "**未涵盖鬼场正规序常数 a^g**：抽取记录称 (2.7.21) 给出 a^g = 0，而既有节点
-     worldsheet.brst-quantization 写 a^g = -1。该分歧未解决，本推导与本节点都不涉及 a^g。
-     见目标节点 notes 中的说明。"
+  - "**本推导不涵盖鬼场正规序常数 a^g**（它由 worldsheet.bc-ghost-normal-ordering-constant
+     单独承载）。抽取记录 §1.1 / E43 称 (2.7.21) 给出 a^g = 0 与既有节点
+     worldsheet.brst-quantization 的 a^g = -1 曾有分歧；**reviewer-ch23 已裁定 a^g = -1**
+     （|↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1；[L_0, c_1] = -c_1），
+     抽取记录的 a^g = 0 是误记，待 researcher 订正。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

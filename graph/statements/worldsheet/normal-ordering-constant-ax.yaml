@@ -33,7 +33,12 @@ notes: |
   「This derivation is a delight to mathematicians」是反讽），
   态-算子路线则把常数归结为「单位算子对应基态」这一构造性事实。
 
-  ⚠ 与鬼场的正规序常数 a^g 的关系存在文献歧义，见
-  worldsheet.bc-ghost-ground-state-ghost-number 的 notes（本图未就 a^g 的取值建节点）。
+  鬼场一侧的对应常数是 a^g = -1（worldsheet.bc-ghost-normal-ordering-constant）。
+  该值曾与抽取记录 polchinski-1998-v1.md §1.1 / E43 的 a^g = 0 冲突；
+  **reviewer-ch23 已于 2026-09-10 裁定 a^g = -1 正确**
+  （|↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1，故 [L_0, c_1] = -c_1），
+  抽取记录中的 a^g = 0 是误记，待 researcher 订正。
+  注意 a^X = 0 与 a^g = -1 是两个不同部门的常数，二者取值不同并无矛盾：
+  X 部门基态对应单位算子（权 0），鬼场基态对应 c(0)（权 -1）。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

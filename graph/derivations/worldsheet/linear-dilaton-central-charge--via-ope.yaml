@@ -19,8 +19,9 @@ summary: |
   交叉项（一个 :∂X∂X: 与一个 V·∂^2X）对四阶极点无贡献。
   把 (ii) 的系数与定义式 c/(2z^4) 比较，得附加项 6 α' V^μ V_μ，故 c = D + 6α' V·V。
 gaps:
-  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1）：与
-     worldsheet.free-boson-central-charge-d--via-ope 同源的缺口。"
+  - "**OPE 收敛性在来源中未证**（lead 裁决 1）：本推导只用 Wick 缩并求 OPE、
+     再比对四阶极点系数，不需围道变形；但 OPE 展开本身的收敛性仍未证。
+     与 worldsheet.free-boson-central-charge-d--via-ope 同源的缺口。"
   - "系数 6α' 未核实（抽取记录只核实了 (2.5.2) 的式号与标题，未核实表达式）。
      本推导的 summary 复述的是标准结果，不是从原书逐字抄来的。"
   - "本推导没有 --via-mode-algebra 的对偶版本：线性 dilaton 的 L_m 模式表达式

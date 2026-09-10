@@ -5,7 +5,6 @@ status: physical-argument
 depends_on:
   - id: worldsheet.free-scalar-cft-action
   - id: worldsheet.laplacian-log-contact-term
-  - id: worldsheet.free-scalar-propagator
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.1, eq. (2.1.23)、(2.1.24)，p.36（公式号已由 schrans-2020 核实）"
@@ -20,5 +19,10 @@ gaps:
      反常正是这一假设失效的情形（对比 worldsheet.weyl-anomaly-trace：那里测度确实不变分）。"
   - "∫ DX 本身没有数学定义（见 worldsheet.free-scalar-propagator--via-path-integral 的同名缺口）。"
   - "「δX 任意性 ⇒ 算子恒等式」这一步是在分布意义下做的，但书中不指定算子插入所在的函数空间。"
+notes: |
+  **依赖方向（reviewer-ch23 裁定）**：Polchinski §2.1 的顺序是先由路径积分中的场重定义得到
+  算子运动方程 (2.1.21)，再解出传播子 (2.1.22)；因此本推导**不**依赖
+  worldsheet.free-scalar-propagator，反向的边加在
+  worldsheet.free-scalar-propagator--via-path-integral 上。原先此处的传播子依赖是方向反的，已删。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

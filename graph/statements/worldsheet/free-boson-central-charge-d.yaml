@@ -20,12 +20,20 @@ sources:
       **公式号完全未核实，且无页码锚点**——这是抽取记录中唯一一条核心陈述既无式号也无页码
       （见 literature/extractions/polchinski-1998-v1.md E34 与 Q4）。内容（c = D）本身在
       抽取记录第 1.1 节被列为「内容确认，位置见 E34」。**必须人工核对原书。**
+  - ref: virasoro-lean-2025
+    loc: "Theorem 10.1 + Corollary 10.2（c = 1，Lean 机器验证）；Appendix A.2"
+    note: |
+      代数路线的**主数学来源**（Kytölä, arXiv:2510.21741，开放获取，researcher 全文核实）。
+      只给单个 Heisenberg 族的 c = 1；c = D 由 D 个互相对易的拷贝相加得到，那一步不在来源里。
+      详见 --via-mode-algebra 的 sources 与 gaps。
   - ref: kac-raina-1987
-    loc: "Lecture 2 的 oscillator/Fock 表示部分，**编号未核实**"
-    note: 直接对易子计算路线的数学来源；编号未核实，见 --via-mode-algebra 的 gaps。
+    loc: "Heisenberg 代数的 Fock 表示上的 Virasoro（Sugawara 型）作用；**本项目未核实任何编号，故不给 Lecture 号**"
+    note: |
+      背景引用，不承载论证。**版本陷阱**（researcher 2026-09-10）：第 1 版（World Scientific 1987）约 12 讲，
+      第 2 版（Kac–Raina–Rozhkovskaya 2013）18 讲，两版讲号与命题号不可互换。
   - ref: schottenloher-2008
     loc: "Virasoro 代数的 Heisenberg/Fock 表示相关章节，**章节与定理编号未核实**"
-    note: 同上。
+    note: 备选数学来源，同样编号未核实；不承载论证。
 tags: [cft, central-charge, free-boson, virasoro, sugawara]
 notes: |
   **本节点是 D = 26 的三条推导的公共支点**：
@@ -38,7 +46,8 @@ notes: |
 
   两条推导（lead 裁决 2，2026-09-10）：
     --via-ope          Polchinski §2.4 的 TT OPE 路线，physical-argument（OPE 收敛未证）
-    --via-mode-algebra 直接对易子计算，本质上是严格的代数事实，但因数学来源的编号未核实
-                       而暂记 physical-argument，待 researcher 核实后升级为 rigorous。
+    --via-mode-algebra 直接对易子计算，**rigorous**（lead 裁决 2026-09-10）：主数学来源改为
+                       virasoro-lean-2025 Theorem 10.1 + Corollary 10.2（带编号、开放获取、已 Lean 机器验证），
+                       剩下的「c = 1 ⇒ c = D」一步经 reviewer-ch23 独立复核。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

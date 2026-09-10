@@ -6,6 +6,11 @@ depends_on:
   - id: worldsheet.conformal-gauge-fixing
   - id: worldsheet.bc-ghost-cft
   - id: worldsheet.free-scalar-cft-action
+    inferred: true
+    note: |
+      Polchinski §3.3 的 FP 手续作用在 **Polyakov 作用量**上（任意世界面度规 g_{ab}），
+      而 worldsheet.free-scalar-cft-action 是已经固定到平坦度规的自由标量作用量（共形规范的结果）。
+      本图目前没有 Polyakov 作用量节点，故暂用自由标量作用量代替，这一替代是本图的补白，标 inferred。
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.16)、(3.3.18)、(3.3.21)、(3.3.24)，p.88–89（式号经 schrans-2020 核实）；脚注 2（p.87）讨论 delta 函数的规范不变性"
@@ -20,6 +25,9 @@ summary: |
   (5) 在共形规范 ĝ = δ 与复坐标下化简，Weyl 部分把 b 的迹消掉，剩下 (1/2π)∫(b∂̄c + b̄∂c̄)，
       即权 λ = 2 的 bc 系统。
 gaps:
+  - "对 worldsheet.free-scalar-cft-action 的边是占位边（inferred）：正确的依赖应是 Polyakov 作用量。
+     **待 worldsheet.polyakov-action 节点（第 1 章分支 agent/curator/polchinski-ch1，即将合并）建立后换边**，
+     并把 inferred 改回 false。"
   - "**FP 手续在数学上没有被严格化**（抽取记录 E50 的结论）：规范群的体积 V_{diff×Weyl}、
      群上的测度 dζ、以及场空间上的测度 Dg 都没有定义；『分离出无穷体积并消去』是形式操作。"
   - "delta 函数 δ(g - ĝ^ζ) 的规范不变性需要论证；Polchinski 用脚注 2（p.87）讨论，

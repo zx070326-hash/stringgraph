@@ -6,7 +6,6 @@ depends_on:
   - id: worldsheet.bc-ghost-cft
   - id: worldsheet.tt-ope-central-charge
   - id: worldsheet.operator-product-expansion
-  - id: worldsheet.ope-commutator-dictionary
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.5, eq. (2.5.11)（鬼场 T）、(2.5.12)（中心荷），p.50–51（式号经 schrans-2020 核实）"
@@ -23,8 +22,11 @@ summary: |
   λ = 2 的情形另有一条独立的数学证据：fgz-1986 Proposition 2.1(i) 在半无限形式空间
   Λ^∞_* 上算出鬼场表示的中心荷为 -26。
 gaps:
-  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1）：
-     与自由玻色子的同类计算共享这一缺口。"
+  - "**OPE 收敛性在来源中未证**（lead 裁决 1）：本推导只用 Wick 缩并求 OPE、
+     再与 worldsheet.tt-ope-central-charge 的定义式比对四阶极点系数，**不需围道变形**，
+     故不依赖 worldsheet.ope-commutator-dictionary（该边已删）。
+     但 worldsheet.operator-product-expansion 所刻画的展开其**收敛半径仍未被证明**，
+     这一缺口与自由玻色子的同类计算共享。"
   - "一般 λ 的公式 -3(2λ-1)^2 + 1 的具体形式未核实（核对源只给出 (2.5.12) 的标题）。
      只有 λ = 2 时的数值 -26 被抽取记录标为已核实，且有 fgz-1986 的独立支持。
      **若只需要 λ = 2，本节点的可信度高于其一般形式。**"

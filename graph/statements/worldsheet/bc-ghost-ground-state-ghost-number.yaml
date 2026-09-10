@@ -30,15 +30,15 @@ notes: |
   |↑⟩ = c_0c_1|0⟩、{b_0,c_0} = 1、gh(c_n) = +1、gh(b_n) = -1，与本节点完全一致；
   它**没有**给出真空的鬼数数值，本节点补上这一条（-1/2），并给出其独立来源。
 
-  ⚠ **文献歧义（需 auditor / lead 裁决，本图未据此建节点）**：
-  抽取记录 polchinski-1998-v1.md 的第 1.1 节与 E43 断言 Polchinski (2.7.21) 给出鬼场正规序常数
-  **a^g = 0**（「由态-算子对应定出」）；而本图既有节点 worldsheet.brst-quantization 的
-  statement 写的是 **a^g = -1**（并据此把 Q_B 中的 c_0 项系数与总 L_0 的移位定死）。
-  两者不可能同时是对 L_0^g 中同一个常数的描述。核对源 schrans-2020 的目录只给出条目标题
-  「Eq. (2.7.21) The bc Normal Ordering Constant a^g」，**不含数值**，
-  因此抽取记录中的 a^g = 0 属未核实的主张。
-  本节点因此**不建立任何关于 a^g 取值的断言**，也没有为 a^g 单建节点。
-  需要人工翻原书 p.61–62 确认 (2.7.21) 的数值，以及它与 §4.3 中 BRST 荷里 a^g 的关系
-  （二者是否为同一个量、是否差一个 λ 相关的偏移）。已 agora_send 给 auditor 与 lead。
+  **a^g 的取值：已裁定 a^g = -1**（reviewer-ch23, 2026-09-10）。
+  论证：态-算子同构下 |↓⟩ = c_1|0⟩ 对应算子 c(0)，而 λ = 2 的 bc 系统中 c 的共形权是
+  h(c) = 1 - λ = -1；于是 L_0 |↓⟩ = -|↓⟩，等价地 [L_0, c_1] = -c_1。
+  以「被正模湮灭的基态 L_0 本征值为 a^g」的约定读出 a^g = -1，
+  与既有节点 worldsheet.brst-quantization statement 里的 a^g = -1 一致。
+  抽取记录 polchinski-1998-v1.md 第 1.1 节与 E43 中的 **a^g = 0 是误记**，待 researcher 订正；
+  核对源 schrans-2020 的目录只给条目标题「Eq. (2.7.21) The bc Normal Ordering Constant a^g」
+  而不含数值，因此该误记未被第三方核对拦下。
+  数值本身另立节点 worldsheet.bc-ghost-normal-ordering-constant，与
+  worldsheet.normal-ordering-constant-ax（a^X = 0）平行。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -5,8 +5,6 @@ statement: |
   在幺正共形场论中，设 O 是共形权 h_O = h̄_O = 0 的主场（primary）。则
     L_{-1} · O = ∂O = 0,   L̄_{-1} · O = ∂̄O = 0,
   即 O 是常数（正比于单位算子）。
-  理由：L_{-1}·O 的权为 h_O + 1 = 1；若 L_{-1}·O ≠ 0，它连同整个模会给出权任意低乃至为负的
-  态与 O 的组合，在幺正理论中与「权非负、且 h = 0 只有真空」相矛盾。
 uses_conventions: [conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1
@@ -19,6 +17,17 @@ notes: |
   这条在弦论中的用处：它是「顶点算子必须有确定的共形权、且权为零的算子平凡」这类论证的基础，
   也用于说明 CFT 中不存在非平凡的无量纲模量算子（除非放弃幺正性）。
   与 worldsheet.descendant-weight-grading 拆成两个节点，是因为二者是不同的命题：
-  前者是纯粹的分次计算（对任意最高权模成立），后者额外用到**幺正性**。
+  那一条是纯粹的分次计算（对任意最高权模成立，不用幺正性，标 rigorous），
+  本节点额外用到**幺正性**。
+
+  **幺正性在哪里进入（自 worldsheet.descendant-weight-grading 移来，reviewer-ch23）**：
+  两处。一是本节点的论证本身用到「零范数态必为零向量」，这需要内积正定；
+  二是「每个态要么是最高权态、要么是某个最高权态的 descendant」这一分解，
+  它需要幺正性（或至少模的完全可约性）；来源在幺正 CFT 的前提下断言它，本图未单列节点。
+  核对源把 (2.9.14) 的条目标题写作 "Non-Highest Weight States in Unitary CFTs"，
+  即来源确实把整段讨论限定在幺正 CFT。
+
+  ⚠ 对玻色弦的适用性：世界面理论的 X^0 方向与鬼场方向内积都不正定，
+  本节点**不适用于**完整的玻色弦世界面 CFT，只适用于幺正的物质 CFT。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

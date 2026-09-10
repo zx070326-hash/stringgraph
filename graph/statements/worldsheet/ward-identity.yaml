@@ -9,6 +9,13 @@ statement: |
   等价地，变换律完全由流与算子的 OPE 的**单极点系数**决定：
     j(z) A(0, 0) ∼ (1/z) · (1/ε) δA(0, 0) + （正则项）。
   该恒等式在期望值中成立，即左右两侧插入任意其它算子（在 C 之外）给出相同的关联函数。
+
+  ⚠ **i 因子约定未定**：上式右端的系数写作 (1/ε)，但文献中也常见 (1/iε)；
+  两者差一个 i，来源于 Noether 流的定义是否带 i、以及无穷小参数 ε 是否取为实参数。
+  本图**未核实** Polchinski (2.3.5)/(2.3.11) 采用哪一种（见 sources[].note），
+  也未在 conv.worldsheet-complex-coords 里固定它。
+  引用本节点做定量计算时必须自行确定该 i 因子；
+  本图下游的结论只用到「变换律由单极点系数决定」这一结构，不依赖该因子。
 uses_conventions: [conv.worldsheet-complex-coords]
 sources:
   - ref: polchinski-1998-v1

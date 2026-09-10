@@ -39,5 +39,9 @@ notes: |
     worldsheet.linear-dilaton-central-charge（c = D + 6α'V·V）
   中心荷不随共形变换改变、且是常数这一点另有节点：
   worldsheet.weyl-anomaly-central-charge-constant（Wess–Zumino 相容性）。
+
+  **待拆**（reviewer-ch23 提出，本轮不拆）：本卡片除了定义中心荷（TT OPE 四阶极点系数）之外，
+  还内嵌了「TT OPE 的低阶极点结构由共形不变性完全确定」这条**命题**。
+  若日后它们被分别推导或分别引用，应拆成两个节点。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

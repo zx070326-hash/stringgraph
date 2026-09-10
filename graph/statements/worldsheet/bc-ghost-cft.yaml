@@ -48,5 +48,10 @@ notes: |
   故两者可以并存、日后由 lead 决定是否让 brst-quantization 显式依赖本节点。
 
   βγ 系统（对易的一阶系统）见 worldsheet.beta-gamma-central-charge。
+
+  **待拆**（reviewer-ch23 提出，本轮不拆）：本定义卡内嵌了至少两条**命题**：
+  （a）作用量 S = (1/2π)∫ b ∂̄ c 对任意 λ 共形不变；
+  （b）鬼数流 j = -:bc: 不是主场（共形变换带反常项，(2.5.15)–(2.5.17)）。
+  二者在来源中各自有推导，日后若被分别引用应拆成独立节点。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -7,9 +7,12 @@ depends_on:
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.1, eq. (2.1.24)（p.36）：恒等式直接写出，无证明"
-    note: 公式号经 schrans-2020 目录核实；内容为忠实转述，未核对原书。
-  - ref: headrick-2008
-    loc: "习题 2.1 的解答：两种正规化下验证 ∫ d^2 z (∂∂̄ ln|z|^2) f = 2π f(0)"
+    note: |
+      公式号经 schrans-2020 目录核实；内容为忠实转述，未核对原书。
+      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
+      headrick-2008 习题 2.1 的解答用两种正则化验证了
+      ∫ d^2 z (∂∂̄ ln|z|^2) f = 2π f(0)，即本推导 summary 中的两条路线；
+      按上述政策它不再作为 sources[] 条目。
 summary: |
   两条互相独立的验证路线（均见于 headrick-2008 的习题 2.1 解答）：
   (i) 围道路线：由 Stokes 定理把 ∫_D d^2 z ∂∂̄ ln|z|^2 f 化为绕 z = 0 的小围道积分，
@@ -20,8 +23,9 @@ summary: |
 gaps:
   - "**这条其实是严格的分布论事实**（二维 Laplace 算子的基本解），本推导之所以只标 physical-argument，
      是因为按 docs/STATUS_LEVELS.md，rigorous 要求来源是数学文献且可追溯到已核实的定理编号；
-     目前两条来源一条是不给证明的教科书正文（polchinski-1998-v1 (2.1.24)），
-     一条是第三方习题解答（headrick-2008）。**升级路径**：researcher 补一条分布论/PDE 教材中
+     目前唯一的 sources[] 条目是不给证明的教科书正文（polchinski-1998-v1 (2.1.24)），
+     而 headrick-2008 的习题解答按 lead 政策裁决（2026-09-10）只能作核对源、不能承载论证。
+     **升级路径**：researcher 补一条分布论/PDE 教材中
      「Δ (1/2π) ln|x| 是 R^2 上 Laplace 算子的基本解」的已核实定理编号，即可改为 kind: proof / status: rigorous。"
   - "headrick-2008 的两种正规化都只对紧支光滑测试函数验证，未讨论更一般的分布类；
      Polchinski 后续用它时作用在算子插入上（而非测试函数上），那一步属 operator-equation-of-motion 的缺口。"

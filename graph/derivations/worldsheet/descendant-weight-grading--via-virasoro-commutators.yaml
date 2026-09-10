@@ -1,28 +1,36 @@
 id: worldsheet.descendant-weight-grading--via-virasoro-commutators
 target: worldsheet.descendant-weight-grading
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: worldsheet.virasoro-algebra
-  - id: worldsheet.state-operator-isomorphism
-  - id: worldsheet.primary-field
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.9, eq. (2.9.14)，p.72（式号经 schrans-2020 核实）"
+    note: |
+      来源在幺正 CFT 的语境里陈述该式；本推导只取其中的代数内容
+      （L_0 本征值的分级），该部分与幺正性无关。
 summary: |
-  由 Virasoro 代数关系取 m = 0：[L_0, L_{-k}] = k L_{-k}。
-  于是 L_0 L_{-k_1}…L_{-k_n}|O⟩ = (Σ k_i) L_{-k_1}…L_{-k_n}|O⟩ + L_{-k_1}…L_{-k_n} L_0 |O⟩
-  = (h_O + Σ k_i) L_{-k_1}…L_{-k_n}|O⟩，逐个把 L_0 交换到右端即可。
-  由于每个 k_i ≥ 1，权严格增加。
+  由 Virasoro 对易关系 [L_m, L_n] = (m-n) L_{m+n} + (c/12) m(m^2-1) δ_{m+n,0} 取 m = 0：
+  中心项含因子 m(m^2-1)，在 m = 0 处为零，故 [L_0, L_{-k}] = k L_{-k}（对一切 k ∈ Z）。
+  于是对 n 归纳，把 L_0 逐个交换到右端：
+    L_0 L_{-k_1}…L_{-k_n} v
+      = ( Σ_i k_i ) L_{-k_1}…L_{-k_n} v + L_{-k_1}…L_{-k_n} L_0 v
+      = ( h + Σ_i k_i ) L_{-k_1}…L_{-k_n} v，
+  最后一步用 L_0 v = h v。每个 k_i ≥ 1 故 Σ k_i ≥ n ≥ 1，权严格增加。
+  分级结论随之：v 生成的模由这些单项式张成，各自是 L_0 的本征向量。
 gaps:
-  - "L_0 本征值的计算本身是**纯代数的**（只用 [L_0, L_{-k}] = k L_{-k}，有限步）。
-     本推导之所以只标 physical-argument，是因为陈述被放在 CFT 的语境里：
-     『态』与『共形权』的意义经 worldsheet.state-operator-isomorphism 与
-     worldsheet.primary-field，二者都是 physical-argument。
-     **升级路径**：若把陈述改写为纯 Virasoro 表示论的命题（对任意最高权模成立），
-     可用 worldsheet.verma-module 作为唯一依赖并标 rigorous；
-     本图不这么做是为了忠实于来源的语境。"
-  - "陈述中「每个态要么是最高权态、要么是 descendant」的分解需要幺正性（或至少需要
-     模的完全可约性），来源在幺正 CFT 的前提下断言它，本图未单列节点。"
+  - "本推导**不**断言最高权模是不可约的、也不断言这些单项式线性无关（Verma 模的 PBW 基底
+     与分级维数 p(N) 是另一回事，见 worldsheet.verma-module）；只断言它们是 L_0 的本征向量、
+     本征值为 h + Σ k_i。"
+  - "本推导**不**断言「每个态要么是最高权态、要么是某个最高权态的 descendant」——
+     那个分解需要幺正性或完全可约性，不在本节点范围内。"
+notes: |
+  reviewer-verified: reviewer-ch23, 2026-09-10。
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（lead 裁决 2026-09-10）标 rigorous：
+  前提在陈述里完整写出（Virasoro 代数关系 + 最高权向量的定义），
+  证明是有限步初等代数（对 n 归纳的对易子交换），无解析或路径积分输入。
+  依赖只有 worldsheet.virasoro-algebra，不再经 state-operator-isomorphism / primary-field，
+  因此不被 CFT 语境的 physical-argument 节点拖低。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

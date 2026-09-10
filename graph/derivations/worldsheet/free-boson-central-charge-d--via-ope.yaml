@@ -10,16 +10,23 @@ depends_on:
   - id: worldsheet.ope-commutator-dictionary
   - id: worldsheet.energy-momentum-laurent-modes
   - id: worldsheet.virasoro-generators-free-boson
-    inferred: true
+    inferred: false
     note: |
-      Polchinski 在 §2.4 用 OPE 定出 c，在 §2.7 才给出模式表达式 (2.7.25)；
-      「OPE 路线定出的 c 与模式路线定义的同一组 L_m 的中心荷是同一个数」这一步
-      在来源中没有被显式论证（它默认 T 的 Laurent 模就是振子双线性式）。
-      本图把它标为 inferred: true，因为本推导的目标陈述是用模式定义的 L_m 表述的。
+      **reviewer-ch23（2026-09-10）裁定此边非 inferred**：Polchinski §2.7 (2.7.5)–(2.7.8)
+      显式地把 T 的 Laurent 模写成振子双线性式并做完这一步推导，不是本图的补白。
+      式号 (2.7.7) 经核对源 schrans-2020 核实。
+  - id: worldsheet.normal-ordering-constant-ax
+    note: |
+      模式路线与 OPE 路线的 L_0 分别用产生-湮灭正规序与共形正规序定义，二者相差 a^X；
+      只有 a^X = 0 才能说「两条路线定出的是同一个 L_0」，从而中心项可以直接比较。
+      a^X ≠ 0 会在 [L_m, L_n] 的中心项里留下 m 相关的移位。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（**式号未核实，无页码锚点**）；用到的 TT OPE 形式见 §2.4 约 (2.4.24)–(2.4.25)"
     note: 见 polchinski-1998-v1.md E34 与 Q4：这是本抽取中最缺锚点的核心条目。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.5)–(2.7.8)（T 的 Laurent 模即振子双线性式，及 L_0 的正规序写法），p.59"
+    note: (2.7.7) 的式号经核对源 schrans-2020 目录核实；本条支撑 depends_on 里对 virasoro-generators-free-boson 与 normal-ordering-constant-ax 的两条非 inferred 边。
 summary: |
   用 worldsheet.conformal-normal-ordering 的交叉缩并规则直接算
     T(z) T(0),  T(z) = -(1/α') : ∂X^μ ∂X_μ :(z)。
@@ -39,7 +46,9 @@ gaps:
   - "Wick 缩并规则本身来自路径积分（worldsheet.free-scalar-propagator 为 physical-argument）。"
   - "来源定位最弱的一条：c = D 的公式号在抽取记录中既无式号也无页码锚点（Q4）。
      在人工核对原书之前，本推导的 sources[].loc 只是区间猜测。"
-  - "「OPE 定出的 c」与「模式定义的 L_m 的中心荷」之间的等同标为 inferred（见 depends_on）。
+  - "「OPE 定出的 c」与「模式定义的 L_m 的中心荷」之间的等同，现已根据 §2.7 (2.7.5)–(2.7.8)
+     标为非 inferred（reviewer-ch23），但它依赖 a^X = 0
+     （worldsheet.normal-ordering-constant-ax）才能把两种正规序的 L_0 认同。
      独立于此的模式路线见 worldsheet.free-boson-central-charge-d--via-mode-algebra。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

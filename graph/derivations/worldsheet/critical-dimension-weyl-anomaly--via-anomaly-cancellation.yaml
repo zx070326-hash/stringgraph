@@ -15,14 +15,11 @@ sources:
     note: |
       按抽取记录 E53/Q6 的明确要求不写死式号。已知硬约束：§3.4 = p.90–96，
       (3.4.31) 在 p.96–97。
-  - ref: schrans-2020
-    loc: "§3.26 \"Theories with a Quantum Anomaly\""
-    note: |
-      对「Weyl 不变性是**局域**的规范冗余，有反常即规范对称性被破坏，
-      后果涉及幺正性」这一论点的复述。逐字：「the scale invariance is local; it is a gauge
-      redundancy and if there is an anomaly the result is that the gauge symmetry is broken,
-      with implications for e.g. unitarity」——**这是 schrans-2020 的措辞，不是 Polchinski 的**
-      （抽取记录 E53 明确标注了这一点）。
+      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
+      schrans-2020 §3.26 "Theories with a Quantum Anomaly" 逐字：「the scale invariance is local;
+      it is a gauge redundancy and if there is an anomaly the result is that the gauge symmetry
+      is broken, with implications for e.g. unitarity」——**这是 schrans-2020 的措辞，不是 Polchinski 的**
+      （抽取记录 E53 明确标注），只作核对，不承载论证。
 summary: |
   (1) Weyl 是规范冗余：Polyakov 路径积分对 diff × Weyl 取商，规范固定用掉了 Weyl
       （worldsheet.conformal-gauge-fixing）。若 Weyl 在量子层面有反常，规范固定不自洽。
@@ -35,8 +32,14 @@ summary: |
   (5) 若物质部门是 D 个平坦时空自由标量，c^m = D（worldsheet.free-boson-central-charge-d），
       故 D = 26。
 gaps:
+  - "**与 worldsheet.critical-dimension-brst 非完全独立**（reviewer-ch23）：两条路线共享
+     c^g = -26（worldsheet.bc-ghost-central-charge）与 c^m = D（worldsheet.free-boson-central-charge-d）
+     两个输入，只是把它们拼成 c^{tot} = 0 的机制不同（Weyl 反常消除 vs BRST 幂零）。
+     故不得把两条当作 D = 26 的**两份独立证据**；若 c^g 或 c^m 的计算有误，两条同时失效。"
   - "**每一步都是物理论证**：路径积分测度的 Weyl 变分（(2)）、Faddeev–Popov 手续（(3)）、
-     以及 c^m = D 与 c^g = -26 各自的 OPE 计算，全部封顶在 physical-argument。
+     以及 c^g = -26 的 OPE 计算，均封顶在 physical-argument。
+     （c^m = D 本身现已由 worldsheet.free-boson-central-charge-d--via-mode-algebra 做到 rigorous，
+     但那只是代数命题；本推导用到的是它作为世界面 CFT 中心荷的物理解释。）
      本推导不引入新的严格性，只做合成。"
   - "「有反常 ⇒ 理论不一致」这一步在来源中是物理论断而非定理：书中没有证明
      『c^{tot} ≠ 0 的玻色弦一定破坏幺正性』，只论证了规范固定的自洽性要求。
