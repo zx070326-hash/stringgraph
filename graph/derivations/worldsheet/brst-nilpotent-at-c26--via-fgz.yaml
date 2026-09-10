@@ -3,7 +3,7 @@ target: worldsheet.brst-nilpotent-at-c26
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
   - id: worldsheet.virasoro-algebra-v2
   - id: math.virasoro-universal-central-extension
     inferred: true
