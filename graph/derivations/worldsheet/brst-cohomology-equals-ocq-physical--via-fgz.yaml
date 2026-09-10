@@ -22,27 +22,6 @@ sources:
       再由 Euler–Poincaré 型的特征标计算（Proposition 1.3、Proposition 2.4）定出维数。
       编号已核实。Proposition 2.6 给出 p ≠ 0 时 V(E,p) 是 free ℒ^--module 且横向空间 T 存在，
       即 Theorem 1.12 的假设在此成立。
-  - ref: lian-zuckerman-1991
-    loc: "Theorem 3.5(i), p.570（'There is a canonical isometry V(D,p)^{G₊}[−h]/rad ≅ H⁰_∞(G, G₀; V(D,p) ⊗ L(26−D, 1−h))'）；一般版本见 Theorem 2.25, p.566 与 Corollary 2.26（Vanishing Theorem）, p.567"
-    note: |
-      **第二条独立来源**，L1 全文核实（34 页逐页读毕，Theorem 3.5 所在页单页重读复核，
-      literature/extractions/primary-sources-round2.md §1.5、§1.6）。
-      与 fgz-1986 Theorem 2.8 的**第一个**同构平行（都是「旧协变物理态模零模态 ≅ 相对半无限
-      上同调次数 0」），但 LZ 版本有两点更强：
-        (a) 明确写成**等距**（isometry），与 FGZ 的 "unitary isomorphism" 同义；
-        (b) 覆盖 D ≠ 26 的情形——把物质侧 V(D,p) 与一个中心荷 26 − D 的补充不可约 Vir 模
-            L(26−D, 1−h) 张量后再做相对上同调。本节点只用 D = 26 的情形，此时补充模是
-            L(0,0)（平凡一维），LZ 的 (i) 退化为与 FGZ 同一条陈述。
-      支撑链（编号均已核实）：Theorem 2.13（约化公式）→ Lemma 2.21（cf. [FGZ, Theorem 1.12]）
-      → Theorem 2.25 → Corollary 2.26（Vanishing Theorem）→ Corollary 2.28（作者自命名
-      "No-ghost Theorem"）。
-      **转录疑点，引用其假设前须复核**：Theorem 2.25 的假设行在扫描件里渲染为
-      「W ∈ 𝒪 be hermitian, 𝒢-free」，按上下文（Lemma 2.21/2.22、Proposition 3.1(v)）应为
-      **𝒢₋-free**；Corollary 2.26 第二行渲染的「= 0 for n = 0」按上下文应为 **n ≠ 0**。
-      **编号陷阱**：LZ 自己的 Introduction (p.549) 把 Vanishing Theorem 误写成 "Corollary 2.19"
-      （p.564 处实为 Remark 2.19），**不要引用 "LZ 1991 Corollary 2.19"**。
-      本条不改变本推导的 status（仍 rigorous），但把可追溯性从「PNAS 公告体裁 + 证明梗概」
-      提升到「CMP 期刊长文的完整证明」，见 gaps 第一条。
   - ref: kato-ogawa-1983
     loc: "摘要与正文，定理编号未核实"
     note: |
@@ -79,19 +58,21 @@ summary: |
   它把 c = 26 当假设，幂零性由一般的 Proposition 1.2 给出。故本推导的 rigorous
   不受 critical-dimension-brst--via-nilpotency 降级为 physical-argument 的影响。
 
-  【2026-09-10 第二来源】lian-zuckerman-1991 Theorem 3.5(i)（CMP 135, 570）给出同一条
-  同构的等距版本，并有期刊长文级别的完整证明（见 sources 与 gaps 第一条）。
-  它与 FGZ 同源但不是同一份证明（LZ 走自己的约化公式 Theorem 2.13 路线）。
-  **登记为本推导的第二条 source 而非新建 --via-lian-zuckerman 推导，是一个可议的取舍**：
-  按「一个节点一个命题、一条推导一个论证」的纪律，更干净的做法是新建
-  worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman，
-  让两条独立论证并列。此处从简，留待 reviewer/lead 裁决。
+  【2026-09-10 拆分记录】lian-zuckerman-1991 Theorem 3.5(i)（CMP 135, 570）给出同一条同构的
+  **等距**版本，并有期刊长文级别的完整证明。此前它被登记为本推导的**第二条 source**，
+  本推导的 summary 自己把这个取舍标为"可议"并留待裁决；lead 2026-09-10 裁决为**拆**。
+  LZ 条目已从本推导的 sources 移出，改由独立推导
+  **worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman** 承载
+  （LZ 走的是自己的约化公式 Theorem 2.13 路线，与 FGZ 同源但不是同一份证明）。
+  本推导的 status、depends_on、其余 sources 与论证均未变。
+  两条推导互补：FGZ 逐字给出"**包含映射**诱导酉同构"这一具体形式但只有证明梗概；
+  LZ 有完整证明但没有逐字说明典范等距由包含映射诱导（见该节点 gaps 第一条）。
 gaps:
-  - "fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.8 的完整证明未在该文展开；本推导标 rigorous 依据的是编号定理的陈述与该文给出的证明梗概（Prop 2.6 → Thm 1.12 → Thm 2.7 → Thm 2.8），完整细节需 FGZ 的后续长文，researcher 未能定位该长文。**2026-09-10 缓解（primary-sources-round2.md §1.5）：lian-zuckerman-1991（Commun. Math. Phys. 135, 547–580）提供了期刊长文级别的完整证明**——34 页，逐条编号（Theorem 2.1 → Definition 2.2/Prop 2.3 → Prop 2.5 Künneth → Prop 2.12 有限滤过 → Theorem 2.13 约化公式 → Lemma 2.21 → Lemma 2.23 Poincaré 对偶 → Theorem 2.25 → Corollary 2.26 Vanishing Theorem），其 Theorem 3.5(i) 给出与 FGZ Theorem 2.8 第一个同构平行的**等距**。故本推导的可追溯性缺口已实质关闭；FGZ 的后续长文是否存在不再是瓶颈。仍留此条是因为：LZ 的证明走的是**他自己的**约化公式路线，不是 FGZ 梗概那条路线的展开，两者虽同源（LZ Lemma 2.21 自注 \"cf. [FGZ, Theorem 1.12]\"）但不是同一份证明；且 LZ 有三处扫描转录疑点待复核（见 lian-zuckerman-1991 source 的 note）。"
+  - "fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.8 的完整证明未在该文展开；**本推导**标 rigorous 依据的是编号定理的陈述与该文给出的证明梗概（Prop 2.6 → Thm 1.12 → Thm 2.7 → Thm 2.8），完整细节需 FGZ 的后续长文，researcher 未能定位该长文。这条 gap 对**本推导**仍然成立、未被关闭。目标陈述层面的缓解由**另一条独立推导** worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman 提供：lian-zuckerman-1991（Commun. Math. Phys. 135, 547–580）有 34 页逐条编号的完整证明（Theorem 2.1 → Prop 2.5 Künneth → Prop 2.12 有限滤过 → Theorem 2.13 约化公式 → Lemma 2.21 → Lemma 2.23 Poincaré 对偶 → Theorem 2.25 → Corollary 2.26 Vanishing Theorem → Theorem 3.5(i)）。**但那不是本推导的证明**：LZ 走他自己的约化公式路线，两者只在消灭定理一步同源（LZ Lemma 2.21 自注 \"cf. [FGZ, Theorem 1.12]\"）。2026-09-10 前本条 gap 里写的\"本推导的可追溯性缺口已实质关闭\"在拆分后不再适用，已改写。"
   - "FGZ 的动量条件是 p ≠ 0，本陈述写 k ≠ 0，二者逐字一致；但本陈述的姊妹节点 worldsheet.no-ghost-theorem-brst 写的是 k^+ ≠ 0。二者等价（类光向量张成 R^{25,1}）这一步是 curator 的初等观察，不出自 FGZ，未在任何来源中查到成文陈述。"
   - "FGZ 的次数归一化（H^0_∞）与本项目的鬼数归一化（gh = 1）相差常数平移；该平移是本项目按 worldsheet.brst-quantization 的 gh(c_n) = +1 约定推出的，FGZ 未给出鬼数与半无限次数的字典。"
   - "FGZ 的 P 是否逐字等于 worldsheet.old-covariant-physical-states 定义的 H_phys（含 a = 1 的 L_0 条件写法），未与原文逐字核对；由 Theorem 2.7(ii) 的维数公式 p_{(24)}(1 - p·p/2) 反推的谱与 a = 1 一致，这是间接佐证而非逐字核对。"
   - "kato-ogawa-1983 是否已给出上同调形式的同构（而不只是「用 Q_B 条件定义物理态并证无鬼」），正文未获取，未核实（brst-cohomology-sources.md §6.1）。本推导把「提出」归 Kato–Ogawa、「严格证明」归 FGZ，这一归属本身依赖该未核实点。"
-  - "本推导不含正定性：H_phys/H_0 与 H_rel 上诱导形式的正定性来自 Theorem 2.8 的第二个同构（横向空间 T ∩ P），属 worldsheet.no-ghost-theorem-brst / worldsheet.no-ghost-theorem-v2。"
+  - "本推导不含正定性：H_phys/H_0 与 H_rel 上诱导形式的正定性来自 Theorem 2.8 的第二个同构（横向空间 T ∩ P），属 worldsheet.no-ghost-theorem-brst / worldsheet.no-ghost-theorem-v4（2026-09-10：原写 v2，v2 已两次换代到 v4；目标陈述正文里那处 v2 的引用因陈述不可变而保留，见目标节点）。"
 author: curator
 created: "2026-09-10"

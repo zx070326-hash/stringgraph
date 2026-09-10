@@ -132,6 +132,21 @@ sources:
 tags:
   [bosonic-string, unitarity, critical-dimension, old-covariant, brst, cohomology, representation-theory]
 notes: |
+  【2026-09-10 追加：v3 已被 v4 取代，仅修量词】本节点的 statement 与下方 notes 多处引用
+  worldsheet.no-ghost-theorem-v3。该节点已被 **worldsheet.no-ghost-theorem-v4** 取代
+  （ms.no-ghost-theorem 第三轮审计 B1/A1，两处**表述**修复：动量限定提到全局前言 +
+  第 (2) 条显式写"存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0"；DDF 参考方向由射线改为去心直线）。
+  本节点的**陈述文本不改**（陈述不可变），下述对照仍然逐字正确，因为它们是关于 v3 的：
+  - 断言范围 (a) 里那句「这与 worldsheet.no-ghost-theorem-v3 断言 (2) 相容但更弱（v3 的 (2)
+    不带「存在某个 p」的限定）」——对 **v3** 仍然正确。但对 **v4** 不再是"更弱"：v4 的 (2) 已经
+    写成「存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0」，与 LZ Theorem 3.5(ii) 反方向给出的
+    「存在某个 p 使不正定」在量词结构上**一致**（两者都是对 p 的存在量化）。
+    差别只剩：LZ 的 p 还须满足 (P1)–(P3)，v4 只要求 p ≠ 0。引用时请以本条为准。
+  - 下方【本节点与 v3 的分工】一节的分工判断不变（v4 与 v3 在这方面逐字相同）：v4 覆盖
+    (D = 26, a = 1) 的等距同构 + (D > 26, a = 1) 的负模，本节点覆盖判定问题；仍**不是**取代关系，
+    v4 同样**不**加 superseded_by 指向本节点。
+  - 读法说明 2、3、4 与 gaps 里对 v3 的引用，一律可读作对 v4 的引用（那些点在 v3→v4 中未变）。
+
   【本节点与 worldsheet.no-ghost-theorem-v3 的分工】
   v3 覆盖 (D = 26, a = 1) 的等距同构 + (D > 26, a = 1) 的负模，论证走 DDF 算子，来源是
   goddard-thorn-1972 / goddard-2008 / fgz-1986。本节点覆盖**判定问题**：在哪些 (D, a) 上

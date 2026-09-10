@@ -100,7 +100,20 @@ sources:
       原文措辞与是否引用 Goddard-Thorn / Brower 均未核实（同文件 Q7）。经 conv.intercept-sign-a
       换算 A = -1 ↔ a = 1。§4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
+superseded_by: worldsheet.no-ghost-theorem-v4
 notes: |
+  【已被取代，2026-09-10】ms.no-ghost-theorem 第三轮回译审计裁定 drift，唯一阻塞项是 B1：
+  **本节点第 (2) 条缺动量量词，照字面对 D = 26 亦真、无区分力**。(2) 写"存在 |ψ⟩ ∈ H_phys 使
+  ⟨ψ|ψ⟩ < 0"而不限制动量，但 p = 0、能级 1 的态 α^0_{-1}|0; 0⟩ 满足 L_1|ψ⟩ ∝ p·α_1|ψ⟩ = 0
+  与 L_0 = 1 = a，是物理态，模为 η^{00} = -1；这对任何 D 成立，含 D = 26。于是 (2) 照字面是
+  真命题但没有内容。本节点里唯一可能救它的排除句（"k_0·k = 0 的动量扇区（特别是 k = 0）不在
+  本陈述范围内"）写在 (1) 之内、(2) 之前，按位置读只管 (1)。
+  **这是表述缺陷，不是物理错误**：在"排除句全局生效"的读法下 (2) 与后继节点的 (2) 同义。
+  后继节点 worldsheet.no-ghost-theorem-v4 把动量限定提到全局前言并在 (2) 内部显式写出
+  "存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0"，同时把记号跟随 worldsheet.ddf-operators-v4
+  （射线 → 去心直线，第三轮审计 A1）。除这两处外 v4 与本节点逐字相同，论证与状态均未变。
+  本节点保留作历史，其推导 worldsheet.no-ghost-theorem-v3--via-goddard-thorn 不动。
+
   取代 worldsheet.no-ghost-theorem-v2（后者又取代 worldsheet.no-ghost-theorem）。
   按项目规则陈述文本不可变，故新建本节点；v2 保留作历史，其推导
   worldsheet.no-ghost-theorem-v2--via-goddard-thorn 不动。
@@ -126,7 +139,9 @@ notes: |
   证明，但两篇 1972 年论文的正文均未获取、无抽取记录（第一轮审计 B4 也指出 a = -3、-5 在
   level ≤ 3 的数值检查中未见负模），故本节点只写"至少在 a = 1 时"。a = 1 的情形有独立佐证：
   level-2 标量物理态的模正比于 (D-1)[16a^2 + (2D-74)a + 84 - 3D]，在 a = 1 处为 (D-1)(26-D)，
-  D > 26 时严格为负。若日后核实了 Brower/Thorn 的一般 a 结论，应新建 v4 节点而非改写本节点。
+  D > 26 时严格为负。若日后核实了 Brower/Thorn 的一般 a 结论，应新建后继节点而非改写本节点。
+  （注意：worldsheet.no-ghost-theorem-v4 **不是**那个加强——它只修动量量词与 DDF 参数化，
+  第 (2) 条对 a 的量化仍是"至少在 a = 1 时"。一般 a 的加强若成立，需再建 v5。）
 
   【扇区覆盖（初等观察，不属断言）】(1b) 的逐塔陈述覆盖整个扇区：给定类光方向与扇区内的在壳动量 p
   （能级 N = a - α' p^2 ∈ Z_{≥0}），把 k_0 按 2α' k_0·p = 1 定标后取 k := p + N k_0，则

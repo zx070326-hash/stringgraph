@@ -63,7 +63,17 @@ sources:
       ms.no-ghost-theorem 第一轮审计 B6 指出 Polchinski §4.1 有此注；抽取记录
       literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
 tags: [bosonic-string, spectrum-generating-algebra]
+superseded_by: worldsheet.ddf-operators-v4
 notes: |
+  【已被取代，2026-09-10】本节点把类光参考方向写成**射线** {λ k_0 : λ > 0}，同时又说标度
+  "唯一确定为 λ = 1/(2α' k_0·p)"——两句互相矛盾：k_0·p < 0 时该 λ < 0，不在射线上。
+  ms.no-ghost-theorem 第三轮审计（A1 附带项、建议 D2）指出该缺陷。后继节点
+  worldsheet.ddf-operators-v4 把参考方向改为**去心直线** {λ k_0 : λ ∈ R \ {0}}，
+  并显式写出 λ 的符号随 sign(k_0·p)（等价说法：固定射线并额外要求 k_0·p > 0）。
+  这是**表述缺陷**，不是物理错误：对固定的态动量 p，满足 (★) 的类光向量在 v3 与 v4 下是同一个；
+  射线写法的唯一后果是对 k_0·p < 0 的方向前提不可满足，相关断言在那里空真而非假。
+  除此之外 v4 与本节点逐字相同。
+
   取代 worldsheet.ddf-operators-v2。变更原因是 ms.no-ghost-theorem 第二轮审计 C2：
   v2 的归一化写作 k_0·p = 1，只在 α' = 1/2 时给出整数的动量/能级移动；在
   conv.alpha-prime-regge 保留一般 α'（α^μ_0 = (2α')^{1/2} p^μ）下，单值性要求
