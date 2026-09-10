@@ -1,0 +1,109 @@
+id: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk
+kind: proposition
+title: 球面与圆盘上没有非零全纯二次微分：H⁰(P¹, K²) = 0，圆盘加边界条件同理
+statement: |
+  **约定**：黎曼面 Σ 上的**全纯二次微分**是给每个全纯坐标片 (U, z) 指定一个全纯函数 φ(z)，
+  在换片 z ↦ w 时按
+    φ̃(w) = φ(z) · (dz/dw)²
+  相容变换的对象；它就是典范线丛的平方 K² = K^{⊗2} 的全纯截面。记其全局截面空间为 H⁰(Σ, K²)。
+
+  **(1)（球面）** 在 P¹ = C ∪ {∞}（= 紧、连通、亏格 0 的黎曼面）上
+    **H⁰(P¹, K²) = 0** ，
+  即除 φ ≡ 0 外没有全局全纯二次微分。
+  次数记账：deg K = 2g − 2 = −2，故 deg K² = −4 < 0，而**负次数线丛没有非零全纯截面**。
+
+  **(2)（圆盘 / 上半平面，带边界条件）** 把圆盘实现为上半平面 H，边界 ∂H = R ∪ {∞}。
+  对二次微分附加**边界条件**：φ 在边界上取实值，
+    φ(y) ∈ R  对一切 y ∈ ∂H ,
+  等价地 φ dz² 在反射 z ↦ z̄ 下不变（这正是「二次微分能下降到 H 的双重 = P¹ 上」的相容条件）。
+  则满足该边界条件的全局全纯二次微分也**只有 0**。
+
+  **本命题不断言什么**（逐条，重要）：
+  - **不断言 μ(S₂) = μ(D₂) = 0**。从 H⁰(K²) = 0 到「模数 μ = 0」还要过桥
+    worldsheet.moduli-holomorphic-quadratic-differentials（μ = 全纯二次微分空间的实维数），
+    且该桥在**带边**情形下本身缺边界条件（见 notes）。本卡只给数学侧那一格。
+  - **不断言 RP₂ 的情形**。RP₂ 不可定向，二次微分要用 dianalytic / Klein 面的语言，
+    本项目在这方面只有 caohuu-ghisa-2004 与 barza-ghisa-2009 两条（且证明外包），
+    **不足以照搬**。RP₂ 的 μ = 0 另有出处（Polchinski §6.1 对 RP₂ 的独立正文陈述，
+    已由 worldsheet.rp2-conformal-killing-group 承载）。
+  - **不断言亏格 ≥ 1 的计数**（g ≥ 2 时 dim H⁰(K²) = 3g − 3、g = 1 时 = 1）。
+    那需要完整的 Riemann–Roch 加 deg K = 2g − 2，本图另有节点在建。
+  - **不涉及带极点或带标记点的二次微分**。⚠ 这是最容易引错的一格：
+    Eynard 讲义 Ch. 5 Theorem 4.1 的 `Ω_𝒮` 是「在标记点有**二阶极点**」的二次微分构成的**仿射**空间，
+    **不是** H⁰(K²)（math-sources.md §39.7(c) 的明确警告）。
+  - 不涉及任何世界面/物理内容（Weyl 因子、路径积分测度、鬼场）。
+uses_conventions: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；配套定义 (1-5)(1-6), p.71"
+    note: |
+      **L1 全文到手**（math-sources.md §39.7 与 §42）。原文：
+      「**Theorem 1.2 (Riemann-Roch)** For every divisor D we have r(−D) = deg D + 1 − 𝔤 + i(D).」
+      配套 (1-5)(1-6)：`ℒ(D) = {f ∈ 𝔐⁰(Σ) | (f) ≥ D}`、`r(D) = dim ℒ(D)`；
+      `Ω(D) = {ω ∈ 𝔐¹(Σ) | (ω) ≥ D}`、`i(D) = dim Ω(D)`。
+      与 Hartshorne 形式的字典：`r(−D) = l(D)`、`i(D) = l(K − D)`。
+      ⚠⚠ **本条是框架来源，不是本命题的直接来源**。researcher 已明写
+      （math-sources.md §42「三条值得 curator 注意的后果」第 3 条）：
+      「负次数线丛无非零全纯截面」这条引理（`deg D < 0 ⇒ l(D) = 0`）
+      **在教材里是 RR 之前的独立命题，不含在 RR 里**，且本项目**未核到它的编号**。
+      ⇒ 本卡的 `deg K² = −4 < 0` 记账用得上 Eynard 的 RR 语言与 deg 约定，
+      但那条关键引理**没有带编号的来源**——这就是本卡推导只能标 physical-argument 的原因。
+      ⚠ 该讲义**每章内部重新计数**，loc 必须写「Ch. 4, Theorem 1.2」；只写「Theorem 1.2」
+      会与 Ch. 5 的同号定理混淆。
+  - ref: farkas-kra-1992
+    loc: "§III.4「Divisors and the Riemann–Roch Theorem」, pp. 69–78, 2nd ed."
+    note: |
+      **只有小节位置是 L1**（出版方目录扫描，DNB 路线；math-sources.md §42.3）；正文未取得。
+      ⚠⚠ **禁止写「Theorem III.4.8」**：该定理号在本项目只有 L4 证据（检索后端转述），
+      sources.bib 的 note 里已下过同样的禁令。
+      ⚠ 本条登记的用途：`deg D < 0 ⇒ l(D) = 0` 这条引理在标准教材里通常就位于 RR 一节的前面，
+      **FK §III.4 是最可能的落点**，供 researcher 下一轮定位。**本项目尚未核实它在这一节里，
+      也未核实它的编号。** 在核实前，本条**不承载本卡的任何一步**。
+      ⚠ 另注：FK 里 RR 出现两次（另一处是 IV.10「Riemann-Roch—An Alternate Approach」, p.237），
+      引用时必须写清是哪一处。
+tags: [math, quadratic-differential, riemann-sphere, disk, moduli, canonical-bundle, riemann-roch]
+notes: |
+  由 curator-ckg-followups 于 2026-09-11 新建。**建卡动机是一条点名的待办**：
+  worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条逐字写着
+
+  > 「要真正关闭：新建一张『S₂ / D₂ 上不存在非零全局全纯二次微分 ⇒ μ = 0』的卡
+  > （直接构造，与 sphere-conformal-killing-group 的两片正则性分析同型），
+  > 再把本推导改挂它并撤 inferred。」
+
+  本卡就是那张卡的**数学侧一半**（「不存在非零全纯二次微分」）。
+
+  **★ 本轮只建卡，不改那条推导**（lead 的任务边界；positive-euler-* 由他人持 claim）。
+  **给 lead 的接边建议（两条边，缺一不可）**：
+  1. `worldsheet.positive-euler-number-no-moduli--via-surface-enumeration`
+     加 `depends_on: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk`（本卡）；
+  2. 同时加 `depends_on: worldsheet.moduli-holomorphic-quadratic-differentials`
+     ——它是「μ = 全纯二次微分空间的实维数」这座桥（math-sources.md §39.8 的 **(B2)**）。
+     **只接第 1 条不够**：本卡说的是 H⁰(K²) = 0，它本身不含「μ」这个物理量。
+  接完之后 S₂ 与 D₂ 两格才从「断言」变成「有论证」，并可撤掉相应的 inferred 标记。
+  ⚠ **接完也不会升到 rigorous**：本卡推导是 physical-argument（见其 gaps），
+  桥 (B2) 那张卡也是 physical-argument。
+
+  **⚠ D₂ 那一格有一条本卡关不掉的残余缺口**：本图的 μ 定义
+  （worldsheet.moduli-condition-traceless-transverse）写在**紧无边**曲面上，
+  带边时 ker P̂₁^T 需要边界条件，本图与来源都没有给
+  （positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 最后一条已记）。
+  本卡 (2) 自己**选定了**一个边界条件（φ 在 ∂H 上取实值 / 反射不变），
+  它与物理侧 μ 的定义是否逐字一致，**本图无节点、无来源**。
+  ⇒ 接边时必须把这条写进 note，不要让它悄悄消失。
+
+  **与 Polchinski 的关系**：原书 §6.1 对 S₂（p.167）与 D₂（p.168）各有一句
+  「there are no moduli」的**断言**，不给论证；书内的一般理由是 §5.2 的 (5.2.11a)，
+  而那正是 positive-euler-number-no-moduli 的目标本身（拿来关闭就是循环）。
+  本卡走的是**独立的数学路线**，故不把 Polchinski 列为 source。
+
+  **与 riemann-roch-* 诸卡的关系**：另一名 curator 正在按 math-sources.md §42 建
+  math.riemann-roch-theorem / math.canonical-divisor-degree /
+  math.quadratic-differentials-minus-holomorphic-vector-fields。
+  本卡**有意不依赖**它们（本轮它们还不在 main，且本卡 (1) 有一条不需要 RR 的初等证明）。
+  它们落地后，lead 可考虑给本卡补一条 --via-riemann-roch 的推导：
+  由 `l(2K) − l(−K) = 3g − 3` 在 g = 0 给 `dim H⁰(K²) − dim H⁰(K^{−1}) = −3`，
+  配 `dim H⁰(K^{−1}) = 3`（球面全纯向量场，见 worldsheet.sphere-conformal-killing-group）
+  即得 `dim H⁰(K²) = 0`。⚠ 那条路线**反过来依赖** κ(S₂) = 6，与本卡现有推导相互独立，
+  不要把两者接成环。
+author: curator-ckg-followups
+created: "2026-09-11"

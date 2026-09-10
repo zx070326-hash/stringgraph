@@ -1,0 +1,89 @@
+id: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk--via-negative-degree
+target: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；定义 (1-5)(1-6), p.71"
+    note: |
+      **框架来源，L1**（math-sources.md §39.7、§42）：提供除子/线丛的次数记账语言与 `l(D)` 的定义。
+      ⚠ **不提供本推导的关键引理**：`deg D < 0 ⇒ l(D) = 0` 在教材里是 RR **之前**的独立命题，
+      researcher 已明写它「不含在 RR 里」，且**本项目未核到任何编号**（math-sources.md §42 后果第 3 条）。
+  - ref: farkas-kra-1992
+    loc: "§III.4, pp. 69–78, 2nd ed."
+    note: |
+      **位置 L1、内容未取得**。登记为「负次数无非零截面」这条引理的**候选落点**，供下一轮定位。
+      ⚠ **禁止写 Theorem III.4.8**（本项目只有 L4 证据）。本条**不承载本推导的任何一步**。
+summary: |
+  两条路线并列给出；(A) 是本推导实际完成的论证，(B) 是它在标准语言里的名字。
+
+  **(A) 球面：两片正则性的初等计算（自足，不用 Riemann–Roch）。**
+  设 φ dz² 是 P¹ 上的全局全纯二次微分。在 z 片上 φ 是整函数（C 上处处全纯）。
+  换到 u = 1/z 片：由 z = 1/u 得 dz = −u^{−2} du，故
+    φ̃(u) = φ(1/u) · (dz/du)² = φ(1/u) · u^{−4} 。
+  要求 φ̃ 在 u = 0（即 z = ∞）处全纯，即 φ(1/u) 在 u → 0 时以**至少 4 阶**为零。
+  写 φ 的 Taylor 展开 φ(z) = Σ_{n ≥ 0} c_n z^n，则 φ̃(u) = Σ_n c_n u^{−n−4}，
+  其中每一项的幂次 −n − 4 ≤ −4 < 0；正则性要求所有项消失，即 **c_n = 0 对一切 n ≥ 0**，
+  故 φ ≡ 0。⇒ H⁰(P¹, K²) = 0。
+  （与 worldsheet.sphere-conformal-killing-group--via-two-patch-regularity 逐行对偶：
+  向量场是权 −1，(dz/du)^{−1} 给 u^{+2}，留下 3 个非负幂 ⇒ 3 个复参数；
+  二次微分是权 +2，(dz/du)^{+2} 给 u^{−4}，一个非负幂都不剩 ⇒ 0。
+  两者幂次之差 3 正是 κ − μ = 3χ 里那个 3 的来源。）
+
+  **(B) 球面：次数记账（同一件事的线丛说法）。**
+  deg K_{P¹} = 2g − 2 = −2，故 deg K² = −4 < 0；负次数线丛没有非零全纯截面，
+  即 l(2K) = dim H⁰(K²) = 0。
+  ⚠ 这条「负次数 ⇒ 无截面」的引理在本图**无带编号来源**，见 gaps 第一条。
+
+  **(C) 圆盘：Schwarz 反射把 (2) 归约到 (1)。**
+  设 φ dz² 是上半平面 H 上的全纯二次微分，且在 ∂H 上取实值。
+  令 φ*(z) := conj(φ(conj z))，它在下半平面全纯；由 φ 在实轴取实值，
+  Schwarz 反射原理给出 φ 与 φ* 沿实轴全纯拼接，得到 C 上的整函数
+  （∞ 点由 H ∪ ∂H ∪ H* 的双重 = P¹ 补齐，且反射与 (dz/du)² 的变换相容，
+  因为 z ↦ z̄ 是反全纯对合、(dz̄/dz̄)² 的模长不变）。
+  于是回到 (A)，整函数 φ 必须在 ∞ 处以 4 阶为零 ⇒ φ ≡ 0。
+gaps:
+  - |
+    **(B) 的关键引理无带编号来源。** `deg D < 0 ⇒ l(D) = 0` 是标准教材命题，
+    但 researcher 本轮**没有找到编号**（math-sources.md §42：「它在教材里是 RR 之前的独立命题，
+    **不含在 RR 里**」）。本图登记的两条数学来源里，Eynard 只给 RR 本体，
+    FK §III.4 只有小节位置、正文未取得。
+    ⇒ 路线 (B) **在本图里是无来源的断言**；真正承载本命题的是路线 (A) 的显式计算。
+  - |
+    **(A) 是有限步初等计算，但无 reviewer 独立复核记录**，故按 docs/STATUS_LEVELS.md
+    的例外条款不能标 rigorous（「缺此记录…的一律 physical-argument」）。
+    **升级路径**：reviewer 复核 (A)（Laurent 幂次比较，三行）并在本文件 notes 写
+    `reviewer-verified: <agent>, <date>`；届时 status 与 kind 一起改成 rigorous / proof。
+    这与姊妹推导 worldsheet.sphere-conformal-killing-group--via-two-patch-regularity 的处境完全相同。
+  - |
+    **(C) 的边界条件是本推导自己选的，不是从别处继承的。** 「φ 在 ∂H 上取实值」
+    等价于「φ dz² 在反射下不变」，它是**使二次微分能下降到 D₂ = S₂/(z ∼ 1/z̄) 的自然条件**，
+    但本图**没有节点**说物理侧的 μ(D₂)（ker P̂₁^T 在带边曲面上的维数）用的就是这个边界条件。
+    ⚠ 换个边界条件（例如只要求 φ 有界、或要求 Im φ|_∂ = 0 的另一种实结构）结论可能不同。
+    ⇒ **接到 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 时必须把这条写进 note**，
+    否则会出现「数学卡关掉了一个与物理定义未必相同的问题」。
+  - |
+    **(C) 的 ∞ 点处理写得简略。** 上半平面的双重（double）作为紧曲面是 P¹，
+    但「H ∪ ∂H ∪ H* 补上 ∞ 后恰是 P¹，且反射与二次微分的变换律相容」这一步
+    本推导只作了一句话交代，没有逐点检验 u = 1/z 片上的相容性。
+    这一步与 (A) 同型且初等，但同样待 reviewer 复核。
+  - |
+    **不覆盖 RP₂**。不可定向情形要用 dianalytic 语言，本项目的两条 Klein 面来源
+    （caohuu-ghisa-2004、barza-ghisa-2009）都把证明外包给未取得的文献，**不足以支撑**。
+    RP₂ 的 μ = 0 走 Polchinski §6.1 的独立正文陈述，见 worldsheet.rp2-conformal-killing-group。
+  - |
+    **不覆盖 g ≥ 1**。本推导对 (A) 用的是 P¹ 的两片图册，换成别的亏格完全失效；
+    g ≥ 2 的 `dim H⁰(K²) = 3g − 3` 需要真正的 Riemann–Roch，另见正在建的 math.riemann-roch-theorem。
+notes: |
+  由 curator-ckg-followups 于 2026-09-11 建立。
+  `depends_on` 为空是有意的：路线 (A) 是自足的复分析计算，不用图内任何上游节点
+  （用 Riemann–Roch 的 (B) 反而**需要**上游，但那条无来源、且本轮 RR 卡尚未进 main）。
+  validate 会对此报 warning（「derivation has no dependencies」），与
+  math.pbw-theorem--via-lakos、math.classification-of-compact-surfaces--via-normal-forms 同型。
+
+  **不要把本推导与 riemann-roch 路线接成环**：日后若给本卡补 --via-riemann-roch，
+  那条路线要用 `dim H⁰(K^{−1}) = 3`（即 κ(S₂) = 6），而 κ(S₂) = 6 的推导之一
+  又与本推导的 (A) 同型。两条路线必须保持独立，见目标陈述 notes 末段。
+author: curator-ckg-followups
+created: "2026-09-11"
