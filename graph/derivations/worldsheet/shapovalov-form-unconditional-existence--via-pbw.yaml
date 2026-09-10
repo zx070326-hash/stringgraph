@@ -1,0 +1,162 @@
+id: worldsheet.shapovalov-form-unconditional-existence--via-pbw
+target: worldsheet.shapovalov-form-unconditional-existence
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.verma-module-free-over-negative-part
+    inferred: false
+    note: |
+      **兑现假设 (H) 的唯一输入，且只用在目标的 (2)**：该卡的 (1)(2)(3) 逐条就是本目标的
+      (H1)(H2)(H3)（自由秩 1 / 有序单项式基 / 基元按 Σn_i = N 分块），基环是**特征零的域 F**。
+      记法差别只有基元下标的标号顺序（该卡 1 ≤ n_1 ≤ … ≤ n_m，与本目标 (H2) 逐字一致）。
+      ⚠ 该卡本身是 **rigorous**（未形式化，瓶颈是 Mathlib v4.33.1 无 PBW 定理），
+      故本推导的 status 上限就是 rigorous；目标 (1) 的条件版则不消耗它。
+  - id: worldsheet.shapovalov-form-existence
+    inferred: false
+    note: |
+      提供「**Shapovalov 泛函存在 ⇒ 归一化逆变型存在**」这一步，即该卡的 (1)(2)，
+      **对任意交换 ℚ-代数 R 成立且已形式化**（`shapovalov`、`shapovalov_isContravariant`、
+      `existsUnique_isContravariant`、`exists_isContravariant_iff`）。
+      本推导只需要把 f_0 造出来，剩下的构造与等价由这张卡承载，不重证。
+      ⚠ **不使用**该卡的 (4)（特征零域上 存在 ⟺ V(c,h) ≠ 0）：那条路线用 L_0 本征值分离 level，
+      只在域上成立；本推导在一般 R 上走的是 (H) 的基分块，见 gaps (i) 与目标 notes。
+  - id: worldsheet.shapovalov-form-uniqueness
+    inferred: false
+    note: |
+      提供目标 (1)(c) 的**唯一性**、**自动对称性**与 **level 正交性**，三条都无条件
+      （该卡 (1)(2)(3)，formalized，任意交换 ℚ-代数）。本推导对它零输入、纯引用。
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供 V(c,h) 的构造、|c,h⟩、**level 分量 V_N 的定义**（由 N 的合成所对应的负模态词张成）
+      与「L_0 在 V_N 上作用为 h + N」（`lie_lgen_zero_of_mem_levelSpan`，任意 R）。
+      后者是 f_0(L_0 v) = h f_0(v) 那一条性质的依据。
+      ⚠ 本推导**不**使用该卡在域上的 `isInternal_levelSpan`：目标 (1)(a) 的内直和是从 (H) 得到的。
+  - id: worldsheet.verma-level-spanned-by-partitions
+    inferred: false
+    note: |
+      提供「**V_N 恰是 level N 的有序（分拆）词的张成**」这一等式（该卡 (3)，straightening，
+      对任意交换 ℚ-代数成立，formalized `levelSpan_eq_ordSpan` /
+      `levelSpan_eq_span_range_partitionWord`）。
+      没有它，(H2)(H3) 只说「基元按 level 分块」，还接不上 worldsheet.verma-module-v2 里
+      **按合成定义**的 V_N；有了它，两种写法在任意 R 上重合，目标 (1)(a) 的 ⊕_N V_N 才是
+      对 V_N 而不是对「有序词张成」的陈述。
+      ⚠ 只用它的 (3)（张成），**不用** (4) 的维数上界，也不需要它的域假设。
+  - id: math.virasoro-anti-involution
+    inferred: false
+    note: |
+      提供「逆变」这一概念（伴随 σ(L_n) = L_{−n}），即目标里 B 与 f 的定义所依赖的对象。
+      ⚠ 本推导**不**需要它在 U(Vir) 上的延拓（该卡【不断言】(a)）：f_0 是按 level 分块的
+      坐标泛函，不经 Harish-Chandra 投影，故不引入第二次 PBW 依赖。见 gaps (iii)。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{IsShapovalovFunctional, shapovalov, shapovalov_isContravariant, existsUnique_isContravariant, exists_isContravariant_iff, eq_of_isContravariant, IsContravariant.comm, IsContravariant.eq_zero_of_level_ne, levelSpan_zero}；formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg, lie_lgen_zero_of_mem_levelSpan}；formal/StringFormal/Virasoro/VermaPBW.lean :: StringFormal.Virasoro.{levelSpan_eq_ordSpan, levelSpan_eq_span_range_partitionWord}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；相关提交 1731c49 / bbc1354 / 080d7f9（Shapovalov.lean）、
+      11b4c0f（VermaPBW.lean）、b138286（Verma.lean 的 level 部分），以及 main 上新增的
+      level 移位 `lie_lgen_mem_levelSpan` / `lie_lgen_mem_levelSpan_of_neg`。
+      **本条承载「f_0 是 Shapovalov 泛函」三条性质里的两条与其后的全部构造，且都对任意 R**：
+      · f_0(L_n v) = 0 (n < 0) ← `lie_lgen_mem_levelSpan_of_neg`：L_n 把 V_N 送进 V_{N+|n|}，
+        |n| ≥ 1 故目标 level ≥ 1，落在 f_0 的核里（Lean 侧的同一步写作
+        `hwvFunctional_lie_lgen_of_neg`，但那里的 `hwvFunctional` 限域）；
+      · f_0(L_0 v) = h f_0(v) ← `lie_lgen_zero_of_mem_levelSpan`；
+      · 泛函 ⇒ 形式（存在唯一）← `shapovalov` / `shapovalov_isContravariant` /
+        `existsUnique_isContravariant`；对称与 level 正交 ← `IsContravariant.comm` /
+        `IsContravariant.eq_zero_of_level_ne`；V_0 = R·|c,h⟩ ← `levelSpan_zero`；
+      · V_N = 有序词张成 ← `levelSpan_eq_ordSpan`。
+      ⚠ **未被本条覆盖的恰是「(H) ⇒ 内直和 + f_0 良定义」**：Lean 里对应的
+      `isCompl_levelSpan_zero` / `hwvFunctional` 带 `[Field K] [CharZero K]`，
+      是用 L_0 本征值分离 level 得到的，不是用 (H) 的基。见 gaps (i)。
+      **curator 未自行重跑 `lake build`**；合并前由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2（俄文原刊 Функц. анализ и его прил. 16:2 (1982) 第 58 页）：M_{h,c}(k) 的定义"
+    note: |
+      **文献侧「(H) ⇒ 形式存在」这条路线的原型**（L1，math-sources.md §34.2(b)）：
+      FF 直接把 Shapovalov 形式定义成 k 次齐次分量上 PBW 基的 Gram 矩阵，
+      即在 h, c ∈ C 上默认了 (H2)(H3) 并据此得到形式。
+      ⚠ 那里**没有把「存在」当命题证明**，故本条只承载「路线相同」而不承载论证；
+      本推导的论证由上一条（Lean）+ 第一条 depends_on（PBW 卡）拼成。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.8(1), p. 96（LNP 759, pp. 91-102）"
+    note: |
+      **对目标 (2)（无条件存在唯一）的文献背书**，L1 逐字见目标卡 sources。
+      **两条限制**：限 c, h ∈ ℝ 且为 Hermite 形式；证明正文本项目未转录。
+      ⇒ 只作归属与旁证。
+summary: |
+  **本推导把既有推导 worldsheet.shapovalov-form-existence--via-pbw「实际证到但未被其目标承载」的
+  更强结论搬到本卡上**（那条推导的 summary 末句与 notes 逐字预告了这张卡）。分三步：
+
+  **第一步（目标 (1)(a)，(H) ⇒ level 内直和）**：由 (H2)，V(c,h) 的每个元素在有序词基下有
+  唯一有限展开；由 (H3)，基元按 level 分块。故 V(c,h) = ⊕_N span_R{level N 的基元}。
+  再由 worldsheet.verma-level-spanned-by-partitions (3)（straightening，任意交换 ℚ-代数）
+  知 span_R{level N 的基元} = V_N，于是 V(c,h) = ⊕_N V_N，且 V_0 = R·|c,h⟩ 自由秩 1
+  （level 0 的基元只有空词；`levelSpan_zero` 独立给出 V_0 = R·|c,h⟩，(H2) 再给出它是自由的）。
+  ⚠ 这一步是本推导唯一没有逐字来源、也未形式化的地方，见 gaps (i)。
+
+  **第二步（目标 (1)(b)，f_0 是 Shapovalov 泛函）**：由 (a) 定义 f_0 = 沿 ⊕ 分解取 V_0 分量再
+  除以 |c,h⟩。三条性质逐条：
+    · f_0(|c,h⟩) = 1：按定义；
+    · f_0(L_n v) = 0 (n < 0)：由 level 移位 `lie_lgen_mem_levelSpan_of_neg`，L_n 把 V_N 送进
+      V_{N+|n|}，而 |n| ≥ 1 使目标 level ≥ 1，落在 ker f_0；对 v 的分解逐项应用；
+    · f_0(L_0 v) = h f_0(v)：L_0 在 V_N 上是 h + N（`lie_lgen_zero_of_mem_levelSpan`），
+      逐项作用后只有 N = 0 分量被 f_0 看见。
+  这两条引理**对任意交换 ℚ-代数 R、任意 (c,h) 成立且已形式化**。
+
+  **第三步（目标 (1)(c)）**：把 f_0 喂给 worldsheet.shapovalov-form-existence 的 (1)：
+  Φ_{f_0} : V(c,h) → V(c,h)*（σ-扭对偶）给出归一化逆变型 B = (Φ_{f_0}(·))(·)；
+  唯一性、对称性、level 正交由 worldsheet.shapovalov-form-uniqueness (1)(2)(3) 给出。
+  全部对任意 ℚ-代数成立且已形式化。
+
+  **目标 (2)**：取 R = F 为特征零的域，math.verma-module-free-over-negative-part 的 (1)(2)(3)
+  正是 (H)，代入 (1) 即得：对**所有** (c,h) ∈ F²，Shapovalov 形式存在且唯一。
+  这就是既有推导 shapovalov-form-existence--via-pbw 的净增量，现在有节点承载它了。
+
+  **与既有 worldsheet.shapovalov-form-existence--via-pbw 的关系**：两条推导用同一批输入，
+  目标不同。那条的目标是**条件命题**（其有效状态由 formalized 的 --via-lean 决定，
+  本推导不影响它）；本条的目标是**更强的存在性陈述**，代价是有效状态封顶在 rigorous。
+  那条推导保留不动，只在 notes 里加了一句指向本卡。
+gaps:
+  - |
+    (i) **「(H) ⇒ V(c,h) = ⊕_N V_N 且 f_0 良定义」这一步没有逐字来源，也未形式化。**
+    它是「基 + 按 level 分块」的直接读出（由 (H2) 的唯一展开与 (H3) 的分块），
+    数学上不含新内容；但 feigin-fuchs-1982 与 schottenloher-2008 都是**默认**这一分级
+    （FF 直接写「k 次齐次分量上的 PBW 基」），本仓库 Lean 侧对应的
+    `isCompl_levelSpan_zero` / `hwvFunctional` 又带 `[Field K] [CharZero K]`
+    （走的是 L_0 本征值分离，不是 (H) 的基）。
+    ⇒ 按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这一步需要 reviewer 独立复核；
+    **本推导尚无 `reviewer-verified` 记录**。目标 (2)（特征零域）不依赖这一步的一般 R 版本，
+    因为那里 ⊕ 分解另有 Lean 的 `isInternal_levelSpan` 可用；受影响的只有 (1) 的一般 R 版本。
+  - |
+    (ii) **(H) 本身在一般交换 ℚ-代数 R 上没有节点**。目标 (2) 只到特征零的域，
+    因为 math.verma-module-free-over-negative-part 就设在那里。
+    数学上 PBW 对「作为 R-模自由的李代数」在任意交换环上成立（Mathlib 无，本图也无卡），
+    补上它即可把 (2) 推广到任意交换 ℚ-代数；这是一条明确的、可立卡的缺口。
+  - |
+    (iii) **σ 延拓到 U(Vir) 的路线被绕开，但图上仍无节点**。教科书用三角分解 +
+    Harish-Chandra 投影 χ 定义 ⟨u|c,h⟩, w|c,h⟩⟩ := χ(σ(u)w)，那需要 σ 沿泛包络代数延拓
+    （math.virasoro-anti-involution 的【不断言】(a)）。本推导用 level-0 坐标泛函绕开了它，
+    故不需要该步；但若日后有人按教科书写法重证，那一步在图上仍无承载节点。
+  - |
+    (iv) **来源不覆盖论证本身**。schottenloher-2008 Theorem 6.8 只断言结论（且限实 Hermite，
+    证明未转录），feigin-fuchs-1982 把形式定义成 PBW 基下的 Gram 矩阵（默认存在性）。
+    本推导的严格性由「PBW 卡（rigorous）+ Lean（formalized 的各步）+ gaps (i) 的分块读出」
+    拼成，**不依赖**上述两条文献的证明细节。
+notes: |
+  【本推导为什么标 rigorous 而不是更低】
+  除 gaps (i) 外每一步要么是 formalized 的 Lean 声明（对任意交换 ℚ-代数成立），
+  要么是 rigorous 的 PBW 卡；gaps (i) 是从「基」的定义直接分块，属 docs/STATUS_LEVELS.md
+  所说的「有限步初等（线性代数）」一类。**但该条款要求 reviewer 独立复核并在此写
+  `reviewer-verified: <agent>, <date>`，本推导目前没有这条记录。**
+  ⇒ 交 reviewer / lead 裁决：若认为 gaps (i) 不满足例外条款，正确处置是把本推导降为
+  physical-argument（而不是删边或改目标陈述）。届时目标 (2) 仍可由另立一条只走
+  特征零域的推导保住 rigorous。
+
+  【与 worldsheet.shapovalov-form-existence--via-pbw 的分工，避免重复计数】
+  两条推导的 depends_on 高度重叠，但它们**不是同一条论证的两份拷贝**：
+  那条的最后一步是「代入目标 (4) 的 ⟸ 方向」（域上，用 Lean 的
+  `exists_isShapovalovFunctional_of_hwv_ne_zero`），本条的最后一步是「把 f_0 喂给
+  存在性卡的 (1)」（任意 R）。前者以 |c,h⟩ ≠ 0 为中介，后者以 (H) 的基为中介。
+  ⚠ 图上因此有两条从 math.verma-module-free-over-negative-part 出发的路径，
+  但它们通向**不同的目标卡**，不会造成同一结论被计两次。
+author: curator
+created: "2026-09-11"
