@@ -1,0 +1,149 @@
+id: worldsheet.no-ghost-theorem-v3
+kind: proposition
+title: 无鬼定理（Goddard–Thorn）：D = 26、a = 1 时逐动量塔上 H_phys/H_0 等距同构于 24 个横向 DDF 振子的 Fock 空间
+statement: |
+  设 H_phys 是 worldsheet.old-covariant-physical-states 定义的 D 维自由玻色开弦旧协变物理态空间
+  （单组振子 α^μ_n；(L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 ∀ n > 0；截距记号 a 按 conv.intercept-sign-a，
+  即 Polchinski 的 A = -a）。Fock 内积由 (α^μ_n)^† = α^μ_{-n} 与 η_{μν}（conv.metric-mostly-plus）
+  诱导，在 Fock 空间上不定。
+
+  记号（固定动量）：F(p) 是建在动量本征态 |0; p⟩ 上的 Fock 空间（零模 α^μ_0 = (2α')^{1/2} p^μ，
+  记号同 worldsheet.ddf-operators-v3），H_phys(p) := H_phys ∩ F(p)。质量壳按 conv.alpha-prime-regge
+  写作 α' m^2 = N - a，m^2 = -p^2，N 是振子能级；于是 |ψ⟩ ∈ H_phys(p) 处在能级 N = a - α' p^2。
+
+  (1) 设 D = 26 且 a = 1。固定一条类光参考方向（射线 {λ k_0 : λ > 0}，k_0^2 = 0），
+      其标度按 worldsheet.ddf-operators-v3 的归一化条件 2α' k_0·p = 1 逐塔确定；
+      条件 k_0·p ≠ 0 只依赖方向不依赖标度。在扇区 {p : k_0·p ≠ 0} 上：
+
+      (1a) 半正定：对每个满足 k_0·p ≠ 0 的动量 p 与每个 |ψ⟩ ∈ H_phys(p)，有 ⟨ψ|ψ⟩ ≥ 0。
+
+      (1b) 逐动量塔的等距同构：设 k 满足
+             (i) k 在快子壳（N = 0 的质量壳）上：α' k^2 = a = 1；
+             (ii) k_0·k ≠ 0，且 k_0 的标度已按 2α' k_0·k = 1 取定。
+           记该塔上的物理态空间与其零模态子空间
+             H_phys(k; k_0) := ⊕_{N ≥ 0} H_phys(k - N k_0)，
+             H_0(k; k_0)    := {|χ⟩ ∈ H_phys(k; k_0) : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys(k; k_0)}，
+           以及横向 DDF Fock 空间
+             H^⊥(k) := span{ A^{i_1}_{-n_1} ... A^{i_r}_{-n_r} |0; k⟩ : r ≥ 0, n_j ≥ 1, i_j ∈ {2,...,25} }，
+           其中 A^i_{-n} 是 worldsheet.ddf-operators-v3 的 DDF 算子（24 个横向方向 i = 2..25）。
+           （由质量壳，H_phys(k - N k_0) 中的态自动处在能级 N，因为
+             α'(k - N k_0)^2 = α' k^2 - 2N α' k_0·k = 1 - N = a - N；
+            相应地 A^i_{-n} 把动量移到 p - n k_0 并把能级升高 n，故 H^⊥(k) ⊂ H_phys(k; k_0)。）
+           则：
+             (1b-i)  商空间 H_phys(k; k_0) / H_0(k; k_0) 上由 Fock 内积诱导的内积正定；
+             (1b-ii) 包含映射 H^⊥(k) ↪ H_phys(k; k_0) 与商映射的复合
+                       H^⊥(k) → H_phys(k; k_0) / H_0(k; k_0)
+                     是**等距同构**（保内积的线性双射，不只是线性同构）；
+             (1b-iii) 该同构保**能级 N** 分级：H^⊥(k) 一侧的 N 是 DDF 能级 Σ_j n_j，
+                     H_phys(k; k_0) 一侧的 N 是振子能级，等价于动量分级 p = k - N k_0，
+                     也等价于 N = a - α' p^2。
+                     （分级**不是** L_0 分级：在 H_phys 上 L_0 ≡ a = 1 是常数，L_0 分级平凡。）
+
+      k_0·k = 0 的动量扇区（特别是 k = 0）不在本陈述范围内：DDF 构造在那里退化，需单独处理。
+
+  (2) 设 D > 26。则至少在 a = 1 时 H_phys 含负模态，即存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0。
+      （本陈述只断言 a = 1 的情形；对一般 a 的加强见 notes。）
+
+  本陈述不对 D ≤ 25 作任何断言（无论 a 取何值），不对 D = 26、a ≠ 1 作断言，
+  也不使用"退耦""不幺正"等未定义的措辞。
+uses_conventions:
+  [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: goddard-thorn-1972
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      2026-09-10 核实（literature/extractions/brst-cohomology-sources.md §3）：
+      正文四条获取路径全部失败（ScienceDirect 403、CERN CDS 反爬、OSTI 只有元数据、
+      Semantic Scholar 无 PDF），故**不能确认也不能否认**文中有编号定理；三条间接证据
+      （Goddard 本人 2008 综述复述该结果时不给编号、FGZ 1986 引它为 ref 8 时不给编号、
+      该刊该年代 4 页快报体例不用编号定理）一致指向"无编号"。
+      摘要逐字（INSPIRE）：「A simple consequence of this counting is the absence of ghosts
+      for d ⩽ 26 (d ⩽ 10 for Neveu-Schwartz).」摘要**完全不提 intercept**：Veneziano 模型
+      以 α_0 = 1 为前提，故本条只覆盖 a = 1。摘要级证据只覆盖 (1a)，不含 (1b) 的等距同构措辞。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（逐字：'For D = 26, if |ψ⟩ is a physical state … it can be written in the form' DDF 态 + 零模态）"
+    note: |
+      作者本人的历史综述（L3，二手），是 (1b) 取"包含映射 H^⊥(k) ↪ H_phys 诱导等距同构"这一
+      具体形式的最直接可引用依据；综述通篇在 α_0 = 1 下陈述，且明说「The No-Ghost Theorem
+      follows for D < 26 by embedding in the D = 26 case」（故 D ≤ 25 不是独立情形，本节点不断言）。
+      综述不含新证明，只作归属与形式的证据。逐字引句已在 ms.no-ghost-theorem 第二轮审计 D2 登记。
+  - ref: fgz-1986
+    loc: "Theorem 2.8 第二个同构（T ∩ P ≅ P/rad P），在固定动量 p ≠ 0 的 V(R^{25,1}, p) 上陈述，维数 p_{(24)}(1 - p·p/2)"
+    note: |
+      编号已核实（全文五页逐页读毕，brst-cohomology-sources.md §1.3）。这是本节点采用**逐动量**
+      表述的直接依据：FGZ 也在固定动量上陈述，并逐字写「All three isomorphic spaces are positive
+      definite」（对应 (1b-i)）。
+      两点不逐字对应，如实登记：(a) FGZ 的横向空间 T 是 V(E,p) 中被 ℒ^+ 湮灭的正定子空间
+      （Proposition 2.6），不是本节点建在快子壳基态 |0; k⟩ 上的 DDF Fock 空间 H^⊥(k)；二者作为
+      分级内积空间同构，但实现方式不同（no-ghost-theorem-brst 的 notes (c) 已记同一差异）。
+      (b) FGZ 固定单个动量（单个能级），本节点把同一动量方向上的整条塔 {k - N k_0} 打包成
+      N-分级空间；打包是初等的直和，因为不同动量的态在 Fock 内积下正交。
+  - ref: brower-thorn-1971
+    loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
+    note: |
+      支持本节点断言 (2)（D > 26 有负模物理态）的候选来源。Goddard 2008 把「物理态中出现鬼当
+      D > 26」明确归给更早的 Brower–Thorn 1971（其 ref [29]），而**不是** goddard-thorn-1972 或
+      brower-1972——后两篇的摘要里都没有 D > 26 的反例。但 Brower–Thorn 1971 自己的摘要只说
+      「no ghosts or unanticipated null ('zero norm') states are found on the leading nine
+      trajectories」，**摘要里没有出现 D > 26 或任何维数条件**。二手归属与一手摘要之间存在张力，
+      需读正文才能裁决；本项目如实登记两方，不裁决。见 brst-cohomology-sources.md §3.2。
+  - ref: brower-1972
+    loc: "§II-III（节号未核实）"
+    note: Brower 用谱生成代数给出独立证明；节号形式沿用 v2，未与原文核对（APS 403，正文未获取）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.2-2.3.3（教科书版本：DDF 态张成 H_phys 模零模态）"
+    note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: polchinski-1998-v1
+    loc: "§4.1 末（p.124-125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E58：页码已核实，
+      原文措辞与是否引用 Goddard-Thorn / Brower 均未核实（同文件 Q7）。经 conv.intercept-sign-a
+      换算 A = -1 ↔ a = 1。§4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
+tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
+notes: |
+  取代 worldsheet.no-ghost-theorem-v2（后者又取代 worldsheet.no-ghost-theorem）。
+  按项目规则陈述文本不可变，故新建本节点；v2 保留作历史，其推导
+  worldsheet.no-ghost-theorem-v2--via-goddard-thorn 不动。
+
+  【相对 v2 的三处修正，来自 ms.no-ghost-theorem 第二轮审计】
+  B1（照字面为假 → 改为逐动量塔表述）：v2 把 H^⊥ 写成 DDF 算子作用在**一个**基态 |0; k⟩ 上生成的
+     Fock 空间，却把 H_phys/H_0 取遍整个 k·k_0 ≠ 0 扇区（动量连续）。整个扇区的 H_phys/H_0 是各
+     动量分量的直和，与单个可数维 Fock 空间之间不存在线性双射，故 v2 的 (1b) 照字面为假。
+     本节点把 (1b) 改为：对每个在快子壳上且 k_0·k ≠ 0 的 k，只在动量塔 {k - N k_0 : N ≥ 0} 上
+     取商，再与 H^⊥(k) 等距同构。同时补上 v2 缺的在壳条件 α' k^2 = a = 1（不在壳时 H^⊥ ⊄ H_phys）。
+  B2（分级）：v2 写"分级由 L_0 给出"，但 H_phys 上 L_0 ≡ a = 1 是常数，该分级平凡。
+     本节点改为能级 N 分级，并给出它在塔上的两个等价刻画（动量 p = k - N k_0；N = a - α' p^2）。
+  B3（记号）：v2 引用 DDF 归一化时写 k_0·k = 1，而 DDF 节点用 p 记态动量。本节点统一用
+     worldsheet.ddf-operators-v3 的记号，并把归一化写成一般 α' 的 2α' k_0·p = 1（审计 C2）。
+  另按审计 F2 补 uses_conventions: conv.intercept-sign-a——v2 用 (L_0 - a) 记号却未声明该约定。
+
+  第 (2) 条与 v2 逐字相同，未加强，也未加 D ≤ 25 的任何断言（审计 A3：canonical_text 里那句
+  "正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)"来自第一轮审计员的记忆，
+  按 brst-cohomology-sources.md §4.1 其 a ≤ 1 分支**没有任何可引用来源**，故不进入本节点）。
+
+  【第 (2) 条对 a 的量化】Goddard-Thorn 1972 的原始结果在 a = 1（截距取临界值）下陈述。
+  文献中流传的更强形式"D > 26 时对任意 a 均有负模态"通常归于 Brower 1972 / Thorn 的谱生成代数
+  证明，但两篇 1972 年论文的正文均未获取、无抽取记录（第一轮审计 B4 也指出 a = -3、-5 在
+  level ≤ 3 的数值检查中未见负模），故本节点只写"至少在 a = 1 时"。a = 1 的情形有独立佐证：
+  level-2 标量物理态的模正比于 (D-1)[16a^2 + (2D-74)a + 84 - 3D]，在 a = 1 处为 (D-1)(26-D)，
+  D > 26 时严格为负。若日后核实了 Brower/Thorn 的一般 a 结论，应新建 v4 节点而非改写本节点。
+
+  【扇区覆盖（初等观察，不属断言）】(1b) 的逐塔陈述覆盖整个扇区：给定类光方向与扇区内的在壳动量 p
+  （能级 N = a - α' p^2 ∈ Z_{≥0}），把 k_0 按 2α' k_0·p = 1 定标后取 k := p + N k_0，则
+  α' k^2 = α' p^2 + 2N α' k_0·p = (a - N) + N = a，即 k 在快子壳上，p 属于 k 的塔且该塔唯一。
+  又因 k_0^2 = 0，2α' k_0·k = 2α' k_0·p = 1，标度自洽（审计 C1）。
+  同理，H_0(k; k_0) 与全局零模态空间 H_0 的关系是 H_0(k; k_0) = H_0 ∩ H_phys(k; k_0)，
+  因为不同动量的 Fock 态互相正交；本节点采用塔内定义，不依赖这一等式。
+
+  【数值佐证】ms.no-ghost-theorem 第二轮审计做过 α' = 1/2、mostly-plus、能级 N ≤ 3 的独立复核
+  （直接求 L_1..L_N 的公共核再看 Gram 矩阵特征值符号）：D=26、a=1 时无负特征值，正特征值个数
+  逐级等于 p_24(N) = 24 / 324 / 3200，与 (1a)(1b) 一致；D=27、28、a=1 自 N=2 起出现负模，与 (2) 一致；
+  D=25、a=1 无负模但正特征值个数（23/300/2876）严格大于 p_23(N)（23/299/2852），说明 D ≤ 25 时
+  商空间严格大于横向 Fock 空间，本节点不对 D ≤ 25 作等距同构断言是必要的。
+
+  形式化：这是形式化岛 1 的目标，Lean 声明名预留为 StringFormal.NoGhost.no_ghost_theorem，
+  完成后由 lean-formalizer 填写 formal.lean_decl 并把推导状态升为 formalized。
+  逐动量塔表述比 v2 更接近可形式化的形式（每个塔是可数维分级空间）。抽取记录 E68 建议：
+  BRST 版本（worldsheet.no-ghost-theorem-brst）的分级 + 三角矩阵论证也应同时参考。
+author: curator
+created: "2026-09-10"

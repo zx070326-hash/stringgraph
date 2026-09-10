@@ -62,11 +62,33 @@ sources:
       原文措辞与是否引用 Goddard-Thorn / Brower 均未核实（同文件 Q7）。
       §4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
+superseded_by: worldsheet.no-ghost-theorem-v3
 notes: |
+  【已被取代】按 graph/milestones/no-ghost-theorem.yaml 第二轮审计：
+  B1（主因，照字面为假）：本节点第 (1b) 条把 H^⊥ 写成 DDF 算子作用在**一个**基态 |0; k⟩ 上生成的
+     Fock 空间，却把 H_phys/H_0 取遍整个 k·k_0 ≠ 0 扇区（动量连续）。整个扇区的 H_phys/H_0 是各
+     动量分量的直和（不可数维），与单个可数维 Fock 空间之间不存在线性双射，故所断言的"等距同构"
+     照字面为假。本节点也没有要求 |0; k⟩ 在快子壳上，不在壳时 H^⊥ ⊄ H_phys。
+     正确形式是逐动量塔的（FGZ 1986 Theorem 2.8 也在固定动量上陈述）。
+  B2：本节点写"两侧的分级由 L_0 给出"，但在 H_phys 上 L_0 ≡ a = 1 是常数，该分级平凡；
+     实际保持的是振子能级 N 分级。
+  B3：本节点引用 DDF 归一化时写 k_0·k = 1，而 worldsheet.ddf-operators-v2 用 p 记态动量、
+     写 k_0·p = 1，跨节点记号不一致。
+  另：本节点用 (L_0 - a) 记号却未声明 conv.intercept-sign-a。
+  修正版本见 worldsheet.no-ghost-theorem-v3（同时把 DDF 依赖换成 worldsheet.ddf-operators-v3）。
+  注意 B1/B2/B3 都是**表述缺陷**，不是物理错误：核心命题（D=26、a=1 无鬼且商空间 ≅ 横向 Fock 空间；
+  D>26、a=1 有鬼）经第二轮审计在 N ≤ 3 上数值复核成立。
+  按项目规则陈述文本不可变，本节点保留作历史，其推导
+  worldsheet.no-ghost-theorem-v2--via-goddard-thorn 一并保留不动（故本节点有效状态仍为 rigorous）。
+
   取代 worldsheet.no-ghost-theorem。旧节点的第 (3) 条"D ≤ 26 且 a ≤ 1 ⇒ 半正定"为假：
   按 ms.no-ghost-theorem 审计记录 B1 的精确计算，level-2 标量物理态的模在 D = 26 时正比于
   2(D-1)(8a-3)(a-1)（原式 (D-1)[16a^2 + (2D-74)a + 84 - 3D] 在 D = 26 处的因式分解），
   在 3/8 < a < 1 上严格为负。正确的无鬼区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)。
+  【第二轮审计 A3 补注：上一句的 "(D ≤ 25 且 a ≤ 1)" 分支来自第一轮审计员的记忆，
+  按 literature/extractions/brst-cohomology-sources.md §4.1 **没有任何可引用来源**
+  （GT 1972、Brower 1972 摘要都只覆盖 a = 1；Goddard 2008 不讨论 α_0 < 1）。
+  它只出现在 notes 里，从未进入任何 statement；worldsheet.no-ghost-theorem-v3 也不含它。】
   本节点只保留 D = 26、a = 1 与 D > 26 两条，不写 D ≤ 25 的情形；若要建 D ≤ 25 的无鬼性
   （通常归于 Brower 1972 / Thorn），应另建节点并以抽取记录支撑。
 

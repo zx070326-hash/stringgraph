@@ -150,11 +150,39 @@ def test_seed_graph_validates() -> None:
     assert not errors, "\n".join(str(e) for e in errors)
 
 
-def test_seed_no_ghost_v2_is_rigorous_with_inferred_kac() -> None:
+def test_seed_no_ghost_v3_is_rigorous_with_inferred_kac() -> None:
     g = load_graph(ROOT)
     effs = compute_all(g)
+    assert effs["worldsheet.no-ghost-theorem-v3"].name == "rigorous"
+    assert effs["worldsheet.no-ghost-theorem-v3"].conjectures == set()
+
+
+def test_superseded_no_ghost_v2_points_to_v3_but_keeps_its_derivation() -> None:
+    """v2 被 v3 取代（第二轮审计 B1/B2/B3：逐动量塔表述、能级 N 分级、记号统一）。
+
+    与 v1 不同，v2 的推导 --via-goddard-thorn 保留作历史，故 v2 的有效状态仍是 rigorous；
+    ddf-operators-v2 同时被 v3 取代（审计 C2：一般 α' 下归一化是 2α' k_0·p = 1）。
+    """
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    assert (
+        g.statements["worldsheet.no-ghost-theorem-v2"].superseded_by
+        == "worldsheet.no-ghost-theorem-v3"
+    )
+    assert (
+        g.statements["worldsheet.ddf-operators-v2"].superseded_by
+        == "worldsheet.ddf-operators-v3"
+    )
+    assert g.derivations_for("worldsheet.no-ghost-theorem-v2")
     assert effs["worldsheet.no-ghost-theorem-v2"].name == "rigorous"
-    assert effs["worldsheet.no-ghost-theorem-v2"].conjectures == set()
+
+
+def test_milestone_no_ghost_points_at_v3() -> None:
+    """里程碑 ms.no-ghost-theorem 跟随陈述换代指向 v3（第三轮回译前 audit.status 为 draft）。"""
+    g = load_graph(ROOT)
+    ms = g.milestones["ms.no-ghost-theorem"]
+    assert ms.statement_id == "worldsheet.no-ghost-theorem-v3"
+    assert ms.statement_id in g.statements
 
 
 def test_superseded_no_ghost_v1_is_open() -> None:
