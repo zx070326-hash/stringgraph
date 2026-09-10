@@ -22,8 +22,20 @@ depends_on:
       【2026-09-11 新增，来自 v4 拆卡】本推导第 (1b) 步「其 Gram 矩阵就是 24 个横向振子
       Fock 空间的正定 Gram 矩阵」依赖这条命题。同上，v4 未拆时它是定义卡文本的一部分，
       不是新依赖。来源覆盖沿用 v4。
-      注意本条**不含** (A^i_n)† = A^i_{−n}（Gram 矩阵计算还需要它，本图尚无该节点，
-      见该命题的 notes 与本推导 gaps 的【2026-09-11】条）。
+      注意本条**不含** (A^i_n)† = A^i_{−n}（Gram 矩阵计算还需要它，见下一条依赖）。
+  - id: worldsheet.ddf-operators-adjoint
+    note: |
+      【2026-09-11（二）新增，ms.no-ghost-theorem 第五轮审计建议，lead 已同意】
+      本推导第 (1b) 步「其 Gram 矩阵就是 24 个横向振子 Fock 空间的**正定** Gram 矩阵」
+      需要伴随关系 (A^i_n)† = A^i_{−n}：上一条依赖的横向振子代数**只给对易子**，
+      单凭对易子算不出任何配对值，正定性还要伴随关系加真空归一化 ⟨0;k|0;k⟩ = 1。
+      该节点的第 (2) 条正是这一步的完整记账（对角正定，对角元 ∏ n^{d} · d!）。
+      此前本推导 gaps 的【2026-09-11 新增】末条把它登记为「本图无节点」的缺口，现已建卡，
+      该 gap 条目相应更新。
+      来源覆盖沿用 v4（GSW §2.3.3 / GT 1972，另加 goddard-2008 作为二手证据），
+      与上两条对易关系节点同一处、同一核实等级（式号 L0）。
+      **有效状态不因此再降**：本推导的 effective 在 DDF 拆卡后已是 physical-argument，
+      新依赖的 effective 同样是 physical-argument。
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.kac-determinant
     inferred: true
@@ -82,7 +94,9 @@ summary: |
   满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（worldsheet.ddf-transverse-oscillator-algebra），
   且把动量移到 p + n k_0。取快子壳上的基态 |0; k⟩（α' k^2 = 1，k_0·k ≠ 0，它本身是物理态），
   则 A^i_{-n} 生成的全部态都是物理态，动量落在塔 {k - N k_0 : N ≥ 0} 上，能级 N = Σ_j n_j，
-  其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵。
+  其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵
+  （伴随关系 (A^i_n)† = A^i_{−n} 与由它加上述代数、真空归一化得到的对角正定 Gram 矩阵，
+  见 worldsheet.ddf-operators-adjoint）。
   再证塔上任意物理态可写成 DDF 态加零模态（Goddard 2008 的「physical state = DDF + null」形式），
   于是 ⟨ψ|ψ⟩ ≥ 0，且包含映射诱导的 H^⊥(k) → H_phys(k;k_0)/H_0(k;k_0) 是保内积的双射（等距同构），
   逐能级 N 成立故保 N 分级。（分级用 N 而非 L_0：H_phys 上 L_0 ≡ a 是常数。）
@@ -109,7 +123,7 @@ gaps:
   - "【形式化进度 2026-09-11】Fock 空间（worldsheet.bosonic-fock-space）、Sugawara 构造与 c = D、老协变物理态条件、Virasoro 生成元的伴随 L_m^† = L_{−m}、以及指数顶点算子 :e^{i n k_0·X}: 的**振子部分**与 DDF **动量塔**（`formal/StringFormal/NoGhost/VertexOperator.lean`、`DDF.lean`，无 sorry，公理仅标准三条；合并提交 9691057）已在 Lean 中机器验证。**但本推导的两个核心步骤仍未形式化**：(i) DDF 算子 A^i_n = Σ_m α^i_m V^{(n)}_m 本身未定义，连带 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 未证；(ii) 第 (1) 条的**张成定理**（\"塔上任意物理态 = DDF 态 + 零模态\"）未做。待办见 formal/TODO.md 的 `ddf-operators` 与 `ddf-spans` 两项。附带发现：横向性 ε·k_0 = 0 不只是使被积量成为权 1 primary 的条件，还是 A^i_n 的模态和在代数 Fock 空间上局部有限（从而 A^i_n 良定义）的必要输入；详见 worldsheet.ddf-operators-v4 的 notes【Lean 进展 2026-09-11】。"
   - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
   - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
-  - "【2026-09-11 新增】(A^i_n)† = A^i_{−n} **在本图中没有节点**，但第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」需要它（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。拆卡时发现，登记为待补节点。Lean 侧对应 V(b)_J† = V(−b)_{−J}，同样未做，且当前只有 R-双线性型、无 sesquilinear 结构。"
+  - "【2026-09-11 新增；2026-09-11（二）更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0），论证中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 在本图中仍无承载节点；Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。"
 notes: |
   【2026-09-11：DDF 拆卡与由此产生的状态下降（curator，本次改 depends_on / gaps / notes，
   以及 summary 第 (1) 条里的三处节点指向（ddf-operators-v4 → v5，另把两条对易关系的节点 id 写出）；
@@ -132,6 +146,20 @@ notes: |
   - worldsheet.ddf-transverse-oscillator-algebra：Lean 侧**完全未起步**（需顶点算子乘积），
     或由 researcher 找到带编号的数学文献严格证明。
   - 或者两条各自取得 reviewer 复核 + 更强的文献定位（GSW 式号 / GT 1972 正文）。
+
+  【2026-09-11（二）：补上 (1b) 的伴随依赖（curator，ms.no-ghost-theorem 第五轮审计建议，
+  lead 已同意）。本次只改 depends_on（新增一条）、summary 第 (1) 条一处括号补注、
+  gaps 中原「(A^i_n)† = A^i_{−n} 在本图中没有节点」一条的措辞；
+  **status、sources 与论证步骤一字未动**。】
+  新增依赖 worldsheet.ddf-operators-adjoint（(A^i_n)† = A^i_{−n}，推导
+  --via-vertex-operator-adjoint，physical-argument）。理由：第 (1b) 步断言 H^⊥(k) 的 Gram 矩阵
+  **正定**，而 worldsheet.ddf-transverse-oscillator-algebra 只给对易子；
+  从对易子到配对值必须再有伴随关系与真空归一化。此前这条输入被隐含使用，
+  只在 gaps 里登记为「待补节点」，现改为显式依赖。
+  **有效状态不变**：本推导的 effective 在 DDF 拆卡后已是 physical-argument
+  （由那两条对易关系节点封顶），新依赖的 effective 同为 physical-argument，故不再下降。
+  上面的升级路径清单相应多一项：worldsheet.ddf-operators-adjoint 也需升级
+  （Lean 侧先做 V(b)_J† = V(−b)_{−J}，或由 researcher 取得顶点算子代数侧带编号的严格陈述）。
 
   ---
   【以下为原 notes，一字未动】

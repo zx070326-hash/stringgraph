@@ -1,0 +1,147 @@
+id: worldsheet.ddf-operators-adjoint
+kind: proposition
+title: DDF 算子在 Fock 双线性型下互为伴随：(A^i_n)† = A^i_{−n}（一切 n ≠ 0）；推论：H^⊥(k) 的 Gram 矩阵对角正定
+statement: |
+  设 A^i_n 是 worldsheet.ddf-operators-v5 定义的 DDF 算子（i = 2..D−1，n ∈ Z \ {0}；
+  类光参考方向 k_0² = 0，横向偏振 ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}，
+  标度按 2α' k_0·p = 1 逐塔取定）。因此下述一切断言只在**非退化扇区** {p : k_0·p ≠ 0} 上作出。
+
+  【承载断言的空间】固定该扇区中的一条动量塔
+    T(p; k_0) := ⊕_{N ∈ Z} F(p + N k_0)，
+  F(q) 是建在动量本征态 |0; q⟩ 上的 Fock 空间（记号同 worldsheet.ddf-operators-v5）。
+  塔上的双线性型 ⟨·,·⟩ 取各层 worldsheet.fock-indefinite-form 的型的**直和**：
+  同一层内按该节点的 (1)(a)(b) 确定，不同层（动量不同）互相正交。
+  A^i_n 把第 N 层送到第 N + n 层（并把振子能级降低 n，见 worldsheet.ddf-commute-with-virasoro 的推论）。
+
+  (1) **伴随关系**。对一切 i = 2..D−1、一切 n ∈ Z \ {0}、一切 v ∈ F(p) 与 w ∈ F(p + n k_0)：
+
+        ⟨ A^i_n v , w ⟩ = ⟨ v , A^i_{−n} w ⟩,
+
+      即在该双线性型意义下 **(A^i_n)† = A^i_{−n}**。（n 与 −n 都非零，故两侧算子都有定义；
+      本条不涉及 n = 0，A^i_0 在 worldsheet.ddf-operators-v5 中未定义。）
+
+  (2) **推论：H^⊥(k) 上的 Gram 矩阵**。设 k 满足
+        (i) α' k² = a = 1（快子壳；截距记号按 conv.intercept-sign-a），
+        (ii) k_0·k ≠ 0，标度已按 2α' k_0·k = 1 取定，
+      并把塔基态归一化为 ⟨ |0; k⟩ , |0; k⟩ ⟩ = 1。进一步设
+        (a) [A^i_m, A^j_n] = m δ^{ij} δ_{m+n, 0}（worldsheet.ddf-transverse-oscillator-algebra）；
+        (b) A^i_n |0; k⟩ = 0 对一切 n > 0。
+      记横向 DDF Fock 空间
+        H^⊥(k) := span{ A^{i_1}_{−n_1} ⋯ A^{i_r}_{−n_r} |0; k⟩ : r ≥ 0, n_j ≥ 1, i_j ∈ {2,…,D−1} }。
+      则 H^⊥(k) 上由塔的双线性型诱导的 Gram 矩阵**被 (1)、(a)、(b) 与该归一化唯一确定**，
+      并且在有序域系数（如 R = ℝ）下是**对角正定**的。显式地：由 (a)，不同 (i, n) 的
+      A^i_{−n} 两两对易，故对每个有限支撑的 d : {2,…,D−1} × Z_{>0} → N 可无歧义地写
+
+        |{d}⟩ := ∏_{(i,n)} (A^i_{−n})^{d(i,n)} |0; k⟩,
+
+      则
+
+        ⟨ {d} , {e} ⟩ = δ_{d,e} · ∏_{(i,n)} n^{d(i,n)} · d(i,n)!,
+
+      特别地 {|{d}⟩} 是**正交基**，对角元 ∏ n^{d(i,n)} · d(i,n)! **严格为正**，
+      且配对逐 DDF 能级 N = Σ_{(i,n)} n · d(i,n) 分级正交（不同 N 的基向量正交，
+      这与它们落在塔的不同层 p = k − N k_0 上是同一件事）。
+
+      注意 (2) 与 worldsheet.fock-indefinite-form 的 (2)(3) **逐字同型**，
+      只是把那里的 η^{μμ} 换成横向的 δ^{ij}（即 η^{ii} = +1，i 类空），
+      因而对角元不再出现 μ = 0 的负号——这正是「横向 DDF 空间正定」的全部内容。
+
+  【本节点**不**断言什么】——五条边界：
+  (a) 「†」在这里是 **R-双线性型意义下的转置**，不是 Hilbert 空间的 Hermitian 共轭。
+      这与 worldsheet.virasoro-generators-adjoint 的边界 (a)、
+      worldsheet.fock-indefinite-form 的 notes【2026-09-11（二）】是同一条限定：
+      物理上的协变 Fock 空间是复空间、带 Hermitian 半双线性形式，其上的 † 还含一次复共轭；
+      两者在实极化下一致，**复情形本图与 Lean 侧均未做**。
+  (b) **不**断言 H^⊥(k) → H_phys(k; k_0) / H_0(k; k_0) 是等距同构。那是
+      worldsheet.no-ghost-theorem-v4 第 (1b) 条，还需要「塔上任意物理态 = DDF 态 + 零模态」
+      这条张成定理，本节点完全不涉及。本节点只算 H^⊥(k) **内部**的 Gram 矩阵。
+  (c) (2) 中的假设 (b)「A^i_n|0;k⟩ = 0 (n > 0)」**不是**独立公理：它是能级记账的推论
+      （A^i_n 把振子能级降低 n，而 Fock 空间的能级分级非负，故降到负能级只能为零）。
+      此处把它写成前提，只是为了让 (2) 的代数内容自足、可与自由振子 Fock 空间的标准计算逐字对照。
+  (d) **不**断言 A^i_n 作为算子的良定义性（那是 worldsheet.ddf-transversality-gives-local-finiteness），
+      也**不**重新断言 (a) 的横向振子代数（那是 worldsheet.ddf-transverse-oscillator-algebra）。
+      本节点新增的信息量只在 (1)，(2) 是把 (1) 与那两条已有节点合起来的记账。
+  (e) **不**覆盖退化扇区 k_0·p = 0（含 p = 0）：那里 A^i_n 本身没有定义。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      与 worldsheet.ddf-operators-v5 / worldsheet.ddf-transverse-oscillator-algebra 同一处来源，
+      **核实等级沿用**：章节页码 L4/L2（literature/extractions/brst-cohomology-sources.md §5.2–5.3），
+      **式号与正文 L0**（Google Books 只定位到 'DDF' 首现 p.103，正文未获取）。
+      教科书在此处对本命题**只写一句话**（「A^i_n 是厄米的」/「(A^i_n)† = A^i_{−n}」一类），
+      不给推导、不给编号——这是本节点 status 只能到 physical-argument 的直接原因之一。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2，
+      故其归一化写作 k_0·p = 1，是 worldsheet.ddf-operators-v5 归一化条件
+      2α' k_0·p = 1（该节点的 (★)）的特例。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（把物理态写成 DDF 态 + 零模态，并按横向振子 Fock 空间计数其正定内积）"
+    note: |
+      作者本人的历史综述（L3，二手）。它**预设**本命题——「DDF 态按横向振子 Fock 空间计数
+      且内积正定」这句话若无 (A^i_n)† = A^i_{−n} 便无法计算任何 Gram 矩阵——
+      但**不给证明、不给编号**（brst-cohomology-sources.md §3.1 第 1 条）。
+      只作为「本命题是文献中被默认使用的标准事实」的二手证据，不承载论证。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      DDF / 谱生成代数的原始出处链条。式号沿用旧节点 worldsheet.ddf-operators，
+      **未与原文核对**（brst-cohomology-sources.md §3.1：GT 1972 正文四条获取路径全部失败）。
+      摘要只有「absence of ghosts for d ⩽ 26」一句，不含伴随关系。
+tags: [bosonic-string, spectrum-generating-algebra, fock-space, adjoint, no-ghost]
+notes: |
+  【为什么立卡】(A^i_n)† = A^i_{−n} 在本图中此前**没有节点**，却被
+  worldsheet.no-ghost-theorem-v4 第 (1b) 条实际使用：那里断言
+  「H^⊥(k) 的 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」，
+  而横向振子代数（worldsheet.ddf-transverse-oscillator-algebra）**只给对易子**，
+  单凭对易子算不出任何配对——还需要伴随关系与真空归一化。
+  这个缺口在 2026-09-11 的三处被独立登记：
+    - worldsheet.ddf-transverse-oscillator-algebra 的 notes【已知缺口，建议后续立卡】；
+    - worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight 的 gaps 第 5 条；
+    - worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps【2026-09-11 新增】末条。
+  ms.no-ghost-theorem 第五轮审计据此提出立卡，lead 同意。本节点关闭这三处登记的同一个缺口。
+
+  查重：2026-09-11 跑 `uv run stringgraph search 伴随 / adjoint / Gram / DDF`，
+  返回的伴随类节点只有 worldsheet.virasoro-generators-adjoint（L_m^† = L_{−m}）、
+  worldsheet.fock-indefinite-form（(α^μ_n)† = α^μ_{−n}）与
+  worldsheet.bc-ghost-hermitian-conjugation（b_n† = b_{−n}、c_n† = c_{−n}），
+  **没有任何断言 (A^i_n)† = A^i_{−n} 的既有节点**。
+
+  【与 worldsheet.virasoro-generators-adjoint 的关系】两者是**同一机制的两个实例**：
+  一个由厄米场构成的权 h 场，其模在径向量子化的伴随下指标反射，J_m† = J_{−m}。
+  L_m（h = 2，Sugawara 双线性）那一例已在 Lean 中机器验证（formalized，
+  `Fock.pairing_Lop_left`），本例（h = 1，∂X^i 乘顶点算子）**没有**：
+  Lean 侧连顶点算子的伴随 V(b)_J† = V(−b)_{−J} 都没有（见推导 gaps）。
+  两者的证明结构差别在于：L_m 是**振子的有限双线性和**，逐项配对 + 指标反射 j ↦ −j 即可；
+  A^i_n 含**顶点算子**，取伴随要把 E_+E_- 重排序，这一步本图与 Lean 侧都未做。
+  因此本节点**不能**沿用 virasoro-generators-adjoint 的 formalized 状态。
+
+  【为什么不是 rigorous】docs/STATUS_LEVELS.md 的 rigorous 例外条款要求
+  「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。本命题第 (1) 条的标准论证
+  依赖顶点算子的伴随（E_+E_- 重排序），不是有限步初等线性代数；
+  两条一手来源（GSW §2.3.3、GT 1972）的定位都未核实到式号，正文均未获取；
+  文献侧只有一句无证明的断言。故 physical-argument。
+  相较之下第 (2) 条**单独看**确实是有限步初等计算（自由振子 Gram 矩阵的标准递推），
+  但它以第 (1) 条与 worldsheet.ddf-transverse-oscillator-algebra（physical-argument）为输入，
+  故整卡不高于 physical-argument；未来若第 (1) 条升级，(2) 可考虑拆出单独立卡。
+
+  【升级路径】
+  (i) 走 Lean：需先在 `formal/StringFormal/NoGhost/VertexOperator.lean` 上证
+      V(b)_J† = V(−b)_{−J}（在 b·b = 0 即 k_0² = 0 下），再组装 A^i_n
+      （后者本身尚未定义，见 worldsheet.ddf-operators-v5 notes (3)）。
+      另有一条结构性障碍：Lean 侧目前只有 R-双线性型 `Fock.pairing`，**无 sesquilinear 结构**，
+      故即使做完也只覆盖本节点边界 (a) 说的实极化情形。
+  (ii) 走数学文献：DDF 算子在顶点算子代数（Borcherds / FLM）传统里是标准对象，
+      那里有不变双线性型与伴随的严格陈述；需 researcher 先取得**带编号**的可引用陈述。
+      与 worldsheet.ddf-transverse-oscillator-algebra 的升级路径 (ii) 是同一条。
+  (iii) FGZ 1986 Theorem 2.8 逐字有「All three isomorphic spaces are positive definite」，
+      那是横向空间 T 正定的**结论**，可作为本节点 (2) 的独立佐证；但 FGZ 的 T 与本节点的
+      H^⊥(k) 实现方式不同（见 worldsheet.no-ghost-theorem-v4 sources 的注），
+      不能直接充当本节点的来源，故未列入 sources。
+
+  【下游】worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (1b) 步。
+  该推导的有效状态在拆卡后已是 physical-argument
+  （被 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra 拉低），
+  故加入本依赖**不再进一步下降**。
+author: curator
+created: "2026-09-11"

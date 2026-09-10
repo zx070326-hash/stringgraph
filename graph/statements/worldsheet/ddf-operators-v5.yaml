@@ -147,5 +147,17 @@ notes: |
   (4) **顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做**（需 E_+ E_- 重排序，且 Lean 侧目前只有
       R-双线性型，无 sesquilinear 结构）；**x^μ 与 [x^μ, p^ν] 未做**（塔上只有 e^{i n k_0·x}
       这一个移位，且塔建在固定的 a、b 上，不是全动量空间）。
+
+  【2026-09-11（二）：偏振 ε^i 与 ∂X^i 的记号关系（auditor 第五轮精确性观察，
+  lead 已同意只补 notes、不建 v6；curator 转录，陈述文本未动）】
+  本卡引入偏振 ε^i 但公式写 ∂X^i；二者只在 k_0 无横向分量时一致，
+  即固定类光直线的同时也固定了横向标架（ε^i = e_i，i = 2..D−1，ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}）。
+  canonical_text 与 light-cone-quantization 的横向内积一致。不建 v6。
+
+  这条观察在下游被用到两处，均按上述读法：
+  worldsheet.ddf-transverse-oscillator-algebra 把 ε^i·ε^j = δ^{ij} 写进前提
+  （其 notes【陈述文本相对 v4 的两处显式化】已登记同一件事），
+  worldsheet.ddf-operators-adjoint 第 (2) 条据此得到「对角元全为正」
+  （横向指标全类空，δ^{ii} = +1）。
 author: curator
 created: "2026-09-11"
