@@ -25,9 +25,49 @@ prescription and without normal-ordering corrections.
 `StringFormal/NoGhost/VertexOperator.lean`, and `dotVec η x y = Σ_μ η_μ x^μ y^μ` is the
 spacetime contraction of `StringFormal/NoGhost/DDF.lean`.
 
+## Main statements
+
+* `Fock.vertexSub_creaExp_of_dotVec_zero` — **no contraction**: the translation `E_+(b)`
+  fixes the coherent-state coefficients `Φ^{b'}_j` when `b·b' = 0`.  Coefficient form of
+  `E_+(b,z) E_-(b',w) = exp((b·b') Σ_{l ≥ 1} (w/z)^l / l) E_-(b',w) E_+(b,z)` with the
+  scalar factor equal to `1`.  Proved from the Euler recursion `Fock.creaExp_euler`; no
+  exponential identity, no convergence.
+* `Fock.vertexAnn_creaExp_mul_of_dotVec_zero`, `Fock.vertexAnn_creaExp_of_dotVec_zero` —
+  operator form of the same fact: `E_+(b)_L` commutes with multiplication by `Φ^{b'}_j`.
+* `Fock.vertexOsc_apply_creaExp_of_dotVec_zero` — the vacuum value
+  `V^{(b)}_J Φ^{b'}_K = Φ^b_J Φ^{b'}_K`, manifestly symmetric in `(b, J)` and `(b', K)`.
+* `Fock.eq_zero_of_vertex_recursion₂` — two-index rigidity, the inductive step.
+* **`Fock.vertexOsc_comm_of_dotVec_zero`**, `Fock.lie_vertexOsc_vertexOsc_of_dotVec_zero` —
+  `b·b' = 0` ⟹ `V^{(b)}_J V^{(b')}_K = V^{(b')}_K V^{(b)}_J`, with no `z ≠ w` prescription
+  and no monodromy factor.
+* **`towerVertex_comm_of_isotropic`**, `lie_towerVertex_towerVertex_of_isotropic` — on the
+  DDF momentum tower, `k_0² = 0` ⟹ `V^{(m)}_J` and `V^{(n)}_K` commute.
+
+## Mathematical remarks (for the dependency graph)
+
+1. **`k_0² = 0` is essential**, not a convenience: for `k_0² ≠ 0` the contraction produces
+   the monodromy factor `(w/z)^{mn k_0²} ≠ 1` and the tower vertex operators do *not*
+   commute.  This is the second place (after the tower conformal weight,
+   `lie_towerLop_towerVertex_of_pos`) where light-likeness of the reference vector does real
+   work.
+2. **What is still missing for `[A^ε_m, A^δ_n]`.**  Two further steps, neither of which is
+   in this file:
+   (a) the *same-point product* `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L` — needs the
+   addition formula `Φ^{b+b'}_M = Σ_{j+k=M} Φ^b_j Φ^{b'}_k` (true for *all* momenta, it is
+   `E_-(b)E_-(b') = E_-(b+b')`), plus local finiteness of the `K`-sum, for which the naive
+   level count is *not* enough: one must first pull `Φ^{b'}` out to the left using
+   `Fock.vertexOsc_creaExp_mul_of_dotVec_zero`;
+   (b) the *weighted* sum `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`, whose `δ_{m+n,0}`
+   is a total-derivative (residue) statement and whose `m` is where the DDF normalisation
+   `2α' k_0·p = 1` first enters.
+3. **`hη : η^{μμ} η_{μμ} = 1` is not needed here.**  Unlike the mode algebra of
+   `StringFormal/NoGhost/VertexOperator.lean`, nothing in this file contracts a spacetime
+   index against the metric twice, so no hypothesis on `η` appears.
+
 ## Status
 
-Skeleton: contents are added one declaration per commit.  No `sorry` at any point.
+Complete as far as it goes, no `sorry`; axioms are `propext`, `Classical.choice`,
+`Quot.sound` only.
 -/
 
 namespace StringFormal.NoGhost

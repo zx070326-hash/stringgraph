@@ -484,10 +484,62 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       「`A^ε_n` 保持 `physSubmodule`」还不能证（`L_0` 条件缺；且 `physSubmodule`
       目前只在单个 Fock 空间上，塔上的物理子模尚未定义）。
 
+  - [x] (5) **横向代数第一步：正交动量的顶点算子彼此对易**：
+    `StringFormal/NoGhost/VertexCommute.lean`，无 sorry，11 条声明公理只有标准三条
+    （2026-09-11 用 `--import StringFormal.NoGhost.VertexCommute --all` 复核）。
+    - **无缩并引理** `Fock.vertexSub_creaExp_of_dotVec_zero`：`b·b' = 0` ⟹
+      `vertexSub b (Φ^{b'}_j) = Polynomial.C (Φ^{b'}_j)`，即平移 `X_{μ,l} ↦ X_{μ,l} - b^μ T^l`
+      **原样固定**另一动量的相干态系数。这是收缩公式
+      `E_+(b,z) E_-(b',w) = exp((b·b') Σ_{l≥1} (w/z)^l / l) · E_-(b',w) E_+(b,z)` 的系数形式，
+      正交时标量因子为 `1`。证明**不需要**任何指数恒等式：对 `j` 归纳，把 (3a) 的欧拉递推
+      `Fock.creaExp_euler` 整体穿过代数同态 `vertexSub b`，多出的项是
+      `-(b'·b) T^l Φ_{j-l}`（私有引理 `vertexSub_sum_creation_mul`，**全文件唯一**用到
+      `b·b' = 0` 的地方），然后用 `ℚ`-代数里除以 `M` 消掉标量。
+    - 算子形式（题目要求的第 1 步）：`Fock.vertexAnn_creaExp_mul_of_dotVec_zero`
+      （`E_+(b)_L ∘ E_-(b')_j = E_-(b')_j ∘ E_+(b)_L`）与
+      `Fock.vertexAnn_creaExp_of_dotVec_zero`（`E_+(b)_L Φ^{b'}_j = δ_{L,0} Φ^{b'}_j`）。
+    - 真空基：`Fock.vertexOsc_apply_creaExp_of_dotVec_zero`，`V^{(b)}_J Φ^{b'}_K = Φ^b_J Φ^{b'}_K`，
+      右端对 `(b,J) ↔ (b',K)` 显然对称——这正是对易的底。
+      推广 `Fock.vertexOsc_creaExp_mul_of_dotVec_zero`：`V^{(b)}_J (Φ^{b'}_c · P) = Φ^{b'}_c · V^{(b)}_J P`。
+    - 归纳步：`Fock.eq_zero_of_vertex_recursion₂`（`eq_zero_of_vertex_recursion` 的**双指标**版）。
+      两个顶点算子的乘积满足
+      `W_{J,K}(X_v P) = X_v W_{J,K}P - b^{v.1} W_{J+n,K}P - b'^{v.1} W_{J,K+n}P`，
+      每个动量只移自己的 Laurent 指标；对易子满足同一条递推，故由真空值决定。
+    - **主定理** `Fock.vertexOsc_comm_of_dotVec_zero` / `Fock.lie_vertexOsc_vertexOsc_of_dotVec_zero`：
+      `b·b' = 0` ⟹ `V^{(b)}_J V^{(b')}_K = V^{(b')}_K V^{(b)}_J`（题目要求的第 2 步）。
+      注意这**不需要** `z ≠ w`，也没有任何单值因子：正交动量的两个指数顶点算子的 OPE 无奇点。
+    - **塔上版本**（第 3 步）：`towerVertex_comm_of_isotropic` /
+      `lie_towerVertex_towerVertex_of_isotropic`，`k_0² = 0` ⟹ `V^{(m)}_J` 与 `V^{(n)}_K` 对易。
+      动量算术是 `dotVec_vertexMomentum`：`(m k_0)·(n k_0) = mn k_0²`；零模半是层移位
+      `towerShift`，平凡对易（`j+n+m = j+m+n`）。
+      **数学要点**：`k_0² ≠ 0` 时结论**假**——收缩给出单值因子 `(w/z)^{mn k_0²} ≠ 1`，
+      所以这条对易性是「类光参考矢量」这个假设第二次真正起作用的地方
+      （第一次是 (3e) 的塔上共形权）。
+    - **未做 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
+      需要三块。① `Φ^{b+b'}_M = Σ_{j+k=M} Φ^b_j Φ^{b'}_k`（即 `E_-(b)E_-(b') = E_-(b+b')`，
+      **与正交性无关**），可照 (3a) 的欧拉递推加强归纳证，主要工作量是三角形双重求和的换序；
+      ② 局部有限性：对固定的 `P`，只有有限多个 `K` 使 `V^{(b)}_{L-K}V^{(b')}_K P ≠ 0`
+      （下端来自 `vertexOsc_apply_eq_zero_of_level`，上端要用
+      `vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}` 提到左边，再对 `Ψ^{b'}_M P` 的 level 用
+      同一条引理——**朴素的 level 计数不够**，因为 `V^{(b')}_K P` 的 level 随 `K` 增长）；
+      ③ 用 `lsumLocFin` 组装后，两边满足同一条 `b+b'` 的产生递推，
+      由 `Fock.vertexOsc_unique` 归约到真空即 ①。估计 150–250 行。
+    - **未做 (5b)** 加权和 `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`：这是 `[A^ε_m, A^δ_n]`
+      的真正内容，(5a) 只是它的输入。物理上它是「`:(k_0·∂X) e^{i(m+n)k_0·X}:` 在 `m+n ≠ 0` 时是
+      全导数 `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，留数为零；`m+n = 0` 时退化成 `k_0·∂X`，
+      留数是 `k_0·α_0 = 2α' k_0·p = 1`」，所以 **`δ_{m+n,0}` 来自全导数，`m` 来自归一化**，
+      这里第一次用到 `dotVec η b a = 1`。形式化路线未定，估计 200–300 行。
+  - **[A,A] 的整条链**（记录，供下一位）：横向性 (4) 给
+    `[A^ε_m, A^δ_n] = Σ_{j,l} [α^ε_j, α^δ_l] V^{(m)}_j V^{(n)}_l`（用到 (5) 的顶点算子对易
+    把两个 `V` 并到右边），再用 `Fock` 的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
+    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。即：(5) 已做的是**第一步**，
+    剩下 (5a)(5b) 与双重局部有限和的 Leibniz 组装（可仿 `lie_towerLop_ddfOp_of_pos`）。
+
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
     所以「`A^ε_n` 把物理态送到物理态」还证不了。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
+    仍缺同点乘积 (5a) 与加权和 (5b)。
   - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
