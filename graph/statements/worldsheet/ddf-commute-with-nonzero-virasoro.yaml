@@ -116,5 +116,43 @@ notes: |
   【与 worldsheet.ddf-commute-with-virasoro 的关系，一句话】
   本卡 ⊊ 那张卡（量词更窄）。那张卡的 notes 已登记本卡的存在与两者的分工；
   两张卡的陈述文本都不再改动。
+
+  【2026-09-11（六）：本卡已被 ∀m 版覆盖；保留作历史（三段式攻关记录），不换代、不删，curator】
+  main 合入 `formal/StringFormal/NoGhost/DDFOperatorAll.lean` 后，
+  `lie_towerLop_ddfOp` 把 ⁅L_m, A^ε_n⁆ = 0 证到**每个** m ∈ Z，
+  图中 worldsheet.ddf-commute-with-virasoro 因此有了 --via-lean（formalized），
+  effective 从 physical-argument 升为 formalized。
+  ⇒ **本卡的全部内容自此被那张卡严格包含**（本卡是它限到 m ≠ 0 的弱化）。
+  按 lead 裁决：**保留不删、不加 `superseded_by`**。理由两条：
+  (1) 本卡不是"更差的表述"，而是攻关中一个真实存在过的量词边界，
+      与 worldsheet.brst-nilpotent-at-c26 同一模式；
+  (2) 它与 worldsheet.ddf-operators-preserve-positive-mode-conditions 一起构成
+      **三段式攻关的可追溯记录**：
+        m ≥ 1（DDFOperator.lean，`lie_towerLop_ddfOp_of_pos`）
+          → m ≠ 0（DDFOperatorNeg.lean，`lie_towerLop_ddfOp_of_ne`；**本卡**）
+          → 正模保持（TowerPhysical.lean；那张弱节点）
+          → 一切 m + 完整物理态保持（DDFOperatorAll.lean；
+            worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-operators-preserve-physical-states）。
+  ⚠ **新的下游不应再引本卡**：需要对易关系的引 ∀m 卡，需要物理态保持的引
+  worldsheet.ddf-operators-preserve-physical-states。本卡只服务于历史追溯。
+
+  【本卡推导对 v1 的依赖是对的，别去追改】
+  本卡的 --via-lean 依赖 worldsheet.exponential-vertex-operator-mode-weight-identity
+  （v1，m ≠ 0，`Fock.lie_Lop_vertexOsc_of_ne`）。该卡已被 -v2（一切 m）换代，
+  故 validate 会报「depends on superseded statement」。**这是提醒不是错误**
+  （docs/STATUS_LEVELS.md【旧推导的去留】）：Lean 的 `lie_towerLop_ddfOp_of_ne`
+  **确实**只用 v1，改指 v2 反而会失真。
+
+  【一处必须按新证据更正的旧措辞】
+  本卡上文（【m = 0 为什么缺】段）写「把 m ≠ 0 的系数代进去会得到**错**答案」。
+  前半句（j = 0 与 j = m 两项重合）对，**后半句是误传**。
+  `formal/StringFormal/NoGhost/VertexWeightZero.lean` 文件头逐字：
+  「通式系数是 `J - m + a·b + ½ (m+1) (b·b)`，`m = 0` 给 `J + a·b + ½ (b·b)`，
+    而直接计算给出的也正是这个。之前记录的「代 `m = 0` 给错答案」指的是**真空引理**
+    （`Fock.Lop_apply_creaExp_of_pos` / `_shifted` 的 `0 < m` 假设不可去），
+    **不是**最终的对易子系数。」
+  即：m = 0 需要单独证的是**真空引理**（L_0|k⟩ = ½(a·a)|k⟩，非零标量倍），
+  最终对易子系数从来就是一条统一的多项式。
+  详见 worldsheet.exponential-vertex-operator-mode-weight-identity-v2 的 notes。
 author: curator
 created: "2026-09-11"
