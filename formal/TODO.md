@@ -217,6 +217,16 @@
   `StringFormal.NoGhost.Fock.spuriousShell`（并在 notes 记 `nullStates` 与 `nullStates_eq`），
   `lean_file` 填 `formal/StringFormal/NoGhost/SpuriousShell.lean`；这会撤销该卡 notes 里
   「Lean 侧没有这个子模，故不填 lean_decl」的记账。
+- [x] `quotient-form`：`H_phys / H_null` 上诱导形式良定义 ——
+  `StringFormal/NoGhost/QuotientForm.lean`（图节点 `worldsheet.spurious-orthogonal-to-physical`
+  的后半句）。`Fock.pairing_add_null`（`⟨ψ+χ, φ+χ'⟩ = ⟨ψ,φ⟩`，ψ,φ ∈ H_phys，χ,χ' ∈ H_null）、
+  `Fock.pairing_eq_of_sub_mem_nullSubmodule`（差式版本）、`Fock.nullInPhys` / `Fock.PhysQuot`
+  （= `physSubmodule ⧸ nullSubmodule.comap physSubmodule.subtype`）、两次 `Submodule.liftQ`
+  得到的 `Fock.quotientPairing : LinearMap.BilinForm R (PhysQuot η a a₀)`，计算规则
+  **`Fock.quotientPairing_mk`** 与对称性 `Fock.quotientPairing_comm`。
+  **未做**：非退化性（`∀ q', ⟨q,q'⟩ = 0 → q = 0`，形式上 routine 但没写）与正定性（无鬼定理本体）。
+  图侧：建议 `worldsheet.spurious-orthogonal-to-physical--via-lean` 的 `lean_decl` 列
+  `spuriousSubmodule_le_orthComplement` 与 `quotientPairing_mk`，从 rigorous 升回 formalized。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
