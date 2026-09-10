@@ -281,7 +281,28 @@
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
-- [ ] `negative-norm-above-26`：D > 26 时显式负模态。
+- [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
+  level-2 标量试探态 `ψ₂ = [α_{-1}·α_{-1} + c₂(a·α_{-2}) + c₃(a·α_{-1})²]|k⟩`
+  （`Fock.levelTwoScalar`），其中 `a^μ = α^μ_0 = (2α')^{1/2}k^μ`，`s := zeroModeSq η a = 2α'k²`。
+  - 任意系数下的模：`Fock.pairing_levelTwoScalar_self`，`⟨ψ₂,ψ₂⟩ = 2D + 2s c₂² + 2s² c₃² + 4s c₃`。
+  - 物理态条件：`Fock.Lop_one_apply_levelTwoScalar`（`L₁ψ₂ = (2+2c₂+2c₃s)(a·α_{-1})|k⟩`）、
+    `Fock.Lop_two_apply_levelTwoScalar`（`L₂ψ₂ = (D+2c₂s+c₃s)|k⟩`）；`n ≥ 3` 自动
+    （`Fock.Lop_apply_levelTwoScalar_of_three_le`，用 level 分级）。
+    合起来是 `Fock.levelTwoScalar_mem_physSubmodule`。
+  - 闭式（图节点 `worldsheet.ocq-level-two-scalar-norm`）：`Fock.pairing_levelTwoScalar_physical`，
+    `(4a₀-9)² ⟨ψ₂,ψ₂⟩ = 2(D-1)[16a₀² + (2D-74)a₀ + 84 - 3D]`（分母已清；括号内判别式 `4(D-1)(D-25)`）。
+    非空性：`Fock.exists_levelTwoScalar_mem_physSubmodule`（域上，`4a₀ ≠ 9` 且 `k² ≠ 0`）。
+  - `a₀ = 1`：`Fock.pairing_levelTwoScalar_intercept_one`，`⟨ψ₂,ψ₂⟩ = -2(D-26)(D-1)/25`，
+    系数 `c₂ = (D-1)/5`、`c₃ = (D+4)/10`。
+  - **鬼**（no-ghost-theorem-v4 第 (2) 条）：`Fock.exists_mem_physSubmodule_pairing_self_neg`，
+    有序域上 `D > 26` ⟹ `∃ ψ ∈ physSubmodule (minkowski D K) b 1, ⟨ψ,ψ⟩ < 0`；
+    动量见 `Fock.exists_zeroModeSq_eq_neg_two`（`α'k² = -1`，需 `D ≥ 2` 与域，因为
+    单分量的 `k² = -1` 在 ℚ 上无解）。
+
+  **未做**：没有证明 `ψ₂` 张成 level-2 物理态的标量（`SO(D-1)` 不变）部分，所以「level-2 标量模」
+  是关于这一族显式试探态的陈述，不是关于某个典范向量的。做鬼不需要这一步（一个负模态就够），
+  但图节点若要读作「level-2 标量物理态的模」，应在 `gaps` 里写明这一点。
+  也没有证明 `D ≤ 26` 时模非负——那是无鬼定理本身。
 
 ## 基础设施
 
