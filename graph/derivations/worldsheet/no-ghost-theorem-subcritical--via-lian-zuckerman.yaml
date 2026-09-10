@@ -16,6 +16,24 @@ depends_on:
       与之逐条相同（最高权向量、L_n|h⟩ = 0 (n>0)、L₀|h⟩ = h|h⟩、按 L₀ 分级）。
       **约定差异**：本项目记 V(c,h)，LZ 记 M(c,h)；本项目节点的 V(c,h) 与 LZ 的 M(c,h)
       是同一对象，LZ 的 L(c,h) 在本项目图中尚无独立节点（见 gaps）。
+  - id: worldsheet.bosonic-fock-space
+    note: |
+      非 inferred：LZ (3.2) 逐字把物质模定义为 V(D,p) = sym ⊕_{μ=1}^{D} ⊕_{n=1}^{∞} C α^μ_{-n}，
+      即产生算符（**不含零模** n = 0）张成的自由模上的对称代数，与本节点的
+      F(D,R) = R[X_{(μ,n)} : n ≥ 1] 逐条相同；LZ (3.1) 的
+      [α^μ_m, α^ν_n] = m g^{μν} δ_{m,-n} 1 与本节点在对角 η 下的振子代数相同。
+      **两处对应关系**：(a) LZ 的动量 p 通过 x·v_p = ⟨p,x⟩ v_p 作用在真空上（零模作为标量），
+      本节点把动量当作外部标签（其 notes 缺口 (i)），二者一致；
+      (b) 指标范围 LZ 写 μ = 1..D，本节点写 μ = 0..D−1，只是编号差异。
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      非 inferred：LZ Proposition 3.1(ii) 逐条给出本节点 (1) 的两条刻画——
+      「hermitian，⟨v_p, v_p⟩ = 1，α^{μ†}_n = α^μ_{-n}，π(L_n)† = π(L_{-n})」；
+      本节点 (4) 的不定性正是目标陈述里「厄米形式在 V(D,p) 上不定」那一句。
+      **约定差异**：本节点是 R-双线性型（Lean 侧），LZ 是复共轭线性的厄米形式；
+      在实系数、单项式正交基上二者的 Gram 矩阵相同，本推导只用到 Gram 矩阵与符号。
+      本节点 (4) 要求 D ≥ 2 才能同时取到正负值——这与 LZ 的下界 (P4) D ≥ 2 一致；
+      **但「LZ 的 D ≥ 2 就是为此」是 curator 的观察，LZ 未给出该下界的理由**，见 gaps。
   - id: worldsheet.kac-determinant
     inferred: true
     note: |
@@ -124,7 +142,7 @@ summary: |
   critical-dimension-brst--via-nilpotency 为 physical-argument 的影响。
 gaps:
   - "【最实质的一条】LZ 证明末句到两分支条件之间的最后一步（'the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h)'）在抽取记录的 L1 逐字里**没有附引文**；把它接到 Kac 行列式 / Kac–Kazhdan 1979 的定位（LZ Lemma 3.17、Remark 3.15）只有转述级证据（primary-sources-round2.md §8、§9.3；bib key kac-kazhdan-1979 的 note）。故 worldsheet.kac-determinant 这条边标 inferred。待复核 LZ p.571–579。"
-  - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中**没有逐字登记**。本节点按 conv.metric-mostly-plus 读作洛伦兹 (1, D−1)，依据是两条推断（g 正定会使判据平凡；D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合），不是原文措辞。若 g 实为 mostly-minus，陈述中 h ∈ (p·p)/2 + Z₊ 的符号与 N = h − p·p/2 的换算需相应翻转。"
+  - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中**没有逐字登记**。本节点按 conv.metric-mostly-plus 读作洛伦兹 (1, D−1)，依据是两条推断（g 正定会使判据平凡；D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合），不是原文措辞。若 g 实为 mostly-minus，陈述中 h ∈ (p·p)/2 + Z₊ 的符号与 N = h − p·p/2 的换算需相应翻转。相关的 curator 观察（**不是** LZ 的说法）：worldsheet.fock-indefinite-form (4) 指出该型取到正负两种值需要 D ≥ 2，这与 LZ 的下界 (P4) 数值巧合；LZ 未说明 D ≥ 2 的理由，本项目不据此裁定该下界的来由。"
   - "「LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目 H_phys(p)/H_0(p)」是抽取者的对照解读，LZ 全文无 'old covariant' 字样，故 depends_on 上 worldsheet.old-covariant-physical-states 标 inferred。同理「LZ 的相对复形 = 本项目 b₀ = L₀ = 0 的 BRST 相对复形」也是解读（primary-sources-round2.md §1.4 明示须标 inferred），故 worldsheet.brst-quantization 亦标 inferred。这两条是本推导可追溯性上最软的地方：定理本体逐字可靠，把它翻译到本项目对象上的字典不逐字可靠。"
   - "LZ 的设定与本项目 worldsheet.no-ghost-theorem-v3 的设定在**证明侧**不同：26 > D ≥ 2 分支必须补一个 c = 26 − D 的不可约 Vir 模 L(26−D, 1−h) 才能做 BRST（总中心荷 26）。断言侧不受影响（左端只用 D 个自由玻色子，见目标陈述范围 (b)），但这意味着本推导**不是** v3 的 DDF 论证的推广，形式化时是两条独立路线。D = 26、h = 1 时补充模退化为 L(0,0)（平凡一维），两条路线在临界点重合。"
   - "LZ 的 D ≥ 2 下界（陈述的 (P4)）与对 p 的三条假设 (P1)–(P3) 在 ms.no-ghost-theorem 审计 B1 算出的区域里**没有**对应物；引用本节点覆盖 B1 时必须补上这四条，否则是过度断言。(P2) 与 v3 排除的 k₀·k = 0 扇区是否是同一个排除，未做对照。"
