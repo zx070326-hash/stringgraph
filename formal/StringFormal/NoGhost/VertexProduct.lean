@@ -14,15 +14,62 @@ import StringFormal.NoGhost.DDFOperator
 Graph node: `worldsheet.ddf-transverse-oscillator-algebra`; `formal/TODO.md` item
 `ddf-operators`, sub-item (5a).
 
-Target: for `b · b' = 0`,
-`∑_{J + K = L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`,
-i.e. the two exponential vertex operators may be multiplied at the same point and the
-result is the vertex operator of the summed momentum.  This is the input to (5b), the
-weighted sum `∑_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}` which *is* the DDF bracket.
+For `b · b' = 0`,
+`Σ_{J + K = L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`:
+the two exponential vertex operators may be multiplied at the same point and the result is
+the vertex operator of the summed momentum.  This is the input to (5b), the weighted sum
+`Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}` which *is* the DDF bracket.
+
+## Conventions
+
+`conv.metric-mostly-plus`, `conv.alpha-prime-regge`, as in `StringFormal/NoGhost/DDF.lean`;
+`b^μ = (2α')^{1/2} c^μ` is the rescaled vertex momentum of
+`StringFormal/NoGhost/VertexOperator.lean`, and `dotVec η x y = Σ_μ η_μ x^μ y^μ`.
+
+## Main statements
+
+* `Fock.vertexAnn_mem_levelSubmodule`, `Fock.vertexAnn_apply_eq_zero_of_level` — the
+  annihilation half `Ψ^b_M = vertexAnn b M` maps the level-`N` piece to level `N - M` and
+  kills it for `M > N`.  Corollary `Fock.levelBound_vertexAnn_le`:
+  `levelBound (Ψ^b_M P) ≤ levelBound P` **uniformly in `M`**.
+* `Fock.vertexOsc_vertexOsc_apply_eq_zero_of_lt` / `_of_gt` — the two ends of the finite
+  window `-levelBound P ≤ K ≤ L + levelBound P` of the `K`-sum.  The upper end is where
+  `b · b' = 0` is indispensable.
+* `Fock.vertexProduct` — the product assembled as a locally finite sum, with
+  `Fock.vertexProduct_apply` (computed by any index set containing the window),
+  `Fock.vertexProduct_apply_one` (vacuum value) and `Fock.vertexProduct_X_mul` (creation
+  recursion for the momentum `b + b'`).
+* **`Fock.vertexProduct_eq_vertexOsc_add`** — the theorem: `W_L = V^{(b+b')}_L`.
+  `Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero` is the same statement as an identity of
+  honest finite sums.
+* `sum_towerVertex_towerVertex_single_of_isotropic`,
+  **`sum_towerVertex_towerVertex_of_isotropic`** — the tower version for a light-like
+  reference vector (`k_0² = 0`): `Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L`.
+
+## Mathematical remarks (for the dependency graph)
+
+1. **Where `b · b' = 0` is used.**  Twice, and both times essentially.  (a) *Local
+   finiteness.*  The naive level count fails: `V^{(b')}_K P` sits at level
+   `levelBound P + K`, which grows with `K`, so `V^{(b)}_{L-K}` never gets to kill it.
+   Orthogonality lets one pull the coherent-state factors out to the left
+   (`Fock.vertexOsc_creaExp_mul_of_dotVec_zero`), leaving `Ψ^{b'}_M P`, whose level bound is
+   independent of `K`.  (b) *Vacuum value*, via
+   `Fock.vertexOsc_apply_creaExp_of_dotVec_zero`.  The *creation* halves multiply correctly
+   for any pair of momenta (`Fock.creaExpPair_eq_creaExp_add`); only the annihilation half
+   contracts.
+2. **For `b · b' ≠ 0` the statement is false**, not merely unproved: the contraction
+   produces `exp((b·b') Σ_{l≥1} (w/z)^l / l) = (1 - w/z)^{-b·b'}`, whose expansion mixes all
+   Laurent indices, so the `K`-sum is not locally finite and the product is not a single
+   vertex operator.  On the DDF tower this is exactly the place where `k_0² = 0` enters.
+3. **Still missing for the DDF bracket** `[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}`: the weighted
+   sum `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}` (item (5b)).  Physically that is a
+   total-derivative/residue statement; the `δ_{m+n,0}` comes from the total derivative and
+   the `m` from the normalisation `2α' k_0·p = 1`, which is the first place `dotVec η b a = 1`
+   is used.  Nothing here uses that hypothesis.
 
 ## Status
 
-Work in progress; this header records what is present.  No `sorry`.
+Complete as stated, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only.
 -/
 
 namespace StringFormal.NoGhost
@@ -403,5 +450,98 @@ theorem sum_vertexOsc_vertexOsc_of_dotVec_zero (η b b' : Fin D → R)
 end Product
 
 end Fock
+
+/-! ### The tower version
+
+On the DDF momentum tower the vertex operators carry momenta `n k_0`, all proportional to
+the light-like reference vector, so any two of them are orthogonal
+(`dotVec_vertexMomentum` with `k_0² = 0`) and the previous theorem applies rung by rung.
+The zero-mode halves are rung shifts, and `towerShift m ∘ towerShift n = towerShift (m+n)`
+is just `j + n + m = j + (m + n)`; the momenta add because
+`m k_0 + n k_0 = (m+n) k_0`. -/
+
+section TowerProduct
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+omit [Algebra ℚ R] in
+lemma vertexMomentum_add (b : Fin D → R) (m n : ℤ) :
+    vertexMomentum b m + vertexMomentum b n = vertexMomentum b (m + n) := by
+  funext μ
+  simp only [Pi.add_apply, vertexMomentum_apply]
+  push_cast
+  ring
+
+/-- **The same-point product of two DDF tower vertex operators**, on a single rung:
+`Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L` whenever the reference vector is light-like.
+Any index set containing the window `n - levelBound P ≤ K ≤ L - m + levelBound P` computes
+the sum.
+
+The hypothesis `k_0² = 0` is essential and enters exactly as in
+`Fock.vertexProduct_eq_vertexOsc_add`: for `k_0² ≠ 0` the contraction of the two
+exponentials produces the monodromy factor `(w/z)^{mn k_0²}`, the sum over `K` is no longer
+locally finite, and the product is not a single vertex operator. -/
+theorem sum_towerVertex_towerVertex_single_of_isotropic (η b : Fin D → R)
+    (hbb : dotVec η b b = 0) (m n L j : ℤ) (P : Fock D R) {s : Finset ℤ}
+    (hs : ∀ K : ℤ, n - (Fock.levelBound P : ℤ) ≤ K → K ≤ L - m + (Fock.levelBound P : ℤ) →
+      K ∈ s) :
+    ∑ K ∈ s, (towerVertex η b m (L - K) * towerVertex η b n K) (Finsupp.single j P)
+      = towerVertex η b (m + n) L (Finsupp.single j P) := by
+  classical
+  have hdot : dotVec η (vertexMomentum b n) (vertexMomentum b m) = 0 := by
+    rw [dotVec_vertexMomentum, hbb, mul_zero]
+  set F : ℤ → Fock D R := fun K =>
+    Fock.vertexOsc η (vertexMomentum b m) (L - m - n - K)
+      (Fock.vertexOsc η (vertexMomentum b n) K P) with hF
+  have hterm : ∀ K : ℤ,
+      (towerVertex η b m (L - K) * towerVertex η b n K) (Finsupp.single j P)
+        = Finsupp.single (j + n + m) (F (K - n)) := by
+    intro K
+    rw [Module.End.mul_apply, towerVertex_single, towerVertex_single, hF,
+      show L - K - m = L - m - n - (K - n) from by ring]
+  have himg : ∑ K ∈ s, F (K - n) = ∑ K ∈ s.image (fun x => x - n), F K :=
+    (Finset.sum_image (fun x _ y _ h => by omega)).symm
+  have hinner : ∑ K ∈ s.image (fun x => x - n), F K
+      = Fock.vertexOsc η (vertexMomentum b m + vertexMomentum b n) (L - m - n) P :=
+    Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero η (vertexMomentum b m) (vertexMomentum b n)
+      hdot (L - m - n) P (fun K h1 h2 => by
+        rw [Finset.mem_image]
+        exact ⟨K + n, hs (K + n) (by omega) (by omega), by omega⟩)
+  rw [Finset.sum_congr rfl (fun K _ => hterm K), ← Finsupp.single_finsetSum, himg, hinner,
+    vertexMomentum_add, towerVertex_single, show j + n + m = j + (m + n) from by ring,
+    show L - m - n = L - (m + n) from by ring]
+
+/-- **The same-point product of two DDF tower vertex operators**, on an arbitrary tower
+vector: `Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L` for a light-like reference vector.
+The window is the same one as in `towerVertex_apply_eq_zero_of_lt`, widened at the top. -/
+theorem sum_towerVertex_towerVertex_of_isotropic (η b : Fin D → R) (hbb : dotVec η b b = 0)
+    (m n L : ℤ) (x : TowerFock D R) {s : Finset ℤ}
+    (hs : ∀ K : ℤ, n - (towerLevelBound x : ℤ) ≤ K → K ≤ L - m + (towerLevelBound x : ℤ) →
+      K ∈ s) :
+    ∑ K ∈ s, (towerVertex η b m (L - K) * towerVertex η b n K) x
+      = towerVertex η b (m + n) L x := by
+  classical
+  have key : ∀ j ∈ x.support, ∑ K ∈ s,
+      (towerVertex η b m (L - K) * towerVertex η b n K) (Finsupp.single j (x j))
+        = towerVertex η b (m + n) L (Finsupp.single j (x j)) := by
+    intro j hj
+    have hle : (Fock.levelBound (x j) : ℤ) ≤ (towerLevelBound x : ℤ) := by
+      exact_mod_cast Finset.le_sup (f := fun j => Fock.levelBound (x j)) hj
+    exact sum_towerVertex_towerVertex_single_of_isotropic η b hbb m n L j (x j)
+      (fun K h1 h2 => hs K (by omega) (by omega))
+  calc ∑ K ∈ s, (towerVertex η b m (L - K) * towerVertex η b n K) x
+      = ∑ K ∈ s, ∑ j ∈ x.support,
+          (towerVertex η b m (L - K) * towerVertex η b n K) (Finsupp.single j (x j)) := by
+        refine Finset.sum_congr rfl fun K _ => ?_
+        conv_lhs => rw [← sum_single_eq x]
+        rw [map_sum]
+    _ = ∑ j ∈ x.support, ∑ K ∈ s,
+          (towerVertex η b m (L - K) * towerVertex η b n K) (Finsupp.single j (x j)) :=
+        Finset.sum_comm
+    _ = ∑ j ∈ x.support, towerVertex η b (m + n) L (Finsupp.single j (x j)) :=
+        Finset.sum_congr rfl key
+    _ = towerVertex η b (m + n) L x := by rw [← map_sum, sum_single_eq]
+
+end TowerProduct
 
 end StringFormal.NoGhost
