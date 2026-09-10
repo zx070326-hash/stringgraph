@@ -65,6 +65,10 @@
 - `worldsheet.verma-module`（构造+万有性质+分级可标 formalized；PBW 基与 dim p(N) 另立）
 - `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
 - `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
+- `worldsheet.brst-quantization`（statement 写死 c^g = −26，是命题埋进定义卡；建 v2 改为"鬼场部门为 λ = 2 的 bc 系统，中心荷记 c^g"，不要加 uses 边——会把四个 rigorous 节点拉低）
+- `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
+- `worldsheet.bc-ghost-cft`（两条内嵌命题）
+- 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载
 
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
 

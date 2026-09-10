@@ -12,7 +12,7 @@
 
 - 度规号差：mostly-plus `(-,+,+,...,+)`
 - 弦长：`alpha'`，Regge 斜率；闭弦张力 `T = 1/(2π α')`
-- 世界面：欧氏号差用于 CFT 陈述，洛伦兹号差用于光锥量子化陈述，各自显式标注
+- 世界面：欧氏号差用于 CFT 陈述，洛伦兹号差用于光锥量子化陈述，各自显式标注。family `worldsheet-signature`，canonical 为 `conv.worldsheet-euclidean`（Polchinski 第 2 章起默认），`conv.worldsheet-lorentzian` 供第 1 章节点；跨号差的推导边须带 `convention_map`（Wick 字典 σ² = iσ⁰、S_P^L = i S_P^E）
 - Virasoro 代数：`[L_m, L_n] = (m-n) L_{m+n} + (c/12) m (m^2-1) δ_{m+n,0}`
 - 规范场归一化：`Tr` 取基本表示，`F = dA + A∧A`
 - 单位：`ħ = c = 1`
