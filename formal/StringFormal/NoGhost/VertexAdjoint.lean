@@ -114,6 +114,65 @@ theorem pairing_vertexAnn_left (η b : Fin D → R) (hη : ∀ μ, η μ * η μ
   rw [neg_neg] at h
   rw [pairing_comm η v, h, pairing_comm]
 
+/-! ### The adjoint of the vertex operator on a single Fock space -/
+
+/-- **`V(b)_K^† = V(-b)_{-K}`** for the Fock form.
+
+Written out: `⟨V(b)_K v, w⟩ = ⟨v, V(-b)_{-K} w⟩`, where `V(b)_K = Fock.vertexOsc η b K` is the
+`z^K` Laurent coefficient of the oscillator part of `:e^{i c·X(z)}:` with `b = (2α')^{1/2} c`.
+
+Three remarks, all of them corrections to the folklore statement.
+
+* **No isotropy hypothesis.**  One might expect the reordering `E_+ E_- ↦ E_- E_+` to produce a
+  self-contraction `exp(Σ_l (b·b)/l …)` and hence to need `b·b = 0`.  It does not: the adjoint
+  of the *normal-ordered* product `E_-(b) E_+(b)` is `E_+(b)^† E_-(b)^† = E_-(-b) E_+(-b)`,
+  which is *again* normal ordered.  So the identity holds for arbitrary `b`, and the only
+  hypothesis is `hη`, the same one every spacetime-index contraction in this development uses.
+* **The momentum flips sign.**  See `pairing_creaExp_left` for why `-b` and not `b`: the two
+  halves of the normal-ordered exponential carry opposite signs in the exponent.
+* **The Laurent index flips sign with no shift.**  `V_K` here is the plain `z^K` coefficient,
+  with no conformal-weight normalisation, so the usual `z^{-2h}` of radial quantisation does
+  not appear.  The DDF bookkeeping `(V^{(n)}_J)^† = V^{(-n)}_{-J}` is recovered on the tower
+  (`towerPairing_towerVertex_left`), where `b ↦ -b` is absorbed into `n ↦ -n`. -/
+theorem pairing_vertexOsc_left (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (K : ℤ)
+    (v w : Fock D R) :
+    pairing η (vertexOsc η b K v) w = pairing η v (vertexOsc η (-b) (-K) w) := by
+  classical
+  set s : Finset ℤ := vertexIdx b v ∪ (vertexIdx (-b) w).image (fun M => M - K) with hsdef
+  have hsv : ∀ L ∉ s, vertexAnn b L v = 0 := fun L hL =>
+    vertexAnn_apply_eq_zero_of_notMem_vertexIdx b v
+      (fun hc => hL (Finset.mem_union_left _ hc))
+  have hsw : ∀ M ∉ s.image (fun L => K + L), vertexAnn (-b) M w = 0 := by
+    intro M hM
+    refine vertexAnn_apply_eq_zero_of_notMem_vertexIdx (-b) w fun hc => hM ?_
+    refine Finset.mem_image.mpr ⟨M - K, ?_, by ring⟩
+    exact Finset.mem_union_right _ (Finset.mem_image.mpr ⟨M, hc, rfl⟩)
+  have hLHS : pairing η (vertexOsc η b K v) w
+      = ∑ L ∈ s, pairing η v (creaExp η (-b) L * vertexAnn (-b) (K + L) w) := by
+    rw [vertexOsc_apply η b K v hsv, map_sum, LinearMap.sum_apply]
+    exact Finset.sum_congr rfl fun L _ => by
+      rw [pairing_creaExp_left η b hη, pairing_vertexAnn_left η b hη]
+  have hRHS : pairing η v (vertexOsc η (-b) (-K) w)
+      = ∑ L ∈ s, pairing η v (creaExp η (-b) L * vertexAnn (-b) (K + L) w) := by
+    rw [vertexOsc_apply η (-b) (-K) w hsw, map_sum,
+      Finset.sum_image (fun x _ y _ h => by omega)]
+    exact Finset.sum_congr rfl fun L _ => by rw [show -K + (K + L) = L from by ring]
+  rw [hLHS, hRHS]
+
+/-- `⟨v, V(b)_K w⟩ = ⟨V(-b)_{-K} v, w⟩`. -/
+theorem pairing_vertexOsc_right (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (K : ℤ)
+    (v w : Fock D R) :
+    pairing η v (vertexOsc η b K w) = pairing η (vertexOsc η (-b) (-K) v) w := by
+  rw [pairing_vertexOsc_left η (-b) hη (-K), neg_neg, neg_neg]
+
+/-- The special case `b · b = 0` singled out by the graph node
+`worldsheet.vertex-operator-adjoint`: for an isotropic vertex momentum the adjoint relation
+holds — but so it does for every `b`, see `pairing_vertexOsc_left`. -/
+theorem pairing_vertexOsc_left_of_dotVec_zero (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (_hbb : dotVec η b b = 0) (K : ℤ) (v w : Fock D R) :
+    pairing η (vertexOsc η b K v) w = pairing η v (vertexOsc η (-b) (-K) w) :=
+  pairing_vertexOsc_left η b hη K v w
+
 end CreaExpAdjoint
 
 end Fock
