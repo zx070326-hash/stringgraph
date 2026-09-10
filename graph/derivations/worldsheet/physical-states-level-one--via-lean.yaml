@@ -1,0 +1,145 @@
+id: worldsheet.physical-states-level-one--via-lean
+target: worldsheet.physical-states-level-one
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      提供 H_phys 与 H_0 本身：Lean 里 `Fock.physSubmodule η a a₀` 与
+      `Fock.nullSubmodule η a a₀ = physSubmodule ⊓ orthComplement η physSubmodule`，
+      即该定义卡的 formal.lean_decl 所指的对象。字面依赖（同文件定义）。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间 `Fock D R` 与 **level 分级** `Fock.levelSubmodule D R N`（加权齐次分量）。
+      第 (1)(2) 条整个是关于 level 1 分量 F_1 的陈述；level 1 单项式的分类
+      （`Fock.exists_eq_single_of_level_eq_one`：level 为 1 的单项式恰是单个 α^μ_{−1}）
+      直接用的是该节点定义的权函数 N(d) = Σ n·d(μ,n)。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_n（`Fock.Lop`）与算它在单振子态上取值所需的求值引理
+      （`Fock.Lop_apply_mode_one`、`Fock.mode_apply_one_eq_zero`）。
+      第 (2) 条的三件事——n ≥ 2 自动、L_1 给横向性、L_0 给质量壳——全部是对 `Lop` 的直接计算。
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    inferred: false
+    note: |
+      提供第 (2) 条 L_0 部分的**唯一实质输入**：L_0 在 level N 分量上是标量 α'k² + N 的乘法
+      （`Fock.Lop_zero_apply_of_mem_levelSubmodule`，即该节点 formal.lean_decl）。
+      Lean 里 `Fock.sub_intercept_apply_of_mem_levelSubmodule` 一行调用它，
+      把 (L_0 − a) 在 F_N 上化成标量 (α'k² + N − a)；本推导取 N = 1。
+      该节点的 hη : ∀ μ, η μ * η μ = 1 假设由此传入本命题（与 worldsheet.virasoro-generators-adjoint
+      不同，本命题**需要** η² = 1）。
+  - id: worldsheet.virasoro-generators-adjoint
+    inferred: false
+    note: |
+      提供第 (3) 条「零模态」的**唯一实质输入**：L_{−1}^† = L_1
+      （`Fock.pairing_Lop_left`）。链条是
+      `pairing_Lop_left` ⇒ `Fock.spuriousSubmodule_le_orthComplement`（伪态 ⊥ 物理态）
+      ⇒ `Fock.spurious_inf_physSubmodule_le_nullSubmodule` ⇒ `Fock.Lop_neg_apply_mem_nullSubmodule`
+      ⇒ `Fock.Lop_neg_one_apply_one_mem_nullSubmodule`。字面依赖（同文件，逐条调用）。
+      第 (1)(2) 条不经过这条边。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      提供第 (3) 条里出现的双线性型 `Fock.pairing` 本身（H_0 的定义、
+      以及 ⟨L_{−1}|k⟩, L_{−1}|k⟩⟩ = 0 这一句，`Fock.pairing_self_eq_zero_of_mem_nullSubmodule`）。
+      本推导只用该节点的陈述 (1)（型的存在唯一与伴随关系），不用 (2)(3)(4)。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.{polState, polState_eq_sum_mode, polState_mem_levelSubmodule_one, exists_eq_single_of_level_eq_one, exists_polState_of_mem_levelSubmodule_one, Lop_apply_polState_of_two_le, Lop_one_apply_polState, polState_mem_physSubmodule_iff, mem_physSubmodule_inf_levelSubmodule_one_iff, Lop_neg_one_apply_one_eq_polState, Lop_neg_one_apply_one_mem_physSubmodule, Lop_neg_one_apply_one_mem_nullSubmodule, massShell_of_mem_physSubmodule, sub_intercept_apply_of_mem_levelSubmodule, mem_physSubmodule_iff_of_mem_levelSubmodule}"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
+      以及 2c8b577 已由 lead 合并进 main。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)、(4.1.17)、(4.1.18)，p.123–124"
+    note: |
+      **文献侧的平行论证**（不是本推导的形式化证据）：抽取记录
+      literature/extractions/polchinski-1998-v1.md#E56，式号与内容已核实。
+      Polchinski 的计算与 Lean 的路线在数学内容上一一对应（见 summary 的逐条对照），
+      但 Polchinski 的论述把 A = −1 与 A ≷ −1 三栏一起讨论，其中只有 A = −1 一栏
+      对应本推导；另两栏（有质量 / 快子、负范数）**未形式化**，见 gaps (i)。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/PhysicalStates.lean 的
+  `LevelOne` 一节（第 (2) 条的 L_0 部分来自同文件 `Phys` 一节）。逐条：
+
+  **(1) 每个 level 1 态都是 ζ·α_{−1}|k⟩**（`exists_polState_of_mem_levelSubmodule_one`）。
+  先证 level 恰为 1 的单项式必是单个变量 X_{(μ,1)}（`exists_eq_single_of_level_eq_one`：
+  权 N(d) = Σ_{(ν,n)} n·d(ν,n) = 1 强迫支撑为一个点、指数为 1、模数 n = 1）。
+  于是取 ζ^μ := η^{μμ} · coeff_{X_{(μ,1)}}(ψ)，由 η^{μμ}η_{μμ} = 1 得
+  Σ_μ η^{μμ} ζ^μ X_{(μ,1)} = ψ 逐系数成立。这里用到 hη。
+
+  **(2) level 1 的物理态条件**（`polState_mem_physSubmodule_iff` → `mem_physSubmodule_inf_levelSubmodule_one_iff`）。
+  三块：
+    · **L_0**：`sub_intercept_apply_of_mem_levelSubmodule` 用
+      worldsheet.open-string-l0-equals-level-plus-mass 把 (L_0 − a) 在 F_N 上化成标量
+      (α'k² + N − a)；取 N = 1 即 (α'k² + 1 − a)·ψ = 0。
+      （加设 R 无零因子且 ψ ≠ 0 时，取一个非零系数即得 α'k² + 1 = a，
+      `massShell_of_mem_physSubmodule`。）
+    · **L_1**：`Lop_one_apply_polState` 算出 L_1(ζ·α_{−1}|k⟩) = (Σ_μ η^{μμ}ζ^μ a^μ)·|k⟩。
+      路线是把 L_1 作用在单个模上（`Lop_apply_mode_one`：L_n α^μ_j = … α^μ_{n+j} …），
+      n + j = 1 + (−1) = 0 落到零模 `mode_zero_apply`，即标量 a^μ。
+      故 L_1ψ = 0 ⟺ ζ·α_0 = 0（用 `MvPolynomial.C_eq_zero` 把「常数多项式为零」化为「系数为零」）。
+    · **n ≥ 2**：`Lop_apply_polState_of_two_le`。同一条 `Lop_apply_mode_one`，
+      此时 n + j = n − 1 > 0，`mode_apply_one_eq_zero` 说正指标的模湮灭真空，故整项为零。
+  三块合起来即目标的充要条件；再与 `polState_mem_levelSubmodule_one`（ζ·α_{−1}|k⟩ ∈ F_1）
+  和第 (1) 条拼成 `mem_physSubmodule_inf_levelSubmodule_one_iff`（关于 H_phys ⊓ F_1 的刻画）。
+
+  **(3) a = 1、α_0·α_0 = 0 时 L_{−1}|k⟩ 是零模态**。
+    · `Lop_neg_one_apply_one_eq_polState`：L_{−1}|k⟩ = ζ·α_{−1}|k⟩ **取 ζ = a**（纵向），
+      即 Polchinski (4.1.18) 的 (2α')^{1/2} k·α_{−1}|0;k⟩。
+    · `Lop_neg_one_apply_one_mem_physSubmodule`：代入第 (2) 条，横向性变成 a·a = 0
+      （假设 hk : zeroModeSq η a = 0 直接给出），质量壳变成 (½·0 + 1 − 1)·ψ = 0（恒真）。
+      **这是 a = 1 唯一被用到的地方**：它使质量壳项 α'k² + 1 − a 在 k² = 0 时为零。
+    · `Lop_neg_one_apply_one_mem_nullSubmodule`：该态又在 L_{−1} 的像中，故是伪态
+      （`Lop_neg_mem_spuriousSubmodule`）；由 worldsheet.virasoro-generators-adjoint
+      得伪态 ⊥ 物理态（`spuriousSubmodule_le_orthComplement`：
+      ⟨L_{−n}ψ, φ⟩ = ⟨ψ, L_nφ⟩ = 0 对物理态 φ 与 n ≥ 1），
+      于是「伪态 ∩ 物理态 ⊆ 零模态」（`spurious_inf_physSubmodule_le_nullSubmodule`）
+      给出 L_{−1}|k⟩ ∈ H_0。零范数 ⟨χ,χ⟩ = 0 是 `pairing_self_eq_zero_of_mem_nullSubmodule`
+      的一步特化（χ 与所有物理态正交，特别是与它自己）。
+gaps:
+  - |
+    (i) **只走了 a = 1 的一个方向**。本推导证的是「a = 1 且 k² = 0 ⇒ 纵向 level 1 态是零模态」。
+    Polchinski §4.1 的另两栏（A > −1：level 1 有质量、伪态不物理、D−1 个自由度；
+    A < −1：快子，其中一个负范数态破坏幺正性）**未形式化**，本推导也不覆盖。
+    因此本推导**不能**用来支持 worldsheet.open-string-intercept（「一致性要求 a = 1」）。
+  - |
+    (ii) **不含 level 2，不给 D = 26**。Polchinski §4.1 的 level 2 分析（E57）未形式化。
+  - |
+    (iii) **零模态的逆包含未证**。Lean 只有 `spurious_inf_physSubmodule_le_nullSubmodule`
+    这一个方向；「每个零模态都是伪态」是无鬼定理难的那一半，PhysicalStates.lean
+    文件头 "Mathematical gaps" 第 2 条明确记为未证。
+  - |
+    (iv) **双线性型而非 Hermitian 形式**（继承 worldsheet.virasoro-generators-adjoint--via-lean 的
+    gaps (i)、worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    第 (3) 条的「零范数」是 R-双线性型意义下的 ⟨χ,χ⟩ = 0；复 Fock 空间上的
+    Hermitian 版本未形式化。
+  - |
+    (v) **level 分级是 ⨆ 而非 DirectSum**（PhysicalStates.lean 文件头 gap 1）。
+    `Fock.physSubmodule_eq_iSup_inf_levelSubmodule` 给出 H_phys = ⨆_N (H_phys ⊓ F_N)，
+    但「该上确界是内直和」未被打包成 `DirectSum.IsInternal`。本推导不需要它
+    （第 (2) 条是关于 H_phys ⊓ F_1 的陈述，不需要分解的直性），
+    但任何想说「H_phys 逐 level 分解」的下游需要补这一条。
+  - |
+    (vi) **逐动量扇区、代数版、对角 η、R 为交换 ℚ-代数**：继承
+    worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii) 与 Sugawara.lean 的零模缺口。
+    没有位置算符 x^μ，没有对 k 的直积分。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
+
+  【记号换算】Lean 用 `a₀ : R` 表示截距、`a : Fin D → R` 表示零模参数；本图的陈述里
+  截距写 a、零模写 α_0，与 conv.intercept-sign-a、conv.alpha-prime-regge 一致。
+  与 Polchinski 的换算是 a = −A（conv.intercept-sign-a），故 Polchinski 的
+  「A = −1 一栏」对应本推导的 a = 1。
+
+  本推导由 curator 于 2026-09-11 在 PhysicalStates.lean 合入 main（2c8b577）后建立，
+  与 worldsheet.virasoro-generators-adjoint--via-lean 同批。
+author: curator
+created: "2026-09-11"

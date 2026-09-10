@@ -144,7 +144,7 @@ notes: |
       它被写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里）。
       任何需要 CFT 侧 L_m 的下游结论都不能引本节点的 formalized 状态。
 
-  (5) **L_m^† = L_{-m} 未证**（formalizer 记录的缺口，同上第 5 条）。
+  (5) **【已关闭，见本条末尾的 2026-09-11（二）记录】L_m^† = L_{-m} 未证**（formalizer 记录的缺口，同上第 5 条）。
       Sugawara.lean 完全不涉及 worldsheet.fock-indefinite-form 的 `Fock.pairing`：
       文件里没有一条把 `Fock.Lop` 与 `Fock.pairing` 联系起来的引理。
       这是**无鬼定理所必需**的一步（物理态条件 L_n|ψ⟩ = 0 与内积正定性之间的桥），
@@ -164,6 +164,20 @@ notes: |
       **L_m 的伴随 L_m^† = L_{-m} 未证**——那是 physical-states 的形式化内容
       （formal/TODO.md `physical-states` 一项，PhysicalStates.lean 进行中），
       完成后应在此补 lean 声明名；在此之前，任何需要 L_m 伴随性的下游不得引本节点的 formalized 状态。
+
+      **【本条已关闭，curator 2026-09-11（二）】** PhysicalStates.lean 已合入 main
+      （合并提交 2c8b577，形式化提交 58216ac），本条登记的两处缺口同时关闭：
+      · **L_m^† = L_{-m}** → `StringFormal.NoGhost.Fock.pairing_Lop_left`（对偶形式 `pairing_Lop_right`）。
+        已单独立卡 **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，status: formalized）。
+        本节点**不**在自己的 `formal` 字段里加它：那是另一条命题，不是本定义卡的内容。
+      · **n = 0 的模伴随**（上文「只是一步展开，但 Sugawara.lean 没有写」）
+        → `Fock.pairing_mode_left` / `pairing_mode_right` 对**一切** j ∈ Z 成立，
+        j = 0 时两边都是标量 a^μ 的乘法。该句自此过时。
+      仍然为真的限定：这些伴随都是 R-**双线性型**意义下的转置，不是 ℂ 上的 Hermitian 共轭
+      （worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)），
+      且证明**不需要** hη : ∀ μ, η μ * η μ = 1。
+      上文「任何需要 L_m 伴随性的下游不得引本节点的 formalized 状态」一句**继续有效**：
+      下游应当引 worldsheet.virasoro-generators-adjoint，而不是本节点。
 
   (6) **R 必须是交换 ℚ-代数**。`Fock.Lop` 用到 `invTwo R`（½），中心项用到 1/12，
       故 Sugawara.lean 的 `Lop` 一节起 `variable [Algebra ℚ R]`。ℝ、ℂ 满足；

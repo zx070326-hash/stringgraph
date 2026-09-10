@@ -1,0 +1,98 @@
+id: worldsheet.virasoro-generators-adjoint
+kind: proposition
+title: Virasoro 生成元在 Fock 双线性型下互为伴随：⟨L_m v, w⟩ = ⟨v, L_{−m} w⟩（L_m^† = L_{−m}，对一切 m ∈ Z）
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、**任意**对角度规分量 η : {0,…,D−1} → R，
+  以及零模参数 a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge，固定动量扇区）。
+
+  设 F = F(D, R) 是 worldsheet.bosonic-fock-space 的 Fock 空间；
+  ⟨·,·⟩ : F × F → R 是 worldsheet.fock-indefinite-form 的 R-双线性型
+  （由 ⟨|k⟩, |k⟩⟩ = 1 与 (α^μ_n)^† = α^μ_{−n}（n ≥ 1）唯一确定）；
+  L_m（m ∈ Z）是 worldsheet.virasoro-generators-free-boson 定义在 F 上的 Sugawara 算子
+  （振子双线性式 L_m = (1/2) Σ_n : α_{m−n} · α_n :，产生-湮灭正规序）。
+
+  则对一切 m ∈ Z 与一切 v, w ∈ F：
+    ⟨ L_m v , w ⟩ = ⟨ v , L_{−m} w ⟩,
+  等价地 ⟨ v , L_m w ⟩ = ⟨ L_{−m} v , w ⟩。即在该双线性型意义下
+    **L_m^† = L_{−m}**。
+
+  **假设的弱性（本命题的一半信息量在这里）**：上式对**任意**对角 η 成立，
+  **不需要** η^{μμ} η_{μμ} = 1（即不需要「η² = 1」），不需要 η 是 mostly-plus 的
+  diag(−1,+1,…,+1)，不需要 R 带序、实结构或复共轭，也不需要零模参数 a 满足任何条件。
+  这与 worldsheet.free-boson-central-charge-d、worldsheet.fock-space-virasoro-representation、
+  worldsheet.open-string-l0-equals-level-plus-mass 形成对照：那三条的每一条实质结论都必须假设
+  η^{μμ} η_{μμ} = 1（因为它们要把缩并用的 η_{μν} 与对易关系里的 η^{μν} 对上），
+  而本命题的证明只用「产生与湮灭互为伴随」加一次求和指标的反射 j ↦ −j。
+
+  【本命题**不**断言什么】——四条边界：
+  (a) **不**是 Hilbert 空间意义下的 Hermitian 伴随。⟨·,·⟩ 是 R-双线性型，
+      「†」在这里就是转置；复 Fock 空间上的半双线性（Hermitian）形式不在本命题范围内
+      （见 worldsheet.fock-indefinite-form 的推导 gaps (iv)）。在实极化下两者一致。
+  (b) **不**断言任何正定性、半正定性或不定性。它只是一条伴随关系。
+  (c) 只对**这一种** L_m（Sugawara 型，产生-湮灭正规序）被证明。
+      文献中由全纯 T 的 Laurent 模定义的 L_m（worldsheet.energy-momentum-laurent-modes，
+      经 OPE 与围道、共形正规序）与之等同这件事，本图与 Lean 侧都**没有**建立
+      （worldsheet.virasoro-generators-free-boson 的 notes 缺口 (4)）。
+  (d) **不**断言 H_phys 上诱导的型半正定，也不断言「零模态 = 伪态 ∩ 物理态」的逆包含。
+      前者是无鬼定理（worldsheet.no-ghost-theorem-v4），后者是它难的那一半。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.pairing_Lop_left
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.pairing_Lop_left（对偶形式 Fock.pairing_Lop_right；输入引理 Fock.pairing_mode_left / pairing_mode_right / pairing_nordPair_left）"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac。Lean 4 + Mathlib v4.33.1。
+      这是本节点有效状态 formalized（经推导 --via-lean）的依据。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)，p.122（伪态 |χ⟩ = Σ_{k≥1} L_{−k}|χ_k⟩ 与物理态正交：⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E55，**式号与内容已核实**
+      （[S] = schrans-2020 §4.1/§4.2 逐步复现）。
+      这是文献侧最接近本命题的可定位处：Polchinski **使用**了 L_{−k}^† = L_k
+      （把 L_{−k} 从右矢搬到左矢），但**不把它单列为命题**，也不给证明——
+      它被当作 (α^μ_n)^† = α^μ_{−n} 的显然推论。本节点是对该步骤的精确化与独立登记。
+  - ref: gsw-1987-v1
+    loc: "§2.2.2 'Virasoro algebra and physical states'（伪态/零态讨论，同样默认 L_m^† = L_{−m}）"
+    note: |
+      定位强度 L4（目录/页码级，见 literature/extractions/brst-cohomology-sources.md §5.1）；
+      **式号未核实**。GSW 用 mostly-minus，伴随关系本身与度规号差无关。
+tags: [bosonic-string, quantization, fock-space, virasoro, no-ghost, adjoint, formalized]
+notes: |
+  【为什么单独建卡】这一条在 2026-09-10 与 2026-09-11 两次被登记为**无鬼定理形式化岛的关键缺口**：
+  见 worldsheet.virasoro-generators-free-boson 的 notes 缺口 (5)、
+  worldsheet.old-covariant-physical-states 的 notes (A)、
+  worldsheet.fock-space-virasoro-representation 的 notes【未覆盖：与内积的相容性】。
+  它是把「物理态条件 L_n|ψ⟩ = 0（n ≥ 1）」与「内积」联系起来的**唯一**桥梁：
+  伪态与物理态正交（Polchinski (4.1.8)）、零模态的存在、乃至无鬼定理的整个论证
+  都建立在它之上。PhysicalStates.lean 合入 main（2c8b577）后该缺口关闭，故立卡。
+  查重：`uv run stringgraph search 伴随 / adjoint` 于 2026-09-11 只返回
+  worldsheet.virasoro-generators-free-boson 与 worldsheet.fock-indefinite-form 的 notes 提及，
+  没有任何断言 L_m^† = L_{−m} 的既有节点。
+
+  【顺带被证明、但不属于本命题的两条】（都在同一 Lean 文件里，见推导的 summary）
+  - **模的伴随对一切整数 j 成立**：⟨α^μ_j v, w⟩ = ⟨v, α^μ_{−j} w⟩，**包括 j = 0**
+    （此时两边都是标量 a^μ 的乘法，`Fock.pairing_mode_left`）。
+    worldsheet.fock-indefinite-form 的陈述 (1)(b) 只覆盖 n ≥ 1；
+    worldsheet.virasoro-generators-free-boson 的 notes 缺口 (5) 末句写的
+    「n = 0 的情形只是一步展开，但 Sugawara.lean 没有写」现已由此关闭。
+    这一条**没有**单独立卡：它是 fock-indefinite-form (1)(b) 在 j = 0 处的平凡延拓
+    （零模在固定动量扇区上是标量，标量对双线性型自伴），不构成独立命题。
+  - **正规序双线性的伴随**：⟨:α_i·α_j: v, w⟩ = ⟨v, :α_{−i}·α_{−j}: w⟩（`Fock.pairing_nordPair_left`），
+    这是上一条加「正规序只交换两个互相对易的因子」的直接推论，同样不单独立卡。
+
+  【下游】本节点直接支撑：
+  worldsheet.physical-states-level-one（零模态部分）、
+  worldsheet.old-covariant-physical-states（其「零模态」一句要谈 H_phys 上诱导的型）、
+  以及 polchinski-ch4 分支上待合并的 worldsheet.spurious-orthogonal-to-physical
+  （Lean 侧已有 `Fock.spuriousSubmodule_le_orthComplement` 与
+  `Fock.spurious_inf_physSubmodule_le_nullSubmodule`，合并后应把它们挂上去）。
+author: curator
+created: "2026-09-11"

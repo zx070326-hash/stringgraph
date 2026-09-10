@@ -1,0 +1,116 @@
+id: worldsheet.physical-states-level-one
+kind: proposition
+title: 旧协变量子化的 level 1 物理态：H_phys ∩ F_1 恰为横向极化 ζ·α_0 = 0 的质量壳态；a = 1、k² = 0 时纵向态 L_{−1}|k⟩ 是零模态
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、对角度规分量 η : {0,…,D−1} → R **满足 η^{μμ} η_{μμ} = 1**
+  （conv.metric-mostly-plus 的 diag(−1,+1,…,+1) 满足之）、零模参数
+  a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge，固定动量扇区），以及截距 a ∈ R
+  （物理态条件写作 (L_0 − a)|ψ⟩ = 0，conv.intercept-sign-a；Polchinski 的 A = −a）。
+
+  设 F = F(D,R)、level 分级 F_N 如 worldsheet.bosonic-fock-space，
+  L_m 如 worldsheet.virasoro-generators-free-boson，
+  H_phys 如 worldsheet.old-covariant-physical-states，
+  ⟨·,·⟩ 如 worldsheet.fock-indefinite-form，
+  H_0 = {χ ∈ H_phys : ⟨χ, ψ⟩ = 0 ∀ ψ ∈ H_phys} 为零模态空间。
+  对极化矢量 ζ : {0,…,D−1} → R 记
+    ζ·α_{−1}|k⟩ := Σ_μ η^{μμ} ζ^μ α^μ_{−1}|k⟩   （即 η_{μν} ζ^μ α^ν_{−1}|k⟩），
+    ζ·α_0     := Σ_μ η^{μμ} ζ^μ a^μ            （= (2α')^{1/2} ζ·k）。
+
+  **(1) level 1 的一般态。** 每个 ψ ∈ F_1 都可写成 ψ = ζ·α_{−1}|k⟩（存在这样的 ζ）。
+
+  **(2) level 1 的物理态条件。** 对一切 ψ ∈ F：
+    ψ ∈ H_phys ∩ F_1
+      ⟺ 存在 ζ 使得   ψ = ζ·α_{−1}|k⟩,
+                      (α' k² + 1 − a) · ψ = 0,
+                      ζ·α_0 = 0。
+  换言之：n ≥ 2 的条件 L_n ψ = 0 在 F_1 上**自动成立**；L_1 ψ = 0 恰是**横向性** ζ·α_0 = 0；
+  L_0 条件恰是标量 (α'k² + 1 − a) 零化 ψ。若 R 还无零因子且 ψ ≠ 0，后者即**质量壳**
+    α' k² + 1 = a，   在 conv.metric-mostly-plus 下 k² = −m²，故 α' m² = 1 − a。
+
+  **(3) a = 1、k² = 0 时的零模态光子。** 设 a = 1 且 α_0·α_0 = 2α'k² = 0（无质量壳）。则
+    L_{−1}|k⟩ = a·α_{−1}|k⟩ = (2α')^{1/2} k·α_{−1}|k⟩
+  （即极化取纵向 ζ = k 的 level 1 态）**是物理态**，且由于它同时是伪态（在 L_{−1} 的像中），
+  它是**零模态**：
+    L_{−1}|k⟩ ∈ H_0 = H_phys ∩ H_phys^⊥,   特别地 ⟨L_{−1}|k⟩, L_{−1}|k⟩⟩ = 0。
+  这正是「a = 1 时纵向光子极化退耦、留下 e^μ ~ e^μ + λk^μ 的规范自由度」的精确内容。
+
+  【本命题**不**断言什么】——五条边界，每条都对应一处别的节点或一处已知缺口：
+  (a) **不**断言 a = 1 是**唯一**使纵向态退耦的截距。第 (3) 条只走了一个方向
+      （a = 1 且 k² = 0 ⇒ 该伪态是零模态）。「a ≠ 1 时 level 1 出现负模态/多余自由度、
+      因而必须 a = 1」是 worldsheet.open-string-intercept 的内容，
+      在本图中由 worldsheet.open-string-intercept--via-null-state-decoupling 承担，
+      **未**被本命题覆盖，也**未**形式化。
+  (b) **不**做 level 2 分析，**不**给出 D = 26。见 worldsheet.critical-dimension-old-covariant。
+  (c) **不**断言横向态的模态为正（更不断言 H_phys/H_0 半正定）。那是无鬼定理
+      （worldsheet.no-ghost-theorem-v4）。本命题只在第 (3) 条里断言一个**特定**态模态为零。
+  (d) **不**断言「零模态 = 伪态 ∩ 物理态」的**逆包含**（每个零模态都是伪态）。
+      第 (3) 条只用了正向包含「伪态 ∩ 物理态 ⊆ 零模态」，其逆是无鬼定理难的那一半。
+  (e) 第 (1) 条只断言**存在**这样的 ζ，不断言唯一。（η^{μμ}η_{μμ} = 1 时 ζ 其实唯一，
+      但那一句未被单列，也不被下文使用。）
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.mem_physSubmodule_inf_levelSubmodule_one_iff
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.mem_physSubmodule_inf_levelSubmodule_one_iff（第 (2) 条）；另有 Fock.exists_polState_of_mem_levelSubmodule_one（第 (1) 条）、Fock.{Lop_neg_one_apply_one_eq_polState, Lop_neg_one_apply_one_mem_physSubmodule, Lop_neg_one_apply_one_mem_nullSubmodule, pairing_self_eq_zero_of_mem_nullSubmodule}（第 (3) 条）、Fock.massShell_of_mem_physSubmodule（第 (2) 条末句的质量壳）"
+    note: |
+      本仓库，合并提交 2c8b577，形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      `lean_decl` 只填得下一个名字，故填了第 (2) 条的主定理。逐条对应见推导 --via-lean 的 summary。
+      Lean 里截距叫 `a₀ : R`（不是 `a`），因为 `a : Fin D → R` 已被零模参数占用；
+      本陈述沿用图中的记号 a 表示截距、α_0 表示零模。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)、(4.1.17)、(4.1.18)，p.123–124"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E56，**式号与内容已核实**
+      （[S] = schrans-2020 §4.3–4.7 逐条复现）。逐条对应（已按 conv.intercept-sign-a 做 a = −A 换算）：
+        · (4.1.16) L_0 条件给 m² = (1+A)/α'  →  本陈述 (2) 的质量壳 α'm² = 1 − a
+        · (4.1.17) L_1 条件给 e·k = 0        →  本陈述 (2) 的横向性 ζ·α_0 = 0
+        · (4.1.18) L_{−1}|0;k⟩ = (2α')^{1/2} k·α_{−1}|0;k⟩ 是伪态  →  本陈述 (3) 的等式
+      Polchinski 在 A = −1（即 a = 1）一栏里写「level 1 无质量，spurious 态同时物理（即 null），
+      剩 D−2 个自由度，且 e^μ → e^μ + k^μ 保持 e·k = 0」——这就是本陈述 (3)。
+      Polchinski **同时**给出 A > −1 与 A < −1 两栏（有质量 / 快子，各 D−1 个自由度，
+      后者破坏幺正性）：**那两栏不在本节点内**，见边界 (a)。
+  - ref: gsw-1987-v1
+    loc: "§2.2.2 'Virasoro algebra and physical states'（level 1 的横向条件与零态）"
+    note: |
+      定位强度 L4（目录/页码级）；**式号未核实**。GSW 用 mostly-minus 号差与 α' = 1/2
+      的开弦归一化，逐字公式须先按 conv.metric-mostly-plus / conv.alpha-prime-regge 转写。
+tags: [bosonic-string, quantization, fock-space, no-ghost, intercept, null-state, formalized]
+notes: |
+  【为什么把 (1)(2)(3) 放在一张卡上】文献侧它们是同一段分析（Polchinski §4.1 的 level 1 一节，
+  抽取记录同一条 E56），Lean 侧它们是同一节 `LevelOne` 且 (3) 的证明直接调用 (2) 的主定理
+  （`polState_mem_physSubmodule_iff`）。若 reviewer 认为「level 1 物理态的刻画」与
+  「a = 1 处的零模态」应当拆成两条命题，拆分是无损的：(3) 可以单独成卡并 depends_on 本卡。
+  **本卡不断言 a = 1 的唯一性**，故它与 worldsheet.open-string-intercept 不是同一条陈述，
+  不构成重复。查重：`uv run stringgraph search 零模态 / level 1 / 极化 / 光子` 于 2026-09-11
+  未找到任何断言 level 1 物理态刻画的既有节点。
+
+  【与 worldsheet.open-string-intercept 的关系（要紧）】本卡**不能**用来把
+  worldsheet.open-string-intercept 或其推导 --via-null-state-decoupling 升到 formalized：
+  那条陈述的内容是「一致性**要求** a = 1」，即一个唯一性/排他性断言，
+  本卡只给出 a = 1 时零模态**存在**这一个方向（边界 (a)）。
+  已在该推导的 gaps 中写明。
+
+  【与 polchinski-ch4 分支的关系】伪态空间与「伪态 ⊥ 物理态」在 Lean 里已有
+  （`Fock.spuriousSubmodule`、`Fock.spuriousSubmodule_le_orthComplement`、
+  `Fock.spurious_inf_physSubmodule_le_nullSubmodule`），本卡第 (3) 条正是走这条路线；
+  但对应的图节点 worldsheet.ocq-spurious-states / worldsheet.spurious-orthogonal-to-physical
+  在 agent/curator/polchinski-ch4 分支上、2026-09-11 尚未合并 main，
+  故本卡的推导**暂时**直接依赖 worldsheet.virasoro-generators-adjoint。
+  那两个节点合并后，应在 worldsheet.physical-states-level-one--via-lean 的 depends_on
+  里补上 worldsheet.spurious-orthogonal-to-physical（并把 adjoint 的边保留，
+  因为 (2) 的横向性部分不经过伪态）。
+
+  【零模的地位】与整个无鬼定理形式化岛一样，本卡是**逐动量扇区**的陈述：k 只以标量参数
+  a^μ = (2α')^{1/2} k^μ 出现，没有位置算符 x^μ，也没有对 k 的直积分。
+  第 (3) 条的「无质量壳」在 Lean 里写作 α_0·α_0 = 0（`zeroModeSq η a = 0`），
+  在 R = ℝ、α' > 0 时与 k² = 0 等价。
+author: curator
+created: "2026-09-11"

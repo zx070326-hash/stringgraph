@@ -1,0 +1,107 @@
+id: worldsheet.virasoro-generators-adjoint--via-lean
+target: worldsheet.virasoro-generators-adjoint
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_m 本身与它的「局部有限和」表示：Lean 里 `Fock.Lop` 及其求值引理
+      `Fock.Lop_apply`（「任何足够大的有限指标区间都算出同一个 L_n」）正是该节点定义的算子。
+      本推导的整个论证就是在 `Lop_apply` 给出的有限和上做指标反射，字面依赖，
+      同一命名空间；PhysicalStates.lean `import StringFormal.NoGhost.Sugawara`。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      提供双线性型 `Fock.pairing` 与本推导的**唯一实质输入**
+      `Fock.pairing_creation_left` / `pairing_creation_right`（(α^μ_{−n})^† = α^μ_n，n ≥ 1）。
+      注意方向：本推导用的是该节点陈述 (1)(b) 的伴随关系，**不**用其 (2)(3)(4)
+      （对角形、level 正交、不定性）。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间 `Fock D R = MvPolynomial (Osc D) R` 与产生/湮灭算符本身，
+      以及 `Fock.modeBound`（每个向量只被有限多个模非平凡作用）——后者是把
+      L_m 的形式无穷和化为有限和、从而允许逐项配对的前提。字面依赖（`import`）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.{pairing_mode_left, pairing_mode_right, pairing_nordPair_left, pairing_Lop_left, pairing_Lop_right}（及私有引理 nordPair_apply_eq_zero_of_notMem_Icc）"
+    note: |
+      本仓库，合并提交 2c8b577，形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      被调用的上游声明：`Fock.{pairing_creation_left, pairing_creation_right}`（Fock.lean）、
+      `Fock.{mode, mode_of_pos, mode_of_neg, mode_zero_apply, nordPair, Lop, Lop_apply,
+      modeBound, nordPair_apply_eq_zero_of_modeBound_lt}`（Sugawara.lean）。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
+      以及 2c8b577 已由 lead 合并进 main（按根 CLAUDE.md，合并前须过 validate 与 pytest，
+      但那两者不构建 Lean）。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)，p.122"
+    note: |
+      **不承载本推导的论证**，只作对照：Polchinski 在 (4.1.8) 里一步用掉
+      ⟨ψ|L_{−k}χ_k⟩ = ⟨L_k ψ|χ_k⟩ 而不加证明。文献侧没有与本推导对应的论证
+      （Sugawara 求和的逐项配对与指标反射），故本推导的来源主项是本仓库。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E55，式号已核实。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/PhysicalStates.lean 的
+  `Adjoint` 与 `AdjointLop` 两节。三步：
+
+  1. **模的伴随，对一切 j ∈ Z**（`pairing_mode_left`）：
+     ⟨α^μ_j v, w⟩ = ⟨v, α^μ_{−j} w⟩。按 j 的三分律分情形：
+     j < 0 时 α^μ_j 是产生算符（`mode_of_neg`）、α^μ_{−j} 是湮灭算符（`mode_of_pos`），
+     直接就是 worldsheet.fock-indefinite-form 的 `pairing_creation_left`；
+     j > 0 对称；**j = 0 时两边都是标量 a^μ 的乘法**（`mode_zero_apply`），
+     由双线性性平凡成立。这一步把 fock-indefinite-form 陈述 (1)(b) 的 n ≥ 1
+     延拓到全部整数指标，是本推导的第一块砖。
+
+  2. **正规序双线性的伴随**（`pairing_nordPair_left`）：
+     ⟨:α_i·α_j: v, w⟩ = ⟨v, :α_{−i}·α_{−j}: w⟩。`Fock.nordPair` 按 i ≤ j 与否
+     决定两个模的书写顺序；两种情形都是把第 1 步用两次，
+     注意 :α_i·α_j: 的伴随把顺序也翻转一次，恰好与 (−i) ≤ (−j) 的判定翻转对上。
+
+  3. **Sugawara 求和的指标反射**（`pairing_Lop_left`）：
+     取有限指标区间 [−B, B]，B = max(modeBound v, modeBound w) + |m|，
+     私有引理 `nordPair_apply_eq_zero_of_notMem_Icc` 证明区间外每一项作用在 v（resp. w）上都是零，
+     于是 `Lop_apply` 允许把 L_m v 与 L_{−m} w 都写成**同一个** [−B, B] 上的有限和：
+       L_m v = ½ Σ_{j ∈ [−B,B]} :α_{m−j}·α_j: v,   L_{−m} w = ½ Σ_{j ∈ [−B,B]} :α_{−m−j}·α_j: w。
+     把 ⟨·,·⟩ 的双线性性推进求和号，再用 `Finset.sum_equiv (Equiv.neg ℤ)` 把左边的求和指标
+     j 换成 −j（区间 [−B,B] 关于 j ↦ −j 对称，这正是取对称区间的原因），
+     逐项由第 2 步得
+       ⟨:α_{m−j}·α_j: v, w⟩ = ⟨v, :α_{−(m−j)}·α_{−j}: w⟩ = ⟨v, :α_{−m−(−j)}·α_{−j}: w⟩，
+     即左和的第 j 项等于右和的第 (−j) 项。两个有限和逐项对应相等，故整体相等。
+     `pairing_Lop_right` 由 `pairing_Lop_left` 加 `neg_neg` 一行得到。
+
+  全过程不使用 hη : ∀ μ, η μ * η μ = 1——这是本命题假设弱于同岛其余结果的原因：
+  中心项计算（`lie_Lop_Lop`）需要把两个 η 缩掉，本推导不需要。
+gaps:
+  - |
+    (i) **双线性型，不是半双线性型**（继承 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    Lean 里 `Fock.pairing` 是 R-双线性的，「†」= 转置。物理上的复 Fock 空间带 Hermitian 形式，
+    其上的 L_m^† 还含一次复共轭；两者在实极化（实系数、实极化矢量）上一致，
+    **复情形未证**。这条 gap 对本节点尤其要紧：无鬼定理谈的是 Hermitian 形式的半正定性。
+  - |
+    (ii) **只支持对角 η**（继承 worldsheet.bosonic-fock-space 缺口 (iii)）。
+    η 在 Lean 里是 `Fin D → R`（对角元）。一般对称 η^{μν} 需先作基变换，未做。
+    与陈述里强调的「不需要 η² = 1」不冲突：不需要的是**归一化**，对角性仍然要。
+  - |
+    (iii) **零模是标量参数，没有 x^μ、没有对 k 的直积分**（继承 Sugawara.lean 的缺口）。
+    本推导给出的是**逐动量扇区**上的伴随关系。完整弦 Fock 空间上的相应陈述未形式化。
+  - |
+    (iv) **代数版，未取完化**（继承 worldsheet.bosonic-fock-space 缺口 (ii)）；
+    且 R 必须是交换 ℚ-代数（`Fock.Lop` 用到 ½）。
+  - |
+    (v) **不覆盖 CFT 侧的 L_m**。见目标陈述的边界 (c)：由全纯 T 的 Laurent 模定义的 L_m
+    与本推导中的 Sugawara L_m 未被证明等同，Lean 侧没有 T、没有 OPE、没有围道积分。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做，
+  文件头的公理声明是形式化者的人工登记。
+
+  本推导由 curator 于 2026-09-11 在 PhysicalStates.lean 合入 main（2c8b577）后建立。
+  它关闭了 worldsheet.virasoro-generators-free-boson notes 缺口 (5)、
+  worldsheet.old-covariant-physical-states notes (A) 与
+  worldsheet.fock-space-virasoro-representation notes【未覆盖：与内积的相容性】
+  三处登记的同一个缺口（那三处的 notes 已于同一提交内更新）。
+author: curator
+created: "2026-09-11"
