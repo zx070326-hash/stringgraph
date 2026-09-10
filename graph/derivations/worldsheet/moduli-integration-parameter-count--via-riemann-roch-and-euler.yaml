@@ -1,0 +1,59 @@
+id: worldsheet.moduli-integration-parameter-count--via-riemann-roch-and-euler
+target: worldsheet.moduli-integration-parameter-count
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.riemann-roch-kappa-minus-mu
+    note: 提供 κ − μ = 3χ。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；
+      本推导只用到拓扑等式 χ = 2 − 2g（闭可定向、无边），与号差无关。
+      继承该约定登记的缺口。
+    note: 提供 χ = 2 − 2g（闭可定向、无边时 b = 0）。
+  - id: worldsheet.gauge-fixed-measure-moduli-and-positions
+    note: |
+      提供积分变量的清单：μ 个模 t^k 与 2n − κ 个未固定的顶点算子坐标。
+      本节点计的就是这两组的总数。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    inferred: true
+    note: |
+      inferred：抽取记录 Q12 没有把它列为依赖，但本命题的关键限定
+      「μ **只**数度规的模，不含顶点算子位置」正是由这张卡对 μ 的定义决定的；
+      没有这条边，6g−6+2n 与 (5.2.9) 的区别就无从记账。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.9)；§5.3, eq. (5.3.2)/(5.3.9), p.152–156"
+    note: |
+      ⚠ **本推导的换算式不在原书里**：抽取记录 Q12 明写「抽取者的推导，标为推断，原书未见此式」。
+      两个被组合的输入（(5.2.9) 与 (5.3.2)/(5.3.9) 的测度）各自有 L1 级的式号锚定，
+      组合是本图/抽取者做的。
+summary: |
+  闭可定向亏格 g 曲面 χ = 2 − 2g，代入 κ − μ = 3χ 得 μ − κ = −3χ = 6g − 6。
+  规范固定后的实积分参数是 μ 个模加上 2n − κ 个未固定的顶点算子坐标，总数
+    μ + (2n − κ) = (μ − κ) + 2n = 6g − 6 + 2n。
+  两处检验：球面 (g = 0) 带 n = 3 个顶点算子给 0（三点函数没有积分，与固定三个坐标一致）；
+  环面 (g = 1) 带 n = 1 给 2（正是对 τ 的两个实积分）。
+gaps:
+  - |
+    **换算式本身是本图的产物，不是文献陈述**（抽取记录 Q12 明确标注）。本条边因此
+    在依赖上标 inferred，且本推导的状态不高于它所组合的两个输入。
+  - |
+    **上游 worldsheet.riemann-roch-kappa-minus-mu 只到 physical-argument**
+    （原书用鬼数反常导出，比例常数用球面标定），故本条不可能更高。
+  - |
+    **限定条件「闭、可定向、无边」是本卡自己加的**：χ = 2 − 2g 只对这类曲面成立。
+    带边或不可定向情形（圆盘、Klein 瓶、RP₂）需要 χ = 2 − 2g − b 或交叉帽计数，
+    结果不再是 6g − 6 + 2n。抽取记录 Q12 只验算了球面与环面两个闭可定向例子。
+  - |
+    **「顶点算子位置总数是 2n，κ 个被固定」这一记账未被独立验证**：
+    它来自 (5.3.2) 的测度 d^{2n−κ}σ，属 worldsheet.gauge-fixed-measure-moduli-and-positions，
+    那条也只到 physical-argument。
+notes: |
+  本条存在的目的是**把两条容易混淆的陈述分开记账**（抽取记录 Q12 的明确要求）：
+  (5.2.9) 的 κ − μ = 3χ 是文献陈述；6g − 6 + 2n 是本图的换算。
+  不要把后者写进前者的卡片。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -28,12 +28,44 @@ sources:
       「谱生成代数」这一名称的来源即在于本命题：DDF 算子生成一份自由振子代数，
       从而由一个物理态生成整塔物理态。式号沿用旧节点 worldsheet.ddf-operators，未与原文核对
       （literature/extractions/brst-cohomology-sources.md §3.1：GT 1972 正文四条获取路径全部失败）。
+
+      **【2026-09-11（四）归属削弱，curator；本条 source 保留不删】**
+      按 goddard-2008 参考文献表（L1 逐字，extractions/gsw-1987-v1.md E3）：
+      **Goddard 本人把本对易关系 (5.5) 归给 [43] Brower–Goddard 1973 与 [44] Brower–Goddard 1972，
+      不归给本文**；本文（其 [45]）对应的是**无鬼定理本身**（该综述 §6, p.15, (6.4)，无编号），
+      且 GT 证明真正使用的代数是 (6.3) 的 [L_m, K_n] = −n K_{m+n}。
+      故本条 source 的正当性**弱于**下面的 goddard-2008 与 gebert-nicolai-1995。
+      brower-goddard-1972 / brower-goddard-1973 已登记进 sources.bib，但**正文均未获取（L0），
+      不得承载论证**，故本节点暂不把它们列为 source。
   - ref: goddard-2008
-    loc: "arXiv:0802.3249，无鬼定理一节（DDF 态张成横向 Fock 空间的写法）"
+    loc: "§5 'Spectrum Generating Algebra', p. 11, eq. (5.5)；偏振正交归一 ε^i·ε^j = δ^{ij} 与 k·ε^i = 0 见同页 (5.1) 之后的正文"
     note: |
-      作者本人的历史综述，**预设**本命题（把 DDF 态写成横向振子 Fock 空间）但不给证明、不给编号
-      （brst-cohomology-sources.md §3.1 第 1 条）。只作为「本命题是文献中被使用的标准事实」的
-      二手证据，不作为论证来源。
+      **【2026-09-11（四）重写，curator；旧措辞「不给编号」在本命题上是错的】**
+      本命题在该文中是**带编号的显示公式** (5.5)，逐字
+      `[A^i_m, A^j_n] = m δ^{ij} δ_{m,−n},   1 ≤ i, j ≤ D − 2.`
+      （researcher L1 逐页读图，extractions/gsw-1987-v1.md §2 E3）。
+      **★ 本节点 notes 说「v4 没写出的隐含前提」的 ε^i·ε^j = δ^{ij}，现在有逐字来源**：
+      (5.1) 之后正文逐字「orthonormal polarization vectors for a photon of momentum k, i.e.
+      **ε^i · ε^j = δ^{ij}, k · ε^i = 0**」——两条偏振条件同时给出。
+      **仍然成立的限制**：历史综述，(5.5) **无证明**；且作者本人把它归给 [43]/[44]（Brower–Goddard），
+      见上一条 source 的归属削弱说明。故只升可追溯性，不承载论证。
+      **号差** (−,+,+,+) = mostly-plus，与 conv.metric-mostly-plus 一致，**无需换算**；归一化逐字 k·p = 1。
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.4)（右端显式保留算子 k(0) = k·α_0）；其依据是 p. 593, eq. (3.1)（物理态的李括号）与 §2.1, p. 582, eq. (2.62)（零模字典 [ψ_0, φ_0] = ([ψ,φ])_0）；归一化 k·r = 1 见 p. 594 同页正文；d − 2 个正交归一偏振见 §3.2, p. 599"
+    note: |
+      **【2026-09-11（四）新增，curator】本命题在数学物理文献中的证明所在处**（CMP 172 (1995) 571–622；
+      researcher L1 逐页读期刊排版 PDF，extractions/gsw-1987-v1.md §4 E15/E17）。
+      (3.4) 逐字 `[A^ξ_m, A^η_n] = m(ξ·η) δ_{m+n,0} (k(−1))_0 = m(ξ·η) δ_{m+n,0} k(0)`，
+      引出句逐字「**According to (2.62)** the above commutator then translates into」。
+      **★ 这是本图目前唯一逐字回答「右端为何恰好是 m δ^{ij}、不带 α' 或 k_0·p 的残余因子」的来源**：
+      G–N **把算子 k(0) 显式留在右端**，并在同页逐字说明「one has to find a lightlike vector k = k(r)
+      such that **k·r = 1**. In this case the transversal DDF operators … realize **precisely** the algebra of
+      d − 2 transversal oscillators」。k·r = 1 即本节点的 2α' k_0·p = 1。
+      这直接回应了本节点 statement 末段「右端没有 k_0 或 p 的残余依赖……正是归一化的作用」那句话。
+      **论证路线不是两个顶点算子的 OPE + 围道形变**，而是「物理态的李括号 (3.1) + 零模字典 (2.62)」，
+      全程形式级数：推导见 worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket。
+      **适用限制**：G–N 的前提是格点顶点代数（偶格、洛伦兹号差、双乘性上闭链 ε），
+      本图尚无对应的卡，故该推导的有效状态仍被压在 open。
 tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra]
 notes: |
   【拆卡来源，2026-09-11】本节点是 worldsheet.ddf-operators-v4 的拆分产物之一，
@@ -52,6 +84,42 @@ notes: |
   两条一手来源（GSW、GT 1972）的定位都未核实到式号，也没有可引用的数学文献严格证明
   （kac-raina-1987 的讲号/命题号在本项目中未核实且两版不可互换，不得猜编号）。
   故 physical-argument。
+  ⚠ **【2026-09-11（四）更新】本段末句「没有可引用的数学文献严格证明」已过时**：
+  gebert-nicolai-1995 §3.1 (3.4) 是带编号的严格结果（见下方新块与 source）。
+  但本节点的**有效状态仍是 physical-argument**，best_derivation 仍是 --via-conformal-weight，
+  原因见新块第 (3) 条。本段其余内容（对 --via-conformal-weight 那条推导的定级理由）不变。
+
+  【2026-09-11（四）文献更新：两条来源升级 + 一条新推导，curator】
+  按 researcher 的核实（literature/extractions/gsw-1987-v1.md §2、§4、§9(1)(3)）：
+  (1) **goddard-2008 (5.5) 是带编号的显示公式**（不是「不给编号」），且
+      **ε^i·ε^j = δ^{ij} 与 k·ε^i = 0 在 (5.1) 后逐字同时给出**——本节点上面说的
+      「v4 没写出的隐含前提」自此有了逐字来源。仍无证明，只升可追溯性。
+      同时 **Goddard 本人把 (5.5) 归给 Brower–Goddard [43]/[44]，不归给 goddard-thorn-1972**，
+      已在 GT 那条 source note 里补记（不删该 source）。
+  (2) **gebert-nicolai-1995 (3.4) 给出本命题的顶点代数证明**，路线是
+      「物理态的李括号 (3.1) + 零模字典 (2.62)」——**与 --via-conformal-weight 的 OPE + 围道路线
+      完全不同，是第三条独立路线**（第二条是 tomassini-2008 Theorem 2.4 的修改版 DDF）。
+      新推导 worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket 承载它，`status: rigorous`。
+      **它还逐字回答了 --via-conformal-weight 的 gaps 第 1 条**（右端为何无 α'/k_0·p 残余）：
+      (3.4) 把算子 k(0) 显式留在右端，只有在 k·r = 1（即本节点的 2α' k_0·p = 1）时才退化为 m δ^{ij}。
+  (3) **有效状态没变，仍是 physical-argument。** 两个上限：
+      (a) G–N 的前提是格点顶点代数，本图无「D 个自由玻色子（含类光方向与不定号差）⊗ C[Z k_0]
+          构成顶点代数、动量塔为其模」的卡，桥接边只能 inferred 到
+          worldsheet.string-cft-is-a-vertex-algebra-v2（effective = open）；
+      (b) 本节点 statement 末句的「与 worldsheet.transverse-oscillator-commutators 逐字同型」
+          把任何推导拉到那张 physical-argument 的卡之下。
+      **⇒ 建议（交 lead/auditor）**：按「一个节点一个命题」，把 (b) 那句比较拆成独立节点
+      （新建 + superseded_by，不得就地改本节点文本）；把 (a) 的缺卡列进 docs/ROADMAP.md。
+  ⚠ **工具显示提醒**：`stringgraph status` 的 `own_status` 取全部推导中 status 最高者，
+  故本节点现在显示 `own_status: rigorous` 而 `effective: physical-argument`——不是矛盾，
+  rigorous 的那条是新的零模路线，被自己的 open 依赖压住。
+
+  【ε·p = 0 问题（extractions/gsw-1987-v1.md Q5）已核查：不是本命题的缺口】
+  G–N §3.2 (p.599) 要求偏振「orthogonal to both r and k」，比本节点多一条 ε·p = 0。
+  但 (3.1) 的推导逐字只用 ξ·k = η·k = k·k = 0；且横向空间是商 {ξ : ξ·k = 0}/ℝk，
+  A^{ξ+ck}_m = A^ξ_m（m ≠ 0）而 ξ·η 不变，故 ξ·r = 0 是代表元的选取而非额外前提，
+  **δ^{ij} 不受影响**。推理是本项目的（G–N 未写 WLOG），
+  已登记在 --via-zero-mode-bracket 的 gaps 第 5 条。**本节点的前提不需要修改。**
 
   【升级路径与 Lean 现状】**Lean 侧完全未起步**：`formal/StringFormal/NoGhost/VertexOperator.lean`
   文件头 "Mathematical gaps" 第 2 条逐字写「No operator products. `V(b, z) V(b', w)` and hence

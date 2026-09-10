@@ -1,0 +1,68 @@
+id: spectrum.gravitational-coupling-kappa--via-field-theory-comparison
+target: spectrum.gravitational-coupling-kappa
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.sphere-normalization-from-factorization
+    note: |
+      提供 C_{S₂} = 8π/(α'g_c²)（(6.6.8)）——[H] Problem 6.11 明写「using the result (6.6.8)」，
+      本推导的振幅前因子里含它。（2026-09-11 起由拆出的归一化卡承载，原指
+      spectrum.closed-string-four-tachyon-integral。）
+  - id: worldsheet.bc-ghost-sphere-cc-correlator
+    note: 提供 S₂ 上六个 c 插入的期望值（(6.6.14) 的鬼场部门）。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: 提供 κ_CKV = 6、三个坐标可固定——三点振幅无剩余积分的原因。
+  - id: spectrum.sphere-n-tachyon-expectation-value
+    note: 提供 X 部门的 tachyon 期望值；(6.6.14) 里两个 tachyon 的部分由它给出。
+  - id: worldsheet.euler-number-weyl-invariance
+    inferred: true
+    note: |
+      标 inferred：提供 χ(S₂) = 2 的拓扑不变性，用于 Euler 因子 e^{−λχ} = e^{−2λ}。
+      来源只用这个因子而不回指该结果。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep 声明 conv.worldsheet-lorentzian，本推导用
+      conv.worldsheet-euclidean。χ 是拓扑量，其值不依赖号差；
+      Wick 旋转下 (−γ)^{1/2}R_γ ↔ g^{1/2}R_g（conv.worldsheet-euclidean 的字典 (a)）。
+      ⚠ 该等同本图无节点承载，与 docs/ROADMAP.md「待建：欧氏 Polyakov 作用量定义卡」同源。
+sources:
+  - ref: headrick-2008
+    loc: "Problem 6.11(b)(c)（PDF p.49–51）：两条耦合关系与迹陷阱，逐字"
+    note: |
+      抽取记录 #E107，L1，**这两个数值关系的独立背书**。
+      ⚠ 按 lead 裁决，[H] 在此作为唯一成文来源使用，**reviewer 须复核计算**。
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.14)/(6.6.15)/(6.6.16)，p.194–195"
+    note: 抽取记录 #E107，L1（schrans-2020 §6.67，笔记 p.333）；(6.6.19)/(6.6.21) 只到 L2。
+summary: |
+  **(1) 弦侧。** S₂ 上取一个无质量闭弦顶点算子（极化 e_{μν}）与两个 tachyon，
+  三个坐标全部被 PSL(2,C) 固定（κ_CKV = 6，六个 c 插入），
+  Euler 因子 e^{−2λ}，X 部门给 δ²⁶(Σk) 与动量的多项式/幂次组合，
+  合起来是 (6.6.14)，前因子含 g_c³（或 g_c²g'_c，视顶点算子归一化）与 C_{S₂}。
+
+  **(2) 场论侧。** 用 tachyon 的低能有效作用量 (6.6.16)（一个标量场，质量 α'm² = −4）
+  与 Einstein 框架下正则归一化的引力子，写出「引力子—tachyon—tachyon」顶点，
+  其耦合是 κ 乘动量的组合。
+
+  **(3) 比较。** 两侧的同一个运动学结构（e_{μν}k^μk^ν 型）比较系数，
+  [H] 分别得到 g_c = α'g'_c/2（其式 (70)）与 **κ = πα'g'_c**（其式 (76)）。
+
+  ⚠ 比较时必须用 [H] 的迹提醒：e 的迹是 dilaton，不是引力子的迹。
+gaps:
+  - "**主要来源是习题解答**：两条耦合关系的显式推导只有 headrick-2008，
+     schrans-2020 §6.67 只给出结构（κ_CKV = 6、χ = 2、e^{−2λ}）。
+     按 lead 裁决，**reviewer 须复核 [H] 的系数比较**；复核后请在此写 reviewer-verified 记录。"
+  - "**(6.6.14) 的显式表达式本图不写出**：抽取记录没有抄出它，本推导只给结构。"
+  - "**「闭弦无质量态含引力子」在本图无节点**：这是本推导的隐含前提
+     （见目标陈述 notes）。第 3 章的顶点算子分类未被抽取。"
+  - "**场论侧的 Einstein 框架、正则归一化、dilaton 的处理都没有节点**：
+     κ 的定义（κ² = 8πG_N 还是别的归一化）在本图中没有约定节点，
+     故 κ 的**数值**关系依赖来源的未写明约定。这是本条最实质的记账缺口。"
+  - "**(6.6.19)/(6.6.21)（三个无质量闭弦）只到 L2**，本推导不使用它们。"
+  - "**路径积分测度未定义**（本批次共有）。**上游 ch5 节点已于 2026-09-11 进入 main**：
+     本推导不直接用 (5.3.9)，它对 (5.3.9) 的依赖经 spectrum.sphere-n-tachyon-expectation-value
+     （该节点的推导已补上 worldsheet.string-s-matrix 边）与 spectrum.sphere-normalization-from-factorization 传递。"
+notes: |
+  ⚠ 若日后建「κ 的归一化约定」节点（conv.gravitational-coupling 一族），
+  应回到本推导把该约定显式声明——目前 κ = πα'g'_c 这个数值只在 [H] 的（未写明的）约定下成立。
+author: curator-polchinski-ch6
+created: "2026-09-11"

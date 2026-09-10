@@ -51,6 +51,9 @@ and `conv.intercept-sign-a` (the intercept is `a₀`, Polchinski's `-A`).
 * `Fock.pairing_levelTwoScalar_intercept_one` — at `a₀ = 1`, `⟨ψ₂, ψ₂⟩ = -2(D-26)(D-1)/25`.
 * `Fock.exists_mem_physSubmodule_pairing_self_neg` — **the ghost**: for `D > 26` and `a₀ = 1`
   over an ordered field, `H_phys` contains a state of strictly negative norm.
+* `Fock.exists_mem_physSubmodule_pairing_self_neg'` — same, with the momentum quantifier of
+  `worldsheet.no-ghost-theorem-v4` (2) made explicit: the witness also records
+  `zeroModeSq = -2` and `p ≠ 0`.
 
 ## Gaps
 
@@ -817,6 +820,35 @@ physical subspace over `ℚ` contains a ghost. -/
 example : ∃ (b : Fin 27 → ℚ) (ψ : Fock 27 ℚ),
     ψ ∈ physSubmodule (minkowski 27 ℚ) b 1 ∧ pairing (minkowski 27 ℚ) ψ ψ < 0 :=
   exists_mem_physSubmodule_pairing_self_neg (K := ℚ) (by norm_num)
+
+/-- **The ghost above the critical dimension, with the momentum quantifier made explicit.**
+Strengthening of `exists_mem_physSubmodule_pairing_self_neg`: the witness momentum is on the
+level-two mass shell `α' k² = -1` (`zeroModeSq = -2`) and is in particular *nonzero*, which is
+what clause (2) of `worldsheet.no-ghost-theorem-v4` asserts (`∃ p ≠ 0`).  Nonvanishing is forced
+by the mass shell alone: `zeroModeSq η 0 = 0 ≠ -2`. -/
+theorem exists_mem_physSubmodule_pairing_self_neg' (hD : 26 < D) :
+    ∃ (b : Fin D → K) (ψ : Fock D K),
+      zeroModeSq (minkowski D K) b = -2 ∧ b ≠ 0 ∧
+        ψ ∈ physSubmodule (minkowski D K) b 1 ∧ pairing (minkowski D K) ψ ψ < 0 := by
+  obtain ⟨b, hb⟩ := exists_zeroModeSq_eq_neg_two (K := K) (D := D) (by omega)
+  have hη : ∀ μ : Fin D, minkowski D K μ * minkowski D K μ = 1 := by
+    intro μ
+    by_cases h : (μ : ℕ) = 0
+    · rw [minkowski_timelike D K h]; norm_num
+    · rw [minkowski_spacelike D K h]; norm_num
+  have hb0 : b ≠ 0 := by
+    intro h
+    have hzero : zeroModeSq (minkowski D K) (0 : Fin D → K) = 0 := by
+      simp [zeroModeSq]
+    rw [h, hzero] at hb
+    norm_num at hb
+  refine ⟨b, levelTwoScalar (minkowski D K) b (((D : K) - 1) / 5) (((D : K) + 4) / 10),
+    hb, hb0, levelTwoScalar_intercept_one_mem_physSubmodule (minkowski D K) b hη hb, ?_⟩
+  rw [pairing_levelTwoScalar_intercept_one (minkowski D K) b hη hb]
+  have h26 : (26 : K) < (D : K) := by exact_mod_cast hD
+  have hnum : -2 * ((D : K) - 26) * ((D : K) - 1) < 0 := by nlinarith
+  rw [div_neg_iff]
+  exact Or.inr ⟨hnum, by norm_num⟩
 
 end Ghost
 

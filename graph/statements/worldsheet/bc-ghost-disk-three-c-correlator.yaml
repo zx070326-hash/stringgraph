@@ -1,0 +1,49 @@
+id: worldsheet.bc-ghost-disk-three-c-correlator
+kind: proposition
+title: 圆盘上 bc 鬼场的三 c 期望值 ⟨c(y₁)c(y₂)c(y₃)⟩_{D₂} = C^g_{D₂} y₁₂y₁₃y₂₃
+statement: |
+  在 λ = 2 的 bc 鬼场 CFT（worldsheet.bc-ghost-cft）中，取圆盘 D₂ 实现为上半平面
+  （worldsheet.tree-level-worldsheet-topologies），鬼场插入在边界（实轴）上的坐标 y_i ∈ R。则
+  **最简单的非零鬼场期望值恰含三个 c 插入**，且
+    ⟨ c(y₁) c(y₂) c(y₃) ⟩_{D₂} = C^g_{D₂} · y₁₂ y₁₃ y₂₃,   y_ij ≡ y_i − y_j，
+  其中 C^g_{D₂} 是一个与 y_i 无关的归一化常数（其数值由路径积分归一化约定决定，本命题不定它）。
+
+  三次多项式的形式由三件事定死：c 的共形权是 −1（λ = 2）、期望值在 PSL(2,R) 下协变、
+  以及 c 的反对易性（表达式在 y_i 交换下反号）。
+
+  **本命题不断言什么**：不定 C^g_{D₂} 的数值；不断言「为什么必须恰好三个 c 插入」
+  （那是 worldsheet.bc-ghost-number-anomaly-sphere 的内容，其圆盘版本本图未建）；
+  不涉及 X 部门（那在 spectrum.* 的振幅节点里与本式相乘）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.2)，p.176–177"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E96，等级 **L1，且有两个独立二手源**：
+      schrans-2020 §6.25 附近（笔记 p.297）与 headrick-2008 Problem 6.7（PDF p.43）逐字写出
+      「The ghost path integral is given by (6.3.2): ⟨c(y₁)c(y₂)c(y₃)⟩_{D₂} = C^g_{D₂}y₁₂y₁₃y₂₃」。
+      抽取记录称这与 (6.3.4) 是「本章表达式层面最硬的锚点」。
+      ⚠ 仍未核对 Polchinski 原书本身（抽取记录 §0/§5.0）。
+  - ref: headrick-2008
+    loc: "Problem 6.7（PDF p.43）：逐字引用 (6.3.2) 并给出完整表达式"
+    note: |
+      按 lead 裁决（docs/ROADMAP.md 2026-09-10）：Headrick 习题解答一般只作核对源；
+      这里它**与 schrans-2020 相互独立地**给出同一表达式，故作为第二核对源列出，
+      不单独承载论证。
+tags: [worldsheet, bc-ghost, disk, correlator, tree-level, open-string]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E96 建立（Polchinski 第 6 章批次）。
+
+  **area 选择说明**：本卡片放 `worldsheet.` 而不是 `spectrum.` 或 `cft.`，理由是本图已有一族
+  `worldsheet.bc-ghost-*` 节点（bc-ghost-cft、bc-ghost-central-charge、
+  bc-ghost-ground-state-ghost-number、bc-ghost-hermitian-conjugation），把 bc CFT 的关联函数
+  与它们放在一起可保持该族完整、依赖边不跨区。`cft.` 区留给与弦无关的一般 CFT 结果
+  （Möbius 固定的 n 点函数、Zamolodchikov 内积），见本批次的 cft.* 节点。
+
+  **与 Jacobian 的关系**：本式与 math.mobius-three-point-fixing-jacobian 的圆盘情形
+  |y₁₂y₁₃y₂₃| 逐字同形——这正是「鬼场插入抵消固定三个坐标的 Jacobian」的算术根据。
+  两者是不同来源的不同陈述（一个是 bc CFT 的关联函数，一个是线性代数），故分开建卡。
+author: curator-polchinski-ch6
+created: "2026-09-11"

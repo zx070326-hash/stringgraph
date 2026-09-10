@@ -130,7 +130,40 @@ sources:
       conv.alpha-prime-regge；Δ_n 的表达式与号差无关。§2.3.3 的页码经核实
       （literature/extractions/brst-cohomology-sources.md §5.1/§5.3），式号未核实。
 tags: [bosonic-string, critical-dimension, intercept, summary]
+superseded_by: worldsheet.critical-dimension-bosonic-v3
 notes: |
+  **【2026-09-11：本卡片已换代 → worldsheet.critical-dimension-bosonic-v3】**（curator，
+  lead 授权，依 ms.critical-dimension-bosonic **第二轮回译审计**（physics-auditor）的裁定与
+  建议 §6 (i)–(iv) 及本轮新发现 N2/N3）本卡片的 statement 文本**一字未动**，只加本段与
+  superseded_by（根 CLAUDE.md 原则 1）。第二轮裁定 drift（无物理错误），构成 drift 的六处
+  以及 v3 的修法：
+    D1/C1（主因）(I) 的前提「正规序常数取横向零点能的 ζ 正规化值 a = (D−2)/24」与路线卡
+      worldsheet.critical-dimension-light-cone（a 是 Δ_n 中的待定参数）**直接相反**，
+      也与修订后的里程碑 canonical_text 相反。v3 改为「a 待定」，ζ 值降为说明段。
+    D2/A1 (I) 末句「也是唯一以「当且仅当」形式给出 D 的一条」与本卡自己的 (III)
+      （Q_B² = 0 ⟺ c^m = 26，再经 c^m = D 给 ⟺ D = 26）抵触，(IV) 的判据 c^{tot} = 0
+      实质上也是双向的。v3 删去该半句并在【不断言】新增 (6) 明示不作该断言。
+    D3/C2 (III) 漏写 ⟹ 方向所需的前提「诸 c_{−m} c_m 线性无关（忠实的 Fock 型受限模）」。
+      v3 补上（审计补记：该前提在非零受限模上很可能自动成立，故本卡省掉它不是物理错误）。
+    D4/C3 (V)「三条刻画对任意 D ≥ 4 都各自等价于 a = 1」在图内无支撑：
+      (a)(b) 的零态推导覆盖 D ≥ 2，(c) 的光锥表示论推导自陈只到 D ≥ 5 且在 D = 5 有洞
+      （SO(4) 的 3 维自对偶 2-形式表示）。v3 按刻画分列**图内支撑**的范围。
+    D5/T4 (II) 的「零模态（伪态）」括注混用术语：伪态是 L_{−n} 的后代且与物理态正交的态，
+      零模态是内积在 H_phys 上的根，二者相等在 (26,1) 是无鬼定理的内容而非定义。v3 删括注。
+    N2（新发现）(I) 的「闭合 ⟺ D = 26 且 a = 1」未限定 D ≥ 4：D = 3 只有一个横向指标，
+      反对称组合恒为零，对任意 a 都闭合，「仅当」方向有反例；D = 2 无横向振子。v3 补 D ≥ 4。
+    N3（新发现）(V) 首句是平铺断言「a = 1 与 D 无关地成立」，路线卡的形状是「一致性要求
+      a = 1」。v3 改用路线卡形状。
+  另外，本卡片 sources 的四处 Polchinski 定位已被 2026-09-11 的**原书核实**订正
+  （literature/extractions/polchinski-1998-v1.md §12.10）：§1.3 的结论式是 (1.3.40), p.23
+  且「显式 [J^{i−},J^{j−}] 验证是习题 1.3」的说法不成立（原书没做也没留成习题）；
+  §4.1 level 2 的 (4.1.24)–(4.1.28) 不存在（是 p.124 正文 + 习题 4.1）；§4.3 的陈述式是
+  (4.3.9) 而非 (4.3.10)；§3.4 的结论式是 (3.4.23), p.94 且**原书写的是 D = 26 而非
+  c^m = 26**（Q6 关闭）。这些订正只体现在 v3 的 sources 里，本卡片的 sources 保持原样
+  作为历史记录。
+  推导 worldsheet.critical-dimension-bosonic-v2--via-four-routes **保留不动**，
+  新推导是 worldsheet.critical-dimension-bosonic-v3--via-four-routes（依赖边完全相同）。
+
   【本卡片换代 worldsheet.critical-dimension-bosonic】（curator，2026-09-11）
   旧卡的 statement 写「在以下**三种**独立意义下要求 D = 26 且 a = 1：(i) 光锥 (ii) 旧协变
   (iii) BRST」。ms.critical-dimension-bosonic 的起草者列出四处不一致（该里程碑

@@ -1,0 +1,59 @@
+id: spectrum.sphere-n-tachyon-expectation-value--via-gaussian-integral
+target: spectrum.sphere-n-tachyon-expectation-value
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.sphere-zero-mode-momentum-conservation
+    note: 提供 (2π)^d δ^d(Σk_i) 与 C^X_{S₂} 中零模因子的吸收方式。
+  - id: spectrum.vertex-operator-geodesic-renormalization
+    note: |
+      提供 [·]_r 的定义与 G'_r = G' + (α'/2)ln d²；没有它，重合点自缩并发散，
+      Gauss 积分的指数里 (1/2)Σ_i k_i² G'(σ_i,σ_i) 项无意义。
+  - id: worldsheet.free-scalar-propagator
+    note: |
+      提供两点函数的归一化 X^μ(z,z̄)X^ν(0,0) ∼ −(α'/2)η^{μν}ln|z|²，
+      指数 α'k_i·k_j 的系数完全由它决定（换 α' 归一化或 d²z 的 Jacobian 都会改变它）。
+  - id: spectrum.tachyon-expectation-conformal-factor-cancellation
+    note: 提供「ω 与非普适项 f 相消」这一步，本推导第 (3) 步直接用其结论。
+  - id: worldsheet.string-s-matrix
+    note: |
+      **2026-09-11 补边**（ch.5 已合入 main，原 gap「待 ch5 节点合入后补边」由此关闭）：
+      提供本期望值在 S-矩阵里的位置——(5.3.9) 中 ∫[dφ]e^{−S_m}∏_i ĝ^{1/2}V_{j_i} 这一因子，
+      以及顶点算子带 ĝ^{1/2} 权重、与 bc 部门相乘分离的写法。
+      不标 inferred：抽取记录 #E91（§6.2 的泛函积分与零模）的「文献列出的依赖」直接列出 **E80**。
+      ⚠ 这条依赖不是逻辑上强制的：原书 p.150「A note to the reader」说树级测度可由
+      (6.4.4) 下方的捷径独立得到，读者可跳过 §5.3 的 FP 各节。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.17)，p.171"
+    note: 抽取记录 #E93，L1（schrans-2020 §6.12，笔记 p.286；[S] 用 n = 3 显式验证 f 项相消）。
+summary: |
+  **(1) Gauss 积分。** 作用量对 X 是二次的，插入的顶点算子对 X 是指数（线性源）型，
+  故泛函积分是 Gauss 型：分离零模后（给出动量守恒 delta 函数），非零模的积分给出
+    exp[ − Σ_{i<j} k_i · k_j G'_r(σ_i, σ_j) − (1/2) Σ_i k_i² G'_r(σ_i, σ_i) ]
+  乘以与动量无关的行列式因子（并入 C^X_{S₂}）。
+
+  **(2) 代入 Green 函数。** S₂ 上 G'(z_i, z_j) = −(α'/2) ln|z_ij|² + (非普适项 f)，
+  其中 f 依赖度规的共形因子 ω 与球面上的具体规范选择。
+  代入得普适部分 exp[ Σ_{i<j} α' k_i·k_j ln|z_ij| ] = ∏_{i<j}|z_ij|^{α' k_i·k_j}。
+
+  **(3) 非普适部分相消。** 依 spectrum.tachyon-expectation-conformal-factor-cancellation，
+  凡只依赖单个 i 的项（含 ω(z_i) 与自能项）都以 Σ_i k_i² 或 (Σ_i k_i)·(…) 的组合出现，
+  在动量守恒与质量壳条件下相消，只剩 (2) 的普适因子。整体的 i 与 (2π)^d 按 (6.2.14) 的约定写出。
+gaps:
+  - "**路径积分测度未定义**：Gauss 泛函积分、行列式的正规化（(6.2.6)）与零模分离都没有定义，
+     故 status 上限 physical-argument。这是本节点全部下游共有的限制。"
+  - "**（2026-09-11 已关闭）** 原 gap：本期望值要接成 S-矩阵需要 (5.3.9)（抽取记录 E80），
+     而该节点尚未进入 main。现 worldsheet.string-s-matrix 已在 main，边已补（非 inferred）。
+     **残余**：本卡只是 (5.3.9) 的**一个因子**，「整条 S-矩阵 = 各部门因子之积」这一分解
+     在本图中由 (5.3.9) 的写法本身承载，没有独立论证。"
+  - "**(6.2.3)–(6.2.9) 只到 L2**：非零模行列式与 Green 函数的 PDE 表达式，抽取者只读到
+     schrans-2020 的目录条目，本图没有表达式级的核实。"
+  - "**只有 n = 3 的显式验证**：[S] 只对三点显式验算了 f 项的相消（[6.44]–[6.45]），
+     一般 n 的相消在本图与来源中都没有逐项写出。"
+  - "**只有二手源**（L1）：原书未核对（抽取记录 §0/§5.0）。"
+notes: |
+  这条是第 6 章 X 部门的主力公式：闭弦三点/四点（(6.6.2)/(6.6.4)）与 Virasoro–Shapiro
+  都从它出发；开弦（D₂）的对应式 (6.2.33) 因只到 L2 而未建节点，见目标陈述 notes。
+author: curator-polchinski-ch6
+created: "2026-09-11"

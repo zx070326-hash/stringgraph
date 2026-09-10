@@ -1,0 +1,35 @@
+id: worldsheet.moduli-holomorphic-quadratic-differentials--via-complex-coordinates
+target: worldsheet.moduli-holomorphic-quadratic-differentials
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: 提供被改写的条件：无迹 + ∇^b δ'g_ba = 0。
+  - id: worldsheet.conformal-gauge-fixing
+    note: 提供 ĝ_ab = δ_ab（**只局部**，见 gaps）。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁^T 的定义，无散度条件即 P₁^T δ'g = 0。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8) 附近, p.152"
+    note: |
+      抽取记录 #E73/#E74，L1（schrans-2020 §5.9，笔记 p.249–250，条目 [5.30]）。
+summary: |
+  无迹条件在复坐标下杀掉混合分量：δ'g_zz̄ = 0，只剩 δ'g_zz 与 δ'g_z̄z̄。
+  平坦度规下 ∇ → ∂，无散度条件 ∇^b δ'g_ba = 0 的两个分量为
+    ∂^z δ'g_zz + ∂^z̄ δ'g_z̄z = 0  ⟹  ∂_z̄ δ'g_zz = 0 （第二项因无迹而为零），
+  同理 ∂_z δ'g_z̄z̄ = 0。故 δ'g_zz 全纯、δ'g_z̄z̄ 反全纯。
+gaps:
+  - |
+    **只是局部改写**：共形规范只在局部可达。μ 是整体量，需要在每个坐标片上正则并且在过渡函数下
+    按二次微分变换；这部分整体结构在来源与本推导中都没有论证。
+  - |
+    **指标升降的因子未核实**：与 worldsheet.ckv-holomorphic-in-conformal-gauge 同样的问题，
+    抽取记录只给出结论（[S] 条目 [5.30]），中间步骤是 curator 补的。结论不受因子影响。
+  - |
+    有限步初等计算，但**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.2.8) 只经 schrans-2020 目录核对（对笔记 L1/L2，对原书 L3）。
+    上游 worldsheet.moduli-condition-traceless-transverse 的式号强度更弱（只有 [S] 正文交叉引用）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

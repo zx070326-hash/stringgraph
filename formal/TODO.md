@@ -50,6 +50,7 @@
   ⟹ `s + t + u = Σ mᵢ²`，其中 `s = -B(k₁+k₂, k₁+k₂)` 等（`mandelstamS/T/U`）。
   不需要非退化、不需要号差、不需要域、连 2 可逆都不需要——纯运动学。
   `mandelstam_sum_four_tachyons`：加 `α'mᵢ² = -1` 得 `α'(s+t+u) = -4`；
+  `mandelstam_sum_four_closed_tachyons`：加 `α'mᵢ² = -4`（闭弦基态，`α'kᵢ² = 4`）得 `α'(s+t+u) = -16`；
   `regge_trajectory_sum_four_tachyons`：`α_c(x) = a + α'x` 时 `Σα_c = 3a - 4`（截距留作参数）；
   `regge_intercept_sum_four_tachyons`：`a = 1` 时 `Σα_c = -1`。
   `mandelstam_sum_diagonal_metric`：`Fin D → K` 上对角度规 `η` 的具体版本（与 `DDF.dotVec` 同形，
@@ -57,6 +58,40 @@
   建议图节点 `spectrum.mandelstam-invariants-sum-rule` 的 `lean_decl`。
   **未做**：`s`、`t`、`u` 与散射道的关系（需要 in/out 态与解析延拓，不是代数），
   Veneziano 振幅本身，以及 `α_c` 是"领头轨迹"这一物理陈述。
+
+## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
+
+`StringFormal/Math/GreenSchwarzAlgebra.lean`，独立小岛（只 import Mathlib）。
+对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5 的
+Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条。
+
+- [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
+  `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
+  `gs_factorization_e8`：`E₈` 支，`Ω₄ = x`、`Ω₈ = x²/100`、`Ω₁₂ = x³/7200`；
+  `gs_factorization_nested_eq_expanded`：GS 原文的嵌套形与二手文献的展开形
+  `(1/48)Ω₄Ω₈ − (1/14400)Ω₄³` 是同一恒等式。
+  建议图节点 `math.anomaly-twelve-form-factorization` 的 `lean_decl`（取前两条）。
+  **环境选择**：陈述在 `[Field K] [CharZero K]` 上，系数写作 `48⁻¹`、`300⁻¹`、`/100`、`/7200`，
+  证明是 `field_simp; ring`。**不要**改回 `[CommRing R] [Algebra ℚ R]` + `algebraMap ℚ R (1/48)`：
+  那样 `ring` 把 `algebraMap ℚ R (1/48)` 当不透明原子，两个不同写法的有理常数不会被认同，
+  一名 formalizer 曾因此停摆一轮。系数本来就是有理数，域上陈述对图完全够用。
+  **未做**：迹恒等式本身（`math.so-usp-adjoint-fundamental-trace-identities`、
+  `math.e8-adjoint-trace-identities`）是独立节点，这里只把它们的输出当写死的数字系数；
+  微分形式、指标定理、反常多项式的来历一概不碰。
+
+- [x] `gs-trace-conditions`（A2）：混合反常的两条迹条件。
+  `mixed_anomaly_trace_conditions_n32`：`N + 8l = 24 ∧ N + 2l = 30 ⟹ (N, l) = (32, −1)`；
+  `mixed_anomaly_no_solution_l_one`：`l = +1`（`usp`）时两条件矛盾，无解。
+  建议图节点 `math.mixed-anomaly-trace-conditions-n32` 的 `lean_decl`。`omega` 一行。
+
+- [x] `gs-tr-f6`（A3）：`Ω₁₂` 中 `tr F⁶` 的系数 `N + 32l`。
+  `tr_f6_coefficient_vanishing`：`so(N)` 支 `N − 32 = 0 ⟺ N = 32`；
+  `tr_f6_usp_positive`：`usp(N)` 支 `N + 32 > 0`（`N ≥ 1`）恒不为零。
+  建议图节点 `math.tr-f6-coefficient-vanishing` 的 `lean_decl`。`omega` 一行。
+
+**整个岛都不碰物理**：这几条方程为什么是反常抵消条件，由
+`consistency.anomaly-cancellation-so32-effective-theory` 承载；
+"只有 `SO(32)` 与 `E₈ × E₈` 因子化" 这类唯一性断言**不是** GS 1984 的结果，图里也没有节点。
 
 ## Virasoro
 
@@ -92,6 +127,10 @@
   - `negSpan_eq_top`：`V(c,h)` 由**无序**负模态词 `L_{n_1}⋯L_{n_k}|c,h⟩`（`n_i < 0`）张成；
   - `lie_lgen_zero_wordAct` / `lie_lgen_zero_of_mem_levelSpan`：`L_0` 在 level `N` 上作用为 `h+N`；
   - `iSup_levelSpan_eq_top` + `levelSpan_fg`：`⨆_N V_N = V(c,h)`，每个 `V_N` 有限生成；
+  - **level 平移** `lie_lgen_mem_levelSpan`（`k ≥ 1` 时 `L_{-k} : V_N → V_{N+k}`）与
+    整数版 `lie_lgen_mem_levelSpan_of_neg`；辅助 `consComposition` / `lie_lgen_levelWord`。
+    对任意交换 `ℚ`-代数 `R` 成立，不需要 `V(c,h) ≠ 0`（`levelSpan` 是按张成词定义的，
+    不是按 `L_0` 特征子空间定义的）；
   - 域上（`[Field K] [CharZero K]`）：`isInternal_levelSpan`（`V = ⨁_N V_N`）与
     `levelSpan_eq_eigenspace`（`V_N` 恰为 `L_0` 的 `h+N` 特征子空间）；
   - 万有性质 `vermaLift` / `vermaLift_hwv` / `vermaLift_lie` / `eq_of_lie_of_eq_hwv`；
@@ -144,6 +183,16 @@
     **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
     这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
     而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
+  - **char-0 域上存在性已收紧为 iff**（2026-09-11）：`levelSpan_zero`（`V_0 = R·|c,h⟩`，任意
+    `ℚ`-代数）+ `isCompl_levelSpan_zero`（`V = V_0 ⊕ ⨁_{N≥1} V_N`）+ level 平移
+    ⇒ `hwvFunctional`（level-0 坐标）是 Shapovalov 泛函，
+    `exists_isShapovalovFunctional_of_hwv_ne_zero`、`exists_isContravariant_of_hwv_ne_zero`、
+    `exists_isContravariant_iff_hwv_ne_zero`（**存在 ⟺ `hwv ≠ 0`**）、
+    `existsUnique_isContravariant_of_hwv_ne_zero`。
+    即：在 `[Field K] [CharZero K]` 上，Shapovalov 形式的唯一缺口就是 `V(c,h) ≠ 0`
+    （`pbw-verma` (b)），`IsShapovalovFunctional` 不再是独立假设。
+    一般交换 `ℚ`-代数 `R` 上是否也成立**未定**：构造用了 `isInternal_levelSpan`，
+    而后者只在 char-0 域上有（level 片靠 `L_0` 特征值 `h+N` 分离）。
   - 低阶 Gram：`gram_level_one`（`2h`）、`gram_level_two_aa/ab/bb`（`4h+c/2`、`6h`、`8h²+4h`）、
     `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
     这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
@@ -408,6 +457,15 @@
     有序域上 `D > 26` ⟹ `∃ ψ ∈ physSubmodule (minkowski D K) b 1, ⟨ψ,ψ⟩ < 0`；
     动量见 `Fock.exists_zeroModeSq_eq_neg_two`（`α'k² = -1`，需 `D ≥ 2` 与域，因为
     单分量的 `k² = -1` 在 ℚ 上无解）。
+  - 带动量量词的加强版：`Fock.exists_mem_physSubmodule_pairing_self_neg'`，结论多输出
+    `zeroModeSq (minkowski D K) b = -2` 与 `b ≠ 0`，可逐字对应 no-ghost-theorem-v4 第 (2) 条的
+    `∃ p ≠ 0`；`b ≠ 0` 由质壳本身逼出（`zeroModeSq η 0 = 0 ≠ -2`）。
+    图节点 `worldsheet.negative-norm-physical-state-above-26` 的 `lean_decl` 宜改指这个声明。
+  - **公理登记**（curator 要求）：上述声明均无 `sorry`，
+    `lake env lean --run scripts/check_axioms.lean --import StringFormal.NoGhost.LevelTwo --all`
+    对 `exists_mem_physSubmodule_pairing_self_neg`、`exists_mem_physSubmodule_pairing_self_neg'`、
+    `exists_zeroModeSq_eq_neg_two` 均输出 `ok`，公理集只有
+    `propext`、`Classical.choice`、`Quot.sound`（2026-09-11 复核）。
 
   **未做**：没有证明 `ψ₂` 张成 level-2 物理态的标量（`SO(D-1)` 不变）部分，所以「level-2 标量模」
   是关于这一族显式试探态的陈述，不是关于某个典范向量的。做鬼不需要这一步（一个负模态就够），
@@ -424,4 +482,9 @@
   图侧接入已做：`uv run stringgraph check-axioms`（`tools/stringgraph/axioms.py`）把结论映回节点 id，
   非标准公理同时报到陈述卡和依赖它的 `formalized` 推导上；**不进 `validate`/pre-commit**（要起 Lean）。
   2026-09-11 全图 14 个 `formal.lean_decl` 跑通：14 ok，0 bad，0 missing。
-- [ ] `basic-lean-housekeeping`：把 `toProdₗ` / `ofWitt` / `span_lgen_cgen_eq_top` 从 `Verma.lean` 挪到 `Basic.lean`（它们是 Basic 级事实；`WittPerfect.lean` 因此多 import 了 Verma）。等 Verma 区无并行 formalizer 时做。另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
+- [x] `basic-lean-housekeeping`：`toProdₗ` / `ofWitt` / `toProd_ofWitt` / `ofWitt_lgen` /
+  `span_lgen_cgen_eq_top` / `centralTerm_zero` 已于 2026-09-11 从 `Verma.lean` 挪到
+  `Basic.lean`（声明全名不变，图卡 `lean_decl` 无需改）。`WittPerfect.lean` 的 import 已从
+  `Virasoro.Verma` 改成 `Virasoro.Basic`。`DescendantGrading.lean` **仍需** import Verma：
+  它实际用了 `wordAct` / `vermaLift` / `VermaModule`（约 40 处），不是只为这几条。
+  另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。

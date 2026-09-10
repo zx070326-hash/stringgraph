@@ -1,0 +1,32 @@
+id: worldsheet.metric-variation-with-moduli
+kind: proposition
+title: "含模的度规一般变分：δg_ab = Σ_k ∂_{t^k} ĝ_ab δt^k − 2(P̂₁δσ)_ab + (2δω − ∇̂·δσ) ĝ_ab"
+statement: |
+  设 ĝ_ab(t) 是依赖 μ 个模 t^k 的参考度规族。围绕 ĝ 的度规的**最一般**无穷小变分
+  （模的移动 + diff × Weyl）为
+    δg_ab = Σ_{k=1}^{μ} ∂_{t^k} ĝ_ab  δt^k  −  2 (P̂₁ δσ)_ab  +  ( 2 δω − ∇̂_c δσ^c )  ĝ_ab ,
+  其中 P̂₁、∇̂ 都对 ĝ 取。前一项是 worldsheet.diff-weyl-metric-variation 中没有的新内容：
+  模的方向不能由规范变换产生，必须单独参数化。
+
+  ⚠ **本卡采用的是勘误后的式子**，见 sources 的警告。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.5), p.155–156"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E78，L1（读到 schrans-2020 §5.12，
+      笔记 p.252）。
+      ⚠⚠ **勘误依赖（抽取记录 Q14 的第 1 条）**：伴读者逐字写「Note that, as per Joe's errata
+      page, there is an error in the last term. The correct equation should read
+      δg_ab = Σ_k ∂_{t^k}ĝ_ab δt^k − 2(P̂₁δσ)_ab + (2δω − ∇̂·δσ)ĝ_ab」。
+      **本卡写的是勘误版式子，印刷版的最后一项与此不同。**
+      ⚠ 而且：**Polchinski 官方勘误表本项目未能取得**（KITP 三条 URL 全部 404，见抽取记录 Q10
+      第 6 点与 Q14），所以「勘误表上确实有这一条」目前**只有 schrans-2020 一个来源**
+      （对该笔记 L1，对勘误表本身 L3）。
+tags: [worldsheet, moduli, faddeev-popov, errata, gauge-fixing]
+notes: |
+  与 worldsheet.diff-weyl-metric-variation 的关系：本式 = 那一式 + 模的项。
+  勘误后的形式与「那一式加一项」完全一致，这本身是勘误版可信的一个（弱）旁证。
+author: curator-polchinski-ch5
+created: "2026-09-11"

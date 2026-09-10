@@ -18,12 +18,15 @@
 
 同步：Lean 岛 1 无鬼定理形式化。
 
-### Phase 1 进度（2026-09-11）
-- 玻色弦：Polchinski v1 §1–4 全部入图并经 reviewer 审查；§5–6 抽取完成、转图中；§8（T 对偶）抽取中。
-- 超弦：Polchinski v2 §10–11 抽取完成（**Cambridge Core 章级 PDF 一手核实，61 条 L1**——同一路线正在清第一卷整张未核实式号清单）；§10 节点转换中。
-- 里程碑：`ms.no-ghost-theorem` 四轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第一轮回译 drift，修复中；`ms.critical-dimension-superstring` 待 §10–11 入图后起草。
-- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 顶点算子振子部分 / creaExp 递推已机器验证；剩 [L_m, V_K] 共形权（进行中）、DDF 对易关系、张成定理、level-2 负模态（进行中）。
-- 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美、**Shapovalov 形式**（唯一性无条件、存在 ⟺ V≠0、N=2 Gram 行列式 = 2h(16h²+2h(c−5)+c) 与 Kac 公式核对通过）、Möbius Jacobian、Mandelstam 和。Kac 行列式来源核实：Feigin–Fuchs 1982 Thm 3.1（Math-Net.Ru 全文）、Schottenloher Thm 6.12；kac-1979（LNP 94）与 kac-1980-icm 是两篇。
+### Phase 1 进度（2026-09-11 深夜）
+- 计数：main 238 statements / 176 derivations / 27 formalized；Lean 26 声明公理干净（2144 jobs）。
+- 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
+- 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
+- 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
+- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（m ≥ 1）与塔上版本** / level-2 负模态（含 p ≠ 0）已机器验证；进行中：DDF 算子 A^i_n 定义 + [L_m, A]=0（m ≥ 1）。剩：m < 0、DDF 横向代数、张成定理。
+- 无鬼定理回 rigorous 的最短路径：Gebert–Nicolai 顶点代数推导已入图（own rigorous），只被"自由玻色子顶点代数"缺卡压成 open——researcher 正找 Kac/LL/FLM 对不定号差格的编号定理。
+- Lean 岛 2（Green–Schwarz 代数）：因子化恒等式（SO(32)/E₈）、迹条件算术 7 条声明已合入；等 GS 1984 图节点合入后接线。
+- 附带数学岛：Verma 模、Euler 分拆、Witt/Virasoro 完美、Shapovalov 形式、Möbius Jacobian、Mandelstam 和。
 
 ## Phase 2：一致性与对偶子图
 
@@ -49,7 +52,7 @@
 - 与观测约束（暗能量演化等）的接口节点
 
 ### Phase 4 种子（2026-09-11 已启动）
-- Vafa 2005 / Ooguri–Vafa 2006 / AMNV 2006 抽取中（逐字记录原文主张强度，供双轨挂载）。
+- Vafa 2005 / Ooguri–Vafa 2006 / AMNV 2006 全文抽取完成（L1），swampland 区节点转换中。**记账红线**：AMNV 猜想 (I) 被作者本人用 SO(32) 旋量反驳（适用域内 → refuted）；OV/Vafa 的"反例"全在引力解耦极限（适用域外 → 独立卡，不作 refutation）。三篇均无 de Sitter / 暗能量约束——观测接口需 2018 年后文献（Obied–Ooguri–Spodyneiko–Vafa 等），抽取中。
 
 ## 长期
 
@@ -102,7 +105,7 @@
 - 待建：`H_phys 按 level 分级`（Fock.physSubmodule_eq_iSup_inf_levelSubmodule，现成 formalized 命题）
 - `worldsheet.physical-states-level-one` 的 (3) 可拆出"a = 1 处纵向光子是零模态"
 - `worldsheet.ocq-spurious-states`（定义带质量壳条件，Lean 的 spuriousSubmodule 不带；拆成"L_{−n} 像空间"（formalized）与"再交质量壳"两卡，让 spurious-orthogonal-to-physical 与 physical-states-level-one 回到 formalized）——**已完成 2026-09-11**（spurious-subspace formalized，level-one 复位）
-- ~~vertex-operator-adjoint 与 momentum-tower-fock-space~~ 已建（2026-09-11）。后续（curator 建议，按价值排序）：(1) `:e^{ink_0·X}:` 在 k_0² = 0 时权 0 且主场——两条瓶颈的共同上游，VertexWeight.lean 基例完成后可 formalized；(2) "径向厄米共轭规则"卡（四处散文重述）；(3) 拆 ddf-operators-adjoint 的 (2) Gram 递推走 rigorous 例外；(4) A^i_n = Σ α^i_m V^{(n)}_{−m} vs Lean 的 V^{(n)}_m 逐项对应相反，形式化前定死一种
+- ~~vertex-operator-adjoint 与 momentum-tower-fock-space~~ 已建（2026-09-11）。后续（curator 建议，按价值排序）：~~(1) `:e^{ink_0·X}:` 在 k_0² = 0 时权 0 且主场~~ 与 ~~(2) "径向厄米共轭规则"卡~~ 已建（2026-09-11，分支 agent/curator/vertex-primary：`worldsheet.exponential-vertex-operator-weight` + `--via-ope-with-t`、`worldsheet.radial-hermitian-conjugation`；两条瓶颈推导与 ddf-operators-adjoint 推导已接线，四处散文加指针；两张 formalized 卡只加 notes 不加 uses）。(1) 的后续待裁：Lean 证的是**模形式** `L_m^{(a+b)}V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½b·b)V_{J−m}`，与卡片断言的 OPE 形式互推要经 `ope-pole-mode-commutator-dictionary`（physical-argument），故 VertexWeight.lean 完成后**不能直接**把该卡标 formalized——建议届时拆一张模形式卡承载 formalized。另待建：`worldsheet.boundary-normal-ordering`（开弦边界缩并加倍 = 闭弦 α'k²/4 与开弦 α'k² 之间的因子 4，Polchinski (6.2.34)，本图无节点）。仍待办：(3) 拆 ddf-operators-adjoint 的 (2) Gram 递推走 rigorous 例外；(4) A^i_n = Σ α^i_m V^{(n)}_{−m} vs Lean 的 V^{(n)}_m 逐项对应相反，形式化前定死一种
 - `worldsheet.ddf-operators-v4`（一卡三事：A^i_n 定义、[L_m, A^i_n] = 0、[A^i_m, A^j_n] = mδδ；后两条是命题，形式化路径不同，拆成 v5 纯定义 + 两条 proposition；再加"横向性 ⟹ 模态和局部有限"命题，Lean 已有支撑）
 - ~~`worldsheet.open-string-virasoro-modes-v2`~~ 已建 v3 + `open-string-doubling-trick` 命题（2026-09-11）。后续 doubling-trick 边已加（2026-09-11）
 - `worldsheet.ocq-spurious-states`（定义带质量壳条件，Lean 的 spuriousSubmodule 不带；拆成"L_{−n} 像空间"（formalized）与"再交质量壳"两卡，让 spurious-orthogonal-to-physical 与 physical-states-level-one 回到 formalized）——**已派**
@@ -115,6 +118,15 @@
 - ~~待建：math.virasoro-universal-central-extension~~ 已建（2026-09-11，Feldvoss–Siciliano Lemma 2.6）。`math.witt-algebra-perfect` 与 Hochschild–Serre 登记已完成（2026-09-11）；witt-perfect 的 Lean 形式化已派；PBW 基元模态排列方向（Kytölä 递增 vs 本图递减）待统一。kac-raina 2013 二版是否单独登记待裁。
 - ~~待建：正规序等同节点~~ 已建 `worldsheet.normal-ordering-modes-agree`（2026-09-11）。后续拆：X 半边弱节点（让 c = D 的 OPE 路线不拖进鬼场链）与不含常数值的纯代数弱节点（可走 rigorous 例外）。`conformal-normal-ordering` 已出 v2（任意自由场含费米型，2026-09-11）。
 - 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
+- **已闭合（2026-09-11）**：H 的 Chern–Simons 符号约定——Bilal 2008 β̃ = 1 已由 lead 逐页核实（(12.14)/(12.26)），GS (4) 与 Bilal (12.14) 相差 (B,H)↦(−B,−H)，两家一致；GS (5)(6)(15)(16) 与 Zumino Les Houches 1983 约定逐字同一；ZWZ 正文不可得（L2），图中不得出现"ZWZ eq. (X)"。
+- 待换代：`worldsheet.critical-dimension-light-cone` 补前提 D ≥ 4（iff 在 D ≤ 3 不成立；GSW 原文同样未写）——等 auditor 第三轮裁定。
+- 待换代：`worldsheet.kac-determinant` 陈述中 α_N "正"无据（FF 写 ненулевая、Schottenloher 写 K_N ≥ 0）；lead 裁决：新建 v2 写"非零常数"并 superseded_by（不是里程碑，走普通换代）。
+- 待建：`worldsheet.shapovalov-form-unconditional-existence`（rigorous，依赖 verma-module-free-over-negative-part；`--via-pbw` 已证到但无节点承载）；`descendant-weight-grading*` 可挂 Verma.lean 新 `lie_lgen_mem_levelSpan`（任意交换 ℚ-代数、无 c,h 假设）。
+- 待拆：`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
+- 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
+- **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
+- 待建：**`worldsheet.free-boson-vertex-algebra`**（D 个自由玻色子（不定号差）⊗ C[Z k_0] 的 Heisenberg/格点顶点代数，动量塔为其模；来源 FLM / Kac / Lepowsky–Li）与 **`math.vertex-algebra-jacobi-identity`**（Borcherds 恒等式带编号）。补上后 G–N 推导 `ddf-commute-with-virasoro--via-vertex-algebra-primary` 直接升 rigorous，无鬼定理随之回 rigorous——**这是当前最短的升级路径**（curator-gn-ddf 2026-09-11）。
+- 待处理：Polchinski v1 原书核实（§12.10）30 条 loc 修改、15 条作者自承缺口、Q6（weyl-anomaly-v2 的 c^m=26 应挂 §4.3 (4.3.9)）、Q22 撤销 Narain 压级建议、Q3（OPE 收敛 p.69 有论证）。
 - 待建：**"光锥质量壳 → 协变振幅外线 on-shell"**（§1 光锥谱与 §6 协变振幅外线之间的系统性缺环，§6 分支 6 条 inferred 边全指向它；reviewer-ch6）
 - 待建：`compact.kaluza-klein-metric-ansatz`（(8.1.2)，KK 塔的前提 G^{μd}=0 目前只在陈述文本里）；Chan–Paton 卡就位后 Wilson 线两卡补边
 - 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载

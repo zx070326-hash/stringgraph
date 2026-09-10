@@ -8,23 +8,28 @@ depends_on:
     note: |
       本推导的 summary 与 gaps 已经用到 a = (D-2)/24（横向零点能经 ζ 正规化），
       原先它只写在 gaps 里而没有对应的依赖边。该结果现已单列节点
-      （Polchinski §1.3 约 (1.3.33)-(1.3.35)），落在本推导 sources 已引的
-      「§1.3，约 eq. (1.3.30)-(1.3.36)」区间内，故这条边有来源支撑，非 inferred。
+      （Polchinski §1.3，A 的定义式 **(1.3.31)**、ζ 正规化 (1.3.32)、结果 **(1.3.35)** `A = (2−D)/24`，
+      式号 2026-09-11 经原书核实落实），已列入本推导 sources 的 §1.3 条目，故这条边有来源支撑，非 inferred。
     convention_map: |
       被依赖节点按 Polchinski 记号给 A = -(D-2)/24 并声明 conv.intercept-sign-a
       （a = -A）；本推导与目标陈述用的是 a，取 a = (D-2)/24。
   - id: worldsheet.open-string-mass-shell
     note: |
       本推导的 summary 用 α'm^2 = N - a 把 Δ_n = 0 的解读成谱条件。该质量壳现已单列
-      节点，来源是已核实的 Polchinski (1.3.36)，落在本推导 sources 已引的
-      「§1.3，约 eq. (1.3.30)-(1.3.36)」区间内，非 inferred。
+      节点，来源是已核实的 Polchinski **(1.3.36)**，已列入本推导 sources 的 §1.3 条目，非 inferred。
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算，给出 Δ_n）"
     note: GSW 用 mostly-minus 号差与 α' = 1/2 归一化；Δ_n 的形式不受影响，整体因子已按 conv.alpha-prime-regge 转写。
   - ref: polchinski-1998-v1
-    loc: "§1.3，约 eq. (1.3.30)–(1.3.36)（零点能与质量壳），习题 1.3（洛伦兹代数的直接验证）"
-    note: "表示论论证，非显式对易子计算；显式计算见 GSW §2.3.1。"
+    loc: "§1.3：正规序常数 A 的定义与 ζ 正规化 eq. **(1.3.31)–(1.3.35)**、质量壳 **(1.3.36)**、level 1 质量 (1.3.39)、结论式 **(1.3.40)**, p.23（逐字 `A = −1 , D = 26`；式号与内容均已核实，抽取记录 polchinski-1998-v1.md §12.5 / E18 / Q2）"
+    note: |
+      原书走的是表示论计数，不是显式对易子计算；显式计算见 GSW §2.3.1 (2.3.32)。
+      **【2026-09-11 原书核实订正】**本条此前写「习题 1.3（洛伦兹代数的直接验证）」——
+      **原书既没有做该验算，也没有把它留成习题**（抽取记录 §12.5）：p.21 只描述它并推给共形规范路线。
+      作者三处自降严格程度（逐字）：p.21「plausible without a complete treatment」、
+      p.24「We will show this **indirectly** in the coming chapters」、p.90「rather **heuristically**」。
+      另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」。
 summary: |
   把 α^-_n = L^⊥_n/((2α')^{1/2} p^+) 代入 J^{i-}，用横向振子对易关系逐项计算
   [J^{i-}, J^{j-}]。经典部分相消，量子部分留下 Σ_{n≥1} Δ_n (α^i_{-n}α^j_n - α^j_{-n}α^i_n)，
@@ -36,7 +41,8 @@ summary: |
 gaps:
   - "零点能 Σ_{n≥1} n = ζ(-1) = -1/12 用 ζ 函数正规化，未给出算子层面的严格定义；这是本推导只能记为 physical-argument 的主要原因。该正规化步骤现已单列为 worldsheet.zeta-regularized-sum-of-integers（physical-argument），其纯数学部分（收敛级数 Σ n e^{-un} 的 Laurent 常数项 = -1/12）单列为 worldsheet.regulated-sum-laurent-expansion（rigorous）。"
   - "[J^{i-}, J^{j-}] 的计算涉及无穷多模式求和的重排与正规序重整（J^{i-} 是三次式），文献中按形式操作处理，未给出收敛性论证。"
-  - "文献差异：Polchinski §1.3 正文用的是表示论论证（第一激发级须为无质量 SO(D-2) 矢量），显式的洛伦兹代数验证只作为习题 1.3；本推导陈述的是 GSW §2.3.1 的显式版本。"
+  - "**文献差异（2026-09-11 原书核实后加强）**：Polchinski §1.3 正文用的是表示论论证（第一激发级须为无质量 SO(D-2) 矢量，结论式 (1.3.40), p.23），**显式的洛伦兹代数验证在原书里根本没有做，也没有留成习题**（此前本条写「只作为习题 1.3」，据抽取记录 §12.5 撤销）；原书 p.21 逐字承认只求「plausible without a complete treatment」并把诚实的推导推给共形规范路线，p.24 说「We will show this indirectly」，p.90 自称 §1.3 是「rather heuristically」。因此本推导陈述的 Δ_n 显式版本**只**由 GSW §2.3.1 (2.3.32) 支撑，Polchinski 不是它的来源。"
+  - "**目标陈述的 iff 未限定 D ≥ 4**：D = 3 时只有一个横向指标，α^i_{-n}α^j_n - α^j_{-n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合，「仅当」方向有反例；D = 2 无横向振子。GSW 的原文同样未写该限定。（ms.critical-dimension-bosonic 第二轮回译审计 N2；汇总卡片 worldsheet.critical-dimension-bosonic-v3 的 (I) 已加该前提，本卡应另行换代补上。）"
   - "严格化路线：光锥洛伦兹反常可用 Virasoro 中心荷的严格代数计算重述（c^⊥ = D-2 与 a 的关系），届时可加一条 kind: proof 的新推导，不改本陈述。"
 author: curator-critdim
 created: "2026-09-10"

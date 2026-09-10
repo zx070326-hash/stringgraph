@@ -1,0 +1,74 @@
+id: spectrum.mandelstam-invariants-sum-rule
+kind: proposition
+title: 四点运动学：s + t + u = Σ_i m_i²，四开弦 tachyon 时等于 −4/α'
+statement: |
+  设四条外线动量 k₁,…,k₄ 全部取**入射**约定，满足动量守恒 Σ_i k_i = 0，
+  各自在质量壳上 k_i² = −m_i²（conv.metric-mostly-plus）。定义 Mandelstam 变量
+    s = −(k₁ + k₂)²,   t = −(k₁ + k₃)²,   u = −(k₁ + k₄)²。
+  则
+    s + t + u = − Σ_i k_i² = Σ_i m_i²。
+  对四个开弦 tachyon（α' m_i² = −1，即 k_i² = 1/α'）得
+    s + t + u = − 4/α'。
+  对四个闭弦 tachyon（α' m_i² = −4，即 k_i² = 4/α'）得
+    s + t + u = − 16/α'。
+
+  **本命题不断言什么**：不涉及任何振幅；不断言 s、t、u 与「通道」的对应
+  （那取决于哪两条腿被视为入射，属约定）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.7)（Mandelstam 变量满足 s + t + u = Σ_i m_i² = −4/α'），p.179–183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E98，等级 **L1**（schrans-2020 §6.30–§6.37，
+      笔记 p.300–307，逐页读到）。
+  - ref: polchinski-1998-v1
+    loc: "§6.6（闭弦四 tachyon；[S] §6.66 脚注 8 明写 α'(s+t+u) = −16），p.192–194"
+    note: |
+      抽取记录 #E106，L1。⚠ 同一处记录了 [S] 的一处**自相矛盾**：他的 [6.236] 说
+      「we have again used α_c(s)+α_c(t)+α_c(u) = 1」，而由他自己的脚注 8（α'(s+t+u) = −16）
+      与 α_c(x) = α'x/4 + 1 得该和 = −4 + 3 = **−1**。抽取记录已记录在案，
+      本卡片采 α'(s+t+u) = −16（即闭弦 s+t+u = −16/α'），与脚注 8 一致。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.{mandelstamS, mandelstamT, mandelstamU, mandelstam_sum, mandelstam_sum_four_tachyons, mandelstam_sum_four_closed_tachyons, regge_trajectory_sum_four_tachyons, regge_intercept_sum_four_tachyons, minkowskiForm, mandelstam_sum_diagonal_metric}"
+    note: |
+      本仓库，formal 侧提交 c9e5626（"formal: prove Mandelstam sum rule s+t+u = sum m_i^2 and
+      four-tachyon corollaries"）；Lean 4 + Mathlib v4.33.1。逐条对应：
+        定义 s = −(k₁+k₂)² 等 → `mandelstamS/T/U`（对任意对称双线性型 B，`k 0..3` = k₁..k₄）；
+        s + t + u = Σm_i² → `mandelstam_sum`（本卡 formal.lean_decl；任意模上任意对称双线性型，
+          不需要非退化、号差、域，甚至不需要 2 可逆）；
+        开弦四 tachyon α'(s+t+u) = −4 → `mandelstam_sum_four_tachyons`（前提 α'm_i² = −1）；
+        Minkowski 对角度规的具体版本 → `minkowskiForm` / `mandelstam_sum_diagonal_metric`。
+      【2026-09-11 更新，原 ⚠ 已解除】闭弦情形 −16/α' 现由 `mandelstam_sum_four_closed_tachyons`（33ebd33）承载；它是 `mandelstam_sum` 取 α'm_i² = −4 的一行代入，
+      formalizer 只写了开弦的特化。见 --via-lean 推导的 gaps。
+      另有 `regge_trajectory_sum_four_tachyons`（α_c(x) = a + α'x 时三者之和 = 3a − 4）与
+      `regge_intercept_sum_four_tachyons`（a = 1 时 = −1）——**这两条不是本卡的断言**，
+      它们额外消耗截距 a = 1（worldsheet.open-string-intercept-v2），见 notes。
+formal:
+  lean_decl: StringFormal.Math.mandelstam_sum
+  lean_file: StringFormal/Math/MobiusJacobian.lean
+tags: [spectrum, kinematics, mandelstam, four-point, tachyon, on-shell, formalized]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E98/E106 拆出（任务书：把振幅推导里的纯计算部分单列）。
+
+  **为什么单列**：s + t + u 的取值在 Veneziano 的三项 Beta 结构、Regge 极限的 u ∝ −s、
+  以及 Virasoro–Shapiro 的 α_c(s)+α_c(t)+α_c(u) = −1 里反复使用，
+  而它只是运动学，与路径积分无关。单列后，那些振幅节点的 gaps 里不必重复这一步。
+
+  **status 历史**：初建时 physical-argument。2026-09-11：reviewer-ch6 复核
+  --via-momentum-conservation 升 rigorous；同日挂上 formalizer 的 MobiusJacobian.lean B 节
+  （--via-lean，formalized）。
+
+  【formalizer 的说明】（2026-09-11，MobiusJacobian.lean 文件头与 formal/TODO.md）
+  **只有 −4（与 −16）的形式是纯运动学。** 文献常写的等价形式 α_c(s)+α_c(t)+α_c(u) = −1
+  （α_c(x) = 1 + α'x）额外消耗了开弦截距 a = 1：Lean 的 `regge_trajectory_sum_four_tachyons`
+  把 a 留作参数得 3a − 4，`regge_intercept_sum_four_tachyons` 才代入 a = 1。
+  **本卡只断言 s + t + u = Σm_i² 及其 tachyon 特化，不断言 α_c 求和 = −1**；
+  下游（spectrum.virasoro-shapiro-amplitude 等）用 α_c 形式时，应把 a = 1 记为对
+  worldsheet.open-string-intercept-v2（或 conv.intercept-sign-a 下相应约定）的依赖，
+  而不是归到本卡。若日后需要 α_c 形式的独立卡，按 formalizer 建议新建并依赖截距节点。
+
+  ⚠ 它同时**订正**了一处文献内部矛盾（[S] 的 α_c 求和规则），见 sources 的第二条。
+author: curator-polchinski-ch6
+created: "2026-09-11"

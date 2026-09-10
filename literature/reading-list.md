@@ -3,7 +3,7 @@
 | 优先级 | ref | 范围 | 目标 area | 负责 | 状态 |
 |---|---|---|---|---|---|
 | P0 | polchinski-1998-v1 | §1–§6, §8（玻色弦、共形规范、光锥量子化、无鬼定理、模空间与一般亏格 FP、树级振幅；环面紧化与 T 对偶） | worldsheet | researcher | extracted（二手源，需持原书者核对 E34/E53/E58；**§5–§6 于 2026-09-11 追加 E69–E112**，其中 (6.4.23) Veneziano 表达式与 (6.6.23) 开闭弦关系最需核对；**§8 于 2026-09-11 追加 E113–E158**，其中 **(8.3.28) T 对偶「是同一个 CFT」的原文措辞最需核对（Q20）**，其次 (8.4.24)/(8.4.25) 的必要性半句（Q21/Q22）与 (8.7.2) DBI（Q25）。**§8.5 轨形未抽，见 E146**。勘误表风险见 Q14+Q24） |
-| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | extracted（二手源）。**⚠ 2026-09-11：Cambridge Core 路线已证可取 Vol.1 正文 PDF（见下方备忘），建议派一轮把 §3 未核实清单（E34 的 `c=D`、E53 的 §3.4 式号、E58 的无鬼定理措辞、(2.1.1) 的 Wick 旋转、(2.7.21) 的表达式）全部升到 L1** |
+| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | **★★ 原书核实完成（L1，2026-09-11 第六轮）** → `extractions/polchinski-1998-v1.md` **§12**。Q2/Q3/Q4/Q5/Q6/Q7/Q10/Q11/Q12/Q20/Q21/Q22 全部关闭；30 条图节点 loc 修改建议见 §12.10 B 表；15 条作者自承缺口见 C 表。**剩余最高性价比：Appendix A (A.1.31)、书末 References（Goddard–Thorn 是否被引）、§1.2 的 `T=1/(2πα')` 式号** |
 | P0 | lian-zuckerman-1991 | 全文（Thm 2.13/2.25、Cor 2.26/2.28、Thm 3.5） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `extractions/primary-sources-round2.md` §1 |
 | P0 | virasoro-lean-2025 | §9–§12 + App. A.2（Heisenberg、Sugawara c=1、Verma/Fock） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `primary-sources-round2.md` §5.2 |
 | P0 | fgz-1986 | 全文 | worldsheet | researcher | extracted（L1 全文）→ `brst-cohomology-sources.md` §1 |
@@ -41,7 +41,9 @@
 | **P0** | **alvarez-gaume-witten-1984** | 全文，特别是 **eq. (63)**（反常相对归一化）与十维反常多项式系数 | consistency | 待分派 | **新增（2026-09-11，由 green-schwarz-1984 抽取推出）**：GS 1984 把 (17) 的常数 `c`、(20) 的三个系数、(22) 的相对归一化**全部**外包给本文。不抽它，整条 GS 反常链的数值系数层就是 L0。Nucl. Phys. **B234** (1984) 269–330，无 arXiv（1984）。⚠️ GS 原文把年份误印为 1983。**取件钥匙（2026-09-11 补）**：INSPIRE recid **192309**，报告号 `HUTP-83/A039`，**有 KEKSCAN id `84-02-145`**、**无 CDS id** → 走 KEK 而非 CDS；推出的 URL `lib-extopc.kek.jp/preprints/PDF/1984/8402/8402145.pdf` 两次 `socket hang up`，主机是否活着未分辨 |
 | P1 | thorn-1985-santa-barbara | 全文（42 页，含**改良版 Goddard–Thorn 无鬼定理证明**） | worldsheet | 待分派 | **新增（2026-09-11，`primary-sources-round2.md` §12.5）**：C. B. Thorn, *Introduction to the theory of relativistic strings*, Workshop on Unified String Theories, Santa Barbara, 1985-07-29–08-16。报告号 `DOE/ER/40008-77` / `CONF-850798-1` / NTIS `DE86001950`，42 页。摘要自陈「give an **improved version of the Goddard-Thorn proof** of the No-ghost Theorem」（INIS `szqhd-hct30`、OSTI 5007660）。INIS 有文件但 `access.files: restricted`（需注册，未办）；OSTI 无全文。**⚠ 勿与 `thorn-1985`（MSRI 7 页）混淆。** 建议路线：对该 Workshop 论文集（World Scientific，Green & Gross 编）跑 archive.org 重印文集流程 |
 | P0 | alvarez-gaume-witten-1984 | 全文（Nucl. Phys. B234, 269–330，62 页） | consistency | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/alvarez-gaume-witten-1984.md`（E1–E20 + §5 Lean 候选）。取自 **McGill 课程页扫描件**（见下方备忘）。**eq. (63) 已逐字取到**。★ **GS Q3 完全闭合**：GS (20) 的五个系数 = −48 × [AGW (119) 的 N=1 场内容组合]，机械可验，`n=496` 是 `7936−16n` 的唯一零点。★ **GS Q2 只闭合一半**：AGW **不含** 常数 `c`，也**不含** GS (22) 的十维混合十二形式（p.328 明说不做），只给配方。★ **AGW 不是 CS/下降方程符号约定的源头**（源头是 Zumino–Wu–Zee）。⚠️ **年份订正**：AGW **自己的页眉就印 1983**，GS 照抄，不是 GS 误印 |
-| **P0** | **zumino-wu-zee-1984** | 全文（下降方程 `ω⁰_{2n+1}`/`ω¹_{2n}` 的定义与符号约定；纯规范反常的绝对归一） | consistency | 待分派 | **新增（2026-09-11，由 alvarez-gaume-witten-1984 抽取推出，优先级 P0）**：B. Zumino, Y.-S. Wu, A. Zee, Nucl. Phys. **B239** (1984) 477 = GS ref [9] = AGW ref [7] 的「Univ. Washington preprint, 1983」。**AGW 全文没有下降方程**，所以 (a) GS 常数 `c` 的另一半依赖、(b) `H = dB + ω⁰_{3Y} − ω⁰_{3L}` 的符号约定源头，**都只能在这里**。抽了它，GS 链的数值系数层才可能全闭合。无 arXiv |
+| **P0** | **zumino-wu-zee-1984** | 全文（下降方程 `ω⁰_{2n+1}`/`ω¹_{2n}` 的定义与符号约定；纯规范反常的绝对归一） | consistency | researcher | **attempted, blocked（2026-09-11）** → `extractions/zumino-wu-zee-1984.md`。**正文一字未取到（L2，仅摘要+元数据）**，但**本轮的两个核心问题已由其伴随文献闭合**（见下一行）。⚠️ **派工单的两个获取前提被证伪**：(a) INSPIRE `publication_info` **无 `pubinfo_freetext`** ⇒ **零个重印出处**，archive.org 文集路线输入条件不满足；(b) *Current Algebra and Anomalies* 里 Zumino 那章（pp.361–393）是 **Les Houches 讲义（单作者）**，**该书不收 ZWZ**。`external_system_identifiers` **无 KEKSCAN、无 CDS** ⇒ KEK 与 OAI-PMH 路线入口即排除。已试并失败：Semantic Scholar（CLOSED）、OSTI（`LBL-16443` 三种查法均无命中）、INIS（`zectt-7td81` metadata-only）、INIS 旧公共路径（404）、`site:edu` 扫描件检索（只命中转述性课程笔记）。**未穷尽的唯一入口：UNT Digital Library / TRAIL（被 Altcha 反爬挡住，需人工浏览器）**。ScienceDirect 与未授权扫描站按规则不使用 |
+| **P0** | **zumino-1983-les-houches** | 全文（LBL-16747，46 印刷页） | consistency | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/zumino-wu-zee-1984.md`（E1–E17）。**= GS ref [10] 的第一项**（不是 ref [9]），ZWZ 的同作者同期伴随讲义，引言自陈「Some of the results are contained in a recent paper written in collaboration with Wu Yong-Shi and Anthony Zee [2]」。**★ 闭合了两件事**：(1) **`green-schwarz-1984.md` Q6 的「下降方程符号约定源头」** —— GS (5)(6)(15)(16) 逐字采用 Zumino 的约定，含 **(3.32) `δω⁰ = −dω¹` 的负号**；(2) **`c` 的归属定案** —— 本文 §5 只给 `2n−2` 维通式 (5.13) 且原文手写「(up to a sign)」，**不含引力侧**，故 `c` 在 AGW/ZWZ/Z-LH 三篇里都不以一个数存在。**★ 但不能裁决 `H` 的 CS 符号**（本文无 `B`、无 `H`、无引力）：GS 与 Bilal 由 `(B,H)→(−B,−H)` 相联，**两者都对**。三条作者自陈 gap：局部性、`k²=0` 留作习题、**WZ 相容条件解的唯一性明确不讨论**（⇒ GS「uniquely determined」无支撑） |
+
 | P1 | eguchi-gilkey-hanson-1980 | Â 多项式（Dirac genus）的定义与 Pontryagin 展开 | consistency | 待分派 | **新增（2026-09-11）**：Phys. Reports **66** (1980) 213 = AGW ref [6]，AGW (82) 的 Â 多项式外包给它。本轮已用 Harvard Math 272b 讲义（匿名 CAS 输出，L1）核对 Â₁–Â₄ 全部相符，但那只作旁证；canonical 数学来源应是 Hirzebruch 或本条 |
 | P1 | green-schwarz-1985-hexagon | 全文 | consistency | 待分派 | **新增（2026-09-11）**：Nucl. Phys. **B255** (1985) 93–114。GS 1984 自陈弦论侧 "details will be presented elsewhere"，Schwarz 2012（arXiv:1201.0981，L1）指认这里就是那个 elsewhere。要给「type I 单圈六边形反常抵消」建节点必须先抽它 |
 | P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1`。**2026-09-11 追加理由（researcher，建议 lead 把本行提到 P1）**：`vafa-2005` §4 把「U(1)⁴⁹⁶ 与 U(1)²⁴⁸×E₈ 就反常而言一致」引给 `green-schwarz-1984`，但本项目对 GS 1984 的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈。本章现在同时被 GS 抽取与 Vafa 抽取两处需要，是 swampland↔consistency 接口边的唯一可能来源。见 `extractions/vafa-2005.md` Q3 |
@@ -55,6 +57,25 @@
 | P2 | susskind-1995-remnants | 全文（hep-th/9501106） | swampland | 待分派 | **新增（2026-09-11）**：AMNV §2.2 的 remnant 论证与「量子引力无全局对称性」这一前提都引本文，§2.3 的 large-N species problem 也引它。**⇒ 图里「无全局对称性」节点的来源应是本条，不是 AMNV**（后者只引用不论证）。有 arXiv |
 
 ## 已知获取路线备忘
+
+- **★★ 新增可用路线（2026-09-11）：`osti.gov/servlets/purl/<OSTI-ID>` —— 1980 年代 DOE 国家实验室报告（LBL / ANL / FNAL / SLAC…）正文的直接入口。**
+  `zumino-1983-les-houches`（LBL-16747，46 印刷页）全文即以此取得（L1）。
+  **这条路线修正了本文件此前的一句判断**：`goddard-thorn-1972` 那次记的「OSTI 无全文」应收窄为
+  **「OSTI 不藏 CERN-TH 报告」，而不是「OSTI 没有全文」**。凡报告号形如 `LBL-*`、`ANL-*`、`FNAL-*`、`SLAC-PUB-*`、`DOE/ER/*` 的，都值得先试 OSTI。
+  1. `https://www.osti.gov/api/v1/records?q=%22<报告号>%22` → 拿 **OSTI ID**。
+     ⚠ **一律用 `q="…"` 加引号，不要用 `report_number=` 参数**：实测 `report_number=LBL-16443` 与 `q="LBL-16747"` 行为不一致。
+     ⚠ **含 `/` 的报告号（如 `DOE/ER/40048`）会让查询被静默忽略并返回一批无关记录** —— 看到结果与查询毫无关系时，是查询被吞了，不是「无此件」。
+  2. `https://www.osti.gov/servlets/purl/<OSTI-ID>` → **WebFetch 会抱怨读不了二进制，但已落盘并在末尾方括号里打印本地路径**（同 AGW/Cambridge 路线）。
+  3. `Read` 带 `pages` 逐页读图。**扫描件常是打字稿 + 手写公式**：一次 10 页可读，**关键系数必须单页重渲染**，且**同篇内两条路线算同一批数时一定互除一遍**
+     （本轮即靠 (5.10) 与 (5.11) 互除，把肉眼的 `(m−1)!` 改判为 `(n−1)!`；同 AGW 定 (101) = 11/21 的手法）。
+- **★ 配套的存在性探测器：INIS 的 `files` 字段（2026-09-11 口径修正）。**
+  `https://inis.iaea.org/api/records?q=<查询>&size=20` 返回的记录里，若 **`files.enabled: true`** 且 **`access.files: "public"` / `access.status: "open"`**，
+  则该件**确实有开放全文**（本轮 LBL-16747 = INIS `ph8pd-7r422`，文件 `15035011.pdf`，542345 字节，与 OSTI 那份吻合）。
+  ⇒ **修正本文件此前「INIS 取全文基本无望」的口径**：`files.enabled` 是**可信的正信号**，
+  只是**下载要换主机** —— 旧公共路径 `collection/NCLCollectionStore/_Public/<vol>/<iss>/<RN>.pdf` **本轮实测仍 404**。
+  **用 INIS 判断「有没有」，用 OSTI 拿「文件本身」。**
+- **⚠ 反爬新增一条**：`digital.library.unt.edu`（TRAIL / DOE 技术报告扫描库）返回 **Altcha 挑战页**，agent 过不去。
+  与 `cds.cern.ch` 同类处理：**把 URL 交给人类点击，不要用代理绕**。
 
 - **★★ 新增可用路线（2026-09-11）：大学课程页挂的原刊扫描件 —— `alvarez-gaume-witten-1984`（Nucl. Phys. B234, 269–330, 62 页）全文即以此取得（L1）。**
   这是第二条成功拿到 pre-arXiv 论文正文的路线，**比 archive.org 路线省事得多，应当先试**。
@@ -112,6 +133,20 @@
   Vol.2 已取 item hash：contents `07FB90D821053D58A00610479EFE2978`、notation `BACF746050A6F8DC6AE8EF5FA4A6BA28`、
   ch.10 `E69C35DC077FD0BAD6B39479144D4A12`、ch.11 `C4D876C20A83F4E778152B75A219A718`、
   ch.12 `46D902501550C028C94F24884F4B9D7A`、附录 B `872CC69E98F684AFA1019EB2A955BD11`。
+  **Vol.1 全部 item hash（2026-09-11 实得，文件名规则 `9780511816079c<章号>_p<起页>-<止页>_CBO.pdf`，实测 c1–c8 全部命中）：**
+  frontmatter(i–viii) `D8E774D629783EE35C60C78122AF28B5` / contents(ix–xii) `5A6EE61D4E1E712BB9D55D142187A6B6` /
+  foreword(xiii–xiv) `55B6451C35A99B25FE283F4B1AD988A7` / preface(xv–xvii) `BB4B6DFFBB6CA9E785644A9D0693C9CD` /
+  **notation(xviii–xx) `4E431CFB7DE9E03AE982456CC6BA3BE0`（文件名例外：`9780511816079mfm_pxviii-xx_CBO.pdf`）** /
+  ch.1(1–31) `B743D2FD9DFC745DF9A39834989A0BAB` / ch.2(32–76) `5CA151E88B12C248825A262624ADC7D6` /
+  ch.3(77–120) `606E849133B4EE45657DF6128FD1C8C1` / ch.4(121–144) `12E46864E4792BDA6021FD53D3C193E2` /
+  ch.5(145–165) `2619B77DD4AE2BE4D53B5EED5D3BE3C1` / ch.6(166–205) `F440F6B46EB4150F96EAEAFDDF9F0D76` /
+  ch.7(206–230) `1FCFE9B5026DE1E5210F0F62514336B0` / ch.8(231–282) `812E73D34A5F56520ECCAA94F068E1A6` /
+  ch.9(283–328) `8787336CD0569208E89B12D418283685` / **App.A 路径积分(329–346) `D6A09941572ED2451AFC3C5C497F9A9A`** /
+  **References(347–358) `F5E26AFC8AF1D3B0E3F3866E752F8FD2`** / glossary(359–388) `41D8D3C53148B5BFBA313D3C612F7887` /
+  index(389–402) `C125CE5357865125A6B484F68E9EE3AC`。
+  ⚠ **版本锚定**：Core 数字化本是 **Cambridge Books Online（2005 平装，已含 2000 年 "with corrections"）**。
+  → 因此 [S] 说「按 Joe 勘误表更正」的那几处（(5.3.5)、(5.4.10)、(8.6.19) 等），**页图上看到的已经是更正后的文本**，
+  「官方勘误表取不到」这个系统性风险随之大幅降低（KITP 三条 URL 仍 404，但已不再是必需品）。
   ⚠ 注意 `assets.cambridge.org/.../frontmatter/*.pdf` 仍然 **Socket is closed**（与旧记录一致）；**要走 Core 的 `/services/` 端点**。
 - **⚠ Schrans 伴读笔记（[S]）没有第 2 卷版本（2026-09-11 确认）。** hepnotes.com 首页明写该 string 笔记只覆盖
   「the first 8 chapters of volume 1」，`joes-book-2.pdf` 不存在。**别再找。**

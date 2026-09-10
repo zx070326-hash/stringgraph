@@ -1,0 +1,57 @@
+id: spectrum.vertex-operator-geodesic-renormalization
+kind: definition
+status: physical-argument
+title: 顶点算子的测地距离重整化 [F]_r 与重整化 Green 函数 G'_r = G' + (α'/2) ln d²
+statement: |
+  弯曲世界面上的顶点算子需要减除自缩并才有定义。本卡片固定所采用的减除方案（Polchinski §3.6）：
+  对 X 的泛函 F，定义**重整化算符**
+    [ F ]_r  =  exp( (1/2) ∫ d²σ d²σ2  Δ(σ, σ2)  δ/δX^μ(σ) · δ/δX_μ(σ2) )  F,
+  其中减除核取**测地距离**的对数
+    Δ(σ, σ2)  =  (α'/2) ln d²(σ, σ2),
+  d(σ,σ2) 是世界面度规下两点的测地距离（这是 (3.6.5)/(3.6.9) 的方案；
+  这里用 σ2 记第二个积分变量，原书写作带撇的 σ'）。
+
+  **效果**：在期望值中，凡出现两点函数 G'(σ_i, σ_j) 的地方一律被换成
+    G'_r(σ_i, σ_j)  =  G'(σ_i, σ_j) + (α'/2) ln d²(σ_i, σ_j)，
+  它在 σ_j → σ_i 时**有限**（G' 的对数短距离奇异性被减除核逐字抵消）。
+  边界上的算子另有**边界正规序**版本（(6.2.34)/(6.2.35)），本卡片不写出。
+
+  **本卡片不断言什么**：不断言该方案唯一（不同减除核相差顶点算子的有限重定义）；
+  不断言重整化后的算子仍是共形主场（那需要单独论证，见 notes）；
+  不给出边界正规序的显式表达式。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.15)/(6.2.16)（重整化 Green 函数，重合点有限），p.171；减除方案本身出自 §3.6 eq. (3.6.5)/(3.6.9)"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E92，等级 **L1**（schrans-2020 §6.10–§6.11，
+      笔记 p.284–285，逐页读到并逐步复现）。抽取记录明记这是「任务书要求的『正规化』在本章的
+      第一个落点：振幅的有限性来自顶点算子的重整化（自收缩减除），不是来自任何整体正规化方案」。
+      ⚠ §3.6 的 (3.6.5)/(3.6.9) 本身**本图没有节点**，抽取记录也未单独抽取，本卡片按 E92 的转述写。
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.34)/(6.2.35)（D₂ 边界上的边界正规序），p.174–176"
+    note: 抽取记录 #E95，等级 **L2**（只读到 schrans-2020 的目录条目）。本卡片只提及其存在，不写表达式。
+tags: [spectrum, tree-level, vertex-operator, renormalization, normal-ordering, green-function]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E92 建立。
+
+  **为什么 status = physical-argument（而不是 rigorous）**：本卡片是**定义卡**，但它定义的对象
+  （泛函微分算符作用在路径积分插入上）依赖未定义的路径积分测度；按 docs/STATUS_LEVELS.md
+  「definition 的 status 表示该定义卡本身的地位……physical-argument = 依赖路径积分等未定义对象」，
+  取 physical-argument。它会把依赖它的一切振幅节点压到同一水平——这是有意的。
+
+  **「G'_r 在重合点有限」这一句**：它是该方案的设计目的，本卡片把它写在 statement 里作为方案的
+  **直接效果**而不是独立命题（其内容就是「减除核 = 短距离奇异部分」的同义反复）。
+  若日后需要把它作为命题使用（例如论证 n 点函数的有限性），应另建 proposition 卡并给推导。
+
+  **与既有节点的关系**：worldsheet.conformal-normal-ordering 处理的是**平面上**自由标量的正规序
+  （减除 −(α'/2)ln|z|²）；本卡片是它在**弯曲世界面**上的推广（用测地距离代替 |z|），
+  两者在平坦度规下相差一个共形因子 ω 的项——这正是
+  spectrum.tachyon-expectation-conformal-factor-cancellation 处理的那个 ω。
+  抽取记录 E95 另记一处**记号陷阱**：闭弦四 tachyon 振幅算的是普通正规序 :e^{ik·X}: 而不是
+  [e^{ik·X}]_r，二者由「令 ω = 0」相联系，混用会差一个 exp(−(α'/4)Σ_i k_i² ω(z_i)) 因子。
+author: curator-polchinski-ch6
+created: "2026-09-11"

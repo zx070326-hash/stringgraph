@@ -1,0 +1,29 @@
+id: worldsheet.diff-weyl-metric-variation
+kind: proposition
+title: "diff × Weyl 下度规的无穷小变分：δg_ab = −2(P₁δσ)_ab + (2δω − ∇·δσ) g_ab"
+statement: |
+  设 (M, g) 是二维 Riemann 流形。在由向量场 δσ^a 生成的无穷小微分同胚与参数 δω 的无穷小
+  Weyl 变换的复合下，度规的变分为
+    δg_ab = − ∇_a δσ_b − ∇_b δσ_a + 2 δω  g_ab
+          = − 2 (P₁ δσ)_ab + ( 2 δω − ∇_c δσ^c )  g_ab ,
+  其中 P₁ 如 worldsheet.metric-variation-operator-p1 所定义。
+
+  该式把 δg 分成两块：**对称无迹部分** −2(P₁δσ)_ab（只由 δσ 的「非共形部分」贡献）
+  与**纯迹部分** (2δω − ∇·δσ) g_ab（Weyl 参数与 δσ 的散度只以组合 2δω − ∇·δσ 出现）。
+  推论：迹部分总可以被 δω 吸收，故 diff × Weyl 在度规上的作用等价于 P₁ 的像加上任意的纯迹项。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.4)（并见 (5.2.5)），p.151；同一式在 §3.3 已作为 (3.3.16) 出现"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E73，L1（读到 schrans-2020 §5.6–§5.7，
+      笔记 p.248–249；**未核对 Polchinski 原书**）。
+      抽取记录记下 [S] 逐字「This is just (3.3.16)」，即 §5.2 是把第 3 章已有的度规变分式重写。
+      (3.3.16) 的式号已在 worldsheet.faddeev-popov-ghost-action 处经 schrans-2020 目录核实。
+tags: [worldsheet, moduli, ckv, diff-weyl, gauge-fixing]
+notes: |
+  与 worldsheet.metric-variation-with-moduli 的关系：那条是本式加上模的贡献
+  Σ_k ∂_{t^k} ĝ_ab δt^k（原书 (5.3.5)，且该式**在印刷版里有误**，见那张卡的 gaps）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

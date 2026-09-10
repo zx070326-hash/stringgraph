@@ -1,0 +1,54 @@
+id: spectrum.open-string-four-tachyon-amplitude
+kind: proposition
+title: 开弦四 tachyon 树振幅：第四个坐标沿边界积分，给出 Beta 型积分 I(s,t)
+statement: |
+  在 D₂（上半平面）上取四个开弦 tachyon 顶点算子插在边界实轴上。PSL(2,R) 只能固定三个位置
+  （worldsheet.disk-conformal-killing-group），**第四个位置 y 不能被固定，必须沿边界积分**。
+  于是振幅形如
+    S_{D₂}(k₁;…;k₄)
+      = i g_o⁴ C_{D₂} (2π)²⁶ δ²⁶(Σ_i k_i) × [ 各循环序的积分之和 ]，
+  其中每个循环序的积分在固定 y₁ = 0、y₂ = 1、y₃ → ∞ 后化为一维实积分。
+  用 Mandelstam 变量（spectrum.mandelstam-invariants-sum-rule）写出时，
+  区间 (0,1) 上的那一段是 Euler Beta 型积分
+    I(s, t) = ∫₀¹ dy  y^{−α' s − 2} (1 − y)^{−α' t − 2},
+  即 I(s,t) = B(−α(s), −α(t))，α(x) ≡ 1 + α' x 是开弦的领头 Regge 轨迹
+  （math.euler-beta-integral、worldsheet.leading-regge-trajectory）。
+  三个区间 (−∞,0)、(0,1)、(1,∞) 给出 s、t、u 三种通道的贡献。
+
+  ⚠ **本卡片对表达式的核实程度**：「第四点须积分」「用 Mandelstam 变量改写」「结果是 Beta 型积分」
+  三点有来源（(6.4.5)、(6.4.7)–(6.4.9)）；**上式中被积函数的具体幂次与整体前因子是 curator 由
+  Veneziano 弱形式（[S] 的 [6.143]）反推的**，原书 (6.4.5) 的显式写法未核实，见 gaps。
+
+  **本命题不断言什么**：不给出三段积分合并后的完整表达式（那是
+  spectrum.veneziano-amplitude-weak，且只建弱形式）；不定 C_{D₂}。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.5)（四点振幅，第四个坐标沿边界积分）、(6.4.7)（Mandelstam 变量）、(6.4.8)/(6.4.9)（用 Mandelstam 写出），p.179–183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E98，等级 **L1**（schrans-2020 §6.30–§6.37，
+      笔记 p.300–307，逐页读到并逐步复现）。
+      ⚠ 抽取记录**没有抄出 (6.4.5) 的被积函数**；本卡片写出的幂次
+      y^{−α's−2}(1−y)^{−α't−2} 是 curator 由 [S] [6.143] 的 Beta 参数 (−α's−1, −α't−1)
+      反推的（B(a,b) 的 Euler 积分表示 ⇒ 幂次 a−1 = −α's−2）。**未核对原书。**
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.20)–(6.4.22)（Beta 函数表示）"
+    note: 抽取记录 #E99，L1（[S] §6.39–§6.41，笔记 p.308–309）。
+tags: [spectrum, tree-level, disk, open-string, tachyon, four-point, beta-function]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E98 建立。
+
+  **⚠ 上游 ch5 节点尚未进入 main**（主公式 (5.3.9)、FP 手续），处理同本批次其它节点。
+
+  **发散的处理方式值得记录**（任务书「正规化」在本章的第三个落点）：抽取记录 E98 逐字引 [S] §6.34：
+  「In order to avoid any divergences, we first **replace the upper integration boundary 1 by r**,
+  work in the region where the integrand is convergent and then **take the limit of r → 1**」
+  ——即**解析延拓**，不是任何别的正规化方案。积分只在 Re(−α's−1) > 0 等条件下收敛，
+  其余参数值由 Beta 函数的亚纯延拓定义（math.euler-beta-integral），
+  端点发散则被解读为中间态极点（spectrum.four-tachyon-factorization-disk-normalization）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

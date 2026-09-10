@@ -1,0 +1,43 @@
+id: math.mixed-anomaly-trace-conditions-n32--via-integer-linear-solve
+target: math.mixed-anomaly-trace-conditions-n32
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    inferred: false
+    note: |
+      【reviewer-gs1984 2026-09-11】改 inferred: false：这条边本身在原文 "in eq. (12)" 处可查；inferred 的是陈述里的 USp 分支，不是边——USp 归属留在 gaps。
+      只为陈述的第 (2) 部分（把 l = ∓1 读成 SO/USp）提供记号；
+      第 (1) 部分是纯 ℤ 上的算术，不依赖任何图内节点。
+      标 inferred: true 的理由与 math.tr-f6-coefficient-vanishing--via-coefficient-inspection 相同：
+      **(2) 的 USp 分支（两条件给 16 与 28、互相矛盾）在 GS 原文中不存在**，
+      GS 只把 N + 8l = 24 与 N + 2l = 30 用于确认 SO(32)（抽取记录 Q4）。
+  - id: conv.gauge-trace-normalization
+    note: N 与 l 的含义（基本表示维数、SO/USp 的符号）由该约定与迹恒等式节点共同固定。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611）：「The cancellation requires that `N + 8l = 24` and `N + 2l = 30` in eq. (12).」"
+    note: |
+      GS 给出方程并直接跳到「two independent confirmations of … SO(32)」，
+      **不写解方程这一步**。本推导把它显式化。抽取记录 E15。
+summary: |
+  **(1)** 两式相减：(N + 8l) − (N + 2l) = 24 − 30，即 6l = −6，故 l = −1；
+  代回 N + 2(−1) = 30 得 N = 32。两步都是等价变形，故解存在且唯一：(N, l) = (32, −1)。
+  验算：32 + 8(−1) = 24 ✓，32 + 2(−1) = 30 ✓。
+
+  **(2) SO(N)（l = −1）**：两条件分别是 N − 8 = 24 与 N − 2 = 30，各自都给 N = 32。
+  这就是 GS 所谓「两次独立确认」：混合反常的两个不同结构（(22) 中 tr R² tr F⁴ 一路与
+  tr F² tr R⁴ 一路）各给一条件，而它们在 l = −1 上相容。
+
+  **(2) USp(N)（l = +1）**：N + 8 = 24 给 N = 16，N + 2 = 30 给 N = 28，
+  16 ≠ 28，故无解。**这一步 GS 原文没有写**（见 gaps）。
+gaps:
+  - "USp 一支（本推导 (2) 的后半）在 GS 原文中不存在：GS 给了 l = +1 却从不讨论 USp 的排除，这是抽取者的推论（抽取记录 Q4）。结论本身平凡，但归属必须记清。"
+  - "缺 reviewer 独立复核记录，故按 docs/STATUS_LEVELS.md 不取 rigorous；Lean 化后（`omega` 一行）可直接给 formalized 推导。"
+  - "「这两条方程确实是混合反常抵消的条件」不由本推导承载，且其相对归一化外包给未取得的 alvarez-gaume-witten-1984 eq. (63)；见 consistency.anomaly-cancellation-so32-effective-theory 的 gaps。"
+notes: |
+  reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
+  本条的算术由 curator 于 2026-09-11 重算，与抽取记录 §5.2 一致；
+  curator 不算独立 reviewer，故不写 `reviewer-verified`。
+author: curator
+created: "2026-09-11"

@@ -1,6 +1,6 @@
 id: worldsheet.momentum-tower-fock-space
 kind: definition
-status: rigorous
+status: formalized
 title: 沿一个参考向量的动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)：移位算子 e^{i n k_0·x}、层间正交的双线性型（约定式）、逐层作用的 α^μ_n 与 L_m
 statement: |
   固定 D ∈ N、交换环 R（凡出现 L_m 处另设 R 为 Q-代数）、**对角**时空度规分量
@@ -83,8 +83,8 @@ uses:
   - worldsheet.virasoro-generators-free-boson
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 formal:
-  lean_decl: StringFormal.NoGhost.TowerFock
-  lean_file: StringFormal/NoGhost/DDF.lean
+  lean_decl: StringFormal.NoGhost.Fock.towerPairing
+  lean_file: StringFormal/NoGhost/TowerPairing.lean
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{TowerFock, towerMomentum, towerShift, towerDiag, towerMode, towerLop}；towerShift_zero / towerShift_comp / towerShift_single / towerMode_single / towerLop_single / lie_towerLop_towerMode / lie_towerMode_towerVertex（其 p = 0 情形即本卡 (1)(ii) 的内容）"
@@ -99,14 +99,53 @@ sources:
       "j = −N" 指的是 worldsheet.no-ghost-theorem-v4 用**振子能级** N 标层（动量 k − N k_0）
       的那套记法，与本卡的 N 差一个符号，见 notes【三套层指标的字典】。
 
-      ⚠ **本卡 status 只能 rigorous，不能 formalized**：Lean 侧有塔（`TowerFock`）、移位算子
-      （`towerShift`，含 (1)(i) 的群律与 (1)(ii) 的动量移位）、逐层算子
-      （`towerDiag`/`towerMode`/`towerLop`），**但没有塔上的双线性型**——2026-09-11 curator
-      对 DDF.lean 全文 grep `pairing`，零命中；`Fock.pairing` 只存在于单层（Fock.lean），
-      VertexOperator.lean 文件头 "Mathematical gaps" 第 3 条也只谈单层的型。
-      故本卡的 (2) 与 (4) **没有机器验证**。formal 字段仍填 `TowerFock`，
-      与 worldsheet.virasoro-algebra 的做法一致（lean_decl 指向只覆盖陈述一部分的声明，
-      缺口写在这里）。
+      ⚠ **已过期（2026-09-11 下午）。** 原文逐字如下，保留作记账：
+      「本卡 status 只能 rigorous，不能 formalized：Lean 侧有塔（`TowerFock`）、移位算子
+       （`towerShift`，含 (1)(i) 的群律与 (1)(ii) 的动量移位）、逐层算子
+       （`towerDiag`/`towerMode`/`towerLop`），**但没有塔上的双线性型**——2026-09-11 curator
+       对 DDF.lean 全文 grep `pairing`，零命中；……故本卡的 (2) 与 (4) 没有机器验证。」
+      formalizer 在提交 1a7445e（合并 7e7c513）新建 TowerPairing.lean 补上了塔上的型，
+      (2)(4) 与 (3) 的 L_m 那半现均有逐句对应的 Lean 声明，见**下一条来源**；
+      `formal.lean_decl` 已由 `TowerFock` 改指 `Fock.towerPairing`。
+      本条来源保留，因为【塔】与 (1)(3) 的对象（`TowerFock`/`towerShift`/`towerDiag`）仍在 DDF.lean。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/TowerPairing.lean :: StringFormal.NoGhost.Fock.{towerPairing, towerPairing_apply, towerPairing_single_left, towerPairing_single_single, towerPairing_single_single_of_ne, towerPairing_comm, towerPairing_towerShift_left, towerPairing_towerShift_right, towerPairing_towerMode_left, towerPairing_towerMode_right, towerPairing_towerLop_left, towerPairing_towerLop_right}；另 StringFormal.NoGhost.{towerShift_apply, towerDiag_apply, towerMode_apply, towerLop_apply}"
+    note: |
+      本仓库，形式化提交 1a7445e（"formal: add the bilinear form on the DDF momentum tower"），
+      合并提交 7e7c513。**这一条承载本卡 (2) 与 (4)**（即上一条来源的 ⚠ 所说的缺口）：
+        · (2) 塔上的型 ⟨v,w⟩_T = Σ_N ⟨v_N,w_N⟩ ↔ `Fock.towerPairing η :=
+          Finsupp.lsum R fun j => (pairing η).compl₂ (Finsupp.lapply j)`，类型为
+          `LinearMap.BilinForm R (TowerFock D R)`（双线性按构造成立，`towerPairing_add_left`
+          等只是把它展开）；计算规则 `towerPairing_apply`（= v.sum fun j P => pairing η P (w j)，
+          即本卡的有限和）；对称性 `towerPairing_comm`（逐层继承 `Fock.pairing_comm`）；
+        · (2) 的「不同层正交」↔ **`towerPairing_single_single_of_ne`**
+          （i ≠ j ⟹ ⟨single i P, single j Q⟩_T = 0）；
+        · (4) S_n^† = S_{−n} ↔ **`towerPairing_towerShift_left`**
+          （⟨towerShift n v, w⟩ = ⟨v, towerShift (−n) w⟩），配套 `towerPairing_towerShift_right`；
+        · (3) 里「逐层作用的 α^μ_p 与 L_m，其伴随逐层继承」那半 ↔
+          `towerPairing_towerMode_left`（(α^μ_p)^† = α^μ_{−p}，含 p = 0 的逐层标量情形）与
+          **`towerPairing_towerLop_left`**（L_m^† = L_{−m}，需 `[Algebra ℚ R]`，与本卡首句
+          「凡出现 L_m 处另设 R 为 Q-代数」一致）。
+      索引字典同上一条（Lean 的 rung 指标 j = 本卡的层指标 N）。文件头自述的约定与本卡边界 (d)
+      一致：型是 **R-双线性**而非半双线性，全文未用 η 或动量的任何实性假设。
+
+      ⚠ **机器验证的到底是什么（formalizer 2026-09-11 的观察，逐条保留）**：
+      在 Lean 里「层间正交」**不是定理而是定义的推论**——`towerPairing` 被定义成各层配对的
+      **单位权 Finsupp 求和**，`towerPairing_single_single_of_ne` 只是把该定义在 rung 基上展开。
+      因此机器验证的内容是**这套约定自洽、且本卡 (4) 由它推出**，
+      **不是** δ^D(p − p′) 型的动量正交性本身（后者在本图中没有节点承载，
+      见 statement (2) 的 ⚠ 与 notes【层间正交这条约定的风险登记】）。
+      与此相应：三条伴随中**只有 `towerPairing_towerShift_left` 真正用到该约定**
+      （它跨层，文件头逐字写着 "it is not a consequence of anything in `Fock.lean`"）；
+      `towerPairing_towerMode_left` 与 `towerPairing_towerLop_left` 不移动层指标，
+      **只是逐层继承** `Fock.pairing_mode_left` / `Fock.pairing_Lop_left`。
+
+      Lean 侧仍未做（不影响本卡：按边界 (c)(e) 本卡也不断言它们）：型的非退化性、任何正定性、
+      任何拓扑完化；以及顶点算子 `towerVertex` 的伴随（需 `vertexOsc` 的伴随，即
+      worldsheet.vertex-operator-adjoint），故 A^i_n 的伴随在 Lean 侧仍不可用。
+      **curator 未自行重跑 `lake build`**；依据是 formalizer 在总线上的报告
+      （"lake build ok, 42 decls axiom-clean"，消息 577）、formal/TODO.md 第 (1b) 项与
+      formal/CLAUDE.md 的文件表，以及 7e7c513 已由 lead 合并进 main。
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
     note: |
@@ -151,13 +190,29 @@ notes: |
   worldsheet.ddf-operators-adjoint 的【承载断言的空间】一段用的正是本卡的记法
   （T(p;k_0) := ⊕_{N∈Z} F(p + N k_0)，A^i_n 把第 N 层送到第 N+n 层），逐字一致。
 
-  【status: rigorous 的理由】本卡是纯代数构造：已有 R-模的外部直和、指标平移、直和双线性型，
-  没有收敛性问题、没有路径积分、没有连续动量。按 docs/STATUS_LEVELS.md，
-  definition 的 status 表示该定义卡本身的地位；不填 formalized 的唯一理由是
-  **Lean 里没有塔上的型**（见 sources 第一条的 ⚠），(2) 与 (4) 无机器验证。
-  升级路径：在 DDF.lean（或新文件）上定义 `towerPairing := Σ_j Fock.pairing`（逐层配对求和），
-  证 `towerShift` 关于它的伴随即本卡 (4)，随后本卡可升 formalized。
-  这条待办 2026-09-11 由 curator 记在本卡；formal/TODO.md 由 formalizer 维护，本卡不改它。
+  【status：rigorous → formalized（2026-09-11 下午，curator）】本卡是纯代数构造：已有 R-模的
+  外部直和、指标平移、直和双线性型，没有收敛性问题、没有路径积分、没有连续动量。
+  按 docs/STATUS_LEVELS.md，definition 的 status 表示该定义卡本身的地位（formalized =
+  有 Lean 声明逐句对应）。**原先不填 formalized 的唯一理由——「Lean 里没有塔上的型，
+  (2) 与 (4) 无机器验证」——已消失**：formalizer 在 1a7445e（合并 7e7c513）新建
+  TowerPairing.lean，对应关系是
+    (2) ↔ `Fock.towerPairing` + `towerPairing_single_single_of_ne`（含 `towerPairing_apply`
+        与 `towerPairing_comm`）；
+    (4) ↔ `towerPairing_towerShift_left`；
+    (3) 的 L_m 那半 ↔ `towerPairing_towerLop_left`（α^μ_p 那半 ↔ `towerPairing_towerMode_left`），
+  逐条对照见 sources 第二条。`formal.lean_decl` 因此由 `TowerFock` 改指 `Fock.towerPairing`
+  （塔本身仍是 `TowerFock`，在 sources 第一条）。上一版记在这里的升级路径
+  （「定义 towerPairing := Σ_j Fock.pairing，证 towerShift 关于它的伴随」）至此完成。
+
+  ⚠ **升级的诚实边界（formalizer 的观察，必读）**：Lean 里「层间正交」是 `towerPairing`
+  **定义**（各层配对的单位权 Finsupp 求和）的推论，不是定理；机器验证的是
+  **这套约定自洽、并且 (4) 由之推出**，**不是** δ^D(p − p′) 正交性本身。
+  三条伴随中只有 `towerPairing_towerShift_left`（跨层）真正用到该约定；
+  `towerPairing_towerMode_left` / `towerPairing_towerLop_left` 不移动层指标，只是逐层继承
+  单层引理。故下面【层间正交这条约定的风险登记】**一字未改地仍然有效**：
+  形式化把这条约定钉成了 Lean 定义，并没有把它变成定理；
+  要收紧仍需一条「离散塔模型 ↔ 连续动量模型」的独立陈述，本图仍无此节点。
+  formal/TODO.md 由 formalizer 维护，本卡不改它。
 
   【层间正交这条约定的风险登记】它不是无害的记号选择：无鬼定理断言的正定性是**塔上**那个型的性质
   （worldsheet.no-ghost-theorem-v4 (1b)），而塔上的型有一半内容（跨层为零）是本卡规定的。

@@ -1,0 +1,52 @@
+id: consistency.descent-forms-chern-simons
+kind: definition
+status: physical-argument
+title: 下降形式 ω⁰_{2n+1} 与 ω¹_{2n}（Chern–Simons 形式及其规范变分，只定到相差恰当形式）
+statement: |
+  在 conv.gauge-trace-normalization 的记号下（F = dA + A²，楔号省略，tr 是基本表示的迹），
+  对 n ≥ 1 引入两族微分形式：
+
+  · **ω⁰_{2n+1 Y}**（2n+1 形式），由
+
+        d ω⁰_{2n+1 Y} = tr F^{n+1}                                    (GS (15))
+
+    定义，**只定到相差一个恰当形式**（原文逐字：「where ω⁰_{2n+1 Y} is defined (up to an exact form) by」）。
+    n = 1 的标准取法是 ω⁰_{3Y} = tr(A F − ⅓ A³)（GS (5)(6)），n = 3 给出 S₁ 里用到的 ω⁰_{7Y}。
+
+  · **ω¹_{2n Y}**（2n 形式），由无穷小规范变换 δ 作用在上一族上给出：
+
+        δ ω⁰_{2n+1 Y} = − d ω¹_{2n Y}                                  (GS (16))
+
+    同样**只定到相差一个恰当形式**。反常本身写成 ∫ω¹_{2n} 的形式（例如 (17) 的 G）。
+
+  · **洛伦兹一路**：把 (A, F) 换成自旋联络与曲率 (ω, R)、下标 Y 换成 L，记号与关系相同；
+    ω⁰_{3L} = tr(ω R − ⅓ ω³)，dω⁰_{3L} = tr R²（GS (7)(8)），S₂/S₃ 里用到 ω⁰_{7L}、ω¹_{10L}。
+
+  **本卡不含**：ω⁰_{2n+1} 与 ω¹_{2n} 的**显式表达式**（n ≥ 2）。GS 逐字把它们外包给 ref. [9]
+  = Zumino–Wu–Zee（本项目未取得全文）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(5)(6)(7)(8)（n = 1 的显式式子）与 (15)(16)（一般 n 的下降关系）；「Explicit expressions for ω⁰_{2n+1 Y} are given in ref. [9]」"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E9。
+  - ref: zumino-wu-zee-1984
+    loc: "全文（GS ref. [9]；显式的下降形式表达式）"
+    note: |
+      **本项目未取得全文（L0）**。列在这里是因为 GS 明确把显式表达式外包给它，
+      本卡的「不含」一段直接指向这条。抽取记录 Q2。
+tags: [anomaly, chern-simons, descent-equations, differential-forms, green-schwarz]
+notes: |
+  【为什么 status 取 physical-argument 而不是 rigorous】下降方程本身是标准的 Chern–Weil / BRST 下降
+  内容，数学上是可以严格化的；但**本卡定义的对象不唯一**：ω⁰_{2n+1} 与 ω¹_{2n} 各只定到恰当形式，
+  而 consistency.gs-counterterms-1984 里的 S₁ (18)、S₃ (23) 显式含 ω⁰_{7Y}、ω⁰_{7L}，
+  取不同代表元会改变这些反项的具体表达式。也就是说：**本图目前掌握的定义不足以唯一确定下游对象**，
+  而能补上这一点的唯一来源（zumino-wu-zee-1984）没有取到。按「不确定选低一级」取 physical-argument。
+
+  升级路径：取得 Zumino–Wu–Zee 1984 或任何给出显式 ω⁰_{2n+1} 的来源（Bilal 2008 §12 的 Q₃/Q₅/Q₇
+  是候选，但本项目只读了 §12 的部分内容且其符号约定与 GS 反号，见 conv.gauge-trace-normalization notes）。
+
+  【与现代记号的对照】现代文献常把这两族写成 Q_{2n+1}(A, F) 与 Q¹_{2n}，
+  并把整套关系叫「Stora–Zumino 下降方程」。GS 1984 不用这些名字。
+author: curator
+created: "2026-09-11"

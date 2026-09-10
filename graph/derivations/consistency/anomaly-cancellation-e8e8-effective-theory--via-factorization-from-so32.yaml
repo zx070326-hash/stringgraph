@@ -1,0 +1,67 @@
+id: consistency.anomaly-cancellation-e8e8-effective-theory--via-factorization-from-so32
+target: consistency.anomaly-cancellation-e8e8-effective-theory
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.anomaly-cancellation-so32-effective-theory
+    note: |
+      **这条边就是 GS 的论证本身**，逐字：「Given the cancellation of mixed anomalies in SO(32)
+      the possibility of their cancellation in E₈ × E₈ follows from eq. (19).」
+      E₈ × E₈ 的混合反常**没有独立验算**。
+  - id: math.anomaly-twelve-form-factorization
+    note: (19)。上一条边所说的「follows from eq. (19)」里的 (19)。
+  - id: math.e8-adjoint-trace-identities
+    note: |
+      (12a′)(12b′)(12c′)。规范反常一路 GS 逐字「It follows from eq. (12c′) by the same reasoning
+      as before」，即把 SO(32) 一路的论证换上 E₈ 的迹恒等式重跑一遍。
+  - id: consistency.gs-counterterms-1984
+    note: (18′)(21)(23′) 三段反项（S₂ 与 SO(32) 共用）。
+  - id: consistency.h-field-strength-chern-simons
+    note: (4′) 的 H（两个 E₈ 因子各带 1/30）与 (9c′) 的 δB。
+  - id: consistency.gravitational-anomaly-requires-496-fermions
+    note: |
+      n = 496；E₈ × E₈ 的伴随维数 2 × 248 = 496。GS 的**早期版本**恰恰只注意到这一条
+      （致谢逐字，见目标节点 notes 第 2 条）。
+  - id: conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(17′)(18′) 与引导句「It follows from eq. (12c′) by the same reasoning as before」；PLB p.120–121（重印 611–612），(23′) 与引导句「Given the cancellation of mixed anomalies in SO(32) the possibility of their cancellation in E₈ × E₈ follows from eq. (19).」；PLB p.122（重印 613）致谢段"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E12/E16/E19。
+summary: |
+  **(A) 纯 Yang–Mills 反常。** 由 (12c′)（E₈ 的迹恒等式）代替 (12c)，"by the same reasoning as
+  before" 得到相容反常
+      G′ = (c/108000) ∫ [ ω¹_{2Y₁} (tr₁F²)² + ω¹_{2Y₂} (tr₂F²)² ]                  (17′)
+  它由反项
+      S′₁ = (c/108000) ∫ { 30 B [ (tr₁F²)² + (tr₂F²)² − tr₁F² tr₂F² ]
+                            − ω⁰_{3Y₁} ω⁰_{3Y₂} (tr₁F² − tr₂F²) }                   (18′)
+  抵消。注意 E₈ 一路根本没有单迹六阶项可言：(12c′) 说 Ω₁₂ 整个正比于 (tr F²)³，
+  这正是 Chapline–Slansky 指出的「E₈ 无独立四阶、六阶 Casimir」的后果。
+
+  **(B) 纯引力反常。** 与 SO(32) 完全相同：n = 496（E₈ × E₈ 的维数 2 × 248 = 496），
+  剩余两项由**同一个** S₂ (21) 抵消（S₂ 不含规范场）。
+
+  **(C) 混合反常。** ★ **GS 没有独立算**。逐字「Given the cancellation of mixed anomalies in
+  SO(32) the possibility of their cancellation in E₈ × E₈ follows from eq. (19).」
+  论证的骨架是：混合反常的结构只通过 Ω₄、Ω₈、Ω₁₂ 的组合进入，而 (19) 说
+  Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²] **对两个群同时成立**；既然 SO(32) 一侧已经配平，
+  同样的组合在 E₈ × E₈ 一侧也配平，只需重新分配系数。显式结果是
+      S′₃ = (c/7200) ∫ ( 30 B tr R² tr₁F² + 5 ω⁰_{3L} ω⁰_{3Y₁} tr R² + 20 ω⁰_{3Y₁} ω⁰_{7L}
+                         + ω⁰_{3Y₁} ω⁰_{3L} tr₁F² + ω⁰_{3L} ω⁰_{3Y₁} tr₂F² ) + (1 ↔ 2)   (23′)
+
+  **合并**：S′₁ + S₂ + S′₃ 抵消 E₈ × E₈ 的全部单圈反常。
+gaps:
+  - "★ **(C) 完全没有独立验算**：GS 只说「follows from eq. (19)」，中间步骤（混合反常如何只通过 Ω₄, Ω₈, Ω₁₂ 的那一个组合进入）**原文没有写出**，本图也没有补。这是本节点比 SO(32) 节点更弱的地方。"
+  - "本推导 summary 里 (C) 的「论证骨架」两句是 curator 的重构，不是原文措辞；原文只有那一句话。若 reviewer 认为重构不当，应删到只剩引文。"
+  - "继承 consistency.anomaly-cancellation-so32-effective-theory 的全部 gaps（尤其数值系数外包给未取得的 alvarez-gaume-witten-1984）。"
+  - "E₈ 迹恒等式本身在所有来源里都没有证明（见 math.e8-adjoint-trace-identities--via-casimir-structure 的 gaps）。"
+  - "(18′) 的 108000 与 (23′) 的 7200 这些数字，GS 未说明来历。"
+notes: |
+  【为什么这条推导以 SO(32) 节点为依赖】因为 GS 的论证就是这么走的（见 depends_on 第一条的逐字引文）。
+  图里这条边把「E₈ × E₈ 一支的可信度不高于 SO(32) 一支」这件事记了账：任何压低 SO(32) 节点的
+  缺口都会自动压低这里。
+
+  【归属提醒】E₈ × E₈ 这一半的关键输入来自 Chapline–Slansky（私人交流），
+  独立观察者还有 Dixon–Harvey–Witten 与 Thierry-Mieg；GS 的预印本版本遗漏了这一半。
+  详见目标节点 notes 第 2 条与抽取记录 E19。
+author: curator
+created: "2026-09-11"

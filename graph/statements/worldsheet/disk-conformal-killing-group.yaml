@@ -1,0 +1,57 @@
+id: worldsheet.disk-conformal-killing-group
+kind: proposition
+title: 圆盘的共形 Killing 群是 PSL(2,R)，κ(D₂) = 3；边界三点可被固定，两种循环序不等价
+statement: |
+  设 D₂ 按 worldsheet.tree-level-worldsheet-topologies 实现为上半平面 H（边界 = 实轴 ∪ {∞}）。则：
+
+  **(1)** D₂ 的共形 Killing 向量是 S₂ 的 CKV 中与认同 z ∼ 1/z̄ 相容（等价地：在实轴上取实值，
+  δz|_{z ∈ R} ∈ R）的那些，即 δz = a₀ + a₁z + a₂z² 且 a₀, a₁, a₂ **全为实**。
+  故 **κ(D₂) = 3 个实 CKV**，相应的整体群是实 Möbius 群
+    z ↦ (αz + β)/(γz + δ),  α,β,γ,δ ∈ R,  αδ − βγ = 1，模去 ±1，
+  即 **PSL(2,R)**；它把 H 映到 H、把边界映到边界。
+  与 Riemann–Roch 的对照：χ(D₂) = 1、μ(D₂) = 0，故 3χ = κ − μ = 3 − 0 = 3。
+
+  **(2)（三点固定）** PSL(2,R) 在边界上**保持定向**，因而保持三点的**循环序**：
+  给定边界上三个互不相同的点 y₁, y₂, y₃，存在唯一的 PSL(2,R) 元把它们送到任一组指定的
+  **同循环序**的三点；而 (y₁,y₂,y₃) 与 (y₁,y₃,y₂) 这两个循环序**不被** PSL(2,R) 联系，
+  是两条不同的轨道。
+  **后果**：开弦树级振幅在用 PSL(2,R) 固定三个边界坐标之后，仍需对这**两种循环序求和**
+  ——这正是 spectrum.open-string-three-tachyon-amplitude 中 「+ (k₂ ↔ k₃)」项的来源。
+
+  **本命题不断言什么**：不断言 D₂ 无模（μ = 0 属第 5 章 Riemann–Roch，本图暂无节点，
+  这里只作对照记录）；不涉及 Chan–Paton 因子（两种循环序各自配的迹见 spectrum.chan-paton-*）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4 开头（三 tachyon 开弦振幅的推导，p.179 附近）：D₂ 上 3χ = κ − μ = 3 − 0，三个被固定的坐标落在实轴上，按循环序有两种；**无式号**"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E90，等级 **L1（内容）/ L0（式号）**：
+      来源是 schrans-2020 §6.27（笔记 p.299，逐页读到）配图 6.7。抽取记录 §7 明记本条**无式号**。
+      ⚠ **「PSL(2,R)」这个记号写在原书哪一式未核实。**
+      ⚠ **本条存在文献歧义**（见推导 gaps 与本卡 notes）：[S] 的逐字句子写
+      「fixed on the real axis … **in two ways that are linked by a PSL(2,R) transformation**,
+      depending on the cyclic order」，而抽取记录的转述写「两种**不被** PSL(2,R) 联系的循环序」。
+      两者相反。本卡片按「不被联系」写，理由见 notes。
+  - ref: schrans-2020
+    loc: "§6.27（笔记 p.299）+ 图 6.7：内容的实际读取来源（核对源）"
+tags: [worldsheet, tree-level, disk, conformal-killing-vector, psl2r, open-string, cyclic-order]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E90 建立。
+
+  **⚠ 文献歧义与本图的取舍（须记入 auditor 视野）**：如 sources 所记，[S] 的逐字句子与抽取者的
+  转述在「两种循环序是否被 PSL(2,R) 联系」上**正好相反**。本卡片采「**不被**联系」，三条理由：
+  (a) 数学上 PSL(2,R) 是 H 的保定向自同构群，在 ∂H ≅ S¹ 上保持定向、因而保持循环序，
+      不可能把 (y₁,y₂,y₃) 送到 (y₁,y₃,y₂)（见 math.mobius-group-sharply-three-transitive）；
+  (b) 若两种序被 PSL(2,R) 联系，(6.4.2) 就不会出现「+ ⟨k₂ ↔ k₃⟩」这一项——而抽取记录 E97
+      逐字记录了该项的存在，这是**独立于 [S] 那句话的**书内证据；
+  (c) [S] 的句子也可能是他自己的笔误或省略（同一条 E90 里抽取者已指出他在 E89 有一处类似笔误）。
+  但 **(a) 是 curator 的数学论证、不是文献内容**，故本卡片的推导标 physical-argument，
+  并把这条歧义登记在案，建议由 auditor 在有原书时核对 §6.4 开头的原文措辞。
+
+  **与第 5 章的接口（待补边）**：κ − μ = 3χ（E75, (5.2.9)）与 χ(D₂) = 1、μ = 0 都属第 5 章，
+  本批次提交时尚无节点。本卡片把它们作为**对照**写在 statement 里，不建依赖边；
+  待 ch5 节点合入后可补一条 --via-riemann-roch 的独立推导。
+author: curator-polchinski-ch6
+created: "2026-09-11"

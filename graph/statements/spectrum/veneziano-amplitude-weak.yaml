@@ -1,0 +1,60 @@
+id: spectrum.veneziano-amplitude-weak
+kind: proposition
+title: Veneziano 振幅（弱形式）：四开弦 tachyon 树振幅正比于三项 Beta 函数之和
+statement: |
+  开弦四 tachyon 树振幅（spectrum.open-string-four-tachyon-amplitude）的三段边界积分
+  用 Euler Beta 函数表出后，振幅具有结构
+    S_{D₂}(k₁;…;k₄)  ∝  δ²⁶(Σ_i k_i) ·
+      [ B(−α's − 1, −α't − 1) + B(−α's − 1, −α'u − 1) + B(−α't − 1, −α'u − 1) ]，
+  其中 B 是 Euler Beta 函数（math.euler-beta-integral），s, t, u 是 Mandelstam 变量，
+  且 α's + α't + α'u = −4（spectrum.mandelstam-invariants-sum-rule）。
+  用开弦 Regge 轨迹 α(x) = 1 + α'x 写，三个参数即 −α(s)、−α(t)、−α(u)。
+  这就是 **Veneziano 振幅**。
+
+  ⚠⚠ **本卡片刻意只建「弱形式」**：
+  - 断言的只有「**正比于**上述三项 Beta 函数之和」这个**结构**；
+  - **整体前因子（含 g_o、C_{D₂}、i、(2π)²⁶ 的组合）本图未核实、不写出**；
+  - 因此本卡片**不能**用于任何需要绝对归一化的下游（例如与 Yang–Mills 耦合比较），
+    那些下游必须另找来源。
+
+  **本命题不断言什么**：不断言这三项就是原书 (6.4.23) 的逐字形式；不给出前因子；
+  不断言 Beta 函数的极点全部对应物理态（那需要逐个留数检验，见
+  spectrum.four-tachyon-factorization-disk-normalization 与
+  spectrum.massless-open-pole-requires-chan-paton）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.23)（Veneziano 振幅），并见 (6.4.20)–(6.4.22)（Beta 函数表示），p.183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E99，等级 **L1（式号 + 推导路线）/ L2（表达式）**。
+      ⚠⚠ **这是本章表达式层面最弱的一条**，抽取记录逐条列出理由：
+      (a) **schrans-2020 没有把 (6.4.23) 抄出来**；他对该式的全部注释只有一句
+          「This is straightforward. Use (6.4.9) and plug in the expression for C_{D₂}
+          and the expression of I in terms of the Beta functions (6.4.20).」
+      (b) 本卡片写出的三项 Beta 结构取自 [S] §6.41 的 [6.143]
+          （𝔅 = B(−α's−1,−α't−1) + B(−α's−1,−α'u−1) + B(−α't−1,−α'u−1)），
+          那是他**为算 Regge 行为而写的、(6.4.23) 的「Beta 函数部分」**，**整体前因子未给**。
+      (c) 第二个方向一致但**不同形**：headrick-2008 Problem 6.9 算的是四**规范玻色子**振幅，
+          出现 B(−α't+1,−α's−1)、B(−α't+1,−α'u+1)、B(−α'u+1,−α's−1)，
+          **参数偏移不同（不是 tachyon）**，不能互证。
+      (d) 抽取记录的结论逐字：「**curator 若要写出 (6.4.23) 的显式表达式，必须先核对原书。**」
+      本卡片遵此，只建弱形式。
+  - ref: schrans-2020
+    loc: "§6.39–§6.41（笔记 p.308–309）：三项 Beta 结构的实际来源 [6.143]（核对源）"
+tags: [spectrum, tree-level, open-string, tachyon, veneziano, beta-function, four-point, weak-form]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E99 建立，**按任务书要求只建弱形式**。
+
+  **历史意义（不入陈述）**：Veneziano 1968 的这个 Beta 函数拟设是弦论的起点；
+  本图目前没有登记 Veneziano 的原始论文，本卡片的来源只有 Polchinski（且经二手源转述）。
+  若日后 researcher 登记 veneziano-1968，可为本卡片补一条独立推导，
+  并借机核对前因子——那也是把本卡片从「弱形式」升级为完整形式的自然时机。
+
+  **升级路径（须新建节点，不得改本卡）**：核对原书 (6.4.23) 后，
+  新建 spectrum.veneziano-amplitude（含前因子）并在本卡写 superseded_by。
+  按 graph/CLAUDE.md，**不得**直接修改本卡的 statement 文本。
+author: curator-polchinski-ch6
+created: "2026-09-11"

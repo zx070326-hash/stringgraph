@@ -1,0 +1,33 @@
+id: worldsheet.torus-metric-reduces-to-modulus
+kind: proposition
+title: 环面上任一度规经 diff × Weyl 化为某个 τ 的平坦度规，故环面只有 τ 这两个模
+statement: |
+  设 M 是紧、可定向、无边、亏格 1 的二维流形（环面），g 是 M 上任一欧氏号差度规。则存在
+  微分同胚与 Weyl 变换的复合把 g 送到 worldsheet.torus-modulus 中某个 τ ∈ H 的平坦度规
+  ds² = |dσ¹ + τ dσ²|²。
+
+  推论（本节点断言的计数）：在环面上作 diff × Weyl 规范固定后，**度规里剩下的连续参数恰是 τ**，
+  即两个实参数；用 worldsheet.riemann-roch-kappa-minus-mu 的记号，环面的模数目 μ = 2。
+
+  ⚠ 本节点**不**断言不同的 τ 给出互不等价的环面（那需要 worldsheet.modular-fundamental-domain），
+  也**不**断言 τ 的取值范围可以限制到基本域。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.9)–(5.1.11), p.147"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E69，L1（读到 schrans-2020 §5.1
+      笔记 p.243–244 的逐步复现，**未核对 Polchinski 原书**）。
+      抽取记录记下的论证是：Ricci 标量为零的二维度规**局域**平坦，剩下的自由度是坐标的周期性条件，
+      把一个周期转到实轴并归一后周期性即 w ≅ w + 2πm + 2πnτ。
+tags: [worldsheet, torus, moduli, gauge-fixing, diff-weyl]
+notes: |
+  这是「模 = 规范固定后剩下的连续参数」在本图的第一个具体实例；一般亏格的对应陈述是
+  worldsheet.gauge-fixed-measure-moduli-and-positions。
+  μ = 2 与 worldsheet.torus-two-moduli-two-ckv 的 μ = 2 是**两条独立得到的同一数字**：
+  这里是几何计数（周期格的剩余参数），那里是解 (5.2.8) 的全纯方程。两者相符是一致性检验，
+  不是循环论证。
+author: curator-polchinski-ch5
+created: "2026-09-11"

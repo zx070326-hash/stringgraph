@@ -170,5 +170,32 @@ notes: |
 
   **本卡第 (2) 条的陈述文本保留原位**，作为「本卡 (1) 的推论」读；
   任何要单独引用 Gram 矩阵记账的下游，应引 worldsheet.transverse-ddf-fock-gram-matrix。
+
+  【2026-09-11（四）：「径向共轭规则」现有承载节点（curator；**只加本段 notes，
+  陈述文本未动**；推导 --via-vertex-operator-adjoint 已加一条非 inferred 依赖）】
+  本卡 notes【与 worldsheet.virasoro-generators-adjoint 的关系】里写的那条「同一机制」
+  （「一个由厄米场构成的权 h 场，其模在径向量子化的伴随下指标反射，J_m† = J_{−m}」）
+  现由 worldsheet.radial-hermitian-conjugation 承载（definition，own rigorous /
+  effective physical-argument），其 (5) 把本卡列为五个实例之一
+  （h = 1 的 ∂X^i e^{i n k_0·X} → (A^i_n)† = A^i_{−n}）。
+  同时本卡推导第 1 步用到的「被积量是权 1 主场」里「指数因子权为 0」那一半
+  现由 worldsheet.exponential-vertex-operator-weight 承载（本卡推导经
+  worldsheet.ddf-commute-with-virasoro 与 worldsheet.vertex-operator-adjoint
+  间接依赖它，未另加边）。
+  **本卡 status 定级不变，仍是 physical-argument**：两张新卡自身的 effective 就是
+  physical-argument；本卡【为什么不是 rigorous】所说的关键障碍（顶点算子伴随要做
+  E_+E_- 重排序）**未变**；升级路径 (i)(ii) 与【下游】一段也不变。
+
+  【2026-09-11 下午（curator，对接 TowerPairing.lean）】本卡 (1) 用到**跨层配对**
+  （A^i_n 把第 N 层送到第 N+n 层，被配对的两个向量在不同动量层），而上面
+  【承载断言的空间】一段所说的「不同层（动量不同）互相正交」是
+  worldsheet.momentum-tower-fock-space (2) 的**约定式定义**：它现已形式化
+  （那张卡 2026-09-11 下午升为 formalized，lean_decl = `Fock.towerPairing`），
+  但在 Lean 里是 `towerPairing`（各层配对的单位权求和）的**定义**及其展开
+  `towerPairing_single_single_of_ne`，**不是物理证明**，也不是 δ^D(p − p′) 正交性的推导。
+  故本卡 (1) 与由它导出的 (2) 的 Gram 矩阵仍以这条约定为输入，而非结论。
+  Lean 侧 A^i_n 的伴随仍不可用（缺 `vertexOsc` / `towerVertex` 的伴随，即
+  worldsheet.vertex-operator-adjoint；TowerPairing.lean 文件头 Gaps 第 2 条），
+  故上面【升级路径】(i) 的内容不变。
 author: curator
 created: "2026-09-11"

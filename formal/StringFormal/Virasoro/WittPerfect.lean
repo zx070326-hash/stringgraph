@@ -3,7 +3,7 @@ Copyright (c) 2026 stringgraph contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: stringgraph lean-formalizer
 -/
-import StringFormal.Virasoro.Verma
+import StringFormal.Virasoro.Basic
 import Mathlib.Algebra.Lie.Solvable
 import Mathlib.Data.ZMod.Basic
 
@@ -49,9 +49,8 @@ The same witness works in the Virasoro algebra for `n ≠ 0` (no central term, s
 numbers do not add to zero); `L 0` comes from `⁅L 1, L (-1)⁆ = 2 L 0` (the central term
 `(1³ - 1)/12` vanishes) and `C` from `2⁅L 2, L (-2)⁆ - 4⁅L 1, L (-1)⁆`.
 
-This file imports `Virasoro/Verma.lean` only for `VirasoroAlgebra.span_lgen_cgen_eq_top`
-(and `ofWitt`), which are `Basic.lean`-level facts that happen to live in `Verma.lean`;
-moving them to `Basic.lean` would remove this import.
+This file needs only `Basic.lean`-level facts (`VirasoroAlgebra.span_lgen_cgen_eq_top` and
+`ofWitt`), so it imports `Virasoro/Basic.lean`, not `Virasoro/Verma.lean`.
 
 ## Status
 

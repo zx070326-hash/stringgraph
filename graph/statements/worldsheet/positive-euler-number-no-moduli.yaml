@@ -1,0 +1,35 @@
+id: worldsheet.positive-euler-number-no-moduli
+kind: proposition
+title: "χ > 0 的世界面没有模（μ = 0）"
+statement: |
+  设 M 是紧二维世界面，χ 是它的 Euler 数。则
+    χ > 0  ⟹  μ = 0 ，
+  即不存在非平凡的模（worldsheet.moduli-condition-traceless-transverse 意义下的
+  无迹无散度度规变分）。
+
+  ⚠ **本条的论证强度显著低于对偶的 worldsheet.negative-euler-number-no-ckv。**
+  原书把它作为 (5.2.10) 的「对偶」断言；伴读者明确记录自己无法复现直接论证，
+  只能靠枚举 χ > 0 的曲面来验证。详见本节点唯一一条推导的 gaps。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 附近, p.152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E76，L1（读到 schrans-2020 笔记 p.252）。
+      ⚠ 抽取记录逐字转引伴读者的自述：
+      「I have not been able to show in a satisfying way that for positive Euler numbers,
+      the number of moduli is zero. I have tried two ways… But neither way has lead to
+      anything useful. There is, however, an indirect way. We know that for closed oriented
+      surfaces, the Euler number is χ = 2 − 2g … The only close oriented surface with χ > 0
+      therefore has g = 0, i.e. is the sphere, the disk or the projective plane,
+      for which there are no moduli.」
+      这是**第三方对自己复现能力的陈述**，不是 Polchinski 的自述；
+      **Polchinski 原书是否给了直接论证，本项目未核实**。
+tags: [worldsheet, moduli, euler-number, counting]
+notes: |
+  拆卡理由见 worldsheet.negative-euler-number-no-ckv 的 notes：原书把两半写成一条对偶陈述，
+  但两半的论证强度不同，按「一个节点一个命题 + status 实话实说」必须分开记账
+  （抽取记录「本轮对图的建议」第 3 条也明确要求）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

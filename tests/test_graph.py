@@ -971,3 +971,19 @@ def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
     g = load_graph(mini)
     warns = [p for p in validate(g) if p.severity == "warning" and "swallowed" in str(p)]
     assert warns
+
+
+def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
+    """own_status is the max over derivations; the per-derivation list must expose that a
+    rigorous derivation can be throttled to open by a dependency."""
+    from stringgraph.loader import load_graph
+    from stringgraph.report import status_report
+
+    g = load_graph(ROOT)
+    rep = status_report(g, "worldsheet.ddf-commute-with-virasoro")
+    ders = {d["id"]: d for d in rep["derivations"]}
+    assert "worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary" in ders
+    d = ders["worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary"]
+    assert d["own"] == "rigorous"
+    assert d["effective"] == "open"
+    assert rep["effective"] == "physical-argument"
