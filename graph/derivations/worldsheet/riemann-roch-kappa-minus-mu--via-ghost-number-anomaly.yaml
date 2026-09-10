@@ -1,0 +1,69 @@
+id: worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly
+target: worldsheet.riemann-roch-kappa-minus-mu
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ghost-number-current-weyl-anomaly
+    note: 提供 ∇_a j^a = ((1−2λ)/4)R，λ = 2 时为 −(3/4)R。
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: |
+      提供「(5.3.9) 里 b 插入有 μ 个、c 插入有 κ 个」——鬼数流计的是 c 数减 b 数，
+      故路径积分的鬼数是 κ − μ。这是本推导的另一半输入。
+  - id: worldsheet.string-s-matrix
+    note: 鬼数不守恒的记账是在这个公式的插入上做的。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}，
+      故 χ = (1/4π)∫d²σ g^{1/2}R + 边界项。继承该约定登记的缺口。
+    note: 提供 χ = (1/4π)∫ g^{1/2} R，把 ∫√g ∇_a j^a 换算成 χ。
+  - id: worldsheet.conformal-killing-equation
+    note: κ 的定义。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: μ 的定义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出 (5.2.9)）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E82，L1（读到 schrans-2020
+      §5.22–§5.23，笔记 p.261–262；条目 [5.90] 逐字「…which leads to the Riemann-Roch
+      theorem (5.2.9)」）。
+summary: |
+  把鬼数反常当作**算子方程**，于是路径积分中的鬼数不守恒：
+    δ_{g#} ∫[dφ] e^{−S} ∝ ε ∫ d²σ ĝ^{1/2} ∇_a j^a = ε ∫ d²σ ĝ^{1/2} ((1−2λ)/4) R 。
+  代 λ = 2 与 χ = (1/4π)∫ d²σ ĝ^{1/2} R，右端 ∝ χ（比例常数在本路线不被算出）。
+  另一方面，(5.3.9) 中 b 插入有 μ 个、c 插入有 κ 个，鬼数流计的是 c 数减 b 数，
+  故同一个变分给出 iε(κ − μ) ∝ εχ。
+  **比例常数不是算出来的，而是用球面这一个例子标定的**：球面 χ = 2、μ = 0、κ = 6
+  给 6 = 3·2，于是常数定为 3，得 κ − μ = 3χ。
+  （伴读者明说环面 χ = 0 定不出常数，只有球面能用。）
+gaps:
+  - |
+    **比例常数靠单个例子标定**。这是本推导最实质的弱点：论证只给出 κ − μ ∝ χ，
+    系数 3 由球面的 (χ, μ, κ) = (2, 0, 6) 定出。若球面的 κ = 6 有误，整条结论随之改变。
+    而**球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)**，属第 6 章。
+    该节点（worldsheet.sphere-conformal-killing-group）已由 §6 分支的 curator 建成，
+    但**该分支尚未合入 main**：**待 §6 sphere-conformal-killing-group 合入后补边**。
+    在那之前，本推导的标定一步在图上有一条依赖边**悬空**。
+  - |
+    **「反常是算子方程」这一步没有论证**：从配分函数的 Weyl 变分到「∇_a j^a 作为算子方程
+    可以插进任意关联函数」需要论证反常的局域性与与插入的对易性，来源里只有断言。
+  - |
+    **上游 worldsheet.ghost-number-current-weyl-anomaly 携带一处勘误依赖**（习题 3.6 的符号错，
+    勘误表本项目未取得）与 OPE 收敛缺口。
+  - |
+    **路径积分层面的形式操作**：δ_{g#} 作用在 ∫[dφ]e^{−S} 上、测度的鬼数变换等，
+    均无数学定义。
+  - |
+    **来源强度**：式号 (5.3.20)/(5.3.21)/(5.2.9) 只经 schrans-2020 核对
+    （(5.2.9) 是正文级引用，是本章最强的一条；对原书仍为 L3）。
+notes: |
+  **本推导不是数学上的 Riemann–Roch 证明**，只是本书采用的物理路线。
+  升级路径：另起一条挂数学来源的推导（Riemann–Roch 或 P₁ 的椭圆指标定理），
+  那条可以到 rigorous，本条保留为「书内路线」的记账。
+
+  另注：抽取记录 E82 给的「本条应拆成 statement + derivation」的建议已按此实现——
+  陈述在 worldsheet.riemann-roch-kappa-minus-mu，本文件是它的（目前唯一的）推导。
+author: curator-polchinski-ch5
+created: "2026-09-11"

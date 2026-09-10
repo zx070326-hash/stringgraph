@@ -1,0 +1,64 @@
+id: worldsheet.torus-metric-reduces-to-modulus--via-conformal-gauge
+target: worldsheet.torus-metric-reduces-to-modulus
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.conformal-gauge-fixing
+    note: |
+      提供「二维度规局域可化为 δ_ab（等价地 R = 0）」这一步。**只覆盖局部**：
+      该节点的 statement 里明写「本节点不断言全局规范固定的存在性」。
+  - id: worldsheet.torus-modulus
+    note: 论证的终点对象（平坦环面 T²(τ)）由这张定义卡给出。
+  - id: worldsheet.polyakov-action-symmetries
+    inferred: true
+    note: |
+      inferred：抽取记录 E69 没有把 diff 不变性列为依赖，但「用微分同胚把一个周期转到实轴」
+      这一步用到的正是 Polyakov 作用量的 diff 对称性。论证在 §1.2，本推导来源 §5.1 只是使用它。
+    convention_map: |
+      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian，
+      度规 γ_ab 号差 (−,+)），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      换算按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)–(d)：σ² = iσ⁰、(−γ)^{1/2} ↔ g^{1/2}、
+      S_P^L = i S_P^E。**微分同胚不变性本身与号差无关**（它是坐标变换下的协变性，
+      对任何号差的度规都成立），故本条换算不带来新的物理内容。
+      ⚠ 继承 conv.worldsheet-euclidean notes 里登记的缺口：Wick 旋转在路径积分层面的合法性
+      本图无节点，故凡跨本 family 的推导一律不高于 physical-argument。
+  - id: worldsheet.polyakov-weyl-invariance
+    inferred: true
+    note: |
+      inferred：同上，「用 Weyl 变换把度规化到平坦、并把周期长度归一」用到 Weyl 对称性，
+      §5.1 只使用不论证。
+    convention_map: |
+      跨 family `worldsheet-signature`，换算同上一条（conv.worldsheet-euclidean 的 Wick 旋转字典）。
+      Weyl 变换 g_ab → e^{2ω} g_ab 的形式在两种号差下逐字相同，d = 2 时 √g g^{ab} 的 Weyl 权
+      也相同，故 Weyl 不变性的陈述跨号差不变。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.9)–(5.1.11), p.147"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E69，L1（读到 schrans-2020 §5.1
+      笔记 p.243–244；**原书正文本项目未取得**，见抽取记录 §5.0）。
+summary: |
+  用 diff × Weyl 把环面度规化为 Ricci 标量为零的度规；二维零曲率度规**局域**平坦，
+  故可取局部平坦坐标 σ^a。剩下的规范不变信息是坐标的周期性条件，一般形如
+  σ^a ≅ σ^a + 2π(m u^a + n v^a)。转到复坐标 w = σ¹ + iσ²，再用一个旋转把 u 转到实轴、
+  用一个 Weyl 重标度把 |u| 归一，周期性化为 w ≅ w + 2πm + 2πnτ，τ = v¹ + iv²。
+  度规正定要求 det g = (Im τ)² > 0，故 τ 落在上半平面（取 Im τ > 0 这一支）。
+  于是环面的度规在 diff × Weyl 之后只剩两个实参数 (Re τ, Im τ)，即 μ = 2。
+gaps:
+  - |
+    **局域平坦 → 整体平坦的跨越没有论证**。本图现有的 worldsheet.conformal-gauge-fixing
+    明确只断言局部结论。「环面的共形类里存在整体平坦度规」在数学上是单值化定理
+    （或等价地：2∇²ω = R 在紧曲面上可解当且仅当 ∫√g R = 0，即 χ = 0）的内容，
+    Polchinski 此处没有证明，本图也没有节点承载它。这是本推导不能高于 physical-argument
+    的**首要**理由。
+  - |
+    「把 u 转到实轴并归一后 τ 唯一确定该环面」这一步只是构造，未论证得到的 τ 与所选周期基底
+    无关——事实上它**依赖**基底，这正是 worldsheet.torus-modular-equivalence 的内容；
+    本推导的结论因此只是「存在某个 τ」，不含唯一性。
+  - |
+    **来源强度**：式号 (5.1.9)–(5.1.11) 与全部中间步骤都只经 schrans-2020 伴读笔记核对（L1
+    对笔记、L3 对原书）。本项目至今没有 Polchinski Vol.1 正文，见抽取记录 §5.0 与 Q9。
+notes: |
+  与 worldsheet.torus-two-moduli-two-ckv 的关系见目标节点的 notes：两条路线独立给出 μ = 2。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,39 @@
+id: worldsheet.gauge-fixed-measure-moduli-and-positions--via-faddeev-popov
+target: worldsheet.gauge-fixed-measure-moduli-and-positions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.faddeev-popov-ghost-action
+    note: |
+      提供 §3.3 的 FP 手续（插入 1 = Δ_FP ∫dζ δ(g − ĝ^ζ) 并分离规范群体积）；
+      §5.3 逐字「repeat the analysis of the Faddeev–Popov procedure surrounding (3.3.18)」。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: 提供「哪些度规变分不能由规范变换产生」——这正是 FP 手续固定不掉的 μ 个方向。
+  - id: worldsheet.conformal-killing-equation
+    note: 提供 κ 个残余对称性，用来固定 κ 个顶点算子坐标。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.2), p.155"
+    note: |
+      抽取记录 #E77，L1（schrans-2020 §5.11，笔记 p.252）。
+summary: |
+  规范固定的 delta 函数只能把度规固定到一个参考度规族 ĝ(t) 之内：因为 diff × Weyl 的轨道
+  不覆盖全部度规，剩下的横截方向就是 ker P̂₁^T，其维数为 μ，参数记作 t^k，仍需积分。
+  另一方面规范群作用不是自由的：CKV 是让度规不动的那 κ 个方向，除掉它们才不会重复计数；
+  标准做法是用这 κ 个残余参数去固定 κ 个顶点算子坐标（集合 f），于是顶点算子的
+  2n 个坐标只剩 2n − κ 个要积分。
+gaps:
+  - |
+    **规范群体积的分离、delta 函数的规范不变性、以及路径积分测度 [dg dφ] 本身的存在性**
+    在来源中都不被论证（Polchinski 在 §3.3 脚注 2 承认 delta 函数的规范不变性需要论证）。
+    这是路径积分层面的形式操作，本推导因此固定在 physical-argument。
+  - |
+    **「κ 个 CKV 恰好能固定 κ 个坐标」是断言**：需要 CKV 群在位形空间上的作用局部自由
+    且无剩余离散重复（离散剩余由 n_R 处理）。来源与本图都没有论证这一点。
+  - |
+    **μ、κ 的有限性未论证**（继承 worldsheet.moduli-condition-traceless-transverse 的 gap：
+    P₁ 椭圆性与紧性本图无节点）。
+  - |
+    **来源强度**：式号 (5.3.2) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

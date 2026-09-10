@@ -1,0 +1,42 @@
+id: worldsheet.genus-g-ghost-path-integral
+kind: definition
+status: physical-argument
+title: 一般亏格上 FP 行列式的 bc 鬼场表示（含 μ 个 b 插入与 κ 个 c 插入）
+statement: |
+  把 worldsheet.genus-g-faddeev-popov-determinant 中的玻色型积分变量换成 Grassmann 变量
+    δσ^a → − c^a/4π ,   β'_{ab} → b_{ab} ,   x_{ai} → η_{ai} ,   δt^k → − ξ^k/4π
+  （β' 是 β 的无迹部分），得到 FP 行列式本身的鬼场表示
+    Δ_FP = (1/n_R) ∫ [db dc]  exp(−S_g)
+             ∏_{k=1}^{μ} (1/4π) (b, ∂_{t^k} ĝ)
+             ∏_{(a,i) ∈ f} c^a(σ̂_i) ,
+  其中鬼场作用量为
+    S_g = (1/2π) ∫ d²σ  ĝ^{1/2}  b_ab (P̂₁ c)^{ab}  =  (1/2π) (b, P̂₁ c) ,
+  b_ab 对称无迹、c^a 为向量（与 §3.3 的 (3.3.21) 同一作用量，即 λ = 2 的 bc 系统）。
+
+  **要点**：μ 个 b 插入与 κ 个 c 插入不是外加的，而是 FP 手续的直接产物——
+  μ 个 b 来自模的积分变量 δt^k，κ 个 c 来自固定顶点算子坐标的乘子 x_{ai}。
+uses:
+  - worldsheet.genus-g-faddeev-popov-determinant
+  - worldsheet.faddeev-popov-ghost-action
+  - worldsheet.metric-variation-operator-p1
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.8), p.156；鬼场作用量即 §3.3 的 (3.3.21)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E79，L1（读到 schrans-2020 §5.14，
+      笔记 p.254；**未核对 Polchinski 原书**）。
+      (3.3.21) 的式号已在 worldsheet.faddeev-popov-ghost-action 处经 schrans-2020 目录核实。
+tags: [worldsheet, faddeev-popov, ghosts, moduli, path-integral, bc-system]
+notes: |
+  **status = physical-argument**：与上游同理（Grassmann 路径积分 [db dc] 在本项目无数学定义），
+  且「玻色行列式的逆 ↔ 费米路径积分」这一替换本身是形式操作。
+
+  下游意义：这条正是 worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly
+  的输入——鬼数流计的是 c 的个数减 b 的个数，即 κ − μ。
+  与 worldsheet.bc-ghost-cft 的关系：那张卡是平面共形规范下的 bc 系统（复坐标、λ = 2），
+  本卡是任意度规 ĝ 上的协变写法；两者在共形规范下由 (3.3.24) 相联，
+  **本图未建那条改写的节点**。
+author: curator-polchinski-ch5
+created: "2026-09-11"

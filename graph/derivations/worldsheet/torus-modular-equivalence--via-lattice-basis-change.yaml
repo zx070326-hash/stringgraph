@@ -1,0 +1,44 @@
+id: worldsheet.torus-modular-equivalence--via-lattice-basis-change
+target: worldsheet.torus-modular-equivalence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.torus-modulus
+    note: 提供 T²(τ) = C/Λ(τ) 与 Λ(τ) = 2πZ + 2πτZ 的定义，论证就在这个格上进行。
+  - id: worldsheet.modular-group-psl2z
+    note: 提供 PSL(2,Z) 及其在 H 上的分式线性作用。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13)–(5.1.14), p.148"
+    note: |
+      抽取记录 #E71，L1（schrans-2020 §5.3–§5.4，笔记 p.246）。
+      [S] §5.4 显式验算出度规在模变换下变为
+      ds² → (cτ+d)(cτ̄+d)[(dσ'¹)² + (τ'+τ̄')dσ'¹dσ'² + |τ'|²(dσ'²)²]，
+      即差一个整体正因子 |cτ+d|²，故是一个 Weyl 变换。**这一步是核对源里的验算，不承载论证**
+      （按 lead 2026-09-10 裁决，schrans-2020 是个人笔记，不作为 sources[] 条目承载论证）。
+summary: |
+  同一个环面 C/Λ 的格 Λ 可以用不同的基底描述。若 (ω₁, ω₂) 与 (ω'₁, ω'₂) 都是 Λ 的基底，
+  则二者由一个整数矩阵联系，且该矩阵可逆（逆也是整数矩阵），故行列式为 ±1；
+  保定向要求行列式 = +1，即矩阵属于 SL(2,Z)。模参数是两个周期之比 τ = ω₂/ω₁，
+  于是在基底改变 (ω'₂, ω'₁) = (aω₂ + bω₁, cω₂ + dω₁) 下
+    τ' = ω'₂/ω'₁ = (aτ + b)/(cτ + d)。
+  在「固定周期、改度规」的写法里，同一件事表现为度规乘上正因子 |cτ + d|²（一个 Weyl 变换）
+  外加一个坐标（微分同胚）变换，故 T²(τ) 与 T²(τ') 在 diff × Weyl 下等价。
+  γ 与 −γ 给出同一个 τ' 映射，故有效作用的是 PSL(2,Z)。
+gaps:
+  - |
+    **「基底改变矩阵必属 SL(2,Z)」这一步在本图与本来源中都没有写出证明**。它是初等格论
+    （整数矩阵可逆 ⟺ det = ±1），但按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，
+    初等计算要标 rigorous 需要 reviewer 独立复核并在本节点 notes 留 `reviewer-verified`
+    记录——**目前没有**。
+  - |
+    **抽取记录未能确定原书在这一步给的是论证还是断言**：E71 只记录了 (5.1.13) 的内容
+    （「一般模变换为 τ' = (aτ+b)/(cτ+d)」）与「整体变号给出同一变换」，没有记录论证过程。
+    上面 summary 的格基底论证是 curator 补出的标准推理，**不是来源逐字**。
+  - |
+    **来源强度**：式号与内容只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）。
+notes: |
+  升级路径：若 reviewer 复核「基底改变 ⟺ SL(2,Z)」并确认原书确有此论证（或改挂一个
+  数学来源如 Serre《A Course in Arithmetic》第 VII 章），本推导可升到 rigorous。
+author: curator-polchinski-ch5
+created: "2026-09-11"

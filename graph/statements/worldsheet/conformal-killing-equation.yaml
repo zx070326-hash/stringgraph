@@ -1,0 +1,52 @@
+id: worldsheet.conformal-killing-equation
+kind: definition
+status: rigorous
+title: "共形 Killing 向量与共形 Killing 方程 (P₁δσ)^{ab} = 0"
+statement: |
+  设 (M, g) 是二维 Riemann 流形。一个**共形 Killing 向量**（CKV）是一个向量场 δσ^a，
+  使得由它生成的无穷小微分同胚可以被某个无穷小 Weyl 变换**完全抵消**，即存在 δω 使
+    δg_ab = 0 。
+  由 worldsheet.diff-weyl-metric-variation 的分解式
+    0 = − 2 (P₁ δσ)_ab + ( 2 δω − ∇_c δσ^c ) g_ab ,
+  取迹（在 d = 2 且 P₁δσ 无迹时）给出
+    δω = ½ ∇_c δσ^c ,
+  代回后剩下的方程即**共形 Killing 方程**
+    (P₁ δσ)_ab = 0 ,  即  ∇_a δσ_b + ∇_b δσ_a = g_ab ∇_c δσ^c 。
+  CKV 张成的实向量空间即 ker P₁，其维数记作 κ。
+
+  换言之：一个 CKV 不是通常意义的 Killing 向量（那要求 ∇_aδσ_b + ∇_bδσ_a = 0），
+  而是「一个微分同胚 + 一个特定 Weyl 变换」的组合，该组合让度规不变。
+uses:
+  - worldsheet.metric-variation-operator-p1
+  - worldsheet.diff-weyl-metric-variation
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.7), p.151–152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E74，内容 L1 / 式号 L2。
+      ⚠ **式号有源内冲突**（抽取记录 §5.0 与 §7 专门列出）：
+      schrans-2020 的**目录**写 `5.8 p 151: Eq (5.2.7) The Conformal Killing Equation`，
+      而其**正文**的同一小节标题写成 `Eq (5.2.5)`（与它上一节的 (5.2.5) 重复）。
+      抽取记录判断正文标题是过期的复制粘贴，目录（单调递增、与 (5.2.4)→(5.2.6)→(5.2.10)
+      的序列相容）更可信，**采目录值 (5.2.7)**，并明令「curator 不得把 (5.2.5) 当成
+      共形 Killing 方程的 loc」。本卡照办。
+      **两个号码都未经 Polchinski 原书核对。**
+tags: [worldsheet, ckv, moduli, conformal-killing, gauge-fixing]
+notes: |
+  **status 与 uses 的说明**：本卡的 kind 是 definition，但它断言的不只是「CKV = 让度规不变的
+  diff × Weyl」这个定义，还断言了它**等价于** (P₁δσ)_ab = 0。这个等价用到
+  worldsheet.diff-weyl-metric-variation（度规变分的分解式），故后者列进 uses，
+  本卡的有效状态随之为 physical-argument。
+  若日后需要一张纯粹 rigorous 的定义卡（「CKV := ker P₁」，不含等价性断言），
+  应新建 v2 并把等价性单列为命题。
+
+  κ 的下游用途：CKV 是规范固定后**残余**的连续对称性，用来固定 κ 个顶点算子坐标
+  （worldsheet.gauge-fixed-measure-moduli-and-positions），并在 S-矩阵主公式里
+  对应 κ 个 c 鬼场插入（worldsheet.genus-g-ghost-path-integral）。
+  球面 κ = 6（PSL(2,C)）、圆盘 κ = 3（PSL(2,R)）、环面 κ = 2（两个平移）——
+  球面与圆盘的值出自原书 §6.1/§6.4，由 §6 的 curator 负责；环面的值见
+  worldsheet.torus-two-moduli-two-ckv。
+author: curator-polchinski-ch5
+created: "2026-09-11"

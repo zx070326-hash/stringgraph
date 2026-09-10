@@ -1,0 +1,35 @@
+id: worldsheet.gauge-fixed-measure-moduli-and-positions
+kind: proposition
+title: "一般亏格上规范固定后的剩余积分变量：μ 个模与 2n − κ 个顶点算子坐标"
+statement: |
+  设世界面 M 是紧二维曲面，路径积分的出发点是 [dg dφ] d^{2n}σ，其中
+  d^{2n}σ = ∏_{i=1}^n d²σ_i 是 n 个顶点算子的位置、φ 记全部物质场。
+  对 diff × Weyl 作 Faddeev–Popov 规范固定后，测度分解为
+    [dξ dφ]  d^μ t  d^{2n−κ}σ ,
+  其中
+  (a) ξ 是规范参数（其积分给出规范群体积，被除掉）；
+  (b) t^k (k = 1,…,μ) 是**模**——FP 手续固定不了的那 μ 个连续参数
+      （worldsheet.moduli-condition-traceless-transverse）；
+  (c) κ 个顶点算子坐标被 κ 个共形 Killing 向量固定（记这组被固定的坐标指标集为 f），
+      剩下 2n − κ 个坐标仍要积分。
+
+  换言之：**模就是 Faddeev–Popov 手续固定不掉的剩余参数**，而 CKV 就是规范固定后
+  仍然残余、可以用来固定顶点算子位置的连续对称性。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.2), p.155"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E77，L1（读到 schrans-2020 §5.11，
+      笔记 p.252；**未核对 Polchinski 原书**，见抽取记录 §5.0）。
+      抽取记录备注：「这一步是『模 = FP 固定不掉的剩余参数』这个说法在书中的落点」。
+tags: [worldsheet, moduli, ckv, faddeev-popov, gauge-fixing, measure]
+notes: |
+  本节点是 §3.3 的平面 FP 手续（worldsheet.faddeev-popov-ghost-action）向一般亏格的推广的
+  **计数部分**；行列式部分见 worldsheet.genus-g-faddeev-popov-determinant，
+  鬼场表示见 worldsheet.genus-g-ghost-path-integral。
+  κ 个坐标能被固定的前提是 CKV 群在顶点算子位置上作用得足够自由（例如球面上用 PSL(2,C)
+  固定三个点）——**这个前提在本节点与来源中都没有被论证**，是 §6 才处理的事。
+author: curator-polchinski-ch5
+created: "2026-09-11"

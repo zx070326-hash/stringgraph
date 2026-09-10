@@ -1,0 +1,41 @@
+id: worldsheet.beltrami-differential
+kind: definition
+status: rigorous
+title: Beltrami 微分 μ_k
+statement: |
+  设 ĝ_ab(t) 是依赖 μ 个模 t^k 的参考度规族。对每个模方向定义**Beltrami 微分**
+    (μ_k)^a{}_b  =  ½  ĝ^{ac}  ∂_{t^k} ĝ_{cb}   （原书记作 μ_k^{ab} 的指标写法见 notes）。
+  它是「度规族沿第 k 个模方向的变化率」的一个混合指标写法。
+
+  ⚠ **按上式定义的 μ_k 一般并不无迹**：它的迹是 ½ ĝ^{ab}∂_{t^k}ĝ_ab = ½ ∂_{t^k} ln det ĝ。
+  在与对称无迹的 b_ab 配对时只有 μ_k 的无迹部分有贡献，这是下游
+  worldsheet.b-insertion-beltrami-form 只用到无迹部分的理由。
+
+  在共形规范与复坐标下，与 b 配对的（无迹）分量是
+    μ_{k  z̄}{}^{z}  与  μ_{k  z}{}^{z̄} ,
+  即这一部分是 (−1, 1) 型（与 (1, −1) 型）的张量：它把 ∂_z̄ 方向的余切与 ∂_z 方向的切向量配对，
+  正好与全纯二次微分 b_zz 配对成标量。
+uses: []
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.7), p.162"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E86，L1（读到 schrans-2020
+      §5.28–§5.30，笔记 p.265–266；**未核对 Polchinski 原书**）。
+      ⚠ 抽取记录把定义写成 μ_k^{ab} = ½ ĝ^{ac}∂_k ĝ_{cb}，**左右指标位置不匹配**
+      （左端两个上指标，右端一上一下）。本卡按右端的指标结构写成 (μ_k)^a{}_b，
+      这是唯一自洽的读法；若原书用的是别的指标约定（例如先升两个指标再去迹），
+      本卡需要修订。已记入报告的「文献歧义」栏。
+tags: [worldsheet, moduli, beltrami, ghosts, complex-geometry]
+notes: |
+  Beltrami 微分是模空间几何的标准对象（Teichmüller 理论中它是 Teichmüller 空间的切向量）。
+  本卡**只**采用 Polchinski 的定义（度规族的模导数），**不**声称任何 Teichmüller 理论的定理，
+  因为本项目没有可核实的数学来源（Farkas–Kra / Hubbard 的编号本项目未能核实）。
+
+  status = rigorous 指这张定义卡本身在数学上精确（给定光滑度规族，μ_k 就是一个张量场），
+  不表示 Polchinski 的用法严格。
+author: curator-polchinski-ch5
+created: "2026-09-11"
