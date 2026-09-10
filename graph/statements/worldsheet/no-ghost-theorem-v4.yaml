@@ -139,6 +139,20 @@ notes: |
      与 v3 的关系：v3 的 (2) 在"按位置读"下是空真命题、在"排除句全局生效"读法下与 v4 的 (2) 同义。
      v4 只是把读法钉死，**不是**在纠正一个假命题。
 
+  【2026-09-10 追加（ms.no-ghost-theorem 第四轮审计 A2(iii)/C3/D2(a)）：(2) 的 p ≠ 0 有 L1 来源】
+     V1 与推导节点的 gaps 原先记的是「(2) 的动量量词 p ≠ 0 没有逐字来源，只有本项目核算加上
+     FGZ Theorem 2.8 的 p ≠ 0（而那条是 D = 26 的正定性陈述，不是 D > 26 的负模陈述）」。第四轮审计补上一条：
+     **(2) 的 p ≠ 0 有 L1 来源：worldsheet.no-ghost-theorem-subcritical（LZ 1991 Thm 3.5(ii) 反方向，
+     (P2) ⇒ p ≠ 0）；本节点现有的推导 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 不依赖它。**
+     推理见该 subcritical 节点 notes 的【v4 注】：LZ (ii) 的「当且仅当」反方向给出「存在满足 (P1)–(P3)
+     的 p 使商空间不正定」，(P2) 蕴含 p ≠ 0，商已模去 rad 故不正定即含负模向量，而 (D > 26, h = 1)
+     恰落在 (ii) 两分支之外。故 LZ (ii) ⇒ 本节点的 (2)。
+     为什么不把 lian-zuckerman-1991 加进现有推导的 sources：那条推导走纯 D 玻色子的 DDF / 纵向算子路线，
+     LZ 走带补充模 L(26−D, 1−h) 的 BRST 相对上同调，是两条独立论证，一条推导只记一个论证。
+     也不能另挂一条只支撑 (2) 的 v4 推导：一条推导须支撑整条目标陈述，而 LZ 不覆盖本节点的 (1)。
+     故 LZ 的论证以独立陈述节点 worldsheet.no-ghost-theorem-subcritical 的形式留在图中，此处只作交叉登记。
+     本节点的**陈述文本不因此改动**（这是加强来源，不是修陈述，第四轮审计 D3：不需要 v5）。
+
   V2（审计 A1 附带项 / D2）：记号跟随 worldsheet.ddf-operators-v4。v3 引用的 ddf-operators-v3
      把类光参考方向写成射线 {λ k_0 : λ > 0}，与归一化 λ = 1/(2α' k_0·p) 在 k_0·p < 0 时冲突；
      v4 的 DDF 节点改为去心直线 {λ k_0 : λ ∈ R \ {0}}，符号随 sign(k_0·p)。本节点相应改写
