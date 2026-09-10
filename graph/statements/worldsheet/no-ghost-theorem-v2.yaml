@@ -24,10 +24,28 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
 sources:
   - ref: goddard-thorn-1972
-    loc: "Theorem 1（定理编号未核实）"
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
     note: |
-      原文（Phys. Lett. B 40, 235-238，4 页短文）未在 literature/extractions/ 登记，
-      "Theorem 1" 这一编号沿用自旧节点 worldsheet.no-ghost-theorem，未与原文核对。
+      2026-09-10 核实（literature/extractions/brst-cohomology-sources.md §3）：
+      正文四条获取路径全部失败（ScienceDirect 403、CERN CDS 反爬、OSTI 只有元数据、
+      Semantic Scholar 无 PDF），故**不能确认也不能否认**文中有编号定理；三条间接证据
+      （Goddard 本人 2008 综述复述该结果时不给编号、FGZ 1986 引它为 ref 8 时不给编号、
+      该刊该年代 4 页快报体例不用编号定理）一致指向"无编号"。
+      摘要逐字（INSPIRE）：「A simple consequence of this counting is the absence of ghosts
+      for d ⩽ 26 (d ⩽ 10 for Neveu-Schwartz).」原先写的 "Theorem 1" 沿用自旧节点
+      worldsheet.no-ghost-theorem，无任何来源支持，已撤下。
+      注意摘要**完全不提 intercept**：Veneziano 模型以 α_0 = 1 为前提，故本条只覆盖 a = 1。
+  - ref: brower-thorn-1971
+    loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
+    note: |
+      支持本节点断言 (2)（D > 26 有负模物理态）的候选来源。
+      Goddard 2008（作者本人的历史综述，见 goddard-2008）把「物理态中出现鬼当 D > 26」明确归给
+      更早的 Brower–Thorn 1971（其 ref [29]），而**不是** 1972 年的 goddard-thorn-1972 或
+      brower-1972——后两篇的摘要里都没有 D > 26 的反例。
+      但 Brower–Thorn 1971 自己的摘要只说「no ghosts or unanticipated null ('zero norm') states
+      are found on the leading nine trajectories」，**摘要里没有出现 D > 26 或任何维数条件**。
+      Goddard 2008 的归属（二手）与 Brower–Thorn 摘要（一手）之间存在张力，需读正文才能裁决；
+      本项目如实登记两方，不裁决。见 brst-cohomology-sources.md §3.2。
   - ref: brower-1972
     loc: "§II-III（节号未核实）"
     note: |

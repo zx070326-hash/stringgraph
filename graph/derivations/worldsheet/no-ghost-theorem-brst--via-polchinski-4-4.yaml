@@ -39,6 +39,6 @@ gaps:
   - "受限模条件（见 worldsheet.brst-quantization）在 §4.4 未被提及，本推导默认它成立。"
   - "k^+ = 0 与 k = 0 的动量扇区未覆盖：光锥振子组合的定义在那里退化。陈述已把它们排除。"
   - "相对复形上内积的鬼场零模归一化（⟨↓|c_0|↓⟩ = 1）未与 Polchinski (4.4.23) 逐字核对。"
-  - "本推导不建立 BRST 上同调与旧协变物理态空间 H_phys/H_0 的等价（Kato–Ogawa 定理），后者尚未建节点；worldsheet.no-ghost-theorem-v2 与本陈述是两条独立命题。"
+  - "本推导不建立 BRST 上同调与旧协变物理态空间 H_phys/H_0 的等价（Kato–Ogawa 定理）；后者现已单独建节点 worldsheet.brst-cohomology-equals-ocq-physical（FGZ 1986 Theorem 2.8 第一个同构）。worldsheet.no-ghost-theorem-v2 与本陈述仍是两条独立命题。"
 author: curator
 created: "2026-09-10"

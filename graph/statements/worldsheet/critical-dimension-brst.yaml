@@ -20,15 +20,31 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，Q_B^2 的计算与结论 Q_B^2 = 0 ⟺ c^m = 26，约 eq. (4.3.2)–(4.3.6)"
     note: 公式号为近似定位。Polchinski 把物质中心荷写作 c_m，本节点改写为 c^m 以避开与鬼场模式 c_m 的记号冲突。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      本命题（Q_B 幂零 ⇒ 临界维数）的原始来源。摘要逐字：「There an interesting relation
+      between critical dimension and BRS symmetry is noticed」。正文未获取（ScienceDirect 403），
+      定理编号未核实，且未核实它给出的是「⟹」还是本节点写的「当且仅当」。
+      见 literature/extractions/brst-cohomology-sources.md §6。
   - ref: fgz-1986
-    loc: "Theorem 1.1（PNAS 短文，编号未核实）"
-    note: 半无限上同调微分 d 的 d^2 = 0 与临界中心荷 26；定理编号未与原文核对。
-  - ref: lian-zuckerman-1989
-    loc: "§2, Theorem 2.x（定理号未核实）"
-    note: 受限模上 d^2 = 0 当且仅当中心荷取临界值的数学化处理；节号与定理号未核实。
+    loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
+    note: |
+      **本条只支持「鬼场中心荷 = -26」这一步，不支持本节点的主断言。**
+      全文核实（brst-cohomology-sources.md §1.2）：FGZ 中没有「Q^2 = 0 ⟺ c = 26」型编号陈述。
+      Proposition 1.2 只有一句「d^2 = 0」，是一般分次李代数的陈述（前提 H^2(g) = 0、γ = 0 写在
+      正文里），既不出现 26 也不出现中心荷；26 只出现在 Proposition 2.1(i)「ρ(c) = -26 Id」
+      （鬼场表示），而 §2.1 紧接着写「from this point on we will assume that π(c) = 26 Id_V」，
+      即 c^m = 26 是 FGZ 的**假设**不是结论。原先引 "Theorem 1.1" 系凭记忆填写，不存在。
+      lian-zuckerman-1989 的引用已删除：该文是 super-Virasoro/RNS 超弦（临界值 c = 15），
+      与玻色弦 c = 26 无关，属误引。
 tags: [bosonic-string, critical-dimension, brst, nilpotency]
 notes: |
   本节点只断言幂零条件，不断言 BRST 上同调等同于旧协变物理态空间
-  （那是 Kato–Ogawa / FGZ 层面的另一条命题，尚未建节点）。
+  （那是 Kato–Ogawa / FGZ 层面的另一条命题，见 worldsheet.brst-cohomology-equals-ocq-physical）。
+
+  2026-09-10 来源核实后，本节点唯一的推导 --via-nilpotency 由 rigorous 降为 physical-argument：
+  原先标 rigorous 所依据的两条数学来源都不成立（FGZ 假设 c = 26 而非推出它；
+  Lian–Zuckerman 1989 是 super-Virasoro 论文，属误引）。陈述本身未改。
 author: curator-critdim
 created: "2026-09-10"

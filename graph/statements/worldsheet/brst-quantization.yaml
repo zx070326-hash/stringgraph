@@ -47,11 +47,30 @@ sources:
     loc: "§4.2（BRST 一般框架），§4.3（弦的 BRST 量子化）：Q_B 的模展开约 eq. (4.3.1)，鬼场正规序常数 a^g = -1"
     note: 公式号为近似定位；Polchinski 的 Q_B 归一化与本节点一致。
   - ref: fgz-1986
-    loc: "Theorem 1.1（PNAS 短文，编号未核实）"
-    note: 半无限上同调的微分 d（= Q_B）与 bc 系统的数学化构造；定理编号未与原文核对，见 lian-zuckerman-1989 的完整处理。
-  - ref: lian-zuckerman-1989
-    loc: "§2, Theorem 2.x（定理号未核实）"
-    note: 受限模上 BRST 微分的构造与良定义性；节号与定理号未与原文核对，需 researcher 补齐。
+    loc: "Proposition 2.1（(i) ρ(c) = -26 Id_{Λ^∞_*}；(ii) ρ(L_m) = Σ_n (n-m) :c_{-n} b_{m+n}: 的鬼场表示）"
+    note: |
+      支持本节点的鬼场部门：bc 系统作为半无限形式 Λ^∞_* 上的表示，其中心荷算出为 -26，
+      鬼场 Virasoro 模有显式表达式。编号已核实（全文逐页读毕，见
+      literature/extractions/brst-cohomology-sources.md §1.4）。
+      原先引的 "Theorem 1.1" 系凭记忆填写，与原文不符，已订正。
+  - ref: fgz-1986
+    loc: "§2.1 \"The Virasoro Algebra and the BRST Complex\"（Proposition 2.1 之后的正文）"
+    note: |
+      Q_B 作为半无限上同调微分 d 的数学化构造。原文逐字：「We will work in the subcomplex of
+      V ⊗ Λ^∞_* ℒ' relative to the center. Thus from this point on we will assume that
+      π(c) = 26 Id_V. When V is the Fock module …, the differential of this subcomplex is known
+      in the physics literature as the BRST operator (see, e.g., ref. 5) and we will call this
+      subcomplex the BRST complex.」ref. 5 = kato-ogawa-1983。
+      注意这里 π(c) = 26 是 FGZ 的**假设**；本节点作为定义不含该假设。
+      Proposition 1.2「d^2 = 0」是一般分次李代数的陈述，不含中心荷条件。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      Q_B（BRS 荷）在弦上的首次引入与协变量子化。摘要逐字：「Covariant canonical quantization
+      of the bosonic string is performed, based on the BRS invariance principle.」
+      FGZ §2.1 把「BRST operator」这一叫法直接指向本文。正文未获取（ScienceDirect 403），
+      定理编号与 Q_B 的具体归一化未核实。见 brst-cohomology-sources.md §6。
+      （原先此处引的 lian-zuckerman-1989 已删除：该文是 super-Virasoro/RNS 超弦，非玻色弦，属误引。）
 tags: [bosonic-string, quantization, brst, ghosts]
 notes: |
   本节点是定义，不含 Q_B^2 = 0 的断言，也不含 D = 26。

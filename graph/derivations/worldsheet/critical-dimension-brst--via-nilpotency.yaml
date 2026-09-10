@@ -1,22 +1,33 @@
 id: worldsheet.critical-dimension-brst--via-nilpotency
 target: worldsheet.critical-dimension-brst
-kind: proof
-status: rigorous
+kind: physical-argument
+status: physical-argument
 depends_on:
   - id: worldsheet.brst-quantization
   - id: worldsheet.virasoro-algebra
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
-    note: 公式号为近似定位。
+    note: 公式号为近似定位。这是教科书式的形式模式计算，未声明受限模限制，也未处理无穷模式和的重排合法性。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      「Q_B^2 = 0 ⟹ D = 26 且 a = 1」的原始来源。摘要逐字有
+      「There an interesting relation between critical dimension and BRS symmetry is noticed」，
+      即 D = 26 与 a = 1 是要求 BRS 荷幂零的必然结果。正文未获取（ScienceDirect 403），
+      定理编号未核实，也未核实它给出的是「⟹」还是「⟺」。见
+      literature/extractions/brst-cohomology-sources.md §6。
   - ref: fgz-1986
-    loc: "Theorem 1.1（PNAS 短文，编号未核实）"
-    note: 半无限上同调微分 d 的构造与 d^2 = 0 的中心荷条件；定理编号未与原文核对。
-  - ref: lian-zuckerman-1989
-    loc: "§2, Theorem 2.x（定理号未核实）"
-    note: 受限模上 BRST 微分幂零性的数学化处理，是本推导标 rigorous 的依据之一；节号与定理号未核实。
+    loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
+    note: |
+      核实结果（全文五页逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.2）：
+      FGZ **不**证明 Q^2 = 0 ⟺ c = 26。文中 Proposition 1.2 只有一句「d^2 = 0」，是一般分次李
+      代数的陈述，前提 H^2(g) = 0、γ = 0 写在正文里，命题里既不出现 26 也不出现中心荷。
+      26 出现在 Proposition 2.1(i)「ρ(c) = -26 Id」，那是**鬼场表示的中心荷**；
+      紧接的正文写「from this point on we will assume that π(c) = 26 Id_V」——
+      即 c^m = 26 在 FGZ 里是**假设**，不是结论。故本条只支持「鬼场中心荷 = -26」这一步。
 summary: |
-  {Q_B, Q_B} 的计算是模式代数中的有限代数计算：用 {b_k, c_n} = δ_{k+n,0} 与物质 Virasoro
+  {Q_B, Q_B} 的计算是模式代数中的形式代数计算：用 {b_k, c_n} = δ_{k+n,0} 与物质 Virasoro
   [L^m_k, L^m_n] = (k-n) L^m_{k+n} + (c^m/12) k(k^2-1) δ_{k+n,0} 展开，
   三次鬼场项与物质项的交叉贡献相消，只剩正比于总中心荷的项
   {Q_B, Q_B} = Σ_{m∈Z} ((c^m - 26)/12)(m^3 - m) c_{-m} c_m。
@@ -24,13 +35,21 @@ summary: |
   等价地：Q_B^2 = 0 ⟺ 总 Virasoro L_n = L^m_n + L^g_n + a^g δ_{n,0} 无中心扩张。
   （记号：c^m 是物质中心荷，c_n 是鬼场模式；沿用 worldsheet.brst-quantization 的上标约定。）
 
-  标 rigorous 的理由：这是（物质 Virasoro ⊗ bc Clifford 代数）上的恒等式，不涉及路径积分、
-  正规化或渐近展开。受限模假设（已写进陈述本身）保证 Q_B 的模式和逐项有限，故所有重排合法。
-  半无限上同调文献（FGZ 1986、Lian–Zuckerman 1989）把它当作定理处理。
+  【状态说明】本推导原标 rigorous，依据是「FGZ 1986 与 Lian–Zuckerman 1989 把它当定理处理」。
+  2026-09-10 的来源核实（literature/extractions/brst-cohomology-sources.md）推翻了这两条依据：
+    - FGZ 1986 里**没有**「Q^2 = 0 ⟺ c = 26」型的编号陈述；c = 26 是该文的假设
+      （§2.1「we will assume that π(c) = 26 Id_V」），Proposition 2.1(i) 只算出鬼场表示的中心荷 -26。
+    - Lian–Zuckerman 1989 是 *BRST cohomology of the super-Virasoro algebras*，处理 RNS 超弦
+      （临界值 ĉ = 10，即 c = 15），与玻色弦 c = 26 无关，原引用属**误引**，已删除。
+  剩下的两条来源里，Polchinski §4.3 是教科书式形式模式计算，Kato–Ogawa 1983 是物理文献且正文未获取。
+  按 docs/STATUS_LEVELS.md「不确定时选低的那级」，本推导降为 physical-argument。
+  这不是说该计算有错——它在受限模上确实是有限代数计算——而是说**目前没有任何已核实的数学来源**
+  可以支撑 rigorous 级别的可追溯性。
 gaps:
-  - "受限模假设已提升到陈述里，故不再是本推导的隐含缺口；但 Polchinski §4.3 的表述是形式模式计算，未声明该限制，本推导的严格版本取自半无限上同调文献。"
-  - "两条数学来源（fgz-1986、lian-zuckerman-1989）的定理编号未与原文核对，loc 中已标注；需 researcher 补齐后才算完整可追溯。"
-  - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构（Kato–Ogawa 定理），后者需另建节点。"
-  - "本推导只定出 c^m = 26（即 D = 26），不定出开弦截距 a = 1；a = 1 由 worldsheet.open-string-intercept 独立给出。"
-author: curator-critdim
+  - "升级为 rigorous 需要一条已核实定理编号的数学来源。候选：Lian–Zuckerman, *BRST cohomology and highest weight vectors I*, Commun. Math. Phys. 135 (1991) 547–580, DOI 10.1007/BF02104121（bib key lian-zuckerman-1991）——这是**一般 Virasoro**（非 super-Virasoro）的 BRST 上同调论文，比 1989 那篇更可能是正确出处；但**只核实了元数据，内容未核实**（见 brst-cohomology-sources.md §2.3）。次选：Kato–Ogawa 1983 正文（需绕过 ScienceDirect 403）。"
+  - "受限模假设已提升到陈述里，故不再是本推导的隐含缺口；但没有任何一条现有来源在受限模范畴中显式陈述并证明该幂零性判据，无穷模式和重排的合法性只在本项目的节点内部论证过。"
+  - "kato-ogawa-1983 的定理编号未核实，且未核实它给出的是「⟹」还是「⟺」；陈述写的是「当且仅当」，反方向（c^m = 26 ⟹ Q_B^2 = 0）目前只有 Polchinski 的形式计算支撑。"
+  - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构；后者见 worldsheet.brst-cohomology-equals-ocq-physical。"
+  - "本推导只定出 c^m = 26（即 D = 26），不定出开弦截距 a = 1；a = 1 由 worldsheet.open-string-intercept 独立给出。注意 Kato–Ogawa 摘要把 D = 26 与 a = 1 一并归给 BRS 幂零性，与本节点的拆分不完全一致（本项目按「一个节点一个命题」拆开）。"
+author: "curator-critdim；curator 按 brst-cohomology-sources.md 核实结果降级并改写 sources"
 created: "2026-09-10"

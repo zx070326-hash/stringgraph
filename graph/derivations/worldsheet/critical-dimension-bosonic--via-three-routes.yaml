@@ -27,7 +27,7 @@ summary: |
   本推导只做合取，不含新的物理输入，故其自身状态为 rigorous；
   但有效状态由最弱的一条决定，即光锥路线与截距节点的 physical-argument。
 gaps:
-  - "本推导不主张三条路线互相蕴含。三者只是各自挑出同一组 (D, a) = (26, 1)；它们之间的严格等价（例如 BRST 相对上同调与旧协变 H_phys/H_0 的同构，Kato–Ogawa / FGZ）是独立命题，尚未建节点。"
+  - "本推导不主张三条路线互相蕴含。三者只是各自挑出同一组 (D, a) = (26, 1)。其中路线 (ii) 与 (iii) 之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ 旧协变 H_phys/H_0；Kato–Ogawa 1983 提出，FGZ 1986 Theorem 2.8 第一个同构严格证明）。本推导仍不把它加为依赖，因为汇总陈述是三条路线的**合取**而非等价链；若日后要把汇总改写成「三条路线互相等价」，则必须显式依赖该节点。路线 (i)（光锥）与 (ii)(iii) 之间的等价仍无节点。"
   - "汇总节点的陈述把开弦截距 a 与闭弦情形混在一起表述；细化时应按开/闭弦分别陈述。(i) 与 open-string-intercept 明确写开弦，(ii)(iii) 与开闭弦无关。"
   - "路线 (iii) 的 c^m = 26 与路线 (i)(ii) 的 D = 26 之间需要 c^m = D（D 个自由玻色子的中心荷）这一步；该步写在 worldsheet.critical-dimension-brst 陈述末句，未单列节点。"
 author: curator-critdim

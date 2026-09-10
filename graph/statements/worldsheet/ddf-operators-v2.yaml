@@ -16,10 +16,17 @@ uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: gsw-1987-v1
-    loc: "§2.3.2，约 eq. (2.3.4x)（DDF 算子的定义式；式号未核实）"
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
     note: |
-      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；具体式号未与原书核对，
-      需 researcher 补齐。旧节点只写 "§2.3.2"，无式号。
+      2026-09-10 来源核实前本条写 "§2.3.2，约 eq. (2.3.4x)"，两处都不成立，已订正
+      （见 literature/extractions/brst-cohomology-sources.md §5.2–5.3）：
+      §2.3.2 的标题是 'Construction of transverse physical states'，只占 p.100–101；
+      DDF 与 spectrum-generating algebra 按目录属 §2.3.3（p.102–112），
+      Google Books 全文检索 'DDF' 在正文首次命中 p.103。
+      章节页码来自 CUP 25 周年版 frontmatter（经检索后端读取，L4，未逐字核对）+ Google Books
+      页码定位（做过两个对照实验验证命中真实性）。**式号仍未核实（L0）**：
+      Google Books 只回页码不回 snippet，且返回的不一定是首次出现页，只能当区间约束用。
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
   - ref: goddard-thorn-1972
     loc: "eq. (3)–(6)（式号未核实）"
     note: 式号沿用旧节点 worldsheet.ddf-operators，未与原文核对；GT 1972 未在 literature/extractions/ 登记。
