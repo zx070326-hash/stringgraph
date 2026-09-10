@@ -3,7 +3,7 @@ target: duality.ads-cft
 kind: conjecture-support
 status: conjecture
 depends_on:
-  - id: worldsheet.critical-dimension-bosonic
+  - id: worldsheet.critical-dimension-bosonic-v2
     inferred: true
     note: 占位：真正的依赖是超弦临界维数 D=10 与 D 膜低能有效作用量，这两个节点尚未建立。
 sources:
