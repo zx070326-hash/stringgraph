@@ -4,3 +4,4 @@ import StringFormal.Virasoro.Verma
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
+import StringFormal.NoGhost.PhysicalStates
