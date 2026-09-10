@@ -10,3 +10,4 @@ import StringFormal.NoGhost.FockSigned
 import StringFormal.NoGhost.PhysicalStates
 import StringFormal.NoGhost.VertexOperator
 import StringFormal.NoGhost.DDF
+import StringFormal.NoGhost.VertexWeight
