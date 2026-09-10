@@ -1,14 +1,14 @@
 /-
 # No-ghost theorem (Goddard–Thorn): statement file
 
-Graph node: `worldsheet.no-ghost-theorem-v2`
+Graph node: `worldsheet.no-ghost-theorem-v3` (successor chain: no-ghost-theorem → v2 → v3; check `superseded_by`)
 Milestone:  `ms.no-ghost-theorem`
 
 ## Scope of this file
 
 Only the *statement* lives here, and only once the ingredients exist:
 
-1. `StringFormal.Fock`   – Fock space of `D` free bosons (not yet written)
+1. `StringFormal.NoGhost.Fock` – Fock space of `D` free bosons (done; zero modes / momentum still missing)
 2. `StringFormal.Virasoro.Sugawara` – `L n` acting on Fock space, `c = D`
 3. `StringFormal.NoGhost.PhysicalStates` – `H_phys` as a submodule
 4. `StringFormal.NoGhost.DDF` – DDF operators and the transverse Fock space
