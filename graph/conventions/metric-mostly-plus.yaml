@@ -6,4 +6,4 @@ definition: |
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2"
+    loc: "前言 Conventions 表（MTW 约定，号差 (− + + … +)）；抽取记录 polchinski-1998-v1 §1 核实"

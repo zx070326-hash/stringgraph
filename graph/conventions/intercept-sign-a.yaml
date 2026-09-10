@@ -1,0 +1,15 @@
+id: conv.intercept-sign-a
+family: normal-ordering-constant
+title: 截距记号 a（物理态条件 (L_0 − a)|ψ⟩ = 0）
+definition: |
+  开弦物理态条件写作 (L_0 − a)|ψ⟩ = 0，临界值 a = 1。
+  Polchinski 用 A 且写 (L_0 + A)|ψ⟩ = 0，临界值 A = −1；换算 a = −A。
+  从 Polchinski 抽取的边转入本图时必须做此换算，否则与 Goddard–Thorn / GSW 的边差一个符号。
+canonical: true
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.2.2（物理态条件，a 记号）"
+  - ref: polchinski-1998-v1
+    loc: "§4.1，约 eq. (4.1.1)–(4.1.7)（A 记号，(L_0 + A)|ψ⟩ = 0；式号未核实）"
+notes: |
+  由 researcher 抽取记录 polchinski-1998-v1 §1 提出（2026-09-10）。
