@@ -63,6 +63,7 @@ gaps:
   - "本条只对紧支光滑测试函数成立；Polchinski 后续把它作用在算子插入上（而非测试函数上），
      那一步的缺口属 worldsheet.operator-equation-of-motion，不属本节点。"
 notes: |
+  reviewer-verified: lead#4 (acting reviewer), 2026-09-10 — 换算链 Δln|x|=2πδδ → Δln|z|²=4πδδ → ∂∂̄=Δ/4 ⇒ πδδ → δ²=½δδ ⇒ 2πδ² 已独立复核；按 STATUS_LEVELS 例外条款保持 rigorous。
   **status 定级的理由（curator, 2026-09-10）**：本推导的实质内容（二维 Laplace 基本解）
   有已核实编号、带完整证明的数学文献来源（Lieb–Loss Thm 6.20，L1），
   这部分严格性放在上游节点 math.laplace-fundamental-solution-2d 承担；
