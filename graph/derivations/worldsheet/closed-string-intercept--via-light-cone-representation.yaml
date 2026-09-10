@@ -1,0 +1,71 @@
+id: worldsheet.closed-string-intercept--via-light-cone-representation
+target: worldsheet.closed-string-intercept
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.closed-string-mass-formula
+    note: |
+      供给质量壳条件 (α'/2) m² = N + Ñ - a - ã 以及左右行的对称性 a = ã
+      （原书记号 A = Ã = -(D-2)/24）。本推导把「level (1,1) 无质量」代入它得 a + ã = 2，
+      再由 a = ã 得 a = ã = 1。来源 (1.4.8) 式号与内容已核实（抽取记录 #E22）。
+  - id: worldsheet.closed-string-level-matching
+    note: |
+      供给 N = Ñ。没有它，「第一激发级」在闭弦上不是单一能级：(N, Ñ) = (1, 0) 与 (0, 1)
+      也在 N + Ñ = 1 上，而它们不是物理态。来源 (1.4.10)/(1.4.11) 式号与内容已核实（#E23）。
+  - id: worldsheet.closed-string-oscillator-commutators
+    note: |
+      供给「level (1,1) 恰有 (D-2)² 个态 α^i_{-1} ᾱ^j_{-1}|0;k⟩」这一计数：左右行各是
+      (D-2) 份互相对易的 Heisenberg 代数、内积正定。来源 (1.4.6c)/(1.4.6d) 已核实（#E21）。
+  - id: worldsheet.light-cone-normal-ordering-constant
+    note: |
+      供给单行的 ζ 正规化常数 A = -(D-2)/24。该节点是对开弦（一组横向振子）陈述的，
+      闭弦对左右各用一次；抽取记录 #E22 明确写「其中 A = Ã = -(D-2)/24」，故这条边有来源支撑
+      （与 worldsheet.closed-string-mass-formula--via-light-cone-hamiltonian 的同名边同一理由，
+      不标 inferred）。
+      ⚠ 本推导**不**使用该常数的具体值来定 a：a = ã = 1 由小群表示论定出，与 D 无关。
+      挂这条边是因为目标陈述把 a、ã 认作「左右行各一份的正规序常数」，
+      即 a = ã 这一步的来源须在图上可查。把 a = (D-2)/24 与 a = 1 联立才给 D = 26，
+      那是 worldsheet.critical-dimension-light-cone（**开弦**）一侧的内容，不在本推导范围。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4：模式展开 (1.4.4)、振子对易关系 (1.4.6c)/(1.4.6d)、质量公式 (1.4.8)、σ 平移生成元与 level matching (1.4.10)/(1.4.11)（以上式号与内容均已核实，抽取记录 #E20–#E23）"
+    note: |
+      这四条是本推导的**已核实**锚点，覆盖除「第一激发级的谱」以外的全部输入。
+  - ref: polchinski-1998-v1
+    loc: "§1.4，第一激发级的谱（无质量、SO(D-2) 二阶张量、引力子/B 场/dilaton）：**式号与页码均未核实**，只知落在 (1.4.11) 与 (1.4.19) 之间"
+    note: |
+      **本推导的关键一步恰好落在这个未核实的位置上。** 抽取记录中 §1.4 的条目
+      （E20–E24）没有一条覆盖它，故无法给出式号；区间约束由两侧已核实的锚点
+      (1.4.11)（level matching）与 (1.4.19)（世界面宇称）给出。
+      与开弦一侧对照：开弦的同一论证有抽取记录 #E18（§1.3，p.23–24，页码已核实/式号未核实），
+      且 #E18 自评「**这一条最需要人工核对原文**」——闭弦一侧的定位比它还弱一级。
+summary: |
+  光锥量子化把闭弦的独立自由度定为左右各 (D-2) 个横向振子（且左右互相对易），
+  故满足 level matching 的第一激发级 (N, Ñ) = (1, 1) 恰有 (D-2)² 个态
+  α^i_{-1} ᾱ^j_{-1}|0;k⟩，它们构成 SO(D-2) 的二阶张量表示
+  （分解为无迹对称 ⊕ 反对称 ⊕ 迹）。
+  洛伦兹不变性要求每个质量能级的态构成对应小群的表示：无质量态的小群是 SO(D-2)，
+  有质量态的小群是 SO(D-1)。SO(D-2) 的矢量指标一对一地装在 (D-2)² 上，
+  而 SO(D-1) 的二阶张量需要 (D-1)² 个态（其不可约分块的维数也都与 (D-2)² 的三个分块不合），
+  故该能级必须**无质量**。
+  代入闭弦质量壳 (α'/2) m² = N + Ñ - a - ã 与 N = Ñ = 1 得 a + ã = 2，
+  再由左右对称性 a = ã（worldsheet.closed-string-mass-formula）得
+    a = ã = 1，
+  于是 α' m² / 4 = N - a = Ñ - ã。这是目标陈述中的 (c) ⇒ (a) ⇒ 「a = ã = 1」。
+gaps:
+  - "论证输入是「谱必须组织成洛伦兹小群表示」这一物理要求（光锥规范已破坏显式洛伦兹协变），属一致性要求而非定理，故记为 physical-argument。这与开弦一侧 worldsheet.open-string-intercept-v2--via-light-cone-representation 的第一条 gap 同型。"
+  - "**目标陈述的 (b)（旧协变一侧的伪态刻画）不由本推导支撑。** 本推导走的是光锥表示论，完全不涉及闭弦旧协变物理态条件；而本图**尚无**闭弦 OCQ 物理态空间的节点（worldsheet.old-covariant-physical-states 是开弦的）。补上 (b) 需要：(1) 建闭弦 OCQ 物理态条件节点（(L_0 - a)|ψ⟩ = (L̄_0 - ã)|ψ⟩ = 0 与 L_n|ψ⟩ = L̄_n|ψ⟩ = 0, n > 0）；(2) 建一条 --via-null-state-decoupling 推导，类比 worldsheet.open-string-intercept-v2--via-null-state-decoupling。在此之前，(b) 在图上是**无支撑的**，目标陈述已显式标注这一点。"
+  - "**小群计数在低维失效**：D ≤ 4 时 SO(D-2) 与 SO(D-1) 的表示计数论证不成立（D = 4 时 SO(2) 是阿贝尔群，「二阶张量表示」的分解与计数都退化）。目标陈述限定 D ≥ 5。本项目只关心 D = 26 附近，低维未处理。注：开弦卡片写的是 D ≥ 4，闭弦这里更保守一级，因为论证用的是二阶张量而非矢量。"
+  - "**「(D-1)² 个态」这一步是计数式的粗论证**：严格地说需要逐一排除「(D-2)² 个态凑成 SO(D-1) 的某组不可约表示之和」的可能，而不只是比较 (D-2)² 与 (D-1)²。教科书（以及开弦一侧的同型论证）都停在计数层面。本推导照实记为 physical-argument，不主张已排除全部可能。"
+  - "**关键一步的来源定位未核实**：第一激发级的谱在 §1.4 的位置（式号与页码）在抽取记录中没有条目，只有区间约束 (1.4.11)–(1.4.19)；且「引力子 / 反对称张量 / dilaton」这三个名字是否在原书此处出现也未核对（本卡片按标准教科书表述写出）。这是本节点最该被人工核对的一处。"
+  - "本推导给出 a = ã = 1，**不**给出 D = 26。闭弦一侧的 D = 26 需要把 a = (D-2)/24（worldsheet.light-cone-normal-ordering-constant，对每行各一份）与 a = 1 联立；图中现有的 worldsheet.critical-dimension-light-cone 是**开弦**的表述，闭弦版本未建节点。"
+  - "化简式 α'm² = 4(N-1) 是否在 Polchinski 书中显式出现未核实（抽取记录 §3 清单，与 worldsheet.closed-string-mass-formula 的同名 gap 相同）；本推导只把它作为代入 a = ã = 1 与 level matching 的直接结果。"
+notes: |
+  【本推导与开弦一侧的对照】结构照搬 worldsheet.open-string-intercept-v2--via-light-cone-representation
+  （谱须组织成小群表示 ⇒ 第一激发级无质量 ⇒ 由质量壳定出截距），三处不同：
+    1. 计数对象由矢量 (D-2) 换成二阶张量 (D-2)²，故 D 的下界收紧到 D ≥ 5；
+    2. 多一步「a = ã」，由 worldsheet.closed-string-mass-formula 的左右对称性供给；
+    3. 需要 level matching 才能把「第一激发级」定义清楚（开弦无此步）。
+  开弦一侧还有第二条推导（伪态解耦），闭弦一侧暂缺，见 gaps 第二条。
+author: curator
+created: "2026-09-11"

@@ -1,12 +1,12 @@
-id: worldsheet.critical-dimension-brst--via-nilpotency
-target: worldsheet.critical-dimension-brst
+id: worldsheet.critical-dimension-brst-v2--via-nilpotency
+target: worldsheet.critical-dimension-brst-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.brst-quantization-v2
     note: |
       提供 Q_B 的模式定义、bc 反对易关系、L^g_n 与受限模条件。
-      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。**这是本次换代唯一实质影响的推导**：
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。**这是那次换代唯一实质影响的推导**：
       旧卡的 statement 里写死 c^g = −26，而本推导的
       {Q_B,Q_B} = Σ ((c^m − 26)/12)(m³−m) c_{−m}c_m 里那个 26 就是 −c^g，
       从旧卡取该值等于「从一张 definition 卡里读一条命题」。v2 不再断言取值，
@@ -28,20 +28,8 @@ depends_on:
       已同时挂在 bc-ghost-central-charge 上。
       有效状态不受影响：bc-ghost-central-charge 的有效状态是 physical-argument，
       与本推导自身的 physical-argument 相同。
-  - id: worldsheet.free-boson-central-charge-d
-    inferred: true
-    note: |
-      本推导的目标陈述末句写「物质部门取 D 个自由玻色子 X^μ 时 c^m = D，故 Q_B^2 = 0 ⟺ D = 26」。
-      「c^m = D」这一步同样不是本推导算出来的，它是 worldsheet.free-boson-central-charge-d。
-      标 inferred 的理由：本推导的来源位置（Polchinski §4.3）不在原地论证 c = D，
-      而是引用 §2.4 末至 §2.5 初的结果；而那处的公式号在本图中是**完全未核实**的
-      （抽取记录 polchinski-1998-v1.md E34 与 Q4：唯一一条核心陈述既无式号也无页码锚点）。
-      本图未核实 §4.3 是否显式回指 §2.4，故标 inferred。
-      本条边正是 worldsheet.free-boson-central-charge-d 的 notes 里所建议的
-      （「建议 lead 让后续修订把 critical-dimension-brst 与 critical-dimension-weyl-anomaly 的
-      这一步显式指向本节点」）；weyl-anomaly 那一侧的边已存在。
-      有效状态不受影响：free-boson-central-charge-d 有一条 rigorous 推导
-      （--via-mode-algebra），高于本推导自身的 physical-argument。
+      **本条边在 2026-09-11 的 v2 换代中保留**：v2 只删掉目标陈述的末句（c^m = D 那一步），
+      c^g = −26 仍写在陈述正文里。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
@@ -62,7 +50,8 @@ sources:
         "In addition, ghost number fractionization is observed in this system."
       **方向已由此确定为「⟹」**（"are **required by** the nilpotency"），反方向摘要中无陈述。
       摘要把 D = 26 与 α_0 = 1 一并归给 BRS 幂零性，与本项目「一个节点一个命题」的拆分不同
-      （本推导只定 c^m = 26）。正文未获取（ScienceDirect 403），定理编号未核实。
+      （本推导只定 c^m = 26；连由 c^m = 26 到 D = 26 的换算也不在目标陈述内）。
+      正文未获取（ScienceDirect 403），定理编号未核实。
       报告号 KUNS 637（INSPIRE，L2；检索后端 L4 对该归属有异议，未裁决）可作为找扫描件的钥匙。
       见 literature/extractions/primary-sources-round2.md §6 与 brst-cohomology-sources.md §6。
   - ref: fgz-1986
@@ -81,9 +70,10 @@ summary: |
   {Q_B, Q_B} = Σ_{m∈Z} ((c^m - 26)/12)(m^3 - m) c_{-m} c_m。
   由 c_{-m} c_m 的线性无关性得 Q_B^2 = 0 ⟺ c^m = 26。
   等价地：Q_B^2 = 0 ⟺ 总 Virasoro L_n = L^m_n + L^g_n + a^g δ_{n,0} 无中心扩张。
-  （记号：c^m 是物质中心荷，c_n 是鬼场模式；沿用 worldsheet.brst-quantization 的上标约定。）
+  （记号：c^m 是物质中心荷，c_n 是鬼场模式；沿用 worldsheet.brst-quantization-v2 的上标约定。）
 
-  【状态说明】本推导原标 rigorous，依据是「FGZ 1986 与 Lian–Zuckerman 1989 把它当定理处理」。
+  【状态说明】本推导（在旧 id worldsheet.critical-dimension-brst--via-nilpotency 下）原标 rigorous，
+  依据是「FGZ 1986 与 Lian–Zuckerman 1989 把它当定理处理」。
   2026-09-10 的来源核实（literature/extractions/brst-cohomology-sources.md）推翻了这两条依据：
     - FGZ 1986 里**没有**「Q^2 = 0 ⟺ c = 26」型的编号陈述；c = 26 是该文的假设
       （§2.1「we will assume that π(c) = 26 Id_V」），Proposition 2.1(i) 只算出鬼场表示的中心荷 -26。
@@ -106,6 +96,22 @@ gaps:
   - "受限模假设已提升到陈述里，故不再是本推导的隐含缺口；但没有任何一条现有来源在受限模范畴中显式陈述并证明该幂零性判据，无穷模式和重排的合法性只在本项目的节点内部论证过。"
   - "kato-ogawa-1983 的定理编号仍未核实（正文未获取）；但**方向已核实为「⟹」**（primary-sources-round2.md §6，INSPIRE 逐字摘要）：原文写「the conditions D = 26 and α_0 = 1 for the space-time dimension D and the zero-intercept α_0 of leading trajectory are **required by** the nilpotency Q_B² = 0 of the BRS charge」，即 Q_B² = 0 ⟹ (D = 26 且 α_0 = 1)（必要性）。**反方向（c^m = 26 ⟹ Q_B² = 0）在该摘要中没有陈述**，目前只有 Polchinski §4.3 的形式计算支撑；而目标陈述写的是「当且仅当」。注：反方向本身另有一个更弱但独立的节点 worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2）。"
   - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构；后者见 worldsheet.brst-cohomology-equals-ocq-physical。"
-  - "本推导只定出 c^m = 26（即 D = 26），不定出开弦截距 a = 1；a = 1 由 worldsheet.open-string-intercept 独立给出。注意 Kato–Ogawa 摘要把 D = 26 与 a = 1 一并归给 BRS 幂零性，与本节点的拆分不完全一致（本项目按「一个节点一个命题」拆开）。"
-author: "curator-critdim；curator 按 brst-cohomology-sources.md 核实结果降级并改写 sources"
+  - "本推导只定出 c^m = 26，**既不定出 D = 26，也不定出开弦截距 a = 1**。由 c^m = 26 到 D = 26 需要 c^m = D（worldsheet.free-boson-central-charge-d），该步自 2026-09-11 的换代起不再属于本推导的目标陈述，而由汇总卡片 worldsheet.critical-dimension-bosonic-v2 的推导 --via-four-routes 显式供边；a = 1 由 worldsheet.open-string-intercept-v2 独立给出。注意 Kato–Ogawa 摘要把 D = 26 与 a = 1 一并归给 BRS 幂零性，与本项目「一个节点一个命题」的拆分不一致。"
+notes: |
+  【2026-09-11 换代】本文件由 worldsheet.critical-dimension-brst--via-nilpotency 改挂到换代后的
+  陈述 worldsheet.critical-dimension-brst-v2（旧卡末句把 c^m = D 这一步绑进 BRST 幂零性判据，
+  见 docs/ROADMAP.md 待拆清单与目标卡片的 notes）。因 derivation id 必须写成
+  `<statement-id>--via-<method>`（graph/CLAUDE.md 的 id 规则），无法就地改 id，
+  故新建本文件并删除旧文件（`git mv`）。
+
+  **与旧推导的唯一实质差别**：depends_on 去掉了 worldsheet.free-boson-central-charge-d
+  那条 inferred 边。理由：那条边是为旧陈述末句「c^m = D 故 ⟺ D = 26」而挂的，
+  v2 的陈述里已经没有那一步；继续挂着会让图上出现一条**目标陈述里不存在的**推理步骤。
+  该步现由 worldsheet.critical-dimension-bosonic-v2--via-four-routes 作为 (III)(IV) 的公共输入
+  显式供边（且那里**不**标 inferred，因为它的 sources 列出了 §2.4 末至 §2.5 初这一被论证的位置）。
+  其余（sources、summary、gaps 的前四条、bc-ghost-central-charge 的 inferred 边、状态
+  physical-argument）逐字沿用；gaps 末条按新的边界改写。
+  有效状态不变：free-boson-central-charge-d 有 --via-lean（formalized），从未压低本推导；
+  去掉它不改变 min。
+author: "curator-critdim；curator 按 brst-cohomology-sources.md 核实结果降级并改写 sources；curator 2026-09-11 换代到 v2 目标"
 created: "2026-09-10"
