@@ -30,5 +30,13 @@ notes: |
 
   本节点的存在只是为了让依赖它的结论（DBI 作用量、T 对偶改变膜维数）在报告中
   显示出真实的证据强度，而不是把这一步藏起来。
+
+  **档位（lead 裁定 2026-09-11，依 reviewer-ch8）**：本节点保留为独立节点，
+  唯一的推导 `--via-implicit-use-in-text` 标 **physical-argument**，不标 conjecture。
+  依据 docs/STATUS_LEVELS.md 的「断言 + 骨架」一节：
+  「论证不完整」与「结论可能为假」是两个不同的轴，前者用 gaps 记录；
+  原书没有把这一极限当猜想提出，文献中也没有人认为它为假，
+  把它压成 conjecture 会让 `conjectures-depended-on` 报告失去含义。
+  原先的 `--via-implicit-use`（conjecture-support / conjecture）已删除。
 author: curator-polchinski-ch8
 created: "2026-09-11"

@@ -1,6 +1,6 @@
 id: duality.t-duality-is-cft-isomorphism
 kind: proposition
-title: T 对偶把半径 R 与半径 α'/R 的紧化自由玻色子送成同一个世界面理论
+title: T 对偶保持谱、T/T̄ 与 OPE：半径 R 与半径 α'/R 的紧化自由玻色子
 statement: |
   设玻色闭弦的一个坐标 X = X_L + X_R 紧化在半径 R（conv.compactification-radius），
   其余坐标不动。定义**对偶坐标**
@@ -19,27 +19,40 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length, conv.worldsheet-complex-coords]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§8.3, eq. (8.3.28)，p.247；用到 (8.2.16)（X_L、X_R 的模式展开）与 (8.3.27)"
+    loc: "§8.3, eq. (8.3.28)（X' = X_L − X_R 的**定义**），p.247–248；「the same theory」与「same OPEs and energy momentum tensor」在 p.248 正文（无式号）；用到 (8.2.16)（X_L、X_R 的模式展开）与 (8.3.27)"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E133，证据等级：
-      **式号与页码 L1，原书措辞 L0**。本轮拿到的全部措辞都是 Schrans 的复述
-      （笔记 p.461），抽取者**未能取得原书这一段**。
-      ⚠ 见抽取记录 Q20：无法确认原书用的是「the same CFT」/「exactly equivalent」
-      还是只说了「谱相同」「振幅相同」，也无法确认「非微扰」这个词是否出自原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E133，**证据等级 L1（原书直读）**。
+      **Q20 已于 2026-09-11 按原书核实关闭（抽取记录 §12.10 表 A）**：
+      (8.3.28) 是**定义式** X' = X_L − X_R；「the same theory」的陈述与
+      「same OPEs and energy momentum tensor」这个理由**都在原书**；
+      「非微扰 / 精确成立」的断言也在原书（p.248，无式号，靠 SU(2)×SU(2) 规范对称性论证）。
+      ⚠ **原书同时给出两条限定**：
+      (a) 两组场的关系在**世界面上是非局域的**（p.248）；
+      (b) p.248 逐字「We do not have a nonperturbative understanding of string theory,
+          but we do know a great deal about low energy field theory …」
+          ——即「精确成立」那一步是**时空有效场论论证**，不是世界面论证
+          （抽取记录 §12.10 表 C 第 15 条）。
+      本卡的 statement 仍只承载谱与世界面算子两层，不承载「同一个 CFT」与「非微扰」。
 tags: [t-duality, compactification, cft, closed-string, worldsheet, phase2]
 notes: |
-  **未核实的更强措辞（抽取记录 Q20，本图不写进陈述）**：Schrans 的复述逐字为
-  「the theory with X and X' are exactly the same CFTs, and this is a
-  **non-perturbative** statement, as they have the same OPE and energy-momentum tensor.
-  The two theories related by T-duality are thus the same, also at a non-perturbative level.」
-  ——「**同一个 CFT**」与「**非微扰**」这两句**均未核对原书**，故不进入 statement，
-  只记在此。若日后核实原书确有此措辞，应新建 v2 陈述并把本卡标 superseded_by，
-  不得就地改写本卡的 statement 文本。
+  **更强措辞已核实在原书（Q20 关闭，2026-09-11）**：原书 p.248 确实陈述两个理论是
+  「the same theory」，理由是「same OPEs and energy momentum tensor」，
+  并断言这是**精确 / 非微扰**的。Schrans 的复述（「exactly the same CFTs … also at a
+  non-perturbative level」）因此是忠实的。
+  **本卡的 statement 仍不含这两句**，理由有三：
+  (1) 原书同时写明两组场的关系在**世界面上非局域**；
+  (2) 「非微扰」那一步靠的是 SU(2)×SU(2) 规范对称性 + **时空有效场论**论证
+      （p.248 自承「We do not have a nonperturbative understanding of string theory」），
+      证据层次与本卡承载的世界面论证不同，应当另建节点；
+  (3) 本卡已提交到本分支，按 graph/CLAUDE.md 不得就地改写 statement 文本。
+  **→ 给 lead 的建议**：新建 `duality.t-duality-is-exact-nonperturbatively`
+  （kind proposition，推导 kind physical-argument、status physical-argument，
+  依赖本卡 + 时空 EFT 论证），而不是把本卡升格；本卡不标 superseded_by。
 
-  上面的 (3b) 是把 Schrans 给出的理由（「相同的 OPE 与能动张量」）写成可检查的形式；
-  即使这条理由确实出自原书，它给出的也是**世界面 CFT 同构**，而不是
+  上面的 (3b) 是把原书给出的理由（「相同的 OPE 与能动张量」）写成可检查的形式；
+  它给出的是**世界面层面的谱与算子对应**，而不是
   「弦论作为时空理论在非微扰层面等价」——后者还需要弦耦合展开之外的输入，
-  本书此处没有给。
+  原书在 p.248 用的是 SU(2)×SU(2) 规范对称性加低能有效场论的论证。
 
   独立的第二条路线（**不作为本卡的 source**）：Headrick 习题解答 Problem 8.3
   把 X^{25} 的平移对称性规范化（引入世界面规范场 A_a 与 Lagrange 乘子 φ），

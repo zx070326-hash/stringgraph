@@ -1,7 +1,7 @@
 id: compact.o-k-k-orbit-preserves-evenness--via-orthogonality-relations
 target: compact.o-k-k-orbit-preserves-evenness
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: compact.narain-lattice
 sources:
@@ -14,7 +14,11 @@ summary: |
   Schrans 的复现是把 Λ 按左右分块、由 Λ^TηΛ = η 得三个分块关系再逐项代入化简，
   结果相同。
 gaps:
-  - "这一步是一行线性代数、前提完整，但缺 reviewer 独立复核记录，按 docs/STATUS_LEVELS.md 不走 rigorous 例外；有 reviewer 复核后可升 rigorous（但其下游仍被 compact.o-k-k-orbit-preserves-self-duality 压低）。"
+  - "本条自身的论证是一行线性代数、前提完整，已由 reviewer 复核并升 rigorous（见 notes）。但其下游 compact.narain-moduli-space 仍被 compact.o-k-k-orbit-preserves-self-duality 与 compact.modular-invariance-requires-self-dual-lattice 压到 physical-argument。"
   - "「ΛΓ 仍是秩 2k 的离散格」来源未明说（Λ 可逆故成立）。"
+notes: |
+  `reviewer-verified: reviewer-ch8, 2026-09-11`
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外（lead 裁决 2026-09-10）升 proof / rigorous：
+  前提完整（Γ 偶、Λ^TηΛ = η），论证是一行线性代数，reviewer 已独立复核。
 author: curator-polchinski-ch8
 created: "2026-09-11"

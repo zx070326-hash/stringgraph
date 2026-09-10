@@ -1,7 +1,7 @@
 id: compact.self-dual-radius-extra-massless-states--via-integer-solutions
 target: compact.self-dual-radius-extra-massless-states
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: compact.circle-closed-string-mass-formula
   - id: compact.circle-level-matching
@@ -21,8 +21,13 @@ summary: |
   由 N, Ñ ≥ 0 得 (n ± w)² ∈ {0, 4}，即 n ± w ∈ {0, ±2}；
   逐一枚举四种组合并回解 (n, w) 即得表中的 (a)–(d)。
 gaps:
-  - "整数解的枚举本身是初等算术，但没有 reviewer 独立复核记录，按 docs/STATUS_LEVELS.md 不走 rigorous 例外。"
-  - "上游质量公式与 level matching 都是 physical-argument（截距 a = ã = 1、协变/光锥形式的等同），故本条的有效状态被压到 physical-argument。"
+  - "整数解的枚举是有限步初等算术，已由 reviewer 独立复核并升 rigorous（见 notes）。它只把给定的两条质量壳条件解出来，不为那两条条件本身负责。"
+  - "上游质量公式与 level matching 都是 physical-argument（截距 a = ã = 1、协变/光锥形式的等同），故本条的**有效状态**仍被压到 physical-argument，尽管本推导自身的论证是 rigorous 的。"
   - "「这些态只在 R = √α' 处无质量」需要 R 附近的质量随 R 变化不为零，本节点未陈述；对应式是 (8.3.20)（抽取记录 #E130），本图未建卡。"
+notes: |
+  `reviewer-verified: reviewer-ch8, 2026-09-11`
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外（lead 裁决 2026-09-10）升 proof / rigorous：
+  给定两条质量壳条件后，4 = (n+w)² + 4N 与 4 = (n−w)² + 4Ñ 在 N, Ñ ∈ Z≥0 上的解
+  是有限步穷举，前提完整，reviewer 已独立复核。
 author: curator-polchinski-ch8
 created: "2026-09-11"

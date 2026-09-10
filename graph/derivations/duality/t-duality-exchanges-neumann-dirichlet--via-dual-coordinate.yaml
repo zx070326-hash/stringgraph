@@ -1,10 +1,16 @@
 id: duality.t-duality-exchanges-neumann-dirichlet--via-dual-coordinate
 target: duality.t-duality-exchanges-neumann-dirichlet
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
+  - id: duality.dual-coordinate
+    note: |
+      提供对偶坐标 X' = X_L − X_R 的定义与恒等式 ∂_σX = −i∂_τX'（纯变量替换）。
+      本推导的全部代数内容来自这张卡。
   - id: duality.t-duality-is-cft-isomorphism
-    note: 提供对偶坐标 X' = X_L − X_R 的定义与它给出同一个世界面理论这一事实。
+    note: |
+      只提供「X' 描述的是半径 α'/R 的那个理论」这一事实，即本条之所以是**T 对偶**的
+      陈述而不只是一条坐标恒等式。边界条件的代数本身不用它（改用 duality.dual-coordinate）。
   - id: worldsheet.open-string-neumann-boundary-condition
     convention_map: |
       上游在洛伦兹世界面（conv.worldsheet-lorentzian）上写 ∂^σX^μ = 0；
@@ -14,19 +20,36 @@ depends_on:
   - id: worldsheet.open-string-doubling-trick
     inferred: true
     note: |
-      开弦上「X_L 与 X_R 是同一个全纯场在双倍区域上的两半」这一结构是把 X' = X_L − X_R
-      写成开弦上的局域场的前提。原书在 §8.6 没有回引 doubling trick，故标 inferred。
+      **只借用上半平面加倍构造这一件事**：开弦上 X_L 与 X_R 是同一个全纯场在双倍区域上的
+      两半，这是把 X' = X_L − X_R 写成开弦上一个场的前提。
+      本推导**不**使用 doubling trick 的任何其他结论（不用它算关联函数、不用它定镜像电荷）。
+      原书在 §8.6 没有回引 doubling trick，故标 inferred。
+      ⚠ 与此相关：原书明记 X 与 X' 的关系在世界面上**非局域**（p.248，抽取记录 Q20）；
+      加倍构造让 X' 在开弦上仍可当作一个场来写，但这条非局域性是本边值得标 inferred 的
+      实质理由之一。
 sources:
   - ref: polchinski-1998-v1
     loc: "§8.6, eq. (8.6.15)，p.266"
     note: 抽取记录 polchinski-1998-v1#E151（L1，Schrans §8.106，笔记 p.521，[8.469]–[8.471]）。
 summary: |
+  **前提（本推导显式写出，来源未写）**：开弦的每个端点在世界面上描出一条沿世界面时间
+  连通的世界线（σ¹ = 0 与 σ¹ = π 各一条，参数为 τ ∈ R）。
+
   由 X = X_L + X_R、X' = X_L − X_R 与 ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄ 直接得
-  ∂_σ X = −i(∂X_L − ∂̄X_R) = −i ∂_τ X'。
-  于是 ∂_σX = 0（Neumann）⟺ ∂_τX' = 0（端点处 X' 不随时间变化 = Dirichlet）。
+  ∂_σ X = −i(∂X_L − ∂̄X_R) = −i ∂_τ X'（duality.dual-coordinate）。
+  在端点处取 Neumann 条件 ∂_σX = 0，等价地 ∂_τX' = 0，即 X' 沿该端点世界线的
+  τ-导数恒为零；由世界线连通，X' 在该端点上取常值。这正是 Dirichlet 条件。
+  反向同理（∂_τX' = 0 ⟹ ∂_σX = 0），故两类边界条件在 X ↔ X' 下逐点互换。
+
+  全部内容是两行代数加一次「导数恒为零 + 定义域连通 ⟹ 取常值」，前提已完整写出。
 gaps:
-  - "这一步是两行代数、前提完整，缺 reviewer 独立复核记录，按 docs/STATUS_LEVELS.md 不走 rigorous 例外；有复核后可升 rigorous（但上游 duality.t-duality-is-cft-isomorphism 仍是 physical-argument，有效状态不变）。"
-  - "「∂_τX'|_∂ = 0 ⟺ X'|_∂ = const」这一步（从导数为零到取值固定）在来源中没有单独论证；它需要端点在世界面时间上连通。"
-  - "上游 duality.t-duality-is-cft-isomorphism 的原书措辞未核实（抽取记录 Q20）。"
+  - "「∂_τX'|_∂ = 0 ⟹ X'|_∂ = const」需要端点世界线沿世界面时间连通；**来源没有单独论证这一步**，本推导把它写成显式前提（见 summary 第一段）。"
+  - "上游 duality.t-duality-is-cft-isomorphism 只被用来保证 X' 描述的是对偶理论；它自身是 physical-argument，故本条的**有效状态**仍是 physical-argument，尽管本推导自身的论证是 rigorous 的。"
+  - "⚠ **旧 gap 已撤销**：原先写「上游 duality.t-duality-is-cft-isomorphism 的原书措辞未核实（Q20）」——Q20 已于 2026-09-11 按原书核实关闭（§12.10 表 A）。"
+notes: |
+  `reviewer-verified: reviewer-ch8, 2026-09-11`
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外（lead 裁决 2026-09-10）升 proof / rigorous：
+  前提已完整写出（含端点世界线连通这一条，原先只在 gaps 里），
+  论证是有限步初等计算（变量替换 + 一次积分常数论证），且 reviewer 已独立复核。
 author: curator-polchinski-ch8
 created: "2026-09-11"

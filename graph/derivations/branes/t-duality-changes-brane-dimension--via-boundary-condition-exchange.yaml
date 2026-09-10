@@ -20,7 +20,7 @@ summary: |
   膜的世界体维数 p + 1 = 满足 Neumann 的方向数，故每对一个 Neumann 方向作对偶，
   p 减 1；对一个 Dirichlet 方向作对偶，p 加 1。
 gaps:
-  - "⚠ 在未紧化方向上使用 T 对偶依赖 duality.t-duality-in-decompactification-limit，该节点是 conjecture（本书无论证）。因此本条的有效状态是 conjecture，不是 physical-argument。"
+  - "⚠ 在未紧化方向上使用 T 对偶依赖 duality.t-duality-in-decompactification-limit：本书对这一极限无论证，也没有把它写成前提。该节点按 lead 2026-09-11 的「断言 + 骨架」裁决标 physical-argument（缺口记在它自己的 gaps 里），故本条的有效状态是 physical-argument，而不再被压到 conjecture。"
   - "无式号：Schrans 说这段在原书 p.269，但没有给出式号（抽取记录 §10）。"
   - "「膜的维数 = Neumann 方向数」这一记账在 branes.d-brane-from-t-duality 的定义里，来源没有把它写成独立命题。"
 author: curator-polchinski-ch8

@@ -29,6 +29,6 @@ gaps:
   - "⚠ 表达式与全部数值系数**未从原书抄出**；本卡因此只作弱陈述（形状与规范不变组合），不含系数、不含张力 τ_p。"
   - "⚠ 伴读者得到的张力 T_p 与原书 τ_p 归一化不同（他自陈）；抽取记录明令不得把该 T_p 挂到 polchinski-1998-v1。"
   - "⚠ Schrans Open Questions 第 8 条：他看不出 (8.7.5)（作用量里的几何因子）从哪来。"
-  - "⚠ 依赖未论证的 decompactification 极限（抽取记录 Q27），该上游是 conjecture，故本条的有效状态是 conjecture。"
+  - "⚠ 依赖未论证的 decompactification 极限 duality.t-duality-in-decompactification-limit（抽取记录 Q27）：把未紧化方向当作 R → ∞ 的紧化方向，原书既没有论证也没有把它写成前提。该上游按 lead 2026-09-11 的「断言 + 骨架」裁决标 physical-argument（缺口记在它自己的 gaps 里），故它不再把本条压到 conjecture；但本条的有效状态仍不高于 physical-argument。"
 author: curator-polchinski-ch8
 created: "2026-09-11"

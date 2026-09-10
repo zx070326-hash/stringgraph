@@ -14,23 +14,32 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§8.4, eq. (8.4.28)（模掉 O(k;R)×O(k;R)）与 (8.4.30)（再模掉 O(k,k;Z)），p.253"
+    loc: "§8.4, eq. (8.4.28)（未模掉离散群的版本）与 **(8.4.31)**（Narain 模空间，模掉 O(k,k;Z)），p.253"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E142，
-      内容 L1、**式号 L2**（源内冲突）。
-      ⚠ Schrans **目录**写 8.71 → (8.4.28)、8.72 → (8.4.30)，但其**正文两节标题都写 (8.4.28)**；
-      本图**采目录值**（§8.72 的内容确实是「再模掉 O(k,k,Z)」，与 §8.71 不是同一式），
-      与抽取记录 §9.0 的裁断一致。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E142，**式号已按原书核实（L1）**。
+      **2026-09-11 更正（抽取记录 §12.10 表 B 第 20 条）**：模空间是 **(8.4.31)**，
+      不是本卡原先写的 (8.4.30)。原书的编号分工是：
+      (8.4.28) = 未模掉离散群的版本；(8.4.29) = 参数计数；
+      (8.4.30a,b) = 等价关系；**(8.4.31) = Narain 模空间本身**。
+      ⚠ 旧 note 写「式号 L2（源内冲突），采 Schrans 目录值」——该裁断已作废，
+      现按原书直读。
 tags: [compactification, torus, narain, moduli-space, t-duality, o-d-d]
 notes: |
-  **本节点的有效状态被两条弱环压住**：compact.o-k-k-orbit-preserves-self-duality
-  （无任何来源给出论证）与 compact.modular-invariance-requires-self-dual-lattice
-  （原书只写 "a little thought shows"）。这正是抽取记录 §11 建议 4 说的
-  「模空间 (8.4.30) 的有效状态被后两条压到最低」。
+  **有效状态的瓶颈（2026-09-11 修订）**：原先写「被两条弱环压住，其中
+  compact.o-k-k-orbit-preserves-self-duality 无任何来源给出论证」，
+  并引抽取记录 §11 建议 4 的「模空间的有效状态被后两条压到最低」。
+  **该说法已撤销**：按原书核实（§12.10 表 A 的 Q22），原书给了自对偶那一半的论证
+  （ℓ 只通过 ∘ 积进入，∘ 在 O(k,k;R) 下不变）。
+  现在真正的瓶颈只剩两条，且都是 physical-argument 档而非更低：
+  (a) compact.modular-invariance-requires-self-dual-lattice（原书只写
+      "a little thought shows"，无论证）；
+  (b) **轨道的传递性**——(8.4.25) 只说 ΛΓ 仍是偶自对偶格，不说任意两个偶自对偶格
+      都被某个 Λ 联系；本图没有节点承载传递性，它记在本卡推导的 gaps 里。
 
-  **本书此处没有给模空间上的度规或体积**；(8.4.35)/(8.4.39) 给的是**模场的动能项**
-  （抽取记录 #E144，且 Schrans 明说「We will not perform the detailed calculation」），
-  那是另一回事，本图不建卡。
+  **模空间度规：原书有（2026-09-11 更正）**。本卡原先写「本书此处没有给模空间上的
+  度规或体积」，**该说法已撤销**（§12.10 表 B 第 21 条）：原书 **(8.4.34)/(8.4.35)**
+  明确定义模空间度规，并说 (8.4.31) 上有**唯一**的 O(k,k;R) 不变度规；
+  前提是先做 (3.7.25) 的时空 Weyl 重标度。本图暂未为度规建卡，建议 lead 排入 ROADMAP。
 
   一条附带事实（Schrans §8.71 正文，L1）：B_{mn} = 0 且每个紧化方向都在 R = √α' 时，
   规范群是 (SU(2)×SU(2))^k = SU(2)^{2k}。本图不单独建卡。

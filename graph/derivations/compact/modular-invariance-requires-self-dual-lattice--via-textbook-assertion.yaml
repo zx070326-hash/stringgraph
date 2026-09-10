@@ -13,9 +13,9 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§8.4, eq. (8.4.24) 的后半句，p.252"
     note: |
-      抽取记录 polchinski-1998-v1#E139/Q21。原书逐字（经 Schrans 引号转引）：
-      「a little thought shows that it is also necessary if modular invariance is to hold
-      for all τ」。**没有论证。**
+      抽取记录 polchinski-1998-v1#E139/Q21，**L1（原书直读，见 §12.10 表 A）**。
+      原书 p.252 逐字：「a little thought shows that it is also necessary if modular
+      invariance is to hold for all τ」。**没有论证。**
 summary: |
   **本推导没有论证可复述。** 原书在给出「自对偶 ⇒ 模不变」之后，用一句
   「a little thought shows that it is also necessary if modular invariance is to hold
@@ -25,7 +25,7 @@ summary: |
 gaps:
   - "⚠ **原书对这一步没有给出任何论证**（Schrans 引号直接转引 + 明说复现不出）。这是本条唯一也是全部的缺口。"
   - "任何二手源（Schrans、Headrick）都没有补上这一步；本项目也没有登记能支撑它的数学文献。"
-  - "status 档位待 reviewer-ch5 关于「无论证断言」的裁定；若新增更低档位，本推导应随之下调。"
+  - "本条的 status 按 lead 2026-09-11 的「断言 + 骨架」裁决定为 physical-argument（断言 + 无论证 → physical-argument，缺口记在 gaps；不压成 conjecture）。它不表示这一步已被复核，只表示缺口已显式记账。"
 notes: |
   按抽取记录 Q21 的明确要求：**不要把 Narain 的「偶自对偶」当成一条已证定理挂上去**。
   本卡与 compact.self-dual-lattice-gives-modular-invariance 的证据强度差一个档位，
