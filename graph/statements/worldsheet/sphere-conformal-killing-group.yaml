@@ -36,15 +36,37 @@ sources:
       ⚠ L1 只保证「[S] 这么写」，不保证原书这么写。
   - ref: schrans-2020
     loc: "§6.2（笔记 p.277）、§6.23（p.296）、§6.67（p.333）：内容的实际读取来源（核对源）"
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.5.2, p.6"
+    note: |
+      **数学侧来源（2026-09-11 由 curator-ckg-followups 补），L1 逐字**（math-sources.md §39.7.1）：
+      「The homomorphism γ ⟼ φ_γ of PSL(2,C) into the group of all holomorphic automorphisms
+      Aut(P¹) of the Riemann sphere is an isomorphism.」
+      ⚠ **它直接支撑的是本卡的 (3)（整体群是 PSL(2,C)），而且比 (3) 更强**：
+      它还断言 PSL(2,C) **穷尽** Aut(P¹)。本卡 (3) 只说「相应的有限变换群是 Möbius 群」，
+      不断言穷尽性——穷尽性的承载节点是 math.automorphisms-of-riemann-sphere-are-mobius。
+      ⚠ **它不直接给 (1)(2)**：从「自同构群」到「CKV 向量场空间、κ = 6」还要过桥 (B1)，
+      见推导 worldsheet.sphere-conformal-killing-group--via-automorphism-group 的第一条 gap。
+      ⚠ 该文件未印年份，bib key 不带年份，偏离 literature/CLAUDE.md 规范，待 lead 裁决。
+  - ref: eynard-2018-lectures
+    loc: "Ch. 5, Theorem 1.1, eq. (1-1), p.77"
+    note: |
+      **独立第二来源，L1 逐字**（math-sources.md §39.7(d)）：`ℳ_{0,0} = {(ℂP¹)}`，`Aut = PSL(2,ℂ)`。
+      ⚠ 该讲义**每章内部重新计数**，loc 必须写「Ch. 5, Theorem 1.1」，
+      只写「Theorem 1.1」会与 Ch. 4 的同号定理混淆。
+      ⚠ 同一条还顺带给出 `ℳ_{0,0}` 是单点（μ(S₂) = 0 的旁证），
+      但**本卡明写不断言 μ = 0**，故这半句不进本卡。
 tags: [worldsheet, tree-level, sphere, conformal-killing-vector, mobius, psl2c]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E89 建立。
 
-  **与第 5 章的关系（待补边）**：Riemann–Roch κ − μ = 3χ（抽取记录 E75，(5.2.9)）在 S₂ 上给
-  κ − μ = 6，与本命题的直接构造 κ = 6、μ = 0 互为佐证（[S] §6.67 正是这样用的）。
-  第 5 章的节点由另一名 curator 建立，本批次提交时**尚未进入 main**，故本卡片把
-  「共形 Killing 方程 ∂̄δz = 0」写进 statement 作为**前提**而不是依赖边，
-  推导节点里标 inferred 并留 gap，**待 ch5 节点合入后补边**。
+  **与第 5 章的关系（★ 2026-09-11 更新，curator-ckg-followups）**：原记录写「ch5 节点尚未进入 main，
+  待合入后补边」——**已办**。两条推导现都挂了 worldsheet.conformal-killing-equation（(5.2.7)，
+  CKV 的定义与方程）与 worldsheet.ckv-holomorphic-in-conformal-gauge（共形规范复坐标下 ⟺ ∂̄δz = 0）。
+  **残余项**：Riemann–Roch κ − μ = 3χ（E75, (5.2.9)）在 S₂ 上给 κ − μ = 6，
+  与本命题的直接构造 κ = 6、μ = 0 互为佐证（[S] §6.67 正是这样用的），
+  但本图**仍不建那条边**：worldsheet.riemann-roch-kappa-minus-mu 正在被另一名 curator 换代，
+  且 μ(S₂) = 0 那一半在图上还是断言。换代落地后由 lead 决定是否接。
 
   **[S] 的一处笔误已订正**：他写「we thus need a_n = 0 for n > 3」，但由 δu = Σ a_n u^{2−n}
   的正则性得到的条件是 **n > 2**，且他下一句自己就说「only a₀, a₁, a₂ can be non-zero」。
@@ -54,8 +76,14 @@ notes: |
   向量场」，更适合 cft 或 math area；现放 worldsheet 是沿用抽取记录 E89 的归类。
   id 不可改，日后换代时新建 cft.* 或 math.* 卡并给本卡写 superseded_by。
 
-  **数学表述的对应**：本命题等价于「P¹ 上的全局全纯向量场空间是 sl(2,C)，dim_C = 3」。
-  本图目前**没有**该数学事实的文献来源节点；若日后 researcher 登记一本复几何/黎曼曲面教材，
-  可为本命题补一条 --via-<math-source> 的 rigorous 推导（见推导节点的 gaps）。
+  **数学表述的对应（★ 2026-09-11 更新）**：本命题等价于「P¹ 上的全局全纯向量场空间是 sl(2,C)，
+  dim_C = 3」加上「Aut(P¹) = PSL(2,C)」。原记录写「本图没有该数学事实的文献来源节点」——**已部分办掉**：
+  - **群那一半有了**：math.automorphisms-of-riemann-sphere-are-mobius（Miličić Thm 1.5.2，rigorous），
+    新推导 worldsheet.sphere-conformal-killing-group--via-automorphism-group 走这条线。
+  - **向量场那一半仍然没有**：「全局全纯向量场空间 = Lie(Aut)」这一步
+    （math-sources.md §39.8 的桥 (B1)）在本项目登记的文献里**没有来源**，
+    新推导对此明留 gap，故它的 status 仍是 physical-argument，**本卡的有效状态没有因此升高**。
+  ⇒ 想让本卡到 rigorous，缺的是 (B1) 的来源（或 reviewer 对该步的复核记录），
+  而**不是**再多找一本讲 Aut(P¹) 的教材。
 author: curator-polchinski-ch6
 created: "2026-09-11"
