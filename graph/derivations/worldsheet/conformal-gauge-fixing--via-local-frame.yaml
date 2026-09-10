@@ -4,6 +4,28 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: conv.worldsheet-complex-coords
+  - id: worldsheet.polyakov-action-symmetries
+    inferred: true
+    note: |
+      本推导的整个论证以「理论具有世界面微分同胚不变性」为前提（(ii) 的参数计数里
+      「微分同胚有 2 个参数」这一项，以及 (iii) 里「残余变换是那些把 δ_{ab} 变回 ∝ δ_{ab} 的
+      微分同胚」）。该不变性本身的论证不在本推导的来源位置（Polchinski §3.3）里，
+      而在 §1.2（即 worldsheet.polyakov-action-symmetries 的来源）；§3.3 只是**使用**它。
+      本图未核实 §3.3 是否显式回指 §1.2，故按项目规则标 inferred。
+      ⚠ 世界面号差不一致：polyakov-action-symmetries 讲的是洛伦兹号差世界面度规 γ_{ab}
+      （(-,+)，conv.metric-mostly-plus 下的 Polyakov 作用量），本节点讲的是**欧氏**世界面度规
+      g_{ab}（§2.1 起的欧氏化之后）。「diff 不变性在欧氏化后仍成立」这一步是标准但未在本图
+      建节点的步骤（本图没有世界面号差的约定节点，只有时空号差的 metric family）。
+  - id: worldsheet.polyakov-weyl-invariance
+    inferred: true
+    note: |
+      本推导的 (ii) 用到「Weyl 有 1 个参数」并用一次 Weyl 变换消去 e^{2ω}，(iii) 用到
+      「补偿的 Weyl 变换」；两处都以 Polyakov 作用量的 Weyl 不变性为前提。
+      与上一条同理：论证在 §1.2（worldsheet.polyakov-weyl-invariance 的来源），
+      本推导的来源 §3.3 只使用它，故标 inferred。
+      ⚠ 同样有洛伦兹/欧氏世界面号差的未建节点转写步骤。
+      另注：这里用到的是**经典** Weyl 不变性（规范自由度的存在性）；量子层面的 Weyl 反常
+      不影响本节点（规范固定是经典操作），但影响下游，见 worldsheet.critical-dimension-weyl-anomaly。
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.6)、(3.3.8)，p.85（式号经 schrans-2020 核实；(3.3.6) 的表达式经其 §5.1 正文核实）"
@@ -22,7 +44,14 @@ gaps:
      数学来源（核实定理编号）后，(i)(ii) 部分可望升级。"
   - "全局规范固定不在本节点范围内：模空间与共形 Killing 向量的存在使 (ii) 只能局部成立。
      来源本身也只写「at least locally」。"
-  - "前提『Polyakov 作用量具有 diff × Weyl 对称性』（抽取记录 E7）在本分支上没有对应节点，
-     被写进陈述文本作为假设而非依赖边；待 E7 节点合入后须补边。"
+  - "『diff × Weyl 对称性』这一前提现已补成两条显式边（worldsheet.polyakov-action-symmetries、
+     worldsheet.polyakov-weyl-invariance，抽取记录 E7 拆成的两个节点，2026-09-10 合入 main）。
+     两条边标 inferred，因为论证在 Polchinski §1.2 而非本推导来源 §3.3。
+     **剩余缺口**：陈述文本仍把这一前提写成假设并注「本图未单建该节点」，这句话已过时；
+     按「不改已提交节点的 statement 文本」的规则不动它，如需更正须新建 v2 陈述。"
+  - "洛伦兹 → 欧氏世界面的转写没有节点：两条新加的边来自洛伦兹号差世界面度规 γ_{ab} 的
+     对称性（§1.2），本节点是欧氏号差 g_{ab}（§2.1 起）。本图的 metric family 只管**时空**号差，
+     没有世界面号差的约定节点。建议 lead/auditor 决定是否新建
+     conv.worldsheet-signature-euclidean 一族。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

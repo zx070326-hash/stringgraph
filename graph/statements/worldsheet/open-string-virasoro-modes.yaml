@@ -43,5 +43,16 @@ notes: |
 
   **待拆**（reviewer-ch23 提出，本轮不拆）：本卡片把「开弦模展开的定义」与
   「这组模满足的代数关系 / 具体表达式」写在一起；后者是命题，日后若被独立推导或引用应拆出。
+
+  **零模与形式化（2026-09-10 跨分支补注）**：Fock 空间的形式化定义见
+  worldsheet.bosonic-fock-space（status: formalized，formal/StringFormal/NoGhost/Fock.lean），
+  但那个空间**没有零模**——它是 α^μ_{-n}（n ≥ 1）生成的多项式代数，动量 k 只是外部标签，
+  不出现在空间的结构里。本节点断言的
+    L_0 = α' p² + Σ_{n≥1} α_{-n}·α_n,   α^μ_0 = (2α')^{1/2} p^μ
+  恰恰以零模为核心（α_0 ∝ p），故**尚未形式化**：要把它落到 Lean 侧的 Fock 空间上，
+  必须先显式扩张该定义补上 x^μ、p^μ（见 bosonic-fock-space 的 notes 缺口 (i)）。
+  同理，下游的质量壳条件 (L_0 - a)|ψ⟩ = 0 与 worldsheet.old-covariant-physical-states
+  也不继承 bosonic-fock-space 的 formalized 状态。
+  因此本节点的 uses 不加 worldsheet.bosonic-fock-space。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
