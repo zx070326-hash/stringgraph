@@ -200,6 +200,7 @@ notes: |
   status: formalized。本推导的 status 与 depends_on 未动，但
   `stringgraph status worldsheet.spurious-orthogonal-to-physical` 现在报 effective: formalized。
 
+  【已过期（2026-09-11，reviewer-batch9）：下段写于 QuotientForm.lean 合入之前；gaps (i) 已由 pairing_add_null / quotientPairing_mk 关闭，见上文，本推导已升回 formalized。保留仅作历史。】
   ⚠ **留给 reviewer / lead 的一条诚实保留**：天花板一消，本节点就以 formalized 报出，
   而上面 gaps (i)（陈述 (2) 后半：「加零态不改变内积」与「商空间 H_phys/N 上的诱导形式良定义」
   在 Lean 里没有具名引理）**仍然存在**。即：本节点的 formalized 覆盖陈述 (1) 与 (2) 前半，

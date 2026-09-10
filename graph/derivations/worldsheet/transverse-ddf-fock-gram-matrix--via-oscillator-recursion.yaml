@@ -158,16 +158,14 @@ notes: |
   与已在 Lean 中机器验证的同型计算（`Fock.pairing_monomial_monomial`）逐步同构。
   按条款还需 reviewer 独立复核并在本处记录：
 
-  reviewer-verified: <pending>
+  reviewer-verified: reviewer-batch9, 2026-09-11
 
-  **lead 裁决（2026-09-11）**：允许在 reviewer 复核落记之前先标 rigorous，
-  条件是本条 `<pending>` 显式留在这里、且复核清单写明。
+  **复核记录**：reviewer-batch9 于 2026-09-11 逐项复核下列三项，全部通过（Leibniz 计数、归纳两情形与 d'=e' ⟺ d=e、有序域正定与线性无关）。
   **reviewer 复核清单（三项，都是记账，不需要新数学）**：
     1. 第 1 步的 (★)：Leibniz 展开对 N 的归纳、以及「贡献非零对易子的 r 恰有 e(i,n) 个」的计数；
     2. 第 2 步归纳步的两个情形（e(i,n) = 0 与 ≥ 1）与 d' = e' ⟺ d = e 的等价；
        特别是 d = e 时 (i,n) 处因子的对上：n · d(i,n) · n^{d(i,n)−1} (d(i,n)−1)! = n^{d(i,n)} d(i,n)!；
     3. 第 3 步在有序域上由 Σ c_d² G_d 得正定与线性无关的两个方向。
-  复核完成后请把 `<pending>` 换成 `<agent>, <date>`，并删除本段的 lead 裁决说明。
 
   **推导名 `--via-oscillator-recursion`**：与 DDF 家族里走「权与围道形变」的
   `--via-conformal-weight` 和走「顶点算子伴随」的 `--via-vertex-operator-adjoint` 区分。
