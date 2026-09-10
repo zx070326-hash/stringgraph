@@ -149,7 +149,62 @@
   `worldsheet.ocq-spurious-states` 的 `lean_decl` 填 `spuriousSubmodule`；
   `worldsheet.open-string-intercept--via-null-state-decoupling` 的 level 1 半边可引
   `Lop_neg_one_apply_one_mem_nullSubmodule`（但该推导还需 level 2 与唯一性，不能标 formalized）。
-- [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。
+- [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
+  `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
+  `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
+
+  **路线选择：走了 lead 倾向的 (A) 多动量 Fock 空间路线**，不是 (B) 公理化。理由：
+  (B) 把 DDF 算子的存在性设为假设，形式化的就只是"无鬼定理在 DDF 存在下的推论"，
+  而无鬼定理的全部力气恰恰在于构造这些算子，价值很低。选 (A) 之后发现工程量比预期小，
+  因为在**代数** Fock 空间 `MvPolynomial (Osc D) R` 上顶点算子的两半都是初等的：
+  - 产生半 `E_-(z) = exp(Σ_{m≥1} (b·α_{-m}/m) z^m)` 只是"乘以交换环 `Fock D R` 的一个元素"，
+    其单项式系数就是经典指数权 `∏ (η_μ b^μ)^{d(v)} / (v.2^{d(v)} d(v)!)`；它的**全部**所需性质
+    （`∂/∂X_{μ,m}` 把它乘上 `η_μ b^μ / m` 并把 z 次数降 m）在系数层面一行可证，
+    不需要任何"exp 的乘法性质"或 Schur 多项式组合学。
+  - 湮灭半 `E_+(z) = exp(-Σ_{l≥1} (b·α_l/l) z^{-l})` 的指数是**常系数导子**
+    （在 `η^{μμ}η_{μμ}=1` 下 `b·α_l/l = Σ_μ b^μ ∂/∂X_{μ,l}`），所以 `E_+` 就是**变量平移**
+    `X_{μ,l} ↦ X_{μ,l} - b^μ T^l`，即一个到 `Polynomial (Fock D R)` 的代数同态
+    （`vertexSub`），其 `T^L` 系数就是多项式取系数。完全不需要收敛性。
+  - 二者的乘积 `V_K = Σ_L Φ_{K+L} Ψ_L` 用 `Sugawara.lean` 已有的 `lsumLocFin` 实现：
+    逐向量只有有限多项非零（`Ψ_L` 在 `L` 超过平移后多项式的次数时为零）。
+
+  已做（(1)(2) 全做完，(3) 只做了归约不含底）：
+  - [x] (1) **动量塔与移位算子**：`TowerFock D R = ℤ →₀ Fock D R`，第 `j` 层动量参数
+    `towerMomentum a b j = a + j·b`（`b^μ = (2α')^{1/2} k_0^μ`；与图节点的 `k - N k_0` 的
+    字典是 `j = -N`）；`towerShift n`（= `e^{i n k_0·x}`，把第 `j` 层送到第 `j+n` 层）、
+    `towerDiag`、`towerMode`、`towerLop`，以及 `lie_towerLop_towerMode`。
+    另有动量算术：`dotVec_towerMomentum_right_of_isotropic`（`k_0²=0` ⟹ `k_0·p` 沿塔不变，
+    即图节点 ddf-operators-v4 说明 (b)）与 `invTwo_mul_zeroModeSq_towerMomentum`
+    （`α'(k - N k_0)² = α'k² - N`，即 no-ghost-theorem-v4 (1b) 的质量壳记账）。
+  - [x] (2) **指数顶点算子的振子部分**：`Fock.creaExp`（产生半的 Laurent 系数）、
+    `Fock.vertexSub` / `Fock.vertexAnn`（湮灭半）、`Fock.vertexOsc η b K`（`z^K` 系数）。
+    核心定理 **`Fock.lie_mode_vertexOsc`**：`[α^μ_p, V_K] = b^μ V_{K-p}`（`p ≠ 0`）；
+    `Fock.lie_mode_zero_vertexOsc`：单个 Fock 空间上 `p = 0` 的括号**为零**（物理关系需要动量移位）；
+    **`Fock.mode_vertexOsc_sub`**：左边用参数 `a+b`、右边用参数 `a` 的双动量形式，对**所有** `p`
+    （含 0）成立；塔上的版本是 **`lie_towerMode_towerVertex`**。
+    分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
+    `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
+    横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
+  - [ ] (3) **共形权 `[L_m, V]`**：**未做**。真正的陈述是
+    `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
+    `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
+    `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
+    取定值的算子族唯一），加上 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode`，把该恒等式
+    **归约为真空上的单条等式**，即计算 `L_m` 作用在相干态系数 `creaExp` 上。那条计算未做。
+    做它需要的组合输入已经看清楚：欧拉型递推 `M·Φ_M = Σ_{l=1}^{M} (b·α_{-l}) Φ_{M-l}`，
+    在系数层面等价于 `Σ_v (η_{v.1} b^{v.1}) w(d - e_v) = (level d) · w(d)`，可由
+    `Fock.expWeight_add_single` 直接得到。
+
+  **未做（下一项 `ddf-spans` 之前必须补）**：
+  - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
+    （`lie_towerMode_towerVertex_of_eq_zero` 允许把 `α^i_m` 移到右边，那里 `m` 大时湮灭态）
+    加上 `vertexOsc_apply_eq_zero_of_level`；**这一步是本项发现的一个实质数学点**：
+    没有 `ε·k_0 = 0`，围道积分的模态和在代数 Fock 空间上**不是**有限和。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
+  - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
+    塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
+  - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
+    出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [ ] `negative-norm-above-26`：D > 26 时显式负模态。
