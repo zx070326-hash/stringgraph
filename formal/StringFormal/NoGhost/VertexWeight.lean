@@ -587,6 +587,61 @@ lemma Lop_apply_X_mul (η a : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (m 
   rw [← h]
   abel
 
+/-- **The conformal-weight identity on a general state, for `m ≥ 1`.**
+
+`L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b + ½ (m+1) (b·b)) V_{J-m}`,
+
+where `V_J = vertexOsc η b J` is the `z^J` Laurent coefficient of the oscillator part of
+`:e^{i c·X(z)}:`, the left Virasoro generator carries the shifted zero mode `a + b` and the
+right one the original zero mode `a` (the two-momentum bookkeeping of
+`Fock.mode_vertexOsc_sub`).
+
+Proof: both sides, as families of endomorphisms indexed by `J`, satisfy the *same*
+creation-mode recursion.  For the left side this uses `Fock.lie_Lop_mode` (through
+`Fock.Lop_apply_X_mul`) together with `Fock.mode_vertexOsc_sub`; for the right side only
+`Fock.mode_vertexOsc_sub`.  The coefficient is affine in `J` with slope `1`, which is exactly
+what compensates the `l · V_{J+l-m}` term produced by `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}`.  On
+the vacuum the two sides agree by `Fock.Lop_apply_creaExp_of_pos_shifted` and
+`Fock.Lop_apply_one_of_pos`.  `Fock.eq_zero_of_vertex_recursion` then forces equality.
+
+The `m < 0` case is *not* of this shape and is not covered here (see the file header). -/
+theorem lie_Lop_vertexOsc_of_pos (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : 0 < m) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (J - m) := by
+  have hzero := eq_zero_of_vertex_recursion b
+    (fun K : ℤ => (Lop η (a + b) m ∘ₗ vertexOsc η b K - vertexOsc η b K ∘ₗ Lop η a m)
+      - (((K : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (K - m)) ?_ ?_ J
+  · rwa [sub_eq_zero] at hzero
+  · intro v K P
+    have hidx1 : K - m + ((v.2 : ℕ) : ℤ) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hidx2 : K - (m - ((v.2 : ℕ) : ℤ)) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hmv := mode_vertexOsc_sub η a b hη v.1 (m - ((v.2 : ℕ) : ℤ)) K P
+    rw [hidx2] at hmv
+    have hT2 : mode η (a + b) v.1 (m - ((v.2 : ℕ) : ℤ)) (vertexOsc η b K P)
+        = vertexOsc η b K (mode η a v.1 (m - ((v.2 : ℕ) : ℤ)) P)
+          + b v.1 • vertexOsc η b (K + ((v.2 : ℕ) : ℤ) - m) P := by
+      rw [← hmv]; abel
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply]
+    rw [vertexOsc_X_mul η b v K P, map_sub, map_smul,
+      Lop_apply_X_mul η (a + b) hη m v (vertexOsc η b K P),
+      Lop_apply_X_mul η a hη m v P, map_add, map_smul,
+      vertexOsc_X_mul η b v K (Lop η a m P),
+      vertexOsc_X_mul η b v (K - m) P, hT2, hidx1]
+    simp only [mul_sub, mul_add, mul_smul_comm]
+    push_cast
+    module
+  · intro K
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply,
+      vertexOsc_apply_one]
+    rw [Lop_apply_one_of_pos η a hm, map_zero,
+      Lop_apply_creaExp_of_pos_shifted η a b hη hm K]
+    abel
+
 end LopVertexOsc
 
 end Fock
