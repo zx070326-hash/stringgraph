@@ -269,7 +269,53 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
     这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
     （`desc*_mem_levelSpan`），但线性无关仍缺 → 与「Kac 行列式」的等同还差 `pbw-verma` (b)。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`（对具体向量，非基）。
+  - **level 3**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelThree.lean`，无 sorry，
+    公理只有标准三条）：对 `desc3 = L₋₃v`、`desc21 = L₋₂L₋₁v`、`desc111 = L₋₁³v` 的
+    9 个内积（`gram_level_three_entries`，非对角项经 `IsContravariant.comm` 对称）：
+
+        ⟨L₋₃v, L₋₃v⟩ = 6h + 2c      ⟨L₋₃v, L₋₂L₋₁v⟩ = 10h      ⟨L₋₃v, L₋₁³v⟩ = 24h
+        ⟨L₋₂L₋₁v, L₋₂L₋₁v⟩ = 8h² + ch + 8h        ⟨L₋₂L₋₁v, L₋₁³v⟩ = 36h² + 12h
+        ⟨L₋₁³v, L₋₁³v⟩ = 48h³ + 72h² + 24h
+
+    3×3 行列式 `gram_level_three_det`：
+
+        det₃ = 48 h² (16h² + 2h(c−5) + c) (3h² + h(c−7) + c + 2)
+
+    中间因子正是 level-2 行列式除以 2h——与 Kac 公式预言的「rs = 2 的根在 N = 3 以重数
+    p(3−2) = p(1) = 1 重现」逐项吻合。`gram_level_three_det_eq_kac` 把它写成 Kac 乘积形
+
+        det₃ = 2304 (h − h₁₁)² (h − h₁₂)(h − h₂₁)(h − h₁₃)(h − h₃₁),
+
+    Kac 根只经对称函数进入（假设形式：`h₁₁ = 0`、`8(h₁₂+h₂₁) = 5−c`、`16h₁₂h₂₁ = c`、
+    `3(h₁₃+h₃₁) = 7−c`、`3h₁₃h₃₁ = c+2`），所以定理与 √((c−1)(c−25)) 的分支约定无关。
+    辅助引理 `kac_factor_rs_two` / `kac_factor_rs_three` 是清分母后的二次因式分解；
+    `kac_level_three_at_c_one` 是 c = 1 处的退化核对：det₃ = 144h²(4h−1)²(h−1)²，
+    与 `h_{r,s} = (r−s)²/4` 给的 h₁₁ = 0、h₁₂ = h₂₁ = 1/4、h₁₃ = h₃₁ = 1 一致（完全平方）。
+    另有 `desc3/desc21/desc111_mem_levelSpan` 与正交性实例
+    `gram_level_one_three` / `gram_level_two_three`。
+    ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
+    与「level-3 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`（均对具体向量，非基）。
+  - **常数 α_N 的正确形状（2026-09-11，formalizer 用 CAS 独立核对，未形式化）**：
+    `worldsheet.kac-determinant` 卡上悬而未决的 α_N，在本仓库这组 PBW 型基下满足
+
+        α_N = ∏_{r,s≥1, rs≤N} ( (2r)^s · s! )^{ p(N−rs) − p(N−r(s+1)) }。
+
+    注意指数是 **p(N−rs) − p(N−r(s+1))**，不是某些文献里随手写的 p(N−rs)。
+    数值核对：N=1 → 2；N=2 → 32（= `gram_level_two_det` 的 2·16）；
+    N=3 → 2304（= 48·16·3，本文件的 `gram_level_three_det_eq_kac`）；
+    N=4 → 37748736（= 384·16²·3·8·16，由 5×5 Gram 的 CAS 行列式反读）。
+    用 p(N−rs) 当指数会给 N=2 → 64、N=3 → 36864，与实际行列式**不符**。
+    ⇒ α_N > 0 在 N ≤ 4 上是**已核对的事实**（每个因子都是正整数），
+    但一般 N 的正性仍只是这个乘积公式的推论，而该公式本身未形式化也未在已核实来源里逐字找到。
+  - **N = 4 的下一步目标**（CAS 已给出、尚未形式化）：基 {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}，
+
+        det₄ = 384 h³ (8h + c − 1) (16h² + 2h(c−5) + c)² (3h² + h(c−7) + c + 2)
+                   (16h² + 10ch − 82h + 15c + 66),
+
+    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根），
+    末因子 = 16(h − h₁₄)(h − h₄₁)（h₁₄+h₄₁ = (41−5c)/8，h₁₄h₄₁ = (66+15c)/16）。
+    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合。
 
 ## 无鬼定理岛
 

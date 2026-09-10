@@ -67,6 +67,7 @@ StringFormal/
   Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
   Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
   Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
+  Virasoro/ShapovalovLevelThree.lean   level-3 Gram（9 个内积）与 det₃ = 48h²(16h²+2h(c−5)+c)(3h²+h(c−7)+c+2)，及其与 Kac 公式 N=3 乘积形 2304(h−h₁₁)²(h−h₁₂)(h−h₂₁)(h−h₁₃)(h−h₃₁) 的等同
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
   Math/FiniteCounts.lean    六边形奇数扭转数 Σ_{k odd} C(6,k) = 32（GS (12c) 的"32"）；**GSO 扇区穷举**（Polchinski §10.6 (a)(b)(c) 字面有 10 解，maximal 者恰 6 个 = IIA/IIB/IIA′/IIB′/0A/0B——"maximality" 是原书未明说的第四条件）
