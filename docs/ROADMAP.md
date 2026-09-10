@@ -73,9 +73,15 @@
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
 - `worldsheet.no-ghost-theorem-v4`（(1) D=26 等距同构 与 (2) D>26 负模 的来源集合不相交：GT/Goddard/FGZ 只管 (1)，LZ 只管 (2)；拆成两卡后 LZ 可作 (2) 的独立推导。涉及里程碑指向，须在船长批准 v4 之后作为 v5 换代处理，不阻塞本次审批）
+- `worldsheet.open-string-intercept`（"α'm² = N − a"已 formalized 覆盖，"一致性要求 a = 1"是 physical-argument，绑在一起无法记账；与 open-string-l0-level-form 同构）
+- 待建：`H_phys 按 level 分级`（Fock.physSubmodule_eq_iSup_inf_levelSubmodule，现成 formalized 命题）
+- `worldsheet.physical-states-level-one` 的 (3) 可拆出"a = 1 处纵向光子是零模态"
 - `worldsheet.open-string-virasoro-modes-v2`（仍内嵌 doubling trick 命题，reviewer-batch2）
 - `worldsheet.fock-indefinite-form`（"有序域上不定"末句未形式化：加一条平凡 Lean 引理或移到 notes）
-- `worldsheet.brst-cohomology-equals-ocq-physical`（--via-fgz 与 --via-lian-zuckerman 互补而非各自完整；researcher 读 LZ p.566–567 确认典范等距是否由包含映射诱导，否则拆目标）
+- ~~`worldsheet.brst-cohomology-equals-ocq-physical` 拆目标~~ 已否决（2026-09-11）：LZ Lemma 2.22 p.565 逐字给出映射 ω ↦ [ω ⊗ 鬼真空]，两条推导都覆盖具体映射，不拆。
+- 待建：`math.virasoro-universal-central-extension`（H²(Vir, C) = 0），brst-nilpotent-at-c26--via-fgz 对这一步无支撑，与 virasoro-unique-central-extension（H²(Witt)）不是同一命题
+- 待建："共形正规序与产生-湮灭正规序给出同一组 L_m（L_0 差 a^X / a^g）"节点，目前在三处以散文重复
+- 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
 - 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载
 
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）

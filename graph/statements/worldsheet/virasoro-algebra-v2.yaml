@@ -1,0 +1,84 @@
+id: worldsheet.virasoro-algebra-v2
+kind: definition
+status: formalized
+title: Virasoro 代数（李代数定义；不含唯一性断言）
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C；ℚ-代数是为了让 1/12 有意义）。
+
+  **载体**：Vir(R) := W(R) ⊕ R，其中 W(R) 是 Witt 代数（math.witt-algebra）。
+  记 L_n := (ℓ_n, 0)（n ∈ Z）与 C := (0, 1)。
+
+  **括号**：Vir(R) 上的 R-双线性李括号由
+
+    [L_m, L_n] = (m − n) L_{m+n} + ((m^3 − m)/12) δ_{m+n,0} · C,
+    [C, X] = [X, C] = 0        (X ∈ Vir(R))
+
+  唯一确定（第一式右端第二项即 conv.virasoro-standard 的 (c/12) m(m^2−1) δ_{m+n,0}，
+  其中中心荷 c 是 C 在给定表示上的标量值）。这确实是李代数：括号交错且满足 Jacobi 恒等式。
+
+  **结构**：{L_n : n ∈ Z} ∪ {C} 张成 Vir(R)；作为 R-模有线性同构 Vir(R) ≅ W(R) × R。
+  投影 π : Vir(R) → W(R)，(w, r) ↦ w 是李代数同态，含入 ι : R → Vir(R)，r ↦ (0, r) 是单射，
+  且 ker π = im ι，即
+
+    0 → R → Vir(R) → W(R) → 0
+
+  是正合列，ι(R) 落在 Vir(R) 的中心。故 Vir(R) 是 W(R) 的一个一维中心扩张。
+
+  **本节点不断言**：Vir(R) 是 W(R) 的**唯一**非平凡一维中心扩张。那是一条独立命题，
+  见 worldsheet.virasoro-unique-central-extension（未形式化）。
+uses: [math.witt-algebra]
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.VirasoroAlgebra
+  lean_file: StringFormal/Virasoro/Basic.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Basic.lean :: StringFormal.Virasoro.VirasoroAlgebra；VirasoroAlgebra.{lgen, cgen, toProdₗ, lie_lgen_lgen, cgen_lie, lie_cgen, ofCentre, ofCentre_lie, lie_ofCentre, toWitt, toWitt_surjective, ofCentre_injective, toWitt_eq_zero_iff}；span 版本 VirasoroAlgebra.span_lgen_cgen_eq_top 在 formal/StringFormal/Virasoro/Verma.lean"
+    note: |
+      本仓库，提交 ecc4c5c（Basic.lean，"formal: replace Virasoro placeholder with a real
+      LieRing/LieAlgebra instance"）与 b138286（span_lgen_cgen_eq_top，在 Verma.lean 中）。
+      这是本节点 status: formalized 的依据，逐句对应：
+      - 载体与生成元 → `VirasoroAlgebra R := LieAlgebra.ofTwoCocycle (virasoroCocycle R)`、
+        `lgen`、`cgen`；
+      - 括号 → `lie_lgen_lgen : ⁅L n, L m⁆ = (n − m) • L (n+m) + (if n+m = 0 then
+        centralTerm R n else 0) • C`，其中 `centralTerm R n = (n^3 − n)/12`；
+      - 中心性 → `cgen_lie` / `lie_cgen` / `ofCentre_lie` / `lie_ofCentre`；
+      - 模同构与张成 → `toProdₗ : Vir ≃ₗ[R] Witt × R`、`span_lgen_cgen_eq_top`；
+      - 正合列 → `toWitt_surjective`、`ofCentre_injective`、`toWitt_eq_zero_iff`。
+      无 sorry，公理仅 propext / Classical.choice / Quot.sound。
+      **未打包**：`Basis (Option ℤ) R (VirasoroAlgebra R)` 实例尚未构造，故陈述里写的是
+      「张成 + 模同构」而不是「以 {L_n} ∪ {C} 为基」；后者由 toProdₗ 与 Witt 的基立即得到，
+      但 Lean 中没有这条声明（见 formal/TODO.md 与本节点 notes）。
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.19)"
+    note: "物理侧的标准写法与归一化，即 conv.virasoro-standard 的出处。"
+  - ref: virasoro-lean-2025
+    loc: "Definition 8.1（Virasoro 代数；编号已核实）"
+    note: |
+      本项目实现的设计来源（Apache-2.0，非代码移植），署名见
+      formal/StringFormal/Virasoro/ATTRIBUTION.md。该文取 [Field 𝕜] [CharZero 𝕜]，
+      本节点按本仓库实现取 ℚ-代数 R，条件更弱。
+tags: [cft, algebra, lie-algebra, formalized]
+notes: |
+  【本卡片是 worldsheet.virasoro-algebra 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单）
+  旧卡 worldsheet.virasoro-algebra 把两件事写在一张定义卡上：
+  (a) 李代数的定义（生成元、括号、中心性）；
+  (b)「它是 Witt 代数的**唯一**非平凡中心扩张」。
+  (a) 已在 Lean 中完成，(b) 没有（Mathlib v4.33.1 有 2-上循环但没有 2-上边缘与上同调商）。
+  合成一张卡使整卡只能标 rigorous，从而把所有引用它的下游都压在 rigorous 以下。
+  本卡片**逐字包含**旧卡陈述除最后一句以外的全部内容，故所有引用「Virasoro 代数的括号关系」
+  的节点已就地改指本卡片；(b) 由 worldsheet.virasoro-unique-central-extension 承载。
+
+  【基环】陈述对任意 ℚ-代数 R 成立。Witt 代数本身（math.witt-algebra）对任意交换环成立，
+  ℚ-代数条件只来自中心项的 1/12。C、R、Q 都满足。
+
+  【已知的形式化缺口 —— 这些是刻意不写进陈述的】
+  (i) **基**：`Basis (Option ℤ) R (VirasoroAlgebra R)` 未构造，见 formal/TODO.md
+      「Virasoro 代数的基」一项。陈述里只写「张成」与「Vir ≅ W(R) × R」，两者都已证。
+  (ii) **唯一性**：见上，已拆出为独立命题卡。
+  (iii) 本节点是抽象李代数，**不**断言任何具体表示（Sugawara 构造、自由玻色子的 L_m 等）
+      满足这些关系；那些是 worldsheet.virasoro-generators-free-boson 等节点的事。
+
+  【查重】新增前跑过 `stringgraph search virasoro / witt / central`。
+author: curator
+created: "2026-09-11"

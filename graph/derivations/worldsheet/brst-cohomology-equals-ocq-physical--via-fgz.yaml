@@ -5,7 +5,7 @@ status: rigorous
 depends_on:
   - id: worldsheet.brst-quantization
   - id: worldsheet.old-covariant-physical-states
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: fgz-1986
     loc: "Theorem 2.8，第一个同构：P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p))，p ≠ 0"

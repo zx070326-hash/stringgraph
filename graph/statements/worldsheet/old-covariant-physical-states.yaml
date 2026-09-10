@@ -1,24 +1,127 @@
 id: worldsheet.old-covariant-physical-states
 kind: definition
-status: rigorous
+status: formalized
 title: 旧协变量子化中的物理态空间
 statement: |
   取 D 个自由玻色子 X^μ 的 Fock 空间 F（度规 η_{μν}，模式 α^μ_n），
   Virasoro 生成元 L_n 由 Sugawara 型构造给出，中心荷 c = D。
   物理态空间定义为 H_phys = {|ψ⟩ ∈ F : (L_0 - a)|ψ⟩ = 0, L_n|ψ⟩ = 0 ∀ n>0}，
   其中 a 是截距常数。零模态为 H_phys 中与所有物理态内积为零者。
-uses: [worldsheet.virasoro-algebra]
+uses:
+  - worldsheet.virasoro-algebra-v2
+  - worldsheet.bosonic-fock-space
+  - worldsheet.virasoro-generators-free-boson
+  - worldsheet.fock-indefinite-form
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.physSubmodule
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.physSubmodule（成员刻画 Fock.mem_physSubmodule；零模态 Fock.nullSubmodule 与 Fock.mem_nullSubmodule，经 Fock.orthComplement；level 分解 Fock.physSubmodule_eq_iSup_inf_levelSubmodule）"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      这是本节点 status: formalized 的依据。逐句对应与三条限定见 notes
+      【2026-09-11（二）：本节点已形式化】。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**。
   - ref: polchinski-1998-v1
-    loc: "§4.1"
+    loc: "§4.1（p.121 起，约 eq. (4.1.1)–(4.1.7)：只强加「湮灭」一半的 Virasoro 约束 L_m|ψ⟩ = 0（m ≥ 1）与 (L_0 + A)|ψ⟩ = 0）；零模态见 eq. (4.1.8)–(4.1.9)，p.122"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E54（**页码已核实/式号未核实**）
+      与 #E55（(4.1.8)、(4.1.9) **式号与内容已核实**）。
+      Polchinski 用 A 且写 (L_0 + A)|ψ⟩ = 0；本节点用 a = −A，见 conv.intercept-sign-a。
   - ref: gsw-1987-v1
-    loc: "§2.2.1"
-tags: [bosonic-string, quantization]
+    loc: "§2.2.1–2.2.2（物理态条件与零态，a 记号）"
+    note: 定位强度 L4（目录/页码级）；式号未核实。GSW 用 mostly-minus。
+tags: [bosonic-string, quantization, formalized]
 notes: |
   Fock 空间 F 的形式化定义见 worldsheet.bosonic-fock-space（`formal/StringFormal/NoGhost/Fock.lean`），
   其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模 x^μ、p^μ
   与动量 k（L_0 = α'p² + Σ_{n≥1} α_{−n}·α_n 以及物理态条件都依赖 k），这部分**尚未形式化**，
   因此本节点不继承那两个节点的 formalized 状态。
+
+  **【2026-09-11 更新：Sugawara.lean 之后，本节点的形式化缺口收窄为两条】**
+  （curator，依据 formal/StringFormal/NoGhost/Sugawara.lean，合并提交 7af81b1；
+  只改本 notes，其余字段未动）
+
+  上面一段的「零模未形式化」现在需要修正：Sugawara.lean 已经把 L_n（含 L_0）定义在
+  worldsheet.bosonic-fock-space 的 F(D,R) 上，零模作为**标量参数** a^μ = (2α')^{1/2} k^μ 出现，
+  并证出 L_0 = α'k² + N（`Fock.Lop_zero_apply_of_mem_levelSubmodule`）与
+  Virasoro 关系 c = D（`Fock.lie_Lop_Lop`）。也就是说，本节点陈述里
+  「Virasoro 生成元 L_n 由 Sugawara 型构造给出，中心荷 c = D」这一句**已经形式化**
+  （见 worldsheet.virasoro-generators-free-boson、worldsheet.free-boson-central-charge-d、
+  worldsheet.fock-space-virasoro-representation）。物理态条件
+  (L_0 − a)|ψ⟩ = 0、L_n|ψ⟩ = 0（n > 0）现在也可以在 Lean 侧逐字写出来（尚未写）。
+
+  **仍然阻塞本节点及整个无鬼定理形式化岛的两条缺口**（formalizer 在 Sugawara.lean
+  文件头 "Mathematical gaps" 第 5 条记录，curator 于此登记）：
+
+  (A) **【已关闭，2026-09-11（二）：见下节】** 原文：**L_m^† = L_{−m} 未证**。
+      Sugawara.lean 与 Fock.lean 之间没有任何一条把
+      `Fock.Lop` 和 worldsheet.fock-indefinite-form 的 `Fock.pairing` 放进同一个陈述的引理。
+      这一条是**本节点的核心内容所必需**的：「零模态为 H_phys 中与所有物理态内积为零者」
+      这个定义要谈 H_phys 上诱导的内积，而 H_phys 由 L_n 条件切出；
+      没有 L_n^† = L_{−n} 就无法把 L_n 条件与内积联系起来
+      （标准论证「⟨ψ|L_{−n}χ⟩ = ⟨L_n ψ|χ⟩ = 0」整个建立在它之上）。
+      无鬼定理的形式化在此处必须先补上。
+      —— 现由 `Fock.pairing_Lop_left`（PhysicalStates.lean）关闭，
+      已立卡 **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，formalized）。
+
+  (B) **两种 L_m 定义未被证明等同**。本节点写的是「Sugawara 型构造」，
+      Lean 覆盖的正是这一种（振子双线性 + 产生-湮灭正规序）；
+      但文献里同一批 L_n 也常由全纯 T 的 Laurent 模定义
+      （worldsheet.energy-momentum-laurent-modes，经 OPE 与围道，共形正规序）。
+      Lean 侧没有 T、没有 OPE、没有围道积分，两个定义**没有**被证明给出同一组算子。
+      后果：本节点若被理解为 CFT 侧的 L_n，则不能引用上述 formalized 节点；
+      本图把这两种定义当作同一批算子这件事，目前只写在
+      worldsheet.free-boson-central-charge-d--via-ope 的论证里，没有独立节点。
+
+  另外仍未形式化的：位置算符 x^μ 与对动量 k 的直积分（Lean 只有逐 k 扇区）、
+  截距常数 a 的取值（worldsheet.open-string-intercept，符号约定 conv.intercept-sign-a）。
+  因此本节点**仍不**继承下游那些 formalized 节点的状态。
+
+  **【2026-09-11（二）：本节点已形式化，status rigorous → formalized】**
+  （curator，依据 formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577，
+  形式化提交 58216ac。本次只改 status / uses / formal / sources / notes，
+  **statement 文本一字未动**，符合根 CLAUDE.md 原则 1。）
+
+  逐句对应（陈述 → Lean）：
+  - 「Fock 空间 F（度规 η_{μν}，模式 α^μ_n）」→ `Fock D R` 与 `Fock.mode`
+    （worldsheet.bosonic-fock-space，已 formalized）；
+  - 「Virasoro 生成元 L_n 由 Sugawara 型构造给出，中心荷 c = D」→ `Fock.Lop` 与 `Fock.lie_Lop_Lop`
+    （worldsheet.virasoro-generators-free-boson、worldsheet.free-boson-central-charge-d，均 formalized）；
+  - 「H_phys = {(L_0 − a)|ψ⟩ = 0, L_n|ψ⟩ = 0 ∀ n > 0}」→ **`Fock.physSubmodule η a a₀`**，
+    成员刻画逐字对应：`Fock.mem_physSubmodule : ψ ∈ physSubmodule ↔ Lop 0 ψ = a₀ • ψ ∧ ∀ n > 0, Lop n ψ = 0`；
+  - 「零模态为 H_phys 中与所有物理态内积为零者」→ **`Fock.nullSubmodule η a a₀
+    = physSubmodule ⊓ orthComplement η physSubmodule`**，成员刻画 `Fock.mem_nullSubmodule`
+    逐字就是「χ ∈ H_phys 且 ⟨χ, ψ⟩ = 0 对一切 ψ ∈ H_phys」，与本陈述最后一句**一致**
+    （附带 `Fock.pairing_self_eq_zero_of_mem_nullSubmodule` 给出零范数）。
+    这一句能形式化，靠的正是刚关闭的缺口 (A)：没有 L_n^† = L_{−n}，H_phys 上诱导的型
+    与 L_n 条件之间没有任何联系。
+
+  **本节点标 formalized 时必须一并读的三条限定**：
+
+  (α) **Lean 的 H_phys 是单动量塔上的**。`physSubmodule η a a₀` 里动量只以标量参数
+      a^μ = α^μ_0 = (2α')^{1/2} k^μ 出现（PhysicalStates.lean 文件头 "Mathematical gaps" 第 5 条），
+      没有位置算符 x^μ，也没有对 k 的直积分。**本图节点的陈述说的是整个 Fock 空间 F 上的 H_phys**，
+      即那一族逐 k 空间的直和/直积分。两者在「对每个固定 k」的意义下逐字相同，
+      在「整个弦的协变态空间」的意义下 Lean 只覆盖了纤维。无鬼定理逐动量成立，故对该目标够用；
+      任何需要在 k 上做积分/求和的下游结论不得引本节点的 formalized 状态。
+  (β) **level 分解是 ⨆，不是 DirectSum**。`Fock.physSubmodule_eq_iSup_inf_levelSubmodule` 给出
+      H_phys = ⨆_N (H_phys ⊓ F_N)（且每个 level 分量仍是物理态，
+      `Fock.levelComponent_mem_physSubmodule`），但「该上确界是**内直和**」
+      没有被打包成 `DirectSum.IsInternal`（PhysicalStates.lean 文件头 gap 1；
+      根源是 Fock.lean 没有给 Fock 空间本身提供该结构）。本节点陈述没写 level 分解，
+      不受影响；但下游若要用「H_phys 逐 level 直和分解」，需先补这一条。
+  (γ) **双线性型，不是 Hermitian 形式**（继承 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+      「内积为零」在 Lean 里是 R-双线性型 `Fock.pairing` 意义下的；复 Fock 空间上的
+      半双线性（Hermitian）形式未形式化。实极化下两者一致。
+
+  缺口 (B)（两种 L_m 定义未被证明等同）与「截距常数 a 的取值未形式化」**仍然成立**，
+  不因本次升级而改变：本节点是**定义卡**，a 是自由参数；a = 1 的**唯一性**见
+  worldsheet.open-string-intercept（physical-argument），a = 1 处零模态的**存在**见
+  worldsheet.physical-states-level-one（formalized）。
 author: seed
 created: "2026-09-10"

@@ -1,0 +1,122 @@
+id: worldsheet.fock-space-virasoro-representation--via-lean
+target: worldsheet.fock-space-virasoro-representation
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_n 本身：Lean 里 ρ 的取值 `Fock.virRep_lgen : virRep η a (VirasoroAlgebra.lgen R n) = Lop η a n`
+      直接引用 `Fock.Lop`，即该节点定义的算子。字面依赖，同一文件同一命名空间。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供 ρ 的定义域及其结构：Lean 里是 `StringFormal.Virasoro.VirasoroAlgebra R`
+      （该卡 formal.lean_decl 所指），本推导用到它的生成元 `VirasoroAlgebra.lgen` / `cgen`、
+      投影 `VirasoroAlgebra.toWitt` / `toProd`、括号公式 `VirasoroAlgebra.toProd_lie`
+      与模同构 `toProdₗ`（`virRep` 的构造经由 Witt 基的 `Basis.constr`，
+      故实际用到的是 Witt 侧的基 `WittAlgebra.lgen` 加中心方向，见 math.witt-algebra）。
+      指向 **v2**（不含唯一中心扩张断言的定义卡，status: formalized）而非已冻结的
+      worldsheet.virasoro-algebra：本推导只用定义，完全不用唯一性。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供表示空间：`Fock D R` 及其上的 `Module.End R (Fock D R)`。
+      Sugawara.lean `import StringFormal.NoGhost.Fock`，字面依赖。
+  - id: worldsheet.free-boson-central-charge-d
+    inferred: false
+    note: |
+      提供保括号所需的核心输入：`Fock.wittRep_lie` / `Fock.virRep_lie` 的证明直接调用
+      `Fock.lie_Lop_Lop`（即该节点内容，见 worldsheet.free-boson-central-charge-d--via-lean）。
+      这条边是数学上真实的输入，不只是形式上的：中心荷 D 与括号关系全部由它提供。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.virRep_lie"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189，形式化提交
+      c567dab9204441549ad9dd6719e6b766bb5f005b；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的声明：`Fock.{wittRep, wittRep_lgen, wittRep_lie, virRep, virRep_apply,
+      virRep_lgen, virRep_cgen, virRep_lie}`，以及被它们调用的 `Fock.lie_Lop_Lop`；
+      Virasoro 侧用到 `StringFormal.Virasoro.{WittAlgebra.lgen, VirasoroAlgebra.toWitt,
+      VirasoroAlgebra.toProd, VirasoroAlgebra.toProd_lie, cocycleBilin}`。
+      文件自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**；依据是 formal/ 自述、formal/TODO.md 登记，
+      以及 7af81b1 已由 lead 合并进 main。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/Sugawara.lean 的 `Representation` 一节。
+
+  1. **构造 Witt 层的表示**。Witt 代数 W_R 在 R 上以 `WittAlgebra.lgen R n`（n ∈ Z）为基，
+     用 `Basis.constr` 把 n ↦ L_n 线性延拓成 `wittRep : W_R →ₗ[R] End_R(F)`
+     （`wittRep_lgen : wittRep (ℓ n) = L_n`）。良定义性即 `Basis.constr` 的泛性质，无内容。
+
+  2. **保括号（Witt 层）**，`wittRep_lie`。要证的是双线性映射的相等
+       (w, w') ↦ wittRep ⁅w, w'⁆    与    (w, w') ↦ ⁅wittRep w, wittRep w'⁆。
+     两边都写成 `W_R →ₗ[R] W_R →ₗ[R] End_R(F)`（文件里的私有 `bilRep` / `bilRep'`），
+     再用 `Basis.ext` 逐对基元 (ℓ m, ℓ n) 比较，归结为
+       L_m L_n - L_n L_m = (m-n) L_{m+n} + （中心项）
+     ——但 Witt 代数没有中心元，故这一步只在中心项为零时成立。文件的做法是先在 Witt 层
+     处理无中心项的部分，中心项在第 3 步经 Virasoro 的 2-上圈吸收。
+     核心输入是 `lie_Lop_Lop`（worldsheet.free-boson-central-charge-d）。
+
+  3. **抬到 Virasoro 层**。`virRep := wittRep ∘ toWitt + toSpanSingleton (D • id) ∘ centralPart`，
+     即把 X ∈ Vir_R 分解为「Witt 部分 + 中心部分」，中心部分乘以标量 D。
+     由构造直接得 `virRep_lgen : ρ(L_n) = L_n` 与 `virRep_cgen : ρ(C) = D · id`。
+
+  4. **保括号（Virasoro 层）**，`virRep_lie`。用 Vir_R 的括号公式
+     （`VirasoroAlgebra.toProd_lie`：Witt 分量是 Witt 括号，中心分量是 2-上圈
+     `cocycleBilin` 在 Witt 分量上的取值），把左边展开成
+       wittRep ⁅toWitt X, toWitt Y⁆ + cocycleBilin(toWitt X, toWitt Y) · (D • id);
+     右边用 `lie_add_left` / `lie_add_right` 展开，中心项与一切对易（`lie_smul_id_left/right`
+     给零），剩下的正是第 2 步的 `wittRep_lie`。两边逐项相等。
+     这一步用到 hη : ∀ μ, η μ * η μ = 1（经 `wittRep_lie` 传下来）。
+gaps:
+  - |
+    **未打包成 `LieHom`**（formalizer 记录的缺口，Sugawara.lean 文件头 "Mathematical gaps" 第 4 条）。
+    Mathlib v4.33.1 只通过 `local instance`（`LieRing.ofAssociativeRing`）让 `Module.End R M`
+    成为 `LieRing`，该实例出了那个文件就不可用，故同态性质写成裸定理 `virRep_lie`
+    而不是 bundled 的 `VirasoroAlgebra R →ₗ⁅R⁆ Module.End R (Fock D R)`。
+    **数学内容完全相同**（R-线性 + 保括号 = 李代数同态的定义），
+    但下游若想把它当 `LieHom` 用（例如接 Mathlib 的表示论 API），还需要重新打包。
+  - |
+    **η 对角且 η^{μμ} η_{μμ} = 1**（假设 `hη`），零模是标量参数 a : Fin D → R（无 x^μ），
+    R 必须是交换 ℚ-代数，Fock 空间是**代数版**（未取完化）。
+    这些限制继承自 worldsheet.free-boson-central-charge-d--via-lean 的 gaps 与
+    worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii)，此处不重复论证。
+  - |
+    **与内积无关**：本推导不涉及 worldsheet.fock-indefinite-form 的 `Fock.pairing`，
+    故本条**不**能用来支持「F 是 Virasoro 代数的幺正/*-表示」这类陈述。
+    无鬼定理需要的正是后者。
+    **【2026-09-11（二）更正】** 本条原写「特别是 **L_n^† = L_{-n} 未证**」，该句已过时：
+    L_m^† = L_{-m} 现由 `StringFormal.NoGhost.Fock.pairing_Lop_left`
+    （formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577）机器证明，
+    图节点为 **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，formalized）。
+    那里的「†」是 `Fock.pairing` 这个 R-**双线性型**意义下的伴随（转置），
+    **不是 ℂ 上的 Hermitian 共轭**（worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    本 gap 的其余内容不变：**本推导自身**（`virRep_lie`）仍不涉及 `Fock.pairing`，
+    且 Lean 侧**没有**把 `Fock.virRep` 与 `Fock.pairing` 放进同一陈述的结果，
+    故「F 是 Virasoro 的 *-表示」这条陈述依然未被建立。
+  - |
+    **不断言不可约性、最高权、Verma 商结构**。Lean 里有 `eq_smul_id_of_lie_mode`
+    （F 在**振子代数**上的刚性），但**没有** F 在 Virasoro 代数上的不可约性，
+    也没有把 F 与 worldsheet.verma-module 联系起来的任何结果。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
+
+  【2026-09-11（二）：删掉了一条过时的 gap】（curator，reviewer-batch3 必修第 1 条）
+  原 gaps 最后一条写「**Vir_R 的「基」在 Lean 中未打包**……本节点陈述里说
+  『Vir_R 作为 R-模自由，基为 {L_n} ∪ {C}』」——**该引述与目标陈述不符**：
+  worldsheet.fock-space-virasoro-representation 的 statement 写的是
+  「{L_n : n ∈ Z} ∪ {C} **张成** Vir_R」，本来就没有断言它是基，
+  也没有断言 Vir_R 作为 R-模自由。既然陈述与 Lean 的「张成 + 模同构 Vir ≅ W(R) × R」
+  已经对齐，这条 gap 无所指，故删除。
+  仍然为真、且已记录在别处的事实：`Basis (Option ℤ) R (VirasoroAlgebra R)` 实例
+  在 Lean 中尚未构造（worldsheet.virasoro-algebra-v2 的缺口 (i)，
+  以及本推导目标节点 notes【Vir_R 的基未打包】一段）；`virRep` 的良定义性不依赖它
+  （它由 Witt 基的 `Basis.constr` 加中心方向的 `toSpanSingleton` 构造）。
+
+  本推导由 curator 于 2026-09-11 在 Sugawara.lean 合入 main（7af81b1）后建立，
+  与 worldsheet.free-boson-central-charge-d--via-lean 同批。
+author: curator
+created: "2026-09-11"

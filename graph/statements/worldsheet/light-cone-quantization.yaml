@@ -29,7 +29,7 @@ statement: |
   凡出现 α^-_n 处均代入上面的横向表达式；于是 J^{i-} 是横向模式的三次式，
   其算符排序取正规序。
 uses:
-  - worldsheet.virasoro-algebra
+  - worldsheet.virasoro-algebra-v2
   - worldsheet.light-cone-coordinates
   - worldsheet.light-cone-gauge
   - worldsheet.open-string-mode-expansion

@@ -4,7 +4,7 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.brst-quantization
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.bc-ghost-central-charge
     inferred: true
     note: |

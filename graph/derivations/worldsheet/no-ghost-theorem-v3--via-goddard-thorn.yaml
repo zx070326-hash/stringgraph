@@ -5,7 +5,7 @@ status: rigorous
 depends_on:
   - id: worldsheet.old-covariant-physical-states
   - id: worldsheet.ddf-operators-v3
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.kac-determinant
     inferred: true
     note: |

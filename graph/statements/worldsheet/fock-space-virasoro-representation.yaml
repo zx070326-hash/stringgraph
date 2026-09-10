@@ -1,0 +1,105 @@
+id: worldsheet.fock-space-virasoro-representation
+kind: proposition
+title: 自由玻色子 Fock 空间是 Virasoro 代数的表示，中心元作用为 D·id（c = D）
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、对角度规分量 η : {0..D-1} → R 满足 η^{μμ} η_{μμ} = 1
+  （conv.metric-mostly-plus 的 diag(-1,+1,…,+1) 满足之），以及零模参数
+  a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge）。
+
+  设 F = F(D, R) 是 worldsheet.bosonic-fock-space 的 Fock 空间，
+  L_n（n ∈ Z）是 worldsheet.virasoro-generators-free-boson 定义在 F 上的 Sugawara 算子，
+  Vir_R 是 worldsheet.virasoro-algebra-v2 的 Virasoro 代数（在基环 R 上：Vir(R) = W(R) ⊕ R，
+  L_n = (ℓ_n, 0)，中心元 C = (0, 1)；{L_n : n ∈ Z} ∪ {C} 张成 Vir_R）。
+
+  则 R-线性映射
+    ρ : Vir_R → End_R(F),   ρ(L_n) = L_n,   ρ(C) = D · id_F
+  是**良定义的**（由上述基上的取值线性延拓），并且**保李括号**：
+    ρ([X, Y]) = [ρ(X), ρ(Y)] = ρ(X) ρ(Y) - ρ(Y) ρ(X)   对一切 X, Y ∈ Vir_R。
+  即 F 是 Virasoro 代数的一个表示，其中心元作用为标量 D，故该表示的中心荷 c = D。
+
+  ⚠ 本命题与 worldsheet.free-boson-central-charge-d 不是同一条：后者断言的是**生成元之间**
+  的对易关系 [L_m, L_n] = (m-n) L_{m+n} + (D/12) m(m²-1) δ_{m+n,0}；本命题断言的是
+  这组关系**恰好凑成抽象 Virasoro 代数 Vir_R 到 End_R(F) 的李代数同态**，
+  即 ρ 在整个 Vir_R 上（不只在生成元上）保括号。前者是后者的输入。
+
+  ⚠ 本命题**不**断言该表示不可约、不断言最高权、也不涉及 F 上的双线性型
+  （worldsheet.fock-indefinite-form）：ρ 与内积的相容性 L_n^† = L_{-n} 是另一条陈述，
+  本图与 Lean 侧均**未**建立（见 notes）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.virRep_lie
+  lean_file: StringFormal/NoGhost/Sugawara.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.{virRep, virRep_lgen, virRep_cgen, virRep_lie}"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189。逐条对应：
+        · ρ 的存在与良定义 → `Fock.virRep : VirasoroAlgebra R →ₗ[R] Module.End R (Fock D R)`
+          （由 `wittRep`（Witt 基 `WittAlgebra.lgen` 上的 `Basis.constr`）与中心方向的
+          `LinearMap.toSpanSingleton` 相加而成，故 R-线性是构造自带的）
+        · ρ(L_n) = L_n  → `Fock.virRep_lgen`
+        · ρ(C) = D·id   → `Fock.virRep_cgen`
+        · 保括号        → `Fock.virRep_lie`（带假设 `hη : ∀ μ, η μ * η μ = 1`）
+      Witt 层的对应结果是 `Fock.wittRep_lie`。全部无 sorry。
+  - ref: virasoro-lean-2025
+    loc: "Theorem 10.1 + Corollary 10.2（单个 Heisenberg 族上的 Sugawara 表示，c = 1）；Lean 声明名 `sugawaraRepresentation_of_representation_heisenbergAlgebra`"
+    note: |
+      **旁证，不承载本节点的论证**。Kytölä 把同一件事（Fock 表示是 Virasoro 表示）在 Lean 中
+      做到了 c = 1、单分量、正定内积的情形；本节点是 D 分量、带对角洛伦兹度规的版本，
+      证明独立写在本仓库，未复用其代码。
+  - ref: kac-raina-1987
+    loc: "Heisenberg 代数的 Fock 表示上的 Virasoro 作用；**本项目未核实任何编号，故不给 Lecture 号**"
+    note: |
+      经典数学来源，作为「这是标准构造」的指路，不承载论证。
+      **版本陷阱**（researcher 2026-09-10）：第 1 版（World Scientific 1987）约 12 讲，
+      第 2 版（Kac–Raina–Rozhkovskaya 2013）18 讲，讲号与命题号不可互换。
+tags: [cft, virasoro, fock-space, free-boson, representation, sugawara, formalized]
+notes: |
+  【为什么单独建卡】worldsheet.free-boson-central-charge-d 只说生成元之间的括号关系；
+  「这组关系拼成一个到 End_R(F) 的李代数同态」是**额外**的一步，因为它要用到
+  Vir_R 的结构（作为 R-模在 {L_n} ∪ {C} 上自由、括号由 Witt 括号加 2-上圈给出），
+  并且要把生成元上的等式提升到整个 Vir_R 上的双线性等式。
+  在 Lean 里这一步是实打实的工作量（`bilRep` / `bilRep'` 两个双线性映射的相等，
+  经 `Basis.ext` 逐基元比较），不是一行推论。查重：`stringgraph search fock / representation`
+  在 2026-09-11 未找到任何断言「Fock 空间是 Virasoro 表示」的既有节点。
+
+  【与 worldsheet.verma-module 的关系】本节点**不**断言 F 是 Verma 模、也不断言最高权或不可约。
+  事实上 F 在 α_0 ≠ 0 时是最高权为 α'k² 的 Virasoro 模，但那是另一条命题（且要用到
+  worldsheet.open-string-l0-equals-level-plus-mass 的 L_0 = α'k² + N 与 level 分级；
+  2026-09-11 前此处写的是 worldsheet.open-string-l0-level-form，该卡已换代），本图未建。
+
+  【未覆盖：与内积的相容性】ρ 与 worldsheet.fock-indefinite-form 的双线性型之间
+  **没有任何联系被建立**：Sugawara.lean 里没有一条把 `Fock.Lop` 与 `Fock.pairing`
+  放在同一个陈述里的引理，故 **L_n^† = L_{-n} 未证**。这是无鬼定理形式化岛的
+  当前主要缺口之一，已登记在 worldsheet.virasoro-generators-free-boson 与
+  worldsheet.old-covariant-physical-states 的 notes。
+
+  **【2026-09-11（二）：上一段的「L_n^† = L_{-n} 未证」已过时】**（curator，
+  依据 formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577）。
+  L_m^† = L_{-m} 现由 `StringFormal.NoGhost.Fock.pairing_Lop_left`
+  （对偶形式 `pairing_Lop_right`）机器证明，图节点为
+  **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，status: formalized）。
+  **限定**：那里的「†」是 `Fock.pairing` 这个 R-**双线性型**意义下的伴随（转置），
+  **不是 ℂ 上的 Hermitian 共轭**（见 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+  **但本节点陈述末尾那句仍然为真、且不因此改写**：本节点断言的是 ρ 保李括号，
+  ρ 与内积的相容性**不是本节点的内容**；PhysicalStates.lean 也没有把
+  `Fock.virRep` 与 `Fock.pairing` 放进同一个陈述——即
+  「F 是 Virasoro 代数的**幺正 / *-表示**」这条陈述本图与 Lean 侧**仍然没有**。
+  想要它的下游应当同时引本节点与 worldsheet.virasoro-generators-adjoint，
+  或者另立一条 *-表示的卡（本图未建）。
+
+  【为什么引 v2 而不是旧的 worldsheet.virasoro-algebra】旧卡把「李代数定义」与
+  「Virasoro 是 Witt 代数的**唯一**非平凡中心扩张」合在一张卡上，后者未形式化，
+  整卡因此只能是 rigorous，会把本节点压到 rigorous。旧卡已于 2026-09-11 冻结
+  （superseded_by → v2）。本节点只用到定义部分，故引 worldsheet.virasoro-algebra-v2
+  （status: formalized），不引唯一性命题 worldsheet.virasoro-unique-central-extension。
+
+  【Vir_R 的基未打包】v2 的缺口 (i)：Lean 里没有 `Basis (Option ℤ) R (VirasoroAlgebra R)`，
+  只有张成性与模同构 Vir ≅ W(R) × R。本节点陈述用「张成」的说法与之对齐；
+  ρ 的良定义性走的是 **Witt 基**上的 `Basis.constr` 加中心方向的 `toSpanSingleton`，
+  不依赖 Vir 的基。
+author: curator
+created: "2026-09-11"

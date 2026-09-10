@@ -95,7 +95,7 @@ sources:
   - ref: lian-zuckerman-1991
     loc: "Theorem 3.5 的证明末句, p.571（逐字：'Thus V(D,p)^{G₊}[−h]/rad is unitary for all p iff ch_q L(26−D, 1−h) = sign_q L(26−D, 1−h), i.e. iff the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h), as given above.'）"
     note: |
-      L1 逐字。这一句是本节点挂 worldsheet.verma-module 依赖的直接依据：判据被归结为
+      L1 逐字。这一句是本节点挂 worldsheet.verma-module-pbw-basis 依赖的直接依据：判据被归结为
       Verma 模 M(26−D, 1−h) 的半正定性。**注意最后一句「The latter is equivalent to precisely
       the conditions on (D,h)」在此处没有给出引文**——把它接到 Kac 行列式 / Kac–Kazhdan 的那一步
       在抽取记录里只有转述（§8、§9.3 提到 LZ Lemma 3.17、Remark 3.15），没有逐字，
@@ -181,6 +181,14 @@ notes: |
      「(D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)」**没有**这条下界。引用本节点覆盖 B1 时必须补上。
   4. **对 p 的四条假设**照抄在陈述的 (P1)–(P4)。(P2)「⟨p,x⟩ ≠ 0 for some x ∉ C1」排除了某类
      退化动量；它与 v3 排除的 k₀·k = 0 扇区**是否是同一个排除**未做对照（断言范围 (d)）。
+     【2026-09-11 补，对应范围 (d)；按 reviewer-batch2 / 第四轮审计 C3】已对照：LZ p.569 的
+     Heisenberg 代数由 {α^μ_n} ∪ {1} 生成，p 是零模交换子代数上的线性泛函（x·v_p = ⟨p,x⟩v_p，
+     LZ (3.3)），(P2) 的 x ∉ C1 读作 α^μ_0 的非零线性组合，则 (P2) ⇔ (⟨p,α^μ_0⟩)_μ ≠ 0 ⇔ p ≠ 0。
+     故 (P2) 排除的恰是 p = 0，与 v4 (2) 的 p ≠ 0 是同一个排除；v4 (1) 另排除 k₀·p = 0，比 LZ 宽，
+     不是 (P2) 的对应物。该对照是本项目的初等观察，不是 LZ 原句（若 x 允许含 1 分量，(P2) 在 (P1)
+     下对任意 p 平凡成立，故只能取前一种读法）。**陈述文本的范围 (d) 按纪律不改**。
+     另：LZ §2.3 起还有一条常设假设 reality condition σλ = −λ（p.563 末），Theorem 3.5 在其下；
+     本节点的 (P1)–(P4) 没有列它，已登记为推导节点的 gap。
 
   【另外三条本项目自己加的登记】
   5. **度规号差。** LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 里没有逐字登记。
@@ -215,7 +223,14 @@ notes: |
 
   【形式化提示】
   本节点比 v3 更接近可形式化的形式（判据 = Verma 模半正定性 = Kac 行列式的符号分析），
-  但它依赖 worldsheet.verma-module 中**尚未形式化的 PBW 基**部分，且需要 Kac 行列式公式。
+  但它依赖 worldsheet.verma-module-pbw-basis 这条**尚未形式化的 PBW 基**命题，且需要 Kac 行列式公式。
   形式化岛 1 的目标仍是 v3；本节点作为 v3 的判定侧补充登记。
+
+  【拆卡换代记录，2026-09-11（curator）】上面陈述文本里「Verma 模见 worldsheet.verma-module」
+  这个指针指向的旧卡已被拆分并标 superseded_by：构造与分级部分见
+  worldsheet.verma-module-v2（formalized），基与 dim V_N = p(N) 部分见
+  worldsheet.verma-module-pbw-basis（rigorous，未形式化）。**陈述文本按纪律不改**
+  （改陈述文本等于新建节点）；本节点用到的是后者，推导
+  worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 的 depends_on 已就地改指。
 author: curator
 created: "2026-09-10"

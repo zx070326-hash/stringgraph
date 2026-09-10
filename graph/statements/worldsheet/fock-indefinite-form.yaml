@@ -44,6 +44,13 @@ sources:
       伴随关系本身（(1)(b) 对 `Fock.pairing` 成立）是 `Fock.pairing_creation_left` /
       `Fock.pairing_creation_right`；被形式化的型定义是 `Fock.pairing`，
       mostly-plus 度规是 `Fock.minkowski`。全部无 sorry。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/FockSigned.lean :: StringFormal.NoGhost.Fock.pairing_indefinite、pairing_indefinite_field"
+    note: |
+      本仓库，合并提交 11b4c0f。陈述 (4) 末句「于是当 R 是有序域且 D ≥ 2 时该型不定」的
+      机器检查（2026-09-11 补，关闭推导 --via-lean 的 gap (v)）。陈述括号里写的
+      「在 Lean 中未单列为定理」是 2026-09-10 的事实，按陈述不可变原则保留原文；
+      现况见 notes【2026-09-11】。
   - ref: polchinski-1998-v1
     loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124：level 1 态 e·α_{−1}|0;k⟩ 的范数分析（A < −1 时该 level 含一个负范数态，破坏幺正性）"
     note: |
@@ -71,5 +78,36 @@ notes: |
 
   【下游】本节点是无鬼定理形式化岛的第二块砖。接下来 formal/TODO.md 的 `sugawara`
   需要先按 worldsheet.bosonic-fock-space 的缺口 (i) 补零模，才能定义 L_0。
+
+  【2026-09-11：(4) 末句已形式化】陈述 (4) 括号里「在 Lean 中未单列为定理，见推导节点的
+  gaps (v)」一句已过时：FockSigned.lean 的 `Fock.pairing_indefinite`（有序环）与
+  `Fock.pairing_indefinite_field`（有序域）把它补上了，推导 --via-lean 的 gap (v) 已标关闭。
+  陈述文本按不可变原则不改。Lean 证明只需有序环 `[CommRing R] [PartialOrder R] [IsStrictOrderedRing R]`，
+  比陈述写的「有序域」弱；鬼态存在只需 D ≥ 1，正模态需 D ≥ 2。
+  （上一段说的 `sugawara` 一项也已完成，见 worldsheet.virasoro-generators-free-boson 与
+  worldsheet.open-string-l0-equals-level-plus-mass。）
+
+  【2026-09-11（二）：「†」在本节点里到底是什么，以及复情形未做】（curator，
+  依据 formal/StringFormal/NoGhost/PhysicalStates.lean 文件头 "Mathematical gaps" 第 3 条，
+  合并提交 2c8b577。只补 notes，陈述文本未动。）
+  陈述 (1)(b) 与标题里的 `(α^μ_n)^† = α^μ_{−n}` 必须按下面的意思读：
+  - **`Fock.pairing` 是 R-双线性型**（R 任意交换环），不是半双线性型；
+    因此这里的「†」就是**转置**（对该双线性型的伴随），
+    **不是** Hilbert 空间意义下的 Hermitian 共轭。
+  - 物理上的协变 Fock 空间是**复**空间，带 Hermitian 半双线性形式，
+    其上的 α^† 还要取一次复共轭。两者**在实极化下一致**：
+    取实系数、实极化矢量时 Hermitian 形式限制到实张成上就是本节点的双线性型，
+    第 (2)(3)(4) 条的所有数值（对角元 ∏ (n η^{μμ})^{d}·d!、±n）逐字相同。
+    **复情形没有形式化**，也没有在本图中另立节点。
+  - 这条限定对整个无鬼定理岛都要紧：无鬼定理断言的是 Hermitian 形式在
+    H_phys/H_0 上半正定；目前 Lean 侧一切「范数」「正交」「零模态」
+    （worldsheet.old-covariant-physical-states、worldsheet.virasoro-generators-adjoint、
+    worldsheet.physical-states-level-one）都在**双线性型**意义下。
+    这与推导 --via-lean 的 gaps (iv) 是同一条，此处从陈述侧再登记一次，
+    以免下游只读陈述卡的人误以为是 Hermitian 版本。
+  - 顺带（2026-09-11（二）新增，来自 PhysicalStates.lean）：陈述 (1)(b) 的伴随关系
+    对**一切整数指标** j 成立，不止 n ≥ 1——`Fock.pairing_mode_left` 给出
+    ⟨α^μ_j v, w⟩ = ⟨v, α^μ_{−j} w⟩，j = 0 时两边都是零模标量 a^μ = (2α')^{1/2}k^μ 的乘法。
+    由它再推出 L_m^† = L_{−m}，见 worldsheet.virasoro-generators-adjoint。
 author: curator
 created: "2026-09-10"

@@ -53,6 +53,12 @@ notes: |
   worldsheet.open-string-l0-level-form。
   旧卡在被拆分时**没有任何入边或出边**（图中无节点引用它），故本次拆分不改动任何其它节点。
 
+  **【2026-09-11 换代提示】** 上文与 statement 末段提到的 worldsheet.open-string-l0-level-form
+  已被再次拆分并写 superseded_by：纯代数的「L_0 在 level N 片上 = α'k² + N」现为
+  **worldsheet.open-string-l0-equals-level-plus-mass**（formalized），
+  「X 部门无加性常数（a^X = 0）」归 worldsheet.normal-ordering-constant-ax。
+  statement 文本按不可变原则保留旧 id；旧 id 仍可解析，其 superseded_by 指向新卡。
+
   与 worldsheet.virasoro-generators-free-boson 的分工：那条给的是**任意**自由玻色子 Fock 空间上
   L_m 的纯代数定义（uses 为空、可形式化）；本条只加两件开弦特有的东西——
   doubling trick（为什么只有一套 Virasoro）与开弦零模归一化 (2α')^{1/2}。

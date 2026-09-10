@@ -599,3 +599,15 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
         "worldsheet.critical-dimension-light-cone",
         "worldsheet.critical-dimension-brst",
     }
+
+
+# ---------------------------------------------------------------- bib
+
+
+def test_duplicate_bib_key_is_error(mini: Path) -> None:
+    bib = mini / "literature" / "sources.bib"
+    extra = "@article{ref-a,\n title={A again}\n}\n"
+    bib.write_text(bib.read_text(encoding="utf-8") + "\n" + extra, encoding="utf-8")
+    g = load_graph(mini)
+    errors = [p for p in validate(g) if p.severity == "error"]
+    assert any("duplicate bib key 'ref-a'" in str(e) for e in errors)

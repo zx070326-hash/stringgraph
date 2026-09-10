@@ -1,0 +1,49 @@
+id: math.vertex-algebra-associativity--via-fbz-corrections
+target: math.vertex-algebra-associativity
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.formal-distribution-locality
+    inferred: true
+    note: |
+      勘误表证明的第一句逐字是「By locality, for any C ∈ V the series Y(A,z)Y(B,w)C is the expansion in
+      V((z))((w)) of an element of the space V[[z,w]][z^{-1},w^{-1},(z−w)^{-1}]」——用到的正是
+      (z−w)^N [Y(A,z),Y(B,w)] = 0 这条局域性。但 FBZ 自己的局域性公理写在其 Ch.1「Locality」（web draft 目录 p.16，
+      L4，编号未核实），而本图的定义卡按 Schottenloher Definition 10.7 / Gui Definition 7.6 写。
+      两处是同一个公式（变量名与 R = End(V) 的特化不同），这一跨书认同是本图的判断，故标 inferred。
+sources:
+  - ref: frenkel-benzvi-2004
+    loc: "作者勘误表 corrections.pdf「To § 3.2」：Theorem 3.2.1 的修订陈述 + 简化证明（引用 Proposition 3.2.8 与 Lemma 3.2.6）+ 证明后的 Remark；印本 §3.2, pp. 48–51（Google Books 定位，L4）"
+    note: |
+      **L1 的部分**：定理陈述、嵌入方式、证明第一句、Remark（researcher 2026-09-11 逐页读勘误表，math-sources.md §9.1）。
+      **未获取的部分**：Proposition 3.2.8 与 Lemma 3.2.6 的内容，以及印本正文的证明——全书无合法公开全文
+      （AMS 预览 403，作者主页不挂 PDF；nzdr.ru 扫描件按 literature/CLAUDE.md 规则不采信）。
+      文献自称的严格程度：AMS Mathematical Surveys and Monographs 88 中带完整证明的 Theorem，
+      作者本人勘误表再给一遍简化证明——是数学界接受的标准定理。
+summary: |
+  按勘误表的简化证明结构（只有骨架被转录，见 gaps）：
+  (1) 由局域性，对任意 C ∈ V，Y(A,z)Y(B,w)C 是 V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] 中某元素 F 在 V((z))((w))
+      中的展开（形式分布 (z-w)^N Y(A,z)Y(B,w)C 的 z,w 负幂只来自 z^{-1}, w^{-1}，且由场的截断性只有有限多负幂）。
+  (2) 同一元素 F 可以在另一个方向展开：把 z 写成 w + (z-w)，把 z^{-1} = (w + (z-w))^{-1} 按 (z-w)/w 的正幂展开，
+      得到 F 在 V((w))((z-w)) 中的像。
+  (3) 由分次理由，右端 Y(Y(A,z-w)B,w)C 作为 w 与 (z-w) 的级数本来就落在 V((w))((z-w)) 中。
+  (4) 用 Proposition 3.2.8 与 Lemma 3.2.6（内容未转录）证明 (2) 的像与 (3) 相等，即 (1) 式。
+  (5) Remark：同一证明表明对充分大的 N，z^N Y(Y(A,z-w)B,w)C ∈ V[[z,w]][w^{-1},(z-w)^{-1}]，
+      且把 (z-w)^{-1} 按 w/z 正幂展开后其在 V[[z^{±1},w^{±1}]] 中的像等于 z^N Y(A,z)Y(B,w)C——
+      这给出目标节点的「另一种写法」。
+gaps:
+  - "**证明主体未获取**：Proposition 3.2.8 与 Lemma 3.2.6 只确认了编号存在（勘误表引用），内容未转录；
+     印本正文全书无合法公开全文。本推导的 status: rigorous 依据的是文献自称的严格程度
+     （AMS 数学专著 + 作者勘误表），不是本图的逐步复核。与 math.laplace-fundamental-solution-2d--via-lieb-loss
+     （证明整页转录）相比，这是本批证据最薄的一条 rigorous。"
+  - "**版次**：所引措辞来自可能针对第 1 版（2001）的勘误表（PDF 元数据 2001-09，L4）；第 2 版印本正文的措辞未见。
+     编号 Theorem 3.2.1 在第 2 版存在（Google Books p.49，带控制实验）。"
+  - "**顶点代数的定义未在本图落卡**：目标节点开头的公理概述不是逐字定义；「局域性公理」到 math.formal-distribution-locality
+     的边因此标 inferred。"
+notes: |
+  **禁令核对**：本推导不写 FBZ Theorem 3.3.1（不存在的编号），不写 Kac Theorem 2.3 / Corollary 2.2
+  （内容未核实、归属冲突）。见 math-sources.md §13.4 三条硬性禁令。
+  **不含任何收敛性**：五步全在形式级数空间内；「按 (z-w)/w 的正幂展开」是形式代数操作，
+  不是解析收敛（对照 math.vertex-algebra-ope-analytic-convergence--via-gui）。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,90 @@
+id: worldsheet.ope-pole-mode-commutator-dictionary
+kind: proposition
+title: OPE 极点系数 ⟺ 模式对易子字典（形式分布版、玻色型；无收敛性、无围道）
+statement: |
+  **记号**（全部在形式级数层面，z, w 是形式变量，不是复平面上的点）：
+  - 形式分布模指标（math.formal-distribution-locality）：A(z) = Σ_{n ∈ Z} A_{(n)} z^{-n-1}，A_{(n)} ∈ End(V)。
+  - 物理模指标：给每个场 A 指定一个整数 h_A（物理上取其共形权），A(z) = Σ_{m ∈ Z} A_m z^{-m-h_A}。
+    两套指标之间只是**重标**：
+      A_m = A_{(m + h_A - 1)},   等价地   A_{(n)} = A_{n - h_A + 1}。
+  - i_{z,w} (z - w)^{-(j+1)} 表示该有理函数在 {|z| > |w|} 上的形式幂级数展开，i_{w,z} 表示在 {|z| < |w|} 上的展开
+    （math.locality-ope-equivalences 的「记号」段）；:A(z)B(w): := A(z)_- B(w) + B(w) A(z)_+ 是产生-湮灭正规序积。
+  - Res_z 取 z^{-1} 的系数。
+
+  **命题**：设 (V, E) 如 worldsheet.string-cft-is-a-vertex-algebra-v2 所述，取 A, B ∈ E 为两个**玻色型（偶）**场
+  ——即 ∂X^μ、T^X、T^g、T = T^X + T^g 及其 ∂_z 导数与产生-湮灭正规序积；**不含** b、c 本身或任何奇场——
+  设其形式局域阶为 N，即 (z - w)^N [A(z), B(w)] = 0 于 End(V)[[z^{±1}, w^{±1}]]。则：
+
+  (1) **极点系数唯一存在**：令
+        C^j(w) := Res_z (z - w)^j [A(z), B(w)] ∈ End(V)[[w^{±1}]],   0 ≤ j ≤ N-1,
+      则在 End(V)[[z^{±1}, w^{±1}]] 中
+        A(z)B(w) = Σ_{j=0}^{N-1} i_{z,w} (z - w)^{-(j+1)} C^j(w) + :A(z)B(w):,
+        B(w)A(z) = Σ_{j=0}^{N-1} i_{w,z} (z - w)^{-(j+1)} C^j(w) + :A(z)B(w):,
+      且满足第一式的 C^0, …, C^{N-1} 唯一。物理写法即
+        A(z)B(w) ∼ Σ_{j=0}^{N-1} C^j(w) / (z - w)^{j+1},
+      其中「默认 |z| > |w|」的含义**只是**选定 i_{z,w} 这种形式展开。
+
+  (2) **模式对易子由同一组 C^j 给出**：把 C^j 的模按整数移位 h_{C^j} := h_A + h_B - j - 1 编号，
+      即 (C^j)_p := (C^j)_{(p + h_A + h_B - j - 2)}（这是**指标约定**，不是关于 C^j 共形权的断言）。则对一切 m, n ∈ Z
+        [A_m, B_n] = Σ_{j=0}^{N-1} binom(m + h_A - 1, j) · (C^j)_{m+n}。
+      在形式分布指标下这就是 [A_{(M)}, B_{(N')}] = Σ_{j=0}^{N-1} binom(M, j) C^j_{(M + N' - j)}，
+      其中 M = m + h_A - 1、N' = n + h_B - 1。
+
+  (3) **字典是双向的**：(1) 与 (2) 中的 C^j 是同一组，且「存在 C^j 使 (1) 成立」与「存在 C^j 使 (2) 成立」
+      彼此等价（且都等价于局域性）。这就是「**OPE 的极点结构 ⟺ 模的（反）对易关系**」在形式分布层面的精确内容。
+
+  **本命题不含的内容**（划界）：
+  - 不断言任何收敛性。特别地**不**说 A(z)B(w) 或 R{A(z)B(w)} 是某个环域上的全纯函数，
+    **不**用径向排序、围道积分或围道变形，**不**断言两种算子排序互为解析延拓。
+    那一层（径向排序围道 = 形式分布残数）见 worldsheet.ope-commutator-dictionary 与
+    math.vertex-algebra-ope-analytic-convergence。
+  - 只覆盖玻色型场。b、c 及任何奇场的（反）对易版本不在本命题范围内。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 10, Theorem 10.10, p. 178：第 4 条（物理写法的 OPE，即本节点 (1)）⟺ 第 5 条（模式对易子公式 [A_(m), B_(n)] = Σ_j (m choose j) C^j_(m+n−j)，即本节点 (2) 的形式分布指标版）；系数分布的存在唯一性与 C^j(w) = Res_z (z−w)^j [A(z),B(w)] 见 Proposition 10.6, p. 175；物理记号的翻译段（「with the implicit assumption of |z| > |w| in order to justify 1/(z−w)^{j+1} = i_{z,w} 1/(z−w)^{j+1}」）见 p. 179；正规序积 Definition 10.9, p. 178"
+    note: |
+      **L1（researcher 逐页读图核实，2026-09-11，math-sources.md §11.2–§11.3）**。
+      本节点 (1)(2)(3) 是 Theorem 10.10 在 (V, E) 上的直接实例化，**加上物理模指标重标**——
+      重标那一步两本书都没有并列写出，是本图的补白，见
+      worldsheet.ope-pole-mode-commutator-dictionary--via-locality-theorem 的 gaps。
+      **转录疑点（Q10）**：Theorem 10.10 第 5 条求和下限在页图上疑似 j = 1；本节点按 j = 0 写，
+      与 math.locality-ope-equivalences 一致。
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, §7.7 p. 73–74（复解析局域性 –7.11→ OPE –7.12→ Lie 括号版的箭头图；说明留数路线在数学侧亦存在）"
+    note: |
+      仅作旁证：说明「极点系数 ⟺ 模对易子」这条字典在解析路线里也有对应物。本节点走的是形式路线，
+      不依赖 Gui 的解析前提。
+tags: [cft, ope, locality, formal-distribution, commutator, vertex-algebra, bosonic]
+notes: |
+  **本节点为什么存在**（reviewer-batch3 必修第 3 条，curator 2026-09-11）：
+  原先严格路线的推导 worldsheet.ope-commutator-dictionary--via-locality-theorem 挂在
+  worldsheet.ope-commutator-dictionary 上，但该推导自己在 gaps 里承认**不覆盖目标陈述的两层内容**：
+  (a) 径向排序 R{A(z)B(w)} 作为环域上全纯函数、两种排序互为解析延拓（解析层）；(b) 费米型场。
+  即「推导证的东西比目标弱」。本节点就是那条推导**真正证到的**陈述：形式分布版、玻色型的极点-对易子字典。
+  worldsheet.ope-commutator-dictionary 保留不动（陈述不可变），其严格路线现指向本节点。
+
+  **本节点与 math.locality-ope-equivalences 的分工**：后者是纯数学命题（任意含幺结合代数 R 上的形式分布），
+  本节点是它在弦论 (V, E) 上的**实例化**，因此本节点的依赖里必然含
+  worldsheet.string-cft-is-a-vertex-algebra-v2（该节点无推导，open），本节点的有效状态也因此为 open。
+  这正是本图要显示的事：**严格路线在数学侧是通的，卡在「弦论的场确实两两局域」这一步**。
+
+  **关于 uses_conventions**：本节点自己的公式（模指标重标、二项式系数、Res）**不用**度规号差、α' 或
+  中心项归一化中的任何一个；三条约定是通过 E 的定义（worldsheet.string-cft-is-a-vertex-algebra-v2 里
+  ∂X^μ 的归一化与 η 的号差）继承进来的，故照抄声明以保持与 v2 一致。若日后把本节点改写成
+  「任意满足形式局域性的一对场」的纯数学版本，这三条应删去——但那时它就不再需要 v2 作前提，
+  也就退化成 math.locality-ope-equivalences 本身。
+
+  **h_{C^j} 那句话为什么写成「指标约定」**：把 C^j 的模按 h_A + h_B - j - 1 移位编号，是为了让 (2) 的右端
+  写成 (C^j)_{m+n} 这种物理形状；这一步是定义，不需要证明。它在物理文献里之所以看起来自然，
+  是因为当 A、B 是权 h_A、h_B 的（拟）主场时 C^j 的共形权确实是 h_A + h_B - j - 1——
+  **但本节点不断言这一点**（那需要先有 T 与 Virasoro 作用，属于另一条链）。
+
+  **一个可直接检验的特例**（不写进陈述，以免变成第二条命题）：A = B = T、h_A = h_B = 2、N = 4、
+  C^3 = (c/2)·1、C^2 = 0、C^1 = 2T、C^0 = ∂T 时，(2) 给出 [L_m, L_n] = (m-n)L_{m+n} + (c/12)m(m²-1)δ_{m+n,0}
+  （conv.virasoro-standard）。见推导节点 summary (4) 与 Schottenloher (10.2), p.180。
+author: curator
+created: "2026-09-11"

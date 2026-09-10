@@ -7,7 +7,7 @@ statement: |
   DDF 算子 A^i_n := ∮ dz/(2πi) ∂X^i(z) e^{i n k·X(z)}（k 归一化使 k·p = 1）。
   它们与所有 L_m 对易，且满足 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
   即一个 D-2 维横向振子代数。
-uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses: [worldsheet.virasoro-algebra-v2, worldsheet.old-covariant-physical-states]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: gsw-1987-v1

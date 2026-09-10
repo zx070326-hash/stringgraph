@@ -4,11 +4,11 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.old-covariant-physical-states
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1（OCQ 伪态/零态分析：第一级给 a = 1，第二级在 a = 1 下给 D = 26）"
-    note: "抽取记录 polchinski-1998-v1#E57。公式号未逐条核对。"
+    note: "抽取记录 polchinski-1998-v1#E56（level 1，a = 1；(4.1.16)–(4.1.18) 已核实）与 #E57（level 2，D = 26；式号未核实）。lead 2026-09-11 订正原 E57 单引。"
   - ref: gsw-1987-v1
     loc: "§2.2.2（伪态与零态的条件）"
     note: 已从 mostly-minus / α'=1/2 转写。
@@ -29,7 +29,25 @@ summary: |
 gaps:
   - "'伪态必须解耦'是幺正性/规范不变性的一致性要求，不是定理；这是本推导记为 physical-argument 而非 proof 的原因。零态条件本身的代数计算是严格的。"
   - "本推导给出 a = 1，不给出 D = 26；D = 26 见 worldsheet.critical-dimension-old-covariant 与 worldsheet.critical-dimension-brst。"
-  - "抽取记录编号 polchinski-1998-v1#E57 由 reviewer 提供，对应的抽取记录文件在本分支中不存在，编号未能自行核对。"
+  - "抽取记录编号已核对（lead 2026-09-11）：level 1 分析是 E56，level 2 是 E57；原 gap 所述文件不存在的情况已不成立。"
+  - |
+    **【2026-09-11（二）：形式化只覆盖了本推导的一个方向，本推导仍是 physical-argument】**
+    （curator，依据 formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577。）
+    PhysicalStates.lean 与新节点 worldsheet.physical-states-level-one（formalized）**只覆盖**：
+      「设 a = 1 且 k² = 0，则 L_{−1}|k⟩ = (2α')^{1/2} k·α_{−1}|k⟩ 满足物理态条件，
+       且因它是伪态而必为零模态」
+    （`Fock.Lop_neg_one_apply_one_mem_physSubmodule`、`Fock.Lop_neg_one_apply_one_mem_nullSubmodule`）。
+    这是本推导 summary「第一级」一段里**从 a = 1 出发**的那半句。
+    **未被覆盖、且构成本推导全部论证力的部分**：
+      (1) **唯一性/排他性**：「a = 1 **是唯一**使第一级纵向态退耦的截距」，
+          即 a ≠ 1 时的三分讨论（Polchinski §4.1：A > −1 有质量、伪态不物理、D−1 个自由度；
+          A < −1 快子且含一个负范数态、破坏幺正性）。Lean 里没有任何一条对应定理。
+      (2) **「伪态必须解耦」这一物理要求本身**——它是幺正性/规范不变性的一致性条件，
+          不是可形式化的数学命题（见本 gaps 第一条）。
+      (3) **第二级（level 2）分析**（本 summary 的后半段，定 D = 26）：完全未形式化。
+    因此：**本推导与 worldsheet.open-string-intercept 一律不得标 formalized，
+    status 保持 physical-argument。** 想引用形式化结果的下游应当直接引
+    worldsheet.physical-states-level-one，并注意它只给出上述那一个方向。
   - "命名说明：reviewer 原先指定的 id 为 --via-level-two-null-state，但如上所算，a = 1 来自第一级（level 1）伪态，第二级只定 D。为避免永久性误导的 id，改名为 --via-null-state-decoupling；两级分析都写在本推导里。若 lead 坚持原名，合并前可重命名（本分支未合并，id 尚可改）。"
 author: curator-critdim
 created: "2026-09-10"

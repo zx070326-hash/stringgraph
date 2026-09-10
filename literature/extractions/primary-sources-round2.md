@@ -593,3 +593,232 @@ INSPIRE API 用 `fields=abstracts` **单字段**查询时能拿到完整逐字�
 6. **LZ 1991 两处扫描转录疑点**（Theorem 2.25 的 `𝒢-free` vs `𝒢₋-free`；Corollary 2.26 第二行
    `n = 0` vs `n ≠ 0`；Corollary 2.28 的公式指数）：需要持有可选中文本 PDF 的人复核。
    PDF 本身在 Project Euclid 免费，任何人可复现（§7 给了 URL）。
+   → **本条第 1 项（`𝒢₋-free`）已在 §11.4 得到强佐证，见下。**
+
+---
+
+## 11. LZ 1991 的「典范等距」是否由包含映射诱导 —— 第三轮专项核实
+
+> **编号说明**：lead 的任务书写的是「新节 §10」，但本文件的 §10 已被「未解决 / 留给下一轮」占用
+> （`literature/CLAUDE.md` 规则 3：可多次追加，**不覆盖**已有条目），故本节编号为 **§11**。
+>
+> - 负责 agent：researcher（无 Bash，不做 git 操作）
+> - 日期：2026-09-10（第三轮）
+> - 触发：`graph/derivations/worldsheet/brst-cohomology-equals-ocq-physical--via-lian-zuckerman.yaml`
+>   的 `gaps[0]` 自称「本推导最软的一步……待 researcher 复核 LZ p.566–567」
+> - 证据等级沿用 §0 的表。本节全部为 **L1**（Project Euclid 免费 PDF，`Read(pages=)` 逐页读图），
+>   获取端点与 §1.0 / §7 相同：`https://projecteuclid.org/journalArticle/Download?urlId=cmp%2F1104202143`
+>   （PDF 页码 = 刊物页码 − 546；本轮读了 PDF 第 16–21、24–25 页 = 刊物 p.562–567、p.570–571）
+
+### 11.1 结论（一句话）
+
+**是。** LZ 的典范等距**确实**由「物理态 ⊗ （补充模的最高权向量）⊗ 鬼真空 ↦ 上同调类」诱导，
+而且 LZ 把这个映射**逐字写了出来**（`Lemma 2.22` 证明中的 Eq. (2)，p.565）。
+之前登记的「LZ 只说 canonical isometry、没写映射是什么」是**因为上一轮没有读 Lemma 2.22**——
+`Theorem 2.25` 的证明末句正是「Now by **Lemma 2.22**, Eqs. (1), (2) give the desired result」。
+因此 `--via-lian-zuckerman` 的 `gaps[0]`（「本推导最软的一步」）**可以关闭**。
+
+### 11.2 逐字证据链（三步，全部 L1）
+
+**第一步：显式映射写在 `Lemma 2.22`（p.565）的证明里。逐字：**
+
+> **Lemma 2.22.** *Suppose W∈𝒪 is hermitian, 𝒢₋-free and* dim W[α] < ∞ ∀α∈𝒢₀'. *Then
+> for each* λ∈𝒢₀', *there is an isometry*
+> H^n_∞(𝒢, 𝒢₀; W ⊗ M(−β̄−λ)) = 0   *for* n ≠ 0,
+>                       ≅ W^{𝒢₊}[λ]   *for* n = 0.
+>
+> *Proof.* The vanishing part follows from Lemma 2.21. **One can check that the composed
+> isomorphism given by the proof of Corollary 2.17 and Theorem 2.13,**
+>   W^{𝒢₊}[λ] ⥲ H⁰(𝒢₊, W)[λ] ⥲ H⁰_∞(𝒢, 𝒢₀; W ⊗ M(−β̄−λ)),   (1)
+> **is given by**
+>   **ω ↦ [ω ⊗ 1] ↦ [ω ⊗ v_{−β̄−λ} ⊗ 1 ⊗ 1],   (2)**
+> where [ ] denotes the cohomology class. This is obviously an isometry. ∎
+
+三个符号的身份（均 L1，出自本文自身）：
+
+| 符号 | 身份 | 出处逐字 |
+|---|---|---|
+| `ω ∈ W^{𝒢₊}[λ]` | 物质模里被 𝒢₊ 湮灭、权为 λ 的向量 = **旧协变物理态** | `Corollary 2.17` 证明（p.563）：「A simple calculation shows that H⁰(𝒢₊, W) ≅ W^{𝒢₊}, the space of 𝒢₊-invariant vectors in W.」 |
+| `v_{−β̄−λ}` | **Verma 模 M(−β̄−λ) 的最高权向量** | `Lemma 2.14` 证明（p.562）：「where v_Λ is a highest weight vector of M(Λ) having weight Λ」 |
+| `1 ⊗ 1` | **半无限形式空间 Ω_∞ = ∧_∞𝒢 的典范生成元 = 鬼真空** | 同上句续：「and 1⊗1 ∈ ∧(𝒢^(0)′) ∨ (𝒢^(1)) has weight β̄」；`Remark 2.19(i)`（p.564）：「A hermitian form is uniquely defined by letting ⟨1⊗1, 1⊗1⟩_{Ω_∞} = 1」 |
+
+**`1⊗1` 就是物理学家的 |↓⟩，且能对上数值**：`Proposition 3.3(iii)` 给 β̄ = −26z′ − L′₀，
+`Proposition 3.3(iv)` 把 ∧_∞𝒢 的 𝒢₀-谱 {−26z′ − L′₀ + nL′₀}_{n∈Z₊} 认同为 {1−n}_{n∈Z₊}
+「*i.e. the eigenvalues of* −L₀」。故 `1⊗1`（n = 0）的 −L₀ 本征值为 1，即 **L₀ 本征值 = −1**
+——正是 `polchinski-1998-v1.md` E43 订正后的鬼场正规序常数 **a^g = −1**，也正是图节点
+`worldsheet.brst-cohomology-equals-ocq-physical` 里 |↓⟩ 的归一化（该节点把 −1 挪进
+L_0 = L^m_0 + L^g_0 − 1 的定义，等价）。**这条数值吻合是本轮的额外收获**：
+它把「LZ 的 1⊗1 = 本项目的 |↓⟩」从纯字典推断变成了带一个可核对数值的对照。
+
+**第二步：`Theorem 2.25`（p.566）的等距就是 Lemma 2.22 的映射再对 rad 取商。证明逐字：**
+
+> *Proof.* First apply Lemma 2.21 to V₊ = W and V₋ = M, rad M, M/rad M, where M = M(−β̄−λ).
+> Then Corollary 2.20 implies that
+>   H⁰_∞(𝒢,𝒢₀; W ⊗ (M/rad M)) ≅ H⁰_∞(𝒢,𝒢₀; W ⊗ M)/i*H⁰_∞(𝒢,𝒢₀; W ⊗ rad M)   (1)
+> is an isometry. Now W ⊗ (M/rad M) is hermitian. Thus by Remark 2.19 (ii), there is a hermitian
+> pairing between C^n_∞ and C^{−n}_∞, where C*_∞ = C*_∞(𝒢,𝒢₀; W ⊗ (M/rad M)). By Lemma 2.24
+> C*_∞(𝒢,𝒢₀; W ⊗ M(Λ)) is finite dimensional. Thus Lemma 2.23 implies that the left-hand side of
+> Eq. (1) is hermitian. It follows from Eq. (1) that
+>   i*H⁰_∞(𝒢,𝒢₀; W ⊗ rad M) = rad H⁰_∞(𝒢,𝒢₀; W ⊗ M).   (2)
+> **Now by Lemma 2.22, Eqs. (1), (2) give the desired result.** ∎
+
+而 (1) 里的 `i*` **逐字就是包含映射诱导的映射**——`Lemma 2.18`（p.564）逐字：
+
+> …*Then there is an isomorphism* H⁰(A/B) ≅ H⁰(A)/i*H⁰(B), **where i\* is induced by i: B ↪ A**.
+> *If, furthermore, A has a sesquilinear form such that* ⟨d·,·⟩ = ⟨·,d·⟩ *and* B ⊆ rad A,
+> *then the isomorphism is an isometry.*
+>
+> *Proof.* The short exact sequence 0 → B →^i A →^p A/B → 0, **where p is the canonical map**,
+> gives a long exact sequence. But since this sequence collapses we get the desired isomorphism.
+> The second part is a trivial exercise. ∎
+
+（`Corollary 2.20`, p.564，是它在半无限上同调里的版本：「*Suppose* (V,π)∈𝒪 *has a sesquilinear
+form and* U ⊂ rad V *is a submodule. If* H^n_∞(𝒢,𝒢₀;K) = 0 *for* K = V, U *or* V/U *if* n ≠ 0,
+*then there is an isometry* H⁰_∞(𝒢,𝒢₀; V/U) ≅ H⁰_∞(𝒢,𝒢₀;V)/i*H⁰_∞(𝒢,𝒢₀;U).」）
+
+→ 合起来：`Theorem 2.25` 的典范等距 `W^{𝒢₊}[λ]/rad ≅ H⁰_∞(𝒢,𝒢₀; W ⊗ L(−β̄−λ))`
+就是 **ω ↦ [ω ⊗ (L 的最高权向量) ⊗ 1 ⊗ 1]** 在两侧同时对 rad 取商后诱导的映射
+（Verma 侧的 `v_{−β̄−λ}` 经 `p: M → M/rad M = L` 落到 L 的最高权向量）。
+
+**第三步：`Theorem 3.5(i)` 的证明只有一句话，直接回到 Theorem 2.25。p.570 逐字：**
+
+> *Proof.*
+> (i) We remind the reader of the convention that V(D,p)[−h] is the eigenspace of −L₀ with
+> eigenvalue −h. **Then (i) is simply a direct application of Theorem 2.25.**
+
+→ **`Theorem 3.5(i)` 的「canonical isometry」= `Theorem 2.25` 的等距 = 上面那个显式映射。**
+本项目用的 **D = 26、h = 1** 特例下补充模是 L(0,0) = **C**（`Corollary 2.26` 的证明逐字就是
+一句「L(0) = **C**.」），其最高权向量是 1，映射退化为
+
+  **ω ↦ [ω ⊗ 1 ⊗ 1 ⊗ 1]，即「物理态 ⊗ 鬼真空 ↦ 上同调类」，与 FGZ 的 ι 逐点相同。**
+
+### 11.3 与 FGZ「The inclusion of P … induces」的逐条对照
+
+| 项 | FGZ 1986 Theorem 2.8（第一个同构） | LZ 1991 Theorem 3.5(i) / Theorem 2.25 |
+|---|---|---|
+| 映射是否逐字给出 | **是**：「The inclusion of P into (V ⊗ Λ⁰_∞)^{ℒ₀} … induces a unitary isomorphism」 | **是**（本轮新证）：Lemma 2.22 Eq. (2) 逐字 `ω ↦ [ω ⊗ v_{−β̄−λ} ⊗ 1 ⊗ 1]`，Theorem 2.25 与 3.5(i) 逐句回指它 |
+| 措辞 | "unitary isomorphism" | "isometry"（Thm 2.25 / 3.5(i)）；"canonical"（Thm 2.13、Lemma 2.14、Thm 3.5(i)） |
+| 「典范」的含义 | 由包含映射直接给出 | 由 `Corollary 2.17`+`Theorem 2.13`（约化公式）**复合**给出，Lemma 2.22 再把复合映射算出来**恰好是**包含型映射 |
+| 张量因子 | 只有 V ⊗ Λ⁰_∞（鬼真空扇区） | 多一个补充模因子 L(26−D, 1−h) 的最高权向量；**D=26,h=1 时该因子 = C，两者重合** |
+| 「核 = rad」 | FGZ 的陈述形式是 P/rad P ≅ H⁰_∞，核已含在商里 | 同左（Thm 2.25 已是 `/rad` 形式）。**LZ 没有单独写一句「该映射的核是 rad」**；由「Lemma 2.22 是等距（等距把 rad 映满 rad）」+ 证明里的 Eq. (2) `i*H⁰(W⊗rad M) = rad H⁰(W⊗M)` 一行即得，**这一行是抽取者的合成，不是 LZ 的原句**（推断，须标 `inferred`） |
+
+**差异的实质**：LZ 走的确实是「谱序列/约化公式」路线（`Theorem 2.13` 逐字：「(*Reduction formula*).
+**There is a canonical isomorphism** H*_∞(𝒢,𝒢₀; W ⊗ M(−β̄−λ)) ≅ H*(𝒢₊, W)[λ] for each λ∈𝒢₀'.」，
+更精确地说是**有限滤过 + 长正合列**，见 `Proposition 2.12` 与 Theorem 2.13 的证明，
+**不是**谱序列的语言），**但终点相同**：Lemma 2.22 明确指出这条路线复合出来的同构就是包含型映射。
+所以「LZ 走了别的构造」这个上一轮的猜测是**部分正确、结论错误**：路线不同，**映射相同**。
+
+### 11.4 本轮顺带解决 / 新发现的四件事
+
+1. **§10.6 的转录疑点 (a) 基本可判定：`Theorem 2.25` 的假设应读作 `𝒢₋-free`。**
+   理由：`Lemma 2.22`（p.565）与 `Lemma 2.21`（p.564）在**同一组假设**下都渲染成带下标的
+   **`𝒢₋-free`**（Lemma 2.21 逐字：「If V₊, V₋∈𝒪 with V₊ hermitian and **𝒢₋-free**…」），
+   而 Theorem 2.25 的证明第一句就是「First apply **Lemma 2.21**…」。
+   **等级：L1 间接（同页同章的平行陈述带下标），不是对 2.25 那一行的直接判读**——
+   该行在扫描里仍看不出下标。建议把 §10.6 第 1 项从「待复核」降为「已高度确信，仍欢迎复核」。
+2. **转录疑点 (b) 确认为疑点：`Corollary 2.26` 第二行确实渲染成「= 0 *for* n = 0」**（p.567 原页），
+   与第一行的「≅ W^{𝒢₊}[−β̄]/rad *for* n = 0」重复，按上下文第二行必为 **n ≠ 0**。
+   对照证据：**同一份扫描里 `Lemma 2.22` 的两行渲染是正常的**（「= 0 for n ≠ 0」/「≅ … for n = 0」），
+   说明这不是全篇性的 OCR 缺陷，**更可能是原刊排印错误**。引用 Corollary 2.26 时须带这条注。
+3. **LZ 自己给了物理词典，可以削弱 `old-covariant-physical-states` 那条 `inferred` 边的软度。**
+   §2.3 开头逐字（p.563）：
+   > **2.3. Important Consequences.** We now proceed to an important consequence of the reduction
+   > formula (for the case of a Hermitian 𝒢-module W) which relates W^{𝒢₊}[λ]/rad with a zeroth
+   > relative cohomology group (Theorem 2.25). **In some special cases, the space W^{𝒢₊}[λ]/rad is
+   > known as the "physical Hilbert space"** (see Sect. 3 for examples.)
+
+   以及 `Remark 3.6(ii)`（p.571）逐字：
+   > Theorem 2.25 can be applied to a general class of string theories, known as the "compactified"
+   > string models… Given such a theory, **one postulates that the "particle spectrum" be given by
+   > the cohomology classes of** H⁰_∞(𝒢,𝒢₀; V(D,p) ⊗ W).
+
+   → LZ **仍然没有**写 "old covariant" 四个字（§1.6 读法说明 3 不变），但「W^{𝒢₊}[λ]/rad =
+   物理 Hilbert 空间」「H⁰_∞ 的类 = 粒子谱」是**作者自己的**对照措辞，不再是抽取者独有的解读。
+   `depends_on` 的 `inferred: true` 建议保留（LZ 没有给出与本项目 H_phys/H_0 定义逐条对齐的命题），
+   但 note 里可以补上这两句逐字，把「纯抽取者解读」改成「作者给了同向的非正式对照」。
+4. **新发现一条此前未登记的支撑性假设：`§2.3` 起有一条 reality condition。** p.563 末逐字：
+   > **From now on we will only consider weights λ∈𝒢₀' that satisfy the reality condition σλ = −λ.**
+
+   这是 §2.3（含 `Theorem 2.25`、`Corollary 2.26/2.27/2.28`）以及由它们推出的 `Theorem 3.5` 的
+   **常设假设**，`--via-lian-zuckerman` 与 `--via-lian-zuckerman`（subcritical）两条推导的
+   `gaps` 里都没有登记。σ 是 `Proposition 3.3(ii)` 的反线性自同构（σ(L_n) = −L_{−n}, σ(z) = −z）。
+   在本项目的 D=26、h=1（h 实）特例下它应当自动满足，但**这一步 LZ 没有验，本轮也没有验**。
+   建议加进 gaps（等级：假设逐字为 L1，「特例下自动满足」为未核实推断）。
+
+**另外一条小的编号存疑（不影响结论，登记备查）**：`Corollary 2.20` 的证明渲染为
+「It follows from Lemma 2.18 and the observation made in **Remark 2.13(iii)**」，
+但内容显然指 **`Remark 2.19(iii)`**（p.564，「U ⊆ rad V then C_∞(𝒢,𝒢₀;U) ⊆ rad C_∞(𝒢,𝒢₀;V)」）。
+2.13 处是 `Theorem 2.13`（约化公式），没有 (iii) 小项。**未做单页重读复核，可能是 OCR 误读也可能
+是本文第二处交叉引用错误**（第一处见 §1.7 的 "Corollary 2.19"）。
+
+### 11.5 对图的建议
+
+> researcher 不写 `graph/`。以下逐条写明「哪个节点的哪个字段 → 改成什么」。
+> 相关 id 已用 `Read`/`Grep` 确认存在（2026-09-10）。
+
+#### 11.5.1 `worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman`（derivation）
+
+- **`gaps[0]` 建议整体替换**（原文是「【本推导最软的一步】…待 researcher 复核 LZ p.566–567」）为：
+
+  > 「【已复核，2026-09-10，primary-sources-round2.md §11】LZ **确实**逐字给出了典范等距的构造，
+  > 且它就是包含型映射：`Lemma 2.22`（p.565）证明中的 Eq. (2) 逐字写
+  > `ω ↦ [ω ⊗ 1] ↦ [ω ⊗ v_{−β̄−λ} ⊗ 1 ⊗ 1]`，其中 `v_{−β̄−λ}` 是补充 Verma 模的最高权向量
+  > （身份见 Lemma 2.14 证明）、`1⊗1` 是半无限形式的典范生成元即鬼真空
+  > （Remark 2.19(i) 定义 ⟨1⊗1,1⊗1⟩ = 1；Proposition 3.3(iii)(iv) 给它 −L₀ 本征值 1，即 L₀ = −1 = a^g）。
+  > `Theorem 2.25` 的证明末句「Now by **Lemma 2.22**, Eqs. (1), (2) give the desired result」把
+  > 该映射对 rad 取商；`Theorem 3.5(i)` 的证明逐字只有一句「(i) is simply a direct application of
+  > Theorem 2.25」。本节点的 D=26、h=1 特例下补充模 L(0,0) = **C**（Corollary 2.26 证明逐字「L(0) = **C**.」），
+  > 映射退化为 `ω ↦ [ω ⊗ 鬼真空]`，与 fgz-1986 的 ι 逐点相同。
+  > **残留的两点仍是推断（不是 LZ 原句）**：(a)「该映射的核恰为 rad」LZ 没有单独陈述，由
+  > 「Lemma 2.22 是等距」+ Theorem 2.25 证明 Eq. (2) 一行合成；(b)「LZ 的 1⊗1 = 本项目 |↓⟩」
+  > 仍属 brst-quantization 那条 inferred 边的字典，但现在有 L₀ 本征值 −1 这个可核对数值支持。」
+
+- **`gaps` 建议新增一条（本轮新发现）**：
+  > 「LZ §2.3 开头（p.563 末）逐字设定常设假设『From now on we will only consider weights λ∈𝒢₀'
+  > that satisfy the reality condition σλ = −λ』，Theorem 2.25 / Corollary 2.26 / Theorem 3.5 全部
+  > 在此假设下。本节点的 D=26、h=1 特例是否自动满足该条件，**未核实**。」
+
+- **`sources[0].note`（Theorem 3.5(i) 那条）建议追加一句**：
+  > 「Theorem 3.5(i) 的证明逐字只有一句『(i) is simply a direct application of Theorem 2.25』，
+  > 故实质来源是 Theorem 2.25 + Lemma 2.22（primary-sources-round2.md §11.2）。」
+
+- **`sources[1].note` 的转录疑点 (a) 建议降级**：按 §11.4 第 1 条，改成
+  「(a) …按 Lemma 2.21/2.22 的平行渲染（两处均带下标 `𝒢₋-free`）判定应为 `𝒢₋-free`，
+  高度确信；仍欢迎持可选中文本者复核该行」；(b) 保留并补一句
+  「同一扫描里 Lemma 2.22 的对应两行渲染正常，故更可能是原刊排印错误而非 OCR」。
+
+- **`notes` 里「两条推导的分工」那段建议改写**：原写「本推导……但没有逐字说明典范同构由包含映射
+  诱导（见 gaps 第一条）」。按本轮结果，**这句已不成立**。建议改为：
+  「两条推导都逐字覆盖了『包含型映射诱导等距』这一具体形式（FGZ 用一句话直陈，LZ 用
+  Lemma 2.22 把约化公式复合出来的映射算出来）；真正的分工是**证明的完整程度**（PNAS 梗概
+  vs CMP 长文）与**覆盖范围**（FGZ 只有 D=26；LZ 覆盖任意 D≥2 加补充模）。」
+
+- **`status: rigorous` 不变**，本轮只增强不削弱。
+
+#### 11.5.2 目标陈述 `worldsheet.brst-cohomology-equals-ocq-physical` —— **建议不拆**
+
+lead 问「两条推导互补 → 是否需拆目标陈述」。**researcher 的意见：不拆。** 理由：
+
+1. 拆分的动机原本是「一条推导只覆盖『存在保形式的双射』、另一条才覆盖『由 ι 诱导』」。
+   **这个前提本轮被推翻**：两条来源现在都逐字覆盖了具体映射，目标陈述的断言
+   （ι 良定义、核恰为 H_0、诱导酉同构）**没有任何一半是只靠单一来源支撑的**。
+   按 `graph/CLAUDE.md`「一个节点一个命题」，这里就是**一个**命题挂两条推导，正是该原则想要的形态。
+2. 若硬拆成「存在同构」+「同构由 ι 给出」两个节点，会制造一条两来源完全重合的边，
+   增加节点数而不增加信息，且与 `docs/VISION.md`「审计面固定在里程碑」的减负方向相反。
+3. **真正值得拆的另有其物（可选，优先级低）**：目标陈述当前把 `k ≠ 0` 写死，而 LZ 的动量假设是
+   四条 (P1)–(P4)（§1.6），FGZ 是 `p ≠ 0`。这属于**假设对齐**问题，应在 gaps 里解决
+   （现有 gap 已记），不必新建节点。
+
+#### 11.5.3 `worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman`（若已建）
+
+同 11.5.1 的第二条：把 reality condition `σλ = −λ` 加进 gaps；
+并可在 sources.note 里补 §11.4 第 3 条的两句作者自述（"physical Hilbert space" / "particle spectrum"）。
+
+### 11.6 本节仍未核实的部分
+
+1. **`Theorem 2.25` 假设行的下标**：仍未直接判读（只有平行陈述佐证）。
+2. **`Corollary 2.20` 证明里的 "Remark 2.13(iii)"**：未单页复核，OCR 误读 vs 原文交叉引用错误未分辨。
+3. **`Lemma 2.18` 里「B ⊆ rad A」**：扫描渲染像 "BC ⊆ rad A"，按 `Corollary 2.20` 的对应条件
+   （"U ⊂ rad V"）读作 **B ⊆ rad A**；未单页复核。
+4. **reality condition 在 D=26、h=1 下是否自动满足**：未验。
+5. 与本节无关但仍开着的 §10 各条不变。

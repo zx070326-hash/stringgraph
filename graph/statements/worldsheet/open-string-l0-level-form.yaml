@@ -56,5 +56,52 @@ notes: |
 
   **零模尚未形式化**：本命题的核心是 α_0 ∝ p，而 worldsheet.bosonic-fock-space
   （status: formalized）的空间不含零模，故本命题不继承那条的 formalized 状态。
+
+  **【2026-09-11：Sugawara.lean 覆盖了断言 (i)，但没有覆盖 (ii)，故本节点不建 --via-lean 推导】**
+  （curator，依据 formal/StringFormal/NoGhost/Sugawara.lean，合并提交 7af81b1）
+
+  上面「零模尚未形式化」一段现已过时：Sugawara.lean 把零模作为**标量参数**
+  a^μ = α^μ_0 = (2α')^{1/2} k^μ 引入（`Fock.mode η a μ 0 = a μ • id`），于是
+    `Fock.Lop_zero_apply_of_mem_levelSubmodule`：
+      P ∈ levelSubmodule D R N  ⟹  L_0 P = (½ · zeroModeSq η a + N) · P,
+  而 ½ · zeroModeSq η a = ½ Σ_μ η^{μμ} a^μ a^μ = ½ · 2α' k² = α' k²。
+  这**就是断言 (i)**，机器检查、无 sorry（另有真空情形 `Fock.Lop_zero_apply_one`：
+  L_0 |k⟩ = α' k² |k⟩）。与本节点文本的两点差异，都在「更弱/更具体」的方向上，不构成反例：
+    · Lean 里 p 不是算符，而是固定动量扇区上的本征值 k；本节点的 p 是算符。
+      在固定 k 的 Fock 空间上两者给出同一个 L_0（α^μ_0 与全部产生算符对易，故为标量）。
+    · Lean 断言的是「L_0 在 level-N 分量上乘以 α'k² + N」，其中 N 是**分级 level**
+      （`Fock.level`），不是本节点写的算符 N = Σ_{n≥1} α_{-n}·α_n。
+      「数算符 = level」这件事 Lean 中没有单列（文件里根本没有定义数算符），
+      两者的等同是标准事实但未被机器检查。
+
+  **为什么仍然不建 formalized 的 --via-lean 推导**：本节点是 (i) **与** (ii) 的合取，
+  而 (ii)（共形正规序的 L_0 与产生-湮灭正规序的 L_0 相差 a^X，且 a^X = 0）**完全不在 Lean 里**。
+  formalizer 明确记录：**Sugawara.lean 里 a^X = 0 是「定义里没有加常数」，不是定理**——
+  文件采用产生-湮灭正规序，从头就没有引入任何加性常数，`Lop_zero_apply_one` 只是这一选择的直接后果。
+  要形式化 (ii) 必须先有共形正规序 / 全纯 T 的 Laurent 模侧的 L_0，
+  而 Lean 侧没有 T、没有 OPE、没有围道积分（Sugawara.lean 文件头 "Mathematical gaps" 第 5 条：
+  「That L_m agrees with the Laurent modes of the holomorphic energy-momentum tensor ... not proved here」）。
+  给整条节点挂一条 status: formalized 的推导会让 (ii) 也被记为已形式化，那是假账。
+
+  **建议（留给 lead / reviewer 裁决）**：把本节点按其自身 notes 里已经预留的方式拆成
+  (i)（纯代数、可立即标 formalized，Lean 侧已完成）与 (ii)（a^X = 0 的算符等同，
+  仍是 physical-argument）两张卡。当时不拆的理由是「(i) 单独看内容太薄」，
+  但现在 (i) 有了机器检查的证明，而 (ii) 明确无法形式化，
+  合并保存的代价变成了「一条已形式化的结果被一条物理论证封顶且无法记账」。
+
+  **【2026-09-11：已按上述建议拆分，本卡片换代】**（lead 裁决，curator 执行）
+  - 断言 (i) → **worldsheet.open-string-l0-equals-level-plus-mass**（新卡，formalized，
+    推导 --via-lean 指向 `StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule`）。
+    新卡以 **level 分级**指标 N 表述（与 Lean 一致），并把「level = 数算符本征值」
+    这一未形式化的等同列为其明确不断言的边界 (b)。
+  - 断言 (ii)（a^X = 0，共形正规序侧 L_0 与振子式 L_0 相同）→ **不另建新卡**，
+    归 **worldsheet.normal-ordering-constant-ax**（本来就有卡，physical-argument）。
+  - 本卡片写 `superseded_by` 指向新卡；陈述文本与旧推导
+    worldsheet.open-string-l0-level-form--via-zero-mode-substitution **均不改动、保留**。
+  - 需要旧卡完整合取的下游，应同时引 open-string-l0-equals-level-plus-mass 与
+    normal-ordering-constant-ax 两张卡，不要再引本卡片。
+  - 本卡片在换代时无任何 depends_on 入边（只有 notes 文本提及），
+    故换代不改变任何节点的有效状态。
+superseded_by: worldsheet.open-string-l0-equals-level-plus-mass
 author: curator-worldsheet-signature
 created: "2026-09-10"
