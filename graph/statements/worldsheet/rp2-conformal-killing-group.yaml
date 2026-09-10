@@ -1,0 +1,80 @@
+id: worldsheet.rp2-conformal-killing-group
+kind: proposition
+title: 射影平面无模（μ = 0），共形 Killing 群是 SO(3)，κ(RP₂) = 3
+statement: |
+  设 RP₂ 按 worldsheet.tree-level-worldsheet-topologies 实现为球面在对合
+    z′ = − 1/z̄
+  下的 Z₂ 商。该对合无不动点，故商空间**无边界**且**不可定向**。则：
+
+  **(1)（无模）** RP₂ 上不存在非平凡的模：μ(RP₂) = 0
+  （μ 按 worldsheet.moduli-condition-traceless-transverse 定义）。
+
+  **(2)（共形 Killing 群）** RP₂ 的共形 Killing 群是 PSL(2,C) 中**与该认同相容**的子群，
+  即黎曼球的通常旋转群 **SO(3)**。
+
+  **(3)（CKV 计数）** 由 χ(RP₂) = 1 与 Riemann–Roch 的 κ − μ = 3χ
+  （worldsheet.riemann-roch-kappa-minus-mu）配 (1) 得
+    κ(RP₂) = 3 。
+  这与 (2) 相容：SO(3) 是 3 维实李群。
+
+  **本命题不断言什么**：
+  - **不**断言 SO(3) 是 RP₂ 的**全部**共形自同构群（那需要 Liouville 型定理，本图无节点）；
+  - **不**处理无取向弦的 Ω 投影、Chan–Paton 因子或 RP₂ 上的 Green 函数
+    （后者本图刻意不建节点，见 worldsheet.tree-level-worldsheet-topologies 的 notes）；
+  - **不**断言「χ > 0 的曲面只有三种」（那是 math.positive-euler-surfaces-are-sphere-disk-rp2）。
+
+  ⚠ **群的写法在文献中有两说**：本卡按 Polchinski 取 **SO(3)**；另有文献写 **SU(2)**，
+  两者差一个 Z₂（SU(2) 是二重覆盖，有效作用的是 PSU(2) ≅ SO(3)）。κ = 3 不受影响。详见 notes。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」, pp. 168–169，认同式 (6.1.9) z′ = −1/z̄；「There are no moduli. The CKG is the subgroup of PSL(2,C) that respects the identification (6.1.9); this is just the ordinary rotation group SO(3).」——**无式号**（(6.1.9) 只编到认同式本身）"
+    note: |
+      **L1 原书页图逐字核实**（literature/extractions/math-sources.md §39.6(d)；Cambridge Core
+      ch.6 PDF，PDF 页 = 书页 − 165）。**这是本卡 (1)(2) 的直接来源，且是原书正文而非伴读笔记。**
+      ⚠ 原书**从不写「κ(RP₂) = 3」这个数字**；(3) 的数字来自同书 (5.2.11a)，见下一条 source。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p. 152：「χ > 0 : κ = 3χ, μ = 0」"
+    note: |
+      L1 原书页图（math-sources.md §39.6(a)）。配 χ(RP₂) = 1 给 κ(RP₂) = 3。
+      ⚠ 同式的 μ = 0 那一半与本卡 (1) 重复，但本卡 (1) **另有** §6.1 的独立逐字陈述，
+      故 (1) 不必依赖 §5.2——这一点对避免与
+      worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 成环是关键的，见推导 notes。
+  - ref: caohuu-ghisa-2004
+    loc: "Corollary 3.1（arXiv:0902.2725v1, p. 2）：P² 的 dianalytic 自同构形如 g(z̃) = G̃(z) 或 G̃(z̄)，其中 G 是黎曼球的一个旋转"
+    note: |
+      **数学侧的独立第二来源**，L1 全文（math-sources.md §39.7.2）。同文用的对合
+      h(z) = −1/z̄ 与 Polchinski (6.1.9) **逐字相同**。四条随引用必写的限制：
+      (a) 原文**不出现 "SO(3)"、不出现 "PSU(2)"、不出现「维数 3」**——从「黎曼球的旋转群」
+          到「SO(3)，实维 3」是使用者的补步（标准，但不是来源原文）；
+      (b) **证明外包**：上游 Theorem 2.1 明写「We have shown in [5]」，
+          [5] = Bârză–Ghişa, *Mathematica Bohemica* **129** (2004) 129–140，本项目未获取；
+      (c) 文中式 (2) 的归一化 |a| + |b| ≠ 0 写得不严（PSU(2) 需 |a|² + |b|² = 1），**不可照抄当定义**；
+      (d) 期刊层级低，正文有笔误（§3 开头把 Theorem 2.1 称作「Theorem 1」）。
+      ⚠ **严禁**把这条结论引成 Bârză–Ghişa 2009 的「Theorem 4」——那句是 Theorem 4 与
+      Theorem 5 之间的**无编号**行间陈述（math-sources.md §39.7.3）。
+tags: [worldsheet, tree-level, projective-plane, unoriented, conformal-killing-vector, so3, moduli]
+notes: |
+  由 curator 于 2026-09-11 从 literature/extractions/math-sources.md §39.9(4) 建立。
+  本卡补上了 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的
+  gaps 里点名的「**RP₂ 的 μ = 0 则连节点都缺**」。
+
+  **⚠ 文献分歧：SO(3) 还是 SU(2)**。arXiv:2502.13269（*Superstring scattering on the real
+  projective plane*）据检索摘要称「the conformal Killing group of the real projective plane
+  is **SU(2)**」——该条**等级 L4（仅摘要、正文未获取）**，记在 math-sources.md §39.7.4 与 Q34。
+  本卡按 **Polchinski 的 SO(3)** 写，理由：(a) 它是本图已登记的、逐字读到原书页图的来源；
+  (b) SU(2) → PSU(2) ≅ SO(3) 是二重覆盖，**在 RP₂ 上有效作用的是 SO(3)**；
+  (c) 两者李代数同为 su(2)，κ = 3 两说一致。
+  **但两种写法确实并存于文献中**，日后若有人要断言「CKG 是哪个群」，须回到这条记录。
+
+  **数学侧来源只覆盖 (2) 的一半**：Cao-Huu–Ghişa Corollary 3.1 说的是 RP² 的
+  **dianalytic 自同构**是球面旋转，它给出 (2) 的群**是什么**，
+  但**不给** κ = 3 这个维数，也不给 (1)。见 sources 的限制 (a)。
+
+  **本卡与 worldsheet.sphere-/disk-conformal-killing-group 的差别**：那两张卡的 statement
+  都**明确声明不断言 μ = 0**（reviewer 已指出这一点）；**本卡断言 μ(RP₂) = 0**，
+  因为原书 §6.1 对 RP₂ 逐字写了「There are no moduli」，是可直接引用的正文陈述。
+author: curator-surface-class
+created: "2026-09-11"
