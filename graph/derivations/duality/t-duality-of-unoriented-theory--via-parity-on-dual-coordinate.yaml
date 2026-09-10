@@ -1,0 +1,34 @@
+id: duality.t-duality-of-unoriented-theory--via-parity-on-dual-coordinate
+target: duality.t-duality-of-unoriented-theory
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.worldsheet-parity
+    note: |
+      提供 Ω 的定义与它在闭弦上交换左右行模（Ω α_n Ω^{-1} = ᾱ_n）这一性质，
+      即 (8.8.1) 的 X_L ↔ X_R。
+  - id: duality.dual-coordinate
+    note: 提供对偶坐标 X' = X_L − X_R 的定义（本条只需要这个定义，不需要两个理论等价）。
+  - id: duality.t-duality-is-cft-isomorphism
+    note: |
+      只提供「X' 描述的是对偶理论」这一事实，即本条之所以是关于**T 对偶后**的无取向理论。
+      Ω 在 X' 上的作用本身只用 duality.dual-coordinate。
+  - id: compact.left-right-momenta
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.8, eq. (8.8.1)、(8.8.3)，p.277"
+    note: 抽取记录 polchinski-1998-v1#E158（L1，Schrans §8.130–§8.131，笔记 p.561–562）。
+summary: |
+  Ω 交换 X_L 与 X_R。对 X = X_L + X_R 这只是宇称（X 不变、宇称作用在世界面上）；
+  对 X' = X_L − X_R 则额外带一个整体负号，故 Ω 在对偶坐标上是
+  「宇称 × 时空反射」的组合。把这个组合作用在背景场上并要求 Ω = 1，
+  得到对偶背景场必须满足的一组奇偶性条件：每个被对偶化的指标贡献一个负号，
+  ε^{ab} 在 B 场项上再额外贡献一个。
+gaps:
+  - "⚠ **G_{mn}（两个指标都被对偶化）的符号有分歧**：Schrans 写 −，抽取者复算得 +，原书未核实（抽取记录 Q26）。本节点的陈述因此不含这一条。"
+  - "⚠ (8.8.2) 的内容未知（Schrans 目录只有 (8.8.1) 与 (8.8.3)）。"
+  - "⚠ 未确认原书在此处是否使用「orientifold」一词。"
+  - "「Ω 作用在背景场上」这一步需要把世界面上的算符作用翻译成时空场的奇偶性，来源只给了结果的清单，没有逐项展开（Schrans 对 G 侧只写「and similarly we find」）。"
+  - "⚠ **旧 gap 已撤销**：原先写「上游 duality.t-duality-is-cft-isomorphism 的原书措辞未核实（Q20）」——Q20 已于 2026-09-11 按原书核实关闭（抽取记录 §12.10 表 A）：(8.3.28) 是 X' 的定义，「the same theory」与「same OPEs and energy momentum tensor」都在原书。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

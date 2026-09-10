@@ -1,0 +1,28 @@
+id: compact.circle-level-matching
+kind: proposition
+title: 紧化后的 level matching 修正 N − Ñ + nw = 0
+statement: |
+  设 D = 26 的玻色闭弦的一个空间方向紧化在半径 R 的圆上（conv.compactification-radius），
+  紧化方向的动量数为 n、绕数为 w，N、Ñ 为含紧化方向振子的左右行能级算符。则物理态满足
+    **0 = n w + N − Ñ**,   即   Ñ − N = n w.
+  这是未紧化时的 level matching N = Ñ（worldsheet.closed-string-level-matching）
+  在紧化后的修正：动量与绕数同时非零的态允许左右能级不等，差值恰为 nw。
+  n w = 0 的扇区（包括全部未紧化方向）回到 N = Ñ。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.2) 的第二式（两支之差），p.241"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E126，证据等级 L1
+      （Schrans §8.26–§8.27，笔记 p.449–450）。
+      未紧化的对应式是 (1.4.11)（N = Ñ，本图 worldsheet.closed-string-level-matching）。
+tags: [compactification, closed-string, winding, torus, level-matching, constraint]
+notes: |
+  这条修正是「紧化 CFT 的模不变性」在一维情形的具体形式：多维推广是
+  L_0 − L̄_0 ∈ Z（(7.2.29)），它在 Narain 格上给出「格必须是偶格」
+  （compact.narain-lattice-is-even）。一维时 ℓ∘ℓ = 2nw，与本式一致。
+
+  本节点只陈述约束式本身，不陈述它的来源解释（σ 平移是规范冗余 / 模不变性）。
+  在紧化情形，原书是把两支质量壳相减得到它，而不是重新论证 σ 平移。
+author: curator-polchinski-ch8
+created: "2026-09-11"

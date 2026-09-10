@@ -1,0 +1,22 @@
+id: compact.narain-lattice-is-even--via-modular-t-invariance
+target: compact.narain-lattice-is-even
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.toroidal-level-matching-constraint
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.19)，p.251；用到 (7.2.29)"
+    note: 抽取记录 polchinski-1998-v1#E138（L1，Schrans §8.57–§8.63，笔记 p.472–475）。
+summary: |
+  环面配分函数含因子 q^{L_0} q̄^{L̄_0}；τ → τ + 1 把它乘以 e^{2πi(L_0 − L̄_0)}，
+  故模不变要求 L_0 − L̄_0 ∈ Z。紧化方向对 L_0 − L̄_0 的贡献是
+  (α'/4)(p_L² − p_R²) = (1/2)(ℓ_L² − ℓ_R²) = (1/2) ℓ∘ℓ，
+  振子与鬼场部分的贡献已是整数，故 ℓ∘ℓ ∈ 2Z。
+gaps:
+  - "「环面配分函数在模变换下不变」是一致性**要求**（世界面上模参数 τ 的等价类才是物理的），不是本图中被证明的定理；本图尚无 (7.2.29) 的节点。"
+  - "配分函数的路径积分定义、以及 τ → τ+1 作用在它上面的方式，来源在第 7 章，本图未覆盖。"
+  - "「振子部分对 L_0 − L̄_0 的贡献是整数」用到 N、Ñ 的整数谱，在紧化情形没有重新论证。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

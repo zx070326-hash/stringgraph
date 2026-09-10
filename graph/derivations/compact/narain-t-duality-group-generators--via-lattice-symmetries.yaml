@@ -1,0 +1,29 @@
+id: compact.narain-t-duality-group-generators--via-lattice-symmetries
+target: compact.narain-t-duality-group-generators
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.toroidal-zero-mode-momenta
+  - id: compact.narain-moduli-space
+    note: |
+      提供「O(k,k;Z) = 使 ΛΓ = Γ 的那些 Λ，即 T 对偶群」这一身份认定；
+      本节点验证的是两类具体变换落在这个群里。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.32)–(8.4.33)，p.254"
+    note: |
+      抽取记录 polchinski-1998-v1#E143（L1）。⚠ 原书只有一句 cryptic 断言，
+      两页论证是 Schrans 补的。
+summary: |
+  (1) 世界面作用量 (3.7.6) 对 X^m → L^m_n X^n（L ∈ GL(k,R)）自动不变；
+      保持紧化周期性（n_m、w^m 仍为整数且穷尽整数）迫使 L 为整数矩阵且 det L = 1，
+      即 L ∈ SL(k,Z)。它按同一矩阵作用在 (n, w) 上，把格点送到格点。
+  (2) b_{mn} → b_{mn} + N_{mn} 由 v_m = α'n_m/R − B_{mn}w^n R 把 n_m 移成 n_m − N_{mn}w^n；
+      因为 N_{mn}w^n ∈ Z，格点仍是格点，谱不变。
+gaps:
+  - "⚠ 原书对这一步只有一句断言（Schrans 逐字转引后评为「rather cryptic」）；本推导复述的是 Schrans 补出的论证，不是原书的论证。按 lead 裁决 2026-09-10，个人笔记不得作为 sources[] 承载论证，故本条 sources 只指 Polchinski 的式号，论证强度相应记在此。"
+  - "「这两类生成什么群」没有陈述：原书没有给出 O(k,k;Z) 的生成元完整清单，第三类（单方向因子化对偶）也没有与前两类并列（抽取记录 #E143）。"
+  - "上游 compact.narain-moduli-space 的有效状态已被两条无论证断言压低。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

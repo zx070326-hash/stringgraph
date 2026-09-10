@@ -1,0 +1,33 @@
+id: compact.self-dual-radius-su2-current-algebra--via-vertex-operator-ope
+target: compact.self-dual-radius-su2-current-algebra
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.self-dual-radius-extra-massless-states
+    note: |
+      给出 k_L = ±2/√α'、k_R = 0 的解（(n, w) = ±(1, 1)），即 j^± 的动量。
+  - id: compact.left-right-momenta
+  - id: worldsheet.operator-product-expansion
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      原书用 (2.6.14) 从 OPE 的极点结构读出模的对易关系，即本图的这条字典。
+  - id: worldsheet.primary-field
+    note: 提供「共形权 (h, h̄)」与主场的定义，用来陈述 j^i 是权 (1,0) 主场。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.12)–(8.3.14)，p.243"
+    note: |
+      抽取记录 polchinski-1998-v1#E129（L1，Schrans §8.32–§8.34，笔记 p.455–456）。
+summary: |
+  自由玻色子的指数算子 e^{i k_L X_L} 的共形权是 α' k_L²/4；在 R = √α' 处
+  k_L = ±2/√α' 给权 1，故 j^± 与 ∂X_L 同为权 (1,0) 的全纯流。
+  用自由玻色子的两点函数计算 j^i j^j 的 OPE，指数算子的互乘给出 (z−w)^{α' k_L k'_L/2} 因子，
+  j^+ j^- 产生二阶极点与 ∂X_L 的一阶极点，闭合成 su(2)。
+  再用围道变形（OPE ↔ 对易子字典）把一阶/二阶极点翻译成模的对易关系 (8.3.14)。
+gaps:
+  - "OPE 级数的收敛性与围道变形的合法性在来源中未证明（lead 裁决 2026-09-10：凡靠围道变形 + OPE 得到算子关系的推导一律 physical-argument）。"
+  - "Schrans 只复现了两条 OPE（[8.162]–[8.165]），其余他明说留给读者；即「闭合成 su(2)」这句在二手源里只被部分验证。"
+  - "顶点算子的 cocycle 因子（(8.2.22)/(8.2.23)，抽取记录 #E124）在本推导中未显式处理；没有它，带绕数的指数算子之间是反对易而非对易，su(2) 的符号结构会受影响。本图暂未建 cocycle 节点。"
+  - "流的比例常数与 j^{1,2} 的归一化未从来源确定（只给出「∝」），故 (2) 的 OPE 系数只在所记的两条上有源。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

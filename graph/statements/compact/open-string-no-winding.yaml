@@ -1,0 +1,33 @@
+id: compact.open-string-no-winding
+kind: proposition
+title: Neumann 开弦没有绕数，故小半径极限不给对偶而给降维
+statement: |
+  设玻色开弦的一个方向紧化在半径 R 的圆上（conv.compactification-radius），
+  端点满足 Neumann 边界条件（worldsheet.open-string-neumann-boundary-condition）。则：
+  (1) 端点在紧化方向自由移动，任何绕在圆上的位形都可以连续地「解绕」，
+      故开弦**没有绕数量子数**，质谱中没有 w²R²/α'² 项：
+        m² = n²/R² + (N − 1)/α'   （无 Chan–Paton 因子时，n ∈ Z）；
+  (2) 因此 R → 0 时除 n = 0 外全部态的质量趋于无穷，开弦谱退化成 25 维的谱——
+      **开弦没有闭弦那样「小半径回到大半径」的对偶**；
+  (3) 但退到 25 维的只是**端点**：弦的内部仍在全部 26 维中振动。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6（p.265 附近），无式号"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E150，**内容 L1、式号 L0**
+      （Schrans §8.105，其标题不带式号 = 他自补的小节，笔记 p.520–521）。
+      Schrans 转述原书的关键限定（逐字）：「it seems like it lives in the 25 dimensional
+      spacetime … **But as explained by Joe, this is not quite right; it is the endpoints
+      only that live in 25 dimensional spacetime. The interior stuff of the string vibrates
+      in the full 26 dimensions.**」
+tags: [compactification, open-string, neumann, winding, t-duality, d-brane]
+notes: |
+  **(3) 是 D 膜概念的直接前身**：正是「只有端点降维」这句话在 T 对偶下变成
+  「端点被钉在一张超平面上」（branes.d-brane-from-t-duality）。
+
+  本条与闭弦的对比是全章的结构性对照：闭弦有绕数因而有 R ↔ α'/R 的对偶
+  （duality.t-duality-spectrum-equivalence），开弦没有绕数因而**表面上**没有对偶——
+  真正的答案是开弦的 T 对偶把边界条件换掉（duality.t-duality-exchanges-neumann-dirichlet）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -1,0 +1,40 @@
+id: duality.t-duality-in-decompactification-limit--via-implicit-use-in-text
+target: duality.t-duality-in-decompactification-limit
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: duality.t-duality-is-cft-isomorphism
+    note: |
+      有限半径处的对偶陈述；本节点断言的正是把它外推到 R → ∞ / R' → 0 的极限。
+      该外推在来源中没有论证，只被默认使用。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7（p.268 起，把 Dp 膜放进未紧化时空的整段讨论）；§8.8 同样默认使用"
+    note: |
+      抽取记录 polchinski-1998-v1#E154/Q27。⚠ **原书没有把这一步写成前提，也没有论证它**；
+      它是被隐含使用的。伴读者在 §8.116 脚注 12 把它作为疑问提出（笔记 p.546，L1）。
+summary: |
+  **这是 curator 为「原书隐含使用的前提」补建的节点，来源对它没有给出任何论证。**
+  按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位裁决（lead 2026-09-11）：
+  「论证不完整」与「结论可能为假」是两个不同的轴；本条属前者，
+  故标 physical-argument 并把缺口逐条写进 gaps，而不是标 conjecture
+  （原书并未把它当猜想提出，文献中也没有人认为它为假）。
+
+  可复述的全部依据是**全书默认使用 + 事后一致性**：
+  §8.7–§8.8 自始至终把未紧化方向当作 R → ∞ 的紧化方向处理，
+  由此得到的 D 膜图像（Dirichlet 边界条件、膜上的规范理论、
+  由闭弦交换给出的膜间长程力与由此定出的张力）内部自洽，
+  并与后来独立发展的 D 膜物理相容。没有一步是对极限本身的论证。
+gaps:
+  - "curator 补的隐含前提（抽取记录 Q27）：⚠ **原书对这一极限没有任何论证，也没有把它写成前提**，全书默认使用。本推导承载的是「被默认使用」这一事实，不是一条论证。"
+  - "duality.t-duality-is-cft-isomorphism 的论证依赖有限非零 R：模式展开、离散的 (n, w) 谱、格求和都在 R 有限时才成立。R → 0 时绕数态塔变连续，论证的每一步都需要重做。"
+  - "本项目未登记任何讨论该极限的文献；也未核实原书别处（如 Vol.2）是否补了这一步。"
+  - "「事后一致性」不是对该极限的论证，只是对其推论的检验；本条的 status 不应被读成对极限本身的支持。"
+notes: |
+  **lead 裁定（2026-09-11）**：本节点保留为独立节点（不合并进下游的 gaps），
+  档位按「断言 + 骨架」裁决定为 physical-argument。
+  本推导取代原先的 `--via-implicit-use`（kind conjecture-support / status conjecture），
+  该节点已删除——理由见 docs/STATUS_LEVELS.md「断言 + 骨架」一节：
+  conjecture 保留给来源本身当猜想提出、或结论真伪在文献中未定的命题。
+author: curator-polchinski-ch8
+created: "2026-09-11"

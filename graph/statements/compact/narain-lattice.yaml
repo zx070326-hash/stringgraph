@@ -1,0 +1,41 @@
+id: compact.narain-lattice
+kind: definition
+status: rigorous
+title: Narain 格 Γ ⊂ R^{k,k} 与其双线性型 ℓ∘ℓ'
+statement: |
+  设 D = 26 的玻色闭弦有 k 个方向紧化成环面，常背景 G_{mn}、B_{mn}，
+  零模动量 v_m = α' n_m/R − B_{mn} w^n R（compact.toroidal-zero-mode-momenta）。定义
+    **v^m_{L,R} ≡ v^m ± w^m R**   （指标由 G^{mn} 升降）。
+  引入时空 tetrad G_{mn} = e^r_m e^r_n（r = 1..k），把紧化坐标换成 X^r = e^r_m X^m，
+  紧化方向的顶点算子动量为 k_{Lr} = e^m_r v_{Lm}/α'（k_R 同式换 v_R），并记
+    **ℓ_{L,R} ≡ (α'/2)^{1/2} k_{L,R} ∈ R^k**.
+  于是每一对整数 (n_m, w^m) ∈ Z^k × Z^k 给出一个向量 ℓ = (ℓ_L; ℓ_R) ∈ R^k × R^k，
+  全体这样的向量构成一个秩 2k 的格
+    **Γ = Γ(G, B, R) ⊂ R^{k,k}**,
+  其上的（号差 (k, k) 的）双线性型定义为
+    **ℓ ∘ ℓ' ≡ ℓ_L · ℓ'_L − ℓ_R · ℓ'_R**.
+  Γ 称为该紧化背景的 **Narain 格**。对偶格记 Γ* = { ℓ* : ℓ*∘ℓ ∈ Z 对一切 ℓ ∈ Γ }；
+  Γ 称为**偶格**若 ℓ∘ℓ ∈ 2Z 对一切 ℓ ∈ Γ，称为**自对偶**若 Γ* = Γ。
+uses: [compact.toroidal-zero-mode-momenta]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.9)（v_{L,R}）、(8.4.13)（tetrad）、(8.4.14)（顶点算子动量）、(8.4.17)（ℓ∘ℓ'），p.250–251"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E137/#E138，证据等级 L1
+      （Schrans §8.54–§8.63，笔记 p.468、p.472–475）。
+tags: [compactification, torus, narain, lattice, definition, b-field]
+notes: |
+  一维情形（k = 1，B = 0）用无量纲半径 r = R(2/α')^{1/2} 写成
+  ℓ_L = n/r + wr/2、ℓ_R = n/r − wr/2（(8.4.26)，抽取记录 #E141）；
+  此时 ℓ∘ℓ' = n w' + n' w，evenness 与自对偶都显然（Headrick Problem 8.5 逐字：
+  「Evenness of the lattice is obvious … hence it is self-dual」）。
+
+  **B_{mn} 在 ℓ∘ℓ' 中掉出**（Headrick Problem 8.5(b) 逐字：「in particular, B_{mn} drops
+  out」），即「偶自对偶」这个条件不依赖 B 场的取值——只有 Γ 在 R^{k,k} 中的**位置**
+  依赖 (G, B)。这是 compact.narain-moduli-space 的几何基础。
+
+  本卡是**定义卡**：它只固定记号与 Γ 的构造，「Γ 必须是偶自对偶」是命题
+  （compact.narain-lattice-is-even 与 compact.modular-invariance-requires-self-dual-lattice）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

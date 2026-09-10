@@ -1,0 +1,49 @@
+id: duality.t-duality-is-cft-isomorphism--via-spectrum-and-vertex-operators
+target: duality.t-duality-is-cft-isomorphism
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: duality.t-duality-spectrum-equivalence
+  - id: compact.left-right-momenta
+  - id: worldsheet.closed-string-mode-expansion
+    note: |
+      提供 X = X_L + X_R 的左右行独立模式展开与 [ᾱ_m, ᾱ_n] = m δ_{m+n,0}；
+      原书用的是 (8.2.16)（紧化情形的展开），本图目前只有未紧化的展开卡。
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    inferred: true
+    note: |
+      (3b) 用到 T = −(1/α')∂X∂X 在 ᾱ_m → −ᾱ_m 下不变。抽取记录里「相同的能动张量」
+      这句是 Schrans 的复述（#E133），没有原书位置，也没有逐式验算；
+      故这条边标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.28)（X' 的定义），p.247–248；「the same theory」与「same OPEs and energy momentum tensor」在 p.248 正文（无式号）"
+    note: |
+      抽取记录 polchinski-1998-v1#E133，**L1（原书直读）**。
+      **Q20 已于 2026-09-11 关闭（§12.10 表 A）**：(8.3.28) 是定义式；
+      「the same theory」与其理由「same OPEs and energy momentum tensor」都在原书；
+      「非微扰」的断言也在原书（p.248，靠 SU(2)×SU(2) 规范对称性 + 低能有效场论）。
+      ⚠ 原书同时写明：两组场的关系在**世界面上非局域**（p.248）。
+summary: |
+  三步（按 Schrans 复述的结构）：
+  (i) 在 X_R 中作 ᾱ_m → −ᾱ_m、x_R → −x_R，即换用 X' = X_L − X_R。
+      这不改变振子对易关系，是振子代数的自同构；唯一的实际效果是 p_R → −p_R。
+  (ii) 由 (8.3.27)，p_R 反号恰好可以由 n ↔ w、R → α'/R 实现。
+  (iii) 于是半径 R 的 X 理论与半径 α'/R 的 X' 理论的态、质量、约束一一对应，
+       且能动张量与顶点算子的 OPE 在该对应下相同。
+gaps:
+  - "⚠ **旧 gap 已撤销**：原先写「原书措辞未核实（Q20）」。Q20 已于 2026-09-11 按原书核实关闭：原书确实说「the same theory」并断言精确/非微扰成立。**本推导仍只承载谱与算子层面已复现的部分**，不承载那两句——它们的论证是时空有效场论式的，应另建节点（见目标卡 notes 给 lead 的建议）。"
+  - "⚠ 原书明写两组场 X 与 X' 的关系在**世界面上非局域**（p.248）。本推导的 (i)(ii)(iii) 三步（振子自同构、零模反号、谱与 OPE 对应）没有讨论这条非局域性与「同一个世界面理论」之间的张力：非局域的场重定义一般不保持局域算子的代数，原书没有说明为什么这里保持。"
+  - "⚠ 原书 p.248 自承「We do not have a nonperturbative understanding of string theory, but we do know a great deal about low energy field theory …」（§12.10 表 C 第 15 条）：即「T 对偶精确成立」靠的是时空有效场论论证，不是本推导走的世界面论证。"
+  - "⚠ 原书 p.246 另有一条自承缺口（§12.10 表 C 第 14 条）：「To establish an exactly flat direction one needs some special argument」。它直接影响增强对称点附近的平坦方向（compact.self-dual-radius-gauge-symmetry-enhancement 的邻域），本图未建卡。"
+  - "「相同的 OPE 与相同的能动张量 ⇒ 两个世界面理论相同」这一步在来源中没有展开：没有给出态空间之间的同构映射，也没有验证全部关联函数。「CFT 同构」的定义本身在本图中没有节点——这也是目标卡的 title 与 statement 只说「保持谱、T/T̄ 与 OPE」而不说「同构」的原因。"
+  - "带绕数顶点算子之间需要 cocycle 因子才互相对易（(8.2.22)/(8.2.23)，抽取记录 #E124）；对偶映射如何作用在 cocycle 上，来源没有讨论。"
+  - "只覆盖单个紧化自由玻色子；一般背景下的对偶（Buscher 规则）在原书正文没有，只在习题 8.3 里，且不含 dilaton 的移动（dilaton 的移动见 duality.t-duality-dilaton-shift）。"
+  - "OPE 的收敛性与围道变形的合法性（lead 裁决 2026-09-10 的通用缺口）在此处同样未证明。"
+notes: |
+  旁证（**不作 source**，按 lead 裁决 2026-09-10 个人笔记/习题解答不得承载论证）：
+  Headrick 习题解答 Problem 8.3 从世界面规范化路线得到 Buscher 规则，
+  与本条在 G_{25,25} → α'²/G_{25,25}（即 R → α'/R）这一点上一致，
+  但那是习题级、路径积分层面、且不含 dilaton 的移动。
+author: curator-polchinski-ch8
+created: "2026-09-11"
