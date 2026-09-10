@@ -1,0 +1,98 @@
+id: worldsheet.critical-dimension-brst-v2
+kind: proposition
+title: BRST 荷幂零 Q_B^2 = 0 当且仅当物质中心荷 c^m = 26（陈述只到 c^m，不含 c^m = D 那一步）
+statement: |
+  记号：中心荷写作上标 c^m（物质）、c^g = -26（鬼场），以免与鬼场模式 c_n 撞号
+  （见 worldsheet.brst-quantization-v2 的记号约定）。
+
+  设 Q_B 是 worldsheet.brst-quantization-v2 定义的 BRST 荷（bc 系统权 λ = 2，
+  鬼场正规序常数 a^g = -1，物质中心荷 c^m），并设它作用在**受限模** V 上，即
+    对每个 v ∈ V 存在 N = N(v) 使 L^m_n v = b_n v = c_n v = 0 对所有 n > N。
+  （该条件保证 Q_B 的模式和逐项有限，从而 Q_B 与 Q_B^2 都是良定义算子；
+  物质与鬼场的 Fock 模满足它。）则在 V 上
+    Q_B^2 = (1/2) {Q_B, Q_B} = (1/2) Σ_{m∈Z} ((c^m - 26)/12) (m^3 - m) c_{-m} c_m
+  （整体常数因子依赖模归一化；(m^3 - m) 的形式来自把 a^g = -1 吸收进 L_0）。
+  由于诸 c_{-m} c_m 在 V 上线性无关（对忠实的 Fock 型受限模成立），
+    Q_B^2 = 0  ⟺  c^m = 26  ⟺  总中心荷 c^m + c^g = c^m - 26 = 0。
+
+  【本命题到此为止】本卡片**不**断言 D = 26。由 c^m = 26 过渡到 D = 26 需要额外一步
+    c^m = D  （D 个平坦自由玻色子的中心荷；worldsheet.free-boson-central-charge-d），
+  该步不是本命题的产物，也不写进本命题的陈述；它作为 BRST 路线与 Weyl 反常路线的
+  **公共输入**记在汇总卡片 worldsheet.critical-dimension-bosonic-v2 及其推导
+  --via-four-routes 上。
+uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，Q_B^2 的计算与结论 Q_B^2 = 0 ⟺ c^m = 26，约 eq. (4.3.2)–(4.3.6)"
+    note: 公式号为近似定位。Polchinski 把物质中心荷写作 c_m，本节点改写为 c^m 以避开与鬼场模式 c_m 的记号冲突。
+  - ref: kato-ogawa-1983
+    loc: "摘要；正文未获取，定理编号未核实"
+    note: |
+      本命题（Q_B 幂零 ⇒ 临界维数）的原始来源。**INSPIRE 记录 177600 的摘要，逐字**
+      （primary-sources-round2.md §6，L2，分段以符合引用长度限制，段间无删节）：
+        "Covariant canonical quantization of the bosonic string is performed, based on the BRS
+         invariance principle." /
+        "Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition
+         Q_B |phys⟩ = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner." /
+        "There an interesting relation between critical dimension and BRS symmetry is noticed;
+         namely, the conditions D = 26 and α_0 = 1 for the space-time dimension D and the
+         zero-intercept α_0 of leading trajectory are required by the nilpotency Q_B² = 0 of
+         the BRS charge." /
+        "In addition, ghost number fractionization is observed in this system."
+      **方向已核实为「⟹」**（"the conditions D = 26 and α_0 = 1 … are **required by** the
+      nilpotency Q_B² = 0"）；**本节点写的「当且仅当」，其反方向（c^m = 26 ⟹ Q_B² = 0）
+      在该摘要中没有陈述，目前无文献来源**，只有 Polchinski §4.3 的形式计算支撑
+      （另见更弱的独立节点 worldsheet.brst-nilpotent-at-c26）。
+      正文未获取（ScienceDirect 403），定理编号未核实。报告号 KUNS 637（INSPIRE，L2；
+      检索后端 L4 对该归属有异议，未裁决）。见 primary-sources-round2.md §6。
+      ⚠ 该摘要把 D = 26 与 α_0 = 1 一并归给 BRS 幂零性。本卡片按「一个节点一个命题」
+      只取其中「c^m = 26」这一半：既不取 D = 26（缺 c^m = D 那一步），也不取 α_0 = 1。
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
+    note: |
+      **本条只支持「鬼场中心荷 = -26」这一步，不支持本节点的主断言。**
+      全文核实（brst-cohomology-sources.md §1.2）：FGZ 中没有「Q^2 = 0 ⟺ c = 26」型编号陈述。
+      Proposition 1.2 只有一句「d^2 = 0」，是一般分次李代数的陈述（前提 H^2(g) = 0、γ = 0 写在
+      正文里），既不出现 26 也不出现中心荷；26 只出现在 Proposition 2.1(i)「ρ(c) = -26 Id」
+      （鬼场表示），而 §2.1 紧接着写「from this point on we will assume that π(c) = 26 Id_V」，
+      即 c^m = 26 是 FGZ 的**假设**不是结论。
+      lian-zuckerman-1989 的引用已删除：该文是 super-Virasoro/RNS 超弦（临界值 c = 15），
+      与玻色弦 c = 26 无关，属误引。
+tags: [bosonic-string, critical-dimension, brst, nilpotency]
+notes: |
+  【本卡片换代 worldsheet.critical-dimension-brst】（curator，2026-09-11，依 docs/ROADMAP.md
+  待拆清单，lead 已同意）旧卡陈述的末句是
+    「特别地，物质部门取 D 个自由玻色子 X^μ 时 c^m = D，故 Q_B^2 = 0 ⟺ D = 26。」
+  该句把两件事绑在一张卡上：BRST 幂零性判据（本卡片的内容，来源是 Polchinski §4.3 的模式
+  计算与 Kato–Ogawa 摘要，physical-argument）与自由玻色子的中心荷 c^m = D（另有节点
+  worldsheet.free-boson-central-charge-d，其 --via-lean 已 formalized）。后果有三：
+    (1) 一条 formalized 的输入被 physical-argument 的判据封顶，两者无法分别记账；
+    (2) 汇总卡片 worldsheet.critical-dimension-bosonic-v2 已把 c^m = D 单列为 (III)(IV) 的
+        公共输入，与旧卡末句重复记账；
+    (3) 旧卡的唯一推导 --via-nilpotency 为了末句必须额外挂一条 inferred 边
+        （worldsheet.free-boson-central-charge-d），而该边的来源位置（§4.3 的 Q_B² 模式计算）
+        并不在原地论证 c^m = D。
+  本卡片删去该末句，陈述只到 c^m = 26；(3) 中的那条 inferred 边随之从新推导
+  worldsheet.critical-dimension-brst-v2--via-nilpotency 中去掉。
+  **worldsheet.bc-ghost-central-charge 的 inferred 边保留**：陈述里
+  「(c^m − 26)/12」与「c^m + c^g = c^m − 26」中的那个 26 仍然是 −c^g，仍不是本推导算出来的。
+  旧卡 worldsheet.critical-dimension-brst 的 statement 文本一字未动，只加 superseded_by
+  与一段 notes（根 CLAUDE.md 原则 1）。
+
+  本节点只断言幂零条件，不断言 BRST 上同调等同于旧协变物理态空间
+  （那是 Kato–Ogawa / FGZ 层面的另一条命题，见 worldsheet.brst-cohomology-equals-ocq-physical）。
+
+  【数学侧文献一律不推导 c = 26（2026-09-10 第二轮核实，primary-sources-round2.md §1.4）】
+  fgz-1986 与 lian-zuckerman-1991 **都不推导 c = 26，两篇都把它作为相对复形的定义条件**：
+    - FGZ §2.1 逐字「from this point on we will assume that π(c) = 26 Id_V」；
+      Proposition 1.2 只有一句「d² = 0」，不含中心荷条件；26 只在 Proposition 2.1(i)
+      的鬼场表示 ρ(c) = −26 Id 中出现。
+    - LZ 1991 Proposition 1.11(i) 的 d² = 0 对任意 V ∈ 𝒪 **无条件**成立且不含 26；
+      26 在全文出现的**唯一**位置是 Proposition 3.3(iii)，且是**单向**的
+      「(∧_∞𝒢, η) is a 𝒢-module **if** β̄ = −26z′ − L′₀」（单页重读复核，排印确为 if）。
+  故「Q_B² = 0 ⟺ c^m = 26」这条判据在已核实的数学文献里**没有对应的编号定理**；
+  本节点目前的可追溯性只到 Kato–Ogawa 1983 摘要（方向 ⟹）与 Polchinski §4.3 的形式计算。
+  反方向（c^m = 26 ⟹ Q_B² = 0）另有一个更弱、来源更清楚的节点
+  worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2），本节点的「当且仅当」不由它支撑。
+author: curator
+created: "2026-09-11"

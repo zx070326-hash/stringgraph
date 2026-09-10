@@ -35,7 +35,23 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§3.4, eq. (3.4.31)（中心荷为常数，p.96–97，式号已核实）；§2.5, eq. (2.5.12)（c^g = -26，式号已核实）"
 tags: [bosonic-string, critical-dimension, weyl-anomaly, conformal-anomaly]
+superseded_by: worldsheet.critical-dimension-weyl-anomaly-v2
 notes: |
+  【本卡片已被 worldsheet.critical-dimension-weyl-anomaly-v2 换代】（curator，2026-09-11）
+  换代理由：本卡陈述末段「特别地，物质部门取 D 个平坦时空自由标量 X^μ 时 c^m = D
+  （worldsheet.free-boson-central-charge-d），于是 D = 26」把 c^m = D 这一步
+  （独立节点，其 --via-lean 已 formalized）绑进了 Weyl 反常论证（physical-argument），
+  两者无法分别记账，并与汇总卡片 worldsheet.critical-dimension-bosonic-v2 把 c^m = D
+  单列为 (III)(IV) 公共输入的做法重复。v2 的陈述删去该段，只到
+  「反常抵消（c^{tot} = c^m + c^g = 0）⟺ c^m = 26」，其余文本（含 ⚠ 那段关于
+  c^m = 26 比 D = 26 更一般的说明）逐字保留。本卡 statement 文本一字未动
+  （根 CLAUDE.md 原则 1），只加本段与 superseded_by。
+  本卡的唯一推导 --via-anomaly-cancellation 已改挂到 v2（新 id
+  worldsheet.critical-dimension-weyl-anomaly-v2--via-anomaly-cancellation，旧文件删除，
+  depends_on 去掉 free-boson-central-charge-d、保留 bc-ghost-central-charge）。
+  入边换代：worldsheet.critical-dimension-bosonic-v2--via-four-routes 的 depends_on
+  已就地改指 v2（旧推导 --via-three-routes 本就不含本卡）。
+
   **这是 D = 26 的第四条路线**，与图中已有的三条并列：
     (i)   worldsheet.critical-dimension-light-cone   光锥洛伦兹代数闭合
     (ii)  worldsheet.critical-dimension-old-covariant 旧协变零模态退耦与幺正性

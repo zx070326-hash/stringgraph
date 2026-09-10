@@ -655,7 +655,7 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     assert tree["own"] == "rigorous"
     assert {c["id"] for c in tree["children"]} >= {
         "worldsheet.critical-dimension-light-cone",
-        "worldsheet.critical-dimension-brst",
+        "worldsheet.critical-dimension-brst-v2",
     }
 
 
