@@ -39,5 +39,8 @@
       "Bash(rm -rf graph/*)",
       "Bash(rm -rf formal/*)"
     ]
+  },
+  "worktree": {
+    "baseRef": "head"
   }
 }
