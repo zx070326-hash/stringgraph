@@ -1,0 +1,43 @@
+id: consistency.gravitational-anomaly-requires-496-fermions
+kind: proposition
+title: tr R⁶ 项不能由局域反项抵消，故物质部分必须恰有 496 个左手 spin-1/2 场
+statement: |
+  在 consistency.gravitational-anomaly-polynomial-d10 的十二形式中：
+
+  **(1)** tr R⁶ 项对应形如 ∫ω¹_{10L} 的反常，它**不能**通过给作用量添加局域项来抵消；
+
+  **(2)** 该项的系数正比于 n − 496，因此为使它消失，物质部分必须恰有
+      **n = 496** 个左手 spin-1/2 场。
+
+  **本节点不断言**：
+  (a) n = 496 使引力反常整体为零。取 n = 496 后 (20) 仍剩下
+      − (1/32)(tr R²)³ − ⅛ tr R² tr R⁴ 两项，它们要由反项 S₂ (21) 抵消
+      （见 consistency.anomaly-cancellation-so32-effective-theory）；
+  (b) 哪些规范群的维数是 496（见 notes 第 1 条：本图没有为这条初等算术建节点）；
+  (c) 「维数 496 的群只有若干个」这类分类结论——**GS 1984 没有此断言**，
+      本图也不据任何来源建唯一性节点（见 math.anomaly-twelve-form-factorization 的 notes）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(20) 下方逐字：「The last term in eq. (20) corresponds to an anomaly of the form ∫ω¹_{10L}, which cannot be cancelled by adding local terms to the action. Therefore 496 left-handed spin 1/2 fields are needed in the matter sector in order that it vanish. Remarkably, since the dimension of the adjoint representation of SO(32) or E₈ × E₈ is 496, the cancellation occurs for either of these gauge groups.」"
+    note: |
+      L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E13。
+      **注意 GS 的最后一句只说「对这两个群，抵消发生了」，不是「只有这两个群」。**
+tags: [anomaly, gravitational-anomaly, dimension-496, so32, e8, d10]
+notes: |
+  【1. 维数算术未建节点】dim SO(32) = 32·31/2 = 496，dim(E₈ × E₈) = 2 · 248 = 496。
+  GS 由此得到两个候选群。这条算术本图**未单建节点**：抽取记录 §5.4（候选 A4）指出
+  dim SO(n) = n(n−1)/2 在 Mathlib 里可从反对称矩阵空间维数得到，但 **dim E₈ = 248
+  Mathlib 目前没有**，须先引入 E₈ 的 Cartan 矩阵，难度高于 A1–A3，建议后置。
+  在补上该节点之前，本图对「496」的处理是：把它当作反常条件给出的**数**，
+  而把「哪个群有这个维数」留在本 notes 与来源引文里。
+
+  【2. 「不能由局域项抵消」是物理判断】(1) 是 GS 的断言，本图无独立论证：
+  为什么 tr F² tr F⁴ 型的项可以（通过 (14) 写成全微分并配 B 的非平凡变换）而 tr R⁶ 型不行，
+  GS 没有给判据。这条记在推导的 gaps 里。
+
+  【3. 与规范一路的对称性】纯规范一路的对应陈述是 math.tr-f6-coefficient-vanishing
+  （tr F⁶ 系数 N + 32l 必须为零）。两条的逻辑形状相同：**六阶单迹项不可抵消 ⇒ 其系数必须为零**。
+author: curator
+created: "2026-09-11"

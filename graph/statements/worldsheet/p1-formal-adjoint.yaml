@@ -1,0 +1,36 @@
+id: worldsheet.p1-formal-adjoint
+kind: proposition
+title: "P₁ 与 P₁^T 在 L² 配对下互为伴随：(u, P₁ v) = (P₁^T u, v)"
+statement: |
+  设 (M, g) 是紧、无边的二维 Riemann 流形，u_ab 是 M 上的对称无迹二阶张量场、
+  v^a 是向量场，配对与算子如 worldsheet.metric-variation-operator-p1 所定义。则
+    (u, P₁ v) = (P₁^T u, v),
+  即
+    ∫ d²σ  g^{1/2}  u^{ab} (P₁ v)_ab  =  ∫ d²σ  g^{1/2}  (− ∇^b u_ab)  v^a 。
+  特别地：
+    ker P₁ = {共形 Killing 向量}（worldsheet.conformal-killing-equation），
+    ker P₁^T = {与所有 diff × Weyl 变分正交的度规变分}
+             = {模的方向}（worldsheet.moduli-condition-traceless-transverse）。
+
+  ⚠ 「紧、无边」是本节点的前提：有边世界面（开弦）上分部积分留下边界项，此处不处理。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2（p.150–152）：P₁^T 与配对恒等式在原书中的式号本图未能锚定；P₁^T 作为算子在 §5.4 的 b 运动方程 P̂₁^T b = 0 处出现（eq. (5.4.4) 附近，p.160）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E73，L1（读到 schrans-2020
+      §5.6–§5.7 笔记 p.248–249，条目 [5.21]）。
+      ⚠ **本条是本批中来源最弱的陈述之一**：转置 (P₁^T u)_a = −∇^b u_ab 与恒等式
+      (u, P₁v) = (P₁^T u, v) 都**只有 schrans-2020 的背书**，抽取记录没有把它们锚定到原书的
+      任何编号式。按 lead 2026-09-10 裁决，个人笔记不作为承载论证的 sources[] 条目，
+      故本卡的 loc 只能写「§5.2，式号未锚定」。
+      原书确实用到 P₁^T（(5.4.4) 处的 b 运动方程），这是它存在于原书的间接证据。
+tags: [worldsheet, moduli, ckv, adjoint, differential-operator]
+notes: |
+  这条恒等式是 §5.2 全部计数论证的技术支点：它把「哪些度规变分不能由规范变换产生」
+  （= (im P₁ ⊕ 纯迹)^⊥）翻译成「ker P₁^T 中的对称无迹张量」，从而使 μ 与 κ 都变成
+  两个椭圆算子的核维数，Riemann–Roch 才有指标定理的形状。
+  本图**没有**把它挂到指标定理上（那需要数学来源，见 worldsheet.riemann-roch-kappa-minus-mu 的 notes）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

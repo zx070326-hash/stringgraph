@@ -36,7 +36,50 @@ depends_on:
       与上两条对易关系节点同一处、同一核实等级（式号 L0）。
       **有效状态不因此再降**：本推导的 effective 在 DDF 拆卡后已是 physical-argument，
       新依赖的 effective 同样是 physical-argument。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    note: |
+      【2026-09-11（四）新增，拆卡后接线，lead 裁决】本推导第 (1b) 步「其 Gram 矩阵就是
+      24 个横向振子 Fock 空间的**正定** Gram 矩阵」这一句里的**矩阵本身**由该节点承载：
+      在 (H1) 横向振子代数、(H2) 伴随关系、(H3) 真空湮灭、(H4) 真空归一化四条假设下，
+      DDF 单项式基正交、对角元 ∏ n^{d(i,n)} d(i,n)!、有序域上正定。
+      它与上一条依赖 worldsheet.ddf-operators-adjoint **分工明确、不重复**：
+      那一条承载 (H2) 本身（伴随关系 (A^i_n)† = A^i_{−n}，physical-argument），
+      本条承载「有了 (H1)(H2)(H3)(H4) 之后 Gram 矩阵长什么样」这步蕴含
+      （推导 --via-oscillator-recursion，status rigorous，reviewer 复核待补）。
+      该节点是 worldsheet.ddf-operators-adjoint 第 (2) 条的拆卡产物，旧卡未换代。
+      **有效状态不因此变化**：新节点 depends_on 旧卡与 worldsheet.ddf-transverse-oscillator-algebra，
+      其 effective 同样是 physical-argument，与本推导既有的上限同级。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      【2026-09-11（三）新增，立卡后接线】目标陈述 (1b) 断言的空间
+        H_phys(k; k_0) := ⊕_{N ≥ 0} H_phys(k − N k_0)
+      是**动量塔的子空间**，其上的内积（也就是 (1b-i) 说「正定」的那个型、
+      (1b-ii) 说「保内积」的那个型）是塔上层间正交的双线性型；
+      H_0(k;k_0) 的定义（塔内与全部物理态正交的子空间）与目标 notes【扇区覆盖】里
+      「不同动量的 Fock 态互相正交」一句，也都在塔上、依赖同一条层间正交约定。
+      该对象与该型现由本条依赖承载，本推导与目标陈述不再自行引入。
+      这条边**不是 inferred**：塔是目标陈述 (1b) 量词的定义域，
+      不是「某处文献的论证依赖它」——恰恰相反，文献不把塔写成对象，
+      见本推导 gaps 的【v3 起】「逐动量塔打包是本项目对文献表述的规范化」一条。
+      **有效状态不变**：该卡 status rigorous、依赖均 formalized，
+      本推导既有的上限（两条 DDF 对易关系与 ddf-operators-adjoint，均 physical-argument）不受影响。
   - id: worldsheet.virasoro-algebra-v2
+  - id: worldsheet.negative-norm-physical-state-above-26
+    inferred: false
+    note: |
+      【2026-09-11（四）新增，LevelTwo.lean 合入 main（c32f026）后接线】
+      目标第 (2) 条断言「D > 26、a = 1 时存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0」。
+      这条依赖就是该断言的**见证**：它给出显式的 level-2 标量态
+      ψ₂ = [α_{−1}·α_{−1} + (D−1)/5·(α_0·α_{−2}) + (D+4)/10·(α_0·α_{−1})²]|k⟩
+      与质量壳 α'k² = −1 上的动量，机器验证了 ψ₂ ∈ H_phys 且
+      ⟨ψ₂,ψ₂⟩ = −2(D−26)(D−1)/25 < 0（formalized）。
+      **非 inferred**：本推导 summary 第 (2) 条早已把「level-2 标量物理态的模正比于
+      (D−1)[16a²+(2D−74)a+84−3D]，在 a = 1 处为 (D−1)(26−D)」写成与纵向算子构造并列的
+      独立核算，这张卡正是那次核算的承载节点，现在还带了机器检查。
+      **注意本条不改变本推导的论证**：本推导第 (2) 条走的仍是 Brower/DDF 纵向算子构造
+      （文献路线，正文未获取）；这条依赖是同一结论的第二条、完全独立的路线。
+      **有效状态不变**：该卡 effective 为 formalized，本推导的封顶仍在第 (1) 条那侧
+      （两条 DDF 对易关系与 ddf-operators-adjoint，均 physical-argument）。
   - id: worldsheet.kac-determinant
     inferred: true
     note: |
@@ -115,16 +158,31 @@ gaps:
   - "两篇 1972 年论文（按可得证据）都只覆盖 a = 1：goddard-thorn-1972 摘要不提 intercept（Veneziano 模型以 α_0 = 1 为前提），brower-1972 摘要把结果限定在 unit Regge intercept。Goddard 2008 综述通篇在 α_0 = 1 下陈述，且完全不讨论 α_0 < 1。**2026-09-10 更新（primary-sources-round2.md §1.6、§4）：a ≤ 1 分支不再是无来源的**——D ≤ 25、a ≤ 1 的情形现由 worldsheet.no-ghost-theorem-subcritical 覆盖，来源是 lian-zuckerman-1991 Theorem 3.5(ii)（L1 逐字，Commun. Math. Phys. 135, 570）。但两者**设定不同，不能互相替换**：(1) LZ 的证明必须补一个中心荷 c = 26 − D 的不可约 Vir 模 L(26−D, 1−h) 才能做 BRST 相对上同调（总中心荷 26），本推导是纯 D 玻色子的 DDF 论证，是两条独立路线（LZ 的补充模只出现在上同调一侧，被断言的空间仍是纯 D 玻色子的 H_phys/H_0；D = 26、a = 1 时补充模退化为平凡模 L(0,0)，两条路线在临界点重合）；(2) LZ 另加下界 D ≥ 2 与对动量 p 的三条假设，本推导与目标陈述都没有这些；(3) LZ 的断言是「对每个 p 正定」的全称等价，不给出负模的显式构造，而本推导第 (2) 条走的是显式纵向算子构造。故本陈述仍不对 D ≤ 25 作任何断言，引用时应指向新节点。"
   - "从物理文献到形式化的差距：需要把\"DDF 态张成 H_phys 模零模态\"这一步写成 Fock 空间上的线性代数命题（含 k_0·k ≠ 0 扇区的显式处理）。抽取记录 E68 建议对照 BRST 版本（worldsheet.no-ghost-theorem-brst）的分级 + 三角矩阵论证，后者更接近可形式化的形式。"
   - "零动量 / k_0·k = 0 扇区被陈述显式排除（v4 已把该排除提到全局前言），本推导不覆盖。"
-  - "【v3 起】目标陈述的\"逐动量塔\"打包（对固定 k 取 ⊕_{N≥0} H_phys(k - N k_0) 再模零模态）是本项目对文献表述的规范化，没有一处来源逐字如此写：GT 1972 / GSW / Goddard 2008 用的是\"每个物理态 = DDF 态 + 零模态\"的形式（不做动量记账），FGZ 1986 Theorem 2.8 在固定单个动量（单个能级）上陈述且横向空间 T 的实现方式不同。打包本身是初等的直和（不同动量的 Fock 态正交），但\"H^⊥(k) 的 DDF 能级等于 H_phys 一侧的振子能级\"这一步在文献里是隐含的记账，形式化时必须显式证明。"
+  - "【v3 起；2026-09-11（三）更新】目标陈述的\"逐动量塔\"打包（对固定 k 取 ⊕_{N≥0} H_phys(k - N k_0) 再模零模态）是本项目对文献表述的规范化，没有一处来源逐字如此写：GT 1972 / GSW / Goddard 2008 用的是\"每个物理态 = DDF 态 + 零模态\"的形式（不做动量记账），FGZ 1986 Theorem 2.8 在固定单个动量（单个能级）上陈述且横向空间 T 的实现方式不同。【（三）更新】该规范化现已落成一张可引用的定义卡 **worldsheet.momentum-tower-fock-space**（已加为本推导依赖），塔、移位算子 e^{i n k_0·x} 与塔上的型都在那里定义。**但两点未变**：(i) 文献侧仍无逐字来源，那张卡的 sources 对 GSW 同样标注「GSW 不把动量塔写成一个有名字的对象」；(ii) 打包用的\"不同动量的 Fock 态正交\"在本图中是**约定式定义**（那张卡的 (2) 显式声明「层间正交是本定义规定的，不是被证明的」），物理上对应 ⟨p|p'⟩ ∝ δ^D(p−p')，而本图**没有节点**承载连续动量本征态与 δ 归一化。此外\"H^⊥(k) 的 DDF 能级等于 H_phys 一侧的振子能级\"这一步在文献里仍是隐含的记账（Lean 侧只有质量壳一半 `invTwo_mul_zeroModeSq_towerMomentum`），形式化时必须显式证明。"
   - "【v3 起】基态在壳条件 α' k^2 = a = 1 与归一化 2α' k_0·k = 1 的一般 α' 形式来自本项目的量纲恢复（worldsheet.ddf-operators-v4 说明 (c)），文献均在 α' = 1/2 下工作。换算是初等的，但无逐字来源。"
-  - "【v4 新增】目标陈述第 (2) 条的动量量词 p ≠ 0 **没有逐字来源**：候选来源（brower-thorn-1971 / goddard-thorn-1972 / brower-1972）都不讨论 p = 0 的退化情形。该量词来自 ms.no-ghost-theorem 第三轮审计的独立核算（p = 0 时 α^0_{-1}|0;0⟩ 对任意 D 都是负模物理态），以及 fgz-1986 Theorem 2.8 逐字的 p ≠ 0 条件（但 FGZ 那条是 D = 26 的正定性陈述，不是 D > 26 的负模陈述）。本推导第 (2) 条的纵向算子构造确实落在 p ≠ 0 上，但这一步同样只有本项目的核算，没有文献逐字。**2026-09-10 更新（ms.no-ghost-theorem 第四轮审计 A2(iii)/C3）**：(2) 的 p ≠ 0 有 L1 来源：worldsheet.no-ghost-theorem-subcritical（LZ 1991 Thm 3.5(ii) 反方向，(P2) ⇒ p ≠ 0）；本推导不依赖它。理由：本推导走纯 D 玻色子的 DDF / 纵向算子路线，LZ 走带补充模 L(26−D, 1−h) 的 BRST 相对上同调，是两条独立论证，故**不**把 lian-zuckerman-1991 并入本推导的 sources（一条推导一个论证）。也不另挂一条只支撑 (2) 的 v4 推导——一条推导须支撑整条目标陈述，而 LZ 不覆盖 v4 的 (1)。LZ 的完整论证已作为独立陈述节点 worldsheet.no-ghost-theorem-subcritical 在图中登记。"
+  - "【v4 新增】目标陈述第 (2) 条的动量量词 p ≠ 0 **没有逐字来源**：候选来源（brower-thorn-1971 / goddard-thorn-1972 / brower-1972）都不讨论 p = 0 的退化情形。该量词来自 ms.no-ghost-theorem 第三轮审计的独立核算（p = 0 时 α^0_{-1}|0;0⟩ 对任意 D 都是负模物理态），以及 fgz-1986 Theorem 2.8 逐字的 p ≠ 0 条件（但 FGZ 那条是 D = 26 的正定性陈述，不是 D > 26 的负模陈述）。本推导第 (2) 条的纵向算子构造确实落在 p ≠ 0 上，但这一步同样只有本项目的核算，没有文献逐字。**2026-09-10 更新（ms.no-ghost-theorem 第四轮审计 A2(iii)/C3）**：(2) 的 p ≠ 0 有 L1 来源：worldsheet.no-ghost-theorem-subcritical（LZ 1991 Thm 3.5(ii) 反方向，(P2) ⇒ p ≠ 0）；本推导不依赖它。理由：本推导走纯 D 玻色子的 DDF / 纵向算子路线，LZ 走带补充模 L(26−D, 1−h) 的 BRST 相对上同调，是两条独立论证，故**不**把 lian-zuckerman-1991 并入本推导的 sources（一条推导一个论证）。也不另挂一条只支撑 (2) 的 v4 推导——一条推导须支撑整条目标陈述，而 LZ 不覆盖 v4 的 (1)。LZ 的完整论证已作为独立陈述节点 worldsheet.no-ghost-theorem-subcritical 在图中登记。**2026-09-11（四）更新：(2) 现由 Lean 直接给出见证。** worldsheet.negative-norm-physical-state-above-26（formalized，`Fock.exists_mem_physSubmodule_pairing_self_neg`，LevelTwo.lean，合并提交 c32f026）机器验证了：有序域上 D > 26、a = 1 时存在动量与 level-2 标量物理态使 ⟨ψ,ψ⟩ < 0，动量取在 α'k² = −1 的质量壳上（`Fock.exists_zeroModeSq_eq_neg_two`，需 D ≥ 2 与两个非零分量），故 α_0·α_0 = −2 ≠ 0，即 p ≠ 0。该卡已加为本推导的依赖。**仍未关闭的部分**：(a) 「p ≠ 0」这一步在 Lean 里是由 α_0·α_0 = −2 得到的两行推论，`exists_mem_physSubmodule_pairing_self_neg` 的结论本身没有把动量的非零性一并输出（见该卡推导的 gaps (i)）；(b) 文献侧的**逐字来源**仍然没有（Lean 见证是本仓库的构造，不是文献）；(c) 本推导自己的第 (2) 条论证（纵向算子构造）仍未形式化，Lean 走的是另一条路线。"
   - "【2026-09-11 新增，reviewer-ch4】**零态的两个定义在本推导里不是前提而是结论**：本推导商掉的 H_0（H_phys 的根基）与 worldsheet.ocq-spurious-states-v2（原 v1 已换代）的 N（物理态 ∩ 伪态）在 D = 26、a = 1 时相等，这一点**不需要单独假设**——它是 GT 分解（每个物理态 = DDF 态 + 伪态）、横向 DDF 空间上内积正定、以及 N ⊥ H_phys（worldsheet.spurious-orthogonal-to-physical）这三条的两行推论：设 ψ ∈ H_0，写 ψ = ψ_T + χ（χ 伪态），则对任意 DDF 态 φ 有 0 = ⟨ψ, φ⟩ = ⟨ψ_T, φ⟩，由横向正定得 ψ_T = 0，故 ψ = χ ∈ N；反向 N ∩ H_phys ⊆ H_0 就是 spurious-orthogonal-to-physical。因此不必为 H_0 ⊆ N 另立前提。注意 worldsheet.ocq-spurious-states-v2 与 worldsheet.spurious-orthogonal-to-physical 只证 N ⊆ H_0 这一半，反向那一半的论证在本推导内部（依赖 GT 分解），一般 (D, a) 下不成立。"
   - "【v4 新增】worldsheet.ddf-operators-v4 相对 v3 只改了参考方向的参数化（射线 → 去心直线），本推导的论证一字未变；此处登记以便日后追溯换代不影响论证强度。"
   - "【形式化进度 2026-09-11】Fock 空间（worldsheet.bosonic-fock-space）、Sugawara 构造与 c = D、老协变物理态条件、Virasoro 生成元的伴随 L_m^† = L_{−m}、以及指数顶点算子 :e^{i n k_0·X}: 的**振子部分**与 DDF **动量塔**（`formal/StringFormal/NoGhost/VertexOperator.lean`、`DDF.lean`，无 sorry，公理仅标准三条；合并提交 9691057）已在 Lean 中机器验证。**但本推导的两个核心步骤仍未形式化**：(i) DDF 算子 A^i_n = Σ_m α^i_m V^{(n)}_m 本身未定义，连带 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 未证；(ii) 第 (1) 条的**张成定理**（\"塔上任意物理态 = DDF 态 + 零模态\"）未做。待办见 formal/TODO.md 的 `ddf-operators` 与 `ddf-spans` 两项。附带发现：横向性 ε·k_0 = 0 不只是使被积量成为权 1 primary 的条件，还是 A^i_n 的模态和在代数 Fock 空间上局部有限（从而 A^i_n 良定义）的必要输入；详见 worldsheet.ddf-operators-v4 的 notes【Lean 进展 2026-09-11】。"
   - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
   - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
-  - "【2026-09-11 新增；2026-09-11（二）更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0），论证中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 在本图中仍无承载节点；Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。"
+  - "【2026-09-11 新增；2026-09-11（二）更新；2026-09-11（三）再更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0）。【（三）更新】其中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 也**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，physical-argument），故「在本图中仍无承载节点」一句同样过时；仍未关闭的是它下面三条更基础的缺口——「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」无节点、「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」无节点、指数算符两半的同点重排序无节点（现址：worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条）。Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，塔上的双线性型也未做（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核），且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。【（四）更新，2026-09-11】(1b) 里的另一半——「有了伴随关系与横向振子代数之后，Gram 矩阵**是什么**」——现由 **worldsheet.transverse-ddf-fock-gram-matrix**（推导 --via-oscillator-recursion，status rigorous，条件命题，reviewer 复核待补）承载，已加入本推导的 depends_on。这一半此前是 worldsheet.ddf-operators-adjoint 陈述的第 (2) 条，混在一张 physical-argument 的卡里，看不出「递推本身是严格的、只有前件不严格」。**本推导的 effective 不变**（仍被两条 DDF 对易关系与伴随关系封顶为 physical-argument）；改动的只是可审计性。"
 notes: |
+  【2026-09-11（四）：第 (2) 条接上 Lean 见证（curator，本次只改 depends_on（新增一条）
+  与「(2) 的动量量词 p ≠ 0 没有逐字来源」那条 gap 的措辞；
+  **status、sources、summary 与论证步骤一字未动**）】
+  新增依赖 **worldsheet.negative-norm-physical-state-above-26**（proposition，formalized，
+  推导 --via-lean，lean_decl `Fock.exists_mem_physSubmodule_pairing_self_neg`），**非 inferred**。
+  它是目标第 (2) 条的独立见证：显式 level-2 标量态在 D > 26、a = 1、α'k² = −1 上给出
+  ⟨ψ,ψ⟩ = −2(D−26)(D−1)/25 < 0。
+  为什么不给本推导另挂一条「只证第 (2) 条」的 --via-lean 推导：**一条推导须支撑整条目标陈述**，
+  而 Lean 完全不覆盖目标第 (1) 条（D = 26 的半正定与逐塔等距同构，需要 DDF 张成定理，
+  formal/TODO.md 的 `ddf-operators`、`ddf-spans` 都未做）。
+  故按与 worldsheet.no-ghost-theorem-subcritical 相同的处理方式：把第 (2) 条立成独立陈述节点，
+  再作为依赖接进本推导。
+  **有效状态不变**：目标的 effective 仍是 physical-argument，瓶颈仍是第 (1) 条那侧的
+  两条 DDF 对易关系与 worldsheet.ddf-operators-adjoint。
+
   【2026-09-11：DDF 拆卡与由此产生的状态下降（curator，本次改 depends_on / gaps / notes，
   以及 summary 第 (1) 条里的三处节点指向（ddf-operators-v4 → v5，另把两条对易关系的节点 id 写出）；
   **status、sources 与论证步骤一字未动**）】
@@ -160,6 +218,18 @@ notes: |
   （由那两条对易关系节点封顶），新依赖的 effective 同为 physical-argument，故不再下降。
   上面的升级路径清单相应多一项：worldsheet.ddf-operators-adjoint 也需升级
   （Lean 侧先做 V(b)_J† = V(−b)_{−J}，或由 researcher 取得顶点算子代数侧带编号的严格陈述）。
+
+  【2026-09-11（三）：动量塔立卡后的接线（curator，本次只改 depends_on 与三条 gaps 的措辞；
+  **status、sources、summary 与论证步骤一字未动**）】
+  新增依赖 **worldsheet.momentum-tower-fock-space**（definition, rigorous），**非 inferred**：
+  目标 (1b) 的 H_phys(k;k_0) = ⊕_{N≥0} H_phys(k − N k_0) 与它上面的内积就是这张卡定义的
+  动量塔与塔上层间正交的双线性型。此前本图没有承载该对象的节点，
+  gaps 的【v3 起】一条只把「逐动量塔打包」登记为本项目的规范化。
+  同时更新两条 gaps 的措辞（【v3 起】的塔打包一条、(A^i_n)† 一条），
+  把「无节点」改为指向新卡与 worldsheet.vertex-operator-adjoint，
+  并保留未关闭的部分（层间正交仍是约定；权 0、径向共轭规则、同点重排序仍无节点）。
+  **有效状态不变**：新依赖 status rigorous 且其依赖均 formalized，
+  本推导的 effective 仍由两条 DDF 对易关系与 ddf-operators-adjoint 封在 physical-argument。
 
   ---
   【以下为原 notes，一字未动】

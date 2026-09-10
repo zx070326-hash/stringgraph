@@ -1,0 +1,85 @@
+id: consistency.gs-counterterms-1984
+kind: definition
+status: physical-argument
+title: Green–Schwarz 1984 的三段局域反项 S₁、S₂、S₃（及 E₈ × E₈ 版 S′₁、S′₃）
+statement: |
+  Green–Schwarz 1984 加到十维有效作用量上的局域反项，**原文分三段给出**
+  （记号见 conv.gauge-trace-normalization、consistency.h-field-strength-chern-simons、
+  consistency.descent-forms-chern-simons；楔号省略，积分是十维积分）。
+  **c 是一个数值常数，GS 逐字说它「可以从 refs. [3, 9] 推出」，本文没有算出它。**
+
+  **SO(32)**：
+
+      S₁ = c ∫ ( B tr F⁴ + ⅔ ω⁰_{3Y} ω⁰_{7Y} )                                              (18)
+
+      S₂ = − c ∫ ( (1/32) B (tr R²)² + ⅛ B tr R⁴ + (1/12) ω⁰_{3L} ω⁰_{7L} )                   (21)
+
+      S₃ = c ∫ ( ⅛ B tr R² tr F²
+                 + (1/48) ω⁰_{3L} ω⁰_{3Y} tr R²
+                 − (1/24) ω⁰_{3Y} ω⁰_{3L} tr F²
+                 − ⅔ ω⁰_{3L} ω⁰_{7Y}
+                 + (1/12) ω⁰_{3Y} ω⁰_{7L} )                                                    (23)
+
+  **E₈ × E₈**（S₂ 与 SO(32) 情形**相同**，因为它不含规范场）：
+
+      S′₁ = (c/108000) ∫ { 30 B [ (tr₁F²)² + (tr₂F²)² − tr₁F² tr₂F² ]
+                            − ω⁰_{3Y₁} ω⁰_{3Y₂} ( tr₁F² − tr₂F² ) }                            (18′)
+
+      S′₃ = (c/7200) ∫ ( 30 B tr R² tr₁F²
+                         + 5 ω⁰_{3L} ω⁰_{3Y₁} tr R²
+                         + 20 ω⁰_{3Y₁} ω⁰_{7L}
+                         + ω⁰_{3Y₁} ω⁰_{3L} tr₁F²
+                         + ω⁰_{3L} ω⁰_{3Y₁} tr₂F² ) + (1 ↔ 2)                                  (23′)
+
+  下标 1、2 指两个 E₈ 因子。
+
+  **本卡不含**：
+  (a) 这些反项**确实抵消反常**这一断言——那是 consistency.anomaly-cancellation-so32-effective-theory
+      与 consistency.anomaly-cancellation-e8e8-effective-theory；
+  (b) 常数 c 的值；
+  (c) 后世的 ∫B ∧ X₈ 打包写法（见 notes 第 1 条）。
+uses:
+  - consistency.h-field-strength-chern-simons
+  - consistency.descent-forms-chern-simons
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(18)；PLB p.120（重印 611），(21)(23)；PLB p.120（重印 611），(18′)；PLB p.120–121（重印 611–612），(23′)。c 的出处见 (17) 后逐字「The numerical constant c can be deduced from refs. [3,9].」"
+    note: |
+      L1 逐页读图，**按印刷原样转录**（抽取记录 literature/extractions/green-schwarz-1984.md E10/E12/E14/E15/E16）。
+      注意 (23′) 最后两项的 ω 次序相反，见 notes 第 2 条。
+  - ref: alvarez-gaume-witten-1984
+    loc: "eq. (63)（GS ref. [3]；GS 把常数 c 与各反常之间的相对归一化都指向这里）"
+    note: |
+      **本项目未取得全文（L0）**。这是本卡「c 未定」的直接原因，也是整条反常抵消链
+      数值系数层的唯一来源。抽取记录 Q2。
+  - ref: zumino-wu-zee-1984
+    loc: "全文（GS ref. [9]）"
+    note: 本项目未取得全文（L0）。与 [3] 一起被 GS 指为 c 的来源。
+tags: [anomaly, counterterm, green-schwarz-mechanism, so32, e8, d10]
+notes: |
+  【1. ★ 不写 B ∧ X₈】派工与常识里的「Green–Schwarz 抵消项 ∫B ∧ X₈」这个打包写法
+  **不出现在 GS 1984 原文**。原文给的就是上面三段（E₈ × E₈ 版是 S′₁ + S₂ + S′₃）。
+  X₈ 与 ∫B ∧ X₈ 是后来的重排：bilal-2008 (12.16)(12.26)(12.33)、schwarz-2001 的 (36)(29)。
+  若将来要建现代写法的节点，**须挂 bilal-2008 一类来源，不得挂 green-schwarz-1984**
+  （抽取记录 Q5）。
+
+  【2. (23′) 末两项的 ω 次序】原文第四项是 ω⁰_{3Y₁} ω⁰_{3L} tr₁F²，第五项是 ω⁰_{3L} ω⁰_{3Y₁} tr₂F²，
+  两个三形式的次序相反。三形式反对易，故 ω⁰_{3L} ω⁰_{3Y₁} = − ω⁰_{3Y₁} ω⁰_{3L}；
+  但本卡**按印刷原样转录，不做合并**（抽取记录 E16 备注）。同理 (23) 的第二、第三项次序也相反。
+
+  【3. ★ H 的 CS 项符号差异】本卡与 consistency.h-field-strength-chern-simons 用 GS 原文的
+  H = dB + ω⁰_{3Y} − ω⁰_{3L}；bilal-2008 (12.14) 的 H = dB − Q₃(A,F) + β̃ Q₃(ω,R) **两个 CS 项整体反号**。
+  δB 的符号（(9c)）与这些反项里 B 的系数是绑在一起的，混用两套约定会得到错误的相对符号。
+
+  【4. 为什么 status 是 physical-argument】三条理由，任一条都足够：
+  (i) 常数 c 在本文里未定，指向本项目未取得的 alvarez-gaume-witten-1984；
+  (ii) ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（见 descent 卡），故 S₁、S₃ 的显式值依赖代表元选取；
+  (iii) 反项是加到一个只在低能展开意义下存在的有效作用量上的，GS 自陈该截断
+       "probably not fully consistent"。
+
+  【5. S₂ 与规范群无关】(21) 不含规范场，故 SO(32) 与 E₈ × E₈ 共用同一个 S₂。
+  这一点在 consistency.anomaly-cancellation-e8e8-effective-theory 的推导里用到。
+author: curator
+created: "2026-09-11"

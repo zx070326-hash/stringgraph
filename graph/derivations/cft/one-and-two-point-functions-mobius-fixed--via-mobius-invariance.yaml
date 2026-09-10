@@ -1,0 +1,48 @@
+id: cft.one-and-two-point-functions-mobius-fixed--via-mobius-invariance
+target: cft.one-and-two-point-functions-mobius-fixed
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.primary-field
+    note: 提供主场的定义与有限共形变换下的变换律 A'(z') = (∂z'/∂z)^{−h}(…)^{−h̄}A(z)（(2.4.13)）。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: 提供 PSL(2,C) 及其生成元（平移 a₀、标度+旋转 a₁、特殊共形 a₂）——本推导逐个使用。
+  - id: math.mobius-group-sharply-three-transitive
+    note: 提供「用平移把一点移到 0、用标度把另一点移到 1」这些步骤的合法性与唯一性。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.7, eq. (6.7.3)/(6.7.4)，p.198；§2.4 eq. (2.4.13)"
+    note: 抽取记录 #E110，L1（schrans-2020 §6.73–§6.74，笔记 p.340–341）。
+summary: |
+  **(1) 一点函数。** 平移不变性 ⇒ ⟨A(z)⟩ 与 z 无关，可取 z = 0。
+  剩余的标度+旋转 z ↦ γz 固定原点，在其下 A(0) ↦ γ^{−h}γ̄^{−h̄}A(0)，
+  故 ⟨A(0)⟩ = γ^{−h}γ̄^{−h̄}⟨A(0)⟩ 对一切 γ ∈ C^× 成立，
+  除非 h = h̄ = 0，否则 ⟨A(0)⟩ = 0。
+
+  **(2) 两点函数。** 平移把 z₂ 移到 0；再用 z ↦ z/z₁₂ 把 z₁ 移到 1。
+  两个算子各按权拾取 Jacobian 因子，合起来给
+    ⟨A_i(z₁)A_j(z₂)⟩ = z₁₂^{−h_i−h_j} z̄₁₂^{−h̄_i−h̄_j} ⟨A_i(1,1)A_j(0,0)⟩。
+
+  **(3) 单值性。** 把 z₁ 绕 z₂ 转一圈：z₁₂ ↦ e^{2πi}z₁₂、z̄₁₂ ↦ e^{−2πi}z̄₁₂，
+  上式拾取相位 e^{−2πi(h_i+h_j)}e^{+2πi(h̄_i+h̄_j)} = e^{−2πi(J_i+J_j)}。
+  关联函数单值 ⟺ J_i + J_j ∈ Z。
+gaps:
+  - "**「关联函数在 PSL(2,C) 下不变」这一前提本图没有节点**：它在 CFT 中通常由
+     Ward 恒等式（worldsheet.ward-identity）在球面上的整体版本给出，
+     但本图的 Ward 节点是局部形式，与「球面上整体 Möbius 不变」之间的一步没有承载。
+     **本推导把它写作前提**，这是标 physical-argument 的首要理由。"
+  - "**特殊共形变换（a₂）没有被使用**：本推导只用了平移与标度。
+     完整论证（尤其是排除 h_i ≠ h_j 的两点函数）需要 a₂，那在
+     cft.tensor-two-and-three-point-functions 里。"
+  - "**关联函数的存在性与正则性被默认**：把「关联函数」当作可以做变量替换的普通函数，
+     忽略算子插入点处的奇性与分布性质。"
+  - "**只有二手源**（L1）：原书未核对。"
+  - "**⚠ [S] 的技术手法与原书可能不同**（抽取记录 E111 备注，同一节）：他为避开 Λ → ∞ 的奇异性
+     **保持 Λ 有限**并用 Mathematica 算 Jacobian，自述「Arguably we should take Λ → ∞ but
+     if we do that now we will see that it leads to complications」。**原书怎么处理无穷远点未核实。**"
+notes: |
+  本推导是纯 CFT 论证，与路径积分测度无关，因此**它的 physical-argument 不是来自弦论那条上限**，
+  而是来自上面第一条 gap（Möbius 不变性这个前提无节点）。
+  若日后建「球面上关联函数的整体共形 Ward 恒等式」节点，本推导可升级。
+author: curator-polchinski-ch6
+created: "2026-09-11"

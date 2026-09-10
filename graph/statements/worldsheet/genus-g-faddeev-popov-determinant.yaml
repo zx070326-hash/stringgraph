@@ -1,0 +1,38 @@
+id: worldsheet.genus-g-faddeev-popov-determinant
+kind: definition
+status: physical-argument
+title: 一般亏格上的 Faddeev–Popov 行列式（逆行列式的积分表示）
+statement: |
+  在一般亏格世界面上，Faddeev–Popov 行列式 Δ_FP 由它的**逆**的积分表示定义：
+    Δ_FP^{-1} = n_R ∫ d^μ δt  d^κ x  [dδω  dδσ  dβ]
+                exp{ 2πi [ ∫ d²σ  ĝ^{1/2}  β^{ab} δg_ab
+                          + Σ_{(a,i) ∈ f} x_{ai} δσ^a(σ̂_i) ] } ,
+  其中
+  - δg_ab 是 worldsheet.metric-variation-with-moduli 给出的一般变分（含模的项）；
+  - β^{ab} 是拉格朗日乘子场，x_{ai} 是固定顶点算子坐标的拉格朗日乘子，
+    f 是被 CKV 固定的那 κ 个坐标的指标集；
+  - n_R 是规范全固定后残余的**离散**对称群的阶（如世界面宇称），除掉它以免重复计数。
+
+  对 δω 的积分给出 δ(β^{ab} ĝ_ab)，即 **β 无迹**——这正是鬼场 b 是对称无迹张量的来源。
+uses:
+  - worldsheet.metric-variation-with-moduli
+  - worldsheet.gauge-fixed-measure-moduli-and-positions
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.6)（逆 FP 行列式），p.155–156；所用的度规变分是 (5.3.5)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E78，L1（读到 schrans-2020 §5.12，
+      笔记 p.252–253）。伴读者逐字：「We basically repeat the analysis of the Faddeev-Popov
+      procedure surrounding (3.3.18) for completeness.」
+      ⚠ 本卡通过 (5.3.5) 继承一处**勘误依赖**，见 worldsheet.metric-variation-with-moduli 的 sources。
+tags: [worldsheet, faddeev-popov, moduli, ghosts, path-integral, measure]
+notes: |
+  **status = physical-argument（不是 rigorous）**：这张定义卡里的对象是一个
+  无穷维路径积分 [dδω dδσ dβ]，本项目没有它的数学定义。按 docs/STATUS_LEVELS.md，
+  定义卡的 status 表示「该定义卡本身的地位」，「依赖路径积分等未定义对象」正是
+  physical-argument 一档。
+  因此凡依赖本卡的下游节点（鬼场表示、S-矩阵主公式）都不可能高于 physical-argument。
+author: curator-polchinski-ch5
+created: "2026-09-11"

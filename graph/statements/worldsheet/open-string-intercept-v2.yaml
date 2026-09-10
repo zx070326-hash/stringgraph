@@ -48,8 +48,15 @@ sources:
     loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124（OCQ level 1 分析：A = −1 一栏无质量且伪态同时物理；A > −1 与 A < −1 两栏各 D−1 个自由度，后者破坏幺正性）"
     note: "抽取记录 polchinski-1998-v1#E56（level 1，式号与内容已核实；#E57 是 level 2，定 D 而非 a）。已按 conv.intercept-sign-a 做 a = −A 换算。"
   - ref: polchinski-1998-v1
-    loc: "§1.3（光锥谱：第一激发级须为无质量 SO(D−2) 矢量），(1.3.25b)、约 (1.3.32)–(1.3.36)"
-    note: "抽取记录 polchinski-1998-v1#E18。式号为近似定位。"
+    loc: "§1.3（光锥谱：第一激发级须为无质量 SO(D−2) 矢量）：横向对易关系 (1.3.25b)、正规序常数 (1.3.31)–(1.3.35)、质量壳 (1.3.36)、level 1 质量 (1.3.39)、**结论式 (1.3.40)**, p.23（逐字 `A = −1 , D = 26`）"
+    note: |
+      抽取记录 polchinski-1998-v1#E18 / Q2。**【2026-09-11 原书核实订正】**此前写「约 (1.3.32)–(1.3.36)，
+      式号为近似定位」——结论式现落实为 **(1.3.40), p.23**，A 与 D 写在同一式里。
+      原书 p.23 逐字：「At the first level we found only the D − 2 states α^i_{−1}|0;k⟩,
+      so these must be massless and `A = −1 , D = 26`」——即本卡片刻画 (c) 的原书形状。
+      ⚠ 该路线的严格程度由作者自陈封顶：p.21「plausible without a complete treatment」、
+      p.24「We will show this **indirectly** in the coming chapters」、p.90「rather **heuristically**」。
+      已按 conv.intercept-sign-a 做 a = −A 换算。
   - ref: gsw-1987-v1
     loc: "§2.2.1–2.2.2（OCQ 谱、截距与无质量矢量）"
     note: 定位强度 L4（目录/页码级），式号未核实。GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
@@ -81,6 +88,6 @@ notes: |
   一致性要求，OCQ 路线的输入是「伪态必须解耦」这一幺正性/规范不变性要求，
   两者都不是定理。Lean 侧只覆盖 a = 1 的**充分**方向（见上文边界 (iv)），
   因此本卡片**不得**标 formalized。
-  【范围注（reviewer-batch4，2026-09-11）】陈述写"对任意 D ≥ 4 等价于 a = 1"，但光锥推导（SO(D−2) 矢量表示计数）只覆盖 D ≥ 5；D = 4 时 SO(2) 的表示计数论证退化。零态推导不依赖此计数。日后换代时把 D ≥ 4 改为 D ≥ 5 或按推导分别标注。
+  【范围注（reviewer-batch4，2026-09-11）】陈述写"对任意 D ≥ 4 等价于 a = 1"，但光锥推导（SO(D−2) 矢量表示计数）只覆盖 D ≥ 5；D = 4 时 SO(2) 的表示计数论证退化。零态推导不依赖此计数。日后换代时按推导分别标注：(a)(b) 零态刻画 D ≥ 2；(c) 表示论刻画 D = 4 与 D ≥ 6（**D = 5 处 SO(4) 自对偶 2-形式表示使计数论证失效**，见 --via-light-cone-representation gaps；lead 2026-09-11 订正本注原写"改为 D ≥ 5"的方向错误）。
 author: curator
 created: "2026-09-11"

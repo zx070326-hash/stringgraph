@@ -655,7 +655,7 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     assert tree["own"] == "rigorous"
     assert {c["id"] for c in tree["children"]} >= {
         "worldsheet.critical-dimension-light-cone",
-        "worldsheet.critical-dimension-brst",
+        "worldsheet.critical-dimension-brst-v2",
     }
 
 
@@ -946,3 +946,44 @@ def test_report_formalization_frontier(mini: Path) -> None:
     assert "worldsheet.prop-b" in rep["formalization_frontier"]
     assert "worldsheet.def-a" not in rep["formalization_frontier"]
     assert rep["counts"]["by_area"]["worldsheet"] == 2
+
+
+def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-a.yaml",
+        """
+        id: worldsheet.def-a
+        kind: definition
+        status: rigorous
+        title: A
+        statement: a definition
+        uses_conventions: [conv.metric-plus]
+        sources:
+          - ref: ref-a
+            loc: "1"
+            note: |
+              first note
+              - ref: ref-b
+                loc: "swallowed"
+        """,
+    )
+    g = load_graph(mini)
+    warns = [p for p in validate(g) if p.severity == "warning" and "swallowed" in str(p)]
+    assert warns
+
+
+def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
+    """own_status is the max over derivations; the per-derivation list must expose that a
+    rigorous derivation can be throttled to open by a dependency."""
+    from stringgraph.loader import load_graph
+    from stringgraph.report import status_report
+
+    g = load_graph(ROOT)
+    rep = status_report(g, "worldsheet.ddf-commute-with-virasoro")
+    ders = {d["id"]: d for d in rep["derivations"]}
+    assert "worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary" in ders
+    d = ders["worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary"]
+    assert d["own"] == "rigorous"
+    assert d["effective"] == "open"
+    assert rep["effective"] == "physical-argument"

@@ -1,0 +1,52 @@
+id: spectrum.open-string-hard-scattering-exponential-falloff--via-stirling
+target: spectrum.open-string-hard-scattering-exponential-falloff
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.veneziano-amplitude-weak
+    note: 提供三项 Beta 结构；硬散射的指数因子不依赖整体前因子，故弱形式足够。
+  - id: math.gamma-ratio-asymptotics
+    note: |
+      提供 Stirling 型渐近。⚠ 硬散射极限下 Beta 的**两个参数同时**趋于无穷，
+      用的是 ln Γ(z) 的完整 Stirling 展开而不是 math.gamma-ratio-asymptotics (2) 的单参数形式；
+      本图没有为「双参数同时趋无穷」单建节点，见 gaps。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 s + t + u = −4/α'，使 s ln s + t ln t + u ln u 中的三项可用同一个 s 与角度表出。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.29)/(6.4.30)，p.183"
+    note: 抽取记录 #E101，L1（schrans-2020 §6.42–§6.43，笔记 p.310–311）。
+summary: |
+  **(1) 双参数 Stirling。** 硬散射极限下 −α(s)、−α(t)、−α(u) 全部趋于 −∞（模趋于无穷）。
+  对 B(a,b) = Γ(a)Γ(b)/Γ(a+b) 取对数并用 ln Γ(z) = z ln z − z + O(ln z)：
+    ln B(a,b) ≈ a ln a + b ln b − (a+b)ln(a+b)。
+  代入 a = −α(s) ≈ −α's、b = −α(t) ≈ −α't（大 s 时常数项可略），
+  并用 s + t + u = −4/α' ⇒ a + b ≈ −α'(s+t) ≈ α'u，得
+    ln B ≈ −α'( s ln s + t ln t + u ln u ) + （相对次要项）。
+  三项之和的行为由指数最大的一项主导，给出
+    S ∝ exp[ −α'( s ln s + t ln t + u ln u ) ]。
+
+  **(2) 化为角度形式。** 由 (6.4.27)，大 s 时 t/s → −sin²(θ/2)、u/s → −cos²(θ/2)。
+  代入并提出 s：
+    s ln s + t ln t + u ln u = s [ ln s + (t/s)ln t + (u/s)ln u ]
+      → s · f(θ) （ln s 项因 s + t + u 有限而相消），
+    f(θ) = − cos²(θ/2) ln cos²(θ/2) − sin²(θ/2) ln sin²(θ/2)。
+  即 S ∝ exp[−α' f(θ) s]。
+gaps:
+  - "**「双参数同时趋无穷」的 Stirling 渐近本图没有节点**：math.gamma-ratio-asymptotics
+     给的是**单参数**（一个固定、一个趋无穷）的形式，本推导用的是更强的版本。
+     该缺口应记在案；若日后 researcher 登记 DLMF，可一并补上。"
+  - "**符号与相位处理略过**：a、b 沿负实方向趋于无穷，ln a 的分支、以及 t、u < 0 时
+     ln t、ln u 的定义在本推导（与来源）中都没有说清。物理文献默许取主支并忽略相位，
+     因为关心的是**模**的衰减率。这是本推导标 physical-argument 的直接理由之一。"
+  - "**(2) 中「ln s 项相消」这一步依赖 s + t + u 有限**，本推导用了 spectrum.mandelstam-invariants-sum-rule；
+     该步骤在来源里没有逐项写出。"
+  - "**弱形式的代价**：只给「∝」，不给比例常数。"
+  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude-weak 继承）。"
+  - "⚠ **不覆盖**「幂律衰减是幺正性的必要条件」：抽取记录 E101 逐字记录 [S] 找不到该说法的依据，
+     本图不建该节点（见目标陈述的 ⚠）。"
+notes: |
+  与 spectrum.virasoro-shapiro-hard-scattering 是同一手法的闭弦版本（指数率差因子 2）。
+  按 Q15，本图不建「二者差因子 2」的陈述。
+author: curator-polchinski-ch6
+created: "2026-09-11"

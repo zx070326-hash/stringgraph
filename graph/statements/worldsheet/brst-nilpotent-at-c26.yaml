@@ -11,7 +11,7 @@ sources:
   - ref: fgz-1986
     loc: "Proposition 1.2（d² = 0，在正文假设 H²(g)=0、γ=0 下）；§2.1 对 Virasoro 情形取 π(c) = 26"
   - ref: polchinski-1998-v1
-    loc: "§4.3，约 eq. (4.3.2)–(4.3.6)"
+    loc: "§4.3, eq. (4.3.9)（{Q_B,Q_B}=0 only if c^m=26；原书明写最短推导为 exercise 4.3）；(4.3.10)（j_B j_B OPE）；(4.3.3)(4.3.5)(4.3.6) 为定义式。原「约 (4.3.2)–(4.3.6)」按 v1 抽取 §12.3 订正 2026-09-11"
 tags: [brst, bosonic-string]
 notes: |
   为什么单独建这个弱节点：FGZ 的无鬼定理（Theorem 2.8）只用到"假设 c=26 则复形微分平方为零"，

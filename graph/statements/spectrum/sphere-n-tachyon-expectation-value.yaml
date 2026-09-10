@@ -1,0 +1,49 @@
+id: spectrum.sphere-n-tachyon-expectation-value
+kind: proposition
+title: 球面上 n 个 tachyon 顶点算子的期望值 = i C^X_{S₂}(2π)^d δ^d(Σk) ∏_{i<j}|z_ij|^{α'k_i·k_j}
+statement: |
+  设 d 个自由标量在 S₂ 上按 worldsheet.free-scalar-cft-action 的欧氏作用量做路径积分，
+  插入 n 个按 spectrum.vertex-operator-geodesic-renormalization 重整化的指数型（tachyon）
+  顶点算子 [e^{i k_i · X(σ_i)}]_r，坐标用 z 片写作 z_i。则
+    ⟨ ∏_{i=1..n} [ e^{i k_i · X(σ_i)} ]_r ⟩_{S₂}
+      =  i C^X_{S₂} (2π)^d δ^d( Σ_i k_i )  ∏_{i<j} | z_ij |^{α' k_i · k_j},
+    z_ij ≡ z_i − z_j,
+  其中 C^X_{S₂} 是与动量、坐标无关的归一化常数（数值不由本命题定出）。
+
+  关键结构：**共形因子 ω（度规的 Weyl 部分）与 Green 函数的非普适部分 f(z_i, z̄_i) 全部相消**，
+  只剩普适的 |z_ij| 幂次；相消的机制是动量守恒 Σ_i k_i = 0（外加 tachyon 的质量壳条件），
+  见 spectrum.tachyon-expectation-conformal-factor-cancellation。
+
+  **本命题不断言什么**：不是 S-矩阵元（还要乘鬼场期望值、e^{−λχ}、并对未固定坐标积分）；
+  不给出 C^X_{S₂}；不涉及 D₂、RP₂ 上的对应表达式（(6.2.33)、(6.2.38)，本图未建，见 notes）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.17)，p.171"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E93，等级 **L1**（schrans-2020 §6.12，笔记 p.286，
+      逐页读到；[S] 用 n = 3 显式验证了 f 项的相消，见其 [6.44]–[6.45]）。⚠ 原书未核对。
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.13)/(6.2.14)（动量守恒 delta 函数与 C^X_{S₂}），eq. (6.2.15)/(6.2.16)（重整化 Green 函数），p.171"
+    note: 抽取记录 #E92，L1。本式的两个输入。
+tags: [spectrum, tree-level, sphere, tachyon, closed-string, correlator, path-integral]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E93 建立。
+
+  **⚠ 上游 ch5 节点尚未进入 main**：「S-矩阵 = 规范固定路径积分 (5.3.9)」属第 5 章
+  （抽取记录 E80），本批次提交时无节点。本卡片只陈述 X 部门的**期望值**（不是 S-矩阵），
+  故这一缺失不影响陈述本身；但把它接成振幅时需要那条边，**待 ch5 节点合入后补**。
+
+  **D₂ 与 RP₂ 的对应表达式本批次不建节点**：(6.2.32)/(6.2.33)（D₂ 的 Green 函数与 tachyon 期望值）
+  只到 L2（抽取者只读到目录条目）；(6.2.38)（RP₂ 的 Green 函数）被 [S] 指为**原书有误**且
+  该更正**不在**官方勘误表上（抽取记录 E95、Q14）。在原书与勘误表都取不到的情况下建节点
+  会把未经证实的第三方更正固化进图，故跳过，列入报告的「未做条目」。
+  ⚠ 因此本图目前**没有**开弦（D₂）版本的 X 部门期望值节点：
+  spectrum.open-string-three-tachyon-amplitude 与 spectrum.open-string-four-tachyon-amplitude
+  的推导直接引 (6.4.2)/(6.4.5)，并在 gaps 里记下这一缺环。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,42 @@
+id: worldsheet.torus-two-moduli-two-ckv--via-doubly-periodic-holomorphic
+target: worldsheet.torus-two-moduli-two-ckv
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ckv-holomorphic-in-conformal-gauge
+    note: 把 CKV 计数化为「处处正则的全纯 δz」。
+  - id: worldsheet.moduli-holomorphic-quadratic-differentials
+    note: 把模计数化为「处处正则的全纯二次微分 δ'g_zz」。
+  - id: worldsheet.torus-modulus
+    note: 提供环面 = C/Λ(τ) 与其平坦度规，全纯函数在其上即双周期全纯函数。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8) 附近, p.152；(5.1.16), p.148–149"
+    note: |
+      抽取记录 #E74（L1，schrans-2020 §5.9 笔记 p.249–250）与 #E69 备注。
+summary: |
+  环面上的平坦度规使共形规范可以整体取到，且 z 是整体（多值到格平移）坐标。
+  于是「处处正则的全纯函数」= C 上全纯且对格 Λ(τ) 双周期的函数。这样的函数在基本平行四边形
+  （紧集）上连续故有界，由 Liouville 定理必为常数。
+  代入两处：
+  (a) δz = 常数 ⇒ CKV 就是两个平移（实参数两个），κ = 2；
+  (b) δ'g_zz = 常数（二次微分在平坦坐标下的分量），μ = 2，正对应 τ 的两个实分量。
+gaps:
+  - |
+    **Liouville 定理在本图中没有节点，来源也不给证明**。它是标准复分析结果，
+    但按项目规则不能默认为「已论证」；本推导因此不能高于 physical-argument。
+    升级路径：建 math 区节点（如 `math.doubly-periodic-holomorphic-is-constant`）
+    并挂一个可核实的复分析来源。
+  - |
+    **上游拖低**：worldsheet.ckv-holomorphic-in-conformal-gauge 与
+    worldsheet.moduli-holomorphic-quadratic-differentials 都只到 physical-argument
+    （只是局部改写，整体正则性未论证）。
+  - |
+    **「二次微分在环面上的整体正则性 ⟺ 分量函数双周期全纯」这一步未论证**：
+    它用到环面上有整体平坦坐标、过渡函数是平移（(dz/dz')² = 1），
+    抽取记录没有记录原书是否写出这一点。
+  - |
+    **来源强度**：(5.1.16) 只有 schrans-2020 正文的交叉引用（抽取记录 §7 列为最弱一档）；
+    (5.2.8) 只有 [S] 目录背书。均未核对原书。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,83 @@
+id: worldsheet.critical-dimension-weyl-anomaly-v2--via-anomaly-cancellation
+target: worldsheet.critical-dimension-weyl-anomaly-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.weyl-anomaly-trace
+  - id: worldsheet.weyl-anomaly-central-charge-constant
+  - id: worldsheet.bc-ghost-central-charge
+    note: |
+      供给 c^g = −26。目标陈述里的「c^m − 26 = 0」中那个 26 就是 −c^g，
+      本推导不重算它。（2026-09-11 换代后这条边保留；被去掉的是
+      worldsheet.free-boson-central-charge-d，见 notes。）
+  - id: worldsheet.faddeev-popov-ghost-action
+  - id: worldsheet.conformal-gauge-fixing
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.4：Weyl 反常 ∝ 中心荷的核心式 **(3.4.15)**（`c = −12a₁`，`T^a_a = −(c/12)R`）；「总中心荷为零 ⟺ Weyl 不变」的两处 **iff 散文** p.95（\"a flat world-sheet CFT can be coupled to a curved metric in a Weyl-invariant way if and only if the total central charge c is zero\"）与 p.96（\"Weyl invariance holds in the quantum theory if and only if a₁ = −c/12 vanishes\"）；\"Discussion\" 小节的 **(3.4.23)**, p.94 给的是 `c = c^X + c^g = D − 26` 与「Weyl-invariant only for **D = 26**」。式号、页码与措辞 2026-09-11 经原书核实（抽取记录 polchinski-1998-v1.md §12.2，**Q6 关闭**）"
+    note: |
+      **【2026-09-11 原书核实：Q6 关闭，本条此前的「未核实/不写死式号」已作废】**
+      ⚠ **原书 (3.4.23) 写的是 D = 26，不是 c^m = 26**。目标陈述采用的一般物质 CFT 形式
+      （c^{tot} = 0 ⟺ c^m = 26）在 §3.4 里**只有散文与 (3.4.15) 支撑，没有对应的式号结论**；
+      逐字写出 `c^m = 26` 的是 **§4.3 (4.3.9)**（见下一条 source）。
+      故本推导对目标陈述的支撑是「§3.4 散文 + (3.4.15) + §4.3 (4.3.9)」三处联合，
+      而非单一位置——这是本推导在来源侧的实际弱点，取代此前登记的「式号完全未核实」。
+      另：原书在 (3.4.23) 处**显式引用 (2.5.12)** 作为 c^g = −26 的来源，
+      故本推导对 worldsheet.bc-ghost-central-charge 的依赖在原书里是明写的。
+      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
+      schrans-2020 §3.26 "Theories with a Quantum Anomaly" 逐字：「the scale invariance is local;
+      it is a gauge redundancy and if there is an anomaly the result is that the gauge symmetry
+      is broken, with implications for e.g. unitarity」——**这是 schrans-2020 的措辞，不是 Polchinski 的**
+      （抽取记录 E53 明确标注），只作核对，不承载论证。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. **(4.3.9)**（全书唯一逐字写出 `c^m = 26` 的位置：「{Q_B, Q_B} = 0 only if c^m = 26」；式号与内容已核实，抽取记录 §12.3）"
+    note: |
+      本条**不是**本推导的论证来源（那是 BRST 路线 worldsheet.critical-dimension-brst-v2 的事），
+      只用来支撑目标陈述采用的**记号与一般性形式**「c^m = 26」在原书中确有逐字出处。
+      抽取记录 §12.10 表 B 第 7 行的建议正是：若卡片文本是 c^m = 26，则改挂 §4.3 (4.3.9)。
+summary: |
+  (1) Weyl 是规范冗余：Polyakov 路径积分对 diff × Weyl 取商，规范固定用掉了 Weyl
+      （worldsheet.conformal-gauge-fixing）。若 Weyl 在量子层面有反常，规范固定不自洽。
+  (2) 反常的大小正比于中心荷（worldsheet.weyl-anomaly-trace：⟨T^a_a⟩ = -(c/12) R），
+      且中心荷是常数（worldsheet.weyl-anomaly-central-charge-constant）。
+  (3) 规范固定引入的 Faddeev–Popov 鬼场是 λ = 2 的 bc 系统
+      （worldsheet.faddeev-popov-ghost-action），贡献 c^g = -26
+      （worldsheet.bc-ghost-central-charge）。
+  (4) 总反常正比于 c^{tot} = c^m + c^g；要求它为零得 c^m = 26。
+  由 c^m = 26 到 D = 26 的那一步（c^m = D）**不在本推导范围内**：
+  自 2026-09-11 的换代起它不属于目标陈述，而由 worldsheet.critical-dimension-bosonic-v2
+  的推导 --via-four-routes 作为 (III)(IV) 的公共输入显式供边。
+gaps:
+  - "**与 worldsheet.critical-dimension-brst-v2 非完全独立**（reviewer-ch23）：两条路线共享
+     c^g = -26（worldsheet.bc-ghost-central-charge），且判据是同一个数 c^m - 26 = 0，
+     只是把输入拼起来的机制不同（Weyl 反常消除 vs BRST 幂零）。
+     故不得把两条当作 c^m = 26 的**两份独立证据**；若 c^g 的计算有误，两条同时失效。
+     （换代前两条还共享 c^m = D 这个输入；该步现已移出两卡的陈述，改由汇总卡片
+     worldsheet.critical-dimension-bosonic-v2--via-four-routes 承载，共享关系在那里记账。）"
+  - "**每一步都是物理论证**：路径积分测度的 Weyl 变分（(2)）、Faddeev–Popov 手续（(3)）、
+     以及 c^g = -26 的 OPE 计算，均封顶在 physical-argument。本推导不引入新的严格性，只做合成。"
+  - "「有反常 ⇒ 理论不一致」这一步在来源中是物理论断而非定理：书中没有证明
+     『c^{tot} ≠ 0 的玻色弦一定破坏幺正性』，只论证了规范固定的自洽性要求。
+     注意非临界弦（Liouville）的存在说明 c^{tot} ≠ 0 并非绝对不可处理，
+     而是需要把 Liouville 模式当作动力学自由度——那超出本节点的范围。"
+  - "**来源定位是本批最弱的一处**：结论的公式号完全未核实，且未确认 Polchinski 写的是
+     『c^m = 26』还是直接写『D = 26』（抽取记录 Q6 明确要求人工核对）。
+     本节点按更一般的形式（c^m = 26）陈述，若原书只写 D = 26，
+     则本节点的陈述强于来源，须相应修订。该疑问在换代中**未**解决。"
+  - "本推导只定 c^m，不定截距 a = 1，也不定 D；与 worldsheet.critical-dimension-brst-v2 相同。"
+notes: |
+  【2026-09-11 换代】本文件由 worldsheet.critical-dimension-weyl-anomaly--via-anomaly-cancellation
+  改挂到换代后的陈述 worldsheet.critical-dimension-weyl-anomaly-v2（旧卡末段把 c^m = D 这一步
+  绑进 Weyl 反常论证，见 docs/ROADMAP.md 待拆清单与目标卡片的 notes）。因 derivation id 必须写成
+  `<statement-id>--via-<method>`（graph/CLAUDE.md 的 id 规则），无法就地改 id，
+  故新建本文件并删除旧文件（`git mv`）。
+
+  **与旧推导的唯一实质差别**：depends_on 去掉了 worldsheet.free-boson-central-charge-d。
+  理由：那条边只服务于旧陈述末段「c^m = D，于是 D = 26」，v2 的陈述里已无该步；
+  继续挂着会让图上出现一条目标陈述里不存在的推理步骤。该步现由
+  worldsheet.critical-dimension-bosonic-v2--via-four-routes 显式供边。
+  summary 的第 (5) 步（「若物质部门是 D 个平坦标量，c^m = D，故 D = 26」）相应删除，
+  并改写为一句边界声明；gaps 第一条与第五条按新的边界改写，其余逐字沿用。
+  有效状态不变：free-boson-central-charge-d 有 --via-lean（formalized），从未压低本推导。
+author: "curator-polchinski-ch2-3；curator 2026-09-11 换代到 v2 目标"
+created: "2026-09-10"

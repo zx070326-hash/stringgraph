@@ -1,0 +1,42 @@
+id: worldsheet.p1-formal-adjoint--via-integration-by-parts
+target: worldsheet.p1-formal-adjoint
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁、P₁^T 与两个 L² 配对的定义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2（p.150–152），式号未锚定；P₁^T 在 §5.4 的 b 运动方程处使用（(5.4.4) 附近，p.160）"
+    note: |
+      抽取记录 #E73，L1（schrans-2020 §5.6–§5.7，笔记 p.248–249，条目 [5.21]）。
+      ⚠ 该恒等式在本图中**只有伴读笔记的背书**，没有原书式号；见目标节点 sources 的警告。
+summary: |
+  展开配对并用 u 的对称性与无迹性：
+    u^{ab}(P₁v)_ab = u^{ab}·½(∇_a v_b + ∇_b v_a − g_ab ∇·v)
+                   = u^{ab} ∇_a v_b        （对称性合并前两项；无迹性杀掉第三项）。
+  在紧无边流形上对 ∫ d²σ g^{1/2} u^{ab}∇_a v_b 分部积分（∇ 与 g^{1/2} 相容，
+  ∇_a(g^{1/2} X^a) 是全散度，积分为零）得
+    ∫ g^{1/2} u^{ab}∇_a v_b = − ∫ g^{1/2} (∇_a u^{ab}) v_b = (P₁^T u, v)。
+gaps:
+  - |
+    **前提「紧、无边」在来源中未被声明**：抽取记录 E73 没有记录 [S] 或原书是否限定了边界条件。
+    本卡自行补上了这个前提（否则恒等式不成立，开弦世界面带边）。因此本节点的陈述比
+    「来源里的那句话」更谨慎，而不是更强。
+  - |
+    分部积分本身是有限步初等计算，但**无 reviewer 独立复核记录**，
+    故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款不能标 rigorous。
+  - |
+    **来源强度是本批最弱之一**：(P₁^T u)_a = −∇^b u_ab 与本恒等式在抽取记录中只归于
+    schrans-2020，没有原书式号。若原书的 P₁^T 定义带不同的符号或因子，
+    本卡与下游的 worldsheet.moduli-condition-traceless-transverse、
+    worldsheet.b-insertion-diff-variation 都需要相应修正（结论的**形状**不变：
+    ker P₁^T = 模、b 的运动方程 = P₁^T b = 0）。
+  - |
+    椭圆算子理论层面的内容（P₁ 椭圆、ker 有限维、L² 分解 im P₁ ⊕ ker P₁^T 成立）
+    在来源与本图中**都没有**；本推导只给形式的分部积分恒等式，不含泛函分析。
+notes: |
+  升级路径：(a) reviewer 复核代数；(b) researcher 找到原书里 P₁^T 的定义式号，
+  或改挂一个数学来源（如 Tromba 或 D'Hoker–Phong 1988 综述 §II）。两者都做才能到 rigorous。
+author: curator-polchinski-ch5
+created: "2026-09-11"

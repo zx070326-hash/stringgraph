@@ -1,0 +1,81 @@
+id: worldsheet.worldsheet-sum-over-topologies
+kind: definition
+status: physical-argument
+title: 弦微扰展开的定义：对世界面拓扑求和，每个拓扑一个 Polyakov 路径积分
+statement: |
+  弦微扰论按**定义**（不是从别处导出的定理）如下给出：给定 n 个渐近弦态（外线数据：
+  弦的种类、动量与极化，在世界面上表现为指定的穿孔/边界），S-矩阵元定义为
+
+    S = Σ_{拓扑}  ∫ (Dg DX / V_{diff×Weyl})  exp( − S_P[X, g] − λ χ ),
+
+  其中：
+  (i) **求和范围**是所有紧、连通、且其边界与穿孔数据与指定外态相符的二维世界面拓扑。
+      取向弦只对可定向曲面求和（亏格 g ≥ 0，开弦另带 b ≥ 0 个边界分支）；
+      无取向弦（世界面宇称投影后的理论）还要对不可定向曲面求和。
+      对哪一类曲面求和**由弦的类型决定**，不由本定义内部决定。
+  (ii) 对每个固定拓扑，做以该拓扑为定义域的 Polyakov 路径积分
+      （worldsheet.polyakov-action；对世界面度规 g_{ab} 与嵌入 X^μ 积分，除以规范群体积）。
+  (iii) 权重中除物质作用量 S_P 外还有一项 λ χ，其中 χ 是该拓扑的 Euler 数
+      （worldsheet.worldsheet-euler-number），λ 是一个实参数。χ 只依赖拓扑，
+      故 e^{−λχ} 在每个拓扑上是一个常数因子。
+
+  **相互作用不由额外的相互作用顶点给出**：世界面上没有局部相互作用点，弦的分裂与合并
+  完全由世界面的拓扑携带（开弦过程见原书 Fig. 3.4）。
+
+  ⚠ 本卡**不断言**任何收敛性或可定义性：对拓扑的求和是发散的（渐近）级数，
+  测度 Dg DX 与规范群体积 V_{diff×Weyl} 都没有数学定义。
+  ⚠ 本卡**不断言** λ 与任何时空场（dilaton 期望值）的关系，也不断言 λ 与其它参数的独立性。
+uses:
+  - worldsheet.polyakov-action
+  - worldsheet.worldsheet-euler-number
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.1 Sums over world-sheets（p.77–81；Fig. 3.4「Open String Processes」在 p.79，位置已核实）；§3.2 The Polyakov path integral（p.82 起）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E47，证据等级 [部分已核实]。
+      E47 记录的原书内容是：「弦的 S-矩阵定义为对所有连接指定边界的紧致世界面拓扑求和，
+      每个拓扑再对度规与嵌入积分」，并注明这是**定义/公设**，不是推出来的。
+      ⚠ **已核实的只有两处位置**：schrans-2020 目录条目 `3.1 p 79: Fig 3.4 Open String Processes`
+      与 `3.33 p 100: Compact Connected Topologies`。**后者在 p.100，属 §3.5 Scattering
+      amplitudes（§3.5 起于 p.97），不在 §3.1–§3.2**；即「求和范围是紧且连通的拓扑」这一措辞
+      的已核实出处是 §3.5，本卡把它与 §3.1–§3.2 的定义合并陈述，是沿用 E47 的合并。
+      §3.1/§3.2 内的具体公式号本图**未核实**，故 loc 只给节与页，不给式号。
+      ⚠ 「取向 / 无取向依弦的类型而定」一句的已核实出处是 §5.3（抽取记录 E80 第 1 条因子说明，
+      转录自 schrans-2020 §5.15，笔记 p.255），**不是 §3.1**；抽取记录**没有**记录
+      Polchinski 在何处点名 RP²、Klein 瓶等具体不可定向曲面，故本卡不点名任何具体曲面。
+tags: [worldsheet, path-integral, perturbation-theory, topology, euler-number, s-matrix]
+notes: |
+  **为什么 status = physical-argument**：按 docs/STATUS_LEVELS.md，definition 卡的 status
+  表示该定义本身的地位；本卡定义的对象（路径积分测度、规范群体积、对拓扑的无穷求和）
+  没有数学定义，故只能是 physical-argument。这会（有意地）把所有以弦微扰振幅为上游的
+  命题压到 physical-argument。
+
+  **与 §5.3 主公式的关系**：本卡是「对拓扑求和 + 每拓扑一个 Polyakov 路径积分 + e^{−λχ}」
+  这一层骨架；把规范固定做完、写出模参数与鬼场插入的完整表达式 (5.3.9) 是另一张卡
+  （worldsheet.string-s-matrix，第 5 章分支），后者应以本卡为上游，见该卡 notes 记录的缺口。
+
+  **跨号差**：依赖的 worldsheet.worldsheet-euler-number 与 worldsheet.polyakov-action 写在
+  洛伦兹世界面号差下（conv.worldsheet-lorentzian），本卡按 §3.2 的路径积分写在欧氏号差下
+  （conv.worldsheet-euclidean）。statement schema 的 `uses` 字段不能带 convention_map，
+  故换算记在这里：见 conv.worldsheet-euclidean 的 Wick 旋转字典
+  （(-γ)^{1/2} ↔ g^{1/2}，S_P^L = i S_P^E，e^{iS_L} = e^{-S_E}）；Euler 数的欧氏写法
+  ξ = (1/4π)∫_M d²σ √g R + (1/2π)∫_{∂M} k ds 正是 §3.2 的 (3.2.3b)（经 schrans-2020 核实），
+  与 §1.2 的洛伦兹写法逐项对应，χ 的**数值**因是拓扑量而不变。
+  该 Wick 旋转本身在路径积分层面没有节点，缺口继承 conv.worldsheet-euclidean 的 notes。
+
+  **符号 χ 与 ξ**：抽取记录 E48 在 §3.2 处用 ξ 记 Euler 数，E80 在 (5.3.9) 处用 χ；
+  两者是同一个量。本图统一用 χ（与 worldsheet.worldsheet-euler-number 一致）。
+  原书 §3.2 实际用哪个符号本图未核实。
+
+  **不在本卡范围**：λ 由 dilaton 期望值决定（属 §3.7；抽取记录未覆盖 §3.6 之后，
+  唯一线索是 E80 转录的 [S] 一句「λ is a parameter, as we will see later, is not independent」）；
+  e^{−λχ} 作为耦合常数展开的读法见 worldsheet.euler-number-weights-string-coupling。
+
+  **位置核对源（不入 sources[]，lead 裁决：个人笔记只作核对）**：schrans-2020 目录条目 `3.1 p 79`（Fig 3.4）、`3.33 p 100`（Compact Connected Topologies）；§5.15（笔记 p.254–255，(5.3.9) 九条因子说明）。
+
+author: curator-e47-e48
+created: "2026-09-11"

@@ -1,0 +1,36 @@
+id: worldsheet.b-insertion-weyl-invariance--via-weight-counting
+target: worldsheet.b-insertion-weyl-invariance
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: 提供 b、c 的来源（δg 的对称无迹部分与 δσ），从而决定它们的 Weyl 权。
+  - id: worldsheet.string-s-matrix
+    note: 被检查 Weyl 不变性的对象就是 (5.3.9) 里的 b 插入与 c 插入。
+  - id: worldsheet.euler-number-weyl-invariance
+    convention_map: |
+      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian），
+      本推导在欧氏世界面（conv.worldsheet-euclidean）。按 conv.worldsheet-euclidean 的
+      Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；Weyl 变换 g → e^{2ω}g 的形式与号差无关。
+      继承该约定登记的缺口。
+    note: |
+      (5.3.9) 的权重含 e^{−λχ}，要说「插入不带来新的 Weyl 破坏」必须知道 χ 本身 Weyl 不变。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.3), p.160"
+    note: |
+      抽取记录 #E83，L1（schrans-2020 §5.24，笔记 p.262）。
+summary: |
+  逐因子数 Weyl 权：ĝ^{1/2} 给 +2ω，每个升指标的 ĝ^{ab} 给 −2ω，b_ab 与 c^a 本身权为零。
+  在 (b, ∂_{t^k}ĝ) 这种缩并中升指标的个数恰好抵消体积元的权，故插入整体 Weyl 不变。
+gaps:
+  - |
+    **只是权的计数，不是场论论证**：它假定 b、c 作为积分变量的 Weyl 权为零
+    （因为它们来自 δg 的无迹部分与 δσ），而没有讨论路径积分**测度** [db dc] 的 Weyl 变换。
+    测度的 Weyl 反常正是鬼场中心荷 c^g = −26 的来源，本节点不覆盖它。
+  - |
+    有限步初等计算，但**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.4.3) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,34 @@
+id: worldsheet.modular-group-psl2z
+kind: definition
+status: rigorous
+title: 模群 PSL(2,Z) 及其在上半平面上的作用
+statement: |
+  设 SL(2,Z) 是行列式为 1 的 2×2 整数矩阵群。矩阵
+    γ = ( (a, b), (c, d) ),   a, b, c, d ∈ Z,   ad − bc = 1
+  按
+    τ ↦ γ·τ = (a τ + b) / (c τ + d)
+  作用在上半平面 H = {τ : Im τ > 0} 上。该作用保持 H，因为
+    Im(γ·τ) = Im τ / |c τ + d|².
+  由于 γ 与 −γ 给出**同一个**分式线性映射，有效作用的群是
+    PSL(2,Z) = SL(2,Z) / {±I},
+  称为**模群**。两个标准元素为
+    T = ( (1, 1), (0, 1) ) : τ ↦ τ + 1,      S = ( (0, −1), (1, 0) ) : τ ↦ −1/τ 。
+uses: []
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13), p.148（一般模变换 τ' = (aτ+b)/(cτ+d)，ad − bc = 1，模群 = SL(2,Z)/Z₂ ≡ PSL(2,Z)）；S、T 的矩阵形式见 (5.1.12), p.148"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70/#E71，L1（读到 schrans-2020
+      §5.2–§5.3 笔记 p.244–246；**未核对 Polchinski 原书**）。
+      T = ((1,1),(0,1))、S = ((0,−1),(1,0)) 的显式矩阵出自 schrans-2020 §5.3（核对源）。
+      Im(γ·τ) = Im τ/|cτ+d|² 是标准恒等式，抽取记录未记录它是否写在原书里，
+      本卡把它作为定义的自洽性说明列出（curator 补，不是来源逐字）。
+tags: [worldsheet, torus, modular-group, psl2z, moduli]
+notes: |
+  本卡只是群及其作用的定义，status = rigorous 指定义本身精确，**不**断言
+  (i) 它就是环面的等价关系（worldsheet.torus-modular-equivalence），
+  (ii) 它由 S、T 生成（worldsheet.modular-group-generated-by-s-and-t），
+  (iii) 它有基本域 F₀（worldsheet.modular-fundamental-domain）。三条都是命题，状态各自计算。
+author: curator-polchinski-ch5
+created: "2026-09-11"

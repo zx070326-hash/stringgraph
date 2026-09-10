@@ -1,0 +1,39 @@
+id: worldsheet.modular-group-generated-by-s-and-t--via-generator-relations
+target: worldsheet.modular-group-generated-by-s-and-t
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    note: 提供 PSL(2,Z)、S 与 T 的矩阵表示。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12)–(5.1.13), p.148"
+    note: |
+      抽取记录 #E70，L1（schrans-2020 §5.2–§5.3，笔记 p.244–246）。
+summary: |
+  在矩阵表示下 T = ((1,1),(0,1))、S = ((0,−1),(1,0))。直接相乘给
+    S² = ((−1,0),(0,−1)) = −I ≡ I  (在 PSL(2,Z) 中)，
+    ST = ((0,−1),(1,1)),   (ST)³ = −I ≡ I。
+  生成性在原书是**断言**：抽取记录只记下「生成变换为 T 与 S」，没有记录任何证明；
+  schrans-2020 的路线（先 X : τ → τ/(1+τ)，再由 T^{-1} X T^{-1} 得到 S）说明的是
+  「S 可以由别的自然生成元凑出」，不是「S、T 生成整个 PSL(2,Z)」的证明。
+gaps:
+  - |
+    **(1) 生成性没有证明**。本书只断言 S、T 是「生成变换」。标准证明（对 |c| 作辗转相除归纳）
+    既不在来源里，也不在本图里。这是本推导不能高于 physical-argument 的主要理由。
+  - |
+    **(2) 两条关系的出处未核实**：抽取记录 §7 明确列出「(5.1.12) 是否含 S²=1、(ST)³=1
+    未核实」——它们可能是 schrans-2020 自补的。本图**不得**声称这两条关系有原书出处。
+  - |
+    (2) 的矩阵验算本身是有限步初等计算，但**没有 reviewer 独立复核记录**，
+    故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款不能标 rigorous。
+  - |
+    **来源强度**：式号只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）。
+notes: |
+  升级路径有二，且可分别进行：
+  (a) 关系 S² = (ST)³ = 1：reviewer 复核上面两个矩阵乘法即可升到 rigorous
+      （但仍须先解决 gap (2) 的出处问题，否则陈述失去来源）；
+  (b) 生成性：需要挂数学来源（Serre, *A Course in Arithmetic*, Ch. VII）并登记到 sources.bib。
+  两者强度不同，若要分别记账应把本命题拆成两张卡。
+author: curator-polchinski-ch5
+created: "2026-09-11"

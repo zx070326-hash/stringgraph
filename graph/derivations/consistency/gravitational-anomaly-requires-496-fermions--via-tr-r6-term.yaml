@@ -1,0 +1,44 @@
+id: consistency.gravitational-anomaly-requires-496-fermions--via-tr-r6-term
+target: consistency.gravitational-anomaly-requires-496-fermions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.gravitational-anomaly-polynomial-d10
+    note: |
+      提供 (20) 及其 tr R⁶ 项的系数 −(n − 496)/7560。这条边在来源处逐字可查：
+      GS 就是从 (20) 的最后一项读出 496 的。
+  - id: consistency.descent-forms-chern-simons
+    note: |
+      GS 说该项对应「an anomaly of the form ∫ω¹_{10L}」，用的正是本卡的下降形式记号
+      （洛伦兹一路，n = 5）。
+  - id: conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(20) 下方逐字段落（「The last term in eq. (20) corresponds to an anomaly of the form ∫ω¹_{10L}, which cannot be cancelled by adding local terms to the action. Therefore 496 left-handed spin 1/2 fields are needed…」）"
+    note: L1。抽取记录 E13。
+summary: |
+  两步，其中只有第二步是算术：
+
+  **第一步（物理判断，GS 的断言）**：(20) 的第三项 tr R⁶ 是**单迹的六阶**不变量，
+  它对应的反常形如 ∫ω¹_{10L}，**不能**由给作用量添加局域项来抵消。
+  与之对照，前两项（(tr R²)³ 与 tr R² tr R⁴）是**可分解**的，可以写成全微分并配上 B 的非平凡
+  变换（(9c) 的 tr(ω dΘ) 那一项）由反项 S₂ 抵消。
+  **GS 没有给出「何时可抵消」的判据**，本图也没有。
+
+  **第二步（算术）**：既然该项必须自己为零，而其系数是 −(n − 496)/7560，
+  就要求 n − 496 = 0，即 n = 496。
+
+  **与规范一路的平行**：纯规范一路的同一逻辑给出 tr F⁶ 的系数 N + 32l 必须为零
+  （math.tr-f6-coefficient-vanishing），那里 GS 的措辞也一样：
+  「The first term in eq. (12c) corresponds to anomalies that cannot be cancelled by the addition
+  of local interactions to the effective action.」两处共用同一个未证明的判据。
+gaps:
+  - "★ 「单迹六阶项对应的反常不能由局域反项抵消」是 GS 的断言，**全文无证明、无引用**；本图无独立来源。这是本节点（以及 math.tr-f6-coefficient-vanishing 的物理读法）的核心缺口。"
+  - "系数 −(n − 496)/7560 本身来自未取得的 alvarez-gaume-witten-1984（见依赖节点的 gaps）。"
+  - "「n = 规范群维数」这一步（无质量费米子在伴随表示）在 GS 只有一句「which only depends on the dimension of the gauge group」，本图未单建节点。"
+  - "dim SO(32) = dim(E₈ × E₈) = 496 这条算术本图未建节点（抽取记录 §5.4 候选 A4：Mathlib 无 dim E₈ = 248）。"
+notes: |
+  措辞纪律：本推导与目标节点都**不**说「496 使引力反常为零」。n = 496 只让 tr R⁶ 项消失；
+  剩下两项由 S₂ 抵消。抽取记录 E13 备注专门警告过这个易误引点。
+author: curator
+created: "2026-09-11"

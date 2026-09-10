@@ -1,0 +1,106 @@
+id: worldsheet.negative-norm-physical-state-above-26
+kind: proposition
+title: D > 26、截距 a = 1 时旧协变物理态空间在非零动量上含负模态（显式 level-2 见证）
+statement: |
+  设 K 是有序域（Lean 侧写作 [Field K] [LinearOrder K] [IsStrictOrderedRing K]；ℚ、ℝ 均满足），
+  D > 26，η = mostly-plus 的 Minkowski 对角度规 diag(−1, +1, …, +1)（conv.metric-mostly-plus），
+  截距 a = 1（conv.intercept-sign-a，物理态条件写作 (L_0 − 1)|ψ⟩ = 0；Polchinski 的 A = −1）。
+
+  记号沿用固定动量扇区的代数 Fock 空间：F = F(D, K) 如 worldsheet.bosonic-fock-space，
+  零模参数 a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge），
+  L_n 如 worldsheet.virasoro-generators-free-boson，
+  ⟨·,·⟩ 如 worldsheet.fock-indefinite-form，
+  H_phys(α_0) 如 worldsheet.old-covariant-physical-states（该动量扇区上的物理态子空间）。
+  记 s := α_0·α_0 = Σ_μ η^{μμ} a^μ a^μ = 2α' k²。
+
+  **(1) 质量壳上的动量存在。** 只要 D ≥ 2（D > 26 蕴含之），就存在零模参数 α_0 使
+      s = α_0·α_0 = −2，即 α' k² = −1——这正是截距 a = 1 处 level 2 的质量壳（α'k² + 2 = a）。
+      （在 K = ℚ 上需要**两个**非零分量：一个类时、一个类空，例如
+       a^0 = 3/2、a^1 = 1/2 给 −(3/2)² + (1/2)² = −2；单个分量的 α'k² = −1 在 ℚ 上无解。）
+
+  **(2) 显式负模物理态。** 对每个这样的 α_0，取第二能级标量态
+      ψ₂ = [ α_{−1}·α_{−1} + c₂ (α_0·α_{−2}) + c₃ (α_0·α_{−1})² ] |k⟩,
+      c₂ = (D − 1)/5,   c₃ = (D + 4)/10
+      （即 worldsheet.ocq-level-two-scalar-norm-closed-form 第 (6) 条的态）。则
+        ψ₂ ∈ H_phys(α_0)      且      ⟨ψ₂, ψ₂⟩ = −2 (D − 26)(D − 1)/25 < 0，
+      负号来自 D > 26（有序域上 (D − 26)(D − 1) > 0）。
+
+  **(3) 结论。** 存在零模参数 α_0 与 ψ ∈ H_phys(α_0) 使 ⟨ψ, ψ⟩ < 0。
+      即：**D > 26、a = 1 时旧协变物理态空间上的 Fock 型不是半正定的**。
+
+  **(4) 该见证的动量非零。** 由 (1) 的 α_0·α_0 = −2 ≠ 0 立得 α_0 ≠ 0，即 k ≠ 0。
+      因此本命题给出的是**非零动量扇区**上的负模态，而不是 p = 0 处那个对任何 D
+      （包括 D = 26）都存在的平凡负模态 α^0_{−1}|0;0⟩。
+      （α_0 ≠ 0 是 Lean 声明结论的一部分：`b ≠ 0`。）
+
+  【本命题**不**断言什么】
+  (a) **不**断言 D ≤ 26 时半正定（那是无鬼定理，worldsheet.no-ghost-theorem-v4 第 (1) 条）。
+  (b) **不**断言 a ≠ 1 时也有负模态。文献中流传的更强形式「D > 26 时对任意 a 均有负模态」
+      在本图中没有可核实来源（见 worldsheet.no-ghost-theorem-v4 的 gaps）。
+  (c) **不**断言这是「level 2 标量物理态」的模：ψ₂ 张成 level 2 物理态的小群不变部分这一点
+      未形式化，见依赖节点 worldsheet.ocq-level-two-scalar-norm-closed-form 的边界 (a)。
+      对本命题而言无关紧要——一个负模态就够。
+  (d) **不**给出所有负模态，不给出负特征值的个数，不做能级 N ≥ 3 的分析。
+  (e) 与整个无鬼定理形式化岛一样：**逐动量扇区、代数版（无位置算符 x^μ、无完化）、对角 η、
+      R-双线性型而非 Hermitian 半双线性型**。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg'
+  lean_file: StringFormal/NoGhost/LevelTwo.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg（第 (3) 条）；另有 Fock.exists_zeroModeSq_eq_neg_two（第 (1) 条）、Fock.levelTwoScalar_intercept_one_mem_physSubmodule 与 Fock.pairing_levelTwoScalar_intercept_one（第 (2) 条）；文件末尾另有 D = 27、K = ℚ 的具体 example"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 ea303c5，合并进 main 的提交 c32f026。
+      全文 grep `sorry` 零命中。**curator 未自行重跑 `lake build`，也未跑
+      `uv run stringgraph check-axioms`**；formal/TODO.md 的 `negative-norm-above-26` 条目
+      没有逐字登记「公理只有标准三条」，见推导 gaps。
+  - ref: brower-thorn-1971
+    loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
+    note: |
+      **文献侧的候选归属，不是本命题的来源**：Goddard 2008 把「D > 26 时物理态中出现鬼」
+      归给 Brower–Thorn 1971（其 ref [29]），但该文摘要只说 leading nine trajectories，
+      没有出现 D > 26 或任何维数条件；正文未获取。二手归属与一手摘要的张力如实登记，
+      不裁决。见 literature/extractions/brst-cohomology-sources.md §3.2。
+      本命题的证明**不依赖**这条来源，它是本仓库内的独立构造。
+  - ref: polchinski-1998-v1
+    loc: "§4.1 末（p.124–125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E58（页码已核实，原文措辞未核实）。
+      Polchinski 不给 D > 26 的显式负模态构造。经 conv.intercept-sign-a 换算 A = −1 ↔ a = 1。
+tags: [bosonic-string, unitarity, critical-dimension, old-covariant, no-ghost, formalized]
+notes: |
+  【本卡与 worldsheet.no-ghost-theorem-v4 第 (2) 条的关系】v4 的第 (2) 条是
+  「D > 26 ⟹ 存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0（至少在 a = 1 时）」。
+  本卡就是那一条的**机器验证见证**，并已加为
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的依赖（非 inferred）。
+  三点必须讲清，以免被误读为「无鬼定理已形式化」：
+  - **本卡不是 v4**。v4 还有第 (1) 条（D = 26 的半正定与逐塔等距同构），那一条要 DDF 张成定理，
+    Lean 侧完全未做（formal/TODO.md 的 `ddf-operators`、`ddf-spans`）。
+  - **一条推导须支撑整条目标陈述**，所以不能给 v4 单挂一条「只证第 (2) 条」的 --via-lean 推导；
+    正确做法就是本卡这样：把第 (2) 条立成独立陈述，再作为依赖接进 v4 的现有推导。
+    这与 worldsheet.no-ghost-theorem-subcritical（LZ 1991）的处理方式相同。
+  - **v4 的 effective 不因本卡上升**：它的瓶颈是两条 DDF 对易关系与 ddf-operators-adjoint
+    （均 physical-argument），与第 (2) 条无关。
+  - Lean 的 `physSubmodule η a a₀` 是**固定动量的代数 Fock 空间**上的物理态子空间，
+    与 v4 记号段里的 H_phys(p)（建在动量本征态 |0;p⟩ 上的 F(p) 的子空间）设定一致；
+    差别只在 Lean 侧没有位置算符 x^μ 与对 p 的直积分（无零模完化），见边界 (e)。
+
+  【formalizer 的观察：ℚ 上必须用两个分量】第 (1) 条的动量在 Lean 里由
+  `Fock.exists_zeroModeSq_eq_neg_two` 给出，显式取 a^0 = 3/2、a^1 = 1/2。
+  **单分量不行**：α'k² = −1 要求 −(a^0)² = −2，即 (a^0)² = 2，在 ℚ 上无解。
+  所以这条见证需要 D ≥ 2（一个类时方向加一个类空方向）与除法（域）。
+  D > 26 自然蕴含 D ≥ 2，但这一点在把本卡推广到别的基环时要紧：
+  在一般有序**环**上第 (1) 条可能失败（例如 ℤ 上 −x² + y² = −2 无解）。
+
+  【查重】`uv run stringgraph search negative-norm / ghost / level-two` 于 2026-09-11 未找到
+  承载「D > 26 显式负模物理态」的既有节点：worldsheet.no-ghost-theorem-v2/v3/v4 把它作为
+  整条定理的第 (2) 条，worldsheet.ocq-level-two-scalar-norm 只给一般 (D, a) 的模的闭式
+  而不作存在性断言，worldsheet.fock-indefinite-form 的负模态在**全 Fock 空间**上（不是物理态）。
+  本卡与三者都不重复：它断言的是**物理态子空间**上存在负模态，且带 D > 26、a = 1 的量词。
+author: curator
+created: "2026-09-11"

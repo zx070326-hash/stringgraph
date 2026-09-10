@@ -123,7 +123,7 @@ notes: |
   文献侧只有一句无证明的断言。故 physical-argument。
   相较之下第 (2) 条**单独看**确实是有限步初等计算（自由振子 Gram 矩阵的标准递推），
   但它以第 (1) 条与 worldsheet.ddf-transverse-oscillator-algebra（physical-argument）为输入，
-  故整卡不高于 physical-argument；未来若第 (1) 条升级，(2) 可考虑拆出单独立卡。
+  故整卡不高于 physical-argument；**(2) 已拆出单独立卡**，见下面【2026-09-11（四）】。
 
   【升级路径】
   (i) 走 Lean：需先在 `formal/StringFormal/NoGhost/VertexOperator.lean` 上证
@@ -143,5 +143,59 @@ notes: |
   该推导的有效状态在拆卡后已是 physical-argument
   （被 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra 拉低），
   故加入本依赖**不再进一步下降**。
+
+  【2026-09-11（四）：第 (2) 条已拆出 worldsheet.transverse-ddf-fock-gram-matrix（lead 裁决）】
+  （curator。**本卡不换代、statement 一字未动、id 不变**；只改本 notes 与上面【为什么不是 rigorous】
+  末句的一处措辞（「未来……可考虑拆」→「已拆」）。）
+  新卡把本卡第 (2) 条重写成一条**条件命题**：四条输入
+    (H1) [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}；
+    (H2) ⟨A^i_n v, w⟩ = ⟨v, A^i_{−n} w⟩（即本卡的 (1)）；
+    (H3) A^i_n|0;k⟩ = 0 (n > 0)；
+    (H4) ⟨|0;k⟩,|0;k⟩⟩ = 1
+  全部写成**显式假设**，结论是 ⟨{d},{e}⟩ = δ_{d,e} ∏ n^{d(i,n)} d(i,n)!（任意交换环）与
+  有序域上的正定。它的推导（--via-oscillator-recursion）把递推的归纳记账逐步写全，
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款标 rigorous（reviewer 复核待补，
+  该推导 notes 留有 `reviewer-verified: <pending>` 与三项复核清单）。
+
+  **为什么不必等本卡 (1) 升级**：新卡是条件命题，它的严格程度**与 (1) 是否成立无关**——
+  (1) 在那里只是前件 (H2)。本卡 (2) 之所以只能是 physical-argument，
+  是因为本卡把 (1) 当**已证事实**用；新卡把它当**假设**用，于是那步蕴含本身可以是 rigorous。
+  两张卡说的不是同一件事，这正是拆卡的全部收益。
+
+  **新卡不改变任何下游的有效状态**：它 depends_on 本卡与
+  worldsheet.ddf-transverse-oscillator-algebra（两者 effective 均为 physical-argument），
+  故新卡的 effective 仍是 physical-argument。
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (1b) 步现在同时依赖本卡（伴随关系本身）
+  与新卡（Gram 矩阵正定那一步），其 effective 不变。
+
+  **本卡第 (2) 条的陈述文本保留原位**，作为「本卡 (1) 的推论」读；
+  任何要单独引用 Gram 矩阵记账的下游，应引 worldsheet.transverse-ddf-fock-gram-matrix。
+
+  【2026-09-11（四）：「径向共轭规则」现有承载节点（curator；**只加本段 notes，
+  陈述文本未动**；推导 --via-vertex-operator-adjoint 已加一条非 inferred 依赖）】
+  本卡 notes【与 worldsheet.virasoro-generators-adjoint 的关系】里写的那条「同一机制」
+  （「一个由厄米场构成的权 h 场，其模在径向量子化的伴随下指标反射，J_m† = J_{−m}」）
+  现由 worldsheet.radial-hermitian-conjugation 承载（definition，own rigorous /
+  effective physical-argument），其 (5) 把本卡列为五个实例之一
+  （h = 1 的 ∂X^i e^{i n k_0·X} → (A^i_n)† = A^i_{−n}）。
+  同时本卡推导第 1 步用到的「被积量是权 1 主场」里「指数因子权为 0」那一半
+  现由 worldsheet.exponential-vertex-operator-weight 承载（本卡推导经
+  worldsheet.ddf-commute-with-virasoro 与 worldsheet.vertex-operator-adjoint
+  间接依赖它，未另加边）。
+  **本卡 status 定级不变，仍是 physical-argument**：两张新卡自身的 effective 就是
+  physical-argument；本卡【为什么不是 rigorous】所说的关键障碍（顶点算子伴随要做
+  E_+E_- 重排序）**未变**；升级路径 (i)(ii) 与【下游】一段也不变。
+
+  【2026-09-11 下午（curator，对接 TowerPairing.lean）】本卡 (1) 用到**跨层配对**
+  （A^i_n 把第 N 层送到第 N+n 层，被配对的两个向量在不同动量层），而上面
+  【承载断言的空间】一段所说的「不同层（动量不同）互相正交」是
+  worldsheet.momentum-tower-fock-space (2) 的**约定式定义**：它现已形式化
+  （那张卡 2026-09-11 下午升为 formalized，lean_decl = `Fock.towerPairing`），
+  但在 Lean 里是 `towerPairing`（各层配对的单位权求和）的**定义**及其展开
+  `towerPairing_single_single_of_ne`，**不是物理证明**，也不是 δ^D(p − p′) 正交性的推导。
+  故本卡 (1) 与由它导出的 (2) 的 Gram 矩阵仍以这条约定为输入，而非结论。
+  Lean 侧 A^i_n 的伴随仍不可用（缺 `vertexOsc` / `towerVertex` 的伴随，即
+  worldsheet.vertex-operator-adjoint；TowerPairing.lean 文件头 Gaps 第 2 条），
+  故上面【升级路径】(i) 的内容不变。
 author: curator
 created: "2026-09-11"

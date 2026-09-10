@@ -1,0 +1,101 @@
+id: math.virasoro-anti-involution
+kind: definition
+status: formalized
+title: Virasoro 代数的反对合 σ：L_n ↦ L_{−n}、C ↦ C 是李代数反自同构且 σ² = id
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），Vir(R) 是 Virasoro 代数
+  （worldsheet.virasoro-algebra-v2；生成元 L_n (n ∈ Z) 与中心元 C，括号
+  [L_m, L_n] = (m − n) L_{m+n} + ((m³ − m)/12) δ_{m+n,0} C，[C, ·] = 0，
+  约定 conv.virasoro-standard）。
+
+  **定义**：σ = σ_R : Vir(R) → Vir(R) 是满足
+
+      σ(L_n) = L_{−n}   (n ∈ Z),      σ(C) = C
+
+  的 R-线性映射。它由这两条唯一确定：Witt 代数 W(R) 以 {ℓ_n : n ∈ Z} 为 R-基，
+  而 Vir(R) ≅ W(R) × R 是 R-模同构（worldsheet.virasoro-algebra-v2 的「结构」一段），
+  故 σ 就是「Witt 侧按 ℓ_n ↦ ℓ_{−n} 作用、中心侧取恒等」这个映射。
+
+  **(1) 对合**：σ ∘ σ = id_{Vir(R)}。特别地 σ 是 R-线性自同构（R-线性等价），σ^{−1} = σ。
+
+  **(2) 反自同构（anti-automorphism）**：对一切 X, Y ∈ Vir(R)
+
+      σ([X, Y]) = [σ(Y), σ(X)]。
+
+  等价地：σ 是李代数同构 Vir(R) → Vir(R)^op。
+
+  **(2) 为什么不是记号翻转**：在生成元上两边分别为
+
+      σ([L_m, L_n])      = (m − n) L_{−m−n} + ((m³ − m)/12) δ_{m+n,0} C,
+      [σ(L_n), σ(L_m)]   = [L_{−n}, L_{−m}] = (m − n) L_{−m−n}
+                            + (((−n)³ − (−n))/12) δ_{m+n,0} C.
+
+  第一项的符号由括号反序给出；中心项要用两件事才对上：2-上闭链 n ↦ (n³ − n)/12 是**奇函数**，
+  且 δ_{m+n,0} 的支撑上 m = −n，于是 ((−n)³ − (−n))/12 = (m³ − m)/12。
+  ⇒ σ 是反自同构这件事**用到了 Virasoro 中心项关于 n ↦ −n 的奇性**；
+  若把中心项换成一个偶的 2-上闭链，同一公式给出的 σ 就不再是反自同构。
+
+  【本节点明确**不**断言】
+  (a) σ 在泛包络代数 U(Vir) 上的延拓（那是一个反自同构 U(Vir) → U(Vir)），
+      也不断言三角分解 U(Vir) = U(vir₋) ⊗ U(vir₀) ⊗ U(vir₊) 或 Harish-Chandra
+      投影 U(Vir) → R 的存在。那些需要 PBW（math.pbw-theorem），本项目未形式化。
+  (b) 与 Hermite 共轭 L_n† = L_{−n} 的任何关系。σ 是 **R-线性**的（不是共轭线性的）：
+      在 R = C 上它对应双线性型的转置，不是 Hilbert 空间意义下的伴随。
+      物理侧的 L_n† = L_{−n} 是另一条陈述，见 worldsheet.virasoro-generators-adjoint。
+  (c) σ 在 Verma 模或任何表示上诱导的结构。由 σ 定义的逆变（Shapovalov）双线性型见
+      worldsheet.shapovalov-form-uniqueness 与 worldsheet.shapovalov-form-existence。
+  (d) σ 是 Vir(R) 的**唯一**反对合，或它与其他反对合的关系。
+uses: [worldsheet.virasoro-algebra-v2]
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.VirasoroAlgebra.antiInvolution_lie
+  lean_file: StringFormal/Virasoro/Shapovalov.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.VirasoroAlgebra.{antiInvolutionₗ, antiInvolutionₗ_lgen, antiInvolutionₗ_cgen, antiInvolutionₗ_comp_self, antiInvolutionₗ_involutive, antiInvolutionₗ_lie, antiInvolution, antiInvolution_apply, antiInvolution_lgen, antiInvolution_cgen, antiInvolution_lie, antiInvolution_involutive, antiInvolution_symm}；Witt 侧 StringFormal.Virasoro.WittAlgebra.{antiInvolutionₗ, antiInvolutionₗ_lgen, antiInvolutionₗ_comp_self, antiInvolutionₗ_involutive, antiInvolutionₗ_lie}；中心项的奇性 StringFormal.Virasoro.cocycleBilin_antiInvolution"
+    note: |
+      本仓库，形式化侧提交 1731c49（"formal: construct the Shapovalov form from a
+      sigma-twisted dual highest weight vector"），已由 lead 以 **b95a406**
+      （"merge: Shapovalov form on the Virasoro Verma module (formalizer)"）合入 main；
+      Lean 4 + Mathlib v4.33.1。文件头 Status 段自述「No `sorry`, no new axioms」，
+      formal/TODO.md 的 `shapovalov-form` 一条已勾选。
+      逐句对应：
+      - 定义 → `VirasoroAlgebra.antiInvolutionₗ`（经 `toProdₗ` 把 Witt 侧的
+        `(lgen R).constr R fun n => lgen R (-n)` 与中心侧的 `LinearMap.id` 并起来），
+        打包成 R-线性等价 `VirasoroAlgebra.antiInvolution`；
+        生成元上的取值 → `antiInvolution_lgen`（L_n ↦ L_{−n}）、`antiInvolution_cgen`（C ↦ C）；
+      - (1) 对合 → `antiInvolution_involutive`（并有 `antiInvolution_symm : σ⁻¹ = σ`）；
+      - (2) 反自同构 → `antiInvolution_lie`（本卡 formal.lean_decl），
+        其关键引理 `cocycleBilin_antiInvolution` 就是上面「中心项奇性」那一步。
+      **curator 未自行重跑 `lake build`**；依据是文件头自述、formal/TODO.md 的勾选，
+      以及 b95a406 已在 main 上。合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页；该处只用到由 σ 定义的 Gram 矩阵 M_{h,c}(k)，**没有给 σ 单独编号**）"
+    note: |
+      文献侧的对照，**不承载本卡的论证**。FF 在 §3.2 直接说由 M_{h,c}(k) 定义的二次型
+      «называется формой Шаповалова»（称为 Shapovalov 形式），反对合本身在那里是隐含的
+      记号约定，没有作为带编号的命题出现（L1 逐页核实，
+      literature/extractions/math-sources.md §34.2(b)）。
+      ⇒ 「σ 是反自同构」在文献里通常被当作显然的一句话，**不要去找一条并不存在的
+      「Theorem X.Y」**（与 math.verma-module-free-over-negative-part 的处理同一条纪律）。
+tags: [algebra, lie-algebra, virasoro, anti-involution, shapovalov, formalized, math-input]
+notes: |
+  【为什么立成 definition 而不是 proposition】本卡的主体是「σ 是什么」，(1)(2) 是这个定义的
+  **良定义性/结构性断言**，与 worldsheet.virasoro-algebra-v2 把「括号交错且满足 Jacobi」
+  「0 → R → Vir → W → 0 正合」写进定义卡是同一种处理。
+  按 docs/STATUS_LEVELS.md，definition 卡的 status 表示「有 Lean 声明逐句对应」，
+  这里 (1)(2) 都是 Shapovalov.lean 里具名且无 sorry 的定理，故标 formalized。
+  ⚠ 若日后 reviewer 认为 (2) 应独立成命题卡，正确的修法是新建 proposition 卡 +
+  `--via-lean` 推导，并给本卡写 superseded_by，而不是改本卡的 status。
+
+  【本卡为什么值得单独存在】Shapovalov 型的两张卡（uniqueness / existence）都以 σ 为
+  唯一的代数输入；把 σ 抽出来立卡，使「逆变性」这个概念在图里有一个可指的定义点，
+  也使「中心项奇性 ⇒ σ 是反自同构」这条**容易被当成显然、实际不显然**的事实被记录下来。
+
+  【记号】文献里 σ 也写作 ω、τ 或 x ↦ x^t。本卡统一写 σ。
+  Kytölä 的 VirasoroProject（virasoro-lean-2025）**没有**这个对象
+  （researcher 2026-09-11 逐文件核实，literature/extractions/math-sources.md §34.7：
+  21 个 .lean 文件里没有 ShapovalovForm.lean，arXiv:2510.21741 的 Table 1 也没有逆变形式）。
+  ⇒ 本卡与 Shapovalov 两卡是本项目相对该项目的**净增量**。
+author: curator
+created: "2026-09-11"

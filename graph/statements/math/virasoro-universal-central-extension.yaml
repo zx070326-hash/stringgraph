@@ -125,6 +125,47 @@ notes: |
   (V) 在任何 Lean 项目中都**没有**形式化记录（researcher 2026-09-11 查了该仓库文件清单：
   有 WittAlgebraCohomology.lean，没有任何 Virasoro 上同调/完美性/万有性文件）。
   这个不对称是刻意记在这里的。
+  ⚠ **2026-09-11 下午部分过期**：本图自己的 formal/ 现在有 (1) 了，见下一段。
+
+  【陈述 (1) 已形式化（2026-09-11 下午，curator）；本卡 status 与推导不改】
+  formalizer 于 formal/StringFormal/Virasoro/WittPerfect.lean（分支 agent/formalizer/witt-perfect，
+  已由 lead 以 20cc08f 合入 main，无 sorry，公理仅标准三条）证了本卡陈述 (1) 的全部内容：
+    · `StringFormal.Virasoro.VirasoroAlgebra.isPerfect`：
+      ⁅(⊤ : LieIdeal R (VirasoroAlgebra R)), ⊤⁆ = ⊤，对交换 ℚ-代数 R（比 char 0 的域更一般）；
+    · `StringFormal.Virasoro.VirasoroAlgebra.cgen_eq`：
+      C = 2 ⁅L_2, L_{−2}⁆ − 4 ⁅L_1, L_{−1}⁆，
+      即本卡 (1) 里「非平凡的一步是中心元也落在导出代数里」那一句的机器见证
+      （用 ⁅L_2, L_{−2}⁆ = 4 L_0 + C/2 与 ⁅L_1, L_{−1}⁆ = 2 L_0；后者的中心项 (1³−1)/12 = 0，
+      Lean 里是 `VirasoroAlgebra.two_smul_lgen_zero_eq`）。
+      注意 Lean 的指标次序与本卡陈述括号里的说明一致：⁅L_2, L_{−2}⁆ = 4 L_0 + (1/2) C。
+    · 非零模的一般见证 `VirasoroAlgebra.two_smul_lgen_eq (hn : n ≠ 0)`：
+      2 L_n = ⁅L_{n+2}, L_{−2}⁆ − ⁅L_{n+1}, L_{−1}⁆（两个括号的模态和都不为零，故无中心项）。
+  **本卡不填 formal.lean_decl、status 与推导一字不改**，因为本卡的 (2)（H^1 = H^2 = 0）与
+  (3)（万有性）**都没有**形式化：(1) ⟹ H^1 = 0 还要那条上同调字典，H^2 = 0 与万有性判据
+  完全在 Lean 之外。按 docs/STATUS_LEVELS.md，一张陈述里含未形式化子句的卡不得标 formalized；
+  故本卡陈述【本节点不断言】(e)「任何形式化。本项目 formal/ 中没有这条结论」应读作：
+  **整条结论（(1)+(2)+(3)）没有**，其中 (1) 已有。**陈述文本按原则 1 不改**，这里作订正记录。
+  若将来要让 (1) 以 formalized 报出，正确做法是把 (1) 单列成卡
+  （做法参照 math.witt-algebra-perfect → math.witt-algebra-derived-algebra 的拆法），
+  交 lead 裁决后由 curator 执行；本次未做（不在本轮任务范围）。
+
+  【2026-09-11（四）：上一段说的拆卡已执行——**(1) 已形式化，(2)(3) 未**（curator，lead 裁决）】
+  本卡陈述的 (1) 现已单列为 **math.virasoro-algebra-perfect**（proposition，
+  推导 math.virasoro-algebra-perfect--via-lean，**status formalized**，
+  lean_decl `StringFormal.Virasoro.VirasoroAlgebra.isPerfect`，lean_file
+  `StringFormal/Virasoro/WittPerfect.lean`）。那张卡逐条写出本卡 (1) 的四件事：
+  非零模的一致见证 2L_n = [L_{n+2}, L_{−2}] − [L_{n+1}, L_{−1}]（n ≠ 0）、
+  零模 2L_0 = [L_1, L_{−1}]、**中心元的显式见证 C = 2[L_2, L_{−2}] − 4[L_1, L_{−1}]**
+  （`VirasoroAlgebra.cgen_eq`，即本卡 (1) 括号里 [L_2, L_{−2}] = 4L_0 + (1/2)C 那句的机器见证）、
+  以及完美性本身；基环是任意交换 **ℚ-代数**，比本卡限定的「特征零的域」更一般。
+  本卡的推导 --via-feldvoss-siciliano 已加一条 depends_on 指向它。
+
+  **本卡不换代、statement 一字未动、status 与推导不改、仍不填 formal.lean_decl。**
+  理由与上一段相同：本卡的 (2)（H¹ = H² = 0）与 (3)（万有性）**都没有**形式化，
+  按 docs/STATUS_LEVELS.md，一张陈述里含未形式化子句的卡不得标 formalized。
+  本卡承载的仍是完整的三段结论，其中只有 (1) 那一段在别处以 formalized 报出。
+  一句话读法：**(1) 已形式化，(2)(3) 未**。
+  陈述【本节点不断言】(e) 的读法照上一段不变。
 
   【本卡不采信的来源（researcher 的三条禁令，math-sources.md §31.4）】
   1. feldvoss-siciliano-2025 **Lemma 2.4** —— char p > 3 的受限 Virasoro 代数，不是同一对象。

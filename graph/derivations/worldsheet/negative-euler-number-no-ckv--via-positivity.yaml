@@ -1,0 +1,56 @@
+id: worldsheet.negative-euler-number-no-ckv--via-positivity
+target: worldsheet.negative-euler-number-no-ckv
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.conformal-killing-equation
+    note: 提供被求解的方程 (P₁δσ)_ab = 0。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁ 的分量表达式，恒等式的左端由它展开。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian，体积元 (−γ)^{1/2}），本推导在欧氏世界面
+      （conv.worldsheet-euclidean，体积元 g^{1/2}）。按 conv.worldsheet-euclidean 的 Wick 旋转
+      字典 (a)：(−γ)^{1/2} ↔ g^{1/2}，故 χ = (1/4π)∫d²σ (−γ)^{1/2} R + 边界项
+      在欧氏写法下逐字变为 χ = (1/4π)∫d²σ g^{1/2} R + 边界项，Ricci 标量 R 的定义与号差无关。
+      继承 conv.worldsheet-euclidean notes 登记的缺口（Wick 旋转在路径积分层面本图无节点），
+      故跨号差的推导一律不高于 physical-argument。
+    note: 提供 χ = (1/4π)∫ g^{1/2} R + 边界项，用来把 χ 的符号翻译成 R 的符号。
+  - id: worldsheet.euler-number-weyl-invariance
+    convention_map: |
+      跨 family `worldsheet-signature`，换算同上一条（(−γ)^{1/2} ↔ g^{1/2}）。
+      Weyl 变换 g → e^{2ω}g 与曲率变换 R' = e^{−2ω}(R − 2∇²ω) 的形式在两种号差下逐字相同。
+    note: |
+      本推导要「用 Weyl 变换把 R 取成常数」，必须知道这一步不改变 χ，否则「χ < 0 ⇒ R < 0」
+      的推理在换了度规之后失效。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10), p.152；Euler 数与 Weyl 下曲率见 §1.2 的 (1.2.31)/(1.2.32)"
+    note: |
+      抽取记录 #E76，L1（schrans-2020 笔记 p.252）。
+summary: |
+  展开 (P₁δσ)_ab(P₁δσ)^{ab} 并分部积分（对易两个协变导数产生曲率项，二维用
+  R_abcd = ½(g_ac g_bd − g_ad g_bc)R 化为 R 乘 δσ²），得
+    ∫ g^{1/2}(P₁δσ)² = ∫ g^{1/2}( ½∇_aδσ_b∇^aδσ^b − ¼ R δσ_aδσ^a )。
+  用 Weyl 变换把 R 取成常数（χ 不变），χ < 0 ⇒ R < 0 ⇒ 右端被积函数逐点非负、
+  且为零当且仅当 δσ = 0。左端为零（CKV 方程）故 δσ ≡ 0，即 κ = 0。
+gaps:
+  - |
+    **「用 Weyl 变换把 R 取成常数」在来源与本图中都没有论证**。这是常曲率度规存在性
+    （单值化定理 / Yamabe 型结果）的内容，需要解 2∇²ω = R − R_const e^{2ω}。
+    这是本推导最实质的缺口。
+  - |
+    **恒等式 (5.2.10) 的推导过程本图无核实**：抽取记录只记下等式两端，没有中间步骤；
+    上面 summary 的「对易导数产生曲率项」是 curator 补的标准推理，不是来源逐字。
+    因子 ½ 与 ¼ 的具体值本图**未独立验证**。
+  - |
+    **有边世界面的边界项未处理**：分部积分在带边曲面上留下边界项，Euler 数也带测地曲率项。
+    圆盘 χ = 1 > 0 不在本条适用范围（本条只管 χ < 0），但一般带边的 χ < 0 曲面
+    （如带边亏格 ≥ 1）需要边界条件，来源未给。
+  - |
+    有限步初等计算部分**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.2.10) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

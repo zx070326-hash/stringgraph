@@ -1,0 +1,31 @@
+id: worldsheet.modular-group-generated-by-s-and-t
+kind: proposition
+title: "模群由 S : τ ↦ −1/τ 与 T : τ ↦ τ + 1 生成，且 S² = 1、(ST)³ = 1"
+statement: |
+  在 PSL(2,Z)（worldsheet.modular-group-psl2z）中，记
+    T : τ ↦ τ + 1,     S : τ ↦ −1/τ 。
+  则
+  (1) S 与 T 生成 PSL(2,Z)；
+  (2) 它们满足关系 S² = 1 与 (ST)³ = 1（作为 PSL(2,Z) 的元素，即在相差 ±I 的意义下）。
+
+  ⚠ 本节点**不**断言 (1)(2) 是 PSL(2,Z) 的一个**表现**（presentation），
+  即不断言「S² 与 (ST)³ 生成全部关系」（那等价于 PSL(2,Z) ≅ Z/2 ∗ Z/3）。
+  抽取记录没有任何证据表明原书作了那个更强的断言。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（生成变换 T : τ → τ+1 与 S : τ → −1/τ）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70，L1（读到 schrans-2020 §5.2，
+      笔记 p.244–245）。
+      ⚠ **抽取记录明确记为未核实的一点**：「S² = 1、(ST)³ = 1 这两条关系是否写在 Polchinski 的
+      (5.1.12) 里，还是 [S] 自己补的，未核实」（E70 备注，并见抽取记录 §7 的清单）。
+      [S] 的路线是先引入 X : τ → τ/(1+τ)，再由 T^{-1} X T^{-1} τ = −1/τ 换成 S，
+      然后给出这两条关系（[5.11]–[5.12]）。
+tags: [worldsheet, torus, modular-group, psl2z]
+notes: |
+  「PSL(2,Z) 由 S、T 生成」是一条真的（且经典的）数学定理，但**本书没有证它**，
+  本图也还没有挂任何数学来源。若日后要升级，标准来源是 Serre,
+  *A Course in Arithmetic*, Ch. VII, Thm 2（尚未登记到 literature/sources.bib，编号未核实）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

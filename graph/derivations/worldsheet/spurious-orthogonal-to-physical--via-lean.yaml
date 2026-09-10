@@ -18,8 +18,12 @@ depends_on:
     note: |
       提供目标陈述中的对象 S(k)（= S ∩ ker(L_0 − a)）与 N(k) = H_phys(k) ∩ S(k) 本身。
       2026-09-11 由 worldsheet.ocq-spurious-states 换代而来（那张卡已 superseded_by 本卡）。
-      **Lean 侧没有这个带质量壳的子模**，故该定义卡是 rigorous；
-      这是本推导 status: formalized 而目标节点有效状态为 rigorous 的**全部**原因，见 notes。
+      **已过期的旧记账（保留原文）**：「Lean 侧没有这个带质量壳的子模，故该定义卡是 rigorous；
+      这是本推导 status: formalized 而目标节点有效状态为 rigorous 的全部原因。」
+      **现状（2026-09-11 下午）**：SpuriousShell.lean（提交 4cc9f02）已给出该子模
+      `Fock.spuriousShell η a a₀ := spuriousSubmodule η a ⊓ ker (Lop η a 0 − a₀ • id)`，
+      那张定义卡已改 status: formalized 并填上 formal.lean_decl，本条天花板因此消失。
+      下面 gaps (ii) 里「限制到质量壳那一步不在 Lean 里」也已失效，见那里的补记。
   - id: worldsheet.old-covariant-physical-states
     inferred: false
     note: |
@@ -51,6 +55,28 @@ sources:
       文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
       **curator 未自行重跑 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
       以及 2c8b577 已由 lead 合并进 main。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/QuotientForm.lean :: StringFormal.NoGhost.Fock.{pairing_eq_zero_of_mem_nullSubmodule, pairing_eq_zero_of_mem_nullSubmodule', pairing_add_null_left, pairing_add_null_right, pairing_add_null, pairing_eq_of_sub_mem_nullSubmodule, nullInPhys, physPairing, nullInPhys_le_ker_physPairing, PhysQuot, quotientPairing, quotientPairing_mk, quotientPairing_comm, quotientPairing_mk_eq_zero_of_mem_nullSubmodule}"
+    note: |
+      本仓库，形式化提交 d1ec0fa（"formal: show the form on H_phys/H_null is well defined"），
+      合并提交 7e7c513。**这一条承载目标陈述 (2) 的后半**，即本推导原 gaps (i) 的缺口：
+        · 「加零态不改变内积」↔ **`Fock.pairing_add_null`**：ψ, φ ∈ H_phys、χ, χ' ∈ H_0 时
+          ⟨ψ+χ, φ+χ'⟩ = ⟨ψ, φ⟩；差式版 `Fock.pairing_eq_of_sub_mem_nullSubmodule`；
+        · 「Fock 内积在商上诱导良定义的形式」↔ `Fock.PhysQuot η a a₀`
+          （= physSubmodule ⧸ nullInPhys，`nullInPhys` 是 H_0 在 H_phys 内的像）上的
+          **`Fock.quotientPairing`**（两次 `Submodule.liftQ` 得到的 `LinearMap.BilinForm`），
+          「良定义」的机器形式是计算规则 **`Fock.quotientPairing_mk`**：⟨[ψ], [φ]⟩ = ⟨ψ, φ⟩；
+          配套 `quotientPairing_comm`（对称）与
+          **`Fock.quotientPairing_mk_eq_zero_of_mem_nullSubmodule`**（零态代表元给出零行）。
+      **量词字典（重要）**：Lean 商掉的是 H_phys 的根基
+      H_0 = physSubmodule ⊓ orthComplement physSubmodule，而目标陈述 (2) 商掉的是
+      N = H_phys ∩ S(k)。因 N ⊆ H_0（正是陈述 (2) 前半，已由
+      `spurious_inf_physSubmodule_le_nullSubmodule`（无壳）/ `nullStates_le_nullSubmodule`（在壳）
+      机器验证），Lean 的版本**蕴含**陈述所要求的那个：在更大的子模上良定义 ⟹ 在更小的子模上
+      良定义。这一步是子模成员的单调性，在 Lean 里没有单列引理。
+      **curator 未自行重跑 `lake build`**；依据是 formalizer 的总线报告（消息 577：
+      "lake build ok, 42 decls axiom-clean"）、formal/TODO.md 的 `quotient-form` 项
+      （其中「未做」逐字为非退化性与正定性），以及 7e7c513 已由 lead 合并进 main。
   - ref: polchinski-1998-v1
     loc: "§4.1，eq. (4.1.8)、(4.1.9)，p.122"
     note: |
@@ -58,7 +84,8 @@ sources:
       ⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0，在 (4.1.9) 断言加零态不改变内积。
       式号经 schrans-2020 目录核实，未核对原书。抽取记录 polchinski-1998-v1.md#E55。
 summary: |
-  机器检查的证明，全部在 formal/StringFormal/NoGhost/PhysicalStates.lean 的 `Null` 一节。
+  机器检查的证明：陈述 (1) 与 (2) 前半在 formal/StringFormal/NoGhost/PhysicalStates.lean 的
+  `Null` 一节，(2) 后半（商上诱导形式良定义）在 formal/StringFormal/NoGhost/QuotientForm.lean。
   与走文献路线的 worldsheet.spurious-orthogonal-to-physical--via-virasoro-adjoint 是
   **同一命题的两条独立推导**：那条自行论证 L_n† = L_{−n}，本条把它作为已形式化的输入取用。
 
@@ -81,12 +108,29 @@ summary: |
   **量词与陈述的对照**：Lean 的 `spuriousSubmodule` 不带质量壳条件，故它证的是
   比陈述 (1) **更强**的版本（对所有 L_{−n} 的像，不只是在壳的那些）；
   陈述 (1) 是它在 ker(L_0 − a) 上的限制。同理 (2) 前半也随之更强。
+
+  **陈述 (2) 后半（加零态不改变内积、商上诱导良定义的形式）** = QuotientForm.lean
+  （2026-09-11 下午补齐，原 gaps (i)）：`Fock.pairing_add_null` 把 ⟨ψ+χ, φ+χ'⟩ 用 `map_add`
+  拆开，含 χ 或 χ' 的交叉项由 `pairing_eq_zero_of_mem_nullSubmodule`（零态 ⊥ 物理态，即上面 (1)
+  的内容）消去；**关键的一步是 ⟨χ, χ'⟩ 这一项**——要消掉它必须先知道 ψ+χ 仍是物理态，
+  用的是 `nullSubmodule_le_physSubmodule`（零态本身是物理态）。
+  随后 `Fock.quotientPairing`（对两个变量各做一次 `Submodule.liftQ`）给出 H_phys/H_0 上的
+  `LinearMap.BilinForm`，而 `quotientPairing_mk`（⟨[ψ],[φ]⟩ = ⟨ψ,φ⟩）正是"良定义"这句话的
+  机器形式：诱导型的值与代表元的选取无关。Lean 商掉的是根基 H_0，陈述商掉的是 N ⊆ H_0，
+  故 Lean 的版本蕴含陈述要求的那个（量词字典见该条 sources）。
 gaps:
   - |
-    (i) **陈述 (2) 的后半在 Lean 里没有具名引理**：
-    ⟨ψ + χ | ψ' + χ'⟩ = ⟨ψ | ψ'⟩（χ, χ' ∈ N）以及"Fock 内积在 H_phys/N 上诱导良定义的形式"
-    未被打包成声明。它由 `pairing` 的双线性与 `mem_nullSubmodule` 一步展开即得，
-    但**本推导不能声称它已被机器检查**。若要让 formalized 覆盖整条陈述，需补这条引理。
+    (i) **已关闭（2026-09-11 下午）。** 原文记「陈述 (2) 的后半在 Lean 里没有具名引理：
+    ⟨ψ + χ | ψ' + χ'⟩ = ⟨ψ | ψ'⟩（χ, χ' ∈ N）以及『Fock 内积在 H_phys/N 上诱导良定义的形式』
+    未被打包成声明……本推导不能声称它已被机器检查」。
+    formalizer 在提交 d1ec0fa（合并 7e7c513）新建 formal/StringFormal/NoGhost/QuotientForm.lean，
+    把这两句都打包成了具名声明：`Fock.pairing_add_null`、
+    `Fock.pairing_eq_of_sub_mem_nullSubmodule`、`Fock.quotientPairing` 与计算规则
+    `Fock.quotientPairing_mk`（另有 `Fock.quotientPairing_mk_eq_zero_of_mem_nullSubmodule`
+    与 `Fock.quotientPairing_comm`）。逐条对照见新增的第二条 sources 与 summary 末段。
+    残留两点**不属于本条缺口**：陈述 (2) 末句的「厄米形式」在 Lean 侧仍只是 R-双线性型
+    （见下面 gaps (iii)）；商形式的**非退化性** Lean 未证，而陈述 (2) 只要求「良定义」、
+    不要求非退化（记账见 notes 末段）。
   - |
     (ii) **Lean 的 spuriousSubmodule 不带质量壳条件**（见上）。方向对本推导有利
     （证的更强），但意味着带质量壳的定义卡 worldsheet.ocq-spurious-states-v2
@@ -97,6 +141,14 @@ gaps:
     本推导改为经后者取用 Lean 结论，再限制到质量壳。目标陈述本身仍带质量壳，故本条缺口
     对**本**推导仍在（限制那一步不在 Lean 里），只是不再阻塞下游：
     需要无壳版本的下游（worldsheet.physical-states-level-one--via-lean）现直接引新卡。
+    **2026-09-11 下午补记：本条已失效。** SpuriousShell.lean 既给了带质量壳的子模
+    `Fock.spuriousShell`，也给了「限制」这一步的具名引理：
+    `Fock.spuriousShell_le_spuriousSubmodule`（S(k) ⊆ S）与
+    `Fock.spuriousShell_le_orthComplement`（S(k) ⊥ H_phys，即目标陈述 (1)），
+    以及 `Fock.nullStates_le_nullSubmodule`（目标陈述 (2) 前半）。
+    本推导的 depends_on 与 summary 本次**未重接**（仍走无壳卡再限制），因为那条路径与 summary
+    逐字一致；若 reviewer 希望直接调用 `spuriousShell_le_orthComplement`，正确做法是新建一条
+    `--via-lean-onshell` 推导，而不是改本条的 summary。
   - |
     (iii) **双线性型而非 Hermitian 形式**（继承 worldsheet.virasoro-generators-adjoint--via-lean
     的 gaps (i)、worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
@@ -109,16 +161,53 @@ gaps:
     worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii)。没有位置算符 x^μ，没有对 k 的直积分，
     故"固定动量扇区 F(k)"在 Lean 侧是全局参数而非分解指标。
 notes: |
+  【已升回 formalized（2026-09-11 下午，curator）】原【降级记 lead 2026-09-11，依
+  reviewer-batch5b】逐字为：「status formalized → rigorous：本推导 gaps (i) 自认目标陈述 (2) 后半
+  （加零模态不改内积、H_phys/N 上诱导形式良定义）无 Lean 引理；一条 formalized 推导须逐句覆盖
+  目标。formalizer 补该引理后可升回。」**降级注写明的升回条件已满足**：formalizer 在 d1ec0fa
+  （合并 7e7c513）的 QuotientForm.lean 给出 `Fock.pairing_add_null`（加零态不改内积）与
+  `Fock.quotientPairing` + `Fock.quotientPairing_mk`（商上诱导形式良定义），
+  故本推导 status 由 rigorous 升回 formalized，原 gaps (i) 已标为关闭。
+
+  【升回后仍需记在案的两条限定（curator）】
+    · `Fock.pairing_add_null` 的假设里 **χ, χ' ∈ H_0 与「ψ+χ ∈ H_phys」都是必需的，不是装饰**：
+      消掉 ⟨χ, χ'⟩ 这一交叉项用的是 `nullSubmodule_le_physSubmodule`（零态本身是物理态），
+      QuotientForm.lean 文件头逐字写着「Without that inclusion the cross term ⟨χ, χ'⟩ would not
+      obviously vanish」。图上这条包含是 H_0 = H_phys ⊓ H_phys^⊥ 定义的直接推论
+      （由 worldsheet.old-covariant-physical-states 提供），不是独立命题，故本次未加新边。
+    · **商形式的非退化性未证**。Lean 侧只有显然的那一半
+      `Fock.quotientPairing_mk_eq_zero_of_mem_nullSubmodule`（代表元属 H_0 ⟹ 该类整行为零）；
+      反方向「∀ q', ⟨q,q'⟩ = 0 ⟹ q = 0」按 `nullSubmodule` 的定义应当成立，但
+      QuotientForm.lean 文件头 Gaps 第 1 条明确记为**未形式化**（"routine but not done"），
+      正定性（无鬼定理本体）更没有。目标陈述 (2) 只要求商上的形式**良定义**、不要求非退化，
+      故这不影响本推导对陈述的覆盖；但下游若要用「H_phys/H_0 上的型非退化」，
+      本图与 Lean 侧都还没有依据。
+      另：陈述 (2) 末句写的是「厄米形式」，Lean 侧只有 R-双线性型，见 gaps (iii)。
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
 
-  【有效状态是 rigorous 不是 formalized，这是正确记账】本推导 status: formalized，但目标节点的
-  有效状态被依赖 worldsheet.ocq-spurious-states-v2（定义卡，status: rigorous）压到 rigorous。
-  原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，与 Lean 的 `Fock.spuriousSubmodule` 不重合，
-  故没填 formal.lean_decl；本推导实际用的是 Lean 那个更大的子模，再限制回 S(k)。
-  按 docs/STATUS_LEVELS.md 对 definition 传播的规定，这正是希望看到的行为：
-  「Lean 证明用的对象若与卡片定义不逐句一致（如缺质量壳条件），命题就不该显示为 formalized」。
+  【已过期的记账（保留原文）：有效状态是 rigorous 不是 formalized】
+    「本推导 status: formalized，但目标节点的有效状态被依赖 worldsheet.ocq-spurious-states-v2
+     （定义卡，status: rigorous）压到 rigorous。原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，
+     与 Lean 的 `Fock.spuriousSubmodule` 不重合，故没填 formal.lean_decl；本推导实际用的是 Lean
+     那个更大的子模，再限制回 S(k)。按 docs/STATUS_LEVELS.md 对 definition 传播的规定，
+     这正是希望看到的行为。」
+
+  【现状（2026-09-11 下午，curator）：天花板已消失，目标节点回到 formalized】
+  formalizer 在 4cc9f02 新建 SpuriousShell.lean，把带质量壳的 S(k) 与 N(k) 逐字写成 Lean 定义
+  （`Fock.spuriousShell` / `Fock.nullStates`），故 worldsheet.ocq-spurious-states-v2 改为
+  status: formalized。本推导的 status 与 depends_on 未动，但
+  `stringgraph status worldsheet.spurious-orthogonal-to-physical` 现在报 effective: formalized。
+
+  【已过期（2026-09-11，reviewer-batch9）：下段写于 QuotientForm.lean 合入之前；gaps (i) 已由 pairing_add_null / quotientPairing_mk 关闭，见上文，本推导已升回 formalized。保留仅作历史。】
+  ⚠ **留给 reviewer / lead 的一条诚实保留**：天花板一消，本节点就以 formalized 报出，
+  而上面 gaps (i)（陈述 (2) 后半：「加零态不改变内积」与「商空间 H_phys/N 上的诱导形式良定义」
+  在 Lean 里没有具名引理）**仍然存在**。即：本节点的 formalized 覆盖陈述 (1) 与 (2) 前半，
+  不覆盖 (2) 后半。按 docs/STATUS_LEVELS.md 的精神，干净的做法是**再拆一次**：
+  把 (2) 后半单列为一张卡（目前只能是 rigorous），本卡只留 (1) + (2) 前半；**或**把本推导降为
+  rigorous。curator 本次未动陈述文本也未拆卡（超出本次任务范围，且两种修法都影响下游引用），
+  已在报告中列为建议拆分项。
 
   【2026-09-11（二）：拆卡后的改动】按 lead 裁决（docs/ROADMAP.md 待拆清单）把
   worldsheet.ocq-spurious-states 拆成 worldsheet.spurious-subspace（无壳 S，formalized）与

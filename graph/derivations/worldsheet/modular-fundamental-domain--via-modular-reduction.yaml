@@ -1,0 +1,46 @@
+id: worldsheet.modular-fundamental-domain--via-modular-reduction
+target: worldsheet.modular-fundamental-domain
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    note: 提供作用在 τ 上的群与 Im(γ·τ) = Im τ/|cτ+d|²。
+  - id: worldsheet.modular-group-generated-by-s-and-t
+    note: |
+      归约算法只用 S 与 T 两个生成元，故需要「S、T 生成 PSL(2,Z)」才能保证归约覆盖整个群轨道。
+      该节点自身只有 physical-argument 级论证。
+  - id: worldsheet.torus-modular-equivalence
+    note: |
+      提供「同一 PSL(2,Z) 轨道 ⇒ 同一环面」，使 F₀ 中的代表元确实代表一个环面等价类。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.15), p.148"
+    note: |
+      抽取记录 #E72，L1（schrans-2020 笔记 p.248）。
+summary: |
+  标准归约：用 T 的幂把 Re τ 平移进 [−½, ½]；若此时 |τ| < 1，用 S 把 τ 换成 −1/τ，
+  由 Im(S·τ) = Im τ/|τ|² 可知 Im τ 严格增大；重复。因为 Im τ 在每步 S 之后严格增大，
+  而对固定的 τ 轨道 Im 的取值集合在正数区间上无聚点（|cτ+d|² 取到的值离散），
+  过程有限步终止，终点落在 F₀ 内。
+gaps:
+  - |
+    **边界的处理在原书中不完整**。伴读者 schrans-2020 逐字写「we have been quite cavalier
+    about the boundaries of F₀」并把读者引向 Zwiebach 2nd ed. §26.6。本节点陈述里写出的两条
+    边界认同（Re τ = ±½ 由 T、|τ| = 1 的两半由 S）是**结论**，来源里没有证明它们穷尽了
+    F₀ 内部的重复。
+  - |
+    **终止性论证是 curator 补的**：抽取记录 E72 只记录了 F₀ 的形状与「每个环面等价于唯一一个
+    落在 F₀ 的 τ」这个断言，没有记录归约算法或终止性论证。上面 summary 里
+    「Im τ 严格增大且过程有限步终止」这段是标准推理，**不是来源逐字**，其中
+    「|cτ+d|² 取值离散」一步本身也未在本图中论证。
+  - |
+    **依赖链拖低**：本推导用到 worldsheet.modular-group-generated-by-s-and-t，
+    而那条的生成性在本书中只是断言（见其 gaps）。
+  - |
+    **来源强度**：式号 (5.1.15) 只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）。
+notes: |
+  升级路径：登记 Zwiebach 2nd ed.（或 Serre, *A Course in Arithmetic*, Ch. VII, Thm 1）
+  到 literature/sources.bib，另起一条 `--via-<数学来源>` 的 rigorous 推导。
+  本条保留为「Polchinski 书内路线」的记账。
+author: curator-polchinski-ch5
+created: "2026-09-11"

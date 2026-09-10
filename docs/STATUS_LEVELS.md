@@ -53,3 +53,7 @@ holography.black-hole-entropy-strominger-vafa
 ## 里程碑 `approved` 的含义（lead 裁决 2026-09-11，依 auditor 第五轮建议）
 
 `audit.status: approved` 断言的是**陈述忠实性**（canonical_text 与 statement 经回译比对无漂移、无物理错误），**不**断言任何有效状态等级。推导严格程度由工具计算的 `effective` 单独承载并在 `stringgraph report` 逐里程碑列出。船长批准时应同时看到 effective 与瓶颈链（`stringgraph why`），但 effective = physical-argument 不阻止 approved。把 approved 绑到 effective ≥ rigorous 会制造"不拆定义卡以免降级"的反向激励。
+
+## "断言 + 骨架"的档位（lead 裁决 2026-09-11，依 reviewer-ch5 建议）
+
+来源给出论证骨架但关键步骤只有断言（如 Polchinski "a little thought shows"、"it is straightforward to"），标 **physical-argument**，`gaps` 逐条写明断言处；**不**标 conjecture。`conjecture` 保留给来源本身把它当猜想提出、或结论真伪在文献中未定的命题（对偶、沼泽地等）。理由："论证不完整"与"结论可能为假"是两个不同的轴，前者用 gaps 记录；把无争议的断言压成 conjecture 会让 `conjectures-depended-on` 报告失去含义。

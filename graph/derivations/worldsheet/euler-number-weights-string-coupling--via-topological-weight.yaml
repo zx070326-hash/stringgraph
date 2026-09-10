@@ -1,0 +1,92 @@
+id: worldsheet.euler-number-weights-string-coupling--via-topological-weight
+target: worldsheet.euler-number-weights-string-coupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.worldsheet-sum-over-topologies
+    note: |
+      提供「拓扑求和 + 每拓扑一个 Polyakov 路径积分 + 权重含 e^{−λχ}」这一框架；
+      本推导只解释这个权重怎么读成耦合常数展开，不重建框架本身。
+  - id: worldsheet.worldsheet-euler-number
+    note: |
+      提供 χ 的表达式与 Gauss–Bonnet 给出的 χ = 2 − 2g − b。**注意**：χ = 2 − 2g − b
+      本身在该卡里是作为定义的背景说明列出的标准微分几何结果，图中没有为它单列节点
+      （见该卡 notes），而本推导的 (i)(ii) 两步计数直接用到它。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep worldsheet.worldsheet-euler-number 声明
+      conv.worldsheet-lorentzian（χ 写成 (1/4π)∫_M d²σ (−γ)^{1/2} R + (1/2π)∫_{∂M} ds k），
+      本推导的 target 声明 conv.worldsheet-euclidean（χ 写成 (1/4π)∫_M d²σ g^{1/2} R + …）。
+      换算就是 conv.worldsheet-euclidean 的字典 (a) 一行：(−γ)^{1/2} ↔ g^{1/2}，R 与 k 的
+      表达式逐项不变。**这一次换算有直接来源**：欧氏写法正是 §3.2 的 (3.2.3b)，其表达式经
+      schrans-2020 §3.28 正文 [3.134] 逐字核实，与 §1.2 的洛伦兹写法同一形式；
+      且 χ 的**数值**是拓扑量，不随号差改变。故本条 convention_map 不引入新缺口
+      （Wick 旋转在路径积分层面的合法性缺口仍继承 conv.worldsheet-euclidean 的 notes，
+      但本推导已是 physical-argument）。
+  - id: worldsheet.euler-number-weyl-invariance
+    note: |
+      提供「λχ 项不破坏 Weyl 对称性」这一步。这是把 λχ 加进作用量的**理由**：
+      §3.2 的 (3.2.3b) 就是这条 Weyl 不变性（抽取记录 E48 逐字：「它是 Weyl 不变的
+      ((3.2.3b))」），与 §1.2 的 (1.2.32) 是同一内容在第 3 章的重述。
+    convention_map: |
+      同上，跨 family `worldsheet-signature`：dep 声明 conv.worldsheet-lorentzian，
+      target 声明 conv.worldsheet-euclidean；Weyl 变换 γ' = e^{2ω}γ ↔ g' = e^{2ω}g
+      与 R' = e^{−2ω}(R − 2∇_a∂^a ω)、k' = e^{−ω}(k + n^a ∂_a ω) 的形式在两种号差下相同
+      （二维、边界外法向 n·n = +1 在欧氏号差下同样成立），相消的组合式逐项不变。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.2, eq. (3.2.3b)（Euler 数项的 Weyl 不变性）、eq. (3.2.7)（弦耦合常数 g_c ∼ e^λ、g_o ∼ e^{λ/2}），p.82–83"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E48，证据等级 [已核实]
+      （式号经 schrans-2020 目录 `3.2 p 82`、`3.3 p 83` 核实；ξ 的表达式经 [3.134] 逐字核实）。
+      **来源给的是结论**：可加 λξ 项、它 Weyl 不变、e^{−λξ} 给拓扑展开的耦合常数、
+      g_c ∼ e^λ、g_o ∼ e^{λ/2}。**指数怎么定出来的论证不在抽取记录里**，见 gaps。
+  - ref: polchinski-1998-v1
+    loc: "§3.1（p.77–81）：拓扑求和的框架；§5.3, eq. (5.3.9)（p.156）：权重 exp(−S_m − S_g − λχ) 中 λχ 的出现"
+    note: |
+      抽取记录 E47 与 E80。E80 第 5 条因子说明逐字转录 [S]：「权重是 exp(−S_m − S_g − λχ)；
+      λ 是一个参数，as we will see later, is not independent」——本推导只用「λχ 在权重里」
+      这一点，不用「λ 不独立」。
+summary: |
+  三步：
+
+  (1) **可以加这一项**。Euler 数项 S_χ = λχ 在 diff 下显然不变（χ 由协变积分给出），
+      在 Weyl 下也不变（worldsheet.euler-number-weyl-invariance，即 §3.2 的 (3.2.3b)），
+      故加它不破坏世界面的规范对称性。又因 χ 只依赖拓扑，它对 g_{ab} 与 X^μ 的变分为零，
+      不改变任何运动方程，也不改变固定拓扑内的路径积分——它在每个拓扑上只是常数因子。
+
+  (2) **它在拓扑求和里的作用是常数权重**。于是在
+      worldsheet.worldsheet-sum-over-topologies 的求和里，第 T 个拓扑整体乘 e^{−λ χ(T)}。
+
+  (3) **把这个常数读成耦合常数的幂**。用 Gauss–Bonnet 的 χ = 2 − 2g − b：
+      · 闭弦可定向无边：χ = 2 − 2g，权重 e^{λ(2g−2)}。要与「每个闭弦顶点算子带一个 g_c」
+        的记法相容，球面 n 点树级振幅须 ∝ g_c^{n−2}，而它按权重 ∝ g_c^{n} e^{−2λ}，
+        故 g_c ∼ e^{λ}，亏格展开的权重是 g_c^{2g−2} = g_c^{−χ}。
+      · 开弦圆盘：χ = 1，权重 e^{−λ}；同样要求圆盘 n 点振幅 ∝ g_o^{n−2}，而它 ∝ g_o^{n} e^{−λ}，
+        故 g_o² ∼ e^{λ}，即 g_o ∼ e^{λ/2}，且 g_o² ∼ g_c。
+      这两条正是 (3.2.7) 的内容。**注意这一步没有计算出任何东西**：λ 是自由参数，
+      本步只是把 e^{−λχ} 改写成「耦合常数」的幂次，即给出耦合常数的定义。
+gaps:
+  - "**(3) 的计数论证无来源**：抽取记录 E48 只转录了结论 (3.2.7)（g_c ∼ e^λ、g_o ∼ e^{λ/2}），
+     没有转录 Polchinski 的论证；本推导第 (3) 步用的「n 点树级振幅 ∝ g^{n−2}」+「每个顶点算子
+     一个 g」这套计数是 curator 补入的标准论证。它与 (3.2.7) 的结论一致（这是本条的唯一佐证），
+     但**不能保证与原书的论证路线相同**，且它默认了顶点算子的归一化约定（图中无节点）。"
+  - "**「∼」不是「=」**：比例常数由顶点算子归一化与测度约定决定，本图不固定，也未核实原书是否固定。
+     因此本推导不支持任何写成等号的关系（如常见的 g_s = e^λ、g_s = e^Φ）。"
+  - "**χ = 2 − 2g − b 在图中没有节点**：它是 Gauss–Bonnet 的内容，worldsheet.worldsheet-euler-number
+     只把它作为定义的背景说明列出（属 math area，Phase 1 之外）。第 (3) 步直接用了它。
+     不可定向情形的交叉帽贡献同样没有节点，故本推导只覆盖可定向闭弦与圆盘两种情形。"
+  - "**(1) 中「变分为零、不改变动力学」这句话本图未核实原书是否写出**；它是标准的二维事实
+     （二维 Einstein–Hilbert 项是拓扑项），本推导据此论证，不据来源逐字。"
+  - "**上游框架自身没有数学定义**：worldsheet.worldsheet-sum-over-topologies 是
+     physical-argument（路径积分测度、规范群体积、对拓扑的无穷求和都无定义），
+     故本推导无论如何不能高于 physical-argument。"
+  - "**λ 的来源不在本推导内**：λ 与 dilaton 期望值的关系（§3.7）本图无节点，抽取记录也未覆盖；
+     [S] 转录的「λ … is not independent」只是提示，不构成断言。本推导把 λ 当自由参数。"
+notes: |
+  status = physical-argument 的理由：即便 (1)(2) 两步是干净的对称性/拓扑论证，
+  第 (3) 步的计数无来源支撑（gaps 第 1 条），且整个框架建立在无定义的路径积分上
+  （gaps 最后第 2 条）。按 docs/STATUS_LEVELS.md 的 rigorous 例外裁决，
+  本条既缺 reviewer 独立复核记录、又不满足「前提已完整写出」（顶点算子归一化未定），
+  故不上 rigorous。
+author: curator-e47-e48
+created: "2026-09-11"

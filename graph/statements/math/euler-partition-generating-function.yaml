@@ -128,5 +128,6 @@ notes: |
 
   **归属**：恒等式本身是 Euler 的（18 世纪，*Introductio in analysin infinitorum*），
   本项目不为它找一手历史来源。
+  【措辞注 reviewer-batch6】【无穷乘积的意义】段写"Hausdorff 拓扑环"，(2) 的半环情形对应 Lean 的 IsTopologicalSemiring（拓扑半环）；陈述不改，换代时补一句。
 author: curator
 created: "2026-09-11"

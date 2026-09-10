@@ -1,0 +1,42 @@
+id: worldsheet.b-insertion-diff-variation--via-b-equation-of-motion
+target: worldsheet.b-insertion-diff-variation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: 提供 b 插入 (1/4π)(b, ∂_{t^k}ĝ) 与鬼场作用量 S_g = (1/2π)(b, P̂₁c)。
+  - id: worldsheet.p1-formal-adjoint
+    note: |
+      提供 (u, P₁v) = (P₁^T u, v)，把 (b, P̂₁·) 的变分搬到 P̂₁^T b 上。
+      ⚠ 该节点的来源是本批最弱的之一（P₁^T 的显式表达式只有伴读笔记背书）。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P̂₁、P̂₁^T。
+  - id: worldsheet.string-s-matrix
+    note: 被作变分的对象。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.4), p.160；(3.3.21)"
+    note: |
+      抽取记录 #E84，L1（schrans-2020 §5.25，笔记 p.263–264）。
+summary: |
+  在微分同胚 δσ^a = ξ^a 下，参考度规按 δĝ_ab = −(∇̂_a ξ_b + ∇̂_b ξ_a) 变化，
+  代入模插入 (b, ∂_{t^k}ĝ) 并对 t^k 求导后重排，得
+    δ_ξ (b, ∂_{t^k}ĝ) = −2 (b, P̂₁ ∂_{t^k}ξ) = −2 (P̂₁^T b, ∂_{t^k}ξ)，
+  末一步用 worldsheet.p1-formal-adjoint。
+  由 S_g = (1/2π)(b, P̂₁c) 对 c 变分得 b 的运动方程 P̂₁^T b = 0，
+  故上式在运动方程处为零。
+gaps:
+  - |
+    **中间步骤本图无核实**：抽取记录只给出结论式 δ_ξ(b, ∂_{t^k}ĝ) = −2(P̂₁^T b, ∂_{t^k}ξ)，
+    没有给出「代入并重排」的过程；上面 summary 的推理是 curator 补的，
+    尤其「∂_{t^k} 与 δ_ξ 对易、ξ 可以搬到 ∂_{t^k}ξ 的位置」这一步未验证。
+  - |
+    **「运动方程成立」在路径积分里是含接触项的算子等式**，不是逐点等式。
+    本节点写成「在运动方程成立处为零」，其精确含义（插进关联函数后除 c 插入外为零）
+    正是下游 worldsheet.s-matrix-diff-invariance 出问题的地方。
+  - |
+    **上游 worldsheet.p1-formal-adjoint 的来源在本图中只有伴读笔记背书**，无原书式号。
+  - |
+    **来源强度**：式号 (5.4.4) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

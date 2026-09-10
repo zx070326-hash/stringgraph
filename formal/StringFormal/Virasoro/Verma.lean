@@ -55,6 +55,8 @@ have (see the *Status* section).
   all `n_i < 0`.  (Words are *not* ordered here.)
 * `lie_lgen_zero_wordAct`: `L_0` acts on `L_{n_1} ⋯ L_{n_k} |c,h⟩` by `h - (n_1 + ⋯ + n_k)`.
 * `lie_lgen_zero_of_mem_levelSpan`: `L_0` acts by `h + N` on `V_N`.
+* `lie_lgen_mem_levelSpan` / `lie_lgen_mem_levelSpan_of_neg`: **level shift**, `L_{-k}` maps
+  `V_N` into `V_{N+k}` for `k ≥ 1`.  No hypothesis on `R`, `c`, `h`, or on `V(c,h) ≠ 0`.
 * `iSup_levelSpan_eq_top`: `⨆_N V_N = V(c,h)`; `levelSpan_fg`: each `V_N` is finitely
   generated (hence finite dimensional over a field).
 * `isInternal_levelSpan` (over a field of characteristic zero): `V(c,h) = ⨁_N V_N`, and
@@ -66,7 +68,6 @@ have (see the *Status* section).
   Virasoro-equivariant `R`-linear map `V(c,h) → M` sending `|c,h⟩` to `v`.
 * `adjoin_range_uea_ι_eq_top`: `U(L)` is generated as an `R`-algebra by the image of `L`
   (missing from Mathlib `v4.33.1`; the tensor-algebra analogue is there).
-* `VirasoroAlgebra.span_lgen_cgen_eq_top`: `Vir = span_R {L_n : n ∈ ℤ} ∪ {C}`.
 
 ## Status
 
@@ -121,56 +122,6 @@ theorem adjoin_range_uea_ι_eq_top :
   exact hsurj
 
 end UniversalEnveloping
-
-/-! ### The Virasoro algebra is spanned by `L n` and `C` -/
-
-namespace VirasoroAlgebra
-
-variable (R : Type*) [CommRing R] [Algebra ℚ R]
-
-/-- `toProd` upgraded to an `R`-linear equivalence `VirasoroAlgebra R ≃ₗ WittAlgebra R × R`. -/
-noncomputable def toProdₗ : VirasoroAlgebra R ≃ₗ[R] WittAlgebra R × R where
-  toFun := toProd R
-  invFun := (toProd R).symm
-  map_add' := toProd_add R
-  map_smul' := toProd_smul R
-  left_inv := (toProd R).left_inv
-  right_inv := (toProd R).right_inv
-
-/-- The linear (**not** Lie algebra) splitting `WittAlgebra R → VirasoroAlgebra R`,
-`ℓ n ↦ L n`. -/
-noncomputable def ofWitt : WittAlgebra R →ₗ[R] VirasoroAlgebra R :=
-  ((toProdₗ R).symm : WittAlgebra R × R →ₗ[R] VirasoroAlgebra R) ∘ₗ
-    LinearMap.inl R (WittAlgebra R) R
-
-@[simp] lemma toProd_ofWitt (w : WittAlgebra R) : toProd R (ofWitt R w) = (w, 0) := rfl
-
-@[simp] lemma ofWitt_lgen (n : ℤ) : ofWitt R (WittAlgebra.lgen R n) = lgen R n := rfl
-
-/-- The Virasoro algebra is spanned by the generators `L n`, `n : ℤ`, together with the central
-element `C`. -/
-lemma span_lgen_cgen_eq_top :
-    Submodule.span R (insert (cgen R) (Set.range (lgen R))) = ⊤ := by
-  rw [eq_top_iff]
-  intro X _
-  have hX : X = ofWitt R (toWitt R X) + (toProd R X).2 • cgen R := by
-    apply toProd_injective
-    rw [toProd_add, toProd_smul, toProd_cgen, toProd_ofWitt, toWitt_apply]
-    ext <;> simp
-  have hw : toWitt R X ∈ Submodule.span R (Set.range (WittAlgebra.lgen R)) := by
-    rw [(WittAlgebra.lgen R).span_eq]
-    exact Submodule.mem_top
-  have h1 : ofWitt R (toWitt R X) ∈ Submodule.span R (Set.range (lgen R)) := by
-    have hmem : ofWitt R (toWitt R X)
-        ∈ (Submodule.span R (Set.range (WittAlgebra.lgen R))).map (ofWitt R) :=
-      Submodule.mem_map_of_mem hw
-    rwa [Submodule.map_span, ← Set.range_comp,
-      show (ofWitt R ∘ WittAlgebra.lgen R) = lgen R from rfl] at hmem
-  rw [hX]
-  exact Submodule.add_mem _ (Submodule.span_mono (Set.subset_insert _ _) h1)
-    (Submodule.smul_mem _ _ (Submodule.subset_span (Set.mem_insert _ _)))
-
-end VirasoroAlgebra
 
 /-! ### The Verma module `V(c,h)` -/
 
@@ -437,9 +388,6 @@ theorem negSpan_eq_top : negSpan R c h = ⊤ := by
 
 /-! ### The `L₀`-grading -/
 
-lemma centralTerm_zero : centralTerm R (0 : ℤ) = 0 := by
-  simp [centralTerm]
-
 /-- `L₀` acts on `L_{n_1} ⋯ L_{n_k} |c,h⟩` by the scalar `h - (n_1 + ⋯ + n_k)`. -/
 lemma lie_lgen_zero_wordAct (l : List ℤ) :
     ⁅VirasoroAlgebra.lgen R 0, wordAct R c h l (hwv R c h)⁆
@@ -537,6 +485,61 @@ theorem iSup_levelSpan_eq_top : (⨆ N : ℕ, levelSpan R c h N) = ⊤ := by
   show wordAct R c h ((l.map fun n : ℤ => (-n).toNat).map fun b : ℕ => -(b : ℤ)) (hwv R c h)
       = wordAct R c h l (hwv R c h)
   rw [hmap]
+
+/-! #### Level shift: `L_{-k}` raises the level by `k` -/
+
+/-- Prepending a block of size `k ≥ 1` to a composition of `N` gives a composition of `N + k`.
+On words this is `L_{-k} · (L_{-b_1} ⋯ L_{-b_r})`. -/
+def consComposition {k : ℕ} (hk : 0 < k) {N : ℕ} (cmp : Composition N) : Composition (N + k) where
+  blocks := k :: cmp.blocks
+  blocks_pos := by
+    intro i hi
+    rcases List.mem_cons.mp hi with rfl | hi
+    · exact hk
+    · exact cmp.blocks_pos hi
+  blocks_sum := by
+    rw [List.sum_cons, cmp.blocks_sum]
+    omega
+
+@[simp] lemma consComposition_blocks {k : ℕ} (hk : 0 < k) {N : ℕ} (cmp : Composition N) :
+    (consComposition hk cmp).blocks = k :: cmp.blocks := rfl
+
+/-- `L_{-k}` sends the level-`N` word attached to `cmp` to the level-`(N+k)` word attached to
+`consComposition hk cmp`. -/
+lemma lie_lgen_levelWord {k : ℕ} (hk : 0 < k) {N : ℕ} (cmp : Composition N) :
+    ⁅VirasoroAlgebra.lgen R (-(k : ℤ)), levelWord R c h N cmp⁆
+      = levelWord R c h (N + k) (consComposition hk cmp) := by
+  rw [levelWord, levelWord, consComposition_blocks, List.map_cons, wordAct_cons]
+
+/-- **Level shift.**  For `k ≥ 1`, the generator `L_{-k}` maps `V_N` into `V_{N+k}`.
+
+This is the statement that `V(c,h)` is graded for the `ℤ`-grading of the Virasoro algebra in
+which `L_n` has degree `-n`, restricted to the raising operators.  It holds over any
+commutative `ℚ`-algebra `R`, with no hypothesis on `c`, `h`, or on `V(c,h)` being nonzero,
+because `levelSpan` is *defined* by the spanning words rather than as an `L₀`-eigenspace. -/
+lemma lie_lgen_mem_levelSpan {k : ℕ} (hk : 0 < k) (N : ℕ) {x : VermaModule R c h}
+    (hx : x ∈ levelSpan R c h N) :
+    ⁅VirasoroAlgebra.lgen R (-(k : ℤ)), x⁆ ∈ levelSpan R c h (N + k) := by
+  rw [levelSpan] at hx
+  induction hx using Submodule.span_induction with
+  | mem y hy =>
+    obtain ⟨cmp, rfl⟩ := hy
+    rw [lie_lgen_levelWord R c h hk cmp]
+    exact Submodule.subset_span ⟨_, rfl⟩
+  | zero => rw [lie_zero]; exact Submodule.zero_mem _
+  | add y z _ _ hy hz => rw [lie_add]; exact Submodule.add_mem _ hy hz
+  | smul t y _ hy => rw [lie_smul]; exact Submodule.smul_mem _ _ hy
+
+/-- Level shift indexed by a negative integer: `L_n` with `n < 0` maps `V_N` into `V_{N + |n|}`.
+Since `|n| ≥ 1` the target level is strictly bigger than `N`; in particular it is never `0`,
+which is what makes a level-`0` functional annihilate the image of every raising operator. -/
+lemma lie_lgen_mem_levelSpan_of_neg {n : ℤ} (hn : n < 0) (N : ℕ) {x : VermaModule R c h}
+    (hx : x ∈ levelSpan R c h N) :
+    ⁅VirasoroAlgebra.lgen R n, x⁆ ∈ levelSpan R c h (N + (-n).toNat) := by
+  have hk : 0 < (-n).toNat := by omega
+  have hn' : (-(((-n).toNat : ℕ) : ℤ)) = n := by omega
+  have key := lie_lgen_mem_levelSpan R c h hk N hx
+  rwa [hn'] at key
 
 end Verma
 

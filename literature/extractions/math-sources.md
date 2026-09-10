@@ -2336,3 +2336,839 @@ tags: [algebra, lie-algebra, cohomology, central-extension]
 - **Q22** `Vect(S¹)` 的连续上同调（Gelfand–Fuks / Goncharova / Reshetnikov / Tsujishita）与
   Witt/Vir 的**代数**上同调之间那条「稠密性论证不成立」的沟（§27.4）。
   这与 §13.3 的「弦论那个具体理论满足假设」是同一类缺口，值得单独立节点。
+
+---
+
+# § PBW 定理的「任意李代数 / 任意基环」来源（撤 inferred 用）
+
+- 负责 agent：researcher
+- 日期：**2026-09-11（第四轮）**
+- 触发：`math.verma-module-free-over-negative-part--via-pbw-theorem` 到 `math.pbw-theorem` 的边标着
+  `inferred: true`，其 note 逐字说理由是**适用范围**：「humphreys-1972 全书语境是『代数闭特征零域上的
+  **有限维半单**李代数』，而 §17.1 开头对 L 的假设本项目未核到（L0）」（= §15.5 的 **Q15**）。
+  本节的任务：找一条**明确对任意（含无限维）李代数、任意交换环或域**陈述 PBW 的**带编号**来源。
+- 证据等级沿用本文件 §0 的 L0–L4 表。
+- **一句话结论**：找到了一条，**Lakos, arXiv:1812.04896v2, Proposition 6.1（书上 p.16）**——
+  「The PBW theorem holds if `𝔤` is a free `K`-module.」，前提逐字只有「`K` 是幺交换环、`𝔤` 是 Lie `K`-代数」，
+  **全文无任何有限维假设**，且同一篇里有第二条独立证明（Appendix A, **Corollary A.4(f)**）。
+  另外把 **Bourbaki 的位置钉到了 Ch. I, §2, no. 7, p. 18（L1，来自出版社目录扫描）**，但**正文与「Theorem 1」
+  这个编号仍然完全未核实**。任务书候选 2（Dixmier **2.1.11**）本轮拿到了**相反**的 L3 证据（指向 **2.1.8**）。
+
+---
+
+## 33. 结论表（先看这张）
+
+| # | 候选 | 本轮结果 | 等级 | 能否用来撤 inferred |
+|---|---|---|---|---|
+| 1 | **Bourbaki**, *Lie Groups and Lie Algebras, Chapters 1–3*, Ch. I, §2, no. 7 | **小节标题与页码已 L1 落定**：「**7. The Poincaré-Birkhoff-Witt Theorem … 18**」（出版社目录扫描逐字）。**正文未取**；**「Theorem 1」这个编号本轮零证据**；「`𝔤` 为自由 `K`-模」这条前提**未见任何已核实来源写出** | 位置 **L1** / 内容 **L0** | **否**（只有位置，没有内容） |
+| 2 | **Dixmier**, *Enveloping Algebras*, Thm **2.1.11** | **未证实，且有相反证据**：Crytser 讲义（L1 读毕）把「有序单项式基」挂在 **[Dixmier, Lem 2.1.8]** 上，把 `U(𝔤)` 的 `U(𝔤')`-模基挂在 **[Prop. 2.2.7]** 上。**2.1.11 是什么，本轮仍不知道** | **L0**（且 2.1.8 为 L3） | **否**，且**禁止写 2.1.11** |
+| 3 | **Serre**, *Lie Algebras and Semisimple Lie Algebras* | 无公开全文，编号零证据 | **L0** | 否 |
+| 4 | **Jacobson**, *Lie Algebras*, Ch. V Thm 3 | 无公开全文。两处 L1 书目（Garrett 讲稿、Lakos [19]）都只给「Jacobson, Nathan: *Lie Algebras*. Wiley, New York, 1962」，**不带编号**。旁证：Garrett 逐字说他的证明「is basically that given in Jacobson」并适用于无限维 | **L0** | 否 |
+| 5 | **Kac**, *IDLA* 3rd ed. §9.1 / **Moody–Pianzola** | 未查到公开全文（沿用 §17 的结论；Kac 的结构性反对仍在：该书讲 Kac–Moody `g(A)`，Virasoro 不是 Kac–Moody） | **L0** | 否 |
+| 6 | **形式化（Lean / Coq / Isabelle）** | **三边都没有 PBW**。Mathlib 官方 `docs/1000.yaml` 里 `Poincaré–Birkhoff–Witt theorem` 条目**存在但没有 `decl`**（= 官方登记为未形式化）；Isabelle AFP 只有一条微分几何路线的 *Lie Groups and Algebras*；Coq 侧本轮未找到 | **L1**（Lean）/ **L2**（AFP）/ **L0 否定**（Coq） | 不适用（只影响 `status` 上限） |
+| **★** | **Lakos**, arXiv:**1812.04896v2**, **Proposition 6.1**（p.16）＋ **Corollary A.4(f)**（p.20） | **全文到手、逐字核实**。前提：`K` 幺交换环、`𝔤` 为自由 `K`-模；**无维数限制**；索引集任意 | **L1** | **可以**（见 §33.7 的写法与限制） |
+
+> **一条方法论提醒（与 §19.1、§32.1 并列的第三条路线）**：本轮 Bourbaki 的位置不是靠 Google Books、
+> 不是靠出版社书页（Springer 仍是登录墙），而是靠 **德国国家图书馆（DNB）挂的「出版社目录扫描件」
+> `d-nb.info/<IDN>/04`**。这是拿不到书时定位章节号/页码的一条新活路，见 §33.8。
+
+---
+
+## 33.1 需求侧：到底要一条什么陈述（复述，避免跑偏）
+
+图里 `math.pbw-theorem` 的 statement 已经写死为「**域 F 上、任意（可无限维）李代数 L + 全序基 (X,≤)**」，
+并且它自己的 statement 末尾就承认：
+
+> 【范围】本节点按上面写的**任意（可无限维）李代数 + 全序基**陈述。所引来源的原书语境是否允许无限维 L **未核实**。
+
+所以本轮要的**不是**「PBW 的又一个证明」，而是**一句带编号的、把假设写清楚的定理陈述**，其假设要能覆盖
+`vir` 与 `vir₋`（可数无限维、非半单、特征零域上）。判据只有两条：
+
+1. 假设里**不能**出现 finite-dimensional / semisimple / algebraically closed；
+2. 结论要含**有序单项式基**（节点的 (1)）或**分次同构** `S(L) ≅ gr U(L)`（节点的 (2)）——两者有一即可，
+   因为节点自己说明了两者在来源里是同一小节内互推的。
+
+---
+
+## 33.2 ★★ 首选（L1 全文到手）：Lakos, *Some proofs of the Poincaré–Birkhoff–Witt theorem and related matters*
+
+### 33.2.0 文献标识与**版本陷阱（必读）**
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | **Gyula Lakos**（Alfréd Rényi Institute of Mathematics；文末逐字 `Email address: lakos@renyi.hu`） | **L1** |
+| 标题 | *Some proofs of the Poincaré–Birkhoff–Witt theorem and related matters* | **L1** |
+| eprint | **arXiv:1812.04896** | **L1** |
+| 版本 | **v1: 2018-12-12**；**v2: 2024-07-23**（"last revised"） | **L1**（abs 页） |
+| 页数 / comments | 逐字：「**22 pages, Part 3 of original submission arXiv:1812.04896v1, rewritten**」 | **L1** |
+| 分类 | math.RA；MSC **Primary 17B35; Secondary 17B01, 16S30** | **L1** |
+| journal-ref | **无**（abs 页无 journal-ref，只有 arXiv 自发 DOI `10.48550/arXiv.1812.04896`）⇒ 截至 2026-09-11 **视为未发表的 expository preprint** | **L1** |
+| 摘要（逐字） | 「This expository paper focuses on free Lie `K`-algebras and the basic PBW theorem. We argue in various ways that the basic PBW theorem is a quite close consequence of the Magnus-Witt theorems concerning free Lie algebras.」 | **L1** |
+
+> ⚠⚠ **版本陷阱，直接写进 `loc`**：comments 逐字说 v2 是「v1 原稿的 **Part 3**，**重写过**」。
+> ⇒ **v1 与 v2 的编号几乎肯定不同**，本节所有编号（Prop 6.1、Cor A.4、Thm 1.5–1.7）**只对 v2 成立**。
+> `loc` 必须写死 **v2**。（同一类坑见 memory 里的 arXiv:2512.08296 案例。）
+
+获取：`arxiv.org/pdf/1812.04896` → WebFetch 落盘 301.4 KB → `Read` 带 `pages` 读图。**PDF 页 = 论文页**（共 22 页）。
+本轮 L1 逐页读了 **pp. 1–6, 16–22**（含全部参考文献）。
+
+### 33.2.1 ★ 前提（书上 **p.1**，Introduction，「The local formulation of the PBW theorem」段；L1 逐字）
+
+> **The local formulation of the PBW theorem.** Assume that `K` is a unital commutative ring, and `𝔤` is a
+> `K`-module with a compatible Lie-ring structure; i. e. `𝔤` is a Lie `K`-algebra (also called: Lie ring over `K`).
+> The universal enveloping algebra `𝒰𝔤` is the free `K`-algebra `F_K[𝔤] ≃ ⊗𝔤 ≡ ⊕_{n=0}^∞ ⊗^n 𝔤` factorized by
+> the ideal `J𝔤` generated by the elements `X ⊗ Y − Y ⊗ X − [X,Y]`, the tensor products are taken over `K`.
+> Let `𝒎 : ⊗𝔤 → 𝒰𝔤` denote this canonical homomorphism. The enveloping algebra is naturally filtered by
+> `𝒰^n𝔤 = 𝒎(⊗^{≤n}𝔤)`, and the construction implies the existence of natural surjective maps
+> `𝒎^{(n)} : ⊙^n 𝔤 → 𝒰^n𝔤/𝒰^{n−1}𝔤`. The (local form of the) Poincaré–Birkhoff–Witt theorem, whenever it holds,
+> states that the maps `𝒎^{(n)}` are isomorphisms. This theorem is known to hold in the following cases:
+
+**这段话就是本轮要的东西**：`K` 只要「幺交换环」，`𝔤` 只要「李 `K`-代数」。**全文没有任何有限维假设**
+（我逐页读了 pp.1–6, 16–22，没有出现 "finite dimensional" 作为对 `𝔤` 的standing assumption）。
+`𝒎^{(n)}` 是同构 ⇔ 图节点的 **(2)** 分次形式 `S(L) ≅ gr U(L)`（`⊙^n` 就是对称代数的 `n` 次分量）。
+
+### 33.2.2 已知成立的情形一览（书上 **p.2**；L1 逐字，节录）
+
+> (i) `K` is a field, or, more generally, `𝔤` is a free `K`-module, or, more generally, `𝔤` is a direct sum of
+> cyclic `K`-modules (Poincaré [32]; `K` is a field, `ℚ ⊂ K`, cf. Ton-That, Tran [42]; Birkhoff [2], Witt [45]:
+> `K` is a field, but their methods work more generally);
+> (i') `K` is a principal ideal domain (Lazard [22]) or just a Dedekind domain (Cartier [8]); also see Higgins [18]
+> for further results in this direction;
+> (ii) `ℚ ⊂ K` (Cohn [11]);
+> (ii') `1/2 ∈ K` but `[𝔤,[𝔤,𝔤]] = 0` (Nouazé, Revoy [31]), or `1/k! ∈ K` but `(ad 𝔤)^k 𝔤 = 0` ([21]);
+> cf. Grivel [15] for a review. **But there are counterexamples** (see Širšov [39], Cartier [8], Cohn [11]).
+> The most general approach is of Higgins [18], cf. Revoy [35].
+
+> ★ **这一段对图有独立价值**：它逐字给出了「**PBW 在一般交换环上会失败**」这件事（有反例），
+> 因此 `math.pbw-theorem--via-humphreys` 的 gaps 第四条（「基环限制」）**不是过度谨慎，是对的**。
+> 若日后有人想把节点的基环从「域」放宽，**必须放宽到 (i)/(i')/(ii) 之一，不能放宽到任意交换环**。
+
+### 33.2.3 全局形式（书上 **p.2**，「Global formulations of the PBW theorem」，情形 (i)；L1 逐字）
+
+> (i) If `𝔤` is a sum of cyclic `K`-modules, then we can choose a basis `{g_α : α ∈ A}`, and an ordering `≤` of `A`.
+> Then let `⊗_≤ 𝔤` be the submodule of `⊗𝔤` spanned by `g_{α_1} ⊗ … ⊗ g_{α_n}` with `α_1 ≤ … ≤ α_n`.
+> Then the "basic" version of the PBW theorem states that
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `𝒎_≤ : ⊗_≤ 𝔤 → 𝒰𝔤`
+>
+> (a restriction of `𝒎`) is an isomorphism of `K`-modules. […] As the natural map `⊗^n_≤ 𝔤 → ⊙^n 𝔤` is an
+> isomorphism, it is easy to see that this `𝒎_≤` is necessarily surjective, and **its injectivity is equivalent to
+> the local version of PBW theorem**; one can see these inductively on the filtration.
+
+**这就是图节点的 (1)（有序单项式基）**：`⊗_≤𝔤` 的自然基是有序单项式，`𝒎_≤` 是同构 ⇔ 有序单项式的像是 `𝒰𝔤` 的基。
+**索引集 `A` 任意**（只要求给一个序 `≤`），**这正是无限维情形需要的措辞**。
+末句还逐字给出「局部形式 ⇔ 全局形式」，所以节点 statement 里那句「(1) 与 (2) 在同一小节里互推」在这份来源里
+**是被明写出来的**（Humphreys 那边只是转述）。
+
+### 33.2.4 ★★★ **Proposition 6.1**（书上 **p.16**；L1 逐字）——本轮要的那条带编号陈述
+
+第 6 节的标题与开场白（逐字）：
+
+> **6. FROM `F^Lie_K` TO THE BASIC PBW THEOREM**
+> Here we assume to know that free Lie `K`-algebras are free `K`-modules in every multigrade separately (MW),
+> and that the PBW theorem holds for them.
+>
+> **Proposition 6.1.** *The PBW theorem holds if `𝔤` is a free `K`-module.*
+
+后接约 1.5 页的完整证明（`Proof.` … `□`，跨 p.16–p.17），证法是把 `𝔤` 的基 `{Z_λ}` 提升到自由李代数
+`F^Lie_K[X_λ : λ ∈ Λ]`，再用 Magnus–Witt 定理。第 6 节末尾还逐字补了一句：
+
+> But then the arguments of the previous proof can be modified in order to obtain the basic PBW theorem for
+> **sums of cyclic `K`-modules**.
+
+> ⚠ **`loc` 必须同时指 p.1–2**：Prop 6.1 的主语「the PBW theorem」是在 Introduction 里定义的
+> （局部形式 = `𝒎^{(n)}` 同构；全局形式 (i) = `𝒎_≤` 同构）。**单独引 "Proposition 6.1" 而不带 Introduction，
+> 读者无法知道它到底断言了什么**——这与 §16.3 里 Kytölä 那句「无编号正文」是相反方向的同一类坑。
+
+### 33.2.5 第二条独立证明：**Corollary A.4**（书上 **p.20**；L1 逐字）
+
+Appendix A 标题逐字：「**Appendix A. The Witt–Lazard proof of the global PBW theorems**」，
+开场逐字说这条路线「allows to formulate the proof of the PBW theorem simultaneously in (i) the basic case
+(sum of cyclic `K`-modules) and (ii) the symmetric case (`ℚ ⊂ K`)」。链条是
+**Lemma A.1 → Corollary A.2 → Lemma A.3 → Corollary A.4**。
+
+> **(III) The PBW splittings.** Note that in case (i), `⊗_η 𝔤 = ⊗_≤ 𝔤`; and in case (ii), `⊗_η 𝔤 = ⊗_Σ 𝔤`.
+> Thus, the statement of the PBW theorem is that `⊗_η 𝔤` and `J𝔤` do not intersect each other
+> (and, in fact, they are complementer spaces in `⊗𝔤`).
+
+> **Corollary A.4.** *The following inner direct sum decompositions hold:*
+> (a) `J^{≤n}𝔤 = J^{≤n−1}𝔤 ⊕ J^n_η𝔤`; (b) …; (c) …; (d) …; (e) …;
+> **(f) `⊗𝔤 = ⊗_η 𝔤 ⊕ J𝔤`.**
+
+紧接其证明之后逐字：
+
+> In particular, we find the statement of the PBW theorem in (f).
+
+⇒ **同一篇论文里有两条互相独立的证明**（第 6 节走 Magnus–Witt；附录 A 走经典 Witt–Lazard），
+对 `status = rigorous` 是加分项。另外 p.20 逐字点名了其它经典证明的出处，可作为将来找一手书的地图：
+
+> Specified to the basic case (i), the proof given above is certainly over-algebraized compared to the one of
+> **Jacobson [19]** […] There are similar proofs which concentrate not on the factorization structure but on
+> constructing the regular representation of the enveloping algebra. Such one is the proof of
+> **Cartan, Eilenberg [7]** in the basic case (i). In the symmetric case (ii), this is done by **Cohn [11]**;
+> another (terse) proof is given in **Deligne, Morgan, Bernstein [13]**. Quite different proof is the one of
+> **Milnor, Moore [30]** (over fields) which uses the coalgebra structure of the universal enveloping algebra.
+
+（参考文献逐字：[7] Cartan, Henri; S. Eilenberg, Samuel: *Homological algebra*. Princeton University Press, 1956；
+[19] Jacobson, Nathan: *Lie Algebras*. Wiley, New York, 1962；[30] Milnor, John W.; Moore, John C.:
+*On the structure of Hopf algebras*. Ann. of Math. (2) **81** (1965), 211–264；
+[5] Bourbaki, Nicolas: *Elements of mathematics. Lie groups and Lie algebras. Part I: Chapters 1–3.*
+Hermann, Paris; Addison-Wesley Publishing Co., Reading Mass., **1975**。）
+
+### 33.2.6 使用限制（诚实记录）
+
+1. **未发表**：expository preprint，无 journal-ref（L1 核对 abs 页）。它的权威性低于教科书，
+   **但它是本轮唯一一条「带编号 + 前提逐字 + 无维数限制 + 全文可读」的来源**。
+   建议在图里**与 `humphreys-1972` 并列**（教科书给权威与完整证明，本篇给适用范围），而不是取代它。
+2. **Prop 6.1 的证明依赖 Magnus–Witt 定理**（本篇 **Theorem 1.5 / 1.6 / 1.7**，p.5，逐字：
+   「**Theorem 1.5.** (The Magnus–Witt theorem.) `F^Lie_K[X_λ : λ ∈ Λ]` embeds to the noncommutative polynomial
+   algebra `F_K[X_λ : λ ∈ Λ]` by the commutator-evaluation.」；1.6「… is a free `K`-module (multigrade-wise)」；
+   1.7「… can be directly complemented …」），这是**非教科书路线**。若 reviewer 介意，改引 **Corollary A.4(f)**，
+   那条走的是经典 Witt–Lazard 证明。
+3. **记号**：本篇用 `𝒰𝔤`、`⊙^n𝔤`（对称幂）、`⊗_≤𝔤`、`J𝔤`；图节点用 `U(L)`、`S(L)`、`gr U(L)`。
+   对应关系是 `⊙^n 𝔤 ↔ S(L)` 的 `n` 次分量、`𝒰^n𝔤/𝒰^{n−1}𝔤 ↔ gr_n U(L)`。**抄公式时不要混。**
+
+---
+
+## 33.3 ★ Bourbaki：位置钉死了（L1），内容与「Theorem 1」仍是 L0
+
+### 33.3.1 怎么拿到的（**新活路，值得进 reading-list**）
+
+Springer 书页仍是登录墙（§19.1 记的 303 → `idp.springer.com`）。本轮改走
+**德国国家图书馆（Deutsche Nationalbibliothek）为每条书目挂的「出版社目录扫描件」**：
+
+```
+https://d-nb.info/954432517/04      ← IDN 954432517 的第 04 号附件 = 目录扫描 PDF（8 页，1.3 MB）
+```
+
+WebFetch 落盘（**注意：它是纯图片型 PDF，WebFetch 的摘要器读不出来，必须落盘后用 `Read` 带 `pages` 读图**）
+→ `Read pages 1-8` 全部读毕。**L1**。
+
+### 33.3.2 标题页（PDF p.1；L1 逐字）
+
+> NICOLAS BOURBAKI / ELEMENTS OF MATHEMATICS / **Lie Groups and Lie Algebras** / **Chapters 1–3** /
+> Springer-Verlag / Berlin Heidelberg New York / London Paris Tokyo
+
+（**扫描件里没有版权页，故出版年未见**。见 33.3.5 的年份冲突。）
+
+### 33.3.3 ★★ 目录里 Chapter I §1–§2 的逐字转录（PDF p.2 = 书上 **p. xi**；L1）
+
+> **CHAPTER I. LIE ALGEBRAS … 1**
+> **§ 1. Definition of Lie algebras … 1**
+> &nbsp;&nbsp; 1. Algebras … 1 / 2. Lie algebras … 3 / 3. Commutative Lie algebras … 5 / 4. Ideals … 5 /
+> &nbsp;&nbsp; 5. Derived series, lower central series … 6 / 6. Upper central series … 6 / 7. Extensions … 7 /
+> &nbsp;&nbsp; 8. Semi-direct products … 8 / 9. Change of base ring … 11
+> **§ 2. Enveloping algebra of a Lie algebra … 12**
+> &nbsp;&nbsp; 1. Definition of the enveloping algebra … 12
+> &nbsp;&nbsp; 2. Enveloping algebra of a product … 13
+> &nbsp;&nbsp; 3. **Enveloping algebra of a subalgebra** … 14
+> &nbsp;&nbsp; 4. Enveloping algebra of the opposite algebra … 15
+> &nbsp;&nbsp; 5. Symmetric algebra of a module … 16
+> &nbsp;&nbsp; 6. Filtration of the enveloping algebra … 17
+> &nbsp;&nbsp; 7. **The Poincaré-Birkhoff-Witt Theorem … 18**
+> &nbsp;&nbsp; 8. Extension of derivations … 23
+> &nbsp;&nbsp; 9. Extension of the base ring … 25
+
+⇒ **可写进图的定位**：`Ch. I, §2, no. 7 «The Poincaré-Birkhoff-Witt Theorem», p. 18`（**L1**）。
+
+**顺带三条对本项目有用的目录情报（同一页/后页，L1）**：
+- **§2 no. 3「Enveloping algebra of a subalgebra」在 p. 14** ——「`U(L)` 作为 `U(H)`-模自由」这条
+  （= `math.verma-module-free-over-negative-part` 的直接上游）如果 Bourbaki 有，最可能在这里或 no. 7 的推论里。
+- **§1 no. 9「Change of base ring」p. 11 / §2 no. 9「Extension of the base ring」p. 25** ——
+  Bourbaki 显然是在**一般基环**上做的（否则不会有这两节），这与「`𝔤` 为自由 `K`-模」的前提相容，
+  但**这只是结构性旁证，不是对前提的核实**。
+- Chapter II §1 no. 5「**Structure of the cogebra `U(g)` in characteristic 0**」p. 116；
+  Chapter II §3「Enveloping algebra of the free Lie algebra」p. 136。
+
+### 33.3.4 ⚠ **硬性禁令：不得写「Theorem 1」**
+
+- 任务书给的定位是「Ch. I §2.7 **Theorem 1**」。**本轮对这个编号得到的证据是零。**
+  目录只到 `no. 7` 一级；Google Books 拿不到正文；所有说「就是 Theorem 1」的话都来自**检索后端的自述**，
+  按 §0 的口径**不可引**（这与 §15.4 那条 `Corollary A/B/D` 禁令同性质）。
+- 同理，**「`𝔤` 是自由 `K`-模」这条前提在 Bourbaki 原文里怎么写的，本轮完全没有核到**。
+  ⇒ **Bourbaki 目前不能作为「撤 inferred」的依据**：我们只知道那一节叫什么、在第几页。
+
+### 33.3.5 Google Books 与年份：两个坑
+
+| 探针 | 结果 | 判读 |
+|---|---|---|
+| 卷 id **`brSYF_rB2ZcC`**，控制查询 `"zzqxjkwmnbv"` | **No results** | ✔ 控制通过（本卷无「回落固定页」病） |
+| `"Poincaré-Birkhoff-Witt"` | **Page 187** | ✘ **与目录的 p.18 矛盾**。按目录，p.187 落在 Chapter II 的「Exercises for §4」区。⇒ **检索后端只回一个页码，而且不是首个命中**。**Google Books 这条路本轮判定为不可用于定位**（与 §15.3 Humphreys 卷的经验相反） |
+| `"Enveloping algebra"` | Page 16 | 与「§2 起于 p.12」相容，但无信息量 |
+| 卷元数据 | 「Publisher: Springer Science & Business Media；**Publication Year: 1975**；ISBN **3540642420 / 9783540642428**；**450 pages**；Edition: reprint」 | ⚠ **年份自相矛盾**：ISBN 354064242X 系列是 **1998 年 Springer 平装重印**的号，而 1975 是 Hermann/Addison-Wesley 英译本的年份（= lakos-2024-pbw 的 [5] 逐字著录）。**Google Books 的年份不可信。**「450 pages」与目录末条「… 449」相容 ⇒ 至少可确认**DNB 扫描的目录与该 Google Books 卷是同一套页码** |
+
+> ⇒ **因此本轮不把 Bourbaki 登记进 `sources.bib`**：正文未取、内部编号未核实、**连出版年都定不下来**
+> （key 的年份没法诚实地填）。沿用 §17 的口径留在本节备查。若 lead 认为 §15 的 humphreys-1972 先例
+> （正文未取也登记了）应当同样适用于 Bourbaki，那就登记——**但 note 里必须写死「只有目录是 L1」**。
+> 待填的骨架见 §33.7 末尾。
+
+---
+
+## 33.4 Dixmier：任务书给的 **2.1.11** 拿到了**相反**证据
+
+来源：**Danny Crytser, *Notes on Enveloping Algebras (following Dixmier)*, Summer 2019**，
+`https://myslu.stlawu.edu/~dcrytser/EnvelopingAlgebrasNotes.pdf`（落盘 385.3 KB，**L1 读毕 pp.1–7**）。
+首页摘要逐字：「These notes follow **[2] Ch. 2** very closely – mostly they were written to digest and provide
+additional background information.」（`[2]` = Dixmier）。
+
+**该讲义把自己的每条结论逐条挂到 Dixmier 的编号上（L1 逐字）**：
+
+| Crytser | 挂到 Dixmier | 内容（L1 逐字节录） |
+|---|---|---|
+| Lemma 1.1 | `[2, Lemma 2.1.3]` | `U(𝔤)` 的泛性质 |
+| Lemma 1.2 | `[2, Lem. 2.1.5]` | `σ(a_1)…σ(a_p) − σ(a_{π(1)})…σ(a_{π(p)}) ∈ U_{p−1}(𝔤)` |
+| Lemma 1.3 | `[2, Lem. 2.1.6]` | 「The set of monomials `{y_I : I increasing of length p}` spans the space `U_p(𝔤)`.」 |
+| **Lemma 1.5** | **`[2, Lem 2.1.8]`** | **「The set `{y_I : I increasing}` forms a basis for `U(𝔤)`.」← 这就是 PBW 基** |
+| Prop 2.3 | `[2, Prop. 2.2.4]` | `𝔤' ⊂ 𝔤` ⇒ `U(𝔤') ⊂ U(𝔤)` |
+| **Prop 2.4** | **`[2, Prop. 2.2.7]`** | 「Let `𝔤' ≤ 𝔤` and let `(y_1,…,y_q)` be a basis for a (vector space) complement of `𝔤'` in `𝔤`. Then the set `{y_1^{k_1}…y_q^{k_q} : k_j ∈ ℕ∪{0}}` is a **`U(𝔤')`-module basis for `U(𝔤)`**.」 |
+| Prop 2.5 | `[2, Prop. 2.2.8]` | `U(𝔥) ⊗_{U(𝔩)} U(𝔣) → U(𝔤)` 是双射 |
+
+**结论**：
+1. **有序单项式基在 Dixmier 里是 `Lem 2.1.8`（L3），不是 `2.1.11`。** `2.1.11` 是什么，本轮**仍然不知道**
+   （§17 已记「完全未核实」，本轮把它降级为「**有相反证据**」）。**禁止在图里写 Dixmier 2.1.11。**
+2. **`Prop. 2.2.7` 是 (B)（`U(L)` 作为 `U(子代数)`-模自由）的编号候选**，比 Humphreys 那条无字母可写的推论好。
+   ⚠ **但 Crytser 的转述里 `(y_1,…,y_q)` 是有限串**，且他自己的 Definition 1.6 逐字假设
+   「Assume that `𝔤` is **finite-dimensional** (although as in [4] its possible to make this work for
+   **countable-dimension** Lie algebras as well)」——**所以这条对 `vir` 能不能直接用，未定**。
+3. **Crytser 是个人讲义**，权威性等同 `swanson-2015-pbw`（lead 2026-09-11 裁决：个人笔记只作核对源）。
+   ⇒ 只用于「Dixmier 的编号大概是什么」，**不入 `sources.bib`**，也不作为图的 source。
+4. Dixmier §2.1 的**标题**是「The Poincaré-Birkhoff-Witt theorem」（L4，ScienceDirect 的章节页转述），
+   与 Crytser 的 2.1.x 编号相容；但 Dixmier 对 `𝔤` 的维数假设**本轮仍未核到**。
+
+---
+
+## 33.5 其余候选与两条「不要再抓了」的负面结论
+
+| 候选 | 本轮结果 |
+|---|---|
+| **Shepler–Witherspoon, *Poincaré-Birkhoff-Witt Theorems*, arXiv:1404.6497**（已发表：MSRI Publ. **67**, Cambridge Univ. Press, 2015, pp. 259–290——书目取自 lakos-2024-pbw 的 [37]，L1） | **★ 明确不可用**（L1 读毕 pp.1–6）。它的两条 PBW 陈述**都是加粗小标题、没有编号**：「**Original PBW Theorem.** *A Lie algebra `𝔤` embeds into its universal enveloping algebra `U(𝔤)`, and the associated graded algebra of `U(𝔤)` is isomorphic to `S(𝔤)`, the symmetric algebra on the vector space `𝔤`.*」「**PBW Basis Theorem.** *Let `v_1,…,v_n` be an ordered `k`-vector space basis of the Lie algebra `𝔤`. Then `{v_1^{a_1}⋯v_n^{a_n} : a_i ∈ ℕ}` is a `k`-basis of the universal enveloping algebra `U(𝔤)`.*」——而且 p.2 逐字定义「**A finite dimensional Lie algebra** is a finite dimensional vector space `𝔤` over a field `k` …」，p.2 又逐字说「we limit discussions to **finitely generated algebras** over `k` for simplicity」。**方向与本项目要的正相反**（要的是无限维），且无编号。**下一轮不要再抓这一篇。** |
+| **Paul Garrett, *Poincaré-Birkhoff-Witt theorem*（UMN 讲稿, 2011-04-08, 4 页）**，`www-users.cse.umn.edu/~garrett/m/algebra/pbw.pdf` | **有编号且方向正确**（L1 读毕）：「**[0.0.1] Theorem**: For any basis `{x_i : i ∈ I}` of a Lie algebra `𝔤` with *ordered* index set `I`, the monomials `x_{i_1}^{e_1}…x_{i_n}^{e_n}` (with `i_1 < … < i_n`, and integers `e_i > 0`) form a *basis* for the enveloping algebra `U𝔤`.」「**[0.0.2] Corollary**: The natural map of a Lie algebra to its universal enveloping algebra is an *injection*.」p.2 逐字：「The hard part of the argument is basically from Jacobson, and applies to **not-necessarily finite-dimensional** Lie algebras over arbitrary fields of characteristic 0.」p.1 逐字：「The following argument does not use any further properties of the Lie algebra `𝔤`, so *must* be general.」**⇒ 这是「无限维适用性」的第三条旁证**（前两条是 ardizzoni-2010 与 swanson-2015-pbw）。**但它是个人讲稿**，按 lead 2026-09-11 的裁决**只能作核对源、不进 `sources[]`**。 |
+| **Encyclopedia of Mathematics, "Birkhoff-Witt theorem"**（Springer/Kluwer 百科，作者 T.S. Fofanova） | 已读（检索后端转述，**L3**）。给出「域上任意李代数 + 有序基 ⇒ 有序积构成 `U(G)` 的基」与推论「`G → U(G)` 是单同态」，并说「The theorem remains valid if `k` is a **principal ideal domain**」。**方向正确、无维数限制**，**但百科条目没有编号**，且本轮只拿到转述。作为旁证记下，不入 bib。 |
+| **nLab, "PBW theorem"** | 前提写的是 **flat**（`𝔤` flat as `k`-module, `ℚ ⊂ k`），不是 free；陈述无编号。引的一手文献是 **Quillen, *Rational homotopy theory*, Ann. of Math. 90 (1969) 205–295, appendix B.3**（**新候选**：这是一条「带编号（附录小节号）+ 已发表 + 一般基环」的路线，本轮**未取正文**，L0）。 |
+| **Weibel, *An Introduction to Homological Algebra*, 「Theorem 7.3.7」** | **新候选，本轮零证据**。Google Books 卷 `flm-dBXfZ_gC`（§32.1 已记控制通过）：`"Poincaré-Birkhoff-Witt"` → 只回 **p.445**（按 §32 的经验那是书末索引区），`"ordered monomials"` → **No results**。**连 §7.3 的位置都没钉住 ⇒ 禁止写 Weibel 7.3.7。**（注意 `weibel-1994` 已在 bib 里，是 §28 给 `H²` 用的，**不要顺手拿它当 PBW 的来源**。） |
+| Serre / Jacobson / Kac IDLA / Moody–Pianzola | 均无公开全文，编号零证据（**L0**，沿用 §17）。 |
+
+---
+
+## 33.6 ★★ 形式化侧：三个证明助手都没有 PBW（本轮全部重查，读取日期 **2026-09-11**）
+
+| 系统 | 证据 | 等级 |
+|---|---|---|
+| **Lean 4 / Mathlib（源码）** | `raw.githubusercontent.com/leanprover-community/mathlib4/master/Mathlib/Algebra/Lie/UniversalEnveloping.lean` 逐条读声明：`Rel`、`ringCon`、`UniversalEnvelopingAlgebra`、`mkAlgHom`、`ι`、`lift`、`lift_symm_apply`、`ι_comp_lift`、`lift_ι_apply`、`lift_ι_apply'`、`lift_unique`、`hom_ext`。**无 PBW、无滤过、无对称代数同构；无 TODO**（只有 Porting note）。与 §16.4 读 docs 页的结论一致，但这次读的是**源码**。 | **L1** |
+| **★ Lean 4 / Mathlib（官方定理跟踪表）** | `docs/1000.yaml` 里有条目 `Q2270905: title: Poincaré–Birkhoff–Witt theorem`，**但该条目没有 `decl` / `authors` / `date` 字段** ⇒ **Mathlib 官方把它登记为「未形式化」**。（对照组：同表里 `Q1243340 Birkhoff–Von Neumann theorem` 有 `decl: doublyStochastic_eq_convexHull_permMatrix, authors: Bhavik Mehta, date: 2024`。） | **L1** |
+| **Isabelle / AFP** | `isa-afp.org/topics/mathematics/algebra/` 下与李代数相关的**只有一条**：**"Lie Groups and Algebras", Richard Schmoetten & Jacques D. Fleuriot, 2024-07-31**。其摘要（L2）形式化的是**微分几何路线**：Lie groups as locales on smooth manifolds、diffeomorphism groups、group actions、GL、smooth vector fields、"the Lie algebra of a Lie group"（左不变向量场）。**没有抽象李代数、没有泛包络代数、没有 PBW。** AFP 无 PBW 条目。 | **L2**（摘要级） |
+| **Coq / Rocq** | 本轮检索**未找到**任何 PBW 或泛包络代数的形式化。**这是「没找到」，不是「已证明没有」。** | **L0（否定）** |
+
+> ⇒ **§16.4 的硬约束不变，而且更硬了**：`math.pbw-theorem` 及其一切下游
+> **上限 `rigorous`，不得标 `formalized`**。
+> **★ 这条同时结案了 §19.2 的 Q18 的一半**：「Mathlib 的 1000.yaml 跟踪表」本轮**已查**，
+> 结果是「条目在、`decl` 不在」。下次复查只需再看这一个字段。
+> **Q18 剩下的一半**（`Mathlib/Algebra/Lie/Free.lean` docstring 里那句「I don't know of a proof that avoids
+> invoking the Poincaré–Birkhoff–Witt theorem」）**本轮仍未核**。
+
+---
+
+## 33.7 图里建议怎么改（供 curator 取舍；researcher 不改 `graph/`）
+
+### (a) 给 `math.pbw-theorem` 增加一条 source
+
+```yaml
+  - ref: lakos-2024-pbw
+    loc: "arXiv:1812.04896**v2**, Proposition 6.1, p. 16（「The PBW theorem holds if 𝔤 is a free K-module.」）；
+          该命题所指的「PBW theorem」由 Introduction, p. 1–2 定义：局部形式 = 𝒎^{(n)} : ⊙^n𝔤 → 𝒰^n𝔤/𝒰^{n−1}𝔤 为同构，
+          全局形式 (i) = 𝒎_≤ : ⊗_≤𝔤 → 𝒰𝔤 为 K-模同构（有序单项式基）；
+          第二条独立证明见 Appendix A（Witt–Lazard），Corollary A.4(f), p. 20"
+    note: |
+      **L1 全文读毕（researcher 2026-09-11，literature/extractions/math-sources.md §33.2）**。
+      前提逐字：「Assume that K is a unital commutative ring, and 𝔤 is a K-module with a compatible
+      Lie-ring structure; i. e. 𝔤 is a Lie K-algebra」——**全文无任何有限维假设**，基的索引集 A 任意。
+      域是特例（域上模皆自由）。本条 source 的作用是**背书适用范围**，不是替代 humphreys-1972 的教科书证明。
+      ⚠ 版本陷阱：v2（2024-07-23）的 comments 逐字为「Part 3 of original submission arXiv:1812.04896v1,
+      rewritten」⇒ v1 编号不同，`loc` 必须写死 v2。⚠ 未发表 preprint（无 journal-ref）。
+```
+
+### (b) 撤 `inferred` 的条件——**已经满足，但要配一条记录**
+
+`math.verma-module-free-over-negative-part--via-pbw-theorem` 里到 `math.pbw-theorem` 的边，
+其 `inferred: true` 的 note 逐字写的理由是：
+
+> **inferred 的理由是适用范围，不是论证**（math-sources.md §15.5，Q15）……
+> **撤销条件**：核到 Humphreys §17.1 对 L 的假设声明并确认不限有限维（Q15）。
+
+本轮的发现让这条**撤销条件本身可以放宽**：瓶颈从来不是「Humphreys 怎么说」，而是
+「**本图有没有一条来源背书无限维**」。现在有了。建议：
+
+1. 把该边改 `inferred: false`，note 重写为：
+   「适用范围由 **lakos-2024-pbw, Prop 6.1（K 幺交换环、𝔤 自由 K-模、无维数限制）** 背书；
+    vir 与 vir₋ 都是特征零域上的可数维李代数，落在其假设内，且都有现成可数全序基
+    （{L_n}∪{C}；{L_{-1} < L_{-2} < …}），不需要选择公理。
+    humphreys-1972 仍作为教科书证明的来源保留，其有限维半单语境**不再是本边的瓶颈**。
+    原 inferred 理由与撤销条件（Q15）见 math-sources.md §15.5、§33.7。」
+2. **Q15 不必再追**（Humphreys §17.1 的假设声明）：它现在只影响 `humphreys-1972` 这一条 source 的
+   自洽性，不再卡住任何一条边。建议在 §19.2 把 Q15 从「决定 inferred 能否撤」降级为「可选」。
+3. ⚠ **一个前置动作，请 curator/lead 裁决**：`math.pbw-theorem` 的 **statement 里那段【范围】**
+   （「所引来源的原书语境是否允许无限维 L **未核实**」）与 **notes 的「警告二」** 都已**过时**。
+   按项目原则 1，statement 文本不可改。可选做法：(i) 在 notes 里追加一条「2026-09-11 更新：
+   范围问题已由 lakos-2024-pbw Prop 6.1 解决，statement 的【范围】段与警告二作废」；
+   或 (ii) 新建 `math.pbw-theorem-v2` 并把旧卡标 `superseded_by`。**researcher 不代决。**
+
+### (c) 建议新增一条独立推导 `math.pbw-theorem--via-lakos`
+
+现在 `math.pbw-theorem` 只挂着 `--via-humphreys` 一条推导，而那条的 gaps 第一条逐字承认
+「**印本未取得** …… 本推导对来源的核实等级是 L3/L4，不是 L1」。新增一条
+
+```yaml
+id: math.pbw-theorem--via-lakos
+target: math.pbw-theorem
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: lakos-2024-pbw
+    loc: "arXiv:1812.04896v2, §6 (Prop. 6.1, p.16, 走 Magnus–Witt 路线) 与 Appendix A (Cor. A.4(f), p.20, 走经典 Witt–Lazard 路线)"
+```
+
+的好处：**同一张卡挂两条独立推导**（教科书 vs 全文可读的 preprint），
+把「可核对性」与「权威性」分开承载，正合项目原则 1。**同时它自带两条独立证明**（§33.2.5）。
+`status` 仍是 `rigorous`（未形式化，见 §33.6）。
+
+### (d) Bourbaki 的 `loc` 骨架（**若 lead 决定登记**）
+
+```yaml
+  - ref: bourbaki-lie-<年份待定>
+    loc: "Ch. I, §2, no. 7 «The Poincaré-Birkhoff-Witt Theorem», p. 18（Springer 英译 Chapters 1–3）"
+    note: |
+      **只有目录是 L1**（DNB 目录扫描 d-nb.info/954432517/04）。**正文完全未取**：
+      定理的内部编号（常被转引为 "Theorem 1"）与前提（「𝔤 为自由 K-模」）**均未核实（L0）**。
+      **禁止在图里写 "Theorem 1"。** 出版年在来源间冲突（Google Books 元数据 1975 + ISBN 3540642420
+      系 1998 重印；lakos-2024-pbw [5] 著录为 Hermann/Addison-Wesley 1975）。
+```
+
+**researcher 本轮不登记它**，理由见 §33.3.5。
+
+---
+
+## 33.8 访问日志与未解决问题（本节）
+
+### 33.8.1 访问日志
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Lakos arXiv:1812.04896（22 页）** | `arxiv.org/pdf/1812.04896` | **成功**（落盘 301.4 KB → `Read pages`；读 pp.1–6, 16–22） |
+| **Lakos abs 页（版本/journal-ref）** | `arxiv.org/abs/1812.04896` | **成功**（v1 2018-12-12 / v2 2024-07-23；无 journal-ref） |
+| **★ Bourbaki 目录（8 页扫描）** | **`d-nb.info/954432517/04`** | **成功**（落盘 1.3 MB；**纯图片型 PDF，WebFetch 摘要器读不出，必须 `Read pages` 读图**） |
+| DNB 书目记录本体 | `d-nb.info/954432517` → 302 → `portal.dnb.de/opac.htm?...` | **失败：`portal.dnb.de` 被 Anubis 反爬拦截（"Access Denied: error code ..."）** |
+| **Shepler–Witherspoon arXiv:1404.6497** | `arxiv.org/pdf/1404.6497` | **成功**（落盘 356.9 KB；读 pp.1–6） |
+| **Garrett PBW 讲稿（4 页）** | `www-users.cse.umn.edu/~garrett/m/algebra/pbw.pdf` | **成功**（落盘 93.7 KB，全读） |
+| **Crytser, Notes on Enveloping Algebras（following Dixmier）** | `myslu.stlawu.edu/~dcrytser/EnvelopingAlgebrasNotes.pdf` | **成功**（落盘 385.3 KB；读 pp.1–7） |
+| **Mathlib 源码** | `raw.githubusercontent.com/leanprover-community/mathlib4/master/Mathlib/Algebra/Lie/UniversalEnveloping.lean` | **成功**（raw.githubusercontent.com **不需要认证**，是读 Mathlib 源码的稳定路线） |
+| **Mathlib `docs/1000.yaml`** | `raw.githubusercontent.com/leanprover-community/mathlib4/master/docs/1000.yaml` | **成功**（Q2270905 无 decl） |
+| **Isabelle AFP 代数主题页** | `isa-afp.org/topics/mathematics/algebra/` | **成功**（只有一条 Lie 相关条目） |
+| AFP 站内搜索页 | `isa-afp.org/search?term=...` | **失败**（纯 JS，返回的是空搜索框） |
+| nLab | `ncatlab.org/nlab/show/PBW+theorem` | **成功**（带重音的标题 `Poincaré-Birkhoff-Witt+theorem` 是 **404**，**要用 `PBW+theorem`**） |
+| Google Books（Bourbaki 卷 `brSYF_rB2ZcC`） | `books.google.com/books?id=…&q=…` | **控制通过但结论不可用**：只回**一个**页码，且与目录矛盾（见 §33.5 表） |
+| Google Books（Weibel 卷 `flm-dBXfZ_gC`） | 同上 | `"Poincaré-Birkhoff-Witt"` → p.445（索引区）；`"ordered monomials"` → No results |
+| Dixmier 正文 | 全网 | **仍然一页都拿不到**（§17 的结论不变） |
+
+> **对 `reading-list.md` 的建议增补**：
+> - **★ 新活路一：`d-nb.info/<IDN>/04` = 出版社目录扫描件。** 德国国家图书馆给很多 Springer/Hermann 书挂了
+>   目录扫描，**这是 Springer 登录墙的一条绕路**，能拿到章节标题 + 页码（L1）。
+>   **注意它是图片型 PDF：必须落盘后 `Read pages` 读图，WebFetch 的摘要器会说「只有二进制」。**
+>   （反面：`portal.dnb.de` 的检索界面被 Anubis 反爬挡死，不要去。）
+> - **★ 新活路二：`raw.githubusercontent.com/leanprover-community/mathlib4/master/<path>`** 直接读 Mathlib 源码与
+>   `docs/1000.yaml`，**不需要认证**，比读 `mathlib4_docs` 的 HTML 页更权威（读的是源码本身）。
+> - **新活路三**：`www-users.cse.umn.edu/~garrett/`、`myslu.stlawu.edu/~<user>/`（个人讲稿，只作核对源）。
+> - **★ 修正 §15.3 的乐观结论**：Google Books 的「控制实验通过」**只保证没有回落页病，不保证返回的是首个命中**。
+>   本轮 Bourbaki 卷控制通过，返回的 p.187 却与出版社目录的 p.18 矛盾。
+>   ⇒ **今后 Google Books 的页码只能作为「与其它证据相容性检验」，不能单独定位。**
+> - **新死路**：`portal.dnb.de`（Anubis 反爬）；`isa-afp.org/search`（纯 JS）；
+>   `ncatlab.org/nlab/show/Poincaré-...`（带重音的 URL 404）。
+
+### 33.8.2 未解决 / 留给下一轮
+
+- **Q23** **Bourbaki Ch. I §2 no. 7 的正文（p.18–23）**：定理的内部编号是不是 "Theorem 1"？前提怎么写的？
+  持书者看一眼即可结案。**在结案前，图里只许写 `Ch. I, §2, no. 7, p. 18`。**
+  顺带看 **§2 no. 3（p.14）**有没有「`U(L)` 作为 `U(H)`-模自由」——那是 (B) 的编号候选。
+- **Q24** **Bourbaki 该卷的出版年**（Springer 英译到底著录 1975 还是 1989？ISBN 3540642420 是哪一次重印？）。
+  这条决定 `sources.bib` 的 key 怎么起。DNB 门户被反爬挡住，可试 Library of Congress / WorldCat。
+- **Q25** **Dixmier `2.1.11` 究竟是什么**（§33.4 已证明它**不是**有序单项式基）。低优先级，
+  但若有人再看到「Dixmier 2.1.11 = PBW」的说法，请指向本节。
+  更值得追的是 **Dixmier `Prop. 2.2.7`**（`U(𝔤')`-模基）对无限维是否成立。
+- **Q26** **Quillen, *Rational homotopy theory*, Ann. of Math. 90 (1969), appendix B.3**（nLab 引的一手出处，
+  flat 模版本）。这是「带编号 + 已发表 + 一般基环」的新候选，本轮未取正文。
+- **Q27** **lakos-2024-pbw 是否已被期刊接受**（现为 L0）。若发表，编号可能变；`loc` 现在写死 v2。
+- **Q28** **Q18 的后半**：`Mathlib/Algebra/Lie/Free.lean` 的 docstring 是否真写着
+  「I don't know of a proof that avoids invoking the Poincaré–Birkhoff–Witt theorem」。
+  现在有了 `raw.githubusercontent.com` 这条路，**一次 fetch 就能核实**，本轮遗漏。
+- **Q29** Isabelle AFP 那条 *Lie Groups and Algebras*（Schmoetten–Fleuriot 2024）本轮只读了摘要（L2）。
+  若日后要拿它当「李代数已被别的系统形式化」的旁证，需读条目正文确认它形式化到哪一步。
+# § Kac 行列式公式
+
+> **编号说明**：本节按分派写作 **§34**。**§33 预留给「PBW 一般来源」**（另一路 agent 并行写入，
+> 本轮我写入时该节尚不存在）。**若合并后 §33 仍空缺，lead 可把本节整体改号为 §33**——
+> 本节内部没有交叉引用自己的节号，改号是安全的。§20–§23 在本文件里本来就是空号。
+
+## 34. Kac 行列式公式：可逐字定位的带编号来源（researcher，2026-09-11）
+
+- 触发：`graph/statements/worldsheet/kac-determinant.yaml` 与其推导 `--via-feigin-fuchs` 的 `sources`
+  现引 `kac-1979`（`loc: "Theorem 1"`）与 `feigin-fuchs-1982`（`loc: "§2（完整证明）"`），
+  **两条编号都未核实**，且 `sources.bib` 对 `kac-1979` 指向哪一篇存疑
+  （`brst-cohomology-sources.md` §1.5：FGZ 1986 的 ref 10 是 ICM Helsinki 1978，不是 LNP 94）。
+- 本轮结果：**两条 `loc` 都要改**，并且找到了**一条可公开获取、可逐字引用的带编号来源**（Schottenloher Thm 6.12）。
+
+### 34.1 ★★★ `kac-1979` 归属结论：LNP 94 与 ICM Helsinki 是**两篇不同的论文**，且两者都被文献当作行列式公式的出处
+
+**决定性证据（L1）：Kac 本人的出版目录** `https://math.mit.edu/~kac/publications.pdf`
+（WebFetch 落盘 159 KB → `Read pages 1-3` 读图），"Publications" 列表第 3 页逐字：
+
+> 30. Contravariant form for infinite dimensional Lie algebras and superalgebras, *Lecture
+>     Notes in Physics* **94** (1979), 441–445.
+> 31. (with D. Kazhdan) Structure of representations with highest weight of infinite dimen-
+>     sional Lie algebras, *Advances in Math.* **34** (1979), 97–108.
+> 32. Highest weight representations of infinite dimensional Lie algebras, *Proceedings of ICM,
+>     Helsinki* **1978** (1980), 299–304.
+
+⇒ **#30 与 #32 是目录里两个独立条目，不是同一篇的两个版本**。
+「`kac-1979` 到底是哪篇」这一疑点由此结案：**`kac-1979` 就是 #30 = LNP 94, 441–445**，登记无误。
+顺带**副产品**：`kac-kazhdan-1979` 的终页 **108 由作者本人目录确认**（原 note 说「终页未与出版方核对」，可解除）。
+
+但**新的分歧**随之出现——两篇都被当作 Kac 行列式的出处：
+
+| 谁 | 把行列式公式归给哪篇 | 等级 |
+|---|---|---|
+| **Feigin–Fuchs 1982**（俄文原刊，§34.2） | **[2] = LNP 94, 1979, 441–445** | **L1 逐字** |
+| **Schottenloher 2008 Thm 6.12**（§34.3） | **[Kac80] = Proc. Intern. Congress Helsinki, 299–304, 1980** | **L1 逐字** |
+| Lian–Zuckerman 1991 [K1]（`primary-sources-round2.md` §1.6） | LNP 94, p. 441 | L1（前轮） |
+| FGZ 1986 ref 10（`brst-cohomology-sources.md` §1.5） | ICM Helsinki 1978, Vol. 1, 299–304 | L1（前轮） |
+| Goddard–Olive 型引用（检索后端转述，未逐字核实） | **两篇并列写在同一条**：「Lecture Notes in Physics, Vol. 94, p. 441 …; in Proc. Int. Congress of Math., Helsinki (1978)」 | L4 |
+
+**结论与建议**：
+1. `kac-1979` 保持指向 LNP 94，**note 里写死「与 ICM 那篇是两篇，不是同一篇的两个版本，依据是 Kac 本人出版目录 #30/#32」**。
+2. **新增 bib key `kac-1980-icm`**（ICM Helsinki 1978，出版年 1980）。FGZ 与 Schottenloher 引的是它，
+   图里凡是转述这两家的地方应引它而不是 `kac-1979`。
+3. **「哪一篇最先陈述 Virasoro 的行列式公式」本轮未能裁决**（两篇正文都没拿到，见 §34.10 Q23/Q24）。
+   一条**弱倾向**（L4，不得单独用）：检索后端称 Kac 本人的《Infinite dimensional Lie algebras》
+   把 ICM 那篇（[1978 B]）引在 **g(A) 的最高权模与特征标公式**两章，暗示 ICM 那篇偏 Kac–Moody 综述，
+   而 LNP 94 的标题「contravariant form … and superalgebras」正对逆变形式；
+   FF 1982 作为**同期最内行的引用者**选了 LNP 94。
+4. **`loc` 里绝不能再写「Theorem 1」**：LNP 94 正文未获取，内部编号 **L0**。
+
+### 34.2 ★★★ Feigin–Fuchs 1982 全文核实（俄文原刊，L1 逐页读图）——**定理号是 §3.2 的「Теорема 3.1」，证明在 §4.2**
+
+**获取途径（可复用，L1）**：Math-Net.Ru
+`https://www.mathnet.ru/eng/faa1619`（元数据）→
+`https://www.mathnet.ru/php/getFT.phtml?jrnid=faa&paperid=1619&what=fullt&option_lang=eng`
+（WebFetch 落盘 2 MB **扫描图 PDF** → `Read pages` 逐页读图；**PDF 页 = 俄文刊页 − 46**）。
+先用 `…/archive.phtml?jrnid=faa&wshow=issue&year=1982&volume=16&issue=2` 定位 `paperid=1619`（p. 47–63）。
+
+**元数据（L2，Math-Net.Ru 页面）**：Б. Л. Фейгин, Д. Б. Фукс,
+《Кососимметрические инвариантные дифференциальные операторы на прямой и модули Верма над алгеброй Вирасоро》,
+Функц. анализ и его прил. **16**:2 (1982), 47–63；英译 Funct. Anal. Appl. **16**:2 (1982), **114–126**；
+DOI 10.1007/BF01081626；MR **659165**；Zbl **0505.58031**；收稿 **15.09.1981**。
+⚠ **俄文标题的词序是「Кососимметрические инвариантные…」（先「斜对称」后「不变」），
+bib 里英文标题 "Invariant skew-symmetric…" 是英译本用法**，两者都能查到，不必改。
+
+#### (a) 论文自述的结构（书上 p. 47，L1 逐字节选）
+
+> «Основным результатом этой статьи является **теорема 1.1**, доставляющая полную классификацию
+> кососимметрических дифференциальных операторов…»
+> «Эта проблема приводимости **решена в 1979 г. Кацем [2]**, и с помощью его результатов удается
+> доказать нашу основную теорему. Более того, … простые соображения, относящиеся к инвариантным
+> операторам, позволяют дать **новое доказательство теоремы Каца**.»
+> «В **§ 3** формулируется **теорема Каца**, и при помощи этой теоремы и результатов § 2 доказывается
+> основная теорема. Заключительный **§ 4 содержит доказательство теоремы Каца**, а также
+> упоминавшихся комбинаторных тождеств.»
+
+**⇒ 三条对图直接有用的事实**：
+1. 本文的**主定理是 Theorem 1.1（不变微分算子的分类），不是 Kac 行列式**；
+2. **Kac 行列式在 §3 被陈述、在 §4 被证明**；现图里 `feigin-fuchs-1982` 的 `loc: "§2（完整证明）"` **是错的**
+   （§2 讲的是「不变算子 ↔ 特殊向量」的辅助构造与主系统的渐近解）；
+3. 作者自称给的是**「новое доказательство» = 一个新证明**，并把「可约性问题**已由 Kac 于 1979 年解决**」
+   写在明处。**因此不宜把本文描述成「第一个完整证明」**——那是二手文献的说法，不是作者自称。
+
+#### (b) ★ 定理原文（书上 **p. 58**，§3.2 «Теорема Каца»；L1 逐字）
+
+引出句：«**Кацу удалось вычислить определитель матрицы** M_{h,c}(k). Вот его результат.»
+
+> **Теорема 3.1 (см. [2]).**
+>
+> det² M_{h,c}(k) = C ∏_{i=1}^{k} ∏_{j|i} Φ_{j, i/j}(h, c)^{p(k−i)},
+>
+> Φ_{α,β}(h, c) = ( h + (1/24)(α²−1)(c−13) + (1/2)(αβ−1) ) ×
+>                 ( h + (1/24)(β²−1)(c−13) + (1/2)(αβ−1) ) + (α²−β²)²/16,
+>
+> где **C — ненулевая константа**.
+>
+> **Следствие.** Для существования у модуля V_{h,c} особого вектора степени ≤ k необходимо и
+> достаточно, чтобы для некоторых натуральных чисел k′, k″ с k′k″ ≤ k имело место равенство
+> Φ_{k′,k″}(h, c) = 0.
+
+**四条必须随引用一起写的注意事项**：
+- **是 det²（行列式的平方），不是 det**。Φ_{α,β} 是**一对** (α,β) 与 (β,α) 的合并因子，
+  故 ∏_{j|i} Φ_{j,i/j} = [∏_{j|i}(h − h_{j,i/j})]²，两边平方后与标准写法一致（验算见 §34.8）。
+- **下标判读**：扫描件上 Φ 的第一个下标字形在 `i` 与 `j` 之间不易分辨；
+  按 ∏_{j|i} 的求积变量以及 p. 62 同一式的重复出现，**只能是 Φ_{j, i/j}**（i = rs，j 跑遍 i 的因子）。
+  这一处是**字形 L2 + 数学强制**，不是纯 L1。
+- **C 只被断言「非零」，没有断言「正」**。图卡现在写的是「α_N 是…**正**常数」，
+  **本轮找到的两个来源都不支持「正」**（Schottenloher 写的是 K_N ≥ 0，见 §34.3）。
+- 前置定义（同页 §3.2，L1）：M_{h,c}(k) 是 Verma 模 V_{h,c} 的 k 次齐次分量（维数 p(k)）上，
+  把 U(L₁⁻) 的 p(k) 个线性无关元 e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用到真空 v 上得到的基的 Gram 矩阵；
+  正文逐字说「определяемая этой матрицей квадратичная форма называется **формой Шаповалова**」。
+  **h, c 取任意复数**（p. 57 逐字：«Пусть h и c — два комплексных числа»）——
+  这一点比 Schottenloher 的实 Hermite 版本更贴合图卡。
+
+#### (c) 证明的位置（书上 **p. 62**，L1）
+
+小节标题逐字：**«4.2. Доказательство теоремы 3.1.»**，证明用 §4.1 显式构造的特殊向量 ξ^k_{m,n}
+（Предложение 4.1、4.2）+ §3 的 Предложение 3.2、3.3 + 归纳，末句：
+«Таким образом, det² M_{h,c}(r) делится на ∏∏_{j|i} Φ_{j,i/j}(h,c)^{p(r−i)}，и очевидное вычисление
+степеней показывает, что частное есть константа»。
+
+#### (d) 参考文献（书上 **p. 63**，L1 逐字）——**这是 §34.1 的关键证据**
+
+> 1. Фейгин Б. Л., Фукс Д. Б. Об инвариантных дифференциальных операторах на прямой. —
+>    Функц. анализ, 1979, т. 13, вып. 4, с. 91–92.
+> 2. **Kac V. G. Contravariant form for infinite-dimensional Lie algebras and superalgebras.
+>    Lecture Notes Phys. V. 94, 1979, p. 441–445.**
+> 3. Kac V. G., Peterson D. H. Spin and wedge representations of infinite-dimensional Lie algebras
+>    and groups. — Proc. Nat. Acad. Sci. USA, 1981, v. 78, p. 3308–3312.
+> 4. Гроэман Д. Я. Классификация билинейных инвариантных операторов на тензорных полях. —
+>    Функц. анализ, 1980, т. 14, вып. 2, с. 58–59.
+> 5. Гельфанд И. М., Фукс Д. Б. Когомологии алгебры Ли векторных полей на окружности. —
+>    Функц. анализ, 1968, т. 2, вып. 4, с. 92–93.
+
+⇒ **FF 的 [2] 就是 `kac-1979`（LNP 94），一字不差**；他们**没有**引 ICM 那篇。
+（顺带：条目 5 与 bib 里 `gelfand-fuks-1968` 的元数据一致。）
+
+#### (e) ⚠ 一处未裁决的印刷/判读问题
+
+书上 **p. 59 首句**（紧接 Theorem 3.1 与其推论之后）渲染为：
+«Насколько нам известно, доказательство **теоремы 2.1** не опубликовано. Мы приведем ее доказательство в § 4.»
+（「据我们所知，定理 ?.1 的证明未曾发表。我们将在 §4 给出它的证明。」）
+
+- **字形上读作 2.1**（同一页与 p. 61 上「теорему 3.1」「теорему 2.1」两种写法都出现，说明字形可分辨）；
+- **但 §2 里根本没有「Теорема 2.1」**——只有 §2.4 的 **Предложение 2.1**（S̄_k 是代数曲线），
+  而且它在原地就被证明了（«Предложение доказано.»，p. 54）；
+- **§4 里唯一被证明的编号定理是 3.1**（§4.2 标题）。
+
+⇒ 语义上这句只能指 **Теорема 3.1**（即：Kac 的证明未发表，我们补上），但**字面印的是 2.1**。
+**图里不得引用这句作为「Kac 只宣布不证明」的证据**，直到有人核对英译本（Q26）。
+可以安全引用的是 §34.2(a) 的三句（Kac 1979 解决了问题 / 我们给新证明 / §4 含 Kac 定理的证明）。
+
+### 34.3 ★★★ 可公开获取的带编号来源：Schottenloher, LNP 759, **Ch. 6, Theorem 6.12**（L1 全章读图）
+
+**获取途径**：作者本人 LMU 主页按章挂的 PDF，
+`https://www.mathematik.uni-muenchen.de/~schotten/LNP-cft-pdf/06_978-3-540-68625-5_Ch06_23-08-08.pdf`
+（落盘 302 KB → `Read pages` 读图；**PDF 页 = 书页 − 86**）。
+页脚逐字：「Schottenloher, M.: *Representation Theory of the Virasoro Algebra*. Lect. Notes Phys. **759, 91–102** (2008)
+DOI 10.1007/978-3-540-68628-6**_7**」——**又一次「章号 6 / DOI 后缀 _7」错位**，与 §11、§29 记录的模式一致，
+`loc` 请写「Ch. 6, LNP 759, pp. 91–102」，不要用 DOI 后缀推章号。
+
+章内结构（L1）：§6.1 Unitary and Highest-Weight Representations (p. 91)、**§6.2 Verma Modules (p. 92)**、
+**§6.3 The Kac Determinant (p. 95)**、§6.4 Indecomposability and Irreducibility (p. 99)、
+§6.5 Projective Representations of Diff₊(𝕊) (p. 100)、References (p. 102)。
+章首第一句逐字：「Most of the results in this chapter can be found in **[Kac80]**.」
+
+**可引编号（均 L1 逐字）**：
+
+- **Theorem 6.8, p. 96**（Hermite 形式的存在唯一性 = 图卡里「由 L_n^† = L_{−n} 与 ⟨h|h⟩ = 1 定义」那句）：
+  > Let h, c ∈ ℝ and M = M(c,h).
+  > 1. H : M × M → ℂ is the unique hermitian form satisfying H(v₀,v₀) = 1, as well as
+  >    H(L_n v, w) = H(v, L_{−n} w) and H(Zv,w) = H(v,Zw) for all v,w ∈ M and n ∈ ℤ.
+  > 2. H(v,w) = 0 for v ∈ V_N, w ∈ V_M with N ≠ M, that is the eigenspaces of L₀ are pairwise orthogonal.
+  > 3. ker H is the maximal proper submodule of M.
+- **Definition 6.11, p. 97**：「Let P(N) := dim_ℂ V_N and {b₁,…,b_{P(N)}} be a basis of V_N.
+  We define matrices A^N by A^N_{ij} := H(b_i,b_j) for i,j ∈ {1,…,P(N)}.」
+- **★★ Theorem 6.12, p. 98**（**本轮为本节点找到的最贴切的带编号来源**）逐字：
+  > **Theorem 6.12. [Kac80]** *The Kac determinant* det A^N *depends on* (c,h) *as follows:*
+  >
+  > det A^N(c,h) = K_N ∏_{p,q ∈ ℕ, pq ≤ N} (h − h_{p,q}(c))^{P(N−pq)},
+  >
+  > *where* **K_N ≥ 0** *is a constant which does not depend on* (c,h), *the* P(M) *is as in Definition 6.11, and*
+  >
+  > h_{p,q}(c) := (1/48)( (13 − c)(p² + q²) + √((c−1)(c−25)) (p² − q²) − 24pq − 2 + 2c ).
+  >
+  > 紧接一句：「**A proof can be found in [KR87] or [CdG94], for example.**」
+- **Corollary 6.10, p. 97**（H 半正定 ⇒ c ≥ 0 且 h ≥ 0）；**Remark 6.9, p. 97**（M/ker H 上 H 非退化但不定）；
+  **Theorem 6.13, p. 98–99**（酉性完全分类，第 2 条给出 **minimal model 参数化**：
+  c(m) := 1 − 6/(m(m+1))，h_{p,q}(m) := (((m+1)p − mq)² − 1)/(4m(m+1))，1 ≤ p ≤ q < m）；
+  **Theorem 6.17, p. 100**（Verma 模不可分解 / 商模不可约）。
+- **章末参考文献（p. 102，L1 逐字，与 §34.1 直接相关）**：
+  > [Kac80] V. Kac. Highest weight representations of infinite dimensional Lie algebras. In: *Proc.
+  >         Intern. Congress Helsinki*, Acad. Sci. Fenn., 299–304, 1980.
+  > [KR87]  V. Kac and A.K. Raina. *Highest Weight Representations of Infinite Dimensional Lie
+  >         Algebras*. World Scientific, Singapore, 1987.
+  > [CdG94] F. Constantinescu and H.F. de Groote. *Geometrische und Algebraische Methoden der
+  >         Physik: Supermannigfaltigkeiten und Virasoro-Algebren*. Teubner, Stuttgart, 1994.
+  > [FQS86] D. Friedan, Z. Qiu, S. Shenker. Details of the nonunitary proof for highest weight
+  >         representations of the Virasoro algebra. *Comm. Math. Phys.* **107** (1986), 535–542.
+  > [GKO86] P. Goddard, A. Kent, D. Olive. Unitary representations of the Virasoro and
+  >         Super-Virasoro algebras. *Comm. Math. Phys.* **103** (1986), 105–119.
+
+**⚠ 引用 Theorem 6.12 必须同时写清的三条限制**：
+1. **实数限制**：Theorem 6.8 起整段假设 **c, h ∈ ℝ**，A^N 是 **Hermite** 形式的 Gram 矩阵；
+   图卡若要覆盖复 (c,h) 的双线性 Shapovalov 形式，**该限制要么写进 note，要么改引 FF Theorem 3.1**（那边是 ℂ）。
+2. **常数**：书上写 **K_N ≥ 0**，**没有**写 > 0。
+3. **归属**：本书把这条定理归给 **[Kac80] = ICM Helsinki**，并把**证明外包给 [KR87] / [CdG94]**，
+   **全章没有引 Feigin–Fuchs**。所以「Kac 陈述 + FF 证明」这条历史线**不是 Schottenloher 的说法**。
+
+### 34.4 物理侧标准转述：Di Francesco–Mathieu–Sénéchal —— **是 §7.2，不是任务书说的 §7.3.2**
+
+- Google Books 卷 `keUrdME5rhIC`（*Conformal Field Theory*, Springer 1997）：
+  `"Kac determinant"` → **p. 205**；`"Unitarity and the Kac Determinant"` → **p. 205**；
+  **控制查询** `"qxzptvv wrrglmn"` → 无命中（只回封面）⇒ **控制通过**（L4 带控制）。
+- 检索后端读到的章节结构（L4，未逐页核实）：**Ch. 7「Minimal Models I」**；
+  §7.1 Verma Modules (p. 200)；**§7.2 The Kac Determinant (p. 205)**；§7.2.1 Unitarity and the Kac Determinant (p. 205)；
+  §7.2.2 Unitarity of c > 1 Representations (p. 209)；§7.2.3 Unitary c < 1 Representations；§7.3 = minimal models 本体。
+- ⇒ **任务书里的「§7.3.2」与此不符**；本轮**没有任何证据支持 §7.3.2**。
+- **公式号（如常被转引的 (7.30)）本轮完全未核实（L0），不得写进图。**
+- 结论：DMS 只能作**旁证**，`loc` 最多写「§7.2 The Kac Determinant, p. 205（L4，公式号未核实）」，
+  而且**不必写**——`schottenloher-2008` 已经提供了更强的同类来源。
+  （注：检索结果里有一个 `scispace.com` 的全本 PDF；**按 literature/CLAUDE.md 规则 1 未使用**，
+  是否可用留给 lead 裁决，与 §28.1 的 Weibel 全本问题同类。）
+
+### 34.5 Iohara–Koga, *Representation Theory of the Virasoro Algebra* (2011)：**Chapter 4 = 「Determinant Formulae」，编号仍 L0**
+
+- 章标识（L2/L3）：Iohara, K., Koga, Y. (2011). **"Determinant Formulae"**, in *Representation Theory of
+  the Virasoro Algebra*, Springer Monographs in Mathematics, **DOI 10.1007/978-0-85729-160-8_4**。
+  章序（L4）：1 Preliminary → 2 Classification of Harish-Chandra Modules → 3 The Jantzen Filtration →
+  **4 Determinant Formulae** → 5 Verma Modules I: Preliminaries。
+- Springer 官方章摘要（L4，检索后端转述 Springer 页面，**未逐字核实**）：
+  「The Kac determinant formula for Verma modules over Vir is given together with its proof **in the
+  language of vertex algebras**, a result that is crucial for the analysis of Verma modules in Chapters 5 and 6.
+  The chapter also provides determinant formulae for the Vir-module maps from a Verma module to the Fock
+  module … and from a Fock module to the contragredient dual of the Verma module …」
+- **访问全部失败**：`link.springer.com/chapter/…_4` 与 `…/book/…` 一律 303 → `idp.springer.com/authorize`；
+  Google Books 该卷**无预览**（`vid=ISBN9780857291592` + `"Kac determinant"` → 无结果页，非「无命中」）。
+- ⇒ **「Theorem 4.1」这类编号一个字都不许写**。这本书仍是**主题最对口**的候选（也是 Kytölä 的 [IK10]），
+  留待能进 Springer 的人核对（Q28），与 §30.3 的 Q19 是同一本书、同一堵墙。
+
+### 34.6 Kac–Raina *Bombay Lectures*：本轮唯一新增的是「它被当作证明出处」这一事实
+
+- **L1 新证据**：Schottenloher Theorem 6.12 后一句把证明外包给 **[KR87]**（= `kac-raina-1987` 第 1 版）与 [CdG94]。
+  这是图里第一次有 L1 来源把 Kac–Raina 与**Kac 行列式的证明**挂钩。
+- 但**书内讲号/命题号仍未核实**，且 `sources.bib` 的**版本陷阱**（第 1 版约 12 讲 / 2013 第 2 版 18 讲，编号不可互换）依旧。
+  ⇒ `loc` **只能写主题**（「Kac 行列式的证明」），**不得写 Lecture / Theorem 号**。本轮没有新增第 2 版的 key。
+
+### 34.7 形式化状态：**Kytölä 的 VirasoroProject 没有 Shapovalov 形式，也没有 Kac 行列式**（三条独立证据，L1）
+
+1. **Lean 文件清单**（`github.com/kkytola/VirasoroProject/tree/master/VirasoroProject`，2026-09-11 读取）：
+   21 个 `.lean` 文件——CentralChargeCalc / CentralExtension / Commutator / CyclicTripleSum / FockSpace /
+   FockSpaceSugawara / HeisenbergAlgebra / IndexTri / IsCentralExtension / LieAlgebraModuleUEA /
+   LieAlgebraRepresentationOfBasis / LieCohomologySmallDegree / **LieVerma** / SectionSES / Sugawara /
+   **VermaModule** / VirasoroAlgebra / VirasoroCocycle / **VirasoroVerma** / WittAlgebra / WittAlgebraCohomology。
+   **没有 ShapovalovForm.lean、没有 KacDeterminant.lean、没有 SingularVector.lean。**
+2. **arXiv:2510.21741 的 Table 1（书上 p. 2，L1）**「Main objects and results formalized and discussed in this report」
+   共 7 行：中心扩张 (Def 3.1)、2 次李代数上同调 (Def 4.3)、Virasoro 代数 (Def 8.1)、Heisenberg (Sec 9)、
+   **Verma 模 (Def 12.2)**、Witt 的 H² 计算 (Thm 6.2)、Sugawara (Thm 10.1)、Verma→charged Fock 的模映射 (Thm 12.7)。
+   **没有逆变形式 / 行列式。**
+3. **§14 "Conclusions and outlook"（书上 p. 12，L1 逐字）**：
+   > For Virasoro algebra representation theory, a significant project could aim at a formal proof of the
+   > **Feigin–Fuks structure theorem for Verma modules over the Virasoro algebra [FF84, VZ90, IK10]**,
+   > which is foundational to numerous topics in conformal field theory.
+   同段前一句还写「Highest weight representation theory of Lie algebras … is likely a major undertaking,
+   **starting from the missing Poincaré–Birkhoff–Witt theorem**」。
+   其参考文献（书上 p. 13，L1）：**[FF84]** B. L. Feigin and D. B. Fuks. *Verma modules over the Virasoro algebra*.
+   Functional Analysis and Its Applications, **17(3):241–242, 1984**；**[VZ90]** Vershik–Zhelobenko (eds.),
+   *Representation of Lie groups and related topics*, Adv. Stud. Contemp. Math. 7, Gordon and Breach, 1990；
+   **[IK10]** Iohara–Koga (2010)。
+
+**⇒ 对图的硬约束**：`worldsheet.kac-determinant` **不能标 `formalized`**，上限是 `rigorous`；
+理由与 `math.verma-module-free-over-negative-part` 同源（Mathlib 无 PBW，见 §16.4），
+而且这里还多一层：**连 Shapovalov 形式本身都没有被形式化**。
+
+### 34.8 三种参数化对照（+ 我自己做的一致性验算，**这一小节是推断，不是来源原文**）
+
+| 来源 | 参数化写法 | 等级 |
+|---|---|---|
+| **Schottenloher Thm 6.12** | 直接用 c：h_{p,q}(c) = (1/48)[(13−c)(p²+q²) + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c] | L1 |
+| **Feigin–Fuchs Thm 3.1** | **不出现 h_{r,s}**，用无根号的成对多项式 Φ_{α,β}(h,c)（见 §34.2(b)） | L1 |
+| **Schottenloher Thm 6.13.2 / 物理书** | c(m) = 1 − 6/(m(m+1))，h_{p,q}(m) = (((m+1)p − mq)² − 1)/(4m(m+1)) | L1（Schottenloher 那半） |
+| **c = 13 − 6(t + 1/t)** 型（任务书提到的另一种） | **本轮在任何已核实来源里都没见到**；Kac–Raina / Iohara–Koga 可能用它，但都没拿到正文 | **L0** |
+
+**我做的三次数值验算（researcher 推断）**，用来确认三种写法互相自洽、可以放进同一张卡：
+- Schottenloher 的 h_{p,q}(c) 在 c = 1 时给 (p−q)²/4；FF 的 Φ_{2,1}(h,1) = (h − 1/4)²。✓ 一致。
+- c = 1/2（m = 3）：Schottenloher 给 h_{2,1} = 1/2、h_{1,2} = 1/16，与 Thm 6.13.2 的 minimal-model 公式一致；
+  FF 的 Φ_{2,1}(h, 1/2) 展开 = h² − 0.5625h + 0.03125 = (h − 1/2)(h − 1/16)。✓ 一致。
+- 由此 **Φ_{α,β}(h,c) = (h − h_{α,β}(c))(h − h_{β,α}(c))**，且 FF 的 det² 形式与
+  det M_N = α_N ∏_{rs≤N}(h − h_{r,s})^{p(N−rs)} 逐项平方后完全吻合。✓
+  （**平方根分支约定**：c < 1 时取 √((c−1)(c−25)) > 0，验算即按此。）
+
+### 34.9 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+**A. `worldsheet.kac-determinant`（statement）的 `sources` 建议改成：**
+
+```yaml
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（LNP 759, pp. 91-102）；Gram 矩阵定义 Definition 6.11, p. 97；Hermite 形式的唯一性 Theorem 6.8, p. 96"
+    note: "L1 逐页核实（math-sources.md §34.3）。三点限制：(a) 该处假设 c,h ∈ R、A^N 是 Hermite 形式的 Gram 矩阵，不是复 (c,h) 的双线性 Shapovalov 形式；(b) 书上写 K_N >= 0，没有写 > 0；(c) 该书把定理归给 [Kac80] = ICM Helsinki 那篇，且把证明外包给 [KR87]/[CdG94]，全章不引 Feigin-Fuchs。"
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982), 第 58 页）"
+    note: "L1 逐页核实（math-sources.md §34.2）。原文形式是 det^2 M_{h,c}(k) = C * prod_{i<=k} prod_{j|i} Phi_{j,i/j}(h,c)^{p(k-i)}，Phi 是 (h-h_{a,b})(h-h_{b,a}) 的无根号展开；C 只被断言『非零』。h,c 取任意复数。英译本 Funct. Anal. Appl. 16 (1982) 114-126 的编号与页码未核实。"
+  - ref: kac-1979
+    loc: "pp. 441-445（内部编号未核实，不得写 Theorem 1）"
+    note: "Feigin-Fuchs 1982 的参考文献 [2] 逐字就是本条，Теорема 3.1 标注 (см. [2])。正文未获取。"
+```
+**⚠ 同时给 auditor 的一条**：卡面 statement 现在写「α_N 是与 (c,h) 无关的**正**常数」。
+**「正」在本轮两个来源里都无据**（FF：非零；Schottenloher：≥ 0）。
+按「状态只能实话实说」，要么在 statement 里改成「非零常数」（那是**新建节点 + superseded_by**），
+要么在 note 里写明「正性未由所引来源支持」。**我不替 curator 做这个决定。**
+
+**B. `worldsheet.kac-determinant--via-feigin-fuchs`（derivation）建议：**
+- `feigin-fuchs-1982` 的 `loc` 由 `"§2（完整证明）"` 改为 **`"§3.2 Теорема 3.1（陈述）+ §4.2 «Доказательство теоремы 3.1»（证明，俄文原刊第 62 页）"`**；
+- `kac-1979` 的 `loc` 去掉 `"Theorem 1（陈述与证明概要）"`，改为 `"pp. 441-445（编号未核实）"`；
+- `summary` 里「数学界接受为定理」可保留，但**「Kac 给出公式并概述证明」无据**——
+  FF 原文只说「Кацу удалось вычислить определитель…」（Kac 算出了这个行列式），
+  且 FF 自称提供的是**新证明**，同时把「可约性问题已由 Kac 1979 解决」写在明处（§34.2(a)）。
+- 若要引 ICM 那篇，**必须用新 key `kac-1980-icm`**，不要复用 `kac-1979`。
+
+**C. 状态**：本节点上限 `rigorous`（§34.7）；`formalized` 现在**不可能**。
+
+### 34.10 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Kac 本人出版目录** | `math.mit.edu/~kac/publications.pdf` | **成功**（落盘 159 KB → 读图 p.1–3；#30/#31/#32 三条逐字） |
+| **Feigin–Fuchs 1982 俄文全文** | `mathnet.ru/php/getFT.phtml?jrnid=faa&paperid=1619&what=fullt` | **成功**（落盘 2 MB 扫描 PDF，17 页读完 p.47–63；**PDF 页 = 刊页 − 46**） |
+| Math-Net.Ru 期号定位 | `…/archive.phtml?jrnid=faa&wshow=issue&year=1982&volume=16&issue=2` | 成功（**俄文页面回来是乱码**，但 `paperid` 与页码可用；英文页 `mathnet.ru/eng/faa1619` 正常） |
+| **Schottenloher Ch. 6** | `…/~schotten/LNP-cft-pdf/06_978-3-540-68625-5_Ch06_23-08-08.pdf` | **成功**（落盘 302 KB，全章 12 页读完；**PDF 页 = 书页 − 86**） |
+| **Kytölä arXiv:2510.21741** | `arxiv.org/pdf/2510.21741` | **成功**（落盘 1.2 MB；读 p.2–3、12–13、14–16） |
+| Kytölä Lean 仓库目录 | `github.com/kkytola/VirasoroProject/tree/master/VirasoroProject` | 成功（21 个 .lean 文件名） |
+| DMS 页码定位 | Google Books `books.google.com/books?id=keUrdME5rhIC&q=…` | 成功（p. 205；**控制查询无命中 ⇒ 控制通过**） |
+| Kac LNP 94 正文 | `link.springer.com/chapter/10.1007/3-540-09238-2_102` | **失败：303 → `idp.springer.com/authorize`** |
+| Kac LNP 94 纸本 | archive.org `title:(group theoretical methods in physics)` | **失败**：只有 Montreal 1976 / Cocoyoc 1980 / Trieste 1983 三卷，**没有 Austin 1978（LNP 94）那卷** |
+| **ICM 1978 Helsinki Vol. 1 正文** | `mathunion.org/fileadmin/ICM/Proceedings/ICM1978.1/ICM1978.1.ocr.pdf` | **失败：30 MB，`maxContentLength size of 10485760 exceeded`** |
+| ICM 1978 Vol. 1（archive.org 两个副本） | `proceedingsofint0001inte_c4t9` / `…_n1u1` | 元数据可读；**`fulltext/inside.php` 与 `_djvu.txt` 均 403**（借阅限制项，与 GS 1984 那本公开重印集不同） |
+| Iohara–Koga Ch. 4 | `link.springer.com/chapter/…_4`；Google Books `vid=ISBN9780857291592` | **双失败**（认证墙 / 无预览） |
+| zbMATH 查询页 | `zbmath.org/?q=…` | **失败：403**（**新增死路**） |
+| MathSciNet MR Lookup | `mathscinet.ams.org/mrlookup?au=…&ti=…` | **失败**：`ti=` 参数无效，只回搜索表单或无关的 Kac 条目；**不要再试** |
+| Springer 章 PDF 直链 | `link.springer.com/content/pdf/10.1007/978-1-4757-0363-4_3.pdf` | **失败：303 → 认证墙**（`content/pdf/` 也不例外） |
+| ouci.dntb.gov.ua | `ouci.dntb.gov.ua/en/?s=<DOI>` | 失败（只回首页，未命中记录） |
+
+> **新增活路**：**Math-Net.Ru 是俄文老论文的稳定入口**——`…/php/getFT.phtml?jrnid=<刊>&paperid=<id>&what=fullt`
+> 直接给整篇扫描 PDF，落盘后 `Read pages` 读图即可（本轮 17 页公式全部可判读）。
+> 期号页用 `…/php/archive.phtml?jrnid=<刊>&wshow=issue&year=&volume=&issue=` 定位 `paperid`。
+> **新增死路**：zbMATH 查询页 403；`mathscinet.ams.org/mrlookup` 的 `ti=` 无效；
+> archive.org 的**借阅限制卷**（`fulltext/inside.php`、`_djvu.txt` 一律 403）——
+> 与 `reference_archive-org-reprint-fulltext-route` 记的公开重印集不是一回事，**先看该项是否 lending-restricted**。
+
+**未解决 / 留给下一轮：**
+
+- **Q23** **Kac, LNP 94 (1979), 441–445 的正文与内部编号（L0）。** 图里现写的 `Theorem 1` **无任何证据**。
+  Springer 认证墙 + archive.org 无此卷。可能的下一招：找一篇**逐字引用了它的定理号**的论文，
+  或找 LNP 94 的**重印/图书馆扫描**（该卷 = *Group Theoretical Methods in Physics*, Austin 1978,
+  eds. Beiglböck–Böhm–Takasugi，DOI 10.1007/3-540-09238-2_102）。
+- **Q24** **ICM Helsinki 1978 (299–304) 的正文（L0）：它到底含不含 Virasoro 的行列式公式？**
+  这一条决定 Schottenloher 的 [Kac80] 归属是否准确，也决定 FGZ ref 10 的解释。
+  IMU 官方 PDF 30 MB 超上限——**需要一个能分页取 PDF 的手段**（lead 若有 Bash/curl 可直接切页）。
+- **Q25** **FF 1982 英译本（Funct. Anal. Appl. 16 (1982) 114–126）的编号与页码。**
+  按俄文 p.47–63 ↔ 英译 p.114–126 的线性换算，Theorem 3.1 约在英译 **p. 122**（**未核实，别写进图**）。
+  Springer BF01081626 在认证墙后。
+- **Q26** **FF 1982 俄文 p. 59 首句的定理号究竟是 2.1 还是 3.1**（§34.2(e)）。
+  这句是「Kac 未发表证明」的唯一直接候选证据，值得钉死。
+- **Q27** DMS *Conformal Field Theory* 里 Kac 行列式的**公式号**（L0）与 §7.2 的**逐页确认**。
+- **Q28** Iohara–Koga **Chapter 4「Determinant Formulae」的定理编号**（L0）——与 §30.3 的 Q19 同一堵墙。
+- **Q29** `sources.bib` 里 **`schottenloher-2008` 条目的花括号失衡**（`note = {…}` 在原第 457 行就闭合，
+  其后到 481 行是游离文本，最后多一个 `}`）。**本轮我把第 6 章的补充追加进了最后那段游离文本内部，
+  没有改动括号结构**（避免与别的 agent 冲突）。**建议 lead 单独修一次**。

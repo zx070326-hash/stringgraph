@@ -1,0 +1,132 @@
+id: worldsheet.kac-determinant-level-two
+kind: proposition
+title: Verma 模低阶 Gram 元与 level-2 行列式：⟨L₋₁v, L₋₁v⟩ = 2h，det[{L₋₂v, L₋₁²v}] = 2h(16h² + 2h(c−5) + c)（张成集的 Gram，非基的 Gram）
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），v := |c,h⟩ 是最高权向量，约定 conv.virasoro-standard。
+  设 B 是 V(c,h) 上的**归一化逆变双线性型**，即 B 逆变（B(L_n x, y) = B(x, L_{−n} y)，
+  见 worldsheet.shapovalov-form-uniqueness）且 B(v, v) = 1。记 ⟨x, y⟩ := B(x, y)。
+
+  记 level-1 与 level-2 的三个显式降算符态
+
+      a₁ := L₋₁ v,      a := L₋₂ v,      b := L₋₁² v = L₋₁ (L₋₁ v)。
+
+  则：
+
+  **(1) level 1**：⟨a₁, a₁⟩ = 2h。
+
+  **(2) level 2 的三个 Gram 元**：
+
+      ⟨a, a⟩ = 4h + c/2,      ⟨a, b⟩ = ⟨b, a⟩ = 6h,      ⟨b, b⟩ = 8h² + 4h。
+
+  （⟨a,b⟩ = ⟨b,a⟩ 是 worldsheet.shapovalov-form-uniqueness (2) 的对称性，不是额外假设。）
+
+  **(3) level-2 的 2×2 行列式**：
+
+      ⟨a,a⟩⟨b,b⟩ − ⟨a,b⟩⟨b,a⟩ = 2h( 16h² + 2h(c − 5) + c )。
+
+  **(4) 与 Kac 行列式 N = 2 的比较（本卡不断言二者相等，见【不断言】(a)）**：
+  把 (3) 的右端配平后
+
+      2h(16h² + 2h(c−5) + c) = 32 · (h − 0) · (h − h_{1,2}(c)) · (h − h_{2,1}(c)),
+
+  其中 h_{1,2}, h_{2,1} 是二次因子 16h² + 2h(c−5) + c 的两根，满足
+
+      h_{1,2} + h_{2,1} = (5 − c)/8,        h_{1,2} · h_{2,1} = c/16。
+
+  这与 worldsheet.kac-determinant 在 N = 2 处的形状逐项吻合：
+  rs ≤ 2 的指标恰为 (1,1)、(1,2)、(2,1)，指数分别为 p(2−1) = p(1) = 1 与 p(2−2) = p(0) = 1；
+  h_{1,1}(c) = 0；两根之和与之积与 Kac 公式一致（核对见 notes）；
+  且此处的常数是 **α₂ = 32 > 0**。
+
+  【本节点明确**不**断言】
+  (a) **(3) 是「level-2 的 Kac 行列式」**。Kac 行列式是 Gram 矩阵在 V_2 的一组**基**上的行列式；
+      {a, b} 只被证明**落在** V_2 里。它们**张成** V_2（V_2 的定义是 2 的全体合成 [2]、[1,1]
+      所给词的张成），但**线性无关**没有证——那正是 PBW
+      （math.verma-module-free-over-negative-part 的 (2)(3)：dim V_2 = p(2) = 2）。
+      ⇒ (3) 是**张成集的 Gram 行列式**。若 {a, b} 线性相关（在 V(c,h) = 0 时它们都是 0），
+      (3) 仍成立但与「基的 Gram 行列式」无关。
+  (b) **B 的存在性**。本卡的一切都以「设 B 是归一化逆变型」为前提；
+      存在性见 worldsheet.shapovalov-form-existence（条件的），无条件版本要 V(c,h) ≠ 0。
+  (c) **一般 N 的行列式公式**。见 worldsheet.kac-determinant（rigorous，未形式化）。
+      本卡只做 N = 1, 2。
+  (d) **零点的表示论含义**：(1)(3) 的零点与奇异向量/可约性的对应关系不在本卡内。
+      （h = 0 时 (1) 为零，对应真空模的 level-1 零向量 L₋₁|0⟩——这条**解释**本卡不承载。）
+  (e) 任何正定性/酉性；B 是 R-双线性型，R 上无序结构。
+  (f) **α_N 对一般 N 的正性**。本卡只给出 N = 2 的常数 32。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.IsContravariant.gram_level_two_det
+  lean_file: StringFormal/Virasoro/Shapovalov.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{desc1, desc2, desc11, lie_lgen_one_neg_one, lie_lgen_zero_neg_one, lie_lgen_two_neg_two, lie_lgen_two_neg_one, lie_lgen_one_desc1, lie_lgen_zero_desc1, lie_lgen_two_desc1, lie_lgen_two_desc2, lie_lgen_two_desc11, lie_lgen_one_desc11, two_mul_centralTerm_two, desc1_mem_levelSpan, desc2_mem_levelSpan, desc11_mem_levelSpan, IsContravariant.gram_level_one, IsContravariant.gram_level_two_aa, IsContravariant.gram_level_two_ab, IsContravariant.gram_level_two_bb, IsContravariant.gram_level_two_det, IsContravariant.gram_level_one_two}"
+    note: |
+      本仓库，形式化侧提交 **0c5f1f5**（"formal: compute the level-1 and level-2 Gram matrices
+      and the N=2 Kac determinant"），由 lead 以 **b95a406** 合入 main；Lean 4 + Mathlib v4.33.1。
+      逐句对应：(1) → `gram_level_one`；(2) → `gram_level_two_aa`（写作 `4*h + centralTerm R 2 * c`，
+      而 `centralTerm R 2 = (2³−2)/12 = 1/2`，配套引理 `two_mul_centralTerm_two : 2·centralTerm R 2 = 1`）、
+      `gram_level_two_ab`、`gram_level_two_bb`，对称性经 `IsContravariant.comm`；
+      (3) → `gram_level_two_det`（本卡 formal.lean_decl）。
+      **(4) 不在 Lean 里**：Lean 只给出多项式 `2*h*(16*h^2 + 2*h*(c-5) + c)`，
+      与 Kac 公式的比较是 curator 在本卡 notes 里做的手算核对。
+      另有 `gram_level_one_two : ⟨a₁, a⟩ = 0`（level 1 与 2 正交，是
+      worldsheet.shapovalov-form-uniqueness (3) 的实例）。
+      文件头 Status 段自述「No `sorry`, no new axioms」，其第 2 条 gap 逐字说明
+      「Gram matrix entries are stated for the *specific vectors* …, not for a basis of `V_N`」。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（h_{p,q}(c) 的显式公式）；Gram 矩阵定义 Definition 6.11, p. 97（LNP 759, pp. 91-102）"
+    note: |
+      **只用于本卡 (4) 的比较**，不承载 (1)(2)(3) 的论证。L1 逐页核实
+      （literature/extractions/math-sources.md §34.3）。⚠ 该处限 c, h ∈ ℝ 且 A^N 是 **Hermite**
+      形式的 Gram 矩阵，并且 A^N 是取 V_N 的**一组基** b₁,…,b_{P(N)}（Definition 6.11）——
+      正是本卡【不断言】(a) 所缺的那一步。书上写 K_N ≥ 0（不是 > 0）。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页）"
+    note: |
+      **只用于 (4) 的比较**。FF 的 M_{h,c}(k) 显式定义为 PBW 基
+      e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用于真空所得基的 Gram 矩阵（L1，math-sources.md §34.2(b)）；
+      k = 2 时那组基正是本卡的 {b, a} = {L₋₁²v, L₋₂v}，**但 FF 已假定它是基**。
+      FF 的形式是 det² 而非 det，其常数 C 只被断言**非零**。
+tags: [cft, representation-theory, verma-module, shapovalov, kac-determinant, virasoro, formalized]
+notes: |
+  【本卡与 worldsheet.kac-determinant 的关系——最要紧的一条】
+  本卡**不是**后者的特例，两者差一个尚未形式化的输入：{L₋₂v, L₋₁²v} 的**线性无关**。
+  Lean 只证了 `desc2_mem_levelSpan` / `desc11_mem_levelSpan`（它们属于 V_2），
+  张成性是 V_2 定义的直接读出（2 的合成恰有 [2] 与 [1,1] 两个），
+  而线性无关等价于 dim V_2 = 2 = p(2)，属于 math.verma-module-free-over-negative-part 的 (2)(3)，
+  其瓶颈是 Mathlib v4.33.1 无 PBW（formal/TODO.md 的 `pbw-verma` (b)）。
+  ⇒ 在 PBW 之前，本卡 (3) 的右端只是一个**恒等式**，不是「Kac 行列式在 N = 2 的值」。
+  这也是本卡标题写「张成集的 Gram，非基的 Gram」的原因。
+
+  【(4) 的核对：curator 手算，2026-09-11，researcher 的 §34.8 已独立做过 c = 1 与 c = 1/2 的数值核对】
+  取 schottenloher-2008 Theorem 6.12 的
+  h_{p,q}(c) = (1/48)[ (13−c)(p²+q²) + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c ]：
+  · **h_{1,1}(c) = 0**：p = q = 1 时 p²+q² = 2、p²−q² = 0、pq = 1，
+    得 (1/48)[2(13−c) − 24 − 2 + 2c] = (1/48)[26 − 2c − 26 + 2c] = 0。✓
+    与 (3) 右端的因子 2h（即 h − h_{1,1}）对上。
+  · **h_{1,2}, h_{2,1}**：p²+q² = 5、pq = 2、p²−q² = ∓3，
+    h_{1,2} = (1/16)[5 − c − √((c−1)(c−25))]，h_{2,1} = (1/16)[5 − c + √((c−1)(c−25))]。
+    和 = (5 − c)/8，积 = (1/256)[(5−c)² − (c−1)(c−25)] = (1/256)(16c) = c/16。✓
+    而 16h² + 2h(c−5) + c = 16[h² − h(5−c)/8 + c/16]，其两根之和与之积正是上面两式。✓
+  · **指数**：p(2 − 1·1) = p(1) = 1（因子 (1,1)），p(2 − 1·2) = p(0) = 1（因子 (1,2) 与 (2,1)）。✓
+  · **常数**：2h(16h² + …) = 32·h·(h − h_{1,2})(h − h_{2,1})，故 **α₂ = 32 > 0**。✓
+  ⚠ **平方根分支约定**：上式按 c < 1 时取 √((c−1)(c−25)) > 0（与 §34.8 同一约定）；
+  h_{1,2} 与 h_{2,1} 的**标号**依赖这个分支选择，但它们的**和与积**（也就是本卡 (4) 用到的全部）
+  与分支无关，故本卡的核对不受影响。
+  ⚠ **本核对是 curator 的手算，不是任何来源的逐字内容，也未在 Lean 里**。
+  它支持的只是「(3) 与已有的 kac-determinant 卡在 N = 2 处不矛盾」，
+  **不构成** worldsheet.kac-determinant 的独立证据。
+
+  【一条对 worldsheet.kac-determinant 的旁证】该卡 statement 写「α_N 是与 (c,h) 无关的**正**常数」。
+  researcher 2026-09-11 指出「正」在两个已核实来源里都无据（FF 只说非零、Schottenloher 写 K_N ≥ 0，
+  math-sources.md §34.2(b)、§34.3）。本卡在 N = 2 给出 α₂ = 32 > 0，
+  是**一个正例**，但显然不能推出一般 N 的正性——见本卡【不断言】(f)。
+  该问题已在 worldsheet.kac-determinant 的 notes 中登记，**陈述未改**（项目原则 1）。
+
+  【(1) 的物理读法（本卡不断言，见【不断言】(d)）】h = 0 时 ⟨L₋₁v, L₋₁v⟩ = 0，
+  这是真空模 (c, 0) 的 level-1 零向量；Lean 的 `gram_level_one` docstring 也这么写。
+  把它接到奇异向量/不可约商需要另立节点。
+author: curator
+created: "2026-09-11"

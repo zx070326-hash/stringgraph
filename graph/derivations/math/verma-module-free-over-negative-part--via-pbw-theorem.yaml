@@ -4,19 +4,25 @@ kind: proof
 status: rigorous
 depends_on:
   - id: math.pbw-theorem
-    inferred: true
+    inferred: false
     note: |
-      **inferred 的理由是适用范围，不是论证**（math-sources.md §15.5，Q15）。
-      本推导第 (2) 步对 L = vir 与 L = vir₋ 各用一次 PBW，而这两个都是**无限维**李代数；
-      math.pbw-theorem 的来源 humphreys-1972 全书语境是「代数闭特征零域上的**有限维半单**李代数」，
-      而 **§17.1 开头对 L 的假设本项目未核到（L0）**。
-      现有旁证：ardizzoni-2010 引用同一条时的前提只是「a Lie algebra which is assumed to have a totally
-      ordered basis (X, ≤)」（无有限维假设，L1）；swanson-2015-pbw 的记号段写「L is a Lie algebra over F
-      (possibly infinite dimensional)」并加「Many statements are true in much greater generality」（L1）。
-      两条旁证都不是 Humphreys 原文的背书，故这条边标 inferred。
-      **撤销条件**：核到 Humphreys §17.1 对 L 的假设声明并确认不限有限维（Q15）。
-      **注意**：vir 与 vir₋ 都有现成的可数全序基（{L_n}_{n∈Z} ∪ {C}；{L_{-1} < L_{-2} < …}），
-      故「全序基存在」这一前提在本用例中是显然的，不需要选择公理。
+      **适用范围已由 lakos-2024-pbw 背书，本边于 2026-09-11 由 `inferred: true` 改为 `false`
+      （curator，落地 math-sources.md §33.7(b)）。**
+      本推导第 (2) 步对 L = vir 与 L = vir₋ 各用一次 PBW，两者都是**无限维**李代数。
+      背书来源：**lakos-2024-pbw, Proposition 6.1（arXiv:1812.04896v2, p. 16）**，前提逐字为
+      「K 是幺交换环、𝔤 是带相容李环结构的 K-模」且只要求 **𝔤 为自由 K-模**，
+      **全文无任何有限维假设**，全局形式 (i) 的基索引集任意（L1 全文读毕，math-sources.md §33.2）。
+      vir 与 vir₋ 都是特征零域上的可数维李代数，落在该假设内（域上的模皆自由），
+      且都有现成的可数全序基（{L_n}_{n∈Z} ∪ {C}；{L_{-1} < L_{-2} < …}），
+      故「全序基存在」这一前提在本用例中是显然的，**不需要选择公理**。
+      本图侧对应的推导节点是 **math.pbw-theorem--via-lakos**（与 --via-humphreys 并列的第二条独立推导）。
+      humphreys-1972 仍作为教科书证明的来源保留在目标上游，其有限维半单语境**不再是本边的瓶颈**——
+      瓶颈从来不是「Humphreys 怎么说」，而是「本图有没有一条来源背书无限维」，现在有了。
+      **原 inferred 理由与原撤销条件（Q15：核 Humphreys §17.1 对 L 的假设声明）**见
+      math-sources.md §15.5 与 §33.7(b)；Q15 现已降级为**可选**，它只影响 humphreys-1972
+      这一条 source 自身的自洽性，不再卡住任何一条边。
+      ⚠ 与之无关、仍然有效的限制：PBW 在**任意**交换环上有反例（lakos-2024-pbw p. 2 逐字，
+      引 Širšov、Cartier、Cohn），故日后放宽基环只能放宽到循环模直和 / PID 或 Dedekind 环 / ℚ ⊂ K。
   - id: worldsheet.verma-module-v2
     inferred: false
     note: |
@@ -92,8 +98,11 @@ gaps:
   - "**没有带编号的一手来源（Q17）**。本命题在文献里通常不是编号命题（要么写进定义，要么作为
      PBW 的即时推论一笔带过），见目标节点 notes。下一轮最值得抓的三个来源：Iohara–Koga (2011)、
      Moody–Pianzola (1995)、Feigin–Fuks (1984)；本轮三者都拿不到公开全文，故未登记进 sources.bib。"
-  - "**上游的适用范围（Q15）**：到 math.pbw-theorem 的边标了 inferred——Humphreys 的语境是有限维半单，
-     而这里的 vir、vir₋ 是无限维。见该边的 note。"
+  - "**上游的适用范围（Q15）——已结案，2026-09-11**：到 math.pbw-theorem 的边原先标 `inferred: true`，
+     理由是 Humphreys 的语境是有限维半单而这里的 vir、vir₋ 是无限维。现已改 `inferred: false`：
+     **lakos-2024-pbw, Prop. 6.1（K 幺交换环、𝔤 自由 K-模、全文无有限维假设、索引集任意；L1 全文读毕）**
+     背书了本用例的适用范围，图上对应 `math.pbw-theorem--via-lakos`。见该边的 note 与 math-sources.md §33.7(b)。
+     残留的（更弱的）限制是基环：PBW 在任意交换环上有反例，本图把 math.pbw-theorem 限定在域上，安全。"
   - "**未形式化，且缺口是精确的一条上游定理**：Mathlib **没有** PBW（读取日期 2026-09-11）。
      两条 L1 证据：(i) `Mathlib/Algebra/Lie/UniversalEnveloping` 的全部 17 个声明只围绕构造与泛性质
      （Rel、ringCon、UniversalEnvelopingAlgebra、mkAlgHom、ι、lift、lift_unique、hom_ext 等），
@@ -124,6 +133,7 @@ gaps:
      自由性 (1) 对任意交换环 R（vir₋ 作为 R-模自由）都成立，worldsheet.verma-module-v2 的构造本就对
      任意 ℚ-代数成立。若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
 notes: |
+  核对源（lead 2026-09-11 从 sources[] 降注）：swanson-2015-pbw，原 loc：研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论
   reviewer-verified: reviewer-batch4, 2026-09-11 — 诱导模识别 → 两次 PBW → 分拆计数三步独立复核；来源无证明、论证为本图补写，按 STATUS_LEVELS 例外条款保持 rigorous。
   （reviewer-batch4 同时指出：到 verma-level-spanned-by-partitions 的记账边不被来源或 summary 使用，已改 inferred: true。）
   **status 的选择**：rigorous。按 docs/STATUS_LEVELS.md 等级 4，非平凡输入（PBW）来自数学教科书里
@@ -157,4 +167,3 @@ notes: |
   该条已在自己的 gaps 里登记这一步；若日后有第二处需要，应新建一条 math 节点承载 Euler 恒等式。
 author: curator
 created: "2026-09-11"
-# lead 2026-09-11：swanson-2015-pbw 降为核对源，原 loc："研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论"

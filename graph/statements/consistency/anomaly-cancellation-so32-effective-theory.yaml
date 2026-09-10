@@ -1,0 +1,63 @@
+id: consistency.anomaly-cancellation-so32-effective-theory
+kind: proposition
+title: SO(32)：加入洛伦兹 Chern–Simons 项与 S₁ + S₂ + S₃ 后，十维有效场论的单圈反常全部抵消
+statement: |
+  在十维 N = 1 超引力 + 超 Yang–Mills 的**有效场论**中取规范群 **SO(32)**
+  （伴随表示维数 496）。若
+
+    (i) 按 consistency.h-field-strength-chern-simons 修改三形式场强，即在 GS 的 ref. [7]
+        那个极小拉氏量之上把**洛伦兹 Chern–Simons 项 −ω⁰_{3L}** 加进 H（GS (4) 的最后一项）；
+    (ii) 把 consistency.gs-counterterms-1984 的 **S₁ + S₂ + S₃**（(18)(21)(23)）加到作用量上，
+
+  则**单圈层次**上的纯规范反常、纯引力反常与混合反常**全部抵消**。
+
+  原文逐字：「In summary, modifying the action of ref. [7] by including the last term in eq. (4)
+  and adding S₁ + S₂ + S₃ to the action gives complete cancellation of all anomalies at one-loop
+  level for the gauge group SO(32).」
+
+  **本节点不断言**（每一条都有原文依据，见 notes）：
+  (a) 任何「只有 SO(32) 与 E₈ × E₈ 可以」的唯一性或分类结论——GS 全文没有这种断言，
+      摘要只给充分条件（"cancel **if** the gauge group is SO(32) or E₈ × E₈"），
+      正文并明写 "We only discuss SO(N), USp(N) and E₈ × E₈ explicitly"；
+  (b) 加入这些反项后超对称性仍然成立——GS 逐字 "only adding these terms and no others destroys
+      supersymmetry"，并"suspect"要恢复它得引入整个无穷级数；
+  (c) 超对称流反常、"大"规范变换（不与恒等连通）的反常、涉及闭弦的各种图——原文明列为**未做**；
+  (d) 关于弦论的任何事。GS 的弦论侧结果在同文只是 "summarized"，逐字
+      "the details will be presented elsewhere"（见 notes 第 3 条）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(23) 之后的总结句；论证分布在 PLB p.119–120（重印 610–611）的 (12c)–(23)"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E9/E10/E13/E14/E15。
+tags: [anomaly, green-schwarz-mechanism, so32, d10, effective-field-theory, phase2]
+notes: |
+  【1. ★ 唯一性冲突，未裁决（抽取记录 E20 / Q1）】本图**不建**「因子化 ⟺ SO(32) 或 E₈ × E₈」的节点：
+  · GS 1984 全文没有 "only"、"unique"、"classification" 一类针对规范群的断言；
+  · schwarz-2012-history p.10（作者本人 2012 年回忆）说 E₈ × E₈ 是 "a second (and the only other)"；
+  · bilal-2008 p.102–103 与 antonelli-2015 §1.1 都列**四个** 496 维解
+    （SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶），Bilal 说 "One can actually scan all 496-dimensional
+    groups and show that there are no other possibilities"（无证明无引用）；
+  · antonelli-2015 说四解的"原始陈述"在 GSW Vol. 2 第 13 章，且 "no proof has explicitly been
+    carried out" 直到该文（2015，单作者预印本）。
+  三者互相冲突，**留给 auditor / lead 裁决**。
+
+  【2. 相关但未建的节点】
+  · 树级机制（GS fig. 1）：B tr F⁴ 顶点经 B 传播子连到 H² 项里的 ω⁰_{3Y} dB 顶点，
+    给出六规范场树图的反常片，与 (18) 第二项一起抵消六边形反常。要建须先补 S₀ (1) 的定义卡。
+  · 混合反常十二形式 (22)：本轮没有单建卡，其内容写在本节点推导的 summary 里。
+  · δH = 0（(10c)）：见 consistency.h-field-strength-chern-simons notes 第 3 条。
+
+  【3. ★ 弦论侧不在本图（抽取记录 E17 / Q7）】GS 1984 确实说他们算了 type I 单圈六边形
+  （"We have explicitly evaluated the anomalies of one-loop superstring hexagons … The results are
+  summarized here, but the details will be presented elsewhere."），并给出 (24)(25)。
+  那个 "elsewhere" 是 green-schwarz-1985-hexagon（据 schwarz-2012-history p.9）。
+  **本图不在 green-schwarz-1984 名下建弦论侧节点**；(25) 的求积上限还有读图存疑（抽取记录 §3.2）。
+  **杂化弦更与本文无关**：GS 逐字说 E₈ × E₈ 的超弦理论 "has not yet been constructed / formulated"，
+  杂化弦是 ghmr-1985。
+
+  【4. 作者自陈的结论强度】GS 的结束语是 "it appears very likely that SO(32) superstring theory is
+  a consistent quantum theory"——**"appears very likely"，不是定理**。本节点只覆盖有效场论侧的
+  反常抵消，不覆盖那句话。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,66 @@
+id: spectrum.chan-paton-yang-mills-coupling
+kind: proposition
+title: 幺正性定出 Yang–Mills 耦合 g'_o = g_o/√(2α')；α' → 0 时开弦振幅重现 Yang–Mills 树图
+statement: |
+  给开弦附 Chan–Paton 因子（spectrum.chan-paton-factors）。则：
+
+  **(1)（耦合关系）** 把四 tachyon 振幅在 α' s → 0 处的极点留数与两个三点振幅
+  （tachyon–tachyon–规范玻色子）相比较——即因子化/幺正性——定出
+    **g'_o = g_o / √(2α')**   （(6.5.14)），
+  其中 g_o 是 tachyon 顶点算子的归一化（(3.6.25)），g'_o 是规范玻色子的耦合。
+  同一比较也确认了光子顶点算子在 (3.6.26) 中的归一化，与**态-算子对应**给出的归一化一致。
+
+  **(2)（一个规范玻色子 + 两个 tachyon）** 相应的三点振幅为
+    S_{D₂} = − i g'_o (2π)²⁶ δ²⁶(Σ_i k_i) (e₁ · k₂₃) tr( λ^{a₁} [ λ^{a₂}, λ^{a₃} ] )   （(6.5.12)），
+  其中 e₁ 是规范玻色子极化、k₂₃ ≡ k₂ − k₃。
+  结构常数由 **f^{abc} = tr( [λ^a, λ^b] λ^c )** 给出。
+
+  **(3)（低能极限）** 三规范玻色子与四规范玻色子的开弦树振幅在 α' → 0 极限下
+  **重现 Yang–Mills 理论的树图**（(6.5.15)/(6.5.16)），
+  即开弦的低能有效作用量是（带 α' 修正的）Yang–Mills 作用量。
+
+  **本命题不断言什么**：不给出 Yang–Mills 有效作用量的 α' 修正项；
+  不断言 (3) 对任意点数成立（来源只做了三点与四点）；不涉及闭弦/引力（见 spectrum.gravitational-coupling-kappa）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: headrick-2008
+    loc: "Problem 6.7（PDF p.43–45）与 Problem 6.9(b)（PDF p.47）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E102，等级 **L1**，且这是本节**最强的独立源**。
+      逐字可用的锚点：
+      - Problem 6.7：「Putting these together with **(6.5.10)** and using **(6.4.14)** …」，
+        结论「in agreement with **(6.5.12)**」，其中
+        S_{D₂} = −i g'_o (2π)²⁶ δ²⁶(Σk) e₁·k₂₃ tr(λ^{a₁}[λ^{a₂},λ^{a₃}])；
+      - Problem 6.7(b)：「Using equations **(6.4.17)**, **(6.4.20)**, and **(6.5.6)** …」
+        → g'_o = g_o/√(2α')「in agreement with **(6.5.14)**」；并「we have also applied equation **(6.5.9)**」；
+      - Problem 6.9(b)：「The Yang-Mills coupling is g'_o = (2α')^{−1/2}g_o **(6.5.14)**」，
+        f^{abc} = tr([λ^a,λ^b]λ^c)；结论「**this single string theory diagram reproduces, at momenta
+        small compared to the string scale, the sum of the field theory Feynman diagrams**」
+        （这句是 **[H] 自述，不是 Polchinski 原话**）；
+      - Problem 6.7(b) 末：「This result confirms the normalization of the photon vertex operator
+        as written in equation **(3.6.26)**. **The state-operator mapping gives the same normalization**」。
+      ⚠ **按 lead 裁决（2026-09-10）**：Headrick 习题解答一般只作核对源，
+      「对某个显式计算是唯一成文来源时」可作为推导 source，但 **reviewer 须复核计算**。
+      本节属此情形（[S] 对 §6.5 只到目录级）。
+  - ref: polchinski-1998-v1
+    loc: "§6.5, eq. (6.5.6)/(6.5.9)/(6.5.10)/(6.5.12)/(6.5.14)（有 [H] 背书，L1）；(6.5.15)/(6.5.16)/(6.5.18)（Yang–Mills 有效场论，仅 L2）；顶点算子归一化 §3.6 eq. (3.6.25)/(3.6.26)，p.184–189"
+    note: |
+      抽取记录 #E102。⚠ **(6.5.15)/(6.5.16)/(6.5.18) 的表达式只读到 schrans-2020 的目录条目（L2）**，
+      故本卡片的 (3) 只作**定性**陈述，不写表达式。
+tags: [spectrum, tree-level, open-string, chan-paton, yang-mills, coupling, unitarity, effective-field-theory, state-operator]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E102 建立。
+
+  **这是「态-算子对应在振幅中被使用」的第二个落点**（抽取记录 Q18 列出三个：
+  (5.4.5) 判定 V 是权 1 主场；(3.6.26) 的归一化；(6.7.9)–(6.7.18) 的 Hilbert 空间形式）。
+  按 Q18 的建议，本图**不**把三者挂到同一个节点上：本卡片的 (1) 末句只记录归一化的一致性，
+  Hilbert 空间形式另建 cft.state-operator-hilbert-space-form。
+
+  **(3) 只作定性陈述的理由**：Yang–Mills 有效作用量的表达式 (6.5.16)/(6.5.18) 只到 L2，
+  且 [H] 那句「reproduces the sum of the field theory Feynman diagrams」是**他自己的话**，
+  不是 Polchinski 的措辞。写成定性陈述可避免把二手源的表述固化成原书的陈述。
+author: curator-polchinski-ch6
+created: "2026-09-11"

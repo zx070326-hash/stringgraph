@@ -1,0 +1,36 @@
+id: worldsheet.ckv-holomorphic-in-conformal-gauge
+kind: proposition
+title: "共形规范复坐标下 CKV 方程化为全纯性：∂̄ δz = 0、∂ δz̄ = 0"
+statement: |
+  在共形规范（ĝ_ab = δ_ab，worldsheet.conformal-gauge-fixing）与复坐标
+  z = σ¹ + iσ²（conv.worldsheet-complex-coords）下，把无穷小微分同胚写成 z → z + δz(z, z̄)、
+  z̄ → z̄ + δz̄(z, z̄)。则共形 Killing 方程（worldsheet.conformal-killing-equation）
+  (P₁δσ)_ab = 0 的两个独立分量恰为
+    ∂̄ δz = 0 ,     ∂ δz̄ = 0 ,
+  即 **δz 是 z 的全纯函数、δz̄ 是反全纯函数**（且 δz̄ = (δz)‾ 使变换保实）。
+  因此在共形规范下，CKV 就是世界面上处处正则的全纯向量场；κ = dim_R ker P₁
+  等于这类全纯向量场的实维数。
+
+  ⚠ 「处处正则」是关键限定：全纯性是局部条件，κ 的具体值由曲面的整体结构
+  （各坐标片上的正则性 + 过渡函数）决定。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8)（共形规范下的模与共形 Killing 向量）附近, p.152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E74，L1（读到 schrans-2020 §5.9，
+      笔记 p.249–250，条目 [5.33]）。
+      ⚠ (5.2.8) 这个式号来自 schrans-2020 的目录（`5.9 p 152: Eq (5.2.8) The Moduli and
+      Conformal Killing Vectors in the Conformal Gauge`）；原书未核对。
+      ⚠ **原书的 (5.2.8) 把「模的方程」与「CKV 的方程」写在同一处**；本图按
+      「一个节点一个命题」拆成本卡与 worldsheet.moduli-holomorphic-quadratic-differentials 两卡，
+      两卡共用同一个 loc。
+tags: [worldsheet, ckv, conformal-gauge, holomorphic, moduli]
+notes: |
+  这条是「CKV 计数 = 全纯向量场计数」的接口，第 6 章球面上 δz = a₀ + a₁z + a₂z²（κ = 6）
+  与圆盘上的 PSL(2,R)（κ = 3）都由它加各自的整体正则性条件得到；那两条属 §6，
+  由另一名 curator 负责（`spectrum.` 前缀）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

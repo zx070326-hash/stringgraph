@@ -1,0 +1,48 @@
+id: spectrum.virasoro-shapiro-regge-behavior--via-gamma-asymptotics
+target: spectrum.virasoro-shapiro-regge-behavior
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.virasoro-shapiro-amplitude
+    note: 提供 Γ 商的完整表达式，两个极限都是对它取渐近。
+  - id: math.gamma-ratio-asymptotics
+    note: |
+      提供 Γ(z+a)/Γ(z+b) ∼ z^{a−b} 与 Stirling 型渐近。
+      ⚠ 继承其 gap (3)（Regge 方向 arg = π 不在适用域内、Γ 的极点全落在该射线上）。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: |
+      提供 α'(s+t+u) = −16 ⇒ α_c(s)+α_c(t)+α_c(u) = −1，
+      Regge 极限下 u ≈ −s 与硬散射下三项 ln 的合并都用它。
+      ⚠ **同时订正 [S] [6.236] 的 α_c 求和 = 1 之误。**
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.12)/(6.6.13)，p.193–194"
+    note: |
+      抽取记录 #E106，L1（schrans-2020 §6.65–§6.66，笔记 p.331–333）。
+      ⚠ [S] 的 [6.236] 用了错误的 α_c 求和值（1，应为 −1）；抽取记录明记不影响幂次结论，
+      但「别照抄这句」。
+summary: |
+  **(1) Regge。** 在 C(−α_c(u), −α_c(t)) = 2πB(−α_c(u), −α_c(t), 1 + α_c(u) + α_c(t)) 中，
+  取 s → ∞、t 固定 ⇒ u ≈ −s ⇒ −α_c(u) ≈ α's/4 → ∞。
+  用 Γ 商渐近对三个 Γ 逐项取极限（[S] 的 [6.231]/[6.232] 是逐项代数式），得
+    S ∝ s^{2α_c(t)} Γ(−α_c(t))/Γ(1 + α_c(t))。
+  幂次 2α_c(t)（而非 α_c(t)）来自复积分的三 Γ 结构：分子分母各出一个 s^{α_c(t)} 型因子。
+
+  **(2) 硬散射。** s, t, u → ∞ 而比值固定；对 Γ 商取对数并用 Stirling
+  ln Γ(z) ≈ z ln z − z，配 α_c(x) = α'x/4 + 1，得
+    ln S ≈ −(α'/2)( s ln s + t ln t + u ln u ) + 次要项，
+  即 (6.6.13)。**指数率 α'/2 恰是开弦 α' 的一半**（本图不建对比节点，见目标陈述 notes）。
+gaps:
+  - "**继承 math.gamma-ratio-asymptotics 的适用域缺口**：Regge 极限沿 Γ 的极点射线取极限。"
+  - "**双参数同时趋无穷的 Stirling 渐近本图无节点**（与开弦硬散射节点同一缺口）；
+     (2) 中的符号与对数分支处理同样略过。"
+  - "**(1) 的幂次 2α_c(t) 未独立验算**：本推导照录 [S] 的结论并给出结构性解释
+     （三 Γ 结构 ⇒ 幂次加倍），没有逐项复算 [6.231]/[6.232]。**建议 reviewer 复核。**"
+  - "**⚠ [S] 在此处的一句是错的**（α_c 求和 = 1，应为 −1）：本推导不使用该式，改用
+     spectrum.mandelstam-invariants-sum-rule。凡复现 [S] 计算的人都会撞上这处。"
+  - "**上游的路径积分缺口**（经 spectrum.virasoro-shapiro-amplitude 继承）。"
+notes: |
+  按抽取记录 Q15，本图不建「开闭弦 Regge/硬散射指数差因子 2」的陈述节点；
+  该对比只写在两条目标陈述的 notes 里，并注明是抽取者的观察而非原书内容。
+author: curator-polchinski-ch6
+created: "2026-09-11"

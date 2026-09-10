@@ -1,0 +1,102 @@
+id: consistency.anomaly-cancellation-so32-effective-theory--via-green-schwarz-counterterms
+target: consistency.anomaly-cancellation-so32-effective-theory
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.anomaly-twelve-form-d10
+    note: 规范反常一路的编码框架（Ω_{4n} 与十二形式）。
+  - id: consistency.h-field-strength-chern-simons
+    note: |
+      提供 (4) 的 H 与 (9c) 的 δB。GS 逐字：「The nontrivial Λ transformation of B in eq. (9c)
+      is the key to the cancellation between δS₁ and G.」
+  - id: consistency.descent-forms-chern-simons
+    note: (14)(15)(16) 用到的 ω⁰_{2n+1 Y}、ω¹_{2n Y}，以及把反常写成 ∫ω¹ 的形式。
+  - id: consistency.gs-counterterms-1984
+    note: (18)(21)(23) 三段反项本身。
+  - id: consistency.gravitational-anomaly-polynomial-d10
+    note: (20)，引力一路的十二形式。
+  - id: consistency.gravitational-anomaly-requires-496-fermions
+    note: |
+      给出 n = 496 这一必要条件；SO(32) 的伴随维数恰为 496，故它被满足
+      （dim SO(32) = 496 这条算术本图未建节点，见该目标节点 notes 第 1 条）。
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    note: (12a)(12b)(12c) 与 (13a)：把 Ω_{4n} 写成基本迹的表达式，SO(32) 取 N = 32、l = −1。
+  - id: math.tr-f6-coefficient-vanishing
+    note: |
+      纯规范一路的关键算术：tr F⁶ 的系数 N + 32l 在 N = 32、l = −1 时为零。
+      GS 逐字「it is absent if the gauge group is chosen to be SO(32)」。
+  - id: math.mixed-anomaly-trace-conditions-n32
+    note: |
+      混合反常一路的关键算术：N + 8l = 24 与 N + 2l = 30 各自给出 N = 32
+      （GS 的 "two independent confirmations"）。
+  - id: conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119–120（重印 610–611）：(12c) 下方讨论、(14)(15)(16)、(17)(18) + fig. 1、(20)(21)、(22)(23) 与总结句"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E9/E10/E13/E14/E15。
+  - ref: alvarez-gaume-witten-1984
+    loc: "eq. (63)（GS 逐字：「The relative normalization of all the anomalies can be deduced from eq. (63) of ref. [3].」）；以及 (17) 的常数 c"
+    note: |
+      **本项目未取得全文（L0）**。整条链的**数值系数层**——(17) 的 c、(20) 的三个系数、
+      (14)(20)(22) 之间的相对归一化——全部压在这一条上。抽取记录 Q2/Q3。
+  - ref: zumino-wu-zee-1984
+    loc: "全文（GS ref. [9]：ω⁰_{2n+1} 的显式表达式与十二形式分析）"
+    note: 本项目未取得全文（L0）。
+summary: |
+  GS 的论证按三类反常分三段，最后合起来。
+
+  **(A) 纯 Yang–Mills 反常。**
+  1. 由 (12c)，Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴。第一项（单迹六阶）对应的反常
+     **不能**由局域反项抵消，但取 SO(32)（N = 32, l = −1）时它的系数为零
+     （math.tr-f6-coefficient-vanishing）。
+  2. 剩下的 tr F² tr F⁴ 项是可分解的：(14) 给 tr F² tr F⁴ = d(ω⁰_{3Y} tr F⁴) = d(ω⁰_{7Y} tr F²)。
+     由下降方程 (15)(16)，对应的相容反常是
+        G = c ∫ ( ⅓ ω¹_{2Y} tr F⁴ + ⅔ ω¹_{6Y} tr F² )                     (17)
+     两项之比由 Bose 对称性唯一确定；常数 c 由 refs. [3,9] 定（本文不算）。
+  3. 加入反项 S₁ = c ∫ ( B tr F⁴ + ⅔ ω⁰_{3Y} ω⁰_{7Y} )                     (18)。
+     因为 (9c) 给 δB = −tr(A dΛ) + tr(ω dΘ)，B 的非平凡 Λ 变换使 δS₁ 与 G 对消。
+     GS 逐字：「This amounts to a complete cancellation of the Yang–Mills anomaly for the gauge
+     group SO(32).」
+  4. 机制的树图图像（GS fig. 1）：B tr F⁴ 顶点经 B 传播子接到 (1) 的 H² 项里的 ω⁰_{3Y} dB 顶点，
+     给出六规范场树振幅的反常片，与 (18) 第二项一起抵消六边形反常。
+
+  **(B) 纯引力反常。**
+  5. (20) 的 tr R⁶ 项要求 n = 496（consistency.gravitational-anomaly-requires-496-fermions）；
+     SO(32) 的伴随维数正是 496。
+  6. 取 n = 496 后 (20) 仍剩 −(1/32)(tr R²)³ − ⅛ tr R² tr R⁴，由
+        S₂ = −c ∫ ( (1/32) B (tr R²)² + ⅛ B tr R⁴ + (1/12) ω⁰_{3L} ω⁰_{7L} )      (21)
+     抵消，机制与 (A) 相同，只是换成 (9c) 里 B 的 **Θ**（局域洛伦兹）变换那一项。
+     GS 由此得出他强调的对称结论：「not only does the cancellation of the Yang–Mills anomaly
+     require coupling to the supergravity multiplet, but also the cancellation of the gravitational
+     anomalies requires the contributions of Yang–Mills supermultiplets.」
+
+  **(C) 混合反常。**
+  7. 上面两批反项本身还会贡献混合反常（例如 (18) 里 B 的洛伦兹变换）。SO(32) 的混合反常十二形式是
+        − tr R² [ tr F⁴ + ⅛ (tr F²)² ] + tr F² [ ⅛ tr R⁴ + (5/32)(tr R²)² ]        (22)
+     （相对归一化取自 AGW eq. (63)；GS 明说 (14)(20)(22) 三者是按正确的相对归一化给出的）。
+  8. 它由
+        S₃ = c ∫ ( ⅛ B tr R² tr F² + (1/48) ω⁰_{3L} ω⁰_{3Y} tr R² − (1/24) ω⁰_{3Y} ω⁰_{3L} tr F²
+                   − ⅔ ω⁰_{3L} ω⁰_{7Y} + (1/12) ω⁰_{3Y} ω⁰_{7L} )                   (23)
+     抵消，而抵消**要求** N + 8l = 24 与 N + 2l = 30（即 (12b)(12a) 的两个系数取定值），
+     两式在 l = −1 时都给 N = 32（math.mixed-anomaly-trace-conditions-n32）。
+     GS 称此为对 SO(32) 的「两次独立确认」。
+
+  **合并**：修改 H（加 −ω⁰_{3L}）并加入 S₁ + S₂ + S₃，则单圈的规范、引力、混合反常全部抵消。
+gaps:
+  - "★ **数值系数层整体外包**：(17) 的常数 c 与 (14)(20)(22) 的相对归一化，GS 逐字指向 alvarez-gaume-witten-1984 eq. (63)，**本项目未取得该文**。凡本推导中出现的具体数（⅓, ⅔, 1/32, ⅛, 1/12, 1/48, 1/24, 5/32）都不可追溯到本图掌握的来源（抽取记录 Q2/Q3）。"
+  - "★ 「单迹六阶项的反常不能由局域反项抵消，可分解项可以」这条判据，GS 全文无证明；本图无独立来源。(A)1 与 (B)5 两处都靠它。"
+  - "(22) 只给结果，无中间步骤：GS 未展示混合反常十二形式是怎么算出来的。"
+  - "δS₁ 与 G 的对消、δS₂/δS₃ 的对消，GS 都只给结论不给计算；本图未复算任何一处。"
+  - "ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（consistency.descent-forms-chern-simons），故 S₁、S₃ 的显式值依赖代表元选取。"
+  - "有效场论截断本身：GS 逐字承认「any truncation of the complete string theory is probably not fully consistent」。"
+  - "(A)4 的树图机制要用到 GS (1) 的 S₀（H² 项），本图未建该定义卡。"
+notes: |
+  【本推导的 status 为何是 physical-argument】这是标准的物理学家式反常计算：形式的十二维多项式、
+  下降方程、圈图与树图的反常片对消，没有任何一步在本图里被严格化，且核心数值输入来自未取得的文献。
+  按 docs/STATUS_LEVELS.md 第 3 级。
+
+  【与 math.* 三条算术节点的分工】图里刻意把「N = 32 从哪来」拆成三条纯代数节点
+  （tr F⁶ 系数、混合反常两方程、因子化恒等式），使得**即使物理层长期停在 physical-argument，
+  代数层仍可独立升到 rigorous / formalized**。这是 Phase 2 Lean 岛的设计意图。
+author: curator
+created: "2026-09-11"

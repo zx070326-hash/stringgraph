@@ -1,0 +1,73 @@
+id: math.mobius-three-point-fixing-jacobian
+kind: proposition
+title: 固定三点的共形 Killing 群 Jacobian 是 Vandermonde 行列式 z₁₂z₁₃z₂₃
+statement: |
+  设无穷小 Möbius 变换按 worldsheet.sphere-conformal-killing-group 参数化为
+    δz = a₀ + a₁ z + a₂ z²   (a₀, a₁, a₂ 复)，
+  并设 z₁, z₂, z₃ 互不相同。则参数到三点位移的线性映射
+    (a₀, a₁, a₂) ⟼ (δz₁, δz₂, δz₃),   δz_i = a₀ + a₁ z_i + a₂ z_i²
+  的矩阵是 Vandermonde 矩阵（第 i 行为 (1, z_i, z_i²)），其行列式为
+    det = (z₂ − z₁)(z₃ − z₁)(z₃ − z₂) = − z₁₂ z₁₃ z₂₃,   z_ij ≡ z_i − z_j，
+  故 |det| = |z₁₂ z₁₃ z₂₃| ≠ 0，映射可逆。
+
+  **(1)（球面）** 把全纯与反全纯两侧合起来，用 PSL(2,C) 固定 S₂ 上三个复坐标时
+  出现的 Jacobian 因子是  |z₁₂|² |z₁₃|² |z₂₃|²。
+  **(2)（圆盘）** 用 PSL(2,R) 固定 D₂ 边界上三个实坐标时同样的计算给  |y₁₂ y₁₃ y₂₃|。
+
+  ⚠ **本命题只断言线性代数**：上面两式与 bc 鬼场三点期望值
+  （worldsheet.bc-ghost-sphere-cc-correlator、worldsheet.bc-ghost-disk-three-c-correlator）
+  在函数形式上**逐字相同**，这正是「鬼场插入抵消固定坐标的 Jacobian」的算术内容；
+  但「Faddeev–Popov 手续给出的正是这个 Jacobian」是路径积分层面的陈述，属第 5 章，
+  **本命题不断言它**（本图暂无该节点，见 notes）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.2)/(6.3.4)（与本 Jacobian 逐字同形的鬼场三点期望值）；§6.4 eq. (6.4.5)、§6.6 eq. (6.6.4)（三点被固定后的振幅表达式）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E96/#E97/#E104，等级 L1
+      （(6.3.2)/(6.3.4) 有 schrans-2020 与 headrick-2008 **两个独立二手源**逐字写出表达式）。
+      ⚠ 来源给出的是**鬼场期望值**；Vandermonde 行列式这一步是 curator 补出的线性代数，
+      原书是否在此处写出该 Jacobian **未核实**。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.{vandermonde_fin_three, mobius_three_point_jacobian, det_mobius_matrix, mobius_three_point_jacobian_eq_neg, mobius_three_point_det_ne_zero, mobius_three_point_fixing_bijective}"
+    note: |
+      本仓库，formal 侧提交 70b62c5（"formal: prove Mobius three-point fixing Jacobian
+      (Vandermonde n=3)"）；Lean 4 + Mathlib v4.33.1。逐条对应：
+        行列式 det = (z₂−z₁)(z₃−z₁)(z₃−z₂) → `mobius_three_point_jacobian`（本卡 formal.lean_decl；
+          任意交换环，Mathlib `Matrix.det_vandermonde` 的 n = 3 特化）；
+          `det_mobius_matrix` 是三个变量写开的同一式；
+        符号 det = −z₁₂z₁₃z₂₃ → `mobius_three_point_jacobian_eq_neg`；
+        三点互不相同 ⇒ det ≠ 0、映射可逆 → `mobius_three_point_det_ne_zero` /
+          `mobius_three_point_fixing_bijective`（域上；后者把 (a₀,a₁,a₂) ↦ (δz_i) 写成
+          Vandermonde 矩阵的 mulVec 并证双射）。
+      Lean 侧的 `z 0, z 1, z 2` 即本卡的 z₁, z₂, z₃（0 起数）。
+      **Lean 只覆盖无穷小/线性代数陈述**：(1)(2) 的「合起来得 |z₁₂|²|z₁₃|²|z₂₃|²、|y₁₂y₁₃y₂₃|」
+      是对 |det| 取模/取乘积的一行算术，没有单独的 Lean 声明；PSL(2,R) 的锐三重传递与
+      有限变换的测度换算不在 Lean 内（见 math.mobius-group-sharply-three-transitive）。
+formal:
+  lean_decl: StringFormal.Math.mobius_three_point_jacobian
+  lean_file: StringFormal/Math/MobiusJacobian.lean
+tags: [math, linear-algebra, vandermonde, mobius, faddeev-popov, jacobian, formalized]
+notes: |
+  由 curator 于 2026-09-11 拆出（任务书：把「PSL(2,C) 三点固定的 Jacobian」作为纯数学部分单列）。
+
+  **为什么值得单列**：第 6 章几乎每条树级振幅都用到「固定三点 + 乘上 c 鬼三点期望值」，
+  而两者之所以对消，纯粹因为 Vandermonde 行列式与 (6.3.2)/(6.3.4) 同形。
+  单列算术部分后，振幅节点的 gaps 里只剩真正的物理缺口（路径积分测度、FP 手续）。
+
+  **status 历史**：初建时 physical-argument（无 reviewer 复核、无数学来源）。2026-09-11：
+  reviewer-ch6 复核 --via-vandermonde 升 rigorous；同日挂上 formalizer 的
+  MobiusJacobian.lean（--via-lean，formalized）。
+
+  【formalizer 的三点说明】（2026-09-11，MobiusJacobian.lean 文件头与 formal/TODO.md）
+  1. **符号**：det (vandermonde z) = (z₂−z₁)(z₃−z₁)(z₃−z₂) = −z₁₂z₁₃z₂₃，符号随两点换位翻转，
+     所以文献一律写绝对值 |z₁₂z₁₃z₂₃|；符号不是物理陈述的一部分。
+  2. **Lean 覆盖范围**：只有无穷小变换 δz = a₀ + a₁z + a₂z² 的线性代数（行列式、非退化、双射）。
+     PSL(2,R)/PSL(2,C) 的锐三重传递（有限变换）与「Jacobian ⇒ 测度换算」仍是 physical-argument 层面，
+     分别由 math.mobius-group-sharply-three-transitive 与（待建的）第 5 章 FP 节点承载。
+  3. **孤岛**：MobiusJacobian.lean 只 import Mathlib，不 import `Virasoro/`、`NoGhost/`。
+     它同时容纳 spectrum.mandelstam-invariants-sum-rule 的 B 节。
+
+  **待补边**：第 5 章的规范固定测度 (5.3.9)（抽取记录 E77/E80）说明 FP 行列式在固定 CKV 参数后
+  产生的正是这个 Jacobian。该节点由另一名 curator 建立，本批次提交时尚未进入 main。
+author: curator-polchinski-ch6
+created: "2026-09-11"
