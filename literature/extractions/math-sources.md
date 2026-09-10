@@ -6344,3 +6344,485 @@ math.cy3-topological-types-finite               status: conjecture
 - **Q46.5** KS 的 491 与 Taylor 的 491 是否同源（§46.4 注 4）。若同源，则「KS 列表的极值恰好饱和椭圆纤维化的理论上界」是一条很强的结构性事实，值得单独建卡。
 - **Q46.6** 本节全部证据都是 L2/L3。**四篇数学论文（Grassi 1991、Gross 1994、Kawamata 1997、FHS 2021）一篇正文都没读。** FHS 有 arXiv（`2112.01352`），**升到 L1 的成本最低**。
 
+---
+
+## 47. `math.even-self-dual-euclidean-lattices-dimension-16`：偶自对偶格的维数 ≡ 0 mod 8，且 16 维恰有两个（researcher，2026-09-11）
+
+> **本节状态：已完成**（2026-09-11，researcher；skeleton 先落盘，之后逐条追加）。
+> 目标：为杂化弦"规范群恰有两个（`Spin(32)/Z₂` 与 `E₈×E₈`）"这条路线的**数学前提**找带编号来源，
+> 使 `math.even-self-dual-euclidean-lattices-dimension-16` 能从 `physical-argument` 升到 `rigorous`。
+> **结果：(A)(B) 各拿到一条 L1 带编号来源（§47.1 表），但任务书点名的四本教科书正文一本都没取到（§47.4）。**
+
+### 47.0 需求侧：要两条不同的定理，绝不能合成一条
+
+图卡 `math.even-self-dual-euclidean-lattices-dimension-16` 的文字里其实压着**两条独立的数学命题**，
+它们的证明手段、原始文献、可获得性完全不同：
+
+| | 陈述 | 证明手段 | 谁给 |
+|---|---|---|---|
+| **(A)** | 正定（欧氏）偶自对偶格的秩 `n` 必被 8 整除 | 模形式（θ 级数权 n/2 在 Γ₁ 上）或纯代数 | **有干净的带编号来源**（§47.2） |
+| **(B)** | `n = 16` 时恰有两个等价类：`Γ₈ ⊕ Γ₈` 与 `Γ₁₆`（= `D₁₆⁺`） | Kneser 邻居法 / Minkowski–Siegel 质量公式 / 手工枚举 | **难得多**（§47.3 起） |
+
+⚠ **(A) 不蕴涵 (B)，(B) 也不是 (A) 的"n=16 特例"。** 杂化弦"规范群恰有两个"这条路线**两条都要**。
+⚠ 还有第三条**不属于本节**、且仍是 `physical-argument` 的桥：
+「一致的 16 维内部 CFT（模不变 + 幺正）⟺ 偶自对偶欧氏格」。本节**不碰**它，见 §47.6。
+
+**术语陷阱（本节全程要盯）**：数学文献里主流说法是 **"even unimodular"**（偶幺模），
+物理文献里主流说法是 **"even self-dual"**（偶自对偶）。对**正定整格**这两者是同一件事
+（`L = L*` ⟺ `det = 1` ⟺ unimodular），但**在不定号差下**物理书常用的 "self-dual" 也仍指 `L = L*`。
+⇒ 抄编号时必须记原文用的是哪个词；curator 建卡时要在 `notes` 里写明两词等同的条件。
+另一个记号陷阱：`Γ₁₆`、`Λ₁₆`、`D₁₆⁺`、`II₁₆,₀`、`E₈²` 在不同书里指同一批对象但字母不同（§47.2、§47.5）。
+
+### 47.1 ★★ 结论表（先看这张）
+
+| 命题 | 最佳可引来源 | 编号（逐字） | 证据等级 | 建议 status |
+|---|---|---|---|---|
+| **(A)** 正定偶幺模格的秩 `n ≡ 0 mod 8` | Zagier, *The 1-2-3 of Modular Forms* 第一篇, **p. 33** | **`Proposition 12`**，第 **(i)** 条 | **L1 页图** | **`rigorous`** |
+| **(B)** 16 维恰两类：`D₁₆⁺` 与 `E₈ ⊕ E₈`，**且两者不同构** | Chenevier–Lannes, arXiv:1409.7616, ch. II §3, **p. 35** | **`Corollaire 3.6`** | **L1 页图** | **`rigorous`** |
+| (B′) 8 维唯一：`E₈` | 同上，**p. 34** | **`Corollaire 3.5`** | L1 页图 | `rigorous` |
+| (C) 24 维恰 24 类 | 同上，**p. 41** | **`Théorème 3.13`** | L1 页图 | `rigorous` |
+| 归属：8 维 Mordell / 16 维 Witt / 24 维 Niemeier | 同上，**p. 33** | 无编号（散文句） | L1 逐字 | —（只入 `notes`） |
+| **「Witt 1941 这篇文章证明了 (B)」** | — | — | **L0，且本轮拿到反向线索** | ⛔ **不得写** |
+| Serre *A Course in Arithmetic* Ch. V 的定理号 | — | — | **L0**（章定位 pp. 48–58 是 L2） | ⛔ 只可引到章 |
+| Milnor–Husemoller Ch. II 的定理号 | — | — | **L0**（章定位 pp. 15–55 是 L2） | ⛔ 只可引到章 |
+| SPLAG "Table 16.7" | — | — | **L0**（Ch. 16 = pp. 406–420，三版一致，L2） | ⛔ 只可引到章 |
+| Ebeling 的定理号（Ch. 2 还是 Ch. 3 都未定） | — | — | **L0**（章标题 + 三版页码是 L2） | ⛔ 只可引到章+版次 |
+| 「一致的 16 维内部 CFT ⟺ 偶自对偶欧氏格」 | Polchinski v2 §11.6 (11.6.4a,b)（已有 L1 抽取 E63） | 有式号 | L1 | **`physical-argument`（本节不动）** |
+
+**一句话结论**：**(A) 与 (B) 都能升 `rigorous`，但不是靠任务书点名的那四本教科书**——
+四本书的正文本轮一本都没打开；真正拿到编号与证明的是
+**Zagier 的模形式讲义（(A)）** 和 **Chenevier–Lannes 的 arXiv 专著（(B)，带完整证明）**。
+⚠ **但杂化弦"规范群恰有两个"整体不会因此变严格**：瓶颈是那条仍为 `physical-argument`
+的「一致 CFT ⟺ 偶自对偶格」桥，见 §47.6(b)。
+
+### 47.2 ★★ (A) 已核实、可直接引用：Zagier, *Elliptic Modular Forms and Their Applications*, **Proposition 12(i)**（L1 页图）
+
+**书目**：D. Zagier, "Elliptic Modular Forms and Their Applications", in K. Ranestad (ed.),
+*The 1-2-3 of Modular Forms*（Universitext, Springer, 2008），pp. 1–103。
+**获取路线（可复现）**：作者本人 MPIM 主页上的**出版社排版 PDF**
+`https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-74119-0_1/fulltext.pdf`
+（1.2 MB；WebFetch 落盘后 `Read(pages=)` 读页图。**PDF 页码 = 书页码**，首页即 p.1）。
+这是作者自建页上的合法一手件，不是盗版扫描。
+
+**位置**：§3.2 "Theta Series in Many Variables" 下的小节 **"♠ Invariants of Even Unimodular Lattices"**，
+命题在**书上 p. 33**，证明跨 p. 33–34。
+
+**逐字（L1，照抄页图）**：
+
+> **Proposition 12.** *Let `Q : ℤ^m → ℤ` be a positive definite even unimodular quadratic form in m variables. Then*
+> *(i) the rank m is divisible by 8, and*
+> *(ii) the number of representations of `n ∈ ℕ` by Q is given for large n by the formula*
+>
+> `R_Q(n) = − (2k/B_k) σ_{k−1}(n) + O(n^{k/2})   (n → ∞),`  (38)
+>
+> *where `m = 2k` and `B_k` denotes the kth Bernoulli number.*
+
+⇒ **图里要的 (A) 就是 Proposition 12 的第 (i) 条。** 它是**带编号、带证明、公开可取**的，
+而且假设写得正好对口：**positive definite**（= 欧氏）+ **even** + **unimodular**。
+
+**证明的依赖（原文自己列出的，L1）**：
+- "By the theorem above, the theta series `Θ_Q` is a modular form of weight k on the full modular group `Γ₁ = SL(2,ℤ)`"
+  —— 这里的 "the theorem above" 是**同页前面的 `Theorem (Hecke, Schoenberg)`（书上 p. 32，无编号，只有人名）**。
+- "By the results of Section 2, this modular form is a linear combination of `𝔾_k(z)` and a cusp form of weight k"
+- "Now Proposition 8 implies the asymptotic formula (38)"
+- 降到 `m ≡ 4 (mod 8)` 的技巧原文逐字：
+  > "For the first part it is enough to show that m cannot be an odd multiple of 4, since if m is either odd or twice an odd number then 4m or 2m is an odd multiple of 4 and we can apply this special case to the quadratic form `Q ⊕ Q ⊕ Q ⊕ Q` or `Q ⊕ Q`, respectively."
+  ⚠ 末句"如果 `k ≡ 2 (mod 4)` 则 `B_k > 0`，(38) 右边趋于 −∞，与 `R_Q(n) ≥ 0` 矛盾"里的**极限变量**
+  我在页图上读成 `k → ∞`，但按数学内容应是 `n → ∞`。**这一句不要照抄，可能是我的读图误差或原书误印。**
+
+**★ 作者自己给出的强度措辞（对 status 判定很要紧，L1 逐字，书上 p. 34）**：
+
+> "The first statement of Proposition 12 is purely algebraic, and purely algebraic proofs are known, but they are not as simple or as elegant as the modular proof just given. No non-modular proof of the asymptotic formula (38) is known."
+
+⇒ **(A) 是 `rigorous`，且原文明说存在纯代数证明**（即不必把整条模形式机器拖进依赖图；
+若 curator 想要一条不依赖 Hecke–Schoenberg 的推导，Serre / Milnor–Husemoller 那条纯代数路线才是对的，见 §47.4）。
+
+**同一节里对 (B) 的陈述：有，但没有编号、也没有引文（L1 逐字，书上 p. 34）**：
+
+> "However, in rank 16 one knows that there are two non-equivalent lattices: the direct sum `Λ₈ ⊕ Λ₈` and a second lattice `Λ₁₆` which is not decomposable. Since the theta series of both lattices are modular forms of weight 8 on the full modular group with Fourier expansions beginning with 1, they are both equal to the Eisenstein series `E₈(z)`, so we have `r_{Λ₈⊕Λ₈}(n) = r_{Λ₁₆}(n) = 480 σ₇(n)` for all `n ≥ 1`, even though the two lattices in question are distinct."
+
+以及**书上 p. 36**（"♠ Drums Whose Shape One Cannot Hear" 小节，讲 Milnor 的等谱环面）：
+
+> "As we already mentioned, there are two non-isomorphic even unimodular lattices `Λ₁ = Γ₈ ⊕ Γ₈` and `Λ₂ = Γ₁₆` in dimension 16."
+
+**★ 三条必须记下的注意事项：**
+
+1. ⚠ **"one knows that" 是转述，不是本书证明的。** Zagier 对 (B) **不给编号、不给证明、正文里也不给参考文献**
+   （该文的体例是"references … collected into a single section at the end"，见 p. 2 逐字：
+   "references and suggestions for further reading have not been given within the main text but collected into a single section at the end"）。
+   ⇒ **(B) 不能引 Zagier 当 rigorous 来源**，最多当"该事实在标准文献中是已知的"的旁证（L1 但强度为转述）。
+2. ⚠ **同一篇文章里记号从 `Λ₈/Λ₁₆`（p. 34）换成了 `Γ₈/Γ₁₆`（p. 36）。** 图卡用的是 `Γ` 版，与 p. 36 一致。
+3. ⚠ **rank 8 的唯一性**在 p. 34 也只是顺带一句（"the known classification in this rank says … is, in fact, the only such lattice up to isomorphism"，
+   句中被指代的格符号我在页图上没读全，**该句不要逐字引用**）。**rank 24 那句原文把 Niemeier 拼成了 "Niemeyer"**：
+   > "The even unimodular lattices of this rank were classified completely by Niemeyer in 1973. There are exactly 24 of them up to isomorphism."
+   ⇒ 若将来要引 24 维，**注意这是原文的拼写，正确姓氏是 Niemeier**。
+
+### 47.3 ★★★ (B) 已核实、带编号、带完整证明、公开可取：Chenevier–Lannes, **Corollaire 3.6**（L1 页图）
+
+**这是本轮最重要的发现，也是 (B) 唯一一条我真正逐字读到编号与证明的来源。**
+
+**书目**：G. Chenevier & J. Lannes, *Formes automorphes et voisins de Kneser des réseaux de Niemeier*,
+**arXiv:1409.7616**（math.NT；法文；约 380 页 + 附录）。
+该书的英文出版版是 *Automorphic Forms and Even Unimodular Lattices*, Ergebnisse der Mathematik
+(3. Folge) **69**, Springer 2019 —— ⚠ **英文版的编号与法文预印本几乎肯定不同，见下方警告。**
+
+**获取路线（可复现）**：`https://arxiv.org/pdf/1409.7616v1` → WebFetch 落盘（3.4 MB）→ `Read(pages=)`。
+（⚠ `ar5iv.labs.arxiv.org/html/1409.7616` **超 10 MB 上限**，走不通。）
+**PDF 页 = 书页 + 4**（正文 p.1 在 PDF 第 5 页；前面是扉页 + 罗马数字目录 i–iii）。
+
+⚠⚠ **版本悬案（必须记下）**：本轮取到的文件，**左侧栏 stamp 印的是 `arXiv:1409.7616v1 [math.NT] 26 Sep 2014`，
+而扉页正文日期印的是 `30 juin 2022`**。两者不自洽（2014 年的 v1 不可能带 2022 的编译日期）。
+arXiv API 报该条目**存在 v2**。⇒ **引用时不要写死版本号**，写 `arXiv:1409.7616`；
+若某条编号成为图里的 load-bearing 依赖，请人类到 arXiv 页面核对版本与编号是否随版本改动。
+
+**位置**：**Chapitre II「Algèbre bilinéaire et quadratique」, §3「Systèmes de racines et réseaux unimodulaires pairs」（书 pp. 31–41）**。
+编号是**章内 §3 的流水号**（3.1, 3.2, …, 3.13），页图上印的标签就是 `Corollaire 3.6`（**不是** `II.3.6`）。
+
+**★ (B) 的逐字陈述（L1，书上 p. 35）**：
+
+> **Corollaire 3.6.** *Tout réseau unimodulaire pair de dimension 16 est isomorphe à `D₁₆⁺` ou à `E₈ ⊕ E₈`
+> (et ces deux réseaux ne sont pas isomorphes).*
+
+（中译：任一 16 维偶幺模格同构于 `D₁₆⁺` 或 `E₈ ⊕ E₈`，**且这两个格互不同构**。
+注意括号里那半句很值钱：它把"恰有两个"里的**"至少两个"**也一并给了，
+所以引这一条就够了，不需要再单独找"两者不同构"的来源。）
+
+**同节的 8 维版本（L1，书上 p. 34）**：
+
+> **Corollaire 3.5.** *Tout réseau unimodulaire pair de dimension 8 est isomorphe à `E₈`.*
+
+**★ 原文自己给出的归属（L1 逐字，书上 p. 33，小标题
+"CLASSIFICATION DES RÉSEAUX UNIMODULAIRES PAIRS EN DIMENSION 8, 16 ET 24" 下第一句）**：
+
+> "Cette classification est due à **Louis J. Mordell** en dimension 8, à **Ernst Witt** en dimension 16
+> et à **Hans-Volker Niemeier** en dimension 24 [Ni73]."
+
+⇒ **"16 维恰有两个" 的原始功劳归 Witt**，这一点由该书作者明写。
+⚠ 但**原文只对 Niemeier 给了文献标签 `[Ni73]`，对 Mordell 与 Witt 没给标签**
+（同页、同段内没有 `[Wit41]` 之类）。⇒ 「Witt 1941 = 该定理的原始出处」这一步
+**在本节只到"作者说是 Witt"的程度，具体是哪一篇仍是 L0**，见 §47.4 与 §47.7 Q47.2。
+
+**★ 证明是完整的，而且原文说明了它为什么在 8/16 维也成立（L1 逐字，p. 33）**：
+
+> "Ci-après, nous évoquons la stratégie ingénieuse développée par Boris Venkov [Ven80] pour retrouver
+> la classification de Niemeier. **Sa stratégie fonctionne également en dimension 8 et 16.** En effet,
+> l'idée de départ de Venkov est de considérer des séries thêta 'à coefficients harmoniques de degré 2'
+> et d'observer que ces séries sont identiquement nulles car toute forme modulaire parabolique pour
+> `SL₂(ℤ)` de poids `14 = 24/2 + 2` est nulle, les arguments qu'il utilise ensuite ne font plus intervenir
+> de façon essentielle que la dimension des réseaux est 24 ; or toute forme modulaire parabolique pour
+> `SL₂(ℤ)` de poids `n/2 + 2` est également nulle pour `n = 8, 16`."
+
+**Corollaire 3.6 的证明链（原文自己列出的依赖，L1）**：
+
+| 编号 | 内容 | 页 |
+|---|---|---|
+| `Définition 3.1` | ADE 型根系的 ad hoc 定义（三条件 (I)(II)(III)），自称是 `[Bou81b, Ch. VI, §1, Déf. 1]` 的变体 | 31 |
+| `Proposition 3.2` | Venkov 恒等式：`Σ_{α∈R(L)} (α·x)² = (2|R(L)|/n) x·x`，**对 n = 8, 16, 24** | 33 |
+| `Proposition-Définition 3.3` | 若 `R(L) ≠ ∅` 则 (a) `R(L)` 是**秩 n** 的 ADE 根系；(b) 各不可约分支的 Coxeter 数相同（记 `h(L)`，称 équicoxeter）；(c) `|R(L)| = n·h(L)` | 34 |
+| **`Corollaire 3.6`** | **16 维分类** | **35** |
+
+**Corollaire 3.6 的证明逐字（L1，p. 35）**：
+
+> "*Démonstration.* Soit L un tel réseau. La série thêta de L est nécessairement égale à la série
+> d'Eisenstein normalisée `𝔼₈ = 𝔼₄²`. On en déduit `|R(L)| = 480` et `h(L) = 30`. Cette dernière égalité
+> force **par inspection** `R(L) ≃ D₁₆` ou `R(L) ≃ E₈ ⊔ E₈` … Dans le cas `R(L) ≃ E₈ ⊔ E₈` on conclut
+> comme précédemment que l'on a `L ≃ E₈ ⊕ E₈`. Dans le cas `R(L) ≃ D₁₆`, `D₁₆` apparaît, à isomorphisme
+> près, comme un sous-réseau de L ; on peut donc supposer que l'on a dans `ℚ ⊗_ℤ L` les inclusions
+> `D₁₆ ⊂ L ⊂ D₁₆^♯`. Alors `L/D₁₆` est un lagrangien du qe-module `rés D₁₆` et l'on voit que l'on a `L ≃ D₁₆⁺`."
+
+⚠ **证明里有一步是 "force par inspection"**（"由检查即得"）：即"秩 16、équicoxeter、Coxeter 数 30 的 ADE 根系
+只有 `D₁₆` 与 `E₈ ⊔ E₈` 两种"这一步是**有限枚举**，原文不展开。
+这是一个**有限可判定的检查**，不是缺口，但**如果将来要 Lean 形式化，这一步就是主要工作量**（见 §47.6）。
+
+**★ 该书对 (A) 的态度：只说"众所周知"，不证明（L1 逐字，书上 p. 1，§I.1）**：
+
+> "Il est bien connu que l'ensemble `X_n` est fini, et qu'il est non vide si, et seulement si, `n ≡ 0 mod 8`."
+
+⇒ **(A) 不能引 Chenevier–Lannes**（他们不证也不给出处）。**(A) 用 Zagier Prop 12(i)（§47.2）。**
+
+**同书 §I.1（p. 1）的定义与记号（L1 逐字，对建卡直接可用）**：
+
+> "Un réseau unimodulaire pair de rang n est un réseau `L ⊂ ℝⁿ` de covolume 1 et tel que `x·x ∈ 2ℤ` pour tout `x ∈ L`."
+> "`X_n = O(ℝⁿ)\𝓛_n` l'ensemble des classes d'isométrie de réseaux unimodulaires pairs de rang n."
+> "`E_n = D_n ⊕ ℤe` où `D_n = {(x_i) ∈ ℤⁿ, Σ_i x_i ≡ 0 mod 2}`, `e = ½(1,1,…,1)`, et `n ≡ 0 mod 8`."
+> "De manière un peu surprenante, `X_n` n'a été déterminé qu'en dimension `n ≤ 24`. Mordell et Witt ont
+> respectivement démontré que `X₈ = {E₈}` et `X₁₆ = {E₁₆, E₈ ⊕ E₈}`."
+
+⚠⚠ **本书的 `E₁₆` 就是 `D₁₆⁺`，不是什么"E 型李代数"**（不存在 `E₁₆` 李代数）。
+原文在 p. 33 自己点明了这一点（L1 逐字）：
+
+> "Le réseau unimodulaire pair `E_n` est aussi noté `D_n⁺` (au moins pour `n ≥ 16`)"
+
+并且（p. 33）"Pour `n ≥ 16` (et `n ≡ 0 mod 8`) on a `R(E_n) = R(D_n) = D_n`" —— 即 `E₁₆` 的根系是 `D₁₆` 型。
+**所以同一本书里 §I.1 写 `E₁₆`、§II.3 写 `D₁₆⁺`，指同一个格。抄编号时两处措辞不同，不要当成两条不同结论。**
+
+**同节其它可能有用的编号（L1，顺带记下，供 24 维/Leech 方向）**：
+`Scholie 3.4`（p. 34，24 维恒等式）、`Proposition 3.7`（p. 36）、`Proposition 3.8`（p. 37）、
+`Proposition 3.9` + `Corollaire 3.10` + `Scholie 3.11`（p. 38，24 维双射）、
+**`Théorème 3.12`（p. 41）**"Tout réseau unimodulaire pair dont l'ensemble des racines est vide est isomorphe
+au réseau de Leech."（原文注明 "dû à Conway (voir [Co69b])"）、
+**`Théorème 3.13`（p. 41）** 24 维的 24 个类。
+
+⚠⚠ **引用警告（最容易翻车的一条）：编号是预印本的编号。**
+英文出版版 *Automorphic Forms and Even Unimodular Lattices*（Ergebnisse 69, Springer 2019）
+**几乎肯定重排了编号**（法文本把整个 Chapitre II 的 §3 用 3.x 流水号，英文本的章节划分未核实）。
+⇒ **bib 里登记的是 arXiv 版**（`chenevier-lannes-2014`），`loc` 写
+`arXiv:1409.7616, ch. II, §3, Corollaire 3.6 (p. 35)`，**不要**写成 Springer 书的定理号。
+
+### 47.4 任务书点名的五个候选：逐条结算（**四本书的定理号全部 L0**）
+
+本轮**没有一本**任务书点名的教科书能取到正文（Springer 登录墙 + Google Books 无预览 + WebSearch 额度耗尽）。
+但**书目坐标**都钉死了，而且发现了几处版次陷阱。下面逐条给证据等级。
+
+#### (a) Serre, *A Course in Arithmetic* (GTM 7) —— 章定位 L2，**定理号 L0**
+
+**已核实（L2，Crossref 单-DOI 元数据）**：
+
+> DOI `10.1007/978-1-4684-9884-4_5`；title **"Integral Quadratic Forms with Discriminant ± 1"**；
+> container `Graduate Texts in Mathematics / A Course in Arithmetic`；**pages 48–58**；book-chapter；1973。
+> （同书 Ch. IV "Quadratic Forms over Q_p and over Q" pp. 27–47；Ch. VII "Modular Forms" pp. 77–111。）
+
+⇒ **第 V 章确实是"判别式 ±1 的整二次型"，且只有 11 页（48–58）。**
+任务书猜的结构（§1 Preliminaries / §2 Statement of results，Theorem 2 = "n ≡ 0 mod 8"，
+§1.4.3 或 Thm 5/6 给 8 维唯一与 16 维两个）**在 11 页的篇幅里是合理的，但本轮一个字都没核实**。
+
+**另一条独立的书目线索（L1，Chenevier–Lannes 参考文献 p. 381 逐字）**：
+
+> "[Ser70] J.-P. Serre, *Cours d'arithmétique*, P.U.F., Paris (1970)."
+
+⚠ 专家引的是**法文原版 1970**，不是 GTM 7 英译本。而且 CL 引它的地方（p. 2）是
+「`|X₃₂| > 8·10⁶` [Ser70]」——即**质量公式给出的 32 维下界**。
+⇒ 这至少证明 Serre 书里**有**"定正情形 + 质量公式"的讨论（也就是任务书说的 §2.3 那块内容），
+但**具体编号仍是 L0**。
+
+**已试且失败的路线（别再花预算）**：
+`books.google.com/books?vid=ISBN9780387900407` → 页面明写 **"No eBook available"**，**无预览** ⇒
+[[web-fetch-access-blockers]] 里那条 Google Books `&q=` 定位法**对这本书完全不适用**。
+`www.googleapis.com/books/v1/volumes?q=…` 本轮**三次全部 HTTP 429**。
+
+⛔ **禁令：图里不得写 `Serre, A Course in Arithmetic, Ch. V, Theorem 2`（或任何具体定理号）。**
+可以写的最强形式是：`serre-1973-arithmetic`，`loc: "Ch. V «Integral Quadratic Forms with Discriminant ±1», pp. 48–58（章定位 L2，定理号未核实）"`。
+
+#### (b) Milnor–Husemoller, *Symmetric Bilinear Forms* —— 章定位 L2+L1 双源，**定理号 L0**
+
+**两条独立来源逐字一致：**
+
+- **L2（Crossref）**：book DOI `10.1007/978-3-642-88330-9`, *Symmetric Bilinear Forms*, 1973。章：
+  | 章 | 标题 | 页 |
+  |---|---|---|
+  | I | Basic Concepts | 1–14 |
+  | **II** | **Symmetric Inner Product Spaces over Z** | **15–55** |
+  | III | Inner Product Spaces over a Field | 56–83 |
+  | IV | Discrete Valuations and Dedekind Domains | 84–99 |
+  | V | Some Examples | 100–109 |
+- **L1（Chenevier–Lannes 参考文献 p. 379 逐字）**：
+  > "[MH73] J. Milnor & D. Husemoller, *Symmetric bilinear forms*, Ergebnisse der Math. und ihrer Grenzgebiete **73**, Springer Verlag (1973)."
+
+⇒ 任务书说的"Ch. II §6"**章是对的**（ℤ 上的对称内积空间只可能在 Ch. II，全书 109 页里它占 41 页，是最长的一章）。
+但 `Theorem 6.1` 这个号**本轮无任何证据**。⛔ **同上禁令。**
+
+#### (c) Conway–Sloane, *SPLAG* —— 章定位 L2（**跨三版页码不变**）+ 一条意外收获
+
+**L2（Crossref）**，同一章在三个版本里的 DOI 与页码：
+
+| 版 | 书 DOI 前缀 | Ch. 16 "Enumeration of Unimodular Lattices" | Ch. 19 "Enumeration of Extremal Self-Dual Lattices" |
+|---|---|---|---|
+| 1st (1988) | `10.1007/978-1-4757-2016-7` | **406–420** | 439–442 |
+| 2nd (1993) | `10.1007/978-1-4757-2249-9` | **406–420** | 439–442 |
+| 3rd (1999) | `10.1007/978-1-4757-6568-7` | **406–420** | **441–444** |
+
+★ **Ch. 16 的页码三版完全一致（406–420）** ⇒ 引 `SPLAG Ch. 16, pp. 406–420` **是版次稳健的**。
+⚠ 但 **Ch. 19 的页码在第 3 版变了** ⇒ 不要把"SPLAG 页码不随版本变"当成通则。
+
+**L1（Chenevier–Lannes 参考文献 p. 375 逐字）**：
+> "[CS99] J.H. Conway & N. J. A. Sloane, *Sphere packings, lattices and groups*, Grundlehren der Math. Wissenschaften **290**, Springer-Verlag, New York (1999)."
+
+**★ 意外收获（L1，CL 参考文献 p. 383 逐字）——SPLAG 第 18 章的真实身份：**
+> "[Ven80] B. Venkov, *On the classification of integral even unimodular 24-dimensional quadratic forms*, **Chapitre 18 de [CS99]**."
+
+⇒ **Venkov 的那篇分类文章就是 SPLAG 的第 18 章**（不是独立期刊文章）。
+而 §47.3 里 Corollaire 3.6 的整个证明策略正是"Venkov 的策略"。
+⇒ **如果将来要给 (B) 找第二条独立来源，SPLAG 的 Ch. 18（而不是 Ch. 16）才是与本证明同源的那一章。**
+
+⛔ 任务书提到的 **"Table 16.7"** 本轮**未核实**，不得写入图。
+
+#### (d) Ebeling, *Lattices and Codes* —— **三版页码全不同**，章定位 L2，定理号 L0
+
+**L2（Crossref）**：
+
+| 版 | 书 DOI | Ch. 1 "Lattices and Codes" | Ch. 2 "Theta Functions and Weight Enumerators" | **Ch. 3 "Even Unimodular Lattices"** | Ch. 5 |
+|---|---|---|---|---|---|
+| 1994 | `10.1007/978-3-322-96879-1` | 1–35 | （未取到）| **83–103** | 127–166 |
+| 2002 | `10.1007/978-3-322-90014-2` | 1–37 | （未取到）| **87–108** | 135–174 |
+| 3rd (2012/13) | `10.1007/978-3-658-00360-9` | 1–32 | 33–75 | **77–95** | 121–157 |
+
+⚠⚠ **同一章 "Even Unimodular Lattices" 在三个版本里的起始页是 83 / 87 / 77 —— 全不一样。**
+⇒ **引 Ebeling 必须写死版次**（这一点和 [[reference_web-fetch-access-blockers]] 里 Jost/Kac–Raina 的教训同型）。
+
+⚠ 任务书写的 "Ebeling **Thm 2.x**"：**章号存疑**。按上表，
+"偶幺模格"是 **Ch. 3**，而 **Ch. 2 是 "Theta Functions and Weight Enumerators"**。
+`n ≡ 0 mod 8` 这条**既可能在 Ch. 2**（因为标准证明就是 θ 函数那条，见 §47.2 的 Zagier）**也可能在 Ch. 3**。
+本轮**两种都无法排除** ⇒ 定理号与章号**一律 L0**。
+
+#### (e) Witt 1941 —— 书目 L1+L2 双源钉死，**正文 L0**，且**有一条真实的溯源缺口**
+
+**书目（两条独立来源，逐字）：**
+
+- **L1（Chenevier–Lannes 参考文献 p. 384 逐字）**：
+  > "[Wit41] E. Witt, *Eine Identität zwischen Modulformen zweiten Grades*, Abh. Math. Sem. **Hansischen** Univ. **14**, 323–337 (1941)."
+- **L2（Crossref）**：DOI **`10.1007/BF02940750`**；title "Eine Identität zwischen Modulformen zweiten Grades"；
+  container **"Abhandlungen aus dem Mathematischen Seminar der Universität Hamburg"**；vol **14**；pages **323–337**；1941 (December)。
+- **重印（L2，Crossref）**：Witt, *Collected Papers — Gesammelte Abhandlungen*（Springer Collected Works in Mathematics, 1998），
+  pp. **313–329**，DOI `10.1007/978-3-642-41970-6_37`。
+
+⚠ **刊名差异不是错误**：1933–1945 年间汉堡大学名为 "Hansische Universität"，
+所以 1941 年那一卷印的是 "Abh. Math. Sem. Hansischen Univ."，现代 Crossref 用的是现名。**两者是同一刊、同卷、同页。**
+
+**★★ 必须记下的溯源缺口（本轮最重要的否定结论之一）：**
+
+Chenevier–Lannes 有两处提到 Witt，但**指向的不是同一件事**：
+
+1. **p. 33（分类）**："Cette classification est due à … à **Ernst Witt** en dimension 16 …"
+   —— **无文献标签**（同段只给 Niemeier 挂了 `[Ni73]`）。
+2. **p. 340（附录 A，θ 恒等式）逐字**：
+   > "l'égalité des séries thêta `ϑ^(g)_{E₈⊕E₈} = ϑ^(g)_{E₁₆}` pour `g ≤ 3` (**résultat dû à Witt pour `g ≤ 2` [Wit41]**)."
+   —— **这是全书唯一一处带标签地引用 [Wit41]，而它引的是"次数 g ≤ 2 的 Siegel θ 级数相等"，不是分类。**
+
+⇒ **本轮没有任何来源逐字支持"Witt 1941 这一篇里证明了 16 维分类"。**
+只支持两件较弱的事：(i) 分类归 Witt（人）；(ii) Witt 1941（文）证了 `g ≤ 2` 的 θ 恒等式。
+⛔ **禁令：不得在图里写 "Witt (1941) proved that there are exactly two …"。**
+可写：`witt-1941`，`note: "Chenevier–Lannes 把 16 维分类归给 Witt 但未给出处；[Wit41] 在该书里被引用的是 g≤2 的 Siegel θ 恒等式。原文正文未取到。"`
+（这条待解问题见 §47.7 Q47.2。）
+
+### 47.5 ★ 记号对照表（**同一个符号在不同书里指不同的格**）
+
+| 对象 | Polchinski v2 §11.6 | Zagier (2008) | Chenevier–Lannes | 常见其它写法 |
+|---|---|---|---|---|
+| 8 维那个偶幺模格 | `Γ₈` | `Λ₈`（p.34）→ `Γ₈`（p.36） | `E₈` | `E₈`、`Λ₈` |
+| 16 维**不可分解**那个 | `Γ₁₆` | `Λ₁₆`（p.34）→ `Γ₁₆`（p.36） | `E₁₆`（§I.1）= `D₁₆⁺`（§II.3） | `D₁₆⁺`、`II₁₆,₀`、`Γ₁₆` |
+| 16 维**可分解**那个 | `Γ₈ × Γ₈` | `Λ₈ ⊕ Λ₈` → `Γ₈ ⊕ Γ₈` | `E₈ ⊕ E₈` | `E₈²` |
+
+**★★ 两个真会咬人的陷阱：**
+
+1. **`E₁₆` 不是李代数。** Chenevier–Lannes 的 `E_n := D_n ⊕ ℤe`（`e = ½(1,…,1)`）是他们对 `D_n⁺` 的记号，
+   原文 p. 33 自己说："Le réseau unimodulaire pair `E_n` est aussi noté `D_n⁺` (au moins pour `n ≥ 16`)"。
+   **不存在 `E₁₆` 型李代数**；`E₁₆` 的根系是 `D₁₆` 型（原文 p. 33："Pour `n ≥ 16` … on a `R(E_n) = R(D_n) = D_n`"）。
+2. **`Λ₁₆` 在 Zagier 与在 Chenevier–Lannes 附录 A 里是两个不同的格。**
+   Zagier p. 34 的 `Λ₁₆` = 16 维偶幺模不可分解格（= `D₁₆⁺`）；
+   CL **附录 A**（p. 339）的 `Λ₁₆` = **Barnes–Wall 格 BW₁₆**（原文逐字："un remarquable réseau de dimension 16
+   découvert par Barnes et Wall en 1959 [BW59]. Il apparaît … dans [CS99] où il est noté `Λ₁₆` ou `BW₁₆`"），
+   它的最小范数是 4、**不是幺模格**。⛔ **两者不可混。**
+
+**`Γ₁₆ = D₁₆⁺ = E₁₆(CL)` 的等同是抽取者做的比对（`inferred`，非任一文献明说）**：
+Polchinski (11.6.5a,b) 的 `Γ₁₆` = 「`(n₁,…,n₁₆)` 或 `(n₁+½,…,n₁₆+½)`，`Σᵢ nᵢ ∈ 2ℤ`」
+与 CL 的 `E₁₆ = D₁₆ ⊕ ℤe`（`D₁₆ = {x ∈ ℤ¹⁶ : Σxᵢ ≡ 0 mod 2}`，`e = ½(1,…,1)`）逐条对上。
+curator 若要建这条等同边，**须标 `inferred: true`**。
+
+**术语**：本节所有来源里，数学侧一律写 **"even unimodular" / "réseau unimodulaire pair"**，
+物理侧（Polchinski (11.6.4b) 写 `Γ = Γ*`）写 **"even self-dual"**。对**正定**整格两者等价。
+
+### 47.6 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+**（a）核心建议：把现在这一张卡拆成两张**
+
+现在的 `math.even-self-dual-euclidean-lattices-dimension-16` 把 §47.0 的 (A)、(B) 压在一起。
+两条命题的来源、证明手段、可形式化难度都不同，**合成一张卡会让 (B) 的 `par inspection` 有限枚举
+和 (A) 的模形式论证互相污染**。建议：
+
+| 建议 id | kind | 建议 status | 内容 | 唯一必须的 source |
+|---|---|---|---|---|
+| `math.even-unimodular-rank-divisible-by-8` | proposition | **`rigorous`** | 正定偶幺模格的秩 `n ≡ 0 (mod 8)` | `zagier-2008`，`loc: "§3.2, Proposition 12(i), p. 33"` |
+| `math.even-unimodular-rank-16-classification` | proposition | **`rigorous`** | 16 维偶幺模格恰有两类：`D₁₆⁺` 与 `E₈ ⊕ E₈`，且两者不同构 | `chenevier-lannes-2014`，`loc: "ch. II, §3, Corollaire 3.6, p. 35"` |
+
+（可选，同一节同一页图里顺手就有，成本为零：
+`math.even-unimodular-rank-8-unique` ← `Corollaire 3.5, p. 34`；
+`math.even-unimodular-rank-24-niemeier` ← `Théorème 3.13, p. 41`。）
+
+**如果船长坚持保留单卡**：那么 `sources` 必须**同时**挂 Zagier Prop 12(i) 与 CL Corollaire 3.6，
+且 `notes` 写明"本卡是两条独立定理的合取，(A) 来自 Zagier，(B) 来自 Chenevier–Lannes"。
+**不要**只挂一条 Polchinski (11.6.4)——那是物理书的无出处断言。
+
+**（b）现有那条"一致 CFT ⟺ 偶自对偶格"的桥**：**保持 `physical-argument`，本节不动它。**
+它的一手来源已经在 `extractions/polchinski-1998-v2.md` **E63**（§11.6, (11.6.1)–(11.6.10), pp. 73–75，L1）：
+Polchinski 逐字写 "From the discussion of Narain compactification in **section 8.4**, we know that the
+requirements for a consistent CFT are **locality of the OPE plus modular invariance**"，
+然后直接断言 "Even self-dual Euclidean lattices exist only when the dimension is a multiple of 8,
+and for dimension 16 there are exactly two such lattices, `Γ₁₆` and `Γ₈ × Γ₈`."
+—— **这句断言没有任何文献出处**，这正是本节要替换掉的部分。
+⇒ 建议的边：`heterotic.gauge-group-exactly-two --depends_on--> math.even-unimodular-rank-divisible-by-8`
+和 `--> math.even-unimodular-rank-16-classification`，**外加**那条仍为 `physical-argument` 的
+"一致性 ⟺ 偶自对偶"桥。**数学卡升 rigorous 不会把杂化弦那条结论抬到 rigorous**，瓶颈仍在物理桥上——
+这一点请在 `notes` 里写清楚，免得有人误以为"补了数学来源就严格了"。
+
+**（c）形式化可行性（给 lean-formalizer 的预判，非本轮任务）**
+
+Corollaire 3.6 的证明链是：`dim M₈(SL₂(ℤ)) = 1` → θ 级数 = `𝔼₄²` → `|R(L)| = 480`、`h(L) = 30`
+→ **"par inspection"：秩 16、équicoxeter、Coxeter 数 30 的 ADE 根系只有 `D₁₆` 与 `E₈ ⊔ E₈`** → 格论收尾。
+⇒ **唯一的重活是那一步有限枚举**（ADE 根系的 Coxeter 数表 + 秩相加 = 16 + 各分支 h 相同）。
+Mathlib 里根系已有（`RootSystem`），但 **ADE 分类与 Coxeter 数表本轮未查**（见 §47.7 Q47.5）。
+`dim M_k(SL₂(ℤ))` 与 Eisenstein 级数在 Mathlib 里的状态**也未查**。
+
+**（d）四条禁令（都在 §47.4 里给了证据）**
+
+- ⛔ 不得写 `Serre, A Course in Arithmetic, Ch. V, Theorem 2`（或任何 Serre 的定理号）。
+- ⛔ 不得写 `Milnor–Husemoller, Ch. II, Theorem 6.1`（或任何 M–H 的定理号）。
+- ⛔ 不得写 `SPLAG Table 16.7`；SPLAG 只能引到**章**（Ch. 16, pp. 406–420，三版一致）。
+- ⛔ 不得写 `Witt (1941) proved there are exactly two …`——**本轮找到的是反向证据**：
+  Chenevier–Lannes 唯一带标签引用 `[Wit41]` 的地方，引的是 `g ≤ 2` 的 Siegel θ 恒等式，不是分类。
+
+**（e）bib 登记（本轮已写入 `literature/sources.bib`）**
+
+新增 7 条：`zagier-2008`、`chenevier-lannes-2014`、`serre-1973-arithmetic`、`conway-sloane-1999`、
+`milnor-husemoller-1973`、`witt-1941`、`ebeling-2013`。
+每条的 `note` 里都写清了**哪些字段是 L1/L2 核实的、哪些是未核实的**，
+特别是"定理号未核实"与"页码随版次变"两类风险。
+
+### 47.7 访问日志与未解决问题（本节）
+
+**本轮成功的路线（可复用）：**
+
+| 路线 | 结果 |
+|---|---|
+| `people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-74119-0_1/fulltext.pdf` | ★ **出版社排版 PDF，1.2 MB，PDF 页 = 书页**。作者主页上的合法一手件 |
+| `arxiv.org/pdf/1409.7616v1` → 落盘 3.4 MB → `Read(pages=)` | ★★ **本轮最大收获**；**PDF 页 = 书页 + 4** |
+| `api.crossref.org/works?query.bibliographic=…&select=DOI,title,container-title,page,type,issued` | ★ **Springer 书的章级目录（标题 + 页码 + 逐版 DOI）一次到手**——绕开 Springer 登录墙的最便宜办法。对 Serre / Milnor–Husemoller / SPLAG / Ebeling 四本全部命中 |
+| `api.crossref.org/works?query.bibliographic=<老论文标题>` | 钉死 Witt 1941 的 DOI/卷/页 + 找到 1998 全集重印本 |
+| 读**专家专著的参考文献章**（CL pp. 371–384） | ★ 一次拿到 [Wit41][Ni73][Ser70][Ven80][CS99][MH73][Kn57][Kin03][Co69b][KV89] 的逐字著录 |
+| `en.wikipedia.org/wiki/Unimodular_lattice` | 只用来定位候选文献，**不作为证据**；它给的是 "two in dimension 16 (E₈² and II₁₆,₀)" |
+| `services.dnb.de/sru/dnb?version=1.1&operation=searchRetrieve&query=…&recordSchema=MARC21-xml` | **接口是活的**（返回合法 SRU 响应），但 `WOE=serre course in arithmetic` → `numberOfRecords = 0` |
+| `inspirehep.net/api/literature?q=ft "…"` | 两次查询各只 2–10 条命中，**对本题基本无用**（物理文献不带数学定理号） |
+
+**本轮失败的路线（别再花预算）：**
+
+- `www.googleapis.com/books/v1/volumes?q=…` → **HTTP 429 三次**（与 [[web-fetch-access-blockers]] 记录一致，本环境基本不可用）。
+- `books.google.com/books?vid=ISBN9780387900407`（Serre GTM 7）→ **"No eBook available"，无预览** ⇒ Google Books 定位法对该书无效。
+- `ar5iv.labs.arxiv.org/html/1409.7616` → **`maxContentLength size of 10485760 exceeded`**（长专著必须走 PDF 路线）。
+- `neilsloane.com/doc/` → **HTTP 403**（Sloane 自建论文目录不可抓）。
+- `gaetan.chenevier.perso.math.cnrs.fr/pub.html` → **TLS 证书 altnames 不匹配**（`*.perso.math.cnrs.fr` 不覆盖三级子域），WebFetch 直接失败。
+- `lite.duckduckgo.com` / `html.duckduckgo.com` → CAPTCHA；`www.mojeek.com` → **403**。
+- ⚠⚠ **本会话开始时 `WebSearch` 额度就已被前序任务耗尽（200/200）**，全程只能用 WebFetch + API。
+  **这直接决定了 Serre/M–H/SPLAG/Ebeling 的定理号拿不到**：破这些书的唯一已知路线（找一篇逐字引
+  "[Ser73, Ch. V, Thm 2]" 的论文、或找 `.edu` 课程页扫描件）**都需要全文检索**。
+
+**未解决 / 留给下一轮：**
+
+- **Q47.1 ★★ 四本教科书的定理号全部 L0**（Serre Ch. V、Milnor–Husemoller Ch. II、SPLAG Ch. 16/18、Ebeling Ch. 2 或 3）。
+  **下一轮有 WebSearch 时优先做这个**，检索式建议：`"Serre" "Course in Arithmetic" "Ch. V" "Theorem"`、
+  `"Milnor" "Husemoller" "Theorem 5.1" signature`、`Ebeling "Lattices and Codes" "Theorem 3."`。
+  也值得试 `d-nb.info/<IDN>/04` 目录扫描（Ebeling 是德国出版社，DNB 命中率最高；**IDN 要靠 WebSearch 找**）。
+- **Q47.2 ★★ Witt 1941 正文里到底有没有 16 维分类？** 本轮反而拿到"CL 只把 `[Wit41]` 用于 θ 恒等式"这条反向线索。
+  可试路线：(i) Witt *Collected Papers*（DOI `10.1007/978-3-642-41970-6_37`，pp. 313–329）——Springer 墙；
+  (ii) DigiZeitschriften / GDZ 是否收 *Abh. Math. Sem. Hansischen Univ.* 第 14 卷；
+  (iii) 找一篇**明确写 "Witt [Wit41] classified the even unimodular lattices of rank 16" 的现代论文**。
+- **Q47.3** Chenevier–Lannes 的**版本悬案**：取到的文件同时带 `v1 / 26 Sep 2014` 的侧栏 stamp 与 `30 juin 2022` 的扉页日期。
+  需人类到 arXiv 页面核对 v1/v2 的差异，确认 `Corollaire 3.6` 这个号在两版里一致。
+- **Q47.4** 英文出版版 *Automorphic Forms and Even Unimodular Lattices*（Ergebnisse **69**, Springer 2019）里
+  Corollaire 3.6 对应的编号是多少？（若图要引印本而非 arXiv，必须先解决这个。）
+- **Q47.5** 形式化侧完全没查：Mathlib 里 (i) ADE 根系分类与 Coxeter 数表、(ii) `dim M_k(SL₂(ℤ))`、
+  (iii) 格/θ 级数 —— 三样有没有。这决定 §47.6(c) 的可行性判断。
+- **Q47.6** 本节**没有为 (A) 找到第二条独立来源**（Zagier 是唯一 L1）。CL 对 (A) 只说 "il est bien connu"。
+  Serre / Milnor–Husemoller 本该是那条独立来源，但正文没取到 ⇒ 与 Q47.1 是同一件事。
+- **Q47.7** Zagier p. 33 证明末句的极限变量（我读成 `k → ∞`，按内容应是 `n → ∞`）需重读一次页图确认；
+  以及 p. 34 那句 rank-8 唯一性里被指代的格符号没读全。**两处都已在 §47.2 标注为"不要照抄"。**
+
+
