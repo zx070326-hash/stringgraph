@@ -35,19 +35,31 @@ statement: |
 uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard, conv.intercept-sign-a]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.7)（Q_B 的模式展开），p.132"
+    loc: "§4.3, eq. (4.3.7), p.132（Q_B 的模式展开；⚠ **原书写的是闭弦形式，末项为 + a^B(c_0 + c̃_0)**，紧接一句 a^B = a^g = −1）；配 (4.3.5)（Q_B = (1/2πi)∮(dz j_B − dz̄ j̃_B)）、(4.3.6)（{Q_B, b_m} = L^m_m + L^g_m）、**(4.3.8)**（{Q_B, b_0} = L^m_0 + L^g_0 —— **这是原书给 a^B = a^g = −1 的论证**）"
     note: |
-      式号经 schrans-2020 目录核实（`4.24 p 132: Eq (4.3.7) The Mode Expansion of the BRST
-      Operator`、`4.25 p 132: Eq (4.3.7) The BRST Normal Ordering Constant`）。
-      schrans-2020 §4.46 的 [4.225] 逐字复现了含 − c_0 的模式展开，[4.226] 给出
-      Q_B|ψ,↓⟩ = Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})|ψ,↓⟩。**未核对原书**。
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E63。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——一处实质订正】
+
+      ⚠ **订正**：本图与 [S] 都把 (4.3.7) 的末项记成 `− c_0`。**原书 (4.3.7) 写的是闭弦的
+      一般形式 `+ a^B(c_0 + c̃_0)`**，`− c_0` 是它在开弦（只有一套鬼场模、且 a^B = −1）下的特例。
+      本节点 statement 写的是开弦特例，**内容不错**，但不得声称与 (4.3.7) 逐字一致。
+
+      **a^B = a^g = −1 在原书里有明确论证，出处是 (4.3.8)**（旧记录完全没有这条）：
+      原书由 {Q_B, b_0} = L^m_0 + L^g_0 读出 Q_B 里 c_0 项的系数必须与 L_0 的正规序常数匹配，
+      故 a^B = a^g。这条依赖边在本图中**可以不标 inferred**。
+
+      另一处独立的 a^g = −1 逐字确认在 **(4.1.22)**（p.125）：
+      原书写 (L^m_0 + L^g_0)|ψ,↓⟩ = 0 并逐字说明「the ghosts in their ground state |↓⟩,
+      **which has L^g_0 = −1**」——注意这里的 L^g_0 是**共形正规序**的那一个
+      （与本节点 statement 里「不含正规序常数」的 L^g_0 相差 a^g），
+      正是本节点 statement 中「两个不同的算符」那一段所警告的口径差在原书里的实例。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）与 §12.10 表 B 第 29 项。
   - ref: polchinski-1998-v1
-    loc: "§2.7，eq. (2.7.21)（bc 正规序常数 a^g = λ(1−λ)/2，λ = 2 给 −1）"
+    loc: "§2.7, p.61：a^g = ½λ(1−λ) 在 (2.7.20) 与 (2.7.21) **之间的无式号正文**里（λ = 2 给 −1）；(2.7.21) 是把常数代回后的 L_m"
     note: |
-      式号经 schrans-2020 目录核实（`2.58 p 61`）；a^g = −1 的逐字证据见抽取记录
-      polchinski-1998-v1.md §1.1 脚注 [†a^g]（schrans-2020 笔记 p.74–75、p.77）。
-      注意：抽取记录原表曾误记 a^g = 0，已由 reviewer-ch23 裁定并订正为 −1。
+      【原书核实 2026-09-11，L1】⚠ 订正：旧 loc 说「(2.7.21)（bc 正规序常数 a^g = λ(1−λ)/2）」，
+      把式号与内容绑错了——(2.7.21) **不是**那个标量等式，而是代入常数后的 L_m 表达式。
+      详见 worldsheet.bc-ghost-normal-ordering-constant 的 sources。
+      a^g = −1 现有四处原书逐字确认，「抽取记录原表曾误记 a^g = 0」这段历史至此关闭。
 tags: [brst, bosonic-string, ghosts, intercept, quantization]
 notes: |
   本命题是把 worldsheet.brst-current-bosonic-string（CFT / 围道语言）与

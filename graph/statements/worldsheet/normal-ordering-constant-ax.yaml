@@ -18,26 +18,58 @@ uses_conventions:
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.7, eq. (2.7.7)（L_0 的正规序）、(2.7.9)（a^X = 0）、(2.7.11)（产生-湮灭正规序），p.59–60"
+    loc: "§2.7, eq. (2.7.7)（L_0 = α'p²/4 + Σ_{n≥1}(α_{−n}·α_n) + a^X）、**(2.7.8)**（2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0，即 Virasoro 代数路线）、(2.7.9)（a^X = 0），p.59；第二条路线（两种正规序的关系）是 (2.7.11)/(2.7.12)，p.60；第三条路线（态-算子映射）是 p.72–73 的正文 + exercises 2.13, 2.14"
     note: |
-      三个公式号经 schrans-2020 目录核实，且 **a^X = 0 这个值本身出现在核对源的条目标题里**
-      （`2.51 p 59: Eq. (2.7.9) a^X = 0`），故值与式号同时得到第三方确认。
-      schrans-2020 §2.53、§2.80 另有两处复算。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**推翻本图先前记录的推导路线**】
+
+      原书 p.59 逐字：
+        "We encountered this same issue in section 1.3, where we treated it in a heuristic way. Now the
+         left-hand side has a finite and unambiguous definition in terms of the Laurent coefficients of the
+         `: :`-ordered energy-momentum tensor, so the normal ordering constant is finite and calculable.
+         **There are several ways to determine it. The simplest uses the Virasoro algebra,**
+           2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0 ,   (2.7.8)
+         and so   a^X = 0 .   (2.7.9)"
+
+      ⚠ **订正**：本节点 notes 与 --via-state-operator 的旧记录都写「Polchinski 在 §2.7 **用态-算子
+      同构**直接定常数」。**原书不是**：(2.7.9) 的推导用的是 **Virasoro 代数**
+      （2L_0 = [L_1, L_{−1}]，即 (2.6.22) 的 SL(2,R) 子代数）作用在零动量真空上。
+      原书自陈 **p.73「three honest ways」**，态-算子映射是**第三条**：
+        1. Virasoro 代数（(2.7.8)）——原书称 "the simplest"
+        2. 两种正规序（`: :` 与 `° °`）的关系——(2.7.11)/(2.7.12)，原书 p.60 逐字
+           "giving a second derivation of a^X = 0"
+        3. 态-算子映射——p.72–73 正文 + exercises 2.13, 2.14
+      本图为路线 1 新建了 worldsheet.normal-ordering-constant-ax--via-virasoro-algebra；
+      既有的 --via-state-operator 对应路线 3，**保留但其 loc 已改指 p.72–73**。
+      路线 2 本图尚无节点。
+
+      另：本节点 statement 末段的「等价的刻画：按态-算子同构，单位算子 1 对应的态 |0⟩ 满足
+      L_0|0⟩ = 0」在原书里是路线 3 的内容，不是 (2.7.9) 的论证；陈述文本不改，此处记账。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E42/E43/Q11）、§12.4（E15）
+      与 §12.10 表 B 第 14 项。
 tags: [cft, normal-ordering, state-operator, free-boson]
 notes: |
-  **这条的意义在于它是与 zeta 正规化并列的第二条路线**。抽取记录 E42 指出：
+  **这条的意义在于它是与 zeta 正规化并列的第二条路线**。抽取记录 E42 曾写：
   Polchinski 在 §1.3（光锥）用 zeta / 指数截断正规化得 Σ_{n≥1} n → -1/12，
   从而定出光锥正规序常数 A = -(D-2)/24；而在 §2.7 他**不用**正规化，
-  改用态-算子同构直接定常数。两条路线给出一致的结果，
-  但认识论地位不同：zeta 正规化是显式丢弃发散项（schrans-2020 的评语
-  「This derivation is a delight to mathematicians」是反讽），
-  态-算子路线则把常数归结为「单位算子对应基态」这一构造性事实。
+  改用态-算子同构直接定常数。
+
+  ⚠ **上一段的后半句已被 2026-09-11 的原书核实推翻**（见 sources 的 note）：
+  §2.7 走的是 **Virasoro 代数**路线（(2.7.8)：2L_0 = [L_1, L_{−1}] 作用在零动量真空上），
+  态-算子映射是原书 p.73 自陈「three honest ways」里的**第三条**（p.72–73 + exercises 2.13/2.14）。
+  「不用正规化」这个要点仍然成立，且比旧记录更强：原书 p.73 逐字把 Σ_{n≥1} n → −1/12
+  称为 "**a useful mnemonic**, so we give a prescription that **can be checked by one of the more
+  honest methods**"，即**明确不把 zeta 路线当作推导**
+  （见 worldsheet.zeta-regularized-sum-of-integers）。
 
   鬼场一侧的对应常数是 a^g = -1（worldsheet.bc-ghost-normal-ordering-constant）。
   该值曾与抽取记录 polchinski-1998-v1.md §1.1 / E43 的 a^g = 0 冲突；
   **reviewer-ch23 已于 2026-09-10 裁定 a^g = -1 正确**
-  （|↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1，故 [L_0, c_1] = -c_1），
-  抽取记录中的 a^g = 0 是误记，待 researcher 订正。
+  （|↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1，故 [L_0, c_1] = -c_1）。
+  **2026-09-11 原书核实已把这条争议彻底关闭**：a^g = −1 在原书里有四处独立的逐字确认
+  （(2.7.20)/(2.7.21) 的 ½λ(1−λ) 取 λ=2；(4.1.22) 「|↓⟩ … which has L^g_0 = −1」；
+  p.72「the weight of |↓⟩ is −1 in agreement with the earlier result (2.7.21) for λ = 2」；
+  p.73「For the ghosts we similarly get 2/24 − 26/24 = −1」）。
+  [S] 在其 §2.80 结论句写的 a^g = 0 是 [S] 自己的笔误，抽取记录已订正。
   注意 a^X = 0 与 a^g = -1 是两个不同部门的常数，二者取值不同并无矛盾：
   X 部门基态对应单位算子（权 0），鬼场基态对应 c(0)（权 -1）。
 author: curator-polchinski-ch2-3

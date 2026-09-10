@@ -20,20 +20,60 @@ uses_conventions:
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.7, eq. (2.7.21)（鬼场正规序常数 a^g），p.61"
+    loc: "§2.7, p.61：**a^g = ½λ(1−λ) 这个等式本身在 (2.7.20) 与 (2.7.21) 之间的正文里，无式号**；带式号的是 (2.7.19)（L_m = Σ(mλ − n)°b_n c_{m−n}° + δ_{m,0}a^g）、**(2.7.20)**（2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = λ(1−λ)|↓⟩，即 Virasoro 代数路线）、(2.7.21)（把常数代回后的 L_m，常数以 λ(1−λ)/2 δ_{m,0} 的形式出现）"
     note: |
-      **式号经 schrans-2020 目录核实**（条目标题「Eq. (2.7.21) The bc Normal Ordering Constant a^g」），
-      但该目录**不含数值**，故 a^g = -1 这个值未经第三方核对源确认。
-      数值由 reviewer-ch23 于 2026-09-10 从 h(c) = 1 - λ 独立推出，并与
-      worldsheet.brst-quantization 的 §4.3 用法一致。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——Q11 关闭；
+      **旧 note 的「数值 a^g = -1 未经第三方核对源确认」现予撤销**】
+
+      原书 p.61 逐字：
+        "The ordering constant can be determined as in eq. (2.7.8), which gives
+           2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = (λb_0c_1)[(1−λ)b_{−1}c_0]|↓⟩ = λ(1−λ)|↓⟩ .  (2.7.20)
+         **Thus, a^g = ½λ(1−λ) and**
+           L_m = Σ_n (mλ − n)°b_n c_{m−n}° + (λ(1−λ)/2)δ_{m,0} .  (2.7.21)"
+
+      两处订正：
+      1. ⚠ **(2.7.21) 本身不是等式 a^g = ½λ(1−λ)**，而是把常数代回之后的 L_m 表达式。
+         标量等式是 (2.7.20) 与 (2.7.21) **之间的一句无式号散文**。
+         [S] 的条目标题「Eq. (2.7.21) The bc Normal Ordering Constant a^g」是内容标签，不是该式的内容。
+         (2.7.21) **是一般 λ 的公式**（λ 全程保留，λ=2 在此处并未代入）。
+      2. ⚠ **推导路线是 Virasoro 代数，不是态-算子同构**：原书逐字「can be determined
+         **as in eq. (2.7.8)**」，即用 2L_0 = [L_1, L_{−1}]（(2.6.22)）。
+         本图为此新建了 worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra。
+
+      **数值 a^g = −1 现为 L1，有四处独立的原书逐字确认**：
+        (a) (2.7.20)/(2.7.21) 取 λ = 2：½·2·(1−2) = −1；
+        (b) **(4.1.22)** 处逐字「the ghosts in their ground state |↓⟩, **which has L^g_0 = −1**」；
+        (c) p.72 逐字「the weight of |↓⟩ is −1 **in agreement with the earlier result (2.7.21) for λ = 2**」
+            （这句同时确认 (2.7.21) 是一般 λ 公式）；
+        (d) p.73「For the ghosts we similarly get **2/24 − 26/24 = −1**」。
+      [S] §2.80 结论句写的 a^g = 0 是 [S] 自己的笔误。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E42/E43/Q11）、§12.3（(4.1.22)）、
+      §12.4（E15 三种诚实算法）与 §12.10 表 A 的 Q11、表 B 第 13、14 项。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.5)（bc 场的权 h_b = λ、h_c = 1 − λ）、(2.5.4)（作用量 S = (1/2π)∫d²z b ∂̄c）、(2.5.11a,b)（T = :(∂b)c: − λ∂(:bc:)），p.50–51"
+    note: |
+      【原书核实 2026-09-11，L1】⚠ 订正：旧 loc 把「b、c 的权 λ、1−λ」挂在 (2.5.4)，
+      那是**作用量**；权是 **(2.5.5)**。另 (2.5.12) 给 bc 中心荷 c = −3(2λ−1)² + 1
+      （λ=2 ⇒ −26），(2.5.14) 给鬼数流 j = −:bc:。
+      原书 p.51 末另有一句可直接引的一手依据：「The bc theory for λ = 2, weights (h_b, h_c) = (2, −1),
+      **will arise in the next chapter as the Faddeev–Popov ghosts from gauge-fixing the Polyakov string**.」
+      即 λ = 2 这个取值与它在图里的用途在原书里是绑定的。
 tags: [cft, ghosts, bc-system, normal-ordering, brst]
 notes: |
   与 worldsheet.normal-ordering-constant-ax（a^X = 0）平行：两者是 X 部门与鬼场部门
   各自的共形正规序常数。取值不同不构成矛盾——X 部门基态对应单位算子（权 0），
   鬼场基态对应 c(0)（权 1 - λ = -1）。
 
-  **历史分歧（已裁定）**：抽取记录 polchinski-1998-v1.md §1.1 与 E43 记 (2.7.21) 给出 a^g = 0；
-  reviewer-ch23（2026-09-10）裁定该记录是误记，正确值为 a^g = -1，待 researcher 订正抽取记录。
+  **历史分歧（已裁定，2026-09-11 彻底关闭）**：抽取记录 polchinski-1998-v1.md §1.1 与 E43
+  曾记 (2.7.21) 给出 a^g = 0；reviewer-ch23（2026-09-10）裁定该记录是误记，正确值为 a^g = -1。
+  2026-09-11 的原书页图核实给出四处独立的逐字确认（见 sources 第一条的 note (a)–(d)），
+  该值现为 L1，不再依赖本图的重算。误记源头是 [S] §2.80 的笔误，抽取记录已订正。
+
+  ⚠ **一处仍未闭合的口径差**（curator-v1-locs 2026-09-11）：本节点的 statement 把 a^g **定义**为
+  「基态 |↓⟩ 上 L^g_0 的本征值」，而原书 (2.7.19) 把 a^g **定义**为 L_m 模式展开里的
+  δ_{m,0} 系数。两者在本图的设定下取值相同（因为 °…° 正规序把湮灭模放右边，
+  L_0 的双线性部分在 |↓⟩ 上给零），但**这一步等同本图没有独立节点**，
+  在 --via-virasoro-algebra 的 gaps 里已记账。
 
   本节点的存在理由：既有节点 worldsheet.brst-quantization 的 statement 内部已把
   a^g = -1 写死（BRST 荷的 c_0 项系数、总 L_0 的移位都依赖它），但那是一张定义卡，

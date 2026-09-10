@@ -32,17 +32,39 @@ uses:
 uses_conventions: [conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.17)（b_n† = b_{−n}、c_n† = c_{−n}）、eq. (4.3.18)（基态内积需要鬼场插入才非零），p.134"
+    loc: "§4.3, eq. (4.3.17a,b,c)（α^{μ†}_m = α^μ_{−m}、b^†_m = b_{−m}、c^†_m = c_{−m}）、eq. (4.3.18a,b)（开/闭弦基态内积，需 c_0（与 c̃_0）插入），p.134"
     note: |
-      式号经 schrans-2020 目录核实（`4.30–4.33 p 134`），其中 `4.32 Q_B takes Ĥ into itself`
-      与 `4.33 The Need for a New Inner Product on Ĥ` 是**无编号的正文断言**。
-      **表达式与归一化未核对原书。** 抽取记录 literature/extractions/polchinski-1998-v1.md#E66。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号与内容确认，
+      **并查明「新内积」那条正文断言的实质**】
+
+      (4.3.17a,b,c) 与 (4.3.18a,b) 的式号与内容逐字确认，「表达式与归一化未核对原书」撤销。
+
+      ★ [S] 目录里那条无编号的 `The Need for a New Inner Product on Ĥ` 对应的原书正文
+      **就是 p.135 的这一段**（逐字）：
+        "The inner product (4.3.18a) is not quite the correct one to use in `Ĥ`. It is not well
+         defined: the ghost zero modes give zero, while the δ²⁶(k−k') contains a factor δ(0)
+         because the momentum support is restricted to the mass shell. **Therefore we use in `Ĥ`
+         a reduced inner product ⟨ ‖ ⟩ in which we simply ignore the X⁰ and ghost zero modes.**
+         It is this inner product that will be relevant for the probabilistic interpretation."
+
+      → **三点后果（本图先前一条都没记）**：
+        (1) **§4.4 无鬼定理里用的不是 (4.3.18a)，而是这个人为约化的内积 ⟨ ‖ ⟩**；
+        (2) 原书给出的**理由是 (4.3.18a) 本身没有良定义**（鬼场零模给零、δ²⁶ 含 δ(0)），
+            即这不是一次方便的选择而是一次**必要的修补**；
+        (3) 「忽略 X⁰ 与鬼场零模」是一次**非平凡的人为选择**，形式化时必须显式写进去，
+            否则 (4.4.20) 的正定性断言无从表述。
+      本节点采用的 ⟨↓|c_0|↓⟩ = 1 是另一种处理鬼场零模的写法（插入 c_0 而非忽略零模），
+      **与原书的 ⟨ ‖ ⟩ 是否给出同一个诱导内积，本图仍未验证**——这条缺口不但没消除，
+      现在还知道了它两端各是什么。已同步记入 worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的 gaps。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）与 §12.10 表 B 第 10 项、表 C 第 7 项。
   - ref: polchinski-1998-v1
-    loc: "§4.4，eq. (4.4.23)（无鬼定理证明末尾的内积）"
+    loc: "§4.4, **eq. (4.4.20)**（⟨ψ‖ψ'⟩ = ⟨ψ_0‖ψ_0'⟩，无鬼定理的正定性断言所用的内积就是 p.135 的约化内积 ⟨ ‖ ⟩）"
     note: |
-      式号取自抽取记录 E68。worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的 gaps
-      记着"⟨↓|c_0|↓⟩ = 1 未与 Polchinski (4.4.23) 逐字核对"——**本节点没有消除该缺口**，
-      只是把归一化的选择显式化并集中到一个可引用的节点上。
+      【原书核实 2026-09-11，L1】⚠ 订正：旧 loc 写「(4.4.23)（无鬼定理证明末尾的内积）」，
+      式号错位——**(4.4.23) 是 OCQ 侧的 Q_B|ψ,↓⟩ = Σ_{n≥0}c_{−n}(L^m_n − δ_{n,0})|ψ,↓⟩**，
+      正定性的内积等式是 **(4.4.20)**。
+      「⟨↓|c_0|↓⟩ = 1 未与 Polchinski 逐字核对」这条缺口**仍然成立**，且现在定位更准：
+      原书那一侧根本不是 (4.3.18a)，而是 p.135 的约化内积。
   - ref: fgz-1986
     loc: "§2（Λ^∞_* 上的形式与 Theorem 2.8 中的 unitary isomorphism）"
     note: |

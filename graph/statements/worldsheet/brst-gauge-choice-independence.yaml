@@ -24,6 +24,34 @@ sources:
     note: |
       式号经 schrans-2020 目录核实（`4.9–4.12 p 126–127`），表达式未核对原书。
       抽取记录 literature/extractions/polchinski-1998-v1.md#E59。
+  - ref: polchinski-1998-v1
+    loc: "§5.4, **p.161**（(5.4.6) δ_B(b,∂_kĝ) = iε(T,∂_kĝ) 下方正文，无式号）：**S-矩阵的 BRST 不变性带一个未处理的模空间边界项**"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**作者自承缺口，本图先前没有**】
+
+      本节点断言的是「改变规范固定条件只加 BRST 恰当项」这一**世界面局域**的陈述（§4.2）。
+      但把它推到**振幅层面**（"物理振幅与规范选择无关"）时，原书在 §5.4 明说还有一项没处理，
+      p.161 逐字：
+        "so the BRST variation vanishes **up to a possible term from the boundary of moduli space**.
+         … **In most cases there is no surface contribution, due to what is known as the *canceled
+         propagator argument*. In certain circumstances this argument does not apply**, and we will
+         see how to deal with this."
+      （"canceled propagator argument" 这个名字在 p.196 被再次点明：「The analytic continuation
+        argument used here is known for historic reasons as the canceled propagator argument.」）
+
+      → **即：S-矩阵的 BRST 不变性在原书里是有洞的**，洞在模空间边界，靠一个解析延拓型的
+        论证（canceled propagator argument）打发，且原书自己说「certain circumstances this
+        argument does not apply」。
+      → 本节点的 statement **不**覆盖振幅层面，故本条不改变本节点的 status；
+        但**凡以本节点为依据主张「弦振幅与规范选择无关」的下游推导都必须挂上这条限定**，
+        且不得高于 physical-argument。本图目前没有 S-矩阵层面的节点（§5.3 (5.3.9) 一带
+        在 curator-ch5/ch6 分支上），已在报告中把这条交给 lead 转派。
+
+      同页另有一条对 §5.3 主公式有利的原书自述（p.161，逐字）：
+        "It is important to note that **the gauge-fixed result (5.3.9) could be written down directly
+         from the requirement of BRST invariance, without reference to the gauge-invariant form.**"
+      → 这给 (5.3.9) 提供了**第二条独立的辩护路线**，可作为 S-矩阵主公式的第二条 derivation。
+      见 literature/extractions/polchinski-1998-v1.md §12.7（E84/E86 一带）与 §12.10 表 C 第 12 项。
 tags: [brst, gauge-fixing, quantization, amplitudes]
 notes: |
   这是"为什么 BRST 上同调才是物理态空间"的论证的路径积分侧。

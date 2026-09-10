@@ -13,13 +13,37 @@ statement: |
 uses_conventions: []
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.3, eq. (1.3.32)（p.22）"
+    loc: "§1.3, eq. (1.3.32)（Σ_{n=1}^∞ n → −1/12），p.22；截断因子是 (1.3.33) exp(−εγ_{σσ}^{−1/2}|k_σ|)，截断后的 A 是 (1.3.34)；**原书对本处方的定性在 §2.9 末，p.73**（\"a useful mnemonic\"），一般公式是 **(2.9.19)** Σ_{n=1}^∞(n−θ) ≡ 1/24 − (1/8)(2θ−1)²"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E15，证据等级 [已核实]
-      （Schrans 目录「1.12 p 22: Eq. (1.3.32) Regularising Σ_n n」）。
-      抽取记录明确指出这是「一个正规化步骤而非证明」；Schrans 对该推导的评语
-      「This derivation is a delight to mathematicians.」是反讽——那是 Schrans 的评价，
-      不是 Polchinski 的措辞（Polchinski 的原措辞未核实，见抽取记录 §0）。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**两条比旧记录硬得多的依据**】
+
+      (1) **原书 p.73 逐字把这条称为 mnemonic，并明说要用更诚实的方法核对**：
+        "**We have now given three honest ways of calculating normal ordering constants: from the
+          Virasoro algebra as in eq. (2.7.8), by relating the two forms of normal ordering as in
+          eq. (2.7.11), and from the state–operator mapping above. Nevertheless the idea of adding
+          up zero-point energies is intuitive and a useful mnemonic, so we give a prescription that
+          can be checked by one of the more honest methods:** ..."
+        并把发散和的赋值写成**定义**：「One encounters divergent sums of the form Σ_{n=1}^∞(n−θ) …
+        **Define this to be** Σ_{n=1}^∞(n−θ) = 1/24 − (1/8)(2θ−1)² **(2.9.19)**. This is the value one
+        obtains as in eq. (1.3.32) by regulating and discarding the quadratically divergent part.」
+      → **即「zeta 路线不是推导」这一判断现在是原书自陈，不再只是 [S] 的反讽评语或本图的裁断。**
+        本节点 notes 里对 status 的选择（physical-argument，不记为 convention）由此得到一手支持。
+
+      (2) **丢弃发散项的理由在原书里比旧记录记的更强**。p.22 逐字：
+        "The cutoff-dependent first term is proportional to the length ℓ of the string and can be
+         canceled by a counterterm in the action proportional to ∫d²σ(−γ)^{1/2}. **In fact, Weyl
+         invariance *requires* that it be canceled**, leaving only the cutoff-independent second term…
+         **This finite remainder is an example of a Casimir energy**, coming from the fact that the
+         string has a finite length."
+      → 丢弃发散项**不是**随意的正规化选择：原书给的理由是 **Weyl 不变性要求存在这个抵消项**。
+        这比本节点 notes 末段引的「Headrick 习题 1.5 的 θ-无关性」理由强，且是一手的。
+        ⚠ 但它**不改变本节点的 status**：Weyl 不变性要求抵消发散项，
+        并不论证「剩下的有限部分就是物理零点能」——后者仍是本节点唯一未证的那一步。
+
+      (3) 配套：中心荷的 Casimir 能量诠释在原书是 (2.9.17) E = −(c+c̃)/24 与
+        (2.9.18) E = −π(c+c̃)/12ℓ（本图旧记录没有这两式）。
+      见 literature/extractions/polchinski-1998-v1.md §12.4（E15/E42/E43）、§12.5（E10–E19）
+      与 §12.10 表 B 第 15 项。
 tags: [bosonic-string, regularization, zero-point-energy, light-cone]
 notes: |
   **status 的选择（本节点作者的裁断）**：本项目给了两个选项——

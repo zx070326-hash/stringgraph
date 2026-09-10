@@ -19,8 +19,28 @@ summary: |
   丢弃它，取有限部分 -1/12 作为物理零点能的值。
 gaps:
   - "「丢弃 1/(εa)^2 而保留 -1/12」这一步是正规化处方，不是定理。抽取记录 §1.1 与 #E15 均明确记为正规化步骤；Schrans 的「delight to mathematicians」是反讽。"
-  - "合法性的论据（截断项可被局域抵消项吸收、与 θ 无关）在文献中是提示性的，不构成证明；没有给出「任何合理正规化都给同一有限部分」的一般论证。"
-  - "严格化路线：(i) 把零点能定义成 ζ 正规化的算子行列式，并证明其与哈密顿量谱的关系；(ii) 完全绕开模式求和，用 Virasoro 代数的中心荷（横向 c = D-2）与 L_0 的代数定义直接定出正规序常数。后者是本项目更可行的方向，届时可加 kind: proof 的新推导，不改本陈述。"
-  - "Polchinski 本人对这一步的措辞未核实（正文未获取，见抽取记录 §0）。"
+  - "合法性的论据（截断项可被局域抵消项吸收、与 θ 无关）在文献中是提示性的，不构成证明；没有给出「任何合理正规化都给同一有限部分」的一般论证。
+     **【2026-09-11 原书逐字：论据比本图先前记的强，但缺口位置不变】** p.22：
+     「The cutoff-dependent first term is proportional to the length ℓ of the string and can be
+     canceled by a counterterm in the action proportional to ∫d²σ(−γ)^{1/2}. **In fact, Weyl
+     invariance *requires* that it be canceled**, leaving only the cutoff-independent second term…
+     **This finite remainder is an example of a Casimir energy**, coming from the fact that the
+     string has a finite length.」
+     即丢弃发散项的理由是**Weyl 不变性要求存在这个抵消项**（比「与 θ 无关」硬）。
+     ⚠ 但这**不填补本节点的缺口**：Weyl 不变性只要求发散项被抵消，
+     **不论证「剩下的有限部分就是物理零点能」**——后者仍是本推导唯一未证的那一步。"
+  - "严格化路线：(i) 把零点能定义成 ζ 正规化的算子行列式，并证明其与哈密顿量谱的关系；(ii) 完全绕开模式求和，用 Virasoro 代数的中心荷（横向 c = D-2）与 L_0 的代数定义直接定出正规序常数。后者是本项目更可行的方向，届时可加 kind: proof 的新推导，不改本陈述。
+     **【2026-09-11】** 路线 (ii) 正是原书 p.73 自陈的「three honest ways」之第一条，
+     本图已建 worldsheet.normal-ordering-constant-ax--via-virasoro-algebra 与
+     worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra 两张卡（协变部门）。
+     光锥部门（A = (2−D)/24）尚无对应的代数路线节点。"
+  - "Polchinski 本人对这一步的措辞未核实（正文未获取，见抽取记录 §0）。
+     **【2026-09-11 关闭，且结论对本节点有利】** 原书 p.73 逐字：
+     「Nevertheless the idea of adding up zero-point energies is intuitive and **a useful mnemonic**,
+     so we give a prescription that **can be checked by one of the more honest methods**」，
+     并把发散和的赋值写成「**Define this to be** Σ_{n=1}^∞(n−θ) = 1/24 − (1/8)(2θ−1)² **(2.9.19)**」。
+     → **作者本人明确不把 zeta 路线当作推导**，而是当作助记 + 需要用别的方法核对的处方。
+     这比 [S] 的反讽评语硬得多，且直接支持本节点取 status = physical-argument（而非
+     记成 convention）的裁断。（抽取记录 §12.10 表 B 第 15 项。）"
 author: curator-polchinski-ch1
 created: "2026-09-10"

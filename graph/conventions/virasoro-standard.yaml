@@ -7,4 +7,22 @@ definition: |
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.6, eq. (2.6.19)"
+    loc: "§2.6, eq. (2.6.19), p.56（原书逐字：[L_m, L_n] = (m − n)L_{m+n} + (c/12)(m³ − m)δ_{m,−n}）；开弦的同形代数是 (2.6.30)"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）】
+      ⚠ **原书 (2.6.19) 的中心项写作 `(c/12)(m³ − m)`，Kronecker 记作 `δ_{m,−n}`；
+      本节点 definition 写的是 `(c/12) m(m² − 1) δ_{m+n,0}`。二者恒等
+      （m³ − m = m(m²−1)，δ_{m,−n} = δ_{m+n,0}），但不是逐字相同的排版。**
+      本图任何地方**不得**声称本节点「与 Polchinski (2.6.19) 逐字一致」，只能说「等价改写」。
+      按不可违背原则 1（约定卡的 definition 是被大量节点引用的规范文本）此处不改写 definition，
+      只在来源上记明差异。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E40）与 §12.10 表 B 第 3 项。
+      附带落实（同为 L1）：(2.6.22) 给出无中心荷的 SL(2,R) 子代数
+      [L_0,L_1] = −L_1、[L_0,L_{−1}] = L_{−1}、[L_1,L_{−1}] = 2L_0，
+      这是 (2.7.8)/(2.7.20) 定正规序常数 a^X、a^g 的技术支点
+      （见 worldsheet.normal-ordering-constant-ax--via-virasoro-algebra）。
+notes: |
+  **2026-09-11（curator-v1-locs）**：本节点只订正来源标注，归一化本身未改。
+  「中心荷归一化使自由玻色子 c=1」这一句在原书的落点是 p.48（(2.4.24) 下方正文，无式号）
+  逐字「The central charge of a free scalar is 1; for D free scalars it is D」，
+  带式号的锚点是 (2.4.22)（D/2z⁴ 项）——见 worldsheet.free-boson-central-charge-d。

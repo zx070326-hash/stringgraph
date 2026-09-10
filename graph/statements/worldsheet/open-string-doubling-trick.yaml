@@ -36,15 +36,28 @@ uses_conventions:
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.6, eq. (2.6.25)（The Open String Boundary），p.56"
+    loc: "§2.6, eq. (2.6.28), p.57（**doubling trick 本身**：T_{zz}(z) ≡ T_{z̄z̄}(z̄'), Im z < 0）；配 (2.6.26)（边界条件 T_ab n^a t^b = 0）、(2.6.27)（T_{zz} = T_{z̄z̄}, Im z = 0）、(2.6.29)（L_m = (1/2πi)∮dz z^{m+1}T_{zz}(z)，开弦只有一套）、(2.6.30)（开弦的 Virasoro 代数，与 (2.6.19) 同形）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E40 备注，证据等级 **[已核实]**：
-      schrans-2020 目录条目 `2.46 p 56: Eq. (2.6.25) The Open String Boundary` 式号已核实，
-      且抽取记录逐字写「(2.6.25) 说明开弦情形下 `L` 与 `L̄` 由 doubling trick 合并成**一套**
-      Virasoro 代数」——即结论 (iii) 在二手核对源意义上已核实。
-      ⚠ **(i)(ii) 的具体表达式（边界上 T = T̄ 的写法、反射公式 T̃(z) = T̄(z^*)）未核对原书**：
-      核对源只给条目标题与「合并成一套」这一结论，中间两步是本图按标准 CFT 做法补出的措辞。
-      原书正文在付费墙后（抽取记录 §0）。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——⚠ 一处式号订正，且**否定了**
+      本条旧 note 的核实声明】
+
+      ⚠ **订正**：旧 loc 与旧 note 都说 (2.6.25) 是「doubling trick 把 L 与 L̄ 合并成一套
+      Virasoro 代数」，并把它标为 [已核实]。**原书 (2.6.25) 不是这个**，它只是开弦的坐标区域
+      `0 ≤ Re w ≤ π ⟺ Im z ≥ 0`。这条旧核实来自 [S] 的条目标题，是二手源的标题误导。
+
+      订正后，本节点 statement 的三段各自有了一手落点，且**全部为 L1**：
+        (i)   边界上两部门相等          → (2.6.26)（T_ab n^a t^b = 0）与 (2.6.27)（T_{zz} = T_{z̄z̄} at Im z = 0）
+        (ii)  镜像延拓                   → **(2.6.28)**（T_{zz}(z) ≡ T_{z̄z̄}(z̄'), Im z < 0）
+        (iii) 只有一套 Virasoro           → (2.6.29)（单一围道的 L_m）与 (2.6.30)（其代数与 (2.6.19) 同形）
+      即旧 note 里「(i)(ii) 的具体表达式未核对原书……是本图按标准 CFT 做法补出的措辞」
+      **现予撤销**：原书写出了这两步，只是式号与旧记录不同。
+
+      ⚠ **但本节点的 status 不因此上调**：本卡的 physical-argument 不是因为「原书没写」，
+      而是因为 notes 里列的三条（量子层面的边界算子等式、算子值分布的 Schwarz 反射、
+      上游 worldsheet.energy-momentum-laurent-modes 本身是 physical-argument）都未被消解。
+      见推导 worldsheet.open-string-doubling-trick--via-boundary-condition 的 gaps。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E40）。
   - ref: polchinski-1998-v1
     loc: "§1.2, eq. (1.2.28)（Neumann 边界条件 ∂^σ X^μ = 0，本命题的前提）"
     note: 见 worldsheet.open-string-neumann-boundary-condition 的来源，抽取记录 #E8，[已核实]。

@@ -37,8 +37,46 @@ uses:
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.worldsheet-coordinate-length]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.3（光锥规范）：约 eq. (1.3.8) 规范条件、约 eq. (1.3.22) 开弦模式展开、约 eq. (1.3.32)–(1.3.36) 零点能与质量壳"
-    note: 公式号按 Polchinski 第一卷 §1.3 的编号给出近似位置，未逐条核对印次差异。Polchinski 在 §1.3 直接把正规序常数取为 ζ 正规化的值，本节点把它保留为参数 a。
+    loc: "§1.3（光锥规范）：规范条件 **(1.3.8a,b,c)**；开弦模式展开 **(1.3.22)**；正则对易 (1.3.24a,b)/(1.3.25a,b)；零点能 **(1.3.31)** A = ((D−2)/2)Σ_{n≥1}n 与 **(1.3.32)** Σn → −1/12，截断因子 (1.3.33)，截断后 (1.3.34)，**(1.3.35)** A = (2−D)/24；质量壳 **(1.3.36)** m² = (1/α')(N + (2−D)/24)；能级 (1.3.37)；A = −1, D = 26 是 **(1.3.40)**，p.23"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号全部落实，含一处订正；
+      **另有两条作者自承缺口**】
+
+      ⚠ **订正**：旧记录（E16）把 A 的定义式猜在「(1.3.33)–(1.3.35)」区间。
+      **A 的定义式是 (1.3.31)**；(1.3.35) 是其正规化后的取值，原书写作 **A = (2−D)/24**
+      （不写 −(D−2)/24）。旧 loc「约 (1.3.32)–(1.3.36)」现予细化为上面各式。
+
+      ★ **作者自承缺口之一（p.21，逐字）——直接封顶「光锥路线」的严格程度**：
+        "In a careful treatment of light-cone quantization, this constant is determined as follows.
+         The choice of light-cone gauge has obscured the Lorentz invariance of the theory. It is
+         necessary to check this by finding the operators M^{μν} that generate Lorentz
+         transformations, and verifying that they have the correct algebra … One finds that this is
+         the case only for the specific value A = −1, and only if D = 26.
+         **We do not wish to spend this much time on light-cone quantization, so we will try to show
+         that the result is plausible without a complete treatment. We assure the reader that we will
+         obtain the values of A and D honestly in the conformal gauge approach**, which will also give
+         us insight into why Lorentz invariance would be lost in the light-cone approach for the wrong
+         A or D."
+      → **[M^{i−}, M^{j−}] = 0 的显式验算原书根本没做，也没有留成习题**；(1.3.40) 走的是
+        **表示论计数**（massive vector 需 D−1 个自旋态、massless 只需 D−2；第一激发能级只有
+        D−2 个态 α^i_{−1}|0;k⟩，故必须无质量）。§3.4 开头 p.90 另有一句自评「as we briefly and
+        rather **heuristically** explained in section 1.3」。
+      → **不要**把「光锥洛伦兹代数闭合」当成本书的一个可引结论——本书没有它。
+
+      ★ **作者自承缺口之二（p.24，逐字）**：
+        "The higher excited states of the string, which are massive, do form full representations of
+         SO(D−1). One can check this by hand for a few levels, and in a more complete analysis it
+         follows from the existence of the full set of Lorentz generators. **We will show this
+         indirectly in the coming chapters, by finding a consistent covariant quantization.**"
+      → 即**光锥量子化的洛伦兹不变性在本书中从未被直接验证**，只被协变量子化间接背书。
+
+      ★ **丢弃发散项的理由比旧记录强（p.22，逐字）**：
+        "The cutoff-dependent first term is proportional to the length ℓ of the string and can be
+         canceled by a counterterm in the action proportional to ∫d²σ(−γ)^{1/2}. **In fact, Weyl
+         invariance *requires* that it be canceled**, leaving only the cutoff-independent second
+         term… **This finite remainder is an example of a Casimir energy.**"
+      见 literature/extractions/polchinski-1998-v1.md §12.5（E10–E19、E18/Q2）与 §12.10
+      表 A 的 Q2、表 B 第 8 项、表 C 第 2、3 项。
   - ref: gsw-1987-v1
     loc: "§2.3.1（光锥规范、横向振子 Fock 空间、洛伦兹生成元 J^{μν}）"
     note: GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化；此处已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。

@@ -22,6 +22,35 @@ sources:
       (2.2.4) 的公式号经 schrans-2020 目录核实（`2.7 p 38: Eq. (2.2.4) A Taylor Expansion`）；
       (2.2.1)–(2.2.3) 未核实。收敛半径的图示对应 (2.9.3) 附近，schrans-2020 §2.77 复现。
       见 literature/extractions/polchinski-1998-v1.md E27 与 Q3。
+  - ref: polchinski-1998-v1
+    loc: "§2.9, **p.69**（(2.9.2) 下方正文，无式号）：**OPE 收敛性的论证**；配 (2.9.1)（|z| < 1 的设定）、(2.9.2)（按 L_0, L̃_0 本征态展开）、(2.9.3)（三算子结合性）"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**Q3 的结论被修正：
+      原书给了论证，不是「书中不证」**】
+
+      原书 p.69 逐字：
+        "By the state–operator correspondence this is equivalent to gluing back the disk with the
+         appropriate local operator A_{ij,z,z̄}(0,0) and so we are done! To put this in standard form
+         expand in a complete set of L_0, L̃_0 eigenstates, A_{ij,z,z̄} = Σ_k z^{h_k−h_i−h_j}
+         z̄^{h̄_k−h̄_i−h̄_j} c^k_{ij} A_k **(2.9.2)**, with the z- and z̄-dependence determined by the
+         conformal weights as in eq. (2.4.20). **The convergence of the OPE is just the usual
+         convergence of a complete set in quantum mechanics. The construction is possible as long as
+         there are no other operators with |z'| ≤ |z|, so that we can cut on a circle of radius
+         |z| + ε.**"
+
+      → **三点结论（取代抽取记录 Q3 里「抽取者没有在任何公开源里看到 Polchinski 证明这一点」）**：
+        (1) 原书**给了**论证，并且明确说明了收敛半径的来源（切开路径积分的圆的半径 |z| + ε）；
+        (2) 该论证建立在**态-算子对应**（worldsheet.state-operator-isomorphism）之上，
+            而后者本身是路径积分构造、不是定理；
+        (3) 「complete set 的通常收敛」在无穷维希尔伯特空间上是一个**未加限定的类比**，
+            没有解析估计、没有收敛域定理。
+      → **因此：凡把 OPE 收敛性当作 axiom 的记法都应改为 physical-argument**
+        （抽取记录 Q3 原建议建 axiom 节点，现改为 physical-argument）。
+        本图中承载「OPE 收敛/结合性」的节点是 worldsheet.ope-associativity-bootstrap 与
+        math.vertex-algebra-ope-analytic-convergence（后者是数学侧的独立来源，不受本条影响）。
+        本图**没有**名为 `worldsheet.ope-convergence` 的节点；是否单列由 lead 决定，已列入报告。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.4（Q3）与 §12.10 表 A 的 Q3。
 tags: [cft, ope, definition, convergence]
 notes: |
   **为什么 status 是 physical-argument 而不是 rigorous**：作为定义，本节点的严格程度取决于

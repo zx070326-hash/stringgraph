@@ -33,11 +33,28 @@ depends_on:
       原书正文在付费墙后（抽取记录 §0），本图无法核实 §2.7 原地是否有回指，故照实标 inferred。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.7, eq. (2.7.7)、(2.7.9)、(2.7.11)，p.59–60（式号与 a^X = 0 的值均经 schrans-2020 核实）"
+    loc: "§2.9「Zero-point energies」小节，p.72–73（态-算子映射定正规序常数）+ exercises 2.13, 2.14；另 §2.7 p.60 (2.7.11)/(2.7.12) 是**另一条**路线（两种正规序的关系），原书逐字 \"giving a second derivation of a^X = 0\""
     note: |
-      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
-      schrans-2020 §2.53（由正规序得 a^X）与 §2.80（由态-算子映射定正规序常数）复算了这条，
-      且其目录条目标题直接含值（`2.51 p 59: Eq. (2.7.9) a^X = 0`）。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——⚠ **本推导的 loc 实质改指**】
+
+      旧 loc 写 §2.7 (2.7.7)/(2.7.9)/(2.7.11)，并把它当成态-算子路线的出处。**这是错的**：
+      (2.7.8)/(2.7.9) 走的是 **Virasoro 代数**路线（原书 p.59 逐字 "The simplest uses the
+      Virasoro algebra"），本图已为它新建 --via-virasoro-algebra。
+
+      态-算子路线在原书里是**第三条**，出处有两个：
+        (a) p.62 逐字：「The constant can also be obtained by working out the relation between
+            `: :` and `° °` for the CFT (**exercises 2.13, 2.14**).」
+        (b) p.72–73 §2.9 的「Zero-point energies」小节，原书 p.73 逐字自陈：
+            「We have now given **three honest ways** of calculating normal ordering constants:
+             from the Virasoro algebra as in eq. (2.7.8), by relating the two forms of normal
+             ordering as in eq. (2.7.11), and **from the state–operator mapping above**.」
+      即本推导对应第三条，且其中一半（(a)）在原书里是**习题**而非正文推导。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E42/E43）与 §12.4（E15）。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)（L_0 = α'p²/4 + Σ(α_{−n}·α_n) + a^X，本推导要定的就是这个 a^X）、(2.7.9)（a^X = 0），p.59"
+    note: |
+      这两式只提供「a^X 是什么」与「答案是 0」，**不提供本推导的论证**
+      （论证在上面那条 loc）。分列两条来源即为区分二者。
 summary: |
   两种正规序都把 L_0 写成同一个双线性式加一个常数，故差是 c-数 a^X，可以在任一个态上读出。
   取单位算子 1：按 worldsheet.state-operator-isomorphism，它对应的态是基态 |0⟩，
@@ -52,7 +69,13 @@ gaps:
      构造而非定理（见其 --via-radial-quantization 的 gaps）。故本推导封顶在 physical-argument。"
   - "「单位算子的共形权为 0」在来源中是定义性的（1 与 T 的 OPE 无奇异项），未单列节点。"
   - "本推导只覆盖 X 部门。鬼场的对应常数是 a^g = -1（worldsheet.bc-ghost-normal-ordering-constant）；
-     抽取记录 §1.1 / E43 中的 a^g = 0 已由 reviewer-ch23（2026-09-10）裁定为误记。"
+     抽取记录 §1.1 / E43 中的 a^g = 0 已由 reviewer-ch23（2026-09-10）裁定为误记，
+     并于 2026-09-11 由原书页图四处逐字确认为 −1。"
+  - "**本推导对应原书三条路线中的第三条，而第三条在原书里有一半是习题**（p.62：
+     「The constant can also be obtained ... (exercises 2.13, 2.14)」）。原书正文实际走的是
+     Virasoro 代数路线 (2.7.8)，见 worldsheet.normal-ordering-constant-ax--via-virasoro-algebra。
+     本推导保留的价值在于它是一条**独立**路线（不用 (2.6.22) 的 SL(2,R) 子代数），
+     但它的认识论代价是必须假定 worldsheet.state-operator-isomorphism。"
   - "新增的 worldsheet.open-string-doubling-trick 边限定在**纯 Neumann** 边界条件
      （见该节点 notes 的「与 D 膜的关系」）。若某些方向取 Dirichlet，本推导的结论 a^X = 0
      是否逐字不变，本图未验证。"
