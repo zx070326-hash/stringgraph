@@ -66,8 +66,9 @@
 ## 待拆清单（定义卡内嵌命题）
 
 - `tt-ope-central-charge`、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
-- `worldsheet.virasoro-algebra`（唯一性断言）
-- `worldsheet.verma-module`（构造+万有性质+分级可标 formalized；PBW 基与 dim p(N) 另立）
+- ~~`worldsheet.verma-module`~~ 已拆（v2 formalized + math.verma-module-free-over-negative-part），2026-09-11
+- ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
+- 待建：`math.euler-partition-generating-function`（Σ p(N)q^N = ∏(1−q^n)^{−1}；subcritical 推导与 Verma 特征标用到，无节点无来源）——**已派 formalizer**
 - `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
 - `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
 - `worldsheet.brst-quantization`（statement 写死 c^g = −26，是命题埋进定义卡；建 v2 改为"鬼场部门为 λ = 2 的 bc 系统，中心荷记 c^g"，不要加 uses 边——会把四个 rigorous 节点拉低）
