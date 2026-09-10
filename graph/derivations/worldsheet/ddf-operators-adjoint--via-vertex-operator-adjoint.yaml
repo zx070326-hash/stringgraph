@@ -1,0 +1,156 @@
+id: worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint
+target: worldsheet.ddf-operators-adjoint
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v5
+    note: |
+      被断言的对象。本推导用到定义卡的全部三条结构性输入：类光条件 k_0² = 0（使两个指数算符之间
+      没有分支因子，伴随运算不产生额外相位）、横向条件 ε^i·k_0 = 0（使 ∂X^i 与 e^{i n k_0·X}
+      两个因子之间无缩并，可逐因子取伴随）、归一化 2α' k_0·p = 1（使模指标为整数，
+      「反射 J ↦ −J」这句话才有意义）。
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      提供塔的每一层上的双线性型本身，以及本推导的**核心输入**：陈述 (1)(b)
+      「产生与湮灭互为伴随」(α^μ_{−n})† = α^μ_n（n ≥ 1）。目标 (2) 的 Gram 矩阵计算
+      又逐字复用该节点的 (2)（单项式基下的对角形 ∏ (n η^{μμ})^{d} · d!）与 (3)（level 正交）
+      的证明结构，只把 η^{μμ} 换成横向的 δ^{ij}。
+      **不**使用该节点的 (4)（不定性）——那是类时方向的事，横向方向上恰恰相反。
+  - id: worldsheet.virasoro-generators-adjoint
+    inferred: true
+    note: |
+      两个角色，都不是「文献在此处引用了它」，故标 inferred。
+      (i) **机制样板**：目标断言与它是同一条规则的两个实例——由厄米场构成的权 h 场，
+          其模在伴随下指标反射 J_m† = J_{−m}（那里 h = 2 的 Sugawara L_m，这里 h = 1 的
+          ∂X^i e^{i n k_0·X}）。该节点是本图中**唯一**被机器验证过的该规则实例，
+          本推导第 1 步的写法照它组织。
+      (ii) **技术输入**：本推导第 2 步需要 (α^i_m)† = α^i_{−m} 对**一切整数 m 含 m = 0**
+          （A^i_n 的模态和跑遍 m ∈ Z）。worldsheet.fock-indefinite-form 的陈述 (1)(b)
+          只覆盖 n ≥ 1；把它延拓到全部整数的正是该节点 Lean 侧的 `Fock.pairing_mode_left`
+          （见该节点 notes【顺带被证明、但不属于本命题的两条】第一条）。
+          注意这条延拓**不在**该节点的 statement 文本里，故此边标 inferred 而非 inferred: false。
+  - id: worldsheet.ddf-transverse-oscillator-algebra
+    note: |
+      目标第 (2) 条的假设 (a)。Gram 矩阵的递推把 A^i_{+n} 逐个对易穿过 A^j_{−m} 时，
+      每次产生的 c-数就是 m δ^{ij} δ_{m+n,0}；没有这条对易关系，(1) 的伴随关系
+      单独算不出任何配对值。**目标第 (1) 条不依赖它**（伴随关系的论证只用顶点算子的重排序，
+      不用两个 DDF 算子之间的 OPE）。这条边是本推导 status 的直接上限之一
+      （该节点自身 effective = physical-argument）。
+  - id: worldsheet.ddf-commute-with-virasoro
+    inferred: true
+    note: |
+      提供目标 (2) 假设 (b) 的理由：该节点的推论逐字给出「A^i_n 把能级移动 −n」
+      （由 k_0² = 0 与 2α' k_0·p = 1 的质量壳记账 α'(p + n k_0)² = α' p² + n）。
+      与 Fock 空间能级分级非负（worldsheet.bosonic-fock-space）合起来即得
+      A^i_n|0;k⟩ = 0（n > 0）。文献（GSW §2.3.3，式号 L0）不逐条写出这一步，故标 inferred。
+      本推导也可以把 (b) 当作纯假设读（目标陈述边界 (c) 即如此写），
+      那样这条边只承担「(b) 在本设定下确实成立」的记账。
+  - id: worldsheet.bosonic-fock-space
+    inferred: true
+    note: |
+      提供两件事：(i) 能级分级 F = ⊕_{N ≥ 0} F_N **非负**，这是上一条得到
+      A^i_n|0;k⟩ = 0（n > 0）的另一半；(ii) 目标 (2) 里「不同 (i,n) 的 A^i_{−n} 互相对易
+      故单项式无歧义」以及单项式基的组合记账 ∏ n^{d} · d!，与该节点的多项式模型逐字同构。
+      来源处不提 Fock 空间的形式化模型，标 inferred。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧本命题的所在处。**核实等级沿用 worldsheet.ddf-operators-v5 与
+      worldsheet.ddf-transverse-oscillator-algebra**：章节页码 L4/L2
+      （brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
+      重要限定：教科书在此处对伴随关系**只写一句话**（「A^i_n 是厄米的」一类），
+      **没有推导**。本推导 summary 的三步是本项目按标准径向量子化规则重建的，
+      **没有逐字来源**（见 gaps 第 1 条）。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（DDF 态按横向振子 Fock 空间计数，其内积正定）"
+    note: |
+      作者本人的历史综述（L3，二手）。**预设**本目标（不算出 Gram 矩阵就谈不上「正定」），
+      但不给证明、不给编号（brst-cohomology-sources.md §3.1 第 1 条）。
+      只作为「本命题是被默认使用的标准事实」的证据，不承载论证。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      原始出处链条。四条获取路径全部失败（brst-cohomology-sources.md §3.1）；
+      式号沿用旧节点 worldsheet.ddf-operators，未与原文核对。摘要不含伴随关系。
+summary: |
+  文献里这一条只有一句话（「A^i_n 是厄米的」）。下面是把那句话展开成的标准论证，
+  三步；每一步都注明它是标准规则还是本项目的重建。
+
+  **第 1 步（模反射规则）。** 径向量子化中，一个由厄米场构成的权 h 主场 J(z) 的模
+  J_m := ∮ (dz/2πi) z^{m+h−1} J(z) 在 Fock 双线性型下满足 (J_m)† = J̄_{−m}
+  （J̄ 是共轭场；J 厄米时 J̄ = J）。这正是本图中两条已有节点背后的同一条规则：
+  h = 1 的 ∂X^μ 给 (α^μ_m)† = α^μ_{−m}（worldsheet.fock-indefinite-form (1)(b)），
+  h = 2 的 Sugawara L_m 给 L_m† = L_{−m}（worldsheet.virasoro-generators-adjoint，已形式化）。
+  DDF 算子的被积量 O^i_n(z) = ∂X^i(z) e^{i n k_0·X(z)} 是权 1 主场
+  （worldsheet.ddf-commute-with-virasoro 的论证内容：k_0² = 0 与 ε^i·k_0 = 0 把
+  T·O 的三阶与二阶极点都杀掉），故 A^i_n = ∮ (dz/2πi) O^i_n(z) 就是它的第 n 个模，
+  于是 (A^i_n)† = (Ō^i_n 的第 −n 个模)。剩下的全部工作是确认 Ō^i_n = O^i_{−n}。
+
+  **第 2 步（逐因子取伴随，即 Ō^i_n = O^i_{−n}）。** 把 A^i_n 展成模态和
+    A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_{−m}，
+  其中 V^{(n)}_J 是正规序指数算符 :e^{i n k_0·X}: 的第 J 个模（含零模移位 e^{i n k_0·x}，
+  它把动量 p 送到 p + n k_0）。两个因子之间**没有缩并**，因为交叉缩并的系数正比于
+  ε^i·k_0 = 0；因此可以逐因子取伴随：
+    · (α^i_m)† = α^i_{−m}，对**一切整数 m 含 m = 0**（worldsheet.fock-indefinite-form (1)(b)
+      加 worldsheet.virasoro-generators-adjoint 在 Lean 侧对 m = 0 的延拓；
+      m = 0 时 α^i_0 = (2α')^{1/2} p^i 是标量，对双线性型自伴）；
+    · (V^{(n)}_J)† = V^{(−n)}_{−J}。这一步是**本推导唯一的非初等步骤**：
+      X^μ 厄米蕴含 (:e^{i n k_0·X(z)}:)† 形式上是 :e^{−i n k_0·X(1/z̄)}:，
+      即 k_0 → −k_0 且模指标反射；把它写成模的等式需要把指数算符的湮灭半 E_+ 与产生半 E_-
+      **重排序**（E_+E_- ↔ E_-E_+），而重排序产生的因子正比于 z^{2α' n² k_0·k_0}，
+      **由 k_0² = 0 恒为 1**。这是类光条件在本推导中的关键作用。
+  合起来
+    (A^i_n)† = Σ_{m ∈ Z} (V^{(n)}_{−m})† (α^i_m)† = Σ_{m ∈ Z} V^{(−n)}_{m} α^i_{−m} = A^i_{−n}
+  （末一步把求和指标 m ↦ −m 反射，并用两个因子对易——同样因为 ε^i·k_0 = 0）。
+  动量记账自洽：左端把 F(p + n k_0) 送回 F(p)，右端 A^i_{−n} 正是如此，这就是目标 (1) 里
+  v ∈ F(p)、w ∈ F(p + n k_0) 的量词来源。
+
+  **第 3 步（Gram 矩阵，目标 (2)）。** 这一步是纯代数的、有限步的。设已有
+  (1)、(a) [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}、(b) A^i_n|0;k⟩ = 0 (n > 0) 与 ⟨0;k|0;k⟩ = 1。
+  算两个 DDF 单项式的配对 ⟨{d}, {e}⟩：用 (1) 把左边的每个 A^i_{−n} 搬到右边变成 A^i_{+n}，
+  再用 (a) 把它逐个对易穿过右边的 A^j_{−m}（每穿过一次给 c-数 n δ^{ij} δ_{n,m}），
+  最后用 (b) 让它打在 |0;k⟩ 上得零。这与自由振子 Fock 空间上的标准 Wick 递推**逐字相同**
+  （worldsheet.fock-indefinite-form 陈述 (2) 的证明结构），结论也逐字相同，
+  只是 η^{μμ} 换成 δ^{ij}：
+    · d ≠ e 时递推在某处必然剩下一个打不掉的湮灭因子，得 0（正交）；
+    · d = e 时逐个因子给出 n^{d(i,n)} · d(i,n)!，乘起来即对角元；
+    · 因 i 全是**类空横向**方向（δ^{ii} = +1）且 n ≥ 1，对角元是正整数的乘积，
+      在有序域上严格为正 ⟹ H^⊥(k) 上的型正定。
+  能级分级正交是 (a) 的直接推论，也可以从「不同能级落在塔的不同层、动量不同」直接读出
+  （层间正交是塔的双线性型的定义）。
+
+  这三步合起来就是 worldsheet.no-ghost-theorem-v4 第 (1b) 步里那句
+  「其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的完整依据：
+  横向振子代数（worldsheet.ddf-transverse-oscillator-algebra）只给对易子，
+  正定性还需要本推导的 (1) 与真空归一化。
+gaps:
+  - "**文献只有一句断言，没有推导；summary 三步没有逐字来源。** GSW §2.3.3 的定位强度是章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3），GT 1972 正文未获取。教科书对伴随关系只写「A^i_n 是厄米的」一类的一句话。第 1、2 步的模反射规则与逐因子取伴随是本项目按标准径向量子化规则重建的，**未与任何原文核对**。"
+  - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤，且本图中没有承载它的节点。** 它需要指数算符两半的重排序（E_+E_- ↔ E_-E_+），以及「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则——后者在本图中同样没有节点（最接近的是 worldsheet.ope-commutator-dictionary，但那是围道形变，不是伴随）。这是本推导 status 无法高于 physical-argument 的主要原因；若 reviewer 要求，应把它单列成一条命题节点。"
+  - "**Lean 侧未起步：V(b)_J† = V(−b)_{−J} 未证。** `formal/StringFormal/NoGhost/VertexOperator.lean` 已有正规序指数的两半（`Fock.creaExp`、`Fock.vertexSub`）与模 `Fock.vertexOsc`，也有 b·b = 0（`dotVec η b b = 0`）作为显式假设，但**没有任何关于伴随的定理**——worldsheet.ddf-operators-v5 的 notes (4) 逐字登记「顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做（需 E_+E_- 重排序）」。另有结构性障碍：Lean 侧只有 R-双线性型 `Fock.pairing`，**无 sesquilinear 结构**，故即使做完也只覆盖目标边界 (a) 说的实极化情形，不覆盖复 Hermitian 形式。"
+  - "**「†」是双线性型的转置，不是 Hermitian 共轭**（继承 worldsheet.fock-indefinite-form 与 worldsheet.virasoro-generators-adjoint 的同一条 gap）。物理上的协变 Fock 空间是复空间，A^† 还含一次复共轭；本推导第 2 步里「X^μ 厄米」这句话在双线性型版本中要读成「转置下不变」。两者在实极化下一致，**复情形未证**。这条对本节点尤其要紧，因为无鬼定理断言的是 Hermitian 形式的半正定性。"
+  - "**塔上的双线性型本身没有独立节点。** 目标陈述把 T(p;k_0) 上的型定义为各层 worldsheet.fock-indefinite-form 的型的直和（层间正交）。该节点是**逐固定动量扇区**陈述的（其 Lean 侧 `Fock.pairing` 也是），不同动量层之间的正交性在本图中是**约定式引入**的，不是被证明的（物理上它就是动量本征态的正交性 ⟨p|p'⟩ ∝ δ(p−p')）。第 (1) 条的等式跨两个不同层，因此实质上用到了这条约定。"
+  - "**目标 (2) 的正定性需要额外假设**：系数环是有序域（如 R = ℝ）且 ⟨0;k|0;k⟩ = 1。前者本图中最接近的登记是 worldsheet.fock-indefinite-form 的 Lean 侧 `Fock.pairing_indefinite_field`（有序环即可）；后者是归一化选择，不是被推出的。目标陈述已把两者写成前提。"
+  - "**退化扇区 k_0·p = 0（含 p = 0）不覆盖**：那里 A^i_n 本身没有定义（worldsheet.ddf-operators-v5）。"
+  - "**第 3 步的递推没有逐步展开**。summary 只写了递推的形状（搬伴随 → 对易穿过 → 打真空），没有写归纳的严格记账（对 Σ_{(i,n)} d(i,n) 的归纳、d ≠ e 时「某处必然剩下打不掉的湮灭因子」的精确论证）。这一步是初等的、与自由振子 Fock 空间逐字同型，但若要按 docs/STATUS_LEVELS.md 的 rigorous 例外条款单独升级第 (2) 条，必须写全并由 reviewer 复核。"
+notes: |
+  **status 定级理由**：kind 与 status 都取 physical-argument。第 (1) 条的论证依赖顶点算子的
+  伴随与径向量子化的共轭规则（gaps 第 2、3 条），不是有限步初等计算，
+  不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；两条一手来源的式号均未核实、正文均未获取；
+  文献侧只有一句无证明的断言。**无 reviewer-verified 记录。**
+
+  即使不看第 (1) 条，本推导也被 worldsheet.ddf-transverse-oscillator-algebra
+  （effective = physical-argument）从上方封顶，故 status 不可能更高。
+
+  **推导名 `--via-vertex-operator-adjoint`**：与同一族的
+  `worldsheet.ddf-commute-with-virasoro--via-conformal-weight` 及
+  `worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight` 区分。
+  那两条走的是「权与围道形变」（T 与被积量的 OPE、两个被积量之间的 OPE），
+  本条走的是「顶点算子的伴随」（指数算符两半的重排序），机器不同，故不沿用 `--via-conformal-weight`。
+
+  **本推导没有第二条独立路线**。数学侧（顶点算子代数的不变双线性型与伴随）原则上给得出严格版本，
+  但需要 researcher 先取得带编号的可引用陈述；届时应新增一条 `--via-voa-invariant-form`
+  的独立推导，而不是改本条。见目标节点 notes【升级路径】(ii)。
+author: curator
+created: "2026-09-11"
