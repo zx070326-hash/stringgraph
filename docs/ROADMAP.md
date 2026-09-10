@@ -44,8 +44,10 @@
 - **OPE 收敛公理**：暂不建公理节点。凡靠"围道变形 + OPE"得到算子关系的推导一律 `physical-argument`，gaps 写明"OPE 级数收敛与围道变形合法性在来源中未证明"。等 CFT 子图有足够多此类推导再统一挂公理。
 - **c = D / Sugawara**：建"Fock 空间上的 Virasoro 生成元"定义节点 + "满足 Virasoro 关系、c = D"命题节点；命题配 `--via-ope`（physical-argument）与 `--via-mode-algebra`（严格代数事实，来源 Kac–Raina 1987 / Schottenloher 2008，定理编号核实后才标 rigorous）两条推导。
 - **`worldsheet.virasoro-algebra` 拆卡**：同意拆。待本批 curator 分支合并后由 lead 执行：新定义卡不含唯一性断言（可标 formalized），唯一性另立命题卡，旧卡 `superseded_by`。
-- **a < 1 分支**：researcher 第二轮检索（Thorn 1987、GSW §2.3.3、Polchinski §4.1 习题）。找不到成文来源就不入库。
+- **a < 1 分支**：已解决（2026-09-10 第二轮核验）。成文来源是 Lian–Zuckerman 1991 Theorem 3.5(ii), p.570：「D = 26, h = 1 or 26 > D ≥ 2, h ≤ 1」（h 即截距 a）。注意 LZ 设定是 V(D,p) ⊗ L(26−D, 1−h)（D < 26 需补一个 c = 26−D 的模），与纯 D 玻色子设定不同；建独立节点 `worldsheet.no-ghost-theorem-subcritical`。Thorn 1987 摘要不提 intercept，降级为候选。
 - **"初等可复核"能否标 rigorous**（reviewer-ch1 第 8 条）：可以，条件是前提完整 + 有限步初等计算 + reviewer 独立复核并在推导 `notes` 留 `reviewer-verified` 记录；写入 docs/STATUS_LEVELS.md。
+- **Goddard–Thorn 1972 正文**：四条获取路径（INSPIRE files、CDS、KEK、archive.org 重印本）全部失败；"CERN TH.1471 报告号"线索已证伪。里程碑 canonical_source.loc 保持"无编号；摘要末句"。
+- **Lian–Zuckerman 1991 不含 Q_B² = 0 ⟺ c = 26**：全文核实，该文与 FGZ 一样把 c = 26 作为相对复形的定义条件；`critical-dimension-brst` 的升级候选清单里删去它。Kato–Ogawa 1983 摘要方向为 ⟹。
 - **Polchinski 原书核对**：仍无持书者。E34 改由 Kac–Raina 等数学来源支撑，E53、E58 继续挂"二手源核实"gap。
 
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
