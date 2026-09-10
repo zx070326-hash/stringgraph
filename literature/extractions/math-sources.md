@@ -2336,3 +2336,376 @@ tags: [algebra, lie-algebra, cohomology, central-extension]
 - **Q22** `Vect(S¹)` 的连续上同调（Gelfand–Fuks / Goncharova / Reshetnikov / Tsujishita）与
   Witt/Vir 的**代数**上同调之间那条「稠密性论证不成立」的沟（§27.4）。
   这与 §13.3 的「弦论那个具体理论满足假设」是同一类缺口，值得单独立节点。
+
+---
+
+# § Kac 行列式公式
+
+> **编号说明**：本节按分派写作 **§34**。**§33 预留给「PBW 一般来源」**（另一路 agent 并行写入，
+> 本轮我写入时该节尚不存在）。**若合并后 §33 仍空缺，lead 可把本节整体改号为 §33**——
+> 本节内部没有交叉引用自己的节号，改号是安全的。§20–§23 在本文件里本来就是空号。
+
+## 34. Kac 行列式公式：可逐字定位的带编号来源（researcher，2026-09-11）
+
+- 触发：`graph/statements/worldsheet/kac-determinant.yaml` 与其推导 `--via-feigin-fuchs` 的 `sources`
+  现引 `kac-1979`（`loc: "Theorem 1"`）与 `feigin-fuchs-1982`（`loc: "§2（完整证明）"`），
+  **两条编号都未核实**，且 `sources.bib` 对 `kac-1979` 指向哪一篇存疑
+  （`brst-cohomology-sources.md` §1.5：FGZ 1986 的 ref 10 是 ICM Helsinki 1978，不是 LNP 94）。
+- 本轮结果：**两条 `loc` 都要改**，并且找到了**一条可公开获取、可逐字引用的带编号来源**（Schottenloher Thm 6.12）。
+
+### 34.1 ★★★ `kac-1979` 归属结论：LNP 94 与 ICM Helsinki 是**两篇不同的论文**，且两者都被文献当作行列式公式的出处
+
+**决定性证据（L1）：Kac 本人的出版目录** `https://math.mit.edu/~kac/publications.pdf`
+（WebFetch 落盘 159 KB → `Read pages 1-3` 读图），"Publications" 列表第 3 页逐字：
+
+> 30. Contravariant form for infinite dimensional Lie algebras and superalgebras, *Lecture
+>     Notes in Physics* **94** (1979), 441–445.
+> 31. (with D. Kazhdan) Structure of representations with highest weight of infinite dimen-
+>     sional Lie algebras, *Advances in Math.* **34** (1979), 97–108.
+> 32. Highest weight representations of infinite dimensional Lie algebras, *Proceedings of ICM,
+>     Helsinki* **1978** (1980), 299–304.
+
+⇒ **#30 与 #32 是目录里两个独立条目，不是同一篇的两个版本**。
+「`kac-1979` 到底是哪篇」这一疑点由此结案：**`kac-1979` 就是 #30 = LNP 94, 441–445**，登记无误。
+顺带**副产品**：`kac-kazhdan-1979` 的终页 **108 由作者本人目录确认**（原 note 说「终页未与出版方核对」，可解除）。
+
+但**新的分歧**随之出现——两篇都被当作 Kac 行列式的出处：
+
+| 谁 | 把行列式公式归给哪篇 | 等级 |
+|---|---|---|
+| **Feigin–Fuchs 1982**（俄文原刊，§34.2） | **[2] = LNP 94, 1979, 441–445** | **L1 逐字** |
+| **Schottenloher 2008 Thm 6.12**（§34.3） | **[Kac80] = Proc. Intern. Congress Helsinki, 299–304, 1980** | **L1 逐字** |
+| Lian–Zuckerman 1991 [K1]（`primary-sources-round2.md` §1.6） | LNP 94, p. 441 | L1（前轮） |
+| FGZ 1986 ref 10（`brst-cohomology-sources.md` §1.5） | ICM Helsinki 1978, Vol. 1, 299–304 | L1（前轮） |
+| Goddard–Olive 型引用（检索后端转述，未逐字核实） | **两篇并列写在同一条**：「Lecture Notes in Physics, Vol. 94, p. 441 …; in Proc. Int. Congress of Math., Helsinki (1978)」 | L4 |
+
+**结论与建议**：
+1. `kac-1979` 保持指向 LNP 94，**note 里写死「与 ICM 那篇是两篇，不是同一篇的两个版本，依据是 Kac 本人出版目录 #30/#32」**。
+2. **新增 bib key `kac-1980-icm`**（ICM Helsinki 1978，出版年 1980）。FGZ 与 Schottenloher 引的是它，
+   图里凡是转述这两家的地方应引它而不是 `kac-1979`。
+3. **「哪一篇最先陈述 Virasoro 的行列式公式」本轮未能裁决**（两篇正文都没拿到，见 §34.10 Q23/Q24）。
+   一条**弱倾向**（L4，不得单独用）：检索后端称 Kac 本人的《Infinite dimensional Lie algebras》
+   把 ICM 那篇（[1978 B]）引在 **g(A) 的最高权模与特征标公式**两章，暗示 ICM 那篇偏 Kac–Moody 综述，
+   而 LNP 94 的标题「contravariant form … and superalgebras」正对逆变形式；
+   FF 1982 作为**同期最内行的引用者**选了 LNP 94。
+4. **`loc` 里绝不能再写「Theorem 1」**：LNP 94 正文未获取，内部编号 **L0**。
+
+### 34.2 ★★★ Feigin–Fuchs 1982 全文核实（俄文原刊，L1 逐页读图）——**定理号是 §3.2 的「Теорема 3.1」，证明在 §4.2**
+
+**获取途径（可复用，L1）**：Math-Net.Ru
+`https://www.mathnet.ru/eng/faa1619`（元数据）→
+`https://www.mathnet.ru/php/getFT.phtml?jrnid=faa&paperid=1619&what=fullt&option_lang=eng`
+（WebFetch 落盘 2 MB **扫描图 PDF** → `Read pages` 逐页读图；**PDF 页 = 俄文刊页 − 46**）。
+先用 `…/archive.phtml?jrnid=faa&wshow=issue&year=1982&volume=16&issue=2` 定位 `paperid=1619`（p. 47–63）。
+
+**元数据（L2，Math-Net.Ru 页面）**：Б. Л. Фейгин, Д. Б. Фукс,
+《Кососимметрические инвариантные дифференциальные операторы на прямой и модули Верма над алгеброй Вирасоро》,
+Функц. анализ и его прил. **16**:2 (1982), 47–63；英译 Funct. Anal. Appl. **16**:2 (1982), **114–126**；
+DOI 10.1007/BF01081626；MR **659165**；Zbl **0505.58031**；收稿 **15.09.1981**。
+⚠ **俄文标题的词序是「Кососимметрические инвариантные…」（先「斜对称」后「不变」），
+bib 里英文标题 "Invariant skew-symmetric…" 是英译本用法**，两者都能查到，不必改。
+
+#### (a) 论文自述的结构（书上 p. 47，L1 逐字节选）
+
+> «Основным результатом этой статьи является **теорема 1.1**, доставляющая полную классификацию
+> кососимметрических дифференциальных операторов…»
+> «Эта проблема приводимости **решена в 1979 г. Кацем [2]**, и с помощью его результатов удается
+> доказать нашу основную теорему. Более того, … простые соображения, относящиеся к инвариантным
+> операторам, позволяют дать **новое доказательство теоремы Каца**.»
+> «В **§ 3** формулируется **теорема Каца**, и при помощи этой теоремы и результатов § 2 доказывается
+> основная теорема. Заключительный **§ 4 содержит доказательство теоремы Каца**, а также
+> упоминавшихся комбинаторных тождеств.»
+
+**⇒ 三条对图直接有用的事实**：
+1. 本文的**主定理是 Theorem 1.1（不变微分算子的分类），不是 Kac 行列式**；
+2. **Kac 行列式在 §3 被陈述、在 §4 被证明**；现图里 `feigin-fuchs-1982` 的 `loc: "§2（完整证明）"` **是错的**
+   （§2 讲的是「不变算子 ↔ 特殊向量」的辅助构造与主系统的渐近解）；
+3. 作者自称给的是**「новое доказательство» = 一个新证明**，并把「可约性问题**已由 Kac 于 1979 年解决**」
+   写在明处。**因此不宜把本文描述成「第一个完整证明」**——那是二手文献的说法，不是作者自称。
+
+#### (b) ★ 定理原文（书上 **p. 58**，§3.2 «Теорема Каца»；L1 逐字）
+
+引出句：«**Кацу удалось вычислить определитель матрицы** M_{h,c}(k). Вот его результат.»
+
+> **Теорема 3.1 (см. [2]).**
+>
+> det² M_{h,c}(k) = C ∏_{i=1}^{k} ∏_{j|i} Φ_{j, i/j}(h, c)^{p(k−i)},
+>
+> Φ_{α,β}(h, c) = ( h + (1/24)(α²−1)(c−13) + (1/2)(αβ−1) ) ×
+>                 ( h + (1/24)(β²−1)(c−13) + (1/2)(αβ−1) ) + (α²−β²)²/16,
+>
+> где **C — ненулевая константа**.
+>
+> **Следствие.** Для существования у модуля V_{h,c} особого вектора степени ≤ k необходимо и
+> достаточно, чтобы для некоторых натуральных чисел k′, k″ с k′k″ ≤ k имело место равенство
+> Φ_{k′,k″}(h, c) = 0.
+
+**四条必须随引用一起写的注意事项**：
+- **是 det²（行列式的平方），不是 det**。Φ_{α,β} 是**一对** (α,β) 与 (β,α) 的合并因子，
+  故 ∏_{j|i} Φ_{j,i/j} = [∏_{j|i}(h − h_{j,i/j})]²，两边平方后与标准写法一致（验算见 §34.8）。
+- **下标判读**：扫描件上 Φ 的第一个下标字形在 `i` 与 `j` 之间不易分辨；
+  按 ∏_{j|i} 的求积变量以及 p. 62 同一式的重复出现，**只能是 Φ_{j, i/j}**（i = rs，j 跑遍 i 的因子）。
+  这一处是**字形 L2 + 数学强制**，不是纯 L1。
+- **C 只被断言「非零」，没有断言「正」**。图卡现在写的是「α_N 是…**正**常数」，
+  **本轮找到的两个来源都不支持「正」**（Schottenloher 写的是 K_N ≥ 0，见 §34.3）。
+- 前置定义（同页 §3.2，L1）：M_{h,c}(k) 是 Verma 模 V_{h,c} 的 k 次齐次分量（维数 p(k)）上，
+  把 U(L₁⁻) 的 p(k) 个线性无关元 e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用到真空 v 上得到的基的 Gram 矩阵；
+  正文逐字说「определяемая этой матрицей квадратичная форма называется **формой Шаповалова**」。
+  **h, c 取任意复数**（p. 57 逐字：«Пусть h и c — два комплексных числа»）——
+  这一点比 Schottenloher 的实 Hermite 版本更贴合图卡。
+
+#### (c) 证明的位置（书上 **p. 62**，L1）
+
+小节标题逐字：**«4.2. Доказательство теоремы 3.1.»**，证明用 §4.1 显式构造的特殊向量 ξ^k_{m,n}
+（Предложение 4.1、4.2）+ §3 的 Предложение 3.2、3.3 + 归纳，末句：
+«Таким образом, det² M_{h,c}(r) делится на ∏∏_{j|i} Φ_{j,i/j}(h,c)^{p(r−i)}，и очевидное вычисление
+степеней показывает, что частное есть константа»。
+
+#### (d) 参考文献（书上 **p. 63**，L1 逐字）——**这是 §34.1 的关键证据**
+
+> 1. Фейгин Б. Л., Фукс Д. Б. Об инвариантных дифференциальных операторах на прямой. —
+>    Функц. анализ, 1979, т. 13, вып. 4, с. 91–92.
+> 2. **Kac V. G. Contravariant form for infinite-dimensional Lie algebras and superalgebras.
+>    Lecture Notes Phys. V. 94, 1979, p. 441–445.**
+> 3. Kac V. G., Peterson D. H. Spin and wedge representations of infinite-dimensional Lie algebras
+>    and groups. — Proc. Nat. Acad. Sci. USA, 1981, v. 78, p. 3308–3312.
+> 4. Гроэман Д. Я. Классификация билинейных инвариантных операторов на тензорных полях. —
+>    Функц. анализ, 1980, т. 14, вып. 2, с. 58–59.
+> 5. Гельфанд И. М., Фукс Д. Б. Когомологии алгебры Ли векторных полей на окружности. —
+>    Функц. анализ, 1968, т. 2, вып. 4, с. 92–93.
+
+⇒ **FF 的 [2] 就是 `kac-1979`（LNP 94），一字不差**；他们**没有**引 ICM 那篇。
+（顺带：条目 5 与 bib 里 `gelfand-fuks-1968` 的元数据一致。）
+
+#### (e) ⚠ 一处未裁决的印刷/判读问题
+
+书上 **p. 59 首句**（紧接 Theorem 3.1 与其推论之后）渲染为：
+«Насколько нам известно, доказательство **теоремы 2.1** не опубликовано. Мы приведем ее доказательство в § 4.»
+（「据我们所知，定理 ?.1 的证明未曾发表。我们将在 §4 给出它的证明。」）
+
+- **字形上读作 2.1**（同一页与 p. 61 上「теорему 3.1」「теорему 2.1」两种写法都出现，说明字形可分辨）；
+- **但 §2 里根本没有「Теорема 2.1」**——只有 §2.4 的 **Предложение 2.1**（S̄_k 是代数曲线），
+  而且它在原地就被证明了（«Предложение доказано.»，p. 54）；
+- **§4 里唯一被证明的编号定理是 3.1**（§4.2 标题）。
+
+⇒ 语义上这句只能指 **Теорема 3.1**（即：Kac 的证明未发表，我们补上），但**字面印的是 2.1**。
+**图里不得引用这句作为「Kac 只宣布不证明」的证据**，直到有人核对英译本（Q26）。
+可以安全引用的是 §34.2(a) 的三句（Kac 1979 解决了问题 / 我们给新证明 / §4 含 Kac 定理的证明）。
+
+### 34.3 ★★★ 可公开获取的带编号来源：Schottenloher, LNP 759, **Ch. 6, Theorem 6.12**（L1 全章读图）
+
+**获取途径**：作者本人 LMU 主页按章挂的 PDF，
+`https://www.mathematik.uni-muenchen.de/~schotten/LNP-cft-pdf/06_978-3-540-68625-5_Ch06_23-08-08.pdf`
+（落盘 302 KB → `Read pages` 读图；**PDF 页 = 书页 − 86**）。
+页脚逐字：「Schottenloher, M.: *Representation Theory of the Virasoro Algebra*. Lect. Notes Phys. **759, 91–102** (2008)
+DOI 10.1007/978-3-540-68628-6**_7**」——**又一次「章号 6 / DOI 后缀 _7」错位**，与 §11、§29 记录的模式一致，
+`loc` 请写「Ch. 6, LNP 759, pp. 91–102」，不要用 DOI 后缀推章号。
+
+章内结构（L1）：§6.1 Unitary and Highest-Weight Representations (p. 91)、**§6.2 Verma Modules (p. 92)**、
+**§6.3 The Kac Determinant (p. 95)**、§6.4 Indecomposability and Irreducibility (p. 99)、
+§6.5 Projective Representations of Diff₊(𝕊) (p. 100)、References (p. 102)。
+章首第一句逐字：「Most of the results in this chapter can be found in **[Kac80]**.」
+
+**可引编号（均 L1 逐字）**：
+
+- **Theorem 6.8, p. 96**（Hermite 形式的存在唯一性 = 图卡里「由 L_n^† = L_{−n} 与 ⟨h|h⟩ = 1 定义」那句）：
+  > Let h, c ∈ ℝ and M = M(c,h).
+  > 1. H : M × M → ℂ is the unique hermitian form satisfying H(v₀,v₀) = 1, as well as
+  >    H(L_n v, w) = H(v, L_{−n} w) and H(Zv,w) = H(v,Zw) for all v,w ∈ M and n ∈ ℤ.
+  > 2. H(v,w) = 0 for v ∈ V_N, w ∈ V_M with N ≠ M, that is the eigenspaces of L₀ are pairwise orthogonal.
+  > 3. ker H is the maximal proper submodule of M.
+- **Definition 6.11, p. 97**：「Let P(N) := dim_ℂ V_N and {b₁,…,b_{P(N)}} be a basis of V_N.
+  We define matrices A^N by A^N_{ij} := H(b_i,b_j) for i,j ∈ {1,…,P(N)}.」
+- **★★ Theorem 6.12, p. 98**（**本轮为本节点找到的最贴切的带编号来源**）逐字：
+  > **Theorem 6.12. [Kac80]** *The Kac determinant* det A^N *depends on* (c,h) *as follows:*
+  >
+  > det A^N(c,h) = K_N ∏_{p,q ∈ ℕ, pq ≤ N} (h − h_{p,q}(c))^{P(N−pq)},
+  >
+  > *where* **K_N ≥ 0** *is a constant which does not depend on* (c,h), *the* P(M) *is as in Definition 6.11, and*
+  >
+  > h_{p,q}(c) := (1/48)( (13 − c)(p² + q²) + √((c−1)(c−25)) (p² − q²) − 24pq − 2 + 2c ).
+  >
+  > 紧接一句：「**A proof can be found in [KR87] or [CdG94], for example.**」
+- **Corollary 6.10, p. 97**（H 半正定 ⇒ c ≥ 0 且 h ≥ 0）；**Remark 6.9, p. 97**（M/ker H 上 H 非退化但不定）；
+  **Theorem 6.13, p. 98–99**（酉性完全分类，第 2 条给出 **minimal model 参数化**：
+  c(m) := 1 − 6/(m(m+1))，h_{p,q}(m) := (((m+1)p − mq)² − 1)/(4m(m+1))，1 ≤ p ≤ q < m）；
+  **Theorem 6.17, p. 100**（Verma 模不可分解 / 商模不可约）。
+- **章末参考文献（p. 102，L1 逐字，与 §34.1 直接相关）**：
+  > [Kac80] V. Kac. Highest weight representations of infinite dimensional Lie algebras. In: *Proc.
+  >         Intern. Congress Helsinki*, Acad. Sci. Fenn., 299–304, 1980.
+  > [KR87]  V. Kac and A.K. Raina. *Highest Weight Representations of Infinite Dimensional Lie
+  >         Algebras*. World Scientific, Singapore, 1987.
+  > [CdG94] F. Constantinescu and H.F. de Groote. *Geometrische und Algebraische Methoden der
+  >         Physik: Supermannigfaltigkeiten und Virasoro-Algebren*. Teubner, Stuttgart, 1994.
+  > [FQS86] D. Friedan, Z. Qiu, S. Shenker. Details of the nonunitary proof for highest weight
+  >         representations of the Virasoro algebra. *Comm. Math. Phys.* **107** (1986), 535–542.
+  > [GKO86] P. Goddard, A. Kent, D. Olive. Unitary representations of the Virasoro and
+  >         Super-Virasoro algebras. *Comm. Math. Phys.* **103** (1986), 105–119.
+
+**⚠ 引用 Theorem 6.12 必须同时写清的三条限制**：
+1. **实数限制**：Theorem 6.8 起整段假设 **c, h ∈ ℝ**，A^N 是 **Hermite** 形式的 Gram 矩阵；
+   图卡若要覆盖复 (c,h) 的双线性 Shapovalov 形式，**该限制要么写进 note，要么改引 FF Theorem 3.1**（那边是 ℂ）。
+2. **常数**：书上写 **K_N ≥ 0**，**没有**写 > 0。
+3. **归属**：本书把这条定理归给 **[Kac80] = ICM Helsinki**，并把**证明外包给 [KR87] / [CdG94]**，
+   **全章没有引 Feigin–Fuchs**。所以「Kac 陈述 + FF 证明」这条历史线**不是 Schottenloher 的说法**。
+
+### 34.4 物理侧标准转述：Di Francesco–Mathieu–Sénéchal —— **是 §7.2，不是任务书说的 §7.3.2**
+
+- Google Books 卷 `keUrdME5rhIC`（*Conformal Field Theory*, Springer 1997）：
+  `"Kac determinant"` → **p. 205**；`"Unitarity and the Kac Determinant"` → **p. 205**；
+  **控制查询** `"qxzptvv wrrglmn"` → 无命中（只回封面）⇒ **控制通过**（L4 带控制）。
+- 检索后端读到的章节结构（L4，未逐页核实）：**Ch. 7「Minimal Models I」**；
+  §7.1 Verma Modules (p. 200)；**§7.2 The Kac Determinant (p. 205)**；§7.2.1 Unitarity and the Kac Determinant (p. 205)；
+  §7.2.2 Unitarity of c > 1 Representations (p. 209)；§7.2.3 Unitary c < 1 Representations；§7.3 = minimal models 本体。
+- ⇒ **任务书里的「§7.3.2」与此不符**；本轮**没有任何证据支持 §7.3.2**。
+- **公式号（如常被转引的 (7.30)）本轮完全未核实（L0），不得写进图。**
+- 结论：DMS 只能作**旁证**，`loc` 最多写「§7.2 The Kac Determinant, p. 205（L4，公式号未核实）」，
+  而且**不必写**——`schottenloher-2008` 已经提供了更强的同类来源。
+  （注：检索结果里有一个 `scispace.com` 的全本 PDF；**按 literature/CLAUDE.md 规则 1 未使用**，
+  是否可用留给 lead 裁决，与 §28.1 的 Weibel 全本问题同类。）
+
+### 34.5 Iohara–Koga, *Representation Theory of the Virasoro Algebra* (2011)：**Chapter 4 = 「Determinant Formulae」，编号仍 L0**
+
+- 章标识（L2/L3）：Iohara, K., Koga, Y. (2011). **"Determinant Formulae"**, in *Representation Theory of
+  the Virasoro Algebra*, Springer Monographs in Mathematics, **DOI 10.1007/978-0-85729-160-8_4**。
+  章序（L4）：1 Preliminary → 2 Classification of Harish-Chandra Modules → 3 The Jantzen Filtration →
+  **4 Determinant Formulae** → 5 Verma Modules I: Preliminaries。
+- Springer 官方章摘要（L4，检索后端转述 Springer 页面，**未逐字核实**）：
+  「The Kac determinant formula for Verma modules over Vir is given together with its proof **in the
+  language of vertex algebras**, a result that is crucial for the analysis of Verma modules in Chapters 5 and 6.
+  The chapter also provides determinant formulae for the Vir-module maps from a Verma module to the Fock
+  module … and from a Fock module to the contragredient dual of the Verma module …」
+- **访问全部失败**：`link.springer.com/chapter/…_4` 与 `…/book/…` 一律 303 → `idp.springer.com/authorize`；
+  Google Books 该卷**无预览**（`vid=ISBN9780857291592` + `"Kac determinant"` → 无结果页，非「无命中」）。
+- ⇒ **「Theorem 4.1」这类编号一个字都不许写**。这本书仍是**主题最对口**的候选（也是 Kytölä 的 [IK10]），
+  留待能进 Springer 的人核对（Q28），与 §30.3 的 Q19 是同一本书、同一堵墙。
+
+### 34.6 Kac–Raina *Bombay Lectures*：本轮唯一新增的是「它被当作证明出处」这一事实
+
+- **L1 新证据**：Schottenloher Theorem 6.12 后一句把证明外包给 **[KR87]**（= `kac-raina-1987` 第 1 版）与 [CdG94]。
+  这是图里第一次有 L1 来源把 Kac–Raina 与**Kac 行列式的证明**挂钩。
+- 但**书内讲号/命题号仍未核实**，且 `sources.bib` 的**版本陷阱**（第 1 版约 12 讲 / 2013 第 2 版 18 讲，编号不可互换）依旧。
+  ⇒ `loc` **只能写主题**（「Kac 行列式的证明」），**不得写 Lecture / Theorem 号**。本轮没有新增第 2 版的 key。
+
+### 34.7 形式化状态：**Kytölä 的 VirasoroProject 没有 Shapovalov 形式，也没有 Kac 行列式**（三条独立证据，L1）
+
+1. **Lean 文件清单**（`github.com/kkytola/VirasoroProject/tree/master/VirasoroProject`，2026-09-11 读取）：
+   21 个 `.lean` 文件——CentralChargeCalc / CentralExtension / Commutator / CyclicTripleSum / FockSpace /
+   FockSpaceSugawara / HeisenbergAlgebra / IndexTri / IsCentralExtension / LieAlgebraModuleUEA /
+   LieAlgebraRepresentationOfBasis / LieCohomologySmallDegree / **LieVerma** / SectionSES / Sugawara /
+   **VermaModule** / VirasoroAlgebra / VirasoroCocycle / **VirasoroVerma** / WittAlgebra / WittAlgebraCohomology。
+   **没有 ShapovalovForm.lean、没有 KacDeterminant.lean、没有 SingularVector.lean。**
+2. **arXiv:2510.21741 的 Table 1（书上 p. 2，L1）**「Main objects and results formalized and discussed in this report」
+   共 7 行：中心扩张 (Def 3.1)、2 次李代数上同调 (Def 4.3)、Virasoro 代数 (Def 8.1)、Heisenberg (Sec 9)、
+   **Verma 模 (Def 12.2)**、Witt 的 H² 计算 (Thm 6.2)、Sugawara (Thm 10.1)、Verma→charged Fock 的模映射 (Thm 12.7)。
+   **没有逆变形式 / 行列式。**
+3. **§14 "Conclusions and outlook"（书上 p. 12，L1 逐字）**：
+   > For Virasoro algebra representation theory, a significant project could aim at a formal proof of the
+   > **Feigin–Fuks structure theorem for Verma modules over the Virasoro algebra [FF84, VZ90, IK10]**,
+   > which is foundational to numerous topics in conformal field theory.
+   同段前一句还写「Highest weight representation theory of Lie algebras … is likely a major undertaking,
+   **starting from the missing Poincaré–Birkhoff–Witt theorem**」。
+   其参考文献（书上 p. 13，L1）：**[FF84]** B. L. Feigin and D. B. Fuks. *Verma modules over the Virasoro algebra*.
+   Functional Analysis and Its Applications, **17(3):241–242, 1984**；**[VZ90]** Vershik–Zhelobenko (eds.),
+   *Representation of Lie groups and related topics*, Adv. Stud. Contemp. Math. 7, Gordon and Breach, 1990；
+   **[IK10]** Iohara–Koga (2010)。
+
+**⇒ 对图的硬约束**：`worldsheet.kac-determinant` **不能标 `formalized`**，上限是 `rigorous`；
+理由与 `math.verma-module-free-over-negative-part` 同源（Mathlib 无 PBW，见 §16.4），
+而且这里还多一层：**连 Shapovalov 形式本身都没有被形式化**。
+
+### 34.8 三种参数化对照（+ 我自己做的一致性验算，**这一小节是推断，不是来源原文**）
+
+| 来源 | 参数化写法 | 等级 |
+|---|---|---|
+| **Schottenloher Thm 6.12** | 直接用 c：h_{p,q}(c) = (1/48)[(13−c)(p²+q²) + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c] | L1 |
+| **Feigin–Fuchs Thm 3.1** | **不出现 h_{r,s}**，用无根号的成对多项式 Φ_{α,β}(h,c)（见 §34.2(b)） | L1 |
+| **Schottenloher Thm 6.13.2 / 物理书** | c(m) = 1 − 6/(m(m+1))，h_{p,q}(m) = (((m+1)p − mq)² − 1)/(4m(m+1)) | L1（Schottenloher 那半） |
+| **c = 13 − 6(t + 1/t)** 型（任务书提到的另一种） | **本轮在任何已核实来源里都没见到**；Kac–Raina / Iohara–Koga 可能用它，但都没拿到正文 | **L0** |
+
+**我做的三次数值验算（researcher 推断）**，用来确认三种写法互相自洽、可以放进同一张卡：
+- Schottenloher 的 h_{p,q}(c) 在 c = 1 时给 (p−q)²/4；FF 的 Φ_{2,1}(h,1) = (h − 1/4)²。✓ 一致。
+- c = 1/2（m = 3）：Schottenloher 给 h_{2,1} = 1/2、h_{1,2} = 1/16，与 Thm 6.13.2 的 minimal-model 公式一致；
+  FF 的 Φ_{2,1}(h, 1/2) 展开 = h² − 0.5625h + 0.03125 = (h − 1/2)(h − 1/16)。✓ 一致。
+- 由此 **Φ_{α,β}(h,c) = (h − h_{α,β}(c))(h − h_{β,α}(c))**，且 FF 的 det² 形式与
+  det M_N = α_N ∏_{rs≤N}(h − h_{r,s})^{p(N−rs)} 逐项平方后完全吻合。✓
+  （**平方根分支约定**：c < 1 时取 √((c−1)(c−25)) > 0，验算即按此。）
+
+### 34.9 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+**A. `worldsheet.kac-determinant`（statement）的 `sources` 建议改成：**
+
+```yaml
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（LNP 759, pp. 91-102）；Gram 矩阵定义 Definition 6.11, p. 97；Hermite 形式的唯一性 Theorem 6.8, p. 96"
+    note: "L1 逐页核实（math-sources.md §34.3）。三点限制：(a) 该处假设 c,h ∈ R、A^N 是 Hermite 形式的 Gram 矩阵，不是复 (c,h) 的双线性 Shapovalov 形式；(b) 书上写 K_N >= 0，没有写 > 0；(c) 该书把定理归给 [Kac80] = ICM Helsinki 那篇，且把证明外包给 [KR87]/[CdG94]，全章不引 Feigin-Fuchs。"
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982), 第 58 页）"
+    note: "L1 逐页核实（math-sources.md §34.2）。原文形式是 det^2 M_{h,c}(k) = C * prod_{i<=k} prod_{j|i} Phi_{j,i/j}(h,c)^{p(k-i)}，Phi 是 (h-h_{a,b})(h-h_{b,a}) 的无根号展开；C 只被断言『非零』。h,c 取任意复数。英译本 Funct. Anal. Appl. 16 (1982) 114-126 的编号与页码未核实。"
+  - ref: kac-1979
+    loc: "pp. 441-445（内部编号未核实，不得写 Theorem 1）"
+    note: "Feigin-Fuchs 1982 的参考文献 [2] 逐字就是本条，Теорема 3.1 标注 (см. [2])。正文未获取。"
+```
+**⚠ 同时给 auditor 的一条**：卡面 statement 现在写「α_N 是与 (c,h) 无关的**正**常数」。
+**「正」在本轮两个来源里都无据**（FF：非零；Schottenloher：≥ 0）。
+按「状态只能实话实说」，要么在 statement 里改成「非零常数」（那是**新建节点 + superseded_by**），
+要么在 note 里写明「正性未由所引来源支持」。**我不替 curator 做这个决定。**
+
+**B. `worldsheet.kac-determinant--via-feigin-fuchs`（derivation）建议：**
+- `feigin-fuchs-1982` 的 `loc` 由 `"§2（完整证明）"` 改为 **`"§3.2 Теорема 3.1（陈述）+ §4.2 «Доказательство теоремы 3.1»（证明，俄文原刊第 62 页）"`**；
+- `kac-1979` 的 `loc` 去掉 `"Theorem 1（陈述与证明概要）"`，改为 `"pp. 441-445（编号未核实）"`；
+- `summary` 里「数学界接受为定理」可保留，但**「Kac 给出公式并概述证明」无据**——
+  FF 原文只说「Кацу удалось вычислить определитель…」（Kac 算出了这个行列式），
+  且 FF 自称提供的是**新证明**，同时把「可约性问题已由 Kac 1979 解决」写在明处（§34.2(a)）。
+- 若要引 ICM 那篇，**必须用新 key `kac-1980-icm`**，不要复用 `kac-1979`。
+
+**C. 状态**：本节点上限 `rigorous`（§34.7）；`formalized` 现在**不可能**。
+
+### 34.10 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Kac 本人出版目录** | `math.mit.edu/~kac/publications.pdf` | **成功**（落盘 159 KB → 读图 p.1–3；#30/#31/#32 三条逐字） |
+| **Feigin–Fuchs 1982 俄文全文** | `mathnet.ru/php/getFT.phtml?jrnid=faa&paperid=1619&what=fullt` | **成功**（落盘 2 MB 扫描 PDF，17 页读完 p.47–63；**PDF 页 = 刊页 − 46**） |
+| Math-Net.Ru 期号定位 | `…/archive.phtml?jrnid=faa&wshow=issue&year=1982&volume=16&issue=2` | 成功（**俄文页面回来是乱码**，但 `paperid` 与页码可用；英文页 `mathnet.ru/eng/faa1619` 正常） |
+| **Schottenloher Ch. 6** | `…/~schotten/LNP-cft-pdf/06_978-3-540-68625-5_Ch06_23-08-08.pdf` | **成功**（落盘 302 KB，全章 12 页读完；**PDF 页 = 书页 − 86**） |
+| **Kytölä arXiv:2510.21741** | `arxiv.org/pdf/2510.21741` | **成功**（落盘 1.2 MB；读 p.2–3、12–13、14–16） |
+| Kytölä Lean 仓库目录 | `github.com/kkytola/VirasoroProject/tree/master/VirasoroProject` | 成功（21 个 .lean 文件名） |
+| DMS 页码定位 | Google Books `books.google.com/books?id=keUrdME5rhIC&q=…` | 成功（p. 205；**控制查询无命中 ⇒ 控制通过**） |
+| Kac LNP 94 正文 | `link.springer.com/chapter/10.1007/3-540-09238-2_102` | **失败：303 → `idp.springer.com/authorize`** |
+| Kac LNP 94 纸本 | archive.org `title:(group theoretical methods in physics)` | **失败**：只有 Montreal 1976 / Cocoyoc 1980 / Trieste 1983 三卷，**没有 Austin 1978（LNP 94）那卷** |
+| **ICM 1978 Helsinki Vol. 1 正文** | `mathunion.org/fileadmin/ICM/Proceedings/ICM1978.1/ICM1978.1.ocr.pdf` | **失败：30 MB，`maxContentLength size of 10485760 exceeded`** |
+| ICM 1978 Vol. 1（archive.org 两个副本） | `proceedingsofint0001inte_c4t9` / `…_n1u1` | 元数据可读；**`fulltext/inside.php` 与 `_djvu.txt` 均 403**（借阅限制项，与 GS 1984 那本公开重印集不同） |
+| Iohara–Koga Ch. 4 | `link.springer.com/chapter/…_4`；Google Books `vid=ISBN9780857291592` | **双失败**（认证墙 / 无预览） |
+| zbMATH 查询页 | `zbmath.org/?q=…` | **失败：403**（**新增死路**） |
+| MathSciNet MR Lookup | `mathscinet.ams.org/mrlookup?au=…&ti=…` | **失败**：`ti=` 参数无效，只回搜索表单或无关的 Kac 条目；**不要再试** |
+| Springer 章 PDF 直链 | `link.springer.com/content/pdf/10.1007/978-1-4757-0363-4_3.pdf` | **失败：303 → 认证墙**（`content/pdf/` 也不例外） |
+| ouci.dntb.gov.ua | `ouci.dntb.gov.ua/en/?s=<DOI>` | 失败（只回首页，未命中记录） |
+
+> **新增活路**：**Math-Net.Ru 是俄文老论文的稳定入口**——`…/php/getFT.phtml?jrnid=<刊>&paperid=<id>&what=fullt`
+> 直接给整篇扫描 PDF，落盘后 `Read pages` 读图即可（本轮 17 页公式全部可判读）。
+> 期号页用 `…/php/archive.phtml?jrnid=<刊>&wshow=issue&year=&volume=&issue=` 定位 `paperid`。
+> **新增死路**：zbMATH 查询页 403；`mathscinet.ams.org/mrlookup` 的 `ti=` 无效；
+> archive.org 的**借阅限制卷**（`fulltext/inside.php`、`_djvu.txt` 一律 403）——
+> 与 `reference_archive-org-reprint-fulltext-route` 记的公开重印集不是一回事，**先看该项是否 lending-restricted**。
+
+**未解决 / 留给下一轮：**
+
+- **Q23** **Kac, LNP 94 (1979), 441–445 的正文与内部编号（L0）。** 图里现写的 `Theorem 1` **无任何证据**。
+  Springer 认证墙 + archive.org 无此卷。可能的下一招：找一篇**逐字引用了它的定理号**的论文，
+  或找 LNP 94 的**重印/图书馆扫描**（该卷 = *Group Theoretical Methods in Physics*, Austin 1978,
+  eds. Beiglböck–Böhm–Takasugi，DOI 10.1007/3-540-09238-2_102）。
+- **Q24** **ICM Helsinki 1978 (299–304) 的正文（L0）：它到底含不含 Virasoro 的行列式公式？**
+  这一条决定 Schottenloher 的 [Kac80] 归属是否准确，也决定 FGZ ref 10 的解释。
+  IMU 官方 PDF 30 MB 超上限——**需要一个能分页取 PDF 的手段**（lead 若有 Bash/curl 可直接切页）。
+- **Q25** **FF 1982 英译本（Funct. Anal. Appl. 16 (1982) 114–126）的编号与页码。**
+  按俄文 p.47–63 ↔ 英译 p.114–126 的线性换算，Theorem 3.1 约在英译 **p. 122**（**未核实，别写进图**）。
+  Springer BF01081626 在认证墙后。
+- **Q26** **FF 1982 俄文 p. 59 首句的定理号究竟是 2.1 还是 3.1**（§34.2(e)）。
+  这句是「Kac 未发表证明」的唯一直接候选证据，值得钉死。
+- **Q27** DMS *Conformal Field Theory* 里 Kac 行列式的**公式号**（L0）与 §7.2 的**逐页确认**。
+- **Q28** Iohara–Koga **Chapter 4「Determinant Formulae」的定理编号**（L0）——与 §30.3 的 Q19 同一堵墙。
+- **Q29** `sources.bib` 里 **`schottenloher-2008` 条目的花括号失衡**（`note = {…}` 在原第 457 行就闭合，
+  其后到 481 行是游离文本，最后多一个 `}`）。**本轮我把第 6 章的补充追加进了最后那段游离文本内部，
+  没有改动括号结构**（避免与别的 agent 冲突）。**建议 lead 单独修一次**。
