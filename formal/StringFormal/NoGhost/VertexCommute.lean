@@ -246,4 +246,49 @@ end OrthogonalMomenta
 
 end Fock
 
+/-! ### The vertex operators of a light-like tower commute -/
+
+section TowerCommute
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+omit [Algebra ℚ R] in
+/-- The momenta of the DDF tower are all proportional to the reference vector, so their
+contractions are `(m n) k_0²`. -/
+lemma dotVec_vertexMomentum (η b : Fin D → R) (m n : ℤ) :
+    dotVec η (vertexMomentum b m) (vertexMomentum b n)
+      = ((m : R) * (n : R)) * dotVec η b b := by
+  rw [dotVec, dotVec, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun μ _ => by simp only [vertexMomentum_apply]; ring
+
+/-- **The vertex operators of a light-like DDF tower commute.**  For `k_0² = 0` the momenta
+`n k_0` of the tower vertex operators are pairwise orthogonal (`(m k_0)·(n k_0) = mn k_0²`),
+so the oscillator parts commute by `Fock.vertexOsc_comm_of_dotVec_zero`, while the zero-mode
+factors `e^{i m k_0·x}`, `e^{i n k_0·x}` are rung shifts and commute trivially.
+
+This is the operator input for the second step of the DDF transverse algebra: in
+`[A^ε_m, A^δ_n]` the whole bracket comes from the transverse oscillators `α^ε_j`, never from
+the exponentials — provided the reference vector is light-like.  For `k_0² ≠ 0` the statement
+is false already for the oscillator parts (the contraction produces the monodromy factor
+`(w/z)^{mn k_0²}`, which is not `1`). -/
+theorem towerVertex_comm_of_isotropic (η b : Fin D → R) (hbb : dotVec η b b = 0)
+    (m n J K : ℤ) :
+    towerVertex η b m J * towerVertex η b n K = towerVertex η b n K * towerVertex η b m J := by
+  have hdot : dotVec η (vertexMomentum b m) (vertexMomentum b n) = 0 := by
+    rw [dotVec_vertexMomentum, hbb, mul_zero]
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [Module.End.mul_apply, Module.End.mul_apply, towerVertex_single, towerVertex_single,
+    towerVertex_single, towerVertex_single,
+    Fock.vertexOsc_comm_of_dotVec_zero η (vertexMomentum b m) (vertexMomentum b n) hdot
+      (J - m) (K - n) P,
+    show j + n + m = j + m + n from by ring]
+
+/-- Lie-bracket form of `towerVertex_comm_of_isotropic`. -/
+theorem lie_towerVertex_towerVertex_of_isotropic (η b : Fin D → R) (hbb : dotVec η b b = 0)
+    (m n J K : ℤ) : ⁅towerVertex η b m J, towerVertex η b n K⁆ = 0 := by
+  rw [LieRing.of_associative_ring_bracket, towerVertex_comm_of_isotropic η b hbb m n J K,
+    sub_self]
+
+end TowerCommute
+
 end StringFormal.NoGhost
