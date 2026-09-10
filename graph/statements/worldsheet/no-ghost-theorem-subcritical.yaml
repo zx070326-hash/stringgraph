@@ -1,0 +1,192 @@
+id: worldsheet.no-ghost-theorem-subcritical
+kind: proposition
+title: 亚临界无鬼定理（Lian–Zuckerman）：D 个自由玻色子的 H_phys/H_0 对所有动量正定当且仅当 (D = 26 且 a = 1) 或 (26 > D ≥ 2 且 a ≤ 1)
+statement: |
+  本陈述是 Lian–Zuckerman 1991 Theorem 3.5 的转写。记号按该文 §3，凡与本项目记号的对应关系
+  都在括号里标出；凡属抽取者的解读而非该文措辞的，在 notes 里单列，不进入本断言。
+
+  【设定】
+  𝒢 = Virasoro 代数（conv.virasoro-standard 的 {L_n} 与中心元 z），
+  𝒢₊ = span{L_n : n > 0}，𝒢₀ = C·L_0 + C·z（相对复形所相对的子代数）。
+
+  物质 Fock 模 V(D,p)（LZ p.569）：Heisenberg 代数由 {α^μ_n : μ = 1..D, n ∈ Z} ∪ {1} 生成，
+    [α^μ_m, α^ν_n] = m g^{μν} δ_{m,-n} 1                                    (LZ 3.1)
+  （g 是 D 维洛伦兹度规，本项目按 conv.metric-mostly-plus 取号差 (−,+,...,+)；
+   LZ 原文对 g 的号差在抽取记录中未逐字登记，见 notes 第 5 条）；
+    V(D,p) = Sym( ⊕_{μ=1}^{D} ⊕_{n≥1} C·α^μ_{-n} )                          (LZ 3.2)
+  建在真空 v_p 上，x·v_p = ⟨p,x⟩ v_p（LZ 3.3）。Virasoro 作用与中心荷（LZ Proposition 3.1(i)）
+    π(L_m) = (1/2) Σ_{n∈Z} :α_{m-n}·α_n: ，  π(z) = D·Id_{V(D,p)}，
+  厄米形式由 (α^μ_n)^† = α^μ_{-n} 与 ⟨v_p, v_p⟩ = 1 诱导（Proposition 3.1(ii)），
+  在 V(D,p) 上**不定**。
+
+  对动量 p 的假设（LZ p.569 逐字：「We will assume that ⟨p,1⟩ = 1, that ⟨p,x⟩ ≠ 0 for some
+  x ∉ C1, that ⟨p, α^μ_0⟩ ∈ R for all μ, and that D ≥ 2.」）：
+    (P1) ⟨p, 1⟩ = 1；
+    (P2) 存在 x ∉ C·1 使 ⟨p, x⟩ ≠ 0；
+    (P3) ⟨p, α^μ_0⟩ ∈ R 对所有 μ = 1..D；
+    (P4) D ≥ 2。
+
+  最高权参数 h：LZ Theorem 3.5 的假设行是 h ∈ (p·p)/2 + Z₊。按 LZ p.570 证明 (i) 的首句
+  「V(D,p)[−h] is the eigenspace of −L₀ with eigenvalue −h」，h 就是 L₀ 本征值，
+  即本项目 conv.intercept-sign-a 中物理态条件 (L₀ − a)|ψ⟩ = 0 里的**截距 a**。
+  （LZ 括注称 h 为 "Regge slope" 是术语错误，见 notes 第 1 条。）
+  h ∈ (p·p)/2 + Z₊ 与本项目 conv.alpha-prime-regge 的质量壳 α′m² = N − a 在 α′ = 1/2、
+  m² = −p·p 下一致：N = h − (p·p)/2 ∈ Z₊ 是振子能级。
+
+  空间：
+    V(D,p)^{𝒢₊}[−h] := { v ∈ V(D,p) : L_n v = 0 ∀ n > 0,  L₀ v = h v }
+                     （= 本项目 worldsheet.old-covariant-physical-states 在截距 a = h、
+                        动量 p 处的 H_phys(p)；见 notes 第 6 条，该对应是抽取者解读）；
+    rad := 该空间中与该空间全体向量正交的向量构成的子空间（零模态，本项目的 H_0(p)）；
+    L(c′, h′) := 中心荷 c′、最高权 h′ 的**不可约**最高权 Vir 模，即 Verma 模 M(c′,h′)
+                 的不可约商（LZ Remark 3.2(ii)；Verma 模见 worldsheet.verma-module）；
+    H^0_∞(𝒢, 𝒢₀; ·) := 次数 0 的相对半无限（= BRST）上同调，复形与微分见
+                 worldsheet.brst-quantization 的数学化对应（notes 第 7 条）。
+
+  【断言（LZ Theorem 3.5，设 (P1)–(P4) 与 h ∈ (p·p)/2 + Z₊）】
+
+  (i) 存在典范**等距**（isometry，保厄米形式的线性双射）
+        V(D,p)^{𝒢₊}[−h] / rad  ≅  H^0_∞( 𝒢, 𝒢₀ ; V(D,p) ⊗ L(26 − D, 1 − h) )。
+
+  (ii) (i) 中的空间**对每个满足 (P1)–(P3) 的 p 都幺正（正定）当且仅当** (D, h) 取
+        D = 26 且 h = 1，   或   26 > D ≥ 2 且 h ≤ 1。
+      （D 取整数时「26 > D ≥ 2」即「2 ≤ D ≤ 25」。逐字原文见 sources 的 loc。）
+
+  【本陈述的范围（明确不断言的事）】
+
+  (a) (ii) 是**对 p 全称量化之后**的等价：右端条件等价于「对一切满足 (P1)–(P3) 的 p，
+      左端商空间正定」。故由「当且仅当」的反方向只能得到：(D,h) 落在两分支之外时**存在**
+      某个这样的 p 使商空间不正定（已模去 rad，不正定即含负模向量）。本陈述不给出该 p 的
+      显式构造，也不断言对**每个** p 都出现负模。特别地，D > 26 且 h = 1 落在两分支之外，
+      故由 (ii) 得存在负模 p——这与 worldsheet.no-ghost-theorem-v3 断言 (2) 相容但更弱
+      （v3 的 (2) 不带「存在某个 p」的限定）。
+
+  (b) (i) 右端的因子 L(26 − D, 1 − h) 是中心荷 26 − D 的**补充**不可约 Vir 模，其作用是把 BRST
+      相对复形的总中心荷凑成 D + (26 − D) = 26。它只出现在**上同调一侧**；左端
+      V(D,p)^{𝒢₊}[−h]/rad 只用到 D 个自由玻色子，不含补充模。
+      D = 26、h = 1 时该因子是 L(0, 0) = 平凡一维模，LZ 的设定退化为本项目纯 D 玻色子的设定；
+      26 > D ≥ 2 时该因子**非平凡**，故 (ii) 的亚临界分支虽然断言的是纯 D 玻色子空间的正定性，
+      其**证明**必须经过一个 c = 26 − D 的内部 CFT，与 worldsheet.no-ghost-theorem-v3 的纯
+      DDF 论证不是同一条论证路线。这一差异对断言无影响，对可形式化路径有影响。
+
+  (c) 本陈述**不**断言左端商空间与 (D − 2) 个横向振子的 Fock 空间等距同构。D ≤ 25 时二者
+      **不**同构：由 (i) 与约化公式，左端的分级特征标是 (D−2) 个横向振子的特征标乘以
+      ch L(26 − D, 1 − h)，后者在 D ≤ 25 时不等于 1（数值核对见 notes 第 8 条）。
+      「H_phys/H_0 ≅ 横向 Fock 空间」只在 D = 26、a = 1 成立，那是 worldsheet.no-ghost-theorem-v3
+      断言 (1b) 的内容，不是本节点的内容。
+
+  (d) 本陈述不涉及：D = 1、h ∉ (p·p)/2 + Z₊、不满足 (P1)–(P3) 的 p（特别是不覆盖 v3 中
+      k₀·k = 0 的退化扇区是否被 (P2) 排除——二者的排除条件未做对照）、以及闭弦与超弦。
+
+  (e) 本陈述不断言 D = 26 或 a = 1 由任何原理导出：(D, h) 在此是被判定的参数，不是被推出的值。
+uses_conventions:
+  [conv.virasoro-standard, conv.metric-mostly-plus, conv.intercept-sign-a, conv.alpha-prime-regge]
+sources:
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 3.5, p.570（逐字：'Let D ≥ 2, h ∈ (p·p)/2 + Z₊ : (i) There is a canonical isometry V(D,p)^{G₊}[−h]/rad ≅ H⁰_∞(G, G₀; V(D,p) ⊗ L(26−D, 1−h)). (ii) The above space is unitary for each p iff (D, h) takes the following values D = 26, h = 1 or 26 > D ≥ 2, h ≤ 1.'）"
+    note: |
+      L1：全文 34 页逐页读毕，Theorem 3.5 所在页做过单页重读复核
+      （literature/extractions/primary-sources-round2.md §1.6）。这是本项目目前**唯一**已核实的
+      「(D ≤ 25, a ≤ 1) 分支」成文来源；此前 ms.no-ghost-theorem 审计 B1 把该区域归给
+      Brower 1972，按 primary-sources-round2.md §3 的证据**不成立**（Brower 摘要限定在 unit
+      Regge intercept）。
+      **不要照抄 LZ 紧随其后的括注「The number h is called the "Regge slope" in the physics
+      literature」**——那是术语错误，h 是截距不是斜率（notes 第 1 条）。
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 3.5 的证明末句, p.571（逐字：'Thus V(D,p)^{G₊}[−h]/rad is unitary for all p iff ch_q L(26−D, 1−h) = sign_q L(26−D, 1−h), i.e. iff the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h), as given above.'）"
+    note: |
+      L1 逐字。这一句是本节点挂 worldsheet.verma-module 依赖的直接依据：判据被归结为
+      Verma 模 M(26−D, 1−h) 的半正定性。**注意最后一句「The latter is equivalent to precisely
+      the conditions on (D,h)」在此处没有给出引文**——把它接到 Kac 行列式 / Kac–Kazhdan 的那一步
+      在抽取记录里只有转述（§8、§9.3 提到 LZ Lemma 3.17、Remark 3.15），没有逐字，
+      故推导节点把 worldsheet.kac-determinant 标为 inferred。
+  - ref: lian-zuckerman-1991
+    loc: "§3 的模假设：Fock 模定义与对 p 的四条假设 p.569（(3.1)–(3.3)）；Proposition 3.1（(i) π(L_m)、π(z) = D·Id；(ii) hermitian、⟨v_p,v_p⟩ = 1、α^{μ†}_n = α^μ_{-n}；(iv) dim V(D,p)[λ] < ∞；(v) V(D,p) 是 G₋-free），Remark 3.2(ii)（M(c,h)/L(c,h) 记号），Proposition 3.4（ch_q V(D,p) = q^{p·p/2} φ(q)^{−D}）"
+    note: |
+      L1。Proposition 3.1 在 LZ 中标注来源为 "[GSW, FGZ]"，即该文自己把 Fock 模的这些性质
+      归给 Green–Schwarz–Witten 与 FGZ 1986，不作为本文的新结果。
+      (v) 的 G₋-free 是消灭定理（Theorem 2.25 / Corollary 2.26）的关键假设。
+  - ref: lian-zuckerman-1991
+    loc: "§1 全局假设 A1–A5, p.550；范畴 O（Definition 1.2）与 O₀（Definition 1.3）；相对子复形 C*_∞(G,A;V) 的定义, p.556；Definition 1.10 与 Proposition 1.11(i)（d² = 0）"
+    note: |
+      L1。A5 只处理 𝒢₀^(1) = 0（Neveu–Schwarz 型），对非超的 Virasoro 自动满足。
+      **重要否定结论**：Proposition 1.11(i) 的 d² = 0 对任意 V ∈ 𝒪 **无条件**成立且不含 26；
+      26 只出现在 Proposition 3.3(iii)，且是单向的「(∧_∞𝒢, η) is a 𝒢-module **if**
+      β̄ = −26z′ − L′₀」。故本文与 fgz-1986 同型：为 c = 26 **构造**相对复形，不**推导** c = 26。
+      见 primary-sources-round2.md §1.4。
+  - ref: fgz-1986
+    loc: "Theorem 2.7、Theorem 2.8（D = 26、p ≠ 0 的情形；dim H^0 = p_{(24)}(1 − p·p/2)）"
+    note: |
+      D = 26 分支的独立佐证（编号已核实，brst-cohomology-sources.md §1.3）。
+      FGZ 只覆盖 D = 26，**不**覆盖本节点的 26 > D ≥ 2 分支；LZ 1991 是把 FGZ 的结果
+      推广到带补充模 L(26−D, 1−h) 的情形。LZ 参考文献 [FGZ] 即此文。
+  - ref: thorn-1984
+    loc: "Nucl. Phys. B248, 551–569；仅 INSPIRE 逐字摘要（L2），正文未获取"
+    note: |
+      物理侧的历史候选来源，**不作为本节点的数学依据**。摘要逐字：「… we use the Kac formula
+      to discuss the validity of the no-ghost theorem of dual models in a more general setting
+      than the original proofs of that theorem.」——"more general setting" 与 Kac 行列式路线都与
+      本节点吻合，但**摘要没有写出条件本身**，正文未获取（Elsevier 403）。
+      LZ 1991 把「D 维玻色 Fock 空间的无鬼定理」归给 [GT, T1, LZ, FGZ] 四篇，其中 [T1] 就是本文
+      （不是 thorn-1987）。找扫描件的钥匙是报告号 UFTP-84-004。见 primary-sources-round2.md §4。
+tags:
+  [bosonic-string, unitarity, critical-dimension, old-covariant, brst, cohomology, representation-theory]
+notes: |
+  【本节点与 worldsheet.no-ghost-theorem-v3 的分工】
+  v3 覆盖 (D = 26, a = 1) 的等距同构 + (D > 26, a = 1) 的负模，论证走 DDF 算子，来源是
+  goddard-thorn-1972 / goddard-2008 / fgz-1986。本节点覆盖**判定问题**：在哪些 (D, a) 上
+  H_phys/H_0 对所有动量正定。两者在 (D = 26, a = 1) 上重叠且相容，但断言的内容不同——
+  v3 给出与 24 个横向振子的等距同构（本节点不给），本节点给出全部 (D, a) 的判据（v3 不给）。
+  故不是取代关系，v3 **不**加 superseded_by。
+
+  【必须一起读的四条读法说明（primary-sources-round2.md §1.6）】
+  1. **LZ 的 h 是截距 a，不是 Regge 斜率。** LZ 在 Theorem 3.5(ii) 后括注「The number h is
+     called the "Regge slope" in the physics literature」是**术语用错**：物理文献里 Regge 斜率
+     是 α′，截距才是 α₀ = a。判定依据是 LZ 自己在 p.570 证明 (i) 首句写的
+     「V(D,p)[−h] is the eigenspace of −L₀ with eigenvalue −h」——h 是 L₀ 本征值。
+     引用本结果时**不要照抄 "Regge slope" 措辞**。
+  2. **补充模。** LZ 的 (i) 右端是 V(D,p) ⊗ L(26 − D, 1 − h)，26 > D ≥ 2 时补充模非平凡。
+     见断言范围 (b)：左端不含补充模，故 (ii) 断言的对象仍是纯 D 玻色子的 H_phys/H_0；
+     补充模是**证明手段**不是**断言对象**。这是本节点与 v3 之间最容易被误读的一点。
+  3. **下界 D ≥ 2。** 这是 LZ §3 Fock 模假设 (P4)，ms.no-ghost-theorem 审计 B1 算出的区域
+     「(D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)」**没有**这条下界。引用本节点覆盖 B1 时必须补上。
+  4. **对 p 的四条假设**照抄在陈述的 (P1)–(P4)。(P2)「⟨p,x⟩ ≠ 0 for some x ∉ C1」排除了某类
+     退化动量；它与 v3 排除的 k₀·k = 0 扇区**是否是同一个排除**未做对照（断言范围 (d)）。
+
+  【另外三条本项目自己加的登记】
+  5. **度规号差。** LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 里没有逐字登记。
+     本节点按 conv.metric-mostly-plus 读作 (−,+,...,+)：若 g 正定则 V(D,p) 正定、(ii) 的
+     判据将平凡成立，与 LZ 得到非平凡条件矛盾，故 g 必不定；再由 (P3)「⟨p,α^μ_0⟩ ∈ R for all μ」
+     与 D = 26 分支同 FGZ 的 V(R^{25,1}, p) 吻合，读作洛伦兹号差 (1, D−1)。
+     **这一步是本项目的推断，不是 LZ 的逐字措辞**，已登记为推导节点的 gap。
+  6. **左端 = 本项目的 H_phys/H_0。**「V(D,p)^{𝒢₊}[−h]/rad 就是
+     worldsheet.old-covariant-physical-states 的 H_phys(p)/H_0(p)」是抽取者的对照解读
+     （primary-sources-round2.md §1.6 读法说明 3），**LZ 全文没有出现 "old covariant" 字样**。
+     对照的依据是定义逐条相同：L_n v = 0 (n>0)、L₀ v = h v、模去零模态。
+     已登记为推导节点 depends_on 上的 inferred 说明。
+  7. **相对上同调 = 本项目的 BRST 相对上同调。** LZ 的 C*_∞(𝒢, 𝒜; V)（𝒜 = 𝒢₀ = CL₀ + Cz）
+     对应 worldsheet.brst-quantization 里 b₀|ψ⟩ = 0、L₀|ψ⟩ = 0 的相对复形。
+     primary-sources-round2.md §1.4 明确写：由 Definition 1.6 的 ⟨β̄,x⟩ 项与 Proposition 3.3(iii)
+     的 β̄ 得 η(z) = −26，故 θ(z)ω = 0 等价于 π(z) = 26——**这段是抽取者的推导，LZ 正文没有把它
+     写成编号命题**，故推导节点把 worldsheet.brst-quantization 标为 inferred。
+
+  【与本项目已有数值核对的一致性（curator 2026-09-10 独立复核）】
+  8. ms.no-ghost-theorem 第二轮审计在 α′ = 1/2、mostly-plus、能级 N ≤ 3 上直接算过物理态
+     Gram 矩阵：D = 26、a = 1 时正特征值个数逐级 24 / 324 / 3200 = p₂₄(N)；
+     D = 25、a = 1 时无负模但个数是 23 / 300 / 2876，**严格大于** p₂₃(N) = 23 / 299 / 2852。
+     本节点的 (i) 精确解释这组数：D = 25、h = 1 时补充模是 L(26−25, 1−1) = L(1, 0)，
+     其特征标 ch L(1,0) = (1 − q)·∏_{n≥1}(1 − q^n)^{−1} = 1 + 0·q + q² + q³ + 2q⁴ + …；
+     而 p₂₃ 的生成函数乘以 ch L(1,0) 逐级给出
+       1, 23, 300, 2876, 22450, …
+     与审计的 23 / 300 / 2876 **逐项吻合**。D = 26 时补充模是 L(0,0)（平凡一维，ch = 1），
+     乘积退化为 p₂₄(N) = 24 / 324 / 3200，同样吻合。
+     这是对「左端是纯 D 玻色子空间、补充模只进上同调侧」这一读法的独立数值佐证，
+     也解释了为什么 D ≤ 25 时商空间严格大于横向 Fock 空间（断言范围 (c)）。
+     该核对是本项目的初等特征标计算，**不是 LZ 的原文内容**。
+
+  【形式化提示】
+  本节点比 v3 更接近可形式化的形式（判据 = Verma 模半正定性 = Kac 行列式的符号分析），
+  但它依赖 worldsheet.verma-module 中**尚未形式化的 PBW 基**部分，且需要 Kac 行列式公式。
+  形式化岛 1 的目标仍是 v3；本节点作为 v3 的判定侧补充登记。
+author: curator
+created: "2026-09-10"

@@ -21,12 +21,25 @@ sources:
     loc: "§4.3，Q_B^2 的计算与结论 Q_B^2 = 0 ⟺ c^m = 26，约 eq. (4.3.2)–(4.3.6)"
     note: 公式号为近似定位。Polchinski 把物质中心荷写作 c_m，本节点改写为 c^m 以避开与鬼场模式 c_m 的记号冲突。
   - ref: kato-ogawa-1983
-    loc: "摘要与正文，定理编号未核实"
+    loc: "摘要；正文未获取，定理编号未核实"
     note: |
-      本命题（Q_B 幂零 ⇒ 临界维数）的原始来源。摘要逐字：「There an interesting relation
-      between critical dimension and BRS symmetry is noticed」。正文未获取（ScienceDirect 403），
-      定理编号未核实，且未核实它给出的是「⟹」还是本节点写的「当且仅当」。
-      见 literature/extractions/brst-cohomology-sources.md §6。
+      本命题（Q_B 幂零 ⇒ 临界维数）的原始来源。**INSPIRE 记录 177600 的摘要，逐字**
+      （primary-sources-round2.md §6，L2，分段以符合引用长度限制，段间无删节）：
+        "Covariant canonical quantization of the bosonic string is performed, based on the BRS
+         invariance principle." /
+        "Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition
+         Q_B |phys⟩ = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner." /
+        "There an interesting relation between critical dimension and BRS symmetry is noticed;
+         namely, the conditions D = 26 and α_0 = 1 for the space-time dimension D and the
+         zero-intercept α_0 of leading trajectory are required by the nilpotency Q_B² = 0 of
+         the BRS charge." /
+        "In addition, ghost number fractionization is observed in this system."
+      **方向已核实为「⟹」**（"the conditions D = 26 and α_0 = 1 … are **required by** the
+      nilpotency Q_B² = 0"）；**本节点写的「当且仅当」，其反方向（c^m = 26 ⟹ Q_B² = 0）
+      在该摘要中没有陈述，目前无文献来源**，只有 Polchinski §4.3 的形式计算支撑
+      （另见更弱的独立节点 worldsheet.brst-nilpotent-at-c26）。
+      正文未获取（ScienceDirect 403），定理编号未核实。报告号 KUNS 637（INSPIRE，L2；
+      检索后端 L4 对该归属有异议，未裁决）。见 primary-sources-round2.md §6。
   - ref: fgz-1986
     loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
     note: |
@@ -46,5 +59,19 @@ notes: |
   2026-09-10 来源核实后，本节点唯一的推导 --via-nilpotency 由 rigorous 降为 physical-argument：
   原先标 rigorous 所依据的两条数学来源都不成立（FGZ 假设 c = 26 而非推出它；
   Lian–Zuckerman 1989 是 super-Virasoro 论文，属误引）。陈述本身未改。
+
+  【数学侧文献一律不推导 c = 26（2026-09-10 第二轮核实，primary-sources-round2.md §1.4）】
+  fgz-1986 与 lian-zuckerman-1991 **都不推导 c = 26，两篇都把它作为相对复形的定义条件**：
+    - FGZ §2.1 逐字「from this point on we will assume that π(c) = 26 Id_V」；
+      Proposition 1.2 只有一句「d² = 0」，不含中心荷条件；26 只在 Proposition 2.1(i)
+      的鬼场表示 ρ(c) = −26 Id 中出现。
+    - LZ 1991 Proposition 1.11(i) 的 d² = 0 对任意 V ∈ 𝒪 **无条件**成立且不含 26；
+      26 在全文出现的**唯一**位置是 Proposition 3.3(iii)，且是**单向**的
+      「(∧_∞𝒢, η) is a 𝒢-module **if** β̄ = −26z′ − L′₀」（单页重读复核，排印确为 if）。
+      LZ 的相对复形取 𝒜 = 𝒢₀ = CL₀ + Cz，θ(z)ω = 0 才把 π(z) = 26 作为条件带进来。
+  故「Q_B² = 0 ⟺ c^m = 26」这条判据在已核实的数学文献里**没有对应的编号定理**；
+  本节点目前的可追溯性只到 Kato–Ogawa 1983 摘要（方向 ⟹）与 Polchinski §4.3 的形式计算。
+  反方向（c^m = 26 ⟹ Q_B² = 0）另有一个更弱、来源更清楚的节点
+  worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2），本节点的「当且仅当」不由它支撑。
 author: curator-critdim
 created: "2026-09-10"

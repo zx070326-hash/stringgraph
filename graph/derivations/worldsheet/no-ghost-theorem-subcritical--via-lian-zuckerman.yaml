@@ -1,0 +1,136 @@
+id: worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman
+target: worldsheet.no-ghost-theorem-subcritical
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.virasoro-algebra
+    note: |
+      LZ 的 𝒢 就是 Virasoro 代数（含中心元 z），Fock 模上的表示由 Proposition 3.1(i) 给出
+      π(L_m) = (1/2) Σ_n :α_{m-n}·α_n:、π(z) = D·Id。归一化与 conv.virasoro-standard 一致
+      （LZ 的中心荷取值 D 对应自由玻色子每个方向贡献 1）。
+  - id: worldsheet.verma-module
+    note: |
+      非 inferred：LZ Theorem 3.5 证明末句（p.571）逐字把判据归结为「the Verma module
+      M(26−D, 1−h) is positive semi-definite」；Remark 3.2(ii) 定义 M(c,h) 为最高权
+      cz′ + hL′₀ 的 Verma 模、L(c,h) 为其不可约商。本项目的 worldsheet.verma-module
+      与之逐条相同（最高权向量、L_n|h⟩ = 0 (n>0)、L₀|h⟩ = h|h⟩、按 L₀ 分级）。
+      **约定差异**：本项目记 V(c,h)，LZ 记 M(c,h)；本项目节点的 V(c,h) 与 LZ 的 M(c,h)
+      是同一对象，LZ 的 L(c,h) 在本项目图中尚无独立节点（见 gaps）。
+  - id: worldsheet.kac-determinant
+    inferred: true
+    note: |
+      LZ 证明末句只写到「iff the Verma module M(26−D, 1−h) is positive semi-definite.
+      The latter is equivalent to precisely the conditions on (D, h), as given above.」——
+      **最后这一步（Verma 模半正定 ⟺ 两分支条件）在抽取记录的逐字引文里没有给出引文**。
+      literature/sources.bib 的 kac-kazhdan-1979 条与 primary-sources-round2.md §8/§9.3
+      转述说该步用的是 Kac–Kazhdan 行列式公式（定位到 LZ Lemma 3.17、Remark 3.15），
+      但那是转述（无 L1 逐字），且 primary-sources-round2.md §1.6 列举 Theorem 3.5 所依赖的
+      全部模假设时**没有**列出 Lemma 3.17。
+      另有一层不确定：本项目 worldsheet.kac-determinant 的一手来源是 kac-1979 / feigin-fuchs-1982
+      的 Kac 行列式公式，而 LZ 引的是 Kac–Kazhdan 1979（[KK]，bib key kac-kazhdan-1979，
+      内容未核实），二者相关但不是同一篇。
+      故按项目规则 5 标 inferred：这条边是「该步骤在数学上必须经过 Kac 行列式/Kac–Kazhdan
+      的半正定区域分析」的推断，不是在指定 loc 处能读到的引用。待 researcher 复核 LZ p.571–579
+      的 Lemma 3.17 / Remark 3.15 后可改为非 inferred 并补 loc。
+  - id: worldsheet.brst-quantization
+    inferred: true
+    note: |
+      LZ 的相对复形 C*_∞(𝒢, 𝒜; V)（Definition 1.10、1.12(i)，𝒜 = 𝒢₀ = CL₀ + Cz，p.556）
+      与本节点定义的 H^0_∞ 对应本项目 worldsheet.brst-quantization 里 b₀|ψ⟩ = 0、L₀|ψ⟩ = 0
+      的相对 BRST 复形。**LZ 正文没有把这一对应写成编号命题**：
+      primary-sources-round2.md §1.4 明确标注「由 Definition 1.6 的 ⟨β̄,x⟩ 项与
+      Proposition 3.3(iii) 的 β̄ 得 η(z) = −26，故 θ(z)ω = 0 等价于 π(z) = 26……
+      上面这段推导是我的解读，curator 若采用须标 inferred: true」。照办。
+      注意 LZ 侧的总中心荷 26 是由 V(D,p) ⊗ L(26−D, 1−h) 凑出的（π(z) = D + (26−D) = 26），
+      不是本项目 brst-quantization 默认的「物质 = D 个自由玻色子且 c^m = D」；
+      brst-quantization 作为定义允许一般 c^m 的物质 CFT，故可用作依赖，但这一差异见 gaps。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: true
+    note: |
+      本节点断言 (ii) 的对象 V(D,p)^{𝒢₊}[−h]/rad 与本项目 H_phys(p)/H_0(p) 的等同，是
+      primary-sources-round2.md §1.6「读法说明 3」的对照解读：**LZ 全文没有出现
+      "old covariant" 字样**，也没有把该空间与物理文献的物理态空间写成一条编号对应。
+      对照的依据是两边定义逐条相同（L_n v = 0 ∀n>0；L₀ v = h v；模去零模态），
+      加上 conv.intercept-sign-a 下 h = a。故标 inferred。
+sources:
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 3.5(ii), p.570"
+    note: |
+      本推导的主来源，逐字条件见目标陈述 sources 第一条。L1（全文 34 页逐页读毕，
+      Theorem 3.5 所在页单页重读复核），见 literature/extractions/primary-sources-round2.md §1.6。
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 3.5(i) 与其证明, p.570–571（等距同构；证明末句把判据归结为 Verma 模 M(26−D,1−h) 的半正定性，判据的中间形式是 ch_q L(26−D,1−h) = sign_q L(26−D,1−h)）"
+    note: L1 逐字，见目标陈述 sources 第二条。
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 2.13（约化公式 H*_∞(𝒢,𝒢₀; W ⊗ M(−β̄−λ)) ≅ H*(𝒢₊, W)[λ]）, p.562；Theorem 2.25, p.566（W hermitian、𝒢₋-free、dim W[α] < ∞ ⇒ H^n_∞ = 0 (n≠0) 且 H^0_∞ ≅ W^{𝒢₊}[λ]/rad，且是等距）；Corollary 2.26（Vanishing Theorem）, p.567；Corollary 2.27（维数与 signature 的 Euler–Poincaré 公式）, p.567；Corollary 2.28（作者自命名 \"No-ghost Theorem\"）, p.568"
+    note: |
+      Theorem 3.5 的一般理论输入，编号均已核实（L1）。
+      **三条转录疑点必须随引用一起传递**（primary-sources-round2.md §1.5、§10.6）：
+      (a) Theorem 2.25 的假设行在扫描件里渲染为「W ∈ 𝒪 be hermitian, 𝒢-free」，按上下文
+          （Lemma 2.21/2.22 与 Proposition 3.1(v)）应为 **𝒢₋-free**；
+      (b) Corollary 2.26 第二行渲染为「= 0 for n = 0」，按上下文应为 **n ≠ 0**；
+      (c) Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属在扫描下不清晰，**引用该公式本体前
+          必须重新对照原页**（本推导不引用该公式本体，只引用其名称与 iff 结构）。
+      另有编号陷阱：LZ 自己的 Introduction (p.549) 把 Vanishing Theorem 误写成
+      "Corollary 2.19"（p.564 处实为 Remark 2.19），**不要引用 "LZ 1991 Corollary 2.19"**。
+  - ref: lian-zuckerman-1991
+    loc: "Proposition 3.1（Fock 模性质，LZ 标注来源为 \"[GSW, FGZ]\"）, p.569；Proposition 3.3, p.570（(iii) '(∧_∞𝒢, η) is a 𝒢-module if β̄ = −26z′ − L′₀'；(iv) Spec）；Proposition 3.4（ch_q / sign_q 显式公式）"
+    note: |
+      L1。Proposition 3.3(iii) 的 "if"（不是 "iff"）经单页重读复核，是 26 在本文出现的**唯一**
+      位置，且属鬼系统一侧；这决定了本文**不能**用来升级 worldsheet.critical-dimension-brst--via-nilpotency
+      （见 primary-sources-round2.md §1.4 与该推导的 gaps）。
+  - ref: fgz-1986
+    loc: "Theorem 2.7、Theorem 2.8（D = 26、p ≠ 0）"
+    note: |
+      D = 26 分支的独立佐证（编号已核实）。FGZ 不覆盖 26 > D ≥ 2 分支。
+      LZ 的 Lemma 2.21 自注「(cf. [FGZ, Theorem 1.12])」，即 LZ 的消灭定理路线与 FGZ 同源。
+  - ref: thorn-1984
+    loc: "Nucl. Phys. B248, 551–569；仅 INSPIRE 逐字摘要（L2），正文未获取"
+    note: |
+      **不作为本推导的依据**，仅登记归属：LZ 把 D 维玻色 Fock 空间无鬼定理归给 [GT, T1, LZ, FGZ]，
+      其中 [T1] 是本文（Kac 行列式路线，"in a more general setting than the original proofs"）。
+      若日后取得正文，可能成为本节点的第二条独立推导（物理侧）。
+summary: |
+  论证是 LZ 1991 §2 的一般理论 + §3 的自由玻色子实例，全部在 Virasoro 代数的相对半无限
+  （BRST）上同调框架内进行，不含路径积分或形式重排。
+
+  (1) 一般理论（§2，均在范畴 𝒪 与全局假设 A1–A5 下）：
+      Theorem 2.1 给出 ℒ-free 消解；Definition 2.2 / Proposition 2.3 给出约化复形与 d̄₀² = 0；
+      Proposition 2.12 给出有限滤过；**Theorem 2.13**（约化公式）把带 Verma 模系数的相对上同调
+      算成 H*(𝒢₊, W)[λ]；Lemma 2.21（cf. FGZ Theorem 1.12）给出「W hermitian 且 𝒢₋-free ⇒
+      H^n_∞ = 0 (n ≠ 0)」；Lemma 2.23 给 Poincaré 对偶；**Theorem 2.25** 把 Verma 模换成不可约商
+      L(·)，得到 H^0_∞(𝒢,𝒢₀; W ⊗ L(−β̄−λ)) ≅ W^{𝒢₊}[λ]/rad 且该同构是**等距**；
+      Corollary 2.26 是消灭定理，Corollary 2.27 给 Euler–Poincaré 型的维数与 signature 公式，
+      Corollary 2.28 是作者自命名的 "No-ghost Theorem"（幺正性 ⟺ 特征标与 signature 特征标的
+      常数项相等）。
+
+  (2) 自由玻色子实例（§3）：取 W = V(D,p)。Proposition 3.1 验证 Theorem 2.25 的全部假设——
+      V(D,p) ∈ 𝒪₀、hermitian、逐权有限维、且 **𝒢₋-free**（这一条是关键，(v)）；
+      π(z) = D·Id。Proposition 3.3(iii) 给出鬼系统一侧 β̄ = −26z′ − L′₀，故补充模的中心荷
+      必须是 26 − D，最高权是 1 − h。代入 Theorem 2.25 即得目标陈述的 (i)（等距）。
+
+  (3) 判据（Theorem 3.5(ii)）：由 (i) 的等距，左端正定 ⟺ 右端正定；再由 Corollary 2.27/2.28 的
+      特征标–signature 判据，右端对一切 p 正定 ⟺ ch_q L(26−D, 1−h) = sign_q L(26−D, 1−h)
+      ⟺ Verma 模 M(26−D, 1−h) 半正定（LZ 证明末句逐字）。最后一步（Verma 模半正定的
+      (c,h) 区域）落到 Virasoro 最高权模的幺正/半正定性判定，即 Kac 行列式的符号分析，
+      给出 D = 26, h = 1 或 26 > D ≥ 2, h ≤ 1。
+
+  【为什么标 rigorous】按 docs/STATUS_LEVELS.md 第 4 级：这是发表在 Commun. Math. Phys.
+  135 (1991) 547–580 的数学论文中的**编号定理**，有完整的期刊长文级证明（不是公告体裁），
+  论证在半无限上同调的模范畴中进行（受限模、分级、滤过、消解），定理编号与逐字措辞已由
+  researcher 全文 34 页逐页核实并对关键页做过单页重读复核（primary-sources-round2.md §1.6）。
+  本推导**不**依赖 worldsheet.critical-dimension-brst：LZ 与 FGZ 一样把总中心荷 26 当作
+  相对复形的定义条件，不推导它；故本推导的 rigorous 不受
+  critical-dimension-brst--via-nilpotency 为 physical-argument 的影响。
+gaps:
+  - "【最实质的一条】LZ 证明末句到两分支条件之间的最后一步（'the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h)'）在抽取记录的 L1 逐字里**没有附引文**；把它接到 Kac 行列式 / Kac–Kazhdan 1979 的定位（LZ Lemma 3.17、Remark 3.15）只有转述级证据（primary-sources-round2.md §8、§9.3；bib key kac-kazhdan-1979 的 note）。故 worldsheet.kac-determinant 这条边标 inferred。待复核 LZ p.571–579。"
+  - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中**没有逐字登记**。本节点按 conv.metric-mostly-plus 读作洛伦兹 (1, D−1)，依据是两条推断（g 正定会使判据平凡；D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合），不是原文措辞。若 g 实为 mostly-minus，陈述中 h ∈ (p·p)/2 + Z₊ 的符号与 N = h − p·p/2 的换算需相应翻转。"
+  - "「LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目 H_phys(p)/H_0(p)」是抽取者的对照解读，LZ 全文无 'old covariant' 字样，故 depends_on 上 worldsheet.old-covariant-physical-states 标 inferred。同理「LZ 的相对复形 = 本项目 b₀ = L₀ = 0 的 BRST 相对复形」也是解读（primary-sources-round2.md §1.4 明示须标 inferred），故 worldsheet.brst-quantization 亦标 inferred。这两条是本推导可追溯性上最软的地方：定理本体逐字可靠，把它翻译到本项目对象上的字典不逐字可靠。"
+  - "LZ 的设定与本项目 worldsheet.no-ghost-theorem-v3 的设定在**证明侧**不同：26 > D ≥ 2 分支必须补一个 c = 26 − D 的不可约 Vir 模 L(26−D, 1−h) 才能做 BRST（总中心荷 26）。断言侧不受影响（左端只用 D 个自由玻色子，见目标陈述范围 (b)），但这意味着本推导**不是** v3 的 DDF 论证的推广，形式化时是两条独立路线。D = 26、h = 1 时补充模退化为 L(0,0)（平凡一维），两条路线在临界点重合。"
+  - "LZ 的 D ≥ 2 下界（陈述的 (P4)）与对 p 的三条假设 (P1)–(P3) 在 ms.no-ghost-theorem 审计 B1 算出的区域里**没有**对应物；引用本节点覆盖 B1 时必须补上这四条，否则是过度断言。(P2) 与 v3 排除的 k₀·k = 0 扇区是否是同一个排除，未做对照。"
+  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点（worldsheet.verma-module 只到 Verma 模 M(c,h)，且其 PBW 基与 dim V_N = p(N) 尚未形式化）。建议新建 worldsheet.irreducible-highest-weight-module；在此之前本推导借 verma-module 承载这条依赖。"
+  - "本推导只承接 Theorem 3.5 的 (i)(ii)。LZ §2 的一般理论（Theorem 2.13 约化公式、Theorem 2.25、Corollary 2.26 消灭定理、Corollary 2.28）本身可以各建节点，本项目暂不拆；目前它们只以 sources 的 loc 形式登记。"
+  - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。三条都不影响 Theorem 3.5 本身的逐字条件，但影响本推导 summary 第 (1) 步的转述。"
+  - "从文献到形式化的差距：需要把 (3) 的最后一步（Verma 模 M(c,h) 半正定的 (c,h) 区域）写成可形式化的命题，它等价于 Kac 行列式在该区域非负——本项目 worldsheet.kac-determinant 尚未形式化，worldsheet.verma-module 也缺 PBW（Mathlib v4.33.1 无 PBW）。故本节点短期内不可形式化。"
+author: curator
+created: "2026-09-10"
