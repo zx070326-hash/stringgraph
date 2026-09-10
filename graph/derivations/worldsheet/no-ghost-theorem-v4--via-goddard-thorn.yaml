@@ -17,12 +17,35 @@ depends_on:
       在 v4 未拆时它是 worldsheet.ddf-operators-v4 陈述文本的一部分，故本条不是新依赖，
       只是把已有依赖显式化。来源覆盖沿用 v4（GSW §2.3.3 / GT 1972），
       另加 goddard-2008 作为「physical state = DDF 态 + 零模态」的二手证据。
-  - id: worldsheet.ddf-transverse-oscillator-algebra
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       【2026-09-11 新增，来自 v4 拆卡】本推导第 (1b) 步「其 Gram 矩阵就是 24 个横向振子
       Fock 空间的正定 Gram 矩阵」依赖这条命题。同上，v4 未拆时它是定义卡文本的一部分，
       不是新依赖。来源覆盖沿用 v4。
       注意本条**不含** (A^i_n)† = A^i_{−n}（Gram 矩阵计算还需要它，见下一条依赖）。
+
+      【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】原指
+      worldsheet.ddf-transverse-oscillator-algebra（已 superseded）。那张卡把**两个命题**
+      捆在一起：对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（现为本依赖 v2，陈述逐字去掉末句）
+      与末句「与世界面横向振子 α^i_n 的代数逐字同型」（现为
+      worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators，physical-argument）。
+      **本推导只改指 v2，不加同构卡的边**，理由：
+      (a) 目标陈述 worldsheet.no-ghost-theorem-v4 的 (1b) 断言的是 H_phys(k;k_0)/H_0(k;k_0) 与
+          **横向 DDF Fock 空间** H^⊥(k) 等距同构，H^⊥(k) 通篇由 A^i_{−n} 定义（标题逐字「24 个横向
+          **DDF** 振子的 Fock 空间」）；陈述**从不**声称 H^⊥(k) 与光锥横向振子的 Fock 空间同构，
+          故光锥侧那张卡不是本论证的输入。
+      (b) 本推导 summary 里「其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」一句
+          读起来像在用那个同构，但它实际引用的是 Gram 矩阵的**显式对角元** ∏ n^{d} d!，
+          由 worldsheet.transverse-ddf-fock-gram-matrix（已在本推导依赖中）给出，
+          那套算术只用到 (H1) 对易关系 + (H2) 伴随关系 + 真空归一化，与 α^i_n 无关。
+      (c) 文献侧也没有逐字用到那个同构：goddard-2008 的「physical state = DDF 态 + 零模态」
+          与 fgz-1986 Theorem 2.8 的「All three isomorphic spaces are positive definite」
+          都是在 DDF / 横向空间自身上陈述正定性。
+      **有效状态的后果**：v2 的 effective 由 physical-argument 升为 **rigorous**
+      （推导 --via-zero-mode-bracket，G–N CMP §3.1 的零模李括号路线，拆卡前被末句比较压住），
+      故本条依赖**不再是**本推导的上限。目标 worldsheet.no-ghost-theorem-v4 的 effective
+      **仍是 physical-argument**，瓶颈只剩内积/伴随那一层（worldsheet.ddf-operators-adjoint
+      与 worldsheet.transverse-ddf-fock-gram-matrix，后者被前者封顶）。
   - id: worldsheet.ddf-operators-adjoint
     note: |
       【2026-09-11（二）新增，ms.no-ghost-theorem 第五轮审计建议，lead 已同意】
@@ -49,6 +72,22 @@ depends_on:
       该节点是 worldsheet.ddf-operators-adjoint 第 (2) 条的拆卡产物，旧卡未换代。
       **有效状态不因此变化**：新节点 depends_on 旧卡与 worldsheet.ddf-transverse-oscillator-algebra，
       其 effective 同样是 physical-argument，与本推导既有的上限同级。
+  - id: worldsheet.ddf-contour-equals-mode-sum
+    inferred: false
+    note: |
+      【2026-09-11（六）新增，curator】**本推导走的是文献的围道路线，而它依赖的 DDF 定义卡
+      worldsheet.ddf-operators-v6 是模态和版本**；这条边补上两者之间的字典。
+      逐字锚点：goddard-2008 §5 'Spectrum Generating Algebra', p.11, eq. (5.1)
+      `A^μ_n = (1/2πi) ∮ P^μ(z) V(nk, z) dz`（**L1 逐字**，
+      literature/extractions/gsw-1987-v1.md §2 E1；注意本推导 sources 里 goddard-2008 的 loc
+      指的是该文的**无鬼定理**一节，不是 §5，故此处另给锚点）。
+      本推导 summary 第 (1) 条与 notes 逐字自称「本推导走解析围道路线」，
+      故这条依赖不是新引入的假设，而是把一直隐含的一步显式化。
+      ⚠ **goddard-thorn-1972 与 gsw-1987-v1 的围道写法式号至今 L0**（正文未获取），
+      故「GT 本人逐字用围道」这一点本项目只有间接证据（Goddard 2008 的综述转述）；
+      本条的 inferred: false 依据的是 goddard-2008 (5.1) 这一处 L1 锚点。
+      **有效状态不因此再降**：新依赖的 effective 是 physical-argument，
+      与本推导已有的两条 DDF 对易关系同级，目标的 effective 仍是 physical-argument。
   - id: worldsheet.momentum-tower-fock-space
     note: |
       【2026-09-11（三）新增，立卡后接线】目标陈述 (1b) 断言的空间
@@ -186,6 +225,7 @@ gaps:
   - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
   - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
   - "【2026-09-11 新增；2026-09-11（二）更新；2026-09-11（三）再更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0）。【（三）更新】其中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 也**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，physical-argument），故「在本图中仍无承载节点」一句同样过时；仍未关闭的是它下面三条更基础的缺口——「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」无节点、「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」无节点、指数算符两半的同点重排序无节点（现址：worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条）。Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，塔上的双线性型也未做（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核），且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。【（四）更新，2026-09-11】(1b) 里的另一半——「有了伴随关系与横向振子代数之后，Gram 矩阵**是什么**」——现由 **worldsheet.transverse-ddf-fock-gram-matrix**（推导 --via-oscillator-recursion，status rigorous，条件命题，reviewer 复核待补）承载，已加入本推导的 depends_on。这一半此前是 worldsheet.ddf-operators-adjoint 陈述的第 (2) 条，混在一张 physical-argument 的卡里，看不出「递推本身是严格的、只有前件不严格」。**本推导的 effective 不变**（仍被两条 DDF 对易关系与伴随关系封顶为 physical-argument）；改动的只是可审计性。"
+  - "【2026-09-11（六）新增，curator】**本推导的 A^i_n 是文献的围道积分，而本推导依赖的定义卡 worldsheet.ddf-operators-v6 是模态和**——这两件事是同一个算子，现由新依赖 worldsheet.ddf-contour-equals-mode-sum（physical-argument）承载，其推导 --via-laurent-coefficient-extraction 的 gaps 逐条写明缺口：(a) 形式级数乘积按幂次重排在算子层面未论证（最近的近亲 worldsheet.ope-pole-mode-commutator-dictionary 自身 effective = open，因对象不同未连边）；(b) 围道积分的语义未固定（本项目读作形式留数 [z^{-1}]，而本推导第 (1) 步文献侧论证用的是**形变**围道，两种读法在别处不等价）；(c) 正规序 :·: 与 Lean 的 E-E+ 拆分未对接。**此前这一步是隐含的**：DDF 定义卡在 2026-09-11 由 v5（围道）就地换代到 v6（模态和）时，本推导的 depends_on 跟着换了，但没有人为这一步立节点。现予补上。⚠ 本推导的 effective **不变**（仍是 physical-argument，与两条 DDF 对易关系同级）；改变的是可审计性：ms.no-ghost-theorem 的回译审计从此有一个明确的地方读这条缺口。"
 notes: |
   【2026-09-11（四）：第 (2) 条接上 Lean 见证（curator，本次只改 depends_on（新增一条）
   与「(2) 的动量量词 p ≠ 0 没有逐字来源」那条 gap 的措辞；

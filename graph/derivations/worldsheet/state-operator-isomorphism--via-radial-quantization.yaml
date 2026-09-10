@@ -5,7 +5,12 @@ status: physical-argument
 depends_on:
   - id: worldsheet.operator-product-expansion
   - id: worldsheet.energy-momentum-laurent-modes
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
+    note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.8, eq. (2.8.1)–(2.8.18)，p.63–67（公式号大量经 schrans-2020 核实）"

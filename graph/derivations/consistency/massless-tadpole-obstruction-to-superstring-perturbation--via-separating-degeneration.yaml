@@ -1,0 +1,59 @@
+id: consistency.massless-tadpole-obstruction-to-superstring-perturbation--via-separating-degeneration
+target: consistency.massless-tadpole-obstruction-to-superstring-perturbation
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §7.5, p. 140（(a) 的断言与三条适用域）；§7.5 末–§7.6.1, pp. 140–143, (7.18)–(7.27)（(c) 的论证）；§8.3, p. 174, (8.39)(8.40)（(b)）；§8.3, p. 175（归纳论证，本推导只在 gaps 记录其条件）"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/witten-2012-superstring-perturbation.md EW16/EW17/EW18/EW19）。
+      版本红线：v4（2023-11-05），无期刊版。**§7.2–7.4、§7.6.2–7.7、§8.1–8.2 未读**（同记录 §3.2），
+      故本推导对 (7.18)–(7.22) 之前的铺垫与 §8.2.3 的超对称论证只能按 §7.6.1/§8.3 的回指转述。
+  - ref: witten-2013-overview
+    loc: "arXiv:1304.2832v4, §1, pp. 1–2：步骤 (B)（条件收敛积分的红外处理，超对称版 Deligne–Mumford 紧化作红外正规子）；p. 2 两圈 dilaton tadpole 模型作反例"
+    note: L1（抽取记录 EW4/EW5）。只作 (c) 的作者级概括与 (a) 的反例登记，不承载式号。
+summary: |
+  原文的论证链（式号依 arXiv:1209.5461v4）：
+
+  **(a) tadpole 是障碍（§7.5 p. 140）**：作者直接断言这是「the most critical question」，并说明证明策略
+  是用时空超对称、对亏格归纳。这一条本身是**问题的提出**，不是推导；它的物理内容是：
+  若 g 圈无质量 tadpole 非零，则在分离退化（一个亏格 0 分量带外态、一个亏格 g 分量无外态）处，
+  (7.23) 右边的 ∫ d²q/(q̄q) 对数发散没有被乘以零，g 圈以上的振幅红外发散，微扰真空失稳。
+
+  **(b) 哪一个 tadpole（§8.3 p. 174）**：在超共形形式下，零动量处的 NS 扇区标量顶点算符只有一个 𝒱_φ
+  （十维杂化弦：(8.39) 𝒱_φ = c̃cδ(γ)∂̃X_I DX^I），所以 dilaton 与度规迹的 tadpole 只以**一个线性组合**出现；
+  相应地只有一个 𝒱_{ψ_α}（(8.40)）用于证明它为零。**原文明说**这是超共形形式的特点：在 §2.4.4 的更一般形式里
+  会分别出现两个 tadpole 与两个 𝒱_{ψ_α}。
+
+  **(c) tadpole 为零时（§7.5 末–§7.6.1）**：
+  1. 分离退化附近，g 圈振幅的奇异部分写成 (7.23)：对退化参数 q 的 ∫ d²q/(q̄q)，乘以左右两个分量上的积分；
+  2. 假设无质量 tadpole 为零 (7.24)，右分量积分为零，于是 q = 0 处的对数发散「被 0 乘」（"0/0"），
+     用截断 ε 定义的 𝒜_{g,ε} = ∫_{ℳ̂_ε} F (7.26) 在 ε → 0 有极限——**振幅收敛**；
+  3. "This is not the whole story"：q 是线丛 𝒩^{−1} 的截面而非复数，𝒩^{−1} 拓扑非平凡不能整体平凡化；
+     改变其厄米度量等价于 log ε → log ε + h，极限仍存在但移动 (7.27)；
+  4. 作者把这一移动解释为**真空模空间 𝒵 的重参数化**：S 矩阵作为 𝒵 上的函数是自然决定的，
+     但计算它所用的顶点算符（即 𝒵 的坐标）不是。
+
+  **档位**：全链是路径积分/模空间积分层面的形式操作（超模空间上的 Stokes 定理、退化极限的领头阶、
+  截断与取极限），且 (a) 本身是断言。按 docs/STATUS_LEVELS.md 的「断言 + 骨架」裁决取 physical-argument，
+  不取 conjecture（原文对 (b)(c) 的动词是 "there is only one" / "we will find that … are convergent"，
+  不是猜想措辞）。
+gaps:
+  - "★★ **本卡刻意不含「tadpole 为零」**。§8.3 p. 175 的归纳论证逐字挂在一个来源不证的条件上：'**If** (as in most cases) general arguments show that spacetime supersymmetry is not spontaneously broken at g-loop order, then the inductive step is complete'。这与 polchinski-1998-v2 §12.2 pp. 102–103 的两个 \"if\"（E20）结构同型。要用「tadpole 为零」作前提的下游卡必须另建节点并抄这个 \"if\"（目标卡 notes 第 2 条）。"
+  - "★ depends_on 为空：论证的前提在本图中尚无节点——超模空间的 Deligne–Mumford 紧化及其分离退化参数 q（§6，未读）、退化附近的因子化 (7.23)（其铺垫 (7.18)–(7.22) 在 pp. 140–142，已读但未建卡）、零动量 NS 顶点算符的分类（§2.4，未读）、超对称 Ward 恒等式 (8.38) 𝒱_φ = Σ_α Q_α(𝒱_{ψ_α})（§8.2.3，未读）。补齐后应改为显式边。"
+  - "★ 适用域是三重限定（闭取向弦、无质量 S 矩阵、无微扰质量重整化），且 §1 p. 3 显式排除了质量重整化与需要真空移动的模型；作者说处理后者的 off-shell 形式 [19–24] 「has not yet been done」in the SRS language（截至 v4，2023）。"
+  - "(c) 的结论强度是「S 矩阵作为 𝒵 上的函数良定义」，(7.27) 的移动量依赖 h 的选择；原文没有给出 𝒵 的自然坐标，也没有说明不同正规子给出的 S 矩阵在物理上如何比较（只说 differ by reparametrizations）。"
+  - "[73] La–Nelson PRL 63 (1989) 24（原文说部分问题「have been treated in」该文）本项目未登记、未读。"
+  - "本推导的来源无期刊版（arXiv:1209.5461 至 2026-09-11 无 publication_info）；读的是 v4（2023），§1 关于 [19–24] 的整段不可能在 2012 年的 v1 里（抽取记录 §3.4）。"
+notes: |
+  **为什么 id 取 --via-separating-degeneration**：(a)(c) 的论证核心都在分离退化处的 ∫ d²q/(q̄q) 因子
+  ——tadpole 非零则它发散，tadpole 为零则它被 0 乘且残余依赖 𝒩^{−1} 的度量。(b) 是这个论证里
+  「被乘以零的那个东西是什么」的说明。
+
+  **不写 reviewer-verified**：没有可复核的有限步计算，全部是模空间积分的形式操作。
+
+  **与 1304.2832 §1 (B) 的关系**：作者在 Overview 里把 (c) 概括为「完成故事所需的两步」之一，
+  另一步 (A)（在超模空间上做全部分部积分）由 consistency.superstring-perturbation-theory-via-super-riemann-surfaces 承载。
+author: curator-superstring-pert
+created: "2026-09-11"

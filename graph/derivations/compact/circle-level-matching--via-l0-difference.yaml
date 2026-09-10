@@ -1,0 +1,33 @@
+id: compact.circle-level-matching--via-l0-difference
+target: compact.circle-level-matching
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.left-right-momenta
+  - id: worldsheet.closed-string-level-matching
+    inferred: true
+    note: |
+      提供未紧化时的 N = Ñ 及其来源（σ 平移是残余规范冗余 ⇒ (L_0 − L̄_0)|ψ⟩ = 0）。
+      原书在紧化情形没有重述这一步，而是直接把两支质量壳相减；
+      「相减得到的式子就是同一条 (L_0 − L̄_0)|ψ⟩ = 0 约束」是 curator 的合并，
+      抽取记录里没有对应的原文位置，故标 inferred。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      提供两支质量壳 m² = (4/α')(N − 1) + k_L² 与 m² = (4/α')(Ñ − 1) + k_R² 的左右对称结构
+      （截距 a = ã = 1）。同 compact.circle-closed-string-mass-formula--via-l0-sum 的
+      inferred 理由：原书用的是协变/BRST 形式 (4.3.31)/(4.3.32)。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.2)（两支之差），p.241"
+    note: |
+      抽取记录 polchinski-1998-v1#E126（L1，Schrans §8.26–§8.27 逐式复现 [8.137]–[8.142]）。
+summary: |
+  两支质量壳 m² = (4/α')(N − 1) + k_L² 与 m² = (4/α')(Ñ − 1) + k_R² 相减：
+    0 = (4/α')(N − Ñ) + k_L² − k_R².
+  代入 k_{L,R} = n/R ± wR/α' 得 k_L² − k_R² = 4nw/α'，故 0 = N − Ñ + nw。
+gaps:
+  - "「相减得到的约束就是 (L_0 − L̄_0)|ψ⟩ = 0」这一步没有来源；两条上游边因此都标 inferred。"
+  - "上游 worldsheet.closed-string-level-matching 自身是 physical-argument（「σ 平移是规范冗余」是物理要求，不是定理）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

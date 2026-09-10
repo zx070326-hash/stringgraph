@@ -1,5 +1,5 @@
-id: worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight
-target: worldsheet.ddf-transverse-oscillator-algebra
+id: worldsheet.ddf-transverse-oscillator-algebra-v2--via-conformal-weight
+target: worldsheet.ddf-transverse-oscillator-algebra-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -22,13 +22,6 @@ depends_on:
       「OPE ⟹ 模态对易子」的径向排序 + 围道形变步骤：[A^i_m, A^j_n] 由 A^i_m 的围道绕过 A^j_n
       的围道所扫出的差给出，等于两者 OPE 的单极点留数的围道积分。
       这是本推导 status 的直接上限（该字典节点自身是 physical-argument）。
-  - id: worldsheet.transverse-oscillator-commutators
-    inferred: true
-    note: |
-      目标陈述断言 DDF 算子的代数**与横向振子代数同型**，δ^{ij} 中的横向正交归一标架
-      （i, j = 2..D-1，ε^i·ε^j = δ^{ij}）与右端 m δ^{ij} δ_{m+n,0} 的形状都取自这条既有节点。
-      本论证并不从它推出目标（DDF 代数是独立计算的结果），只是共用同一套横向标架与同一形状的答案，
-      故标 inferred。
   - id: worldsheet.virasoro-generators-free-boson
     inferred: true
     note: |
@@ -90,6 +83,22 @@ gaps:
   - "k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内：那里 A^i_n 本身没有定义。"
   - "本推导不覆盖 A^i_n 作为代数算子的良定义性（worldsheet.ddf-transversality-gives-local-finiteness）：走解析围道路线时该问题不出现，走代数路线时它是前置条件。"
 notes: |
+  【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】本推导的 target 由
+  worldsheet.ddf-transverse-oscillator-algebra（旧卡，已 superseded）改为
+  worldsheet.ddf-transverse-oscillator-algebra-v2（陈述逐字去掉末句「与世界面横向振子 α^i_n 的代数
+  逐字同型」），文件名一并改名（git mv）。同时**撤销了对 worldsheet.transverse-oscillator-commutators
+  的 inferred 边**：该边的原 note 逐字说它承载的是「与横向振子代数同型」这一断言
+  （「本论证并不从它推出目标（DDF 代数是独立计算的结果），只是共用同一套横向标架与同一形状的答案」），
+  而那一断言已拆出为 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators。
+  ⚠ 原 note 还提到「δ^{ij} 中的横向正交归一标架 ε^i·ε^j = δ^{ij} 取自这条既有节点」——
+  这一点**不需要**那条边：ε^i·ε^j = δ^{ij} 是目标 v2 **陈述里写出的前提**，
+  且有 goddard-2008 (5.1) 之后的逐字来源（「orthonormal polarization vectors … ε^i·ε^j = δ^{ij}, k·ε^i = 0」）。
+  若 reviewer 认为该标架仍需一张承载卡，正确的对象是 worldsheet.light-cone-quantization 的
+  正交归一横向标架，**不是**光锥振子的对易关系卡。
+  **本推导的 status 与论证一字未改**：仍是 physical-argument，上限仍是
+  worldsheet.ope-commutator-dictionary（故 effective 不因撤销该边而变化；目标 v2 的 effective
+  由姊妹推导 --via-zero-mode-bracket 提供，为 rigorous）。
+
   【本推导的来历】2026-09-11 拆卡：worldsheet.ddf-operators-v4 是一张 `status: rigorous` 的
   **定义**卡，却在末段断言了本目标（以及 [L_m, A^i_n] = 0）。本推导把实际论证登记下来。
 

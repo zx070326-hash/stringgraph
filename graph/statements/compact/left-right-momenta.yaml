@@ -1,0 +1,34 @@
+id: compact.left-right-momenta
+kind: proposition
+title: 紧化闭弦的左右行动量 k_L = n/R + wR/α'，k_R = n/R − wR/α'
+statement: |
+  设闭弦的一个坐标紧化在半径 R 的圆上（conv.compactification-radius），
+  该方向的紧化动量本征值为 p = n/R（n ∈ Z），绕数为 w ∈ Z
+  （compact.closed-string-winding-sector）。定义左行/右行动量
+    k_L ≡ (2/α')^{1/2} α_0,   k_R ≡ (2/α')^{1/2} ᾱ_0,
+  其中 α_0、ᾱ_0 是该紧化方向的零模振子。则
+    **k_L = n/R + wR/α',   k_R = n/R − wR/α'**.
+  反解为 n = (R/2)(k_L + k_R)、w = (α'/(2R))(k_L − k_R)。
+  未紧化方向的零模仍满足 α_0 = ᾱ_0 = (α'/2)^{1/2} p（即 k_L = k_R = p）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.2, eq. (8.2.7)（k_L, k_R），p.236；用到 (8.2.5)（绕数的围道积分）与 (8.2.6)（Noether 动量）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E122，证据等级 L1
+      （Schrans §8.13，笔记 p.437）。
+      ⚠ **弦上的动量量子化 (8.2.2) 的式号只由 Schrans 正文的一句交叉引用锚定**
+      （「where we have used the quantisation condition (8.2.2)」），其目录无条目，
+      而 (8.2.7) 全靠它（抽取记录 §10）。
+tags: [compactification, closed-string, winding, torus, spectrum, momentum]
+notes: |
+  反解式 n = (R/2)(k_L + k_R)、w = (α'/(2R))(k_L − k_R) 是 curator 的两行代数，
+  来源未逐字给出；T 对偶的「n ↔ w」正是在这组反解式上定义的
+  （duality.t-duality-spectrum-equivalence）。
+
+  这条式子是全章的出发点：质量公式（compact.circle-closed-string-mass-formula）、
+  level matching 的修正（compact.circle-level-matching）、自对偶半径的增强对称
+  （compact.self-dual-radius-su2-current-algebra）、Narain 格（compact.narain-lattice）
+  全部由它出发。
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -59,6 +59,22 @@ sources:
          strategy which will also be useful in generalizing to Q_B."
       → 即「直接算 Q_1 的上同调」这条路在原书里是**习题**，正文走的是 S = {Q_1,R} 的标准策略。
 
+      ★★ **【2026-09-11 第七轮：本推导的谱系，作者自陈，书末 References p.350 逐字】**
+        「The BRST operator for field theory is derived in Kato & Ogawa (1983);
+         **our proof of the no-ghost theorem is loosely patterned on the one in that paper.**」
+      ⇒ **本推导（Polchinski §4.4）的来源谱系是 `kato-ogawa-1983`（Nucl. Phys. B212, 443），
+      不是 Goddard–Thorn。** 同一段把 **Brower (1972) 与 Goddard & Thorn (1972) 列为
+      "**Classic proofs of the OCQ no-ghost theorem**"**——那是 **OCQ** 路线，
+      对应 §4.1 的 (4.1.20)，与本推导的 BRST 路线**分属两条**。
+      ⚠ 三条使用限制：
+      (1) **"loosely patterned on" 是原书用词**，不是 "follows"/"reproduces"；
+          搬进图里必须保留 "loosely"，**不得**把本推导写成「复述 Kato–Ogawa 的证明」。
+      (2) `kato-ogawa-1983` **本项目尚未取得正文**，故本轮**不**给本推导新增该 ref
+          （加 ref 会暗示它支撑本推导的论证步骤，而我们无法核对）。
+          取得正文后应新建一条独立推导 `--via-kato-ogawa`，而不是改本条。
+      (3) **不得**把 `goddard-thorn-1972` 加进本推导的 sources：原书明确把 GT 归到另一条路线。
+      见 literature/extractions/polchinski-1998-v1.md §13.2(a)(b)(c)。
+
       见 literature/extractions/polchinski-1998-v1.md §12.3（E58/E68）与 §12.10 表 B 第 9 项、
       表 C 第 9 项。
   - ref: polchinski-1998-v1

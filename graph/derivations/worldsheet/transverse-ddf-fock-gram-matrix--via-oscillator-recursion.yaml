@@ -19,11 +19,18 @@ depends_on:
       换句话说：**本推导自身的严格程度（rigorous）说的是那步蕴含，
       目标节点的 effective 说的是蕴含加上前件在 DDF 设定下的兑现程度**，两者不同，
       本条边保证后者不被高估。
-  - id: worldsheet.ddf-transverse-oscillator-algebra
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       **非 inferred**：目标假设 (H1)（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）在 DDF 设定下由该节点供给。
       理由与上一条完全相同（(H1) 在目标陈述里是假设，这条边只承担「前件在 DDF 设定下由谁兑现」
-      的记账，并为目标节点的 effective 封顶）。该节点 effective = physical-argument。
+      的记账，并为目标节点的 effective 封顶）。
+      【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】原指
+      worldsheet.ddf-transverse-oscillator-algebra（已 superseded），该卡把对易关系与
+      「与光锥横向振子代数逐字同型」捆在一张卡上；拆卡后 (H1) 的承载者是本依赖（只含对易关系），
+      同构识别归 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators。
+      本推导的算术只用 (H1) 这条 c-数，**不**用与光锥振子的比较，故不加同构卡的边。
+      ⚠ 原 note 末句「该节点 effective = physical-argument」**已过时**：v2 的 effective 是 rigorous。
+      本推导目标的 effective 现由 (H2) 那一线（worldsheet.ddf-operators-adjoint，physical-argument）封顶。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing_monomial_monomial, pairing_creation_left, pairing_creation_right, pairing_eq_zero_of_level_ne}"

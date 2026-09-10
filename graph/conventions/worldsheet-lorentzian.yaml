@@ -33,7 +33,7 @@ definition: |
 canonical: false
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.13)（S_P = -(1/4πα') ∫ dτ dσ (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ）；式号未核实"
+    loc: "§1.2, eq. **(1.2.13)**, p.12（`S_P = −(1/4πα′) ∫_M dτ dσ (−γ)^{1/2} γ^{ab} ∂_aX^μ∂_bX_μ`）。**【2026-09-11 核实，L1 页图】式号与页码正确，「式号未核实」撤销**"
     note: |
       拉氏量形式与前因子 -1/(4πα')、以及 (-γ)^{1/2} 的写法，见抽取记录
       literature/extractions/polchinski-1998-v1.md#E5（证据等级 [页码已核实/式号未核实]，

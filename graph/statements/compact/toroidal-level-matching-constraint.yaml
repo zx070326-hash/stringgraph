@@ -1,0 +1,30 @@
+id: compact.toroidal-level-matching-constraint
+kind: proposition
+title: k 维紧化的 level matching：ℓ∘ℓ = 2(Ñ − N)
+statement: |
+  在 k 维环面紧化中（compact.narain-lattice 的记号），闭弦物理态满足
+    **v_L² − v_R² + 4α'(N − Ñ) = 0**   （v² 用 G_{mn} 缩并），
+  等价地，用 Narain 格向量 ℓ = (ℓ_L; ℓ_R) 写成
+    **ℓ ∘ ℓ ≡ ℓ_L² − ℓ_R² = 2 ( Ñ − N )**.
+  质量公式相应为
+    m² = (1/2α'²) G_{mn}( v^m_L v^n_L + v^m_R v^n_R ) + (2/α')( N + Ñ − 2 ),
+  即 m² = (1/α')(ℓ_L² + ℓ_R²) + (2/α')(N + Ñ − 2)。
+  k = 1、B = 0 时 ℓ∘ℓ = 2nw，回到 compact.circle-level-matching。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.9)（质量公式）与 (8.4.10)（L_0 − L̄_0 约束），p.250；ℓ 的写法见 (8.4.19)，p.251"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E137/#E138，证据等级 L1
+      （Schrans §8.54–§8.55，笔记 p.468）。
+tags: [compactification, torus, narain, level-matching, mass-formula, constraint]
+notes: |
+  从 (8.4.10) 的 v 形式换到 ℓ 形式用到 ℓ_{L,R}² = (1/2α') G_{mn} v^m_{L,R} v^n_{L,R}
+  （由 ℓ = (α'/2)^{1/2} k、k_{Lr} = e^m_r v_{Lm}/α' 与 G_{mn} = e^r_m e^r_n 两行代数得到）。
+  **这个换算是 curator 的复算**，抽取记录没有逐字给出；k = 1、B = 0 时它给
+  ℓ∘ℓ = 2nw，与 (8.4.26) 的 ℓ∘ℓ' = nw' + n'w 一致，可作交叉检验。
+
+  本节点把质量公式与约束写在一张卡上是因为原书 (8.4.9)/(8.4.10) 由同一步（左右两支的
+  和与差）同时得出，且后续只用到约束那一半。若日后需要分别引用质量公式，可拆卡。
+author: curator-polchinski-ch8
+created: "2026-09-11"

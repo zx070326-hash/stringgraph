@@ -1,0 +1,210 @@
+id: worldsheet.ddf-commute-with-virasoro--via-lean
+target: worldsheet.ddf-commute-with-virasoro
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      被作用的对象 A^ε_n（Lean `ddfOp η a b ε hη hεb n`，即该卡的 formal.lean_decl）。
+      本推导的前提 (T) ε·k_0 = 0 就是 `ddfOp` 的显式参数 `hεb`；
+      (N) k_0² = 0 与 (S) 2α' k_0·p = 1 是该卡数据的 (N)(S)，在 Lean 里是本定理的假设
+      `hbb`、`hba`（不是 `ddfOp` 的参数）。
+      ⚠ **就地换代**：目标卡的 statement 文本写的是 worldsheet.ddf-operators-v5
+      （已被 v6 取代）。按根 CLAUDE.md 原则 1 目标卡文本不改；换代只在本推导的 depends_on 上做，
+      与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的处理方式相同。
+      **这处换代不是无害的重命名**：v5 用围道积分定义 A^i_n，v6 用模态和，
+      本推导（与 Lean）证的是模态和版本。见下面 gaps 第 1 条。
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+    inferred: false
+    note: |
+      **本推导的唯一实质数学输入**：单 Fock 上的共形权恒等式，**一切 m ∈ Z**，
+      Lean `Fock.lie_Lop_vertexOsc`（VertexWeightZero.lean）。
+      Lean 把它机械搬到塔上得 `lie_towerLop_towerVertex`（需 b·b = 0）与归一化形式
+      `lie_towerLop_towerVertex_normalized`：⁅L_m, V^{(n)}_K⁆ = (K − m) V^{(n)}_{K−m}，一切 m。
+      **本推导相对 worldsheet.ddf-commute-with-nonzero-virasoro--via-lean 的全部新增就在这条边上**：
+      那条推导只能引 v1（m ≠ 0，`Fock.lie_Lop_vertexOsc_of_ne`），故其目标量词被迫窄到 m ≠ 0
+      （formal/TODO.md `ddf-operators` 第 (5) 项逐字：
+      「`hm : m ≠ 0` 在 `lie_towerLop_ddfOp_of_ne` 里只用了一次」）。
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      塔上的顶点算子模 `towerVertex η b n K` = 零模移位 ∘ 逐层的 `Fock.vertexOsc η (n·b) (K−n)`，
+      其中振子那一半正是该定义卡的 formal.lean_decl。本推导的第 1 步在这个对象上做，故显式连边。
+  - id: worldsheet.ddf-transversality-gives-local-finiteness-v2
+    inferred: false
+    note: |
+      **本推导离不开它两次**：一次是 A^ε_n 存在（`ddfOp` 由 `lsumLocFin` 组装，
+      其构造性输入正是该卡的 `ddfSummand_apply_eq_zero_of_notMem_window`），
+      一次是伸缩和的四条边带在窗口外为零（`ddfOp_apply` 允许换用任意够大的窗口；
+      两端各留 |m| 余量，m = 0 时余量为 0，论证退化但仍逐字成立）。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      塔 T(p;k_0)、逐层作用的 L_m（`towerLop`，用该层动量）、移位算子 e^{i n k_0·x}（`towerShift`）。
+      「L_m 与 A^ε_n 的括号」这句话只有在塔上才有意义：L_m 不移动层、A^ε_n 移动 n 层，
+      二者是同一个空间上的算子。
+      ⚠ **m = 0 这一支尤其依赖这张卡**：目标卡【推论】里的质量壳记账
+      α'(p + n k_0)² = α'p² + n 就是塔上第 j 层动量 p_j = p + j k_0 的算术
+      （Lean `invTwo_mul_zeroModeSq_towerMomentum`，formal/StringFormal/NoGhost/DDF.lean）。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      括号左边的 L_m 本身（Sugawara `Fock.Lop`，逐层装在塔上）。
+      ⚠ 本推导**不**使用 Virasoro 括号 [L_m, L_n] 或中心荷 c = D。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      每层的代数 Fock 空间与 level 分级；伸缩和的边界项消失机制（能级下界、指标上界）
+      都在这张卡的对象上陈述。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      目标卡【推论】里「旧协变物理态」的两条条件由这张卡定义。
+      ⚠ 该卡的 `Fock.physSubmodule` 定义在**单个** Fock 空间上；塔上的对应物
+      `towerPhysSubmodule η a b a₀`（TowerPhysical.lean）是把同样两条条件逐字装到塔上，
+      **统一截距 a₀**（不是逐层不同的截距，见目标卡 notes 的 ★ 段）。
+      推论那一半的机器验证由姊妹卡 worldsheet.ddf-operators-preserve-physical-states 承载，
+      见 sources 与 gaps 第 3 条。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.lie_towerLop_ddfOp（目标声明，第 179 行，一切 m : ℤ）；m = 0 的单独形式 StringFormal.NoGhost.lie_towerLop_ddfOp_zero（第 266 行）；上游 StringFormal.NoGhost.lie_towerLop_towerVertex（第 76 行）、lie_towerLop_towerVertex_normalized（第 129 行）、lie_towerLop_ddfSummand_all（第 149 行）；目标卡推论段的两半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）与 ddfOp_mem_towerPhysSubmodule（第 308 行）。单 Fock 输入：formal/StringFormal/NoGhost/VertexWeightZero.lean :: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc。定义与零件：formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfOp / ddfOp_apply / ddfSummand / ddfWindow / lie_mul_end / lie_sum_end / sum_lie_end；formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / towerL0Submodule / towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。目标声明逐字（去掉隐式参数）：
+        `theorem lie_towerLop_ddfOp (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+           (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0)
+           (m n : ℤ) : ⁅towerLop η a b m, ddfOp η a b ε hη hεb n⁆ = 0`。
+      与目标卡的量词逐字一致：`hbb` = (N) k_0² = 0，`hba` = (S) 2α' k_0·p = 1，
+      `hεb` = (T) ε·k_0 = 0，**m 与 n 都无限制**（目标卡把 n 限在非零整数，
+      是 Lean 结论的严格弱化，故被覆盖）。
+      文件头逐字：「`lie_towerLop_ddfOp` — `⁅L_m, A^ε_n⁆ = 0` for **every** `m : ℤ`」，
+      并逐字说明 DDFOperator.lean 有 m ≥ 1、DDFOperatorNeg.lean 有 m ≠ 0，
+      「both were blocked at `m = 0` only because the single-Fock conformal-weight identity was」。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, eq. (5.4)（arXiv:0802.3249v1）：逐字 `[L_m, A^i_n] = 0.`"
+    note: |
+      **不承载本推导的论证**（该文是历史综述，(5.4) 无证明、无「we prove」），只作量词对照：
+      该式对 m 无限制，与本推导的结论量词一致（researcher L1 逐页读图，
+      literature/extractions/gsw-1987-v1.md §2 E2）。号差逐字 signature (−,+,+,+) = mostly-plus，
+      与 conv.metric-mostly-plus 一致，无需换算；归一化逐字 k·p = 1，在 α' = 1/2 下即 (S)。
+      ⚠ **该文的 A^i_n 由 (5.1) 的围道积分定义**，与本推导的模态和之间的字典见 gaps 第 1 条。
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.5)：`[L_(n), A^ξ_m] = 0   ∀ n, m ∈ ℤ`"
+    note: |
+      **不承载本推导的论证**（那是 worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary
+      的事）。引在这里只为对照量词：G–N 同样对 m 无限制，与本推导一致。
+      两条路线**没有共同步骤**：G–N 走格点顶点代数的 Jacobi 公理，本推导走塔上的有限和重排。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（式号未核实）"
+    note: |
+      **不承载本推导的论证**。文献侧的论证走 OPE + 围道形变
+      （本图的 worldsheet.ddf-commute-with-virasoro--via-conformal-weight），
+      与本推导没有共同步骤。式号 L0；GSW 用 mostly-minus，已转写；GSW 取 α' = 1/2。
+summary: |
+  机器检查的证明，主体在 formal/StringFormal/NoGhost/DDFOperatorAll.lean。
+  该文件逐字就是 DDFOperatorNeg.lean（m ≠ 0）**删掉 `hm : m ≠ 0` 假设**后的版本：
+  文件头逐字「Since `hm : m ≠ 0` entered `lie_towerLop_ddfOp_of_ne` at exactly one place —
+  the appeal to `lie_towerLop_ddfSummand_of_ne` — everything downstream goes through verbatim
+  once that one input is unconditional.」
+
+  三步（与 worldsheet.ddf-commute-with-nonzero-virasoro--via-lean 同构，唯一差别在第 1 步的输入）。
+
+  **第 1 步：塔上的权 0 变换律，一切 m。**
+  `lie_towerLop_towerVertex`：⁅L_m, V^{(n)}_K⁆ = (K − m − n + n(k_0·p)) V^{(n)}_{K−m}。
+  证明是把单 Fock 恒等式（worldsheet.exponential-vertex-operator-mode-weight-identity-v2，
+  Lean `Fock.lie_Lop_vertexOsc`）逐层代入，第 j 层的动量参数是 a + j·b。
+  **这一步是本推导相对 m ≠ 0 版本的唯一实质改动**：文件头逐字「this is the *only* place in the
+  whole `m = 0` upgrade where anything has to be re-checked: the coefficient polynomial
+  `J - m + a·b + ½ (m+1)(b·b)` is literally the same function of `m` in both inputs」。
+  ⚠ **(N) k_0² = 0 在这一步仍是必需的**：不设 (N) 时第 j 层的系数是
+    (K − n) − m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)，**含层指标 j**，
+  ⁅L_m, V^{(n)}_K⁆ 在整条塔上就不是 V^{(n)}_{K−m} 的标量倍。
+  再代入 (S) 2α' k_0·p = 1 得 `lie_towerLop_towerVertex_normalized`：
+    ⁅L_m, V^{(n)}_K⁆ = (K − m) V^{(n)}_{K−m}，一切 m
+  （两项 n 依赖的贡献——单值移位 z^n 与 n(k_0·p)——互相抵消）。
+
+  **第 2 步：单项括号的伸缩形式，一切 m。**
+  `lie_towerLop_ddfSummand_all`：记 G_i := α^ε_{m+i} V^{(n)}_i（Lean `ddfShifted`），则
+    ⁅L_m, α^ε_j V^{(n)}_j⁆ = (j − m)·G_{j−m} − j·G_j 。
+  两项分别来自 Leibniz 律的两半：⁅L_m, α^ε_j⁆ = −j α^ε_{m+j}（`lie_towerLop_towerModeVec`）
+  与第 1 步。**m = 0 时两项本来就相同，单项括号自己就是零**——文件头逐字
+  「at `m = 0` is `0` term by term」。
+
+  **第 3 步：伸缩求和，边界项在窗口两端各自消失。**
+  与 m ≠ 0 版本逐字相同：窗口两端各留 |m| 的余量，再把两个和都与公共大窗口比较，
+  一次覆盖 m > 0、m < 0 两种符号；**m = 0 时余量 |m| = 0，边带为空，论证退化但逐字成立**
+  （文件头逐字「the `m ≠ 0` window argument, run with slack `|m| = 0`, degenerates to it
+  correctly」）。放大窗口不花代价，因为 `ddfOp_apply` 对任意够大的窗口都成立
+  （worldsheet.ddf-transversality-gives-local-finiteness-v2）。
+
+  **目标卡推论段的机器验证。**
+  目标卡的陈述文本把「DDF 算子把物理态映为物理态」写成本命题的推论。同一文件给出：
+  · `ddfOp_mem_towerL0Submodule`：(L_0 − a₀)Ψ = 0 ⟹ (L_0 − a₀)(A^ε_n Ψ) = 0，
+    一行代数 L_0 A^ε_n Ψ = A^ε_n L_0 Ψ = a₀ • A^ε_n Ψ，**这正是 m = 0 买到的东西**；
+  · `ddfOp_mem_towerPhysSubmodule`：两半合起来，
+    A^ε_n(towerPhysSubmodule a₀) ⊆ towerPhysSubmodule a₀
+    （m ≥ 1 那一半是先前的 `ddfOp_mem_towerPositiveModeSubmodule`）。
+  该推论已另立独立卡 worldsheet.ddf-operators-preserve-physical-states 承载（同样 formalized），
+  本推导把它列在 sources.loc 中以说明目标卡的推论段也已覆盖。
+  ⚠ **截距 a₀ 逐字不变**：`invTwo_zeroModeSq_towerMomentum_add_shift_cancel` 说
+  层 +n 与振子能级 −n 在 α'p_j² + N 中相消。目标卡推论里「A^i_n 把能级移动 −n」指的是
+  **振子能级**，**不是** L_0 本征值；后者逐字不变。见目标卡 notes 的对应更正段。
+gaps:
+  - |
+    **本推导证的是本图 v6 的模态和 A^ε_n，不是文献的围道积分 A^i_n。**
+    目标卡 statement 文本引的是 worldsheet.ddf-operators-v5（围道定义），本推导 depends_on
+    就地换代到 worldsheet.ddf-operators-v6（模态和定义）。两者是同一个算子这件事在本图中
+    **只有 physical-argument 级的承载**：worldsheet.ddf-contour-equals-mode-sum。
+    **本推导刻意不把那张卡列为依赖**，理由是本图的定义链是 v5 到 v6 的换代（supersession），
+    不是一条被引用的命题；把它列进来会让本推导的有效状态降到 physical-argument，
+    而 Lean 确确实实完整证明了模态和版本。
+    ⚠ **代价必须由下游承担**：凡要把本结论回译成**文献**陈述的下游
+    （首当其冲 ms.no-ghost-theorem 的回译审计）必须显式引用
+    worldsheet.ddf-contour-equals-mode-sum 及其 gaps。这与
+    worldsheet.ddf-operators-v6 的 notes【围道 ⟹ 模态和的字典】是同一条记账。
+  - |
+    **目标卡把 n 限在非零整数，Lean 的 n 跑遍整数**：本推导覆盖目标卡且比它强，
+    反过来不成立的地方一个也没有。文献排除 n = 0 是因为 A^i_0 在代数上退化，
+    不是因为它没有定义（worldsheet.ddf-operators-v6 的 notes (2)）。
+  - |
+    **目标卡推论段的第二句「因此 DDF 算子把物理态映为物理态」在 Lean 里是塔上的子模包含**
+    （`ddfOp_mem_towerPhysSubmodule`，统一截距 a₀），而目标卡的文字挂在
+    worldsheet.old-covariant-physical-states 的名义下，那张卡的 Lean 对应物
+    `Fock.physSubmodule` 是**单个** Fock 空间上的。两者的关系（塔上的物理子模是逐层同一条件）
+    在 TowerPhysical.lean 文件头有逐字说明，但本图**没有**一张卡断言
+    「塔上的物理子模 = 逐层的 physSubmodule 之交」。这是一处记账缺口，不影响本推导的结论，
+    但 auditor 回译时应把目标卡推论读成塔上的陈述。
+  - |
+    **一般交换 Q-代数，无实结构**。「存在类光 k_0 使 k_0·p ≠ 0」在一般 R 上为假，
+    (N)(S) 只作为给定数据。k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内。
+  - |
+    **(N) k_0² = 0 的必要性是观察，不是本推导的断言**。第 1 步的说明给出了 k_0² ≠ 0 时
+    系数含层指标 j 的显式形式，那已足以说明「不能去掉」，但本图不把它立成一条命题。
+  - |
+    **本推导不覆盖 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**
+    （worldsheet.ddf-transverse-oscillator-algebra），也不覆盖 A^ε_n ≠ 0
+    或「DDF 态张成物理谱」。目标卡的【与 worldsheet.ddf-transverse-oscillator-algebra 的关系】段
+    已把前者划出去；后两条是 formal/TODO.md 的 `ddf-spans` 项，未做。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【本推导使目标卡的 effective 从 physical-argument 升到 formalized】
+  目标卡此前有两条推导：--via-conformal-weight（physical-argument，OPE + 围道形变）与
+  --via-vertex-algebra-primary（自身 rigorous，但被一条 open 的桥接边
+  worldsheet.string-cft-is-a-vertex-algebra-v2 压到 open）。两条都保留不删。
+  工具取最强的一条，故 best_derivation 换成本推导。
+  ⚠ **这不等于「文献路线也严格了」**：那两条路线各自的缺口一条未关，见它们自己的 gaps；
+  也不等于「围道定义下的命题被机器验证了」，见 gaps 第 1 条。
+
+  【与弱节点 worldsheet.ddf-commute-with-nonzero-virasoro 的关系】
+  那张卡（m ≠ 0）自本推导起被目标卡**完全覆盖**，但按 lead 裁决**保留不删、不换代**，
+  作为三段式攻关（m ≥ 1 → m ≠ 0 → 一切 m）的历史记录。它的 --via-lean 仍依赖
+  worldsheet.exponential-vertex-operator-mode-weight-identity（v1，
+  `Fock.lie_Lop_vertexOsc_of_ne`），那条依赖在事实上是**对的**——Lean 的
+  `lie_towerLop_ddfOp_of_ne` 确实只用 v1——故 validate 对它报的
+  「depends on superseded statement」是提醒而非错误（docs/STATUS_LEVELS.md【旧推导的去留】）。
+author: curator
+created: "2026-09-11"

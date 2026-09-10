@@ -1,0 +1,41 @@
+id: compact.self-dual-radius-gauge-symmetry-enhancement
+kind: proposition
+title: 自对偶半径处时空规范对称性由 U(1)×U(1) 增强为 SU(2)×SU(2)
+statement: |
+  D = 26 的玻色闭弦在一个方向紧化在半径 R 时，一般 R 处的无质量矢量只有两个——
+  Kaluza–Klein 矢量 α^μ_{−1} ᾱ^{25}_{−1}|0;k⟩ 与来自反对称张量的 B_{μ,25} 矢量
+  α^{25}_{−1} ᾱ^μ_{−1}|0;k⟩——对应的时空规范群是 **U(1) × U(1)**
+  （一个全纯 U(1)、一个反全纯 U(1)）。
+
+  在自对偶半径 **R = √α'** 处，另有四个无质量矢量态
+  （compact.self-dual-radius-extra-massless-states 的 (b)(c) 类，
+  取其一阶振子为非紧方向的 ᾱ^μ_{−1} 或 α^μ_{−1}）。
+  连同原有的两个，全纯侧与反全纯侧各得三个无质量矢量，
+  它们的世界面流构成两套 affine su(2)（compact.self-dual-radius-su2-current-algebra），
+  于是时空规范对称性增强为
+    **SU(2) × SU(2)**,
+  其中原来的 U(1) × U(1) 是它的极大环面（j³ 与 j̄³ 生成）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.9)–(8.3.14) 一段（p.242–243）；一般 R 处的谱见 (8.3.3)，p.241"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E128/#E129，证据等级 L1。
+      ⚠ 结论句「The gauge group we have uncovered is thus SU(2)×SU(2)」是
+      **Schrans 的复述**（抽取记录 #E128 明记），不是从原书抄出的措辞。
+      ⚠ 一般 R 处的无质量谱清单（(8.3.3)）在抽取记录里只到 L2（目录级）。
+tags: [compactification, spectrum, gauge-symmetry, enhanced-symmetry, self-dual-radius, closed-string]
+notes: |
+  「世界面上的权 (1,0) 流代数 ⇒ 时空的规范对称性」这一步在本书里没有被独立论证；
+  它是弦论的标准物理翻译（无质量矢量 + 流代数 ⇒ 非阿贝尔规范玻色子）。
+  本图把它记为本节点推导的一条 gap，而不是另建一条一般性命题——
+  因为原书在此处没有陈述这条一般原理。
+
+  与 Chan–Paton 给出 U(n)（第 6 章）是**两条不同的机制**：那里规范群来自开弦端点的
+  内部指标，这里来自紧化闭弦的绕数态在特殊半径处变成无质量。
+  抽取记录 #E129 明确记下这一点。
+
+  增强对称点附近的规范玻色子质量 m ≈ 2|R − √α'|/α'（(8.3.20)）与十个无质量标量
+  构成 (3,3) 表（(8.3.21)）不在本节点范围（抽取记录 #E130，本图未建卡）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

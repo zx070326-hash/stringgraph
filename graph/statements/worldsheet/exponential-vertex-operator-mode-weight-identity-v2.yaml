@@ -1,0 +1,142 @@
+id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+kind: proposition
+title: 类光/一般动量指数顶点算子的**模形式**共形权恒等式：L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J − m + b·a + ½(m+1) b·b) V_{J−m}（**一切 m ∈ Z，含 m = 0**）
+statement: |
+  【与 v1 的唯一实质差别】worldsheet.exponential-vertex-operator-mode-weight-identity
+  把量词限在 m ≠ 0 并把 m = 0 列为【明确不断言】。本卡去掉该限制：**同一条公式对一切
+  m ∈ Z 成立，m = 0 不是例外**。其余文字与 v1 相同，故按项目规则新建节点而不改 v1 文本。
+
+  【设定：代数 Fock 空间上的模，无 OPE、无围道、无收敛性】
+  按 worldsheet.bosonic-fock-space 取 D 个自由玻色振子的**代数** Fock 空间 F（无零模），
+  系数环 R 是交换 Q-代数，对角度规分量 η_μ 满足 η_μ² = 1（conv.metric-mostly-plus）。
+  取两个**常**向量 a、b ∈ R^D，按 conv.alpha-prime-regge 的重标度它们分别是
+    a^μ = (2α')^{1/2} p^μ （某个动量 p 的零模参数），
+    b^μ = (2α')^{1/2} k^μ （顶点算子携带的动量 k）。
+  记 V_J（J ∈ Z）为 worldsheet.exponential-vertex-operator-modes 定义的
+  正规序指数 :e^{i k·X(z)}: 的**振子部分**的 z^J 洛朗系数（z^J-系数约定；Lean `Fock.vertexOsc η b J`），
+  L_m^{(q)} 为 worldsheet.virasoro-generators-free-boson 的 Sugawara 生成元，
+  其零模用动量参数 q（Lean `Fock.Lop η q m`）。
+
+  【断言】对一切 m ∈ Z（**含 m = 0**）与一切 J ∈ Z，作为 F 上的线性算子恒等式：
+
+    L_m^{(a+b)} ∘ V_J  −  V_J ∘ L_m^{(a)}
+      = ( J − m + b·a + ½ (m+1) (b·b) ) · V_{J−m} ，
+
+  其中 x·y = Σ_μ η_μ x^μ y^μ。特别地 m = 0 给出
+    L_0^{(a+b)} ∘ V_J − V_J ∘ L_0^{(a)} = ( J + b·a + ½ (b·b) ) · V_J 。
+
+  【两侧的 L 用不同动量参数，这是本恒等式的实质内容之一】
+  左边第一个 L_m 的零模参数是 a + b，第二个是 a：V_J 把动量 p 的扇区送到 p + k 的扇区，
+  故"同一个 L_m"在两侧是**不同的**算子。这正是把 V_J 放到动量塔上才能写成对易子
+  ⁅L_m, V_J⁆ 的原因（见 worldsheet.momentum-tower-fock-space）。
+
+  【类光特例】若 k² = 0（等价 b·b = 0），则 ½(m+1)(b·b) 项消失：
+    L_m^{(a+b)} V_J − V_J L_m^{(a)} = ( J − m + b·a ) V_{J−m} ，  ∀ m ∈ Z，
+  即"权 1 拟主场"的模变换律；其中 b·a = 2α' k·p 是**零模（动量）贡献的分次移位**，
+  **不是共形权的一部分**。在 DDF 归一化 2α' k_0·p = 1、k = n k_0 下 b·a = n。
+  m = 0 时它读作 L_0^{(a+b)} V_J − V_J L_0^{(a)} = (J + b·a) V_J。
+
+  【本节点明确不断言】
+  (a) **任何 OPE 形式的陈述**。本卡只谈模的代数恒等式；
+      "T(z)V_k(0) 只有二阶及以下极点、二阶极点系数是 h"是
+      worldsheet.exponential-vertex-operator-weight (1)，两者之间隔着
+      worldsheet.ope-pole-mode-commutator-dictionary。
+  (b) **共形权的数值 h = α'k²/4 或 α'k²**。本卡的 ½(b·b) = α'k² 是开弦边界归一化下的 h，
+      但把它读成"权"需要 (a) 的字典；本卡只把它当作恒等式里的一个系数。
+  (c) **收敛性、完化、解析结构**。F 是多项式代数，V_J 逐向量是有限和。
+  (d) **V_J 的伴随关系**（worldsheet.vertex-operator-adjoint）与塔上的版本
+      （那是 worldsheet.ddf-commute-with-virasoro 一路）。
+  (e) **不断言 [L_m, L_n] 或中心荷 c = D**：本卡完全不用 Virasoro 括号。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc
+  lean_file: StringFormal/NoGhost/VertexWeightZero.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightZero.lean :: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc（本卡 formal.lean_decl，第 164 行，一切 m : ℤ）；m = 0 的单独版本 StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_zero（第 118 行）；类光推论 StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_isotropic（第 184 行，一切 m）；两支先行版本 StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_ne（VertexWeightNeg.lean）与 ..._of_pos（VertexWeight.lean）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。语句逐字（去掉隐式参数）：
+        `theorem lie_Lop_vertexOsc (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (m J : ℤ) :
+           Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+             = (((J : R) - (m : R)) + (∑ μ, η μ * a μ * b μ)
+                 + invTwo R * ((m : R) + 1) * (∑ μ, η μ * b μ * b μ)) • vertexOsc η b (J - m)`，
+      假设只有 `hη`，**m 无任何限制**。与本卡陈述逐字一致。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: polchinski-1998-v1
+    loc: "§8.2，eq. (8.2.27)，p.240：V^i(n k_0, z) = (2/α')^{1/2} ∂X^i e^{i n k_0 X^+}(z) 是权 (1,0) 的主场"
+    note: |
+      **不承载本卡的论证**（本卡的论证是 Lean 的），只作对照：原书在光锥系里断言乘积是权 (1,0) 主场，
+      由 ∂X^i 的权 (1,0) 逐字蕴含指数因子的权为 0，即本卡【类光特例】在 k² = 0 时
+      ½(m+1)(b·b) 项消失那一半。**原书写的是 OPE / 主场语言，不是模恒等式**，
+      两者之间隔着 worldsheet.ope-pole-mode-commutator-dictionary。
+      抽取记录 literature/extractions/polchinski-1998-v1.md #E125，位置证据 [已核实] / L1。
+      ⚠ 原书同样**不区分 m = 0**：主场语言下量词自动含 m = 0，故 v1 的 m ≠ 0 限制
+      从来只是本图形式化进度的痕迹，不是文献的限制。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      DDF 链的主来源，本卡的类光特例在那里是被默认使用的一句话（"被积量是权 1 primary"）。
+      核实等级沿用 worldsheet.ddf-operators-v6：章节页码 L4/L2，**式号与正文 L0**。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+      **GSW 不写模恒等式**，也不区分两侧 L_m 的动量参数，更不区分 m = 0。
+tags: [cft, vertex-operator, conformal-weight, bosonic-string, spectrum-generating-algebra, formalized]
+notes: |
+  取代 worldsheet.exponential-vertex-operator-mode-weight-identity（v1，限 m ≠ 0）。
+  v1 的陈述文本按项目规则不可变，故新建本卡。v1 的推导
+  --via-lean（lean_decl `Fock.lie_Lop_vertexOsc_of_ne`）保留不删，作为 m ≠ 0 那一半的历史记录
+  （docs/STATUS_LEVELS.md【旧推导的去留】）。
+
+  【★ 一处必须更正的记账：「m = 0 代进通式会得到错答案」是**误传**（formalizer 2026-09-11，curator 转录）】
+  本图多处（v1 的 notes、worldsheet.ddf-commute-with-nonzero-virasoro 的 notes、
+  worldsheet.ddf-commute-with-virasoro 的 notes、以及各自推导的 gaps）写过：
+    「Sugawara 求和在 m = 0 时 j = 0 与 j = m 两项重合……**把 m ≠ 0 的系数代进去会得到错答案**」。
+  前半句对，**后半句错**。`formal/StringFormal/NoGhost/VertexWeightZero.lean` 文件头逐字：
+    「通式系数是 `J - m + a·b + ½ (m+1) (b·b)`，`m = 0` 给 `J + a·b + ½ (b·b)`，
+      而直接计算给出的也正是这个。之前记录的「代 `m = 0` 给错答案」指的是**真空引理**
+      （`Fock.Lop_apply_creaExp_of_pos` / `_shifted` 的 `0 < m` 假设不可去），
+      **不是**最终的对易子系数。」
+  机制：m = 0 时真空上多出 ½(a·a)（`Fock.Lop_apply_creaExp_zero_shifted`），
+  而 V_J L_0^{(a)}|k⟩ = ½(a·a) Φ_J 恰好把它减掉，两处偏差抵消，
+  故最终系数仍落在同一条 m 的多项式上。
+  ⇒ **m = 0 需要单独证的是真空引理，不是最终公式**；最终公式从来就是一条统一的多项式。
+  凡在别处读到「代 m = 0 给错答案」，请按本段理解为「代 m = 0 到**真空引理**给错答案」。
+
+  【本卡对 DDF 链的意义】
+  v1 的 m ≠ 0 是整条 DDF 形式化链上**唯一**的量词缺口：
+  formal/TODO.md 的 `ddf-operators` 第 (5) 项逐字「`hm : m ≠ 0` 在 `lie_towerLop_ddfOp_of_ne` 里
+  只用了一次，就是引用 `lie_towerLop_ddfSummand_of_ne`；伸缩和与窗口分析在 `m = 0` 处逐字成立」。
+  本卡（Lean `Fock.lie_Lop_vertexOsc`）补上那一处后，塔上的 ∀m 版本
+  `lie_towerLop_ddfOp`（`formal/StringFormal/NoGhost/DDFOperatorAll.lean`）即逐字得到，
+  worldsheet.ddf-commute-with-virasoro 因此升为 formalized。
+
+  【与塔上版本的关系】
+  Lean 把本卡的单 Fock 恒等式搬到动量塔上得到（**一切 m**，均需 b·b = 0）
+    `lie_towerLop_towerVertex`：⁅L_m, V^{(n)}_K⁆ = (K − m − n + n(b·a)) V^{(n)}_{K−m}，
+    `lie_towerLop_towerVertex_normalized`：再加 b·a = 1 得 (K − m) V^{(n)}_{K−m}，
+  两者在 `formal/StringFormal/NoGhost/DDFOperatorAll.lean`。
+  塔上写成真正的对易子 ⁅L_m, ·⁆ 是因为 `towerLop` 逐层用该层动量，吸收了本卡"两侧参数不同"这件事。
+  ⚠ **塔上版本需要 b·b = 0（类光），本卡不需要**：不设类光时塔上第 j 层的系数含层指标 j
+  （见 worldsheet.ddf-commute-with-nonzero-virasoro 的 notes），不再是标量倍。
+
+  【b·a 项不是权：一处容易算错的地方】
+  b·a = 2α' k·p 是零模贡献的分次移位。在 DDF 归一化下（k = n k_0，2α' k_0·p = 1）b·a = n。
+  把 b·a 误读成共形权的一部分会得到错的 h。单个 Fock 空间上这一项无处安放，
+  这正是 worldsheet.ddf-operators-v6 需要动量塔的原因。
+  ⚠ 特别地 m = 0 的类光式 L_0^{(a+b)}V_J − V_J L_0^{(a)} = (J + b·a) V_J **不是零**。
+  这与 DDF 算子的 ⁅L_0, A^ε_n⁆ = 0 不矛盾，两步：
+  (i) 搬到动量塔上时，V^{(n)}_K 除振子部分外还带零模移位 e^{i n k_0·x}，
+      它把系数里的 b·a = n 抵掉一个 −n，得 Lean `lie_towerLop_towerVertex_normalized`：
+      ⁅L_m, V^{(n)}_K⁆ = (K − m) V^{(n)}_{K−m}，m = 0 处即 K·V^{(n)}_K；
+  (ii) 再乘上振子模：⁅L_0, α^ε_j⁆ = −j α^ε_j（Lean `lie_towerLop_towerModeVec` 在 m = 0），
+      故单项 ⁅L_0, α^ε_j V^{(n)}_j⁆ = −j α^ε_j V^{(n)}_j + j α^ε_j V^{(n)}_j = 0 **逐项为零**。
+  见 worldsheet.ddf-commute-with-virasoro--via-lean 的 summary。
+
+  【与 worldsheet.exponential-vertex-operator-weight 的分工】
+  · 本卡：模恒等式，代数，formalized，**一切 m**，不谈"权"这个词的定义。
+  · 那张卡：OPE 形式，含 h = α'k²/4（闭弦）/ α'k²（开弦）的数值与主场判据，physical-argument。
+  · 桥：worldsheet.exponential-vertex-operator-weight--via-mode-identity（physical-argument，
+    经 worldsheet.ope-pole-mode-commutator-dictionary，该字典自身 effective = open）。
+  ⚠ 那条桥的 depends_on 目前指向 v1；**本次不改**（v1 的推导保留作历史，且那条桥的论证
+  只用到 m ≠ 0 之外无关的部分）。是否改指本卡由 lead 裁决，见本轮报告。
+author: curator
+created: "2026-09-11"

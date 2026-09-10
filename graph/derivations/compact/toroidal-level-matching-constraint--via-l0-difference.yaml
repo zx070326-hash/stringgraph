@@ -1,0 +1,31 @@
+id: compact.toroidal-level-matching-constraint--via-l0-difference
+target: compact.toroidal-level-matching-constraint
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.toroidal-zero-mode-momenta
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      提供左右两支质量壳的结构与截距 a = ã = 1。原书用的是 (4.3.31)/(4.3.32)
+      的协变/BRST 形式，本图上游是光锥形式；两者在物理态上的等同无节点承载，故 inferred。
+  - id: worldsheet.closed-string-level-matching
+    inferred: true
+    note: |
+      提供「物理态满足 (L_0 − L̄_0)|ψ⟩ = 0」这一条件本身。原书在紧化情形直接写出
+      (8.4.10)，没有重述其来源，故这条边是 curator 的追溯。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.9)–(8.4.10)，p.250"
+    note: 抽取记录 polchinski-1998-v1#E137（L1，Schrans §8.54–§8.55，笔记 p.468）。
+summary: |
+  零模对 L_0、L̄_0 的贡献分别是 (1/4α')G_{mn}v^m_L v^n_L 与 (1/4α')G_{mn}v^m_R v^n_R。
+  两支质量壳的和给质量公式 (8.4.9)，差给 v_L² − v_R² + 4α'(N − Ñ) = 0。
+  用 ℓ_{L,R}² = (1/2α')G_{mn}v^m_{L,R}v^n_{L,R} 改写即得 ℓ∘ℓ = 2(Ñ − N)。
+gaps:
+  - "从 v 形式到 ℓ 形式的换算是 curator 的两行代数，来源未逐字给出（见目标节点 notes）。"
+  - "上游 compact.toroidal-zero-mode-momenta 含两处勘误/符号缺口（(8.4.5)、(8.4.8)）。"
+  - "协变/光锥两种质量壳形式的等同、以及 (L_0 − L̄_0)|ψ⟩ = 0 的来源都由 inferred 边承载。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

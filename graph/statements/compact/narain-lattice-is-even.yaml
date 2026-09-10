@@ -1,0 +1,31 @@
+id: compact.narain-lattice-is-even
+kind: proposition
+title: 环面配分函数的 τ → τ + 1 不变性要求 Narain 格是偶格
+statement: |
+  设 D = 26 的玻色闭弦紧化在 k 维环面上，Narain 格为 Γ（compact.narain-lattice）。
+  单圈（环面世界面）配分函数在模变换 τ → τ + 1 下不变，等价于对每个态
+    L_0 − L̄_0 ∈ Z.
+  由 compact.toroidal-level-matching-constraint，L_0 − L̄_0 在紧化方向的贡献是
+  (1/2) ℓ∘ℓ（振子部分 N − Ñ 已是整数），故模不变性要求
+    **ℓ ∘ ℓ ∈ 2 Z   对一切 ℓ ∈ Γ**,
+  即 **Γ 必须是偶格**。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.19)（ℓ∘ℓ ∈ 2Z），p.251；模不变性要求 L_0 − L̄_0 ∈ Z 是 (7.2.29)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E138，证据等级 L1
+      （Schrans §8.57–§8.63，笔记 p.472–475，[8.245]–[8.249] 逐式复现）。
+      ⚠ 本图尚无 (7.2.29)（「模不变性 ⟺ L_0 − L̄_0 ∈ Z」）的节点，
+      该步只能写在本条陈述里并在推导中记 gap。
+tags: [compactification, torus, narain, lattice, modular-invariance, consistency]
+notes: |
+  **逻辑方向值得记录**（抽取记录 #E138 明记）：本书是**先**由 τ → τ + 1 的模不变性
+  得到「偶」，**再**由「偶」推出顶点算子的互局域性（compact.even-lattice-gives-mutual-locality），
+  不是反过来。许多文献的叙述顺序相反。
+
+  这条是 Narain 链上**证据最强**的一环（有完整复现）。链上其余三环依次减弱：
+  自对偶 ⇒ 模不变（有复现）> 模不变 ⇒ 自对偶（原书只写 "a little thought shows"）
+  ≈ ΛΓ 仍偶自对偶（伴读者只证出「偶」）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

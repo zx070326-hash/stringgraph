@@ -710,26 +710,44 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
       **数学要点**：`k_0² ≠ 0` 时结论**假**——收缩给出单值因子 `(w/z)^{mn k_0²} ≠ 1`，
       所以这条对易性是「类光参考矢量」这个假设第二次真正起作用的地方
       （第一次是 (3e) 的塔上共形权）。
-    - **部分做了 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
-      需要三块，**① 已证**。
+    - **[x] 做完了 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
+      `StringFormal/NoGhost/VertexProduct.lean`，无 sorry，17 条声明公理只有标准三条
+      （2026-09-11 用 `--import StringFormal.NoGhost.VertexProduct --all` 复核）。
+      主定理 **`Fock.vertexProduct_eq_vertexOsc_add`**（算子等式）与
+      **`Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero`**（有限和形式：任何包含窗口
+      `-levelBound P ≤ K ≤ L + levelBound P` 的指标集都算得对）。三块都齐了：
       ① **相干态加法公式** `Fock.creaExpPair_eq_creaExp_add`：
       `Φ^{b+b'}_j = Σ_{p+q=j} Φ^b_p Φ^{b'}_q`（即 `E_-(b)E_-(b') = E_-(b+b')`），
       **对任意动量成立，不需要正交性**——产生半永远是交换环里的乘法，缩并只出在湮灭半。
-      证明是欧拉递推的唯一性：新引理 `Fock.creaExpPair`（卷积，窗口 `Icc 0 j`）、
+      证明是欧拉递推的唯一性：`Fock.creaExpPair`（卷积，窗口 `Icc 0 j`）、
       `Fock.creaExpPair_eq_sum_Icc`（任何包含 `[0,j]` 的窗口都算得对）与
-      `Fock.sum_mode_creaExpPair_eq_smul`（卷积满足**同一条** `b+b'` 的欧拉递推：
-      把权 `j = p + (j-p)` 劈开，对两个因子各用一次 `Fock.sum_mode_creaExp_eq_smul`，
-      产生算子提出来后两项都重组成移位后的卷积），再在 `ℚ`-代数里除以 `j`。
-      ② **仍缺** 局部有限性：对固定的 `P`，只有有限多个 `K` 使
-      `V^{(b)}_{L-K}V^{(b')}_K P ≠ 0`（下端来自 `vertexOsc_apply_eq_zero_of_levelBound_lt`，
-      上端要用 `vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}_{K+M}` 提到左边，
-      再对 `Ψ^{b'}_M P` 用同一条引理——**朴素的 level 计数不够**，因为 `V^{(b')}_K P` 的 level
-      随 `K` 增长）。缺的辅助事实是 `vertexAnn b M` 把 level `N` 送到 level `N - M`
-      （于是 `levelBound (Ψ^b_M P) ≤ levelBound P`），估计 60–100 行。
-      ③ **仍缺** 用 `lsumLocFin` 组装后两边满足同一条 `b+b'` 的产生递推，
-      由 `Fock.vertexOsc_unique` 归约到真空即 ①（真空值 `Σ Φ^b_JΦ^{b'}_K` 正是卷积）。
-      估计 ②③ 合计 150–250 行。
-      **另一条更省的路**：湮灭半也有加法公式 `Σ_{L1+L2=M} Ψ^b_{L1}Ψ^{b'}_{L2} = Ψ^{b+b'}_M`
+      `Fock.sum_mode_creaExpPair_eq_smul`（卷积满足**同一条** `b+b'` 的欧拉递推），
+      再在 `ℚ`-代数里除以 `j`。
+      ② **局部有限性已证**。上一位预判的辅助事实成立且是全部内容：
+      **`Fock.vertexAnn_mem_levelSubmodule`**（`Ψ^b_M` 把 level `N` 送到 level `N - M`，
+      对单项式按 level 强归纳，用 `vertexAnn_mul_X` 逐个剥 `X_v`）、
+      `Fock.vertexAnn_apply_eq_zero_of_level`（`M > N` 时为零）与推论
+      **`Fock.levelBound_vertexAnn_le`**：`levelBound (Ψ^b_M P) ≤ levelBound P`，
+      **对 `M` 一致**。有了它，`vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}_{K+M}`
+      提到左边后，`Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt` 给出
+      「`V^{(b)}_J V^{(b')}_K P = 0` 只要 `levelBound P + J < 0`，**与 `K` 无关**」，
+      这正是朴素 level 计数拿不到的那一步。下端 `_of_lt` 直接是
+      `vertexOsc_apply_eq_zero_of_levelBound_lt`。窗口 `Fock.vertexProdIdx`。
+      ③ **组装已证**。`Fock.vertexProduct` 用 `lsumLocFin`（局部有限性作为定义的一部分，
+      所以 `hdot` 是定义的参数）；`Fock.vertexProduct_X_mul` 是 `b+b'` 的产生递推
+      （两个 `V` 各移自己的指标，把第二个修正和重标 `K ↦ K+n` 后两项并成 `W_{L+n}`，
+      系数相加成 `(b+b')^μ`——重标用私有引理 `sum_add_right_eq_sum`）；
+      `Fock.vertexProduct_apply_one` 是真空值，正是 ① 的卷积；
+      最后 `Fock.vertexOsc_unique` 收尾。
+      **塔版本**（超出原计划）：`sum_towerVertex_towerVertex_single_of_isotropic`（单层）与
+      **`sum_towerVertex_towerVertex_of_isotropic`**（任意塔矢量）：`k_0² = 0` 时
+      `Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L`。动量算术是 `vertexMomentum_add`
+      （`m k_0 + n k_0 = (m+n) k_0`），零模半是 `j + n + m = j + (m+n)`。
+      **数学要点（供图节点 `gaps`）**：`b·b' ≠ 0` 时结论**假**，不只是没证——缩并给出
+      `exp((b·b') Σ_{l≥1} (w/z)^l/l) = (1 - w/z)^{-b·b'}`，它的展开把所有 Laurent 指标
+      混起来，`K`-求和不再局部有限，乘积也不是单个顶点算子。塔上这就是 `k_0² = 0`
+      第三次真正起作用的地方（前两次：(3e) 塔上共形权、(5) 顶点算子对易）。
+      **另一条更省的路（未走）**：湮灭半也有加法公式 `Σ_{L1+L2=M} Ψ^b_{L1}Ψ^{b'}_{L2} = Ψ^{b+b'}_M`
       （两次平移的复合＝平移之和，代数同态在生成元上比较即可，**且这个和是有限的**），
       配上 ① 可以把整个乘积公式化成三重和的重排；但重排里对 `K` 的求和仍是无限的，
       局部有限性 ② 绕不过去。
@@ -737,21 +755,43 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
       的真正内容，(5a) 只是它的输入。物理上它是「`:(k_0·∂X) e^{i(m+n)k_0·X}:` 在 `m+n ≠ 0` 时是
       全导数 `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，留数为零；`m+n = 0` 时退化成 `k_0·∂X`，
       留数是 `k_0·α_0 = 2α' k_0·p = 1`」，所以 **`δ_{m+n,0}` 来自全导数，`m` 来自归一化**，
-      这里第一次用到 `dotVec η b a = 1`。形式化路线未定，估计 200–300 行。
+      这里第一次用到 `dotVec η b a = 1`。
+      **(5a) 做完后给下一位的两条记录**（2026-09-11）：
+      **(i) 一条走不通的路（已排查，别再试）**：拿 (3e) 的模态权恒等式
+      `⁅L_0, V^{(n)}_K⁆ = K V^{(n)}_K` 对 (5a) 的和 `S_L = Σ_K V^{(m)}_{L-K}V^{(n)}_K`
+      做 Leibniz，只能得到 `T_L + U_L = L·S_L`，其中 `T_L = Σ_K K V^{(m)}_{L-K}V^{(n)}_K`、
+      `U_L = Σ_K (L-K) V^{(m)}_{L-K}V^{(n)}_K`。这是**一个方程两个未知量**，而且我们要的
+      `L = 0` 情形下 `U_0 = -T_0`，方程退化成 `0 = 0`，**没有任何信息**。
+      直觉上的原因：`L_0` 的 Leibniz 只看得见两个因子的权之和，而 (5b) 要的是把权只挂在
+      **一个**因子上；同点乘积本身对这种不对称加权是盲的。所以 (5b) 不是 (5a) 的推论，
+      必须引入 `k_0·∂X` 这个场本身。
+      **(ii) 物理结构（未形式化，供下一位设计）**：`Σ_j j V^{(m)}_j V^{(n)}_{L-j}` 是
+      `(z∂_z V^{(m)})(z)·V^{(n)}(z)` 的模态；`k_0² = 0` 时
+      `z∂_z V^{(m)} = V^{(m)}·(i m z k_0·∂X)`（无缩并），再用 (5a) 融合两个指数得
+      `i m z (k_0·∂X) e^{i(m+n)k_0·X}`。于是 `m+n ≠ 0` 时被积量是全导数
+      `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，相应系数为零；`m+n = 0` 时指数退化成 `1`
+      （**需要先证零动量顶点算子是恒等**：`Fock.vertexOsc η 0 K = if K = 0 then 1 else 0`，
+      估计 40 行），剩下 `k_0·∂X` 的零模 `k_0·α_0 = 2α' k_0·p = 1`。
+      所以真正缺的原子事实是：`Σ_j j V^{(m)}_j V^{(n)}_{-j}` 与 `k_0·α` 模态的关系。
+      候选入口是 `Fock.lie_mode_vertexOsc`（`[α^μ_p, V^{(b)}_K] = b^μ V^{(b)}_{K-p}`，
+      contract 上 `k_0` 后因 `k_0²=0` 而为零，说明 `k_0·α_p` 与塔上顶点算子**对易**——
+      这条对易性大概率是把「全导数」翻译成代数陈述的正确工具，但**未验证**）。
+      整体重估 **200–300 行**，与上一位的估计一致。
   - **[A,A] 的整条链**（记录，供下一位）：横向性 (4) 给
     `[A^ε_m, A^δ_n] = Σ_{j,l} [α^ε_j, α^δ_l] V^{(m)}_j V^{(n)}_l`（用到 (5) 的顶点算子对易
     把两个 `V` 并到右边），再用 `Fock` 的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
-    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。即：(5) 已做的是**第一步**，
-    剩下 (5a)(5b) 与双重局部有限和的 Leibniz 组装（可仿 `lie_towerLop_ddfOp_of_pos`）。
+    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。即：(5) 与 (5a) 已做，
+    剩下 (5b) 与双重局部有限和的 Leibniz 组装（可仿 `lie_towerLop_ddfOp_of_pos`）。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - `⁅L_m, A^ε_n⁆ = 0` 与「`A^ε_n` 保持 `towerPhysSubmodule`」**全部 `m` 已证**（见 (6)）；
     剩下的是 `[A,A]` 振子代数与张成性。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 的顶点算子乘积部分已做（(5) 对易 + (5a) 同点乘积），
+    仍缺 (5b) 的加权和（留数/全导数那一步）。
   - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
     所以「`A^ε_n` 把物理态送到物理态」还证不了。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
-    仍缺同点乘积 (5a) 与加权和 (5b)。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**前两步已做**（(5) 正交动量顶点算子对易、
+    (5a) 同点乘积 `Fock.vertexProduct_eq_vertexOsc_add`），仍缺加权和 (5b)。
   - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。

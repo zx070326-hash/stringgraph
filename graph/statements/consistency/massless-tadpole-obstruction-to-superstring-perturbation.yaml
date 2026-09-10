@@ -1,0 +1,102 @@
+id: consistency.massless-tadpole-obstruction-to-superstring-perturbation
+kind: proposition
+title: 无质量 tadpole 是超弦微扰论「最关键的问题」：在超共形形式下只有 dilaton 与度规迹的一个线性组合是潜在障碍；tadpole 为零时振幅只条件收敛，S 矩阵作为真空模空间 𝒵 上的函数良定义但其参数化不唯一
+statement: |
+  **设定（适用域，是陈述的一部分；全部为 Witten 1209.5461v4 §7.5 p. 140 的显式限定）**：
+  RNS 超弦微扰论在超模空间/积分链上的表述
+  （consistency.superstring-perturbation-theory-via-super-riemann-surfaces 的框架）；
+  **只考虑闭的取向弦**；**只考虑无质量粒子的 S 矩阵**；
+  **只考虑无质量粒子没有微扰质量重整化的弦紧化**。
+
+  **命题**（三条，均为原文逐字断言的转述）：
+
+  (a) **tadpole 是关键障碍**（§7.5 p. 140）：
+      > "Ultimately, the most critical question for superstring perturbation theory is to make sure that the
+      > vacuum state that one attempts to construct in perturbation theory is not destabilized by massless
+      > tadpoles."
+      即：若某亏格 g 的无质量 tadpole ⟨𝒱⟩_g 非零，微扰真空失稳，g 圈及以上的振幅没有意义。
+
+  (b) **哪一个 tadpole**（§8.3 p. 174，(8.39)(8.40)）：在超共形形式下，零动量处**只有一个** NS 扇区
+      标量顶点算符 𝒱_φ，因此
+      > "only one linear combination of the tadpoles of the dilaton and the trace of the metric is a
+      > potential obstruction to the validity of perturbation theory"，
+      并且只有一个 𝒱_{ψ_α} 可用来证明这一个障碍为零。十维杂化弦的显式形式是
+      𝒱_φ = c̃ c δ(γ) ∂̃X_I D X^I（(8.39)）。分开的 dilaton tadpole 与度规迹 tadpole 只在
+      「更一般的形式（§2.4.4）」里才会分别出现——**本卡与来源都不用那种形式**。
+
+  (c) **tadpole 为零时的收敛性与不唯一性**（§7.5 末–§7.6.1，pp. 140–143，(7.23)(7.24)(7.26)(7.27)）：
+      设无质量 tadpole 为零（(7.24)：∫_{ℳ̂_r} 𝒢_{r,α} = 0，α = 1,…,s）。则
+      · 计算 S 矩阵所需的超模空间积分**收敛，但只是条件收敛**：分离退化处
+        𝒜_{g,sing} = Σ_α ∫ (d²q / q̄q) ∫_{ℳ̂_ℓ} 𝒢_{ℓ,α} ∫_{ℳ̂_r} 𝒢_{r,α}（(7.23)）
+        在 q = 0 的对数发散被 0 乘掉（原文："rather like the 0/0 that one gets in field theory if the
+        tadpole vanishes"）；
+      · 但 q 不是一个复数而是线丛 𝒩^{−1} 的截面，该丛拓扑非平凡；改变 𝒩^{−1} 上的厄米度量
+        等价于 log ε → log ε + h，极限 ε → 0 仍存在但其值移动
+        𝒜_g → 𝒜_g − 4π Σ_α ∫_{ℳ̂_ℓ×ℳ̂_r} h 𝒢_{ℓ,α} 𝒢_{r,α}（(7.27)）；
+      · 原文结论（p. 140–141 逐字）："Different infrared regulators lead to results for the S-matrix
+        that differ by reparametrizations of 𝒵. … So the S-matrix is naturally determined, but the
+        vertex operators that are used to evaluate it are not." 其中 𝒵 是微扰真空的模空间
+        （至少含弦耦合 g_st = e^φ 这一个模），且
+        "in general there is no reason to expect 𝒵 to have a natural parametrization in terms of fields
+        such as φ."
+
+  **本节点不断言**：
+  (i) ★★ **无质量 tadpole 为零**。那是 §8.3 pp. 173–175 用时空超对称做的**对亏格的归纳论证**，
+      而归纳闭合挂在一个来源不证的 "if"（超对称在 g 圈不自发破缺）上——见推导的 gaps；
+      本卡只陈述「tadpole 是障碍」与「tadpole 为零时会怎样」。
+  (ii) ★★ 「Witten 证明了 dilaton tadpole 为零」——按 (b)，在超共形形式下根本没有单独的 dilaton tadpole，
+      只有那**一个线性组合**；任何把本卡引成「dilaton tadpole 为零」的写法都是误引。
+  (iii) 开弦 / 无定向弦（圆盘与 ℝℙ² 的 R-R 与 NS-NS tadpole，§9.4）——那是另一条链
+      （R-R tadpole 不抵消 ⇒ 反常，见 consistency.superstring-perturbative-consistency-unproven-1998 的 notes）。
+  (iv) 振幅有唯一数值——(c) 的结论强度是「S 矩阵作为 𝒵 上的函数良定义」，比「数值唯一」弱。
+  (v) 有质量重整化的模型、需要真空移动的模型（§1 p. 3 显式排除；处理它们的 off-shell 形式
+      [19–24] 截至 v4 尚未用超黎曼面语言重述）。
+uses_conventions: []
+sources:
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §7.5「Massless Tadpoles In String Theory」, p. 140（论文页；PDF p. 144），无式号：'Ultimately, the most critical question …'；同页三条适用域限定（closed oriented / massless S-matrix / no perturbative mass renormalization）与 𝒵、g_st = e^φ 的说明"
+    note: |
+      **L1 逐页读图**（researcher 2026-09-11；抽取记录
+      literature/extractions/witten-2012-superstring-perturbation.md **EW16**）。
+      ⚠ **版本红线**：式号与页码只对 **v4（2023-11-05）** 有效，本文**无期刊版**（INSPIRE recid 1188034 无
+      publication_info）。⚠ 同页有一处排印错误 "The show this"（应为 "To show this"，页图字形清晰，判为原文排印）。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §7.5 末–§7.6.1, pp. 140–143，(7.18)–(7.27)：条件收敛（'convergent, but only conditionally so'）、'0/0'、𝒩^{−1} 上厄米度量的选择使 log ε → log ε + h、结果移动 (7.27)、'differ by reparametrizations of 𝒵'"
+    note: |
+      L1（抽取记录 **EW17**）。这是 witten-2013-overview §1 p. 1 所说的步骤 **(B)**
+      （「a careful treatment of integrals that are only conditionally convergent in the infrared region」）
+      在主论文里的落地。原文同处引 [73] = H. La and P. Nelson, "Unambiguous Fermionic-String Amplitudes,"
+      PRL 63 (1989) 24（"Some of the issues have been treated in [73]"）——**本项目未登记也未读该文**。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §8.3「Vanishing Of Massless Tadpoles」, p. 174，(8.39)(8.40)：'At zero momentum, in a superconformal formalism, there is only one 𝒱_φ, so only one linear combination of the tadpoles of the dilaton and the trace of the metric is a potential obstruction …'"
+    note: |
+      L1（抽取记录 **EW19**）。**只取这一段的「哪一个 tadpole」**；同节 p. 175 的归纳论证（tadpole 为零）
+      **不入本卡的陈述**，只在推导的 summary/gaps 里记录（EW18）。
+  - ref: witten-2013-overview
+    loc: "arXiv:1304.2832v4, §1, p. 2：'The models considered here, since they do have a dilaton tadpole at two-loop order, are not models in which superstring perturbation theory works to all orders, at least not in its usual form.'"
+    note: |
+      L1（抽取记录 **EW5**）。作为 (a) 的**反面实例**登记：SO(32) 杂化弦 on CY，超对称一圈自发破缺、
+      两圈出现 dilaton tadpole，正是本卡 (a) 所说「微扰真空失稳」的模型。
+      ⚠ 该文自己用 "dilaton tadpole" 一词；按主论文 §8.3 p. 174 的说明，在超共形形式下它指的是 (b) 那一个线性组合。
+tags: [superstring, perturbation-theory, tadpole, dilaton, infrared, supermoduli, consistency, conditional-convergence]
+notes: |
+  【1. 与 consistency.superstring-perturbation-theory-via-super-riemann-surfaces 的关系】
+  那张卡的第 (c) 条「预期的红外行为」正是靠本卡 (a)(c) + §8.3 的归纳论证建立的；
+  故**那张卡的推导 depends_on 本卡**，本卡不依赖那张卡（避免环）。
+
+  【2. ★ 建议拆出的下一张卡】
+  §8.3 pp. 173–175 的归纳论证「假设 tadpole 为零且超对称在 ≤ g−1 圈不破缺，则 g 圈 tadpole
+  ⟨𝒱_φ⟩_g = 0（(8.38)+(8.42)）；若超对称在 g 圈不自发破缺，归纳闭合」是一条**独立被推导的命题**，
+  按「一个节点一个命题」应另建（建议 id：consistency.massless-tadpoles-vanish-by-genus-induction，
+  physical-argument，gaps 必抄那个 "if"）。本轮未建，因为派工单只指定本卡；
+  它的存在与否不影响本卡的陈述。
+
+  【3. 与 Polchinski 的接口】polchinski-1998-v2 §12.2 pp. 102–103 的第二个 "if"（type I 闭弦交换的红外收敛，
+  E20）与 §10.8 的 tadpole 抵消，是本卡 (a) 在开弦/无定向弦侧的 1998 年版本；
+  1998 年的自承缺口见 consistency.superstring-perturbative-consistency-unproven-1998。
+
+  【4. 约定】本卡引用的 (7.23)(7.27)(8.39) 都是结构式（因子化形式、移动量、顶点算符的场内容），
+  不含度规号差或 α′ 归一化的选择，故 uses_conventions 为空。Witten §7.1 p. 125 写闭弦
+  L_0 = (α′/4)P² + N，与 conv.alpha-prime-regge 一致，但本卡不用它。
+author: curator-superstring-pert
+created: "2026-09-11"

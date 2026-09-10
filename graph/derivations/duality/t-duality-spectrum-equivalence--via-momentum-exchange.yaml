@@ -1,0 +1,25 @@
+id: duality.t-duality-spectrum-equivalence--via-momentum-exchange
+target: duality.t-duality-spectrum-equivalence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.left-right-momenta
+  - id: compact.circle-closed-string-mass-formula
+  - id: compact.circle-level-matching
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.27)，p.247"
+    note: |
+      抽取记录 polchinski-1998-v1#E132（L1，Schrans §8.43，笔记 p.460，[8.181]）。
+summary: |
+  代入验算：在 n → w、w → n、R → α'/R 下
+    k_L = n/R + wR/α'  ⟼  w/(α'/R) + n(α'/R)/α' = wR/α' + n/R = k_L,
+    k_R = n/R − wR/α'  ⟼  wR/α' − n/R = −k_R.
+  质量公式只含 k_L² + k_R²（即 n²/R² + w²R²/α'²），在 n ↔ w、R ↔ α'/R 下两项互换，故不变；
+  level matching 只含乘积 nw，也不变。振子部分 N、Ñ 完全不参与该映射。
+gaps:
+  - "「谱相同」不等于「同一个理论」：本推导只比对了质量与约束，没有比对关联函数、算子代数或非微扰量。更强的陈述见 duality.t-duality-is-cft-isomorphism，其证据强度低得多。"
+  - "上游的质量公式与 level matching 都是 physical-argument（截距、协变/光锥形式的等同），故本条的有效状态被压到 physical-argument，尽管代数验算本身是初等的。"
+  - "本条只覆盖单个方向的紧化；多维情形的对偶群是 O(k,k;Z)（compact.narain-t-duality-group-generators），其中「单方向因子化对偶」这一类生成元原书没有和另两类并列成表（抽取记录 #E143）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

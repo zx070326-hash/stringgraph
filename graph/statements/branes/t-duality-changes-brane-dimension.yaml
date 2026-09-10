@@ -1,0 +1,27 @@
+id: branes.t-duality-changes-brane-dimension
+kind: proposition
+title: T 对偶把 Dp 膜变成 D(p∓1) 膜
+statement: |
+  设有一张 Dp 膜（branes.d-brane-from-t-duality）。对某个空间方向作 T 对偶：
+  (1) 若该方向**平行**于膜（膜上是 Neumann），T 对偶把它换成 Dirichlet，
+      得到一张 **D(p−1) 膜**；
+  (2) 若该方向**垂直**于膜（膜上是 Dirichlet），T 对偶把它换成 Neumann，
+      得到一张 **D(p+1) 膜**。
+  未紧化、全 Neumann 的开弦理论是 p = 25 的 D25 膜；每对一个方向作对偶，p 减 1。
+uses_conventions: [conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7 附近（Schrans 说在原书 p.269），无式号"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E155，**内容 L1、式号 L0**
+      （Schrans §8.115 内，笔记 p.531）。
+      ⚠ Schrans 在此处的评语「This important remark allows one to establish dualities
+      between different string theories, e.g. type IIA and type IIB superstrings」
+      是**第二卷的内容，不是本章的陈述**（抽取记录明记不得挂到本记录），本图不采。
+tags: [d-brane, t-duality, dirichlet, neumann, brane-dimension]
+notes: |
+  本条是 duality.t-duality-exchanges-neumann-dirichlet 的直接推论，
+  但它在**未紧化方向**上使用 T 对偶，因而额外依赖
+  duality.t-duality-in-decompactification-limit（本书未论证的极限，抽取记录 Q27）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

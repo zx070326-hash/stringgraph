@@ -42,7 +42,7 @@ sources:
 notes: |
   由 curator 于 2026-09-11（curator-v1-locs）按 §12.10 表 B 第 5 项新建。
   建立动机：本图大量节点的陈述文本直接抄了原书带 `∼` 的 OPE
-  （worldsheet.tt-ope-central-charge、worldsheet.primary-field、
+  （worldsheet.tt-ope-central-charge、worldsheet.primary-field-v2、
   worldsheet.brst-current-primary-iff-total-central-charge-zero 等），
   而 `∼` 的强度此前没有任何节点定义过；Lean 形式化时这会直接决定要证的命题是什么。
 

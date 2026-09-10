@@ -1,0 +1,133 @@
+id: worldsheet.ddf-transverse-oscillator-algebra-v2
+kind: proposition
+title: DDF 算子之间的对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（v2：只含对易关系本身，不含与横向振子代数的同型比较）
+statement: |
+  设 A^i_n 是 worldsheet.ddf-operators-v5 定义的 DDF 算子（i = 2..D-1，n ∈ Z \ {0}；
+  同一条类光参考方向 k_0² = 0，同一套横向偏振 ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}，
+  标度按 2α' k_0·p = 1 逐塔取定）。则在扇区 {p : k_0·p ≠ 0} 的动量塔上
+
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n, 0}，    i, j = 2..D-1，  m, n ∈ Z \ {0}。
+
+  注意右端**没有**中心项以外的贡献，也没有 k_0 或 p 的残余依赖：
+  这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      与 worldsheet.ddf-operators-v5 同一处来源；本节点承载的是 worldsheet.ddf-operators-v4 陈述文本里
+      「且满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，即一个 D-2 维横向自由振子代数」
+      这一句**中的公式部分**（「即一个 D-2 维横向自由振子代数」那层识别现由
+      worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 承载）。
+      **式号仍未核实（L0）**；GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；
+      GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      「谱生成代数」这一名称的来源即在于本命题：DDF 算子生成一份自由振子代数，
+      从而由一个物理态生成整塔物理态。式号沿用旧节点 worldsheet.ddf-operators，未与原文核对
+      （literature/extractions/brst-cohomology-sources.md §3.1：GT 1972 正文四条获取路径全部失败）。
+
+      **【2026-09-11（四）归属削弱，curator；本条 source 保留不删】**
+      按 goddard-2008 参考文献表（L1 逐字，extractions/gsw-1987-v1.md E3）：
+      **Goddard 本人把本对易关系 (5.5) 归给 [43] Brower–Goddard 1973 与 [44] Brower–Goddard 1972，
+      不归给本文**；本文（其 [45]）对应的是**无鬼定理本身**（该综述 §6, p.15, (6.4)，无编号），
+      且 GT 证明真正使用的代数是 (6.3) 的 [L_m, K_n] = −n K_{m+n}。
+      故本条 source 的正当性**弱于**下面的 goddard-2008 与 gebert-nicolai-1995。
+      brower-goddard-1972 / brower-goddard-1973 已登记进 sources.bib，但**正文均未获取（L0），
+      不得承载论证**，故本节点暂不把它们列为 source。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p. 11, eq. (5.5)；偏振正交归一 ε^i·ε^j = δ^{ij} 与 k·ε^i = 0 见同页 (5.1) 之后的正文"
+    note: |
+      本命题在该文中是**带编号的显示公式** (5.5)，逐字
+      `[A^i_m, A^j_n] = m δ^{ij} δ_{m,−n},   1 ≤ i, j ≤ D − 2.`
+      （researcher L1 逐页读图，extractions/gsw-1987-v1.md §2 E3）。
+      **★ 本节点 statement 里的前提 ε^i·ε^j = δ^{ij} 有逐字来源**：
+      (5.1) 之后正文逐字「orthonormal polarization vectors for a photon of momentum k, i.e.
+      **ε^i · ε^j = δ^{ij}, k · ε^i = 0**」——两条偏振条件同时给出。
+      **仍然成立的限制**：历史综述，(5.5) **无证明**；且作者本人把它归给 [43]/[44]（Brower–Goddard），
+      见上一条 source 的归属削弱说明。故只升可追溯性，不承载论证。
+      **号差** (−,+,+,+) = mostly-plus，与 conv.metric-mostly-plus 一致，**无需换算**；归一化逐字 k·p = 1。
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.4)（右端显式保留算子 k(0) = k·α_0）；其依据是 p. 593, eq. (3.1)（物理态的李括号）与 §2.1, p. 582, eq. (2.62)（零模字典 [ψ_0, φ_0] = ([ψ,φ])_0）；归一化 k·r = 1 见 p. 594 同页正文；d − 2 个正交归一偏振见 §3.2, p. 599"
+    note: |
+      **本命题在数学物理文献中的证明所在处**（CMP 172 (1995) 571–622；
+      researcher L1 逐页读期刊排版 PDF，extractions/gsw-1987-v1.md §4 E15/E17）。
+      (3.4) 逐字 `[A^ξ_m, A^η_n] = m(ξ·η) δ_{m+n,0} (k(−1))_0 = m(ξ·η) δ_{m+n,0} k(0)`，
+      引出句逐字「**According to (2.62)** the above commutator then translates into」。
+      **★ 这是本图目前唯一逐字回答「右端为何恰好是 m δ^{ij}、不带 α' 或 k_0·p 的残余因子」的来源**：
+      G–N **把算子 k(0) 显式留在右端**，并在同页逐字说明「one has to find a lightlike vector k = k(r)
+      such that **k·r = 1**. In this case the transversal DDF operators … realize **precisely** the algebra of
+      d − 2 transversal oscillators」。k·r = 1 即本节点的 2α' k_0·p = 1。
+      这直接回应了本节点 statement 末段「右端没有 k_0 或 p 的残余依赖……正是归一化的作用」那句话。
+      **论证路线不是两个顶点算子的 OPE + 围道形变**，而是「物理态的李括号 (3.1) + 零模字典 (2.62)」，
+      全程形式级数：推导见 worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket。
+      ⚠ 同页那句「realize precisely the algebra of d − 2 transversal oscillators」是**同型识别**，
+      不是本节点的内容：它由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 承载。
+tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra]
+notes: |
+  【换代来历，2026-09-11（五），curator，分支 agent/curator/ddf-algebra-split】
+  本节点是 worldsheet.ddf-transverse-oscillator-algebra 的换代版本。旧卡把**两个命题**写在一张卡上：
+    (1) 对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（本节点）；
+    (2) 末句「即 {A^i_n} 生成一份 D-2 维横向自由玻色振子代数（Heisenberg 代数），
+        与世界面横向振子 α^i_n 的代数（worldsheet.transverse-oscillator-commutators）逐字同型」
+        （现由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 承载）。
+  后果是记账性的：(2) 把旧卡的**每一条**推导都拉到 worldsheet.transverse-oscillator-commutators
+  （physical-argument）之下，其中 --via-zero-mode-bracket 自身论证是 rigorous（G–N CMP §3.1），
+  (2) 是它**唯一**剩下的上限。拆卡按根 CLAUDE.md 原则 1 走「新建 + 旧卡 superseded_by」，
+  不就地改旧卡文本。拆卡建议本来就写在旧卡 notes 与
+  ddf-transverse-oscillator-algebra--via-zero-mode-bracket 的 gaps 第 6 条里（交 lead/auditor），lead 已派发。
+
+  【陈述文本相对旧卡的唯一改动】删去上述 (2) 那一句，其余**逐字照抄**（前提、公式、末段关于
+  「右端没有 k_0 或 p 的残余依赖」的说明都不动）。前提里的 ε^i·ε^j = δ^{ij} 与 m, n ≠ 0 的量词
+  也照抄旧卡（它们是旧卡相对 worldsheet.ddf-operators-v4 已经写出的显式化，有 goddard-2008 (5.1)
+  后的逐字来源）。**没有新增或削弱任何前提。**
+
+  【两条推导都改指本节点】--via-zero-mode-bracket（G–N 零模李括号，own rigorous）与
+  --via-conformal-weight（GSW/GT 的 OPE + 围道形变，physical-argument）按 docs/STATUS_LEVELS.md
+  的「旧推导的去留」裁决做 git mv 改名 + target 改指本节点；旧卡因此没有推导，
+  有效状态为 open，但它有 superseded_by，`stringgraph report` 不把它列进 open_propositions。
+  两条推导原先都有一条指向 worldsheet.transverse-oscillator-commutators 的 inferred 边，
+  那条边只承载被拆掉的 (2)，已**撤销**（理由逐条写在各自的 notes 里）。
+
+  【有效状态】本节点 effective = **rigorous**，best_derivation = --via-zero-mode-bracket
+  （own rigorous；其余依赖 effective 为 rigorous 或 formalized）。
+  --via-conformal-weight 仍是 physical-argument（被 worldsheet.ope-commutator-dictionary 封顶），
+  两条并存，工具取高者。**这不是论证变强，而是记账修正**：G–N §3.1 的严格论证在旧卡上
+  早已登记为 rigorous，只是被末句比较压住。
+
+  【还没解决的事，原样搬运】
+  - G–N ↔ 本图的归一化字典仍是本项目推断（--via-zero-mode-bracket 的 gaps 第 4 条），
+    一般 α' 的形式无文献来源；这是本节点 statement 里 2α' k_0·p = 1 的唯一薄弱处。
+  - (3.1) 的母式 (2.120) 所在页未读（同推导 gaps 第 2 条）。
+  - ε·p = 0 的核查结论（「不是本命题的缺口」）其推理是本项目的（同推导 gaps 第 5 条）。
+  - **Lean 侧完全未起步**：`formal/StringFormal/NoGhost/VertexOperator.lean` 文件头
+    "Mathematical gaps" 第 2 条逐字「No operator products. `V(b, z) V(b', w)` and hence
+    `[A^i_m, A^j_n]` are untouched.」。故本节点**不得**标 formalized。
+    形式化的两条路线：(i) 围道路线需要顶点算子乘积与重排序；(ii) 顶点代数路线需要
+    Mathlib 的 Mathlib/Algebra/Vertex/（Locality 仍在 TODO）加零模同态 (2.62)。
+
+  【⚠ statement 里的 worldsheet.ddf-operators-v5 指针：合并 main 后已被 v6 取代（2026-09-11（五）晚，curator）】
+  本卡的 statement 逐字照抄旧卡，因此写的是「worldsheet.ddf-operators-v5 定义的 DDF 算子」。
+  与此同时 main 上（提交 56ca5ac）**v5 已被 worldsheet.ddf-operators-v6 取代**：v6 把 A^i_n 的定义
+  从围道积分改成模态和 A^ε_n = Σ_m (ε·α_m) V^{(n)}_m（与 Lean `StringFormal.NoGhost.ddfOp` 逐句对应，
+  status formalized）。本卡的**依赖边已随 main 自动换代为 v6**（两条推导的 depends_on 都指 v6），
+  只有 statement 与本 notes 里的**文字指针**仍写 v5——按项目原则 1，改陈述文本等于新建卡，
+  故本卡不就地改。
+  **这不影响命题内容**：v5 与 v6 定义的是同一个算子（v6 的模态和就是 v5 围道积分的洛朗展开，
+  见 worldsheet.ddf-contour-equals-mode-sum 一线），两卡的三条结构性前提（k_0² = 0、ε·k_0 = 0、
+  2α' k_0·p = 1）逐字相同。
+  **建议（交 lead / ddf-all-wire 的持有人）**：若要让文字指针也对上，按换代流程新建
+  worldsheet.ddf-transverse-oscillator-algebra-v3（只把 v5 改成 v6，其余逐字），
+  与 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 的同类指针一起做。
+  本任务不做，以免与 ddf-all-wire 分支互相覆盖。
+
+  【为什么它对无鬼定理是必需的】worldsheet.no-ghost-theorem-v4 第 (1b) 条断言
+  H_phys(k;k_0)/H_0(k;k_0) 与横向 DDF Fock 空间 H^⊥(k) **等距同构**；「H^⊥(k) 上的 Gram 矩阵
+  对角正定」这一步以本命题为 (H1)（worldsheet.transverse-ddf-fock-gram-matrix 的假设编号），
+  另需 (A^i_n)† = A^i_{−n}（worldsheet.ddf-operators-adjoint）。
+  ⚠ **无鬼定理 v4 的陈述只说「与 24 个横向 DDF 振子的 Fock 空间等距同构」**，
+  并不断言 H^⊥(k) 与光锥横向振子 Fock 空间同构，故 --via-goddard-thorn **不**依赖
+  worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators，只依赖本节点（见该推导 depends_on 的 note）。
+author: curator
+created: "2026-09-11"
