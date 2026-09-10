@@ -211,4 +211,11 @@
 
 ## 基础设施
 
-- [ ] `scripts/check_axioms.lean`：给定声明名，输出其公理集合，非标准三公理则退出非零。供 `stringgraph` 未来接入。
+- [x] `scripts/check_axioms.lean`：给定声明名，输出其公理集合，非标准三公理则退出非零。
+  `lake env lean --run scripts/check_axioms.lean <DeclName>...`，或 `--all` 从 stdin 读名字表；
+  每行 `<ok|bad|missing>\t<声明名>\t<公理集合>`，`sorryAx`、未知声明都算失败。
+  用 `Lean.importModules`（`loadExts := false`，因而不需要 `enableInitializersExecution`/unsafe main）
+  加载 `StringFormal` 环境，再对每个名字跑 `Lean.collectAxioms`；`--import <Module>` 可换环境。
+  图侧接入已做：`uv run stringgraph check-axioms`（`tools/stringgraph/axioms.py`）把结论映回节点 id，
+  非标准公理同时报到陈述卡和依赖它的 `formalized` 推导上；**不进 `validate`/pre-commit**（要起 Lean）。
+  2026-09-11 全图 14 个 `formal.lean_decl` 跑通：14 ok，0 bad，0 missing。

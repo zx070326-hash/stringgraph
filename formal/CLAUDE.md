@@ -18,11 +18,18 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
 ## 与图的关系
 
 - 图节点通过 `formal.lean_decl` 与 `formal.lean_file` 指向这里的声明。`stringgraph validate` 检查文件存在。
-- 只有 **无 sorry、无新增公理** 编译通过的声明才能让对应推导标 `formalized`。检查方式：
+- 只有 **无 sorry、无新增公理** 编译通过的声明才能让对应推导标 `formalized`。检查方式（先 `lake build`）：
   ```bash
-  lake env lean --run scripts/check_axioms.lean <DeclName>   # 待写
+  cd formal
+  lake env lean --run scripts/check_axioms.lean StringFormal.NoGhost.Fock.lie_Lop_Lop
+  lake env lean --run scripts/check_axioms.lean --all < names.txt   # 名字表从 stdin 读
   ```
-  在此之前，用 `#print axioms <DeclName>` 手工确认只出现 `propext`、`Classical.choice`、`Quot.sound`。
+  输出每行 `<ok|bad|missing>\t<声明名>\t<公理集合>`；只要出现 `propext`、`Classical.choice`、
+  `Quot.sound` 之外的公理（`sorryAx` 也是公理）或声明不存在，就退出 1。交互式开发时
+  `#print axioms <DeclName>` 仍然更快。
+- 全图一次过：`uv run stringgraph check-axioms`（可加 `--json` / `--formalized-only` / `--decl NAME`），
+  它把上面脚本的结论映回节点 id，非标准公理会指名是哪个陈述卡和哪条 `formalized` 推导。
+  这条命令**不在** `validate` 和 pre-commit 里（要起 Lean，太慢），改完 Lean 后自己跑。
 - **禁止**为了让 `validate` 通过而写带 `sorry` 的陈述。没准备好就不写声明，像 `NoGhost/Statement.lean` 那样在文件头写清楚。
 
 ## 目录
@@ -45,6 +52,8 @@ StringFormal/
                             α^μ_p / L_n / 顶点算子；含 p=0 的模态代数与横向性；
                             无 [L_m, V]，无 A^i_n 本身（见文件头 gaps）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
+scripts/
+  check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
 ```
 
 复用既有形式化的调研记录见 `NOTES-virasoro-reuse.md`。
