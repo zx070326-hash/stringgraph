@@ -1,0 +1,118 @@
+id: worldsheet.ddf-transversality-gives-local-finiteness-v2
+kind: proposition
+title: 横向性 ε·k_0 = 0 使 DDF 模态和在代数动量塔上局部有限：窗口外的项逐向量为零，故 A^ε_n 是处处有定义的线性算子
+statement: |
+  记号与 worldsheet.ddf-operators-v6 完全一致：动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)
+  是**代数**直和（有限支撑，无完化、无解析结构；worldsheet.momentum-tower-fock-space），
+  V^{(n)}_K 是 :e^{i n k_0·X(z)}: 在塔上的 **z^K 洛朗系数**（把第 N 层送到第 N+n 层，
+  把振子能级升高 K − n），α^ε_m = ε·α_m = Σ_μ η_μ ε^μ α^μ_m 是偏振收缩的振子模。
+
+  【两个界】对塔上的每个向量 x ∈ T(p; k_0)（**不要求 x 是能级齐次的**）定义
+    L(x) := 出现在 x 中的振子单项式的最大**能级**（各占据层上取最大值），
+    M(x) := 出现在 x 中的振子变量的最大**指标**（各占据层上取最大值）。
+  两者都是有限的自然数（x 的支撑有限、每层是多项式）。
+
+  【断言】设横向性成立：ε·k_0 = 0。则对**每个** n ∈ Z、**每个** x ∈ T(p; k_0)
+  与**每个**整数 m 满足
+    m < n − L(x)   或   m > M(x)
+  的情形，都有
+    α^ε_m V^{(n)}_m x = 0 。
+  等价地：模态和 Σ_{m ∈ Z} α^ε_m V^{(n)}_m x 至多有
+  ( M(x) + L(x) − n + 1 ) 项非零，落在有限窗口
+    W(n, x) := { m ∈ Z : n − L(x) ≤ m ≤ M(x) }
+  之内。因此 worldsheet.ddf-operators-v6 定义的
+    A^ε_n = Σ_{m ∈ Z} α^ε_m V^{(n)}_m
+  是塔上处处有定义的 R-线性算子，**不需要收敛性假设、不需要完化、不需要解析延拓**；
+  并且它可以用**任何**包含 W(n, x) 的有限指标集 s 来计算：
+    A^ε_n x = Σ_{m ∈ s} α^ε_m V^{(n)}_m x 。
+
+  【两条截断的机制不同，只有上截断用横向性】
+  (下截断，不用横向性) V^{(n)}_m 把能级升高 m − n，能级为负的向量是零，故 m < n − L(x) 时
+    已经有 V^{(n)}_m x = 0（顶点算子本身就杀死 x）。
+  (上截断，**这里才用 ε·k_0 = 0**) 横向性给出 [α^ε_m, V^{(n)}_K] = 0 对**所有** m（含 m = 0），
+    于是 α^ε_m V^{(n)}_m x = V^{(n)}_m α^ε_m x，而 m > M(x) 时 α^ε_m 湮灭 x。
+
+  【本节点明确不断言】
+  (a) 必要性（ε·k_0 ≠ 0 时和不是局部有限的）——见 notes，若需引用应另立节点；
+  (b) A^ε_n ≠ 0，或它与文献的围道积分写法相同（后者是 worldsheet.ddf-operators-v6 notes 里
+      登记的 open 缺口）；
+  (c) A^ε_n 与 L_m 或与另一个 A 的任何对易关系。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfSummand_apply_eq_zero_of_notMem_window
+  lean_file: StringFormal/NoGhost/DDFOperator.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfSummand_apply_eq_zero_of_notMem_window（本卡 formal.lean_decl）；配套 StringFormal.NoGhost.{ddfWindow, ddfOp, ddfOp_apply, towerLevelBound, towerModeBound, ddfShifted_apply_eq_zero_of_lt, ddfShifted_apply_eq_zero_of_gt, towerVertex_apply_eq_zero_of_lt, towerModeVec_apply_eq_zero_of_lt, towerModeVec_mul_towerVertex_of_transverse}；Fock 侧 StringFormal.NoGhost.Fock.{levelBound, vertexOsc_apply_eq_zero_of_levelBound_lt, modeBound}"
+    note: |
+      本仓库，合并提交 45626af（formal 侧提交 03c4304），Lean 4 + Mathlib v4.33.1，
+      无 sorry，该文件 28 条声明的公理只有 propext / Classical.choice / Quot.sound
+      （formal/TODO.md 的 `ddf-operators` 第 (4) 项逐字登记；**curator 未自行重跑 `lake build`**）。
+      **组装已完成**：v1 的 sources 里逐字引用的「`A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` is not
+      defined … neither the assembly nor …」已被 03c4304 作废，`ddfOp` 与
+      `ddfSummand_apply_eq_zero_of_notMem_window` 现在都存在。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      只定位被断言的对象 A^i_n 与条件 ε·k_0 = 0 的文献出处，**不承载论证**。
+      **GSW 不作本断言**：文献把 ε·k_0 = 0 只当作「使被积量成为权 1 primary / 避免奇异 OPE」的条件，
+      不讨论模态和的局部有限性——把 A^i_n 当解析对象时这个问题根本不出现。
+tags: [bosonic-string, spectrum-generating-algebra, well-definedness, formalized]
+notes: |
+  取代 worldsheet.ddf-transversality-gives-local-finiteness（v1，2026-09-11 建）。
+
+  【为什么换代（三处，都不是措辞问题）】
+  (1) **v1 的陈述把「worldsheet.ddf-operators-v5 的围道积分展成模态和」写进了 setup**，
+      即含 --via-mode-sum 的「第 0 步」。lead 2026-09-11 裁决把 A^ε_n 的定义改为模态和
+      （worldsheet.ddf-operators-v6），围道写法退为文献写法；v1 的这句话既指向已被取代的 v5，
+      又把一条 open 的字典绑进了陈述，使得**任何 formalized 的推导挂在 v1 上都是超额声明**。
+  (2) **v1 的窗口 n − N ≤ m ≤ N 用了同一个界 N 的两侧**，而 Lean 里两侧是**不同的**量：
+      下侧用能级界 `towerLevelBound`，上侧用指标界 `towerModeBound`。两者机制不同
+      （见陈述末段），恒有 M(x) ≤ L(x)（一个指标 r 的振子至少贡献能级 r），
+      故本卡的窗口比 v1 的**更窄**，v1 的窗口是本卡在能级齐次向量 |ψ⟩（L = N，M ≤ N）上的推论。
+      ⚠ 「M ≤ L」这一步在 Lean 里**没有具名引理**，故本卡不把 v1 的窗口写进陈述。
+  (3) **v1 的精确窗口只对能级齐次的 |ψ⟩ 陈述**（v1 推导 --via-mode-sum 的 gaps 第 5 条就是这件事），
+      Lean 的 `towerLevelBound` / `towerModeBound` 是对**任意**向量取 sup，故本卡对任意向量成立。
+      这条 gap 因此关闭。
+
+  v1 的推导 worldsheet.ddf-transversality-gives-local-finiteness--via-mode-sum 已随之改名并改挂本卡
+  （worldsheet.ddf-transversality-gives-local-finiteness-v2--via-mode-sum，仍 physical-argument），
+  v1 因此不再有推导。这是有意的：v1 是围道版陈述的历史记录，本图不再引用它。
+
+  【本节点的来历：Lean 侧发现，文献未明写】
+  这是 worldsheet.ddf-operators-v4 的 notes 第 (2) 条登记的观察，2026-09-11 拆卡时立卡（v1），
+  同日 Lean 组装完成后换代为本卡。原文要点：横向条件 ε·k_0 = 0 **不只是**为了让被积量成为
+  权 1 primary，它还是 A^ε_n 作为**代数**算子良定义的必要输入。
+  文献（GSW §2.3.3、GT 1972、goddard-2008 §5）把 A^i_n 写成围道积分，围道积分默认被积量是
+  可形变的解析对象，于是「和是否有限」这个问题根本不出现；一旦落到代数动量塔
+  （无完化、无解析结构）上，它就是必须先证的第一件事。
+  在 Lean 里这一点被推到极致：横向性假设 `hεb` 是 **`ddfOp` 这个定义本身的参数**
+  ——非横向时 A^ε_n 根本写不出来，不是"写出来但不收敛"。
+
+  【必要性方向：本节点不断言，登记备查】若 ε·k_0 ≠ 0，则由
+  `lie_towerModeVec_towerVertex`（[α^ε_p, V^{(n)}_K] = n (ε·k_0) V^{(n)}_{K−p}）得
+  α^ε_m V^{(n)}_m x = V^{(n)}_m α^ε_m x + n (ε·k_0) V^{(n)}_0 x，
+  第二项与 m 无关且一般非零，故对一切充分大的 m 都有同一个非零贡献，模态和在代数塔上
+  **不是**局部有限的。**这一逆命题不是本节点的断言**（按根 CLAUDE.md「一个节点一个命题」）；
+  若日后需要引用，应另立节点 `worldsheet.ddf-nontransverse-mode-sum-diverges`。
+  注意它需要 n ≠ 0 且 V^{(n)}_0 x ≠ 0，这两条 Lean 侧都没有证。
+
+  【n = 0 也成立】Lean 的 `ddfSummand_apply_eq_zero_of_notMem_window` 对 n : ℤ 无限制，
+  故本卡对 n = 0 一并成立（窗口变成 −L(x) ≤ m ≤ M(x)）。
+  worldsheet.ddf-operators-v6 的 notes (2) 已登记这一点；文献排除 n = 0 是代数上的理由，
+  不是良定义性的理由。
+
+  【与其他 DDF 节点的关系】
+  - worldsheet.ddf-operators-v6：本命题的对象来源（纯定义卡）。逻辑上有一处**循环的外观**：
+    v6 的定义里说「这个和逐向量有限（见本命题）」，本命题又依赖 v6 提供对象。
+    Lean 里这不是循环：`ddfSummand`（单项）先定义、局部有限性再证、`ddfOp`（和）最后组装，
+    三者是严格递增的依赖链。图中把 v6 当作对象卡、本命题当作它的良定义性命题，
+    是这条链在两张卡上的投影。
+  - worldsheet.ddf-commute-with-positive-virasoro、worldsheet.ddf-commute-with-virasoro、
+    worldsheet.ddf-transverse-oscillator-algebra：另外三条命题。逻辑上本命题**在它们之前**——
+    先要 A^ε_n 是算子，再谈它的对易子。文献侧的论证走解析围道路线、并不显式经过本命题，
+    故本图**不**把本命题连成走文献路线那几条推导的依赖（那会是伪造的边）；
+    只有走 Lean / 代数路线的推导（worldsheet.ddf-commute-with-positive-virasoro--via-lean）
+    才实质依赖它，那里也确实连了边。
+author: curator
+created: "2026-09-11"

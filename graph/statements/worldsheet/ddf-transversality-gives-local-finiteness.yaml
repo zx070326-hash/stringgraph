@@ -112,5 +112,19 @@ notes: |
   A^i_n = Σ_m α^i_m V^{(n)}_{−m}），同一窗口按 m ↦ −m 反射后读作 **−N ≤ m ≤ N − n**。
   **本图不采这一套**；此处只为便于与用该约定写的旧文本（本次已改写的
   worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint 的 summary 第 2 步）对照。
+
+  【2026-09-11（五）：本卡被 worldsheet.ddf-transversality-gives-local-finiteness-v2 取代，curator】
+  三条理由，全在陈述文本里，故必须换代而不是改本卡：
+  (1) 本卡的 setup 逐字写「worldsheet.ddf-operators-v5 的围道积分展成模态和即 A^i_n = Σ_m …」，
+      把「围道 ⟹ 模态和」这一步绑进了陈述。lead 2026-09-11 裁决把定义卡换代为
+      worldsheet.ddf-operators-v6（模态和即定义），本卡这句话既指向已被取代的 v5，
+      又把一条 open 的字典留在陈述里，使任何 formalized 的推导挂在本卡上都成为超额声明。
+  (2) 本卡的窗口 n − N ≤ m ≤ N 两侧用同一个界 N；Lean 里两侧是**不同**的量
+      （下侧能级界 `towerLevelBound`，上侧指标界 `towerModeBound`），v2 按 Lean 写。
+  (3) 本卡的精确窗口只对**能级齐次**的 |ψ⟩ 陈述；Lean 对任意塔向量成立，v2 据此放宽。
+  本卡的推导 `--via-mode-sum` 已改名改挂到 v2
+  （worldsheet.ddf-transversality-gives-local-finiteness-v2--via-mode-sum，仍 physical-argument），
+  故本卡不再有推导。这是有意的：本卡是围道版陈述的历史记录，本图不再引用它。
+superseded_by: worldsheet.ddf-transversality-gives-local-finiteness-v2
 author: curator
 created: "2026-09-11"

@@ -1,0 +1,186 @@
+id: worldsheet.ddf-operators-v6
+kind: definition
+status: formalized
+title: DDF 算子的定义（**模态和**版：A^ε_n = Σ_m (ε·α_m) V^{(n)}_m，横向性 ε·k_0 = 0 是定义的参数）——纯定义，不含对易关系断言
+statement: |
+  【本卡与 v5 的唯一实质差别】v5 把 A^i_n 写成**围道积分**；本卡把它写成**模态和**，
+  并把横向性 ε·k_0 = 0 提升为定义的**参数**（没有它，下面的和不是有限和，算子根本写不出来）。
+  围道写法退为文献写法，见 notes。lead 裁决 2026-09-11。
+
+  【数据】固定 D ∈ N 与交换环 R（下面出现顶点算子处另设 R 为 Q-代数），
+  对角时空度规分量 η_μ（conv.metric-mostly-plus 下 η = diag(−1,+1,…,+1)，η_μ² = 1），
+  以及 α'（conv.alpha-prime-regge）。给定
+    · 基点动量 p 与**类光参考向量** k_0，
+    · 偏振向量 ε。
+  按 worldsheet.momentum-tower-fock-space 的记号取动量塔
+    T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)，
+  第 N 层的零模是 α^μ_0|_N = (2α')^{1/2}(p + N k_0)^μ。记重标度向量
+    a^μ := (2α')^{1/2} p^μ,   b^μ := (2α')^{1/2} k_0^μ。
+
+  【三个条件及其地位】
+    (T) 横向性     ε·k_0 = 0        （等价：η(ε, b) = 0）
+    (N) 类光性     k_0² = 0         （等价：η(b, b) = 0）
+    (S) 归一化     2α' k_0·p = 1    （等价：η(b, a) = 1）
+  **(T) 是本定义的参数**：下面的模态和只有在 (T) 下才逐向量有限（见
+  worldsheet.ddf-transversality-gives-local-finiteness-v2），故不假设 (T) 时 A^ε_n 这个符号
+  没有指称对象。**(N) 与 (S) 是本卡所定义的 DDF 数据的一部分**，但它们的作用是别的：
+  (N) 保证 k_0·p 沿整条塔不变（从而 (S) 一次取定即对整条塔成立），
+  (S) 由单值性要求 2α' n k_0·p ∈ Z（∀n）取该整数为 1，使洛朗指标的记账是整数移位。
+  两者都**不是**下面这个和有意义的前提，因此在形式化里它们是关于 A^ε_n 的**定理的假设**，
+  不是 A^ε_n 的**定义的参数**（对照见 notes 的【与 Lean 的逐句字典】）。
+
+  【顶点算子的模】设 V^{(n)}_K（K ∈ Z）是正规序指数 :e^{i n k_0·X(z)}: 在塔上的
+  **z^K 洛朗系数**（z^K-系数约定，即 lead 2026-09-11 裁决的 (α) 约定）：
+  它把第 N 层送到第 N + n 层，并把振子能级升高 K − n；
+  单值因子 z^{2α' n k_0·p} 在 (N)+(S) 下等于 z^n，故指标移位 K ↦ K − n 是整数移位。
+
+  【定义】记偏振收缩的振子模
+    α^ε_m := ε·α_m = Σ_μ η_μ ε^μ α^μ_m      (m ∈ Z)，
+  在 (T) 之下定义 **DDF 算子**
+    A^ε_n := Σ_{m ∈ Z} α^ε_m V^{(n)}_m ,      n ∈ Z 。
+  这个形式上无限的和在 T(p;k_0) 上**逐向量是有限和**：对每个 x ∈ T(p;k_0) 只有落在某个
+  有限窗口内的 m 使 α^ε_m V^{(n)}_m x ≠ 0（这一点是命题
+  worldsheet.ddf-transversality-gives-local-finiteness-v2，(T) 在那里被用于**上**截断），
+  故 A^ε_n 是 T(p;k_0) 上处处有定义的 R-线性算子，
+  **不需要完化、不需要收敛性假设、不需要解析延拓**。
+
+  【横向标架的特例】取 ε = e_i（i = 2..D−1，横向指标约定与 worldsheet.light-cone-quantization
+  一致：0、1 方向组成光锥对 ±），且固定类光直线的同时固定横向标架使 e_i·k_0 = 0、
+  e_i·e_j = δ^{ij}，则 A^{e_i}_n 就是文献记号 A^i_n。
+
+  【本卡明确不断言】
+  (a) [L_m, A^ε_n] = 0 —— 见 worldsheet.ddf-commute-with-positive-virasoro（m ≥ 1）与
+      worldsheet.ddf-commute-with-virasoro（∀m）；
+  (b) [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} —— 见 worldsheet.ddf-transverse-oscillator-algebra；
+  (c) A^ε_n ≠ 0，以及 DDF 态张成横向物理谱 —— 本图与 Lean 均未建立；
+  (d) 「存在类光 k_0 使 k_0·p ≠ 0」——这是关于**实**洛伦兹二次型的存在性断言，
+      在一般交换环 R 上为假，本卡把 (N)(S) 作为给定数据而不证其可满足性。
+uses:
+  - worldsheet.bosonic-fock-space
+  - worldsheet.momentum-tower-fock-space
+  - worldsheet.virasoro-algebra-v2
+  - worldsheet.old-covariant-physical-states
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfOp
+  lean_file: StringFormal/NoGhost/DDFOperator.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfOp（本卡 formal.lean_decl）；配套 StringFormal.NoGhost.{towerModeVec, ddfSummand, ddfWindow, ddfOp_apply}；塔与顶点算子模来自 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{TowerFock, towerMomentum, towerShift, towerDiag, towerMode, towerVertex, dotVec}"
+    note: |
+      本仓库，合并提交 45626af（formal 侧提交 03c4304），Lean 4 + Mathlib v4.33.1，
+      无 sorry，**28 条声明的公理只有 propext / Classical.choice / Quot.sound**
+      （formal/TODO.md 的 `ddf-operators` 第 (4) 项逐字登记；**curator 未自行重跑 `lake build`**）。
+      逐句字典见 notes。这是本卡 `status: formalized` 的依据。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      沿用 worldsheet.ddf-operators-v5 的核实结果（literature/extractions/brst-cohomology-sources.md §5.2–5.3）：
+      §2.3.2 标题为 'Construction of transverse physical states'，只占 p.100–101；DDF 与谱生成代数按目录属
+      §2.3.3（p.102–112），Google Books 全文检索 'DDF' 正文首次命中 p.103。**式号仍未核实（L0）**。
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1，
+      是 (S) 的特例。
+      ⚠ **GSW 写的是围道积分，不是模态和**：本卡的模态和与 GSW 写法之间的字典见 notes，
+      该字典在本图中**没有严格节点承载**。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      式号沿用旧节点 worldsheet.ddf-operators，未与原文核对；GT 1972 正文四条获取路径全部失败
+      （literature/extractions/brst-cohomology-sources.md §3.1）。同样是围道写法。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, eq. (5.1)–(5.3)（arXiv:0802.3249v1）：A^i_n 的定义与适用条件 k·p = 1"
+    note: |
+      号差逐字 signature (−,+,+,+) = mostly-plus，与 conv.metric-mostly-plus 一致，无需换算；
+      归一化逐字 k·p = 1，在 α' = 1/2 下即本卡的 (S)。该文是历史综述，**同样只写围道积分**。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（DDF 构造需要 k_0·p ≠ 0 的注记；页码/式号未核实）"
+    note: |
+      ms.no-ghost-theorem 第一轮审计 B6 指出 Polchinski §4.1 有此注；抽取记录
+      literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
+tags: [bosonic-string, spectrum-generating-algebra, definition, formalized]
+notes: |
+  取代 worldsheet.ddf-operators-v5（v5 取代 v4，v4 取代 v3，v3 取代 v2）。
+  按项目规则陈述文本不可变，故新建本节点。
+
+  【为什么换代（lead 裁决 2026-09-11）】
+  formal/StringFormal/NoGhost/DDFOperator.lean 把 DDF 算子定义为**模态和**
+  `ddfOp η a b ε hη hεb n = lsumLocFin (fun j => ddfSummand η a b ε n j) (ddfWindow n) …`，
+  其中 `ddfSummand η a b ε n j = towerModeVec η a b ε j * towerVertex η b n j`（即 α^ε_j V^{(n)}_j）。
+  **横向性 `hεb : dotVec η ε b = 0` 是这个定义的显式参数**——不是为了方便，而是因为
+  `lsumLocFin` 的构造要求先给出「窗口外的项在给定向量上为零」的证明
+  （`ddfSummand_apply_eq_zero_of_notMem_window`），而该证明的**上**截断整个建立在横向性上。
+  非横向时这个和在代数 Fock 塔上不是局部有限的（见 v5 的 notes 与
+  worldsheet.ddf-transversality-gives-local-finiteness 的【必要性方向】），算子不可表达。
+  v5 用围道积分定义，Lean 里没有对应物；继续以 v5 为定义卡会让整条 DDF 支路的
+  formalized 无处落脚，且逼着每条下游推导重复登记「围道 ⟹ 模态和」这一步。
+  **裁决：图内定义采模态和，围道积分退为 notes 里的文献写法。**
+
+  【围道 ⟹ 模态和的字典：本图的 open 缺口，诚实登记】
+  文献（GSW §2.3.3、GT 1972、goddard-2008 (5.1)）一律把 A^i_n 写成
+    A^i_n = ∮ (dz/2πi) ∂X^i(z) e^{i n k_0·X(z)} 。
+  它与本卡的模态和相同，是「形式洛朗展开 + 取总 z^{−1} 系数」的标准两行核对：
+  ∂X^i(z) ∝ Σ_m α^i_m z^{−m−1}，:e^{i n k_0·X(z)}: = Σ_K V^{(n)}_K z^K，
+  总 z^{−1} 系数要求 (−m−1) + K = −1，即 K = m，给出 Σ_m α^i_m V^{(n)}_m。
+  **但本图没有任何节点承载这条字典**：最接近的
+  worldsheet.ope-pole-mode-commutator-dictionary 是**形式分布版的模态字典**且自身
+  effective = open（无推导）；worldsheet.ope-commutator-dictionary 是围道 ⟹ **对易子**，
+  不是围道 ⟹ 模态和。
+  按 lead 裁决，本卡**不把这条字典写进陈述**，故本卡的 formalized 不受它拖累；
+  代价是「本图的 A^ε_n 与文献的 A^i_n 是同一个算子」这句话在图中是 **未论证的**。
+  ⚠ 任何要把本图 DDF 结论回译成文献陈述的下游（首当其冲是 ms.no-ghost-theorem 的回译审计）
+  必须显式引用这条缺口。补它的两条路：
+    (a) 建 `worldsheet.ddf-contour-equals-mode-sum` 卡并给推导（physical-argument 起步）；
+    (b) 先把 worldsheet.ope-pole-mode-commutator-dictionary 从 open 救出来。
+  curator 建议 (a)，理由是 (b) 的对象（形式分布）与这里需要的对象（塔上的洛朗系数）不同。
+
+  【与 Lean 的逐句字典（本卡 status: formalized 的依据）】
+  · 度规对角分量 η_μ，η_μ² = 1 ⇒ `η : Fin D → R` 与假设 `hη : ∀ μ, η μ * η μ = 1`；
+  · 内积 x·y ⇒ `dotVec η x y = Σ_μ η μ * x μ * y μ`；
+  · a^μ = (2α')^{1/2} p^μ、b^μ = (2α')^{1/2} k_0^μ ⇒ `a b : Fin D → R`；
+  · 塔 ⊕_N F(p + N k_0) ⇒ `TowerFock D R = ℤ →₀ Fock D R`，第 j 层动量
+    `towerMomentum a b j = a + j·b`（**j = N，无符号翻转**）；
+  · (T) ε·k_0 = 0 ⇒ `hεb : dotVec η ε b = 0`，**`ddfOp` 的显式参数**；
+  · (N) k_0² = 0 ⇒ `hbb : dotVec η b b = 0`，**只出现在定理假设里**（如
+    `lie_towerLop_ddfOp_of_pos`），不是 `ddfOp` 的参数；
+  · (S) 2α' k_0·p = 1 ⇒ `hba : dotVec η b a = 1`，同上；
+  · α^ε_m = Σ_μ η_μ ε^μ α^μ_m ⇒ `towerModeVec η a b ε m = Σ_μ (η μ * ε μ) • towerMode η a b μ m`；
+  · V^{(n)}_K（z^K 系数，层 N → N+n，能级 +（K−n）） ⇒
+    `towerVertex η b n K = towerShift n ∘ towerDiag (fun _ => Fock.vertexOsc η (n·b) (K − n))`；
+  · α^ε_m V^{(n)}_m ⇒ `ddfSummand η a b ε n m`；
+  · 有限窗口 ⇒ `ddfWindow n x = Finset.Icc (n − towerLevelBound x) (towerModeBound x)`；
+  · A^ε_n = Σ_m α^ε_m V^{(n)}_m ⇒ **`ddfOp η a b ε hη hεb n`**（`lsumLocFin` 组装）；
+  · 「任意够大的窗口都算得对」 ⇒ `ddfOp_apply`。
+
+  **Lean 比本卡更一般的三处**（本卡是 Lean 的特例，故 formalized 成立）：
+  (1) Lean 的 `ddfOp` **不假设 (N) 与 (S)**；本卡把它们写进 DDF 数据。取 `hbb`、`hba` 成立即得本卡对象。
+  (2) **Lean 对 n = 0 同样有定义**（`ddfOp … (n : ℤ)` 无 n ≠ 0 的限制，局部有限性对 n = 0 照样成立）。
+      v2–v5 都写 n ∈ Z \ {0}，本卡改写为 n ∈ Z。文献排除 n = 0 是因为 A^i_0 在**代数**上退化
+      （它不移动动量层，且横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 在 m = 0 处平凡），
+      不是因为它没有定义。⚠ 下游凡引用「A^i_n（n ≠ 0）」的命题（首当其冲
+      worldsheet.ddf-operators-adjoint 与 worldsheet.ddf-transverse-oscillator-algebra）
+      仍按各自陈述的 n ≠ 0 读，**本卡的 n ∈ Z 不自动放宽它们**。
+  (3) Lean 的 ε 是**任意**满足 `dotVec η ε b = 0` 的向量，不要求 ε 属于某个正交归一横向标架，
+      也不要求 ε·p = 0。本卡的【横向标架的特例】是它的一个取法。
+
+  **Lean 未覆盖的三处**（故本卡的这些内容仍是 rigorous 层面的记账，不是机器验证）：
+  (i) 围道积分写法与本卡模态和的等价（见上面的 open 缺口）；
+  (ii) (S) 的单值性来由（z^{2α' n k_0·p} ∈ z^Z）——Lean 只把 (S) 当假设，
+      不重现导出它的 OPE 论证；
+  (iii) (d)「存在类光 k_0 使 k_0·p ≠ 0」的可满足性——在一般环 R 上为假，
+      需 R = R 并引入洛伦兹号差与类光锥，是一条独立待办（DDFOperator/DDF 文件头均已声明）。
+  这三处**都不在本卡的陈述里**（(i)(ii) 只在 notes，(iii) 已在【本卡明确不断言】(d) 排除），
+  故不阻碍 `status: formalized`。
+
+  【自 v5 保留但未在本卡陈述中重复的说明】
+  v5 的说明 (a)（参考方向取**去心直线** {λ k_0 : λ ∈ R\{0}} 而不是射线，标度 λ = 1/(2α' k_0·p)
+  的符号随 sign(k_0·p)）与说明 (b)（(S) 沿一条塔不变，因 k_0² = 0 ⇒ k_0·(p + n k_0) = k_0·p）
+  在本卡中被压缩进【三个条件及其地位】一段。两者内容不变，
+  (b) 的 Lean 对应物是 `dotVec_towerMomentum_right_of_isotropic`。
+  说明 (c)（单值性给出 (S)）见上面的 (ii)。
+  k_0·p = 0 的扇区（特别是 p = 0）DDF 构造退化，仍不在覆盖范围内（第一轮审计 B6）。
+
+  【偏振 ε 与 ∂X^i 的记号关系（auditor 第五轮观察，转录自 v5）】
+  v5 引入偏振 ε^i 但公式写 ∂X^i，二者只在固定横向标架时一致。**本卡不再有这个问题**：
+  陈述直接用 ε 与收缩 α^ε_m = ε·α_m，标架化只作为特例出现（与 Lean 的 `towerModeVec` 一致）。
+author: curator
+created: "2026-09-11"

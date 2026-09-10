@@ -3,7 +3,7 @@ target: worldsheet.ddf-commute-with-virasoro
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: 被断言的对象；类光条件 k_0² = 0 与横向条件 ε·k_0 = 0 都写在该定义卡里，是本论证的两个输入。
   - id: worldsheet.virasoro-generators-free-boson
     note: |

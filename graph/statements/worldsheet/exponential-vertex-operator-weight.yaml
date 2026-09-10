@@ -218,5 +218,27 @@ notes: |
   【下游】worldsheet.ddf-commute-with-virasoro--via-conformal-weight（summary 第 1 步）与
   worldsheet.vertex-operator-adjoint--via-radial-conjugation（summary 第 1 步末：
   h = 0 使径向共轭的模反射恰为 J ↦ −J、不带指标平移）。两条均已改为依赖本卡。
+
+  【2026-09-11（五）：【升级路径】(i) 的预案已执行（lead 裁决），curator】
+  formalizer 的 `formal/StringFormal/NoGhost/VertexWeightNeg.lean` 已合入 main，
+  `Fock.lie_Lop_vertexOsc_of_ne` 对**一切 m ≠ 0** 给出模恒等式
+  （与 VertexWeight.lean 的 m ≥ 1 半系数完全相同）。按上面 (i) 的逐字建议：
+    · 新建**模形式卡** worldsheet.exponential-vertex-operator-mode-weight-identity
+      （proposition，只断言 L_m 恒等式、不提 OPE、限 m ≠ 0），
+      其推导 --via-lean 为 **formalized**，lean_decl `StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_ne`；
+    · **本卡新增推导** worldsheet.exponential-vertex-operator-weight--via-mode-identity
+      （physical-argument），依赖新卡 + worldsheet.ope-pole-mode-commutator-dictionary。
+  **本卡 status 与陈述一字未动，有效状态也未变**（仍 physical-argument，
+  best_derivation 仍是 --via-ope-with-t；--via-mode-identity 被 open 的字典压到 open）。
+  变的是**记账可见性**：现在图中能读出本命题的困难在哪一步——不在 Wick 缩并
+  （那部分已机器验证），而在那条 open 的 OPE⟺模字典上。
+  ⚠ 三条限制，reviewer 请核：
+  (1) 新卡**只覆盖 m ≠ 0**；m = 0 是真正的例外（Sugawara 求和在 m = 0 时 j = 0 与 j = m 并项），
+      不是疏漏，逐字理由见 VertexWeightNeg.lean 文件头「尚缺」第 1 条。
+  (2) 新卡是**单个 Fock 空间**上的恒等式，两侧 L_m 的零模参数不同（a+b 与 a），
+      不是真正的对易子；塔上写成对易子的版本 Lean 只有 m ≥ 1。
+  (3) --via-mode-identity **只覆盖本卡的 (2)(b)（开弦 α'k²）与 (3)（h = 0）**，
+      不覆盖 (2)(a) 的闭弦 α'k²/4——那需要边界镜像加倍那一步（边界 (e)，本图无节点）。
+      (2)(a) 仍由 --via-ope-with-t 承担。
 author: curator
 created: "2026-09-11"

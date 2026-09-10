@@ -143,5 +143,67 @@ notes: |
   本条只需要被积量是权 1 primary（k_0² = 0、ε·k_0 = 0），不需要任何两个顶点算子的乘积；
   横向振子代数需要 V(b, z) V(b', w) 的 OPE，形式化路径完全不同（Lean 侧后者尚未起步）。
   故按「一个节点一个命题」分开。
+
+  【2026-09-11（五）：Lean 已覆盖 m ≠ 0；本卡**不**标 formalized。弱节点已立（lead 裁决），curator】
+  formal 侧 9ac8f41（`formal/StringFormal/NoGhost/DDFOperatorNeg.lean`，无 sorry，
+  7 条声明公理只有标准三条）证得
+    `lie_towerLop_ddfOp_of_ne`：k_0² = 0、2α' k_0·p = 1、ε·k_0 = 0、**m ≠ 0** ⟹ ⁅L_m, A^ε_n⁆ = 0，
+  n 无限制。这**不是**本卡的全部内容：本卡的量词是 **∀ m ∈ Z（含 m = 0）**。
+  按项目原则「status 只能实话实说」，**本卡不标 formalized、不新增 --via-lean 推导**；
+  已形式化的那一半由新的弱节点
+    **worldsheet.ddf-commute-with-nonzero-virasoro**（m ≠ 0，effective = formalized）
+  单独承载，模式与 worldsheet.brst-nilpotent-at-c26 相同。
+  本卡的有效状态因此**不变**（physical-argument，best_derivation 仍是 --via-conformal-weight）。
+
+  **剩余障碍已被钉死在一处**（formal/TODO.md `ddf-operators` 第 (5) 项逐字）：
+  「`hm : m ≠ 0` 在 `lie_towerLop_ddfOp_of_ne` 里只用了一次，就是引用
+    `lie_towerLop_ddfSummand_of_ne`。伸缩和与窗口分析在 `m = 0` 处逐字成立。
+    真正缺的是单 Fock 恒等式在 `m = 0` 的版本。」
+  即障碍**不在** DDF 这一层，而在 worldsheet.exponential-vertex-operator-mode-weight-identity
+  的 m = 0 例外：Sugawara 正规序求和在 m = 0 时 j = 0 与 j = m 两项**重合**
+  （并成一项 ½:α_0·α_0:，中间段为空），把 m ≠ 0 的系数代进去会得到**错**答案。
+  补上单 Fock 的 m = 0 恒等式后，本卡即可整体升为 formalized。
+
+  ⚠ **必须读准的更正（lead 2026-09-11）**：缺的陈述是 **[L_0, A^ε_n] = 0**，
+  **不是** [L_0, A^ε_n] = −n A^ε_n。A^ε_n 是**权 1 流的零模**，
+  [L_m, j_r] = ((h−1)m − r) j_{m+r} 在 h = 1、r = 0 时为零。
+  本卡【推论】里「A^i_n 把能级移动 −n」那句话说的是**另一件事**：
+  L_0 本征值的移位来自顶点算子的**动量移位** p ↦ p + n k_0 与质量壳记账
+  α'(p + n k_0)² = α'p² + n（k_0² = 0、2α' k_0·p = 1），不是来自这个括号。
+  ⚠ 上面 tomassini-2008 (2.38) 逐字写 [L_0, A^i_n] = −n A^i_n，那是**固定纤维**版本的
+  **修改版** DDF 算子，与本图/Lean 的塔上版本不是同一个对象（见 source note 与
+  literature/extractions/gsw-1987-v1.md §5）。**不要把两者混为一谈。**
+
+  **本卡【推论】的 caveat（供 auditor 回译时逐条对照）**：推论断言的两半现状不同——
+  · 「L_m(A^i_n ψ) = 0 ∀ m > 0」这一半，其所依赖的 [L_m, A^ε_n] = 0（m ≥ 1）**已形式化**
+    （经弱节点 worldsheet.ddf-commute-with-nonzero-virasoro）；
+  · 「L_0 一条连同质量壳记账」这一半**完全未形式化**：既缺 [L_0, A^ε_n] = 0，
+    又缺塔上的物理子模定义（Lean `Fock.physSubmodule` 只在单个 Fock 空间上，
+    DDFOperator.lean 文件头 "What is NOT here" 第 3 条）。
+  因此「DDF 算子把物理态映为物理态」在本图中**仍是 physical-argument**，不得记为已机器验证。
+
+  【2026-09-11（五）续：正模那一半已单独立卡并 formalized；附 formalizer 对 L_0 记账的更正】
+  formal 侧 57fce31 新增 `formal/StringFormal/NoGhost/TowerPhysical.lean`，定义了塔上的
+  正模子空间 `towerPositiveModeSubmodule = {Ψ | L_m Ψ = 0 ∀ m ≥ 1}` 并证明
+  `ddfOp_mem_towerPositiveModeSubmodule`（A^ε_n 保持它）。
+  本推论的**前一半**因此有了独立的 formalized 承载：
+    **worldsheet.ddf-operators-preserve-positive-mode-conditions**（弱节点）。
+  本卡的推论**整体不变、status 不变**（后一半仍缺）。
+
+  ★ **一处必须纠正的记账（formalizer 2026-09-11，curator 转录）**：
+  本图此前有滑向「塔的每一层要用**不同的**截距 a_j = a + j(k_0·p)」的读法。**那是错的。**
+  · 塔上的 L_0（Lean `towerLop η a b 0`）在第 j 层**已经用该层自己的动量** p_j = p + j k_0，
+    所以 (L_0 − a₀)Ψ = 0 是塔向量上一个**完全统一**的条件，a₀ 是**一个**常数；
+  · 在 k_0² = 0 与 2α' k_0·p = 1 之下，第 j 层能级 N 处的 L_0 本征值是
+      α' p_j² + N = α' k² + j + N，
+    故物理条件是 **α' k² + j + N = a₀**——在 (j, N) 平面上是一条**反对角线 j + N = 常数**，
+    **不是**逐层不同的截距；
+  · A^ε_n 沿这条反对角线移动（层 +n、振子能级 −n），本征值不变
+    （Lean `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`，且与求和指标 j 无关）。
+    **这正是 A^ε_n 是权 0 算子的算术理由，也说明层依赖不是障碍。**
+  · 推论：L_0 条件把能级逐层钉死为 N = a₀ − α'k² − j，
+    这就是本卡推论里「A^i_n 把能级移动 −n」那句话的准确内容。
+  ⇒ **剩余障碍只有括号 [L_0, A^ε_n] = 0（formalizer 进行中），不是任何关于截距的额外约定。**
+  这与上一段「⚠ 必须读准的更正」是同一件事的两面：缺的是括号，且那个括号等于零而非 −n A^ε_n。
 author: curator
 created: "2026-09-11"

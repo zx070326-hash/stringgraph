@@ -1,0 +1,136 @@
+id: worldsheet.ddf-transversality-gives-local-finiteness-v2--via-lean
+target: worldsheet.ddf-transversality-gives-local-finiteness-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      被断言的对象。v6 的 `formal.lean_decl` 是 `StringFormal.NoGhost.ddfOp`，而本推导的目标声明
+      `ddfSummand_apply_eq_zero_of_notMem_window` 正是 `ddfOp` 的构造性输入
+      （`lsumLocFin` 要求「窗口外的项在该向量上为零」的证明）。
+      横向性 ε·k_0 = 0（`hεb : dotVec η ε b = 0`）写在 v6 的三个条件 (T) 里，逐字对应。
+      ⚠ 记账细节：本推导**不需要** v6 的 (N) k_0² = 0 与 (S) 2α' k_0·p = 1
+      （Lean 侧 `ddfSummand_apply_eq_zero_of_notMem_window` 的假设只有 `hη` 与 `hεb`）。
+      它们仍写在 v6 的数据里，因此本条边比 Lean 实际用到的更强；这不影响 formalized。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      代数动量塔 T(p; k_0) = ⊕_N F(p + N k_0) 与其上「逐层作用的 α^μ_m」「移位算子 e^{i n k_0·x}」
+      的定义卡（formalized，lean_decl `Fock.towerPairing`；塔本体是 `TowerFock D R = ℤ →₀ Fock D R`，
+      逐层算子是 `towerDiag`，移位是 `towerShift`）。
+      「局部有限」这个概念只有在这个**有限支撑、无完化**的代数直和上才有内容。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      每一层的 `Fock D R = MvPolynomial (Osc D) R` 与它的 level 分级（`Fock.level`、
+      `Fock.levelSubmodule`）。本推导的两个界 `Fock.levelBound`（= `P.support.sup (level D)`）
+      与 `Fock.modeBound`（= `P.vars.sup (·.2)`）都是在这张卡的对象上定义的，
+      塔上的 `towerLevelBound` / `towerModeBound` 是它们在占据层上取 sup。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      **只提供「局部有限和 ⟹ 良定义算子」这一构造模式的共用零件**，不提供 Virasoro 关系：
+      Lean 侧 L_m = (1/2)Σ_n :α_{m−n}·α_n: 的良定义性用的正是同一个 `lsumLocFin`
+      与同一个 `Fock.modeBound` 上截断（`Fock.mode_apply_eq_zero_of_modeBound_lt`）。
+      本推导把同一模式套在 A^ε_n 上。⚠ 本推导**不**用到 [L_m, L_n] 或中心荷。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfSummand_apply_eq_zero_of_notMem_window（目标声明）；`ddfWindow`（第 257–259 行的窗口定义）、`ddfOp`（第 289–293 行的组装）、`ddfOp_apply`（第 295–300 行）、`towerLevelBound`（第 135–137 行）、`towerModeBound`（第 140–141 行）；两条截断引理 `ddfShifted_apply_eq_zero_of_lt`、`ddfShifted_apply_eq_zero_of_gt`；其上游 `towerVertex_apply_eq_zero_of_lt`、`towerModeVec_apply_eq_zero_of_lt`、`towerModeVec_mul_towerVertex_of_transverse`、`Fock.vertexOsc_apply_eq_zero_of_levelBound_lt`"
+    note: |
+      本仓库，合并提交 45626af（formal 侧提交 03c4304），Lean 4 + Mathlib v4.33.1。
+      文件无 sorry；formal/TODO.md 的 `ddf-operators` 第 (4) 项逐字登记
+      「`StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条」
+      （即 propext / Classical.choice / Quot.sound）。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **不承载本推导的论证**，只定位被断言的对象与条件 ε·k_0 = 0 的文献出处。
+      GSW 不作本断言（把 A^i_n 当解析对象时局部有限性不是一个问题）。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/DDFOperator.lean。目标声明逐字为
+
+    theorem ddfSummand_apply_eq_zero_of_notMem_window (η a b ε : Fin D → R)
+        (hη : ∀ μ, η μ * η μ = 1) (hεb : dotVec η ε b = 0) (n : ℤ) (x : TowerFock D R) (j : ℤ)
+        (hj : j ∉ ddfWindow n x) : ddfSummand η a b ε n j x = 0
+
+  其中 `ddfSummand η a b ε n j = towerModeVec η a b ε j * towerVertex η b n j`（即 α^ε_j V^{(n)}_j），
+  `ddfWindow n x = Finset.Icc (n − towerLevelBound x) (towerModeBound x)`（即本卡的 W(n, x)）。
+  **假设只有 `hη`（η_μ² = 1）与 `hεb`（ε·k_0 = 0）；x 是任意塔向量，不要求能级齐次；
+  n 是任意整数，含 n = 0。**
+
+  证明分两侧，机制不同：
+
+  **下截断（`ddfShifted_apply_eq_zero_of_lt`，不用横向性）。**
+  j < n − towerLevelBound x 时先由 `towerVertex_apply_eq_zero_of_lt` 得 V^{(n)}_j x = 0，
+  再复合 α^ε_j。`towerVertex_apply_eq_zero_of_lt` 逐层归约到
+  `Fock.vertexOsc_apply_eq_zero_of_levelBound_lt`：`vertexOsc η c K` 把能级恰好升高 K
+  （`Fock.vertexOsc_mem_levelSubmodule`），而 `Fock.levelBound P + K < 0` 时目标能级为负，
+  能级为负的子模是零。塔上的指标移位 K ↦ K − n 由 `towerVertex` 的定义
+  （`towerShift n ∘ towerDiag (fun _ => Fock.vertexOsc η (n·b) (K − n))`）吸收。
+
+  **上截断（`ddfShifted_apply_eq_zero_of_gt`，这里才用横向性）。**
+  横向性 `hεb` 给 `towerModeVec_mul_towerVertex_of_transverse`：
+  α^ε_p ∘ V^{(n)}_K = V^{(n)}_K ∘ α^ε_p 对**所有** p（**含 p = 0**）。
+  这一条的上游是 `lie_towerModeVec_towerVertex`：⁅α^ε_p, V^{(n)}_K⁆ = n (ε·k_0) V^{(n)}_{K−p}，
+  横向时右端为零。把 α^ε_j 移到右边后，j > towerModeBound x 时
+  `towerModeVec_apply_eq_zero_of_lt` 给 α^ε_j x = 0。
+  ⚠ 塔上的 p = 0 情形**必须**靠 `towerShift`：单个 Fock 空间上 [α^μ_0, V_K] 恒为零
+  （零模是标量），塔上才有正确的动量记账。
+
+  **合并**（`ddfSummand_eq_ddfShifted` 把 `ddfSummand n j` 写成 `ddfShifted n 0 j`，
+  再对 j 落在窗口哪一侧分情形）即得目标。
+
+  **组装到算子（本卡陈述的后两句）**：
+  `ddfOp η a b ε hη hεb n = lsumLocFin (fun j => ddfSummand η a b ε n j) (ddfWindow n) (…)`
+  ——第三个参数就是上面这条定理，所以横向性是 `ddfOp` 的**定义参数**；
+  `ddfOp_apply` 给出「任何满足『窗口外为零』的有限集 s 都算得对」，
+  即本卡「可以用任何包含 W(n, x) 的有限指标集来计算」那一句。
+gaps:
+  - |
+    **本推导只覆盖本卡陈述的内容，不覆盖它与文献的接口**：文献把 A^i_n 写成围道积分
+    ∮ (dz/2πi) ∂X^i e^{i n k_0·X}；本图（v6）与 Lean 都用模态和。两者相同这件事
+    是 worldsheet.ddf-operators-v6 的 notes 里登记的 **open 缺口**
+    （本图最接近的 worldsheet.ope-pole-mode-commutator-dictionary 是形式分布版且 effective = open）。
+    按 lead 2026-09-11 裁决，该字典不写进任何陈述，故不压低本推导；
+    **但把本卡结论回译成文献陈述的下游（ms.no-ghost-theorem 的回译审计）必须显式引用它。**
+  - |
+    **必要性方向（ε·k_0 ≠ 0 ⟹ 和不局部有限）未证**。Lean 有
+    `lie_towerModeVec_towerVertex`（⁅α^ε_p, V^{(n)}_K⁆ = n (ε·k_0) V^{(n)}_{K−p}），
+    这是必要性论证的关键一步，但「余项对无穷多个 m 都非零」还需要 n ≠ 0 与 V^{(n)}_0 x ≠ 0，
+    两者 Lean 侧都没有。本卡的【明确不断言】(a) 已排除该方向。
+  - |
+    **本卡陈述里的 M(x) ≤ L(x) 未在 Lean 中具名**（因此本卡不把 v1 的窗口 n − N ≤ m ≤ N
+    写进陈述，只在 notes 里说明它是推论）。这是一行初等观察（指标 r 的振子至少贡献能级 r），
+    但按项目规矩不写成"已形式化"。
+  - |
+    **一般交换环，无实结构**：R 只是 Q-代数，η 只满足 η_μ² = 1。
+    「存在类光 k_0 使 k_0·p ≠ 0」在一般 R 上为假，故本推导（与 v6）都只把
+    k_0² = 0、2α' k_0·p = 1 当给定数据。要谈可满足性需 R = R 与洛伦兹锥，是独立待办。
+  - |
+    **k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内**：那里 v6 的 (S) 不可满足。
+    ⚠ 但注意本推导本身**并不使用** (S)，所以严格地说 Lean 的局部有限性在该扇区照样成立；
+    受限的是 v6 定义卡的适用范围，不是本推导的论证。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【相对 v1 推导 --via-mode-sum 的三处升级，逐条对应 v1 那条的 gaps】
+  (1) v1 gaps 第 1 条「第 0 步（围道 ⟹ 模态和）在本图中没有严格依据」——
+      **已由换代绕开**（v6 直接以模态和为定义），但字典本身仍是 open 缺口，见本推导 gaps 第 1 条。
+  (2) v1 gaps 第 3 条「不标 formalized：A^i_n 与那个模态和在 Lean 里都还没有定义，组装未做」——
+      **已关闭**。03c4304 加入 `ddfOp`（`lsumLocFin` 组装）与 `ddfOp_apply`。
+  (3) v1 gaps 第 5 条「窗口依赖 |ψ⟩ 是能级齐次的向量」——
+      **已关闭**。Lean 的 `towerLevelBound` / `towerModeBound` 对任意向量取 sup。
+  v1 gaps 第 2 条（缺 reviewer 复核记录 ⟹ 不能标 rigorous）在这里不适用：
+  本推导不是手写论证，是机器检查，走的是 formalized 那一档。
+
+  【与 --via-mode-sum 的关系】同一命题的两条独立记录：
+  worldsheet.ddf-transversality-gives-local-finiteness-v2--via-mode-sum 是手写的两步论证
+  （physical-argument，因无 reviewer 复核记录），本条是机器检查。工具取高者，
+  故本卡的 best_derivation 是本条。手写那条保留不删——它写清了每一步用到什么，
+  是 reviewer 与回译审计的入口。
+author: curator
+created: "2026-09-11"
