@@ -431,7 +431,10 @@
   pages   = {301--335},
   year    = {1989},
   doi     = {10.1007/BF01217910},
-  note    = {标题已订正并核实（Project Euclid 卷期目录 + Crossref）：是 super-Virasoro，不是 supra-Virasoro。卷/期/页已核实。内容是 RNS 超弦（FGZ 1986 的超对称推广），不是玻色弦 c=26，勿用于玻色弦结论。全文在付费墙后，定理编号未核实。见 extractions/brst-cohomology-sources.md §2。}
+  note    = {标题已订正并核实（Project Euclid 卷期目录 + Crossref）：是 super-Virasoro，不是 supra-Virasoro。卷/期/页已核实。内容是 RNS 超弦（FGZ 1986 的超对称推广），不是玻色弦 c=26，勿用于玻色弦结论。
+             **全文已核实（2026-09-11，35 页逐页读毕）**。获取途径：Project Euclid 免费端点 https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104179468 （与 1991 那篇同一路线）。
+             可引用的编号结果：**Theorem 2.20 (p.321)** 逐字「There are unitary isomorphisms T ∩ P ≅ P/rad P ≅ H^0_rel」= 超弦无鬼定理的上同调形式（两扇区 κ=0,1/2；前提 p != 0、D = 10、p 未来向、R 扇区零模空间取 T_0 ⊕ T_1）；**Corollary 2.15(ii)** 作者自命名 "(No-ghost Theorem) H^0_rel(p,κ) is a positive definite space"；**Theorem 2.4** 消灭定理（"Suppose p != 0"）；**Theorem 2.7** R 扇区零模 supercharge 复形上同调为零（{D_R, ε} = 1）；**Proposition 1.7(ii)** 「Q^2 = 0 iff D = 10」但证明外包给 Ohta [13] 与 Terao–Uehara [15]；**Definition 2.2** 相对复形 = Ker b_0 ∩ Ker β_0 ∩ Ker K ∩ Ker D_R（κ=0）；**Proposition 4.3** GSO 子复形上同调；**Theorem 5.1 / 5.4** 绝对复形上同调；**Proposition 5.5** p = 0 例外情形；**Theorem 3.3.1** 超李代数同调正合序列；**Lemma 5.3.1 (Dixon–Taylor)** 指认 Kato–Ogawa 的 Ker A = Im A 结构。
+             **编号陷阱**：p.305 Lemma 1.4 与 p.306 Definition 1.4 同号；各章公式号重起。**与 fgz-1986 同型：D = 10 是假设不是结论。** p.320 Remark 明证 V(p,κ) 一般不是 Verma 模直和——与 figueroa-ofarrill-kimura-1989 p.111 引 Brower–Friedman 的完全可约性矛盾。引 Kato–Ogawa [11]、Ohta [13]；**不引 Henneaux**；Note added in proof 称与 FOK 独立。见 extractions/lian-zuckerman-1989.md。}
 }
 
 @article{lian-zuckerman-1991,
@@ -470,10 +473,93 @@
   pages   = {443--460},
   year    = {1983},
   doi     = {10.1016/0550-3213(83)90680-6},
-  note    = {元数据已核实（INSPIRE 记录 177600；卷页由 FGZ 1986 参考文献 5 独立佐证）。报告号 **KUNS 637**（INSPIRE report_numbers，L2；检索后端 L4 对此有异议，认为 637 属 RIFP 系列且 Kato 当时在东京——两方冲突未裁决，此处按 INSPIRE 记）。
+  note    = {元数据已核实（INSPIRE 记录 177600；卷页由 FGZ 1986 参考文献 5 与 LZ 1989 参考文献 [11] 独立佐证）。报告号 **KUNS 637**；**KUNS 归属争议已于 2026-09-11 关闭**：INSPIRE raw_affiliation 与 INIS 单位字段均为「Department of Physics, Kyoto University」，此前检索后端（L4）「637 属 RIFP、Kato 在东京」的异议不成立。preprint_date 1982-04，预印本 18 页；INIS 补 issue 3、出版日 1983-02-28；KEKSCAN 2000-33-955（主机 lib-extopc.kek.jp 已四次 socket hang up，勿再试）；无 CDS。
              **摘要已升级为逐字（INSPIRE，2026-09-10）**：「Covariant canonical quantization of the bosonic string is performed, based on the BRS invariance principle. Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition Q_B |phys> = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner. There an interesting relation between critical dimension and BRS symmetry is noticed; namely, the conditions D = 26 and alpha_0 = 1 for the space-time dimension D and the zero-intercept alpha_0 of leading trajectory are required by the nilpotency Q_B^2 = 0 of the BRS charge. In addition, ghost number fractionization is observed in this system.」
              **方向已定：给的是「Q_B^2 = 0 ==> (D = 26 且 a = 1)」（required by），摘要中没有反方向，因此没有「当且仅当」。**
-             仍未核实：是否已写成 Ker Q_B / Im Q_B = OCQ 物理态 的同构形式；定理编号。正文未获取（ScienceDirect 403；未找到 KEK/京大扫描件）。见 extractions/brst-cohomology-sources.md §6 与 primary-sources-round2.md §6。}
+             **正文仍未获取（L0）**；但 2026-09-11 经三条 L1 二手来源三角定位了证明结构（ito-morozumi-nojiri-uehara-1986 §4 五处自称「same method in Ref. 1)」；lian-zuckerman-1989 p.332 指认 Dixon–Taylor 型 Ker A = Im A 结构；kohriki-kunitomo-murata-2010 (2.1) 鬼零模二维表示归 KO）：鬼零模分离 + 光锥参考系（隐含 p^+ != 0）+ 形式参数 beta 展开 + Kugo–Ojima quartet + DDF 横向投影 ⇒ 物理学家证明，status 不能因它离开 physical-argument。「Ker Q/Im Q ≅ OCQ」的上同调语言按 LZ 1989 §0 与 Dedushenko 2015 §1 均归 FGZ 而非 KO。见 extractions/kato-ogawa-1983.md。}
+}
+
+@article{ohta-1986,
+  author  = {Ohta, Nobuyoshi},
+  title   = {Covariant quantization of superstrings based on {BRS} invariance},
+  journal = {Physical Review D},
+  volume  = {33},
+  number  = {6},
+  pages   = {1681--1691},
+  year    = {1986},
+  doi     = {10.1103/PhysRevD.33.1681},
+  note    = {由 researcher 于 2026-09-11 登记。**标题是复数 "superstrings"**（INSPIRE recid 17645 逐字；用单数检索零命中）。终页 1691 由 OSTI 5930612 "Pages: 1681-1691" 与 LZ 1989 参考文献 [13]（印作 "681–1691"，起页少一位）两条独立来源给出；期号 6、出版日 1986-03-15（OSTI/INIS）。报告号 UTTG-30-85，preprint_date 1985-12，预印本 30 页；KEKSCAN 85-12-165（主机死）；OSTI 只有引文记录（purl 404）；APS 403；无 CDS。**正文未获取（L0）。**
+             摘要逐字（INSPIRE，abstract_source APS）：「A manifestly covariant quantization of the superstring is presented in the Neveu-Schwarz-Ramond formalism on the basis of the Becchi-Rouet-Stora (BRS) invariance principle. The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B^2=0 of the BRS charge. A modified form of the subsidiary condition of Kugo and Ojima Q_B|phys>=0 to define the physical subspace is sufficient to demonstrate the no-ghost theorem.」
+             **★ 关键 L1 证词（ito-morozumi-nojiri-uehara-1986 p.952 Note added）：Ohta 的预印本 UTTG 30-85「did not present the proof of the no-ghost theorem in the Ramond sector」。发表版是否补上未核。⇒ 挂 no-ghost-theorem-superstring 只能挂 NS 扇区并注明。**
+             L3 转述：LZ 1989 Prop 1.7(ii) "Q^2 = 0 iff D = 10" 证明归 [13,15]；Prop 1.7(x)(xi) 两扇区零模分解「Calculations are done in [13]」；Prop 2.1 [13] {Q,b_0}=K, [Q,β_0]=D_R；p.329 G-parity 含鬼的 GSO 推广归 Terao–Uehara/Ohta；KKM 2010 (2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 归 [35,36]；Dedushenko 2015 §1 把它归入「直接推广 KO/Polchinski 玻色弦证明」一类（要求 d >= 2）。见 extractions/ohta-1986.md。}
+}
+
+@article{henneaux-1987,
+  author  = {Henneaux, Marc},
+  title   = {{BRST} cohomology of the fermionic string},
+  journal = {Physics Letters B},
+  volume  = {183},
+  number  = {1},
+  pages   = {59--64},
+  year    = {1987},
+  doi     = {10.1016/0370-2693(87)91417-1},
+  note    = {由 researcher 于 2026-09-11 登记。元数据 L2（INSPIRE recid 246118；pubinfo_freetext「Phys. Lett. B183 ( 1987) 59-64」；ADS 1987PhLB..183...59H；无报告号、无 CDS/KEKSCAN/OSTI）。**期号 1 与出版月 1987-01 已由 Crossref 逐字核实。** **正文未获取（L0）**：ULB 机构库 DI-fusion 的 VuFind 前端 HTTP 500 ×3，DSpace 后端 `dipot.ulb.ac.be/dspace/simple-search?query="BRST cohomology of the fermionic string"` 报「Results 1-1 of 1」但条目表未交付抓取器——**交人类点击**。
+             摘要逐字（INSPIRE）：「The BRST cohomology of the first-quantized fermionic string (Ramond model) is explicitly computed by using methods developed in a previous letter. The infinite degeneracy due to the commuting ghost zero mode is shown to be spurious by extending to the BRST context an argument originally due to Corrigan and Goddard.」⇒ **只做 R 扇区；摘要不含 "no-ghost" 字样。** "previous letter" = Phys. Lett. B 177 (1986) 35–38（recid 237921，摘要「The cohomology of the open bosonic string BRS operator is computed in a physical fashion. The method can be applied to the closed and to the fermionic models.」）。
+             L3（figueroa-ofarrill-kimura-1989 全文，五处引 [12]）：Henneaux 表示 = γ_0 生成、β_0 湮灭、Hilbert 空间 C[γ_0]（即 R 扇区 −1/2 picture，换算是推断）；F_0 上同调平凡「one can define an operator K such that {F_0, K} = 1」（脚注 9：仅 p != 0）；FOK 批评此表示下 Q 非厄米、上同调内积不自动良定（p.116）。LZ 1989 不引本文。见 extractions/henneaux-1987.md。}
+}
+
+@article{figueroa-ofarrill-kimura-1989,
+  author  = {Figueroa-O'Farrill, Jos{\'e} M. and Kimura, Takashi},
+  title   = {The {BRST} cohomology of the {NSR} string: vanishing and ``no-ghost'' theorems},
+  journal = {Communications in Mathematical Physics},
+  volume  = {124},
+  number  = {1},
+  pages   = {105--132},
+  year    = {1989},
+  doi     = {10.1007/BF01218471},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（28 页逐页读图，L1）**，获取途径 Project Euclid https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104179078 （免登录）。**DOI/卷/期/页已由 Crossref 逐字核实**（`api.crossref.org/works/10.1007/BF01218471`：CMP 124(1) 105-132, issued 1989-03）；Project Euclid 卷期目录与 Dedushenko 2015 [18] 独立佐证。
+             **无编号定理，全部按公式号引用**：NS 相对消灭定理 (3.19)；R 相对消灭定理 (4.17)（Henneaux 表示）；两种 R 零模表示（Schrödinger L^2(R,dx) vs Henneaux C[γ_0]）的相对上同调同构 (5.1)（仅作为无分次空间）；绝对复形上同调 (5.2)(5.3)（鬼数 ±1/2）；无鬼定理 = 迹恒等式 (6.14)=(6.15)（NS）、(6.19)=(6.20)（R）+ p.128 Schrödinger 表示一段；附录 A (A.14) 超李代数同调消灭、附录 B (B.1) 正定内积。
+             **作者自承缺口**：R 扇区完全可约性引 Brower–Friedman 是「claim」（p.115，与 lian-zuckerman-1989 p.320 Remark 矛盾）；附录 A 定理「We have never seen a published proof」只补特例；(B.1) 正定性「left as an exercise」；零动量排除（脚注 3/6/9）；GSO 后无鬼「as an exercise」；D = 10 是假设。**引 Henneaux [12]，不引 Ohta/Kato–Ogawa/IMNU；与 LZ 1989 互不引用（LZ Note added in proof 称独立）。** 见 extractions/figueroa-ofarrill-kimura-1989.md。}
+}
+
+@article{ito-morozumi-nojiri-uehara-1986,
+  author  = {It{\=o}, Makoto and Morozumi, Takuya and Nojiri, Shin'ichi and Uehara, Shozo},
+  title   = {Covariant quantization of {N}eveu-{S}chwarz-{R}amond model},
+  journal = {Progress of Theoretical Physics},
+  volume  = {75},
+  number  = {4},
+  pages   = {934--952},
+  year    = {1986},
+  doi     = {10.1143/PTP.75.934},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（19 页逐页读图，L1）**。获取途径：OUP `academic.oup.com/ptp/article-lookup/doi/10.1143/PTP.75.934` → `article-pdf/75/4/934/5260521/75-4-934.pdf` → 302 至 watermark02.silverchair.com → 落盘 804 KB。**页面标「Subscribers Only」但可下载；PTP 旧刊整体可循此路线。** Received December 9, 1985。作者单位东北大/京都大/广岛大 RITP（Kato–Ogawa 学派）。
+             可引用：(3.2)(3.4) 两扇区 BRS 荷零模分解（R 含 η̄_0 ζ_0^2 = b_0 γ_0^2 项）；**(3.8)–(3.10) 幂零的显式系数公式**（"demands D = 10, α_0^NS = 1/2, α_0^R = 0"，⟺ 可读出）；(3.14) R 扇区 βγ 零模表示 ζ̄_0|0>_ζ = 0（= Henneaux 表示/−1/2 picture）；**(3.19) 度规 G^R = η_0 × δ(ζ_0)**；(3.22)–(3.26) 物理态条件（= 相对复形 Ker b_0 ∩ Ker β_0 ∩ Ker F_0）；**§4 Proposition I（Kugo–Ojima quartet）、Proposition II（β 阶归纳 + DDF 型横向投影 P(β)）、(4.21) 正半定** = R 扇区无鬼定理的物理证明；NS 扇区只有 p.947 一段评论「goes in a quite similar manner」。
+             **★ p.952 Note added 逐字：Ohta 预印本 UTTG 30-85「did not present the proof of the no-ghost theorem in the Ramond sector」。**
+             **对 kato-ogawa-1983 的反推价值**：§4 与 Appendix 五处自称「similar to / the same method in Ref. 1)」（(4.9) β 重标度、Prop II 证明等）——是 KO 证明结构最可靠的 L3。隐含假设 p^+ != 0、|φ(β)> 可按 β 展开（(4.16) 明写 "we have assumed"）。见 extractions/ito-morozumi-nojiri-uehara-1986.md。}
+}
+
+@misc{dedushenko-2015,
+  author = {Dedushenko, Mykola},
+  title  = {Superstring {BRST} no-ghost theorem at arbitrary picture number},
+  year   = {2015},
+  eprint = {1212.3592},
+  archiveprefix = {arXiv},
+  primaryclass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**全文已核实（arXiv v2，21 页，页边条纹「arXiv:1212.3592v2 [hep-th] 12 Nov 2015」；首页日期 "October 29, 2018" 是 LaTeX \today 伪迹）。** 未见期刊发表版。主结果 **(39)**：`H*((H^A, Q_B)) ≅ (H^⊥_{A,↓} ⊕ H^⊥_{A,↑}) ∩ ker L_0`——任意 picture A、两扇区、**非零动量**，绝对 BRST 上同调 ≅ 两份光锥谱（鬼数 (A+1) ± 1/2）；Lemma 1–3；§6 显式代表元 Ω = 1 − S^{-1}U + …（仿 Polchinski §4.4）；§7–8 A-picture 与 (−A−2)-picture 的配对与正定厄米内积 (61)。自称「proven above by straightforward application of the spectral sequence」——物理学家级完整证明（physical-argument）。**p.3 逐字：零动量任意 picture 的相对上同调「remains an open problem」**；p.3 转述 Berkovits–Zwiebach 1998 [21]：非零动量相对/半相对上同调 picture 无关，零动量 picture 相关。§1 对文献的分类：KO/Polchinski 路线 [12,15,20,23]（要求 d >= 2）vs FGZ 路线 [17]=LZ 1989（可做 d = 1）；[14] Henneaux 未归类。参考文献 [1] Kato–Ogawa、[12] Ohta PRD 33 1681、[13] Ohta PLB 179 347、[14] Henneaux PLB 183 59、[15] IMNU PTP 75 934、[16] Horowitz–Myers–Martin PLB 218 309、[18] FOK CMP 124 105、[19] FOK PLB 219 273。见 extractions/henneaux-1987.md §5.2。}
+}
+
+@article{kohriki-kunitomo-murata-2010,
+  author  = {Kohriki, Maiko and Kunitomo, Hiroshi and Murata, Masaki},
+  title   = {No-ghost theorem for {N}eveu-{S}chwarz string in 0-picture},
+  journal = {Progress of Theoretical Physics},
+  volume  = {124},
+  number  = {6},
+  pages   = {953--968},
+  year    = {2010},
+  doi     = {10.1143/PTP.124.953},
+  eprint  = {1009.0107},
+  archiveprefix = {arXiv},
+  primaryclass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记。**发表版卷/期/页/DOI 已由 Crossref 逐字核实（PTP 124(6) 953-968, 2010-12-01）。** **部分读毕（arXiv v4，页边「31 Jan 2012」；pp.1–10 = §1–§3.2，pp.16–18 = 附录 B 末 + 参考文献，L1；式号按 arXiv v4）**。报告号 YITP-10-75。价值在于对 Kato–Ogawa/Ohta 方法的 L3 转述（京都 YITP，KO 学派）：§1 p.2 逐字「The modern BRST quantization of the bosonic string theory was first performed by Kato and Ogawa.^33) They proved that the physical Hilbert space is isomorphic to the conventional one spanned by DDF states^34) and, hence, has a positive semidefinite norm.」；p.3「a similar no-ghost theorem was also proved for the NSR superstring.^35),36) … The no-ghost theorem can be proved in a completely parallel way to the case of the bosonic string.^33)」；(2.1) 鬼零模二维表示「defined by^33)」；(2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 标 35),36)；§2.2 「Following the conventional method^33),35),36) we take another rescaling」ħ 展开 (2.10)–(2.13)；Proposition 1 (3.7)「The proof is almost the same as the standard one^33),35),36)」。[33] KO、[35] Ohta PRD 33 1681、[36] IMNU、[37] FMS、[38] Brower–Friedman、[39] Goddard–Thorn。自身结果（NS 0-picture 无鬼 + 非平凡度规 G (3.5)(3.6)）未抽取。见 extractions/kato-ogawa-1983.md §2–§3。}
 }
 
 @misc{goddard-2008,
