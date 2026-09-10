@@ -80,6 +80,7 @@
 - **需船长人工点击一次的文件**（agent 被反爬拦住，文件本身公开；见 literature/extractions/primary-sources-round2.md §12.9）：
   1. Goddard–Thorn 1972 正文：`https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`（CERN-TH-1493，MARC 963 = PUBLIC）——里程碑 canonical_source 的一手来源
   2. Brower–Thorn 1971：`https://cds.cern.ch/record/352004/files/CM-P00058794.pdf`——可裁决 D>26 负模态的历史归属
+  4. **GSW Vol.2 ch.13（pp.307–362，12 MB，超出 WebFetch 10 MB 上限）**：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`——本机构有 Cambridge Core 订阅；取到即可裁决四解分类的原文措辞（§13.5.3 pp.353–358）。同一天花板卡住 GSW v1 ch.2（无鬼定理 §2.3.3，13 MB）。
   3. Thorn 1985 Santa Barbara 42 页报告（自述"improved version of the Goddard–Thorn proof"）：`https://inis.iaea.org/records/szqhd-hct30`，需免费注册——是否注册请船长决定
   下载后放 `literature/raw/`（gitignore）并告知，researcher 即可逐页抽取。
 
@@ -122,7 +123,9 @@
 - 待换代：`worldsheet.critical-dimension-light-cone` 补前提 D ≥ 4（iff 在 D ≤ 3 不成立；GSW 原文同样未写）——等 auditor 第三轮裁定。
 - 待换代：`worldsheet.kac-determinant` 陈述中 α_N "正"无据（FF 写 ненулевая、Schottenloher 写 K_N ≥ 0）；lead 裁决：新建 v2 写"非零常数"并 superseded_by（不是里程碑，走普通换代）。
 - 待建：`worldsheet.shapovalov-form-unconditional-existence`（rigorous，依赖 verma-module-free-over-negative-part；`--via-pbw` 已证到但无节点承载）；`descendant-weight-grading*` 可挂 Verma.lean 新 `lie_lgen_mem_levelSpan`（任意交换 ℚ-代数、无 c,h 假设）。
-- 待拆：`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
+- **lead 裁决（2026-09-11）**：`math.chern-simons-descent-equations--via-chern-weil-transgression` 保持 rigorous——Chern–Weil transgression 是标准已发表数学定理，own status 按论证本身；但三条 canonical 数学源（Chern / Kobayashi–Nomizu / Nakahara）目前 L0，researcher 须在该卡进入任何里程碑推导链前核实到编号。
+- **记账红线（2026-09-11，ADT 2010 L1）**：U(1)⁴⁹⁶ 与 E₈×U(1)²⁴⁸ 只是使反常十二形式**因子化**，GS 抵消项在阿贝尔情形**写不下来**（Y₄ ≠ dH₃，与超对称+阿贝尔规范不变性不相容）——图中分类卡只能写"因子化"，不得写"反常抵消"；Vafa 2005 E15 的前提被 ADT 反驳。四解分类原文措辞仍 L0（GSW ch.13 待船长点击）。
+- 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
 - 待建：**`worldsheet.free-boson-vertex-algebra`**（D 个自由玻色子（不定号差）⊗ C[Z k_0] 的 Heisenberg/格点顶点代数，动量塔为其模；来源 FLM / Kac / Lepowsky–Li）与 **`math.vertex-algebra-jacobi-identity`**（Borcherds 恒等式带编号）。补上后 G–N 推导 `ddf-commute-with-virasoro--via-vertex-algebra-primary` 直接升 rigorous，无鬼定理随之回 rigorous——**这是当前最短的升级路径**（curator-gn-ddf 2026-09-11）。

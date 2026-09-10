@@ -31,20 +31,48 @@ sources:
     loc: "PLB p.119（重印 610），(5)(6)(7)(8)（n = 1 的显式式子）与 (15)(16)（一般 n 的下降关系）；「Explicit expressions for ω⁰_{2n+1 Y} are given in ref. [9]」"
     note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E9。
   - ref: zumino-wu-zee-1984
-    loc: "全文（GS ref. [9]；显式的下降形式表达式）"
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（GS ref. [9]）"
     note: |
-      **本项目未取得全文（L0）**。列在这里是因为 GS 明确把显式表达式外包给它，
-      本卡的「不含」一段直接指向这条。抽取记录 Q2。
+      **L2（原记为 L0，2026-09-11 更正为「摘要已取得、正文未取得」）**。列在这里是因为 GS 明确把
+      显式表达式外包给它，本卡的「不含」一段直接指向这条。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」；需要下降方程的可引位置时改引 zumino-1983-les-houches。
+      抽取记录 literature/extractions/zumino-wu-zee-1984.md §0.2/§3.1。
 tags: [anomaly, chern-simons, descent-equations, differential-forms, green-schwarz]
+superseded_by: consistency.descent-forms-gs-notation
 notes: |
+  【★ 换代记录（2026-09-11，curator）：本卡 superseded_by consistency.descent-forms-gs-notation。】
+  本卡把**三件事**写在一张定义卡里，按 graph/CLAUDE.md「一个节点一个命题」拆成三张：
+
+  | 旧卡里的内容 | 新落点 | kind / status |
+  |---|---|---|
+  | 纯微分几何的下降方程（d TrFⁿ = 0、transgression、δω^p + dω^{p+1} = 0） | **math.chern-simons-descent-equations** | proposition / 推导 rigorous |
+  | GS 的标号 (15)(16)、「只定到恰当形式」、引力侧 (7)(8) 与一般 n 的 A→ω, F→R 代换 | **consistency.descent-forms-gs-notation** | definition / physical-argument |
+  | 「反常写成 ∫ω¹」这条物理识别 | **consistency.descent-omega1-is-consistent-anomaly** | proposition / 推导 physical-argument |
+
+  拆分的直接依据是 literature/extractions/zumino-wu-zee-1984.md §5.2（researcher 建议，逐字：
+  「**不要**把这两条合成一张卡 —— 前者是定理，后者是物理识别。这是本轮最重要的一条结构建议。」）。
+  **本卡的 statement 文本一字未改**（项目原则 1）；`superseded_by` 指向 GS 标号那一张，
+  因为那是下游 consistency 节点的直接替代品。
+
+  本轮同时补上的、旧卡没有的三条限定（全部来自 zumino-1983-les-houches 的 L1 全文，见新卡与其推导的 gaps）：
+  (a) **局部性**：来源逐字「really valid only locally, in some finite neighborhood in x-space」，
+      而 GS 直接在整个十维时空上使用；
+  (b) **k² = 0 未证**（来源逐字「We leave the proof as an exercise to the reader」）；
+  (c) **相容条件解的唯一性未讨论**（来源逐字「The problem of finding the most general solution of the
+      consistency condition will not be discussed here」）⇒ GS (11) 前的「uniquely determined」无支撑。
+
+  ---
+
   【为什么 status 取 physical-argument 而不是 rigorous】下降方程本身是标准的 Chern–Weil / BRST 下降
   内容，数学上是可以严格化的；但**本卡定义的对象不唯一**：ω⁰_{2n+1} 与 ω¹_{2n} 各只定到恰当形式，
   而 consistency.gs-counterterms-1984 里的 S₁ (18)、S₃ (23) 显式含 ω⁰_{7Y}、ω⁰_{7L}，
   取不同代表元会改变这些反项的具体表达式。也就是说：**本图目前掌握的定义不足以唯一确定下游对象**，
   而能补上这一点的唯一来源（zumino-wu-zee-1984）没有取到。按「不确定选低一级」取 physical-argument。
 
-  升级路径：取得 Zumino–Wu–Zee 1984 或任何给出显式 ω⁰_{2n+1} 的来源（Bilal 2008 §12 的 Q₃/Q₅/Q₇
-  是候选，但本项目只读了 §12 的部分内容且其符号约定与 GS 反号，见 conv.gauge-trace-normalization notes）。
+  升级路径：**已作废——本卡不再升级。** 原文写的是「取得 Zumino–Wu–Zee 1984 或任何给出显式 ω⁰_{2n+1}
+  的来源」；2026-09-11 取到的是 GS ref [10] 的第一项（zumino-1983-les-houches，L1 全文），
+  显式表达式 (2.29)/(5.7) 已落在 math.chern-simons-descent-equations。
+  ZWZ 正文对本项目已穷尽当前可用路线（抽取记录 §0.4），且即便取到也未必闭合常数 c（§4 Q-Z3）。
 
   【与现代记号的对照】现代文献常把这两族写成 Q_{2n+1}(A, F) 与 Q¹_{2n}，
   并把整套关系叫「Stora–Zumino 下降方程」。GS 1984 不用这些名字。

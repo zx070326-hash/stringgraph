@@ -1,0 +1,149 @@
+id: math.chern-simons-descent-equations
+kind: proposition
+title: Chern–Weil transgression 与下降方程组：Tr Fⁿ = dω⁰_{2n−1}，δω^p + dω^{p+1} = 0
+statement: |
+  设 𝔤 是矩阵李代数，A 是取值于 𝔤 的矩阵一形式，
+
+      F := dA + A²        （楔号一律省略，A² ≡ A ∧ A；A 的元素反交换，d 与一形式 A 反交换，d² = 0）
+
+  Tr 是一个 Ad-不变的迹（下面所有断言与表示的选取无关）。设 n ≥ 1。
+
+  **(0) 设定与有效范围（本卡涵盖以下两种意义，二者的断言相同）**
+
+  (a) **代数意义**：把 A、F 当作自由分次微分代数的生成元，所用关系**只有**
+      dA = F − A²、dF = FA − AF、d² = 0，不假设任何对易关系、对称性或不变性。
+  (b) **局部几何意义**：在 x-空间的某个**有限坐标邻域**上，A 是主丛的一个局部联络表示
+      （底空间上的规范势），F 是其曲率。
+
+  ★ **本卡不断言全局版本。** 唯一被本项目逐页核实的来源对此有逐字限定：
+  「Equations such as (2.24) and (2.26) are really valid only locally, in some finite neighborhood
+  in x-space. It is however well known that they can be given a global meaning by using a connection
+  on a principal fibre bundle, rather than a vector potential on the base (x-space).」
+
+  **(i) 闭性**
+
+      DF := dF + [A, F] = 0            （Bianchi 恒等式）
+      d Tr Fⁿ = n Tr((dF) F^{n−1}) = n Tr((DF) F^{n−1}) = 0
+
+  **(ii) transgression（Chern–Simons 形式）**
+
+  置 A_t := tA（t ∈ [0,1]），F_t := dA_t + A_t² = tF + (t² − t)A²，并定义
+
+      ω⁰_{2n−1} := n Tr ∫₀¹ dt A F_t^{n−1}
+
+  则
+
+      **Tr Fⁿ = d ω⁰_{2n−1}.**
+
+  显式特例：
+      n = 2:  ω⁰_3 = Tr(A dA + ⅔ A³) = Tr(A F − ⅓ A³)
+      n = 3:  ω⁰_5 = Tr(A (dA)² + (3/2) A³ dA + (3/5) A⁵)
+
+  ★ ω⁰_{2n−1} **只由 Tr Fⁿ = dω⁰_{2n−1} 定到相差一个恰当形式**；上式给出的是一个具体代表元
+  （transgression 代表元）。
+
+  **(iii) 下降方程组**
+
+  设 g 取值于群，记
+
+      𝒜 := g⁻¹A g + g⁻¹ dg,    v := g⁻¹ δg,    ℱ := d𝒜 + 𝒜² = g⁻¹F g
+
+  其中 d = dx^μ ∂/∂x^μ 沿 x 方向、δ = dt^α ∂/∂t^α 沿群参数方向（t^α 是群元所依赖的任意参数），
+  且 d² = δ² = dδ + δd = 0，Δ := d + δ 满足 Δ² = 0；v 是取值于 𝔤 的**零次 x-形式、一次 δ-形式**，
+  满足 δ𝒜 = −dv − v𝒜 − 𝒜v ≡ −Dv 与 δv = −v²。
+
+  把 ω⁰_{2n−1}(𝒜 + v, ℱ) 按 v 的幂次展开
+
+      ω⁰_{2n−1}(𝒜 + v, ℱ) = ω⁰_{2n−1}(𝒜, ℱ) + ω¹_{2n−2} + ω²_{2n−3} + ⋯ + ω^{2n−1}_0
+
+  （**上标 = v 的幂次，下标 = x-形式次数**）。则
+
+      **δ ω^p_{2n−1−p} + d ω^{p+1}_{2n−2−p} = 0   (p = 0, 1, …, 2n−2),**
+      **δ ω^{2n−1}_0 = 0.**
+
+  第一行取 p = 0 即 **δ ω⁰_{2n−1} = − d ω¹_{2n−2}**。
+
+  显式特例：
+      n = 2:  ω¹_2 = Tr(v dA)
+      n = 3:  ω¹_4 = Tr(v d(A dA + ½ A³))
+
+  每个 ω^p 同样只定到相差恰当形式：把 ω^p ↦ ω^p + dη^p + δζ^p 作相容重定义后方程组仍成立。
+
+  **本卡不含**
+
+  (a) 任何**物理**内容：v 在本卡纯粹是群参数方向的一形式，本卡**不**断言它是 Faddeev–Popov 鬼场、
+      **不**断言 δ 是 BRS 算子、**不**断言 ω¹_{2n−2} 是规范反常。那条识别是
+      consistency.descent-omega1-is-consistent-anomaly（physical-argument）。
+  (b) **唯一性**：本卡不断言 δω⁰ = −dω¹ 的解在恰当形式之外唯一，也不断言 ω¹ 是 Wess–Zumino
+      相容条件的**最一般**解。见该 consistency 卡与其推导的 gaps。
+  (c) 任何**绝对归一化**：本卡的 ω 全部**未归一**（不含 i、2π、(4π)^{n−1} 之类因子）。
+      来源 §5 给出的绝对归一化式 (5.13) 因读图不可靠且原文在该式上方**手写插注「(up to a sign)」**，
+      本图**不采信、不转录**（抽取记录 §3.2）。
+  (d) **引力/洛伦兹侧**（自旋联络 ω、曲率 R、tr R²、ω⁰_{3L}）：来源全文只处理内部对称群，
+      不含引力。GS 记号下的洛伦兹一路见 consistency.descent-forms-gs-notation。
+  (e) ω¹_{2n−2} 的一般积分公式（来源 (3.36)）：抽取记录 §3.2 判定该式的前置因子与末项指数**读图不可靠**，
+      本图只收上面 n = 2、n = 3 两个清晰的显式特例。
+  (f) 同伦算子 k 的性质 k² = 0：来源逐字把它留作「exercise to the reader」，见推导 gaps。
+      本卡的 (i)(ii)(iii) 三条**都不使用** k² = 0。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: zumino-1983-les-houches
+    loc: "(2.10)–(2.13)（形式装置与 Bianchi）；(2.17)(2.18)(2.27)（闭性 (i)）；(2.19)–(2.26)（transgression 与 ω₃，(2.25)(2.26)）；(2.28)(2.29)(2.30)(2.31)（一般 n，(2.29) 在 §5 重述为 (5.7)(5.8)）；(3.1)(3.2)（ω⁰ 的上标记号）；(3.18)–(3.22)（d、δ、Δ）；(3.23)–(3.27)（𝒜、v、ℱ 与 δ𝒜 = −Dv、δv = −v²）；(3.29)(3.31)(3.32)（下降方程组）；(3.37)(3.38)（ω¹ 的两个显式特例）；p.16 末「really valid only locally」；p.17 末「purely algebraic objects … No special relations」"
+    note: |
+      **L1 全文 46 印刷页逐页读图**（抽取记录 literature/extractions/zumino-wu-zee-1984.md，E2/E4/E5/E6/E7/E9/E10）。
+      注意该抽取记录的文件名是 `zumino-wu-zee-1984.md`，但其 E1–E17 **全部出自本条（Les Houches 讲义 LBL-16747）**，
+      不是 Zumino–Wu–Zee 的 Nucl. Phys. B239 正文。**本卡的一切式号都是本条的式号。**
+      本卡 (0)(a) 的「代数意义」有来源 p.17 末的逐字许可；(0) 的局部性限定有 p.16 末的逐字限定。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**"
+    note: |
+      **L2，且这条边是推断（inferred）**：摘要逐字说所作构造「automatically satisfies the Wess-Zumino
+      consistency condition」，与本卡 (iii) 的下降链一致，但**不能**据此把本卡的任何式号写成 ZWZ 的式号。
+      ZWZ 与本卡主来源的关系有后者引言的自陈为据（逐字「Some of the results are contained in a recent paper
+      written in collaboration with Wu Yong-Shi and Anthony Zee [2]」）。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。抽取记录 §0.2/§3.1。
+  - ref: chern-1979
+    loc: "Appendix: Geometry of Characteristic Classes（**本项目未核实，L0 待核**）"
+    note: |
+      canonical 数学来源**候选**。本卡的 (i)(ii) 是 Chern–Weil 理论的 transgression 部分，
+      属标准数学内容。该指认本身有 L1 依据：zumino-1983-les-houches 参考文献 `[0]`（p.45）逐字把本书
+      列为本主题的「Standard mathematical references」并特别点出该附录。
+      **但本项目未逐页核实本书任何页码或定理号**，故 loc 只能写到附录名。
+  - ref: kobayashi-nomizu-1963
+    loc: "Vol. II (1969), Ch. XII 'Characteristic Classes'（**本项目未核实，L0 待核**）"
+    note: |
+      同上，canonical 数学来源候选，出处同为 zumino-1983-les-houches 的参考文献 `[0]`。
+      **本项目未核实任何页码或定理号。**
+tags: [chern-weil, transgression, chern-simons, descent-equations, differential-forms, brs]
+notes: |
+  【1. 本卡与 GS 记号的换标】来源用 `Tr Fⁿ = dω⁰_{2n−1}`；green-schwarz-1984 用
+  `dω⁰_{2n+1 Y} = tr F^{n+1}`。两者**是同一族方程**，换标为 **n_Zumino = n_GS + 1**：
+  GS 的 ω⁰_{3Y} = 本卡 n = 2 的 ω⁰_3，GS 的 ω⁰_{7Y} = 本卡 n = 4 的 ω⁰_7，
+  GS 的 ω¹_{2n Y} = 本卡的 ω¹_{2n}（下标本身不变）。这条换标写在 consistency.descent-forms-gs-notation。
+
+  【2. ★ GS 1984 的下降方程符号就是本卡的符号（L1 核实）】green-schwarz-1984 的
+  (5)(6)(15)(16) 与本卡主来源逐字同一，包括三处符号：
+    · GS (5) `ω⁰_{3Y} = tr(AF − ⅓A³)` = 本卡 (ii) 的 n = 2 特例（连 `−⅓` 都一样）；
+    · GS (6)(15) `dω⁰ = tr F^{n+1}` **正号、无 2π、无数值因子** = 本卡 (ii)；
+    · GS (16) `δω⁰_{2n+1 Y} = − dω¹_{2n Y}` = 本卡 (iii) 的 p = 0 行。
+  ⇒ GS (15) 后那句「Explicit expressions for ω⁰_{2n+1 Y} are given in ref. [9]」外包出去的东西，
+  在本卡主来源里就是 (2.29)/(5.7)。**这条判定是在 Les Houches 讲义上核实的，不是在 ZWZ 上核实的。**
+
+  【3. Tr 的表示无关性与约定卡的关系】本卡声明 conv.gauge-trace-normalization 是为了固定
+  **微分形式那一半**（F = dA + A²、楔号省略、A 是反厄米矩阵一形式）。该约定卡里 tr（基本表示）与
+  Tr（伴随表示）之分**在本卡不起作用**：(i)(ii)(iii) 对任一 Ad-不变迹都成立。
+  来源另用对称化迹 Str（其 (3.35)），本卡不区分，因为在 Tr Fⁿ 这类表达式里 F 是偶次形式、互相交换。
+
+  【4. 记号沿革】现代文献常把这两族写成 Q_{2n+1}(A, F) 与 Q¹_{2n}，把整套关系叫
+  **「Stora–Zumino 下降方程」**。文献学上这个名字是有理由的：本卡主来源开篇逐字把主要功劳给
+  参考文献 `[1] R. Stora and B. Zumino, in preparation`，而该文**从未以此形式发表**；
+  Stora 一线的通行发表形态是 manes-stora-zumino-1985。⇒ **下降方程的「原始出处」在文献学上是分叉的。**
+
+  【5. 换代记录】本卡与 consistency.descent-forms-gs-notation、
+  consistency.descent-omega1-is-consistent-anomaly 一起接手了旧卡
+  **consistency.descent-forms-chern-simons**（已 superseded_by 后者）的内容：
+  旧卡把「纯微分几何的下降方程」「GS 的标号与引力侧代换」「反常识别」三件事写在一张定义卡里，
+  按 graph/CLAUDE.md「一个节点一个命题」拆开。
+author: curator
+created: "2026-09-11"

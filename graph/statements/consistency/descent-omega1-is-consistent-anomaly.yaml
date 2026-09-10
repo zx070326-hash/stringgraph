@@ -1,0 +1,110 @@
+id: consistency.descent-omega1-is-consistent-anomaly
+kind: proposition
+title: 下降链的 ω¹_{2n−2} 满足 Wess–Zumino 相容条件，是 2n−2 维非阿贝尔手征反常的一个解
+statement: |
+  记号与 math.chern-simons-descent-equations 相同（conv.gauge-trace-normalization；楔号省略）。
+
+  **(1) 物理侧的设定**
+
+  设 W[A] 是手征费米子在外规范场 A 中的有效作用量（**假定它经适当重整化后存在**）。设
+
+      X_i(x) = − ∂_μ δ/δA^i_μ − (A_μ × δ/δA_μ)_i,      [X_i(x), X_j(y)] = f_{ij}^k X_k(x) δ(x − y)
+
+  是规范变换的泛函生成元，反常定义为 G_i[A](x) := X_i(x) W[A]（G_i = 0 即对应流守恒）。
+  由 W[A] 的**存在性**本身推出 **Wess–Zumino 相容条件**
+
+      **X_i(x) G_j(y) − X_j(y) G_i(x) = f_{ij}^k G_k(x) δ(x − y).**
+
+  引入反交换标量（Faddeev–Popov 鬼场）v_i(x)，记 v·G := Σ_i ∫dx v_i(x) G_i(x)，则相容条件等价于
+
+      v·X (v·G) − ½ (v × v)·G = 0，  即   **δ (v·G) = 0**,
+      其中 δA_μ = v·X A_μ,   δv_i = − ½ (v × v)_i,   δ² = 0.
+
+  **(2) 与下降方程的认同（本卡的核心断言）**
+
+  上式的 δ（BRS 算子）与 math.chern-simons-descent-equations (iii) 里沿群参数方向的 δ 是**同一个算子**：
+  两者在 𝒜、v 上的作用律逐字相同，
+
+      δ𝒜 = − dv − v𝒜 − 𝒜v ≡ − Dv,     δv = − v².
+
+  在这一认同下，下降链的第二项 ω¹_{2n−2}（ω⁰_{2n−1}(𝒜 + v, ℱ) 按 v 展开的**一次幂**项）满足
+
+      **δ ω¹_{2n−2} = − d ω²_{2n−3}**,
+
+  故 δ ∫ ω¹_{2n−2} = 0（在可略去边界项的意义下）：**ω¹_{2n−2} 对 v 是线性的且满足相容条件**，
+  因而给出 2n−2 维非阿贝尔手征规范反常的**一个**解。
+
+  显式特例（未归一）：
+      n = 2（2 维）:  ω¹_2 = Tr(v dA)
+      n = 3（4 维）:  ω¹_4 = Tr(v d(A dA + ½ A³))
+
+  **(3) 反常的定义（来源自陈，随卡搬运）**
+
+  来源逐字把「反常」定义为：相容条件的**任一不是基本场 (φ, A_μ) 的局域泛函之变分**的解
+  （「any solution of (4.4) which is not a variation of a local functional in the basic fields
+  (φ, A_μ) we regard as anomaly」）。
+
+  **本卡不含**
+
+  (a) ★ **唯一性**。来源 p.29 逐字：「**The problem of finding the most general solution of the
+      consistency condition will not be discussed here.**」⇒ 本卡只断言 ω¹ 是**一个**解，
+      **不**断言它是最一般解，**不**断言相容条件在恰当形式外唯一确定反常。
+      特别地，green-schwarz-1984 (11) 前那句「The anomalies corresponding to diagrams with more than
+      six external lines are **uniquely determined** by the hexagon diagrams. Their form can be deduced
+      by implementing the Wess–Zumino consistency conditions」**在 Zumino 一侧没有支撑**；
+      唯一性（相容反常的上同调分类）属 manes-stora-zumino-1985 一线，本项目未取得该文。
+  (b) ★ **绝对归一化**。来源 §5 给出的 (5.13) 是把 ω¹_{2n−2} 归一到指标定理的唯一式子，但
+      (i) 读图不可靠（(4π)^{n−1} 的底数与指数），(ii) 原文在该式上方**手写插注「(up to a sign)」**。
+      ⇒ 本卡的 ω¹ **未归一**。
+  (c) **与一圈微扰论结果的定量一致**。来源自称 n = 3 时 (5.13) 配 (3.38) 「agrees with」它引自
+      Adler / Bardeen / Becchi 的一圈结果 (2.9)，且 (3.38)「agrees with」(2.16)。
+      **本项目两处都未复算**（需先固定形式↔散度字典与 λ 的厄米/反厄米换算）。
+  (d) **ω¹ 确实不是局域泛函的变分**这一点（即按 (3) 的定义它确实是反常而非平凡项）：
+      本图未验证，来源也未给一般证明。
+  (e) **引力/洛伦兹反常**：来源全文只处理内部对称群。
+  (f) **十维与 GS 机制**：本卡是任意 2n−2 维的一般陈述，不承载 d = 10 的任何系数。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: zumino-1983-les-houches
+    loc: "(4.1)(4.2)（X_i 与其代数）；(4.3)（G_i = X_i W[A]）；**(4.4)（Wess–Zumino 相容条件）**，引导句逐字「the mere existence of the functional W[A], which we suppose to be obtained by appropriate renormalization, implies a consistency condition」；(4.6)(4.7)（鬼场写法）；(4.8)(4.9)(4.10)(4.11)（δA、δv、δ(v·G) = 0、δ² = 0，后者逐字「Exercise: check (4.11)」）；(4.13)–(4.15)（v = −i v^k λ_k、δ𝒜 = −Dv、δv = −v²）；p.28 逐字「It should be clear that (4.8), (4.9) are nothing but the BRS-transformations and (4.10) the Slavnov identity for the special case of currents.」；p.29 逐字「Hence the δ defined in (4.14), (4.15) and the d in (4.17) fulfill the algebra (3.25) (3.26) and will be identified with those operators.」；**(4.18)（δω¹_{2n−2} = d(−ω²_{2n−3})）** 与其后逐字结论「We see that ω¹_{2n−2} is linear in v and satisfies the consistency condition.」；p.27 反常的定义；p.29 逐字「The problem of finding the most general solution of the consistency condition will not be discussed here.」"
+    note: |
+      **L1 逐页读图**（抽取记录 literature/extractions/zumino-wu-zee-1984.md E11/E12）。
+      ⚠ 该抽取记录的文件名是 ZWZ，但其 E1–E17 全部出自本条（Les Houches 讲义 LBL-16747）。
+      ★ 「下降方程的 δ = BRS 算子」是**来源自己的显式认同**（p.28/p.29 两句逐字），不是后人的重排。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**"
+    note: |
+      **L2，独立佐证**：摘要逐字说所作构造「**automatically satisfies the Wess-Zumino consistency
+      condition**」，而该相容条件「a condition which has direct physical interpretation」；
+      措辞是 **"automatically satisfies"（构造性），不是 "we prove"**。
+      这与本卡 (2) 的内容一致，但**不能**据此把本卡的任何式号写成 ZWZ 的式号。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。抽取记录 §0.2/§3.1。
+  - ref: wess-zumino-1971
+    loc: "全文（相容条件的原始出处；green-schwarz-1984 的 ref. [8]，本卡主来源的 ref [15]）"
+    note: 本项目未取得全文（L0）。只承载「相容条件出自这里」这条归属，不承载任何公式。
+  - ref: manes-stora-zumino-1985
+    loc: "全文（**未取得，L0**）——相容条件之解的**唯一性 / 上同调分类**的候选来源"
+    note: |
+      列在这里**只为标记本卡不含 (a) 那条缺口的去向**，不承载本卡的任何断言。
+      主来源 p.29 逐字把「最一般解」问题排除在外，唯一性属这条线。**本项目正文一字未取到。**
+tags: [anomaly, wess-zumino-consistency, brs, descent-equations, chern-simons]
+notes: |
+  【1. 本卡为什么与 math.chern-simons-descent-equations 分开】前者是定理（纯微分几何），
+  本卡是**物理识别**：把群参数方向的一形式 v 认同为 Faddeev–Popov 鬼场、把 δ 认同为 BRS 算子、
+  把 ∫ω¹ 认同为有效作用量的规范变分。这一步依赖 W[A] 的存在（来源逐字「which we suppose to be
+  obtained by appropriate renormalization」），不是微分几何内容。
+  抽取记录 §5.2 的原话：「**不要**把这两条合成一张卡——前者是定理，后者是物理识别。
+  这是本轮最重要的一条结构建议。」
+
+  【2. 与 GS 1984 的关系】green-schwarz-1984 把十维反常写成 ∫ω¹_{10} 的形式并据此构造反项，
+  用的正是本卡这条识别；但 GS 只引不复述（(11) 上一段逐字「Their form can be deduced by
+  implementing the Wess–Zumino consistency conditions [8]」，「The analysis of ref. [9] relates the
+  anomalies to a formal expression in twelve dimensions」）。
+  ⇒ **GS 那一步依赖的唯一性，本卡明确不提供**（见「本卡不含 (a)」）。
+
+  【3. 本卡与 consistency.anomaly-twelve-form-d10 的分工】那张卡是十维、GS 记号、含十二形式编码；
+  本卡是任意 2n−2 维、Zumino 记号、只到「ω¹ 是相容条件的一个解」为止，**不含任何十维系数**。
+  两卡都不承载唯一性。
+author: curator
+created: "2026-09-11"

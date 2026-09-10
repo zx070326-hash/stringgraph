@@ -9,8 +9,23 @@ depends_on:
     note: |
       提供 (4) 的 H 与 (9c) 的 δB。GS 逐字：「The nontrivial Λ transformation of B in eq. (9c)
       is the key to the cancellation between δS₁ and G.」
-  - id: consistency.descent-forms-chern-simons
-    note: (14)(15)(16) 用到的 ω⁰_{2n+1 Y}、ω¹_{2n Y}，以及把反常写成 ∫ω¹ 的形式。
+  - id: consistency.descent-forms-gs-notation
+    note: |
+      (14)(15)(16) 用到的 ω⁰_{2n+1 Y}、ω¹_{2n Y}。
+      ⚠ **本推导用到的洛伦兹一路（ω⁰_{3L}、ω⁰_{7L}、ω¹_{10L}）在一般 n 上是本图的推断**：
+      GS 只显式给了 n = 1 的 (7)(8)，一般 n 的 A → ω、F → R 代换 GS 原文未陈述；
+      见该依赖卡 statement (2) 的证据分层。
+  - id: consistency.descent-omega1-is-consistent-anomaly
+    inferred: true
+    note: |
+      **inferred: true。** 本推导第 (A)2 步把可分解的十二形式对应到「相容反常 G = c∫(⅓ω¹_{2Y}trF⁴
+      + ⅔ω¹_{6Y}trF²)」(17)，用的正是「ω¹ 满足 Wess–Zumino 相容条件、因而就是反常」这条识别。
+      **但 green-schwarz-1984 原文没有陈述这条识别**，只逐字写「Their form can be deduced by
+      implementing the Wess–Zumino consistency conditions [8]」并把分析外包给 ref. [9]
+      （= zumino-wu-zee-1984，**本项目正文未取得**）。
+      本图把这条边接到在同作者同期伴随文献（zumino-1983-les-houches, L1）上核实的那张卡上，
+      属**跨文献推断**，故标 inferred。
+      ⚠ 该卡**不提供唯一性**（见其 statement「本卡不含 (a)」与本推导 gaps）。
   - id: consistency.gs-counterterms-1984
     note: (18)(21)(23) 三段反项本身。
   - id: consistency.gravitational-anomaly-polynomial-d10
@@ -40,8 +55,17 @@ sources:
       **本项目未取得全文（L0）**。整条链的**数值系数层**——(17) 的 c、(20) 的三个系数、
       (14)(20)(22) 之间的相对归一化——全部压在这一条上。抽取记录 Q2/Q3。
   - ref: zumino-wu-zee-1984
-    loc: "全文（GS ref. [9]：ω⁰_{2n+1} 的显式表达式与十二形式分析）"
-    note: 本项目未取得全文（L0）。
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（GS ref. [9]：ω⁰_{2n+1} 的显式表达式与十二形式分析）"
+    note: |
+      **L2（原记为 L0，2026-09-11 更正为「摘要已取得、正文未取得」）**。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。抽取记录 literature/extractions/zumino-wu-zee-1984.md §0.2/§3.1。
+  - ref: zumino-1983-les-houches
+    loc: "(2.25)(2.26)(3.1)(3.32)（GS (5)(6)(15)(16) 逐字采用的下降方程约定与符号）；(2.29) 与 §5 的 (5.7)（GS (15) 后外包出去的「显式表达式」）；§5「Normalization of the anomalies」(5.6)–(5.13)（绝对归一化的一路，c 的另一半）；p.16 末「really valid only locally」；p.29 末「The problem of finding the most general solution of the consistency condition will not be discussed here.」"
+    note: |
+      **L1 全文（46 印刷页逐页读图）**；= green-schwarz-1984 的 ref. [10] 第一项。
+      承载两件事：(a) 本推导所用下降方程的**符号约定**已在此核实与 GS 逐字同一；
+      (b) 本推导 gaps 里三条 Zumino 侧缺口（局部性、k² = 0、唯一性）的逐字出处。
+      ⚠ **不承载引力/洛伦兹一路的任何内容**（该文全文只做内部对称群，无 ω、无 R、无 tr R²）。
 summary: |
   GS 的论证按三类反常分三段，最后合起来。
 
@@ -83,11 +107,15 @@ summary: |
 
   **合并**：修改 H（加 −ω⁰_{3L}）并加入 S₁ + S₂ + S₃，则单圈的规范、引力、混合反常全部抵消。
 gaps:
-  - "★ **数值系数层整体外包**：(17) 的常数 c 与 (14)(20)(22) 的相对归一化，GS 逐字指向 alvarez-gaume-witten-1984 eq. (63)，**本项目未取得该文**。凡本推导中出现的具体数（⅓, ⅔, 1/32, ⅛, 1/12, 1/48, 1/24, 5/32）都不可追溯到本图掌握的来源（抽取记录 Q2/Q3）。"
+  - "★ **数值系数层整体外包**：(17) 的常数 c 与 (14)(20)(22) 的相对归一化，GS 逐字指向 alvarez-gaume-witten-1984 eq. (63)。**状态更正（2026-09-11）：该文全文已取得（L1），而它并不含常数 c**——见下面单列的那条 gap。凡本推导中出现的具体数（⅓, ⅔, 1/32, ⅛, 1/12, 1/48, 1/24, 5/32）都不可追溯到本图掌握的来源（抽取记录 Q2/Q3）。"
   - "★ 「单迹六阶项的反常不能由局域反项抵消，可分解项可以」这条判据，GS 全文无证明；本图无独立来源。(A)1 与 (B)5 两处都靠它。"
   - "(22) 只给结果，无中间步骤：GS 未展示混合反常十二形式是怎么算出来的。"
   - "δS₁ 与 G 的对消、δS₂/δS₃ 的对消，GS 都只给结论不给计算；本图未复算任何一处。"
-  - "ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（consistency.descent-forms-chern-simons），故 S₁、S₃ 的显式值依赖代表元选取。"
+  - "ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（consistency.descent-forms-gs-notation），故 S₁、S₃ 的显式值依赖代表元选取。"
+  - "★ **局部性（2026-09-11 新发现，此前从未被记录）**：本推导用到的下降方程，其唯一已核实的一手来源（zumino-1983-les-houches, p.16 末）逐字限定「Equations such as (2.24) and (2.26) are **really valid only locally, in some finite neighborhood in x-space**. It is however well known that they can be given a global meaning by using a connection on a principal fibre bundle, rather than a vector potential on the base (x-space).」而本推导里的 S₁、S₂、S₃ 与 G 都是**整个十维时空上的积分**。**green-schwarz-1984 全文没有这句话**，GS 直接在整个十维时空上写 (4)–(8)(14)–(16)。全局化所需的主丛表述本图无来源、未做。"
+  - "★ **相容条件之解的唯一性无支撑（2026-09-11 新发现）**：(A)2 步「两项之比由 Bose 对称性唯一确定」与 consistency.anomaly-twelve-form-d10 里 GS 逐字的「The anomalies … are **uniquely determined** by the hexagon diagrams. Their form can be deduced by implementing the Wess–Zumino consistency conditions [8]」都依赖唯一性。但 zumino-1983-les-houches p.29 逐字：「**The problem of finding the most general solution of the consistency condition will not be discussed here.**」⇒ **Zumino 一侧不提供唯一性**。真正的唯一性（相容反常的上同调分类）属 manes-stora-zumino-1985 (CMP 102 (1985) 157) 一线，**本项目正文一字未取到**。GS 的 ref. [8] = wess-zumino-1971 本图也未取得。"
+  - "**k² = 0 未证（2026-09-11 新发现）**：下降方程装置里的同伦算子 k（zumino-1983-les-houches (2.44)，满足 kd + dk = 1）的 k² = 0 在该文逐字被留作「We leave the proof as an exercise to the reader.」。**说明**：本推导实际用到的是 kd + dk = 1 与下降链本身，不使用 k² = 0；记录在此是为了不让下游误以为那套装置在来源处已闭合。"
+  - "★ **常数 c 在三篇原始文献里都不以一个数的形式存在（2026-09-11 定案，替代原「AGW 未取得」的记法）**：alvarez-gaume-witten-1984 全文已取得（L1）且**确实没有 c**——(114) 逐字「apart from a factor common to the three cases」，只给相对归一；zumino-1983-les-houches §5 给的是 **2n−2 维通式 (5.13)**，**不含引力侧**，且原文在该式上方**手写插注「(up to a sign)」**、读图不可靠；ZWZ 正文未取得（L2）。⇒ **c 是 GS 自己合成的一步（AGW 相对归一 + Zumino 绝对归一），GS 未给中间步骤，本图未复算。**即使将来取到 ZWZ 正文，c 大概率仍不会以一个数出现（抽取记录 Q-Z3）。"
   - "有效场论截断本身：GS 逐字承认「any truncation of the complete string theory is probably not fully consistent」。"
   - "(A)4 的树图机制要用到 GS (1) 的 S₀（H² 项），本图未建该定义卡。"
 notes: |
