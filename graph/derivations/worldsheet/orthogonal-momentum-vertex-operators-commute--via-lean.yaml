@@ -10,7 +10,7 @@ depends_on:
       本推导**实质地**用到它是**交换环**这一点（产生半就是乘以 F 的一个元素，故两个产生半
       自动对易）与它的 level 分级（`levelSubmodule`，用于 `vertexOsc` 的局部有限性）。
       产生变量 X_v 上的递推（`Fock.vertexOsc_X_mul`）也是这张卡的多项式结构。
-  - id: worldsheet.exponential-vertex-operator-mode-weight-identity
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
     inferred: true
     note: |
       **inferred: true。** 本推导用到的 `Fock.creaExp_euler`（欧拉型递推
