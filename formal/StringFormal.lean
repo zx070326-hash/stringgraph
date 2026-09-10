@@ -31,3 +31,4 @@ import StringFormal.NoGhost.LevelTwo
 import StringFormal.NoGhost.TowerPhysical
 import StringFormal.NoGhost.VertexCommute
 import StringFormal.NoGhost.VertexProduct
+import StringFormal.NoGhost.VertexAdjoint
