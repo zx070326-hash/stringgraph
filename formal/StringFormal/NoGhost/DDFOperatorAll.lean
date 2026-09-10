@@ -7,6 +7,7 @@ Written from scratch against Mathlib `v4.33.1`; not a port of any existing forma
 -/
 import StringFormal.NoGhost.DDFOperatorNeg
 import StringFormal.NoGhost.VertexWeightZero
+import StringFormal.NoGhost.TowerPhysical
 
 /-!
 # `⁅L_m, A^ε_n⁆ = 0` for **every** `m : ℤ`
@@ -35,6 +36,9 @@ So this file is the `m ≠ 0` file with the hypothesis deleted:
 * `lie_towerLop_ddfSummand_all` — the telescoping form, all `m`.  (The unsuffixed name
   `lie_towerLop_ddfSummand` is already taken by the `m > 0` version in `DDFOperator.lean`.)
 * **`lie_towerLop_ddfOp`** — `⁅L_m, A^ε_n⁆ = 0` for **every** `m : ℤ`.
+* `ddfOp_mem_towerL0Submodule` / **`ddfOp_mem_towerPhysSubmodule`** — the corollary that
+  `A^ε_n` maps the old covariant physical subspace of the tower into itself.  `TowerPhysical.lean`
+  could only do the `m ≥ 1` half; the `L_0` half is exactly what `m = 0` buys.
 
 ## Why `m = 0` is `0` and not a multiple of `A^ε_n`
 
@@ -263,5 +267,50 @@ theorem lie_towerLop_ddfOp_zero (η a b ε : Fin D → R) (hη : ∀ μ, η μ *
     (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) (n : ℤ) :
     ⁅towerLop η a b 0, ddfOp η a b ε hη hεb n⁆ = 0 :=
   lie_towerLop_ddfOp η a b ε hη hbb hba hεb 0 n
+
+
+
+/-! ### The DDF operators preserve the physical subspace of the tower -/
+
+/-- **The DDF operators preserve the mass-shell condition.**
+
+If `(L_0 - a₀) Ψ = 0` then `(L_0 - a₀) (A^ε_n Ψ) = 0`.  This is the half of "`A^ε_n` maps
+physical states to physical states" that `TowerPhysical.lean` had to leave open, and it is
+exactly the payload of the `m = 0` bracket: `L_0 A^ε_n Ψ = A^ε_n L_0 Ψ = a₀ • A^ε_n Ψ`.
+
+Note the intercept `a₀` is *unchanged*: `A^ε_n` moves a state `n` rungs up the momentum tower
+and `n` oscillator levels down, and `invTwo_zeroModeSq_towerMomentum_add_shift_cancel` is the
+arithmetic identity saying those two shifts cancel in `α' p² + N`. -/
+theorem ddfOp_mem_towerL0Submodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) {a₀ : R} (n : ℤ)
+    {Ψ : TowerFock D R} (hΨ : Ψ ∈ towerL0Submodule η a b a₀) :
+    ddfOp η a b ε hη hεb n Ψ ∈ towerL0Submodule η a b a₀ := by
+  rw [mem_towerL0Submodule] at hΨ ⊢
+  have h' := congrArg (fun T : Module.End R (TowerFock D R) => T Ψ)
+    (lie_towerLop_ddfOp η a b ε hη hbb hba hεb 0 n)
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    LinearMap.zero_apply, sub_eq_zero] at h'
+  rw [h', hΨ, map_smul]
+
+/-- **The DDF operators preserve the old covariant physical subspace of the momentum tower.**
+
+`Ψ ∈ towerPhysSubmodule η a b a₀ → A^ε_n Ψ ∈ towerPhysSubmodule η a b a₀`, under the DDF
+normalisations `k_0² = 0`, `2α' k_0 · p = 1` and transversality `ε · k_0 = 0`.
+
+This is the operator-theoretic content of `worldsheet.ddf-operators-v5`: starting from a
+physical state of the tower one may apply `A^ε_n` freely and stay physical, which is what
+produces the transverse DDF spectrum used in Goddard-Thorn.  Both halves are corollaries of
+`⁅L_m, A^ε_n⁆ = 0`: the `m ≥ 1` half was already available
+(`ddfOp_mem_towerPositiveModeSubmodule`), the `m = 0` half is `ddfOp_mem_towerL0Submodule`.
+
+What is *not* claimed here: that the DDF states span the physical subspace (that is the hard
+half of no-ghost), nor the `⁅A^ε_m, A^ε'_n⁆` oscillator algebra. -/
+theorem ddfOp_mem_towerPhysSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) {a₀ : R} (n : ℤ)
+    {Ψ : TowerFock D R} (hΨ : Ψ ∈ towerPhysSubmodule η a b a₀) :
+    ddfOp η a b ε hη hεb n Ψ ∈ towerPhysSubmodule η a b a₀ :=
+  Submodule.mem_inf.2
+    ⟨ddfOp_mem_towerL0Submodule η a b ε hη hbb hba hεb n (Submodule.mem_inf.1 hΨ).1,
+      ddfOp_mem_towerPositiveModeSubmodule η a b ε hη hbb hba hεb n (Submodule.mem_inf.1 hΨ).2⟩
 
 end StringFormal.NoGhost
