@@ -266,8 +266,27 @@
       连同辅助引理 `Fock.level_sub_single_add`、`Fock.expWeight_sub_single`；
       无 sorry，公理只有标准三条。求和索引写成 `l ∈ Finset.range M` 配 `l.succPNat`，
       即模态跑遍 `1, …, M`。
-    - [ ] (3b) 真空上的单条等式 `L_m Φ_J = …`（把 (3a) 与 `Sugawara.lean` 的 `Lop` 结合），
-      以及由 `vertexOsc_unique` 得到的完整 `[L_m, V_J]`：**未做**。
+    - [x] (3b) 真空上的单条等式，`m ≥ 1` 的情形**已证**：
+      `Fock.Lop_apply_creaExp_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
+      `L_m Φ_J = (a·b + ½ (m-1)(b·b) + (J - m)) Φ_{J-m}`，对任意 `J : ℤ` 成立
+      （`J < m` 时两边都为零）。证明把 `L_m = ½ Σ_j :α_{m-j}·α_j:` 的指标分成五段
+      （`j ≤ -1` / `j = 0` / `1 ≤ j ≤ m-1` / `j = m` / `j ≥ m+1`），两条产生尾用
+      `Fock.sum_mode_creaExp_eq_smul`（(3a) 的 `mode` 形式）求和。
+      推论 `Fock.Lop_apply_creaExp_of_pos_shifted`（零模参数 `a → a+b`）给出
+      `L_m^{(a+b)} Φ_J = (J - m + a·b + ½ (m+1)(b·b)) Φ_{J-m}`，与本项 (3) 记录的文献形式
+      `(J + b·a - m + (m+1)·½ b·b)` **逐项相符**，即权 `h = ½ b·b`。
+      交叉验证：`Fock.Lop_one_apply_creaExp_one`（由上式）与
+      `Fock.Lop_one_apply_creaExp_one_via_mode`（由对易子 `Lop_apply_mode_one`）
+      在 `m = J = 1` 给出同一答案。无 sorry，公理只有标准三条。
+    - [x] (3c) `m = 0`：`Fock.Lop_zero_apply_creaExp`，`L_0 Φ_J = (α'k² + J) Φ_J`。
+      **数学要点**：它不是 (3b) 在 `m = 0` 的特例——`m ≥ 1` 时 `j = 0` 与 `j = m` 是两项、
+      各出 `½ (a·b)`，`m = 0` 时并成一项 `½ (a·a)`，把 `m = 0` 代入 (3b) 会得到错误的
+      `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 齐次元，这条直接由已有的
+      `Fock.Lop_zero_apply_of_mem_levelSubmodule` 得到。
+    - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
+      共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
+      第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
+    - [ ] (3d) 由 `vertexOsc_unique` 从 (3b) 得到完整的 `[L_m, V_J]`：**未做**。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
