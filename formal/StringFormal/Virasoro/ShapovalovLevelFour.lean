@@ -266,6 +266,199 @@ lemma lie_lgen_one_desc1111 : ⁅VirasoroAlgebra.lgen R 1, desc1111 R c h⁆
   congr 1
   ring
 
+/-! ### `levelSpan` membership -/
+
+lemma desc4_mem_levelSpan : desc4 R c h ∈ levelSpan R c h 4 := by
+  refine Submodule.subset_span ⟨Composition.single 4 (by norm_num), ?_⟩
+  rw [levelWord, Composition.single_blocks]
+  rfl
+
+lemma desc31_mem_levelSpan : desc31 R c h ∈ levelSpan R c h 4 := by
+  refine Submodule.subset_span ⟨⟨[3, 1], by simp, rfl⟩, ?_⟩
+  rw [levelWord]
+  rfl
+
+lemma desc22_mem_levelSpan : desc22 R c h ∈ levelSpan R c h 4 := by
+  refine Submodule.subset_span ⟨⟨[2, 2], by simp, rfl⟩, ?_⟩
+  rw [levelWord]
+  rfl
+
+lemma desc211_mem_levelSpan : desc211 R c h ∈ levelSpan R c h 4 := by
+  refine Submodule.subset_span ⟨⟨[2, 1, 1], by simp, rfl⟩, ?_⟩
+  rw [levelWord]
+  rfl
+
+lemma desc1111_mem_levelSpan : desc1111 R c h ∈ levelSpan R c h 4 := by
+  refine Submodule.subset_span ⟨Composition.ones 4, ?_⟩
+  rw [levelWord, Composition.ones_blocks]
+  rfl
+
+/-! ### The fifteen independent entries of the level-4 Gram matrix -/
+
+variable {R c h}
+variable {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+
+/-- `⟨L₋₄|c,h⟩, L₋₄|c,h⟩⟩ = 8h + 5c`. -/
+theorem IsContravariant.gram_level_four_44 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc4 R c h) (desc4 R c h) = 8 * h + 5 * c := by
+  have key := hB (-4) (hwv R c h) (desc4 R c h)
+  rw [← desc4] at key
+  rw [key, neg_neg, lie_lgen_four_desc4, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+/-- `⟨L₋₄|c,h⟩, L₋₃L₋₁|c,h⟩⟩ = 14h`. -/
+theorem IsContravariant.gram_level_four_4_31 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc4 R c h) (desc31 R c h) = 14 * h := by
+  have key := hB (-4) (hwv R c h) (desc31 R c h)
+  rw [← desc4] at key
+  rw [key, neg_neg, lie_lgen_four_desc31, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+/-- `⟨L₋₄|c,h⟩, L₋₂²|c,h⟩⟩ = 24h + 3c`. -/
+theorem IsContravariant.gram_level_four_4_22 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc4 R c h) (desc22 R c h) = 24 * h + 3 * c := by
+  have key := hB (-4) (hwv R c h) (desc22 R c h)
+  rw [← desc4] at key
+  rw [key, neg_neg, lie_lgen_four_desc22, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+/-- `⟨L₋₄|c,h⟩, L₋₂L₋₁²|c,h⟩⟩ = 36h`. -/
+theorem IsContravariant.gram_level_four_4_211 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc4 R c h) (desc211 R c h) = 36 * h := by
+  have key := hB (-4) (hwv R c h) (desc211 R c h)
+  rw [← desc4] at key
+  rw [key, neg_neg, lie_lgen_four_desc211, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+/-- `⟨L₋₄|c,h⟩, L₋₁⁴|c,h⟩⟩ = 120h`. -/
+theorem IsContravariant.gram_level_four_4_1111 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc4 R c h) (desc1111 R c h) = 120 * h := by
+  have key := hB (-4) (hwv R c h) (desc1111 R c h)
+  rw [← desc4] at key
+  rw [key, neg_neg, lie_lgen_four_desc1111, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+/-- `⟨L₋₃L₋₁|c,h⟩, L₋₃L₋₁|c,h⟩⟩ = 4ch + 12h² + 12h`. -/
+theorem IsContravariant.gram_level_four_31_31 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc31 R c h) (desc31 R c h) = 4 * c * h + 12 * h ^ 2 + 12 * h := by
+  have key := hB (-3) (desc1 R c h) (desc31 R c h)
+  rw [← desc31] at key
+  rw [key, neg_neg, lie_lgen_three_desc31, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_one hB1]
+  ring
+
+/-- `⟨L₋₃L₋₁|c,h⟩, L₋₂²|c,h⟩⟩ = 30h`. -/
+theorem IsContravariant.gram_level_four_31_22 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc31 R c h) (desc22 R c h) = 30 * h := by
+  have key := hB (-3) (desc1 R c h) (desc22 R c h)
+  rw [← desc31] at key
+  rw [key, neg_neg, lie_lgen_three_desc22, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_one hB1]
+  ring
+
+/-- `⟨L₋₃L₋₁|c,h⟩, L₋₂L₋₁²|c,h⟩⟩ = 40h² + 20h`. -/
+theorem IsContravariant.gram_level_four_31_211 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc31 R c h) (desc211 R c h) = 40 * h ^ 2 + 20 * h := by
+  have key := hB (-3) (desc1 R c h) (desc211 R c h)
+  rw [← desc31] at key
+  rw [key, neg_neg, lie_lgen_three_desc211, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_one hB1]
+  ring
+
+/-- `⟨L₋₃L₋₁|c,h⟩, L₋₁⁴|c,h⟩⟩ = 192h² + 48h`. -/
+theorem IsContravariant.gram_level_four_31_1111 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc31 R c h) (desc1111 R c h) = 192 * h ^ 2 + 48 * h := by
+  have key := hB (-3) (desc1 R c h) (desc1111 R c h)
+  rw [← desc31] at key
+  rw [key, neg_neg, lie_lgen_three_desc1111, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_one hB1]
+  ring
+
+/-- `⟨L₋₂²|c,h⟩, L₋₂²|c,h⟩⟩ = c²/2 + 8ch + 4c + 32h² + 32h`.  This is the only entry of the
+level-4 Gram matrix that is not an integer polynomial in `c` and `h`; the `1/2` is written as
+`centralTerm R 2`. -/
+theorem IsContravariant.gram_level_four_22_22 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc22 R c h) (desc22 R c h)
+      = centralTerm R 2 * c ^ 2 + 8 * c * h + 4 * c + 32 * h ^ 2 + 32 * h := by
+  have key := hB (-2) (desc2 R c h) (desc22 R c h)
+  rw [← desc22] at key
+  rw [key, neg_neg, lie_lgen_two_desc22, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_two_aa hB1]
+  linear_combination (4 * c * h + 4 * c) * two_mul_centralTerm_two R
+
+/-- The division-free form of `gram_level_four_22_22`. -/
+theorem IsContravariant.two_mul_gram_level_four_22_22 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    2 * B (desc22 R c h) (desc22 R c h)
+      = c ^ 2 + 16 * c * h + 8 * c + 64 * h ^ 2 + 64 * h := by
+  rw [hB.gram_level_four_22_22 hB1]
+  linear_combination (c ^ 2) * two_mul_centralTerm_two R
+
+/-- `⟨L₋₂²|c,h⟩, L₋₂L₋₁²|c,h⟩⟩ = 6ch + 48h² + 48h`. -/
+theorem IsContravariant.gram_level_four_22_211 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc22 R c h) (desc211 R c h) = 6 * c * h + 48 * h ^ 2 + 48 * h := by
+  have key := hB (-2) (desc2 R c h) (desc211 R c h)
+  rw [← desc22] at key
+  rw [key, neg_neg, lie_lgen_two_desc211, map_add, LinearMap.map_smul, LinearMap.map_smul,
+    smul_eq_mul, smul_eq_mul, hB.gram_level_two_aa hB1, hB.gram_level_two_ab hB1]
+  linear_combination (6 * c * h) * two_mul_centralTerm_two R
+
+/-- `⟨L₋₂²|c,h⟩, L₋₁⁴|c,h⟩⟩ = 216h² + 144h`. -/
+theorem IsContravariant.gram_level_four_22_1111 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc22 R c h) (desc1111 R c h) = 216 * h ^ 2 + 144 * h := by
+  have key := hB (-2) (desc2 R c h) (desc1111 R c h)
+  rw [← desc22] at key
+  rw [key, neg_neg, lie_lgen_two_desc1111, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_two_ab hB1]
+  ring
+
+/-- `⟨L₋₂L₋₁²|c,h⟩, L₋₂L₋₁²|c,h⟩⟩ = 4ch² + 2ch + 32h³ + 116h² + 32h`. -/
+theorem IsContravariant.gram_level_four_211_211 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc211 R c h) (desc211 R c h)
+      = 4 * c * h ^ 2 + 2 * c * h + 32 * h ^ 3 + 116 * h ^ 2 + 32 * h := by
+  have key := hB (-2) (desc11 R c h) (desc211 R c h)
+  rw [← desc211] at key
+  have hba : B (desc11 R c h) (desc2 R c h) = 6 * h :=
+    (hB.comm _ _).trans (hB.gram_level_two_ab hB1)
+  rw [key, neg_neg, lie_lgen_two_desc211, map_add, LinearMap.map_smul, LinearMap.map_smul,
+    smul_eq_mul, smul_eq_mul, hba, hB.gram_level_two_bb hB1]
+  linear_combination (4 * c * h ^ 2 + 2 * c * h) * two_mul_centralTerm_two R
+
+/-- `⟨L₋₂L₋₁²|c,h⟩, L₋₁⁴|c,h⟩⟩ = 288h³ + 336h² + 96h`. -/
+theorem IsContravariant.gram_level_four_211_1111 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc211 R c h) (desc1111 R c h) = 288 * h ^ 3 + 336 * h ^ 2 + 96 * h := by
+  have key := hB (-2) (desc11 R c h) (desc1111 R c h)
+  rw [← desc211] at key
+  rw [key, neg_neg, lie_lgen_two_desc1111, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_two_bb hB1]
+  ring
+
+/-- `⟨L₋₁⁴|c,h⟩, L₋₁⁴|c,h⟩⟩ = 384h⁴ + 1152h³ + 1056h² + 288h`. -/
+theorem IsContravariant.gram_level_four_1111_1111 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc1111 R c h) (desc1111 R c h)
+      = 384 * h ^ 4 + 1152 * h ^ 3 + 1056 * h ^ 2 + 288 * h := by
+  have key := hB (-1) (desc111 R c h) (desc1111 R c h)
+  rw [← desc1111] at key
+  rw [key, neg_neg, lie_lgen_one_desc1111, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_three_111_111 hB1]
+  ring
+
+/-- Levels `3` and `4` are orthogonal, an instance of `IsContravariant.eq_zero_of_level_ne`. -/
+theorem IsContravariant.gram_level_three_four (hB : IsContravariant R c h B)
+    {x y : VermaModule R c h} (hx : x ∈ levelSpan R c h 3) (hy : y ∈ levelSpan R c h 4) :
+    B x y = 0 :=
+  hB.eq_zero_of_level_ne (by norm_num) hx hy
+
 end Level4
 
 end StringFormal.Virasoro
