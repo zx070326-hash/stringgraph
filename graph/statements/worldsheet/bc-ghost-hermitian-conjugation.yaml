@@ -28,7 +28,7 @@ statement: |
   ⚠ **这是一次非平凡的选择，不是自动的**：Fock 空间上的"自然"内积在 C_rel 上退化，
   插入 c_0 是为恢复非退化性而做的约定。无鬼定理断言的正定性是**这个**形式的正定性。
 uses:
-  - worldsheet.brst-quantization
+  - worldsheet.brst-quantization-v2
 uses_conventions: [conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1
@@ -67,5 +67,14 @@ notes: |
 
   status: rigorous 的理由：本节点是二维 Clifford 模上的内积约定 + 模式的伴随关系，
   纯代数、无收敛问题；uses 只连 worldsheet.brst-quantization（本身 rigorous 的代数节点）。
+
+  **【2026-09-11 换代提示】** 上文（statement 首句与本 notes）提到的
+  worldsheet.brst-quantization 已写 superseded_by 指向
+  **worldsheet.brst-quantization-v2**，本节点的 `uses` 边已就地换到 v2。
+  两版在本节点用到的一切（bc 模式代数、|↓⟩ = c_1|0⟩ 与 |↑⟩ = c_0|↓⟩、{b_0,c_0} = 1、
+  gh(c_n) = +1/gh(b_n) = −1、gh(|0⟩) = 0）**逐字相同**；v2 的唯一改动是把鬼场中心荷
+  c^g 从数值 −26 改回符号（取值移到 worldsheet.bc-ghost-central-charge），
+  而 c^g 不进入本节点的任何一句话。statement 文本按不可变原则保留旧 id 的写法，
+  旧 id 仍可解析。本节点的 status 与有效状态不变（v2 同为 rigorous）。
 author: curator
 created: "2026-09-11"

@@ -72,7 +72,25 @@ sources:
       定理编号与 Q_B 的具体归一化未核实。见 brst-cohomology-sources.md §6。
       （原先此处引的 lian-zuckerman-1989 已删除：该文是 super-Virasoro/RNS 超弦，非玻色弦，属误引。）
 tags: [bosonic-string, quantization, brst, ghosts]
+superseded_by: worldsheet.brst-quantization-v2
 notes: |
+  ⚠ **本卡片已被取代（curator，2026-09-11）**，见 superseded_by。
+  取代原因正是本 notes 末尾「⚠ 但确实存在一个真问题」一段提出、并由 lead 收进
+  docs/ROADMAP.md「待拆清单」的那一条：本卡片的 statement 里把
+    c^g = -3(2λ-1)^2 + 1 = -26 (λ = 2)
+  与由此得到的 c = c^m + c^g = c^m - 26 写死，而那是一条**命题**
+  （worldsheet.bc-ghost-central-charge）被埋进 definition 卡的正文。
+  worldsheet.brst-quantization-v2 把 c^g 改回**符号**（只声明它是由
+  [L^g_m, L^g_n] 的中心项唯一确定的常数，不断言取值），其余文字逐字保留。
+  按不可变原则，本卡片的 id 与 statement 文本不作任何修改。
+  图中原先指向本卡片的 `uses` / `depends_on` 已在同一次提交里就地换到 v2
+  （它们用的都是 Q_B 的代数构造，与 c^g 的取值无关；唯一用到 -26 的
+  worldsheet.critical-dimension-brst--via-nilpotency 早已另挂
+  worldsheet.bc-ghost-central-charge）。**例外**：
+  worldsheet.brst-nilpotent-at-c26--via-fgz 当时由另一位 curator 持有写锁，
+  未换代，会留下一条 `depends on superseded statement` 警告，待其换代后消失。
+  a^g = -1 按 lead 指示继续留在 v2 的定义里，理由见 v2 的 notes 末段。
+
   本节点是定义，不含 Q_B^2 = 0 的断言，也不含 D = 26。
   之所以能标 rigorous：bc 系统是 Clifford 型（反对易）代数上的 Fock 模，Q_B 是其上的
   有明确定义的奇算符——受限模条件保证 Q_B 作用到任一向量只有有限多项非零。

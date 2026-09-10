@@ -3,8 +3,11 @@ target: worldsheet.brst-charge-on-ghost-ground-state
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
-    note: "提供 Q_B 的模式展开、|↓⟩ 的湮灭条件、a^g = −1、受限模。"
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B 的模式展开、|↓⟩ 的湮灭条件、a^g = −1、受限模。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。本推导逐项作用只用模式代数与 a^g，
+      **不用 c^g 的取值**，故 v2 把 c^g 符号化不影响本推导。）
   - id: worldsheet.old-covariant-physical-states
     note: "提供 (2) 右端的 H_phys 定义（截距 a = 1 的情形）。"
 sources:

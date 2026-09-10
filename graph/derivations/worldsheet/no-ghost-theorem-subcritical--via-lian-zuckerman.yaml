@@ -60,7 +60,7 @@ depends_on:
       故按项目规则 5 标 inferred：这条边是「该步骤在数学上必须经过 Kac 行列式/Kac–Kazhdan
       的半正定区域分析」的推断，不是在指定 loc 处能读到的引用。待 researcher 复核 LZ p.571–579
       的 Lemma 3.17 / Remark 3.15 后可改为非 inferred 并补 loc。
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
     inferred: true
     note: |
       LZ 的相对复形 C*_∞(𝒢, 𝒜; V)（Definition 1.10、1.12(i)，𝒜 = 𝒢₀ = CL₀ + Cz，p.556）
@@ -72,6 +72,12 @@ depends_on:
       注意 LZ 侧的总中心荷 26 是由 V(D,p) ⊗ L(26−D, 1−h) 凑出的（π(z) = D + (26−D) = 26），
       不是本项目 brst-quantization 默认的「物质 = D 个自由玻色子且 c^m = D」；
       brst-quantization 作为定义允许一般 c^m 的物质 CFT，故可用作依赖，但这一差异见 gaps。
+      【2026-09-11 换代】本条边由 worldsheet.brst-quantization 就地换到
+      **worldsheet.brst-quantization-v2**（旧卡已写 superseded_by）。v2 的唯一改动是把鬼场
+      中心荷 c^g 从数值 −26 改回符号（取值移到 worldsheet.bc-ghost-central-charge），
+      相对复形 b₀|Ψ⟩ = 0、L₀|Ψ⟩ = 0 与 Q_B 的模式定义逐字未变，故本条边的 inferred 标注、
+      note 内容与有效状态**均不受影响**。注意上文提到的「η(z) = −26」是 LZ 自己算出的鬼系统
+      中心荷，本来就不取自本图的定义卡，换代后这一点反而更清楚。
   - id: worldsheet.old-covariant-physical-states
     inferred: true
     note: |

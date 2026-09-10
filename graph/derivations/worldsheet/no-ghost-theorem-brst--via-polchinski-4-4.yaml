@@ -3,7 +3,11 @@ target: worldsheet.no-ghost-theorem-brst
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B、b_n、c_n 的模式代数与鬼数（§4.4 的论证对象）。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。c^g = −26 只经
+      worldsheet.critical-dimension-brst 这条边进入本推导，v2 把 c^g 符号化不影响记账。）
   - id: worldsheet.critical-dimension-brst
   - id: worldsheet.virasoro-algebra-v2
 sources:

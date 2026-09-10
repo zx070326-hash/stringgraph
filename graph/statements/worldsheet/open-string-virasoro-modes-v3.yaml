@@ -1,0 +1,113 @@
+id: worldsheet.open-string-virasoro-modes-v3
+kind: definition
+status: rigorous
+title: 开弦的 Virasoro 生成元 L_m（倍增域上的围道定义）与零模归一化 α_0 = (2α')^{1/2} p
+statement: |
+  **定义域约定（倍增域 / doubled domain）。** 开弦世界面带边。在欧氏共形规范下把它共形映到
+  上半平面 H = {z ∈ C : Im z ≥ 0}，实轴 Im z = 0 是弦的边界
+  （conv.worldsheet-euclidean、conv.worldsheet-complex-coords）。
+  设 T(z) ≡ T_{zz}、T̄(z̄) ≡ T_{z̄z̄} 是 worldsheet.traceless-holomorphic-energy-momentum
+  给出的全纯 / 反全纯部门，其 Laurent 模按 worldsheet.energy-momentum-laurent-modes 的围道公式取。
+  本节点**约定**把反全纯部门反射到下半平面来工作：
+    对 Im z < 0  定义   T(z) := T̄(z^*)   （z^* 是 z 的复共轭，落在 H 内），
+  于是在整个 C \ {0} 上只有**一个**符号 T，其 Laurent 模由**整圆**围道给出
+    L_m := ∮_{|z| = r} (dz / 2π i)  z^{m+1} T(z),   m ∈ Z。
+  在这套约定下本图对开弦只写出**一族**生成元 {L_m : m ∈ Z}，不再单独引入 {L̄_m}。
+
+  ⚠ **上一段是定义域的选取，不是断言。** 「Neumann 边界条件使 T 与 T̄ 在实轴上相等，
+  因而上式定义的 T 真的跨过实轴解析延拓、这一族 L_m 与在 H 上分别取 {L_m}、{L̄_m}
+  所含的信息相同——即开弦只有一套 Virasoro 代数」是一条**命题**，
+  见 worldsheet.open-string-doubling-trick。
+  需要该结论的推导必须显式依赖那条命题；只用本节点的模记号与零模归一化的推导不必。
+  （闭弦无边界，不做这一约定：全纯与反全纯是两套独立的 Virasoro 代数 {L_m} 与 {L̄_m}。）
+
+  **自由玻色子 Fock 空间上的显式模式表达式**由 worldsheet.virasoro-generators-free-boson 给出：
+    L_m = (1/2) Σ_{n ∈ Z} : α_{m-n} · α_n :,   α_p · α_q ≡ η_{μν} α^μ_p α^ν_q。
+
+  **零模归一化。** 开弦取
+    α^μ_0 = (2 α')^{1/2}  p^μ,
+  其中 p^μ 是弦的总时空动量（conv.alpha-prime-regge、conv.metric-mostly-plus）。
+  闭弦的对应取法是 α^μ_0 = ᾱ^μ_0 = (α'/2)^{1/2} p^μ，与开弦相差因子 2，
+  这是开闭弦公式最常见的混淆点。
+  能级算符（level operator）记作
+    N ≡ Σ_{n ≥ 1} α_{-n} · α_n。
+
+  ⚠ 本节点是**定义/归一化约定的记录**，不断言任何由此推出的等式。
+  特别地，「L_0 = α' p^2 + N」**不在本节点内**：它是一条命题，见
+  worldsheet.open-string-l0-equals-level-plus-mass（纯代数、已形式化的那一半）与
+  worldsheet.normal-ordering-constant-ax（共形正规序侧 a^X = 0 的那一半）。
+  截距 a 的取值同样不在本节点内（见 worldsheet.open-string-intercept；
+  符号约定见 conv.intercept-sign-a）。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+  - worldsheet.energy-momentum-laurent-modes
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.25)（开弦边界：doubling trick 把 L 与 L̄ 合并成一套 Virasoro），p.56"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.46 p 56: Eq. (2.6.25) The Open String Boundary`）。
+      **本节点只从此处取「用倍增域上的一族 L_m 来记开弦」这一记法约定**；
+      「Neumann ⟹ 可以这么做」这一断言另属 worldsheet.open-string-doubling-trick。
+  - ref: polchinski-1998-v1
+    loc: "§2.7（p.58 起），eq. (2.7.27)（α_0^μ = (2α')^{1/2} p^μ）；同处 (2.7.25) 给 L_m"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字核实（「Recall (2.7.25) and (2.7.27) for the open string」）。
+      ⚠ schrans-2020 §4.6 有一句「Joe's book has taken α' = 2」，与原书前言「α' 保持显式」矛盾，
+      抽取记录判定为该笔记的笔误，**不采信**；本节点按 α' 显式书写。
+  - ref: polchinski-1998-v1
+    loc: "闭弦零模 α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ：**式号未核实**（抽取记录第 1.1 节列为「内容确认，式号未核实」）"
+tags: [bosonic-string, open-string, virasoro, zero-mode, definition, doubling-trick]
+notes: |
+  【本卡片取代 worldsheet.open-string-virasoro-modes-v2】（curator 2026-09-11，执行
+  docs/ROADMAP.md「待拆清单」中 reviewer-batch2 提出、lead 已同意的一条）。
+  v2 的 statement 首段以「**doubling trick。**」开头，用陈述句写
+  「Neumann 边界条件使能动张量的全纯与反全纯部门在边界上相等，于是可以把 T̄ 视为 T 到
+  上半平面镜像的解析延拓……相应地，开弦只有**一套** Virasoro 生成元」——
+  这是一条**命题**（有前提、有结论、可证可驳）被写进 definition 卡，
+  与 v2 自己末段「本节点是定义/归一化约定的记录，不断言任何由此推出的等式」自相矛盾。
+  本卡片把它拆成两半：
+    · 反射 T̄ 到下半平面、只写一族 L_m —— **定义域约定**，留在本卡片；
+    · 「Neumann ⟹ 这么做是合法的、开弦只有一套 Virasoro」—— **命题**，
+      worldsheet.open-string-doubling-trick（推导 --via-boundary-condition，physical-argument）。
+  v2 按不可变原则原样保留，写 superseded_by 指向本卡片。
+
+  **本卡片刻意不 uses worldsheet.open-string-doubling-trick。** 定义可以自由**规定**在哪个域上
+  写模，正如可以规定用哪套坐标；那条命题的作用是保证这一规定与 Neumann 边界条件相容、
+  且不丢信息。让定义卡去 uses 那条命题会把「规定」与「规定的正当性」重新黏在一起，
+  正是本次拆分要消除的东西。分派规则见下。
+
+  【引用本卡片还是 doubling-trick？——分派规则】
+  - 只需要开弦 L_m 的记号、模式表达式或零模归一化 (2α')^{1/2} → 引本卡片；
+  - 需要「开弦只有**一套** Virasoro，不存在独立的 L̄_m」这一结论（例如任何在开弦上
+    只写一次物理态条件 L_n|ψ⟩ = 0 的论证）→ **另加**
+    worldsheet.open-string-doubling-trick 这条边；
+  - 两者都需要 → 同时引，不要引已换代的 v2。
+
+  **有效状态的来源**（承自 v2，未变）：本节点自身 rigorous，但 uses 里的
+  worldsheet.energy-momentum-laurent-modes 有效状态是 physical-argument
+  （它经 OPE 与围道，由 traceless-holomorphic-energy-momentum 拉低），
+  故本节点有效状态为 physical-argument。保留这条边是**有意的**：
+  本卡片的定义域约定与 L_m 的围道式都直接写在 T 的 Laurent 语言里，离不开它。
+  拆分不改变图中任何节点的有效状态（已实测）。
+
+  与 worldsheet.virasoro-generators-free-boson 的分工：那条给的是**任意**自由玻色子 Fock 空间上
+  L_m 的纯代数定义（uses 为空、已形式化）；本条只加两件开弦特有的东西——
+  倍增域上的模记法与开弦零模归一化 (2α')^{1/2}。
+
+  **零模与形式化（承自 v2 与 v1）**：worldsheet.bosonic-fock-space（status: formalized）
+  的空间**不含零模**——它是 α^μ_{-n}（n ≥ 1）生成的多项式代数，动量 k 只是外部标签。
+  本节点的 α^μ_0 = (2α')^{1/2} p^μ 以零模为核心，故**尚未形式化**；
+  要落到 Lean 侧必须先显式扩张那个定义补上 x^μ、p^μ（见 bosonic-fock-space 的 notes 缺口 (i)）。
+  因此本节点的 uses 不加 worldsheet.bosonic-fock-space。
+
+  **仍留在本卡片里、可能需要再拆的东西**（curator 记账）：末段闭弦零模
+  α^μ_0 = ᾱ^μ_0 = (α'/2)^{1/2} p^μ 是一句**对照**，它的来源式号未核实（见 sources 第三条），
+  且严格说属闭弦而非开弦。若日后建闭弦模节点，应把这句移过去，本卡片只留指路。
+author: curator
+created: "2026-09-11"

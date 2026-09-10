@@ -3,7 +3,12 @@ target: worldsheet.brst-preserves-relative-complex
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B、受限模、相对复形 {b_0Ψ = 0, L_0Ψ = 0} 的定义。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。c^g 的取值不进入 (1)(2)(3) 的代数；
+      需要 c^m = 26 的只有 (1) 末句「H_rel 是上同调」，那一步由下面的
+      worldsheet.brst-nilpotent-at-c26 这条边承担。）
   - id: worldsheet.brst-anticommutator-b-mode
     note: "提供 {Q_B, b_0} = L^tot_0，是 (1) 的全部代数内容。"
   - id: worldsheet.bc-ghost-hermitian-conjugation

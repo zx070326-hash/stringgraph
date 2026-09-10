@@ -1,0 +1,119 @@
+id: worldsheet.open-string-doubling-trick--via-boundary-condition
+target: worldsheet.open-string-doubling-trick
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.open-string-neumann-boundary-condition
+    inferred: true
+    convention_map: |
+      跨 family `worldsheet-signature`：dep 用 conv.worldsheet-lorentzian（σ ∈ [0, ℓ] 的
+      洛伦兹带状世界面，∂^σ = γ^{σa}∂_a），target 用 conv.worldsheet-euclidean（欧氏上半平面）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典（σ^2 = i σ^0；(-γ)^{1/2} ↔ g^{1/2}）
+      再接共形映射「带 → 上半平面」，边界 σ = 0, ℓ 映到实轴 Im z = 0，
+      法向导数 ∂^σ 映到 ∂ - ∂̄ 方向的导数，于是
+        ∂^σ X^μ|_{∂} = 0   ↦   (∂ - ∂̄) X^μ|_{Im z = 0} = 0。
+      **本条 convention_map 承载的是两个未建节点的断言**：(a) Wick 旋转把 Neumann 条件
+      逐字搬到欧氏号差；(b) 带 → 上半平面的共形映射把边界映到边界且保持 (a) 的形式。
+      两者都是标准操作，本图没有节点（见 conv.worldsheet-euclidean 的 notes 与
+      docs/ROADMAP.md「待建：欧氏 Polyakov 作用量定义卡……让 Wick 旋转从约定节点变成
+      有陈述承载」）。故本边继承该缺口，见 gaps。
+    note: |
+      提供本命题 (i) 的前提：端点自由运动 ⟹ ∂^σ X^μ|_{∂} = 0。
+      标 inferred 的两条理由：
+      (1) 该节点的来源是 Polchinski §1.2 (1.2.28)，是**经典**变分的边界项分析，
+          在**洛伦兹带状**世界面上写；本推导要用的是**量子算符 T** 在**欧氏上半平面**
+          实轴上的等式。中间的 Wick 旋转 + 共形映射（见 convention_map）与
+          「经典边界条件对正规序算符逐字成立」这两步，在该 loc 处都读不到。
+      (2) 本推导的来源 loc（§2.6 (2.6.25)）也不在原地回指 §1.2；本图未核实原书是否有回指。
+  - id: worldsheet.traceless-holomorphic-energy-momentum
+    note: |
+      提供 T(z) 全纯、T̄(z̄) 反全纯这一前提——没有它「解析延拓」无从谈起。
+      来源同为 Polchinski §2.4 (2.4.1)–(2.4.2)，与本推导 sources 的第三条同源，故不标 inferred。
+      注意该节点自称是**经典/形式**陈述（量子层面 ⟨T^a_a⟩ ∝ c R，平坦世界面上才不显现），
+      本推导继承该限定：论证只在平坦（共形平坦）背景上有效。
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: |
+      提供 (iii) 里 L_m = ∮ (dz/2πi) z^{m+1} T(z) 的围道定义与反全纯侧的 L̄_m，
+      本推导把半圆围道补成整圆用的就是这一式。来源同为 Polchinski §2.6，不标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.25)（The Open String Boundary），p.56"
+    note: |
+      抽取记录 polchinski-1998-v1.md#E40 备注，**[已核实]**：schrans-2020 目录条目
+      `2.46 p 56: Eq. (2.6.25) The Open String Boundary` 式号已核实，抽取记录逐字写
+      「(2.6.25) 说明开弦情形下 `L` 与 `L̄` 由 doubling trick 合并成**一套** Virasoro 代数」。
+      **只有结论 (iii) 在这个意义上已核实**；(i)(ii) 的表达式未核对原书，见 gaps。
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.28)（Neumann 边界条件），p.—"
+    note: 抽取记录 #E8，[已核实]（schrans-2020 §1.11 逐字复现）。本推导的第一个前提。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.1)（T^a_a = 0）、(2.4.2)（分解为全纯 + 反全纯），p.43"
+    note: 式号经 schrans-2020 目录核实（`2.16`/`2.17`）；抽取记录 #E31。本推导的第二个前提。
+summary: |
+  三步，每一步都是物理学家式的形式操作（故整条取 physical-argument）。
+
+  **(i) 边界上 T = T̄。** 能动张量由 X 的（正规序）双线性给出，欧氏复坐标下
+    T = -(1/α') : ∂X · ∂X :,   T̄ = -(1/α') : ∂̄X · ∂̄X :。
+  经 convention_map 的字典，Neumann 条件在上半平面实轴上读作 (∂ - ∂̄) X^μ = 0，
+  即 ∂X^μ|_{Im z = 0} = ∂̄X^μ|_{Im z = 0}。把它代入上面两式，逐分量相同，得
+    T(z)|_{Im z = 0} = T̄(z̄)|_{Im z = 0}。
+  物理读法：Neumann 条件说**没有能量-动量流出弦端点**，边界上的法向能流为零，
+  这正是全纯与反全纯两支在边界上必须相等的内容。
+
+  **(ii) Schwarz 反射。** 定义 T̃(z) = T(z) (Im z > 0)、T̃(z) = T̄(z^*) (Im z < 0)。
+  T 在上半平面全纯；T̄ 反全纯意味着 z ↦ T̄(z^*) 在下半平面全纯。
+  由 (i) 两者在实轴上取值相同，按（算子值版本的）Schwarz 反射原理 / Morera 型论证，
+  T̃ 在整个 C 上（算子插入点之外）全纯。这就是「T̄ 是 T 越过边界的镜像解析延拓」。
+
+  **(iii) 半圆补成整圆。** 在带边世界面上，L_m 与 L̄_m 原本由绕原点的**半**圆围道
+  （在 H 内，两端落在实轴上）定义。把 L̄_m 的半圆用 (ii) 的反射映到下半平面并与 L_m 的
+  半圆拼接，两段实轴上的贡献互相抵消，得整圆围道
+    L_m = ∮_{|z| = r} (dz/2πi) z^{m+1} T̃(z)，
+  且在该反射下 L̄_m 与 L_m 是同一个量。故开弦上只有一族独立的生成元 {L_m}，
+  物理态条件对它写一次即可——这正是 Polchinski (2.6.25) 的内容。
+  闭弦无边界，(i) 不存在，两支保持独立。
+gaps:
+  - "**(i)(ii) 的具体表达式未核对原书**。核对源（schrans-2020 目录）只给条目标题
+     `Eq. (2.6.25) The Open String Boundary` 与抽取记录的一句结论「L 与 L̄ 合并成一套」，
+     即**只有 (iii) 已核实**。(i) 的『Neumann ⟹ 边界上 T = T̄』与 (ii) 的反射公式
+     T̃(z) = T̄(z^*) 是本图按标准 CFT 做法补出的措辞，原书正文在付费墙后（抽取记录 §0）。
+     若持原书者核对后措辞不同，须以原书为准并相应改写本推导（陈述卡则须换代）。"
+  - "**Wick 旋转与共形映射两步无节点承载**（见本推导第一条边的 convention_map）：
+     worldsheet.open-string-neumann-boundary-condition 是在洛伦兹带状世界面上的经典变分结论，
+     本推导在欧氏上半平面上用它。conv.worldsheet-euclidean 只是一个约定节点，
+     按 docs/STATUS_LEVELS.md 约定节点**不降级任何东西**，所以这一步在有效状态里
+     完全不留痕迹——这是本图目前的一个系统性记账缺口，docs/ROADMAP.md 已列为待建
+     （『欧氏 Polyakov 作用量定义卡或 S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然』）。
+     同一缺口在 worldsheet.conformal-gauge-fixing--via-local-frame 的 gaps 里也记着。"
+  - "**经典边界条件 ⟹ 量子算符边界条件**这一步是形式代换。(i) 把 ∂X = ∂̄X 直接代进
+     T = -(1/α') : ∂X·∂X :，默认正规序与取边界值可交换；带边世界面上的正规序
+     （镜像电荷会改变自缩并）本图没有节点。这是把本推导标 physical-argument
+     而非 rigorous 的**主要**理由之一。"
+  - "**(ii) 的 Schwarz 反射对算子值对象的意义未处理**。T 不是解析函数而是算子值分布，
+     反射原理只在插入到关联函数里、且远离其它算子插入点时才有意义；
+     『在算子插入点之外』这一限定本推导写在 summary 里但没有严格化，
+     与 worldsheet.energy-momentum-laurent-modes 的同类缺口同源。"
+  - "**(iii) 里『两段实轴上的贡献互相抵消』未验算**。半圆拼接时实轴段的被积函数
+     z^{m+1} T̃(z) 在两侧的取向相反，形式上抵消；但这一步依赖 T̃ 在实轴上连续
+     （即 (i)(ii)），且未处理 z = 0 与端点处的收敛性。"
+  - "本推导只论证『开弦有一套 Virasoro』，**不**论证这一族 L_m 满足 Virasoro 对易关系
+     ——那需要 TT OPE（worldsheet.tt-ope-central-charge）与围道变形字典
+     （worldsheet.ope-commutator-dictionary），本推导刻意不连它们以免把与本命题无关的
+     依赖拖进来。需要对易关系的下游应各自挂那两条。"
+  - "Dirichlet 方向未覆盖：若某些方向取 Dirichlet，(i) 的等式变成带负号的反射，
+     结论 (iii) 仍成立而 (i)(ii) 的写法要改。见目标陈述 notes 的『与 D 膜的关系』。"
+notes: |
+  本推导与目标陈述 worldsheet.open-string-doubling-trick 一并由 curator 于 2026-09-11
+  从 worldsheet.open-string-virasoro-modes-v2 拆出（ROADMAP「待拆清单」reviewer-batch2 那条）。
+  它填的是 worldsheet.open-string-l0-level-form--via-zero-mode-substitution 的 gaps 里
+  那条「doubling trick 本身没有被论证」——现在有论证了，但论证是 physical-argument 且
+  gaps 逐条写明，所以**那条推导的有效状态不变**（它本来就是 physical-argument）。
+  换句话说：本次拆分把一个「隐含的、无节点的假设」变成一个「显式的、可查的 physical-argument
+  节点」，账面状态不变而可追溯性提高——这正是拆卡的目的。
+
+  T 与 T̄ 的具体表达式 T = -(1/α') : ∂X·∂X : 写在 summary 里而**没有**连到节点上：
+  本图目前用这一式的地方是 worldsheet.free-boson-central-charge-d 一带，
+  但那条卡片的陈述是中心荷而非 T 的定义。若日后建「自由玻色子的能动张量」定义卡，
+  应把本推导 (i) 的那一步改成对它的显式依赖。
+author: curator
+created: "2026-09-11"

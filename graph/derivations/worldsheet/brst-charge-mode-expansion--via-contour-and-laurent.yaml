@@ -4,8 +4,12 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.brst-current-bosonic-string
-  - id: worldsheet.brst-quantization
-    note: "提供 b_n、c_n 的模式展开与 {b_m, c_n} = δ_{m+n,0}、受限模条件，以及待比对的模式定义式。"
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 b_n、c_n 的模式展开与 {b_m, c_n} = δ_{m+n,0}、受限模条件，以及待比对的模式定义式。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。v2 不再断言 c^g = −26，
+      本推导也不需要它：末项 −c_0 的系数是 a^g，由下面的
+      worldsheet.bc-ghost-normal-ordering-constant 这条边单独承担。）
   - id: worldsheet.energy-momentum-laurent-modes
     note: "提供 T^m(z) = Σ_n L^m_n z^{−n−2} 的 Laurent 展开，本推导用它把 c T^m 项的围道积分算成 Σ_n c_n L^m_{−n}。"
   - id: worldsheet.bc-ghost-normal-ordering-constant

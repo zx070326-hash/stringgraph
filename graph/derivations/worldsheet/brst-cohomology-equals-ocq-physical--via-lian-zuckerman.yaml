@@ -3,7 +3,7 @@ target: worldsheet.brst-cohomology-equals-ocq-physical
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
     inferred: true
     note: |
       LZ 的相对复形 C*_∞(𝒢, 𝒜; V)（Definition 1.10、1.12(i)，𝒜 = 𝒢₀ = CL₀ + Cz，p.556）
@@ -14,6 +14,12 @@ depends_on:
       （worldsheet.brst-cohomology-equals-ocq-physical--via-fgz 对同一条边未标 inferred，
       因为 FGZ 在物理语言与上同调语言之间给了更多桥接措辞；两条推导对这条边的标注不同是
       有意为之，反映各自来源的可追溯性，不是不一致。）
+      【2026-09-11 换代】本条边由 worldsheet.brst-quantization 就地换到
+      **worldsheet.brst-quantization-v2**（旧卡已写 superseded_by）。v2 的唯一改动是把鬼场
+      中心荷 c^g 从数值 −26 改回符号（取值移到 worldsheet.bc-ghost-central-charge），
+      相对复形 b₀|Ψ⟩ = 0、L₀|Ψ⟩ = 0 与 Q_B 的模式定义逐字未变，故本条边的 inferred 标注、
+      note 内容与有效状态**均不受影响**。注意上文提到的「η(z) = −26」是 LZ 自己算出的鬼系统
+      中心荷，本来就不取自本图的定义卡，换代后这一点反而更清楚。
   - id: worldsheet.old-covariant-physical-states
     inferred: true
     note: |

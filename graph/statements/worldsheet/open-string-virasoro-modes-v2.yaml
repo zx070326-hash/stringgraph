@@ -45,7 +45,32 @@ sources:
   - ref: polchinski-1998-v1
     loc: "闭弦零模 α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ：**式号未核实**（抽取记录第 1.1 节列为「内容确认，式号未核实」）"
 tags: [bosonic-string, open-string, virasoro, zero-mode, definition, doubling-trick]
+superseded_by: worldsheet.open-string-virasoro-modes-v3
 notes: |
+  ⚠ **本卡片已被取代（curator，2026-09-11）**，见 superseded_by。
+  取代原因是 docs/ROADMAP.md「待拆清单」里 reviewer-batch2 的一条：本卡片**仍内嵌
+  doubling trick 命题**。statement 首段以「**doubling trick。**」开头，用陈述句写
+  「Neumann 边界条件使能动张量的全纯与反全纯部门在边界上相等，于是可以把 T̄ 视为 T 到
+  上半平面镜像的解析延拓……相应地，开弦只有**一套** Virasoro 生成元」——
+  这是一条有前提、有结论、可证可驳的**命题**，却写在一张 definition 卡里，
+  与本卡片末段自称的「本节点是定义/归一化约定的记录，不断言任何由此推出的等式」直接矛盾。
+  拆成两张：
+    worldsheet.open-string-virasoro-modes-v3   —— 纯定义：倍增域上的 L_m 围道定义
+                                                  （反射 T̄ 到下半平面写成**定义域约定**）
+                                                  + 开弦零模归一化 (2α')^{1/2}
+    worldsheet.open-string-doubling-trick      —— 命题：Neumann ⟹ T̄ 是 T 的镜像解析延拓
+                                                  ⟹ 开弦只有一套 Virasoro
+                                                  （推导 --via-boundary-condition，physical-argument）
+  按不可变原则，本卡片的 id 与 statement 文本不作任何修改。
+  图中唯一引用本卡片的结构边（worldsheet.open-string-l0-level-form--via-zero-mode-substitution）
+  已按语义换代：模定义与零模归一化 → v3，「只有一套 Virasoro」→ 新增 doubling-trick 边。
+  拆分不改变任何节点的有效状态（v3 与本卡片同为自身 rigorous / 有效 physical-argument）。
+
+  **仍在散文中提到本卡片 id 的地方**（statement 文本不可改，故保留；旧 id 仍可解析）：
+  worldsheet.open-string-l0-equals-level-plus-mass 的 statement（零模归一化的指路）、
+  worldsheet.open-string-l0-level-form 的 statement（同上，该卡自身也已换代）。
+  两处都是**指路**而非依赖边，读者顺 superseded_by 到 v3 即可。
+
   本节点取代 worldsheet.open-string-virasoro-modes（后者已写 superseded_by 指向本节点）。
   **拆分理由**（reviewer-ch23 在旧卡 notes 里标的「待拆」）：旧卡把
   「开弦的模定义与零模归一化」（定义）与「L_0 = α' p^2 + N」（命题）写在同一张卡上，

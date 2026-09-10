@@ -3,10 +3,21 @@ target: worldsheet.open-string-l0-level-form
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.open-string-virasoro-modes-v2
+  - id: worldsheet.open-string-virasoro-modes-v3
     note: |
-      提供开弦零模归一化 α^μ_0 = (2α')^{1/2} p^μ 与「开弦只有一套 Virasoro」这一前提。
+      提供开弦零模归一化 α^μ_0 = (2α')^{1/2} p^μ 与倍增域上的 L_m 模记法。
       来源同为 Polchinski §2.7 (2.7.27) 与 §2.6 (2.6.25)，与本推导的 sources 重合。
+      （2026-09-11 由 worldsheet.open-string-virasoro-modes-v2 换代到 v3。v2 把
+      「开弦只有一套 Virasoro」这条**命题**写在 definition 卡里；v3 只保留定义部分，
+      该命题移到 worldsheet.open-string-doubling-trick，本推导已另加那条边。）
+  - id: worldsheet.open-string-doubling-trick
+    note: |
+      提供「开弦只有**一套** Virasoro 生成元」这一前提——本推导把 L_0 当作开弦上唯一的
+      零模生成元、并对它写一次质量壳条件，用的就是它。
+      （2026-09-11 新增。这条前提原先隐含在 worldsheet.open-string-virasoro-modes-v2 的
+      statement 首段里、且本推导的 gaps 明写「doubling trick 本身没有被论证」；
+      现在它是一条有推导、有 gaps 的显式节点。有效状态不变：
+      open-string-doubling-trick 的有效状态 physical-argument 与本推导自身相同。）
   - id: worldsheet.virasoro-generators-free-boson
     note: |
       提供断言 (i) 的左端：产生-湮灭正规序下 L_0 = (1/2) α_0·α_0 + Σ_{n≥1} α_{-n}·α_n。
@@ -41,16 +52,26 @@ summary: |
   整条取 physical-argument，原因在 (ii)：a^X = 0 的推导
   worldsheet.normal-ordering-constant-ax--via-state-operator 是 physical-argument
   （态-算子同构本身经过路径积分/径向量子化），本推导不能高于它。
-  另外 worldsheet.open-string-virasoro-modes-v2 的有效状态也是 physical-argument
-  （它 uses worldsheet.energy-momentum-laurent-modes，后者经 OPE 与围道）。
+  另外 worldsheet.open-string-virasoro-modes-v3 的有效状态也是 physical-argument
+  （它 uses worldsheet.energy-momentum-laurent-modes，后者经 OPE 与围道），
+  worldsheet.open-string-doubling-trick 亦然。
   按 docs/STATUS_LEVELS.md，取 min。
 gaps:
-  - "**doubling trick 本身没有被论证**：worldsheet.open-string-virasoro-modes-v2 把它作为
-     定义记录下来（来源 (2.6.25)），但「Neumann 边界条件 ⟹ T̄ 是 T 的镜像解析延拓
-     ⟹ 只有一套 Virasoro」这一串本图没有推导节点。本推导默认它。"
+  - "【2026-09-11 已关闭，改写如下】原 gap：「**doubling trick 本身没有被论证**：
+     worldsheet.open-string-virasoro-modes-v2 把它作为定义记录下来（来源 (2.6.25)），
+     但『Neumann 边界条件 ⟹ T̄ 是 T 的镜像解析延拓 ⟹ 只有一套 Virasoro』这一串本图没有
+     推导节点。本推导默认它。」现已建节点：**worldsheet.open-string-doubling-trick**
+     （推导 --via-boundary-condition，status physical-argument），本推导已显式挂上该边，
+     不再『默认』。**但缺口只是从这里搬到了那里，没有消失**：那条推导自己的 gaps 记着
+     (i)(ii) 的表达式未核对原书（核对源只覆盖结论 (iii)）、Wick 旋转与共形映射两步无节点承载、
+     经典边界条件到量子算符边界条件是形式代换、Schwarz 反射对算子值分布的意义未处理。
+     本推导的有效状态因此不变（本来就是 physical-argument）。"
   - "**(ii) 的两个 L_0 是否真的是同一个算子**这件事，来源是在**平面上的 CFT** 语境里说的
      （态-算子同构、单位算子对应基态）；把它搬到带边的开弦世界面上，
-     严格说还需要 doubling trick 提供的等同。本图未把这一步单列。"
+     严格说还需要 doubling trick 提供的等同。**该等同现在有节点了**
+     （worldsheet.open-string-doubling-trick，2026-09-11），但
+     worldsheet.normal-ordering-constant-ax 一侧**没有**挂它，
+     所以『a^X = 0 在带边世界面上仍成立』这一步在本图中仍未单列。缺口保留。"
   - "(i) 中『正规序只影响 n = 0 项』用到 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，
      该对易关系写在 worldsheet.virasoro-generators-free-boson 的 statement 内部
      （其来源是第 1 章抽取记录 E14，那条本身未单独建节点）。故本推导对该对易关系的
