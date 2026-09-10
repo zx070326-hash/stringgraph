@@ -1,0 +1,78 @@
+id: math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration
+target: math.positive-euler-surfaces-are-sphere-disk-rp2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.classification-of-compact-surfaces
+    note: |
+      提供穷尽性与两两不同胚：每个紧（连通）带边曲面同胚于某个规范胞腔复形所定的曲面，
+      且 (可定向性, contour 数, χ) 是完全不变量。没有它，下面的枚举只给出「候选表」，
+      不给出「恰好这三个、且两两不同」。
+sources:
+  - ref: gallier-xu-2013
+    loc: "Definition 6.5, pp. 88–89（type (I) p ≥ 0, q ≥ 0；type (II) p ≥ 1, q ≥ 0）+ χ(K) = 2 − 2p − q / χ(K) = 2 − p − q, pp. 89–90（**无编号行间式**）+ 身份认定 p. 90、p. 102"
+    note: |
+      L1 逐字（math-sources.md §39.2.2–§39.2.4）。本条 source 提供的是**两个输入**
+      （参数范围与 χ 公式），**不**提供「χ > 0 ⇒ 三种」这条结论——见 gaps 第一条。
+  - ref: polchinski-1998-v1
+    loc: "§6.1 首句, p. 166（结论的逐字陈述，无式号、无证明、无引文）"
+    note: |
+      L1 原书页图（math-sources.md §39.6(b)）。仅作**结论的独立确认**，不承载论证。
+summary: |
+  **两个输入（来源逐字给出）**：
+
+  (I) **参数范围**（Definition 6.5）：每个紧带边曲面同胚于一个规范胞腔复形，
+      要么是 type (I)（可定向）参数 p ≥ 0, q ≥ 0，要么是 type (II)（不可定向）参数 p ≥ 1, q ≥ 0；
+      其中 q = contour 数。
+  (II) **χ 公式**（p. 89–90 的无编号行间式）：
+       type (I)：χ = 2 − 2p − q；   type (II)：χ = 2 − p − q。
+
+  **本图补的一步（两行算术，来源里不存在）**：把 χ > 0 代进 (II) 并在 (I) 的范围内求解——
+
+  - type (I)：2 − 2p − q > 0，p ≥ 0, q ≥ 0 ⟹ 2p + q ≤ 1 ⟹ (p,q) = (0,0) 或 (0,1)；
+    (0,0) ⟹ χ = 2 ⟹ **球面**（p. 89–90 的身份认定）；
+    (0,1) ⟹ χ = 1 ⟹ **闭圆盘**（p. 102 的身份认定）。
+  - type (II)：2 − p − q > 0，p ≥ 1, q ≥ 0 ⟹ p + q ≤ 1 ⟹ (p,q) = (1,0)；
+    ⟹ χ = 1 ⟹ **实射影平面**（p. 90 与 p. 102 的身份认定）。
+
+  最后由 math.classification-of-compact-surfaces（Theorem 6.2）知这三者两两不同胚
+  （(可定向, 0, 2)、(可定向, 1, 1)、(不可定向, 0, 1) 三组不变量互不相同），且穷尽了 χ > 0 的情形。
+
+  **落选者对照**：莫比乌斯带 (II) 中 (p,q) = (1,1) 给 χ = 0；环面 (I) 中 (1,0) 给 χ = 0；
+  Klein 瓶 (II) 中 (2,0) 给 χ = 0。**没有任何曲面的 χ 落在 1 与 2 之间或大于 2**。
+gaps:
+  - |
+    **⚠ 本推导的关键一步在任何来源里都不存在**：Gallier–Xu 全书**不讨论 χ > 0**，
+    也没有任何形式的「χ > 0 ⇒ 恰好三种」陈述（researcher 逐页核实，math-sources.md §39.0 表 (A) 第三行）。
+    上面的不等式求解是**本图完成的两行初等算术**。来源只提供两个输入：Definition 6.5 的参数范围
+    与 pp. 89–90 的 χ 公式。
+  - |
+    **未标 rigorous 的理由（docs/STATUS_LEVELS.md 第 4 级的「例外」条款）**：本推导正好符合
+    「前提已完整写出 + 有限步初等计算」的形状，**但该条款要求 reviewer 已独立复核并在 notes 里
+    写 `reviewer-verified: <agent>, <date>`**。本卡建立时**尚无复核记录**，
+    按「缺此记录的一律 physical-argument」取 physical-argument。见 notes 的升级路径。
+  - |
+    **继承上游的两条缺口**（见 math.classification-of-compact-surfaces--via-normal-forms 的 gaps）：
+    (a) 三角化存在性（Radó）的证明在 Gallier–Xu Appendix E，本图未读；
+    (b) 来源对 "surface" 是否已含连通性未核实，本卡把连通性写成显式前提。
+  - |
+    **χ 公式无编号**：pp. 89–90 的两条 χ(K) 公式是**行间式**，图里只能引页码。
+    **严禁**把它们写成任何定理号。
+  - |
+    **type (II) 的 p 数的是交叉帽个数**，与常见物理写法「χ = 2 − 2g − b − c」的四参数记法不同
+    （原书用一个属数 g 覆盖两种情形）。若下游节点仍在用四参数写法，须先做记号对照。
+notes: |
+  由 curator 于 2026-09-11 建立（math-sources.md §39.9(2)）。
+
+  **⚠ kind = physical-argument 是工具约束，不是内容判断**：校验器要求 `kind: proof` 必须配
+  `status: formalized/rigorous`，而本条按上面的理由取 status = physical-argument，故 kind 只能同步降。
+  内容上它是一段初等算术论证。reviewer 复核后 status 升 rigorous 时，kind 应一并改回 proof。
+
+  **升级路径（唯一的一条）**：本推导是 docs/STATUS_LEVELS.md「rigorous 例外」的**候选**——
+  前提（Definition 6.5 的参数范围 + 两条 χ 公式）已在 summary 里完整写出，
+  待证的只是两个线性不等式在非负整数上的解集。请 reviewer 独立复核 summary 里的两行算术
+  与三处身份认定，复核通过后在本节点 notes 追加
+    `reviewer-verified: <agent-id>, <date>`
+  并把 status 改为 rigorous。**在此之前任何人不得擅自改 status。**
+author: curator-surface-class
+created: "2026-09-11"
