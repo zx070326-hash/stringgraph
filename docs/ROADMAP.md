@@ -72,6 +72,7 @@
 - `worldsheet.brst-quantization`（statement 写死 c^g = −26，是命题埋进定义卡；建 v2 改为"鬼场部门为 λ = 2 的 bc 系统，中心荷记 c^g"，不要加 uses 边——会把四个 rigorous 节点拉低）
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
+- `worldsheet.no-ghost-theorem-v4`（(1) D=26 等距同构 与 (2) D>26 负模 的来源集合不相交：GT/Goddard/FGZ 只管 (1)，LZ 只管 (2)；拆成两卡后 LZ 可作 (2) 的独立推导。涉及里程碑指向，须在船长批准 v4 之后作为 v5 换代处理，不阻塞本次审批）
 - `worldsheet.open-string-virasoro-modes-v2`（仍内嵌 doubling trick 命题，reviewer-batch2）
 - `worldsheet.fock-indefinite-form`（"有序域上不定"末句未形式化：加一条平凡 Lean 引理或移到 notes）
 - `worldsheet.brst-cohomology-equals-ocq-physical`（--via-fgz 与 --via-lian-zuckerman 互补而非各自完整；researcher 读 LZ p.566–567 确认典范等距是否由包含映射诱导，否则拆目标）
