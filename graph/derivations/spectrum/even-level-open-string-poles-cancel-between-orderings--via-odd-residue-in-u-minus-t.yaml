@@ -1,0 +1,95 @@
+id: spectrum.even-level-open-string-poles-cancel-between-orderings--via-odd-residue-in-u-minus-t
+target: spectrum.even-level-open-string-poles-cancel-between-orderings
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.open-string-four-tachyon-amplitude
+    note: |
+      提供 I(s,t) = B(−α_o(s), −α_o(t)) 与三个区间（三种循环序）的分解——
+      原书 p.183 逐字引用的正是「The other two terms in the amplitude (6.4.9)」，即同一分解。
+  - id: spectrum.massless-open-pole-requires-chan-paton
+    note: |
+      提供整族中**唯一被原书写出机制的那一例**（α's = 0）：留数 (u−t)/2 在 u − t 下为奇，
+      与 I(s,u) 相消。本推导把该例作为基准，整族的结论是原书在同一句里附带的断言。
+      ⚠ 依赖方向不循环：旧卡的推导（--via-cyclic-order-sum）不引用本卡片。
+  - id: math.euler-beta-integral
+    note: |
+      提供 B(a,b) 在 a 为非正整数处的单极点塔与留数——(6.4.18) 的极点位置与 (6.4.17) 的
+      留数 (u−t)/2 都是由它读出的（原书 p.182 用的是被积函数在 y = 0 的 Taylor 展开 (6.4.16)，
+      等价于 B 的极点结构）。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: |
+      提供 α'(s+t+u) = −4。它是「留数在 u − t 下为奇」这句话有意义的前提：
+      在 s = 0 处 t + u = −4/α' 已被固定，故留数只依赖 u − t 这一个变量，
+      「奇/偶」才是良定义的。原书 (6.4.7) 就在同一节。
+  - id: worldsheet.disk-conformal-killing-group
+    inferred: true
+    note: |
+      标 inferred：提供「圆盘边界上存在不止一种不等价循环序」这一事实——没有它就没有可相加、
+      可相消的第二项。⚠ **原书 p.182–183 没有论证循环序的分类**，只是直接引用 (6.4.9) 的三项；
+      循环序个数的论证在本图里外包给 worldsheet.disk-conformal-killing-group，
+      而**原书不作这个引用**，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, p.183 第 1 段（无式号）；(6.4.16)–(6.4.18) 在 p.182"
+    note: |
+      抽取记录 **§14.1**（原书核实 2026-09-11），**L1（原书页图逐字）**。
+      原书对本命题的全部论证就是那一句：
+      「Because the residue at s = 0 in (6.4.17) is odd in u − t, this pole actually cancels that
+      from I(s,u), **as do all poles at even multiples of 1/α'**.」
+      ——机制只对 s = 0 一例说明，整族部分（黑体处）是**无论证的断言**。
+summary: |
+  **(1) 一个循环序的极点塔。** 把 I(s,t) 的被积函数在 y = 0 附近 Taylor 展开（(6.4.16)），
+  逐项积分给出 α's = −1, 0, 1, 2, … 处的单极点（(6.4.18)）；等价地，
+  I(s,t) = B(−α_o(s), −α_o(t)) 在 −α_o(s) = 0, −1, −2, … 处有 Beta 函数的极点塔。
+  展开的第二项给出 s = 0 处的极点，留数为 **(u − t)/2**（(6.4.17)）。
+
+  **(2) 求和抵消（原书写出机制的唯一一例，α's = 0）。** 完整振幅是三项之和（(6.4.9)），
+  其中一项是 I(s,t)，另一项是 I(s,u)（t ↔ u）。在 s = 0 处 t + u 由
+  α'(s+t+u) = −4 固定，故留数只是 u − t 的函数；因为 (6.4.17) 的留数 (u−t)/2
+  **在 u − t 下为奇函数**，两项在同一极点处的留数大小相等、符号相反，逐项抵消。
+  ⇒ 纯四 tachyon 开弦振幅在 α's = 0 处**没有**极点。
+
+  **(3) 整族（原书的断言，本推导不补论证）。** 原书在同一句里附加
+  「as do all poles at even multiples of 1/α'」，即 α's = 0, 2, 4, … 的整族极点同样相消。
+  **本推导照录这一断言，不给出它的论证**（原书没有给，见 gaps）。
+
+  **(4) 存活集合（平凡的集合差）。** 由 (6.4.18) 的塔 {α's = −1, 0, 1, 2, …} 去掉 {0, 2, 4, …}，
+  余下 {α's = −1, 1, 3, …}，即 1/α' 的奇数倍。**这一步是集合差，不是新论证；
+  原书没有把这个结论写出来。**
+
+  **(5) 边界。** 原书紧接一句「This will not be true for the more general open string theories
+  to be introduced in the next section」（§6.5，Chan–Paton）。带 Chan–Paton 迹时各序的迹不同，
+  (2) 的逐项抵消不再发生（见 spectrum.massless-open-pole-requires-chan-paton (2)）。
+gaps:
+  - "**⚠ 本条 status 只能是 physical-argument 的主要理由：原书对整族结论一句论证也没有。**
+     (6.4.17) 的留数为什么在 u − t 下为奇，原书给了（Taylor 展开的第二项系数 α't+2 与
+     u 通道对应项相减）；但**「为什么 1/α' 的每一个偶数倍处留数都是 u − t 的奇函数」
+     原书逐字只有 `as do all poles at even multiples of 1/α'` 这半句**，
+     没有归纳、没有对称性论证、没有引用。**本图不补这个论证。**"
+  - "**「存活的是 1/α' 的奇数倍」不是原书的一句话**，是「偶数倍全部相消」与 (6.4.18) 的塔
+     作集合差得到的。集合差本身平凡，但**把它作为一条结论陈述出来是本图做的**，原书没写。"
+  - "**(2) 的相消本推导没有逐项验算**（与 spectrum.massless-open-pole-requires-chan-paton--via-cyclic-order-sum
+     同一缺口）：三段积分的相对权重与被积函数的幂次在本图中是**反推**的
+     （见 spectrum.open-string-four-tachyon-amplitude 的 gaps），故「符号相反、大小相等」
+     这一点本图没有独立验证。**建议 reviewer 复核。**"
+  - "**原书没有把这族相消与 G-parity 或任何选择定则联系起来**，抽取记录 §14.1(d) 对此有明确警告
+     （「researcher 不做推断」）。本推导也不作此联系；任何要建立这一联系的节点必须另找来源。"
+  - "**figure 6.3(b)/(c) 未核**：p.183 的论证引用了这两张图，本项目只读到正文引用
+     （§14.4 F.3 的 negative evidence）。"
+  - "**路径积分测度未定义**（本批次共有）；上游开弦 X 部门期望值的缺口经
+     spectrum.open-string-four-tachyon-amplitude 继承。"
+  - "**「极点 ⇒ 中间态」的解释依赖未建立的幺正性**；本推导只谈极点的有无，不谈谱的解释。"
+notes: |
+  由 curator 于 2026-09-11 按抽取记录 §14.4 A 的建议新建。
+
+  **status 的选择理由**（依 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位，lead 2026-09-11 裁决）：
+  原书给出了论证骨架（Taylor 展开 → 留数 → 奇偶性 → 序间抵消），但整族部分是**光秃秃的断言**
+  （「as do all poles at even multiples of 1/α'」）。按该裁决，这种情形标
+  **physical-argument** 并把断言处逐条写进 gaps，**不**标 conjecture
+  ——「论证不完整」与「结论可能为假」是两个不同的轴。
+
+  **⚠ 禁令（§14.1）**：相消机制是 I(s,t) 与 I(s,u) **两个循环序之间**的抵消，
+  **不是**「因子 (1 + α's) 抵消」。不得把后者写进任何节点。
+author: curator-polchinski-ch6-sec14
+created: "2026-09-11"
