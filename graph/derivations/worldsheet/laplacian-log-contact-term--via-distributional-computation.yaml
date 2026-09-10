@@ -3,7 +3,7 @@ target: worldsheet.laplacian-log-contact-term
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.laplace-fundamental-solution-2d
+  - id: math.laplace-fundamental-solution-2d
     inferred: true
     note: |
       Lieb–Loss 不提复坐标，Polchinski 也不引 Lieb–Loss，两边没有互引：
@@ -33,7 +33,7 @@ sources:
       δ^2(z,z̄) = (1/2)δ(σ^1)δ(σ^2) 这条归一化的出处是前言 p. xviii 的 delta 函数约定
       （对 Polchinski 仅 L3，经 schrans-2020 两次转述），已记在 conv.worldsheet-complex-coords。
 summary: |
-  由 worldsheet.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，n = 2，带完整证明）出发，
+  由 math.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，n = 2，带完整证明）出发，
   在 conv.worldsheet-complex-coords 下做换算。写 x = (σ^1, σ^2)、z = σ^1 + iσ^2、|z| = |x|：
 
     (1) Δ ln|x| = 2π δ(σ^1) δ(σ^2)                      [Lieb–Loss 6.20, n = 2；δ 相对 dσ^1 dσ^2]
@@ -65,7 +65,7 @@ gaps:
 notes: |
   **status 定级的理由（curator, 2026-09-10）**：本推导的实质内容（二维 Laplace 基本解）
   有已核实编号、带完整证明的数学文献来源（Lieb–Loss Thm 6.20，L1），
-  这部分严格性放在上游节点 worldsheet.laplace-fundamental-solution-2d 承担；
+  这部分严格性放在上游节点 math.laplace-fundamental-solution-2d 承担；
   留在本推导里的只是**记号与归一化的搬运**（复坐标 + d^2 z 的 Jacobian + δ^2 归一化）。
   据此标 kind: proof / status: rigorous。
 

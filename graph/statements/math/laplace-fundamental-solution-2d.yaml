@@ -1,4 +1,4 @@
-id: worldsheet.laplace-fundamental-solution-2d
+id: math.laplace-fundamental-solution-2d
 kind: proposition
 title: 二维 Laplace 算子的基本解：-Δ(-(1/2π) ln|x-y|) = δ_y（分布意义）
 statement: |

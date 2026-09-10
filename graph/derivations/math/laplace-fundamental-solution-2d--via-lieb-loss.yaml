@@ -1,5 +1,5 @@
-id: worldsheet.laplace-fundamental-solution-2d--via-lieb-loss
-target: worldsheet.laplace-fundamental-solution-2d
+id: math.laplace-fundamental-solution-2d--via-lieb-loss
+target: math.laplace-fundamental-solution-2d
 kind: proof
 status: rigorous
 depends_on: []

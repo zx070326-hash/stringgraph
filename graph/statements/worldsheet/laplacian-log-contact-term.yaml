@@ -29,7 +29,7 @@ notes: |
   operator-equation-of-motion、conformal-normal-ordering 共同依赖。
 
   **2026-09-10 更新（curator-laplace-source，未改 id 与 statement 文本）**：本条的纯数学内核
-  已单列为 worldsheet.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，带完整证明，rigorous，
+  已单列为 math.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，带完整证明，rigorous，
   且不依赖任何约定）。本节点 = 那条定理 + conv.worldsheet-complex-coords 的两条归一化
   （d^2 z = 2 dσ^1 dσ^2 与 δ^2(z,z̄) = (1/2)δ(σ^1)δ(σ^2)）的换算结果；
   四步换算链（含「两个因子 2 缺一不可」）见
