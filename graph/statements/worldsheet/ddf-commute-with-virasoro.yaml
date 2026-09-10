@@ -255,5 +255,21 @@ notes: |
     **不是**最终的对易子系数。」
   即：m = 0 需要单独证的是**真空引理**，最终公式从来就是一条统一的多项式。
   详见 worldsheet.exponential-vertex-operator-mode-weight-identity-v2 的 notes。
+
+  【2026-09-11（六）：本卡【推论】段现有独立承载卡，curator】
+  本卡陈述里的【推论】段（「因此 DDF 算子把物理态映为物理态」）已单列为
+    **worldsheet.ddf-operators-preserve-physical-states**（proposition，formalized，
+    lean_decl `StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule`，DDFOperatorAll.lean），
+  两半齐全（质壳 `ddfOp_mem_towerL0Submodule` + 正模 `ddfOp_mem_towerPositiveModeSubmodule`），
+  截距 a₀ 统一且逐字不变。
+  ⚠ 这**不是**换代：本卡的陈述文本不变，【推论】段仍属本卡；新卡只是让下游能单独引用
+  并单独记账。需要「A^ε_n 保持物理子空间」这条结论的下游**应引新卡**，
+  不必再经本卡的推论段。
+  ⚠ 上文【本卡【推论】的 caveat（供 auditor 回译时逐条对照）】写的
+  「『L_0 一条连同质量壳记账』这一半**完全未形式化**」**已过时**：
+  该半现由 `ddfOp_mem_towerL0Submodule` 覆盖，塔上的物理子模也已由
+  `towerPhysSubmodule` 定义。该段作为历史保留，请按本段更新阅读。
+  仍然成立的是：本图**没有**一张卡断言「塔上的物理子模 = 逐层 `Fock.physSubmodule` 之交」，
+  见新卡的【不断言】(f) 与其推导 gaps 第 2 条。
 author: curator
 created: "2026-09-11"

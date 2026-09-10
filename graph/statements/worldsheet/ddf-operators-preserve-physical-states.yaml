@@ -1,0 +1,135 @@
+id: worldsheet.ddf-operators-preserve-physical-states
+kind: proposition
+title: DDF 算子把塔上的旧协变物理态映为物理态：A^ε_n(towerPhys(a₀)) ⊆ towerPhys(a₀)，截距 a₀ 统一且不变
+statement: |
+  记号与 worldsheet.ddf-operators-v6 完全一致：动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)
+  （代数直和，第 j 层动量 p + j k_0），a^μ = (2α')^{1/2}p^μ、b^μ = (2α')^{1/2}k_0^μ，
+  L_m 是 worldsheet.virasoro-generators-free-boson 的 Sugawara 生成元**逐层用该层动量**装在塔上
+  （不移动层指标），A^ε_n = Σ_{m ∈ Z} α^ε_m V^{(n)}_m 是 v6 定义的 DDF 算子（把第 j 层送到第 j+n 层）。
+
+  【定义：塔上的旧协变物理子空间，截距 a₀ 是一个常数】
+  给定 a₀ ∈ R，令
+    H_phys(p; k_0; a₀) := { Ψ ∈ T(p; k_0) : (L_0 − a₀)Ψ = 0  且  L_m Ψ = 0 对一切 m ≥ 1 } 。
+  这是 worldsheet.old-covariant-physical-states 的两条条件**逐字**装在塔上。
+  ⚠ **a₀ 是塔向量上的一个统一常数，不是逐层不同的截距**：塔上的 L_0 在第 j 层已经用该层
+  自己的动量 p_j = p + j k_0，所以 (L_0 − a₀)Ψ = 0 是一个整体条件。
+  在 (N)(S) 之下第 j 层能级 N 处的 L_0 本征值是 α' p_j² + N = α' p² + j + N，
+  故该条件在 (j, N) 平面上是一条**反对角线 j + N = a₀ − α' p²**。
+
+  【前提】
+    (T) 横向性  ε·k_0 = 0        （v6 的定义参数）
+    (N) 类光性  k_0² = 0
+    (S) 归一化  2α' k_0·p = 1
+
+  【断言】在 (T)(N)(S) 之下，对一切 n ∈ Z 与一切 a₀ ∈ R：
+
+    A^ε_n ( H_phys(p; k_0; a₀) ) ⊆ H_phys(p; k_0; a₀) 。
+
+  即：若 Ψ 满足 (L_0 − a₀)Ψ = 0 与 L_mΨ = 0（∀ m ≥ 1），则 A^ε_n Ψ 满足同样两条条件，
+  **截距 a₀ 逐字不变**。（分解成两半：质壳那一半单独写作
+  A^ε_n(ker(L_0 − a₀)) ⊆ ker(L_0 − a₀)，正模那一半是
+  worldsheet.ddf-operators-preserve-positive-mode-conditions。）
+
+  【为什么 a₀ 不变：一句算术】
+  A^ε_n 把层指标 +n、把振子能级 −n；在 α' p_j² + N = α' p² + j + N 中这两个移位相消，
+  故 L_0 本征值逐字不变。**这正是 A^ε_n 是权 0 算子的算术理由。**
+  ⚠ 与之配套的读法更正：文献与本图别处写的「A^i_n 把能级移动 −n」指的是**振子能级** N，
+  **不是** L_0 本征值（后者不变），也**不是** ⁅L_0, A^ε_n⁆ 的值（那个是 0）。
+
+  【本节点明确不断言】
+  (a) **不断言 DDF 态张成 H_phys**（模零模态）。那是无鬼定理的困难一半
+      （worldsheet.no-ghost-theorem-v4 第 (1) 条），本图与 Lean 均未建立
+      （formal/TODO.md 的 `ddf-spans` 项）。本卡只给**包含**，不给**张成**。
+  (b) **不断言 A^ε_n Ψ ≠ 0**，也不断言这些像态之间线性无关。
+  (c) **不断言 H_phys 上的任何正定性**（那还需要伴随关系与横向振子代数，见
+      worldsheet.ddf-operators-adjoint 与 worldsheet.transverse-ddf-fock-gram-matrix）。
+  (d) **不断言 (N)(S) 可满足**（「存在类光 k_0 使 k_0·p ≠ 0」是关于实洛伦兹二次型的断言，
+      在一般交换环上为假；见 worldsheet.ddf-operators-v6 的 (d)）。
+  (e) **不断言 a₀ 的取值**（临界弦的 a₀ = 1 由别处给出；本卡对每个 a₀ 都成立）。
+  (f) **不断言塔上的 H_phys 与单个 Fock 空间上的 `Fock.physSubmodule` 之间的关系**
+      超出「同样两条条件逐层装上」这句话；本图没有一张卡断言
+      「塔上的物理子模 = 逐层 physSubmodule 之交」。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule
+  lean_file: StringFormal/NoGhost/DDFOperatorAll.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（本卡 formal.lean_decl，第 308 行）；质壳那一半 StringFormal.NoGhost.ddfOp_mem_towerL0Submodule（第 284 行）；括号输入 StringFormal.NoGhost.lie_towerLop_ddfOp（第 179 行）。子空间与记账：formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.towerPhysSubmodule / towerL0Submodule / towerPositiveModeSubmodule / mem_towerPhysSubmodule / ddfOp_mem_towerPositiveModeSubmodule / invTwo_zeroModeSq_towerMomentum_add_shift_cancel / invTwo_mul_zeroModeSq_towerMomentum / Lop_zero_apply_of_mem_levelSubmodule"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。语句逐字（去掉隐式参数）：
+        `theorem ddfOp_mem_towerPhysSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+           (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) {a₀ : R}
+           (n : ℤ) {Ψ : TowerFock D R} (hΨ : Ψ ∈ towerPhysSubmodule η a b a₀) :
+           ddfOp η a b ε hη hεb n Ψ ∈ towerPhysSubmodule η a b a₀`
+      与本卡陈述逐字一致：`hbb` = (N)，`hba` = (S)，`hεb` = (T)，n 与 a₀ 均无限制，
+      **左右两侧的 a₀ 是同一个**（这就是本卡「截距不变」那一句）。
+      `towerPhysSubmodule η a b a₀ = towerL0Submodule η a b a₀ ⊓ towerPositiveModeSubmodule η a b`，
+      展开引理 `mem_towerPhysSubmodule` 逐字给出本卡 H_phys 的两条条件。
+      TowerPhysical.lean 文件头逐字：「`towerLop η a b 0` already evaluates `L_0` rung by rung
+      with the rung's own momentum `p_j = a + j·b`, so `(L_0 - a₀) Ψ = 0` is a perfectly uniform
+      condition on a tower vector.」，以及「the eigenvalue becomes
+      `α' k² + (j' + n) + (N - n) = α' k² + j' + N`: **unchanged**」。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧「DDF 算子把物理态映为物理态」那句话的出处。**GSW 不做本卡的塔上记账**：
+      教科书把它当作 [L_m, A^i_n] = 0 的一句话推论，不显式讨论截距在动量塔上是否统一，
+      也不把质壳那一半单列。式号仍未核实（L0）；GSW 用 mostly-minus，
+      已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11，(5.4) 的引出句（逐字）：「The DDF operators, A^i_n, are well-defined on states of momentum p, such that k · p = 1 and they can be used to **generate physical states** because they commute with the Virasoro algebra,」"
+    note: |
+      **不承载论证**（该文是历史综述，(5.4) 无证明）。引在这里是为了定位「DDF 生成物理态」
+      这句话的文献表述：文献把它当作对易关系的直接推论、**不区分 m ≥ 1 与 m = 0**，
+      也不区分「保持」与「张成」。本卡只断言**保持**（【不断言】(a)）。
+      号差逐字 signature (−,+,+,+)，与 conv.metric-mostly-plus 一致，无需换算。
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.5) 及其后正文"
+    note: |
+      **不承载论证**。G–N 在顶点代数框架里由 (3.5) 同样立即得到「DDF 算子保持物理态」，
+      量词对 m 无限制。核实等级沿用 worldsheet.ddf-commute-with-virasoro 的同名条目
+      （researcher L1，literature/extractions/gsw-1987-v1.md §4 E14–E16）。
+tags: [bosonic-string, spectrum-generating-algebra, virasoro, formalized]
+notes: |
+  【立卡理由（lead 2026-09-11 派发）】
+  「DDF 算子把物理态映为物理态」此前只作为 worldsheet.ddf-commute-with-virasoro 陈述文本里的
+  【推论】存在，没有独立节点，因而无法被下游单独引用、也无法单独记账其形式化程度。
+  main 合入 `formal/StringFormal/NoGhost/DDFOperatorAll.lean` 后，
+  `ddfOp_mem_towerPhysSubmodule` 把它整条证出（两半齐全），故立独立卡承载。
+  ⚠ **这不是弱节点**：与 worldsheet.ddf-operators-preserve-positive-mode-conditions
+  （只有正模那一半）不同，本卡是**完整**的物理态保持。那张弱节点自此被本卡覆盖，
+  按 lead 裁决保留作历史，见其 notes。
+
+  查重：2026-09-11 跑 `uv run stringgraph search 保持物理 / towerPhysSubmodule /
+  physical states preserve`。除上述弱节点外无重复节点。
+
+  【本卡与 worldsheet.ddf-commute-with-virasoro 的分工】
+  · 那张卡：**括号** ⁅L_m, A^ε_n⁆ = 0（一切 m）。其陈述文本里的【推论】段就是本卡的内容，
+    但按项目规则那段文字不可变，故本卡是把它单列出来的独立节点，**不是**换代。
+  · 本卡：**子空间包含**。论证是那张卡的一行推论加上塔上物理子模的定义，
+    但「一行推论」也需要塔上物理子模这个对象存在，那是 TowerPhysical.lean 的贡献，
+    在图中没有单独的定义卡（见【不断言】(f) 与推导的 gaps）。
+
+  【三段式攻关的终点，供追溯】
+  本卡所在的这条链在 2026-09-11 一天之内走完三段：
+    m ≥ 1（DDFOperator.lean，`lie_towerLop_ddfOp_of_pos`）
+      → m ≠ 0（DDFOperatorNeg.lean，`lie_towerLop_ddfOp_of_ne`；图中弱节点
+        worldsheet.ddf-commute-with-nonzero-virasoro）
+      → 正模保持（TowerPhysical.lean，`ddfOp_mem_towerPositiveModeSubmodule`；图中弱节点
+        worldsheet.ddf-operators-preserve-positive-mode-conditions）
+      → 一切 m + 完整物理态保持（DDFOperatorAll.lean；本卡与
+        worldsheet.ddf-commute-with-virasoro）。
+  最后一段的钥匙是单 Fock 恒等式的 m = 0 情形
+  （worldsheet.exponential-vertex-operator-mode-weight-identity-v2，VertexWeightZero.lean）。
+
+  【无鬼定理还差什么（避免误读本卡的分量）】
+  本卡是无鬼定理第 (1) 条的**容易一半**（DDF 态确实是物理态）。**困难一半是张成**
+  （「塔上任意物理态 = DDF 态 + 零模态」），本图与 Lean 都没有。
+  此外正定性还需要伴随关系（worldsheet.ddf-operators-adjoint）与横向振子代数
+  （worldsheet.ddf-transverse-oscillator-algebra），两者在 Lean 侧均未起步，
+  在图中都是 physical-argument。故本卡的 formalized **不会**把
+  worldsheet.no-ghost-theorem-v4 的有效状态抬起来。
+author: curator
+created: "2026-09-11"
