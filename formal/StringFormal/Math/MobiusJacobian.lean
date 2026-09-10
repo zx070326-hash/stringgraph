@@ -5,6 +5,9 @@ Authors: stringgraph lean-formalizer
 -/
 import Mathlib.LinearAlgebra.Vandermonde
 import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Mathlib.LinearAlgebra.Matrix.BilinearForm
+import Mathlib.Tactic.Abel
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # Two algebraic lemmas behind tree-level open-string amplitudes
@@ -39,8 +42,7 @@ i.e. `α_c(s) + α_c(t) + α_c(u) = -1` for the Regge trajectory `α_c(x) = 1 + 
 
 ## Status
 
-Part A is proved.  Part B is added in a following commit.  Nothing here is `sorry`ed:
-declarations appear only once proved.
+Both parts are proved, `sorry`-free, with the standard axioms only.
 -/
 
 namespace StringFormal.Math
@@ -127,5 +129,135 @@ theorem mobius_three_point_fixing_bijective
   exact ⟨Matrix.mulVec_injective_iff_isUnit.mpr hu, Matrix.mulVec_surjective_iff_isUnit.mpr hu⟩
 
 end MobiusField
+
+/-! ### B. The Mandelstam sum rule -/
+
+section Mandelstam
+
+variable {K : Type*} [CommRing K] {M : Type*} [AddCommGroup M] [Module K M]
+
+/-- `s = -(k₁+k₂)²` for four momenta `k : Fin 4 → M` measured with the bilinear form `B`.
+Indices are `0`-based, so `k 0 = k₁`, …, `k 3 = k₄`.  The overall minus sign is the
+mostly-plus convention `conv.metric-mostly-plus`: with `η = (-,+,…,+)` an on-shell momentum
+has `k² = -m²`, and `s` is defined so that it is `+M²` for a timelike total momentum. -/
+def mandelstamS (B : LinearMap.BilinForm K M) (k : Fin 4 → M) : K := -B (k 0 + k 1) (k 0 + k 1)
+
+/-- `t = -(k₁+k₃)²`; see `mandelstamS`. -/
+def mandelstamT (B : LinearMap.BilinForm K M) (k : Fin 4 → M) : K := -B (k 0 + k 2) (k 0 + k 2)
+
+/-- `u = -(k₁+k₄)²`; see `mandelstamS`. -/
+def mandelstamU (B : LinearMap.BilinForm K M) (k : Fin 4 → M) : K := -B (k 0 + k 3) (k 0 + k 3)
+
+/-- **Mandelstam sum rule.**  For four momenta with `Σᵢ kᵢ = 0` (all momenta incoming) and
+on-shell conditions `kᵢ² = -mᵢ²` (mostly-plus), the three invariants satisfy
+`s + t + u = Σᵢ mᵢ²`.
+
+This is pure kinematics: `B` is an arbitrary *symmetric bilinear form* on an arbitrary module,
+no nondegeneracy, no signature, no field, not even `2` invertible is needed.  The physical
+content that does *not* appear here, and so must be supplied by the graph, is that `B` is the
+Minkowski form and that `mᵢ` are the masses of the external states. -/
+theorem mandelstam_sum (B : LinearMap.BilinForm K M) (hB : ∀ x y, B x y = B y x)
+    (k : Fin 4 → M) (m : Fin 4 → K)
+    (hk : ∑ i, k i = 0)
+    (hmass : ∀ i, B (k i) (k i) = -(m i) ^ 2) :
+    mandelstamS B k + mandelstamT B k + mandelstamU B k = ∑ i, (m i) ^ 2 := by
+  rw [Fin.sum_univ_four] at hk
+  have hsum : k 1 + k 2 + k 3 = -k 0 := by
+    have h : k 0 + (k 1 + k 2 + k 3) = 0 := by rw [← hk]; abel
+    exact eq_neg_of_add_eq_zero_right h
+  have hcross : B (k 0) (k 1) + B (k 0) (k 2) + B (k 0) (k 3) = -B (k 0) (k 0) := by
+    have h : B (k 0) (k 1 + k 2 + k 3) = B (k 0) (-k 0) := by rw [hsum]
+    simpa using h
+  simp only [mandelstamS, mandelstamT, mandelstamU, map_add, LinearMap.add_apply,
+    Fin.sum_univ_four]
+  rw [hB (k 1) (k 0), hB (k 2) (k 0), hB (k 3) (k 0)]
+  linear_combination (-2 : K) * hcross - hmass 0 - hmass 1 - hmass 2 - hmass 3
+
+/-- **Four open-string tachyons.**  Feeding the ground-state mass shell `α' mᵢ² = -1`
+(`conv.alpha-prime-regge` with `N = 0` and intercept `a = 1`, `conv.intercept-sign-a`) into the
+sum rule gives `α'(s + t + u) = -4`. -/
+theorem mandelstam_sum_four_tachyons (B : LinearMap.BilinForm K M) (hB : ∀ x y, B x y = B y x)
+    (k : Fin 4 → M) (m : Fin 4 → K) (α : K)
+    (hk : ∑ i, k i = 0)
+    (hmass : ∀ i, B (k i) (k i) = -(m i) ^ 2)
+    (htach : ∀ i, α * (m i) ^ 2 = -1) :
+    α * (mandelstamS B k + mandelstamT B k + mandelstamU B k) = -4 := by
+  rw [mandelstam_sum B hB k m hk hmass, Fin.sum_univ_four]
+  linear_combination htach 0 + htach 1 + htach 2 + htach 3
+
+/-- Same statement in Regge-trajectory form, with the intercept `a` kept as a parameter:
+for `α_c(x) = a + α' x` one gets `α_c(s) + α_c(t) + α_c(u) = 3a - 4`.  Only the `-4` is
+kinematics; the value of `a` is the separate proposition `worldsheet.open-string-intercept`. -/
+theorem regge_trajectory_sum_four_tachyons (B : LinearMap.BilinForm K M)
+    (hB : ∀ x y, B x y = B y x) (k : Fin 4 → M) (m : Fin 4 → K) (α a : K)
+    (hk : ∑ i, k i = 0)
+    (hmass : ∀ i, B (k i) (k i) = -(m i) ^ 2)
+    (htach : ∀ i, α * (m i) ^ 2 = -1) :
+    (a + α * mandelstamS B k) + (a + α * mandelstamT B k) + (a + α * mandelstamU B k)
+      = 3 * a - 4 := by
+  linear_combination mandelstam_sum_four_tachyons B hB k m α hk hmass htach
+
+/-- The open-string case `a = 1`, i.e. `α_c(x) = 1 + α' x`:
+`α_c(s) + α_c(t) + α_c(u) = -1`, the constraint behind the Veneziano amplitude's
+`s`-`t`-`u` structure. -/
+theorem regge_intercept_sum_four_tachyons (B : LinearMap.BilinForm K M)
+    (hB : ∀ x y, B x y = B y x) (k : Fin 4 → M) (m : Fin 4 → K) (α : K)
+    (hk : ∑ i, k i = 0)
+    (hmass : ∀ i, B (k i) (k i) = -(m i) ^ 2)
+    (htach : ∀ i, α * (m i) ^ 2 = -1) :
+    (1 + α * mandelstamS B k) + (1 + α * mandelstamT B k) + (1 + α * mandelstamU B k) = -1 := by
+  have h := regge_trajectory_sum_four_tachyons B hB k m α 1 hk hmass htach
+  rw [h]
+  norm_num
+
+end Mandelstam
+
+section DiagonalMetric
+
+variable {K : Type*} [CommRing K] {D : ℕ}
+
+/-- The diagonal ("Minkowski", once `η = (-1,1,…,1)`) bilinear form on `Fin D → K`.
+Same shape as `StringFormal.NoGhost.DDF.dotVec`; that file is deliberately *not* imported —
+islands stay independent — so the agreement is recorded here in `minkowskiForm_apply`. -/
+noncomputable def minkowskiForm (η : Fin D → K) : LinearMap.BilinForm K (Fin D → K) :=
+  Matrix.toBilin' (Matrix.diagonal η)
+
+@[simp]
+theorem minkowskiForm_apply (η x y : Fin D → K) :
+    minkowskiForm η x y = ∑ μ, η μ * x μ * y μ := by
+  rw [minkowskiForm, Matrix.toBilin'_apply]
+  refine Finset.sum_congr rfl fun i _ => ?_
+  rw [Finset.sum_eq_single i]
+  · simp only [Matrix.diagonal_apply_eq]; ring
+  · intro j _ hj; simp [Matrix.diagonal_apply_ne _ (Ne.symm hj)]
+  · simp
+
+theorem minkowskiForm_symm (η x y : Fin D → K) :
+    minkowskiForm η x y = minkowskiForm η y x := by
+  simp only [minkowskiForm_apply]
+  exact Finset.sum_congr rfl fun i _ => by ring
+
+/-- The sum rule for concrete `D`-dimensional momenta and a diagonal metric `η`: entirely
+elementary once written out.  Taking `η 0 = -1`, `η μ = 1` for `μ ≥ 1` gives the physical
+mostly-plus statement. -/
+theorem mandelstam_sum_diagonal_metric (η : Fin D → K) (k : Fin 4 → (Fin D → K))
+    (m : Fin 4 → K)
+    (hk : ∀ μ, ∑ i, k i μ = 0)
+    (hmass : ∀ i, ∑ μ, η μ * k i μ * k i μ = -(m i) ^ 2) :
+    (-∑ μ, η μ * (k 0 μ + k 1 μ) * (k 0 μ + k 1 μ))
+      + (-∑ μ, η μ * (k 0 μ + k 2 μ) * (k 0 μ + k 2 μ))
+      + (-∑ μ, η μ * (k 0 μ + k 3 μ) * (k 0 μ + k 3 μ)) = ∑ i, (m i) ^ 2 := by
+  have hk' : ∑ i, k i = 0 := by
+    funext μ
+    simpa using hk μ
+  have hmass' : ∀ i, minkowskiForm η (k i) (k i) = -(m i) ^ 2 := by
+    intro i; rw [minkowskiForm_apply]; exact hmass i
+  have e : ∀ a b : Fin D → K, (∑ μ, η μ * (a μ + b μ) * (a μ + b μ))
+      = minkowskiForm η (a + b) (a + b) := by
+    intro a b; rw [minkowskiForm_apply]; simp only [Pi.add_apply]
+  rw [e (k 0) (k 1), e (k 0) (k 2), e (k 0) (k 3)]
+  exact mandelstam_sum (minkowskiForm η) (minkowskiForm_symm η) k m hk' hmass'
+
+end DiagonalMetric
 
 end StringFormal.Math
