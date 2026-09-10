@@ -26,6 +26,25 @@ sources:
       L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md §1.1）。
       同处还有一句限定全文范围的话：「We only discuss SO(N), USp(N) and E₈ × E₈ explicitly,
       but other groups can be analyzed in an analogous manner.」
+  - ref: zumino-1983-les-houches
+    loc: "(2.10) `A = −i A^k_μ λ_k dx^μ`（「a matrix of one-forms (i.e. having anticommuting elements)」，λ_k **厄米**）；(2.11) `F = dA + A²`（「wedge symbol suppressed, matrix multiplication understood」）；(2.12) Bianchi `DF ≡ dF + [A,F] = 0`；(2.13) `d² = 0` 及其后一句「d anti-commutes with the one-form A」；(2.25)(2.26)(2.29)(3.1)(3.32)（GS (5)(6)(15)(16) 所采用的下降方程约定与符号）；(3.35) 对称化迹 Str"
+    note: |
+      **L1 全文 46 印刷页逐页读图**（抽取记录 literature/extractions/zumino-wu-zee-1984.md §1.1/§1.2、E2/E5/E6/E9）。
+      ★ **本条登记的是一条约定归属的核实结果，不改变本约定的任何内容**：
+      **green-schwarz-1984 的 (5)(6)(15)(16) 逐字采用了本条的约定与符号**，逐项对照见
+      consistency.descent-forms-gs-notation 的 notes 第 1 条。要点：
+        · 场强：GS (2) `F = dA + A²`（省 ∧） = 本条 (2.11)；
+        · 规范势：GS (3) 的 λ^a **反厄米** 与本条 (2.10) 的 λ_k **厄米** 由 `λ^a_GS = −i λ_{k,Z}` 相联，
+          **两边的 A 都是反厄米矩阵一形式，是同一约定**；
+        · CS 三形式 GS (5) = 本条 (2.25) 第三式（连 `−⅓` 都一样）；
+        · 下降方程 GS (6)(15) = (2.26)/(3.1)（**正号，无 1/2π，无数值因子**），
+          GS (16) `δω⁰ = −dω¹` = (3.32) 第一行。
+      ⚠ **本条全文不含引力/洛伦兹侧**（无自旋联络 ω、无 R、无 tr R²）：本约定卡「引力一路」那一条
+      （ω 为 10 × 10、R = dω + ω²、tr R^{2n}）**只能溯源到 green-schwarz-1984 (8) 后正文**，
+      **不得**溯源到本条。
+      ⚠ 本条**不裁决** H 的 Chern–Simons 项符号（本条没有 B 场、没有 H），见 notes 第 3(b) 条。
+      ⚠ 本条 = green-schwarz-1984 的 **ref. [10] 的第一项**（不是 ref. [9]）；ref. [9] = zumino-wu-zee-1984
+      的**正文本项目一字未取到**，图里不得出现「ZWZ eq. (X)」。
   - ref: bilal-2008
     loc: "§12, (12.28)–(12.29)（E₈ 的重标度 tr F² := (1/30) Tr F²，由此 Tr F⁴ = 9(tr F²)²、Tr F⁶ = (75/20)(tr F²)³）"
     note: |
@@ -52,4 +71,17 @@ notes: |
       Bilal (12.14) 是 H = dB − Q₃(A,F) + β̃ Q₃(ω,R)，**两个 CS 项整体反号**。
       这条差异记在 consistency.h-field-strength-chern-simons 与 consistency.gs-counterterms-1984 的 notes，
       本约定节点不承载它（它是定义卡的内容，不是归一化选择）。
+      **补记（2026-09-11，该问题已闭合）**：β̃ = 1 已核实（Bilal p.102 逐字），两家由场重定义
+      (B, H) ↦ (−B, −H) 相联，**物理不变量是两个 CS 项的相对符号**，两家一致。
+      ★ 且该符号的来源是 **green-schwarz-1984 (4) + (9c)**，**不是** zumino-*：
+      Zumino 一侧**没有 B 场、没有 H、没有引力侧**，下降方程只约束 ω₃ 自身的定义与 δω₃ 的符号，
+      **完全不约束 H = dB ± ω₃ 里的那个 ±**（抽取记录 zumino-wu-zee-1984.md Q-Z1/Q-Z2）。
+
+  【4. ★ 下降方程一侧的约定源头已闭合（2026-09-11 新增）】见 sources 的 zumino-1983-les-houches 一条：
+  **GS (5)(6)(15)(16) 不是「大意引用 ref [9]」，而是逐字采用了 Zumino 的约定与符号**（L1 核实）。
+  ⚠ 该核实是在 GS 的 **ref. [10] 第一项**（Les Houches 讲义）上做的，不是在 ref. [9]（ZWZ 正文）上做的；
+  ZWZ 正文本项目一字未取到，**图里不得出现「ZWZ eq. (X)」**。
+  ⚠ 与之相对，**引力一路（ω、R、tr R^{2n}）在 Zumino 一侧完全没有对应物**，
+  凡涉及洛伦兹侧一般 n 的边一律标 `inferred: true`（见
+  consistency.descent-forms-gs-notation statement (2) 的证据分层）。
   (c) **α′ 归一化**：GS 只在弦论侧的 (25) 里出现 α′，本图不建那批节点，故与 conv.alpha-prime-regge 无交涉。

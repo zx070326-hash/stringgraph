@@ -7,10 +7,16 @@ depends_on:
     note: |
       提供 (20) 及其 tr R⁶ 项的系数 −(n − 496)/7560。这条边在来源处逐字可查：
       GS 就是从 (20) 的最后一项读出 496 的。
-  - id: consistency.descent-forms-chern-simons
+  - id: consistency.descent-forms-gs-notation
+    inferred: true
     note: |
-      GS 说该项对应「an anomaly of the form ∫ω¹_{10L}」，用的正是本卡的下降形式记号
-      （洛伦兹一路，n = 5）。
+      **inferred: true（洛伦兹一路，2026-09-11 改标）。**
+      GS 说该项对应「an anomaly of the form ∫ω¹_{10L}」，用的正是该卡的下降形式记号（洛伦兹一路，n = 5）。
+      ⚠ **但 GS 原文只显式定义了 n = 1 的洛伦兹侧 (7)(8)**；ω¹_{10L} 在原文里**只被使用、从未被定义**，
+      本图把它理解为「在 Yang–Mills 侧的一般公式里作代换 A → ω、F → R」，**GS 原文没有陈述这个代换**。
+      ⚠ 且该代换在 Zumino 一侧**没有任何支撑**：下降方程的一手来源 zumino-1983-les-houches
+      全文只处理内部对称群，**没有自旋联络 ω、没有 R、没有 tr R²、没有 ω⁰_{3L}**（L1 全文 46 页通读确认）。
+      ⇒ 按项目原则 5，本边标 inferred。抽取记录 literature/extractions/zumino-wu-zee-1984.md §1.3/§5.3。
   - id: conv.gauge-trace-normalization
 sources:
   - ref: green-schwarz-1984
@@ -34,7 +40,9 @@ summary: |
   of local interactions to the effective action.」两处共用同一个未证明的判据。
 gaps:
   - "★ 「单迹六阶项对应的反常不能由局域反项抵消」是 GS 的断言，**全文无证明、无引用**；本图无独立来源。这是本节点（以及 math.tr-f6-coefficient-vanishing 的物理读法）的核心缺口。"
-  - "系数 −(n − 496)/7560 本身来自未取得的 alvarez-gaume-witten-1984（见依赖节点的 gaps）。"
+  - "系数 −(n − 496)/7560 本身来自 alvarez-gaume-witten-1984（见依赖节点的 gaps）。**状态更正（2026-09-11）：该文全文已取得（L1，literature/extractions/alvarez-gaume-witten-1984.md），旧记法「未取得」已过时**；该抽取记录称 GS (20) 的五个系数已由 AGW (119) 机械复核（§5.1），本推导不重复该核对。"
+  - "★ **洛伦兹一路的 ω¹_{10L} 是本图的推断（2026-09-11 新增，对应本推导已标 inferred 的那条边）**：GS 原文只显式定义 n = 1 的洛伦兹侧 (7)(8)，ω¹_{10L} 只被使用不被定义；下降方程的一手来源 zumino-1983-les-houches 全文**不含引力侧**（无 ω、无 R、无 tr R²）。⇒ 「把 Yang–Mills 侧公式作 A → ω, F → R 代换」这一步**没有任何文献陈述**，是本项目补的。"
+  - "★ **局部性（2026-09-11 新发现）**：∫ω¹_{10L} 这类写法所依赖的下降方程，其唯一已核实来源（zumino-1983-les-houches, p.16 末）逐字限定它们「**really valid only locally, in some finite neighborhood in x-space**」；本推导（与 GS 原文）在整个十维时空上使用。"
   - "「n = 规范群维数」这一步（无质量费米子在伴随表示）在 GS 只有一句「which only depends on the dimension of the gauge group」，本图未单建节点。"
   - "dim SO(32) = dim(E₈ × E₈) = 496 这条算术本图未建节点（抽取记录 §5.4 候选 A4：Mathlib 无 dim E₈ = 248）。"
 notes: |
