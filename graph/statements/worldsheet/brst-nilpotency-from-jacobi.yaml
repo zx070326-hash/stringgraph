@@ -31,11 +31,22 @@ sources:
       式号经 schrans-2020 目录核实（`4.13 p 128: Eq (4.2.13) The BRST Charge is Nilpotent`），
       表达式未核对原书。抽取记录 literature/extractions/polchinski-1998-v1.md#E60。
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.15)、(4.3.16)，p.133（一般约束代数 [G_i, G_j] = f_{ij}^k G_k 下 Q_B 幂零 ⟺ Jacobi）"
+    loc: "§4.3, p.133：约束代数 **(4.3.12)** [G_I, G_J] = i g^K_{IJ} G_K；BRST 荷 **(4.3.14)**；**幂零 (4.3.16)** Q_B² = ½{Q_B,Q_B} = −½ g^K_{IJ} g^M_{KL} c^I c^J c^L b_M = 0（由 GGG 的 Jacobi 恒等式）"
     note: |
-      式号经 schrans-2020 目录核实（`4.28 p 133: Eq (4.3.15) The Algebra Satisfied by the
-      Constraints`、`4.29 p 133: Eq (4.3.16) The Nilpotency of the General BRST Charge`），
-      **表达式未核实**。抽取记录 polchinski-1998-v1.md#E65。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号订正 + **作者自承缺口**】
+
+      ⚠ 旧 loc 把约束代数记成 (4.3.15)：**原书是 (4.3.12)**，(4.3.15) 只是 G^g_I 的定义。
+      (4.3.16) 的式号与内容确认，「表达式未核实」这句撤销。
+
+      ⚠ **原书在 (4.3.16) 正下方自承（p.133，逐字）**：
+        "**We have neglected central charge terms; these need to be checked by hand.**"
+      → 即本节点所依赖的「Jacobi ⟹ Q_B² = 0」在原书里**只对无中心扩张的约束代数完成**；
+      有中心荷时需要逐项手算，而原书没有做，也没有留成习题。
+      这条已写入本推导（--via-structure-constants）的 gaps。
+      与 fgz-1986 Proposition 1.2 的关系因此更清楚了：FGZ 也是在 H²(g)=0、γ=0 的前提下
+      给出 d² = 0，中心扩张的情形在 FGZ 里靠「假设 π(c) = 26」绕开——
+      **两个来源在同一个地方留了同一个洞。**
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）与 §12.10 表 C 第 6 项。
   - ref: fgz-1986
     loc: "Proposition 1.2（d² = 0，前提 H²(g) = 0、γ = 0 写在正文而非命题里）"
     note: |

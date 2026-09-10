@@ -21,10 +21,20 @@ statement: |
 uses_conventions: [conv.virasoro-standard, conv.intercept-sign-a]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.6)（{Q_B, b_m} = L^tot_m），p.132"
+    loc: "§4.3, eq. (4.3.6), p.132（{Q_B, b_m} = L^m_m + L^g_m）；m = 0 的特例单独写作 **(4.3.8)** {Q_B, b_0} = L^m_0 + L^g_0，并被原书用来定 a^B = a^g = −1"
     note: |
-      式号经 schrans-2020 目录核实（`4.23 p 132: Eq (4.3.6) The Anticommutator {Q_B, b_m}`），
-      **未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E63。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号确认 + 补 (4.3.8)】
+
+      (4.3.6) 的式号与内容**逐字确认**（旧记录只有 [S] 目录级）。
+      本轮新落实的是紧随其后的 **(4.3.8)**：原书把 m = 0 的情形单独写出，
+      并以此论证 Q_B 模式展开 (4.3.7) 里的常数 a^B 必须等于 a^g（= −1）。
+      这条在本图中此前没有落点，见 worldsheet.brst-charge-mode-expansion 的 sources。
+
+      配套的 §4.3 式号（全部 L1）：(4.3.5) Q_B 的围道定义；(4.3.19) b_0|ψ⟩ = 0
+      （原书逐字「we will **assert** (and later show) that physical states must satisfy」）；
+      (4.3.20) L_0|ψ⟩ = {Q_B,b_0}|ψ⟩ = 0。
+      ⚠ (4.3.19) 那句 "assert" 是一处作者自承的缺口，见 worldsheet.brst-quantization-v2 的 notes。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）。
   - ref: fgz-1986
     loc: "§1–§2.1（半无限上同调微分 d 与鬼场表示 Λ^∞_*；Proposition 2.1(ii) 给 ρ(L_m) 的鬼场表示）"
     note: |

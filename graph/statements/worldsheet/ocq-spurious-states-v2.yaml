@@ -51,12 +51,14 @@ sources:
       文件头自述「Complete, no `sorry`」；**curator 未自行重跑 `lake build`**，
       依据是 formal/ 的自述、formal/TODO.md 的登记，以及 9dd69c0 已由 lead 合并进 main。
   - ref: polchinski-1998-v1
-    loc: "§4.1，eq. (4.1.8)、(4.1.9)，p.122"
+    loc: "§4.1, eq. (4.1.8)（|χ⟩ = Σ_{n≥1} L^m_{−n}|χ_n⟩）、(4.1.9)（|ψ⟩ ≅ |ψ⟩ + |χ⟩），p.122；OCQ 空间的商定义是 **(4.1.10)** H_OCQ = H_phys / H_null"
     note: |
-      式号经第三方伴读笔记目录核实（schrans-2020：`4.1/4.2 p 122: Eq (4.1.8)/(4.1.9)
-      Spurious States, I/II`），**未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E55。
-      Polchinski 写 |χ⟩ = Σ_{k≥1} L_{−k}|χ_k⟩（其求和指标为 k）并说「既是物理态又是伪态的即 null 态」；
-      本节点的「N ⊆ H_0 是命题不是定义」的区分是本项目补上的，不出自原书。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号与内容确认，补 (4.1.10)】
+      (4.1.8)/(4.1.9) 逐字确认，「**未核对原书**」撤销。
+      本轮新落实 **(4.1.10) H_OCQ = H_phys / H_null**：这是 OCQ 物理空间的定义式，
+      本图此前没有它的式号。
+      本节点「N ⊆ H_0 是命题不是定义」的区分仍然是本项目补上的，不出自原书——这句保留。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E54–E56）。
   - ref: gsw-1987-v1
     loc: "§2.2.1–2.2.2（spurious states、zero-norm states）"
     note: GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
