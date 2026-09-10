@@ -1,0 +1,36 @@
+id: worldsheet.linear-dilaton-cft
+kind: definition
+status: rigorous
+title: 线性 dilaton 共形场论
+statement: |
+  在 D 个自由标量 X^μ 的理论（worldsheet.free-scalar-cft-action）上，把能动张量修改为
+    T(z) = -(1/α') : ∂X^μ ∂X_μ : + V_μ ∂^2 X^μ,
+    T̄(z̄) = -(1/α') : ∂̄X^μ ∂̄X_μ : + V_μ ∂̄^2 X^μ,
+  其中 V_μ 是一个固定的常向量。该 T 仍满足共形场论所要求的 TT OPE 形式
+  （worldsheet.tt-ope-central-charge），故给出一个新的共形场论，称为**线性 dilaton CFT**，
+  其名称来自它等价于在世界面上加一项耦合到 Ricci 标量的线性 dilaton 背景 Φ(X) = V_μ X^μ。
+  作用量本身（以及 X 的传播子与运动方程）不变，改变的只是能动张量，
+  因而算子的共形权与理论的中心荷都随之改变（worldsheet.linear-dilaton-central-charge）。
+uses:
+  - worldsheet.free-scalar-cft-action
+  - worldsheet.energy-momentum-tensor-free-scalar
+  - worldsheet.conformal-normal-ordering
+  - worldsheet.tt-ope-central-charge
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5（p.49 起），eq. (2.5.2)（线性 dilaton 中心荷）、(2.5.3)（线性 dilaton 变换），p.49"
+    note: |
+      两个公式号经 schrans-2020 目录核实（`2.27`、`2.28`, p.49）。
+      **T 的具体表达式（V_μ ∂^2 X^μ 项的系数）未核实**；见 polchinski-1998-v1.md E35。
+tags: [cft, linear-dilaton, energy-momentum-tensor, definition]
+notes: |
+  本节点是「同一个作用量可以配不同的能动张量、给出不同的 CFT」的第一个例子，
+  也是后续弦论中 dilaton 背景、Liouville 理论与非临界弦的入口。
+  在本图中它的作用是**限定** worldsheet.free-boson-central-charge-d 的适用范围：
+  c = D 只对 V_μ = 0 的标准能动张量成立。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

@@ -1,0 +1,52 @@
+id: worldsheet.bc-ghost-cft
+kind: definition
+status: rigorous
+title: bc 鬼场系统（权 (λ, 1-λ) 的一阶反对易 CFT）
+statement: |
+  bc 系统是由两个**反对易**（费米型）场 b、c 构成的一阶共形场论，作用量
+    S = (1/2π) ∫ d^2 z  b  ∂̄ c,
+  其中 b 是权 (λ, 0)、c 是权 (1-λ, 0) 的全纯场（反全纯部门有独立的 b̄、c̄）。
+  该作用量对任意 λ 都是共形不变的。
+  基本 OPE 为
+    b(z) c(0) ∼ 1/z,   c(z) b(0) ∼ 1/z,   b(z) b(0) ∼ 0,   c(z) c(0) ∼ 0。
+  能动张量为
+    T(z) = : (∂b) c : - λ  ∂( : b c : )。
+  鬼数流为 j(z) = - : b c :，其守恒荷即鬼数；约定
+    gh(c) = +1,  gh(b) = -1。
+  该 j 不是主场：它在共形变换下带反常项（(2.5.15)–(2.5.17)），这正是鬼数不守恒
+  （背景鬼数）与 Riemann–Roch 型计数的来源。
+
+  弦论中相关的取值是 λ = 2：此时 b 权 2、c 权 -1，模展开
+    b(z) = Σ_{n∈Z} b_n z^{-n-2},  c(z) = Σ_{n∈Z} c_n z^{-n+1},  {b_m, c_n} = δ_{m+n,0}，
+  与 worldsheet.brst-quantization 的记号一致。
+uses:
+  - worldsheet.operator-product-expansion
+  - worldsheet.primary-field
+  - worldsheet.tt-ope-central-charge
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.4)（bc 作用量共形不变）、(2.5.11)（鬼场能动张量）、(2.5.14)（鬼数流）、(2.5.15)–(2.5.17)（鬼数的共形变换），p.50–51"
+    note: |
+      公式号全部经 schrans-2020 目录核实（`2.29`–`2.35`, p.50–51）。
+      **T 的具体表达式（(∂b)c - λ∂(bc) 中的系数）与 j 的符号未核实**；
+      见 polchinski-1998-v1.md E36。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.17)（{b_m, c_n} = δ_{m,-n}），p.61"
+    note: 公式号经 schrans-2020 目录核实（`2.55`–`2.62`, p.61–62）。
+tags: [cft, ghosts, bc-system, definition, faddeev-popov]
+notes: |
+  **与既有节点 worldsheet.brst-quantization 的关系**：后者是一张较大的定义卡，
+  在其 statement 内部已经写死了 λ = 2 的 bc 系统（模展开、{b_m,c_n}、L^g_n、
+  c^g = -3(2λ-1)^2+1 = -26、两个简并基态 |↓⟩ = c_1|0⟩ 与 |↑⟩ = c_0c_1|0⟩、gh(c_n)=+1/gh(b_n)=-1）。
+  本节点**不修改**该卡片（已提交节点的 statement 不可改），而是把 bc 系统作为
+  **一般 λ 的共形场论**单独立出来，使中心荷公式 c = -3(2λ-1)^2 + 1
+  （worldsheet.bc-ghost-central-charge）能作为一条有自己来源与状态的命题存在，
+  而不是埋在 BRST 定义卡的正文里。记号与鬼数约定与 brst-quantization 保持一致，
+  故两者可以并存、日后由 lead 决定是否让 brst-quantization 显式依赖本节点。
+
+  βγ 系统（对易的一阶系统）见 worldsheet.beta-gamma-central-charge。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

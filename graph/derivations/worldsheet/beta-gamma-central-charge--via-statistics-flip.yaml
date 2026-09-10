@@ -1,0 +1,26 @@
+id: worldsheet.beta-gamma-central-charge--via-statistics-flip
+target: worldsheet.beta-gamma-central-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-central-charge
+  - id: worldsheet.bc-ghost-cft
+  - id: worldsheet.tt-ope-central-charge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.24)，p.52（式号经 schrans-2020 核实；表达式未核实）"
+summary: |
+  βγ 系统的 Wick 缩并与 bc 系统逐项对应，唯一的差别是场的统计：
+  在 bc 情形每次交换两个场带一个负号，在 βγ 情形不带。
+  在 TT OPE 的四阶极点上，这个差别使**每一个闭合缩并圈**多一个 (-1)，
+  于是整体中心荷反号：c^{βγ}(λ) = - c^{bc}(λ) = 3(2λ-1)^2 - 1。
+  λ = 3/2 代入得 +11。
+gaps:
+  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1），
+     继承自 worldsheet.bc-ghost-central-charge--via-ope。"
+  - "「统计翻转 ⇒ 每个圈多一个 (-1) ⇒ 中心荷整体反号」这一步在本图中只作为
+     论证要点复述，来源中的具体推导未核实（(2.5.24) 只核实了式号与标题）。
+     严格地说需要逐项核对两套 Wick 定理的符号规则。"
+  - "βγ 的基本 OPE 符号（β γ ∼ -1/z 还是 +1/z）未核实，它影响 T 的表达式但不影响中心荷的值。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

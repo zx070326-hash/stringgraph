@@ -1,0 +1,44 @@
+id: worldsheet.open-string-virasoro-modes
+kind: definition
+status: rigorous
+title: 开弦的 Virasoro 生成元与零模 α_0 = (2α')^{1/2} p
+statement: |
+  对开弦，doubling trick 把全纯与反全纯部门合并为**一套** Virasoro 代数
+  （边界条件把 T̄ 在边界上等同于 T 的解析延拓）。其生成元由
+  worldsheet.virasoro-generators-free-boson 的模式公式给出，零模取
+    α^μ_0 = (2 α')^{1/2}  p^μ,
+  其中 p^μ 是弦的总动量（conv.alpha-prime-regge）。于是
+    L_0 = α' p^2 + Σ_{n = 1}^{∞} α_{-n} · α_n,
+    L_m = (1/2) Σ_{n = -∞}^{+∞} : α_{m-n} · α_n :   (m ≠ 0),
+  其中 N ≡ Σ_{n≥1} α_{-n}·α_n 是能级算符（level operator）。
+  闭弦的对应取法是 α^μ_0 = ᾱ^μ_0 = (α'/2)^{1/2} p^μ，且有独立的两套 Virasoro 代数。
+uses:
+  - worldsheet.virasoro-generators-free-boson
+  - worldsheet.energy-momentum-laurent-modes
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7（p.58 起），eq. (2.7.25)（L_0 与 L_m）、(2.7.27)（α_0^μ = (2α')^{1/2} p^μ）"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字核实（「Recall (2.7.25) and (2.7.27) for the open string」）。
+      ⚠ schrans-2020 §4.6 有一句「Joe's book has taken α' = 2」，与原书前言「α' 保持显式」矛盾，
+      抽取记录判定为该笔记的笔误，**不采信**；本节点按 α' 显式书写。
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.25)（开弦边界：doubling trick 把 L 与 L̄ 合并成一套 Virasoro），p.56"
+    note: "公式号经 schrans-2020 目录核实（`2.46 p 56: Eq. (2.6.25) The Open String Boundary`）。"
+  - ref: polchinski-1998-v1
+    loc: "闭弦零模 α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ：**式号未核实**（抽取记录第 1.1 节列为「内容确认，式号未核实」）"
+tags: [bosonic-string, open-string, virasoro, zero-mode, definition]
+notes: |
+  零模归一化 (2α')^{1/2} 与 conv.alpha-prime-regge 捆绑：它使
+  L_0 = (1/2)α_0·α_0 + N = α' p^2 + N，从而质量壳条件 (L_0 - a)|ψ⟩ = 0 化为
+  α' m^2 = N - a（注意 p^2 = -m^2，mostly-plus）。若改用闭弦归一化 (α'/2)^{1/2}
+  则 L_0 = (α'/4)p^2 + N，公式差因子 4——这是开闭弦公式最常见的混淆点。
+
+  截距 a 的符号约定见 conv.intercept-sign-a（Polchinski 用 A = -a）。
+  本节点不断言 a 的取值，那是 worldsheet.open-string-intercept 的内容。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

@@ -1,0 +1,32 @@
+id: worldsheet.beta-gamma-central-charge
+kind: proposition
+title: βγ 系统（对易的一阶系统）的中心荷 c = 3(2λ-1)^2 - 1，λ = 3/2 时 c = +11
+statement: |
+  设 βγ 系统是与 bc 系统（worldsheet.bc-ghost-cft）结构相同、但两个场**对易**（玻色型）
+  的一阶共形场论：作用量 S = (1/2π) ∫ d^2 z  β ∂̄ γ，β 权 (λ, 0)、γ 权 (1-λ, 0)，
+  基本 OPE 为 β(z) γ(0) ∼ -1/z、γ(z) β(0) ∼ 1/z（与 bc 的差别在于统计与相应的符号）。
+  则其中心荷与 bc 系统的中心荷反号并做相应替换：
+    c^{βγ} = 3 (2λ - 1)^2 - 1 = - c^{bc}。
+  特别地 λ = 3/2 给出
+    c^{βγ} = 3 · 2^2 - 1 = +11。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.24)（βγ 系统的中心荷），p.52"
+    note: |
+      公式号与「这是 βγ 系统的中心荷」这一身份经 schrans-2020 目录核实
+      （`2.36 p 52: Eq. (2.5.24) The Central Charge of the βγ System`）。
+      抽取记录第 1.1 节把「λ = 3/2 时 c = +11」标为**已核实**；
+      **一般 λ 的表达式与 βγ 的 OPE 符号未核实**。见 polchinski-1998-v1.md E37。
+tags: [cft, central-charge, ghosts, beta-gamma, superstring]
+notes: |
+  λ = 3/2 的 βγ 系统是 RNS 超弦的超鬼场（superghost）部门，属 polchinski-1998-v2 的内容。
+  在**玻色弦**范围内本节点不参与任何推导：抽取记录 E37 明确指出「+11 这个数值在本抽取范围
+  （玻色弦）用不到，是超弦（Vol.2）的输入」。
+  它在图中的价值是把「统计翻转 ⇒ 中心荷反号」这条规则记录下来，
+  供日后超弦分支（c^{超弦总} = (3/2)D + 11 - 26 = 0 ⇒ D = 10）引用。
+  **本节点不断言 D = 10**，那需要超 Virasoro 与超鬼场的完整设置，本批不涉及。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

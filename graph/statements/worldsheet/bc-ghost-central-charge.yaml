@@ -1,0 +1,39 @@
+id: worldsheet.bc-ghost-central-charge
+kind: proposition
+title: bc 鬼场系统的中心荷 c = -3(2λ-1)^2 + 1，λ = 2 时 c = -26
+statement: |
+  worldsheet.bc-ghost-cft 定义的权 (λ, 1-λ) 反对易一阶系统的中心荷为
+    c^{bc} = -3 (2λ - 1)^2 + 1。
+  特别地，Faddeev–Popov 鬼场对应的 λ = 2 给出
+    c^{g} = -3 · 3^2 + 1 = -26。
+  （λ = 1 给出 c = -2，λ = 1/2 给出 c = 1，均为常见的特例。）
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.12)（一般 λ 的鬼场中心荷公式），p.51"
+    note: |
+      公式号与「这是鬼场中心荷」这一身份经 schrans-2020 目录逐字核实
+      （`2.31 p 51: Eq. (2.5.12) The Ghost Central Charge`，且抽取记录第 1.1 节把
+      「λ = 2 时 c = -26」标为**已核实**）。
+      **公式的具体形式 -3(2λ-1)^2 + 1 未核实**（核对源只给标题）；
+      但 λ = 2 代入得 -26 这一数值本身已核实。见 polchinski-1998-v1.md E36。
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i)：鬼场表示中心荷 ρ(c) = -26 Id_{Λ^∞_*}"
+    note: |
+      λ = 2 情形的独立数学来源：bc 系统作为半无限形式 Λ^∞_* 上的表示，中心荷算出为 -26。
+      编号已核实（见 literature/extractions/brst-cohomology-sources.md §1.4）。
+      **该条只覆盖 λ = 2，不覆盖一般 λ 的公式。**
+tags: [cft, central-charge, ghosts, bc-system, critical-dimension]
+notes: |
+  **-26 是全书两条 D = 26 推导的共同支点**（抽取记录 E36 备注）：
+  BRST 路线（worldsheet.critical-dimension-brst）与 Weyl 反常路线
+  （worldsheet.critical-dimension-weyl-anomaly）都用它。
+  在本节点建立之前，c^g = -26 只作为 worldsheet.brst-quantization 定义卡正文中的
+  一句话存在；现在它是一条有自己的来源与状态的命题。
+
+  记号：本图用上标区分中心荷 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 混淆，
+  与 worldsheet.brst-quantization / worldsheet.critical-dimension-brst 的约定一致。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

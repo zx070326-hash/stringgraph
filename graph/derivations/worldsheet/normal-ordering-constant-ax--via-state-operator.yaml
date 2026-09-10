@@ -1,0 +1,32 @@
+id: worldsheet.normal-ordering-constant-ax--via-state-operator
+target: worldsheet.normal-ordering-constant-ax
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.state-operator-isomorphism
+  - id: worldsheet.virasoro-generators-free-boson
+  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.energy-momentum-laurent-modes
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)、(2.7.9)、(2.7.11)，p.59–60（式号与 a^X = 0 的值均经 schrans-2020 核实）"
+  - ref: schrans-2020
+    loc: "§2.53（由正规序得 a^X）、§2.80（由态-算子映射定正规序常数）"
+    note: 第三方复算，非原书；用于确认 a^X = 0 的值与论证路线。
+summary: |
+  两种正规序都把 L_0 写成同一个双线性式加一个常数，故差是 c-数 a^X，可以在任一个态上读出。
+  取单位算子 1：按 worldsheet.state-operator-isomorphism，它对应的态是基态 |0⟩，
+  且由共形不变性 L_0 |0⟩ = h(1) |0⟩ = 0（单位算子的共形权为 0）。
+  另一方面产生-湮灭正规序的 L_0 = (1/2)α_0·α_0 + Σ_{n≥1}α_{-n}·α_n 在 |0; k=0⟩ 上取值 0。
+  两者相减得 a^X = 0。
+  与 §1.3 的 zeta 正规化路线（Σ_{n≥1} n → -1/12，给出光锥正规序常数 A = -(D-2)/24）
+  相容：那里的 -(D-2)/24 是横向振子在**光锥规范**下的零点能，本节点的 a^X 是
+  协变 X 部门共形正规序与产生-湮灭正规序之差，两者是不同的量，各自为零/非零并不矛盾。
+gaps:
+  - "整条论证以 worldsheet.state-operator-isomorphism 为前提，而该同构在来源中是路径积分
+     构造而非定理（见其 --via-radial-quantization 的 gaps）。故本推导封顶在 physical-argument。"
+  - "「单位算子的共形权为 0」在来源中是定义性的（1 与 T 的 OPE 无奇异项），未单列节点。"
+  - "本推导只覆盖 X 部门。鬼场的对应常数 a^g 在抽取记录与本图既有节点之间存在数值分歧，
+     本图未建节点，见 worldsheet.bc-ghost-ground-state-ghost-number 的 notes。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"
