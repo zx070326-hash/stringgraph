@@ -159,5 +159,26 @@ notes: |
   （其 notes【陈述文本相对 v4 的两处显式化】已登记同一件事），
   worldsheet.ddf-operators-adjoint 第 (2) 条据此得到「对角元全为正」
   （横向指标全类空，δ^{ii} = +1）。
+
+  【2026-09-11（四）：A^i_n 的模态和采用哪套指标约定（lead 裁决；curator，陈述文本未动）】
+  本卡的陈述只把 A^i_n 写成**围道积分** A^i_n = ∮ (dz/2πi) ∂X^i(z) e^{i n k_0·X(z)}，
+  **不写模态和**，故本卡本身对指标约定不置一词。但下游要把它展成模态和时有两种写法：
+    (α) **z^J-系数约定（本图与 Lean 统一采用的一套）**：把 :e^{i n k_0·X(z)}: = Σ_J V^{(n)}_J z^J
+        的 z^J 系数记作 V^{(n)}_J，于是
+          **A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_m**；
+    (β) 「第 J 个模」约定：V^{(n)}_J 记作 z^{−J} 的系数，于是 A^i_n = Σ_m α^i_m V^{(n)}_{−m}。
+  **lead 于 2026-09-11 裁决全图统一采 (α)**，理由是形式化沿用它：
+  `formal/StringFormal/NoGhost/DDF.lean` 文件头逐字写
+  「`A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` is not defined」与
+  「`towerVertex η b n K` — the `z^K` Laurent coefficient」。
+  **(α) 与 (β) 只差 m ↦ −m 的重标，没有任何内容差别**；换算时注意同时反射窗口与求和范围。
+  围道核对（两行）：∂X^i(z) ∝ Σ_m α^i_m z^{−m−1}，∮ 取总 z^{−1} 系数给 (−m−1)+K = −1，
+  即 K = m，正是 (α)。
+  受此裁决影响的下游（均已按 (α) 核对，2026-09-11（四））：
+    · worldsheet.ddf-transversality-gives-local-finiteness —— 陈述本来就写 (α)
+      （「V^{(n)}_K 是 z^K 洛朗系数」），窗口 n − N ≤ m ≤ N **在 (α) 下推出，无需改写**；
+    · worldsheet.vertex-operator-adjoint —— 陈述逐字声明用 (α)，未动；
+    · worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint —— summary 第 2 步原用 (β)，
+      **已改写为 (α)**（本图内此前唯一的例外）。
 author: curator
 created: "2026-09-11"

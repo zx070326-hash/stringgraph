@@ -107,9 +107,23 @@ summary: |
   于是 (A^i_n)† = (Ō^i_n 的第 −n 个模)。剩下的全部工作是确认 Ō^i_n = O^i_{−n}。
 
   **第 2 步（逐因子取伴随，即 Ō^i_n = O^i_{−n}）。** 把 A^i_n 展成模态和
-    A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_{−m}，
-  其中 V^{(n)}_J 是正规序指数算符 :e^{i n k_0·X}: 的第 J 个模（含零模移位 e^{i n k_0·x}，
-  它把动量 p 送到 p + n k_0）。两个因子之间**没有缩并**，因为交叉缩并的系数正比于
+    A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_m，
+  其中 V^{(n)}_J 是正规序指数算符 :e^{i n k_0·X(z)}: 的 **z^J 洛朗系数**
+  （含零模移位 e^{i n k_0·x}，它把动量 p 送到 p + n k_0）。
+  【2026-09-11（四）：求和指标约定统一，lead 裁决「采 Lean 写法」】本步原写作
+  A^i_n = Σ_m α^i_m V^{(n)}_{−m}，其中 V^{(n)}_J 读作「第 J 个**模**」（即 z^{−J} 的系数）；
+  现改为与 `formal/StringFormal/NoGhost/DDF.lean` 文件头逐字一致的
+  **A^i_n = Σ_{m ∈ Z} α^i_m ∘ V^{(n)}_m**（V 读作 z^J 的**系数**）。
+  **两种写法只差 m ↦ −m 的重标，内容完全相同**；改写的理由是形式化将沿用 Lean 那套，
+  且本图内其余两处早已用它：worldsheet.vertex-operator-adjoint（其陈述逐字写「**z^J 的系数**，
+  与 Lean 侧 `Fock.vertexOsc` / `towerVertex` 的指标约定相同」）与
+  worldsheet.ddf-transversality-gives-local-finiteness（「V^{(n)}_K 是 z^K 洛朗系数」，
+  局部有限窗口 n − N ≤ m ≤ N）。本步此前是本图内**唯一**的例外。
+  围道核对（初等，两行）：∂X^i(z) ∝ Σ_m α^i_m z^{−m−1}，:e^{i n k_0·X(z)}: = Σ_K V^{(n)}_K z^K，
+  ∮ (dz/2πi) 取总 z^{−1} 系数，即 (−m−1) + K = −1，故 K = m，得 A^i_n ∝ Σ_m α^i_m V^{(n)}_m。
+  注意伴随规则 (V^{(n)}_J)† = V^{(−n)}_{−J} 的**形状在两种约定下相同**（指标反射与
+  J ↦ −J 的换名对易），故本步引用的 worldsheet.vertex-operator-adjoint 无需改写。
+  两个因子之间**没有缩并**，因为交叉缩并的系数正比于
   ε^i·k_0 = 0；因此可以逐因子取伴随：
     · (α^i_m)† = α^i_{−m}，对**一切整数 m 含 m = 0**（worldsheet.fock-indefinite-form (1)(b)
       加 worldsheet.virasoro-generators-adjoint 在 Lean 侧对 m = 0 的延拓；
@@ -121,8 +135,9 @@ summary: |
       **重排序**（E_+E_- ↔ E_-E_+），而重排序产生的因子正比于 z^{2α' n² k_0·k_0}，
       **由 k_0² = 0 恒为 1**。这是类光条件在本推导中的关键作用。
   合起来
-    (A^i_n)† = Σ_{m ∈ Z} (V^{(n)}_{−m})† (α^i_m)† = Σ_{m ∈ Z} V^{(−n)}_{m} α^i_{−m} = A^i_{−n}
-  （末一步把求和指标 m ↦ −m 反射，并用两个因子对易——同样因为 ε^i·k_0 = 0）。
+    (A^i_n)† = Σ_{m ∈ Z} (V^{(n)}_m)† (α^i_m)† = Σ_{m ∈ Z} V^{(−n)}_{−m} α^i_{−m}
+             = Σ_{m ∈ Z} V^{(−n)}_m α^i_m = Σ_{m ∈ Z} α^i_m V^{(−n)}_m = A^i_{−n}
+  （第三个等号把求和指标反射 m ↦ −m；第四个等号用两个因子对易——同样因为 ε^i·k_0 = 0）。
   动量记账自洽：左端把 F(p + n k_0) 送回 F(p)，右端 A^i_{−n} 正是如此，这就是目标 (1) 里
   v ∈ F(p)、w ∈ F(p + n k_0) 的量词来源。
 
@@ -152,7 +167,7 @@ gaps:
   - "**塔上的双线性型是约定式引入的，不是被证明的。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.momentum-tower-fock-space，其 (2) 把塔上的型定义为各层 worldsheet.fock-indefinite-form 之型的直和并**显式声明「层间正交是本定义规定的，不是被证明的」**；本条已加为依赖。**缺口本身没有关闭**：worldsheet.fock-indefinite-form 是**逐固定动量扇区**陈述的（其 Lean 侧 `Fock.pairing` 也是），不同动量层之间的正交性在本图中仍是输入而非结论（物理上它是动量本征态的正交性 ⟨p|p'⟩ ∝ δ^D(p−p')，而本图**没有节点**承载连续动量本征态与 δ 归一化）。目标 (1) 的等式跨两个不同层，因此实质使用这条约定。Lean 侧另缺塔上的型本身（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。"
   - "**目标 (2) 的正定性需要额外假设**：系数环是有序域（如 R = ℝ）且 ⟨0;k|0;k⟩ = 1。前者本图中最接近的登记是 worldsheet.fock-indefinite-form 的 Lean 侧 `Fock.pairing_indefinite_field`（有序环即可）；后者是归一化选择，不是被推出的。目标陈述已把两者写成前提。"
   - "**退化扇区 k_0·p = 0（含 p = 0）不覆盖**：那里 A^i_n 本身没有定义（worldsheet.ddf-operators-v5）。"
-  - "**第 3 步的递推没有逐步展开**。summary 只写了递推的形状（搬伴随 → 对易穿过 → 打真空），没有写归纳的严格记账（对 Σ_{(i,n)} d(i,n) 的归纳、d ≠ e 时「某处必然剩下打不掉的湮灭因子」的精确论证）。这一步是初等的、与自由振子 Fock 空间逐字同型，但若要按 docs/STATUS_LEVELS.md 的 rigorous 例外条款单独升级第 (2) 条，必须写全并由 reviewer 复核。"
+  - "**第 3 步的递推没有逐步展开**。summary 只写了递推的形状（搬伴随 → 对易穿过 → 打真空），没有写归纳的严格记账（对 Σ_{(i,n)} d(i,n) 的归纳、d ≠ e 时「某处必然剩下打不掉的湮灭因子」的精确论证）。这一步是初等的、与自由振子 Fock 空间逐字同型，但若要按 docs/STATUS_LEVELS.md 的 rigorous 例外条款单独升级第 (2) 条，必须写全并由 reviewer 复核。**【2026-09-11（四）更新】这件事已经做了，但做在另一张卡上**：worldsheet.transverse-ddf-fock-gram-matrix（条件命题，把 (1)(a)(b) 与真空归一化写成显式假设 (H1)–(H4)）的推导 --via-oscillator-recursion 逐步写全了归纳记账（湮灭算符穿过创生算符串的 Leibniz 引理 + 对 |d| 的归纳 + 有序域上的正定），status rigorous，reviewer 复核清单已列、`reviewer-verified: <pending>`。**本推导的 summary 第 3 步与本 gap 保留原样**：目标 worldsheet.ddf-operators-adjoint 的第 (2) 条把 (1) 当已证事实用，本推导对它的支撑仍只是上面那段形状描述。要引用严格版本请指向新卡。"
 notes: |
   **status 定级理由**：kind 与 status 都取 physical-argument。第 (1) 条的论证依赖顶点算子的
   伴随与径向量子化的共轭规则（gaps 第 2、3 条），不是有限步初等计算，
@@ -182,5 +197,23 @@ notes: |
       ← 承载目标陈述【承载断言的空间】一段的塔与层间正交的型，
         关闭 gaps 第 5 条的「没有独立节点」一句（约定仍是约定，见改写后的该条）。
   summary 与 target 的陈述文本除第 2 步加的一处括号指针外未动；三条 sources 未动。
+
+  **【2026-09-11（四）：两处改动，curator，lead 裁决】**
+  (1) **求和指标约定统一为 Lean 写法**。summary 第 2 步的模态和由
+      A^i_n = Σ_m α^i_m V^{(n)}_{−m}（V = 第 J 个模 = z^{−J} 的系数）改为
+      A^i_n = Σ_m α^i_m V^{(n)}_m（V = z^J 的系数），与
+      `formal/StringFormal/NoGhost/DDF.lean` 文件头逐字一致，并顺带把「合起来」那一行的
+      指标链重算了一遍。**两者只差 m ↦ −m 的重标，论证内容、结论、status 均不变。**
+      裁决理由：形式化将沿用 Lean 那套；且本图内 worldsheet.vertex-operator-adjoint 与
+      worldsheet.ddf-transversality-gives-local-finiteness 早已用 z^J-系数约定，
+      本推导此前是唯一的例外，属于图内不一致。
+      **worldsheet.ddf-transversality-gives-local-finiteness 的局部有限窗口 n − N ≤ m ≤ N
+      经核对本来就是在 Lean 写法下推的，无需改写**（详见该节点 notes 的同日记录）。
+      `(V^{(n)}_J)† = V^{(−n)}_{−J}` 的形状在两种约定下相同，故被依赖的
+      worldsheet.vertex-operator-adjoint 一字未动。
+  (2) **目标第 (2) 条已拆卡**：worldsheet.transverse-ddf-fock-gram-matrix
+      （+ 推导 --via-oscillator-recursion，status rigorous，条件命题）。
+      本推导 summary 第 3 步保留原文（它仍是本推导对目标第 (2) 条的支撑），
+      gaps 第 8 条已更新为指向新卡。**本推导的 target、status、depends_on、sources 均未动。**
 author: curator
 created: "2026-09-11"
