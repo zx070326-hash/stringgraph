@@ -1,0 +1,127 @@
+id: worldsheet.isotropic-tower-vertex-operators-commute
+kind: proposition
+title: 类光动量塔上的顶点算子逐对对易：k_0² = 0 ⟹ [V^{(m)}_J, V^{(n)}_K] = 0（含层移位零模；k_0² ≠ 0 时因单值因子 (w/z)^{mn k_0²} 而不成立）
+statement: |
+  【设定】按 worldsheet.momentum-tower-fock-space 取沿参考向量 k_0 的动量塔
+    T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)，
+  系数环 R 是交换 ℚ-代数，对角时空度规分量 η_μ，收缩 x·y := Σ_μ η_μ x^μ y^μ
+  （conv.metric-mostly-plus 的收缩约定）。按 conv.alpha-prime-regge 记重标度向量
+    a^μ := (2α')^{1/2} p^μ,   b^μ := (2α')^{1/2} k_0^μ。
+  ⚠ **本卡不需要归一化 η_μ² = 1，也不需要 DDF 归一化 2α' k_0·p = 1**（见【不断言】(d)）。
+
+  对每个 n ∈ Z 记 V^{(n)}_K（K ∈ Z）为塔上顶点算子 :e^{i n k_0·X(z)}: 的 z^K 洛朗系数
+  （z^K-系数约定，与 worldsheet.ddf-operators-v6 同一约定；Lean 侧
+  `towerVertex η b n K`）。按那张卡，V^{(n)}_K 是两个因子的复合：
+    · **零模半**：层移位 e^{i n k_0·x}，把第 j 层送到第 j+n 层；
+    · **振子半**：worldsheet.orthogonal-momentum-vertex-operators-commute 意义下的
+      V^{(n k_0)}_{K−n}，其洛朗指标移位 −n 就是单值因子 z^{2α' n k_0·p} = z^n 的记账。
+
+  【断言】若
+
+      k_0² = 0        （等价 b·b = 0）
+
+  则对一切 m, n, J, K ∈ Z，作为 T(p; k_0) 上的线性算子恒等式
+
+      V^{(m)}_J ∘ V^{(n)}_K = V^{(n)}_K ∘ V^{(m)}_J ，
+      等价地   [ V^{(m)}_J , V^{(n)}_K ] = 0 。
+
+  【两个半各自为什么对易】
+  · **零模半**：两个层移位平凡对易（j + n + m = j + m + n）。
+  · **振子半**：塔上两个顶点算子的动量都与 k_0 成比例，
+      (m k_0)·(n k_0) = m n k_0² = 0，
+    故它们正交，由 worldsheet.orthogonal-momentum-vertex-operators-commute 对易。
+
+  【类光性在这里是**必要**的，不是为了方便】
+  若 k_0² ≠ 0，上面的正交性条件破坏，缩并给出单值因子
+
+      (w/z)^{m n k_0² · (2α')} ≠ 1    （按本卡的重标度即 (w/z)^{m n (b·b)}），
+
+  两个洛朗模不再对易。**本卡不断言这条否定结论**，只把它记录为限制（见【不断言】(a)）。
+  这是"类光参考矢量"这个假设在 DDF 构造里**第二处**真正承重的地方；第一处是塔上的共形权
+  （worldsheet.exponential-vertex-operator-mode-weight-identity 的塔上版本，
+  那里 k_0² ≠ 0 会让 [L_m, V^{(n)}_K] 的系数含塔的层指标 j，从而不再是 V^{(n)}_{K−m} 的标量倍）。
+
+  【本节点明确不断言】
+  (a) **k_0² ≠ 0 时的「不对易」**。那是上面那个缩并因子给出的**预期**，
+      本图与 Lean 都没有证明（Lean 侧连该形式级数都没有定义）。
+      ⇒ 不得把本卡引作"k_0² ≠ 0 时顶点算子不对易"的来源。
+  (b) **[A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0}**。本卡是那条链的第一步，
+      见 worldsheet.ddf-transverse-oscillator-algebra 与 notes。
+  (c) **余循环 / Klein 因子 / 一般动量格**。本卡的零模只是塔的层移位（Z 的表示），
+      塔是建在**固定的** p 与 k_0 上，不是全动量空间；[x^μ, p^ν] 未出现。
+      一般格上的顶点算子见 math.lattice-vertex-algebra。
+  (d) **DDF 归一化 2α' k_0·p = 1 与 η_μ² = 1**。两者都**不被本卡使用**；
+      它们在 worldsheet.ddf-operators-v6 与下游的 [L_m, A^ε_n] = 0 那里才需要。
+  (e) **OPE 形式、收敛性、完化、幺正性、号差**。T(p;k_0) 是代数直和，
+      V^{(n)}_K 逐向量是有限和；η_μ 只是 R 中一族元素。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.towerVertex_comm_of_isotropic
+  lean_file: StringFormal/NoGhost/VertexCommute.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexCommute.lean :: StringFormal.NoGhost.towerVertex_comm_of_isotropic（本卡 formal.lean_decl）、括号形式 StringFormal.NoGhost.lie_towerVertex_towerVertex_of_isotropic、动量算术 StringFormal.NoGhost.dotVec_vertexMomentum；单 Fock 输入 StringFormal.NoGhost.Fock.vertexOsc_comm_of_dotVec_zero；塔与顶点算子来自 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{TowerFock, towerShift, towerDiag, towerVertex, towerVertex_single, vertexMomentum, dotVec}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。formalizer 2026-09-11 完成，
+      lead 以 **7181f9e**（"merge: vertex operators with orthogonal momenta commute;
+      tower vertex operators commute for isotropic k0 (VertexCommute.lean)"）合入 main。
+      `towerVertex_comm_of_isotropic` 语句逐字（去掉隐式参数）：
+        `(η b : Fin D → R) (hbb : dotVec η b b = 0) (m n J K : ℤ) :
+         towerVertex η b m J * towerVertex η b n K = towerVertex η b n K * towerVertex η b m J`，
+      **假设只有 `hbb`**；证明经 `Finsupp.lhom_ext` 逐层化归到 `towerVertex_single`，
+      振子半调用 `Fock.vertexOsc_comm_of_dotVec_zero`（洛朗指标 J−m、K−n），
+      零模半是 `show j + n + m = j + m + n from by ring`。与本卡断言逐字一致。
+      ⚠ **「k_0² ≠ 0 时结论为假」在 Lean 里只是文件头的数学注记，不是定理**。
+      该注记逐字：「for `k_0² ≠ 0` the contraction produces the monodromy factor
+      `(w/z)^{mn k_0²} ≠ 1` and the tower vertex operators do *not* commute. This is the
+      second place (after the tower conformal weight, `lie_towerLop_towerVertex_of_pos`)
+      where light-likeness of the reference vector does real work.」
+      本卡据此写【类光性必要】那段，并在【不断言】(a) 明确它**未被证明**。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **不承载本卡的论证**（论证是 Lean 的），只作对照：DDF 构造里 k_0 取类光正是为了让
+      e^{i n k_0·X} 之间无缩并、且单值因子是整数幂。核实等级沿用
+      worldsheet.ddf-operators-v6：章节页码 L4/L2，**式号与正文 L0**。
+      GSW 用 mostly-minus（已按 conv.metric-mostly-plus 转写）、取 α' = 1/2，
+      **不写洛朗模形式的对易陈述**。
+tags: [cft, vertex-operator, bosonic-string, spectrum-generating-algebra, ddf, momentum-tower, formalized]
+notes: |
+  【立卡理由与与姊妹卡的分工】本卡与
+  worldsheet.orthogonal-momentum-vertex-operators-commute 是 formal/TODO.md
+  `ddf-operators` 子项 (5) 的"第 2 步"与"第 3 步"（formalizer 自述的编号）。
+  拆成两张卡不是为了凑数，而是因为**假设与适用范围不同**：
+  · 姊妹卡：单个代数 Fock 空间，**任意**正交动量 b·b′ = 0，无零模；
+  · 本卡：动量塔，动量全部与 k_0 成比例，**必须** k_0² = 0，含层移位零模。
+  本卡把姊妹卡当输入使用（(m k_0)·(n k_0) = mn k_0²），反向不成立。
+
+  【"类光性第二处承重"这句话的精确含义——请 reviewer 核对】
+  类光性 k_0² = 0 在 DDF 链上目前有**两处**被 Lean 记录为不可去：
+  (1) **塔上共形权**：`lie_towerLop_towerVertex_of_pos`（及 `_of_ne`、无后缀版本）必须假设
+      dotVec η b b = 0。formalizer 的理由逐字记在 formal/TODO.md (3e)：单 Fock 的系数在第 j 层是
+      (K−n) − m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)，**含 j**；k_0² ≠ 0 时
+      ⁅L_m, V^{(n)}_K⁆ 在整条塔上不是 V^{(n)}_{K−m} 的标量倍。
+      ⚠ 注意对照：**单 Fock 版本 (3d)(3f) 对任意 b 成立，不需要 b·b = 0**。
+  (2) **本卡**：塔上顶点算子之间的对易。
+  ⇒ 两处的机制不同：(1) 是"系数依赖层指标"，(2) 是"缩并出单值因子"。
+  两处都只在**塔上**成立/需要，单 Fock 版本都不需要类光性——这个对照是本卡最值得记住的一点。
+
+  【本卡为什么不需要 2α' k_0·p = 1】归一化 (S) 的作用是让单值指数 2α' n k_0·p 是整数，
+  从而洛朗指标移位 K ↦ K−n 是整数移位；但在本仓库的实现里这个移位**已经被写进
+  `towerVertex` 的定义**（`towerVertex η b n K = towerShift n ∘ towerDiag (vertexOsc η (n·b) (K−n))`），
+  即定义层面就取了 (S)。所以本卡的陈述里 (S) 不再以假设出现。
+  ⚠ **这不是说 (S) 可以丢**：丢掉 (S) 时 `towerVertex` 这个定义本身就不对应
+  :e^{i n k_0·X}: 的洛朗展开（指数不是整数）。参见 worldsheet.ddf-operators-v6
+  的【三个条件及其地位】对 (T)(N)(S) 的区分。
+
+  【这条链还缺什么】同点乘积 (5a) 与加权和 (5b) 都未做，见姊妹卡 notes 的转录。
+  特别地 (5b) 的 m δ_{m+n,0} 才是 [A^ε_m, A^δ_n] 右端的来源，
+  而它**第一次**用到 b·a = 2α' k_0·p = 1。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search 对易 / isotropic / "vertex operator"`。
+  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra、
+  worldsheet.vertex-operator-adjoint（塔上 V 的伴随，k_0² = 0，另一条命题）、
+  worldsheet.momentum-tower-fock-space（定义卡）。**没有**塔上 [V, V] 的节点，本卡不重复。
+author: curator
+created: "2026-09-11"
