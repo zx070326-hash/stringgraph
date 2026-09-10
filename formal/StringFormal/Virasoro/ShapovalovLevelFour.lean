@@ -3,6 +3,8 @@ Copyright (c) 2026 stringgraph contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: stringgraph lean-formalizer
 -/
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.Notation
 import StringFormal.Virasoro.ShapovalovLevelThree
 
 /-!
@@ -458,6 +460,134 @@ theorem IsContravariant.gram_level_three_four (hB : IsContravariant R c h B)
     {x y : VermaModule R c h} (hx : x ∈ levelSpan R c h 3) (hy : y ∈ levelSpan R c h 4) :
     B x y = 0 :=
   hB.eq_zero_of_level_ne (by norm_num) hx hy
+
+/-! ### The `5 × 5` determinant, and the Kac formula at `N = 4` -/
+
+set_option maxRecDepth 4000 in
+set_option maxHeartbeats 1000000 in
+/-- **The level-4 Kac determinant.**  The `5 × 5` Gram determinant of
+`L₋₄|c,h⟩`, `L₋₃L₋₁|c,h⟩`, `L₋₂²|c,h⟩`, `L₋₂L₋₁²|c,h⟩`, `L₋₁⁴|c,h⟩` equals
+
+`384 h³ (8h + c - 1) (16h² + 2h(c-5) + c)² (3h² + h(c-7) + c + 2)`
+`  · (16h² + 10ch - 82h + 15c + 66)`.
+
+The four non-trivial factors are the Kac polynomials at `rs = 4` (`h₂₂`, a *rational* Kac
+weight, appearing here for the first time), `rs = 2` (squared, because `p(4-2) = 2`),
+`rs = 3` and `rs = 4` (the pair `h₁₄, h₄₁`).
+
+As with `gram_level_two_det` and `gram_level_three_det`, linear independence of the five
+vectors is PBW and is not available here, so this is the determinant of an explicit matrix
+of inner products. -/
+theorem IsContravariant.gram_level_four_det (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    Matrix.det
+        !![B (desc4 R c h) (desc4 R c h), B (desc4 R c h) (desc31 R c h),
+             B (desc4 R c h) (desc22 R c h), B (desc4 R c h) (desc211 R c h),
+             B (desc4 R c h) (desc1111 R c h);
+           B (desc31 R c h) (desc4 R c h), B (desc31 R c h) (desc31 R c h),
+             B (desc31 R c h) (desc22 R c h), B (desc31 R c h) (desc211 R c h),
+             B (desc31 R c h) (desc1111 R c h);
+           B (desc22 R c h) (desc4 R c h), B (desc22 R c h) (desc31 R c h),
+             B (desc22 R c h) (desc22 R c h), B (desc22 R c h) (desc211 R c h),
+             B (desc22 R c h) (desc1111 R c h);
+           B (desc211 R c h) (desc4 R c h), B (desc211 R c h) (desc31 R c h),
+             B (desc211 R c h) (desc22 R c h), B (desc211 R c h) (desc211 R c h),
+             B (desc211 R c h) (desc1111 R c h);
+           B (desc1111 R c h) (desc4 R c h), B (desc1111 R c h) (desc31 R c h),
+             B (desc1111 R c h) (desc22 R c h), B (desc1111 R c h) (desc211 R c h),
+             B (desc1111 R c h) (desc1111 R c h)]
+      = 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
+          * (3 * h ^ 2 + h * (c - 7) + c + 2)
+          * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) := by
+  rw [hB.comm (desc31 R c h) (desc4 R c h), hB.comm (desc22 R c h) (desc4 R c h),
+    hB.comm (desc211 R c h) (desc4 R c h), hB.comm (desc1111 R c h) (desc4 R c h),
+    hB.comm (desc22 R c h) (desc31 R c h), hB.comm (desc211 R c h) (desc31 R c h),
+    hB.comm (desc1111 R c h) (desc31 R c h), hB.comm (desc211 R c h) (desc22 R c h),
+    hB.comm (desc1111 R c h) (desc22 R c h), hB.comm (desc1111 R c h) (desc211 R c h),
+    hB.gram_level_four_44 hB1, hB.gram_level_four_4_31 hB1, hB.gram_level_four_4_22 hB1,
+    hB.gram_level_four_4_211 hB1, hB.gram_level_four_4_1111 hB1,
+    hB.gram_level_four_31_31 hB1, hB.gram_level_four_31_22 hB1,
+    hB.gram_level_four_31_211 hB1, hB.gram_level_four_31_1111 hB1,
+    hB.gram_level_four_22_22 hB1, hB.gram_level_four_22_211 hB1,
+    hB.gram_level_four_22_1111 hB1, hB.gram_level_four_211_211 hB1,
+    hB.gram_level_four_211_1111 hB1, hB.gram_level_four_1111_1111 hB1]
+  simp [Matrix.det_succ_row_zero, Fin.sum_univ_succ, Fin.succAbove]
+  linear_combination (384 * c ^ 2 * h ^ 3 * (2 * c * h + c + 16 * h ^ 2 - 10 * h)
+      * (c * h + c + 3 * h ^ 2 - 7 * h + 2)
+      * (20 * c * h ^ 2 + 40 * c * h + 15 * c + 32 * h ^ 3 - 76 * h ^ 2 + 104 * h - 15))
+    * two_mul_centralTerm_two R
+
+omit [Algebra ℚ R] in
+/-- The Kac weight at `rs = 4` with `r = s = 2` is *rational*: `h₂₂ = (1-c)/8`.  This is the
+first level at which a Kac root is a rational function of `c` rather than a root of an
+irreducible quadratic, and it is what makes the level-4 determinant factor over `ℚ(c)` into
+one linear and three quadratic pieces. -/
+lemma kac_factor_rs_two_two {h22 : R} (hs : 8 * h22 = 1 - c) :
+    8 * (h - h22) = 8 * h + c - 1 := by
+  linear_combination -hs
+
+omit [Algebra ℚ R] in
+/-- The two Kac roots at `rs = 4` with `(r,s) = (1,4), (4,1)` are the roots of
+`16X² - 2(41-5c)/2 X + (15c+66)`; equivalently `h₁₄ + h₄₁ = (41-5c)/8` and
+`h₁₄h₄₁ = (15c+66)/16`.  This is the corresponding factorisation with denominators cleared. -/
+lemma kac_factor_rs_four {h14 h41 : R}
+    (hs : 8 * (h14 + h41) = 41 - 5 * c) (hp : 16 * (h14 * h41) = 15 * c + 66) :
+    16 * ((h - h14) * (h - h41)) = 16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66 := by
+  linear_combination (-2 * h) * hs + hp
+
+set_option maxHeartbeats 1000000 in
+/-- **The level-4 determinant is Kac's product.**  Given the Kac weights at `rs ≤ 4`
+— `h₁₁ = 0`; `{h₁₂, h₂₁}` with `h₁₂ + h₂₁ = (5-c)/8`, `h₁₂h₂₁ = c/16`;
+`{h₁₃, h₃₁}` with `h₁₃ + h₃₁ = (7-c)/3`, `h₁₃h₃₁ = (c+2)/3`; `h₂₂ = (1-c)/8`;
+and `{h₁₄, h₄₁}` with `h₁₄ + h₄₁ = (41-5c)/8`, `h₁₄h₄₁ = (15c+66)/16` — the level-4 Gram
+determinant is
+
+`K₄ (h - h₁₁)^{p(3)} ((h - h₁₂)(h - h₂₁))^{p(2)} ((h - h₁₃)(h - h₃₁))^{p(1)}`
+`   (h - h₂₂)^{p(0)} ((h - h₁₄)(h - h₄₁))^{p(0)}`
+
+with `p(3) = 3`, `p(2) = 2`, `p(1) = p(0) = 1` and `K₄ = 384 · 8 · 16² · 3 · 16 = 37748736`.
+This is exactly the Kac determinant formula `det M_N = K_N ∏_{rs ≤ N} (h - h_{r,s})^{p(N-rs)}`
+specialised to `N = 4`, in this (unnormalised) basis. -/
+theorem IsContravariant.gram_level_four_det_eq_kac (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) {h11 h12 h21 h13 h31 h22 h14 h41 : R}
+    (e11 : h11 = 0)
+    (e2s : 8 * (h12 + h21) = 5 - c) (e2p : 16 * (h12 * h21) = c)
+    (e3s : 3 * (h13 + h31) = 7 - c) (e3p : 3 * (h13 * h31) = c + 2)
+    (e22 : 8 * h22 = 1 - c)
+    (e4s : 8 * (h14 + h41) = 41 - 5 * c) (e4p : 16 * (h14 * h41) = 15 * c + 66) :
+    Matrix.det
+        !![B (desc4 R c h) (desc4 R c h), B (desc4 R c h) (desc31 R c h),
+             B (desc4 R c h) (desc22 R c h), B (desc4 R c h) (desc211 R c h),
+             B (desc4 R c h) (desc1111 R c h);
+           B (desc31 R c h) (desc4 R c h), B (desc31 R c h) (desc31 R c h),
+             B (desc31 R c h) (desc22 R c h), B (desc31 R c h) (desc211 R c h),
+             B (desc31 R c h) (desc1111 R c h);
+           B (desc22 R c h) (desc4 R c h), B (desc22 R c h) (desc31 R c h),
+             B (desc22 R c h) (desc22 R c h), B (desc22 R c h) (desc211 R c h),
+             B (desc22 R c h) (desc1111 R c h);
+           B (desc211 R c h) (desc4 R c h), B (desc211 R c h) (desc31 R c h),
+             B (desc211 R c h) (desc22 R c h), B (desc211 R c h) (desc211 R c h),
+             B (desc211 R c h) (desc1111 R c h);
+           B (desc1111 R c h) (desc4 R c h), B (desc1111 R c h) (desc31 R c h),
+             B (desc1111 R c h) (desc22 R c h), B (desc1111 R c h) (desc211 R c h),
+             B (desc1111 R c h) (desc1111 R c h)]
+      = 37748736 * (h - h11) ^ 3 * ((h - h12) * (h - h21)) ^ 2
+          * ((h - h13) * (h - h31)) * (h - h22) * ((h - h14) * (h - h41)) := by
+  rw [hB.gram_level_four_det hB1, ← kac_factor_rs_two e2s e2p, ← kac_factor_rs_three e3s e3p,
+    ← kac_factor_rs_four e4s e4p, ← kac_factor_rs_two_two e22, e11]
+  ring
+
+omit [Algebra ℚ R] in
+/-- Sanity check at `c = 1`, where the Kac weights degenerate to `h_{r,s} = (r-s)²/4`:
+`h₁₁ = 0`, `h₁₂ = h₂₁ = 1/4`, `h₁₃ = h₃₁ = 1`, `h₂₂ = 0`, `h₁₄ = h₄₁ = 9/4`.
+The level-4 determinant becomes `9216 h⁴ (4h-1)⁴ (h-1)² (4h-9)²`, a perfect square times
+`h⁴` as it must be for coincident roots (`h₂₂ = h₁₁ = 0` at `c = 1`). -/
+lemma kac_level_four_at_c_one (x : R) :
+    384 * x ^ 3 * (8 * x + (1 : R) - 1) * (16 * x ^ 2 + 2 * x * ((1 : R) - 5) + 1) ^ 2
+        * (3 * x ^ 2 + x * ((1 : R) - 7) + 1 + 2)
+        * (16 * x ^ 2 + 10 * (1 : R) * x - 82 * x + 15 * (1 : R) + 66)
+      = 9216 * x ^ 4 * (4 * x - 1) ^ 4 * (x - 1) ^ 2 * (4 * x - 9) ^ 2 := by
+  ring
 
 end Level4
 
