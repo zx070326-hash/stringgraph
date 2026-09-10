@@ -16,6 +16,7 @@ import StringFormal.NoGhost.SpuriousShell
 import StringFormal.NoGhost.VertexOperator
 import StringFormal.NoGhost.DDF
 import StringFormal.NoGhost.VertexWeight
+import StringFormal.NoGhost.DDFOperator
 import StringFormal.NoGhost.TowerPairing
 import StringFormal.NoGhost.QuotientForm
 import StringFormal.NoGhost.LevelTwo
