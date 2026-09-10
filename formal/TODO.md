@@ -65,7 +65,37 @@
   未取完化（代数 Fock 空间，不是 Hilbert 空间）；未做复双线性/埃尔米特版本。
   图侧：建议新建节点 `worldsheet.bosonic-fock-space`（定义卡）与
   `worldsheet.fock-indefinite-form`（命题卡），由 curator 添加。
-- [ ] `sugawara`：`L n` 在 Fock 空间上的作用，证明满足 Virasoro 关系且 `c = D`。这一步的正规序处理是主要难点。
+- [x] `sugawara`：`L n` 在 Fock 空间上的作用，Virasoro 关系与 `c = D`。
+  见 `StringFormal/NoGhost/Sugawara.lean`（约 1400 行，无 sorry，公理只有标准三条）。
+  零模按**参数**处理：`a : Fin D → R` 代表 `a^μ = α^μ_0 = (2α')^{1/2} k^μ`（`x^μ` 未引入，
+  无鬼定理不需要）。度规仍是对角 `η : Fin D → R`，且**所有实质命题都带假设
+  `hη : ∀ μ, η μ * η μ = 1`**（即 `η_{μμ} = η^{μμ}`，`minkowski` 满足），因为同一个 `η`
+  既用于对易关系又用于缩并时空指标。做到：
+  - `mode η a μ j`（任意 `j : ℤ` 的 `α^μ_j`：`j>0` 湮灭、`j<0` 产生、`j=0` 标量 `a^μ`）
+    与全模态对易关系 `lie_mode_mode`；
+  - `lsumLocFin`：**局部有限**算子族的和，这是「`Σ_{j∈ℤ}` 在代数 Fock 空间上逐向量只有
+    有限多非零项」的形式化，不需要任何收敛性假设；
+  - `Lop η a n = ½ Σ_{j∈ℤ} :α_{n-j}·α_j:`（`nordPair` 是产生-湮灭正规序，`a^X = 0`），
+    以及「用任何足够大的有限指标集计算」的 `Lop_apply`；
+  - `lie_Lop_mode`：**`[L_m, α^ν_p] = -p α^ν_{m+p}`**；
+  - `eq_smul_id_of_lie_mode`：Fock 表示的**不可约性/刚性**（与所有模态对易的算子是标量）；
+  - `Lop_apply_one_of_pos`（`L_n|k⟩ = 0`, `n ≥ 1`）、`Lop_zero_apply_one`
+    （`L_0|k⟩ = α'k²|k⟩`）、`Lop_zero_apply_of_mem_levelSubmodule`
+    （**`L_0 = α'k² + N` 在 level `N` 片上**）；
+  - `lie_Lop_Lop`：**`[L_m,L_n] = (m-n)L_{m+n} + D·(m³-m)/12·δ_{m+n,0}`，即 `c = D`**；
+  - `virRep` / `virRep_lgen` / `virRep_cgen` / `virRep_lie`：`L n ↦ L_n`、`C ↦ D·id`
+    的线性映射及其保李括号性质（未打包成 `LieHom`：Mathlib v4.33.1 只把
+    `Module.End R M` 的 `LieRing` 结构做成 `local instance`）。
+  证明路线（不走硬算重排）：`[L_m,α_p]` → Jacobi ⇒ `W_{m,n} := [L_m,L_n]-(m-n)L_{m+n}`
+  与所有模态对易 ⇒ 刚性给出 `W = z(m,n)·id` ⇒ `z(m,0)=0` 加 2-上闭链恒等式给出
+  `m+n≠0` 时 `z=0` 与对角上的递推 `(m-1)z(m+1)=(m+2)z(m)` ⇒ 真空上算两个初值
+  `z(1,-1)=0`、`z(2,-2)=D/2`（`D` 只在 `Σ_μ η^{μμ}η_{μμ}=D` 这一处进入）。
+  **本项未做**：`L_m` 与全纯能动张量 Laurent 模的等同（那是 `--via-ope` 那条推导的内容）；
+  `L_m^† = L_{-m}` 对 `Fock.pairing` 的伴随性；正定性/幺正性。
+  图侧：建议 curator 把 `worldsheet.virasoro-generators-free-boson` 的
+  `formal.lean_decl` 填 `StringFormal.NoGhost.Fock.Lop`，把
+  `worldsheet.free-boson-central-charge-d--via-mode-algebra` 标 `formalized`，
+  `lean_decl` 填 `StringFormal.NoGhost.Fock.lie_Lop_Lop`。
 - [ ] `physical-states`：`H_phys` 子模与零模态。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
