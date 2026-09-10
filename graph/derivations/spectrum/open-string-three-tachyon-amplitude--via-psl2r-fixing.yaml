@@ -75,7 +75,7 @@ gaps:
   - "**路径积分测度未定义**（本批次共有）：status 上限 physical-argument。"
   - "**质量壳条件的搬运**（见第五条依赖的 inferred 说明）：光锥谱 ⇒ 协变振幅外线，本图无节点。"
 notes: |
-  第 (2) 步的运动学是初等计算，可复核；但整条推导受 (1) 的路径积分组装限制，
-  即使 reviewer 复核 (2) 也不会升级本推导的 status。
+  reviewer-verified: reviewer-ch6, 2026-09-11（仅第 (2) 步：2α'k_i·k_j = −1 ⇒ 1 + 2α'k_i·k_j = 0 的运动学）
+  整条推导受 (1) 的路径积分组装限制，status 仍为 physical-argument。
 author: curator-polchinski-ch6
 created: "2026-09-11"

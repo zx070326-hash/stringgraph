@@ -4,7 +4,9 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: spectrum.closed-string-four-tachyon-integral
-    note: 提供待算的复积分 ∫_C d²z |z|^{−α'u/2−4}|1−z|^{−α't/2−4} 与前因子 g_c⁴C_{S₂}。
+    note: 提供待算的复积分 ∫_C d²z |z|^{−α'u/2−4}|1−z|^{−α't/2−4} 与前因子 g_c⁴C_{S₂}（C_{S₂} 作符号）。
+  - id: spectrum.sphere-normalization-from-factorization
+    note: 提供 C_{S₂} = 8π/(α'g_c²)（(6.6.8)），使前因子合成 8πg_c²/α'。
   - id: math.euler-beta-integral
     note: |
       提供实 Beta 积分与 Γ 的极点结构。⚠ **复平面上的积分 I(a,b) = ∫d²z|z|^{−2a}|1−z|^{−2b}

@@ -1,7 +1,7 @@
 id: spectrum.sphere-tachyon-expectation-smooth-at-infinity--via-inversion
 target: spectrum.sphere-tachyon-expectation-smooth-at-infinity
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: spectrum.sphere-n-tachyon-expectation-value
     note: 提供被改写的表达式 ∏_{i<j}|z_ij|^{α'k_i·k_j} 与动量守恒 delta 函数。
@@ -40,7 +40,7 @@ summary: |
 gaps:
   - "**这一论证的来源是习题解答而非正文**（抽取记录 Q17 明记）：原书正文是否论证了
      「顶点算子可以放到 z = ∞」未核实，可能只留给习题 6.1。按 lead 裁决，
-     **reviewer 须复核上面的换片代数**；复核后请在此写 reviewer-verified 记录。"
+     Headrick 作唯一成文来源时 reviewer 须复核计算——**已复核**（见 notes）。"
   - "**质量壳条件的搬运未被节点承载**（见第三条依赖的 inferred 说明）：
      从光锥谱的 α'm² = −4 到协变振幅外线的 α'k² = 4，本图没有节点。"
   - "**只覆盖 tachyon**：带 ∂X 的顶点算子换片时有额外幂次，本推导不涉及。"
@@ -50,6 +50,10 @@ gaps:
      动量守恒唯一确定的顶点算子期望值」，[H] 直接对它做换片。两式在原书中的确切关系
      （是否 (6.2.31) 就是含 ∂X 因子的推广）本图未核对。"
 notes: |
+  reviewer-verified: reviewer-ch6, 2026-09-11
+  复核对象：summary 的换片代数（|z_ij| = |u_ij|/(|u_i||u_j|)、动量守恒改写、α'k_i² = 4 ⇒ ∏|u_i|⁴）。
+  升级依据：初等可复核例外；前提（(6.2.31) 的乘积形式、Σk = 0、α'k_i² = 4）已在目标陈述与依赖里写全。
+
   本推导是「用共形 Killing 群固定三点、其中一点取 ∞」这一操作在本图中的**唯一**支撑。
   凡使用该操作的节点（spectrum.closed-string-four-tachyon-integral、
   spectrum.open-string-four-tachyon-amplitude）都应依赖本条或在 gaps 里回指它。

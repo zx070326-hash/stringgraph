@@ -21,8 +21,9 @@ depends_on:
       该节点陈述的是**谱**上的 S ≤ α'm² + 1，来源是 §1.3 (1.3.43)；
       把它作为**振幅参数**的记号在 §6.4 里出现，两处不互相引用。
     convention_map: |
-      conv.metric-mostly-plus 下 m² = −x（x 为相应通道的 Mandelstam 变量），
-      故谱上的 α'm² + 1 与振幅参数里的 1 + α'x 在极点位置上一致。
+      conv.metric-mostly-plus 下 x = −(k_i+k_j)² = m²_int（x 为相应通道的 Mandelstam 变量，
+      等于该通道中间态质量的平方），故谱上的 α'm² + 1 与振幅参数里的 1 + α'x 在极点位置上一致
+      （α'm² = −1 ⟺ α'x = −1）。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.4, eq. (6.4.23)，并见 (6.4.20)–(6.4.22)，p.183"

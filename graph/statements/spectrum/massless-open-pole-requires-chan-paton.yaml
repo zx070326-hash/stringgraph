@@ -9,7 +9,7 @@ statement: |
   **(1)** 把另一循环序（t ↔ u 交换）的贡献加进来后，该极点的留数**相消**：
   在**没有** Chan–Paton 因子的纯四 tachyon 开弦振幅里，**α' s = 0 处没有极点**。
 
-  **(2)** 只有当各循环序配上互不相同的 Chan–Paton 迹（spectrum.chan-paton-amplitude-trace-factor）
+  **(2)** 只有当各循环序配上互不相同的 Chan–Paton 迹（spectrum.chan-paton-factors）
   且这些迹不相消时，α' s = 0 的极点才真实存在——它对应中间态的**无质量规范玻色子**，
   其留数正比于结构常数型的组合。这正是 (6.5.14) 定出 Yang–Mills 耦合 g'_o 时所用的极点。
 

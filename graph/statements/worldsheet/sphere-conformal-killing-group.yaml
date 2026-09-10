@@ -50,6 +50,10 @@ notes: |
   的正则性得到的条件是 **n > 2**，且他下一句自己就说「only a₀, a₁, a₂ can be non-zero」。
   本卡片按 n > 2 写（抽取记录 E89 已指出这处前后矛盾）。
 
+  **area 归属（reviewer-ch6 建议，2026-09-11）**：本命题的内容是「P¹ 的共形自同构群 / 全局全纯
+  向量场」，更适合 cft 或 math area；现放 worldsheet 是沿用抽取记录 E89 的归类。
+  id 不可改，日后换代时新建 cft.* 或 math.* 卡并给本卡写 superseded_by。
+
   **数学表述的对应**：本命题等价于「P¹ 上的全局全纯向量场空间是 sl(2,C)，dim_C = 3」。
   本图目前**没有**该数学事实的文献来源节点；若日后 researcher 登记一本复几何/黎曼曲面教材，
   可为本命题补一条 --via-<math-source> 的 rigorous 推导（见推导节点的 gaps）。

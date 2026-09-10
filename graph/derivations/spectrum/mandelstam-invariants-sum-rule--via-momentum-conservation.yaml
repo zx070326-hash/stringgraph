@@ -1,7 +1,7 @@
 id: spectrum.mandelstam-invariants-sum-rule--via-momentum-conservation
 target: spectrum.mandelstam-invariants-sum-rule
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: worldsheet.open-string-mass-shell
     inferred: true
@@ -28,15 +28,15 @@ summary: |
   （末步用 conv.metric-mostly-plus 的 m² = −k²）。
   代入 α'k_i² = 1（开弦 tachyon）得 −4/α'；代入 α'k_i² = 4（闭弦 tachyon）得 −16/α'。
 gaps:
-  - "**未获 reviewer 复核**：本推导符合 docs/STATUS_LEVELS.md「初等可复核」例外的前两条，
-     缺 reviewer-verified 记录，故暂标 physical-argument。"
   - "**质量壳条件的搬运未被节点承载**（见两条依赖的 inferred 说明）：从光锥量子化的谱
      到协变振幅外线的 on-shell 条件，本图没有节点。这是本图从第 1 章到第 6 章之间的一处系统性缺环，
      值得 lead 记入待建清单。"
   - "**「全部取入射约定」这一符号约定未核对原书**：若某些腿取出射，s、t、u 的定义相差符号，
      结论形式不变但表达式的读法要改。"
 notes: |
-  升级到 rigorous 只需 reviewer 复核这三行代数并在此写 reviewer-verified 记录；
-  但第二条 gap（质量壳条件的搬运）不会因此消失，它需要一个新节点。
+  reviewer-verified: reviewer-ch6, 2026-09-11
+  复核对象：summary 的三行代数。升级依据：初等可复核例外。另有 Lean 推导 --via-lean（formalized）。
+
+  质量壳条件搬运的 gap 不因复核消失，它需要一个新节点（lead 已记入 ROADMAP 待建）。
 author: curator-polchinski-ch6
 created: "2026-09-11"

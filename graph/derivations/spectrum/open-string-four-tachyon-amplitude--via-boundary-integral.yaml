@@ -47,7 +47,7 @@ gaps:
   - "**y₃ → ∞ 的合法性只有类比支撑**（见第五条依赖的 inferred 说明；抽取记录 Q17 明记
      原书正文是否论证过这一点未核实）。"
   - "**三个区间的贡献如何合并、循环序与 Chan–Paton 迹如何配对，本推导不涉及**
-     （见 spectrum.chan-paton-amplitude-trace-factor）。"
+     （见 spectrum.chan-paton-factors）。"
   - "**路径积分测度未定义**（本批次共有）。"
 notes: |
   本推导刻意**不**写出合并后的完整表达式：那属 spectrum.veneziano-amplitude-weak，

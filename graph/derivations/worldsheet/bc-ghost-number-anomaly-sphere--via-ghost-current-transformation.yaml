@@ -51,8 +51,8 @@ gaps:
   - "**一般亏格的公式不在本推导范围**：鬼数反常 ⇒ Riemann–Roch（抽取记录 E82）属第 5 章，
      另一名 curator 在建。**待 ch5 节点合入后，本推导可作为其 g = 0 特例接边。**"
 notes: |
-  第 (2) 步的代数（−3/z）是 curator 的显式验算，来源只给结论。
-  它是有限步初等计算，若 reviewer 复核可按 STATUS_LEVELS 的例外升级**这一步**，
-  但整条推导仍受围道变形与路径积分两条缺口限制，不会因此升到 rigorous。
+  reviewer-verified: reviewer-ch6, 2026-09-11（仅第 (2) 步：代入 u = 1/z 得 (3/2)(∂²u)/(∂u) = −3/z）
+  第 (2) 步的代数是 curator 的显式验算，来源只给结论；整条推导仍受围道变形与路径积分
+  两条缺口限制，status 仍为 physical-argument。
 author: curator-polchinski-ch6
 created: "2026-09-11"

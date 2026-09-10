@@ -14,12 +14,9 @@ statement: |
     S_{S₂} = i g_c⁴ C_{S₂} (2π)²⁶ δ²⁶(Σ_i k_i)
              ∫_C d²z₄  |z₄|^{−α'u/2 − 4} |1 − z₄|^{−α't/2 − 4}    （(6.6.4) 的化简形式）。
 
-  **(3)（极点与归一化）** |z₄| → ∞ 的端点发散给出 **α' s = −4** 处的极点，
-  即闭弦 tachyon 中间态上壳；与因子化比较定出
-    **C_{S₂} ≡ e^{−2λ} C^X_{S₂} C^g_{S₂} = 8π / (α' g_c²)**   （(6.6.8)）。
-
   **本命题不断言什么**：不给出 (6.6.2) 的显式前因子；不把 (2) 的积分算出
-  （那是 spectrum.virasoro-shapiro-amplitude）。
+  （那是 spectrum.virasoro-shapiro-amplitude）；不定 C_{S₂} 的数值，也不涉及 α's = −4 处的极点
+  （那是 spectrum.sphere-normalization-from-factorization）。
 uses_conventions:
   - conv.worldsheet-euclidean
   - conv.worldsheet-complex-coords
@@ -27,7 +24,7 @@ uses_conventions:
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.6, eq. (6.6.2)（三 tachyon）、(6.6.4)（四 tachyon）、(6.6.7)（α's = −4 的极点）、(6.6.8)（C_{S₂} = 8π/(α'g_c²)），p.192–193"
+    loc: "§6.6, eq. (6.6.2)（三 tachyon）、(6.6.4)（四 tachyon），p.192–193"
     note: |
       literature/extractions/polchinski-1998-v1.md#E104，等级 **L1**（schrans-2020 §6.60–§6.63，
       笔记 p.326–328，逐页读到）。[S] 对三点的评语逐字：「This is just a duplication on the open
@@ -35,12 +32,11 @@ sources:
       即 (6.6.2) 的细节在二手源里**没有被写出**，本卡片的 (1) 因此只作结构性陈述。
       ⚠ 「z₃ → ∞ 合法」这一步：[S] 只写「Just as for the open string case (6.4.5) the z₃ → ∞
       does not cause a problem」，**不给论证**（抽取记录 Q17）。
-  - ref: headrick-2008
-    loc: "Problem 6.11（PDF p.49）：逐字「and the result **(6.6.8)**, C_{S₂} ≡ e^{−2λ}C^X_{S₂}C^g_{S₂} = 8π/(α'g_c²)」"
-    note: C_{S₂} 的第二个独立源（L1）。按 lead 裁决作核对源/唯一成文来源使用。
-tags: [spectrum, tree-level, sphere, closed-string, tachyon, four-point, psl2c, normalization]
+tags: [spectrum, tree-level, sphere, closed-string, tachyon, four-point, psl2c]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E104 建立。
+  2026-09-11 按 reviewer-ch6 把原 (3)（α's = −4 极点 + C_{S₂} = 8π/(α'g_c²)）拆到
+  spectrum.sphere-normalization-from-factorization；本卡未合并 main，直接改文本。
 
   **⚠ 上游 ch5 节点尚未进入 main**（主公式 (5.3.9)、FP 手续），处理同本批次其它节点。
 

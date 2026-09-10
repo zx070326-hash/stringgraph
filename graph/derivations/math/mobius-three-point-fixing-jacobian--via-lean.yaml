@@ -1,0 +1,62 @@
+id: math.mobius-three-point-fixing-jacobian--via-lean
+target: math.mobius-three-point-fixing-jacobian
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.mobius_three_point_jacobian"
+    note: |
+      本仓库，formal 侧提交 70b62c5（"formal: prove Mobius three-point fixing Jacobian
+      (Vandermonde n=3)"），文件初建 d084e5c；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的声明：`StringFormal.Math.{vandermonde_fin_three, mobius_three_point_jacobian,
+      det_mobius_matrix, mobius_three_point_jacobian_eq_neg, mobius_three_point_det_ne_zero,
+      mobius_three_point_fixing_bijective}`。
+      formal/TODO.md 的 `mobius-three-point-jacobian` 记「无 sorry，公理只有标准三条」。
+      公理检查：`uv run stringgraph check-axioms --decl StringFormal.Math.mobius_three_point_jacobian
+      --decl StringFormal.Math.mobius_three_point_fixing_bijective`，运行记录见 notes。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/Math/MobiusJacobian.lean A 节内完成，
+  外加 Mathlib 的 Vandermonde 行列式公式。
+
+  1. **矩阵**（`vandermonde_fin_three`）：`Matrix.vandermonde z` 展开为第 i 行 (1, z_i, z_i²)，
+     即 δz_i = a₀ + a₁z_i + a₂z_i² 的系数矩阵。
+  2. **行列式**（`mobius_three_point_jacobian`，目标陈述的核心等式）：Mathlib 的
+     `Matrix.det_vandermonde` 给 ∏_{i<j}(z_j − z_i)，展开 Fin 3 的乘积得
+     (z₂ − z₁)(z₃ − z₁)(z₃ − z₂)；任意交换环。`det_mobius_matrix` 用 `det_fin_three` 直接展开
+     三个变量的矩阵，是同一式的独立核对。
+  3. **符号**（`mobius_three_point_jacobian_eq_neg`）：`ring` 把上式改写为 −(z₁−z₂)(z₁−z₃)(z₂−z₃)
+     = −z₁₂z₁₃z₂₃。
+  4. **非退化与双射**（域上，`mobius_three_point_det_ne_zero`、`mobius_three_point_fixing_bijective`）：
+     `Matrix.det_vandermonde_ne_zero_iff` 把 det ≠ 0 化为 z 单射；再由
+     `Matrix.mulVec_injective_iff_isUnit` / `mulVec_surjective_iff_isUnit` 得
+     (a₀,a₁,a₂) ↦ (δz_i) 是双射——即「三个 CKV 参数恰好够把三点固定到任意指定位移」。
+
+  目标陈述 (1)(2) 的 |z₁₂|²|z₁₃|²|z₂₃|² 与 |y₁₂y₁₃y₂₃| 是对第 2–3 步取模、
+  以及全纯/反全纯两份相乘的一行算术，Lean 没有单独声明，见 gaps。
+gaps:
+  - |
+    **(1)(2) 的取模/相乘没有单独 Lean 声明**：|det|、|det|·|det̄| = |z₁₂|²|z₁₃|²|z₂₃|² 是从
+    `mobius_three_point_jacobian_eq_neg` 出发的一行算术，未在 Lean 内写出。
+  - |
+    **只覆盖无穷小陈述**：有限 Möbius 变换的锐三重传递（math.mobius-group-sharply-three-transitive）
+    与「FP Jacobian ⇒ 测度换算」（第 5 章）不在 Lean 内，也不是本卡的断言。
+  - |
+    **文献侧无带编号的独立来源**：目标陈述的 sources 只有物理书里与之同形的鬼场期望值；
+    Vandermonde 行列式本身的数学教材定位未登记。这不影响 formalized 的判定。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **depends_on 为空是有意的**：输入只有 Mathlib 的 `Matrix.det_vandermonde`，本图不为
+  Mathlib 基础库建节点；本卡是数学输入叶子，与 math.euler-partition-generating-function--via-lean 同型。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，MobiusJacobian.olean 已存在）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.mobius_three_point_jacobian --decl StringFormal.Math.mobius_three_point_fixing_bijective --decl StringFormal.Math.mobius_three_point_jacobian_eq_neg
+
+  三条均 `ok … axioms: propext Classical.choice Quot.sound`，`0 non-standard, 0 missing; 0 errors`。
+  本分支未改动 formal/ 下任何文件（MobiusJacobian.lean 经 git merge main 合入，逐字相同）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

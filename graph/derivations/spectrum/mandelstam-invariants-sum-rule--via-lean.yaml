@@ -1,0 +1,64 @@
+id: spectrum.mandelstam-invariants-sum-rule--via-lean
+target: spectrum.mandelstam-invariants-sum-rule
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.mandelstam_sum"
+    note: |
+      本仓库，formal 侧提交 c9e5626（"formal: prove Mandelstam sum rule s+t+u = sum m_i^2 and
+      four-tachyon corollaries"）；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的声明：`StringFormal.Math.{mandelstamS, mandelstamT, mandelstamU, mandelstam_sum,
+      mandelstam_sum_four_tachyons, minkowskiForm, minkowskiForm_apply, minkowskiForm_symm,
+      mandelstam_sum_diagonal_metric}`。
+      formal/TODO.md 的 `mandelstam-sum-rule` 记「无 sorry，公理只有标准三条」。
+      公理检查：`uv run stringgraph check-axioms --decl StringFormal.Math.mandelstam_sum
+      --decl StringFormal.Math.mandelstam_sum_four_tachyons`，运行记录见 notes。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/Math/MobiusJacobian.lean B 节内完成。
+
+  1. **定义**：对任意交换环 K 上的模 M 与双线性型 B，`mandelstamS B k = −B(k₀+k₁, k₀+k₁)` 等
+     （Lean 0 起数：k 0 = k₁）。负号是 conv.metric-mostly-plus。
+  2. **主定理**（`mandelstam_sum`，目标陈述的 s + t + u = Σm_i²）：前提 B 对称、Σ_i k_i = 0、
+     B(k_i,k_i) = −m_i²。由 k₁+k₂+k₃ = −k₀ 得 Σ_{j≠0} B(k₀,k_j) = −B(k₀,k₀)，展开三个平方项后
+     `linear_combination` 收尾。**不需要**非退化、号差、域，甚至不需要 2 可逆。
+  3. **开弦四 tachyon**（`mandelstam_sum_four_tachyons`）：加前提 α'm_i² = −1，
+     `linear_combination` 四条得 α'(s+t+u) = −4。
+  4. **对角度规的具体版本**（`mandelstam_sum_diagonal_metric`）：`minkowskiForm η` =
+     `Matrix.toBilin' (diagonal η)`，`minkowskiForm_apply` 把它展开成 Σ_μ η_μ x_μ y_μ；
+     取 η = (−1, 1, …, 1) 即物理的 mostly-plus 陈述，由第 2 步实例化。
+
+  Lean 里**不出现**的物理内容（须由图承载）：B 是 Minkowski 型、m_i 是外线态的质量、
+  质量壳条件来自谱（见 --via-momentum-conservation 的 inferred 边与 gaps）。
+gaps:
+  - |
+    **闭弦情形 α'(s+t+u) = −16 没有单独的 Lean 声明**：它是 `mandelstam_sum` 取 α'm_i² = −4 的
+    一行代入（与 `mandelstam_sum_four_tachyons` 的证明逐字同型，只把 −1 换成 −4），
+    formalizer 只写了开弦特化。建议 formalizer 补 `mandelstam_sum_four_closed_tachyons`
+    后把本条 gap 删去；在此之前，本卡陈述的第三句（闭弦 −16/α'）由 --via-momentum-conservation
+    （rigorous，reviewer-ch6 复核）承载。
+  - |
+    **质量壳条件的搬运不在 Lean 内**：m_i 在 Lean 里只是满足 B(k_i,k_i) = −m_i² 的标量，
+    「它等于光锥谱的质量」这一识别由图的 inferred 边承载（lead 已记 ROADMAP 待建
+    「光锥质量壳 → 协变振幅外线 on-shell」）。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **depends_on 为空是有意的**：输入只有 Mathlib 的双线性型与 Fin 求和引理；
+  本卡是纯运动学的数学输入叶子。
+
+  **不挂 `regge_intercept_sum_four_tachyons`**：该声明证的是 α_c(s)+α_c(t)+α_c(u) = −1，
+  额外消耗截距 a = 1；按 formalizer 建议，它不属本卡（本卡只断言 −4 形式），
+  见目标陈述 notes。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，MobiusJacobian.olean 已存在）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.mandelstam_sum --decl StringFormal.Math.mandelstam_sum_four_tachyons --decl StringFormal.Math.regge_intercept_sum_four_tachyons
+
+  三条均 `ok … axioms: propext Classical.choice Quot.sound`，`0 non-standard, 0 missing; 0 errors`。
+  本分支未改动 formal/ 下任何文件（MobiusJacobian.lean 经 git merge main 合入，逐字相同）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

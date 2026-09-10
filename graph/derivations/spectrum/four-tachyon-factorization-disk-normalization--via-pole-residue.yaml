@@ -16,7 +16,7 @@ depends_on:
     note: |
       标 inferred：提供「s = −1/α' 就是开弦 tachyon 上壳」这一识别（α'm² = −1）。
       该节点出自光锥量子化（§1.3），与 §6.4 不互相引用。
-    convention_map: conv.metric-mostly-plus 下 s 通道不变量 s = −(k₁+k₂)² 与中间态质量满足 s = −m²，故 α'm² = −1 ⟺ s = −1/α'。
+    convention_map: conv.metric-mostly-plus 下 s 通道不变量 s = −(k₁+k₂)² = m²_int（中间态质量的平方），故 α'm² = −1 ⟺ α's = −1，即 s = −1/α'。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.4, eq. (6.4.11)/(6.4.13)/(6.4.14)，p.179–183"

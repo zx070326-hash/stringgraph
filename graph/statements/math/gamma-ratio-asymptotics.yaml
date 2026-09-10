@@ -1,6 +1,6 @@
 id: math.gamma-ratio-asymptotics
 kind: proposition
-title: Γ 商的渐近 Γ(z+a)/Γ(z+b) ∼ z^{a−b} 与 Beta 函数的 Regge 型渐近 B(a,b) ∼ Γ(b) a^{−b}
+title: Γ 商的渐近 Γ(z+a)/Γ(z+b) ∼ z^{a−b} 与 Beta 函数的单参数渐近 B(a,b) ∼ Γ(b) a^{−b}
 statement: |
   **(1)（Γ 商）** 对固定的 a, b ∈ C 与任意 δ > 0，当 |z| → ∞ 且 |arg z| ≤ π − δ 时
     Γ(z + a) / Γ(z + b) = z^{a−b} ( 1 + O(1/z) )。
@@ -9,17 +9,8 @@ statement: |
   （math.euler-beta-integral），对**固定**的 b，当 |a| → ∞ 且 |arg a| ≤ π − δ 时
     B(a, b) = Γ(b) · a^{−b} ( 1 + O(1/a) )。
 
-  **(3)（本图使用的形式）** 用于 Regge 极限时取 a = −α(s)（s → +∞，故 a 沿**负实轴**趋于 ∞）、
-  b = −α(t)（固定）。形式上代入 (2) 得
-    B(−α(s), −α(t)) ∼ Γ(−α(t)) · (−α(s))^{α(t)} ∝ s^{α(t)} Γ(−α(t))，
-  即 Regge 幂次由 t 通道的轨迹函数 α(t) 给出。
-  ⚠ **该代入超出 (1)(2) 的适用域**：arg a = π 恰是被排除的方向，且 Γ(a) 的极点
-  a = 0, −1, −2, … 全部落在这条射线上。物理文献的做法是让 s 带一个小虚部
-  （或等价地对极点做平均），本图不把这一步当作已论证，见推导 gaps。
-
-  **(4)（Stirling 公式的记录）** 上面 (1) 的通常证明途径是 Stirling 公式
-    Γ(x + 1) = x^x e^{−x} (2π x)^{1/2} (1 + O(1/x))。
-  ⚠ 见 notes 中关于 Polchinski 印刷版与二手源转引之间的差异。
+  Regge 极限中把 (2) 用在 a = −α(s)（沿负实轴趋于无穷）上的做法**超出本命题的适用域**，
+  见 notes 的「本图使用的形式」与推导 gaps。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.4, eq. (6.4.28) 的推导（Regge 极限中对三项 Beta 函数逐项用 Stirling 公式取 s → ∞ 极限），p.183–184"
@@ -29,6 +20,19 @@ sources:
       ⚠ 这是**物理书**的位置，不是数学文献；本条命题的数学地位见 notes。
 tags: [math, special-functions, gamma-function, asymptotics, stirling, regge]
 notes: |
+  **本图使用的形式（原 statement (3)，2026-09-11 按 reviewer-ch6 移入 notes）**：
+  用于 Regge 极限时取 a = −α(s)（s → +∞，故 a 沿**负实轴**趋于 ∞）、b = −α(t)（固定）。
+  形式上代入 (2) 得 B(−α(s), −α(t)) ∼ Γ(−α(t)) · (−α(s))^{α(t)} ∝ s^{α(t)} Γ(−α(t))，
+  即 Regge 幂次由 t 通道的轨迹函数 α(t) 给出。
+  ⚠ **该代入超出 (1)(2) 的适用域**：arg a = π 恰是被排除的方向，且 Γ(a) 的极点
+  a = 0, −1, −2, … 全部落在这条射线上。物理文献的做法是让 s 带一个小虚部
+  （或等价地对极点做平均），本图不把这一步当作已论证，见推导 gaps。
+  这一段不是本命题的断言，只是记录下游（spectrum.veneziano-regge-behavior 等）如何使用 (2)。
+
+  **Stirling 公式的记录（原 statement (4)，同上移入 notes）**：(1) 的通常证明途径是 Stirling 公式
+  Γ(x + 1) = x^x e^{−x} (2π x)^{1/2} (1 + O(1/x))。本卡采标准形式；
+  关于 Polchinski 印刷版与二手源转引之间的差异见下一段。
+
   由 curator 于 2026-09-11 在转写 Polchinski 第 6 章时拆出（把 Regge 渐近里的纯数学部分与
   「振幅」这个路径积分对象分开，使前者不被后者的测度问题拖累）。
 
@@ -36,14 +40,16 @@ notes: |
   「There is a typo in Joe's book, as per his errata page. Stirling's formula should read
   Γ(x+1) = x^x e^{−x} **(2/πx)^{1/2}**.」——[S] 转引的这个「更正后」形式与标准的
   Γ(x+1) ∼ x^x e^{−x} **(2πx)^{1/2}** 不符（(2/πx)^{1/2} 与 (2πx)^{1/2} 相差因子 πx·(2/2)，
-  在 x → ∞ 时是完全不同的量级）。本卡片 (4) 采**标准形式**。
+  在 x → ∞ 时是完全不同的量级）。本卡片（notes 的 Stirling 段）采**标准形式**。
   可能的解释：[S] 自己的转录笔误（他把 (2πx)^{1/2} 打成了 (2/πx)^{1/2}），
   或原书与勘误表用了不同的排版约定。**本项目取不到 Polchinski 官方勘误表**（Q14：KITP 三条 URL 全部 404），
   故无法裁定。这不影响 Regge 幂次结论（(2) 只用 Γ 商的渐近，与 Stirling 前因子无关），
   但**不得照抄 [S] 的那一行**。
 
-  **⚠ 为什么不是 rigorous**：与 math.euler-beta-integral 同样的记账理由——本图没有登记特殊函数
-  数学来源，也没有 reviewer 复核记录。升级路径：researcher 登记 DLMF（Γ 商渐近是 DLMF 第 5 章
-  「Asymptotic Expansions」一节的标准结果）并核对位置后即可改 rigorous。
+  **status 历史**：初建时标 physical-argument（无数学文献来源、无 reviewer 复核）。
+  2026-09-11 reviewer-ch6 独立复核了 (1)(2)（statement 只保留这两条后），
+  推导 math.gamma-ratio-asymptotics--via-stirling 按 STATUS_LEVELS 的初等可复核例外升为 rigorous。
+  researcher 日后登记 DLMF（Γ 商渐近是 DLMF 第 5 章「Asymptotic Expansions」一节的标准结果）
+  可再补一条数学文献来源。
 author: curator-polchinski-ch6
 created: "2026-09-11"
