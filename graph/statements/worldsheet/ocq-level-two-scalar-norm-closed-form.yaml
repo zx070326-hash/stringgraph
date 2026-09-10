@@ -1,0 +1,132 @@
+id: worldsheet.ocq-level-two-scalar-norm-closed-form
+kind: proposition
+title: 第二能级标量试探态的模的清分母闭式 (4a−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a² + (2D−74)a + 84 − 3D]（任意交换 ℚ-代数）
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、对角度规分量 η : {0,…,D−1} → R **满足 η^{μμ} η_{μμ} = 1**
+  （conv.metric-mostly-plus 的 diag(−1,+1,…,+1) 满足之）、零模参数
+  a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge，固定动量扇区），
+  以及截距 a ∈ R（conv.intercept-sign-a，物理态条件写作 (L_0 − a)|ψ⟩ = 0；Polchinski 的 A = −a）。
+
+  设 F = F(D,R)、level 分级 F_N 如 worldsheet.bosonic-fock-space，
+  L_n 如 worldsheet.virasoro-generators-free-boson，
+  ⟨·,·⟩ 如 worldsheet.fock-indefinite-form（R-双线性型，由 ⟨|k⟩,|k⟩⟩ = 1 与
+  (α^μ_n)^† = α^μ_{−n} 唯一确定），H_phys 如 worldsheet.old-covariant-physical-states。
+  记 s := α_0·α_0 = Σ_μ η^{μμ} a^μ a^μ = 2α' k²。
+
+  对系数 c₂, c₃ ∈ R 定义**第二能级标量试探态**（α_{−1}·α_{−1} 的系数归一化为 1）
+    ψ₂(c₂,c₃) := [ α_{−1}·α_{−1} + c₂ (α_0·α_{−2}) + c₃ (α_0·α_{−1})² ] |k⟩ ∈ F_2,
+  其中 α_{−1}·α_{−1} = Σ_μ η^{μμ} α^μ_{−1} α^μ_{−1}，α_0·α_{−n} = Σ_μ η^{μμ} a^μ α^μ_{−n}。
+
+  **(1) 任意系数下的模**（不使用任何物理态条件）：
+      ⟨ψ₂, ψ₂⟩ = 2D + 2 s c₂² + 2 s² c₃² + 4 s c₃。
+
+  **(2) Virasoro 条件与物理态判据**：
+      L_1 ψ₂ = (2 + 2c₂ + 2c₃ s) · (α_0·α_{−1})|k⟩,
+      L_2 ψ₂ = (D + 2c₂ s + c₃ s) · |k⟩,
+      L_n ψ₂ = 0  (n ≥ 3，因 ψ₂ ∈ F_2 自动成立)。
+    于是质量壳 ½ s + 2 = a（即 α' k² + 2 = a）连同
+      (V1) 2 + 2c₂ + 2c₃ s = 0    与    (V2) D + 2c₂ s + c₃ s = 0
+    蕴含 ψ₂(c₂,c₃) ∈ H_phys。
+
+  **(3) 系数被钉死（清分母形式）**：在质量壳 s = 2a − 4 下，(V1) 与 (V2) 蕴含
+      (4a − 9) c₂ = −(D − 1),        (4a − 9) · s · c₃ = D − 4a + 8。
+
+  **(4) 清分母闭式**：在同样的前提（s = 2a − 4、(V1)、(V2)）下，对**任意**交换 ℚ-代数 R
+    与任意满足这些条件的 c₂, c₃ ∈ R：
+      (4a − 9)² ⟨ψ₂, ψ₂⟩ = 2 (D − 1) [ 16a² + (2D − 74) a + 84 − 3D ]。
+    **本条不需要 4a ≠ 9、不需要 s ≠ 0、不需要 R 是域**：分母已清，这是环上的恒等式。
+    方括号内的二次式关于 a 的判别式为 4(D − 1)(D − 25)。
+
+  **(5) 非空性（域上）**：设 R = K 是含 ℚ 的域，4a − 9 ≠ 0 且 s ≠ 0（即 k² ≠ 0，等价于 a ≠ 2）。
+    取
+      c₂ = −(D − 1)/(4a − 9),      c₃ = (D − 4a + 8)/((2a − 4)(4a − 9)),
+    则 (V1)(V2) 成立、ψ₂(c₂,c₃) ∈ H_phys，且第 (4) 条的闭式对它成立。故 (4) 不是空真。
+    （由 (3) 的两式在 4a − 9 ≠ 0、s ≠ 0 时作除法即得这组解**唯一**；除法这一步见 notes。）
+
+  **(6) a = 1 的特化**：设 K 是有序域，s = −2（即 α' k² = −1，正是 a = 1 处 level 2 的质量壳），
+    c₂ = (D − 1)/5、c₃ = (D + 4)/10（即 (5) 在 a = 1 处的解）。则
+      ψ₂(c₂,c₃) ∈ H_phys（截距 a = 1）    且    ⟨ψ₂, ψ₂⟩ = −2 (D − 26)(D − 1)/25。
+
+  【本命题**不**断言什么】
+  (a) **不**断言 ψ₂ 张成 level 2 物理态的标量（小群不变）部分，也**不**断言在该三维子空间中
+      物理态条件的解空间一维。本命题是关于这一族**显式试探态**的陈述，不是关于某个典范向量的
+      陈述。一维性是 worldsheet.ocq-level-two-scalar-norm 第 (1) 条的内容，**未形式化**。
+  (b) **不**做判别式的分类讨论（D ≤ 24 无实根 / D = 25 二重根 a = 3/4 / D ≥ 26 两相异实根，
+      以及 D = 26 时 2(8a−3)(a−1) 在 3/8 < a < 1 上为负）：那是
+      worldsheet.ocq-level-two-scalar-norm 第 (3b)(3c) 条，**未形式化**。
+  (c) **不**断言 D ≤ 26 时模非负——那是无鬼定理本身（worldsheet.no-ghost-theorem-v4 第 (1) 条）。
+  (d) 与整个无鬼定理形式化岛一样：**逐动量扇区**（k 只以标量参数 a^μ 出现，无位置算符 x^μ、
+      无对 k 的直积分）、**代数版**（无完化）、**对角 η**、**R-双线性型而非 Hermitian 半双线性型**。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.pairing_levelTwoScalar_physical
+  lean_file: StringFormal/NoGhost/LevelTwo.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.pairing_levelTwoScalar_physical（第 (4) 条）；另有 Fock.levelTwoScalar（试探态定义，及 traceState / secondState / polSqState）、Fock.pairing_levelTwoScalar_self（第 (1) 条）、Fock.{Lop_one_apply_levelTwoScalar, Lop_two_apply_levelTwoScalar, Lop_apply_levelTwoScalar_of_three_le, levelTwoScalar_mem_physSubmodule}（第 (2) 条）、Fock.{four_mul_sub_nine_mul_coeff_two, four_mul_sub_nine_mul_coeff_three}（第 (3) 条）、Fock.exists_levelTwoScalar_mem_physSubmodule（第 (5) 条）、Fock.{pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule}（第 (6) 条）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1。文件由形式化提交 0f1143a → ea303c5 逐步建成
+      （闭式在 3963281，a = 1 与鬼在 ea303c5）；合并进 main 的提交是 c32f026
+      （"merge: level-2 scalar norm closed form and D>26 ghost witness (formalizer)"）。
+      全文 grep `sorry` 零命中。**curator 未自行重跑 `lake build`，也未跑
+      `uv run stringgraph check-axioms`**；且 formal/TODO.md 的 `negative-norm-above-26` 条目
+      （与该文件其余条目不同）**没有逐字登记「公理只有标准三条」**，见推导节点 notes。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，level 2 的分析，落在 (4.1.19)–(4.1.28) 区间，p.124（式号未核实）"
+    note: |
+      **文献侧只有定性结论，不是本命题的来源**：Polchinski 处理一般 level-2 态
+      (E_{μν}α^μ_{−1}α^ν_{−1} + e_μ α^μ_{−2})|0;k⟩，只结论性地给出「A = −1 且 D = 26 时
+      才出现额外零态」，不给一般 (D, a) 的闭式。抽取记录
+      literature/extractions/polchinski-1998-v1.md#E57 的位置栏为 [页码已核实/式号未核实]。
+  - ref: gsw-1987-v1
+    loc: "§2.2.2–2.2.3（第二能级伪态与 zero-norm 条件）"
+    note: |
+      同样只给零态存在条件（a = 1, D = 26），不给一般 (D, a) 的闭式。
+      GSW 用 mostly-minus 与 α' = 1/2，需转写。
+tags: [bosonic-string, quantization, old-covariant, critical-dimension, intercept, spectrum, formalized]
+notes: |
+  【为什么新建这张卡（拆卡）】worldsheet.ocq-level-two-scalar-norm 把四件事写在一张卡上：
+  (1) 三维标量子空间中物理态解空间一维、(2) 模的闭式、(3a) a = 1 处的 (D−1)(26−D)、
+  (3b)(3c) 判别式分类。LevelTwo.lean 机器验证的**只有 (2) 与 (3a)**（外加任意系数下的模、
+  Virasoro 条件、域上的非空性），(1) 与 (3b)(3c) 未做。若把整张原卡升为 formalized，
+  就等于把未形式化的一维性与判别式分类也一并宣称为机器验证——那是虚报。
+  故按 formalizer 建议、lead 同意，拆出本卡只承载已机器验证的那部分。
+  原卡 worldsheet.ocq-level-two-scalar-norm **保持 rigorous 不变**（其推导
+  --via-level-two-gram 已由 reviewer-ch4 于 2026-09-11 独立复核），并新增一条对本卡的依赖。
+  查重：`uv run stringgraph search level-two / 闭式 / negative-norm` 于 2026-09-11 只找到原卡，
+  无承载「清分母闭式 + 机器验证」的既有节点。
+
+  【第三次独立核算】本卡的闭式与原卡逐字一致，而两者的计算路径完全独立：
+    1. auditor（2026-09-10，ms.no-ghost-theorem 第一轮审计 B1）：精确有理数 Gram 矩阵；
+    2. curator（2026-09-11）：符号代数重算，补出正因子 2/(4a − 9)²；
+    3. Lean（本卡，LevelTwo.lean）：在**任意交换 ℚ-代数**上从 `Fock.pairing` 的定义
+       逐步展开，`linear_combination` 收尾。
+  三次都得到 2(D−1)[16a² + (2D−74)a + 84 − 3D]，且 Gram 矩阵逐项吻合
+  （⟨A,A⟩ = 2D、⟨A,B⟩ = 2s、⟨B,B⟩ = 2s²、⟨C,C⟩ = 2s、⟨A,C⟩ = ⟨B,C⟩ = 0，
+  其中 A = α_{−1}·α_{−1}|k⟩、B = (α_0·α_{−1})²|k⟩、C = (α_0·α_{−2})|k⟩）。
+  Lean 的 (V1)(V2) 与原卡的两条物理条件是同一对方程（原卡写 1 + s c₃ + c₂ = 0 与
+  D + s c₃ + 2s c₂ = 0，(V1) 是前者的 2 倍，(V2) 逐项相同）。
+
+  【与原卡的记号对应】原卡记 K := α_0·α_0，本卡记 s（Lean 里是 `Fock.zeroModeSq η a`）；
+  原卡的 c_2、c_3 与本卡、Lean 的 c₂、c₃ 一一对应（c₂ 配 α_0·α_{−2}，c₃ 配 (α_0·α_{−1})²），
+  且 c₂ = (1 − D)/(4a − 9) 与本卡的 −(D − 1)/(4a − 9) 相同、
+  c₃ = (D − 4a + 8)/(2(4a − 9)(a − 2)) 与本卡的 (D − 4a + 8)/((2a − 4)(4a − 9)) 相同。
+  原卡把闭式写成 ⟨ψ₂,ψ₂⟩ = (D−1)[…]·2/(4a−9)²（要求 4a ≠ 9 才能除），
+  本卡按 Lean 写成清分母形式，故在任意 ℚ-代数上成立、不需要 4a ≠ 9。
+
+  【(5) 中「唯一」这一步的地位】(3) 的两个等式是 Lean 定理
+  （`four_mul_sub_nine_mul_coeff_two` / `_three`）；由它们在 4a − 9 ≠ 0、s ≠ 0 时**作除法**
+  得到 c₂、c₃ 的唯一值，这一步在 Lean 中没有单列为定理
+  （`exists_levelTwoScalar_mem_physSubmodule` 只证**存在**：把解代回去验证）。
+  这是一行域上除法，登记于此以免被读成「唯一性已机器验证」。
+
+  【Lean 记号换算】Lean 里截距叫 `a₀ : R`（因为 `a : Fin D → R` 已被零模参数占用），
+  本卡沿用图中的记号：截距写 a、零模写 α_0。质量壳在 Lean 里写作
+  `invTwo R * zeroModeSq η a + 2 = a₀`（第 (2) 条的形式）或
+  `zeroModeSq η a = 2 * a₀ - 4`（第 (3)(4) 条的形式），两者在 ℚ-代数上等价。
+author: curator
+created: "2026-09-11"

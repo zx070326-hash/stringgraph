@@ -72,5 +72,20 @@ notes: |
   本节点**不**断言 level-2 的完整 Gram 矩阵性质，也不断言非标量（小群非平凡表示）部分的模；
   它只覆盖由 η 与 α_0 张成的那个三维子空间中的物理态。level-3 的数值检查（审计 B1 提到
   D = 26、a ∈ {0, 1/4, 3/8, 1/2, 3/4} 均出现负特征值）本节点不覆盖。
+
+  【2026-09-11（二）：第 (2)(3a) 条已机器验证，第 (1)(3b)(3c) 条未；已拆卡】
+  （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）
+  formal/StringFormal/NoGhost/LevelTwo.lean（合入 main 的提交 c32f026）在 Lean 中验证了
+  本节点的**第 (2) 条闭式**（清分母形式 (4a−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a² + (2D−74)a + 84 − 3D]，
+  任意交换 ℚ-代数）与**第 (3a) 条**（a = 1 处 ⟨ψ₂,ψ₂⟩ = −2(D−26)(D−1)/25），
+  这是同一结果的第三次独立核算（前两次见上）。
+  **未验证**：第 (1) 条的解空间一维性、第 (3b)(3c) 条的判别式分类。
+  按「status 只能实话实说」，本节点**不**升为 formalized、保持 rigorous
+  （推导 --via-level-two-gram，reviewer-ch4 已复核）；已机器验证的那部分另立新卡
+  **worldsheet.ocq-level-two-scalar-norm-closed-form**（formalized），
+  并已作为依赖加进本节点的推导。两卡不是重复：新卡只讲显式试探态的模，
+  本卡多讲一维性与判别式分类。
+  附带登记（formalizer）：第 (3a) 条的质量壳 α'k² = −1 在 ℚ 上**单分量无解**，
+  需 D ≥ 2 取一个类时加一个类空分量（如 a^0 = 3/2、a^1 = 1/2）；详见推导 notes。
 author: curator
 created: "2026-09-11"
