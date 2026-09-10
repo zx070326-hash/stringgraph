@@ -24,6 +24,17 @@ uses_conventions:
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1
+    loc: "§6.4, p.183：eq. (6.4.26)（**硬散射极限的定义** s → ∞、t/s 固定）"
+    note: |
+      **§12.8（原书核实，2026-09-11，p.183），等级 L1**。§12.8 逐字记：
+      「**(6.4.25)** Regge 极限 s → ∞, t 固定；**(6.4.26)** 硬散射极限 s → ∞, t/s 固定」。
+      → **本卡片 statement 里「固定角高能极限：s, t, u → ∞ 而比值 t/s 固定」这一定义
+      与原书 (6.4.26) 一致。**
+      ⚠ **式号张力**：本卡片的另一条 source（来自 [S]）把结果记在 (6.4.29)/(6.4.30)；
+      §12.8 只核到 (6.4.26) 是**极限的定义式**，**没有核对 (6.4.29)/(6.4.30)**。
+      两者最可能各指不同的式子（定义 vs 结果），但这个调和是 curator 的推断。
+      详见 spectrum.veneziano-regge-behavior 的同一处登记。
+  - ref: polchinski-1998-v1
     loc: "§6.4, eq. (6.4.29)/(6.4.30)（硬散射极限），p.183"
     note: |
       literature/extractions/polchinski-1998-v1.md#E101，等级 **L1**（schrans-2020 §6.42–§6.43，
