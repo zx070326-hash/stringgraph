@@ -12,8 +12,8 @@ import StringFormal.NoGhost.VertexWeightNeg
 # `⁅L_m, A^ε_n⁆ = 0` for every `m ≠ 0`
 
 Graph nodes: `worldsheet.ddf-commute-with-virasoro` (this file upgrades the formalised part
-from `m ≥ 1` to all `m ≠ 0`), `worldsheet.ddf-operators-v6`.
-`formal/TODO.md` item `ddf-operators`, sub-item (4).
+from `m ≥ 1` to all `m ≠ 0`), `worldsheet.ddf-operators-v5` (the definition of `A^ε_n`).
+`formal/TODO.md` item `ddf-operators`, sub-item (5).
 
 ## What is here
 
