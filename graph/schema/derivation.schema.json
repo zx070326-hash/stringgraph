@@ -39,6 +39,7 @@
     },
     "summary": { "type": "string", "minLength": 1 },
     "gaps": { "type": "array", "items": { "type": "string" }, "description": "论证中已知未严格化的步骤" },
+    "notes": { "type": "string", "description": "推导级的自由备注；docs/STATUS_LEVELS.md 的 rigorous 例外条款要求在此写 reviewer-verified: <agent>, <date>" },
     "author": { "type": "string" },
     "created": { "type": "string" }
   }
