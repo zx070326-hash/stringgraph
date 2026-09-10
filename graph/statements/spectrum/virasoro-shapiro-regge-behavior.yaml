@@ -16,6 +16,18 @@ uses_conventions:
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1
+    loc: "§6.6, p.193–194：eq. (6.6.13)（闭弦硬散射 ∝ exp[−(α'/2)(s ln sα' + t ln tα' + u ln uα')]）"
+    note: |
+      **§12.8（原书核实，2026-09-11）的 §6.6 落实表，等级 L1（式号 + 表达式）**。
+      表中逐字：「闭弦硬散射 ∝ exp[−(α'/2)(s ln sα' + t ln tα' + u ln uα')] | (6.6.13) | ✓」。
+      ⚠ **与本卡片 (2) 的写法差一个常数因子，二者等价**：
+      本卡片写 exp[−(α'/2)(s ln s + t ln t + u ln u)]，原书写的宗量是 **sα'、tα'、uα'**（无量纲）。
+      两者之比是 exp[−(α'/2)(s+t+u) ln α']；由闭弦四 tachyon 的 α'(s+t+u) = −16
+      （spectrum.mandelstam-invariants-sum-rule）得该比 = exp[8 ln α'] = α'⁸，
+      是一个**与运动学无关的常数**。本卡片的陈述只断言正比关系，故不受影响。
+      → **原书的写法在量纲上更干净**（对数宗量无量纲）；下游若要写显式表达式，应采原书形式。
+      ⚠ **(6.6.12)（Regge）本轮未被 §12.8 核对**，仍只有 [S] 一个来源，见下一条 source。
+  - ref: polchinski-1998-v1
     loc: "§6.6, eq. (6.6.12)（Regge）、(6.6.13)（硬散射），p.193–194"
     note: |
       literature/extractions/polchinski-1998-v1.md#E106，等级 **L1**（schrans-2020 §6.65–§6.66，

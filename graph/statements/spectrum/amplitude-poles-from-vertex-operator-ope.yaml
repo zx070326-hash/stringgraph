@@ -30,12 +30,19 @@ uses_conventions:
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.6, eq. (6.6.24)（两个 tachyon 顶点算子的 OPE）、(6.6.25)，p.195"
+    loc: "§6.6, p.195：eq. (6.6.24)/(6.6.25)（两个 tachyon 顶点算子的 OPE 与由此做的振幅极点一致性检验）"
     note: |
-      literature/extractions/polchinski-1998-v1.md#E109，等级 **L1**（schrans-2020 §6.72，
-      笔记 p.339–340，逐页读到）。
+      literature/extractions/polchinski-1998-v1.md#E109（schrans-2020 §6.72，笔记 p.339–340）
+      + **§12.8（原书核实，2026-09-11）的 §6.6 落实表**。
+      **式号已由原书页图确认（L1）**：§12.8 表中一行「OPE 一致性检验 | (6.6.24)/(6.6.25) | 补」，
+      与本卡片的 loc 一致。⚠ **§12.8 没有抄出这两式的表达式**，
+      故本卡片 statement 里的 OPE 展开式仍只有 [S] 一个来源（等级不变）。
       抽取记录逐字：「**这条把『OPE 的极点结构 ↔ 振幅的物理极点』直接连起来**，
       是第 2 章 OPE 与第 6 章振幅之间的桥。⚠ 它依赖 OPE 的收敛性（**Q3** 仍未解决）。」
+      **Q3 的进展（2026-09-11，§12.10 表 A）**：原书 **p.69（§2.9）确实给了 OPE 收敛性的论证**
+      （「the usual convergence of a complete set in quantum mechanics」+ 收敛半径来自切开路径积分的圆），
+      等级 `physical-argument`，**不是「书中不证」**。本卡片 statement 末尾的 ⚠ 据此可以更精确地读作：
+      「依赖一条本图尚未建节点、但原书给了物理论证的收敛性」。
 tags: [spectrum, tree-level, closed-string, ope, pole, factorization, level-matching]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E109 建立。
