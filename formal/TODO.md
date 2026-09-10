@@ -179,6 +179,24 @@
   无壳的 `worldsheet.spurious-subspace`（已建、formalized）的 `lean_decl` 是 `spuriousSubmodule`；带壳的 `worldsheet.ocq-spurious-states-v2` 不填 `lean_decl`（2026-09-11 已落地）；
   `worldsheet.open-string-intercept--via-null-state-decoupling` 的 level 1 半边可引
   `Lop_neg_one_apply_one_mem_nullSubmodule`（但该推导还需 level 2 与唯一性，不能标 formalized）。
+- [x] `spurious-shell`：带质量壳的伪态 S(k) = S ∩ ker(L_0 − a₀) 与零态 N(k) = S(k) ∩ H_phys。
+  见 `StringFormal/NoGhost/SpuriousShell.lean`（无 sorry，公理只有标准三条）。对应图节点
+  `worldsheet.ocq-spurious-states-v2`（Polchinski (4.1.8)/(4.1.9)）。做到：
+  - `spuriousShell η a a₀ = spuriousSubmodule η a ⊓ ker(L_0 − a₀·id)`，`mem_spuriousShell`；
+  - `nullStates η a a₀ = spuriousShell ⊓ physSubmodule`；
+  - **`nullStates_eq`**：`nullStates = spuriousSubmodule ⊓ physSubmodule`，即零态的定义
+    对「S 带不带质量壳」不敏感（因 `physSubmodule ≤ ker(L_0 − a₀)`，见
+    `physSubmodule_le_ker_Lop_zero_sub`）——这正是 v2 卡陈述里那句话；
+  - **`nullStates_le_nullSubmodule`**：N(k) ⊆ H_0(k)（H_phys 的根基），由
+    `spurious_inf_physSubmodule_le_nullSubmodule` 一行；配套
+    `pairing_self_eq_zero_of_mem_nullStates`（零态零范数）、`spuriousShell_le_orthComplement`、
+    `Lop_neg_apply_mem_nullStates`。
+  **本项未做**：反包含 H_0(k) ⊆ N(k)（临界维数命题，D = 26、a₀ = 1，图上尚无节点）；
+  没有把 on-shell 伪态分解成 Σ_{n≥1} L_{−n}（各自在壳的）|χ_n⟩。
+  图侧：建议把 `worldsheet.ocq-spurious-states-v2` 的 `formal.lean_decl` 填
+  `StringFormal.NoGhost.Fock.spuriousShell`（并在 notes 记 `nullStates` 与 `nullStates_eq`），
+  `lean_file` 填 `formal/StringFormal/NoGhost/SpuriousShell.lean`；这会撤销该卡 notes 里
+  「Lean 侧没有这个子模，故不填 lean_decl」的记账。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
