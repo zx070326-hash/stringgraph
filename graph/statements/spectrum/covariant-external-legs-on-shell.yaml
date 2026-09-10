@@ -1,0 +1,120 @@
+id: spectrum.covariant-external-legs-on-shell
+kind: proposition
+title: "协变振幅外线的 on-shell 条件就是光锥质量壳：开弦 L_0 = 1 ⟺ α'k² = 1 − N ⟺ α'm² = N − 1；闭弦 (L_0, L̃_0) = (1,1) ⟺ α'k²/4 = 1 − N ⟺ α'm² = 4(N − 1)"
+statement: |
+  【设定】D = 26 个自由玻色子 X^μ 的世界面 CFT；约定 conv.metric-mostly-plus（m² = −k²）、
+  conv.alpha-prime-regge、conv.intercept-sign-a（本图截距 a = −A，Polchinski 的 A = −1 即 a = 1）、
+  conv.virasoro-standard、conv.worldsheet-complex-coords。
+  「协变振幅」指 worldsheet.string-s-matrix 的主公式 (5.3.9)：每条外线是一个顶点算子插入
+  V_j(k, σ)，其对应态按 worldsheet.state-operator-isomorphism 记为 |V⟩ ∈ F；
+  设 |V⟩ 落在时空动量 k、level N 的扇区（level 分级同 worldsheet.bosonic-fock-space）。
+
+  (1) **开弦外线（边界插入）。**
+      「V 是**权 1 的主场**」 ⟺ 「L_n|V⟩ = 0 ∀ n > 0（主场性）**且** L_0|V⟩ = |V⟩」。
+      其中**后一半**（L_0 条件）在动量 k、level N 的扇区上等价于
+        α' k² + N = 1,  即  **α' k² = 1 − N**,
+      因为在该扇区上 L_0 就是标量 α'k² + N 的乘法
+      （worldsheet.open-string-l0-equals-level-plus-mass）。
+      配 m² = −k² 即
+        **α' m² = N − 1**。
+      特别地 N = 0（tachyon，V = :e^{ik·X}:，边界权 h = α'k²）给 α'k² = 1，α'm² = −1；
+      N = 1（V = e·∂X e^{ik·X}）给 α'k² = 0，α'm² = 0。
+
+  (2) **闭弦外线（体内插入）。**
+      「V 是**权 (1,1) 的主场**」 ⟺ 「L_n|V⟩ = L̃_n|V⟩ = 0 ∀ n > 0 **且** L_0|V⟩ = L̃_0|V⟩ = |V⟩」。
+      L_0 条件的那一半在动量 k、左右 level (N, Ñ) 的扇区上等价于
+        α' k²/4 + N = 1  与  α' k²/4 + Ñ = 1,
+      即 **α' k²/4 = 1 − N** 与 **N = Ñ**（后者是 (L_0 − L̃_0)|V⟩ = 0，即
+      worldsheet.closed-string-level-matching 的协变写法；闭弦零模归一化
+      α^μ_0 = (α'/2)^{1/2} k^μ 见 worldsheet.closed-string-mode-expansion，
+      故闭弦的 (1/2) α_0·α_0 = α' k²/4）。配 m² = −k² 得
+        **α' m² = 4 (N − 1)**。
+      特别地 N = Ñ = 0（tachyon，体内权 (α'k²/4, α'k²/4)）给 α'k² = 4，α'm² = −4。
+
+  (3) **与光锥谱逐能级一致（本命题的桥内容）。**
+      (1)、(2) 给出的允许动量集合分别与
+        worldsheet.open-string-mass-shell（a = 1 时 α'm² = N − a = N − 1）、
+        worldsheet.closed-string-mass-formula（a = ã = 1 且 level matching 时 α'm² = 4(N − 1)）
+      **逐能级重合**；且在 D = 26、a = 1 时两侧的态空间本身也同构，
+        H_OCQ ≅ H_light-cone
+      （Polchinski (4.1.20)，证明在 §4.4 (4.4.21)；本图由 worldsheet.no-ghost-theorem-v4
+      的**同构半**承载：逐动量塔上 H_phys/H_0 ≅ 24 个横向振子的 Fock 空间）。
+      结论：**在 D = 26、a = 1 的玻色弦中，把光锥量子化算出的质量谱直接用作协变振幅外线的
+      on-shell 条件是合法的**——(1)(2) 保证「允许动量」的集合相同，
+      H_OCQ ≅ H_light-cone 保证每个允许动量上的**态的个数**也相同。
+
+  【本命题**不**断言什么】——六条边界，每条对应一处别的节点或一处已知缺口：
+  (a) **不**断言 (5.3.9) 的路径积分有定义、收敛，或对拓扑的求和收敛
+      （worldsheet.string-s-matrix 自身已声明不断言这些）。
+  (b) **不**断言「权 1 / 权 (1,1) ⟹ 积分后的顶点算子共形（Weyl）不变 ⟹ 振幅良定义」这一步是严格的。
+      原书把它作为 §3.6 的条件引用（p.125 逐字「This agrees with the condition from section 3.6
+      that the integrated vertex operator be conformally invariant」），本图**没有** §3.6 那条条件的节点。
+      本命题只把「外线是权 1 / (1,1) 主场」当作**外线的定义性要求**接受下来，
+      断言的是它的 L_0 一半与光锥质量壳等价。
+  (c) **不**断言零模态（null states）在振幅中解耦，也不断言振幅只依赖 H_OCQ = H_phys/H_null 的等价类。
+      本图无该命题的节点。
+  (d) **不**断言 (D, a) ≠ (26, 1) 时的任何内容：H_OCQ ≅ H_light-cone 只在 (26, 1) 成立
+      （D > 26、a = 1 时的反例见 worldsheet.negative-norm-physical-state-above-26）。
+  (e) **不**给出激发态顶点算子的显式形式，只断言其对应态的 L_0 本征值所满足的条件。
+  (f) **不**断言外线动量必须实，也不断言解析延拓到壳外的合法性；振幅中出现的 Mandelstam
+      变量按 spectrum.mandelstam-invariants-sum-rule 处理，那里的 m_i² 由本命题供给。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.intercept-sign-a
+  - conv.virasoro-standard
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1, p.125 散文（紧接 (4.1.22)/(4.1.23)），逐字：「The condition (4.1.22) requires the weight of the matter state to be 1… the vertex operator must then be a weight 1 or (1,1) tensor. This agrees with the condition from section 3.6 that the integrated vertex operator be conformally invariant, which gives another understanding of the condition A = −1.」"
+    note: |
+      这是本卡 (1)(2) 的**直接来源**：外线顶点算子是权 1 / (1,1) 张量，且原书自己把它与
+      A = −1（本图 a = 1）的截距条件对应起来。
+      抽取记录 literature/extractions/polchinski-1998-v1.md（researcher 第六轮 §4.1 原书核实段，
+      「p.125 另一句（旧记录没有，对顶点算子链有用）」），证据等级 L1（页图逐字）。
+  - ref: polchinski-1998-v1
+    loc: "§4.1, eq. (4.1.11a)：L^m_0 = α'p² + α_{−1}·α_1 + …；eq. (4.1.16)：m² = (1+A)/α'（level 1 的协变质量壳）"
+    note: |
+      (4.1.11a) 是本卡 (1) 里 L_0 = α'k² + N 的原书形式；(4.1.16) 是把 L_0 条件解出来的
+      **level 1 实例**：α'm² = 1 + A = 1 − a，取 a = 1 得无质量。
+      式号经 researcher 第六轮逐字核实（同一抽取记录段的表格：「(4.1.11a,b) ✓」「(4.1.16) ✓」）。
+  - ref: polchinski-1998-v1
+    loc: "§4.1, p.124, eq. (4.1.20)：H_OCQ = H_light-cone（A = −1 且 D = 26；原书注明「as will be shown in section 4.4」）"
+    note: |
+      本卡第 (3) 条的同构半。式号经 researcher 第六轮核实（逐字：「The OCQ at A = −1 and D = 26
+      is in fact the same as light-cone quantization at all mass levels, H_OCQ = H_light-cone (4.1.20),
+      as will be shown in section 4.4. It is only in this case that consistent interactions are known.」）。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, eq. (4.4.21)：H_OCQ = H_BRST = H_light-cone（三者同构），配 (4.4.19)/(4.4.20)（上同调代表元与内积正定）"
+    note: |
+      (4.1.20) 的证明所在。⚠ 该证明用「下三角矩阵的一般性质」得 Ker(S+U) ≅ Ker S；
+      在无穷维 Fock 空间上 (4.4.19) 的级数是否终止/收敛，抽取记录明记**需要论证**。
+      这是本卡推导标 physical-argument 的理由之一。
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.36)（开弦光锥质量壳）；§1.4, eq. (1.4.8)（闭弦光锥质量公式）、(1.4.11)（level matching）"
+    note: |
+      第 (3) 条比较的光锥一侧；本图分别由 worldsheet.open-string-mass-shell 与
+      worldsheet.closed-string-mass-formula、worldsheet.closed-string-level-matching 承载。
+tags: [spectrum, vertex-operator, on-shell, mass-shell, ocq, light-cone, bridge, bosonic-string]
+notes: |
+  **本卡的用途（为什么建它）**：spectrum 区（Polchinski 第 6 章）的一批推导都要把
+  「光锥量子化算出的 α'm² = N − 1 / 4(N−1)」当作**协变振幅外线**的 on-shell 条件用，
+  而 §6 与 §1 互不引用，此前只能标 `inferred: true`。ROADMAP 把这条缺环记为待建
+  （「光锥质量壳 → 协变振幅外线 on-shell」，reviewer-ch6 提出）。本卡承载这一步。
+
+  **它承载的到底是哪一步**：不是「协变振幅外线必须是权 1 主场」（那是外线的**定义性要求**，
+  见【不断言】(b)），而是**「权 1 主场的 L_0 条件 ⟺ 光锥质量壳」**这一等价，
+  外加「两边的态空间在 (26, 1) 同构」。凡是只用到「某个 α'k² 值 = 某个能级的上壳条件」的下游推导，
+  都可以把 inferred 边改挂本卡而撤掉 inferred；凡是还额外用到「振幅外线必须上壳」这一**框架**
+  假设的，本卡不承载该框架，那部分保留 inferred 并在 note 里指向本卡。
+
+  **可能的拆分（留给 reviewer 裁决）**：(1) 与 (2) 是两条命题（开弦、闭弦），
+  它们在原书 p.125 的同一句里被一并断言（「a weight 1 or (1,1) tensor」）、
+  推导也逐字相同（只差零模归一化 α_0 = (2α')^{1/2} k vs (α'/2)^{1/2} k），故本图暂合为一卡。
+  若日后开闭弦分别出现独立推导，应拆成两卡并把本卡标 superseded_by。
+
+  **记号**：Polchinski 的 A 与本图的 a 差一个符号（conv.intercept-sign-a：a = −A）。
+  原书 (4.1.16) 写 m² = (1+A)/α'，本图写 α'm² = N − a 在 N = 1 上的实例 α'm² = 1 − a，
+  两式在 a = −A 下逐字相同。
+author: curator-onshell-bridge
+created: "2026-09-11"
