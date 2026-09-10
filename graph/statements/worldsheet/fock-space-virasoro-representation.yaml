@@ -77,6 +77,20 @@ notes: |
   当前主要缺口之一，已登记在 worldsheet.virasoro-generators-free-boson 与
   worldsheet.old-covariant-physical-states 的 notes。
 
+  **【2026-09-11（二）：上一段的「L_n^† = L_{-n} 未证」已过时】**（curator，
+  依据 formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577）。
+  L_m^† = L_{-m} 现由 `StringFormal.NoGhost.Fock.pairing_Lop_left`
+  （对偶形式 `pairing_Lop_right`）机器证明，图节点为
+  **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，status: formalized）。
+  **限定**：那里的「†」是 `Fock.pairing` 这个 R-**双线性型**意义下的伴随（转置），
+  **不是 ℂ 上的 Hermitian 共轭**（见 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+  **但本节点陈述末尾那句仍然为真、且不因此改写**：本节点断言的是 ρ 保李括号，
+  ρ 与内积的相容性**不是本节点的内容**；PhysicalStates.lean 也没有把
+  `Fock.virRep` 与 `Fock.pairing` 放进同一个陈述——即
+  「F 是 Virasoro 代数的**幺正 / *-表示**」这条陈述本图与 Lean 侧**仍然没有**。
+  想要它的下游应当同时引本节点与 worldsheet.virasoro-generators-adjoint，
+  或者另立一条 *-表示的卡（本图未建）。
+
   【为什么引 v2 而不是旧的 worldsheet.virasoro-algebra】旧卡把「李代数定义」与
   「Virasoro 是 Witt 代数的**唯一**非平凡中心扩张」合在一张卡上，后者未形式化，
   整卡因此只能是 rigorous，会把本节点压到 rigorous。旧卡已于 2026-09-11 冻结
