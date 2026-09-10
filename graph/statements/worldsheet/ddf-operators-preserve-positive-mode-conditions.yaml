@@ -1,0 +1,118 @@
+id: worldsheet.ddf-operators-preserve-positive-mode-conditions
+kind: proposition
+title: DDF 算子保持**正模** Virasoro primary 条件：A^ε_n({Ψ | L_mΨ = 0 ∀ m ≥ 1}) ⊆ 同一子空间——弱节点，L_0 质壳条件不含在内
+statement: |
+  记号与 worldsheet.ddf-operators-v6 完全一致：动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)
+  （代数直和），a^μ = (2α')^{1/2}p^μ、b^μ = (2α')^{1/2}k_0^μ，
+  L_m 是 worldsheet.virasoro-generators-free-boson 的 Sugawara 生成元**逐层用该层动量**装在塔上
+  （第 j 层用动量 p + j k_0，不移动层指标），
+  A^ε_n = Σ_{m ∈ Z} α^ε_m V^{(n)}_m 是 v6 定义的 DDF 算子（把第 j 层送到第 j+n 层）。
+
+  【定义：塔上的正模子空间】
+    P(p; k_0) := { Ψ ∈ T(p; k_0) : L_m Ψ = 0 对一切 m ≥ 1 } 。
+  它是有限多个（可数个）线性映射核的交，故是 T(p; k_0) 的子模。
+
+  【前提】
+    (T) 横向性  ε·k_0 = 0        （v6 的定义参数）
+    (N) 类光性  k_0² = 0
+    (S) 归一化  2α' k_0·p = 1
+
+  【断言】在 (T)(N)(S) 之下，对一切 n ∈ Z：
+    A^ε_n ( P(p; k_0) ) ⊆ P(p; k_0) 。
+  即：若 Ψ 满足 L_m Ψ = 0（∀ m ≥ 1），则 A^ε_n Ψ 也满足 L_m (A^ε_n Ψ) = 0（∀ m ≥ 1）。
+
+  【本节点明确不断言 —— 这是一个弱节点】
+  (a) **不断言 A^ε_n 保持质壳（L_0）条件**，因而**不断言 A^ε_n 把物理态映为物理态**。
+      旧协变物理态（worldsheet.old-covariant-physical-states）要求
+        (i) L_m Ψ = 0（∀ m ≥ 1）  与  (ii) (L_0 − a₀) Ψ = 0，
+      本卡只覆盖 (i)。(ii) 需要 [L_0, A^ε_n] = 0，本图与 Lean 均未建立，见 notes。
+  (b) **不断言 P(p; k_0) 上有任何正定性、有限维性或分级性质。**
+  (c) **不断言 A^ε_n ≠ 0**，也不断言 A^ε_n P(p;k_0) 张成任何东西。
+  (d) **不断言 (N)(S) 可满足**（"存在类光 k_0 使 k_0·p ≠ 0"是关于实洛伦兹二次型的断言，
+      在一般交换环上为假；见 worldsheet.ddf-operators-v6 的 (d)）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfOp_mem_towerPositiveModeSubmodule
+  lean_file: StringFormal/NoGhost/TowerPhysical.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.ddfOp_mem_towerPositiveModeSubmodule（本卡 formal.lean_decl）；子空间 P(p;k_0) 的定义 StringFormal.NoGhost.towerPositiveModeSubmodule 与展开引理 mem_towerPositiveModeSubmodule；同文件另有 towerL0Submodule / towerPhysSubmodule / mem_towerPhysSubmodule（**已定义但无保持性定理**）与 invTwo_zeroModeSq_towerMomentum_add_shift_cancel（L_0 本征值的移位相消记账）"
+    note: |
+      本仓库，合并提交 57fce31，Lean 4 + Mathlib v4.33.1，无 sorry。
+      语句逐字（去掉隐式参数）：
+        `theorem ddfOp_mem_towerPositiveModeSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+           (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) (n : ℤ)
+           {Ψ : TowerFock D R} (hΨ : Ψ ∈ towerPositiveModeSubmodule η a b) :
+           ddfOp η a b ε hη hεb n Ψ ∈ towerPositiveModeSubmodule η a b`
+      与本卡陈述逐字一致：`hbb` = (N)，`hba` = (S)，`hεb` = (T)，n 无限制。
+      `towerPositiveModeSubmodule η a b = ⨅ m : ℤ, ⨅ _ : 0 < m, LinearMap.ker (towerLop η a b m)`
+      逐字就是本卡的 P(p; k_0)。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧「DDF 算子把物理态映为物理态」那句话的出处。**GSW 不作本卡这个弱化断言**：
+      文献一次性断言完整的物理态保持（两条条件），不把正模那一半单独拆出来。
+      本卡是本项目为记账 Lean 已做到的部分而做的拆分。式号 L0；GSW 用 mostly-minus，
+      已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11，(5.4) 的引出句（逐字）：「The DDF operators, A^i_n, are well-defined on states of momentum p, such that k · p = 1 and they can be used to **generate physical states** because they commute with the Virasoro algebra,」"
+    note: |
+      **不承载论证**（该文是历史综述，(5.4) 无证明）。引在这里是为了定位「DDF 生成物理态」
+      这句话的文献表述，并显示文献把它当作 [L_m, A^i_n] = 0 的直接推论、
+      **不区分 m ≥ 1 与 m = 0**。本卡只覆盖 m ≥ 1 那一半所蕴含的结论。
+      号差逐字 signature (−,+,+,+)，与 conv.metric-mostly-plus 一致。
+tags: [bosonic-string, spectrum-generating-algebra, virasoro, formalized, weak-node]
+notes: |
+  【为什么立这个弱节点（lead 裁决 2026-09-11）】
+  与 worldsheet.ddf-commute-with-nonzero-virasoro、worldsheet.brst-nilpotent-at-c26 同一模式。
+  文献一句话「DDF 算子把物理态映为物理态」在本图里是
+  worldsheet.ddf-commute-with-virasoro 的**推论**（写在该卡陈述里），
+  其有效状态是 physical-argument。Lean 已经把其中**正模那一半**完整证出
+  （`ddfOp_mem_towerPositiveModeSubmodule`），本卡让这一半有独立的 formalized 承载，
+  不被 L_0 那一半的缺口拖低。
+  ⚠ **本卡不取代那条推论**：需要完整物理态保持（含质壳）的下游必须引
+  worldsheet.ddf-commute-with-virasoro。
+
+  【剩余障碍：只差 [L_0, A^ε_n] = 0】
+  TowerPhysical.lean 文件头逐字：
+    「The split is there because *proving* that `A^ε_n` preserves the `L_0` condition needs
+      `⁅L_0, A^ε_n⁆ = 0`, i.e. the `m = 0` case of the conformal-weight identity
+      `⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`, and that case is **not formalised**」。
+  该 m = 0 缺口的根在单个 Fock 空间上（Sugawara 求和在 m = 0 时 j = 0 与 j = m 两项重合），
+  见 worldsheet.exponential-vertex-operator-mode-weight-identity 的 notes 与
+  worldsheet.ddf-commute-with-nonzero-virasoro 的 notes。
+  formalizer 正在做（formal/TODO.md `ddf-operators` 项）。
+
+  【★ formalizer 的更正：塔上的 L_0 条件是**统一截距**，不是逐层截距（2026-09-11，curator 转录）】
+  本图此前（含 worldsheet.ddf-commute-with-virasoro 的推论、
+  worldsheet.no-ghost-theorem-v4 一带的记账）有一处容易滑向的误读：以为塔的每一层要用
+  **不同的**截距 a_j = a + j(k_0·p)。**这是错的。** 正确的图景是：
+  · 塔上的 L_0（Lean `towerLop η a b 0`）在第 j 层**已经用该层自己的动量** p_j = a + j·b，
+    所以 (L_0 − a₀)Ψ = 0 是塔向量上一个**完全统一**的条件，a₀ 是**一个**常数；
+  · 在 (N) k_0² = 0、(S) 2α' k_0·p = 1 之下，第 j 层能级 N 处的 L_0 本征值是
+      α' p_j² + N = α' k² + j + N
+    （Lean `invTwo_mul_zeroModeSq_towerMomentum` + `Lop_zero_apply_of_mem_levelSubmodule`），
+    故物理条件是
+      **α' k² + j + N = a₀**，
+    即在 (j, N) 平面上是一条**反对角线 j + N = 常数**，不是逐层不同的截距。
+  · A^ε_n 沿这条反对角线移动：层 +n、振子能级 −n，两者相消，本征值不变
+    （Lean `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`，文件头逐字
+      「the eigenvalue becomes `α' k² + (j' + n) + (N - n) = α' k² + j' + N`: **unchanged**,
+       and independently of the summation index `j`」）。
+    **这正是 A^ε_n 是权 0 算子的算术理由**，也说明层依赖**不是**障碍。
+  · 同一算术的推论：L_0 条件把振子能级逐层钉死为 N = a₀ − α'k² − j，
+    这就是「层 j = −N_mass 上的 DDF 态处在振子能级 N_mass」的来由。
+  ⇒ **缺的只有括号 [L_0, A^ε_n] = 0，不是任何关于截距的额外约定。**
+  本卡的陈述刻意不含 L_0 条件，故不受此影响；本段是为纠正图中别处的记账而写。
+
+  【与其他 DDF 节点的关系】
+  · worldsheet.ddf-commute-with-nonzero-virasoro（m ≠ 0，formalized）：本卡的**上游**。
+    Lean 的证明只用了 m ≥ 1 的版本（`lie_towerLop_ddfOp_of_pos`），
+    一行代数：L_m(A^ε_n Ψ) = A^ε_n(L_m Ψ) + ⁅L_m, A^ε_n⁆Ψ = 0 + 0 = 0。
+  · worldsheet.old-covariant-physical-states：单个 Fock 空间上的完整物理态卡
+    （Lean `Fock.physSubmodule`，两条条件都有）。本卡的 P(p;k_0) 是它在塔上的**正模那一半**。
+    Lean 侧塔上的完整版 `towerPhysSubmodule` **已定义但没有保持性定理**。
+  · worldsheet.ddf-commute-with-virasoro（∀m）：承载完整推论的卡，effective = physical-argument。
+author: curator
+created: "2026-09-11"

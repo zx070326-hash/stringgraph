@@ -37,11 +37,26 @@ sources:
       本轮页图核实**没有覆盖到**（§12.1 只落实了式号，未转录 (2.4.17) 前后的正文）。
       在裁定前**不得**把「X^μ 不是主场」当作可引的原书结论；本条已上报 lead/auditor。
 
+      **【2026-09-11 裁定已下达，本卡因此换代】** 抽取记录 §13.4（L1 页图，pp.43–49）取到
+      (2.4.17) 正下方 p.47 第一行的逐字「**All transform as tensors except `∂²X^μ`.**」，
+      主语是 (2.4.17) 权表里的全部五个算符。⇒ **在自由标量 CFT 里 X^μ 是权 (0,0) 的主场**，
+      本卡 statement 与 notes 里的相反说法是错的。已换代到 worldsheet.primary-field-v2。
+
       见 literature/extractions/polchinski-1998-v1.md §12.1（E30/E31/E32）与 §12.10 表 B 第 25 项。
 tags: [cft, primary-field, conformal-weight, definition]
+superseded_by: worldsheet.primary-field-v2
 notes: |
+  ⚠⚠ **本卡已于 2026-09-11 换代（superseded_by: worldsheet.primary-field-v2），原因是下面第 (1) 条
+  与 statement 末句「非主场（如 T 自身、如 X^μ）」都是错的。** 原书 p.47 第一行逐字
+  「All transform as tensors except `∂²X^μ`」（(2.4.17) 权表正下方，L1 页图）⇒
+  **自由标量 CFT 里 X^μ 是权 (0,0) 的主场**；「X^μ 不是 tensor」只对**线性 dilaton CFT**
+  成立（§2.5 (2.5.3), p.49，那是另一个 CFT）。**本卡文本按项目原则 1 保持原样不改，
+  以下内容只作历史记录，不得再被引用。**
+
+  ── 以下为换代前的原文 ──
   两个易错点，均已核实存在于来源：
   (1) X^μ 本身**不是**主场（(2.4.7)），因为 T(z)X^μ(0,0) 的展开带 ln 项；权 (1,0) 的主场是 ∂X^μ。
+      **【2026-09-11 已证伪，见上方】**
   (2) T 自身**不是**主场，其变换律多出正比于中心荷的 Schwarzian 项，
       见 worldsheet.schwarzian-transformation-of-t。
 

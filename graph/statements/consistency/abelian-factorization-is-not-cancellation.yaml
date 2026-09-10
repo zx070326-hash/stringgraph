@@ -1,0 +1,140 @@
+id: consistency.abelian-factorization-is-not-cancellation
+kind: proposition
+title: 阿贝尔因子使十二形式因子化却写不出 GS 抵消项：U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ 的 Y₄ ≠ dH₃
+statement: |
+  **设定**：十维 N = 1 超引力 + 超 Yang–Mills 的**有效场论**，规范群取
+
+      G = U(1)⁴⁹⁶   或   G = E₈ × U(1)²⁴⁸
+
+  （两者的生成元数都是 n = 496）。反常十二形式按 Adams–DeWolfe–Taylor 的编排写成
+
+      Î₁₂ = (1/1440)[ −Tr F⁶ + (1/48) Tr F⁴ Tr F² − (Tr F²)³/14400 ]
+            + (n − 496)[ tr R⁶/725760 + tr R⁴ tr R²/552960 + (tr R²)³/1327104 ]
+            + Y₄ X₈/768                                                          (ADT (7))
+
+  其中 Tr 是伴随迹、tr 是 SO(1,9) 基本迹（conv.gauge-trace-normalization），
+  Y₄ = tr R² − (1/30) Tr F²，X₈ 见 ADT (8)。
+
+  **(1) 因子化成立。** 对上面两个群，第一个方括号**逐项**为零——U(1) 的伴随表示是单态，
+  故一切含阿贝尔生成元的伴随迹为零；E₈ × U(1)²⁴⁸ 的 E₈ 一支满足与 E₈ × E₈ 情形同一条迹关系——
+  且 n = 496 使第二个方括号为零。于是 Î₁₂ 取因子化形式 **Y₄ X₈**。对 U(1)⁴⁹⁶ 更简单：
+
+      Y₄^{(496)} = tr R²,   X₈^{(496)} = tr R⁴ + (tr R²)²/4                       (ADT (15))
+
+  **(2) 但 Green–Schwarz 抵消项写不下来。** 两件事同时成立：
+
+  · **阿贝尔规范场不进六边形图**：规范微子与规范场的耦合是 Dχ^a = ∂χ^a − i f^{abc} A^b χ^c，
+    U(1) 的结构常数全为零，故阿贝尔规范场与规范微子解耦，**没有阿贝尔反常可消**
+    （这与 Î₁₂ 中一切阿贝尔伴随迹为零是同一件事）；
+
+  · **超对称仍然强制阿贝尔 Chern–Simons 项**：按 Bergshoeff 等人的结果，每个 U(1)^{(i)} 都给 H₃
+    贡献一项 ω₃^{(i)} = A^{(i)} ∧ dA^{(i)}，
+
+        H₃ ≡ dB₂ − Σ_i ω₃^{(i)} + …                                              (ADT (16))
+
+    于是 B₂ 的动能项只有在 B₂ 按 **δ_Λ B₂ = Σ_i Λ^{(i)} F^{(i)}**（ADT (17)）变换时才规范不变。
+
+  两者合起来使抵消引力（与可能的非阿贝尔）反常所需的 GS 项在阿贝尔规范变换下不再不变：
+
+      δ_Λ ∫ B₂ ∧ X₈ = ∫ Σ_i Λ^{(i)} F^{(i)} ∧ X₈  ≠ 0                             (ADT (18))
+
+  而右端**没有对应的单圈反常可以抵消它**。等价的判据是 GS 机制赖以成立的关系 Y₄ = dH₃（ADT (13)）
+  在这里失效：
+
+      **Y₄ ≠ dH₃**                                                                (ADT (19))
+
+  ——阿贝尔场从 Y₄ 中退出（它们不进六边形图），却被超对称留在 dH₃ 里。
+
+  **(3) 二择一。** 因此（ADT 逐字）「Supersymmetry thus allows us to preserve either abelian gauge
+  or local Lorentz invariance, but not both.」：保住阿贝尔规范不变性就必须丢掉 ∫B₂ ∧ X₈，
+  从而留下未抵消的局域洛伦兹反常；保住洛伦兹不变性就破坏阿贝尔规范不变性。
+  结论逐字：这两个理论「cannot be made anomaly-free by the Green–Schwarz mechanism」。
+
+  **⇒ 记账后果（本卡存在的理由）**：「反常十二形式因子化」**不蕴含**「反常抵消」。
+  凡引用 consistency.twelve-form-factorization-solutions 的四解表处，只能说这四个群使 Î₁₂ **因子化**。
+
+  **本节点不断言**：
+  (a) ADT 摘要那句更强的「**are not consistent quantum theories**」。从 (3) 到「不是一致量子理论」
+      还需要「除 ∫B₂ ∧ X₈ 之外没有别的抵消办法」以及「(16) 是超对称的唯一选择」，
+      ADT 没有证明这两步（见推导 gaps）。本卡只承载「GS 机制在此写不下来」。
+  (b) 四解分类本身（见 consistency.twelve-form-factorization-solutions）。
+  (c) 「十维超引力沼泽地为空 / 弦普适性」——ADT 摘要自带限定语「without **known** inconsistencies」，
+      不是分类定理。
+  (d) Bergshoeff 等人那条超对称要求本身：本项目未取得 Nucl. Phys. B195 (1982) 97（L0），
+      本卡只转述 ADT 对它的引用。
+  (e) 弦论侧的任何事（本卡全部在有效场论侧）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352**v2**，第三节「10D supergravity with abelian gauge group factors」，(15)(16)(17)(18)(19)；因子化与 GS 机制的复述见第二节 (7)(8)(9)(10)(11)(12)(13)"
+    note: |
+      L1。researcher 已逐页读毕 4 页 PDF（抽取记录 literature/extractions/gsw-1987-v2.md E14）。
+      **本卡另由 curator 于 2026-09-11 取 arXiv e-print 源码 `universality_ten_v2.tex`
+      （`https://arxiv.org/e-print/1006.1352v2`，作者投稿的 LaTeX 原件）逐段核对**，
+      式号按源码中公式环境的出现顺序数得：
+      (1) 作用量、(2) H₃ = dB₂ − ω₃^Y、(3) ω₃^Y、(4) B₂ → B₂ + Tr(ΛF)、(5) 下降关系、
+      (6) δ log Z ~ ∫Î₁₀、(7) Î₁₂、(8) Y₄ 与 X₈、(9) H₃ = dB₂ − ω₃^Y + ω₃^R、(10) ΔS ~ ∫B₂ ∧ X₈、
+      (11) B₂ → B₂ + Tr(ΛF) − tr(ΘR)、(12) Y₄ = d(ω₃^R − ω₃^Y)、(13) Y₄ = dH₃、(14) Dχ^a、
+      (15) Y₄^{(496)} 与 X₈^{(496)}、(16) H₃ 的阿贝尔 CS 项、(17) δ_Λ B₂、(18) δ_Λ ∫B₂ ∧ X₈、
+      **(19) Y₄ ≠ dH₃**。⇒ 抽取记录与 sources.bib 里「(19) 逐字 Y₄ ≠ dH₃」**得到独立确认**。
+      ⚠ **同时发现一处转录误差（本卡按源码写，供 lead / researcher 修 literature/）**：
+      (7) 的引力三项在源码里是**小写 tr**（tr R⁶、tr R⁴ tr R²、(tr R²)³），
+      而 `literature/sources.bib` 的 adams-dewolfe-taylor-2010 note 与
+      `extractions/gsw-1987-v2.md` E14 都写成了大写 Tr R⁶ 等。
+      ADT 在 (7) 之后逐字定义「tr is the trace in the fundamental of SO(1,9)」，故**小写为准**。
+      ⚠ 版本必须写死 v2：致谢逐字承认早期版本 (7)(8) 的系数有误。
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(20)（纯引力十二形式，用于与 ADT (7) 的交叉核验）"
+    note: |
+      L1。**只作交叉核验**，不承载本卡的阿贝尔论证（GS 1984 里没有阿贝尔解）。
+      核验结果见推导 notes：ADT (7) 乘以 −96 后与 GS (20) 在纯引力扇区**逐项相同**。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, pp. 100–101：(12.2.27)(12.2.28a,b) 与 (12.2.29)；p. 101 脚注 1「They also hold for E₈ × U(1)²⁴⁸ and U(1)⁴⁹⁶, but no corresponding string theories are known.」"
+    note: |
+      **L1 原书**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E14/E15）。
+      ★ **ADT (7)(8) ≡ Polchinski (12.2.27)(12.2.28a,b)，逐项逐系数完全相同**（抽取记录 E15 已核实；
+      ADT 自陈「following the presentation of Polchinski [11]」）。⇒ 本卡引用的反常多项式有第二处 L1 转录。
+      ⚠ **两者在公式上不是独立证据**（同一排布，且系数都外包给 Alvarez-Gaumé–Witten）。
+      ⚠ **记号不同**：Polchinski 的 tr = 切空间迹、Tr_a/Tr_v = 规范群伴随/矢量迹；
+      Polchinski ↔ ADT 可逐符号对译（Tr_a ↔ Tr，tr ↔ tr），Polchinski ↔ GS **不能**。
+      ★ **本条同时是本卡结论的一处旁证**：Polchinski 在脚注里对两个阿贝尔解补的话是
+      「**but no corresponding string theories are known**」，且全书**不说**它们反常抵消——
+      他的措辞恰好避开了 ADT 指出的坑。
+tags: [anomaly, green-schwarz-mechanism, abelian, d10, swampland, effective-field-theory, factorization]
+notes: |
+  【0. ★ 陈述里两处指向 consistency.twelve-form-factorization-solutions 的交叉引用已改道（2026-09-11）】
+  本卡的 statement 写于同日稍早，当时四解表由 `consistency.twelve-form-factorization-solutions` 一张卡承载。
+  lead 依 literature/extractions/polchinski-1998-v2-ch12.md 裁决后，那张卡**已拆成两张并标 superseded_by**：
+  · **consistency.d10-four-groups-satisfy-anomaly-conditions**（rigorous）——四个群满足两条反常条件（可机检）；
+  · **consistency.d10-anomaly-conditions-completeness-claim**（conjecture）——「恰是这四个」的完备性主张。
+  statement 文本按项目原则 1 不改；**阅读时请把那两处引用读作指向上面两张新卡**。
+  新增红线：**不得写「恰有四个」**（Polchinski §12.2 p.101 脚注 1 的动词只是 "hold"，无唯一性主张）。
+
+  【1. ★ 这条卡是记账红线的载体（docs/ROADMAP.md 2026-09-11）】
+  在 ADT 2010 之前，文献习惯把「Î₁₂ 因子化」直接说成「anomaly-free」。ADT 证明这两件事在**阿贝尔情形分裂**：
+  · (a) 因子化 Î₁₂ ∝ Y₄X₈ —— 四个 496 维解都满足；
+  · (b) GS 抵消项真能写下来（要求 Y₄ = dH₃）—— 两个阿贝尔解做不到。
+  图中任何引用四解表的地方只能写 (a)。
+
+  【2. 与 Vafa 2005 的关系（本卡不越区建边）】Vafa 的 landscape/swampland 文（本图 swampland 区在审分支）
+  逐字把「U(1)⁴⁹⁶ 与 U(1)²⁴⁸ × E₈ 就反常而言一致」当作前提，并逐字邀请两个方向的后续工作
+  （「either to construct these or … to find what consistency condition goes wrong」）。
+  **ADT 正是第二个方向的实现**，且其前提句被本卡推翻。
+  ⚠ 但 ADT 的结论**比 Vafa 的猜想更强也更窄**：Vafa 猜「造不出来」，ADT 论证「GS 机制用不上」。
+  两者不是同一条陈述；swampland 区若要挂边，必须在边上写清这一点。
+
+  【3. 与 GSW 第 10 章的一致性】GSW Vol.2 p.148 逐字：「**Only in the abelian case, when the theory
+  becomes free, can T vanish.**」——即在 GSW 自己的框架里，阿贝尔规范反常平凡地为零。
+  这与 ADT「阿贝尔场不进六边形图」是同一件事，**两个独立来源相符**。
+  真正的问题因此全在引力/混合反常与抵消项能否写下来，正是本卡 (2)。
+
+  【4. 未建的相邻节点】
+  · Bergshoeff–de Roo–de Wit 等（NPB 195 (1982) 97）的超对称要求（ADT (16) 的来源）：本项目未取得，
+    未建节点，未登记 bib。这是本卡论证链上**最实质的外部输入**。
+  · Chapline–Manton（PLB 120 (1983) 105）（非阿贝尔推广，ADT (2) 的来源）：同样未取得。
+  · Fiol 2008（arXiv:0809.1525）在 ADT 之前给出这两个理论「可能不存在」的**另一类**证据
+    （紧化后模空间体积、repulson 奇点、非阿贝尔 enhançon 不可用）。
+    **与本卡的论证完全不同，不是同一条陈述**，本轮不建节点（正文 L0，只核实了 arXiv 元数据与摘要）。
+author: curator
+created: "2026-09-11"

@@ -67,8 +67,11 @@ StringFormal/
   Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
   Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
   Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
+  Virasoro/ShapovalovLevelThree.lean   level-3 Gram（9 个内积）与 det₃ = 48h²(16h²+2h(c−5)+c)(3h²+h(c−7)+c+2)，及其与 Kac 公式 N=3 乘积形 2304(h−h₁₁)²(h−h₁₂)(h−h₂₁)(h−h₁₃)(h−h₃₁) 的等同
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
+  Math/FiniteCounts.lean    六边形奇数扭转数 Σ_{k odd} C(6,k) = 32（GS (12c) 的"32"）；**GSO 扇区穷举**（Polchinski §10.6 (a)(b)(c) 字面有 10 解，maximal 者恰 6 个 = IIA/IIB/IIA′/IIB′/0A/0B——"maximality" 是原书未明说的第四条件）
+  Math/AnomalyPolynomial.lean  Polchinski (12.2.27)+(12.2.28) ≡ (12.2.11)+(12.2.12)（`ring`，同时验证 ADT (7)）；IIB 引力反常整数解 (2,−2,1) 射线（三式秩 2 非 3）；GS (20) = −96 × Polchinski 引力部分
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
@@ -88,7 +91,9 @@ StringFormal/
   NoGhost/VertexWeightNeg.lean  **m < 0 半**：L_m 真空显式和、Φ_J 真空关系、lie_Lop_vertexOsc_of_neg；合并版 lie_Lop_vertexOsc_of_ne（m ≠ 0）
   NoGhost/VertexWeightZero.lean  m = 0：lie_Lop_vertexOsc_zero；**合并版 lie_Lop_vertexOsc（每个 m ∈ ℤ，同一多项式系数）**。m = 0 只是真空引理不同（差 ½a·a，在对易子里抵消）
   NoGhost/DDFOperatorNeg.lean  塔版 lie_towerLop_towerVertex_of_ne（m ≠ 0）；**lie_towerLop_ddfOp_of_ne：[L_m, A^ε_n] = 0 对所有 m ≠ 0**（窗口两端各留 |m| 余量）；剩塔版 m = 0
-  NoGhost/TowerPhysical.lean  塔上物理子模 towerPositiveModeSubmodule / towerL0Submodule / towerPhysSubmodule（**统一截距 a₀**：塔上 L_0 在层 j 已用该层动量，条件 α'k² + j + N = a₀ 选出反对角线）；**ddfOp_mem_towerPositiveModeSubmodule**（A^ε_n 保持正模条件）；保持 L_0 条件待 m = 0 括号
+  NoGhost/DDFOperatorAll.lean  塔版 lie_towerLop_towerVertex（**每个 m ∈ ℤ**，由 Fock.lie_Lop_vertexOsc 搬运）；**lie_towerLop_ddfOp：[L_m, A^ε_n] = 0 对一切 m**（m = 0 时窗口余量为 0，边带为空，逐项自消）；**ddfOp_mem_towerL0Submodule / ddfOp_mem_towerPhysSubmodule**（A^ε_n 保持塔上物理子空间）
+  NoGhost/TowerPhysical.lean  塔上物理子模 towerPositiveModeSubmodule / towerL0Submodule / towerPhysSubmodule（**统一截距 a₀**：塔上 L_0 在层 j 已用该层动量，条件 α'k² + j + N = a₀ 选出反对角线）；**ddfOp_mem_towerPositiveModeSubmodule**（A^ε_n 保持正模条件）；保持 L_0 条件见 DDFOperatorAll.lean
+  NoGhost/VertexCommute.lean  b·b′ = 0 ⇒ 顶点算子对易（vertexOsc_comm_of_dotVec_zero；E₊ 穿过 E₋ 只在此用正交性，E₋E₋ = E₋(b+b′) 对任意动量）；塔上 k_0²=0 ⇒ towerVertex 对易（**k_0² ≠ 0 时有单值性因子，不对易**）；[A,A] 剩同点乘积局部有限性 + 全导数留数
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、

@@ -19,13 +19,15 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数：main 262 statements / 196 derivations / 32 formalized；Lean 31 声明公理干净（2145 jobs）。
+- 计数：main 290 statements / 222 derivations / 37 formalized；Lean 36 声明公理干净（2154 jobs）。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
+- **Lean 岛 1 里程碑（2026-09-11 深夜）**：`[L_m, V_J]` 对**每个 m ∈ ℤ**、`[L_m, A^ε_n] = 0` 对**每个 m**、**DDF 算子保持塔上物理子空间**（统一截距 a₀）全部机器验证；`ddf-commute-with-virasoro`（∀m）经 G–N 顶点代数推导已 **rigorous**，Lean 接线中。无鬼定理 v4 剩余上限：`ddf-transverse-oscillator-algebra`（拆卡中）、`ddf-operators-adjoint`、`transverse-ddf-fock-gram-matrix`——全在内积/伴随层（Q36：不定 Hermitian 内积下的顶点代数无带编号定理）。
 - Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（所有 m ≠ 0）** / **DDF 算子 A^ε_n 作为局部有限模态和 + [L_m, A^ε_n] = 0（m ≥ 1）** / level-2 负模态（含 p ≠ 0）已机器验证。剩：m = 0（真正例外）、塔版 m < 0、DDF 横向代数 [A,A]、张成定理。图接线（v6 定义卡、弱节点 positive-virasoro）进行中。
 - 无鬼定理回 rigorous：号差在顶点代数层不是假设（一切在 ℂ 上）；Li–Wang Thm 3.6/3.10 覆盖类光格——curator 正建 lattice-VA 卡并把 G–N 推导接离 open 根。
 - 无鬼定理回 rigorous 的最短路径：Gebert–Nicolai 顶点代数推导已入图（own rigorous），只被"自由玻色子顶点代数"缺卡压成 open——researcher 正找 Kac/LL/FLM 对不定号差格的编号定理。
+- Lean 岛 2 扩展：GSO 扇区穷举（(a)(b)(c) 字面 10 解、maximal 6 解——"maximality" 是 Polchinski 未明说的第四条件）、六边形奇数扭转 = 32、Polchinski (12.2.27) ≡ (12.2.11)+(12.2.12)（同时验证 ADT (7)）、IIB 引力反常整数解射线（三式秩 2）、GS (20) = −96 × Polchinski 引力部分。E₈ 根系幂和形式化中。
 - Lean 岛 2（Green–Schwarz 代数）：因子化恒等式（SO(32)/E₈）、迹条件算术 7 条声明已合入；等 GS 1984 图节点合入后接线。
 - 附带数学岛：Verma 模、Euler 分拆、Witt/Virasoro 完美、Shapovalov 形式、Möbius Jacobian、Mandelstam 和。
 
@@ -130,6 +132,8 @@
 - **lead 裁决（2026-09-11）**：`math.chern-simons-descent-equations--via-chern-weil-transgression` 保持 rigorous——Chern–Weil transgression 是标准已发表数学定理，own status 按论证本身；但三条 canonical 数学源（Chern / Kobayashi–Nomizu / Nakahara）目前 L0，researcher 须在该卡进入任何里程碑推导链前核实到编号。
 - **记账红线（2026-09-11，ADT 2010 L1）**：U(1)⁴⁹⁶ 与 E₈×U(1)²⁴⁸ 只是使反常十二形式**因子化**，GS 抵消项在阿贝尔情形**写不下来**（Y₄ ≠ dH₃，与超对称+阿贝尔规范不变性不相容）——图中分类卡只能写"因子化"，不得写"反常抵消"；Vafa 2005 E15 的前提被 ADT 反驳。四解分类原文措辞仍 L0（GSW ch.13 待船长点击）。
 - **已核实（2026-09-11，Polchinski v2 ch.12 L1）**：四解分类原文措辞——p.101 脚注 1 "They also **hold** for E₈×U(1)²⁴⁸ and U(1)⁴⁹⁶, but no corresponding string theories are known"；两条 properties（伴随迹组合为零 + n = 496），**无唯一性主张**。裁决：分类拆 (A1) 四群满足两条 properties（rigorous，纯代数）+ (A2) 完备性（physical-argument/conjecture）。Polchinski 拒绝固定 H 的 CS 常数 c、c′（(12.2.22)），独立佐证"相对符号是不变量"。**§12.5 p.126 作者自承**："a fully explicit proof of the perturbative consistency of the theory seems to be lacking"——建 `consistency.superstring-perturbative-consistency-unproven` 作 consistency 区共同瓶颈（Witten 2012–13 超黎曼面是否填上：待查）。
+- **原书页核实结案（2026-09-11，Polchinski v1 §13–§14）**：X^μ **是** h=0 主场（p.47 逐字；旧 `primary-field` 卡的反例是错的，已换代 v2）；T = 1/(2πα') 是 (1.2.10)；(A.1.31) 不是 e^{iS}=e^{−S_E}（本项目合成）；(1.2.31) Euler 数无边界项；书末参考文献把 OCQ 无鬼定理归 Brower 1972 + GT 1972，§4.4 自陈 "loosely patterned on" Kato–Ogawa（Kac/FF/Thorn 1985 不在参考文献）；ch.7 tadpole 相消是 **SO(8192)**（玻色弦，作者自称 "probably has no special significance"），SO(32) 只一句前向指路；(6.4.18) α's = 0 极点在两循环序间相消（p.183 逐字，含全部偶数倍）；(6.6.21) 印刷 4α' 是误印（应 ¼α'）。
+- **Witten 2012–13 超黎曼面系列（L1）**：PCO 被导出、伪奇点被指认，但**全系列无一处宣称微扰一致性已证**（摘要 "demonstration"，§8.3 归纳挂在未证 "if"）；Donagi–Witten 非投影性**不是**对 PCO 的否定（逐字 "does not depend on a projection"）。三卡结构（1998 缺口 open / Witten 框架 physical-argument / DW rigorous）建设中。
 - 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。

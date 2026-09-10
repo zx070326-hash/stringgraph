@@ -51,7 +51,22 @@ notes: |
   这不造成歧义：v2 在 X 部门逐字退化为 v1（v2 放宽的是设定范围并补了费米换序符号），
   本卡的 T(z) 只涉及玻色型的 X^μ。
 
-  注意 X^μ 本身**不是**主场（Polchinski (2.4.7)），只有 ∂X^μ 才是权 (1,0) 的主场；
-  见 worldsheet.primary-field 的 notes。
+  ⚠ **【2026-09-11 更正，curator-v1-sec13】本段此前写的「X^μ 本身**不是**主场（Polchinski (2.4.7)）」
+  是错的。** 原书 (2.4.17) 权表正下方 p.47 第一行逐字「**All transform as tensors except `∂²X^μ`.**」
+  ⇒ 在本卡这个自由标量 CFT（T = (2.4.4)）里，**X^μ 是权 (0,0) 的主场**，∂X^μ 是权 (1,0) 的主场，
+  唯一的非 tensor 是 **∂²X^μ**。(2.4.7) 恰是主场变换律 (2.4.15) 在 h = h̃ = 0 的无穷小形式。
+  「X^μ 不是 tensor」只在**线性 dilaton CFT**（另一个 T，(2.5.1a,b)）成立，见 §2.5 (2.5.3), p.49。
+  详见 worldsheet.primary-field-v2（旧卡 worldsheet.primary-field 已因同一错误换代）。
+
+  ★ **【必须与本卡一起搬运的约定陷阱（2026-09-11，L1）】** Polchinski 的世界面能动张量按
+  **(1.2.22)（p.13）** 定义为 `T^{ab} = −4π(−γ)^{−1/2}(δ/δγ_ab)S_P`，其正下方逐字：
+  「This has an extra factor of `−2π` relative to the usual definition in field theory;
+  this is a standard and convenient convention in string theory.」
+  ⇒ **本卡的 T(z) = −(1/α'):∂X∂X:（原书 (2.4.4), p.44）与场论通行的能动张量差一个 −2π 因子。**
+  这是同一套归一化的两个面貌，但**只有 p.13 这一句把差别讲明**。任何把本卡公式搬到
+  场论式表述（Noether 定理、Einstein 方程源项、Ward 恒等式的场论写法）的节点都必须声明它。
+  本图目前**没有** conv.worldsheet-stress-tensor-normalization 这个约定卡；抽取记录 §13.9 B#8
+  建议新建，已列入报告交 lead 裁决（新建约定 family 需要指定 canonical，超出本轮范围）。
+  见 literature/extractions/polchinski-1998-v1.md §13.3(c) 与 §13.4(a)(c)。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

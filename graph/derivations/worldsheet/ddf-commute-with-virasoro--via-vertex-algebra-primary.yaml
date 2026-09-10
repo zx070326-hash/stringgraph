@@ -44,8 +44,8 @@ depends_on:
       **原 gaps 第 1 条逐字说「补上那张卡是把本条升到 rigorous 的唯一待办」——本轮补上了。**
       ⚠ 仍需注意本卡的边界 (N4)(N6)：它不断言共形向量 ω 与本图 Sugawara L_m 是同一族算子，
       也不断言 𝒴(e^{jk}, z) 就是 :e^{i j k_0·X}:；这两条仍分别由下面的
-      worldsheet.virasoro-generators-free-boson（inferred）与 ddf-operators-v5 的 convention_map 承担。
-  - id: worldsheet.ddf-operators-v5
+      worldsheet.virasoro-generators-free-boson（inferred）与 ddf-operators-v6 的 convention_map 承担。
+  - id: worldsheet.ddf-operators-v6
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条）：G–N 的格点向量对应本图 α_0-归一化的动量
       （r ↔ (2α')^{1/2} p，k ↔ (2α')^{1/2} k_0），于是 G–N 的常设假设 r·k = 1 逐字对应本图的
@@ -139,7 +139,7 @@ summary: |
   **注意两个 m 不是同一个**：(2.57) 的 m 是**模指标**（这里取 0），(3.5) 的 m 是**动量指标**
   （藏在 e^{mk} 里，任意）。这正是「零模」这一措辞在本路线中的关键作用。
 
-  第 5 步（翻回本图的对象）。按 depends_on 中 worldsheet.ddf-operators-v5 的 convention_map，
+  第 5 步（翻回本图的对象）。按 depends_on 中 worldsheet.ddf-operators-v6 的 convention_map，
   G–N 的 (ξ, k, r, A^ξ_m, L_(n)) 逐项对应本图的 (ε^i, k_0, p, A^i_n, L_m)，
   于是 (3.5) 即目标陈述 [L_m, A^i_n] = 0 对所有 m ∈ Z、所有 n ∈ Z \ {0}
   （G–N 的量词更宽，含 n = 0；目标只取 n ≠ 0，是其特例）。

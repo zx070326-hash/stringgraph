@@ -8,11 +8,37 @@ definition: |
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.9)–(1.2.10)（弦张力 T = 1/(2πα') 与 Regge 斜率的定义）"
+    loc: "§1.2, eq. **(1.2.10)**, p.11：`T = 1/(2πα′)`；α′ 作为 *Regge slope* 的定义性描述在同页 (1.2.9a,b) 下方正文；Nambu–Goto 拉氏量里的 1/(2πα′) 见 **(1.2.9b)**"
+    note: |
+      【原书核实 2026-09-11（researcher 第七轮，L1 页图逐字）——Q1 关闭】
+
+      p.11 (1.2.9a,b) 下方逐字：
+        "where `M` denotes the world-sheet. The constant `α′`, which has units of
+         spacetime-length-squared, is the *Regge slope*, whose significance will be seen later.
+         The tension `T` of the string is related to the Regge slope by
+             `T = 1/(2πα′)`   (1.2.10)
+         (exercise 1.1)."
+
+      两处订正：
+      1. **式号是 (1.2.10)，p.11。** 本节点此前写的 (1.2.3) 与 (1.2.9)–(1.2.10) 都不准确：
+         **(1.2.3) 实为点粒子作用量的变分 `δS_pp = −m∫dτ u̇_μ δX^μ`（p.10），与 α′ 毫无关系。**
+      2. ⚠ **原书把 `T = 1/(2πα′)` 本身标为「(exercise 1.1)」**，即**这条关系在正文里没有推导**，
+         只有断言 + 习题。本约定卡是 convention（不参与状态传播），故此事不影响任何有效状态；
+         但凡把它当作**命题**引用的节点必须知道：Polchinski 侧只有习题，不是正文论证。
+
+      见 literature/extractions/polchinski-1998-v1.md §13.3(a)(b)。
   - ref: polchinski-1998-v1
     loc: "§1.3, eq. (1.3.36)（开弦光锥质量壳）"
 notes: |
-  抽取记录 polchinski-1998-v1#Q1 指出原先写的 eq. (1.2.3) 定位有误，已改为 §1.2 约 (1.2.9)–(1.2.10)；
-  新公式号仍为近似定位，需 researcher 核对。
+  抽取记录 polchinski-1998-v1#Q1 曾指出原先写的 eq. (1.2.3) 定位有误，一度改为「§1.2 约 (1.2.9)–(1.2.10)」；
+  **2026-09-11 原书页图核实后定为 (1.2.10), p.11**（见上方 sources note），近似定位与「需 researcher 核对」的
+  限定同时撤销。
   原定义文本写死了 "α' m^2 = N - 1"，等于把截距 a = 1 当成归一化约定；
   按 auditor 意见改为 α' m^2 = N - a，把 a = 1 留给命题节点。
+
+  ⚠ **同族的一条 §1.2 约定陷阱（不在本卡的 definition 里，此处记账）**：Polchinski 的世界面能动张量
+  按 (1.2.22)（p.13）定义为 `T^{ab} = −4π(−γ)^{−1/2}(δ/δγ_ab)S_P`，原书正下方逐字
+  「This has an extra factor of `−2π` relative to the usual definition in field theory;
+  this is a standard and convenient convention in string theory.」
+  即**本书的 `T^{ab}` 比场论通行定义多一个 `−2π`**。它与 α′ 归一化是两件事，属另一个 family
+  （尚未建卡，见 worldsheet.energy-momentum-tensor-free-scalar 的 notes 与本轮报告）。

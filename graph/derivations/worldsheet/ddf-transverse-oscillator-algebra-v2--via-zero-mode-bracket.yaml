@@ -40,7 +40,7 @@ depends_on:
       （但「扭群代数在此退化为普通群代数」仍是本项目推断，见本卡推导的 gaps 第 1 条）。
       【改挂记录，2026-09-11（同上）】此前 inferred 到 worldsheet.string-cft-is-a-vertex-algebra-v2
       （effective = open），那是原 gaps 第 1 条登记的缺卡。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条；**本推导对它比对易关系那条推导更敏感，
       因为这里右端不是 0 而是 m δ^{ij}**）：

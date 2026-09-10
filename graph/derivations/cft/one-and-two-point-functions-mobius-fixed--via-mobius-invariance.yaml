@@ -3,8 +3,14 @@ target: cft.one-and-two-point-functions-mobius-fixed
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.primary-field
-    note: 提供主场的定义与有限共形变换下的变换律 A'(z') = (∂z'/∂z)^{−h}(…)^{−h̄}A(z)（(2.4.13)）。
+  - id: worldsheet.primary-field-v2
+    note: |
+      提供主场的定义与有限共形变换下的变换律 A'(z') = (∂z'/∂z)^{−h}(…)^{−h̄}A(z)（(2.4.13)）。
+
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: worldsheet.sphere-conformal-killing-group
     note: 提供 PSL(2,C) 及其生成元（平移 a₀、标度+旋转 a₁、特殊共形 a₂）——本推导逐个使用。
   - id: math.mobius-group-sharply-three-transitive

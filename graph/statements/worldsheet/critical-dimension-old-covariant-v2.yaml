@@ -55,7 +55,22 @@ sources:
       属 §2.3.3（p.102–112），§2.3.2 是 'Construction of transverse physical states'（p.100–101）。
       式号未核实。
 tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
+superseded_by: worldsheet.critical-dimension-old-covariant-v3
 notes: |
+  **【已换代，2026-09-11】**本卡的 statement 文本一字未动，sources 与 tags 亦未动。
+  换代原因只有一处：statement 把 H_0 写成「零模态（伪态）子空间」，而紧邻的定义式
+  H_0 = {χ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys} 说的是**内积的根**；「伪态」是另一个概念
+  （L_{−n} 的后代），二者相等在 (D, a) = (26, 1) 恰是无鬼定理的一部分内容而非定义。
+  ms.critical-dimension-bosonic 第二轮回译审计 D5/T4 已就汇总卡的同款括注裁定须删，
+  第三轮 §6 逐字点名本卡是该链上最后一处仍带括注者，交 lead 排期。
+  新卡 worldsheet.critical-dimension-old-covariant-v3 只删该括注，其余逐字照抄本卡。
+  推导 worldsheet.critical-dimension-old-covariant-v2--via-no-ghost 已改名改指为
+  worldsheet.critical-dimension-old-covariant-v3--via-no-ghost，故本卡现无推导，
+  这是换代后的正常状态（report 会把带 superseded_by 的开放命题隐去）。
+
+  ──────────────────────────────────────────────────────────────────────
+  以下为换代前的 notes，逐字保留：
+
   【本卡片换代 worldsheet.critical-dimension-old-covariant】（curator，2026-09-11，依
   docs/ROADMAP.md 待拆清单，lead 已同意）旧卡有两处问题，都在 ms.no-ghost-theorem 审计 B2/B3
   与旧卡自身的 notes 中已登记，但因「不改已提交陈述」而只能挂账：

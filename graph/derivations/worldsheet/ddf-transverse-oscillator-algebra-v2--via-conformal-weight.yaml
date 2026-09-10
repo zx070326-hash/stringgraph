@@ -3,7 +3,7 @@ target: worldsheet.ddf-transverse-oscillator-algebra-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: 被断言的对象；类光条件 k_0² = 0、横向条件 ε·k_0 = 0 与归一化 2α' k_0·p = 1 都是本论证的输入。
   - id: worldsheet.free-scalar-propagator
     inferred: true

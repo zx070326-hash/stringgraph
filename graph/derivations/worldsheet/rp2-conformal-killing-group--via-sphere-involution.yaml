@@ -13,7 +13,7 @@ depends_on:
       中与认同 z ∼ −1/z̄ 相容的那些。原书 §6.1 逐字就是这样说的
       （「the subgroup of PSL(2,C) that respects the identification (6.1.9)」），
       与 §6.1 的球面段落同章同节，故不标 inferred。
-  - id: worldsheet.riemann-roch-kappa-minus-mu
+  - id: worldsheet.riemann-roch-kappa-minus-mu-v2
     note: |
       提供 κ − μ = 3χ，配 χ(RP₂) = 1 与本条 (1) 的 μ = 0 得 **κ(RP₂) = 3**。
       原书**不写**这个数字，但它写了 (5.2.11a) κ = 3χ（该卡承载的就是 (5.2.9)/(5.2.11a) 这条关系），

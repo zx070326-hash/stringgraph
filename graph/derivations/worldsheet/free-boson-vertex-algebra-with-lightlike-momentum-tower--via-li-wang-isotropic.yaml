@@ -30,7 +30,7 @@ depends_on:
       正对应 Li–Wang 的 M(1) 里零模不在 Fock 空间中而由模的参数 λ 携带）。
       振子关系 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0} 与 Heisenberg 李代数在 ⟨·,·⟩ = η 下逐字一致。
       **非 inferred**：两侧都是显式定义，对照逐项可见。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: |
       目标陈述 (3) 的整性条件 (I) 2α'(k_0·p) ∈ Z 的出处：该卡说明 (c) 逐字给出同一条件
       （由 ∂X^i(z) e^{i n k_0·X(z)} 与动量 p 的态的 OPE 单值性得 2α' k_0·p ∈ Z），

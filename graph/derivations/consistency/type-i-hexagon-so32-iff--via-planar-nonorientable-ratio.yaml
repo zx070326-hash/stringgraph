@@ -1,0 +1,86 @@
+id: consistency.type-i-hexagon-so32-iff--via-planar-nonorientable-ratio
+target: consistency.type-i-hexagon-so32-iff
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.chan-paton-gauge-group
+    inferred: false
+    note: |
+      固定候选集：type I 开弦的规范群只能是 SO(n)、USp(n) 或 U(n)。
+      **边在本推导来源处可查**：GSW p. 152（(10.2.1) 之前）逐字说 λ 属于规范代数
+      「SO(n), USp(n) or U(n)」的基本表示。
+      ⚠ **载体差异**：本图这张卡的来源是 polchinski-1998-v1 §6.5（世界面宇称投影），
+      GSW 则把同一结论外包给自己的 §6.1（本项目未抽取该章）。两者结论相同，论证路线不同。
+  - id: math.tr-f6-coefficient-vanishing
+    inferred: true
+    note: |
+      **inferred 的理由（两条，都必须记）**：
+      (1) 该节点讲的是**低能场论**十二形式里 tr F⁶ 的系数 **N + 32l** 何时为零；本推导需要的是
+          **弦论侧**的整数条件 **n + 32η = 0**。两者是同一条整数方程，前提是把 GS 的记号 l
+          与 GSW 的扭转因子 η 等同起来。**这一等同是抽取者/curator 做的**：
+          GSW 不引 GS 的记号，GS 也从不提「扭转」（抽取记录 literature/extractions/gsw-1987-v2.md Q5）。
+      (2) 该节点只覆盖 SO/USp 两支（l = ∓1），**不含 U(n)（η = 0）一支**；
+          η = 0 时 W = W_P ≠ 0 平凡无解，本推导直接补上（GSW (10.1.14) 的场论对应式系数是 n，
+          对任意 n ≥ 1 恒不为零，已补记在 math.so-usp-adjoint-fundamental-trace-identities 的 notes）。
+  - id: conv.gauge-trace-normalization
+    note: |
+      GSW p. 149 逐字给出与本约定**完全相同**的 tr/Tr 定义
+      （「'Tr' to denote a trace in the adjoint representation and 'tr' … in the fundamental」），
+      且 λ 取基本表示；抽取记录 §1.2 判定「完全一致，无需换算」。
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.2.1, pp. 152–153, (10.2.1)(10.2.2)(10.2.3) 与 η 的定义；§10.2.2, p. 165, (10.2.36)(10.2.37) 与逐字句「…and for no other group」；§10.1.2, p. 149, (10.1.11)–(10.1.14)（低能场论侧的对照）；§10.5, p. 172（总结）；p. 143（章首断言与自陈缺口）；p. 155（正规化方案的自陈 ad hoc）"
+    note: |
+      L1 逐页读图（抽取记录 E1/E4/E5/E6/E10/E11）。
+      作者自称的论证强度：主结论用直接断言（「will emerge」「vanishes … and for no other group」
+      「uniquely determines」），但同一章有三处自我限定——p. 143「although the relevant calculations
+      have not been performed」（指引力/混合侧）、p. 155（费曼规则 ad hoc、两种正规化）、
+      p. 171–172「not entirely rigorous」（指发散抵消，不指本卡的反常计算）。
+summary: |
+  **第一步：三类图的群论因子。** 单圈六边形在 type I 里有平面（annulus）、不可定向（Möbius 带）
+  与非平面三种拓扑，群论因子分别是 (10.2.1) G_P = n tr(λ₁…λ₆)、(10.2.2) G_N = η tr(λ₁…λ₆)、
+  (10.2.3) G_T = tr(λ₁…λ₄)tr(λ₅λ₆)。η 是扭转奇数条线的因子：SO(n) 给 −1、USp(n) 给 +1、U(n) 给 0。
+  平面图的 n 来自那条**没有粒子附着的边界**上的单位矩阵迹；Möbius 带只有一条边界，故没有这个 n。
+
+  **第二步：两个单迹图的比值。** GSW 把不可定向图的反常积分化到与平面图相同的变量上，
+  变量替换 √z_r → z_r（即 ν_r/2 → ν_r，5 个变量各出一个 2）给出因子 2⁵ = 32，
+  再用 G_N = η G_P / n，得 **(10.2.36) W_N = η(32/n) W_P**。
+
+  **第三步：解整数方程（这一步 GSW 不写，本图补出）。**
+  W = W_P + W_N = (1 + 32η/n) W_P。设 W_P ≠ 0，则
+
+      W = 0  ⟺  n + 32η = 0,   η ∈ {−1, 0, +1},  n 正整数。
+
+  · η = 0（U(n)）：方程成 n = 0，无解；
+  · η = +1（USp(n)）：n = −32 < 0，无解；
+  · η = −1（SO(n)）：n = 32，即 **SO(32)**，且解唯一。
+  这正是 math.tr-f6-coefficient-vanishing 在低能场论侧解的同一条方程（N + 32l = 0），
+  只是把 l 换成扭转因子 η、把 N 换成 Chan–Paton 维数 n——**这一等同是本图做的**，见 depends_on 的 inferred。
+
+  **第四步：低能对照（GSW 自己给的一致性检查）。** 低能极限下 (10.1.12) Tr t⁶ = (n − 32)trλ⁶ + 15trλ⁴trλ²：
+  n trλ⁶ 来自平面图，−32 trλ⁶ 来自不可定向图（GSW 逐字说这 32 是「六边形内线上分布奇数个扭转的方式数」），
+  15trλ⁴trλ² 具有非平面图的群论结构。⇒ 弦论侧的 n + 32η 与场论侧的 N + 32l **是同一个系数**。
+  ⚠ p. 165 该段两次把 (10.1.12) 误印为 (10.2.17)（抽取记录 §3.3）。
+
+  **档位理由**：全程是弦论微扰论的形式操作（发散圈积分、变量替换、canceled propagator argument），
+  作者自陈费曼规则是 ad hoc 引入的（p. 155），且第三步的解方程 GSW 根本不写。
+  按 docs/STATUS_LEVELS.md 这是 physical-argument。
+gaps:
+  - "★ GSW 只对**纯规范**六边形做了弦论侧计算。引力反常、混合反常、type IIB、杂化弦**全部只有低能场论的 suggests**：章首 p. 143 逐字「although the relevant calculations have not been performed」，§10.3 pp. 167–168 逐字「suggests」「should cancel」「It is plausible」「there seems to be」。目标卡的 (b)(d) 已把这些排除在陈述之外。"
+  - "★ 正规化方案的任意性（p. 155 逐字）：「Since at the present stage in the development of string theory the Feynman rules are introduced in a somewhat ad hoc manner so as to implement unitarity, rather than being derived from a fundamental action principle, it is not entirely clear what requirements, if any, a regularization method should satisfy.」同处说两种正规化（Pauli–Villars 型与 Fujikawa 型）给出**相同的抵消条件**但**不同的反常公式**。附录 10.A（pp. 175–178）本项目未读，故『两法一致』这一验证未核实。"
+  - "「和为零 ⟺ SO(32)」的整数方程 n + 32η = 0 是本图补出的一步：GSW 直接断言「and for no other group」，不作枚举也不写方程。"
+  - "(10.2.36) 里的因子 32 来自变量替换的 2⁵，GSW 只写结果不写积分中间步骤；本图未复核那个圈积分。"
+  - "本推导默认 W_P ≠ 0（否则任何群都『抵消』）。GSW 没有单独论证 W_P ≠ 0，只在 §10.2.1–10.2.2 算出它的显式表达式。"
+  - "「总反常为零」还需要非平面图（双迹结构 G_T）无反常，GSW 在 §10.2.3 用 canceled propagator argument 论证。**本图未建该节点**，故本卡只覆盖单迹部分，章首那句 iff 与本卡的等价性要等那张卡补上。"
+  - "U(n) 被 GSW 提前排除的理由是**超对称**（p. 152 逐字「Since U(n) groups have already been shown to be inconsistent with supersymmetry」），外包给该书 §6.1，本项目未取。本推导不需要它（η = 0 直接无解），但目标卡 (a) 提到了它。"
+  - "首发权不在本章：原始计算是 Green–Schwarz, Nucl. Phys. B255 (1985) 93–114（本项目未抽）。本章读到的页面内没有给出这条引用。"
+notes: |
+  【本推导与 math.hexagon-odd-twist-count 的关系】**不是依赖**。(10.2.36) 的 32 来自变量替换，
+  而扭转计数 32 出现在同一页的**低能解释**里（本推导第四步）。两条路线都给 2⁵，
+  GSW 不解释它们为何相等。math.hexagon-odd-twist-count 只承载后者的纯组合内容。
+
+  【升级路径】本卡要升到更高档位需要的不是更好的记账，而是别的文献：
+  (a) green-schwarz-1985-hexagon（原始计算，含正规化细节）；
+  (b) 附录 10.A（两种正规化给出相同抵消条件的验证，pp. 175–178 未读）。
+author: curator
+created: "2026-09-11"

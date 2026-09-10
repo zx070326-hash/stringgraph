@@ -40,7 +40,7 @@ definition: |
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.1, p.32，(2.1.1) 下方正文（无式号）：\"in the first seven sections all equations make sense if σ² is replaced with iσ⁰\"；欧氏约定（作用量整体变号）本身见 Appendix A, eq. (A.1.31)"
+    loc: "§2.1, p.32，(2.1.1) 下方正文（无式号）：\"in the first seven sections all equations make sense if σ² is replaced with iσ⁰\"；欧氏约定（作用量整体变号）本身见 **Appendix A, eq. (A.1.31), p.335**（逐字是 S_E 的定义式，**不是** e^{iS_L} = e^{−S_E}，见下方 2026-09-11 note）"
     note: |
       【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——Q10 关闭，本条 note 取代旧的
       「[S] 与 [H] 都查不到 ⇒ 不要当成已核实」判断】
@@ -82,6 +82,59 @@ sources:
       §3.3 的 Faddeev–Popov 手续（(3.3.16)/(3.3.18)/(3.3.21)/(3.3.24)，式号经 schrans-2020 目录核实）
       全部在欧氏号差、度规记号 g_{ab} 下进行，是本约定在第 3 章被使用的直接证据。
       **权重写成 e^{-S} 而非 e^{iS} 这一点在本图未逐字核实原书措辞。**
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.1「Bosonic fields」，斜体小标题 *Euclidean path integrals* 之下，p.335**：闵氏拉氏路径积分权重 exp[(i/ħ)∫dt L] 是 **(A.1.14)**（p.331）；欧氏路径积分 = ∫[dq] exp[∫₀^U du L(q, i∂_u q)] 是 **(A.1.30)**（p.335）；`S_E = ∫du L_E(q, ∂_u q) = −∫du L(q, i∂_u q)` 是 **(A.1.31)**（p.335）。**本约定 definition 段 (c) 里的 e^{iS_P^L} = e^{−S_P^E} 是这三式的合成，原书没有把它写成任何一个式子。**"
+    note: |
+      【原书核实 2026-09-11（researcher 第七轮，L1 页图逐字，App. A pp.329–338 读毕）——
+      **部分推翻本卡此前的表述：(A.1.31) 不是 `e^{iS_L} = e^{−S_E}`**】
+
+      (A.1.31) 的逐字上下文（p.335）：
+        "The weight in the Euclidean path integral is **conventionally defined to be** `exp(−S_E)`,
+         so the Euclidean action contains a minus sign,
+             `S_E = ∫ du L_E(q, ∂_u q) = − ∫ du L(q, i∂_u q) .`   (A.1.31)
+         Euclidean path integrals are usually the more well-defined, because the exponential of the
+         action is damped rather than oscillatory. The Minkowski matrix elements can then be obtained
+         by analytic continuation."
+
+      三条硬结论：
+      1. **(A.1.31) 是 `S_E` 的定义式**，不是 `e^{iS_L} = e^{−S_E}`。「权重是 exp(−S_E)」是式子上方的
+         **散文**，且原书用词是 "**conventionally defined to be**"（约定如此定义），不是「可以证明等于」。
+      2. **`e^{iS_L} = e^{−S_E}` 这个等式在原书里根本不存在。** 它只有把 **(A.1.14)**（闵氏权重
+         exp[(i/ħ)∫dt L]，p.331）+ **(A.1.30)**（欧氏权重逐字写作 `exp[∫₀^U du L(q, i∂_u q)]`，
+         指数上**没有 −S_E 字样**，p.335）+ **(A.1.31)** 三者串起来才成立。
+         **这个串接是本项目做的，不是原书的任何一行。** 本卡 definition 段 (c) 末句
+         「因此权重 e^{i S_P^L} = e^{- S_P^E}」按项目原则 1 不改文本，在此记账为
+         **合成结论（相当于 inferred: true）**，凡引用该句的节点须知其来源是三式合成。
+      3. **Wick 旋转在原书里的方向是 `t = −iu`，不是 `σ² = iσ⁰`。** p.335 逐字：
+         "**Taking the times to be purely imaginary, `t = −iu` for real `u`, defines the *Euclidean*
+         amplitudes**"。`t = −iu`（App. A）与 `σ² = iσ⁰`（§2.1）方向一致（u = it），
+         但**原书从未把这两个记号并排写出**，两者的桥接同样是本项目的推断。
+
+      ★ **本轮新记的两条作者自承缺口（都直接封顶任何以路径积分为根的链）**：
+      (i) **Wick 旋转的真论证只对单自由度量子力学做过。** p.335，(A.1.27)–(A.1.29) 之间逐字：
+          "…one only encounters `exp(−iHΔt)` for positive `Δt`. Now continue analytically by uniformly
+           rotating all times in the complex plane, `t → e^{−iθ}t` for any phase `0 ≤ θ ≤ π`. The real
+           part of the exponent is `−E sinθ Δt`, where `E` is the energy of the intermediate state.
+           **Because the Hamiltonian is bounded below for a stable system**, the sum over intermediate
+           states is safely convergent and no singularities are encountered — the continued amplitude
+           is well defined."
+          即论证依赖「**H 下有界**」这条假设，且**是对单自由度量子力学做的**；
+          **原书没有说它对世界面 CFT / 弦 S-矩阵也成立。** 本卡 notes 末段那条
+          「Wick 旋转在路径积分层面的合法性本图完全没有节点」的警告因此**得到原书侧的确认**，
+          且现在知道原书能给的最强的东西是什么。
+      (ii) **路径积分公式本身的推导是 heuristic 的。** p.332 逐字：
+          "The derivation of the path integral formula treated the continuum limit `ε → 0`
+           **rather heuristically**. Renormalization theory is the study of this limiting process,
+           and is rather well understood."
+          同页还有："**Actually, we will evaluate explicitly only a few Gaussian path integrals.**
+           We use the path integral primarily to derive some general results, such as operator
+           equations and sewing relations."
+          ⇒ **凡以「Polyakov 路径积分」为根的链，其根部状态封顶 `physical-argument`，作者明说。**
+          （本卡是 convention，不参与状态传播；这两条记在这里是因为它们是同一段附录的内容，
+          真正受影响的是 worldsheet.string-s-matrix 等以路径积分为根的命题卡。）
+
+      ⚠ **本轮未读 App. A pp.339–346**（§A.2 起，推测费米场/Grassmann）。
+      见 literature/extractions/polchinski-1998-v1.md §13.1(a)(b)(c)(d)(e)。
   - ref: schrans-2020
     loc: "目录条目 2.1–2.4（p.33）、3.7–3.10（p.88–89）：公式号的核对来源，非内容来源"
 notes: |
@@ -108,4 +161,12 @@ notes: |
   按不可违背原则 1 不改 definition 文本，此处记账：该括注中的「未核实」现为**已核实**，
   且注意**原书给的是分量表，不是 [S] 写的 ds² = dz dz̄**。
   另：上面 sources 第二条（§3.2–§3.3）里「权重写成 e^{-S} 而非 e^{iS} 未逐字核实」这句
-  **仍然成立**——本轮核实的是 §2.1 与 Appendix A 的式号，第 3 章的路径积分权重措辞未取页。
+  **仍然成立**——第 3 章的路径积分权重措辞未取页。
+
+  **2026-09-11（curator-v1-sec13，§13.1 落地）**：Appendix A 已取页，(A.1.31) 逐字到手，
+  结论是它**不是** `e^{iS_L} = e^{−S_E}`，而是 `S_E` 的定义式；旧 note (2) 里
+  「(A.1.31) 本身本项目尚未取页」这句现已作废。**definition 段 (c) 末句的那个等式，
+  以及 (b) 的 σ² = iσ⁰ ↔ t = −iu 桥接，都是本项目的合成/推断，不是原书逐字**——
+  详见上方新增的 Appendix A sources note。凡跨本 family 的 convention_map 除继承本卡
+  notes 已列的缺口外，还继承那条 note 里记的两条作者自承缺口
+  （Wick 旋转只对单自由度 QM 有真论证；路径积分连续极限 "rather heuristically"）。

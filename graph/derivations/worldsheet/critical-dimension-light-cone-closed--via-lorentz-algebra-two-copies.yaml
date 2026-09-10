@@ -1,0 +1,151 @@
+id: worldsheet.critical-dimension-light-cone-closed--via-lorentz-algebra-two-copies
+target: worldsheet.critical-dimension-light-cone-closed
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.critical-dimension-light-cone-v2
+    inferred: true
+    note: |
+      供给**单手征**的一切内容：Δ_n 的显式形式、「Δ_n = 0 ∀n ⟺ D = 26 且 a = 1」这一步、
+      前提 D ≥ 4 的必要性、以及「[J,J] = 0 ⟺ 逐个系数为零」所需的线性无关论证的模板。
+      本推导把它**逐手征地用两次**（右行用 a，左行用 ã）。
+      **inferred: true**，理由是这条移植在任何已定位的位置上都没有论证：
+        · GSW §2.3.1 (2.3.32) 是**开弦**（单组横向振子）的计算，且该式的「式号 ↔ 内容」
+          对应本身还是 L0（brst-cohomology-sources.md §5.2/§5.4：只有 Google Books 页码约束，
+          未读到正文）；闭弦的两手征版本是否出现在 §2.3.1 或 §2.3.4（p.113–116）**未核实**。
+        · Polchinski §1.4 根本不做这个计算（连开弦一侧都不做，抽取记录 §12.5 已核实）。
+      移植所用的物理输入写在 summary 第一段与 gaps 第 1、2 条：闭弦的 X^- 逐手征解出
+      （α^-_n ∝ L^⊥_n、ᾱ^-_n ∝ L̄^⊥_n），故 J^{i-} 分成右行三次式 + 左行三次式，
+      反常也分成两份；**左右交叉项经零模（x^i, p^i, p^+, x^-）的相消是本推导假定的**。
+    convention_map: |
+      被依赖节点（开弦卡）的整体常数是 -(1/(2α'(p^+)²))，其中零模归一化 α^μ_0 = (2α')^{1/2} p^μ；
+      闭弦取 α^μ_0 = ᾱ^μ_0 = (α'/2)^{1/2} p^μ（worldsheet.closed-string-mode-expansion），
+      故整体常数不同。目标陈述因此只写「C ≠ 0，依赖 α'、p^+、ℓ 的约定」而不写具体值——
+      Δ_n、Δ̃_n 的形式不受该常数影响，本推导的结论也不受影响。
+  - id: worldsheet.closed-string-mode-expansion
+    note: |
+      供给「横向场含两组独立振子（右行 α^i_n、左行 ᾱ^i_n）」与闭弦零模归一化。
+      来源 Polchinski (1.4.4) 式号与内容已核实（抽取记录 #E20），故不标 inferred。
+      没有它，「反常分成两份」这句话无从说起：开弦的 Neumann 边界条件把左右行绑成一组。
+  - id: worldsheet.closed-string-oscillator-commutators
+    note: |
+      供给 [α^i_m, α^j_n] = [ᾱ^i_m, ᾱ^j_n] = m δ^{ij} δ_{m,-n} 与 **[α^i_m, ᾱ^j_n] = 0**。
+      后者是本推导两处关键步骤的依据：(1) 反常按手征分成互不混合的两份；
+      (2) 线性无关那一步里右行成员与左行成员的像
+      n α^i_{-n} ᾱ^j_{-n}|0;k⟩ 与 n α^j_{-n} ᾱ^i_{-n}|0;k⟩ 是 Fock 空间里两个不同的基向量。
+      来源 (1.4.6c)/(1.4.6d) 式号与内容已核实（#E21），不标 inferred。
+  - id: worldsheet.closed-string-level-matching
+    note: |
+      供给 H_match 的定义（N = Ñ）。目标陈述把「洛伦兹代数闭合」断言在 H_match 上，
+      因为那才是闭弦光锥量子化的物理态空间；相应地，线性无关那一步的试探态必须取在
+      H_match 内（本推导取 α^j_{-n} ᾱ^j_{-n}|0;k⟩，它满足 N = Ñ = n）。
+      来源 (1.4.10)/(1.4.11) 式号与内容已核实（#E23），不标 inferred。
+      ⚠ 这条边**不是**结论的前提而是断言范围的限定：由于试探态本身就在 H_match 内，
+      同一结论在整个闭弦 Fock 空间上也成立（目标陈述已写明），故 level matching
+      既不加强也不削弱结论，只是把命题放到物理态空间上说。
+  - id: worldsheet.light-cone-normal-ordering-constant
+    note: |
+      **只服务于 summary 第二段**（Polchinski 形状的那条路线：先把 ζ 正规化值
+      a = ã = (D-2)/24 代进去，再配合独立得到的 a = ã = 1 得 D = 26）。
+      **目标陈述与本推导的主论证不用它**：主论证把 a、ã 当作 Δ_n、Δ̃_n 中的**待定参数**，
+      由 n 的正幂系数得 D = 26、由负幂系数得 a = ã = 1，全程不需要任何正规化数值。
+      该节点是对**开弦**（一组横向振子）陈述的，闭弦对左右各用一次；抽取记录 #E22
+      明确写「其中 A = Ã = -(D-2)/24」，故这条边有来源支撑，不标 inferred
+      （与 worldsheet.closed-string-intercept--via-light-cone-representation 的同名边同一理由）。
+      下游**不得**据本边推断「本路线共享 ζ 正规化处方」——主论证不经过 ζ。
+    convention_map: |
+      被依赖节点按 Polchinski 记号给 A = -(D-2)/24 并声明 conv.intercept-sign-a（a = -A）；
+      本推导与目标陈述用 a、ã，取 a = ã = (D-2)/24。
+  - id: worldsheet.closed-string-intercept
+    inferred: true
+    note: |
+      **只服务于 summary 第二段的第三条路线**（「联立」路线）：那张卡由 level (1,1) 的小群
+      表示论独立给出 a = ã = 1（与 D 无关），把它与上一条边的 a = ã = (D-2)/24 联立即得
+      D = 26。这正是该卡推导 --via-light-cone-representation 的 gap 里说的「需要把
+      a = (D-2)/24 与 a = 1 联立」那一步，本推导在此把它显式记到图上。
+      **inferred: true**：这一步的**联立本身**在任何已定位的位置上都没有逐字论证。
+      Polchinski §1.4 只在质量公式一带提到 D = 26（抽取记录 #E22 的「原文陈述」），
+      而 #E22 的备注明写化简式 m² = (4/α')(N-1) 是否显式出现**未核实**；
+      本卡片与该边都不据以主张原书论证了闭弦的 D = 26。
+      ⚠ **主论证不依赖这条边**：目标陈述的充要条件由 Δ_n、Δ̃_n 逐系数给出，
+      不需要预先知道 a = ã = 1，也**不**预设 a = ã（那张卡把 a = ã 当输入，本卡不）。
+      因此删掉这条边不会削弱目标陈述，只会删掉 summary 第二段的第三条路线。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.1 'Light-cone gauge and Lorentz algebra', p.93–99, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算与 Δ_n；**开弦版本**）；闭弦的两手征版本未在任何已定位处核实（§2.3.4 'Analysis of the spectrum', p.113–116 是唯一可能的落点，未核实）"
+    note: |
+      GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已按 conv.metric-mostly-plus 与
+      conv.alpha-prime-regge 转写；Δ_n 的形式不受影响。
+      定位等级：小节页码来自 CUP 目录（brst-cohomology-sources.md §5.1，L4），
+      "2.3.32" → p.99 来自 Google Books（§5.2），**式号 ↔ 内容对应为 L0**。
+      §5.4 明写这套页码「只能当区间约束用，不能当精确定位」。
+  - ref: polchinski-1998-v1
+    loc: "§1.4：闭弦模式展开 **(1.4.4)**、左右行振子对易 **(1.4.6c)/(1.4.6d)**、质量公式 **(1.4.8)**（含 A = Ã = −(D−2)/24）、level matching **(1.4.10)/(1.4.11)**（式号与内容均已核实，#E20–#E23）；单行正规序常数的 ζ 正规化在 §1.3 **(1.3.31)–(1.3.35)**"
+    note: |
+      这些位置支撑本推导的舞台设置（两组互相对易的横向振子、左右各一个正规序常数、
+      level matching）与 summary 第二段的 ζ 值，**不**支撑闭弦的 [J^{i-}, J^{j-}] 计算。
+      原书连开弦一侧的该计算都没做、也没留成习题（抽取记录 §12.5 已核实），
+      并三处自降严格程度：p.21「plausible without a complete treatment」、
+      p.24「We will show this **indirectly** in the coming chapters」、p.90「rather **heuristically**」。
+      这三句同样是本推导封顶在 physical-argument 的文献依据。
+summary: |
+  【主论证：两份反常】闭弦光锥规范把 X^- 的振子**逐手征**解出（α^-_n ∝ L^⊥_n，ᾱ^-_n ∝ L̄^⊥_n），
+  故 J^{i-} = （零模部分）+（右行三次式）+（左行三次式）。左右振子互相对易
+  （worldsheet.closed-string-oscillator-commutators），于是把开弦的计算
+  （worldsheet.critical-dimension-light-cone-v2，来源 GSW §2.3.1 (2.3.32)）逐手征各做一遍，
+  得到
+    [J^{i-}, J^{j-}] = -C Σ_{n≥1} [ Δ_n (α^i_{-n}α^j_n - α^j_{-n}α^i_n)
+                                  + Δ̃_n (ᾱ^i_{-n}ᾱ^j_n - ᾱ^j_{-n}ᾱ^i_n) ],
+  Δ_n 为开弦的表达式（含 a），Δ̃_n 为同一表达式把 a 换成 ã。C ≠ 0 只依赖约定。
+
+  【把「对易子为零」翻成「逐个系数为零」】固定一对 i ≠ j（这需要 **D ≥ 4**）。
+  对每个 n，取满足 level matching 的试探态 ψ_n = α^j_{-n} ᾱ^j_{-n}|0;k⟩ ∈ H_match：
+    · 右行第 m 个成员作用在 ψ_n 上得 n δ_{mn} α^i_{-n} ᾱ^j_{-n}|0;k⟩
+      （第二项 α^j_{-m}α^i_m 因 i ≠ j 而湮灭 ψ_n）；
+    · 左行第 m 个成员作用在 ψ_n 上得 n δ_{mn} α^j_{-n} ᾱ^i_{-n}|0;k⟩；
+    · 两个像是 Fock 空间的两个不同基向量（i ≠ j），线性无关。
+  故 [J^{i-}, J^{j-}] = 0 在 H_match 上 ⟺ 对所有 n ≥ 1 有 Δ_n = Δ̃_n = 0。
+  Δ_n 中 n 的正幂系数 (26-D)/12 = 0 给 D = 26；代回负幂系数得 a = 1；Δ̃_n 同样给 ã = 1。
+  反之 D = 26、a = ã = 1 时每个 Δ_n、Δ̃_n 都为零。这就是目标陈述的充要条件。
+  D = 3 时两族恒为零，翻译失效（目标陈述的【不断言】(i)）。
+
+  【第二段：另外两条给出同一结论的路线，本推导只作登记，不作为主论证】
+  (α) **Polchinski 形状**：把每行的 ζ 正规化值 a = ã = (D-2)/24
+      （worldsheet.light-cone-normal-ordering-constant，对左右各用一次；闭弦形式见 (1.4.8)
+      的 A = Ã = -(D-2)/24）代入 Δ_n、Δ̃_n，则两者同时退化为 n(26-D)/12，
+      闭合 ⟺ D = 26，而 a = ã = 1 成为随之而来的推论。
+  (β) **「联立」路线**：worldsheet.closed-string-intercept 由 level (1,1) 的小群表示论
+      独立给出 a = ã = 1（与 D 无关）；与 a = ã = (D-2)/24 联立即得 D = 26。
+      这正是该卡推导 --via-light-cone-representation 的 gap 所指的空缺，现由本节点补上。
+  (α)(β) 都经过 ζ 正规化，主论证不经过（主论证把 a、ã 当自由参数）。
+gaps:
+  - "**闭弦的 [J^{i-}, J^{j-}] 两手征形式没有已定位的来源**：GSW §2.3.1 (2.3.32) 是开弦（单组横向振子）的版本，且其「式号 ↔ 内容」的对应本身是 L0（brst-cohomology-sources.md §5.2/§5.4 只给了 Google Books 的页码区间约束，未读到正文）；Polchinski §1.4 根本不做这个计算（连开弦一侧都不做，抽取记录 §12.5 已核实）。闭弦版本落在 GSW §2.3.1 或 §2.3.4（p.113–116）的可能性存在但**未核实**。因此 depends_on 中指向开弦卡的那条边标 inferred: true。"
+  - "**左右交叉项的相消是假定的**：J^{i-} 的右行部分与左行部分共享零模（x^i, p^i, p^+, x^-），故 [J^{i-}, J^{j-}] 中原则上有交叉项。本推导按标准的手征分解假定它们相消、反常恰好分成两份互不混合的和。该步骤在本图的任何已定位来源处**都没有被写出来**，是本条推导相对开弦一侧新增的、未被文献覆盖的一步。"
+  - "零点能 Σ_{n≥1} n = ζ(-1) = -1/12 的 ζ 正规化没有算子层面的严格定义（节点 worldsheet.zeta-regularized-sum-of-integers，physical-argument）。它只进入 summary 第二段的 (α)(β) 两条路线；主论证不用它，但整条 Δ_n 的推导（在开弦卡里）本身就经过无穷模式和的重排与正规序重整，这是本推导封顶在 physical-argument 的主要原因之一。"
+  - "**[J^{i-}, J^{j-}] 的计算涉及无穷多模式求和的重排**（J^{i-} 是三次式），文献按形式操作处理，未给出收敛性论证。闭弦是两份这样的和，问题不因手征分解而减轻。"
+  - "**前提 D ≥ 4 与线性无关一步不在来源里**：与开弦卡 worldsheet.critical-dimension-light-cone-v2 的同名 gap 同款——GSW 的原文既没写 D ≥ 4，也没写「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步。闭弦这里还多一层：试探态必须取在 level matching 子空间内，这一步同样是 curator 补的。两处都是有限步初等计算，但因不在来源里，不据以提升本推导的 status。"
+  - "**本推导不断言闭弦的 D = 26 与开弦的 D = 26 等价**，也不断言这条路线与 worldsheet.critical-dimension-bosonic-v3 的四条路线之间有任何蕴含关系。ms.critical-dimension-bosonic 与其 canonical_text 明写不对闭弦作断言；本节点建立后该声明仍然成立（里程碑不使用闭弦一侧的任何节点），本推导也不请求把它改掉。"
+  - "**a = ã 在本推导中是结论而非输入**，与 worldsheet.closed-string-intercept 相反（那张卡由 worldsheet.closed-string-mass-formula 的左右对称性取 a = ã 为输入）。两张卡在这一点上的方向不同**不是**冲突：本卡的结论更强（分别定出 a 与 ã），故与那张卡的输入相容。下游若同时引用两张卡，须注意不要把「a = ã」在本卡里读成前提。"
+notes: |
+  【本推导与开弦一侧的对照】结构照搬 worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra
+  （代入 α^-_n → 逐项算对易子 → 经典部分相消 → 量子部分留下 Σ Δ_n × 反对称双线性 →
+  线性无关 ⟹ 逐个 Δ_n = 0），四处不同：
+    1. 两份反常（右行 Δ_n、左行 Δ̃_n），结论多出 ã = 1；
+    2. 试探态取在 level matching 子空间内，故多一条 closed-string-level-matching 的边；
+    3. 整体常数 C 因闭弦零模归一化不同而不同，目标陈述不写它的具体值；
+    4. **移植本身没有来源**，故指向开弦卡的边标 inferred: true——这是本推导相对开弦一侧
+       在证据强度上**弱一级**的地方，也是它不能标 proof 的独立理由。
+
+  【status 的选择】physical-argument。按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位裁决，
+  「来源给出骨架但关键步骤只有断言」标 physical-argument 而不是 conjecture：本命题的结论
+  （闭弦临界维数 D = 26、左右截距各为 1）在文献中不是有争议的命题，缺的是本图内的逐字定位与
+  几处形式操作的严格化，这些已逐条写进 gaps。
+  即便这条边的证据强度更弱（移植无来源），也不下调到 conjecture——`conjecture` 保留给
+  来源本身把它当猜想提出、或结论真伪在文献中未定的命题。
+
+  【上游 / 下游】上游是开弦卡 v2 与四张闭弦卡；下游目前只有一处引用：
+  worldsheet.closed-string-intercept--via-light-cone-representation 的 gap
+  （「闭弦版本未建节点」）本次已改写为指向本节点。**该 gap 的改写不新增依赖边**：
+  那条推导仍然只走小群表示论，不使用本节点（否则两者会互相依赖）。
+author: curator
+created: "2026-09-11"

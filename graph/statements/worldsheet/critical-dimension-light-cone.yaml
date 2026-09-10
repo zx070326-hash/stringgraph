@@ -39,5 +39,15 @@ sources:
       worldsheet.critical-dimension-bosonic-v3 的 (I) 已写入 D ≥ 4 的前提，故它弱于本卡、方向安全；
       本卡应另行换代补上该限定。GSW §2.3.1 的原文同样未写。）
 tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance]
+superseded_by: worldsheet.critical-dimension-light-cone-v2
+notes: |
+  **【已换代，2026-09-11】**本卡的 statement 文本一字未动。换代原因：陈述写
+  「闭合 ⟺ D = 26 且 a = 1」而未限定 D ≥ 4，作为命题在 D = 3 有反例（见上方 sources
+  第二条 note 里登记的那处缺口）。ms.critical-dimension-bosonic 第二轮回译审计 N2 发现，
+  第三轮裁定 3(a) 要求换代。新卡 worldsheet.critical-dimension-light-cone-v2 补上前提
+  D ≥ 4 并写出「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步，其余逐字照抄本卡。
+  推导 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 已改名改指为
+  worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra，故本卡现无推导，
+  这是换代后的正常状态（report 会把带 superseded_by 的开放命题隐去）。
 author: curator-critdim
 created: "2026-09-10"

@@ -33,7 +33,7 @@ depends_on:
       故它只在塔上、且只在那条约定下有意义；单层的 worldsheet.fock-indefinite-form
       对跨层配对不置一词。gaps 第 5 条已相应改写（约定仍是约定，只是有了承载它的节点）。
       这条边**不是 inferred**：塔与塔上的型是目标陈述量词的定义域。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: |
       被断言的对象。本推导用到定义卡的全部三条结构性输入：类光条件 k_0² = 0（使两个指数算符之间
       没有分支因子，伴随运算不产生额外相位）、横向条件 ε^i·k_0 = 0（使 ∂X^i 与 e^{i n k_0·X}

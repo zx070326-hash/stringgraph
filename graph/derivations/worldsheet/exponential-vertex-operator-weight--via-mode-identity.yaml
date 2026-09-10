@@ -1,0 +1,126 @@
+id: worldsheet.exponential-vertex-operator-weight--via-mode-identity
+target: worldsheet.exponential-vertex-operator-weight
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity
+    inferred: false
+    note: |
+      **本推导的实质输入**（formalized）：模恒等式
+        L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J − m + b·a + ½(m+1)(b·b)) V_{J−m}，m ≠ 0。
+      目标卡 (2)(b) 的 h = α'k² 就是 ½(b·b)（b^μ = (2α')^{1/2}k^μ，开弦边界归一化），
+      目标卡 (3) 的 h = 0 就是 b·b = 0 的情形。
+    convention_map: |
+      两卡都声明 conv.metric-mostly-plus 与 conv.alpha-prime-regge，无号差/α' 换算。
+      需要留意的是**插入位置**的记账：模恒等式里的 ½(b·b) = α' k² 是目标卡 (2)(b) 的
+      **开弦边界**值；目标卡 (2)(a) 的**闭弦体内**值 α'k²/4 与它差因子 4，
+      差别来自边界镜像使有效手征动量 k → 2k（目标卡 notes 的【开弦 vs 闭弦的因子 4】）。
+      **本推导只覆盖 (2)(b) 与 (3)；(2)(a) 由姊妹推导 --via-ope-with-t 承担。**
+  - id: worldsheet.ope-pole-mode-commutator-dictionary
+    inferred: false
+    note: |
+      **把模恒等式翻成 OPE 极点结构的字典**，也是本推导止步于 physical-argument 的原因：
+      该节点自身 effective = open（own_status rigorous，但其推导
+      --via-locality-theorem 被 open 的依赖压住）。
+      它是**形式分布版**的字典（无收敛性、无围道），与本推导需要的方向一致：
+      从模对易子 [L_m, φ_J] = Σ_r C(m,J,r) φ_{J−m+…} 读出 T(z)φ(0) 的极点系数。
+      ⚠ 一处不完全匹配已在 gaps 第 1 条登记：目标恒等式两侧的 L_m 动量参数不同
+      （L^{(a+b)} 与 L^{(a)}），不是一个真正的对易子，字典的标准形式假设的是对易子。
+  - id: worldsheet.primary-field
+    inferred: false
+    note: |
+      **被断言的概念与判据**：「共形权由 T·O OPE 的二阶极点系数读出」「无三阶及更高极点 ⟹ 主场」。
+      目标 (1) 逐字就是把 V_k 代进该判据；本推导要论证的正是"代进去之后二阶极点系数是 ½(b·b)、
+      且没有更高阶极点"。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      字典两端的 L_m 是同一个对象：模恒等式里的 `Fock.Lop`，与 T(z) 的洛朗模 L_m。
+      「T 的模就是 Sugawara 生成元」这一句由该卡承载（其与
+      worldsheet.energy-momentum-laurent-modes 的一致性另见
+      worldsheet.normal-ordering-modes-agree）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightNeg.lean :: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_ne；formal/StringFormal/NoGhost/VertexWeight.lean :: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_pos"
+    note: |
+      **只承载本推导的第一步（模恒等式），不承载第二步（字典）**。
+      Lean 里没有任何 OPE 对象，也没有"共形权"这个概念；
+      VertexOperator.lean 文件头「Mathematical gaps」第 1 条逐字登记
+      「In particular the statement "`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`"
+      is **not** formalised.」——那句话说的正是本推导第二步之后的结论。
+  - ref: polchinski-1998-v1
+    loc: "§2.4，(2.4.6)（权由 T·O OPE 的二阶极点定义，p.44）；§8.2，eq. (8.2.27)，p.240（∂X^i e^{i n k_0 X^+} 是权 (1,0) 主场）"
+    note: |
+      提供本推导第二步所要落地的**目标语言**（OPE / 主场）与结论的独立佐证。
+      (2.4.6) 式号已核实（抽取记录 #E32）；(8.2.27) [已核实] / L1（#E125）。
+      ⚠ **原书不给本推导的论证**：它不从模恒等式出发，也不写模恒等式。
+summary: |
+  两步。第一步已机器验证，第二步是本推导的全部弱点。
+
+  **第 1 步（formalized）**。worldsheet.exponential-vertex-operator-mode-weight-identity：
+  对一切 m ≠ 0、J ∈ Z，
+    L_m^{(a+b)} V_J − V_J L_m^{(a)} = ( J − m + b·a + ½(m+1)(b·b) ) V_{J−m}。
+  把它按 m 的幂整理：系数是 m 的**一次**多项式（−m + ½(m+1)(b·b) 加上与 m 无关的 J + b·a），
+  **没有 m² 及更高次项**。
+
+  **第 2 步（本推导的 physical-argument 部分）**。用
+  worldsheet.ope-pole-mode-commutator-dictionary 把上式读回 OPE：
+  权 h 的主场 φ 的标准模关系是
+    [L_m, φ_J] = ( J + (m+1)h − m·(?) ) φ_{J−m} 型的**m 的一次式**，
+  而 T·φ OPE 中的 (r+1) 阶极点对应模关系里 m 的 r 次项。
+  于是
+    · 系数中 m 的最高次是 1  ⟹ OPE 中最高阶极点是二阶 ⟹ **没有三阶及更高极点 ⟹ V_k 是主场**
+      （目标 (1)）；
+    · m 的一次项系数 ½(b·b) = α' k²  ⟹ **h = α'k²**（目标 (2)(b)，开弦边界归一化）；
+    · b·a 项与 m 无关，进的是**一阶**极点（∂ 项与分次移位），**不是权**（目标卡 notes 已警告）；
+    · b·b = 0（k = n k_0，k_0² = 0）时 h = 0（目标 (3)）。
+
+  **本推导不覆盖目标 (2)(a)（闭弦体内 h = α'k²/4）**：Lean 侧的 V_J 是**开弦边界**
+  归一化下的对象（单值因子 z^{2α' n k_0·p}，缩并加倍），闭弦值要再除以 4，
+  那一步的桥（边界镜像使手征动量加倍）本图无节点，见目标卡边界 (e)。
+  (2)(a) 由姊妹推导 worldsheet.exponential-vertex-operator-weight--via-ope-with-t 承担。
+gaps:
+  - |
+    **第 2 步的字典 worldsheet.ope-pole-mode-commutator-dictionary 自身 effective = open**，
+    这是本推导止步于 physical-argument 的**首要**原因，也是目标卡 notes 的【升级路径】(i)
+    早已预言的（逐字：「那条字典会把 --via-lean 封在 physical-argument」）。
+  - |
+    **字典的形式与这里需要的形式不完全匹配**：字典的标准陈述是关于**对易子** [L_m, φ_J]，
+    而第 1 步的左边是 L_m^{(a+b)} V_J − V_J L_m^{(a)}，**两个 L_m 的零模参数不同**，
+    严格说不是对易子。把它写成对易子要先上动量塔
+    （worldsheet.momentum-tower-fock-space，Lean 的 `towerLop` / `towerVertex`）；
+    塔上的版本 Lean 现已覆盖一切 m ≠ 0（`lie_towerLop_towerVertex_of_ne`，
+    `formal/StringFormal/NoGhost/DDFOperatorNeg.lean`），**但需要额外假设 k_0² = 0**
+    （否则系数含塔的级数 j），而本卡的目标断言是对**一般** k 的权 α'k²，
+    一般 k 时连塔上版本都不可用。
+    ⚠ 因此严格地说，本推导第 2 步用的是"对每个 m ≠ 0 分别成立的一族恒等式"，
+    而字典要的是"一个作用在单一空间上的对易子族"。这一步的接缝**本图没有节点**。
+  - |
+    **"m 的一次式 ⟺ 二阶极点"这条对应关系本身没有被独立引用**。
+    它是字典的内容，但本图的 worldsheet.ope-pole-mode-commutator-dictionary 是形式分布版，
+    其陈述用的是形式分布的展开系数，不是"m 的多项式次数"这种读法。
+    两者等价是标准的（对 z 的展开与对 m 的多项式次数互为傅里叶对偶），
+    但**本推导没有可引用的节点**，故这一步是断言。
+  - |
+    **不覆盖闭弦体内值 α'k²/4（目标 (2)(a)）与边界镜像加倍那一步**（目标卡边界 (e)）。
+  - |
+    **m = 0 不在第 1 步的覆盖范围内**（模恒等式的例外）。在 OPE 语言里 m = 0 不是例外，
+    这本身说明第 2 步的翻译不是逐字的：字典若真能双向使用，应当也给出 m = 0 的关系。
+    本推导不主张已弥合这一点。
+notes: |
+  【本推导的来历】worldsheet.exponential-vertex-operator-weight 的 notes【升级路径】(i)
+  写好的预案，lead 2026-09-11 裁决执行：Lean 完成后拆模形式卡承载 formalized，
+  OPE 卡新增本推导（依赖新卡 + 字典，physical-argument）。
+
+  **本推导不改变目标卡的有效状态**：目标卡原有推导 --via-ope-with-t 已是 physical-argument，
+  本推导同级。工具取两条中较高者，结果不变。
+  **但它改变了记账**：现在图中可以看出"这条命题的困难究竟在哪一步"——
+  不在 Wick 缩并（那部分已机器验证成模恒等式），而在
+  worldsheet.ope-pole-mode-commutator-dictionary 这条 open 的字典上。
+  这正是拆卡的目的。
+
+  **升级路径**：把 worldsheet.ope-pole-mode-commutator-dictionary 从 open 救出来
+  （它的推导 --via-locality-theorem 被 open 依赖压住），本推导即可升到与该字典同级。
+  这条待办与 worldsheet.ddf-commute-with-virasoro--via-conformal-weight 的瓶颈是同一条。
+author: curator
+created: "2026-09-11"

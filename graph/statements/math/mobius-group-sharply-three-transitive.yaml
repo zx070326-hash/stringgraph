@@ -24,7 +24,32 @@ sources:
       literature/extractions/polchinski-1998-v1.md#E104、#E90，等级 L1（内容出自 schrans-2020
       §6.60–§6.63、§6.27，笔记 p.299、p.326–328，逐页读到）。
       ⚠ 来源只**使用**这条群论事实（「固定 z₁ = 0, z₂ = 1, z₃ = ∞」），**没有陈述或证明**它；
-      本卡片是 curator 为承载该步骤而拆出的数学节点，**本图目前没有数学文献来源**，见 notes。
+      本卡片是 curator 为承载该步骤而拆出的数学节点。
+      ⚠ **2026-09-11 追记**：本卡现已另有一条数学侧来源（下一条 milicic-riemann-surfaces），
+      但那条覆盖的是「Aut(P¹) ≅ PSL(2,C)」而**不是本卡陈述的单可迁性**；
+      单可迁性与循环序两轨道**至今没有带编号的数学文献来源**，见 notes 第 2 条。
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.5.2, p.6（第 1 章 §1.5，Möbius 变换与 Aut(P¹) 一节）"
+    note: |
+      **数学侧来源，L1 逐字**（literature/extractions/math-sources.md §39.7.1；讲义全 15 页已读完）。
+      原文逐字：「The homomorphism γ ⟼ φ_γ of PSL(2,C) into the group of all holomorphic
+      automorphisms Aut(P¹) of the Riemann sphere is an isomorphism.」
+      ⚠ **这条定理本身不是本卡的陈述**：它断言的是「PSL(2,C) **穷尽** Aut(P¹)」，
+      本卡 (1) 断言的是「PSL(2,C) 在互不相同的有序三点组上**单可迁**」。两者互相独立。
+      登记它的两个理由：
+      (a) §1.5 正是该讲义建立「PSL(2,C) 通过 z ↦ (az+b)/(cz+d) 作用在 P¹ 上」的那一节，
+          本卡 (1) 里的群、作用与记号与之逐字一致，故本卡不再是「只有物理书来源」；
+      (b) 该定理已由本图独立承载为 **math.automorphisms-of-riemann-sphere-are-mobius**，
+          本卡「本命题不断言什么」的第二条（不断言 PSL(2,C) 是**全部**共形自同构）
+          从此有专门节点可指，不再是悬空的免责声明。
+      ⚠ **单可迁性本身在该讲义中未核到编号**：本项目对这份讲义只逐字转录了 Theorem 1.5.2
+      与 Theorem 1.7.3 两条（math-sources.md §39.7.1 对其余编号只记了标题）。
+      ⚠ 实情形（Aut(D)）的对应条目是 **Theorem 1.7.3, p.10 + §1.9, p.11 的无编号句**
+      （SL(2,R) ≅ SU(1,1)）——「Aut(D) = PSL(2,R)」在该讲义里**没有单一编号**，
+      引用时要么写两处、要么只引 SU(1,1) 版。该条已登记在
+      worldsheet.disk-conformal-killing-group 与其推导 --via-real-mobius-subgroup 的 sources 里。
+      ⚠ 该文件**未印年份**，bib key 不带年份（`milicic-riemann-surfaces`），
+      偏离 literature/CLAUDE.md 的 key 规范，待 lead 裁决。
 tags: [math, mobius, psl2c, psl2r, group-action, cross-ratio, cyclic-order]
 notes: |
   由 curator 于 2026-09-11 拆出，用途有二：
@@ -34,13 +59,19 @@ notes: |
       「are linked by a PSL(2,R) transformation」，而 (2) 说它们属**不同轨道**。
       本图按 (2) 写，理由见 worldsheet.disk-conformal-killing-group 的 notes。
 
-  **⚠ 为什么不是 rigorous**：(1) 与 (2) 都是经典结果（任何黎曼曲面/双曲几何教材都有），
-  但本图**没有登记任何数学来源**，sources 里唯一的条目是**物理书里使用该事实的位置**。
-  按 docs/STATUS_LEVELS.md，这既不满足「数学文献来源」也没有 reviewer 复核记录，
-  故取 physical-argument。**升级路径**：researcher 登记一本复分析/黎曼曲面教材
-  （Ahlfors 复分析中的线性变换与交叉比一章，或 Beardon 的离散群几何第 4 章）并核对定理号；
-  或 reviewer 按「初等可复核」例外复核推导里的显式构造。
-  **本次没有擅自登记新文献**（literature/sources.bib 当前被另一名 curator 的 claim 占用，
-  且新条目需先核对位置）。
+  **★ 2026-09-11 订正（curator-ckg-followups）：本卡原 notes 里的「⚠ 为什么不是 rigorous」一段
+  已过时（它写的两条理由都已变化），整段替换为下面两条。**
+
+  1. **推导已是 rigorous。** 唯一推导 math.mobius-group-sharply-three-transitive--via-cross-ratio
+     现为 `status: rigorous`，依据是 docs/STATUS_LEVELS.md 的「初等可复核」例外
+     （前提完整 + 有限步初等计算 + `reviewer-verified: reviewer-ch6, 2026-09-11`）。
+     reviewer-ch6 同时订正了实情形里 det 符号的一处错误，见推导 notes。
+  2. **数学侧来源已登记（但只覆盖一半）。** sources 现含 milicic-riemann-surfaces
+     的 Theorem 1.5.2（L1 逐字）。⚠ **它证明的是 Aut(P¹) ≅ PSL(2,C)，不是单可迁性**；
+     本卡陈述的两条（复情形单可迁、实情形循环序两轨道）**仍然没有带编号的数学文献来源**，
+     它们靠的是推导里的显式构造 + reviewer 复核。
+     **升级路径（仍开放）**：researcher 若能核到 Ahlfors《Complex Analysis》线性变换/交叉比一章、
+     或 Beardon《The Geometry of Discrete Groups》第 4 章里单可迁性那条的编号，
+     可给本卡再挂一条 --via-<math-source> 的推导，届时本卡的 rigorous 就不再依赖本项目的例外条款。
 author: curator-polchinski-ch6
 created: "2026-09-11"

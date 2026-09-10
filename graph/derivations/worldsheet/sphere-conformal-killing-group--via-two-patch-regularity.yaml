@@ -8,6 +8,21 @@ depends_on:
       提供两片坐标与过渡函数 u = 1/z，以及由它导出的向量场变换 δu = −z^{−2} δz。
       没有第二片就没有「在 u = 0 也要正则」这个条件，展开次数就不会被截断。
       两者同出 §6.1，故不标 inferred。
+  - id: worldsheet.conformal-killing-equation
+    note: |
+      **2026-09-11 补边（curator-ckg-followups）**：提供「共形 Killing 向量」这个概念本身
+      与它满足的方程 (P₁δσ)_ab = 0。本推导第 (1) 步「共形 Killing 方程在复坐标下即 ∂̄δz = 0」
+      就是对这条定义说的；在补这条边之前，该前提只写在目标陈述的 statement 里而无节点承载
+      （见本推导原 gaps 第一条，现已按此改写）。
+      该节点属第 5 章（Polchinski §5.2, (5.2.7)），与本推导的 §6.1 不同章，
+      但它是本推导明写要用的定义，**不是 inferred**。
+  - id: worldsheet.ckv-holomorphic-in-conformal-gauge
+    note: |
+      **2026-09-11 补边（curator-ckg-followups）**：提供第 (1) 步用到的**等价性**本身
+      ——(P₁δσ)_ab = 0 ⟺ ∂̄δz = 0 且 ∂δz̄ = 0（共形规范 + 复坐标下）。
+      本推导只用它的结论，不重做该改写。
+      ⚠ 该节点自身只有 physical-argument 级的推导（其 gaps：指标升降因子未核、
+      只是**局部**改写、无 reviewer 复核记录），故本推导的有效状态被它压住——这是如实记账。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.1, eq. (6.1.5a)/(6.1.5b)；过渡函数与 δu = −z^{−2}δz 在 (6.1.4a) 附近"
@@ -31,22 +46,37 @@ summary: |
   三者生成的整体变换群是 Möbius 群 z ↦ (αz + β)/(γz + δ)（αδ − βγ = 1），
   由于 (α,β,γ,δ) 与其整体反号给出同一变换，群为 PSL(2,C)。实参数计数：3 复 = 6 实 = κ(S₂)。
 gaps:
-  - "**上游 ch5 节点尚未进入 main**：共形 Killing 方程 ∂̄δz = 0 本身（抽取记录 E74，(5.2.7)；
-     ⚠ [S] 目录与正文对该式号自相矛盾，见抽取记录 §5.0）在本图中还没有节点，另一名 curator
-     正在建。本推导把它写进目标陈述的 statement 作前提。**待 ch5 节点合入后补 depends_on 边。**
-     同样地，Riemann–Roch（E75, (5.2.9)）给出的 κ − μ = 3χ = 6 是本结论的独立交叉检验，
-     也待合入后补边。"
+  - "**★ 2026-09-11 结案（curator-ckg-followups）：原第一条 gap「上游 ch5 节点尚未进入 main」已作废。**
+     ch5 节点现已在 main，本推导已补上两条 depends_on：worldsheet.conformal-killing-equation
+     （CKV 的定义与方程 (P₁δσ)_ab = 0，(5.2.7)）与 worldsheet.ckv-holomorphic-in-conformal-gauge
+     （共形规范复坐标下该方程 ⟺ ∂̄δz = 0）。**残余项**：Riemann–Roch（E75, (5.2.9)）给出的
+     κ − μ = 3χ = 6 仍只作为独立交叉检验，**本推导不建那条边**——理由是
+     worldsheet.riemann-roch-kappa-minus-mu 正在被另一名 curator 换代为 -v2，
+     且 μ(S₂) = 0 那一半在图上仍是断言（见
+     worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条）。
+     换代落地后由 lead 决定是否接边。"
   - "**第 (3) 步『指数化』未论证**：由三个无穷小生成元得到整体群 PSL(2,C)（而不只是其单位分支
      的李代数 sl(2,C)），需要 S₂ 上共形自同构群的整体分类，本推导与来源都没有做。
      严格说本推导只证明了 CKV 的**李代数**是 3 维复的，「有限群是 PSL(2,C)」是标准断言。"
-  - "**「δz 在 S₂ 上处处正则」这一 CKV 定义与第 5 章的定义是否逐字一致，未核实**：第 5 章的 CKV
-     是「diff×Weyl 下使度规不变的向量场」的解，与这里的「全局全纯向量场」在共形规范下等价，
-     但这个等价性本图无节点。"
-  - "**PSL(2,C) 这个记号写在原书哪一式未核实**（抽取记录 §7 未核实清单：E90 条目同样问题）。"
-  - "**数学侧无文献来源**：本推导等价于『P¹ 上全局全纯向量场 = sl(2,C)』，这是标准复几何结果，
-     但本图未登记任何复几何/黎曼曲面教材。按 docs/STATUS_LEVELS.md，rigorous 需要数学文献来源，
-     或者按『初等可复核』例外需 reviewer 复核并留 `reviewer-verified` 记录——**两者都没有**，
-     故取 physical-argument。升级路径见目标陈述 notes。"
+  - "**「δz 在 S₂ 上处处正则」这一 CKV 定义与第 5 章的定义的关系（2026-09-11 更新）**：
+     第 5 章的 CKV 是「diff×Weyl 下使度规不变的向量场」（worldsheet.conformal-killing-equation），
+     与这里的「全局全纯向量场」在共形规范下的等价性**现已有节点承载**
+     （worldsheet.ckv-holomorphic-in-conformal-gauge，已补为依赖）。
+     **残余缺口**：该节点自陈只做了**局部**改写，「曲面用几片覆盖、过渡函数下 δz 按权 −1 的
+     向量场变换」这个**整体**部分在它那里没有论证——而本推导第 (2) 步恰恰用的就是这个变换律
+     （δu = −z^{−2}δz）。本推导的这一步取自 Polchinski §6.1 (6.1.4a) 附近，不是从该节点推出的。"
+  - "**PSL(2,C) 记号的书内位置（2026-09-11 更新）**：原「未核实」的说法已作废——
+     researcher 取到原书 ch.6 页图后确认，**PSL(2,C) 定义在书上 p.168，(6.1.6) 上方，无式号**
+     （math-sources.md §39.6(c)，逐字见 worldsheet.disk-conformal-killing-group 的第一条 source）。
+     **残余项**：本推导用的 (6.1.5a)/(6.1.5b) 两个式号仍只来自伴读者 [S]，**原书未核对**。"
+  - "**本推导自身仍无数学侧文献来源**（2026-09-11 更新）：它等价于『P¹ 上全局全纯向量场 = sl(2,C)』，
+     是标准复几何结果，但**这条两片 Laurent 计算本身**在本图里没有数学教材来源。
+     按 docs/STATUS_LEVELS.md，rigorous 需要数学文献来源，或按『初等可复核』例外需 reviewer 复核
+     并留 `reviewer-verified` 记录——**两者仍都没有**，故本推导保持 physical-argument。
+     ⚠ 注意区分：目标陈述现已有**另一条**带数学来源的推导
+     worldsheet.sphere-conformal-killing-group--via-automorphism-group（走 Miličić Thm 1.5.2），
+     但那条覆盖的是**群**（Aut(P¹) = PSL(2,C)），它自己另有『群 ⇒ 向量场空间』的缺口。
+     两条路线互补，都没有单独关掉整条陈述。"
 notes: |
   计算本身是有限步初等操作（Taylor 展开 + 换片 + 幂次比较），按 docs/STATUS_LEVELS.md 的
   rigorous 例外**有资格**升到 rigorous，条件是：(a) reviewer 独立复核并在此处写

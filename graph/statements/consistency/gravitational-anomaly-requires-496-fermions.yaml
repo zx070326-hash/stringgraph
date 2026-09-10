@@ -24,6 +24,29 @@ sources:
     note: |
       L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E13。
       **注意 GS 的最后一句只说「对这两个群，抵消发生了」，不是「只有这两个群」。**
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352**v2**，(7) 的第二个方括号：(n − 496)[tr R⁶/725760 + tr R⁴ tr R²/552960 + (tr R²)³/1327104]，其中「n is the total number of gauge bosons」"
+    note: |
+      **L1**（curator 2026-09-11 取 arXiv e-print LaTeX 源码 `universality_ten_v2.tex` 核对；
+      researcher 已逐页读毕 PDF，抽取记录 literature/extractions/gsw-1987-v2.md E14）。
+      **本条是「系数正比于 n − 496」的第二个独立来源**（第一条是 GS (20)），且两者可精确对上：
+      把 ADT (7) 的引力部分（(n − 496) 方括号 + Y₄X₈/768 的纯引力部分 tr R²·(tr R⁴ + (tr R²)²/4)/768）
+      整体乘以 **−96**，逐项等于 GS (20) 的三项：
+      −(n−496)/7560 · tr R⁶、−[1/8 + (n−496)/5760] · tr R² tr R⁴、−[1/32 + (n−496)/13824] · (tr R²)³。
+      三项**有理数精确相等**（curator 2026-09-11 复算）。
+      ⚠ **这不构成对 Alvarez-Gaumé–Witten 系数的独立核实**：ADT 自陈其 (7) 就是引自 AGW
+      （「computed by Alvarez-Gaumé and Witten [5] and, following the presentation of Polchinski [11]」），
+      与 GS 同源。核实的只是「两处转录一致」。
+      ⚠ 版本写死 **v2**：ADT 致谢逐字承认早期版本 (7)(8) 的系数有误。
+      ⚠ (7) 的三个引力迹在源码里是**小写 tr**（SO(1,9) 基本迹）；`literature/sources.bib` 与
+      `extractions/gsw-1987-v2.md` E14 误转录为大写 Tr，以源码为准。
+  - ref: gsw-1987-v2
+    loc: "§10.1.2, p. 148（抽取记录 literature/extractions/gsw-1987-v2.md **E2**）：「Only in the abelian case, when the theory becomes free, can T vanish.」"
+    note: |
+      **L1 逐页读图**（第 10 章 pp. 141–174 读毕）。
+      ⚠ **本条不承载本卡的陈述**（GSW 第 10 章只算**纯规范**反常，引力反常在第 13 章 §13.3.2 p. 336，
+      **本项目未取得该章正文，L0**）。它只承载 notes 第 5 条的旁证：阿贝尔情形规范反常平凡为零。
+      **红线**：本图任何节点都不得以 gsw-1987-v2 为来源声称第 13 章的措辞或式号（同记录 §3.1/§5.5）。
 tags: [anomaly, gravitational-anomaly, dimension-496, so32, e8, d10]
 notes: |
   【1. 维数算术未建节点】dim SO(32) = 32·31/2 = 496，dim(E₈ × E₈) = 2 · 248 = 496。
@@ -39,5 +62,24 @@ notes: |
 
   【3. 与规范一路的对称性】纯规范一路的对应陈述是 math.tr-f6-coefficient-vanishing
   （tr F⁶ 系数 N + 32l 必须为零）。两条的逻辑形状相同：**六阶单迹项不可抵消 ⇒ 其系数必须为零**。
+
+  【4. ★ 记账红线：n = 496 不蕴含反常抵消（2026-09-11，ADT 2010 L1）】
+  本节点给出的 n = 496 是**必要条件**，四个 496 维候选群都满足它
+  （见 consistency.d10-four-groups-satisfy-anomaly-conditions：
+   SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶，四者的 n = 496 与六阶伴随迹关系已逐一验算）。
+  但按 consistency.abelian-factorization-is-not-cancellation（Adams–DeWolfe–Taylor 2010，L1），
+  **两个阿贝尔解虽然使十二形式因子化，GS 抵消项却写不下来**（Y₄ ≠ dH₃，与超对称 + 阿贝尔规范不变性不相容）。
+  ⇒ 引用本节点时**不得**把「dim G = 496」读成「反常抵消」，也不得把四解表说成「四个反常自由的理论」，
+  更**不得写「恰有四个」**——完备性是一条猜想，见
+  consistency.d10-anomaly-conditions-completeness-claim（status: conjecture）。
+  （docs/ROADMAP.md 2026-09-11 记账红线 + lead 2026-09-11 依 polchinski-1998-v2-ch12 的追加裁决。）
+
+  【5. GSW Vol. 2 第 10 章对阿贝尔情形的旁证（L1）】p. 148 逐字：
+  「The result described above shows that the D = 10 super Yang–Mills theory has a gauge anomaly for
+  every choice of gauge group! **Only in the abelian case, when the theory becomes free, can T vanish.**」
+  ——即在 GSW 自己的框架里阿贝尔**规范**反常平凡地为零，问题全在引力/混合反常与抵消项能否写下来。
+  这与 ADT「阿贝尔场不进六边形图」是同一件事（抽取记录 literature/extractions/gsw-1987-v2.md E2）。
+  ⚠ GSW 关于**引力**反常的正文在第 13 章（§13.3.2, p. 336），**本项目未取得（L0）**，
+  故本节点不挂 gsw-1987-v2 作为来源。
 author: curator
 created: "2026-09-11"

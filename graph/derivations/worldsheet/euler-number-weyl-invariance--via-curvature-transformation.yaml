@@ -6,10 +6,19 @@ depends_on:
   - id: worldsheet.worldsheet-euler-number
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2, eq. (1.2.32)（p.15，R 在 Weyl 重标度下的变换）及其下方对 χ 不变性的显式验证"
+    loc: "§1.2, eq. **(1.2.32)**, p.15（曲率在 Weyl 重标度下的变换；原书写作密度形式 `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)`）及其下方对 χ 不变性的显式验证。⚠ **(1.2.31) 无边界项，带边界的 Euler 数在第 1 章是 exercise 1.3**"
     note: |
-      抽取记录 polchinski-1998-v1#E9，证据等级 [已核实]（Schrans 目录 §1.2、§1.3）。
-      边界项 k 的变换式未在抽取记录中出现，由 curator 补入；这一步没有来源支撑。
+      抽取记录 polchinski-1998-v1#E9。
+      **【订正 2026-09-11（curator-v1-sec13，L1 页图逐字，p.15）】** 式号 (1.2.32) 与页码正确，
+      证据等级由 Schrans 目录（L2）升到 **L1**；两处措辞订正：
+      1. 本 summary 第 1 行引的 `R′ = e^{−2ω}(R − 2∇_a∂^aω)` **不是原书逐字形式**，
+         原书是等价的密度形式 `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)`。
+      2. ★ **边界项在原书 §1.2 正文中根本不存在**：p.15 逐字「The integral (1.2.31) is therefore
+         invariant for a world-sheet **without boundary**. **With boundaries an additional surface
+         term is needed (exercise 1.3).**」⇒ 旧 note 说的「边界项 k 的变换式未在抽取记录中出现，
+         由 curator 补入；这一步没有来源支撑」**在原书侧得到确认并且更强**：连边界项本身
+         都不是 §1.2 正文内容。本推导第 3–5 步（边界项相消）的 Polchinski 侧支撑为零，
+         只靠 headrick-2008 problem 1.3 solution（第三方习题解答）。gaps 第 1 条已覆盖此点。
   - ref: headrick-2008
     loc: "problem 1.3 solution，边界项显式计算"
     note: |
