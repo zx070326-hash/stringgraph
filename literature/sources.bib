@@ -1401,3 +1401,274 @@
             (3) 个人讲稿，权威性低于 lakos-2024-pbw 与教科书，只用于「无限维也成立」这一点的旁证。
             见 extractions/math-sources.md §33.5。}
 }
+% 沼泽地（swampland）Phase 4 种子（researcher 2026-09-11 登记）
+% 抽取记录：extractions/vafa-2005.md、extractions/ooguri-vafa-2006.md、
+%            extractions/arkani-hamed-2006.md
+% 三篇均 arXiv 公开，本轮**全文逐页读图（L1）**。
+% ★ 三篇之间的关系（每条都有 L1 逐字证据，见各抽取记录 §4 的 Q 条）：
+%    - 三条判据族（Vafa 的有限性 / OV 的模空间几何 / AMNV 的引力最弱）在原文层面是**并列**的，
+%      彼此没有推导关系；唯一的原文级逻辑连接是 AMNV -> Vafa 的两处「有限性」呼应
+%      （arkani-hamed-2006 的 §1 与 §2.1 末）。其余任何连接边都必须标 inferred: true。
+%    - 三篇都**没有** de Sitter 猜想、**没有**暗能量/宇宙学常数约束。
+% ---------------------------------------------------------------------------
+
+@misc{vafa-2005,
+  author        = {Vafa, Cumrun},
+  title         = {The String Landscape and the Swampland},
+  year          = {2005},
+  eprint        = {hep-th/0509212},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note          = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，10 页逐页读图）**：
+                   arxiv.org/pdf/hep-th/0509212 落盘 92.4 KB 后 Read 带 pages。
+                   **版本：arXiv v2（页边条纹逐字 `arXiv:hep-th/0509212v2  6 Oct 2005`）**；报告号 HUTP-05/A043；
+                   标题页页脚 September 2005。**本项目所有 loc 依 v2；v1 差异未核对（L0）；是否有期刊发表版未核实（L0）。**
+                   **★ 两条结构性禁令（10 页逐页确认）**：
+                   (1) **本文没有任何编号公式** —— V(Phi)=0、S = int M_P^{d-2}R + g_ij dPhi dPhi、V_Phi = int dPhi sqrt(g)、
+                       V_Phi^Lambda、V_Phi != infty、V_tau = int d^2tau/tau_2^2、两个 Narain 型陪集、U(1)^496; U(1)^248 x E8 全部无编号。
+                       **loc 只能写「§N, p.M」，绝不许编公式号。**
+                   (2) **本文没有任何编号 Conjecture** —— 猜想都是散文（"the conjecture is that…"、"It is natural to conjecture that…"）。
+                       **绝不许写「Vafa, Conjecture 1」。** 编号的猜想在 ooguri-vafa-2006（Conjecture 0-4）。
+                   **可引用的核心内容**：
+                   **§1, p.1「swampland」的定义句（逐字）**：「This vast series of semiclassically consistent effective field theories
+                   which are actually inconsistent we shall call the 'swampland'.」（单引号、小写、对象是 effective field theories）；
+                   **§1, p.2 三条判据（逐字）**：「finiteness of volume of scalar fields, finiteness of the number of fields and
+                   finiteness/restrictions on the rank of the gauge groups」，并逐字附「These finiteness properties can be relaxed
+                   if we turn off the gravity」（原文排印作 `crieteria`）；
+                   **§2, p.3 有限性猜想本体（逐字）**：V_Phi != infty，前提「as long as the Newton's constant is not zero (i.e. M_p != infty
+                   and gravity is not decoupled)」，精确化「(more precisely the conjecture is that this could go to infinity ~ |logLambda|
+                   as Lambda -> 0 but no worse.)」；
+                   **§3.1, p.6 下界猜想**：纯 4d N=2 超引力不在 landscape，逐字「It is natural to conjecture that」+「It would be
+                   interesting to verify or disprove this.」；
+                   **§4, p.6-7**：U(1)^496 与 U(1)^248 x E8 应属 swampland，逐字「It is hard to believe that they actually exist,
+                   though we have no proof of this.」
+                   **主张强度（决定 status 上限）**：摘要最强动词只有 suggest / propose；§1 p.1 逐字
+                   「Even though this by itself does not *prove* the above picture, it makes it look rather plausible.」；
+                   §5 逐字「The conjectures motivated in this note are motivated from the constructability or lack thereof
+                   within string theory.」**=> 所有挂本条的 statement 的 status 上限是 conjecture。**
+                   **★ 溯源矛盾（必读，见 extractions/vafa-2005.md Q3）**：本文 §4 把「U(1)^496 与 U(1)^248 x E8 就反常而言一致」
+                   引给 **[6] = green-schwarz-1984**，但本项目对 GS 1984 的 **L1 全文抽取**显示原文只点名 SO(32) 与 E8 x E8
+                   （其 eq. (20) 只给出 dim G = 496 是 tr R^6 项消失的必要条件；四解分类在 GSW v2 ch.13）。
+                   **=> 「这两个群反常自由」不得直接挂 green-schwarz-1984**；应另立节点，来源候选 gsw-1987-v2 ch.13 或 Antonelli 1507.08642。
+                   **本文与 ooguri-vafa-2006 的分工**：本文讲**体积**（V_Phi != infty），OV 讲**距离/直径**（Conjecture 1）。
+                   二者相容但**独立**（OV §3.1 Example ii 逐字：IIB tau 空间「the volume of this moduli space is finite yet a geodesic
+                   length toward i infty is logarithmically divergent」）。**把 OV 的 Conjecture 1 归给本文是溯源错误。**
+                   **本文不含**：距离猜想、无穷塔轻态、弱引力猜想（只在 [9] 标为 "work in progress"）、de Sitter 猜想、
+                   「无全局对称性」。参考文献 [1]（Douglas 的 Strings 2005 讲座）与 [9]（work in progress）按
+                   literature/CLAUDE.md 规则 1 **不可登记为 source**。
+                   **本文唯一引用的严格数学定理**是 [3] Borel--Harish-Chandra 1962（T^d Narain 模空间体积有限），已登记为 borel-harish-chandra-1962。}
+}
+
+@misc{ooguri-vafa-2006,
+  author        = {Ooguri, Hirosi and Vafa, Cumrun},
+  title         = {On the Geometry of the String Landscape and the Swampland},
+  year          = {2006},
+  eprint        = {hep-th/0605264},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note          = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，18 页逐页读图）**：
+                   arxiv.org/pdf/hep-th/0605264 落盘 157.5 KB 后 Read 带 pages。
+                   **版本：arXiv v1（页边条纹逐字 `arXiv:hep-th/0605264v1  26 May 2006`）**；报告号 CALT-68-2600, HUTP-06/A017。
+                   **本文的核心资产就是 Conjecture 0-4 这套编号，故所有 loc 必须写死 v1；后续版本/发表版未核对（L0）。**
+                   **★ 编号结构**：
+                   (1) **五条编号猜想 Conjecture 0 / 1 / 2 / 3 / 4，全部在 §2 The Conjectures, p.3-p.4。编号从 0 开始。**
+                       => loc 可以也应该写「§2, Conjecture N, p.M」。
+                   (2) **全文只有两个编号公式：(1.1)（p.1，ds^2 = (dr/r)^2）与 (3.1)（p.6，ds^2 = dtau dtaubar/(Im tau)^2）。**
+                       其余公式（T = |log(r/r_0)|、eps(T) ~ exp(-9T/8)、Narain 陪集、一圈度规修正、FRW 方程）**全部无编号**。
+                   (3) **⚠⚠ §3.1 出现两个 `Example v)`**：p.8 = Calabi-Yau threefolds；p.10 = Compactifications to Four Dimensions
+                       with N=1 Supersymmetry。**loc 绝不能只写「Example v」，必须带标题或页码。**（§3.2 用字母 a)-d)，无此问题。）
+                   **逐字猜想（可直接进图节点引文）**：
+                   **Conjecture 0**（p.3）：「M is parameterized by inequivalent expectation values of massless scalar fields.」
+                   **Conjecture 1**（p.3）：「Choose any point p_0 in M. For any positive T, there is another point p in M such that d(p,p_0) > T.」
+                   **Conjecture 2**（p.3）：「Compared to the theory at p_0 in M, the theory at p with d(p,p_0) > T has an infinite tower
+                   of light particles starting with mass of the order of e^{-alpha T} for some alpha > 0. In the T -> infty limit, the number
+                   of extra light particles of mass less than a fixed mass scale becomes infinite.」
+                   **Conjecture 3**（p.4）：「The scalar curvature near the points at infinity is non-positive. (It is strictly negative
+                   if the dimension of the moduli space is greater than 1.)」
+                   **Conjecture 4**（p.4）：「There is no non-trivial 1-cycle with minimum length within a given homotopy class in M.」
+                   **距离的定义（§2, p.3，逐字）**：「the distance of the shortest geodesic between them **measured in Planck units**」
+                   —— **本条是 conv.moduli-metric-planck-units 的 canonical 来源（vafa-2005 没有这一句）**；
+                   §4.2, p.14 另给 ds^2 = M_Pl^{-2} dphi^2。
+                   **适用域（§2, p.2，逐字）**：「our conjectures apply to consistent quantum theories of gravity with finite Planck mass
+                   in 4 and higher spacetime dimensions」；且 Conjecture 1 前明确「Let us assume that the dimension of M is not zero」
+                   （摘要亦写 finite **non-zero** diameter）。**这两个限定必须进节点，否则陈述是错的。**
+                   **★ 四条使用限制（每条都有 L1 逐字背书）**：
+                   (a) **alpha 不普适**：§3.1 Example i, p.6 逐字「the coefficient of the exponent is not universal (9/8 and 3/8 in this case)
+                       even for a given dimension」；Example iii, p.7 又给 8/7 与 6/7。**「alpha 是 O(1) 普适常数」不在本文里。**
+                   (b) **Conjecture 3 是标量曲率，不是截面曲率**；原文 p.4 逐字说更强的截面版本不成立
+                       （「there are points on M arising in string theory where the sectional curvature is positive」「which is weaker」）。
+                   (c) **Conjecture 1 与 2 相互独立**：§4.1, p.13-14 逐字「it is possible to show that these are independent conjectures
+                       and one conjecture does not follow from the other」，并给「无穷塔但有限距离」的例（收缩 P^2 的 M 理论紧化）。
+                       **图里两条之间禁止画 depends_on 边。**
+                   (d) **「Swampland Distance Conjecture」这个名字不在本文里**，全文只叫 Conjecture 2。
+                   **★ 三处编号误植（本项目判定，非原文）**：p.9 两处与 p.12 一处在**曲率**语境里写「conjecture 2」，
+                   按内容应为 **conjecture 3**（同篇 p.12 Example c 在同样语境写的是 conjecture 3，编号正确）。
+                   引这三处必须在 note 写「原文 v1 印作 conjecture 2」并标 inferred: true。
+                   **另一处疑似排印**：§3.1 Example iv, p.7 的 M_K3^(classical) 写作 SO(3,19)/(SO(2) x SO(19))，
+                   按最大紧子群应为 SO(3) x SO(19)。**引用前必须回原页复核。**
+                   **★ 本文自带双轨结构（对 ROADMAP Phase 4 最直接的支持）**：§3.1 = 成立方向（Examples i-v，引力例子）；
+                   **§3.2 Non-Gravitational Counter-Examples = 反例方向**（p.10-12：紧全局对称 G/H 违反 Conj 1 与 4；
+                   平 Dp 膜 Conj 1 成立而 Conj 2 失效；全局 N=2 rigid limit 的 Ricci 曲率正定违反 Conj 3（有显式计算）；
+                   非紧 CY 的小 P^2 违反 Conj 1 与 3；T^2 上的 D5 给模空间 R^4 x T^2 违反 Conj 4）。
+                   摘要对这一方向逐字用「**it is shown** that these conditions can be violated if gravity is decoupled」（比正面方向强）。
+                   **⚠ 记账红线：§3.2 的反例不得作为 Conjecture 1-4 本身的 kind: refutation 推导**——猜想适用域明确要求有限 Planck 质量，
+                   反例全在引力解耦极限，前提不满足。正确做法是建独立的「适用域/判据在引力解耦时失效」statement 并把反例挂到它上面。
+                   **本文不含**：模空间体积有限（那是 vafa-2005；本文 §1 开篇还称体积判据有「well known counter-examples」）、
+                   弱引力猜想、de Sitter 猜想。参考文献 [4]（Douglas 讲座录音 URL）不可登记。
+                   **最值得单独抽取的引文**：[15] Bagger--Witten NPB 222, 1 (1983)（§3.1 p.9 把「超多重态模空间标量曲率必为负」
+                   归给它，且说这是局部 N=2 超对称的直接后果——是 swampland 区最有希望通向 rigorous 的物理支点），已登记为 bagger-witten-1983。}
+}
+
+@misc{arkani-hamed-2006,
+  author        = {Arkani-Hamed, Nima and Motl, Lubo{\v s} and Nicolis, Alberto and Vafa, Cumrun},
+  title         = {The String Landscape, Black Holes and Gravity as the Weakest Force},
+  year          = {2006},
+  eprint        = {hep-th/0601001},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note          = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，21 页逐页读图）**：
+                   arxiv.org/pdf/hep-th/0601001 落盘 213.8 KB 后 Read 带 pages。
+                   **版本：arXiv v2（页边条纹逐字 `arXiv:hep-th/0601001v2  21 Feb 2006`）**；报告号 HUTP-05/A0057。
+                   **⚠⚠ 版本风险（本篇最重要的一条）**：arXiv ID 是 0601001（2006-01-01），但读到的是 v2（2006-02-21）。
+                   §5「Possible relation to subluminal positivity constraints」的核心引用
+                   **[9] = Adams--Arkani-Hamed--Dubovsky--Nicolis--Rattazzi, hep-th/0602178（2006 年 2 月）**，
+                   **日期上不可能出现在 v1 里** => **§5 与 eqs. (28)-(30) 极可能是 v2 新增或大改**（此为按引用日期的推断，v1 本轮未取）。
+                   **所有 loc 必须写死 v2；引 §5/(28)-(30) 额外加 note。** 发表状态未核实（L0）。
+                   **★ 编号结构（三篇里最完整）**：**30 个编号公式 (1)-(30) 全篇连续**（(1)-(4) p.4；(5)-(6) p.6；(7)-(11) p.7；
+                   (12)-(14) p.8；(15)-(17) p.9；(18)-(19) p.10；(20) p.12；(21)-(24) p.13；(25)-(27) p.14；(28) p.15；(29)-(30) p.16）；
+                   三个 sharp 版本用罗马数字 **(I)(II)(III)**，在 §3, p.10（不占用 (1)-(30) 的编号）；五张编号图 Figure 1-5；
+                   **有目录页（论文 p.1 是 Contents，正文从 p.2 起）**。
+                   **★ 否定结论：全文 21 页没有「Weak Gravity Conjecture」这个词组。** 原文只有标题的 "Gravity as the Weakest Force"
+                   与正文两处加引号的 "gravity is the weakest force"（p.2、p.4；后者明确说这是猜想的 rephrasing）。
+                   **图节点用「弱引力猜想」这个名字时，note 必须写「此名不出自本文」。**
+                   **★ 「m <= q M_Pl」在本文有四种写法，绝不可互换（详见 extractions/arkani-hamed-2006.md Q1）**：
+                   (1) **§2.1, eq. (1), p.4**：`m_el <~ g_el M_Pl`（**规范耦合 g**，关系符 `<~`，M_Pl 显式）；
+                   (2) **§2.2, p.6（逐字）**：「Since extremal black holes have M = QM_Pl, in order for them to be able to decay into
+                       elementary particles, these particles should have **m < qM_Pl**.」（**电荷 q**，**严格小于**）；
+                   (3) **§3, eq. (19), p.10**：`(M/Q) <~ 1`（M_Pl = 1 单位）；
+                   (4) **§3, (I)(II)(III), p.10**：三式均用 **`<= 1`**。
+                   另有 Figure 1, p.3 的 `G_N < g^2/m^2` 与 §2.4 eq. (14) 的 `T_el <~ (g^2/G_N)^{1/2}`，以及**摘要用等号** `Lambda = gM_Pl`
+                   （正文 eq. (4) 是 `Lambda <~ gM_Pl`）。**本文没有任何带精确系数的形式**（无 sqrt2、无 (d-2)/(d-3)），
+                   也**没有给出 g 与 q 的显式换算**。**禁止补系数。**
+                   **★ 极端性归一化在文内不统一**：§2.2 用 `M = QM_Pl`（也写 `M >= QM_Pl` 作黑洞解存在的界）；
+                   §4 eqs. (22)(23) 用 `M^2 = (1/2)Q_R^2` / `M^2 = (1/2)Q_L^2`（M_Pl = 1、**alpha' = 4**）。
+                   §3, p.10 对「1」的定义是**相对的**（逐字「it is natural to take the (M/Q) ratio that is equal to one for large extremal
+                   black holes」）。**原文没有给出两套归一化的换算 => 必须新建 conv.extremality-normalization 约定卡。**
+                   **★★ 三个 sharp 版本的 status 各不相同（这是本条对图最重要的输入）**：
+                   **(I) 最小荷态 —— 被作者本人反驳，status: refuted。** §3, p.11 逐字：「there are easy counterexamples to the conjecture (I)
+                   in string theory, even when the minimally charged particles *are* exactly stable. For instance, in the weakly coupled SO(32)
+                   heterotic string, the spinor of SO(32) is exactly stable and has minimal half-integral charges under the U(1)'s inside the
+                   SO(32), but is heavy and can violate our bounds. A generalization of these are the half-integrally charged winding strings
+                   considered by Wen and Witten [7] … **So (I) can't be right.**」
+                   **=> 这是本项目至今第一个可落地 status: refuted + kind: refutation 的案例，且反例在猜想适用域内（弦论紧化、有引力），
+                   与 ooguri-vafa-2006 §3.2 的「引力解耦反例」性质完全不同。** 证据来源 [7] = wen-witten-1985（已登记）。
+                   **(II) 最轻带电粒子**：status conjecture。原文逐字「Even though we have no counterexamples for conjecture (II) most of our
+                   evidence only supports the weaker conjecture (III).」且「(II) is the stronger of the two (and it clearly implies (III))」。
+                   **(III) 最小质荷比态**：status conjecture，有 §4 的正面证据。
+                   **(II) => (III) 是一行初等推理**（原文只说 clearly，未写推导）：按 docs/STATUS_LEVELS.md 的 lead 裁决，
+                   reviewer 独立复核后这条**边**可标 rigorous。
+                   **正面证据（§4, eqs. (20)-(25), p.12-14）**：SO(32) 杂化弦 on T^6，U(1)^28，偶自对偶格 Q_L^2 - Q_R^2 in 2Z；
+                   Sen 的极端黑洞解 M^2 = (1/2)Q_R^2（BPS）与 M^2 = (1/2)Q_L^2（非 BPS）；微扰谱
+                   M^2 = (1/2)Q_R^2 + N_R = (1/2)Q_L^2 + N_L - 1（**alpha' = 4；原文逐字说左移玻色弦快子给的 `-1` "is crucial"**）；
+                   格上存在 Q_L^2 - Q_R^2 = 2 的电荷矢量 => 总有态满足 M^2 = (1/2)Q_L^2 - 1 < 极端黑洞值。
+                   原文措辞「the string spectrum also **guarantees**」（本文最强的正面证据措辞）。
+                   §4.1, p.14-15 把它推广到**任意微扰杂化紧化（含 K3、任意 CY 三折）**，走玻色化 + 谱流算子 O(z) = :e^{i sqrt k phi}:；
+                   **⚠ 其中「模不变性 => 算子谱完备」这一步在原文只有一个括号，无引用无证明（必须进 gaps）。**
+                   **其他必记的自我限定**：BPS 是**饱和**不是违反，且猜想是「存在**某个**态」不是「所有态」（§2.1, p.5 逐字反驳 "anti-BPS" 读法）；
+                   高超对称系统里速度无关力全消失但不等式仍适用（§2.1, p.4）；§2.3 自陈 n=2「parametrically marginal」、
+                   n=1「look like they might be violated」，AdS5 x X 与 large-N 两个压力测试都只到「we aren't aware of any examples」
+                   （**是「未找到反例」不是「验证成功」，应进 gaps**）；§3, p.12 的「精确稳定态数目有限」猜想**必须带
+                   「in any given direction in charge space」限定**（原文自陈不加则 "not quite correct"，BPS 是例外）；
+                   §6, p.17 逐字「The specific forms of our conjecture are sharp, and if they are wrong it should be possible to find simple
+                   counter-examples in string theory, though we have not found any.」（**Phase 4 反例分支的原文授权**）；
+                   §6, p.18 说 strong form 与 weak form 对暴胀给出 "two very different pictures"，且 weak form「as is more likely」。
+                   **与 vafa-2005 的唯一原文级逻辑连接**：§1 逐字「This finiteness criterion nicely extends some of the finiteness criteria
+                   discussed in [1,2]」；§2.1 末逐字（非阿贝尔情形）「a statement not independent of conjecture about the finiteness of the
+                   volume of moduli spaces in [1]」。**本文不含**距离猜想/模空间曲率（那是 ooguri-vafa-2006）、de Sitter 猜想；
+                   「量子引力无全局对称性」本文只**引用**（[4] Susskind）不论证。
+                   参考文献 [2]（Douglas 讲座）与 [10]（"M. Padi, L. Motl et al., work in progress"）按 literature/CLAUDE.md 规则 1 **不可登记**。}
+}
+
+% --- 上述三篇抽取推出的新登记（researcher 2026-09-11；均仅登记，正文未读，L0） ---
+
+@article{wen-witten-1985,
+  author  = {Wen, Xiao-Gang and Witten, Edward},
+  title   = {Electric and Magnetic Charges in Superstring Models},
+  journal = {Nuclear Physics B},
+  volume  = {261},
+  pages   = {651--677},
+  year    = {1985},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             元数据 L1 抄自 arkani-hamed-2006 的参考文献 [7]（逐字：「X. G. Wen and E. Witten, "Electric And Magnetic Charges
+             In Superstring Models," Nucl. Phys. B 261, 651 (1985).」）——**起始页 651 已 L1 核实，终页 677 未与出版方核对（L0）**。
+             **登记理由（价值很高）**：arkani-hamed-2006 §3, p.11 用「Wen--Witten 的半整数荷缠绕弦（有分数电荷但很重）」
+             作为反驳其 sharp 版本 **(I)** 的反例之一，并直接下结论「So (I) can't be right.」
+             **=> 本条是本项目第一条 status: refuted 图节点的证据来源。** 要让那条 refutation 推导不只依赖 AMNV 的转述，
+             必须抽本文。1985 年，无 arXiv；Elsevier 预计 403（参见 reading-list 的死路清单）。}
+}
+
+@article{sen-1995-bh-torus,
+  author  = {Sen, Ashoke},
+  title   = {Black hole solutions in heterotic string theory on a torus},
+  journal = {Nuclear Physics B},
+  volume  = {440},
+  pages   = {421--440},
+  year    = {1995},
+  eprint  = {hep-th/9411187},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             元数据 L1 抄自 arkani-hamed-2006 的参考文献 [8]（逐字：「A. Sen, "Black hole solutions in heterotic string theory on a torus,"
+             Nucl. Phys. B 440, 421 (1995) [arXiv:hep-th/9411187].」）——**起始页 421 已 L1 核实，终页 440 未核对（L0）**。
+             **登记理由**：arkani-hamed-2006 §4 eqs. (22)(23)（杂化弦 on T^6 的极端黑洞质量 M^2 = (1/2)Q_R^2 与 M^2 = (1/2)Q_L^2，
+             M_Pl = 1 单位）**全部外包给本文**。不抽它，AMNV 全部正面证据的「极端黑洞侧」就只有转述级。
+             有 arXiv，可按 arxiv.org/pdf/hep-th/9411187 落盘 + Read 取全文。}
+}
+
+@misc{susskind-1995-remnants,
+  author        = {Susskind, Leonard},
+  title         = {Trouble for remnants},
+  year          = {1995},
+  eprint        = {hep-th/9501106},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             元数据 L1 抄自 arkani-hamed-2006 的参考文献 [4]（逐字：「L. Susskind, "Trouble for remnants," [arXiv:hep-th/9501106].」）。
+             **登记理由**：arkani-hamed-2006 §2.2 的 remnant 论证（g ~ 10^{-100} 的黑洞衰变到 Planck 标度会留下 10^100 个残余）
+             与「量子引力不应有全局对称性」这一前提**都引本文**（"see e.g. [4]"）；§2.3 的 large-N species problem 也引它。
+             **=> 图里「量子引力无全局对称性」/「残余问题」节点的来源应是本条，不是 arkani-hamed-2006**（后者只引用不论证）。}
+}
+
+@article{bagger-witten-1983,
+  author  = {Bagger, Jonathan and Witten, Edward},
+  title   = {Matter couplings in {$N=2$} supergravity},
+  journal = {Nuclear Physics B},
+  volume  = {222},
+  pages   = {1--10},
+  year    = {1983},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             元数据 L1 抄自 ooguri-vafa-2006 的参考文献 [15]（逐字：「J. Bagger and E. Witten, "Matter couplings in N = 2 supergravity,"
+             Nucl. Phys. B 222, 1 (1983).」）——**起始页 1 已 L1 核实，终页 10 未核对（L0）**。
+             **登记理由（swampland 区最有希望通向 rigorous 的物理支点）**：ooguri-vafa-2006 §3.1（第一个 Example v，p.9）逐字说
+             「though a quaternionic Kähler manifold in general can have curvatures of any sign [14], **it is known that those realized for
+             hypermultiplet fields coupled to supergravity must have a negative scalar curvatures [15]**」，并补一句这是
+             「a direct consequence of the local N = 2 supersymmetry」，因此对扰动与非扰动量子修正后仍成立。
+             **=> 若本文确有该定理，则 Conjecture 3 在超多重态模空间上的那一支可能不是 conjecture 而是有定理支撑的。**
+             1983 年，无 arXiv；Elsevier 预计 403。（同处的 [14] = J. A. Wolf, J. Math. Mech. 14, 1033 (1965)，本轮未登记。）}
+}
+
+@article{borel-harish-chandra-1962,
+  author  = {Borel, Armand and Harish-Chandra},
+  title   = {Arithmetic Subgroups of Algebraic Groups},
+  journal = {Annals of Mathematics},
+  volume  = {75},
+  pages   = {485--535},
+  year    = {1962},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+             元数据部分 L1：抄自 vafa-2005 的参考文献 [3]（逐字：「A. Borel and Harish-Chandra, "Arithmetic Subgroups of Algebraic Groups,"
+             Ann. of Math. 75, 485 (1962).」）——**起始页 485 已 L1 核实；终页 535 来自抽取者的通行记忆，未核对（L0），引用前须查 JSTOR/AMS。**
+             **登记理由**：这是 **vafa-2005 全文唯一引用的严格数学定理**——§2, p.4 用它支撑「T^d 的 Narain 模空间体积有限」
+             （逐字「which is known to be finite [3]」）。**=> 这是 swampland 区目前唯一一条可能通向 status: rigorous 的一手数学来源。**
+             建议做法：把「T^d Narain 模空间体积有限」单独建 statement（而不是让它给一般的体积猜想升格），
+             并在抽到本文之前把该边标 inferred: true。}
+}
+
