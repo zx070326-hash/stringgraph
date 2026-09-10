@@ -1,0 +1,110 @@
+id: math.virasoro-algebra-perfect--via-lean
+target: math.virasoro-algebra-perfect
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供本推导的**全部**图内输入：Lean 侧的载体 `VirasoroAlgebra R`（`StringFormal/Virasoro/Basic.lean`，
+      即该定义卡的 formal.lean_decl 所指对象）、生成元 `lgen : ℤ → VirasoroAlgebra R` 与
+      中心元 `cgen R`、括号关系 `VirasoroAlgebra.lie_lgen_lgen`
+      （⁅L m, L n⁆ = (m − n) • L (m+n) + δ_{m+n,0} · centralTerm m • C，
+      `centralTerm R m = inv12 R * ((m³ − m : ℤ) : R)`），
+      以及张成性 `VirasoroAlgebra.span_lgen_cgen_eq_top`（该定义卡陈述的【结构】一段，
+      Lean 侧在 `StringFormal/Virasoro/Verma.lean`，已列在该卡 sources 的 loc 里）。
+      **基环一致**：该定义卡与本卡都要求 R 是交换 ℚ-代数（Basic.lean 的
+      `[CommRing R] [Algebra ℚ R]`），故不需要 convention_map，也不需要收紧或放宽。
+      该定义卡 status: formalized，不构成本推导的状态上限。
+      字面依赖（同一 Lean 项目，逐条调用）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/WittPerfect.lean :: StringFormal.Virasoro.VirasoroAlgebra.{lie_mem_derivedSeries_one, two_smul_lgen_eq, two_smul_lgen_zero_eq, cgen_eq, lgen_mem_derivedSeries_one, cgen_mem_derivedSeries_one, derivedSeries_one_eq_top, isPerfect} 与 StringFormal.Virasoro.invertibleTwo；上游调用 StringFormal.Virasoro.VirasoroAlgebra.{lie_lgen_lgen, centralTerm, inv12, twelve_mul_inv12, span_lgen_cgen_eq_top} 与 Mathlib 的 LieAlgebra.coe_derivedSeries_one_eq"
+    note: |
+      本仓库，形式化分支 agent/formalizer/witt-perfect，已由 lead 以 20cc08f 合入 main；
+      Lean 4 + Mathlib v4.33.1。文件头自述「Complete, no `sorry`」，
+      formal/TODO.md 的 `witt-virasoro-perfect` 一条已勾选。
+      **curator 未自行重跑 `lake build`**；依据是该自述、TODO 登记与 20cc08f 已由 lead 合并进 main。
+      合并含 formal/ 的分支前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6 的证明第一部分，p. 7（对 𝒱 逐字给出 [d₀, d_n] = n d_n、[d₋₁, d₁] = 2d₀、[d₋₂, d₂] = 4d₀ + ½c）"
+    note: |
+      **不承载本推导的论证**，只作对照。覆盖面窄得多（特征零的**域**），
+      且其第一步见证 [d₀, d_n] = n d_n 需要 n 可逆，与本推导用的一致见证不同（见 summary 的注）。
+      该文也没有把「𝒱 完美」单列为编号陈述（它在 Lemma 2.6 的证明里）。
+      L1 逐字引文见 literature/extractions/math-sources.md 第 25.1 节（researcher 2026-09-11 全文核实）。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/WittPerfect.lean 的
+  `StringFormal.Virasoro.VirasoroAlgebra` 命名空间，变量为 `(R : Type*) [CommRing R] [Algebra ℚ R]`。
+  「完美」在 Lean 里写成 `LieAlgebra.derivedSeries R L 1 = ⊤`（等价地 ⁅(⊤ : LieIdeal R L), ⊤⁆ = ⊤，
+  二者定义相等；Mathlib v4.33.1 没有 `IsPerfect` 谓词）。
+
+  **准备**：`lie_mem_derivedSeries_one (x y) : ⁅x, y⁆ ∈ derivedSeries R (VirasoroAlgebra R) 1`
+  —— 把「任一括号属于括号之集的张成」经 `LieAlgebra.coe_derivedSeries_one_eq` 与 `derivedSeries _ _ 1` 对上。
+
+  **陈述 (1)（非零模的一致见证）** = `two_smul_lgen_eq {n : ℤ} (hn : n ≠ 0)`：
+    (2 : R) • L n = ⁅L (n+2), L (-2)⁆ − ⁅L (n+1), L (-1)⁆。
+  两次 `lie_lgen_lgen` 展开，指标相加用 `show n + 2 + (-2) = n from by ring` 等；
+  两个括号的模指标和都是 n ≠ 0，故 `simp only [if_neg hn, zero_smul, add_zero]` 抹掉中心项；
+  `← sub_smul` 合并后 `push_cast; ring` 算出系数 (n+4) − (n+2) = 2。
+  **注**：与文献（feldvoss-siciliano-2025）走的 [d₀, d_n] = n d_n 不同——那个见证要除以 n。
+  这里的见证与 n 无关，只需 2 可逆，与 `WittAlgebra.two_smul_lgen_eq` 同形。
+
+  **陈述 (2)（零模）** = `two_smul_lgen_zero_eq : (2 : R) • L 0 = ⁅L 1, L (-1)⁆`。
+  中心项 `centralTerm R 1 = inv12 R * ((1³ − 1 : ℤ) : R) = 0`（`norm_num`），故不出现 C。
+
+  **陈述 (3)（中心元的见证）** = `cgen_eq : C = (2 : R) • ⁅L 2, L (-2)⁆ − (4 : R) • ⁅L 1, L (-1)⁆`。
+  两个关键常数：`centralTerm R 1 = 0`，以及 `(2 : R) * centralTerm R 2 = 1`
+  （由 (2³ − 2) = 6 与 `twelve_mul_inv12`：2·(inv12·6) = 12·inv12 = 1）。
+  展开后 (i) 与 (ii) 的 L_0 部分按 2·(2 − (−2)) = 4·(1 − (−1)) 相消（`push_cast; ring`），
+  剩下的中心部分恰是 C（`abel`）。**这是本推导唯一不与 Witt 情形共享的一步。**
+
+  **陈述 (4)（完美性）** = `derivedSeries_one_eq_top`，包装为 `isPerfect`（本卡 lean_decl）。
+  三步：
+    · `lgen_mem_derivedSeries_one (n : ℤ)`：先由 (1)(2) 得 (2 : R) • L n ∈ derivedSeries _ _ 1
+      （对 n = 0 与 n ≠ 0 分情况，`sub_mem` 处理两个括号之差），
+      再用 `invertibleTwo R`（ℚ-代数里 2 的逆是 `algebraMap ℚ R (1/2)`，取出后 `smul_smul` 消掉 2）
+      得 L n 本身在里面；
+    · `cgen_mem_derivedSeries_one`：`rw [cgen_eq]` 后同样由 `sub_mem` + `SMulMemClass.smul_mem` 得 C 在里面；
+    · 收尾：`← span_lgen_cgen_eq_top R` 把 ⊤ 换成 {C} ∪ {L n} 的张成，`Submodule.span_le`
+      后 `rintro x (rfl | ⟨n, rfl⟩)` 逐个交给上面两条。
+  `isPerfect` 的证明项就是 `derivedSeries_one_eq_top R`。
+gaps:
+  - |
+    (i) **不涉及任何上同调，也不涉及万有性**。H¹(Vir, k) = 0、H²(Vir, k) = 0 与
+    「Vir 是 W 的万有中心扩张」留在 math.virasoro-universal-central-extension 的 (2)(3)，
+    本图与任何已知 Lean 项目都**没有**形式化它们（researcher 2026-09-11 核实 Kytölä 的
+    VirasoroProject 文件清单：只有 WittAlgebraCohomology.lean，无 Virasoro 上同调 / 完美性文件）。
+    特别地，本推导**不**提供「完美 ⟺ H¹(−, k) = 0」这条字典。
+  - |
+    (ii) **基环的锐利性未回答**。Witt 侧有充要条件（`WittAlgebra.derivedSeries_one_eq_top_iff`：
+    ⟺ 2 ∈ R^×，附 ℤ 与 ZMod 2 两个反例）；Virasoro 侧**没有**对应结果，
+    因为本图与 Lean 侧的 `VirasoroAlgebra R` 定义就要求 `[Algebra ℚ R]`（括号里的 (m³−m)/12）。
+    「12 不可逆时 Vir 是否完美」在当前形式化里连提问的对象都没有。
+    目标陈述的边界 (c) 已声明这一点。
+  - |
+    (iii) **「特征零的域上完美」没有单独的具名引理**。域 k（char 0）是 ℚ-代数的特例，
+    故由本推导的结论一步即得，但 Lean 里没有把它单列为定理，也没有像 Witt 侧那样给正特征反例。
+    这不影响本卡陈述（本卡就是按 ℚ-代数陈述的），此处登记以便与
+    math.witt-algebra-derived-algebra 的 gap (i) 对照。
+  - |
+    (iv) **`lake build` 未由 curator 重跑**。本推导 status: formalized 的证据是 WittPerfect.lean
+    的文件头自述、formal/TODO.md 的勾选与 20cc08f 已由 lead 合并进 main
+    （合并流程要求 `lake build` + `check-axioms`）。curator 侧只做了 grep 级核对
+    （`isPerfect`、`cgen_eq`、`two_smul_lgen_eq`、`two_smul_lgen_zero_eq` 的签名与证明体，
+    2026-09-11 逐行读过 WittPerfect.lean 的 `VirasoroAlgebra` 命名空间）。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+
+  【与 math.virasoro-universal-central-extension--via-feldvoss-siciliano 的关系】
+  那一条是文献路线（feldvoss-siciliano-2025 Lemma 2.6），目标含 H¹ = H² = 0 与万有性，
+  故即便有本条也**不能**升到 formalized；它已加 depends_on 指向本卡的目标，
+  由本卡供给其陈述 (1)。反过来本推导**不**依赖那一条（Lean 证明不引用任何文献结果）。
+
+  【与 math.witt-algebra-derived-algebra--via-lean 的关系】同一个 Lean 文件的两个命名空间，
+  证明骨架共享（一致见证 → 2 可逆 → 基张成 → ⊤）。差别只有两处：
+  Vir 侧多一步 `cgen_eq`（中心元也要拉进导出代数），且 Vir 侧的一致见证要限定 n ≠ 0
+  （n = 0 由 `two_smul_lgen_zero_eq` 单独给）。两条推导互不依赖。
+author: curator
+created: "2026-09-11"

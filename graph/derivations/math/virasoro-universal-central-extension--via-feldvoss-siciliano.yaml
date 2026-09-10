@@ -44,6 +44,22 @@ depends_on:
       并另给了一条两行的初等推导（math.witt-algebra-perfect--via-bracket-identity）。
       本推导不依赖于采用哪一份来源，只依赖于结论 H¹(𝒲, 𝔽) = 0。
       **⚠ 别与目标陈述的 (1)/(2) 混**：那是 **𝒱** 的完美性与 H¹(𝒱, 𝔽) = 0，本依赖是 **𝒲** 的。
+  - id: math.virasoro-algebra-perfect
+    note: |
+      【2026-09-11（四）新增，拆卡后接线，lead 裁决】**非 inferred**：目标陈述的 (1)
+      「[Vir(k), Vir(k)] = Vir(k)，非平凡的一步是 C ∈ [Vir(k), Vir(k)]」由该节点整条供给
+      （其 (4) 是完美性，(3) 是中心元的显式见证 C = 2[L_2, L_{−2}] − 4[L_1, L_{−1}]，
+      与目标陈述括号里写的 [L_2, L_{−2}] = 4L_0 + (1/2)C 是同一件事的两种写法）。
+      该节点是从目标节点拆出的、**已形式化**的那一半
+      （StringFormal.Virasoro.VirasoroAlgebra.isPerfect，无 sorry）。
+      **基环放宽不需要 convention_map**：目标陈述限定「k 是特征零的域」，
+      该节点对任意交换 ℚ-代数成立，是更一般的情形，直接特化即可。
+      记号也一致：两者都挂 conv.virasoro-standard（目标节点 uses_conventions 为空，
+      理由见其 notes【为什么 uses_conventions 是空的】，校验器不因此报冲突）。
+      **本推导的 status 不因此改变**：目标的 (2)(3)（H¹ = H² = 0 与万有性）仍未形式化，
+      本推导的其余步骤仍走 feldvoss-siciliano-2025，故仍是 rigorous。
+      新依赖的 effective 是 formalized（≥ rigorous），不构成新的上限。
+      **⚠ 与上一条 math.witt-algebra-perfect 分工**：那是 **𝒲** 的完美性 / H¹，本条是 **𝒱** 的。
 sources:
   - ref: feldvoss-siciliano-2025
     loc: "Lemma 2.6, p. 7（陈述 + 完整证明）；万有性的一般判据见 p. 5 正文"
@@ -115,7 +131,12 @@ gaps:
      （researcher 2026-09-11 核实其 Lean 文件清单：有 WittAlgebraCohomology.lean，
      没有任何 Virasoro 上同调 / 完美性 / 万有性文件）。故本推导上限是 rigorous。
      注意这造成一个不对称：H²(Witt) 一维（worldsheet.virasoro-unique-central-extension）
-     的最强来源是机器验证的，本节点的不是。"
+     的最强来源是机器验证的，本节点的不是。
+     **【2026-09-11（四）部分更新】**目标陈述的 **(1) 已形式化**（本仓库 WittPerfect.lean 的
+     `VirasoroAlgebra.isPerfect`，无 sorry），并已拆成独立卡 **math.virasoro-algebra-perfect**
+     （已加为本推导的 depends_on）。**(2)(3) 仍未形式化**：H¹(Vir,k) = 0 还差那条上同调字典，
+     H²(Vir,k) = 0 与万有性判据完全在 Lean 之外。故本推导上限**仍是 rigorous**，本条不关闭，
+     只是把「一点都没有」订正为「(1) 有，(2)(3) 没有」。外部项目的情况未变。"
   - "**主来源是未见刊的 arXiv 预印本**。feldvoss-siciliano-2025 是否已被期刊接受未核实（L0，
      math-sources.md Q16）；若已发表，Lemma 2.6 的编号可能变。本推导的 loc 写死的是 v1。
      缓解：该文对这条结论自陈是 well-known，并引 schlichenmaier-2014 Remark 6.4 与
@@ -153,6 +174,18 @@ notes: |
   另有两条独立数学来源（其中 schlichenmaier-2014 是已发表期刊论文）覆盖 (2) 的核心部分，
   故 rigorous 成立。不取 formalized 的理由见 gaps 第一条。
   未使用 STATUS_LEVELS.md 的「reviewer 复核初等计算」例外——本推导不靠自算。
+
+  【2026-09-11（四）：目标 (1) 拆卡并接线（curator，lead 裁决）】
+  目标陈述的 (1)（𝒱 完美，含 C ∈ [𝒱,𝒱]）已单列为 **math.virasoro-algebra-perfect**
+  （proposition，推导 --via-lean，**status formalized**，lean_decl
+  `StringFormal.Virasoro.VirasoroAlgebra.isPerfect`，含中心元见证 `cgen_eq`：
+  C = 2[L_2, L_{−2}] − 4[L_1, L_{−1}]），并已加为本推导的一条 depends_on。
+  拆卡的依据是目标节点 notes【陈述 (1) 已形式化】一段里写下的做法（参照
+  math.witt-algebra-perfect → math.witt-algebra-derived-algebra）。
+  **本次改动只有三处：加一条 depends_on、改写 gaps 第 1 条、加本段。**
+  target、status、summary、sources 一字未动；目标卡不换代、其 statement 未动、
+  仍**不填** formal.lean_decl —— 因为它的 (2)(3) 未形式化，整卡不得标 formalized。
+  一句话状态：**(1) 已形式化，(2)(3) 未**。本推导仍是 rigorous。
 
   【为什么 uses_conventions 空但没有 convention_map】目标节点 uses_conventions 为空，
   两条依赖（worldsheet.virasoro-algebra-v2、math.witt-algebra）都挂 conv.virasoro-standard。
