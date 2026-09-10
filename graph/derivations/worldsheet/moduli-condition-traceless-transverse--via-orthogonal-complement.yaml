@@ -1,0 +1,46 @@
+id: worldsheet.moduli-condition-traceless-transverse--via-orthogonal-complement
+target: worldsheet.moduli-condition-traceless-transverse
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.diff-weyl-metric-variation
+    note: 提供被正交的对象：全体 diff × Weyl 变分 = −2(P₁δσ) + (2δω − ∇·δσ)ĝ。
+  - id: worldsheet.p1-formal-adjoint
+    note: 提供 (δ'g, P₁δσ) = (P₁^T δ'g, δσ)，把「与 im P₁ 正交」翻译成「P₁^T δ'g = 0」。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁、P₁^T 与 L² 配对的定义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.6a)–(5.2.6b), p.151–152"
+    note: |
+      抽取记录 #E73，L1（schrans-2020 §5.6–§5.7，笔记 p.248–249）。
+      式号只有 [S] 正文交叉引用，无目录条目（抽取记录 §7）。
+summary: |
+  要求 (δ'g, δg) = 0 对一切 diff × Weyl 变分 δg 成立。取 δσ = 0、δω 任意：
+  纯迹部分给 ∫ g^{1/2} δ'g^{ab} (2δω) ĝ_ab = 0 对一切 δω，故 ĝ^{ab}δ'g_ab = 0（无迹，(5.2.6a)）。
+  再取 δω 使迹部分为零、δσ 任意：由 worldsheet.p1-formal-adjoint，
+    0 = (δ'g, −2 P₁δσ) = −2 (P₁^T δ'g, δσ)  对一切 δσ,
+  故 P̂₁^T δ'g = 0，即 ∇̂^b δ'g_ba = 0（(5.2.6b)）。
+  反向包含由同一串等式倒着读得到。
+gaps:
+  - |
+    **「对一切检验场成立 ⇒ 被检验的场为零」用的是变分法基本引理**，本图无节点，
+    来源也未提及所需的正则性（δσ、δω 的函数类）。形式操作，不是泛函分析论证。
+  - |
+    **本节点只给出 ker P̂₁^T 这个特征，不含维数有限性**。「μ 有限」需要 P₁ 是椭圆算子且
+    M 紧，来源里没有这一步；本图也没有节点。下游凡把 μ 当有限数用的地方（μ 个模积分、
+    Riemann–Roch）都继承这个缺口。
+  - |
+    **前提「紧、无边」由 worldsheet.p1-formal-adjoint 继承**；有边情形（开弦世界面）
+    的边界条件在来源与本图中都未处理。
+  - |
+    **来源强度**：式号 (5.2.6a)/(5.2.6b) 只有 schrans-2020 正文的交叉引用背书
+    （无目录条目、无原书），见抽取记录 §7 的清单。
+notes: |
+  这条与 worldsheet.conformal-killing-equation 是同一结构的两半：
+  模 = ker P₁^T（对称无迹张量侧），CKV = ker P₁（向量场侧）。
+  Riemann–Roch κ − μ = 3χ 就是这两个核的维数差，因此在数学上它是 P₁ 的指标定理；
+  但 Polchinski 走的是鬼数反常的路（worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly），
+  本图没有指标定理的节点。
+author: curator-polchinski-ch5
+created: "2026-09-11"

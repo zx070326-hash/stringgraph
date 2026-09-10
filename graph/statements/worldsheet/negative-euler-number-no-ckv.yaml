@@ -1,0 +1,27 @@
+id: worldsheet.negative-euler-number-no-ckv
+kind: proposition
+title: "χ < 0 的世界面没有共形 Killing 向量（κ = 0）"
+statement: |
+  设 M 是紧二维世界面。对任意向量场 δσ 成立恒等式
+    ∫ d²σ  g^{1/2} (P₁δσ)_ab (P₁δσ)^{ab}
+      = ∫ d²σ  g^{1/2} ( ½ ∇_a δσ_b ∇^a δσ^b − ¼ R  δσ_a δσ^a ) 。
+  用 Weyl 变换把 R 取成常数；由 χ = (1/4π)∫d²σ g^{1/2} R（worldsheet.worldsheet-euler-number）
+  与面积为正，χ < 0 蕴含 R < 0。此时右端被积函数是两个非负项之和，且只在 δσ = 0 时为零。
+  故 (P₁δσ)_ab = 0 只有平凡解，即
+    χ < 0  ⟹  κ = 0 。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10), p.152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E76，L1
+      （读到 schrans-2020 笔记 p.252；**未核对 Polchinski 原书**）。
+tags: [worldsheet, ckv, euler-number, moduli, counting]
+notes: |
+  **本条与「χ > 0 ⟹ μ = 0」强度不同，故拆成两卡**（抽取记录 E76 与「本轮对图的建议」第 3 条
+  都明确要求拆开）：本条有直接的正定性论证，
+  worldsheet.positive-euler-number-no-moduli 则没有——见那张卡。
+  与 worldsheet.riemann-roch-kappa-minus-mu 合用：χ < 0 时 κ = 0 给 μ = −3χ = 6g − 6（闭可定向）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,54 @@
+id: worldsheet.positive-euler-number-no-moduli--via-surface-enumeration
+target: worldsheet.positive-euler-number-no-moduli
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: 提供 μ 的定义（ker P̂₁^T ∩ 对称无迹），即被断言为零的对象。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；
+      χ = 2 − 2g − b 是拓扑等式，与号差无关。继承该约定登记的缺口。
+    note: |
+      提供 χ = 2 − 2g − b，枚举路线靠它把「χ > 0」翻译成「只剩球面、圆盘、射影平面」。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁、P₁^T；对偶的正定性论证（若存在）应在这里进行。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 附近, p.152"
+    note: |
+      抽取记录 #E76，L1（schrans-2020 笔记 p.252）。
+summary: |
+  原书把本条作为 (5.2.10) 的**对偶断言**给出（χ < 0 ⇒ κ = 0 的镜像）。
+  本图能核实到的唯一成文论证是间接的：闭可定向曲面 χ = 2 − 2g，χ > 0 迫使 g = 0；
+  连同带边与不可定向情形，χ > 0 的紧曲面只有球面、圆盘、射影平面三种，
+  而这三种都没有模。于是逐个枚举即得结论。
+gaps:
+  - |
+    **直接论证在本图中不存在**。抽取记录逐字记下伴读者「I have not been able to show in a
+    satisfying way that for positive Euler numbers, the number of moduli is zero.
+    I have tried two ways… But neither way has lead to anything useful.」
+    **Polchinski 原书是否给出直接论证，本项目未核实**（无原书正文）。
+  - |
+    **枚举路线所依赖的成文论证出自 schrans-2020，而按 lead 2026-09-10 裁决，个人笔记
+    不得作为 sources[] 条目承载论证。** 因此从本图的记账看，本命题目前**没有任何可用的
+    成文论证**，只有三个特例的核对。这正是 status 取 `conjecture` 而不是 `physical-argument`
+    的理由（docs/STATUS_LEVELS.md：conjecture = 有非平凡检验但无证明）。
+  - |
+    **枚举路线的两个输入在本图中都还没有节点**：
+    (i) 「χ > 0 的紧二维曲面只有 S₂、D₂、RP₂」（曲面分类定理，无来源、无节点）；
+    (ii) 「S₂、D₂、RP₂ 各自 μ = 0」——原书在 §6.1/§6.4 给出（(6.1.5) 等），
+         属第 6 章，由另一名 curator 负责，本批未建。
+  - |
+    **来源强度**：式号 (5.2.10) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+notes: |
+  升级路径（都不难，但都不在本批范围）：
+  (a) §6 的 curator 建成 S₂/D₂/RP₂ 的 μ = 0 节点后，把它们挂上来；
+  (b) 挂一个曲面分类定理的数学来源；
+  (c) 若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
+      改建一条 `--via-positivity` 推导，那条可以到 physical-argument 甚至更高。
+  完成 (a)+(b) 即可把本条升到 physical-argument（枚举是完备的）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

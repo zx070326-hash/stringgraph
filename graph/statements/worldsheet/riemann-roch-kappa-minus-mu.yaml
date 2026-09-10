@@ -1,0 +1,42 @@
+id: worldsheet.riemann-roch-kappa-minus-mu
+kind: proposition
+title: "Riemann–Roch（Polchinski 形式）：κ − μ = 3χ"
+statement: |
+  设 M 是紧二维世界面（可带边、可不可定向），χ 是它的 Euler 数
+  （worldsheet.worldsheet-euler-number）。记
+    μ = 世界面**度规**的实模数目（worldsheet.moduli-condition-traceless-transverse），
+    κ = 共形 Killing 向量的实数目（worldsheet.conformal-killing-equation）。
+  则
+    κ − μ = 3 χ 。
+
+  已知的检验值：
+    球面 S₂：χ = 2, κ = 6, μ = 0  ⇒  6 − 0 = 3·2 ✓
+    圆盘 D₂：χ = 1, κ = 3, μ = 0  ⇒  3 − 0 = 3·1 ✓
+    环面 T²：χ = 0, κ = 2, μ = 2  ⇒  2 − 2 = 0 ✓
+
+  ⚠ **μ 只数度规的模，不含顶点算子的位置。** 通行的写法「dim M_{g,n} = 6g − 6 + 2n」
+  与本式**不是同一条陈述**；两者的换算见 worldsheet.moduli-integration-parameter-count
+  与抽取记录 Q12。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.9), p.152（陈述）；§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E75/#E82。
+      **式号锚定强度是第 5 章最好的一条**：schrans-2020 §5.23 **正文**逐字写
+      「…which leads to the Riemann-Roch theorem (5.2.9)」，紧接 κ − μ = 3χ（条目 [5.90]），
+      即正文级引用而非目录标题（L1 对笔记；对 Polchinski 原书仍未核对）。
+      ⚠ **球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)**（[S] 明说「we will see in the next
+      chapter」），属第 6 章，由另一名 curator 负责；本卡把它作为**检验值**列出，
+      对应的依赖边只在推导里出现，并标为该来源尚未建节点。
+tags: [worldsheet, moduli, ckv, riemann-roch, euler-number, counting]
+notes: |
+  **本书没有走数学上的 Riemann–Roch / 指标定理路线**：它是先在 §5.2 陈述、再到 §5.3
+  用鬼数流的 Weyl 反常「导出」的，且比例常数不是算出来的，而是用球面这一个例子标定的
+  （见 worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly）。
+  数学上真正的 Riemann–Roch（或 P₁ 的 Atiyah–Singer 指标）有严格证明，
+  但本图**没有**挂那条路线的来源，故本命题目前的最高强度就是 physical-argument。
+  升级路径：登记一个可核实的数学来源（Riemann–Roch 或椭圆算子指标定理），另起一条 rigorous 推导。
+author: curator-polchinski-ch5
+created: "2026-09-11"

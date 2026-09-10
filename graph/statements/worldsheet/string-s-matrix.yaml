@@ -1,0 +1,65 @@
+id: worldsheet.string-s-matrix
+kind: definition
+status: physical-argument
+title: 玻色弦 S-矩阵的主公式 (5.3.9)
+statement: |
+  n 个玻色弦态的 S-矩阵元由下式**定义**：
+    S_{j₁…j_n}(k₁,…,k_n)
+      = Σ_{紧世界面拓扑}  (1/n_R)  ∫_F d^μ t  ∫ [dφ  db  dc]  exp(− S_m − S_g − λχ)
+        × ∏_{(a,i) ∉ f} ∫ dσ_i^a
+        × ∏_{k=1}^{μ} (1/4π) ( b, ∂_{t^k} ĝ )
+        × ∏_{(a,i) ∈ f} c^a(σ̂_i)
+        × ∏_{i=1}^{n} ĝ(σ_i)^{1/2}  V_{j_i}(k_i, σ_i) 。
+  各因子的含义：
+  1. 对所有紧 Riemann 面求和；取向 / 无取向由弦的类型决定；
+  2. n_R 是规范全固定后残余离散对称群的阶（如世界面宇称），除掉以免重复计数；
+  3. 在基本域 F 上对 μ 个模 t^k 积分（环面情形 F = F₀，见 worldsheet.modular-fundamental-domain）；
+  4. 对物质场 φ 与鬼场 b、c 做路径积分；
+  5. 权重 exp(−S_m − S_g − λχ)，λ 是一个参数（原书注明它「不是独立的」，
+     那属后文的内容，本卡不断言）；
+  6. 若曲面有 κ 个 CKV，用它们固定 κ 个顶点算子坐标（集合 f），其余坐标要积分；
+  7. 每个模给一个因子 (4π)^{-1}(b, ∂_{t^k} ĝ)；
+  8. 每个被固定的顶点算子坐标给一个 c^a(σ̂_i) 插入；
+  9. 最后乘上全部顶点算子，带权重 ĝ^{1/2}。
+
+  ⚠ **本公式在原书中是 S-矩阵的定义，不是从别处导出的定理。**
+  ⚠ **它自身没有收敛性或可定义性的论证**：对拓扑的求和是发散的渐近级数，
+  单个路径积分的存在性也没有数学定义。本卡不断言任何收敛性。
+uses:
+  - worldsheet.genus-g-ghost-path-integral
+  - worldsheet.gauge-fixed-measure-moduli-and-positions
+  - worldsheet.worldsheet-euler-number
+  - worldsheet.polyakov-action
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.9), p.156"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E80，L1（读到 schrans-2020 §5.15，
+      笔记 p.254–255，其中九条因子含义逐条转录；**未核对 Polchinski 原书**）。
+      伴读者对本式地位的评语（逐字）：「This formula is obtained by filling in the various parts
+      so is entirely straightforward. But we repeat it here and discuss its different parts
+      because of its sheer importance for string theory.」
+      ⚠ 「λ 不是独立参数」一句在抽取记录里记为 [S] 转述的「as we will see later」，
+      本卡只把它写进因子说明，**不作为断言**。
+tags: [worldsheet, s-matrix, amplitude, path-integral, moduli, ghosts, perturbation-theory]
+notes: |
+  **这是「弦微扰论振幅」这条主线唯一的定义节点**：第 6 章全部树级结果都应挂在它下面
+  （那部分由另一名 curator 以 `spectrum.` 前缀处理）。
+
+  **status = physical-argument** 的三条理由，按 docs/STATUS_LEVELS.md 的「定义卡依赖
+  路径积分等未定义对象」一档：
+  (i) [dφ db dc] 没有数学定义；
+  (ii) 对拓扑的求和是发散渐近级数，本书此处不讨论；
+  (iii) 上游 worldsheet.genus-g-ghost-path-integral 与
+        worldsheet.genus-g-faddeev-popov-determinant 本身就是 physical-argument。
+
+  **本图缺的两条上游**：抽取记录 E80 把依赖列为 E47（世界面拓扑求和）与 E48（λχ 与弦耦合），
+  这两条在本图**尚无节点**（属第 3 章 §3.1–§3.2，前几批未建）。本卡改挂
+  worldsheet.worldsheet-euler-number（χ 本身）与 worldsheet.polyakov-action（S_m），
+  但「对拓扑求和」与「e^{−λχ} 是弦耦合展开」这两个内容目前在图中**没有承载节点**，
+  是一处已知缺口，建议 lead 派人补 E47/E48。
+author: curator-polchinski-ch5
+created: "2026-09-11"

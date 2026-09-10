@@ -1,0 +1,52 @@
+id: worldsheet.s-matrix-diff-invariance--via-contact-terms
+target: worldsheet.s-matrix-diff-invariance
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: worldsheet.b-insertion-diff-variation
+    note: |
+      提供已经算出来的那一半：δ_ξ(b, ∂_{t^k}ĝ) = −2(P̂₁^T b, ∂_{t^k}ξ)，
+      在 b 的运动方程处为零。
+  - id: worldsheet.string-s-matrix
+    note: 被断言不变的对象。
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: 提供 c 插入的来源（固定顶点算子坐标的乘子），接触项就出在这些插入处。
+  - id: worldsheet.gauge-fixed-measure-moduli-and-positions
+    note: 提供「κ 个顶点算子坐标被固定」这一设置，(b) 中要补偿的效应正来自它。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.4), p.160"
+    note: |
+      抽取记录 #E84，L1（schrans-2020 §5.25 与第 5 章 "Open Questions" 框，笔记 p.243、p.263–264）。
+summary: |
+  论证的骨架：b 插入的微分同胚变分正比于 (P̂₁^T b, ∂ξ)；b 的运动方程 P̂₁^T b = 0 来自
+  δS_g/δc = 0，因此在路径积分里它是一个**含源的** Schwinger–Dyson 等式——源就在 c 插入处。
+  Polchinski 断言这些源项「恰好是补偿固定顶点算子坐标变换所需要的」（逐字见目标节点 sources），
+  从而两处非协变性相消，(5.3.9) 整体微分同胚不变。
+gaps:
+  - |
+    **接触项的计算在原书中不存在**。Polchinski 用的是「so there will be source terms…;
+    this is precisely what is needed to account for…」这类断言式措辞，
+    抽取记录逐字保留了这一句，并记录伴读者的反应：「I don't understand this,
+    let alone how you can show this.」——**没有任何一步计算被写出来**。
+  - |
+    **本图能核实到的补充材料不可用**：伴读者自补的 §5.35「Appendix: The Schwinger Dyson
+    Equations in a QFT」是个人笔记，按 lead 2026-09-10 裁决不得作为承载论证的 sources[] 条目；
+    而且他本人声明未能复现 Polchinski 的论证。
+  - |
+    **因此本推导没有任何成文的完整论证**，只有一个骨架加一个断言。按 docs/STATUS_LEVELS.md，
+    这落在 `conjecture`（有非平凡检验但无证明）而不是 `physical-argument`（有物理学家式的推导）。
+    ⚠ 这是**记账判断，不是对结论的怀疑**：S-矩阵的微分同胚不变性在物理上没有争议，
+    本图记的是「本项目手上的来源把它论证到了什么程度」。
+  - |
+    **Schwinger–Dyson 等式在路径积分中的地位**（测度不变性、接触项的正规化依赖）
+    在本图与来源中都没有节点。
+  - |
+    **来源强度**：式号 (5.4.4) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）；
+    连那句逐字原文也是转引。
+notes: |
+  升级到 physical-argument 的最低条件：拿到一份把接触项写出来的成文来源
+  （原书 §5.4 正文本身可能就够——本项目还没有它），另建一条推导。
+  在那之前请勿手改本条的 status（docs/STATUS_LEVELS.md：不允许无新推导就改状态）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

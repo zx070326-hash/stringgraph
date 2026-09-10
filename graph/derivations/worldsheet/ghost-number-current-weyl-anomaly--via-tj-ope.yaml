@@ -1,0 +1,56 @@
+id: worldsheet.ghost-number-current-weyl-anomaly--via-tj-ope
+target: worldsheet.ghost-number-current-weyl-anomaly
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+    note: |
+      提供 bc 系统、鬼数流 j = −:bc:、以及「j 不是主场，在共形变换下带反常项
+      （(2.5.15)–(2.5.17)）」——那个反常项就是这里三阶极点的来源。
+  - id: worldsheet.weyl-anomaly-trace
+    note: |
+      提供 Weyl 反常的一般形式：由局域性与量纲分析，反常只能正比于 R，系数由短距离展开定出。
+      本推导把同一套论证从 ⟨T^a_a⟩ 搬到 ∇_a j^a。
+  - id: worldsheet.operator-product-expansion
+    note: 系数由 T(z)j(0) 的 OPE 三阶极点读出，故依赖 OPE 及其收敛性假定。
+  - id: worldsheet.euler-number-weyl-invariance
+    inferred: true
+    convention_map: |
+      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian），
+      本推导在欧氏世界面（conv.worldsheet-euclidean）。按 conv.worldsheet-euclidean 的
+      Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；曲率的 Weyl 变换式在两种号差下逐字相同。
+      继承该约定登记的缺口。
+    note: |
+      inferred：抽取记录 E81 没有列这条依赖。加它的理由是——「反常正比于 R」这个结论要有
+      规范无关的意义，必须知道 ∫√g R 在 Weyl 变换下的行为（它给出 χ）。
+      本条边只在下游（Riemann–Roch 推导）真正被用到，此处标 inferred 记账。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.19), p.158；(2.5.15)；(3.4.9)；习题 3.6"
+    note: |
+      抽取记录 #E81，L1（schrans-2020 §5.21，笔记 p.260–261）。
+      伴读者先由习题 3.6 的形式 ∇_a j^a = aR 读系数，再独立重做一遍
+      （把 δ_W 作用在两边，条目 [5.79]–[5.85]）验证 a = α。
+summary: |
+  bc 系统的鬼数流 j 不是主场：T(z)j(0) 的展开带一个三阶极点，系数 (1 − 2λ)。
+  按与 Weyl 反常同样的局域性 + 量纲论证，弯曲世界面上 ∇_a j^a 只能正比于 R；
+  比例常数由上述三阶极点定出，得 ∇_a j^a = ((1 − 2λ)/4) R。λ = 2 给 −(3/4)R。
+gaps:
+  - |
+    **围道 + OPE 路线的既定缺口**（lead 2026-09-10 裁决）：OPE 级数的收敛性与围道变形的
+    合法性在来源中未被证明，凡此类推导一律 physical-argument。
+  - |
+    ⚠ **勘误依赖**：系数的读出所依据的习题 3.6 在印刷版里有符号错
+    （schrans-2020 逐字「a sign error on exercise 3.6, as per Joe's errata page」）。
+    **Polchinski 官方勘误表本项目未能取得**，该事实目前只有 schrans-2020 单源支撑。
+    若勘误内容与此不符，本式的整体符号需要重定。
+  - |
+    **系数 1/4 与三阶极点归一化本图未独立验证**：抽取记录只给出结论式与 OPE 的形状，
+    没有中间步骤；本图既没有 (2.5.15) 的节点，也没有核实 (3.4.9) 的归一化。
+  - |
+    **反常作为算子方程的地位没有论证**：从「配分函数的 Weyl 变分」到「∇_a j^a 是算子方程」
+    这一步在下游（Riemann–Roch）被当成前提使用，来源里没有证明。
+  - |
+    **来源强度**：式号 (5.3.19) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

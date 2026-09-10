@@ -1,0 +1,29 @@
+id: worldsheet.torus-two-moduli-two-ckv
+kind: proposition
+title: "环面上 μ = κ = 2：两个模与两个共形 Killing 向量"
+statement: |
+  在平坦环面 T²(τ)（worldsheet.torus-modulus）上：
+  (a) 共形 Killing 向量恰是常向量场（复坐标下 δz = 常数、δz̄ = 常数‾），
+      即两个平移；故 κ = 2（两个实参数）。
+  (b) 全纯二次微分恰是常数（δ'g_zz = 常数），故 μ = 2（一个复参数 = 两个实参数），
+      对应 τ 的两个实分量。
+  于是环面满足 κ − μ = 0 = 3χ（χ(T²) = 0），与 worldsheet.riemann-roch-kappa-minus-mu 相符。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8) 附近, p.152；环面的两个平移（CKV）见 §5.1 的 eq. (5.1.16), p.148–149"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E74（「环面上两者各有两个双周期全纯解，
+      故环面 μ = κ = 2」，L1：读到 schrans-2020 §5.9 笔记 p.249–250）与 #E69 备注。
+      ⚠ **(5.1.16) 这个式号强度最弱**：抽取记录 §7 明确列出「只有 [S] §5.9 正文的交叉引用，
+      无目录条目」，即它是伴读笔记正文顺手提到的号码，既无目录背书也无原书背书。
+      本卡把它写进 loc 但在此标明该弱点。
+tags: [worldsheet, torus, moduli, ckv, counting]
+notes: |
+  μ = 2 在本图有**两条独立来路**：本卡（解 (5.2.8) 的全纯方程）与
+  worldsheet.torus-metric-reduces-to-modulus（几何计数：周期格的剩余参数就是 τ）。
+  两者相符是一致性检验，不是循环论证——但两条都只到 physical-argument。
+author: curator-polchinski-ch5
+created: "2026-09-11"

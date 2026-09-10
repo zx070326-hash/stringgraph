@@ -1,0 +1,54 @@
+id: worldsheet.diff-weyl-metric-variation--via-infinitesimal-transformation
+target: worldsheet.diff-weyl-metric-variation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁ 的定义，本式的对称无迹部分就是 −2 P₁δσ。
+  - id: worldsheet.polyakov-action-symmetries
+    inferred: true
+    note: |
+      inferred：抽取记录 E73 把依赖列为「§3.3 的 (3.3.16)」，没有回溯到对称性节点。
+      本条边记录的是「所考虑的变换群就是 Polyakov 作用量的 diff × Weyl」这一前提，
+      §5.2 只使用不论证。
+    convention_map: |
+      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian），
+      本推导在欧氏世界面（conv.worldsheet-euclidean）。换算按 conv.worldsheet-euclidean
+      的 Wick 旋转字典；李导数公式 δg_ab = −∇_aδσ_b − ∇_bδσ_a 与号差无关，
+      本条换算不引入新内容。继承该约定节点登记的缺口（Wick 旋转在路径积分层面无节点）。
+  - id: worldsheet.polyakov-weyl-invariance
+    inferred: true
+    note: |
+      inferred：同上，Weyl 参数 δω 的引入依赖 Weyl 是理论的对称性；§5.2 只使用。
+    convention_map: |
+      跨 family `worldsheet-signature`，换算同上一条。Weyl 变换 δg_ab = 2δω g_ab
+      在两种号差下逐字相同。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.4)–(5.2.5), p.151；同式即 §3.3 的 (3.3.16)"
+    note: |
+      抽取记录 #E73，L1（schrans-2020 §5.6–§5.7，笔记 p.248–249）。
+summary: |
+  微分同胚由向量场 δσ^a 生成，度规按李导数变分 δg_ab = −(∇_a δσ_b + ∇_b δσ_a)；
+  Weyl 变换给 δg_ab = 2δω g_ab。相加后按「对称无迹 + 纯迹」分解：
+    −(∇_aδσ_b + ∇_bδσ_a) = −2·½(∇_aδσ_b + ∇_bδσ_a − g_ab∇·δσ) − g_ab ∇·δσ
+                          = −2(P₁δσ)_ab − g_ab ∇·δσ,
+  代入即得 δg_ab = −2(P₁δσ)_ab + (2δω − ∇·δσ) g_ab。
+gaps:
+  - |
+    **李导数的符号约定未在来源中核实**：δg_ab = −(∇_aδσ_b + ∇_bδσ_a) 里的整体负号
+    对应「主动」变换约定（坐标 σ'^a = σ^a + δσ^a 下场的变化）。抽取记录 E73 只给出最终式
+    (5.2.4)，没有给出中间步骤，故本图**无法核实原书用的是哪一种符号约定**；
+    本推导的分解在两种约定下同构（只差 δσ → −δσ），不影响下游的 ker P₁ 计数。
+  - |
+    上面的代数是有限步初等计算，前提（二维、Levi-Civita 联络、对称无迹分解）已写全，
+    但**没有 reviewer 独立复核记录**，故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款
+    不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.2.4)/(5.2.5) 只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）；
+    本项目至今没有 Polchinski Vol.1 正文。
+notes: |
+  升级路径：这是本批中最容易升到 rigorous 的一条——只需 reviewer 复核上面三行代数
+  并在此写 `reviewer-verified: <agent>, <date>`（前提是接受李导数符号约定的选择）。
+author: curator-polchinski-ch5
+created: "2026-09-11"
