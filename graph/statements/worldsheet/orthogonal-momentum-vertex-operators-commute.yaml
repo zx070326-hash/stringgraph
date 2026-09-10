@@ -1,0 +1,134 @@
+id: worldsheet.orthogonal-momentum-vertex-operators-commute
+kind: proposition
+title: 动量正交的两个指数顶点算子（振子部分）的洛朗模逐对严格对易：b·b′ = 0 ⟹ V^{(b)}_J V^{(b′)}_K = V^{(b′)}_K V^{(b)}_J（无 z ≠ w 规定、无单值因子）
+statement: |
+  【设定：代数 Fock 空间上的模，无 OPE、无围道、无收敛性、无零模】
+  按 worldsheet.bosonic-fock-space 取 D 个自由玻色振子的**代数** Fock 空间
+  F = F(D, R)（多项式代数，无零模、无完化），系数环 R 是交换 ℚ-代数。
+  取对角时空度规分量 η_μ，记收缩 x·y := Σ_μ η_μ x^μ y^μ（conv.metric-mostly-plus 的收缩约定）。
+  ⚠ **本卡不需要归一化 η_μ² = 1**，见下面【与 mode-weight 卡的假设差别】。
+
+  取两个**常**向量 b, b′ ∈ R^D，按 conv.alpha-prime-regge 它们是
+    b^μ = (2α')^{1/2} k^μ,   b′^μ = (2α')^{1/2} k′^μ
+  （k、k′ 是两个顶点算子各自携带的动量）。记 V^{(b)}_J（J ∈ Z）为正规序指数
+  :e^{i k·X(z)}: 的**振子部分**的 z^J 洛朗系数（z^J-系数约定；Lean 侧
+  `Fock.vertexOsc η b J`），同理 V^{(b′)}_K。
+
+  【断言】若
+
+      b·b′ = 0        （等价 k·k′ = 0）
+
+  则对一切 J, K ∈ Z，作为 F 上的线性算子恒等式
+
+      V^{(b)}_J ∘ V^{(b′)}_K  =  V^{(b′)}_K ∘ V^{(b)}_J ，
+      等价地   [ V^{(b)}_J , V^{(b′)}_K ] = 0 。
+
+  【这里没有 z ≠ w，也没有单值因子——这是本卡的实质内容】
+  一般动量下把湮灭半 E₊(b, z) 移到产生半 E₋(b′, w) 右边会留下缩并标量
+
+      E₊(b,z) E₋(b′,w) = exp( (b·b′) Σ_{l ≥ 1} (w/z)^l / l ) · E₋(b′,w) E₊(b,z)
+                       = (1 − w/z)^{−(b·b′)} · E₋(b′,w) E₊(b,z)，
+
+  它在形式级数意义下是 (w/z) 的非平凡级数（这正是 OPE 写法里 |z| > |w| 的径向排序与
+  (z−w)^{k·k′} 型奇点/单值因子的来源）。b·b′ = 0 时该标量**恒等于 1**，
+  于是两个顶点算子的**每一对洛朗模**逐对严格对易，**不需要任何 |z| > |w| 的排序规定、
+  不需要解析延拓、也不产生正规序修正项**。
+
+  【本节点明确不断言】
+  (a) **完整顶点算子（含零模）的对易**。本卡只谈振子部分；零模（动量算符 x^μ、p^μ、
+      余循环/Klein 因子）不在 worldsheet.bosonic-fock-space 的空间里。带零模的塔上版本
+      见 worldsheet.isotropic-tower-vertex-operators-commute。
+  (b) **b·b′ ≠ 0 时的任何结论**。上面那个缩并标量给出的"应当成立"的带单值因子的关系
+      **本图与 Lean 都没有**；本卡只断言 b·b′ = 0 的那一侧。
+  (c) **同点乘积与加权和**，即 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L
+      与 Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}。这两条才是
+      worldsheet.ddf-transverse-oscillator-algebra 的正体，**都未完成**（见 notes）。
+  (d) **任何 OPE 形式的陈述**。本卡是模的代数恒等式；上面写出的 E₊E₋ 缩并公式只是
+      **动机说明**，不是本卡断言的对象（本卡断言的只有"标量为 1 那一侧的结论"）。
+  (e) **收敛性、完化、解析结构、幺正性、号差**。F 是多项式代数，V^{(b)}_J 逐向量是有限和；
+      η_μ 只是 R 中的一族元素，没有实结构也没有正定性。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.vertexOsc_comm_of_dotVec_zero
+  lean_file: StringFormal/NoGhost/VertexCommute.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexCommute.lean :: StringFormal.NoGhost.Fock.vertexOsc_comm_of_dotVec_zero（本卡 formal.lean_decl）与括号形式 StringFormal.NoGhost.Fock.lie_vertexOsc_vertexOsc_of_dotVec_zero；关键零件 StringFormal.NoGhost.Fock.{vertexSub_creaExp_of_dotVec_zero, vertexAnn_creaExp_mul_of_dotVec_zero, vertexAnn_creaExp_of_dotVec_zero, vertexOsc_apply_creaExp_of_dotVec_zero, vertexOsc_creaExp_mul_of_dotVec_zero, eq_zero_of_vertex_recursion₂}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。该文件由 formalizer 于 2026-09-11 完成
+      （17 条声明，formalizer 自述用 `--import StringFormal.NoGhost.VertexCommute --all`
+      复核公理只有标准三条），由 lead 以 **7181f9e**（"merge: vertex operators with orthogonal
+      momenta commute; tower vertex operators commute for isotropic k0 (VertexCommute.lean)"）
+      合入 main。
+      `vertexOsc_comm_of_dotVec_zero` 的语句逐字（去掉隐式参数）：
+        `(η b b' : Fin D → R) (hdot : dotVec η b b' = 0) (J K : ℤ) (P : Fock D R) :
+         vertexOsc η b J (vertexOsc η b' K P) = vertexOsc η b' K (vertexOsc η b J P)`，
+      **假设只有 `hdot`**——没有 `hη`、没有对 `J, K` 的限制、没有 `b ≠ b'`。
+      与本卡断言逐字一致。
+      ⚠ 文件头「Mathematical remarks」第 3 条逐字：「`hη : η^{μμ} η_{μμ} = 1` is not needed
+      here. Unlike the mode algebra of `StringFormal/NoGhost/VertexOperator.lean`, nothing in
+      this file contracts a spacetime index against the metric twice, so no hypothesis on `η`
+      appears.」
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **不承载本卡的论证**（论证是 Lean 的），只作对照：DDF 链里"两个 e^{i n k_0·X} 之间没有
+      缩并奇点（因为 k_0² = 0）"是被默认使用的一句话，用来把 [A^i_m, A^j_n] 的全部贡献
+      归给横向振子。核实等级沿用 worldsheet.ddf-operators-v6：章节页码 L4/L2，
+      **式号与正文 L0**。GSW 用 mostly-minus（已按 conv.metric-mostly-plus 转写）、取 α' = 1/2。
+      **GSW 不写洛朗模形式的对易陈述**，也不把正交性与类光性分开讨论。
+tags: [cft, vertex-operator, bosonic-string, spectrum-generating-algebra, ddf, formalized]
+notes: |
+  【立卡理由】这是 [A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0} 那条链的**第一步**，formal/TODO.md
+  的 `ddf-operators` 条目子项 (5) 逐字如此命名（「横向代数第一步：正交动量的顶点算子彼此对易」）。
+  拆成独立卡的理由同 worldsheet.exponential-vertex-operator-mode-weight-identity：
+  Lean 证的是代数模恒等式，而 worldsheet.ddf-transverse-oscillator-algebra 断言的是完整的
+  振子代数；把这一步单独立卡，formalized 才落在它真正覆盖的范围上。
+
+  【与 worldsheet.exponential-vertex-operator-mode-weight-identity 的假设差别（两处）】
+  · 那张卡需要 `hη : η_μ² = 1`（它的 L_m 里有 Σ_μ η^{μμ}η_{μμ} 型的双重收缩）；
+    **本卡不需要**，见 sources 里引的文件头第 3 条。
+  · 那张卡需要 m ≠ 0；本卡对 J、K 无任何限制。
+  ⇒ 本卡的假设严格弱于那张卡，两者互不蕴含（结论也不同：一条是 [L_m, V]，一条是 [V, V]）。
+
+  【正交性到底在哪一步被用到——一句话版】
+  **只在湮灭半穿过产生半那一处**，而且全文件只用一次。
+  · **产生半与正交性无关**：E₋(b) 与 E₋(b′) 都只是"乘以交换环 F 的一个元素"，
+    它们自动对易；更强的 **E₋(b)E₋(b′) = E₋(b+b′)**（系数形式
+    Φ^{b+b′}_j = Σ_{p+q=j} Φ^b_p Φ^{b′}_q）对**任意**动量成立，
+    Lean 侧是 `Fock.creaExpPair_eq_creaExp_add`（无任何关于 b、b′ 的假设）。
+    ⚠ 该加法公式是**另一条命题**，本图**暂未立卡**；它是同点乘积 (c) 的真空值。
+  · **湮灭半**在本仓库的实现里是常系数导子的指数，即**变量平移** X_{μ,l} ↦ X_{μ,l} − b^μ T^l
+    （代数同态 `Fock.vertexSub`）。`Fock.vertexSub_creaExp_of_dotVec_zero` 说：
+    b·b′ = 0 时这个平移把另一动量的相干态系数 Φ^{b′}_j **原样固定**
+    （`vertexSub b (Φ^{b′}_j) = Polynomial.C (Φ^{b′}_j)`）。这就是缩并标量 = 1 的系数形式。
+    formalizer 自述该文件**唯一**用到 b·b′ = 0 的地方是私有引理
+    `vertexSub_sum_creation_mul`（穿过欧拉递推时多出来的项正比于 −(b′·b)）。
+  ⇒ 物理读法：**正交动量的两个指数算子之间没有缩并**，所以既无奇点也无单值因子；
+  这与"E₋ 之间永远没有缩并"是两件不同的事，不要混为一谈。
+
+  【证明不需要任何指数恒等式或收敛性——值得记录的一点】
+  Lean 侧既没有"exp 的乘法性质"，也没有 Schur 多项式组合学，也没有 (1−w/z)^{−b·b′} 的
+  形式展开。`vertexSub_creaExp_of_dotVec_zero` 是对 j 的归纳：把欧拉型递推
+  M·Φ_M = Σ_{l=1}^{M} (b′·α_{−l}) Φ_{M−l}（`Fock.creaExp_euler`，已是 formalized 的零件）
+  整体穿过代数同态 `vertexSub b`，再在 ℚ-代数里除以 M。
+  ⇒ 本卡陈述里写出的 E₊E₋ 缩并公式**只是动机**（见【不断言】(d)），不是被形式化的对象。
+
+  【这条链还缺什么（供下一位；转录自 formal/TODO.md `ddf-operators` (5)）】
+  (5a) 同点乘积 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L（b·b′ = 0）：三块里 ① 相干态
+       加法公式已证，② K-和的局部有限性与 ③ lsumLocFin 组装 + `vertexOsc_unique` 归约**未做**
+       （估 150–250 行）。⚠ ② 的要点：**朴素的 level 计数不够**，因为 V^{(b′)}_K P 的 level
+       随 K 增长；要先用 `Fock.vertexOsc_creaExp_mul_of_dotVec_zero` 把 Φ^{b′} 提到左边。
+  (5b) 加权和 Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}：**未做**（估 200–300 行）。
+       物理上 δ_{m+n,0} 来自"全导数的留数为零"，m 来自归一化 2α' k_0·p = 1
+       （这是 b·a = 1 第一次真正起作用的地方）。
+  ⇒ 本卡 + worldsheet.isotropic-tower-vertex-operators-commute 覆盖的是第一步；
+  worldsheet.ddf-transverse-oscillator-algebra 仍只能靠文献推导。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search "vertex operator" / 对易 / orthogonal`。
+  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra（[A,A]，文献推导）、
+  worldsheet.exponential-vertex-operator-mode-weight-identity（[L_m, V]）、
+  worldsheet.vertex-operator-adjoint（V 的伴随）。**没有** [V, V] 的节点，本卡不重复。
+author: curator
+created: "2026-09-11"

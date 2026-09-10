@@ -1,0 +1,122 @@
+id: worldsheet.orthogonal-momentum-vertex-operators-commute--via-lean
+target: worldsheet.orthogonal-momentum-vertex-operators-commute
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      被作用的空间与其结构：`Fock D R = MvPolynomial (Osc D) R`（代数、无零模、无完化）。
+      本推导**实质地**用到它是**交换环**这一点（产生半就是乘以 F 的一个元素，故两个产生半
+      自动对易）与它的 level 分级（`levelSubmodule`，用于 `vertexOsc` 的局部有限性）。
+      产生变量 X_v 上的递推（`Fock.vertexOsc_X_mul`）也是这张卡的多项式结构。
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity
+    inferred: true
+    note: |
+      **inferred: true。** 本推导用到的 `Fock.creaExp_euler`（欧拉型递推
+      M·Φ_M = Σ_{l=1}^{M}(b·α_{−l})Φ_{M−l}）与刚性引理 `Fock.eq_zero_of_vertex_recursion`
+      （本推导用的是它的双指标版 `eq_zero_of_vertex_recursion₂`）都是那张卡的推导
+      （worldsheet.exponential-vertex-operator-mode-weight-identity--via-lean）在
+      formal/StringFormal/NoGhost/VertexWeight.lean 里建立并登记的**同一批零件**，
+      VertexCommute.lean 直接 `import StringFormal.NoGhost.VertexWeight`。
+      **但那张卡的 statement 断言的是 [L_m, V] 的系数，本推导一个字都没用到**——
+      用到的只是它所在文件里的零件。故这条边是**文件级/零件级依赖，不是命题级依赖**，
+      按 CLAUDE.md 原则 5 标 inferred。
+      ⚠ 正确的修法（提请 lead）：把 `Fock.creaExp`（相干态系数）与 `Fock.vertexOsc`
+      拆成一张 formalized **定义卡**（如 worldsheet.exponential-vertex-operator-modes），
+      再把 `creaExp_euler` 与 `eq_zero_of_vertex_recursion` 作为该定义卡下的命题卡；
+      在那之前本图没有可以非 inferred 地指向的节点。
+      ⚠ 那张卡是 formalized，故这条边**不**压低本推导的有效状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexCommute.lean :: StringFormal.NoGhost.Fock.vertexOsc_comm_of_dotVec_zero（目标断言）与 StringFormal.NoGhost.Fock.lie_vertexOsc_vertexOsc_of_dotVec_zero（括号形式）；链条 StringFormal.NoGhost.Fock.{vertexSub_creaExp_of_dotVec_zero, vertexAnn_creaExp_mul_of_dotVec_zero, vertexAnn_creaExp_of_dotVec_zero, vertexOsc_apply_creaExp_of_dotVec_zero, vertexOsc_creaExp_mul_of_dotVec_zero, eq_zero_of_vertex_recursion₂}；上游零件 StringFormal.NoGhost.Fock.{creaExp, creaExp_euler, vertexSub, vertexAnn, vertexOsc, vertexOsc_X_mul, vertexOsc_apply_one, eq_zero_of_vertex_recursion, dotVec_comm}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；17 条声明，formalizer 自述 2026-09-11 用
+      `--import StringFormal.NoGhost.VertexCommute --all` 复核公理只有
+      propext / Classical.choice / Quot.sound。
+      lead 以 **7181f9e** 合入 main。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+summary: |
+  机器检查的证明，三层结构，全部在 formal/StringFormal/NoGhost/VertexCommute.lean。
+
+  **第一层：无缩并引理（`vertexSub_creaExp_of_dotVec_zero`）——正交性唯一被用到的地方。**
+  本仓库把湮灭半实现成**变量平移**：`vertexSub b` 是代数同态
+  F → F[T]，X_{μ,l} ↦ X_{μ,l} − b^μ T^l（这正是 E₊(b, z) = exp(−Σ_{l≥1}(b·α_l)/l · z^{−l})
+  在 b·α_l/l 为常系数导子时的作用）。断言：b·b′ = 0 ⟹
+    `vertexSub b (Φ^{b′}_j) = Polynomial.C (Φ^{b′}_j)`，
+  即平移**原样固定**另一动量的相干态系数 Φ^{b′}_j = `creaExp η b' j`。
+  证明是对 j 的归纳：把欧拉型递推 `Fock.creaExp_euler`
+    M · Φ^{b′}_M = Σ_{l=1}^{M} (b′·α_{−l}) Φ^{b′}_{M−l}
+  整体穿过代数同态 `vertexSub b`；多出来的项正比于 −(b′·b) T^l Φ^{b′}_{j−l}
+  （私有引理 `vertexSub_sum_creation_mul`，**全文件唯一**使用 b·b′ = 0 之处），
+  正交时为零；再在 ℚ-代数里除以 M（`natCast_smul_left_cancel`）。
+  **不用任何指数恒等式、不用 Schur 多项式、不用 (1−w/z)^{−b·b′} 的形式展开、不用收敛性。**
+
+  **第二层：算子形式与真空值。**
+  · `vertexAnn_creaExp_mul_of_dotVec_zero`：E₊(b)_L 与"乘以 Φ^{b′}_j"可交换；
+    `vertexAnn_creaExp_of_dotVec_zero`：E₊(b)_L Φ^{b′}_j = δ_{L,0} Φ^{b′}_j。
+  · `vertexOsc_apply_creaExp_of_dotVec_zero`：**真空值** V^{(b)}_J Φ^{b′}_K = Φ^b_J · Φ^{b′}_K。
+    右端在 (b,J) ↔ (b′,K) 下显然对称（F 交换），这就是对易的底。
+  · 推广 `vertexOsc_creaExp_mul_of_dotVec_zero`：V^{(b)}_J (Φ^{b′}_c · P) = Φ^{b′}_c · V^{(b)}_J P。
+
+  **第三层：刚性（`eq_zero_of_vertex_recursion₂`）+ 归约到真空。**
+  两个顶点算子的乘积 W_{J,K} := V^{(b)}_J V^{(b′)}_K 满足**双指标**产生模态递推
+    W_{J,K}(X_v · P) = X_v · W_{J,K}P − b^{v.1} W_{J+n,K}P − b′^{v.1} W_{J,K+n}P   (n = v.2)，
+  即"每个动量只移自己的洛朗指标"；这是 `Fock.vertexOsc_X_mul` 对两个因子各用一次的结果。
+  对易子 V^{(b)}_J V^{(b′)}_K − V^{(b′)}_K V^{(b)}_J 满足**同一条**递推（逐项相减，`abel`），
+  而它在真空 1 上的值是 Φ^b_J Φ^{b′}_K − Φ^{b′}_K Φ^b_J = 0（第二层 + `mul_comm`）。
+  `eq_zero_of_vertex_recursion₂` 于是给出对易子作为 `Module.End` 恒为 0，
+  即目标的 `vertexOsc_comm_of_dotVec_zero`；`lie_vertexOsc_vertexOsc_of_dotVec_zero`
+  是它的李括号改写（经 `LieRing.of_associative_ring_bracket`）。
+
+  **假设核对**：全程只有 `hdot : dotVec η b b' = 0`。**没有** `hη : η_μ² = 1`，
+  没有 J、K 的符号/大小限制，没有 b ≠ b′，没有域/序/完化假设。
+gaps:
+  - |
+    (i) **只覆盖振子部分，不含零模**。目标【不断言】(a)：worldsheet.bosonic-fock-space
+    的空间里没有动量算符 x^μ、p^μ，也没有余循环/Klein 因子，所以"完整顶点算子对易"
+    不在本推导范围内。塔上的版本（零模以层移位 e^{i n k_0·x} 出现）是
+    worldsheet.isotropic-tower-vertex-operators-commute。
+    **一般动量的完整顶点算子**（任意两个不成比例的动量 + 余循环）本图与 Lean 都没有。
+  - |
+    (ii) **b·b′ ≠ 0 一侧完全没做**。目标陈述里写出的缩并公式
+    E₊(b,z)E₋(b′,w) = (1−w/z)^{−(b·b′)} E₋(b′,w)E₊(b,z) **不是**被形式化的对象，
+    只是动机说明（目标【不断言】(d)）。Lean 侧连 (1−w/z)^{−(b·b′)} 这个形式级数都没有定义。
+    ⇒ 「b·b′ ≠ 0 时不对易」这条**否定**结论在本图里没有任何背书；
+    塔上的对应否定结论见姊妹卡，那里同样只是注记。
+  - |
+    (iii) **同点乘积与加权和未做**，见目标【不断言】(c) 与 notes 的 (5a)(5b)。
+    因此本推导**不**支持 worldsheet.ddf-transverse-oscillator-algebra 的任何部分，
+    只是它的第一块输入。
+  - |
+    (iv) **依赖 worldsheet.exponential-vertex-operator-mode-weight-identity 的那条边是
+    inferred**：用到的是那张卡所在 Lean 文件里的零件（`creaExp_euler`、
+    `eq_zero_of_vertex_recursion`），不是那张卡的命题内容。
+    图上缺一张承载 `Fock.creaExp` / `Fock.vertexOsc` 的 formalized **定义卡**；
+    curator 已在本轮报告中提请 lead。
+    ⚠ **换代风险（2026-09-11，curator 在并行分支上看到）**：另一条在途工作
+    （bus claim #229）要把那张卡换代为
+    worldsheet.exponential-vertex-operator-mode-weight-identity-v2（把 m ≠ 0 升到 ∀m）。
+    若先合入，本推导这条边会变成 validate 的 "depends on superseded statement" **warning**。
+    处理方式：**把这条边改指 -v2 即可**（本推导用的零件与量词范围无关），
+    或者——更好——等定义卡补上后改指定义卡，把这条 inferred 边删掉。
+  - |
+    (v) **一般交换 ℚ-代数，无实结构、无幺正性、无解析结构**。η_μ 是 R 中任意一族元素
+    （本推导连 η_μ² = 1 都不要）；没有洛伦兹号差、没有内积正定性、没有收敛性。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【依赖为什么这么少（与 worldsheet.exponential-vertex-operator-mode-weight-identity--via-lean
+  的情形相同）】本推导的输入只有"作用在什么空间上"。它**不用** Virasoro 生成元、不用 L_m、
+  不用动量塔、不用 DDF 归一化、不用类光性。这也是为什么本卡与姊妹卡要分开：
+  单 Fock 的版本对**任意**正交动量成立，塔上的版本才需要 k_0² = 0。
+
+  【一条值得 reviewer 注意的反直觉事实】产生半的加法公式
+  Φ^{b+b′}_j = Σ_{p+q=j} Φ^b_p Φ^{b′}_q（`Fock.creaExpPair_eq_creaExp_add`，同文件）
+  **对任意动量成立，不需要正交性**——缩并只出在湮灭半。
+  所以"E₋E₋ 要不要正交性"这个问题的答案是**不要**，而"E₊ 穿 E₋ 要不要"的答案是**要**。
+  该加法公式是另一条命题，本图暂未立卡（它是同点乘积的真空值，见目标 notes 的 (5a) ①）。
+author: curator
+created: "2026-09-11"
