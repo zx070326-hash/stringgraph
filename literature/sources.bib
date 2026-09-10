@@ -257,7 +257,174 @@
   title  = {From Dual Models to String Theory},
   year   = {2008},
   eprint = {0802.3249},
-  note   = {arXiv physics.hist-ph；作者本人的历史综述，是 goddard-thorn-1972 与 brower-1972 适用范围的二手证据来源。}
+  archivePrefix = {arXiv},
+  primaryClass  = {physics.hist-ph},
+  note   = {arXiv physics.hist-ph；作者本人的历史综述，是 goddard-thorn-1972 与 brower-1972 适用范围的二手证据来源。
+            **第二轮补充（researcher 2026-09-11）：全文已核实（L1，34 页 PDF 落盘后 Read 带 pages 逐页读图；本轮读 pp.1-2, 9-20, 29-34）。**
+            获取途径 arxiv.org/pdf/0802.3249（v1，2008-02-22）。
+            **★ 重要修正：旧 note 与旧图节点都记本文「不给编号」，这对无鬼定理成立，对两条 DDF 对易关系不成立。**
+            两条关系在本文中都是**带编号的显示公式**（不是 Theorem/Proposition）：
+            **§5「Spectrum Generating Algebra」, p.11, eq. (5.4)** 逐字 `[L_m, A^i_n] = 0.`（**对 m 无限制**），
+            引出句逐字「The DDF operators, A^i_n, are well-defined on states of momentum p, such that k·p = 1 and they can be
+            used to generate physical states because they commute with the Virasoro algebra,」；
+            **§5, p.11, eq. (5.5)** 逐字 `[A^i_m, A^j_n] = m delta^{ij} delta_{m,-n},  1 <= i,j <= D-2.`
+            **A^i_n 的定义在 §5, p.11, eq. (5.1)-(5.3)**：(5.1) `A^i_n = eps^i_mu A^mu_n,  A^mu_n = (1/2pi i) oint P^mu(z) V(nk,z) dz`；
+            (5.2) `V(alpha,z) = :exp{i alpha . Q(z)}:`；(5.3) `Q^mu(z) = q^mu - i p^mu log z + i sum_{n!=0}(1/n)a^mu_n z^{-n}, P^mu = i dQ^mu/dz`。
+            (5.1) 后正文**逐字同时给出两条偏振条件**：「orthonormal polarization vectors for a photon of momentum k, i.e.
+            **eps^i . eps^j = delta^{ij}, k . eps^i = 0**」——这正是图节点 ddf-transverse-oscillator-algebra 的 notes 说
+            「v4 没写出的隐含前提」，现已有逐字来源。
+            **★ 号差优势：§1, p.1, (1.1) 后逐字「g^{mu nu} … taken to have signature (-,+,+,+)」= mostly-plus，
+            与 conv.metric-mostly-plus 一致，引用无需换算**（GSW 是 mostly-minus，需换算）。同处 (1.1) 给 `[a^mu_m,a^nu_n]=m g^{mu nu} delta_{m,-n}`、`a^{mu+}_n = a^mu_{-n}`。
+            **★ 归属信息（对图很重要）**：作者本人把 (5.5) 归给参考文献 **[43] R.C. Brower and P. Goddard, Physical States in the
+            Dual Resonance Model, Proc. Int. School of Physics "Enrico Fermi" Course LIV (Academic Press, 1973) 98-110** 与
+            **[44] R.C. Brower and P. Goddard, Collinear Algebra for the Dual Model, Nucl. Phys. B40 (1972) 437-444**，
+            **不归给 goddard-thorn-1972**；A^i_n 的定义归给 [42] = Del Giudice-Di Vecchia-Fubini, Ann. Phys. 70 (1972) 378-398。
+            GT 1972 = 其 [45]，对应的是**无鬼定理本身**（§6, p.15, eq. (6.4) `|psi> = |f> + |n>`，**无编号**，
+            逐字「we were able to prove the No-Ghost Theorem [45]: For D = 26, if |psi> is a physical state … it can be written in the form」，
+            并逐字「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.」）。
+            GT 证明真正用的代数是 **§6, p.15, eq. (6.3)**：`[L_m,K_n] = -n K_{m+n}`、`[K_m,K_n]=0`，**不是** A^i_n 的对易关系。
+            **反面信息（横向性之必要）：§5, p.12, eq. (5.6)** 逐字「the longitudinal components, A-tilde_n = k-tilde_mu A^mu_n,
+            **fail to commute with the Virasoro algebra**」，`[L_m, A-tilde_n] = -(1/2)m(m+1)n Phi^n_m`；(5.7) `[A-tilde_m,A-tilde_n]=(m-n)A-tilde_{m+n}+m^3 delta_{m,-n}`。
+            **注意这是「不与 Virasoro 对易」的失效，不是「模态和发散」的失效，两者不可混引。**
+            Brower 路线见 §6, p.16, (6.5)-(6.7)：(6.7) 逐字 `[L_m, A^L_n] = 0,  [A^L_m, A^i_n] = -n A^i_{m+n}`（后者与 gebert-nicolai-1995 (3.31)/(3.43) 同型，跨来源独立佐证）。
+            **使用限制：本文是历史综述，(5.4)/(5.5) 均为陈述、无证明、无「we prove」。** 引它只升「可追溯性」，**不足以把节点 status 提上 physical-argument 之上**。
+            另：参考文献 [32] 逐字佐证 thorn-1985 的元数据（MSRI 论文集 411-417）；[46] 佐证 brower-1972 卷页；[29] 佐证 brower-thorn-1971 卷页。
+            **元数据疑点**：其 [34] 逐字为「B.L. Feigen and D.B. Fuchs, Skew-symmetric differential operators on the line and Verma modules
+            over the Virasoro algebra, Funct. Anal. and Appl. **17** (1982) 114.」，与本 bib 的 feigin-fuchs-1982（vol. 16, 114-126, 1982）
+            及 virasoro-lean-2025 note 里的「17(3):241-242 (1984)」**三方不一致，未裁决**（作者姓亦拼作 "Feigen"）。
+            见 extractions/gsw-1987-v1.md §2。}
+}
+
+@article{gebert-nicolai-1995,
+  author  = {Gebert, Reinhold W. and Nicolai, Hermann},
+  title   = {On {$E_{10}$} and the {DDF} construction},
+  journal = {Communications in Mathematical Physics},
+  volume  = {172},
+  number  = {3},
+  pages   = {571--622},
+  year    = {1995},
+  eprint  = {hep-th/9406175},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1）**：读 pp. 571-572, 579-583, 593-600。
+             获取途径 **https://pure.mpg.de/rest/items/item_153125_1/component/file_153124/content**（MPG repository，
+             返回**出版方排版的期刊 PDF，页码即期刊页码**，落盘 2.5 MB 后 Read 带 pages 读图）。
+             **注意 arxiv.org/pdf/hep-th/9406175 本轮返回 HTTP 404。** 标题页记「Received 20 July 1994 / in revised form 28 October 1994」。
+             **本条对图的核心价值：它把两条 DDF 对易关系放进纯顶点代数（形式级数）框架，全程不用围道形变、不用收敛性。**
+             **可引用的编号结果（均 L1 逐字）**：
+             **§2.1, p. 582, eq. (2.55)-(2.57)**——(2.55) 定义权 Delta 的 primary state `(L_(n) - delta_{n0}Delta)psi = 0, all n >= 0`；
+             (2.56) `[L_(n), Y(psi,z)] = z^n {z d/dz + (n+1)Delta} Y(psi,z)`；
+             **★ (2.57) `[L_(n), psi_m] = {(Delta-1)(n+1) - m} psi_{m+n}   for all m,n in Z`**，引出句逐字「We immediately infer from (2.41) that, for psi in R_(Delta),」。
+             **取 Delta = 1、m = 0 即得「权 1 primary 的零模与所有 L_n 对易」**——这是图中 ope-commutator-dictionary 那一步的可形式化替代。
+             其推导链**全部带编号且全在公理体系内**：**(2.36) Jacobi identity（顶点代数公理）** => **(2.38) commutator formula
+             `[psi_m, phi_n] = sum_{i>=0} C(m,i)(psi_i phi)_{m+n-i}`**（正文逐字：(2.37)/(2.38) 是 (2.36) 的 m=0 与 l=0 特例）
+             => **(2.41) `[L_(n), Y(phi,z)] = sum_{i>=-1} C(n+1,i+1) Y(L_(i)phi, z) z^{n-i}`**（逐字「Taking Res_{z_0}[Res_{z_1}[z_1^n (Jacobi identity)]] in the special case psi = omega」）
+             => (2.56)/(2.57)。另 **(2.32) Regularity 公理 `psi_n phi = 0` for n sufficiently large**（p.579）。
+             **§3.1, p. 593, eq. (3.2)-(3.3)**：**transversal DDF operator 定义为零模** `A^xi_m := (xi(-1)e^{mk})_0 = Res_z[Y(xi(-1)e^{mk},z)] = Res_z[xi(z)Y(e^{mk},z)]`，
+             逐字「where normal ordering in the last line is unnecessary due to **xi.k = 0**」；前置 (3.1) 给物理态的李括号。
+             **§3.1, p. 594, eq. (3.4)** `[A^xi_m, A^eta_n] = m(xi.eta) delta_{m+n,0}(k(-1))_0 = m(xi.eta) delta_{m+n,0} k(0)`
+             ——**★ 右端显式保留 k(0) = k.alpha_0**，同页逐字说明只有在 `k.r = 1` 时才「realize precisely the algebra of d-2 transversal oscillators」。
+             **这直接回应了图中推导 ddf-transverse-oscillator-algebra--via-conformal-weight 的 gaps 第 1 条**（「右端为何不带 alpha'/k.p 因子」）。
+             **§3.1, p. 594, eq. (3.5)** `[L_(n), A^xi_m] = 0   for all n, m in Z`，引出句逐字「Moreover, **it is clear from (2.57)** that these
+             operators commute with the Virasoro algebra」——**量词是 for all n，含 n = 0**，与 goddard-2008 (5.4) 一致，
+             与 tomassini-2008 (2.38) 的 `m != 0` 版本**不同**（原因见 extractions/gsw-1987-v1.md §5：塔 vs 固定纤维）。
+             **§3.2-§3.3 的纵向侧**：(3.18) DDF vertex operators；(3.19) 权 1 primary 变换律；(3.20) 纵向 Virasoro `L-frak_m`；
+             (3.29) `[L-frak_m, L-frak_n] = (m-n)L-frak_{m+n} + 2(m^3-m)delta_{m+n,0}k(0)`，逐字「central charge c_L = 24 … **universal** in the sense that
+             its central charge **does not depend on the dimension of the lattice**」；(3.31) `[L-frak_m, A^xi_n] = -n A^xi_{n+m}`；
+             (3.42) `script-L_n := (1/2) sum_i sum_m :A^i_m A^i_{n-m}:`（c = d-2）；(3.43) `[script-L_m, A^i_n] = -n A^i_{n+m}`；
+             (3.44) `A^-_n := L-frak_n - script-L_n`；(3.45) `[A^i_m, A^-_n] = 0`；
+             (3.46) `[A^-_m, A^-_n] = (m-n)A^-_{m+n} + ((26-d)/12)(m^3-m)delta_{m+n,0}`；
+             **(3.48) `P_(1)(r) = S(t-hat^-) tensor V(26-d, 0)`**——无鬼定理的**张量积分解**形式（横向 Fock (x) Virasoro Verma），
+             与 lian-zuckerman-1991 Theorem 3.5(i) 同构。**常设假设 `r.k = 1` 写在 (3.29) 之前，引用必带。**
+             §3.2 末 p.599 逐字：「we can always find d-2 **orthonormal** vectors xi_i, 1 <= i <= d-2, **orthogonal to both r and k**」
+             ——**比图节点多一条 `eps.p = 0`（与态动量正交），图中 ddf-operators-v5 只要求 eps.k_0 = 0，是否为真缺口未裁决**。
+             **★ summability（对 ddf-transversality-gives-local-finiteness 直接相关）**：**摘要逐字**「we find it necessary … **to admit
+             non-summable operators (in the sense of the vertex algebra formalism)**」；**§3.1, p. 595** 逐字「…the above series is
+             **not (algebraically) summable on the whole space F**. In particular, it is **not summable on the vacuum state 1 = |0>**」。
+             **⚠ 但该不可加和性是 (3.12) 的纵向 log 级数、机制是动量条件 s.k = r.k，不是横向的 eps.k_0 != 0。
+             两者是不同的失效模式，不可互引为来源。** 横向侧在本文中由**正规性公理 (2.32) 直接保证**，无需单独证明。
+             **模式约定陷阱**：(2.31) `Y(psi,z) = sum_n psi_n z^{-n-1}` 与 (2.47) 的按权移位展开 `sum_n psi_(n) z^{-n-Delta}` 是两套，
+             由 (2.48) `psi_n = psi_(n+1-Delta_psi)` 换算；**(2.57) 里的 psi_m 是 (2.31) 型**，混用会差一个移位。
+             **未核实（L0）**：参考文献 [26]（无鬼定理）与 [27] 的具体身份（参考文献页未读），**不得代写**；第 4 章与附录 A 未读。
+             见 extractions/gsw-1987-v1.md §4。}
+}
+
+@misc{tomassini-2008,
+  author        = {Tomassini, Luca},
+  title         = {Local aspects of free open bosonic string field theory},
+  year          = {2008},
+  eprint        = {0812.0213},
+  archivePrefix = {arXiv},
+  primaryClass  = {math-ph},
+  note          = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1）**：arxiv.org/pdf/0812.0213 落盘 221.5 KB 后 Read 带 pages，读 pp. 1, 6-10。
+                   **v1，2008-12-01**（标题页另印「November 10, 2018」，是 arXiv 重编译时间戳，**不是版本日期，勿照抄**）。
+                   Dipartimento di Matematica, Universita di Roma "Tor Vergata"。**是否已发表：未核实（L0）**，loc 写死 v1。
+                   **★ 本条是目前找到的唯一一份把 DDF 对易关系写成带编号定理并给出完整证明的公开文献。**
+                   **可引用的编号结果（均 L1 逐字）**：
+                   **Definition 2.3, p. 9, eq. (2.37)**：`A^i_n(p) = V^i_n(n k(p))` if `k(p) != 0`，`= 0` if `k(p) = 0`，
+                   逐字「are called **transverse DDF operators**」；定义在 `K = L^2(R^d, F, dp)` 的每个纤维 `K_p ~ F` 上。
+                   **★ Theorem 2.4, p. 9（带证明，止于 p.10 的 QED 方框）**，其 **eq. (2.38) 一次给出六条关系**：
+                   `[A^i_n, A^j_m] = delta_{ij} m delta_{m+n} . I`；
+                   **`[L_m, A^i_n] = 0,  m != 0`**；
+                   **`[L_0, A^i_n] = -n A^i_n`**；
+                   **`(A^i_n)^dagger = A^i_{-n}`**；
+                   `A^i_n Omega = 0  (n > 0)`；`A^i_0 = p^i`。
+                   定理陈述前半逐字：「The transverse DDF operators A^i_n (i = 1..., d-2) are are well defined on the invariant domain
+                   D_0^{p+} (x) F_0 and are closed operators on the domain D(A^i_n) = {psi in K : psi(p) in D(A^i_n(p)) a.e. p,
+                   int_{R^d} ||A^i_n(p)psi(p)||^2 dp < infinity}」（「are are」是原文重复排印）。
+                   证明自陈依赖 **(2.34)**（p.8，**在假设 k^2 = 0 下**的一般关系）+ L_m 保持定义域。
+                   **★ 良定义性/有限和：证明第一步逐字**「application of any of the A^i_n's to vectors f (x) chi in D_0^{p+} (x) F_0 results in a
+                   **finite** sum of terms of the form」——**这是「A^i_n 在代数 Fock 空间上是有限和」的带编号来源**，
+                   其有限性来自 **(2.31) `U_n(k)psi = 0` for n sufficiently large**（正规性），**不是**从 eps.k_0 = 0 推出的能级上界。
+                   **★★ 三条硬使用限制（引用前必读）**：
+                   (1) **他的 DDF 算子是「修改版」，作者自陈与经典定义 fundamentally different。** Remark 2, p.10 逐字：
+                   「**This is fundamentally different from the classical definition** …, since our "modified" DDF operators
+                   **leave the single fiber K_p of K invariant and do not commute with L_0**. This fact also implies that DDF states …
+                   **do not necessarily satisfy the Klein-Gordon constraint L_0 psi = 0**」。
+                   **这就是 (2.38) 里 `[L_m, A^i_n] = 0` 只对 m != 0 成立的原因** —— 与 goddard-2008 (5.4)、gebert-nicolai-1995 (3.5)
+                   的 for-all-m 版本**不矛盾但不同源**（那两家是动量塔，本文是固定纤维）。
+                   **把本条挂到 worldsheet.ddf-commute-with-virasoro 会与该节点的「对所有 m」量词冲突，除非 note 写明这一点。**
+                   (2) **横向条件写法不同**：他写 `k^i = 0 for i = 1,...,d-2` 且 `k.p = -1`（(2.34) 后正文逐字），
+                   不是图里的 `eps.k_0 = 0` 与 `2 alpha' k_0.p = 1`。正交归一横向标架下等价，**但该等价是本项目的推断**。
+                   (3) **号差未声明（L0）**：p.1 只说「the usual "string theoretic" signature of the Minkowski metric」。
+                   由 (2.34) 的 `-eta^{mu nu}` 化到 (2.38) 的 `+delta_{ij}` **推断**为 mostly-minus，
+                   这也解释了 `k.p = -1` 与 Goddard `k.p = +1` 的符号差。**此为推断，不是原文陈述。**
+                   另可引：**(2.42), p.10**：`L_m A^{i_1}_{-n_1}...A^{i_k}_{-n_k}(f (x) Omega) = 0, m > 0` 与
+                   `L_0 ... = (1/2)(p^2 - 2b + 2 sum_l n_l)(f (x) Omega)`；**(2.43)** 质量壳记账。
+                   **p. 7 另有一条可用的二手佐证（L3）**：逐字「The fact that the indefinite inner product restricts to a positive definite one on
+                   H^{phys} when **d = 26 and b = 1** is the content of the famous no-ghost theorem of **Brower [18], Goddard and Thorn [19]**,
+                   as reformulated in [2].」——同时给出 D = 26 与截距 b = 1 两个条件。
+                   **未核实（L0）**：其 [2]/[7]/[17]/[20]/[24] 的身份；§3 及以后各节。
+                   见 extractions/gsw-1987-v1.md §3。}
+}
+
+@incollection{brower-goddard-1973,
+  author    = {Brower, Richard C. and Goddard, Peter},
+  title     = {Physical States in the Dual Resonance Model},
+  booktitle = {Proceedings of the International School of Physics ``Enrico Fermi'' Course LIV},
+  publisher = {Academic Press},
+  address   = {New York and London},
+  pages     = {98--110},
+  year      = {1973},
+  note      = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取，本轮未尝试。**
+               元数据 **L1 逐字抄自 goddard-2008 参考文献 [43]**（arXiv:0802.3249v1, p.31），**未与出版方交叉核对**。
+               登记理由：goddard-2008 §5, p.11 把 **`[A^i_m, A^j_n] = m delta^{ij} delta_{m,-n}` 这条对易关系归给本文与 brower-goddard-1972（其 [43,44]）**，
+               **不归给 goddard-thorn-1972**。图中三个 DDF 节点目前把该关系挂在 GT 1972 上（loc「eq. (3)-(6)」，式号未核实），
+               按本条证据那条边的正当性被削弱（见 extractions/gsw-1987-v1.md Q7 与 §9 第 (6) 条）。
+               **⚠ 本条只能作为「来源如此归属」的指针出现在 note/gaps 里，不得承载论证，不得代写其内容。**}
+}
+
+@article{brower-goddard-1972,
+  author  = {Brower, Richard C. and Goddard, Peter},
+  title   = {Collinear Algebra for the Dual Model},
+  journal = {Nuclear Physics B},
+  volume  = {40},
+  pages   = {437--444},
+  year    = {1972},
+  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取，本轮未尝试。**
+             元数据 **L1 逐字抄自 goddard-2008 参考文献 [44]**（arXiv:0802.3249v1, p.31），**未与出版方交叉核对**（期号/DOI 未取）。
+             登记理由同 brower-goddard-1973：与它一起被 goddard-2008 指认为横向 DDF 对易关系 (5.5) 的出处，
+             并同时被指认为纵向关系 (5.7) `[A-tilde_m, A-tilde_n] = (m-n)A-tilde_{m+n} + m^3 delta_{m,-n}` 的出处。
+             **⚠ 只作指针，不承载论证。** 注意与 brower-1972（Phys. Rev. D6, 1655，单作者）**是不同论文，勿混。**}
 }
 
 @article{green-schwarz-1984,
