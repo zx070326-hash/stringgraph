@@ -570,6 +570,23 @@ variable [Algebra ℚ R]
 Work in progress: statements are added one at a time, each with a complete proof.
 -/
 
+/-- Moving a creation operator past `L_m`: the pointwise form of `⁅L_m, α^μ_p⁆ = -p α^μ_{m+p}`
+at `p = -l`, namely `L_m (α^μ_{-l} Q) = α^μ_{-l} (L_m Q) + l α^μ_{m-l} Q`.  Here
+`α^μ_{-l} Q = X (μ, l) * Q` is multiplication by the corresponding Fock variable. -/
+lemma Lop_apply_X_mul (η a : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (m : ℤ) (v : Osc D)
+    (Q : Fock D R) :
+    Lop η a m (X v * Q)
+      = X v * Lop η a m Q + (((v.2 : ℕ) : R)) • mode η a v.1 (m - ((v.2 : ℕ) : ℤ)) Q := by
+  obtain ⟨μ, n⟩ := v
+  have hml : m + -(((n : ℕ)) : ℤ) = m - (((n : ℕ)) : ℤ) := by ring
+  have h := congrArg (fun T : Module.End R (Fock D R) => T Q)
+    (lie_Lop_mode η a hη m μ (-(((n : ℕ)) : ℤ)))
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply,
+    Module.End.mul_apply, LinearMap.smul_apply, mode_neg_pnat, creation_apply, Int.cast_neg,
+    neg_neg, Int.cast_natCast, hml] at h
+  rw [← h]
+  abel
+
 end LopVertexOsc
 
 end Fock
