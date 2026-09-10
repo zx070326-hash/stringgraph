@@ -13,7 +13,25 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 ### 在 worktree 里构建
 
-worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
+worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 45 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
+
+**`package-overrides.json` 的格式是 lake manifest 的片段，不是 `{"名字": "路径"}` 映射**（写错格式 lake 会静默忽略/报 `property not found: schemaVersion`，然后**从 github 重新 clone 2.2 GB 的 mathlib 并从源码开始编译**，一名 formalizer 因此空转 40 分钟）：
+
+```json
+{"schemaVersion": "1.2.0",
+ "packages": [
+   {"type": "path", "name": "mathlib", "scope": "",
+    "dir": "D:/physics/string/formal/.lake/packages/mathlib",
+    "inherited": false, "configFile": "lakefile.lean",
+    "manifestFile": "lake-manifest.json"},
+   ...其余 8 个：plausible / LeanSearchClient / importGraph / proofwidgets /
+      aesop / Qq / batteries（scope "leanprover-community"）与 Cli（scope "leanprover"），
+      inherited 均为 true，configFile 照抄 lake-manifest.json（proofwidgets 是 lakefile.lean，
+      其余是 lakefile.toml）
+ ]}
+```
+
+`name` / `scope` / `configFile` 必须与 `formal/lake-manifest.json` 里对应条目一致。写好后若 worktree 里已经有被误 clone 的 `formal/.lake/packages/`，要先 `rm -rf` 掉，lake 才会走 override。验证成功的标志：`lake build` 打印的 `LEAN_PATH` 里 mathlib 指向 `D:\physics\string\formal\.lake\packages\...`，且构建在 10 秒内完成。
 
 ### 读大文件的纪律
 
@@ -67,6 +85,11 @@ StringFormal/
   NoGhost/TowerPairing.lean   动量塔上的双线性型 towerPairing = Σ_j ⟨·_j,·_j⟩（BilinForm）：层间正交、
                             对称、towerShift/towerMode/towerLop 的伴随（见文件头 gaps）
   NoGhost/VertexWeight.lean   顶点算子共形权：creaExp 欧拉递推、真空上 L_m Φ_J（m ≥ 0）、**m ≥ 1 的 [L_m, V_J] 恒等式**（lie_Lop_vertexOsc_of_pos）与塔上版本（k_0²=0 时 [L_m, V^{(n)}_K] = (K−m)V^{(n)}_{K−m}）；m < 0 未做
+  NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
+                            level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
+                            **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、
+                            lsumLocFin 组装的 ddfOp、**⁅L_m, A^ε_n⁆ = 0（m ≥ 1）**；
+                            m ≤ 0、[A,A] 振子代数、保物理子空间均未做（见文件头 gaps）
   NoGhost/QuotientForm.lean   H_phys/H_null 上诱导形式：pairing_add_null、nullInPhys、PhysQuot、
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule

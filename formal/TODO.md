@@ -378,13 +378,42 @@
       无 sorry，公理只有标准三条。
     - [ ] (3f) `m < 0` 的 `[L_m, V_J]`：**未做**。(3d) 的整条路线用了 `m ≥ 1`
       两次（真空上 `L_m|k⟩ = 0`，以及 (3b) 的分段求和），`m < 0` 需要 (3c') 先做。
+  - [x] (4) **DDF 算子本身与 `⁅L_m, A^ε_n⁆ = 0`（`m ≥ 1`）**：
+    `StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条。
+    - 偏振经由**收缩**进入：`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p`（`α^ε_p`），
+      横向性是 `dotVec η ε b = 0`（`ε·k_0 = 0`）。
+      `lie_towerModeVec_towerVertex`：`⁅α^ε_p, V^{(n)}_K⁆ = n (ε·k_0) V^{(n)}_{K-p}`，
+      横向时给 `towerModeVec_mul_towerVertex_of_transverse`（严格对易，含 `p = 0`）。
+    - **局部有限性**（图节点 `worldsheet.ddf-transversality-gives-local-finiteness`）：
+      `ddfSummand_apply_eq_zero_of_notMem_window`。窗口 `ddfWindow n x =
+      Icc (n - towerLevelBound x) (towerModeBound x)`，两端机制**不同**：
+      下端只靠 `towerVertex_apply_eq_zero_of_lt`（顶点算子不能把 level 降到真空以下，
+      与横向性无关），上端**必须**用横向性把 `α^ε_j` 移到右边变成高指标湮灭算子。
+      为此新增 `Fock.levelBound`（`P.support.sup (level D)`）与
+      `Fock.vertexOsc_apply_eq_zero_of_levelBound_lt`，以及塔上的
+      `towerLevelBound` / `towerModeBound`。
+    - `ddfOp η a b ε hη hεb n`（`A^ε_n = Σ_{j∈ℤ} α^ε_j V^{(n)}_j`，用 `lsumLocFin` 组装；
+      `hη`、`hεb` 是**定义的参数**，因为求和的存在性本身依赖横向性），
+      `ddfOp_apply`（任意够大的有限窗口都算得对）。
+    - **`lie_towerLop_ddfOp_of_pos`**：`k_0² = 0`、`2α' k_0·p = 1`、`ε·k_0 = 0`、`m ≥ 1`
+      ⟹ `⁅L_m, A^ε_n⁆ = 0`。证明是逐项 Leibniz + 重标 `j ↦ j+m` 的伸缩和；
+      边界项靠窗口两端各自的消失机制。
+      辅助：`lie_towerLop_ddfSummand`（单项括号的伸缩形式）、
+      `lie_mul_end` / `lie_smul_end` / `smul_lie_end` / `lie_sum_end` / `sum_lie_end`
+      （Mathlib 的 `lie_sum` / `sum_lie` / `lie_smul` 对 `Module.End` 的括号**匹配不上**：
+      `LieRingModule.toBracket` 与 `LieRing.toBracket` 不是同一个实例路径，
+      只能从 `LieRing.of_associative_ring_bracket` 重证）。
+    - **仍缺**：`m ≤ -1`（需 (3f)）与 `m = 0`（`Fock.lie_Lop_vertexOsc_of_pos` 假设 `0 < m`，
+      `m = 0` 不是它的特例，参见 (3c) 的同类现象）。因此
+      `worldsheet.ddf-commute-with-virasoro` 只形式化了一半，
+      「`A^ε_n` 保持 `physSubmodule`」还不能证（`L_0` 条件缺；且 `physSubmodule`
+      目前只在单个 Fock 空间上，塔上的物理子模尚未定义）。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
-  - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
-    （`lie_towerMode_towerVertex_of_eq_zero` 允许把 `α^i_m` 移到右边，那里 `m` 大时湮灭态）
-    加上 `vertexOsc_apply_eq_zero_of_level`；**这一步是本项发现的一个实质数学点**：
-    没有 `ε·k_0 = 0`，围道积分的模态和在代数 Fock 空间上**不是**有限和。
+  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
+    所以「`A^ε_n` 把物理态送到物理态」还证不了。
   - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
+  - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
