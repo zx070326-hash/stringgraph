@@ -1,0 +1,41 @@
+id: worldsheet.heterotic-internal-fermions-spacelike
+kind: proposition
+title: 杂化弦的 32 个内部左移费米子 λ^A 都必须是类空的（左移一侧没有费米型约束可以去掉负范数态）
+statement: |
+  在 worldsheet.heterotic-string-construction 的构造中，内部左移费米子 λ^A（A = 1, …, 32）
+  的号差必须**全部为类空**（即 λ^Aλ^B OPE 的留数是正定的 δ^{AB}，不能出现 η^{AB} 那样的
+  含 −1 的号差）。
+
+  **原书给出的理由（逐字）**：
+    'In particular, none of the λ^A can have a timelike signature because there is no fermionic
+     constraint on the left-moving side to remove states of negative norm.'
+
+  即：对嵌入坐标 X^0 与右移费米子 ψ̃^0，负范数态是被约束代数（Virasoro 与超 Virasoro）
+  去掉的；左移一侧只有 Virasoro，**没有**与 ψ̃ 对应的费米型约束（超流），
+  因此若某个 λ^A 是类时的，其激发产生的负范数态无法被去掉。
+
+  **本命题不断言的内容**：
+    (1) 不断言这是一条定理。原书只给上引一句理由，**没有**给出「类时 λ 的负范数态确实
+        留在 BRST 上同调里」的证明，也不引文献。
+    (2) 不断言 32 这个数目（那来自 c = 16 的配平，见 worldsheet.heterotic-string-construction）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 50, (11.2.5c) 之后（无式号；逐字见 statement）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E54 备注；抽取者特别标注「这是一条**真实的技术限制**，
+      转节点时别漏」）。原文对此只有引用的这一句，**无式号、无脚注、无引文**。
+tags: [heterotic, unitarity, no-ghost-theorem, worldsheet, assertion]
+notes: |
+  【与无鬼定理的关系】本命题实际上是 worldsheet.no-ghost-theorem-heterotic 的**必要条件方向**
+  的一句话版本：无鬼定理只在「负范数态能被约束去掉」时成立，而左移一侧的约束只有 Virasoro。
+  但原书**没有**把这两处联系起来论证，只把它当作构造时的选择理由。
+  本图因此把它建成独立的弱命题，而不是无鬼定理的推论。
+
+  【为什么不并进构造卡】worldsheet.heterotic-string-construction 是定义卡（写下场内容与作用量）；
+  「不能取类时号差」是对该定义的一条**限制性命题**，有自己的（虽然只有一句话的）理由。
+  按 graph/CLAUDE.md「一个节点一个命题」拆开。
+author: curator
+created: "2026-09-11"

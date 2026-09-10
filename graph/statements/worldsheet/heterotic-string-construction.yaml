@@ -1,0 +1,103 @@
+id: worldsheet.heterotic-string-construction
+kind: definition
+status: physical-argument
+title: 杂化弦的世界面构造：(N, Ñ) = (0, 1) 约束代数、场内容 X^μ + ψ̃^μ + 32 个左移 λ^A，中心荷配平 (c, c̃) = (26, 15)
+statement: |
+  **约束代数的选择**。按 §11.1 的分类，左移与右移的约束代数可以**独立**选取；
+  取左移一侧为玻色弦的约束代数（只有 T_B，即 Table 11.1 的 N = 0 行，鬼场中心荷 c^g = −26），
+  右移一侧为超弦的 (1,1) 超共形约束代数（T̃_B 与 T̃_F，即 N = 1 行，c̃^g = −15）。
+  原书逐字：'This allows the one new possibility, the (N, Ñ) = (0,1) *heterotic string*;
+  (N, Ñ) = (1,0) would be the same on redefining z → z̄.'
+
+  **中心荷配平**。总鬼场中心荷 (c^g, c̃^g) = (−26, −15)，故物质部门必须有 (c, c̃) = (26, 15)。
+  取十个平坦嵌入坐标 X^μ(z, z̄)（μ = 0, …, 9）与十个右移世界面费米子 ψ̃^μ(z̄)（(11.2.1)），
+  它们给出 (c, c̃) = (10, 15)；**剩下的必须是纯左移的 (c, c̃) = (16, 0)**。
+  原书逐字：'The ghost central charges add up to (c^g, c̃^g) = (−26, −15), so the remaining
+  matter has (c, c̃) = (16, 0). The simplest possibility is to take 32 left-moving spin-1/2
+  fields λ^A(z), A = 1, …, 32'（(11.2.2)；每个左移 Majorana–Weyl 世界面费米子贡献 c = 1/2，
+  32 × 1/2 = 16）。
+
+  **作用量**（(11.2.3)，逐字公式）：
+    S = (1/4π) ∫ d²z [ (2/α') ∂X^μ ∂̄X_μ + λ^A ∂̄λ^A + ψ̃^μ ∂ψ̃_μ ]。
+
+  **基本 OPE**（(11.2.4a,b,c)）：X^μX^ν 与 ψ̃^μψ̃^ν 同 RNS 弦（worldsheet.rns-action 里的
+  (10.1.6)/(10.1.7)，其中 ψ̃ 一支照抄），另有
+    λ^A(z) λ^B(0) ∼ δ^{AB}/z。
+
+  **约束流**（(11.2.5a,b,c)，逐字公式）：
+    T_B  = −(1/α') ∂X^μ ∂X_μ − (1/2) λ^A ∂λ^A,
+    T̃_B = −(1/α') ∂̄X^μ ∂̄X_μ − (1/2) ψ̃^μ ∂̄ψ̃_μ,
+    T̃_F = i(2/α')^{1/2} ψ̃^μ ∂̄X_μ。
+  注意 **左移一侧没有超流**：约束代数在左边只是 Virasoro。
+
+  **世界面对称性**：SO(9,1) × SO(32)，其中 SO(32) 作用在 λ^A 上，是**内部**对称性
+  （原书逐字：'The world-sheet theory has symmetry SO(9,1) × SO(32). The SO(32), acting on
+  the λ^A, is an internal symmetry.'）。
+
+  **本卡不断言的内容**：
+    (1) 不断言 32 个 λ^A 是唯一的取法。原书只说这是 'the simplest possibility'；
+        §11.6 的玻色构造（compact.heterotic-narain-lattice-even-self-dual）是另一种实现，
+        原书说两者经玻色化等价（'It is easy to see'，见那张卡）。
+    (2) 不断言周期条件与 GSO 投影——那是 worldsheet.heterotic-so32-projections 的内容。
+    (3) 不断言路径积分有数学定义（与 worldsheet.rns-action、worldsheet.free-scalar-cft-action
+        同样的缺口，另加 Grassmann/Berezin 积分）。
+    (4) 不断言「杂化弦是一致的弦论」——无鬼定理见 worldsheet.no-ghost-theorem-heterotic，
+        模不变性见 worldsheet.heterotic-so32-partition-function。
+uses:
+  - worldsheet.free-scalar-cft-action
+  - worldsheet.rns-action
+  - worldsheet.bc-ghost-central-charge
+  - worldsheet.superconformal-ghost-central-charge
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.1)–(11.2.5c), pp. 49–50（场内容、中心荷配平、作用量、OPE、T_B/T̃_B/T̃_F；SO(9,1) × SO(32) 的逐字句在 p. 50）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E54；式号与公式逐页读到原书页图）。
+      引用的是 Cambridge Books Online 版（© 2001, 2005），见 sources.bib 的 note。
+  - ref: polchinski-1998-v2
+    loc: "§11.1, (11.1.6b) 之后, p. 48（逐字：'This allows the one new possibility, the (N, Ñ) = (0,1) heterotic string; (N, Ñ) = (1,0) would be the same on redefining z → z̄.'）"
+    note: |
+      L1（E52 备注）。这是「杂化弦」这个构造在本书里的出处：它来自 §11.1 对约束代数的分类，
+      **左右两侧可以取不同的约束代数**这一观察。
+  - ref: polchinski-1998-v2
+    loc: "§11.1, Table 11.1 的前两行与 eq. (11.1.2b), pp. 46–47（c^g = −26 与 c^g = −15）"
+    note: |
+      L1（E51）。中心荷配平用到的两个鬼场中心荷即此表的前两行；本图另有
+      worldsheet.bc-ghost-central-charge（λ = 2 给 −26）与
+      worldsheet.superconformal-ghost-central-charge（−26 + 11 = −15）两张卡。
+tags: [heterotic, worldsheet, action, definition, so32, central-charge]
+notes: |
+  【status: physical-argument 的理由】与 worldsheet.rns-action 同：本卡把 OPE 列为定义数据，
+  而 OPE 收敛性在本图未公理化；另有 Grassmann 场与路径积分的缺口。按「不确定选低一级」取
+  physical-argument。
+
+  【「16 = 32 × 1/2」是 SO(32) 的来源】抽取记录 E54 特别标出这一点：规范群不是先验选定的，
+  而是「配平 c = 16 的最简办法恰好是 32 个实费米子，它们的内部对称性就是 SO(32)」。
+  §11.6 的格点构造给出同样的两个群（worldsheet.heterotic-bosonic-construction-gauge-groups）。
+
+  【⚠ 「SO(32)」这个名字只到李代数的精度】原书 §11.4 脚注 1（p. 60，逐字）：
+  'To be precise the Lie algebra determines only the local structure of the group. Many groups,
+  differing only by discrete identifications, will have a common Lie algebra.'
+  本图凡写 SO(32) 处，断言的都是**李代数** so(32)（以及原书使用的群名），
+  **不**断言整体群是 SO(32) 还是 Spin(32)/Z₂。
+  ⚠ 抽取记录（E54–E63）**没有**记录原书任何一处写出 'Spin(32)/Z₂'；
+  本轮因此不建该区分的节点，也不得据本图断言两者的区别。见本轮报告的「文献歧义」条。
+
+  【左移一侧没有超流】这不是笔误：约束代数在左边只有 Virasoro，右边才有超 Virasoro。
+  下游两处直接用到这个不对称：
+    (a) 左移 λ^A 不能有类时号差（worldsheet.heterotic-internal-fermions-spacelike）；
+    (b) 左移配分函数里没有超共形鬼场的 F 贡献，故 (11.2.13) 全取正号
+        （worldsheet.heterotic-so32-partition-function）。
+
+  【与 ch.10 结论卡的关系】worldsheet.ten-dimensional-superstring-theories 的结论
+  「恰有三个」是**第 10 章构造范围内**的（原文限定词 'in this chapter'）。
+  杂化弦不在那个范围内；那张卡的 statement 已显式声明「不断言杂化弦不存在」。
+  本卡与其后继卡就是被排除在外的那两个理论。
+author: curator
+created: "2026-09-11"

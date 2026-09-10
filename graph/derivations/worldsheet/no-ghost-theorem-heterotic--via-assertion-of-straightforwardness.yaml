@@ -1,0 +1,42 @@
+id: worldsheet.no-ghost-theorem-heterotic--via-assertion-of-straightforwardness
+target: worldsheet.no-ghost-theorem-heterotic
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: 供给场内容与左右两侧的约束代数（左：Virasoro；右：超 Virasoro），即「鬼场是什么」的前提。
+  - id: worldsheet.no-ghost-theorem-superstring
+    note: |
+      原书明写右移一侧「与 RNS 超弦相同」，故右侧的结论就是这张卡。
+      ⚠ 那张卡自身的唯一推导也是一句话（'a direct imitation of the bosonic argument of chapter 4'）。
+  - id: worldsheet.no-ghost-theorem-brst
+    note: |
+      原书明写左移一侧「与玻色弦相同」，故左侧的结论就是这张卡（Vol.1 §4.4 的 BRST 无鬼定理）。
+  - id: worldsheet.brst-charge-general-constraint-algebra
+    inferred: true
+    note: |
+      **inferred 的理由**：原书在 §11.2 p. 50 只说「可以构造幂零 BRST 荷」，**不写表达式、不引用任何构造**。
+      本图把它连到一般约束代数的 BRST 荷构造卡，是**本图补的**边——
+      在 §11.2 那一页找不到对应论证。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 50, **无式号**（逐字：'The right-moving ghosts are the same as in the RNS superstring, and the left-movers are as in the bosonic string. It is straightforward to construct the nilpotent BRST charge and show the no-ghost theorem, with any BRST-invariant periodicity conditions. As usual this still holds if we replace any of the spatial (X^μ, ψ̃^μ) and the λ^A with a unitary (0,1) SCFT of the equivalent central charge.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E55）。**这三句话就是全部论证。**
+summary: |
+  原书的全部论证是：右移鬼场与 RNS 超弦相同，左移鬼场与玻色弦相同，
+  因此「构造幂零 BRST 荷并证明无鬼定理是 straightforward 的」。
+  本推导忠实记录这条**类比论证**：把左右两侧分别接到玻色弦与超弦的对应结论上，
+  再加一条本图补的 BRST 荷构造边（inferred）。
+
+  **这不是证明，是断言。** 书中不写 Q_B、不证明幂零性、不定义 H^⊥、不列举
+  「BRST 不变的周期条件」、不引任何文献。
+gaps:
+  - "**'It is straightforward to …' 就是全部论证**：原书不构造 Q_B、不证明幂零、不给无鬼定理的精确陈述（连横向 Hilbert 空间 H^⊥ 的定义都没有，而 §10.5 末的超弦版至少给了）。"
+  - "**左右两侧鬼场系统不同这一点未被讨论**：左移是 bc，右移是 b̃c̃ + β̃γ̃。Vol.1 §4.4 与 §10.5 的论证都是单侧的；两侧如何拼接（尤其是 light-cone number 分次要同时对两侧做）原书不谈。"
+  - "**'with any BRST-invariant periodicity conditions' 这个全称量词没有任何论证**，而 §11.2/§11.3 恰恰要对多种周期条件（(11.2.6) 的 O(32) 扭曲、(11.2.19) 的两组 16、§11.3 的扭曲构造）反复使用它。"
+  - "**继承超弦一侧的三个未讨论差异**（抽取记录 Q4）：βγ 是对易鬼场且占据数无上界；R 扇区的 β_0、γ_0 零模条件是额外强加的；Vol.1 §4.4 的数算符 S 在超弦版里的对应物未验证。"
+  - "**'unitary (0,1) SCFT of the equivalent central charge' 的替换断言无论证**，且本图没有「幺正 (0,1) SCFT」的节点。"
+  - "**BRST 荷构造那条边是 inferred**：原书在此处不引用任何 BRST 构造（见 depends_on 的 note）。"
+author: curator
+created: "2026-09-11"
