@@ -32,8 +32,16 @@ depends_on:
       c^g = −26 仍写在陈述正文里。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
-    note: 公式号为近似定位。这是教科书式的形式模式计算，未声明受限模限制，也未处理无穷模式和的重排合法性。
+    loc: "§4.3：BRST 流 j_B = (4.3.3)、Q_B = (4.3.5)、{Q_B, b_m} = L^m_m + L^g_m = (4.3.6)、Q_B 的模式展开 (4.3.7)（末项 a^B(c_0 + c̃_0)，紧接一句 a^B = a^g = −1，依据 (4.3.8)）；**结论式 (4.3.9)**「{Q_B, Q_B} = 0 only if c^m = 26」；(4.3.10) 是 j_B j_B 的 OPE，其单极点给「when c^m = 26」的一半；最短推导用 Jacobi 恒等式，是**习题 4.3**（式号与内容 2026-09-11 经原书核实，抽取记录 polchinski-1998-v1.md §12.3）"
+    note: |
+      **【2026-09-11 原书核实订正】**本条此前写「约 eq. (4.3.2)–(4.3.6)，公式号为近似定位」——
+      现落实：陈述式是 **(4.3.9)**，(4.3.2) 其实是规范固定项、(4.3.4) 是三条 OPE。
+      原书对 (4.3.10) 的措辞逐字：「This requires a bit of calculation, being careful about minus
+      signs from anticommutation. The single pole implies that {Q_B,Q_B} = 0 **when** c^m = 26.」
+      即原书自己给出的是 ⟸ 方向的形式计算与 (4.3.9) 的 **only if** 断言。
+      这仍是教科书式的形式模式计算：未声明受限模限制，未论证无穷模式和重排的合法性，
+      也未写出 ⟹ 方向所需的线性无关（忠实性）前提；原书另在 p.133 对**一般**约束代数的幂零性
+      逐字写「We have neglected central charge terms; these need to be checked by hand」。
   - ref: kato-ogawa-1983
     loc: "摘要；正文未获取，定理编号未核实"
     note: |
