@@ -14,8 +14,8 @@ statement: |
   它们给出 (c, c̃) = (10, 15)；**剩下的必须是纯左移的 (c, c̃) = (16, 0)**。
   原书逐字：'The ghost central charges add up to (c^g, c̃^g) = (−26, −15), so the remaining
   matter has (c, c̃) = (16, 0). The simplest possibility is to take 32 left-moving spin-1/2
-  fields λ^A(z), A = 1, …, 32'（(11.2.2)；每个左移 Majorana–Weyl 世界面费米子贡献 c = 1/2，
-  32 × 1/2 = 16）。
+  fields λ^A(z), A = 1, …, 32'（(11.2.2)；每个左移实费米子贡献 c = 1/2，
+  32 × 1/2 = 16。原书的用词是 'spin-1/2 fields'，本卡不额外断言它们的时空/世界面旋量类型）。
 
   **作用量**（(11.2.3)，逐字公式）：
     S = (1/4π) ∫ d²z [ (2/α') ∂X^μ ∂̄X_μ + λ^A ∂̄λ^A + ψ̃^μ ∂ψ̃_μ ]。
