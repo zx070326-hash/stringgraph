@@ -3172,3 +3172,656 @@ sources:
 - **Q29** `sources.bib` 里 **`schottenloher-2008` 条目的花括号失衡**（`note = {…}` 在原第 457 行就闭合，
   其后到 481 行是游离文本，最后多一个 `}`）。**本轮我把第 6 章的补充追加进了最后那段游离文本内部，
   没有改动括号结构**（避免与别的 agent 冲突）。**建议 lead 单独修一次**。
+
+---
+---
+
+# § 紧曲面分类定理 + RP₂/圆盘的 CKV 与模
+
+## 39. 为 `positive-euler-number-no-moduli--via-surface-enumeration` 的两个缺口找带编号来源（researcher，2026-09-11）
+
+- 触发：`graph/derivations/worldsheet/positive-euler-number-no-moduli--via-surface-enumeration.yaml`
+  的 `gaps` 第 2、3 条：「**输入 (1)（曲面分类定理）在本图中无节点、无数学来源**」、
+  「**RP₂ 的 μ = 0 则连节点都缺**」。
+- 证据等级沿用 §0。
+- ⚠ **本轮最大的意外收获与任务书的预设相反**：我用 [[reference_cambridge-core-licensed-book-pdfs]] 的路线
+  取到了 Polchinski Vol.1 **第 5 章与第 6 章的原书页图**，结果是——
+  **原书自己就给了 χ > 0 ⇒ μ = 0 的直接论证（不是枚举），也自己逐字给了 RP₂ 与圆盘的 CKG。**
+  所以该推导的 `gaps` 里有**两条已经作废、一条需要改写**（见 §39.8）。
+
+### 39.0 结论表（先看这张）
+
+| 问题 | 结论 | 最佳来源与编号 | 等级 |
+|---|---|---|---|
+| **(A) 紧曲面分类（含带边、含不可定向）** | ✅ 有带编号定理 | **Gallier–Xu (2013), Theorem 6.2**（书上 p.97） | **L1** |
+| (A) 配套：χ = 2−2p−q / 2−p−q | ⚠ **有公式、无编号** | 同书 p.89–90 行间式（Definition 6.5 之后） | L1 |
+| (A) 「χ>0 只剩 S²、D²、RP²」 | ❌ **任何来源都没有这条现成陈述** | 由 Def 6.5 + χ 公式**两行算术**导出（本文件 §39.2(e)，**是我的补步**） | — |
+| (A) 第二来源 Massey | ⚠ **Theorem 5.1 有 L1 旁证；带边那条定理号 L0** | Massey (1967) Ch. I §5/§7/§10/§11（目录 L1） | L1/L0 |
+| (A) Munkres §77 | ❌ **不对口**：只讲闭曲面、不出现 Euler 数 | Theorem 77.5（第三方逐字转引） | L2 |
+| (A) Hatcher §1.2 | ❌ **根本没有分类定理**（有编号的没有，无编号的也没有） | §1.2 末只有 Prop 1.26 / Cor 1.27 / Cor 1.28 / Ex 1.29 | **L1** |
+| **(B) RP₂：μ = 0、κ = 3、CKG = SO(3)** | ✅ **Polchinski 原书逐字有** | **Polchinski §6.1「The projective plane」，书上 p.168–169，(6.1.9) 附近，无式号** | **L1** |
+| (B) 圆盘：μ = 0、CKG = PSL(2,R) | ✅ **Polchinski 原书逐字有，且有两处** | **§6.1「The disk」p.168（(6.1.8) 之后）** 与 **§6.4 开头 p.178**，均无式号 | **L1** |
+| (B) κ = 3 这个**数字** | ✅ 由原书 **(5.2.11a) κ = 3χ** + χ = 1 得到 | Polchinski (5.2.11a)，书上 p.152 | **L1** |
+| (B) 数学侧：Aut(D) | ⚠ 分成两条、合成后无单一编号 | **Miličić Theorem 1.7.3**（Aut(D)≅SU(1,1)/{±I}）+ §1.9 无编号句（SL(2,R)≅SU(1,1)） | **L1** |
+| (B) 数学侧：Aut(P¹) = PSL(2,C) | ✅ | **Miličić Theorem 1.5.2** | **L1** |
+| (B) 数学侧：Aut(RP²) = 球面旋转群 | ✅ 有编号，但期刊层级低、证明外包 | **Cao-Huu–Ghişa, arXiv:0902.2725, Corollary 3.1** | **L1** |
+| (B) 「球面旋转群 = SO(3)、实维 3」 | ❌ 上面那条推论里**没有**这句 | — | — |
+
+---
+
+### 39.1 需求侧：这条推导到底缺什么
+
+推导 `--via-surface-enumeration` 的 `summary` 把论证拆成两步：
+
+1. **曲面分类**：χ = 2 − 2g − b − c，χ > 0 只允许 S₂、D₂、RP₂；
+2. **三个曲面各自 μ = 0**。
+
+本轮要找的就是 (1) 的数学来源、(2) 里 RP₂ 那一支的来源。
+**但读完原书之后，问题的形状变了**：原书根本不是这么论证的（§39.6），
+枚举路线是本图补写的。所以下面同时给出**两条路线各自的来源**，
+并在 §39.8 建议 curator 把它们拆成两条并列的 derivation。
+
+---
+
+### 39.2 ★★ (A) 首选来源：Gallier & Xu, *A Guide to the Classification Theorem for Compact Surfaces*（L1 全章读图）
+
+#### 39.2.0 版本陷阱（必读，与 [[gui-2023-lectures]] 那次同类）
+
+同一批内容有**两个编号互不相同的公开版本**：
+
+| | 文件 | 章节 | 分类定理编号 |
+|---|---|---|---|
+| **出版版**（Springer GTC 9, 2013） | `cis.upenn.edu/~jean/surfclassif-root.pdf`（标题页日期 **January 8, 2025**，页脚 "Philadelphia, September 2012"） | **Ch. 6** | **Theorem 6.2** |
+| **arXiv 早期版**（单作者，2008） | `arxiv.org/pdf/0805.0562`（v1） | Ch. 5 | Theorem 5.3.2 |
+
+**编号交叉表（本轮逐条对照，L1）**：
+
+| 出版版 | arXiv 版 | 内容 |
+|---|---|---|
+| Lemma 6.1 | Lemma 5.2.5 | 每个胞腔复形等价于某个规范胞腔复形 |
+| Proposition 6.1 | Proposition 5.2.2 | 每个胞腔复形可细分为三角化 2-复形 |
+| Definition 6.4 | Definition 5.2.3 | 定向 / contour |
+| **Definition 6.5** | **Definition 5.2.4** | **规范胞腔复形 type (I)/(II)** |
+| **Theorem 6.1** | **Theorem 5.3.1** | 三角化版分类定理（含带边） |
+| **Theorem 6.2** | **Theorem 5.3.2** | **紧曲面版分类定理（含带边）** |
+| Theorem 6.3 | Theorem 5.3.4 | 连通和形式（闭曲面） |
+| Definition 6.6 | Definition 5.3.3 | 连通和 |
+
+⚠ **另有一个 28 页的截断文件**：`cis.upenn.edu/~jean/surfclass-n.pdf` 与镜像
+`cs.brynmawr.edu/~dxu/surfclassif.pdf` 两次下载都只回来 2.7 MB / **28 页**（只到第 1 章），
+其目录显示的是**第三套编号**（Ch. 6 同出版版，但 Appendix B 叫「Proof of Proposition 5.1」）。
+**不要用这两个 URL 取正文。**
+
+#### 39.2.1 ★★★ **Theorem 6.2**（书上 **p.97**，L1 逐字）——这就是图里要的那条
+
+> **Theorem 6.2.** *Two compact surfaces or compact surfaces with boundary are homeomorphic iff
+> they agree in character of orientability, number of contours, and Euler–Poincaré characteristic.*
+
+同页上方的三角化版：
+
+> **Theorem 6.1.** *Two (two-dimensional) compact polyhedra or compact polyhedra with boundary
+> (triangulated compact surfaces with or without boundary) are homeomorphic iff they agree in
+> character of orientability, number of contours, and Euler–Poincaré characteristic.*
+
+Theorem 6.1 与 6.2 之间（p.96 末）作者自陈缺口，**必须随引用一起写**：
+
+> "In order to finally get a version of Theorem 6.1 for compact surfaces or compact surfaces with
+> boundary (not necessarily triangulated), it is necessary to prove that every surface and every
+> surface with boundary can be triangulated. As we said in Section 1.1, this is indeed true, but the
+> proof is far from trivial. … We will present Carsten Thomassen's proof, which we consider to be
+> the most easily accessible, in Appendix E."
+
+→ **Theorem 6.2 依赖「每个曲面可三角化」（Radó），该证明在 Appendix E，不在正文**。
+本项目若要 `rigorous`，这条依赖必须显式建边或至少写进 note。
+
+#### 39.2.2 **Definition 6.5**（书上 **p.88–89**，L1 逐字）——枚举的参数范围就藏在这里
+
+> **Definition 6.5.** A *cell complex in normal form, or canonical cell complex* is a cell complex,
+> K = (F, E, B), where F = {A} is a singleton set, and either
+> (I) E = {a₁,…,a_p, b₁,…,b_p, c₁,…,c_q, h₁,…,h_q} and
+>   B(A) = a₁b₁a₁⁻¹b₁⁻¹ ⋯ a_p b_p a_p⁻¹ b_p⁻¹ c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹,
+>   **where p ≥ 0, q ≥ 0**, or
+> (II) E = {a₁,…,a_p, c₁,…,c_q, h₁,…,h_q} and
+>   B(A) = a₁a₁ ⋯ a_p a_p c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹,
+>   **where p ≥ 1, q ≥ 0**.
+
+紧接着（p.89，L1 逐字）：
+
+> "Observe that canonical complexes of type (I) are orientable, whereas canonical complexes of type (II)
+> are not. The sequences c_i h_i c_i⁻¹ yield q boundary vertices, (h_i, c_i, h_i⁻¹), and thus **q contours** (h_i) …"
+
+#### 39.2.3 χ 公式（书上 **p.89–90**）——**⚠ 无编号，只能引页码**
+
+> "Thus, in case (I), there are q+1 vertices, 2p+2q sides, and one face, and the Euler–Poincaré
+> characteristic is q+1−(2p+2q)+1 = 2−2p−q, that is,
+>   **χ(K) = 2 − 2p − q**,
+> and in case (II), there are q+1 vertices, p+2q sides, and one face, and the Euler–Poincaré
+> characteristic is q+1−(p+2q)+1 = 2−p−q, that is,
+>   **χ(K) = 2 − p − q**.
+> Note that when p = q = 0, we do get χ(K) = 2, which agrees with the fact that in this case, we assumed
+> the existence of a null vertex and there is one face. **This is the case of the sphere.**"
+
+同书 p.103（§6.6，同样**无编号**）给出等价的属数形式：
+
+> "In terms of the Euler–Poincaré characteristic, for an orientable surface, the genus g is given by the formula
+>   g = (2 − χ − q)/2,
+> and for a nonorientable surface, the genus g is given by the formula
+>   g = 2 − χ − q,
+> **where q is the number of contours.**"
+
+→ 即 **χ = 2 − 2g − q（可定向）**、**χ = 2 − g − q（不可定向）**。
+**这正是推导 `summary` 里那条「χ = 2 − 2g − b − c」的正确写法**——注意原书用**一个**属数 g
+覆盖两种情形（不可定向时 g 数的是交叉帽/射影平面个数），**不是**「2 − 2g − b − c」那种把
+handles 与 crosscaps 并列相加的四参数写法。**推导 summary 里那条公式的形式在本轮找到的任何来源里都没有出现，
+建议 curator 改写成上面两条之一。**
+
+#### 39.2.4 本书对三个目标曲面的身份认定（L1 逐字，散落）
+
+- **球面**：p.89–90「Note that when p = q = 0, we do get χ(K) = 2 … This is the case of the sphere.」
+- **圆盘**：p.102（§6.6）「there are only two kinds of complexes having a trivial group, namely, for orientable
+  complexes for which p = q = 0, or **p = 0 and q = 1**. The corresponding surfaces (with boundary) are a
+  *sphere* and a *closed disk* (a surface with boundary).」
+- **射影平面**：p.90「If a canonical cell complex has the boundary, B(A) = a₁a₁, we can think of the face A as a
+  circular disk whose boundary is divided into two semi-circles both labeled a₁. … it is homeomorphic to the
+  projective plane.」（即 type (II)、p = 1、q = 0）
+- **莫比乌斯带**（最近的落选者）：p.102「in the nonorientable case when p = 1 and q = 0, a *projective plane*,
+  or **p = 1 and q = 1, a *Möbius strip***.」→ χ = 2−1−1 = **0**，正好被 χ > 0 排除。
+
+#### 39.2.5 ★ (e) 「χ > 0 ⇒ 恰好三种」这一步：**没有任何来源写过，是我的补步**
+
+把 Definition 6.5 的参数范围代进 §39.2.3 的两条公式：
+
+- type (I)（可定向）：`2 − 2p − q > 0`，`p ≥ 0, q ≥ 0` ⟹ `(p,q) = (0,0)` 或 `(0,1)`
+  ⟹ **χ = 2 的球面**、**χ = 1 的圆盘**（身份认定见 §39.2.4）。
+- type (II)（不可定向）：`2 − p − q > 0`，`p ≥ 1, q ≥ 0` ⟹ `(p,q) = (1,0)`
+  ⟹ **χ = 1 的射影平面**。
+
+再由 **Theorem 6.2**（同不定向性 + 同 contour 数 + 同 χ ⟹ 同胚）知这三者两两不同胚且穷尽。
+
+⚠ **诚实记录**：这三行是**纯算术**，但**书上没有这段话**，也没有任何「χ > 0」的讨论。
+按本项目规矩，把它写进图时要么标 `inferred: true`，要么在 derivation 的 `summary` 里
+明写「不等式求解这一步由本图完成，来源只提供 Definition 6.5 的参数范围与 χ 公式」。
+
+---
+
+### 39.3 (A) 第二来源：Massey —— **目录 L1，定理号只有一条有旁证**
+
+**已获取**：`Algebraic Topology: An Introduction`, William S. Massey, Harcourt, Brace & World, 1967
+的**目录扫描页**（`external.dandelon.com/download/attachments/dandelon/ids/DE00420A6F9CE221E6E38C12579A000352287.pdf`，
+6 页，L1 读图）。**正文未获取。**
+
+Chapter One「Two-Dimensional Manifolds」目录逐字（L1）：
+
+| § | 标题 | 页 |
+|---|---|---|
+| 1 | Introduction | 1 |
+| 2 | Definition and examples of n-manifolds | 2 |
+| 3 | Orientable vs. nonorientable manifolds | 3 |
+| 4 | Examples of compact, connected 2-manifolds | 6 |
+| **5** | **Statement of the classification theorem for compact surfaces** | **10** |
+| 6 | Triangulations of compact surfaces | 15 |
+| **7** | **Proof of Theorem 5.1** | **18** |
+| 8 | The Euler characteristic of a surface | 29 |
+| 9 | Manifolds with boundary | 35 |
+| **10** | **The classification of compact, connected 2-manifolds with boundary** | **37** |
+| **11** | **The Euler characteristic of a bordered surface** | **42** |
+| 12 | Models of compact bordered surfaces in Euclidean 3-space | 43 |
+| 13 | Remarks on noncompact surfaces | 47 |
+
+**结论**：
+- **「紧曲面分类定理 = Theorem 5.1」有 L1 证据**——证据就是 **§7 的标题本身**「Proof of Theorem 5.1」。
+  任务书猜的 `Thm I.5.1` **对**。
+- **§10 里那条带边分类定理的编号完全没有证据（L0）。硬性禁令：不得写「Theorem 10.1」。**
+  （编号体系看起来是 `<节>.<序>`，但「看起来」不是证据。）
+- **跨版本风险**：本书后由 Springer 重印为 GTM 56（Gallier–Xu 参考文献 [16] 逐字写「second edition, 1987」），
+  Chapter I 又被吸收进 GTM 127 *A Basic Course in Algebraic Topology* (1991)。
+  **三个版本的定理编号是否一致，本轮未核实。** 引用时必须写死版本。
+
+**第三方交叉（L1，但权威性低）**：ETH Zürich 学士论文
+Ana da Silva Rodrigues, *Classification of Surfaces*, 2023（`people.math.ethz.ch/~acannas/Student_Papers/BSc_Theses/`）
+第 5 章明说「following Massey's book 'Algebraic Topology: An Introduction' [11]」，并给出自己的编号：
+
+> **Theorem 5.1**（p.43）Let M₁ and M₂ be two bordered surfaces with the same number of boundary components.
+> Then M₁ and M₂ are homeomorphic if and only if M₁* and M₂* are homeomorphic.
+> （p.45，无编号）**χ(M) = χ(M*) − k**
+> **Theorem 5.2**（p.46）Two compact bordered surfaces are homeomorphic if and only if they have the same
+> number of boundary components, they are both orientable or non-orientable, and they have the same Euler
+> characteristic.
+
+⚠ 这是**学士论文**，**不建议进 `sources.bib` 当图的来源**；只作为「Massey §10 那条定理长什么样」的旁证，
+且它的编号是**它自己的**，不是 Massey 的。
+
+---
+
+### 39.4 (A) 候选否定之一：Munkres §77 —— **编号对得上，内容不对口**
+
+第三方讲义（ETSU, R. Gardner, *Knot Theory* Section 4.2 笔记，L1 读图）**逐字转引并注明出处**
+「James Munkres' *Topology*, Second Edition, Upper Saddle River, NJ: Prentice Hall (2000)」：
+
+> **Theorem 77.5. The Classification Theorem.**
+> Let X be the quotient space obtained from a polygonal region in the plane by pasting its edges
+> together in pairs. Then X is homeomorphic to either S², to the n-fold torus T, or to the m-fold
+> projective plane P_m.
+
+→ 等级 **L2**（第三方逐字 + 出处齐全，Munkres 原书未获取）。
+
+⚠ **不能用**：这条定理 (a) **只覆盖闭曲面**（"pasting its edges together in pairs" 意味着没有自由边），
+(b) **通篇不出现 Euler 数**。本项目要的恰恰是「带边 + 用 χ 判别」。登记它只是为了钉死这个看似对口的候选。
+
+---
+
+### 39.5 (A) 候选否定之二：Hatcher §1.2 —— **L1 确认「根本没有」**
+
+取到 `pi.math.cornell.edu/~hatcher/AT/ATch1.pdf`（PDF 页 = 书页 − 20），读了书上 **pp.49–56** 全段。
+§1.2 的最后一个小标题是「**Applications to Cell Complexes**」（p.49 起），其内容**全部**是：
+
+- **Proposition 1.26**（贴 2-胞腔对 π₁ 的影响，三条 (a)(b)(c)）
+- **Corollary 1.27**：「*The surface M_g is not homeomorphic, or even homotopy equivalent, to M_h if g ≠ h.*」
+- **Corollary 1.28**：任何群都是某个 2 维胞腔复形的 π₁
+- **Example 1.29**
+- 然后 p.52 就进入 **Exercises**，p.56 是 **§1.3 Covering Spaces**。
+
+关于不可定向曲面，p.52 只有一句**无编号**的正文：
+「Hence N_g is not homotopy equivalent to N_h if g ≠ h, nor is N_g homotopy equivalent to any orientable surface M_h.」
+
+→ **结论（L1）：Hatcher §1.2 里没有紧曲面分类定理，有编号的没有、无编号的也没有；
+带边曲面一个字都没提。他只证了「标准曲面两两不同伦等价」这半边（唯一性），不证存在性/穷尽性。**
+任务书里「Hatcher §1.2 末（无编号？核实）」——**核实结果是比「无编号」更强的否定：那条定理不在那里**。
+
+---
+
+### 39.6 ★★★ (B) 本轮最重要的发现：**Polchinski 原书自己给了全部四条**（L1 原书页图）
+
+取书路线见 [[reference_cambridge-core-licensed-book-pdfs]]；本轮用到
+ch.5 `2619B77DD4AE2BE4D53B5EED5D3BE3C1` / `9780511816079c5_p145-165_CBO.pdf`、
+ch.6 `F440F6B46EB4150F96EAEAFDDF9F0D76` / `9780511816079c6_p166-205_CBO.pdf`。
+
+#### (a) **χ > 0 ⇒ μ = 0 原书有直接论证，且有独立式号 (5.2.10)/(5.2.11a)**（书上 **p.152**，L1 逐字）
+
+> "Further, κ vanishes for χ < 0 and μ vanishes for χ > 0. To show this, we first **cite the fact** that it is
+> always possible by a Weyl transformation to find a metric for which the scalar curvature R is constant.
+> The sign of R is then the same as that of χ. Now, P₁ᵀP₁ = −½∇² − ¼R, so
+>   ∫d²σ g^{1/2}(P₁δσ)_{ab}(P₁δσ)^{ab} = ∫d²σ g^{1/2} δσ_a(P₁ᵀP₁δσ)^a
+>     = ∫d²σ g^{1/2}( ½∇_aδσ_b∇^aδσ^b − (R/4) δσ_aδσ^a ) .   **(5.2.10)**
+> For negative χ the right-hand side is strictly positive, so P₁δσ cannot vanish.
+> **A similar argument shows that P₁ᵀδ′g cannot vanish for positive χ.**
+> Combining these results we have
+>   χ > 0 :  κ = 3χ ,  μ = 0 ,   **(5.2.11a)**
+>   χ < 0 :  κ = 0 ,  μ = −3χ .  **(5.2.11b)**"
+
+三条必须随引用一起写的缺口（全 L1，全是原书自陈）：
+
+1. **单值化被外包**：「we first **cite the fact** that it is always possible by a Weyl transformation to find a
+   metric for which the scalar curvature R is constant」——原书**不证**，也**不给引文**。
+2. **「R 的符号与 χ 相同」也是断言**（Gauss–Bonnet），原书同样不证不引。
+3. **χ > 0 那一半只有一句「A similar argument shows」**——即本图关心的方向，
+   **原书没有写出来**，只声明与 χ < 0 的论证同型。
+
+#### (b) **「χ > 0 的 Riemann 面只有三个」原书自己说了，但不证不引**（书上 **p.166**，§6.1 首句，L1 逐字）
+
+> "**There are three Riemann surfaces of positive Euler number: the sphere, the disk, and the projective plane.**"
+
+→ 这就是枚举路线的步骤 (1)，**原书是当作已知事实直接写出的，全章无证明、无引文**。
+所以「补一条数学来源」这件事仍然必要（§39.2），但它补的是**原书的缺口**，不是本图自造的缺口。
+
+#### (c) **圆盘：CKG = PSL(2,R)，μ = 0**（书上 **p.168**，§6.1「The disk」，L1 逐字，**无式号**）
+
+> "The CKG of the disk is the subgroup of PSL(2,**C**) that leaves the boundary of the disk fixed.
+> For the reflection (6.1.8) this is just the subgroup of (6.1.6) with α, β, γ, δ all real, which is
+> **PSL(2,R)**, the Möbius group with real parameters. One CKV is the ordinary rotational symmetry of
+> the disk. **Again, all metrics are equivalent — there are no moduli.**"
+
+（(6.1.7) 是 `z′ = 1/z̄`，(6.1.8) 是 `z′ = z̄`；(6.1.6) 是一般 Möbius 变换 `z′=(αz+β)/(γz+δ)`，
+p.168 上方明写「we can fix αδ − βγ = 1 and identify under an overall sign reversal … This defines the group PSL(2,C)」。）
+
+#### (d) **射影平面：CKG = SO(3)，μ = 0**（书上 **p.168–169**，§6.1「The projective plane」，L1 逐字，**无式号**）
+
+> "The projective plane RP₂ can also be obtained as a **Z**₂ identification of the sphere. Identify points
+> z and z′ with
+>   z′ = −1/z̄ .   **(6.1.9)**
+> These points are diametrically opposite in the round metric (6.1.3). There are no fixed points and so no
+> boundary in the resulting space, but the space is not oriented. One fundamental region for the
+> identification is the unit disk |z| ≤ 1, with points e^{iφ} and −e^{iφ} identified. Another choice is the
+> upper half-z-plane. **There are no moduli. The CKG is the subgroup of PSL(2,C) that respects the
+> identification (6.1.9); this is just the ordinary rotation group SO(3).**"
+
+#### (e) 球面（顺带，用于 `sphere-conformal-killing-group` 的第二锚点，书上 **p.167–168**，L1）
+
+> p.167：「According to the general discussion in section 5.2, **the sphere has no moduli and six CKVs**,
+> so that in particular every metric is (diff×Weyl)-equivalent to the round metric (6.1.3).」
+> **(6.1.5a)** δz = a₀ + a₁z + a₂z² …「with three complex or six real parameters as expected from the
+> Riemann–Roch theorem.」
+> p.168：「Three of the six parameters correspond to ordinary rotations, forming an **SO(3)** subgroup of PSL(2,C).」
+
+#### (f) **κ = 3 这个数字怎么来的**
+
+原书 **§6.1 里从不写「κ(D₂) = 3」或「κ(RP₂) = 3」**，只写群。
+数字 3 的书内来源是 **(5.2.11a) `κ = 3χ`** 配 χ(D₂) = χ(RP₂) = 1。
+（另可用 **(5.4.20)** `m = μ + 2n_c + n_o − κ = −3χ + 2n_c + n_o`，书上 p.164。）
+
+#### (g) ⚠ **辟谣：Polchinski Vol.1 第 5 章里没有 κ/μ/χ 的「Table 5.1」**
+
+某些检索摘要会说「Table 5.1 是你要的表」。**本轮读了书上 pp.150–165（§5.2 起到第 5 章末），
+全章只有 Fig. 5.1 / 5.2 / 5.3 三张图，没有任何表格**；第 5 章在 p.165 以习题 5.1–5.3 结束。
+（pp.145–149 = §5.1「The circle」未读，但那一节讲环面与模群，出现 κ/μ 总表的可能性极低。）
+**图里不得出现 `loc: "Table 5.1"`。**
+
+---
+
+### 39.7 (B) 数学侧的带编号来源
+
+#### 39.7.1 ★ Miličić, *Notes on Riemann Surfaces*（Univ. of Utah, Math 6220），全 15 页 L1
+
+编号体系是 `<章>.<节>.<序>`（如「1.5.2. **Theorem.**」）。本轮要的两条：
+
+> **1.5.2. Theorem.**（书上 p.6）*The homomorphism γ ⟼ φ_γ of PSL(2,**C**) into the group of all
+> holomorphic automorphisms Aut(**P**¹) of the Riemann sphere is an isomorphism.*
+
+> **1.7.3. Theorem.**（书上 p.10）*The homomorphism γ ⟼ φ₀ ∘ φ_γ ∘ φ₀⁻¹ is a surjective homomorphism of
+> SU(1,1) onto the group of all holomorphic automorphisms Aut(D(0,1)) of D(0,1).
+> The kernel of this homomorphism is {±I}.*
+
+⚠ **「Aut(D) = PSL(2,R)」在这篇里没有单一编号。** 把 SU(1,1) 换成 SL(2,R) 靠的是 §1.9（p.11）
+的**无编号正文句**：「Therefore, Ψ : SL(2,**R**) ⟶ SU(1,1) is a group isomorphism.」（Ψ(S) = TST⁻¹，
+T = (1/√2)·[[1, i],[i, 1]]）。所以引用时**要么写「Theorem 1.7.3 + §1.9」两处，要么只引 SU(1,1) 版**。
+
+同文其余可用编号（登记备用）：1.6.1 Lemma（Aut(**C**) 是仿射）、1.6.2 Theorem、1.7.1/1.7.2 Lemma、
+1.8.1 Theorem（球面自同构必有不动点）、1.8.2 Theorem、1.11.1 Theorem（单值化）。
+
+⚠ **文件上没有印年份**，`sources.bib` 里 key 只能写 `milicic-riemann-surfaces`，
+**偏离 `literature/CLAUDE.md` 的 `<firstauthor>-<year>` 规范，请 lead 裁决**。
+
+#### 39.7.2 ★ Cao-Huu & Ghişa, arXiv:0902.2725（v1, 4 页，L1 全文）——RP₂ 唯一找到的**带编号**数学陈述
+
+期刊版：*Automation, Computers, Applied Mathematics* **13** (2004) no. 1。arXiv v1 投于 2009-02-16。
+
+设定（p.1，L1）：「The antianalytic involution h : C̄ → C̄ defined by h(z) = −1/z̄ if z ≠ 0, z ≠ ∞,
+and h(0) = ∞, h(∞) = 0 makes (C̄, h) into a symmetric Riemann surface.
+The real projective plane P² = C̄/⟨h⟩ endowed with the unique dianalytic structure which makes the
+canonical projection π : C̄ → P² a dianalytic function, represents a nonorientable Klein surface.」
+——**注意 h 与 Polchinski 的 (6.1.9) `z′ = −1/z̄` 逐字相同**。
+
+> **Corollary 3.1.**（书上 p.2，L1 逐字）*The dianalytic automorphisms of P² have the representation:*
+>   g(z̃) = G̃(z)  *or*  g(z̃) = G̃(z̄), *where **G is a rotation of the Riemann sphere**.*
+
+配套的（§2，p.2，**式 (2)，非定理**）：「any dianalytic automorphism of P² has the representation
+g(z̃) = G̃(z), or g(z̃) = G̃(z̄), where G(z) = e^{iθ}(az+b)/(−b̄z+ā), |a|+|b| ≠ 0, θ ∈ R」。
+
+⚠ **四条限制，必须随引用一起写**：
+1. **原文不出现「SO(3)」、不出现「PSU(2)」、不出现「维数 3」。**
+   从「球面旋转群」到「SO(3)，实维 3、κ = 3」是**使用者的补步**（标准，但不是来源原文）。
+2. **证明外包**：上游 Theorem 2.1 明写「We have shown in [5]」，[5] = Bârză & Ghişa,
+   *Dynamics of Dianalytic Transformations of Klein Surfaces*, **Mathematica Bohemica 129 (2004) no. 2, 129–140**
+   （本轮未获取）。Corollary 3.1 的证明本身只有半页，且是「验证 z ↦ e^{iα}(z−z₀)/(1+z̄₀z) 是球面旋转」这一步。
+3. **归一化条件写得不严**：`|a| + |b| ≠ 0` 不足以刻画 PSU(2)（需 `|a|²+|b|² = 1` 后投影化；
+   前置的 `e^{iθ}` 可被吸收进 a,b，实测无碍）。**不要照抄这行当定义。**
+4. 期刊层级低、正文有笔误（§3 开头把 **Theorem 2.1** 称作「Theorem 1」）。
+
+#### 39.7.3 第二来源：Bârză & Ghişa, *Excerpts of Analysis on Klein Surfaces*, Rev. Roumaine Math. Pures Appl. **54** (2009) 5–6, 395–406（L1 pp.395–402）
+
+免费 PDF：`csm.ro/reviste/Revue_Mathematique/pdfs/2009/5-6/5Barza.pdf`。
+
+框架性定理（L1 逐字，节录）：
+- **Theorem 1**（p.396）对称 Riemann 面 (O₂; k) 的商 O₂/⟨k⟩ 是不可定向 Klein 面；反之每个不可定向
+  Klein 面都同构于某个这样的商。
+- **Theorem 3**（p.397）P²/NOKS 上的 dianalytic 映射与双叶覆盖上与 k 交换的解析映射一一对应
+  （「can be lifted to a unique **analytic** mapping F : O₂ → O₂ commuting with k」）。
+- **Theorem 4**（p.397）P² 的全部 dianalytic **变换**的显式形式（(2n+1) 次有理式）。
+
+⚠ **最容易引错的一点**：真正说「P² 的 dianalytic **自同构**都形如 G̃(cl[z]) = cl[G(z)] 或 cl[G(z̄)]，
+G(z) = e^{iθ}(az+b)/(−b̄z+ā)」的那句，在 **p.398 顶端，是 Theorem 4 与 Theorem 5 之间的无编号行间陈述**，
+**不是 Theorem 4**。（检索摘要会把它说成 Theorem 4——错的。）
+同处也自陈「We have proved the following results (see [11])」，证明同样外包。
+
+#### 39.7.4 未能找到 / 明确的空白
+
+- **Alling–Greenleaf, LNM 219 (1971)**：archive.org 有扫描（`foundationsofthe0219alli`），但是**借阅限制项**，
+  按 [[reference_archive-org-reprint-fulltext-route]] 记的规律，`fulltext/inside.php` 与 `_djvu.txt` 一律 403。
+  **本轮未取到，任何编号都是 L0。**（唯一旁证：某综述称该书的编号形如「Theorem 1.3.6 (Ahlfors), p. 16」，
+  即三级编号——但这是 L4，不足以推出别的定理号。）
+- **Klein 曲面自同构群的主流文献（Bujalance–Cirre–Gamboa 等）全部假设代数亏格 ≥ 2**（那里 Aut 有限），
+  **代数亏格 0 的 RP² 恰恰被排除在外**。这是一个真实的文献空白，不是我没找到。
+- **Farkas–Kra / Jost / Forster**：均未获取（付费墙），本轮未尝试逐条突破。
+- arXiv:2502.13269（*Superstring scattering on the real projective plane*）据检索摘要称
+  「the conformal Killing group of the real projective plane is **SU(2)**」——**L4，正文未获取**。
+  ⚠ 若属实，它与 Polchinski 的 **SO(3)** 相差一个 **Z₂**（SU(2) 是二重覆盖，有效作用的是 PSU(2) ≅ SO(3)）。
+  **这不影响 κ = 3（两者李代数同为 su(2)），但如果哪天要写「CKG 是哪个群」，两种写法并存于文献中，须写明取哪一种。**
+
+---
+
+### 39.8 ★★ 对**现有卡片**的三条订正（本轮读原书直接得到，优先级高于新建卡）
+
+#### (A) `worldsheet.positive-euler-number-no-moduli--via-surface-enumeration` 的 `gaps` 有两条已作废
+
+- gaps 第 1 条写：「**原书未给直接论证** … **Polchinski 原书是否给出直接论证，本项目未核实**」
+  → **已核实：原书给了**（§39.6(a)，(5.2.10) + (5.2.11a) + 「A similar argument shows」）。
+  这条 gap 必须改写为：「原书给的是**正定性论证**，但 χ > 0 那一半只有一句 "A similar argument shows"，
+  且论证依赖两条原书不证不引的输入（常曲率度规的存在、R 的符号 = χ 的符号）。」
+- `summary` 里「原书只把本条作为 (5.2.10) 的**对偶断言**（χ < 0 ⇒ κ = 0 的镜像）给出，未附论证」
+  **是错的**：(5.2.10) 是那条正定性积分恒等式本身，(5.2.11a/b) 才是结论对；
+  原书是**对 χ < 0 写出论证、对 χ > 0 声明同型**。
+- `notes` 的升级路径 (d)「若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
+  另建一条 `--via-positivity` 推导」→ **条件已满足，建议现在就建**（见 §39.9(3)）。
+
+#### (B) 伴读者 [S] 那段被逐字转引的枚举论证**本身有毛病**，不宜作为论证骨架
+
+现节点 `sources[].note` 逐字转引的 [S] 句子是：
+「We know that for closed oriented surfaces, the Euler number is χ = 2 − 2g … **The only close oriented
+surface with χ > 0 therefore has g = 0, i.e. is the sphere, the disk or the projective plane**」。
+——**「closed oriented surface」与「the disk or the projective plane」自相矛盾**（圆盘有边、RP₂ 不可定向），
+而且 χ = 2 − 2g 这条公式只对闭可定向曲面成立，根本推不出圆盘与 RP₂。
+**Polchinski 自己的那句（§39.6(b)，p.166）是干净的**：「There are three Riemann surfaces of positive Euler
+number: the sphere, the disk, and the projective plane.」
+→ 建议 curator **把枚举路线的书内锚点从 [S] 换成原书 p.166**，并保留 [S] 引文只作为「本图为何走枚举」的历史记录。
+
+#### (C) `worldsheet.disk-conformal-killing-group` 卡：**歧义结案 + `loc` 三处要改**
+
+1. **歧义结案（本轮最干净的一条）**。卡片 `notes` 记的「[S] 说两种循环序 *is linked by* PSL(2,R)，
+   抽取记录说 *不被* 联系，两者相反」——**原书站在「不被联系」一边，且是逐字**（书上 **p.178**，§6.4 开头，L1）：
+   > "We represent the disk as the upper half-plane so the boundary coordinate y is real. **There are no moduli.**
+   > After fixing the metric, the CKG **PSL(2,R)** can be used to fix the three vertex operators to arbitrary
+   > positions y₁, y₂, y₃ on the boundary, except that **this group does not change the cyclic ordering of the
+   > vertex operators so we must sum over the two orderings**."
+   → 卡片选的方向正确；`notes` 里理由 (a)「**这是 curator 的数学论证、不是文献内容**」这句限定
+   **可以撤销**，改成「原书 p.178 明写」。**[S] 那句确认为 Schrans 的错误**，可加进
+   [[lit-polchinski-v1-equation-anchors]] 的「[S] 已确证的错误」清单。
+2. **`loc` 的页码错了**：§6.4 开头在书上 **p.178**（不是「p.179 附近」）。
+3. **`loc` 里的「3χ = κ − μ = 3 − 0」不在 §6.4**。我读了书上 pp.178–181，**没有这条式子**。
+   §6.4 开头只说「There are no moduli」并点名 PSL(2,R)。
+   `κ − μ = 3χ` 的书内位置是 **§5.2 (5.2.9)**（原书写作 `μ − κ = −3χ`，见 [[lit-polchinski-v1-equation-anchors]]）
+   与 **(5.2.11a) `κ = 3χ, μ = 0`**。**建议把这半句从 §6.4 的 loc 里摘出去，另挂 (5.2.11a)。**
+4. **「PSL(2,R)」这个记号写在原书哪里——已核实**：出现在 **两处，均无式号**——
+   **p.168**（§6.1「The disk」，(6.1.8) 之后）与 **p.178**（§6.4 开头）。卡片里那条
+   「⚠ **「PSL(2,R)」这个记号写在原书哪一式未核实**」可以撤销。
+5. ⚠ **唯一性没有书内支持**：卡片 statement (2) 写「**存在唯一的** PSL(2,R) 元把它们送到任一组指定的同循环序的三点」。
+   原书只写「can be used to fix the three vertex operators to **arbitrary positions**」，
+   **没有「唯一」**。唯一性要么挂 `math.mobius-group-sharply-three-transitive`，要么在 note 里注明「唯一性非书内陈述」。
+
+---
+
+### 39.9 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+> 我不代 curator/auditor 做任何裁决。以下只是把「哪条陈述能挂哪条编号」摆出来。
+
+#### (1) 新 statement `math.classification-of-compact-surfaces`
+
+```yaml
+kind: proposition          # 命题不填 status，由 derivation 计算
+title: 紧曲面分类定理（含带边、含不可定向）
+statement: |
+  两个紧曲面（含带边）同胚，当且仅当它们的可定向性、边界分支数（contour 数）与
+  Euler–Poincaré 示性数三者全部相同。
+sources:
+  - ref: gallier-xu-2013
+    loc: "Ch. 6 §6.3, Theorem 6.2, p. 97（三角化版 Theorem 6.1, p. 96）"
+    note: |
+      L1 逐页核实（math-sources.md §39.2.1）。三条限制：
+      (a) 原文用 "number of contours"，不是 "number of boundary components"；
+      (b) Theorem 6.2 依赖「每个曲面/带边曲面可三角化」，原书 p.96 自陈该证明「far from trivial」
+          且放在 Appendix E（Thomassen 的证明），正文不证；
+      (c) 出版版编号 6.2 与 arXiv 版（gallier-2008-surfaces）编号 5.3.2 不可互换。
+  - ref: massey-1967
+    loc: "Ch. I §10「The classification of compact, connected 2-manifolds with boundary」, pp. 37-42（定理编号未核实，不得写 Theorem 10.1）"
+    note: "仅目录 L1（math-sources.md §39.3）。闭曲面那条是 Theorem 5.1（由 §7 标题「Proof of Theorem 5.1」佐证）。"
+```
+
+配一条 derivation `math.classification-of-compact-surfaces--via-normal-forms`，
+`kind: proof`、`status: rigorous`，`sources` 同上，**并在 `gaps` 里写死上面的 (b)**（三角化外包）。
+
+#### (2) 新 statement `math.positive-euler-characteristic-surfaces`（**这才是 ch.5 那条推导真正要的**）
+
+```yaml
+kind: proposition
+title: χ > 0 的紧连通曲面只有三种：S²、D²、RP²
+statement: |
+  设 M 是紧连通二维曲面（允许有边、允许不可定向），χ(M) 是其 Euler 数。
+  若 χ(M) > 0，则 M 同胚于球面 S²（χ = 2）、圆盘 D²（χ = 1）或实射影平面 RP²（χ = 1）三者之一。
+```
+derivation `--via-normal-form-enumeration`：
+- `depends_on`: `math.classification-of-compact-surfaces`；
+- `sources`: `gallier-xu-2013`，`loc: "Definition 6.5, pp. 88-89（type (I) p>=0,q>=0；type (II) p>=1,q>=0）+ χ(K)=2-2p-q / χ(K)=2-p-q, pp. 89-90（无编号行间式）+ 身份认定 p.90（RP²）、p.102（圆盘 p=0,q=1；莫比乌斯带 p=q=1）"`；
+- ⚠ `summary` 里必须写明：**「χ > 0 ⇒ 只剩三种」这条不等式求解在来源里不存在，是本图补的两行算术**；
+  对应的边或该条 source 建议标 `inferred: true`，或由 auditor 判定这属于「来源直接蕴含的平凡推论」。
+- 最近的落选者 **莫比乌斯带 χ = 0**（p = q = 1）值得写进 `notes`，因为它是唯一会被「χ ≥ 0」误纳的曲面。
+
+#### (3) ★ 新 derivation `worldsheet.positive-euler-number-no-moduli--via-positivity`
+
+这是原书自己的论证，**与现有的 `--via-surface-enumeration` 并列，不替换它**。
+
+```yaml
+target: worldsheet.positive-euler-number-no-moduli
+kind: physical-argument
+status: physical-argument
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 与 (5.2.11a), p.152"
+gaps:
+  - "原书对 χ < 0（κ = 0）写出了完整正定性论证，对本条（χ > 0 ⇒ μ = 0）**只有一句 'A similar argument shows that P₁ᵀδ′g cannot vanish for positive χ'**，未写出。"
+  - "论证依赖『总可用 Weyl 变换取到常数标量曲率 R 的度规』——原书逐字写 'we first **cite the fact**'，不证、不给引文（即单值化定理）。"
+  - "论证依赖『R 的符号与 χ 相同』（Gauss–Bonnet），原书同样不证不引。"
+```
+→ **status 建议 `physical-argument`**：论证骨架是原书的、方向清晰，但本图关心的那一半原书没写出来，
+且两条输入外包。**是否可升到 `rigorous`，由 auditor 定。**
+**（若采纳，`--via-surface-enumeration` 的 gaps 第 1 条与 notes(d) 应同步改写，见 §39.8(A)。）**
+
+#### (4) 新 statement `worldsheet.rp2-conformal-killing-group`
+
+```yaml
+kind: proposition
+title: 射影平面的共形 Killing 群是 SO(3)，κ(RP₂) = 3，μ(RP₂) = 0
+statement: |
+  RP₂ 实现为球面在对合 z′ = −1/z̄ 下的 Z₂ 商（无不动点，故无边界，且不可定向）。则：
+  (1) RP₂ 无模：μ(RP₂) = 0；
+  (2) 其共形 Killing 群是 PSL(2,C) 中与该认同相容的子群，即通常的旋转群 SO(3)；
+  (3) 由 χ(RP₂) = 1 与 κ = 3χ 得 κ(RP₂) = 3。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」, pp. 168-169，认同式 (6.1.9)；『There are no moduli』与『the CKG … is just the ordinary rotation group SO(3)』均为**无式号**正文句"
+    note: |
+      L1 原书页图核实（math-sources.md §39.6(d)）。⚠ 原书**不写** κ(RP₂)=3 这个数字，
+      数字来自同书 (5.2.11a) κ = 3χ 与 χ(RP₂) = 1。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p.152（κ = 3χ, μ = 0 for χ > 0）"
+  - ref: caohuu-ghisa-2004
+    loc: "Corollary 3.1（arXiv:0902.2725v1, p.2）"
+    note: |
+      数学侧独立来源，L1（math-sources.md §39.7.2）。原文逐字只说自同构「is a rotation of the
+      Riemann sphere」，**不出现 SO(3)/PSU(2)/维数 3**；证明外包给 Barza-Ghisa, Math. Bohemica 129 (2004) 129-140。
+      同文用的对合 h(z) = −1/z̄ 与 Polchinski (6.1.9) 逐字相同。
+```
+- `uses_conventions`: `conv.worldsheet-euclidean`、`conv.worldsheet-complex-coords`（与 disk 卡一致）。
+- 建议同时建 derivation `--via-sphere-involution`，`kind: physical-argument`，
+  `depends_on`: `worldsheet.sphere-conformal-killing-group`（CKG(S₂) = PSL(2,C)）
+  + `worldsheet.riemann-roch-kappa-minus-mu`（给 κ = 3χ）。
+- ⚠ **文献分歧要写进 note**：arXiv:2502.13269 据称写「CKG of RP² is **SU(2)**」（L4，未核实）。
+  SU(2) 与 SO(3) 差一个 Z₂，κ 不受影响，但群的写法两说并存。
+
+#### (5) `worldsheet.disk-conformal-killing-group`（已存在）：按 §39.8(C) 改 `loc` 与 `notes`
+
+建议的新 `loc`（可直接抄）：
+
+```yaml
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The disk」, p.168（(6.1.8) 之后）：CKG 是 PSL(2,C) 中保持圆盘边界的子群 = PSL(2,R)，且『there are no moduli』；**无式号**"
+    note: |
+      L1 原书页图核实（math-sources.md §39.6(c)）。原书用 (6.1.7) z′=1/z̄ 与共形等价的 (6.1.8) z′=z̄，
+      并在 p.168 上方由 (6.1.6) + αδ−βγ=1 + 整体反号认同定义 PSL(2,C)。
+  - ref: polchinski-1998-v1
+    loc: "§6.4 开头, p.178：『There are no moduli. After fixing the metric, the CKG PSL(2,R) can be used to fix the three vertex operators to arbitrary positions y₁,y₂,y₃ on the boundary, except that this group does not change the cyclic ordering … so we must sum over the two orderings.』；**无式号**"
+    note: |
+      L1 原书页图核实。**本条直接结案了卡片 notes 里的文献歧义：原书站「不被 PSL(2,R) 联系」一边。**
+      ⚠ 原书只说 arbitrary positions，**没有说「唯一」**；唯一性须另挂 math.mobius-group-sharply-three-transitive。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p.152（κ = 3χ, μ = 0 for χ > 0；配 χ(D₂)=1 给 κ=3）"
+```
+并**删掉**旧 loc 里的「3χ = κ − μ = 3 − 0」与「p.179 附近」，
+**撤销** notes 里「PSL(2,R) 记号未核实」与「(a) 是 curator 的数学论证、不是文献内容」两处。
+
+#### (6) 数学侧的可选补强
+
+若 curator 想给 (4)(5) 各挂一条**纯数学**依赖：
+
+```yaml
+# 圆盘
+- ref: milicic-riemann-surfaces
+  loc: "Theorem 1.7.3, p.10（Aut(D(0,1)) ≅ SU(1,1)/{±I}）+ §1.9, p.11 的无编号句（SL(2,R) ≅ SU(1,1)）"
+  note: "L1。⚠ 「Aut(D) = PSL(2,R)」在该文献里**没有单一编号**，是两处合成。"
+# 球面（给 sphere 卡）
+- ref: milicic-riemann-surfaces
+  loc: "Theorem 1.5.2, p.6（PSL(2,C) → Aut(P¹) 是同构）"
+# 射影平面
+- ref: caohuu-ghisa-2004
+  loc: "Corollary 3.1（arXiv:0902.2725v1, p.2）"
+```
+
+#### (7) 三条禁令
+
+1. **不得写 `Massey … Theorem 10.1`**（§39.3）。
+2. **不得写 `Polchinski Vol.1 Table 5.1`**——第 5 章没有表格（§39.6(g)）。
+3. **不得把 RP² 自同构那条引成 `Bârză–Ghişa Theorem 4`**——那句是 Theorem 4 与 5 之间的**无编号**陈述（§39.7.3）。
+
+---
+
+### 39.10 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Polchinski Vol.1 ch.5 正文** | Cambridge Core `…/2619B77DD4AE2BE4D53B5EED5D3BE3C1/9780511816079c5_p145-165_CBO.pdf/…` | **成功**（243 KB；读 pp.150–165；**PDF 页 = 书页 − 144**） |
+| **Polchinski Vol.1 ch.6 正文** | Cambridge Core `…/F440F6B46EB4150F96EAEAFDDF9F0D76/9780511816079c6_p166-205_CBO.pdf/…` | **成功**（404 KB；读 pp.166–181；**PDF 页 = 书页 − 165**） |
+| **Gallier–Xu 出版版全书** | `cis.upenn.edu/~jean/surfclassif-root.pdf` | **成功**（3.5 MB；**PDF 页 = 书页 + 10**，前置 roman 页 = PDF 页 + 2） |
+| **Gallier arXiv 版** | `arxiv.org/pdf/0805.0562` | **成功**（947 KB；**PDF 页 = 书页**） |
+| Gallier 草稿版（两个镜像） | `cis.upenn.edu/~jean/surfclass-n.pdf`；`cs.brynmawr.edu/~dxu/surfclassif.pdf` | **失败：两次都只回来 28 页**（2.7 MB，只到第 1 章）——**新增死路** |
+| ar5iv 版 0805.0562 | `ar5iv.arxiv.org/html/0805.0562` | **失败**：「Conversion to HTML had a Fatal error」 |
+| **Massey 1967 目录扫描** | `external.dandelon.com/download/attachments/dandelon/ids/DE00420A6F9CE221E6E38C12579A000352287.pdf` | **成功**（92.6 KB，6 页扫描）——**新增活路：dandelon 是取旧书目录页的稳定入口** |
+| **Munkres Thm 77.5（转引）** | `faculty.etsu.edu/gardnerr/Knot-Theory/Notes-Livingston/Livingston-Knot-4-2.pdf` | **成功**（352 KB；p.2 逐字带出处） |
+| **Hatcher ch.1** | `pi.math.cornell.edu/~hatcher/AT/ATch1.pdf` | **成功**（1 MB；**PDF 页 = 书页 − 20**） |
+| **Miličić 讲义** | `math.utah.edu/~milicic/Math_6220/rsurfaces.pdf` | **成功**（163 KB，15 页全读；**PDF 页 = 书页**） |
+| **Cao-Huu–Ghişa** | `arxiv.org/pdf/0902.2725` | **成功**（72 KB，4 页全读） |
+| **Bârză–Ghişa 2009** | `csm.ro/reviste/Revue_Mathematique/pdfs/2009/5-6/5Barza.pdf` | **成功**（198 KB；读 pp.395–402；**PDF 页 = 刊页 − 394**） |
+| ETH 学士论文 | `people.math.ethz.ch/~acannas/Student_Papers/BSc_Theses/2023_bsc_da_silva_classification_of_surfaces.pdf` | **成功**（3.4 MB；**PDF 页 = 书页 + 6**） |
+| Alling–Greenleaf LNM 219 | archive.org `foundationsofthe0219alli` | **未尝试正文**（借阅限制项，按既往规律必 403） |
+| arXiv:2502.13269 正文 | `arxiv.org/abs/2502.13269` | **失败**（abs 页只有摘要，摘要里没有 CKV 陈述；未取 PDF） |
+
+> **两条可复用的经验**：
+> (1) **dandelon.com** 的 `external.dandelon.com/download/attachments/dandelon/ids/<ID>.pdf` 提供**旧书的目录扫描页**，
+> 对「只想确认某章某节标题与页码」的场景够用，且不被拦——这是本轮拿到 Massey 结构的唯一手段。
+> (2) **同一本书的作者主页往往挂着多个版本，编号可能完全不同**（Gallier 一人挂了三份），
+> 取正文前先看标题页日期与目录，**不要假设 arXiv 版 = 出版版**。
+
+**未解决 / 留给下一轮：**
+
+- **Q30** **Massey 里带边分类定理的编号（L0）。** GTM 56 (2nd ed. 1987) 或 GTM 127 (1991) 的 Ch. I §10。
+  可能的下一招：找一篇**逐字引用了它的定理号**的论文；或找 GTM 127 的公开扫描（Springer 认证墙）。
+  在拿到之前，图里只能写「Ch. I §10, pp. 37–42」。
+- **Q31** **Massey 1967 / GTM 56 / GTM 127 三个版本的 Chapter I 定理编号是否一致（L0）。**
+  本轮只有 1967 Harcourt 版的目录。
+- **Q32** **Bârză & Ghişa, Mathematica Bohemica 129 (2004) 129–140** 正文——
+  这是 RP² 自同构那条结论**唯一的真正证明出处**（0902.2725 与 RRMPA 2009 都把证明外包给它）。
+  `dml.cz` 有 Mathematica Bohemica 全文开放，值得一试。
+- **Q33** **Alling–Greenleaf LNM 219 里有没有 RP²（代数亏格 0）自同构群的带编号定理。**
+  它是这一支文献人人引的标准参考，但本轮无人给出具体编号。
+- **Q34** **arXiv:2502.13269 正文里「CKG of RP² = SU(2)」的确切措辞**，
+  以确认它与 Polchinski 的 SO(3) 是笔误还是有意（覆盖群 vs 有效作用群）。
+- **Q35** **Polchinski Vol.1 §5.1（书上 pp.145–149）未读**——用于最终排除「第 5 章有 κ/μ/χ 总表」的可能。
+- **Q36** **Miličić 讲义的年份**（文件上未印）。影响 `sources.bib` 的 key 是否合规。

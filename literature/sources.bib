@@ -2027,3 +2027,147 @@
              重印本把期刊页码换成书页码；本图 green-schwarz-1984 的 loc 一律写「PLB p.NNN（重印 MMM）」，
              其中「重印 608+k <-> PLB 117+k」这条映射是**推出来的**（§0.3），不是页面直证。}
 }
+% ===================================================================
+% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
+% 抽取记录：literature/extractions/math-sources.md §39
+% ===================================================================
+
+@book{gallier-xu-2013,
+  author    = {Gallier, Jean and Xu, Dianna},
+  title     = {A Guide to the Classification Theorem for Compact Surfaces},
+  series    = {Geometry and Computing},
+  volume    = {9},
+  publisher = {Springer},
+  year      = {2013},
+  doi       = {10.1007/978-3-642-34364-3},
+  note      = {由 researcher 于 2026-09-11 登记。**Ch.6 已 L1 逐页核实**（math-sources.md §39.2），
+               作者自建的公开 PDF（与出版版同编号，编译日期 2025-01-08）在
+               https://www.cis.upenn.edu/~jean/surfclassif-root.pdf 。
+               本项目需要的编号：**Theorem 6.2**（书上 p.97）=「Two compact surfaces or compact surfaces with boundary
+               are homeomorphic iff they agree in character of orientability, number of contours, and
+               Euler-Poincare characteristic.」；配套 **Definition 6.5**（p.88-89，规范胞腔复形 type (I) p>=0,q>=0 /
+               type (II) p>=1,q>=0）与 **Lemma 6.1**（每个胞腔复形等价于某个规范胞腔复形）。
+               ⚠ **chi(K) = 2 - 2p - q（type I）与 chi(K) = 2 - p - q（type II）在书上 p.89-90 是无编号的行间公式**，
+               不得写成定理号；p.103 的 g=(2-chi-q)/2 与 g=2-chi-q 同样无编号。
+               ⚠ **版本陷阱**：作者早期的 arXiv 版 = gallier-2008-surfaces，编号完全不同（Theorem 5.3.2 对应本书 Theorem 6.2）。}
+}
+
+@misc{gallier-2008-surfaces,
+  author = {Gallier, Jean},
+  title  = {The Classification Theorem for Compact Surfaces and a Detour on Fractals},
+  year   = {2008},
+  eprint = {0805.0562},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.GM},
+  note   = {由 researcher 于 2026-09-11 登记。**v1 已 L1 逐页核实**（math-sources.md §39.2）。
+               这是 gallier-xu-2013 的**单作者早期版本，章节与定理编号完全不同**：
+               本书 Ch.6 在这里是 Ch.5；**Theorem 5.3.2**（p.66）= 出版版 **Theorem 6.2**；
+               Theorem 5.3.1 = 6.1；Theorem 5.3.4 = 6.3；Lemma 5.2.5 = Lemma 6.1；Definition 5.2.4 = Definition 6.5。
+               chi 公式同样无编号（p.59）。**若图里引用，务必写清是 arXiv 版还是出版版，不可混用编号。**
+               本条登记的唯一理由是它完全免费且可直读；正式引用建议用 gallier-xu-2013。}
+}
+
+@book{massey-1967,
+  author    = {Massey, William S.},
+  title     = {Algebraic Topology: An Introduction},
+  publisher = {Harcourt, Brace \& World},
+  address   = {New York},
+  year      = {1967},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取；只有目录页 L1**（扫描件 external.dandelon.com，
+               math-sources.md §39.3）。目录逐字：Chapter One「Two-Dimensional Manifolds」
+               §5「Statement of the classification theorem for compact surfaces」p.10；
+               §7「**Proof of Theorem 5.1**」p.18；§8「The Euler characteristic of a surface」p.29；
+               §9「Manifolds with boundary」p.35；§10「The classification of compact, connected 2-manifolds
+               with boundary」p.37；§11「The Euler characteristic of a bordered surface」p.42。
+               ⚠ **只有「Theorem 5.1 = 紧曲面分类定理」这一条有 L1 证据（来自 §7 的标题）。
+               §10 里那条带边分类定理的编号完全未核实（L0）——严禁写「Theorem 10.1」。**
+               ⚠ 本书后由 Springer 重印为 GTM 56（2nd ed. 1987），并被吸收进 GTM 127
+               *A Basic Course in Algebraic Topology* (1991) 的 Chapter I；**跨版本编号是否一致未核实。**}
+}
+
+@book{munkres-2000,
+  author    = {Munkres, James R.},
+  title     = {Topology},
+  edition   = {2},
+  publisher = {Prentice Hall},
+  address   = {Upper Saddle River, NJ},
+  year      = {2000},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取；Theorem 77.5 的文字为 L2**
+               （第三方课程讲义逐字转引并注明出处，math-sources.md §39.4）：
+               「**Theorem 77.5. The Classification Theorem.** Let X be the quotient space obtained from a
+               polygonal region in the plane by pasting its edges together in pairs. Then X is homeomorphic
+               to either S^2, to the n-fold torus T, or to the m-fold projective plane P_m.」
+               ⚠ **本条不能用来支撑本项目要的陈述**：它只讲闭曲面（多边形边两两粘合），
+               **既不含带边曲面，也不出现 Euler 数**。登记只是为了把这条「看起来对口其实不对口」的候选钉死。}
+}
+
+@book{hatcher-2002,
+  author    = {Hatcher, Allen},
+  title     = {Algebraic Topology},
+  publisher = {Cambridge University Press},
+  year      = {2002},
+  url       = {https://pi.math.cornell.edu/~hatcher/AT/ATpage.html},
+  note      = {由 researcher 于 2026-09-11 登记。**Ch.1 免费 PDF 已取到，§1.2 全段 L1 读完**（math-sources.md §39.5）。
+               ⚠ **登记的是一条否定结论**：§1.2 结尾（书上 pp.49-52，小标题「Applications to Cell Complexes」）
+               只有 Proposition 1.26、**Corollary 1.27**（「The surface M_g is not homeomorphic, or even homotopy
+               equivalent, to M_h if g != h.」）、Corollary 1.28、Example 1.29，随后就是习题与 §1.3。
+               **§1.2 里没有任何形式的紧曲面分类定理（有编号的没有，无编号的也没有），也完全不涉及带边曲面。**
+               不可作为 math.classification-of-compact-surfaces 的来源。}
+}
+
+@misc{milicic-riemann-surfaces,
+  author = {Mili{\v c}i{\'c}, Dragan},
+  title  = {Notes on Riemann Surfaces},
+  howpublished = {讲义, University of Utah, Math 6220},
+  url    = {https://www.math.utah.edu/~milicic/Math_6220/rsurfaces.pdf},
+  note   = {由 researcher 于 2026-09-11 登记，**全文 15 页已 L1 读完**（math-sources.md §39.6）。
+               ⚠ **文件上没有印任何年份**，故 key 不带年份，**偏离 literature/CLAUDE.md 的 key 规范**，
+               请 lead 决定是否改名（例如按访问年写 milicic-2026）。访问日期 2026-09-11。
+               可引编号：**Theorem 1.5.2**（p.6）「The homomorphism gamma -> phi_gamma of PSL(2,C) into the group of
+               all holomorphic automorphisms Aut(P^1) of the Riemann sphere is an isomorphism.」；
+               **Theorem 1.7.3**（p.10）「The homomorphism gamma -> phi_0 o phi_gamma o phi_0^{-1} is a surjective
+               homomorphism of SU(1,1) onto the group of all holomorphic automorphisms Aut(D(0,1)) of D(0,1).
+               The kernel of this homomorphism is {\textpm}I.」；另有 Theorem 1.6.2（Aut(C)）、Theorem 1.8.1、
+               Theorem 1.11.1（单值化）。
+               ⚠ **「SL(2,R) 与 SU(1,1) 同构」在 §1.9（p.11）是无编号的正文句**（「Therefore, Psi : SL(2,R) -> SU(1,1)
+               is a group isomorphism.」），所以「Aut(D) = PSL(2,R)」这个合成结论**在本文献里没有单一编号可引**。}
+}
+
+@misc{caohuu-ghisa-2004,
+  author = {Cao-Huu, Tuan and Ghi{\c s}a, Dorin},
+  title  = {Geometry and Iteration of Dianalytic Transformation},
+  year   = {2004},
+  eprint = {0902.2725},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.CV},
+  note   = {由 researcher 于 2026-09-11 登记，**arXiv v1 全文 4 页已 L1 读完**（math-sources.md §39.7）。
+               期刊版：*Automation, Computers, Applied Mathematics* **13** (2004), no. 1（arXiv 于 2009-02-16 投稿）。
+               本项目要的那条是 **Corollary 3.1**（arXiv v1 p.2，逐字）：
+               「The dianalytic automorphisms of P^2 have the representation: g(z~) = G~(z) or g(z~) = G~(z_bar),
+               where **G is a rotation of the Riemann sphere**.」
+               ⚠ 三条限制：(a) 原文**不写 SO(3)、不写 PSU(2)、不写维数 3**，「旋转群 = SO(3) 且实维数 3」是使用者的补步；
+               (b) 该推论的上游 Theorem 2.1 明写「We have shown in [5]」，**证明外包给 Barza-Ghisa, Mathematica Bohemica
+               129 (2004) 129-140**（本轮未获取）；
+               (c) 文中 (2) 写 G(z) = e^{i theta}(az+b)/(-b_bar z + a_bar), |a|+|b| != 0，**归一化条件写得不严**
+               （PSU(2) 需要 |a|^2+|b|^2=1；e^{i theta} 可被吸收，实测无碍，但措辞不可照抄当定义）。
+               期刊层级较低、正文有笔误（§3 把 Theorem 2.1 称作「Theorem 1」），引用时须注明。}
+}
+
+@article{barza-ghisa-2009,
+  author  = {B{\^a}rz{\u a}, Ilie and Ghi{\c s}a, Dorin},
+  title   = {Excerpts of Analysis on {K}lein Surfaces},
+  journal = {Revue Roumaine de Math{\'e}matiques Pures et Appliqu{\'e}es},
+  volume  = {54},
+  number  = {5--6},
+  pages   = {395--406},
+  year    = {2009},
+  url     = {https://www.csm.ro/reviste/Revue_Mathematique/pdfs/2009/5-6/5Barza.pdf},
+  note    = {由 researcher 于 2026-09-11 登记，**pp.395-402 已 L1 读到**（math-sources.md §39.7）。
+               提供 caohuu-ghisa-2004 的独立第二来源与更完整的框架：**Theorem 1**（p.396，对称 Riemann 面 <-> 不可定向
+               Klein 面）、**Theorem 3**（p.397，双叶覆盖上的提升）、**Theorem 4**（p.397，P^2 的全部 dianalytic 变换的形式）。
+               ⚠ **最关键的一条陷阱**：真正说「P^2 的 dianalytic **自同构** 都形如 G~(cl[z]) = cl[G(z)] 或 cl[G(z_bar)]，
+               G(z)=e^{i theta}(az+b)/(-b_bar z+a_bar)」的那句话在 **p.398 顶端，是 Theorem 4 与 Theorem 5 之间的
+               无编号行间陈述**，**不是 Theorem 4**。引用自同构结论时**不得写「Theorem 4」**。
+               该页同样自陈「We have proved the following results (see [11])」，证明外包。}
+}
+
