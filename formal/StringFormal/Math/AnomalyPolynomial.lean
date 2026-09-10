@@ -159,4 +159,69 @@ theorem anomaly_polynomial_factorized_eq_expanded (n trR2 trR4 trR6 TrF2 TrF4 Tr
   unfold IhatN1Factorized IhatN1Expanded Ihat8 Ihat56 Y4 X8
   ring
 
+/-! ### Type IIB: the gravitational anomaly (Polchinski (12.2.13), (12.2.14)) -/
+
+/-- Polchinski (12.2.13), the anomaly twelve-form of a self-dual five-form field strength
+`[5]₊`, transcribed verbatim:
+
+```
+Î_SD(R₂) = 992 tr(R₂⁶)/725760 − 448 tr(R₂⁴)tr(R₂²)/552960 + 128 [tr(R₂²)]³/1327104
+```
+-/
+noncomputable def IhatSD (trR2 trR4 trR6 : K) : K :=
+  992 * trR6 / 725760 - 448 * trR4 * trR2 / 552960 + 128 * trR2 ^ 3 / 1327104
+
+/-- The purely gravitational twelve-form of a `d = 10` chiral field content consisting of
+`n32` gravitinos **56**, `n12` Majorana–Weyl fermions **8** and `nA` self-dual tensors
+`[5]₊`, all counted *net* of their parity conjugates (a **8′** counts as `-1` towards
+`n12`, etc., since "parity interchanges the two fields in each pair so these make
+opposite contributions to the anomaly").
+
+The fermion term is `Ihat8` at `n = 1` and vanishing gauge traces: type IIB has no gauge
+fields, and a neutral field sits in the trivial representation so `n = Tr(1) = 1`. -/
+noncomputable def IhatIIB (n32 n12 nA trR2 trR4 trR6 : K) : K :=
+  n12 * Ihat8 1 trR2 trR4 trR6 0 0 0 + n32 * Ihat56 trR2 trR4 trR6
+    + nA * IhatSD trR2 trR4 trR6
+
+/-- **Polchinski (12.2.14).** Type IIB supergravity has "two **8′**s, two **56**s, and one
+`[5]₊`", i.e. `n32 = 2`, `n12 = -2`, `nA = 1`, and
+
+```
+Î_IIB(R₂) = −2Î_8(R₂) + 2Î_56(R₂) + Î_SD(R₂) = 0 .
+```
+
+Polchinski asserts this without displaying the arithmetic ("the coefficients of these
+conspire to produce zero total anomaly"). The three coefficients are
+`(-2 - 990 + 992)/725760`, `(-2 + 450 - 448)/552960`, `(-2 - 126 + 128)/1327104`. -/
+theorem iib_gravitational_anomaly_cancels (trR2 trR4 trR6 : K) :
+    IhatIIB 2 (-2) 1 trR2 trR4 trR6 = 0 := by
+  unfold IhatIIB Ihat8 Ihat56 IhatSD
+  ring
+
+/-- **The three integer conditions of Polchinski (12.2.14) have exactly a one-parameter
+family of solutions.**
+
+For a purely gravitational `d = 10` anomaly, requiring each of the three monomials
+`tr R₂⁶`, `tr R₂⁴ tr R₂²`, `[tr R₂²]³` to cancel gives three linear conditions on the net
+field counts `a = n_{3/2}` (gravitinos **56**), `b = n_{1/2}` (fermions **8**),
+`c = n_A` (self-dual tensors). They are equivalent to `a = 2c` and `b = -2c`.
+
+The coefficients are the numerators of (12.2.11) at `n = 1`, (12.2.12), (12.2.13) over
+their respective common denominators `725760`, `552960`, `1327104`. Bilal's lectures give
+the same system in the same normalisation, e.g. `-495 n_{3/2} + n_{1/2} + 992 n_A = 0`.
+
+Two things worth recording. First, the system has **rank two, not three** — any two of the
+three equations already force `a = 2c`, and the third is then automatic; so the "three
+conditions, three parameters" counting that makes Polchinski call the cancellation
+"miraculous" and "accidental" is slightly generous to the miracle: there are effectively
+two conditions on three parameters, and a one-dimensional solution space is expected.
+What is *not* automatic is that the solution has the small integer content `(2, -2, 1)`
+realised by IIB supergravity. Second, the solution family is genuinely a **lattice**: no
+divisibility obstruction appears, so every integer multiple of `(2, -2, 1)` solves it and
+nothing else does. -/
+theorem iib_gravitational_anomaly_solutions (a b c : ℤ) :
+    (-495 * a + b + 992 * c = 0 ∧ 225 * a + b - 448 * c = 0 ∧ -63 * a + b + 128 * c = 0)
+      ↔ (a = 2 * c ∧ b = -2 * c) := by
+  omega
+
 end StringFormal.Math
