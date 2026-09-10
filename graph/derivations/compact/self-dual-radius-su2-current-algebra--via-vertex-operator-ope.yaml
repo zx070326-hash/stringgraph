@@ -11,7 +11,7 @@ depends_on:
   - id: worldsheet.ope-commutator-dictionary
     note: |
       原书用 (2.6.14) 从 OPE 的极点结构读出模的对易关系，即本图的这条字典。
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
     note: 提供「共形权 (h, h̄)」与主场的定义，用来陈述 j^i 是权 (1,0) 主场。
 sources:
   - ref: polchinski-1998-v1

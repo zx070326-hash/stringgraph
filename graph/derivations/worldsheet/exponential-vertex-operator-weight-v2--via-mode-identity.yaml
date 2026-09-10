@@ -3,7 +3,7 @@ target: worldsheet.exponential-vertex-operator-weight-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.exponential-vertex-operator-mode-weight-identity
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
     inferred: false
     note: |
       **本推导的实质输入**（formalized）：模恒等式
