@@ -655,7 +655,7 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     assert tree["own"] == "rigorous"
     assert {c["id"] for c in tree["children"]} >= {
         "worldsheet.critical-dimension-light-cone",
-        "worldsheet.critical-dimension-brst",
+        "worldsheet.critical-dimension-brst-v2",
     }
 
 
@@ -922,3 +922,52 @@ def test_seed_graph_decls_point_at_the_lean_island() -> None:
     assert all(u.decl.startswith("StringFormal.") for u in uses.values())
     formalized = collect_decls(g, formalized_only=True)
     assert formalized and all(u.formalized_derivations for u in formalized)
+
+
+def test_report_formalization_frontier(mini: Path) -> None:
+    """def-a formalized with a Lean decl; prop-b (rigorous, depends only on def-a) is on the frontier."""
+    _write(mini, "formal/StringFormal/X.lean", "-- stub")
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-a.yaml",
+        """
+        id: worldsheet.def-a
+        kind: definition
+        status: formalized
+        title: A
+        statement: a definition
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: "1"}]
+        formal: {lean_decl: X.a, lean_file: StringFormal/X.lean}
+        """,
+    )
+    g = load_graph(mini)
+    rep = full_report(g)
+    assert "worldsheet.prop-b" in rep["formalization_frontier"]
+    assert "worldsheet.def-a" not in rep["formalization_frontier"]
+    assert rep["counts"]["by_area"]["worldsheet"] == 2
+
+
+def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-a.yaml",
+        """
+        id: worldsheet.def-a
+        kind: definition
+        status: rigorous
+        title: A
+        statement: a definition
+        uses_conventions: [conv.metric-plus]
+        sources:
+          - ref: ref-a
+            loc: "1"
+            note: |
+              first note
+              - ref: ref-b
+                loc: "swallowed"
+        """,
+    )
+    g = load_graph(mini)
+    warns = [p for p in validate(g) if p.severity == "warning" and "swallowed" in str(p)]
+    assert warns

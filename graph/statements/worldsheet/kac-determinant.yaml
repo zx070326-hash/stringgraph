@@ -6,7 +6,7 @@ statement: |
   Gram 行列式为
   det M_N(c,h) = α_N ∏_{r s ≤ N, r,s ≥ 1} (h - h_{r,s}(c))^{p(N - rs)}，
   其中 α_N 是与 (c,h) 无关的正常数，h_{r,s}(c) 由 Kac 公式给出。
-uses_conventions: [conv.virasoro-standard]
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
 sources:
   - ref: kac-1979
     loc: "Theorem 1"
@@ -16,5 +16,12 @@ sources:
     loc: "§2.9"
     note: "抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式未核实，主来源为 kac-1979 / feigin-fuchs-1982。"
 tags: [cft, representation-theory]
+notes: |
+  【记号约定（curator 2026-09-11 补）】本卡 statement 用 V(c,h) 记 Verma 模、用 ⟨h|h⟩ = 1
+  归一化 Shapovalov 形式；这套记号现由 conv.verma-module-notation 统一定义并给出对照表
+  （Kytölä 𝒱_{c,h} / Lian–Zuckerman M(c,h) / Humphreys Z(λ)）。
+  ⚠ **该约定不规定 Shapovalov 形式的归一化**，那一句仍只写在本卡 statement 里。
+  ⚠ 特别相关：lian-zuckerman-1991 Theorem 3.5 的 D < 26 分支归结为 **M(26−D, 1−h) 的半正定性**
+  （primary-sources-round2.md §1.6，L1），即本卡的判据；两处的 M / V 是同一对象。
 author: seed
 created: "2026-09-10"

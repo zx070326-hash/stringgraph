@@ -1,0 +1,108 @@
+id: worldsheet.descendant-weight-grading-v2
+kind: proposition
+title: L_0 对 Virasoro 词的作用：任意 Virasoro 模中 L_{n_1}…L_{n_r} v 的本征值为 h − Σ n_i（全降算符时 h + Σ k_i）
+statement: |
+  设 R 是交换环且是 ℚ-代数，Vir = Vir(R) 是 Virasoro 代数（worldsheet.virasoro-algebra-v2，
+  约定 conv.virasoro-standard：[L_m, L_n] = (m − n) L_{m+n} + (c/12) m(m² − 1) δ_{m+n,0}）。
+  设 M 是**任意** Vir 的李模（M 是 R-模，Vir 的作用与 R-模结构相容），v ∈ M 满足**唯一的一条假设**
+    L_0 v = h v   （h ∈ R）。
+  对任意整数列 (n_1, …, n_r) ∈ Z^r（r ≥ 0；**符号任意**，不必为负、不必有序、可重复）记
+    L_{n_1} L_{n_2} … L_{n_r} v ∈ M
+  为逐次作用的结果（r = 0 时即 v 本身）。则
+
+    L_0 ( L_{n_1} … L_{n_r} v ) = ( h − Σ_{i=1}^r n_i ) ( L_{n_1} … L_{n_r} v )。
+
+  特别地，取 n_i = −k_i（k_i ≥ 1，即全是降算符）得
+    L_0 ( L_{−k_1} … L_{−k_r} v ) = ( h + Σ_{i=1}^r k_i ) ( L_{−k_1} … L_{−k_r} v )。
+
+  **本命题不需要的假设**（这是它与被它取代的 worldsheet.descendant-weight-grading 的实质差别）：
+  不需要 L_n v = 0 (n > 0)（v **不必**是最高权向量），不需要中心元在 v 上的作用（中心荷 c 不进入
+  计算），不需要 M 不可约或完全可约，不需要幺正性，不需要 R 是域或特征零。
+  理由：只用到 [L_0, L_n] = −n L_n，而其中心项含因子 m(m² − 1) 在 m = 0 处为零，恒消失。
+
+  【本节点明确**不**断言】
+  (a) 这些向量线性无关，或它们张成 v 生成的子模（那是 PBW 一类的内容，见
+      math.verma-module-free-over-negative-part 与 worldsheet.verma-level-spanned-by-partitions）。
+  (b) M（或 v 生成的子模）按 L_0 本征值**直和分解** ⊕_{N ≥ 0} M_{h+N}，也不断言权 h 的分量恰由 v
+      张成。**这两条在一般模、一般基环上不成立**，且是本卡与旧卡分家的直接原因，见 notes。
+  (c)「本征值严格大于 h」。在一般交换环 R 上「大于」没有意义；本卡的正确内容是本征值与 h
+      相差一个**正整数** Σ k_i。「不同 N 给出的本征值两两不同」还额外需要 R 是特征零
+      （否则 h + N = h + N′ 可能对 N ≠ N′ 成立）。
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.lie_lgen_zero_wordActOn
+  lean_file: StringFormal/Virasoro/DescendantGrading.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/DescendantGrading.lean :: StringFormal.Virasoro.{wordActOn, wordActOn_nil, wordActOn_cons, wordActOn_verma, lie_lgen_zero_wordActOn, lie_lgen_zero_wordActOn_of_isHighestWeightVector, vermaLift_wordAct}"
+    note: |
+      本仓库，形式化分支 agent/formalizer/descendant-general，已由 lead 合入 main（无 sorry，
+      公理仅 propext / Classical.choice / Quot.sound）；Lean 4 + Mathlib v4.33.1。逐字对应：
+        · 词的作用 → `wordActOn R M l v := l.foldr (fun n x => ⁅lgen R n, x⁆) v`，`l : List ℤ`
+          （**符号任意**，与本陈述一致；在 Verma 模上按定义等于 `Verma.wordAct`，见 `wordActOn_verma`）；
+        · 本征值公式 → `lie_lgen_zero_wordActOn (h : R) (hv : ⁅lgen R 0, v⁆ = h • v) (l : List ℤ) :
+          ⁅lgen R 0, wordActOn R M l v⁆ = (h - ((l.sum : ℤ) : R)) • wordActOn R M l v`。
+          Lean 写 h − Σ n_i；取 n_i = −k_i 即本陈述第二式的 h + Σ k_i。
+        · 最高权向量版是推论 `lie_lgen_zero_wordActOn_of_isHighestWeightVector`，
+          它只取用 `IsHighestWeightVector` 的 `lie_lgen_zero` 分量——这正是本陈述
+          「不需要 L_n v = 0」那一句的机器见证。
+      模的类型类是 `[AddCommGroup M] [Module R M] [LieRingModule (VirasoroAlgebra R) M]
+      [LieModule R (VirasoroAlgebra R) M]`，即本陈述的「任意 Vir 的李模」。
+      **curator 未自行重跑 `lake build`**；依据是文件头自述、formal/TODO.md 第 `descendant-weight-grading`
+      条（已勾选）与该分支已由 lead 合并进 main。
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.14)，p.72（式号经 schrans-2020 目录核实：`2.78 p 72: Eq (2.9.14) Non-Highest Weight States in Unitary CFTs`）"
+    note: |
+      **文献侧的对照，不承载本卡的论证**，且强度低于 Lean：来源把该式放在**幺正 CFT** 的语境里，
+      并与「每个态要么是最高权态要么是 descendant」的分解混在一起陈述。本卡只取其中的代数内容，
+      并按 formalizer 的核对把「⊕ 分解」与「本征值严格大于 h」两句剥离出去（见 notes）。
+      ⚠ 抽取记录 Q5：本次核实没有任何证据表明 Polchinski §2.9 讨论 Verma 模或 Kac 行列式；
+      §2.9（p.68–73）中被核对源标注的只有 (2.9.3)、(2.9.14)、(2.9.15) 三处。**未核对原书。**
+tags: [cft, virasoro, highest-weight, representation-theory, formalized]
+notes: |
+  【本卡的来历：worldsheet.descendant-weight-grading 的换代（2026-09-11，curator）】
+  旧卡把两件事写在一条命题里：
+    (i) 本征值公式 L_0 (L_{−k_1}…L_{−k_n} v) = (h + Σ k_i)(…)；
+    (ii) 末句「特别地……其 L_0 本征值严格大于 h，故 v 生成的最高权模按 L_0 本征值分级为
+         ⊕_{N ≥ 0} V_{h+N}，其中 V_h 由 v 张成」。
+  Lean（`StringFormal.Virasoro.lie_lgen_zero_wordActOn`）覆盖 (i) 且比旧卡更强（任意模、
+  任意符号的词、只要 L_0 v = h v），但**不覆盖 (ii)**。按 docs/STATUS_LEVELS.md 对
+  「Lean 证明用的对象若与卡片陈述不逐句一致，命题就不该显示为 formalized」的规定，
+  本卡只承载 (i)（故可 formalized），旧卡 superseded_by 本卡并在其 notes 登记 (ii) 的缺口。
+  **旧卡的 statement 文本一字未动**（根 CLAUDE.md 原则 1），其推导
+  worldsheet.descendant-weight-grading--via-virasoro-commutators（rigorous）保留。
+
+  【为什么 (ii) 不能留在本卡上 —— formalizer 的核对，逐条登记】
+  (a) **显式公式只用 L_0 v = h v，不用 L_n v = 0 (n > 0)**。中心项因子 m(m² − 1)|_{m=0} = 0，
+      故 [L_0, L_n] = −n L_n 无中心修正，归纳中中心荷根本不出现。因此正确的一般性是
+      「任意 L_0-本征向量」而不是「最高权向量」；旧卡把最高权条件写进前提是**多余的假设**。
+      Lean 侧的见证：`lie_lgen_zero_wordActOn` 的假设只有 `⁅lgen R 0, v⁆ = h • v`，
+      带 `IsHighestWeightVector` 的版本是它的推论。
+  (b) **「本征值严格大于 h」在一般环上无意义**。R 是交换 ℚ-代数，没有序；正确内容是
+      「与 h 相差一个正整数 N = Σ k_i」。进一步，「不同 N 的本征值两两不同」需要 **CharZero**
+      （h + N = h + N′ ⟹ N = N′ 用到 Nat.cast 单射）。旧卡把这一句写成无条件的，是**错的**。
+  (c) **⊕ 分解需要更强的假设**。即使在 Verma 模 V(c,h) 上，
+      worldsheet.verma-module-v2 也只在**任意**基环上给 ⨆_N V_N = V(c,h)（`iSup_levelSpan_eq_top`），
+      而内直和 `isInternal_levelSpan` 与「V_N 恰是 (h+N)-特征子空间」`levelSpan_eq_eigenspace`
+      都限定 `[Field K] [CharZero K]`。在一般模 M 上连 ⨆ 都不成立（M 未必由 v 生成）。
+      「V_h 由 v 张成」更强：那要 PBW / 非零性，见 math.verma-module-free-over-negative-part。
+  (d) **一般最高权模的版本本可由 vermaLift 五行推出**，formalizer 也顺手证了
+      `vermaLift_wordAct`（v 的 descendant 是 Verma descendant 在 vermaLift 下的像）；
+      但本卡采用的 `lie_lgen_zero_wordActOn` 是**直接归纳**的版本，连最高权条件都不要，
+      比经 vermaLift 的路线更一般，故本卡不依赖 worldsheet.verma-module-v2。
+
+  【与相邻节点的分工，避免重复】
+    · worldsheet.verma-module-v2：Verma 模上的 L_0 分级（含域上的 ⊕ 与特征子空间刻画）。
+      本卡是「任意模、任意词、只要一条本征方程」的那一半，不涉及张成或分解。
+    · worldsheet.verma-level-spanned-by-partitions：V_N 由分拆词张成、dim ≤ p(N)。
+    · math.verma-module-free-over-negative-part：PBW 基、dim V_N = p(N)、V(c,h) ≠ 0。
+    · worldsheet.weight-zero-primary-constant：需要幺正性的那条命题（权零主场是常数）。
+  四者与本卡都不重复。
+
+  【查重】2026-09-11 跑 `stringgraph search grading / verma / L_0 eigenvalue / 特征子空间 / level`：
+  命中 worldsheet.descendant-weight-grading（本卡取代它）、verma-module-v2、
+  verma-level-spanned-by-partitions、physical-states-level-grading（那是 Fock 空间的 level 分级，
+  不是抽象 Virasoro 模）、open-string-l0-level-form。无既有节点承载「任意 Virasoro 模上的词的
+  L_0 本征值公式」。
+author: curator
+created: "2026-09-11"

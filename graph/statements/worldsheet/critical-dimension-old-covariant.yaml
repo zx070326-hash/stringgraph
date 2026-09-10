@@ -39,7 +39,26 @@ sources:
       spectrum-generating algebra 属 §2.3.3（p.102–112），§2.3.2 是
       'Construction of transverse physical states'（p.100–101）。式号未核实。
 tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
+superseded_by: worldsheet.critical-dimension-old-covariant-v2
 notes: |
+  【本卡片已被 worldsheet.critical-dimension-old-covariant-v2 换代】（curator，2026-09-11）
+  换代理由（下面【措辞待规范化，陈述不改】一段所登记的账，现已由 v2 结清）：
+    (1) 本卡末句「D < 26 时内积仍半正定，但 H_0 的维数不足以把 H_phys 约化到横向 Fock 空间，
+        谱不具备 (c) 的形式」**不被本卡唯一的依赖 worldsheet.no-ghost-theorem-v4 支撑**
+        （v4 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)）；「H_0 的维数不足」也不是精确表述。
+        v2 删去该句，改为显式声明「D ≤ 25 不作断言」。
+    (2) 本卡的标题与结论句用「零模态退耦」「谱在洛伦兹协变的意义下幺正」等措辞
+        （ms.no-ghost-theorem 审计 B2/B3：「退耦」在自由弦态空间命题中无可操作定义）。
+        v2 一律改写为「H_phys/H_0 与横向 Fock 空间等距同构」与「存在负模物理态」。
+    (3) 本卡没有写 v4 的动量限定（p ≠ 0；固定 k_0 时 k_0·p ≠ 0），而本卡的推导
+        --via-no-ghost 在 summary 里明写「本陈述未写这些限制」。v2 把它们写进陈述。
+  本卡 statement 文本一字未动（根 CLAUDE.md 原则 1），只加本段与 superseded_by。
+  本卡的唯一推导 --via-no-ghost 已改挂到 v2（新 id
+  worldsheet.critical-dimension-old-covariant-v2--via-no-ghost，旧文件删除；
+  depends_on 仍是 worldsheet.no-ghost-theorem-v4，论证不变）。
+  入边换代：worldsheet.critical-dimension-bosonic-v2--via-four-routes、
+  worldsheet.critical-dimension-bosonic--via-three-routes 两处 depends_on 已就地改指 v2。
+
   这条是"无鬼定理的等号情形"作为临界维数判据的独立表述，即旧汇总节点
   worldsheet.critical-dimension-bosonic 陈述中的第 (ii) 条。
 

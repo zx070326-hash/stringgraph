@@ -5,7 +5,11 @@ status: physical-argument
 depends_on:
   - id: worldsheet.energy-momentum-tensor-free-scalar
   - id: worldsheet.tt-ope-central-charge
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      **换代（curator 2026-09-11）**：原为 worldsheet.conformal-normal-ordering（v1）。
+      v1 的 statement 首句限定「对自由标量理论」，v2 把设定放宽到任意自由场并写出费米换序符号；
+      X 部门逐字退化为 v1，**本推导的内容与有效状态均不变**。
   - id: worldsheet.free-scalar-propagator
   - id: worldsheet.ope-commutator-dictionary
   - id: worldsheet.energy-momentum-laurent-modes
@@ -41,7 +45,7 @@ sources:
     loc: "§2.7, eq. (2.7.5)–(2.7.8)（T 的 Laurent 模即振子双线性式，及 L_0 的正规序写法），p.59"
     note: (2.7.7) 的式号经核对源 schrans-2020 目录核实；本条支撑 depends_on 里对 virasoro-generators-free-boson 与 normal-ordering-constant-ax 的两条非 inferred 边。
 summary: |
-  用 worldsheet.conformal-normal-ordering 的交叉缩并规则直接算
+  用 worldsheet.conformal-normal-ordering-v2 的交叉缩并规则直接算
     T(z) T(0),  T(z) = -(1/α') : ∂X^μ ∂X_μ :(z)。
   每次缩并给出一个 ∂∂ 作用在传播子 -(α'/2) η^{μν} ln|z|^2 上的因子，
   即 ⟨∂X^μ(z) ∂X^ν(0)⟩ = -(α'/2) η^{μν} / z^2。

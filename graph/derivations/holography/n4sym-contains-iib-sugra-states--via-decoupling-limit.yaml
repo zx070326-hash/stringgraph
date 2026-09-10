@@ -1,0 +1,69 @@
+id: holography.n4sym-contains-iib-sugra-states--via-decoupling-limit
+target: holography.n4sym-contains-iib-sugra-states
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: maldacena-1997
+    loc: "arXiv:hep-th/9711200v3, §2, 式 (2.1)–(2.5) 与脚注 5，p.2–p.4；结论句在 p.4"
+summary: |
+  原文 §2 的论证链，逐步如下（式号依 arXiv v3）：
+
+  1. 退耦极限 (2.1)：IIB 弦耦合 g 固定，N 根 D3 膜相距 r，取 α' → 0 且 U ≡ r/α' 固定
+     （即拉伸开弦的质量固定）。N 在此极限中固定，没有取大 N。
+  2. 膜上理论：极限中世界体理论是 4 维 N=4 U(N) SYM；在 r = 0 的超共形点上，
+     共形群 SO(2,4)，R 对称 SO(6) ∼ SU(4)，超共形群的超对称生成元数目是超 Poincaré 的两倍。
+     原文对这一支逐字写 "All this is valid for any N."
+  3. 超引力解 (2.2)（引自 Horowitz–Strominger）：调和函数 f = 1 + 4πgNα'²/r⁴。
+  4. 近视界几何 (2.3)：在 (2.1) 下"丢掉调和函数里的 1"，度规化为
+     ds² = α'[ U²/√(4πgN) dx²_∥ + √(4πgN) dU²/U² + √(4πgN) dΩ²_5 ]，即 AdS_5 × S^5；
+     S^5 半径与 AdS_5 半径相等，R²_sph/α' = √(4πgN)，Planck 单位下二者 ∝ N^{1/4}。
+  5. 可信区间 (2.4)：g ≤ 1 时 gN ≫ 1；脚注 5 明确 g > 1 时条件为 N/g ≫ 1
+     （"In other words we need large N, not large g."）。
+  6. 近极端黑 D3 膜解 (2.5)：固定世界体能量密度 μ，得 U₀⁴ = (2⁷/3)π⁴g²μ，U₀ 在 α'→0 下有限。
+  7. proper-energy 论证（p.4）：虽然度规整体带一个 α' 因子，但规范理论中固定的能量 ω 对应的
+     固有能量 E_proper = (1/√α') ω(4πgN)^{1/4}/U 有限，固有波长也固定；
+     时空作用量 S ∼ (1/α'⁴)∫d^10x √G R 中的 α' 因子可与 Newton 常数中的对消，
+     极限中 Planck 长度有限。故不能只保留零模，必须考虑在 AdS 背景上传播的场。
+  8. 结论（p.4）：Hawking 温度有限 ⇒ 黑洞向 AdS 时空有能流；N=4 d=4 U(N) SYM 是幺正理论
+     ⇒ 大 N 下其 Hilbert 空间包含 (AdS_5 × S^5)_N 上 IIB 超引力的态，特别是引力子。
+
+  原文对这一结论的措辞是 "we conclude that"（不是 conjecture）；对"超引力解可信"这一步（§1）
+  的措辞是 "we argue"。整条链是物理论证：路径积分/超引力近似、极限中的领头阶丢项、量纲分析。
+gaps:
+  - >-
+    depends_on 为空：本论证的前提在本图中尚无节点——D3 退耦极限 (2.1)、D3 超引力解 (2.2)、
+    近视界几何 (2.3)、超引力可信区间 (2.4)、近极端黑 D3 膜解 (2.5)、proper-energy 不塌缩论证、
+    N=4 U(N) SYM 的幺正性。抽取记录 §5.2(a)(b) 已给出建议 id（holography.d3-decoupling-limit 等），
+    补齐后应改为显式边。
+  - >-
+    (2.2) → (2.3) 的关键一步是「丢掉调和函数里的 1」，这是 α'→0 下的领头阶近似，原文未给误差估计。
+  - >-
+    超引力可信只在 gN ≫ 1（g ≤ 1）或 N/g ≫ 1（g > 1）区间内；该限定已写入目标陈述，
+    不在陈述外另行外推。
+  - >-
+    边界条件未指定：原文 §1 p.1「we leave this interesting problem for the future」，
+    §2 p.4「The gauge theory should provide us with a specific choice of boundary conditions.
+    It would be interesting to determine them.」（抽取记录 §5.4 第 1 条）
+  - >-
+    未构造引力子的渐近态：§6 p.16 原文「we have not shown here how to construct graviton states」
+    （抽取记录 §5.4 第 7 条、E46）。
+  - >-
+    超引力解 (2.2) 本身引自 Horowitz–Strominger (NPB 360 (1991) 197)，
+    本项目未登记也未抽取该文，此处按原文转述使用。
+notes: |
+  from: maldacena-1997#E7、E8、E9、E10、E11、E12、E13、E14、E15。
+
+  status 取 physical-argument 而非更高：整条链由超引力近似、极限中丢项与量纲论证构成，
+  没有数学证明；也没有对"Hilbert 空间包含"给出精确的态空间嵌入意义。
+  status 不取 conjecture：原文这一步逐字是 "we conclude that"，且论证是可复核的物理推理，
+  与 §2 p.4 那句 "We are led to the conjecture that" 属于不同强度（见目标卡与 v2 对偶卡 notes）。
+
+  本推导目前没有出边（depends_on 空），validate 会给一条 "derivation has no dependencies" 警告。
+  这是有意的：宁可留空并在 gaps 里写清缺哪些节点，也不挂与内容无关的占位依赖
+  （旧卡 duality.ads-cft--via-decoupling-limit 挂的 worldsheet.critical-dimension-bosonic-v2
+  就是这样一条与 IIB/D3 无关的占位边）。
+
+  所有 loc 锚定 arXiv:hep-th/9711200v3 (22 Jan 1998)。
+author: curator
+created: "2026-09-11"

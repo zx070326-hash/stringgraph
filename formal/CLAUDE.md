@@ -15,6 +15,10 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
 
+### 读大文件的纪律
+
+`Sugawara.lean`（约 1400 行）、`VertexOperator.lean`（约 800 行）、`PhysicalStates.lean`（约 800 行）**不要整文件 Read**：三名 formalizer 曾在"读源文件"阶段停摆。一律 `grep -n "<声明名>"` 定位，再 `sed -n a,bp` 读几十行。任务拆小：一个声明一次提交。
+
 ## 与图的关系
 
 - 图节点通过 `formal.lean_decl` 与 `formal.lean_file` 指向这里的声明。`stringgraph validate` 检查文件存在。
@@ -42,17 +46,27 @@ StringFormal/
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
   Virasoro/VermaPBW.lean    有序词（分拆）张成 Verma 模 level 片，dim V_N ≤ p(N)；线性无关（PBW）未做
+  Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
+  Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
+  Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
+  Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
   NoGhost/PhysicalStates.lean  H_phys 子模、L_m^† = L_{-m}（pairing_Lop_left）、L_n 齐次性与 H_phys 的 level 分级、零模态/伪态、level 1 与 a₀=1 光子零模态
+  NoGhost/LevelTwo.lean     level-2 标量态 ψ₂ = [α_{-1}·α_{-1}+c₂(a·α_{-2})+c₃(a·α_{-1})²]|k⟩：
+                            L₁/L₂ 物理态条件、闭式模 (4a₀-9)²⟨ψ₂,ψ₂⟩=2(D-1)[16a₀²+(2D-74)a₀+84-3D]、
+                            有序域上 D>26 的显式负模物理态（见文件头 gaps）
   NoGhost/VertexOperator.lean  指数顶点算子 :e^{ic·X}: 的振子部分：产生半 = 乘以 creaExp、
                             湮灭半 = 变量平移 vertexSub；vertexOsc η b K 的模态代数
                             [α^μ_p, V_K] = b^μ V_{K-p}、level 分级、刚性（见文件头 gaps）
   NoGhost/DDF.lean          DDF 动量塔 ℤ →₀ Fock D R、移位算子 e^{i n k_0·x}、塔上的
                             α^μ_p / L_n / 顶点算子；含 p=0 的模态代数与横向性；
                             无 [L_m, V]，无 A^i_n 本身（见文件头 gaps）
+  NoGhost/VertexWeight.lean   顶点算子共形权（进行中）：creaExp 欧拉递推 creaExp_euler 已证；真空上 L_m Φ_J 与 [L_m, V_K] 待做
+  NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
+  NoGhost/LevelTwo.lean      level-2 标量物理态闭式 (4a₀−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a₀²+(2D−74)a₀+84−3D]；a₀=1、D>26 有序域上存在负模物理态（exists_mem_physSubmodule_pairing_self_neg）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
@@ -60,7 +74,7 @@ scripts/
 
 复用既有形式化的调研记录见 `NOTES-virasoro-reuse.md`。
 
-分解任务见 `TODO.md`。
+分解任务见 `TODO.md`。挑下一个目标用 `uv run stringgraph report` 末尾的 **formalization frontier**（所有依赖已 formalized、自身未形式化的节点），比 TODO 更实时。
 
 ## 规则
 

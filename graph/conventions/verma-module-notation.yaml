@@ -1,0 +1,87 @@
+id: conv.verma-module-notation
+family: verma-module-notation
+title: Verma 模的记号：本图记 V(c,h)，最高权向量 |c,h⟩
+definition: |
+  **本图的记号（唯一规范）**：
+
+  · Virasoro 代数（conv.virasoro-standard 的 {L_n}_{n∈ℤ} 与中心元 C）的 Verma 模记
+      **V(c, h)**，
+    其中 c 是中心荷（C 的作用标量）、h 是共形权（L_0 的最高权本征值）。
+  · 最高权向量记 **|c,h⟩**；在 (c, h) 从上下文明确时可简写 **|h⟩**。
+  · 模由**负模生成元** L_{−n}（n ≥ 1）作用于 |c,h⟩ 生成：
+      V(c,h) = span{ L_{−n_1} L_{−n_2} ⋯ L_{−n_k} |c,h⟩ : k ≥ 0, n_i ≥ 1 }。
+    「level N 分量」V_N 指 L_0 本征值为 h + N 的部分，对应 Σ n_i = N。
+  · 三角分解记 vir = vir₋ ⊕ vir₀ ⊕ vir₊，vir_± = span{L_n : ±n > 0}，vir₀ = span{L_0, C}。
+  · 不可约商（若在图中出现）记 **L(c,h)**。本图目前没有承载 L(c,h) 的节点。
+
+  **对照表（同一对象在各文献中的记号）**：
+
+  | 文献 | Verma 模 | 最高权向量 | 泛包络代数 | 本项目核实等级 |
+  |---|---|---|---|---|
+  | **本图** | V(c,h) | \|c,h⟩ 或 \|h⟩ | U(Vir) | — |
+  | Humphreys 1972（有限维半单，权 λ） | **Z(λ)** | 无统一记号 | **𝔊(L)** 记 gr U(L)（**不是**泛包络本身） | L3：多份讲义一致「Humphreys 用 Z(λ)，不用 M(λ)」；**原书未读**（math-sources.md §16.2） |
+  | Kytölä 2025（virasoro-lean-2025） | 一般：**M_λ**；Virasoro：**𝒱_{c,h}** | **v_{c,h}** | **𝒰(𝔤)** | **L1 逐字**（Definition 12.2 / Lemma 12.3 / Definition 12.4，math-sources.md §16.3） |
+  | Lian–Zuckerman 1991 | **M(c,h)**（不可约商 **L(c,h)**） | 未记录 | — | **L1 逐字**：Remark 3.2(ii)（primary-sources-round2.md §1.6） |
+  | Kac–Raina *Bombay Lectures* | 预期 **M(c,h)** | — | — | **L0，未核实**：见下方 notes 的警告 |
+
+  **换算**：以上全部是**同一个对象**（U(Vir) 对最高权左理想的商，或等价的万有性质刻画），
+  记号差异不涉及任何符号约定或归一化，故不需要 convention_map，只需读者认得出。
+  唯一需要小心的是**权的参数化**：本图与 Kytölä、LZ 都用一对标量 (c, h)；
+  Humphreys 用抽象权 λ ∈ 𝔥*，对应关系是 λ(C) = c、λ(L_0) = h。
+canonical: true
+sources:
+  - ref: virasoro-lean-2025
+    loc: "§12, p. 10–11：Definition 12.2（Verma 模的万有性质）、Lemma 12.3（M_λ := 𝒰(𝔤)/I_λ）、Definition 12.4（Virasoro Verma 模 𝒱_{c,h}，最高权向量 v_{c,h}）"
+    note: |
+      **L1 逐字**（researcher 2026-09-11 读 arxiv.org/pdf/2510.21741 第 10–14 页，
+      literature/extractions/math-sources.md §16.3）。本图 V(c,h) 的构造与万有性质
+      逐句对应该文的 Lemma 12.3 + Definition 12.4，只差记号。
+  - ref: lian-zuckerman-1991
+    loc: "Remark 3.2(ii)：M(c,h) 记最高权 cz′ + hL′₀ 的 Verma 模，L(c,h) 是其不可约商"
+    note: |
+      **L1 逐字**（literature/extractions/primary-sources-round2.md §1.6）。
+      这是本图中「M(c,h) = V(c,h)」这一对应的唯一 L1 证据。
+      ⚠ 该文 Theorem 3.5 的 D < 26 分支归结为 **Verma 模 M(26−D, 1−h) 的半正定性**，
+      即本图 worldsheet.kac-determinant 的判据；引用时记号必须对得上，这条约定就是为此而设。
+  - ref: humphreys-1972
+    loc: "§20（标准循环模 / 最高权模，记号 Z(λ)）；**分节号未核实**"
+    note: |
+      **L3，原书未读**：记号 Z(λ) 由多份公开讲义一致转述（math-sources.md §16.2）。
+      ⚠ **两条硬约束照抄自 sources.bib 对该 key 的禁令**：
+      (1) 该书全书语境是代数闭特征零域上的**有限维半单**李代数，**不覆盖 Virasoro**；
+      (2) **不得**把 §20.x 当作「Verma 模作为 U(n⁻)-模自由秩 1」的来源
+          （唯一 L1 读到的讲义把 §20.3 挂在「最高权定理」下）。
+      本条只用于**记号对照**，不承载任何论证。
+  - ref: kac-raina-1987
+    loc: "Verma 模的记号；**讲号、命题号与记号本身全部未核实（L0）**"
+    note: |
+      ⚠ **本行是对照表里唯一未核实的一格**。sources.bib 对该 key 记录了两条限制：
+      内容与编号均未核实（L0），且**版本陷阱**（第 1 版约 12 讲 / 第 2 版 Kac–Raina–Rozhkovskaya
+      2013 共 18 讲，讲号不可互换）。
+      「Kac 一线用 M(c,h)」是本图的**预期**（与 lian-zuckerman-1991 的 M(c,h) 同源），
+      **不是核实过的事实**。谁读到原书请回来订正本行或删掉它。
+notes: |
+  【为什么建这条约定】researcher 在 literature/extractions/math-sources.md §18 第 4 条里明写了这条建议：
+  「**记号对齐**：Humphreys 写 Z(λ) 与 𝔊(L)；Kytölä 写 M_λ / 𝒱_{c,h} 与 𝒰(𝔤)；
+  lian-zuckerman-1991 又是另一套。**建议在 graph/conventions/ 加一条 family: verma-module-notation**，
+  否则 M(λ) / Z(λ) / 𝒱_{c,h} 在图里会被当成三个东西。」本卡片即此。
+
+  【family 只有这一个成员】不像 conv.metric-mostly-plus / conv.metric-mostly-minus 那样存在真正对立的
+  两套约定——Verma 模的记号差异**不改变任何公式的符号或归一化**，只是名字不同。
+  因此本 family 恰有一个 canonical 成员，其作用是**给对照表一个可引用的位置**，
+  而不是在互斥选项间做选择。若将来图里真的需要并存两套参数化
+  （例如抽象权 λ ∈ 𝔥* 与标量对 (c,h) 各自建卡），再加第二个成员并写 convention_map。
+
+  【不涉及的东西】本约定**不**规定：
+  · Shapovalov / 逆变形式的归一化（⟨h|h⟩ = 1 等）——那写在 worldsheet.kac-determinant 的陈述里；
+  · 有序单项式里模态的**排列方向**（L_{−n_m}⋯L_{−n_1} 递增 vs L_{−b_1}⋯L_{−b_k} 递减）——
+    本图两种写法都出现过（math.verma-module-free-over-negative-part 用递增、
+    worldsheet.verma-level-spanned-by-partitions 用递减），二者张成同一族且与分拆一一对应，
+    但**若将来要比对具体基元下标，须先统一**。这是本约定刻意留下的一个已知松弛处。
+  · 「合成（composition）」与「分拆（partition）」的区别——见 worldsheet.verma-module-v2 的
+    notes【与 Lean 的其他差异】，那是实质的数学区别，不是记号问题。
+
+  【查重】新增前跑过 `stringgraph search verma`：graph/conventions/ 下此前没有任何与表示论记号
+  有关的约定卡（9 张全是度规 / α' / 世界面坐标 / Virasoro 括号 / 截距符号）。
+
+  【登记】由 curator 于 2026-09-11 建立（约定卡的 schema 无 author / created 字段，故记在此处）。

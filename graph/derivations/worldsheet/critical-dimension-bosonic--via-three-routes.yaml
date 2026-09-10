@@ -4,8 +4,39 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.critical-dimension-light-cone
-  - id: worldsheet.critical-dimension-old-covariant
-  - id: worldsheet.critical-dimension-brst
+  - id: worldsheet.critical-dimension-old-covariant-v2
+    note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.critical-dimension-old-covariant，该卡已
+      superseded_by worldsheet.critical-dimension-old-covariant-v2（v2 删去旧卡末句关于
+      D < 26 的说法、改用「等距同构」「存在负模物理态」的措辞、并写进 v4 的动量限定）。
+      本推导的目标是旧汇总卡 worldsheet.critical-dimension-bosonic，其陈述只用到路线 (ii)
+      在 (D, a) = (26, 1) 处的结论，v2 逐条保留之，故换代不改变本推导的论证与状态。
+      ⚠ 旧汇总卡陈述里带「⇒ D = 26 且 a = 1」的读法（把 (ii) 读成等价式）本就强于 v2
+      也强于旧卡——两卡都只断言临界点处幺正与 D > 26 处有负模态。该过度断言由
+      worldsheet.critical-dimension-bosonic-v2 修正，本推导只作记账，不修旧卡陈述。
+  - id: worldsheet.critical-dimension-brst-v2
+    note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.critical-dimension-brst，该卡已 superseded_by
+      worldsheet.critical-dimension-brst-v2（v2 删去旧卡末句「取 D 个自由玻色子时 c^m = D，
+      故 Q_B² = 0 ⟺ D = 26」，陈述只到 c^m = 26）。
+      后果：本推导的目标（旧汇总卡 worldsheet.critical-dimension-bosonic）陈述的是 D = 26，
+      而路线 (iii) 换代后只给 c^m = 26，故 c^m = D 这一步必须由下面新增的
+      worldsheet.free-boson-central-charge-d 显式供边——这正是本推导 gaps 第三条
+      （「该步写在 worldsheet.critical-dimension-brst 陈述末句，未单列节点」）所指的缺口，
+      换代后它被补上了。本推导的论证与状态不变。
+  - id: worldsheet.free-boson-central-charge-d
+    inferred: true
+    note: |
+      【2026-09-11 新增】供给 c^m = D 这一步，即由路线 (iii) 的 c^m = 26 得到汇总陈述里的
+      D = 26。换代前这一步藏在 worldsheet.critical-dimension-brst 的陈述末句里
+      （见本推导 gaps 第三条）；路线卡换代后陈述里没有它了，故必须在此显式记账，
+      否则汇总陈述的 D = 26 在图上无支撑。
+      标 inferred 的理由：本推导 sources 的 loc 只覆盖 §1.3 / §4.1 / §4.3 / §4.4，
+      其中 §4.3（eq. (4.3.10)）只**执行**了代入（c^m = 26 ⇒ D = 26），
+      **论证** c^m = D 的位置是 §2.4 末至 §2.5 初，不在本推导已引的定位范围内
+      （且那处的式号与页码本身**完全未核实**，抽取记录 #E34/Q4）。
+      与 worldsheet.critical-dimension-brst-v2--via-nilpotency 换代前的处理一致。
+      有效状态不受影响：该节点有 --via-lean（formalized）。
   - id: worldsheet.open-string-intercept-v2
     note: |
       汇总陈述含 a = 1，但路线 (iii)（BRST 幂零）只给出 c^m = 26，不含截距。
@@ -23,10 +54,14 @@ summary: |
   worldsheet.critical-dimension-bosonic 现在是汇总命题：它的陈述 (i)(ii)(iii) 是
   三个独立节点的合取，外加截距 a = 1——
     (i)   worldsheet.critical-dimension-light-cone（光锥洛伦兹代数闭合 ⇒ D=26 且 a=1）
-    (ii)  worldsheet.critical-dimension-old-covariant（零模态退耦、谱幺正 ⇒ D=26 且 a=1）
-    (iii) worldsheet.critical-dimension-brst（Q_B^2 = 0 ⟺ c^m = 26；**只给 D，不给 a**）
+    (ii)  worldsheet.critical-dimension-old-covariant-v2（(26,1) 处 H_phys/H_0 ≅ 横向 Fock；
+          D > 26、a = 1 时有负模物理态；2026-09-11 前为 worldsheet.critical-dimension-old-covariant）
+    (iii) worldsheet.critical-dimension-brst-v2（Q_B^2 = 0 ⟺ c^m = 26；**只给 c^m，不给 D 也不给 a**；
+          2026-09-11 前为 worldsheet.critical-dimension-brst，其陈述末句含 c^m = D 那一步）
     (+)   worldsheet.open-string-intercept-v2（a = 1，与 D 无关地成立；2026-09-11 前为
           worldsheet.open-string-intercept）
+    (+)   worldsheet.free-boson-central-charge-d（c^m = D，把路线 (iii) 的 c^m = 26 换成 D = 26；
+          2026-09-11 新增，此前藏在路线 (iii) 的陈述末句里）
   路线 (iii) 单独不足以支撑汇总陈述中的 a = 1，这是 reviewer 指出的缺口；
   补上 open-string-intercept-v2 后合取才完整。
   本推导只做合取，不含新的物理输入，故其自身状态为 rigorous；
@@ -34,7 +69,7 @@ summary: |
 gaps:
   - "本推导不主张三条路线互相蕴含。三者只是各自挑出同一组 (D, a) = (26, 1)。其中路线 (ii) 与 (iii) 之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ 旧协变 H_phys/H_0；Kato–Ogawa 1983 提出，FGZ 1986 Theorem 2.8 第一个同构严格证明）。本推导仍不把它加为依赖，因为汇总陈述是三条路线的**合取**而非等价链；若日后要把汇总改写成「三条路线互相等价」，则必须显式依赖该节点。路线 (i)（光锥）与 (ii)(iii) 之间的等价仍无节点。"
   - "汇总节点的陈述把开弦截距 a 与闭弦情形混在一起表述；细化时应按开/闭弦分别陈述。(i) 与 open-string-intercept 明确写开弦，(ii)(iii) 与开闭弦无关。"
-  - "路线 (iii) 的 c^m = 26 与路线 (i)(ii) 的 D = 26 之间需要 c^m = D（D 个自由玻色子的中心荷）这一步；该步写在 worldsheet.critical-dimension-brst 陈述末句，未单列节点。"
+  - "路线 (iii) 的 c^m = 26 与路线 (i)(ii) 的 D = 26 之间需要 c^m = D（D 个自由玻色子的中心荷）这一步。**2026-09-11 已消解**：该步换代前写在 worldsheet.critical-dimension-brst 的陈述末句里、未单列节点；路线卡换代到 worldsheet.critical-dimension-brst-v2 后陈述里不再有它，本推导已把 worldsheet.free-boson-central-charge-d 加为显式依赖边（标 inferred，理由见该边的 note）。"
   - "第四条路线 worldsheet.critical-dimension-weyl-anomaly（Weyl 反常抵消：c^{tot} = c^m + c^g = 0）已建节点，但**未加入本推导**。它与路线 (iii)（BRST 幂零）共享 c^g = -26（worldsheet.bc-ghost-central-charge）与 c^m = D（worldsheet.free-boson-central-charge-d）两个输入，两条路线的判据都是同一个数 c^m - 26 = 0，故**不完全独立**（差别只在论证方式：(iii) 是模式代数中 {Q_B, Q_B} 的计算，(iv) 是路径积分测度的 Weyl 变分）。本汇总陈述的文本写死了「三种独立意义」，把第四条路线加进来会与陈述文本矛盾；按项目规则不改已提交陈述文本，升为四路线须新建 worldsheet.critical-dimension-bosonic-v2 并给本节点写 superseded_by。**本轮暂不做**，留待 lead 裁决。"
 author: curator-critdim
 created: "2026-09-10"

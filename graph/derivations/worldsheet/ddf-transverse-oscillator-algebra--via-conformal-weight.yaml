@@ -11,7 +11,7 @@ depends_on:
       XX OPE X^μ(z)X^ν(0) ∼ -(α'/2)η^{μν} ln|z|²。两个被积量之间的全部缩并都由它给出；
       它同时提供 z^{2α' n m k_0·k_0} = 1（k_0² = 0）与 z^{±1}（由归一化 2α' k_0·p = 1）这两个关键幂次。
       来源处（GSW §2.3.3，式号未核实）不逐条列出这一步，标 inferred。
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
     inferred: true
     note: |
       两个指数算符 :e^{i m k_0·X(z)}: 与 :e^{i n k_0·X(w)}: 的重排序（交叉缩并）规则，

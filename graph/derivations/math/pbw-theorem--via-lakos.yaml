@@ -1,0 +1,118 @@
+id: math.pbw-theorem--via-lakos
+target: math.pbw-theorem
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: lakos-2024-pbw
+    loc: |
+      arXiv:1812.04896**v2**（22 页；**编号只对 v2 成立**）。
+      前提：Introduction, p. 1「The local formulation of the PBW theorem」段。
+      主证明：§6「From F^Lie_K to the basic PBW theorem」，**Proposition 6.1, p. 16**，
+      逐字「The PBW theorem holds if 𝔤 is a free K-module.」，证明跨 p. 16–17（走 Magnus–Witt 路线，
+      所用的 Magnus–Witt 定理是本篇 Theorem 1.5 / 1.6 / 1.7, p. 5）。
+      第二条独立证明：**Appendix A「The Witt–Lazard proof of the global PBW theorems」**，
+      链条 Lemma A.1 → Corollary A.2 → Lemma A.3 → **Corollary A.4(f), p. 20**
+      「⊗𝔤 = ⊗_η𝔤 ⊕ J𝔤」，其后正文逐字「In particular, we find the statement of the PBW theorem in (f)」。
+      两形式的等价：Introduction, p. 2「Global formulations of the PBW theorem」情形 (i) 末句。
+    note: |
+      **L1 逐页读毕（researcher 2026-09-11，literature/extractions/math-sources.md §33.2；
+      本轮读了 pp. 1–6 与 16–22，含全部参考文献）。PDF 页 = 论文页。**
+      ⚠ **版本陷阱**：v2 的 comments 逐字为「22 pages, Part 3 of original submission arXiv:1812.04896v1,
+      rewritten」⇒ v1 是另一份更长稿件的一部分，**编号几乎肯定不同**，`loc` 已写死 v2。
+      ⚠ **未发表**：abs 页无 journal-ref，只有 arXiv 自发 DOI 10.48550/arXiv.1812.04896
+      （读取日期 2026-09-11）；作者自称 expository paper。见 gaps 第一条。
+summary: |
+  本推导与 math.pbw-theorem--via-humphreys 是**同一张卡上的两条独立推导**：那条给教科书的权威性与
+  完整证明，本条给**全文可读的可核对性**与**明确写出的适用范围**。本条自身还包含两条互相独立的证明。
+
+  **(0) 前提（书上 p. 1，Introduction，逐字）**：
+    「Assume that K is a unital commutative ring, and 𝔤 is a K-module with a compatible Lie-ring structure;
+     i. e. 𝔤 is a Lie K-algebra (also called: Lie ring over K).」
+  泛包络代数按与本图相同的方式构造：𝒰𝔤 := ⊗𝔤 / J𝔤，其中 ⊗𝔤 = ⊕_{n≥0} ⊗^n 𝔤（张量取在 K 上），
+  J𝔤 是由 X ⊗ Y − Y ⊗ X − [X,Y] 生成的理想，𝒎 : ⊗𝔤 → 𝒰𝔤 是典范同态。滤过取 𝒰^n𝔤 := 𝒎(⊗^{≤n}𝔤)。
+  **全文对 𝔤 没有任何有限维假设**，基的索引集任意。**域是特例**（域上的模皆自由），
+  故本推导的假设覆盖本节点 statement 里写的「域 F 上、任意（可无限维）李代数 L + 全序基 (X, ≤)」。
+
+  **(1) 局部形式 = 本节点的 (2)**（书上 p. 1，逐字）：构造给出自然满射
+    𝒎^{(n)} : ⊙^n 𝔤 → 𝒰^n𝔤 / 𝒰^{n−1}𝔤，
+  PBW 的局部形式断言这些 𝒎^{(n)} **都是同构**。⊙^n 就是对称代数的 n 次分量，
+  故这句话逐条对应本节点的 (2)「S(L) ⟶ gr U(L) 是同构」（对每个次数分量分别陈述）。
+
+  **(2) 全局形式 = 本节点的 (1)**（书上 p. 2，情形 (i)，逐字）：若 𝔤 是循环 K-模的直和（自由模是特例），
+  取基 {g_α : α ∈ A} 与 A 的一个序 ≤，令 ⊗_≤𝔤 ⊆ ⊗𝔤 为由 g_{α_1} ⊗ … ⊗ g_{α_n}（α_1 ≤ … ≤ α_n）张成的子模，
+  则 PBW 的「basic」版本断言限制映射
+    𝒎_≤ : ⊗_≤𝔤 → 𝒰𝔤
+  是 K-模同构。⊗_≤𝔤 的自然基就是有序单项式，故这逐条对应本节点的 (1)「有序单项式构成 U(L) 的基」；
+  n = 1 一层即给出本节点的 (3)（ι 单射）。**索引集 A 任意**，这正是无限维情形所需的措辞。
+
+  **(3) 两形式等价（来源明写，不是本图补的）**：同一段末句逐字
+    「As the natural map ⊗^n_≤ 𝔤 → ⊙^n 𝔤 is an isomorphism, it is easy to see that this 𝒎_≤ is necessarily
+     surjective, and **its injectivity is equivalent to the local version of PBW theorem**; one can see these
+     inductively on the filtration.」
+  ⇒ 本节点 statement 里那句「(1) 与 (2) 在同一小节里互推」在本来源中是**被逐字写出来的**
+  （humphreys-1972 那一侧只是本图转述），且互推的方向与本节点写的一致。
+
+  **(4) 第一条证明：Proposition 6.1（§6, p. 16–17）**。§6 开场逐字声明本节所用的输入：
+    「Here we assume to know that free Lie K-algebras are free K-modules in every multigrade separately (MW),
+     and that the PBW theorem holds for them.」
+  命题逐字：「**The PBW theorem holds if 𝔤 is a free K-module.**」
+  证法：把 𝔤 的 K-基 {Z_λ} 提升到自由李代数 F^Lie_K[X_λ : λ ∈ Λ]，用 Magnus–Witt 定理
+  （本篇 Thm 1.5：F^Lie_K[X_λ] 由换位子求值嵌入非交换多项式代数 F_K[X_λ]；Thm 1.6：它在每个多重次数上是自由 K-模；
+  Thm 1.7：可直接补足）把自由情形的 PBW 沿满射推到 𝔤。证明完整（`Proof.` … `□`，跨 p. 16–17）。
+  §6 末尾还补了一句：同样的论证经修改可覆盖**循环 K-模的直和**。
+
+  **(5) 第二条独立证明：Appendix A（Witt–Lazard），Corollary A.4(f), p. 20**。
+  附录标题逐字「The Witt–Lazard proof of the global PBW theorems」，开场逐字说该路线可以
+  「formulate the proof of the PBW theorem simultaneously in (i) the basic case (sum of cyclic K-modules)
+   and (ii) the symmetric case (ℚ ⊂ K)」。在情形 (i) 中 ⊗_η𝔤 = ⊗_≤𝔤，PBW 等价于说 ⊗_η𝔤 与 J𝔤 互补，
+  而 Corollary A.4(f) 逐字给出内直和分解 **⊗𝔤 = ⊗_η𝔤 ⊕ J𝔤**，其后正文逐字
+  「In particular, we find the statement of the PBW theorem in (f)」。
+  ⇒ **同一篇论文里两条互不依赖的证明**（§6 走 Magnus–Witt，附录 A 走经典 Witt–Lazard），
+  这是把本推导定为 rigorous 的加分项。
+
+  **记号对照**（抄公式时不要混）：来源写 𝒰𝔤 / ⊙^n𝔤 / ⊗_≤𝔤 / J𝔤，本节点写 U(L) / S(L) / gr U(L)；
+  对应是 ⊙^n𝔤 ↔ S(L) 的 n 次分量、𝒰^n𝔤 / 𝒰^{n−1}𝔤 ↔ gr_n U(L)。
+gaps:
+  - "**来源未发表**。lakos-2024-pbw 是 arXiv 上的 expository preprint（无 journal-ref，读取日期 2026-09-11），
+     权威性低于教科书。**它不取代 math.pbw-theorem--via-humphreys**，两条推导并列：那条承担权威性，
+     本条承担可核对性与适用范围。status 仍取 rigorous（docs/STATUS_LEVELS.md 等级 4：数学界接受的完整证明），
+     理由是 PBW 本身不存在「证明是否成立」的疑问，且本篇给出两条独立的完整证明；
+     若 reviewer 认为「未发表」应压到更低一级，请在此登记裁决。"
+  - "**Prop 6.1 的证明走非教科书路线**：它把 PBW 归约到 Magnus–Witt 定理（本篇 Thm 1.5 / 1.6 / 1.7, p. 5），
+     而 Magnus–Witt 本身**本图没有节点、本轮也没有独立核实其证明**（researcher 读了陈述，没读 §1–§5 的证明）。
+     若 reviewer 介意这条依赖，应改用 Appendix A 的 **Corollary A.4(f)**（经典 Witt–Lazard 路线），
+     它不经过 Magnus–Witt。两条路线在同一份来源里都是完整的。"
+  - "**Appendix A 的证明链未逐行核实**：本轮 L1 读的是 Corollary A.4 的陈述与其前后文
+     （含「In particular, we find the statement of the PBW theorem in (f)」这句），
+     **Lemma A.1 → Corollary A.2 → Lemma A.3 的证明正文没有逐行核**。"
+  - "**基环比本节点更宽，本推导按窄的用**。来源对任意幺交换环 K（𝔤 为自由 K-模）成立，本节点限定域 F。
+     这个方向是安全的（域上的模皆自由，故本节点是来源的特例）。⚠ 但**不要反过来**：
+     来源 p. 2 逐字记载 PBW 在一般交换环上**有反例**（Širšov、Cartier、Cohn），放宽基环只能放宽到
+     (i) 循环模直和 / (i') PID 或 Dedekind 环 / (ii) ℚ ⊂ K。要放宽应新建节点，不得改本节点陈述。
+     这条同时**确认了** math.pbw-theorem--via-humphreys 的 gaps 第四条不是过度谨慎。"
+  - "**未形式化**：Mathlib 官方定理跟踪表 `docs/1000.yaml` 的 `Q2270905` 条目**有条目、无 `decl`**
+     ⇒ 官方登记为未形式化（L1，读取日期 2026-09-11）；Isabelle/AFP 与 Coq 侧同样没有
+     （math-sources.md §33.6）。⇒ 本推导以及一切经过它的路径**上限是 rigorous，不得标 formalized**。"
+notes: |
+  **本推导为什么存在**（落地 math-sources.md §33.7(c)）：在此之前 math.pbw-theorem 只挂着
+  `--via-humphreys` 一条推导，而那条的 gaps 第一条逐字承认「**印本未取得** …… 本推导对来源的核实等级是
+  L3/L4，不是 L1」。本条的来源是**全文到手、逐页读图**的 L1，且**把前提逐字写出来**
+  （K 幺交换环、𝔤 自由 K-模、无维数限制、索引集任意）。同一张卡挂两条独立推导，
+  把「权威性」与「可核对性 + 适用范围」分开承载，正合项目原则 1。
+
+  **depends_on 为空是有意的**，与 math.pbw-theorem--via-humphreys 同理：PBW 的输入只有张量代数、
+  对称代数、泛包络代数这三个构造，本图不为它们建节点（它们是 Mathlib 已有的东西，
+  见 `Mathlib/Algebra/Lie/UniversalEnveloping`），把它们伪造成依赖只会制造没有内容的边。
+  本条是李代数一侧的**叶子式输入**，可信度完全由 sources 承载。
+  ⇒ `uv run stringgraph validate` 会为本节点报一条「无依赖」warning，**这是预期的**，与那条推导一致。
+
+  **status 的选择**：rigorous，不是 formalized（理由见 gaps 最后一条），也不援引
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款（那是给「有限步初等计算 + reviewer 复核」用的）；
+  本条靠的是来源里两条已写出的完整证明。
+
+  **本推导对图的实际作用**：它是把 `math.verma-module-free-over-negative-part--via-pbw-theorem`
+  到 math.pbw-theorem 那条边从 `inferred: true` 改成 `inferred: false` 的依据——
+  瓶颈是「本图有没有一条来源背书无限维」，本条就是那条来源。详见目标节点 notes 的 2026-09-11 更新记录。
+author: curator
+created: "2026-09-11"

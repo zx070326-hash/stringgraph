@@ -39,5 +39,15 @@ notes: |
   ⚠ 本节点定义的是**共形正规序**（按传播子减除，与坐标有关）。它与模式展开中的
   **产生-湮灭正规序**（把 α_{n>0} 移到右边）不是同一个操作，两者在 L_0 上相差一个常数；
   对 X 理论该常数为零，见 worldsheet.normal-ordering-constant-ax。
+
+  【已被 worldsheet.conformal-normal-ordering-v2 取代（curator 2026-09-11）】
+  本卡 statement 第一句限定「对自由标量理论」，但图中多处把它用到**费米型 bc 系统**上
+  （worldsheet.bc-ghost-normal-ordering-constant--via-state-operator、
+  worldsheet.normal-ordering-modes-agree--via-self-contraction 等），
+  后者的 gaps 里逐字记着这是「本推导做的外推」。v2 把设定放宽到任意自由场
+  （带 Grassmann 宇称 + 一个相容的两点函数），并显式写出费米换序符号 (−1)^{σ(P)}；
+  X 部门逐字退化为本卡，**数值上无新断言**。
+  所有 uses/depends_on 引用已于同日换到 v2；本卡保留只为不改动已提交节点的 id 与 statement。
+superseded_by: worldsheet.conformal-normal-ordering-v2
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

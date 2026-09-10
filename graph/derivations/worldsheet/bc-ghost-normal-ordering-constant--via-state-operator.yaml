@@ -6,7 +6,14 @@ depends_on:
   - id: worldsheet.bc-ghost-cft
   - id: worldsheet.bc-ghost-ground-state-ghost-number
   - id: worldsheet.state-operator-isomorphism
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      **换代（curator 2026-09-11）**：原为 worldsheet.conformal-normal-ordering（v1）。
+      本推导对象是**费米型** bc 系统，而 v1 的 statement 首句限定「对自由标量理论」——
+      这条边此前是一次未标注的外推。v2 覆盖任意自由场（带 Grassmann 宇称的两点函数
+      + 显式的费米换序符号 (−1)^{σ(P)}），故该外推现在有节点承载。
+      ⚠ 残留：v2 里的费米符号规则本身在本项目的文献核实中没有对应条目
+      （见 v2 第二条 source 的 note），只是把外推从「没写」变成「写明并标出弱点」。
   - id: worldsheet.energy-momentum-laurent-modes
 sources:
   - ref: polchinski-1998-v1
@@ -28,6 +35,11 @@ gaps:
      采用 a^g = -1 的依据是本推导的重算加上 §4.3 用法的自洽性，不是原书逐字核实。"
   - "|↓⟩ = c_1|0⟩ 这一等同来自 worldsheet.brst-quantization 的既有定义卡与
      worldsheet.bc-ghost-ground-state-ghost-number 的 (i)，本图未从 §2.7 原文逐字核实该式。"
+  - "**正规序卡的费米符号规则未经文献核实**（2026-09-11 换代后的残留）。本推导现依赖
+     worldsheet.conformal-normal-ordering-v2，它覆盖费米型场；但 v2 里的 (−1)^{σ(P)}
+     规则是本图按两点函数的反对称性补出的措辞，抽取记录中没有覆盖它的条目
+     （原书正文在付费墙后）。对本推导的实际影响很小——summary 只用到
+     [L^g_0, c_1] = −c_1 这一条模式代数，不显式做 Wick 缩并——但边上的这个弱点要记账。"
 notes: |
   reviewer-verified: reviewer-ch23, 2026-09-10（裁定 a^g = -1，理由即本 summary：
   |↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1，[L_0, c_1] = -c_1）。

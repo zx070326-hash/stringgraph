@@ -1,0 +1,86 @@
+id: worldsheet.descendant-weight-grading-v2--via-lean
+target: worldsheet.descendant-weight-grading-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供本推导的**唯一实质输入**：括号关系
+      `VirasoroAlgebra.lie_lgen_lgen (n m : ℤ) : ⁅lgen R n, lgen R m⁆ =
+       ((n : R) − (m : R)) • lgen R (n + m) + (if n + m = 0 then centralTerm R n else 0) • cgen R`
+      （StringFormal/Virasoro/Basic.lean，即该定义卡的 formal.lean_decl 所指的对象），
+      以及中心项在 m = 0 处为零 `centralTerm_zero : centralTerm R (0 : ℤ) = 0`。
+      「李模」的类型类（`LieRingModule (VirasoroAlgebra R) M` + `LieModule R (VirasoroAlgebra R) M`）
+      来自 Mathlib，不是本图节点。字面依赖（逐条调用）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/DescendantGrading.lean :: StringFormal.Virasoro.{wordActOn, wordActOn_nil, wordActOn_cons, wordActOn_verma, lie_lgen_zero_wordActOn, lie_lgen_zero_wordActOn_of_isHighestWeightVector, vermaLift_wordAct}；上游调用 StringFormal.Virasoro.{VirasoroAlgebra.lie_lgen_lgen, centralTerm_zero}"
+    note: |
+      本仓库，形式化分支 agent/formalizer/descendant-general，已由 lead 合入 main；
+      Lean 4 + Mathlib v4.33.1。文件头自述「无 sorry」，formal/TODO.md 的
+      `descendant-weight-grading` 一条已勾选并逐字记下「只用 `⁅L_0, v⁆ = h • v` 这一条假设」。
+      **curator 未自行重跑 `lake build`**；依据是该自述、TODO 登记与分支已合并进 main。
+      ⚠ 记账细节：`centralTerm_zero` 目前住在 StringFormal/Virasoro/Verma.lean 里，
+      DescendantGrading.lean 因此 `import StringFormal.Virasoro.Verma`。这是**文件组织的产物，
+      不是数学依赖**：`centralTerm_zero` 是 Basic 级事实（centralTerm R 0 = 0），
+      与 Verma 模无关，故本推导**不**依赖 worldsheet.verma-module-v2。
+      formal/TODO.md 的 `basic-lean-housekeeping` 一项已登记把这类引理挪回 Basic.lean。
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.14)，p.72（式号经 schrans-2020 目录核实）"
+    note: |
+      **不承载本推导的论证**，只作对照：来源在幺正 CFT 语境里写下同一式，并把它与
+      「⊕ 分解」「本征值严格大于 h」两句混在一起。后两句不在目标陈述里（见目标卡的
+      【本节点明确不断言】(b)(c) 与旧卡 worldsheet.descendant-weight-grading 的 notes）。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/DescendantGrading.lean。
+
+  **词的作用**：`wordActOn R M l v := l.foldr (fun n x => ⁅lgen R n, x⁆) v`，`l : List ℤ`。
+  这就是目标陈述的 L_{n_1} … L_{n_r} v（`l = [n_1, …, n_r]`，`r = 0` 时 `wordActOn _ _ [] v = v`）。
+
+  **本征值公式** = `lie_lgen_zero_wordActOn`：
+    (hv : ⁅lgen R 0, v⁆ = h • v) → ∀ l : List ℤ,
+      ⁅lgen R 0, wordActOn R M l v⁆ = (h − ((l.sum : ℤ) : R)) • wordActOn R M l v。
+  证明是对列表 `l` 归纳，五行：
+    · `nil`：`simpa using hv`（r = 0 的情形就是假设本身）；
+    · `cons a t`：`leibniz_lie` 把 ⁅L_0, ⁅L_a, x⁆⁆ 拆成 ⁅⁅L_0, L_a⁆, x⁆ + ⁅L_a, ⁅L_0, x⁆⁆；
+      `VirasoroAlgebra.lie_lgen_lgen` 给 ⁅L_0, L_a⁆ = (0 − a)·L_a + (中心项)·C，
+      而中心项因 `centralTerm_zero`（`0 + a = 0` 分支只在 a = 0 时命中，且那时 centralTerm R 0 = 0）
+      整体消去（`ite_self, zero_smul`）；对尾部用归纳假设 `ih`，`← add_smul` 合并标量，
+      `push_cast; ring` 收尾把 (−a) + (h − Σ_{t}) 化为 h − (a + Σ_{t}) = h − l.sum。
+
+  取 `l = [−k_1, …, −k_r]`（k_i ≥ 1）即 `l.sum = −Σ k_i`，得目标陈述的第二式 h + Σ k_i。
+
+  **「不需要最高权条件」有机器见证**：`lie_lgen_zero_wordActOn` 的假设只有 `⁅L_0, v⁆ = h • v`；
+  带最高权向量的版本 `lie_lgen_zero_wordActOn_of_isHighestWeightVector` 是它的一行推论
+  （只取 `IsHighestWeightVector.lie_lgen_zero` 这一个分量）。
+gaps:
+  - |
+    (i) **不涉及张成、线性无关、直和分解**。目标陈述的【不断言】(a)(b) 正是这些；
+    Lean 侧对应物在别处且**假设更强**：worldsheet.verma-module-v2 的
+    `iSup_levelSpan_eq_top`（任意基环，只给 ⨆）与 `isInternal_levelSpan` /
+    `levelSpan_eq_eigenspace`（需 `[Field K] [CharZero K]`）。
+    在本推导的一般模 M 上连 ⨆ 都不成立（M 未必由 v 生成）。
+  - |
+    (ii) **「本征值两两不同」不在本推导内**。目标陈述只说本征值与 h 相差正整数 Σ k_i；
+    要从中推出「不同 level 的本征值不同」需要 CharZero（Lean 里体现在
+    `Verma.levelSpan_iSupIndep` 用 `Nat.cast_injective`）。
+    旧卡 worldsheet.descendant-weight-grading 的「严格大于 h」是无条件写的，那是错的（见其 notes）。
+  - |
+    (iii) **代数版、无解析结构**。M 是抽象 R-模，没有内积、没有拓扑、没有幺正性；
+    因此本推导与「幺正 CFT 中 L_0 谱非负」一类结论无关
+    （那一支是 worldsheet.weight-zero-primary-constant，physical-argument）。
+  - |
+    (iv) **中心荷不进入，故本推导也不断言中心元在 v 上如何作用**。目标陈述同样不含它；
+    需要 C v = c v 的下游应引 worldsheet.verma-module-v2 或 worldsheet.virasoro-algebra-v2。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  与旧卡的推导 worldsheet.descendant-weight-grading--via-virasoro-commutators（rigorous，
+  reviewer-verified: reviewer-ch23, 2026-09-10）是**同一段代数计算的两条独立记录**：
+  那一条是手写归纳并声明了 char-0 / 分解的缺口，本条是机器检查且陈述已剥掉分解子句。
+  旧卡已 superseded_by 本卡的目标；那条推导保留，不删。
+author: curator
+created: "2026-09-11"

@@ -28,7 +28,7 @@ statement: |
   (b) V(c,h) ≠ 0。本节点的一切结论在 V(c,h) = 0 时平凡成立（空洞真），
       非零性同样归 worldsheet.verma-module-pbw-basis。
   (c) 与 Verma 模的不可约性、奇异向量、Kac 行列式无关。
-uses_conventions: [conv.virasoro-standard]
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
 formal:
   lean_decl: StringFormal.Virasoro.finrank_levelSpan_le_card_partition
   lean_file: StringFormal/Virasoro/VermaPBW.lean
@@ -59,6 +59,10 @@ sources:
       （2026-09-11 起 worldsheet.verma-module-pbw-basis 已 superseded_by math.verma-module-free-over-negative-part）。
 tags: [cft, representation-theory, verma-module, pbw, straightening, formalized]
 notes: |
+  【记号约定（curator 2026-09-11 补）】uses_conventions 新增 conv.verma-module-notation：
+  本图记 V(c,h)、最高权向量 |c,h⟩，对照 Kytölä 𝒱_{c,h} / v_{c,h}、Lian–Zuckerman M(c,h)、
+  Humphreys Z(λ)。**statement 文本未改**（原则 1），该约定只是把已在用的记号显式化并给出对照表。
+
   【与 math.verma-module-free-over-negative-part 的分工】那张卡是完整的 PBW 结论
   （有序词构成**基**、dim = p(N)、V ≠ 0），rigorous 未形式化。本卡片只是它的
   「≤」一半（张成），formalized。那张卡的推导 --via-pbw-theorem 现在 depends_on 本卡片：

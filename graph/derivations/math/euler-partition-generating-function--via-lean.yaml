@@ -1,0 +1,117 @@
+id: math.euler-partition-generating-function--via-lean
+target: math.euler-partition-generating-function
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/EulerPartition.lean :: StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow"
+    note: |
+      本仓库，合并提交 44386e8（"merge: Euler partition generating function (formalizer,
+      StringFormal.Math)"），形式化侧提交 3ce78e5；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的全部声明：`StringFormal.Math.{partitionGF, coeff_partitionGF,
+      constantCoeff_partitionGF, hasProd_partitionGF, multipliable_geomSeries,
+      partitionGF_eq_tprod_geomSeries, one_sub_X_pow_mul_geomSeries,
+      partitionGF_mul_tprod_one_sub_X_pow, tprod_one_sub_X_pow_mul_partitionGF,
+      isUnit_tprod_one_sub_X_pow, constantCoeff_tprod_one_sub_X_pow, partitionGF_eq_invOfUnit,
+      coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq, partitionGF_eq, inv_one_sub_X_pow,
+      partitionGF_eq_tprod_inv}`。
+      文件头自述「Everything hard is Mathlib's」；formal/TODO.md 的 `euler-partition-gf`
+      记「无 sorry，公理只有标准三条」。该文件是 `StringFormal/Math/` 孤岛，
+      **不 import** `Virasoro/` 或 `NoGhost/`，只 import Mathlib 的
+      `Combinatorics.Enumerative.Partition.Glaisher` 与 `RingTheory.PowerSeries.Inverse`。
+      公理检查：`uv run stringgraph check-axioms --decl
+      StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow`，见 notes 的运行记录。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/Math/EulerPartition.lean 内完成，
+  外加 Mathlib v4.33.1 的两条输入。路线：
+
+  1. **Mathlib 输入（分拆的生成函数，受限版）**。
+     `Nat.Partition.hasProd_powerSeriesMk_card_restricted R (fun _ ↦ True)` 是 Mathlib
+     `Partition/Glaisher.lean` 里的结论：对「无限制」的分拆（谓词恒真），
+       HasProd (fun n ↦ Σ'_j X^{(n+1)j}) (mk fun N ↦ card{N 的分拆})
+     在 R[[X]] 的逐系数拓扑下成立。它是 `Nat.Partition.hasProd_genFun`
+     （`Partition/GenFun.lean`）取 f ≡ 1 的特化；GenFun 模块文档把这一特化列为 TODO。
+     `simpa` 掉 `restricted` 的恒真谓词即得 `hasProd_partitionGF`，
+     由此 `partitionGF_eq_tprod_geomSeries`：P_R(X) = ∏'_{n≥1} Σ_{j≥0} X^{nj}
+     （目标陈述 (2)）。**这一步是整个证明里唯一非平凡的组合学内容**，且完全在 Mathlib 里。
+
+  2. **每个 Euler 因子被几何级数逆掉**（`one_sub_X_pow_mul_geomSeries`）：
+       (1 − X^m) · Σ'_{j≥0} X^{mj} = 1,
+     把 X^{mj} 改写为 (X^m)^j 后即是 Mathlib 的
+     `PowerSeries.WithPiTopology.one_sub_mul_tsum_pow_of_constantCoeff_eq_zero`
+     （常数项为 0 的幂级数 Y 满足 (1 − Y)·Σ' Y^j = 1）。任意交换环。
+
+  3. **主定理**（`partitionGF_mul_tprod_one_sub_X_pow`，目标陈述 (1)）：
+       P_R(X) · ∏'_{n≥1}(1 − X^n)
+       = ∏'_{n≥1} Σ_j X^{nj} · ∏'_{n≥1}(1 − X^n)        （第 1 步）
+       = ∏'_{n≥1} ( Σ_j X^{nj} · (1 − X^n) )              （两个可乘族的 tprod 之积 = 逐项积的 tprod：
+                                                            `Multipliable.tprod_mul`，可乘性分别来自
+                                                            第 1 步与 Mathlib 的
+                                                            `WithPiTopology.multipliable_one_sub_X_pow`）
+       = ∏'_{n≥1} 1 = 1.                                  （第 2 步 + `tprod_one`）
+     由此立刻得 `isUnit_tprod_one_sub_X_pow` 与 `partitionGF_eq_invOfUnit`
+     （P_R 是 `PowerSeries.invOfUnit (∏'(1 − X^n)) 1`，用 Mathlib 的 `mul_invOfUnit` 与
+     常数项 = 1）。
+
+  4. **无拓扑重述**（`coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq`，目标陈述 (3)）：
+     对任意交换环 S 临时装上离散拓扑，可乘性给出有限部分积
+     ∏_{n∈s}(1 − X^n) → ∏'(1 − X^n)（`Multipliable.hasProd`），左乘 P_S 并用第 3 步，
+     再用逐系数拓扑下 coeff_N 连续（`WithPiTopology.continuous_coeff`）把极限落到系数上，
+     得 coeff_N(P_S · ∏_{n∈s}(1 − X^n)) 最终 = coeff_N 1 = [N = 0]。
+     声明本身不带任何拓扑类型类假设。
+
+  5. **域上的除法形式**（目标陈述 (4)）：`partitionGF_eq` 由第 3 步 +
+     `PowerSeries.eq_inv_iff_mul_eq_one`（常数项 ≠ 0）；`inv_one_sub_X_pow` 由第 2 步 +
+     `PowerSeries.inv_eq_iff_mul_eq_one`；`partitionGF_eq_tprod_inv` 把后者代入第 1 步的
+     几何级数形式，得逐因子取逆的物理写法。
+
+  全部步骤是形式幂级数环里的代数 + Mathlib 已有的逐系数拓扑引理，无解析内容。
+gaps:
+  - |
+    **p(N) 的具体数值不可计算**：`Fintype.card (Nat.Partition N)` 经 `Fintype.ofSurjective`
+    从 `Composition N` 构造，`decide` 归约不了。它按定义就是分拆函数，但目标陈述对具体 N 的
+    数值检验（如 coeff_5 P = 7）在 Lean 里不能靠 `decide` 自动完成。
+    与 worldsheet.verma-level-spanned-by-partitions--via-lean 的同名 gap 相同。
+  - |
+    **文献侧无带编号的独立来源**。本推导的 sources 只有本仓库；数论教材候选定位
+    （Hardy–Wright 第 XIX 章 / Andrews §1.1）编号未核实、印本未取得，故未登记 bib、
+    未入 sources（见目标节点 notes）。这不影响 formalized 的判定——证据标准由 Lean 构建承载——
+    只影响「文献归属」一栏的完整性。
+  - |
+    **与 Verma 特征标的接线未做**。要得到 ch_q V(c,h) = q^h ∏(1 − q^n)^{−1}，还差
+    dim V_N = p(N) 的下界一半（PBW；math.verma-module-free-over-negative-part，rigorous 未形式化；
+    formal/TODO.md 的 pbw-verma (b)）。本推导刻意不碰这一步：`Math/` 是孤岛，不 import `Virasoro/`。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+  **本推导的公理检查由 curator 亲自跑过**（见本 notes 末尾的运行记录），
+  不是只依赖 formal/ 的自述——这是图里第一条这样办的 formalized 推导。
+
+  **depends_on 为空是有意的**：本推导的输入只有 Mathlib 的分拆生成函数（`hasProd_genFun`）
+  与形式幂级数的逐系数拓扑引理，本图不为 Mathlib 的基础库建节点。
+  本节点是本图在组合学一侧的一个**数学输入叶子**，与 math.pbw-theorem--via-humphreys、
+  math.laplace-fundamental-solution-2d--via-lieb-loss 同型；validate 对空 depends_on 的
+  warning 是预期内的。
+
+  **为什么 lean_decl 选无逆元形式而不是物理写法**：`partitionGF_mul_tprod_one_sub_X_pow`
+  在任意交换环上成立且不引入「取逆」这一额外结构；`partitionGF_eq_tprod_inv` 虽是物理文献
+  的字面形状，却需要域。按 formal/TODO.md 的建议取前者作 lean_decl；后者作为同一卡片的 (4)
+  一并登记在目标节点 sources 的逐条对应里，下游需要哪种形状就引哪个声明名。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，Lean 4 + Mathlib v4.33.1，EulerPartition.olean 时间戳
+  2026-09-11 02:45）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow
+
+  输出 `ok  StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow  axioms: propext
+  Classical.choice Quot.sound`，`1 declarations checked: 1 ok, 0 non-standard, 0 missing;
+  0 errors`。同一轮另外五条也全部 ok（同样三条公理）：
+  `partitionGF_eq`、`partitionGF_eq_tprod_inv`、`partitionGF_eq_invOfUnit`、
+  `coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq`、`partitionGF_eq_tprod_geomSeries`。
+  ⇒ 目标陈述 (1)(2)(3)(4) 的每一种写法都**逐条**通过了公理检查，无 `sorryAx`。
+  注：check-axioms 是在**主仓库**跑的（本分支的 worktree 没有自己的 .lake），
+  而本分支未改动 formal/ 下任何文件，两边 EulerPartition.lean 逐字相同（合并提交 44386e8）。
+author: curator
+created: "2026-09-11"
