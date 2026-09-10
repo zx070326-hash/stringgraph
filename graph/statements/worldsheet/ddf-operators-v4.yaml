@@ -105,5 +105,58 @@ notes: |
   只含振子部分），其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模
   α^μ_0 = (2α')^{1/2} p^μ 与动量 p（归一化 (★) 的全部内容都关于 p，A^i_n 还把 p 移到 p + n k_0），
   这部分**尚未形式化**，因此本节点不继承那两个节点的 formalized 状态。
+
+  【Lean 进展 2026-09-11】本仓库合并提交 9691057（formal 侧提交 4c12d36），新增
+  `formal/StringFormal/NoGhost/VertexOperator.lean` 与 `formal/StringFormal/NoGhost/DDF.lean`，
+  两者均无 sorry，公理只有 propext / Classical.choice / Quot.sound。
+  **本节点 status 不变（仍 rigorous，不升 formalized）**：A^i_n 本身尚未定义，
+  已形式化的只是它的两个零件。逐条登记成果与由此暴露的缺口，对照 formal/TODO.md 的 `ddf-operators` 项。
+
+  (1) **顶点算子 :e^{i k_0·X}: 的振子部分已形式化**。在**代数** Fock 空间
+      （worldsheet.bosonic-fock-space 的 `MvPolynomial (Osc D) R`）上，正规序指数的两半都是初等的：
+      产生半 E_-(z) = exp(Σ_{m≥1} (b·α_{-m}/m) z^m) 只是"乘以交换环 Fock D R 的一个显式元素"
+      （`Fock.creaExp`，单项式系数即经典指数权）；湮灭半 E_+(z) = exp(−Σ_{l≥1} (b·α_l/l) z^{-l})
+      的指数是常系数导子，故 E_+ 就是**变量平移** X_{μ,l} ↦ X_{μ,l} − b^μ T^l（`Fock.vertexSub`），
+      一个到 Polynomial (Fock D R) 的代数同态。于是 z^K 系数 `Fock.vertexOsc η b K`
+      逐向量是有限和，**全程不用任何收敛性假设**。这里 b^μ = (2α')^{1/2} k_0^μ 是本节点 k_0 的重标度。
+      核心恒等式：`Fock.lie_mode_vertexOsc`（[α^μ_p, V_K] = b^μ V_{K−p}，p ≠ 0）与双动量形式
+      `Fock.mode_vertexOsc_sub`（左侧模态用参数 a+b、右侧用 a，对**所有** p 含 0 成立）。
+      动量塔 `TowerFock D R = ℤ →₀ Fock D R`（第 j 层动量参数 a + j·b）与移位算子 `towerShift n`
+      （即零模算符 e^{i n k_0·x}）也已形式化，塔上的 `lie_towerMode_towerVertex` 对**所有** p
+      （**含 p = 0**）成立。相对地，单个 Fock 空间上 p = 0 的括号**为零**
+      （`Fock.lie_mode_zero_vertexOsc`）：本节点"A^i_n 把动量 p 移到 p + n k_0"这句在形式化里
+      是**必需**的，没有动量塔就没有正确的零模关系。塔的索引字典是 j = −N（本节点写作 {k − N k_0}）。
+      本节点说明 (b)（k_0² = 0 ⇒ k_0·p 沿塔不变）已形式化为 `dotVec_towerMomentum_right_of_isotropic`。
+
+  (2) **【本项目 Lean 侧的新发现，文献未明写】横向条件 ε·k_0 = 0 是 A^i_n 作为代数算子良定义的
+      必要输入，而不只是为了避免奇异 OPE / 使被积量成为权 1 primary。** 理由：DDF 算子是模态和
+      A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_m，它在代数 Fock 空间上逐向量是**有限**和，当且仅当可以把
+      α^i_m 移到右侧（那里 m 充分大时湮灭该态）；移动的合法性正是 [α^i_m, V^{(n)}] = 0，即 ε·k_0 = 0
+      （Lean 侧 `lie_towerMode_towerVertex_of_eq_zero`，配合 `Fock.vertexOsc_apply_eq_zero_of_level`）。
+      若 ε·k_0 ≠ 0，则按 (1) 的 [α^μ_p, V_K] = b^μ V_{K−p}，该和每一项都非零，
+      在代数 Fock 空间上根本不是局部有限和，A^i_n 连"算子"都算不上。文献（GSW §2.3.3、GT 1972）
+      只把 ε·k_0 = 0 当作 primary 条件。本节点陈述文本不改（ε·k_0 = 0 本来就在其中），
+      这里只登记该条件的**第二重作用**。
+
+  (3) **本节点断言的 [L_m, A^i_n] = 0 尚未形式化。** 形式化所需的正确中间陈述是
+        L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m}
+      （两侧 L_m 的动量参数不同，这是塔上算子的必然写法），共形权
+        h = ½ b·b = α' k_0²，故 k_0² = 0 ⇒ h = 0。
+      现状：**归纳步已有**（`Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion`
+      把该恒等式归约为真空上的单条等式），真空 + m = 0 的情形已核验，一般 m 的形式化进行中
+      （`StringFormal/NoGhost/VertexWeight.lean`，截至 9691057 未合并）。在此之前
+      **图中不得把 [L_m, A^i_n] = 0 或"e^{i k_0·X} 权为 0"记为已机器验证**。
+
+  (4) **说明 (a) 的存在性部分不可在一般环上形式化。** "存在类光 k_0 使 k_0·p ≠ 0" 是关于
+      **实**二次型（洛伦兹号差）的断言，在一般交换环 R 上为假。Lean 侧因此把归一化与类光性
+      作为显式假设引入（`dotVec η b a = 1` 即 2α' k_0·p = 1，`dotVec η b b = 0` 即 k_0² = 0），
+      不证其可满足性。要把说明 (a)（去心直线上的标度与符号选取）完整形式化，必须取 R = ℝ
+      并引入号差与类光锥，这是一条独立待办。
+
+  (5) **仍无机器验证的部分**：A^i_n 的定义本身；[L_m, A^i_n] = 0；横向振子代数
+      [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（需顶点算子的乘积/OPE，完全未碰）；顶点算子的伴随
+      V(b)_J† = V(−b)_{−J}（需 E_+ E_- 重排序，且 Lean 侧目前只有 R-双线性型，无 sesquilinear 结构）；
+      x^μ 与 [x^μ, p^ν]（塔上只有 e^{i n k_0·x} 这一个移位，且塔建在固定的 a、b 上，
+      不是全动量空间）。
 author: curator
 created: "2026-09-10"
