@@ -26,6 +26,19 @@ namespace StringFormal.NoGhost
 
 open MvPolynomial
 
+section TowerApply
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- Pointwise formula for the DDF vertex operator: rung `j` of `V^{(n)}_K w` is the oscillator
+vertex operator applied to rung `j - n` of `w`. -/
+lemma towerVertex_apply (η b : Fin D → R) (n K : ℤ) (w : TowerFock D R) (j : ℤ) :
+    towerVertex η b n K w j
+      = Fock.vertexOsc η (vertexMomentum b n) (K - n) (w (j - n)) := by
+  rw [towerVertex, LinearMap.comp_apply, towerShift_apply, towerDiag_apply]
+
+end TowerApply
+
 namespace Fock
 
 variable {D : ℕ} {R : Type*} [CommRing R]
@@ -174,6 +187,47 @@ theorem pairing_vertexOsc_left_of_dotVec_zero (η b : Fin D → R) (hη : ∀ μ
   pairing_vertexOsc_left η b hη K v w
 
 end CreaExpAdjoint
+
+/-! ### The adjoint of the vertex operator on the DDF momentum tower -/
+
+section TowerVertexAdjoint
+
+variable [Algebra ℚ R]
+
+/-- **`(V^{(n)}_K)^† = V^{(-n)}_{-K}`** for the tower form: the DDF vertex operator carrying
+momentum `n k_0` is adjoint to the one carrying `-n k_0`, with the Laurent index reflected.
+
+This is the statement of the graph node `worldsheet.vertex-operator-adjoint`.  It combines two
+independent halves: `towerPairing_towerShift_left` for the zero-mode factor `e^{i n k_0·x}`
+(which is what turns `n` into `-n`), and `pairing_vertexOsc_left` for the oscillator factor
+(which turns the vertex momentum `n b` into `-n b`, i.e. again `n ↦ -n`).  Only `hη` is
+needed: neither `k_0² = 0` nor `2α' k_0·p = 1` enters. -/
+theorem towerPairing_towerVertex_left (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (n K : ℤ)
+    (v w : TowerFock D R) :
+    towerPairing η (towerVertex η b n K v) w
+      = towerPairing η v (towerVertex η b (-n) (-K) w) := by
+  have hneg : vertexMomentum b (-n) = -vertexMomentum b n := by
+    funext μ
+    simp only [vertexMomentum_apply, Pi.neg_apply]
+    push_cast
+    ring
+  have key : ((towerPairing η).flip w).comp (towerVertex η b n K)
+      = (towerPairing η).flip (towerVertex η b (-n) (-K) w) := by
+    refine Finsupp.lhom_ext fun i P => ?_
+    simp only [LinearMap.comp_apply, LinearMap.flip_apply, towerVertex_single,
+      towerPairing_single_left, towerVertex_apply, hneg]
+    rw [show (-K : ℤ) - -n = -(K - n) from by ring, show i - (-n) = i + n from by ring]
+    exact pairing_vertexOsc_left η (vertexMomentum b n) hη (K - n) P (w (i + n))
+  exact LinearMap.congr_fun key v
+
+/-- `⟨v, V^{(n)}_K w⟩ = ⟨V^{(-n)}_{-K} v, w⟩` on the tower. -/
+theorem towerPairing_towerVertex_right (η b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (n K : ℤ)
+    (v w : TowerFock D R) :
+    towerPairing η v (towerVertex η b n K w)
+      = towerPairing η (towerVertex η b (-n) (-K) v) w := by
+  rw [towerPairing_towerVertex_left η b hη (-n) (-K), neg_neg, neg_neg]
+
+end TowerVertexAdjoint
 
 end Fock
 
