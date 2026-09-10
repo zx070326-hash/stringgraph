@@ -271,3 +271,20 @@
                    不是 Polchinski 的论证。见 literature/extractions/polchinski-1998-v1.md
                    第 0 节与 Q9。}
 }
+
+@misc{stringformal-2026,
+  author = {stringgraph contributors},
+  title  = {StringFormal: the Lean 4 formalisation island of the stringgraph project},
+  year   = {2026},
+  note   = {本仓库自身的 `formal/` 目录（Lean 4 + Mathlib v4.33.1，Apache-2.0）。
+            **这是一手来源，不是外部文献**：引用它等于引用我们自己写并机器检查过的证明。
+            `loc` 的写法固定为「仓库相对文件路径 :: 完整声明名」，例如
+            `formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.pairing_unique`，
+            并在同一条 source 的 note 或推导节点的 notes 里给出**提交 sha**，
+            因为本仓库会继续变动，文件路径本身不构成不可变定位。
+            以本 ref 为唯一来源且 status 为 formalized 的推导，其证据标准是：
+            `cd formal && lake build` 通过、目标声明无 sorry、公理集合仅
+            propext / Classical.choice / Quot.sound。
+            当前尚无自动化检查（formal/TODO.md 的 scripts/check_axioms.lean 未做），
+            以形式化者在 formal/TODO.md 中的登记为准。}
+}

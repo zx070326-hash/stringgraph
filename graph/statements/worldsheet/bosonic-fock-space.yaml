@@ -1,0 +1,101 @@
+id: worldsheet.bosonic-fock-space
+kind: definition
+status: formalized
+title: D 个自由玻色振子的 Fock 空间（代数版，无零模）与其 level 分级
+statement: |
+  固定维数 D ∈ ℕ 与基环 R（交换幺环；物理情形取 R = ℝ 或 ℂ）。
+
+  **振子标签**：Osc(D) := {(μ, n) : μ ∈ {0, 1, …, D−1}, n ∈ Z, n ≥ 1}，
+  其中 (μ, n) 命名产生算符 α^μ_{−n}。注意 n = 0 **不在**标签集内：零模不属于本定义。
+
+  **Fock 空间**：F(D, R) := Osc(D) 上的自由交换 R-代数，即多项式代数
+    F(D, R) = R[ X_{(μ,n)} : (μ,n) ∈ Osc(D) ]
+  （等价地：产生算符张成的自由模上的对称代数）。真空 |k⟩ 即常数 1；单项式
+    X^d = ∏_{(μ,n)} X_{(μ,n)}^{d(μ,n)}     （d : Osc(D) → ℕ，有限支撑）
+  对应态 ∏_{(μ,n)} (α^μ_{−n})^{d(μ,n)} |k⟩。F(D,R) 的元素是这些单项式的**有限** R-线性组合。
+  动量 k 在本定义中只是标记「这一份 Fock 空间挂在哪个动量真空上」的外部标签，
+  不出现在 F(D,R) 的任何结构中（见 notes 的缺口 (i)）。
+
+  **算符**：设 η 为**对角**时空度规，由分量 η^{μμ} ∈ R（μ = 0..D−1）给定；
+  conv.metric-mostly-plus 下 η = diag(−1, +1, …, +1)。定义 F(D,R) 上的 R-线性算符
+    α^μ_{−n} := 乘以 X_{(μ,n)}                    （产生算符，n ≥ 1）
+    α^μ_{n}  := (n η^{μμ}) · ∂/∂X_{(μ,n)}          （湮灭算符，n ≥ 1）
+  它们满足振子（Heisenberg）代数
+    [α^μ_m, α^ν_{−n}] = (m η^{μμ}) δ^{μν} δ_{mn} · id,
+    [α^μ_{−m}, α^ν_{−n}] = [α^μ_m, α^ν_n] = 0        （m, n ≥ 1），
+  在对角 η 下这就是通行写法 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}（m, n ≠ 0）。
+  特别地 α^μ_n |k⟩ = 0（n ≥ 1）。
+
+  **level 分级**：单项式 X^d 的 level 定义为
+    N(d) := Σ_{(μ,n)} n · d(μ,n)
+  （即权函数 (μ,n) ↦ n 下的加权次数）。记 F_N ⊆ F(D,R) 为 level 恰为 N 的单项式张成的
+  R-子模（加权齐次分量）。则
+    |k⟩ ∈ F_0,   α^μ_{−n}(F_N) ⊆ F_{N+n},   α^μ_n(F_{N+n}) ⊆ F_N。
+  level 为 N 的单项式只用到模数 n ≤ N 的振子、且每个指数 d(μ,n) ≤ N，故这样的 d 只有有限多个；
+  于是每个 F_N 是**有限生成** R-模，R 为域时 dim_R F_N < ∞。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock
+  lean_file: StringFormal/NoGhost/Fock.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.{Osc, Fock}；Fock.{vacuum, creation, annihilation, oscWeight, minkowski, level, levelSubmodule}；Fock.{lie_annihilation_creation, lie_creation_creation, lie_annihilation_annihilation, annihilation_vacuum, one_mem_levelSubmodule, creation_mem_levelSubmodule, annihilation_mem_levelSubmodule, finite_setOf_level_eq, levelSubmodule_fg, levelSubmodule_finite}"
+    note: |
+      本仓库，合并提交 2fcf86a（"merge: Fock space of D free bosons with eta-induced indefinite
+      form (formalizer)"）。这是本节点 status: formalized 的依据：陈述中的每一句
+      （代数结构、振子代数、level 分级、算符移动 level、每片有限生成/有限维）都对应
+      上列声明之一，无 sorry。`Fock D R` 是 `MvPolynomial (Osc D) R` 的 abbrev；
+      `Osc D = Fin D × ℕ+`，故 μ 的范围 {0..D−1} 与 n ≥ 1 是类型层面强制的。
+  - ref: polchinski-1998-v1
+    loc: "§2.7（p.58 起），eq. (2.7.25)、(2.7.27)（开弦模式 α^μ_n 与零模 α^μ_0 = (2α')^{1/2} p^μ）；§4.1（p.121 起）（老协变量子化在这个振子 Fock 空间上强加 Virasoro 条件）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E41：(2.7.25)/(2.7.27) 的**式号与内容已核实**
+      （经第三方笔记 [S] §4.3 逐字复现）；§4.1 的**页码已核实、式号未核实**（#E54）。
+      **强度说明**：Polchinski 并不把「Fock 空间」写成一条带 level 分级与有限维性的独立定义，
+      他直接在振子上工作。本节点把它显式化为一条定义卡，是本项目的重新包装，不是逐字引用。
+      Polchinski 的 α^μ_n 含零模 n = 0；本节点**不含**零模，见 notes 缺口 (i)。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1 'Commutation relations and mode expansions'，p.75 起（章节标题与起始页来自 CUP 25 周年版 frontmatter 目录）"
+    note: |
+      定位强度 L4：目录页码由检索后端读取 CUP frontmatter PDF 得到（见
+      literature/extractions/brst-cohomology-sources.md §5.1），**未逐字核对正文，式号未核实**。
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写（整体反号）。
+tags: [bosonic-string, quantization, fock-space, oscillator-algebra, formalized]
+notes: |
+  【与 Lean 的对应】本节点是 formal/StringFormal/NoGhost/Fock.lean 的图侧定义卡，
+  由 formal/TODO.md「无鬼定理岛 / fock-space」一项在完成时点名要求 curator 建立。
+
+  【已知缺口 —— 这些是本定义**刻意不包含**的东西，不是证明漏洞】
+
+  (i) **零模缺失**。本定义没有 x^μ、p^μ，也没有 α^μ_0。动量 k 只是标签，
+      F(D,R) 的任何结构都不依赖它。后果：
+      - Sugawara 构造给出的 L_0 = α' p² + Σ_{n≥1} α_{−n}·α_n **依赖 k**，
+        因此把 Virasoro 作用装到本空间上的节点（尚未建立）必须先**显式扩张**本定义，
+        补上零模；不能直接把本节点当作 L_0 的定义域。
+      - 老协变物理态条件 (L_0 − a)|ψ⟩ = 0、L_n|ψ⟩ = 0 同样 k-依赖，
+        见 worldsheet.old-covariant-physical-states，该节点**不**继承本节点的 formalized 状态。
+      完整的弦 Fock 空间是本空间按 k 取的直和/直积分族。
+
+  (ii) **未取完化**。这是**代数** Fock 空间：元素是有限线性组合，没有取任何拓扑完化，
+      不是物理学家说的 Hilbert 空间。Goddard–Thorn 无鬼定理本身是代数陈述
+      （逐 level 有限维），故这是正确的对象；但「弦的 Hilbert 空间」是**另一条陈述**，
+      本节点不蕴含它。
+
+  (iii) **度规只支持对角 η**。Lean 侧 η 是函数 `Fin D → R`（对角元），不是一般的对称双线性型。
+      在 ℝ 上这不损失一般性（可对角化），且正是使内积在单项式基下对角的原因；
+      但一般 η^{μν} 需要一次基变换，未做。
+
+  (iv) 本定义对任意交换环 R 成立（内积矩阵元 ∏ (n η^{μμ})^k k! 无分母）。
+      需要正定性/号差的陈述必须另加有序域假设；Sugawara 里的 1/2 还会要求 ℚ-代数。
+
+  (v) F = ⊕_{N≥0} F_N 这条**直和分解未在 Lean 中断言**（Mathlib 的加权齐次分解可给出，
+      但本文件没有取用），故本节点陈述里只写了各 F_N 及算符如何移动 level，
+      没有写直和分解。要用直和分解的下游节点须自行补。
+
+  【查重】新增前跑过 `stringgraph search fock / heisenberg / oscillator`：
+  既有的 worldsheet.transverse-oscillator-commutators 是**光锥规范下 D−2 个横向振子**的
+  正定 Heisenberg 代数（一条命题），worldsheet.closed-string-oscillator-commutators 是闭弦左右行版本；
+  本节点是**协变的 D 个方向**、以定义卡形式给出的向量空间与分级，二者不重复也不冲突。
+author: curator
+created: "2026-09-10"

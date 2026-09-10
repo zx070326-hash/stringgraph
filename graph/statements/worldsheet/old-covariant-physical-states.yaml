@@ -15,5 +15,10 @@ sources:
   - ref: gsw-1987-v1
     loc: "§2.2.1"
 tags: [bosonic-string, quantization]
+notes: |
+  Fock 空间 F 的形式化定义见 worldsheet.bosonic-fock-space（`formal/StringFormal/NoGhost/Fock.lean`），
+  其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模 x^μ、p^μ
+  与动量 k（L_0 = α'p² + Σ_{n≥1} α_{−n}·α_n 以及物理态条件都依赖 k），这部分**尚未形式化**，
+  因此本节点不继承那两个节点的 formalized 状态。
 author: seed
 created: "2026-09-10"

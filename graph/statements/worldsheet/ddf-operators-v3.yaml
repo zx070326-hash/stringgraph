@@ -84,5 +84,10 @@ notes: |
   换算，不是新物理内容；若 researcher 日后拿到 GT 1972 正文或 GSW 原式号，应把 loc 补精确。
 
   k_0·p = 0 的扇区（特别是 p = 0）DDF 构造退化，需单独处理（第一轮审计 B6）。
+
+  Fock 空间 F(p) 的形式化定义见 worldsheet.bosonic-fock-space（`formal/StringFormal/NoGhost/Fock.lean`，
+  只含振子部分），其上的不定双线性型见 worldsheet.fock-indefinite-form；本节点隐含使用了零模
+  α^μ_0 = (2α')^{1/2} p^μ 与动量 p（归一化 (★) 的全部内容都关于 p，A^i_n 还把 p 移到 p + n k_0），
+  这部分**尚未形式化**，因此本节点不继承那两个节点的 formalized 状态。
 author: curator
 created: "2026-09-10"

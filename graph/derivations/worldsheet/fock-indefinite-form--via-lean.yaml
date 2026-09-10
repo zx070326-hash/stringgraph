@@ -1,0 +1,81 @@
+id: worldsheet.fock-indefinite-form--via-lean
+target: worldsheet.fock-indefinite-form
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      Lean 侧同一文件内的对象：`Fock.pairing` 等一切都定义在
+      `StringFormal.NoGhost.Fock D R` 与 `Fock.creation` / `Fock.annihilation` 之上，
+      依赖是字面的（同一命名空间、同一文件），不是重构出来的。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing, pairing_unique, pairing_comm, pairing_flip, pairing_monomial_monomial, pairing_apply, pairing_creation_left, pairing_creation_right, pairing_eq_zero_of_level_ne, pairing_X_X, pairing_X_X_minkowski_timelike, pairing_X_X_minkowski_spacelike, monomialNorm, minkowski}"
+    note: |
+      本仓库，合并提交 2fcf86a（"merge: Fock space of D free bosons with eta-induced indefinite
+      form (formalizer)"），Lean 4 + Mathlib v4.33.1。文件末尾自述「Complete, no `sorry`」；
+      formal/TODO.md 的「无鬼定理岛 / fock-space」记「公理检查：全部声明只用
+      propext / Classical.choice / Quot.sound」。**该公理检查目前是形式化者的人工登记，
+      没有自动化脚本复核**（formal/TODO.md 基础设施一节的 scripts/check_axioms.lean 未做）。
+  - ref: virasoro-lean-2025
+    loc: "Corollary 12.6（带电 Fock 空间 F_α 上的 c = 1 Virasoro 表示）、Theorem 10.1"
+    note: |
+      **旁证，不是本推导的来源**：本推导的证明全在本仓库的 Fock.lean 里，与 Kytölä 的代码无共享。
+      列在此处是为了记录「Lean 中构造玻色 Fock 空间」已有独立先例，以及它为何**不能**替代本文件：
+      按 literature/sources.bib 中该条已核实的三条使用限制，Kytölä 只有单分量（c = 1）Heisenberg、
+      正定内积、且不涉及洛伦兹不定度规——而不定性恰是本节点与整个无鬼定理的难点所在。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/NoGhost/Fock.lean 内完成。路线：
+
+  1. 先**构造**候选型。把 `Fock D R = MvPolynomial (Osc D) R` 的单项式基
+     `MvPolynomial.basisMonomials` 上的线性泛函 `d ↦ monomialNorm η d • lcoeff R d` 用
+     `Basis.constr` 延拓，得到 `pairing η`。这一步顺带给出陈述 (2) 的对角公式
+     `pairing_monomial_monomial`（基上直接读出）与对称性 `pairing_flip` / `pairing_comm`。
+
+  2. 证**伴随关系**（`pairing_creation_left`）：产生算符在单项式上是 `d ↦ d + δ_v`，
+     核心是归一化常数的递推
+       monomialNorm η (d + δ_v) = monomialNorm η d · (n η^{μμ} · (d(v) + 1))，
+     而湮灭算符 α^μ_n = n η^{μμ} ∂/∂X_v 作用在系数上恰好补出因子 (d(v) + 1)。
+     `pairing_creation_right` 由对称性得到。
+
+  3. 证**唯一性**（`pairing_unique`，即陈述 (1)）：设 B 满足 (a)(b)。先对 Q 用
+     `MvPolynomial.induction_on` 证 B 1 Q = pairing η 1 Q（归纳步用 (b) 的右伴随把
+     乘 X_v 搬到左边变成湮灭算符作用在真空 1 上，`annihilation_one` 给零）；
+     再对 P 归纳，归纳步用 (b) 的左伴随。两次归纳都只用到 (a)(b)，故 B = pairing η。
+
+  4. 陈述 (3)（level 正交）：`pairing_apply` 把 ⟨P,Q⟩ 写成沿 P 的支撑的对角和；
+     若 P 在 level M、Q 在 level N 且 M ≠ N，则每一项里 coeff d P 与 coeff d Q 不能同时非零。
+
+  5. 陈述 (4)（不定性）：`pairing_X_X` 给 ⟨X_u, X_v⟩ = δ_{uv} · n η^{μμ}；代入
+     `minkowski D R = fun μ => if μ = 0 then -1 else 1` 得 `pairing_X_X_minkowski_timelike`
+     （= −n）与 `pairing_X_X_minkowski_spacelike`（= +n）。
+gaps:
+  - |
+    (iii) **只支持对角 η**。Lean 里 η 是 `Fin D → R`（对角元），不是一般对称双线性型。
+    对角性是「单项式基即正交基」（陈述 (2)）的前提；一般 η^{μν} 需要先做一次基变换，未做。
+    在 ℝ 上这不损失一般性（可对角化），但形式化侧确实没有覆盖非对角输入。
+  - |
+    (iv) **实对称双线性型，不是半双线性型**。形式化的是 R-双线性型（R 任意交换环）。
+    物理上的复 Fock 空间带的是 Hermitian 半双线性型；两者在单项式的实张成上一致，
+    但**复情形没有证**。特别地「(α^μ_n)† = α^μ_{−n}」在本节点里是双线性型意义下的伴随，
+    不是 Hilbert 空间意义下的 Hermitian 伴随。
+  - |
+    (v) 陈述 (4) 末句「−n < 0 < n 故该型不定」在 Lean 中**未单列为定理**：文件在任意
+    `CommRing R` 上工作，没有序结构，只给出两个值 −n 与 +n。从这两个值到「不定」
+    需要 R 是有序域且 D ≥ 2，是一步平凡推理，但没有机器检查。
+  - |
+    (vi) 本推导继承 worldsheet.bosonic-fock-space 的缺口 (i)（无零模/动量）与 (ii)（未完化）。
+    因此本节点**不是**「弦的协变 Hilbert 空间上的 Minkowski 内积」这条陈述，
+    只是它的振子部分、代数版本。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。本推导**未由 curator 重新运行
+  lake build**；依据是 formal/ 的自述与 formal/TODO.md 的登记，以及 2fcf86a 已由 lead 合并进 main
+  （按根 CLAUDE.md，合并前须过 validate 与 pytest，但那两者不构建 Lean）。
+  若后续 `scripts/check_axioms.lean` 做出来，应在此补一行自动检查结果。
+
+  文献侧（Polchinski / GSW）并没有与本推导对应的论证：他们直接规定内积并计算矩阵元，
+  不证唯一性。故本推导的 sources 主项是本仓库，两条文献只挂在陈述节点上作为物理对照。
+author: curator
+created: "2026-09-10"
