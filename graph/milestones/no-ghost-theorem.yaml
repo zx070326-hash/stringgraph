@@ -29,10 +29,153 @@ canonical_source:
   ref: goddard-thorn-1972
   loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
-  status: draft
+  status: back-translated
   back_translation:
     by: physics-auditor
     text: |
+      【回译，第四轮，physics-auditor，2026-09-10。仅依据 no-ghost-theorem-v4 / ddf-operators-v4 /
+      old-covariant-physical-states 的 statement 与 uses_conventions 字段及四个约定节点写成；
+      写此文时未读 canonical_text、推导、notes、前三轮 diff_notes。formal/ 中尚无对应 Lean 声明。】
+
+      背景与约定。取 D 个自由玻色子 X^μ（μ = 0..D-1），时空度规号差 (-,+,...,+)。开弦，只有一组
+      振子 α^μ_n（n ∈ Z），零模 α^μ_0 = (2α')^{1/2} p^μ，α' 是 Regge 斜率。Fock 空间 F 上的内积由
+      (α^μ_n)^† = α^μ_{-n} 与 η_{μν} 诱导，因 η_{00} = -1 而不定。Virasoro 生成元 L_n 由 Sugawara
+      构造给出，满足 [L_m, L_n] = (m-n) L_{m+n} + (c/12) m(m^2-1) δ_{m+n,0}，c = D。
+      物理态空间 H_phys = {ψ ∈ F : (L_0 - a)ψ = 0, L_n ψ = 0 ∀ n ≥ 1}；这里 a 是截距，
+      按 Goddard–Thorn/GSW 记号（Polchinski 的 A = -a）。零模态 = H_phys 中与全部物理态正交的态。
+      F(p) 是建在动量本征态 |0; p⟩ 上的 Fock 空间，H_phys(p) = H_phys ∩ F(p)。
+      质量壳 α' m^2 = N - a，m^2 = -p^2，故 ψ ∈ H_phys(p) 的振子能级是 N = a - α' p^2。
+
+      DDF 算子（ddf-operators-v4）。横向指标 i = 2..D-1（共 D-2 个）。取一条类光去心直线
+      {λ k_0 : λ ∈ R\{0}}，k_0 ≠ 0，k_0^2 = 0。A^i_n = ∮ dz/(2πi) ∂X^i e^{i n k_0·X}，n ≠ 0，
+      其中 k_0 的标度按 2α' k_0·p = 1 取定（p 是被作用态的动量），故必须 k_0·p ≠ 0；
+      标度因子 λ = 1/(2α' k_0·p) 的符号随 sign(k_0·p)。A^i_n 把动量 p 移到 p + n k_0，
+      且 k_0·(p + n k_0) = k_0·p，故一次归一化对整条塔 {p + n k_0} 有效。
+      [L_m, A^i_n] = 0，[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}。
+
+      全局限定。以下 (1)(2) 的一切断言都只在 p ≠ 0 上作出；在 (1)（已固定 k_0）中进一步只在
+      k_0·p ≠ 0 上作出。p = 0 或（在 (1) 中）k_0·p = 0 的动量不在本陈述范围内。
+
+      (1) 设 D = 26 且 a = 1。固定一条类光去心直线 {λ k_0}，k_0^2 = 0；对每个动量 p 按
+          2α' k_0·p = 1 逐塔取定 k_0 的标度（含符号）。在扇区 {p : k_0·p ≠ 0} 上：
+        (1a) 对任意 p 满足 k_0·p ≠ 0、任意 ψ ∈ H_phys(p)：⟨ψ|ψ⟩ ≥ 0。
+        (1b) 设 k 满足 α' k^2 = 1（即 N = 0 的快子壳）且 k_0·k ≠ 0，k_0 已按 2α' k_0·k = 1 归一化。
+             令 H_phys(k; k_0) = ⊕_{N ≥ 0} H_phys(k - N k_0)（由 α'(k - N k_0)^2 = 1 - N，
+             其第 N 个直和项恰是能级 N 的物理态），
+             H_0(k; k_0) = {χ ∈ H_phys(k; k_0) : ⟨χ|ψ⟩ = 0 ∀ ψ ∈ H_phys(k; k_0)}，
+             H^⊥(k) = span{A^{i_1}_{-n_1} ⋯ A^{i_r}_{-n_r} |0; k⟩ : r ≥ 0, n_j ≥ 1, i_j ∈ {2,...,25}}
+             （A^i_{-n} 把动量移到 p - n k_0、能级升 n，所以 H^⊥(k) ⊂ H_phys(k; k_0)）。则
+          (1b-i)   H_phys(k; k_0)/H_0(k; k_0) 上由 Fock 内积诱导的内积正定；
+          (1b-ii)  H^⊥(k) ↪ H_phys(k; k_0) ↠ H_phys(k; k_0)/H_0(k; k_0) 是等距同构：
+                   线性双射且保内积；
+          (1b-iii) 该同构保能级分级：左边 N = Σ n_j，右边 N = 振子能级 = a - α' p^2，
+                   等价于动量 p = k - N k_0。（不是 L_0 分级；H_phys 上 L_0 ≡ 1。）
+
+      (2) 设 D > 26 且 a = 1。则存在动量 p ≠ 0 与 ψ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0。
+          （p ≠ 0 是断言的一部分：p = 0 处对任意 D 都有负模物理态，故若不加量词本条对 D = 26 亦真。）
+          对一般 a 不作断言。
+
+      不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
+    verdict: faithful
+    diff_notes: |
+      【第四轮 diff_notes，2026-09-10，对象 worldsheet.no-ghost-theorem-v4 与按 v4 改写后的 canonical_text】
+      参照材料（回译写完后才读）：canonical_text；v4 / ddf-operators-v4 的 notes 与 sources；推导
+      worldsheet.no-ghost-theorem-v4--via-goddard-thorn（含 gaps）；worldsheet.no-ghost-theorem-subcritical 全文；
+      literature/extractions/brst-cohomology-sources.md §1.3（FGZ Thm 2.8 逐字）、§3–§4；primary-sources-round2.md
+      §1.6（LZ 1991 Thm 3.5 逐字）、§4、§9.3；polchinski-1998-v1.md E58/E68。GT 1972 正文仍未获取。
+      数值复核脚本重写为 graph/build/noghost_round4_check.py（gitignore，不入库；uv run --with numpy），
+      α' = 1/2、mostly-plus，k = (0,√2,0,…)、k_0 = (1,1,0,…)/√2，p_N = k − N k_0，直接求 L_1..L_N 公共核再看 Fock
+      Gram 矩阵在核上的特征值符号 (负,零,正)：
+        D=26, a=1, p_N（p ≠ 0、k_0·p = 1 ≠ 0）：N=1/2/3 = (0,1,24) / (0,26,324) / (0,375,3200)，正特征值个数 = p_24(N)，
+            且每个 p_N 的质量壳能级 a − α'p_N² 恰为 N；dim H_phys(p_N) = 25/350/3575。⇒ (1a)(1b-i)(1b-ii 维数)(1b-iii) N ≤ 3 通过。
+        D=27, a=1, 同一塔：N=1 (0,1,25)，N=2 (1,26,350)，N=3 (26,377,3575)。p_2、p_3 类时、非零、k_0·p = 1。⇒ (2) 的见证
+            在 p ≠ 0 上存在。
+        D=26, a=1, p=0：N=1 (1,0,25)，N=2 (25,0,325)。⇒ 第三轮 B1 的反例复现：不加 p ≠ 0 量词则 (2) 对 D=26 亦真。
+        D=26, a=1, N=1, p=(1,1,0,…)（p ≠ 0、p² = 0 在壳、k_0·p = 0）：(0,1,24)，无负模。⇒ (1) 多排除的 k_0·p = 0 扇区
+            在 N=1 处无鬼（与第三轮 B2 一致），排除是收窄而非必要，允许。
+
+      A. 任务指定的核查项
+      A1. 〔(a) 全局动量限定是否同时约束 (1)(2)〕是，且无歧义。v4 把限定写成独立段落置于 (1)(2) 之前，逐字写明
+          「对下述 (1) 与 (2) **同时**生效」，并在 (2) 内部重复写出量词「存在动量 p ≠ 0 与 |ψ⟩ ∈ H_phys(p)」——两层保险，
+          任一层单独都足以钉死读法。对 (1)：全称量词的范围被限到 {p : k_0·p ≠ 0}（蕴含 p ≠ 0）；对 (2)：存在量词的见证
+          被限到 p ≠ 0。二者与"一切断言只在非退化扇区上作出"的读法一致，无第三轮那种"按位置读"的歧义。
+          附带自洽性：(1b) 的塔 {k − N k_0} 自动落在扇区内（k_0·(k − N k_0) = k_0·k ≠ 0 ⇒ 每个塔动量非零且 k_0·p ≠ 0），
+          故 (1b) 不需要另加扇区条件。canonical_text 的对应段落与 v4 语义逐条相同。
+          措辞小疵（不阻止）：限定段给的理由「DDF 构造在这些动量上退化」只解释 (1) 的排除；(2) 排除 p = 0 的理由是
+          区分力（下一句已写）。另 v4/canonical (2) 的括注「p = 0 处对任意 D（包括 D = 26）都有负模物理态」隐含 a = 1
+          （α^0_{−1}|0;0⟩ 是物理态要 L_0 = 1 = a）；在 (2) 的 a = 1 语境内正确，是说明句不是断言。
+      A2. 〔(b) v4 (2) 的 "p ≠ 0" 无逐字来源，是否阻止 approved〕**判定：不阻止，作为已登记 gap 可接受。**理由三条：
+          (i) 量词只**收窄**见证范围，不新增任何超出文献的断言。文献（Goddard 2008 → Brower–Thorn 1971；Polchinski §4.1
+              E57 的 level-2 分析；第一轮 B1 的精确公式）给出的 D > 26、a = 1 反例都在能级 2：level-2 标量物理态的模
+              ∝ (D−1)(26−D) < 0。而 a = 1 时能级 N 的质量壳是 α'p² = 1 − N，N = 2 ⇒ α'p² = −1，p 类时、**自动非零**。
+              所以"存在 level-2 鬼"逐字蕴含"存在 p ≠ 0 上的鬼"；p ≠ 0 不是额外假设，是已有见证的性质。本轮数值
+              （D=27 N=2 (1,26,350)，p 类时）再次复现。
+          (ii) 推导节点 gaps 末两条已如实登记「p ≠ 0 无逐字来源，来自本项目核算 + FGZ Thm 2.8 的 p ≠ 0（D = 26 正定性）」，
+              canonical_text 的括注也写明其来源是第三轮审计 B1。船长看到的信息完整。
+          (iii) **新发现：LZ 1991 Thm 3.5(ii) 是 (2) 的一条 L1 严格来源**（见 C3）。它的反方向给出 D > 26、h = 1 时
+              ∃ p（满足 (P1)–(P3)）使 H_phys(p)/H_0(p) 不正定；(P2)「⟨p,x⟩ ≠ 0 for some x ∉ C1」蕴含 p ≠ 0，且商掉 rad 后
+              的非退化厄米型不正定 ⇒ 有负模向量 ⇒ H_phys(p) 有负模态。故 LZ (ii) ⇒ v4 (2)（经 subcritical notes 第 5、6 条
+              的两处 inferred 对应：g 洛伦兹号差、LZ 左端 = 本项目 H_phys(p)/H_0(p)）。建议 curator 把 lian-zuckerman-1991
+              Theorem 3.5(ii) 加进 v4 推导对 (2) 的 sources（或另挂一条 (2) 的 via-lian-zuckerman 推导），这会把 (2) 的
+              来源从 L3 归属争议提升到 L1。这是加强来源，不是修陈述，不需要 v5。
+          真正未闭合的是 (2) 的**历史归属**（Goddard 2008 把它归给 Brower–Thorn 1971，后者摘要无维数条件），第二、三轮已登记，
+          不属本轮回译范围。
+      A3. 〔(c) ddf-v4 去心直线与 v4 (1) 的一致性〕一致。ddf-v4 说明 (a)：方向 = 去心直线 {λk_0 : λ ∈ R∖{0}}，标度
+          λ = 1/(2α'k_0·p) 符号随 sign(k_0·p)，归一化后代表元满足 k_0·p = 1/(2α') > 0。v4 (1) 引言逐字复述这三点；(1b)
+          前提 (ii)「k_0·k ≠ 0 且标度按 2α'k_0·k = 1 取定」在去心直线下对 k_0·k 的两种符号都可满足（第三轮 A1 指出的
+          v3 空真区域已消除）。塔 {k − N k_0} 用归一化后的代表元，给定直线与 k 后唯一，无歧义。移动方向：ddf-v4 写
+          A^i_n 把 p 移到 p + n k_0，v4 写 A^i_{−n} 移到 p − n k_0 并升能级 n，α'(p − n k_0)² = α'p² − n ⇒ N → N + n ✓。
+          ddf-v4 与 v4 的 uses_conventions 相同（metric-mostly-plus、alpha-prime-regge），v4 另加 virasoro-standard、
+          intercept-sign-a，四条均 canonical: true，符合里程碑只用规范约定的要求。
+      A4. 〔(d) 数值复核〕见上，全部与第二、三轮一致，与 (1a)(1b)(2) 相符。
+
+      B. canonical_text ↔ v4 逐条
+      B1. 引言与固定动量记号：语义一致。canonical_text 仍省略 v4 的「Fock 内积由 (α^μ_n)† = α^μ_{−n} 与 η_{μν} 诱导、不定」
+          与「单组振子」（第三轮 A4 已记，压缩非差异）。
+      B2. 全局动量限定段：逐字同义（canonical 把"见 notes 的【v4 变更记】"改成"见第三轮审计 B1"，指向不同但内容同）。
+      B3. (1) 引言、(1a)：逐条一致。
+      B4. (1b)：canonical 仍是压缩版——未显式定义 H_0(k;k_0)（写"其零模态子空间"，"其"指塔，取塔内定义，v4 notes 说明
+          与全局 H_0 ∩ 塔相等）、未写 H^⊥(k) ⊂ H_phys(k;k_0)、未写 H^⊥ 侧 N = Σn_j、未重复 2α'k_0·k = 1。与第三轮 A4 相同，
+          非语义差异。结论强度三项（商上正定 / 等距同构 = 保内积双射 / 保能级 N 而非 L_0）两侧一致。
+      B5. (2)：逐字同义——"至少在 a = 1"、"存在动量 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0"、对一般 a 不断言。括注内容
+          一致（a = 1 隐含，见 A1 末）。
+      B6. 免责句：一致；v4 多一句"不使用退耦/不幺正措辞"，canonical 无此措辞亦无此句。
+      B7. 量词归纳：(1a) ∀p∈扇区 ∀ψ；(1b) ∀k（快子壳、k_0·k ≠ 0）；(2) ∃p≠0 ∃ψ。两侧相同。边界情形：D ≤ 25 不断言、
+          D = 26 a ≠ 1 不断言、D > 26 只断言 a = 1、p = 0 不断言、(1) 中 k_0·p = 0 不断言。两侧相同。
+          ⇒ canonical_text 是 v4 的忠实压缩，无多出或少掉的断言。
+
+      C. 与来源的差异（相对第三轮的变化）
+      C1. goddard-thorn-1972（canonical_source，L2 摘要）：不变，只覆盖 (1a)，含 d < 26（里程碑收窄，允许）。第二轮 D5 /
+          第三轮 C6 关于 canonical_source 只能单列的问题未变，不阻止。
+      C2. goddard-2008（L3）：不变，支持 (1b-ii) 满射部分与 D < 26 嵌入；D > 26 归 Brower–Thorn 1971（张力未裁决）。
+      C3. **lian-zuckerman-1991 Thm 3.5(ii)（L1 逐字，primary-sources-round2.md §1.6）与 v4 的关系——本轮新评估。**
+          subcritical 节点陈述范围 (a) 写「这与 v3 断言 (2) 相容但更弱（v3 的 (2) 不带「存在某个 p」的限定）」。对 v3 该句
+          正确（v3 的 (2) 字面无动量量词）。对 v4 该句**不再成立，且方向反转**：v4 (2) = ∃p≠0 ∃ψ；LZ (ii) 反方向 =
+          ∃p 满足 (P1)–(P3) 使商不正定；(P2) ⇒ p ≠ 0，商非退化不正定 ⇒ ∃ 负模向量。故 LZ (ii) 的反方向**至少与 v4 (2) 一样强**，
+          即 LZ ⇒ v4 (2)，不是"更弱"。subcritical 的 notes 追加段已写"量词结构一致，差别只剩 LZ 的 p 还须满足 (P1)–(P3)"，
+          与本评估相容但没说出"(P2) ⇒ p ≠ 0，故 LZ 蕴含 v4 (2)"。**不改该陈述**（陈述不可变，且它是关于 v3 的逐字正确记录）；
+          建议 curator 在 subcritical 的 notes 追加段补一句，并按 A2(iii) 把 LZ 加进 v4 (2) 的来源。
+          另：subcritical (d) 说 v3 的 k_0·k = 0 排除扇区与 (P2) 是否同一排除未对照。对 v4 现在可以对照：v4 对 (2) 的排除
+          恰是 p = 0，(P2) 排除的也恰是 p = 0（x 取遍 α^μ_0 的线性组合）；v4 对 (1) 另排除 k_0·p = 0，比 LZ 宽。
+      C4. fgz-1986 Thm 2.8（L1）：不变，固定 p ≠ 0、D = 26 正定性与维数 p_24(1 − p·p/2)；是 (1b) 逐动量表述与 p ≠ 0
+          措辞的依据，**不是** (2) 的来源（推导 gaps 已如实写明）。
+      C5. polchinski-1998-v1 E58：不变（A = −1 ↔ a = 1，(1a)(1b-i)）。E68 属 BRST 版本。
+      C6. 一般 α' 的 (★)、逐塔打包、能级记账：无逐字来源，推导 gaps 已登记，本轮数值再次复核通过。不阻止。
+
+      D. 裁定与建议
+      D1. **裁定 faithful。**canonical_text 与 v4 在量词、前提、结论强度、边界情形上逐条等价（B7）；第三轮唯一阻塞项 B1
+          已由全局限定 + (2) 内显式量词双重修复（A1）；ddf-v4 与 v4 (1) 一致（A3）；(1a)(1b)(2) 在 N ≤ 3 数值复核通过（A4）。
+          未发现假命题。
+      D2. **建议船长 approved。**船长批准时应知晓并接受的三个已登记 gap（均不是语义偏移）：
+          (a) (2) 的动量量词 p ≠ 0 与 (2) 本身的历史归属只有 L3 + 本项目有限计算（A2）；LZ 1991 Thm 3.5(ii) 可作 L1 来源，
+              建议批准前或批准后由 curator 补入（不改陈述）。
+          (b) canonical_source 仍是 GT 1972 摘要级，只覆盖 (1a)；GT 正文未获取。
+          (c) (1b) 的逐塔打包、一般 α' 归一化是本项目的规范化，文献无逐字（推导 gaps 已登记，本轮复核）。
+      D3. 不需要 v5。subcritical 节点陈述范围 (a) 对 v4 的过时比较已由其 notes 追加段覆盖，建议按 C3 补一句，不阻止。
+
+      ================================================================
+      第三轮回译文本（2026-09-10，针对 worldsheet.no-ghost-theorem-v3；历史记录，原样保留，自 back_translation.text 移入此处）
+      ================================================================
       【第三轮回译，2026-09-10，对象 worldsheet.no-ghost-theorem-v3。仅依据该节点的 statement / uses_conventions、
       它引用的 worldsheet.old-covariant-physical-states 与 worldsheet.ddf-operators-v3 的 statement 字段、
       以及四条约定节点（conv.metric-mostly-plus、conv.virasoro-standard、conv.alpha-prime-regge、conv.intercept-sign-a）
@@ -77,8 +220,6 @@ audit:
       量词归纳：(1a) 是"∀p∀ψ"；(1b) 是"∀k（快子壳、k_0·k≠0）"下由包含+商映射给定的等距同构；(2) 是"∃ψ"。
       结论强度：(1a) 半正定；(1b-i) 商上正定；(1b-ii) 等距同构（不只是线性同构）。陈述没有说 D = 26 是无鬼的
       必要条件，也没有说 a = 1 是必要条件；(2) 只给出 D > 26、a = 1 的反例存在性。
-    verdict: drift
-    diff_notes: |
       【v4 变更记】2026-09-10 lead 按第三轮审计改指 worldsheet.no-ghost-theorem-v4，等待第四轮回译。
       本轮（第三轮）的 back_translation.text 与 verdict 是针对 **v3** 写的，原样保留；下方三轮审计记录全部原样保留。
       改动清单（只此三项，statement 文本不可变故一律新建节点）：
@@ -381,5 +522,4 @@ audit:
       C2. canonical_text 若保持只含 (1)(2)，应在 (2) 中显式写明对 a 的量化。
       【第二轮注：C1 的"新建节点"与 C2 已由 v2 与改写后的 canonical_text 落实；B5 已由 conv.alpha-prime-regge 改为 α' m² = N − a
       落实；B6 已由 v2 明写等距同构与 k·k_0 ≠ 0 扇区落实；B7 已由 v2 sources 改为节号形式落实（节号仍未核实）。】
-
 phase: 1
