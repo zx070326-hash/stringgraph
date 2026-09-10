@@ -11,6 +11,10 @@ lake build              # 构建全部
 lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 ```
 
+### 在 worktree 里构建
+
+worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。
+
 ## 与图的关系
 
 - 图节点通过 `formal.lean_decl` 与 `formal.lean_file` 指向这里的声明。`stringgraph validate` 检查文件存在。
@@ -27,6 +31,7 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 StringFormal/
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
+  Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 ```
