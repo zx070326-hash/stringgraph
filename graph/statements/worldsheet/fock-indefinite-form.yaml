@@ -1,0 +1,75 @@
+id: worldsheet.fock-indefinite-form
+kind: proposition
+title: Fock 空间上由 ⟨0|0⟩ = 1 与 (α^μ_n)† = α^μ_{−n} 唯一确定的双线性型，及其由 η^{00} = −1 导致的不定性
+statement: |
+  设 F = F(D, R) 是 worldsheet.bosonic-fock-space 给出的 Fock 空间，η 为其中的对角度规，
+  α^μ_{−n}（产生）与 α^μ_n（湮灭）为其算符（μ = 0..D−1，n ≥ 1），|k⟩ 为真空。
+
+  (1) **存在唯一性**。存在**唯一**的 R-双线性型 ⟨·,·⟩ : F × F → R 满足
+      (a) ⟨|k⟩, |k⟩⟩ = 1；
+      (b) 产生与湮灭算符互为伴随：对一切 μ ∈ {0..D−1}、n ≥ 1、P, Q ∈ F，
+            ⟨α^μ_{−n} P, Q⟩ = ⟨P, α^μ_n Q⟩   且   ⟨P, α^μ_{−n} Q⟩ = ⟨α^μ_n P, Q⟩。
+      这就是物理文献中「内积由 ⟨0|0⟩ = 1 与 (α^μ_n)† = α^μ_{−n} 完全确定」一句的精确内容。
+
+  (2) **对称性与单项式基下的显式对角形**。该型对称；且对任意 d, e : Osc(D) → ℕ（有限支撑）与 a, b ∈ R，
+        ⟨ a X^d , b X^e ⟩ = δ_{d,e} · a b · ∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} · d(μ,n)!。
+      特别地单项式基是正交基，对角元为 ∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} · d(μ,n)!；
+      η^{μμ} = ±1 时它是整数，不出现分母。
+
+  (3) **level 正交**。若 M ≠ N、P ∈ F_M、Q ∈ F_N，则 ⟨P, Q⟩ = 0。
+
+  (4) **不定性**。在 conv.metric-mostly-plus（η = diag(−1, +1, …, +1)，故 η^{00} = −1）下，
+      对一切 n ≥ 1：
+        类时方向 μ = 0（需 D ≥ 1）： ⟨ α^0_{−n}|k⟩ , α^0_{−n}|k⟩ ⟩ = −n；
+        类空方向 μ = i ≠ 0（需 D ≥ 2）： ⟨ α^i_{−n}|k⟩ , α^i_{−n}|k⟩ ⟩ = +n。
+      于是当 R 是有序域（如 ℝ）且 D ≥ 2 时该型既取到负值又取到正值，即**不定**：
+      类时振子生成负模态（「鬼」），这正是无鬼定理必须消去的对象。
+      （最后这一步「−n < 0 < n 故不定」是上两条计算在有序域上的直接推论，
+      在 Lean 中未单列为定理，见推导节点的 gaps (v)。）
+uses_conventions: [conv.metric-mostly-plus]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.pairing_unique
+  lean_file: StringFormal/NoGhost/Fock.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.pairing_unique"
+    note: |
+      本仓库，合并提交 2fcf86a。`lean_decl` 只填得下一个名字，故填了刻画整个对象的唯一性定理
+      `pairing_unique`（对应陈述 (1)）。陈述其余各条对应的声明：
+        (2) 对称性  → `Fock.pairing_comm`（及 `Fock.pairing_flip`）
+        (2) 对角形  → `Fock.pairing_monomial_monomial`
+        (3) level 正交 → `Fock.pairing_eq_zero_of_level_ne`
+        (4) 类时 −n → `Fock.pairing_X_X_minkowski_timelike`
+        (4) 类空 +n → `Fock.pairing_X_X_minkowski_spacelike`
+      伴随关系本身（(1)(b) 对 `Fock.pairing` 成立）是 `Fock.pairing_creation_left` /
+      `Fock.pairing_creation_right`；被形式化的型定义是 `Fock.pairing`，
+      mostly-plus 度规是 `Fock.minkowski`。全部无 sorry。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124：level 1 态 e·α_{−1}|0;k⟩ 的范数分析（A < −1 时该 level 含一个负范数态，破坏幺正性）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E56，证据等级 [已核实]（式号与内容经第三方
+      笔记复现）。这是文献侧「协变 Fock 内积不定」最接近的可定位陈述，但它是**逐 level 的谱分析**，
+      不是本节点的 (1)(2)(3) 那种关于双线性型本身的结构陈述。
+      Polchinski 并不把「唯一性」单独陈述——他直接使用 (α^μ_n)† = α^μ_{−n} 定内积。
+      本节点的第 (1) 条（存在**且唯一**）是本项目对该做法的精确化，文献侧无对应编号结果。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1 'Commutation relations and mode expansions'，p.75 起；§2.2.2 'Virasoro algebra and physical states'，p.79 起（负模态态的讨论）"
+    note: |
+      定位强度 L4（目录页码，见 literature/extractions/brst-cohomology-sources.md §5.1）；
+      **式号未核实**。GSW 用 mostly-minus，鬼出现在类时方向这一物理结论不变，
+      但逐字公式的符号需按 conv.metric-mostly-plus 反号后才可比。
+tags: [bosonic-string, quantization, fock-space, indefinite-metric, no-ghost, formalized]
+notes: |
+  【为什么这是一条命题而不是定义】内积不是额外规定的，而是被 ⟨0|0⟩ = 1 与伴随关系
+  **唯一确定**的——这正是第 (1) 条的内容，也是本节点的主要信息量。定义卡是
+  worldsheet.bosonic-fock-space。
+
+  【与既有节点的关系】worldsheet.transverse-oscillator-commutators 断言横向（光锥）振子的
+  Fock 内积**正定**；本节点断言协变 Fock 内积**不定**。两者不矛盾：前者只有 D−2 个类空方向，
+  后者含类时方向 μ = 0。无鬼定理正是要证明「协变物理态空间模零模态」上诱导的型
+  与横向那个正定型等距同构（worldsheet.no-ghost-theorem-v3）。
+
+  【下游】本节点是无鬼定理形式化岛的第二块砖。接下来 formal/TODO.md 的 `sugawara`
+  需要先按 worldsheet.bosonic-fock-space 的缺口 (i) 补零模，才能定义 L_0。
+author: curator
+created: "2026-09-10"
