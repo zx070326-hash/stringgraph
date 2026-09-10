@@ -36,6 +36,19 @@ depends_on:
       与上两条对易关系节点同一处、同一核实等级（式号 L0）。
       **有效状态不因此再降**：本推导的 effective 在 DDF 拆卡后已是 physical-argument，
       新依赖的 effective 同样是 physical-argument。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    note: |
+      【2026-09-11（四）新增，拆卡后接线，lead 裁决】本推导第 (1b) 步「其 Gram 矩阵就是
+      24 个横向振子 Fock 空间的**正定** Gram 矩阵」这一句里的**矩阵本身**由该节点承载：
+      在 (H1) 横向振子代数、(H2) 伴随关系、(H3) 真空湮灭、(H4) 真空归一化四条假设下，
+      DDF 单项式基正交、对角元 ∏ n^{d(i,n)} d(i,n)!、有序域上正定。
+      它与上一条依赖 worldsheet.ddf-operators-adjoint **分工明确、不重复**：
+      那一条承载 (H2) 本身（伴随关系 (A^i_n)† = A^i_{−n}，physical-argument），
+      本条承载「有了 (H1)(H2)(H3)(H4) 之后 Gram 矩阵长什么样」这步蕴含
+      （推导 --via-oscillator-recursion，status rigorous，reviewer 复核待补）。
+      该节点是 worldsheet.ddf-operators-adjoint 第 (2) 条的拆卡产物，旧卡未换代。
+      **有效状态不因此变化**：新节点 depends_on 旧卡与 worldsheet.ddf-transverse-oscillator-algebra，
+      其 effective 同样是 physical-argument，与本推导既有的上限同级。
   - id: worldsheet.momentum-tower-fock-space
     note: |
       【2026-09-11（三）新增，立卡后接线】目标陈述 (1b) 断言的空间
@@ -137,7 +150,7 @@ gaps:
   - "【形式化进度 2026-09-11】Fock 空间（worldsheet.bosonic-fock-space）、Sugawara 构造与 c = D、老协变物理态条件、Virasoro 生成元的伴随 L_m^† = L_{−m}、以及指数顶点算子 :e^{i n k_0·X}: 的**振子部分**与 DDF **动量塔**（`formal/StringFormal/NoGhost/VertexOperator.lean`、`DDF.lean`，无 sorry，公理仅标准三条；合并提交 9691057）已在 Lean 中机器验证。**但本推导的两个核心步骤仍未形式化**：(i) DDF 算子 A^i_n = Σ_m α^i_m V^{(n)}_m 本身未定义，连带 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 未证；(ii) 第 (1) 条的**张成定理**（\"塔上任意物理态 = DDF 态 + 零模态\"）未做。待办见 formal/TODO.md 的 `ddf-operators` 与 `ddf-spans` 两项。附带发现：横向性 ε·k_0 = 0 不只是使被积量成为权 1 primary 的条件，还是 A^i_n 的模态和在代数 Fock 空间上局部有限（从而 A^i_n 良定义）的必要输入；详见 worldsheet.ddf-operators-v4 的 notes【Lean 进展 2026-09-11】。"
   - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
   - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
-  - "【2026-09-11 新增；2026-09-11（二）更新；2026-09-11（三）再更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0）。【（三）更新】其中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 也**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，physical-argument），故「在本图中仍无承载节点」一句同样过时；仍未关闭的是它下面三条更基础的缺口——「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」无节点、「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」无节点、指数算符两半的同点重排序无节点（现址：worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条）。Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，塔上的双线性型也未做（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核），且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。"
+  - "【2026-09-11 新增；2026-09-11（二）更新；2026-09-11（三）再更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0）。【（三）更新】其中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 也**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，physical-argument），故「在本图中仍无承载节点」一句同样过时；仍未关闭的是它下面三条更基础的缺口——「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」无节点、「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」无节点、指数算符两半的同点重排序无节点（现址：worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条）。Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，塔上的双线性型也未做（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核），且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。【（四）更新，2026-09-11】(1b) 里的另一半——「有了伴随关系与横向振子代数之后，Gram 矩阵**是什么**」——现由 **worldsheet.transverse-ddf-fock-gram-matrix**（推导 --via-oscillator-recursion，status rigorous，条件命题，reviewer 复核待补）承载，已加入本推导的 depends_on。这一半此前是 worldsheet.ddf-operators-adjoint 陈述的第 (2) 条，混在一张 physical-argument 的卡里，看不出「递推本身是严格的、只有前件不严格」。**本推导的 effective 不变**（仍被两条 DDF 对易关系与伴随关系封顶为 physical-argument）；改动的只是可审计性。"
 notes: |
   【2026-09-11：DDF 拆卡与由此产生的状态下降（curator，本次改 depends_on / gaps / notes，
   以及 summary 第 (1) 条里的三处节点指向（ddf-operators-v4 → v5，另把两条对易关系的节点 id 写出）；
