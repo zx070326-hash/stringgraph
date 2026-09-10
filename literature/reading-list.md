@@ -41,12 +41,33 @@
 | **P0** | **alvarez-gaume-witten-1984** | 全文，特别是 **eq. (63)**（反常相对归一化）与十维反常多项式系数 | consistency | 待分派 | **新增（2026-09-11，由 green-schwarz-1984 抽取推出）**：GS 1984 把 (17) 的常数 `c`、(20) 的三个系数、(22) 的相对归一化**全部**外包给本文。不抽它，整条 GS 反常链的数值系数层就是 L0。Nucl. Phys. **B234** (1984) 269–330，无 arXiv（1984）。⚠️ GS 原文把年份误印为 1983。**取件钥匙（2026-09-11 补）**：INSPIRE recid **192309**，报告号 `HUTP-83/A039`，**有 KEKSCAN id `84-02-145`**、**无 CDS id** → 走 KEK 而非 CDS；推出的 URL `lib-extopc.kek.jp/preprints/PDF/1984/8402/8402145.pdf` 两次 `socket hang up`，主机是否活着未分辨 |
 | P1 | thorn-1985-santa-barbara | 全文（42 页，含**改良版 Goddard–Thorn 无鬼定理证明**） | worldsheet | 待分派 | **新增（2026-09-11，`primary-sources-round2.md` §12.5）**：C. B. Thorn, *Introduction to the theory of relativistic strings*, Workshop on Unified String Theories, Santa Barbara, 1985-07-29–08-16。报告号 `DOE/ER/40008-77` / `CONF-850798-1` / NTIS `DE86001950`，42 页。摘要自陈「give an **improved version of the Goddard-Thorn proof** of the No-ghost Theorem」（INIS `szqhd-hct30`、OSTI 5007660）。INIS 有文件但 `access.files: restricted`（需注册，未办）；OSTI 无全文。**⚠ 勿与 `thorn-1985`（MSRI 7 页）混淆。** 建议路线：对该 Workshop 论文集（World Scientific，Green & Gross 编）跑 archive.org 重印文集流程 |
 | P0 | alvarez-gaume-witten-1984 | 全文（Nucl. Phys. B234, 269–330，62 页） | consistency | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/alvarez-gaume-witten-1984.md`（E1–E20 + §5 Lean 候选）。取自 **McGill 课程页扫描件**（见下方备忘）。**eq. (63) 已逐字取到**。★ **GS Q3 完全闭合**：GS (20) 的五个系数 = −48 × [AGW (119) 的 N=1 场内容组合]，机械可验，`n=496` 是 `7936−16n` 的唯一零点。★ **GS Q2 只闭合一半**：AGW **不含** 常数 `c`，也**不含** GS (22) 的十维混合十二形式（p.328 明说不做），只给配方。★ **AGW 不是 CS/下降方程符号约定的源头**（源头是 Zumino–Wu–Zee）。⚠️ **年份订正**：AGW **自己的页眉就印 1983**，GS 照抄，不是 GS 误印 |
-| **P0** | **zumino-wu-zee-1984** | 全文（下降方程 `ω⁰_{2n+1}`/`ω¹_{2n}` 的定义与符号约定；纯规范反常的绝对归一） | consistency | 待分派 | **新增（2026-09-11，由 alvarez-gaume-witten-1984 抽取推出，优先级 P0）**：B. Zumino, Y.-S. Wu, A. Zee, Nucl. Phys. **B239** (1984) 477 = GS ref [9] = AGW ref [7] 的「Univ. Washington preprint, 1983」。**AGW 全文没有下降方程**，所以 (a) GS 常数 `c` 的另一半依赖、(b) `H = dB + ω⁰_{3Y} − ω⁰_{3L}` 的符号约定源头，**都只能在这里**。抽了它，GS 链的数值系数层才可能全闭合。无 arXiv |
+| **P0** | **zumino-wu-zee-1984** | 全文（下降方程 `ω⁰_{2n+1}`/`ω¹_{2n}` 的定义与符号约定；纯规范反常的绝对归一） | consistency | researcher | **attempted, blocked（2026-09-11）** → `extractions/zumino-wu-zee-1984.md`。**正文一字未取到（L2，仅摘要+元数据）**，但**本轮的两个核心问题已由其伴随文献闭合**（见下一行）。⚠️ **派工单的两个获取前提被证伪**：(a) INSPIRE `publication_info` **无 `pubinfo_freetext`** ⇒ **零个重印出处**，archive.org 文集路线输入条件不满足；(b) *Current Algebra and Anomalies* 里 Zumino 那章（pp.361–393）是 **Les Houches 讲义（单作者）**，**该书不收 ZWZ**。`external_system_identifiers` **无 KEKSCAN、无 CDS** ⇒ KEK 与 OAI-PMH 路线入口即排除。已试并失败：Semantic Scholar（CLOSED）、OSTI（`LBL-16443` 三种查法均无命中）、INIS（`zectt-7td81` metadata-only）、INIS 旧公共路径（404）、`site:edu` 扫描件检索（只命中转述性课程笔记）。**未穷尽的唯一入口：UNT Digital Library / TRAIL（被 Altcha 反爬挡住，需人工浏览器）**。ScienceDirect 与未授权扫描站按规则不使用 |
+| **P0** | **zumino-1983-les-houches** | 全文（LBL-16747，46 印刷页） | consistency | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/zumino-wu-zee-1984.md`（E1–E17）。**= GS ref [10] 的第一项**（不是 ref [9]），ZWZ 的同作者同期伴随讲义，引言自陈「Some of the results are contained in a recent paper written in collaboration with Wu Yong-Shi and Anthony Zee [2]」。**★ 闭合了两件事**：(1) **`green-schwarz-1984.md` Q6 的「下降方程符号约定源头」** —— GS (5)(6)(15)(16) 逐字采用 Zumino 的约定，含 **(3.32) `δω⁰ = −dω¹` 的负号**；(2) **`c` 的归属定案** —— 本文 §5 只给 `2n−2` 维通式 (5.13) 且原文手写「(up to a sign)」，**不含引力侧**，故 `c` 在 AGW/ZWZ/Z-LH 三篇里都不以一个数存在。**★ 但不能裁决 `H` 的 CS 符号**（本文无 `B`、无 `H`、无引力）：GS 与 Bilal 由 `(B,H)→(−B,−H)` 相联，**两者都对**。三条作者自陈 gap：局部性、`k²=0` 留作习题、**WZ 相容条件解的唯一性明确不讨论**（⇒ GS「uniquely determined」无支撑） |
+
 | P1 | eguchi-gilkey-hanson-1980 | Â 多项式（Dirac genus）的定义与 Pontryagin 展开 | consistency | 待分派 | **新增（2026-09-11）**：Phys. Reports **66** (1980) 213 = AGW ref [6]，AGW (82) 的 Â 多项式外包给它。本轮已用 Harvard Math 272b 讲义（匿名 CAS 输出，L1）核对 Â₁–Â₄ 全部相符，但那只作旁证；canonical 数学来源应是 Hirzebruch 或本条 |
 | P1 | green-schwarz-1985-hexagon | 全文 | consistency | 待分派 | **新增（2026-09-11）**：Nucl. Phys. **B255** (1985) 93–114。GS 1984 自陈弦论侧 "details will be presented elsewhere"，Schwarz 2012（arXiv:1201.0981，L1）指认这里就是那个 elsewhere。要给「type I 单圈六边形反常抵消」建节点必须先抽它 |
 | P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1` |
 
 ## 已知获取路线备忘
+
+- **★★ 新增可用路线（2026-09-11）：`osti.gov/servlets/purl/<OSTI-ID>` —— 1980 年代 DOE 国家实验室报告（LBL / ANL / FNAL / SLAC…）正文的直接入口。**
+  `zumino-1983-les-houches`（LBL-16747，46 印刷页）全文即以此取得（L1）。
+  **这条路线修正了本文件此前的一句判断**：`goddard-thorn-1972` 那次记的「OSTI 无全文」应收窄为
+  **「OSTI 不藏 CERN-TH 报告」，而不是「OSTI 没有全文」**。凡报告号形如 `LBL-*`、`ANL-*`、`FNAL-*`、`SLAC-PUB-*`、`DOE/ER/*` 的，都值得先试 OSTI。
+  1. `https://www.osti.gov/api/v1/records?q=%22<报告号>%22` → 拿 **OSTI ID**。
+     ⚠ **一律用 `q="…"` 加引号，不要用 `report_number=` 参数**：实测 `report_number=LBL-16443` 与 `q="LBL-16747"` 行为不一致。
+     ⚠ **含 `/` 的报告号（如 `DOE/ER/40048`）会让查询被静默忽略并返回一批无关记录** —— 看到结果与查询毫无关系时，是查询被吞了，不是「无此件」。
+  2. `https://www.osti.gov/servlets/purl/<OSTI-ID>` → **WebFetch 会抱怨读不了二进制，但已落盘并在末尾方括号里打印本地路径**（同 AGW/Cambridge 路线）。
+  3. `Read` 带 `pages` 逐页读图。**扫描件常是打字稿 + 手写公式**：一次 10 页可读，**关键系数必须单页重渲染**，且**同篇内两条路线算同一批数时一定互除一遍**
+     （本轮即靠 (5.10) 与 (5.11) 互除，把肉眼的 `(m−1)!` 改判为 `(n−1)!`；同 AGW 定 (101) = 11/21 的手法）。
+- **★ 配套的存在性探测器：INIS 的 `files` 字段（2026-09-11 口径修正）。**
+  `https://inis.iaea.org/api/records?q=<查询>&size=20` 返回的记录里，若 **`files.enabled: true`** 且 **`access.files: "public"` / `access.status: "open"`**，
+  则该件**确实有开放全文**（本轮 LBL-16747 = INIS `ph8pd-7r422`，文件 `15035011.pdf`，542345 字节，与 OSTI 那份吻合）。
+  ⇒ **修正本文件此前「INIS 取全文基本无望」的口径**：`files.enabled` 是**可信的正信号**，
+  只是**下载要换主机** —— 旧公共路径 `collection/NCLCollectionStore/_Public/<vol>/<iss>/<RN>.pdf` **本轮实测仍 404**。
+  **用 INIS 判断「有没有」，用 OSTI 拿「文件本身」。**
+- **⚠ 反爬新增一条**：`digital.library.unt.edu`（TRAIL / DOE 技术报告扫描库）返回 **Altcha 挑战页**，agent 过不去。
+  与 `cds.cern.ch` 同类处理：**把 URL 交给人类点击，不要用代理绕**。
 
 - **★★ 新增可用路线（2026-09-11）：大学课程页挂的原刊扫描件 —— `alvarez-gaume-witten-1984`（Nucl. Phys. B234, 269–330, 62 页）全文即以此取得（L1）。**
   这是第二条成功拿到 pre-arXiv 论文正文的路线，**比 archive.org 路线省事得多，应当先试**。
