@@ -1,0 +1,84 @@
+id: math.witt-algebra-perfect--via-bracket-identity
+target: math.witt-algebra-perfect
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.witt-algebra
+    note: |
+      非 inferred：整条论证只用到该定义卡里的括号关系 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n} 与
+      「{ℓ_n : n ∈ ℤ} 是基」这两件事，别的什么都不用。
+      **基环收紧**：该卡对任意交换环 R 定义 W(R)，本推导（与目标陈述）取特征零的域 k。
+sources:
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6, p. 7：证明里对 **𝒱** 的完美性给出逐字的三步计算；H¹(𝒲, 𝔽) = 0 本身在同一句里作为已知引用（归给 [24, Section 2]），**无单独编号**"
+    note: |
+      **这条来源承载两件事，强度不同，务必分清**：
+      (i) **结论**「H¹(𝒲, 𝔽) = 0」在该文正文里被逐字写出并使用（L1 逐字见
+          literature/extractions/math-sources.md 第 25.1 节）。这是结论本身的文献依据，
+          但该文**不给证明**，转引 schlichenmaier-2014 §2。
+      (ii) **证明方法**是本推导从同一段照搬的：该文对 **Virasoro 代数 𝒱** 写出
+          「[d₀, d_n] = n d_n ⟹ d_n ∈ [𝒱, 𝒱] (n ≠ 0)；[d₋₁, d₁] = 2d₀ ⟹ d₀ ∈ [𝒱, 𝒱]；
+          [d₋₂, d₂] = 4d₀ + ½c ⟹ c ∈ [𝒱, 𝒱]」。
+          Witt 侧只是把第三步去掉（W 没有中心元），前两步逐字相同。
+          **这一步「去掉第三步」是本图做的，不是文献做的**——见 gaps 第 1 条。
+  - ref: ecker-schlichenmaier-2018
+    loc: "arXiv:1707.06106v2, §3.3.2, p. 5：`H¹(𝓛, 𝕂) = (𝓛 / [𝓛, 𝓛])^*`（无编号）"
+    note: |
+      把 (1) 完美性翻译成 (2) H¹ = 0 用的一般字典。L1 逐字（math-sources.md 第 27.3 节）。
+      同文 §5.1 对 **𝒱** 明写「The first equation is obtained from the fact that the Virasoro
+      algebra is a perfect Lie algebra」，即演示了同一条翻译；但那句说的是 𝒱 不是 𝒲。
+summary: |
+  在 conv.virasoro-standard 的记号 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n} 下，两行计算：
+
+  **p ≠ 0**：[ℓ_p, ℓ_0] = (p − 0) ℓ_p = p ℓ_p，且 p 在 char 0 的域 k 中可逆，故
+    ℓ_p = (1/p) [ℓ_p, ℓ_0] ∈ [W, W]。
+
+  **p = 0**：[ℓ_1, ℓ_{−1}] = (1 − (−1)) ℓ_0 = 2 ℓ_0，且 2 可逆，故
+    ℓ_0 = (1/2) [ℓ_1, ℓ_{−1}] ∈ [W, W]。
+
+  （更一般地：给定 p，任取 m + n = p 且 m − n 在 k 中可逆，就有 ℓ_p = (1/(m−n)) [ℓ_m, ℓ_n]。
+   上面两行是这一族里最省事的两个取法。）
+
+  于是基 {ℓ_p : p ∈ ℤ} 全部落在 [W, W] 里；[W, W] 是子空间，故 [W, W] = W，即 (1)。
+  再由 H¹(𝓛, k) = (𝓛 / [𝓛, 𝓛])^*（ecker-schlichenmaier-2018 §3.3.2）得 H¹(W, k) = 0^* = 0，即 (2)。
+
+  论证只用到括号的结构常数与「非零整数在 k 中可逆」，没有任何解析、几何或收敛性输入，
+  也不需要 PBW、不需要任何上同调机器（H¹ 那一步只用了「1-上循环 = 在括号上为零的线性泛函，
+  1-上边缘 = 0」这个定义级事实）。
+gaps:
+  - "**文献里没有一处对 𝒲 逐字写出这两行计算**。feldvoss-siciliano-2025 Lemma 2.6 的证明写的是
+     对 **𝒱** 的三步（多一步 [d₋₂, d₂] = 4d₀ + ½c），Witt 侧的 H¹(𝒲, 𝔽) = 0 被它作为已知转引给
+     [24, Section 2]，而本项目**未核实** schlichenmaier-2014 §2 是否明写这条
+     （math-sources.md 第 26 节只逐字记录了该文 §6 的 H² 内容）。
+     因此 summary 里的两行是**本图按 FS 对 𝒱 的模板做的删减重算**，不是照抄。
+     这是本推导取 rigorous 需要 reviewer 复核的唯一实质理由。"
+  - "**「(1) ⟺ (2)」的一般公式没有独立节点**。H¹(𝓛, k) = (𝓛 / [𝓛, 𝓛])^* 在本图中只以来源
+     （ecker-schlichenmaier-2018 §3.3.2）的形式出现，没有承载它的 statement，故这一步没有图内的边。
+     若将来建了「李代数上同调低维公式」节点，本推导应加一条依赖。"
+  - "**未形式化**。Kytölä 的 VirasoroProject 有 WittAlgebraCohomology.lean，
+     但 researcher 2026-09-11 核实其文件清单里**没有**完美性 / H¹ 的结果
+     （math-sources.md 第 30.4 节）。本仓库 formal/ 也没有。故上限是 rigorous。
+     顺带：这是一条**很适合先形式化的**目标——载体 math.witt-algebra 已是 formalized
+     （StringFormal.Virasoro.WittAlgebra），(1) 的 Lean 陈述可以完全绕开上同调，
+     只写 `∀ p, lgen p ∈ LieAlgebra.derivedSeries ... 1` 之类。"
+notes: |
+  【status 裁决与复核状态】按 docs/STATUS_LEVELS.md，等级 4 (rigorous) 的例外条款要求推导节点
+  在 notes 写 `reviewer-verified: <agent>, <date>`。**本节点暂无该记录。**
+  lead 于 2026-09-11 明确允许先标 rigorous，理由是：(a) 证明是两行有限步初等计算，
+  前提（括号结构常数 + char 0）在陈述里完整写出；(b) 结论本身在 feldvoss-siciliano-2025 Lemma 2.6
+  的证明里被逐字当作已知事实使用，不是本图自创的断言。
+  **待 reviewer 复核。** 复核通过后请把下一行的占位替换为实录：
+    reviewer-verified: <pending>, <pending>
+  若 reviewer 不认可上面 gaps 第 1 条的「删减重算」这一步，由 reviewer 裁定降级。
+
+  【与 math.virasoro-universal-central-extension 的关系】那条是关于 **𝒱** 的
+  H¹(𝒱, 𝔽) = H²(𝒱, 𝔽) = 0 + 万有性；本条是关于 **𝒲** 的 H¹。
+  FS Lemma 2.6 的证明**同时**用到本条与 worldsheet.virasoro-unique-central-extension
+  （dim H²(𝒲, 𝔽) = 1），所以本条建好之后，那条推导的 gaps 第 5 条可以关掉，
+  改为一条实际的 depends_on 边（本次一并改）。
+
+  【为什么不叫 --via-feldvoss-siciliano】因为本推导的**证明**不是从该文照抄的
+  （该文对 𝒲 只给结论不给证明），叫 --via-bracket-identity 更诚实：
+  论证靠的是 Witt 括号的结构常数本身。
+author: curator
+created: "2026-09-11"
