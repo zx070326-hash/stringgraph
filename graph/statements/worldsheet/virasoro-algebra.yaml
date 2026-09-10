@@ -1,0 +1,21 @@
+id: worldsheet.virasoro-algebra
+kind: definition
+status: rigorous
+title: Virasoro 代数
+statement: |
+  Virasoro 代数 Vir 是由 {L_n : n ∈ Z} 与中心元 c 张成的复李代数，李括号为
+  [L_m, L_n] = (m-n) L_{m+n} + (c/12) m (m^2-1) δ_{m+n,0}，[L_n, c] = 0。
+  它是圆周上多项式向量场李代数（Witt 代数）的唯一非平凡中心扩张。
+uses: []
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.19)"
+  - ref: virasoro-lean-2025
+    loc: "Lean 形式化定义"
+tags: [cft, algebra, lie-algebra]
+formal:
+  lean_decl: StringFormal.Virasoro.VirasoroAlgebra
+  lean_file: StringFormal/Virasoro/Basic.lean
+author: seed
+created: "2026-09-10"

@@ -1,0 +1,30 @@
+id: worldsheet.no-ghost-theorem--via-goddard-thorn
+target: worldsheet.no-ghost-theorem
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.old-covariant-physical-states
+  - id: worldsheet.ddf-operators
+  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.kac-determinant
+    inferred: true
+    note: |
+      Goddard–Thorn 原文不引用 Kac 行列式（1979 年才有）。现代数学化表述
+      （如 Frenkel–Garland–Zuckerman 1986 的 BRST 上同调证明）会用到 Verma 模结构。
+      标 inferred 表示"现代严格证明依赖它"而非"原文依赖它"。
+sources:
+  - ref: goddard-thorn-1972
+    loc: "Theorem 1 及其证明"
+  - ref: brower-1972
+    loc: "独立证明，用谱生成代数"
+  - ref: gsw-1987-v1
+    loc: "§2.3.2–2.3.3（教科书版本）"
+summary: |
+  用 DDF 算子在 D=26、a=1 时构造 H_phys 的一组正模基（横向 Fock 空间），
+  证明任意物理态可分解为 DDF 态加零模态，从而内积半正定。
+  D>26 时显式构造负模物理态。
+gaps:
+  - "原文对 D<26 情形的讨论不完整；D<26 的半正定性通常归于 Brower 与后续工作。"
+  - "从物理文献到形式化的差距：需要把 DDF 态张成 H_phys 模零模态这一步写成 Fock 空间上的线性代数命题。"
+author: seed
+created: "2026-09-10"

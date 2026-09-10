@@ -1,0 +1,19 @@
+id: worldsheet.ddf-operators
+kind: definition
+status: rigorous
+title: DDF 算子
+statement: |
+  在 D 维自由玻色弦 Fock 空间上，取类光动量 k (k^2 = 0) 与横向偏振 ε^i (i = 1..D-2，ε·k = 0)，
+  DDF 算子 A^i_n := ∮ dz/(2πi) ∂X^i(z) e^{i n k·X(z)}（k 归一化使 k·p = 1）。
+  它们与所有 L_m 对易，且满足 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+  即一个 D-2 维横向振子代数。
+uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.2"
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)"
+tags: [bosonic-string, spectrum-generating-algebra]
+author: seed
+created: "2026-09-10"

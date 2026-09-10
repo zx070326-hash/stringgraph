@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stringgraph/convention",
+  "type": "object",
+  "required": ["id", "family", "title", "definition", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^conv\\.[a-z0-9]+(-[a-z0-9]+)*$" },
+    "family": { "type": "string", "description": "同一 family 内的约定互斥，例如 metric、alpha-prime、virasoro；每个 family 恰好一个 canonical" },
+    "title": { "type": "string" },
+    "definition": { "type": "string" },
+    "canonical": { "type": "boolean" },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ref"],
+        "additionalProperties": false,
+        "properties": { "ref": { "type": "string" }, "loc": { "type": "string" } }
+      }
+    },
+    "notes": { "type": "string" }
+  }
+}

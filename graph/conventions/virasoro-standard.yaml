@@ -1,0 +1,10 @@
+id: conv.virasoro-standard
+family: virasoro
+title: Virasoro 代数标准归一化
+definition: |
+  [L_m, L_n] = (m-n) L_{m+n} + (c/12) m (m^2-1) δ_{m+n,0}。
+  中心荷 c 归一化使自由玻色子 c=1。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.19)"

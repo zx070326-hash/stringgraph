@@ -1,0 +1,17 @@
+id: worldsheet.critical-dimension-bosonic
+kind: proposition
+title: 玻色弦临界维数 D = 26
+statement: |
+  自由玻色弦在以下三种独立意义下要求 D = 26 且 a = 1：
+  (i) 光锥量子化的洛伦兹代数闭合 [J^{i-}, J^{j-}] = 0；
+  (ii) 旧协变量子化中零模态完全退耦、物理态谱幺正（无鬼定理的等号情形）；
+  (iii) BRST 荷幂零 Q_B^2 = 0（等价于总中心荷 c_matter + c_ghost = D - 26 = 0）。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3 (光锥), §4.2–4.4 (BRST)"
+  - ref: gsw-1987-v1
+    loc: "§2.3"
+tags: [bosonic-string, critical-dimension]
+author: seed
+created: "2026-09-10"

@@ -1,0 +1,19 @@
+id: worldsheet.verma-module
+kind: definition
+status: rigorous
+title: Virasoro 代数的 Verma 模
+statement: |
+  给定 (c, h) ∈ C^2，Verma 模 V(c,h) 是由最高权向量 |h⟩ 生成的 Vir 模，
+  满足 L_0|h⟩ = h|h⟩，c 作用为标量 c，L_n|h⟩ = 0 (n>0)，
+  且 {L_{-n_1}...L_{-n_k}|h⟩ : n_1 ≥ ... ≥ n_k ≥ 1} 是一组基。
+  V(c,h) 按 L_0 本征值分级，第 N 级维数为 p(N)（整数分拆数）。
+uses: [worldsheet.virasoro-algebra]
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9"
+  - ref: kac-1979
+    loc: "§1"
+tags: [cft, representation-theory]
+author: seed
+created: "2026-09-10"

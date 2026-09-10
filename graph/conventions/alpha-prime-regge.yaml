@@ -1,0 +1,9 @@
+id: conv.alpha-prime-regge
+family: alpha-prime
+title: Regge 斜率 α'
+definition: |
+  弦长尺度由 Regge 斜率 α' 表示；闭弦张力 T = 1/(2π α')；开弦质量谱 α' m^2 = N - 1。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.3)"

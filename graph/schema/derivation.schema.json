@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stringgraph/derivation",
+  "type": "object",
+  "required": ["id", "target", "kind", "status", "depends_on", "sources", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*--via-[a-z0-9]+(-[a-z0-9]+)*$" },
+    "target": { "type": "string" },
+    "kind": { "enum": ["proof", "physical-argument", "conjecture-support", "refutation"] },
+    "status": { "enum": ["formalized", "rigorous", "physical-argument", "conjecture", "speculation", "refuted"] },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "inferred": { "type": "boolean" },
+          "note": { "type": "string" },
+          "convention_map": { "type": "string", "description": "当依赖节点约定不同，说明换算" }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["ref"],
+        "additionalProperties": false,
+        "properties": {
+          "ref": { "type": "string" },
+          "loc": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "summary": { "type": "string", "minLength": 1 },
+    "gaps": { "type": "array", "items": { "type": "string" }, "description": "论证中已知未严格化的步骤" },
+    "author": { "type": "string" },
+    "created": { "type": "string" }
+  }
+}

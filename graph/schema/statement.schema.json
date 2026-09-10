@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stringgraph/statement",
+  "type": "object",
+  "required": ["id", "kind", "title", "statement", "sources"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z]+\\.[a-z0-9]+(-[a-z0-9]+)*$" },
+    "kind": { "enum": ["definition", "proposition", "axiom"] },
+    "title": { "type": "string", "minLength": 1 },
+    "statement": { "type": "string", "minLength": 1 },
+    "formal_statement": { "type": "string", "description": "可选：LaTeX 或半形式化陈述" },
+    "status": {
+      "enum": ["formalized", "rigorous", "physical-argument"],
+      "description": "仅 definition/axiom 填写：该定义本身的严格程度。proposition 的状态由 derivations 计算，禁止填写"
+    },
+    "uses": {
+      "type": "array",
+      "items": { "type": "string" },
+      "uniqueItems": true,
+      "description": "仅 definition/axiom：定义中直接用到的其他 statement id（定义性依赖）"
+    },
+    "uses_conventions": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^conv\\.[a-z0-9]+(-[a-z0-9]+)*$" },
+      "uniqueItems": true
+    },
+    "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/source" } },
+    "tags": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "notes": { "type": "string" },
+    "superseded_by": { "type": "string" },
+    "formal": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "lean_decl": { "type": "string", "description": "formal/ 中的完整声明名" },
+        "lean_file": { "type": "string" }
+      }
+    },
+    "author": { "type": "string" },
+    "created": { "type": "string" }
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["ref"],
+      "additionalProperties": false,
+      "properties": {
+        "ref": { "type": "string", "description": "literature/sources.bib 中的 key" },
+        "loc": { "type": "string", "description": "章节、定理号、公式号或页码" },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

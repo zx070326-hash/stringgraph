@@ -1,0 +1,23 @@
+id: worldsheet.no-ghost-theorem
+kind: proposition
+title: 无鬼定理（Goddard–Thorn）
+statement: |
+  设 D 维自由玻色弦的旧协变物理态空间 H_phys 如 old-covariant-physical-states 所定义。
+  若 D = 26 且 a = 1，则 H_phys 上由 Fock 内积诱导的内积是半正定的，
+  且 H_phys 模掉零模态后同构于 24 个横向振子生成的 Fock 空间（DDF 态空间）。
+  若 D > 26，则对任意 a，H_phys 含负模态。
+  若 D ≤ 26 且 a ≤ 1，H_phys 内积半正定（但 D<26 时零模态不足以退耦，谱不幺正于洛伦兹协变的意义下）。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: goddard-thorn-1972
+    loc: "Theorem 1"
+  - ref: brower-1972
+    loc: "独立证明"
+  - ref: polchinski-1998-v1
+    loc: "§4.4 (BRST 版本)"
+tags: [bosonic-string, unitarity, critical-dimension]
+notes: |
+  这是形式化岛 1 的目标。Lean 声明名预留为 StringFormal.NoGhost.no_ghost_theorem，
+  完成后由 lean-formalizer 填写 formal.lean_decl 并把推导状态升为 formalized。
+author: seed
+created: "2026-09-10"

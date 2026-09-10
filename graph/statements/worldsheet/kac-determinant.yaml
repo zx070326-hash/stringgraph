@@ -1,0 +1,19 @@
+id: worldsheet.kac-determinant
+kind: proposition
+title: Kac 行列式公式
+statement: |
+  Verma 模 V(c,h) 第 N 级上 Shapovalov 形式（由 L_n^† = L_{-n} 与 ⟨h|h⟩=1 定义）的
+  Gram 行列式为
+  det M_N(c,h) = α_N ∏_{r s ≤ N, r,s ≥ 1} (h - h_{r,s}(c))^{p(N - rs)}，
+  其中 α_N 是与 (c,h) 无关的正常数，h_{r,s}(c) 由 Kac 公式给出。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: kac-1979
+    loc: "Theorem 1"
+  - ref: feigin-fuchs-1982
+    loc: "完整证明"
+  - ref: polchinski-1998-v1
+    loc: "§2.9 (未给证明)"
+tags: [cft, representation-theory]
+author: seed
+created: "2026-09-10"

@@ -1,0 +1,19 @@
+id: worldsheet.old-covariant-physical-states
+kind: definition
+status: rigorous
+title: 旧协变量子化中的物理态空间
+statement: |
+  取 D 个自由玻色子 X^μ 的 Fock 空间 F（度规 η_{μν}，模式 α^μ_n），
+  Virasoro 生成元 L_n 由 Sugawara 型构造给出，中心荷 c = D。
+  物理态空间定义为 H_phys = {|ψ⟩ ∈ F : (L_0 - a)|ψ⟩ = 0, L_n|ψ⟩ = 0 ∀ n>0}，
+  其中 a 是截距常数。零模态为 H_phys 中与所有物理态内积为零者。
+uses: [worldsheet.virasoro-algebra]
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1"
+  - ref: gsw-1987-v1
+    loc: "§2.2.1"
+tags: [bosonic-string, quantization]
+author: seed
+created: "2026-09-10"

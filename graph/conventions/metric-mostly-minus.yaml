@@ -1,0 +1,10 @@
+id: conv.metric-mostly-minus
+family: metric
+title: 度规号差 mostly-minus
+definition: |
+  时空度规号差取 (+,-,-,...,-)。Green–Schwarz–Witten 及多数早期对偶模型文献使用。
+  与 mostly-plus 的换算：η → -η，p^2 → -p^2，质量壳 p^2 = -m^2 变为 p^2 = m^2。
+canonical: false
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.1"

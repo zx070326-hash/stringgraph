@@ -1,0 +1,17 @@
+id: duality.ads-cft
+kind: proposition
+title: AdS/CFT 对应（Maldacena）
+statement: |
+  N 个重合 D3 膜的近视界极限给出 AdS_5 × S^5 上的 IIB 型弦论，
+  它与四维 N=4 SU(N) 超 Yang–Mills 理论完全等价：
+  两边的配分函数在边界条件与源的对应下相等。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: maldacena-1997
+    loc: "§2–§3"
+tags: [holography, duality]
+notes: |
+  这是全息扇区的根猜想。图中依赖它的所有结果有效状态至多为 conjecture。
+  可能另设 axiom 节点 `holography.ads-cft-assumed` 供"假设 AdS/CFT 成立"的条件推导使用。
+author: seed
+created: "2026-09-10"

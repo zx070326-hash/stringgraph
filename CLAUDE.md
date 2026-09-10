@@ -1,0 +1,80 @@
+# stringgraph — 弦论结果依赖图与形式化
+
+## 项目是什么
+
+把弦论五十年的结果整理成一张**机器可读的有向无环图**：每个节点是一条精确陈述（定义、约定、或命题），每条边是"这条结果的某个推导依赖那条结果"。每个节点带**认识论状态**（已形式化 / 严格证明 / 物理论证 / 猜想 / 已反驳），状态沿图向上传播，使我们第一次能精确回答"某条结论到底建立在多少条猜想之上"。在此之上，挑选已有严格数学基础的"岛"做 Lean 形式化。
+
+核心论证见 `docs/VISION.md`，方法论来源（Prove2Me / FLT / Navier-Stokes 项目的经验）见 `docs/METHODOLOGY.md`。
+
+## 子项目地图
+
+| 目录 | 内容 | 有自己的 CLAUDE.md |
+|---|---|---|
+| `graph/` | 图数据本体：陈述、推导、里程碑、约定（YAML） | 是 |
+| `tools/stringgraph/` | Python 工具：校验、状态传播、报告、渲染 | 是 |
+| `formal/` | Lean 4 + Mathlib 形式化岛 | 是 |
+| `literature/` | 文献登记、抽取记录、模板 | 是 |
+| `docs/` | 愿景、方法论、状态定义、路线图 | 否 |
+| `tests/` | 工具的 pytest | 否 |
+| `.claude/agents/` | 本项目专用 agent 角色 | 否 |
+| `.claude/skills/` | 本项目工作流 skill | 否 |
+
+进入某个子目录工作前，**先读该目录的 CLAUDE.md**。
+
+## 不可违背的原则
+
+1. **陈述与推导分离**。一条陈述是不可变的卡片，可以挂多个独立推导。改陈述文本等于新建节点并标记旧节点 `superseded_by`。
+2. **状态只能实话实说**。`status` 是该节点本身论证的严格程度，不是"大家都相信"。物理学家式的推导就写 `physical-argument`，对偶就写 `conjecture`。有效状态由工具计算，不手写。
+3. **审计面固定在里程碑**。只有 `graph/milestones/` 里的陈述需要人类（船长）逐条确认，且必须通过回译审计。其余节点由 agent 自由添加，靠工具校验和 reviewer 把关。
+4. **先搜索再新增**。新增节点前用 `uv run stringgraph search <关键词>` 查重。发现同一引理的不兼容表述，不要新建，而是提交到里程碑流程做规范化。
+5. **每条边都要有来源**。`depends_on` 里的每个依赖要能在 `sources` 指向的文献位置找到对应论证。找不到就标 `inferred: true` 并留 note。
+6. **约定显式化**。度规号差、α' 归一化、规范场归一化等由 `graph/conventions/` 统一定义，每条涉及公式的陈述声明使用哪套约定。
+7. **提交前必须过校验**。`uv run stringgraph validate` 不通过的改动不得提交；pre-commit hook 会强制执行。
+
+## 多 agent 协作（agent teams / 子 agent）
+
+本项目会并行运行多个 agent。规则：
+
+### Agora 协调总线
+- 会话开始时调用 `agora_join`，`role` 与 `priority` 按下表，不得临时改动：
+
+| role | priority | 谁 | 职责 |
+|---|---|---|---|
+| `lead` | 80 | 主会话 | 分派任务、合并分支、维护里程碑 |
+| `auditor` | 60 | physics-auditor agent | 回译审计、里程碑确认；可抢占 curator 对 milestones 的写入 |
+| `curator` | 50 | graph-curator agent | 从文献抽取陈述与推导 |
+| `formalizer` | 50 | lean-formalizer agent | Lean 形式化 |
+| `reviewer` | 40 | graph-reviewer agent | 对抗性审查，只读 |
+| `researcher` | 30 | researcher agent | 文献检索，只写 `literature/` |
+
+- 动手改文件前 `agora_claim`，路径粒度是子目录或单文件，例如 `graph/statements/worldsheet/**`、`formal/StringFormal/Virasoro/**`。
+- 长任务中定期 `agora_inbox`。结束时 `agora_release` 并 `agora_leave`。
+- 冲突优先 `agora_send` 沟通，`agora_preempt` 只用于 auditor 阻止错误进入里程碑。
+
+### Git 纪律
+- 主分支 `main`。每个 agent 任务在自己的 worktree 上开分支：`agent/<role>/<slug>`，worktree 放在 `.claude/worktrees/`（已 gitignore）。
+- 只由 `lead` 合并到 `main`。合并前跑 `uv run stringgraph validate` 和 `uv run pytest`。
+- 禁止 `push --force`、`reset --hard`、改写历史。
+- 提交信息格式：`<scope>: <动词开头的一句话>`，scope 取 `graph|tools|formal|lit|docs|claude`。例：`graph: add no-ghost theorem chain (worldsheet)`。
+- 每个提交只做一件事。图数据改动和工具改动分开提交。
+
+### 子项目 `.claude/` 与 CLAUDE.md
+- 根目录 `.claude/` 是唯一的 agent/skill/settings 位置，子目录不再放 `.claude/`，避免 agent 在 worktree 里读到不一致的配置。
+- 子目录 CLAUDE.md 只写该目录的**局部规则**（文件格式、命名、验证命令），不重复本文件内容。
+
+## 常用命令
+
+```bash
+uv sync                               # 安装工具依赖
+uv run stringgraph validate           # 校验全图（schema、id 解析、无环、约定一致）
+uv run stringgraph status <node-id>   # 某节点的有效状态与所依赖的猜想集合
+uv run stringgraph report             # 全图统计 + 每个里程碑的猜想依赖
+uv run stringgraph search <keyword>   # 新增前查重
+uv run stringgraph dot > graph/build/graph.dot   # 导出 Graphviz
+uv run pytest                         # 工具测试
+cd formal && lake build               # 构建 Lean 形式化
+```
+
+## 当前阶段
+
+见 `docs/ROADMAP.md`。现在处于 **Phase 0：骨架与种子数据**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem`）。

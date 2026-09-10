@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stringgraph/milestone",
+  "type": "object",
+  "required": ["id", "statement_id", "canonical_text", "audit"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^ms\\.[a-z0-9]+(-[a-z0-9]+)*$" },
+    "statement_id": { "type": "string" },
+    "canonical_text": { "type": "string", "minLength": 1, "description": "船长确认的权威自然语言陈述" },
+    "canonical_source": {
+      "type": "object",
+      "required": ["ref", "loc"],
+      "additionalProperties": false,
+      "properties": { "ref": { "type": "string" }, "loc": { "type": "string" } }
+    },
+    "audit": {
+      "type": "object",
+      "required": ["status"],
+      "additionalProperties": false,
+      "properties": {
+        "status": { "enum": ["draft", "back-translated", "approved", "rejected"] },
+        "captain": { "type": "string" },
+        "approved_on": { "type": "string" },
+        "back_translation": {
+          "type": "object",
+          "required": ["by", "text", "verdict"],
+          "additionalProperties": false,
+          "properties": {
+            "by": { "type": "string" },
+            "text": { "type": "string", "description": "审计 agent 只看 YAML/Lean 后翻回的自然语言" },
+            "verdict": { "enum": ["faithful", "drift", "wrong"] },
+            "diff_notes": { "type": "string" }
+          }
+        }
+      }
+    },
+    "phase": { "type": "integer" }
+  }
+}

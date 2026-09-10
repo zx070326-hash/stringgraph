@@ -1,0 +1,18 @@
+id: duality.ads-cft--via-decoupling-limit
+target: duality.ads-cft
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: worldsheet.critical-dimension-bosonic
+    inferred: true
+    note: 占位：真正的依赖是超弦临界维数 D=10 与 D 膜低能有效作用量，这两个节点尚未建立。
+sources:
+  - ref: maldacena-1997
+    loc: "§2"
+summary: |
+  D3 膜的两种描述（开弦/闭弦）在近视界退耦极限下的匹配，加上对称性（PSU(2,2|4)）匹配
+  与大量后续检验。无证明。
+gaps:
+  - "依赖节点为占位，Phase 3 建立 D 膜与 IIB 超引力节点后替换。"
+author: seed
+created: "2026-09-10"

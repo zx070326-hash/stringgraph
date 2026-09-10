@@ -1,0 +1,31 @@
+# Claude Code worktrees / local state
+.claude/worktrees/
+.claude/settings.local.json
+.claude/scheduled_tasks.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+uv.lock.bak
+
+# Lean
+formal/.lake/
+formal/lake-packages/
+formal/**/*.olean
+formal/**/*.ilean
+formal/**/*.trace
+
+# Generated artifacts
+graph/build/
+*.svg.tmp
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

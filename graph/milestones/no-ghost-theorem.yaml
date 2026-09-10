@@ -1,0 +1,12 @@
+id: ms.no-ghost-theorem
+statement_id: worldsheet.no-ghost-theorem
+canonical_text: |
+  对 D 维自由玻色弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态。
+  当 D = 26 且 a = 1 时，物理态空间上的内积半正定，且模掉零模态后由 24 个横向振子的 DDF 态张成。
+  当 D > 26 时存在负模物理态。
+canonical_source:
+  ref: goddard-thorn-1972
+  loc: "Theorem 1"
+audit:
+  status: draft
+phase: 1

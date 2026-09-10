@@ -1,0 +1,9 @@
+id: conv.metric-mostly-plus
+family: metric
+title: 度规号差 mostly-plus
+definition: |
+  时空度规号差取 (-,+,+,...,+)。Polchinski 全书约定。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2"

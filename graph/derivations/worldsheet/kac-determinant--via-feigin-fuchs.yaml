@@ -1,0 +1,17 @@
+id: worldsheet.kac-determinant--via-feigin-fuchs
+target: worldsheet.kac-determinant
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.verma-module
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: kac-1979
+    loc: "Theorem 1（陈述与证明概要）"
+  - ref: feigin-fuchs-1982
+    loc: "§2（完整证明）"
+summary: |
+  Kac 给出公式并概述证明；Feigin–Fuchs 通过构造 Verma 模之间的同态（奇异向量）
+  完整证明行列式的零点集与重数。数学界接受为定理。
+author: seed
+created: "2026-09-10"
