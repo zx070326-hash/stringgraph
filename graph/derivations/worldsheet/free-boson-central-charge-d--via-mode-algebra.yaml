@@ -4,7 +4,7 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.virasoro-generators-free-boson
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: virasoro-lean-2025
     loc: "Theorem 10.1 + Corollary 10.2（c = 1，Lean 机器验证）；Appendix A.2"

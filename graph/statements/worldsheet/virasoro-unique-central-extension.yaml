@@ -1,0 +1,51 @@
+id: worldsheet.virasoro-unique-central-extension
+kind: proposition
+title: Virasoro 代数是 Witt 代数唯一的非平凡一维中心扩张（H²(W, k) 一维）
+statement: |
+  设 k 是特征零的域。取 Witt 代数 W(k)（math.witt-algebra），以平凡模 k 为系数。
+
+  (1) 二阶李代数上同调 H^2(W(k), k) 是**一维** k-向量空间，由 Virasoro 2-上循环
+
+        γ(ℓ_m, ℓ_n) = ((m^3 − m)/12) δ_{m+n,0}
+
+      的上同调类生成；特别地 [γ] ≠ 0，即由 γ 定义的中心扩张**不分裂**。
+
+  (2) 因此：W(k) 的一维中心扩张按**扩张等价**（保持 k 与 W(k) 上恒等映射的交换图）
+      分类为 H^2(W(k), k) ≅ k，其中 0 对应平凡（分裂）扩张 W(k) ⊕ k；
+      非零类恰为 {λ[γ] : λ ∈ k^×}。
+
+  (3) 全体非零类给出的李代数**互相同构**（把中心元重标度 C ↦ λ^{-1} C），
+      且同构于 worldsheet.virasoro-algebra-v2 的 Vir(k)。
+      故在李代数同构的意义下，Vir(k) 是 W(k) 唯一的非平凡一维中心扩张。
+
+  【本节点不断言】
+  (a) 高于一维的中心扩张、非平凡系数模的上同调、或 H^n (n ≠ 2) 的计算；
+  (b) 特征非零或一般 ℚ-代数基环上的同一结论（来源都在特征零域上工作，见推导的 gaps）；
+  (c) 任何形式化：本项目 formal/ 中**没有**这条结论，见推导的 gaps。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: virasoro-lean-2025
+    loc: "Theorem 6.2（H^2(witt) 一维；**编号已核实**，见 sources.bib 本条 note 的已核实编号清单）；Lean 声明 WittAlgebra.rank_lieTwoCohomology_eq_one"
+  - ref: schottenloher-2008
+    loc: "相关章节，编号未核实（Witt 代数的中心扩张与 Virasoro 代数）"
+  - ref: kac-raina-1987
+    loc: "Witt 代数的中心扩张与 H^2 的计算这一主题；**按 sources.bib 的版本陷阱说明，不写 Lecture 编号**"
+tags: [cft, algebra, lie-algebra, cohomology, central-extension]
+notes: |
+  【本卡片是 worldsheet.virasoro-algebra 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单）
+  旧卡把这条断言写在定义卡的最后一句（「它是圆周上多项式向量场李代数（Witt 代数）的唯一
+  非平凡中心扩张」）。它是一条**需要证明的命题**，不是定义的一部分，且未形式化；
+  留在定义卡里会把整卡钉死在 rigorous，连带压低所有只用到括号关系的下游节点。
+  现拆出为本卡片，定义部分见 worldsheet.virasoro-algebra-v2（formalized）。
+
+  【为什么陈述里要区分「扩张等价」与「李代数同构」】
+  H^2 分类的是**扩张等价类**，λ[γ] 与 [γ] 在 λ ≠ 0, 1 时是不等价的扩张（等价要求中心上是
+  恒等映射），但对应的李代数同构（重标度中心元）。物理文献常把两者混为一谈说「唯一」；
+  本节点把 (2)(3) 分开写，就是为了不让这个含混进入图。中心元的这一重标度自由度正是
+  conv.virasoro-standard 用 c/12 固定归一化所消除的东西。
+
+  【与本项目 Lean 实现的关系】worldsheet.virasoro-algebra-v2 在 Lean 中被**构造**为
+  γ 对应的中心扩张（Mathlib `LieAlgebra.ofTwoCocycle`），即上述 (1) 中的那个上循环；
+  但「[γ] ≠ 0」与「dim H^2 = 1」在本仓库中都没有证。
+author: curator
+created: "2026-09-11"

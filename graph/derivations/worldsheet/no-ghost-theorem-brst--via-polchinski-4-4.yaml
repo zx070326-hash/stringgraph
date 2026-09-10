@@ -5,7 +5,7 @@ status: physical-argument
 depends_on:
   - id: worldsheet.brst-quantization
   - id: worldsheet.critical-dimension-brst
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.4（p.137–142）：光锥振子对易关系 eq. (4.4.7)；Q_B = Q_1 + Q_0 + Q_{-1} 的分级分解 eq. (4.4.10)；Q_1^2 = 0 eq. (4.4.13)；上同调态的形式 eq. (4.4.19)；内积 eq. (4.4.23)"

@@ -1,0 +1,62 @@
+id: worldsheet.verma-module-pbw-basis
+kind: proposition
+title: Verma 模的 PBW 基：有序单项式构成基，dim V_N = p(N)，特别地 V(c,h) ≠ 0
+statement: |
+  设 K 是特征零的域，(c, h) ∈ K^2，V(c,h) 为 Verma 模（worldsheet.verma-module-v2），
+  |c,h⟩ 为其最高权向量，V_N 为其 level N 分量（L_0 本征值 h + N）。则
+
+  (1) **PBW 基**：有序单项式
+        L_{-n_1} L_{-n_2} … L_{-n_k} |c,h⟩,   n_1 ≥ n_2 ≥ … ≥ n_k ≥ 1,  k ≥ 0
+      （k = 0 的空积即 |c,h⟩）构成 V(c,h) 的一组 K-基。等价地：V(c,h) 作为
+      U(Vir_-) -模是自由的、秩 1、由 |c,h⟩ 生成，其中 Vir_- := span{L_{-n} : n ≥ 1}。
+
+  (2) **分级维数**：上述基中 level N 的元素恰对应 N 的整数**分拆**，故
+        dim_K V_N = p(N)   （p 为分拆函数，p(0) = 1）；
+      特别地每个 V_N 是有限维的，且形式特征标为 Σ_N p(N) q^{h+N} = q^h ∏_{n≥1} (1 − q^n)^{-1}。
+
+  (3) **非零性**：由 (2) 的 N = 0 情形，dim_K V_0 = 1，故 |c,h⟩ ≠ 0，特别地
+        V(c,h) ≠ 0   对**所有** (c, h) ∈ K^2 成立。
+
+  【范围说明】
+  (a) (1)(2)(3) 对所有 (c,h) 成立，**与 Verma 模是否不可约无关**：不可约性、奇异向量、
+      不可约商 L(c,h) 的维数都不是本节点的内容（判据是 Kac 行列式，
+      见 worldsheet.kac-determinant）。
+  (b) 本节点与所用的排序约定无关：把 (1) 里的 n_1 ≥ … ≥ n_k 换成 n_1 ≤ … ≤ n_k
+      得到另一组基（同一分拆的另一种代表元），维数结论不变。
+  (c) 本节点**未形式化**，见推导的 gaps（Mathlib v4.33.1 无 PBW 定理）。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: kac-1979
+    loc: "§1（Verma 模的构造与逆变形式；PBW 基是其行列式表述的前提）；**分节号未核实**，且 sources.bib 对本 key 指向哪一篇 Kac 存疑"
+  - ref: kac-raina-1987
+    loc: "Virasoro 代数的最高权表示、Verma 模及其特征标这一主题；**不写 Lecture 编号**（sources.bib 的版本陷阱：两版讲号不可互换）"
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Verma.lean 的 Status 段（第 1–3 条）与 formal/TODO.md 的 `pbw-verma` 一项"
+    note: |
+      **这条 source 不是本命题的证明**，而是本命题在本项目中**未形式化**这一事实的登记：
+      Verma.lean 的 Status 段逐条写明缺 PBW 基（straightening + 线性无关）、缺 dim V_N = p(N)、
+      缺 V(c,h) ≠ 0，并指出 Mathlib v4.33.1 没有 PBW 定理。提交 b138286。
+tags: [cft, representation-theory, verma-module, pbw]
+notes: |
+  【本卡片是 worldsheet.verma-module 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单）
+  旧卡把「构造 + 分级」（已在 Lean 中完成）与「PBW 基 + dim = p(N)」（未形式化、依赖
+  Mathlib 尚无的 PBW 定理）写在同一张定义卡上。现构造部分见
+  worldsheet.verma-module-v2（formalized），本卡片承载其余部分。
+
+  【引用本卡片还是 v2？——分派规则】
+  - 只用到「V(c,h) 的构造、最高权关系、万有性质、L_0 分级」→ 引 worldsheet.verma-module-v2；
+  - 用到「基 / 维数 p(N) / 特征标 / **模非零**」→ 引本卡片。
+  按此规则改指本卡片的三处（拆卡时逐条读上下文判定）：
+  - worldsheet.kac-determinant--via-feigin-fuchs：Kac 行列式是逆变形式在 level N 的
+    **PBW 基**下的 Gram 行列式，其表述本身就需要 (1)(2)；
+  - worldsheet.no-ghost-theorem-brst--via-fgz：所需的表示论输入是「模在负模态下自由」
+    （FGZ Proposition 2.6 的 free ℒ^--module），即 (1) 的等价形式；
+  - worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman：LZ 把判据归结为
+    Verma 模 M(26−D, 1−h) 的半正定性，并用特征标 ch_q（Proposition 3.4 / Theorem 3.5 证明末句），
+    需要 (2)；该推导的 gaps 也已逐字点名「PBW 基与 dim V_N = p(N) 尚未形式化」。
+
+  【与 worldsheet.descendant-weight-grading 的分工】
+  后者只断言降算符提高 L_0 本征值（h + Σk_i），**明确不断言**这些单项式线性无关；
+  线性无关正是本卡片 (1)。两者不重复。
+author: curator
+created: "2026-09-11"

@@ -23,7 +23,7 @@ depends_on:
       加上 conv.intercept-sign-a 下 h = a；本节点用 D = 26、h = 1。
       同一条边在 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 上也标 inferred，
       理由相同。
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.virasoro-algebra-v2
     note: |
       非 inferred：LZ 的 𝒢 就是 Virasoro 代数（含中心元 z），物质 Fock 模上的表示由
       Proposition 3.1(i) 逐字给出 π(L_m) = (1/2) Σ_n :α_{m−n}·α_n:、π(z) = D·Id，
@@ -116,7 +116,7 @@ gaps:
   - "动量条件：LZ 的假设是 (P1) ⟨p,1⟩ = 1、(P2) ⟨p,x⟩ ≠ 0 对某 x ∉ C1、(P3) ⟨p,α^μ_0⟩ ∈ R、(P4) D ≥ 2；目标陈述写的是 k ≠ 0（沿用 FGZ 的 p ≠ 0）。(P2) 与 k ≠ 0 是否等价**未做对照**，(P1) 的归一化在本项目记号下对应什么也未登记。本节点的 D = 26 使 (P4) 自动满足。"
   - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中没有逐字登记。本推导按 conv.metric-mostly-plus 读作洛伦兹 (1, 25)，依据是 D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合，以及 (P3) 的实性假设；这是推断而非原文措辞（与 subcritical 推导的同名 gap 相同）。"
   - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。前两条直接落在本推导 summary 的第 (2)(3) 步转述上；三条都不影响 Theorem 3.5(i) 本身的逐字条件。"
-  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点。本推导只用 L(0,0)（平凡一维模），故未挂 worldsheet.verma-module 依赖；若日后建 worldsheet.irreducible-highest-weight-module，应把「L(0,0) 是平凡一维模」这一步显式化（它是 (5) 的关键，Kac 表中 c = 0、h = 0 的不可约模确实是一维平凡模，但本推导没有为这一步给出 loc）。"
+  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点。本推导只用 L(0,0)（平凡一维模），故未挂 worldsheet.verma-module-v2 / worldsheet.verma-module-pbw-basis 依赖；若日后建 worldsheet.irreducible-highest-weight-module，应把「L(0,0) 是平凡一维模」这一步显式化（它是 (5) 的关键，Kac 表中 c = 0、h = 0 的不可约模确实是一维平凡模，但本推导没有为这一步给出 loc）。"
   - "本推导与 --via-fgz 的独立性是**部分**的：LZ Lemma 2.21 自注 cf. [FGZ, Theorem 1.12]，消灭定理一步同源；独立的是约化公式（Theorem 2.13）与 Theorem 2.25 这条主干，以及证明的完整程度。图上并列两条推导反映的是「两份可独立核对的文本」，不是「两条完全无关的数学路线」。"
 notes: |
   【拆分记录，2026-09-10】本推导是从

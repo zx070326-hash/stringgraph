@@ -1,0 +1,105 @@
+id: worldsheet.verma-module-v2
+kind: definition
+status: formalized
+title: Virasoro 代数的 Verma 模 V(c,h)：构造、万有性质与 L_0 分级（不含 PBW 基）
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），(c, h) ∈ R^2。
+  取 Virasoro 代数 Vir = Vir(R)（worldsheet.virasoro-algebra-v2）与其泛包络代数 U(Vir)。
+
+  **构造**：令 J(c,h) ⊆ U(Vir) 为由
+    { L_n : n > 0 } ∪ { L_0 − h } ∪ { C − c }
+  生成的**左理想**，定义 Verma 模
+    V(c,h) := U(Vir) / J(c,h)，
+  它带 U(Vir)-模结构，从而带 Vir 的李模结构与 R-模结构。
+  记最高权向量 |c,h⟩ := [1] ∈ V(c,h)（1 的陪集）。
+
+  **最高权关系**：
+    L_n |c,h⟩ = 0  (n > 0)，  L_0 |c,h⟩ = h |c,h⟩，  C |c,h⟩ = c |c,h⟩，
+  且 V(c,h) 由 |c,h⟩ 在 U(Vir) 下生成：任意 v ∈ V(c,h) 形如 u·|c,h⟩，u ∈ U(Vir)。
+
+  **万有性质**（这是「Verma 模」一词的规范内容）：设 M 是任一 Vir 模，v ∈ M 满足同样的三条
+  最高权关系（权 (c,h)）。则存在**唯一**的 R-线性、Vir-等变映射 V(c,h) → M 把 |c,h⟩ 送到 v。
+  等价地：两个从 V(c,h) 出发的 Vir-等变 R-线性映射若在 |c,h⟩ 上相等则处处相等。
+
+  **负模态张成**：V(c,h) 作为 R-模由**无序**负模态词
+    L_{n_1} L_{n_2} … L_{n_k} |c,h⟩   （k ≥ 0，所有 n_i < 0）
+  张成。
+
+  **L_0 分级**：对 N ∈ N，记 V_N ⊆ V(c,h) 为
+    L_{-b_1} L_{-b_2} … L_{-b_k} |c,h⟩，  b_1 + … + b_k = N，  b_i ≥ 1
+  （即 N 的全体**合成**）所张成的 R-子模。则
+    L_0 在 V_N 上作用为标量 h + N，   ⨆_N V_N = V(c,h)，   每个 V_N 是有限生成 R-模。
+  若进一步 R = K 是特征零的域，则
+    V(c,h) = ⊕_{N ≥ 0} V_N（内直和），且 V_N **恰**是 L_0 的 (h+N)-特征子空间。
+
+  【本节点明确**不**断言】（这些是刻意排除的，不是证明漏洞，见 notes）
+  (a) 有序单项式 {L_{-n_1}…L_{-n_k}|c,h⟩ : n_1 ≥ … ≥ n_k ≥ 1} 构成 R-**基**（PBW）；
+  (b) dim V_N = p(N)（整数分拆数）——本节点只给「有限生成」；
+  (c) **V(c,h) ≠ 0**。
+  (a)(b)(c) 由 worldsheet.verma-module-pbw-basis 承载（rigorous，未形式化）。
+uses: [worldsheet.virasoro-algebra-v2]
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.VermaModule
+  lean_file: StringFormal/Virasoro/Verma.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{VirasoroUEA, vermaRelations, vermaIdeal, VermaModule, hwv, wordAct, negSpan, levelWord, levelSpan, IsHighestWeightVector, vermaLift, lZero}；定理 {lie_lgen_hwv_of_pos, lie_lgen_zero_hwv, lie_cgen_hwv, exists_smul_hwv, negSpan_eq_top, lie_lgen_zero_wordAct, lie_lgen_zero_of_mem_levelSpan, iSup_levelSpan_eq_top, levelSpan_fg, isHighestWeightVector_hwv, vermaLift_hwv, vermaLift_lie, eq_of_lie_of_eq_hwv, isInternal_levelSpan, levelSpan_eq_eigenspace}"
+    note: |
+      本仓库，提交 b138286（"formal: construct the Virasoro Verma module V(c,h), its universal
+      property and its L0-grading"，739 行，无 sorry，公理仅 propext / Classical.choice /
+      Quot.sound）。这是本节点 status: formalized 的依据，逐句对应：
+      - 构造 → `vermaIdeal` / `VermaModule R c h`（`[CommRing R] [Algebra ℚ R]`）；
+      - 最高权关系 → `lie_lgen_hwv_of_pos` / `lie_lgen_zero_hwv` / `lie_cgen_hwv`；
+        「由 |c,h⟩ 生成」→ `exists_smul_hwv`；
+      - 万有性质 → `isHighestWeightVector_hwv`、`vermaLift` / `vermaLift_hwv` /
+        `vermaLift_lie`（存在）、`eq_of_lie_of_eq_hwv`（唯一）；
+      - 负模态张成 → `negSpan_eq_top`（**无序**词）；
+      - 分级 → `lie_lgen_zero_of_mem_levelSpan`、`iSup_levelSpan_eq_top`、`levelSpan_fg`；
+        域上（`[Field K] [CharZero K]`）→ `isInternal_levelSpan`、`levelSpan_eq_eigenspace`。
+      陈述中的 V_N 用**合成**（Lean 的 `Composition N`，有序正整数序列）而不是分拆定义，
+      与 `levelWord` 一致；这与「有序单项式张成」不是一回事（后者未证，见不断言 (a)）。
+  - ref: kac-1979
+    loc: "§1（Verma 模与逆变形式的构造）；**分节号未核实**，且 sources.bib 对本条 key 指向哪一篇 Kac 有存疑（FGZ 引的可能是 ICM Helsinki 1978）"
+    note: |
+      文献侧的标准定义来源。本节点的构造（U(Vir) 对左理想取商）与万有性质是教科书写法；
+      与 lian-zuckerman-1991 Remark 3.2(ii) 的 M(c,h) 是同一对象（LZ 记 M，本项目记 V）。
+  - ref: polchinski-1998-v1
+    loc: "§2.9（最高权态与降算符生成的模，p.68–73）"
+    note: |
+      **强度说明与订正**：旧卡 worldsheet.verma-module 把本条 loc 写成「§2.9」并当作
+      Verma 模的定义出处。curator-polchinski-ch2-3 的抽取记录 Q5 指出，核实过的
+      §2.9 条目只有 (2.9.3)、(2.9.14)、(2.9.15)，**没有证据表明 Polchinski 在此定义 Verma 模**；
+      §2.9 讲的是最高权态与降算符生成的模。故本节点把它降格为背景引用，
+      不作为「Verma 模」这一定义的承载来源，数学侧以 kac-1979 与本仓库 Lean 文件为准。
+tags: [cft, representation-theory, verma-module, formalized]
+notes: |
+  【本卡片是 worldsheet.verma-module 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单；
+  拆分建议由 lean-formalizer 在旧卡 notes 中提出）
+  旧卡把三件事写在一张定义卡上：构造 + 分级（已形式化）、PBW 基（未形式化）、
+  dim V_N = p(N)（未形式化）。合成一张卡使旧卡只能标 rigorous，且 formal 字段被**故意留空**，
+  于是任何引用它的推导都无法反映「构造部分其实已经机器验证」这一事实。
+  现按「一个节点一个命题」拆开：本卡片只承载 Lean 中确已证明的部分。
+
+  【为什么 (c) V(c,h) ≠ 0 不在本卡片里 —— 这是最要紧的一条】
+  没有 PBW 就无法证 1 ∉ vermaIdeal，也没有便宜的替代品（任意 (c,h) 的非零最高权模本身
+  就是要构造的东西；只有 (c,h) = (0,0) 时平凡模现成可用）。因此**本卡片里的每一条结论
+  都可能是空洞真**（若 V(c,h) = 0 则全部平凡成立）。这不影响 status: formalized——
+  它们确实被机器验证了——但引用本卡片的下游若需要「模非零」，**必须**改引
+  worldsheet.verma-module-pbw-basis。已按此原则对全图引用逐条分派，见该节点 notes。
+
+  【基环】构造部分对任意 ℚ-代数 R 成立；直和分解与特征子空间刻画需要特征零的**域**。
+  陈述已分别限定。
+
+  【与 Lean 的其他差异】
+  - Lean 中还证了副产品 `adjoin_range_uea_ι_eq_top`（U(L) 由 ι '' L 生成，Mathlib v4.33.1 无）
+    与 `VirasoroAlgebra.span_lgen_cgen_eq_top`；前者是技术引理不入图，后者已写进
+    worldsheet.virasoro-algebra-v2 的陈述。
+  - `V_N` 的定义用合成而非分拆：这是为了不预设有序化（straightening），
+    见 formal/TODO.md 的 `pbw-verma` 一项 (a)。
+
+  【查重】新增前跑过 `stringgraph search verma / pbw / highest weight / partition`：
+  除旧卡 worldsheet.verma-module 外无同题节点；LZ 的不可约商 L(c,h) 在图中仍无节点
+  （见 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 的 gaps）。
+author: curator
+created: "2026-09-11"

@@ -6,8 +6,8 @@ depends_on:
   - id: worldsheet.brst-quantization
   - id: worldsheet.brst-nilpotent-at-c26
     note: FGZ Theorem 2.8 只需要 c=26 时 d²=0（Prop 1.2），不需要双条件版本；lead 裁决改指弱节点。
-  - id: worldsheet.virasoro-algebra
-  - id: worldsheet.verma-module
+  - id: worldsheet.virasoro-algebra-v2
+  - id: worldsheet.verma-module-pbw-basis
     inferred: true
     note: |
       核实后（全文逐页读毕）可以定位到具体位置：FGZ Proposition 2.6 断言 p ≠ 0 时 V(E, p) 是
@@ -15,6 +15,10 @@ depends_on:
       仍标 inferred 的理由：FGZ 说的是"物质 Fock 模在负模下自由"，不是本项目 Verma 模节点定义的
       V(c,h)；由"自由 U(ℒ^-)-模"到"Verma 模"的识别需要额外一步（Fock 模一般不等于 Verma 模），
       FGZ 未写这一步。若日后为"Fock 模在负模下自由"单建节点，本边应改指向它并去掉 inferred。
+      **2026-09-11 拆卡换代**：本边原指旧卡 worldsheet.verma-module，现改指
+      worldsheet.verma-module-pbw-basis。理由：本边承载的表示论输入正是「在负模态下自由」，
+      即拆分后归入 pbw-basis 的那一半（其陈述 (1) 的等价形式就是 U(Vir_-)-自由、秩 1），
+      而不是 worldsheet.verma-module-v2 的构造与分级。inferred 的理由未变。
 sources:
   - ref: fgz-1986
     loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"

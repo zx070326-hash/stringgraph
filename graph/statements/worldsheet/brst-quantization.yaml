@@ -37,7 +37,7 @@ statement: |
   BRST 物理态空间定义为相对上同调
     H_BRST = ker Q_B / im Q_B  （限制在 b_0 |ψ⟩ = 0 与 L_0 |ψ⟩ = 0 的相对复形上）。
   该定义只有在 Q_B^2 = 0 时才有意义；Q_B^2 = 0 的条件见 worldsheet.critical-dimension-brst。
-uses: [worldsheet.virasoro-algebra]
+uses: [worldsheet.virasoro-algebra-v2]
 uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1

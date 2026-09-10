@@ -3,8 +3,14 @@ target: worldsheet.kac-determinant
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.verma-module
-  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.verma-module-pbw-basis
+    note: |
+      **2026-09-11 拆卡换代**：本边原指旧卡 worldsheet.verma-module，现改指
+      worldsheet.verma-module-pbw-basis（它 depends_on verma-module-v2，构造与分级仍在链上）。
+      理由：Kac 行列式是逆变（Shapovalov）形式在 level N 的 **PBW 基**下的 Gram 行列式，
+      其 p(N) × p(N) 的规模与「行列式」这一说法本身都需要拆分后归入 pbw-basis 的那一半
+      （有序单项式构成基、dim V_N = p(N)），只有构造与分级写不出这条公式。
+  - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: kac-1979
     loc: "Theorem 1（陈述与证明概要）"
