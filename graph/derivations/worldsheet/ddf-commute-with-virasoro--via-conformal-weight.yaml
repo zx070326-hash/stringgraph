@@ -42,6 +42,18 @@ depends_on:
     note: 目标陈述末段推论（DDF 算子把物理态映为物理态）所用的物理态条件。
   - id: worldsheet.virasoro-algebra-v2
     note: L_m 之间的 Virasoro 关系；推论中把 L_0 条件沿塔搬运时用到。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      【2026-09-11（三）新增，立卡后接线】目标陈述写的是「在该扇区的动量塔上」，
+      且明确「L_m 指作用在塔上、逐层用该层动量的算子（第 N 层动量 p + N k_0）」——
+      这个塔与其上逐层作用的 L_m、α^μ_n 现由该定义卡的【塔】与 (3) 承载。
+      本推导的推论一段（把 L_0 条件沿塔搬运、A^i_n 把动量移到 p + n k_0）也在塔上进行：
+      移动层指标的算子只有该卡 (1) 的 S_n = e^{i n k_0·x}。
+      这条边**不是 inferred**：塔是目标陈述量词的定义域，不是文献里某处的论证依赖。
+      Lean 侧的对应物同样在塔上（`towerLop`、`towerMode`、`lie_towerLop_towerMode`、
+      `invTwo_mul_zeroModeSq_towerMomentum`），见该卡 sources 第一条。
+      **有效状态不变**：该卡 status rigorous，其依赖均为 formalized，
+      本推导既有的上限（worldsheet.ope-commutator-dictionary 等，physical-argument）不受影响。
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -103,5 +115,9 @@ notes: |
   因此不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；两条一手来源都没有核实到式号，
   也没有可引用的数学文献严格证明（kac-raina-1987 的讲号/命题号在本项目中未核实
   且两版不可互换，不得猜编号）。故 physical-argument，**无 reviewer-verified 记录**。
+
+  **【2026-09-11（三）接线记录，curator】** 新增一条**非 inferred** 依赖
+  worldsheet.momentum-tower-fock-space：目标陈述与本推导的推论一段都在动量塔上进行，
+  此前本图没有承载该对象的节点。summary、gaps、sources 与 status 均未动，有效状态不变。
 author: curator
 created: "2026-09-11"
