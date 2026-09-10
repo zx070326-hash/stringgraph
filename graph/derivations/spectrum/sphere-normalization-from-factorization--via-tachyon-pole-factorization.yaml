@@ -47,7 +47,10 @@ gaps:
      故因子化右端的 g_c³ C_{S₂} 结构只能类比开弦（见第二条依赖的 inferred 说明）。"
   - "**数值系数 8π 未独立核实**：本推导的 summary 只复现标度关系 C_{S₂} ∝ 1/(α'g_c²)；
      8π 有 [S] 与 [H] 两个二手源一致，但原书未核对。"
-  - "**上游 ch5 节点尚未进入 main**（主公式 (5.3.9)、FP 手续），与本批次其它节点同。"
+  - "**上游 ch5 节点已于 2026-09-11 进入 main**（worldsheet.string-s-matrix 等）。
+     本推导不直接用 (5.3.9)，它对主公式与 FP 手续的依赖经
+     spectrum.closed-string-four-tachyon-integral 传递；**那条推导的 depends_on 尚未补上该边**
+     （TODO：curator 下一轮）。"
   - "**路径积分测度未定义**（本批次共有）。"
 notes: |
   2026-09-11 按 reviewer-ch6 从 spectrum.closed-string-four-tachyon-integral--via-sl2c-fixing

@@ -58,7 +58,9 @@ gaps:
      κ 的定义（κ² = 8πG_N 还是别的归一化）在本图中没有约定节点，
      故 κ 的**数值**关系依赖来源的未写明约定。这是本条最实质的记账缺口。"
   - "**(6.6.19)/(6.6.21)（三个无质量闭弦）只到 L2**，本推导不使用它们。"
-  - "**路径积分测度未定义**、**上游 ch5 节点尚未进入 main**（本批次共有）。"
+  - "**路径积分测度未定义**（本批次共有）。**上游 ch5 节点已于 2026-09-11 进入 main**：
+     本推导不直接用 (5.3.9)，它对 (5.3.9) 的依赖经 spectrum.sphere-n-tachyon-expectation-value
+     （该节点的推导已补上 worldsheet.string-s-matrix 边）与 spectrum.sphere-normalization-from-factorization 传递。"
 notes: |
   ⚠ 若日后建「κ 的归一化约定」节点（conv.gravitational-coupling 一族），
   应回到本推导把该约定显式声明——目前 κ = πα'g'_c 这个数值只在 [H] 的（未写明的）约定下成立。

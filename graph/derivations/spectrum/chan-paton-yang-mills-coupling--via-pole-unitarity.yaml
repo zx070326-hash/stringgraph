@@ -56,7 +56,10 @@ gaps:
   - "**态-算子对应的那一句只有 [H] 背书**（见第五条依赖的 inferred 说明）：
      他说「state-operator mapping gives the same normalization」但没写出映射；
      本图无法核实这一步的细节。"
-  - "**路径积分测度未定义**、**上游 ch5 节点尚未进入 main**（本批次共有）。"
+  - "**路径积分测度未定义**（本批次共有）。**上游 ch5 节点已于 2026-09-11 进入 main**：
+     本推导不直接用 (5.3.9)，它对 (5.3.9) 的依赖经上游的开弦振幅节点
+     （spectrum.open-string-three-tachyon-amplitude / spectrum.open-string-four-tachyon-amplitude）传递，
+     那两条推导的 depends_on 尚未补上该边（TODO：curator 下一轮）。"
   - "**幺正性本身没有节点**：本推导所说的「幺正性定出耦合」，实际做的是**要求**因子化成立
      并据此定归一化，不是从一条已建立的幺正性陈述出发。"
 notes: |

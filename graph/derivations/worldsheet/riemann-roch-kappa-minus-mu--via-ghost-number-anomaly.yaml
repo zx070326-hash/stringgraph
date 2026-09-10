@@ -22,6 +22,25 @@ depends_on:
     note: κ 的定义。
   - id: worldsheet.moduli-condition-traceless-transverse
     note: μ 的定义。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: |
+      **比例常数的标定输入**（2026-09-11 补边，ch.5/ch.6 两支合入 main 后）：
+      提供 κ(S₂) = 6（(6.1.5a)/(6.1.5b) 的两片正则性直接构造）。本推导只导出 κ − μ ∝ χ，
+      系数 3 全靠球面这一个例子定出，而球面的 κ = 6 就出自该节点。
+      不标 inferred：来源在原地就用球面标定（见 summary 末的逐字转述），
+      且 [S] §6.67 逐字写「zero moduli and six conformal Killing vectors … 3χ = κ − μ = 6 − 0 = 6」，
+      即文献自己把这两章接在一起（抽取记录 E96 的「文献列出的依赖」也含 E75/E89）。
+      ⚠ **该卡片明确声明不断言 μ(S₂) = 0**，故标定所需的另一半（μ(S₂) = 0）**不由本条边承载**，
+      见 gaps 第一条的残余部分。
+  - id: worldsheet.bc-ghost-number-anomaly-sphere
+    inferred: true
+    note: |
+      **同一机制的 g = 0 特例，作为标定的独立佐证**（2026-09-11 补边）：该节点用同一条鬼流
+      非张量变换律 (2.5.17)|_{λ=2} 在球面两片上算围道积分之差，得每个手征部门 3、合计 6，
+      即 κ − μ = 6，与本推导用 (κ, μ) = (6, 0) 标定出的 3χ = 6 一致。
+      标 inferred：原书 §5.3 在标定处**不回指** §6.3，这条「特例 ⇒ 一般式的系数」的接法是本图补的。
+      ⚠ 该节点带**勘误依赖**（[S] 称印刷版 (6.3.6) 有误、官方勘误表本项目未取得），
+      故本条边只作佐证，标定的主承载仍是上一条边的 κ(S₂) = 6。
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出 (5.2.9)）"
@@ -29,6 +48,11 @@ sources:
       抽取记录 literature/extractions/polchinski-1998-v1.md#E82，L1（读到 schrans-2020
       §5.22–§5.23，笔记 p.261–262；条目 [5.90] 逐字「…which leads to the Riemann-Roch
       theorem (5.2.9)」）。
+  - ref: polchinski-1998-v1
+    loc: "§6.1, eq. (6.1.5a)/(6.1.5b)（标定所用的 κ(S₂) = 6）；§6.3, eq. (6.3.6)（同一反常在 S₂ 上给出的 3）"
+    note: |
+      2026-09-11 补：本条只承载**比例常数标定这一步的两个输入**，不承载 §5.3 的反常计算本身。
+      抽取记录 #E89（κ(S₂) = 6，L1）与 #E96（S₂ 上必须三个 c 插入，L1，**带勘误依赖**）。
 summary: |
   把鬼数反常当作**算子方程**，于是路径积分中的鬼数不守恒：
     δ_{g#} ∫[dφ] e^{−S} ∝ ε ∫ d²σ ĝ^{1/2} ∇_a j^a = ε ∫ d²σ ĝ^{1/2} ((1−2λ)/4) R 。
@@ -43,9 +67,15 @@ gaps:
     **比例常数靠单个例子标定**。这是本推导最实质的弱点：论证只给出 κ − μ ∝ χ，
     系数 3 由球面的 (χ, μ, κ) = (2, 0, 6) 定出。若球面的 κ = 6 有误，整条结论随之改变。
     而**球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)**，属第 6 章。
-    该节点（worldsheet.sphere-conformal-killing-group）已由 §6 分支的 curator 建成，
-    但**该分支尚未合入 main**：**待 §6 sphere-conformal-killing-group 合入后补边**。
-    在那之前，本推导的标定一步在图上有一条依赖边**悬空**。
+    **悬空的依赖边已于 2026-09-11 补上**（ch.5 与 ch.6 两支均已合入 main）：
+    κ(S₂) = 6 挂 worldsheet.sphere-conformal-killing-group，
+    同一反常在 S₂ 上的独立佐证挂 worldsheet.bc-ghost-number-anomaly-sphere（inferred）。
+    **残余（本 gap 未关闭的部分）**：标定还要用 **μ(S₂) = 0**，而
+    worldsheet.sphere-conformal-killing-group 的 statement **明确声明不断言 μ(S₂) = 0**，
+    本图目前**没有任何节点断言 μ(S₂) = 0**——最接近的
+    worldsheet.positive-euler-number-no-moduli（χ > 0 ⇒ μ = 0）在原书里是与 (5.2.9) 同处
+    §5.2 的对偶断言，拿它来标定 (5.2.9) 有**循环之嫌**，故本图**不建这条边**，
+    留给 auditor 裁决。在此之前，标定的 μ = 0 一半仍是断言。
   - |
     **「反常是算子方程」这一步没有论证**：从配分函数的 Weyl 变分到「∇_a j^a 作为算子方程
     可以插进任意关联函数」需要论证反常的局域性与与插入的对易性，来源里只有断言。
