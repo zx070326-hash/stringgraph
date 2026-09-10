@@ -150,11 +150,20 @@ def test_seed_graph_validates() -> None:
     assert not errors, "\n".join(str(e) for e in errors)
 
 
-def test_seed_no_ghost_is_rigorous_with_inferred_kac() -> None:
+def test_seed_no_ghost_v2_is_rigorous_with_inferred_kac() -> None:
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem"].name == "rigorous"
-    assert effs["worldsheet.no-ghost-theorem"].conjectures == set()
+    assert effs["worldsheet.no-ghost-theorem-v2"].name == "rigorous"
+    assert effs["worldsheet.no-ghost-theorem-v2"].conjectures == set()
+
+
+def test_superseded_no_ghost_v1_is_open() -> None:
+    """旧节点被 v2 取代（审计 B1：第 (3) 条为假），不再挂推导，效状态 open 是预期结果。"""
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    assert g.statements["worldsheet.no-ghost-theorem"].superseded_by == "worldsheet.no-ghost-theorem-v2"
+    assert not g.derivations_for("worldsheet.no-ghost-theorem")
+    assert effs["worldsheet.no-ghost-theorem"].name == "open"
 
 
 def test_seed_ads_cft_is_conjecture() -> None:

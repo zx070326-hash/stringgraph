@@ -1,0 +1,71 @@
+id: worldsheet.no-ghost-theorem-v2
+kind: proposition
+title: 无鬼定理（Goddard–Thorn）：D = 26、a = 1 时 H_phys/H_0 等距同构于 24 个横向振子的 Fock 空间
+statement: |
+  设 H_phys 是 worldsheet.old-covariant-physical-states 定义的 D 维自由玻色开弦旧协变物理态空间
+  （单组振子 α^μ_n；(L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 ∀ n > 0），记零模态子空间
+    H_0 = {|χ⟩ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ |ψ⟩ ∈ H_phys}。
+  Fock 内积由 (α^μ_n)^† = α^μ_{-n} 与 η_{μν}（conv.metric-mostly-plus）诱导，在 F 上不定。
+
+  (1) 设 D = 26 且 a = 1。固定一个类光参考动量 k_0（k_0^2 = 0），并把注意力限制在动量 k 满足
+      k·k_0 ≠ 0 的扇区（这正是 worldsheet.ddf-operators-v2 中归一化条件 k_0·k = 1 所要求的条件）。
+      则在该扇区上：
+        (1a) 对任意 |ψ⟩ ∈ H_phys 有 ⟨ψ|ψ⟩ ≥ 0（Fock 内积在 H_phys 上半正定）；
+        (1b) 商空间 H_phys / H_0 上的诱导内积正定，且它与 24 个横向振子
+             A^i_{-n}（i = 2..25，n ≥ 1，DDF 算子，见 worldsheet.ddf-operators-v2）作用在
+             基态 |0; k⟩ 上生成的 Fock 空间 H^⊥ 之间存在**等距同构**，即一个保内积的线性双射
+             （不只是线性同构；两侧的分级由 L_0 给出，同构保分级）。
+      k·k_0 = 0 的动量扇区（特别是 k = 0）不在本陈述范围内：DDF 算子的构造在那里退化，需单独处理。
+
+  (2) 设 D > 26。则至少在 a = 1 时 H_phys 含负模态，即存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0。
+      （本陈述只断言 a = 1 的情形；对一般 a 的加强见 notes。）
+
+  本陈述不对 D ≤ 25 作任何断言，也不使用"退耦""不幺正"等未定义的措辞。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: goddard-thorn-1972
+    loc: "Theorem 1（定理编号未核实）"
+    note: |
+      原文（Phys. Lett. B 40, 235-238，4 页短文）未在 literature/extractions/ 登记，
+      "Theorem 1" 这一编号沿用自旧节点 worldsheet.no-ghost-theorem，未与原文核对。
+  - ref: brower-1972
+    loc: "§II-III（节号未核实）"
+    note: |
+      Brower 用谱生成代数给出独立证明。旧节点把 loc 写成"独立证明"，不是章节号，
+      违反 graph/CLAUDE.md 的定位要求（ms.no-ghost-theorem 审计 B7）；此处改为节号形式，
+      但节号本身未与原文核对。
+  - ref: gsw-1987-v1
+    loc: "§2.3.2-2.3.3（教科书版本：DDF 态张成 H_phys 模零模态）"
+    note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
+  - ref: polchinski-1998-v1
+    loc: "§4.1 末（p.124-125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E58：页码已核实，
+      原文措辞与是否引用 Goddard-Thorn / Brower 均未核实（同文件 Q7）。
+      §4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
+tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
+notes: |
+  取代 worldsheet.no-ghost-theorem。旧节点的第 (3) 条"D ≤ 26 且 a ≤ 1 ⇒ 半正定"为假：
+  按 ms.no-ghost-theorem 审计记录 B1 的精确计算，level-2 标量物理态的模在 D = 26 时正比于
+  2(D-1)(8a-3)(a-1)（原式 (D-1)[16a^2 + (2D-74)a + 84 - 3D] 在 D = 26 处的因式分解），
+  在 3/8 < a < 1 上严格为负。正确的无鬼区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)。
+  本节点只保留 D = 26、a = 1 与 D > 26 两条，不写 D ≤ 25 的情形；若要建 D ≤ 25 的无鬼性
+  （通常归于 Brower 1972 / Thorn），应另建节点并以抽取记录支撑。
+
+  第 (2) 条对 a 的量化：Goddard-Thorn 1972 的原始结果是在 a = 1（截距取临界值）下陈述的，
+  D > 26 时用 DDF 态加纵向态构造出负模态。文献中流传的更强形式"D > 26 时对任意 a 均有负模态"
+  通常归于 Brower 1972 / Thorn 的谱生成代数证明。本项目尚未登记 GT 1972 与 Brower 1972 的抽取记录，
+  无法确认这一加强的出处与确切条件（ms.no-ghost-theorem 审计 B4 也指出：a = -3、-5 在 level ≤ 3
+  的数值检查中未见负模），故本节点只写"至少在 a = 1 时"。a = 1 的情形有独立佐证：上式在 a = 1
+  处给出 level-2 标量物理态的模正比于 (D-1)(26-D)，D > 26 时严格为负。
+  若日后核实了 Brower/Thorn 的一般 a 结论，应新建 v3 节点而非改写本节点。
+
+  B6 相关：第 (1b) 条明写"等距同构"（保内积）而非泛泛的"同构"，并显式声明 DDF 构造所需的
+  类光参考动量条件 k·k_0 ≠ 0（Polchinski §4.1 亦有此注），零动量扇区排除在外。
+
+  形式化：这是形式化岛 1 的目标，Lean 声明名预留为 StringFormal.NoGhost.no_ghost_theorem，
+  完成后由 lean-formalizer 填写 formal.lean_decl 并把推导状态升为 formalized。
+  抽取记录 E68 建议：BRST 版本（worldsheet.no-ghost-theorem-brst）的分级 + 三角矩阵论证
+  比 DDF 版本更接近可形式化的形式，形式化时应同时参考。
+author: curator
+created: "2026-09-10"

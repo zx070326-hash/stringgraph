@@ -16,8 +16,13 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§4.4 (BRST 版本)"
 tags: [bosonic-string, unitarity, critical-dimension]
+superseded_by: worldsheet.no-ghost-theorem-v2
 notes: |
   这是形式化岛 1 的目标。Lean 声明名预留为 StringFormal.NoGhost.no_ghost_theorem，
   完成后由 lean-formalizer 填写 formal.lean_decl 并把推导状态升为 formalized。
+  【已被取代】本节点第 (3) 条"D ≤ 26 且 a ≤ 1 ⇒ 半正定"为假，见
+  graph/milestones/no-ghost-theorem.yaml 的审计记录 B1（D = 26、3/8 < a < 1 时 level-2
+  标量物理态的模严格为负）；正确陈述见 worldsheet.no-ghost-theorem-v2。
+  按项目规则陈述文本不可变，本节点保留作历史，不再挂推导，故有效状态为 open。
 author: seed
 created: "2026-09-10"

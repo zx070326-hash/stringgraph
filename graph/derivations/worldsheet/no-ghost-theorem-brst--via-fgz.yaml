@@ -1,0 +1,40 @@
+id: worldsheet.no-ghost-theorem-brst--via-fgz
+target: worldsheet.no-ghost-theorem-brst
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.critical-dimension-brst
+  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.verma-module
+    inferred: true
+    note: |
+      FGZ 的计算用到 Virasoro 模（Fock 模 / Verma 模）的结构结果来定位上同调；
+      PNAS 短文只给结论与证明梗概，未逐条列出所用的表示论输入，故标 inferred。
+      需 researcher 核对 FGZ 的长文版本与 lian-zuckerman-1989 后改为显式依赖或删除。
+sources:
+  - ref: fgz-1986
+    loc: "Theorem 1.2（编号未核实）"
+    note: |
+      半无限上同调（= BRST 上同调）在总中心荷为零（c^m = 26）时的计算：
+      相对上同调集中在单一次数并同构于横向 Fock 空间，且内积正定。
+      定理编号沿用 worldsheet.critical-dimension-brst 中对 fgz-1986 的写法（那里引 Theorem 1.1），
+      未与原文核对。PNAS 是公告体裁，完整证明在后续长文与 lian-zuckerman-1989。
+  - ref: lian-zuckerman-1989
+    loc: "§2（节号未核实）"
+    note: 受限模上 BRST 微分与其上同调的数学化处理；节号与定理号未核实，需 researcher 补齐。
+summary: |
+  FGZ 把 BRST 复形认作 Virasoro 代数的半无限（semi-infinite）上同调复形，
+  微分 d 即 Q_B，其 d^2 = 0 恰当 c^m + c^g = 0（worldsheet.critical-dimension-brst）。
+  在受限模范畴中，他们对物质 Fock 模（非零动量）计算 H^•_rel(Vir, Vir_0; F_matter ⊗ ...)，
+  证明它集中在单一鬼数上，且同构于横向振子生成的 Fock 空间；
+  再由该同构保内积得到诱导内积正定。
+  与 --via-polchinski-4-4 相比，这里的分级/滤子论证是在有明确定义的（受限）模范畴中做的，
+  收敛性问题由模的受限性与分级有限性处理，故可标 rigorous。
+gaps:
+  - "fgz-1986 是 PNAS 公告，完整证明在后续长文与 lian-zuckerman-1989；本推导标 rigorous 依据的是这一整条数学文献链，而不是 PNAS 短文本身。"
+  - "两条来源的定理编号/节号均未与原文核对（loc 已标注），在 researcher 补齐前可追溯性不足。"
+  - "FGZ 的定理对物质模的假设（非零动量 / Fock 模的不可约性）与本陈述写的 k^+ ≠ 0 是否逐字一致，未核实；两者在自由玻色子 Fock 模上通常等价，但这一等价本身未验证。"
+  - "本推导不建立 BRST 上同调与旧协变物理态空间的等价（Kato–Ogawa 定理），后者尚未建节点。"
+author: curator
+created: "2026-09-10"

@@ -15,5 +15,11 @@ sources:
   - ref: goddard-thorn-1972
     loc: "eq. (3)–(6)"
 tags: [bosonic-string, spectrum-generating-algebra]
+superseded_by: worldsheet.ddf-operators-v2
+notes: |
+  【已被取代】本节点把横向指标写作 i = 1..D-2，与 worldsheet.light-cone-quantization 的
+  i = 2..D-1 记号不一致；参考动量的归一化条件 k·p = 1 也未显式写出 k·p ≠ 0 的要求
+  （见 graph/milestones/no-ghost-theorem.yaml 审计 B6）。规范化版本见
+  worldsheet.ddf-operators-v2。按项目规则陈述文本不可变，本节点保留作历史。
 author: seed
 created: "2026-09-10"

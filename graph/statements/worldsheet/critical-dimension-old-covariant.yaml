@@ -24,5 +24,13 @@ tags: [bosonic-string, critical-dimension, unitarity, old-covariant]
 notes: |
   这条是"无鬼定理的等号情形"作为临界维数判据的独立表述，即旧汇总节点
   worldsheet.critical-dimension-bosonic 陈述中的第 (ii) 条。
+
+  【措辞待规范化，陈述不改】末句"D < 26 时内积仍半正定，但 H_0 的维数不足以把 H_phys
+  约化到横向 Fock 空间"与结论句"零模态完全退耦，物理谱在洛伦兹协变的意义下幺正"
+  沿用了 graph/milestones/no-ghost-theorem.yaml 审计 B2/B3 指出的措辞问题：
+  "退耦"在自由弦态空间命题中无可操作定义，"H_0 维数不足"不是精确表述。
+  按审计的精确计算，D ≤ 25 且 a ≤ 1 时半正定确实成立，故末句在 a = 1 时并不假，
+  问题只在措辞；规范写法见 worldsheet.no-ghost-theorem-v2（改说"H_phys/H_0 与横向 Fock 空间
+  之间不存在等距同构"，不用"退耦""不幺正"）。本节点不新建后继版本，只在此登记。
 author: curator-critdim
 created: "2026-09-10"
