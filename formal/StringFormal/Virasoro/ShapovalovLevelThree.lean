@@ -52,6 +52,92 @@ noncomputable def desc21 : VermaModule R c h := ⁅VirasoroAlgebra.lgen R (-2), 
 /-- The level-3 descendant `L₋₁³|c,h⟩`. -/
 noncomputable def desc111 : VermaModule R c h := ⁅VirasoroAlgebra.lgen R (-1), desc11 R c h⁆
 
+/-! ### Brackets and actions needed at level 3 -/
+
+/-- `(3³ - 3)/12 = 2`: the level-3 central coefficient is an integer. -/
+lemma centralTerm_three : centralTerm R 3 = 2 := by
+  have h24 : (((3 : ℤ) ^ 3 - 3 : ℤ) : R) = 24 := by norm_num
+  rw [centralTerm, h24, show inv12 R * (24 : R) = 2 * (12 * inv12 R) by ring,
+    twelve_mul_inv12, mul_one]
+
+lemma lie_lgen_three_neg_three : ⁅VirasoroAlgebra.lgen R 3, VirasoroAlgebra.lgen R (-3)⁆
+    = (6 : R) • VirasoroAlgebra.lgen R 0 + centralTerm R 3 • VirasoroAlgebra.cgen R := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+lemma lie_lgen_three_neg_two : ⁅VirasoroAlgebra.lgen R 3, VirasoroAlgebra.lgen R (-2)⁆
+    = (5 : R) • VirasoroAlgebra.lgen R 1 := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+lemma lie_lgen_three_neg_one : ⁅VirasoroAlgebra.lgen R 3, VirasoroAlgebra.lgen R (-1)⁆
+    = (4 : R) • VirasoroAlgebra.lgen R 2 := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+/-- `L₃ L₋₁|c,h⟩ = 0`. -/
+lemma lie_lgen_three_desc1 : ⁅VirasoroAlgebra.lgen R 3, desc1 R c h⁆ = 0 := by
+  rw [desc1, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 3), lie_zero,
+    add_zero, lie_lgen_three_neg_one, smul_lie,
+    lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 2), smul_zero]
+
+/-- `L₃ L₋₁²|c,h⟩ = 0`. -/
+lemma lie_lgen_three_desc11 : ⁅VirasoroAlgebra.lgen R 3, desc11 R c h⁆ = 0 := by
+  rw [desc11, leibniz_lie, lie_lgen_three_desc1, lie_zero, add_zero, lie_lgen_three_neg_one,
+    smul_lie, lie_lgen_two_desc1, smul_zero]
+
+/-- `L₀ L₋₁²|c,h⟩ = (h+2) L₋₁²|c,h⟩`. -/
+lemma lie_lgen_zero_desc11 : ⁅VirasoroAlgebra.lgen R 0, desc11 R c h⁆
+    = (h + 2) • desc11 R c h := by
+  rw [desc11, leibniz_lie, lie_lgen_zero_desc1, lie_lgen_zero_neg_one, one_smul, lie_smul]
+  module
+
+/-- `L₃ L₋₃|c,h⟩ = (6h + 2c)|c,h⟩`. -/
+lemma lie_lgen_three_desc3 : ⁅VirasoroAlgebra.lgen R 3, desc3 R c h⁆
+    = (6 * h + 2 * c) • hwv R c h := by
+  rw [desc3, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 3), lie_zero,
+    add_zero, lie_lgen_three_neg_three, add_lie, smul_lie, smul_lie, lie_lgen_zero_hwv,
+    lie_cgen_hwv, smul_smul, smul_smul, ← add_smul, centralTerm_three]
+
+/-- `L₃ L₋₂L₋₁|c,h⟩ = 10h |c,h⟩`. -/
+lemma lie_lgen_three_desc21 : ⁅VirasoroAlgebra.lgen R 3, desc21 R c h⁆
+    = (10 * h) • hwv R c h := by
+  rw [desc21, leibniz_lie, lie_lgen_three_desc1, lie_zero, add_zero, lie_lgen_three_neg_two,
+    smul_lie, lie_lgen_one_desc1, smul_smul]
+  congr 1
+  ring
+
+/-- `L₃ L₋₁³|c,h⟩ = 24h |c,h⟩`. -/
+lemma lie_lgen_three_desc111 : ⁅VirasoroAlgebra.lgen R 3, desc111 R c h⁆
+    = (24 * h) • hwv R c h := by
+  rw [desc111, leibniz_lie, lie_lgen_three_desc11, lie_zero, add_zero, lie_lgen_three_neg_one,
+    smul_lie, lie_lgen_two_desc11, smul_smul]
+  congr 1
+  ring
+
+/-- `L₂ L₋₂L₋₁|c,h⟩ = (4(h+1) + c/2) L₋₁|c,h⟩`. -/
+lemma lie_lgen_two_desc21 : ⁅VirasoroAlgebra.lgen R 2, desc21 R c h⁆
+    = (4 * (h + 1) + centralTerm R 2 * c) • desc1 R c h := by
+  rw [desc21, leibniz_lie, lie_lgen_two_desc1, lie_zero, add_zero, lie_lgen_two_neg_two,
+    add_lie, smul_lie, smul_lie, lie_lgen_zero_desc1, lie_cgen_eq, smul_smul, smul_smul,
+    ← add_smul]
+
+/-- `L₂ L₋₁³|c,h⟩ = (18h + 6) L₋₁|c,h⟩`. -/
+lemma lie_lgen_two_desc111 : ⁅VirasoroAlgebra.lgen R 2, desc111 R c h⁆
+    = (18 * h + 6) • desc1 R c h := by
+  rw [desc111, leibniz_lie, lie_lgen_two_desc11, lie_smul, ← desc1, lie_lgen_two_neg_one,
+    smul_lie, lie_lgen_one_desc11, smul_smul, ← add_smul]
+  congr 1
+  ring
+
+/-- `L₁ L₋₁³|c,h⟩ = (6h + 6) L₋₁²|c,h⟩`. -/
+lemma lie_lgen_one_desc111 : ⁅VirasoroAlgebra.lgen R 1, desc111 R c h⁆
+    = (6 * h + 6) • desc11 R c h := by
+  rw [desc111, leibniz_lie, lie_lgen_one_desc11, lie_smul, ← desc11, lie_lgen_one_neg_one,
+    smul_lie, lie_lgen_zero_desc11, smul_smul, ← add_smul]
+  congr 1
+  ring
+
 end Level3
 
 end StringFormal.Virasoro
