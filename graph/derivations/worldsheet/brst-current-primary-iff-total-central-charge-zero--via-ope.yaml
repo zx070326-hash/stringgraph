@@ -4,8 +4,14 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.brst-current-bosonic-string
-  - id: worldsheet.primary-field
-    note: "提供权 h 主场的判据（T(z)O(w) 只有二阶与一阶极点），本命题的\"是否主场\"按此判据。"
+  - id: worldsheet.primary-field-v2
+    note: |
+      提供权 h 主场的判据（T(z)O(w) 只有二阶与一阶极点），本命题的"是否主场"按此判据。
+
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: worldsheet.tt-ope-central-charge
     note: "提供 T(z)T(w) OPE 中的 c/2·(z−w)^{−4} 项，是三阶极点系数正比于 c^tot 的来源。"
   - id: worldsheet.bc-ghost-central-charge
@@ -39,7 +45,7 @@ summary: |
   合并：三阶极点在（且仅在）全导数项取 (3/2)∂²c 时为零；四阶极点的系数是
   (c^m + c^g)/2 = c^tot/2，与全导数项无关。故
     T^tot(z) j_B(w) ∼ (c^tot/2) c(w)/(z−w)⁴ + j_B(w)/(z−w)² + ∂j_B(w)/(z−w)。
-  由 worldsheet.primary-field 的判据，j_B 是权 1 主场 ⟺ 四阶极点消失 ⟺ c^tot = 0。
+  由 worldsheet.primary-field-v2 的判据，j_B 是权 1 主场 ⟺ 四阶极点消失 ⟺ c^tot = 0。
   再由 worldsheet.bc-ghost-central-charge 的 c^g = −26 得 c^m = 26；
   对 D 个平坦自由玻色子（worldsheet.free-boson-central-charge-d 的 c^m = D）即 D = 26。
 gaps:
