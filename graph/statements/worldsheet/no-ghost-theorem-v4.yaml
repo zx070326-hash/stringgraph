@@ -108,11 +108,36 @@ sources:
     loc: "§2.3.2-2.3.3（教科书版本：DDF 态张成 H_phys 模零模态）"
     note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
   - ref: polchinski-1998-v1
-    loc: "§4.1 末（p.124-125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本"
+    loc: "§4.1, p.124：结论 (4.1.20) H_OCQ = H_light-cone，原书注明「as will be shown in section 4.4」；证明在 §4.4（BRST 版本，属 worldsheet.no-ghost-theorem-brst）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E58：页码已核实，
-      原文措辞与是否引用 Goddard-Thorn / Brower 均未核实（同文件 Q7）。经 conv.intercept-sign-a
-      换算 A = -1 ↔ a = 1。§4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——E58/Q7 关闭】
+
+      三点落实，其中两点修正本图先前的记录：
+      1. **措辞**：§4.1 (4.1.20) 处逐字「The OCQ at A = −1 and D = 26 is in fact the same as
+         light-cone quantization at all mass levels, H_OCQ = H_light-cone **(4.1.20)**, **as will be
+         shown in section 4.4**. It is only in this case that consistent interactions are known.」
+         §4.4 开头 p.137 逐字「**In this section we prove that** …」。
+         → 不是 "it can be shown"。旧 note 的「原文措辞未核实」撤销。
+      2. ⚠ **§4.1 与 §4.4 的分工与旧记录设想的不同**：§4.1 (4.1.20) 陈述的是
+         **H_OCQ ≅ H_light-cone（同构）**，**不是**「内积正定」；三者同构 + 正定是 §4.4 的 (4.4.21)。
+         旧 note 写「§4.1 末只陈述结论」这一点仍对，但结论的内容要按上面写。
+      3. ⚠ **是否引用 Goddard–Thorn / Brower：答案是否**。§4.1–§4.4 与习题 4.1–4.6 的正文中
+         **没有任何文献引用标记**（pp.121–144 逐页看过）；Polchinski 的体例是把参考文献集中在
+         书末 References（pp.347–358），**该部分本项目尚未取页**。
+         → **本节点不得声称「Polchinski 把无鬼定理归功于 Goddard–Thorn」**。
+           本节点的归属依据只有 goddard-2008 与 fgz-1986 两条（见上）。
+
+      ⚠ **另一处与本节点直接相关、本图先前记反的事实**（p.143，逐字）：
+        "Eq. (4.4.19) defines an OCQ-physical state in each cohomology class. For the special case
+         of flat spacetime this state can be constructed more explicitly by using the **Del Giudice–
+         Di Vecchia–Fubini (DDF) operators** … **so this is deferred to chapter 8**."
+      → 原书**明写**了 §4.4 ↔ DDF（第 8 章）的连接。本图别处「本书从未把 DDF 与 §4.4 接起来」
+        的说法是错的，凡因此标 inferred 的边可以撤销该标记
+        （具体在 ddf-* 一带，那些文件由他人持有，已在报告中交 lead）。
+
+      经 conv.intercept-sign-a 换算 A = −1 ↔ a = 1。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E58/Q7）与 §12.10 表 A 的 Q7、
+      表 B 第 9、22 项。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
 notes: |
   【2026-09-11（四）补注：第 (2) 条已有机器验证的独立见证节点；第 (1) 条仍待 DDF】

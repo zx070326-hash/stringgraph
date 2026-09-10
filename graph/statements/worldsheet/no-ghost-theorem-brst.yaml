@@ -32,11 +32,73 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.4 The no-ghost theorem（p.137-142），eq. (4.4.7)、(4.4.10)、(4.4.13)、(4.4.19)、(4.4.23)"
+    loc: "§4.4 The no-ghost theorem, pp.137–142；定理陈述在 p.138；关键式号 (4.4.1)（L_m = L^X_m + L^K_m + L^g_m）、(4.4.6)、(4.4.7)、**(4.4.9)**（Q_B = Q_1 + Q_0 + Q_{−1}）、(4.4.10)、(4.4.11)、**(4.4.12)**（分级展开 ⇒ Q_1² = 0）、(4.4.13)（Q_1 = −(2α')^{1/2}k⁺Σ_{m≠0}α^-_{−m}c_m）、(4.4.14)（R）、(4.4.15)（S = {Q_1,R}）、(4.4.16)–(4.4.18)、(4.4.19)（|ψ⟩ = (1 − S^{−1}U + …)|ψ_0⟩）、**(4.4.20)**（⟨ψ‖ψ'⟩ = ⟨ψ_0‖ψ_0'⟩，正定性）、**(4.4.21)**（H_OCQ = H_BRST = H_light-cone）、(4.4.22)–(4.4.27)"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E68：这些式号经两个第三方笔记
-      交叉核对（不是核对原书），证明结构已核实。内积归一化 ⟨↓|c_0|↓⟩ = 1 的具体写法
-      与 Polchinski (4.4.23) 的归一化未逐字核对。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——**两处式号错位订正 + 四条假设
+      + 内积的非平凡选择**。本条取代旧 note 的「经两个第三方笔记交叉核对（不是核对原书）」】
+
+      ⚠ **式号错位（旧 loc 有两处差一号）**：
+        Q_B = Q_1 + Q_0 + Q_{−1}  是 **(4.4.9)**，旧记录写 (4.4.10)；(4.4.10) 是 [N^lc, Q_j] = jQ_j。
+        分级展开 ⇒ Q_1² = 0     是 **(4.4.12)**，旧记录写 (4.4.13)；(4.4.13) 是 Q_1 的显式表达式。
+
+      ★ **定理在原书里的确切陈述（p.138，逐字）**：
+        "Define the transverse Hilbert space H^⊥ to consist of those states in H that have no
+         longitudinal (X⁰, X¹, b, or c) excitations. Since these oscillators are the source of the
+         indefinite inner product, H^⊥ has a positive inner product. Light-cone gauge-fixing
+         eliminates the longitudinal oscillators directly — the light-cone Hilbert space is
+         isomorphic to H^⊥ … **We will show, in the general case, that the BRST cohomology is
+         isomorphic to H^⊥. That is, it has the same number of states at each mass level, and has
+         a positive inner product. This is the no-ghost theorem.**"
+
+      ★★ **原书定理的四条假设（p.137–139，逐字；本节点的 statement 只覆盖其中的特例）**：
+        p.137: "the world-sheet theory consists of **d free X^μ fields including μ = 0, plus some
+                compact unitary CFT K of central charge 26 − d**, plus the ghosts. The Virasoro
+                generators are a sum L_m = L^X_m + L^K_m + L^g_m (4.4.1).
+                **By compact we mean that L^K_0 has a discrete spectrum.**"
+        p.138: "**The only information we use about the compact CFT is that it is conformally
+                invariant with the appropriate central charge, so there is a nilpotent BRST
+                operator, and that it has a positive inner product.**"
+        p.139: "**We choose a Lorentz frame in which the momentum component k⁺ is nonzero.**"
+      即四条：(i) K 紧致（L^K_0 谱离散）；(ii) K 幺正/内积正定；(iii) 总中心荷使 Q_B 幂零；
+      (iv) **k⁺ ≠ 0**。(iv) 尤其要紧：(4.4.13)/(4.4.14) 里 Q_1 与 R 的定义式都含 k⁺ 或 1/k⁺，
+      k⁺ = 0 时整个论证崩掉。
+
+      ⚠ **本节点的 statement 是原书定理的特例，不是原书定理本身**：本节点设 K 平凡、d = 26
+      （物质部门就是 26 个自由 X^μ）。特例化后 (i)(ii) 自动满足、(iii) 成为 D = 26、
+      (iv) 就是本节点已写的 k⁺ ≠ 0。**故本节点与原书不冲突，但也不得声称"这就是 Polchinski §4.4
+      的定理"。** 一般形式（d 个 X + 中心荷 26−d 的紧致幺正 CFT）值得单列一张新陈述卡，
+      前提是先有「紧致幺正 CFT」的定义卡；本图两者都没有，已列入报告交 lead 排期。
+
+      ★ **内积是一个人为约化的内积（p.135，逐字）**：
+        "The inner product (4.3.18a) is not quite the correct one to use in `Ĥ`. It is not well
+         defined: the ghost zero modes give zero, while the δ²⁶(k−k') contains a factor δ(0)
+         because the momentum support is restricted to the mass shell. **Therefore we use in `Ĥ`
+         a reduced inner product ⟨ ‖ ⟩ in which we simply ignore the X⁰ and ghost zero modes.**"
+      → (4.4.20) 的 ⟨ψ‖ψ'⟩ 用的就是这个**约化**内积。本节点 statement 里的
+        ⟨ψ, ψ'⟩_rel := ⟨ψ|c_0|ψ'⟩ 是另一种处理鬼场零模的写法，**两者的关系本图未核实**；
+        「Polchinski (4.4.23) 的归一化未逐字核对」这条旧限定因此仍然成立，且现在知道了
+        它的实质：原书那一侧根本不是 (4.3.18a) 而是一个人为约化的内积。
+
+      ★ **§4.4 与 DDF 的连接在原书里是明写的（p.143，逐字）**：
+        "Eq. (4.4.19) defines an OCQ-physical state in each cohomology class. For the special case
+         of flat spacetime this state can be constructed more explicitly by using the
+         **Del Giudice–Di Vecchia–Fubini (DDF) operators**. To explain these we will need to develop
+         some more vertex operator technology, **so this is deferred to chapter 8**."
+      → 本节点 notes 写「DDF 算子不出现在 Polchinski §4.4 的论证里」——**论证里确实不出现，
+        这句仍对**；但「本书从未把 DDF 与 §4.4 接起来」（本图别处的说法）是错的，
+        §4.4 → §8.2 的这条边**不必标 inferred**。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E58/Q7、E62–E67）与
+      §12.10 表 B 第 9、10、22 项、表 C 第 7、9 项。
+  - ref: polchinski-1998-v1
+    loc: "§4.1, p.124：「as will be shown in section 4.4」；p.122：「These are in fact equivalent, as will be shown in section 4.4.」；§4.4 开头 p.137：「**In this section we prove that** the BRST cohomology of the string has a positive inner product and is isomorphic to the light-cone and OCQ spectra.」"
+    note: |
+      【原书核实 2026-09-11，L1】Q7(a)（原书用什么动词）与 Q7(b)（是否引 Goddard–Thorn）关闭：
+      (a) **不是 "it can be shown"，是 §4.4 的 "we prove"** 加 §4.1 的 "as will be shown in section 4.4"。
+      (b) **§4.1–§4.4 与习题 4.1–4.6 的正文中没有任何文献引用标记**（pp.121–144 逐页看过）。
+          Polchinski 的体例是把参考文献集中在书末 References（pp.347–358），**该部分本项目未取页**。
+          → 本节点（以及 worldsheet.no-ghost-theorem-v4）**不得声称「Polchinski 把无鬼定理
+            归功于 Goddard–Thorn」**——正文里没有这句。归属证据只有 goddard-2008 与 fgz-1986。
   - ref: fgz-1986
     loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"
     note: |
