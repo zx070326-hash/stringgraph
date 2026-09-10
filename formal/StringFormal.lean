@@ -20,6 +20,7 @@ import StringFormal.NoGhost.VertexWeight
 import StringFormal.NoGhost.DDFOperator
 import StringFormal.NoGhost.VertexWeightNeg
 import StringFormal.NoGhost.DDFOperatorNeg
+import StringFormal.NoGhost.VertexWeightZero
 import StringFormal.NoGhost.TowerPairing
 import StringFormal.NoGhost.QuotientForm
 import StringFormal.NoGhost.LevelTwo

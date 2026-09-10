@@ -368,8 +368,9 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
     分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
     `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
     横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
-  - [x] (3) **共形权 `[L_m, V]`**：`m ≠ 0` **已证**（`m ≥ 1` 见 (3d) 单 Fock、(3e) 塔上；
-    `m ≤ -1` 见 (3c')、(3f)；`m = 0` 见 (3c)，只有真空上的形式）。陈述是
+  - [x] (3) **共形权 `[L_m, V]`**：**一切 `m : ℤ` 已证**（`m ≥ 1` 见 (3d) 单 Fock、(3e) 塔上；
+    `m ≤ -1` 见 (3c')、(3f)；`m = 0` 见 (3g)，真空上的形式见 (3c)）。合并声明
+    `Fock.lie_Lop_vertexOsc`（`StringFormal/NoGhost/VertexWeightZero.lean`）对所有 `m` 成立。陈述是
     `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
     `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
     `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
@@ -449,9 +450,28 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       合并推论：`Fock.lie_Lop_vertexOsc_of_ne`（一切 `m ≠ 0`）与
       `Fock.lie_Lop_vertexOsc_of_ne_isotropic`（`b·b = 0`，DDF 归一化下的权 1 变换律）。
       无 sorry，公理只有标准三条。
-      **仍缺**：`m = 0` 的一般态算子形式（真空上是 (3c)；`m = 0` 时 Sugawara 的
-      `j = 0` 与 `j = m` 并成一项，系数多项式在 `m = 0` 处**不适用**，见 (3c) 的要点）。
-      塔上的负模对应物已由 (5) 补齐。
+      **仍缺**：塔上的 `m = 0` 版本（`lie_towerLop_towerVertex_of_ne` 已覆盖 `m ≠ 0`，见 (5)；
+      `m = 0` 需把 (3g) 搬到塔上）。（原列的「`m = 0` 的一般态算子形式」已由 (3g) 补上；
+      当时同时写下的「系数多项式在 `m = 0` 处**不适用**」是**错的**，见 (3g)。）
+    - [x] (3g) `m = 0` 的 `[L_0, V_J]`：**已证**
+      `Fock.lie_Lop_vertexOsc_zero`（`StringFormal/NoGhost/VertexWeightZero.lean`）
+      `L_0^{(a+b)} ∘ V_J - V_J ∘ L_0^{(a)} = (J + a·b + ½ (b·b)) • V_J`。
+      **数学结论（订正此前记录）：系数与 `m ≠ 0` 的通式一致。** 通式
+      `J - m + a·b + ½ (m+1)(b·b)` 在 `m = 0` 处给 `J + a·b + ½ (b·b)`，正是所证系数。
+      此前「代 `m = 0` 给错答案」的说法只对**真空引理**成立，对**对易子系数**不成立：
+      * 真空引理确实变形状。`m ≥ 1` 靠 `Fock.Lop_apply_one_of_pos`（`L_m|k⟩ = 0`）；
+        `m = 0` 时 `L_0^{(a)}|k⟩ = ½ (a·a)|k⟩`（`Fock.Lop_zero_apply_one`）非零。
+      * 相应地 `Fock.Lop_apply_creaExp_zero_shifted` 给
+        `L_0^{(a+b)} Φ_J = (J + ½ (a·a) + a·b + ½ (b·b)) Φ_J`，比
+        `Fock.Lop_apply_creaExp_of_pos_shifted` 在 `m = 0` 处的形式**多出 `½ (a·a)`**。
+      * 在对易子里 `V_J L_0^{(a)}|k⟩ = ½ (a·a) Φ_J` 恰好把这一项减掉，两处偏差抵消。
+      这就是为什么 `m = 0` 必须单独证（真空值不同），而结果又落回同一条多项式。
+      `Fock.eq_zero_of_vertex_recursion` 的产生模态递推同样不用 `m` 的符号（`m = 0` 也不例外），
+      所以 (3d) 的递推块逐字照搬。
+      合并推论：`Fock.lie_Lop_vertexOsc`（**一切 `m : ℤ`**）与
+      `Fock.lie_Lop_vertexOsc_isotropic`（`b·b = 0`，权 1 准初级场变换律，无 `m` 限制）。
+      辅助：`Fock.zeroModeSq_add`（极化 `(a+b)·(a+b) = a·a + 2 a·b + b·b`）。
+      无 sorry，5 条声明 `check_axioms` 全 `ok`，公理只有标准三条。
   - [x] (4) **DDF 算子本身与 `⁅L_m, A^ε_n⁆ = 0`（`m ≥ 1`）**：
     `StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条。
     - 偏振经由**收缩**进入：`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p`（`α^ε_p`），
