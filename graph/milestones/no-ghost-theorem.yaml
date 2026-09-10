@@ -15,22 +15,150 @@ canonical_source:
   ref: goddard-thorn-1972
   loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
-  status: draft
+  status: back-translated
   back_translation:
     by: physics-auditor
     text: |
-      （仅依据 statement 节点的 statement / uses_conventions 与三条约定节点写成；无 formal_statement，无 Lean 声明。）
-      设 D 个自由玻色子 X^μ 的 Fock 空间 F，度规号差 mostly-plus，Virasoro 代数取标准归一化（自由玻色子 c=1，故 c=D），
-      α' 取 Regge 斜率约定。H_phys ⊂ F 由 (L_0 − a)ψ = 0 与 L_n ψ = 0（所有 n>0）定义，a 为截距常数；
-      "零模态"指 H_phys 中与 H_phys 全体正交的向量。断言有三条：
-      (1) 若 D=26 且 a=1：对任意 ψ ∈ H_phys，Fock 内积 ⟨ψ|ψ⟩ ≥ 0（半正定）；并且商空间 H_phys/（零模态）
-          与 24 个横向振子生成的 Fock 空间同构，该空间即 DDF 算子生成的态空间。
-      (2) 若 D>26：对每一个实数 a，存在 ψ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0。
-      (3) 若 D ≤ 26 且 a ≤ 1：对任意 ψ ∈ H_phys，⟨ψ|ψ⟩ ≥ 0。括号补充："D<26 时零模态不足以退耦、谱在洛伦兹协变的意义下
-          不幺正"——YAML 未给这两句可操作定义，照字面只能翻成：D<26 时零模态子空间比 D=26 时小，商掉零模态后
-          剩下的空间不再与横向 DDF 空间同构，作者把这种情形称为"不幺正"。
+      【第二轮回译，2026-09-10，对象 worldsheet.no-ghost-theorem-v2。仅依据该节点的 statement / uses_conventions、
+      它引用的 worldsheet.old-covariant-physical-states 与 worldsheet.ddf-operators-v2 的 statement 字段、
+      以及三条约定节点写成；无 formal_statement，无 Lean 声明。写于读 canonical_text 之前。】
+
+      设定。取 D 个自由玻色子（单组振子 α^μ_n，μ = 0..D-1）的 Fock 空间 F，时空度规 η_{μν} 号差 (-,+,...,+)。
+      F 上的内积由 (α^μ_n)^† = α^μ_{-n} 与 η_{μν} 诱导，一般是不定的。Virasoro 生成元 L_n 取 Sugawara 型构造，
+      中心荷 c = D，满足 [L_m, L_n] = (m-n) L_{m+n} + (c/12) m(m^2-1) δ_{m+n,0}。质量壳记为 α' m^2 = N - a，
+      a 是截距常数，物理态条件写成 (L_0 - a)|ψ⟩ = 0（a 记号，不是 Polchinski 的 A = -a）。
+      定义 H_phys = {|ψ⟩ ∈ F : (L_0 - a)|ψ⟩ = 0 且 L_n|ψ⟩ = 0 对所有 n > 0}，
+      H_0 = {|χ⟩ ∈ H_phys : ⟨χ|ψ⟩ = 0 对所有 |ψ⟩ ∈ H_phys}（零模态子空间）。
+
+      断言 (1)。假设 D = 26 且 a = 1。任取一个类光参考动量 k_0（k_0^2 = 0），并且只考虑动量 k 满足 k·k_0 ≠ 0 的态
+      （这是 DDF 算子归一化 k_0·k = 1 所需要的条件）。那么在这个扇区上：
+        (1a) 对每一个 |ψ⟩ ∈ H_phys，⟨ψ|ψ⟩ ≥ 0。即 Fock 内积限制到 H_phys 上是半正定的。
+        (1b) 商空间 H_phys / H_0 上由 Fock 内积诱导的内积是正定的；并且存在一个保内积的线性双射（等距同构，
+             不只是抽象线性同构），把 H_phys / H_0 映到 H^⊥，其中 H^⊥ 是由 24 个横向 DDF 算子 A^i_{-n}
+             （i = 2..25，n ≥ 1）作用在基态 |0; k⟩ 上张成的 Fock 空间。这些 DDF 算子与所有 L_m 对易，
+             满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（i 取 2..D-1，0、1 方向组成光锥对）。
+             该同构保持分级，分级由 L_0 给出。
+        动量满足 k·k_0 = 0 的态（尤其 k = 0）不在断言范围内。
+
+      断言 (2)。假设 D > 26 且 a = 1。则存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0，即 H_phys 中有负模态。
+      （本陈述对 D > 26、a ≠ 1 不作断言。）
+
+      不作断言的情形：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1；k·k_0 = 0 扇区。
+      陈述不含"退耦""不幺正"之类的措辞。
+
+      回译时注意到的陈述内部疑点（在读 canonical_text 之前记下）：
+        Q1 "固定一个 k_0" 与 ddf-operators-v2 的 "k_0·p = 1" 归一化：若 k_0 真的固定，只有 k_0·p = 1 的动量才满足
+           归一化，而不是全部 k_0·p ≠ 0；须按扇区把 k_0 重标度（k_0 类光，重标度仍类光）。
+        Q2 (1b) 中 H^⊥ 建在单个 |0; k⟩ 上，其动量只覆盖 k - N k_0（N ≥ 0）；而 H_phys / H_0 的量词范围是整个
+           k·k_0 ≠ 0 扇区（连续动量）。二者不可能作为整体等距同构，除非逐动量陈述。
+        Q3 (1b) 说"分级由 L_0 给出"，但 H_phys 上 L_0 = a = 1 是常数，作为分级是平凡的；真正的分级是能级 N。
+        Q4 |0; k⟩ 未要求 k 在快子壳（α' k^2 = a = 1）上；不在壳则 H^⊥ ⊄ H_phys。
     verdict: drift
     diff_notes: |
+      ================================================================
+      第二轮（2026-09-10，针对 worldsheet.no-ghost-theorem-v2 与改写后的 canonical_text）
+      ================================================================
+      参照材料：literature/extractions/brst-cohomology-sources.md §3–§4（GT 1972、Brower 1972、Brower–Thorn 1971
+      均只有摘要级证据 L2；Goddard 2008 综述 L3）、polchinski-1998-v1.md E58/E68、推导节点
+      worldsheet.no-ghost-theorem-v2--via-goddard-thorn，以及本轮数值复核 graph/build/noghost_round2_check.py
+      （gitignore，不入库）。GT 1972 正文仍未获取（researcher 正在找）；本轮裁定不依赖正文，见 E 段。
+
+      数值复核（α' = 1/2，mostly-plus，能级 N ≤ 3；直接求 L_1..L_N 的公共核得到 H_phys，再取 Fock Gram 矩阵在核上的
+      特征值符号 (负, 零, 正)）：
+        D=26, a=1：N=1/2/3 分别为 (0,1,24) / (0,26,324) / (0,375,3200)；正特征值个数恰为 p_24(N) = 24 / 324 / 3200。
+                   ⇒ (1a) 半正定与 (1b) 商空间维数逐级等于 24 个横向振子的 Fock 空间维数，在 N ≤ 3 得到验证。
+        D=27, a=1：N=2 有 1 个负特征值，N=3 有 26 个 ⇒ (2) 在 a=1 成立。D=28, a=1 同样自 N=2 起有负模。
+        D=25, a=1：无负模，但正特征值个数 23 / 300 / 2876 大于 p_23(N) = 23 / 299 / 2852：商空间严格大于横向 Fock
+                   空间，与 Goddard 2008 "D<26 由嵌入 D=26 得到"一致，说明 v2 不对 D ≤ 25 作等距同构断言是恰当的。
+        D=26, a=0.5 / 0.75：自 N=2 起有负模（复核第一轮 B1）。D=26, a=1.25：自 N=1 起有负模。
+        D=25, a ∈ {0, 0.5}：N ≤ 3 无负模（只是与 A3 那句不矛盾，不是证明）。
+
+      A. canonical_text 与 v2 statement 的差异
+      A1. 〔任务检查项 (b)〕第 (2) 条：canonical_text「当 D > 26 时，至少在 a = 1 的情形存在负模物理态」与 v2
+          「设 D > 26。则至少在 a = 1 时 H_phys 含负模态，即存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0」**不逐字一致**
+          （v2 多写"即存在…"的展开；两侧括号注不同），但量词与范围完全相同：都只断言 a = 1，都不断言一般 a。语义等价。
+      A2. 第 (1) 条：两侧的前提（D=26、a=1）、扇区限制（k·k_0 ≠ 0，排除 k=0）、结论强度（H_phys 半正定；H_phys/H_0 与
+          24 个横向振子 Fock 空间等距同构、保内积双射）一致。v2 多出三点：商空间诱导内积正定（半正定模掉根基自动成立，
+          不增加内容）；横向指标 i = 2..25；"分级由 L_0 给出、同构保分级"（canonical_text 未提分级，见 B2）。
+      A3. canonical_text 末段含一句 v2 没有的断言：「正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)」。它与同一句前半
+          「本里程碑不对 D ≤ 25 作任何断言」自相矛盾；其 a ≤ 1 分支按 brst-cohomology-sources.md §4.1 **没有任何可引用来源**
+          （GT 1972、Brower 1972 摘要都限定 a = 1；Goddard 2008 不讨论 α_0 < 1）。这句来自第一轮审计员的记忆，不应出现在
+          canonical_text。这是 canonical_text 相对 statement 的实质偏移（canonical_text 更强且无来源），是本轮裁定 drift 的主因之一。
+      A4. H_0 的写法：canonical_text「零模态…张成的子空间」，v2「H_0 = {χ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys}」。
+          后者本身已是子空间（内积限制在 H_phys 上的根基），两者是同一集合。无差异。
+
+      B. v2 statement 与 canonical_text 共有的表述缺陷（量词/记号不精确，不是物理错误；statement 不可变，修正需 v3 并改 canonical_text）
+      B1. 量词范围不匹配。v2 把 H^⊥ 写成 DDF 算子作用在**一个**基态 |0;k⟩ 上生成的 Fock 空间，却把 H_phys/H_0 取遍整个
+          k·k_0 ≠ 0 扇区（动量连续）。整个扇区的 H_phys/H_0 是各动量分量的直和，与单个可数维 Fock 空间之间不存在线性双射，
+          照字面读为假。定理的正确形式是逐动量的（FGZ 1986 Thm 2.8 也是固定 p ≠ 0 陈述，维数 p_24(1 - p·p/2)）：
+          对每个在快子壳（α' k^2 = a = 1）上且 k·k_0 ≠ 0 的 k，把 H_phys 限制到动量 k - N k_0（N ≥ 0）的塔上再模零模态，
+          与 H^⊥(k) 等距同构，保能级 N。canonical_text 未写基态，只说「与 24 个横向振子的 Fock 空间等距同构」，同样没有固定
+          动量，缺陷相同。v2 也没有要求 |0;k⟩ 在壳；不在壳时 H^⊥ ⊄ H_phys。数值复核是逐动量做的，正是在这个意义下成立。
+      B2. v2「两侧的分级由 L_0 给出」：在 H_phys（与 H^⊥ ⊂ H_phys）上 L_0 = a = 1 是常数，作为分级是平凡的。实际保持的
+          分级是振子能级 N（等价地 α' p^2 = N - a，或 DDF 数算符 Σ_n A^i_{-n} A^i_n）。应写「分级由能级 N 给出」。
+      B3. 记号：v2 引用 ddf-operators-v2 的归一化写成「k_0·k = 1」，而 ddf-operators-v2 明确用 p 记态动量、写「k_0·p = 1」
+          （其 notes 说明改名正是为了区分）。两处指同一条件，但跨节点引用应用同一记号。
+
+      C. 〔任务检查项 (a)〕k·k_0 ≠ 0 扇区限制与 ddf-operators-v2 是否自洽
+      C1. 自洽。ddf-operators-v2 要求 k_0·p ≠ 0 以便把 k_0 重标度到 k_0·p = 1；类光向量重标度仍类光，条件 k·k_0 ≠ 0 与
+          标度无关；DDF 算子把动量移到 p ∓ n k_0，而 k_0·(p ∓ n k_0) = k_0·p（因 k_0^2 = 0），所以整条 DDF 塔留在扇区内，
+          H_0 也在扇区内。v2 说「固定一个 k_0」而 ddf-v2 按态动量归一化：一条塔内 k_0·p 恒定，固定一个 k_0 足够；跨塔要
+          重标度。措辞上应写「固定 k_0 的方向」。
+      C2. 附带发现（属 ddf-operators-v2，不影响本里程碑的扇区语义）：归一化「k_0·p = 1」只在 α' = 1/2 时给出整数能级移动。
+          在 conv.alpha-prime-regge 保留一般 α'（α^μ_0 = (2α')^{1/2} p^μ）下，e^{i n k_0·X(z)} 作用在 |p⟩ 上的单值性要求
+          2α' n k_0·p ∈ Z，正确条件是 2α' k_0·p = 1。ddf-v2 的 notes 已承认「未改动量纲/α' 因子」。
+
+      D. 与来源的差异
+      D1. goddard-thorn-1972（canonical_source，L2 摘要）：摘要只说「absence of ghosts for d ⩽ 26」，在 Veneziano 模型
+          语境下 a = 1。它覆盖 (1a)（且比里程碑强：含 d < 26），不含 (1b) 的等距同构措辞，不含 (2) 的 D > 26 反例。
+          里程碑对 D ≤ 25 不作断言是对来源的收窄，允许。
+      D2. goddard-2008（L3）：明确陈述「For D = 26, if |ψ⟩ is a physical state … it can be written in the form」DDF 态 +
+          零模态，即 (1b)；「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case」；D > 26 出鬼归给
+          Brower–Thorn 1971。与 v2 一致。(2) 的归属应指向 brower-thorn-1971 而非 GT 1972——v2 的 sources 已如实登记，
+          canonical_source 没有。
+      D3. polchinski-1998-v1 E58（页码核实、措辞未核实）：A = −1、D = 26 时 OCQ 物理态模掉 null 后内积正定。经
+          conv.intercept-sign-a 换算 A = −1 ↔ a = 1，与 (1a)(1b) 一致。E68 是 BRST 版本，属 worldsheet.no-ghost-theorem-brst。
+      D4. 一般 a 的加强、以及 D ≤ 25 且 a ≤ 1 的无鬼性：所有现有来源都不支持；v2 与 canonical_text (2) 都正确地没有断言，
+          唯一漏网的是 A3 那句。
+      D5. 〔任务检查项 (c)〕canonical_source.loc「无编号定理；结论见摘要末句…正文未获取」符合 graph/CLAUDE.md
+          「不确定编号时照实写」的要求，形式合规。但它只覆盖 (1a)，且是摘要级。schema 的 canonical_source 是单个 {ref, loc}
+          对象，不允许双列。建议二选一：(i) 改 graph/schema/milestone.schema.json 允许 canonical_source 为数组（tools 改动，
+          lead 决定），双列 goddard-thorn-1972（原始）与 goddard-2008（可追溯的显式陈述，loc 写节名 + 逐字引句）；
+          (ii) 保持单列 GT 1972，等 researcher 拿到正文后把 loc 改为正文位置。在 GT 正文到手前不建议把 canonical_source
+          换成综述：综述不是原始来源。
+
+      E. 需要等 GT 1972 正文才能定的事项（不影响本轮裁定）
+      E1. GT 1972 正文是否含 (1b) 的显式分解、是否含 D > 26 反例、是否有编号定理——影响 canonical_source.loc 与 v2
+          sources 的归属，不影响 canonical_text ↔ statement 的语义比对。
+
+      F. 建议
+      F1. lead 改 canonical_text：删去「正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)」；把 (1) 改为逐动量表述（B1），
+          并写明分级是能级 N。
+      F2. curator 建 worldsheet.no-ghost-theorem-v3：(1b) 写成「对每个快子壳上、k·k_0 ≠ 0 的 k，H_phys 在动量 k - N k_0
+          塔上模零模态 ≅ H^⊥(k)，保能级 N」；「分级由 L_0 给出」改为能级 N；引用 ddf 归一化时与 ddf 节点用同一记号；
+          uses_conventions 加 conv.intercept-sign-a（陈述用 (L_0 - a) 记号却未声明该约定）。
+      F3. curator 建 worldsheet.ddf-operators-v3：归一化写 2α' k_0·p = 1（C2）。
+      F4. F1 完成、v3 取代 v2 后做第三轮回译。本轮置 back-translated 只表示"审计已完成、差异已记录"，不表示可批。
+
+      裁定 drift 的依据：核心命题（D=26、a=1 无鬼 + 商空间 ≅ 横向 Fock 空间；D>26、a=1 有鬼）两侧一致且经数值复核；
+      偏移在 A3（canonical_text 多出一句无来源断言）与 B1/B2（两侧共有的量词/分级不精确）。未发现第一轮 B1 那种物理错误。
+
+      ================================================================
+      第一轮（2026-09-10，针对旧陈述 worldsheet.no-ghost-theorem，已被 v2 取代；以下为历史记录，原样保留）
+      ================================================================
+      第一轮回译文本：
+        （仅依据 statement 节点的 statement / uses_conventions 与三条约定节点写成；无 formal_statement，无 Lean 声明。）
+        设 D 个自由玻色子 X^μ 的 Fock 空间 F，度规号差 mostly-plus，Virasoro 代数取标准归一化（自由玻色子 c=1，故 c=D），
+        α' 取 Regge 斜率约定。H_phys ⊂ F 由 (L_0 − a)ψ = 0 与 L_n ψ = 0（所有 n>0）定义，a 为截距常数；
+        "零模态"指 H_phys 中与 H_phys 全体正交的向量。断言有三条：
+        (1) 若 D=26 且 a=1：对任意 ψ ∈ H_phys，Fock 内积 ⟨ψ|ψ⟩ ≥ 0（半正定）；并且商空间 H_phys/（零模态）
+            与 24 个横向振子生成的 Fock 空间同构，该空间即 DDF 算子生成的态空间。
+        (2) 若 D>26：对每一个实数 a，存在 ψ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0。
+        (3) 若 D ≤ 26 且 a ≤ 1：对任意 ψ ∈ H_phys，⟨ψ|ψ⟩ ≥ 0。括号补充："D<26 时零模态不足以退耦、谱在洛伦兹协变的意义下
+            不幺正"——YAML 未给这两句可操作定义，照字面只能翻成：D<26 时零模态子空间比 D=26 时小，商掉零模态后
+            剩下的空间不再与横向 DDF 空间同构，作者把这种情形称为"不幺正"。
+      第一轮裁定：drift。第一轮 diff_notes：
+
       参照来源：无网络，Goddard–Thorn 1972 原文未在 literature/extractions 登记，比对依据为审计员对该定理的记忆
       （GT 1972 Theorem 1；GSW 1987 v1 §2.3.2；Polchinski 1998 v1 §4.1 的 level-2 分析）以及本次会话内的显式计算
       （graph/build/noghost_check.py，gitignore，不入库：对 level ≤ 3 的 H_phys 在 (D,a) 网格上数值求内积矩阵特征值，
@@ -50,6 +178,8 @@ audit:
           a=1/2 时模 = −50/49，a=3/4 时 = −25/12，a=9/10 时 = −350/243。level-3 数值检查在 D=26、a ∈ {0, 1/4, 3/8, 1/2, 3/4}
           均出现负特征值。所以 D=26 时必须 a=1 恰好；"D ≤ 26 且 a ≤ 1"的正确版本是"(D ≤ 25 且 a ≤ 1) 或 (D=26 且 a=1)"
           （Brower 1972；Thorn 用 Kac 行列式的证明给出同一条件）。level-2 判别式 4(D−1)(D−25) 在 D ≤ 25 时 ≤ 0，与此一致。
+          【第二轮注：本条括号内对 Brower 1972 / Thorn 的归属是记忆，researcher 核实后（brst-cohomology-sources.md §4.1）
+          发现两篇 1972 年论文摘要都只覆盖 a = 1，"(D ≤ 25 且 a ≤ 1)"分支目前无可引用来源。】
       B2. 括号句"谱不幺正于洛伦兹协变的意义下"混用了"幺正/半正定"与"洛伦兹协变"。D<26、a=1 时 H_phys 内积仍半正定
           （检查 D=25、24 在 level 2、3 均无负模），谱是幺正的；失去的是"商空间 = 横向 DDF 空间"这一等价性（多出纵向的
           正模态），以及光锥规范的洛伦兹不变性。应写成"D<26 时零模态更少，H_phys/null 严格大于 DDF 空间，不再与光锥
@@ -67,5 +197,7 @@ audit:
       C1. 在 B1 修正前不应 approved。新建 statement 节点：删去第 (3) 条或改为"(D ≤ 25, a ≤ 1) 或 (D=26, a=1)"，
           并把 (2) 的"任意 a"以文献抽取记录支撑。
       C2. canonical_text 若保持只含 (1)(2)，应在 (2) 中显式写明对 a 的量化。
+      【第二轮注：C1 的"新建节点"与 C2 已由 v2 与改写后的 canonical_text 落实；B5 已由 conv.alpha-prime-regge 改为 α' m² = N − a
+      落实；B6 已由 v2 明写等距同构与 k·k_0 ≠ 0 扇区落实；B7 已由 v2 sources 改为节号形式落实（节号仍未核实）。】
 
 phase: 1
