@@ -554,3 +554,22 @@
   「AGW (119) + (83) ⟹ GS (20)」是一条**纯 `ℚ` 上多项式恒等式**，`ring` 一行即可。
 - ⇒ **新增首选 Lean 目标：AGW 记录 §5.1 的 B1。** 它把 GS 那句"496 是必需的"变成可机检的算术，价值高于本记录原有的 A1–A3。
 
+## 9. ★ 第三轮追加（2026-09-11，lead 直接核实）：Bilal 2008 §12.4 的 β̃ 与 H 的 CS 约定
+
+**来源**：Bilal, *Lectures on Anomalies*, arXiv:0802.0634 v2，§12.4 pp.100–103（arXiv PDF 逐页读图，**L1**）。
+
+- **(12.14)**：`H = dB − Q₃(A,F) + β̃ Q₃(ω,R) ≡ dB − Q₃^{YM} + β̃ Q₃^{L}`，"with β̃ to be fixed below"。文中先说 `H = dB − βQ₃(A,F)`，β 的值依赖迹的参考表示与 B、H 归一化，"We fix the trace to be in some reference representation … and then rescale B and H to set β = 1"。
+- **(12.15)**：`(δ^gauge + δ^L)B = Q₂^{1}(v,A,F) − β̃ Q₂^{1}(v̂,ω,R)`。
+- **(12.16)–(12.19)**：GS 反项 `ΔΓ = ∫ B ∧ X₈`，对应不变十二形式 `ΔÎ₁₂ = (tr F² − β̃ tr R²) ∧ X₈`。
+- **β̃ 的值（p.102 逐字）**："We see that it is then enough to choose **β̃ = 1** in (12.14) and (12.15), let the reference trace in (12.19) be the trace in the fundamental representation of SO(32) and take X₈ = (1/(384(2π)⁵))[tr R⁴ + ¼(tr R²)² − tr F² tr R² + 8 tr F⁴]"（(12.26)）；E₈×E₈ 情形 "again with β̃ = 1"（p.102，(12.33) 上方）。
+- **(12.23)**（SO(n) 迹恒等式，"Let us note without proof"）：`Tr F² = (n−2) tr F²`、`Tr F⁴ = (n−8) tr F⁴ + 3(tr F²)²`、`Tr F⁶ = (n−32) tr F⁶ + 15 tr F² tr F⁴`；**(12.24)** n = 32；**(12.22)** dim G = 496。
+- **(12.28)/(12.29)**（E₈）：`Tr F⁴ = (1/100)(Tr F²)²`、`Tr F⁶ = (1/7200)(Tr F²)³`；定义 `tr F² := (1/30) Tr F²` 后 `Tr F⁴ = 9(tr F²)²`、`Tr F⁶ = (75/20)(tr F²)³`。
+- **四解分类（p.103 逐字）**："One can actually scan all 496-dimensional groups and show that there are no other possibilities to achieve factorization of Î₁₂^{total}" —— **无证明、无引用**；并说 E₈×U(1)²⁴⁸ 与 U(1)⁴⁹⁶ "do not seem to correspond to any consistent superstring theory"。
+- **(12.21)** 总十二形式（dim G、Tr F⁶ 等系数）；**(12.25)** SO(32) 因子化形式 `Î₁₂ = (1/(384(2π)⁵))[tr R² − tr F²][tr R⁴ + ¼(tr R²)² − tr F² tr R² + 8 tr F⁴]`。
+
+**对 §8 / zumino-wu-zee-1984.md 裁定的影响**：researcher 的"GS (4) 与 Bilal (12.14) 由 (B,H)→(−B,−H) 相联，前提 β̃ = +1 待查"——**前提现已核实为真**（β̃ = 1）。⇒ `conv.h-chern-simons-sign` 可闭合：GS 写 `H = dB + ω_Y − ω_L`，Bilal 写 `H = dB − Q₃^{YM} + Q₃^{L}`，两者相差整体符号 (B,H) ↦ (−B,−H)，物理不变量是两个 CS 项的**相对**符号（YM 与 L 相反），两家一致。
+
+**对 GS 迹恒等式卡的影响**：Bilal (12.23) 与 GS (12)(13) 是同一组恒等式的独立陈述（Bilal 自称 "without proof"），可作第二来源但**不升等级**。E₈ 的 tr := Tr/30 定义在 (12.29) 上方逐字。
+
+**对四解分类的影响**：Bilal 2008 也只断言不证明（"one can actually scan"），与 GS 抽取 §4 的结论一致：显式证明仍需 Antonelli 2015 或 GSW v2 ch.13（抽取中）。
+
