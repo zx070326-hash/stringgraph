@@ -1,0 +1,18 @@
+id: worldsheet.brst-nilpotent-at-c26--via-fgz
+target: worldsheet.brst-nilpotent-at-c26
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: fgz-1986
+    loc: "Proposition 1.2（d² = 0）；Proposition 2.1(i)（ρ(c) = −26）；§2.1 正文 π(c) = 26 的假设"
+summary: |
+  FGZ 在一般分次李代数 g 上证明半无限上同调微分满足 d² = 0（Prop 1.2），前提是 H²(g)=0 且
+  2-上循环 γ 可取零。对 Virasoro 代数，鬼场表示的中心荷为 −26（Prop 2.1(i)），故当物质表示
+  中心荷为 26 时相对复形上 γ = 0，Prop 1.2 适用，Q_B^2 = 0。
+gaps:
+  - "FGZ 对 H²(g)=0 与 γ=0 的假设在 Virasoro 情形如何具体满足，文中是叙述而非编号命题；细节见 literature/extractions/brst-cohomology-sources.md §1.2。"
+author: lead
+created: "2026-09-10"

@@ -51,7 +51,7 @@ depends_on:
     inferred: false
 sources:
   - ref: goddard-thorn-1972
-    loc: "Theorem 1"
+    loc: "无编号定理；摘要末句 'absence of ghosts for d ⩽ 26'（正文未获取）"   # 不确定编号时照实写，不要编 "Theorem 1"
 summary: |
   用 DDF 算子构造物理态空间，证明 D=26 且 a=1 时物理态内积半正定。
 author: seed

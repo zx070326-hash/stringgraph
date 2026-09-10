@@ -1,0 +1,21 @@
+id: worldsheet.brst-nilpotent-at-c26
+kind: proposition
+title: 物质中心荷 c^m = 26 时 BRST 荷幂零（单向）
+statement: |
+  设 Q_B 如 worldsheet.brst-quantization 所定义，作用在受限模上。
+  若物质 Virasoro 表示的中心荷 c^m = 26（从而总中心荷 c^m + c^g = 0），则 Q_B^2 = 0。
+  本命题只断言"c^m = 26 ⇒ 幂零"这一方向；反方向（幂零 ⇒ c^m = 26）见
+  worldsheet.critical-dimension-brst。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: fgz-1986
+    loc: "Proposition 1.2（d² = 0，在正文假设 H²(g)=0、γ=0 下）；§2.1 对 Virasoro 情形取 π(c) = 26"
+  - ref: polchinski-1998-v1
+    loc: "§4.3，约 eq. (4.3.2)–(4.3.6)"
+tags: [brst, bosonic-string]
+notes: |
+  为什么单独建这个弱节点：FGZ 的无鬼定理（Theorem 2.8）只用到"假设 c=26 则复形微分平方为零"，
+  不用到双条件版本。让 no-ghost-theorem-brst 依赖双条件节点会把该分支拖到 physical-argument，
+  而双条件的"⇒ c^m=26"方向目前只有物理论证来源。lead 裁决（2026-09-10）。
+author: lead
+created: "2026-09-10"

@@ -4,7 +4,8 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.brst-quantization
-  - id: worldsheet.critical-dimension-brst
+  - id: worldsheet.brst-nilpotent-at-c26
+    note: FGZ Theorem 2.8 只需要 c=26 时 d²=0（Prop 1.2），不需要双条件版本；lead 裁决改指弱节点。
   - id: worldsheet.virasoro-algebra
   - id: worldsheet.verma-module
     inferred: true
