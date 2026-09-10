@@ -65,11 +65,14 @@ notes: |
 
   【4. ★ 记账红线：n = 496 不蕴含反常抵消（2026-09-11，ADT 2010 L1）】
   本节点给出的 n = 496 是**必要条件**，四个 496 维候选群都满足它
-  （见 consistency.twelve-form-factorization-solutions：SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶）。
+  （见 consistency.d10-four-groups-satisfy-anomaly-conditions：
+   SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶，四者的 n = 496 与六阶伴随迹关系已逐一验算）。
   但按 consistency.abelian-factorization-is-not-cancellation（Adams–DeWolfe–Taylor 2010，L1），
   **两个阿贝尔解虽然使十二形式因子化，GS 抵消项却写不下来**（Y₄ ≠ dH₃，与超对称 + 阿贝尔规范不变性不相容）。
-  ⇒ 引用本节点时**不得**把「dim G = 496」读成「反常抵消」，也不得把四解表说成「四个反常自由的理论」。
-  （docs/ROADMAP.md 2026-09-11 记账红线。）
+  ⇒ 引用本节点时**不得**把「dim G = 496」读成「反常抵消」，也不得把四解表说成「四个反常自由的理论」，
+  更**不得写「恰有四个」**——完备性是一条猜想，见
+  consistency.d10-anomaly-conditions-completeness-claim（status: conjecture）。
+  （docs/ROADMAP.md 2026-09-11 记账红线 + lead 2026-09-11 依 polchinski-1998-v2-ch12 的追加裁决。）
 
   【5. GSW Vol. 2 第 10 章对阿贝尔情形的旁证（L1）】p. 148 逐字：
   「The result described above shows that the D = 10 super Yang–Mills theory has a gauge anomaly for

@@ -85,10 +85,14 @@ notes: |
   两条路线落到同一个 2⁵，**GSW 没有解释它们为什么相等**。本卡把这条观察记在这里；
   推导只用第一条（变量替换），不依赖第二条。
 
-  【2. ★ 与四解卡绝不可合并】consistency.twelve-form-factorization-solutions 是**低能场论侧**：
-  候选集是全部 496 维李代数，结论是「因子化」。本卡是**弦论侧**：候选集是 Chan–Paton 群，
-  结论是「单迹反常为零」。适用域、候选集、结论词三样都不同。
+  【2. ★ 与四解卡绝不可合并】consistency.d10-four-groups-satisfy-anomaly-conditions（与其完备性卡
+  consistency.d10-anomaly-conditions-completeness-claim）是**低能场论侧**：
+  候选集是全部 496 维李代数，结论是「满足两条反常条件 / 因子化」。本卡是**弦论侧**：
+  候选集是 Chan–Paton 群，结论是「单迹反常为零」。适用域、候选集、结论词三样都不同。
   GSW 自己也把两者分开：本章 (10.1.12) 之后逐字「(These matters are discussed further in §13.5.3.)」。
+  ⚠ 尤其注意：**本卡的「and for no other group」不是场论侧的完备性主张**。
+  场论侧的完备性在本图是 conjecture（见上述完备性卡），而本卡的「no other」只在
+  Chan–Paton 候选集 SO(n)/USp(n)/U(n) 内，且由整数方程 n + 32η = 0 直接解出。
 
   【3. ★ 本章相对 GS 1984 的两处实质补充】(a) 迹恒等式多了 U(n) 一支 (10.1.14) Tr t⁶ = n trλ⁶ + 15 trλ⁴trλ²
   （已补记在 math.so-usp-adjoint-fundamental-trace-identities 的 notes）；
