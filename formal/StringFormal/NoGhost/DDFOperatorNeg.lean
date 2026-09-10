@@ -53,10 +53,17 @@ the enlarged window serves both signs at once — so the telescoping below is ru
 ## What is still missing
 
 `m = 0`.  The single-Fock identity `Fock.lie_Lop_vertexOsc_of_ne` genuinely excludes it (at
-`m = 0` the `j = 0` and `j = m` terms of the Sugawara normal ordering collide), so
-`⁅L_0, A^ε_n⁆ = 0` — equivalently the statement that `A^ε_n` shifts the `L_0` eigenvalue by
-`-n` — is not available here.  This is the one remaining gap in
-`worldsheet.ddf-commute-with-virasoro`.
+`m = 0` the `j = 0` and `j = m` terms of the Sugawara normal ordering collide), and that is
+the *only* obstruction: `hm` enters `lie_towerLop_ddfOp_of_ne` at exactly one place, the
+appeal to `lie_towerLop_ddfSummand_of_ne`.  The telescoping itself, and the window analysis
+above, are valid verbatim at `m = 0` — indeed at `m = 0` the two telescoping terms
+`(j - m) G_{j-m}` and `j G_j` coincide, so each summand's bracket vanishes on its own.
+
+The missing conclusion is `⁅L_0, A^ε_n⁆ = 0` (not a nonzero multiple of `A^ε_n`: `A^ε_n` is
+the *zero mode* of a weight-`1` current, and `⁅L_m, j_0⁆ = ((h-1)m - 0) j_m = 0` for
+`h = 1`).  It is what makes DDF states automatically satisfy the `L_0` mass-shell condition,
+so `worldsheet.ddf-commute-with-virasoro` cannot be called fully formalised until it is
+there, and "`A^ε_n` preserves the physical subspace" still cannot be stated.
 -/
 
 namespace StringFormal.NoGhost
