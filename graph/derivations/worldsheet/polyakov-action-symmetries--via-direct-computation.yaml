@@ -18,5 +18,9 @@ summary: |
 gaps:
   - "微分同胚不变性此处按坐标变换的形式计算给出（局部、光滑、保定向）；不含大微分同胚/模空间的讨论，也不含边界项的处理（开弦边界见 worldsheet.open-string-neumann-boundary-condition）。"
   - "Polchinski 的原文措辞未核实（正文未获取，见抽取记录 §0）；本条标 rigorous 的依据是该计算本身是初等张量分析，可独立复核，不依赖文献的严格性声明。"
+notes: |
+  reviewer-verified: reviewer-ch1, 2026-09-10
+  陈述已补齐前提（M 紧、φ 保定向、φ(∂M) = ∂M），证明是有限步初等计算
+  （张量变换 + 变量替换公式），故按 rigorous 例外裁决（lead, 2026-09-10）保持 rigorous。
 author: curator-polchinski-ch1
 created: "2026-09-10"

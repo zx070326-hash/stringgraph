@@ -5,7 +5,8 @@ statement: |
   Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）在下列两类变换下不变：
   (i) 时空 Poincaré 变换：X'^μ(τ,σ) = Λ^μ_ν X^ν(τ,σ) + b^μ，γ'_{ab} = γ_{ab}，
       其中 Λ ∈ O(1, D-1)，b^μ ∈ R^D 常数；
-  (ii) 世界面微分同胚（重参数化）σ^a → σ'^a(σ)：
+  (ii) 世界面微分同胚（重参数化）：设世界面 M 紧，φ: M → M 为保定向微分同胚
+      且 φ(∂M) = ∂M，写成坐标形式 σ^a → σ'^a(σ)：
       X'^μ(σ') = X^μ(σ)，  γ'_{ab}(σ') = (∂σ^c/∂σ'^a)(∂σ^d/∂σ'^b) γ_{cd}(σ)。
   即 S_P[X', γ'] = S_P[X, γ]。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]

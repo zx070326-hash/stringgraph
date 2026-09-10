@@ -4,7 +4,7 @@ title: 世界面 Euler 数在 Weyl 变换下不变
 statement: |
   在二维 Weyl 重标度 γ'_{ab} = e^{2ω} γ_{ab} 下，Ricci 标量与测地曲率按
     R' = e^{-2ω} ( R - 2 ∇_a ∂^a ω ),
-    k' = e^{-ω} ( k + n^a ∂_a ω )   （n^a 为边界外法向单位矢）
+    k' = e^{-ω} ( k + n^a ∂_a ω )   （n^a 为边界外法向单位类空矢量，n·n = +1）
   变换。因此 Euler 数（worldsheet.worldsheet-euler-number）
     χ = (1/(4π)) ∫_M d^2σ (-γ)^{1/2} R + (1/(2π)) ∫_{∂M} ds k
   满足 χ[γ'] = χ[γ]：体项中的 -2∇_a∂^a ω 是全散度，其积分化为边界项，

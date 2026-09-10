@@ -14,7 +14,7 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.3（p.16 起），约 eq. (1.3.1)–(1.3.2)"
+    loc: "§1.3（p.16 起）光锥坐标定义；式号未核实（抽取记录 E10 只给 (1.3.1)–(1.3.8) 区间）"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E10，证据等级 [部分已核实]：
       §1.3 起于 p.16 由 CUP 目录确认；**1/√2 因子未核实**（另一种常见约定不带 1/√2，

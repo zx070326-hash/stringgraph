@@ -8,11 +8,16 @@ definition: |
   模式展开中相应出现 cos(nπσ/ℓ)、exp(∓2πin(σ ∓ cτ)/ℓ) 等因子。
 
   与「ℓ 已定死」的写法的换算：
-    开弦 ℓ = π：cos(nπσ/ℓ) → cos(nσ)，exp(-nπicτ/ℓ) → exp(-inτ)（取 c = 1）；
-    闭弦 ℓ = 2π：exp(∓2πin(σ ∓ cτ)/ℓ) → exp(∓in(σ ∓ τ))。
+    c 不是自由参数：光锥规范 X^+ = x^+ + τ_P 下由拉氏量定出 c = ℓ/(2πα' p^+)
+    （Polchinski §1.3，(1.3.11) 附近；表达式未核对原书）。
+    既有节点用的世界面时间 τ_std 与 Polchinski 的 τ_P 差一个 diff：τ_P = 2α' p^+ τ_std。
+    于是 开弦取 ℓ = π：  nπcτ_P/ℓ = n τ_std，  cos(nπσ/ℓ) → cos(nσ)，exp(-nπicτ_P/ℓ) → exp(-in τ_std)；
+        闭弦取 ℓ = 2π： 2πncτ_P/ℓ = n τ_std，exp(∓2πin(σ ∓ cτ_P)/ℓ) → exp(∓in(σ ∓ τ_std))；
+        零模项 (p^i/p^+) τ_P = 2α' p^i τ_std。
+    振子系数 α_n 的定义带固定前因子 (2α')^{1/2}（开弦）/(α'/2)^{1/2}（闭弦），
+    不随 τ 归一化改变，故 [α_m, α_n] = m δ、N、Ñ、m^2 不变。
   本项目多数节点（如 worldsheet.light-cone-quantization）用后一种写法；
-  从 Polchinski 抽取的节点保留 ℓ，两者按上式对应，
-  物理量（N、Ñ、m^2、振子对易关系 [α_m, α_n] = m δ）不变。
+  从 Polchinski 抽取的节点保留 ℓ，两者按上式对应。
 canonical: true
 sources:
   - ref: polchinski-1998-v1

@@ -1,7 +1,7 @@
 id: worldsheet.closed-string-oscillator-commutators--via-canonical-quantization
 target: worldsheet.closed-string-oscillator-commutators
-kind: proof
-status: rigorous
+kind: physical-argument
+status: physical-argument
 depends_on:
   - id: worldsheet.closed-string-mode-expansion
   - id: worldsheet.light-cone-canonical-commutators

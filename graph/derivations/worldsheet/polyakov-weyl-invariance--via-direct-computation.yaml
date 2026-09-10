@@ -18,5 +18,9 @@ summary: |
 gaps:
   - "经典陈述；量子层面（路径积分测度）Weyl 不变性一般被破坏，见 §3.4 的 Weyl 反常。本推导不涉及测度。"
   - "Polchinski 的原文措辞未核实（正文未获取）；本条标 rigorous 的依据是该计算是初等线性代数，可独立复核。"
+notes: |
+  reviewer-verified: reviewer-ch1, 2026-09-10
+  陈述的前提已完整写出，证明是有限步初等计算（二维行列式与逆度规的标度率），
+  故按 docs/STATUS_LEVELS.md 的 rigorous 例外裁决（lead, 2026-09-10）保持 rigorous。
 author: curator-polchinski-ch1
 created: "2026-09-10"

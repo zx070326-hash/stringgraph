@@ -12,7 +12,7 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.9) 附近（Nambu–Goto 作用量段落）"
+    loc: "§1.2，Nambu–Goto 作用量段落（p.9–12，式号未核实）"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E3。诱导度规的表达式
       h_ab = ∂_a X^μ ∂_b X_μ 经 Headrick 习题解答 1.1(b) 逐字确认（[已核实]）；

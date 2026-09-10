@@ -1,7 +1,7 @@
 id: worldsheet.transverse-oscillator-commutators--via-canonical-quantization
 target: worldsheet.transverse-oscillator-commutators
-kind: proof
-status: rigorous
+kind: physical-argument
+status: physical-argument
 depends_on:
   - id: worldsheet.open-string-mode-expansion
   - id: worldsheet.light-cone-canonical-commutators

@@ -8,7 +8,8 @@ statement: |
   其中 N、Ñ 分别是右行与左行的能级算符
   （worldsheet.closed-string-mass-formula 中定义）。
   特别地，左右行的正规序常数在 P 中相消（因为 A = Ã），故 P 不含 c-数模糊性。
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length,
+                   conv.intercept-sign-a]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.4, eq. (1.4.10)"

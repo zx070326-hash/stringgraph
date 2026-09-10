@@ -7,11 +7,12 @@ statement: |
   规范自由度（worldsheet.polyakov-action-symmetries, worldsheet.polyakov-weyl-invariance）
   施加下列规范条件，合称光锥规范：
     (LC1) X^+(τ, σ) = x^+ + τ，  即世界面时间 τ 与时空光锥时间 X^+ 相等（差一个常数）；
-    (LC2) 世界面度规取单位行列式形式 det γ_{ab} = -1（用 Weyl 变换消去整体标度），
+    (LC2) 世界面度规满足 det γ_{ab} = -1（用 Weyl 变换消去整体标度）
+          与 ∂_σ γ_{σσ} = 0（这是 (1.3.9)–(1.3.10)「∫ f dσ 不变」论证所用的条件），
           并把 σ 的坐标长度固定为 ℓ（见 conv.worldsheet-coordinate-length）。
-  施加 (LC1) 要求 p^+ ≠ 0（即 X^+ 沿世界面严格单调），
-  在此前提下 (LC1)+(LC2) 把 diff × Weyl 完全固定，只留下有限维的剩余变换。
-uses: [worldsheet.light-cone-coordinates, worldsheet.polyakov-action]
+  施加 (LC1) 要求 p^+ ≠ 0（即 X^+ 沿世界面严格单调）。
+uses: [worldsheet.light-cone-coordinates, worldsheet.polyakov-action,
+       worldsheet.polyakov-action-symmetries, worldsheet.polyakov-weyl-invariance]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
 sources:
   - ref: polchinski-1998-v1
@@ -22,6 +23,9 @@ sources:
       「1.6 p 17: Below Eq. (1.3.7) Determining p_+」「1.7/1.8 p 18: Eq. (1.3.9)
       Invariance of f dσ / Fixing the Gauge」「1.9 p 18: Eq. (1.3.10)」）。
       规范条件写成 X^+ = x^+ + τ 的具体形式未逐字核对原书。
+      (LC2) 中的 ∂_σ γ_{σσ} = 0 是由 Schrans 伴读笔记目录标题「Eq. (1.3.9)
+      Invariance of f dσ」推知的（该论证需要 γ_{σσ} 不依赖 σ），
+      属 curator 重建，待核对 Polchinski 原书 (1.3.9)–(1.3.10) 确认。
 tags: [bosonic-string, gauge-fixing, light-cone, quantization]
 notes: |
   **与既有节点的 τ 归一化差异**：worldsheet.light-cone-quantization 写
@@ -31,8 +35,9 @@ notes: |
   在 Polchinski 的归一化下 τ 有长度量纲，且 dX^i/dτ = p^i/p^+，
   这正是模式展开 worldsheet.open-string-mode-expansion 中零模项的形式。
 
-  「规范可完全固定」这一断言本身带有前提（p^+ ≠ 0、不讨论大规范变换/Gribov 问题）；
-  本节点把它作为定义的一部分声明，其论证内容与后果见
-  worldsheet.light-cone-gauge-lagrangian（那里记为 physical-argument）。
+  「规范可完全固定」这一断言本身带有前提（p^+ ≠ 0、不讨论大规范变换/Gribov 问题），
+  因而不属于本定义节点：本节点只写下规范条件 (LC1)(LC2) 本身。
+  「(LC1)(LC2) 在 p^+ ≠ 0 下把 diff × Weyl 完全固定」作为可错的命题，
+  写在 worldsheet.light-cone-gauge-lagrangian 的陈述首句（那里记为 physical-argument）。
 author: curator-polchinski-ch1
 created: "2026-09-10"

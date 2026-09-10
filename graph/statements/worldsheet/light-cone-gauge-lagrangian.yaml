@@ -2,7 +2,9 @@ id: worldsheet.light-cone-gauge-lagrangian
 kind: proposition
 title: 光锥规范下的拉氏量：只有横向坐标是独立自由度
 statement: |
-  在光锥规范（worldsheet.light-cone-gauge）下，Polyakov 作用量化为
+  在 p^+ ≠ 0 下，diff × Weyl 可用光锥规范条件 (LC1)(LC2)
+  （worldsheet.light-cone-gauge）完全固定，只留下有限维的剩余变换；
+  此时 Polyakov 作用量化为
     L = (1/(4π α')) ∫_0^ℓ dσ [ (∂_τ X^i)^2 - (∂_σ X^i)^2 ] · (关于 γ 的剩余因子)
         + （x^- 与 p^+ 的零模项）,
   即：D-2 个横向坐标 X^i 是自由的二维标量场，

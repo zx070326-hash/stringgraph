@@ -7,7 +7,7 @@ depends_on:
   - id: worldsheet.point-particle-einbein-action
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.5)–(1.2.7)（einbein 的运动方程与回代）"
+    loc: "§1.2，约 eq. (1.2.5) 之后（einbein 运动方程与回代；式号未核实）"
     note: |
       抽取记录 polchinski-1998-v1#E2。公式号未核对原书（抽取记录 §3 清单：E2 约 (1.2.5)）。
 summary: |

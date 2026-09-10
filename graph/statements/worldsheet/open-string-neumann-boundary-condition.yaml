@@ -6,11 +6,11 @@ statement: |
   见 conv.worldsheet-coordinate-length），端点 σ = 0, ℓ 是世界面的边界。
   对 Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）关于 X^μ 变分，
   分部积分产生的边界项是
-    (1/(2π α')) ∫ dτ (-γ)^{1/2} δX_μ ∂^σ X^μ |_{σ=0}^{σ=ℓ}.
+    -(1/(2π α')) ∫ dτ (-γ)^{1/2} δX_μ ∂^σ X^μ |_{σ=0}^{σ=ℓ}.
   若不对端点处的变分 δX^μ 加任何限制（即端点在时空中自由运动），
-  则 δS_P = 0 对一切 δX^μ 成立当且仅当
-    ∂^σ X^μ(τ, 0) = ∂^σ X^μ(τ, ℓ) = 0   （Neumann 边界条件），
-  同时体内运动方程 ∂_a((-γ)^{1/2} γ^{ab} ∂_b X^μ) = 0 成立。
+  则 δS_P = 0 对一切 δX^μ 成立 当且仅当
+    （体内运动方程 ∂_a((-γ)^{1/2} γ^{ab} ∂_b X^μ) = 0）
+    且（∂^σ X^μ(τ, 0) = ∂^σ X^μ(τ, ℓ) = 0，即 Neumann 边界条件）。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
 sources:
   - ref: polchinski-1998-v1

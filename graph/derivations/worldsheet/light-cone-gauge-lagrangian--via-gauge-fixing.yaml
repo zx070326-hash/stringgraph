@@ -5,6 +5,14 @@ status: physical-argument
 depends_on:
   - id: worldsheet.polyakov-action
   - id: worldsheet.light-cone-gauge
+  - id: worldsheet.polyakov-weyl-invariance
+    note: |
+      用 Weyl 重标度把 det γ 定为 -1。抽取记录 polchinski-1998-v1#E10
+      列 E7（Weyl 不变性）为依赖，落在本推导已引的 (1.3.7)–(1.3.11) 区间。
+  - id: worldsheet.polyakov-action-symmetries
+    note: |
+      用 diff 施加 X^+ = x^+ + τ 与 σ 重参数化。抽取记录 polchinski-1998-v1#E10
+      同样列其为依赖，落在已引的 (1.3.7)–(1.3.11) 区间。
   - id: worldsheet.polyakov-nambu-goto-classical-equivalence
     note: |
       这里只用其中的 T_ab = 0 约束（对 γ_ab 变分的结果），不用它导出 S_NG 的部分。

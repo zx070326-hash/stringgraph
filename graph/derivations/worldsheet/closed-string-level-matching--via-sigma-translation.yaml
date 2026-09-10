@@ -5,6 +5,7 @@ status: physical-argument
 depends_on:
   - id: worldsheet.sigma-translation-generator
   - id: worldsheet.light-cone-gauge
+    inferred: true
     note: |
       用来说明「σ 的原点未被规范固定所定死」，即 σ 平移属于残余规范冗余。
       规范固定的内容在 (1.3.7)–(1.3.10)（已核实为规范固定区间），
