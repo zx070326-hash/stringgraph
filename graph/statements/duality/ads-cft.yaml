@@ -10,7 +10,28 @@ sources:
   - ref: maldacena-1997
     loc: "§2–§3"
 tags: [holography, duality]
+superseded_by: holography.ads5-cft4-duality-v2
 notes: |
+  【已换代，2026-09-11】本卡由 holography.ads5-cft4-duality-v2 取代。
+  按 graph/CLAUDE.md，statement 的 id 与 statement 文本不可改，故保留原文本并在此记录问题；
+  新工作请挂到 holography.ads5-cft4-duality-v2，不要再引本卡。
+  换区（duality → holography）依 lead 裁决（2026-09-11）：
+  graph/schema/areas.yaml 对 holography 的描述正是「AdS/CFT、黑洞熵、Ryu–Takayanagi、岛公式」。
+
+  【本卡陈述与 Maldacena 1997 原文不符的三处】（依 literature/extractions/maldacena-1997.md
+  Q7，抽取者逐页读毕 arXiv:hep-th/9711200v3 全 22 页）：
+  1. 规范群写 SU(N)：原文全篇写 U(N)，且 Higgs 分支/多中心论证依赖 U(N) → U(N−M)×U(M)、U(1)^N，
+     U 因子是本质的。这是事实性不符。
+  2. 「两边的配分函数在边界条件与源的对应下相等」：原文完全没有任何配分函数陈述。
+     该字典出自 Gubser–Klebanov–Polyakov hep-th/9802109 与 Witten hep-th/9802150（均为 1998 年，
+     晚于本文，且不在本文 65 条参考文献里）。这是溯源错误。
+  3. 「完全等价」：原文是 "is dual to"，且猜想句自带两个限定语
+     「plus some appropriate boundary conditions」与「(and possibly also some boundary degrees
+     of freedom)」，并在三处明说边界条件未指定。限定语被丢失。
+
+  另：本卡 sources 的 loc「§2–§3」过粗（猜想句在 §2 p.4，式号 (2.1)–(2.3)），
+  但本卡已换代，不再精确化；精确 loc 见新卡。
+
   这是全息扇区的根猜想。图中依赖它的所有结果有效状态至多为 conjecture。
   可能另设 axiom 节点 `holography.ads-cft-assumed` 供"假设 AdS/CFT 成立"的条件推导使用。
 author: seed

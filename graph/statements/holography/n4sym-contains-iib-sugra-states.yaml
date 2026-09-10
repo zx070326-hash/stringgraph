@@ -1,0 +1,58 @@
+id: holography.n4sym-contains-iib-sugra-states
+kind: proposition
+title: 大 N 下 N=4 U(N) 超 Yang–Mills 的 Hilbert 空间包含 (AdS_5×S^5)_N 上 IIB 超引力的态
+statement: |
+  考虑 3+1 维 N=4 U(N) 超 Yang–Mills 理论处于超共形点，IIB 弦耦合 g 固定。
+  在超引力可信的大 N 区间内（g ≤ 1 时为 gN ≫ 1，g > 1 时为 N/g ≫ 1），
+  该规范理论的 Hilbert 空间包含 (AdS_5 × S^5)_N 上 IIB 超引力的态，
+  特别是包含在该背景上传播的引力子。
+  下标 N 表示两个"半径"（S^5 的半径与 AdS_5 的半径，二者相等）在十维 Planck 单位下正比于 N^{1/4}；
+  以弦长度量则 R^4/α'^2 = 4π g N。
+
+  本陈述只断言"超引力级的态包含在规范理论的 Hilbert 空间里"，
+  不断言两个理论等价，也不给出任何算子对应或配分函数关系。
+  AdS_5 上的边界条件在此陈述中未指定。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: maldacena-1997
+    loc: |
+      arXiv:hep-th/9711200v3, §2, p.4：
+      "Since the Hawking temperature is finite, there is a flux of energy from the black hole to the AdS
+      spacetime. Since N = 4 d=4 U(N) SYM is a unitary theory we conclude that, for large N, it includes
+      in its Hilbert space the states of type IIB supergravity on (AdS_5 × S_5)_N, where subscript
+      indicates the fact that the 'radii' in Planck units are proportional to N^{1/4}. In particular the
+      theory contains gravitons propagating on (AdS_5 × S_5)_N."
+    note: |
+      可信区间 gN ≫ 1 见 eq. (2.4) 与脚注 5（p.3）；
+      半径字典 R^2_sph/α' = √(4πgN) 见 (2.3) 之后（p.3），R̃^4 = 4πgN 见 p.6。
+tags: [holography, ads-cft, supergravity, large-n, d3-brane]
+notes: |
+  from: maldacena-1997#E15（另见 #E1、#E11、#E12、#E13、#E14、#E45）。
+
+  【为什么单独立卡】原文把主张分成两级，摘要里逐字对照即可看出：
+  "We show that the large N limit of certain conformal field theories … include in their Hilbert
+  space a sector describing supergravity …" 与 "We conjecture that compactifications of
+  M/string theory … is dual to various conformal field theories"。
+  本卡承载高的那一级（原文措辞 "we conclude that"，不是 conjecture）；
+  完整弦论对偶在 holography.ads5-cft4-duality-v2。旧卡 duality.ads-cft 把两级混成了一条。
+
+  【原文点名的前提】N=4 SYM 的幺正性 + 近极端黑 D3 膜的 Hawking 温度有限 + 大 N。
+  注意"大 N"在原文里只对超引力近似这一支是必要的：对称性匹配那一支原文逐字写
+  "All this is valid for any N."（§2, p.2）。
+
+  【记号与约定】
+  - 规范群是 U(N)，不是 SU(N)：原文全篇 U(N)，且 Higgs 分支论证依赖 U(N) → U(N−M)×U(M)。
+  - 共形群原文写 SO(2,4)（不是 SO(4,2)），R 对称写 SO(6) ∼ SU(4)；
+    全文 22 页没有出现 PSU(2,2|4) 这个记号，本卡不使用它。
+  - 度规号差 mostly-plus 有原文背书（(4.2) 的 dx²_∥ = −dt² + dx²；附录 (7.1) 的嵌入号差）。
+  - α' 归一化故意未声明：conv.alpha-prime-regge 的实质内容（T = 1/(2πα')、α' m² = N − a）
+    在本文中一次也没出现（抽取记录 Q10），声明它等于写下本文并未使用的约定。
+    按 lead 裁决（2026-09-11）本轮不新建更弱的 α' 约定卡，也不新建 researcher 在 Q2 建议的
+    规范场耦合归一化约定卡 conv.ym-coupling-normalization；留待 lead/auditor 裁决后回填。
+  - 因此本卡只写与规范场耦合归一化无关的形式 R^4/α'^2 = 4πgN（g = 本文的 IIB 弦耦合），
+    不写 R^4/α'^2 = λ = g²_YM N（在本文自己的字典下它等于 2 g²_YM N，见 v2 对偶卡的 notes）。
+
+  【版本】所有 loc 锚定 arXiv:hep-th/9711200v3 (22 Jan 1998)；
+  ATMP 2 (1998) 231–252 发表版的式号未核对（抽取记录 U1）。
+author: curator
+created: "2026-09-11"

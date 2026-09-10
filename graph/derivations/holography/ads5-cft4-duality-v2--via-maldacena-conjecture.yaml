@@ -1,0 +1,93 @@
+id: holography.ads5-cft4-duality-v2--via-maldacena-conjecture
+target: holography.ads5-cft4-duality-v2
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: holography.n4sym-contains-iib-sugra-states
+    inferred: false
+    note: >-
+      原文把猜想直接架在这一结论上：「We have started with a quantum theory and we have seen that
+      it includes gravity so it is natural to think that this correspondence goes beyond the
+      supergravity approximation. We are led to the conjecture that …」（§2, p.4，同一段）。
+sources:
+  - ref: maldacena-1997
+    loc: "arXiv:hep-th/9711200v3, §2, p.4（猜想句所在段落）；耦合字典同页；性质讨论 p.4–p.5；'t Hooft 极限 p.6–p.7"
+summary: |
+  原文的论证只有两步，第二步是明说的外推：
+
+  1. 已建立的部分：大 N 下 N=4 U(N) SYM 的 Hilbert 空间包含 (AdS_5×S^5)_N 上 IIB 超引力的态
+     （本图 holography.n4sym-contains-iib-sugra-states，原文措辞 "we conclude"）。
+  2. 外推：既然从一个量子理论出发并看到它含引力，「it is natural to think that this correspondence
+     goes beyond the supergravity approximation」，于是「We are led to the conjecture that」
+     完整的 IIB 弦论（加边界条件、可能加边界自由度）与 N=4 U(N) SYM 对偶。
+     原文对这一步没有给出论证，只给出上面这句话。
+
+  原文同页给出耦合字典 1/g²_YM + iθ/8π² = (1/2π)(1/g + iχ/2π)，
+  并指出该对应关系在 g 中是非微扰的、IIB 的 SL(2,Z) 将由 SYM 的 SL(2,Z) 推出、
+  它是强弱耦合对应（gN 大时 YM 微扰不可信而 (AdS_5×S^5)_N 上的超引力可信）。
+
+  原文自列的支持证据（逐条附原文自评）：
+  - 超对称与共形对称匹配：AdS_5×S^5 的超对称群与 3+1 维超共形群相同（引 Haag–Lopuszanski–Sohnius）；
+    玻色部分 SO(2,4)×SO(6)。原文对这一支逐字写 "All this is valid for any N."
+    ——这条支持不依赖大 N，与本推导所依赖的超引力级结论是独立的一支，
+    应另立 holography.ads5-cft4-duality-v2--via-symmetry-matching（本轮未建）。
+  - 探针 D3 膜的 Born–Infeld 作用量 (2.6) 可由（破缺的）超共形不变性加半径字典定出，
+    但原文自己降格：「This would be saying that (2.6) is a consequence of the symmetries and
+    thus not a prediction」。
+  - Higgs 分支与多中心解：U(N) → U(N−M)×U(M) 对应分离的 AdS 区域（原文对全分离情形写 "we naively get"）。
+  - 环面紧化后的温度/尺度条件与已有结果一致。
+  - 膨胀子与引力子的吸收截面（原文引 [24,25]，并把一致性归因于 [26] 的非重整化定理）。
+  - 黑洞熵与微扰 YM 的比较：原文只写「agrees up to a numerical factor … this problem remains
+    unsolved」，全文没有出现 3/4 这个数。
+  - 't Hooft 极限（g → 0，gN 固定 ≫ 1）中谱里有自由 IIB 弦：这是预言不是检验，
+    原文括注「though we were not able to check them」。
+gaps:
+  - >-
+    边界条件未指定（抽取记录 §5.4 第 1 条）：猜想句本身带「plus some appropriate boundary
+    conditions」；原文三处承认未定——§1 p.1「we leave this interesting problem for the future」、
+    §2 p.4「The gauge theory should provide us with a specific choice of boundary conditions.
+    It would be interesting to determine them.」、§7 附录关于 AdS 其余区域的评论。
+  - >-
+    可能还需要额外的边界自由度（抽取记录 §5.4 第 2 条）：猜想句括号「(and possibly also some
+    boundary degrees of freedom)」。原文没有说这些自由度是什么。
+  - >-
+    大 N 依赖不统一（抽取记录 §5.4 第 3 条）：超引力可信要 gN ≫ 1（g ≤ 1）或 N/g ≫ 1（g > 1），
+    而对称性匹配「valid for any N」；猜想句本身不带 N 限定，原文另说
+    「The above conjecture becomes nontrivial for large N」。
+  - >-
+    未构造引力子的渐近态（抽取记录 §5.4 第 7 条）：§6 p.16「we have not shown here how to
+    construct graviton states」。
+  - >-
+    从超引力外推到完整弦论这一步无论证：原文只有「it is natural to think that this correspondence
+    goes beyond the supergravity approximation」一句。
+  - >-
+    最强的预言未被检验：'t Hooft 极限中有自由 IIB 弦，原文自陈
+    「though we were not able to check them」。
+  - >-
+    定量检验只到「差一个数值因子」：黑洞熵与微扰 YM 的比较，原文写
+    「this problem remains unsolved」，没有给出 3/4。
+  - >-
+    没有算子字典：原文全文没有配分函数型陈述 Z_string[φ_0] = ⟨exp ∫ φ_0 O⟩，
+    因此「对偶」在本卡里只取原文给的含义，不含 GKP–Witten 字典。
+notes: |
+  from: maldacena-1997#E16（支持证据 #E6、E8、E17、E19、E20、E21、E23、E24、E25；缺口 #E5、E15、E46）。
+
+  【kind/status】kind: conjecture-support、status: conjecture 有原文逐字背书：
+  「We are led to the conjecture that …」。全文对该对应关系自称 conjecture 共 9 处；
+  "we argue" 只用于「超引力解可信」这一步；"proposal" 主要指「用大 N 场论定义 M 理论」。
+
+  【抽取记录 §5.4 的 8 条缺口，本卡收了哪几条】§5.4 第 1、2、3、7 条属于 D3 情形，已逐条进 gaps；
+  第 4 条（D1+D5 需要未证明的非重整化定理与 Higgs/Coulomb 分支退耦）、第 5 条（五维黑弦的必要条件
+  作者明说不知是否成立）、第 6 条（§5 整节自评 sketchy、§5.2 自评 unresolved puzzle）、
+  第 8 条（M5/M2 以「carries over」类比处理，没有重做退耦论证）属于本轮未建的 M5/M2/D1+D5/§5 节点，
+  写进本卡会把别的猜想的缺口记到 D3 头上，故不收，改在此处记账。
+  本卡另加了 4 条 D3 专属缺口（外推无论证、't Hooft 预言未检验、熵只到数值因子、无算子字典）。
+
+  【一条本轮未建的独立支持边】对称性匹配（SO(2,4)×SO(6) + 超共形群，原文「All this is valid for
+  any N.」）在原文中不依赖大 N，因而与本推导所走的超引力路线是独立的一支。
+  建议后续补 holography.ads5-cft4-duality-v2--via-symmetry-matching，
+  依赖超共形代数与 AdS_5×S^5 的等距/超对称节点（两者本图目前都没有）。
+
+  所有 loc 锚定 arXiv:hep-th/9711200v3 (22 Jan 1998)。
+author: curator
+created: "2026-09-11"
