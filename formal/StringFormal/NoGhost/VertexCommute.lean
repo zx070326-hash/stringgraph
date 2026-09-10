@@ -125,6 +125,32 @@ theorem vertexSub_creaExp_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec 
         rw [map_smul, ← Polynomial.smul_C] at key
         exact natCast_smul_left_cancel (Nat.succ_ne_zero M) key
 
+/-- **`E_+(b)` and `E_-(b')` commute for orthogonal momenta.**  In the present realisation
+`E_-(b')` is *multiplication* by the coherent-state coefficient `Φ^{b'}_j = creaExp η b' j`
+and `E_+(b)` is the coefficient extraction `vertexAnn b L`, so the statement
+`E_+(b)_L ∘ E_-(b')_j = E_-(b')_j ∘ E_+(b)_L` reads as follows.  It is the operator form of
+`vertexSub_creaExp_of_dotVec_zero`: all the contractions `[α_l·b, α_{-l}·b'] = l (b·b')`
+vanish. -/
+theorem vertexAnn_creaExp_mul_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec η b' b = 0)
+    (j L : ℤ) (P : Fock D R) :
+    vertexAnn b L (creaExp η b' j * P) = creaExp η b' j * vertexAnn b L P := by
+  rcases lt_or_ge L 0 with hL | hL
+  · rw [vertexAnn_of_neg b hL, LinearMap.zero_apply, LinearMap.zero_apply, mul_zero]
+  · rw [vertexAnn_of_nonneg b hL, vertexAnn_of_nonneg b hL, map_mul,
+      vertexSub_creaExp_of_dotVec_zero η b b' hdot j, Polynomial.coeff_C_mul]
+
+/-- `E_+(b)` acting on the coherent state `Φ^{b'}_j` of an orthogonal momentum: only the
+`z^0` coefficient survives, and it acts as the identity. -/
+theorem vertexAnn_creaExp_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec η b' b = 0)
+    (j L : ℤ) :
+    vertexAnn b L (creaExp η b' j) = if L = 0 then creaExp η b' j else 0 := by
+  have h := vertexAnn_creaExp_mul_of_dotVec_zero η b b' hdot j L 1
+  rw [mul_one, vertexAnn_one] at h
+  rw [h]
+  by_cases hL : L = 0
+  · rw [if_pos hL, if_pos hL, mul_one]
+  · rw [if_neg hL, if_neg hL, mul_zero]
+
 end OrthogonalMomenta
 
 end Fock
