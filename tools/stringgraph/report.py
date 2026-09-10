@@ -95,9 +95,14 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
     effs = compute_all(g)
     by_kind = Counter(st.kind for st in g.statements.values())
     by_eff = Counter(e.name for e in effs.values())
+    # Superseded cards keep no derivations once their successors take over, so they read as
+    # "open" but are not work items; list them separately.
     open_props = sorted(
-        sid for sid, st in g.statements.items() if st.kind == "proposition" and effs[sid].name == "open"
+        sid
+        for sid, st in g.statements.items()
+        if st.kind == "proposition" and effs[sid].name == "open" and not st.superseded_by
     )
+    superseded = sorted(f"{sid} -> {st.superseded_by}" for sid, st in g.statements.items() if st.superseded_by)
     inferred_edges = sorted(
         f"{d.id} -> {dep.id}" for d in g.derivations.values() for dep in d.depends_on if dep.inferred
     )
@@ -126,11 +131,12 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
         },
         "milestones": milestones,
         "open_propositions": open_props,
+        "superseded": superseded,
         "inferred_edges": inferred_edges,
         "gaps": [{"derivation": d, "gap": gp} for d, gp in gaps],
     }
     if open_only:
-        return {k: out[k] for k in ("open_propositions", "inferred_edges", "gaps")}
+        return {k: out[k] for k in ("open_propositions", "superseded", "inferred_edges", "gaps")}
     return out
 
 
@@ -158,6 +164,8 @@ def format_report(rep: dict) -> str:
         lines.append("")
     lines.append(f"open propositions ({len(rep['open_propositions'])}):")
     lines += [f"  {x}" for x in rep["open_propositions"]]
+    lines.append(f"superseded ({len(rep['superseded'])}):")
+    lines += [f"  {x}" for x in rep["superseded"]]
     lines.append(f"inferred edges ({len(rep['inferred_edges'])}):")
     lines += [f"  {x}" for x in rep["inferred_edges"]]
     lines.append(f"known gaps ({len(rep['gaps'])}):")

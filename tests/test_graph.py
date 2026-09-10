@@ -611,3 +611,10 @@ def test_duplicate_bib_key_is_error(mini: Path) -> None:
     g = load_graph(mini)
     errors = [p for p in validate(g) if p.severity == "error"]
     assert any("duplicate bib key 'ref-a'" in str(e) for e in errors)
+
+
+def test_report_hides_superseded_open_cards() -> None:
+    g = load_graph(ROOT)
+    rep = full_report(g)
+    assert "worldsheet.no-ghost-theorem" not in rep["open_propositions"]
+    assert any(x.startswith("worldsheet.no-ghost-theorem -> ") for x in rep["superseded"])
