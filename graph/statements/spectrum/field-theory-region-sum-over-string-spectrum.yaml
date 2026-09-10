@@ -1,0 +1,49 @@
+id: spectrum.field-theory-region-sum-over-string-spectrum
+kind: proposition
+title: "把点粒子圆图按闭弦谱求和，得到与弦振幅同一被积函数但积分区域是 R : τ₂ > 0, |τ₁| < ½"
+statement: |
+  设闭弦的物理谱与 H^⊥（去掉鬼场、去掉 μ = 0,1 的振子、去掉非紧动量后的 Hilbert 空间）
+  一一对应，质量由横向权给出
+    m² = (2/α')(h + h̃ − 2) ,  并带约束 h = h̃ 。
+  把 h = h̃ 的约束写成积分表示（**前提：h − h̃ ∈ Z**）
+    δ_{h,h̃} = ∫_{−π}^{π} (dθ/2π) exp[ i(h − h̃) θ ] ,
+  并把点粒子圆图 spectrum.point-particle-circle-path-sum 对整个 H^⊥ 求和。换元
+    θ + i l/α' = 2π τ
+  后得到
+    Σ_{i∈H^⊥} Z_{S¹}(m_i²)
+      = i V_d ∫_R (dτ dτ̄ / 4τ₂)(4π²α'τ₂)^{−d/2} Σ_{i∈H^⊥} q^{h_i−1} q̄^{h̃_i−1} ,
+    R :  τ₂ > 0 ,  |τ₁| < ½ 。
+
+  **关键点：被积函数与弦论的 (7.3.8) 逐字相同，只有积分区域不同**——这里是 R，
+  弦论里是基本域 F₀ ⊊ R。
+
+  ⚠ **整数自旋前提是原书明写的**（逐字）：「In writing this we are assuming that the difference
+  h − h̃ is an integer. This is true in 26 flat dimensions, and as we have discussed in the previous
+  section it is necessary in general for modular invariance.」
+  ⇒ 这里把 worldsheet.modular-invariance-integer-spin **反向用作输入**。
+
+  **本卡不断言什么**：不断言这个求和收敛（它在 τ₂ → 0 端发散——那正是场论的 UV 发散，
+  也是本卡在图中的用途）；不断言 R 是模空间的任何自然区域（它不是）；
+  不涉及 |τ₁| < ½ 的端点认同问题。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eqs. (7.3.10)(7.3.11)(7.3.12)(7.3.13), p.218"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E23，等级 **L1（原书页图逐字）**。
+      原文对谱的依据逐字：「**As shown in chapter 4**, the physical spectrum is in one-to-one
+      correspondence with H^⊥, where the mass is related to the transverse weights by
+      m² = (2/α')(h + h̃ − 2)」。
+tags: [spectrum, one-loop, torus, field-theory-comparison, uv-divergence, modular-invariance]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E23 建立。
+
+  **本卡在图中的唯一用途**是作为 spectrum.one-loop-uv-finiteness-from-modular-invariance 的
+  对照项：弦论的 (7.3.8) 与本卡的 (7.3.12) **被积函数相同、区域不同**，
+  这个「区域对比」就是原书对 UV 有限性的全部论证。
+author: curator-polchinski-ch7
+created: "2026-09-11"

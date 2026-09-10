@@ -1,0 +1,48 @@
+id: worldsheet.modular-truncation-breaks-brst-decoupling--via-surface-term-cancellation
+target: worldsheet.modular-truncation-breaks-brst-decoupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-variation-is-moduli-space-boundary-term
+    note: |
+      提供论证的关键一步：BRST 零态的耦合 = 模空间上的全导数 ⇒ 只剩边界项。
+      **原书在 §7.3 p.220 明确把这一步引到 §5.4**（逐字「We have seen in the general discussion in
+      section 5.4 that the coupling of a BRST-null state is proportional to a total derivative on
+      moduli space」），且 §5.4 已由 literature/extractions/polchinski-1998-v1.md 在 L1 下读过
+      （pp.160–163）⇒ **这条边是实的，不标 inferred**。
+  - id: worldsheet.modular-fundamental-domain
+    note: |
+      提供 F₀ 及其**边界认同**（Re τ = ±½ 由 T 认同、|τ| = 1 的两半由 S 认同）——
+      正是「表观边界 I/I′ 与 II/II′ 成对抵消」的内容。
+      ⚠ 该卡自带的限定：边界认同在原书未被严格处理。本推导的第 (2) 步因此不比它更强。
+  - id: spectrum.one-loop-torus-amplitude
+    note: 提供被截断的对象（环面振幅及其模积分 ∫_{F₀}）。
+  - id: spectrum.one-loop-uv-finiteness-from-modular-invariance
+    note: |
+      提供动机与被否证的替代方案：正因为场论侧可以截断 l 积分、弦论侧「看起来」也可以把 F₀
+      换成下边缘平直的区域，原书才需要本卡的论证来排除它。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.220 首段"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E27，L1（原书页图逐字整段）。
+summary: |
+  设想把 F₀ 换成 |τ₁| ≤ ½、τ₂ > 1（下边缘平直）。
+  BRST 零态的耦合是模空间上的全导数，故等于边界积分。
+  在 F₀ 上，两对表观边界（图 5.2 的 I ↔ I′ 与 II ↔ II′）由模变换互相认同，被积的面项在
+  两侧取值相同而定向相反，故成对抵消，净边界项为零 ⇒ 零态解耦。
+  截断后的区域下边缘是真边界（没有别的边与它认同），面项无从抵消 ⇒ 零态耦合非零 ⇒
+  负模态不解耦 ⇒ 量子理论不一致。
+  原书把这件事类比为「引力里靠蛮力短距截断会破坏局域时空对称性」。
+gaps:
+  - "**没有算过任何截断后的面项**：原书只论证「不再抵消」，没有给出非零值，也没有给出
+     「非零 ⇒ 不一致」的定量表述（后者用的是「有非零零态振幅即不一致」这一原则）。"
+  - "**关键一步外包给 §5.4，而 §5.4 自身带一个未处理的边界项**（canceled propagator argument，
+     作者承认某些情形不适用）——见 worldsheet.brst-variation-is-moduli-space-boundary-term 的 ⚠。
+     换言之：本卡论证「截断会破坏抵消」，但 F₀ 上抵消**确实成立**这件事在原书里也不是无条件的。"
+  - "**fig. 5.2 的边界标记 I/I′/II/II′ 未核对**（抽取记录 §3.1：图未读）。本图对「哪一对认哪一对」
+     只有第 7 章正文的文字描述。"
+  - "**F₀ 的边界认同在原书未严格处理**（继承自 worldsheet.modular-fundamental-domain）。"
+notes: |
+  由 curator 于 2026-09-11 建立。四条依赖边全部为实边（原书明写或直接引用），无 inferred。
+author: curator-polchinski-ch7
+created: "2026-09-11"

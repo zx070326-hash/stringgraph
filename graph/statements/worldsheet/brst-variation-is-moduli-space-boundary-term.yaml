@@ -1,0 +1,53 @@
+id: worldsheet.brst-variation-is-moduli-space-boundary-term
+kind: proposition
+title: "BRST 零态的耦合正比于模空间上的全导数：振幅的 BRST 变分只剩模空间边界项"
+statement: |
+  在 S-矩阵主公式 worldsheet.string-s-matrix（(5.3.9)）中，被积表达式（含 b 插入、c 插入与
+  顶点算子）的 BRST 变分是**模空间上的全导数**。等价的说法（第 7 章的复述，逐字）：
+    「the coupling of a BRST-null state is proportional to a total derivative on moduli space」。
+  于是
+
+  (1) 振幅的 BRST 变分 = 模空间 F 的**边界项**：
+        δ_B S = ∫_F d^μ t  ∂_{t^k}( … )^k  =  ∮_{∂F} ( … ) ,
+      即在 F 没有真边界（表观边界成对认同）时为零；
+  (2) 因此 BRST 零态（Q_B|Λ⟩ 型）与物理态的振幅为零，负模态解耦——
+      **前提是那个边界项确实消失**。
+
+  ⚠ **原书自承这里有一个未处理的项**（§5.4, p.161 逐字）：
+  「so the BRST variation vanishes **up to a possible term from the boundary of moduli space**. …
+  **In most cases there is no surface contribution, due to what is known as the *canceled propagator
+  argument*. In certain circumstances this argument does not apply**, and we will see how to deal
+  with this.」
+  即 (2) 不是无条件的：它依赖一个解析延拓型的论证（canceled propagator argument），
+  而作者自己说该论证在某些情形不适用。
+
+  **本卡不断言什么**：不断言 canceled propagator argument 本身（本图无该节点）；
+  不断言在给定曲面上边界项确实为零（环面情形见
+  worldsheet.modular-truncation-breaks-brst-decoupling，那张卡讲的正是「一旦造出真边界就不为零」）；
+  不断言 BRST 上同调与物理态空间的等同（那是 worldsheet.brst-cohomology-equals-ocq-physical）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.6) 下方正文（无式号）, p.161"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md §12.7（(5.4.5)/(5.4.6) 一带），
+      等级 **L1（原书页图逐字，researcher 第六轮）**。逐字引文见本卡 statement 的 ⚠ 段。
+      ⓘ 这条节点关闭了 worldsheet.b-insertion-brst-variation 的 notes 里点名的缺口
+      （「抽取记录没有记录原书在何处论证这一点，本图未建该节点」）——现在有了 L1 出处。
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.220 首段（复述：「We have seen in the general discussion in section 5.4 that the coupling of a BRST-null state is proportional to a total derivative on moduli space.」）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E27，等级 **L1（原书页图逐字）**。
+      **第 7 章这句复述是本卡 statement 的措辞来源**（比 §5.4 的原句更直接地说出「全导数」）。
+tags: [worldsheet, brst, moduli, s-matrix, unitarity, boundary-term]
+notes: |
+  由 curator 于 2026-09-11 建立，来源是 ch.5 与 ch.7 两处 L1 引文的合并（ch.7 提供措辞，
+  ch.5 提供原始出处与「未处理的边界项」这一自承缺口）。
+
+  **为什么必须单列**：它是「弦振幅的规范无关性/幺正性」这条链上唯一承载「全导数 + 边界项」
+  这一机制的节点。既有的 worldsheet.brst-gauge-choice-independence 只讲世界面局域的
+  「改规范 = 加 BRST 恰当项」，其 sources.note 已记下 §5.4 的边界项缺口但**不覆盖**本命题。
+author: curator-polchinski-ch7
+created: "2026-09-11"
