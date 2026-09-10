@@ -32,13 +32,24 @@
   - 万有性质 `vermaLift` / `vermaLift_hwv` / `vermaLift_lie` / `eq_of_lie_of_eq_hwv`；
   - 副产品 `adjoin_range_uea_ι_eq_top`（`U(L)` 由 `ι '' L` 生成，Mathlib v4.33.1 没有）。
   **剩余**（不属本项，见下一条与图节点 `notes`）：PBW 基、`dim V_N = p(N)`、`V(c,h) ≠ 0`。
-- [ ] `pbw-verma`：Verma 模的 PBW 基。两半独立：
-  (a) **straightening**：有序词已张成 `V_N`（给出 `dim V_N ≤ p(N)`）。对词长与逆序数做双重归纳，
-      用 `⁅L a, L b⁆ = (a-b) L_{a+b}`（`a,b < 0` 时无中心项）。不依赖上游。
-  (b) **线性无关**：即 `U(Vir_-)` 的 Poincaré–Birkhoff–Witt + 诱导模的自由性。
-      Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
-  `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` 里的一切都可能是空洞真。
-  这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
+- [ ] `pbw-verma`：Verma 模的 PBW 基。两半独立，**(a) 已做，(b) 未做**：
+  - [x] (a) **straightening**：有序词张成 `V_N`，给出 `dim V_N ≤ p(N)`。
+    见 `StringFormal/Virasoro/VermaPBW.lean`（无 sorry，公理只有标准三条）：
+    - `IsOrdWord l`：`l` 是严格负、非降的模态表，即 `L_{-b_1} ⋯ L_{-b_k}`（`b_1 ≥ ⋯ ≥ b_k ≥ 1`）；
+    - `straighten`：`L_a`（`a < 0`）作用在有序词上落在同总模态的有序词张成里；
+    - `wordAct_mem_ordSpan`：**任意**负模态词都是同总模态有序词的线性组合；
+    - `levelSpan_eq_ordSpan`、`levelSpan_eq_span_range_partitionWord`：`V_N` 由 `N` 的分拆
+      （`Nat.Partition N`）指标化的有序词张成；
+    - `finrank_levelSpan_le_card_partition`：域上 `dim V_N ≤ p(N)`。
+    **不用逆序数**：换序步与对易子步都严格增大 `wordWeight l = Σ_i i·l_i`（表头不贡献），
+    故 `wordMeasure l = (-wordWeight l).toNat` 严格下降，单一 ℕ 测度即可归纳。
+    关键的记账是 `straighten` 的结论要带「输出有序词的测度 ≤ 输入词的测度」这一上界，
+    否则 Leibniz 第二项 `⁅L b, ⁅L a, X⁆⁆` 的嵌套整理无法被归纳假设覆盖
+    （内层整理可能产生比原尾巴更长的词）。
+  - [ ] (b) **线性无关**：即 `U(Vir_-)` 的 Poincaré–Birkhoff–Witt + 诱导模的自由性。
+    Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
+  `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
+  `dim V_N = p(N)` 也只证到 `≤`。这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
 - [ ] `shapovalov-form`：Shapovalov 形式。
 - [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。
 
@@ -63,8 +74,8 @@
   **本项未做（留给后续）**：零模（动量 `k`、算符 `x^μ, p^μ`）不在本文件里，
   `L₀` 依赖它们，做 Sugawara 时必须先补；度规只支持对角 `η : Fin D → R`；
   未取完化（代数 Fock 空间，不是 Hilbert 空间）；未做复双线性/埃尔米特版本。
-  图侧：建议新建节点 `worldsheet.bosonic-fock-space`（定义卡）与
-  `worldsheet.fock-indefinite-form`（命题卡），由 curator 添加。
+  图侧：节点 `worldsheet.bosonic-fock-space`（定义卡）与
+  `worldsheet.fock-indefinite-form`（命题卡）已由 curator 添加。
 - [x] `sugawara`：`L n` 在 Fock 空间上的作用，Virasoro 关系与 `c = D`。
   见 `StringFormal/NoGhost/Sugawara.lean`（约 1400 行，无 sorry，公理只有标准三条）。
   零模按**参数**处理：`a : Fin D → R` 代表 `a^μ = α^μ_0 = (2α')^{1/2} k^μ`（`x^μ` 未引入，
@@ -96,6 +107,18 @@
   `formal.lean_decl` 填 `StringFormal.NoGhost.Fock.Lop`，把
   `worldsheet.free-boson-central-charge-d--via-mode-algebra` 标 `formalized`，
   `lean_decl` 填 `StringFormal.NoGhost.Fock.lie_Lop_Lop`。
+- [x] `fock-indefinite-over-ordered-ring`：`worldsheet.fock-indefinite-form` 第 (4) 条末句
+  「有序域上、`D ≥ 2` 时该形式不定」的形式化（即推导节点
+  `worldsheet.fock-indefinite-form--via-lean` 的 gap (v)）。
+  见 `StringFormal/NoGhost/FockSigned.lean`（不改 `Fock.lean`，只加序假设）：
+  `pairing_timelike_neg` / `pairing_spacelike_pos`（每个 level `n ≥ 1` 的显式见证）、
+  `exists_pairing_self_neg`（需 `D ≥ 1`）、`exists_pairing_self_pos`（需 `D ≥ 2`）、
+  `pairing_indefinite`（主结论，有序环上）、`pairing_indefinite_field`（按图节点措辞的有序域版）、
+  `not_forall_pairing_self_nonneg` / `not_forall_pairing_self_nonpos`、
+  `exists_mem_levelSubmodule_pairing_self_neg`（每个 level 都有鬼，不只集中在一片）。
+  注意：Mathlib v4.33.1 **已无** `LinearOrderedField` 类，有序域写作
+  `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`；证明只需有序环，域与全序都用不上。
+  公理检查：全部声明只用 propext / Classical.choice / Quot.sound。
 - [ ] `physical-states`：`H_phys` 子模与零模态。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
