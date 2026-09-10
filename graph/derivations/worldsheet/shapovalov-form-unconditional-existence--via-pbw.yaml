@@ -42,6 +42,14 @@ depends_on:
       **按合成定义**的 V_N；有了它，两种写法在任意 R 上重合，目标 (1)(a) 的 ⊕_N V_N 才是
       对 V_N 而不是对「有序词张成」的陈述。
       ⚠ 只用它的 (3)（张成），**不用** (4) 的维数上界，也不需要它的域假设。
+  - id: worldsheet.verma-level-shift-by-lowering
+    inferred: false
+    note: |
+      **2026-09-11 新增（与该卡同一次提交）**：提供「f_0(L_n v) = 0 (n < 0)」那一步的唯一依据——
+      L_n（n < 0）把 V_N 送进 V_{N+|n|}，|n| ≥ 1 故目标 level ≥ 1，落在 ker f_0
+      （formalized，`lie_lgen_mem_levelSpan_of_neg`，**任意交换 ℚ-代数、对 (c,h) 无假设、
+      不需要 V(c,h) ≠ 0**）。此前这一步只写在本推导 sources 的 Lean loc 里，图上没有承载节点。
+      ⚠ 反方向（正模态降 level）本图没有，本推导也不需要。
   - id: math.virasoro-anti-involution
     inferred: false
     note: |

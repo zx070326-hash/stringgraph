@@ -1,0 +1,74 @@
+id: worldsheet.verma-level-shift-by-lowering--via-lean
+target: worldsheet.verma-level-shift-by-lowering
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供本命题所说的全部对象：V(c,h)（`VermaModule R c h`）、|c,h⟩（`hwv`）、
+      词的作用（`wordAct`）与 **level 分量 V_N 的定义**（`levelWord` / `levelSpan`，
+      按 N 的合成张成）。基环设定 `[CommRing R] [Algebra ℚ R]` 与该卡逐字一致。
+      ⚠ 本推导**只用该卡的定义部分**，不使用它在域上的 `isInternal_levelSpan` /
+      `levelSpan_eq_eigenspace`；那两条带 `[Field K] [CharZero K]`，一旦引入就会把本卡
+      的适用范围收窄到域上，而 Lean 的证明并不需要它们（见目标 notes 第一段）。
+      该卡 effective = formalized，故不压低本推导。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供生成元 L_n 与括号（`VirasoroAlgebra.lgen`，约定 conv.virasoro-standard）。
+      ⚠ 本推导的归纳**没有用到括号关系本身**——L_{−k} 只是被接到词的最前面
+      （`lie_lgen_levelWord` 是 `wordAct_cons` 的直接改写），中心项与结构常数都不出现。
+      这条边只承载「L_n 是什么」。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{consComposition, consComposition_blocks, lie_lgen_levelWord, lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg}（定义侧 levelWord / levelSpan / wordAct_cons 同文件）"
+    note: |
+      本仓库，提交 **60d999e**（"formal: add level-shift lemma lie_lgen_mem_levelSpan
+      (L_{-k} : V_N → V_{N+k})"），已在 main（`git merge-base --is-ancestor 60d999e main` 通过）；
+      Lean 4 + Mathlib v4.33.1。**本条承载本推导的全部论证**：
+      · 目标 (1) = `lie_lgen_mem_levelSpan`（假设只有 `0 < k` 与 `x ∈ levelSpan R c h N`）；
+      · 目标 (2) = `lie_lgen_mem_levelSpan_of_neg`（假设只有 `n < 0`）；
+      · 关键构造 `consComposition hk cmp`：把 k 接到合成 cmp 的 blocks 前面，
+        `consComposition_blocks` 逐字给出 `(consComposition hk cmp).blocks = k :: cmp.blocks`；
+      · 生成元一支 `lie_lgen_levelWord` 的证明逐字是
+        `rw [levelWord, levelWord, consComposition_blocks, List.map_cons, wordAct_cons]`。
+      文件头 Status 段自述「No `sorry`, no new axioms」；本卡核实文件内 `sorry` 字样只出现在
+      该段说明文字中（`grep -n sorry` 唯一命中第 74 行的说明），无实际 sorry。
+      ⚠ **curator 未自行重跑 `lake build`**，也未跑 `check-axioms`；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`（含 formal/ 时的标准流程）。
+summary: |
+  形式化证明，直接读 Lean。设 x ∈ V_N，对 `x ∈ Submodule.span R (Set.range (levelWord R c h N))`
+  作 `Submodule.span_induction`：
+
+  · **生成元支**：x = levelWord N cmp = L_{−b_1} … L_{−b_j}|c,h⟩（cmp 是 N 的合成）。
+    则 L_{−k} x 就是把字母 −k 接到词的最前面，即 levelWord (N+k) (consComposition hk cmp)，
+    而 consComposition hk cmp 是 N + k 的合成（blocks = k :: cmp.blocks）。
+    故 L_{−k} x 本身就是 V_{N+k} 的一个生成元，落在张成里。
+  · **零支 / 加法支 / 数乘支**：`lie_zero`、`lie_add`、`lie_smul` 加子模的封闭性。
+
+  (2) 由 (1) 重标下标（k := (−n).toNat，`omega`）得到。
+
+  **为什么这条引理这么便宜、又为什么它不平凡**：便宜是因为 V_N 按词张成定义，接一个字母
+  仍是同类词；不平凡是因为图上原先没有任何节点断言「负模态严格提高 level」，
+  而 Shapovalov 侧「level-0 坐标泛函杀掉一切 L_n v (n < 0)」这一步正是靠它——
+  没有它，f_0 是不是 Shapovalov 泛函就无从谈起。
+gaps:
+  - |
+    (i) **反方向未做**：正模态 L_k（k ≥ 1）把 V_N 送到哪里（预期 V_{N−k}，N < k 时为 0）
+    在 Lean 与本图中**都没有**。它需要把 L_k 推过负模态词，沿途产生
+    [L_k, L_{−b}] = (k+b) L_{k−b} + 中心项，是一次真正的重排归纳，不是本引理的镜像。
+    目标卡的【不断言】(a) 已登记这一条。
+  - |
+    (ii) **本推导不提供 V_N 之间的独立性**，因此单靠它读不出「level 分解」。
+    ⊕_N V_N 在 Lean 里只在 `[Field K] [CharZero K]` 上（`isInternal_levelSpan`），
+    或者在 PBW 基假设下（见 worldsheet.shapovalov-form-unconditional-existence 的 (H)）。
+notes: |
+  【与 worldsheet.shapovalov-form-existence 的关系】那张卡的 Lean 构造链里，
+  `hwvFunctional_lie_lgen_of_neg` ← `lie_lgen_mem_posLevelSpan` ← 本卡的
+  `lie_lgen_mem_levelSpan_of_neg`。此前本引理只以 source loc 的形式出现在那张卡与
+  worldsheet.shapovalov-form-unconditional-existence 的 note 里，没有独立节点；
+  本卡建立后，worldsheet.shapovalov-form-unconditional-existence--via-pbw 新增了一条指向
+  本卡的 depends_on（非 inferred），把「f_0 杀掉负模态的像」这一步接到图上。
+author: curator
+created: "2026-09-11"
