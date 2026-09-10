@@ -1,0 +1,29 @@
+id: worldsheet.polyakov-nambu-goto-classical-equivalence--via-metric-eom
+target: worldsheet.polyakov-nambu-goto-classical-equivalence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.polyakov-action
+  - id: worldsheet.nambu-goto-action
+  - id: worldsheet.induced-worldsheet-metric
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.15)（δ(-γ)^{1/2} 的变分公式，p.12，已核实）及其后约 (1.2.16)（T_ab = 0）"
+    note: |
+      抽取记录 polchinski-1998-v1#E6。(1.2.15) 的位置与内容由 Schrans 伴读笔记目录
+      §1.1「p 12: Eq. (1.2.15) The Variation of the Determinant of the Metric」核实；
+      T_ab = 0 的公式号未核对原书。
+summary: |
+  用 δ(-γ)^{1/2} = -(1/2)(-γ)^{1/2} γ_{ab} δγ^{ab}（(1.2.15)）对 S_P 关于 γ^{ab} 变分，
+  得 T_{ab} = ∂_a X·∂_b X - (1/2)γ_{ab} γ^{cd} ∂_c X·∂_d X = 0。
+  取迹恒等于零（二维特有），故该约束只说 γ_{ab} 与 h_{ab} = ∂_a X·∂_b X 成比例：
+  γ_{ab} = f h_{ab}。在二维，(-γ)^{1/2} γ^{ab} 对 Weyl 因子 f 齐次零次，
+  故 f 从 S_P 中完全消去，回代即得 S_NG。
+gaps:
+  - "「代入运动方程的解回作用量」这一步与「先变分 X 再用约束」等价，需要 γ_{ab} 是无导数的辅助场且其 EL 方程可解；文献按标准操作处理，未陈述前提。"
+  - "只在诱导度规 h_ab 非退化（浸入、类时世界面）处成立；退化点、世界面边界与拓扑非平凡情形未处理。"
+  - "f > 0 的分支选取（保持号差）与全局存在性（f 是否可取为整体光滑正函数）未论证。"
+  - "只是经典等价。量子层面 Polyakov 形式带 Weyl 反常（§3.4），两者不等价；本推导不涉及。"
+  - "Polchinski 对这条论证的自述措辞未核实（正文未获取，见抽取记录 §0）。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

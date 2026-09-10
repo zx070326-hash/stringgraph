@@ -1,0 +1,30 @@
+id: worldsheet.light-cone-gauge-lagrangian--via-gauge-fixing
+target: worldsheet.light-cone-gauge-lagrangian
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.polyakov-action
+  - id: worldsheet.light-cone-gauge
+  - id: worldsheet.polyakov-nambu-goto-classical-equivalence
+    note: |
+      这里只用其中的 T_ab = 0 约束（对 γ_ab 变分的结果），不用它导出 S_NG 的部分。
+      T_ab = 0 与该命题写在同一处（约 eq. (1.2.16)），故这条边有来源支撑。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.7)–(1.3.11)（规范固定并把作用量化为光锥拉氏量）"
+    note: |
+      抽取记录 polchinski-1998-v1#E11。(1.3.11) 的位置与身份 [已核实]（Schrans §1.10）；
+      推导中间步骤的公式号未核对原书。
+summary: |
+  用 Weyl 变换把 det γ 定为 -1，再用 diff 把 X^+ 定为 x^+ + τ（要求 p^+ ≠ 0）。
+  剩余的 σ 重参数化由「∫ f dσ 在剩余变换下不变」（(1.3.9)–(1.3.10)）用掉，
+  把 σ 的坐标长度固定为 ℓ。代回 S_P，X^+ 的贡献变成与 x^-、p^+ 有关的零模项，
+  X^- 只以线性方式出现，其变分给出的约束（等价于 T_{ab} = 0 的两个独立分量）
+  把 ∂_a X^- 用横向场的二次式解出。剩下的就是 D-2 个自由标量 X^i 的作用量。
+gaps:
+  - "「diff × Weyl 可以完全固定到光锥规范」是局部论证：要求 p^+ ≠ 0，且不讨论大规范变换、Gribov 拷贝、世界面拓扑非平凡时规范条件的全局可达性。"
+  - "解约束得到 X^- 需要对 ∂_σ X^- 沿 σ 积分并要求单值性（闭弦上给出 level matching 型条件）；这一可积性条件在此处未被系统处理，只在闭弦情形另立节点 worldsheet.closed-string-level-matching。"
+  - "本推导是经典（尚未量子化）的操作，但被后续量子结论直接使用；把经典解出的 X^- 提升为量子算符时的排序问题在 §1.3 不被论证，那正是正规序常数 A 出现的地方（worldsheet.light-cone-normal-ordering-constant）。"
+  - "(1.3.11) 的逐字表达式未核实，本推导给出的是结构而非精确系数。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

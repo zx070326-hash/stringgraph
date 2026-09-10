@@ -1,0 +1,25 @@
+id: worldsheet.polyakov-weyl-invariance
+kind: proposition
+title: Polyakov 作用量的 Weyl 不变性
+statement: |
+  Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）在世界面 Weyl 重标度
+    γ'_{ab}(τ,σ) = e^{2 ω(τ,σ)} γ_{ab}(τ,σ),   X'^μ(τ,σ) = X^μ(τ,σ)
+  下不变（ω 为任意光滑实函数）：S_P[X, γ'] = S_P[X, γ]。
+  这一不变性是世界面维数等于 2 的特殊性质：在 d 维世界体上
+  (-γ)^{1/2} γ^{ab} 在 Weyl 变换下带因子 e^{(d-2)ω}。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.19)–(1.2.20) 附近（Weyl 变换 γ'_ab = e^{2ω} γ_ab）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E7。Weyl 变换的写法
+      γ'_ab = e^{2ω(σ,τ)} γ_ab 在 Headrick 习题 1.3 第 (8) 式中逐字出现（内容已核实）；
+      公式号未核对原书。
+tags: [bosonic-string, symmetry, classical, polyakov, weyl]
+notes: |
+  本条是**经典**陈述。量子层面 Weyl 不变性一般被反常破坏（Weyl 反常，§3.4），
+  要求总中心荷为零；这是 D = 26 的第二条独立路线，不在本节点范围。
+  Weyl 不变性与 diff 不变性合起来给出足以取光锥规范
+  （worldsheet.light-cone-gauge）与共形规范的规范自由度。
+author: curator-polchinski-ch1
+created: "2026-09-10"

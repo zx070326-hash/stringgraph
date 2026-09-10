@@ -1,0 +1,33 @@
+id: worldsheet.nambu-goto-action
+kind: definition
+status: rigorous
+title: Nambu–Goto 作用量
+statement: |
+  设世界面由嵌入 X^μ(τ, σ) 给出，h_{ab} = ∂_a X^μ ∂_b X_μ 是诱导度规
+  （worldsheet.induced-worldsheet-metric）。Nambu–Goto 作用量取世界面的面积，
+  以弦张力 T = 1/(2π α') 为比例系数：
+    S_NG[X] = -(1/(2π α')) ∫ dτ dσ (-det h_{ab})^{1/2}
+            = -(1/(2π α')) ∫ dτ dσ [ (Ẋ·X')^2 - Ẋ^2 X'^2 ]^{1/2},
+  其中 Ẋ^μ = ∂_τ X^μ, X'^μ = ∂_σ X^μ。
+  S_NG 在时空 Poincaré 变换与世界面重参数化（diff）下不变。
+uses: [worldsheet.induced-worldsheet-metric]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.9)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E3、#E4，证据等级
+      [页码已核实/式号未核实]。拉氏量前因子 -1/(2πα') 与单位长度质量
+      ρ = T = 1/(2πα') 经 Headrick 习题解答 1.1(b) 第 (4)(5)(7) 式确认（内容已核实）；
+      公式号 (1.2.9) 未核对原书，硬约束是必在已核实的 (1.2.15)（p.12）之前。
+tags: [bosonic-string, action, classical, nambu-goto]
+notes: |
+  E4（张力与 Regge 斜率的关系 T = 1/(2πα')）不另建节点：它已由约定节点
+  conv.alpha-prime-regge 承载（该节点的 sources 已按抽取记录 Q1 修正为
+  §1.2 约 (1.2.9)–(1.2.10)）。本节点直接引用该约定。
+
+  平方根形式使 S_NG 不适合路径积分量子化，这是引入 Polyakov 作用量
+  （worldsheet.polyakov-action）的动机；两者的经典等价见
+  worldsheet.polyakov-nambu-goto-classical-equivalence。
+author: curator-polchinski-ch1
+created: "2026-09-10"

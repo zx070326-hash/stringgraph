@@ -1,0 +1,32 @@
+id: worldsheet.light-cone-normal-ordering-constant--via-zeta-regularization
+target: worldsheet.light-cone-normal-ordering-constant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.zeta-regularized-sum-of-integers
+  - id: worldsheet.transverse-oscillator-commutators
+  - id: worldsheet.open-string-mode-expansion
+  - id: worldsheet.light-cone-gauge-lagrangian
+    note: |
+      提供「α^-_0 由横向模的二次式解出」这一步，正规序常数就出现在把该二次式
+      提升为算符时。抽取记录 #E11/#E16 把二者放在同一节，来源支撑充分。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3，约 eq. (1.3.33)–(1.3.35)（零点能求和给出 A = -(D-2)/24）"
+    note: |
+      抽取记录 polchinski-1998-v1#E16，[页码已核实/式号未核实]。
+      「A = 半和」的定义方式由 Headrick 的 D24-brane 习题确认。
+summary: |
+  经典约束把 α^-_0 表达为 Σ_n α^i_{-n} α^i_n 型的二次式。量子化后同一模的
+  α^i_{-n} 与 α^i_n 不对易（[α_n^i, α_{-n}^i] = n），把二次式写成正规序形式
+  : Σ : 时每个 (i, n) 对留下 (1/2) n 的 c-数残余。
+  对 i = 2..D-1（D-2 个方向）与 n ≥ 1 求和得零点能 (D-2)(1/2) Σ_{n≥1} n，
+  按正规化处方赋值 Σ_{n≥1} n → -1/12，得 A = -(D-2)/24。
+  换算到本图记号：a = -A = (D-2)/24。
+gaps:
+  - "整条论证的非严格核心是 Σ_{n≥1} n → -1/12 的正规化处方（依赖 worldsheet.zeta-regularized-sum-of-integers，physical-argument）。"
+  - "「把经典二次式提升为正规序算符」这一排序选择本身是一个约定性选择；不同排序给不同的 A，Polchinski 取的是正规序 + 正规化零点能这一组合。该组合的唯一性由洛伦兹不变性事后检验（见 worldsheet.critical-dimension-light-cone），不在本推导内。"
+  - "式号 (1.3.33)–(1.3.35) 未核对原书（抽取记录 §3 清单）。"
+  - "符号约定：本推导的结论按 Polchinski 的 A 写出后已按 conv.intercept-sign-a 换算为 a = -A；若日后核实 Polchinski 的符号约定与抽取记录 §1.3 的描述不符，本节点与 conv.intercept-sign-a 须一并复查。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

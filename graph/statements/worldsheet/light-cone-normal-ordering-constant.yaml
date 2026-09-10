@@ -1,0 +1,35 @@
+id: worldsheet.light-cone-normal-ordering-constant
+kind: proposition
+title: 光锥正规序常数 A = -(D-2)/24（等价地 a = (D-2)/24）
+statement: |
+  在开弦光锥量子化中，把经典解出的 α^-_0（等价地光锥哈密顿量）提升为算符需要正规序，
+  这引入一个 c-数常数。D-2 个横向坐标各贡献零点能 (1/2) Σ_{n≥1} n，
+  按正规化处方（worldsheet.zeta-regularized-sum-of-integers）取值 -1/24，故
+    A = (D-2) · (1/2) · "Σ_{n≥1} n" = -(D-2)/24.
+  Polchinski 的记号 A 出现在质量壳条件 m^2 = (1/α')(N + A) 中；
+  按 conv.intercept-sign-a 的换算 a = -A，本图的截距记号下
+    a = (D-2)/24.
+  特别地 D = 26 给 A = -1，即 a = 1。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3，约 eq. (1.3.33)–(1.3.35)（夹在已核实的 (1.3.32) 与 (1.3.36) 之间）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E16，证据等级
+      [页码已核实/式号未核实]：符号 A 与「A = 半和」的定义方式由 Headrick 的
+      D24-brane 习题（A = Ã = (1/2)(Σ_{i=2}^{24}Σ_{n≥1} n + Σ_{n=1/2}^∞ n) = -15/16）
+      确认；具体式号未核对原书。
+tags: [bosonic-string, light-cone, normal-ordering, intercept, zero-point-energy]
+notes: |
+  **记号警告**：Polchinski 用 A 且写 (L_0 + A)|ψ⟩ = 0 / m^2 = (1/α')(N + A)，
+  临界值 A = -1；本图的 canonical 记号是 a（(L_0 - a)|ψ⟩ = 0，a = 1）。
+  换算 a = -A，见 conv.intercept-sign-a（该约定由抽取记录 §1.3 提出）。
+  凡从本节点连出的边都必须做这个换算，否则与 Goddard–Thorn / GSW 的边差一个符号。
+
+  本节点给的是 a 与 D 的**关系**（a = (D-2)/24），不是 a = 1。
+  a = 1 是独立命题 worldsheet.open-string-intercept（由第一激发级的小群表示定出，
+  与 D 无关）。两者合起来才给 D = 26，那是既有节点
+  worldsheet.critical-dimension-light-cone / worldsheet.critical-dimension-bosonic 的内容，
+  本节点不重复。
+author: curator-polchinski-ch1
+created: "2026-09-10"

@@ -1,0 +1,27 @@
+id: worldsheet.polyakov-action
+kind: definition
+status: rigorous
+title: Polyakov 作用量
+statement: |
+  在世界面 M 上引入一个与嵌入 X^μ 独立的动力学场——世界面度规 γ_{ab}（号差 (-,+)，
+  γ = det γ_{ab} < 0）。玻色弦的 Polyakov 作用量是
+    S_P[X, γ] = -(1/(4π α')) ∫_M dτ dσ (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ,
+  即以 γ_{ab} 为背景的 D 个二维自由标量场的作用量，耦合常数由 Regge 斜率 α' 给定。
+uses: []
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.13)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E5，证据等级
+      [页码已核实/式号未核实]。拉氏量形式 L = -(1/4πα') γ^{ab} ∂_a X^μ ∂_b X_μ
+      经 Schrans 伴读笔记 §1.10（推导光锥拉氏量的起手式）确认（内容已核实）；
+      公式号 (1.2.13) 未核对原书，硬约束是必在已核实的 (1.2.15)（p.12）之前。
+tags: [bosonic-string, action, classical, polyakov]
+notes: |
+  Polchinski 称之为 Polyakov 作用量并指出它先由 Brink–Di Vecchia–Howe 与 Deser–Zumino
+  提出；本节点不追溯这一优先权问题（超出抽取记录范围）。
+  与 Nambu–Goto 的经典等价见 worldsheet.polyakov-nambu-goto-classical-equivalence；
+  对称性见 worldsheet.polyakov-action-symmetries 与 worldsheet.polyakov-weyl-invariance。
+author: curator-polchinski-ch1
+created: "2026-09-10"

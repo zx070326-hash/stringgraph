@@ -1,0 +1,25 @@
+id: worldsheet.induced-worldsheet-metric
+kind: definition
+status: rigorous
+title: 世界面的诱导度规
+statement: |
+  设世界面由嵌入 X^μ(τ, σ) 给出，a, b ∈ {τ, σ} 为世界面坐标指标。
+  时空度规 η_{μν} 在世界面上的拉回（诱导度规）是
+    h_{ab} = ∂_a X^μ ∂_b X^ν η_{μν} = ∂_a X^μ ∂_b X_μ.
+  在嵌入为浸入（∂_a X^μ 秩为 2）且世界面为类时曲面时，h_{ab} 是号差
+  (-,+) 的非退化二维洛伦兹度规，det h_{ab} < 0。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.9) 附近（Nambu–Goto 作用量段落）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E3。诱导度规的表达式
+      h_ab = ∂_a X^μ ∂_b X_μ 经 Headrick 习题解答 1.1(b) 逐字确认（[已核实]）；
+      公式号未核对原书。
+tags: [bosonic-string, geometry, classical]
+notes: |
+  非退化性与号差不是 Polchinski 明写的假设，而是使 (-det h)^{1/2} 有意义所需的条件，
+  由 curator 补出；退化嵌入（如折叠或类光面）不在本节点范围。
+author: curator-polchinski-ch1
+created: "2026-09-10"

@@ -1,0 +1,28 @@
+id: worldsheet.worldsheet-euler-number
+kind: definition
+status: rigorous
+title: 世界面的 Euler 数
+statement: |
+  设 M 是带度规 γ_{ab} 的紧二维流形（可带边 ∂M），R 是 γ 的 Ricci 标量曲率，
+  k 是边界的测地曲率，ds 是边界的诱导弧长元。世界面的 Euler 数定义为
+    χ = (1/(4π)) ∫_M d^2σ (-γ)^{1/2} R + (1/(2π)) ∫_{∂M} ds k.
+  由 Gauss–Bonnet 定理，χ 只依赖 M 的拓扑：
+    χ = 2 - 2g - b   （g 为亏格，b 为边界分支数；不可定向情形另计交叉帽）。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.31)（Euler 数的定义式）；同一表达式在 §3.2 重复为 eq. (3.2.3b)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E9。定义式的 §1.2 公式号
+      (1.2.31) [未核实]（硬约束：必在已核实的 (1.2.32)（p.15）之前）；
+      但同一表达式 (1/4π)∫_M d^2σ √g R + (1/2π)∫_{∂M} k ds 在 §3.2 的 (3.2.3b)
+      被 Schrans 伴读笔记引用并给出，故**表达式本身已核实**，只是 §1.2 的式号未核实。
+tags: [bosonic-string, geometry, topology, euler-number]
+notes: |
+  Gauss–Bonnet 给出的 χ = 2 - 2g - b 是标准微分几何结果，不出自 Polchinski 的论证，
+  这里作为定义的背景说明列出；本图不为它单列节点（属 math area，Phase 1 之外）。
+  χ 的 Weyl 不变性是一条独立命题，见 worldsheet.euler-number-weyl-invariance。
+  χ 进入弦微扰论作为世界面拓扑展开的权重（e^{-λχ}），那属第 3 章，不在本节点范围。
+author: curator-polchinski-ch1
+created: "2026-09-10"

@@ -1,0 +1,24 @@
+id: worldsheet.open-string-neumann-boundary-condition--via-boundary-term
+target: worldsheet.open-string-neumann-boundary-condition
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.polyakov-action
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.28)（开弦端点的 Neumann 条件；已核实）及其上方的变分"
+    note: |
+      抽取记录 polchinski-1998-v1#E8。(1.2.28) 的式号与内容经 Schrans 伴读笔记 §1.11
+      逐字确认；产生该条件的变分步骤本身在原书中的公式号未核对。
+summary: |
+  对 S_P 关于 X^μ 做变分并分部积分：
+    δS_P = -(1/(2πα')) ∫ d^2σ [ -δX_μ ∂_a((-γ)^{1/2} γ^{ab} ∂_b X^μ) ]
+           - (1/(2πα')) ∫ dτ (-γ)^{1/2} δX_μ ∂^σ X^μ |_{σ=0}^{ℓ}.
+  体项对任意内部 δX 消失给出波动方程。边界项对任意端点 δX^μ(τ) 消失，
+  由变分法基本引理（δX^μ(τ) 在端点可取任意光滑函数）等价于 ∂^σ X^μ|_{σ=0,ℓ} = 0。
+gaps:
+  - "结论依赖「端点变分不受限」这一前提；若改取 δX^μ|_∂ = 0（Dirichlet），边界项自动消失，Neumann 不再是必需。Polchinski 选 Neumann 的理由（保持时空平移不变性/端点自由）属物理选择，本推导把它写成陈述的前提而非结论。"
+  - "变分法基本引理的应用要求 δX^μ 在边界上可取任意光滑试函数，且忽略角点（世界面边界与初末时刻的交点）；文献不讨论角点。"
+  - "Polchinski 原文的推导步骤与措辞未核实（正文未获取，见抽取记录 §0）。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

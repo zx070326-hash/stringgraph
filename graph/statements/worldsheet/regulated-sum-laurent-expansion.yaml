@@ -1,0 +1,33 @@
+id: worldsheet.regulated-sum-laurent-expansion
+kind: proposition
+title: 指数截断求和的 Laurent 展开：Σ_{n≥1} n e^{-un} = u^{-2} - 1/12 + O(u^2)
+statement: |
+  对 u > 0（弦论中 u = ε a，ε 为截断参数），级数 Σ_{n≥1} n e^{-un} 绝对收敛，且
+    Σ_{n≥1} n e^{-un} = e^{-u} / (1 - e^{-u})^2 = 1 / (4 sinh^2(u/2))
+                      = 1/u^2 - 1/12 + O(u^2)   （u → 0^+）。
+  即：截断求和的小-u 展开中，发散项是 1/u^2，常数项精确等于 -1/12，且没有 1/u 项。
+  独立地，Riemann ζ 函数在 s = -1 处的解析延拓值也是
+    ζ(-1) = -1/12.
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.32)（p.22，对 Σ_n n 的正规化）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E15 与 §1.1「zeta 正规化的
+      使用位置」一栏，证据等级 [已核实]（Schrans 目录「1.12 p 22: Eq. (1.3.32)
+      Regularising Σ_n n」；Schrans 用指数截断 Σ n e^{-εan}，明确保留发散项 1/(εa)^2
+      后丢弃，只取有限部分 -1/12）。Headrick 习题 1.5 做带 θ 的推广
+      Σ_{n≥1}(n-θ)e^{-(n-θ)εa}，有限部分 -(1/2)(1/6 - θ + θ^2)，
+      并指出「截断依赖项与 θ 无关」。
+tags: [regularization, analysis, zero-point-energy, lemma]
+notes: |
+  **本节点是纯数学引理，不含任何物理主张。** 它说的只是「这个收敛级数的
+  Laurent 展开常数项是 -1/12」，是初等分析（几何级数求导 + sinh 的 Taylor 展开），
+  可独立复核，与 Polchinski 是否严格无关。
+
+  把这个常数项当作物理零点能，即丢弃 1/u^2 发散项，是**另一回事**，
+  见 worldsheet.zeta-regularized-sum-of-integers（physical-argument）。
+  本项目刻意把二者拆开，正是为了让「Σ n = -1/12」这条经常被含糊处理的步骤
+  在图上显示出它究竟哪一半是严格的、哪一半不是。
+author: curator-polchinski-ch1
+created: "2026-09-10"

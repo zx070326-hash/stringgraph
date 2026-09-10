@@ -1,0 +1,25 @@
+id: worldsheet.point-particle-einbein-equivalence--via-eliminating-einbein
+target: worldsheet.point-particle-einbein-equivalence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.point-particle-action
+  - id: worldsheet.point-particle-einbein-action
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.5)–(1.2.7)（einbein 的运动方程与回代）"
+    note: |
+      抽取记录 polchinski-1998-v1#E2。公式号未核对原书（抽取记录 §3 清单：E2 约 (1.2.5)）。
+summary: |
+  η 在 S'_pp 中无导数项，其 Euler–Lagrange 方程是代数方程
+  δS'/δη = -(1/2)(η^{-2} Ẋ·Ẋ + m^2) = 0。在 Ẋ·Ẋ < 0 且 m > 0 时它有唯一正解
+  η = m^{-1}(-Ẋ·Ẋ)^{1/2}。把该解回代得 S'_pp → -m∫dτ(-Ẋ·Ẋ)^{1/2} = S_pp。
+  由于 η 是辅助场（不带导数、EL 方程可唯一求解），回代与先解 η 再变分 X 交换，
+  故两作用量给出相同的 X 运动方程。
+gaps:
+  - "「消去辅助场后作用量等价」这一步在文献中按标准经典场论操作处理，未陈述所需的正则性/唯一性假设（Ẋ·Ẋ < 0、m > 0、η > 0 分支的选取）；本推导把这些假设补进了陈述，但没有来源支撑这一补全，故整体按 physical-argument 记。"
+  - "只对类时世界线成立；类光（m = 0）情形不在范围内，此时 einbein 形式严格地更一般。"
+  - "不涉及量子等价：路径积分中消去 η 需要处理测度与 Faddeev–Popov 行列式，Polchinski 在此处不做。"
+  - "Polchinski 对这条等价的原文措辞未核实（全书正文未获取，见抽取记录 §0）。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

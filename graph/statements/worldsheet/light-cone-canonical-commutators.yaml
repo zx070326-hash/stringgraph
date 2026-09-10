@@ -1,0 +1,35 @@
+id: worldsheet.light-cone-canonical-commutators
+kind: definition
+status: rigorous
+title: 光锥规范下的正则量子化（等时对易关系）
+statement: |
+  光锥规范下的独立自由度是横向场 X^i(τ,σ)（i = 2..D-1）与零模 (x^-, p^+)
+  （worldsheet.light-cone-gauge-lagrangian）。设 Π^i 是 X^i 的共轭动量，
+  由光锥拉氏量给出 Π^i = (1/(2π α' c)) ∂_τ X^i（系数依 τ、σ 的归一化而定）。
+  正则量子化把它们提升为算符并规定等时对易关系
+    [ X^i(τ, σ), Π^j(τ, σ') ] = i δ^{ij} δ(σ - σ'),
+    [ X^i(τ, σ), X^j(τ, σ') ] = [ Π^i(τ, σ), Π^j(τ, σ') ] = 0,
+  以及零模的 [x^-, p^+] = -i（号差按 conv.metric-mostly-plus）。
+  横向坐标的厄米性 (X^i)^† = X^i 与正定内积一并规定。
+uses: [worldsheet.light-cone-gauge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.18)（共轭动量 Π^μ）、eq. (1.3.24b)（等时对易关系）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E13 备注，证据等级 [已核实]
+      （式号已核实，Headrick 习题 1.7 引用 (1.3.18)、(1.3.19)、(1.3.24b)、(1.3.25b)；
+      仅有描述，无逐字内容）。Π^i 的具体系数与 [x^-, p^+] 的符号未逐字核实，
+      由 curator 按本图约定补出。
+tags: [bosonic-string, quantization, light-cone, canonical]
+notes: |
+  本节点是**定义**（正则量子化的规定），因此标 rigorous：它规定的是量子理论的
+  代数结构本身，不需要论证。真正需要论证的是「这个规定与光锥规范固定后的
+  经典理论对应」，那属 worldsheet.light-cone-gauge-lagrangian（physical-argument）。
+  由此推出的模式对易关系是命题，见 worldsheet.transverse-oscillator-commutators。
+
+  本节点刻意不把 worldsheet.light-cone-gauge-lagrangian 写进 uses：
+  作为量子理论的定义它是自洽自足的（一族 Heisenberg 代数），
+  与经典拉氏量的联系放在推导里，以免把纯代数的定义层拉低到 physical-argument。
+author: curator-polchinski-ch1
+created: "2026-09-10"

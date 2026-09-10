@@ -1,0 +1,30 @@
+id: worldsheet.euler-number-weyl-invariance
+kind: proposition
+title: 世界面 Euler 数在 Weyl 变换下不变
+statement: |
+  在二维 Weyl 重标度 γ'_{ab} = e^{2ω} γ_{ab} 下，Ricci 标量与测地曲率按
+    R' = e^{-2ω} ( R - 2 ∇_a ∂^a ω ),
+    k' = e^{-ω} ( k + n^a ∂_a ω )   （n^a 为边界外法向单位矢）
+  变换。因此 Euler 数（worldsheet.worldsheet-euler-number）
+    χ = (1/(4π)) ∫_M d^2σ (-γ)^{1/2} R + (1/(2π)) ∫_{∂M} ds k
+  满足 χ[γ'] = χ[γ]：体项中的 -2∇_a∂^a ω 是全散度，其积分化为边界项，
+  恰与边界项中 n^a ∂_a ω 的贡献相消。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.32)（Weyl 重标度下曲率标量的变换，p.15）及其下方（χ 的 Weyl 不变性）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E9，证据等级 [已核实]：
+      Schrans 伴读笔记目录「1.2 p 15: Eq. (1.2.32) The Change in the Curvature under a
+      Weyl Rescaling」「1.3 p 15: Below Eq. (1.2.32) Invariance of χ under Weyl Rescaling」。
+      k' 的变换式在抽取记录中未给出，是 curator 为使相消论证完整而补的标准公式。
+tags: [bosonic-string, geometry, topology, weyl, euler-number]
+notes: |
+  「χ 是拓扑不变量」本身是 Gauss–Bonnet 的内容；本节点只主张比它弱的
+  「χ 在 Weyl 变换下不变」，因为这正是 Polchinski 在 (1.2.32) 下方显式验证的东西
+  （Headrick 习题 1.3 的措辞是「We will prove by explicit computation that,
+  in particular, χ is invariant under Weyl transformations」——那是 Headrick 的措辞，
+  不是 Polchinski 的，见抽取记录 §0）。
+  这条 Weyl 不变性正是把 Euler 数项 λχ 加进世界面作用量而不破坏 Weyl 对称性的理由。
+author: curator-polchinski-ch1
+created: "2026-09-10"
