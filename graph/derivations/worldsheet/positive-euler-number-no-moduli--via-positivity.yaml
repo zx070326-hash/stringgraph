@@ -1,0 +1,105 @@
+id: worldsheet.positive-euler-number-no-moduli--via-positivity
+target: worldsheet.positive-euler-number-no-moduli
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: |
+      提供 μ 的定义：模的方向 = ker P̂₁^T ∩ {对称无迹}。本推导要证的正是
+      「χ > 0 时这个核平凡」，即原书那句 "P₁^T δ′g cannot vanish for positive χ"。
+  - id: worldsheet.metric-variation-operator-p1
+    note: |
+      提供 P₁ 与 P₁^T 的分量表达式；恒等式 (5.2.10) 的左端 ∫ g^{1/2}(P₁δσ)_{ab}(P₁δσ)^{ab}
+      与右端所用的 P₁^T P₁ = −½∇² − ¼R 都由它展开。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian，体积元 (−γ)^{1/2}），本推导在欧氏世界面
+      （conv.worldsheet-euclidean，体积元 g^{1/2}）。按 conv.worldsheet-euclidean 的 Wick 旋转
+      字典 (a)：(−γ)^{1/2} ↔ g^{1/2}，故 χ = (1/4π)∫d²σ g^{1/2}R + 边界项；
+      Ricci 标量 R 的定义与号差无关。继承该约定登记的缺口（Wick 旋转在路径积分层面本图无节点），
+      故跨号差的推导一律不高于 physical-argument。
+    note: 提供 χ = (1/4π)∫ g^{1/2} R + 边界项，用来把 χ 的符号翻译成常曲率 R 的符号。
+  - id: worldsheet.euler-number-weyl-invariance
+    convention_map: |
+      跨 family `worldsheet-signature`，换算同上一条（(−γ)^{1/2} ↔ g^{1/2}）。
+      Weyl 变换 g → e^{2ω}g 与曲率变换 R′ = e^{−2ω}(R − 2∇²ω) 的形式在两种号差下逐字相同。
+    note: |
+      论证第一步要「用 Weyl 变换取常曲率度规」，必须知道这一步不改变 χ，
+      否则「χ > 0 ⇒ R > 0」在换了度规之后失效。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 与 (5.2.11a), p. 152"
+    note: |
+      **L1 原书页图逐字核实**（literature/extractions/math-sources.md §39.6(a)；Cambridge Core
+      ch.5 PDF，PDF 页 = 书页 − 144）。原书该段逐字：
+      「Further, κ vanishes for χ < 0 and μ vanishes for χ > 0. To show this, we first cite the fact
+      that it is always possible by a Weyl transformation to find a metric for which the scalar
+      curvature R is constant. The sign of R is then the same as that of χ. Now, P₁^T P₁ = −½∇² − ¼R,
+      so ⟨(5.2.10)⟩. For negative χ the right-hand side is strictly positive, so P₁δσ cannot vanish.
+      **A similar argument shows that P₁^T δ′g cannot vanish for positive χ.** Combining these results
+      we have χ > 0 : κ = 3χ, μ = 0, (5.2.11a); χ < 0 : κ = 0, μ = −3χ, (5.2.11b).」
+      ⚠ **本卡原先记的「原书未给直接论证 / 未核实」已于 2026-09-11 作废**：原书给了，
+      但只对 χ < 0 写出，对本条（χ > 0）只有一句 "A similar argument shows"，见 gaps。
+summary: |
+  **这是原书自己的论证路线**（与并列的 --via-surface-enumeration 不同，后者是本图补写的枚举）。
+
+  (1) **取常曲率度规**：原书逐字「we first **cite the fact** that it is always possible by a Weyl
+      transformation to find a metric for which the scalar curvature R is constant」。
+      Weyl 变换不改变 χ（worldsheet.euler-number-weyl-invariance）。
+  (2) **R 的符号 = χ 的符号**：原书逐字「The sign of R is then the same as that of χ」
+      （即 Gauss–Bonnet；原书不证不引）。故 χ > 0 ⇒ R > 0。
+  (3) **算子恒等式**：P₁^T P₁ = −½∇² − ¼R，于是 (5.2.10)
+        ∫d²σ g^{1/2}(P₁δσ)_{ab}(P₁δσ)^{ab}
+          = ∫d²σ g^{1/2}( ½ ∇_a δσ_b ∇^a δσ^b − (R/4) δσ_a δσ^a ) 。
+  (4) **两个方向**：
+      - χ < 0（R < 0）：右端逐点严格正，故 P₁δσ 不能为零 ⇒ κ = 0
+        （这一半本图挂在 worldsheet.negative-euler-number-no-ckv--via-positivity 上）；
+      - χ > 0（R > 0）：原书说「**A similar argument shows that P₁^T δ′g cannot vanish for
+        positive χ**」——即把同型的正定性论证换成作用在**对称无迹张量** δ′g 上的算子
+        P₁ P₁^T（它同样是二阶椭圆算子加曲率项，但曲率项的符号相反），
+        由 R > 0 得该二次型严格正，故 ker P₁^T 平凡，即 **μ = 0**。
+      合起来就是 (5.2.11a)：χ > 0 ⇒ κ = 3χ, μ = 0。
+
+  **(4) 的第二个圆点是原书唯一没有写出来的一步**——原书只声明它与第一个圆点同型。
+gaps:
+  - |
+    **原书对本条只写了一句 "A similar argument shows"**：χ < 0 那一半（κ = 0）有完整的
+    正定性论证（(5.2.10) 展开 + 逐点非负），而本图关心的 χ > 0 ⇒ μ = 0 那一半，
+    **原书没有写出来**，只声明与前者同型。summary (4) 第二个圆点里
+    「换成 P₁P₁^T 作用在对称无迹张量上、曲率项变号」这一句是**本图补的**，
+    **来源里没有对应文字，本图也未独立验算符号与系数**。这是本推导最实质的缺口。
+  - |
+    **单值化被外包**：「总可以用 Weyl 变换取到常数标量曲率 R 的度规」——原书逐字写
+    「we first **cite the fact**」，**不证、也不给任何引文**。这就是二维单值化定理 /
+    Yamabe 型结果，本图无节点、无来源。
+  - |
+    **「R 的符号与 χ 相同」也是断言**（Gauss–Bonnet），原书同样**不证不引**，本图无节点。
+  - |
+    **带边情形未处理**：本条的三个目标曲面里 **D₂ 带边**。分部积分在带边曲面上留边界项，
+    Euler 数也带测地曲率项，且 ker P₁^T 需要边界条件。
+    原书 §5.2 与 worldsheet.moduli-condition-traceless-transverse 都写在**紧无边**曲面上。
+    **故本推导严格说只覆盖 S₂ 与 RP₂ 两种无边情形，D₂ 不在其中。**
+  - |
+    **有限步初等计算部分无 reviewer 独立复核记录**（(5.2.10) 的展开、P₁^T P₁ = −½∇² − ¼R 的
+    系数、以及本图补的对称无迹版本），故按 docs/STATUS_LEVELS.md 不能标 rigorous。
+notes: |
+  由 curator 于 2026-09-11 建立，落实 literature/extractions/math-sources.md §39.9(3)
+  与 §39.8(A)。**建立本条的直接触发**：researcher 取到原书 ch.5 页图，
+  证实旧 gap「Polchinski 原书是否给出直接论证，本项目未核实」的答案是「给了」，
+  即目标卡 notes 里的升级路径 (d) 条件已满足。
+
+  **与 --via-surface-enumeration 的关系**：两条推导**并列，不互相替换**。
+  本条是**原书的路线**（正定性），那条是**本图补写的路线**（分类 + 逐曲面核实）。
+  按工具规则，目标节点取两条中最强的一条；两条目前同为 physical-argument。
+
+  **status 为什么不是 rigorous**：论证骨架是原书的、方向清晰，但
+  (a) 本图关心的那一半原书没写出来（只说 "similar"），
+  (b) 两条输入（单值化、Gauss–Bonnet）被原书明文外包，
+  (c) 本图无 reviewer 复核记录。
+  按 docs/STATUS_LEVELS.md「断言 + 骨架」条取 physical-argument，**不标 conjecture**
+  （结论在文献中无争议）。
+  升级路径：为单值化定理与 Gauss–Bonnet 各登记一个数学来源并建节点；
+  由 reviewer 复核 P₁P₁^T 版本的正定性计算（含带边情形的边界条件）。
+author: curator-surface-class
+created: "2026-09-11"

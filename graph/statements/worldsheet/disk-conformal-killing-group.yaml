@@ -25,33 +25,87 @@ uses_conventions:
   - conv.worldsheet-complex-coords
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.4 开头（三 tachyon 开弦振幅的推导，p.179 附近）：D₂ 上 3χ = κ − μ = 3 − 0，三个被固定的坐标落在实轴上，按循环序有两种；**无式号**"
+    loc: "§6.1「The disk」, p. 168（(6.1.8) 之后）：CKG 是 PSL(2,C) 中保持圆盘边界的子群 = PSL(2,R)，且「Again, all metrics are equivalent — there are no moduli.」；**无式号**"
     note: |
-      literature/extractions/polchinski-1998-v1.md#E90，等级 **L1（内容）/ L0（式号）**：
-      来源是 schrans-2020 §6.27（笔记 p.299，逐页读到）配图 6.7。抽取记录 §7 明记本条**无式号**。
-      ⚠ **「PSL(2,R)」这个记号写在原书哪一式未核实。**
-      ⚠ **本条存在文献歧义**（见推导 gaps 与本卡 notes）：[S] 的逐字句子写
-      「fixed on the real axis … **in two ways that are linked by a PSL(2,R) transformation**,
-      depending on the cyclic order」，而抽取记录的转述写「两种**不被** PSL(2,R) 联系的循环序」。
-      两者相反。本卡片按「不被联系」写，理由见 notes。
+      **L1 原书页图逐字核实**（literature/extractions/math-sources.md §39.6(c)；Cambridge Core
+      ch.6 PDF，PDF 页 = 书页 − 165）。原书逐字：
+      「The CKG of the disk is the subgroup of PSL(2,C) that leaves the boundary of the disk fixed.
+      For the reflection (6.1.8) this is just the subgroup of (6.1.6) with α, β, γ, δ all real,
+      which is **PSL(2,R)**, the Möbius group with real parameters. One CKV is the ordinary
+      rotational symmetry of the disk. Again, all metrics are equivalent — there are no moduli.」
+      （(6.1.7) 是 z′ = 1/z̄，(6.1.8) 是共形等价的 z′ = z̄；(6.1.6) 是一般 Möbius 变换
+      z′ = (αz+β)/(γz+δ)，p.168 上方由 αδ − βγ = 1 与整体反号认同定义 PSL(2,C)。）
+  - ref: polchinski-1998-v1
+    loc: "§6.4 开头, **p. 178**：「We represent the disk as the upper half-plane so the boundary coordinate y is real. There are no moduli. After fixing the metric, the CKG PSL(2,R) can be used to fix the three vertex operators to arbitrary positions y₁, y₂, y₃ on the boundary, except that this group **does not change the cyclic ordering** of the vertex operators so we must sum over the two orderings.」；**无式号**"
+    note: |
+      **L1 原书页图逐字核实**（math-sources.md §39.8(C)）。
+      **★ 本条直接结案了本卡原先登记的文献歧义：原书站「不被 PSL(2,R) 联系」一边，
+      与本卡片 statement (2) 的选择一致；[S] 那句「are linked by a PSL(2,R) transformation」
+      确认为伴读者的错误。**
+      ⚠ **原书只说 "arbitrary positions"，没有说「唯一」**——statement (2) 里的「存在唯一的
+      PSL(2,R) 元」是**非书内陈述**，其承载节点是 math.mobius-group-sharply-three-transitive
+      （单可迁性），推导 --via-real-mobius-subgroup 已挂该依赖。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p. 152：「χ > 0 : κ = 3χ, μ = 0」（配 χ(D₂) = 1 给 κ = 3）"
+    note: |
+      L1 原书页图（math-sources.md §39.6(a)）。
+      ⚠ **2026-09-11 订正**：statement (1) 末句的「3χ = κ − μ = 3 − 0 = 3」这条对照关系
+      **不在 §6.4**——researcher 读了书上 pp.178–181，那里没有这条式子。
+      它的书内位置是 §5.2 的 **(5.2.9)**（原书写作 μ − κ = −3χ）与 **(5.2.11a)**。
+      本条 source 就是为承载这半句而单列的（原先它被错记在 §6.4 的 loc 里）。
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.7.3, p.10（Aut(D(0,1)) 是 SU(1,1) 的商，核 {±I}）+ §1.9, p.11 的无编号句（SL(2,R) ≅ SU(1,1)）"
+    note: |
+      **数学侧可选补强，L1**（math-sources.md §39.7.1）；本卡登记它以便日后建一条 rigorous 的
+      数学推导。⚠ **「Aut(D) = PSL(2,R)」在该讲义里没有单一编号**，是 Theorem 1.7.3 与 §1.9
+      两处合成；引用时要么写两处，要么只引 SU(1,1) 版。
+      ⚠ 该文件**未印年份**，bib key 不带年份（`milicic-riemann-surfaces`），
+      偏离 literature/CLAUDE.md 的 key 规范，待 lead 裁决。
+      ⚠ 本条**目前不承载本卡的任何推导**：现有推导 --via-real-mobius-subgroup 走的是
+      Polchinski 的「取相容子群」路线；且 Aut(D) 是**全部**全纯自同构群，
+      本卡 statement 刻意不断言 PSL(2,R) 是全部（见 math.mobius-group-sharply-three-transitive 的
+      「本命题不断言什么」）。
   - ref: schrans-2020
-    loc: "§6.27（笔记 p.299）+ 图 6.7：内容的实际读取来源（核对源）"
+    loc: "§6.27（笔记 p.299）+ 图 6.7：本卡内容最初的读取来源（核对源）"
+    note: |
+      ⚠ **2026-09-11 追记**：[S] §6.27 那句「fixed on the real axis … in two ways that **are
+      linked by** a PSL(2,R) transformation, depending on the cyclic order」**已由原书 p.178
+      确认为错误**，建议加进 [[lit-polchinski-v1-equation-anchors]] 的「[S] 已确证的错误」清单。
+      本条只保留为历史读取来源。
 tags: [worldsheet, tree-level, disk, conformal-killing-vector, psl2r, open-string, cyclic-order]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E90 建立。
 
-  **⚠ 文献歧义与本图的取舍（须记入 auditor 视野）**：如 sources 所记，[S] 的逐字句子与抽取者的
-  转述在「两种循环序是否被 PSL(2,R) 联系」上**正好相反**。本卡片采「**不被**联系」，三条理由：
-  (a) 数学上 PSL(2,R) 是 H 的保定向自同构群，在 ∂H ≅ S¹ 上保持定向、因而保持循环序，
-      不可能把 (y₁,y₂,y₃) 送到 (y₁,y₃,y₂)（见 math.mobius-group-sharply-three-transitive）；
-  (b) 若两种序被 PSL(2,R) 联系，(6.4.2) 就不会出现「+ ⟨k₂ ↔ k₃⟩」这一项——而抽取记录 E97
-      逐字记录了该项的存在，这是**独立于 [S] 那句话的**书内证据；
-  (c) [S] 的句子也可能是他自己的笔误或省略（同一条 E90 里抽取者已指出他在 E89 有一处类似笔误）。
-  但 **(a) 是 curator 的数学论证、不是文献内容**，故本卡片的推导标 physical-argument，
-  并把这条歧义登记在案，建议由 auditor 在有原书时核对 §6.4 开头的原文措辞。
+  **★ 2026-09-11 订正（curator-surface-class，依 math-sources.md §39.8(C)；researcher 取到原书
+  ch.6 页图）——四项，全部是 loc/notes 层面的更正，statement 文本一字未改：**
 
-  **与第 5 章的接口（待补边）**：κ − μ = 3χ（E75, (5.2.9)）与 χ(D₂) = 1、μ = 0 都属第 5 章，
-  本批次提交时尚无节点。本卡片把它们作为**对照**写在 statement 里，不建依赖边；
-  待 ch5 节点合入后可补一条 --via-riemann-roch 的独立推导。
+  1. **文献歧义结案。** 本卡原 notes 记录的歧义（[S] 说两种循环序「are linked by a PSL(2,R)
+     transformation」，与本卡的「不被联系」相反）**已由原书 §6.4 开头 p.178 逐字裁定**：
+     原书写「this group **does not change the cyclic ordering** of the vertex operators
+     so we must sum over the two orderings」。**本卡片当初的选择正确，[S] 是错的。**
+     因此原 notes 里的限定句「**但 (a) 是 curator 的数学论证、不是文献内容**」
+     **撤销**——理由 (a)（PSL(2,R) 保定向 ⇒ 保循环序）现在有原书正文背书。
+     （原理由 (b)：(6.4.2) 里「+ ⟨k₂ ↔ k₃⟩」项的存在，仍是有效的书内旁证。）
+  2. **页码更正**：§6.4 开头在书上 **p. 178**，不是原先写的「p.179 附近」。
+  3. **「3χ = κ − μ = 3 − 0」从 §6.4 的 loc 里摘出**：researcher 读了 pp.178–181，
+     **那里没有这条式子**。它已改挂到独立的 §5.2 (5.2.11a) source 条目上。
+  4. **「PSL(2,R) 记号写在原书哪一式未核实」撤销**：该记号在原书出现于**两处、均无式号**——
+     **p. 168**（§6.1「The disk」，(6.1.8) 之后）与 **p. 178**（§6.4 开头）。两处 loc 都已写死。
+
+  **⚠ 遗留：statement (2) 的「唯一」不是书内陈述。** 原书只写 "arbitrary positions"。
+  唯一性由 math.mobius-group-sharply-three-transitive（PSL(2,R) 在同循环序三元组上**单可迁**）
+  承载，推导 worldsheet.disk-conformal-killing-group--via-real-mobius-subgroup 已挂该依赖。
+  本图**不因此换代**：命题内容正确、依赖已建，只是来源分工需说明（本条即说明）。
+
+  **与第 5 章的接口（保留原 notes 的记录，并按本轮更新）**：κ − μ = 3χ（(5.2.9)）与 χ(D₂) = 1
+  都属第 5 章。本卡建立时 ch5 节点尚未进 main，故只把它们作为**对照**写在 statement 里、不建依赖边。
+  ch5 节点现已在 main（worldsheet.riemann-roch-kappa-minus-mu），可补一条
+  --via-riemann-roch 的独立推导；但注意 μ(D₂) = 0 那一半在图上仍是断言
+  （见 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条）。
+
+  **待办（不在本次改动范围内）**：推导节点
+  worldsheet.disk-conformal-killing-group--via-real-mobius-subgroup 的 sources loc 仍写
+  「§6.4 开头（p.179 附近）」且 gaps 第一条仍把文献歧义记为未决——**两处都应按上面 1、2 更新**。
+  本次任务的改动范围只限本 statement 卡，故未动；已在报告中提请 lead 派单。
 author: curator-polchinski-ch6
 created: "2026-09-11"

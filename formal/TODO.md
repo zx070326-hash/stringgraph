@@ -449,10 +449,9 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       合并推论：`Fock.lie_Lop_vertexOsc_of_ne`（一切 `m ≠ 0`）与
       `Fock.lie_Lop_vertexOsc_of_ne_isotropic`（`b·b = 0`，DDF 归一化下的权 1 变换律）。
       无 sorry，公理只有标准三条。
-      **仍缺**：(a) `m = 0` 的一般态算子形式（真空上是 (3c)；`m = 0` 时 Sugawara 的
-      `j = 0` 与 `j = m` 并成一项，系数多项式在 `m = 0` 处**不适用**，见 (3c) 的要点）；
-      (b) 塔上的 `m < 0` 版本，即 (3e) `lie_towerLop_towerVertex_of_pos` 的负模对应物，
-      搬运是机械的，本轮未做。
+      **仍缺**：`m = 0` 的一般态算子形式（真空上是 (3c)；`m = 0` 时 Sugawara 的
+      `j = 0` 与 `j = m` 并成一项，系数多项式在 `m = 0` 处**不适用**，见 (3c) 的要点）。
+      塔上的负模对应物已由 (5) 补齐。
   - [x] (4) **DDF 算子本身与 `⁅L_m, A^ε_n⁆ = 0`（`m ≥ 1`）**：
     `StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条。
     - 偏振经由**收缩**进入：`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p`（`α^ε_p`），
@@ -478,15 +477,40 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       （Mathlib 的 `lie_sum` / `sum_lie` / `lie_smul` 对 `Module.End` 的括号**匹配不上**：
       `LieRingModule.toBracket` 与 `LieRing.toBracket` 不是同一个实例路径，
       只能从 `LieRing.of_associative_ring_bracket` 重证）。
-    - **仍缺**：`m ≤ -1`（需 (3f)）与 `m = 0`（`Fock.lie_Lop_vertexOsc_of_pos` 假设 `0 < m`，
-      `m = 0` 不是它的特例，参见 (3c) 的同类现象）。因此
-      `worldsheet.ddf-commute-with-virasoro` 只形式化了一半，
-      「`A^ε_n` 保持 `physSubmodule`」还不能证（`L_0` 条件缺；且 `physSubmodule`
-      目前只在单个 Fock 空间上，塔上的物理子模尚未定义）。
+    - **仍缺**：见 (5)，`m ≤ -1` 已补齐，只剩 `m = 0`。
+  - [x] (5) **`⁅L_m, A^ε_n⁆ = 0` 推广到一切 `m ≠ 0`**：
+    `StringFormal/NoGhost/DDFOperatorNeg.lean`，无 sorry，7 条声明公理只有标准三条。
+    把 (3f) 的单 Fock 恒等式机械搬到塔上再重跑伸缩和：
+    - `lie_towerLop_towerVertex_of_ne` / `_of_neg`：塔上共形权恒等式
+      `⁅L_m, V^{(n)}_K⁆ = (K - m - n + n(k_0·p)) V^{(n)}_{K-m}`，`m ≠ 0`。证明与 (3e) 的
+      `_of_pos` 逐字相同，只把 `Fock.lie_Lop_vertexOsc_of_pos` 换成 `..._of_ne`；
+      `k_0² = 0` 依然**必要**，理由同 (3e)（否则系数含 `j·n·(b·b)`，依赖塔的级数 `j`）。
+    - `lie_towerLop_towerVertex_of_ne_normalized` / `_of_neg_normalized`：归一化后的权 0
+      变换律 `⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`。两项 `n` 依赖的贡献
+      （单项式 `z^n` 的单值性移位与 `n(k_0·p)`）都与 `m` 无关，故抵消对符号不敏感。
+    - `lie_towerLop_ddfSummand_of_ne`、**`lie_towerLop_ddfOp_of_ne`**、
+      `lie_towerLop_ddfOp_of_neg`。
+    - **窗口两端的消失机制在 `m < 0` 时仍成立，但边界项换边**：伸缩和把
+      `∑_{[lo,up]} (g(j-m) - g(j))` 化成 `∑_{[lo-m,up-m]} g - ∑_{[lo,up]} g`。`m > 0` 时
+      多出的两条边带是 `[lo-m, lo-1]`（下端机制：顶点算子降不到真空以下）与
+      `[up-m+1, up]`（上端机制：横向性）；`m < 0` 时重标 `j ↦ j-m` 方向反转，两条边带
+      **交换到另一侧**，变成 `[lo, lo-m-1]`（位置在 `lo` 之上，却仍须由**下端**机制消灭）
+      与 `[up+1, up-m]`（仍由上端机制消灭）。修正办法：窗口两端各留 `|m|` 的余量
+      （`lo + |m| ≤ n - towerLevelBound x`、`towerModeBound x + |m| ≤ up`），
+      再把两个和都与公共大窗口 `[min lo (lo-m), max up (up-m)]` 比较，一次覆盖两种符号。
+      因为 `ddfOp_apply` 对任意够大的窗口都成立，放大窗口不花代价。
+    - **仍缺**：只剩 `m = 0`，且**只卡在一处**——`hm : m ≠ 0` 在
+      `lie_towerLop_ddfOp_of_ne` 里只用了一次，就是引用 `lie_towerLop_ddfSummand_of_ne`。
+      伸缩和与上面的窗口分析在 `m = 0` 处逐字成立（`m = 0` 时两项
+      `(j-m) G_{j-m}` 与 `j G_j` 本来就相同，单项括号自己就是零）。真正缺的是单 Fock
+      恒等式 (3f) 在 `m = 0` 的版本。缺的结论是 **`⁅L_0, A^ε_n⁆ = 0`**（注意**不是**
+      `A^ε_n` 的非零倍：`A^ε_n` 是权 1 流的**零模**，`⁅L_m, j_0⁆ = ((h-1)m - 0) j_m`
+      在 `h = 1` 时为零），它正是 DDF 态自动满足 `L_0` 质壳条件的原因。因此
+      「`A^ε_n` 保持物理子空间」仍不能陈述（另外塔上的 `physSubmodule` 尚未定义）。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
-  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
-    所以「`A^ε_n` 把物理态送到物理态」还证不了。
+  - `⁅L_m, A^ε_n⁆ = 0` 已覆盖一切 `m ≠ 0`（见 (5)）；**只剩 `m = 0`**，
+    所以「`A^ε_n` 把物理态送到物理态」仍证不了（`L_0` 条件缺）。
   - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
   - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
