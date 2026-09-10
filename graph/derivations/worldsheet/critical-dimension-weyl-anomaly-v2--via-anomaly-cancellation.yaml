@@ -14,15 +14,27 @@ depends_on:
   - id: worldsheet.conformal-gauge-fixing
 sources:
   - ref: polchinski-1998-v1
-    loc: "§3.4 结尾，p.95–96，式号约在 (3.4.24)–(3.4.32) 区间（**未核实**，见 Q6）"
+    loc: "§3.4：Weyl 反常 ∝ 中心荷的核心式 **(3.4.15)**（`c = −12a₁`，`T^a_a = −(c/12)R`）；「总中心荷为零 ⟺ Weyl 不变」的两处 **iff 散文** p.95（\"a flat world-sheet CFT can be coupled to a curved metric in a Weyl-invariant way if and only if the total central charge c is zero\"）与 p.96（\"Weyl invariance holds in the quantum theory if and only if a₁ = −c/12 vanishes\"）；\"Discussion\" 小节的 **(3.4.23)**, p.94 给的是 `c = c^X + c^g = D − 26` 与「Weyl-invariant only for **D = 26**」。式号、页码与措辞 2026-09-11 经原书核实（抽取记录 polchinski-1998-v1.md §12.2，**Q6 关闭**）"
     note: |
-      按抽取记录 E53/Q6 的明确要求不写死式号。已知硬约束：§3.4 = p.90–96，
-      (3.4.31) 在 p.96–97。
+      **【2026-09-11 原书核实：Q6 关闭，本条此前的「未核实/不写死式号」已作废】**
+      ⚠ **原书 (3.4.23) 写的是 D = 26，不是 c^m = 26**。目标陈述采用的一般物质 CFT 形式
+      （c^{tot} = 0 ⟺ c^m = 26）在 §3.4 里**只有散文与 (3.4.15) 支撑，没有对应的式号结论**；
+      逐字写出 `c^m = 26` 的是 **§4.3 (4.3.9)**（见下一条 source）。
+      故本推导对目标陈述的支撑是「§3.4 散文 + (3.4.15) + §4.3 (4.3.9)」三处联合，
+      而非单一位置——这是本推导在来源侧的实际弱点，取代此前登记的「式号完全未核实」。
+      另：原书在 (3.4.23) 处**显式引用 (2.5.12)** 作为 c^g = −26 的来源，
+      故本推导对 worldsheet.bc-ghost-central-charge 的依赖在原书里是明写的。
       核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
       schrans-2020 §3.26 "Theories with a Quantum Anomaly" 逐字：「the scale invariance is local;
       it is a gauge redundancy and if there is an anomaly the result is that the gauge symmetry
       is broken, with implications for e.g. unitarity」——**这是 schrans-2020 的措辞，不是 Polchinski 的**
       （抽取记录 E53 明确标注），只作核对，不承载论证。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. **(4.3.9)**（全书唯一逐字写出 `c^m = 26` 的位置：「{Q_B, Q_B} = 0 only if c^m = 26」；式号与内容已核实，抽取记录 §12.3）"
+    note: |
+      本条**不是**本推导的论证来源（那是 BRST 路线 worldsheet.critical-dimension-brst-v2 的事），
+      只用来支撑目标陈述采用的**记号与一般性形式**「c^m = 26」在原书中确有逐字出处。
+      抽取记录 §12.10 表 B 第 7 行的建议正是：若卡片文本是 c^m = 26，则改挂 §4.3 (4.3.9)。
 summary: |
   (1) Weyl 是规范冗余：Polyakov 路径积分对 diff × Weyl 取商，规范固定用掉了 Weyl
       （worldsheet.conformal-gauge-fixing）。若 Weyl 在量子层面有反常，规范固定不自洽。
