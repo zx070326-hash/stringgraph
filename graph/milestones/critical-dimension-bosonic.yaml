@@ -1,5 +1,5 @@
 id: ms.critical-dimension-bosonic
-statement_id: worldsheet.critical-dimension-bosonic
+statement_id: worldsheet.critical-dimension-bosonic-v2
 canonical_text: |
   【本里程碑断言什么】
   对 D 维自由玻色弦，D = 26 不是由单一论证得到的：它是四条**论证方式互不相同**的路线各自挑出的同一个值。
@@ -49,7 +49,12 @@ canonical_text: |
       本里程碑**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，本图未建节点。
       （节点：worldsheet.open-string-intercept-v2）
 
-  【各路线的非严格步骤】本里程碑的四条路线中只有 (II) 在图中是 rigorous，其余三条封顶在 physical-argument：
+  【各路线的非严格步骤】本里程碑的四条路线中只有 (II) 在图中是 rigorous（2026-09-11 拆
+  ddf-operators-v4 → v5 后 (II) 的**有效状态**亦为 physical-argument：其推导链的 DDF 部分
+  现由 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra
+  两张 physical-argument 卡承载，见 ms.no-ghost-theorem 第五轮；下文 (II) 一条所说的
+  「图中的推导链是 rigorous」指的是各推导节点**自身**的 status，不再是有效状态），
+  其余三条封顶在 physical-argument：
     (I) 零点能 Σ_{n≥1} n = ζ(−1) = −1/12 用 ζ 函数正规化，没有算子层面的定义；J^{i−} 是三次式，
         [J^{i−}, J^{j−}] 的计算涉及无穷模式和的重排与正规序重整，文献按形式操作处理，无收敛性论证；
         Polchinski §1.3 正文走的是表示论计数（第一激发级须为无质量 SO(D−2) 矢量），显式的代数闭合验证
@@ -88,25 +93,21 @@ canonical_text: |
   (4) 不断言 D = 26 是玻色弦一致性的**充分**条件（相互作用、模不变性、快子等均在范围外）。
   (5) 不断言 a = 1 与 D = 26 之间有蕴含关系：(V) 的三条刻画对任意 D ≥ 4 都等价于 a = 1。
 
-  【本 canonical_text 与 statement_id 现行文本的差异——须 lead 裁决，故 audit.status = draft】
-  本里程碑指向的 worldsheet.critical-dimension-bosonic 的现行 statement 文本写的是
-  「在以下**三种**独立意义下要求 D = 26 且 a = 1：(i) 光锥 (ii) 旧协变 (iii) BRST」。已知四处不一致：
-    D1. **路线数**。第四条路线 worldsheet.critical-dimension-weyl-anomaly 已建节点，但该卡文本写死「三种」，
-        且其唯一推导 --via-three-routes 的 depends_on **不含**第四条路线。故本 canonical_text 的 (IV)
-        在图上**没有**从 statement_id 出发的支撑路径，也不影响该 statement 的有效状态。
-    D2. **「独立」的强度**。该卡写「三种独立意义」，但 (iii) 与 (iv) 共享 c^g = −26 与 c^m = D
-        （见【独立性的限定】），「独立」只能在「论证方式」的意义上成立。
-    D3. **a = 1 的归属**。该卡把 a = 1 写进三条路线的共同结论，但 (iii)（BRST 幂零）在本图中
-        **只**给出 c^m = 26，不给 a；(iv) 同样不给 a。（旁注：Polchinski §4.3 的 Q_B 模式展开里
-        末项 −c_0 就是鬼场正规序常数、数值上等于 a = 1，但那是**代入**的输入，不是该路线的结论；
-        kato-ogawa-1983 摘要把 D = 26 与 α_0 = 1 一并归给幂零性，本图按「一个节点一个命题」拆开。）
-    D4. **开/闭弦与约定**。该卡未区分开弦与闭弦：a = 1 是开弦量，(ii)(iii)(iv) 与开闭弦无关；
-        且该卡的 uses_conventions **未声明 conv.intercept-sign-a**，而「a = 1」的符号恰恰依赖该约定
-        （Polchinski 的同一命题写作 A = −1）。
-  处理方式：本轮只建里程碑、不改任何已提交的陈述或推导（项目原则 1）。**建议 lead 新建
-  worldsheet.critical-dimension-bosonic-v2**：把 (i)–(iv) 各自的前提与结论分开写、把 a = 1 限定为开弦、
-  显式声明 conv.intercept-sign-a、并把 --via-three-routes 换代为四路线版本；届时本里程碑的
-  statement_id 应改指 v2，旧卡写 superseded_by。在此之前本里程碑维持 draft，不得 approved。
+  【本 canonical_text 与 statement_id 的差异：已由 v2 解决（2026-09-11），待 auditor 第一轮回译】
+  本里程碑原先指向 worldsheet.critical-dimension-bosonic，该卡的 statement 写的是
+  「在以下**三种**独立意义下要求 D = 26 且 a = 1：(i) 光锥 (ii) 旧协变 (iii) BRST」，
+  与本 canonical_text 有四处不一致（起草时记为 D1 路线数、D2「独立」的强度、
+  D3 a = 1 的归属、D4 开/闭弦与约定）。
+  这四处**已由换代解决**：curator 于 2026-09-11 新建 worldsheet.critical-dimension-bosonic-v2
+  （按 (I)–(V) 分列四条路线各自的前提与结论；「独立」降为「论证方式独立」并写明 (III)(IV)
+  共享 c^g = −26 与 c^m = D；a = 1 限定为开弦并单列为 (V)；显式声明 conv.intercept-sign-a）
+  与推导 worldsheet.critical-dimension-bosonic-v2--via-four-routes（四条路线 +
+  open-string-intercept-v2 + free-boson-central-charge-d + bc-ghost-central-charge），
+  旧卡写 superseded_by 指向 v2、statement 文本一字未动。
+  本里程碑的 statement_id 已随之改指 v2。
+  **audit.status 仍为 draft**：本里程碑尚未做过任何回译审计，等待 auditor 的第一轮回译；
+  待审的重点是 canonical_text 与 v2 卡片是否逐句对应（尤其 (II) 的「不是等价式」、
+  (III)(IV) 的 c^m = 26 与 D = 26 的关系、以及【独立性的限定】一节）。
 canonical_source:
   ref: polchinski-1998-v1
   loc: |

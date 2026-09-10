@@ -1,0 +1,135 @@
+id: worldsheet.critical-dimension-bosonic-v2--via-four-routes
+target: worldsheet.critical-dimension-bosonic-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.critical-dimension-light-cone
+    note: |
+      供给 (I) 的全部内容（Δ_n 的显式形式与「当且仅当 D = 26 且 a = 1」）。
+      这是四条路线中唯一同时定出 D 与 a、也是唯一以「当且仅当」形式给出 D 的一条。
+  - id: worldsheet.critical-dimension-old-covariant
+    note: |
+      供给 (II)。该卡的结论恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分；
+      「D > 26 时存在负模物理态」经该卡的推导 --via-no-ghost 由
+      worldsheet.no-ghost-theorem-v4 供给（限非零动量）。
+      **本卡 (II) 刻意不采用该卡陈述末句关于 D < 26 的说法**（「H_0 的维数不足以把 H_phys
+      约化到横向 Fock 空间」）：该句不被 no-ghost-theorem-v4 支撑，见
+      worldsheet.critical-dimension-old-covariant--via-no-ghost 的 gaps 与
+      graph/milestones/no-ghost-theorem.yaml 审计 B2/B3。本卡 (II) 明写 D ≤ 25 一侧不作断言，
+      故不依赖那一句。
+  - id: worldsheet.critical-dimension-brst
+    note: |
+      供给 (III)（Q_B² 的模式表达式与 Q_B² = 0 ⟺ c^m = 26）。
+      该卡陈述末句「取 D 个自由玻色子时 c^m = D，故 ⟺ D = 26」在本推导中**不**从该卡取，
+      而由下面的 worldsheet.free-boson-central-charge-d 显式供边（本卡把这一步单列成
+      (III)(IV) 的公共输入）。
+  - id: worldsheet.critical-dimension-weyl-anomaly
+    note: |
+      供给 (IV)（c^{tot} = c^m + c^g = 0 ⟺ c^m = 26）。这是本次换代新增的一条边：
+      旧推导 --via-three-routes 的 depends_on 不含它，导致该路线在图上没有从汇总卡片
+      出发的支撑路径（ms.critical-dimension-bosonic 的 D1）。
+  - id: worldsheet.open-string-intercept-v2
+    note: |
+      供给 (V)（a = 1，只对开弦、与 D 无关）。必须显式取得：路线 (III)(IV) 完全不给 a，
+      故若不加这条边，本卡合取中的 a = 1 只由 (I)(II) 支撑，而 (II) 是把 a = 1 当作**前提**
+      而非结论的。
+  - id: worldsheet.free-boson-central-charge-d
+    note: |
+      供给【(III)(IV) 的结论与「D = 26」的关系】一节里的 c^m = D 那一步，即由 c^m = 26
+      得到 D = 26 的换算。本卡把它单列为 (III)(IV) 的**公共输入**，这正是
+      worldsheet.free-boson-central-charge-d 的 notes 所建议的记账方式。
+      **不标 inferred**：本推导的 sources 里显式列出 Polchinski §2.4 末至 §2.5 初
+      （c = 1 的 TT OPE 计算，D 个给 c^m = D）——这是该步**被论证**的位置——
+      以及 §4.3 eq. (4.3.10)（把 c^m = 26 代成 D = 26 的那一步，式号与内容已核实）。
+      与此对照，worldsheet.critical-dimension-brst--via-nilpotency 把同一条边标为 inferred，
+      理由是**那条推导**的 loc（§4.3 的 Q_B² 模式计算）不在原地论证 c = D；
+      本推导因为把 §2.4–2.5 一并列入 sources，故不标 inferred。
+      有效状态不受影响：该节点有 --via-lean（formalized）。
+  - id: worldsheet.bc-ghost-central-charge
+    note: |
+      供给 c^g = −26。它是 (III)(IV) 的另一个公共输入：(III) 的
+      {Q_B,Q_B} = Σ ((c^m − 26)/12)(m³−m) c_{−m}c_m 里那个 26 就是 −c^g，
+      (IV) 的 c^{tot} = c^m − 26 里那个 26 也是 −c^g。本卡在【"独立"的确切含义】
+      一节里明写这一共享，故必须显式挂边，否则该断言在图上无依据。
+      **不标 inferred**：本推导的 sources 里显式列出 Polchinski §2.5 eq. (2.5.12), p.51
+      （鬼场中心荷公式，式号经 schrans-2020 目录逐字核实），即该步被论证的位置。
+      有效状态不受影响：该节点的有效状态是 physical-argument，与本推导自身相同。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, p.23–24（光锥，(I)；页码已核实/式号未核实，#E18）；§4.1, eq. (4.1.16)–(4.1.18), p.123–124（OCQ level 1 给 A = −1 即 a = 1，式号与内容已核实，#E56）与 p.124–125（无鬼定理，#E57/#E58）"
+    note: |
+      已按 conv.intercept-sign-a 做 a = −A 换算。§1.3 正文走表示论计数，显式的
+      [J^{i−}, J^{j−}] 验证是习题 1.3。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.10), p.132（BRST 路线的结论；**式号与内容均已核实**，#E64）"
+    note: |
+      四条路线中定位最强的一处，也是本推导中「c^m = 26 经 c^m = D 给 D = 26」这一步在原书
+      被实际执行的位置；但它只覆盖 D，不覆盖 a。
+  - ref: polchinski-1998-v1
+    loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（c^m = D 的计算：X^μ 的 TT OPE 给 c = 1，D 个给 c = D；**式号与页码均未核实**，#E34/Q4）"
+    note: |
+      这是 depends_on 中 worldsheet.free-boson-central-charge-d 那条边**不**标 inferred 的
+      依据位置。⚠ 该位置是抽取记录中唯一一条核心陈述既无式号也无页码锚点，
+      **必须人工核对原书**；内容（c = D）本身在抽取记录第 1.1 节被列为「内容确认」。
+      本图另有该命题的 Lean 证明（worldsheet.free-boson-central-charge-d--via-lean），
+      故这一步的可信度不依赖该处定位。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.12), p.51（bc 系统中心荷公式，λ = 2 给 c^g = −26；式号经 schrans-2020 目录逐字核实为 `2.31 p 51: Eq. (2.5.12) The Ghost Central Charge`）"
+    note: depends_on 中 worldsheet.bc-ghost-central-charge 那条边不标 inferred 的依据位置。
+  - ref: polchinski-1998-v1
+    loc: "§3.4 末尾, p.95–96，式号约在 (3.4.24)–(3.4.32) 区间（Weyl 反常路线；**完全未核实**，#E53/Q6）"
+    note: |
+      本推导定位最弱的一处。抽取记录 Q6 要求不写死式号，并要求人工确认原书写的是
+      「c^m = 26」还是直接写「D = 26」。硬约束：§3.4 = p.90–96，(3.4.31) 在 p.96–97。
+  - ref: gsw-1987-v1
+    loc: "§2.3.1, eq. (2.3.32)（Δ_n 的显式计算）；§2.2.1–2.2.2（OCQ 谱与截距）；§2.3.3, p.102–112（无鬼定理与谱生成代数）"
+    note: |
+      GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus
+      与 conv.alpha-prime-regge。§2.3.3 的页码经核实，式号未核实。
+summary: |
+  本推导把 worldsheet.critical-dimension-bosonic-v2 的合取拆成它的各个合取项，
+  逐条指到已有节点：
+    (I)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1
+    (II)  worldsheet.critical-dimension-old-covariant   (D,a) = (26,1) 处幺正；D > 26 有负模态
+    (III) worldsheet.critical-dimension-brst            Q_B² = 0 ⟺ c^m = 26（不给 a）
+    (IV)  worldsheet.critical-dimension-weyl-anomaly    c^m + c^g = 0 ⟺ c^m = 26（不给 a）
+    (V)   worldsheet.open-string-intercept-v2           a = 1（只对开弦，与 D 无关）
+  外加 (III)(IV) 的两个公共输入：
+    c^m = D  worldsheet.free-boson-central-charge-d（由 c^m = 26 得到 D = 26 的那一步）
+    c^g = −26 worldsheet.bc-ghost-central-charge（(III) 的 {Q_B,Q_B} 与 (IV) 的 c^{tot} 里的同一个 26）
+
+  【本推导相对 --via-three-routes 的四处变化】对应 ms.critical-dimension-bosonic 的 D1–D4：
+    D1 加入第四条路线 (IV)，它此前虽有节点但没有从汇总卡片出发的支撑路径。
+    D2 「独立」在目标卡片中已降为「论证方式独立」，且 (III)(IV) 共享的两个输入
+       现在是本推导的显式依赖，图上可查。
+    D3 a = 1 单列为 (V) 并只挂在 open-string-intercept-v2 上；(III)(IV) 明确不给 a。
+    D4 目标卡片显式声明 conv.intercept-sign-a 并把 a = 1 限定为开弦。
+  另外，旧推导 gaps 中「c^m = D 未单列节点」一条已消解：该步现在是显式的依赖边。
+
+  【为什么 kind/status 是 physical-argument 而不是 proof/rigorous】
+  旧推导 --via-three-routes 标 kind: proof / status: rigorous，理由是「合取不含新的物理输入」。
+  本推导按 docs/STATUS_LEVELS.md「不确定时选低的那级」取 physical-argument，理由有二：
+    (1) 目标卡片除四条路线的结论外，还断言了几条**关于这些论证本身**的话——
+        「(I) 是四条中唯一的当且仅当」「(II) 不是等价式」「(III)(IV) 的判据是同一个数、
+        共享两个输入」「(V) 的三条刻画对任意 D ≥ 4 等价于 a = 1」。这些是对本图四张卡片的
+        分类与比较，不是任何一篇文献里的定理，因而不是可以「严格证出」的东西
+        （见下面 gaps 第一条）。
+    (2) 合取项本身全部封顶在 physical-argument（四条路线的有效状态均为 physical-argument，
+        open-string-intercept-v2 亦然），故 rigorous 的标注在任何情形下都会被压下来，
+        标 rigorous 只会制造「这一步是严格的」的错觉。
+  有效状态因此仍是 physical-argument，与 --via-three-routes 给旧卡的结果相同。
+gaps:
+  - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(I) 是四条路线中唯一同时定出 D 与 a、唯一以当且仅当形式给出 D 的一条」「(III)(IV) 的判据是同一个数 c^m − 26 = 0」「(I) 与 (II)(III)(IV) 的等价在本图中无节点」等，都是对**本图现有节点**的比较与分类，不是任何来源中的陈述。它们随图的演化而可能失效（例如若日后建了 (I) ⟺ (II) 的等价节点）。这是本推导标 physical-argument 的主要理由之一。"
+  - "**本推导不主张四条路线互相蕴含**：四者只是各自挑出同一组 (D, a) = (26, 1) 或同一个 c^m = 26。其中 (II) 与 (III) 之间的严格等价已有节点 worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0；Kato–Ogawa 1983 提出，FGZ 1986 Theorem 2.8 第一个同构严格证明），本推导**仍不**把它加为依赖，因为目标是四条路线的**合取**而非等价链；若日后要把目标改写成「路线互相等价」，必须显式依赖该节点。(I) 与 (II)(III)(IV) 之间的等价仍无节点。"
+  - "**(III)(IV) 不是两份互相独立的证据**：两条共享 c^g = −26 与 c^m = D 两个输入（现已是本推导的显式依赖边），判据是同一个数 c^m − 26 = 0；若这两个输入中任一个算错，两条路线同时失效。目标卡片已在【\"独立\"的确切含义】一节写明这一点，本 gap 只作强调。"
+  - "**四条路线各自的非严格步骤**（详见各路线节点自己的 gaps，此处只列封顶原因）：(I) 零点能 Σ n = ζ(−1) = −1/12 的 ζ 正规化无算子层面定义，且 [J^{i−}, J^{j−}] 的计算涉及无穷模式和的重排与正规序重整，文献按形式操作处理；(II) 图中的推导链本身是 rigorous，但 2026-09-11 起其有效状态为 physical-argument（no-ghost-theorem-v4 的 DDF 支链拆卡后由 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra 两张 physical-argument 卡承载），且来源可追溯性弱（goddard-thorn-1972 正文未获取，只有摘要末句）；(III) 反方向 c^m = 26 ⟹ Q_B² = 0 **没有文献来源**（kato-ogawa-1983 摘要只给「⟹」；FGZ 与 Lian–Zuckerman 把 c = 26 当作假设），只有 Polchinski §4.3 的形式计算；(IV) 路径积分测度的 Weyl 变分、Faddeev–Popov 手续、以及「有反常 ⟹ 理论不一致」这一步都是物理论断（非临界弦/Liouville 说明 c^{tot} ≠ 0 并非绝对不可处理）；(V) 两条推导的输入分别是「谱须组织成洛伦兹小群表示」与「伪态必须解耦」，都是一致性要求而非定理。"
+  - "**(IV) 的来源定位是本推导最弱的一处**：结论的公式号完全未核实，且尚未人工确认 Polchinski §3.4 写的是「c^m = 26」还是直接写「D = 26」（抽取记录 E53/Q6）。若原书只写 D = 26，则 worldsheet.critical-dimension-weyl-anomaly 的陈述强于来源，须相应修订，本卡 (IV) 也要跟着改。"
+  - "**c^m = D 那一步的来源位置本身很弱**：Polchinski §2.4 末至 §2.5 初既无式号也无页码锚点（#E34/Q4，抽取记录中唯一一条如此的核心陈述），必须人工核对。缓解：该命题另有 Lean 证明（worldsheet.free-boson-central-charge-d--via-lean，formalized），故这一步的正确性不依赖该处定位，只是**文献可追溯性**弱。"
+  - "**(II) 的适用范围限于非退化动量扇区**，且「D > 26 时存在负模物理态」也限于非零动量。目标卡片已写明，本 gap 只提醒：任何把 (II) 读成「对全部动量成立」的下游用法都是错的，细则见 graph/milestones/no-ghost-theorem.yaml。"
+notes: |
+  本推导由 curator 于 2026-09-11 按 ms.critical-dimension-bosonic 起草者在 canonical_text
+  末段 D1–D4 中提出的建议新建，与旧推导
+  worldsheet.critical-dimension-bosonic--via-three-routes 并存（后者内容未动，
+  它是旧卡 worldsheet.critical-dimension-bosonic 的推导，不指向本卡的目标）。
+author: curator
+created: "2026-09-11"
