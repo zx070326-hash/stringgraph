@@ -29,6 +29,30 @@
   year      = {2013}
 }
 
+@book{lieb-loss-2001,
+  author    = {Lieb, Elliott H. and Loss, Michael},
+  title     = {Analysis},
+  edition   = {2},
+  series    = {Graduate Studies in Mathematics},
+  volume    = {14},
+  publisher = {American Mathematical Society},
+  address   = {Providence, RI},
+  year      = {2001},
+  note      = {数学侧一手来源，登记于 2026-09-10（researcher）。
+               **第 6 章「Distributions」全章已核实（L1，逐页读扫描页图）**，获取途径：多伦多大学 MAT1000 课程页公开挂出的整章扫描
+               https://www.math.utoronto.ca/almut/MAT1000/LL-6.pdf （WebFetch 落盘后用 Read 带 pages 读图；书上 p.135--170）。
+               可引用的编号结果：**Theorem 6.20 (Distributional Laplacian of Green's functions), p. 156** 逐字为
+               「In the sense of distributions, -Delta G_y = delta_y, where delta_y is Dirac's delta measure at y (often written as delta(x-y))」，带完整证明；
+               Green 函数的定义在 **p. 155 式 (2)**：n = 2 时 G_y(x) = -|S^1|^{-1} ln(|x-y|) = -(1/2pi) ln|x-y|，n != 2 时 G_y(x) = [(n-2)|S^{n-1}|]^{-1}|x-y|^{2-n}，
+               并明确写 Laplacian 的定义 Delta := sum_i partial^2/partial x_i^2（正号，无号差歧义）。
+               **Theorem 6.21 (Solution of Poisson's equation), p. 157** 是配套的 -Delta(G*f) = f。
+               **用途与陷阱**：图节点 laplacian-log-contact-term 要的是 **6.20**（-Delta Phi = delta 本身），不是 6.21；
+               从 6.20 换算到 Polchinski (2.1.24) 的 2pi 系数，必须同时用上 Polchinski 前言 p. xviii 的 delta 归一化
+               （delta^2(z,zbar) = (1/2) delta(sigma^1) delta(sigma^2)）与 (2.1.7) 的 d^2 z = 2 dsigma^1 dsigma^2，否则差因子 2。
+               版次/系列/卷号/出版方由扫描件书名页 L1 核实；**出版年 2001 不在该页上（版权页未含），按 AMS 目录记，为 L2**。
+               页码只对第 2 版有效。见 extractions/math-sources.md §2--§5。}
+}
+
 @article{goddard-thorn-1972,
   author  = {Goddard, Peter and Thorn, Charles B.},
   title   = {Compatibility of the dual Pomeron with unitarity and the absence of ghosts in the dual resonance model},
