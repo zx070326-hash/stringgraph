@@ -1,0 +1,121 @@
+id: worldsheet.free-boson-central-charge-d--via-lean
+target: worldsheet.free-boson-central-charge-d
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供被断言的对象本身：Lean 里 `Fock.Lop η a n` 就是该节点定义的 L_n
+      （产生-湮灭正规序、局部有限和），依赖是字面的——`lie_Lop_Lop` 的陈述里
+      出现的正是 `Lop`，同一文件同一命名空间。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间与振子代数：`Fock D R = MvPolynomial (Osc D) R`、`Fock.creation` /
+      `Fock.annihilation` 都来自 formal/StringFormal/NoGhost/Fock.lean，
+      Sugawara.lean 直接 `import StringFormal.NoGhost.Fock` 并在其上定义 `mode`、`nordPair`、`Lop`。
+      本推导用到的 level 分级（`levelSubmodule`）与「湮灭算符降 level」也来自该文件。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.lie_Lop_Lop"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189（"merge: Sugawara construction on
+      the Fock space, Virasoro relations with c = D (formalizer)"），形式化提交
+      c567dab9204441549ad9dd6719e6b766bb5f005b；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的全部声明（同一文件、同一命名空间 `StringFormal.NoGhost.Fock`）：
+        · 定义    `mode`, `nordPair`, `Lop`, `zeroModeSq`, `vircoeff`, `virW`
+        · 步骤 1  `lie_mode_mode`, `lie_Lop_mode`
+        · 步骤 2  `eq_smul_id_of_lie_mode`（刚性/不可约性）, `virW_apply`, `vircoeff_eq`
+        · 步骤 3  `vircoeff_eq_zero_of_add_ne_zero`（m + n ≠ 0 时中心项为零）
+        · 步骤 4  `vircoeff_diag`（对角递推的解），基值在 `BaseValues` 一节
+        · 结论    `lie_Lop_Lop`
+      文件自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **本推导未由 curator 重新运行 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
+      以及 7af81b1 已由 lead 合并进 main。自动化公理检查（formal/TODO.md 的
+      scripts/check_axioms.lean）仍未做，做出来后应在本条补一行结果。
+  - ref: virasoro-lean-2025
+    loc: "Theorem 10.1 + Corollary 10.2（单个 Heisenberg 族的 Sugawara 构造给 c = 1）"
+    note: |
+      **旁证，不承载本推导的论证**：本推导的证明全部在本仓库 Sugawara.lean 内，
+      与 Kytölä 的 Lean 代码无共享（文件头注明 "Written from scratch against Mathlib v4.33.1;
+      not a port of any existing formalisation"）。列在此处是为了说明与
+      worldsheet.free-boson-central-charge-d--via-mode-algebra 的关系：那条推导以
+      Kytölä 的 c = 1 为主来源、再靠「D 个对易拷贝」外推到 c = D（那一步不在来源里，是该条的 gap）；
+      本推导**直接**在 D 分量、带 η 的设定下证出 c = D，不需要那一步外推。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/Sugawara.lean 内完成。
+  **不是**直接重排求和的算法（那是 --via-mode-algebra 的路线），而是「刚性 + 2-上圈递推」：
+
+  0. 设定。η : Fin D → R 是对角度规的分量，零模 α^μ_0 是标量参数 a^μ = (2α')^{1/2} k^μ；
+     `mode η a μ j` 统一给出 j > 0 湮灭、j < 0 产生、j = 0 标量；
+     `nordPair η a i j = :α_i · α_j:`（i ≤ j 时不换序，否则换序）；
+     L_n = ½ Σ_{j∈Z} :α_{n-j} α_j: 由 `lsumLocFin` 实现——对每个 P ∈ Fock D R 只有有限多项非零
+     （`modeBound` + `nordPair_apply_eq_zero_of_modeBound_lt`），不需要任何收敛性假设。
+
+  1. `lie_Lop_mode`：[L_m, α^ν_p] = -p α^ν_{m+p}。Sugawara 和式中只有 j = -p 与 j = m + p
+     两项与 α^ν_p 不对易，由 `lie_mode_mode`（[α^μ_m, α^ν_p] = m η^{μν} δ_{m+p,0}）展开即得。
+     这一步用到 hη：缩并指标的 η 与对易关系里的 η 是同一个函数，需 η_{μμ} η^{μμ} = 1。
+
+  2. 记 W_{m,n} := [L_m, L_n] - (m-n) L_{m+n}。由步骤 1 与 Jacobi 恒等式，W_{m,n} 与**每个**模对易；
+     再由 `eq_smul_id_of_lie_mode`（Fock 模在振子代数上的不可约性/刚性：与所有模对易的自同态是标量）
+     得 W_{m,n} = z(m,n) · id，标量 z(m,n) = `vircoeff η a m n` 定义为 W_{m,n}(1) 的常数项。
+
+  3. z(m,0) = 0（n < 0 时 L_n P 的常数项为零，`constantCoeff_Lop_apply_of_neg`）。
+     把 Jacobi 恒等式作用在 W 上，z 满足 Virasoro 2-上圈恒等式，由此
+     **m + n ≠ 0 ⟹ z(m,n) = 0**（`vircoeff_eq_zero_of_add_ne_zero`），
+     对角上得到递推 (m-1) z(m+1,-(m+1)) = (m+2) z(m,-m)。
+
+  4. 两个基值在真空上算出：z(1,-1) = 0，z(2,-2) = D/2。**因子 D 恰好在这里进入一次**，
+     形式是 Σ_{μ=0}^{D-1} η^{μμ} η_{μμ} = Σ_μ 1 = D——这正是 hη 的用处。
+     代入递推得 z(m,-m) = D (m³ - m)/12（`vircoeff_diag`）。
+
+  5. 合起来即 `lie_Lop_Lop`：
+       [L_m, L_n] = (m - n) L_{m+n} + [m+n=0] · D · (1/12)(m³ - m) · id,
+     与 conv.virasoro-standard 的 (c/12) m(m² - 1) δ_{m+n,0} 逐字一致（m³ - m = m(m² - 1)），
+     读出 c = D。
+gaps:
+  - |
+    **「c = D」的精确含义是 Σ_{μ} η^{μμ} η_{μμ} = D，Lean 中由假设
+    `hη : ∀ μ, η μ * η μ = 1` 提供**（formalizer 2026-09-11 明确要求登记的第 (i) 条）。
+    Lean 里 η 是**对角**度规的分量函数 `Fin D → R`，而同一个 η 既用于缩并 α_p · α_q
+    的时空指标、又提供对易关系中的 η^{μν}；这只有在 η_{μμ} = η^{μμ} 时才正确，
+    故每条实质定理都带 hη。`Fock.minkowski D R`（= conv.metric-mostly-plus 的
+    diag(-1,+1,…,+1)）满足 hη，因此本节点在其声明的约定下确实被覆盖。
+    但**一般的非对角 η^{μν} 没有形式化**（继承 worldsheet.bosonic-fock-space 缺口 (iii)）；
+    在 ℝ 上可对角化故不损失一般性，形式化侧确实没做那次基变换。
+  - |
+    **陈述末句「反全纯部门同理给出 c̄ = D」不在 Lean 里**。Sugawara.lean 只有一套模 α^μ_n，
+    没有 ᾱ^μ_n，也没有左右行部门的直积。对开弦（doubling trick 后只有一套 Virasoro）
+    这不构成缺口，对闭弦构成缺口。
+  - |
+    **零模是标量参数，没有 x^μ**（formalizer 第 (iii) 条）。Lean 里 α^μ_0 = `a μ • id`，
+    a : Fin D → R 代表 (2α')^{1/2} k^μ。这对本条的内容无影响——中心项与 a 无关，
+    `vircoeff` 的计算中 zeroModeSq 的贡献全部相消——但意味着被证的是**逐动量扇区**上的
+    算符恒等式，不是完整弦 Fock 空间（对 k 的直积分）上的。
+  - |
+    **R 必须是交换 ℚ-代数**（`[Algebra ℚ R]`）：`Lop` 里有 ½，中心项里有 1/12。
+    ℝ、ℂ 满足。worldsheet.bosonic-fock-space 那种「任意交换环」的一般性在这里丢掉。
+  - |
+    **代数版 Fock 空间，未取完化**，且本推导**完全不涉及内积**：Sugawara.lean 没有一条
+    把 `Fock.Lop` 与 worldsheet.fock-indefinite-form 的 `Fock.pairing` 联系起来的引理，
+    特别是 **L_m^† = L_{-m} 未证**。因此下游任何用到正定性/幺正性的结论都不能引本条为据。
+  - |
+    继承 --via-mode-algebra 的第二条 gap，且在形式化下更尖锐：本条使 c = D 作为
+    **振子代数的 Fock 表示上的代数命题**成为 formalized，但「c = D 是二维自由标量 CFT 的中心荷」
+    这一**物理**陈述仍封顶在 physical-argument——Lean 侧没有 T、没有 OPE、没有态-算子同构，
+    两种 L_m 定义（振子模式 vs 全纯 T 的 Laurent 模）**未被证明等同**
+    （Sugawara.lean 文件头 "Mathematical gaps" 第 5 条）。
+    需要 CFT 侧 L_m 的下游节点应引 --via-ope，不能引本条。
+notes: |
+  与 worldsheet.free-boson-central-charge-d--via-mode-algebra 并存，两条**不是同一个论证**：
+  --via-mode-algebra 走「直接把 [L_m, L_{-m}] 里的 α_k·α_{-k} 重排成正规序、
+  求和 (1/2) D Σ_{k=1}^{m-1} k(m-k)」；本条走「刚性 + 2-上圈递推 + 两个基值」，
+  中心项从来没有被直接求和算出来。保留前者的价值：它对应文献（Kytölä Thm 10.1 / Kac–Raina）
+  的实际论证路线，且 reviewer-ch23 已独立复核过那个求和。
+
+  本条 status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  与 fock-indefinite-form--via-lean 一样，curator 未自行重跑 lake build。
+author: curator
+created: "2026-09-11"

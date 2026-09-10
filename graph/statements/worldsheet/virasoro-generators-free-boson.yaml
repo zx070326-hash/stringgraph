@@ -1,6 +1,6 @@
 id: worldsheet.virasoro-generators-free-boson
 kind: definition
-status: rigorous
+status: formalized
 title: "自由玻色子 Fock 空间上的 Virasoro 生成元 L_m = (1/2) Σ_n : α_{m-n} · α_n :"
 statement: |
   设 D 个自由玻色子的振子代数由厄米生成元 α^μ_n（μ = 0,…,D-1；n ∈ Z）张成，满足
@@ -20,12 +20,32 @@ statement: |
   **良定义性**：对每个 v ∈ F 存在 N 使 α^μ_n v = 0 对所有 n > N；由于正规序把湮灭算子放在右边，
   和式 Σ_{n∈Z} : α_{m-n}·α_n : v 只有有限多项非零。故每个 L_m 是 F 上处处有定义的线性算子，
   无需任何收敛性假设。
-uses: []
+uses:
+  - worldsheet.bosonic-fock-space
 uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge
   - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.Lop
+  lean_file: StringFormal/NoGhost/Sugawara.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.{mode, nordPair, Lop}；良定义性 StringFormal.NoGhost.{lsumLocFin, lsumLocFin_apply} 与 Fock.{modeBound, nordPair_apply_eq_zero_of_modeBound_lt, nordPair_apply_eq_zero_of_notMem_LopIdx, Lop_apply}；振子代数 Fock.lie_mode_mode；L_0 的显式形 Fock.{nordPair_zero_zero, zeroModeSq, Lop_zero_apply_one, Lop_zero_apply_of_mem_levelSubmodule}"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189（"merge: Sugawara construction on the
+      Fock space, Virasoro relations with c = D (formalizer)"），形式化提交 c567dab9204441549ad9dd6719e6b766bb5f005b。
+      这是本节点 status: formalized 的依据（证据标准见 literature/sources.bib 的 stringformal-2026 条目）：
+        · L_m 的定义       → `Fock.Lop η a n = invTwo R • lsumLocFin (fun j => nordPair η a (n - j) j) …`
+        · 模 α^μ_j（j 任意整数，j>0 湮灭 / j<0 产生 / j=0 标量） → `Fock.mode`
+        · 产生-湮灭正规序 :α_i·α_j:  → `Fock.nordPair`（i ≤ j 时不换序，否则换序）
+        · 振子代数 [α^μ_m, α^ν_p] = m η^{μν} δ_{m+p,0} → `Fock.lie_mode_mode`
+        · **良定义性**（对每个向量只有有限多项非零，不需任何收敛性假设）→ `lsumLocFin` 的构造本身，
+          有限性由 `Fock.modeBound` + `nordPair_apply_eq_zero_of_modeBound_lt` 给出，
+          `Fock.Lop_apply` 说明「任何足够大的有限和都算出同一个 L_n」
+        · L_0 = (1/2) α_0·α_0 + Σ_{n≥1} α_{-n}·α_n → `Fock.Lop_zero_apply_of_mem_levelSubmodule`
+          （在 level N 片上 L_0 = (½ α_0·α_0 + N)·id）与 `Fock.Lop_zero_apply_one`（真空上 L_0 = α'k²）
+      全部无 sorry；差异与未覆盖的部分见 notes 的【Lean 对接：已覆盖与未覆盖】。
   - ref: polchinski-1998-v1
     loc: "§2.7, eq. (2.7.25)、(2.7.27)（开弦的 L_m 与零模 α_0 = (2α')^{1/2} p），p.58 起"
     note: |
@@ -58,6 +78,9 @@ notes: |
   与 formal/ 的接口：formalizer 正在建的自由玻色子 Fock 空间（formal/StringFormal/NoGhost）
   与本节点对应；若 Lean 侧完成 L_m 的定义，可在本节点填 formal.lean_decl。
 
+  ⚠ **以下这一段（2026-09-10 跨分支补注）的结论已被 2026-09-11 的更正推翻，保留以存档；
+  实际结论见本 notes 末尾【2026-09-11 更正：底空间相同，本节点现 uses bosonic-fock-space】。**
+
   **与 worldsheet.bosonic-fock-space 的关系（2026-09-10 跨分支补注）**：
   Fock 空间的形式化定义现已单独建卡 worldsheet.bosonic-fock-space
   （status: formalized，对应 formal/StringFormal/NoGhost/Fock.lean），
@@ -71,5 +94,74 @@ notes: |
   因此本节点**不**写 `uses: [worldsheet.bosonic-fock-space]`——两者的底空间不同，
   写成依赖会给出「L_0 已在形式化的 Fock 空间上有定义」的错误印象。
   m ≠ 0 的 L_m 也同样含 α_0（出现在 n = 0 与 n = m 两项里），不能直接落到无零模的 F(D,R) 上。
+
+  **【2026-09-11 更正：底空间相同，本节点现 uses bosonic-fock-space】**（curator，依据
+  formal/StringFormal/NoGhost/Sugawara.lean，合并提交 7af81b1）。上一段的判断「两者的底空间不同」
+  是在 Lean 侧还没有 L_m 时下的，现在不成立。理由：
+
+  本节点的 Fock 空间 F 是**由单个 |0;k⟩ 用 α^μ_{-n}（n > 0）生成**的（见 statement 首段），
+  而本节点自己写出的对易关系 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0} 取 m = 0 即给出
+  [α^μ_0, α^ν_n] = 0 对**一切** n（前因子 m = 0），特别是与全部产生算符 α^ν_{-n} 对易，
+  配合 α^μ_0 |0;k⟩ = √(2α') k^μ |0;k⟩，
+  **α^μ_0 在整个 F 上就是标量 √(2α') k^μ 乘法**。这不是额外假设，是从本节点 statement 文本
+  两句话直接推出的。于是 F 作为向量空间、连同其上的产生/湮灭算符，
+  **恰好就是** worldsheet.bosonic-fock-space 的 F(D,R)，零模只贡献一个标量参数。
+  Lean 侧正是这样做的：`Fock.mode η a μ 0 = a μ • id`，其中 `a : Fin D → R` 是参数，
+  文件头注明 `a^μ = α^μ_0 = (2α')^{1/2} k^μ`。因此 `uses: [worldsheet.bosonic-fock-space]` 成立，
+  且 L_m（含 m = 0）确实落在 F(D,R) 上，不需要先扩张定义。
+
+  仍然为真、且未被推翻的是：**算符 x^μ 与对 k 的直积分没有形式化**，
+  完整的弦 Fock 空间是这一族空间按 k 的直和/直积分（见下面【未覆盖】(3)）。
+
+  **【Lean 对接：已覆盖与未覆盖】**（curator 2026-09-11，逐条对照 statement 文本）
+
+  已覆盖（对应声明见 sources 第一条）：振子代数、Fock 空间与真空、L_m 的显式正规序定义、
+  L_0 = ½ α_0·α_0 + Σ_{n≥1} α_{-n}·α_n、以及**良定义性**（局部有限和，无收敛性假设）。
+
+  未覆盖 / 有条件覆盖 —— 这些是本节点标 formalized 时必须一并读的限定：
+
+  (1) **η 必须对角且 η^{μμ} η_{μμ} = 1**。Lean 里 η 是 `Fin D → R`（对角元），
+      且每一条实质定理都带假设 `hη : ∀ μ, η μ * η μ = 1`。原因是 Lean 用**同一个** η
+      既缩并 α_p · α_q 的时空指标、又给对易关系提供 η^{μν}，这只有在 η_{μμ} = η^{μμ} 时才对。
+      `Fock.minkowski D R = fun μ => if μ = 0 then -1 else 1`（即 conv.metric-mostly-plus）满足它。
+      一般的非对角 η^{μν} 未覆盖（继承 bosonic-fock-space 缺口 (iii)）。
+
+  (2) **a^X = 0 在 Lean 里是定义，不是定理**。Sugawara.lean 采用产生-湮灭正规序，
+      定义里就没有加任何常数，于是 `Fock.Lop_zero_apply_one` 给出 L_0|k⟩ = α'k²|k⟩。
+      这**不**构成 worldsheet.normal-ordering-constant-ax 的形式化证明——那条断言的是
+      「共形正规序的 L_0 与产生-湮灭正规序的 L_0 相差 a^X 且 a^X = 0」，
+      需要先形式化共形正规序/Laurent 模侧的 L_0，见下面 (4)。
+
+  (3) **零模是标量参数，没有 x^μ**。Lean 只有动量本征值 `a : Fin D → R`，
+      没有位置算符 x^μ，也没有对 k 的直积分。对无鬼定理够用（它逐动量成立），
+      但「弦的完整 Fock 空间」是另一回事。
+
+  (4) **两种 L_m 定义未被证明等同**（formalizer 记录的缺口，Sugawara.lean 文件头 "Mathematical
+      gaps" 第 5 条）：本节点的 L_m（振子双线性 + 产生-湮灭正规序）与
+      worldsheet.energy-momentum-laurent-modes 的 L_m（全纯 T 的 Laurent 系数、围道积分、
+      共形正规序）在 Lean 中**没有**任何联系——Lean 侧根本没有 T、没有 OPE、没有围道。
+      「两者是同一组算子」这件事在本图里也没有独立节点（见本 notes 上文，
+      它被写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里）。
+      任何需要 CFT 侧 L_m 的下游结论都不能引本节点的 formalized 状态。
+
+  (5) **L_m^† = L_{-m} 未证**（formalizer 记录的缺口，同上第 5 条）。
+      Sugawara.lean 完全不涉及 worldsheet.fock-indefinite-form 的 `Fock.pairing`：
+      文件里没有一条把 `Fock.Lop` 与 `Fock.pairing` 联系起来的引理。
+      这是**无鬼定理所必需**的一步（物理态条件 L_n|ψ⟩ = 0 与内积正定性之间的桥），
+      因此无鬼定理的形式化岛在此处仍有缺口。已同步登记在
+      worldsheet.old-covariant-physical-states 的 notes。
+      顺带：statement 首段的 `(α^μ_n)^† = α^μ_{-n}` 一句，其 Lean 对应只有
+      Fock.lean 的 `pairing_creation_left` / `pairing_creation_right`（**n ≥ 1**，
+      且是任意交换环上**双线性型**意义下的伴随，不是 ℂ 上的 Hermitian 共轭，
+      见 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）；
+      n = 0 的情形（标量自伴）只是一步展开，但 Sugawara.lean 没有写。
+      **这是本节点 statement 文本中 Lean 覆盖最弱的一句**，若 reviewer 认为
+      它足以否定 formalized，应降回 rigorous 并在此记录裁决。
+
+  (6) **R 必须是交换 ℚ-代数**。`Fock.Lop` 用到 `invTwo R`（½），中心项用到 1/12，
+      故 Sugawara.lean 的 `Lop` 一节起 `variable [Algebra ℚ R]`。ℝ、ℂ 满足；
+      bosonic-fock-space 那种「任意交换环」的一般性在这里丢掉了。
+
+  (7) **代数版，未取完化**（继承 bosonic-fock-space 缺口 (ii)）。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
