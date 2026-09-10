@@ -58,7 +58,7 @@
 
 ### Git 纪律
 - 主分支 `main`。每个 agent 任务在自己的 worktree 上开分支：`agent/<role>/<slug>`，worktree 放在 `.claude/worktrees/`（已 gitignore）。
-- 只由 `lead` 合并到 `main`。合并前跑 `uv run stringgraph validate` 和 `uv run pytest`。
+- 只由 `lead` 合并到 `main`。合并前跑 `uv run stringgraph validate` 和 `uv run pytest`；含 `formal/` 改动的分支还要 `lake build` 与 `uv run stringgraph check-axioms`。
 - 禁止 `push --force`、`reset --hard`、改写历史。
 - 提交信息格式：`<scope>: <动词开头的一句话>`，scope 取 `graph|tools|formal|lit|docs|claude`。例：`graph: add no-ghost theorem chain (worldsheet)`。
 - 每个提交只做一件事。图数据改动和工具改动分开提交。
@@ -79,6 +79,7 @@ uv run stringgraph search <keyword>   # 新增前查重
 uv run stringgraph dot > graph/build/graph.dot   # 导出 Graphviz
 uv run pytest                         # 工具测试
 cd formal && lake build               # 构建 Lean 形式化
+uv run stringgraph check-axioms       # 全图 lean_decl 的公理检查（需先 lake build；合并 formal 分支前必跑）
 ```
 
 ## 当前阶段
