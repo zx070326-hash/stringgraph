@@ -6,7 +6,7 @@ depends_on:
   - id: worldsheet.light-cone-quantization
 sources:
   - ref: gsw-1987-v1
-    loc: "§2.3.1（[J^{i-}, J^{j-}] 的显式模式计算，给出 Δ_n）"
+    loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算，给出 Δ_n）"
     note: GSW 用 mostly-minus 号差与 α' = 1/2 归一化；Δ_n 的形式不受影响，整体因子已按 conv.alpha-prime-regge 转写。
   - ref: polchinski-1998-v1
     loc: "§1.3，约 eq. (1.3.30)–(1.3.36)（零点能与质量壳），习题 1.3（洛伦兹代数的直接验证）"
