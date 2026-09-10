@@ -1,0 +1,110 @@
+id: worldsheet.ddf-operators-preserve-positive-mode-conditions--via-lean
+target: worldsheet.ddf-operators-preserve-positive-mode-conditions
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-commute-with-nonzero-virasoro
+    inferred: false
+    note: |
+      **本推导的唯一实质输入**：[L_m, A^ε_n] = 0。Lean 的证明实际调用的是 m ≥ 1 的先行版本
+      `lie_towerLop_ddfOp_of_pos`（`formal/StringFormal/NoGhost/DDFOperator.lean`），
+      它是该卡目标声明 `lie_towerLop_ddfOp_of_ne`（m ≠ 0）的特例。
+      本边指向 m ≠ 0 的卡而不是另立 m ≥ 1 的卡，是 lead 2026-09-11 的裁决
+      （不建 positive 版本）；这条边**比 Lean 实际用到的更强**，不影响 formalized。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      被作用的算子 A^ε_n（Lean `ddfOp η a b ε hη hεb n`，即该卡的 formal.lean_decl）。
+      前提 (T) ε·k_0 = 0 是 `ddfOp` 的显式参数 `hεb`；(N)(S) 是本定理的假设 `hbb`、`hba`。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      **被保持的条件的出处**：目标里的 P(p;k_0) = {Ψ | L_m Ψ = 0 ∀ m ≥ 1} 就是这张卡的
+      物理态条件 (i)（Lean 侧单 Fock 版是 `Fock.physSubmodule` 的正模因子；
+      塔上版本是 `towerPositiveModeSubmodule`，`TowerPhysical.lean` 新定义）。
+      ⚠ 本推导**只**用到条件 (i)，不用条件 (ii)（质壳 (L_0 − a₀)Ψ = 0）；
+      目标卡的【明确不断言】(a) 已写死这一点。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      塔 T(p;k_0) 与逐层作用的 L_m（`towerLop`，第 j 层用动量 a + j·b）。
+      「A^ε_n 把 P 映入 P」这句话只有在塔上才有意义：L_m 不移动层，A^ε_n 移动 n 层。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      条件里的 L_m 本身（Sugawara `Fock.Lop`，逐层装在塔上）。
+      ⚠ 本推导**不**使用 Virasoro 括号 [L_m, L_n] 或中心荷。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/TowerPhysical.lean :: StringFormal.NoGhost.ddfOp_mem_towerPositiveModeSubmodule（目标声明，第 111 行）；towerPositiveModeSubmodule（第 84 行，子空间定义）与 mem_towerPositiveModeSubmodule（第 90 行，展开引理）；上游 formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.lie_towerLop_ddfOp_of_pos。同文件另有 towerL0Submodule（第 139 行）、towerPhysSubmodule（第 156 行）、invTwo_zeroModeSq_towerMomentum_add_shift_cancel（第 174 行），**均不被本推导使用**"
+    note: |
+      本仓库，合并提交 57fce31，Lean 4 + Mathlib v4.33.1，无 sorry。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11，(5.4) 的引出句：「they can be used to generate physical states because they commute with the Virasoro algebra」"
+    note: |
+      **不承载论证**，只定位文献里同一句话的表述。该文不区分 m ≥ 1 与 m = 0，
+      故它断言的是本推导结论的**加强版**（完整物理态保持）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3, p.102–112（式号未核实）"
+    note: |
+      **不承载论证**。文献侧同样一次性断言完整的物理态保持，不拆出正模那一半。
+summary: |
+  机器检查的证明，在 formal/StringFormal/NoGhost/TowerPhysical.lean。**一行代数**。
+
+  子空间的定义（Lean `towerPositiveModeSubmodule η a b`）逐字是
+    ⨅_{m : ℤ} ⨅_{0 < m} ker (towerLop η a b m)，
+  展开引理 `mem_towerPositiveModeSubmodule` 把它化为「∀ m > 0, L_m Ψ = 0」。
+  它是子模，因为它是线性映射核的交。
+
+  设 Ψ ∈ P，取 m ≥ 1。由上游 [L_m, A^ε_n] = 0（Lean `lie_towerLop_ddfOp_of_pos`，
+  在 (N) k_0² = 0、(S) 2α' k_0·p = 1、(T) ε·k_0 = 0 之下）把括号展开为
+    L_m ∘ A^ε_n = A^ε_n ∘ L_m ，
+  作用在 Ψ 上：
+    L_m (A^ε_n Ψ) = A^ε_n (L_m Ψ) = A^ε_n 0 = 0 。
+  对一切 m ≥ 1 成立，故 A^ε_n Ψ ∈ P。∎
+
+  Lean 里就是 `rw [h', hΨ m hm, map_zero]` 三步（`h'` 是把
+  `LieRing.of_associative_ring_bracket` 展开并 `sub_eq_zero` 之后的交换律）。
+
+  **n 无限制**（含 n = 0），与 worldsheet.ddf-operators-v6 的 (2) 一致。
+gaps:
+  - |
+    **不覆盖质壳（L_0）条件，故不能推出「A^ε_n 把物理态映为物理态」**。
+    需要 [L_0, A^ε_n] = 0，即共形权恒等式的 m = 0 情形，**未形式化**
+    （根在单 Fock：Sugawara 求和在 m = 0 时 j = 0 与 j = m 两项重合，
+    见 worldsheet.exponential-vertex-operator-mode-weight-identity 的 gaps 第 1 条）。
+    Lean 侧 `towerPhysSubmodule`（含两条条件的塔上物理子模）**已定义但没有保持性定理**。
+    ⚠ 注意 **L_0 那一侧的层依赖不是障碍**：`towerLop η a b 0` 在第 j 层已用该层动量，
+    (L_0 − a₀)Ψ = 0 是统一条件，本征值 α'k² + j + N 在 A^ε_n 的「层 +n、能级 −n」
+    移位下不变（Lean `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`，
+    且与求和指标 j 无关）。缺的**只有那个括号**。
+  - |
+    **只断言"映入"，不断言"映满"或"单"**：本推导对 A^ε_n 在 P 上的像一无所知，
+    也不断言 A^ε_n ≠ 0。DDF 态张成物理谱是完全另一件事（formal/TODO.md 的 `ddf-spans`，未做）。
+  - |
+    **P(p;k_0) 上没有任何正定性内容**。无鬼定理要的是内积的正定性，
+    本推导只谈线性子空间的保持。塔上的配对见 worldsheet.momentum-tower-fock-space
+    （其层间正交是**约定式**定义，不是被证明的）。
+  - |
+    **与文献路线没有共同步骤**。文献（GSW、goddard-2008）从「被积量是权 1 primary」
+    经 OPE + 围道形变一次性得到完整物理态保持；本推导是塔上的代数推理，且只覆盖一半。
+    更根本地：**「本图/Lean 的 A^ε_n 与文献的围道积分 A^i_n 是同一个算子」在本图中没有节点承载**
+    （worldsheet.ddf-operators-v6 notes 登记的 open 缺口）。回译到文献时必须引用它。
+  - |
+    **一般交换 Q-代数，无实结构**。(N)(S) 只作为给定数据，其可满足性未证；
+    k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **本推导的所有依赖都是 formalized**，故有效状态确实是 formalized。
+  这正是把「DDF 保持物理态」拆成正模一半 + 质壳一半的目的：
+  Lean 已做到的那一半不再被未做的那一半拖低。
+  ⚠ 代价是结论变弱：**本推导不支持任何需要质壳条件的下游**，
+  首当其冲是 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的第 (1b) 步
+  （那里需要"A^i_{−n} 生成的全部态都是物理态"，含质壳）。那条推导仍走
+  worldsheet.ddf-commute-with-virasoro（effective = physical-argument），**不改挂本卡**。
+author: curator
+created: "2026-09-11"

@@ -181,5 +181,29 @@ notes: |
     又缺塔上的物理子模定义（Lean `Fock.physSubmodule` 只在单个 Fock 空间上，
     DDFOperator.lean 文件头 "What is NOT here" 第 3 条）。
   因此「DDF 算子把物理态映为物理态」在本图中**仍是 physical-argument**，不得记为已机器验证。
+
+  【2026-09-11（五）续：正模那一半已单独立卡并 formalized；附 formalizer 对 L_0 记账的更正】
+  formal 侧 57fce31 新增 `formal/StringFormal/NoGhost/TowerPhysical.lean`，定义了塔上的
+  正模子空间 `towerPositiveModeSubmodule = {Ψ | L_m Ψ = 0 ∀ m ≥ 1}` 并证明
+  `ddfOp_mem_towerPositiveModeSubmodule`（A^ε_n 保持它）。
+  本推论的**前一半**因此有了独立的 formalized 承载：
+    **worldsheet.ddf-operators-preserve-positive-mode-conditions**（弱节点）。
+  本卡的推论**整体不变、status 不变**（后一半仍缺）。
+
+  ★ **一处必须纠正的记账（formalizer 2026-09-11，curator 转录）**：
+  本图此前有滑向「塔的每一层要用**不同的**截距 a_j = a + j(k_0·p)」的读法。**那是错的。**
+  · 塔上的 L_0（Lean `towerLop η a b 0`）在第 j 层**已经用该层自己的动量** p_j = p + j k_0，
+    所以 (L_0 − a₀)Ψ = 0 是塔向量上一个**完全统一**的条件，a₀ 是**一个**常数；
+  · 在 k_0² = 0 与 2α' k_0·p = 1 之下，第 j 层能级 N 处的 L_0 本征值是
+      α' p_j² + N = α' k² + j + N，
+    故物理条件是 **α' k² + j + N = a₀**——在 (j, N) 平面上是一条**反对角线 j + N = 常数**，
+    **不是**逐层不同的截距；
+  · A^ε_n 沿这条反对角线移动（层 +n、振子能级 −n），本征值不变
+    （Lean `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`，且与求和指标 j 无关）。
+    **这正是 A^ε_n 是权 0 算子的算术理由，也说明层依赖不是障碍。**
+  · 推论：L_0 条件把能级逐层钉死为 N = a₀ − α'k² − j，
+    这就是本卡推论里「A^i_n 把能级移动 −n」那句话的准确内容。
+  ⇒ **剩余障碍只有括号 [L_0, A^ε_n] = 0（formalizer 进行中），不是任何关于截距的额外约定。**
+  这与上一段「⚠ 必须读准的更正」是同一件事的两面：缺的是括号，且那个括号等于零而非 −n A^ε_n。
 author: curator
 created: "2026-09-11"
