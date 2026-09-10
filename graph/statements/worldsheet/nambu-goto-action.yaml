@@ -11,7 +11,7 @@ statement: |
   其中 Ẋ^μ = ∂_τ X^μ, X'^μ = ∂_σ X^μ。
   S_NG 在时空 Poincaré 变换与世界面重参数化（diff）下不变。
 uses: [worldsheet.induced-worldsheet-metric]
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，约 eq. (1.2.9)"

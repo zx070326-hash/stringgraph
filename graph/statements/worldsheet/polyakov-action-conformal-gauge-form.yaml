@@ -1,0 +1,83 @@
+id: worldsheet.polyakov-action-conformal-gauge-form
+kind: proposition
+title: 欧氏 Polyakov 作用量在共形规范下化为二维自由标量的 CFT 作用量（Weyl 因子在 d = 2 脱落）
+statement: |
+  在欧氏世界面上（conv.worldsheet-euclidean）Polyakov 作用量写作
+    S_P^E[X, g] = (1/(4π α')) ∫_M d^2σ  g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ,
+  其中 g_{ab} 号差 (+,+)、g = det g > 0；它由第 1 章的洛伦兹形式
+  S_P^L[X, γ]（worldsheet.polyakov-action）经 Wick 旋转 σ^2 = i σ^0 得到
+  （S_P^L = i S_P^E，前因子由 -1/4πα' 变号为 +1/4πα'；字典见 conv.worldsheet-euclidean）。
+
+  取共形规范 g_{ab} = e^{2 ω(σ)} δ_{ab}（worldsheet.conformal-gauge-fixing 的 (ii) 的中间步骤：
+  先用微分同胚化到共形平坦形式，**暂不**用 Weyl 变换消去 e^{2ω}）。则在世界面维数 d 下
+    g^{1/2} = e^{d ω},   g^{ab} = e^{-2 ω} δ^{ab},   g^{1/2} g^{ab} = e^{(d-2) ω} δ^{ab},
+  故 **d = 2 时 Weyl 因子完全脱落**（这正是 worldsheet.polyakov-weyl-invariance 所说的
+  二维特殊性的作用量层面的表现），于是
+    S_P^E[X, e^{2ω} δ] = (1/(4π α')) ∫ d^2σ  δ^{ab} ∂_a X^μ ∂_b X_μ,
+  与 ω 无关。再取复坐标 z = σ^1 + i σ^2、面积元 d^2 z = 2 dσ^1 dσ^2
+  （conv.worldsheet-complex-coords），并用恒等式
+    δ^{ab} ∂_a X^μ ∂_b X_μ = (∂_1 X)^2 + (∂_2 X)^2 = 4 ∂X^μ ∂̄X_μ,
+  得
+    S_P^E[X, e^{2ω} δ] = (1/(2π α')) ∫ d^2 z  ∂X^μ ∂̄X_μ,
+  这正是 worldsheet.free-scalar-cft-action 的作用量（含前因子）。
+
+  ⚠ 本命题是**局部**陈述：共形规范只在局部成立（worldsheet.conformal-gauge-fixing 明写
+  「至少局部」），故上述等式在每个坐标邻域上成立；全局问题（模空间、共形 Killing 向量、
+  非平凡拓扑上的整体共形平坦化）不在本节点范围。
+  ⚠ 本命题只断言**作用量泛函**相等，**不**断言路径积分测度也与 ω 无关：
+  测度的 Weyl 依赖正是 Weyl 反常的来源（worldsheet.weyl-anomaly-trace），与本命题不冲突。
+  ⚠ 靶空间仍是洛伦兹的（conv.metric-mostly-plus）：本命题只把**世界面**欧氏化，
+  故所得作用量对实的洛伦兹型靶空间仍不正定。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1（p.32 起）：第 2 章以「共形规范 + 欧氏化后的 Polyakov 作用量」为出发点，作用量约 eq. (2.1.10)；**式号与措辞均未核实**"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E25 给出 §2.1 的欧氏自由标量作用量
+      S = (1/2πα') ∫ d^2z ∂X^μ ∂̄X_μ（式号 (2.1.10) 标为近似定位，**未核实**）；
+      复坐标 (2.1.2)、复导数 (2.1.3)、复度规 (2.1.6)、Jacobian (2.1.7) 经 schrans-2020 目录核实。
+      **本图未核实 Polchinski 是否在 §2.1 显式写出「由 (1.2.13) 在共形规范下得到本式」这一步**；
+      本节点的等式链（e^{(d-2)ω} 脱落 → 复坐标改写）是 curator 补出的初等计算，
+      不是来源逐字内容。
+  - ref: polchinski-1998-v1
+    loc: "§3.2–§3.3（p.82–89）：Polyakov 路径积分 ∫ Dg DX e^{-S_P[g,X]} 与共形规范固定；规范固定后物质部门即 §2.1 的自由标量 CFT。式号未核实"
+    note: |
+      §3.3 的 FP 手续（(3.3.16)/(3.3.18)/(3.3.21)/(3.3.24)，式号经 schrans-2020 目录核实）
+      把度规固定到 ĝ = δ，其鬼场部门已由 worldsheet.faddeev-popov-ghost-action 承载；
+      **物质部门的输出**（即本节点）在那条推导的 gaps 中被明确指出「是同一手续的输出，
+      不是输入……若日后建一条『S_P 在共形规范下化为自由标量作用量』的命题，它应以
+      polyakov-action 与 conformal-gauge-fixing 为依赖」。本节点即该命题。
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.19)–(1.2.20)（Weyl 变换 γ'_ab = e^{2ω} γ_ab；(-γ)^{1/2} γ^{ab} 在 d 维带因子 e^{(d-2)ω}）；式号未核实"
+    note: |
+      「Weyl 因子在 d = 2 脱落」这一步的来源与 worldsheet.polyakov-weyl-invariance 相同
+      （抽取记录 #E7，Weyl 变换的写法经 Headrick 习题 1.3 第 (8) 式确认，公式号未核对原书）。
+      本节点用的是它的欧氏版本 g^{1/2} g^{ab} = e^{(d-2)ω} δ^{ab}，形式相同。
+tags: [bosonic-string, action, conformal-gauge, weyl, polyakov, cft, worldsheet]
+notes: |
+  由 curator 于 2026-09-10 新建，目的有二：
+  (1) 补上第 1 章（Polyakov 作用量，洛伦兹）与第 2 章（自由标量 CFT，欧氏）之间缺失的一条边
+      ——在此之前 worldsheet.free-scalar-cft-action 是一张**孤立卡**，图上没有任何东西说明
+      它就是 S_P 在共形规范下的形式；
+  (2) 把「Weyl 因子在 d = 2 脱落」这一步从各节点正文里的顺带一句提升为有来源、有状态的命题。
+
+  **为什么不是 rigorous**：纯代数替换 g_{ab} = e^{2ω}δ_{ab} ⟹ g^{1/2}g^{ab} = δ^{ab} 与
+  δ^{ab}∂_aX∂_bX = 4∂X∂̄X 都是有限步初等计算，按 docs/STATUS_LEVELS.md 的 rigorous 例外
+  本可标 rigorous；但两个条件都不满足：
+    (a) 输入 S_P^E 是由洛伦兹的 S_P^L 经 Wick 旋转得到的，而 Wick 旋转在来源中是形式操作
+        （Polchinski 直接在 §2.1 换到欧氏，不论证），本图也只有约定节点没有陈述节点；
+    (b) STATUS_LEVELS 的例外要求推导 notes 里有 `reviewer-verified: <agent>, <date>`，本推导没有。
+  故按「不确定时选低的那级」标 physical-argument。
+  **升级路径**：若把陈述改写成「纯欧氏」版本（把 S_P^E 当作定义的出发点，不提 Wick 旋转），
+  且经 reviewer 独立复核，则可望升级为 rigorous——那需要新建一条陈述节点
+  （本节点的 statement 文本已提交，不得修改）与一条新推导。
+
+  与 worldsheet.faddeev-popov-ghost-action 的分工：那条给**鬼场**部门（FP 行列式的输出），
+  本条给**物质**部门（X 的作用量）；两者是同一次规范固定的两个输出，
+  故本条不依赖那条，也不被那条依赖。
+author: curator-worldsheet-signature
+created: "2026-09-10"

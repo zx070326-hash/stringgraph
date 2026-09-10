@@ -14,6 +14,7 @@ statement: |
   （共形规范下的形式见 (3.4.18)，任意度规下见 (3.4.19)）。
 uses_conventions:
   - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1

@@ -1,0 +1,62 @@
+id: conv.worldsheet-lorentzian
+family: worldsheet-signature
+title: 世界面号差：洛伦兹（γ_ab 号差 (-,+)，det γ < 0，S_P 前因子 -1/4πα'）
+definition: |
+  世界面度规取**洛伦兹**号差 (-,+)，记作 γ_{ab}，γ ≡ det γ_{ab} < 0，体积元 (-γ)^{1/2} d^2σ，
+  世界面坐标写作 (σ^0, σ^1) = (τ, σ)。Polyakov 作用量写作
+    S_P^L[X, γ] = - (1/(4π α')) ∫_M dτ dσ  (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ,
+  平坦情形 γ_{ab} = diag(-1, +1) 给出 S_P^L = (1/(4π α')) ∫ dτ dσ [ (∂_τ X)^2 - (∂_σ X)^2 ]，
+  即「动能减梯度」的实时作用量；正则量子化与光锥规范用这一写法。
+  诱导度规 h_{ab} = ∂_a X^μ ∂_b X_μ（worldsheet.induced-worldsheet-metric）与 Nambu–Goto
+  作用量中的 (-det h)^{1/2} 也属本约定。
+  本约定是 Polchinski Vol.1 **第 1 章**（经典作用量、边界条件、光锥量子化）的默认；
+  第 2 章起改用欧氏号差，故本节点 canonical: false。
+
+  ── Wick 旋转字典（本节点 → 欧氏 conv.worldsheet-euclidean） ──
+    σ^2 = i σ^0    （等价地 σ^0 = -i σ^2，即 τ = -i σ^2）；
+    (a) γ_{ab}（(-,+)，γ < 0） → g_{ab}（(+,+)，g > 0），  (-γ)^{1/2} ↔ g^{1/2}，
+        平坦情形 diag(-1,+1) ↔ δ_{ab}；
+    (b) ∂_0 = i ∂_2，  dσ^0 = -i dσ^2，  ∫ dσ^0 dσ^1 = i ∫ dσ^1 dσ^2；
+    (c) 代入 (a)(b) 得  S_P^L = i S_P^E，其中
+          S_P^E = + (1/(4π α')) ∫ d^2σ g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ,
+        即**前因子由 -1/4πα' 变为 +1/4πα'**；权重 e^{i S_P^L} = e^{- S_P^E}。
+        号差翻转与作用量整体反号必须同时做。
+    (d) 与复坐标的接口见 conv.worldsheet-euclidean 的 (d) 与 conv.worldsheet-complex-coords：
+          d^2 z = 2 dσ^1 dσ^2，  δ^{ab} ∂_a X ∂_b X = 4 ∂X ∂̄X，
+        平坦欧氏下 S_P^E = (1/(2π α')) ∫ d^2 z ∂X^μ ∂̄X_μ。
+    ⚠ 洛伦兹侧本身**没有** d^2 z：conv.worldsheet-complex-coords 是欧氏复坐标约定。
+      洛伦兹侧的类似物是光锥世界面坐标 σ^± = σ^0 ± σ^1（本图未建约定节点），
+      两者不可混用。
+
+  ⚠ 本 family 只管**世界面**号差。时空号差是独立的 family `metric`
+  （canonical 为 conv.metric-mostly-plus）：第 1 章的节点是「世界面洛伦兹 + 时空 mostly-plus」。
+canonical: false
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.13)（S_P = -(1/4πα') ∫ dτ dσ (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ）；式号未核实"
+    note: |
+      拉氏量形式与前因子 -1/(4πα')、以及 (-γ)^{1/2} 的写法，见抽取记录
+      literature/extractions/polchinski-1998-v1.md#E5（证据等级 [页码已核实/式号未核实]，
+      内容经 Schrans 伴读笔记 §1.10 确认）。「γ = det γ < 0、号差 (-,+)」这一限定
+      是 worldsheet.polyakov-action 节点已写入的内容，同样未逐字核对原书。
+  - ref: polchinski-1998-v1
+    loc: "§1.1 表格与 §1.3：第 1 章通篇用洛伦兹世界面（光锥量子化、实时模式展开 e^{-in(τ ∓ σ)}）"
+    note: |
+      「第 1 章洛伦兹、第 2 章起欧氏」见抽取记录第 1.1 节「世界面号差」一栏，等级 [S]。
+      本条只为记录「本约定在何处被使用」，不承载公式。
+  - ref: gsw-1987-v1
+    loc: "§2.1（洛伦兹世界面上的 Nambu–Goto 与 Polyakov 作用量）"
+    note: |
+      作为「洛伦兹世界面写法不是 Polchinski 独有」的旁证。**GSW 的时空号差是 mostly-minus**
+      （conv.metric-mostly-minus），因此其世界面度规的号差记号与 Polchinski 相反，
+      引用 GSW 的世界面公式时须同时做时空号差换算；本节点不给该换算。
+notes: |
+  由 curator 于 2026-09-10 与 conv.worldsheet-euclidean 一并新建。
+  取 canonical: false 不表示这套写法有问题——第 1 章的经典力学与光锥量子化在洛伦兹号差下
+  才有直接的物理解释（因果结构、实时演化）。它只表示：本图的 canonical 参照系是欧氏，
+  凡是「洛伦兹节点 → 欧氏节点」的依赖边必须带 convention_map。
+
+  ⚠ 里程碑限制：graph/schema 的校验禁止里程碑陈述使用非 canonical 约定。
+  因此任何声明本约定的陈述都不能直接被里程碑引用；若需要，
+  应先建一条欧氏号差的对应陈述（如 worldsheet.polyakov-action-conformal-gauge-form 之于
+  worldsheet.polyakov-action）。
