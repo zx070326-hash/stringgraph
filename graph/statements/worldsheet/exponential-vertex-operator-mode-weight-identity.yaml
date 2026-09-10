@@ -72,6 +72,7 @@ sources:
       核实等级沿用 worldsheet.ddf-operators-v6：章节页码 L4/L2，**式号与正文 L0**。
       GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
       **GSW 不写模恒等式**，也不区分两侧 L_m 的动量参数。
+superseded_by: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
 tags: [cft, vertex-operator, conformal-weight, bosonic-string, spectrum-generating-algebra, formalized]
 notes: |
   【立卡理由：worldsheet.exponential-vertex-operator-weight 的 notes 里已写好的预案】
