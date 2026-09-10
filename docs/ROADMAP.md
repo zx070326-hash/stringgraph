@@ -18,21 +18,38 @@
 
 同步：Lean 岛 1 无鬼定理形式化。
 
+### Phase 1 进度（2026-09-11）
+- 玻色弦：Polchinski v1 §1–4 全部入图并经 reviewer 审查；§5–6 抽取完成、转图中；§8（T 对偶）抽取中。
+- 超弦：Polchinski v2 §10–11 抽取中。
+- 里程碑：`ms.no-ghost-theorem` 四轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第一轮回译 drift，修复中；`ms.critical-dimension-superstring` 待 §10–11 入图后起草。
+- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 顶点算子振子部分 / creaExp 递推已机器验证；剩 [L_m, V_K] 共形权（进行中）、DDF 对易关系、张成定理、level-2 负模态（进行中）。
+- 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美；Shapovalov 形式进行中。
+
 ## Phase 2：一致性与对偶子图
 
 - Green–Schwarz 反常消除、T 对偶（环面）、S 对偶（猜想）、五种超弦与 M 理论关系
 - 这一阶段的目的是让报告第一次显示"哪些结论压在哪些猜想上"
 - Lean 岛 2：Green–Schwarz 反常多项式的因子化（代数部分）
 
+### Phase 2 种子（2026-09-11 已启动）
+- Green–Schwarz 1984 全文抽取完成（archive.org 重印文集路线，本项目首篇 pre-arXiv 正文），consistency 区节点转换中；因子化恒等式 (19) 作为 math 命题是 Lean 岛 2 首选。Alvarez-Gaumé–Witten 1984 eq. (63)（数值系数层唯一来源）抽取中。
+- T 对偶：Polchinski v1 §8 抽取中。
+
 ## Phase 3：全息与黑洞
 
 - AdS/CFT（作为 axiom/conjecture 双轨）、Strominger–Vafa 熵、Ryu–Takayanagi、岛公式
 - 目标产出：一份公开报告，列出全息扇区每条主要结论的猜想依赖集合
 
+### Phase 3 种子（2026-09-11 已启动）
+- Maldacena 1997 全文抽取完成：原文两级主张（"we conclude" 超引力扇区包含 / "conjecture" 完整对偶），U(N) 非 SU(N)，无配分函数陈述（那是 GKP/Witten 1998）。AdS/CFT v2 搬 holography 区进行中。
+
 ## Phase 4：沼泽地
 
 - 每条沼泽地猜想双轨挂载（成立方向 / 反例方向）
 - 与观测约束（暗能量演化等）的接口节点
+
+### Phase 4 种子（2026-09-11 已启动）
+- Vafa 2005 / Ooguri–Vafa 2006 / AMNV 2006 抽取中（逐字记录原文主张强度，供双轨挂载）。
 
 ## 长期
 
