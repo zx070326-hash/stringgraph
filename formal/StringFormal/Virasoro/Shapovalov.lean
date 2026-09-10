@@ -68,6 +68,7 @@ Two observations make most of the theory available anyway.
 * `shapovalov_isContravariant`, `shapovalov_hwv_hwv`, `existsUnique_isContravariant`:
   existence and uniqueness, given the functional.
 * `hwv_ne_zero_of_isContravariant`: a normalised form forces `V(c,h) ≠ 0`.
+* `exists_isContravariant_iff`: the form exists **iff** a Shapovalov functional does.
 * `IsContravariant.gram_level_one`: `⟨L₋₁|c,h⟩, L₋₁|c,h⟩⟩ = 2h`.
 * `IsContravariant.gram_level_two_aa/ab/bb`: `4h + c/2`, `6h`, `8h² + 4h`.
 * `IsContravariant.gram_level_two_det`: `2h(16h² + 2h(c-5) + c)`, the `N = 2` Kac
@@ -495,6 +496,35 @@ theorem hwv_ne_zero_of_isContravariant [Nontrivial R]
   intro h0
   rw [h0, map_zero] at hB1
   exact zero_ne_one hB1
+
+/-- **Converse**: a normalised contravariant form yields a Shapovalov functional, namely
+`⟨|c,h⟩, ·⟩`.  So the hypothesis `IsShapovalovFunctional` is not merely sufficient for the
+construction, it is *equivalent* to it. -/
+lemma isShapovalovFunctional_of_isContravariant
+    {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R} (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    IsShapovalovFunctional R c h (B (hwv R c h)) where
+  apply_hwv := hB1
+  apply_lie_neg n hn v := by
+    have key := hB (-n) (hwv R c h) v
+    rw [neg_neg, lie_lgen_hwv_of_pos R c h (show (0 : ℤ) < -n by omega), map_zero,
+      LinearMap.zero_apply] at key
+    exact key.symm
+  apply_lie_zero v := by
+    have key := hB 0 (hwv R c h) v
+    rw [neg_zero, lie_lgen_zero_hwv, map_smul, LinearMap.smul_apply, smul_eq_mul] at key
+    exact key.symm
+
+variable (R c h)
+
+/-- **The exact content of the missing input.**  A normalised contravariant (hence symmetric)
+form on `V(c,h)` exists if and only if a Shapovalov functional does. -/
+theorem exists_isContravariant_iff :
+    (∃ B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R,
+        IsContravariant R c h B ∧ B (hwv R c h) (hwv R c h) = 1)
+      ↔ ∃ f : VermaModule R c h →ₗ[R] R, IsShapovalovFunctional R c h f :=
+  ⟨fun ⟨_, hB, hB1⟩ => ⟨_, isShapovalovFunctional_of_isContravariant hB hB1⟩,
+    fun ⟨_, hf⟩ => ⟨shapovalov hf, shapovalov_isContravariant hf, shapovalov_hwv_hwv hf⟩⟩
 
 end Existence
 

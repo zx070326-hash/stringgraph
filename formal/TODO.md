@@ -103,7 +103,8 @@
     余伴随作用）。
   - **存在性只差一条**：`IsShapovalovFunctional f`（`f|c,h⟩ = 1`，且 `f` 杀掉 `L_n V (n<0)`、
     `(L_0-h)V`）。由它经万有性质得 `shapovalov`，逆变性由 `vermaLift_lie` 一行推出；
-    `existsUnique_isContravariant` 给出存在唯一。
+    `existsUnique_isContravariant` 给出存在唯一；`exists_isContravariant_iff` 说这条假设
+    **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
     这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
     而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
   - 低阶 Gram：`gram_level_one`（`2h`）、`gram_level_two_aa/ab/bb`（`4h+c/2`、`6h`、`8h²+4h`）、
