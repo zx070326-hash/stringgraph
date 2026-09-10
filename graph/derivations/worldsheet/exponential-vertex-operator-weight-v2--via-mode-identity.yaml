@@ -1,5 +1,5 @@
-id: worldsheet.exponential-vertex-operator-weight--via-mode-identity
-target: worldsheet.exponential-vertex-operator-weight
+id: worldsheet.exponential-vertex-operator-weight-v2--via-mode-identity
+target: worldsheet.exponential-vertex-operator-weight-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -26,12 +26,17 @@ depends_on:
       从模对易子 [L_m, φ_J] = Σ_r C(m,J,r) φ_{J−m+…} 读出 T(z)φ(0) 的极点系数。
       ⚠ 一处不完全匹配已在 gaps 第 1 条登记：目标恒等式两侧的 L_m 动量参数不同
       （L^{(a+b)} 与 L^{(a)}），不是一个真正的对易子，字典的标准形式假设的是对易子。
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
     inferred: false
     note: |
       **被断言的概念与判据**：「共形权由 T·O OPE 的二阶极点系数读出」「无三阶及更高极点 ⟹ 主场」。
       目标 (1) 逐字就是把 V_k 代进该判据；本推导要论证的正是"代进去之后二阶极点系数是 ½(b·b)、
       且没有更高阶极点"。
+      【2026-09-11 换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。本推导的 L_m 是普通自由标量 CFT 的 Sugawara 生成元
+      （worldsheet.virasoro-generators-free-boson），不是线性 dilaton 的（v2 要求声明）。
   - id: worldsheet.virasoro-generators-free-boson
     inferred: false
     note: |
@@ -78,7 +83,7 @@ summary: |
   **本推导不覆盖目标 (2)(a)（闭弦体内 h = α'k²/4）**：Lean 侧的 V_J 是**开弦边界**
   归一化下的对象（单值因子 z^{2α' n k_0·p}，缩并加倍），闭弦值要再除以 4，
   那一步的桥（边界镜像使手征动量加倍）本图无节点，见目标卡边界 (e)。
-  (2)(a) 由姊妹推导 worldsheet.exponential-vertex-operator-weight--via-ope-with-t 承担。
+  (2)(a) 由姊妹推导 worldsheet.exponential-vertex-operator-weight-v2--via-ope-with-t 承担。
 gaps:
   - |
     **第 2 步的字典 worldsheet.ope-pole-mode-commutator-dictionary 自身 effective = open**，
@@ -108,6 +113,10 @@ gaps:
     这本身说明第 2 步的翻译不是逐字的：字典若真能双向使用，应当也给出 m = 0 的关系。
     本推导不主张已弥合这一点。
 notes: |
+  【2026-09-11 换代】本推导原 id 为 worldsheet.exponential-vertex-operator-weight--via-mode-identity，
+  随目标卡换代（边界 (f) 的 X^μ 主场表述订正）改名并改指 -v2；depends_on 的
+  worldsheet.primary-field 同步改指 -v2。论证、status、gaps 均未动。
+
   【本推导的来历】worldsheet.exponential-vertex-operator-weight 的 notes【升级路径】(i)
   写好的预案，lead 2026-09-11 裁决执行：Lean 完成后拆模形式卡承载 formalized，
   OPE 卡新增本推导（依赖新卡 + 字典，physical-argument）。

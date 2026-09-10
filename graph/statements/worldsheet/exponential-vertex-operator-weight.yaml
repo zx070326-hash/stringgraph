@@ -123,7 +123,18 @@ sources:
       （literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
       GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
 tags: [cft, vertex-operator, conformal-weight, primary-field, bosonic-string, spectrum-generating-algebra, no-ghost]
+superseded_by: worldsheet.exponential-vertex-operator-weight-v2
 notes: |
+  ⚠⚠ **本卡已于 2026-09-11 换代（superseded_by: worldsheet.exponential-vertex-operator-weight-v2）**，
+  原因是 statement 边界 (f) 写「X^μ 不是主场，见 worldsheet.primary-field 的 notes (1)」，
+  所引的那条 note 已被原书 p.47 第一行逐字「All transform as tensors except `∂²X^μ`」证伪
+  （抽取记录 literature/extractions/polchinski-1998-v1.md §13.4(a)(b)；worldsheet.primary-field
+  亦因此换代为 -v2）。**在自由标量 CFT 里 X^μ 是权 (0,0) 的主场。** 本卡 (1)(2)(3) 与边界 (a)–(e)
+  的内容在 v2 中逐字保留；两条推导 --via-ope-with-t、--via-mode-identity 已改名到 v2。
+  **本卡文本按项目原则 1 保持原样不改，以下内容只作历史记录，不得再被引用。**
+
+  ── 以下为换代前的原文 ──
+
   【为什么立卡】「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0 且是主场」这条事实在 2026-09-11
   被**三处**独立登记为「本图没有节点承载」：
     - worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2 条
