@@ -26,14 +26,28 @@ uses_conventions:
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.4, eq. (6.4.11)（中间 tachyon 处的发散）、(6.4.13)（因子化）、(6.4.14)（C_{D₂} = 1/(α'g_o²)），p.179–183"
+    loc: "§6.4, p.181–183：eq. (6.4.11)（y→0 邻域的近似，其余项在 α's = −1 处解析）、(6.4.12)（Minkowski iε 处方）、(6.4.13)（幺正性定出极点系数 = 因子化）、(6.4.14)（C_{D₂} = e^{−λ}C^X_{D₂}C^g_{D₂} = 1/(α'g_o²)）、(6.4.18)（极点位置 α's = −1, 0, 1, 2, …）"
     note: |
-      literature/extractions/polchinski-1998-v1.md#E98，等级 **L1**（schrans-2020 §6.30–§6.37，
-      笔记 p.300–307，逐页读到）。
+      literature/extractions/polchinski-1998-v1.md#E98（schrans-2020 §6.30–§6.37，笔记 p.300–307）
+      + **§12.8（原书核实，2026-09-11，p.181–183）**。
+      **(6.4.14) 与 (6.4.13) 的式号已由原书页图确认（L1）**：
+      §12.8 逐字记「**(6.4.14)** C_{D₂} = e^{−λ}C^X_{D₂}C^g_{D₂} = 1/(α'g_o²) ✓」，
+      与本卡片 (3) 的 C_{D₂} = 1/(α'g_o²) **完全一致**。
       抽取记录逐字引 [S] 对 (6.4.13) 的评语：「an example of **factorisation**: the four-string
       amplitude is a combination of two three-string amplitudes with an intermediate state of all
       possible momenta」（其后关于 BCFW 的类比是 **[S] 自己的联想，不是 Polchinski 的说法**，
       本图不采用）。
+      ⚠ **一处措辞差异，本图判为同一件事**：§12.8 把 (6.4.13) 描述为「**幺正性定出极点系数的条件**」，
+      [S] 描述为「**因子化**」。物理上是同一条：幺正性要求极点留数等于两个三点振幅之积。
+      本卡片 (2) 用「因子化」措辞（跟随 [S]），**但原书在该式旁的字面措辞本图未逐字读到**，
+      故不宣称「原书称之为 factorization」。
+      ⚠ **loc 已订正的两点**：
+      (a) 旧 loc 把 (6.4.11) 写成「中间 tachyon 处的发散」，按 §12.8，(6.4.11) 是
+          **把被积函数在 y = 0 邻域近似、并声明其余项在 α's = −1 处解析**的那一步；
+      (b) **极点位置的式号是 (6.4.18)**（α's = −1, 0, 1, 2, …），旧 loc 没有它。
+          本卡片 (1) 断言的 s = −1/α' 是这个塔的最低一个。
+      ⚠ **本卡片 (2) 的「留数 = 两个三点振幅经传播子相接」这一等式的原书排版本轮仍未核对**，
+      §12.8 只核到式号与其角色。
 tags: [spectrum, tree-level, disk, open-string, factorization, pole, normalization, unitarity]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E98 建立。
@@ -44,5 +58,17 @@ notes: |
   **⚠ 「中间态传播子」在本图中没有定义**：因子化的右端要用到中间弦态的传播子与态和，
   这需要弦场论或算符形式的定义，本书在此处是用场论类比写出的。
   本卡片按来源陈述该关系，但不把它当作已定义的等式，见推导 gaps。
+
+  **原书核实带来的两点补充（2026-09-11，§12.8，p.181–182；不入陈述）**：
+  1. **极点是解析延拓出来的，不是积分本身给出的。** 原书逐字：「The divergence of the amplitude
+     *at* the pole is an essential physical feature of the amplitude, a resonance… The divergence
+     of the integral *past* the pole is not; it is just an artifact of this particular integral
+     representation.」——即「超过极点之后的发散」是积分表示的赝像，须靠对 Mandelstam 变量 s
+     的解析延拓去掉。本卡片 (1) 的「端点发散 ⇒ 极点」应在这个意义下读。
+  2. **极点的 iε 处方是原书显式给出的**：(6.4.12) 1/(α's+1) ≡ 1/(α's+1+iε)
+     ≡ P[1/(α's+1)] − iπδ(α's+1)。这条决定了留数的**虚部**（共振宽度），
+     本图**没有**为它建节点，任何要谈幺正性/光学定理的下游都要先补上。
+  3. 详细的发散处理手续（原书做法 vs [S] 的 r → 1 装置）记在
+     spectrum.open-string-four-tachyon-amplitude 的 notes 里，不在此重复。
 author: curator-polchinski-ch6
 created: "2026-09-11"
