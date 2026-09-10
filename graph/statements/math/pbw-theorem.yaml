@@ -48,6 +48,25 @@ sources:
       basis (X, ≤)」，**没有有限维假设**——本节点 (1) 的措辞取自这一句。
       注意版本坑：期刊版（Glasgow Math. J. 54 (2012)）把它编作 `[15, Corollary C, p. 92]`，arXiv 版写 `[Hu]`；
       本图引 arXiv 版，因为那是被 L1 读到的那一份。
+  - ref: lakos-2024-pbw
+    loc: |
+      arXiv:1812.04896**v2**, Proposition 6.1, p. 16（逐字：「The PBW theorem holds if 𝔤 is a free K-module.」）；
+      该命题所指的「PBW theorem」由 Introduction, p. 1–2 定义：局部形式 = 𝒎^{(n)} : ⊙^n𝔤 → 𝒰^n𝔤/𝒰^{n−1}𝔤 为同构，
+      全局形式 (i) = 𝒎_≤ : ⊗_≤𝔤 → 𝒰𝔤 为 K-模同构（有序单项式基）；
+      第二条独立证明见 Appendix A（Witt–Lazard），Corollary A.4(f), p. 20。
+    note: |
+      **L1 全文读毕（researcher 2026-09-11，literature/extractions/math-sources.md §33.2）**。
+      前提逐字：「Assume that K is a unital commutative ring, and 𝔤 is a K-module with a compatible
+      Lie-ring structure; i. e. 𝔤 is a Lie K-algebra」——**全文无任何有限维假设**，基的索引集 A 任意。
+      域是特例（域上的模皆自由）。本条 source 的作用是**背书适用范围**，不是替代 humphreys-1972 的教科书证明；
+      两者并列：后者给权威性与完整教科书证明，前者给可核对性（全文可读）与适用范围。
+      记号对照（**抄公式时不要混**）：本篇写 𝒰𝔤、⊙^n𝔤、⊗_≤𝔤、J𝔤，本节点写 U(L)、S(L)、gr U(L)；
+      对应关系是 ⊙^n𝔤 ↔ S(L) 的 n 次分量、𝒰^n𝔤/𝒰^{n−1}𝔤 ↔ gr_n U(L)。
+      ⚠ **版本陷阱**：v2（2024-07-23）的 comments 逐字为「22 pages, Part 3 of original submission
+      arXiv:1812.04896v1, rewritten」⇒ **v1 与 v2 的编号不同**，本条所有编号（Prop 6.1、Cor A.4）
+      **只对 v2 成立**，`loc` 已写死 v2。
+      ⚠ **未发表**：abs 页无 journal-ref，只有 arXiv 自发 DOI 10.48550/arXiv.1812.04896（读取日期 2026-09-11）；
+      自称 expository preprint，权威性低于教科书。
 tags: [algebra, lie-algebra, universal-enveloping-algebra, pbw, math-input]
 notes: |
   **本节点为什么存在**：worldsheet.verma-module-pbw-basis--via-pbw（该推导已于 2026-09-11 随
@@ -85,5 +104,32 @@ notes: |
   「Mathlib does not currently have the PBW theorem」，并称补上它是 "a major undertaking"。
   ⇒ **本节点及其下游最高只能到 rigorous，不得标 formalized，直到 Mathlib 有 PBW 为止。**
   复查时请同时看 `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 与 Mathlib 的 1000.yaml 跟踪表。
+  **2026-09-11 该复查已做（researcher，math-sources.md §33.6，L1）**：Mathlib 官方定理跟踪表
+  `docs/1000.yaml` 里 `Q2270905: Poincaré–Birkhoff–Witt theorem` 条目**存在但没有 `decl` 字段**
+  ⇒ **Mathlib 官方登记为「未形式化」**（对照组 `Q1243340` 有 `decl`）；重读源码
+  `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 结论不变。Isabelle/AFP 只有微分几何路线的
+  *Lie Groups and Algebras*（2024-07-31），无抽象李代数、无泛包络代数、无 PBW；Coq 侧未找到
+  （这是「没找到」，不是「已证明没有」）。
+  ⇒ **本节点及其下游的 status 上限仍是 `rigorous`，不得标 `formalized`。**
+
+  **★ 2026-09-11 更新记录（curator，落地 math-sources.md §33.7(a)(b)）：适用范围问题已结案。**
+  新增 source **lakos-2024-pbw**（arXiv:1812.04896v2, Prop. 6.1, p. 16 + Cor. A.4(f), p. 20；L1 全文读毕），
+  其前提逐字是「K 是幺交换环、𝔤 是带相容李环结构的 K-模」，Prop 6.1 只要求 **𝔤 为自由 K-模**，
+  **全文没有任何有限维假设**，且全局形式 (i) 的索引集 A 任意（只要求给定一个全序 ≤）。
+  按项目原则 1，statement 文本不改；**以下两处因此已过时，日后新建 v2 卡时一并清理**：
+  1. statement 的【范围】段末句「所引来源的原书语境是否允许无限维 L **未核实**」——**已过时**：
+     lakos-2024-pbw 对任意幺交换环 K、任意（含无限维）自由 K-模李代数陈述并证明本定理，本图已有来源背书无限维。
+  2. 上面的**「警告二：无限维适用性未核实（Q15，等级 L0）」整条已过时**，特别是其结论
+     「任何从本节点出发、把 PBW 用在无限维李代数上的边必须标 `inferred: true`」**已作废**。
+     瓶颈从来不是「Humphreys §17.1 怎么说」，而是「本图有没有一条来源背书无限维」；现在有了。
+     据此 `math.verma-module-free-over-negative-part--via-pbw-theorem` 到本节点的边已改 `inferred: false`
+     （理由见该推导那条边的 note）。**Q15（核 Humphreys §17.1 对 L 的假设声明）降级为可选**：
+     它现在只影响 humphreys-1972 这一条 source 自身的自洽性，不再卡住任何一条边。
+  ⚠ **未过时、仍然有效**：`math.pbw-theorem--via-humphreys` 的 gaps 第四条（基环限制）。
+  lakos-2024-pbw p. 2 逐字给出「PBW 在一般交换环上会失败」——**有反例**（Širšov、Cartier、Cohn）。
+  ⇒ 日后若想把本节点的基环从「域」放宽，**只能放宽到 (i) 𝔤 为循环 K-模的直和（含自由模）、
+  (i') K 为 PID（Lazard）或 Dedekind 环（Cartier）、(ii) ℚ ⊂ K（Cohn）之一，不能放宽到任意交换环**。
+  本节点当前限定在域上，域是 (i) 的特例，安全。
+  ⚠ 上面的**「警告一：编号字母未裁决（Q14）」不受影响**，对 `Corollary C, p. 92` 的硬性禁令继续有效。
 author: curator
 created: "2026-09-11"

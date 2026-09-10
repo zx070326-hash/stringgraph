@@ -489,3 +489,87 @@
 - **状态应为 `conjecture` / 需下调的**：E17（弦论侧，原文自陈 "details will be presented elsewhere"）、E18（"appears very likely"）。
 - **不要建的**：任何形如「反常抵消 ⇒ 规范群唯一是 SO(32) 或 E₈×E₈」的节点挂 `green-schwarz-1984`（见 E20/Q1）。
 - **必须先建约定节点的**：`H` 的 Chern–Simons 符号（Q6）、E₈ 的 `tr` 归一（§1.2）。
+
+---
+
+## 8. ★ 第二轮追加（2026-09-11，researcher）：AGW 抽取完成后对本记录的修订
+
+> 本节**不修改** §1–§7 的任何已有条目（按 `literature/CLAUDE.md` 规则 3 只追加）。
+> 但 §3.5 与 §4 的 Q2/Q3/Q6 三条在新证据下需要重读，**以本节为准**。
+> 新记录：`extractions/alvarez-gaume-witten-1984.md`（AGW 全文 62 页 L1 逐页读毕）。
+
+### 8.1 ★ §3.5 的年份判定 **已推翻**
+
+- 本记录 §3.5 判「GS 参考文献 [3] 印作 1983，通行引法 1984，**GS 原文写的是 1983**」并暗示是 GS 的排印问题。
+- **AGW 原刊页眉逐字为 `Nuclear Physics B234 (1983) 269–330`（L1 核实，journal p.269 顶端）**，同页 `Received 7 October 1983`。
+- ⇒ **GS 是忠实照抄了 AGW 自己的页眉，不是 GS 的错。** Elsevier DOI / INSPIRE 作 1984 是因为该期出版日在 1984-04-02。
+- **转节点时不要写「GS 误印年份」。** 两边都不算错。
+
+### 8.2 ★★ Q3 **完全闭合** —— GS (20) 的系数已可机械导出
+
+- 一手来源是 **AGW eq. (119)（journal p.327）** 的十维三条反常多项式 + **AGW eq. (83)（p.315）** 的 `p_i ↔ Tr R^{2k}` 换算。
+- 抽取者复算：取 GS (20) 自己声明的场内容（"one left-handed spin 3/2 gravitino and one right-handed spin ½ field … and `n` left-handed spin ½ fields"），
+  即组合 `Î_{3/2} + (n−1)Î_{1/2}`，换到 `tr R^{2k}` 基后，**与 GS (20) 的五个系数逐一相差同一个因子 `−48`**
+  （`(tr R²)³` 常数部与 `n` 部、`tr R² tr R⁴` 常数部与 `n` 部、`tr R⁶` 部）。完整算式见 AGW 记录 **§5.1**。
+- 副产品：**E13 里 GS 断言的「n = 496」不再是断言** —— 它就是 `p₃` 系数 `7936 − 16n` 的唯一零点，纯算术。
+- 副产品 2：AGW (114) 逐字说三条生成函数只定到 "**apart from a factor common to the three cases**"。
+  **那个被 AGW 留空的公共因子，在 GS 的 `Ω_{4n} = Tr F^{2n}` 归一下就是 `−48`。**
+- ⇒ **本记录 §7 里「E13/E14 因 Q3 未闭合而只能 `physical-argument`」这条理由作废**（E13 的系数层现已有一手来源 + 机械验算）。
+  但 E13/E14 仍应保持 `physical-argument`，理由改为 **AGW 自己的方法学限制**（Pauli–Villars / Fujikawa 测度 / Bose 对称因子 `1/(n+1)` 未闭合，见 AGW 记录 E19、Q-A6），
+  以及 AGW 的数值系数是 **CAS 生成且发表前出过错**（AGW 记录 E17）。**理由变了，结论没变。**
+
+### 8.3 Q2 **只闭合一半** —— 常数 `c` 与 (22) 都不在 AGW 里
+
+- GS (17) 后写「The numerical constant `c` can be deduced from refs. [3,9]」，GS (22) 前写「The relative normalization of all the anomalies can be deduced from **eq. (63) of ref. [3]**」。
+- **AGW eq. (63) 已逐字取到**（journal p.306，AGW 记录 E8）。它确实是一条同时产出纯规范（`r = 6`）、纯引力（`r = 0`）、混合（中间 `r`）三类反常的**单一生成公式**，三者共用同一前置因子。
+  ⇒ **GS 说「相对归一化由 (63) 决定」在本次核实下是准确的。**
+- **但**：AGW 全文**从不固定整体归一**，所以 `c` 这个数**不在 AGW 里**；
+  AGW 也**没有**做十维混合反常的展开 —— journal p.328 末句逐字：「**We will not explore here the phenomenological consequences of mixed gauge–gravitational anomalies.**」
+  AGW 只给配方（p.325：「Explicit expressions for the combined anomalies can be obtained by combining (112) with the expression for `Â(M)` in (82)–(84).」）。
+- ⇒ **GS (22) 与常数 `c` 的展开是 GS 自己做的，且 GS 未给中间步骤，本项目也未复算。**
+  这两条的节点：status `physical-argument`，sources 列 AGW 时须在 note 写明「AGW 只提供生成函数与 Â 展开，未给该结果」。
+- **下一步**：`zumino-wu-zee-1984`（= GS ref [9]）升为 **P0**。`c` 的另一半依赖在那里。
+
+### 8.4 ★ Q6 **闭合一半** —— AGW **不是** `H` 符号约定的源头
+
+- **AGW 全文没有下降方程**：不出现 `ω⁰_{2n+1}`、`ω¹_{2n}`、`δω⁰ = −dω¹`。全文唯一提 Chern–Simons 的是 journal p.309 的一段散文（`Q_α` 是 `4k−1` 维次级特征类、宇称下为奇、系数须量子化）。
+- AGW 参考文献 `[7]` 含 **「B. Zumino, W. Yong-Shi and A. Zee (Univ. Washington preprint, 1983)」**
+  —— 这就是 **GS ref [9] = Zumino–Wu–Zee, Nucl. Phys. B239 (1984) 477**（AGW 写作时尚是预印本；`W. Yong-Shi` 是 `Wu Yong-Shi` 的错排）。
+- ⇒ **`H = dB + ω⁰_{3Y} − ω⁰_{3L}` 的符号约定 convention 节点，来源应指向 `zumino-wu-zee-1984`，不要指向 AGW。**
+
+### 8.5 ★ 新增：AGW 与 GS 之间的一条「表面矛盾」，**不要判为矛盾**
+
+- **AGW 引言 journal p.271–272 逐字**："The 'type (I)' superstring theories reduce at low energy to `n = 1` supergravity in ten dimensions. **They are presumably anomalous. (Introduction of a gauge group cannot remove the gravitational anomaly, as one may see from formulae of sect. 12.** On the contrary [7] it introduces new anomalies.)"
+- 即 **AGW 在同一年、同一篇里预言了 GS 1984 所推翻的东西**。
+- **但这不是 AGW 算错。** AGW 全篇框架是「**不同自旋的场之间**相消」（摘要逐字 "anomaly cancellation between fields of different spin"）。
+  在该框架内判断成立：抽取者用 AGW (119) 复算，N=1（无自对偶张量）要求三个系数同时为零，分别给 `n = 496`、`n = 416/11`、`n = 256/31`，**互相矛盾，无解**。
+- GS 的出路完全在 AGW 框架**之外**：加**局域抵消项** `S₁+S₂+S₃`，让残留的 `(tr R²)³` 与 `tr R² tr R⁴` 由树图抵消。**AGW 全文从未考虑过这个操作。**
+- ⇒ **图里不得把 AGW 标 `refuted`，也不得在 GS 节点上把 AGW 列为「被推翻的依赖」。**
+  正确做法：两个节点 + 一条 note 写清「可用操作集不同」。这是全图里少见的「两个都对、适用范围不同」的样本，见 AGW 记录 **Q-A4**、**§5.3 的 B3**（该算术已可机检）。
+
+### 8.6 对 §5（Lean 岛候选）的补充
+
+- 本记录 §5.6 把「(20) 本身的系数」列为**排除项**（理由：依赖 AGW 的指标定理计算，Q2/Q3 未闭合）。
+- **该理由现已作废**：把 AGW (119) 的三组有理数当作输入常数（引 AGW + 独立数学来源核过的 Â-genus），
+  「AGW (119) + (83) ⟹ GS (20)」是一条**纯 `ℚ` 上多项式恒等式**，`ring` 一行即可。
+- ⇒ **新增首选 Lean 目标：AGW 记录 §5.1 的 B1。** 它把 GS 那句"496 是必需的"变成可机检的算术，价值高于本记录原有的 A1–A3。
+
+## 9. ★ 第三轮追加（2026-09-11，lead 直接核实）：Bilal 2008 §12.4 的 β̃ 与 H 的 CS 约定
+
+**来源**：Bilal, *Lectures on Anomalies*, arXiv:0802.0634 v2，§12.4 pp.100–103（arXiv PDF 逐页读图，**L1**）。
+
+- **(12.14)**：`H = dB − Q₃(A,F) + β̃ Q₃(ω,R) ≡ dB − Q₃^{YM} + β̃ Q₃^{L}`，"with β̃ to be fixed below"。文中先说 `H = dB − βQ₃(A,F)`，β 的值依赖迹的参考表示与 B、H 归一化，"We fix the trace to be in some reference representation … and then rescale B and H to set β = 1"。
+- **(12.15)**：`(δ^gauge + δ^L)B = Q₂^{1}(v,A,F) − β̃ Q₂^{1}(v̂,ω,R)`。
+- **(12.16)–(12.19)**：GS 反项 `ΔΓ = ∫ B ∧ X₈`，对应不变十二形式 `ΔÎ₁₂ = (tr F² − β̃ tr R²) ∧ X₈`。
+- **β̃ 的值（p.102 逐字）**："We see that it is then enough to choose **β̃ = 1** in (12.14) and (12.15), let the reference trace in (12.19) be the trace in the fundamental representation of SO(32) and take X₈ = (1/(384(2π)⁵))[tr R⁴ + ¼(tr R²)² − tr F² tr R² + 8 tr F⁴]"（(12.26)）；E₈×E₈ 情形 "again with β̃ = 1"（p.102，(12.33) 上方）。
+- **(12.23)**（SO(n) 迹恒等式，"Let us note without proof"）：`Tr F² = (n−2) tr F²`、`Tr F⁴ = (n−8) tr F⁴ + 3(tr F²)²`、`Tr F⁶ = (n−32) tr F⁶ + 15 tr F² tr F⁴`；**(12.24)** n = 32；**(12.22)** dim G = 496。
+- **(12.28)/(12.29)**（E₈）：`Tr F⁴ = (1/100)(Tr F²)²`、`Tr F⁶ = (1/7200)(Tr F²)³`；定义 `tr F² := (1/30) Tr F²` 后 `Tr F⁴ = 9(tr F²)²`、`Tr F⁶ = (75/20)(tr F²)³`。
+- **四解分类（p.103 逐字）**："One can actually scan all 496-dimensional groups and show that there are no other possibilities to achieve factorization of Î₁₂^{total}" —— **无证明、无引用**；并说 E₈×U(1)²⁴⁸ 与 U(1)⁴⁹⁶ "do not seem to correspond to any consistent superstring theory"。
+- **(12.21)** 总十二形式（dim G、Tr F⁶ 等系数）；**(12.25)** SO(32) 因子化形式 `Î₁₂ = (1/(384(2π)⁵))[tr R² − tr F²][tr R⁴ + ¼(tr R²)² − tr F² tr R² + 8 tr F⁴]`。
+
+**对 §8 / zumino-wu-zee-1984.md 裁定的影响**：researcher 的"GS (4) 与 Bilal (12.14) 由 (B,H)→(−B,−H) 相联，前提 β̃ = +1 待查"——**前提现已核实为真**（β̃ = 1）。⇒ `conv.h-chern-simons-sign` 可闭合：GS 写 `H = dB + ω_Y − ω_L`，Bilal 写 `H = dB − Q₃^{YM} + Q₃^{L}`，两者相差整体符号 (B,H) ↦ (−B,−H)，物理不变量是两个 CS 项的**相对**符号（YM 与 L 相反），两家一致。
+
+**对 GS 迹恒等式卡的影响**：Bilal (12.23) 与 GS (12)(13) 是同一组恒等式的独立陈述（Bilal 自称 "without proof"），可作第二来源但**不升等级**。E₈ 的 tr := Tr/30 定义在 (12.29) 上方逐字。
+
+**对四解分类的影响**：Bilal 2008 也只断言不证明（"one can actually scan"），与 GS 抽取 §4 的结论一致：显式证明仍需 Antonelli 2015 或 GSW v2 ch.13（抽取中）。
+

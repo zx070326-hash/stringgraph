@@ -64,6 +64,7 @@ notes: |
   由 S(k) ⊆ S 蕴含本卡 (1)。因此：
     · 本卡的有效状态是 **rigorous**（被定义卡 v2 封顶），这是 docs/STATUS_LEVELS.md
       对 definition 传播的预期行为，不是缺陷；
+      ⚠ **这一条已于 2026-09-11 下午过期**，见下面的【天花板消失】一段。
     · 下游若只需无壳版本（例如 worldsheet.physical-states-level-one--via-lean 第 (3) 条，
       它调用的 `Lop_neg_apply_mem_nullSubmodule` 链全程不带质量壳），**应改引新卡**，
       已于本次改毕；
@@ -76,5 +77,42 @@ notes: |
   若 reviewer 认为一条 Lean 声明只应被一张卡认领，删本卡的 formal 块即可，
   代价是 worldsheet.spurious-orthogonal-to-physical--via-lean 必须改为 rigorous
   （工具要求 status: formalized 的推导其目标必须有 lean_decl）。
+
+  【天花板消失：本卡回到 formalized（2026-09-11 下午，curator）】
+  formalizer 在提交 4cc9f02 新建 formal/StringFormal/NoGhost/SpuriousShell.lean，其中
+    `Fock.spuriousShell η a a₀ := spuriousSubmodule η a ⊓ ker (Lop η a 0 − a₀ • id)`（= 本卡的 S(k)）
+    `Fock.nullStates η a a₀ := spuriousShell ⊓ physSubmodule`（= 本卡的 N(k)）
+  于是定义卡 worldsheet.ocq-spurious-states-v2 改为 status: formalized，
+  上面那条「本卡有效状态被 v2 封顶为 rigorous」的记账**过期**：`stringgraph status
+  worldsheet.spurious-orthogonal-to-physical` 现报 effective: formalized。
+  同一文件还直接给出了带质量壳的两条结论，即本卡陈述 (1) 与 (2) 前半的逐字对应物：
+    `Fock.spuriousShell_le_orthComplement`（S(k) ⊆ H_phys^⊥，本卡 (1)）；
+    `Fock.nullStates_le_nullSubmodule` 与 `Fock.pairing_self_eq_zero_of_mem_nullStates`
+      （N(k) ⊆ H_0(k)、零态零范数，本卡 (2) 前半）。
+  本卡的 formal.lean_decl **本次未改**（仍指 PhysicalStates.lean 的无壳定理）：改指
+  `spuriousShell_le_orthComplement` 会与 worldsheet.spurious-orthogonal-to-physical--via-lean
+  的 summary 脱节（那条 summary 逐字走无壳路线），正确做法是另开一条 `--via-lean-onshell` 推导。
+  已在 curator 报告里列出，交 reviewer / lead 裁定。
+
+  ⚠ **诚实保留（同 --via-lean 的 notes）**：天花板一消，本卡即以 formalized 报出，
+  但陈述 (2) 的**后半**（「加零态不改变内积」与「Fock 内积在 H_phys/N 上诱导良定义的形式」）
+  在 Lean 里**仍无具名引理**（--via-lean 的 gaps (i)）。即 formalized 覆盖 (1) 与 (2) 前半，
+  不覆盖 (2) 后半。按 docs/STATUS_LEVELS.md 的精神，干净的修法是把 (2) 后半单列成卡
+  （目前只能 rigorous），或把 --via-lean 降为 rigorous。本次未动陈述文本、未拆卡。
+
+  【2026-09-11 下午（二）：上面那条 ⚠ 诚实保留已关闭（curator，对接 QuotientForm.lean）】
+  formalizer 在提交 d1ec0fa（合并 7e7c513）新建 formal/StringFormal/NoGhost/QuotientForm.lean，
+  给出陈述 (2) **后半**的具名声明：`Fock.pairing_add_null`（ψ, φ ∈ H_phys、χ, χ' ∈ H_0 时
+  ⟨ψ+χ, φ+χ'⟩ = ⟨ψ, φ⟩）与 `Fock.quotientPairing` + `Fock.quotientPairing_mk`
+  （H_phys/H_0 上的诱导双线性型及其计算规则，即「内积在商上良定义」）。因此：
+    · 上面【formal.lean_decl 的覆盖范围】与两处 ⚠ 里「(2) 后半在 Lean 里没有具名引理」的
+      记账**过期**：本卡的 formalized 现覆盖 (1)、(2) 前半与 (2) 后半；
+    · worldsheet.spurious-orthogonal-to-physical--via-lean 已由 rigorous **升回 formalized**
+      （lead 降级注写明的升回条件已满足），本卡有效状态仍为 formalized；
+    · 因此**不再建议**为 (2) 后半拆卡（此前 curator 报告里的那条建议作废）。
+  两条残留限定（不影响覆盖，但记在案）：Lean 商掉的是根基 H_0，而本卡商掉的是 N ⊆ H_0
+  （N ⊆ H_0 本身已形式化，故 Lean 的版本蕴含本卡要求的那个）；本卡 (2) 末句写的是
+  「厄米形式」，Lean 侧只有 R-双线性型，且商形式的**非退化性未证**（本卡也未要求）。
+  本卡的 statement 文本与 formal 块本次**一字未动**。
 author: curator
 created: "2026-09-11"

@@ -32,6 +32,67 @@
   **未做**：`p(N)` 的渐近（Hardy–Ramanujan）；Dedekind `η` 的模性；与 Verma 特征标的接线
   （需要 PBW 下界，见 `pbw-verma` (b)）。
 
+- [x] `mobius-three-point-jacobian`：Möbius 三点固定的 Jacobian。
+  见 `StringFormal/Math/MobiusJacobian.lean` A 节（无 sorry，公理只有标准三条）。
+  `mobius_three_point_jacobian`：任意交换环上 `det (vandermonde z) = (z₂-z₁)(z₃-z₁)(z₃-z₂)`
+  （Mathlib `Matrix.det_vandermonde` 特化 n = 3）；`det_mobius_matrix` 是三个变量写开的版本；
+  `mobius_three_point_jacobian_eq_neg` 记录符号：等于 `-z₁₂z₁₃z₂₃`，文献里的 `|z₁₂z₁₃z₂₃|`
+  是取绝对值后的结果，符号随三点置换翻转，**不是**物理陈述的一部分。
+  `mobius_three_point_det_ne_zero` / `mobius_three_point_fixing_bijective`（域上）：三点两两不同
+  ⟺ 把 `δz = a₀ + a₁z + a₂z²` 的参数映到三点处取值的线性映射是双射，即三点规范固定存在且唯一。
+  建议图节点 `math.mobius-three-point-fixing-jacobian` 的 `lean_decl`。
+  **未做**：这只是无穷小（李代数）层面的陈述。群层面的 `PSL(2,ℝ)` 在三元组上单可迁、
+  Faddeev–Popov 行列式与测度的关系、以及 `|z₁₂z₁₃z₂₃|` 作为体积因子出现在振幅里，都没碰。
+
+- [x] `mandelstam-sum-rule`：`s + t + u = Σ mᵢ²`。
+  见 `StringFormal/Math/MobiusJacobian.lean` B 节（无 sorry，公理只有标准三条）。
+  `mandelstam_sum`：任意模上任意**对称双线性型** `B`，`Σkᵢ = 0`、`B(kᵢ,kᵢ) = -mᵢ²`（mostly-plus）
+  ⟹ `s + t + u = Σ mᵢ²`，其中 `s = -B(k₁+k₂, k₁+k₂)` 等（`mandelstamS/T/U`）。
+  不需要非退化、不需要号差、不需要域、连 2 可逆都不需要——纯运动学。
+  `mandelstam_sum_four_tachyons`：加 `α'mᵢ² = -1` 得 `α'(s+t+u) = -4`；
+  `mandelstam_sum_four_closed_tachyons`：加 `α'mᵢ² = -4`（闭弦基态，`α'kᵢ² = 4`）得 `α'(s+t+u) = -16`；
+  `regge_trajectory_sum_four_tachyons`：`α_c(x) = a + α'x` 时 `Σα_c = 3a - 4`（截距留作参数）；
+  `regge_intercept_sum_four_tachyons`：`a = 1` 时 `Σα_c = -1`。
+  `mandelstam_sum_diagonal_metric`：`Fin D → K` 上对角度规 `η` 的具体版本（与 `DDF.dotVec` 同形，
+  但不 import 该文件）；`minkowskiForm = Matrix.toBilin' (diagonal η)`。
+  建议图节点 `spectrum.mandelstam-invariants-sum-rule` 的 `lean_decl`。
+  **未做**：`s`、`t`、`u` 与散射道的关系（需要 in/out 态与解析延拓，不是代数），
+  Veneziano 振幅本身，以及 `α_c` 是"领头轨迹"这一物理陈述。
+
+## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
+
+`StringFormal/Math/GreenSchwarzAlgebra.lean`，独立小岛（只 import Mathlib）。
+对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5 的
+Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条。
+
+- [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
+  `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
+  `gs_factorization_e8`：`E₈` 支，`Ω₄ = x`、`Ω₈ = x²/100`、`Ω₁₂ = x³/7200`；
+  `gs_factorization_nested_eq_expanded`：GS 原文的嵌套形与二手文献的展开形
+  `(1/48)Ω₄Ω₈ − (1/14400)Ω₄³` 是同一恒等式。
+  建议图节点 `math.anomaly-twelve-form-factorization` 的 `lean_decl`（取前两条）。
+  **环境选择**：陈述在 `[Field K] [CharZero K]` 上，系数写作 `48⁻¹`、`300⁻¹`、`/100`、`/7200`，
+  证明是 `field_simp; ring`。**不要**改回 `[CommRing R] [Algebra ℚ R]` + `algebraMap ℚ R (1/48)`：
+  那样 `ring` 把 `algebraMap ℚ R (1/48)` 当不透明原子，两个不同写法的有理常数不会被认同，
+  一名 formalizer 曾因此停摆一轮。系数本来就是有理数，域上陈述对图完全够用。
+  **未做**：迹恒等式本身（`math.so-usp-adjoint-fundamental-trace-identities`、
+  `math.e8-adjoint-trace-identities`）是独立节点，这里只把它们的输出当写死的数字系数；
+  微分形式、指标定理、反常多项式的来历一概不碰。
+
+- [x] `gs-trace-conditions`（A2）：混合反常的两条迹条件。
+  `mixed_anomaly_trace_conditions_n32`：`N + 8l = 24 ∧ N + 2l = 30 ⟹ (N, l) = (32, −1)`；
+  `mixed_anomaly_no_solution_l_one`：`l = +1`（`usp`）时两条件矛盾，无解。
+  建议图节点 `math.mixed-anomaly-trace-conditions-n32` 的 `lean_decl`。`omega` 一行。
+
+- [x] `gs-tr-f6`（A3）：`Ω₁₂` 中 `tr F⁶` 的系数 `N + 32l`。
+  `tr_f6_coefficient_vanishing`：`so(N)` 支 `N − 32 = 0 ⟺ N = 32`；
+  `tr_f6_usp_positive`：`usp(N)` 支 `N + 32 > 0`（`N ≥ 1`）恒不为零。
+  建议图节点 `math.tr-f6-coefficient-vanishing` 的 `lean_decl`。`omega` 一行。
+
+**整个岛都不碰物理**：这几条方程为什么是反常抵消条件，由
+`consistency.anomaly-cancellation-so32-effective-theory` 承载；
+"只有 `SO(32)` 与 `E₈ × E₈` 因子化" 这类唯一性断言**不是** GS 1984 的结果，图里也没有节点。
+
 ## Virasoro
 
 - [x] `virasoro-lie-instance`：`VirasoroAlgebra R`（`R` 为交换 ℚ-代数）已是真正的 `LieRing` +
@@ -66,6 +127,10 @@
   - `negSpan_eq_top`：`V(c,h)` 由**无序**负模态词 `L_{n_1}⋯L_{n_k}|c,h⟩`（`n_i < 0`）张成；
   - `lie_lgen_zero_wordAct` / `lie_lgen_zero_of_mem_levelSpan`：`L_0` 在 level `N` 上作用为 `h+N`；
   - `iSup_levelSpan_eq_top` + `levelSpan_fg`：`⨆_N V_N = V(c,h)`，每个 `V_N` 有限生成；
+  - **level 平移** `lie_lgen_mem_levelSpan`（`k ≥ 1` 时 `L_{-k} : V_N → V_{N+k}`）与
+    整数版 `lie_lgen_mem_levelSpan_of_neg`；辅助 `consComposition` / `lie_lgen_levelWord`。
+    对任意交换 `ℚ`-代数 `R` 成立，不需要 `V(c,h) ≠ 0`（`levelSpan` 是按张成词定义的，
+    不是按 `L_0` 特征子空间定义的）；
   - 域上（`[Field K] [CharZero K]`）：`isInternal_levelSpan`（`V = ⨁_N V_N`）与
     `levelSpan_eq_eigenspace`（`V_N` 恰为 `L_0` 的 `h+N` 特征子空间）；
   - 万有性质 `vermaLift` / `vermaLift_hwv` / `vermaLift_lie` / `eq_of_lie_of_eq_hwv`；
@@ -100,8 +165,39 @@
     Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
   `dim V_N = p(N)` 也只证到 `≤`。这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
-- [ ] `shapovalov-form`：Shapovalov 形式。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。
+- [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
+  （无 sorry，公理只有标准三条）：
+  - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
+    `antiInvolution_lie : σ⁅X,Y⁆ = ⁅σY, σX⁆`、`antiInvolution_involutive`。
+    中心项 `(n³-n)/12` 在 `n ↦ -n` 下变号，恰与括号反序的负号抵消（`cocycleBilin_antiInvolution`）。
+  - `IsContravariant B`：`B(L_n x, y) = B(x, L_{-n} y)`。
+  - **`eq_of_isContravariant`：唯一性无条件成立**（只用 `negSpan_eq_top`，不需要 PBW / 分级 /
+    `V ≠ 0`）；推论 `IsContravariant.flip_eq`（**对称性是定理不是公理**）、
+    `IsContravariant.eq_zero_of_level_ne`（不同 level 正交）。
+  - `ContraDual`：`V(c,h) →ₗ R` 带 **σ-扭** 作用 `(X·f)(v) = f(σX·v)` 的 Virasoro 模
+    （类型同义词，因为 Mathlib 的 `Module.Dual.instLieRingModule` 已经在这个类型上放了未扭的
+    余伴随作用）。
+  - **存在性只差一条**：`IsShapovalovFunctional f`（`f|c,h⟩ = 1`，且 `f` 杀掉 `L_n V (n<0)`、
+    `(L_0-h)V`）。由它经万有性质得 `shapovalov`，逆变性由 `vermaLift_lie` 一行推出；
+    `existsUnique_isContravariant` 给出存在唯一；`exists_isContravariant_iff` 说这条假设
+    **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
+    这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
+    而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
+  - **char-0 域上存在性已收紧为 iff**（2026-09-11）：`levelSpan_zero`（`V_0 = R·|c,h⟩`，任意
+    `ℚ`-代数）+ `isCompl_levelSpan_zero`（`V = V_0 ⊕ ⨁_{N≥1} V_N`）+ level 平移
+    ⇒ `hwvFunctional`（level-0 坐标）是 Shapovalov 泛函，
+    `exists_isShapovalovFunctional_of_hwv_ne_zero`、`exists_isContravariant_of_hwv_ne_zero`、
+    `exists_isContravariant_iff_hwv_ne_zero`（**存在 ⟺ `hwv ≠ 0`**）、
+    `existsUnique_isContravariant_of_hwv_ne_zero`。
+    即：在 `[Field K] [CharZero K]` 上，Shapovalov 形式的唯一缺口就是 `V(c,h) ≠ 0`
+    （`pbw-verma` (b)），`IsShapovalovFunctional` 不再是独立假设。
+    一般交换 `ℚ`-代数 `R` 上是否也成立**未定**：构造用了 `isInternal_levelSpan`，
+    而后者只在 char-0 域上有（level 片靠 `L_0` 特征值 `h+N` 分离）。
+  - 低阶 Gram：`gram_level_one`（`2h`）、`gram_level_two_aa/ab/bb`（`4h+c/2`、`6h`、`8h²+4h`）、
+    `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
+    这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
+    （`desc*_mem_levelSpan`），但线性无关仍缺 → 与「Kac 行列式」的等同还差 `pbw-verma` (b)。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`（对具体向量，非基）。
 
 ## 无鬼定理岛
 
@@ -217,6 +313,16 @@
   `StringFormal.NoGhost.Fock.spuriousShell`（并在 notes 记 `nullStates` 与 `nullStates_eq`），
   `lean_file` 填 `formal/StringFormal/NoGhost/SpuriousShell.lean`；这会撤销该卡 notes 里
   「Lean 侧没有这个子模，故不填 lean_decl」的记账。
+- [x] `quotient-form`：`H_phys / H_null` 上诱导形式良定义 ——
+  `StringFormal/NoGhost/QuotientForm.lean`（图节点 `worldsheet.spurious-orthogonal-to-physical`
+  的后半句）。`Fock.pairing_add_null`（`⟨ψ+χ, φ+χ'⟩ = ⟨ψ,φ⟩`，ψ,φ ∈ H_phys，χ,χ' ∈ H_null）、
+  `Fock.pairing_eq_of_sub_mem_nullSubmodule`（差式版本）、`Fock.nullInPhys` / `Fock.PhysQuot`
+  （= `physSubmodule ⧸ nullSubmodule.comap physSubmodule.subtype`）、两次 `Submodule.liftQ`
+  得到的 `Fock.quotientPairing : LinearMap.BilinForm R (PhysQuot η a a₀)`，计算规则
+  **`Fock.quotientPairing_mk`** 与对称性 `Fock.quotientPairing_comm`。
+  **未做**：非退化性（`∀ q', ⟨q,q'⟩ = 0 → q = 0`，形式上 routine 但没写）与正定性（无鬼定理本体）。
+  图侧：建议 `worldsheet.spurious-orthogonal-to-physical--via-lean` 的 `lean_decl` 列
+  `spuriousSubmodule_le_orthComplement` 与 `quotientPairing_mk`，从 rigorous 升回 formalized。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
@@ -244,6 +350,15 @@
     另有动量算术：`dotVec_towerMomentum_right_of_isotropic`（`k_0²=0` ⟹ `k_0·p` 沿塔不变，
     即图节点 ddf-operators-v4 说明 (b)）与 `invTwo_mul_zeroModeSq_towerMomentum`
     （`α'(k - N k_0)² = α'k² - N`，即 no-ghost-theorem-v4 (1b) 的质量壳记账）。
+  - [x] (1b) **塔上的双线性型**（`StringFormal/NoGhost/TowerPairing.lean`，图节点
+    `worldsheet.momentum-tower-fock-space` (2)(4)）：`Fock.towerPairing η = Σ_j ⟨·_j, ·_j⟩`
+    作为 `LinearMap.BilinForm`；层间正交 `towerPairing_single_single_of_ne`、对称
+    `towerPairing_comm`、以及三条伴随 `towerPairing_towerShift_left`（`(e^{ink_0·x})^† = e^{-ink_0·x}`，
+    层间关系，**不是** `Fock.lean` 任何引理的推论）、`towerPairing_towerMode_left`、
+    `towerPairing_towerLop_left`（后两条逐层继承 `pairing_mode_left` / `pairing_Lop_left`）。
+    另补 `towerShift_apply` / `towerDiag_apply` / `towerMode_apply` / `towerLop_apply`
+    （DDF.lean 只有 single 上的公式）。顶点算子 `towerVertex` 的伴随仍未做（需
+    `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`），故 `A^i_n` 的伴随不可用。
   - [x] (2) **指数顶点算子的振子部分**：`Fock.creaExp`（产生半的 Laurent 系数）、
     `Fock.vertexSub` / `Fock.vertexAnn`（湮灭半）、`Fock.vertexOsc η b K`（`z^K` 系数）。
     核心定理 **`Fock.lie_mode_vertexOsc`**：`[α^μ_p, V_K] = b^μ V_{K-p}`（`p ≠ 0`）；
@@ -253,12 +368,13 @@
     分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
     `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
     横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
-  - [ ] (3) **共形权 `[L_m, V]`**：**未做**。真正的陈述是
+  - [ ] (3) **共形权 `[L_m, V]`**：`m ≥ 1` **已证**（见 (3d) 单 Fock、(3e) 塔上），
+    `m < 0` 未做（见 (3c')、(3f)）。陈述是
     `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
     `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
     `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
     取定值的算子族唯一），加上 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode`，把该恒等式
-    **归约为真空上的单条等式**，即计算 `L_m` 作用在相干态系数 `creaExp` 上。那条计算未做。
+    **归约为真空上的单条等式**，即计算 `L_m` 作用在相干态系数 `creaExp` 上。
     做它需要的组合输入已经看清楚：欧拉型递推 `M·Φ_M = Σ_{l=1}^{M} (b·α_{-l}) Φ_{M-l}`，
     在系数层面等价于 `Σ_v (η_{v.1} b^{v.1}) w(d - e_v) = (level d) · w(d)`，可由
     `Fock.expWeight_add_single` 直接得到。
@@ -266,8 +382,51 @@
       连同辅助引理 `Fock.level_sub_single_add`、`Fock.expWeight_sub_single`；
       无 sorry，公理只有标准三条。求和索引写成 `l ∈ Finset.range M` 配 `l.succPNat`，
       即模态跑遍 `1, …, M`。
-    - [ ] (3b) 真空上的单条等式 `L_m Φ_J = …`（把 (3a) 与 `Sugawara.lean` 的 `Lop` 结合），
-      以及由 `vertexOsc_unique` 得到的完整 `[L_m, V_J]`：**未做**。
+    - [x] (3b) 真空上的单条等式，`m ≥ 1` 的情形**已证**：
+      `Fock.Lop_apply_creaExp_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
+      `L_m Φ_J = (a·b + ½ (m-1)(b·b) + (J - m)) Φ_{J-m}`，对任意 `J : ℤ` 成立
+      （`J < m` 时两边都为零）。证明把 `L_m = ½ Σ_j :α_{m-j}·α_j:` 的指标分成五段
+      （`j ≤ -1` / `j = 0` / `1 ≤ j ≤ m-1` / `j = m` / `j ≥ m+1`），两条产生尾用
+      `Fock.sum_mode_creaExp_eq_smul`（(3a) 的 `mode` 形式）求和。
+      推论 `Fock.Lop_apply_creaExp_of_pos_shifted`（零模参数 `a → a+b`）给出
+      `L_m^{(a+b)} Φ_J = (J - m + a·b + ½ (m+1)(b·b)) Φ_{J-m}`，与本项 (3) 记录的文献形式
+      `(J + b·a - m + (m+1)·½ b·b)` **逐项相符**，即权 `h = ½ b·b`。
+      交叉验证：`Fock.Lop_one_apply_creaExp_one`（由上式）与
+      `Fock.Lop_one_apply_creaExp_one_via_mode`（由对易子 `Lop_apply_mode_one`）
+      在 `m = J = 1` 给出同一答案。无 sorry，公理只有标准三条。
+    - [x] (3c) `m = 0`：`Fock.Lop_zero_apply_creaExp`，`L_0 Φ_J = (α'k² + J) Φ_J`。
+      **数学要点**：它不是 (3b) 在 `m = 0` 的特例——`m ≥ 1` 时 `j = 0` 与 `j = m` 是两项、
+      各出 `½ (a·b)`，`m = 0` 时并成一项 `½ (a·a)`，把 `m = 0` 代入 (3b) 会得到错误的
+      `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 齐次元，这条直接由已有的
+      `Fock.Lop_zero_apply_of_mem_levelSubmodule` 得到。
+    - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
+      共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
+      第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
+    - [x] (3d) 完整的 `[L_m, V_J]`，`m ≥ 1`：**已证**
+      `Fock.lie_Lop_vertexOsc_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
+      `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`。
+      证明按预定路线：两边作为 `ℤ → Module.End` 的族满足**同一条**产生模态递推，
+      再由 `Fock.eq_zero_of_vertex_recursion` 归约到真空，真空上是 (3b) 的
+      `Fock.Lop_apply_creaExp_of_pos_shifted` 加 `Lop_apply_one_of_pos`（`m ≥ 1` 时 `L_m|k⟩ = 0`）。
+      递推的关键在于系数对 `J` 是**斜率 1 的仿射函数**：`c(J+l) = c(J) + l`，这恰好抵消
+      `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}` 产生的多余项 `l · V_{J+l-m}`，两边才同构。
+      辅助引理 `Fock.Lop_apply_X_mul`（`⁅L_m, α_p⁆` 的逐点形式）。
+      推论 `Fock.lie_Lop_vertexOsc_of_pos_isotropic`（`b·b = 0` 时右端为 `(J - m + a·b)`）。
+      无 sorry，公理只有标准三条。
+    - [x] (3e) 塔上版本，`m ≥ 1`：`lie_towerLop_towerVertex_of_pos`
+      （`StringFormal/NoGhost/VertexWeight.lean`）
+      `⁅L_m, V^{(n)}_K⁆ = (K - m - n + n (k_0·p)) • V^{(n)}_{K-m}`，
+      归一化推论 `lie_towerLop_towerVertex_of_pos_normalized`（`k_0² = 0` 且 `2α' k_0·p = 1`）
+      给 `⁅L_m, V^{(n)}_K⁆ = (K - m) • V^{(n)}_{K-m}`，即 `towerVertex` 是权 **0** 的准初级场
+      （权 1 来自 DDF 算子里的 `∂X^i`，不属于 `towerVertex`）。
+      **数学要点（本项发现）**：塔上版本**必须**假设 `k_0² = 0`（`dotVec η b b = 0`），
+      这不是为方便。单个 Fock 空间上的系数在第 `j` 级是
+      `(K-n) - m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)`，含 `j`；`k_0² ≠ 0` 时
+      `⁅L_m, V^{(n)}_K⁆` 在整条塔上**不是** `V^{(n)}_{K-m}` 的标量倍，只是逐级成比例、
+      比例因子依赖动量级数 `j`。单 Fock 版本 (3d) 则对任意 `b` 成立，不需要 `b·b = 0`。
+      无 sorry，公理只有标准三条。
+    - [ ] (3f) `m < 0` 的 `[L_m, V_J]`：**未做**。(3d) 的整条路线用了 `m ≥ 1`
+      两次（真空上 `L_m|k⟩ = 0`，以及 (3b) 的分段求和），`m < 0` 需要 (3c') 先做。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
@@ -281,7 +440,37 @@
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
-- [ ] `negative-norm-above-26`：D > 26 时显式负模态。
+- [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
+  level-2 标量试探态 `ψ₂ = [α_{-1}·α_{-1} + c₂(a·α_{-2}) + c₃(a·α_{-1})²]|k⟩`
+  （`Fock.levelTwoScalar`），其中 `a^μ = α^μ_0 = (2α')^{1/2}k^μ`，`s := zeroModeSq η a = 2α'k²`。
+  - 任意系数下的模：`Fock.pairing_levelTwoScalar_self`，`⟨ψ₂,ψ₂⟩ = 2D + 2s c₂² + 2s² c₃² + 4s c₃`。
+  - 物理态条件：`Fock.Lop_one_apply_levelTwoScalar`（`L₁ψ₂ = (2+2c₂+2c₃s)(a·α_{-1})|k⟩`）、
+    `Fock.Lop_two_apply_levelTwoScalar`（`L₂ψ₂ = (D+2c₂s+c₃s)|k⟩`）；`n ≥ 3` 自动
+    （`Fock.Lop_apply_levelTwoScalar_of_three_le`，用 level 分级）。
+    合起来是 `Fock.levelTwoScalar_mem_physSubmodule`。
+  - 闭式（图节点 `worldsheet.ocq-level-two-scalar-norm`）：`Fock.pairing_levelTwoScalar_physical`，
+    `(4a₀-9)² ⟨ψ₂,ψ₂⟩ = 2(D-1)[16a₀² + (2D-74)a₀ + 84 - 3D]`（分母已清；括号内判别式 `4(D-1)(D-25)`）。
+    非空性：`Fock.exists_levelTwoScalar_mem_physSubmodule`（域上，`4a₀ ≠ 9` 且 `k² ≠ 0`）。
+  - `a₀ = 1`：`Fock.pairing_levelTwoScalar_intercept_one`，`⟨ψ₂,ψ₂⟩ = -2(D-26)(D-1)/25`，
+    系数 `c₂ = (D-1)/5`、`c₃ = (D+4)/10`。
+  - **鬼**（no-ghost-theorem-v4 第 (2) 条）：`Fock.exists_mem_physSubmodule_pairing_self_neg`，
+    有序域上 `D > 26` ⟹ `∃ ψ ∈ physSubmodule (minkowski D K) b 1, ⟨ψ,ψ⟩ < 0`；
+    动量见 `Fock.exists_zeroModeSq_eq_neg_two`（`α'k² = -1`，需 `D ≥ 2` 与域，因为
+    单分量的 `k² = -1` 在 ℚ 上无解）。
+  - 带动量量词的加强版：`Fock.exists_mem_physSubmodule_pairing_self_neg'`，结论多输出
+    `zeroModeSq (minkowski D K) b = -2` 与 `b ≠ 0`，可逐字对应 no-ghost-theorem-v4 第 (2) 条的
+    `∃ p ≠ 0`；`b ≠ 0` 由质壳本身逼出（`zeroModeSq η 0 = 0 ≠ -2`）。
+    图节点 `worldsheet.negative-norm-physical-state-above-26` 的 `lean_decl` 宜改指这个声明。
+  - **公理登记**（curator 要求）：上述声明均无 `sorry`，
+    `lake env lean --run scripts/check_axioms.lean --import StringFormal.NoGhost.LevelTwo --all`
+    对 `exists_mem_physSubmodule_pairing_self_neg`、`exists_mem_physSubmodule_pairing_self_neg'`、
+    `exists_zeroModeSq_eq_neg_two` 均输出 `ok`，公理集只有
+    `propext`、`Classical.choice`、`Quot.sound`（2026-09-11 复核）。
+
+  **未做**：没有证明 `ψ₂` 张成 level-2 物理态的标量（`SO(D-1)` 不变）部分，所以「level-2 标量模」
+  是关于这一族显式试探态的陈述，不是关于某个典范向量的。做鬼不需要这一步（一个负模态就够），
+  但图节点若要读作「level-2 标量物理态的模」，应在 `gaps` 里写明这一点。
+  也没有证明 `D ≤ 26` 时模非负——那是无鬼定理本身。
 
 ## 基础设施
 
@@ -293,4 +482,9 @@
   图侧接入已做：`uv run stringgraph check-axioms`（`tools/stringgraph/axioms.py`）把结论映回节点 id，
   非标准公理同时报到陈述卡和依赖它的 `formalized` 推导上；**不进 `validate`/pre-commit**（要起 Lean）。
   2026-09-11 全图 14 个 `formal.lean_decl` 跑通：14 ok，0 bad，0 missing。
-- [ ] `basic-lean-housekeeping`：把 `toProdₗ` / `ofWitt` / `span_lgen_cgen_eq_top` 从 `Verma.lean` 挪到 `Basic.lean`（它们是 Basic 级事实；`WittPerfect.lean` 因此多 import 了 Verma）。等 Verma 区无并行 formalizer 时做。另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
+- [x] `basic-lean-housekeeping`：`toProdₗ` / `ofWitt` / `toProd_ofWitt` / `ofWitt_lgen` /
+  `span_lgen_cgen_eq_top` / `centralTerm_zero` 已于 2026-09-11 从 `Verma.lean` 挪到
+  `Basic.lean`（声明全名不变，图卡 `lean_decl` 无需改）。`WittPerfect.lean` 的 import 已从
+  `Virasoro.Verma` 改成 `Virasoro.Basic`。`DescendantGrading.lean` **仍需** import Verma：
+  它实际用了 `wordAct` / `vermaLift` / `VermaModule`（约 40 处），不是只为这几条。
+  另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。

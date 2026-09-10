@@ -1,0 +1,67 @@
+id: math.so-usp-adjoint-fundamental-trace-identities
+kind: proposition
+title: so(N) / usp(N) 的伴随迹用基本迹表出：Tr F², Tr F⁴, Tr F⁶ 的恒等式（系数 N + 2l, N + 8l, N + 32l）
+statement: |
+  设 𝔤 是 **so(N)** 或 **usp(N)**（N 偶）的李代数，F 是取值于 𝔤 的**二形式**
+  （偶次形式，故各分量在外代数中互相交换；conv.gauge-trace-normalization）。
+  记 **tr** 为 N 维基本表示的迹，**Tr** 为伴随表示的迹，并令 Ω_{4n} := Tr F^{2n}。则
+
+    Ω₄  = (N + 2l) · tr F²
+    Ω₈  = (N + 8l) · tr F⁴ + 3 (tr F²)²
+    Ω₁₂ = (N + 32l) · tr F⁶ + 15 · tr F² · tr F⁴
+
+  其中
+
+    l = −1  （𝔤 = so(N)）
+    l = +1  （𝔤 = usp(N)）
+
+  **本节点不断言**：
+  (a) n ≥ 4（Tr F⁸ 及以上）的任何恒等式；
+  (b) 其它李代数（E₈ 另见 math.e8-adjoint-trace-identities；u(N) 等未涉及）；
+  (c) tr F²、tr F⁴、tr F⁶ 三者互相独立——对具体的小 N 它们之间还有额外关系，
+      本节点只说上面三个等式，**不**说右端各项不可再约；
+  (d) 任何关于反常的事。本节点是纯粹的表示论迹恒等式，物理含义由
+      consistency.anomaly-twelve-form-d10 一侧承载。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12a)(12b)(12c) 与 (13a)(13b)；引导句「The cases of SO(N) and USp(N) are considered first. In these cases Ω_{4n} can be reexpressed in terms of fundamental-representation matrices」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E7）。
+      **GS 直接给出这三条恒等式，没有任何证明动词**（没有 "we show"、"one can show"、"it follows"），
+      也没有给出处引用。这是本节点 status 只能是 physical-argument 的直接原因。
+  - ref: bilal-2008
+    loc: "§12, (12.23)：Tr F² = (n−2) tr F²、Tr F⁴ = (n−8) tr F⁴ + 3(tr F²)²、Tr F⁶ = (n−32) tr F⁶ + 15 tr F² tr F⁴（SO(n)）"
+    note: |
+      L1（抽取记录 §1.2/E7）。与本节点在 l = −1 时逐项一致。
+      **该文的措辞同样是「Let us note without proof that…」**，即第二个来源也不证明。
+      此处 (12.23) 用的是 SO(n) 的原版归一化，与 conv.gauge-trace-normalization 相容，
+      不需要 convention_map；Bilal 的重标度只出现在 E₈ 一段（见该约定节点 notes 第 2 条）。
+  - ref: antonelli-2015
+    loc: "p.10 Table 2（与 GS (12) 一致的迹恒等式表）；§2.3.1（SO(n) 一路的推导思路）"
+    note: |
+      L1（抽取记录 E7 备注）。§2.3.1 的思路：伴随表示实现为基本表示的**外平方**，
+      Ω^{mn}_{kl} = O^m_k O^n_l − O^n_k O^m_l，于是 Tr Ω = ½[(tr O)² − tr(O²)]；
+      再取 O = e^F、Ω = e^𝓕 按 F 的阶数比较两边。
+      **本项目未逐步复核这一推导，也未核实它是否覆盖 usp(N) 一支**；因此它只作为
+      「结论有第三方支持」的证据，不作为严格证明来源。该文是单作者预印本（见 bib note）。
+tags: [algebra, lie-algebra, trace-identity, anomaly, so32, usp, phase2, lean-candidate]
+notes: |
+  【为什么放在 math 而不是 consistency】这是纯粹的李代数表示论恒等式，不含任何物理输入
+  （不涉及指标定理、费米子谱、路径积分）。抽取记录把 E7 标为「★【纯代数】」并列入
+  §5「Phase 2 Lean 岛候选」的前置条件。物理侧的使用在 consistency.* 一批节点。
+
+  【l 的含义】GS 只把 l 当作一个取 ±1 的记号（SO 取 −1、USp 取 +1），本图照抄，
+  **不**替它补「l = 对称/反对称的指标」之类的解释——原文没有给。
+
+  【与 Lean 的关系】本节点是 math.anomaly-twelve-form-factorization（因子化恒等式，
+  Phase 2 Lean 岛首选目标）的**假设**，不是它的证明对象。Lean 陈述应把
+  Ω₄, Ω₈, Ω₁₂ 按上面的多项式表达式**定义**出来，然后证因子化；
+  「这些多项式表达式确实是 so(32) 的伴随迹」这件事**本身不在 Lean 岛的范围内**
+  （需要 so(N) 伴随表示 = 外平方 + Chern–Weil 型展开，Mathlib 现状不足）。
+
+  【查重】新增前跑过 `stringgraph search anomaly / 反常 / trace / SO(32) / supergravity`：
+  全图此前没有 consistency 区节点，math 区也没有任何迹恒等式节点，无重复。
+author: curator
+created: "2026-09-11"

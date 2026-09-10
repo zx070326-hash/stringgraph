@@ -1,0 +1,61 @@
+id: spectrum.sphere-tachyon-expectation-smooth-at-infinity--via-inversion
+target: spectrum.sphere-tachyon-expectation-smooth-at-infinity
+kind: proof
+status: rigorous
+depends_on:
+  - id: spectrum.sphere-n-tachyon-expectation-value
+    note: 提供被改写的表达式 ∏_{i<j}|z_ij|^{α'k_i·k_j} 与动量守恒 delta 函数。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供过渡函数 u = 1/z 与「z = ∞ 就是 u 片原点」这一约定。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      标 inferred：提供闭弦 tachyon 的质量壳条件（本图记为 α'm² = −4，配 mostly-plus 的
+      m² = −k² 即 α'k² = 4）。该节点是**光锥量子化**下的闭弦质量公式，来源（§1.4）
+      与本推导的来源（§6.2 / [H] Problem 6.1）没有互相引用；把光锥谱的质量壳条件搬到
+      协变振幅的外线上，本图没有节点承载这一步。
+    convention_map: |
+      时空号差 mostly-plus（conv.metric-mostly-plus）下 m² = −k²，故 α'm² = −4 等价于 α'k² = 4。
+      抽取记录与 [H] 都直接写 α'k_i² = 4，与本图约定一致。
+sources:
+  - ref: headrick-2008
+    loc: "Problem 6.1（PDF p.40）：换片计算与「smooth at u_i = 0」的结论，逐字"
+    note: |
+      抽取记录 #E94，L1。**按 lead 裁决（2026-09-10），Headrick 习题解答在「对某个显式计算是
+      唯一成文来源」时可作为推导 source，但 reviewer 须复核计算。** 本条即此情形，
+      复核请求见 gaps 与 notes。
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.31)，p.174"
+    note: 抽取记录 #E94，L1（(6.2.31) 是被改写的对象）。
+summary: |
+  逐字复算（[H] Problem 6.1 的三行）：
+
+  z_ij = z_i − z_j = 1/u_i − 1/u_j = (u_j − u_i)/(u_i u_j)，故 |z_ij| = |u_ij| / (|u_i||u_j|)。
+  于是
+    ∏_{i<j}|z_ij|^{α'k_i·k_j} = ∏_{i<j}|u_ij|^{α'k_i·k_j} · ∏_i |u_i|^{−α' k_i·(Σ_{j≠i} k_j)}。
+  用动量守恒 Σ_{j≠i} k_j = −k_i，指数变成 +α' k_i²，即
+    ∏_{i<j}|z_ij|^{α'k_i·k_j} = ∏_{i<j}|u_ij|^{α'k_i·k_j} ∏_i |u_i|^{α'k_i²}。
+  闭弦 tachyon 的质量壳条件 α'k_i² = 4 给出 ∏_i|u_i|⁴：在 u_i = 0 处是四次零点而非奇点，
+  期望值光滑。故把某个 z_i 送到 ∞（u_i → 0）不产生发散，这一步合法。
+gaps:
+  - "**这一论证的来源是习题解答而非正文**（抽取记录 Q17 明记）：原书正文是否论证了
+     「顶点算子可以放到 z = ∞」未核实，可能只留给习题 6.1。按 lead 裁决，
+     Headrick 作唯一成文来源时 reviewer 须复核计算——**已复核**（见 notes）。"
+  - "**质量壳条件的搬运未被节点承载**（见第三条依赖的 inferred 说明）：
+     从光锥谱的 α'm² = −4 到协变振幅外线的 α'k² = 4，本图没有节点。"
+  - "**只覆盖 tachyon**：带 ∂X 的顶点算子换片时有额外幂次，本推导不涉及。"
+  - "**路径积分测度未定义**（本批次共有的限制）：本推导只做代数改写，但被改写的对象
+     (6.2.17)/(6.2.31) 本身是路径积分定义的。"
+  - "**(6.2.31) 与 (6.2.17) 的关系未核实**：抽取记录把 (6.2.31) 描述为「由全纯性 + 极点结构 +
+     动量守恒唯一确定的顶点算子期望值」，[H] 直接对它做换片。两式在原书中的确切关系
+     （是否 (6.2.31) 就是含 ∂X 因子的推广）本图未核对。"
+notes: |
+  reviewer-verified: reviewer-ch6, 2026-09-11
+  复核对象：summary 的换片代数（|z_ij| = |u_ij|/(|u_i||u_j|)、动量守恒改写、α'k_i² = 4 ⇒ ∏|u_i|⁴）。
+  升级依据：初等可复核例外；前提（(6.2.31) 的乘积形式、Σk = 0、α'k_i² = 4）已在目标陈述与依赖里写全。
+
+  本推导是「用共形 Killing 群固定三点、其中一点取 ∞」这一操作在本图中的**唯一**支撑。
+  凡使用该操作的节点（spectrum.closed-string-four-tachyon-integral、
+  spectrum.open-string-four-tachyon-amplitude）都应依赖本条或在 gaps 里回指它。
+author: curator-polchinski-ch6
+created: "2026-09-11"

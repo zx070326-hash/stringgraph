@@ -1,0 +1,68 @@
+id: worldsheet.euler-number-weights-string-coupling
+kind: proposition
+title: Euler 数项 λχ 给出拓扑展开的耦合常数：闭弦 g_c ∼ e^λ、开弦 g_o ∼ e^{λ/2}
+statement: |
+  在世界面作用量中可以加一项正比于 Euler 数的项
+    S_χ = λ χ,   χ = (1/(4π)) ∫_M d²σ g^{1/2} R + (1/(2π)) ∫_{∂M} ds k,
+  λ 为实常数。该项与 diff × Weyl 规范对称性相容（χ 是 Weyl 不变量，
+  worldsheet.euler-number-weyl-invariance）且在二维不带来新的动力学（χ 只依赖拓扑），
+  因此它在弦微扰展开（worldsheet.worldsheet-sum-over-topologies）中的作用只是给
+  每个世界面拓扑一个常数权重 e^{−λ χ}。
+
+  这个权重就是**拓扑展开的耦合常数展开**：
+  (i) 闭弦。可定向无边亏格 g 曲面有 χ = 2 − 2g，故拓扑权重
+        e^{−λχ} = e^{λ(2g−2)}.
+      若约定「每个闭弦顶点算子配一个因子 g_c」，则球面（g = 0）上 n 点树级振幅
+      应正比于 g_c^{n−2}，而按上式它正比于 g_c^{n} e^{−2λ}；两者一致要求
+        g_c ∼ e^{λ},
+      于是亏格展开的权重是 g_c^{2g−2} = g_c^{−χ}：每加一个把手多一个因子 g_c²。
+  (ii) 开弦。圆盘有 χ = 1，拓扑权重 e^{−λ}；同样约定「每个开弦顶点算子配一个因子 g_o」，
+      圆盘上 n 点树级振幅应正比于 g_o^{n−2}，而按上式它正比于 g_o^{n} e^{−λ}，
+      两者一致要求 g_o² ∼ e^{λ}，即
+        g_o ∼ e^{λ/2},   故   g_o² ∼ g_c.
+
+  **边界（本卡不断言的东西）**：
+  ⚠ 这是**弦耦合常数的定义**，不是动力学结论：λ 是 worldsheet.worldsheet-sum-over-topologies
+     定义里的自由参数，上式只是给「弦耦合常数」这个名字下的量赋值，没有任何东西被计算出来。
+  ⚠ 用「∼」而不是「=」是照原书：比例常数依赖顶点算子的归一化，本图不固定它，
+     也不断言常见写法 g_s = e^λ 中的等号。
+  ⚠ 本卡不断言 λ（因而 g_c、g_o）由 dilaton 期望值决定——那是后文（§3.7）的内容。
+  ⚠ 本卡不断言拓扑求和的收敛性；作为「展开」它是形式的（渐近）级数。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.2, eq. (3.2.3b)（Euler 数项的 Weyl 不变性）、eq. (3.2.7)（弦耦合常数），p.82–83"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E48，证据等级 [已核实]：
+      schrans-2020 目录 `3.2 p 82: Eq (3.2.3b) The Weyl Invariance of the Euler Number`、
+      `3.3 p 83: Eq (3.2.7) String Coupling Constants`，**两个式号已核实**；
+      ξ 的表达式 (1/4π)∫_M d²σ √g R + (1/2π)∫_{∂M} k ds 由 schrans-2020 §3.28 正文 [3.134]
+      逐字给出，**已核实**。E48 记录的结论逐字为「`e^{−λξ}` 因子给出拓扑展开的耦合常数，
+      闭弦耦合 `g_c ∼ e^λ`、开弦耦合 `g_o ∼ e^{λ/2}`（(3.2.7)）」。
+      ⚠ **原书如何论证这两个指数本图未核实**：抽取记录只给结论 (3.2.7)，没有转录论证。
+      本卡陈述里 (i)(ii) 的顶点算子计数是 curator 补的标准论证，见推导的 gaps。
+tags: [worldsheet, string-coupling, topology, euler-number, perturbation-theory, weyl]
+notes: |
+  **符号**：抽取记录在 §3.2 处把 Euler 数记作 ξ，在 (5.3.9) 处记作 χ，是同一个量；
+  本图统一用 χ（与 worldsheet.worldsheet-euler-number 一致）。原书 §3.2 用哪个符号本图未核实。
+
+  **与分派任务书措辞的偏差（记录在案）**：任务书写的是「开弦每条边界一个 g_s」，
+  抽取记录 E48 与 (3.2.7) 给的是 g_o ∼ e^{λ/2}。二者不是同一条陈述：按 (3.2.7) 的计数，
+  开弦耦合的幂次由**开弦顶点算子个数**（边界上的穿孔数）计，不由边界分支数 b 计；
+  「每条边界一个 g_s」在圆盘（一条边界）上给不出 g_o² ∼ e^λ。本卡按抽取记录写。
+
+  **为什么这是命题而不是定义卡**：「可以加 λχ 项」并「该项等价于给每个拓扑一个耦合常数幂次」
+  是有内容的断言（要用 χ 的 Weyl 不变性与 Gauss–Bonnet 的 χ = 2 − 2g − b），故挂推导；
+  「S-矩阵 = 对拓扑求和」那一层是纯定义，见 worldsheet.worldsheet-sum-over-topologies。
+
+  **不拆分的理由**：(i) 闭弦与 (ii) 开弦在原书是同一式 (3.2.7)、同一处论证（同一个 λ 的
+  两种读法），未被分别推导，故按「一个节点一个命题」仍算一条命题——「λχ 项的权重就是
+  耦合常数展开」——闭/开只是它在两类拓扑上的实例。若日后核实到原书分别论证，再拆。
+
+  **位置核对源（不入 sources[]，lead 裁决：个人笔记只作核对）**：schrans-2020 目录条目 `3.2 p 82`、`3.3 p 83`；§3.28 正文 [3.134]（ξ 的表达式）。
+
+author: curator-e47-e48
+created: "2026-09-11"

@@ -15,6 +15,21 @@ depends_on:
       得 K/2 + 2 = a，即 K = 2(a − 2)。该节点的断言 (a) 明确**不**包含
       「共形正规序与产生-湮灭正规序给同一算符」（a^X = 0），故这条边不引入 OPE 层的依赖，
       不降低本推导的有效状态。
+  - id: worldsheet.ocq-level-two-scalar-norm-closed-form
+    inferred: true
+    note: |
+      【reviewer-batch8 2026-09-11】改为 inferred: true——summary 不用此边，仅为让机器验证可见（同 batch-4 裁决）。
+      【2026-09-11（二）新增，LevelTwo.lean 合入 main（c32f026）后接线】
+      该卡是本目标第 (2) 条（模的闭式）与第 (3a) 条（a = 1 处为 (D−1)(26−D)·2/25）的
+      **机器验证版**：Lean 的 `Fock.pairing_levelTwoScalar_physical` 给出清分母形式
+      (4a−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a² + (2D−74)a + 84 − 3D]，
+      `Fock.pairing_levelTwoScalar_intercept_one` 给出 a = 1 处的 −2(D−26)(D−1)/25。
+      本条**不是**说本推导的手算被替换掉了——手算仍是本推导的论证本体（见 summary），
+      两者是同一结果的两条独立核算路径；连这条边是为了让「本目标的哪一部分已被机器验证」
+      在图上可见、可追溯。
+      **有效状态不变**：该卡 effective 为 formalized，高于本推导的 rigorous，故不封顶。
+      本目标仍为 rigorous，因为它比该卡多断言两件**未形式化**的事：
+      解空间一维（第 (1) 条）与判别式分类（第 (3b)(3c) 条）。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1，level 2 的物理条件与伪态条件，(4.1.19)–(4.1.28) 区间，p.124；式号未核实"
@@ -74,6 +89,28 @@ gaps:
   - "【2026-09-11 更新】本推导现已连 worldsheet.open-string-l0-equals-level-plus-mass（main 上的 formalized 节点，只断言 L_0 在 level N 分量上的读值，不打包 a^X = 0），故质量壳这一步不再是无来源的。仍**刻意不连** worldsheet.open-string-l0-level-form 这条边，尽管它的断言 (i)（L_0 = α'p² + N）也是本推导用的质量壳形式。理由：本推导只需要 worldsheet.virasoro-generators-free-boson 的 L_m = (1/2)Σ_n :α_{m−n}·α_n: 在 m = 0 处的读值（一行代入，纯代数，rigorous），而 open-string-l0-level-form 还打包了断言 (ii)（共形正规序与产生-湮灭正规序给同一算符，即 a^X = 0），那一条走 OPE/态-算子路线，会把本推导的有效状态压到 physical-argument。连一条本推导用不到的边去换取一个更低的有效状态，不是诚实降级而是记账错误（同 worldsheet.brst-quantization 的 notes 中「是否 uses bc-ghost-cft」的裁断）。若 reviewer 认为 (i) 与 m = 0 代入之间还有本推导未论证的一步，应把该边补回并接受降级。"
 notes: |
   reviewer-verified: reviewer-ch4, 2026-09-11
+
+  【2026-09-11（二）：本目标的哪一部分已被机器验证】LevelTwo.lean（合入 main 的提交 c32f026）
+  机器验证了本目标的**第 (2) 条闭式**与**第 (3a) 条（a = 1 处为 (D−1)(26−D) 乘正因子）**，
+  这是同一结果的**第三次独立核算**（前两次：auditor 的精确有理数 Gram、curator 的符号代数，
+  见下面的复核记录）。三次的中间量逐项吻合：
+  Gram 矩阵 ⟨A,A⟩ = 2D、⟨A,B⟩ = 2K、⟨B,B⟩ = 2K²、⟨C,C⟩ = 2K、⟨A,C⟩ = ⟨B,C⟩ = 0，
+  以及两条物理条件与系数 c_2 = (1−D)/(4a−9)、c_3 = (D−4a+8)/(2(4a−9)(a−2))。
+  Lean 版把闭式写成**清分母**形式 (4a−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[…]，故在任意交换 ℚ-代数上成立，
+  不需要 4a ≠ 9；本目标写成 ⟨ψ₂,ψ₂⟩ = (D−1)[…]·2/(4a−9)² 时必须先设 4a ≠ 9。
+  **本目标的第 (1) 条（三维标量子空间中物理态解空间一维）与第 (3b)(3c) 条（判别式分类：
+  D ≤ 24 / D = 25 二重根 a = 3/4 / D ≥ 26，以及 D = 26 时 2(8a−3)(a−1) 在 3/8 < a < 1 上为负）
+  未形式化**，这正是本目标不能整体升为 formalized、必须另立
+  worldsheet.ocq-level-two-scalar-norm-closed-form 一卡的原因（拆卡由 formalizer 建议、lead 同意）。
+  本推导的 status 仍为 rigorous，summary 与目标陈述一字未动。
+
+  【附带登记：a = 1 的质量壳动量在 ℚ 上需要两个分量】（formalizer，LevelTwo.lean 文件头 Gaps
+  第 2 条与 formal/TODO.md 的 `negative-norm-above-26`）本目标第 (3a) 条落在 a = 1，
+  对应质量壳 α'k² = a − 2 = −1，即 α_0·α_0 = −2。在 ℚ 上**单个非零分量无解**
+  （单分量要求 (a^0)² = 2），必须取一个类时加一个类空分量，例如 a^0 = 3/2、a^1 = 1/2，
+  故该见证需要 **D ≥ 2** 与除法（域）。这一点在手算里被「取 k 使 α'k² = −1」一句掩盖了，
+  在任意基环上并非自动；Lean 侧由 `Fock.exists_zeroModeSq_eq_neg_two` 承担。
+  下游用途见 worldsheet.negative-norm-physical-state-above-26。
 
   【独立复核记录】
   - auditor, 2026-09-10：ms.no-ghost-theorem 第一轮回译审计条目 B1，精确有理数 Gram 矩阵计算，

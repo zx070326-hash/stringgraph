@@ -1,0 +1,227 @@
+id: worldsheet.momentum-tower-fock-space
+kind: definition
+status: formalized
+title: 沿一个参考向量的动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)：移位算子 e^{i n k_0·x}、层间正交的双线性型（约定式）、逐层作用的 α^μ_n 与 L_m
+statement: |
+  固定 D ∈ N、交换环 R（凡出现 L_m 处另设 R 为 Q-代数）、**对角**时空度规分量
+  η^{μμ}（conv.metric-mostly-plus 下 η = diag(−1, +1, …, +1)），以及 α'（conv.alpha-prime-regge）。
+
+  【逐层的空间】对每个动量 q（q^μ ∈ R）记 F(q) := worldsheet.bosonic-fock-space 的 Fock 空间
+  F(D, R)，并把零模按
+    α^μ_0 := (2α')^{1/2} q^μ · id
+  （标量乘法）装在其上。动量 q 只经由零模这一个标量族进入；F(q) 作为 R-模与 q 无关
+  （worldsheet.bosonic-fock-space 的缺口 (i)：那张卡的空间里根本没有零模，零模是这里补上的参数）。
+
+  【塔】固定一个**非零**参考向量 k_0 与一个基点动量 p，定义
+    T(p; k_0) := ⊕_{N ∈ Z} F(p + N k_0)。
+  这是**代数（外部）直和**：元素是族 (v_N)_{N ∈ Z}，v_N ∈ F(p + N k_0)，且只有**有限多个**
+  v_N ≠ 0。层指标 N 跑遍全部整数（不截断，不取任何完化）。第 N 层的动量参数是 p + N k_0，
+  其零模为 α^μ_0|_N = (2α')^{1/2} (p + N k_0)^μ。
+  **塔按指标 N 定义，不按动量值分类**：即使 R 有挠或某些 N ≠ M 使 p + N k_0 与 p + M k_0
+  作为向量相等，第 N 层与第 M 层仍是两层。R = R（实数）、k_0 ≠ 0 时两种读法一致。
+
+  (1) 【移位算子 e^{i n k_0·x}】对每个 n ∈ Z 定义 R-线性算子
+        S_n : T(p;k_0) → T(p;k_0),   S_n(F(p + N k_0)) ⊆ F(p + (N + n) k_0)，
+      它把第 N 层的向量**逐字**送到第 N+n 层的同一个向量（振子部分是恒等映射，只换动量标签）。
+      直接可见：
+        (i)  S_0 = id，S_m S_n = S_{m+n}，故 n ↦ S_n 是 Z 在 T(p;k_0) 上的表示，
+             每个 S_n 可逆，S_n^{−1} = S_{−n}；
+        (ii) [α^μ_0, S_n] = n (2α')^{1/2} k_0^μ · S_n，
+             即 S_n 把动量本征值由 p + N k_0 移到 p + (N+n) k_0。
+      (ii) 正是把 S_n 记作 **e^{i n k_0·x}** 的全部理由。
+      **本定义不引入 x^μ 本身**，也不引入 [x^μ, p^ν]：只有沿 k_0 的这一族整数步移位。
+
+  (2) 【塔上的双线性型 —— 这是一条约定式定义】对 v = (v_N)、w = (w_N) ∈ T(p;k_0) 定义
+        ⟨ v , w ⟩_T := Σ_{N ∈ Z} ⟨ v_N , w_N ⟩,
+      右端是有限和（有限支撑），每层的 ⟨·,·⟩ 是 worldsheet.fock-indefinite-form 由
+      ⟨|0⟩,|0⟩⟩ = 1 与 (α^μ_n)^† = α^μ_{−n}（n ≥ 1）唯一确定的 R-双线性型。
+      注意该型**只依赖 η，不依赖该层的动量**，故各层用的是同一个映射 F × F → R。
+      等价地：**不同层正交**，N ≠ M 时规定 ⟨v_N, w_M⟩_T = 0，塔上的型就是各层之型的直和。
+
+      ⚠ **层间正交是本定义规定的，不是被证明的。** 物理上它对应连续动量本征态的正交性
+      ⟨p|p'⟩ ∝ δ^D(p − p')，而本图中**没有任何节点**承载连续动量本征态与 δ 归一化
+      （本卡的塔是可数离散的代数直和，其中根本没有 δ 函数可用；
+      worldsheet.fock-indefinite-form 是**逐固定动量扇区**陈述的，对跨层配对不置一词）。
+      任何下游断言只要跨层配对（首当其冲是 worldsheet.vertex-operator-adjoint 的 (1) 与
+      worldsheet.ddf-operators-adjoint 的 (1)），就实质使用这条约定。
+
+  (3) 【逐层作用的算子】给定一族 R-线性算子 (T_N)_{N ∈ Z}，T_N : F(p + N k_0) → F(p + N k_0)，
+      其直和 ⊕_N T_N 是 T(p;k_0) 上的 R-线性算子。本图用到的两个实例：
+        · 振子模 α^μ_n（n ≠ 0）：逐层用 worldsheet.bosonic-fock-space 的产生/湮灭算符，
+          与层的动量无关；零模 α^μ_0 逐层是标量 (2α')^{1/2}(p + N k_0)^μ，**依赖层**；
+        · Virasoro 生成元 L_m：逐层用 worldsheet.virasoro-generators-free-boson 的 Sugawara 算子，
+          其定义里出现的动量取**该层的** p + N k_0。
+      这类算子**不移动层指标 N**。移动层指标的只有 (1) 的 S_n（以及由 S_n 与振子部分复合而成的
+      顶点算子，见 worldsheet.vertex-operator-adjoint）。
+
+  (4) 【移位算子的伴随（定义的直接展开，不是新命题）】对一切 n ∈ Z 与一切 v, w ∈ T(p;k_0)：
+        ⟨ S_n v , w ⟩_T = ⟨ v , S_{−n} w ⟩_T,   即 S_n^† = S_{−n} = S_n^{−1}。
+      证：⟨S_n v, w⟩_T = Σ_N ⟨v_{N−n}, w_N⟩ = Σ_M ⟨v_M, w_{M+n}⟩ = ⟨v, S_{−n} w⟩_T，
+      整个论证只用到「各层的型是同一个映射」与「层间正交」，即 (2) 的两条。
+      记录在此是因为下游（顶点算子与 DDF 算子的伴随）每次都用它，而它的成立恰恰依赖 (2) 的约定。
+
+  【本定义**不**断言什么】——六条边界：
+  (a) **不**引入 x^μ、不引入完整的动量空间：一条塔对应一个固定的 (p, k_0)，
+      不同塔（k_0·p 取不同值，或 k_0 方向不同）之间本定义不建立任何关系。
+  (b) **不**要求 k_0 类光。塔本身对任意 k_0 ≠ 0 有定义。下游一律取 k_0² = 0，
+      但「k_0·p 沿塔不变」与「α'(p + N k_0)² = α' p² + N」这两条**记账不属于本卡**：
+      前者是 worldsheet.ddf-operators-v5 的说明 (b)，后者是该卡归一化 (★) 2α' k_0·p = 1
+      与 k_0² = 0 合起来的推论，见 worldsheet.no-ghost-theorem-v4 (1b)。本卡不重复断言它们。
+  (c) **不**取任何拓扑完化：T(p;k_0) 是代数直和，不是 Hilbert 空间；
+      与 worldsheet.bosonic-fock-space 的缺口 (ii) 同一条。
+  (d) ⟨·,·⟩_T 是 **R-双线性型**，不是半双线性（Hermitian）形式；「†」在本卡与其下游一律指
+      对该双线性型的转置。复 Fock 空间上的 Hermitian 版本本图与 Lean 侧均未做
+      （worldsheet.fock-indefinite-form 的 notes【2026-09-11（二）】同一条限定）。
+  (e) **不**断言 ⟨·,·⟩_T 的任何正定/不定性质。逐层的不定性见 worldsheet.fock-indefinite-form (4)；
+      横向 DDF 子空间上的正定性见 worldsheet.ddf-operators-adjoint (2)。
+  (f) **不**断言塔上有 DDF 算子、顶点算子或物理态条件。那些分别是
+      worldsheet.ddf-operators-v5、worldsheet.vertex-operator-adjoint、
+      worldsheet.old-covariant-physical-states 及其下游的事。
+uses:
+  - worldsheet.bosonic-fock-space
+  - worldsheet.fock-indefinite-form
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.towerPairing
+  lean_file: StringFormal/NoGhost/TowerPairing.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{TowerFock, towerMomentum, towerShift, towerDiag, towerMode, towerLop}；towerShift_zero / towerShift_comp / towerShift_single / towerMode_single / towerLop_single / lie_towerLop_towerMode / lie_towerMode_towerVertex（其 p = 0 情形即本卡 (1)(ii) 的内容）"
+    note: |
+      本仓库，合并提交 9691057（formal 侧 4c12d36），无 sorry，公理只有 propext / Classical.choice /
+      Quot.sound；curator 未自行重跑 lake build。`TowerFock D R = ℤ →₀ Fock D R` 逐字就是本卡的
+      **代数直和**（有限支撑），`towerMomentum a b j = a + j·b` 是第 j 层的动量参数，
+      `towerShift n` 是本卡的 S_n，`towerDiag` 是本卡 (3) 的逐层算子构造。
+
+      **索引字典**：Lean 的 rung 指标 j 与本卡的 N 相同（第 j 层动量 a + j·b ↔ 第 N 层动量
+      p + N k_0，a^μ = (2α')^{1/2} p^μ、b^μ = (2α')^{1/2} k_0^μ）；DDF.lean 文件头写的
+      "j = −N" 指的是 worldsheet.no-ghost-theorem-v4 用**振子能级** N 标层（动量 k − N k_0）
+      的那套记法，与本卡的 N 差一个符号，见 notes【三套层指标的字典】。
+
+      ⚠ **已过期（2026-09-11 下午）。** 原文逐字如下，保留作记账：
+      「本卡 status 只能 rigorous，不能 formalized：Lean 侧有塔（`TowerFock`）、移位算子
+       （`towerShift`，含 (1)(i) 的群律与 (1)(ii) 的动量移位）、逐层算子
+       （`towerDiag`/`towerMode`/`towerLop`），**但没有塔上的双线性型**——2026-09-11 curator
+       对 DDF.lean 全文 grep `pairing`，零命中；……故本卡的 (2) 与 (4) 没有机器验证。」
+      formalizer 在提交 1a7445e（合并 7e7c513）新建 TowerPairing.lean 补上了塔上的型，
+      (2)(4) 与 (3) 的 L_m 那半现均有逐句对应的 Lean 声明，见**下一条来源**；
+      `formal.lean_decl` 已由 `TowerFock` 改指 `Fock.towerPairing`。
+      本条来源保留，因为【塔】与 (1)(3) 的对象（`TowerFock`/`towerShift`/`towerDiag`）仍在 DDF.lean。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/TowerPairing.lean :: StringFormal.NoGhost.Fock.{towerPairing, towerPairing_apply, towerPairing_single_left, towerPairing_single_single, towerPairing_single_single_of_ne, towerPairing_comm, towerPairing_towerShift_left, towerPairing_towerShift_right, towerPairing_towerMode_left, towerPairing_towerMode_right, towerPairing_towerLop_left, towerPairing_towerLop_right}；另 StringFormal.NoGhost.{towerShift_apply, towerDiag_apply, towerMode_apply, towerLop_apply}"
+    note: |
+      本仓库，形式化提交 1a7445e（"formal: add the bilinear form on the DDF momentum tower"），
+      合并提交 7e7c513。**这一条承载本卡 (2) 与 (4)**（即上一条来源的 ⚠ 所说的缺口）：
+        · (2) 塔上的型 ⟨v,w⟩_T = Σ_N ⟨v_N,w_N⟩ ↔ `Fock.towerPairing η :=
+          Finsupp.lsum R fun j => (pairing η).compl₂ (Finsupp.lapply j)`，类型为
+          `LinearMap.BilinForm R (TowerFock D R)`（双线性按构造成立，`towerPairing_add_left`
+          等只是把它展开）；计算规则 `towerPairing_apply`（= v.sum fun j P => pairing η P (w j)，
+          即本卡的有限和）；对称性 `towerPairing_comm`（逐层继承 `Fock.pairing_comm`）；
+        · (2) 的「不同层正交」↔ **`towerPairing_single_single_of_ne`**
+          （i ≠ j ⟹ ⟨single i P, single j Q⟩_T = 0）；
+        · (4) S_n^† = S_{−n} ↔ **`towerPairing_towerShift_left`**
+          （⟨towerShift n v, w⟩ = ⟨v, towerShift (−n) w⟩），配套 `towerPairing_towerShift_right`；
+        · (3) 里「逐层作用的 α^μ_p 与 L_m，其伴随逐层继承」那半 ↔
+          `towerPairing_towerMode_left`（(α^μ_p)^† = α^μ_{−p}，含 p = 0 的逐层标量情形）与
+          **`towerPairing_towerLop_left`**（L_m^† = L_{−m}，需 `[Algebra ℚ R]`，与本卡首句
+          「凡出现 L_m 处另设 R 为 Q-代数」一致）。
+      索引字典同上一条（Lean 的 rung 指标 j = 本卡的层指标 N）。文件头自述的约定与本卡边界 (d)
+      一致：型是 **R-双线性**而非半双线性，全文未用 η 或动量的任何实性假设。
+
+      ⚠ **机器验证的到底是什么（formalizer 2026-09-11 的观察，逐条保留）**：
+      在 Lean 里「层间正交」**不是定理而是定义的推论**——`towerPairing` 被定义成各层配对的
+      **单位权 Finsupp 求和**，`towerPairing_single_single_of_ne` 只是把该定义在 rung 基上展开。
+      因此机器验证的内容是**这套约定自洽、且本卡 (4) 由它推出**，
+      **不是** δ^D(p − p′) 型的动量正交性本身（后者在本图中没有节点承载，
+      见 statement (2) 的 ⚠ 与 notes【层间正交这条约定的风险登记】）。
+      与此相应：三条伴随中**只有 `towerPairing_towerShift_left` 真正用到该约定**
+      （它跨层，文件头逐字写着 "it is not a consequence of anything in `Fock.lean`"）；
+      `towerPairing_towerMode_left` 与 `towerPairing_towerLop_left` 不移动层指标，
+      **只是逐层继承** `Fock.pairing_mode_left` / `Fock.pairing_Lop_left`。
+
+      Lean 侧仍未做（不影响本卡：按边界 (c)(e) 本卡也不断言它们）：型的非退化性、任何正定性、
+      任何拓扑完化；以及顶点算子 `towerVertex` 的伴随（需 `vertexOsc` 的伴随，即
+      worldsheet.vertex-operator-adjoint），故 A^i_n 的伴随在 Lean 侧仍不可用。
+      **curator 未自行重跑 `lake build`**；依据是 formalizer 在总线上的报告
+      （"lake build ok, 42 decls axiom-clean"，消息 577）、formal/TODO.md 第 (1b) 项与
+      formal/CLAUDE.md 的文件表，以及 7e7c513 已由 lead 合并进 main。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧唯一相关处：DDF 构造在这里进行，A^i_n 改变动量这件事在那里是被使用的。
+      核实等级沿用 worldsheet.ddf-operators-v5：章节页码 L4/L2
+      （literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
+      ⚠ **GSW 不把动量塔写成一个有名字的对象**，更不讨论层间正交作为一条约定；
+      教科书直接在连续动量的 Fock 空间上工作。把塔单列成定义卡是本项目为可形式化而做的精确化
+      （与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps 里「逐动量塔打包是本项目
+      对文献表述的规范化，没有一处来源逐字如此写」是同一件事，此处把那条规范化落成一张可引用的卡）。
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: polchinski-1998-v1
+    loc: "§2.7（p.58 起），eq. (2.7.25)、(2.7.27)（开弦模式与零模 α^μ_0 = (2α')^{1/2} p^μ）；§4.1（p.121 起）（建在动量本征态 |0; k⟩ 上的协变 Fock 空间）"
+    note: |
+      零模归一化 α^μ_0 = (2α')^{1/2} p^μ 的来源，与 worldsheet.bosonic-fock-space 同一处、
+      同一核实等级：(2.7.25)/(2.7.27) **式号与内容已核实**（抽取记录
+      literature/extractions/polchinski-1998-v1.md#E41），§4.1 **页码已核实、式号未核实**（#E54）。
+      ⚠ Polchinski 用的是**连续**动量与 δ^D(k − k') 归一化的动量本征态，
+      本卡用的是沿一条 k_0 的**可数离散**代数直和；两者不是同一个对象，
+      本卡 (2) 的层间正交是对前者的正交性的离散化**移植**（见 (2) 的 ⚠ 与 notes）。
+      δ 归一化本身在本图中**没有节点**，本条来源不承载它。
+tags: [bosonic-string, fock-space, momentum-tower, spectrum-generating-algebra, definition, no-ghost]
+notes: |
+  【为什么立卡】worldsheet.ddf-operators-adjoint 的陈述、
+  worldsheet.ddf-commute-with-virasoro 的陈述、worldsheet.no-ghost-theorem-v4 的 (1b)
+  都写在「动量塔」上，却没有节点承载这个对象；
+  worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint 的 gaps 第 5 条逐字写着
+  「**塔上的双线性型本身没有独立节点**……不同动量层之间的正交性在本图中是约定式引入的，
+  不是被证明的」。本卡把塔、移位算子、塔上的型集中到一处，并把「层间正交是约定」写进 statement，
+  使下游可以用一条边指向它，而不是每处重述。lead 已同意（docs/ROADMAP.md 待建清单）。
+
+  查重：2026-09-11 跑 `uv run stringgraph search 塔 / tower / 顶点算子 / 动量本征`，
+  返回的全部是 DDF / 无鬼定理系列节点与顶点代数系列节点，
+  **没有任何节点定义动量塔或塔上的型**。
+
+  【三套层指标的字典】同一条塔在本图中有三种标法，互相差符号，务必对齐：
+    · 本卡：T(p; k_0) = ⊕_N F(p + N k_0)，N ∈ Z，基点是 p；
+    · worldsheet.no-ghost-theorem-v4 (1b)：⊕_{N ≥ 0} H_phys(k − N k_0)，N 是**振子能级**，
+      基点是快子壳上的 k；对应本卡的层指标 −N（且只取 ≤ 0 的一半）；
+    · Lean（DDF.lean）：rung j，动量 a + j·b，顶点算子把 j ↦ j + n；j 与本卡的 N 相同，
+      DDF.lean 文件头写的 "j = −N" 是相对 no-ghost-theorem-v4 的那套能级记法说的。
+  worldsheet.ddf-operators-adjoint 的【承载断言的空间】一段用的正是本卡的记法
+  （T(p;k_0) := ⊕_{N∈Z} F(p + N k_0)，A^i_n 把第 N 层送到第 N+n 层），逐字一致。
+
+  【status：rigorous → formalized（2026-09-11 下午，curator）】本卡是纯代数构造：已有 R-模的
+  外部直和、指标平移、直和双线性型，没有收敛性问题、没有路径积分、没有连续动量。
+  按 docs/STATUS_LEVELS.md，definition 的 status 表示该定义卡本身的地位（formalized =
+  有 Lean 声明逐句对应）。**原先不填 formalized 的唯一理由——「Lean 里没有塔上的型，
+  (2) 与 (4) 无机器验证」——已消失**：formalizer 在 1a7445e（合并 7e7c513）新建
+  TowerPairing.lean，对应关系是
+    (2) ↔ `Fock.towerPairing` + `towerPairing_single_single_of_ne`（含 `towerPairing_apply`
+        与 `towerPairing_comm`）；
+    (4) ↔ `towerPairing_towerShift_left`；
+    (3) 的 L_m 那半 ↔ `towerPairing_towerLop_left`（α^μ_p 那半 ↔ `towerPairing_towerMode_left`），
+  逐条对照见 sources 第二条。`formal.lean_decl` 因此由 `TowerFock` 改指 `Fock.towerPairing`
+  （塔本身仍是 `TowerFock`，在 sources 第一条）。上一版记在这里的升级路径
+  （「定义 towerPairing := Σ_j Fock.pairing，证 towerShift 关于它的伴随」）至此完成。
+
+  ⚠ **升级的诚实边界（formalizer 的观察，必读）**：Lean 里「层间正交」是 `towerPairing`
+  **定义**（各层配对的单位权 Finsupp 求和）的推论，不是定理；机器验证的是
+  **这套约定自洽、并且 (4) 由之推出**，**不是** δ^D(p − p′) 正交性本身。
+  三条伴随中只有 `towerPairing_towerShift_left`（跨层）真正用到该约定；
+  `towerPairing_towerMode_left` / `towerPairing_towerLop_left` 不移动层指标，只是逐层继承
+  单层引理。故下面【层间正交这条约定的风险登记】**一字未改地仍然有效**：
+  形式化把这条约定钉成了 Lean 定义，并没有把它变成定理；
+  要收紧仍需一条「离散塔模型 ↔ 连续动量模型」的独立陈述，本图仍无此节点。
+  formal/TODO.md 由 formalizer 维护，本卡不改它。
+
+  【层间正交这条约定的风险登记】它不是无害的记号选择：无鬼定理断言的正定性是**塔上**那个型的性质
+  （worldsheet.no-ghost-theorem-v4 (1b)），而塔上的型有一半内容（跨层为零）是本卡规定的。
+  在连续动量的物理表述里这条对应 δ^D(p − p') 的正交性，是标准且无争议的；
+  但在本图的离散代数模型里它是**输入而非结论**。auditor 若要收紧，
+  应要求的是「离散塔模型与连续动量模型之间的对应」这条独立陈述，本图目前没有这条。
+
+  【与 worldsheet.fock-indefinite-form 的关系】那张卡是**逐层**的型（一个固定动量扇区），
+  已 formalized；本卡只做两件那张卡做不到的事：把层拼起来（直和）、规定跨层为零。
+  本卡不重述那张卡的任何内容（唯一性、单项式对角形、level 正交、不定性都不在本卡断言里）。
+author: curator
+created: "2026-09-11"

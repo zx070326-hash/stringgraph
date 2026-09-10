@@ -1,0 +1,66 @@
+id: spectrum.virasoro-shapiro-amplitude--via-complex-beta-integral
+target: spectrum.virasoro-shapiro-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.closed-string-four-tachyon-integral
+    note: 提供待算的复积分 ∫_C d²z |z|^{−α'u/2−4}|1−z|^{−α't/2−4} 与前因子 g_c⁴C_{S₂}（C_{S₂} 作符号）。
+  - id: spectrum.sphere-normalization-from-factorization
+    note: 提供 C_{S₂} = 8π/(α'g_c²)（(6.6.8)），使前因子合成 8πg_c²/α'。
+  - id: math.euler-beta-integral
+    note: |
+      提供实 Beta 积分与 Γ 的极点结构。⚠ **复平面上的积分 I(a,b) = ∫d²z|z|^{−2a}|1−z|^{−2b}
+      = 2πB(1−a,1−b,a+b−1) 是一条不同的（更强的）恒等式**，本图没有为它单建 math 节点，见 gaps。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: |
+      提供 α'(s+t+u) = −16 ⇒ α_c(s)+α_c(t)+α_c(u) = −1，
+      即三个 Γ 参数满足 c = 1 − a − b，两种写法的等价性靠它。
+  - id: spectrum.four-tachyon-factorization-disk-normalization
+    inferred: true
+    note: |
+      标 inferred：本推导的前因子里含 C_{S₂} = 8π/(α'g_c²)（(6.6.8)），
+      而 (6.6.8) 是用与开弦 (6.4.14) **同一手法**（极点留数因子化）定出的。
+      两者是不同曲面上的不同常数，来源并不把 (6.6.8) 说成 (6.4.14) 的推论；
+      本边只表示「同一手法」，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.10)，p.193"
+    note: |
+      抽取记录 #E105，L1。⚠ 表达式经 schrans-2020 + headrick-2008 两个独立二手源交叉验证等价，
+      **但未核对原书排版**。
+  - ref: schrans-2020
+    loc: "§6.64（笔记 p.329–331）：I(a,b) = 2πB(1−a,1−b,a+b−1) 的完整计算（[6.226]–[6.229]）"
+  - ref: headrick-2008
+    loc: "Problem 6.11(b)（PDF p.50）：Γ 商写法，逐字"
+summary: |
+  **(1) 复 Beta 积分。** 核心是复平面上的恒等式
+    I(a, b) = ∫_C d²z |z|^{−2a} |1 − z|^{−2b} = 2π B(1 − a, 1 − b, a + b − 1)，
+    B(x,y,z) = Γ(x)Γ(y)Γ(z)/(Γ(x+y)Γ(x+z)Γ(y+z))。
+  [S] §6.64 完整算出这一式（把 z 的实虚部积分分离、用 Γ 函数的乘积公式）。
+
+  **(2) 代入。** 把 spectrum.closed-string-four-tachyon-integral (2) 的指数与 (1) 的 a、b 对应，
+  用 α_c(x) = α'x/4 + 1 改写，得
+    S_{S₂} = (8πi g_c²/α')(2π)²⁶δ²⁶(Σk) · C(−α_c(u), −α_c(t))，  C(x,y) = 2πB(x,y,1−x−y)。
+  （前因子里的 C_{S₂} = 8π/(α'g_c²) 与 g_c⁴ 合成 8πg_c²/α'。）
+
+  **(3) 与 [H] 写法的一致性校验**（抽取者做的，本图照录并已复核算术）：
+  a = −1 − α's/4 = −α_c(s)、b = −α_c(t)、c = −α_c(u)；
+  由 α'(s+t+u) = −16 得 α_c(s)+α_c(t)+α_c(u) = −4 + 3 = −1，故 c = 1 − a − b ✓；
+  整体因子 2π × (8πi g_c²/α') = 16π² i g_c²/α' ✓。两式确为同一表达式。
+gaps:
+  - "**复 Beta 积分 I(a,b) = 2πB(1−a,1−b,a+b−1) 在本图没有 math 节点**：
+     它比实 Beta 积分强（是 Dotsenko–Fateev 型的复积分公式），本推导直接引用 [S] 的计算。
+     **建议单建 math 节点**（本批次未做，列入报告的「未做条目」）；
+     未做的理由是本图尚无任何特殊函数数学来源，单建也只能标 physical-argument。"
+  - "**未核对原书排版**：两个二手源各自给出等价式，都没有抄出 (6.6.10) 的逐字形式。"
+  - "**(1) 的积分收敛性与延拓没有处理**：与实情形一样，物理参数区不收敛，靠亚纯延拓定义；
+     复积分的延拓比实情形更微妙（二维积分的端点/重合点奇性），来源与本图都没有讨论。"
+  - "**上游的路径积分缺口**（经 spectrum.closed-string-four-tachyon-integral 继承），
+     以及正规序 vs 重整化算符的记号陷阱（同上）。"
+  - "**⚠ 二手源内部矛盾**：[S] 的 [6.236] 用了 α_c(s)+α_c(t)+α_c(u) = **1**，
+     与他自己的脚注 8 不自洽；正确值是 **−1**（本推导 (3) 已复算）。**不得照抄那句。**"
+notes: |
+  (3) 的一致性校验由抽取者做出，curator 已独立复核算术（两式确为同一表达式）。
+  该校验是本卡片敢写完整表达式（而 Veneziano 只写弱形式）的直接依据。
+author: curator-polchinski-ch6
+created: "2026-09-11"

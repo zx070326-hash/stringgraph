@@ -1,0 +1,42 @@
+id: worldsheet.metric-variation-with-moduli--via-moduli-extension
+target: worldsheet.metric-variation-with-moduli
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.diff-weyl-metric-variation
+    note: 提供 diff × Weyl 部分（后两项），本式只是再加上模的方向。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: |
+      提供「模的方向与所有 diff × Weyl 变分无关」，这正是模的项必须单列、
+      不能被吸收进 P̂₁δσ 或纯迹项的理由。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P̂₁（对参考度规 ĝ 取）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.5), p.155–156（**采勘误版**，见 gaps）"
+    note: |
+      抽取记录 #E78，L1（schrans-2020 §5.12，笔记 p.252）。
+summary: |
+  规范固定后的参考度规不是单个 ĝ 而是一族 ĝ(t)。把「度规的最一般变分」写成三部分之和：
+  沿模方向的移动 Σ_k ∂_{t^k}ĝ_ab δt^k、无迹的规范部分 −2(P̂₁δσ)_ab、纯迹部分
+  (2δω − ∇̂·δσ)ĝ_ab。三者张成全部度规变分，且由
+  worldsheet.moduli-condition-traceless-transverse 第一项与后两项正交，故分解无重复。
+gaps:
+  - |
+    **印刷版式子有误，本节点按 schrans-2020 转述的勘误改写**（抽取记录 Q14 第 1 条）：
+    「as per Joe's errata page, there is an error in the last term」。
+    **Polchinski 官方勘误表本项目未取得**（KITP 三条 URL 全 404），因此
+    「印刷版最后一项有误」这一事实目前只有 schrans-2020 单源支撑。
+    若日后取得勘误表且内容不符，本卡须新建 v2 并写 superseded_by。
+  - |
+    **「三部分张成全部度规变分」是断言**：严格说需要 L² 正交分解
+    （度规变分空间 = im P̂₁ ⊕ 纯迹 ⊕ ker P̂₁^T），那要求 P₁ 椭圆、M 紧。
+    来源与本图都没有这一步。
+  - |
+    **来源强度**：式号 (5.3.5) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+notes: |
+  勘误相关的待办（抽取记录 Q14 说这是「性价比最高的待办」）：找到一个可访问的
+  Polchinski 勘误表镜像，可一次性批量核对 §3–§8 的式号，涉及本批的至少三处
+  （(5.3.5)、习题 3.6、(5.4.10)）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,52 @@
+id: cft.one-and-two-point-functions-mobius-fixed
+kind: proposition
+title: Möbius 不变性定死球面上的一点与两点函数：⟨A⟩ ≠ 0 只对 h = h̄ = 0；两点函数的幂次与单值性条件
+statement: |
+  设一个共形场论定义在 S₂ 上，其主场（worldsheet.primary-field）按权 (h, h̄) 变换，
+  且关联函数在 PSL(2,C)（worldsheet.sphere-conformal-killing-group）下不变。则：
+
+  **(1)（一点函数）** 球面上总可以用平移把一个算子的坐标固定到 z = 0。
+  在剩余的刚性标度 z ↦ z' = γ z 下 A'(z') = γ^{−h} γ̄^{−h̄} A(z)（(2.4.13)），故 A'(0) = γ^{−h}γ̄^{−h̄}A(0)，
+  与不变性相容当且仅当
+    **⟨ A ⟩_{S₂} ≠ 0  仅对 h = h̄ = 0 的算子**   （(6.7.3)）。
+
+  **(2)（两点函数）** 先用平移把第二个算子移到原点（z ↦ z − z₂，(6.7.4)），
+  再用标度 z ↦ z₁₂^{−1} z，得
+    **⟨ A_i(z₁, z̄₁) A_j(z₂, z̄₂) ⟩  =  z₁₂^{−h_i−h_j} z̄₁₂^{−h̄_i−h̄_j} ⟨ A_i(1,1) A_j(0,0) ⟩**。
+
+  **(3)（单值性）** 关联函数在 z₁ 绕 z₂ 一周后必须回到自身，要求 z₁₂ 的总幂次的
+  全纯与反全纯部分之差为整数，即
+    **J_i + J_j ∈ Z**,   J ≡ h − h̄  （自旋）。
+
+  **本命题不断言什么**：不断言 h_i ≠ h_j 时两点函数为零（那是
+  cft.tensor-two-and-three-point-functions 的 (6.7.5)，用的是更强的共形变换）；
+  不涉及非主场（descendant）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.7, eq. (6.7.3)（一点函数）、(6.7.4)（两点函数），p.198；用到 §2.4 eq. (2.4.13)（主场的有限变换）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E110，等级 **L1**（schrans-2020 §6.73–§6.74，
+      笔记 p.340–341，逐页读到）。
+      抽取记录逐字：「**这是本书里『共形对称把低点函数定死到什么程度』的正式陈述，
+      是任务书『SL(2,C) 固定』的核心落点。**」
+      ⚠ 原书未核对（抽取记录 §0/§5.0）。
+tags: [cft, mobius, correlation-function, primary-field, two-point-function, monodromy, spin]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E110 建立。
+
+  **area 选择说明（任务书要求 curator 判断并说明）**：本卡片放 **`cft.`** 而不是 `worldsheet.`
+  或 `spectrum.`，理由是它的内容**与弦无关**——它是任意二维 CFT 在球面上的一般结果
+  （只用主场的变换律与 Möbius 不变性），不涉及 X^μ、α'、时空维数或任何弦特有的结构。
+  按 graph/schema/areas.yaml，`cft` 的定义正是「二维共形场论本体：顶点算子代数、模不变性、自举」。
+  这是本图 `cft/` 目录下的第一批节点。
+  与之对照：worldsheet.bc-ghost-* 那几条虽然也是 CFT 结果，但放在 `worldsheet.` 是因为
+  本图已有 bc 鬼场族在那里，且它们的 λ = 2 取值与弦的规范固定绑定。
+
+  **本卡片依赖 worldsheet.sphere-conformal-killing-group（一个 worldsheet.* 节点）**：
+  这是一条跨区的边，但内容上没有问题——那条命题本身也是纯几何的（P¹ 的 CKV），
+  只是历史上先在 worldsheet 区建立。若日后 cft 区扩大，可考虑把它搬过来（须换代，不得改 id）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

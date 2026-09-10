@@ -1,0 +1,30 @@
+id: worldsheet.moduli-condition-traceless-transverse
+kind: proposition
+title: "模的方向 = 无迹且无散度的度规变分（δ'g ∈ ker P₁^T）"
+statement: |
+  设 (M, ĝ) 是紧无边二维 Riemann 流形。称度规变分 δ'g_ab 是一个**模的方向**，
+  若它与所有 diff × Weyl 变分正交（在 worldsheet.metric-variation-operator-p1 的 L² 配对下），
+  即不能由任何无穷小规范变换产生。则 δ'g_ab 必须满足
+    (a) 无迹：  ĝ^{ab} δ'g_ab = 0,
+    (b) 无散度：∇̂^b δ'g_ba = 0，等价地 P̂₁^T δ'g = 0。
+  反之满足 (a)(b) 的变分与所有 diff × Weyl 变分正交。故
+    {模的方向} = ker P̂₁^T ∩ {对称无迹}，
+  其（实）维数记作 μ。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.6a)（无迹）、(5.2.6b)（无散度），p.151–152"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E73，L1（读到 schrans-2020
+      §5.6–§5.7 笔记 p.248–249）。
+      ⚠ **式号 (5.2.6a)/(5.2.6b) 的强度低于本章其他条目**：抽取记录 §7 明确列出
+      「只有 [S] §5.9 正文的交叉引用；[S] 目录无这一条」。即：这两个号码是伴读笔记正文
+      在别处引用时提到的，没有目录条目背书，**更没有原书背书**。
+tags: [worldsheet, moduli, gauge-fixing, teichmueller]
+notes: |
+  「模数目 μ」这个记号在本图中的定义就在这里；worldsheet.riemann-roch-kappa-minus-mu 的
+  κ − μ = 3χ 中的 μ **只数度规的模**，不含顶点算子位置——见
+  worldsheet.moduli-integration-parameter-count 与抽取记录 Q12。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,53 @@
+id: worldsheet.bc-ghost-disk-three-c-correlator--via-ghost-zero-modes
+target: worldsheet.bc-ghost-disk-three-c-correlator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+    note: |
+      提供 λ = 2 的 bc 系统：c 的共形权 −1、b c 的反对易性与 OPE b(z)c(0) ∼ 1/z。
+      「c 有三个零模、b 无零模」这一事实在该卡片里没有单独陈述，见 gaps。
+  - id: worldsheet.disk-conformal-killing-group
+    note: |
+      提供 κ(D₂) = 3 与 PSL(2,R) 协变性：前者说明「恰好三个 c 插入」，
+      后者把三次多项式的形式定死。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供 D₂ ≅ 上半平面、鬼场插在实轴上的几何设定。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.2)，p.176–177"
+    note: 抽取记录 #E96，L1；schrans-2020 与 headrick-2008 两个独立二手源逐字写出该式。
+  - ref: headrick-2008
+    loc: "Problem 6.7（PDF p.43）"
+    note: 第二核对源，不单独承载论证（lead 裁决 2026-09-10）。
+summary: |
+  **(1) 零模计数。** λ = 2 的 bc 系统在 D₂ 上，c 的零模空间与共形 Killing 向量空间同构
+  （两者都是权 −1 的全纯场的全局解空间），维数 κ(D₂) = 3；b 的零模空间与模空间同构，
+  维数 μ(D₂) = 0。Grassmann 积分要求每个零模恰好被一个插入吸收，
+  故非零期望值**必须恰含三个 c 插入且不含 b**。
+
+  **(2) 形式由共形协变性定死。** 期望值 ⟨c(y₁)c(y₂)c(y₃)⟩ 作为三个权 −1 场的关联函数，
+  在 PSL(2,R) 下按权 −1 协变，且对 y_i 是（反对称的）多项式；
+  三个 y 的最低次反对称、且在每个 y_i 中次数为 1 的表达式唯一（相差常数）：
+    y₁₂ y₁₃ y₂₃。
+  于是 ⟨c(y₁)c(y₂)c(y₃)⟩_{D₂} = C^g_{D₂} y₁₂y₁₃y₂₃。
+
+  （等价的直接做法：把 c 按三个零模展开，做 Grassmann 积分，得到零模波函数的行列式——
+  即 Vandermonde 行列式，见 math.mobius-three-point-fixing-jacobian。）
+gaps:
+  - "**「c 的零模空间 ≅ CKV 空间、b 的零模空间 ≅ 模空间」这一 Riemann–Roch 型对应在本图无节点**：
+     它属第 5 章（抽取记录 E78/E79/E82：一般亏格上的 FP 行列式、bc 鬼场、鬼数反常导出 Riemann–Roch），
+     由另一名 curator 建立，本批次提交时尚未进入 main。本推导把它写在 summary 里作为假设。
+     **待 ch5 节点合入后补 depends_on 边。**"
+  - "**路径积分层面的操作未定义**：bc 系统的 Grassmann 泛函积分、零模分离与测度归一化
+     （C^g_{D₂} 的来源）在本图与来源中都没有定义，故本推导上限 physical-argument。"
+  - "**「三次反对称多项式唯一」这一步用了额外假设**：需要期望值对 y_i 是多项式（而非带极点或
+     支点的函数）。来源直接给出结果，没有论证这一点；本推导按标准 CFT 做法补出。"
+  - "**只有二手源**：抽取记录等级 L1 仅保证 schrans-2020 与 headrick-2008 这样写，
+     Polchinski 原书未核对（抽取记录 §0）。不过本式是本章少数有**两个独立二手源**逐字给出
+     完整表达式的条目之一。"
+notes: |
+  与 worldsheet.bc-ghost-sphere-cc-correlator 是同一手法的两个曲面版本，分开建卡的理由是
+  两式在文献中分别给出（(6.3.2) 与 (6.3.4)）、且分别被开弦与闭弦振幅使用。
+author: curator-polchinski-ch6
+created: "2026-09-11"

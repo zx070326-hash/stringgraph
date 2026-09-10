@@ -1,0 +1,222 @@
+id: worldsheet.exponential-vertex-operator-weight
+kind: proposition
+title: "正规序指数算子 :e^{ik·X}: 是主场，共形权 h = α'k²/4（闭弦体内插入）或 h = α'k²（开弦边界插入）；特别地 k = n k_0 且 k_0² = 0 时 h = 0"
+statement: |
+  【设定】D 个自由标量 X^μ 的世界面 CFT（worldsheet.free-scalar-cft-action），
+  全纯能动张量 T(z) = −(1/α') :∂X^μ ∂X_μ:（worldsheet.energy-momentum-tensor-free-scalar），
+  约定 conv.metric-mostly-plus、conv.alpha-prime-regge、conv.worldsheet-complex-coords。
+  取一个**常**时空动量 k^μ（与 z 无关），记
+    V_k(z, z̄) := :e^{i k·X(z, z̄)}:,
+  正规序按 worldsheet.conformal-normal-ordering-v2（减去自缩并）逐项理解：
+  指数是形式幂级数 Σ_{N ≥ 0} (i^N/N!) :(k·X)^N:，本卡的一切断言都是**形式幂级数层面**的
+  OPE 断言（收敛性见边界 (a)）。
+
+  (1) **主场性**。V_k 与 T 的 OPE 中**没有三阶或更高阶极点**，即存在常数 h, h̄ 使
+        T(z) V_k(0, 0)  ∼  (h / z²) V_k(0, 0)  +  (1/z) ∂V_k(0, 0),
+        T̄(z̄) V_k(0, 0) ∼  (h̄ / z̄²) V_k(0, 0) +  (1/z̄) ∂̄V_k(0, 0)。
+      故按 worldsheet.primary-field 的判据，V_k 是**主场**（Polchinski 的 tensor），
+      其共形权就是上式二阶极点的系数 (h, h̄)。
+
+  (2) **权的值**。h 对动量是**二次**的：在 T = −(1/α') :∂X^μ ∂X_μ: 与全纯缩并
+      ⟨X^μ(z) X^ν(0)⟩_全纯部分 = −(α'/2) η^{μν} ln z 之下
+      （两者分别由 worldsheet.energy-momentum-tensor-free-scalar 与
+      worldsheet.free-scalar-propagator 固定），
+        h = (α'/4) · (该算子携带的**手征**动量)²。
+      本图出现的两种插入位置给出两个值：
+      (a) **闭弦（体内插入）**：手征动量就是 k，全纯与反全纯各一份，
+            (h, h̄) = (α' k²/4, α' k²/4),   h + h̄ = α' k²/2。
+      (b) **开弦（边界插入，Neumann）**：doubling（worldsheet.open-string-doubling-trick）下
+          反全纯的一半经镜像与全纯的一半落在**同一点**，故边界算子携带的手征动量是 **2k**；
+          等价的说法是边界上的缩并是体内的**两倍**
+          （⟨X^μ X^ν⟩|_边界 = −α' η^{μν} ln|y|²，体内是 −(α'/2) η^{μν} ln|z|²）。
+          又因只剩一套 Virasoro，权是**单个**数
+            h = (α'/4) (2k)² = α' k²。
+      故 (a) 与 (b) 相差因子 **4 = 2²**：差别全部来自边界镜像使有效手征动量加倍，
+      再被「h 对动量二次」放大成 4；**这不是两条不同的命题**，而是同一条公式的两个取值。
+      独立的标识：互 OPE 的指数对 k_1·k_2 是**一次**的，故只加倍——
+      体内是 |z|^{α' k_1·k_2}（Polchinski (6.6.24)），边界是 |y|^{2α' k_1·k_2}
+      （本图的开弦写法，见 worldsheet.ddf-operators-v5 说明 (c) 的 z^{2α' n k_0·p}）。
+      本卡在同一张卡上写出两者，正是为了让下游引用时必须显式选一套
+      （下游 DDF 链一律用 (b)）。
+
+  (3) **类光特例（本卡的下游用途）**。设 k_0 是**类光**向量（k_0² = 0），n ∈ Z，取 k = n k_0。
+      则 k² = n² k_0² = 0，于是 (2) 的**两套归一化都给**
+        h = 0   （闭弦情形 h = h̄ = 0），
+      即
+        :e^{i n k_0·X}: 是**共形权 0 的主场**。
+      这是 DDF 构造中「被积量 ∂X^i e^{i n k_0·X} 的权恰好是 1 + 0 = 1」那一步里
+      **指数因子贡献 0** 的全部内容。
+
+  【本命题**不**断言什么】——六条边界：
+  (a) **不**断言 V_k 在任何解析或 Hilbert 空间意义下良定义。正规序指数在本卡里是形式幂级数；
+      它在**代数** Fock 空间上的逐模实现（worldsheet.bosonic-fock-space 的多项式模型，
+      Lean 侧 `Fock.vertexOsc`）是另一件事，收敛性问题见 worldsheet.operator-product-expansion
+      的同一条缺口（OPE 收敛性本图未证）。
+  (b) **不**断言 V_k 的 Laurent 模 V^{(n)}_J 的任何伴随关系。那是
+      worldsheet.vertex-operator-adjoint，它用的是径向共轭而不是共形权。
+  (c) **不**断言 ∂X^i(z) V_{n k_0}(z) 是权 1 主场。那还需要横向条件 ε^i·k_0 = 0 杀掉
+      ∂X^i 与指数之间的**交叉**缩并，是 worldsheet.ddf-commute-with-virasoro 的推导内容；
+      本卡只管指数因子本身。
+  (d) **不**与 worldsheet.weight-zero-primary-constant（幺正 CFT 中权 0 主场是常数）矛盾，
+      也**不**断言 V_{n k_0} 是常数。协变自由标量 CFT 含类时方向，内积不定、**不幺正**
+      （worldsheet.fock-indefinite-form (4)），那条命题的前提不成立；
+      V_{n k_0}（n ≠ 0）正是一个权 0 却非常数的主场（∂V = i n k_0·∂X V ≠ 0）。
+      详见 notes。
+  (e) **不**断言「边界上缩并加倍 / 边界算子携带手征动量 2k」这件事本身。本图没有承载
+      边界正规序与镜像 Green 函数的节点（worldsheet.open-string-doubling-trick 断言的是
+      T 的镜像解析延拓与「只有一套 Virasoro」，**不是** Green 函数在边界上的加倍），
+      故 (2)(b) 的这一步在本图中是**输入**；见推导 gaps。
+      ⚠ 特别注意：能动张量的归一化 T = −(1/α'):∂X∂X: 在开弦情形**不变**
+      （手征缩并系数 α'/2 不变，变的是算子携带的手征动量），本卡不改动
+      worldsheet.energy-momentum-tensor-free-scalar 的任何内容。
+  (f) **不**覆盖 X^μ 本身（X^μ 不是主场，见 worldsheet.primary-field 的 notes (1)），
+      也不覆盖带 ∂X 因子的复合算子（如 :∂X^μ ∂̄X^ν e^{ik·X}:）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4，(2.4.6)（定义权的 T·O OPE，p.44）与 (2.4.16)–(2.4.17)（主场的共形变换 / 典型算子的变换，p.46）一带；**「:e^{ik·X}: 的权是 α'k²/4」这句话的式号本项目未核实**"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E32，
+      位置证据等级：(2.4.6)、(2.4.16)、(2.4.17) 三个**式号已核实** `[已核实]`
+      （schrans-2020 目录 `2.18 p 44`、`2.23 p 46`、`2.24 p 46: Eq. (2.4.17) Conformal
+      Transformation of Typical Operators`），**但核实到的只是「这几条式子在那里、讲的是
+      权的定义与主场的变换」**。
+      ⚠ **本卡 (2)(a) 的具体数值 α'k²/4 在抽取记录里没有任何式号锚点**：E32 的转述只含
+      权的定义式与变换律，不含指数算子的权。(2.4.17) 的标题「典型算子的变换」暗示原书
+      在那里列举了若干算子的权（很可能含 :e^{ik·X}:），但**本项目没有核对过那一页的内容**。
+      故本条 loc 写成「一带」，数值的证据改由下面两条间接来源承担。
+  - ref: polchinski-1998-v1
+    loc: "§8.2，eq. (8.2.27)，p.240：V^i(n k_0, z) = (2/α')^{1/2} ∂X^i e^{i n k_0 X^+}(z) 是**权 (1,0) 的主场**"
+    note: |
+      抽取记录 #E125，位置证据 **[已核实] / L1**（schrans-2020 §8.21–§8.25，笔记 p.446–449）。
+      这是本卡 (3) 最强的文献锚点，也是全书**唯一**一处 DDF 构造：原书在光锥系
+      （X^+X^+ 的 OPE 为 0，(8.2.26)）里直接断言 ∂X^i e^{i n k_0 X^+} 是权 (1,0) 主场。
+      由 ∂X^i 的权是 (1,0)，这逐字蕴含**指数因子的权是 0**，即本卡 (3)。
+      ⚠ **两条限定**：(i) 原书断言的是**乘积**的权，**没有单独陈述指数因子的权**，
+      也没有写出 h = α'k² 或 α'k²/4 的一般公式——把「乘积权 (1,0)」拆成
+      「∂X^i 权 1 + 指数权 0」这一步是本项目做的（虽然初等）；
+      (ii) 同一条抽取记录登记了**一处与原书的实质分歧**（schrans 认为原书的
+      k_0 = 2/(α'q^-) 应为 2/(α'q^+)，且不在原书勘误表上），见该记录的 Q23；
+      这处分歧只影响归一化常数，不影响「指数权为 0」。
+  - ref: polchinski-1998-v1
+    loc: "§6.6，eq. (6.6.24)，p.195：:e^{ik_1·X(z_1)}: :e^{ik_4·X(z_4)}: = |z_14|^{α'k_1·k_4} :(1 + i z_14 k_1·∂X + …) e^{i(k_1+k_4)·X(z_4)}:"
+    note: |
+      抽取记录 #E109，位置证据 **[已核实] / L1**（式号与内容经 schrans-2020 §6.72 复现）。
+      这是闭弦体内归一化 (2)(a) 的间接锚点：**互** OPE 的指数是 α' k_1·k_4，
+      而权是同一条缩并的**自**配对的一半，h + h̄ = α'k²/2 与之一致（把 k_1 = k_4 = k 代入再取半）。
+      ⚠ 这是本项目做的换算，**原书在该式处不写权**。该式另依赖 OPE 收敛性（#E109 的 Q3 未解决）。
+  - ref: polchinski-1998-v1
+    loc: "§6.2，eq. (6.2.31) 的无穷远点检验；§8.2，eq. (8.2.9)（紧化方向配分函数的权因子 q^{α'k_L²/4} q̄^{α'k_R²/4}）"
+    note: |
+      两条**数值一致性检验**（不是本卡的论证来源）。抽取记录 #E94 备注（headrick-2008
+      Problem 6.1 逐字「Since this is an expectation value of closed-string tachyon vertex
+      operators, **α'k_i² = 4**」，L1）与 #E122（(8.2.9) 的 q^{α'k_L²/4}，**[已核实] / L1**）。
+      前者给闭弦快子壳 α'k² = 4，代入 (2)(a) 得 h = h̄ = 1（边际算子，可积分），自洽；
+      后者逐字就是 (2)(a) 的 α'k²/4 出现在配分函数的权因子里。
+      开弦侧的对应检验是 α'k² = 1（conv.intercept-sign-a 下 a = 1 的快子壳）⟺ h = 1，
+      与 (2)(b) 自洽；这一条本项目没有核实到式号。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      DDF 链的主来源，本卡 (3) 在那里是被默认使用的一句话。
+      核实等级沿用 worldsheet.ddf-operators-v5：章节页码 L4/L2
+      （literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+tags: [cft, vertex-operator, conformal-weight, primary-field, bosonic-string, spectrum-generating-algebra, no-ghost]
+notes: |
+  【为什么立卡】「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0 且是主场」这条事实在 2026-09-11
+  被**三处**独立登记为「本图没有节点承载」：
+    - worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2 条
+      （逐字：「这条事实本图没有节点承载……若 reviewer 要求，应把它单列成一条命题节点」）；
+    - worldsheet.ddf-commute-with-virasoro--via-conformal-weight 的 summary 第 1 步
+      （权为 0 只出现在推导内部，没有承载节点）；
+    - formal/StringFormal/NoGhost/VertexOperator.lean 文件头 "Mathematical gaps" 第 1 条
+      （逐字：「In particular the statement "`e^{i k_0·X}` has conformal weight `0` when
+      `k_0² = 0`" is **not** formalised.」）。
+  本卡关闭这三处登记的同一个缺口（在「有节点承载」这个意义上；论证本身仍是 physical-argument）。
+  它是 DDF 链上**两条瓶颈推导的共同上游**，故 docs/ROADMAP.md 把它列为 tower-cards 后续第 (1) 项，
+  lead 已同意立卡。
+
+  查重：2026-09-11 跑 `uv run stringgraph search 共形权 / 顶点算子 / 指数算符 / exponential`。
+  既有的共形权类节点是 worldsheet.primary-field（权与主场的**定义**）、
+  worldsheet.weight-zero-primary-constant（幺正 CFT 中权 0 主场是常数）、
+  worldsheet.schwarzian-transformation-of-t（T 不是主场）、
+  worldsheet.descendant-weight-grading 一族（最高权模的分次；其 v2 在分支
+  agent/curator/frontier-link 上，截至本卡创建未合并）；
+  既有的顶点算子类节点是 worldsheet.vertex-operator-adjoint（模的伴随）、
+  worldsheet.string-cft-is-a-vertex-algebra-v2 与 math.vertex-algebra-*（局域性与结合性）。
+  **没有任何节点给出任何具体算子的共形权数值**——本卡是第一条。
+
+  【与 worldsheet.weight-zero-primary-constant 不矛盾（边界 (d) 的详细说明）】
+  那条命题的前提是**幺正** CFT，其论证用「零范数态必为零向量」（该卡 notes 逐字登记）。
+  本卡的 V_{n k_0}（n ≠ 0，k_0² = 0）是一个见证：它权 0、是主场、但
+    L_{−1}·V_{n k_0} = ∂V_{n k_0} = i n k_0·∂X V_{n k_0} ≠ 0。
+  两者相容，因为协变自由标量 CFT 含类时方向、内积不定（worldsheet.fock-indefinite-form (4)），
+  **不幺正**；而 ∂V_{n k_0} 的范数正比于 k_0² = 0，即它恰是一个**零范数**态——
+  幺正情形下「零范数 ⇒ 零向量」把它杀掉，非幺正情形下它活下来。
+  这正是 DDF 构造能工作的结构性原因（权 0 而非常数的主场是谱生成算子的原料），
+  也是 worldsheet.weight-zero-primary-constant 那条 ⚠「不适用于完整玻色弦世界面 CFT」
+  在本图中的第一个具体见证。**本段是解释，不是新断言**（「范数正比于 k_0²」一句用到
+  worldsheet.fock-indefinite-form 的配对规则，本卡的推导没有把它写成论证步骤）。
+
+  【开弦 vs 闭弦的因子 4：本图的记账位置，以及一处容易算错的地方】
+  本卡 (2) 把两套取值并列写出，是因为本图的上游（worldsheet.free-scalar-propagator、
+  worldsheet.energy-momentum-tensor-free-scalar、worldsheet.conformal-normal-ordering-v2）
+  全部按**闭弦体内**写，而下游 DDF 链（worldsheet.ddf-operators-v5 说明 (c)、
+  worldsheet.ddf-commute-with-virasoro--via-conformal-weight summary 第 1 步、
+  Lean 的 `Fock.vertexOsc` 与 VertexWeight.lean 的目标公式）全部按**开弦边界**写。
+  此前这个因子 4 在本图中**没有任何地方被显式记账**；本卡是记账点。
+  ⚠ **容易算错的地方（curator 自查记录）**：因子 4 **不是**「T 的归一化改了」，也**不是**
+  「把 −(α'/2) 直接换成 −α' 再代进同一条二次公式」（那样会得到 4α'k²，错）。
+  正确的记账只有一条：手征缩并系数 α'/2 **不变**（故 T = −(1/α'):∂X∂X: 不变、
+  ∂X 仍是权 1），变的是**边界算子携带的手征动量 k → 2k**（镜像与原点重合），
+  而 h 对动量二次，故 α'k²/4 → α'(2k)²/4 = α'k²。
+  三条独立自洽检验：(i) 互 OPE 指数对动量一次，故只加倍，α'k_1k_2 → 2α'k_1k_2，
+  与 worldsheet.ddf-operators-v5 说明 (c) 的 z^{2α' n k_0·p} 一致；
+  (ii) 开弦快子壳 α'k² = 1（conv.intercept-sign-a 下 a = 1）⟺ h = 1（边际，可积分）；
+  (iii) 闭弦快子壳 α'k² = 4 ⟺ h = h̄ = 1，且 (8.2.9) 的配分函数权因子逐字是 q^{α'k_L²/4}。
+  ⚠ 把两套取值桥起来的那条事实（Neumann 镜像使边界缩并加倍 / 边界正规序，
+  Polchinski (6.2.34)，抽取记录 #E95，L2）在本图中**没有节点**。
+  建议 curator 后续补一张 `worldsheet.boundary-normal-ordering` 定义卡；
+  在那之前 (2)(b) 的这一步是本卡的输入（边界 (e)、推导 gaps 第 3 条）。
+
+  【与 Lean 侧目标公式的对应，以及一处记号陷阱】
+  formal/StringFormal/NoGhost/VertexWeight.lean 与 VertexOperator.lean 文件头登记的目标恒等式是
+    L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·(1/2) b·b) V_{J−m},
+  其中 b^μ = (2α')^{1/2} k^μ 是重标度的顶点动量、a^μ = (2α')^{1/2} p^μ 是该层的零模参数。
+  逐项对应本卡：
+    · **(1/2) b·b = (1/2)·2α' k² = α' k² 就是本卡 (2)(b) 的 h**（开弦归一化，不是 α'k²/4）；
+      k_0² = 0 即 Lean 的假设 `dotVec η b b = 0`，给 h = 0，即本卡 (3)。
+    · ⚠ **b·a 项不是权**。它是零模（动量）贡献的分次移位：在 DDF 归一化 2α' k_0·p = 1 下
+      b·a = 2α' k·p = n（k = n k_0），正是 worldsheet.ddf-commute-with-virasoro 推论里
+      「A^i_n 把能级移动 −n」的那个 n。把 b·a 误读成权的一部分会得到错的 h。
+      单个 Fock 空间上（不上塔）这一项无处安放，这正是 worldsheet.ddf-operators-v5 的
+      notes (1) 说「没有动量塔就没有正确的零模关系」的原因。
+    · 纯共形权的模形式（无 b·a 项）是 [L_m, V_J] = (J − m + (m+1) h) V_{J−m}，
+      由 (1) 的 OPE 经围道形变得到（worldsheet.ope-pole-mode-commutator-dictionary）。
+
+  【升级路径】
+  (i) 走 Lean（最短）。`Fock.creaExp_euler`（VertexWeight.lean，产生指数的欧拉型递推）已证；
+      归纳步 `Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion` 配合
+      `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode` 已把目标恒等式归约为真空上的单条等式，
+      **基例（L_m 作用在相干态系数 `Fock.creaExp` 上）未完成**，formalizer 在做
+      （分支 agent/formalizer/vertex-weight-2，截至本卡创建未合并）。
+      ⚠ **完成后不能直接把本卡标 formalized**：Lean 证的是**模形式**（上一段的恒等式），
+      本卡 (1) 断言的是 **OPE 形式**；两者互推要经 worldsheet.ope-pole-mode-commutator-dictionary
+      （physical-argument），那条字典会把 `--via-lean` 封在 physical-argument。
+      **建议（提请 lead/auditor）**：Lean 完成时**拆一张模形式的卡**
+      （如 `worldsheet.exponential-vertex-operator-mode-weight-identity`，
+      只断言上面那条 L_m 恒等式、不提 OPE），让它承载 formalized，
+      本卡则新增一条 `--via-mode-identity` 推导（依赖新卡 + 字典，physical-argument）。
+      这与 docs/STATUS_LEVELS.md 关于「拆卡让 Lean 对应的那一半成为 formalized 定义卡」
+      的指导一致。
+  (ii) 走数学文献：顶点算子代数传统里「格顶点算子 e^{α} 的共形权 = (α,α)/2」是标准且带编号的
+      结论（FLM / Kac / Frenkel–Ben-Zvi）。需 researcher 先取得可引用陈述；
+      取得后本卡可新增 `--via-voa-lattice-weight` 独立推导，并可能升到 rigorous。
+      与 worldsheet.vertex-operator-adjoint 升级路径 (ii) 是同一条检索任务。
+
+  【下游】worldsheet.ddf-commute-with-virasoro--via-conformal-weight（summary 第 1 步）与
+  worldsheet.vertex-operator-adjoint--via-radial-conjugation（summary 第 1 步末：
+  h = 0 使径向共轭的模反射恰为 J ↦ −J、不带指标平移）。两条均已改为依赖本卡。
+author: curator
+created: "2026-09-11"

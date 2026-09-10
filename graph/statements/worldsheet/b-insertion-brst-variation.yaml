@@ -1,0 +1,31 @@
+id: worldsheet.b-insertion-brst-variation
+kind: proposition
+title: "b 插入的 BRST 变分：δ_B(b, ∂_{t^k} ĝ) = iε(T^m + T^g, ∂_{t^k} ĝ)"
+statement: |
+  在 worldsheet.string-s-matrix 的公式 (5.3.9) 中，模插入的 BRST 变分为
+    δ_B ( b, ∂_{t^k} ĝ ) = i ε ( T^m + T^g , ∂_{t^k} ĝ ) ,
+  其中用到
+  (a) 反鬼场的 BRST 变换 δ_B b = i ε ( T^m + T^g )（原书 (4.3.1b)），
+  (b) 规范固定的参考度规 ĝ 不被 BRST 荷作用（它是 c 数背景，δ_B ĝ = 0）。
+
+  即：BRST 变分把 b 插入换成总能动张量与 ∂_{t^k}ĝ 的配对——正是「对模求导」的生成元。
+  这一步是 (5.3.9) 的 BRST 不变性论证的第二半（第一半见
+  worldsheet.vertex-operator-brst-variation）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.6), p.161；δ_B b = iε(T^m + T^g) 见 §4.3 的 (4.3.1b)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E85，L1（读到 schrans-2020
+      §5.26–§5.27，笔记 p.264–265；**未核对 Polchinski 原书**）。
+tags: [worldsheet, s-matrix, brst, ghosts, moduli]
+notes: |
+  本卡**不**断言 (5.3.9) 整体的 BRST 不变性。要得到那个结论还需要说明
+  (T^m + T^g, ∂_{t^k}ĝ) 是模空间上的全导数（从而在 ∫_F d^μ t 下积掉，最多留边界项），
+  抽取记录没有记录原书在何处论证这一点，本图**未建**该节点。
+  这也是弦微扰论中「模空间边界项 ⟹ BRST 反常/表面项」这条重要线索的入口，
+  留给后续 curator。
+author: curator-polchinski-ch5
+created: "2026-09-11"

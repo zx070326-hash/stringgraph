@@ -1,0 +1,53 @@
+id: spectrum.sphere-zero-mode-momentum-conservation
+kind: proposition
+title: X 的常数零模积分给出动量守恒 delta 函数 (2π)^d δ^d(Σ_i k_i)
+statement: |
+  设 d 个自由标量 X^μ 在球面 S₂ 上按 worldsheet.free-scalar-cft-action 的欧氏作用量做路径积分
+  （靶空间取 d 个非紧方向，度规 mostly-plus），插入 n 个指数型顶点算子 e^{i k_i · X(σ_i)}。
+  把 X^μ 按 Laplace 算子 ∇² 的本征函数完备系展开，**本征值为零的模只有常数模** x₀^μ
+  （S₂ 紧且无边界）。则：
+
+  **(1)** 常数零模不出现在作用量中（作用量只含导数），只出现在插入的指数里，其积分给出
+    ∫ d^d x₀  exp( i x₀ · Σ_i k_i )  =  (2π)^d δ^d( Σ_i k_i )，
+  即**空间平移不变性 ⇒ 总动量守恒**。零模的归一化常数（本征函数的归一化）贡献一个
+  与动量无关的整体因子，按 (6.2.14) 吸收进前因子 C^X_{S₂}。
+
+  **(2)** 因此 S₂ 上任何一组指数型顶点算子的期望值，只要 Σ_i k_i ≠ 0 就恒为零。
+
+  **前提（本图暂无节点，写作假设）**：弦 S-矩阵由第 5 章的规范固定路径积分 (5.3.9) 定义，
+  X 部门与鬼场部门分离；见 notes。
+
+  **本命题不断言什么**：不给出非零模的行列式（那是 (6.2.6) 的内容）；
+  不给出 C^X_{S₂} 的数值；不涉及顶点算子的重整化（见
+  spectrum.vertex-operator-geodesic-renormalization）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.13)（零模积分给出 delta 函数）与 (6.2.14)（把归一化因子吸收进 C^X_{S₂}），p.171"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E92，等级 **L1**（schrans-2020 §6.10–§6.11，
+      笔记 p.284–285，逐页读到并逐步复现）。
+      ⚠ 抽取记录把零模积分写成「δ^d(X₀ Σk_i) = X₀^{−d} δ^d(Σk_i)」，其中 X₀ 是零模的归一化常数；
+      本卡片按标准写法写成 ∫d^d x₀ e^{i x₀·Σk} = (2π)^d δ^d(Σk) 并把归一化常数并入 C^X_{S₂}，
+      **这一改写是 curator 做的**，与来源等价但措辞不同。原书未核对。
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.3)（按 ∇² 的完备本征函数系展开）、(6.2.5)（零模归一化）、(6.2.6)（行列式形式），p.169–170"
+    note: 抽取记录 #E91，等级 **L2**（只读到 schrans-2020 的目录条目，未读该节正文）。
+tags: [spectrum, tree-level, sphere, path-integral, zero-mode, momentum-conservation]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E92 建立（Polchinski 第 6 章批次）。
+
+  **⚠ 上游 ch5 节点尚未进入 main**：本卡片的前提「S-矩阵 = 规范固定的世界面路径积分 (5.3.9)」
+  与「χ > 0 时 μ = 0」属第 5 章（抽取记录 E77/E80），由另一名 curator 抽取，本批次提交时
+  还没有节点。按与 E49 相同的处理：前提写进 statement 作假设，推导 gaps 里注明
+  **待 ch5 节点合入后补边**。
+
+  **status 上限**：振幅与期望值是**路径积分定义**的对象，世界面路径积分测度（以及对拓扑求和）
+  在本图与来源中都没有定义，故本卡片及其一切下游的 status 上限是 physical-argument。
+  这条限制在本批次的每个 spectrum.* 节点重复出现，不再逐条解释。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,90 @@
+id: worldsheet.positive-euler-number-no-moduli--via-surface-enumeration
+target: worldsheet.positive-euler-number-no-moduli
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: 提供 μ 的定义（ker P̂₁^T ∩ 对称无迹），即被断言为零的对象。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；
+      χ = 2 − 2g − b 是拓扑等式，与号差无关。继承该约定登记的缺口。
+    note: |
+      提供 χ = 2 − 2g − b，枚举路线靠它把「χ > 0」翻译成「只剩球面、圆盘、射影平面」。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁、P₁^T；对偶的正定性论证（若存在）应在这里进行。
+  - id: worldsheet.sphere-conformal-killing-group
+    inferred: true
+    note: |
+      **枚举第 (2) 步中 S₂ 的那一格**（2026-09-11 补边，ch.6 已合入 main）。
+      该节点提供 S₂ 上「全局全纯向量场」的两片正则性分析（(6.1.5a)/(6.1.5b)，κ = 6）；
+      μ = 0 的检核是同一分析换成**全局全纯二次微分**的版本。
+      ⚠ **标 inferred，且本条边不足以关闭本步**：该卡片的 statement **明确声明不断言 μ(S₂) = 0**
+      （它只断言 κ = 6），本图目前没有任何节点断言 μ(S₂) = 0。
+      挂它是为了让读者能顺着图找到 S₂ 上唯一已建的正则性论证；
+      μ(S₂) = 0 本身仍是断言，见 gaps 第三条。
+      （旁证：该卡片 sources 逐字记下 [S] §6.67「zero moduli and six conformal Killing vectors」。）
+  - id: worldsheet.disk-conformal-killing-group
+    inferred: true
+    note: |
+      **枚举第 (2) 步中 D₂ 的那一格**（2026-09-11 补边）。与上一条同型：该节点提供 D₂ 上的
+      实 Möbius 分析（κ = 3），并在 statement 里**明确声明不断言 μ(D₂) = 0**
+      （逐字：「μ = 0 属第 5 章 Riemann–Roch，本图暂无节点，这里只作对照记录」）。
+      故同样标 inferred，同样不足以关闭本步。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 附近, p.152"
+    note: |
+      抽取记录 #E76，L1（schrans-2020 笔记 p.252）。
+summary: |
+  ⚠ **本推导的论证是本图补写的**，不是原书的：原书只把本条作为 (5.2.10) 的
+  **对偶断言**（χ < 0 ⇒ κ = 0 的镜像）给出，未附论证。
+
+  补写的枚举论证（两步）：
+  (1) **曲面分类**：紧二维曲面的 χ = 2 − 2g − b − c（g 为亩数、b 为边界分量数、
+      c 为交叉帽数）。χ > 0 只允许三种：球面 S₂（χ = 2）、圆盘 D₂（χ = 1）、
+      射影平面 RP₂（χ = 1）。
+  (2) **三个曲面各自 μ = 0**：逐个核实。
+  二者合起来就是结论。枚举本身是完备的；弱点全在两个输入的来源（见 gaps）。
+gaps:
+  - |
+    **原书未给直接论证**。抽取记录逐字记下伴读者「I have not been able to show in a
+    satisfying way that for positive Euler numbers, the number of moduli is zero.
+    I have tried two ways… But neither way has lead to anything useful.」
+    **Polchinski 原书是否给出直接论证，本项目未核实**（无原书正文）。
+    因此 sources[] 里的 Polchinski 条目只承载**结论**，不承载上面的枚举论证。
+  - |
+    **输入 (1)（曲面分类定理）在本图中无节点、无数学来源**。它本身是标准的代数拓扑
+    结果（可到 rigorous），但本图尚未登记来源；TODO（researcher）：登记一本拓扑教材。
+  - |
+    **输入 (2) 的三个 μ = 0**（2026-09-11 复核后重写；ch.6 已合入 main）：
+    S₂ 与 D₂ 的节点 worldsheet.sphere-conformal-killing-group /
+    worldsheet.disk-conformal-killing-group 已在 main，**依赖边已补上**（均标 inferred）。
+    但复核发现**原 gap 的判断有误**：这两张卡给的是 **κ = 6 与 κ = 3**，
+    两张卡的 statement 都**明确声明不断言 μ = 0**。因此本步的实质缺口**没有被关闭**，
+    只是从「无节点可挂」变成「已挂的节点不承载所需内容」。
+    **RP₂ 的 μ = 0 则连节点都缺**（本图目前没有任何射影平面的卡）。
+    要真正关闭本步，需新建一张「S₂/D₂/RP₂ 上不存在非零全局全纯二次微分 ⇒ μ = 0」的卡
+    （原书 §6.1/§6.4 只给 κ，μ = 0 在书里是由 §5.2 的对偶断言给出的，
+    直接论证的文献来源本图尚未登记）。在那之前，枚举的第二步在图上仍是**断言**。
+  - |
+    **来源强度**：式号 (5.2.10) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+    伴读者笔记中的同型枚举只作为旁证，按 lead 2026-09-10 裁决不进 sources[]。
+notes: |
+  status 档位按 lead 2026-09-11 裁决（docs/STATUS_LEVELS.md 「断言 + 骨架」条）定为
+  physical-argument：枚举论证的骨架完整、缺口在 gaps 逐条记录，而结论本身在
+  文献中无争议，不属 `conjecture`（reviewer-ch5 建议）。
+  升级路径：
+  (a) ~~§6 分支合入 main 后，把 sphere-/disk-conformal-killing-group 挂上来~~
+      —— 2026-09-11 已挂（两条 inferred 边）。**但两张卡都不断言 μ = 0**，
+      故这一项只完成了接线，没有完成内容；改为：新建一张 S₂/D₂ 的 μ = 0 卡
+      （全局全纯二次微分为零），本条推导再改挂它并撤 inferred；
+  (b) 新建 RP₂ 的 κ/μ 节点；
+  (c) 登记曲面分类定理的数学来源；
+  (d) 若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
+      另建一条 `--via-positivity` 推导。
+  (a)+(b)+(c) 全部完成后，本条可按枚举的完备性重新评估是否能到 rigorous。
+author: curator-polchinski-ch5
+created: "2026-09-11"

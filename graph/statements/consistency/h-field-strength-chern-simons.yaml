@@ -1,0 +1,79 @@
+id: consistency.h-field-strength-chern-simons
+kind: definition
+status: rigorous
+title: 带 Chern–Simons 修正的三形式场强 H = dB + ω⁰_{3Y} − ω⁰_{3L} 与 B 的规范/洛伦兹变换
+statement: |
+  在十维 N = 1 超引力 + 超 Yang–Mills 的场内容（zehnbein e^m_μ、二形式势 B、规范势 A、
+  自旋联络 ω）上，按 Green–Schwarz 1984 定义三形式场强（conv.gauge-trace-normalization，楔号省略）：
+
+  **(1) H 的定义**
+
+      H = dB + ω⁰_{3Y} − ω⁰_{3L}                                      （SO(N) 或 USp(N)）      (4)
+      H = dB + (1/30) ω⁰_{3Y₁} + (1/30) ω⁰_{3Y₂} − ω⁰_{3L}            （E₈ × E₈）             (4′)
+
+  其中（consistency.descent-forms-chern-simons 的 n = 1 情形）
+
+      ω⁰_{3Y} = tr(A F − ⅓ A³),   d ω⁰_{3Y} = tr F²
+      ω⁰_{3L} = tr(ω R − ⅓ ω³),   d ω⁰_{3L} = tr R²
+
+  ω 是切空间代数 SO(9,1) 的 10 × 10 自旋联络矩阵，R = dω + ω²。
+  (4′) 里的 1/30：GS 逐字说，若 Yang–Mills Chern–Simons 项改用**伴随**表示的矩阵定义，
+  则 SO(32) 情形下 (4) 的系数也会是 1/30。
+
+  **(2) 规范与局域洛伦兹变换**（本卡把变换律一并定为定义的一部分）
+
+      δA = dΛ + [A, Λ],        δω = dΘ + [ω, Θ]                                        (9a,b)
+      δB = − tr(A dΛ) + tr(ω dΘ)                                       （SO(N)/USp(N)）  (9c)
+      δB = − (1/30) tr₁(A₁ dΛ₁) − (1/30) tr₂(A₂ dΛ₂) + tr(ω dΘ)        （E₈ × E₈）       (9c′)
+
+  即 **B 在两类变换下都非平凡地变换**；GS 逐字强调这一点是后面反常抵消的关键
+  （"It is crucial that the potential B transforms under both kinds of transformations and that
+  the field strength H is invariant."）。
+
+  **(3) 归属（GS 自己的划界）**
+  Yang–Mills Chern–Simons 项已出现在被修正的极小超引力 + 超 YM 拉氏量（GS 的 ref. [7]）里；
+  **洛伦兹 Chern–Simons 项 −ω⁰_{3L} 是 GS 1984 新加的**，GS 逐字：「The last term in eq. (4) is a
+  higher-derivative term arising in the low-energy expansion of the superstring and therefore does
+  not appear in ref. [7].」
+
+  **本卡不断言**：δH = 0（GS 由 (10) 断言，本图未建该命题节点，见 notes 第 3 条）；
+  也不断言这套场内容构成一个自洽的量子理论——本卡只定义微分形式与变换律。
+uses:
+  - consistency.descent-forms-chern-simons
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118（重印 609），(4)(4′)(5)(6)(7)(8) 与其后正文；PLB p.118–119（重印 609–610），(9a,b)(9c)(9c′)(10a,b,c) 与「It is crucial that the potential B transforms…」"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E5。
+  - ref: bergshoeff-1982
+    loc: "全文（GS ref. [7]，被修正的极小 SUGRA + SYM 拉氏量）"
+    note: |
+      本项目未取得全文（L0）。只承载 (3) 归属那一句里「ref. [7] 里有什么」这一条，
+      而这条本身也是**GS 说的**，不是本图核对的。GS 在同处并列 Chapline–Manton, Phys. Lett. 120B (1983) 105。
+tags: [anomaly, chern-simons, kalb-ramond, supergravity, green-schwarz, d10]
+notes: |
+  【1. status = rigorous 的含义与边界】本卡只做一件事：在给定场（B, A, ω）上写下一个三形式和一组
+  变换律。这是精确的微分几何陈述，故 rigorous。它**不**承载「十维 N = 1 超引力 + 超 YM 作为量子
+  理论存在且自洽」——那件事在本图里没有节点，也不该由定义卡偷偷带进来。
+  下游的物理结论（反常抵消）由 consistency.anomaly-cancellation-* 承载，那里是 physical-argument。
+  注意本卡 `uses` 了只定到恰当形式的 descent 卡（physical-argument），故其**有效**状态会被压到
+  physical-argument；这是有意的记账：n = 1 的 ω⁰_3 虽然显式给出，但本卡与 descent 卡共用同一套记号。
+
+  【2. ★ Chern–Simons 项的符号，与现代文献相反】GS (4) 是 **H = dB + ω⁰_{3Y} − ω⁰_{3L}**；
+  bilal-2008 (12.14) 写 **H = dB − Q₃(A,F) + β̃ Q₃(ω,R)**，**两个 CS 项整体反号**。
+  凡从现代文献（或从"常识"）抄 δB、抄反项符号进入本图的，必须先做这一步换算，
+  否则 consistency.gs-counterterms-1984 里所有依赖 δB 的符号都会错。抽取记录 Q6。
+  另：本卡 (4) 首项下标的读图确认过程见抽取记录 §3.3（判定为 ω⁰_{3Y}，依据是紧随其后的正文）。
+
+  【3. 未建的命题节点：δH = 0】GS 由 (10a,b,c) 断言 H 在两类变换下不变、从而 (1) 的各项不变，
+  逐字只有「It follows from eq. (10) that the terms in eq. (1) are invariant」，**没有计算**。
+  这是一条微分形式的初等命题，本轮**未建节点**（本批的任务边界），建议后续 curator 补
+  `consistency.h-gauge-lorentz-invariance` + `--via-descent-identity`（status 取 physical-argument，
+  除非 reviewer 复核 δω⁰_{3Y} = d tr(Λ dA) 这一步）。
+
+  【4. 玻色作用量 (1) 未建卡】GS (1) 的 S₀（含 φ^{-2}H² 项）本轮未建节点。
+  它在 E10 的树图机制里被用到（B 传播子连接 B tr F⁴ 顶点与 H² 里的 ω⁰_{3Y} dB 顶点）。
+  若后续要把那条树级机制写成节点，须先补 S₀ 的定义卡，来源同为 GS (1) + bergshoeff-1982。
+author: curator
+created: "2026-09-11"

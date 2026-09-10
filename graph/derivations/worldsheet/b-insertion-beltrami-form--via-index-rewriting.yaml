@@ -1,0 +1,39 @@
+id: worldsheet.b-insertion-beltrami-form--via-index-rewriting
+target: worldsheet.b-insertion-beltrami-form
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.beltrami-differential
+    note: 提供 μ_k = ½ ĝ^{-1}∂_k ĝ 的定义，改写的全部内容就是这个定义。
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: 提供被改写的 b 插入 (1/4π)(b, ∂_{t^k}ĝ)。
+  - id: worldsheet.moduli-holomorphic-quadratic-differentials
+    note: |
+      提供「b 与 δ'g 同为对称无迹张量，复坐标下只有 zz 与 z̄z̄ 分量」，
+      这是复坐标写法里只剩两项的理由。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.8), p.162"
+    note: |
+      抽取记录 #E86，L1（schrans-2020 §5.28–§5.30，笔记 p.265–266）。
+summary: |
+  直接代入定义：(b, μ_k) = ∫ ĝ^{1/2} b^{ b}{}_{a} (μ_k)^a{}_b = ½ ∫ ĝ^{1/2} b^{ab} ∂_{t^k}ĝ_ab
+  = ½ (b, ∂_{t^k}ĝ)，故 (1/2π)(b, μ_k) = (1/4π)(b, ∂_{t^k}ĝ)。
+  b_ab 对称无迹，故只有 μ_k 的无迹部分进入配对（μ_k 本身一般带迹，见
+  worldsheet.beltrami-differential 的警告）。
+  复坐标下 b 只有 b_zz、b_z̄z̄ 两个分量，与 μ_k 的对应两个分量配对给出
+  (1/2π)∫d²z (b_zz μ_{k z̄}{}^{z} + b_z̄z̄ μ_{k z}{}^{z̄})。
+gaps:
+  - |
+    **指标位置在来源中不自洽**：抽取记录把 Beltrami 微分写成 μ_k^{ab} = ½ĝ^{ac}∂_kĝ_{cb}，
+    左右指标不匹配（见 worldsheet.beltrami-differential 的 sources 警告）。
+    上面 summary 采的是唯一自洽的读法 (μ_k)^a{}_b，**若原书用别的约定，因子 2 的位置可能改变**。
+  - |
+    **复坐标写法的测度因子未核实**：d²z = 2dσ¹dσ² 的 Jacobian（conv.worldsheet-complex-coords）
+    进入前因子，抽取记录没有给出中间步骤，本图未独立验证 (1/2π) 这个系数。
+  - |
+    有限步初等改写，但**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.4.7)/(5.4.8) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

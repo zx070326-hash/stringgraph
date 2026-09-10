@@ -1,0 +1,28 @@
+id: worldsheet.torus-modular-equivalence
+kind: proposition
+title: 由 PSL(2,Z) 联系的两个 τ 描述同一个环面
+statement: |
+  设 τ ∈ H，γ = ((a,b),(c,d)) ∈ SL(2,Z)，τ' = (aτ + b)/(cτ + d)。则平坦环面
+  T²(τ) 与 T²(τ')（worldsheet.torus-modulus）是同一个环面：存在微分同胚与 Weyl 变换的复合
+  把其中一个的度规送到另一个的度规。
+
+  换言之：模参数 τ 与 τ' 若落在同一个 PSL(2,Z) 轨道上，则给出的世界面在 diff × Weyl 下等价。
+  由于 γ 与 −γ 诱导同一个 τ 变换，作用在模参数上的群是 PSL(2,Z) = SL(2,Z)/{±I}。
+
+  ⚠ 本节点**只**断言这一个方向（同轨道 ⇒ 同环面）。反方向「不同轨道 ⇒ 不同环面」
+  在本图由 worldsheet.modular-fundamental-domain 承担，且那条的论证不完整。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13)（PSL(2,Z) 变换）、(5.1.14)（PSL(2,Z) 下度规的变换），p.148"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E71，L1（读到 schrans-2020
+      §5.3–§5.4 笔记 p.246；**未核对 Polchinski 原书**，见抽取记录 §5.0）。
+tags: [worldsheet, torus, modular-group, moduli]
+notes: |
+  Im τ < 0 的一支：τ ↦ τ̄ 不是 PSL(2,Z) 元素而是反全纯映射（对应世界面定向反转），
+  故「取 Im τ > 0」是对**可定向**环面的约定，不是模变换的推论。本图未建定向反转的节点。
+author: curator-polchinski-ch5
+created: "2026-09-11"

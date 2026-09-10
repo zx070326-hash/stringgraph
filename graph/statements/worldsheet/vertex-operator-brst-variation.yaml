@@ -1,0 +1,35 @@
+id: worldsheet.vertex-operator-brst-variation
+kind: proposition
+title: "维数 1 主场顶点算子的 BRST 变分：δ_B V = iε ∂(cV)"
+statement: |
+  设 V(w) 是物质部门的顶点算子，且它按态-算子对应（worldsheet.state-operator-isomorphism）
+  产生一个 L_0^m = 1 的最高权态，即 V 是**维数 1 的主场**。则它在 BRST 变换下的变分为
+    δ_B V(w) = i ε [ Q_B , V(w) ] = i ε  ∂( c V )(w) ,
+  其中 c 是鬼场、Q_B 是 BRST 荷（worldsheet.brst-current-bosonic-string）。
+  （原书 (5.4.5) 是同一式的 σ 坐标写法。）
+
+  这条的用途：δ_B V 是一个全导数，故它在顶点算子坐标的积分下积掉，
+  这是 S-矩阵 BRST 不变性的一半（另一半是 b 插入的变分，
+  见 worldsheet.b-insertion-brst-variation）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.5), p.161"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E85，L1（读到 schrans-2020
+      §5.26–§5.27，笔记 p.264–265；**未核对 Polchinski 原书**）。
+tags: [worldsheet, s-matrix, brst, vertex-operator, ghosts]
+notes: |
+  ⚠ **态-算子对应在本书振幅部分有三个用法不同的落点**（抽取记录 **Q18**）：
+  (1) 本节点这一处（用「V 对应 L_0^m = 1 的最高权态」断定 V 是维数 1 主场）；
+  (2) §3.6 顶点算子归一化常数的确定；
+  (3) §6.7 把 S₂ 上的 n 点函数改写成 Hilbert 空间矩阵元（要求径向序 = 时间序、完备基、
+      Zamolodchikov 内积良定义）。
+  Q18 建议**不要**把三者挂到同一个 state-operator 节点上，第 (3) 类应另建
+  `state-operator-correspondence--hilbert-space-form` 并标明额外假设。
+  本卡只用第 (1) 类，是三者中最弱的用法；(3) 属第 6 章，由另一名 curator 负责。
+author: curator-polchinski-ch5
+created: "2026-09-11"

@@ -1,0 +1,185 @@
+id: worldsheet.transverse-ddf-fock-gram-matrix--via-oscillator-recursion
+target: worldsheet.transverse-ddf-fock-gram-matrix
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      **非 inferred**：目标陈述的量词跑遍塔 T(k;k_0) = ⊕_N F(k − N k_0) 及其上的双线性型
+      ⟨·,·⟩（该定义卡的 (2)），本推导的每一步配对都在这个型里做。特别地目标 (3) 的
+      「|{d}⟩ 落在第 N(d) 层」以及由此直接读出的分级正交，用的是该卡规定的**层间正交**。
+      ⚠ 该卡 (2) 逐字声明「层间正交是本定义规定的，不是被证明的」，本推导继承这条限定
+      （见 gaps 第 1 条）。该卡 status: rigorous，不构成本推导的状态上限。
+  - id: worldsheet.ddf-operators-adjoint
+    note: |
+      **非 inferred**：目标假设 (H2)（⟨A^i_n v, w⟩ = ⟨v, A^i_{−n} w⟩）在 DDF 设定下由该节点的
+      第 (1) 条供给。目标陈述把 (H2) 写成**假设**，故本推导的算术不依赖它成立；
+      但本图把这条边显式画出来，是为了让「H^⊥(k) 在 DDF 设定下确实正定」这一读法
+      的有效状态诚实地被该节点封顶（effective = physical-argument）。
+      换句话说：**本推导自身的严格程度（rigorous）说的是那步蕴含，
+      目标节点的 effective 说的是蕴含加上前件在 DDF 设定下的兑现程度**，两者不同，
+      本条边保证后者不被高估。
+  - id: worldsheet.ddf-transverse-oscillator-algebra
+    note: |
+      **非 inferred**：目标假设 (H1)（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）在 DDF 设定下由该节点供给。
+      理由与上一条完全相同（(H1) 在目标陈述里是假设，这条边只承担「前件在 DDF 设定下由谁兑现」
+      的记账，并为目标节点的 effective 封顶）。该节点 effective = physical-argument。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing_monomial_monomial, pairing_creation_left, pairing_creation_right, pairing_eq_zero_of_level_ne}"
+    note: |
+      **同型的机器验证对照**（不是本推导的形式化）。协变振子 α^μ_n 在单个 Fock 空间上的
+      同一段递推已在 Lean 中无 sorry 走通：`pairing_monomial_monomial` 就是本推导第 3 步的结论
+      ⟨X^d, X^e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} d(μ,n)!，把 η^{μμ} 取横向的 +1 即得目标 (1)。
+      这条 source 的作用是**为本推导的算术提供一份已被机器检查过的同型样板**：
+      本推导的归纳（对创生算符个数 |d| 归纳、把湮灭算符对易穿过创生算符串）与该文件的证明逐步同构。
+      **但目标对象不同**：Lean 里的单项式是 α^μ_{−n} 的、在单个 Fock 空间上；
+      目标是 A^i_{−n} 的、在动量塔上，而 A^i_n 与塔上的双线性型在 Lean 中都还不存在
+      （DDF.lean 文件头 "What is NOT here" 第 1 条；DDF.lean 全文 grep `pairing` 零命中，
+      2026-09-11 curator 核）。故本推导 status 是 rigorous 而**不是** formalized。
+      合并提交 2fcf86a，Lean 4 + Mathlib v4.33.1，公理仅 propext / Classical.choice / Quot.sound；
+      curator 未自行重跑 `lake build`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧对象的所在处，**不承载论证**：GSW 在此不写 Gram 矩阵、不做递推，
+      只把「DDF 态张成一份横向振子 Fock 空间、内积正定」当作自由振子的标准事实使用。
+      定位强度沿用 worldsheet.ddf-operators-v5：章节页码 L4/L2，式号与正文 L0
+      （literature/extractions/brst-cohomology-sources.md §5.2–5.3）。
+      本推导的递推是本项目按自由振子 Fock 空间的标准记账重写的，**没有逐字来源**。
+summary: |
+  记 n, m ≥ 1，i, j ∈ {2,…,D−1}，并把 (H1) 的算子按角色改写：
+
+    湮灭   a_{i,n} := A^i_{+n}  （n ≥ 1），   创生   a†_{i,n} := A^i_{−n}  （n ≥ 1）。
+
+  **第 0 步（把四条假设翻译成振子形式）。** 由 (H1)（只对 m, n ∈ Z \ {0} 使用，
+  故不触及未定义的 A^i_0）：
+    (i)   [a_{i,n}, a†_{j,m}] = [A^i_n, A^j_{−m}] = n δ^{ij} δ_{n−m,0} · id = n δ^{ij} δ_{n,m} · id；
+    (ii)  [a†_{i,n}, a†_{j,m}] = 0（因 (−n) + (−m) ≤ −2 ≠ 0），同理 [a_{i,n}, a_{j,m}] = 0；
+  由 (H2) 取 n ↦ −n 得两个方向都可用：
+    (iii) ⟨ a_{i,n} v , w ⟩ = ⟨ v , a†_{i,n} w ⟩   与   ⟨ a†_{i,n} v , w ⟩ = ⟨ v , a_{i,n} w ⟩；
+  由 (H3)：(iv) a_{i,n}|0;k⟩ = 0；由 (H4)：(v) ⟨|0;k⟩, |0;k⟩⟩ = 1。
+  (ii) 保证 |{d}⟩ = ∏ (a†_{i,n})^{d(i,n)} |0;k⟩ 与因子次序无关（目标陈述已声明），
+  特别地对任一 (i,n) 使 d(i,n) ≥ 1，可写 |{d}⟩ = a†_{i,n} |{d − 1_{(i,n)}}⟩，
+  其中 1_{(i,n)} 是在 (i,n) 处取 1、别处取 0 的重数函数。
+
+  **第 1 步（一个引理：湮灭算符穿过创生算符串）。** 对任意有限支撑的 e : P → N 与任意 (i,n)：
+
+      a_{i,n} |{e}⟩ = n · e(i,n) · |{e − 1_{(i,n)}}⟩            (★)
+
+  （右端在 e(i,n) = 0 时读作 0，与前面的系数 e(i,n) = 0 一致）。
+  证：把 |{e}⟩ 写成 c_1 c_2 ⋯ c_N |0;k⟩，其中 c_1,…,c_N 是按任意次序排列的 N = Σ e(j,m) 个创生算符。
+  由 (i) 的对易子是**中心的**（id 的 R-倍），逐项移动给出恒等式
+    a c_1 ⋯ c_N = Σ_{r=1}^{N} c_1 ⋯ c_{r−1} [a, c_r] c_{r+1} ⋯ c_N + c_1 ⋯ c_N a
+  （对 N 归纳，每步只用 [a, c_1 ⋯ c_N] 的 Leibniz 展开）。作用在 |0;k⟩ 上时末项由 (iv) 为零。
+  由 (i)，只有 c_r = a†_{i,n} 的那些 r 贡献非零对易子，每个贡献常数 n；这样的 r 恰有 e(i,n) 个，
+  且抽掉一个 a†_{i,n} 之后剩下的串正是 |{e − 1_{(i,n)}}⟩（次序无关，由 (ii)）。
+  故 a_{i,n}|{e}⟩ = n · e(i,n) · |{e − 1_{(i,n)}}⟩。∎
+
+  **第 2 步（目标 (1)：对 |d| := Σ_{(i,n)} d(i,n) 作归纳）。** 断言
+
+      ⟨ {d} , {e} ⟩ = δ_{d,e} · ∏_{(i,n)} n^{d(i,n)} · d(i,n)!    对一切有限支撑的 d, e。
+
+  · **基础 |d| = 0**（即 d = 0，|{0}⟩ = |0;k⟩）。
+    若 e = 0：⟨|0;k⟩, |0;k⟩⟩ = 1（由 (v)），而右端的空乘积也是 1。✓
+    若 e ≠ 0：取 (j,m) 使 e(j,m) ≥ 1，写 |{e}⟩ = a†_{j,m}|{e − 1_{(j,m)}}⟩，
+    由 (iii) 得 ⟨|0;k⟩, a†_{j,m}{e−1}⟩ = ⟨a_{j,m}|0;k⟩, {e−1}⟩ = 0（由 (iv)）。
+    而右端 δ_{0,e} = 0。✓
+  · **归纳步 |d| ≥ 1**。取 (i,n) 使 d(i,n) ≥ 1，置 d' := d − 1_{(i,n)}（故 |d'| = |d| − 1）。
+    由 |{d}⟩ = a†_{i,n}|{d'}⟩ 与 (iii)：
+        ⟨{d}, {e}⟩ = ⟨ a†_{i,n}{d'} , {e} ⟩ = ⟨ {d'} , a_{i,n}{e} ⟩
+                   = n · e(i,n) · ⟨ {d'} , {e − 1_{(i,n)}} ⟩      （用第 1 步的 (★)）。
+    分两种情形：
+      – 若 e(i,n) = 0：右端整体为 0；同时 d(i,n) ≥ 1 > 0 = e(i,n) 蕴含 d ≠ e，
+        故待证等式的右端 δ_{d,e}(…) 也是 0。✓
+      – 若 e(i,n) ≥ 1：置 e' := e − 1_{(i,n)}。归纳假设（用于 |d'| = |d| − 1）给
+            ⟨{d'}, {e'}⟩ = δ_{d',e'} · ∏_{(j,m)} m^{d'(j,m)} · d'(j,m)!。
+        又因 d(i,n) ≥ 1 且 e(i,n) ≥ 1，有 **d' = e' ⟺ d = e**（两边同时加回 1_{(i,n)}）。
+        于是 ⟨{d},{e}⟩ = n · e(i,n) · δ_{d,e} · ∏_{(j,m)} m^{d'(j,m)} d'(j,m)!。
+        当 d ≠ e 两端都是 0；当 d = e 时 e(i,n) = d(i,n)，把 (i,n) 处的因子对上：
+            n · d(i,n) · [ n^{d(i,n)−1} · (d(i,n) − 1)! ] = n^{d(i,n)} · d(i,n)!，
+        其余 (j,m) ≠ (i,n) 的因子在 d' 与 d 中逐字相同，故乘起来正是 ∏ m^{d(j,m)} d(j,m)!。✓
+    归纳完成。注意整段只用到 Z → R 的典范同态，**对任意交换环 R 成立**，不需要任何可逆性。
+    结论对 d 与 e 对称（右端只在 d = e 时非零），故不必再单独证对称性。
+
+  **第 3 步（目标 (2)：有序域上的正定）。** 设 R 是有序域。每个对角元
+  G_d := ∏_{(i,n)} n^{d(i,n)} · d(i,n)! 是有限多个正整数（n ≥ 1，阶乘 ≥ 1）之积，故 G_d > 0。
+  设 v = Σ_d c_d |{d}⟩（有限和）。由第 2 步，⟨v, v⟩ = Σ_{d,e} c_d c_e ⟨{d},{e}⟩ = Σ_d c_d² G_d。
+  若某个 c_d ≠ 0，则该项 c_d² G_d > 0，其余项 ≥ 0，故 ⟨v,v⟩ > 0；
+  特别地 v ≠ 0（否则 ⟨v,v⟩ = 0）。反过来若所有 c_d = 0 则 v = 0。
+  于是：{|{d}⟩} **线性无关**（一个非平凡组合的自配对为正，不可能是零向量），
+  它是 H^⊥(k) 的正交基，且 ⟨·,·⟩|_{H^⊥(k)} 正定。
+
+  **第 4 步（目标 (3)：能级分级正交）。** N(d) := Σ n·d(i,n)。若 N(d) ≠ N(e) 则 d ≠ e，
+  由第 2 步得 ⟨{d},{e}⟩ = 0。这与「从塔的层间正交直接读出」是同一结论：
+  (★) 与 (ii) 表明 a†_{i,n} 把第 N 层送到第 N+n 层
+  （worldsheet.momentum-tower-fock-space 的移位算子记账，动量 k − N k_0），
+  故 |{d}⟩ 落在第 N(d) 层，不同层的配对按该定义卡的 (2) 为零。两条路给同一答案，互为校验。
+
+  以上四步全部是有限步初等代数（一个引理 + 一次对 |d| 的归纳 + 有序域上的符号讨论），
+  不使用围道积分、不使用解析延拓、不使用任何收敛性假设。
+gaps:
+  - |
+    **(i) 塔上的双线性型是约定式引入的，不是被证明的。** 目标与本推导都在
+    worldsheet.momentum-tower-fock-space 的 (2) 所规定的型里做配对，
+    而该卡逐字声明「层间正交是本定义规定的，不是被证明的」——物理上它对应连续动量本征态的
+    ⟨p|p'⟩ ∝ δ^D(p−p')，本图**没有节点**承载连续动量本征态与 δ 归一化。
+    本推导的第 4 步与目标 (3) 的第二条读法实质使用这条约定；
+    第 2 步的算术本身只用到「型是同一个 R-双线性映射」，不用层间正交。
+  - |
+    **(ii) 「†」是 R-双线性型的转置，不是 Hermitian 共轭。** 继承
+    worldsheet.fock-indefinite-form 与 worldsheet.momentum-tower-fock-space 的同一条 gap：
+    物理上的协变 Fock 空间是复空间、带 Hermitian 半双线性形式，A^† 还含一次复共轭。
+    两者在实极化下一致，**复情形本图与 Lean 侧都没有**。
+    这对本推导第 3 步尤其要紧：那里写的 ⟨v,v⟩ = Σ c_d² G_d 在 Hermitian 版本里应是 Σ |c_d|² G_d。
+  - |
+    **(iii) 前件在 DDF 设定下的兑现只有 physical-argument。** 目标是条件命题，本推导只证蕴含；
+    (H1) 与 (H2) 在 DDF 设定下分别由 worldsheet.ddf-transverse-oscillator-algebra 与
+    worldsheet.ddf-operators-adjoint 供给，两者的 effective 都是 physical-argument
+    （文献只有一句无证明的断言，式号 L0，正文未获取）。
+    因此**目标节点的 effective 仍是 physical-argument**；本推导标 rigorous 说的只是
+    「(H1)–(H4) ⟹ (1)(2)(3)」这一步，不是「H^⊥(k) 在弦论里确实正定」。
+    这两件事的区分是本次拆卡的**全部目的**，不要混读。
+  - |
+    **(iv) 未形式化。** Lean 侧同型的那段（协变振子、单个 Fock 空间）已无 sorry 走通
+    （`Fock.pairing_monomial_monomial`），但 A^i_n 未定义、塔上的双线性型未定义，
+    故本目标在 Lean 中**没有目标声明**。升级到 formalized 需要三步：
+    塔上的型 → A^i_n 的定义（formal/TODO.md 的 `ddf-operators` 项）→ 照搬本推导的归纳。
+  - |
+    **(v) (H3) 在本卡里是假设，其理由写在目标 notes 而非本推导。** 「A^i_n|0;k⟩ = 0 (n > 0)」
+    实际由能级记账推出（A^i_n 降低能级 n，Fock 能级分级非负），
+    这用到 worldsheet.ddf-commute-with-virasoro 与 worldsheet.bosonic-fock-space；
+    本推导**不**把它们列为依赖（(H3) 是前提，不是被证的东西）。
+    若日后有人要把本卡读成「无条件断言」，必须先把这两条边补上。
+notes: |
+  **status 定级理由（docs/STATUS_LEVELS.md 的 rigorous 例外条款）**：
+  前提完整（四条假设 (H1)–(H4) 全部写在目标陈述里，不留隐含条件），
+  证明是有限步初等计算（一个 Leibniz 展开引理 + 一次对 |d| 的归纳 + 有序域上的符号讨论），
+  与已在 Lean 中机器验证的同型计算（`Fock.pairing_monomial_monomial`）逐步同构。
+  按条款还需 reviewer 独立复核并在本处记录：
+
+  reviewer-verified: <pending>
+
+  **lead 裁决（2026-09-11）**：允许在 reviewer 复核落记之前先标 rigorous，
+  条件是本条 `<pending>` 显式留在这里、且复核清单写明。
+  **reviewer 复核清单（三项，都是记账，不需要新数学）**：
+    1. 第 1 步的 (★)：Leibniz 展开对 N 的归纳、以及「贡献非零对易子的 r 恰有 e(i,n) 个」的计数；
+    2. 第 2 步归纳步的两个情形（e(i,n) = 0 与 ≥ 1）与 d' = e' ⟺ d = e 的等价；
+       特别是 d = e 时 (i,n) 处因子的对上：n · d(i,n) · n^{d(i,n)−1} (d(i,n)−1)! = n^{d(i,n)} d(i,n)!；
+    3. 第 3 步在有序域上由 Σ c_d² G_d 得正定与线性无关的两个方向。
+  复核完成后请把 `<pending>` 换成 `<agent>, <date>`，并删除本段的 lead 裁决说明。
+
+  **推导名 `--via-oscillator-recursion`**：与 DDF 家族里走「权与围道形变」的
+  `--via-conformal-weight` 和走「顶点算子伴随」的 `--via-vertex-operator-adjoint` 区分。
+  本条不碰任何顶点算子，只做自由振子代数上的递推。
+
+  **与 worldsheet.fock-indefinite-form 的关系（为什么不列为依赖）**：
+  那张卡的 (2)(3) 与本目标的 (1)(3) 逐字同型，本推导的归纳照它的证明结构组织。
+  但本目标的四条输入全是**假设**，不使用该卡的任何断言（该卡讲的是 α^μ_n，不是 A^i_n；
+  它的对角元含 η^{μμ} 的类时负号，本目标的横向指标全类空）。
+  故只在本 notes 与 sources 里作对照，**不画边**——画边会是伪造的依赖。
+
+  **本推导没有第二条路线。** 若日后在 Lean 里把塔上的型与 A^i_n 都做出来，
+  正确做法是新增一条 `--via-lean` 的独立推导（status: formalized），而不是改本条。
+author: curator
+created: "2026-09-11"

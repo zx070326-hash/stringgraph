@@ -1,0 +1,49 @@
+id: consistency.gravitational-anomaly-polynomial-d10--via-index-theorem-coefficients
+target: consistency.gravitational-anomaly-polynomial-d10
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.anomaly-twelve-form-d10
+    note: |
+      提供「反常 ↔ 形式十二形式」的框架与下降方程记号；GS 逐字把引力一路说成
+      「As described above for the Yang–Mills case」，即明确沿用规范一路的同一套编码。
+  - id: conv.gauge-trace-normalization
+    note: 固定 tr R^{2k} 里的 tr 是 10 × 10 切空间矩阵的迹。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(20) 与其引导句"
+    note: |
+      L1。**GS 只把 (20) 抄下来**，逐字「can be associated with the formal twelve-form [3]」，
+      三个系数不是本文算的。抽取记录 E13。
+  - ref: alvarez-gaume-witten-1984
+    loc: "该文的引力反常计算（GS ref. [3]；相对归一化 GS 指为 eq. (63)）"
+    note: |
+      **本项目未取得全文（L0）**，因此本推导的**全部数值内容都悬空**。
+      这是本图当前最大的未闭合依赖之一（抽取记录 Q2/Q3）。
+      另注：GS 的参考文献把该文年份印作 1983，通行为 1984（抽取记录 §3.5）。
+  - ref: bilal-2008
+    loc: "§12, (12.21)（同一反常多项式的现代写法，按 dim G 参数化）"
+    note: |
+      L1，仅作**交叉核验**：逐项与 GS (20) 差同一个整体因子 3/4（表见目标节点 notes）。
+      不是独立推导来源——Bilal 同样是转述 AGW 的指标定理结果。
+summary: |
+  **论证形态：引用他人计算的结果。** 反常多项式的系数来自 Alvarez-Gaumé–Witten 对
+  D = 4k + 2 维手征场（spin-1/2、spin-3/2、自对偶张量）引力反常的指标定理计算。
+  GS 做的只有两件事：
+  (1) 把 D = 10、N = 1 超引力的费米子含量（一个左手 spin-3/2 引力微子 + 一个右手 spin-1/2 场）
+      与 n 个左手 spin-1/2 物质费米子代进去；
+  (2) 把结果按 (tr R²)³、tr R² tr R⁴、tr R⁶ 三个不变量整理，使 n 的依赖以 n − 496 的形式出现。
+  本图对 (1)(2) 都没有独立核算。
+
+  **本图做过的唯一检查**（数值一致性，非证明）：与 bilal-2008 (12.21) 逐项比较，三项之比
+  都是 3/4，故两者只差整体归一。详表见目标节点 notes（抽取记录 §5.5 = 候选 A5，
+  三个 ℚ 上的等式，`norm_num` 可形式化，本轮未建 math 节点）。
+gaps:
+  - "★ 三个系数完全外包给 alvarez-gaume-witten-1984，本项目**未取得该文全文**（L0）。整条 consistency.* 反常链的数值系数层因此不可追溯。"
+  - "GS 未复算，也未说明费米子含量如何代入；spin-3/2 与 spin-1/2 的相对贡献系数在本图无任何来源。"
+  - "「形式上的十二维表达式」与十维反常之间的对应本身只在 zumino-wu-zee-1984（未取得）里，见 consistency.anomaly-twelve-form-d10。"
+  - "升级路径：抽取 Alvarez-Gaumé–Witten 1984（尤其 eq. (63) 与引力反常表），这是本区最高优先级的 researcher 任务。"
+notes: |
+  与 bilal-2008 的 3/4 因子核对由 researcher 在抽取时完成、curator 复看，**未由 reviewer 独立复核**。
+author: curator
+created: "2026-09-11"

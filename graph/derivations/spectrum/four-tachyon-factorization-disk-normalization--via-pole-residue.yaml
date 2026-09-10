@@ -1,0 +1,50 @@
+id: spectrum.four-tachyon-factorization-disk-normalization--via-pole-residue
+target: spectrum.four-tachyon-factorization-disk-normalization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.open-string-four-tachyon-amplitude
+    note: 提供带积分的四点表达式与 Beta 型积分，本推导对它取极点留数。
+  - id: spectrum.open-string-three-tachyon-amplitude
+    note: 提供因子化右端的两个三点振幅（含 g_o³ C_{D₂} 的前因子），比较系数时用到。
+  - id: math.euler-beta-integral
+    note: |
+      提供 B(a,b) 的极点位置与留数（a = −n 处单极点，留数 (−1)^n/n! · Γ(b)/Γ(b−n)）。
+      「端点发散 = 极点」这一等同完全靠它。
+  - id: worldsheet.open-string-mass-shell
+    inferred: true
+    note: |
+      标 inferred：提供「s = −1/α' 就是开弦 tachyon 上壳」这一识别（α'm² = −1）。
+      该节点出自光锥量子化（§1.3），与 §6.4 不互相引用。
+    convention_map: conv.metric-mostly-plus 下 s 通道不变量 s = −(k₁+k₂)² = m²_int（中间态质量的平方），故 α'm² = −1 ⟺ α's = −1，即 s = −1/α'。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.11)/(6.4.13)/(6.4.14)，p.179–183"
+    note: 抽取记录 #E98，L1（schrans-2020 §6.30–§6.37，笔记 p.300–307）。
+summary: |
+  **(1) 端点 ⇒ 极点。** 在 y → 0 附近被积函数 ≈ y^{−α's−2}，积分 ∫₀ dy y^{−α's−2}
+  在 Re(−α's−2) ≤ −1 时发散；按 Beta 函数的亚纯延拓，该发散表现为
+  1/(−α's−1) = −1/(α's+1) 型单极点，位置 α's = −1，即 s = −1/α'。
+  物理读法：世界面上两个顶点算子彼此靠近的区域，对应一根长的中间弦传播，
+  端点发散就是中间态的传播子极点。
+
+  **(2) 留数比较。** 在极点附近把四点振幅写成 (留数)/(s + 1/α')，
+  把留数与「两个三点振幅 × 传播子」的乘积比较。三点振幅由
+  spectrum.open-string-three-tachyon-amplitude 给出（正比于 g_o³ C_{D₂}），
+  故右端 ∝ g_o⁶ C_{D₂}²，左端 ∝ g_o⁴ C_{D₂}；等式定出 C_{D₂} ∝ 1/(α' g_o²)，
+  连同来源给出的数值系数即 **C_{D₂} = 1/(α'g_o²)**。
+gaps:
+  - "**「中间态传播子」在本图与来源中都没有定义**：因子化右端用的是场论类比（1/(s − m²) 型传播子
+     与对中间态的求和）。严格的因子化需要算符形式或弦场论，本书此处不提供。
+     这是本推导标 physical-argument 的主要理由之一。"
+  - "**数值系数未独立核实**：C_{D₂} = 1/(α'g_o²) 的**数值**（而非标度关系）只有 (6.4.14) 一处来源，
+     抽取等级 L1（二手源）。本推导的 summary 只独立复现了标度关系 C_{D₂} ∝ 1/(α'g_o²)。"
+  - "**上游 ch5 节点尚未进入 main**（(5.3.9) 等），与本批次其它节点同。"
+  - "**极点留数的物理解释依赖幺正性**，而幺正性在本图中没有节点；来源也没有证明弦振幅幺正，
+     只是**要求**因子化成立并据此定归一化。"
+  - "**路径积分测度未定义**（本批次共有）。"
+notes: |
+  ⚠ 抽取记录 E98 记录了 [S] 把 (6.4.13) 类比为 BCFW 递推的说法，并明确标注
+  「这是 [S] 的类比，不是 Polchinski 的说法」。本图**不采用**该类比，也不建相关节点。
+author: curator-polchinski-ch6
+created: "2026-09-11"

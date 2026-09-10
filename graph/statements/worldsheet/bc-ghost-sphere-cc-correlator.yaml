@@ -1,0 +1,42 @@
+id: worldsheet.bc-ghost-sphere-cc-correlator
+kind: proposition
+title: 球面上 bc 鬼场的三 cc̄ 期望值 ⟨:cc̄(z₁)::cc̄(z₂)::cc̄(z₃):⟩_{S₂} = C^g_{S₂}|z₁₂|²|z₁₃|²|z₂₃|²
+statement: |
+  在 λ = 2 的 bc 鬼场 CFT（worldsheet.bc-ghost-cft，含独立的反全纯部门 b̄c̄）中，
+  取球面 S₂（worldsheet.tree-level-worldsheet-topologies）。则：
+
+  **(1)** 最简单的非零鬼场期望值恰含**六个 c 型插入**（三个全纯 c 与三个反全纯 c̄）：
+    ⟨ c(z₁) c(z₂) c(z₃) c̄(z̄₁) c̄(z̄₂) c̄(z̄₃) ⟩_{S₂} ≠ 0，
+  这与 κ(S₂) = 6、μ(S₂) = 0 相对应。
+
+  **(2)** 把每对 c、c̄ 放在同一点并作正规序，
+    ⟨ :cc̄(z₁): :cc̄(z₂): :cc̄(z₃): ⟩_{S₂} = C^g_{S₂} · |z₁₂|² |z₁₃|² |z₂₃|²,   z_ij ≡ z_i − z_j，
+  其中 C^g_{S₂} 是与 z_i 无关的归一化常数（数值由路径积分归一化约定决定，本命题不定它）。
+
+  **本命题不断言什么**：不定 C^g_{S₂} 的数值（闭弦振幅里出现的组合 C_{S₂} = e^{−2λ}C^X_{S₂}C^g_{S₂}
+  由因子化定出，见 spectrum.sphere-normalization-from-factorization）；
+  不论证「为什么恰好三个 c」（那是 worldsheet.bc-ghost-number-anomaly-sphere）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.1)（S₂ 上最简非零鬼场期望值）与 eq. (6.3.4)（三对 cc̄ 的显式表达式），p.176–177"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E96，等级 **L1，两个独立二手源**：
+      schrans-2020 §6.23–§6.25（笔记 p.296–297）与 headrick-2008 Problem 6.11（PDF p.48）
+      逐字写出「The ghost path integral is given by (6.3.4):
+      ⟨:c c̄(z₁)::c c̄(z₂)::c c̄(z₃):⟩_{S₂} = C^g_{S₂}|z₁₂|²|z₁₃|²|z₂₃|²」。
+      ⚠ 原书未核对（抽取记录 §0/§5.0）。
+  - ref: headrick-2008
+    loc: "Problem 6.11（PDF p.48）：逐字引用 (6.3.4) 并给出完整表达式"
+    note: 第二核对源（lead 裁决 2026-09-10：Headrick 习题解答一般只作核对源）。
+tags: [worldsheet, bc-ghost, sphere, correlator, tree-level, closed-string]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E96 建立。area 选择理由同
+  worldsheet.bc-ghost-disk-three-c-correlator（与既有的 worldsheet.bc-ghost-* 族并列）。
+
+  与 math.mobius-three-point-fixing-jacobian 的球面情形 |z₁₂|²|z₁₃|²|z₂₃|² 逐字同形，
+  这是「六个 c 插入抵消固定三个复坐标的 Jacobian」的算术根据。
+author: curator-polchinski-ch6
+created: "2026-09-11"

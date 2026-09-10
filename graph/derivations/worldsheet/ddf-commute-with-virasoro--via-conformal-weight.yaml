@@ -34,6 +34,16 @@ depends_on:
     note: |
       「权 h 的主场」的定义与 T·O OPE 的判据。本论证的核心是：k_0² = 0 使指数算符权为 0、
       ε·k_0 = 0 使交叉缩并项消失，于是 ∂X^i e^{i n k_0·X} 是权 1 主场。
+  - id: worldsheet.exponential-vertex-operator-weight
+    note: |
+      【2026-09-11（四）新增，立卡后接线】**summary 第 1 步的全部内容**现由该命题节点承载：
+      「:e^{i n k_0·X}: 是共形权 h = α' n² k_0² 的主场，k_0² = 0 时 h = 0」
+      （该卡 (1)(2)(b)(3)，开弦边界归一化 h = α'k²，与本推导 summary 第 1 步逐字一致）。
+      此前这条事实**只存在于本推导的 summary 内部**，本图没有节点承载它
+      （该卡 notes【为什么立卡】逐字登记了这三处缺口，本推导是其中一处）。
+      这条边**不是 inferred**：本推导第 1 步就是它，不是「在来源某处顺带用到」。
+      **有效状态不变**：该卡 effective = physical-argument，
+      与本推导既有的上限（worldsheet.ope-commutator-dictionary 等）同级。
   - id: worldsheet.ope-commutator-dictionary
     note: |
       「OPE ⟹ 模态对易子」的围道形变步骤。这是把「被积量是权 1 主场」翻译成 [L_m, A^i_n] = 0 的那一步，
@@ -42,6 +52,18 @@ depends_on:
     note: 目标陈述末段推论（DDF 算子把物理态映为物理态）所用的物理态条件。
   - id: worldsheet.virasoro-algebra-v2
     note: L_m 之间的 Virasoro 关系；推论中把 L_0 条件沿塔搬运时用到。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      【2026-09-11（三）新增，立卡后接线】目标陈述写的是「在该扇区的动量塔上」，
+      且明确「L_m 指作用在塔上、逐层用该层动量的算子（第 N 层动量 p + N k_0）」——
+      这个塔与其上逐层作用的 L_m、α^μ_n 现由该定义卡的【塔】与 (3) 承载。
+      本推导的推论一段（把 L_0 条件沿塔搬运、A^i_n 把动量移到 p + n k_0）也在塔上进行：
+      移动层指标的算子只有该卡 (1) 的 S_n = e^{i n k_0·x}。
+      这条边**不是 inferred**：塔是目标陈述量词的定义域，不是文献里某处的论证依赖。
+      Lean 侧的对应物同样在塔上（`towerLop`、`towerMode`、`lie_towerLop_towerMode`、
+      `invTwo_mul_zeroModeSq_towerMomentum`），见该卡 sources 第一条。
+      **有效状态不变**：该卡 status rigorous，其依赖均为 formalized，
+      本推导既有的上限（worldsheet.ope-commutator-dictionary 等，physical-argument）不受影响。
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -68,6 +90,10 @@ summary: |
   T(z) :e^{i n k_0·X(w)}: 的最奇异项是二阶极点，其系数是 α' n² k_0²/…，
   即 :e^{i n k_0·X}: 的共形权 h = α' n² k_0²（开弦边界归一化下的通用公式）。
   类光条件 k_0² = 0 给 **h = 0**。
+  【2026-09-11（四）】这一步现由 worldsheet.exponential-vertex-operator-weight 承载
+  （该卡 (1)(2)(b)(3)；其推导 --via-ope-with-t 把上面省略的缩并计数逐项写出，
+  并登记了「开弦边界归一化（缩并加倍）本图无节点」这条缺口）。
+  本推导不再自行论证这一步。
 
   第 2 步（被积量是权 1 主场）。∂X^i(w) 本身是权 1 主场。把它与 :e^{i n k_0·X(w)}: 相乘时，
   可能破坏 primary 性质的是两者之间的交叉缩并，其系数正比于 **ε·k_0**（横向偏振与参考动量的内积）；
@@ -86,10 +112,10 @@ summary: |
   Lean 侧对应 `invTwo_mul_zeroModeSq_towerMomentum`）。
 gaps:
   - "**式号与正文均未核实**。两条一手来源（GSW §2.3.3、GT 1972）的 loc 强度分别是 L4/L0 与 L0，两篇的正文都未获取。这是本推导可追溯性的主要弱点，与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 面对的是同一个问题。"
-  - "第 1、2 步的 OPE 计算依赖 worldsheet.free-scalar-propagator（physical-argument）与 worldsheet.conformal-normal-ordering（own rigorous / effective physical-argument），两条边在来源处都找不到逐条论证，已标 inferred。"
+  - "第 1、2 步的 OPE 计算依赖 worldsheet.free-scalar-propagator（physical-argument）与 worldsheet.conformal-normal-ordering（own rigorous / effective physical-argument），两条边在来源处都找不到逐条论证，已标 inferred。**【2026-09-11（四）更新】第 1 步整体已搬到 worldsheet.exponential-vertex-operator-weight（+ 其推导 --via-ope-with-t），本条已加为非 inferred 依赖；缺口没有关闭，只是搬了家**：那条推导的 gaps 第 1 条（§2.4 (2.4.17) 一带的内容未核对、缩并系数是本项目重算的）与第 3 条（开弦边界缩并加倍本图无节点）现在是第 1 步的缺口现址。本推导保留 free-scalar-propagator / conformal-normal-ordering-v2 两条 inferred 边，因为第 2 步（∂X^i 与指数的**交叉**缩并正比于 ε·k_0）仍在本推导内部、不在那张卡里（那张卡的边界 (c) 明写不覆盖它）。"
   - "第 3 步的围道形变依赖 worldsheet.ope-commutator-dictionary（physical-argument：径向排序 + 围道变形，未形式化）。这是本推导 status 的直接上限：只要该字典还是 physical-argument，本推导就不可能高于 physical-argument。"
   - "**Sugawara 型 L_m 与 T 的 Laurent 模 L_m 未被证明等同**（worldsheet.normal-ordering-modes-agree，physical-argument 且未形式化）。目标陈述写的是前者，本论证操作的是后者。文献从不区分，故该边标 inferred。要把本推导升到 rigorous，这条接缝必须先处理。"
-  - "**Lean 侧：归纳步已有，基例未做。** 可形式化的中间陈述是 L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m}（塔上两侧 L_m 的动量参数不同），共形权 h = ½ b·b = α' k_0²。`Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion` 配合 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode` 已把它归约为真空上的单条等式（归纳步），但**基例（L_m 作用在相干态系数 `Fock.creaExp` 上）未证**——VertexOperator.lean 文件头 \"Mathematical gaps\" 第 1 条逐字：「In particular the statement \"`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`\" is **not** formalised.」formalizer 正在做 `formal/StringFormal/NoGhost/VertexWeight.lean`（截至合并提交 9691057 未合入）。在基例完成前，本推导不得标 formalized。"
+  - "**Lean 侧：归纳步已有，基例未做。** 可形式化的中间陈述是 L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m}（塔上两侧 L_m 的动量参数不同），共形权 h = ½ b·b = α' k_0²。`Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion` 配合 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode` 已把它归约为真空上的单条等式（归纳步），但**基例（L_m 作用在相干态系数 `Fock.creaExp` 上）未证**——VertexOperator.lean 文件头 \"Mathematical gaps\" 第 1 条逐字：「In particular the statement \"`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`\" is **not** formalised.」formalizer 正在做 `formal/StringFormal/NoGhost/VertexWeight.lean`（截至合并提交 9691057 未合入）。在基例完成前，本推导不得标 formalized。**【2026-09-11（四）更新】** VertexWeight.lean 已合入（提交 d5d0799），里面证出的是基例的**第一步** `Fock.creaExp_euler`（产生指数 E_- 的欧拉型 z∂_z 递推），该文件文件头「尚缺」一节逐字写「`[L_m, V_J]` 的共形权公式……本轮未做」「本文件目前**不**支撑图上任何 `formalized` 的推导」。formalizer 在分支 agent/formalizer/vertex-weight-2 上续做（L_m 作用在相干态系数上），截至本次接线未合并。⚠ 另注意：即使该恒等式做完，它是**模形式**，与 worldsheet.exponential-vertex-operator-weight (1) 的 **OPE 形式**互推要经 worldsheet.ope-pole-mode-commutator-dictionary（physical-argument），见那张卡 notes【升级路径】(i) 关于拆模形式卡的建议。"
   - "本推导只谈 A^i_n 与 L_m 的对易，**不**覆盖 A^i_n 之间的对易（那是 worldsheet.ddf-transverse-oscillator-algebra），也**不**覆盖 A^i_n 作为代数算子的良定义性（那是 worldsheet.ddf-transversality-gives-local-finiteness）。三条从 worldsheet.ddf-operators-v4 拆出的命题各自独立。"
   - "k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内：那里 A^i_n 本身没有定义（worldsheet.ddf-operators-v5 的 (★)）。"
 notes: |
@@ -103,5 +129,21 @@ notes: |
   因此不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；两条一手来源都没有核实到式号，
   也没有可引用的数学文献严格证明（kac-raina-1987 的讲号/命题号在本项目中未核实
   且两版不可互换，不得猜编号）。故 physical-argument，**无 reviewer-verified 记录**。
+
+  **【2026-09-11（三）接线记录，curator】** 新增一条**非 inferred** 依赖
+  worldsheet.momentum-tower-fock-space：目标陈述与本推导的推论一段都在动量塔上进行，
+  此前本图没有承载该对象的节点。summary、gaps、sources 与 status 均未动，有效状态不变。
+
+  **【2026-09-11（四）接线记录，curator】** 新增一条**非 inferred** 依赖
+  worldsheet.exponential-vertex-operator-weight：summary 第 1 步（指数算符的共形权，
+  k_0² = 0 ⟹ h = 0）此前只存在于本推导内部，现由该命题节点承载。
+  同时在 summary 第 1 步与 gaps 第 2 条加了指向该卡的指针。
+  sources 与 status 未动；**有效状态不变**（该卡 effective = physical-argument，
+  与本推导既有上限 worldsheet.ope-commutator-dictionary 同级，瓶颈链因此多一张卡但不降级）。
+  ⚠ 该卡的推导把第 1 步里一条此前没人记账的事情显式登记了：
+  本推导写的 h = α' n² k_0² 是**开弦边界**归一化，而上游 worldsheet.free-scalar-propagator
+  是**闭弦体内**归一化（那里的公式会给 α' n² k_0²/4），两者差因子 4；
+  桥接它们的「边界缩并加倍」本图仍无节点。k_0² = 0 时两者都是 0，
+  故**本推导的结论不受影响**，但这条记账以后若有人把本步用于 k² ≠ 0 的算子就必须看。
 author: curator
 created: "2026-09-11"

@@ -1,0 +1,48 @@
+id: spectrum.tachyon-expectation-conformal-factor-cancellation--via-momentum-conservation
+target: spectrum.tachyon-expectation-conformal-factor-cancellation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.sphere-zero-mode-momentum-conservation
+    note: 提供 Σ_i k_i = 0；[S] 逐字强调相消「由 delta 函数强制，而 delta 函数来自零模」。
+  - id: spectrum.vertex-operator-geodesic-renormalization
+    note: |
+      提供减除方案：自能项 (1/2)k_i² G'_r(σ_i,σ_i) 的有限剩余正比于 ω(z_i)，
+      本推导要相消的就是这一类项。
+  - id: worldsheet.free-scalar-propagator
+    note: 提供 G' 的普适部分 −(α'/2)ln|z|²；非普适部分 f 是它在弯曲度规上的补充项。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.17) 及其推导，p.171"
+    note: 抽取记录 #E93，L1（schrans-2020 §6.12，笔记 p.286，n = 3 的显式验算 [6.44]–[6.45]）。
+summary: |
+  Gauss 积分后指数里的项按对 i 的依赖分三类：
+
+  (a) 双指标普适项 α' k_i·k_j ln|z_ij|（i ≠ j）——保留；
+  (b) 单指标项 k_i² × (自能的有限剩余) ∝ k_i² ω(z_i)；
+  (c) 由非普适部分 f 产生的交叉项，形如 k_i·k_j [f(z_i) + f(z_j)] = (Σ_j k_j)·k_i f(z_i) + …。
+
+  (c) 因 Σ_j k_j = 0 而逐项为零；(b) 中所有外线的 k_i² 取同一个质量壳值
+  （tachyon：α' k_i² = 常数），于是 Σ_i k_i² ω(z_i) 的系数被同一个常数提出，
+  剩下的组合再次被 Σ_i k_i = 0 消掉（或按 (6.2.14) 吸收进与坐标无关的常数）。
+  结果只剩 (a)，即 (6.2.17)。
+
+  ⚠ **两个条件缺一不可**：若外线不满足同一质量壳条件，(b) 不相消，期望值依赖共形因子 ω，
+  规范固定后的结果无意义；若不做动量守恒，(c) 不相消。
+gaps:
+  - "**只有 n = 3 的显式验算**：[S] 只对三点验证（[6.44]–[6.45]）；本推导对一般 n 的分类
+     (a)(b)(c) 是 curator 按同样机制补出的**转述**，不是来源逐字内容。"
+  - "**f 的显式表达式本图没有**：(6.2.9)（S₂ 上的 Green 函数）只到 L2（抽取者只读到目录条目），
+     故「f 只以上述组合出现」这一关键结构在本图中**没有表达式级的核实**。
+     这是本推导最实质的缺口。"
+  - "**路径积分测度未定义**（本批次共有的限制）；且『顶点算子 on-shell 时是权 (1,1) 主场』
+     这一 CFT 事实在本图中没有节点（顶点算子的共形权只在 formal/ 的 Lean 侧有部分工作）。"
+  - "**「Weyl 不变性 ⟸ on-shell + 动量守恒」的措辞未核实**：原书是否把这一点单独说出来未知；
+     (2) 是 curator 依 [S] 的验算写成的读法。"
+notes: |
+  本条与 worldsheet.polyakov-weyl-invariance、worldsheet.weyl-anomaly-trace 是不同层面的陈述：
+  那两条讲**作用量/测度**的 Weyl 性质，本条讲**带插入的期望值**的 Weyl 性质，
+  后者额外要求插入满足质量壳条件。日后若建「顶点算子 on-shell ⟺ 权 (1,1) 主场」节点，
+  应把本推导改成对它的显式依赖。
+author: curator-polchinski-ch6
+created: "2026-09-11"

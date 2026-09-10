@@ -1,0 +1,35 @@
+id: worldsheet.modular-fundamental-domain
+kind: proposition
+title: F₀ = {|Re τ| ≤ ½, |τ| ≥ 1} 是模群在上半平面上的基本域
+statement: |
+  设
+    F₀ = { τ ∈ H : −½ ≤ Re τ ≤ ½ 且 |τ| ≥ 1 } 。
+  则每个 τ ∈ H 都可以由某个模变换（worldsheet.modular-group-psl2z）送进 F₀，
+  且该代表元在**边界上的认同**之外唯一：
+    Re τ = −½ 与 Re τ = +½ 上的点由 T : τ ↦ τ + 1 相互认同；
+    |τ| = 1 上 Re τ < 0 与 Re τ > 0 的两半由 S : τ ↦ −1/τ 相互认同。
+  因此环面的模空间（diff × Weyl 等价类的空间）可以取成 F₀（作了上述边界认同）。
+
+  ⚠ 边界的认同在本书中未被严格处理，见本节点唯一一条推导的 gaps。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.15), p.148（基本域 F₀：−½ ≤ Re τ ≤ ½ 且 |τ| ≥ 1）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E72，L1（读到 schrans-2020
+      笔记 p.248；**未核对 Polchinski 原书**）。
+      ⚠ 抽取记录逐字转引了 [S] 对**原书论证完备性**的评价：
+      「we have argued that F₀ is the fundamental domain of the modular group,
+      we have been quite cavalier about the boundaries of F₀. Those who are interested in
+      a more detailed approach are referred to Zwiebach's book, section 26.6 of the second edition.」
+      这是第三方评价，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」。
+tags: [worldsheet, torus, modular-group, moduli, fundamental-domain]
+notes: |
+  数学上正确的陈述与证明按 [S] 的指路在 Zwiebach 2nd ed. §26.6；
+  **该书本项目 literature/sources.bib 尚未登记，节号未核实**，故这里只写在 notes 里，
+  不作为 sources 条目。这是 researcher 的一条现成待办。
+
+  下游意义：S-矩阵主公式 worldsheet.string-s-matrix 里的模积分写作 ∫_F d^μ t，
+  「在基本域上积分」正是靠这条命题才不会重复计数；环面（单圈）情形的 F 就是这里的 F₀。
+author: curator-polchinski-ch5
+created: "2026-09-11"

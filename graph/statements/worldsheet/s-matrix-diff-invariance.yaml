@@ -1,0 +1,45 @@
+id: worldsheet.s-matrix-diff-invariance
+kind: proposition
+title: S-矩阵主公式 (5.3.9) 是微分同胚不变的
+statement: |
+  worldsheet.string-s-matrix 的公式 (5.3.9) 在世界面微分同胚下不变。
+
+  公式中不显然协变的部分有两处：
+  (a) μ 个 b 插入 (1/4π)(b, ∂_{t^k}ĝ) 与 κ 个 c 插入 c^a(σ̂_i)；
+  (b) 被固定在 σ̂_i 的那些顶点算子（它们的坐标不再是积分变量，故坐标变换会移动它们）。
+  断言是：(a) 中 b 插入的变分由 b 的运动方程 P̂₁^T b = 0 消去
+  （worldsheet.b-insertion-diff-variation），而运动方程在 c 插入处的**接触项**
+  恰好补偿 (b) 中固定顶点算子的坐标变换效应，二者相消。
+
+  ⚠ **原书在这里只有断言，没有给出接触项的计算。** 见本节点唯一一条推导的 gaps；
+  本节点的状态因此定在 conjecture 而不是 physical-argument。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.4), p.160"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E84，L1
+      （读到 schrans-2020 §5.25，笔记 p.263–264，以及第 5 章开头的 "Open Questions" 框，笔记 p.243）。
+      ⚠ **本条是第 5 章唯一拿到的 Polchinski 逐字原文**（经 schrans-2020 转引，
+      伴读者用引号并写「Joe writes」）：
+      「The b equation of motion comes from δS/δc = 0, so there will be source terms at the
+      c insertions; this is precisely what is needed to account for the effect of the
+      coordinate transformations on the fixed vertex operators」。
+      伴读者紧接着写：「I don't understand this, let alone how you can show this.」
+      （同一疑问在 [S] §5.25 末重复）。
+      ⚠ 即便这一句，本项目拿到的也是**转引**，不是原书页面。
+tags: [worldsheet, s-matrix, diffeomorphism, ghosts, contact-terms]
+notes: |
+  抽取记录「本轮对图的建议」第 2 条明确指出：「E84 是本章最该标低状态的一条——
+  原书只有断言，伴读者明说看不懂。」本卡照办。
+
+  伴读者为此专门写了 §5.35「Appendix: The Schwinger Dyson Equations in a QFT」
+  （标题不带式号 = 他自补的材料，非原书内容），但他自己声明未能复现 Polchinski 的论证。
+  按 lead 2026-09-10 裁决，个人笔记不得作为承载论证的 sources[] 条目，
+  故那份附录在本图中不能用来支撑本命题。
+
+  升级路径：找到一份把接触项算完整的成文来源（例如 Polchinski §5.4 原文本身，
+  或 D'Hoker–Phong 1988 的模空间测度综述），另建 `--via-schwinger-dyson` 推导。
+author: curator-polchinski-ch5
+created: "2026-09-11"

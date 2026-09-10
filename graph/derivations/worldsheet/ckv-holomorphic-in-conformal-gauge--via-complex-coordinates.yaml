@@ -1,0 +1,42 @@
+id: worldsheet.ckv-holomorphic-in-conformal-gauge--via-complex-coordinates
+target: worldsheet.ckv-holomorphic-in-conformal-gauge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.conformal-killing-equation
+    note: 提供被改写的方程 (P₁δσ)_ab = 0。
+  - id: worldsheet.conformal-gauge-fixing
+    note: |
+      提供 ĝ_ab = δ_ab 这个背景。⚠ 该节点只断言**局部**可达共形规范；
+      本推导也只是局部的坐标改写，故不受此限制影响，但下游的整体计数受影响（见 gaps）。
+  - id: worldsheet.metric-variation-operator-p1
+    note: 提供 P₁ 的分量表达式。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.8) 附近, p.152"
+    note: |
+      抽取记录 #E74，L1（schrans-2020 §5.9，笔记 p.249–250，条目 [5.33]）。
+summary: |
+  在共形规范 + 复坐标下，对称无迹二阶张量只有两个独立分量 (·)_zz 与 (·)_z̄z̄
+  （因为 g_zz = g_z̄z̄ = 0、g_zz̄ = 1/2，无迹条件杀掉 (·)_zz̄）。平坦度规下协变导数化为普通导数，
+  于是
+    (P₁ δσ)_zz = ∇_z δσ_z = ∂ δz̄ ,   (P₁ δσ)_z̄z̄ = ∇_z̄ δσ_z̄ = ∂̄ δz
+  （用 δσ_z = ½ δz̄、δσ_z̄ = ½ δz 的指标升降，整体因子不影响方程为零）。
+  故 (P₁δσ)_ab = 0 ⟺ ∂̄ δz = 0 且 ∂ δz̄ = 0。
+gaps:
+  - |
+    **指标升降的因子未经核实**：δσ_z 与 δz̄ 之间的 1/2 因子来自 conv.worldsheet-complex-coords
+    的复度规约定。抽取记录只给出结论 ∂δz̄ = ∂̄δz = 0（[S] 条目 [5.33]），没有给中间步骤，
+    故上面 summary 的分量对应是 curator 补的。**结论（两条全纯性方程）不受因子影响**，
+    但若有人要用 (P₁δσ)_zz 的显式归一化（例如算 Gram 矩阵），必须重新核对。
+  - |
+    **只是局部改写**：共形规范只在局部可达（worldsheet.conformal-gauge-fixing 明写），
+    而 κ 的取值是整体量。本推导给的是「CKV ⟺ 处处正则的全纯向量场」这个**局部方程 + 整体正则性**
+    的形式，整体部分（曲面用几片覆盖、过渡函数下 δz 的变换律是权 −1 的向量场）
+    在本推导中没有论证。
+  - |
+    有限步初等计算，但**无 reviewer 独立复核记录**，故不能标 rigorous。
+  - |
+    **来源强度**：式号 (5.2.8) 只经 schrans-2020 目录核对（对笔记 L1/L2，对原书 L3）。
+author: curator-polchinski-ch5
+created: "2026-09-11"

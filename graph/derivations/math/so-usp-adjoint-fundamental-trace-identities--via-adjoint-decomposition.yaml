@@ -1,0 +1,54 @@
+id: math.so-usp-adjoint-fundamental-trace-identities--via-adjoint-decomposition
+target: math.so-usp-adjoint-fundamental-trace-identities
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      只用来固定 tr（基本表示）/ Tr（伴随表示）的分工与 F 是偶次形式这两件事。
+      约定节点不参与状态传播。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12a)(12b)(12c)(13a)(13b)"
+    note: |
+      **本推导的全部「论证」就是：来源直接把结论写了出来。** GS 无证明动词、无出处引用
+      （抽取记录 literature/extractions/green-schwarz-1984.md E7 逐字记录了这一点）。
+  - ref: bilal-2008
+    loc: "§12, (12.23)（SO(n) 三条恒等式，措辞「Let us note without proof that…」）"
+    note: 第二个独立来源，结论一致，但同样明说不给证明。
+  - ref: antonelli-2015
+    loc: "§2.3.1（SO(n) 的推导思路：伴随 = 基本的外平方，Tr Ω = ½[(tr O)² − tr(O²)]，对 O = e^F 按阶比较）；p.10 Table 2"
+    note: |
+      唯一给出**推导路线**的来源，但本项目**未逐步复核**，且未核实它是否覆盖 usp(N)。
+      故本推导不据此升级到 rigorous，只把路线记在 summary 里供后来者接手。
+summary: |
+  **来源的论证形态：直接断言。** GS 1984 在 (12a)–(12c) 处把三条恒等式写出来就走，
+  没有证明也没有引文；Bilal 2008 (12.23) 复述同样三条并明说 "without proof"。
+  本推导如实记录这一点，因此状态只能是 physical-argument（严格说是「文献断言，未见证明」，
+  本图状态阶梯里最接近的一档）。
+
+  **文献里能找到的最接近证明的东西**（antonelli-2015 §2.3.1，仅 SO(n)）：
+  1. so(N) 的伴随表示可实现为基本表示的**外平方** Λ²(N)：
+     若 O 是基本表示中的矩阵，则伴随表示中的对应矩阵为
+     Ω^{mn}_{kl} = O^m_k O^n_l − O^n_k O^m_l。
+  2. 取迹得 Tr Ω = ½[(tr O)² − tr(O²)]。
+  3. 令 O = e^F（F 取值于 so(N) 的基本表示），则 Ω = e^𝓕 且 𝓕 是 F 的伴随表示像；
+     把两边按 F 的阶数展开、逐阶比较，即得 Tr F²、Tr F⁴、Tr F⁶ 用 tr F^{2k} 的表达式。
+  usp(N) 一支相应地用**对称平方**（伴随 = Sym²），这一步在上述来源中**没有写出**，
+  是把 l = ±1 统一成一个记号的常见做法；本图不替它补论证。
+
+  **数值自洽性检查（本图做的，非文献）**：把 N = 32、l = −1 代入 (12)，得
+  Ω₄ = 30 tr F²、Ω₈ = 24 tr F⁴ + 3(tr F²)²、Ω₁₂ = 15 tr F² tr F⁴；
+  这三个数（30, 24, 0）正是 math.anomaly-twelve-form-factorization 与
+  math.mixed-anomaly-trace-conditions-n32 用到的那组，三处彼此相容。
+gaps:
+  - "GS 1984 与 Bilal 2008 都**不给证明**；本图没有任何来源给出 usp(N) 一支的推导。"
+  - "antonelli-2015 §2.3.1 的 SO(n) 推导本项目未逐步复核，且该文是单作者预印本、未核实期刊发表。"
+  - "第 3 步「Ω = e^𝓕 且逐阶比较」在有 F 是**二形式**（外代数取值）的情形下需要说明幂级数的意义；来源在普通矩阵语言里写，本图未核对这一步的合法性。"
+  - "升级路径：找一本李代数不变量理论的教材（Tr 与 tr 的换算表），或由 formalizer 在 Mathlib 的外平方/对称平方框架里做——后者当前基础设施不足。"
+notes: |
+  【不要误读 status】physical-argument 在这里不是说「这条恒等式可疑」——它是标准群论事实，
+  三个独立来源一致。它说的是**本图目前没有掌握任何一份完整证明**。
+  这正是 docs/VISION.md 想让报告显示出来的那类记账。
+author: curator
+created: "2026-09-11"

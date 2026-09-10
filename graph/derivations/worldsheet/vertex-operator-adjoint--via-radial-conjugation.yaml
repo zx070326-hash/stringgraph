@@ -1,0 +1,243 @@
+id: worldsheet.vertex-operator-adjoint--via-radial-conjugation
+target: worldsheet.vertex-operator-adjoint
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      **承载断言的空间与型**。目标 (1) 的等式跨两层（V^{(n)}_J : 第 N 层 → 第 N+n 层），
+      因此它只在塔上、且只在「层间正交」这条约定下有意义；单层的
+      worldsheet.fock-indefinite-form 对跨层配对不置一词。本推导还直接用到该节点的
+      (1) 移位算子 S_n = e^{i n k_0·x}（V^{(n)}_J 的零模因子）、
+      (3) 逐层作用的振子模、以及 (4) S_n^† = S_{−n}（第 4 步）。
+      这条边**不是 inferred**：塔与塔上的型是目标陈述量词的定义域。
+  - id: worldsheet.ddf-operators-v5
+    note: |
+      提供 k_0² = 0（类光条件，第 3 步重排序因子为 1 的唯一理由）与归一化
+      (★) 2α' k_0·p = 1（使单值性指数 2α' n k_0·p = n 为整数，从而 Laurent 指标 J ∈ Z，
+      「反射 J ↦ −J」这句话才有意义；见该卡说明 (c)）。
+      被断言的顶点算子 :e^{i n k_0·X}: 也正是该卡定义 A^i_n 时用的那一个。
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      **核心输入**：逐层的双线性型本身，以及陈述 (1)(b)「产生与湮灭互为伴随」
+      (α^μ_{−n})† = α^μ_n（n ≥ 1）。第 2 步把正规序指数展成产生半与湮灭半之后，
+      逐因子取伴随用的就是这一条；第 3 步「E_- 的伴随是 E_+ 型的对象」也是它的直接后果。
+      **不**使用该节点的 (4)（不定性）。
+  - id: worldsheet.bosonic-fock-space
+    inferred: true
+    note: |
+      振子部分的模型：正规序指数的产生半 E_- 在代数 Fock 空间上就是「乘以一个显式元素」
+      （多项式环的元素），湮灭半 E_+ 是常系数导子的指数即**变量平移**；
+      第 2、3 步把重排序化为这两个初等操作换序，用的是这个多项式模型
+      （Lean 侧 `Fock.creaExp` / `Fock.vertexSub` 正是它）。
+      文献侧（GSW §2.3.3、Polchinski §6.6）不提 Fock 空间的这个代数模型，标 inferred。
+  - id: worldsheet.virasoro-generators-adjoint
+    inferred: true
+    note: |
+      **机制样板**，不是「文献在此处引用了它」，故标 inferred。
+      目标与它是同一条规则的两个实例：由「厄米」场构成的权 h 场，其模在径向共轭下指标反射
+      J_m^† = J_{−m}（那里 h = 2 的 Sugawara L_m，这里 h = 0 的 :e^{i n k_0·X}:）。
+      该节点是本图中**唯一被机器验证过**的该规则实例（`Fock.pairing_Lop_left`），
+      本推导第 1 步的写法照它组织；另外它 Lean 侧的 `Fock.pairing_mode_left`
+      把伴随关系延拓到**一切整数模指标含 m = 0**，第 2 步处理零模因子时需要
+      （worldsheet.fock-indefinite-form 的陈述文本只覆盖 n ≥ 1）。
+      注意该延拓**不在**该节点的 statement 文本里，故此边标 inferred。
+  - id: worldsheet.free-scalar-propagator
+    inferred: true
+    note: |
+      XX OPE X^μ(z)X^ν(0) ∼ −(α'/2) η^{μν} ln|z|²。第 3 步的重排序因子
+      ∝ z^{2α' n² k_0·k_0} 的**指数从哪里来**，全部来自这一条缩并；
+      正是它把「类光」翻译成「因子为 1」。来源处（GSW §2.3.3 式号 L0；
+      Polchinski (6.6.24) 只给结果不给缩并）不逐条列出这一步，标 inferred。
+      这条边把本推导的有效状态封在 physical-argument（该节点自身即 physical-argument），
+      如实登记。
+  - id: worldsheet.conformal-normal-ordering-v2
+    inferred: true
+    note: |
+      指数算符的正规序规则：把 :e^{i n k_0·X}: 分解为 E_- E_+ 并计算两半换序的代价，
+      需要「正规序 = 减去缩并」这条规则。同上，来源处不逐条列出，标 inferred。
+  - id: worldsheet.radial-hermitian-conjugation
+    note: |
+      【2026-09-11（四）新增，立卡后接线】**第 1 步与第 3 步的那条规则**
+      （「厄米共轭在径向量子化下作用为 z ↦ 1/z̄；双线性型版本是 z ↦ 1/z」，
+      以及由它得到的模反射 (φ_m)† = (φ̄)_{−m}）现由该定义卡承载，
+      不再是本推导 summary 里无节点支撑的前提。gaps 第 3 条已相应改写。
+      该卡的 (4) 另把本推导第 1 步里「h ≠ 0 时反射带 h 依赖的指标平移」写成了精确形式：
+      在「z^K 的系数」指标下反射是 K ↦ −K − 2h，**只有 h = 0 时**才退化成 K ↦ −K，
+      这正是本目标需要 h = 0 的地方。
+      这条边**不是 inferred**：本推导第 1 步就是在用这条规则。
+      **有效状态不变**：该卡 own status rigorous、effective physical-argument
+      （被 worldsheet.state-operator-isomorphism 封顶），与本推导既有上限同级。
+  - id: worldsheet.exponential-vertex-operator-weight
+    note: |
+      【2026-09-11（四）新增，立卡后接线】**第 1 步末尾用到的「:e^{i n k_0·X}: 在 k_0² = 0 时
+      是权 0 的主场」**现由该命题节点承载（该卡 (1)(2)(b)(3)）。
+      此前这条事实在本图中没有节点，本推导 gaps 第 2 条逐字登记了这个缺口并建议立卡
+      （「若 reviewer 要求，应把它单列成一条命题节点（与本卡是姊妹卡）」），
+      该条已相应改写。权为 0 是第 1 步「反射恰为 J ↦ −J、不带任何指标平移」的唯一理由
+      （对照 worldsheet.radial-hermitian-conjugation (4) 的 K ↦ −K − 2h）。
+      这条边**不是 inferred**。**有效状态不变**（该卡 effective = physical-argument）。
+  - id: worldsheet.primary-field
+    inferred: true
+    note: |
+      第 1 步的模反射规则以「权 h 场」为前提：h ≠ 0 时反射规则带 h 依赖的额外指标平移，
+      本目标的 h = 0（k_0² = 0）使反射恰为 J ↦ −J。本节点提供「共形权与主场」的定义。
+      ⚠ **「:e^{i n k_0·X}: 的权是 α' n² k_0² = 0」这条事实本图没有节点承载**
+      （最接近的 worldsheet.ddf-commute-with-virasoro 断言的是 [L_m, A^i_n] = 0，
+      权为 0 只出现在它的推导内部）。故此边只提供定义、不提供该事实，标 inferred，
+      并在 gaps 第 2 条登记这个缺口。
+      **【2026-09-11（四）更新】** 上面这段 ⚠ 已过时：该事实现由
+      worldsheet.exponential-vertex-operator-weight 承载（见上面新增的那条依赖）。
+      本边**保留且仍标 inferred**，理由：本推导第 1 步直接按「权 h 场的模」组织论述
+      （不只是经由那张新卡），而来源处（GSW §2.3.3，式号 L0）不引用共形权的定义；
+      该定义同时也是新卡自己的非 inferred 依赖，故本边现在是冗余但无害的记账。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      命题所在的语境。核实等级沿用 worldsheet.ddf-operators-v5：章节页码 L4/L2
+      （literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
+      ⚠ **GSW 不单独陈述本目标，也不给推导**：教科书只对合成后的 DDF 算子说一句
+      「A^i_n 是厄米的」，把顶点算子模的伴随当作径向量子化的常识跳过。
+      下面 summary 的四步是本项目按标准径向量子化规则重建的，**没有逐字来源**（gaps 第 1 条）。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: polchinski-1998-v1
+    loc: "§6.6，eq. (6.6.24)，p.195：两个正规序指数顶点算子之积 :e^{ik₁·X(z₁)}::e^{ik₄·X(z₄)}: = |z₁₄|^{α'k₁·k₄}:(1 + iz₁₄k₁·∂X + … )e^{i(k₁+k₄)·X(z₄)}:"
+    note: |
+      第 3 步重排序因子的文献依据。抽取记录 literature/extractions/polchinski-1998-v1.md#E109，
+      位置证据 **[已核实] / L1**（式号与内容经第三方笔记 [S] §6.72 复现）。
+      幂因子的指数 ∝ α' k₁·k₄，故两个动量互相正交（本推导中 k₁ = n k_0、k₄ = −n k_0，
+      k_0² = 0）时该因子为 1。
+      ⚠ **三条限定，逐条影响本推导的强度**：
+      (i) 这是**两个不同插入点算符之积**的 OPE，不是**同一个算符内部** E_+ 与 E_- 的重排序；
+          后者是前者的形式极限（把两个插入点合并），本图**没有节点**承载这一步（gaps 第 3 条）。
+      (ii) 那里是闭弦、双全纯的 |z|^{…}；开弦边界归一化只有全纯一半，
+           指数按 worldsheet.ddf-operators-v5 说明 (c) 的开弦约定读（该卡写作 z^{2α' n k_0·p}）。
+      (iii) 抽取记录同处标明该 OPE **依赖 OPE 的收敛性**（记录中的 Q3 未解决）。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（p.121 起）（协变 Fock 空间与 (α^μ_n)† = α^μ_{−n}；页码已核实、式号未核实）"
+    note: |
+      第 2 步逐因子取伴随所用的振子层面规则。与 worldsheet.fock-indefinite-form 同一处来源、
+      同一核实等级（抽取记录 #E54，页码已核实、式号未核实）。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（DDF 态按横向振子 Fock 空间计数，其内积正定）"
+    note: |
+      作者本人的历史综述（L3，二手）。**预设**本目标，不给证明、不给编号
+      （brst-cohomology-sources.md §3.1 第 1 条）。只作为「标准事实」的证据，不承载论证。
+summary: |
+  文献里这一步是跳过的（教科书只对合成后的 A^i_n 说「厄米」）。下面是把它展开成的标准论证，
+  四步；每一步注明是标准规则还是本项目的重建。
+
+  **第 1 步（模反射规则，与 L_m 的情形同一条规则）。** 径向量子化中，把厄米共轭定义为
+  作用在坐标上的 z ↦ 1/z̄ 加上场的复共轭：一个由厄米场构成的**权 h** 主场 O(z) 的模
+  O_m := ∮ (dz/2πi) z^{m+h−1} O(z) 满足 (O_m)^† = Ō_{−m}（Ō 是共轭场；O「厄米」时 Ō = O）。
+  【2026-09-11（四）】这条规则现由 worldsheet.radial-hermitian-conjugation 承载
+  （该卡 (1)(2)(3)；双线性型版本是 z ↦ 1/z，见该卡边界 (b)）。
+  这条规则在本图中已有两个被机器验证的实例：h = 1 的 ∂X^μ 给 (α^μ_m)† = α^μ_{−m}
+  （worldsheet.fock-indefinite-form (1)(b)），h = 2 的 Sugawara L_m 给 L_m^† = L_{−m}
+  （worldsheet.virasoro-generators-adjoint，formalized）。
+  被断言的对象 :e^{i n k_0·X(z)}: 在 k_0² = 0 时是**权 0** 的主场
+  （【2026-09-11（四）】现由 worldsheet.exponential-vertex-operator-weight (3) 承载；
+  其理由仍是 T 与它的 OPE 的二阶极点系数 ∝ α' n² k_0² = 0，也正是
+  worldsheet.ddf-commute-with-virasoro--via-conformal-weight 第 1 步所引的同一张卡），
+  故 h = 0，反射恰为 J ↦ −J，不带任何指标平移
+  （h ≠ 0 时的平移量由 worldsheet.radial-hermitian-conjugation (4) 给出：
+  在「z^J 的系数」指标下是 J ↦ −J − 2h）。
+  于是本目标归约为一件事：确认**共轭场是 k_0 → −k_0 的那一个**，即
+  :e^{i n k_0·X}:^– = :e^{−i n k_0·X}:，也就是 n ↦ −n。
+
+  **第 2 步（分解为两半并逐因子取伴随）。** 把正规序指数按产生/湮灭分解
+    :e^{i n k_0·X(z)}:  =  e^{i n k_0·x} · E_-(z) · E_+(z),
+    E_-(z) = exp( Σ_{m ≥ 1} (n k_0·α_{−m}/m) z^m ),
+    E_+(z) = exp( − Σ_{l ≥ 1} (n k_0·α_l/l) z^{−l} ),
+  其中 e^{i n k_0·x} 是零模移位（worldsheet.momentum-tower-fock-space (1) 的 S_n），
+  E_- 只含产生算符，E_+ 只含湮灭算符。形式上取伴随（把每个因子的伴随反序相乘）：
+    · (α^μ_m)† = α^μ_{−m}，对**一切整数 m 含 m = 0**
+      （worldsheet.fock-indefinite-form (1)(b)，m = 0 的延拓见
+      worldsheet.virasoro-generators-adjoint 在 Lean 侧的 `Fock.pairing_mode_left`；
+      m = 0 时 α^μ_0 是标量，对双线性型自伴）；
+    · 故 E_-(z)† 与 E_+(1/z) 同型、E_+(z)† 与 E_-(1/z) 同型，且两者的指数都多一个整体符号
+      （n k_0 → −n k_0）——这就是第 1 步末尾要的 n ↦ −n；
+    · (e^{i n k_0·x})† = e^{−i n k_0·x}，即 S_n^† = S_{−n}
+      （worldsheet.momentum-tower-fock-space (4)，是塔的定义的直接展开）。
+  伴随把三个因子**反序**，所以得到的表达式里两半的次序是 E_+ E_-，
+  而 V^{(−n)}_{−J} 的定义要求的是正规序 E_- E_+。差别只在这一次换序上。
+
+  **第 3 步（重排序，本推导唯一的非初等步骤；类光条件在此起作用）。** 把 E_+ E_- 换回 E_- E_+
+  要付一个 c-数因子。按两个指数算符的换序规则（Polchinski (6.6.24) 的自配对情形；
+  指数由 XX 缩并给出，worldsheet.free-scalar-propagator），该因子的指数正比于
+  两个指数所带动量的内积乘以 α'：这里两半带的动量分别是 +n k_0 与 −n k_0，故
+    因子 ∝ z^{2α' n² k_0·k_0}.
+  **k_0² = 0 使它恒等于 1**（这是类光条件在本推导中的全部作用，也是目标边界 (e) 说
+  「k_0² ≠ 0 时结论不成立」的原因）。于是换序不留痕迹，第 2 步的表达式逐字就是
+    (:e^{i n k_0·X(z)}:)†  =  :e^{−i n k_0·X(1/z)}:  （形式等式，径向共轭下 z ↦ 1/z̄，取实极化）。
+
+  **第 4 步（取 Laurent 系数）。** 对第 3 步的形式等式两侧取 z^J 系数。
+  左侧：伴随是逐系数的（双线性型的转置对 J 逐个作用），给出 (V^{(n)}_J)†。
+  右侧：z ↦ 1/z 把 z^J 的系数换成 z^{−J} 的系数，n ↦ −n，即 V^{(−n)}_{−J}。
+  于是对每个 J ∈ Z
+    (V^{(n)}_J)^†  =  V^{(−n)}_{−J},
+  即目标 (1)。**指标 J 取遍整数**这一点来自 (★) 2α' k_0·p = 1 与 k_0² = 0：
+  单值性指数 2α' n k_0·(p + N k_0) = n 在整条塔上是同一个整数
+  （worldsheet.ddf-operators-v5 说明 (b)(c)），否则 z 的幂是分数，"取 z^J 系数"无意义。
+  动量记账自洽：左端把第 N 层送到第 N+n 层，右端 V^{(−n)}_{−J} 把第 N+n 层送回第 N 层，
+  在层间正交下这是唯一可能非零的配置——这就是目标 (1) 里量词的来源。
+
+  目标 (2)(a)（n = 0）与 (2)(b)（只取零模）都是上述四步的退化情形，
+  后者不需要第 2、3 步，只是 worldsheet.momentum-tower-fock-space (4) 的重述。
+gaps:
+  - "**文献跳过这一步；summary 四步没有逐字来源。** GSW §2.3.3 的定位强度是章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3）；教科书只对合成后的 A^i_n 说一句「厄米」，**对顶点算子模的伴随不写任何东西**。第 1 步的模反射规则、第 2 步的逐因子取伴随、第 4 步的系数比对，都是本项目按标准径向量子化规则重建的，**未与任何原文核对**。"
+  - "**「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」这条事实——【2026-09-11（四）更新：已有承载节点】。** 第 1 步用它来断定反射是纯粹的 J ↦ −J（h ≠ 0 时反射规则带 h 依赖的指标平移，精确形式见 worldsheet.radial-hermitian-conjugation (4)）。**现由 worldsheet.exponential-vertex-operator-weight 承载**（推导 --via-ope-with-t，status physical-argument），本条已加为非 inferred 依赖，本推导 summary 第 1 步不再是裸断言。**但缺口没有关闭，只是搬了家**：那张卡的论证仍是 Wick 缩并 + OPE，且其主来源（Polchinski §2.4 (2.4.17) 一带）的**内容未核对**，最强锚点 (8.2.27)（**[已核实]/L1**）只断言乘积 ∂X^i e^{i n k_0 X^+} 是权 (1,0) 主场、不单独断言指数因子的权。缺口现址是 worldsheet.exponential-vertex-operator-weight--via-ope-with-t 的 gaps 第 1、2 条。Lean 侧同样仍未做：VertexOperator.lean 文件头 \"Mathematical gaps\" 第 1 条逐字「the statement \"`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`\" is **not** formalised」；VertexWeight.lean 已合入但只证到 `Fock.creaExp_euler`，其文件头自述「本文件目前**不**支撑图上任何 `formalized` 的推导」。"
+  - "**「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则——【2026-09-11（四）更新：已有承载节点】。** 第 1、3 步都以它为前提。**现由 worldsheet.radial-hermitian-conjugation 承载**（definition，own status rigorous），本条已加为非 inferred 依赖。**但缺口没有关闭，只是搬了家**：那张卡的 (1)（柱面上的欧氏时间反演对应 z ↦ 1/z̄）**没有任何文献式号锚点**（抽取记录 #E44 只覆盖柱面→圆盘的映射本身，不含共轭的定义；整条规则的具体写法是本项目重建的），且它的有效状态被 worldsheet.state-operator-isomorphism（physical-argument，路径积分构造）封在 physical-argument。文献侧最接近的两处是 Polchinski (4.3.17)（鬼模的 b_n† = b_{−n}，**式号已核实**，但只是一个实例且不给理由）与 (6.7.9)–(6.7.11)（Zamolodchikov 内积，**[已核实]/L1**，原书明说那是「卷积而非普通内积」）。缺口现址是 worldsheet.radial-hermitian-conjugation 的 sources 第三条与 notes【升级路径】。此前本条写的「最接近的 worldsheet.ope-commutator-dictionary 讲的是围道形变，不是伴随」仍然成立：那条与本卡机器不同。"
+  - "**第 3 步的重排序在文献侧只有「两个不同插入点算符之积」的版本。** 引用的 Polchinski (6.6.24)（#E109，[已核实]/L1）是两个分离插入点的 OPE；本推导要的是**同一个算符内部** E_+ 与 E_- 的换序，即把两个插入点合并的形式极限。这一步在本图中**没有节点**，在 Lean 中也没有定理（VertexOperator.lean 只分别给出两半 `Fock.creaExp`、`Fock.vertexSub`，不给它们的换序）。此外 #E109 的备注标明该 OPE **依赖 OPE 收敛性**（该抽取记录的 Q3 未解决），而本推导实际需要的是代数 Fock 空间上的**形式**换序，两者的严格性来源不同——形式换序在代数模型里预期是初等的（见 notes【升级路径】），但本推导没有给出那个初等论证。"
+  - "**「†」是塔上双线性型的转置，不是 Hermitian 共轭**（继承 worldsheet.momentum-tower-fock-space 边界 (d)、worldsheet.fock-indefinite-form 与 worldsheet.virasoro-generators-adjoint 的同一条 gap）。第 1、3 步里「X^μ 厄米」「z ↦ 1/z̄」这两句在双线性型版本中要读成「转置下不变」「z ↦ 1/z」。物理上的协变 Fock 空间是复空间，V† 还含一次复共轭；两者在实极化下一致，**复情形本图与 Lean 侧均未做**。"
+  - "**层间正交是约定，本推导实质使用它。** 目标 (1) 的等式跨两层，其成立依赖 worldsheet.momentum-tower-fock-space (2) 规定的「N ≠ M 时跨层配对为零」。该规定在本图中是**输入而非结论**（物理上对应 ⟨p|p'⟩ ∝ δ^D(p−p')，本图无节点承载 δ 归一化）。这条 gap 现由那张卡的 statement 显式承载，此处只登记本推导用到它。"
+  - "**Lean 侧未起步。** `formal/StringFormal/NoGhost/VertexOperator.lean` 文件头 \"Mathematical gaps\" 第 3 条逐字：「**`R`-bilinear, not sesquilinear**; no adjointness of `V_K` for `Fock.pairing` is proved (the expected `V(b)_J^† = V(-b)_{-J}` for `b·b = 0` would need the reordering `E_+ E_-`)」。另缺塔上的双线性型（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。两件都要做才谈得上把本推导升到 formalized。"
+  - "**退化扇区 k_0·p = 0（含 p = 0）不覆盖**，也**不覆盖 k_0² ≠ 0**：前者使 (★) 无法满足、Laurent 指标不是整数；后者使第 3 步的因子 z^{2α' n² k_0²} ≠ 1。两条都写进了目标陈述的边界 (e)(f)。"
+notes: |
+  **【2026-09-11（四）接线记录，curator】** 新增两条**非 inferred** 依赖，均只是把本推导此前
+  无节点支撑的前提换成有承载节点的引用，**不改变本推导或目标的有效状态**
+  （仍是 physical-argument，两张新卡 effective 都是 physical-argument）：
+    · worldsheet.exponential-vertex-operator-weight ← 承载第 1 步的「k_0² = 0 ⟹ 权 0 主场」，
+      关闭 gaps 第 2 条的「本图没有节点承载」一句；
+    · worldsheet.radial-hermitian-conjugation ← 承载第 1、3 步的「† 在径向量子化下是 z ↦ 1/z̄」，
+      关闭 gaps 第 3 条的「本图没有节点」一句。
+  两条缺口本身都只是搬家（现址见改写后的 gaps 第 2、3 条）。
+  summary 第 1 步加了两处指针并补了 h ≠ 0 时平移量的出处；gaps 第 2、3 条改写；
+  worldsheet.primary-field 那条 inferred 边**保留**（理由见该边的 note 末段）；
+  sources、status、target 的陈述文本均未动。
+
+  **status 定级理由**：kind 与 status 都取 physical-argument。不适用
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款，理由两条（对应 gaps 第 2、3、4 条）：
+  论证以两条本图无节点的规则（径向共轭作用为 z ↦ 1/z̄；指数算符两半的换序）为前提，
+  不是「前提已完整写出的有限步初等计算」；且两条相关来源的核实等级分别是
+  GSW 式号 L0（正文未获取）与 Polchinski (6.6.24) 已核实但**讲的是另一个对象**
+  （分离插入点的 OPE，非同点重排序）。**无 reviewer-verified 记录。**
+  【2026-09-11（四）更新】第一条规则现在**有**节点了
+  （worldsheet.radial-hermitian-conjugation），但那张卡本身的 effective 也是
+  physical-argument（被 worldsheet.state-operator-isomorphism 封顶），
+  且它的 (1) 没有文献式号锚点，故 status 定级**不变**；
+  第二条（指数算符两半的换序）仍然没有节点。
+
+  即使不看上述两点，本推导也被 worldsheet.free-scalar-propagator 与
+  worldsheet.conformal-normal-ordering-v2（均 effective = physical-argument）从上方封顶。
+
+  **推导名 `--via-radial-conjugation`**：与同族的
+  `worldsheet.ddf-commute-with-virasoro--via-conformal-weight`、
+  `worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight` 区分。
+  那两条走「权与围道形变」（T 与被积量的 OPE、两个被积量之间的 OPE），
+  本条走「径向厄米共轭 z ↦ 1/z̄ + 指数算符两半的重排序」，机器不同。
+
+  **本推导没有第二条独立路线。** 数学侧（顶点算子代数的不变双线性型与 adjoint vertex operator）
+  原则上给得出严格版本，需 researcher 先取得带编号的可引用陈述；届时应新增
+  `--via-voa-invariant-form` 的独立推导，而不是改本条。见目标节点 notes【升级路径】(ii)。
+
+  **最短升级路径是 Lean（目标节点 notes【升级路径】(i)）。** 关键观察：在**代数** Fock 空间
+  （worldsheet.bosonic-fock-space 的多项式模型）上，第 3 步的「重排序」不是解析操作——
+  E_- 是「乘以多项式环的一个显式元素」（`Fock.creaExp`），E_+ 是「变量平移」（`Fock.vertexSub`），
+  两者换序只是「先乘后平移 vs 先平移后乘」，代价是把被乘的元素也平移一次，
+  而那个代价正是 z^{2α' n² k_0²} 的代数化身，在 b·b = 0 时为 1。
+  因此本推导的唯一非初等步骤在代数模型里预期是初等的；
+  但**本推导没有写出那个论证**（写出并经 reviewer 复核后，可考虑按 rigorous 例外条款升级）。
+author: curator
+created: "2026-09-11"

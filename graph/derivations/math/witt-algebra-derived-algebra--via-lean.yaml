@@ -1,0 +1,96 @@
+id: math.witt-algebra-derived-algebra--via-lean
+target: math.witt-algebra-derived-algebra
+kind: proof
+status: formalized
+depends_on:
+  - id: math.witt-algebra
+    inferred: false
+    note: |
+      提供本推导的**全部**输入：Lean 侧的载体 `WittAlgebra R := ℤ →₀ R`、基
+      `lgen : Basis ℤ R (WittAlgebra R)` 与括号关系
+      `WittAlgebra.lie_lgen_lgen : ⁅ℓ m, ℓ n⁆ = ((m : R) − (n : R)) • ℓ (m + n)`，
+      即该定义卡的 formal.lean_decl 所指的对象（StringFormal/Virasoro/Witt.lean）。
+      陈述 (3) «⟹» 还用到「{ℓ_n} 是**基**」这件事（取 ℓ_0-坐标 `(lgen R).coord 0`，
+      并用 `Basis.repr_self` 算 ℓ_0 自己的坐标为 1），这也在该定义卡的陈述里。
+      **基环未收紧**：该卡与本卡都对任意交换环 R 成立。字面依赖（同文件，逐条调用）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/WittPerfect.lean :: StringFormal.Virasoro.WittAlgebra.{lie_mem_derivedSeries_one, two_smul_lgen_eq, two_smul_lgen_mem_derivedSeries_one, lgen_mem_derivedSeries_one, derivedSeries_one_eq_top, isPerfect, coord_zero_lie_mem_span_two, derivedSeries_one_eq_top_iff, derivedSeries_one_ne_top_zmod_two, derivedSeries_one_ne_top_int}；上游调用 StringFormal.Virasoro.WittAlgebra.lie_lgen_lgen 与 Mathlib 的 LieAlgebra.coe_derivedSeries_one_eq"
+    note: |
+      本仓库，形式化分支 agent/formalizer/witt-perfect，已由 lead 以 20cc08f 合入 main；
+      Lean 4 + Mathlib v4.33.1。文件头自述「Complete, no `sorry`」，
+      formal/TODO.md 的 `witt-virasoro-perfect` 一条已勾选并逐字记下「2 可逆是必要的」。
+      **curator 未自行重跑 `lake build`**；依据是该自述、TODO 登记与 20cc08f 已由 lead 合并进 main。
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6 的证明，p. 7（对 **𝒱** 逐字给出三步计算；𝒲 的完美性在同句被转引给 [24, Section 2]，**无单独编号**）"
+    note: |
+      **不承载本推导的论证**，只作对照，且覆盖面窄得多（char 0 的域）。
+      本推导的三条实质内容（一致见证、充要条件、正特征反例）**不出自文献**，
+      是 formalizer 在本仓库做出并机器验证的。L1 逐字引文见
+      literature/extractions/math-sources.md 第 25.1 节。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/WittPerfect.lean 的 `WittAlgebra` 命名空间。
+  「完美」在 Lean 里写成 `LieAlgebra.derivedSeries R L 1 = ⊤`（等价地 `⁅(⊤ : LieIdeal R L), ⊤⁆ = ⊤`，
+  二者定义相等）；Mathlib v4.33.1 没有 `IsPerfect` 谓词。
+
+  **陈述 (1) 一致见证** = `two_smul_lgen_eq (n : ℤ)`：
+    (2 : R) • ℓ n = ⁅ℓ (n+2), ℓ (-2)⁆ − ⁅ℓ (n+1), ℓ (-1)⁆，对**任意** `[CommRing R]`。
+  证明四行：两次 `lie_lgen_lgen` 把右端化为 ((n+2) − (−2))•ℓ n − ((n+1) − (−1))•ℓ n
+  （指标相加用 `show n + 2 + (-2) = n from by ring` 等），`← sub_smul` 合并，`push_cast; ring`
+  算出系数 (n+4) − (n+2) = 2。配套的 `two_smul_lgen_mem_derivedSeries_one` 把它送进导出代数
+  （`lie_mem_derivedSeries_one` 经 `LieAlgebra.coe_derivedSeries_one_eq` 把「括号之集的张成」
+  与 `derivedSeries _ _ 1` 对上）。
+
+  **陈述 (2) 充分条件** = `derivedSeries_one_eq_top`（假设 `[Invertible (2 : R)]`）：
+  由 (1) 与 2 可逆得 `lgen_mem_derivedSeries_one` 对一切 n；再用「{ℓ_n} 是基故 span = ⊤」
+  （`(lgen R).span_eq` + `Submodule.span_le`）把 ⊤ 装进导出代数。包装成
+  `isPerfect : ⁅(⊤ : LieIdeal R (WittAlgebra R)), ⊤⁆ = ⊤`。
+
+  **陈述 (3) 充要条件** = `derivedSeries_one_eq_top_iff`：
+    derivedSeries R (WittAlgebra R) 1 = ⊤ ↔ IsUnit (2 : R)。
+  «⟸» 由 `IsUnit.nonempty_invertible` 取出实例后调 (2)。
+  «⟹» 的关键是 `coord_zero_lie_mem_span_two (x y) : (lgen R).coord 0 ⁅x, y⁆ ∈ Ideal.span {(2 : R)}`：
+  在基向量上 ⁅ℓ a, ℓ b⁆ = (a − b)•ℓ (a+b) 只在 a + b = 0 时对 ℓ_0 有贡献，此时 a − b = 2a ∈ (2)；
+  一般 x, y 由双线性展开。于是「括号之集的张成」整体落在 `comap ((lgen R).coord 0) (span {2})` 里；
+  假设 ℓ_0 在其中，用 `Basis.coord_apply` / `Basis.repr_self` 算得 1 ∈ (2)，
+  再 `Ideal.mem_span_singleton` + `isUnit_of_dvd_one` 得 2 ∈ R^×。
+
+  **陈述 (4) 反例** = `derivedSeries_one_ne_top_zmod_two`（ZMod 2 里 2 = 0，`decide` 判非单位）
+  与 `derivedSeries_one_ne_top_int`（`Int.isUnit_iff` + `omega`）。
+
+  文件的 Implementation notes 还记下了导出代数在一般环上的形状 ⨁_n I_n ℓ_n（n 奇 I_n = R、
+  n 偶 I_n = (2)），但**只作说明，未形式化**，见 gaps (ii)。
+gaps:
+  - |
+    (i) **陈述 (4) 的第一条「域上 ⟺ char k ≠ 2」在 Lean 里没有具名引理**。
+    它由 (3) 加「域中非零元可逆」一步得到（这是 Mathlib 的常识，不是新数学），
+    但 WittPerfect.lean 只给了 ℤ 与 ZMod 2 两个具体反例。
+    因此这一句的严格程度实际是「rigorous 的一行推论」，不是逐字机器检查的。
+    **若 reviewer 认为这足以阻止本卡标 formalized，正确的修法是把这一句从陈述里删去
+    （即再建一张只含 (1)(2)(3) 的卡），而不是把本推导降级。**
+  - |
+    (ii) **不给 2 不可逆时导出代数的完整描述**。目标陈述的【不断言】(c) 已声明这一点：
+    Lean 只证了 (3) «⟹» 所需的一半（`coord_zero_lie_mem_span_two`：括号的 ℓ_0-坐标 ∈ (2)），
+    没有证 ⨁_n I_n ℓ_n 这个分解，也没有算 W(R)/[W(R), W(R)]。
+  - |
+    (iii) **不涉及任何上同调**。H^1(W, k) = 0 与「完美 ⟺ H^1(−, k) = 0」的字典留在
+    math.witt-algebra-perfect，本图与任何已知 Lean 项目都**没有**形式化它们
+    （researcher 2026-09-11 核实 Kytölä 的 VirasoroProject 有 WittAlgebraCohomology.lean
+    但其中没有完美性 / H^1 的结果，math-sources.md 第 30.4 节）。
+  - |
+    (iv) **不涉及 Virasoro 代数**。同文件的 `VirasoroAlgebra.isPerfect` 与
+    `VirasoroAlgebra.cgen_eq`（C = 2⁅L 2, L (−2)⁆ − 4⁅L 1, L (−1)⁆）属于
+    math.virasoro-universal-central-extension 的 (1)，那张卡的 notes 已记下指针，
+    但该卡整体（含 H^1 = H^2 = 0 与万有性）仍是 rigorous、未形式化。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+
+  【与 math.witt-algebra-perfect--via-bracket-identity 的关系】那一条是文献路线的手写推导
+  （char 0 的域，rigorous，reviewer 复核尚未落记），本条是 Lean 路线且**结论更强**
+  （任意交换环 + 充要条件 + 反例）。两者目标不同卡：那一条的目标含 H^1 = 0，
+  故即便有本条也不能升到 formalized。那一条已加 depends_on 指向本卡的目标，
+  并在其 notes 记下「原推导第一步 ℓ_p = (1/p)[ℓ_p, ℓ_0] 在 char 3 失效」这一订正。
+author: curator
+created: "2026-09-11"

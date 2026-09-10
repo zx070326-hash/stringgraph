@@ -1,0 +1,34 @@
+id: worldsheet.infinitesimal-beltrami-equation
+kind: proposition
+title: "无穷小 Beltrami 方程：μ_{k z̄_m}{}^{z_m} = ∂_{z̄_m} v_k^{z_m}"
+statement: |
+  设改变模 t^k 等价于在坐标片 m 上作坐标变换
+    z'^{(m)} = z^{(m)} + δt^k  v_k^{z_m}
+  （原书 (5.4.9)）。则 Beltrami 微分（worldsheet.beltrami-differential）与该坐标变换的
+  生成向量场 v_k 之间满足**无穷小 Beltrami 方程**
+    μ_{k  z̄_m}{}^{z_m}  =  ∂_{z̄_m}  v_k^{z_m}     （原书 (5.4.11)）。
+  即：μ_k 度量的正是 v_k 偏离全纯的程度——若 v_k 在某片上全纯，则该片上 μ_k = 0，
+  模的改变可以被该片内的（共形）坐标变换吸收。
+
+  ⚠ 本卡采用的 (5.4.10) 一步依赖原书勘误，见 sources。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eq. (5.4.9)（坐标变换）、(5.4.10)、(5.4.11)（无穷小 Beltrami 方程），p.162"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E86，L1
+      （读到 schrans-2020 §5.28–§5.30 正文，笔记 p.265–266）。
+      ⚠⚠ **勘误依赖（抽取记录 Q14 的第 3 条）**：伴读者在 §5.29 末逐字写
+      「which is (5.4.10) taking into account the correction on Joe's errata page」。
+      ⚠ **Polchinski 官方勘误表本项目未能取得**（KITP 三条 URL 全 404，见抽取记录 Q10 第 6 点、
+      Q14），故「印刷版 (5.4.10) 有误」这一事实目前只有 schrans-2020 单源支撑。
+tags: [worldsheet, moduli, beltrami, complex-geometry, transition-functions]
+notes: |
+  **本批未覆盖的后续**：原书接着把 b 插入表达成**过渡函数（transition functions）的变化**
+  （(5.4.12)/(5.4.14)/(5.4.15)），最终化简为 (5.4.18)。抽取记录 E86 明说这四式
+  **只读到 [S] 目录标题、正文未读（L2）**，因此本批**不建**对应节点。
+  这是 §5 抽取里最明确的一处待补，需要 researcher 读 [S] §5.31–§5.34 正文或拿到原书。
+author: curator-polchinski-ch5
+created: "2026-09-11"

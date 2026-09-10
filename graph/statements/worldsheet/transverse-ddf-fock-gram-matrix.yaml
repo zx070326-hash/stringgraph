@@ -1,0 +1,140 @@
+id: worldsheet.transverse-ddf-fock-gram-matrix
+kind: proposition
+title: 横向 DDF Fock 空间 H^⊥(k) 的 Gram 矩阵（条件命题）：单项式基正交，对角元 ∏ n^{d(i,n)} · d(i,n)!，有序域上正定
+statement: |
+  这是一条**纯代数的条件命题**：把四条假设写全，结论是一个 Gram 矩阵的显式值。
+  它**不**断言这四条假设成立（那分别是别的节点的事，见【本节点不断言】(a)）。
+
+  【设定】设 R 是交换环，D ≥ 2，横向指标集为 {2, …, D−1}（横向偏振按
+  worldsheet.ddf-operators-v5 的读法满足 ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}）。
+  取一条动量塔 T(k; k_0) = ⊕_{N ∈ Z} F(k − N k_0)（worldsheet.momentum-tower-fock-space；
+  k_0² = 0，标度按 2α' k_0·k = 1 取定，故 k_0·k ≠ 0，位于非退化扇区），
+  ⟨·,·⟩ 是该塔上**层间正交**的 R-双线性型（该定义卡的 (2)）。
+  设 |0; k⟩ ∈ T(k; k_0) 是第 0 层的 Fock 真空，
+  {A^i_n : i = 2..D−1, n ∈ Z \ {0}} 是塔上的一族 R-线性算子。
+
+  【四条假设】
+    (H1) 横向振子代数：[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} · id，  m, n ∈ Z \ {0}；
+    (H2) 伴随关系：⟨ A^i_n v , w ⟩ = ⟨ v , A^i_{−n} w ⟩，  一切 n ∈ Z \ {0}、一切 v, w ∈ T(k;k_0)；
+    (H3) 真空湮灭：A^i_n |0;k⟩ = 0，  一切 n > 0；
+    (H4) 真空归一化：⟨ |0;k⟩ , |0;k⟩ ⟩ = 1。
+
+  【被断言的对象】记 P := {2,…,D−1} × Z_{>0}。由 (H1)，任意两个 A^i_{−n}、A^j_{−m}（n, m ≥ 1）
+  的对易子为零（因为 (−n) + (−m) ≤ −2 ≠ 0），故对每个**有限支撑**的 d : P → N，乘积
+
+    |{d}⟩ := ∏_{(i,n) ∈ P} (A^i_{−n})^{d(i,n)} |0;k⟩
+
+  与因子次序无关，是良定义的向量。记 H^⊥(k) := span_R { |{d}⟩ : d 有限支撑 }。
+
+  则在 (H1)–(H4) 下：
+
+  (1) **正交性与对角元（任意交换环 R）**：对一切有限支撑的 d, e : P → N，
+
+        ⟨ {d} , {e} ⟩  =  δ_{d,e} · ∏_{(i,n) ∈ P} n^{d(i,n)} · d(i,n)!  ,
+
+      右端的整数按 Z → R 的典范同态读入 R（乘积只有有限多个因子 ≠ 1）。
+
+  (2) **正交基与正定（R 是有序域时，如 R = ℝ）**：由 (1)，每个对角元
+      ∏ n^{d(i,n)} · d(i,n)! 是**正整数**（正整数的有限乘积），特别地非零；
+      故 {|{d}⟩} 线性无关，是 H^⊥(k) 的一组**正交基**，且 ⟨·,·⟩ 限制到 H^⊥(k) 上**正定**：
+      对 0 ≠ v = Σ_d c_d |{d}⟩ ∈ H^⊥(k) 有 ⟨v, v⟩ = Σ_d c_d² · ∏ n^{d(i,n)} d(i,n)! > 0。
+
+  (3) **DDF 能级分级正交**：置 N(d) := Σ_{(i,n) ∈ P} n · d(i,n)。若 N(d) ≠ N(e) 则 d ≠ e，
+      故由 (1) 得 ⟨{d},{e}⟩ = 0。等价地，配对逐 DDF 能级分级；这与「|{d}⟩ 落在塔的第 N(d) 层
+      （动量 k − N(d) k_0）」是同一件事，也可由塔的层间正交直接读出。
+
+  【本节点不断言】——五条边界：
+  (a) **不**断言 (H1)(H2)(H3) 在 DDF 设定下成立，也不断言 A^i_n 存在或良定义。
+      在本图中它们分别由 worldsheet.ddf-transverse-oscillator-algebra（H1）、
+      worldsheet.ddf-operators-adjoint 的 (1)（H2）、能级记账（H3，见 notes）与
+      worldsheet.ddf-transversality-gives-local-finiteness（良定义性）供给，
+      各自的严格程度见那些节点。本节点只做「若 (H1)–(H4)，则 (1)(2)(3)」这一步蕴含。
+  (b) **不**断言 H^⊥(k) → H_phys(k;k_0)/H_0(k;k_0) 是等距同构。那是
+      worldsheet.no-ghost-theorem-v4 的 (1b)，还需要「塔上任意物理态 = DDF 态 + 零模态」
+      这条张成定理，本节点完全不涉及。
+  (c) 「†」在 (H2) 里是 **R-双线性型意义下的转置**，不是 Hilbert 空间的 Hermitian 共轭；
+      复情形（Hermitian 半双线性形式）本图与 Lean 侧均未做。这与
+      worldsheet.fock-indefinite-form 的 notes【2026-09-11（二）】、
+      worldsheet.ddf-operators-adjoint 的边界 (a) 是同一条限定。
+  (d) **不**使用质量壳条件 α' k² = a = 1（截距记号按 conv.intercept-sign-a）。
+      (1)(2)(3) 与 k² 无关；该条件只在下游（|0;k⟩ 是物理态、H^⊥(k) 落在物理态空间里）才需要。
+      本节点声明 conv.intercept-sign-a 只是为了与 worldsheet.ddf-operators-adjoint 的
+      约定集合逐字一致，本节点的公式不含截距。
+  (e) **不**覆盖退化扇区 k_0·k = 0（含 k = 0）：那里 A^i_n 本身没有定义
+      （worldsheet.ddf-operators-v5）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧「DDF 态张成一份横向振子 Fock 空间且其内积正定」这句话的所在处。
+      **核实等级沿用 worldsheet.ddf-operators-v5 / worldsheet.ddf-operators-adjoint**：
+      章节页码 L4/L2（literature/extractions/brst-cohomology-sources.md §5.2–5.3），
+      **式号与正文 L0**。教科书在此处**不写 Gram 矩阵**，也不做本节点的递推；
+      它把这件事当作「自由振子 Fock 空间的标准事实」直接用。
+      故本 source 只定位对象，不承载论证：论证是本项目按自由振子的标准记账重写的（见推导）。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2，
+      其归一化写作 k_0·k = 1，是 2α' k_0·k = 1 的特例。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（把物理态写成 DDF 态 + 零模态，并按横向振子 Fock 空间计数其正定内积）"
+    note: |
+      作者本人的历史综述（L3，二手）。**预设**本命题的结论（不算 Gram 矩阵就谈不上「正定」），
+      但不给证明、不给编号（brst-cohomology-sources.md §3.1 第 1 条）。
+      只作为「本命题是文献中被默认使用的标准事实」的二手证据，不承载论证。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing_monomial_monomial, pairing_eq_zero_of_level_ne, pairing_creation_left, pairing_creation_right}"
+    note: |
+      **同型对照，不是本节点的形式化**。这四条是协变振子 α^μ_n 在单个 Fock 空间上的
+      同一段记账的机器验证版本（worldsheet.fock-indefinite-form 的 (1)(b)、(2)、(3)）：
+      `pairing_monomial_monomial` 逐字给出 ⟨X^d, X^e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} · d(μ,n)!，
+      把 η^{μμ} 取成横向的 +1 就是本节点 (1) 的右端。
+      **但它不是本节点的形式化**：Lean 侧的 X^d 是 α^μ_{−n} 的单项式，不是 A^i_{−n} 的单项式；
+      A^i_n 在 Lean 中尚未定义（DDF.lean 文件头 "What is NOT here" 第 1 条），
+      塔上也还没有双线性型（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。
+      故本节点**不填** formal.lean_decl、**不**标 formalized。
+      合并提交 2fcf86a（Fock.lean），无 sorry；curator 未自行重跑 `lake build`。
+tags: [bosonic-string, spectrum-generating-algebra, fock-space, gram-matrix, positive-definite, no-ghost]
+notes: |
+  【本卡的来历：worldsheet.ddf-operators-adjoint 的拆卡（2026-09-11，curator，lead 裁决）】
+  旧卡 worldsheet.ddf-operators-adjoint 是「一卡两事」：
+    (1) 伴随关系 (A^i_n)† = A^i_{−n}；
+    (2) 推论：H^⊥(k) 的 Gram 矩阵对角正定。
+  两者的论证性质完全不同：(1) 依赖顶点算子的伴随（指数算符两半的重排序 + 径向共轭规则），
+  不是初等计算，只能是 physical-argument；(2) **在 (1) 与横向振子代数作为假设给定之后**
+  是有限步初等递推，与 worldsheet.fock-indefinite-form 的 (2)(3) 逐字同型
+  （那一段已在 Lean 中机器验证）。旧卡的 notes【为什么不是 rigorous】逐字登记了这一点，
+  并写着「未来若第 (1) 条升级，(2) 可考虑拆出单独立卡」。lead 裁决：不必等 (1) 升级，
+  现在就拆——因为 (2) 的严格程度**本来就与 (1) 无关**，它是一条条件命题。
+  **旧卡不换代、statement 一字未动**：(2) 留在旧卡里作为推论文本，其 notes 已加指针。
+
+  【本卡与旧卡 (2) 的三处差别（都是为了让它成为可独立复核的条件命题）】
+  (a) 四条输入 (H1)–(H4) 在本卡里是**显式假设**，不是「由前面几条节点供给的事实」。
+  (b) 结论按基环分层：(1) 对**任意交换环**成立，只有 (2) 的正定性需要有序域。
+      旧卡的 (2) 把两件事写在一句里。
+  (c) 明确剔除质量壳条件 α' k² = a = 1（见边界 (d)）：旧卡的 (2) 把它写进了前提 (i)，
+      但递推里根本用不到它。
+
+  【(H3) 不是独立公理，但本卡把它当假设】A^i_n 把振子能级降低 n
+  （worldsheet.ddf-commute-with-virasoro 的推论：由 k_0² = 0 与 2α' k_0·k = 1 的质量壳记账
+  α'(k − N k_0)² = α' k² − N），而 Fock 空间的能级分级非负
+  （worldsheet.bosonic-fock-space），故 n > 0 时 A^i_n|0;k⟩ 落在负能级、只能为零。
+  本卡把它写成假设，是为了让 (1)(2)(3) 的代数内容自足、可与自由振子 Fock 空间的标准计算
+  逐字对照，也为了不把 worldsheet.ddf-commute-with-virasoro 拖进本卡的依赖。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search Gram / gram-matrix / transverse / perfect`：
+  唯一命中「Gram 矩阵」的是 worldsheet.ddf-operators-adjoint（即被拆的旧卡）；
+  worldsheet.fock-indefinite-form 是**协变**振子的同一段记账（含类时负号），
+  worldsheet.transverse-oscillator-commutators 只给光锥横向振子的对易子、不算配对。
+  **没有既有节点承载「DDF 单项式基的 Gram 矩阵」。**
+
+  【下游】worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (1b) 步中
+  「Gram 矩阵正定」那一半（本次已接线）。旧卡 worldsheet.ddf-operators-adjoint 仍是
+  该推导的依赖，承载 (1b) 的另一半（伴随关系本身）。
+
+  【升级路径】本卡的推导已按 docs/STATUS_LEVELS.md 的 rigorous 例外条款标 rigorous
+  （lead 允许先标、reviewer 复核待补，见推导 notes 的 `reviewer-verified: <pending>`）。
+  再往上走需要 Lean：先在塔上定义双线性型（现在没有），再定义 A^i_n（现在没有），
+  然后本卡的递推可以逐字照搬 Fock.lean 的 `pairing_monomial_monomial` 的证明。
+  三步都在 formal/TODO.md 的 `ddf-operators` 项之后。
+author: curator
+created: "2026-09-11"

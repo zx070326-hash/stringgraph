@@ -1,0 +1,43 @@
+id: spectrum.massless-open-pole-requires-chan-paton--via-cyclic-order-sum
+target: spectrum.massless-open-pole-requires-chan-paton
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.open-string-four-tachyon-amplitude
+    note: 提供 I(s,t) 与三个区间（三种循环序）的分解，本推导对它们的极点留数求和。
+  - id: worldsheet.disk-conformal-killing-group
+    note: 提供「边界上有两个不等价循环序」这一事实——没有它就不会有需要相加的第二项。
+  - id: math.euler-beta-integral
+    note: 提供 B 在参数为非正整数处的单极点与留数，用来读出 (u−t)/(2s) 这一项。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.17)，p.179–183"
+    note: |
+      抽取记录 #E98，L1（schrans-2020 §6.36–§6.37，笔记 p.307）。
+      ⚠ 原书是否明确写出「加上 t↔u 后极点相消」**未核实**；[S] 的正文如此陈述。
+summary: |
+  **(1)** 用 math.euler-beta-integral 的极点结构展开 I(s,t) = B(−α(s), −α(t)) 在 α's → 0 附近，
+  得 I(s,t) = (u − t)/(2s) + 解析项（(6.4.17)）。留数 ∝ (u − t)。
+
+  **(2)** 四 tachyon 振幅是几个循环序的和。把 t ↔ u 交换的那一项加进来，
+  其在同一极点处的留数 ∝ (t − u)，与 (1) 的留数**符号相反、大小相等**，两者相消。
+  故纯四 tachyon 开弦振幅在 α's = 0 处**没有**极点。
+
+  **(3)** 若每个循环序配上一个 Chan–Paton 迹 tr(λ^{a₁}λ^{a₂}λ^{a₃}λ^{a₄})（各序的迹不同），
+  相消不再发生：留数变成 (u−t)·tr(…) + (t−u)·tr(交换后的…) ∝ (u−t)·tr(λ^{a₁}[λ^{a₂}, …])，
+  正比于结构常数型的反对称组合，一般不为零。此时 α's = 0 的极点真实存在，
+  对应中间态的无质量规范玻色子。
+gaps:
+  - "**(2) 的相消只在 [S] 的正文里被陈述，本推导没有逐项验算**：留数的符号相反这一点
+     依赖三个区间的相对权重与被积函数的幂次，而后者在本图中是**反推**的
+     （见 spectrum.open-string-four-tachyon-amplitude 的 gaps）。**建议 reviewer 复核。**"
+  - "**(3) 只写出结构，没有给出留数的完整表达式**：真正的系数比较在 §6.5（(6.5.6)–(6.5.14)），
+     本图在 spectrum.chan-paton-yang-mills-coupling 里另建节点，其表达式级核实靠 headrick-2008。"
+  - "**原书是否写出该相消未核实**（只有 schrans-2020 一个来源）。"
+  - "**路径积分测度未定义**（本批次共有）；且『极点 ⇒ 中间态』的解释依赖未建立的幺正性。"
+notes: |
+  本推导是本批次里最「反直觉」的一条，也是最值得 reviewer 优先复核的三条之一
+  （另两条：math.mobius-group-sharply-three-transitive 与
+  spectrum.sphere-tachyon-expectation-smooth-at-infinity）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

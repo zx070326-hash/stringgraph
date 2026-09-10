@@ -1,0 +1,139 @@
+id: worldsheet.ocq-level-two-scalar-norm-closed-form--via-lean
+target: worldsheet.ocq-level-two-scalar-norm-closed-form
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间 `Fock D R`、产生算符与 **level 分级** `Fock.levelSubmodule D R N`。
+      试探态的三块 `traceState` / `secondState` / `polSqState` 都是该空间里的显式多项式，
+      「ψ₂ ∈ F_2」（`Fock.levelTwoScalar_mem_levelSubmodule_two`）用的就是该节点定义的权
+      N(d) = Σ n·d(μ,n)；第 (2) 条「n ≥ 3 自动」也只用 level 分级
+      （`Fock.Lop_apply_eq_zero_of_level_lt`）。字面依赖（同一命名空间、逐条调用）。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      提供第 (1) 条里的型 `Fock.pairing` 本身及其伴随关系与单项式对角形；
+      六个两两配对值 `Fock.pairing_{traceState,secondState,polSqState}_*` 全部由
+      `pairing_creation_left` / `pairing_monomial_monomial` 算出。本推导只用该节点的
+      陈述 (1)(2)（唯一性与对角形），不用 (3)(4)。字面依赖。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_n（`Fock.Lop`）与模算符 `Fock.mode` 及其求值引理；第 (2) 条的
+      L_1 ψ₂、L_2 ψ₂ 两式整个是对 `Lop` 的直接计算（`Fock.mode_one_apply_*`、
+      `Fock.mode_two_apply_*` 逐块展开）。字面依赖。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      提供 H_phys 本身：Lean 里 `Fock.physSubmodule η a a₀`，即该定义卡 formal.lean_decl
+      所指对象。第 (2) 条的结论「ψ₂ ∈ H_phys」（`Fock.levelTwoScalar_mem_physSubmodule`）
+      与第 (5)(6) 条的成员断言都是关于它的。字面依赖。
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    inferred: false
+    note: |
+      提供第 (2) 条 L_0 部分的**唯一实质输入**：L_0 在 level N 分量上是标量 α'k² + N 的乘法
+      （`Fock.Lop_zero_apply_of_mem_levelSubmodule`，即该节点 formal.lean_decl）。
+      Lean 里 `Fock.mem_physSubmodule_iff_of_mem_levelSubmodule` 经
+      `Fock.sub_intercept_apply_of_mem_levelSubmodule` 一行调用它；本推导取 N = 2，
+      得质量壳 ½s + 2 = a，即第 (3)(4) 条前提里的 s = 2a − 4。
+      该节点的假设 hη : ∀ μ, η μ * η μ = 1 由此传入本命题。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{traceState, secondState, polSqState, levelTwoScalar, levelTwoScalar_mem_levelSubmodule_two, mode_one_apply_traceState, mode_one_apply_secondState, mode_one_apply_polSqState, mode_two_apply_traceState, mode_two_apply_secondState, mode_two_apply_polSqState, pairing_traceState_traceState, pairing_traceState_secondState, pairing_traceState_polSqState, pairing_secondState_secondState, pairing_secondState_polSqState, pairing_polSqState_polSqState, pairing_levelTwoScalar_self, Lop_one_apply_levelTwoScalar, Lop_two_apply_levelTwoScalar, Lop_apply_levelTwoScalar_of_three_le, levelTwoScalar_mem_physSubmodule, four_mul_sub_nine_mul_coeff_two, four_mul_sub_nine_mul_coeff_three, pairing_levelTwoScalar_physical, exists_levelTwoScalar_mem_physSubmodule, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 0f1143a、fad4944、eba9cab、f94bdc9、
+      3963281、ea303c5，合并进 main 的提交 c32f026。全文 grep `sorry` 零命中。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，level 2 的物理条件与伪态条件，(4.1.19)–(4.1.28) 区间，p.124；式号未核实"
+    note: |
+      **文献侧的平行论证，不是本推导的形式化证据**：Polchinski 只结论性地断言
+      「A = −1 且 D = 26 时才出现额外零态」，不给一般 (D, a) 的闭式。抽取记录
+      literature/extractions/polchinski-1998-v1.md#E57。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/LevelTwo.lean 内完成。路线：
+
+  1. **三块基与 level 齐次性**。`traceState η = Σ_μ η^{μμ} X_{(μ,1)}²`（= α_{−1}·α_{−1}|k⟩）、
+     `secondState η a = Σ_μ η^{μμ}a^μ X_{(μ,2)}`（= α_0·α_{−2}|k⟩）、
+     `polSqState η a = polState η a * polState η a`（= (α_0·α_{−1})²|k⟩），
+     三者都在 `levelSubmodule D R 2` 中，故 `levelTwoScalar η a c₂ c₃ ∈ F_2`。
+     由此第 (2) 条的 n ≥ 3 部分是 `Lop_apply_eq_zero_of_level_lt` 的一步特化。
+
+  2. **模算符在三块上的作用**（`mode_one_apply_*`、`mode_two_apply_*`）。
+     α^μ_1 与 α^μ_2 在这三块上的值由 `Fock.mode` 的定义（湮灭部分是带 n η^{μμ} 的偏导）
+     逐项算出；这是把物理侧「α_1 与两个 α_{−1} 各缩并一次给 2u」等口算翻成的机器计算。
+
+  3. **Gram 矩阵**（`pairing_*_*`，九个配对值）。用 `pairing_creation_left` 把产生算符搬到
+     另一边、再用 `pairing_monomial_monomial` 读出对角元，得到
+     ⟨A,A⟩ = 2D、⟨A,B⟩ = 2s、⟨B,B⟩ = 2s²、⟨C,C⟩ = 2s、⟨A,C⟩ = ⟨B,C⟩ = 0
+     （A = traceState、B = polSqState、C = secondState，s = `zeroModeSq η a` = α_0·α_0）。
+     展开即第 (1) 条 `pairing_levelTwoScalar_self`：⟨ψ₂,ψ₂⟩ = 2D + 2s c₂² + 2s²c₃² + 4s c₃。
+     **本步不用任何物理态条件**，故第 (1) 条对任意 c₂, c₃ 成立。
+
+  4. **Virasoro 条件**（第 (2) 条）。`Lop_one_apply_levelTwoScalar`、
+     `Lop_two_apply_levelTwoScalar` 把 L_1、L_2 在 ψ₂ 上的值化为
+     (2 + 2c₂ + 2c₃s)·polState 与 (D + 2c₂s + c₃s)·1。
+     配上 `mem_physSubmodule_iff_of_mem_levelSubmodule`（其 L_0 部分调用
+     worldsheet.open-string-l0-equals-level-plus-mass）得 `levelTwoScalar_mem_physSubmodule`。
+
+  5. **系数被钉死**（第 (3) 条）。把质量壳 s = 2a − 4 代入 (V1)(V2) 后消元：
+     `four_mul_sub_nine_mul_coeff_two` 给 (4a − 9)c₂ = −(D − 1)，
+     `four_mul_sub_nine_mul_coeff_three` 给 (4a − 9)·s·c₃ = D − 4a + 8。
+     两者都是 `linear_combination` 的两行；**不做除法**，故不需要 4a ≠ 9。
+
+  6. **闭式**（第 (4) 条，`pairing_levelTwoScalar_physical`）。把第 (1) 条的表达式乘上
+     (4a − 9)²，再用第 (5) 步的两个等式作 `linear_combination` 消去 c₂、c₃，得
+       (4a − 9)²⟨ψ₂,ψ₂⟩ = 2(D − 1)[16a² + (2D − 74)a + 84 − 3D]。
+     这是**环上的恒等式**：没有除法，前提只有 s = 2a − 4 与 (V1)(V2)。
+
+  7. **非空性与 a = 1**（第 (5)(6) 条）。`exists_levelTwoScalar_mem_physSubmodule` 在域上
+     取 c₂ = −(D−1)/(4a−9)、c₃ = (D−4a+8)/((2a−4)(4a−9))，`field_simp` 验证 (V1)(V2)；
+     `pairing_levelTwoScalar_intercept_one` 与 `levelTwoScalar_intercept_one_mem_physSubmodule`
+     是它在 a = 1、s = −2、c₂ = (D−1)/5、c₃ = (D+4)/10 处的特化，给
+     ⟨ψ₂,ψ₂⟩ = −2(D−26)(D−1)/25。
+gaps:
+  - |
+    (i) **只是一族显式试探态，不是「level 2 的标量物理态」**。Lean 没有证明 ψ₂ 张成 level 2
+    物理态的 SO(D−1) 不变部分，也没证解空间一维（原卡 worldsheet.ocq-level-two-scalar-norm
+    第 (1) 条）。formal/TODO.md 的 `negative-norm-above-26` 条目对此有同样的登记。
+    对下游的「鬼」用途这一条无关紧要（一个负模态就够），但对「level 2 标量模」这个读法要紧。
+  - |
+    (ii) **判别式的分类讨论未形式化**。第 (4) 条只说判别式是 4(D−1)(D−25)（这句本身在 Lean 里
+    也只出现在文档注释中，不是定理）；D ≤ 24 / D = 25 / D ≥ 26 的三分与 D = 26 时
+    2(8a−3)(a−1) 在 3/8 < a < 1 上为负，都在原卡 --via-level-two-gram 那一侧（rigorous），
+    本推导不覆盖。
+  - |
+    (iii) **第 (5) 条只证存在、不证唯一**。`exists_levelTwoScalar_mem_physSubmodule` 把解代回去
+    验证；由第 (3) 条两式作除法得唯一性这一步在 Lean 中未单列（一行域上除法）。
+  - |
+    (iv) **不给 D ≤ 26 的非负性**。那是无鬼定理本身。
+  - |
+    (v) **继承整个形式化岛的缺口**：逐动量扇区（无位置算符 x^μ、无对 k 的直积分）、代数版
+    （无完化）、对角 η、R-双线性型而非 Hermitian 半双线性型
+    （见 worldsheet.fock-indefinite-form--via-lean 的 gaps (iii)(iv)(vi)）。
+  - |
+    (vi) **公理检查未逐字登记**。formal/TODO.md 的 `negative-norm-above-26` 条目里没有像该文件
+    其余条目那样写「无 sorry，公理只有标准三条」；curator 只做了 grep（`sorry` 零命中），
+    **未重跑 `lake build`，也未跑 `uv run stringgraph check-axioms`**。
+    按 literature/sources.bib 的 stringformal-2026 证据标准，这一条应由 formalizer 或 lead
+    在合并 formal 分支时补跑并登记。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  本推导依据的是 formal/ 的自述与 formal/TODO.md 的登记，以及 c32f026 已由 lead 合并进 main；
+  公理一项的登记缺失见 gaps (vi)。
+
+  【与 worldsheet.ocq-level-two-scalar-norm--via-level-two-gram 的关系】那是同一物理计算的
+  **手算版**（rigorous，reviewer-ch4 已复核），本推导是**机器版**，两者互为独立核算：
+  手算走「基 → 作用结果 → Gram → 通分」，Lean 走「MvPolynomial 上的显式多项式 →
+  `pairing_creation_left` → `linear_combination`」，中间量逐项吻合。
+  这不是同一条推导的两个副本：原卡多断言解空间一维与判别式分类，本卡不断言它们，
+  故两卡是不同的陈述，各自挂各自的推导。
+
+  【Lean 侧的两处比图侧更强/更弱】
+  - 更强：第 (4) 条在**任意交换 ℚ-代数**上成立（不需要域、不需要 4a ≠ 9、不需要 s ≠ 0），
+    因为分母已清；原卡写成 ⟨ψ₂,ψ₂⟩ = (D−1)[…]·2/(4a−9)² 时必须先设 4a ≠ 9。
+  - 更弱：第 (1)(2) 条要求 η^{μμ}η_{μμ} = 1（`hη`），mostly-plus 满足；原卡的手算同样默认这一点。
+author: curator
+created: "2026-09-11"
