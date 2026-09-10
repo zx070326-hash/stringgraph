@@ -5,86 +5,167 @@ status: physical-argument
 depends_on:
   - id: worldsheet.moduli-condition-traceless-transverse
     note: 提供 μ 的定义（ker P̂₁^T ∩ 对称无迹），即被断言为零的对象。
+  - id: worldsheet.metric-variation-operator-p1
+    note: |
+      提供 μ 的定义里出现的 P₁^T。
+      ⚠ 2026-09-11 改：原 note 写「对偶的正定性论证（若存在）应在这里进行」——
+      **那条论证确实存在，且已另建节点**：worldsheet.positive-euler-number-no-moduli--via-positivity。
+      本推导是与之并列的枚举路线，不承载正定性论证。
   - id: worldsheet.worldsheet-euler-number
     convention_map: |
       跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
       （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
       按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；
-      χ = 2 − 2g − b 是拓扑等式，与号差无关。继承该约定登记的缺口。
+      χ 是拓扑量，与号差无关。继承该约定登记的缺口。
     note: |
-      提供 χ = 2 − 2g − b，枚举路线靠它把「χ > 0」翻译成「只剩球面、圆盘、射影平面」。
-  - id: worldsheet.metric-variation-operator-p1
-    note: 提供 P₁、P₁^T；对偶的正定性论证（若存在）应在这里进行。
+      提供世界面的 χ，即枚举所依据的那个量。
+      ⚠ 2026-09-11 改：原 note 写「提供 χ = 2 − 2g − b」——
+      **那条公式的形式在本图登记的任何数学来源里都不出现**（math-sources.md §39.2.3：
+      Gallier–Xu 用**一个**属数覆盖两种情形，χ = 2 − 2g − q / χ = 2 − g − q）。
+      枚举第 (1) 步现改挂 math.positive-euler-surfaces-are-sphere-disk-rp2，那里用的是来源逐字的写法。
+  - id: math.classification-of-compact-surfaces
+    note: |
+      **枚举第 (1) 步的穷尽性与两两不同胚**（2026-09-11 新挂）：Gallier–Xu Theorem 6.2，
+      (可定向性, contour 数, χ) 是紧带边曲面的完全不变量。
+      这关闭了本推导原 gap 第二条「输入 (1) 在本图中无节点、无数学来源」。
+  - id: math.positive-euler-surfaces-are-sphere-disk-rp2
+    note: |
+      **枚举第 (1) 步本身**（2026-09-11 新挂）：χ > 0 的紧连通曲面恰有 S²、D²、RP² 三种。
+      ⚠ 该节点的推导里，「χ > 0 ⇒ 只剩三种」这步不等式求解**在任何来源里都不存在**，
+      是本图补的两行算术（尚待 reviewer 复核）；本推导继承该缺口。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    inferred: true
+    note: |
+      **拓扑侧 ↔ 世界面侧的桥**（2026-09-11 新挂）：该定义卡把 S₂、D₂、RP₂ 具体实现为
+      带复坐标片的世界面（D₂ = S₂/(z ∼ 1/z̄)、RP₂ = S₂/(z ∼ −1/z̄)）并记下 χ 的取值。
+      标 **inferred**：来源没有说「拓扑分类给出的那三个曲面就是这三张复坐标卡片描述的世界面」；
+      这一步（拓扑曲面 ⇒ 唯一的共形/复结构）实为单值化定理的内容，**本图无节点、无来源**。
   - id: worldsheet.sphere-conformal-killing-group
     inferred: true
     note: |
-      **枚举第 (2) 步中 S₂ 的那一格**（2026-09-11 补边，ch.6 已合入 main）。
+      **枚举第 (2) 步中 S₂ 的那一格**（2026-09-11 复核后重写）。
       该节点提供 S₂ 上「全局全纯向量场」的两片正则性分析（(6.1.5a)/(6.1.5b)，κ = 6）；
       μ = 0 的检核是同一分析换成**全局全纯二次微分**的版本。
-      ⚠ **标 inferred，且本条边不足以关闭本步**：该卡片的 statement **明确声明不断言 μ(S₂) = 0**
-      （它只断言 κ = 6），本图目前没有任何节点断言 μ(S₂) = 0。
-      挂它是为了让读者能顺着图找到 S₂ 上唯一已建的正则性论证；
-      μ(S₂) = 0 本身仍是断言，见 gaps 第三条。
-      （旁证：该卡片 sources 逐字记下 [S] §6.67「zero moduli and six conformal Killing vectors」。）
+      ⚠ **标 inferred，且本条边不关闭本格**：该卡片 statement **明确声明不断言 μ(S₂) = 0**
+      （reviewer 已指出），本图目前没有任何节点断言 μ(S₂) = 0。
+      挂它是为了让读者顺着图找到 S₂ 上唯一已建的正则性论证。见 gaps 第二条。
   - id: worldsheet.disk-conformal-killing-group
     inferred: true
     note: |
-      **枚举第 (2) 步中 D₂ 的那一格**（2026-09-11 补边）。与上一条同型：该节点提供 D₂ 上的
-      实 Möbius 分析（κ = 3），并在 statement 里**明确声明不断言 μ(D₂) = 0**
-      （逐字：「μ = 0 属第 5 章 Riemann–Roch，本图暂无节点，这里只作对照记录」）。
-      故同样标 inferred，同样不足以关闭本步。
+      **枚举第 (2) 步中 D₂ 的那一格**，与上一条同型：该节点提供 D₂ 上的实 Möbius 分析（κ = 3），
+      并在 statement 里**明确声明不断言 μ(D₂) = 0**。
+      ⚠ 同样标 inferred，同样**不关闭本格**。见 gaps 第二条。
+  - id: worldsheet.rp2-conformal-killing-group
+    note: |
+      **枚举第 (2) 步中 RP₂ 的那一格**（2026-09-11 新建并挂上）。
+      与前两格不同，**该节点确实断言 μ(RP₂) = 0**：原书 §6.1「The projective plane」
+      （pp. 168–169）逐字写「There are no moduli.」，是可直接引用的正文陈述，不回指 §5.2。
+      故本条边**不标 inferred**，且**这一格是三格中唯一真正关闭的**。
+      这关闭了本推导原 gap 第三条里的「RP₂ 的 μ = 0 则连节点都缺」。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.2, eq. (5.2.10) 附近, p.152"
+    loc: "§6.1 首句, p. 166：「There are three Riemann surfaces of positive Euler number: the sphere, the disk, and the projective plane.」；**无式号**"
     note: |
-      抽取记录 #E76，L1（schrans-2020 笔记 p.252）。
+      **L1 原书页图逐字**（math-sources.md §39.6(b)）。**这是枚举第 (1) 步的书内锚点**
+      （2026-09-11 改挂：原先只挂 §5.2 (5.2.10)）。
+      ⚠ 原书把这句当作已知事实直接写出，**全章无证明、无引文**——数学论证由
+      math.positive-euler-surfaces-are-sphere-disk-rp2 承载。
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」, pp. 168–169（RP₂：「There are no moduli.」）；§6.1「The disk」, p. 168（D₂：「Again, all metrics are equivalent — there are no moduli.」）；§6.1, p. 167（S₂：「the sphere has no moduli and six CKVs」）；三处**均无式号**"
+    note: |
+      **L1 原书页图逐字**（math-sources.md §39.6(c)(d)(e)）。**枚举第 (2) 步三格的书内出处**。
+      ⚠ 原书这三句都是**断言**，不给论证；书内的一般理由是 §5.2 的 (5.2.11a)，
+      即本推导目标本身（见 gaps 第二条的循环性讨论）。
+      ⚠ 目前只有 RP₂ 那一格在图上有承载节点（worldsheet.rp2-conformal-killing-group）；
+      S₂ 与 D₂ 的现有卡片都明确声明不断言 μ = 0。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p. 152：「χ > 0 : κ = 3χ, μ = 0」"
+    note: |
+      **L1 原书页图**（math-sources.md §39.6(a)）。结论本身的书内位置。
+      ⚠ 它同时是并列推导 worldsheet.positive-euler-number-no-moduli--via-positivity 的来源；
+      在本枚举路线里它**只承载结论、不承载论证**（否则第 (2) 步就成了循环）。
 summary: |
-  ⚠ **本推导的论证是本图补写的**，不是原书的：原书只把本条作为 (5.2.10) 的
-  **对偶断言**（χ < 0 ⇒ κ = 0 的镜像）给出，未附论证。
+  **本推导是本图补写的枚举路线，与原书自己的正定性路线
+  （worldsheet.positive-euler-number-no-moduli--via-positivity）并列。**
 
-  补写的枚举论证（两步）：
-  (1) **曲面分类**：紧二维曲面的 χ = 2 − 2g − b − c（g 为亩数、b 为边界分量数、
-      c 为交叉帽数）。χ > 0 只允许三种：球面 S₂（χ = 2）、圆盘 D₂（χ = 1）、
-      射影平面 RP₂（χ = 1）。
-  (2) **三个曲面各自 μ = 0**：逐个核实。
-  二者合起来就是结论。枚举本身是完备的；弱点全在两个输入的来源（见 gaps）。
+  ⚠ **2026-09-11 订正**：本段原先写「原书只把本条作为 (5.2.10) 的**对偶断言**给出，未附论证」——
+  **这是错的**。researcher 取到原书 ch.5 页图后确认（math-sources.md §39.6(a)）：
+  (5.2.10) 是那条**正定性积分恒等式本身**，(5.2.11a)/(5.2.11b) 才是结论对；
+  原书**对 χ < 0 写出了完整论证，对 χ > 0 声明「A similar argument shows」**。
+  即原书有直接论证，只是本图关心的那一半没写出来。那条路线现由 --via-positivity 承载。
+
+  枚举论证（两步）：
+
+  **(1) 曲面分类**：χ > 0 的紧连通曲面恰有三种——球面 S₂（χ = 2）、圆盘 D₂（χ = 1）、
+      射影平面 RP₂（χ = 1）。数学承载：math.positive-euler-surfaces-are-sphere-disk-rp2
+      （由 Gallier–Xu Definition 6.5 的参数范围 + pp. 89–90 的 χ 公式 + Theorem 6.2 得到）。
+      书内锚点：Polchinski §6.1 首句 p. 166 逐字给出同一结论（不证不引）。
+      ⚠ **本步不再引用伴读者 [S] 的枚举句**：那句话自相矛盾（见 gaps 第四条）。
+
+  **(2) 三个曲面各自 μ = 0**：
+      - **RP₂**：由 worldsheet.rp2-conformal-killing-group 承载（原书 §6.1 pp. 168–169 逐字
+        「There are no moduli.」）。**本格已关闭。**
+      - **S₂、D₂**：原书 §6.1 同样逐字写了 p. 167「the sphere has no moduli and six CKVs」与
+        p. 168「Again, all metrics are equivalent — there are no moduli」，
+        但**本图现有的 sphere-/disk-conformal-killing-group 两张卡都明确声明不断言 μ = 0**
+        （它们只承载 κ = 6 与 κ = 3）。**这两格在图上仍是断言**，见 gaps 第二条。
+
+  二者合起来给出结论。枚举本身是完备的；弱点全在第 (2) 步的两格与第 (1) 步的补步（见 gaps）。
 gaps:
   - |
-    **原书未给直接论证**。抽取记录逐字记下伴读者「I have not been able to show in a
-    satisfying way that for positive Euler numbers, the number of moduli is zero.
-    I have tried two ways… But neither way has lead to anything useful.」
-    **Polchinski 原书是否给出直接论证，本项目未核实**（无原书正文）。
-    因此 sources[] 里的 Polchinski 条目只承载**结论**，不承载上面的枚举论证。
+    **第 (1) 步的补步**：math.positive-euler-surfaces-are-sphere-disk-rp2 的推导里，
+    「χ > 0 ⇒ 只剩三种」这条不等式求解**在本轮找到的任何数学来源里都不存在**
+    （Gallier–Xu 全书不讨论 χ > 0），是本图补的两行算术，**尚待 reviewer 复核**。
+    本推导继承该缺口。（Polchinski §6.1 首句给了同一结论，但不证不引。）
   - |
-    **输入 (1)（曲面分类定理）在本图中无节点、无数学来源**。它本身是标准的代数拓扑
-    结果（可到 rigorous），但本图尚未登记来源；TODO（researcher）：登记一本拓扑教材。
+    **第 (2) 步的 S₂ 与 D₂ 两格未关闭**：worldsheet.sphere-conformal-killing-group 与
+    worldsheet.disk-conformal-killing-group 的 statement 都**明确声明不断言 μ = 0**，
+    它们只承载 κ = 6 / κ = 3。原书 §6.1 对这两个曲面各有一句「no moduli」的**断言**
+    （p. 167 与 p. 168，均无论证），书内的一般理由是 §5.2 的 (5.2.11a) ——
+    **那正是本推导的目标本身，拿来关闭第 (2) 步就是循环**。
+    故本图**不建那条边**，两格如实记为断言。
+    要真正关闭：新建一张「S₂ / D₂ 上不存在非零全局全纯二次微分 ⇒ μ = 0」的卡
+    （直接构造，与 sphere-conformal-killing-group 的两片正则性分析同型），
+    再把本推导改挂它并撤 inferred。
+    （RP₂ 那一格没有这个问题：原书 §6.1 对 RP₂ 的「There are no moduli」是同处独立成句的
+    正文陈述，worldsheet.rp2-conformal-killing-group 直接承载它，不回指 §5.2。）
   - |
-    **输入 (2) 的三个 μ = 0**（2026-09-11 复核后重写；ch.6 已合入 main）：
-    S₂ 与 D₂ 的节点 worldsheet.sphere-conformal-killing-group /
-    worldsheet.disk-conformal-killing-group 已在 main，**依赖边已补上**（均标 inferred）。
-    但复核发现**原 gap 的判断有误**：这两张卡给的是 **κ = 6 与 κ = 3**，
-    两张卡的 statement 都**明确声明不断言 μ = 0**。因此本步的实质缺口**没有被关闭**，
-    只是从「无节点可挂」变成「已挂的节点不承载所需内容」。
-    **RP₂ 的 μ = 0 则连节点都缺**（本图目前没有任何射影平面的卡）。
-    要真正关闭本步，需新建一张「S₂/D₂/RP₂ 上不存在非零全局全纯二次微分 ⇒ μ = 0」的卡
-    （原书 §6.1/§6.4 只给 κ，μ = 0 在书里是由 §5.2 的对偶断言给出的，
-    直接论证的文献来源本图尚未登记）。在那之前，枚举的第二步在图上仍是**断言**。
+    **拓扑 ⇒ 共形结构这一步无来源**：第 (1) 步给的是**拓扑**曲面的分类，
+    而 μ 是**共形/复结构**层面的量。「每个 χ > 0 的拓扑曲面上共形结构唯一」实为单值化定理，
+    本图无节点、无来源。对应的边（worldsheet.tree-level-worldsheet-topologies）已标 inferred。
   - |
-    **来源强度**：式号 (5.2.10) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
-    伴读者笔记中的同型枚举只作为旁证，按 lead 2026-09-10 裁决不进 sources[]。
+    **伴读者 [S] 的枚举句本身有毛病，已从论证骨架中撤下**（2026-09-11）：
+    [S] 写「for closed **oriented** surfaces, the Euler number is χ = 2 − 2g …
+    The only close oriented surface with χ > 0 therefore has g = 0, i.e. is the sphere,
+    **the disk or the projective plane**」——「closed oriented surface」与「the disk or the
+    projective plane」自相矛盾（圆盘有边、RP₂ 不可定向），且 χ = 2 − 2g 只对闭可定向曲面成立，
+    根本推不出圆盘与 RP₂。该引文现只作为「本图当初为何走枚举路线」的历史记录，
+    保留在目标卡 worldsheet.positive-euler-number-no-moduli 的 sources note 里，
+    **不进本推导的论证**。
+  - |
+    **带边情形**：D₂ 带边。本图的 μ 定义（worldsheet.moduli-condition-traceless-transverse）
+    写在**紧无边**曲面上，带边时 ker P̂₁^T 需要边界条件，本图与来源都没有给。
+    这条对枚举路线与正定性路线同样成立。
 notes: |
-  status 档位按 lead 2026-09-11 裁决（docs/STATUS_LEVELS.md 「断言 + 骨架」条）定为
-  physical-argument：枚举论证的骨架完整、缺口在 gaps 逐条记录，而结论本身在
-  文献中无争议，不属 `conjecture`（reviewer-ch5 建议）。
-  升级路径：
-  (a) ~~§6 分支合入 main 后，把 sphere-/disk-conformal-killing-group 挂上来~~
-      —— 2026-09-11 已挂（两条 inferred 边）。**但两张卡都不断言 μ = 0**，
-      故这一项只完成了接线，没有完成内容；改为：新建一张 S₂/D₂ 的 μ = 0 卡
-      （全局全纯二次微分为零），本条推导再改挂它并撤 inferred；
-  (b) 新建 RP₂ 的 κ/μ 节点；
-  (c) 登记曲面分类定理的数学来源；
-  (d) 若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
-      另建一条 `--via-positivity` 推导。
-  (a)+(b)+(c) 全部完成后，本条可按枚举的完备性重新评估是否能到 rigorous。
+  **2026-09-11 大改**（curator-surface-class，依 literature/extractions/math-sources.md §39.8(A)）：
+  researcher 取到 Polchinski 原书 ch.5/ch.6 页图后，本推导有两条 gap 作废、summary 有一处事实错误：
+  - 原 gap 第一条「原书未给直接论证 / 本项目未核实」→ **作废**：原书 §5.2 p.152 给了
+    (5.2.10) 的正定性论证；已另建 --via-positivity 承载它。
+  - 原 gap 第二条「输入 (1) 在本图中无节点、无数学来源」→ **作废**：已建
+    math.classification-of-compact-surfaces 与 math.positive-euler-surfaces-are-sphere-disk-rp2。
+  - 原 gap 第三条里「RP₂ 的 μ = 0 连节点都缺」→ **作废**：已建 worldsheet.rp2-conformal-killing-group。
+  - 原 summary「原书只作对偶断言、未附论证」→ **已改正**（见 summary 的订正段）。
+
+  status 仍按 lead 2026-09-11 裁决（docs/STATUS_LEVELS.md「断言 + 骨架」条）定为
+  physical-argument：枚举骨架完整、缺口逐条记录，结论在文献中无争议，不属 conjecture。
+
+  **剩余的升级路径**：
+  (a) 新建「S₂ / D₂ 上无非零全局全纯二次微分 ⇒ μ = 0」的卡，关闭第 (2) 步的两格；
+  (b) 为「拓扑曲面上共形结构唯一」（单值化）登记数学来源并建节点，撤
+      worldsheet.tree-level-worldsheet-topologies 那条边的 inferred；
+  (c) reviewer 复核 math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration
+      的两行算术，使第 (1) 步升到 rigorous；
+  (d) 为 μ 的带边定义补节点。
+  (a)+(b)+(c)+(d) 全部完成后，本条可按枚举的完备性重新评估。
 author: curator-polchinski-ch5
 created: "2026-09-11"
