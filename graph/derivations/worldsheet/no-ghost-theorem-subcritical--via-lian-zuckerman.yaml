@@ -75,6 +75,12 @@ depends_on:
       "old covariant" 字样**，也没有把该空间与物理文献的物理态空间写成一条编号对应。
       对照的依据是两边定义逐条相同（L_n v = 0 ∀n>0；L₀ v = h v；模去零模态），
       加上 conv.intercept-sign-a 下 h = a。故标 inferred。
+      【2026-09-11 补，primary-sources-round2.md §11.4 第 3 条】LZ 自己给了同向的非正式对照：
+      §2.3 开头（p.563）逐字「In some special cases, the space W^{𝒢₊}[λ]/rad is known as the
+      "physical Hilbert space" (see Sect. 3 for examples.)」；Remark 3.6(ii)（p.571）逐字
+      「one postulates that the "particle spectrum" be given by the cohomology classes of
+      H⁰_∞(𝒢,𝒢₀; V(D,p) ⊗ W)」。故这条字典不再是抽取者独有的解读，但 LZ 仍没有给出与本项目
+      H_phys/H_0 定义逐条对齐的编号命题，inferred 保留。
 sources:
   - ref: lian-zuckerman-1991
     loc: "Theorem 3.5(ii), p.570"
@@ -147,6 +153,8 @@ summary: |
   critical-dimension-brst--via-nilpotency 为 physical-argument 的影响。
 gaps:
   - "【最实质的一条】LZ 证明末句到两分支条件之间的最后一步（'the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h)'）在抽取记录的 L1 逐字里**没有附引文**；把它接到 Kac 行列式 / Kac–Kazhdan 1979 的定位（LZ Lemma 3.17、Remark 3.15）只有转述级证据（primary-sources-round2.md §8、§9.3；bib key kac-kazhdan-1979 的 note）。故 worldsheet.kac-determinant 这条边标 inferred。待复核 LZ p.571–579。"
+  - "【2026-09-11 新增，primary-sources-round2.md §11.4 第 4 条】LZ §2.3 开头（p.563 末）逐字设定常设假设「From now on we will only consider weights λ ∈ 𝒢₀′ that satisfy the reality condition σλ = −λ」（σ 是 Proposition 3.3(ii) 的反线性自同构，σ(L_n) = −L_{−n}、σ(z) = −z），Theorem 2.25 / Corollary 2.26 / Theorem 3.5 全部在此假设下。本推导两分支所用的权（Theorem 3.5 中 V(D,p)[−h] 的权，h 实、π(z) = D 实）是否自动满足该条件，LZ 未验，本项目也**未核实**；引用 Theorem 3.5 覆盖 ms.no-ghost-theorem 审计 B1 时应把它与 (P1)–(P4) 一并列出。"
+  - "【2026-09-11 关闭下方「(P2) 与 v3 排除的 k₀·k = 0 扇区是否是同一个排除，未做对照」一句；按 reviewer-batch2 / ms.no-ghost-theorem 第四轮审计 C3】LZ p.569 的 Heisenberg 代数由 {α^μ_n} ∪ {1} 生成，p 是零模交换子代数上的线性泛函（x·v_p = ⟨p,x⟩v_p，LZ (3.3)）；(P2) 的 x ∉ C1 读作 α^μ_0 的非零线性组合，则 (P2) ⇔ (⟨p,α^μ_0⟩)_μ ≠ 0 ⇔ p ≠ 0。故 (P2) 排除的恰是 p = 0，与 v4 (2) 的 p ≠ 0 是**同一个排除**；v4 (1) 另排除 k₀·p = 0，比 LZ 宽，那不是 (P2) 的对应物。**该对照是本项目的初等观察，不是 LZ 原句**，且依赖上述读法（若 x 可含 1 分量，(P2) 在 (P1) 下对任意 p 平凡成立，故 LZ 本意只能是前者）。下方那句按「gap 文本只追加不改写」保留原样。"
   - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中**没有逐字登记**。本节点按 conv.metric-mostly-plus 读作洛伦兹 (1, D−1)，依据是两条推断（g 正定会使判据平凡；D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合），不是原文措辞。若 g 实为 mostly-minus，陈述中 h ∈ (p·p)/2 + Z₊ 的符号与 N = h − p·p/2 的换算需相应翻转。相关的 curator 观察（**不是** LZ 的说法）：worldsheet.fock-indefinite-form (4) 指出该型取到正负两种值需要 D ≥ 2，这与 LZ 的下界 (P4) 数值巧合；LZ 未说明 D ≥ 2 的理由，本项目不据此裁定该下界的来由。"
   - "「LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目 H_phys(p)/H_0(p)」是抽取者的对照解读，LZ 全文无 'old covariant' 字样，故 depends_on 上 worldsheet.old-covariant-physical-states 标 inferred。同理「LZ 的相对复形 = 本项目 b₀ = L₀ = 0 的 BRST 相对复形」也是解读（primary-sources-round2.md §1.4 明示须标 inferred），故 worldsheet.brst-quantization 亦标 inferred。这两条是本推导可追溯性上最软的地方：定理本体逐字可靠，把它翻译到本项目对象上的字典不逐字可靠。"
   - "LZ 的设定与本项目 worldsheet.no-ghost-theorem-v3 的设定在**证明侧**不同：26 > D ≥ 2 分支必须补一个 c = 26 − D 的不可约 Vir 模 L(26−D, 1−h) 才能做 BRST（总中心荷 26）。断言侧不受影响（左端只用 D 个自由玻色子，见目标陈述范围 (b)），但这意味着本推导**不是** v3 的 DDF 论证的推广，形式化时是两条独立路线。D = 26、h = 1 时补充模退化为 L(0,0)（平凡一维），两条路线在临界点重合。"
