@@ -26,8 +26,8 @@ statement: |
 
         ds² = 4 Σ_{i=0}^{d} dy_i² / (1 − |y|²)²                             (2.1)
 
-      （AdS 半径 = 1）；紧化 B̄_{d+1} 的边界是 S^d。取 B̄_{d+1} 上任一正函数 f，
-      要求它在边界上有单零点且在边界外处处非零，令
+      （AdS 半径 = 1）；紧化 B̄_{d+1} 的边界是 S^d。取 B_{d+1} 上任一正函数 f，
+      要求它在边界上有单零点（原文对 f 的这一刻画逐字见 §2.5 p.19，那里用的是同一个 f），令
 
         ds̃² = f² ds²                                                        (2.2)
 
@@ -53,6 +53,10 @@ sources:
       (iv) 的逐字依据（§2.1）："while AdS_{d+1} has (in its Euclidean version) a metric
       invariant under SO(1, d+1), the boundary S^d has only a conformal structure,
       which is preserved by the action of SO(1, d+1)."
+      ⚠ f 的刻画「B_{d+1} 上的正函数、在边界有单零点」的逐字出处是 §2.5 p.19
+      （"Pick any positive function f on B_{d+1} that has a simple zero on the boundary."），
+      抽取记录 E-W11 确认那里的 f 与 (2.2)(2.3) 的 f 是同一个；
+      §2.1 处抽取记录只录了 (2.2)(2.3)(2.4) 三条变换律，没有逐字录 f 的刻画。
       欧氏化的自我定位（§2.1 逐字）："it will be convenient to formulate the present paper
       in a Euclidean language."
 tags: [holography, ads-cft, geometry, conformal-boundary, symmetry]
