@@ -3,6 +3,7 @@ Copyright (c) 2026 stringgraph contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: stringgraph lean-formalizer
 -/
+import Mathlib.Tactic.LinearCombination
 import StringFormal.Virasoro.Verma
 
 /-!
@@ -54,7 +55,9 @@ Two observations make most of the theory available anyway.
 * `StringFormal.Virasoro.IsContravariant`: `B` is contravariant, i.e.
   `B(⁅X, x⁆, y) = B(x, ⁅σX, y⁆)`, and normalised by `B(|c,h⟩,|c,h⟩) = 1`.
 * `StringFormal.Virasoro.ContraDual`: the linear dual of `V(c,h)` with the `σ`-twisted action.
+* `StringFormal.Virasoro.IsShapovalovFunctional`: the one open input (see above).
 * `StringFormal.Virasoro.shapovalov`: **the Shapovalov form**, given the functional.
+* `StringFormal.Virasoro.desc1`, `desc2`, `desc11`: `L₋₁|c,h⟩`, `L₋₂|c,h⟩`, `L₋₁²|c,h⟩`.
 
 ## Main statements
 
@@ -62,7 +65,13 @@ Two observations make most of the theory available anyway.
 * `eq_of_isContravariant`: uniqueness of the contravariant form.
 * `IsContravariant.flip_eq`: the contravariant form is symmetric.
 * `IsContravariant.eq_zero_of_level_ne`: different `L₀`-levels are orthogonal.
-* `shapovalov_isContravariant`, `shapovalov_hwv_hwv`: existence, given the functional.
+* `shapovalov_isContravariant`, `shapovalov_hwv_hwv`, `existsUnique_isContravariant`:
+  existence and uniqueness, given the functional.
+* `hwv_ne_zero_of_isContravariant`: a normalised form forces `V(c,h) ≠ 0`.
+* `IsContravariant.gram_level_one`: `⟨L₋₁|c,h⟩, L₋₁|c,h⟩⟩ = 2h`.
+* `IsContravariant.gram_level_two_aa/ab/bb`: `4h + c/2`, `6h`, `8h² + 4h`.
+* `IsContravariant.gram_level_two_det`: `2h(16h² + 2h(c-5) + c)`, the `N = 2` Kac
+  determinant.
 
 ## Status
 
@@ -488,5 +497,156 @@ theorem hwv_ne_zero_of_isContravariant [Nontrivial R]
   exact zero_ne_one hB1
 
 end Existence
+
+/-! ### Low-level Gram matrices -/
+
+section Levels
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The level-1 descendant `L_{-1}|c,h⟩`. -/
+noncomputable def desc1 : VermaModule R c h := ⁅VirasoroAlgebra.lgen R (-1), hwv R c h⁆
+
+/-- The level-2 descendant `L_{-2}|c,h⟩`. -/
+noncomputable def desc2 : VermaModule R c h := ⁅VirasoroAlgebra.lgen R (-2), hwv R c h⁆
+
+/-- The level-2 descendant `L_{-1}²|c,h⟩`. -/
+noncomputable def desc11 : VermaModule R c h := ⁅VirasoroAlgebra.lgen R (-1), desc1 R c h⁆
+
+lemma lie_lgen_one_neg_one : ⁅VirasoroAlgebra.lgen R 1, VirasoroAlgebra.lgen R (-1)⁆
+    = (2 : R) • VirasoroAlgebra.lgen R 0 := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num [centralTerm]
+
+lemma lie_lgen_zero_neg_one : ⁅VirasoroAlgebra.lgen R 0, VirasoroAlgebra.lgen R (-1)⁆
+    = (1 : R) • VirasoroAlgebra.lgen R (-1) := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+lemma lie_lgen_two_neg_two : ⁅VirasoroAlgebra.lgen R 2, VirasoroAlgebra.lgen R (-2)⁆
+    = (4 : R) • VirasoroAlgebra.lgen R 0 + centralTerm R 2 • VirasoroAlgebra.cgen R := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+lemma lie_lgen_two_neg_one : ⁅VirasoroAlgebra.lgen R 2, VirasoroAlgebra.lgen R (-1)⁆
+    = (3 : R) • VirasoroAlgebra.lgen R 1 := by
+  rw [VirasoroAlgebra.lie_lgen_lgen]
+  norm_num
+
+/-- `L₁ L₋₁ |c,h⟩ = 2h |c,h⟩`. -/
+lemma lie_lgen_one_desc1 :
+    ⁅VirasoroAlgebra.lgen R 1, desc1 R c h⁆ = (2 * h) • hwv R c h := by
+  rw [desc1, leibniz_lie, lie_lgen_hwv_of_pos R c h one_pos, lie_zero, add_zero,
+    lie_lgen_one_neg_one, smul_lie, lie_lgen_zero_hwv, smul_smul]
+
+/-- `L₀ L₋₁ |c,h⟩ = (h+1) L₋₁ |c,h⟩`. -/
+lemma lie_lgen_zero_desc1 :
+    ⁅VirasoroAlgebra.lgen R 0, desc1 R c h⁆ = (h + 1) • desc1 R c h := by
+  rw [desc1, leibniz_lie, lie_lgen_zero_hwv, lie_lgen_zero_neg_one, one_smul, lie_smul,
+    add_comm, add_smul, one_smul]
+
+/-- `L₂ L₋₁ |c,h⟩ = 0`. -/
+lemma lie_lgen_two_desc1 : ⁅VirasoroAlgebra.lgen R 2, desc1 R c h⁆ = 0 := by
+  rw [desc1, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 2), lie_zero,
+    add_zero, lie_lgen_two_neg_one, smul_lie,
+    lie_lgen_hwv_of_pos R c h one_pos, smul_zero]
+
+/-- `L₂ L₋₂ |c,h⟩ = (4h + c/2) |c,h⟩`. -/
+lemma lie_lgen_two_desc2 : ⁅VirasoroAlgebra.lgen R 2, desc2 R c h⁆
+    = (4 * h + centralTerm R 2 * c) • hwv R c h := by
+  rw [desc2, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 2), lie_zero,
+    add_zero, lie_lgen_two_neg_two, add_lie, smul_lie, smul_lie, lie_lgen_zero_hwv,
+    lie_cgen_hwv, smul_smul, smul_smul, ← add_smul]
+
+/-- `L₂ L₋₁² |c,h⟩ = 6h |c,h⟩`. -/
+lemma lie_lgen_two_desc11 : ⁅VirasoroAlgebra.lgen R 2, desc11 R c h⁆
+    = (6 * h) • hwv R c h := by
+  rw [desc11, leibniz_lie, lie_lgen_two_desc1, lie_zero, add_zero, lie_lgen_two_neg_one,
+    smul_lie, lie_lgen_one_desc1, smul_smul]
+  congr 1
+  ring
+
+/-- `L₁ L₋₁² |c,h⟩ = (4h + 2) L₋₁ |c,h⟩`. -/
+lemma lie_lgen_one_desc11 : ⁅VirasoroAlgebra.lgen R 1, desc11 R c h⁆
+    = (4 * h + 2) • desc1 R c h := by
+  rw [desc11, leibniz_lie, lie_lgen_one_desc1, lie_lgen_one_neg_one, smul_lie,
+    lie_lgen_zero_desc1, lie_smul, ← desc1, smul_smul, ← add_smul]
+  congr 1
+  ring
+
+/-- `2 · (c/2) = 1`: the level-2 central coefficient. -/
+lemma two_mul_centralTerm_two : (2 : R) * centralTerm R 2 = 1 := by
+  have h6 : (((2 : ℤ) ^ 3 - 2 : ℤ) : R) = 6 := by norm_num
+  rw [centralTerm, h6, show (2 : R) * (inv12 R * 6) = 12 * inv12 R by ring, twelve_mul_inv12]
+
+lemma desc1_mem_levelSpan : desc1 R c h ∈ levelSpan R c h 1 := by
+  refine Submodule.subset_span ⟨Composition.single 1 one_pos, ?_⟩
+  rw [levelWord, Composition.single_blocks]
+  rfl
+
+lemma desc2_mem_levelSpan : desc2 R c h ∈ levelSpan R c h 2 := by
+  refine Submodule.subset_span ⟨Composition.single 2 two_pos, ?_⟩
+  rw [levelWord, Composition.single_blocks]
+  rfl
+
+lemma desc11_mem_levelSpan : desc11 R c h ∈ levelSpan R c h 2 := by
+  refine Submodule.subset_span ⟨Composition.ones 2, ?_⟩
+  rw [levelWord, Composition.ones_blocks]
+  rfl
+
+variable {R c h}
+variable {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+
+/-- **The level-1 Shapovalov element**: `⟨L₋₁|c,h⟩, L₋₁|c,h⟩⟩ = 2h`.  Vanishing at `h = 0`
+is the level-1 null vector of the vacuum module. -/
+theorem IsContravariant.gram_level_one (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc1 R c h) (desc1 R c h) = 2 * h := by
+  have key := hB (-1) (hwv R c h) (desc1 R c h)
+  rw [← desc1] at key
+  rw [key, neg_neg, lie_lgen_one_desc1, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+theorem IsContravariant.gram_level_two_aa (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc2 R c h) (desc2 R c h) = 4 * h + centralTerm R 2 * c := by
+  have key := hB (-2) (hwv R c h) (desc2 R c h)
+  rw [← desc2] at key
+  rw [key, neg_neg, lie_lgen_two_desc2, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+theorem IsContravariant.gram_level_two_ab (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc2 R c h) (desc11 R c h) = 6 * h := by
+  have key := hB (-2) (hwv R c h) (desc11 R c h)
+  rw [← desc2] at key
+  rw [key, neg_neg, lie_lgen_two_desc11, LinearMap.map_smul, smul_eq_mul, hB1, mul_one]
+
+theorem IsContravariant.gram_level_two_bb (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc11 R c h) (desc11 R c h) = 8 * h ^ 2 + 4 * h := by
+  have key := hB (-1) (desc1 R c h) (desc11 R c h)
+  rw [← desc11] at key
+  rw [key, neg_neg, lie_lgen_one_desc11, LinearMap.map_smul, smul_eq_mul,
+    hB.gram_level_one hB1]
+  ring
+
+/-- **The level-2 Kac determinant** `det = 2h(16h² + 2h(c-5) + c)` for the Gram matrix of
+`L₋₂|c,h⟩` and `L₋₁²|c,h⟩`.  These two vectors span `V₂` (`levelSpan`), but their linear
+independence — hence the identification of this determinant with the level-2 Kac determinant
+proper — is exactly what PBW would supply and is not available here. -/
+theorem IsContravariant.gram_level_two_det (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc2 R c h) (desc2 R c h) * B (desc11 R c h) (desc11 R c h)
+        - B (desc2 R c h) (desc11 R c h) * B (desc11 R c h) (desc2 R c h)
+      = 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) := by
+  rw [hB.gram_level_two_aa hB1, hB.gram_level_two_bb hB1, hB.gram_level_two_ab hB1,
+    hB.comm (desc11 R c h) (desc2 R c h), hB.gram_level_two_ab hB1]
+  linear_combination (4 * c * h ^ 2 + 2 * c * h) * two_mul_centralTerm_two R
+
+/-- Levels 1 and 2 are orthogonal, an instance of `IsContravariant.eq_zero_of_level_ne`. -/
+theorem IsContravariant.gram_level_one_two (hB : IsContravariant R c h B) :
+    B (desc1 R c h) (desc2 R c h) = 0 :=
+  hB.eq_zero_of_level_ne (by norm_num) (desc1_mem_levelSpan R c h) (desc2_mem_levelSpan R c h)
+
+end Levels
 
 end StringFormal.Virasoro
