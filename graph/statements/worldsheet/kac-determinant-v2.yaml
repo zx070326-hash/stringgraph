@@ -108,7 +108,9 @@ notes: |
   ⚠ 仍然成立的下游告诫：任何把「α_N > 0」当前提的步骤（例如从 det 的符号推正定性）
   **在本图里没有来源背书**；本卡不提供它。
   · 一个**正例但不足以推广**：worldsheet.kac-determinant-level-two 在 N = 2 处给出 α₂ = 32 > 0
-    （由 Lean 的 `gram_level_two_det` 加 curator 手算配平得到）。它不能推出一般 N 的正性。
+    （由 Lean 的 `gram_level_two_det` 加 curator 手算配平得到），
+    worldsheet.kac-determinant-level-three 在 N = 3 处给出 α₃ = 2304 > 0
+    （该卡的 Kac 比较在 Lean 内部）。两者都不能推出一般 N 的正性——但见下面的 (D)。
 
   **(B) 低阶独立核对已通过。** worldsheet.kac-determinant-level-two（formalized）给出
   ⟨L₋₂v, L₋₂v⟩⟨L₋₁²v, L₋₁²v⟩ − ⟨L₋₂v, L₋₁²v⟩² = 2h(16h² + 2h(c−5) + c)。
@@ -125,5 +127,48 @@ notes: |
   arXiv:2510.21741 的 Table 1（7 行）无逆变形式与行列式；其 §14 展望逐字说
   Feigin–Fuks 结构定理的形式化「starting from the **missing** Poincaré–Birkhoff–Witt theorem」。
   本仓库侧同理：formal/TODO.md 的 `kac-determinant` 未勾选，`pbw-verma` (b) 是硬瓶颈。
+
+  ---
+  **【(D) 常数 α_N 的显式乘积公式——本项目 formalizer 的 CAS 核对，非文献（登记于 2026-09-11）】**
+
+  本卡 statement 只说 α_N 是「与 (c,h) 无关的非零常数」，不给它的值。formalizer 在做
+  level-3 形式化（worldsheet.kac-determinant-level-three）时用 CAS 独立反读出：
+  **在本仓库这组 PBW 型基（L₋₁^{a₁}L₋₂^{a₂}… 作用于真空，按 FF 的排序）下**
+
+      α_N = ∏_{r, s ≥ 1,  r s ≤ N}  ( (2r)^s · s! )^{ p(N − r s) − p(N − r(s+1)) } 。
+
+  **⚠ 指数是 p(N − rs) − p(N − r(s+1))，不是 p(N − rs)。** 后者（某些教材/讲义里随手写的
+  形式）给出 N = 2 → 64、N = 3 → 36864，与实际的 Gram 行列式**不符**。
+
+  **逐项数值核对**（N = 1, 2, 3 来自本图的 formalized 卡，N = 4 来自 CAS）：
+  · N = 1：唯一指标 (1,1)，底 (2^1·1!) = 2，指数 p(0) − p(−1) = 1 − 0 = 1 ⇒ **α₁ = 2**。
+    与 worldsheet.kac-determinant-level-two (1) 的 ⟨L₋₁v,L₋₁v⟩ = 2h 吻合。
+  · N = 2：(1,1) 底 2 指数 p(1) − p(0) = 0；(1,2) 底 (2²·2!) = 8 指数 1；(2,1) 底 4 指数 1
+    ⇒ **α₂ = 8·4 = 32**。与 worldsheet.kac-determinant-level-two (4) 的 α₂ = 32 吻合。
+  · N = 3：(1,1) 底 2 指数 p(2) − p(1) = 1；(1,2) 指数 p(1) − p(0) = 0；(1,3) 底 (2³·3!) = 48
+    指数 1；(2,1) 底 4 指数 p(1) − p(−1) = 1；(3,1) 底 6 指数 1
+    ⇒ **α₃ = 2·48·4·6 = 2304**。与 worldsheet.kac-determinant-level-three (3) 的
+    2304 = 48·16·3 吻合（该条在 Lean 内部，见那张卡）。
+  · N = 4：**α₄ = 37748736**（= 2·8·384·4·32·6·8），由 5×5 Gram 的 CAS 行列式反读；
+    对应的 det₄ 记在 formal/TODO.md 的 `kac-determinant` 条目下，**本图暂未立卡**。
+  ⇒ curator 2026-09-11 独立重算了上面四个乘积与两个「错版」数值（64 / 36864），全部复现。
+
+  **本登记对 statement 的影响：无，且说明 v2 的写法是对的而且更稳。**
+  上式的每个因子 (2r)^s · s! 都是**正整数**，指数是整数，故只要该公式成立，
+  **「α_N > 0」就是它的推论**，而不需要任何文献支持「正」字。
+  但这恰恰说明本卡把旧卡的「正常数」改成「**非零**常数」是正确的取舍：
+  · 「非零」有两条已核实来源背书（FF 的 «ненулевая»、Schottenloher 的 K_N ≥ 0 配非退化）；
+  · 「正」只能由上面这条**未形式化、非文献**的公式得到，且该公式**依赖基的选取**
+    （换一组基，Gram 行列式要乘上过渡矩阵行列式的平方，α_N 会变；正性在 ℝ 上不变，
+    在一般交换环上连「正」都没有意义）。
+  ⇒ 本卡 statement **不改**（项目原则 1）；要断言 α_N 的值或正性，应另立节点并把
+  「哪组基」写进陈述。
+
+  **来源等级**：本项目内部计算，**不是文献**。
+  记录位置 formal/TODO.md 的 `kac-determinant` 条目（formalizer 2026-09-11 写入，
+  自述「用 CAS 独立核对，未形式化」）；curator 在落地本条时重算了 N = 1…4 的乘积。
+  **该公式本身未形式化**，也未在任何已核实来源里逐字找到。
+  ⚠ 下游仍然成立的告诫（与 (A) 同）：任何把「α_N > 0」当前提的步骤在本图里**没有来源背书**；
+  本卡不提供它，(D) 也不提供它（(D) 只是本项目的一条待核验计算）。
 author: curator
 created: "2026-09-11"
