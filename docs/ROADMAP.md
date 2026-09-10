@@ -49,7 +49,7 @@
 - 与观测约束（暗能量演化等）的接口节点
 
 ### Phase 4 种子（2026-09-11 已启动）
-- Vafa 2005 / Ooguri–Vafa 2006 / AMNV 2006 抽取中（逐字记录原文主张强度，供双轨挂载）。
+- Vafa 2005 / Ooguri–Vafa 2006 / AMNV 2006 全文抽取完成（L1），swampland 区节点转换中。**记账红线**：AMNV 猜想 (I) 被作者本人用 SO(32) 旋量反驳（适用域内 → refuted）；OV/Vafa 的"反例"全在引力解耦极限（适用域外 → 独立卡，不作 refutation）。三篇均无 de Sitter / 暗能量约束——观测接口需 2018 年后文献（Obied–Ooguri–Spodyneiko–Vafa 等），抽取中。
 
 ## 长期
 
