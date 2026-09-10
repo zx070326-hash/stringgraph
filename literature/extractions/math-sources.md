@@ -1120,3 +1120,498 @@ worldsheet.operator-product-expansion          (**保留 physical-argument**)
 - **Q13** **本轮最重要的缺口**：没有任何文献把「玻色弦世界面理论（`D` 分量洛伦兹号差 + `bc` 鬼场 + 路径积分）」
   验证成满足 Gui Def 7.2 / Schottenloher Def 10.7 的顶点代数（§13.3）。
   这是 OPE 路线与无鬼定理路线**共享**的缺口，值得作为下一个检索专题。
+
+---
+
+# § 11A. Schottenloher 第 10 章补转录（第三轮，2026-09-11）
+
+> 本节是 §11 的追加段，**不修改 §11 已有内容**。编号用 `11A.x` 以免与 §12–§14 冲突。
+
+- 负责 agent：researcher
+- 日期：2026-09-11（第三轮）
+- 触发：补转录 **Definition 10.9**（`A(z)_±` 与正规序 `:AB:`）与**书上 p.177 的记号段**；
+  并结案 §14.2 的 **Q10**（Theorem 10.10 第 5 条求和下限是 `j = 0` 还是 `j = 1`）
+- 获取途径：与 §11.0 完全相同的公开 PDF
+  `https://www.mathematik.uni-muenchen.de/~schotten/LNP-cft-pdf/10_978-3-540-68625-5_Ch10_23-08-08.pdf`
+  （WebFetch 落盘 549.7 KB → `Read` 带 `pages` 读页图；**PDF 页 = 书上页码 − 170**；
+  本轮读 PDF 第 7–9 页 = 书上 p.177–179，其中第 8 页 = 书上 p.178 **单独重读一次以放大页图复核 Q10**）
+- 除明确标注为「researcher 推导」的段落外，本节全部为 **L1 逐字**
+
+---
+
+## 11A.1 书上 **p.177** 的「Analytic Aspects」段与记号段（L1 逐字）
+
+### (a) `ι_{z,w}` / `ι_{w,z}` 的两条展开式（书上 p.177，在 §11.3 已引的 "Analytic Aspects" 定义句之后）
+
+> `ι_{z,w} 1/(z−w)^{j+1} = Σ_{m=0}^{∞} (m choose j) z^{−m−1} w^{m−j}`,
+> `ι_{w,z} 1/(z−w)^{j+1} = − Σ_{m=1}^{∞} (−m choose j) z^{m−1} w^{−m−j}`.
+
+> In particular, as formal distributions
+>
+> `ι_{z,w} 1/(z−w) − ι_{w,z} 1/(z−w) = Σ_{m≥0} z^{−m−1}w^m + Σ_{m>0} z^{m−1}w^{−m}`
+> `= Σ_{m∈ℤ} z^{−m−1}w^m = δ(z−w)`  &nbsp;&nbsp;&nbsp;&nbsp; **(10.1)**
+>
+> and similarly for the derivatives of `δ`,
+>
+> `D^j δ(z−w) = ι_{z,w} 1/(z−w)^{j+1} − ι_{w,z} 1/(z−w)^{j+1} = Σ (m choose j) z^{−m−1} w^{m−j}`.
+
+**这最后一式是 11A.3 结案 Q10 的技术支点**：它给出 `Res_z z^m D^j_w δ(z−w) = (m choose j) w^{m−j}`，
+而 `(m choose 0) = 1 ≠ 0`。
+
+### (b) 记号段（书上 p.177，紧接 Remark 10.8 之后；L1 逐字）
+
+> In order to formulate equivalent conditions of locality we introduce some notations. For `A = Σ A_m z^m`
+> we mostly write `A = Σ A_{(n)} z^{−n−1}` such that we have the following convenient formula:
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `A_{(n)} = A_{−n−1} = Res_z A(z) z^n`.
+>
+> We break `A` into
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `A(z)_− := Σ_{n≥0} A_{(n)} z^{−n−1}` , &nbsp;&nbsp; `A(z)_+ := Σ_{n<0} A_{(n)} z^{−n−1}`.
+
+紧接着（书上 **p.178** 页首，L1 逐字）：
+
+> This decomposition has the property
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `(∂A(z))_± = ∂(A(z)_±)`,
+>
+> and conversely, this property determines this decomposition.
+
+> ⚠ **约定陷阱（务必写进图里的约定节点）**：Schottenloher 的下标 `−` 是**模式指标 `n ≥ 0` 的那一半**
+> （即 `z` 的负幂部分，含 `Res`），`+` 是 `n < 0` 的那一半（`z` 的非负幂部分）。
+> **这与物理里常见的「`+` = 湮灭部分」记法方向相反**，也与「`A_±` 按 `z^{±}` 幂次命名」的直觉相反。
+> 抄 Definition 10.9 或 Theorem 10.10 第 3、4 条时如果把 `±` 弄反，正规序积就写反了。
+
+---
+
+## 11A.2 **Definition 10.9**（正规序积，书上 **p.178**；L1 逐字）
+
+> **Definition 10.9.** The *normally ordered product* for distributions `A, B ∈ R[[z^±]]` is the distribution
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `:A(z)B(w): := A(z)_+ B(w) + B(w)A(z)_− ∈ R[[z^±, w^±]]`.
+>
+> Equivalently,
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `:A(z)B(w): = Σ_{n∈ℤ} ( Σ_{m<0} A_{(m)}B_{(n)} z^{−m−1} + Σ_{m≥0} B_{(n)}A_{(m)} z^{−m−1} ) w^{−n−1}`,
+>
+> and the definition leads to the formulas
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `A(z)B(w) = +[A(z)_−, B(w)] + :A(z)B(w): ,`
+> &nbsp;&nbsp;&nbsp;&nbsp; `B(w)A(z) = −[A(z)_+, B(w)] + :A(z)B(w): .`
+
+紧接其后一句（L1 逐字）：
+
+> With this new notation the result of Proposition 10.6 can be restated as follows.
+
+——即 **Definition 10.9 是 Theorem 10.10 第 4 条得以成立的记号前提**，两者在书上是连着的。
+
+**内部一致性核对（researcher 推导，不是原文）**：把 11A.1(b) 的 `A(z)_+ = Σ_{n<0} A_{(n)}z^{−n−1}`、
+`A(z)_− = Σ_{n≥0} A_{(n)}z^{−n−1}` 代入定义式的第一行，正好得到第二行的 `Σ_{m<0}(AB) + Σ_{m≥0}(BA)`。
+**两行自洽，转录无误。**
+
+---
+
+## 11A.3 ★★ **Q10 结案**：Theorem 10.10 第 5 条的求和下限
+
+### (a) 页面上印的是什么（L1，两次不同缩放各读一遍）
+
+书上 p.178 的 Theorem 10.10 第 5 条，**印本逐字**为：
+
+> 5. `[A_{(m)}, B_{(n)}] = Σ_{j=1}^{N−1} (m choose j) C^j_{(m+n−j)}`, &nbsp; `m, n ∈ ℤ`, &nbsp; *for suitable*
+>    `C^j = Σ_{k∈ℤ} C^j_{(k)} w^{−k−1} ∈ R[[w^±]]`.
+
+**即：页图上确实是 `j = 1`，不是 `j = 0`。**（第 2、3、4 条同页均为 `j = 0`，对比明显；
+本轮先读 PDF 第 7–9 页一次，再单独重取 PDF 第 8 页放大复读一次，两次判读一致。）
+
+### (b) 但这是**排印错误**；图里按 `j = 0` 是对的
+
+**结论：`j = 1` 是印刷错误，正确下限是 `j = 0`。图里现有的 `j = 0` 不用改，但必须加 note。**
+四条独立证据：
+
+| # | 证据 | 等级 |
+|---|---|---|
+| 1 | **同一条定理内部不自洽**：第 2、3、4 条都是 `Σ_{j=0}^{N−1}`，且用的是**同一批** `C^j` 与**同一个** `N`。若第 5 条真从 `j=1` 起，它就严格弱于第 2–4 条，「五条等价」不成立 | L1（同页对照） |
+| 2 | **Proposition 10.6（书上 p.175）产出的正是 `c^0,…,c^{N−1}`**（`j` 从 0 到 `N−1`，见 §11.2），第 5 条丢掉 `j=0` 项等于丢掉 Prop 10.6 给出的一个系数 | L1 |
+| 3 | **独立文献给的同一条公式下限是 0**：Gui, *Lectures on VOAs and Conformal Blocks*（2026-07-15 版）**Definition 5.9 式 (5.27)**（本文件 §8.3 已 L1 逐字转录）写作 `[A_m, B_k] = Σ_{l=0}^{N−1} (m choose l) C^l_{m+k−l}` | L1（另一份文献） |
+| 4 | **本章在这一带有系统性的交叉引用排印错误**：书上 p.179 写「according to **4 in Lemma 10.5**」，p.180 两处写「our **Theorem 10.5**」「property **5 in Lemma 10.5**」——**三处**的「10.5」都应为「10.10」（10.5 是 delta 恒等式引理，没有 property 4/5）。同一区域已有三处编号误植，第 5 条下限误植完全在情理之中 | L1（§11.4 记了两处，本轮补到三处） |
+
+**researcher 自己的推导（明确标为推导，不是原文）**——由第 2 条直接算出第 5 条：
+
+```
+A_(m) = Res_z A(z) z^m                              [p.177 记号段]
+Res_z z^m D^j_w δ(z−w) = (m choose j) w^{m−j}       [p.177 D^jδ 展开式]
+
+[A_(m), B_(n)] = Res_z Res_w z^m w^n [A(z),B(w)]
+               = Res_z Res_w z^m w^n Σ_{j=0}^{N−1} C^j(w) D^j_w δ(z−w)      [第 2 条]
+               = Σ_{j=0}^{N−1} (m choose j) Res_w C^j(w) w^{m+n−j}
+               = Σ_{j=0}^{N−1} (m choose j) C^j_(m+n−j)
+⇒ 下限必须是 j = 0。
+```
+
+**一个具体反例（researcher 由书上 p.179–180 的数据推出，不是原文）**：Virasoro 情形，
+书上 p.179–180 给 `[T(z),T(w)] = (Z/12)∂³δ(z−w) + 2T(w)∂_wδ(z−w) + ∂_wT(w)δ(z−w)`，
+故 `C⁰(w) = ∂_wT(w) ≠ 0`。若第 5 条从 `j=1` 起，就会把这一项整个丢掉。
+
+> ⚠ **不要用书上 p.179 的 Heisenberg 例子去「验证」`j=1`**：那里正文写
+> 「Because of `C¹(w) = Z` and `C^j(w) = 0` for `j ≠ 1` …」，即该例恰好 `C⁰ = 0`，
+> **`j=0` 与 `j=1` 在这个例子里给出相同答案，它无法区分两者**。这是个容易上当的地方。
+
+### (c) 给 curator 的处理建议
+
+- 图里第 5 条**保持 `j = 0`**；
+- 但该 source 的 `loc` 或推导 note 里必须写明：
+  「**印本 Theorem 10.10 第 5 条的求和下限印作 `j = 1`，判定为排印错误**；本节点按 `j = 0`，
+  依据是同条定理第 2–4 条、Proposition 10.6、以及 Gui Def 5.9 (5.27)」。
+- 这样做的理由是项目原则 2（实话实说）：图里的公式与被引页面**不逐字一致**，就必须留痕，
+  否则将来做回译审计时会被判为抄错。
+
+---
+
+## 11A.4 本轮对 §14.2 未解决问题的影响
+
+- **Q10 中「Schottenloher 第 5 条下限」这一半：已结案**（见 11A.3）。
+  Q10 中「Gui (5.27) 里 `C` 的上标」那一半**仍未复核**（本轮没有重开 Gui 的 PDF）。
+- **Q12（p.180 两处「10.5」应为「10.10」）：本轮补充为三处**（p.179 一处、p.180 两处），
+  且这条现在有了新用途——它是 11A.3 判定「第 5 条下限是排印错误」的旁证之一。
+  仍未与作者勘误（若有）核对。
+- 本轮**没有**新开任何其他文献；§12–§14 的结论不变。
+
+---
+
+# § PBW / Verma 模自由性
+
+- 负责 agent：researcher
+- 日期：2026-09-11（第三轮，与 §11A 同一轮）
+- 触发：图节点 **`verma-module-pbw-basis--via-pbw`** 需要
+  (A) Poincaré–Birkhoff–Witt 定理（`U(g)` 的有序单项式基）与
+  (B) 其推论「Verma 模 `M(λ)` 作为 `U(n⁻)`-模自由、秩 1」的**可核实编号**
+- 证据等级沿用本文件 §0 的 L0–L4 表
+- **本节最重要的两条结论先写在前面**：
+  1. **(A) 已落定**：Humphreys GTM 9 **§17.3「PBW Theorem and consequences」（起于 p.91），Corollary C 在 p.92**——
+     由一篇已发表论文的逐字引用 + Google Books 全文检索（带通过的控制实验）**两条独立证据**互证（§15）。
+  2. **(B) 没有落定，而且比「没落定」更糟：任务书给的候选（Humphreys §20.3）方向就不对。**
+     Humphreys 全书只讲**有限维半单**李代数，**根本不覆盖 Virasoro**；而本项目的 Verma 模是 Virasoro Verma 模。
+     本轮找到的最贴切来源是**已经在 `sources.bib` 里的 `virasoro-lean-2025`（Kytölä）§12**，
+     它给的是 Virasoro Verma 模 `𝒱_{c,h}` 的 PBW 基本身，**但那句话没有编号**（§16、§17）。
+
+---
+
+## 15. ★ (A) PBW 定理：**Humphreys, GTM 9 (1972), §17.3, Corollary C, p. 92**
+
+### 15.1 结论与证据链
+
+| 待核实项 | 结论 | 等级 |
+|---|---|---|
+| 书目 | J. E. Humphreys, *Introduction to Lie Algebras and Representation Theory*, Graduate Texts in Mathematics **9**, Springer-Verlag, New York-Berlin, **1972** | **L1**（见 15.2 的逐字参考文献条目） |
+| §17 章题 | 「Universal enveloping algebras」，约起于 **p.89** | L4 |
+| §17 子节 | 17.1 Tensor and symmetric algebras / 17.2 Construction of `U(L)` / **17.3 PBW Theorem and consequences** / 17.4 Proof of PBW Theorem / 17.5 Free Lie algebras | L4（检索后端读目录）**＋** L4-带控制（见 15.3） |
+| §17.3 起始页 | **p.91** | L4-带控制 |
+| **PBW 基所在编号** | **Corollary C**，书上 **p.92** | **L3（已发表论文逐字引用）＋ L4-带控制（Google Books）** |
+
+### 15.2 证据 1（**L1** 逐页读图）：Ardizzoni 的逐字引用
+
+来源：A. Ardizzoni, *Universal Enveloping Algebras of PBW Type*, **arXiv:1008.4523v2**（2010-12-23；
+已发表于 Glasgow Math. J. **54** (2012)）。获取：`https://arxiv.org/pdf/1008.4523` WebFetch 落盘 312.9 KB → `Read` 带 `pages` 读图。
+
+**该文 p.1（Introduction 第一段）逐字（L1）**：
+
+> Let `L` be a Lie algebra which is assumed to have a totally ordered basis `(X, ≤)`. A classical result from the
+> theory of Lie algebras asserts that the elements `x₁⋯xₙ`, where `n ≥ 1`, `xᵢ ∈ X`, for all `1 ≤ i ≤ n`, and
+> `x₁ ≤ x₂ ≤ ⋯ ≤ xₙ`, along with `1`, form a basis of the universal enveloping algebra `U(L)` of `L`. This theorem
+> is due to Poincaré, Birkhoff and Witt and the basis is called the **PBW basis** of the universal enveloping
+> algebra (**see e.g. [Hu, Corollary C, page 92]**).
+
+**该文 p.15（References）逐字（L1）**：
+
+> **[Hu]** J. E. Humphreys, *Introduction to Lie algebras and representation theory*. Graduate Texts in Mathematics,
+> Vol. **9**. Springer-Verlag, New York-Berlin, **1972**.
+
+> ⚠ **版本小坑**：检索后端转述的是**期刊版**的编号 `[15, Corollary C, p. 92]`；arXiv 版用的是 `[Hu]`。
+> 两者指同一条。**引用时写 arXiv 版的 `[Hu]`**，因为那是我 L1 读到的。
+
+**这条证据的性质**：我 L1 读到的是**Ardizzoni 的引用行为**，不是 Humphreys 的正文。
+对 Humphreys 而言这是 **L3**（可溯源二手陈述）。但它是一篇同行评议论文对一条具体页码+编号的点名引用，
+比讲义转述强。
+
+### 15.3 证据 2（**L4，但控制实验通过**）：Google Books 全文检索
+
+卷 id **`mSD4DvUFa6QC`**（= Humphreys GTM 9 的预览卷）。手法与 §9.2 一致：`books.google.com/books?id=<ID>&q=<短语>`，**只回页码、不回 snippet**。
+
+| 查询短语 | 返回页 | 判读 |
+|---|---|---|
+| `"zzqxjkwmnbv"`（无意义串，**控制**） | **No results** | ✔ **控制通过**：本卷**没有** §9.2 记的「无命中回落到固定页」的病（FBZ 卷回落到 p.403）。因此本卷的返回页可以当作真实命中 |
+| `"PBW Theorem and consequences"` | **p.91** | ✔ §17.3 的节标题，且与「§17 起于 p.89」相容 |
+| `"Corollary C"` | **p.92** | ✔ **与 Ardizzoni 的「Corollary C, page 92」完全吻合** |
+| `"maximal vector"` | p.32 | （旁证：与 §7 的 `sl₂` 表示论位置相容） |
+
+**两条互相独立的证据落在同一个 (Corollary C, p.92) 上 ⇒ 这个定位可以写进图。**
+
+### 15.4 Humphreys §17.3 里那几条编号**说的是什么**（内容 L1，编号字母 **不可搬运**）
+
+印本拿不到，但有一份公开的、明说「基于 Humphreys §17」的研讨班讲稿：
+**J. Swanson, "§17: The PBW Theorem"**，`https://www.jpswanson.org/talks/2015_Humphreys_PBW.pdf`
+（WebFetch 落盘 326.2 KB → `Read` 全文读毕，9 页；**L1**）。首行逐字：
+
+> The following are lecture notes based on §17 of Humphreys, covering universal enveloping algebras,
+> the PBW theorem, and some consequences. (Speaker: Josh Swanson.)
+
+它用的是**研讨班自己的连续编号（113–118）**，不是 Humphreys 的字母。按顺序，Humphreys §17.3 的内容是：
+
+| Swanson 编号 | 内容（L1 逐字节录） | 对应 Humphreys |
+|---|---|---|
+| **Theorem 113 (PBW, Humphreys' version)** | 「The natural map `𝔖 → gr 𝔘` is an isomorphism of algebras.」 | §17.3 的 **Theorem**（Humphreys 证的是**分次版**） |
+| Corollary 114 | 「`𝔘 ≅ 𝔽[v₁,v₂,…]` as `𝔽`-vector spaces.」 | 某条 Corollary |
+| Corollary 115 | `W ⊂ 𝔗_m` 同构到 `𝔖_m` ⇒ `F_m𝔘 = F_{m−1}𝔘 ⊕ π(W)`；附注「**Humphreys seems to forget to note that `π` is injective on `W`**, though it's implicit in his proofs」 | 某条 Corollary |
+| Corollary 116 | 「`i: L → 𝔘(L)` is injective.」 | 某条 Corollary |
+| **Corollary 117 (PBW Theorem, standard)** | 「Let `(x₁,x₂,…)` be an ordered basis of `L`. Then the elements `x_{i₁}⋯x_{i_m} = π(x_{i₁}⊗⋯⊗x_{i_m})` for `m ∈ ℤ_{≥1}` with `i₁ ≤ ⋯ ≤ i_m`, together with `1`, form a basis for `𝔘(L)`, called a **PBW basis**.」 | **= Ardizzoni 引的 Corollary C** |
+| **Corollary 118** | 「Let `H` be a subalgebra of `L`, and extend an ordered basis `(h₁,h₂,…)` of `H` to an ordered basis `(h₁,…,x₁,…)` of `L`. Then the homomorphism `𝔘(H) → 𝔘(L)` … is itself injective, and **`𝔘(L)` is a free `𝔘(H)`-module** with free basis consisting of all `x_{i₁}⋯x_{i_m}` with `i₁ ≤ ⋯ ≤ i_m`, along with `1`.」 | 某条 Corollary，**这条正是 (B) 的上游** |
+
+另记（L1 逐字）：「**Humphreys writes `𝔊(L)` for `gr 𝔘(L)`** under this filtration」——
+即 Humphreys 的定理原文用的是 `𝔊(L)` 这个记号，图里若抄公式要注意。
+
+> ⚠⚠ **本轮发现的一个真矛盾，未裁决，直接影响 `loc` 怎么写**：
+> Ardizzoni 把**有序单项式基**那条定为 **Corollary C**；而按 Swanson 的顺序，
+> 有序单项式基那条排在**第 4 位**（114→A, 115→B, 116→C, 117→D 的话，它该是 **Corollary D**）。
+> 两者对不上，说明**「Swanson 的第 k 条 = Humphreys 的第 k 个字母」这个假设不成立**
+> （很可能 Humphreys 没有把 115 那种技术性中间结论单列为 Corollary，或者字母顺序不同）。
+> **硬性禁令：只允许写 `Corollary C, p. 92`（有两条独立证据），
+> 绝不允许写 `Corollary A` / `Corollary B` / `Corollary D` / `Corollary E` 中的任何一个，
+> 也绝不允许把 Swanson 的编号 113–118 写进图。**
+
+### 15.5 **未核实（L0）：Humphreys 的 PBW 是否对无限维 `L` 成立**
+
+- Ardizzoni 引用它时的假设是「a Lie algebra which is **assumed to have a totally ordered basis**」，
+  **没有有限维假设**（L1，见 15.2）；Swanson 的记号段也写「`L` is a Lie algebra over `𝔽`
+  (**possibly infinite dimensional**)」，并加了一句「Many statements are true in much greater generality」（L1）。
+- **但**：Humphreys 全书的通行约定是「`F` 代数闭、特征 0，李代数有限维」，**§17.1 开头那句话本轮没有核到（L0）**。
+- ⇒ **结论：把 Humphreys Corollary C 用在 Virasoro（无限维）上，目前只有 L3/L1 的旁证，没有原文背书。**
+  curator 若要这么用，**必须挂 `inferred: true`**，note 写「Humphreys 全书为有限维半单语境；
+  Ardizzoni 与 Swanson 均在无限维/任意李代数语境下引用同一条，但 Humphreys §17.1 的适用范围声明未核实」。
+
+---
+
+## 16. ★★ (B) Verma 模自由性：本项目真正该引的是 **`virasoro-lean-2025` §12**，不是 Humphreys
+
+### 16.1 为什么 Humphreys §20.3 方向不对（**这是本节最重要的判断**）
+
+- Humphreys, GTM 9 **整本书讲的是「代数闭特征 0 域上的有限维半单李代数」**；
+  §20 用根系 `Φ`、Borel 子代数 `B = H ⊕ ⊕_{α∈Φ⁺}L_α`、`Z(λ)` 记号。
+  **Virasoro 代数不在它的适用范围内**（无限维、不是半单、没有有限根系）。
+- 而本项目的 Verma 模是 **Virasoro Verma 模**（见 `lian-zuckerman-1991` Theorem 3.5(ii) 里的
+  `L(26−D, 1−h)`、`worldsheet.kac-determinant` 一线）。
+- ⇒ **即使把 Humphreys §20.3 的编号核实到 L1，它也不能单独支撑本项目的 Verma 节点。**
+  这与 §4.1 里「Evans 即使核实出编号也不是最贴的来源」是同一类判断。
+
+### 16.2 Humphreys §20.3 的编号核实结果：**候选、编号未核实（L0）**，且**很可能不是那条陈述**
+
+- Google Books（同 15.3 的卷，控制已通过）：
+  `"Existence and uniqueness theorems"` → **p.3**（与第 20 章毫不相容，判为无用命中）；
+  `"Standard cyclic modules"` → **p.167**、`"Verma"` → **p.167**（都落在书末索引区）；
+  `"Weights and maximal vectors"` → **p.111**。
+  **四条都不能把 §20.x 的子节号钉死。**
+- 本轮唯一 **L1 读到的、明确写出「section 20.3 of [Hum72]」的公开讲义**是
+  Lily Li, *Weights and Verma Modules*（UC Berkeley Math 261A 期末作业，2021），
+  `https://www.ocf.berkeley.edu/~lilyl/wp-content/uploads/2021/06/Verma-Modules.pdf`（4 页，落盘读毕）。
+  它把 §20.3 挂在 **Theorem 2.1「Theorems of the Highest Weight」**（不可约表示有最高权 / 同最高权则等价 /
+  最高权是 dominant integral / 每个 dominant integral 都能实现）下面，逐字为
+  「*Proof.* The proof is ommitted here. For a full proof, see **section 20.3 of [Hum72]**.」
+  ⇒ **§20.3 指向的是「最高权定理」，不是「`M(λ)` 作为 `U(n⁻)`-模自由秩 1」。**
+  连节号本身的语义都与任务书的假设不符。
+- 另有一条记号差异（L3，多份讲义一致）：**Humphreys 用 `Z(λ)`，不用 `M(λ)`**。
+  图里 `loc` 若写 `M(λ)` 会与原书记号不一致。
+- ⇒ 按 `literature/CLAUDE.md` 口径，**Humphreys §20.3 记为「候选、编号未核实」，不作为 (B) 的来源。**
+
+### 16.3 ★★★ 本轮找到的最贴切来源（**已经在 `sources.bib` 里**）：Kytölä, arXiv:2510.21741, **§12**
+
+来源：`virasoro-lean-2025`（本文件 §12 已登记，`sources.bib` 有条目）。
+本轮**新读**其 §12「Verma modules and Fock spaces」与 §13「Formalizing Verma modules」、§14 Conclusions
+（`arxiv.org/pdf/2510.21741` 落盘 1.2 MB → `Read` 读 PDF 第 10–14 页；**PDF 页 = 论文页**）。全部 **L1 逐字**。
+
+**可引用的编号结果（书上 p.10）**：
+
+> **Definition 12.1.** Let `V` be a left `𝒰(𝔤)`-module. A vector `v ∈ V` is a **weight vector** of weight `λ` if
+> `Hv = λ(H)v` for all `H ∈ 𝔤₀`. &nbsp;&nbsp; **(20)**
+
+（其后 **(21)** `Xv = 0` for all `X ∈ 𝔤₊` 定义 **highest weight vector**；`V = 𝒰(𝔤)v` 定义 **highest weight module**。）
+
+> **Definition 12.2.** A highest weight module `M` over `𝒰(𝔤)` with highest weight `λ` and corresponding highest
+> weight vector `v ∈ M` is said to be a **Verma module** with highest weight `λ` if the following universal property
+> is satisfied: for any `𝒰(𝔤)`-module `V` with a highest weight vector `v` of highest weight `λ`, there exists a
+> unique `𝒰(𝔤)`-module homomorphism `f : M → V` such that `f(v) = v`.
+
+> **Lemma 12.3.** For `𝔤 = 𝔤₋ ⊕ 𝔤₀ ⊕ 𝔤₊` and `λ ∈ 𝔤₀*` as above, let `I_λ ⊂ 𝒰(𝔤)` be the left ideal generated by
+> the elements of the form `H − λ(H)1` for `H ∈ 𝔤₀` and `X` for `X ∈ 𝔤₊`. View `𝒰(𝔤)` as a left module over itself,
+> so that `I_λ` becomes a submodule. Then the module `M_λ := 𝒰(𝔤)/I_λ` is a Verma module ("the Verma module")
+> with highest weight `λ`, with `v_λ := 1 + I_λ ∈ 𝒰(𝔤)/I_λ` as its highest weight vector.
+
+> **Definition 12.4.** The Virasoro algebra has a triangular decomposition `𝔳𝔦𝔯 = 𝔳𝔦𝔯₋ ⊕ 𝔳𝔦𝔯₀ ⊕ 𝔳𝔦𝔯₊` where
+> `𝔳𝔦𝔯_± = span_𝔽{ℒ_n | ±n > 0}`, `𝔳𝔦𝔯₀ = span_𝔽{ℒ₀, C}`.
+> Let `c, h ∈ 𝔽`. The **Virasoro Verma module** `𝒱_{c,h}` of **central charge** `c` and **conformal weight** `h` is
+> the Verma module associated with the above triangular decomposition and the highest weight `λ ∈ 𝔳𝔦𝔯₀*` defined by
+> `λ(C) = c` and `λ(ℒ₀) = h`. We denote (a choice of) its highest weight vector by `v_{c,h}`.
+
+> **Definition 12.5.** The Heisenberg algebra has a triangular decomposition `𝔥𝔢𝔦 = 𝔥𝔢𝔦₋ ⊕ 𝔥𝔢𝔦₀ ⊕ 𝔥𝔢𝔦₊` where
+> `𝔥𝔢𝔦_± = span_𝔽{𝒥_k | ±k > 0}`, `𝔥𝔢𝔦₀ = span_𝔽{𝒥₀, 𝒦}`.
+> Let `α ∈ 𝔽`. The **charged Fock space** `ℱ_α` of **charge** `α` is the Verma module for `𝔥𝔢𝔦` associated with the
+> above triangular [decomposition and the highest weight `λ ∈ 𝔥𝔢𝔦₀*` defined by `λ(𝒦) = 1`, `λ(𝒥₀) = α`]。
+
+**★ 图节点真正要的那句话（书上 p.11，紧接 Def 12.5 之后；L1 逐字）**：
+
+> From the Poincaré–Birkhoff–Witt (PBW) theorem, it can be seen that a basis of `𝒱_{c,h}` is
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `(ℒ_{−n_m} ⋯ ℒ_{−n_1} v_{c,h})_{m∈ℕ, 1≤n_1≤⋯≤n_m}`.
+>
+> Similarly, a basis of `ℱ_α` is
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; `(𝒥_{−k_m} ⋯ 𝒥_{−k_1} v_α)_{m∈ℕ, 1≤k_1≤⋯≤k_m}`.
+
+> ⚠ **这句话没有编号**：它是 §12 的正文散文，夹在 Definition 12.5 与 Corollary 12.6 之间，
+> **不是 Lemma / Proposition / Theorem**。`loc` 只能写「§12, p. 11（正文，无编号）」，
+> **不得写「Kytölä Lemma 12.x」**。这与 §8.4 里 Gui 的「三版局域性等价没有编号定理」是同一种坑。
+
+### 16.4 ★★★ **对 `status` 的硬约束：PBW 不在 Mathlib 里，所以这个节点不能标 `formalized`**
+
+紧接上面那句话（书上 p.11，L1 **逐字**）：
+
+> These statements about explicit bases of Verma modules are **not yet formalized**, since **Mathlib does not
+> currently have the PBW theorem**. The PBW theorem was perhaps the only major missing desirable prerequisite of
+> the project. A few compromises in the scope were made to avoid relying on it.
+
+§14「Conclusions and outlook」（书上 p.12，L1 逐字）：
+
+> Highest weight representation theory of Lie algebras is a classical topic in mathematics **[Hum72]**, certainly
+> wanted in Mathlib. It is likely a major undertaking, starting from the **missing Poincaré–Birkhoff–Witt theorem**.
+> We hope that our design experiment with Verma modules proves helpful there.
+
+**独立佐证（L1，读取日期 2026-09-11）**：`leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Lie/UniversalEnveloping.html`
+只有 17 个声明——`Rel`、`ringCon`、`UniversalEnvelopingAlgebra`、三个 instance、`mkAlgHom`、`ι`、`ι_apply`、
+`lift`、`lift_symm_apply`、`ι_comp_lift`、`lift_ι_apply`、`lift_ι_apply'`、`lift_unique`、`hom_ext`、`hom_ext_iff`——
+**全部围绕构造与泛性质**；**没有 PBW、没有滤过、没有与对称代数的同构，也没有 TODO 段**。
+
+> ⇒ **`verma-module-pbw-basis--via-pbw` 现在最高只能到 `rigorous`，不能标 `formalized`。**
+> 这与 §12.3 记的「Mathlib 的 `Locality` 还是 TODO ⇒ 顶点代数节点不能 `formalized`」是同一类硬约束，
+> 但**这一条更硬**：Locality 至少在 TODO 列表里，PBW 连 TODO 都没有。
+>
+> **同时这是 `formal/` 的一条重要情报**：Kytölä 已经把 Verma 模的**理想商构造**（`vermaIdeal`、`VermaModule`、
+> `VermaModule.hwVec`、`VermaModule.universalMap`、`IsVermaModule`）形式化了（论文 §13 有 Lean 代码块），
+> **只有「显式 PBW 基」这一步没做**。所以形式化侧的缺口是**精确的一条**：`Mathlib` 的 PBW 定理。
+
+### 16.5 一条重要的方法论警告：**(B) 在文献里多半根本没有编号**
+
+本轮扫过的多份来源显示，「`M(λ)` 作为 `U(n⁻)`-模自由秩 1」通常**不是**一条独立编号命题，而是：
+
+- 被**写进定义**：例如 Bershtein, *Virasoro algebra and conformal field theory*（SISSA 讲义）
+  **Definition 2.1** 把 `V_{h,c}` 直接定义成「a module freely generated by `Vir_{<0}`」（L4，检索后端转述）；
+  arXiv:1405.6734 也把「free as a module over `U(L₁)`」当作 Verma 模的**定义条件**（L4）。
+- 或者被当作**PBW 的即时推论**一笔带过（Kytölä §12 就是这样，见 16.3）。
+
+⇒ **给 curator 的建议：不要去找一条并不存在的「Theorem X.Y」。**
+这条陈述在图里应当按「定义级 / PBW 的直接推论」处理，`loc` 指向定义或正文段落，
+并在 note 里写明「文献未把它写成编号命题」。**与 §8.4（Gui 三版等价）同型处理。**
+
+---
+
+## 17. 未能核实编号的候选（**一律不登记进 `sources.bib`**）
+
+沿用 §4 的口径：编号没核实的一律不入 bib，只在这里留档。
+
+| 候选 | 任务书给的定位 | 本轮结果 | 等级 |
+|---|---|---|---|
+| **Dixmier, *Enveloping Algebras*** (North-Holland Math. Library **14**, 1977；法文原版 *Algèbres enveloppantes* 1974) | §2.1.11 | **完全未核实。** 没找到任何公开可读页面。检索后端只给了一句**自陈为猜测**的话（「2.1.11 falls among the consequences of the main theorem (2.1.9/2.1.10)」），**不可用**。另注意 1974 法文版 / 1977 英译版编号是否一致也未查 | **L0** |
+| **Kac, *Infinite-Dimensional Lie Algebras*, 3rd ed.** | §9.2（Verma 模）、Prop 9.2 / 9.3 | **完全未核实**，无公开页面。**并且有结构性反对意见**：该书讲的是 **Kac–Moody 代数 `g(A)`**，而 **Virasoro 代数不是 Kac–Moody 代数**，所以即使核实出 §9.2 也不直接覆盖 `𝒱_{c,h}`。Kac 的 Virasoro 材料在别处（Kac–Raina 一线） | **L0** |
+| **Moody–Pianzola, *Lie Algebras with Triangular Decompositions*** (Wiley, 1995) | 任务书未给具体号 | **完全未核实**，无公开全文。**但它是几个候选里框架最对的**：三角分解正好覆盖 Virasoro。值得下一轮找 | **L0** |
+| **Iohara–Koga, *Representation Theory of the Virasoro Algebra*** (Springer Monographs, 2011) | 本轮新增候选 | **完全未核实**，无公开全文。**这是主题最对口的书**（Kytölä 的 [IK10]），目录含「Verma Modules I: Preliminaries」「Verma Modules II: Structure Theorem」 | **L0** |
+| **Feigin–Fuks 1984**, *Verma modules over the Virasoro algebra*, Funct. Anal. Appl. **17**(3):241–242 | 本轮新增候选 | 未取正文。这是 Kytölä 的 **[FF84]**，Virasoro Verma 模结构定理的经典出处，Kytölä 把「Feigin–Fuks structure theorem 的形式化」列为后续目标 | **L0** |
+| **Humphreys §20.3** | Verma 模自由秩 1 | 见 16.2：**编号未核实，且方向不对**（§20.3 指向最高权定理；全书不覆盖 Virasoro） | **L0** |
+
+---
+
+## 18. 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+针对 `verma-module-pbw-basis--via-pbw`：
+
+```yaml
+sources:
+  # (A) PBW 定理本身 —— 唯一已核实的带编号来源
+  - ref: humphreys-1972
+    loc: "§17.3 (PBW Theorem and consequences), p. 91 起；有序单项式基 = Corollary C, p. 92"
+    # note: 定位由 ardizzoni-2010 p.1 的逐字引用 + Google Books 全文检索两条独立证据互证；
+    #       禁止把编号改写成 Corollary A/B/D。
+
+  # (B) Virasoro Verma 模的 PBW 基 —— 无编号，只能指段落
+  - ref: virasoro-lean-2025
+    loc: "§12 (Verma modules and Fock spaces), p. 11 正文（**无编号**）：
+          𝒱_{c,h} 的基为 (ℒ_{−n_m}⋯ℒ_{−n_1} v_{c,h})，1≤n_1≤⋯≤n_m；
+          Verma 模的定义见 Definition 12.2（泛性质）与 Lemma 12.3（𝒰(𝔤)/I_λ 构造）；
+          Virasoro 情形见 Definition 12.4"
+```
+
+配套建议（**均为建议，researcher 不代 curator / auditor 决定**）：
+
+1. **`status` 上限是 `rigorous`，不得写 `formalized`。**
+   依据是 16.4 的两条 L1 证据（Kytölä 自陈 + Mathlib 文档页）。
+   若将来 Mathlib 有了 PBW，这条要重新评估——**建议在节点 note 里写死「读取日期 2026-09-11」**。
+2. **建议把节点拆成两条**（与 §13.2 同一思路）：
+   - `math.pbw-theorem`（PBW 定理本身，`rigorous`，来源 `humphreys-1972` §17.3 Corollary C）；
+   - `math.verma-module-free-over-U-nminus`（`M(λ) ≅ U(n⁻)` 作为 `U(n⁻)`-模，`rigorous`，
+     依赖前者，来源 `virasoro-lean-2025` §12 p.11）。
+   现在合在一起会让「PBW 有干净编号」这一半被「Verma 那半没编号」拖下去。
+3. **从 `math.pbw-theorem` 到 Virasoro 用例的那条边建议 `inferred: true`**：
+   理由见 15.5——Humphreys 全书是有限维半单语境，无限维适用性只有旁证。
+   note 建议写「Ardizzoni (arXiv:1008.4523) 与 Swanson 讲义均在任意/无限维李代数语境下引用同一条；
+   Humphreys §17.1 的适用范围声明未核实」。
+4. **记号对齐**：Humphreys 写 `Z(λ)` 与 `𝔊(L)`；Kytölä 写 `M_λ` / `𝒱_{c,h}` 与 `𝒰(𝔤)`；
+   `lian-zuckerman-1991` 又是另一套。**建议在 `graph/conventions/` 加一条 `family: verma-module-notation`**，
+   否则 `M(λ)` / `Z(λ)` / `𝒱_{c,h}` 在图里会被当成三个东西。
+5. **形式化侧的具体提示**（给 `formalizer`）：Kytölä 的 `VirasoroProject` 已有
+   `vermaIdeal` / `VermaModule` / `VermaModule.hwVec` / `VermaModule.universalMap` / `IsVermaModule`，
+   **唯独缺 PBW 基**。所以 `formal/` 若要碰这块，缺口是**精确的一条：Mathlib 的 PBW 定理**，
+   而不是整套 Verma 模理论。这是个明确但**很大**的工程（Kytölä 逐字称之为 "a major undertaking"）。
+
+---
+
+## 19. 本节访问日志与未解决问题
+
+### 19.1 访问日志（本轮，供后人省事）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Ardizzoni, arXiv:1008.4523v2** | `arxiv.org/pdf/1008.4523` | **成功**（落盘 312.9 KB → `Read pages`；p.1 引用 + p.15 参考文献） |
+| **Swanson §17 讲稿** | `www.jpswanson.org/talks/2015_Humphreys_PBW.pdf` | **成功**（落盘 326.2 KB，9 页全读） |
+| **Lily Li, Verma Modules 讲义** | `www.ocf.berkeley.edu/~lilyl/wp-content/uploads/2021/06/Verma-Modules.pdf` | **成功**（落盘 204 KB，4 页全读） |
+| **Kytölä arXiv:2510.21741** | `arxiv.org/pdf/2510.21741` | **成功**（落盘 1.2 MB；本轮读 p.10–14） |
+| **Mathlib 文档 `UniversalEnveloping`** | `leanprover-community.github.io/mathlib4_docs/Mathlib/Algebra/Lie/UniversalEnveloping.html` | **成功**（逐条读声明名与 docstring） |
+| Google Books（Humphreys GTM 9） | `books.google.com/books?id=mSD4DvUFa6QC&q=<短语>` | **成功且控制通过**（无意义串回 "No results"，**本卷无回落页病**） |
+| Springer 书页（GTM 9 目录） | `link.springer.com/book/10.1007/978-1-4612-6398-2` | **失败：303 重定向到 `idp.springer.com/authorize`（登录墙）** |
+| Google Books（错卷 id 试探） | `books.google.com/books?id=mSD4DwAAQBAJ&…` | 失败——**该 id 是一本无关的日文小说**。正确 id 是 **`mSD4DvUFa6QC`**（只差两个字符，极易抄错） |
+
+> **对 `reading-list.md` 的建议增补**：
+> - **新增活路**：`www.jpswanson.org/talks/`、`www.ocf.berkeley.edu/~<user>/`、`arxiv.org/pdf/`（本轮再次全程正常）。
+> - **新增死路**：`link.springer.com/book/*` → **303 到 `idp.springer.com` 登录墙**（Springer 书页现在拿不到目录了）。
+> - **Google Books 手法的更新**：§9.2 记的「无命中回落到固定页」**不是全站行为，是逐卷的**。
+>   **每换一个卷 id 都要先跑一次无意义串的控制实验**：本轮 Humphreys 卷回 "No results"（干净），
+>   而 §9.2 的 FBZ 卷回落到 p.403（脏）。控制通过的卷，返回页可以当真实命中用。
+> - **一个新教训**：本轮 (A) 的定位是靠**「找一篇引用了它的已发表论文」**拿到的，
+>   而不是靠找原书。这与 §14.1 记的「先找作者勘误表」并列为拿不到书时的两条标准路线：
+>   **① 作者勘误表；② 引用它的论文里带页码+编号的 citation。**
+
+### 19.2 未解决 / 留给下一轮
+
+- **Q14** Humphreys §17.3 里 **Theorem 与各 Corollary 的字母到底怎么排**（15.4 的矛盾）。
+  持原书者看一眼 p.91–93 即可结案。**在结案前，图里只许写 `Corollary C, p. 92`。**
+- **Q15** Humphreys **§17.1 开头对 `L` 的假设**（是否明说可为无限维）。这条决定 15.5 那条 `inferred` 边能不能撤。
+- **Q16** Humphreys **§20 的子节标题与页码**（`Weights and maximal vectors` 是章题还是 20.1？§20.3 的确切标题是什么）。
+  优先级低——按 16.1 的判断，Humphreys §20 对本项目本来就不适用。
+- **Q17** **(B) 的带编号一手来源仍然缺**。下一轮最值得抓的三个，按性价比排：
+  **① Iohara–Koga (2011)**（主题最对口，Kytölä 的 [IK10]）；
+  **② Moody–Pianzola (1995)**（三角分解框架，覆盖 Virasoro）；
+  **③ Feigin–Fuks (1984)**（经典原始出处）。
+  另可试 Bershtein 的 SISSA CFT 讲义 `www.people.sissa.it/~mbersht/CFT/2019/Lectures2019.pdf`
+  （**Definition 2.1** 疑似把 freeness 写进定义，本轮只有 L4 转述，**未读原文**）。
+- **Q18** **Mathlib 的 PBW 状态需要定期复查**（本轮读取日期 2026-09-11）。
+  建议同时盯 `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 与 Mathlib 的 `1000.yaml` 定理跟踪表
+  （后者本轮**未查**）。另有一条 **L4 未核实**线索：`Mathlib/Algebra/Lie/Free.lean` 的 docstring
+  据称写着「I don't know of a proof that avoids invoking the Poincaré–Birkhoff–Witt theorem」——
+  若属实，是 Mathlib 侧缺 PBW 的第三条独立佐证，**值得花一次 fetch 去逐字核实**。
+- **Q19** Dixmier §2.1.11 与 Kac IDLA §9.2 的编号（见 §17 表）。两者都**没有**公开可读页面，
+  下一轮若要碰，建议改用「找引用它们的论文里的 citation」这条路（19.1 的教训）。
