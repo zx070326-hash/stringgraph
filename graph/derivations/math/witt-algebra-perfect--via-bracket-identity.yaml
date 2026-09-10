@@ -63,12 +63,12 @@ gaps:
      只写 `∀ p, lgen p ∈ LieAlgebra.derivedSeries ... 1` 之类。"
 notes: |
   【status 裁决与复核状态】按 docs/STATUS_LEVELS.md，等级 4 (rigorous) 的例外条款要求推导节点
-  在 notes 写 `reviewer-verified: <agent>, <date>`。**本节点暂无该记录。**
+  在 notes 写 `reviewer-verified: <agent>, <date>`。已由 reviewer-batch5b 复核（见下）。
   lead 于 2026-09-11 明确允许先标 rigorous，理由是：(a) 证明是两行有限步初等计算，
   前提（括号结构常数 + char 0）在陈述里完整写出；(b) 结论本身在 feldvoss-siciliano-2025 Lemma 2.6
   的证明里被逐字当作已知事实使用，不是本图自创的断言。
   **待 reviewer 复核。** 复核通过后请把下一行的占位替换为实录：
-    reviewer-verified: <pending>, <pending>
+    reviewer-verified: reviewer-batch5b, 2026-09-11 — 结构常数与 H¹ 字典独立复核；基环 char-0 域使 (1/p) 合法（WittPerfect.lean 用只需 2 可逆的另一见证，不冲突）
   若 reviewer 不认可上面 gaps 第 1 条的「删减重算」这一步，由 reviewer 裁定降级。
 
   【与 math.virasoro-universal-central-extension 的关系】那条是关于 **𝒱** 的
