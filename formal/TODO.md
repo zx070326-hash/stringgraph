@@ -253,12 +253,13 @@
     分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
     `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
     横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
-  - [ ] (3) **共形权 `[L_m, V]`**：**未做**。真正的陈述是
+  - [ ] (3) **共形权 `[L_m, V]`**：`m ≥ 1` **已证**（见 (3d) 单 Fock、(3e) 塔上），
+    `m < 0` 未做（见 (3c')、(3f)）。陈述是
     `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
     `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
     `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
     取定值的算子族唯一），加上 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode`，把该恒等式
-    **归约为真空上的单条等式**，即计算 `L_m` 作用在相干态系数 `creaExp` 上。那条计算未做。
+    **归约为真空上的单条等式**，即计算 `L_m` 作用在相干态系数 `creaExp` 上。
     做它需要的组合输入已经看清楚：欧拉型递推 `M·Φ_M = Σ_{l=1}^{M} (b·α_{-l}) Φ_{M-l}`，
     在系数层面等价于 `Σ_v (η_{v.1} b^{v.1}) w(d - e_v) = (level d) · w(d)`，可由
     `Fock.expWeight_add_single` 直接得到。
@@ -286,7 +287,31 @@
     - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
       共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
       第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
-    - [ ] (3d) 由 `vertexOsc_unique` 从 (3b) 得到完整的 `[L_m, V_J]`：**未做**。
+    - [x] (3d) 完整的 `[L_m, V_J]`，`m ≥ 1`：**已证**
+      `Fock.lie_Lop_vertexOsc_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
+      `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`。
+      证明按预定路线：两边作为 `ℤ → Module.End` 的族满足**同一条**产生模态递推，
+      再由 `Fock.eq_zero_of_vertex_recursion` 归约到真空，真空上是 (3b) 的
+      `Fock.Lop_apply_creaExp_of_pos_shifted` 加 `Lop_apply_one_of_pos`（`m ≥ 1` 时 `L_m|k⟩ = 0`）。
+      递推的关键在于系数对 `J` 是**斜率 1 的仿射函数**：`c(J+l) = c(J) + l`，这恰好抵消
+      `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}` 产生的多余项 `l · V_{J+l-m}`，两边才同构。
+      辅助引理 `Fock.Lop_apply_X_mul`（`⁅L_m, α_p⁆` 的逐点形式）。
+      推论 `Fock.lie_Lop_vertexOsc_of_pos_isotropic`（`b·b = 0` 时右端为 `(J - m + a·b)`）。
+      无 sorry，公理只有标准三条。
+    - [x] (3e) 塔上版本，`m ≥ 1`：`lie_towerLop_towerVertex_of_pos`
+      （`StringFormal/NoGhost/VertexWeight.lean`）
+      `⁅L_m, V^{(n)}_K⁆ = (K - m - n + n (k_0·p)) • V^{(n)}_{K-m}`，
+      归一化推论 `lie_towerLop_towerVertex_of_pos_normalized`（`k_0² = 0` 且 `2α' k_0·p = 1`）
+      给 `⁅L_m, V^{(n)}_K⁆ = (K - m) • V^{(n)}_{K-m}`，即 `towerVertex` 是权 **0** 的准初级场
+      （权 1 来自 DDF 算子里的 `∂X^i`，不属于 `towerVertex`）。
+      **数学要点（本项发现）**：塔上版本**必须**假设 `k_0² = 0`（`dotVec η b b = 0`），
+      这不是为方便。单个 Fock 空间上的系数在第 `j` 级是
+      `(K-n) - m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)`，含 `j`；`k_0² ≠ 0` 时
+      `⁅L_m, V^{(n)}_K⁆` 在整条塔上**不是** `V^{(n)}_{K-m}` 的标量倍，只是逐级成比例、
+      比例因子依赖动量级数 `j`。单 Fock 版本 (3d) 则对任意 `b` 成立，不需要 `b·b = 0`。
+      无 sorry，公理只有标准三条。
+    - [ ] (3f) `m < 0` 的 `[L_m, V_J]`：**未做**。(3d) 的整条路线用了 `m ≥ 1`
+      两次（真空上 `L_m|k⟩ = 0`，以及 (3b) 的分段求和），`m < 0` 需要 (3c') 先做。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性

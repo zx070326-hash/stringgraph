@@ -49,15 +49,28 @@ import StringFormal.NoGhost.DDF
 `Fock.nordPair_creaExp_of_neg_pos`、`Fock.nordPair_creaExp_zero_pos`、
 `Fock.sum_mode_creaExp_eq_smul`。
 
+* `Fock.lie_Lop_vertexOsc_of_pos` — **一般态上的共形权恒等式，`m ≥ 1`**：
+  `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`，
+  其中 `V_J = vertexOsc η b J`。证明：两边作为 `ℤ → Module.End` 的族满足**同一条**
+  产生模态递推（左边用 `Fock.lie_Lop_mode`（经 `Fock.Lop_apply_X_mul`）与
+  `Fock.mode_vertexOsc_sub`，右边只用 `Fock.mode_vertexOsc_sub`），且在真空上取值相同
+  （`Fock.Lop_apply_creaExp_of_pos_shifted` 与 `Fock.Lop_apply_one_of_pos`），
+  于是 `Fock.eq_zero_of_vertex_recursion` 给出相等。递推能对上的关键是系数对 `J` 是
+  **斜率 1 的仿射函数**：`c(J+l) = c(J) + l`，恰好抵消 `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}`
+  产生的 `l · V_{J+l-m}`。推论 `Fock.lie_Lop_vertexOsc_of_pos_isotropic`（`b·b = 0`）。
+* `lie_towerLop_towerVertex_of_pos` / `lie_towerLop_towerVertex_of_pos_normalized` —
+  DDF 动量塔上的同一恒等式。**塔上版本必须假设 `k_0² = 0`**（`dotVec η b b = 0`）：
+  第 `j` 级的系数是 `(K-n) - m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)`，含 `j`，
+  `k_0² ≠ 0` 时括号不是 `V^{(n)}_{K-m}` 的标量倍。归一化后 `⁅L_m, V^{(n)}_K⁆
+  = (K-m) • V^{(n)}_{K-m}`，即 `towerVertex` 是权 **0** 的准初级场（DDF 算子的权 1
+  来自 `∂X^i`，不属于 `towerVertex`）。
+
 ## 尚缺（本文件的最终目标尚未完成）
 
 * `m < 0`。这不只是"分段计算换个写法"：`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，所以真空上的等式
   **不再**形如 `L_m Φ_J = c · Φ_{J-m}`——共形权恒等式右边多出 `V_J L_m^{(a)}|k⟩` 一项，
   它是真正含产生算子的向量。要处理 `m < 0` 必须把 `vertexOsc`（而不只是 `creaExp`）
-  一起搬过来。本轮未做。
-* `[L_m, V_K]` 的共形权公式。上面只是**真空上**的作用；一般态上的对易子还要把
-  `NoGhost/VertexOperator.lean` 的 `vertexOsc`（湮灭半 `vertexAnn`）一起搬过来。
-* 因此本文件目前**不**支撑图上任何 `formalized` 的推导；以上都是将来共形权推导的中间步。
+  一起搬过来。本轮未做，故 `lie_Lop_vertexOsc_of_pos` 的 `0 < m` 假设无法直接去掉。
 -/
 
 namespace StringFormal.NoGhost
