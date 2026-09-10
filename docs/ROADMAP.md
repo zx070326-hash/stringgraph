@@ -19,11 +19,12 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数：main 238 statements / 176 derivations / 27 formalized；Lean 26 声明公理干净（2144 jobs）。
+- 计数：main 262 statements / 196 derivations / 32 formalized；Lean 31 声明公理干净（2145 jobs）。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
-- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（m ≥ 1）与塔上版本** / level-2 负模态（含 p ≠ 0）已机器验证；进行中：DDF 算子 A^i_n 定义 + [L_m, A]=0（m ≥ 1）。剩：m < 0、DDF 横向代数、张成定理。
+- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（所有 m ≠ 0）** / **DDF 算子 A^ε_n 作为局部有限模态和 + [L_m, A^ε_n] = 0（m ≥ 1）** / level-2 负模态（含 p ≠ 0）已机器验证。剩：m = 0（真正例外）、塔版 m < 0、DDF 横向代数 [A,A]、张成定理。图接线（v6 定义卡、弱节点 positive-virasoro）进行中。
+- 无鬼定理回 rigorous：号差在顶点代数层不是假设（一切在 ℂ 上）；Li–Wang Thm 3.6/3.10 覆盖类光格——curator 正建 lattice-VA 卡并把 G–N 推导接离 open 根。
 - 无鬼定理回 rigorous 的最短路径：Gebert–Nicolai 顶点代数推导已入图（own rigorous），只被"自由玻色子顶点代数"缺卡压成 open——researcher 正找 Kac/LL/FLM 对不定号差格的编号定理。
 - Lean 岛 2（Green–Schwarz 代数）：因子化恒等式（SO(32)/E₈）、迹条件算术 7 条声明已合入；等 GS 1984 图节点合入后接线。
 - 附带数学岛：Verma 模、Euler 分拆、Witt/Virasoro 完美、Shapovalov 形式、Möbius Jacobian、Mandelstam 和。
