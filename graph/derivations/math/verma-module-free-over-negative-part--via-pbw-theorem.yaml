@@ -1,0 +1,110 @@
+id: math.verma-module-free-over-negative-part--via-pbw-theorem
+target: math.verma-module-free-over-negative-part
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.pbw-theorem
+    inferred: true
+    note: |
+      **inferred 的理由是适用范围，不是论证**（math-sources.md §15.5，Q15）。
+      本推导第 (2) 步对 L = vir 与 L = vir₋ 各用一次 PBW，而这两个都是**无限维**李代数；
+      math.pbw-theorem 的来源 humphreys-1972 全书语境是「代数闭特征零域上的**有限维半单**李代数」，
+      而 **§17.1 开头对 L 的假设本项目未核到（L0）**。
+      现有旁证：ardizzoni-2010 引用同一条时的前提只是「a Lie algebra which is assumed to have a totally
+      ordered basis (X, ≤)」（无有限维假设，L1）；swanson-2015-pbw 的记号段写「L is a Lie algebra over F
+      (possibly infinite dimensional)」并加「Many statements are true in much greater generality」（L1）。
+      两条旁证都不是 Humphreys 原文的背书，故这条边标 inferred。
+      **撤销条件**：核到 Humphreys §17.1 对 L 的假设声明并确认不限有限维（Q15）。
+      **注意**：vir 与 vir₋ 都有现成的可数全序基（{L_n}_{n∈Z} ∪ {C}；{L_{-1} < L_{-2} < …}），
+      故「全序基存在」这一前提在本用例中是显然的，不需要选择公理。
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      本推导的对象就是该节点定义的 V(c,h) = U(vir)/J(c,h)，并用到它的三条结论：
+      (i) 最高权关系与 |c,h⟩ 由 1 的陪集给出，(ii) V(c,h) 由 |c,h⟩ 在 U(vir) 下生成，
+      (iii) V_N 的定义与 L_0 在其上作用为 h + N。
+      来源 virasoro-lean-2025 的 Lemma 12.3 用的是**同一构造**（M_λ := 𝒰(𝔤)/I_λ，I_λ 由
+      H − λ(H)1 与 X ∈ 𝔤₊ 生成的左理想），Virasoro 情形见其 Definition 12.4，故不是跨书认同。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      PBW 的输入是 vir 的三角分解 vir = vir₋ ⊕ vir₀ ⊕ vir₊ 与 vir₋ 作为 F-模自由（基 {L_{-n} : n ≥ 1}），
+      两者都直接来自该节点的陈述（括号关系 + 「{L_n} ∪ {C} 张成、Vir(R) ≅ W(R) × R」）。
+      归一化同为 conv.virasoro-standard；中心项的具体系数与本推导无关
+      （vir₋ 内部 [L_{-m}, L_{-n}] 没有中心项，因为 (-m) + (-n) ≠ 0）。
+      来源 virasoro-lean-2025 Definition 12.4 给的三角分解 𝔳𝔦𝔯_± = span{ℒ_n | ±n > 0}、
+      𝔳𝔦𝔯₀ = span{ℒ₀, C} 与本节点写法逐字一致。
+sources:
+  - ref: virasoro-lean-2025
+    loc: "§12, p. 11 正文（无编号）；定义见 Definition 12.2 与 Lemma 12.3，Virasoro 情形见 Definition 12.4"
+    note: |
+      **L1（researcher 2026-09-11 逐页读 PDF p.10–14，math-sources.md §16.3）**。
+      来源对本命题给的**全部**论证就是那一句「From the Poincaré–Birkhoff–Witt (PBW) theorem,
+      it can be seen that a basis of 𝒱_{c,h} is …」——即它把结论归为 PBW 的直接推论而**不写证明**。
+      本推导的 summary 把那三步补全（诱导模识别 → PBW → 计数）。见 gaps 第一条。
+  - ref: swanson-2015-pbw
+    loc: "研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论"
+    note: |
+      只作旁证：它说明 summary 第 (2) 步用的「U(L) 作为 U(子代数)-模自由」这条推论确实就在 Humphreys §17.3 里，
+      不是本图临时拼的。**该讲稿的连续编号与 Humphreys 的字母编号都不得写进图**（Q14 未裁决，
+      见 math.pbw-theorem 的 notes）。
+summary: |
+  标准论证，三步。全部在 F-代数范畴内做，不涉及任何拓扑或收敛。
+
+  (1) **诱导模的识别**。令 b := vir₀ ⊕ vir₊ = span_F{L_n : n ≥ 0} ⊕ F·C，
+      χ_{c,h} : b → F 由 L_0 ↦ h、C ↦ c、L_n ↦ 0 (n > 0) 给出。χ_{c,h} 是李代数同态
+      （b 的导代数落在 span{L_n : n > 0} 里），故延拓成代数同态 U(b) → F，
+      记其核为 m_{c,h} ⊂ U(b)。worldsheet.verma-module-v2 的左理想 J(c,h) 恰是 U(vir)·m_{c,h}，
+      因此
+        V(c,h) = U(vir)/J(c,h) ≅ U(vir) ⊗_{U(b)} F_{c,h}。
+
+  (2) **PBW（两次）**。三角分解给 F-模直和 vir = vir₋ ⊕ b。
+      对子代数 b ⊆ vir 用 math.pbw-theorem（及其「U(L) 作为 U(子代数)-模自由」的推论）得
+      U(vir) 作为**右** U(b)-模自由，自由基由只含 vir₋ 字母的有序单项式给出；张量掉 U(b) 后
+        V(c,h) ≅ U(vir₋) ⊗_F F_{c,h} ≅ U(vir₋)   （作为左 U(vir₋)-模），
+      同构把 1 送到 |c,h⟩。这就是目标 (1)：自由、秩 1、以 |c,h⟩ 为自由基。
+      再对 vir₋ 本身用一次 math.pbw-theorem，取全序基 L_{-1} < L_{-2} < …，得 U(vir₋) 的 F-基
+      由有序单项式给出；作用到 |c,h⟩ 上，按来源的写法（最大下标在最左）即
+        L_{-n_m} L_{-n_{m-1}} … L_{-n_1} |c,h⟩,   1 ≤ n_1 ≤ … ≤ n_m,
+      这是目标 (2)。
+
+  (3) **计数**。由 worldsheet.virasoro-algebra-v2 的括号，L_0 在上述基元上的本征值是 h + Σ_i n_i
+      （对 [L_0, L_{-n}] = n L_{-n} 逐个因子递推）。故 V_N 中的基元恰对应满足 n_1 + … + n_m = N、
+      1 ≤ n_1 ≤ … ≤ n_m 的序列，即 N 的整数分拆，个数 p(N)，给出目标 (3)。
+      N = 0 只有空积一项，故 dim_F V_0 = 1、|c,h⟩ ≠ 0，给出目标 (4)。
+
+  这条论证对**所有** (c,h) 一致成立：PBW 不看 (c,h) 取什么值。不可约性才看，那是
+  worldsheet.kac-determinant 的事。
+gaps:
+  - "**来源不给证明**。virasoro-lean-2025 §12 p.11 对本命题给的全部论证是一句
+     「From the PBW theorem, it can be seen that a basis of 𝒱_{c,h} is …」。summary 的三步是本图补写的
+     （标准的诱导模论证，任何李代数表示论教材都有，但**本图没有一份逐字来源把这三步写出来**）。
+     status 仍取 rigorous，理由：唯一的非平凡输入是 PBW，它有独立的来源节点（math.pbw-theorem）；
+     其余是有限步初等代数（张量积的基变换 + 分拆计数）。若 reviewer 认为这已越过
+     docs/STATUS_LEVELS.md 的门槛，应降到 physical-argument 并在此登记裁决。"
+  - "**没有带编号的一手来源（Q17）**。本命题在文献里通常不是编号命题（要么写进定义，要么作为
+     PBW 的即时推论一笔带过），见目标节点 notes。下一轮最值得抓的三个来源：Iohara–Koga (2011)、
+     Moody–Pianzola (1995)、Feigin–Fuks (1984)；本轮三者都拿不到公开全文，故未登记进 sources.bib。"
+  - "**上游的适用范围（Q15）**：到 math.pbw-theorem 的边标了 inferred——Humphreys 的语境是有限维半单，
+     而这里的 vir、vir₋ 是无限维。见该边的 note。"
+  - "**未形式化，且缺口是精确的一条上游定理**：Mathlib **没有** PBW（读取日期 2026-09-11）。
+     Kytölä 的 VirasoroProject 已形式化 Verma 模的理想商构造（vermaIdeal / VermaModule /
+     VermaModule.hwVec / VermaModule.universalMap / IsVermaModule），**唯独缺显式 PBW 基**，
+     且作者逐字自陈这些关于显式基的陈述 not yet formalized。
+     本图侧：worldsheet.verma-level-spanned-by-partitions（straightening 一半，dim V_N ≤ p(N)）
+     已形式化，**线性无关那一半没有**。⇒ 本推导上限 rigorous。"
+  - "**基环**。目标节点限定在特征零的域 F 上，只为使用「维数」与「分拆计数」的语言。
+     自由性 (1) 对任意交换环 R（vir₋ 作为 R-模自由）都成立，worldsheet.verma-module-v2 的构造本就对
+     任意 ℚ-代数成立。若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
+notes: |
+  **status 的选择**：rigorous。按 docs/STATUS_LEVELS.md 等级 4，非平凡输入（PBW）来自数学教科书里
+  已发表的完整证明，其余步骤是有限步纯代数。不标 formalized 的理由见 gaps 第四条。
+  论证里没有任何形式操作、渐近或路径积分，故没有理由降到 physical-argument。
+
+  **与 worldsheet.verma-module-pbw-basis 的关系**：本节点按来源（Kytölä §12）的设定与记号陈述代数核心；
+  那张卡是本项目面向弦论的版本，额外带形式特征标、项目自身的排序写法与 Lean 记账，
+  经 worldsheet.verma-module-pbw-basis--via-pbw 依赖本节点。
+  ⚠ **两张卡的 (1)(2)(3)(4) 内容高度重叠**，curator 已就「是否应把 worldsheet 那张卡 superseded_by
+  本节点、或反之」提请 lead / auditor 裁决；在裁决前两张都保留，重叠之处在双方 notes 里互相点名。
+author: curator
+created: "2026-09-11"

@@ -23,8 +23,10 @@ sources:
   - ref: schottenloher-2008
     loc: "Ch. 10, Theorem 10.10 (第 4 条 ⟺ 第 5 条), p. 178；系数分布的存在唯一性与 c^n(w) = Res_z (z−w)^n f(z,w) 见 Proposition 10.6, p. 175；p. 179 物理记号翻译段（A(z)B(w) ∼ Σ_{j=0}^{N−1} C^j(w)/(z−w)^{j+1}，「with the implicit assumption of |z| > |w| in order to justify 1/(z−w)^{j+1} = i_{z,w} 1/(z−w)^{j+1}」）；(10.2) p. 180：T(z)T(w) ∼ (c/2)/(z−w)⁴ + 2T(w)/(z−w)² + ∂_w T(w)/(z−w) 给出 Virasoro 关系的例子"
     note: |
-      **L1（researcher 2026-09-11，math-sources.md §11.3–§11.4）**。注意 p.180 正文两处「Theorem 10.5」「Lemma 10.5」
-      几乎肯定应为 Theorem 10.10（Q12），本推导按 10.10 引用。
+      **L1（researcher 2026-09-11，math-sources.md §11.3–§11.4 与 §11A）**。注意 p.179 一处、p.180 两处
+      共**三处**正文写「4 in Lemma 10.5」「our Theorem 10.5」「property 5 in Lemma 10.5」，
+      几乎肯定都应为 Theorem 10.10（Q12），本推导按 10.10 引用。
+      第 5 条求和下限的印本 j = 1 已判为排印错误（原 Q10，已结案），本推导按 j = 0，见 gaps。
   - ref: gui-2023-lectures
     loc: "2026-07-15 版, §7.7 p. 73–74：从复解析局域性经 OPE 推出 Lie 括号版（箭头图 Complex analytic –7.11→ OPE –7.12→ Lie algebraic），逐字「in the same way as deriving the algebraic Jacobi identity from the complex analytic one using residue theorem」"
     note: |
@@ -65,8 +67,15 @@ gaps:
      目标节点已把范围限定为玻色型，故这**不是**本推导与目标之间的缺口，而是**目标节点覆盖面的限制**：
      bc 部门的极点-对易子字典在本图中仍只有物理路线
      （worldsheet.ope-commutator-dictionary--via-contour-deformation）。"
-  - "Theorem 10.10 第 5 条求和下限的转录疑点（Q10：页图上疑似 j = 1 而非 j = 0）见
-     math.locality-ope-equivalences--via-schottenloher 的 gaps。本推导按 j = 0 写。"
+  - "**★ 已结案（原 Q10），仅留痕**：Theorem 10.10 第 5 条的求和下限**印本印作 j = 1**，
+     **本图判为排印错误，按 j = 0 写**（四条依据 + 反例见
+     math.locality-ope-equivalences--via-schottenloher 的 gaps 第一条与
+     literature/extractions/math-sources.md §11A.3）。
+     **本推导对这条结案有直接的自证**：summary (4) 的 Virasoro 例子里 C⁰ = ∂T ≠ 0，
+     若下限真是 j = 1 就会整个丢掉 [L_m, L_n] 中来自 ∂T 的 (m−n)L_{m+n} 项，
+     算不出 Virasoro 代数。**这正是判定排印错误的反例本身。**
+     ⚠ 反过来，**不要用 Schottenloher p. 179 的 Heisenberg 例子去验证下限**：该例 C⁰ = 0，
+     j = 0 与 j = 1 给出相同答案，对两者没有区分力。"
 notes: |
   **本推导取代 worldsheet.ope-commutator-dictionary--via-locality-theorem**（同一提交里删除，
   reviewer-batch3 必修第 3 条，curator 2026-09-11）。改动的实质只有一条：**换目标**。
