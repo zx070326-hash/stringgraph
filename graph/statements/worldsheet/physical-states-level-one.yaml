@@ -102,7 +102,7 @@ notes: |
   （`Fock.spuriousSubmodule`、`Fock.spuriousSubmodule_le_orthComplement`、
   `Fock.spurious_inf_physSubmodule_le_nullSubmodule`），本卡第 (3) 条正是走这条路线；
   但对应的图节点 worldsheet.ocq-spurious-states / worldsheet.spurious-orthogonal-to-physical
-  在 agent/curator/polchinski-ch4 分支上、2026-09-11 尚未合并 main，
+  在 agent/curator/polchinski-ch4 分支上、2026-09-11 已于 2026-09-11 合并 main，
   故本卡的推导**暂时**直接依赖 worldsheet.virasoro-generators-adjoint。
   那两个节点合并后，应在 worldsheet.physical-states-level-one--via-lean 的 depends_on
   里补上 worldsheet.spurious-orthogonal-to-physical（并把 adjoint 的边保留，
