@@ -5,6 +5,7 @@ Authors: stringgraph lean-formalizer
 
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
+import Mathlib.Tactic.FieldSimp
 import StringFormal.NoGhost.PhysicalStates
 
 /-!
@@ -611,6 +612,83 @@ theorem levelTwoScalar_mem_physSubmodule (hη : ∀ μ, η μ * η μ = 1) (a₀
     · exact Lop_apply_levelTwoScalar_of_three_le η a c₂ c₃ (by omega)
 
 end Lop
+
+/-! ### The closed form of the norm on the physical solution -/
+
+section ClosedForm
+
+variable [Algebra ℚ R] (η a : Fin D → R)
+
+/-- The `L_1` and `L_2` conditions together with the mass shell determine `c₂` up to the factor
+`4a₀ - 9`: `(4a₀ - 9) c₂ = -(D - 1)`. -/
+theorem four_mul_sub_nine_mul_coeff_two (a₀ c₂ c₃ : R)
+    (hmass : zeroModeSq η a = 2 * a₀ - 4)
+    (h1 : (2 : R) + 2 * c₂ + 2 * c₃ * zeroModeSq η a = 0)
+    (h2 : (D : R) + 2 * c₂ * zeroModeSq η a + c₃ * zeroModeSq η a = 0) :
+    (4 * a₀ - 9) * c₂ = -((D : R) - 1) := by
+  rw [hmass] at h1 h2
+  linear_combination h2 - invTwo R * h1
+    + (1 + c₂ + c₃ * (2 * a₀ - 4)) * two_mul_invTwo R
+
+omit [Algebra ℚ R] in
+/-- Likewise `(4a₀ - 9) (α_0·α_0) c₃ = D - 4a₀ + 8`. -/
+theorem four_mul_sub_nine_mul_coeff_three (a₀ c₂ c₃ : R)
+    (hmass : zeroModeSq η a = 2 * a₀ - 4)
+    (h1 : (2 : R) + 2 * c₂ + 2 * c₃ * zeroModeSq η a = 0)
+    (h2 : (D : R) + 2 * c₂ * zeroModeSq η a + c₃ * zeroModeSq η a = 0) :
+    (4 * a₀ - 9) * (zeroModeSq η a * c₃) = (D : R) - 4 * a₀ + 8 := by
+  rw [hmass] at h1 h2 ⊢
+  linear_combination (2 * a₀ - 4) * h1 - h2
+
+/-- **The level-two scalar norm** (graph node `worldsheet.ocq-level-two-scalar-norm`), in
+denominator-cleared form:
+
+`(4a₀ - 9)² ⟨ψ₂, ψ₂⟩ = 2 (D - 1) [16 a₀² + (2D - 74) a₀ + 84 - 3D]`.
+
+The hypotheses are exactly the physical-state conditions on `ψ₂`: the mass shell
+`α' k² + 2 = a₀`, written here as `α_0·α_0 = 2a₀ - 4`, and `L_1 ψ₂ = L_2 ψ₂ = 0` in the form
+produced by `Lop_one_apply_levelTwoScalar` / `Lop_two_apply_levelTwoScalar`.  The discriminant
+of the bracket in `a₀` is `4 (D - 1) (D - 25)`, the source of the critical dimension. -/
+theorem pairing_levelTwoScalar_physical (hη : ∀ μ, η μ * η μ = 1) (a₀ c₂ c₃ : R)
+    (hmass : zeroModeSq η a = 2 * a₀ - 4)
+    (h1 : (2 : R) + 2 * c₂ + 2 * c₃ * zeroModeSq η a = 0)
+    (h2 : (D : R) + 2 * c₂ * zeroModeSq η a + c₃ * zeroModeSq η a = 0) :
+    (4 * a₀ - 9) ^ 2 * pairing η (levelTwoScalar η a c₂ c₃) (levelTwoScalar η a c₂ c₃)
+      = 2 * ((D : R) - 1) * (16 * a₀ ^ 2 + (2 * (D : R) - 74) * a₀ + 84 - 3 * (D : R)) := by
+  have hc₂ := four_mul_sub_nine_mul_coeff_two η a a₀ c₂ c₃ hmass h1 h2
+  have hc₃ := four_mul_sub_nine_mul_coeff_three η a a₀ c₂ c₃ hmass h1 h2
+  rw [pairing_levelTwoScalar_self η a hη, hmass] at *
+  linear_combination (2 * (2 * a₀ - 4) * ((4 * a₀ - 9) * c₂ - ((D : R) - 1))) * hc₂
+    + (2 * ((4 * a₀ - 9) * ((2 * a₀ - 4) * c₃) + (D : R) - 4 * a₀ + 8)
+        + 4 * (4 * a₀ - 9)) * hc₃
+
+/-- Solving the two Virasoro conditions: over a field, whenever `4a₀ ≠ 9` and `k² ≠ 0` the
+level-two scalar physical state exists, and its norm is the closed form above. -/
+theorem exists_levelTwoScalar_mem_physSubmodule {K : Type*} [Field K] [Algebra ℚ K]
+    (η a : Fin D → K) (hη : ∀ μ, η μ * η μ = 1) (a₀ : K)
+    (hmass : zeroModeSq η a = 2 * a₀ - 4) (h9 : 4 * a₀ - 9 ≠ 0) (hs : zeroModeSq η a ≠ 0) :
+    ∃ c₂ c₃ : K, levelTwoScalar η a c₂ c₃ ∈ physSubmodule η a a₀ ∧
+      (4 * a₀ - 9) ^ 2 * pairing η (levelTwoScalar η a c₂ c₃) (levelTwoScalar η a c₂ c₃)
+        = 2 * ((D : K) - 1) * (16 * a₀ ^ 2 + (2 * (D : K) - 74) * a₀ + 84 - 3 * (D : K)) := by
+  rw [hmass] at hs
+  have hcond1 : (2 : K) + 2 * (-((D : K) - 1) / (4 * a₀ - 9))
+      + 2 * (((D : K) - 4 * a₀ + 8) / ((2 * a₀ - 4) * (4 * a₀ - 9))) * zeroModeSq η a = 0 := by
+    rw [hmass]
+    field_simp
+    ring
+  have hcond2 : (D : K) + 2 * (-((D : K) - 1) / (4 * a₀ - 9)) * zeroModeSq η a
+      + (((D : K) - 4 * a₀ + 8) / ((2 * a₀ - 4) * (4 * a₀ - 9))) * zeroModeSq η a = 0 := by
+    rw [hmass]
+    field_simp
+    ring
+  refine ⟨-((D : K) - 1) / (4 * a₀ - 9),
+    ((D : K) - 4 * a₀ + 8) / ((2 * a₀ - 4) * (4 * a₀ - 9)), ?_, ?_⟩
+  · refine levelTwoScalar_mem_physSubmodule η a hη a₀ _ _ ?_ hcond1 hcond2
+    rw [hmass]
+    linear_combination (a₀ - 2) * two_mul_invTwo K
+  · exact pairing_levelTwoScalar_physical η a hη a₀ _ _ hmass hcond1 hcond2
+
+end ClosedForm
 
 end Fock
 
