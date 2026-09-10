@@ -69,8 +69,10 @@
 - ~~`worldsheet.verma-module`~~ 已拆（v2 formalized + math.verma-module-free-over-negative-part），2026-09-11
 - ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
 - ~~待建：`math.euler-partition-generating-function`~~ 已建并 formalized（2026-09-11，任意交换环上无逆元形式）；Verma 特征标的形式化缺口现只剩 PBW 下界
-- `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
-- `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
+- ~~`worldsheet.critical-dimension-bosonic`~~ 已建 v2（四路线分列、a = 1 限开弦、intercept-sign 约定，2026-09-11）；ms.critical-dimension-bosonic 指向 v2，待 auditor 第一轮回译
+- `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞；末句 D<26 不被 no-ghost-v4 支撑）——**已派**
+- `worldsheet.critical-dimension-brst` / `-weyl-anomaly`（末句自带 c^m = D ⟹ D = 26 一步，应移出陈述改为依赖 free-boson-central-charge-d）——**已派**
+- 待建：闭弦截距 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a 卡——**已派**
 - ~~`worldsheet.brst-quantization`~~ 已建 v2（c^g 符号化，2026-09-11）；a^g = −1 仍在定义里，若 reviewer 坚持可再拆 v3
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
