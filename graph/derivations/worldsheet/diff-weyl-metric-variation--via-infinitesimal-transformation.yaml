@@ -1,28 +1,10 @@
 id: worldsheet.diff-weyl-metric-variation--via-infinitesimal-transformation
 target: worldsheet.diff-weyl-metric-variation
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: worldsheet.metric-variation-operator-p1
     note: 提供 P₁ 的定义，本式的对称无迹部分就是 −2 P₁δσ。
-  - id: worldsheet.polyakov-action-symmetries
-    inferred: true
-    note: |
-      inferred：抽取记录 E73 把依赖列为「§3.3 的 (3.3.16)」，没有回溯到对称性节点。
-      本条边记录的是「所考虑的变换群就是 Polyakov 作用量的 diff × Weyl」这一前提，
-      §5.2 只使用不论证。
-    convention_map: |
-      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian），
-      本推导在欧氏世界面（conv.worldsheet-euclidean）。换算按 conv.worldsheet-euclidean
-      的 Wick 旋转字典；李导数公式 δg_ab = −∇_aδσ_b − ∇_bδσ_a 与号差无关，
-      本条换算不引入新内容。继承该约定节点登记的缺口（Wick 旋转在路径积分层面无节点）。
-  - id: worldsheet.polyakov-weyl-invariance
-    inferred: true
-    note: |
-      inferred：同上，Weyl 参数 δω 的引入依赖 Weyl 是理论的对称性；§5.2 只使用。
-    convention_map: |
-      跨 family `worldsheet-signature`，换算同上一条。Weyl 变换 δg_ab = 2δω g_ab
-      在两种号差下逐字相同。
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.2, eq. (5.2.4)–(5.2.5), p.151；同式即 §3.3 的 (3.3.16)"
@@ -41,14 +23,23 @@ gaps:
     (5.2.4)，没有给出中间步骤，故本图**无法核实原书用的是哪一种符号约定**；
     本推导的分解在两种约定下同构（只差 δσ → −δσ），不影响下游的 ker P₁ 计数。
   - |
-    上面的代数是有限步初等计算，前提（二维、Levi-Civita 联络、对称无迹分解）已写全，
-    但**没有 reviewer 独立复核记录**，故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款
-    不能标 rigorous。
+    **本推导只覆盖代数分解本身**：「所考虑的变换群就是 diff × Weyl」是 §5.2 的
+    设定，不在本卡论证范围内（它由 Polyakov 作用量的对称性提供，见 notes）。
   - |
     **来源强度**：式号 (5.2.4)/(5.2.5) 只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）；
     本项目至今没有 Polchinski Vol.1 正文。
 notes: |
-  升级路径：这是本批中最容易升到 rigorous 的一条——只需 reviewer 复核上面三行代数
-  并在此写 `reviewer-verified: <agent>, <date>`（前提是接受李导数符号约定的选择）。
+  reviewer-verified: reviewer-ch5, 2026-09-11
+  —— reviewer 独立复核了 summary 里的分解（有限步初等代数，前提：二维、
+  Levi-Civita 联络、对称无迹 + 纯迹分解已写全），故按 docs/STATUS_LEVELS.md 的
+  rigorous 例外条款（lead 2026-09-10）标 kind: proof / status: rigorous。
+
+  **删掉的两条 inferred 边（reviewer-ch5, 2026-09-11）**：
+  原先挂有 worldsheet.polyakov-action-symmetries 与 worldsheet.polyakov-weyl-invariance
+  两条跨号差的 inferred 边。动机是记下「所考虑的变换群为何是 diff × Weyl」这个前提；
+  但本推导实际使用的只有李导数公式与 Weyl 变换的定义式，并不使用「它们是作用量的
+  对称性」这一事实；把两条跨号差边（各带 convention_map）挂在一条纯代数推导上，只会把
+  Wick 旋转的未登记缺口拖进本卡。动机保留在此；若下游需要该前提，应在使用它的
+  那张卡（如规范固定、Faddeev–Popov）上记账。
 author: curator-polchinski-ch5
 created: "2026-09-11"

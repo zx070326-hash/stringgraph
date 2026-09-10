@@ -18,6 +18,15 @@ depends_on:
       按 lead 2026-09-10 裁决，凡靠「围道变形 + OPE」的推导一律 physical-argument。
   - id: worldsheet.operator-product-expansion
     note: OPE 及其收敛性假定。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: true
+    note: |
+      inferred：抽取记录 #E85 没有列这条依赖（它只说「V 是维数 1 的主场」）。
+      加它的理由：本推导的关键前提是物质顶点算符对应的态满足 L_0^m = 1（从而
+      V 的权为 1，[Q_B, V] 才能合成全导数），而「物理态满足 (L_0 − a)|ψ⟩ = 0
+      与 L_n|ψ⟩ = 0 (n > 0)」正是本节点给的定义；L_0^m = 1 即 a = 1 的情形
+      （按 conv.intercept-sign-a；且只在 D = 26、a = 1 下与无鬼定理相洽）。
+      本边只承载「物理态条件提供 L_0^m = 1」这一步，不承载 a = 1 的确定。
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.4, eq. (5.4.5), p.161"
@@ -42,9 +51,10 @@ gaps:
     **j_B 表达式中 (3/2)∂²c 的系数本图未核实**（见 worldsheet.brst-current-bosonic-string 的
     statement (a)：它是全导数，不影响 Q_B，故本推导的结论不受影响）。
   - |
-    **「V 是维数 1 主场」这一前提本身在本图中没有独立节点**：它靠态-算子对应从
-    L_0^m = 1 读出，而「物理顶点算子满足 L_0^m = 1」是老协变/BRST 物理态条件的内容，
-    本推导没有把这条边显式挂上（该条件在 D = 26、a = 1 下才成立）。
+    **「V 是维数 1 主场」靠 a = 1**：它由态-算子对应从 L_0^m = 1 读出，
+    而 L_0^m = 1 是老协变/BRST 物理态条件在 a = 1 时的写法。对应的依赖边已挂上
+    （worldsheet.old-covariant-physical-states，inferred，reviewer-ch5 2026-09-11 建议），
+    但**a = 1 与 D = 26 本身不由本推导确定**，它们是未声明的前提。
   - |
     **来源强度**：式号 (5.4.5) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
 author: curator-polchinski-ch5

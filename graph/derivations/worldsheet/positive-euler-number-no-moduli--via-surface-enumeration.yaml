@@ -1,7 +1,7 @@
 id: worldsheet.positive-euler-number-no-moduli--via-surface-enumeration
 target: worldsheet.positive-euler-number-no-moduli
-kind: conjecture-support
-status: conjecture
+kind: physical-argument
+status: physical-argument
 depends_on:
   - id: worldsheet.moduli-condition-traceless-transverse
     note: 提供 μ 的定义（ker P̂₁^T ∩ 对称无迹），即被断言为零的对象。
@@ -21,34 +21,45 @@ sources:
     note: |
       抽取记录 #E76，L1（schrans-2020 笔记 p.252）。
 summary: |
-  原书把本条作为 (5.2.10) 的**对偶断言**给出（χ < 0 ⇒ κ = 0 的镜像）。
-  本图能核实到的唯一成文论证是间接的：闭可定向曲面 χ = 2 − 2g，χ > 0 迫使 g = 0；
-  连同带边与不可定向情形，χ > 0 的紧曲面只有球面、圆盘、射影平面三种，
-  而这三种都没有模。于是逐个枚举即得结论。
+  ⚠ **本推导的论证是本图补写的**，不是原书的：原书只把本条作为 (5.2.10) 的
+  **对偶断言**（χ < 0 ⇒ κ = 0 的镜像）给出，未附论证。
+
+  补写的枚举论证（两步）：
+  (1) **曲面分类**：紧二维曲面的 χ = 2 − 2g − b − c（g 为亩数、b 为边界分量数、
+      c 为交叉帽数）。χ > 0 只允许三种：球面 S₂（χ = 2）、圆盘 D₂（χ = 1）、
+      射影平面 RP₂（χ = 1）。
+  (2) **三个曲面各自 μ = 0**：逐个核实。
+  二者合起来就是结论。枚举本身是完备的；弱点全在两个输入的来源（见 gaps）。
 gaps:
   - |
-    **直接论证在本图中不存在**。抽取记录逐字记下伴读者「I have not been able to show in a
+    **原书未给直接论证**。抽取记录逐字记下伴读者「I have not been able to show in a
     satisfying way that for positive Euler numbers, the number of moduli is zero.
     I have tried two ways… But neither way has lead to anything useful.」
     **Polchinski 原书是否给出直接论证，本项目未核实**（无原书正文）。
+    因此 sources[] 里的 Polchinski 条目只承载**结论**，不承载上面的枚举论证。
   - |
-    **枚举路线所依赖的成文论证出自 schrans-2020，而按 lead 2026-09-10 裁决，个人笔记
-    不得作为 sources[] 条目承载论证。** 因此从本图的记账看，本命题目前**没有任何可用的
-    成文论证**，只有三个特例的核对。这正是 status 取 `conjecture` 而不是 `physical-argument`
-    的理由（docs/STATUS_LEVELS.md：conjecture = 有非平凡检验但无证明）。
+    **输入 (1)（曲面分类定理）在本图中无节点、无数学来源**。它本身是标准的代数拓扑
+    结果（可到 rigorous），但本图尚未登记来源；TODO（researcher）：登记一本拓扑教材。
   - |
-    **枚举路线的两个输入在本图中都还没有节点**：
-    (i) 「χ > 0 的紧二维曲面只有 S₂、D₂、RP₂」（曲面分类定理，无来源、无节点）；
-    (ii) 「S₂、D₂、RP₂ 各自 μ = 0」——原书在 §6.1/§6.4 给出（(6.1.5) 等），
-         属第 6 章，由另一名 curator 负责，本批未建。
+    **输入 (2) 的三个 μ = 0 当前均无可挂的节点**：
+    S₂ 与 D₂ 的 μ = 0（同时给出 κ = 6、3）属原书 §6.1/§6.4，已由 §6 分支的 curator
+    建成 worldsheet.sphere-conformal-killing-group / worldsheet.disk-conformal-killing-group，
+    但**该分支尚未合入 main**：**待 §6 合入后补边**。
+    **RP₂ 的 μ = 0 则连节点都缺**（本图目前没有任何射影平面的卡）。
+    在这三条边补齐之前，枚举的第二步在图上是**断言**。
   - |
     **来源强度**：式号 (5.2.10) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+    伴读者笔记中的同型枚举只作为旁证，按 lead 2026-09-10 裁决不进 sources[]。
 notes: |
-  升级路径（都不难，但都不在本批范围）：
-  (a) §6 的 curator 建成 S₂/D₂/RP₂ 的 μ = 0 节点后，把它们挂上来；
-  (b) 挂一个曲面分类定理的数学来源；
-  (c) 若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
-      改建一条 `--via-positivity` 推导，那条可以到 physical-argument 甚至更高。
-  完成 (a)+(b) 即可把本条升到 physical-argument（枚举是完备的）。
+  status 档位按 lead 2026-09-11 裁决（docs/STATUS_LEVELS.md 「断言 + 骨架」条）定为
+  physical-argument：枚举论证的骨架完整、缺口在 gaps 逐条记录，而结论本身在
+  文献中无争议，不属 `conjecture`（reviewer-ch5 建议）。
+  升级路径：
+  (a) §6 分支合入 main 后，把 sphere-/disk-conformal-killing-group 挂上来；
+  (b) 新建 RP₂ 的 κ/μ 节点；
+  (c) 登记曲面分类定理的数学来源；
+  (d) 若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
+      另建一条 `--via-positivity` 推导。
+  (a)+(b)+(c) 全部完成后，本条可按枚举的完备性重新评估是否能到 rigorous。
 author: curator-polchinski-ch5
 created: "2026-09-11"

@@ -28,8 +28,8 @@ statement: |
 uses:
   - worldsheet.genus-g-ghost-path-integral
   - worldsheet.gauge-fixed-measure-moduli-and-positions
-  - worldsheet.worldsheet-euler-number
-  - worldsheet.polyakov-action
+  - worldsheet.worldsheet-sum-over-topologies
+  - worldsheet.euler-number-weights-string-coupling
 uses_conventions:
   - conv.worldsheet-euclidean
   - conv.alpha-prime-regge
@@ -56,10 +56,12 @@ notes: |
   (iii) 上游 worldsheet.genus-g-ghost-path-integral 与
         worldsheet.genus-g-faddeev-popov-determinant 本身就是 physical-argument。
 
-  **本图缺的两条上游**：抽取记录 E80 把依赖列为 E47（世界面拓扑求和）与 E48（λχ 与弦耦合），
-  这两条在本图**尚无节点**（属第 3 章 §3.1–§3.2，前几批未建）。本卡改挂
-  worldsheet.worldsheet-euler-number（χ 本身）与 worldsheet.polyakov-action（S_m），
-  但「对拓扑求和」与「e^{−λχ} 是弦耦合展开」这两个内容目前在图中**没有承载节点**，
-  是一处已知缺口，建议 lead 派人补 E47/E48。
+  **E47/E48 上游已接上**（reviewer-ch5, 2026-09-11）：抽取记录 E80 把依赖列为
+  E47（世界面拓扑求和）与 E48（λχ 与弦耦合）。本卡初建时这两条还无节点，
+  故曾暂挂 worldsheet.worldsheet-euler-number 与 worldsheet.polyakov-action 作占位。
+  现已改挂真正的上游：worldsheet.worldsheet-sum-over-topologies（对拓扑求和的定义，
+  它自己 uses 里已含 polyakov-action）与 worldsheet.euler-number-weights-string-coupling
+  （e^{−λχ} 作为拓扑展开的耦合常数；它的推导 --via-topological-weight 依赖 worldsheet-euler-number）。
+  两条占位边因此删去，不会丢失可达性。
 author: curator-polchinski-ch5
 created: "2026-09-11"

@@ -13,17 +13,6 @@ depends_on:
       本推导把同一套论证从 ⟨T^a_a⟩ 搬到 ∇_a j^a。
   - id: worldsheet.operator-product-expansion
     note: 系数由 T(z)j(0) 的 OPE 三阶极点读出，故依赖 OPE 及其收敛性假定。
-  - id: worldsheet.euler-number-weyl-invariance
-    inferred: true
-    convention_map: |
-      跨 family `worldsheet-signature`：该节点写在洛伦兹世界面（conv.worldsheet-lorentzian），
-      本推导在欧氏世界面（conv.worldsheet-euclidean）。按 conv.worldsheet-euclidean 的
-      Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；曲率的 Weyl 变换式在两种号差下逐字相同。
-      继承该约定登记的缺口。
-    note: |
-      inferred：抽取记录 E81 没有列这条依赖。加它的理由是——「反常正比于 R」这个结论要有
-      规范无关的意义，必须知道 ∫√g R 在 Weyl 变换下的行为（它给出 χ）。
-      本条边只在下游（Riemann–Roch 推导）真正被用到，此处标 inferred 记账。
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.3, eq. (5.3.19), p.158；(2.5.15)；(3.4.9)；习题 3.6"
@@ -52,5 +41,11 @@ gaps:
     这一步在下游（Riemann–Roch）被当成前提使用，来源里没有证明。
   - |
     **来源强度**：式号 (5.3.19) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）。
+notes: |
+  reviewer-ch5 (2026-09-11) 指出：原先挂在这里的 `worldsheet.euler-number-weyl-invariance`
+  inferred 边其 note 自己就写明「本条边只在下游（Riemann–Roch 推导）真正被用到」，
+  即本推导并不使用它——挂在这里是自我否定的记账边，已删除。
+  「反常正比于 R 有规范无关意义」这一动机属于下游
+  worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly，应在那里记账。
 author: curator-polchinski-ch5
 created: "2026-09-11"
