@@ -3,7 +3,7 @@ target: worldsheet.critical-dimension-bosonic-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.critical-dimension-light-cone
+  - id: worldsheet.critical-dimension-light-cone-v2
     note: |
       供给 (I) 的全部内容（Δ_n 的显式形式与「当且仅当 D = 26 且 a = 1」）。
       这是四条路线中唯一同时定出 D 与 a 的一条。
@@ -13,6 +13,16 @@ depends_on:
       在实质上也是双向的。目标卡片 worldsheet.critical-dimension-bosonic-v2 的 (I) 末句
       仍含该半句（陈述不可变），里程碑 canonical_text 的【不断言】(6) 已显式免责；
       若日后换代 v3，应删去该半句或改写为「唯一以当且仅当形式**同时**给出 D 与 a」。
+      【2026-09-11 就地换代】原先指向 worldsheet.critical-dimension-light-cone，该卡已
+      superseded_by worldsheet.critical-dimension-light-cone-v2（v2 补上前提 **D ≥ 4** 并写出
+      「[J,J] = 0 ⟺ 对所有 n ≥ 1 有 Δ_n = 0」所需的线性无关一步；旧卡的 iff 在 D = 3 有反例：
+      单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，对易子对任意 (D, a) 都消失）。
+      改指的依据是 ms.critical-dimension-bosonic 第三轮回译审计裁定 3(a)，与本文件里
+      old-covariant / brst / open-string-intercept 三处「就地换代」同款处理。
+      ⚠ **换代带来一处方向不安全的记账缺口，属本推导目标卡的已知过度断言、不在此修**：
+      本推导的目标是**已被换代的**旧汇总卡，其路线 (I) 没有 D ≥ 4 的限定，而换代后的输入
+      路线卡有；故严格说本推导的 (I) 在 D ≤ 3 处无输入支撑。该缺口由
+      worldsheet.critical-dimension-bosonic-v3（(I) 已带 D ≥ 4）修正，本条只作记账。
   - id: worldsheet.critical-dimension-old-covariant-v2
     note: |
       供给 (II)。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
@@ -104,7 +114,8 @@ sources:
 summary: |
   本推导把 worldsheet.critical-dimension-bosonic-v2 的合取拆成它的各个合取项，
   逐条指到已有节点：
-    (I)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1
+    (I)   worldsheet.critical-dimension-light-cone-v2   光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1
+          （2026-09-11 前为 worldsheet.critical-dimension-light-cone；v2 补上前提 D ≥ 4）
     (II)  worldsheet.critical-dimension-old-covariant-v2  (D,a) = (26,1) 处等距同构；D > 26 有负模态
     (III) worldsheet.critical-dimension-brst-v2         Q_B² = 0 ⟺ c^m = 26（不给 a）
     (IV)  worldsheet.critical-dimension-weyl-anomaly-v2 c^m + c^g = 0 ⟺ c^m = 26（不给 a）

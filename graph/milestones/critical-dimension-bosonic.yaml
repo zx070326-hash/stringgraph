@@ -75,7 +75,10 @@ canonical_text: |
       维数计数与限制都排除不掉），故 (c) 在图内实际只覆盖 D = 4 与 D ≥ 6，D = 5 待补
       （该漏洞已记入上述推导的 gaps，待 reviewer 复核）。
       a = 1 出现在路线 (I) 与 (II) 的前提/结论里；路线 (III) 与 (IV) 完全不涉及 a。
-      本里程碑**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，本图未建节点。
+      本里程碑**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，
+      见 worldsheet.closed-string-intercept，本里程碑不使用它。
+      （2026-09-11 第三轮审计 F1：此处原写「本图未建节点」，该记账已过期——该节点存在且含推导
+      --via-light-cone-representation，v3 statement 也已引用它。改此一行不影响命题：两侧仍都不对闭弦作断言。）
       （节点：worldsheet.open-string-intercept-v2）
 
   【各路线的非严格步骤】本里程碑的四条路线中只有 (II) 在图中是 rigorous（2026-09-11 拆
@@ -134,7 +137,12 @@ canonical_text: |
         路线卡 worldsheet.critical-dimension-weyl-anomaly-v2 的 notes 仍把 Q6 记为开放疑问，
         换代时应改挂 §4.3 (4.3.9) 并删去该疑问（已记入 v3 推导的 gaps）。
     (V) 两条推导都是 physical-argument：光锥路线的输入是「谱须组织成洛伦兹小群表示」，
-        OCQ 路线的输入是「伪态必须解耦」，都是一致性要求而非定理；且光锥路线同样经过 ζ 正规化。
+        OCQ 路线的输入是「伪态必须解耦」，都是一致性要求而非定理。
+        （2026-09-11 第三轮审计 F2：此处原有末句「且光锥路线同样经过 ζ 正规化」，**已删**——
+        (V) 的光锥推导 worldsheet.open-string-intercept-v2--via-light-cone-representation 的
+        depends_on 是 light-cone-quantization、open-string-mass-shell、transverse-oscillator-commutators，
+        **不含** worldsheet.light-cone-normal-ordering-constant，其 gaps 逐字写「那条另外用了 ζ 正规化，
+        本条不用」。该记账在图上无边支撑。）
         a = 1 的**充分**方向（a = 1 时纵向态在 k² = 0 处退耦）已形式化，**排他性**方向未形式化。
 
   【独立性的限定】「四条独立论证」指**论证方式**独立，不指输入独立：
@@ -145,7 +153,15 @@ canonical_text: |
       （BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）；本里程碑不使用它，
       也不因此断言两条路线等价。
     - (I) 与 (II)(III)(IV) 之间的等价在本图中**无节点**。
-    - (I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、ζ 正规化的正规序常数）。
+    - (I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳 α'm² = N − a，其中 a 作为参数）。
+      （2026-09-11 第三轮审计 F2：原第三项「ζ 正规化的正规序常数」**已删**。两条理由：一，(V) 的光锥
+      推导在图上根本不挂 worldsheet.light-cone-normal-ordering-constant 这条边；二，本 canonical 的 (I)
+      已明说 ζ 值**不是** (I) 的前提（(I) 把 a 当待定参数），再说 (I)(V) 共享 ζ 处方与之自相矛盾。
+      ⚠ **statement 侧未同步**：worldsheet.critical-dimension-bosonic-v3 的【"独立"的确切含义】末条仍写
+      「(I) 与 (V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、正规序常数的正规化处方）」。
+      陈述卡不可变，本次**不动 v3**。该差异**无害**：这是一句关于图内输入的元断言，且方向是
+      v3 多说了一项共享输入——「多说的共享输入」只会让读者低估路线间的独立性，不会让任何命题变强，
+      故不影响 v3 与本 canonical 的命题内容，也不影响第三轮的 faithful 裁定。下次换代 v4 时同步删去。）
 
   【本里程碑不断言什么】
   (1) 不断言四条路线互相蕴含或等价（见上一节）。
@@ -327,6 +343,58 @@ audit:
       · 路线卡 brst-v2 / weyl-anomaly-v2 的「公共输入记在汇总卡片 …-bosonic-v2」仍指向 v2，未随换代更新。
     verdict: faithful
     diff_notes: |
+      【第三轮修订记，2026-09-11，lead 授权、curator 执行；**纯记账，不改命题，无需第四轮回译**】
+      auditor 第三轮裁定 **faithful** 并置 audit.status: back-translated，同时在 §2 与 §6 点名两处
+      「canonical 的图状态记账」交 curator 在船长批准前顺手改掉（逐字：「批准前建议 curator 改 F1（一行）
+      与 F2（两处删 ζ），两者都只动 canonical_text 的图状态记账，不动命题」）。本次执行如下，
+      **audit.status 维持 back-translated**（auditor 已明说不阻塞、第四轮只需复核这两行）：
+
+      F1（canonical (V) 末句）已改。原文「闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，
+        **本图未建节点**」→「…，见 worldsheet.closed-string-intercept，本里程碑不使用它」，并附一行
+        说明该记账为何过期。该节点确实存在（含推导 --via-light-cone-representation），v3 statement
+        也已引用它。两侧仍都不对闭弦作断言，命题不变。
+
+      F2（两处删 ζ）已改，且**只改 canonical、不动 v3**：
+        (i) 【独立性的限定】末条：「(I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、
+            **ζ 正规化的正规序常数**）」→ 删去第三项，改为「（横向振子对易关系、开弦质量壳
+            α'm² = N − a，其中 a 作为参数）」。
+        (ii) 【各路线的非严格步骤】(V) 末句「且光锥路线同样经过 ζ 正规化」→ **整句删去**。
+        依据（auditor 第三轮 F2 已核，本次复核一致）：(V) 的光锥推导
+        worldsheet.open-string-intercept-v2--via-light-cone-representation 的 depends_on 只有
+        light-cone-quantization / open-string-mass-shell / transverse-oscillator-commutators，
+        **不含** worldsheet.light-cone-normal-ordering-constant，其 gaps 逐字「那条另外用了 ζ 正规化，
+        本条不用」；而 (I) 的 --via-lorentz-algebra 含该 ζ 边。故「(I)(V) 共享 ζ 处方」在图上无边支撑。
+        ⚠ **v3 statement 含同款一句、本次不动**（任务书裁定）：v3 的【"独立"的确切含义】末条写
+        「(I) 与 (V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、正规序常数的正规化处方）」。
+        陈述卡不可变（原则 1），只能等下次换代。**该差异无害**，理由记录在此以备第四轮复核：
+        这是一句关于**图内输入**的元断言而非物理断言；差异方向是 v3 **多**列了一项共享输入，
+        而「多说的共享输入」只会让读者**低估**路线之间的独立性，不会使 v3 断言的任何命题变强，
+        故 v3 与本 canonical 的命题内容仍逐条等价，第三轮的 faithful 裁定不受影响。
+        v4 换代时同步删去该项。
+
+      同批落实的**路线卡侧**两项（auditor 第三轮 §3(a)(b)，不在本文件内，此处只登记）：
+        · 3(a) worldsheet.critical-dimension-light-cone 已换代为 -v2：新卡补上前提 **D ≥ 4**，
+          并写出「[J,J] = 0 ⟺ 对所有 n ≥ 1 有 Δ_n = 0」所需的线性无关一步；旧卡 statement 一字未动、
+          加 superseded_by。推导 --via-lorentz-algebra 已 git mv 为
+          worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra 并改 id/target。
+          **本 canonical 与 v3 的 (I) 不受影响**：两者早已带 D ≥ 4，换代后两侧前提一致，
+          此前登记的「v3 与 canonical 均弱于该路线卡、方向安全」这条记账随之消失
+          （canonical (I) 与 v3 (I) 里那句括注留待 v4 同步，属同类无害记账）。
+          顺带项（3(a) 末段）亦已落实：--via-lorentz-algebra 里 light-cone-normal-ordering-constant
+          那条边的 note 已拆清「ζ 只服务于 summary 第二段的 Polchinski 形状，主论证把 a 当自由参数」，
+          边保留、不改 inferred（该节点有来源支撑）。三条依赖边指向本路线卡的历史推导
+          （--via-three-routes、v2 的 --via-four-routes、v3 的 --via-four-routes）已一并就地改指 -v2。
+        · 3(b) worldsheet.open-string-intercept-v2--via-light-cone-representation：gaps 第 2 条
+          「D ≤ 4 的低维情形不在论证范围内」已改为 **D ≤ 3**（gaps 第 3 条已证 D = 4 被覆盖）；
+          summary 已补入「限制到 SO(D−2) 必须是矢量」这一步以排除 D−2 个单态（原先只在 gaps 第 3 条
+          对 D = 4 写出）。**canonical (V) 的维数范围（(a)(b) 对 D ≥ 2、(c) 图内覆盖 D = 4 与 D ≥ 6、
+          D = 5 待补）不变**，这两处修改只是把该范围的论证补全，未改变覆盖范围。
+
+      本文件本次**未动**：statement_id、canonical_source、audit.status、audit.back_translation 的
+      by/text/verdict，以及第三轮及以前的全部审计文本（下方原文逐字保留）。
+
+      ────────────────────────────────────────────────────────────────────────
+
       【第三轮审计，physics-auditor，2026-09-11。比对对象：v3 statement（含 uses_conventions 四张约定卡）↔ 本 canonical_text /
       canonical_source ↔ 四张路线卡 + open-string-intercept-v2 + old-covariant-v2 的 statement ↔ 推导 --via-four-routes(v3)、
       --via-lorentz-algebra、--via-light-cone-representation、--via-null-state-decoupling ↔ 抽取记录 §12.2 / §12.3 / §12.5 /

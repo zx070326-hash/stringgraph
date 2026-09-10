@@ -667,7 +667,7 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     assert tree["effective"] == "physical-argument"
     assert tree["own"] == "rigorous"
     assert {c["id"] for c in tree["children"]} >= {
-        "worldsheet.critical-dimension-light-cone",
+        "worldsheet.critical-dimension-light-cone-v2",
         "worldsheet.critical-dimension-brst-v2",
     }
 
