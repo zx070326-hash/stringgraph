@@ -170,6 +170,102 @@ lemma lie_lgen_four_desc1111 : ⁅VirasoroAlgebra.lgen R 4, desc1111 R c h⁆
   congr 1
   ring
 
+/-! ### Action of `L₃` on level 4: everything lands on `L₋₁|c,h⟩` -/
+
+/-- `L₁ L₋₂|c,h⟩ = 3 L₋₁|c,h⟩`. -/
+lemma lie_lgen_one_desc2 : ⁅VirasoroAlgebra.lgen R 1, desc2 R c h⁆ = (3 : R) • desc1 R c h := by
+  rw [desc2, leibniz_lie, lie_lgen_hwv_of_pos R c h one_pos, lie_zero, add_zero,
+    lie_lgen_one_neg_two, smul_lie, ← desc1]
+
+/-- `L₃ L₋₂|c,h⟩ = 0`. -/
+lemma lie_lgen_three_desc2 : ⁅VirasoroAlgebra.lgen R 3, desc2 R c h⁆ = 0 := by
+  rw [desc2, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 3), lie_zero,
+    add_zero, lie_lgen_three_neg_two, smul_lie,
+    lie_lgen_hwv_of_pos R c h one_pos, smul_zero]
+
+/-- `L₃ L₋₃L₋₁|c,h⟩ = (6h + 6 + 2c) L₋₁|c,h⟩`. -/
+lemma lie_lgen_three_desc31 : ⁅VirasoroAlgebra.lgen R 3, desc31 R c h⁆
+    = (6 * h + 6 + 2 * c) • desc1 R c h := by
+  rw [desc31, leibniz_lie, lie_lgen_three_desc1, lie_zero, add_zero, lie_lgen_three_neg_three,
+    add_lie, smul_lie, smul_lie, lie_lgen_zero_desc1, lie_cgen_eq, smul_smul, smul_smul,
+    ← add_smul, centralTerm_three]
+  congr 1
+  ring
+
+/-- `L₃ L₋₂²|c,h⟩ = 15 L₋₁|c,h⟩`. -/
+lemma lie_lgen_three_desc22 : ⁅VirasoroAlgebra.lgen R 3, desc22 R c h⁆
+    = (15 : R) • desc1 R c h := by
+  rw [desc22, leibniz_lie, lie_lgen_three_desc2, lie_zero, add_zero, lie_lgen_three_neg_two,
+    smul_lie, lie_lgen_one_desc2, smul_smul]
+  congr 1
+  norm_num
+
+/-- `L₃ L₋₂L₋₁²|c,h⟩ = (20h + 10) L₋₁|c,h⟩`. -/
+lemma lie_lgen_three_desc211 : ⁅VirasoroAlgebra.lgen R 3, desc211 R c h⁆
+    = (20 * h + 10) • desc1 R c h := by
+  rw [desc211, leibniz_lie, lie_lgen_three_desc11, lie_zero, add_zero, lie_lgen_three_neg_two,
+    smul_lie, lie_lgen_one_desc11, smul_smul]
+  congr 1
+  ring
+
+/-- `L₃ L₋₁⁴|c,h⟩ = (96h + 24) L₋₁|c,h⟩`. -/
+lemma lie_lgen_three_desc1111 : ⁅VirasoroAlgebra.lgen R 3, desc1111 R c h⁆
+    = (96 * h + 24) • desc1 R c h := by
+  rw [desc1111, leibniz_lie, lie_lgen_three_desc111, lie_smul, ← desc1, lie_lgen_three_neg_one,
+    smul_lie, lie_lgen_two_desc111, smul_smul, ← add_smul]
+  congr 1
+  ring
+
+/-! ### Action of `L₂` on level 4: everything lands on level 2 -/
+
+/-- `L₀ L₋₂|c,h⟩ = (h+2) L₋₂|c,h⟩`. -/
+lemma lie_lgen_zero_desc2 : ⁅VirasoroAlgebra.lgen R 0, desc2 R c h⁆
+    = (h + 2) • desc2 R c h := by
+  rw [desc2, leibniz_lie, lie_lgen_zero_hwv, lie_lgen_zero_neg_two, smul_lie, lie_smul,
+    ← desc2, add_comm, add_smul]
+
+/-- `L₂ L₋₂²|c,h⟩ = (8h + 8 + c) L₋₂|c,h⟩`. -/
+lemma lie_lgen_two_desc22 : ⁅VirasoroAlgebra.lgen R 2, desc22 R c h⁆
+    = (8 * h + 8 + c) • desc2 R c h := by
+  rw [desc22, leibniz_lie, lie_lgen_two_desc2, lie_smul, ← desc2, lie_lgen_two_neg_two,
+    add_lie, smul_lie, smul_lie, lie_lgen_zero_desc2, lie_cgen_eq, smul_smul, smul_smul,
+    ← add_smul, ← add_smul]
+  congr 1
+  linear_combination c * two_mul_centralTerm_two R
+
+/-- `L₂ L₋₂L₋₁²|c,h⟩ = 6h L₋₂|c,h⟩ + (4h + 8 + c/2) L₋₁²|c,h⟩`. -/
+lemma lie_lgen_two_desc211 : ⁅VirasoroAlgebra.lgen R 2, desc211 R c h⁆
+    = (6 * h) • desc2 R c h + (4 * h + 8 + centralTerm R 2 * c) • desc11 R c h := by
+  rw [desc211, leibniz_lie, lie_lgen_two_desc11, lie_smul, ← desc2, lie_lgen_two_neg_two,
+    add_lie, smul_lie, smul_lie, lie_lgen_zero_desc11, lie_cgen_eq, smul_smul, smul_smul,
+    ← add_smul, add_comm]
+  congr 2
+  ring
+
+/-- `L₂ L₋₁⁴|c,h⟩ = (36h + 24) L₋₁²|c,h⟩`. -/
+lemma lie_lgen_two_desc1111 : ⁅VirasoroAlgebra.lgen R 2, desc1111 R c h⁆
+    = (36 * h + 24) • desc11 R c h := by
+  rw [desc1111, leibniz_lie, lie_lgen_two_desc111, lie_smul, ← desc11, lie_lgen_two_neg_one,
+    smul_lie, lie_lgen_one_desc111, smul_smul, ← add_smul]
+  congr 1
+  ring
+
+/-! ### Action of `L₁` on `L₋₁⁴|c,h⟩` -/
+
+/-- `L₀ L₋₁³|c,h⟩ = (h+3) L₋₁³|c,h⟩`. -/
+lemma lie_lgen_zero_desc111 : ⁅VirasoroAlgebra.lgen R 0, desc111 R c h⁆
+    = (h + 3) • desc111 R c h := by
+  rw [desc111, leibniz_lie, lie_lgen_zero_desc11, lie_lgen_zero_neg_one, one_smul, lie_smul]
+  module
+
+/-- `L₁ L₋₁⁴|c,h⟩ = (8h + 12) L₋₁³|c,h⟩`. -/
+lemma lie_lgen_one_desc1111 : ⁅VirasoroAlgebra.lgen R 1, desc1111 R c h⁆
+    = (8 * h + 12) • desc111 R c h := by
+  rw [desc1111, leibniz_lie, lie_lgen_one_desc111, lie_smul, ← desc111, lie_lgen_one_neg_one,
+    smul_lie, lie_lgen_zero_desc111, smul_smul, ← add_smul]
+  congr 1
+  ring
+
 end Level4
 
 end StringFormal.Virasoro
