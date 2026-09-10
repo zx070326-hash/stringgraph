@@ -1,21 +1,29 @@
 id: ms.no-ghost-theorem
-statement_id: worldsheet.no-ghost-theorem-v2
+statement_id: worldsheet.no-ghost-theorem-v3
 canonical_text: |
-  对 D 维自由玻色开弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态；
-  零模态指与所有物理态正交的物理态，H_0 为其张成的子空间。
-  (1) 当 D = 26 且 a = 1 时，物理态空间上的内积半正定，且商空间 H_phys/H_0 与 24 个横向振子的
-      Fock 空间**等距同构**（保内积的线性双射），同构由 DDF 态给出。该断言限制在动量 k 与所选
-      类光参考动量 k_0 满足 k·k_0 ≠ 0 的扇区；k·k_0 = 0（特别是 k = 0）的扇区不在本里程碑范围内。
+  对 D 维自由玻色开弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态
+  （截距记号 a 按 conv.intercept-sign-a，即 Polchinski 的 A = -a）；零模态指与所有物理态正交的物理态。
+  一切断言在**固定动量**下进行：F(p) 是建在动量本征态 |0; p⟩ 上的 Fock 空间，H_phys(p) = H_phys ∩ F(p)；
+  质量壳 α' m^2 = N - a（m^2 = -p^2）把 H_phys(p) 中态的振子能级定为 N = a - α' p^2。
+  (1) 当 D = 26 且 a = 1 时，固定一条类光参考方向（射线 {λ k_0 : λ > 0}，k_0^2 = 0；k_0 的标度按 DDF
+      归一化 2α' k_0·p = 1 逐塔取定，条件 k_0·p ≠ 0 只依赖方向、不依赖标度）：
+      (a) 对扇区 {p : k_0·p ≠ 0} 内每个动量 p 与每个 |ψ⟩ ∈ H_phys(p)，⟨ψ|ψ⟩ ≥ 0（半正定）；
+      (b) 对每个在快子壳上（α' k^2 = a = 1）且 k_0·k ≠ 0 的动量 k，把物理态限制到动量塔
+          {k - N k_0 : N ≥ 0} 上得到 H_phys(k; k_0) = ⊕_{N ≥ 0} H_phys(k - N k_0)，模掉其零模态子空间
+          H_0(k; k_0) 后诱导内积正定；并且包含映射诱导出与横向 DDF Fock 空间 H^⊥(k)
+          （由 24 个横向 DDF 算子 A^i_{-n}，i = 2..25，n ≥ 1，作用在 |0; k⟩ 上生成）之间的**等距同构**
+          （保内积的线性双射）。该同构保持**能级 N** 分级（不是 L_0 分级：在 H_phys 上 L_0 ≡ a = 1 是常数，
+          L_0 分级平凡）。
+      k_0·k = 0 的动量扇区（特别是 k = 0）不在本里程碑范围内：DDF 构造在那里退化。
   (2) 当 D > 26 时，**至少在 a = 1 的情形**存在负模物理态。
-      （依本文件下方审计建议 C2，显式写出对 a 的量化：本里程碑只断言 a = 1。文献中更强的形式"对任意 a 均存在负模物理态"
-      通常归于 Brower 1972 / Thorn，其出处与确切条件尚未核实，故不纳入 canonical_text。）
-  本里程碑不对 D ≤ 25 作任何断言：旧陈述的"D ≤ 26 且 a ≤ 1 ⇒ 半正定"已被本文件下方审计记录 B1 证伪，
-  正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)。
+      （依第二轮审计建议 C2 显式写出对 a 的量化：本里程碑只断言 a = 1。文献中更强的形式"对任意 a 均存在
+      负模物理态"通常归于 Brower 1972 / Thorn，其出处与确切条件尚未核实，故不纳入 canonical_text。）
+  本里程碑不对 D ≤ 25 作任何断言（无论 a 取何值），也不对 D = 26、a ≠ 1 作断言。
 canonical_source:
   ref: goddard-thorn-1972
   loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
-  status: back-translated
+  status: draft
   back_translation:
     by: physics-auditor
     text: |
@@ -55,6 +63,14 @@ audit:
         Q4 |0; k⟩ 未要求 k 在快子壳（α' k^2 = a = 1）上；不在壳则 H^⊥ ⊄ H_phys。
     verdict: drift
     diff_notes: |
+      【v3 变更记】2026-09-10 lead 按第二轮审计建议改指 v3，等待第三轮回译。
+      具体：statement_id 由 worldsheet.no-ghost-theorem-v2 改为 worldsheet.no-ghost-theorem-v3
+      （新建节点，v2 加 superseded_by 保留作历史）；canonical_text 按 v3 改写（F1：(1) 改为逐动量塔
+      表述、分级写成能级 N、删去下方 A3 指出的无来源句"正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)"，
+      保留"不对 D ≤ 25 作任何断言"）；DDF 节点同时升级为 worldsheet.ddf-operators-v3（F3：归一化改为
+      一般 α' 的 2α' k_0·p = 1）；audit.status 由 back-translated 改回 draft。
+      以下 back_translation 与 diff_notes 全部是**针对 v2 的历史记录**，原样保留，未按 v3 更新。
+
       ================================================================
       第二轮（2026-09-10，针对 worldsheet.no-ghost-theorem-v2 与改写后的 canonical_text）
       ================================================================

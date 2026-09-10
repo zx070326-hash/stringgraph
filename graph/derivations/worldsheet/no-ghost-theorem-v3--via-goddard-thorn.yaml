@@ -1,0 +1,80 @@
+id: worldsheet.no-ghost-theorem-v3--via-goddard-thorn
+target: worldsheet.no-ghost-theorem-v3
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.old-covariant-physical-states
+  - id: worldsheet.ddf-operators-v3
+  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.kac-determinant
+    inferred: true
+    note: |
+      Goddard–Thorn 原文不引用 Kac 行列式（1979 年才有）。现代数学化表述
+      （如 Frenkel–Garland–Zuckerman 1986 的 BRST 上同调证明）会用到 Verma 模结构。
+      标 inferred 表示"现代严格证明依赖它"而非"原文依赖它"。
+sources:
+  - ref: goddard-thorn-1972
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      2026-09-10 核实（brst-cohomology-sources.md §3.1）：正文四条路径全部失败，
+      文中是否有编号定理不能确认也不能否认；三条间接证据（Goddard 2008 综述复述时不给编号、
+      FGZ 1986 引为 ref 8 时不给编号、该刊 4 页快报体例）一致指向"无编号"。
+      摘要不提 intercept，本条只覆盖 a = 1。
+  - ref: brower-thorn-1971
+    loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
+    note: |
+      支持本推导第 (2) 条（D > 26 有负模）的候选来源。Goddard 2008（作者本人综述，见 goddard-2008）
+      把「D > 26 时物理态中出现鬼」归给 Brower–Thorn 1971（其 ref [29]），而不是 1972 年那两篇。
+      但 Brower–Thorn 1971 摘要只提 leading nine trajectories，无维数条件。
+      二手归属与一手摘要存在张力，未裁决，如实登记。见 brst-cohomology-sources.md §3.2。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（逐字：'The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.'）"
+    note: |
+      作者本人的历史综述，是 goddard-thorn-1972 / brower-1972 适用范围的二手（L3）证据来源：
+      (a) 通篇在 α_0 = 1 下陈述无鬼定理（逐字「If α_0 = 1 … so that Virasoro's conditions obtain」，
+          并称 α_0 = 1「we shall in general take to be the case in what follows」）；
+      (b) D < 26 不是独立情形，而是由嵌入 D = 26 得到；
+      (c) D > 26 出鬼归给 Brower–Thorn 1971；
+      (d) 「physical state = DDF 态 + 零模态」的写法是本推导第 (1b) 步的直接依据。
+      综述本身不含新证明，故只作为归属与适用范围的证据，不作为本推导的数学来源。
+  - ref: fgz-1986
+    loc: "Theorem 2.8 第二个同构（T ∩ P ≅ P/rad P），固定动量 p ≠ 0，维数 p_{(24)}(1 - p·p/2)"
+    note: |
+      编号已核实（brst-cohomology-sources.md §1.3）。这是目标陈述采用**逐动量**表述的可引用依据，
+      也是 (1b-i) 正定性的可引用依据（原文逐字「All three isomorphic spaces are positive definite」）。
+      FGZ 的横向空间 T 与本推导用的 DDF Fock 空间 H^⊥(k) 实现方式不同（见目标节点 sources 的注）。
+  - ref: brower-1972
+    loc: "§II–III（节号未核实）"
+    note: |
+      用谱生成代数（Virasoro 代数在物理态空间上的作用）给出的独立证明。
+      节号形式沿用 v2 的推导，节号本身未与原文核对（APS 403，正文未获取），需 researcher 补齐。
+  - ref: gsw-1987-v1
+    loc: "§2.3.2–2.3.3（教科书版本）"
+    note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+summary: |
+  本推导与 worldsheet.no-ghost-theorem-v2--via-goddard-thorn 是同一个论证，只是目标陈述换成了
+  逐动量塔表述的 v3（审计 B1/B2），论证强度不变（status 仍为 rigorous）。
+
+  第 (1) 条：设 D = 26、a = 1，固定类光方向 k_0（标度按 2α' k_0·p = 1 逐塔取定，
+  worldsheet.ddf-operators-v3）。DDF 算子 A^i_n（i = 2..25）与所有 L_m 对易，满足横向振子代数
+  [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，且把动量移到 p + n k_0。取快子壳上的基态 |0; k⟩
+  （α' k^2 = 1，k_0·k ≠ 0，它本身是物理态），则 A^i_{-n} 生成的全部态都是物理态，动量落在塔
+  {k - N k_0 : N ≥ 0} 上，能级 N = Σ_j n_j，其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵。
+  再证塔上任意物理态可写成 DDF 态加零模态（Goddard 2008 的「physical state = DDF + null」形式），
+  于是 ⟨ψ|ψ⟩ ≥ 0，且包含映射诱导的 H^⊥(k) → H_phys(k;k_0)/H_0(k;k_0) 是保内积的双射（等距同构），
+  逐能级 N 成立故保 N 分级。（分级用 N 而非 L_0：H_phys 上 L_0 ≡ a 是常数。）
+  第 (2) 条：D > 26、a = 1 时，在 DDF 态之外还需要纵向（Brower/DDF 纵向算子）方向，
+  用它们显式构造出负模物理态。与此一致的独立核算：level-2 标量物理态的模正比于
+  (D-1)[16a^2 + (2D-74)a + 84 - 3D]，在 a = 1 处为 (D-1)(26-D)，D > 26 时严格为负
+  （ms.no-ghost-theorem 第一轮审计 B1 的精确计算；第二轮审计在 N ≤ 3 上数值复核了 D = 26,27,28）。
+gaps:
+  - "本推导只覆盖目标陈述的两条：D = 26、a = 1 与 D > 26、a = 1。D ≤ 25、a ≤ 1 的无鬼性（通常归于 Brower 1972 / Thorn）不在本陈述内，需另建节点；最早的 worldsheet.no-ghost-theorem 把它写成\"D ≤ 26 且 a ≤ 1\"是错的（第一轮审计 B1：D = 26、3/8 < a < 1 时 level-2 已有负模）。"
+  - "第 (2) 条对一般 a 的加强（\"D > 26 时对任意 a 均有负模态\"）未纳入陈述：goddard-thorn-1972 与 brower-1972 均无抽取记录，无法核实该加强的出处与条件（第一轮审计 B4）。本推导只支持 a = 1 的弱形式。"
+  - "goddard-thorn-1972 的 loc 已按核实结果改为「无编号；摘要末句」：原先写的 \"Theorem 1\" 无任何来源支持（brst-cohomology-sources.md §3.1）。brower-1972 的 §II–III 仍是未核实的定位（APS 403，正文未获取）。两篇 1972 年论文的正文都未获取，故本推导的可追溯性仍弱于 status: rigorous 通常要求的水平——这是本推导目前最大的问题。"
+  - "两篇 1972 年论文（按可得证据）都只覆盖 a = 1：goddard-thorn-1972 摘要不提 intercept（Veneziano 模型以 α_0 = 1 为前提），brower-1972 摘要把结果限定在 unit Regge intercept。Goddard 2008 综述通篇在 α_0 = 1 下陈述，且完全不讨论 α_0 < 1。故 a ≤ 1 的一般情形**没有可引用的一手或权威二手来源**（brst-cohomology-sources.md §4.1）。"
+  - "从物理文献到形式化的差距：需要把\"DDF 态张成 H_phys 模零模态\"这一步写成 Fock 空间上的线性代数命题（含 k_0·k ≠ 0 扇区的显式处理）。抽取记录 E68 建议对照 BRST 版本（worldsheet.no-ghost-theorem-brst）的分级 + 三角矩阵论证，后者更接近可形式化的形式。"
+  - "零动量 / k_0·k = 0 扇区被陈述显式排除，本推导不覆盖。"
+  - "【v3 新增】目标陈述的\"逐动量塔\"打包（对固定 k 取 ⊕_{N≥0} H_phys(k - N k_0) 再模零模态）是本项目对文献表述的规范化，没有一处来源逐字如此写：GT 1972 / GSW / Goddard 2008 用的是\"每个物理态 = DDF 态 + 零模态\"的形式（不做动量记账），FGZ 1986 Theorem 2.8 在固定单个动量（单个能级）上陈述且横向空间 T 的实现方式不同。打包本身是初等的直和（不同动量的 Fock 态正交），但\"H^⊥(k) 的 DDF 能级等于 H_phys 一侧的振子能级\"这一步在文献里是隐含的记账，形式化时必须显式证明。"
+  - "【v3 新增】基态在壳条件 α' k^2 = a = 1 与归一化 2α' k_0·k = 1 的一般 α' 形式来自本项目的量纲恢复（worldsheet.ddf-operators-v3 说明 (c)），文献均在 α' = 1/2 下工作。换算是初等的，但无逐字来源。"
+author: "curator（复制自 worldsheet.no-ghost-theorem-v2--via-goddard-thorn，target 改 v3、依赖改 ddf-operators-v3、summary 按逐动量塔与 N 分级改写；status/sources/原有 gaps 未变）"
+created: "2026-09-10"

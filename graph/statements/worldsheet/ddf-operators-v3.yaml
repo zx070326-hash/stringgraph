@@ -1,0 +1,88 @@
+id: worldsheet.ddf-operators-v3
+kind: definition
+status: rigorous
+title: DDF 算子（横向指标 i = 2..D-1；一般 α' 下归一化 2α' k_0·p = 1）
+statement: |
+  横向指标约定与 worldsheet.light-cone-quantization 一致：i = 2..D-1（共 D-2 个横向方向），
+  0、1 方向组成光锥对 ±。
+
+  设 F(p) 是 D 维自由玻色开弦建在动量本征态 |0; p⟩ 上的 Fock 空间（振子 α^μ_n，
+  零模 α^μ_0 = (2α')^{1/2} p^μ，α' 见 conv.alpha-prime-regge）。
+
+  取一条**类光参考方向**，即由某个类光向量张成的射线 {λ k_0 : λ > 0}（k_0^2 = 0），
+  以及横向偏振 ε^i（i = 2..D-1，ε·k_0 = 0）。DDF 算子定义为
+
+    A^i_n := ∮ (dz / 2πi) ∂X^i(z) e^{i n k_0·X(z)}，   i = 2..D-1，n ∈ Z \ {0}，
+
+  其中 k_0 在该射线上的**标度**取为使
+
+    2 α' k_0·p = 1                                                (★)
+
+  （p 是被作用态的动量）。特别地要求 k_0·p ≠ 0。
+
+  关于 (★) 的三点说明，它们是定义的一部分：
+
+  (a) 条件 k_0·p ≠ 0 只依赖 k_0 的**方向**，不依赖标度：k_0 → λ k_0（λ > 0）仍类光，
+      且 k_0·p ≠ 0 保持成立。标度由 (★) 唯一确定为 λ = 1/(2α' k_0·p)。
+      故"固定 k_0"在本图中一律理解为"固定类光方向"，标度按 (★) 逐塔确定。
+
+  (b) (★) 沿一条 DDF 塔不变：A^i_n 把动量 p 移到 p + n k_0（顶点算子 e^{i n k_0·X} 携带动量
+      n k_0），而 k_0^2 = 0 蕴含 k_0·(p + n k_0) = k_0·p，故若 (★) 对 p 成立则对整条塔
+      {p + n k_0 : n ∈ Z} 同时成立：一次重标度覆盖整条塔。跨塔（k_0·p 取不同值的动量）
+      需要不同的 λ，但按 (a) 这不改变扇区 {p : k_0·p ≠ 0}。
+
+  (c) (★) 的来源是单值性：∂X^i(z) e^{i n k_0·X(z)} 与动量 p 的态的 OPE 带因子
+      z^{2α' n k_0·p}（开弦边界归一化），围道积分要良定义需 2α' n k_0·p ∈ Z 对所有 n ∈ Z 成立，
+      即 2α' k_0·p ∈ Z；(★) 取该整数为 1。在 α' = 1/2 的归一化下 (★) 退化为文献常见的
+      k_0·p = 1（worldsheet.ddf-operators-v2 与 GSW 采用的形式）。
+
+  DDF 算子与所有 Virasoro 生成元对易，[L_m, A^i_n] = 0
+  （因 k_0^2 = 0、ε·k_0 = 0 使被积量是权 1 primary），且满足横向振子代数
+
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+
+  即一个 D-2 维横向自由振子代数。
+uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      沿用 worldsheet.ddf-operators-v2 的核实结果（literature/extractions/brst-cohomology-sources.md §5.2–5.3）：
+      §2.3.2 的标题是 'Construction of transverse physical states'，只占 p.100–101；DDF 与
+      spectrum-generating algebra 按目录属 §2.3.3（p.102–112），Google Books 全文检索 'DDF'
+      正文首次命中 p.103。章节页码来自 CUP 25 周年版 frontmatter（L4，未逐字核对）+ Google Books
+      页码定位。**式号仍未核实（L0）**。GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
+      GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1，是 (★) 的特例；一般 α' 的形式 (★) 不出自 GSW，见 notes。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实）"
+    note: 式号沿用旧节点 worldsheet.ddf-operators，未与原文核对；GT 1972 正文未获取，未在 literature/extractions/ 登记。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（DDF 构造需要 k_0·p ≠ 0 的注记；页码/式号未核实）"
+    note: |
+      ms.no-ghost-theorem 第一轮审计 B6 指出 Polchinski §4.1 有此注；抽取记录
+      literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
+tags: [bosonic-string, spectrum-generating-algebra]
+notes: |
+  取代 worldsheet.ddf-operators-v2。变更原因是 ms.no-ghost-theorem 第二轮审计 C2：
+  v2 的归一化写作 k_0·p = 1，只在 α' = 1/2 时给出整数的动量/能级移动；在
+  conv.alpha-prime-regge 保留一般 α'（α^μ_0 = (2α')^{1/2} p^μ）下，单值性要求
+  2α' n k_0·p ∈ Z，正确条件是 2α' k_0·p = 1。v2 的 notes 本已承认"未改动量纲/α' 因子"。
+  同时按审计 C1 把"固定 k_0 的方向 / 类光重标度不改变条件 / 标度沿塔不变"写进陈述本体
+  （说明 (a)(b)），这三点在 v2 里只隐含在"归一化使 k_0·p = 1"一句中。
+
+  相对 v2 的其余改动都是显式化，不改内容：
+  - 显式引入固定动量的 Fock 空间 F(p) 与零模 α^μ_0 = (2α')^{1/2} p^μ；
+  - 显式写出 A^i_n 把动量移到 p + n k_0（v2 未写，但为 worldsheet.no-ghost-theorem-v3
+    的逐动量塔表述所必需；它直接由顶点算子 e^{i n k_0·X} 携带动量 n k_0 读出）；
+  - 说明 (c) 给出 (★) 的单值性理由。
+  横向指标范围 i = 2..D-1、参考动量记号 k_0 与态动量记号 p 的区分，均与 v2 相同。
+
+  【来源强度】(★) 的一般 α' 形式**没有直接的文献定位**：GSW 与 GT 均在 α' = 1/2（或等价的
+  单位 Regge 斜率）归一化下工作，写的是 k_0·p = 1。本节点把 α' 因子按量纲恢复，依据是说明 (c)
+  的单值性计算（初等，可自洽核验：α' = 1/2 时退化为 k_0·p = 1）。这属于本项目对文献归一化的
+  换算，不是新物理内容；若 researcher 日后拿到 GT 1972 正文或 GSW 原式号，应把 loc 补精确。
+
+  k_0·p = 0 的扇区（特别是 p = 0）DDF 构造退化，需单独处理（第一轮审计 B6）。
+author: curator
+created: "2026-09-10"

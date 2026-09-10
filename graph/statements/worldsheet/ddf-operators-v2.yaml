@@ -36,7 +36,17 @@ sources:
       ms.no-ghost-theorem 审计 B6 指出 Polchinski §4.1 有此注；抽取记录
       literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
 tags: [bosonic-string, spectrum-generating-algebra]
+superseded_by: worldsheet.ddf-operators-v3
 notes: |
+  【已被取代】本节点的归一化写作 k_0·p = 1，只在 α' = 1/2 时正确：在 conv.alpha-prime-regge
+  保留一般 α'（α^μ_0 = (2α')^{1/2} p^μ）下，e^{i n k_0·X(z)} 作用在动量 p 的态上的单值性要求
+  2α' n k_0·p ∈ Z，正确条件是 2α' k_0·p = 1（见 graph/milestones/no-ghost-theorem.yaml
+  第二轮审计 C2；本节点 notes 下方本已承认"未改动量纲/α' 因子"）。此外审计 C1 指出，
+  "固定 k_0"应写成"固定 k_0 的方向"——类光重标度不改变条件 k_0·p ≠ 0，标度沿一条 DDF 塔不变、
+  跨塔才需重取。修正版本见 worldsheet.ddf-operators-v3。
+  按项目规则陈述文本不可变，本节点保留作历史；引用它的旧推导
+  worldsheet.no-ghost-theorem-v2--via-goddard-thorn 一并保留不动。
+
   取代 worldsheet.ddf-operators。旧节点把横向指标写作 i = 1..D-2，与已合并的
   worldsheet.light-cone-quantization（i = 2..D-1）记号不一致；本节点统一为 i = 2..D-1。
   除指标范围、参考动量的记号（旧节点写 k，本节点写 k_0，以便与态动量 p 区分）
