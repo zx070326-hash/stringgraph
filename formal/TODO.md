@@ -480,13 +480,30 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       只能从 `LieRing.of_associative_ring_bracket` 重证）。
     - **仍缺**：`m ≤ -1`（需 (3f)）与 `m = 0`（`Fock.lie_Lop_vertexOsc_of_pos` 假设 `0 < m`，
       `m = 0` 不是它的特例，参见 (3c) 的同类现象）。因此
-      `worldsheet.ddf-commute-with-virasoro` 只形式化了一半，
-      「`A^ε_n` 保持 `physSubmodule`」还不能证（`L_0` 条件缺；且 `physSubmodule`
-      目前只在单个 Fock 空间上，塔上的物理子模尚未定义）。
+      `worldsheet.ddf-commute-with-virasoro` 只形式化了一半。
+  - [x] (4b) **塔上的物理子模与「`A^ε_n` 保持正模条件」**：
+    `StringFormal/NoGhost/TowerPhysical.lean`，无 sorry，8 条声明公理只有标准三条。
+    - `towerPositiveModeSubmodule η a b = {Ψ | ∀ m ≥ 1, L_m Ψ = 0}`（只正模条件），
+      展开引理 `mem_towerPositiveModeSubmodule`。
+    - **`ddfOp_mem_towerPositiveModeSubmodule`**：`k_0² = 0`、`2α' k_0·p = 1`、`ε·k_0 = 0`，
+      `Ψ` 满足正模条件 ⟹ `A^ε_n Ψ` 也满足。证明是 `lie_towerLop_ddfOp_of_pos` 的
+      一行推论：`L_m (A_n Ψ) = A_n (L_m Ψ) + ⁅L_m, A_n⁆ Ψ = 0 + 0`。
+    - `towerL0Submodule η a b a₀`、`towerPhysSubmodule η a b a₀`（= L_0 条件 ⊓ 正模条件）
+      及其展开引理：**已定义但无保持性定理**。
+    - **数学上的一个订正**：最初以为 `L_0` 条件在塔上逐层截距不同、不能用单一 `a₀`，
+      这是错的。`towerLop η a b 0` 本就按各层自己的动量 `p_j = a + j·b` 求值，
+      所以单一 `a₀` 是正确且均匀的条件；它在层 `j`、振子 level `N` 上读作
+      `α'k² + j + N = a₀`，恰好选出反对角线 `j + N` 为常数。
+      `invTwo_zeroModeSq_towerMomentum_add_shift_cancel` 把这个抵消写成引理：
+      `ddfSummand η a b ε n j` 把层 `+n`（`towerVertex_single`）、level `-n`
+      （顶点算子 `+(j-n)`、`α^ε_j` `-j`），`L_0` 本征值不变，且与求和指标 `j` 无关。
+      **因此阻碍不在塔结构，而纯粹在 `m = 0` 括号未形式化。**
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
-  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
-    所以「`A^ε_n` 把物理态送到物理态」还证不了。
+  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做。
+    正模条件那一半已经形式化（见 (4b) `ddfOp_mem_towerPositiveModeSubmodule`），
+    剩下的就是 `⁅L_0, A^ε_n⁆ = 0`；有了它就能直接得到
+    「`A^ε_n` 保持 `towerPhysSubmodule`」。
   - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
   - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
