@@ -10,9 +10,22 @@ sources:
   - ref: maldacena-1997
     loc: "§2"
 summary: |
-  D3 膜的两种描述（开弦/闭弦）在近视界退耦极限下的匹配，加上对称性（PSU(2,2|4)）匹配
-  与大量后续检验。无证明。
+  D3 膜的两种描述（开弦/闭弦）在近视界退耦极限下的匹配，加上对称性匹配
+  （原文写 SO(2,4)×SO(6) 与"the superconformal group"）与大量后续检验。无证明。
 gaps:
   - "依赖节点为占位，Phase 3 建立 D 膜与 IIB 超引力节点后替换。"
+notes: |
+  【已换代，2026-09-11】target duality.ads-cft 已被 holography.ads5-cft4-duality-v2 取代；
+  本推导按 lead 裁决保留不删，新工作请挂
+  holography.ads5-cft4-duality-v2--via-maldacena-conjecture。
+
+  本次唯一的正文改动：summary 原写"对称性（PSU(2,2|4)）匹配"。
+  依 literature/extractions/maldacena-1997.md Q3（抽取者逐页读毕 arXiv v3 全 22 页），
+  原文从未出现 PSU(2,2|4) 这个记号，只写 SO(2,4)×SO(6) 与 "the superconformal group"，
+  并把精确代数指给 Haag–Lopuszanski–Sohnius。挂着 maldacena-1997 的 source 写 PSU(2,2|4)
+  属于溯源错误，故按原文措辞订正。若日后要用 PSU(2,2|4) 记号，须另找来源。
+
+  loc "§2" 过粗（猜想句在 §2 p.4，式号 (2.1)–(2.3)）；本卡已换代不再精确化，
+  精确 loc 见 holography.ads5-cft4-duality-v2 与其推导。
 author: seed
 created: "2026-09-10"
