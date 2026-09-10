@@ -1,33 +1,82 @@
 id: worldsheet.laplacian-log-contact-term--via-distributional-computation
 target: worldsheet.laplacian-log-contact-term
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
+  - id: math.laplace-fundamental-solution-2d
+    inferred: true
+    note: |
+      Lieb–Loss 不提复坐标，Polchinski 也不引 Lieb–Loss，两边没有互引：
+      「Lieb–Loss 6.20 ⇒ (2.1.24)」这一步是本图自己接上的（换算算术为 researcher 推导，
+      见 literature/extractions/math-sources.md §3）。
+      独立佐证（核对源，非 sources[] 条目）：schrans-2020 §2.6（笔记 p.45）把 (2.1.24)
+      在 σ^a 坐标下按 Stokes 定理逐步验算了一遍，结论句「and so LHS = RHS, proving (2.1.24)」；
+      即该笔记做的正是同一件事，只是没引任何分布论文献。
+    convention_map: |
+      Lieb–Loss 用实坐标 x = (σ^1, σ^2)、Lebesgue 测度 dσ^1 dσ^2、Δ := Σ_i ∂_i^2；
+      本节点的目标用 conv.worldsheet-complex-coords 的 z = σ^1 + iσ^2、d^2 z = 2 dσ^1 dσ^2、
+      δ^2(z,z̄) = (1/2) δ(σ^1) δ(σ^2)。换算见 summary 的四步链条。
   - id: conv.worldsheet-complex-coords
 sources:
-  - ref: polchinski-1998-v1
-    loc: "§2.1, eq. (2.1.24)（p.36）：恒等式直接写出，无证明"
+  - ref: lieb-loss-2001
+    loc: "§6.20 (Theorem, Distributional Laplacian of Green's functions), p. 156；Green 函数定义与 |S^1| = 2π 见 p. 155 eq. (2)"
     note: |
-      公式号经 schrans-2020 目录核实；内容为忠实转述，未核对原书。
-      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
-      headrick-2008 习题 2.1 的解答用两种正则化验证了
-      ∫ d^2 z (∂∂̄ ln|z|^2) f = 2π f(0)，即本推导 summary 中的两条路线；
-      按上述政策它不再作为 sources[] 条目。
+      **本推导的严格性来源**（L1，researcher 2026-09-10 逐页核实）：这条定理带完整证明，
+      给出 -Δ(-(1/2π) ln|x-y|) = δ_y。它就是 Polchinski (2.1.24) 缺的那块数学基础。
+  - ref: polchinski-1998-v1
+    loc: "§2.1, eq. (2.1.24)（p.36，恒等式，无证明）；换算所需的 ∂ = (1/2)(∂_1 - i∂_2)、∂̄ = (1/2)(∂_1 + i∂_2) 见 (2.1.3)，d^2 z = 2 dσ^1 dσ^2 见 (2.1.7)"
+    note: |
+      (2.1.24) 与 (2.1.3)、(2.1.7) 的式号经 schrans-2020 目录核实（`2.6 p 36`、`2.1–2.4 p 33`）；
+      内容为忠实转述，未核对原书。Polchinski 只写出恒等式、不给证明，
+      故它在此只承担「目标恰是这条式子、且换算所需两条约定出自这里」的角色，
+      严格性由 lieb-loss-2001 承担。
+      δ^2(z,z̄) = (1/2)δ(σ^1)δ(σ^2) 这条归一化的出处是前言 p. xviii 的 delta 函数约定
+      （对 Polchinski 仅 L3，经 schrans-2020 两次转述），已记在 conv.worldsheet-complex-coords。
 summary: |
-  两条互相独立的验证路线（均见于 headrick-2008 的习题 2.1 解答）：
-  (i) 围道路线：由 Stokes 定理把 ∫_D d^2 z ∂∂̄ ln|z|^2 f 化为绕 z = 0 的小围道积分，
-      用 ∂̄ ln|z|^2 = 1/z̄（在 z ≠ 0）与 ∮ dz/z = 2π i 得到 2π f(0)；
-  (ii) 正规化路线：ln|z|^2 → ln(|z|^2 + ε)，此时 ∂∂̄ ln(|z|^2+ε) = ε/(|z|^2+ε)^2 处处光滑，
-      其对 d^2 z 的积分恒为 2π 且在 ε → 0 时集中到原点，故极限是 2π δ^2。
-  在 conv.worldsheet-complex-coords 的 d^2 z = 2 dσ^1 dσ^2 归一化下右端系数正是 2π。
+  由 math.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，n = 2，带完整证明）出发，
+  在 conv.worldsheet-complex-coords 下做换算。写 x = (σ^1, σ^2)、z = σ^1 + iσ^2、|z| = |x|：
+
+    (1) Δ ln|x| = 2π δ(σ^1) δ(σ^2)                      [Lieb–Loss 6.20, n = 2；δ 相对 dσ^1 dσ^2]
+    (2) ln|z|^2 = 2 ln|z|  ⇒  Δ ln|z|^2 = 4π δ(σ^1) δ(σ^2)
+    (3) ∂ = (1/2)(∂_1 - i∂_2), ∂̄ = (1/2)(∂_1 + i∂_2)  ⇒  ∂∂̄ = (1/4)Δ
+        ⇒  ∂∂̄ ln|z|^2 = π δ(σ^1) δ(σ^2)
+    (4) δ^2(z,z̄) = (1/2) δ(σ^1) δ(σ^2)  ⇒  π δ(σ^1)δ(σ^2) = 2π δ^2(z,z̄)
+    ⇒  ∂∂̄ ln|z|^2 = 2π δ^2(z, z̄)。
+
+  **两个因子 2 缺一不可**：步骤 (3) 的 ∂∂̄ = Δ/4 与步骤 (4) 的 δ^2 = (1/2)δδ。
+  若把 δ^2(z,z̄) 误当成 δ(σ^1)δ(σ^2)，右端系数会变成 π 而不是 2π。
+  一致性检查（与目标陈述的测试函数形式吻合）：
+    ∫ d^2 z (∂∂̄ ln|z|^2) f = ∫ 2 dσ^1 dσ^2 · π δ(σ^1)δ(σ^2) f = 2π f(0)，
+    且 ∫ d^2 z δ^2(z,z̄) = ∫ 2dσ^1 dσ^2 · (1/2)δ(σ^1)δ(σ^2) = 1 ✓。
+
+  历史上本图曾用另外两条路线（围道 / ln(|z|^2+ε) 正规化，见 headrick-2008 习题 2.1 解答与
+  schrans-2020 §2.6）验证同一系数；它们现在只作核对源，论证由 Lieb–Loss 6.20 承担。
 gaps:
-  - "**这条其实是严格的分布论事实**（二维 Laplace 算子的基本解），本推导之所以只标 physical-argument，
-     是因为按 docs/STATUS_LEVELS.md，rigorous 要求来源是数学文献且可追溯到已核实的定理编号；
-     目前唯一的 sources[] 条目是不给证明的教科书正文（polchinski-1998-v1 (2.1.24)），
-     而 headrick-2008 的习题解答按 lead 政策裁决（2026-09-10）只能作核对源、不能承载论证。
-     **升级路径**：researcher 补一条分布论/PDE 教材中
-     「Δ (1/2π) ln|x| 是 R^2 上 Laplace 算子的基本解」的已核实定理编号，即可改为 kind: proof / status: rigorous。"
-  - "headrick-2008 的两种正规化都只对紧支光滑测试函数验证，未讨论更一般的分布类；
-     Polchinski 后续用它时作用在算子插入上（而非测试函数上），那一步属 operator-equation-of-motion 的缺口。"
+  - "步骤 (1)→(4) 的换算算术本身没有任何单一文献做过（Lieb–Loss 不提复坐标，Polchinski 不引
+     Lieb–Loss）：**这一步是 researcher 推导**（literature/extractions/math-sources.md §3），
+     由 schrans-2020 §2.6（笔记 p.45）在 σ^a 坐标下的显式 Stokes 验算佐证（核对源，L1）。
+     它是有限步初等换元/系数记账，前提（两条归一化）已在 conv.worldsheet-complex-coords 写全，
+     但**尚未经 reviewer 独立复核**；见 notes 对 docs/STATUS_LEVELS.md rigorous 例外条款的读法。"
+  - "δ^2(z,z̄) = (1/2)δ(σ^1)δ(σ^2) 的原始出处是 Polchinski 前言 p. xviii，
+     对原书只有 L3 证据（经 schrans-2020 两次转述「the delta function convention from p xviii」），
+     原文措辞未核对（math-sources.md Q3）。若这条归一化被证伪，本节点右端系数即错因子 2。"
+  - "本条只对紧支光滑测试函数成立；Polchinski 后续把它作用在算子插入上（而非测试函数上），
+     那一步的缺口属 worldsheet.operator-equation-of-motion，不属本节点。"
+notes: |
+  **status 定级的理由（curator, 2026-09-10）**：本推导的实质内容（二维 Laplace 基本解）
+  有已核实编号、带完整证明的数学文献来源（Lieb–Loss Thm 6.20，L1），
+  这部分严格性放在上游节点 math.laplace-fundamental-solution-2d 承担；
+  留在本推导里的只是**记号与归一化的搬运**（复坐标 + d^2 z 的 Jacobian + δ^2 归一化）。
+  据此标 kind: proof / status: rigorous。
+
+  **提请 reviewer/auditor 裁定**：若认为 docs/STATUS_LEVELS.md 的 rigorous 例外条款
+  （「有限步初等计算 + reviewer 已独立复核 + notes 写 reviewer-verified」）也管辖这种
+  「published theorem + 换元记账」的情形，那么在补上 `reviewer-verified: <agent>, <date>` 之前
+  本推导应降为 physical-argument。curator 的读法是该条款针对的是**全部论证都是自制计算**的推导，
+  本条不属此类，故先标 rigorous 并把换算链完整摆在 summary 与 gaps 里供复核。
+
+  **变更记录**：2026-09-10 由 physical-argument 升级。原 gaps 第一条（「缺数学文献来源，
+  升级路径：researcher 补一条已核实编号的定理」）已由 lieb-loss-2001 §6.20 兑现，故删除。
+  原 summary 的两条验证路线（围道、ε 正规化）降为核对源记录。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

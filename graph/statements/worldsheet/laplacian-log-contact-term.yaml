@@ -27,5 +27,14 @@ notes: |
   （二维 Laplace 算子的基本解），原则上可以严格证明，也是本批节点中最容易形式化的一条。
   它是自由场传播子归一化与一切「接触项」的唯一来源，被 free-scalar-propagator、
   operator-equation-of-motion、conformal-normal-ordering 共同依赖。
+
+  **2026-09-10 更新（curator-laplace-source，未改 id 与 statement 文本）**：本条的纯数学内核
+  已单列为 math.laplace-fundamental-solution-2d（Lieb–Loss Thm 6.20，带完整证明，rigorous，
+  且不依赖任何约定）。本节点 = 那条定理 + conv.worldsheet-complex-coords 的两条归一化
+  （d^2 z = 2 dσ^1 dσ^2 与 δ^2(z,z̄) = (1/2)δ(σ^1)δ(σ^2)）的换算结果；
+  四步换算链（含「两个因子 2 缺一不可」）见
+  worldsheet.laplacian-log-contact-term--via-distributional-computation 的 summary。
+  拆分理由：Lieb–Loss 6.20 并不陈述 ∂∂̄ ln|z|^2 = 2π δ^2，直接把它挂进本节点 sources[]
+  会违反「每条边都要能在 sources.loc 指向的位置找到对应论证」。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -1,0 +1,49 @@
+id: math.laplace-fundamental-solution-2d
+kind: proposition
+title: 二维 Laplace 算子的基本解：-Δ(-(1/2π) ln|x-y|) = δ_y（分布意义）
+statement: |
+  在 R^2 上取 Lebesgue 测度 d^2 x = dx^1 dx^2，并按
+    Δ := Σ_{i=1}^{2} ∂^2/∂(x^i)^2
+  定义 Laplace 算子（正号，不涉及任何度规号差约定）。对 y ∈ R^2 定义
+    G_y(x) = -|S^1|^{-1} ln|x - y| = -(1/2π) ln|x - y|,
+  其中 |S^1| = 2π 是单位圆周长。则 G_y ∈ L^1_loc(R^2)，且在分布意义下
+    -Δ G_y = δ_y,
+  即对任意测试函数 φ ∈ C_c^∞(R^2)，
+    -∫_{R^2} d^2 x  G_y(x) (Δφ)(x) = φ(y)。
+  这里 δ_y 是 y 点处**相对 Lebesgue 测度 d^2 x** 的 Dirac 测度（常写作 δ(x - y)）。
+  等价的常用写法：Δ ln|x - y| = 2π δ_y。
+uses_conventions: []
+sources:
+  - ref: lieb-loss-2001
+    loc: "§6.20 (Theorem, Distributional Laplacian of Green's functions), p. 156；Green 函数定义与 |S^1| = 2π 见 p. 155 eq. (2)"
+    note: |
+      **L1（researcher 逐页读扫描页图核实，2026-09-10）**：定理原文逐字为
+      「In the sense of distributions, -ΔG_y = δ_y, where δ_y is Dirac's delta measure at y
+      (often written as δ(x-y))」，标题即 THEOREM，正文 p.156 给完整 PROOF
+      （取 y = 0；用 G_0 ∈ L^1_loc 归约到 lim_{r→0} ∫_{|x|>r} (Δφ) G_0；两次分部积分；
+      用球面上 ∇G_0·ν = |S^{n-1}|^{-1} r^{-n+1}）。
+      Lieb–Loss 在 p.155 明确写出 Δ := Σ_i ∂^2/∂x_i^2，故本节点不带任何号差歧义。
+      获取途径见 literature/extractions/math-sources.md §2.1（多伦多大学 MAT1000 课程页第 6 章扫描）。
+      页码只对第 2 版有效；出版年 2001 为 L2（AMS 目录），不在扫描件书名页上。
+tags: [distributions, pde, green-function, math-input]
+notes: |
+  **本节点刻意不使用任何约定节点**：Laplace 算子、Lebesgue 测度、Dirac 测度的归一化
+  全部在陈述文本内写死，与 Lieb–Loss 的写法逐字一致。这样做的目的是把
+  「二维 Laplace 基本解」这条纯数学事实与「Polchinski 复坐标 + δ^2 归一化下的写法」
+  （worldsheet.laplacian-log-contact-term）分成两个节点：
+  前者有已核实编号的严格定理来源，后者额外吃 conv.worldsheet-complex-coords 的两条归一化。
+  因子 2 的换算陷阱因此落在两者之间的那条边上，而不是埋在某个 summary 里。
+
+  **拆节点的理由（curator, 2026-09-10）**：Lieb–Loss 6.20 并不陈述
+  ∂∂̄ ln|z|^2 = 2π δ^2(z,z̄)，只陈述 -ΔG_y = δ_y；若把它直接挂到
+  laplacian-log-contact-term 的 sources[]，就违反「每条边都要能在 sources.loc 指向的位置
+  找到对应论证」。见 literature/extractions/math-sources.md §3、§5.3。
+
+  **area 归属待裁（lead）**：本条是纯 R^2 分析事实，概念上属 `math` area
+  （`math.laplace-fundamental-solution-2d` 更贴），此处按任务书给定的 id 放在 `worldsheet`。
+  id 一旦并入 main 即冻结，若要改 area 请在合并前改。
+
+  **形式化候选**：这是 formal/ 侧的低风险岛（Mathlib 是否已有 n = 2 的分布版基本解本轮未检索，
+  见 math-sources.md §5.4）。
+author: curator-laplace-source
+created: "2026-09-10"

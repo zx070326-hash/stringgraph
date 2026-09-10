@@ -1,0 +1,32 @@
+id: math.laplace-fundamental-solution-2d--via-lieb-loss
+target: math.laplace-fundamental-solution-2d
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: lieb-loss-2001
+    loc: "§6.20 (Theorem, Distributional Laplacian of Green's functions), p. 156，含 p.156 整页 PROOF；Green 函数定义 p. 155 eq. (2)"
+    note: |
+      **L1，逐页核实**（researcher, 2026-09-10；literature/extractions/math-sources.md §2.2–§2.3）。
+      文献自称的严格程度：标题 THEOREM + 完整 PROOF，是标准研究生教材（AMS GSM 14）里
+      被证明的数学定理，不是形式操作。
+summary: |
+  Lieb–Loss, Analysis (2nd ed.), Theorem 6.20 的证明（p.156），取 n = 2、y = 0：
+  (1) 要证 I := ∫_{R^2} (Δφ) G_0 = -φ(0) 对一切 φ ∈ C_c^∞(R^2) 成立；
+  (2) 因 G_0(x) = -(1/2π) ln|x| ∈ L^1_loc(R^2)，可归约为 -φ(0) = lim_{r→0} I(r)，
+      其中 I(r) := ∫_{|x| > r} (Δφ)(x) G_0(x) d^2 x（去掉原点的小圆盘后被积函数光滑）；
+  (3) 在 {|x| > r} 上两次分部积分（散度定理）。体积项因 G_0 在 x ≠ 0 处调和（ΔG_0 = 0）而消失，
+      只剩 |x| = r 上的两个边界项；
+  (4) 用球面上 ∇G_0·ν = |S^{n-1}|^{-1} r^{-n+1}（n = 2 时为 (2π r)^{-1}）：含 ∂φ/∂ν 的边界项
+      随 r → 0 消失，另一项给出 -|S^{n-1}|^{-1} ∫_{S^{n-1}} φ(rω) dω → -φ(0)；
+  (5) 故 -ΔG_0 = δ_0，一般 y 由平移得到。
+  n = 2 时 |S^1| = 2π，即 G_0(x) = -(1/2π) ln|x|，等价写法 Δ ln|x| = 2π δ_0。
+gaps: []
+notes: |
+  **无缺口**：证明在 Lieb–Loss 第 6 章内自足（只用 G_0 ∈ L^1_loc、散度定理、φ ∈ C_c^∞），
+  故 depends_on 为空——本节点是图的一个**数学输入叶子**，不是「未加论证的断言」。
+  与 Theorem 6.21（-Δ(G*f) = f，Poisson 方程可解性）严格区分：图里要的是 6.20 而非 6.21；
+  Evans §2.2.1 给的是 6.21 型陈述（且其定理编号未核实），故不引 Evans；
+  Hörmander ALPDO I §3.3 的编号亦未核实，不引。见 literature/extractions/math-sources.md §4.1–§4.3。
+author: curator-laplace-source
+created: "2026-09-10"
