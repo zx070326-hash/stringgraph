@@ -146,7 +146,7 @@
   图侧：建议 curator 把 `worldsheet.old-covariant-physical-states` 的 `formal.lean_decl`
   填 `StringFormal.NoGhost.Fock.physSubmodule`；`worldsheet.spurious-orthogonal-to-physical`
   新建 `--via-lean` 推导指向 `spuriousSubmodule_le_orthComplement`；
-  `worldsheet.ocq-spurious-states` 的 `lean_decl` 填 `spuriousSubmodule`；
+  无壳的 `worldsheet.spurious-subspace`（已建、formalized）的 `lean_decl` 是 `spuriousSubmodule`；带壳的 `worldsheet.ocq-spurious-states-v2` 不填 `lean_decl`（2026-09-11 已落地）；
   `worldsheet.open-string-intercept--via-null-state-decoupling` 的 level 1 半边可引
   `Lop_neg_one_apply_one_mem_nullSubmodule`（但该推导还需 level 2 与唯一性，不能标 formalized）。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
