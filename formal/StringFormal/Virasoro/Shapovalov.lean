@@ -48,6 +48,14 @@ Two observations make most of the theory available anyway.
    unconditional construction of the normalised Shapovalov form is possible from what is
    currently in this repository; the honest formalisation is the conditional one.
 
+   Over a **field of characteristic zero** the converse direction is now also proved: `|c,h⟩ ≠ 0`
+   is not merely necessary but *sufficient*, because the level decomposition
+   `V(c,h) = ⨁_N V_N` (`isInternal_levelSpan`) provides the projection onto `V_0 = K·|c,h⟩`,
+   whose coordinate functional is a Shapovalov functional.  See
+   `exists_isContravariant_iff_hwv_ne_zero`.  The construction needs the level-shift lemma
+   `lie_lgen_mem_levelSpan_of_neg` (raising operators leave level 0) and
+   `levelSpan_zero : V_0 = K·|c,h⟩`.
+
 ## Main definitions
 
 * `StringFormal.Virasoro.VirasoroAlgebra.antiInvolution`: the Lie algebra anti-automorphism
@@ -69,6 +77,13 @@ Two observations make most of the theory available anyway.
   existence and uniqueness, given the functional.
 * `hwv_ne_zero_of_isContravariant`: a normalised form forces `V(c,h) ≠ 0`.
 * `exists_isContravariant_iff`: the form exists **iff** a Shapovalov functional does.
+* `levelSpan_zero`: `V_0 = R·|c,h⟩` (any commutative `ℚ`-algebra `R`).
+* `hwvFunctional`, `isShapovalovFunctional_hwvFunctional`,
+  `exists_isShapovalovFunctional_of_hwv_ne_zero`: over a field of characteristic zero the
+  Shapovalov functional is **constructed** from `|c,h⟩ ≠ 0` as the level-0 coordinate.
+* `exists_isContravariant_iff_hwv_ne_zero`, `existsUnique_isContravariant_of_hwv_ne_zero`:
+  over a field of characteristic zero, a normalised contravariant form exists (and is then
+  unique) **if and only if** `V(c,h) ≠ 0`.
 * `IsContravariant.gram_level_one`: `⟨L₋₁|c,h⟩, L₋₁|c,h⟩⟩ = 2h`.
 * `IsContravariant.gram_level_two_aa/ab/bb`: `4h + c/2`, `6h`, `8h² + 4h`.
 * `IsContravariant.gram_level_two_det`: `2h(16h² + 2h(c-5) + c)`, the `N = 2` Kac
@@ -78,8 +93,14 @@ Two observations make most of the theory available anyway.
 
 No `sorry`, no new axioms.  Gaps, in decreasing order of importance:
 
-1. Existence of the normalised form is conditional on `IsShapovalovFunctional` (which implies
-   `V(c,h) ≠ 0`) — see above.
+1. Existence of the normalised form is conditional on `V(c,h) ≠ 0` — which is `pbw-verma`,
+   still open.  Over a general commutative `ℚ`-algebra `R` the condition used is the stronger
+   `IsShapovalovFunctional`; over a field of characteristic zero the two are equivalent
+   (`exists_isContravariant_iff_hwv_ne_zero`), so there the *only* gap is `V(c,h) ≠ 0`.
+   Whether `|c,h⟩ ≠ 0` also suffices over a general `R` is not settled here: the construction
+   above uses `isInternal_levelSpan`, which is proved only over a field of characteristic zero
+   (the level pieces are separated by the `L₀`-eigenvalues `h + N`, and over a general `R` the
+   `h + N` need not be distinguishable).
 2. Gram matrix entries are stated for the *specific vectors* `L_{-1}|c,h⟩`, `L_{-2}|c,h⟩`,
    `L_{-1}²|c,h⟩`, not for a basis of `V_N`, because no basis is available without PBW.  The
    level-2 determinant is therefore the Kac determinant only *if* those two vectors are
@@ -528,6 +549,160 @@ theorem exists_isContravariant_iff :
 
 end Existence
 
+
+/-! ### Existence over a field: `V(c,h) ≠ 0` is the only obstruction
+
+Over a field of characteristic zero the Shapovalov functional can be *constructed*, not just
+assumed: `V(c,h) = ⨁_N V_N` (`isInternal_levelSpan`) supplies the projection onto the level-0
+line `V_0 = K·|c,h⟩`, and `|c,h⟩ ≠ 0` makes that line one-dimensional, so its coordinate
+functional is well defined.  Together with `hwv_ne_zero_of_isContravariant` this turns the
+conditional statement above into the equivalence `exists_isContravariant_iff_hwv_ne_zero`.
+-/
+
+section LevelZero
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The only composition of `0` is the empty one, so every level-`0` word is `|c,h⟩`. -/
+lemma levelWord_zero (cmp : Composition 0) : levelWord R c h 0 cmp = hwv R c h := by
+  rw [levelWord, cmp.blocks_eq_nil.mpr rfl, List.map_nil, wordAct_nil]
+
+lemma range_levelWord_zero : Set.range (levelWord R c h 0) = {hwv R c h} := by
+  ext x
+  simp only [Set.mem_range, Set.mem_singleton_iff]
+  refine ⟨?_, ?_⟩
+  · rintro ⟨cmp, rfl⟩
+    exact levelWord_zero R c h cmp
+  · rintro rfl
+    exact ⟨default, levelWord_zero R c h default⟩
+
+/-- **The level-0 subspace is the line through the highest weight vector**, `V_0 = R·|c,h⟩`. -/
+lemma levelSpan_zero : levelSpan R c h 0 = Submodule.span R {hwv R c h} := by
+  rw [levelSpan, range_levelWord_zero]
+
+lemma hwv_mem_levelSpan_zero : hwv R c h ∈ levelSpan R c h 0 := by
+  rw [levelSpan_zero]
+  exact Submodule.mem_span_singleton_self _
+
+end LevelZero
+
+section ExistenceOverField
+
+variable (K : Type*) [Field K] [CharZero K] (c h : K)
+
+/-- The span of all level-`N` pieces with `N ≥ 1`, i.e. of all proper descendants.  It is the
+complement of the line `K·|c,h⟩` in the level decomposition. -/
+noncomputable def posLevelSpan : Submodule K (VermaModule K c h) :=
+  ⨆ N : ℕ, ⨆ (_ : N ≠ 0), levelSpan K c h N
+
+lemma levelSpan_le_posLevelSpan {N : ℕ} (hN : N ≠ 0) :
+    levelSpan K c h N ≤ posLevelSpan K c h :=
+  le_iSup₂ (f := fun N (_ : N ≠ 0) => levelSpan K c h N) N hN
+
+/-- `V(c,h) = V_0 ⊕ (⨁_{N ≥ 1} V_N)`, the two-block form of `isInternal_levelSpan`. -/
+lemma isCompl_levelSpan_zero : IsCompl (levelSpan K c h 0) (posLevelSpan K c h) := by
+  constructor
+  · exact iSupIndep_def.mp (levelSpan_iSupIndep K c h) 0
+  · rw [codisjoint_iff, posLevelSpan, ← iSup_split_single (levelSpan K c h) 0,
+      iSup_levelSpan_eq_top]
+
+/-- Every raising operator `L_n`, `n < 0`, lands in the proper descendants: this is the level
+shift `lie_lgen_mem_levelSpan_of_neg` plus the fact that `N + |n| ≥ 1`. -/
+lemma lie_lgen_mem_posLevelSpan {n : ℤ} (hn : n < 0) (v : VermaModule K c h) :
+    ⁅VirasoroAlgebra.lgen K n, v⁆ ∈ posLevelSpan K c h := by
+  have key : (⨆ N : ℕ, levelSpan K c h N) ≤
+      Submodule.comap (LieModule.toEnd K (VirasoroAlgebra K) (VermaModule K c h)
+        (VirasoroAlgebra.lgen K n)) (posLevelSpan K c h) := by
+    refine iSup_le fun N x hx => ?_
+    show ⁅VirasoroAlgebra.lgen K n, x⁆ ∈ posLevelSpan K c h
+    exact levelSpan_le_posLevelSpan K c h (by omega)
+      (lie_lgen_mem_levelSpan_of_neg K c h hn N hx)
+  exact key (by rw [iSup_levelSpan_eq_top]; trivial)
+
+variable {K c h}
+
+/-- The coordinate of the level-0 component in the basis `|c,h⟩` of `V_0`.  This is the
+Shapovalov functional; `hne` is exactly the hypothesis that `V_0` is one-dimensional. -/
+noncomputable def hwvFunctional (hne : hwv K c h ≠ 0) : VermaModule K c h →ₗ[K] K :=
+  (LinearEquiv.coord K (VermaModule K c h) (hwv K c h) hne).toLinearMap ∘ₗ
+    (LinearEquiv.ofEq _ _ (levelSpan_zero K c h)).toLinearMap ∘ₗ
+      Submodule.projectionOnto (levelSpan K c h 0) (posLevelSpan K c h) (isCompl_levelSpan_zero K c h)
+
+/-- The functional kills every proper descendant. -/
+lemma hwvFunctional_of_mem_posLevelSpan (hne : hwv K c h ≠ 0) {v : VermaModule K c h}
+    (hv : v ∈ posLevelSpan K c h) : hwvFunctional hne v = 0 := by
+  rw [hwvFunctional]
+  simp only [LinearMap.coe_comp, Function.comp_apply,
+    Submodule.projectionOnto_apply_of_mem_right _ hv, map_zero]
+
+/-- Normalisation: `f₀(|c,h⟩) = 1`. -/
+@[simp] lemma hwvFunctional_hwv (hne : hwv K c h ≠ 0) : hwvFunctional hne (hwv K c h) = 1 := by
+  rw [hwvFunctional]
+  simp only [LinearMap.coe_comp, Function.comp_apply,
+    Submodule.projectionOnto_apply_of_mem_left _ (hwv_mem_levelSpan_zero K c h)]
+  exact LinearEquiv.coord_self K (VermaModule K c h) (hwv K c h) hne
+
+/-- `f₀ ∘ L_n = 0` for `n < 0`: the raising operators shift the level up, out of level 0. -/
+lemma hwvFunctional_lie_lgen_of_neg (hne : hwv K c h ≠ 0) {n : ℤ} (hn : n < 0)
+    (v : VermaModule K c h) : hwvFunctional hne ⁅VirasoroAlgebra.lgen K n, v⁆ = 0 :=
+  hwvFunctional_of_mem_posLevelSpan hne (lie_lgen_mem_posLevelSpan K c h hn v)
+
+/-- `f₀ ∘ L_0 = h · f₀`: `L_0` acts by `h + N` on `V_N`, and `f₀` sees only `N = 0`. -/
+lemma hwvFunctional_lie_lgen_zero (hne : hwv K c h ≠ 0) (v : VermaModule K c h) :
+    hwvFunctional hne ⁅VirasoroAlgebra.lgen K 0, v⁆ = h * hwvFunctional hne v := by
+  have key : (⨆ N : ℕ, levelSpan K c h N) ≤
+      LinearMap.eqLocus
+        ((hwvFunctional hne).comp (LieModule.toEnd K (VirasoroAlgebra K) (VermaModule K c h)
+          (VirasoroAlgebra.lgen K 0)))
+        (h • hwvFunctional hne) := by
+    refine iSup_le fun N x hx => ?_
+    show hwvFunctional hne ⁅VirasoroAlgebra.lgen K 0, x⁆ = h * hwvFunctional hne x
+    rw [lie_lgen_zero_of_mem_levelSpan K c h N hx, map_smul, smul_eq_mul]
+    rcases Nat.eq_zero_or_pos N with rfl | hN
+    · rw [Nat.cast_zero, add_zero]
+    · rw [hwvFunctional_of_mem_posLevelSpan hne
+        (levelSpan_le_posLevelSpan K c h (by omega) hx), mul_zero, mul_zero]
+  exact key (by rw [iSup_levelSpan_eq_top]; trivial)
+
+/-- **`f₀` is a Shapovalov functional.** -/
+theorem isShapovalovFunctional_hwvFunctional (hne : hwv K c h ≠ 0) :
+    IsShapovalovFunctional K c h (hwvFunctional hne) where
+  apply_hwv := hwvFunctional_hwv hne
+  apply_lie_neg _n hn v := hwvFunctional_lie_lgen_of_neg hne hn v
+  apply_lie_zero v := hwvFunctional_lie_lgen_zero hne v
+
+variable (K c h)
+
+/-- **Existence of the Shapovalov functional over a field of characteristic zero**, assuming
+only that the Verma module is nonzero (`|c,h⟩ ≠ 0`).  This removes `IsShapovalovFunctional`
+from the list of open inputs: what remains open is only `V(c,h) ≠ 0` (`pbw-verma`). -/
+theorem exists_isShapovalovFunctional_of_hwv_ne_zero (hne : hwv K c h ≠ 0) :
+    ∃ f : VermaModule K c h →ₗ[K] K, IsShapovalovFunctional K c h f :=
+  ⟨hwvFunctional hne, isShapovalovFunctional_hwvFunctional hne⟩
+
+/-- **Existence of the normalised contravariant form**, under the same hypothesis. -/
+theorem exists_isContravariant_of_hwv_ne_zero (hne : hwv K c h ≠ 0) :
+    ∃ B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K,
+      IsContravariant K c h B ∧ B (hwv K c h) (hwv K c h) = 1 :=
+  (exists_isContravariant_iff K c h).mpr (exists_isShapovalovFunctional_of_hwv_ne_zero K c h hne)
+
+/-- **The Shapovalov form exists if and only if `V(c,h) ≠ 0`.**  Over a field of characteristic
+zero this is a complete answer: combined with `existsUnique_isContravariant` it says that
+`V(c,h) ≠ 0` is necessary and sufficient for a unique normalised contravariant form. -/
+theorem exists_isContravariant_iff_hwv_ne_zero :
+    (∃ B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K,
+        IsContravariant K c h B ∧ B (hwv K c h) (hwv K c h) = 1)
+      ↔ hwv K c h ≠ 0 :=
+  ⟨fun ⟨_, _, hB1⟩ => hwv_ne_zero_of_isContravariant hB1,
+    exists_isContravariant_of_hwv_ne_zero K c h⟩
+
+/-- **Existence and uniqueness in one statement.** -/
+theorem existsUnique_isContravariant_of_hwv_ne_zero (hne : hwv K c h ≠ 0) :
+    ∃! B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K,
+      IsContravariant K c h B ∧ B (hwv K c h) (hwv K c h) = 1 :=
+  existsUnique_isContravariant (isShapovalovFunctional_hwvFunctional hne)
+
+end ExistenceOverField
 /-! ### Low-level Gram matrices -/
 
 section Levels

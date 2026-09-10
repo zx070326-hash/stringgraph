@@ -127,6 +127,10 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
   - `negSpan_eq_top`：`V(c,h)` 由**无序**负模态词 `L_{n_1}⋯L_{n_k}|c,h⟩`（`n_i < 0`）张成；
   - `lie_lgen_zero_wordAct` / `lie_lgen_zero_of_mem_levelSpan`：`L_0` 在 level `N` 上作用为 `h+N`；
   - `iSup_levelSpan_eq_top` + `levelSpan_fg`：`⨆_N V_N = V(c,h)`，每个 `V_N` 有限生成；
+  - **level 平移** `lie_lgen_mem_levelSpan`（`k ≥ 1` 时 `L_{-k} : V_N → V_{N+k}`）与
+    整数版 `lie_lgen_mem_levelSpan_of_neg`；辅助 `consComposition` / `lie_lgen_levelWord`。
+    对任意交换 `ℚ`-代数 `R` 成立，不需要 `V(c,h) ≠ 0`（`levelSpan` 是按张成词定义的，
+    不是按 `L_0` 特征子空间定义的）；
   - 域上（`[Field K] [CharZero K]`）：`isInternal_levelSpan`（`V = ⨁_N V_N`）与
     `levelSpan_eq_eigenspace`（`V_N` 恰为 `L_0` 的 `h+N` 特征子空间）；
   - 万有性质 `vermaLift` / `vermaLift_hwv` / `vermaLift_lie` / `eq_of_lie_of_eq_hwv`；
@@ -179,6 +183,16 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
     **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
     这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
     而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
+  - **char-0 域上存在性已收紧为 iff**（2026-09-11）：`levelSpan_zero`（`V_0 = R·|c,h⟩`，任意
+    `ℚ`-代数）+ `isCompl_levelSpan_zero`（`V = V_0 ⊕ ⨁_{N≥1} V_N`）+ level 平移
+    ⇒ `hwvFunctional`（level-0 坐标）是 Shapovalov 泛函，
+    `exists_isShapovalovFunctional_of_hwv_ne_zero`、`exists_isContravariant_of_hwv_ne_zero`、
+    `exists_isContravariant_iff_hwv_ne_zero`（**存在 ⟺ `hwv ≠ 0`**）、
+    `existsUnique_isContravariant_of_hwv_ne_zero`。
+    即：在 `[Field K] [CharZero K]` 上，Shapovalov 形式的唯一缺口就是 `V(c,h) ≠ 0`
+    （`pbw-verma` (b)），`IsShapovalovFunctional` 不再是独立假设。
+    一般交换 `ℚ`-代数 `R` 上是否也成立**未定**：构造用了 `isInternal_levelSpan`，
+    而后者只在 char-0 域上有（level 片靠 `L_0` 特征值 `h+N` 分离）。
   - 低阶 Gram：`gram_level_one`（`2h`）、`gram_level_two_aa/ab/bb`（`4h+c/2`、`6h`、`8h²+4h`）、
     `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
     这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
@@ -468,4 +482,9 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
   图侧接入已做：`uv run stringgraph check-axioms`（`tools/stringgraph/axioms.py`）把结论映回节点 id，
   非标准公理同时报到陈述卡和依赖它的 `formalized` 推导上；**不进 `validate`/pre-commit**（要起 Lean）。
   2026-09-11 全图 14 个 `formal.lean_decl` 跑通：14 ok，0 bad，0 missing。
-- [ ] `basic-lean-housekeeping`：把 `toProdₗ` / `ofWitt` / `span_lgen_cgen_eq_top` 从 `Verma.lean` 挪到 `Basic.lean`（它们是 Basic 级事实；`WittPerfect.lean` 因此多 import 了 Verma）。等 Verma 区无并行 formalizer 时做。另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
+- [x] `basic-lean-housekeeping`：`toProdₗ` / `ofWitt` / `toProd_ofWitt` / `ofWitt_lgen` /
+  `span_lgen_cgen_eq_top` / `centralTerm_zero` 已于 2026-09-11 从 `Verma.lean` 挪到
+  `Basic.lean`（声明全名不变，图卡 `lean_decl` 无需改）。`WittPerfect.lean` 的 import 已从
+  `Virasoro.Verma` 改成 `Virasoro.Basic`。`DescendantGrading.lean` **仍需** import Verma：
+  它实际用了 `wordAct` / `vermaLift` / `VermaModule`（约 40 处），不是只为这几条。
+  另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
