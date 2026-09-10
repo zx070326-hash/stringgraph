@@ -3,7 +3,12 @@ target: worldsheet.brst-cohomology-equals-ocq-physical
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B、鬼场模式代数、受限模与相对复形的定义（本推导的目标对象）。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。v2 不再断言 c^g = −26；
+      本推导也不从本图取该数值：FGZ 在自己的框架里由 Proposition 2.1(i) 算出鬼场表示的中心荷
+      −26，并把 π(c) = 26 Id_V 作为**假设**写进 §2.1，两者都已在本推导的 sources 里逐字记下。）
   - id: worldsheet.old-covariant-physical-states
   - id: worldsheet.virasoro-algebra-v2
 sources:

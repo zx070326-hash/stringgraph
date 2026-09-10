@@ -3,7 +3,14 @@ target: worldsheet.no-ghost-theorem-brst
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B、鬼场模式代数、受限模与相对复形的定义（本推导的目标对象）。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2：v2 只把鬼场中心荷 c^g 从数值 −26
+      改回符号，取值移到 worldsheet.bc-ghost-central-charge。本推导不从本图取该数值——
+      FGZ 在自己的框架里由 Proposition 2.1(i) 算出鬼场表示的中心荷 −26，并把 π(c) = 26 Id_V
+      作为**假设**写进 §2.1；c^m = 26 这一前提在本推导里由 worldsheet.brst-nilpotent-at-c26
+      与目标陈述本身承担。故换代不改变本推导的任何一步，也不改变有效状态。）
   - id: worldsheet.brst-nilpotent-at-c26
     note: FGZ Theorem 2.8 只需要 c=26 时 d²=0（Prop 1.2），不需要双条件版本；lead 裁决改指弱节点。
   - id: worldsheet.virasoro-algebra-v2

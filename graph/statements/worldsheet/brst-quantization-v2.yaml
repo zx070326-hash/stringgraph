@@ -1,0 +1,126 @@
+id: worldsheet.brst-quantization-v2
+kind: definition
+status: rigorous
+title: 玻色弦的 BRST 量子化：bc 鬼场与 BRST 荷（中心荷 c^g 保持为符号）
+statement: |
+  记号约定：中心荷写作上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 的下标记号冲突
+  （文献常写 c_m、c_g，但在 Q_B 与 Q_B^2 的公式里 c_m 会与模式 c_m 撞号）。
+
+  设物质部门是中心荷 c^m 的二维共形场论，其 Virasoro 模为 L^m_n（conv.virasoro-standard）。
+  对 D 个自由玻色子 X^μ（度规 η mostly-plus）有 c^m = D。
+
+  Faddeev–Popov 鬼场部门是**权 λ = 2 的 bc 系统**（worldsheet.bc-ghost-cft 定义的
+  权 (λ, 1-λ) = (2, -1) 一阶反对易系统在 λ = 2 处的取值），在本节点中直接以模式代数给出：
+    b(z) = Σ_{n∈Z} b_n z^{-n-2}，  c(z) = Σ_{n∈Z} c_n z^{-n+1}，
+    {b_m, c_n} = δ_{m+n,0}，  {b_m, b_n} = {c_m, c_n} = 0，
+  鬼场 Virasoro 模
+    L^g_n = Σ_{m∈Z} (2n - m) : b_m c_{n-m} :。
+  **该鬼场部门的中心荷记作 c^g**，即由 [L^g_m, L^g_n] = (m-n) L^g_{m+n} + (c^g/12)(m^3-m) δ_{m+n,0}
+  唯一确定的那个常数。**本定义不断言 c^g 的取值。** λ = 2 时 c^g = -26 是一条**命题**，
+  见 worldsheet.bc-ghost-central-charge（一般 λ 的公式 c^{bc} = -3(2λ-1)^2 + 1 同在该节点），
+  需要这个数值的推导应各自挂那条命题。
+
+  鬼场 Fock 空间建立在 SL(2,C) 不变真空 |0⟩ 上，它由
+    b_n |0⟩ = 0 (n ≥ -1)，  c_n |0⟩ = 0 (n ≥ 2)
+  刻画（这是使 b(z)|0⟩、c(z)|0⟩ 在 z → 0 正则的条件，与权 (2,-1) 相容）。
+  被全部正模 b_n, c_n (n > 0) 湮灭的不是 |0⟩，而是二重简并的鬼场基态
+    |↓⟩ = c_1 |0⟩，  |↑⟩ = c_0 c_1 |0⟩ = c_0 |↓⟩，
+  它们满足 b_n|↓⟩ = c_n|↓⟩ = 0 (n > 0)、b_0|↓⟩ = 0、c_0|↓⟩ = |↑⟩，
+  由 b_0, c_0 的零模 Clifford 代数 {b_0, c_0} = 1 联系。
+  该 Fock 空间的自然内积是不定的（鬼场方向含负模）。
+
+  BRST 荷定义为
+    Q_B = Σ_{n∈Z} c_n L^m_{-n} + Σ_{m,n∈Z} ((m - n)/2) : c_m c_n b_{-m-n} : + a^g c_0，
+  其中鬼场正规序常数取 a^g = -1；等价地，总 Virasoro 生成元
+    L_n = L^m_n + L^g_n + a^g δ_{n,0}
+  在 (m^3 - m) 形式下的中心荷为 c = c^m + c^g。
+  Q_B 提升鬼数 1（gh(c_n) = +1, gh(b_n) = -1）。
+  为使 Q_B 中的无穷模式和有定义，要求它作用的模 V 是**受限模**（restricted / smooth）：
+    对每个 v ∈ V 存在 N = N(v) 使  L^m_n v = b_n v = c_n v = 0  对所有 n > N。
+  在受限模上，Q_B v 的展开只有有限多项非零，故 Q_B 是良定义的算子，且所有模式和的重排合法。
+  物质与鬼场的最高权型 Fock 模都是受限模。
+
+  BRST 物理态空间定义为相对上同调
+    H_BRST = ker Q_B / im Q_B  （限制在 b_0 |ψ⟩ = 0 与 L_0 |ψ⟩ = 0 的相对复形上）。
+  该定义只有在 Q_B^2 = 0 时才有意义；Q_B^2 = 0 的条件见 worldsheet.critical-dimension-brst
+  （它以 c^g = -26 的形式出现，故那条推导须显式挂 worldsheet.bc-ghost-central-charge）。
+uses: [worldsheet.virasoro-algebra-v2]
+uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5（bc CFT，约 eq. (2.5.11)–(2.5.12)：鬼场能动张量与一般 λ 的中心荷公式），p.51"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.31 p 51: Eq. (2.5.12) The Ghost Central Charge`）。
+      本节点**只**取该处的 λ = 2 bc 系统本身（模式与 L^g_n），**不**取其中心荷取值——
+      取值另属 worldsheet.bc-ghost-central-charge。
+  - ref: polchinski-1998-v1
+    loc: "§4.2（BRST 一般框架），§4.3（弦的 BRST 量子化）：Q_B 的模展开约 eq. (4.3.1)，鬼场正规序常数 a^g = -1"
+    note: 公式号为近似定位；Polchinski 的 Q_B 归一化与本节点一致。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.17)（{b_m, c_n} = δ_{m,-n}）、(2.7.18)（两个简并基态）、(2.7.19)（鬼场 Virasoro 生成元），p.61–62"
+    note: 式号经 schrans-2020 目录核实（`2.55`–`2.62`, p.61–62）；抽取记录 polchinski-1998-v1.md#E43。
+  - ref: fgz-1986
+    loc: "Proposition 2.1（(ii) ρ(L_m) = Σ_n (n-m) :c_{-n} b_{m+n}: 的鬼场表示；(i) 另给该表示的中心荷）"
+    note: |
+      支持本节点的鬼场部门：bc 系统作为半无限形式 Λ^∞_* 上的表示，鬼场 Virasoro 模有显式表达式。
+      编号已核实（全文逐页读毕，见 literature/extractions/brst-cohomology-sources.md §1.4）。
+      **本节点只用 (ii)**（模式表达式）；(i)（ρ(c) = -26 Id_{Λ^∞_*}）是中心荷取值，
+      挂在 worldsheet.bc-ghost-central-charge 上，不属本定义。
+  - ref: fgz-1986
+    loc: "§2.1 \"The Virasoro Algebra and the BRST Complex\"（Proposition 2.1 之后的正文）"
+    note: |
+      Q_B 作为半无限上同调微分 d 的数学化构造。原文逐字：「We will work in the subcomplex of
+      V ⊗ Λ^∞_* ℒ' relative to the center. Thus from this point on we will assume that
+      π(c) = 26 Id_V. When V is the Fock module …, the differential of this subcomplex is known
+      in the physics literature as the BRST operator (see, e.g., ref. 5) and we will call this
+      subcomplex the BRST complex.」ref. 5 = kato-ogawa-1983。
+      注意这里 π(c) = 26 是 FGZ 的**假设**；本节点作为定义不含该假设。
+      Proposition 1.2「d^2 = 0」是一般分次李代数的陈述，不含中心荷条件。
+  - ref: kato-ogawa-1983
+    loc: "摘要与正文，定理编号未核实"
+    note: |
+      Q_B（BRS 荷）在弦上的首次引入与协变量子化。摘要逐字：「Covariant canonical quantization
+      of the bosonic string is performed, based on the BRS invariance principle.」
+      FGZ §2.1 把「BRST operator」这一叫法直接指向本文。正文未获取（ScienceDirect 403），
+      定理编号与 Q_B 的具体归一化未核实。见 brst-cohomology-sources.md §6。
+tags: [bosonic-string, quantization, brst, ghosts, definition]
+notes: |
+  【本卡片是 worldsheet.brst-quantization 的换代版】（curator 2026-09-11，执行 docs/ROADMAP.md
+  「待拆清单」中 lead 已同意的一条）。旧卡的 statement 里写死了
+    c^g = -3(2λ-1)^2 + 1 = -26 (λ = 2)
+  以及由此推出的 c = c^m + c^g = c^m - 26。这是一条**命题**
+  （worldsheet.bc-ghost-central-charge，有自己的来源与状态：effective = physical-argument，
+  经 OPE 路线）被埋进一张 definition 卡的正文里，违反「一个节点一个命题」，
+  并使得下游推导对 -26 的记账无从查起。本卡片只做这一件事：把 c^g 变回**符号**，
+  其余文字（模式代数、L^g_n、鬼真空与两个简并基态、Q_B、a^g = -1、受限模、相对上同调）
+  与旧卡逐字一致。旧卡按不可变原则原样保留，写 superseded_by 指向本卡片。
+
+  **本卡片仍不 uses worldsheet.bc-ghost-cft**（沿用旧卡 notes 里 curator 2026-09-10 的裁断，
+  ROADMAP 亦明写「不要加 uses 边」）。理由两条，与旧卡相同：
+  (1) **epistemic 不匹配**。本卡片的 rigorous 靠**代数**路线撑起：bc 系统在这里是 Clifford 型
+      代数上的 Fock 模，模展开、{b_m,c_n} = δ_{m+n,0}、L^g_n、受限模条件全部写在本卡片的
+      statement 里，不需要外部输入；数学来源是 fgz-1986 Proposition 2.1(ii)。
+      而 worldsheet.bc-ghost-cft 走**路径积分/OPE** 路线，它 uses operator-product-expansion、
+      primary-field、tt-ope-central-charge，有效状态被这三者封顶在 physical-argument。
+      加这条边会把本卡片以及 brst-nilpotent-at-c26、brst-cohomology-equals-ocq-physical、
+      no-ghost-theorem-brst、no-ghost-theorem-subcritical 一并拉低（旧卡 notes 记有实测）。
+  (2) schema 上 `uses` 是「定义中直接用到的其他 statement id」。本卡片没有「用到」bc-ghost-cft，
+      而是把同一个对象独立写了一遍（记号刻意保持一致），两者是**平行**表述而非依赖。
+  statement 正文里对 worldsheet.bc-ghost-cft 的提及是**指路**（说明这是同一个对象的 CFT 侧表述），
+  不构成依赖边；这与 statement 里提及 worldsheet.critical-dimension-brst 的性质相同。
+
+  **换代后下游的记账变化**：唯一真正用到 c^g 数值的推导是
+  worldsheet.critical-dimension-brst--via-nilpotency（{Q_B,Q_B} 里的那个 26），
+  它**已经**挂了 worldsheet.bc-ghost-central-charge（inferred，2026-09-10 补），
+  故换代不新增任何未记账的一步；其余引用旧卡的推导用的都是 Q_B 的代数构造
+  （模式代数、L^g_n、a^g、受限模），与 c^g 的取值无关，逐条已在各自的 dep note 里注明。
+
+  **仍留在本定义里的常数 a^g = -1**（curator 记账，供 lead 判断是否再拆）：
+  它同样有独立卡片 worldsheet.bc-ghost-normal-ordering-constant（effective = physical-argument，
+  经态-算子同构）。本次**按 lead 指示保留**为定义中的常数——理由是它不是「算出来的中心荷」
+  而是 Q_B 归一化约定的一部分（改 a^g 就改了 Q_B 这个对象本身，而改 c^g 不改 bc 系统）。
+  若日后 reviewer 认为这仍是命题埋进定义，应建 v3 把 a^g 也符号化，
+  并让 brst-charge-on-ghost-ground-state 一类需要 a^g = -1 的推导各自挂那条命题
+  （它们**已经**挂了：--via-contour-and-laurent 有该边）。
+author: curator
+created: "2026-09-11"

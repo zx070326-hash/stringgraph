@@ -3,7 +3,16 @@ target: worldsheet.critical-dimension-brst
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B 的模式定义、bc 反对易关系、L^g_n 与受限模条件。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。**这是本次换代唯一实质影响的推导**：
+      旧卡的 statement 里写死 c^g = −26，而本推导的
+      {Q_B,Q_B} = Σ ((c^m − 26)/12)(m³−m) c_{−m}c_m 里那个 26 就是 −c^g，
+      从旧卡取该值等于「从一张 definition 卡里读一条命题」。v2 不再断言取值，
+      该数值现在**只**由下面的 worldsheet.bc-ghost-central-charge 这条边供给
+      （该边 2026-09-10 已补，故换代不新增未记账的一步，也不改变有效状态：
+      bc-ghost-central-charge 的有效状态 physical-argument 与本推导自身相同）。）
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.bc-ghost-central-charge
     inferred: true

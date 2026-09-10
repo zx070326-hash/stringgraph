@@ -3,7 +3,12 @@ target: worldsheet.brst-cohomology-low-levels
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 D = 26 个自由玻色子上的 Q_B、鬼场基态 |↓⟩ 与相对复形的设定。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2。c^g 的取值不进入本推导的
+      level 0、level 1 显式计算；需要它的是 Q_B² = 0，由下面的
+      worldsheet.brst-nilpotent-at-c26 这条边承担。）
   - id: worldsheet.brst-charge-on-ghost-ground-state
     note: "提供 Q_B(|ψ⟩⊗|↓⟩) 的显式作用公式，是 level 0 的 (2) 与 level 1 中 C¹ → C² 的计算依据。"
   - id: worldsheet.brst-anticommutator-b-mode

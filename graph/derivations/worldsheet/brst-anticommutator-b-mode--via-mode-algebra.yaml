@@ -3,8 +3,12 @@ target: worldsheet.brst-anticommutator-b-mode
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.brst-quantization
-    note: "提供 Q_B 的模式定义、bc 反对易关系、L^g_n 的表达式、a^g = −1 与受限模条件。"
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      提供 Q_B 的模式定义、bc 反对易关系、L^g_n 的表达式、a^g = −1 与受限模条件。
+      （2026-09-11 由 worldsheet.brst-quantization 换代到 v2：v2 只把中心荷 c^g 从数值改回符号。
+      本推导用到的全部是 Q_B 的代数构造，**不用 c^g 的取值**——{Q_B, b_m} = L^tot_m 对任意 c^g
+      成立，中心荷只在 Q_B² = 0 的判据里出现，那属 worldsheet.critical-dimension-brst。）
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，eq. (4.3.6)，p.132"
