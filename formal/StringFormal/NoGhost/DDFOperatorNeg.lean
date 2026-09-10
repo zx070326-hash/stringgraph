@@ -129,4 +129,29 @@ theorem lie_towerLop_towerVertex_of_neg (η a b : Fin D → R) (hη : ∀ μ, η
         • towerVertex η b n (K - m) :=
   lie_towerLop_towerVertex_of_ne η a b hη hbb hm.ne n K
 
+/-- **The DDF-normalised form for every `m ≠ 0`**: with `k_0² = 0` and `2α' k_0 · p = 1` the
+tower vertex operator `:e^{i n k_0·X}:` is a weight-`0` primary,
+`⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`.
+
+Weight `0` for the same reason as in `lie_towerLop_towerVertex_of_pos_normalized`: the
+monodromy shift `z^{2α' n k_0·p} = z^n` built into `towerVertex` cancels the `n (k_0 · p)`
+term of the single-Fock identity.  The cancellation is insensitive to the sign of `m`,
+because neither of the two `n`-dependent contributions depends on `m`. -/
+theorem lie_towerLop_towerVertex_of_ne_normalized (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    {m : ℤ} (hm : m ≠ 0) (n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R)) • towerVertex η b n (K - m) := by
+  rw [lie_towerLop_towerVertex_of_ne η a b hη hbb hm n K, hba]
+  congr 1
+  ring
+
+/-- The `m ≤ -1` half of the normalised weight-`0` transformation law. -/
+theorem lie_towerLop_towerVertex_of_neg_normalized (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    {m : ℤ} (hm : m < 0) (n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R)) • towerVertex η b n (K - m) :=
+  lie_towerLop_towerVertex_of_ne_normalized η a b hη hbb hba hm.ne n K
+
 end StringFormal.NoGhost
