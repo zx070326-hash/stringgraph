@@ -86,7 +86,7 @@ gaps:
     塔上的对应否定结论见姊妹卡，那里同样只是注记。
   - |
     (iii) **同点乘积与加权和未做**，见目标【不断言】(c) 与 notes 的 (5a)(5b)。
-    因此本推导**不**支持 worldsheet.ddf-transverse-oscillator-algebra 的任何部分，
+    因此本推导**不**支持 worldsheet.ddf-transverse-oscillator-algebra-v2 的任何部分，
     只是它的第一块输入。
   - |
     (iv) **依赖 worldsheet.exponential-vertex-operator-mode-weight-identity 的那条边是

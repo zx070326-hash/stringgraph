@@ -82,7 +82,7 @@ gaps:
     （那属于 math.lattice-vertex-algebra 的范围）。
   - |
     (iii) **同点乘积 (5a) 与加权和 (5b) 未做**，故本推导不支持
-    worldsheet.ddf-transverse-oscillator-algebra 的任何部分，只是其第一块输入。
+    worldsheet.ddf-transverse-oscillator-algebra-v2 的任何部分，只是其第一块输入。
     见目标 notes 与姊妹卡 notes 的转录。
   - |
     (iv) **`towerVertex` 在图上没有自己的定义卡**，本推导对

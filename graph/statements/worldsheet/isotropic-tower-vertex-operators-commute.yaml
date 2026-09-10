@@ -46,7 +46,7 @@ statement: |
       本图与 Lean 都没有证明（Lean 侧连该形式级数都没有定义）。
       ⇒ 不得把本卡引作"k_0² ≠ 0 时顶点算子不对易"的来源。
   (b) **[A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0}**。本卡是那条链的第一步，
-      见 worldsheet.ddf-transverse-oscillator-algebra 与 notes。
+      见 worldsheet.ddf-transverse-oscillator-algebra-v2 与 notes。
   (c) **余循环 / Klein 因子 / 一般动量格**。本卡的零模只是塔的层移位（Z 的表示），
       塔是建在**固定的** p 与 k_0 上，不是全动量空间；[x^μ, p^ν] 未出现。
       一般格上的顶点算子见 math.lattice-vertex-algebra。
@@ -120,7 +120,8 @@ notes: |
   而它**第一次**用到 b·a = 2α' k_0·p = 1。
 
   【查重】2026-09-11 跑 `uv run stringgraph search 对易 / isotropic / "vertex operator"`。
-  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra、
+  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra-v2（旧 id
+  worldsheet.ddf-transverse-oscillator-algebra 已 superseded）、
   worldsheet.vertex-operator-adjoint（塔上 V 的伴随，k_0² = 0，另一条命题）、
   worldsheet.momentum-tower-fock-space（定义卡）。**没有**塔上 [V, V] 的节点，本卡不重复。
 author: curator

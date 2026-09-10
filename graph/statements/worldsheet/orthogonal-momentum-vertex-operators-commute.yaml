@@ -42,7 +42,7 @@ statement: |
       **本图与 Lean 都没有**；本卡只断言 b·b′ = 0 的那一侧。
   (c) **同点乘积与加权和**，即 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L
       与 Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}。这两条才是
-      worldsheet.ddf-transverse-oscillator-algebra 的正体，**都未完成**（见 notes）。
+      worldsheet.ddf-transverse-oscillator-algebra-v2 的正体，**都未完成**（见 notes）。
   (d) **任何 OPE 形式的陈述**。本卡是模的代数恒等式；上面写出的 E₊E₋ 缩并公式只是
       **动机说明**，不是本卡断言的对象（本卡断言的只有"标量为 1 那一侧的结论"）。
   (e) **收敛性、完化、解析结构、幺正性、号差**。F 是多项式代数，V^{(b)}_J 逐向量是有限和；
@@ -83,7 +83,7 @@ notes: |
   【立卡理由】这是 [A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0} 那条链的**第一步**，formal/TODO.md
   的 `ddf-operators` 条目子项 (5) 逐字如此命名（「横向代数第一步：正交动量的顶点算子彼此对易」）。
   拆成独立卡的理由同 worldsheet.exponential-vertex-operator-mode-weight-identity：
-  Lean 证的是代数模恒等式，而 worldsheet.ddf-transverse-oscillator-algebra 断言的是完整的
+  Lean 证的是代数模恒等式，而 worldsheet.ddf-transverse-oscillator-algebra-v2 断言的是完整的
   振子代数；把这一步单独立卡，formalized 才落在它真正覆盖的范围上。
 
   【与 worldsheet.exponential-vertex-operator-mode-weight-identity 的假设差别（两处）】
@@ -124,10 +124,11 @@ notes: |
        物理上 δ_{m+n,0} 来自"全导数的留数为零"，m 来自归一化 2α' k_0·p = 1
        （这是 b·a = 1 第一次真正起作用的地方）。
   ⇒ 本卡 + worldsheet.isotropic-tower-vertex-operators-commute 覆盖的是第一步；
-  worldsheet.ddf-transverse-oscillator-algebra 仍只能靠文献推导。
+  worldsheet.ddf-transverse-oscillator-algebra-v2 仍只能靠文献推导。
 
   【查重】2026-09-11 跑 `uv run stringgraph search "vertex operator" / 对易 / orthogonal`。
-  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra（[A,A]，文献推导）、
+  最接近的既有节点：worldsheet.ddf-transverse-oscillator-algebra-v2（[A,A]，文献推导；
+  旧 id worldsheet.ddf-transverse-oscillator-algebra 已 superseded）、
   worldsheet.exponential-vertex-operator-mode-weight-identity（[L_m, V]）、
   worldsheet.vertex-operator-adjoint（V 的伴随）。**没有** [V, V] 的节点，本卡不重复。
 author: curator
