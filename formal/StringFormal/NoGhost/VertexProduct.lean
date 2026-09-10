@@ -166,6 +166,73 @@ theorem levelBound_vertexAnn_le (b : Fin D → R) (M : ℤ) (P : Fock D R) :
 
 end AnnLevel
 
+/-! ### Local finiteness of the same-point product
+
+For fixed `P` and `L` only finitely many `K` contribute to `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K P`.
+The lower end is the usual level bound on `V^{(b')}_K P`.  The **upper end genuinely needs
+`b · b' = 0`**: the naive estimate is useless because `V^{(b')}_K P` sits at level
+`levelBound P + K`, which grows with `K`, so `V^{(b)}_{L-K}` never gets a chance to kill it.
+Orthogonality lets one pull the coherent-state factors `Φ^{b'}_{K+M}` of `V^{(b')}_K P` out
+to the left past `V^{(b)}_{L-K}` (`Fock.vertexOsc_creaExp_mul_of_dotVec_zero`); what is left
+inside is `Ψ^{b'}_M P`, whose level bound does *not* grow with `K`
+(`Fock.levelBound_vertexAnn_le`). -/
+
+section Window
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+omit [Algebra ℚ R] in
+@[simp]
+lemma levelBound_one : levelBound (1 : Fock D R) = 0 := by
+  classical
+  refine Nat.le_zero.mp (Finset.sup_le fun d hd => ?_)
+  have hd0 : d = 0 := by
+    by_contra hne
+    rw [mem_support_iff, coeff_one, if_neg (Ne.symm hne)] at hd
+    exact hd rfl
+  rw [hd0, level_zero]
+
+/-- **Lower end of the window**: `V^{(b')}_K` already kills `P` once `K` is below minus the
+level bound.  No hypothesis on the momenta. -/
+theorem vertexOsc_vertexOsc_apply_eq_zero_of_lt (η b b' : Fin D → R) {J K : ℤ} {P : Fock D R}
+    (hK : (levelBound P : ℤ) + K < 0) :
+    vertexOsc η b J (vertexOsc η b' K P) = 0 := by
+  rw [vertexOsc_apply_eq_zero_of_levelBound_lt η b' hK, map_zero]
+
+/-- **Upper end of the window, and the whole point of orthogonality**: for `b · b' = 0` the
+composite `V^{(b)}_J V^{(b')}_K` vanishes on `P` as soon as `J` is below minus the level
+bound of `P`, *uniformly in `K`*.  Without `b · b' = 0` this is false: the contraction
+`E_+(b) E_-(b')` produces the factor `exp((b·b') Σ_l (w/z)^l / l)`, which mixes all Laurent
+indices and destroys the uniform bound. -/
+theorem vertexOsc_vertexOsc_apply_eq_zero_of_gt (η b b' : Fin D → R)
+    (hdot : dotVec η b' b = 0) {J : ℤ} (K : ℤ) {P : Fock D R}
+    (hJ : (levelBound P : ℤ) + J < 0) :
+    vertexOsc η b J (vertexOsc η b' K P) = 0 := by
+  classical
+  rw [vertexOsc_apply η b' K P
+      (fun L hL => vertexAnn_apply_eq_zero_of_notMem_vertexIdx b' P hL), map_sum]
+  refine Finset.sum_eq_zero fun M _ => ?_
+  rw [vertexOsc_creaExp_mul_of_dotVec_zero η b b' hdot (K + M) J (vertexAnn b' M P)]
+  have hle : (levelBound (vertexAnn b' M P) : ℤ) ≤ (levelBound P : ℤ) := by
+    exact_mod_cast levelBound_vertexAnn_le b' M P
+  rw [vertexOsc_apply_eq_zero_of_levelBound_lt η b (P := vertexAnn b' M P) (K := J) (by omega),
+    mul_zero]
+
+/-- The finite window `-levelBound P ≤ K ≤ L + levelBound P` of the same-point product. -/
+noncomputable def vertexProdIdx (L : ℤ) (P : Fock D R) : Finset ℤ :=
+  Finset.Icc (-(levelBound P : ℤ)) (L + (levelBound P : ℤ))
+
+theorem vertexOsc_vertexOsc_apply_eq_zero_of_notMem_vertexProdIdx (η b b' : Fin D → R)
+    (hdot : dotVec η b' b = 0) (L : ℤ) (P : Fock D R) {K : ℤ} (hK : K ∉ vertexProdIdx L P) :
+    vertexOsc η b (L - K) (vertexOsc η b' K P) = 0 := by
+  simp only [vertexProdIdx, Finset.mem_Icc, not_and, not_le] at hK
+  rcases lt_or_ge K (-(levelBound P : ℤ)) with h | h
+  · exact vertexOsc_vertexOsc_apply_eq_zero_of_lt η b b' (by omega)
+  · exact vertexOsc_vertexOsc_apply_eq_zero_of_gt η b b' hdot K
+      (by have := hK (by omega); omega)
+
+end Window
+
 end Fock
 
 end StringFormal.NoGhost
