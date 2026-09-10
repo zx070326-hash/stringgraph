@@ -1,0 +1,136 @@
+id: worldsheet.normal-ordering-modes-agree
+kind: proposition
+title: 共形正规序与产生-湮灭正规序给出同一组 Virasoro 生成元（m ≠ 0 逐字相同，L_0 相差常数 a^X = 0 / a^g = -1）
+statement: |
+  **记号**。对自由场的双线性场考虑两种正规序：
+  · **共形正规序** : … :_c —— 从算子乘积中减去所有自缩并（worldsheet.conformal-normal-ordering），
+    缩并由两点函数给出，与坐标有关；
+  · **产生-湮灭正规序** : … :_a —— 把模指标为负的（产生）模写到左边，
+    即 worldsheet.virasoro-generators-free-boson 中的 : α_p α_q :（p ≤ q 不换序，否则换序）；
+    费米场同理，每次换序带一个负号。
+
+  考虑下列两个双线性能动张量（conv.worldsheet-complex-coords）：
+  (a) **X 部门**：T^X(z) = -(1/α') : ∂X^μ ∂X_μ :(z)，D 个自由玻色子，靶空间度规 η mostly-plus
+      （worldsheet.energy-momentum-tensor-free-scalar；模展开 ∂X^μ(z) = -i(α'/2)^{1/2} Σ_m α^μ_m z^{-m-1}，
+      [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}）；
+  (b) **鬼场部门**：λ = 2 的 bc 系统的 T^g(z) = : (∂b) c : - λ ∂( : b c : )
+      （worldsheet.bc-ghost-cft；b(z) = Σ_n b_n z^{-n-2}，c(z) = Σ_n c_n z^{-n+1}，{b_m, c_n} = δ_{m+n,0}），
+      其产生-湮灭正规序取相对于基态 |↓⟩（被全部 b_n、c_n (n > 0) 与 b_0 湮灭，
+      worldsheet.bc-ghost-ground-state-ghost-number (i)）。
+  以上每一个 T 都可以按两种正规序各写一次，记为 T^{(c)}(z) 与 T^{(a)}(z)，
+  其 Laurent 模（worldsheet.energy-momentum-laurent-modes，L_m = ∮ (dz/2πi) z^{m+1} T(z)）
+  分别记为 L_m^{(c)} 与 L_m^{(a)}。
+
+  **断言**：
+
+  (i) （**差是 c-数**）对 (a)、(b) 两种情形，
+        T^{(c)}(z) - T^{(a)}(z) = f(z) · 1,
+      其中 f(z) 是一个不含算子的形式 Laurent 级数（c-数形式级数），1 是恒等算子。
+
+  (ii) （**只落在 m = 0**）进一步地 f(z) = a · z^{-2}（a ∈ C 为常数），因而
+        L_m^{(c)} = L_m^{(a)}  对一切 m ≠ 0，
+      两者作为算子逐字相同（不是"相差可忽略项"，而是同一个算子）。
+
+  (iii) （**L_0 相差常数**）m = 0 时
+        L_0^{(c)} = L_0^{(a)} + a,
+      其中该常数由本图两条既有命题给出：
+        · X 部门：a = a^X = 0（worldsheet.normal-ordering-constant-ax；
+          conv.metric-mostly-plus、conv.alpha-prime-regge、conv.virasoro-standard 下），
+          故 X 部门两组生成元**对一切 m 逐字相同**；
+        · 鬼场部门（以 |↓⟩ 为产生-湮灭真空）：a = a^g = -1
+          （worldsheet.bc-ghost-normal-ordering-constant），故 L_0^{g,(c)} = L_0^{g,(a)} - 1，
+          与 worldsheet.brst-quantization 的 statement 中写的 L_n = L^m_n + L^g_n + a^g δ_{n,0} 一致
+          （那里的 L^g_n 是产生-湮灭序，a^g δ_{n,0} 正是本条 (iii) 的移位）。
+
+  (iv) （**中心荷不受影响**）若 {L_m^{(c)}} 满足标准 Virasoro 关系（conv.virasoro-standard）
+        [L_m^{(c)}, L_n^{(c)}] = (m-n) L_{m+n}^{(c)} + (c/12) m(m^2-1) δ_{m+n,0},
+      则由 (ii)(iii)
+        [L_m^{(a)}, L_n^{(a)}] = (m-n) L_{m+n}^{(a)} + 2 m a δ_{m+n,0} + (c/12) m(m^2-1) δ_{m+n,0},
+      反之亦然。多出的 2 m a δ_{m+n,0} 是把 L_0 平移一个常数所产生的项，
+      作为 Witt 代数上的 2-上循环它是**上边缘**（平移 L_0 即可消去），不改变中心扩张类；
+      中心荷由 m^3 项的系数读出，故 **c 与正规序的选取无关**。
+      特别地 a^X = 0 时连这一项都没有，X 部门两组生成元满足同一个 Virasoro 代数。
+
+  **推论（本命题的用处）**：任何只用到 m ≠ 0 的 L_m 的论断（Virasoro 关系的非中心部分、
+  物理态条件 L_m|ψ⟩ = 0 (m ≥ 1)、场的局域性、中心荷的取值）与两种正规序的选取无关；
+  只有涉及 L_0 **谱**的论断（质量公式、截距、L_0 移位）必须指明用的是哪一种正规序，
+  并按 (iii) 换算。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)（L_0 的共形正规序写法）、(2.7.9)（a^X = 0）、(2.7.11)（产生-湮灭正规序的定义），p.59–60"
+    note: |
+      三个式号与 a^X = 0 的**值**均经核对源 schrans-2020 目录核实
+      （`2.50 p 59`、`2.51 p 59: Eq. (2.7.9) a^X = 0`、`2.52 p 60`），见抽取记录
+      literature/extractions/polchinski-1998-v1.md E42。
+      E42 同时记下：Polchinski 在此处**不用 zeta 正规化**，而是用态-算子同构定常数。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.19)（鬼场 Virasoro 模 L^g_n，产生-湮灭序）、(2.7.21)（鬼场正规序常数 a^g），p.61"
+    note: |
+      **式号经 schrans-2020 目录核实，数值 a^g = -1 未经第三方核对源确认**：
+      schrans-2020 的目录条目标题不含数值，其 §2.80 正文的结论句「a^g = 0」与它自己上一行的方程
+      1 + a^g = 0 自相矛盾（两版均未修正），抽取记录 E43 的 a^g = 0 即由此误记而来。
+      正确值 a^g = -1 的依据是 schrans-2020 [2.148] a^g = ½λ(1-λ) 与 reviewer-ch23（2026-09-10）
+      的独立重算，见 literature/extractions/polchinski-1998-v1.md E43 的「订正（2026-09-10）」。
+      本节点只**引用**该值（承载它的是 worldsheet.bc-ghost-normal-ordering-constant），不重新论证。
+  - ref: polchinski-1998-v1
+    loc: "§2.2, eq. (2.2.5)、(2.2.8)（共形正规序即减去自缩并），p.39–40；§2.3, eq. (2.3.15)（T^X），p.43；§2.5, eq. (2.5.11)（T^g），p.50"
+    note: |
+      本条只为定位两种正规序与两个 T 的定义式，其核实等级与
+      worldsheet.conformal-normal-ordering、worldsheet.energy-momentum-tensor-free-scalar、
+      worldsheet.bc-ghost-cft 各自 sources 中记录的相同（T^X 的系数 -(1/α') 与 T^g 的系数未核对原书）。
+tags: [cft, normal-ordering, virasoro, free-field, ghosts, bookkeeping]
+notes: |
+  **为什么建这个节点**（docs/ROADMAP.md 待建清单，curator 2026-09-11）：
+  「共形正规序与产生-湮灭正规序给出同一组 L_m」此前在图里以**散文**重复了至少三处，
+  每处措辞略有出入、都没有自己的来源与状态：
+    (1) worldsheet.virasoro-generators-free-boson 的 notes 缺口 (4)（"本图未单独建节点，
+        而是写在 free-boson-central-charge-d--via-ope 的论证里"）；
+    (2) worldsheet.free-boson-central-charge-d--via-ope 的 depends_on 边注与 gaps 第 4 条；
+    (3) worldsheet.string-cft-is-a-vertex-algebra-v2 的 statement 里"⚠ 与 …
+        的正规序不同"一段（该 statement 已冻结，不改；只在其 notes 加指针）。
+  另有第四处：worldsheet.conformal-normal-ordering 的 notes 末尾 ⚠ 一段。
+  这些散文本身没错，但它们是**一条命题**，应当有 id、来源、状态和依赖。本节点承载它。
+
+  **本节点自己新增的内容只有 (i)(ii)(iv)**。(iii) 里的两个数值是**引用**
+  worldsheet.normal-ordering-constant-ax（a^X = 0）与 worldsheet.bc-ghost-normal-ordering-constant
+  （a^g = -1），不在此重新论证。把它们写进 statement 是为了让"同一组 L_m"这句话有完整意义
+  ——只说"差一个常数"而不给常数，下游没法用。
+
+  **(iv) 的算法细节**（写在这里而不是 statement 里，因为它是一步验算）：
+  设 L_m^{(a)} = L_m^{(c)} (m ≠ 0)、L_0^{(a)} = L_0^{(c)} - a。则
+    · m + n ≠ 0 且 m, n ≠ 0：[L_m^{(a)}, L_n^{(a)}] = (m-n) L_{m+n}^{(c)} = (m-n) L_{m+n}^{(a)}（因 m+n ≠ 0）；
+    · n = 0, m ≠ 0：[L_m^{(c)}, L_0^{(c)} - a] = [L_m^{(c)}, L_0^{(c)}] = m L_m^{(a)}（常数与一切算子对易）；
+    · n = -m ≠ 0：[L_m^{(c)}, L_{-m}^{(c)}] = 2m L_0^{(c)} + (c/12)m(m^2-1)
+      = 2m L_0^{(a)} + 2 m a + (c/12) m(m^2-1)。
+  这也解释了 schrans-2020 [2.147] 那个定 a^g 的算法「2a^g|↓⟩ = [L_1, L_{-1}]|↓⟩」：
+  它正是在产生-湮灭序下算 [L_1, L_{-1}]，再要求结果等于共形序的 2 L_0。
+
+  ⚠ **依赖面比某些下游需要的宽**（curator 2026-09-11，提请 lead / reviewer 注意）：
+  本节点把 X 部门与鬼场部门写在同一张卡上（roadmap 的措辞如此），于是它的推导必须依赖
+  worldsheet.bc-ghost-cft 与 worldsheet.bc-ghost-normal-ordering-constant。
+  但 worldsheet.free-boson-central-charge-d--via-ope 只用到 **X 半边**——引本节点会让
+  c^X = D 的 OPE 路线在依赖图上牵进整条鬼场链（对 effective status 无影响，两条链都是
+  physical-argument，但语义上是过量依赖）。若日后这成为问题，**正确的修法是新建一个
+  只含 X 半边的弱节点**（如 worldsheet.normal-ordering-modes-agree-x），
+  按本仓库处理 worldsheet.brst-nilpotent-at-c26 的先例办，而不是改本节点的 statement。
+
+  **与 Lean 的关系**：formal/ 侧只有产生-湮灭序的 L_m
+  （worldsheet.virasoro-generators-free-boson 的 Sugawara.lean），**没有** T、OPE、围道，
+  因此本命题是 Lean 侧与 CFT 侧之间那道桥的图侧表述，而**本身尚未形式化**。
+  这正是 worldsheet.virasoro-generators-free-boson 的 notes 缺口 (4) 登记的那条缺口：
+  在本命题被形式化之前，需要 CFT 侧 L_m 的下游仍不得引那个节点的 formalized 状态。
+
+  **本节点不断言的事**：
+  · 不断言 {L_m^{(c)}} 满足 Virasoro 关系——(iv) 是"若…则…"的双向翻译，
+    Virasoro 关系本身见 worldsheet.free-boson-central-charge-d 与 worldsheet.bc-ghost-central-charge；
+  · 不断言 T^{(c)} 的模求和在任何解析意义下收敛（那由 worldsheet.energy-momentum-laurent-modes
+    与 worldsheet.operator-product-expansion 承担，且在那里也未被证明）；
+  · 不覆盖一般 λ 的 bc 系统（只做 λ = 2）、不覆盖 βγ 系统、不覆盖顶点算子 e^{ik·X}
+    （后者不是双线性场，两种正规序之差不再是 c-数）。
+author: curator
+created: "2026-09-11"

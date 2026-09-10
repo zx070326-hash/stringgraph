@@ -73,7 +73,9 @@ notes: |
   与 worldsheet.energy-momentum-laurent-modes 的关系：后者是「由全纯 T 的 Laurent 系数定义 L_m」，
   经过 OPE 与围道，status 由上游拉低；本节点是同一批 L_m 的独立、纯代数的定义。
   两个定义给出同一组算子这件事本身是一条命题（自由场 T 的模展开 = 上述振子双线性式），
-  本图未单独建节点，而是写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里。
+  **自 2026-09-11 起由独立节点 worldsheet.normal-ordering-modes-agree 承载**
+  （此前只写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里；本段的旧措辞
+  「本图未单独建节点」自此过时）。
 
   与 formal/ 的接口：formalizer 正在建的自由玻色子 Fock 空间（formal/StringFormal/NoGhost）
   与本节点对应；若 Lean 侧完成 L_m 的定义，可在本节点填 formal.lean_decl。
@@ -140,9 +142,19 @@ notes: |
       gaps" 第 5 条）：本节点的 L_m（振子双线性 + 产生-湮灭正规序）与
       worldsheet.energy-momentum-laurent-modes 的 L_m（全纯 T 的 Laurent 系数、围道积分、
       共形正规序）在 Lean 中**没有**任何联系——Lean 侧根本没有 T、没有 OPE、没有围道。
-      「两者是同一组算子」这件事在本图里也没有独立节点（见本 notes 上文，
-      它被写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里）。
       任何需要 CFT 侧 L_m 的下游结论都不能引本节点的 formalized 状态。
+
+      **【2026-09-11 更新（curator）：图侧已有节点，Lean 侧缺口不变】**
+      「两者是同一组算子」这件事现由 **worldsheet.normal-ordering-modes-agree** 承载
+      （推导 --via-self-contraction，来源 Polchinski §2.7 (2.7.7)–(2.7.21)），
+      本条原先写的「在本图里也没有独立节点，它被写在
+      worldsheet.free-boson-central-charge-d--via-ope 的论证里」自此过时。
+      该节点断言：两种正规序的双线性场至多差一个 c-数形式级数，故 L_m 对 m ≠ 0 逐字相同、
+      L_0 相差常数（X 部门 a^X = 0，鬼场部门 a^g = -1），且中心荷与正规序无关。
+      **但它的 status 是 physical-argument 且尚未形式化**（其常数值一步用到态-算子同构），
+      因此本条的最后一句**继续有效**：需要 CFT 侧 L_m 的下游仍不得引本节点的 formalized 状态，
+      而应引 worldsheet.normal-ordering-modes-agree（并因此降到 physical-argument）。
+      把这条桥形式化（在 Lean 里同时有 T、模展开与共形正规序）是关闭本缺口的唯一办法。
 
   (5) **【已关闭，见本条末尾的 2026-09-11（二）记录】L_m^† = L_{-m} 未证**（formalizer 记录的缺口，同上第 5 条）。
       Sugawara.lean 完全不涉及 worldsheet.fock-indefinite-form 的 `Fock.pairing`：
