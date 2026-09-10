@@ -28,15 +28,28 @@ uses_conventions:
   - conv.worldsheet-euclidean
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.2, eq. (5.2.9), p.152（陈述）；§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出）"
+    loc: "§5.2, eq. (5.2.9), p.152（陈述；原书写作 μ − κ = −3χ）；§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E75/#E82。
-      **式号锚定强度是第 5 章最好的一条**：schrans-2020 §5.23 **正文**逐字写
-      「…which leads to the Riemann-Roch theorem (5.2.9)」，紧接 κ − μ = 3χ（条目 [5.90]），
-      即正文级引用而非目录标题（L1 对笔记；对 Polchinski 原书仍未核对）。
-      ⚠ **原书的陈述范围比本卡宽**：v1 卡照抄了原书的「可定向或不可定向」。
-      本卡刻意收窄到可定向，理由见 statement 的第一条 ⚠ 与 notes 的换代记录；
-      这是**本图**的限定，不是原书的限定。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E75/#E82，以及该记录 §12.10 表第 16 行。
+      **★ 原书 p.152 已逐字核实（L1，2026-09-11）**：
+      「The metric moduli correspond to the kernel (5.2.6) of P_1^T and the CKVs to the kernel (5.2.7) of P_1.
+       **The Riemann–Roch theorem relates the number of metric moduli μ = dim ker P_1^T and the number of
+       CKVs κ = dim ker P_1 to the Euler number χ,  μ − κ = −3χ.  (5.2.9)**
+       We will be able to derive this later in the chapter. **For a closed oriented surface −3χ = 6g − 6.**
+       This counting refers to real moduli, separating complex moduli such as τ into their real and
+       imaginary parts.」
+      三处要点：
+      (a) **原书的写法是 μ − κ = −3χ**，本卡（沿用 v1）写作 κ − μ = 3χ——**数学上恒等**，
+          只是移项；本图不因此再建一版。
+      (b) 原书在同处给出 μ、κ 的精确定义：μ = dim ker P₁^T、κ = dim ker P₁，
+          与 worldsheet.moduli-condition-traceless-transverse、worldsheet.conformal-killing-equation 一致。
+      (c) **原书紧接 (5.2.9) 自己就写了「For a closed oriented surface −3χ = 6g − 6」**——
+          即**原书在给出亏格公式时也限定了 oriented**，这与本卡收窄到可定向是同向的。
+          （顶点算子位置的 +2n 仍不在 (5.2.9) 里，见 worldsheet.moduli-integration-parameter-count。）
+      **式号锚定强度是第 5 章最好的一条**：除上述原书逐字外，schrans-2020 §5.23 **正文**逐字写
+      「…which leads to the Riemann-Roch theorem (5.2.9)」（条目 [5.90]），即正文级引用而非目录标题。
+      ⚠ **「可定向或不可定向」不是原书这一段的措辞**，是 v1 卡从 §5.2 的上下文（该节确实同时讨论
+      不可定向弦）概括来的。本卡刻意收窄到可定向，理由见 statement 的第一条 ⚠ 与 notes 的换代记录。
       ⚠ 球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)，本卡把它作为**检验值**列出。
   - ref: eynard-2018-lectures
     loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（数学路线的入口，经 math.* 三卡接入）"
