@@ -1,10 +1,21 @@
-id: worldsheet.open-string-intercept--via-null-state-decoupling
-target: worldsheet.open-string-intercept
+id: worldsheet.open-string-intercept-v2--via-null-state-decoupling
+target: worldsheet.open-string-intercept-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.old-covariant-physical-states
   - id: worldsheet.virasoro-algebra-v2
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    inferred: false
+    note: |
+      【2026-09-11 换代时新增的一条边（curator）】summary「第一级」一段里的
+      (L_0 − a) L_{−1}|0;k⟩ = (α'k² + 1 − a) L_{−1}|0;k⟩ 这一步，正是该节点
+      「L_0 在 level N 分量上是标量 α'k² + N 的乘法」在 N = 1 处的特例
+      （Lean 侧 `Fock.sub_intercept_apply_of_mem_levelSubmodule` 一行调用
+      `Fock.Lop_zero_apply_of_mem_levelSubmodule`）。
+      来源侧同一步是 Polchinski (4.1.16)（已在本推导 sources 的 §4.1 区间内），
+      故非 inferred。该节点 effective = formalized，此边不改变本推导的状态。
+      若 lead 要求本次换代严格「就地不改内容」，删掉本条即可，不影响其余部分。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1（OCQ 伪态/零态分析：第一级给 a = 1，第二级在 a = 1 下给 D = 26）"
@@ -45,9 +56,28 @@ gaps:
       (2) **「伪态必须解耦」这一物理要求本身**——它是幺正性/规范不变性的一致性条件，
           不是可形式化的数学命题（见本 gaps 第一条）。
       (3) **第二级（level 2）分析**（本 summary 的后半段，定 D = 26）：完全未形式化。
-    因此：**本推导与 worldsheet.open-string-intercept 一律不得标 formalized，
+    因此：**本推导与 worldsheet.open-string-intercept-v2（换代前为
+    worldsheet.open-string-intercept）一律不得标 formalized，
     status 保持 physical-argument。** 想引用形式化结果的下游应当直接引
     worldsheet.physical-states-level-one，并注意它只给出上述那一个方向。
   - "命名说明：reviewer 原先指定的 id 为 --via-level-two-null-state，但如上所算，a = 1 来自第一级（level 1）伪态，第二级只定 D。为避免永久性误导的 id，改名为 --via-null-state-decoupling；两级分析都写在本推导里。若 lead 坚持原名，合并前可重命名（本分支未合并，id 尚可改）。"
+notes: |
+  【2026-09-11 换代】本文件由 worldsheet.open-string-intercept--via-null-state-decoupling
+  改挂到换代后的陈述 worldsheet.open-string-intercept-v2（旧陈述把「α'm² = N − a」与
+  「一致性要求 a = 1」绑在一张卡上，见 docs/ROADMAP.md 待拆清单）。
+  因 derivation id 必须写成 `<statement-id>--via-<method>`（graph/CLAUDE.md），
+  无法就地改 id，故 `git mv` 成本文件名并删除旧文件。
+
+  相对原推导的**全部改动**（除 id / target 外）只有两处，均已在原处标注：
+  (1) depends_on 增加 worldsheet.open-string-l0-equals-level-plus-mass 一条边
+      （理由见该条 note：summary 的 (L_0 − a)L_{−1}|0;k⟩ = (α'k² + 1 − a)L_{−1}|0;k⟩
+      正是它在 N = 1 的特例；它 effective = formalized，不改变本推导状态）；
+  (2) gaps (iv) 里的陈述 id 由旧卡改为 v2，并保留旧 id 以便追溯。
+  summary、sources、其余 gaps、author、created 一字未改。
+
+  【本推导与 v2 的分工再申】v2 陈述里的 α'm² = N − a 只是背景记号，其论证由
+  worldsheet.open-string-l0-equals-level-plus-mass 与 worldsheet.physical-states-level-grading
+  （均 formalized）承担；本推导承担的是**唯一性/排他性**那一半（a ≠ 1 不自洽），
+  它仍然只有 physical-argument 支撑，这正是当初要拆卡的理由。
 author: curator-critdim
 created: "2026-09-10"

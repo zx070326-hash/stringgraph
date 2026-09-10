@@ -6,10 +6,14 @@ depends_on:
   - id: worldsheet.critical-dimension-light-cone
   - id: worldsheet.critical-dimension-old-covariant
   - id: worldsheet.critical-dimension-brst
-  - id: worldsheet.open-string-intercept
+  - id: worldsheet.open-string-intercept-v2
     note: |
       汇总陈述含 a = 1，但路线 (iii)（BRST 幂零）只给出 c^m = 26，不含截距。
       故 a = 1 必须显式从本节点取得，否则合取不成立。
+      【2026-09-11 换代】原先指向 worldsheet.open-string-intercept；该卡已 superseded_by
+      worldsheet.open-string-intercept-v2（v2 只断言 a = 1，质量公式移交
+      worldsheet.open-string-l0-equals-level-plus-mass 与 worldsheet.physical-states-level-grading）。
+      本推导只用到「a = 1」这一句，v2 逐字保留之，故换代不改变本推导的论证与状态。
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.3（光锥）、§4.1（OCQ 零态与截距）、§4.3（BRST 幂零）、§4.4（无鬼定理的 BRST 版本）"
@@ -21,9 +25,10 @@ summary: |
     (i)   worldsheet.critical-dimension-light-cone（光锥洛伦兹代数闭合 ⇒ D=26 且 a=1）
     (ii)  worldsheet.critical-dimension-old-covariant（零模态退耦、谱幺正 ⇒ D=26 且 a=1）
     (iii) worldsheet.critical-dimension-brst（Q_B^2 = 0 ⟺ c^m = 26；**只给 D，不给 a**）
-    (+)   worldsheet.open-string-intercept（a = 1，与 D 无关地成立）
+    (+)   worldsheet.open-string-intercept-v2（a = 1，与 D 无关地成立；2026-09-11 前为
+          worldsheet.open-string-intercept）
   路线 (iii) 单独不足以支撑汇总陈述中的 a = 1，这是 reviewer 指出的缺口；
-  补上 open-string-intercept 后合取才完整。
+  补上 open-string-intercept-v2 后合取才完整。
   本推导只做合取，不含新的物理输入，故其自身状态为 rigorous；
   但有效状态由最弱的一条决定，即光锥路线与截距节点的 physical-argument。
 gaps:

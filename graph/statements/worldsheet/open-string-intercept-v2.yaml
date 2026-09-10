@@ -1,0 +1,85 @@
+id: worldsheet.open-string-intercept-v2
+kind: proposition
+title: 开弦截距的临界值 a = 1（只断言截距取值，不含质量公式）
+statement: |
+  考虑 D 维自由玻色开弦的旧协变量子化（worldsheet.old-covariant-physical-states）：
+  物理态条件为 (L_0 − a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n > 0)，其中常数 a 称为**截距**
+  （intercept；符号约定 conv.intercept-sign-a，Polchinski 的 A = −a）。
+
+  **本命题断言：一致性要求**
+    a = 1。
+
+  这里的「一致性」指下列任一条（每条都单独等价于 a = 1，且与 D 的取值无关）：
+    (a) 第一激发级（level N = 1）的态是**无质量**的；
+    (b) 第一级伪态（spurious state）L_{−1}|0;k⟩ ∝ k·α_{−1}|0;k⟩ 本身满足物理态条件
+        （因而是零模态），从而矢量态的偏振有规范自由度 e^μ → e^μ + λ k^μ；
+    (c) level 1 的独立态构成无质量小群 SO(D−2) 的矢量表示（D−2 个），
+        而不是有质量小群 SO(D−1) 的某个表示。
+
+  【与质量公式的分工——本卡与旧卡 worldsheet.open-string-intercept 的唯一实质差别】
+  质量公式本身**不是**本命题的内容。「L_0 在 level N 分量上是标量 α'k² + N 的乘法」
+  是 worldsheet.open-string-l0-equals-level-plus-mass（已 formalized）；把它代入
+  物理态条件的 L_0 部分、并按 conv.metric-mostly-plus 用 k² = −m²，得
+    α' m² = N − a
+  （逐 level 的刻画与「非零态强迫质量壳」这两句，见 worldsheet.physical-states-level-grading，
+  亦已 formalized）。上式在本卡片中**只作为背景记号出现**，本卡片对它不承担任何论证：
+  引用质量公式的下游应当引上述两张 formalized 卡片，引「a = 1」才引本卡片。
+  这正是本次换代的目的：旧卡把一条已被 Lean 覆盖的等式与一条 physical-argument 的
+  取值断言绑在同一张卡上，导致前者被后者封顶、无法分别记账。
+
+  【本命题**不**断言什么】
+  (i) **不**断言 D = 26。上面 (a)(b)(c) 三条刻画对任意 D ≥ 4 都成立且都等价于 a = 1；
+      D = 26 见 worldsheet.critical-dimension-bosonic 及其三条路线，其中 BRST 路线
+      （worldsheet.critical-dimension-brst）只给出 c_m = 26 而**不**给出 a = 1。
+  (ii) **不**覆盖闭弦。闭弦的对应量是 a = ã = 1（左右各一份），质量壳 α'm²/4 = N − a；
+      需要时另建节点。
+  (iii) **不**断言 a = 1 时 level 1 的横向态模态为正，更不断言 H_phys/H_0 半正定；
+      那是无鬼定理（worldsheet.no-ghost-theorem-v4）。
+  (iv) 上述 (b) 中「a = 1 ⇒ 纵向态退耦」的那**一个方向**在 a = 1、k² = 0 处已形式化
+      （worldsheet.physical-states-level-one 第 (3) 条）；**唯一性/排他性方向**
+      （a ≠ 1 不自洽）未形式化，正是本卡片承载的、只有 physical-argument 支撑的部分。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124（OCQ level 1 分析：A = −1 一栏无质量且伪态同时物理；A > −1 与 A < −1 两栏各 D−1 个自由度，后者破坏幺正性）"
+    note: "抽取记录 polchinski-1998-v1#E56（level 1，式号与内容已核实；#E57 是 level 2，定 D 而非 a）。已按 conv.intercept-sign-a 做 a = −A 换算。"
+  - ref: polchinski-1998-v1
+    loc: "§1.3（光锥谱：第一激发级须为无质量 SO(D−2) 矢量），(1.3.25b)、约 (1.3.32)–(1.3.36)"
+    note: "抽取记录 polchinski-1998-v1#E18。式号为近似定位。"
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2（OCQ 谱、截距与无质量矢量）"
+    note: 定位强度 L4（目录/页码级），式号未核实。GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
+tags: [bosonic-string, critical-dimension, intercept, open-string, spectrum]
+notes: |
+  【换代记录】本卡片换代 worldsheet.open-string-intercept（旧卡写 superseded_by 指向本卡，
+  旧卡陈述文本一字未动，符合根 CLAUDE.md 原则 1）。拆分依据是 docs/ROADMAP.md「待拆清单」条目
+  「worldsheet.open-string-intercept（"α'm² = N − a" 已 formalized 覆盖，"一致性要求 a = 1"
+  是 physical-argument，绑在一起无法记账；与 open-string-l0-level-form 同构）」，lead 已同意。
+
+  【换代的机械操作】旧卡的两条推导 --via-light-cone-representation 与
+  --via-null-state-decoupling 的**内容整体保留**，但因 derivation id 必须写成
+  `<statement-id>--via-<method>`（graph/CLAUDE.md 的 id 规则），无法就地改 id，
+  故新建同名的 `open-string-intercept-v2--via-...` 两个文件并删除旧文件。
+  两条推导的 summary / gaps / sources 逐字沿用，仅改 id、target 并加一段换代说明。
+  后果：旧卡 worldsheet.open-string-intercept 在换代后**没有任何推导**，
+  `stringgraph report` 会把它列入 "open propositions"。这是换代的正常副作用
+  （旧卡不再被任何节点依赖），不是新增缺口；`report` 是否应过滤 superseded 节点是工具侧问题。
+
+  【入边换代清单】原先 depends_on 旧卡的两条推导已就地换成本卡：
+  worldsheet.critical-dimension-bosonic--via-three-routes、
+  worldsheet.leading-regge-trajectory--via-spin-counting。
+  worldsheet.critical-dimension-bosonic 的**陈述**不动（其陈述含 a = 1，故其推导仍须显式依赖本卡）。
+  其余提及旧卡的地方（若干节点 notes 的散文引用、conv.alpha-prime-regge 的 notes）
+  不是图的边，本次不逐条改写，以免触碰已提交节点的正文。
+
+  【为什么 status 由推导计算而不是 formalized】本卡是 proposition，不填 status。
+  两条推导都是 physical-argument：光锥路线的输入是「谱须组织成洛伦兹小群表示」这一
+  一致性要求，OCQ 路线的输入是「伪态必须解耦」这一幺正性/规范不变性要求，
+  两者都不是定理。Lean 侧只覆盖 a = 1 的**充分**方向（见上文边界 (iv)），
+  因此本卡片**不得**标 formalized。
+author: curator
+created: "2026-09-11"

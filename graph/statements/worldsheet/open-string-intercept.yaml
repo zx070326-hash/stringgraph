@@ -36,5 +36,32 @@ notes: |
 
   from: polchinski-1998-v1#E56（level 1 ⇒ a = 1）, polchinski-1998-v1#E57（level 2）, polchinski-1998-v1#E18
   （lead 2026-09-11 订正：原只写 E57 且称抽取记录不存在；现文件已在 main，E56 = level 1 已核实，E57 = level 2 式号未核实。）
+
+  **【2026-09-11：本卡片已换代 → worldsheet.open-string-intercept-v2】**（curator，
+  依据 docs/ROADMAP.md「待拆清单」条目与 lead 的同意。本次**只加 superseded_by 与本段 notes，
+  statement 文本、sources、tags 一字未动**，符合根 CLAUDE.md 原则 1。）
+
+  拆分理由：本卡片的 statement 把两件事绑在一起——
+    (i) 质量公式 α'm² = N − a（连同 L_0 = α'p² + N 的代入），**已被 Lean 覆盖**
+        （worldsheet.open-string-l0-equals-level-plus-mass、
+        worldsheet.physical-states-level-grading，均 formalized）；
+    (ii)「一致性要求 a = 1」，只有 physical-argument 支撑（两条推导的输入分别是
+        「谱须组织成洛伦兹小群表示」与「伪态必须解耦」，都是一致性要求而非定理）。
+  绑在一张卡上时 (i) 被 (ii) 封顶，两者无法分别记账。新卡 v2 只承载 (ii)，
+  (i) 由上述两张 formalized 卡片承载（**不另建新卡**）。
+
+  换代的机械后果：两条推导 --via-light-cone-representation 与 --via-null-state-decoupling
+  因 id 规则 `<statement-id>--via-<method>` 无法就地改 id，已 `git mv` 成
+  `open-string-intercept-v2--via-...` 并改 target，内容基本沿用（改动见各文件 notes）。
+  因此**本卡片在换代后没有任何推导**，`stringgraph report` 会把它列入 "open propositions"；
+  这是换代的正常副作用而非新增缺口——本卡片换代后已无任何入边
+  （原先依赖它的 worldsheet.critical-dimension-bosonic--via-three-routes 与
+  worldsheet.leading-regge-trajectory--via-spin-counting 已改指 v2），
+  故换代不改变任何节点的有效状态。
+
+  需要引用本卡片内容的下游一律改引：a = 1 → worldsheet.open-string-intercept-v2；
+  质量公式 → worldsheet.open-string-l0-equals-level-plus-mass（+ 逐 level 刻画则
+  worldsheet.physical-states-level-grading）。
+superseded_by: worldsheet.open-string-intercept-v2
 author: curator-critdim
 created: "2026-09-10"
