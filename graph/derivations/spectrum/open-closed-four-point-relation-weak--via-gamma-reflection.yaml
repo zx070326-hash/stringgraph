@@ -1,0 +1,58 @@
+id: spectrum.open-closed-four-point-relation-weak--via-gamma-reflection
+target: spectrum.open-closed-four-point-relation-weak
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.virasoro-shapiro-amplitude
+    note: 提供闭弦侧的 Γ 商表达式（分解的左端）。
+  - id: spectrum.veneziano-amplitude-weak
+    note: |
+      提供开弦侧的三项 Beta 结构（分解的右端）。
+      ⚠ 它本身是弱形式（无前因子），这是本卡片也只能是弱形式的第二个理由
+      （第一个是 (6.6.23) 的三处争议）。
+  - id: math.euler-beta-integral
+    note: |
+      提供 B = ΓΓ/Γ 的关系；三角因子来自 Γ 函数的反射公式
+      Γ(x)Γ(1−x) = π/sin(πx)——即闭弦的三 Γ 结构与两份开弦两 Γ 结构之差。
+      ⚠ 反射公式本身在本图**没有节点**，见 gaps。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 α_c(s)+α_c(t)+α_c(u) = −1，把闭弦的三个 Γ 参数与开弦的两组参数对上。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.23)（并见 (6.6.21)），p.195"
+    note: |
+      抽取记录 #E108，**L1（推导路线）/ L0（表达式）**。⚠ 三处争议见目标陈述 notes 与本推导 gaps。
+  - ref: schrans-2020
+    loc: "§6.71 附近（笔记 p.339）：[6.270]/[6.272]（核对源，两行自相矛盾）"
+summary: |
+  **结构性论证**（本推导只支持这一层）：
+
+  闭弦振幅正比于 Γ(a)Γ(b)Γ(c)/(Γ(a+b)Γ(a+c)Γ(b+c))，其中 a = −α_c(s) 等、a+b+c = 1
+  （由 α_c 求和 = −1）。开弦振幅正比于 Beta 函数 Γ(x)Γ(y)/Γ(x+y)，参数取 α'/4 的轨迹。
+  把闭弦的三 Γ 商拆成两份 Beta 型的乘积，多出/少掉的 Γ 因子用反射公式
+  Γ(x)Γ(1−x) = π/sin(πx) 合并成一个 **sin(πα_c(t))** 型三角因子。
+  于是
+    A_c ∝ sin(πα_c(t)) · A_o(s,t; α'/4) · A_o(t,u; α'/4)，
+  比例常数按 researcher 的复算为 πi g_c²α'/g_o⁴。
+  这就是「闭弦 = 两个开弦」在树级四点的实现，也是 α'_closed = α'_open/4 这条换算的出处。
+gaps:
+  - "**⚠ 争议 1（sin 因子）**：[S] 的 [6.270] 带 sin(πα_c(t))，[6.272] 不带，**同一节内自相矛盾**。
+     researcher 按 (α'/(4ig_o²))² = −α'²/(16g_o⁴) 复算，判定前因子为 +πig_c²α'/g_o⁴ 且
+     **sin 应当保留**。**本推导按 researcher 的判断写，未经原书核对，也未经第二源确认。**"
+  - "**⚠ 争议 2（复共轭）**：[S] 逐字「I am not sure why the second A_o is conjugated in Joe's book」
+     ——**原书写共轭，[S] 认为不需要**。本推导跟随 [S]（不带共轭），**与原书相左**。
+     这是本批次最需要原书核对的一条（抽取记录 Q16）。"
+  - "**⚠ 争议 3（勘误/疑误）**：[S] 指原书 (6.6.21) **下方有符号错**，且**没说**这条在不在官方勘误表上；
+     **勘误表本项目未取得**（Q14）。争议 2 可能正是由它引起。"
+  - "**Γ 反射公式 Γ(x)Γ(1−x) = π/sin(πx) 在本图没有节点**：本推导直接使用。
+     若日后登记特殊函数数学来源，应把它建成 math 节点并补边。"
+  - "**参数配对没有逐项写出**：闭弦的 (a,b,c) 与两份开弦的 (x,y) 如何对应（哪一个是 t 通道、
+     为什么三角因子只带 α_c(t) 而不是 α_c(s) 或 α_c(u)）本推导只作结构性说明，
+     来源的中间步骤也在争议中。"
+  - "**上游两条振幅节点的路径积分缺口**（继承）；**开弦侧是弱形式**，无前因子。"
+notes: |
+  ⚠ **本推导是本批次里最不确定的一条**，其目标陈述亦为弱形式。
+  按抽取记录 Q16，(6.6.23) 是「本章最该人工核对的一式」。
+  核对后的正确做法是**新建**完整形式的节点并给弱形式写 superseded_by，不是就地改写。
+author: curator-polchinski-ch6
+created: "2026-09-11"

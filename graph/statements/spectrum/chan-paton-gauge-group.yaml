@@ -1,0 +1,61 @@
+id: spectrum.chan-paton-gauge-group
+kind: proposition
+title: Chan–Paton 规范群：取向开弦给 U(n)，无取向开弦按 Ω 投影给 SO(n) 或 USp(n)
+statement: |
+  给开弦附上 Chan–Paton 指标（spectrum.chan-paton-factors）。则开弦谱中的无质量矢量态
+  按 λ^a 的自由度组织成规范玻色子，其规范群为：
+
+  **(1)（取向开弦）** 不作无取向投影时，λ^a 跑遍全部 n×n 厄米矩阵（n² 个），
+  规范群是 **U(n)**。
+
+  **(2)（无取向开弦）** 世界面宇称 Ω（worldsheet.worldsheet-parity）作用在带 CP 的态上，
+  除翻转世界面定向（因而**转置** Chan–Paton 矩阵）外还带一个依赖能级的相因子：
+    Ω |N; k; ij⟩  ∝  (−1)^{1+α'm} · （由 M 决定的共轭）· |N; k; ji⟩，
+  形式上写作 λ^a ↦ M (λ^a)^T M^{−1} 乘上述相因子（(6.5.31) 附近）。
+  投影到 Ω = +1 的子空间后，对**含无质量矢量（α'm² = 0，即上式相因子为 −1）的能级**，
+  存活条件是
+    M (λ^a)^T M^{−1} = − λ^a。
+  于是规范群由 M 的类型决定：
+    - M 对称（可取 M = 1）：λ^a 反对称实矩阵 ⇒ **SO(n)**；
+    - M 反对称（n 必为偶）：⇒ **USp(n)**（Polchinski 记作 Sp(n/2)，见 notes 的记号说明）。
+
+  ⚠ **关键点：SO/USp 的二选一由无取向投影（M 的选取）决定，不是自由选择规范群。**
+
+  **本命题不断言什么**：不论证 M 的可能形式为何只有对称与反对称两类
+  （那需要 Ω² = 1 的约束分析，来源有而本图未抽取）；不给出各能级的完整投影结果；
+  不涉及 orientifold 的现代表述（属 branes area）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.5, eq. (6.5.21)（世界面宇称）、(6.5.23)、(6.5.25)–(6.5.27)、(6.5.30)、(6.5.31)，p.190–191"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E103，等级 **L1（[S] §6.59 正文读过，笔记 p.326）
+      / 式号与表达式的对应只到目录级**（抽取记录 §7 明记这一点）。
+      抽取记录的转述：「Ω_γ|N;k;ij⟩ = (−1)^{1+α'm}s^{a'}|N;k;ij⟩（(6.5.31) 附近）。
+      投影出 Ω = 1 的无取向弦要求：对 α'm 为偶（含自旋 1 的态）需 M(λ^a)^T M = s^{a'}λ^a = −λ^a。
+      结果：**取向开弦的 CP 因子给 U(n) 规范对称；无取向开弦按投影方式给 SO(n) 或 Sp(n/2)（n 偶）**。」
+      ⚠ 上式中 Ω 的作用写成对 |N;k;ij⟩ **本身**的本征值（而非映到 |N;k;ji⟩）是抽取记录的措辞；
+      本卡片按标准做法写成带转置的形式并注明，**这是 curator 的改写**。
+  - ref: schrans-2020
+    loc: "§6.59（笔记 p.326）（核对源）"
+tags: [spectrum, open-string, chan-paton, gauge-group, unoriented, orientifold, worldsheet-parity]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E103 建立。
+
+  **⚠ 记号说明（USp vs Sp）**：抽取记录（转述 Polchinski）写「**Sp(n/2)**（n 偶）」，
+  即用「Sp(k)」表示 2k×2k 的紧致辛群；现代多数文献写 **USp(n)** 或 Sp(n/2) 视约定而定，
+  两者指同一个群，只是秩的记法不同。本卡片写 **USp(n)**（n 为 Chan–Paton 指标个数）
+  并在此注明与来源记号的对应：**USp(n) = Polchinski 的 Sp(n/2)**。
+  下游若比较文献务必先对齐这个记号。
+
+  **⚠ 与 E80 主公式的关系**：抽取记录 E103 备注指出无取向弦对应主公式 (5.3.9) 里的
+  **1/n_R 因子**（除以离散对称群的阶）。那属第 5 章，本批次提交时无节点，
+  推导 gaps 里注明**待 ch5 节点合入后补边**。
+
+  **来源等级**：本卡片是本批次中来源最弱的几条之一——[S] 的正文读过（L1），
+  但式号与表达式的对应只到目录级，headrick-2008 在这一节**没有覆盖**。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,56 @@
+id: spectrum.open-string-four-tachyon-amplitude--via-boundary-integral
+target: spectrum.open-string-four-tachyon-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.open-string-three-tachyon-amplitude
+    note: |
+      提供同一套组装（边界顶点算子 + 三个 c 鬼 + e^{−λχ}）与指数 2α'k_i·k_j 的写法；
+      四点情形只是多一个不能固定的坐标。
+  - id: worldsheet.disk-conformal-killing-group
+    note: 提供 κ(D₂) = 3：四个坐标里只有三个能被固定，第四个必须积分。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供把 2α'k_i·k_j 改写成 Mandelstam 变量所需的运动学关系。
+  - id: math.euler-beta-integral
+    note: |
+      提供 ∫₀¹ y^{a−1}(1−y)^{b−1} dy = B(a,b) 及其亚纯延拓——后者是「积分在物理参数区
+      不收敛时如何定义」的唯一依据（[S] 的 r → 1 手续就是它的实现）。
+  - id: spectrum.sphere-tachyon-expectation-smooth-at-infinity
+    inferred: true
+    note: |
+      标 inferred：提供「把第三个顶点算子送到 y₃ → ∞ 合法」这一步的支撑。
+      该节点是**闭弦、球面**上的换片检验（[H] Problem 6.1），开弦/圆盘的对应检验
+      本图没有节点，来源也只写「the z₃ → ∞ does not cause a problem」而不给论证
+      （抽取记录 Q17）。故这条边是本图补出的类比，不是文献给出的依赖。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.5)、(6.4.7)–(6.4.9)、(6.4.20)–(6.4.22)，p.179–183"
+    note: 抽取记录 #E98/#E99，L1（schrans-2020 §6.30–§6.41，笔记 p.300–309）。
+summary: |
+  **(1) 计数。** 四个边界坐标、三个 CKV 参数 ⇒ 一个坐标留作积分变量。
+  固定 y₁ = 0、y₂ = 1、y₃ → ∞，积分变量记 y，沿实轴跑遍 R。
+
+  **(2) 被积函数。** 与三点情形同样的组装给出 ∏_{i<j}|y_ij|^{2α'k_i·k_j} 乘鬼场因子；
+  固定三点后剩下 |y|、|1−y| 的幂次，指数用 Mandelstam 变量改写。
+  区间 (0,1) 上得 I(s,t) = ∫₀¹ dy y^{−α's−2}(1−y)^{−α't−2} = B(−α(s), −α(t))，
+  α(x) = 1 + α'x；另两个区间 (−∞,0)、(1,∞) 给出 t↔u、s↔u 的置换。
+
+  **(3) 收敛与延拓。** 积分只在参数的某个区域绝对收敛；[S] §6.34 的做法是把上限 1 换成 r，
+  在收敛区计算后取 r → 1，即**解析延拓**。其余参数值由 Beta 函数的亚纯延拓给出。
+gaps:
+  - "**被积函数的幂次是反推的**：抽取记录没有抄出 (6.4.5)。本推导写出的
+     y^{−α's−2}(1−y)^{−α't−2} 由 [S] [6.143] 的 Beta 参数 (−α's−1, −α't−1) 反推，
+     **未核对原书**。整体前因子同样未核实。"
+  - "**上游 ch5 节点尚未进入 main**：主公式 (5.3.9)、FP 手续。**待合入后补边。**"
+  - "**开弦 X 部门期望值（D₂ 的 Green 函数与边界正规序，(6.2.32)–(6.2.35)）在本图无节点且只到 L2**，
+     与 spectrum.open-string-three-tachyon-amplitude 同一缺口。"
+  - "**y₃ → ∞ 的合法性只有类比支撑**（见第五条依赖的 inferred 说明；抽取记录 Q17 明记
+     原书正文是否论证过这一点未核实）。"
+  - "**三个区间的贡献如何合并、循环序与 Chan–Paton 迹如何配对，本推导不涉及**
+     （见 spectrum.chan-paton-amplitude-trace-factor）。"
+  - "**路径积分测度未定义**（本批次共有）。"
+notes: |
+  本推导刻意**不**写出合并后的完整表达式：那属 spectrum.veneziano-amplitude-weak，
+  而后者按任务书只建弱形式（没有任何来源抄出 (6.4.23) 的完整式子）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

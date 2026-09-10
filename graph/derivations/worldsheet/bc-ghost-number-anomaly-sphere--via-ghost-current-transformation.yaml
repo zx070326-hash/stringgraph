@@ -1,0 +1,58 @@
+id: worldsheet.bc-ghost-number-anomaly-sphere--via-ghost-current-transformation
+target: worldsheet.bc-ghost-number-anomaly-sphere
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+    note: |
+      提供鬼数流 j = −:bc: 及其非主场变换律 (2.5.15)–(2.5.17)（该卡片 sources 已登记这些式号，
+      并已写明「这正是鬼数不守恒与 Riemann–Roch 型计数的来源」）。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供过渡函数 u = 1/z，本推导的 Schwarzian 型反常项就是对它算出来的。
+  - id: worldsheet.bc-ghost-ground-state-ghost-number
+    inferred: true
+    note: |
+      标 inferred：本推导需要「鬼数是围道积分 ∮ j 的本征值、且真空的鬼数有确定值」这一算符层面的
+      字典，才能把「两片的围道积分差 3」读成「插入数之差为 3」。该节点给的是**平面上**
+      SL(2,C) 不变真空的鬼数约定，来源（§6.3）并不在原地回指它，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.6)，p.176–177；用到 §2.5 eq. (2.5.17)"
+    note: |
+      抽取记录 #E96，L1（schrans-2020 §6.25，笔记 p.297）。
+      ⚠ **勘误依赖**：[S] 逐字「which is (6.3.6) with the correction from Joe's errata page included」。
+      **官方勘误表本项目未取得**（Q14），故印刷版与更正版的差异本图无法核对。
+  - ref: schrans-2020
+    loc: "§6.25（笔记 p.297）（核对源）"
+summary: |
+  **(1) 反常变换。** 鬼数流 j 在坐标变换下不按权 1 的张量变换，λ = 2 的情形为
+    (∂_z u) j_u(u) = j_z(z) + (3/2) (∂²_z u)/(∂_z u)。
+  这条来自 bc 系统的背景荷（j 的 OPE 中 T(z)j(0) 有三阶极点）。
+
+  **(2) 代入 u = 1/z。** ∂_z u = −z^{−2}，∂²_z u = 2z^{−3}，故
+    (3/2)(∂²_z u)/(∂_z u) = (3/2)·(2z^{−3})/(−z^{−2}) = −3/z。
+  即两片上的鬼流相差一个 −3/z 的项。
+
+  **(3) 围道积分。** 鬼数由 ∮ (dz/2πi) j(z) 给出。z 片上绕原点的围道与 u 片上绕 u = 0
+  （即 z = ∞）的围道之差，正是 (2) 中 −3/z 项的留数，绝对值为 **3**。
+  于是「z = 0 附近算出的鬼数」与「z = ∞ 附近算出的鬼数」相差 3：
+  球面上鬼数不守恒 3 个单位（每个手征部门），非零期望值必须多带 3 个 c（gh(c) = +1）。
+  反全纯部门同理，合计 6，与 κ(S₂) = 6 一致。
+gaps:
+  - "**勘误依赖（Q14 第 4 条）**：按 schrans-2020，印刷版 (6.3.6) 有误，他按 Joe 的官方勘误表更正；
+     **该勘误表本项目未能取得**（KITP 三条 URL 全部 404）。因此「(6.3.6) 的具体形式」不得被下游
+     当作已核实。本推导的数值结论 3 另有独立佐证（κ(S₂) = 6 与三 c 期望值 (6.3.1)/(6.3.4)），
+     故结论本身不悬空，悬空的是那一式的写法。"
+  - "**围道变形与算符序的合法性未论证**：第 (3) 步把两片上的围道积分之差归结为留数，
+     默认 j 在环域上的算符乘积可以自由变形围道——这与本图既有的 OPE 收敛缺口同源
+     （lead 裁决 2026-09-10：凡靠围道变形 + OPE 的推导一律 physical-argument）。"
+  - "**「鬼数不守恒 ⇒ 插入数之差固定」这一步用了算符-态字典**（见第三条依赖的 inferred 说明）：
+     严格论证需要在 S₂ 上做 bc 的路径积分并分离零模，本图无节点。"
+  - "**一般亏格的公式不在本推导范围**：鬼数反常 ⇒ Riemann–Roch（抽取记录 E82）属第 5 章，
+     另一名 curator 在建。**待 ch5 节点合入后，本推导可作为其 g = 0 特例接边。**"
+notes: |
+  第 (2) 步的代数（−3/z）是 curator 的显式验算，来源只给结论。
+  它是有限步初等计算，若 reviewer 复核可按 STATUS_LEVELS 的例外升级**这一步**，
+  但整条推导仍受围道变形与路径积分两条缺口限制，不会因此升到 rigorous。
+author: curator-polchinski-ch6
+created: "2026-09-11"

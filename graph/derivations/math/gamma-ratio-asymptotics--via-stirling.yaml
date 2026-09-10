@@ -1,0 +1,43 @@
+id: math.gamma-ratio-asymptotics--via-stirling
+target: math.gamma-ratio-asymptotics
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.euler-beta-integral
+    note: 提供 B(a,b) = Γ(a)Γ(b)/Γ(a+b)，(2) 由它与 (1) 直接组合而得。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.28) 的推导，p.183–184"
+    note: |
+      抽取记录 #E100，L1（schrans-2020 §6.40–§6.41，笔记 p.308–310）。
+      来源**使用**这条渐近而不证明它；下面 (1) 的论证是标准教材内容，由 curator 写出。
+summary: |
+  **(1)** 取 Stirling 的对数形式 ln Γ(z) = (z − 1/2) ln z − z + (1/2)ln 2π + O(1/z)，
+  在 |arg z| ≤ π − δ 内一致成立。于是
+    ln Γ(z+a) − ln Γ(z+b)
+      = (z + a − 1/2) ln(z + a) − (z + b − 1/2) ln(z + b) − (a − b) + O(1/z)。
+  用 ln(z + c) = ln z + c/z + O(1/z²) 展开并逐项相消，得
+    ln Γ(z+a) − ln Γ(z+b) = (a − b) ln z + O(1/z)，
+  取指数即 (1)。
+
+  **(2)** 把 (1) 用在 B(a,b) = Γ(a)Γ(b)/Γ(a+b) 上：固定 b，令 z = a、
+  Γ(a)/Γ(a+b) = a^{−b}(1 + O(1/a))，乘以 Γ(b) 得 (2)。
+
+  **(3)** 是把 (2) 形式地用在 a = −α(s)（沿负实轴）上，**不在 (1)(2) 的适用域内**，见 gaps。
+gaps:
+  - "**(3) 的适用域问题（本条最实质的缺口）**：Regge 极限要求 a = −α(s) 沿 **arg a = π** 趋于无穷，
+     而 (1) 只在 |arg z| ≤ π − δ 成立；更糟的是 Γ(a) 的极点 a = 0,−1,−2,… 全部落在这条射线上，
+     函数在该方向上根本没有极限。物理推导默许 s 带小虚部（或对相邻极点做平均）。
+     本图**不**把这一步当作已论证：凡使用 (3) 的振幅节点（spectrum.veneziano-regge-behavior、
+     spectrum.virasoro-shapiro-regge-behavior）必须继承这条 gap。"
+  - "**无数学文献来源**：与 math.euler-beta-integral 同因——本图未登记特殊函数教材，
+     故 rigorous 的来源条件不满足；也无 reviewer 复核记录。暂标 physical-argument。"
+  - "**Stirling 公式本身未论证**，且其在本图中的唯一文献痕迹（[S] 转引的『更正后』形式
+     Γ(x+1) = x^x e^{−x}(2/πx)^{1/2}）与标准形式不符，见目标陈述 notes。本推导采标准形式。"
+  - "误差项 O(1/z) 的一致性（在扇形内一致、可逐项微分等）未处理。"
+notes: |
+  升级路径与 math.euler-beta-integral 相同（登记数学来源或 reviewer 复核）；
+  但即使升到 rigorous，**gap (3) 仍然存在**——它不是记账问题而是真实的数学缺口，
+  应当在下游振幅节点里保留。
+author: curator-polchinski-ch6
+created: "2026-09-11"

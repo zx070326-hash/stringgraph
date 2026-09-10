@@ -1,0 +1,42 @@
+id: spectrum.massless-open-pole-requires-chan-paton
+kind: proposition
+title: α's = 0 处的无质量极点在纯四 tachyon 振幅中相消，只有加 Chan–Paton 因子后才真实存在
+statement: |
+  取开弦四 tachyon 振幅中区间 (0,1) 的贡献 I(s,t)。在 α's → 0 附近其展开含一项
+    I(s, t) = (u − t)/(2 s) + （在 s = 0 处解析的项）,
+  形式上给出 **α' s = 0 处的极点**（(6.4.17)），看似对应中间态无质量矢量。则：
+
+  **(1)** 把另一循环序（t ↔ u 交换）的贡献加进来后，该极点的留数**相消**：
+  在**没有** Chan–Paton 因子的纯四 tachyon 开弦振幅里，**α' s = 0 处没有极点**。
+
+  **(2)** 只有当各循环序配上互不相同的 Chan–Paton 迹（spectrum.chan-paton-amplitude-trace-factor）
+  且这些迹不相消时，α' s = 0 的极点才真实存在——它对应中间态的**无质量规范玻色子**，
+  其留数正比于结构常数型的组合。这正是 (6.5.14) 定出 Yang–Mills 耦合 g'_o 时所用的极点。
+
+  ⚠ **本命题是一条警告**：不得由 (6.4.17) 单独断言「无质量矢量出现在 s 通道」。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.17)（α's = 0 处的极点），p.179–183；(6.5.6)/(6.5.9)（带 Chan–Paton 的四点与幺正性）p.184–189"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E98，等级 **L1**：schrans-2020 §6.36–§6.37
+      （笔记 p.307，逐页读到）给出 I(s,t) = (u−t)/(2s) + 解析项，并指出把 t ↔ u 的贡献加进来后
+      **该极点相消，在四 tachyon 振幅里实际不存在**；只有加了 Chan–Paton 因子、
+      不同序的迹不相消时，α's = 0 才有真极点。
+      抽取记录逐字提醒：「**curator 若建『无质量矢量态出现在 s 通道』的节点，必须写清楚这一点。**」
+      ⚠ 原书是否明确写出这一相消**未核实**（[S] 的正文如此陈述）。
+tags: [spectrum, tree-level, open-string, pole, massless, chan-paton, warning]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E98 的警告建立。
+
+  **为什么单独建节点**：这是一处容易被下游误用的陷阱。若只看 (6.4.17)，
+  很自然会写下「开弦谱里的无质量矢量在四 tachyon 振幅的 s 通道留下极点」——**这是错的**。
+  把它显式化，可以让任何引用 (6.4.17) 的节点被迫面对相消。
+
+  **与 Chan–Paton 的关系**：本卡片给出了 spectrum.chan-paton-factors 的一个**物理必要性论证**
+  ——不是「可以加」而是「不加就没有规范玻色子极点」。不过来源没有把它表述成必要性论证，
+  本卡片也不这样断言，只陈述两种情形下极点的有无。
+author: curator-polchinski-ch6
+created: "2026-09-11"

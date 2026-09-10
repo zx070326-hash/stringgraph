@@ -1,0 +1,49 @@
+id: spectrum.virasoro-shapiro-regge-behavior
+kind: proposition
+title: Virasoro–Shapiro 振幅的 Regge 与硬散射行为：s^{2α_c(t)} 与 exp[−(α'/2)(s ln s + …)]
+statement: |
+  取 Virasoro–Shapiro 振幅（spectrum.virasoro-shapiro-amplitude），α_c(x) = α'x/4 + 1。则：
+
+  **(1)（Regge 极限：s → ∞，t 固定，u ≈ −s）**
+    **S_{S₂}  ∝  s^{2 α_c(t)} · Γ(−α_c(t)) / Γ(1 + α_c(t))**   （(6.6.12)）。
+
+  **(2)（硬散射极限：s, t, u → ∞，s/t 固定）**
+    **S_{S₂}  ∝  exp[ − (α'/2) ( s ln s + t ln t + u ln u ) ]**   （(6.6.13)）。
+
+  **本命题不断言什么**：不给出比例常数；不与开弦结果作对比（见 notes 与 Q15）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.12)（Regge）、(6.6.13)（硬散射），p.193–194"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E106，等级 **L1**（schrans-2020 §6.65–§6.66，
+      笔记 p.331–333，逐页读到）。
+      ⚠ **[S] 在这里有一处自相矛盾**：其 [6.236] 说「we have again used
+      α_c(s)+α_c(t)+α_c(u) = **1**」，而由他自己的脚注 8（α'(s+t+u) = −16）与 α_c 的定义
+      得该和 = **−1**。抽取记录明记「这不影响 (6.6.12) 的幂次结论（他的 [6.231]/[6.232] 用的是
+      逐项代数式而非这条求和规则），但**记录在案，别照抄这句**」。
+      本卡片采 −1（见 spectrum.mandelstam-invariants-sum-rule）。
+  - ref: schrans-2020
+    loc: "§6.65–§6.66（笔记 p.331–333）（核对源）"
+tags: [spectrum, tree-level, closed-string, virasoro-shapiro, regge, hard-scattering, asymptotics]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E106 建立。
+
+  **⚠ 与开弦的因子 2：本图刻意不建对比节点。**
+  |  | Regge 指数 | 硬散射指数 |
+  |---|---|---|
+  | 开弦 (6.4.28)/(6.4.30) | s^{α(t)} | exp[−α'(s ln s + t ln t + u ln u)] |
+  | 闭弦 (6.6.12)/(6.6.13) | s^{2α_c(t)} | exp[−(α'/2)(s ln s + …)] |
+  两处都恰好差因子 2（「闭弦 ≈ 两个开弦」）。但抽取记录 **Q15 明记：
+  这个对比是抽取者做的，schrans-2020 与 headrick-2008 都没有把两者并列，
+  原书是否显式说过「闭弦 Regge 斜率是开弦的一半」未核实。**
+  因此本图只在两条卡片的 notes 里互指，**不建「二者差因子 2」的陈述节点**。
+  相关的另一面是 α'_closed = α'_open/4 这条换算，它出现在 (6.6.23) 里
+  （spectrum.open-closed-four-point-relation-weak）。
+
+  **(1) 与开弦 Regge（spectrum.veneziano-regge-behavior）是同一手法**，
+  但闭弦的 Γ 商多出分母 Γ(1+α_c(t))——这来自 C(x,y) 的三 Γ 结构而非两 Γ。
+author: curator-polchinski-ch6
+created: "2026-09-11"

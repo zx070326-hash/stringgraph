@@ -1,0 +1,48 @@
+id: spectrum.mandelstam-invariants-sum-rule
+kind: proposition
+title: 四点运动学：s + t + u = Σ_i m_i²，四开弦 tachyon 时等于 −4/α'
+statement: |
+  设四条外线动量 k₁,…,k₄ 全部取**入射**约定，满足动量守恒 Σ_i k_i = 0，
+  各自在质量壳上 k_i² = −m_i²（conv.metric-mostly-plus）。定义 Mandelstam 变量
+    s = −(k₁ + k₂)²,   t = −(k₁ + k₃)²,   u = −(k₁ + k₄)²。
+  则
+    s + t + u = − Σ_i k_i² = Σ_i m_i²。
+  对四个开弦 tachyon（α' m_i² = −1，即 k_i² = 1/α'）得
+    s + t + u = − 4/α'。
+  对四个闭弦 tachyon（α' m_i² = −4，即 k_i² = 4/α'）得
+    s + t + u = − 16/α'。
+
+  **本命题不断言什么**：不涉及任何振幅；不断言 s、t、u 与「通道」的对应
+  （那取决于哪两条腿被视为入射，属约定）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.7)（Mandelstam 变量满足 s + t + u = Σ_i m_i² = −4/α'），p.179–183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E98，等级 **L1**（schrans-2020 §6.30–§6.37，
+      笔记 p.300–307，逐页读到）。
+  - ref: polchinski-1998-v1
+    loc: "§6.6（闭弦四 tachyon；[S] §6.66 脚注 8 明写 α'(s+t+u) = −16），p.192–194"
+    note: |
+      抽取记录 #E106，L1。⚠ 同一处记录了 [S] 的一处**自相矛盾**：他的 [6.236] 说
+      「we have again used α_c(s)+α_c(t)+α_c(u) = 1」，而由他自己的脚注 8（α'(s+t+u) = −16）
+      与 α_c(x) = α'x/4 + 1 得该和 = −4 + 3 = **−1**。抽取记录已记录在案，
+      本卡片采 α'(s+t+u) = −16（即闭弦 s+t+u = −16/α'），与脚注 8 一致。
+tags: [spectrum, kinematics, mandelstam, four-point, tachyon, on-shell]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E98/E106 拆出（任务书：把振幅推导里的纯计算部分单列）。
+
+  **为什么单列**：s + t + u 的取值在 Veneziano 的三项 Beta 结构、Regge 极限的 u ∝ −s、
+  以及 Virasoro–Shapiro 的 α_c(s)+α_c(t)+α_c(u) = −1 里反复使用，
+  而它只是运动学，与路径积分无关。单列后，那些振幅节点的 gaps 里不必重复这一步。
+
+  **⚠ 为什么不是 rigorous**：内容是三行代数（展开 (k_i+k_j)²、用 Σk = 0），
+  按 docs/STATUS_LEVELS.md 的「初等可复核」例外**有资格**升到 rigorous，
+  条件是 reviewer 独立复核并留 reviewer-verified 记录——尚无该记录，故 physical-argument。
+  **这是本批次第二容易升级的一条**（第一条是 math.mobius-three-point-fixing-jacobian）。
+
+  ⚠ 它同时**订正**了一处文献内部矛盾（[S] 的 α_c 求和规则），见 sources 的第二条。
+author: curator-polchinski-ch6
+created: "2026-09-11"

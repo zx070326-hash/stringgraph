@@ -1,0 +1,49 @@
+id: worldsheet.bc-ghost-sphere-cc-correlator--via-ghost-zero-modes
+target: worldsheet.bc-ghost-sphere-cc-correlator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+    note: 提供 λ = 2 的 bc 系统（c 权 −1、反对易、b c OPE）与反全纯部门。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: |
+      提供 κ(S₂) = 6（六个 c 零模 ⇒ 六个 c 插入）与 PSL(2,C) 协变性
+      （把表达式定死成 |z₁₂|²|z₁₃|²|z₂₃|² 的形式）。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供 S₂ 的两片坐标；(2) 的表达式在 u 片的正则性是本式的自洽检验（见 gaps）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.1)/(6.3.4)，p.176–177"
+    note: 抽取记录 #E96，L1；schrans-2020 与 headrick-2008 两个独立二手源。
+  - ref: headrick-2008
+    loc: "Problem 6.11（PDF p.48）"
+    note: 第二核对源。
+summary: |
+  与圆盘情形同一手法：
+
+  **(1) 零模计数。** λ = 2 时 c 的零模空间同构于共形 Killing 向量空间，S₂ 上维数
+  κ(S₂) = 6（全纯与反全纯各 3）；b 的零模空间同构于模空间，μ(S₂) = 0。
+  Grassmann 积分要求每个 c 零模被一个插入吸收，故最简非零期望值恰含 3 个 c 与 3 个 c̄，
+  即 (6.3.1)。
+
+  **(2) 形式。** 把 c 与 c̄ 成对放在同一点，全纯侧给出关于 z_i 的反对称三次多项式
+  z₁₂z₁₃z₂₃（唯一，至多相差常数），反全纯侧给其复共轭，乘积即
+  |z₁₂|²|z₁₃|²|z₂₃|²，前面留一个归一化常数 C^g_{S₂}。
+gaps:
+  - "**Riemann–Roch 型零模对应（c 零模 ≅ CKV、b 零模 ≅ 模）在本图无节点**：属第 5 章
+     （抽取记录 E78/E79/E82），另一名 curator 在建。**待 ch5 节点合入后补边。**"
+  - "**路径积分层面未定义**：Grassmann 泛函积分、零模分离与 C^g_{S₂} 的归一化在本图与来源中
+     都没有定义，故上限 physical-argument。"
+  - "**正规序 :cc̄: 与「把 c、c̄ 放在同一点」这一步没有单独论证**：c 与 c̄ 属不同部门，
+     其乘积的自缩并是否需要减除、以及 (6.3.1) 与 (6.3.4) 之间差的常数因子，来源未说明。"
+  - "**只有二手源**（L1）：原书未核对。不过本式与 (6.3.2) 一样有 schrans-2020 + headrick-2008
+     两个独立来源逐字给出完整表达式，是本章表达式层面最硬的两条之一。"
+  - "**在 u = 1/z 片的正则性没有检验**：|z₁₂|²|z₁₃|²|z₂₃|² 在 z_i → ∞ 时发散，
+     其与 X 部门因子的组合才在 u 片光滑（对照 spectrum.sphere-tachyon-expectation-smooth-at-infinity）。
+     本推导不做这个检验。"
+notes: |
+  (6.3.5) 与 (6.3.8)（多鬼场振幅的两个等价表达式）的等价性**本批次没有建节点**：
+  抽取记录 E96 逐字记录 [S]「why the permutations evidently sum up, is a mystery to me」，
+  他只用 Mathematica 验到 p = 1, 2。若日后建节点应标 physical-argument 或更低。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,48 @@
+id: spectrum.open-string-hard-scattering-exponential-falloff
+kind: proposition
+title: 硬散射极限下开弦四 tachyon 振幅指数衰减：S ∝ exp[−α'(s ln s + t ln t + u ln u)]
+statement: |
+  取开弦四 tachyon 树振幅（spectrum.veneziano-amplitude-weak）。定义**硬散射极限**
+  （固定角高能极限）：s, t, u → ∞ 而比值 t/s（即散射角 θ）固定。则
+    **S_{D₂}  ∝  exp[ − α' ( s ln s + t ln t + u ln u ) ]  =  exp[ − α' f(θ) s ]**   （(6.4.30)），
+  其中（用 (6.4.27) 的运动学 t/s → −sin²(θ/2)、u/s → −cos²(θ/2)）
+    **f(θ) = − cos²(θ/2) ln cos²(θ/2) − sin²(θ/2) ln sin²(θ/2)**。
+
+  **物理读法**：弦振幅在固定角高能下**指数衰减**，而点粒子量子场论的四点振幅是**幂律衰减**。
+  这是弦相对于点粒子的「软性」（弦是延展物体，高能下没有硬的点状子结构）。
+
+  ⚠ **本命题只断言弦侧的计算结果**。抽取记录 E100/E101 明确要求把另一句话分开：
+  「幂律衰减是幺正性的必要条件」——schrans-2020 逐字说他**找不到这一说法的依据**
+  （「I seem to remember that this is a necessary condition for unitarity but
+  **I can't find it back in my notes**」），Polchinski 是否这么说**未核实**。
+  **本图不建那条陈述，也不把它写进本卡片。**
+
+  **本命题不断言什么**：不给出比例常数；不断言该衰减对**所有**弦振幅成立
+  （只算了四 tachyon 树级）；不涉及幺正性。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.29)/(6.4.30)（硬散射极限），p.183"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E101，等级 **L1**（schrans-2020 §6.42–§6.43，
+      笔记 p.310–311，逐页读到）。
+      ⚠ 抽取记录明确把本条拆成两半：(a) 弦振幅硬散射指数衰减——**本书有计算**；
+      (b)「幂律衰减是幺正性的必要条件」——**[S] 明说找不到依据，本书是否这么说未核实**。
+      本卡片只取 (a)。
+  - ref: schrans-2020
+    loc: "§6.42–§6.43（笔记 p.310–311）（核对源）"
+tags: [spectrum, tree-level, open-string, hard-scattering, exponential-falloff, softness, high-energy]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E101 建立，**按抽取记录的建议把两句话分开**（见 statement 的 ⚠）。
+
+  **⚠ 与闭弦的因子 2**：闭弦的对应结果是 exp[−(α'/2)(s ln s + t ln t + u ln u)]
+  （spectrum.virasoro-shapiro-hard-scattering），指数衰减率恰好是一半。
+  按抽取记录 **Q15**（原书是否显式对比未核实），本图不建对比节点，只在两卡的 notes 里互指。
+
+  **f(θ) 的性质（不入陈述）**：f(θ) ≥ 0，在 θ = π/2 处取最大值 ln 2 ≈ 0.693，
+  θ → 0 或 π 时 f → 0（前向/后向散射不被指数压低，与 Regge 区衔接）。
+  本图不建这条，因为来源没有给出这一分析。
+author: curator-polchinski-ch6
+created: "2026-09-11"

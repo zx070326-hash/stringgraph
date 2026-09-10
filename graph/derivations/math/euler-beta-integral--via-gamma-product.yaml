@@ -1,0 +1,42 @@
+id: math.euler-beta-integral--via-gamma-product
+target: math.euler-beta-integral
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.21)/(6.4.22)，p.183"
+    note: |
+      抽取记录 #E99，L1（schrans-2020 §6.39–§6.41，笔记 p.308–309）。
+      来源只**给出**这两式并称推导 straightforward（[S] §6.39 全文：「This is straightforward.」），
+      **没有证明** Beta 积分本身；下面的证明是标准教材论证，由 curator 写出。
+summary: |
+  标准证明（Γ 的积分表示 + Fubini + 极坐标型换元）：
+
+  对 Re a, Re b > 0，
+    Γ(a)Γ(b) = ∫₀^∞ ds s^{a−1} e^{−s} ∫₀^∞ dr r^{b−1} e^{−r}
+             = ∫₀^∞∫₀^∞ ds dr  s^{a−1} r^{b−1} e^{−(s+r)}。
+  换元 s = x t、r = x(1 − t)（x ∈ (0,∞)、t ∈ (0,1)，Jacobian = x）：
+    = ∫₀^∞ dx ∫₀¹ dt  x  (xt)^{a−1} (x(1−t))^{b−1} e^{−x}
+    = [∫₀^∞ dx x^{a+b−1} e^{−x}] · [∫₀¹ dt t^{a−1}(1−t)^{b−1}]
+    = Γ(a+b) · B(a,b)。
+  被积函数在 Re a, Re b > 0 时绝对可积，Fubini 与换元合法，故 B(a,b) = Γ(a)Γ(b)/Γ(a+b)。
+
+  **极点结构**：Γ 在 0, −1, −2, … 有单极点，留数 Res_{z=−n} Γ(z) = (−1)^n/n!，其余处全纯且无零点，
+  故 1/Γ(a+b) 是整函数，B(a,b) 的奇点只能来自 Γ(a)、Γ(b)，位置与留数如陈述所写。
+gaps:
+  - "**无数学文献来源**：本图未登记任何特殊函数/复分析教材，故本推导的 sources 只有一条**物理书**
+     的引用位置（Polchinski (6.4.21)/(6.4.22)，且是经二手源 schrans-2020 转述的 L1 等级）。
+     按 docs/STATUS_LEVELS.md，rigorous 要求数学文献来源，因此本推导暂标 physical-argument。
+     **这不表示该恒等式有疑问**，只表示本图的记账要求未满足。"
+  - "**未获 reviewer 复核**：另一条升级路径是 STATUS_LEVELS 的『初等可复核』例外
+     （前提完整 + 有限步初等计算 + reviewer 独立复核并留 `reviewer-verified` 记录）。
+     上面的 Fubini 换元论证符合前两条，缺第三条。"
+  - "Γ 函数本身的定义、亚纯延拓与留数（Res_{z=−n}Γ = (−1)^n/n!）在本图中**没有节点**，
+     本推导直接使用。若日后建 math.gamma-function 定义卡，应把这里改成显式依赖。"
+notes: |
+  升级动作（任一即可）：(a) researcher 登记数学来源并核对位置（DLMF §5.12 或 Whittaker–Watson §12.4），
+  curator 补 sources 后改 rigorous；(b) reviewer 复核上面的换元论证并在此处写
+  `reviewer-verified: <agent>, <date>`，同样可改 rigorous。
+author: curator-polchinski-ch6
+created: "2026-09-11"

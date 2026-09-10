@@ -1,0 +1,53 @@
+id: spectrum.amplitude-poles-from-vertex-operator-ope
+kind: proposition
+title: 两个顶点算子的 OPE 决定振幅的极点：只有 z 与 z̄ 幂次相等的项在角向积分后存活
+statement: |
+  在闭弦四 tachyon 振幅的积分（spectrum.closed-string-four-tachyon-integral）中，
+  把两个 tachyon 顶点算子作 OPE（(6.6.24)，实为把 (2.2.13) 的指数展开）：
+    :e^{i k₁·X(z₁,z̄₁)}: :e^{i k₄·X(z₄,z̄₄)}:
+      = |z₁₄|^{α' k₁·k₄} : ( 1 + i z₁₄ k₁·∂X + i z̄₁₄ k₁·∂̄X
+          − z₁₄ z̄₁₄ (k₁·∂X)(k₁·∂̄X) + … ) e^{i(k₁+k₄)·X(z₄,z̄₄)} :。
+  对 z₁₄ 作极坐标积分（z₁₄ = r e^{iθ}）。则：
+
+  **(1)** **只有 z₁₄ 与 z̄₁₄ 幂次相等的项在 θ 积分后不为零**（其余项被 ∫dθ e^{i(n−n̄)θ} = 0 杀死）。
+  这正是**能级匹配**（closed-string level matching）在振幅中的体现。
+
+  **(2)** 存活的每一项给出一个径向积分 ∫₀ dr r^{α'k₁·k₄ + 2N + 1}，其端点发散
+  （按解析延拓）给出一个**极点**，位置对应中间态上壳。首项（N = 0）给
+    1 / ( α' k₁·k₄ + 2 )，
+  即 **−u = (k₁ + k₄)² = 4/α'**（u 通道闭弦 tachyon 上壳）；s、t 通道同理。
+  更高的 N 给出更高激发态的极点塔。
+
+  **(3)（对图的意义）** 这条把「**OPE 的奇异幂次结构**」与「**振幅的物理极点**」直接连起来，
+  是第 2 章 OPE 与第 6 章振幅之间的桥。
+
+  ⚠ **本命题依赖 OPE 的收敛性**（本图未证；lead 裁决 2026-09-10：凡靠围道变形 + OPE 的推导
+  一律 physical-argument，gaps 写明）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.24)（两个 tachyon 顶点算子的 OPE）、(6.6.25)，p.195"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E109，等级 **L1**（schrans-2020 §6.72，
+      笔记 p.339–340，逐页读到）。
+      抽取记录逐字：「**这条把『OPE 的极点结构 ↔ 振幅的物理极点』直接连起来**，
+      是第 2 章 OPE 与第 6 章振幅之间的桥。⚠ 它依赖 OPE 的收敛性（**Q3** 仍未解决）。」
+tags: [spectrum, tree-level, closed-string, ope, pole, factorization, level-matching]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E109 建立。
+
+  **与既有节点的关系**：worldsheet.operator-product-expansion 给出 OPE 本身，
+  worldsheet.closed-string-level-matching 给出谱上的 N = Ñ 条件；
+  本卡片的 (1) 是后者在振幅积分中的**表现**，两者是不同层面的陈述，故分开建卡。
+  ⚠ 本卡片**没有**建到 closed-string-level-matching 的依赖边：来源用的是「θ 积分把不匹配的项杀死」
+  这一直接计算，不引用谱的能级匹配；把两者等同是本图的观察，写在 notes 而非边上。
+
+  **与因子化节点的关系**：spectrum.four-tachyon-factorization-disk-normalization 从**端点发散**
+  读出极点，本卡片从 **OPE 的幂次**读出同一批极点——是同一现象的两种看法。
+  两者独立建卡是因为它们的论证路线与来源位置都不同（(6.4.11)/(6.4.13) vs (6.6.24)/(6.6.25)）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

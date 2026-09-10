@@ -1,0 +1,57 @@
+id: cft.tensor-two-and-three-point-functions
+kind: proposition
+title: Möbius 不变性把主场两点函数定到 δ_{h_i h_j}、三点函数定到常数 C_ijk、四点函数定到交叉比的未定函数
+statement: |
+  设二维 CFT 在 S₂ 上，O_i 为权 (h_i, h̄_i) 的主场，关联函数 Möbius 不变。则：
+
+  **(1)（两点函数的选择定则，(6.7.5)）** 用共形变换 z ↦ z + ε(z − z₁)(z − z₂)
+  （它固定 z₁ 与 z₂）作用于两点函数，得
+    (z₁ − z₂)( h_i − h_j ) ⟨ O_i O_j ⟩ = 0，
+  故 **h_i ≠ h_j 时两点函数恒为零**（反全纯侧同理给 h̄_i = h̄_j）。
+
+  **(2)（三点函数，(6.7.6)）** 三点函数被 Möbius 不变性定到一个常数：
+    **⟨ O_i(z₁) O_j(z₂) O_k(z₃) ⟩
+      = C_{ijk} · z₁₂^{h_k−h_i−h_j} z₁₃^{h_j−h_i−h_k} z₂₃^{h_i−h_j−h_k} × （反全纯侧同式，h → h̄）**，
+  其中 C_{ijk} 是与坐标无关的常数（**结构常数**）。
+
+  **(3)（四点函数，(6.7.7)）** 四点函数只被定到**交叉比（非调和比）**
+    x = z₁₂ z₃₄ / ( z₁₃ z₂₄ )
+  的一个**未定函数**：Möbius 不变性把坐标依赖压缩成 x（与 x̄）的函数，不能再定得更死。
+  该函数并非任意——它须满足由更一般的共形变换（及 OPE 结合性）给出的约束；
+  在某些情形这些约束足以完全定出它，这一程序称为**共形自举（conformal bootstrap）**，
+  与三算子 OPE 的结合性（worldsheet.ope-associativity-bootstrap，(2.9.3)）直接相接。
+
+  **本命题不断言什么**：不给出 C_{ijk} 的值（那是具体理论的数据）；
+  不断言自举约束的可解性；不涉及非主场。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.7, eq. (6.7.5)（两点函数）、(6.7.6)（三点函数）、(6.7.7)（四点函数与交叉比），p.199"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E111，等级 **L1**（schrans-2020 §6.75–§6.77，
+      笔记 p.342–345，逐页读到）。
+      [S] 关于 (6.7.7) 的收尾逐字（笔记 p.349）：「The four-point function [6.312] is thus determined
+      by Möbius invariance up to some function of the anharmonic ratio x. This function is not
+      arbitrary but needs to satisfy some constraints, set by more general conformal transformations.
+      In some cases these constraints allow to determine this function completely…
+      **This process is known as the conformal bootstrap. This is linked to the associativity of
+      three operators in (2.9.3)** and in our fig.2.9.」
+      ⚠ **[S] 的技术手法与原书可能不同**（抽取记录 E111）：他为避开 Λ → ∞ 的奇异性保持 Λ 有限
+      并用 Mathematica 算 Jacobian（图 6.11/6.12），自述「Arguably we should take Λ → ∞ but
+      if we do that now we will see that it leads to complications」。**原书怎么处理无穷远点未核实。**
+tags: [cft, mobius, correlation-function, structure-constants, cross-ratio, bootstrap, primary-field]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E111 建立。area 选择理由见
+  cft.one-and-two-point-functions-mobius-fixed 的 notes（纯 CFT 内容，与弦无关）。
+
+  **与既有节点的关系**：worldsheet.ope-associativity-bootstrap 已经陈述了 (2.9.3) 的结合性；
+  本卡片 (3) 末段指出四点函数的未定函数受该结合性约束，是两者的接口，
+  但**本卡片不断言自举的任何具体结果**。
+
+  **(2) 是 CFT 里最常被引用的公式之一**；本图把它建在 `cft.` 区，
+  日后若做 Lean 形式化（三点函数的形式由权唯一定出——这是有限维线性代数 + 函数方程），
+  这是一个可行的候选岛。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,46 @@
+id: spectrum.sphere-zero-mode-momentum-conservation--via-zero-mode-integration
+target: spectrum.sphere-zero-mode-momentum-conservation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-scalar-cft-action
+    note: 提供欧氏作用量 S = (1/4πα')∫d²σ g^{1/2} g^{ab}∂_a X·∂_b X，「作用量只含导数」这一关键性质由它给出。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供 S₂ 的复坐标描述；「S₂ 紧且无边界 ⇒ ∇² 的零模只有常数」这一点用到它。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.13)/(6.2.14)，p.171"
+    note: 抽取记录 #E92，L1（schrans-2020 §6.10–§6.11，笔记 p.284–285）。
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.3)/(6.2.5)/(6.2.6)，p.169–170"
+    note: 抽取记录 #E91，**L2**（只读到目录条目）。
+summary: |
+  **(1) 分离零模。** 把 X^μ(σ) = x₀^μ + X'^μ(σ) 展开，其中 x₀ 是 ∇² 的零本征值模（常数），
+  X' 与常数正交。作用量只含 ∂X，故 S[X] = S[X']，零模在作用量中不出现。
+
+  **(2) 零模只出现在顶点算子里。** 插入 ∏_i e^{i k_i·X(σ_i)} 时零模贡献
+  exp(i x₀ · Σ_i k_i)，与 σ_i 无关。
+
+  **(3) 积分。** 靶空间非紧 ⇒ x₀ 在 R^d 上积分：
+    ∫ d^d x₀ exp(i x₀·Σ_i k_i) = (2π)^d δ^d(Σ_i k_i)。
+  零模本征函数的归一化（(6.2.5)）给出一个与动量无关的常数因子，按 (6.2.14) 并入 C^X_{S₂}。
+  于是 Σk_i ≠ 0 的期望值恒为零。
+
+  物理读法：零模积分就是对弦的整体位置积分，平移不变性给出动量守恒——
+  与点粒子场论中「顶点处的动量守恒」是同一件事。
+gaps:
+  - "**上游 ch5 节点尚未进入 main**：前提『S-矩阵 = 规范固定路径积分 (5.3.9)、X 与 bc 部门分离』
+     在本图无节点（抽取记录 E77/E80），另一名 curator 在建。**待合入后补 depends_on 边。**"
+  - "**路径积分测度未定义**：把 DX 分解为 dx₀ × DX'、以及非零模行列式 (6.2.6) 的存在与正规化，
+     在本图与来源中都没有定义。这是本节点 status 上限为 physical-argument 的根本原因。"
+  - "**(6.2.3)/(6.2.5)/(6.2.6) 只到 L2**（抽取者只读到 schrans-2020 的目录条目，未读正文），
+     故「按 ∇² 完备本征函数系展开」的具体写法在本图中没有表达式级的核实。"
+  - "**靶空间非紧这一前提是隐含的**：若某些方向紧化，零模积分给出的是动量的离散求和而非 delta 函数。
+     来源在此默认非紧（第 8 章才处理紧化），本卡片把它写进 statement。"
+  - "**δ^d 的归一化约定（(2π)^d 的位置）未核对原书**；本图按抽取记录 E93 的 (6.2.17) 中出现的
+     iC^X_{S₂}(2π)^d δ^d(Σk_i) 反推，与 (6.2.14) 的吸收方式一致。"
+notes: |
+  本推导的算术部分（Fourier 表示）平凡；实质内容全在「路径积分测度可以这样分解」这一步，
+  而那正是未定义的部分。升级路径需要世界面路径积分的构造性定义，本项目 Phase 0 不涉及。
+author: curator-polchinski-ch6
+created: "2026-09-11"

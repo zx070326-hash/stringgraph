@@ -1,0 +1,32 @@
+id: math.mobius-three-point-fixing-jacobian--via-vandermonde
+target: math.mobius-three-point-fixing-jacobian
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.sphere-conformal-killing-group
+    note: 提供无穷小 Möbius 变换的参数化 δz = a₀ + a₁z + a₂z²，本推导的输入。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.2)/(6.3.4)；§6.4 eq. (6.4.5)；§6.6 eq. (6.6.4)"
+    note: 抽取记录 #E96/#E97/#E104，L1（schrans-2020 与 headrick-2008 双源给出鬼场三点期望值）。
+summary: |
+  δz_i = a₀ + a₁ z_i + a₂ z_i² 对 (a₀,a₁,a₂) 线性，系数矩阵第 i 行为 (1, z_i, z_i²)，
+  即 3×3 Vandermonde 矩阵，行列式 = ∏_{i<j}(z_j − z_i) = (z₂−z₁)(z₃−z₁)(z₃−z₂)。
+  用 z_ij = z_i − z_j 改写即 (−z₁₂)(−z₁₃)(−z₂₃) = −z₁₂z₁₃z₂₃，取模得 |z₁₂z₁₃z₂₃|。
+  三点互不相同 ⇒ 行列式非零 ⇒ 三个 CKV 参数恰好够把三点固定到任意指定值
+  （这是 math.mobius-group-sharply-three-transitive 单可迁性的无穷小版本）。
+
+  球面上全纯与反全纯参数各三个，两侧行列式互为复共轭，乘积为 |z₁₂|²|z₁₃|²|z₂₃|²；
+  圆盘上参数为实、点在实轴上，直接得 |y₁₂y₁₃y₂₃|。
+gaps:
+  - "**未获 reviewer 复核**：符合 docs/STATUS_LEVELS.md「初等可复核」例外的前两条
+     （前提完整、有限步初等计算），缺 reviewer-verified 记录，故暂标 physical-argument。"
+  - "**「FP 手续给出的就是这个 Jacobian」未被本推导论证**：从规范固定测度 (5.3.9) 导出
+     「固定三个坐标 ⇒ 乘 |det| ⇒ 与 c 鬼三点期望值对消」属第 5 章，本图尚无节点
+     （另一名 curator 在建）。**待 ch5 节点合入后补边。**"
+  - "**与鬼场期望值的「逐字同形」只是观察**：本推导不断言归一化常数 C^g_{D₂}、C^g_{S₂}
+     与 Jacobian 的关系；那需要 bc CFT 的路径积分归一化。"
+notes: |
+  升级到 rigorous 只需 reviewer 复核这几行线性代数并在此写 reviewer-verified 记录。
+author: curator-polchinski-ch6
+created: "2026-09-11"

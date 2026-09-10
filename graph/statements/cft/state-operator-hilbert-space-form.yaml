@@ -1,0 +1,68 @@
+id: cft.state-operator-hilbert-space-form
+kind: proposition
+title: 球面 n 点函数写成 Hilbert 空间矩阵元：Zamolodchikov 内积与「OPE 系数 = 矩阵元」
+statement: |
+  设二维 CFT 在 S₂ 上，按 worldsheet.state-operator-isomorphism 把 z = 0 处的算子 A_j
+  映到单位圆上的态 Ψ_{A_j}[φ_b]（φ_b 为圆上的边界场构型）。则：
+
+  **(1)（两点函数 = 卷积，(6.7.9)）** 把 z = ∞（即 u = 1/z 片的原点 u = 0）处的算子 A_i
+  映到 Ψ_{A_i}[φ_b(u)]；由于 u 片与 z 片的圆参数关系是 σ ↦ 2π − σ，两点函数写成
+    **⟨ A_i'(∞) A_j(0) ⟩_{S₂}  =  ∫ [dφ_b]  Ψ_{A_i}[φ_b^Ω] Ψ_{A_j}[φ_b]**，
+  形式上是一个**卷积**（对同一组边界场积分）而非通常意义的内积
+  （Ω 表示上述圆参数的反向）。
+
+  **(2)（Zamolodchikov 内积，(6.7.11)）** 由 (1) 定义配对
+    **⟨⟨ i | j ⟩⟩ ≡ ⟨ A_i'(∞) A_j(0) ⟩_{S₂}**，
+  记 G_{ij} = ⟨⟨i|j⟩⟩。它是态空间上的一个双线性配对（**Zamolodchikov 内积**），
+  由 cft.tensor-two-and-three-point-functions (1) 知 G_{ij} 只在 h_i = h_j、h̄_i = h̄_j 时非零。
+
+  **(3)（三点函数 ↔ OPE 系数，(6.7.14)/(6.7.15)）** 三点函数与 OPE 系数 c^k_{ij}（(2.4.20)）
+  由该配对相联系：
+    **c_{ikj} = Σ_ℓ c^ℓ_{kj} G_{iℓ}**，
+  即「结构常数」与「OPE 系数」通过 G 升降指标互换。
+
+  **(4)（四点函数，(6.7.16)/(6.7.18)）** 四点函数由在中间插入**完备态基**得到，
+  写成 OPE 系数与 G 的求和。
+
+  ⚠⚠ **本命题的三条未证前提**（抽取记录明确要求单独建节点并标明）：
+  (a) **OPE 收敛**（本图未证，lead 裁决 2026-09-10 的标准缺口，researcher Q3）；
+  (b) **完备基假设**（态空间有可数完备基且插入完备关系合法）；
+  (c) **径向序 = 时间序**（路径积分自动含时序，Hilbert 空间侧需显式时序；
+      两者在世界面 CFT 上的等同**本书未证明**）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.7, eq. (6.7.9)（两点函数的态-算子映射）、(6.7.10)、(6.7.11)（Zamolodchikov 内积）、(6.7.14)/(6.7.15)（三点 ↔ OPE 系数）、(6.7.16)、(6.7.18)（四点），p.200–201"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E112，等级 **L1**（schrans-2020 §6.78–§6.82，
+      笔记 p.349–352，逐页读到）；⚠ (6.7.10)/(6.7.16) 只有 [S] 正文交叉引用，目录无独立条目
+      （抽取记录 §7）。
+      ⚠⚠ **[S] 在这一节留下三条「看不懂」的记录，都指向原书的论证有跳跃**（逐字）：
+      1. §6.79：「[6.320] O_i(z)O_j(0) = Λ^{h_i+h_j}⟨⟨i|j⟩⟩/(z^{h_i+h_j}⟨1⟩_{S₂}) + …
+         **I am not sure how to get rid of the Λ-factor.**」
+      2. §6.82：「Now **Joe used the Σ_n G^{mn} to raise c_{nℓj} to c^m_{ℓj}, but there is also a
+         z₂^{h₂} so I am not sure how this exactly works.**」
+      3. §6.82 脚注 10：「Recall from QFT that **time-ordering is needed in the Hilbert space
+         mechanism, but that this is automatically included in the path-integral formalism.**」
+      抽取记录的结论逐字：「**curator：这一节整体建议标 physical-argument**；
+      特别是『OPE 系数 = Hilbert 空间矩阵元』这条要单独建节点并标明依赖
+      『OPE 收敛（Q3）+ 完备基假设 + 径向序 = 时间序』三条未证前提。」——本卡片即此。
+tags: [cft, state-operator, zamolodchikov-inner-product, ope-coefficients, hilbert-space, radial-quantization]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E112 建立。
+
+  **⚠ 按抽取记录 Q18 的建议单独建节点。** Q18 指出「态-算子对应在振幅中的使用」在本书有三个落点，
+  用法强度不同：
+  1. (5.4.5)：用「V 对应 L₀^m = 1 的最高权态」判定 V 是维数 1 的主场（属第 5 章，另一 curator）；
+  2. (3.6.26) 的归一化：见 spectrum.chan-paton-yang-mills-coupling (1) 末句；
+  3. (6.7.9)–(6.7.18)：本卡片。
+  「**第 3 类比前两类强得多**（要求径向序 = 时间序、完备基、Zamolodchikov 内积良定义）」，
+  故 Q18 建议「**不要把三者挂到同一个 state-operator-correspondence 节点上**」。
+  本图遵此：本卡片是独立节点，只在依赖里引 worldsheet.state-operator-isomorphism，
+  并把三条额外前提写进 statement。
+
+  **area 选择**：`cft.`（纯 CFT 内容，与弦无关），理由同本批次其它 cft.* 节点。
+author: curator-polchinski-ch6
+created: "2026-09-11"

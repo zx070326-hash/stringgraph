@@ -1,0 +1,67 @@
+id: spectrum.closed-string-four-tachyon-integral--via-sl2c-fixing
+target: spectrum.closed-string-four-tachyon-integral
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.sphere-n-tachyon-expectation-value
+    note: 提供 X 部门 ∏_{i<j}|z_ij|^{α'k_i·k_j} 与 δ²⁶(Σk)。
+  - id: worldsheet.bc-ghost-sphere-cc-correlator
+    note: 提供固定三个复坐标后 FP 手续留下的六个 c 插入的期望值 C^g_{S₂}|z₁₂|²|z₁₃|²|z₂₃|²。
+  - id: math.mobius-three-point-fixing-jacobian
+    note: 提供与上一条同形的 Jacobian |z₁₂|²|z₁₃|²|z₂₃|²（两者对消，是被积函数只剩 z₄ 的算术原因）。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: 提供 κ(S₂) = 6：四个复坐标里三个可被固定，第四个必须积分。
+  - id: math.mobius-group-sharply-three-transitive
+    note: 提供「任意三点可唯一地送到 (0,1,∞)」——固定 z₁=0、z₂=1、z₃=∞ 这一具体选择的依据。
+  - id: spectrum.sphere-tachyon-expectation-smooth-at-infinity
+    note: |
+      提供 z₃ → ∞ 的合法性（换到 u 片后期望值光滑，on-shell α'k² = 4 时）。
+      ⚠ 该节点的来源是习题解答（[H] Problem 6.1），且来源正文只写「does not cause a problem」
+      而不给论证（抽取记录 Q17）。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供闭弦情形 α'(s+t+u) = −16，用来把 k_i·k_j 改写成 Mandelstam 变量。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      标 inferred：提供 α's = −4 就是闭弦 tachyon 上壳这一识别（α'm² = −4）。
+      该节点出自光锥量子化（§1.4），§6.6 不回指它。
+    convention_map: conv.metric-mostly-plus 下 s = −m²，故 α'm² = −4 ⟺ α's = −4。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.2)/(6.6.4)/(6.6.7)/(6.6.8)，p.192–193"
+    note: 抽取记录 #E104，L1（schrans-2020 §6.60–§6.63，笔记 p.326–328）。
+  - ref: headrick-2008
+    loc: "Problem 6.11（PDF p.49）：C_{S₂} = 8π/(α'g_c²) 的第二独立源"
+summary: |
+  **(1) 组装与固定。** S₂ 上四点振幅 = e^{−λχ}（χ = 2）× 六个 c 鬼的期望值 × X 部门期望值，
+  再对未被 CKG 固定的坐标积分。κ(S₂) = 6 ⇒ 三个复坐标可固定；
+  用 math.mobius-group-sharply-three-transitive 取 (z₁,z₂,z₃) = (0,1,∞)。
+  鬼场期望值 |z₁₂|²|z₁₃|²|z₂₃|² 与固定坐标的 Jacobian 同形而对消，
+  剩下对 z₄ 在整个 C 上的积分。
+
+  **(2) 被积函数。** X 部门给 ∏_{i<j}|z_ij|^{α'k_i·k_j}；代入 z₁=0、z₂=1、z₃=∞
+  （z₃ 的因子按 spectrum.sphere-tachyon-expectation-smooth-at-infinity 的换片规则处理），
+  用 Mandelstam 变量改写指数，得 |z₄|^{−α'u/2−4}|1−z₄|^{−α't/2−4}，
+  前面配 i g_c⁴ C_{S₂}(2π)²⁶δ²⁶(Σk)。
+
+  **(3) 极点与归一化。** |z₄| → ∞ 的端点（对应 z₄ 与 z₃ = ∞ 靠近，即 s 通道）给出发散，
+  按解析延拓表现为 α's = −4 处的极点，即闭弦 tachyon 上壳。
+  与「两个三点振幅 × 中间态传播子」比较，定出 C_{S₂} = 8π/(α'g_c²)。
+gaps:
+  - "**z₃ → ∞ 的论证薄弱**（抽取记录 Q17）：来源只写「does not cause a problem」；
+     本图的支撑节点来自**习题解答**（[H] Problem 6.1）且是球面闭弦 tachyon 的特例。"
+  - "**上游 ch5 节点尚未进入 main**：主公式 (5.3.9)、FP 手续、「固定 CKV 参数 ⇒ 乘 c 鬼插入」。
+     **待合入后补边。**"
+  - "**(1) 的三 tachyon 情形没有细节**：[S] 逐字说三点「is just a duplication … no point elaborating」，
+     故 (6.6.2) 的显式前因子在本图中**没有任何来源**。目标陈述的 (1) 只作结构性陈述。"
+  - "**因子化比较（(3)）与开弦情形同一缺口**：中间态传播子与态和在本图没有定义。"
+  - "**路径积分测度未定义**（本批次共有）。"
+  - "**记号陷阱**：本振幅用普通正规序 :e^{ik·X}: 而非重整化算符 [·]_r（抽取记录 E95）；
+     本推导的 X 部门依赖节点 spectrum.sphere-n-tachyon-expectation-value 写的是 [·]_r 版本，
+     两者差一个 exp(−(α'/4)Σk_i²ω(z_i)) 因子（取 ω = 0 时相同）。
+     ⚠ **本推导默认取 ω = 0 的规范**，这一步没有节点承载。"
+notes: |
+  最后一条 gap（正规序 vs 重整化算符）是抽取记录 E95 明确点出的陷阱，
+  值得 reviewer 在复核本批次时特别注意。
+author: curator-polchinski-ch6
+created: "2026-09-11"

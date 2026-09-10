@@ -1,0 +1,45 @@
+id: math.mobius-three-point-fixing-jacobian
+kind: proposition
+title: 固定三点的共形 Killing 群 Jacobian 是 Vandermonde 行列式 z₁₂z₁₃z₂₃
+statement: |
+  设无穷小 Möbius 变换按 worldsheet.sphere-conformal-killing-group 参数化为
+    δz = a₀ + a₁ z + a₂ z²   (a₀, a₁, a₂ 复)，
+  并设 z₁, z₂, z₃ 互不相同。则参数到三点位移的线性映射
+    (a₀, a₁, a₂) ⟼ (δz₁, δz₂, δz₃),   δz_i = a₀ + a₁ z_i + a₂ z_i²
+  的矩阵是 Vandermonde 矩阵（第 i 行为 (1, z_i, z_i²)），其行列式为
+    det = (z₂ − z₁)(z₃ − z₁)(z₃ − z₂) = − z₁₂ z₁₃ z₂₃,   z_ij ≡ z_i − z_j，
+  故 |det| = |z₁₂ z₁₃ z₂₃| ≠ 0，映射可逆。
+
+  **(1)（球面）** 把全纯与反全纯两侧合起来，用 PSL(2,C) 固定 S₂ 上三个复坐标时
+  出现的 Jacobian 因子是  |z₁₂|² |z₁₃|² |z₂₃|²。
+  **(2)（圆盘）** 用 PSL(2,R) 固定 D₂ 边界上三个实坐标时同样的计算给  |y₁₂ y₁₃ y₂₃|。
+
+  ⚠ **本命题只断言线性代数**：上面两式与 bc 鬼场三点期望值
+  （worldsheet.bc-ghost-sphere-cc-correlator、worldsheet.bc-ghost-disk-three-c-correlator）
+  在函数形式上**逐字相同**，这正是「鬼场插入抵消固定坐标的 Jacobian」的算术内容；
+  但「Faddeev–Popov 手续给出的正是这个 Jacobian」是路径积分层面的陈述，属第 5 章，
+  **本命题不断言它**（本图暂无该节点，见 notes）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.3, eq. (6.3.2)/(6.3.4)（与本 Jacobian 逐字同形的鬼场三点期望值）；§6.4 eq. (6.4.5)、§6.6 eq. (6.6.4)（三点被固定后的振幅表达式）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E96/#E97/#E104，等级 L1
+      （(6.3.2)/(6.3.4) 有 schrans-2020 与 headrick-2008 **两个独立二手源**逐字写出表达式）。
+      ⚠ 来源给出的是**鬼场期望值**；Vandermonde 行列式这一步是 curator 补出的线性代数，
+      原书是否在此处写出该 Jacobian **未核实**。
+tags: [math, linear-algebra, vandermonde, mobius, faddeev-popov, jacobian]
+notes: |
+  由 curator 于 2026-09-11 拆出（任务书：把「PSL(2,C) 三点固定的 Jacobian」作为纯数学部分单列）。
+
+  **为什么值得单列**：第 6 章几乎每条树级振幅都用到「固定三点 + 乘上 c 鬼三点期望值」，
+  而两者之所以对消，纯粹因为 Vandermonde 行列式与 (6.3.2)/(6.3.4) 同形。
+  单列算术部分后，振幅节点的 gaps 里只剩真正的物理缺口（路径积分测度、FP 手续）。
+
+  **⚠ 为什么不是 rigorous**：Vandermonde 行列式是初等线性代数，但按 docs/STATUS_LEVELS.md，
+  「初等可复核」例外要求 reviewer 独立复核并留 reviewer-verified 记录；本节点尚无该记录，
+  也无数学文献来源。故 physical-argument。**这是本批次最容易升级的一条。**
+
+  **待补边**：第 5 章的规范固定测度 (5.3.9)（抽取记录 E77/E80）说明 FP 行列式在固定 CKV 参数后
+  产生的正是这个 Jacobian。该节点由另一名 curator 建立，本批次提交时尚未进入 main。
+author: curator-polchinski-ch6
+created: "2026-09-11"

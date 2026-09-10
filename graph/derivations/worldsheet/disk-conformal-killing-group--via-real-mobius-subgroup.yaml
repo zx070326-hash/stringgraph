@@ -1,0 +1,58 @@
+id: worldsheet.disk-conformal-killing-group--via-real-mobius-subgroup
+target: worldsheet.disk-conformal-killing-group
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.sphere-conformal-killing-group
+    note: |
+      提供母群：D₂ 的 CKV 是 S₂ 的 CKV 中与认同 z ∼ 1/z̄ 相容的子集，
+      所以先要有 δz = a₀ + a₁z + a₂z² 与 PSL(2,C)。同出第 6 章，不标 inferred。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: 提供 D₂ = S₂/(z ∼ 1/z̄) ≅ 上半平面 H 这一实现，本推导的「相容性」条件就是对它写的。
+  - id: math.mobius-group-sharply-three-transitive
+    note: |
+      提供 (2) 的两半：PSL(2,R) 在同循环序的边界三点组上单可迁（故三点可固定且固定方式唯一），
+      以及它保持 ∂H 的循环序（故两种循环序是两条轨道）。
+      ⚠ 该数学节点本身在本图中只有 physical-argument 级的论证（无文献来源），见其 gaps。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4 开头（p.179 附近）：D₂ 上 κ = 3、μ = 0、χ = 1；三个坐标固定在实轴上；两种循环序。**无式号**"
+    note: 抽取记录 #E90，L1（内容出自 schrans-2020 §6.27，笔记 p.299）。式号不存在，见抽取记录 §7。
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.2)：三 tachyon 开弦振幅中显式出现的「+ ⟨k₂ ↔ k₃⟩」项"
+    note: |
+      抽取记录 #E97，L1。本推导用它作为「两种循环序不被 PSL(2,R) 联系」的**书内旁证**：
+      若两者等价则不会有这一项。⚠ 这是 curator 的推理，不是原书的论证。
+  - ref: schrans-2020
+    loc: "§6.27（笔记 p.299）与图 6.7（核对源）"
+summary: |
+  **(1) 取相容子群。** D₂ = S₂/(z ∼ 1/z̄)。一个 S₂ 上的 CKV 下降到商空间，
+  当且仅当它与该认同对易；等价地，把它写在上半平面模型上，要求它切于边界（不把边界点移出实轴），
+  即 δz|_{z ∈ R} 取实值。代入 δz = a₀ + a₁z + a₂z²，令 z ∈ R 取三个不同实值，
+  得 a₀, a₁, a₂ 全为实。故实参数由 6 降为 3，κ(D₂) = 3；
+  指数化得到实系数 Möbius 变换群 PSL(2,R)，它保持 Im z 的符号，故保持 H。
+
+  **(2) 三点固定与循环序。** 由 math.mobius-group-sharply-three-transitive：
+  PSL(2,R) 在「∂H 上按同一循环序排列的三元组」集合上单可迁，
+  于是三个边界坐标可以（且只能以唯一方式）被固定到指定值——这就是振幅里「用 CKG 固定三点」的操作；
+  同时 PSL(2,R) ⊂ 保定向自同构群，在 ∂H ≅ S¹ 上保持循环序，
+  故 (y₁,y₂,y₃) 与 (y₁,y₃,y₂) 落在两条不同轨道上，振幅必须对两者求和。
+
+  **与 Riemann–Roch 的对照（不作为本推导的依据）**：χ(D₂) = 1、μ = 0 时 κ = 3χ + μ = 3，与 (1) 一致。
+gaps:
+  - "**⚠ 文献歧义**：[S] 的逐字句子说两种排法「are linked by a PSL(2,R) transformation」，
+     与本推导（及抽取记录的转述）相反。本推导按「不被联系」写，依据是 (a) 数学事实
+     math.mobius-group-sharply-three-transitive（本图无文献来源，只有 curator 的初等论证）与
+     (b) (6.4.2) 里「+ ⟨k₂↔k₃⟩」项的存在这条书内旁证。**须有原书者核对 §6.4 开头的原文措辞。**"
+  - "**上游 ch5 节点尚未进入 main**：κ − μ = 3χ（E75, (5.2.9)）与 μ(D₂) = 0（E76）在本图无节点，
+     故 summary 末段只作对照、不建边。**待 ch5 节点合入后补一条 --via-riemann-roch 的独立推导。**"
+  - "**「CKV 下降到商空间 ⟺ 切于边界」这一步未严格化**：本推导用的是『向量场与对合 z ↦ 1/z̄ 对易』
+     的直观版本；严格处理需要在带边曲面上定义共形 Killing 方程的边界条件（第 5 章 E73/E74 的
+     带边推广），本图与来源都没有。"
+  - "**PSL(2,R) 记号与 κ = 3 的式号在原书中的位置未核实**（抽取记录 §7：本条**无式号**）。"
+  - "本推导只谈共形 Killing 群，**不**谈无取向弦的额外投影（RP₂、Ω），那在 spectrum.unoriented-* 诸节点。"
+notes: |
+  升级到 rigorous 需要三件事同时具备：(a) math.mobius-group-sharply-three-transitive 取得数学文献来源；
+  (b) 「CKV 下降到带边商空间」这一步有节点承载；(c) 文献歧义（上面第一条 gap）由原书裁定。
+author: curator-polchinski-ch6
+created: "2026-09-11"

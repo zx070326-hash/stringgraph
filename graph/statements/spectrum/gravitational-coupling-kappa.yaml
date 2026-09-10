@@ -1,0 +1,52 @@
+id: spectrum.gravitational-coupling-kappa
+kind: proposition
+title: 闭弦耦合关系 g_c = α' g'_c / 2 与引力耦合 κ = π α' g'_c
+statement: |
+  在 S₂ 上（μ = 0、κ_CKV = 6，故六个 c 插入、无 b 插入、χ = 2、Euler 因子 e^{−2λ}）
+  计算「一个无质量闭弦（极化张量 e_{μν}）+ 两个 tachyon」的树振幅 (6.6.14)，
+  并与场论树图比较（用 tachyon 的低能有效作用量 (6.6.16) 与 Einstein 框架下正则归一化的引力子）。则
+    **g_c = α' g'_c / 2**   （(6.6.15) 附近），
+    **κ = π α' g'_c**，
+  其中 g_c 是闭弦顶点算子的归一化、g'_c 是无质量闭弦（引力子）的耦合、
+  κ 是引力耦合（κ² = 8πG_N 型的归一化）。
+
+  ⚠ **极化张量的迹陷阱**（headrick-2008 逐字）：上述弦计算中所用的无质量闭弦极化张量 e
+  的**迹代表 dilaton，不是（Einstein 框架下）引力子的迹**——后者总可以被规范掉。
+  比较场论时不得把 tr e 当作引力子自由度。
+
+  **本命题不断言什么**：不给出 (6.6.14) 的显式表达式；不给出 tachyon 有效作用量 (6.6.16)、
+  三个无质量闭弦振幅 (6.6.19)/(6.6.21) 的表达式（那些只到 L2）；
+  不断言弦论低能极限就是 Einstein 引力（只做了这一个耦合的比较）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: headrick-2008
+    loc: "Problem 6.11(b)(c)（PDF p.49–51）：g_c = α'g'_c/2（式 (70)，「Comparison with (64) shows that」）与 κ = πα'g'_c（式 (76)，「Comparison with the amplitude (6.6.14) shows that」）；迹陷阱在 p.51"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E107，等级 **L1**。
+      抽取记录逐字：「**这两个数值关系有 [H] 的独立背书**」；迹陷阱逐字：
+      「The trace of the massless closed string polarization tensor e used in the string calculations
+      of parts (a) and (b) above **represents the dilaton, not the trace of the (Einstein frame)
+      graviton, which can always be gauged away**.」
+      ⚠ 按 lead 裁决（2026-09-10）：Headrick 习题解答在「对某个显式计算是唯一成文来源」时
+      可作为推导 source，但 **reviewer 须复核计算**。
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.14)（一个无质量闭弦 + 两个 tachyon）、(6.6.15)、(6.6.16)（tachyon 有效作用量）、(6.6.19)、(6.6.21)（三个无质量闭弦），p.194–195"
+    note: |
+      抽取记录 #E107，L1（schrans-2020 §6.67，笔记 p.333）；
+      ⚠ **(6.6.19)/(6.6.21) 只到目录级（L2）**，本卡片不写其表达式。
+tags: [spectrum, tree-level, closed-string, graviton, gravitational-coupling, kappa, effective-field-theory, dilaton]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E107 建立。
+
+  **这条在图里的位置**：它是「闭弦谱里的无质量对称张量 = 引力子」这一断言在**耦合层面**的兑现，
+  也是弦长度尺度 α' 与 Newton 常数之间关系的来源。
+  本图**没有**「闭弦无质量态含引力子」的陈述节点（那属第 3 章的顶点算子分类，
+  抽取记录未覆盖），故本卡片把它作为**前提**写在 statement 的措辞里而不建边。
+
+  **⚠ 迹陷阱值得下游注意**：任何把 e_{μν} 与场论中的 h_{μν} 直接等同的节点都会踩这个坑。
+  本卡片把 [H] 的逐字警告写进 statement，使它随节点传播。
+author: curator-polchinski-ch6
+created: "2026-09-11"

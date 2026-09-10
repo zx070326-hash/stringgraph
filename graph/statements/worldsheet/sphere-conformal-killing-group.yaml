@@ -1,0 +1,57 @@
+id: worldsheet.sphere-conformal-killing-group
+kind: proposition
+title: 球面的共形 Killing 向量为 δz = a₀ + a₁z + a₂z²，κ(S₂) = 6，共形 Killing 群是 PSL(2,C)
+statement: |
+  设 S₂ 按 worldsheet.tree-level-worldsheet-topologies 用两片坐标 z、u = 1/z 描述，
+  并设共形 Killing 向量（CKV）定义为满足全纯条件 ∂̄ δz = 0（及其复共轭）的、
+  **在整个 S₂ 上处处正则**的无穷小共形变换 δz。则：
+
+  **(1)** 在 z 片上正则给出 Taylor 展开 δz = Σ_{n ≥ 0} a_n z^n；换到 u 片，
+  由 δu = −z^{−2} δz 得 δu = Σ_n a_n u^{2−n}，要求在 u = 0 正则**当且仅当** a_n = 0 对一切 n > 2。
+  故全局 CKV 恰为
+    δz = a₀ + a₁ z + a₂ z²   （反全纯侧同理 δz̄ = ā₀ + ā₁ z̄ + ā₂ z̄²）。
+
+  **(2)** 三个复参数 (a₀, a₁, a₂) 对应 **κ(S₂) = 6 个实 CKV**。
+
+  **(3)** 相应的有限（整体）变换群是 Möbius 群
+    z ↦ (α z + β)/(γ z + δ),  αδ − βγ = 1,  (α,β,γ,δ) 与 −(α,β,γ,δ) 认同，
+  即 PSL(2,C) = SL(2,C)/{±1}。
+
+  **本命题不断言什么**：不断言 S₂ 无模（μ = 0），也不由 Riemann–Roch 推出 κ = 6
+  ——那是第 5 章的独立结果（见 notes 的「与第 5 章的关系」）；本命题是**直接构造**。
+  不断言 PSL(2,C) 在 n 点函数上的作用方式（那在 cft.* 的 Möbius 固定诸节点）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1, eq. (6.1.5a)（δz = a₀ + a₁z + a₂z²）与 (6.1.5b)（反全纯侧），p.166 起"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E89，等级 **L1**：式号 (6.1.5a)/(6.1.5b) 与内容
+      由 schrans-2020 §6.2（笔记 p.277）给出，抽取者逐页读到。
+      κ(S₂) = 6 在 [S] 中另有两处正文独立复述：§6.23「The sphere has six CKVs, see (6.1.5 a,b)」
+      （笔记 p.296）、§6.67「…zero moduli and six conformal Killing vectors … 3χ = κ − μ = 6 − 0 = 6」
+      （笔记 p.333）。
+      ⚠ **「PSL(2,C)」这个记号本身写在原书哪一式未核实**（抽取记录 §7 的未核实清单）。
+      ⚠ L1 只保证「[S] 这么写」，不保证原书这么写。
+  - ref: schrans-2020
+    loc: "§6.2（笔记 p.277）、§6.23（p.296）、§6.67（p.333）：内容的实际读取来源（核对源）"
+tags: [worldsheet, tree-level, sphere, conformal-killing-vector, mobius, psl2c]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E89 建立。
+
+  **与第 5 章的关系（待补边）**：Riemann–Roch κ − μ = 3χ（抽取记录 E75，(5.2.9)）在 S₂ 上给
+  κ − μ = 6，与本命题的直接构造 κ = 6、μ = 0 互为佐证（[S] §6.67 正是这样用的）。
+  第 5 章的节点由另一名 curator 建立，本批次提交时**尚未进入 main**，故本卡片把
+  「共形 Killing 方程 ∂̄δz = 0」写进 statement 作为**前提**而不是依赖边，
+  推导节点里标 inferred 并留 gap，**待 ch5 节点合入后补边**。
+
+  **[S] 的一处笔误已订正**：他写「we thus need a_n = 0 for n > 3」，但由 δu = Σ a_n u^{2−n}
+  的正则性得到的条件是 **n > 2**，且他下一句自己就说「only a₀, a₁, a₂ can be non-zero」。
+  本卡片按 n > 2 写（抽取记录 E89 已指出这处前后矛盾）。
+
+  **数学表述的对应**：本命题等价于「P¹ 上的全局全纯向量场空间是 sl(2,C)，dim_C = 3」。
+  本图目前**没有**该数学事实的文献来源节点；若日后 researcher 登记一本复几何/黎曼曲面教材，
+  可为本命题补一条 --via-<math-source> 的 rigorous 推导（见推导节点的 gaps）。
+author: curator-polchinski-ch6
+created: "2026-09-11"
