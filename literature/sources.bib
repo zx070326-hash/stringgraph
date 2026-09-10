@@ -279,7 +279,20 @@
             复用评估见 formal/NOTES-virasoro-reuse.md。
             **全文已核实（2026-09-10，16 页读毕）。** 可引用的编号结果：**Theorem 10.1**（在假设 (H) Heisenberg 关系 [J_k,J_l] = k delta_(k,-l) id_V 与 (T) 局部截断「任给 v 存在 K_v 使 J_l v = 0 对所有 l >= K_v」下，L_n v = 1/2 sum_k :J_(n-k) J_k: v 满足 Virasoro 对易关系）；**Corollary 10.2**（由此得到**中心荷 c = 1** 的 Virasoro 表示）；**Corollary 12.6**（带电 Fock 空间 F_alpha 上的 c = 1 表示）；**Theorem 12.7**（Virasoro Verma 模到带电 Fock 空间的唯一模同态）；**Theorem 6.2**（H^2(witt) 一维）；**Definition 8.1**（Virasoro 代数）。Theorem 10.1 的完整证明在 Appendix A.2（Lemma A.6--A.12）。
             对应 Lean 声明（论文 Table 1）：sugawaraRepresentation_of_representation_heisenbergAlgebra、ChargedFockSpace.virasoroVermaToChargedFockSpace、VirasoroAlgebra、HeisenbergAlgebra、VermaModule / IsVermaModule、WittAlgebra.rank_lieTwoCohomology_eq_one。
-            **三条使用限制**：(1) 只有 c = 1 的单分量 Heisenberg，**没有 c = D 的多分量版本**；(2) 没有洛伦兹不定内积（无鬼定理的难点全在这里）；(3) 作者脚注 11 逐字指出通行说法「The Sugawara construction is an embedding of the Virasoro algebra into the universal enveloping algebra of the affine Lie algebra」是 false（无穷和不落在 UEA 内），节点措辞不要用「嵌入」。见 extractions/primary-sources-round2.md §5.2。}
+            **三条使用限制**：(1) 只有 c = 1 的单分量 Heisenberg，**没有 c = D 的多分量版本**；(2) 没有洛伦兹不定内积（无鬼定理的难点全在这里）；(3) 作者脚注 11 逐字指出通行说法「The Sugawara construction is an embedding of the Virasoro algebra into the universal enveloping algebra of the affine Lie algebra」是 false（无穷和不落在 UEA 内），节点措辞不要用「嵌入」。见 extractions/primary-sources-round2.md §5.2。
+            **第二轮补充（researcher 2026-09-11）**：为 OPE 节点查证时重读 pp.1-3，确认
+            **(4) 本文不含任何关于顶点代数、局域性、OPE、形式分布正规序积的陈述**——其 Table 1 列出的全部条目
+            （Def 3.1 / Def 4.3 / Def 8.1 / Sec 9 / Def 12.2 / Thm 6.2 / Thm 10.1 / Thm 12.7）都是 Lie 代数层面的。
+            §1.3 "Related work" 逐字把 VOA 划给 Carnahan [Car25]，并把「CFT 的数学定义」指向 **[Gui23] = gui-2023-lectures**。
+            **(5) §1.2 逐字：「The results here have not yet been pull-requested to Mathlib.」**
+            （报告对应仓库 commit 29e118b，约 4000 行）——复用必须直接依赖该仓库，不能指望从 Mathlib 拿到。
+            **(6) Mathlib 现状（读取日期 2026-09-11；Mathlib 变动快，用前须复查）**：
+            Mathlib/Algebra/Vertex/{HVertexOperator,VertexOperator}.lean 已有 HVertexOperator、VertexOperator、ncoeff、
+            of_coeff、comp 等声明，但 **Locality 与 Residue products 写在模块 docstring 的 TODO 段里，尚未实现**。
+            （检索后端曾误报「Main definitions include locality」；逐字读官方文档页后不成立——是把 TODO 读成 Definitions。）
+            **=> 图里任何顶点代数/局域性节点现在都不能标 formalized，最高只能到 rigorous。**
+            另注意本文 [L_m,L_n] 的中心项写成 ((m^3-m)/12) delta_{m,-n}，与 schottenloher-2008 的 (m/12)(m^2-1) delta_{m+n}
+            是同一式但记法不同，**约定要对齐**。见 extractions/math-sources.md §12。}
 }
 
 @misc{headrick-2008,
@@ -339,8 +352,37 @@
   publisher = {Springer},
   year      = {2008},
   note      = {由 curator 于 2026-09-10 登记。用途：Virasoro 代数的数学处理（Witt 代数的中心扩张、
-               Heisenberg/Fock 表示、Sugawara 型构造）。**章节号与定理号未核实**，
-               图节点的 loc 一律写「相关章节，编号未核实」。}
+               Heisenberg/Fock 表示、Sugawara 型构造）。原登记写「章节号与定理号未核实」。
+               **第 10 章的限制已于 2026-09-11 解除（researcher）：Chapter 10 "Vertex Algebras" 全章已核实（L1，逐页读图）。**
+               获取途径：作者本人在 LMU 主页按章挂出的 PDF
+               https://www.mathematik.uni-muenchen.de/~schotten/LNP-cft-pdf/10_978-3-540-68625-5_Ch10_23-08-08.pdf
+               （WebFetch 落盘 550 KB 后用 Read 带 pages 读图；**PDF 页码 = 书上页码 - 170**）。
+               首页页脚逐字：「Schottenloher, M.: Vertex Algebras. Lect. Notes Phys. 759, 171-212 (2008)
+               DOI 10.1007/978-3-540-68628-6_11」。**陷阱：书里是第 10 章，DOI 后缀却是 _11；
+               文件名 ISBN 978-3-540-68625-5 与 DOI 里的 978-3-540-68628-6 也不同（印本/电子本）。
+               引用请写「Ch. 10, LNP 759, pp. 171-212」，不要用 DOI 后缀推章号。**
+               作者自陈（p.172）：「The presentation in these notes is based mainly on the course [Kac98*]」
+               ——即本章是 Kac《Vertex Algebras for Beginners》的可公开获取替身。
+               **可引用的编号结果（均 L1 逐字）**：
+               **Definition 10.7 (Locality), p. 177**：两个形式分布 A, B 局域 iff 存在 N 使 (z-w)^N [A(z),B(w)] = 0 于 R[[z^+-, w^+-]]；
+               **Proposition 10.6, p. 175**：(z-w)^N f = 0 的 f 唯一地写成 sum_{j=0}^{N-1} c^j(w) D_w^j delta(z-w)，且 c^n(w) = Res_z (z-w)^n f(z,w)
+               （正文逐字把本条归功于 Kac：「The next result (due to Kac [Kac98*])」）；
+               **Theorem 10.10, p. 178**：五条等价性质——1 局域性；2 delta 分解；3 A(z)_- 与 A(z)_+ 的对易子；
+               4 **物理写法的 OPE**（A(z)B(w) = sum i_{z,w}(z-w)^{-(j+1)} C^j(w) + :A(z)B(w):）；5 模式对易子公式；
+               **Lemma 10.11 (Dong's Lemma), p. 181**；**Definition 10.12 (field), p. 181**；
+               Definition 10.1/10.3 (residue / 形式 delta 函数)、Lemma 10.2/10.4/10.5、Definition 10.9 (正规序积)、
+               Lemma 10.13、Remark 10.8/10.14。
+               **p.179 有一段极有用的「桥」**：作者亲手把 Theorem 10.10 第 4 条译成物理记号
+               A(z)B(w) ~ sum_{j=0}^{N-1} C^j(w)/(z-w)^{j+1}，并逐字说「with the implicit assumption of |z| > |w|
+               in order to justify 1/(z-w)^{j+1} = i_{z,w} 1/(z-w)^{j+1}」「This is a kind of operator product expansion
+               as in Sect. 9.3」。**注意是 "a kind of"，不是等同。**
+               **整章停在形式级数层面，没有任何收敛性定理**；|z| > |w| 只是选 i_{z,w} 这种形式展开（p.177 "Analytic Aspects" 段）。
+               Heisenberg/Virasoro 例子：p.179 A(z)A(w) ~ Z/(z-w)^2；p.181-182 自由玻色子 Fock 空间 S = C[T_1,T_2,...] 上 Phi(z)Phi(w) ~ 1/(z-w)^2；
+               p.180 式 (10.2) T(z)T(w) ~ (c/2)/(z-w)^4 + 2T(w)/(z-w)^2 + d_w T(w)/(z-w)。
+               **两个疑点**：(a) p.180 正文两处写「Theorem 10.5」「property 5 in Lemma 10.5」，
+               但 10.5 是 delta 恒等式引理、没有 property 4/5，**几乎肯定应为 Theorem 10.10**，勿照抄；
+               (b) Theorem 10.10 第 5 条求和下限在页图上疑似 j=1，而第 2-4 条均为 j=0，**引用前须复核原页**。
+               **其余章节的编号仍未核实，原限制照旧。** 见 extractions/math-sources.md §11。}
 }
 
 @misc{headrick-2008,
@@ -367,4 +409,143 @@
             已发现至少两处可疑（目录 4.7/4.8 都标 (4.1.18)；4.6 节称「Joe's book has taken
             alpha' = 2」，与原书前言矛盾）。**引本条只表示「两份第三方笔记与之一致」，
             不等于核对了原书。** 见 literature/extractions/polchinski-1998-v1.md 第 0 节与 Q9。}
+}
+
+% ---------------------------------------------------------------------------
+% OPE / 顶点代数（researcher 2026-09-11 登记；抽取记录见 extractions/math-sources.md 第 8-14 节）
+% ---------------------------------------------------------------------------
+
+@misc{gui-2023-lectures,
+  author = {Gui, Bin},
+  title  = {Lectures on Vertex Operator Algebras and Conformal Blocks},
+  year   = {2023},
+  eprint = {2305.03822},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.QA},
+  note   = {**全文已核实（2026-09-11，researcher）**，但**只核实了作者主页版**：
+            https://binguimath.github.io/Files/2022_VOA_Lectures.pdf ，封面页逐字写「Last update: July 15, 2026」。
+            WebFetch 落盘 2.7 MB 后用 Read 带 pages 读图；**PDF 页码 = 书上页码 + 1**。
+            正文 179 页，17 节 + 附录 A。前言逐字：「This monograph is the lecture notes of a course I gave in 2022 spring
+            at Tsinghua University, Yau Mathematical Sciences Center.」
+            **版本陷阱（必读）：下列编号只对 2026-07-15 主页版核实过；arXiv:2305.03822 各版编号是否相同未核实（L0）。
+            图节点的 loc 必须写死版本日期，例如「2026-07-15 版, Proposition 7.12」。**
+            **本书的独特价值**：它是**唯一**把 OPE 的解析收敛性真正证出来的来源。前言逐字自陈
+            「The usual algebraic approaches to VOAs (e.g. [Kac, LL]) avoid showing the convergence of such series」，
+            而本书「prove many well-known results by first proving the convergence (more precisely: absolute and locally
+            uniform (a.l.u.) convergence) of correlation functions which are defined a priori as formal power/Laurent series」。
+            **可引用的编号结果（均 L1 逐字）**：
+            **Definition 7.1, p.69**（a.l.u. 收敛的定义）；
+            **Definition 7.2 (Local fields (complex analytic version)), p.70**——(7.2a)/(7.2b) 两个级数分别在
+            Omega_1 = {0<|z_2|<|z_1|}、Omega_2 = {0<|z_1|<|z_2|} 上 a.l.u. 收敛，且解析延拓到 Conf^2(C^x) 上同一个全纯函数 f_{v,v'}，
+            并存在只依赖 A,B 的 N 使 (z_1-z_2)^N f_{v,v'} 在 C^x x C^x 上全纯；
+            **Definition 7.6 (Local fields (formal variable version)), p.72**——(z_1-z_2)^N [A(z_1),B(z_2)] = 0 于 End(V)[[z_1^+-,z_2^+-]]；
+            **Definition 5.9 (Local fields (Lie algebraic version)) + Remark 5.10, p.55**；
+            **Proposition 7.12 (7.15), p.77**——**解析收敛的 OPE**：f_{v,v'}(z_1,z_2) = sum_{k in Z} (z_1-z_2)^{-k-1} <v',(A_k B)(z_2)v>，
+            右端在 Omega_0 = {0<|z_1-z_2|<|z_2|} 上 a.l.u. 收敛到左端；配套 **Definition 7.10 (7.14)**（A_kB 由围道积分定义）
+            与 **Lemma 7.11**（k >= N 时 A_kB = 0，即奇异项有限）；
+            **Theorem 7.17, p.80**（Jacobi 恒等式的复解析版与代数版等价）；
+            **Theorem 8.1, pp.80-81**——mutually local 的 M 个齐次场，其 M 重乘积级数在 Omega_sigma 上 a.l.u. 收敛并解析延拓到
+            **与排列 sigma 无关**的 f_{v,v'} in O(Conf^M(C^x))（= 物理侧 radial ordering 的严格版本）；**Theorem 8.4, p.83**；
+            **Theorem 5.12 (Reconstruction theorem), pp.55-56**（假设之一逐字为「Locality: Any two fields of E are local」）。
+            **关键否定结论：「三种局域性等价」在本书里没有编号定理**，只有 §7.7 的散文断言 + §7.8-§7.12 的分段证明
+            （p.74 一张箭头图：Lie algebraic -7.8-> Formal variable -7.9-> Complex analytic -7.10-> Formal variable；
+            Complex analytic -7.11-> OPE -7.12-> Lie algebraic）。
+            **绝不要写「Gui Theorem 7.x：三种局域性等价」——不存在这个编号。** 引这条只能写 loc「§7.7-§7.12」。
+            **使用限制**：(1) Prop 7.12 以 Def 7.2（复解析局域性）为前提，不是无条件的 OPE 收敛，图里这条边必须显式画出；
+            (2) Theorem 5.12 **假设** Virasoro 关系与中心荷 c，**不推导** c 的值，不能用来支持 c = 26（与 fgz-1986 / lian-zuckerman-1991 同型）；
+            (3) 全书用 V'-配对 <v', . v>（双线性），不是正定内积，故洛伦兹不定号本身不是障碍，
+            但**本书没有任何一处处理不定内积下的无鬼/幺正性**，也不做弦论（无 c=26、无 Weyl 反常、无路径积分）。
+            Kytola (virasoro-lean-2025) 的 §1.3 把「CFT 的数学定义」正是指向本书（其 [Gui23]）。
+            见 extractions/math-sources.md §8 与 §13。}
+}
+
+@book{frenkel-benzvi-2004,
+  author    = {Frenkel, Edward and Ben-Zvi, David},
+  title     = {Vertex Algebras and Algebraic Curves},
+  edition   = {2},
+  series    = {Mathematical Surveys and Monographs},
+  volume    = {88},
+  publisher = {American Mathematical Society},
+  address   = {Providence, RI},
+  year      = {2004},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取，且本轮判定为无合法公开全文**：
+               bookstore.ams.org 403、www.ams.org/bookstore/pspdf/surv-88-prev.pdf 403、
+               作者主页 math.berkeley.edu/~frenkel/BOOK 与 web.ma.utexas.edu/users/benzvi/math/book.html 均不挂全书 PDF。
+               检索到的 nzdr.ru 全本扫描是非官方站点，按 literature/CLAUDE.md 规则 1 **不采信、不使用**。
+               **唯一已核实的内容来自作者本人的勘误表**（L1，2 页逐页读毕）：
+               https://math.berkeley.edu/~frenkel/BOOK/corrections.pdf
+               （注意 URL 里 BOOK 大写；小写 /book/ 返回 403）。
+               **可引用的编号结果**：**Theorem 3.2.1（结合性）**，勘误表给出的修订措辞逐字为
+               「Any vertex algebra V satisfies the following associativity property: for all A, B, C in V we have the
+               equality in V((w))((z-w)), (1) Y(A,z)Y(B,w)C = Y(Y(A,z-w)B,w)C, where by the left hand side we understand
+               its image in V((w))((z-w)) under the map described above.」
+               其修订前言指出：由局域性，Y(A,z)Y(B,w)C 是 V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] 的元素在 V((z))((w)) 中的展开。
+               勘误表的简化证明用到 **Proposition 3.2.8** 与 **Lemma 3.2.6**（此二编号因此也已确认存在）；
+               另附 Remark 给出等价说法：对充分大的 N，z^N Y(A,z)Y(B,w)C = z^N Y(Y(A,z-w)B,w)C 于 V[[z^+-,w^+-]]。
+               勘误表另两条：**To Remark 1.1.6**（对角支撑子模由 f(w) d_w^i delta(z-w) 张成）与
+               **To Definition 4.1.1**（模的第二条公理的修订）。
+               **版次陷阱**：该 corrections.pdf 的 PDF 元数据显示 pdfTeX 于 2001 年 9 月生成（L4），
+               **很可能是第 1 版（2001）的勘误**；因此拿到的是**勘误版措辞，不是任何印本正文的措辞**。
+               但编号在第 2 版仍存在：Google Books（volume id r82mAgAAQBAJ）查 "Theorem 3.2.1" 命中 **p.49**，
+               控制实验 "Goddard's Uniqueness Theorem" 命中 **p.47**（与目录 §3.1 p.47 一致）、
+               "operator product expansion" 命中 **p.51**（与 §3.3 p.51 一致）。
+               **重要禁令：不得写「Frenkel-Ben-Zvi, Theorem 3.3.1」。** 查 "Theorem 3.3.1" 与一个已知无命中的对照短语
+               返回同一个回落页 p.403，判为**无命中**；任务书假设的 §3.3 编号本轮未证实（L0）。
+               **§2.1.5 / §2.5（Heisenberg 与 Virasoro 顶点代数）的编号本轮完全未核实（L0）**；
+               Google Books 查 "Heisenberg vertex algebra" 返回 p.262，与第 2 章不符，**该页码不可用**。
+               **本书的结合性/OPE 是纯形式的**：陈述场所全是 V((w))((z-w))、V[[z^+-,w^+-]] 等形式级数空间，
+               勘误表通篇没有 converge / holomorphic / analytic continuation 任何一词。
+               与 gui-2023-lectures 的解析版 OPE **是两个不同的节点，不可合并**。
+               见 extractions/math-sources.md §9 与 §13。}
+}
+
+@book{kac-1998,
+  author    = {Kac, Victor G.},
+  title     = {Vertex Algebras for Beginners},
+  edition   = {2},
+  series    = {University Lecture Series},
+  volume    = {10},
+  publisher = {American Mathematical Society},
+  address   = {Providence, RI},
+  year      = {1998},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取**（bookstore.ams.org 403；
+               w3.impa.br 的讲义镜像 403）。**编号信息全部来自作者本人的勘误表 kac-1999-corrections（L1）**，
+               该勘误表标题逐字含 "second edition"，故其引用的编号即**本条（第 2 版）**的编号。
+               **由勘误表 L1 确认存在的编号**：
+               **§4.8 = Borcherds 恒等式**，含 **Theorem 4.8**、公式 **(4.8.1)**、**Proposition 4.8(b)**
+               （勘误表逐字：「the n-th product axiom is nothing else but Borcherds identity in the form (4.8.1) for
+               F = (z-w)^n. As in the proof of Theorem 4.8, ...」）；
+               **Theorem 4.4 = 唯一性定理**，其假设式为 **(4.4.1)**；
+               **Theorem 4.5 = 存在性定理**，假设为 (i)-(v)，**其中 (iii) 就是局域性**，构造公式为 **(4.5.1)**，另有 (4.5.2)；
+               另确认存在 Proposition 3.2、Proposition 3.3(b)、(3.3.6)（斜对称关系）、(3.3.7)、(4.2.1)、(4.2.2)、(4.6.4)、
+               Example 3.5、Section 3.2、Section 1.4、(2.2.5)、(3.1.1)。
+               **红旗：Kac 本人宣布 pp.130-131 的 Theorem 4.11 与 Proposition 4.11 是错的**，
+               勘误表给出重写的 §4.11（含新的 Theorem 4.11(a)(b)、Corollary 4.11(a)(b)、Example 4.11、Remark 4.11a/4.11b）。
+               引用 §4.11 必须引勘误表版本。
+               **未核实（L0）：Theorem 2.3 的正文措辞。** 章节标题为 §2.1 Formal delta-function / §2.2 An expansion of a
+               formal distribution a(z,w) / §2.3 Locality（L4）。Google Books（id e-jxBwAAQBAJ）查 "Theorem 2.3" 命中 p.26，
+               查 "Theorem 4.8" 命中 p.118——后者与勘误表里两条 p.118 的更正（(b_{(k+j)}c)、(a_{(m+j)}c)）吻合，
+               交叉验证该卷即第 2 版，页码可信。
+               **未裁决的矛盾**：检索后端一说「locality 与 weak commutator formula 的等价是 Theorem 2.3(i)」，
+               一说「delta 分解公式被引作 Corollary 2.2」，两者皆 L4。
+               **禁令：在拿到正文前，图节点 loc 不得写 Kac, Theorem 2.3 或 Kac, Corollary 2.2 中的任何一个。**
+               这条陈述请改引 schottenloher-2008 的 Proposition 10.6（其正文明确归功于 Kac）与 Theorem 10.10。
+               **注意 Kac 全书是形式分布演算**：勘误表 (4.11.6) 里的「associativity property in the domain |z| > |w|」
+               指的是选 i_{z,w} 这种形式展开，**不是解析收敛域**，极易误读。
+               见 extractions/math-sources.md §10 与 §13。}
+}
+
+@misc{kac-1999-corrections,
+  author = {Kac, Victor G.},
+  title  = {Corrections to the book ``Vertex algebras for beginners'', second edition},
+  year   = {1999},
+  eprint = {math/9901070},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.QA},
+  note   = {**全文已核实（2026-09-11，5 页逐页读图）**，获取途径 arxiv.org/pdf/math/9901070 落盘后 Read 带 pages。
+            作者本人对 kac-1998 的勘误，1999-01-18。本项目用它**确认 kac-1998 第 2 版的定理编号**（见该条 note），
+            以及记录「Theorem 4.11 与 Proposition 4.11 是错的」这一红旗。
+            它同时是一份独立可引的文献：新写的 §4.11「Field algebras」含 Theorem 4.11(a)(b)、Corollary 4.11(a)(b)、
+            Example 4.11、Remark 4.11a、Remark 4.11b，以及弱局域性 (4.11.3) 与形式结合性 (4.11.6)。
+            见 extractions/math-sources.md §10。}
 }
