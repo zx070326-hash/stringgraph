@@ -320,4 +320,173 @@ theorem IsContravariant.eq_zero_of_level_ne
 
 end Contravariant
 
+/-! ### The `σ`-twisted dual and the construction of the form -/
+
+section Existence
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The central element acts by the scalar `c` on all of `V(c,h)`. -/
+lemma lie_cgen_eq (x : VermaModule R c h) : ⁅VirasoroAlgebra.cgen R, x⁆ = c • x :=
+  lie_cgen_of_mem_negSpan R c h (by rw [negSpan_eq_top]; trivial)
+
+/-- The linear dual `V(c,h) →ₗ[R] R` with the **`σ`-twisted** Virasoro action
+`(X · f)(v) = f(σ(X) · v)`.  This is a type synonym because Mathlib's
+`Module.Dual.instLieRingModule` already puts the untwisted coadjoint action
+`(X · f)(v) = -f(X · v)` on `V(c,h) →ₗ[R] R`. -/
+def ContraDual : Type _ := VermaModule R c h →ₗ[R] R
+
+namespace ContraDual
+
+/-- An element of `ContraDual R c h` read as a linear functional. -/
+def toLin (f : ContraDual R c h) : VermaModule R c h →ₗ[R] R := f
+
+/-- A linear functional read as an element of `ContraDual R c h`. -/
+def ofLin (f : VermaModule R c h →ₗ[R] R) : ContraDual R c h := f
+
+@[simp] lemma toLin_ofLin (f : VermaModule R c h →ₗ[R] R) : toLin R c h (ofLin R c h f) = f := rfl
+
+noncomputable instance : AddCommGroup (ContraDual R c h) :=
+  inferInstanceAs (AddCommGroup (VermaModule R c h →ₗ[R] R))
+
+noncomputable instance : Module R (ContraDual R c h) :=
+  inferInstanceAs (Module R (VermaModule R c h →ₗ[R] R))
+
+@[ext] lemma ext {f g : ContraDual R c h} (hfg : ∀ v, toLin R c h f v = toLin R c h g v) :
+    f = g := LinearMap.ext hfg
+
+@[simp] lemma toLin_add (f g : ContraDual R c h) :
+    toLin R c h (f + g) = toLin R c h f + toLin R c h g := rfl
+
+@[simp] lemma toLin_smul (t : R) (f : ContraDual R c h) :
+    toLin R c h (t • f) = t • toLin R c h f := rfl
+
+/-- `ContraDual` as a linear map to the honest dual; used to turn the lift into a form. -/
+def toLinₗ : ContraDual R c h →ₗ[R] (VermaModule R c h →ₗ[R] R) where
+  toFun := toLin R c h
+  map_add' _ _ := rfl
+  map_smul' _ _ := rfl
+
+@[simp] lemma toLinₗ_apply (f : ContraDual R c h) : toLinₗ R c h f = toLin R c h f := rfl
+
+noncomputable instance instLieRingModule :
+    LieRingModule (VirasoroAlgebra R) (ContraDual R c h) where
+  bracket X f := ofLin R c h
+    { toFun := fun v => toLin R c h f ⁅VirasoroAlgebra.antiInvolution R X, v⁆
+      map_add' := fun v w => by rw [lie_add, map_add]
+      map_smul' := fun t v => by rw [lie_smul, LinearMap.map_smul, RingHom.id_apply] }
+  add_lie X Y f := by
+    refine ext R c h fun v => ?_
+    show toLin R c h f ⁅VirasoroAlgebra.antiInvolution R (X + Y), v⁆ = _
+    rw [map_add, add_lie, map_add]
+    rfl
+  lie_add X f g := by
+    refine ext R c h fun v => ?_
+    show toLin R c h (f + g) _ = _
+    rw [toLin_add]
+    rfl
+  leibniz_lie X Y f := by
+    refine ext R c h fun v => ?_
+    show toLin R c h f ⁅VirasoroAlgebra.antiInvolution R Y,
+      ⁅VirasoroAlgebra.antiInvolution R X, v⁆⁆ = _
+    show _ = toLin R c h f ⁅VirasoroAlgebra.antiInvolution R ⁅X, Y⁆, v⁆
+      + toLin R c h f ⁅VirasoroAlgebra.antiInvolution R X,
+          ⁅VirasoroAlgebra.antiInvolution R Y, v⁆⁆
+    rw [VirasoroAlgebra.antiInvolution_lie, lie_lie, map_sub]
+    abel
+
+lemma lie_apply (X : VirasoroAlgebra R) (f : ContraDual R c h) (v : VermaModule R c h) :
+    toLin R c h ⁅X, f⁆ v = toLin R c h f ⁅VirasoroAlgebra.antiInvolution R X, v⁆ := rfl
+
+noncomputable instance instLieModule : LieModule R (VirasoroAlgebra R) (ContraDual R c h) where
+  smul_lie t X f := by
+    refine ext R c h fun v => ?_
+    rw [lie_apply, map_smul, smul_lie, LinearMap.map_smul, toLin_smul, LinearMap.smul_apply,
+      lie_apply]
+  lie_smul t X f := by
+    refine ext R c h fun v => ?_
+    simp only [lie_apply, toLin_smul, LinearMap.smul_apply]
+
+end ContraDual
+
+/-- The only unproved input to the construction of the Shapovalov form: a linear functional
+picking out the `|c,h⟩`-coefficient.  Equivalently, a highest weight vector of weight `(c,h)`
+in `ContraDual R c h` normalised at `|c,h⟩`.  Existence implies `|c,h⟩ ≠ 0`, hence
+`V(c,h) ≠ 0`, which is open in this repository (`TODO.md`, `pbw-verma`). -/
+structure IsShapovalovFunctional (f : VermaModule R c h →ₗ[R] R) : Prop where
+  apply_hwv : f (hwv R c h) = 1
+  apply_lie_neg : ∀ n : ℤ, n < 0 → ∀ v : VermaModule R c h,
+    f ⁅VirasoroAlgebra.lgen R n, v⁆ = 0
+  apply_lie_zero : ∀ v : VermaModule R c h,
+    f ⁅VirasoroAlgebra.lgen R 0, v⁆ = h * f v
+
+variable {R c h}
+
+/-- A Shapovalov functional is exactly a highest weight vector in the `σ`-twisted dual. -/
+lemma IsShapovalovFunctional.isHighestWeightVector {f : VermaModule R c h →ₗ[R] R}
+    (hf : IsShapovalovFunctional R c h f) :
+    IsHighestWeightVector R c h (ContraDual R c h) (ContraDual.ofLin R c h f) where
+  lie_cgen := by
+    refine ContraDual.ext R c h fun v => ?_
+    rw [ContraDual.lie_apply, ContraDual.toLin_smul, LinearMap.smul_apply,
+      VirasoroAlgebra.antiInvolution_cgen, ContraDual.toLin_ofLin, lie_cgen_eq, map_smul]
+  lie_lgen_zero := by
+    refine ContraDual.ext R c h fun v => ?_
+    rw [ContraDual.lie_apply, ContraDual.toLin_smul, LinearMap.smul_apply,
+      VirasoroAlgebra.antiInvolution_lgen, neg_zero, ContraDual.toLin_ofLin,
+      hf.apply_lie_zero, smul_eq_mul]
+  lie_lgen_pos n hn := by
+    refine ContraDual.ext R c h fun v => ?_
+    rw [ContraDual.lie_apply, VirasoroAlgebra.antiInvolution_lgen, ContraDual.toLin_ofLin,
+      hf.apply_lie_neg (-n) (by omega)]
+    rfl
+
+/-- **The Shapovalov form** on `V(c,h)`, built from a Shapovalov functional by the universal
+property of the Verma module: `⟨x, y⟩ = (vermaLift f₀ x) y`. -/
+noncomputable def shapovalov {f : VermaModule R c h →ₗ[R] R}
+    (hf : IsShapovalovFunctional R c h f) :
+    VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R :=
+  (ContraDual.toLinₗ R c h).comp
+    (vermaLift R c h (ContraDual R c h) hf.isHighestWeightVector)
+
+lemma shapovalov_apply {f : VermaModule R c h →ₗ[R] R} (hf : IsShapovalovFunctional R c h f)
+    (x y : VermaModule R c h) :
+    shapovalov hf x y =
+      ContraDual.toLin R c h
+        (vermaLift R c h (ContraDual R c h) hf.isHighestWeightVector x) y := rfl
+
+/-- Normalisation: `⟨|c,h⟩, |c,h⟩⟩ = 1`. -/
+@[simp] theorem shapovalov_hwv_hwv {f : VermaModule R c h →ₗ[R] R}
+    (hf : IsShapovalovFunctional R c h f) :
+    shapovalov hf (hwv R c h) (hwv R c h) = 1 := by
+  rw [shapovalov_apply, vermaLift_hwv, ContraDual.toLin_ofLin, hf.apply_hwv]
+
+/-- **Contravariance**: `⟨L_n x, y⟩ = ⟨x, L_{-n} y⟩`.  Immediate from equivariance of
+`vermaLift`. -/
+theorem shapovalov_isContravariant {f : VermaModule R c h →ₗ[R] R}
+    (hf : IsShapovalovFunctional R c h f) : IsContravariant R c h (shapovalov hf) := by
+  intro n x y
+  rw [shapovalov_apply, shapovalov_apply, vermaLift_lie, ContraDual.lie_apply,
+    VirasoroAlgebra.antiInvolution_lgen]
+
+/-- **Existence and uniqueness of the Shapovalov form**, given a Shapovalov functional. -/
+theorem existsUnique_isContravariant {f : VermaModule R c h →ₗ[R] R}
+    (hf : IsShapovalovFunctional R c h f) :
+    ∃! B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R,
+      IsContravariant R c h B ∧ B (hwv R c h) (hwv R c h) = 1 :=
+  ⟨shapovalov hf, ⟨shapovalov_isContravariant hf, shapovalov_hwv_hwv hf⟩,
+    fun _ hB => eq_of_isContravariant hB.1 (shapovalov_isContravariant hf)
+      (by rw [hB.2, shapovalov_hwv_hwv hf])⟩
+
+/-- Existence of a normalised contravariant form forces `V(c,h) ≠ 0`, which is why the
+construction cannot be made unconditional here. -/
+theorem hwv_ne_zero_of_isContravariant [Nontrivial R]
+    {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) : hwv R c h ≠ 0 := by
+  intro h0
+  rw [h0, map_zero] at hB1
+  exact zero_ne_one hB1
+
+end Existence
+
 end StringFormal.Virasoro
