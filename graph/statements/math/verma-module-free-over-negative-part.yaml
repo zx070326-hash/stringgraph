@@ -102,5 +102,21 @@ notes: |
   （vermaIdeal、VermaModule、VermaModule.hwVec、VermaModule.universalMap、IsVermaModule），
   **唯独缺显式 PBW 基**。⇒ 形式化侧的缺口是**精确的一条：Mathlib 的 PBW 定理**
   （作者本人称之为 "a major undertaking"），不是整套 Verma 模理论。见 math.pbw-theorem 的 notes。
+
+  **【2026-09-11 补，curator-euler】特征标的组合学部分（Euler 恒等式）已形式化；
+  剩余缺口纯粹是 PBW 下界（`formal/TODO.md` 的 pbw-verma (b)）。** 具体地，
+  Verma 模的形式特征标 ch_q V(c,h) = q^h ∏_{n≥1}(1 − q^n)^{−1} 由两块拼成：
+  (α) 本节点 (3) 的 **dim_F V_N = p(N)**，以及
+  (β) Euler 分拆生成函数恒等式 **Σ_{N≥0} p(N) q^N = ∏_{n≥1}(1 − q^n)^{−1}**。
+  (β) 现已单独立卡并 **formalized**：math.euler-partition-generating-function
+  （`StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow`，
+  `formal/StringFormal/Math/EulerPartition.lean`，任意交换环上成立，公理检查通过）。
+  (α) 的**上界** dim_F V_N ≤ p(N)（straightening）也已 formalized，见
+  worldsheet.verma-level-spanned-by-partitions。
+  ⇒ 因此本节点距离 formalized 的缺口不再包含任何组合学或形式幂级数内容，
+  **只剩线性无关那一半（PBW 下界 dim_F V_N ≥ p(N)，以及由它推出的 (1) 自由性与 (4) 非零性）**，
+  而那一半的唯一障碍是 Mathlib 没有 PBW 定理（见上一段与 math.pbw-theorem 的 notes）。
+  唯一用到特征标的下游 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 相应地
+  已新增一条非 inferred 的边指向 (β)，其「Euler 恒等式无节点无来源」的 gap 已关闭。
 author: curator
 created: "2026-09-11"

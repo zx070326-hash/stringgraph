@@ -1,0 +1,132 @@
+id: math.euler-partition-generating-function
+kind: proposition
+title: Euler 分拆生成函数：(Σ_{N≥0} p(N) X^N) · ∏_{n≥1}(1 − X^n) = 1 于任意交换环的形式幂级数环
+statement: |
+  【记号】p(N) := N 的整数分拆个数（p(0) = 1；「分拆」= 正整数的多重集，其和为 N）。
+  设 R 是交换环，R[[X]] 是 R 上的一元形式幂级数环，
+
+      P_R(X) := Σ_{N ≥ 0} p(N) X^N  ∈ R[[X]]
+
+  （系数经典范同态 ℕ → R 取值；X 就是物理文献里的 q）。
+
+  【无穷乘积的意义】给 R 任取一个使它成为 Hausdorff 拓扑环的拓扑（例如离散拓扑），
+  并在 R[[X]] ≅ R^ℕ 上取**逐系数（乘积）拓扑**。下文的 ∏'_{n≥1} 指这个拓扑下的
+  无条件收敛无穷乘积（可乘族的 tprod）。因子 1 − X^n 的「低阶部分」随 n 稳定，
+  故该族可乘。(3) 给出同一等式的**完全无拓扑**的重述，因此 (1) 的内容与
+  「R 上具体选了哪个 Hausdorff 环拓扑」无关。
+
+  **(1) 无逆元形式（任意交换环 R）**：在 R[[X]] 中
+
+      P_R(X) · ∏'_{n ≥ 1} (1 − X^n) = 1.
+
+  特别地 ∏'_{n≥1}(1 − X^n) 在 R[[X]] 中可逆，其逆恰是 P_R(X)。
+  **不需要 R 是域、不需要特征零、不需要无零因子。**
+
+  **(2) 几何级数形式（任意交换半环 R）**：
+
+      P_R(X) = ∏'_{n ≥ 1} ( Σ_{j ≥ 0} X^{n j} ).
+
+  **(3) 无拓扑形式（任意交换环 S）**：对每个 N ≥ 0，有限部分积的第 N 个系数最终稳定，
+  即对包含关系下一切充分大的有限集 s ⊆ {1, 2, 3, …}，
+
+      coeff_N ( P_S(X) · ∏_{n ∈ s} (1 − X^n) ) = [N = 0]
+
+  （N = 0 时为 1，N ≥ 1 时为 0）。
+
+  **(4) 域上的除法形式**：若 K 是域，则
+
+      P_K(X) = ( ∏'_{n ≥ 1} (1 − X^n) )^{−1} = ∏'_{n ≥ 1} (1 − X^n)^{−1},
+
+  第二个等号是**逐因子取逆**，即物理文献字面写的
+
+      Σ_{N ≥ 0} p(N) q^N = ∏_{n ≥ 1} (1 − q^n)^{−1}.
+
+  (1)–(4) 是同一条恒等式的四种包装，(1) 最一般：(4) 的除法只是 (1) 的重写，
+  「取逆」不是本命题的前提而是它的推论。
+
+  【本节点明确**不**断言】
+  (a) p(N) 的渐近行为（Hardy–Ramanujan 公式）或任何解析性质。本节点全部在
+      **形式幂级数**层面，X 不取复数值，不涉及 |q| < 1 的收敛。
+  (b) Dedekind η 函数的模变换性质，也不涉及 q^{1/24} 因子。
+  (c) 五边形数定理——那是关于 ∏_{n≥1}(1 − X^n) **自身**展开系数的另一条恒等式，
+      与本节点是不同的命题。
+  (d) 与 Virasoro 代数、Verma 模、特征标的任何联系。要把本节点接到 Verma 特征标
+      ch V(c,h) = q^h ∏_{n≥1}(1 − q^n)^{−1}，还需要 dim V_N = p(N)，
+      那由 math.verma-module-free-over-negative-part 承载（rigorous，未形式化）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow
+  lean_file: StringFormal/Math/EulerPartition.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/EulerPartition.lean :: StringFormal.Math.{partitionGF, hasProd_partitionGF, partitionGF_eq_tprod_geomSeries, one_sub_X_pow_mul_geomSeries, partitionGF_mul_tprod_one_sub_X_pow, partitionGF_eq_invOfUnit, coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq, partitionGF_eq, inv_one_sub_X_pow, partitionGF_eq_tprod_inv}"
+    note: |
+      本仓库，合并提交 44386e8（"merge: Euler partition generating function (formalizer,
+      StringFormal.Math)"），形式化侧提交 3ce78e5；Lean 4 + Mathlib v4.33.1。逐条对应：
+        (1) 无逆元形式 → `partitionGF_mul_tprod_one_sub_X_pow`（本卡 formal.lean_decl）
+            与其伴随 `tprod_one_sub_X_pow_mul_partitionGF`、`isUnit_tprod_one_sub_X_pow`、
+            `partitionGF_eq_invOfUnit`（后者说明 P_R 就是 `PowerSeries.invOfUnit`）
+        (2) 几何级数形式 → `hasProd_partitionGF` / `partitionGF_eq_tprod_geomSeries`
+        (3) 无拓扑形式 → `coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq`
+        (4) 域上除法形式 → `partitionGF_eq`（整体取逆）与 `partitionGF_eq_tprod_inv`（逐因子取逆）
+      **指标平移**：Lean 侧一律写 `∏' n : ℕ, (1 - X ^ (n + 1))`（n 从 0 数起），
+      即本卡的 ∏_{m≥1}(1 − X^m)；同理 `∑' j : ℕ, X ^ ((n+1)*j)` 即本卡 (2) 的
+      Σ_{j≥0} X^{mj}（m = n+1）。阅读 Lean 源码时不要把 `n + 1` 读成指标范围的差异。
+      p(N) 在 Lean 侧写作 `Fintype.card (Nat.Partition N)`，与
+      worldsheet.verma-level-spanned-by-partitions 的写法**同一个**。
+      拓扑是 Mathlib 的 `PowerSeries.WithPiTopology`（逐系数/乘积拓扑）；
+      (3) 的声明不带任何拓扑类型类假设（证明内部临时装上离散拓扑）。
+      文件头 Provenance 段逐字自述「Everything hard is Mathlib's」，formal/TODO.md 的
+      `euler-partition-gf` 记「无 sorry，公理只有标准三条」。
+tags: [combinatorics, number-theory, partitions, generating-function, formal-power-series, formalized, math-input]
+notes: |
+  **本节点为什么存在**：worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 的
+  特征标那一步（比较 ch_q L 与 sign_q L）字面用到 Σ_N p(N) q^N = ∏(1−q^n)^{−1}，
+  而此前图里**既无节点也无来源**（该推导 2026-09-11 曾为此单列一条 gap）。
+  上游的 math.verma-module-free-over-negative-part 只给到 dim_F V_N = p(N)，
+  从维数序列到形式特征标差的正是这条 Euler 恒等式。本卡把它补上。
+
+  【formalizer 的三点说明】（2026-09-11，formal/TODO.md 的 `euler-partition-gf` 与
+  EulerPartition.lean 文件头）
+  1. **不需要域、不需要特征零、不需要无零因子**。真正的内容是 (1) 的无逆元形式
+     `(Σ p(N) X^N)·∏(1−X^n) = 1`，它在任意交换环上成立。物理文献字面写的
+     ∏_{n≥1}(1 − q^n)^{−1} 只是**记号**（把可逆元的逆写成分母），**不是前提**：
+     (4) 那两个取逆的写法才需要域，而它们是 (1) 的推论，不是它的加强。
+     引用本卡时若下游只需要 (1)，不要顺带把「系数环是域」写进假设。
+  2. **Mathlib v4.33.1 把这一特化列为 TODO**：
+     `Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean` 的模块文档里写着
+     「the generating function for partition function p(n) (TODO: prove this)」。
+     ⚠ 这句引文是**从 formal/TODO.md 转录的**（formalizer 读的 Mathlib 源文件），
+     curator 未直接打开 Mathlib 的 GenFun.lean 核对；EulerPartition.lean 的文件头
+     独立地写着同一件事（"whose module docstring lists the `f = 1` specialisation proved
+     below as a TODO"）。
+     本文件补的就是这个 TODO：难的部分是 Mathlib 的
+     `Nat.Partition.hasProd_genFun` 及其推论
+     `Nat.Partition.hasProd_powerSeriesMk_card_restricted`（`Partition/Glaisher.lean`），
+     本文件加的是 f ≡ 1 的特化 + 从几何级数 Σ_j X^{nj} 到 (1 − X^n)^{−1} 的那一步。
+     ⇒ 日后若 Mathlib 上游补齐这条，本卡的 lean_decl 可改指 Mathlib，本卡内容不变。
+  3. ⚠ **不要引 `Archive/Wiedijk100Theorems/Partition.lean`**：该文件在 Mathlib v4.33.1
+     **已被删除**，其 `partialGF` 框架不复存在；Euler 的奇/异分拆定理搬到了
+     `Partition/Glaisher.lean`（`card_odds_eq_card_distincts`）。Archive 里**没有**
+     分拆生成函数。任何写着「Mathlib Archive 已有分拆生成函数」的旧笔记都过时了。
+
+  **p(N) 不可由 `decide` 求值**：Mathlib 的 `Fintype (Nat.Partition N)` 实例经
+  `Fintype.ofSurjective` 从 `Composition N` 构造，不是可计算枚举。
+  `Fintype.card (Nat.Partition N)` **按定义**就是分拆函数 p(N)（不需要另证
+  「card = p(N)」），但在 Lean 里算不出 p(5) = 7 这样的具体数值。
+  这与 worldsheet.verma-level-spanned-by-partitions 的同名限制是同一条。
+
+  **来源为什么只有本仓库**：本卡是纯组合学的教科书事实，数论教材当然写过它
+  （候选定位：Hardy–Wright, *An Introduction to the Theory of Numbers*, 第 XIX 章
+  「Partitions」，可能是 Theorem 349；Andrews, *The Theory of Partitions* §1.1）。
+  ⚠ **这两条编号/节号本轮都未核实（L0），两本书本项目都未取得，故一律未登记进
+  literature/sources.bib，也不写进 sources[]**——按 math.laplace-fundamental-solution-2d
+  处理 Evans / Hörmander 的同一条纪律（编号未核实就不引）。
+  这不影响 status：本卡的证明是机器检查的，可核对性由 Lean 源码承载，
+  外部教科书只会提供归属而不会提供更强的证据。日后若有人拿到印本核到编号，
+  再登记 bib 并补进 sources[] 即可（补来源不改陈述文本）。
+
+  **归属**：恒等式本身是 Euler 的（18 世纪，*Introductio in analysin infinitorum*），
+  本项目不为它找一手历史来源。
+author: curator
+created: "2026-09-11"
