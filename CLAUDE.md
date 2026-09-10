@@ -53,6 +53,7 @@
   - `agora_release` 必须带 `claim_id`。
   - 子 agent **不要调用 `agora_leave`**，只 release 自己的 claim；`agora_leave` 由 lead 在整批任务结束时调用一次。
   - 被连带释放后不要慌：文件没被动，重新 `agora_claim` 即可。
+  - **2026-09-11 实测更严重的表现**：claim 常被记到别的角色名下（甚至自己刚 claim 的 #134 也释放不了）。处理：`agora_release` 报 "No matching held claim" 时先重新 `agora_join(role=...)` 再试一次；仍失败就在报告里写明，由 lead 收尾时统一清理。**不要**因此重复 claim 或调用 `agora_leave`。
   - 真正的隔离（每个 worktree 独立 bus id）待总线支持后再启用。
 - 冲突优先 `agora_send` 沟通，`agora_preempt` 只用于 auditor 阻止错误进入里程碑。
 
