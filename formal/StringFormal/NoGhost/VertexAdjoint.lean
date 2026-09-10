@@ -11,17 +11,70 @@ import StringFormal.NoGhost.VertexOperator
 import StringFormal.NoGhost.DDFOperator
 
 /-!
-# The adjoint of the vertex operator for the Fock and tower forms
+# The adjoint of the vertex operator, on a Fock space and on the DDF tower
 
 Graph nodes: `worldsheet.vertex-operator-adjoint`, `worldsheet.ddf-operators-adjoint`.
-This file closes gap (3) of `StringFormal/NoGhost/VertexOperator.lean` and gap (2) of
-`StringFormal/NoGhost/TowerPairing.lean`.
+This file closes gap (3) of `StringFormal/NoGhost/VertexOperator.lean` ("no adjointness of
+`V_K` for `Fock.pairing` is proved") and gap (2) of `StringFormal/NoGhost/TowerPairing.lean`
+("the adjointness of the DDF operators `A^i_n` is not available").
+
+## Conventions
+
+`conv.metric-mostly-plus`, `conv.alpha-prime-regge`, as in `StringFormal/NoGhost/Fock.lean`.
+`b^μ = (2α')^{1/2} c^μ` is the rescaled vertex momentum.  The form `Fock.pairing η` is
+**`R`-bilinear, not sesquilinear**: nothing is conjugated anywhere, so "adjoint" means
+`⟨A v, w⟩ = ⟨v, A^† w⟩` for the bilinear form.  The only standing hypothesis is
+`hη : ∀ μ, η μ * η μ = 1`, exactly as in `Sugawara.lean`.
+
+## Main statements
+
+* `Fock.pairing_creaExp_left` — `Φ_j(b)^† = Ψ_j(-b)`: multiplication by the `z^j` coefficient
+  of the creation exponential `E_-(b)` is adjoint to the `z^{-j}` coefficient of the
+  annihilation exponential `E_+(-b)`.
+* `Fock.pairing_vertexAnn_left` — the mirror statement `Ψ_L(b)^† = Φ_L(-b)`.
+* **`Fock.pairing_vertexOsc_left`** — `⟨V(b)_K v, w⟩ = ⟨v, V(-b)_{-K} w⟩`, the adjoint of the
+  oscillator part of `:e^{i c·X(z)}:` on a single Fock space.
+* **`Fock.towerPairing_towerVertex_left`** — `(V^{(n)}_K)^† = V^{(-n)}_{-K}` on the DDF
+  momentum tower.
+* **`Fock.towerPairing_ddfOp_left`** — `(A^ε_n)^† = A^ε_{-n}` for the transverse DDF
+  operators.
+* `Fock.add_self_eq_zero_of_pairing_vertexOsc_same_momentum` — an *audit* lemma: the sign
+  flip `b ↦ -b` above is forced.  If `⟨V(b)_K v, w⟩ = ⟨v, V(b)_{-K} w⟩` held for one `b`,
+  then `2b = 0`.
+
+## Two corrections to the folklore statement
+
+1. **No isotropy hypothesis is needed.**  One expects the reordering `E_+ E_- ↦ E_- E_+` in
+   the adjoint to generate a self-contraction `exp(Σ_l (b·b)/l ⋯)`, hence to require
+   `b·b = 0`.  It does not.  The adjoint of the *normal-ordered* product `E_-(b) E_+(b)` is
+   `E_+(b)^† E_-(b)^† = E_-(-b) E_+(-b)`, which is again normal ordered — the creation factor
+   ends up on the left by itself.  So `pairing_vertexOsc_left` holds for arbitrary `b`, and
+   `pairing_vertexOsc_left_of_dotVec_zero` (the `b·b = 0` form asked for by the graph node) is
+   a trivial specialisation.  *Consequence for the dependency graph*: the adjointness of the
+   DDF operators does **not** depend on `k_0² = 0`.
+2. **The vertex momentum flips sign; `b` alone is wrong.**  Since the form is bilinear one
+   might argue that no coefficient can change, so `V(b)^†` should again involve `b`.  That
+   argument fails because the two halves of `:e^{i c·X}:` carry *opposite* signs in the
+   exponent, `E_-(z) = exp(+Σ_{m>0} b·α_{-m} z^m/m)` versus
+   `E_+(z) = exp(-Σ_{l>0} b·α_l z^{-l}/l)`, so the map `α^μ_m ↦ α^μ_{-m}` sends `E_-(b)` to
+   `E_+(-b)`, not to `E_+(b)`.  On the tower this is invisible, because `-(n b)` is
+   `(-n) b`: the Fock-level sign flip is exactly the `n ↦ -n` of `e^{i n k_0·x}`, and the
+   familiar `(V^{(n)}_J)^† = V^{(-n)}_{-J}` comes out unchanged.
+
+## Remaining gaps
+
+* Still `R`-bilinear, not Hermitian; no positivity, no completion, no zero modes beyond the
+  tower.  In particular *nothing here says the DDF states have positive norm*; the no-ghost
+  theorem needs `⟨A^{i_1}_{-n_1} ⋯ |0⟩, ⋯⟩` to be computed from `(A^ε_n)^† = A^ε_{-n}`
+  **together with** the DDF commutation relations, which are in
+  `StringFormal/NoGhost/DDFOperatorAll.lean`.  That assembly is not done here.
+* `towerPairing_ddfOp_left` uses `dotVec η ε b = 0` only because `ddfOp` does; the underlying
+  `towerPairing_towerVertex_left` needs no transversality.
 
 ## Status
 
-Work in progress; no `sorry`.
+Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only.
 -/
-
 namespace StringFormal.NoGhost
 
 open MvPolynomial
@@ -185,6 +238,60 @@ theorem pairing_vertexOsc_left_of_dotVec_zero (η b : Fin D → R) (hη : ∀ μ
     (_hbb : dotVec η b b = 0) (K : ℤ) (v w : Fock D R) :
     pairing η (vertexOsc η b K v) w = pairing η v (vertexOsc η (-b) (-K) w) :=
   pairing_vertexOsc_left η b hη K v w
+
+/-! ### The sign of the vertex momentum is not a matter of convention -/
+
+omit [Algebra ℚ R] in
+/-- Closed form for the annihilation half on a one-oscillator state:
+`Ψ_L(b) α^μ_{-m}|0⟩ = δ_{L,0} α^μ_{-m}|0⟩ - δ_{L,m} b^μ |0⟩`. -/
+lemma vertexAnn_X (b : Fin D → R) (L : ℤ) (u : Osc D) :
+    vertexAnn b L (X u)
+      = (if L = 0 then X u else 0)
+        - b u.1 • (if L = ((u.2 : ℕ) : ℤ) then (1 : Fock D R) else 0) := by
+  have h := vertexAnn_mul_X b L (1 : Fock D R) u
+  rw [one_mul, vertexAnn_one, vertexAnn_one] at h
+  rw [h]
+  congr 1
+  · by_cases hL : L = 0
+    · rw [if_pos hL, if_pos hL, one_mul]
+    · rw [if_neg hL, if_neg hL, zero_mul]
+  · congr 1
+    by_cases hL : L = ((u.2 : ℕ) : ℤ)
+    · rw [if_pos (by omega), if_pos hL]
+    · rw [if_neg (by omega), if_neg hL]
+
+/-- **The `b ↦ -b` in `pairing_vertexOsc_left` is forced, not conventional.**  If the naive
+"same momentum" adjoint relation `⟨V(b)_K v, w⟩ = ⟨v, V(b)_{-K} w⟩` held for a single `b`,
+then `2 b = 0`.
+
+The witness is the lowest nontrivial matrix element: with `v = |0⟩`, `w = α^μ_{-1}|0⟩` and
+`K = 1`, one computes `⟨V(b)_1 |0⟩, α^μ_{-1}|0⟩⟩ = b^μ` but
+`⟨|0⟩, V(b)_{-1} α^μ_{-1}|0⟩⟩ = -b^μ`. -/
+theorem add_self_eq_zero_of_pairing_vertexOsc_same_momentum (η b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1)
+    (h : ∀ (K : ℤ) (v w : Fock D R),
+      pairing η (vertexOsc η b K v) w = pairing η v (vertexOsc η b (-K) w))
+    (μ : Fin D) : b μ + b μ = 0 := by
+  classical
+  set u : Osc D := (μ, 1) with hu
+  have hlhs : pairing η (vertexOsc η b 1 (1 : Fock D R)) (X u) = b μ := by
+    rw [vertexOsc_apply_one, pairing_creaExp_one_left η b hη, vertexAnn_X]
+    simp [hu]
+  have hann : vertexAnn b 1 (X u) = C (-b μ) := by
+    rw [vertexAnn_X]
+    simp [hu, MvPolynomial.smul_eq_C_mul]
+  have hrhs : pairing η (1 : Fock D R) (vertexOsc η b (-1) (X u)) = -b μ := by
+    rw [vertexOsc_apply η b (-1) (X u) (s := {0, 1}) (fun L hL => by
+      rw [vertexAnn_X]
+      simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hL
+      rw [if_neg hL.1, if_neg (by simpa [hu] using hL.2), smul_zero, sub_zero])]
+    rw [Finset.sum_insert (by simp), Finset.sum_singleton,
+      creaExp_of_neg η b (by norm_num : (-1 : ℤ) + 0 < 0), zero_mul, zero_add,
+      show (-1 : ℤ) + 1 = 0 from by ring, creaExp_zero, one_mul, hann, pairing_one_left,
+      coeff_C, if_pos rfl]
+  have := h 1 (1 : Fock D R) (X u)
+  rw [hlhs, hrhs] at this
+  linear_combination this
 
 end CreaExpAdjoint
 

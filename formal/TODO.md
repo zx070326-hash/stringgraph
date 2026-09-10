@@ -752,11 +752,50 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     所以「`A^ε_n` 把物理态送到物理态」还证不了。
   - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
     仍缺同点乘积 (5a) 与加权和 (5b)。
-  - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
+  - ~~`A^ε_n` 的伴随未做~~：**已做**，见下一项 `vertex-adjoint`。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
+- [x] `vertex-adjoint`：顶点算子与 DDF 算子在 Fock/塔配对下的伴随 ——
+  `StringFormal/NoGhost/VertexAdjoint.lean`。对应图节点 `worldsheet.vertex-operator-adjoint`
+  与 `worldsheet.ddf-operators-adjoint`；补上 `VertexOperator.lean` 的缺口 (3) 与
+  `TowerPairing.lean` 的缺口 (2)。
+  - **两半各自的伴随**：`Fock.pairing_creaExp_left`（`Φ_j(b)^† = Ψ_j(-b)`）与
+    `Fock.pairing_vertexAnn_left`（`Ψ_L(b)^† = Φ_L(-b)`）。证明是两层归纳：
+    先对 `w` 归纳得真空矩阵元 `Fock.pairing_creaExp_one_left`
+    （`⟨Φ_j(b), w⟩ = coeff 0 (Ψ_j(-b) w)`，递推两边都来自
+    `annihilation_creaExp` 与 `vertexAnn_mul_X`，是**同一条**递推），
+    再对 `v` 归纳（这一层是平凡的，只用 `pairing_creation_left` 与
+    `annihilation_vertexAnn`）。
+  - **主定理** `Fock.pairing_vertexOsc_left`：`⟨V(b)_K v, w⟩ = ⟨v, V(-b)_{-K} w⟩`。
+  - **塔上** `Fock.towerPairing_towerVertex_left`：`(V^{(n)}_K)^† = V^{(-n)}_{-K}`
+    （零模半由 `towerPairing_towerShift_left` 承担，振子半由上一条；
+    `-(n b) = (-n) b` 把 Fock 层的动量反号吸收成 `n ↦ -n`）。
+  - **DDF 算子** `Fock.towerPairing_ddfOp_left`：`(A^ε_n)^† = A^ε_{-n}`。
+    用横向性 `dotVec η ε b = 0` 把伴随重新排回「模乘顶点算子」的次序
+    （`towerModeVec_mul_towerVertex_of_transverse`），再对局部有限和用
+    `ddfOp_apply` 取一个同时够大的窗口 `ddfWindow n v ∪ (ddfWindow (-n) w).image (-·)`。
+  - **两条数学结论（对图的建议，见报告）**：
+    1. **不需要 `b·b = 0`**。原以为把 `E_+E_-` 重排回 `E_-E_+` 会生成自缩并
+       `exp(Σ (b·b)/l ⋯)`。不会：正规序乘积 `E_-(b)E_+(b)` 的伴随是
+       `E_+(b)^†E_-(b)^† = E_-(-b)E_+(-b)`，**本来就是正规序的**。所以
+       `pairing_vertexOsc_left` 对任意 `b` 成立，图卡上的 `k_0² = 0` 假设可以去掉；
+       `pairing_vertexOsc_left_of_dotVec_zero` 只是它的平凡特例。
+       后果：`(A^ε_n)^† = A^ε_{-n}` **不依赖**类光条件。
+    2. **动量必须反号**。「双线性无共轭 ⟹ 系数不变 ⟹ 仍是同一个 `b`」是错的：
+       `E_-` 与 `E_+` 的指数**反号**（`creaExp` 用 `+η b`，`vertexSub` 用 `-b`），
+       所以 `α_m ↦ α_{-m}` 把 `E_-(b)` 送到 `E_+(-b)`。
+       审计引理 `Fock.add_self_eq_zero_of_pairing_vertexOsc_same_momentum`：
+       若同动量版本对某个 `b` 成立则 `2b = 0`（见证是 `K = 1`、`v = |0⟩`、
+       `w = α^μ_{-1}|0⟩`：左边 `b^μ`，右边 `-b^μ`）。
+       塔上看不见这一点，因为 `-(n k_0)` 就是 `(-n) k_0`。
+  - **公理登记**：上述 16 条声明（含辅助 `towerVertex_apply`、`Fock.vertexAnn_X`、
+    `Fock.pairing_one_left`）经
+    `lake env lean --run scripts/check_axioms.lean --import StringFormal.NoGhost.VertexAdjoint --all`
+    全部 `ok`，公理集只有 `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
+  - **仍缺**：形式仍是 `R`-双线性而非 Hermite，无正定性、无完备化；
+    伴随本身**不给** DDF 态的正模态——那还需要 `[A^i_m, A^j_n]`（(5a)(5b)，见上一项）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
