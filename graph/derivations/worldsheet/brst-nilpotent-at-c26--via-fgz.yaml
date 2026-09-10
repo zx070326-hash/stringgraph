@@ -5,6 +5,18 @@ status: rigorous
 depends_on:
   - id: worldsheet.brst-quantization
   - id: worldsheet.virasoro-algebra-v2
+  - id: math.virasoro-universal-central-extension
+    inferred: true
+    note: |
+      **inferred**：这条依赖承载 FGZ Prop 1.2 的第一条假设「H²(g) = 0」在 g = Vir 时的数学内容
+      （H²(Vir, C) = 0，等价地 Vir 已是 Witt 的万有中心扩张）。两边**没有互引**：
+      FGZ 不引任何数学文献支撑 H²(g) = 0，feldvoss-siciliano-2025 也不提 BRST。
+      残留的两点未闭合，见本推导 gaps 的第 2、3 条：
+      (a) FGZ §2 里的 g 是否就是含中心的 Vir、其 H²(g) 是否就是「平凡系数的李代数二阶上同调」，
+          本项目**没有重读 FGZ 原文核实**，只据 literature/extractions/brst-cohomology-sources.md
+          §1.2 的 L1 摘录做合理性判断；
+      (b) FGZ 的假设是**两条**（H²(g) = 0 **且** γ = 0），本依赖只覆盖第一条。
+      在这两点闭合前，本条边不得改成 inferred: false。
 sources:
   - ref: fgz-1986
     loc: "Proposition 1.2（d² = 0）；Proposition 2.1(i)（ρ(c) = −26）；§2.1 正文 π(c) = 26 的假设"
@@ -18,7 +30,22 @@ gaps:
      **Virasoro 代数本身作为李代数的二阶上同调消失**，即 H²(Vir, C) = 0——等价于说 Vir 已经是 Witt 代数的
      **万有中心扩张**（再中心扩张一次不出新东西）。这**不是** worldsheet.virasoro-unique-central-extension 那条命题：
      后者讲的是 H²(Witt, C) 一维（Witt 恰有一个非平凡一维中心扩张，即 Vir）。两者是不同的上同调群，
-     一个的成立不蕴含另一个。**本图中没有 H²(Vir, C) = 0 的节点**，本推导对这一步无任何来源支撑；
-     要补，需要一条独立的数学节点（标准参考是 Virasoro 是万有中心扩张的证明），并把它加进 depends_on。"
+     一个的成立不蕴含另一个。
+     **状态更新（curator 2026-09-11，第二次改写）**：这条数学事实现在**在图内有节点了**——
+     math.virasoro-universal-central-extension（rigorous，主来源 feldvoss-siciliano-2025 Lemma 2.6），
+     已加入本推导的 depends_on。原文这里写的『本图中没有 H²(Vir, C) = 0 的节点，本推导对这一步无任何来源支撑』
+     **已不再成立**；但那条边标了 inferred: true，未闭合的部分见下面两条。"
+  - "**残留 1：FGZ 的 g 到底是谁，未核实。** 把 Prop 1.2 套到 Virasoro 上，需要 FGZ §2 里的 g 就是
+     **含中心元的 Vir**（而不是 Witt 或别的分次李代数），且其 H²(g) 就是**以平凡模为系数**的李代数二阶上同调。
+     本项目**没有重读 FGZ 原文**核实这两点，只依据 literature/extractions/brst-cohomology-sources.md §1.2 的
+     L1 摘录（假设句逐字『we will assume that H²(g) = 0 and that ω₀ and β are fixed in such a way that γ = 0』，
+     且 Prop 1.1(ii) 里 γ 是**标量** 2-上循环）做的合理性判断——γ 是标量说明系数模是平凡的，这支持上述读法，
+     但不是核实。FGZ 也**不引任何数学文献**来支撑 H²(g) = 0，两边没有互引。
+     ⇒ 闭合办法：重读 FGZ §1–§2，确认 g 的定义与 H² 的系数模。"
+  - "**残留 2：γ = 0 那一半仍无来源。** FGZ 的假设是**两条**：H²(g) = 0 **且**『ω₀ 与 β 取得使 γ = 0』。
+     新加的依赖只解决第一条。第二条按 FGZ Prop 1.1(ii)（γ 代表 H²(g) 的平凡类时可取 γ ≡ 0）
+     **形式上应当被第一条蕴含**——H² = 0 时每个类都平凡——但这是本项目的**推断**，不是 FGZ 明说的蕴含关系，
+     原文把两条并列写成假设。该推断同样体现在 depends_on 那条边的 inferred: true 上。
+     ⇒ 闭合办法：核实 Prop 1.1(ii) 的确切措辞，确认『γ 平凡 ⇒ 可取 γ ≡ 0』对本情形无额外条件。"
 author: lead
 created: "2026-09-10"

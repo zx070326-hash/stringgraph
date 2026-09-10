@@ -57,6 +57,14 @@ notes: |
   【area 选择】放在 math 而不是 worldsheet：这是与弦论无关的纯李代数对象，
   worldsheet 侧只通过 Virasoro 代数用到它。
 
+  【单边 / 双边（2026-09-11 补）】本卡是**双边** Witt 代数（生成元 ℓ_n，n ∈ **ℤ**，
+  即 Der(R[t, t⁻¹])），dim H²(双边 Witt, k) = 1（k 特征零），故它有非平凡的一维中心扩张 = Virasoro；
+  **单边**的 W_r（多项式环 R[x₁,…,x_r] 的导子代数）满足 H²(W_r, 𝔽) = 0
+  （feldvoss-siciliano-2025 Proposition 1.2, p. 4），**没有**非平凡中心扩张。两者勿混：
+  下游的 worldsheet.virasoro-unique-central-extension 与 math.virasoro-universal-central-extension
+  都只对双边版本成立。文献里「two-sided」这个词不是修辞（同文 p. 7 脚注 3；
+  Mathieu 甚至把双边 Witt 代数本身叫作 Virasoro 代数）。
+
   【查重】新增前跑过 `stringgraph search witt / virasoro / cohomology`：
   图中此前无 Witt 代数节点，唯一相关命中是旧卡 worldsheet.virasoro-algebra
   在陈述文本中提到「Witt 代数」。
