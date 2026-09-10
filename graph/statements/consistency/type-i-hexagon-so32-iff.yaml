@@ -1,0 +1,88 @@
+id: consistency.type-i-hexagon-so32-iff
+kind: proposition
+title: type I 单圈纯规范六边形反常（单迹部分）为零 ⟺ Chan–Paton 规范群是 SO(32)
+statement: |
+  **设定（适用域，是陈述的一部分）**：**type I 超弦**，**单圈**，六个外态全部是**无质量在壳规范粒子**
+  （GSW 逐字「the external states are massless on-shell gauge particles」）。
+  Chan–Paton 矩阵 λ 取规范代数 **SO(n)、USp(n) 或 U(n)** 的**基本表示**
+  （conv.gauge-trace-normalization；spectrum.chan-paton-gauge-group）。
+  单圈六边形有三种拓扑，其群论因子分别是
+
+      G_P = n · tr(λ₁λ₂…λ₆)        平面图（annulus；n 来自无粒子附着的那条边界上的单位矩阵迹）   (10.2.1)
+      G_N = η · tr(λ₁λ₂…λ₆)        不可定向图（Möbius 带，只有一条边界，故无 n 因子）            (10.2.2)
+      G_T = tr(λ₁λ₂λ₃λ₄) · tr(λ₅λ₆)  非平面图                                                  (10.2.3)
+
+  其中 **η 是把奇数条线扭转所带的因子**，GSW 逐字：「−1 for SO(n), +1 for USp(n) and 0 for U(n)」。
+
+  **命题**：带群论因子 tr(λ₁…λ₆) 的**单迹**总反常是
+
+      W = W_P + W_N,      **W_N = η · (32/n) · W_P**                                          (10.2.36)(10.2.37)
+
+  于是 W = (1 + 32η/n) · W_P，而它**为零当且仅当规范群是 SO(32)**。
+
+  原文逐字（p. 165，(10.2.37) 之后）：
+  「As a result the total anomaly with the group-theory factor tr(λ₁…λ₆) is given by W = W_P + W_N,
+  **which vanishes for the gauge group SO(32) and for no other group.**」
+  同书 p. 143（章首）：「A surprising result will emerge: **the anomaly cancels if and only if the gauge
+  group is SO(32).**」；§10.5 总结 p. 172：「**The requirement that these anomalies cancel uniquely
+  determines the gauge group to be SO(32).**」
+
+  **本节点不断言**（每条都有原文依据，见 notes 与推导 gaps）：
+  (a) ★ 「十维 N = 1 反常自由的规范群唯一是 SO(32)」。本卡的候选集只有 **Chan–Paton 群**
+      SO(n)/USp(n)/U(n)。**E₈ × E₈ 与 E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶ 根本不在候选集里**
+      （E₈ 不是 Chan–Paton 群；U(n) 另被 GSW 以超对称理由提前排除，p. 152）。
+      低能场论侧的四解表是**另一条陈述**：consistency.twelve-form-factorization-solutions。
+  (b) 引力反常与混合反常在**弦论侧**抵消。GSW §10.3（pp. 167–168）对这两类反常**没有做任何弦论侧计算**，
+      逐字只有「as is **suggested** by the low energy analysis of chapter 13」「**should** cancel」
+      「It is **plausible**」「there **seems** to be」；章首 p. 143 更逐字自陈
+      「**although the relevant calculations have not been performed**」。
+  (c) 非平面图无反常（GSW §10.2.3, pp. 165–166，用「canceled propagator argument」）。
+      那是独立的一条命题，本图尚未建卡；本卡只覆盖 tr(λ₁…λ₆) 单迹部分。
+  (d) type IIB、杂化弦的任何事（GSW 同样只说低能分析「suggests」）。
+  (e) SO(32) 单圈**发散**的抵消（§10.4）。作者对那一段自陈
+      「**This argument for the finiteness of the SO(32) theory given above is not entirely rigorous.**」
+  (f) 首发权。本章是教科书重述；原始计算是 Green–Schwarz, Nucl. Phys. **B255** (1985) 93–114，
+      本项目未抽（bib key `green-schwarz-1985-hexagon`，reading-list P1）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.2.2, p. 165，(10.2.36)(10.2.37) 及其后逐字句「…which vanishes for the gauge group SO(32) and for no other group.」；候选集与 η 的定义见 §10.2.1, pp. 152–153, (10.2.1)(10.2.2)(10.2.3)；章首断言 p. 143；总结 §10.5, p. 172"
+    note: |
+      **L1 逐页读图**（Cambridge Core 25th Anniversary Edition 章级 PDF，第 10 章 pp. 141–174 读毕；
+      抽取记录 literature/extractions/gsw-1987-v2.md E1/E5/E6/E11）。
+      ⚠ **同页两处排印错误**：p. 165 正文两次写「as in (10.2.17) for SO(32)」与
+      「The last term in (10.2.17), 15 trλ⁴trλ²」，但 (10.2.17) 是 Dirac 迹公式
+      tr(Γ₁₁Γ_{μ₁}…Γ_{μ₁₀}) = 32 ε（p. 158，已 L1 读到），含那两项的是 **(10.1.12)**。
+      抽取记录 §3.3 判为 GSW 排印错误。引用 p. 165 那段时必须带上这一点。
+      ⚠ 本章**未声明时空度规号差**（抽取记录 §3.5，L0），故本卡不挂任何 conv.metric-*。
+tags: [anomaly, hexagon, type-i, so32, chan-paton, string-one-loop, gauge-anomaly]
+notes: |
+  【1. ★ 两个独立的「32」（本图的观察，不是原文断言）】
+  · **(10.2.36) 里的 32**：GSW 逐字说它来自变量替换「from √z_r to z_r (i.e., from ν_r/2 to ν_r),
+    which gives a factor of 32」——即 5 个积分变量各出一个 2，2⁵ = 32。
+  · **同页低能解释里的 32**：GSW 逐字「The number of such diagrams is equal to the number of ways in
+    which an **odd number of twists** can be distributed on the internal legs of a hexagon diagram,
+    **which is 32**.」——即 Σ_{k 奇} C(6,k) = 2⁵ = 32（本图 math.hexagon-odd-twist-count）。
+  两条路线落到同一个 2⁵，**GSW 没有解释它们为什么相等**。本卡把这条观察记在这里；
+  推导只用第一条（变量替换），不依赖第二条。
+
+  【2. ★ 与四解卡绝不可合并】consistency.twelve-form-factorization-solutions 是**低能场论侧**：
+  候选集是全部 496 维李代数，结论是「因子化」。本卡是**弦论侧**：候选集是 Chan–Paton 群，
+  结论是「单迹反常为零」。适用域、候选集、结论词三样都不同。
+  GSW 自己也把两者分开：本章 (10.1.12) 之后逐字「(These matters are discussed further in §13.5.3.)」。
+
+  【3. ★ 本章相对 GS 1984 的两处实质补充】(a) 迹恒等式多了 U(n) 一支 (10.1.14) Tr t⁶ = n trλ⁶ + 15 trλ⁴trλ²
+  （已补记在 math.so-usp-adjoint-fundamental-trace-identities 的 notes）；
+  (b) GS (12c) 里凭空出现的整数 32 有了世界面来历（见本 notes 第 1 条）。
+
+  【4. 「iff」的实际内容】GSW 直接断言「and for no other group」，**不作枚举**。
+  把它化归为整数方程 n + 32η = 0（η ∈ {−1, 0, +1}，n 正整数）是本图做的一步，见推导 summary。
+
+  【5. 与「非平面图」的关系】GSW 在同一节证明非平面图（群论因子 G_T，双迹）**对任意规范群无反常**，
+  并指出低能极限下场论那边的 tr(λ₁…λ₄)tr(λ₅λ₆) 项要靠无质量闭弦（B_{μν}）交换来消——
+  那正是第 13 章 GS 机制的弦论侧来源。本图尚未建这两张卡，建议后续补：
+  `consistency.type-i-nonplanar-hexagon-anomaly-free` 与 `consistency.b-field-tree-anomaly`
+  （抽取记录 §5.1 已列 loc）。
+author: curator
+created: "2026-09-11"
