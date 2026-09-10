@@ -15,5 +15,33 @@ sources:
   - ref: kac-1979
     loc: "§1"
 tags: [cft, representation-theory]
+notes: |
+  形式化状态（2026-09-10，lean-formalizer）：`formal/StringFormal/Virasoro/Verma.lean`
+  形式化了本节点陈述的**一部分**，因此 `formal` 字段**故意留空**（填了会让依赖它的推导
+  可以标 `formalized`，而 PBW 基这一半并没有做）。
+
+  已形式化（无 sorry，公理仅 propext / Classical.choice / Quot.sound）：
+  - `StringFormal.Virasoro.VermaModule R c h`：`V(c,h) := U(Vir) ⧸ (L_n (n>0), L_0-h, C-c
+    生成的左理想)`，带 Virasoro 模结构；底层是 Mathlib 的 `UniversalEnvelopingAlgebra`。
+  - 最高权关系 `L_n|c,h⟩ = 0 (n>0)`、`L_0|c,h⟩ = h|c,h⟩`、`C|c,h⟩ = c|c,h⟩`，
+    以及"由 |c,h⟩ 生成"（`exists_smul_hwv`）。
+  - 万有性质（`vermaLift`、`eq_of_lie_of_eq_hwv`）：V(c,h) 是**唯一**的这种模，
+    这是本节点"Verma 模"一词的规范内容。
+  - `negSpan_eq_top`：V(c,h) 由**无序**负模态词张成。
+  - 分级：`L_0` 在 level N 片上作用为 `h+N`（`lie_lgen_zero_of_mem_levelSpan`）；
+    `⨆_N V_N = V`；每片有限生成；域上（char 0）`V = ⨁_N V_N` 且 `V_N` 恰是 `L_0` 的
+    `h+N` 特征子空间（`isInternal_levelSpan`、`levelSpan_eq_eigenspace`）。
+
+  未形式化的缺口（数学上不是"补细节"，而是缺一条上游定理）：
+  - **PBW 基**：本陈述断言有序单项式 `{L_{-n_1}...L_{-n_k}|h⟩ : n_1 ≥ ... ≥ n_k ≥ 1}` 是一组基。
+    缺两半：(a) 有序词已张成（straightening，纯自力可做）；(b) 线性无关，即 `U(Vir_-)` 的
+    Poincaré–Birkhoff–Witt 定理 + 诱导模自由性。**Mathlib v4.33.1 没有 PBW**
+    （`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 里都注明缺此定理）。
+  - 因此 **`dim V_N = p(N)`** 也没做，只有"有限维"。
+  - 更值得注意：**`V(c,h) ≠ 0` 也没做**，它同样是 PBW 的推论。没有 PBW 就无法证
+    `1 ∉ 定义理想`，也没有便宜替代品（任意 (c,h) 的非零最高权模本身就是要构造的东西；
+    只有 (c,h)=(0,0) 时平凡模现成可用）。所以上面所有已形式化结论都还可能是空洞真。
+  建议（留给 curator/lead 裁决）：若希望有一个可以被标 `formalized` 的节点，
+  应把"V(c,h) 的构造 + 万有性质 + L_0 分级"拆成独立节点，本节点保留 PBW 基与 p(N) 的断言。
 author: seed
 created: "2026-09-10"
