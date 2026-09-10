@@ -38,7 +38,9 @@
   pages   = {235--238},
   year    = {1972},
   doi     = {10.1016/0370-2693(72)90420-0},
-  note    = {卷/期/页/DOI 已核实（Crossref + INSPIRE 74899）。正文未获取（ScienceDirect 403、CERN CDS 反爬）：文中是否有 "Theorem 1" 未核实，间接证据指向无编号。摘要只给 d <= 26，不提 intercept；无 D>26 反例。见 extractions/brst-cohomology-sources.md §3。}
+  note    = {卷/期/页/DOI 已核实（Crossref + INSPIRE 74899）。正文未获取（ScienceDirect 403、CERN CDS 反爬）：文中是否有 "Theorem 1" 未核实，间接证据指向无编号。摘要只给 d <= 26，不提 intercept；无 D>26 反例。见 extractions/brst-cohomology-sources.md §3。
+             第二轮补充（2026-09-10）：INSPIRE 记录的 documents / urls / report_numbers **三个字段均不存在**，故 (a) INSPIRE 侧确无全文，(b)「CERN TH.1471 左右的报告号」这条线索**无证据支持，已作废**。另试 cds.cern.ch/api（Socket closed）、KEK KISS（域名被拦截）、archive.org 找 Schwarz 编 Superstrings 重印本（numFound 0），均失败。
+             正面收获：lian-zuckerman-1991 参考文献 [GT] 第二次独立佐证卷页（Phys. Lett. 40B, 235-238 (1972)），且 LZ 正文引用时同样**不给编号**——「本快报无编号定理」的间接证据现有四条（FGZ ref 8、Goddard 2008、LZ 1991、刊物体例）。见 extractions/primary-sources-round2.md §2。}
 }
 
 @article{brower-1972,
@@ -50,7 +52,8 @@
   pages   = {1655--1662},
   year    = {1972},
   doi     = {10.1103/PhysRevD.6.1655},
-  note    = {卷/期/页/DOI 已核实（INSPIRE 74322 + ADS 1972PhRvD...6.1655B）。正文未获取（APS 403）。摘要把结果限定在 unit Regge intercept（a=1），不支持把 "(D<=25, a<=1) 或 (D=26, a=1)" 两分支表述归给本文。见 extractions/brst-cohomology-sources.md §4。}
+  note    = {卷/期/页/DOI 已核实（INSPIRE 74322 + ADS 1972PhRvD...6.1655B）。正文未获取（APS 403）。摘要把结果限定在 unit Regge intercept（a=1），不支持把 "(D<=25, a<=1) 或 (D=26, a=1)" 两分支表述归给本文。见 extractions/brst-cohomology-sources.md §4。
+             第二轮补充（2026-09-10）：INSPIRE 的 report_numbers / documents / urls 均无，无 preprint 可循。摘要要点复核后结论不变——「D=26 之下无鬼」是在 a=1 前提下的 D<26，不能读成 a<=1。因此 ms.no-ghost-theorem 审计 B1 批注里把 (D<=25, a<=1) 归给「Brower 1972」**按现有证据不成立**；该区域的已核实出处是 lian-zuckerman-1991 Theorem 3.5(ii)。见 extractions/primary-sources-round2.md §3、§4。}
 }
 
 @article{brower-thorn-1971,
@@ -72,7 +75,37 @@
   pages   = {61--77},
   year    = {1987},
   doi     = {10.1016/0550-3213(87)90431-7},
-  note    = {元数据来自 nLab 引用条目，未与出版方交叉核对。Thorn 本人（arXiv:1110.5510）称此文把 1972 年的无鬼定理证明 substantially streamlined。查 a<=1 归属的首选目标。}
+  note    = {元数据来自 nLab 引用条目，未与出版方交叉核对。Thorn 本人（arXiv:1110.5510）称此文把 1972 年的无鬼定理证明 substantially streamlined。
+             **第二轮核实结论：本文不是 a<1 分支的出处（候选降级）。** INSPIRE 逐字全摘要为「We offer a detailed account of the Goddard-Thorn proof of the no-ghost theorem which incorporates simplifications presented earlier. We extend these methods to obtain a new calculation of the cohomology of the nilpotent operator Q occuring in BRST quantized strings. We further explain why the apparent doubling of transverse states in the cohomology of Q has no physical significance.」——**通篇不提 intercept，也不提 D <= 25**。正文仍未获取（Elsevier 403）。见 extractions/primary-sources-round2.md §4。}
+}
+
+@article{thorn-1984,
+  author  = {Thorn, Charles B.},
+  title   = {Computing the {K}ac determinant using dual model techniques and more about the no-ghost theorem},
+  journal = {Nuclear Physics B},
+  volume  = {248},
+  pages   = {551--569},
+  year    = {1984},
+  doi     = {10.1016/0550-3213(84)90611-4},
+  note    = {元数据经 INSPIRE 核实（含 freetext「Nucl. Phys. B248 (1984) 551-569 and Florida Univ. Gainesville - UFTP-84-004 (84,REC.AUG.) 35p」）。**这是 lian-zuckerman-1991 参考文献里的 [T1]**，LZ 把「D 维玻色 Fock 空间的无鬼定理」归给 [GT, T1, LZ, FGZ] 四篇，其中 Thorn 的那篇是本文，不是 thorn-1987。
+             INSPIRE 逐字全摘要：「We relate some mathematical results concerning the Virasoro algebra to properties of dual models. Specifically, we show how to compute the Kac determinant using well known techniques from dual models. Then we use the Kac formula to discuss the validity of the no-ghost theorem of dual models in a more general setting than the original proofs of that theorem.」
+             「in a more general setting」与 Kac 行列式路线都与 a<1 分支吻合，是该分支物理侧原始出处的**最强候选**，但**摘要没有写出条件本身**，正文未获取（Elsevier 403），故仅摘要级（L2）。找扫描件的钥匙是报告号 UFTP-84-004。见 extractions/primary-sources-round2.md §4。}
+}
+
+@incollection{thorn-1985,
+  author    = {Thorn, Charles B.},
+  title     = {A Proof of the No-Ghost Theorem Using the {K}ac Determinant},
+  booktitle = {Vertex Operators in Mathematics and Physics},
+  editor    = {Lepowsky, James and Mandelstam, Stanley and Singer, Isadore M.},
+  series    = {Mathematical Sciences Research Institute Publications},
+  publisher = {Springer US},
+  address   = {New York, NY},
+  pages     = {411--417},
+  year      = {1985},
+  doi       = {10.1007/978-1-4613-9550-8_20},
+  isbn      = {9781461395522},
+  note      = {元数据经 Crossref 逐条核实（章题/书名/系列 ISSN 0940-4740/页码/ISBN 印本 9781461395522、电子 9781461395508）。
+               **年份陷阱**：会议 1983-11-10..17 举行，论文集 1985 年出版，文献里常被引成「Thorn (1984)」，与 thorn-1984（Nucl. Phys. B248）**极易混淆**，登记本条即为区分。内容未核实（未获取正文）。}
 }
 
 @article{kac-1979,
@@ -83,7 +116,32 @@
   pages   = {441--445},
   year    = {1979}
 ,
-  note    = {疑点（researcher 2026-09-10）：FGZ 1986 参考文献 10 引的是 Kac, Proc. ICM Helsinki 1978, Vol. 1, 299--304，可能不是同一篇；Kac 行列式公式的首发出处待核实。}
+  note    = {疑点（researcher 2026-09-10）：FGZ 1986 参考文献 10 引的是 Kac, Proc. ICM Helsinki 1978, Vol. 1, 299--304，可能不是同一篇；Kac 行列式公式的首发出处待核实。
+             第二轮补充：lian-zuckerman-1991 参考文献 [K1] 逐字为「Kac, V. G.: Contravariant form for infinite-dimensional Lie algebras and superalgebras. Lecture Notes in Physics, Vol. 94, p. 441. Berlin, Heidelberg, New York: Springer 1979」，**独立佐证本条的 LNP 94 / p.441**。但这没有排除 ICM 1978 与 LNP 94 是同一内容的两个版本，**疑点未裁决**。}
+}
+
+@article{kac-kazhdan-1979,
+  author  = {Kac, Victor G. and Kazhdan, David A.},
+  title   = {Structure of representations with highest weight of infinite dimensional {L}ie algebras},
+  journal = {Advances in Mathematics},
+  volume  = {34},
+  pages   = {97--108},
+  year    = {1979},
+  note    = {元数据来自 lian-zuckerman-1991 参考文献 [KK]（逐字：「Kac, V. G., Kazhdan, D. A.: Structure of representations with highest weights of infinite dimensional Lie algebras. Adv. Math. 34, 97 (1979)」），**起始页 97 已核实，终页 108 未与出版方核对**，标题的 highest weight(s) 单复数亦未核对。
+             登记理由：LZ 1991 Theorem 3.5(ii) 的两分支条件最终归结为 Verma 模 M(26-D, 1-h) 的半正定性，其判定用的正是 Kac--Kazhdan 行列式公式（LZ Lemma 3.17、Remark 3.15）。是图中 worldsheet.kac-determinant 节点的候选一手来源。内容未核实。}
+}
+
+@book{kac-raina-1987,
+  author    = {Kac, Victor G. and Raina, Ashok K.},
+  title     = {Bombay Lectures on Highest Weight Representations of Infinite Dimensional Lie Algebras},
+  series    = {Advanced Series in Mathematical Physics},
+  volume    = {2},
+  publisher = {World Scientific},
+  year      = {1987},
+  isbn      = {9789971503963},
+  note      = {**内容与编号均未核实（L0）。** 未获取正文：worldscientific.com 书页 403，Google Books 只回页码不回 snippet。
+               **版本陷阱（必读）**：第 1 版 = 本条（Adv. Ser. Math. Phys. 2, 1987, 145 页, ISBN 9971503964 / 9789971503963，讲座 1985-12..1986-01 于 TIFR），**约 12 讲**；第 2 版 = Kac, Raina & Rozhkovskaya, Adv. Ser. Math. Phys. 29, World Scientific 2013, ISBN 9789814522199，**18 讲**（Lecture 1 p.1 / 2 p.11 / 3 p.19 / 4 p.31 / 5 p.45 / 6 p.55 / 7 p.65 / 8 p.77 / 9 p.89 / 10 p.101 / 11 p.113 / 12 p.123 / 13 p.135 / 14 p.151 / 15 p.163 / 16 p.175 / 17 p.191 / 18 p.211）。**两版讲号与命题号不可互换**，从第 2 版查到的编号不得填进引本条的节点。
+               针对「自由玻色子 Fock 空间上 L_n = 1/2 sum :a_(n-k) a_k: 满足 c = 1 的 Virasoro 关系」这条：**本书里的 Lecture 号与命题号未能核实，不要猜**。已核实的可替代来源见 virasoro-lean-2025（Theorem 10.1 / Corollary 10.2）。见 extractions/primary-sources-round2.md §5。}
 }
 
 @article{feigin-fuchs-1982,
@@ -128,7 +186,11 @@
   pages   = {547--580},
   year    = {1991},
   doi     = {10.1007/BF02104121},
-  note    = {元数据经 Crossref 核实（见 extractions/brst-cohomology-sources.md §2.3）。**内容完全未核实**：未获取正文，未确认它包含哪些定理。登记理由：这是**一般 Virasoro**（非 super-Virasoro）的 BRST 上同调论文，若图中需要玻色弦 BRST 上同调（含 Q^2 = 0 的幂零判据）的严格数学出处，本篇比 lian-zuckerman-1989 更可能是正确来源——后者是 super-Virasoro/RNS，用于玻色弦属误引。引用本条前必须先核实内容与定理编号；在核实前不得用它支撑任何 status: rigorous。}
+  note    = {**全文已核实（2026-09-10，34 页逐页读毕）**。获取途径：Project Euclid 免费 PDF 端点 https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104202143 （文章页自称 no online version，但该端点无需登录即可下载）。
+             可引用的编号结果：**Theorem 3.5(ii), p.570** 逐字给出无鬼条件的两分支「D = 26, h = 1 or 26 > D >= 2, h <= 1」（h 是**截距 a**；LZ 括注称其为 Regge slope 属术语错误，勿照抄）；**Theorem 3.5(i)** 给出等距同构 V(D,p)^(G+)[-h]/rad = H^0_inf(G,G_0; V(D,p) tensor L(26-D,1-h))；**Theorem 2.13** 约化公式；**Theorem 2.25** 与 **Corollary 2.26 (Vanishing Theorem)**；**Corollary 2.28** 作者自命名 "No-ghost Theorem"。
+             **重要否定结论：文中没有「Q^2 = 0 iff c = 26」型陈述。** Proposition 1.11(i) 的 d^2 = 0 对任意 V in O 无条件成立且不含 26；26 只出现在 Proposition 3.3(iii)，且是单向的「is a G-module **if** bar-beta = -26 z' - L'_0」。与 fgz-1986 同型：为 c=26 构造相对复形，不推导 c=26。
+             **编号陷阱：Introduction (p.549) 把 Vanishing Theorem 写成 "Corollary 2.19" 是本文排印错误**（p.564 处是 Remark 2.19），正确编号是 Corollary 2.26（同文 p.557 与 p.567 一致）。
+             转录疑点（引用前须复核原页）：Theorem 2.25 假设行渲染为 G-free，按上下文应为 G_--free；Corollary 2.26 第二行的 n = 0 应为 n != 0；Corollary 2.28 的公式指数。见 extractions/primary-sources-round2.md §1。}
 }
 
 @article{lian-zuckerman-1993,
@@ -151,7 +213,10 @@
   pages   = {443--460},
   year    = {1983},
   doi     = {10.1016/0550-3213(83)90680-6},
-  note    = {元数据已核实（INSPIRE；卷页由 FGZ 1986 参考文献 5 独立佐证）。摘要确认 D=26 与截距 a=1 是 BRS 荷幂零的必然结果，并自称给出无鬼定理证明。是否已写成「BRST 上同调 == 旧协变物理态」的同构形式，正文未获取（ScienceDirect 403），未核实。定理编号未核实。见 extractions/brst-cohomology-sources.md §6。}
+  note    = {元数据已核实（INSPIRE 记录 177600；卷页由 FGZ 1986 参考文献 5 独立佐证）。报告号 **KUNS 637**（INSPIRE report_numbers，L2；检索后端 L4 对此有异议，认为 637 属 RIFP 系列且 Kato 当时在东京——两方冲突未裁决，此处按 INSPIRE 记）。
+             **摘要已升级为逐字（INSPIRE，2026-09-10）**：「Covariant canonical quantization of the bosonic string is performed, based on the BRS invariance principle. Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition Q_B |phys> = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner. There an interesting relation between critical dimension and BRS symmetry is noticed; namely, the conditions D = 26 and alpha_0 = 1 for the space-time dimension D and the zero-intercept alpha_0 of leading trajectory are required by the nilpotency Q_B^2 = 0 of the BRS charge. In addition, ghost number fractionization is observed in this system.」
+             **方向已定：给的是「Q_B^2 = 0 ==> (D = 26 且 a = 1)」（required by），摘要中没有反方向，因此没有「当且仅当」。**
+             仍未核实：是否已写成 Ker Q_B / Im Q_B = OCQ 物理态 的同构形式；定理编号。正文未获取（ScienceDirect 403；未找到 KEK/京大扫描件）。见 extractions/brst-cohomology-sources.md §6 与 primary-sources-round2.md §6。}
 }
 
 @misc{goddard-2008,
@@ -187,5 +252,8 @@
   year   = {2025},
   eprint = {2510.21741},
   note   = {arXiv; 代码 https://github.com/kkytola/VirasoroProject (Apache-2.0, Lean v4.27.0-rc1)；
-            复用评估见 formal/NOTES-virasoro-reuse.md}
+            复用评估见 formal/NOTES-virasoro-reuse.md。
+            **全文已核实（2026-09-10，16 页读毕）。** 可引用的编号结果：**Theorem 10.1**（在假设 (H) Heisenberg 关系 [J_k,J_l] = k delta_(k,-l) id_V 与 (T) 局部截断「任给 v 存在 K_v 使 J_l v = 0 对所有 l >= K_v」下，L_n v = 1/2 sum_k :J_(n-k) J_k: v 满足 Virasoro 对易关系）；**Corollary 10.2**（由此得到**中心荷 c = 1** 的 Virasoro 表示）；**Corollary 12.6**（带电 Fock 空间 F_alpha 上的 c = 1 表示）；**Theorem 12.7**（Virasoro Verma 模到带电 Fock 空间的唯一模同态）；**Theorem 6.2**（H^2(witt) 一维）；**Definition 8.1**（Virasoro 代数）。Theorem 10.1 的完整证明在 Appendix A.2（Lemma A.6--A.12）。
+            对应 Lean 声明（论文 Table 1）：sugawaraRepresentation_of_representation_heisenbergAlgebra、ChargedFockSpace.virasoroVermaToChargedFockSpace、VirasoroAlgebra、HeisenbergAlgebra、VermaModule / IsVermaModule、WittAlgebra.rank_lieTwoCohomology_eq_one。
+            **三条使用限制**：(1) 只有 c = 1 的单分量 Heisenberg，**没有 c = D 的多分量版本**；(2) 没有洛伦兹不定内积（无鬼定理的难点全在这里）；(3) 作者脚注 11 逐字指出通行说法「The Sugawara construction is an embedding of the Virasoro algebra into the universal enveloping algebra of the affine Lie algebra」是 false（无穷和不落在 UEA 内），节点措辞不要用「嵌入」。见 extractions/primary-sources-round2.md §5.2。}
 }
