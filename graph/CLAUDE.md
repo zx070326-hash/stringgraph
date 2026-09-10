@@ -41,13 +41,13 @@ tags: [cft, algebra]
 ## 最小推导示例
 
 ```yaml
-id: worldsheet.no-ghost-theorem--via-goddard-thorn
-target: worldsheet.no-ghost-theorem
+id: worldsheet.no-ghost-theorem-v2--via-goddard-thorn
+target: worldsheet.no-ghost-theorem-v2
 kind: proof                 # proof | physical-argument | conjecture-support | refutation
 status: rigorous            # 见 docs/STATUS_LEVELS.md
 depends_on:
   - id: worldsheet.virasoro-algebra
-  - id: worldsheet.ddf-operators
+  - id: worldsheet.ddf-operators-v2
     inferred: false
 sources:
   - ref: goddard-thorn-1972

@@ -78,4 +78,4 @@ cd formal && lake build               # 构建 Lean 形式化
 
 ## 当前阶段
 
-见 `docs/ROADMAP.md`。现在处于 **Phase 0：骨架与种子数据**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem`）。
+见 `docs/ROADMAP.md`。现在处于 **Phase 0：骨架与种子数据**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem-v2`）。

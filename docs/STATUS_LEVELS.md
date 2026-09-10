@@ -31,7 +31,7 @@ effective(n) = min( status(n), min over d in deps(n) of effective(d) )
 ## 报告输出示例
 
 ```
-worldsheet.no-ghost-theorem
+worldsheet.no-ghost-theorem-v2
   status: rigorous
   effective: rigorous
   assumes: []

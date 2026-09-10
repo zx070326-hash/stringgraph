@@ -1,7 +1,7 @@
 /-
 # No-ghost theorem (Goddard–Thorn): statement file
 
-Graph node: `worldsheet.no-ghost-theorem`
+Graph node: `worldsheet.no-ghost-theorem-v2`
 Milestone:  `ms.no-ghost-theorem`
 
 ## Scope of this file
