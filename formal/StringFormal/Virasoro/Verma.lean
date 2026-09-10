@@ -66,7 +66,6 @@ have (see the *Status* section).
   Virasoro-equivariant `R`-linear map `V(c,h) → M` sending `|c,h⟩` to `v`.
 * `adjoin_range_uea_ι_eq_top`: `U(L)` is generated as an `R`-algebra by the image of `L`
   (missing from Mathlib `v4.33.1`; the tensor-algebra analogue is there).
-* `VirasoroAlgebra.span_lgen_cgen_eq_top`: `Vir = span_R {L_n : n ∈ ℤ} ∪ {C}`.
 
 ## Status
 
@@ -121,56 +120,6 @@ theorem adjoin_range_uea_ι_eq_top :
   exact hsurj
 
 end UniversalEnveloping
-
-/-! ### The Virasoro algebra is spanned by `L n` and `C` -/
-
-namespace VirasoroAlgebra
-
-variable (R : Type*) [CommRing R] [Algebra ℚ R]
-
-/-- `toProd` upgraded to an `R`-linear equivalence `VirasoroAlgebra R ≃ₗ WittAlgebra R × R`. -/
-noncomputable def toProdₗ : VirasoroAlgebra R ≃ₗ[R] WittAlgebra R × R where
-  toFun := toProd R
-  invFun := (toProd R).symm
-  map_add' := toProd_add R
-  map_smul' := toProd_smul R
-  left_inv := (toProd R).left_inv
-  right_inv := (toProd R).right_inv
-
-/-- The linear (**not** Lie algebra) splitting `WittAlgebra R → VirasoroAlgebra R`,
-`ℓ n ↦ L n`. -/
-noncomputable def ofWitt : WittAlgebra R →ₗ[R] VirasoroAlgebra R :=
-  ((toProdₗ R).symm : WittAlgebra R × R →ₗ[R] VirasoroAlgebra R) ∘ₗ
-    LinearMap.inl R (WittAlgebra R) R
-
-@[simp] lemma toProd_ofWitt (w : WittAlgebra R) : toProd R (ofWitt R w) = (w, 0) := rfl
-
-@[simp] lemma ofWitt_lgen (n : ℤ) : ofWitt R (WittAlgebra.lgen R n) = lgen R n := rfl
-
-/-- The Virasoro algebra is spanned by the generators `L n`, `n : ℤ`, together with the central
-element `C`. -/
-lemma span_lgen_cgen_eq_top :
-    Submodule.span R (insert (cgen R) (Set.range (lgen R))) = ⊤ := by
-  rw [eq_top_iff]
-  intro X _
-  have hX : X = ofWitt R (toWitt R X) + (toProd R X).2 • cgen R := by
-    apply toProd_injective
-    rw [toProd_add, toProd_smul, toProd_cgen, toProd_ofWitt, toWitt_apply]
-    ext <;> simp
-  have hw : toWitt R X ∈ Submodule.span R (Set.range (WittAlgebra.lgen R)) := by
-    rw [(WittAlgebra.lgen R).span_eq]
-    exact Submodule.mem_top
-  have h1 : ofWitt R (toWitt R X) ∈ Submodule.span R (Set.range (lgen R)) := by
-    have hmem : ofWitt R (toWitt R X)
-        ∈ (Submodule.span R (Set.range (WittAlgebra.lgen R))).map (ofWitt R) :=
-      Submodule.mem_map_of_mem hw
-    rwa [Submodule.map_span, ← Set.range_comp,
-      show (ofWitt R ∘ WittAlgebra.lgen R) = lgen R from rfl] at hmem
-  rw [hX]
-  exact Submodule.add_mem _ (Submodule.span_mono (Set.subset_insert _ _) h1)
-    (Submodule.smul_mem _ _ (Submodule.subset_span (Set.mem_insert _ _)))
-
-end VirasoroAlgebra
 
 /-! ### The Verma module `V(c,h)` -/
 
@@ -436,9 +385,6 @@ theorem negSpan_eq_top : negSpan R c h = ⊤ := by
   exact smul_mem_negSpan R c h u _ (hwv_mem_negSpan R c h)
 
 /-! ### The `L₀`-grading -/
-
-lemma centralTerm_zero : centralTerm R (0 : ℤ) = 0 := by
-  simp [centralTerm]
 
 /-- `L₀` acts on `L_{n_1} ⋯ L_{n_k} |c,h⟩` by the scalar `h - (n_1 + ⋯ + n_k)`. -/
 lemma lie_lgen_zero_wordAct (l : List ℤ) :
