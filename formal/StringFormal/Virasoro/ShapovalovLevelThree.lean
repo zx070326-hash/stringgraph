@@ -247,6 +247,90 @@ theorem IsContravariant.gram_level_one_three (hB : IsContravariant R c h B)
     B x y = 0 :=
   hB.eq_zero_of_level_ne (by norm_num) hx hy
 
+/-! ### The determinant, and the Kac formula at `N = 3` -/
+
+/-- **The level-3 Kac determinant.**  The `3 × 3` determinant (expanded along the first row)
+of the Gram matrix of `L₋₃|c,h⟩`, `L₋₂L₋₁|c,h⟩`, `L₋₁³|c,h⟩` equals
+
+`48 h² (16h² + 2h(c-5) + c) (3h² + h(c-7) + c + 2)`.
+
+The middle factor is exactly the level-2 determinant divided by `2h`
+(`IsContravariant.gram_level_two_det`), as Kac's product formula predicts: the `rs = 2` roots
+reappear at level `3` with multiplicity `p(3-2) = p(1) = 1`.
+
+As with `gram_level_two_det`, linear independence of the three vectors is PBW and is not
+available here, so this is the determinant of an explicit matrix of inner products. -/
+theorem IsContravariant.gram_level_three_det (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    B (desc3 R c h) (desc3 R c h)
+        * (B (desc21 R c h) (desc21 R c h) * B (desc111 R c h) (desc111 R c h)
+            - B (desc21 R c h) (desc111 R c h) * B (desc111 R c h) (desc21 R c h))
+      - B (desc3 R c h) (desc21 R c h)
+        * (B (desc21 R c h) (desc3 R c h) * B (desc111 R c h) (desc111 R c h)
+            - B (desc21 R c h) (desc111 R c h) * B (desc111 R c h) (desc3 R c h))
+      + B (desc3 R c h) (desc111 R c h)
+        * (B (desc21 R c h) (desc3 R c h) * B (desc111 R c h) (desc21 R c h)
+            - B (desc21 R c h) (desc21 R c h) * B (desc111 R c h) (desc3 R c h))
+      = 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+          * (3 * h ^ 2 + h * (c - 7) + c + 2) := by
+  obtain ⟨e33, e3a, e3b, ea3, eaa, eab, eb3, eba, ebb⟩ := hB.gram_level_three_entries hB1
+  rw [e33, e3a, e3b, ea3, eaa, eab, eb3, eba, ebb]
+  ring
+
+omit [Algebra ℚ R] in
+/-- The two Kac roots at `rs = 3`, `h₁₃` and `h₃₁`, are the roots of
+`3X² + (c-7)X + (c+2)`; equivalently `h₁₃ + h₃₁ = (7-c)/3` and `h₁₃h₃₁ = (c+2)/3`.
+This lemma is the corresponding factorisation, with denominators cleared. -/
+lemma kac_factor_rs_three {h13 h31 : R}
+    (hs : 3 * (h13 + h31) = 7 - c) (hp : 3 * (h13 * h31) = c + 2) :
+    3 * ((h - h13) * (h - h31)) = 3 * h ^ 2 + h * (c - 7) + c + 2 := by
+  linear_combination (-h) * hs + hp
+
+omit [Algebra ℚ R] in
+/-- The two Kac roots at `rs = 2`, `h₁₂` and `h₂₁`, are the roots of `16X² - 2(5-c)X + c`;
+equivalently `h₁₂ + h₂₁ = (5-c)/8` and `h₁₂h₂₁ = c/16`. -/
+lemma kac_factor_rs_two {h12 h21 : R}
+    (hs : 8 * (h12 + h21) = 5 - c) (hp : 16 * (h12 * h21) = c) :
+    16 * ((h - h12) * (h - h21)) = 16 * h ^ 2 + 2 * h * (c - 5) + c := by
+  linear_combination (-2 * h) * hs + hp
+
+/-- **The level-3 determinant is Kac's product.**  Given the Kac weights at `rs ≤ 3`
+— `h₁₁ = 0`, the pair `{h₁₂, h₂₁}` with `h₁₂ + h₂₁ = (5-c)/8`, `h₁₂h₂₁ = c/16`, and the pair
+`{h₁₃, h₃₁}` with `h₁₃ + h₃₁ = (7-c)/3`, `h₁₃h₃₁ = (c+2)/3` — the level-3 Gram determinant is
+
+`2304 (h - h₁₁)^{p(2)} · (h - h₁₂)^{p(1)} (h - h₂₁)^{p(1)} · (h - h₁₃)^{p(0)} (h - h₃₁)^{p(0)}`
+
+with `p(2) = 2`, `p(1) = p(0) = 1`, which is the Kac determinant formula at `N = 3`
+with `K₃ = 48 · 16 · 3 = 2304` in this basis. -/
+theorem IsContravariant.gram_level_three_det_eq_kac (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) {h11 h12 h21 h13 h31 : R}
+    (e11 : h11 = 0)
+    (e2s : 8 * (h12 + h21) = 5 - c) (e2p : 16 * (h12 * h21) = c)
+    (e3s : 3 * (h13 + h31) = 7 - c) (e3p : 3 * (h13 * h31) = c + 2) :
+    B (desc3 R c h) (desc3 R c h)
+        * (B (desc21 R c h) (desc21 R c h) * B (desc111 R c h) (desc111 R c h)
+            - B (desc21 R c h) (desc111 R c h) * B (desc111 R c h) (desc21 R c h))
+      - B (desc3 R c h) (desc21 R c h)
+        * (B (desc21 R c h) (desc3 R c h) * B (desc111 R c h) (desc111 R c h)
+            - B (desc21 R c h) (desc111 R c h) * B (desc111 R c h) (desc3 R c h))
+      + B (desc3 R c h) (desc111 R c h)
+        * (B (desc21 R c h) (desc3 R c h) * B (desc111 R c h) (desc21 R c h)
+            - B (desc21 R c h) (desc21 R c h) * B (desc111 R c h) (desc3 R c h))
+      = 2304 * (h - h11) ^ 2 * ((h - h12) * (h - h21)) * ((h - h13) * (h - h31)) := by
+  rw [hB.gram_level_three_det hB1, ← kac_factor_rs_two e2s e2p,
+    ← kac_factor_rs_three e3s e3p, e11]
+  ring
+
+omit [Algebra ℚ R] in
+/-- Sanity check at `c = 1`, where the Kac weights degenerate to `h_{r,s} = (r-s)²/4`:
+`h₁₁ = 0`, `h₁₂ = h₂₁ = 1/4`, `h₁₃ = h₃₁ = 1`.  The level-3 determinant becomes
+`144 h² (4h-1)² (h-1)²`, a perfect square as it must be for coincident roots. -/
+lemma kac_level_three_at_c_one (x : R) :
+    48 * x ^ 2 * (16 * x ^ 2 + 2 * x * ((1 : R) - 5) + 1)
+        * (3 * x ^ 2 + x * ((1 : R) - 7) + 1 + 2)
+      = 144 * x ^ 2 * (4 * x - 1) ^ 2 * (x - 1) ^ 2 := by
+  ring
+
 end Level3
 
 end StringFormal.Virasoro
