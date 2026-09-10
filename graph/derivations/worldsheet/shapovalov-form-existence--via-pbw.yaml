@@ -4,56 +4,63 @@ kind: proof
 status: rigorous
 depends_on:
   - id: math.verma-module-free-over-negative-part
-    inferred: true
+    inferred: false
     note: |
-      **本推导的全部实质输入**，用到它的 (2) PBW 基、(3) dim_F V_N = p(N)（只需 N = 0 那一项）
-      与 (4) V(c,h) ≠ 0。由 (3) 的 N = 0 情形 dim_F V_0 = 1，V_0 = F·|c,h⟩，
-      于是 PBW 基给出直和分解 V(c,h) = F·|c,h⟩ ⊕ (⊕_{N ≥ 1} V_N)，
-      **系数泛函** f := 「|c,h⟩ 分量的系数」就是一个 Shapovalov 泛函
-      （f(|c,h⟩) = 1 由 dim V_0 = 1；n < 0 时 L_n V ⊆ ⊕_{N ≥ 1} V_N 故 f(L_n v) = 0；
-      L_0 在 V_N 上是 h + N 故 f(L_0 v) = h f(v)）。代入目标 (1) 即得形式。
-      ⚠ **`inferred: true` 的理由**：上述「由自由性/PBW 造出泛函」这一步**没有在本推导所引的
-      任何来源的指定位置被写出来**。schottenloher-2008 Theorem 6.8(1) 只是**断言**存在唯一
-      （其证明正文本项目未转录，researcher 的 §34.3 记录只到定理陈述与 6.11/6.12 的引文）；
-      feigin-fuchs-1982 §3.2 则**直接把形式定义成 PBW 基下的 Gram 矩阵**，把存在性当作定义的
-      副产品（L1，math-sources.md §34.2(b)）。上面括号里的三行是 curator 的重构，
-      不是任何来源的逐字论证。**撤销条件**：拿到 Schottenloher Theorem 6.8 的证明正文
-      （LMU 章节 PDF 已可获取，见 math-sources.md §34.3 的取件路径）并核对它是否走这条路，
-      或找到一处把「V ≅ U(vir₋) ⇒ 逆变形式存在」写成带编号命题的来源。
-      ⚠ **基环收紧**：该卡设在**特征零的域 F** 上，目标卡设在任意交换 ℚ-代数 R 上。
-      故本推导只覆盖 R = F（含物理情形 F = C），**不覆盖一般 ℚ-代数**。见 gaps (i)。
+      **本推导的全部实质输入**，且只用它的 **(4) V(c,h) ≠ 0**（等价地 |c,h⟩ ≠ 0；
+      该卡由 (3) 的 N = 0 情形 dim_F V_0 = 1 得出）。基环与该卡一致：**特征零的域 F**。
+      **2026-09-11：本边由 `inferred: true` 改为 `false`。** 原先标 inferred 是因为
+      「由自由性/PBW 造出 Shapovalov 泛函」这一步在任何来源的指定位置都找不到逐字论证
+      （schottenloher-2008 Theorem 6.8 只断言结论且限实 Hermite 情形、证明正文未转录；
+      feigin-fuchs-1982 把形式直接**定义**成 PBW 基下的 Gram 矩阵）。
+      现在这一步在本推导的 sources 里**有了逐字位置**：main 上的提交 **080d7f9** 给出
+      `StringFormal.Virasoro.exists_isShapovalovFunctional_of_hwv_ne_zero`
+      （特征零域上 |c,h⟩ ≠ 0 ⇒ Shapovalov 泛函存在，构造即 level-0 坐标泛函）与
+      `exists_isContravariant_of_hwv_ne_zero`。⇒ 「该卡的 (4) ⇒ 目标的结论」这条边
+      现在是**机器检查过的**，不再是 curator 的重构。
+      ⚠ 仍然成立的限制：该卡本身是 **rigorous**（未形式化，瓶颈是 Mathlib 无 PBW），
+      故本推导的 status 上限就是 rigorous。
   - id: worldsheet.verma-module-v2
     inferred: false
     note: |
-      提供 V(c,h) 的构造、最高权关系与 **L_0 分级**（V_N 上 L_0 = h + N，且 ⨆_N V_N = V(c,h)；
-      域上还有内直和分解 `isInternal_levelSpan` 与特征子空间刻画 `levelSpan_eq_eigenspace`）。
-      分级是上一条 note 里「n < 0 时 L_n V ⊆ ⊕_{N≥1} V_N」与「f(L_0 v) = h f(v)」两步的依据，
-      也是 math.verma-module-free-over-negative-part 陈述 (3) 里 V_N 的定义处。
-      同一张卡也是目标陈述里 V(c,h)、|c,h⟩ 的定义来源。
+      提供 V(c,h) 的构造、最高权关系与 **L_0 分级**（V_N 上 L_0 = h + N；域上还有内直和
+      `isInternal_levelSpan` 与特征子空间刻画 `levelSpan_eq_eigenspace`）。
+      分级是「level-0 坐标泛函是 Shapovalov 泛函」那一步的依据，
+      也是 math.verma-module-free-over-negative-part 陈述 (3) 里 V_N 的定义处，
+      以及目标陈述里 V(c,h)、|c,h⟩ 的定义来源。
   - id: math.virasoro-anti-involution
     inferred: false
     note: |
-      提供「逆变」这一概念（伴随为 σ(L_n) = L_{−n}）。本路线不需要它的 (2) 反自同构性
-      ——那是 σ-扭对偶路线（--via-lean）才用到的；教科书路线里 σ 只需延拓成 U(Vir) 的
-      反自同构，而那一步本身也要 PBW（见 gaps (ii)）。
+      提供「逆变」这一概念（伴随为 σ(L_n) = L_{−n}）。
+      ⚠ 本路线**不**需要它的 (2) 反自同构性——那是 σ-扭对偶路线（--via-lean）才用到的；
+      教科书路线里 σ 要延拓成 U(Vir) 的反自同构，而那一步本身也要 PBW（见 gaps (iii)）。
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{exists_isShapovalovFunctional_of_hwv_ne_zero, exists_isContravariant_of_hwv_ne_zero, existsUnique_isContravariant_of_hwv_ne_zero, exists_isContravariant_iff_hwv_ne_zero, hwvFunctional, isShapovalovFunctional_hwvFunctional}"
+    note: |
+      本仓库，形式化侧提交 **080d7f9**，已在 main 上；Lean 4 + Mathlib v4.33.1。
+      **本条承载的是「输入 ⇒ 结论」那一步**：`exists_isShapovalovFunctional_of_hwv_ne_zero`
+      的假设逐字是 `(hne : hwv K c h ≠ 0)`（`[Field K] [CharZero K]`），
+      结论是 Shapovalov 泛函存在；`exists_isContravariant_of_hwv_ne_zero` 接着给出形式，
+      `existsUnique_isContravariant_of_hwv_ne_zero` 给出存在唯一。
+      ⚠ **本条不承载 `hwv ≠ 0` 本身**——那正是 depends_on 第一条（PBW，rigorous）提供的，
+      也是本推导 status 只能是 rigorous 的原因。
   - ref: schottenloher-2008
     loc: "Ch. 6 §6.3, Theorem 6.8(1), p. 96（LNP 759, pp. 91-102）"
     note: |
-      **本推导 status: rigorous 的主要背书**：该定理**无条件断言**归一化逆变型的存在唯一
-      （L1 逐字，math-sources.md §34.3）：「H : M × M → ℂ is the unique hermitian form satisfying
-      H(v₀,v₀) = 1, as well as H(L_n v, w) = H(v, L_{−n} w) and H(Zv,w) = H(v,Zw) …」。
-      **两条限制必须随引用一起写**：(a) 限 **c, h ∈ ℝ** 且 H 是 **Hermite（共轭双线性）**形式，
-      不是复 (c,h) 上的双线性型；(b) **该定理的证明正文本项目未转录**，因此「它是怎么用
-      PBW 的」未经核实（这正是上面那条边标 inferred 的原因）。
+      **文献侧对「无条件存在」的背书**（L1 逐字，math-sources.md §34.3）：
+      「H : M × M → ℂ is the unique hermitian form satisfying H(v₀,v₀) = 1, as well as
+      H(L_n v, w) = H(v, L_{−n} w) and H(Zv,w) = H(v,Zw) …」——无条件断言存在唯一。
+      **两条限制**：(a) 限 **c, h ∈ ℝ** 且 H 是 **Hermite** 形式，不是复 (c,h) 上的双线性型；
+      (b) **该定理的证明正文本项目未转录**，故「它是怎么用 PBW 的」未核实。
+      本条只作归属与旁证；论证由上一条（Lean）+ PBW 卡承载。
   - ref: feigin-fuchs-1982
     loc: "§3.2（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页）：M_{h,c}(k) 的定义与「называется формой Шаповалова」一句"
     note: |
       复 (c,h) 上双线性版本的标准出处（L1 逐页核实，math-sources.md §34.2(b)）：
       p. 57 逐字「Пусть h и c — два комплексных числа」，p. 58 把 M_{h,c}(k) 定义成
-      **PBW 基** e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用到真空 v 上所得基的 Gram 矩阵，
-      并称对应二次型为 Shapovalov 形式。⇒ 该文**默认**了 V_{h,c} 的 PBW 基与非零性，
-      即本推导的输入；它没有把存在性作为一条待证命题。
+      **PBW 基** e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用到真空 v 上所得基的 Gram 矩阵。
+      ⇒ 该文**默认**了 V_{h,c} 的 PBW 基与非零性，即本推导的输入；
+      它没有把存在性当作一条待证命题。
   - ref: kac-1979
     loc: "pp. 441-445（内部编号未核实，不得写 Theorem 1）"
     note: |
@@ -62,63 +69,66 @@ sources:
       （Springer 认证墙 + archive.org 无 LNP 94 那卷，math-sources.md §34.1、§34.10 Q23）。
       本条只承载归属，**不承载论证**。
 summary: |
-  **教科书路线**（本卡的第二条推导，与 --via-lean 并列；两者结论相同，输入完全不同）。
+  **兑现假设的路线**（本卡的第二条推导，与 --via-lean 并列）。它与 --via-lean 的分工很清楚：
+  --via-lean 证的是**条件命题**（给定 Shapovalov 泛函 / 给定 V(c,h) ≠ 0 则如何），
+  本推导则**提供那个条件**。
 
-  设 F 是特征零的域，取 math.verma-module-free-over-negative-part：V(c,h) 作为 U(vir₋)-模
-  自由、秩 1，PBW 基由 1 ≤ n_1 ≤ … ≤ n_m 指标，dim_F V_N = p(N)，特别地 V(c,h) ≠ 0。
+  设 F 是特征零的域。math.verma-module-free-over-negative-part 的 (2)(3) 给出 PBW 基与
+  dim_F V_N = p(N)，其 N = 0 情形 p(0) = 1 给出 dim_F V_0 = 1，故 (4)：**|c,h⟩ ≠ 0**。
 
-  **第 1 步（本路线的全部内容）：造出 Shapovalov 泛函。** N = 0 时 p(0) = 1，故
-  V_0 = F·|c,h⟩ 是一维，且 PBW 基给出 V(c,h) = F·|c,h⟩ ⊕ (⊕_{N ≥ 1} V_N)。
-  令 f : V(c,h) → F 为「取 |c,h⟩ 分量的系数」这个线性泛函。逐条验证目标里的三条：
-  f(|c,h⟩) = 1；n < 0 时 L_n 把 V_N 送进 V_{N+|n|} ⊆ ⊕_{N ≥ 1} V_N，故 f(L_n v) = 0；
-  L_0 在 V_N 上是标量 h + N，故 f(L_0 v) = h·f(v)（只有 N = 0 分量对 f 有贡献）。
+  代入目标 (4) 的「⟸」方向（Lean 的 `exists_isShapovalovFunctional_of_hwv_ne_zero`
+  → `exists_isContravariant_of_hwv_ne_zero`）：level 分解给出投影 V(c,h) ↠ V_0 = F·|c,h⟩，
+  其坐标泛函 f₀ 是 Shapovalov 泛函（n < 0 时 L_n 把 V_N 送进 V_{N+|n|}，N + |n| ≥ 1 故被 f₀ 杀掉；
+  L_0 在 V_N 上是 h + N 故 f₀(L_0 v) = h f₀(v)），再由目标 (1) 得归一化逆变型 B，
+  由 worldsheet.shapovalov-form-uniqueness 它唯一。
 
-  **第 2 步：代入目标 (1)。** 由目标陈述的条件构造（万有性质 + σ-扭对偶），f 给出唯一的
-  归一化逆变型 B。于是目标 (2) 的两边都成立（等价式自动为真），(3) 的结论 V(c,h) ≠ 0
-  由输入卡的 (4) 直接给出。⇒ 目标 (1)(2)(3) 全部成立。
+  ⇒ 目标各条在 F 上全部成立且**非空洞**：(3) 的结论 |c,h⟩ ≠ 0 被证；
+  (2) 与 (4) 的两边都为真，等价式非空洞地成立。
 
   **等价的教科书说法**（同一件事的另一种包装）：由三角分解
   U(Vir) = U(vir₋) ⊗ U(vir₀) ⊗ U(vir₊) 取 Harish-Chandra 投影 χ : U(Vir) → U(vir₀) = F[L_0, C] → F
   （L_0 ↦ h、C ↦ c），令 ⟨u·|c,h⟩, w·|c,h⟩⟩ := χ(σ(u) w)。良定义性正是 V(c,h) ≅ U(vir₋)
-  （即输入卡的 (1)），而 χ ∘ σ 限制在 U(vir₋) 上就是第 1 步的 f。
+  （输入卡的 (1)），而 χ ∘ σ 限制到 U(vir₋) 上就是上面的 f₀。
   **两种说法用的是同一条输入（PBW），不是两条独立论证。**
 
-  **本路线相对 --via-lean 的净增量**：它**兑现**了目标 (1) 的假设，从而在 F = C 上给出
-  **无条件**的存在性。⚠ 但那条更强的结论**不是本卡的陈述**（本卡【不断言】(a) 明确排除），
+  **本路线的净增量**：它在 F 上给出**无条件**的存在性。
+  ⚠ 那条更强的结论**不是本卡的陈述**（本卡【不断言】(a) 明确排除），
   因此它在图上目前**没有承载节点**；见 notes。
 gaps:
   - |
-    (i) **基环比目标窄**。输入卡设在特征零的**域** F 上（PBW 的标准前提），
-    目标卡设在任意交换 ℚ-代数 R 上。故本推导只证到 R = F 的情形；
-    一般 ℚ-代数上的存在性**本推导不给**（--via-lean 的条件构造则对任意 ℚ-代数成立）。
+    (i) **目标 (1) 的显式构造不由本路线证明**。(1) 是条件命题「给定 Shapovalov 泛函 f，
+    则 Φ_f 给出的 B 逆变且归一化」，其内容与 f 从哪来无关，由 --via-lean（机器检查）承载；
+    本路线**引用**它而不重证。本路线真正贡献的是 (3) 的结论与 (2)(4) 的非空洞性。
   - |
-    (ii) **σ 延拓到 U(Vir) 这一步本身也要 PBW**。教科书写法里 σ(u)（u ∈ U(Vir)）默认了
+    (ii) **基环比目标窄**。输入卡设在特征零的**域** F 上（PBW 的标准前提），
+    目标卡的 (1)(2)(3) 设在任意交换 ℚ-代数 R 上。故本推导只覆盖 R = F（含物理情形 F = C）。
+    一般 ℚ-代数上「|c,h⟩ ≠ 0 ⇒ 泛函存在」本身也仍 open（见 --via-lean 的 gaps (ii)）。
+  - |
+    (iii) **σ 延拓到 U(Vir) 这一步本身也要 PBW**。教科书写法里 σ(u)（u ∈ U(Vir)）默认了
     σ 沿泛包络代数的反自同构延拓；math.virasoro-anti-involution 明确**不断言**这一条
-    （其【不断言】(a)）。本推导的第 1 步写法（系数泛函）绕开了它，
-    但「Harish-Chandra 投影」那种包装没有绕开。图上没有承载「σ 延拓到 U(Vir)」的节点。
+    （其【不断言】(a)）。上面「坐标泛函」的写法绕开了它，
+    但「Harish-Chandra 投影」那种包装没有绕开。图上没有承载这一步的节点。
   - |
-    (iii) **目标 (2) 的 «(i) ⇒ (ii)» 与 (3) 在本路线里是搭车的**。本路线的实质只有第 1 步；
-    那两条是三行初等论证（取 f := B(|c,h⟩,·)；|c,h⟩ = 0 给 1 = 0），
-    在 --via-lean 里已被机器检查。本推导不重复它们的论证，只声明它们成立。
-    ⇒ 若有人只信本推导，(2)(3) 的严格性实际由 --via-lean 承担。
-  - |
-    (iv) **来源不覆盖论证本身**。见 depends_on 里 `inferred: true` 的理由：
+    (iv) **来源不覆盖「PBW ⇒ V(c,h) ≠ 0」以外的历史论证**。
     schottenloher-2008 Theorem 6.8 只断言结论（且限实 Hermite 情形，证明正文未转录），
     feigin-fuchs-1982 把形式定义成 PBW 基下的 Gram 矩阵（默认存在性）。
-    「PBW ⇒ Shapovalov 泛函」的三行是 curator 的重构。
-    **本推导标 rigorous 的依据是结论本身在数学文献里被无条件断言（Thm 6.8），
-    不是这三行重构。** reviewer 若不接受这一点，正确的降级目标是本推导而不是 --via-lean。
+    本推导的严格性由「输入卡（rigorous）+ Lean 的 `exists_isContravariant_of_hwv_ne_zero`」
+    这两段拼成，**不依赖**上述两条文献的证明细节。
 notes: |
   【本推导为什么挂在这张卡上，而不是新建一张「无条件存在性」卡】
-  它证明的是与 --via-lean 同一个目标（(1)(2)(3)），只是输入完全不同：
-  --via-lean 的输入是「假设有 Shapovalov 泛函」，本推导的输入是 PBW。
+  它与 --via-lean 目标相同，只是输入不同：--via-lean 的输入是假设，本推导的输入是 PBW。
   按 docs/STATUS_LEVELS.md「一个节点若有多条推导，取最强的那条」，本卡的有效状态仍由
-  --via-lean 给出的 `formalized` 决定，本推导不会拖低它，也**不会**把本卡变成
+  --via-lean 的 `formalized` 决定，本推导不会拖低它，也**不会**把本卡变成
   「无条件存在性」——那条更强的陈述在图上暂无节点。
   **若日后需要它**（例如 worldsheet.kac-determinant 要显式声明「形式存在」这一前提），
   正确做法是新建 worldsheet.shapovalov-form-unconditional-existence
-  （rigorous，depends_on math.verma-module-free-over-negative-part），
+  （rigorous，depends_on math.verma-module-free-over-negative-part 与本卡），
   而不是改本卡的陈述文本（项目原则 1）。
+
+  【2026-09-11 的变化】main 的 080d7f9 之后，本推导里唯一未被机器检查的一步就是输入本身
+  （V(c,h) ≠ 0 = PBW）。此前还差「PBW ⇒ Shapovalov 泛函」那一段 curator 重构，
+  现在它是 Lean 的 `exists_isShapovalovFunctional_of_hwv_ne_zero`，
+  故第一条 depends_on 已由 `inferred: true` 改为 `false`。
 
   【历史】逆变形式是 kac-1979（LNP 94, pp. 441-445，标题即「Contravariant form for
   infinite-dimensional Lie algebras and superalgebras」）的主题；该文正文本项目未获取，

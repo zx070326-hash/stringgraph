@@ -1,10 +1,11 @@
 id: worldsheet.shapovalov-form-existence
 kind: proposition
-title: Shapovalov 形式的存在性等价于「Shapovalov 泛函」的存在，并蕴含 V(c,h) ≠ 0；给定泛函则形式由 σ-扭对偶显式构造
+title: Shapovalov 形式的存在性：⟺ Shapovalov 泛函存在（任意 ℚ-代数）；特征零域上 ⟺ V(c,h) ≠ 0，且此时唯一
 statement: |
   设 R 是交换环且是 ℚ-代数，(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
   （worldsheet.verma-module-v2），|c,h⟩ 是最高权向量，σ 是 Virasoro 反对合
-  （math.virasoro-anti-involution）。「逆变型」的定义见 worldsheet.shapovalov-form-uniqueness。
+  （math.virasoro-anti-involution）。「逆变型」的定义见 worldsheet.shapovalov-form-uniqueness；
+  称逆变型 B **归一化**，若 B(|c,h⟩, |c,h⟩) = 1。
 
   称 R-线性泛函 f : V(c,h) → R 是 **Shapovalov 泛函**，若
 
@@ -14,109 +15,132 @@ statement: |
   权为 (c,h)，且在 |c,h⟩ 上取值 1。σ-扭对偶对**任意** ℚ-代数 R 都是 Virasoro 模，
   不需要分级、不需要有限性。）
 
-  **(1) 条件构造**：设 f 是 Shapovalov 泛函。则
+  **(1) 条件构造（任意 ℚ-代数 R）**：设 f 是 Shapovalov 泛函。则
 
       B(x, y) := (Φ_f(x))(y),    Φ_f : V(c,h) → V(c,h)* 是万有性质给出的唯一 Virasoro 等变映射
                                   且 Φ_f(|c,h⟩) = f（对偶取 σ-扭作用）
 
-  是逆变双线性型且 B(|c,h⟩, |c,h⟩) = 1。逆变性直接来自 Φ_f 的等变性。
+  是归一化逆变双线性型。逆变性直接来自 Φ_f 的等变性。
   结合 worldsheet.shapovalov-form-uniqueness，这样的 B **存在且唯一**。
 
-  **(2) 等价**：以下两件事互相蕴含：
-      (i) 存在归一化逆变型 B（即 B 逆变且 B(|c,h⟩,|c,h⟩) = 1）；
-      (ii) 存在 Shapovalov 泛函 f。
+  **(2) 等价（任意 ℚ-代数 R）**：以下两件事互相蕴含：
+      (i) 存在归一化逆变型 B；   (ii) 存在 Shapovalov 泛函 f。
       «(ii) ⇒ (i)» 是 (1)。«(i) ⇒ (ii)» 取 f := B(|c,h⟩, ·)：三条性质分别由归一化、
       n > 0 时 L_n|c,h⟩ = 0 与 L_0|c,h⟩ = h|c,h⟩ 经逆变性读出。
-      ⇒ 「Shapovalov 泛函存在」**不只是**构造的充分条件，它与结论**等价**，
-      因此这条假设**不可去**、也不可能被更弱的假设替代。
+      ⇒ 「Shapovalov 泛函存在」**不只是**构造的充分条件，它与结论**等价**。
 
-  **(3) 必要条件 V(c,h) ≠ 0**：设 R 非平凡（1 ≠ 0）。若存在归一化逆变型 B，则
+  **(3) 必要条件 V(c,h) ≠ 0（任意非平凡 R）**：若存在归一化逆变型 B，则
 
       |c,h⟩ ≠ 0，     特别地 V(c,h) ≠ 0。
 
       （一行：|c,h⟩ = 0 会给 1 = B(0,0) = 0。）
-      ⇒ 由 (2)，任何对 Shapovalov 形式的无条件构造都必须先证 V(c,h) ≠ 0。
+
+  **(4) 特征零域上的完全回答**：设 K 是**特征零的域**，(c, h) ∈ K²。则
+
+      存在归一化逆变型 B   ⟺   |c,h⟩ ≠ 0   （⟺ V(c,h) ≠ 0），
+
+  且此时 B **唯一**。
+      «⇒» 是 (3)。«⇐» 是构造：level 分解 V(c,h) = ⨁_{N ≥ 0} V_N（worldsheet.verma-module-v2
+      在域上的内直和）给出投影 V(c,h) ↠ V_0，而 **V_0 = K·|c,h⟩**（对任意 ℚ-代数 R 都有
+      V_0 = R·|c,h⟩），故 |c,h⟩ ≠ 0 时 V_0 是一维，其坐标泛函 f_0 有定义。
+      f_0 是 Shapovalov 泛函：f_0(|c,h⟩) = 1 由定义；n < 0 时 L_n 把 V_N 送进 V_{N+|n|}
+      而 N + |n| ≥ 1，故 f_0(L_n v) = 0；L_0 在 V_N 上是 h + N，只有 N = 0 分量对 f_0 有贡献，
+      故 f_0(L_0 v) = h f_0(v)。再用 (2)。
+      ⇒ **在特征零域上，Shapovalov 形式存在性的唯一未决输入是 V(c,h) ≠ 0**
+      （即 math.verma-module-free-over-negative-part 的 (4)，其瓶颈是 PBW）。
 
   【本节点明确**不**断言】
-  (a) **无条件存在性**。即：本卡**不**断言「对每个 (c,h) 都存在 Shapovalov 形式」，
-      也不断言 V(c,h) ≠ 0。后者是 math.verma-module-free-over-negative-part 的 (4)
-      （rigorous，未形式化，其瓶颈是 Mathlib 无 PBW）。本卡的 (3) 说明二者不可绕开：
-      **在 V(c,h) ≠ 0 被证明之前，「Shapovalov 形式」这个对象的存在性在本图里是有条件的。**
-  (b) 唯一性（那是 worldsheet.shapovalov-form-uniqueness，且它无条件）。
-  (c) 任何 Gram 矩阵或行列式公式（见 worldsheet.kac-determinant-level-two、
+  (a) **V(c,h) ≠ 0 本身**。(3)(4) 把存在性归结到它，但不证明它；那是
+      math.verma-module-free-over-negative-part 的 (4)（rigorous，未形式化，瓶颈是 Mathlib 无 PBW）。
+      ⇒ 本卡**不**断言「对每个 (c,h) 都存在 Shapovalov 形式」。
+  (b) **一般 ℚ-代数 R 上「|c,h⟩ ≠ 0 ⇒ 存在」**。(4) 的构造用到 level 内直和分解，
+      而后者只在特征零的域上证到（level 分量靠 L_0 本征值 h + N 分离，一般 R 上这些标量
+      未必可区分）。一般 R 上本卡只给 (1)(2)(3)。
+  (c) 唯一性的独立内容（那是 worldsheet.shapovalov-form-uniqueness，且它无条件）。
+  (d) 任何 Gram 矩阵或行列式公式（见 worldsheet.kac-determinant-level-two、
       worldsheet.kac-determinant）。
-  (d) ker B 是极大真子模、V/ker B 不可约（对照 schottenloher-2008 Theorem 6.8(3)）。
-  (e) 任何 Hermite 化、正定性或酉性结论；B 是 R-双线性型。
-  (f) 经三角分解 U(Vir) = U(vir₋) ⊗ U(vir₀) ⊗ U(vir₊) 与 Harish-Chandra 投影
-      U(Vir) → U(vir₀) → R 的**教科书构造**。那条路线需要 PBW；本卡 (1) 走的是
-      σ-扭线性对偶，**完全不用 PBW、不用分级、不用有限性**，代价是把全部未证内容
-      压进「Shapovalov 泛函存在」这一条假设里（由 (2)，这个代价是最优的）。
+  (e) ker B 是极大真子模、V/ker B 不可约（对照 schottenloher-2008 Theorem 6.8(3)）。
+  (f) 任何 Hermite 化、正定性或酉性结论；B 是 R-双线性型。
+  (g) 经三角分解 U(Vir) = U(vir₋) ⊗ U(vir₀) ⊗ U(vir₊) 与 Harish-Chandra 投影的**教科书构造**。
+      那条路线需要 PBW；本卡 (1) 走 σ-扭线性对偶，(4) 走 level 分解的坐标泛函，
+      **两者都不用 PBW**，未证内容被压进「V(c,h) ≠ 0」这一条（由 (4)，在域上这是最优的）。
 uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
 formal:
-  lean_decl: StringFormal.Virasoro.exists_isContravariant_iff
+  lean_decl: StringFormal.Virasoro.exists_isContravariant_iff_hwv_ne_zero
   lean_file: StringFormal/Virasoro/Shapovalov.lean
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{lie_cgen_eq, ContraDual, IsShapovalovFunctional, IsShapovalovFunctional.isHighestWeightVector, shapovalov, shapovalov_apply, shapovalov_hwv_hwv, shapovalov_isContravariant, existsUnique_isContravariant, hwv_ne_zero_of_isContravariant, isShapovalovFunctional_of_isContravariant, exists_isContravariant_iff}"
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{lie_cgen_eq, ContraDual, IsShapovalovFunctional, IsShapovalovFunctional.isHighestWeightVector, shapovalov, shapovalov_apply, shapovalov_hwv_hwv, shapovalov_isContravariant, existsUnique_isContravariant, hwv_ne_zero_of_isContravariant, isShapovalovFunctional_of_isContravariant, exists_isContravariant_iff, levelSpan_zero, hwv_mem_levelSpan_zero, posLevelSpan, isCompl_levelSpan_zero, lie_lgen_mem_posLevelSpan, hwvFunctional, hwvFunctional_hwv, hwvFunctional_lie_lgen_of_neg, hwvFunctional_lie_lgen_zero, isShapovalovFunctional_hwvFunctional, exists_isShapovalovFunctional_of_hwv_ne_zero, exists_isContravariant_of_hwv_ne_zero, exists_isContravariant_iff_hwv_ne_zero, existsUnique_isContravariant_of_hwv_ne_zero}；level 移位 formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg, isInternal_levelSpan, levelSpan_iSupIndep}"
     note: |
-      本仓库，形式化侧提交 **1731c49**（构造）与 **bbc1354**（"formal: show the Shapovalov
-      functional hypothesis is equivalent to existence of the form"，即 (2) 的 «(i) ⇒ (ii)» 一半），
-      由 lead 以 **b95a406** 合入 main；Lean 4 + Mathlib v4.33.1。逐句对应：
-      - Shapovalov 泛函 → `IsShapovalovFunctional`（三个字段 apply_hwv / apply_lie_neg /
-        apply_lie_zero 与陈述里的三条一一对应）；「等价地是 σ-扭对偶的最高权向量」→
-        `IsShapovalovFunctional.isHighestWeightVector`（用到 `lie_cgen_eq`：C 在 V 上是标量 c）；
-      - σ-扭对偶 → `ContraDual`（类型同义词，因为 Mathlib 的 `Module.Dual.instLieRingModule`
-        已在同一类型上放了**未扭**的余伴随作用）；
-      - (1) → `shapovalov`（定义为 `ContraDual.toLinₗ ∘ vermaLift …`）、`shapovalov_hwv_hwv`
-        （归一化）、`shapovalov_isContravariant`（逆变性）、`existsUnique_isContravariant`（存在唯一）；
-      - (2) → `exists_isContravariant_iff`（本卡 formal.lean_decl），
-        其 «(i) ⇒ (ii)» 半由 `isShapovalovFunctional_of_isContravariant` 给出；
-      - (3) → `hwv_ne_zero_of_isContravariant`（假设 `[Nontrivial R]`）。
-      文件头 Status 段自述「No `sorry`, no new axioms」，第 1 条 gap 逐字说明存在性是条件的。
-      **curator 未自行重跑 `lake build`**；依据是该自述、formal/TODO.md 的 `shapovalov-form`
-      勾选与 b95a406 已在 main 上。合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      本仓库，形式化侧提交 **1731c49**（σ-扭对偶与条件构造）、**bbc1354**（(2) 的「(i) ⇒ (ii)」）
+      与 **080d7f9**（(4)：特征零域上的 iff）；前两者经 lead 的 **b95a406** 合入 main，
+      080d7f9 亦已在 main 上。Lean 4 + Mathlib v4.33.1。逐句对应：
+      - Shapovalov 泛函 → `IsShapovalovFunctional`（三字段与陈述三条一一对应）；
+        「σ-扭对偶的最高权向量」→ `IsShapovalovFunctional.isHighestWeightVector`（用 `lie_cgen_eq`）；
+      - σ-扭对偶 → `ContraDual`（类型同义词，避开 Mathlib `Module.Dual.instLieRingModule` 的未扭作用）；
+      - (1) → `shapovalov`、`shapovalov_hwv_hwv`、`shapovalov_isContravariant`、
+        `existsUnique_isContravariant`；
+      - (2) → `exists_isContravariant_iff`，其「(i) ⇒ (ii)」半是 `isShapovalovFunctional_of_isContravariant`；
+      - (3) → `hwv_ne_zero_of_isContravariant`（假设 `[Nontrivial R]`）；
+      - **(4) → `exists_isContravariant_iff_hwv_ne_zero`（本卡 formal.lean_decl，`[Field K] [CharZero K]`）**，
+        存在唯一的合并版是 `existsUnique_isContravariant_of_hwv_ne_zero`；构造链为
+        `levelSpan_zero`（V_0 = R·|c,h⟩，**任意 ℚ-代数**）→ `isCompl_levelSpan_zero`
+        （由 `isInternal_levelSpan` / `levelSpan_iSupIndep`，**域 + 特征零**）→ `hwvFunctional`
+        （level-0 坐标泛函）→ `isShapovalovFunctional_hwvFunctional`
+        （三条性质：`hwvFunctional_hwv`、`hwvFunctional_lie_lgen_of_neg`（经
+        `lie_lgen_mem_posLevelSpan` ← `lie_lgen_mem_levelSpan_of_neg`）、`hwvFunctional_lie_lgen_zero`）。
+      文件头 Status 段自述「No `sorry`, no new axioms」，其第 1 条 gap 逐字说明
+      一般 R 上「|c,h⟩ ≠ 0 是否也充分」未定（level 分量靠 L_0 本征值 h + N 分离）。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
   - ref: schottenloher-2008
     loc: "Ch. 6 §6.3, Theorem 6.8(1), p. 96（LNP 759, pp. 91-102）"
     note: |
       文献侧最接近的带编号来源（L1 逐页核实，math-sources.md §34.3）：
       「H : M × M → ℂ is **the unique hermitian form** satisfying H(v₀,v₀) = 1, as well as
       H(L_n v, w) = H(v, L_{−n} w) …」——即**无条件**断言存在唯一。
-      **三处差别（不可当作本卡的论证来源）**：(i) 限 c, h ∈ ℝ 且是 Hermite 形式；
-      (ii) 存在性在那里是无条件的，因为该书默认 M(c,h) ≠ 0（Verma 模非零被当作已知，
-      背后是 PBW）——本卡 (3) 正是把这条隐含前提挖出来；(iii) 该书未给出本卡 (2) 的等价刻画。
+      **三处差别（不可直接当作本卡的论证来源）**：(i) 限 c, h ∈ ℝ 且是 Hermite 形式；
+      (ii) 存在性在那里是无条件的，因为该书默认 M(c,h) ≠ 0（背后是 PBW）——本卡 (3)(4)
+      正是把这条隐含前提挖出来并证明它是**充要**的；(iii) 该书未给本卡 (2)(4) 的等价刻画。
   - ref: feigin-fuchs-1982
     loc: "§3.2（俄文原刊第 58 页）：M_{h,c}(k) 的定义与「называется формой Шаповалова」"
     note: |
       文献侧对照。FF 把 Shapovalov 形式直接定义成 **PBW 基**下的 Gram 矩阵，
-      即默认了本卡【不断言】(f) 的那条教科书路线与 V(c,h) ≠ 0（L1，math-sources.md §34.2(b)）。
+      即默认了本卡【不断言】(g) 的教科书路线与 V(c,h) ≠ 0（L1，math-sources.md §34.2(b)）。
 tags: [cft, representation-theory, verma-module, shapovalov, virasoro, formalized]
 notes: |
-  【为什么本卡的标题写成「等价 + 蕴含」而不是「存在性」——最要紧的一条】
-  formalizer 在 Shapovalov.lean 文件头 "Route assessment" 第 2 点逐字写：
-  "**no** unconditional construction of the normalised Shapovalov form is possible from what is
+  【★ 陈述沿革（2026-09-11，同一分支内，定稿前）】本卡首版（本分支提交 dfd7fbe）只写到 (1)(2)(3)，
+  因为当时 Lean 侧只有「存在 ⟺ 存在 Shapovalov 泛函」。lead 随后把 main 上的
+  **080d7f9** 通知本任务：Lean 已补上特征零域上的 **iff V(c,h) ≠ 0**，本卡遂在**合并进 main 之前**
+  按 lead 指示把 (4) 写入陈述、lean_decl 改指 `exists_isContravariant_iff_hwv_ne_zero`。
+  ⚠ 这不构成对项目原则 1（陈述不可变）的例外：本卡**从未进入 main**，也无任何 main 上的
+  节点依赖它。**一旦本分支合并，本卡的 statement 文本即冻结**；此后要改只能新建 v2 + superseded_by。
+
+  【为什么标题写「⟺」而不是「存在」——最要紧的一条】
+  Lean 里被机器检查的是**等价与条件构造**，不是「Shapovalov 形式存在」。
+  V(c,h) ≠ 0 仍未证（math.verma-module-free-over-negative-part 的 (4)，rigorous）。
+  把无条件存在性写进本卡会让 formalized 变成假话。
+  formalizer 在 Shapovalov.lean 文件头逐字写过：
+  "no unconditional construction of the normalised Shapovalov form is possible from what is
   currently in this repository; the honest formalisation is the conditional one."
-  本卡照此叙述：Lean 里被机器检查的是**条件构造 + 等价 + 必要性**，
-  不是「Shapovalov 形式存在」。把后者写进本卡会让 formalized 变成假话。
-  无条件存在性由本卡的推导 --via-pbw 承载（rigorous，经
-  math.verma-module-free-over-negative-part），它给的是**同一张卡的第二条路线**，
-  并在其 notes 里记明它还额外给出本卡不断言的无条件存在性。
+  080d7f9 之后这句仍然成立，只是**未决输入从「Shapovalov 泛函存在」收缩到了「V(c,h) ≠ 0」**
+  ——后者是图上早已有卡、有来源、有明确瓶颈（PBW）的对象。这是本轮最大的净增量。
 
   【formalizer 的第 4 点：教科书「定义」在 V(c,h) = 0 时是空的】
   教科书写「Shapovalov 形式由 ⟨u·v_h, w·v_h⟩ := χ(σ(u) w) 定义」，其良定义性依赖
-  「u ↦ u·v_h 的核恰是左理想 J(c,h)」，而这正是 V(c,h) ≅ U(vir₋) 的自由性（PBW）。
+  「u ↦ u·v_h 的核恰是左理想 J(c,h)」，即 V(c,h) ≅ U(vir₋) 的自由性（PBW）。
   若 V(c,h) = 0，那条公式定义的是零空间上的空形式，**归一化 ⟨v_h,v_h⟩ = 1 无法满足**。
-  ⇒ 「Shapovalov 形式的存在」与「V(c,h) ≠ 0」在逻辑上是**捆绑**的（本卡 (3) 是这个捆绑的
-  一半，另一半由 PBW 给出）。任何号称「先定义形式、再由形式证 V ≠ 0」的写法都是循环的。
-  这条观察对图的意义：**worldsheet.kac-determinant 不可能比
-  math.verma-module-free-over-negative-part 更强**——行列式公式预设了形式存在、
-  预设了 level N 有 p(N) 维的基。
+  ⇒ 「Shapovalov 形式存在」与「V(c,h) ≠ 0」在逻辑上**捆绑**；本卡 (4) 把这个捆绑
+  在特征零域上证成了**等价**。任何「先定义形式、再由形式证 V ≠ 0」的写法都是循环的。
+  对图的意义：**worldsheet.kac-determinant 不可能比 math.verma-module-free-over-negative-part
+  更强**——行列式公式预设了形式存在、预设了 level N 有 p(N) 维的基。
 
-  【σ-扭对偶为什么能绕过 PBW】全对偶 V(c,h) →ₗ R 带 σ-扭作用对任意 ℚ-代数都是 Virasoro 模
-  （无分级、无有限性要求），于是「构造形式」被化归为「在这个模里找一个权 (c,h) 的最高权向量」；
-  再由 Verma 模的万有性质一步得到形式。教科书的 Harish-Chandra 投影则要先有三角分解。
-  两条路线的差别不是技巧问题：前者把未证部分**精确隔离**成一条假设，且由 (2) 这条假设是最优的。
+  【两条路线为什么都绕过了 PBW】(1) 用全对偶 V(c,h) →ₗ R 带 σ-扭作用（对任意 ℚ-代数都是
+  Virasoro 模，无分级、无有限性），把「构造形式」化归为「找一个权 (c,h) 的最高权向量」，
+  再由万有性质一步得到形式。(4) 用 level 分解取 V_0 = K·|c,h⟩ 的坐标泛函。
+  教科书的 Harish-Chandra 投影则要先有三角分解。**差别不是技巧问题**：
+  这两条把未证部分精确隔离成一条假设，且 (2)(4) 证明了这条假设是最优的。
 
   【记号】本图记 V(c,h)、|c,h⟩（conv.verma-module-notation）。Lean 侧 `hwv R c h`。
-  Kytölä 的 VirasoroProject **没有**这个构造（math-sources.md §34.7）。
+  Kytölä 的 VirasoroProject **没有** Shapovalov 形式（math-sources.md §34.7）。
 author: curator
 created: "2026-09-11"
