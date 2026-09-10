@@ -3,7 +3,14 @@ target: worldsheet.weight-zero-primary-constant
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.descendant-weight-grading
+  - id: worldsheet.descendant-weight-grading-v2
+    inferred: false
+    note: |
+      2026-09-11 由 worldsheet.descendant-weight-grading 改指（那张卡已 superseded_by v2）。
+      本推导用到的只是「L_{−1}|O⟩ 的 L_0 本征值是 h_O + 1」这类本征值计算，
+      v2 逐字包含且更一般（任意 Virasoro 模、只要 L_0 v = h v）；
+      本推导**不**用旧卡末句的 ⊕ 分解（那句已知在一般基环上错，见旧卡 notes），
+      它需要的「每个态要么是最高权态要么是 descendant」这一分解由幺正性承担，见 gaps。
   - id: worldsheet.primary-field
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.state-operator-isomorphism
@@ -26,7 +33,8 @@ gaps:
      引用本节点时须自行检查幺正性前提。"
   - "论证经 worldsheet.state-operator-isomorphism 在态与算子之间来回（『L_{-1}|O⟩ = 0 即 ∂O = 0』），
      继承其 physical-argument 状态。已改为**显式依赖**（见 depends_on）：
-     worldsheet.descendant-weight-grading 现已改写为纯表示论命题，不再代为承载这条依赖。"
+     worldsheet.descendant-weight-grading 现已改写为纯表示论命题，不再代为承载这条依赖。
+     （2026-09-11：该卡已 superseded_by worldsheet.descendant-weight-grading-v2，本推导已改指 v2。）"
   - "Polchinski 在此处的具体论证路线未核实（只核实了 (2.9.15) 的式号与标题）；
      本 summary 复述的是标准论证。"
 author: curator-polchinski-ch2-3

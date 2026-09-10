@@ -18,8 +18,12 @@ depends_on:
     note: |
       提供目标陈述中的对象 S(k)（= S ∩ ker(L_0 − a)）与 N(k) = H_phys(k) ∩ S(k) 本身。
       2026-09-11 由 worldsheet.ocq-spurious-states 换代而来（那张卡已 superseded_by 本卡）。
-      **Lean 侧没有这个带质量壳的子模**，故该定义卡是 rigorous；
-      这是本推导 status: formalized 而目标节点有效状态为 rigorous 的**全部**原因，见 notes。
+      **已过期的旧记账（保留原文）**：「Lean 侧没有这个带质量壳的子模，故该定义卡是 rigorous；
+      这是本推导 status: formalized 而目标节点有效状态为 rigorous 的全部原因。」
+      **现状（2026-09-11 下午）**：SpuriousShell.lean（提交 4cc9f02）已给出该子模
+      `Fock.spuriousShell η a a₀ := spuriousSubmodule η a ⊓ ker (Lop η a 0 − a₀ • id)`，
+      那张定义卡已改 status: formalized 并填上 formal.lean_decl，本条天花板因此消失。
+      下面 gaps (ii) 里「限制到质量壳那一步不在 Lean 里」也已失效，见那里的补记。
   - id: worldsheet.old-covariant-physical-states
     inferred: false
     note: |
@@ -97,6 +101,14 @@ gaps:
     本推导改为经后者取用 Lean 结论，再限制到质量壳。目标陈述本身仍带质量壳，故本条缺口
     对**本**推导仍在（限制那一步不在 Lean 里），只是不再阻塞下游：
     需要无壳版本的下游（worldsheet.physical-states-level-one--via-lean）现直接引新卡。
+    **2026-09-11 下午补记：本条已失效。** SpuriousShell.lean 既给了带质量壳的子模
+    `Fock.spuriousShell`，也给了「限制」这一步的具名引理：
+    `Fock.spuriousShell_le_spuriousSubmodule`（S(k) ⊆ S）与
+    `Fock.spuriousShell_le_orthComplement`（S(k) ⊥ H_phys，即目标陈述 (1)），
+    以及 `Fock.nullStates_le_nullSubmodule`（目标陈述 (2) 前半）。
+    本推导的 depends_on 与 summary 本次**未重接**（仍走无壳卡再限制），因为那条路径与 summary
+    逐字一致；若 reviewer 希望直接调用 `spuriousShell_le_orthComplement`，正确做法是新建一条
+    `--via-lean-onshell` 推导，而不是改本条的 summary。
   - |
     (iii) **双线性型而非 Hermitian 形式**（继承 worldsheet.virasoro-generators-adjoint--via-lean
     的 gaps (i)、worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
@@ -113,12 +125,26 @@ notes: |
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
 
-  【有效状态是 rigorous 不是 formalized，这是正确记账】本推导 status: formalized，但目标节点的
-  有效状态被依赖 worldsheet.ocq-spurious-states-v2（定义卡，status: rigorous）压到 rigorous。
-  原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，与 Lean 的 `Fock.spuriousSubmodule` 不重合，
-  故没填 formal.lean_decl；本推导实际用的是 Lean 那个更大的子模，再限制回 S(k)。
-  按 docs/STATUS_LEVELS.md 对 definition 传播的规定，这正是希望看到的行为：
-  「Lean 证明用的对象若与卡片定义不逐句一致（如缺质量壳条件），命题就不该显示为 formalized」。
+  【已过期的记账（保留原文）：有效状态是 rigorous 不是 formalized】
+    「本推导 status: formalized，但目标节点的有效状态被依赖 worldsheet.ocq-spurious-states-v2
+     （定义卡，status: rigorous）压到 rigorous。原因同上 gaps (ii)：那张卡的 S(k) 带质量壳条件，
+     与 Lean 的 `Fock.spuriousSubmodule` 不重合，故没填 formal.lean_decl；本推导实际用的是 Lean
+     那个更大的子模，再限制回 S(k)。按 docs/STATUS_LEVELS.md 对 definition 传播的规定，
+     这正是希望看到的行为。」
+
+  【现状（2026-09-11 下午，curator）：天花板已消失，目标节点回到 formalized】
+  formalizer 在 4cc9f02 新建 SpuriousShell.lean，把带质量壳的 S(k) 与 N(k) 逐字写成 Lean 定义
+  （`Fock.spuriousShell` / `Fock.nullStates`），故 worldsheet.ocq-spurious-states-v2 改为
+  status: formalized。本推导的 status 与 depends_on 未动，但
+  `stringgraph status worldsheet.spurious-orthogonal-to-physical` 现在报 effective: formalized。
+
+  ⚠ **留给 reviewer / lead 的一条诚实保留**：天花板一消，本节点就以 formalized 报出，
+  而上面 gaps (i)（陈述 (2) 后半：「加零态不改变内积」与「商空间 H_phys/N 上的诱导形式良定义」
+  在 Lean 里没有具名引理）**仍然存在**。即：本节点的 formalized 覆盖陈述 (1) 与 (2) 前半，
+  不覆盖 (2) 后半。按 docs/STATUS_LEVELS.md 的精神，干净的做法是**再拆一次**：
+  把 (2) 后半单列为一张卡（目前只能是 rigorous），本卡只留 (1) + (2) 前半；**或**把本推导降为
+  rigorous。curator 本次未动陈述文本也未拆卡（超出本次任务范围，且两种修法都影响下游引用），
+  已在报告中列为建议拆分项。
 
   【2026-09-11（二）：拆卡后的改动】按 lead 裁决（docs/ROADMAP.md 待拆清单）把
   worldsheet.ocq-spurious-states 拆成 worldsheet.spurious-subspace（无壳 S，formalized）与
