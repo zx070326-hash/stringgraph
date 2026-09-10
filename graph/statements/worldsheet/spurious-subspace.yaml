@@ -1,0 +1,79 @@
+id: worldsheet.spurious-subspace
+kind: definition
+status: formalized
+title: 伪态子空间的无壳版本 S = Σ_{n≥1} L_{−n}F（正模 Virasoro 生成元的像空间之和，不含质量壳条件）
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、对角度规分量 η : {0,…,D−1} → R（conv.metric-mostly-plus）、
+  零模参数 a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge；固定动量扇区，
+  动量只作为标量参数出现）。设 F = F(D,R) 为 worldsheet.bosonic-fock-space 的 Fock 空间，
+  L_n 为 worldsheet.virasoro-generators-free-boson 的 Sugawara 型生成元（conv.virasoro-standard）。
+
+  定义 **伪态子空间（无壳版本）**
+    S := Σ_{n ≥ 1} L_{−n} F  =  ⨆_{n ≥ 1} im(L_{−n})  ⊆ F，
+  即 F 中由全体 L_{−n}ψ（n ≥ 1，ψ ∈ F）生成的 R-子模。按子模之和的通常含义，等价地：
+    χ ∈ S  ⟺  存在 χ_n ∈ F（n ≥ 1，只有有限多个非零）使 χ = Σ_{n ≥ 1} L_{−n} χ_n。
+
+  **本定义不含质量壳条件**：S 的定义不涉及截距 a，也不要求 (L_0 − a)χ = 0；
+  故 S 对每个截距值都是同一个子模。（Polchinski §4.1 意义下的伪态是 S 与质量壳的交，
+  见 worldsheet.ocq-spurious-states-v2；那里的 S(k) = S ∩ ker(L_0 − a) ⊆ S。）
+
+  注：由 L_{−n} 把 level N 分量映到 level N+n 分量（worldsheet.virasoro-generators-free-boson
+  的齐次性），S 是 level 分级的子模；本卡不使用这一事实。
+uses:
+  - worldsheet.bosonic-fock-space
+  - worldsheet.virasoro-generators-free-boson
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.spuriousSubmodule
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.spuriousSubmodule（定义：`⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range (Lop η a (-n))`）；成员判据 Fock.Lop_neg_mem_spuriousSubmodule（n ≥ 1 时 L_{−n}ψ ∈ S）"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      这是本节点 status: formalized 的依据：Lean 的 `spuriousSubmodule` 与本陈述**逐字同一个对象**
+      （文件内注释亦写明 "This does not depend on the intercept."），
+      参数 η、a 与本陈述的 η、α_0 一一对应，截距 `a₀` 不出现在该定义中。
+      「χ ∈ S ⟺ 有限和 Σ L_{−n}χ_n」这一等价刻画在本仓库中**没有具名引理**，
+      它是 Mathlib 中子模上确界 = 有限和的标准事实；本卡把它作为定义的等价写法而非新命题。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)，p.122（写作 |χ⟩ = Σ_{k≥1} L_{−k}|χ_k⟩ 的那一半）"
+    note: |
+      **只覆盖本定义的求和表达式，不覆盖「无壳」这件事**：Polchinski 的伪态定义同时要求
+      |χ⟩ 满足质量壳条件，故书中没有 S 这个对象本身，S 是本项目为对上 Lean 而分离出来的一半。
+      式号经第三方伴读笔记目录核实（schrans-2020：`4.1/4.2 p 122: Eq (4.1.8)/(4.1.9)
+      Spurious States, I/II`），**未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E55。
+      求和指标写 n 而不是原书的 k，以免与动量标签 k 撞号。
+tags: [bosonic-string, quantization, old-covariant, spurious, fock-space, formalized]
+notes: |
+  【本卡的来历】2026-09-11 按 lead 裁决（docs/ROADMAP.md 待拆清单）从
+  worldsheet.ocq-spurious-states 拆出。那张卡把「L_{−n} 像空间」与「再交质量壳」写在一起，
+  status 只能是 rigorous（Lean 的 `spuriousSubmodule` 不带质量壳，不是同一个对象），
+  于是把两条实际由 Lean 承载的下游结论（worldsheet.spurious-orthogonal-to-physical、
+  worldsheet.physical-states-level-one）压到 rigorous。docs/STATUS_LEVELS.md 对 definition
+  的传播规则明确写了处理办法：**拆卡，让 Lean 对应的那一半成为 formalized 定义卡**。本卡就是那一半。
+  另一半是 worldsheet.ocq-spurious-states-v2（S ∩ 质量壳，rigorous）。
+
+  【标 formalized 时必须一并读的限定】（与整个无鬼定理形式化岛相同，继承
+  worldsheet.bosonic-fock-space 与 Sugawara.lean 的缺口）
+  (α) **逐动量扇区、代数版**：Lean 里动量只是标量参数 a^μ，没有位置算符 x^μ，
+      没有对 k 的直积分；本卡陈述已按此限定写成「固定动量扇区」。
+  (β) **对角 η 且 R 为交换 ℚ-代数**；本卡不需要 η^{μμ}η_{μμ} = 1
+      （`spuriousSubmodule` 的定义不用 hη；用到 hη 的是下游的 level 1 分析）。
+  (γ) **两种 L_m 定义未被证明等同**（Sugawara 型模式双线性 vs 全纯 T 的 Laurent 模，
+      见 worldsheet.old-covariant-physical-states 的缺口 (B)）。若把本卡的 L_n 理解为 CFT 侧的 L_n，
+      则不能引用本卡的 formalized 状态。
+
+  【不断言什么】本卡只给对象，不断言任何包含关系：
+  「S ⊥ H_phys」是 worldsheet.spurious-subspace-orthogonal-to-physical；
+  「S ∩ H_phys ⊆ H_0」是同一张卡的等价重述；
+  「H_0 ⊆ S ∩ H_phys」（逆包含）本图无节点，是无鬼定理难的那一半。
+
+  查重：`uv run stringgraph search 伪态 / spurious / 像空间` 于 2026-09-11 只命中
+  ocq-spurious-states、spurious-orthogonal-to-physical、physical-states-level-one 三张卡，
+  无既有节点承载「不带质量壳的 L_{−n} 像空间」。
+author: curator
+created: "2026-09-11"
