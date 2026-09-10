@@ -1,0 +1,50 @@
+id: worldsheet.gso-removes-tachyon
+kind: proposition
+title: type IIA/IIB 无快子的确切内容：一致性条件的四个解都不含快子所在的 (NS−,NS−) 扇区（type 0 的解则含之）
+statement: |
+  快子在闭超弦中住在 **(NS−, NS−)** 扇区（质量 m² = −2/α'；开弦对应的是 NS− 扇区，
+  m² = −1/(2α')，worldsheet.open-superstring-low-level-spectrum）。
+
+  **断言**：worldsheet.superstring-sector-consistency-solutions 中，
+    · 四个 type II 解（IIB、IIA、IIA′、IIB′）**都不包含** (NS−, NS−)，
+      因此 **type IIA 与 type IIB 的谱中没有快子**；
+    · 两个 type 0 解（0A、0B）**都包含** (NS−, NS−)，因此 **type 0 有快子**
+      （且没有时空费米子）。
+
+  ★★ **本卡存在的目的是把一句通俗说法改写成本书真正说的话**：
+  通行说法「GSO 投影把快子投掉」在 Polchinski 这里**不是**论证的形式。
+  本书的论证是：先解三条一致性条件得到扇区组合，**再**发现 type II 的解里不含快子所在的扇区；
+  GSO 投影只是这些解的重述（worldsheet.gso-projection）。
+  原书逐字：'Notice that none of these theories contains the tachyon, which lives in the sector
+  (NS−,NS−).'
+
+  **本命题不断言的内容**：
+    (1) 不断言「一致性 ⟹ 无快子」这个一般命题——type 0 就是反例：
+        它满足同样的三条条件、模不变，却有快子。
+    (2) 不断言 IIA/IIB 的完整谱无负模态（那由无鬼定理承担）。
+    (3) 不断言更高能级不出现别的不稳定性。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.6) 下方, pp. 26–27（逐字：'Notice that none of these theories contains the tachyon, which lives in the sector (NS−,NS−).'；type 0 的逐字：'These are modular-invariant, but both have a tachyon and there are no spacetime fermions.'）"
+    note: L1（抽取记录 polchinski-1998-v2.md E41）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.7), p. 21（开弦 NS 基态 m² = −1/(2α')，'This state is a tachyon. It has exp(πiF) = −1'）与 p. 23（逐字：'The (NS−,NS−) sector contains a closed string tachyon with m² = −2/α'.'）；Table 10.2 同处"
+    note: L1（E35）。快子所在扇区与质量的来源。
+tags: [superstring, gso, tachyon, type-ii, type-0, spectrum]
+notes: |
+  【为什么值得单列一张卡】「超弦没有快子」是本领域被引用最多的通俗结论之一，
+  而它的确切内容与常见叙述不同（抽取记录 E41/E42 两次强调）。
+  本图把它写成一条**关于扇区组合的断言**，并显式记下 type 0 这个反例，
+  以免下游节点把「一致性 ⟹ 无快子」当成一般定理。
+
+  【与 worldsheet.gso-projection 的分工】那张卡说「解可以重述为投影」，
+  本卡说「解里没有快子扇区」。两者都依赖同一个解表，但断言不同，故分开。
+
+  【开弦的情形】开弦的 GSO 投影（NS+, R+ 或 NS+, R−）同样不含 NS−，故开超弦也无快子；
+  但原书对开弦的 GSO 给的理由不同（OPE 闭合 + 与闭弦的耦合），
+  见 worldsheet.type-i-open-string-gauge-multiplet。本卡的断言只覆盖闭弦四解。
+author: curator
+created: "2026-09-11"

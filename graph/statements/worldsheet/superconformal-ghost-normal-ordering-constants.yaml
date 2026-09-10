@@ -1,0 +1,52 @@
+id: worldsheet.superconformal-ghost-normal-ordering-constants
+kind: proposition
+title: 超共形鬼场的正规序常数：R 扇区 a^g = −5/8，NS 扇区 a^g = −1/2
+statement: |
+  worldsheet.superconformal-ghost-modes 中 L^g_0 的常数 a^g 取值为
+    **Ramond 扇区： a^g = −5/8**，
+    **Neveu–Schwarz 扇区： a^g = −1/2**。
+  记账位置与 conv.intercept-sign-a 的换算同 worldsheet.rns-matter-normal-ordering-constants：
+  Vol.2 把常数写在 L_0 内部，a^g = Vol.1 记号的 A^g = −a^g_(截距记号)。
+
+  ⚠ **与玻色弦的数不同，不要迁移**：玻色弦的 bc 鬼场常数是 a^g = −1
+  （worldsheet.bc-ghost-normal-ordering-constant，λ = 2）。超共形鬼场因为多了 βγ 且分扇区，
+  值变成 −1/2（NS）与 −5/8（R）。
+
+  与物质部门相加（D = 10）：
+    R ： a^m + a^g = 10/16 − 5/8 = 0，
+    NS： a^m + a^g = 0 − 1/2 = −1/2，
+  与 (10.5.4) 的 H = α'p^2 + N（R）、H = α'p^2 + N − 1/2（NS）一致。
+  另一条独立核对：R 基态顶点算子的鬼场因子 e^{−φ/2} 权 3/8、NS 的 e^{−φ} 权 1/2，
+  加上 bc 鬼场的 −1，与上面两个值一致（原书逐字：'Adding the contribution −1 of the bc ghosts,
+  the weight of e^{−φ/2} and of e^{−φ} agree with the values (10.4.5)'）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.5), p. 16（R: a^g = −5/8；NS: a^g = −1/2）；方法说明逐字：'The normal ordering constant is determined by the usual methods to be'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E28；式号与两个值逐页读到原书页图）。
+      ⚠ 原书**只说「用通常的方法」**，不给计算；对应的习题是 exercise 10.9
+      （'By any of the above methods, determine the ghost normal ordering constants (10.4.5).'）。
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.21)（δ(γ) ≅ e^{−φ}，h = 1/2）、(10.4.24)（Σ = e^{−φ/2}，h = 3/8）与 p. 19 的逐字核对句，pp. 18–19"
+    note: |
+      L1（E30、E31）。这是本卡第二条核对的来源。⚠ 该核对经过**玻色化**（βγ ≅ ∂φ 等），
+      本图没有玻色化节点，故它只作为核对记录，不作为依赖边。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.4)、(10.5.5), pp. 21–22（与物质常数相加后的质量壳，D = 10）"
+tags: [superstring, ghosts, beta-gamma, normal-ordering, zero-point-energy]
+notes: |
+  【三处式号自洽】抽取记录 E19/E28/E34 记下：a^m（(10.2.13)）、a^g（(10.4.5)）、
+  H（(10.5.4)）与横向零点能（(10.5.5)）四处在 D = 10 处完全自洽。
+  本卡与 worldsheet.rns-matter-normal-ordering-constants 各承担其中一半。
+
+  【本图缺的那张卡】「周期/反周期、玻色/费米的零点能助记法」在本图无节点
+  （见 worldsheet.rns-matter-normal-ordering-constants 的 notes），
+  故本卡的推导只能把 Vol.1 §2.9 末的助记法作为**来源**引入。
+  βγ 是**对易**的半整数权场，其零点能符号与费米型相反，这一步在本图完全没有支撑节点，
+  推导里记为最大的 gap。
+author: curator
+created: "2026-09-11"

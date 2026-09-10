@@ -1,0 +1,78 @@
+id: worldsheet.ocq-superstring-physical-states
+kind: definition
+status: physical-argument
+title: 超弦的旧协变（OCQ）物理态条件：L^m_n = 0 (n > 0)、G^m_r = 0 (r ≥ 0)、L_0 = 0
+statement: |
+  按旧协变量子化（OCQ；玻色弦情形见 worldsheet.old-covariant-physical-states），
+  超弦的物理态定义为满足下列条件的态（忽略鬼场激发，上标 m 表示只取物质部门）：
+    L^m_n |ψ⟩ = 0    (n > 0),
+    G^m_r |ψ⟩ = 0    (**r ≥ 0**)，
+  其中 **r ≥ 0 含 r = 0**，即 R 扇区的零模条件 G^m_0|ψ⟩ = 0；NS 扇区没有 r = 0 的模式，
+  最低的条件是 G^m_{1/2}|ψ⟩ = 0。
+  态的等价关系（零态/伪态的模去）：
+    L^m_n |χ⟩ ≅ 0    (n < 0),      G^m_r |χ⟩ ≅ 0    (r < 0)。
+  质量壳条件写成
+    L_0 |ψ⟩ = H |ψ⟩ = 0，
+  其中 L_0 是**物质加鬼场**的总 Virasoro 零模，它等于世界面哈密顿量 H
+  ——原书给的理由逐字：'The mass-shell condition can always be written in terms of the total
+  matter plus ghost Virasoro generator, which is the same as the world-sheet Hamiltonian H
+  **because the total central charge is zero**'。
+  正规序常数已按 Vol.2 的体例吸进 L_0（见 worldsheet.rns-super-virasoro-generators 的
+  【常数的记账位置】），故此处不出现显式的 −a。
+
+  ⚠ **方法论限定（原书 §10.5 开头，逐字）**：与玻色弦不同，本书**不**从超-diff × 超-Weyl 不变的
+  作用量出发规范固定，而是「直接在规范固定的形式里推广，**把超共形对称性定义为一个约束**」：
+  'there is an analogous gauge-invariant form … However, it is not necessary to proceed in this
+  way … Rather we can generalize directly in the gauge-fixed form, defining the superconformal
+  symmetry to be a constraint and proceeding in parallel to the bosonic case to construct a
+  consistent theory.'
+  故本卡的条件是**被假定的**，不是从规范不变性导出的。
+
+  本卡是定义。它**不**断言物理态空间的内积性质（见 worldsheet.no-ghost-theorem-superstring），
+  也**不**断言具体的质量谱（见 worldsheet.open-superstring-mass-shell）。
+uses:
+  - worldsheet.old-covariant-physical-states
+  - worldsheet.rns-super-virasoro-generators
+  - worldsheet.superconformal-ghost-modes
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5「OCQ」, eq. (10.5.1)（L^m_n = 0, n > 0 与 G^m_r = 0, r ≥ 0）、(10.5.2)（等价关系）、(10.5.3)（L_0|ψ⟩ = H|ψ⟩ = 0 与其逐字理由），pp. 20–21"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E34；式号与公式内容逐页读到原书页图）。
+      原书明写这套形式是 Vol.1 §4.1 的推广（'In this formalism, developed for the bosonic string
+      in section 4.1, one ignores the ghost excitations…'），故对
+      worldsheet.old-covariant-physical-states 的 uses 是文献明写的。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 开头段, p. 20（方法论声明，逐字见 statement）"
+    note: |
+      L1（E33）。★ 这段对本项目极重要：它是超弦分支**没有** Weyl 反常路线的直接原因，
+      也是「总中心荷为零」在本卷是**被假定**的一致性条件的依据。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（玻色弦 OCQ：L^m_m|ψ⟩ = 0 (m ≥ 1) 与 (L^m_0 + A)|ψ⟩ = 0）"
+    note: |
+      Vol.2 明写以此为模板。⚠ 记账差别：Vol.1 把常数写在括号里，Vol.2 吸进 L_0，
+      是同一件事的两种写法（抽取记录 E34 备注）。
+tags: [superstring, ocq, physical-states, rns, definition]
+notes: |
+  【status: physical-argument 的理由】这不是一张纯代数定义卡：
+  (a) 「把超共形代数当作约束加在态上」这一步在本卷是**公设**（见 statement 的方法论限定）；
+  (b) 「L_0 = H 因为总中心荷为零」这一句把一个尚未成立的条件（c^tot = 0）用作定义的一部分；
+  (c) 上游 worldsheet.rns-super-virasoro-generators 与 worldsheet.superconformal-ghost-modes
+      的有效状态都是 physical-argument。
+
+  【与 BRST 版的关系】BRST 附加条件见 worldsheet.superstring-brst-additional-conditions；
+  R 扇区 (10.5.26) 的 β_0|ψ⟩ = G_0|ψ⟩ = 0 与本卡的 G^m_0|ψ⟩ = 0 的关系由
+  [H] Problem 10.14 记下（'…which is exactly the OCQ condition'），
+  本图未建 BRST ↔ OCQ 在超弦情形的等价节点（玻色弦一侧有
+  worldsheet.brst-cohomology-equals-ocq-physical）。
+  → 待建：worldsheet.brst-cohomology-equals-ocq-physical-superstring。
+
+  【E33 的另一半：本书不构造规范不变形式】'there is an analogous gauge-invariant form' 是
+  **未加论证的断言**（书中不构造、不引用）。按抽取记录 Q5 的建议，本图**不**为它建节点。
+author: curator
+created: "2026-09-11"

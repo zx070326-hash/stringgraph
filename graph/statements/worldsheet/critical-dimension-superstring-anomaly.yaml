@@ -1,0 +1,65 @@
+id: worldsheet.critical-dimension-superstring-anomaly
+kind: proposition
+title: 超弦的总中心荷为零条件 c^m + c^g = 0，即 c^m = 15（陈述只到 c^m，不含 c^m = (3/2)D 那一步）
+statement: |
+  设世界面理论由一个正范数物质 SCFT（中心荷 c^m）与 λ = 2 的超共形鬼场
+  （c^g = −15，worldsheet.superconformal-ghost-central-charge）组成。
+  **一致性条件「总中心荷为零」**
+    c^tot = c^m + c^g = c^m − 15 = 0
+  给出
+    **c^m = 15**。
+  反全纯部门同理给 c̃^m = 15。
+
+  ⚠ **本条与玻色弦的 Weyl 反常路线在逻辑地位上不同，必须写明**：
+  玻色弦一侧（worldsheet.critical-dimension-weyl-anomaly-v2）里「总中心荷为零」是
+  **Weyl 反常抵消**的结论——Polyakov 路径积分对 diff × Weyl 取商，Weyl 是规范冗余，
+  故反常必须消失。**Vol.2 没有这条论证**：本书明说不走「超-diff × 超-Weyl 不变作用量 →
+  规范固定」这条路，而是直接在规范固定的形式里把超共形对称性**定义为一个约束**
+  （worldsheet.ocq-superstring-physical-states 的方法论限定，§10.5 开头逐字）。
+  因此本卡的「总中心荷为零」在 Vol.2 里是一条**被假定的一致性条件**，
+  其唯一的独立支撑是 BRST 幂零性（worldsheet.critical-dimension-superstring-brst）
+  ——而那一条在原书里也只是一句话加两道习题。
+
+  **本命题只定出 c^m，不定出**：
+    (1) 不定出 D（要 D = 10 需再加 c^m = (3/2)D，见汇总卡
+        worldsheet.critical-dimension-superstring）；
+    (2) 不定出任何截距。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（逐字：'The ghost central charge is then −26 + 11 = −15, and the condition that the total central charge vanish gives the critical dimension' 0 = (3/2)D − 15 ⟹ D = 10）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E12；式号与逐字措辞逐页读到原书页图）。
+      ⚠ 原书在这里**直接写出 (3/2)D − 15 = 0**，即把 c^m = (3/2)D 那一步与总中心荷条件
+      合在一个式子里。本卡按项目的记账原则（与 worldsheet.critical-dimension-weyl-anomaly-v2、
+      worldsheet.critical-dimension-brst-v2 一致）**只保留 c^m = 15 那一半**，
+      把 c^m = (3/2)D 单列为公共输入。
+      ⚠ 原文措辞是 'We can anticipate'（预告式）：鬼场在 §10.4 才正式引入。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 开头段, p. 20（方法论声明，逐字：'there is an analogous gauge-invariant form … However, it is not necessary to proceed in this way … Rather we can generalize directly in the gauge-fixed form, defining the superconformal symmetry to be a constraint …'）"
+    note: |
+      L1（E33）。★ 这是本卡「总中心荷为零在本卷是被假定的」这一限定的直接依据。
+  - ref: polchinski-1998-v2
+    loc: "§11.1, (11.1.2b) 之后, p. 47（逐字：'Since the matter central charge c^m is −c^g, there is only one new algebra, N = 2, that can have a positive critical dimension.'）"
+    note: |
+      L1（抽取记录 E51）。这是「c^m = −c^g」在本卷被当作显然写出的第二处，
+      与 §10.1 的用法一致。本卡只引用这一句作为该条件的措辞证据，
+      **不**引用 §11.1 的分类结论（那带作者自己的完备性警告，且第 11 章本轮不入图）。
+tags: [superstring, critical-dimension, central-charge, anomaly, consistency]
+notes: |
+  【为什么本卡不叫 "-weyl-anomaly"】玻色弦一侧的同位卡叫
+  worldsheet.critical-dimension-weyl-anomaly-v2，因为那里真的有 Weyl 反常的论证。
+  超弦一侧没有，故本卡命名为 "-anomaly" 并在陈述里显式声明其逻辑地位不同。
+  这是抽取记录 E33 的直接后果：**Vol.1 的 D = 26 有四条路线，Vol.2 的 D = 10 只有两条，
+  且其中一条（本卡）是假定而非推导。**
+
+  【与 BRST 路线的关系：不是两份独立证据】worldsheet.critical-dimension-superstring-brst
+  的结论 c^m = 15 与本卡的结论逐字相同，且两者共享同一个输入 c^g = −15。
+  差别只在把该输入拼起来的机制：BRST 路线是 {Q_B, Q_B} 的模式计算，本卡是「反常必须消失」
+  这条一致性要求。若 c^g 的计算有误，两条同时失效。汇总卡
+  worldsheet.critical-dimension-superstring 的【"独立"的确切含义】一节写明这一点。
+author: curator
+created: "2026-09-11"

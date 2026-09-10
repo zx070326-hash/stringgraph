@@ -1,0 +1,66 @@
+id: worldsheet.open-superstring-low-level-spectrum
+kind: proposition
+title: 开超弦最低两级的谱：NS 快子（m² = −1/(2α')，exp(πiF) = −1）、NS 无质量矢量、R 无质量 Dirac 方程
+statement: |
+  设 D = 10、开弦、OCQ 物理态条件（worldsheet.ocq-superstring-physical-states），
+  质量壳按 worldsheet.open-superstring-mass-shell。则最低能级为：
+
+  **(A) NS 扇区 level N = 0**：态 |0; k⟩_NS，质量壳给
+      m² = −k² = **−1/(2α')**，即一个**快子**。它的世界面费米子数是 **exp(πiF) = −1**。
+
+  **(B) NS 扇区 level N = 1/2**：态 |e; k⟩_NS = e·ψ_{−1/2}|0; k⟩_NS。物理态条件给
+      L_0：α' k² = 0，  G^m_{1/2}：(2α')^{1/2} k·e = 0，
+  而 G^m_{−1/2}|0; k⟩_NS = (2α')^{1/2} k·ψ_{−1/2}|0; k⟩_NS 是零态（null）。故
+      k² = 0,   e·k = 0,   e^μ ≅ e^μ + λ k^μ，
+  即一个**无质量矢量**，有 D − 2 = 8 个类空极化，且 **exp(πiF) = +1**。
+
+  **(C) R 扇区最低级**：态 |u; k⟩_R = |s; k⟩_R u_s。物理态条件给
+      L_0：α' k² = 0，  G^m_0：α'^{1/2} |s'; k⟩_R (k·Γ)_{s's} u_s = 0，
+  后者正是**无质量 Dirac 方程** (k·Γ)_{s's} u_s = 0。
+  取 k 沿一个光锥方向，k_0Γ⁰ + k_1Γ¹ = −2k_1Γ⁰(S_0 − 1/2)，故物理态条件化为
+      (S_0 − 1/2) |s, 0; k⟩_R u_s = 0，
+  只有 s_0 = +1/2 的分量存活（一半的分量被投影掉，与 Dirac 方程把 Dirac 旋量的自由度减半一致）。
+
+  **开弦最低能级汇总（原书 Table 10.2「Massless and tachyonic open string states」）**：
+      NS+ ： 8_v，m² = 0；      NS− ： 1，m² = −1/(2α')；
+      R+  ： 8，m² = 0；        R−  ： 8′，m² = 0。
+
+  **本命题不断言的内容**：
+    (1) 不断言 8、8′、8_v 这些 SO(8) 表示标签的表示论内容（16 → (+1/2, 8) + (−1/2, 8′) 等，
+        (10.5.17a,b)）——那依赖附录 B.1，本轮未读（抽取记录 Q8）。本卡只把它们当作标签照录。
+    (2) 不断言哪些扇区实际出现在某个具体理论的谱里（那要 §10.6 的一致性条件）。
+    (3) 不断言 G_0² = L_0（原书用它说明 R 扇区的 G_0 条件蕴含 L_0 条件；那一步逐字带
+        'in the critical dimension' 的限定，见 notes）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.7)（NS 最低态 m² = −1/(2α')，逐字 'This state is a tachyon. It has exp(πiF) = −1'）、(10.5.8)–(10.5.11)（NS 第一激发态与无质量矢量条件）、(10.5.12)–(10.5.14)（R 最低态与无质量 Dirac 方程）、(10.5.15)（k_0Γ⁰ + k_1Γ¹ = −2k_1Γ⁰(S_0 − 1/2)）、(10.5.16)（(S_0 − 1/2)|s,0;k>_R u_s = 0）、(10.5.17a,b)（旋量分解），pp. 21–23；Table 10.2 同处"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E35；式号、公式与 Table 10.2 的四行逐页读到原书页图）。
+      原书对 (10.5.14) 的措辞：'which was our original goal in introducing the superconformal
+      algebra'。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 23（逐字：'The (NS−,NS−) sector contains a closed string tachyon with m² = −2/α'.'）"
+    note: |
+      L1（E35 附注）。这条是闭弦快子所在的扇区，下游 worldsheet.gso-removes-tachyon 要用。
+tags: [superstring, open-string, spectrum, tachyon, ns-sector, ramond-sector, dirac-equation]
+notes: |
+  【本卡是「快子被消除」这条结论的前提】(10.5.7) 与 Table 10.2 精确地告诉我们快子住在
+  **NS−**（开弦）与 **(NS−, NS−)**（闭弦）。§10.6 的一致性条件给出的解里不含这两个扇区，
+  这才是「GSO 去掉快子」在本书里的确切内容——见 worldsheet.gso-removes-tachyon。
+
+  【G_0² = L_0 的限定，刻意排除在断言之外】原书逐字：'The G^m_0 condition implies the L_0
+  condition, because G_0² = L_0 in the critical dimension and the ghost parts of G_0 annihilate
+  the ghost vacuum.' 这句话带两个前提（临界维数、鬼场真空被 G_0 的鬼场部分湮灭），
+  且与 math.super-virasoro-algebra 里 {G_0, G_0} = 2L_0 − c/12 的一般式相容当且仅当
+  c/12 的那一项被正规序常数吸收——**这个记账在原书里没有展开**。故本卡不断言它。
+  → 待建：worldsheet.ramond-g0-squared-equals-l0（含临界维数前提）。
+
+  【表示标签的来源】8_v / 8 / 8′ 是 SO(8) 小群的表示；(10.5.17) 的 16 → (+1/2, 8) + (−1/2, 8′)
+  依赖附录 B.1。原书 exercise 10.12 就是让读者验证 (10.5.17)。本卡只照录标签。
+author: curator
+created: "2026-09-11"

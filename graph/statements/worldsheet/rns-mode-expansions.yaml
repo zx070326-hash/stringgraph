@@ -1,0 +1,54 @@
+id: worldsheet.rns-mode-expansions
+kind: definition
+status: rigorous
+title: RNS 场的模式展开与（反）对易关系
+statement: |
+  在 worldsheet.rns-fermion-periodicity 的扇区 (ν, ν̃) 中，平面坐标下的模式展开取为
+    ψ^μ(z)  = Σ_{r ∈ Z + ν}  ψ^μ_r / z^{r + 1/2},
+    ψ̃^μ(z̄) = Σ_{r ∈ Z + ν̃} ψ̃^μ_r / z̄^{r + 1/2},
+    ∂X^μ(z) = −i (α'/2)^{1/2} Σ_{m ∈ Z} α^μ_m / z^{m+1},
+  零模归一化
+    闭弦：α^μ_0 = α̃^μ_0 = (α'/2)^{1/2} p^μ,      开弦：α^μ_0 = (2α')^{1/2} p^μ
+  （与 Vol.1 的取法逐字一致）。（反）对易关系为
+    {ψ^μ_r, ψ^ν_s} = {ψ̃^μ_r, ψ̃^ν_s} = η^{μν} δ_{r,−s},
+    [α^μ_m, α^ν_n] = [α̃^μ_m, α̃^ν_n] = m η^{μν} δ_{m,−n}。
+
+  记号提示：ψ^μ 的模式指标 r 落在 Z + ν 上，故 R 扇区（ν = 0）有零模 ψ^μ_0，
+  NS 扇区（ν = 1/2）没有。
+
+  本卡是模式代数的定义数据。它**不**断言这些模式在某个 Hilbert 空间上有表示、
+  也**不**断言正规序常数的值。因 η_{00} = −1（mostly-plus），
+  类时分量 ψ^0、ψ̃^0 与 α^0 的（反）对易子符号相反，本图的负范数态由此而来
+  （原书 p. 3 逐字：'Because of the Minkowski signature of spacetime the timelike ψ^0 and ψ̃^0,
+  like X^0, have opposite sign commutators and lead to negative norm states'）。
+uses:
+  - worldsheet.rns-fermion-periodicity
+  - worldsheet.closed-string-oscillator-commutators
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.7)（ψ, ψ̃ 的模式展开）、(10.2.8)（∂X 与 α^μ_0 的两种归一化）、(10.2.9a)（{ψ_r, ψ_s} = η δ）、(10.2.9b)（[α_m, α_n] = mηδ），p. 6；半权重变换见 (10.2.6)"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E17；式号与公式内容逐页读到原书页图）。
+      原书对 (10.2.9) 的措辞：'The OPE and the Laurent expansions (or canonical quantization)
+      give the anticommutators'——即两条路都行，后者不经 OPE。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, (10.1.14) 之后一段, p. 3（类时分量给负范数态的逐字说明）"
+tags: [rns, superstring, mode-expansion, oscillators, definition]
+notes: |
+  【status: rigorous 的理由】本卡写下的是一组明确的（反）对易关系与展开系数定义，
+  纯代数、无形式操作。它 uses worldsheet.rns-fermion-periodicity（其自身 uses
+  worldsheet.rns-action，physical-argument），故有效状态仍是 physical-argument。
+  ⚠ 若日后要一张能承载 formalized 的纯代数卡，应把 uses 里的作用量链剪掉，
+  只留「一族生成元与关系」的抽象超振子代数（那时应新建卡片而不是改本卡）。
+
+  【与既有玻色弦卡的关系】α^μ_m 的对易子与零模归一化在
+  worldsheet.closed-string-oscillator-commutators / worldsheet.open-string-mode-expansion
+  已有节点，本卡只在费米部分是新的；本卡 uses 前者以免同一关系记两次账。
+  抽取记录 E17 指出 α^μ_0 的两个取值与 Vol.1 §1.1 表逐字一致。
+author: curator
+created: "2026-09-11"

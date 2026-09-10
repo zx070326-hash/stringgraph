@@ -1,0 +1,49 @@
+id: worldsheet.type-i-open-string-gauge-multiplet--via-ope-closure
+target: worldsheet.type-i-open-string-gauge-multiplet
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.open-superstring-two-sectors
+    note: 供给开弦只有 NS、R 两个扇区，故 GSO 投影只有两种可能。
+  - id: worldsheet.open-superstring-low-level-spectrum
+    note: 供给两个扇区的无质量内容（NS+ 的 8_v、R± 的 8 / 8′）与 Table 10.2。
+  - id: worldsheet.rns-fermion-number-operator
+    note: 供给 exp(πiF)，开弦 GSO 投影就是对它的本征子空间取值。
+  - id: worldsheet.gso-projection
+    note: |
+      供给「开弦必须与之相容」的闭弦一侧的投影。
+      ⚠ 论证方向不同：闭弦的 GSO 来自三条一致性条件，开弦的来自 OPE 闭合，
+      本推导只用闭弦 GSO 作为**相容对象**。
+  - id: worldsheet.operator-product-expansion
+    note: |
+      供给「开+开→闭 散射中 OPE 必须闭合」这一判据所依据的框架。
+      按 lead 2026-09-10 裁决，凡用 OPE 的推导封顶 physical-argument。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, p. 30（开弦 GSO 的理由、两行谱、Chan–Paton 与规范群、规范微子在伴随表示；全部逐字见目标卡片 sources；**本段无式号**）"
+    note: |
+      L1。⚠ 原书对每一条都只给一句理由，不展开论证。
+  - ref: polchinski-1998-v1
+    loc: "§6.5（Chan–Paton 因子与规范群 U(n) / SO(n) / Sp(n)；本图未建节点）"
+    note: |
+      Vol.2 用 'again' 指回 Vol.1 的这条结论。⚠ 本图**没有** Chan–Paton 的节点，
+      故这一步在图上悬空，见 gaps。
+summary: |
+  三条各自一句：
+  (1) 开弦 GSO 的必要性：开+开→闭 的散射振幅要求开弦顶点算子的 OPE 闭合到闭弦扇区上；
+      若开弦不做 GSO 投影，其扇区与闭弦一侧保留的扇区不相容。
+      故开弦也必须投影到 exp(πiF) 的本征子空间，两种符号给 I 与 Ĩ。
+  (2) 两个谱：NS+ 的无质量态是 8_v（矢量），R+ 给 8、R− 给 8′。
+  (3) Chan–Paton：按 Vol.1 §6.5 的规则，取向弦给 U(n)、无取向给 SO(n) 或 Sp(n)；
+      规范微子（8 或 8′）因超对称与规范玻色子同处伴随表示。
+
+  【status 的理由】三条理由都是一句话式的物理论断，
+  且 (3) 依赖本图未建的 Chan–Paton 节点与未建的时空超对称节点。
+gaps:
+  - "**「OPE 闭合 ⟹ 开弦必须 GSO」只有一句话**：原书不展开该论证，本图无法逐步复核。"
+  - "**Chan–Paton 因子在本图无节点**：U(n)/SO(n)/Sp(n) 的规则是 Vol.1 §6.5 的内容，本轮不在范围内。→ 待建 spectrum.chan-paton-gauge-group（Vol.1 §6.5）。"
+  - "**「规范微子在伴随表示」依赖时空超对称**：本图的 worldsheet.type-ii-spacetime-supersymmetry 自身是 physical-argument 且带原书的赤裸断言（'if all requirements … are met (and they are)'）；开弦一侧的超对称本图完全没有节点。"
+  - "**8 / 8′ / 8_v 的表示论内容依赖附录 B.1**（未读）。"
+  - "**本段在原书中无式号**：sources 的 loc 只能定位到 §10.6, p. 30。"
+author: curator
+created: "2026-09-11"

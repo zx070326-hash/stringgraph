@@ -1,0 +1,63 @@
+id: worldsheet.critical-dimension-superstring-brst
+kind: proposition
+title: 超弦 BRST 荷幂零 Q_B² = 0 当且仅当物质中心荷 c^m = c̃^m = 15（陈述只到 c^m，不含 c^m = (3/2)D 那一步）
+statement: |
+  设 Q_B 如 worldsheet.superstring-brst-charge 所定义（λ = 2 的 bcβγ 鬼场，
+  鬼场中心荷 c^g = −15，鬼场正规序常数 a^g 按扇区取 −1/2 / −5/8），
+  作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、G^m_r、b_n、c_n、β_r、γ_r 零化，
+  以保证 Q_B 与 Q_B² 逐项有限）。则
+    **Q_B² = 0  ⟺  总中心荷为零  ⟺  c^m = c̃^m = 15**。
+  这里 c^m 是**任意**正范数物质 SCFT 的中心荷：可以把若干个平坦的 X^μψ^μ SCFT
+  换成任何满足该中心荷条件的正范数 SCFT，Q_B 的幂零性不变。
+  **附带的一条必要条件**：该 SCFT 的超流必须与 ψ^μ、β、γ 有相同的周期性（R 或 NS），
+  否则 BRST 流不周期、Q_B 无定义。
+
+  **本命题只定出 c^m，不定出**：
+    (1) 不定出 D。要得到 D = 10 必须再加一步 c^m = (3/2)D
+        （worldsheet.rns-matter-central-charge），那是**本路线与总中心荷路线的公共输入**，
+        不是本路线自身的产物。这与玻色弦一侧
+        worldsheet.critical-dimension-brst-v2 的记账方式完全平行。
+    (2) 不定出任何截距（超弦的 NS/R 截距见 worldsheet.open-superstring-mass-shell）。
+
+  ⚠ **来源定位的一条硬约束**：本卷**没有**像 Vol.1 (4.3.10) 那样把
+  「Q_B² = 0 ⟺ c = 26」写成带式号的公式。超弦的对应陈述是 §10.5 中 (10.5.23) 下方的
+  **一段正文，无式号**。任何引用本命题的地方，`loc` 只能写
+  「§10.5, p. 24, (10.5.23) 下方一段」，**不要编式号**。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字：'From these one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) whenever the total central charge vanishes. Thus, we can replace some of the spacelike X^μψ^μ SCFTs with any positive-norm SCFT such that the total matter central charge is c^m = c̃^m = 15. The BRST current must be periodic for the BRST charge to be well defined. The supercurrent of the SCFT must therefore have the same periodicity, R or NS, as the ψ^μ, β, and γ.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E37；逐字段落读到原书页图）。
+      ⚠ **无式号是原书的事实，不是抽取的缺陷**：抽取记录明确要求不要编式号。
+      ⚠ 原书的论证是 'one can verify nilpotence by the same steps as in the bosonic case
+      (exercise 4.3)'——**书中不证，推给 Vol.1 的习题 4.3**。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.13, p. 43（逐字：'(a) Verify the operator products (10.5.22). (b) Using the Jacobi identity as in exercise 4.3, verify nilpotence of Q_B.'）"
+    note: |
+      L1（E49）。这是 Q_B² = 0 在原书里的**唯一论证入口**，而它是一道习题。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（0 = (3/2)D − 15 ⟹ D = 10；本卡不使用这一步，只记录总中心荷条件的数值形式）"
+    note: |
+      L1。列出以便读者看到「c^m = 15」与「(3/2)D = 15」是同一个条件的两种写法；
+      两者之间的一步由 worldsheet.rns-matter-central-charge 承担，见汇总卡
+      worldsheet.critical-dimension-superstring。
+tags: [superstring, brst, critical-dimension, central-charge, nilpotency]
+notes: |
+  【本卡与玻色弦 BRST 路线卡的对照】worldsheet.critical-dimension-brst-v2 给
+  Q_B² = (1/2)Σ_m ((c^m − 26)/12)(m³ − m) c_{−m}c_m，即**有显式公式**（Vol.1 (4.3.10)）。
+  超弦一侧**没有**这样的显式公式，只有一句「按同样的步骤可以验证」。
+  这是本图中超弦 BRST 路线比玻色弦弱的地方，必须记在账上。
+
+  【抽取记录 Q6 的建议已采纳】c^m = 15 与 D = 10 拆成两条陈述：
+  本卡只到 c^m = 15（更一般），D = 10 由汇总卡
+  worldsheet.critical-dimension-superstring 承担并显式挂 c^m = (3/2)D 那条公共输入。
+
+  【受限模的问题在超弦更严重】βγ 是对易场，占据数无上界，
+  故「Q_B 与 Q_B² 逐项有限」的模条件需要重新审视。原书完全不讨论。
+  本卡照玻色弦的写法声明受限模，但在推导的 gaps 里记明这是本图的补充而非原书内容。
+author: curator
+created: "2026-09-11"

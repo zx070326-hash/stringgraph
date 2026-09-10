@@ -1,0 +1,51 @@
+id: worldsheet.critical-dimension-superstring-anomaly--via-total-central-charge
+target: worldsheet.critical-dimension-superstring-anomaly
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superconformal-ghost-central-charge
+    note: |
+      供给 c^g = −15（= −26 + 11）。
+      **不标 inferred**：原书 (10.1.20) 逐字写出 'The ghost central charge is then −26 + 11 = −15'，
+      即在原地引用了这一步。
+  - id: worldsheet.tt-ope-central-charge
+    note: 供给中心荷的定义与加性（c^tot = c^m + c^g）。
+  - id: worldsheet.ocq-superstring-physical-states
+    note: |
+      供给「本卷把超共形对称性定义为约束、不走规范不变作用量路线」这一方法论前提
+      （该卡的 statement 里逐字记录了 §10.5 开头那段）。这条边是本推导把「总中心荷为零」
+      记为**被假定**而非**被推导**的依据。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（'the condition that the total central charge vanish gives the critical dimension'）"
+    note: L1。原书直接使用该条件，不论证它为何必须成立。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 开头段, p. 20（本书不走超-diff × 超-Weyl 规范固定那条路的逐字声明）"
+    note: L1（E33）。
+  - ref: polchinski-1998-v1
+    loc: "§3.4（玻色弦的 Weyl 反常与 c^tot = 0；本图节点 worldsheet.critical-dimension-weyl-anomaly-v2 承载）"
+    note: |
+      **仅作对照**，不承载本推导的论证：Vol.2 没有对应的超-Weyl 反常计算。
+      列出以便读者看到两卷的论证强度差别。
+summary: |
+  一步算术加一条被假定的前提：
+    前提（假定）：一致的超弦要求总中心荷为零，c^tot = c^m + c^g = 0。
+    输入：c^g = −15。
+    结论：c^m = 15。
+  ⚠ 前提在本卷**不被论证**。玻色弦一侧的对应前提由 Weyl 反常抵消支撑
+  （Polyakov 路径积分对 diff × Weyl 取商 ⟹ Weyl 反常必须消失），
+  而 Vol.2 §10.5 开头明说不走那条路。本卷对该前提的唯一独立支撑是 BRST 幂零性
+  （worldsheet.critical-dimension-superstring-brst），而那条也只是一句话加两道习题。
+
+  【status 的理由】本推导的核心前提是一条**未被论证的一致性要求**。
+  按「状态只能实话实说」，physical-argument 是能给的上限；
+  若 reviewer 认为「被假定的前提 + 一步算术」应更低，可提出降级。
+  curator 的理由是：该前提在物理上有独立支撑（BRST 路线），且原书把它当作已确立的条件使用，
+  故不降到 conjecture。
+gaps:
+  - "**「总中心荷必须为零」在 Vol.2 里完全没有论证**：这是本推导最大的缺口，且与玻色弦一侧有实质差别——Vol.1 有 Weyl 反常路线（路径积分对 diff × Weyl 取商），Vol.2 §10.5 开头明说不走那条路。抽取记录 E33 把这一点列为对本项目「极重要」。"
+  - "**「存在超-diff × 超-Weyl 不变形式」是原书未加论证的断言**：'there is an analogous gauge-invariant form'，书中不构造、不引用文献（抽取记录 Q5）。本图按该记录的建议**不**为它建节点，因此本推导也无法通过它借到玻色弦那条路线的论证。"
+  - "**c^g = −15 的上游 gap 继承**：bc 与 βγ 的中心荷都是 OPE/路径积分层面的结果；(11.1.2a) 的通式虽已 L1 核实式号与表达式，但其推导同样不在原书中展开。"
+  - "**本路线与 BRST 路线不是两份独立证据**：两者共享 c^g = −15，判据都是同一个数 c^m − 15 = 0。目标卡片的 notes 已写明。"
+author: curator
+created: "2026-09-11"

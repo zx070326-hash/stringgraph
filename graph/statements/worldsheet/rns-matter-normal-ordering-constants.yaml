@@ -1,0 +1,75 @@
+id: worldsheet.rns-matter-normal-ordering-constants
+kind: proposition
+title: RNS 物质部门的正规序常数：R 扇区 a^m = D/16，NS 扇区 a^m = 0
+statement: |
+  worldsheet.rns-super-virasoro-generators 中 L_m 的常数 a^m（Vol.2 的记账位置：写在 L_0 内部）
+  取值为
+    **Ramond 扇区： a^m = D/16**，
+    **Neveu–Schwarz 扇区： a^m = 0**。
+  与 conv.intercept-sign-a 的换算：Vol.2 的 a^m = Vol.1 的 A = −a，故 R 扇区对应截距
+  a = −D/16、NS 扇区对应 a = 0（这只是物质部门；物理的截距还要加鬼场部分，
+  见 worldsheet.open-superstring-mass-shell）。
+
+  原书给出的计数规则（'the mnemonic from the end of section 2.9'）：
+    每个**周期玻色子**贡献 −1/24；每个**周期费米子**贡献 +1/24；每个**反周期费米子**贡献 −1/48；
+  再对两个扇区**共同**加一条正比于 D 的位移项。
+  本图内部的自洽性检验（D 任意）：
+    NS：D 个周期玻色子 + D 个反周期费米子 = D(−1/24) + D(−1/48) = −D/16；
+    R ：D 个周期玻色子 + D 个周期费米子   = D(−1/24) + D(+1/24) = 0；
+    共同加上位移项 +D/16 后得 (a^m_NS, a^m_R) = (0, D/16)，与 (10.2.13) 逐字一致。✓
+  D = 10 时与鬼场常数（worldsheet.superconformal-ghost-normal-ordering-constants：
+  R 的 a^g = −5/8、NS 的 a^g = −1/2）相加：
+    R： 10/16 − 5/8 = 0，   NS： 0 − 1/2 = −1/2，
+  与 (10.5.4) 的 H = α'p^2 + N（R）、H = α'p^2 + N − 1/2（NS）自洽。
+
+  ⚠ 本卡**不**引用原书 (10.2.13) 上方那句「Including the shift +(1/16)c = (1/16)D」——
+  抽取记录 Q3 指出该句在页图上无法 100% 分辨 c 是否带帽（ĉ ≡ (2/3)c = D），
+  字面写法与 c = (3/2)D 不自洽。**两个结果值 D/16 与 0 是清楚的，可放心引用。**
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.13), p. 7（R: a^m = D/16；NS: a^m = 0）；其上方的方法说明逐字：'The normal ordering constant can be obtained by any of the methods from chapter 2; we will use the mnemonic from the end of section 2.9. Each periodic boson contributes −1/24. Each periodic fermion contributes +1/24 and each antiperiodic fermion −1/48.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E19；式号与两个结果值逐页读到原书页图）。
+      ⚠ 同一句里的 'Including the shift +(1/16)c = (1/16)D' 有记号疑问（Q3），本卡不引用它。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.4)、(10.5.5), pp. 21–22（NS: 8(−1/24 − 1/48) = −1/2；R: 8(−1/24 + 1/24) = 0，即 D = 10 时横向模式的零点能）"
+    note: |
+      L1（E34）。这是本卡数值自洽性检验的第二个锚点：(10.5.5) 用的正是同一套助记规则，
+      但只对 **8 个横向**模式求和（纵向与鬼场的贡献已抵消）。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.8, p. 43（逐字：'Verify the weight of the fermionic ground state A_ν for general real ν: (a) from the commutator (2.7.8); (b) from the mnemonic of section 2.9.'）"
+    note: |
+      L1（E49）。这是「Vol.1 §2.9 末有一个零点能助记法」的第二条一手证据
+      （抽取记录 Q2：v1 的 Q5 据此订正）。同时说明这条计算在原书里是**习题**。
+tags: [rns, superstring, normal-ordering, zero-point-energy, ns-sector, ramond-sector]
+notes: |
+  【为什么不把助记法的分解写成断言】抽取记录 Q3 记下了一处无法判读的记号
+  （(10.2.13) 上方印的是 'the shift +(1/16)c = (1/16)D'，若 c 就是 (10.1.14) 的 c = (3/2)D
+  则该等式不成立；抽取者判断印的是带帽的 ĉ ≡ (2/3)c = D，但页图上分辨不出帽子）。
+  因此本卡的 statement 只把 (10.2.13) 的**两个结果值**当作断言，
+  把助记规则与数值核对写成「原书给出的计数规则」与「本图内部的自洽性检验」。
+
+  ★【本卡给 Q3 提供的一条判据（curator 2026-09-11，不是原书文字）】
+  按上面的自洽性检验：助记规则给 NS 的 −D/16 与 R 的 0，要同时得到 (10.2.13) 的 (0, D/16)，
+  两个扇区共同的位移项**必须**是 +D/16。若那句话里的 c 是 (3/2)D，位移项就是 3D/32，
+  NS 会得到 −D/16 + 3D/32 = +D/32 ≠ 0，与 (10.2.13) 矛盾。
+  → 故在「助记规则如原文所述」这一前提下，那处印的**只能**是 ĉ ≡ (2/3)c = D，
+  即抽取者的判断被 (10.2.13) 的两个结果值反推证实。
+  这是一条**图内推断**，不替代人工核对页图；但它把 Q3 的影响面缩小到「记号是否带帽」这件事本身。
+
+  【Vol.1 的助记法在本图无节点】本图有 worldsheet.light-cone-normal-ordering-constant
+  （ζ 正规化的 Σn = −1/12）与 worldsheet.zeta-regularized-sum-of-integers，
+  但没有「周期/反周期费米子的 ±1/24、−1/48」这条规则的节点。
+  本卡的推导因此把 Vol.1 §2.9 的助记法作为**来源**而非依赖边引入，并在推导的 gaps 里记明。
+  → 待建：worldsheet.zero-point-energy-mnemonic（一张覆盖玻色/费米、周期/反周期四种情形的卡）。
+
+  【与玻色弦的 a^g = −1 不要混】那是 bc 鬼场的常数；本卡是**物质**部门，
+  超共形鬼场的常数另见 worldsheet.superconformal-ghost-normal-ordering-constants
+  （NS −1/2、R −5/8）。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,84 @@
+id: worldsheet.no-ghost-theorem-superstring
+kind: proposition
+title: 超弦无鬼定理（Polchinski §10.5 末的陈述）：BRST 上同调内积正定、同构于 OCQ、同构于横向 Hilbert 空间 H^⊥；且在 exp(πiF) 的每个本征子空间上分别成立
+statement: |
+  设 D = 10（或更一般地物质中心荷 c^m = c̃^m = 15），Q_B 如
+  worldsheet.superstring-brst-charge 所定义，并加上
+  worldsheet.superstring-brst-additional-conditions 的附加条件
+  （b_0 = L_0 = 0，R 扇区另加 β_0 = G_0 = 0）。定义**横向 Hilbert 空间**
+    **H^⊥ := 不含 X^{0,1}、ψ^{0,1}、b、c、β、γ 激发的态空间**
+  （这个定义是原书逐字给出的）。则：
+
+  **(1)** BRST 上同调上的内积**正定**；
+  **(2)** BRST 上同调与 OCQ 物理态空间（worldsheet.ocq-superstring-physical-states）**同构**；
+  **(3)** BRST 上同调与 H^⊥ **同构**；
+  **(4)** 由于 exp(πiF) 与 Q_B 交换（worldsheet.rns-fermion-number-operator），
+      可以取 exp(πiF) 的确定本征值的子空间，**无鬼定理在每个本征子空间上分别成立**。
+
+  ⚠⚠ **本卡的 status 由推导承载，而那条推导只有一句话的来源。**
+  原书对 (1)(2)(3) 的全部论证是一句：
+  '**The proof is a direct imitation of the bosonic argument of chapter 4.**'
+  **书中不给证明，也不引用任何原始文献（此处无脚注、无引文）。**
+  故本图对本命题的推导状态是 `physical-argument`，**不是** `rigorous`，
+  尽管玻色弦一侧的对应命题（worldsheet.no-ghost-theorem-brst / -v4）在文献中有严格处理。
+
+  **本命题不断言的内容**：
+    (1) 不断言 (2)(3) 中同构的具体构造（原书不给映射）。
+    (2) 不断言零动量或退化动量扇区的情形（玻色弦一侧的对应命题限 k^+ ≠ 0；
+        原书在超弦一侧对动量条件**只字不提**，本卡照此不作断言，也不宣称覆盖全部动量）。
+    (3) 不断言 picture 的选择无关性——原书全章不出现 'picture' 一词
+        （见 notes 与 gaps）。
+    (4) 第 (4) 条只断言「分别成立」，不断言 GSO 投影后的谱是什么。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5 末, p. 25, **无式号**（逐字：'The reader can again work out the first few levels by hand, the result being exactly the same as for OCQ. The no-ghost theorem is as in the bosonic case. The BRST cohomology has a positive definite inner product and is isomorphic to OCQ and to the transverse Hilbert space H^⊥, which is defined to have no X^{0,1}, ψ^{0,1}, b, c, β, or γ excitations. The proof is a direct imitation of the bosonic argument of chapter 4. We have defined exp(πiF) to commute with Q_B. We can therefore consider subspaces with definite eigenvalues of exp(πiF) and the no-ghost theorem holds separately in each.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E39；整段逐字读到原书页图）。
+      ⚠ **无式号是原书事实**；抽取记录明确要求不要编式号。
+      ⚠ 「The proof is a direct imitation of the bosonic argument of chapter 4.」**就是全部论证**。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, p.137–142（玻色弦无鬼定理的 BRST 证明：light-cone number 分次、Q_B = Q_1 + Q_0 + Q_{−1}、S = {Q_1, R} 是数算符、严格下三角）"
+    note: |
+      Vol.2 明写以此为模板（'a direct imitation of the bosonic argument of chapter 4'），
+      故这条来源是文献指定的。本图对应节点是 worldsheet.no-ghost-theorem-brst
+      与其推导 --via-polchinski-4-4（自身也是 physical-argument）。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.14, p. 43（'Work out the massless level of the open superstring in BRST quantization.'）"
+    note: |
+      L1。原书正文说 'The reader can again work out the first few levels by hand'，
+      对应的习题就是这一道；[H] Problem 10.14 给了解答（低能级验证，非定理证明）。
+tags: [superstring, no-ghost-theorem, brst, unitarity, rns]
+notes: |
+  ★★★【本卡是本轮抽取对本项目最直接有用的结果，也是最需要小心的一张】
+  抽取记录 E39 与 Q4 的要点，逐条落在本卡与其推导上：
+
+  【为什么陈述是三重的，却不拆】(1)(2)(3) 在原书里是**同一句话**的三个并列子句，
+  且共用同一句「direct imitation」作为论证。按 graph/CLAUDE.md「文献把两件事写在一个定理里
+  而它们被分别推导时才拆」的判据，这里**没有**分别推导，故不拆。
+  ⚠ 但若日后取得 Ohta 1986 / Henneaux 1987 等独立来源，很可能会发现它们分别处理
+  (1) 与 (3)（玻色弦一侧的 worldsheet.no-ghost-theorem-v4 就正在被建议按来源集合拆分），
+  届时应新建 v2 并拆。
+
+  【H^⊥ 的定义是逐字的】'defined to have no X^{0,1}, ψ^{0,1}, b, c, β, or γ excitations'
+  ——可直接写进节点，本卡照此。
+
+  【第 (4) 条别漏】「无鬼定理在 exp(πiF) 的每个本征子空间上分别成立」是 GSO 投影后
+  谱仍无鬼的依据。若没有它，worldsheet.gso-projection 之后的一切谱都没有幺正性支撑。
+
+  【picture 问题】原书全章不出现 'picture' 一词，但他用的顶点算子是 −1 与 −1/2 picture
+  （(10.4.22)/(10.4.25)）。抽取记录 Q4 末尾记下一条 **L4 级、不得入库**的现代信息：
+  picture number 会影响 BRST 上同调，零动量 R–R 态在不同 picture 下不等价。
+  若属实，本卡的陈述隐含了 picture 的选择。**本图不采信该信息**，只作为待查线索。
+
+  【升级路径】把本命题抬到 rigorous 的目标文献（reading-list.md 已登记为 P1）：
+    ohta-1986（Phys. Rev. D 33 (1986) 1681；Phys. Lett. B 179 (1986) 347）、
+    henneaux-1987（Phys. Lett. B 183 (1987) 59）；
+  另有候选 Phys. Lett. B 218 (1989) 309、arXiv:1212.3592、arXiv:1009.0107。
+  ⚠ 这些**均只到标题/摘要级，尚未抽取，不得直接作为来源写进本图**。
+author: curator
+created: "2026-09-11"
