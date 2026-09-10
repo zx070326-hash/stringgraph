@@ -39,7 +39,15 @@
 - 与 TheoremGraph / Physlib 对接，导入导出
 - 向 Prove2Me 提交里程碑作为 mission
 
-## 待裁决（来自第一批 agent 的建议，lead 尚未决定）
+## lead 裁决记录（2026-09-10）
+
+- **OPE 收敛公理**：暂不建公理节点。凡靠"围道变形 + OPE"得到算子关系的推导一律 `physical-argument`，gaps 写明"OPE 级数收敛与围道变形合法性在来源中未证明"。等 CFT 子图有足够多此类推导再统一挂公理。
+- **c = D / Sugawara**：建"Fock 空间上的 Virasoro 生成元"定义节点 + "满足 Virasoro 关系、c = D"命题节点；命题配 `--via-ope`（physical-argument）与 `--via-mode-algebra`（严格代数事实，来源 Kac–Raina 1987 / Schottenloher 2008，定理编号核实后才标 rigorous）两条推导。
+- **`worldsheet.virasoro-algebra` 拆卡**：同意拆。待本批 curator 分支合并后由 lead 执行：新定义卡不含唯一性断言（可标 formalized），唯一性另立命题卡，旧卡 `superseded_by`。
+- **a < 1 分支**：researcher 第二轮检索（Thorn 1987、GSW §2.3.3、Polchinski §4.1 习题）。找不到成文来源就不入库。
+- **Polchinski 原书核对**：仍无持书者。E34 改由 Kac–Raina 等数学来源支撑，E53、E58 继续挂"二手源核实"gap。
+
+## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
 
 - **`worldsheet.ope-convergence` 公理节点**（researcher Q3）：Polchinski 用围道变形从 OPE 推 Virasoro 代数，书中不证 OPE 收敛。图里现有的 `virasoro-algebra` 是抽象李代数定义，本身 rigorous，不受影响；受影响的是尚未建立的"自由玻色子的 Sugawara 构造满足 Virasoro 关系"一类节点。建 Sugawara 节点时再决定是否挂此公理。
 - **`worldsheet.virasoro-algebra` 拆卡**（formalizer）：定义部分已形式化，"唯一非平凡中心扩张"未形式化。拆成定义卡（可标 formalized）+ 唯一性命题卡。
