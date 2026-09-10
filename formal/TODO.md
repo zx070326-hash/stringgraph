@@ -194,6 +194,12 @@
     做它需要的组合输入已经看清楚：欧拉型递推 `M·Φ_M = Σ_{l=1}^{M} (b·α_{-l}) Φ_{M-l}`，
     在系数层面等价于 `Σ_v (η_{v.1} b^{v.1}) w(d - e_v) = (level d) · w(d)`，可由
     `Fock.expWeight_add_single` 直接得到。
+    - [x] (3a) 上述**欧拉型递推已证**：`Fock.creaExp_euler`（`StringFormal/NoGhost/VertexWeight.lean`），
+      连同辅助引理 `Fock.level_sub_single_add`、`Fock.expWeight_sub_single`；
+      无 sorry，公理只有标准三条。求和索引写成 `l ∈ Finset.range M` 配 `l.succPNat`，
+      即模态跑遍 `1, …, M`。
+    - [ ] (3b) 真空上的单条等式 `L_m Φ_J = …`（把 (3a) 与 `Sugawara.lean` 的 `Lop` 结合），
+      以及由 `vertexOsc_unique` 得到的完整 `[L_m, V_J]`：**未做**。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
