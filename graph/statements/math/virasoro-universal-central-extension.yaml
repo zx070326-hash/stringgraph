@@ -1,0 +1,137 @@
+id: math.virasoro-universal-central-extension
+kind: proposition
+title: Virasoro 代数是双边 Witt 代数的万有中心扩张（H¹(Vir, k) = H²(Vir, k) = 0）
+statement: |
+  设 k 是**特征零的域**。取 Virasoro 代数 Vir(k)（worldsheet.virasoro-algebra-v2 在 R = k 时的
+  李代数）与**双边** Witt 代数 W(k)（math.witt-algebra，基 {ℓ_n : n ∈ ℤ}），
+  记 π : Vir(k) → W(k) 为典范满射，其核是一维中心 k·C。系数模一律取**平凡模 k**。则：
+
+  (1) **完美性**：[Vir(k), Vir(k)] = Vir(k)。
+      非平凡的一步是中心元也落在导出代数里，即 C ∈ [Vir(k), Vir(k)]。
+      （来源的记号下这一步是 [d_{−2}, d_2] = 4 d_0 + ½ c；换成本图 conv.virasoro-standard
+        的记号，同一事实读作 [L_2, L_{−2}] = 4 L_0 + (1/2) C。两式互为生成元重标记，
+        见 notes 的【为什么 uses_conventions 是空的】。）
+
+  (2) **低维上同调消失**：H^1(Vir(k), k) = 0 且 H^2(Vir(k), k) = 0。
+      其中 H^1 那一半与 (1) 等价（H^1(L, k) ≅ (L/[L, L])^*）。
+
+  (3) **万有性**：(1) 与 (2) 合起来等价于「π : Vir(k) → W(k) 是 W(k) 的**万有中心扩张**」，
+      即对 W(k) 的任一中心扩张 0 → Z → E →^p W(k) → 0，存在**唯一**的李代数同态
+      φ : Vir(k) → E 使 p ∘ φ = π。
+      这一步用的一般判据是：中心扩张 0 → Ĉ → L̂ → L → 0 是万有的**当且仅当**
+      H^1(L̂, k) = H^2(L̂, k) = 0（该判据的出处见 sources 中 weibel-1994 与 block-1968
+      两条，且**只能两条一起引**，见各自 note）。
+
+  【本节点不断言】
+
+  (a) H^2(W(k), k) 的维数。「dim H^2(Witt, k) = 1」是 worldsheet.virasoro-unique-central-extension，
+      那是**另一个李代数的另一个上同调群**；(W) 不蕴含 (V)，(V) 也不蕴含 (W)。
+      （不过本节点采用的那个证明**在手段上用到**了 dim H^2(W, k) = 1，故推导节点里挂了这条
+        依赖——那是证明手段的依赖，不是本陈述的前提。）
+
+  (b) 非平凡系数模的上同调。特别地 H^2(Vir, Vir) = 0（**adjoint** 模）是一条**不同**的定理
+      （它才是 schlichenmaier-2014 的标题与主定理），本节点不含它。
+
+  (c) 更高阶的消失。**恰恰相反**：dim H^3(Vir, k) = 1（ecker-schlichenmaier-2018,
+      arXiv:1707.06106v2, Theorem 5.2.1），dim H^3(Vir, Vir) = 1（同文 Theorem 5.2.2）。
+      因此任何形如「Vir 的上同调都是平凡的」的读法都是错的。
+
+  (d) 特征非零的类比。char p > 3 的**受限** Virasoro 代数（有限维）有形式相同的结论，
+      但那是另一个对象，与本节点无关。
+
+  (e) 任何形式化。本项目 formal/ 中没有这条结论；外部的 Kytölä VirasoroProject 也没有
+      （该项目形式化的是 H^2(Witt) 一维）。故本节点的有效状态上限是 rigorous。
+uses_conventions: []
+sources:
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6, p. 7"
+    note: |
+      **本节点的首选来源**，全文已由 researcher 核实（2026-09-11，13 页逐页读毕，
+      arxiv.org/pdf/2501.15560），逐字为「Let 𝒱 denote the Virasoro algebra over a field 𝔽
+      of characteristic zero. Then H¹(𝒱, 𝔽) = H²(𝒱, 𝔽) = 0. In particular, the Virasoro
+      algebra 𝒱 is a universal central extension of the two-sided Witt algebra 𝒲.」
+      带完整证明；同页脚注 3 说明「two-sided」不是修辞（𝒲 = Der(𝔽[t, t⁻¹])）。
+      作者自陈第一部分是 well-known，只是「为方便读者」补证明——**这不是新结果，
+      但这是一条可引的编号陈述**。
+      **是否已被期刊接受未核实（L0）**：本 loc 写死的是 arXiv v1（2025-01-26）。
+      **⚠ 同文 Lemma 2.4 是 char p > 3 的受限 Virasoro 代数，绝不可当本节点的来源。**
+  - ref: schlichenmaier-2014
+    loc: "arXiv:1111.6625v4, Remark 6.4, p. 13；计算本体是 Lemma 6.2 与 Lemma 6.3, p. 12"
+    note: |
+      旁证（researcher 已读 pp.10–14）。Remark 6.4 是**全文唯一**明写
+      H²(𝒱; 𝕂) = {0} 的地方，逐字「The calculations of Lemma 6.2 and Lemma 6.3 showed
+      H²(𝒱; 𝕂) = {0}.」。
+      **使用限制（两条，均来自 sources.bib 本条 note）**：
+      (i) 本文的标题与主定理是 **adjoint 模**（H²(𝒱, 𝒱) = 0），H²(𝒱; 𝕂) = 0 是证明中途的
+          副产品；(ii) **本文没有任何一条编号定理陈述 H²(Vir, ℂ) = 0**，
+          故**不得**写成「Schlichenmaier, Theorem: H²(Vir, ℂ) = 0」。
+      **编号只对 arXiv v4 核实；期刊版（Forum Math. 26 (2014) 913–929）编号未核实（L0）。**
+  - ref: ecker-schlichenmaier-2018
+    loc: "arXiv:1707.06106v2, §5.1, p. 19 的低维上同调总表（**无编号**，是 summary 小节里的显示式）；H³ 不为零见 Theorem 5.2.1, p. 19 与 Theorem 5.2.2, p. 20"
+    note: |
+      第三来源。§5.1 一次列全 H⁰/H¹/H² × (平凡模, adjoint 模)，其中 H²(𝒱, 𝕂) = {0}，
+      并把该结果**归属**给 schlichenmaier-2014（正文逐字「The results for the second
+      cohomology were shown by Schlichenmaier [31]」）——所以它是转引而非独立证明。
+      同文还逐字说明 H¹(𝒱, 𝕂) = {0}「is obtained from the fact that the Virasoro algebra
+      is a perfect Lie algebra」，即本节点 (1) ⟺ (2) 的 H¹ 那一半；
+      一般公式 H¹(𝓛, 𝕂) = (𝓛/[𝓛, 𝓛])^* 见同文 §3.3.2, p. 5（无编号）。
+      **⚠ §5.1 的这些都是无编号显示式，loc 不得编定理号。**
+  - ref: weibel-1994
+    loc: "Theorem 7.9.2 与 Lemma 7.9.3, p. 249"
+    note: |
+      仅用于陈述 (3) 的**一般判据**。**证据状态必须照实读**：
+      **编号是 L4**（Google Books volume flm-dBXfZ_gC 检索命中 p.249，researcher 跑了
+      故意无意义的控制查询并确认「无命中」，故页码是真实命中）；
+      **内容是 L3**（来自 feldvoss-siciliano-2025 p.5 的逐字转引）；**正文一页未读（L0）**。
+      Theorem 7.9.2 = 「L 有万有中心扩张 iff L 完美」+「Ĉ ≅ H₂(𝔤, 𝔽)」。
+      **⚠ 禁令：「万有 ⟺ H¹(L̂) = H²(L̂) = 0」这条双条件在来源里是 Lemma 7.9.3 与
+      block-1968 Lemma 3.1 两条合起来得到的，不得单独归给 Weibel。**
+  - ref: block-1968
+    loc: "Lemma 3.1"
+    note: |
+      与 weibel-1994 Lemma 7.9.3 **配对**使用，共同支撑陈述 (3) 的那条双条件。
+      元数据 L1（抄自 feldvoss-siciliano-2025 参考文献 [4]），**内容未核实（L0）**，
+      Lemma 3.1 的正文措辞本项目没有读到，故此处不代写其陈述。
+tags: [algebra, lie-algebra, cohomology, central-extension, virasoro, witt]
+notes: |
+  【查重】新增前跑过 `stringgraph search universal central extension / 万有 / cohomology /
+  central extension / H^2 / perfect`：图中此前**没有**任何承载 H²(Vir, k) = 0 的节点，
+  唯一近似命中是 worldsheet.virasoro-unique-central-extension（那是 H²(Witt, k) 一维，
+  见陈述【本节点不断言】(a)）。
+
+  【为什么必须与 worldsheet.virasoro-unique-central-extension 分开】
+  两者是**不同李代数的不同上同调群**：
+    (W) dim H²(Witt, k) = 1 —— Witt 恰有一个非平凡一维中心扩张，即 Vir；
+    (V) H²(Vir, k) = 0     —— Vir 自身再中心扩张不出新东西。
+  (W) 与 (V) 互不蕴含。「Vir 是 Witt 的万有中心扩张」这句话同时用到两者，
+  但它作为**推论**属于本卡（(3)），不属于 (W) 那张卡。不得把两张卡合并，
+  也不得因为「都叫中心扩张」就让其中一个依赖另一个。
+
+  【为什么 uses_conventions 是空的】四份来源的 Virasoro 括号写法互不相同
+  （Feldvoss–Siciliano 用 (n−m) 且中心项按第二指标写；Ecker–Schlichenmaier 的中心项带负号；
+  本图 conv.virasoro-standard 是 Polchinski 系 (m−n) + (c/12)m(m²−1)），
+  但它们是**同一个李代数的不同记号**，而 H^n(−, k) 对李代数同构不变，
+  **本节点的三条断言对括号符号约定完全不敏感**。故按 researcher 的建议
+  （literature/extractions/math-sources.md §31.3-1）不挂任何约定。
+  陈述 (1) 里出现的那个括号式**两种记号都写了**，就是为了不让「空的 uses_conventions」
+  变成一个含糊之处：读者用哪套记号都能验证同一件事。
+  **注意本图记号下指标次序是反的**：conv.virasoro-standard 下
+  [L_{−2}, L_2] = −4 L_0 − (1/2) C，写成 [L_2, L_{−2}] = 4 L_0 + (1/2) C 才与来源同号。
+
+  【area 选择】放在 math：这是与弦论无关的纯李代数命题，弦论侧只通过
+  worldsheet.brst-nilpotent-at-c26--via-fgz 用到它。
+
+  【形式化状态的不对称】(W) 已被 Kytölä 的 VirasoroProject 机器验证（Theorem 6.2），
+  (V) 在任何 Lean 项目中都**没有**形式化记录（researcher 2026-09-11 查了该仓库文件清单：
+  有 WittAlgebraCohomology.lean，没有任何 Virasoro 上同调/完美性/万有性文件）。
+  这个不对称是刻意记在这里的。
+
+  【本卡不采信的来源（researcher 的三条禁令，math-sources.md §31.4）】
+  1. feldvoss-siciliano-2025 **Lemma 2.4** —— char p > 3 的受限 Virasoro 代数，不是同一对象。
+  2. 「Schlichenmaier, Theorem: H²(Vir, ℂ) = 0」—— 那篇没有这样一条编号定理。
+  3. schottenloher-2008 / kac-raina-1987 / Iohara–Koga / Kytölä —— 前两者通读或核实后
+     **没有**这条陈述（Schottenloher 第 4、5 章全读，只有 (W)），后两者本轮 L0 或确定否定。
+     特别地 Iohara–Koga 很可能是把万有性写进 Virasoro 的**定义**，那对本图反而有害
+     （会把一条需要证明的命题藏进定义），启用前必须先确认它是证明还是定义。
+author: curator
+created: "2026-09-11"

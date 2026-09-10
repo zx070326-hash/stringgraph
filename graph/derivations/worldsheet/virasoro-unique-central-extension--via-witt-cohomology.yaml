@@ -32,7 +32,33 @@ sources:
       nontrivial and that H²(Witt, 𝕜) is one-dimensional. **We do not**」。
       即非平凡性确在该项目中证明，但本项目没有核实它对应论文里的哪个编号。
   - ref: schottenloher-2008
-    loc: "相关章节，编号未核实（Witt 代数的中心扩张分类）"
+    loc: "Ch. 5, Theorem 5.1, p. 79；Definition 5.2, p. 82；Ch. 4, Remark 4.7, p. 69"
+    note: |
+      **编号已核实（researcher 2026-09-11，第 4、5 两章全文逐页读毕）**，获取途径是作者本人
+      LMU 主页按章挂的 PDF（www.mathematik.uni-muenchen.de/~schotten/LNP-cft-pdf/）。
+      三个定位各自承担陈述的一段：
+      - **Theorem 5.1, p. 79** 逐字就是「[GF68] H²(W, ℂ) ≅ ℂ」，即陈述 (1) 的维数断言，
+        后接三步证明（ω ∈ Z²；ω ∉ B²；任一 Θ ∈ Z² 同调于某个 λω），证毕于 p. 82；
+      - **Definition 5.2, p. 82** 是 Virasoro 代数的定义
+        [L_n, L_m] = (n−m)L_{n+m} + δ_{n+m}(n/12)(n²−1)Z，对应陈述 (3)；
+      - **Ch. 4, Remark 4.7, p. 69** 逐字「The cohomology group H²(𝔤, 𝔞) is in one-to-one
+        correspondence with the set of equivalence classes of central extensions of 𝔤 by 𝔞」，
+        这是陈述 (2)「H² 分类扩张等价类」那一步的带编号出处（此前悬空）。
+      **⚠ 顺带的否定结论**：第 4、5 两章通读，**没有**任何一处陈述 H²(Vir, ℂ) = 0，
+      也没有「Vir 是万有中心扩张」的措辞。故本书**不得**用作
+      math.virasoro-universal-central-extension 的来源（见该节点 notes 的禁令 3）。
+  - ref: gelfand-fuks-1968
+    loc: "刊号/页码见 sources.bib 本条 note 的元数据分歧（未裁决）；**内容未核实（L0），正文未获取**"
+    note: |
+      **原始出处**。登记理由：schottenloher-2008 的 Theorem 5.1（H²(W, ℂ) ≅ ℂ）**逐字**把该结果
+      归功于 [GF68]，而本推导此前的三个来源（virasoro-lean-2025 / schottenloher-2008 /
+      kac-raina-1987）里没有一手出处。
+      **本条只承担归属，不承担论证**：本项目**没有读到**该文任何一页，也没有裁决其元数据
+      （schottenloher-2008 的参考文献记作 Funct. Anal. Appl. 2 (1968), 342–343；
+      ecker-schlichenmaier-2018 记作 Funkcional. Anal. i Prilozen. 2 (1968), no. 4, 92–93，
+      MR 0245035；最可能是俄文原刊与英译本的差别，但未核实）。
+      按 docs/STATUS_LEVELS.md，本推导的 rigorous 不建立在本条上，而建立在
+      virasoro-lean-2025 Theorem 6.2（机器验证）与 schottenloher-2008 Theorem 5.1 上。
   - ref: kac-raina-1987
     loc: "Witt 代数的中心扩张这一主题；**不写 Lecture 编号**（sources.bib 的版本陷阱：两版讲号不可互换）"
 summary: |
@@ -61,16 +87,23 @@ gaps:
   - "**最强来源的证明在外部仓库**。virasoro-lean-2025 / VirasoroProject 的 Lean 证明本项目
      未运行、未复现；本项目只核实了论文文本与编号。若日后把该证明移植进 formal/，
      本推导可升级为 formalized（届时需给目标陈述补 formal.lean_decl）。"
-  - "**经典出处未登记**。H^2(W, k) 一维通常归给 Gelfand–Fuchs（1968），本项目
-     literature/sources.bib 中**没有**这条文献，故未作为 source 引用。建议 researcher 登记
-     并核实原文编号，届时本推导可加一条独立的一手来源。"
+  - "**经典出处已登记但正文未读**。H^2(W, k) 一维通常归给 Gelfand–Fuchs（1968）；
+     researcher 已于 2026-09-11 把 gelfand-fuks-1968 登记进 literature/sources.bib 并加为本推导的
+     来源（依据是 schottenloher-2008 Theorem 5.1 逐字的归功）。**但该文正文一页未读（L0）**，
+     且两份独立参考文献给出的刊名/页码不一致（俄文原刊 vs 英译本，见 sources.bib 该条 note），
+     **元数据分歧未裁决**。故本条来源只承担历史归属，不构成可核对的论证依据。"
   - "**基环范围**。所引来源都在特征零域上工作（VirasoroProject 的 Witt 代数取
      [Field 𝕜] [CharZero 𝕜]），而本项目 math.witt-algebra / worldsheet.virasoro-algebra-v2
      的 Lean 实现分别对任意交换环 / 任意 ℚ-代数成立。目标陈述已相应限定在特征零域上；
      一般 ℚ-代数（例如非域的 ℚ-代数）上的分类**未核实**，不要把本节点用在那种一般性下。"
-  - "**教科书来源的编号全部未核实**（schottenloher-2008、kac-raina-1987），
-     按各自 sources.bib note 的要求只写主题不写编号。因此除 Theorem 6.2 外，
-     本推导的文献定位强度偏低。"
+  - "**教科书来源的编号：schottenloher-2008 已解除，kac-raina-1987 仍未核实**（更新 2026-09-11）。
+     Schottenloher 第 4、5 两章已由 researcher 逐页读毕，本推导的 loc 已写死为
+     Theorem 5.1 / Definition 5.2 / Remark 4.7（见该来源的 note）。
+     kac-raina-1987 的编号仍未核实，按 sources.bib 的版本陷阱（两版讲号不可互换）只写主题不写编号；
+     且两份引用它的近期文献（feldvoss-siciliano-2025、ecker-schlichenmaier-2018）引的都是
+     **2013 第二版**（Kac–Raina–Rozhkovskaya, Adv. Ser. Math. Phys. 29），
+     被引位置是 [20, Section 1.3]『Witt 有唯一非分裂中心扩张』——正是本节点的陈述。
+     是否新增 bib key kac-raina-rozhkovskaya-2013 并改引第二版，留给后续裁决。"
 notes: |
   【拆卡记录，2026-09-11】本推导与目标陈述一起，从旧卡 worldsheet.virasoro-algebra
   的陈述末句拆出（lead 裁决 2026-09-10，docs/ROADMAP.md 待拆清单）。

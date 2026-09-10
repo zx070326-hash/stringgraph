@@ -1,0 +1,149 @@
+id: math.virasoro-universal-central-extension--via-feldvoss-siciliano
+target: math.virasoro-universal-central-extension
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      非 inferred：目标陈述就是关于 Vir(k) 这个李代数的断言，需要它的定义（生成元、括号、
+      中心性、正合列 0 → R → Vir(R) → W(R) → 0）。
+      **基环收紧**：本图的 Vir(R) 对任意 ℚ-代数 R 定义，来源（feldvoss-siciliano-2025）
+      取特征零的**域** 𝔽；目标陈述已把假设收紧为「k 是特征零的域」，故不需要 convention_map。
+      **记号差异不需要 convention_map**：来源用 [d_m, d_n] = (n−m)d_{m+n} + δ_{m+n,0}
+      (1/12)(n−1)n(n+1)c，与 conv.virasoro-standard 差一个生成元重标记（d_n ↦ ±L_{±n}，
+      c ↦ ±C），是同一个李代数；本推导的目标节点 uses_conventions 为空，
+      结论对同构不变（见目标节点 notes）。
+  - id: math.witt-algebra
+    note: |
+      非 inferred：陈述 (3) 的「万有中心扩张」是相对 W(k) 说的，且来源逐字说的是
+      **two-sided** Witt algebra 𝒲 = Der(𝔽[t, t⁻¹])（feldvoss-siciliano-2025 p. 7 脚注 3）。
+      本图 math.witt-algebra 正是双边版本（基 {ℓ_n : n ∈ ℤ}），对得上。
+      **⚠ 同文 Proposition 1.2, p. 4 说的是**单边** Witt 代数 W_r 的 H²(W_r, 𝔽) = 0，
+      与本条依赖无关，不要混（该文的 (1/12) 中心项只对双边版本存在）。
+      **基环收紧**：本图 W(R) 对任意交换环定义，来源取特征零的域；目标陈述已限定。
+  - id: worldsheet.virasoro-unique-central-extension
+    note: |
+      非 inferred，但**这是证明手段上的依赖，不是目标陈述的前提**（目标节点【本节点不断言】(a)
+      已写明这一点）。理由：feldvoss-siciliano-2025 Lemma 2.6 的证明在处理 H² 那一半时逐字写
+      「we can use the same arguments as in the proof of Lemma 2.4 in conjunction with
+      H¹(𝒲, 𝔽) = 0 and dim_𝔽 H²(𝒲, 𝔽) = 1 (see [24, Section 2])」——
+      其中 dim H²(𝒲, 𝔽) = 1 正是本图 worldsheet.virasoro-unique-central-extension 的 (1)。
+      **不完全覆盖**：同一句里还用到 H¹(𝒲, 𝔽) = 0（即 Witt 代数完美），本图**没有**承载这条的
+      节点，见 gaps。
+      **注意来源不同**：FS 把这两条 Witt 侧事实归给 [24, Section 2] = schlichenmaier-2014，
+      而本图那张卡的最强来源是 virasoro-lean-2025 Theorem 6.2（机器验证）；两者内容一致，
+      本推导不依赖于哪一份来源。
+sources:
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6, p. 7（陈述 + 完整证明）；万有性的一般判据见 p. 5 正文"
+    note: |
+      **本推导的主来源**。Lemma 2.6 一条同时给出目标陈述的 (1)(2)(3)：
+      正文逐字「Then H¹(𝒱, 𝔽) = H²(𝒱, 𝔽) = 0. In particular, the Virasoro algebra 𝒱 is a
+      universal central extension of the two-sided Witt algebra 𝒲.」，
+      证明里逐字给出 [d₀, d_n] = n d_n、[d₋₁, d₁] = 2d₀、[d₋₂, d₂] = 4d₀ + ½c 三步完美性论证。
+      p. 5 正文逐字：「a Lie algebra L over a field 𝔽 has a universal central extension if, and
+      only if, L is perfect (see [31, Theorem 7.9.2]). Moreover, we conclude from [4, Lemma 3.1]
+      and [31, Lemma 7.9.3] that a central extension 0 → Ĉ → L̂ → L → 0 is universal exactly
+      when H¹(L̂, 𝔽) = H²(L̂, 𝔽) = 0.」——这是陈述 (3) 里那条等价判据的直接出处。
+      全文由 researcher 于 2026-09-11 逐页核实（13 页）。
+      **⚠ 不得改引同文 Lemma 2.4（char p > 3 的受限 Virasoro 代数）。**
+  - ref: schlichenmaier-2014
+    loc: "arXiv:1111.6625v4, Remark 6.4, p. 13（H²(𝒱; 𝕂) = {0} 的唯一明写处）；证明本体 Lemma 6.2 与 Lemma 6.3, p. 12"
+    note: |
+      独立的第二来源，且是 feldvoss-siciliano-2025 自己引的那一篇（其 [24]）。
+      它给出 H²(Vir, 平凡模) = 0 的一条**初等证明**：把 2-上循环用上边缘归一化后，
+      Lemma 6.2 给 ψ(x, t) = 0（t 为中心元），Lemma 6.3 给 ψ' ≡ 0。
+      **它不覆盖目标陈述的 (1) 与 (3)**（完美性与万有性在该文中没有出现），只覆盖 (2) 的 H² 一半。
+      **编号只对 arXiv v4 核实（L1）；期刊版编号未核实（L0）。**
+      **禁止**把它写成「Theorem: H²(Vir, ℂ) = 0」，该文没有这样一条编号定理。
+  - ref: ecker-schlichenmaier-2018
+    loc: "arXiv:1707.06106v2, §5.1, p. 19（H²(𝒱, 𝕂) = {0} 与 H¹(𝒱, 𝕂) = {0}，无编号）；§3.3.2, p. 5（H¹(𝓛, 𝕂) = (𝓛/[𝓛, 𝓛])^*，无编号）"
+    note: |
+      第三来源，**是转引不是独立证明**（正文把 H² 结果归给 Schlichenmaier [31]）。
+      它对本推导的价值有两点：(i) §3.3.2 的公式 H¹(𝓛, 𝕂) = (𝓛/[𝓛, 𝓛])^* 是目标陈述
+      「(1) ⟺ (2) 的 H¹ 那一半」的出处——feldvoss-siciliano-2025 把这一步当已知用，没有给出处；
+      (ii) §5.1 同时列出 dim H³(Vir, 𝕂) = 1，是目标陈述【本节点不断言】(c) 的依据。
+  - ref: weibel-1994
+    loc: "Theorem 7.9.2 与 Lemma 7.9.3, p. 249"
+    note: |
+      陈述 (3) 的一般判据。**编号 L4（Google Books 检索命中 + 控制查询通过），内容 L3
+      （feldvoss-siciliano-2025 p. 5 的逐字转引），正文一页未读（L0）。**
+      **⚠ 「万有 ⟺ H¹(L̂) = H²(L̂) = 0」不得单独归给 Lemma 7.9.3**，见 block-1968 那条。
+  - ref: block-1968
+    loc: "Lemma 3.1"
+    note: |
+      与 weibel-1994 Lemma 7.9.3 配对，共同给出 (3) 里的双条件。**内容未核实（L0）**，
+      本项目没有读到 Lemma 3.1 的正文措辞，故不代写。
+summary: |
+  论证骨架（照 feldvoss-siciliano-2025 Lemma 2.6 的证明，逐步对应目标陈述的三段）：
+
+  (1) **完美性**。在来源的记号（[d_m, d_n] = (n−m)d_{m+n} + δ_{m+n,0}(1/12)(n−1)n(n+1)c）下：
+      [d₀, d_n] = n d_n 给出 d_n ∈ [𝒱, 𝒱]（n ≠ 0）；[d₋₁, d₁] = 2d₀ 给出 d₀ ∈ [𝒱, 𝒱]；
+      **关键一步** [d₋₂, d₂] = 4d₀ + ½c 把中心元也拉进导出代数，得 c ∈ [𝒱, 𝒱]。
+      故 𝒱 = [𝒱, 𝒱]。
+      换成本图 conv.virasoro-standard 的记号，这三步依次是 [L₀, L_n] = −n L_n、
+      [L₁, L₋₁] = 2L₀、[L₂, L₋₂] = 4L₀ + (1/2)C（指标次序与来源相反，见目标节点 notes）。
+
+  (2) **H¹ = 0**：由 (1) 与一般公式 H¹(𝓛, 𝕂) = (𝓛/[𝓛, 𝓛])^*（ecker-schlichenmaier-2018
+      §3.3.2；feldvoss-siciliano-2025 把这一步当已知用）立即得到。
+      **H² = 0**：来源用 Lemma 2.4 证明里的同一条长正合序列（Hochschild–Serre，
+      该文引 [18, Theorem 7]），把 H²(𝒱, 𝔽) 夹在 Witt 侧的已知量之间，
+      再代入 H¹(𝒲, 𝔽) = 0 与 dim H²(𝒲, 𝔽) = 1（该文引 [24, Section 2]）得零。
+      独立的第二条路线见 schlichenmaier-2014 Lemma 6.2 + Lemma 6.3（初等的上循环归一化计算）。
+
+  (3) **万有性**。一般判据（feldvoss-siciliano-2025 p. 5，引 weibel-1994 Theorem 7.9.2
+      与 Lemma 7.9.3 + block-1968 Lemma 3.1）：中心扩张 0 → Ĉ → L̂ → L → 0 是万有的
+      当且仅当 H¹(L̂, 𝔽) = H²(L̂, 𝔽) = 0。把 L̂ = Vir(k)、L = W(k) 代入 (2) 即得 (3)；
+      反向也成立，故 (1)+(2) 与 (3) 等价。
+      来源在 Lemma 2.6 的陈述里直接写出了这个「In particular」，本推导没有额外补步骤。
+
+  （顺带，同来源 Corollary 2.7, p. 7：特征零时 𝒲 与 𝒱 是 𝒲 仅有的两个覆盖代数。
+    本图没有为它建节点。）
+gaps:
+  - "**未形式化**。本项目 formal/ 中没有 H²(Vir, k) = 0；外部的 Kytölä VirasoroProject 也没有
+     （researcher 2026-09-11 核实其 Lean 文件清单：有 WittAlgebraCohomology.lean，
+     没有任何 Virasoro 上同调 / 完美性 / 万有性文件）。故本推导上限是 rigorous。
+     注意这造成一个不对称：H²(Witt) 一维（worldsheet.virasoro-unique-central-extension）
+     的最强来源是机器验证的，本节点的不是。"
+  - "**主来源是未见刊的 arXiv 预印本**。feldvoss-siciliano-2025 是否已被期刊接受未核实（L0，
+     math-sources.md Q16）；若已发表，Lemma 2.6 的编号可能变。本推导的 loc 写死的是 v1。
+     缓解：该文对这条结论自陈是 well-known，并引 schlichenmaier-2014 Remark 6.4 与
+     ecker-schlichenmaier-2018 §5.1 作为已有出处，本推导把这两条都列为独立来源，故不是孤证。"
+  - "**第二来源的编号只对 arXiv 版核实**。schlichenmaier-2014 的 Remark 6.4 / Lemma 6.2 / 6.3
+     编号取自 arXiv:1111.6625v4（时间戳 2011–2012），期刊版（Forum Math. 26 (2014) 913–929）
+     的编号是否相同未核实（L0，math-sources.md Q17）。"
+  - "**一般判据的原文没有读到**。weibel-1994 Theorem 7.9.2 / Lemma 7.9.3 的编号是 L4
+     （Google Books 检索 + 控制查询），内容是 L3（feldvoss-siciliano-2025 的逐字转引），
+     正文一页未读；block-1968 Lemma 3.1 的内容完全未核实（L0，math-sources.md Q14/Q15）。
+     因此陈述 (3) 里「(1)+(2) ⟺ 万有」这一等价的**文献强度低于** (1)(2) 本身。
+     若只信 (1)(2)，本节点仍然成立；(3) 的等价性是把 Lemma 2.6 的『In particular』照抄下来的
+     ——所幸 Lemma 2.6 本身就断言了万有性，故 (3) 的**结论**不依赖于这两条未读来源，
+     只有它的**等价形式**依赖。"
+  - "**Witt 侧的一半依赖在图中没有节点**。Lemma 2.6 的证明用到 H¹(𝒲, 𝔽) = 0（Witt 代数完美）
+     与 dim H²(𝒲, 𝔽) = 1 两条。后者已挂 worldsheet.virasoro-unique-central-extension，
+     前者本图**没有**节点（`stringgraph search perfect` 无命中）。
+     补法：建一条 math.witt-algebra-perfect（或在 witt 侧扩一张卡），
+     来源可取 ecker-schlichenmaier-2018 §5.1 附近对 Witt 的对应陈述。留给后续。"
+  - "**Hochschild–Serre 长正合序列未展开**。Lemma 2.6 的 H² 部分只写『same arguments as in the
+     proof of Lemma 2.4』，而 Lemma 2.4 的证明用的是该文 [18, Theorem 7]
+     （Hochschild–Serre 1953）。本项目**没有**登记 Hochschild–Serre，也没有核实那条序列的
+     具体形式；本推导对这一步是**照单接受**来源的说法。这是本推导中唯一一处
+     『来源说了但本项目没看到细节』的地方，若要把该节点推向形式化，这是第一个要展开的坑。"
+notes: |
+  【status 的选择】按 docs/STATUS_LEVELS.md，4 = rigorous 要求「有发表的、数学界接受的完整证明；
+  来源必须是数学文献或数学物理文献」。主来源是纯数学（math.RA）预印本且带完整证明，
+  另有两条独立数学来源（其中 schlichenmaier-2014 是已发表期刊论文）覆盖 (2) 的核心部分，
+  故 rigorous 成立。不取 formalized 的理由见 gaps 第一条。
+  未使用 STATUS_LEVELS.md 的「reviewer 复核初等计算」例外——本推导不靠自算。
+
+  【为什么 uses_conventions 空但没有 convention_map】目标节点 uses_conventions 为空，
+  两条依赖（worldsheet.virasoro-algebra-v2、math.witt-algebra）都挂 conv.virasoro-standard。
+  校验器只在「目标与依赖在同一 family 上用了**不同**约定」时报错，目标为空则不冲突；
+  这里也确实不需要换算，因为目标陈述的三条断言对生成元重标记不变（见目标节点 notes）。
+
+  【下游】本推导使 worldsheet.brst-nilpotent-at-c26--via-fgz 的「H²(g) = 0」那一步
+  第一次在图内有来源（此前该推导的 gaps 逐字写着「本图中没有 H²(Vir, C) = 0 的节点，
+  本推导对这一步无任何来源支撑」）。**但 FGZ 侧的对接本身仍是 inferred**，
+  见那条推导改写后的 gaps 两点。
+author: curator
+created: "2026-09-11"
