@@ -54,7 +54,8 @@
   `WittAlgebra.isPerfect`（需 `[Invertible (2 : R)]`）、`VirasoroAlgebra.isPerfect`
   （`ℚ`-代数，`C = 2⁅L 2, L (-2)⁆ - 4⁅L 1, L (-1)⁆` 见 `VirasoroAlgebra.cgen_eq`）。
   **数学缺口**：`2` 可逆是必要的，`WittAlgebra.derivedSeries_one_eq_top_iff` 给出
-  `⁅⊤,⊤⁆ = ⊤ ↔ IsUnit (2 : R)`；`ZMod 2` 上不完美（`derivedSeries_one_ne_top_zmod_two`）。
+  `⁅⊤,⊤⁆ = ⊤ ↔ IsUnit (2 : R)`；`ZMod 2` 与 `ℤ` 上不完美
+  （`derivedSeries_one_ne_top_zmod_two` / `derivedSeries_one_ne_top_int`）。
   教科书里"任意交换环上 Witt 代数完美"的说法是错的。
 - [x] `verma-module`：Verma 模 `V(c,h)` 的构造与分级；对应图节点 `worldsheet.verma-module`。
   见 `StringFormal/Virasoro/Verma.lean`（739 行，无 sorry，公理只有标准三条）。

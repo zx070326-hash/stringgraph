@@ -20,7 +20,7 @@ Convention: `conv.virasoro-standard` (as in `StringFormal/Virasoro/Basic.lean`).
   `2` is invertible in `R`.
 * `StringFormal.Virasoro.WittAlgebra.derivedSeries_one_eq_top_iff`: the sharp form,
   `⁅⊤, ⊤⁆ = ⊤ ↔ IsUnit (2 : R)`, together with the counterexample
-  `WittAlgebra.derivedSeries_one_ne_top_zmod_two`.
+  `WittAlgebra.derivedSeries_one_ne_top_zmod_two` / `..._ne_top_int`.
 * `StringFormal.Virasoro.VirasoroAlgebra.isPerfect`: `⁅⊤, ⊤⁆ = ⊤` for `VirasoroAlgebra R`
   (`R` a commutative `ℚ`-algebra, as in `Basic.lean`); in particular the central element `C`
   itself is a bracket combination (`VirasoroAlgebra.cgen_eq`), which is the part of
@@ -177,13 +177,21 @@ theorem derivedSeries_one_eq_top_iff :
     obtain ⟨_i⟩ := h.nonempty_invertible
     exact derivedSeries_one_eq_top R
 
-/-- A concrete counterexample: over `ZMod 2` the Witt algebra is **not** perfect (only
-`2 ℓ n = 0`, not `ℓ n`, is a combination of brackets). The same holds over `ℤ`. -/
+/-- A concrete counterexample: over `ZMod 2` the Witt algebra is **not** perfect (there
+`2 ℓ n = 0`, and `ℓ n` itself is not a combination of brackets). -/
 theorem derivedSeries_one_ne_top_zmod_two :
     derivedSeries (ZMod 2) (WittAlgebra (ZMod 2)) 1 ≠ ⊤ := by
   intro h
   rw [derivedSeries_one_eq_top_iff, show (2 : ZMod 2) = 0 by decide] at h
   exact absurd (isUnit_zero_iff.mp h) (by decide)
+
+/-- The Witt algebra over `ℤ` is **not** perfect either: only `2 ℓ n`, never `ℓ n` for `n`
+even, is a combination of brackets. -/
+theorem derivedSeries_one_ne_top_int : derivedSeries ℤ (WittAlgebra ℤ) 1 ≠ ⊤ := by
+  intro h
+  have h2 := (derivedSeries_one_eq_top_iff ℤ).mp h
+  rw [Int.isUnit_iff] at h2
+  omega
 
 end WittAlgebra
 
