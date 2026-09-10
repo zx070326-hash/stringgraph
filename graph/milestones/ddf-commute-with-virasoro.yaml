@@ -82,6 +82,64 @@ audit:
       Virasoro 括号 [L_m, L_n] 与 c = D 都没有用到（Lean 证明不引它们）。
     verdict: faithful
     diff_notes: |
+      【第二轮回译】2026-09-11，physics-auditor（第二位审计员，独立于第一轮）。写本段时只读了
+      statement 卡 worldsheet.ddf-commute-with-virasoro 的 statement / uses_conventions / formal，
+      ddf-operators-v6 与 -v5 的 statement，四条约定的 definition，以及 Lean 的
+      lie_towerLop_ddfOp / ddfOp / ddfSummand / ddfWindow / towerLop / towerVertex / towerMomentum /
+      towerModeVec / Fock.Lop / ddfOp_mem_towerPhysSubmodule 的签名与定义体；**未读** canonical_text、
+      canonical_source、第一轮 text 与 diff_notes、statement 卡的 sources/notes、文献抽取。
+
+      回译文本：
+
+      设定。D 维自由玻色开弦，度规 mostly-plus，α' 为 Regge 斜率。取动量 p 与一个类光向量 k_0
+      （k_0² = 0），要求 k_0·p ≠ 0，并把 k_0 的标度取成 2α' k_0·p = 1；由 k_0² = 0 这个值沿整条塔不变，
+      故一次取定即对整条塔成立。动量塔 T = ⊕_{N∈Z} F(p + N k_0)，第 N 层零模
+      α_0 = (2α')^{1/2}(p + N k_0)。取偏振 ε 满足 ε·k_0 = 0；横向标架下 ε = e_i，i = 2..D−1。
+
+      算子。A^i_n（n ≠ 0）在 statement 卡里指向 v5 的围道积分 ∮ dz/2πi ∂X^i e^{i n k_0·X}；
+      v5 已被 v6 换代，v6 把同一个算子写成模态和 Σ_{m∈Z} (ε·α_m) V^{(n)}_m，其中 V^{(n)}_m 是
+      :e^{i n k_0·X(z)}: 的 z^m 系数，把第 N 层送到第 N+n 层；ε·k_0 = 0 使该和对每个向量只有有限项非零，
+      所以不需要任何收敛或完化。L_m 是 Sugawara 形式 ½ Σ_j :α_{m−j}·α_j:，在塔上逐层用该层自己的零模；
+      c = D，但本命题的结论里不出现中心项。
+
+      断言。在该塔上，对**所有**整数 m 与所有**非零**整数 n，
+        [L_m, A^i_n] = 0
+      作为 T 上线性算子的恒等式成立。
+
+      推论（卡内，不另立节点）。若 (L_0 − a)ψ = 0 且 L_m ψ = 0（∀ m ≥ 1），则 A^i_n ψ 也满足这两条：
+      m ≥ 1 一条直接由对易得；L_0 一条也直接由 m = 0 的对易得——在塔的写法里 L_0 逐层用该层动量，
+      所以 [L_0, A] = 0 已经包含了"第 N+n 层的 α'p² 比第 N 层多 n、振子能级相应少 n"这笔账
+      （α'(p + n k_0)² = α'p² + n，由 k_0² = 0 与 2α' k_0·p = 1）。因此 A^i_n 把旧协变物理态映为
+      旧协变物理态。这里 a 是截距记号（(L_0 − a)ψ = 0，conv.intercept-sign-a），推论对任意 a 成立，
+      不要求 a = 1，也不要求 D = 26。
+
+      Lean 覆盖（逐项对照签名）：
+      - lie_towerLop_ddfOp (η a b ε) (hη : ∀μ, η_μ² = 1) (hbb : b·b = 0) (hba : b·a = 1)
+        (hεb : ε·b = 0) (m n : ℤ) : ⁅towerLop η a b m, ddfOp η a b ε hη hεb n⁆ = 0。
+        · 字典：a = (2α')^{1/2} p，b = (2α')^{1/2} k_0；hbb ⇔ k_0² = 0，hba ⇔ 2α' k_0·p = 1，
+          hεb ⇔ ε·k_0 = 0。hη 是对角 ±1 度规，mostly-plus 是其特例（Lean 不固定号差）。
+        · m 取遍全部 ℤ（含 0）：与卡的"∀ m ∈ Z"一致。
+        · **n 也取遍全部 ℤ，含 n = 0**——比卡宽。n = 0 时 V^{(0)}_m 是 :e^0: 的模，A^ε_0 = ε·α_0
+          是逐层常数，与任何 L_m 对易平凡成立；卡把 n = 0 排除是"更窄"，无矛盾。
+        · ε 是任意满足 ε·b = 0 的向量：不要求 ε 在横向标架里、不要求 ε² = 1、不要求实。比卡宽。
+        · R 是任意含 ℚ 的交换环，D 任意自然数；无 D = 26、无 a = 1。卡也没要求，一致。
+        · 塔 TowerFock = ℤ →₀ Fock，层指标有限支撑的代数直和；对易子是 Module.End 的李括号。
+          与卡"对易子按这一族算子理解"一致。
+        · towerLop m 在第 j 层用 Fock.Lop η (a + j·b) m，即逐层用该层动量；towerVertex n K
+          把第 j 层送到 j + n。与卡一致（卡的 N 对应 Lean 的 j）。
+        · ddfOp 的定义参数只有 hη、hεb；hbb、hba 是定理假设。与 v6 卡"(T) 是定义参数，
+          (N)(S) 是定理假设"逐句一致。
+      - ddfOp_mem_towerPhysSubmodule：同样四条假设下，对任意 a₀ : R 与 n : ℤ，A^ε_n 保持
+        towerL0Submodule ⊓ towerPositiveModeSubmodule = {(L_0 − a₀)Ψ = 0} ∩ {L_m Ψ = 0, m ≥ 1}。
+        这是卡内推论的形式化；a₀ 任意。
+      - Lean 不含（卡也不断言）：A^ε_n ≠ 0；DDF 态张成横向谱；[A^i_m, A^j_n] 代数。
+
+      指针备注：statement 卡文本写"ddf-operators-v5 定义的 DDF 算子"，而 v5 已 superseded_by v6
+      （围道 → 模态和）；formal.lean_decl 对应的是 v6 的 ddfOp。是否算漂移待第 (2) 步比对 canonical_text
+      后裁定。
+
+      以下为第一轮内容（未改动）。
+
       【第一轮，2026-09-11，physics-auditor。回译写完后才读：canonical_text（本人起草）、卡片 sources/notes、
       两条既有推导（--via-conformal-weight、--via-vertex-algebra-primary）、curator 分支上的 --via-lean 推导与
       worldsheet.ddf-contour-equals-mode-sum、literature/extractions/gsw-1987-v1.md §2 E1–E5、§4 E14–E16、§5、§6、
