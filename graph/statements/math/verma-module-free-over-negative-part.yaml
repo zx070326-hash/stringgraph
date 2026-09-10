@@ -59,7 +59,7 @@ notes: |
   取本节点的理由是**来源更好**（那张卡的三条 sources 没有一条是可核实的命题级定位：kac-1979 分节号未核实
   且 sources.bib 对该 key 指向哪一篇存疑、kac-raina-1987 只到主题一级、stringformal-2026 只是形式化状态登记；
   本节点的 virasoro-lean-2025 §12 p.11 是 L1 逐字转录）。
-  原先指向那张卡的三条 depends_on 已改指本节点：worldsheet.kac-determinant--via-feigin-fuchs、
+  原先指向那张卡的三条 depends_on 已改指本节点：worldsheet.kac-determinant-v2--via-feigin-fuchs、
   worldsheet.no-ghost-theorem-brst--via-fgz、worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman。
   ⚠ **本节点 statement 末尾的【与 worldsheet.verma-module-pbw-basis 的分工】一段已过时**：
   那张卡不再是「本项目面向弦论的卡片」而是被本节点取代的历史快照，其推导 --via-pbw 不复存在。

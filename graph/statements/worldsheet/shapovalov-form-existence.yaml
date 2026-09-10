@@ -140,6 +140,20 @@ notes: |
   教科书的 Harish-Chandra 投影则要先有三角分解。**差别不是技巧问题**：
   这两条把未证部分精确隔离成一条假设，且 (2)(4) 证明了这条假设是最优的。
 
+  【2026-09-11 傍晚补：更强结论现在有节点了（curator-verma-followups）】
+  本卡的【不断言】(a)「不断言对每个 (c,h) 都存在 Shapovalov 形式」仍然有效且**不改**，
+  但那条被排除的结论现由新卡 **worldsheet.shapovalov-form-unconditional-existence** 承载：
+  「(H) = V(c,h) 在负部上自由（PBW 基，即 math.verma-module-free-over-negative-part 的
+  (1)(2)(3)）⇒ 归一化 Shapovalov 形式存在且唯一」，任意交换 ℚ-代数上的条件版 +
+  特征零域上的无条件版；其推导 --via-pbw（rigorous）把本卡推导
+  worldsheet.shapovalov-form-existence--via-pbw 实际证到、但本卡陈述不承载的那段搬了过去。
+  **分工**：本卡是**条件命题**且 formalized（有效状态由 --via-lean 决定），
+  新卡更强但封顶 rigorous（输入 (H) 未形式化，瓶颈 Mathlib 无 PBW）。
+  下游只需要条件形式（尤其是要在 Lean 里推理）时应引本卡；需要「形式确实存在」这一前提
+  （例如 worldsheet.kac-determinant-v2 的 Gram 行列式预设了形式存在）时应引新卡。
+  本卡未新增指向新卡的推导：新卡是本卡的**下游**（其推导 depends_on 本卡的 (1)(2)），
+  反向再加一条会造环。
+
   【记号】本图记 V(c,h)、|c,h⟩（conv.verma-module-notation）。Lean 侧 `hwv R c h`。
   Kytölä 的 VirasoroProject **没有** Shapovalov 形式（math-sources.md §34.7）。
 author: curator

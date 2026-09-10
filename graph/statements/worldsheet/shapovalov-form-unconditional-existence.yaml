@@ -1,0 +1,138 @@
+id: worldsheet.shapovalov-form-unconditional-existence
+kind: proposition
+title: Shapovalov 形式的无条件存在性：负部自由（PBW 基）⇒ 归一化逆变形式存在且唯一——任意交换 ℚ-代数上的条件版，特征零域上的无条件版
+statement: |
+  设 R 是交换环且是 ℚ-代数，(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），|c,h⟩ 是最高权向量，V_N ⊆ V(c,h) 是 level N 分量
+  （同上引节点：由 N 的全体合成所对应的负模态词张成的 R-子模），σ 是 Virasoro 反对合
+  （math.virasoro-anti-involution）。**「逆变型」「归一化」「Shapovalov 泛函」三个词的定义
+  逐字照抄 worldsheet.shapovalov-form-existence**，本卡不重定义：
+  B 逆变 ⇔ B(L_n x, y) = B(x, L_{−n} y) (∀n ∈ Z)；B 归一化 ⇔ B(|c,h⟩, |c,h⟩) = 1；
+  f 是 Shapovalov 泛函 ⇔ f(|c,h⟩) = 1、f(L_n v) = 0 (n < 0, ∀v)、f(L_0 v) = h·f(v) (∀v)。
+
+  **假设 (H)（「V(c,h) 在负部上自由」）**：即 math.verma-module-free-over-negative-part 的
+  (1)(2)(3) 在基环 R 上的逐字类比——
+
+    (H1) u ↦ u·|c,h⟩ 是 U(vir₋)-模同构 U(vir₋) ≅ V(c,h)（自由、秩 1，自由基 |c,h⟩）；
+    (H2) 有序单项式族 ( L_{−n_m} L_{−n_{m−1}} … L_{−n_1} |c,h⟩ )_{ m ∈ N, 1 ≤ n_1 ≤ … ≤ n_m }
+         是 V(c,h) 的 **R-基**（m = 0 的空积即 |c,h⟩）；
+    (H3) 这些基元中落在 V_N 的**恰是** n_1 + … + n_m = N 的那些（特别地 |c,h⟩ 落在 V_0）。
+
+  **(1) 条件版（任意交换 ℚ-代数 R）**：设 (H) 成立。则
+
+    (a) V(c,h) = ⊕_{N ≥ 0} V_N 是 R-模的**内直和**，且 V_0 = R·|c,h⟩ 自由、秩 1；
+    (b) 由 (a) 定义的 **level-0 坐标泛函** f_0（f_0(|c,h⟩) = 1，f_0(V_N) = 0 对 N ≥ 1）
+        是 **Shapovalov 泛函**；
+    (c) 于是存在**唯一**的归一化逆变双线性型 B : V(c,h) × V(c,h) → R，
+        即 **Shapovalov 形式**；它自动对称，且 level 正交（M ≠ N ⇒ B(V_M, V_N) = 0）。
+
+  这里对 (c, h) **没有任何限制**，也不要求 R 是域、不要求特征零以外的条件；
+  特别地 (H) ⇒ |c,h⟩ ≠ 0 ⇒ V(c,h) ≠ 0。
+
+  **(2) 无条件版（特征零的域）**：设 R = F 是特征零的域，(c, h) ∈ F² 任意。则 (H) 成立
+  （这正是 math.verma-module-free-over-negative-part 的 (1)(2)(3)），故由 (1)：
+
+      对**所有** (c, h) ∈ F²，归一化 Shapovalov 形式 **存在且唯一**——不带任何前提。
+
+  【与 worldsheet.shapovalov-form-existence 的分工（本卡存在的理由）】
+  那张卡是**条件命题**：「归一化逆变型存在 ⟺ Shapovalov 泛函存在」（任意 ℚ-代数）与
+  「特征零域上 ⟺ V(c,h) ≠ 0」，两者都 formalized；它的【不断言】(a) 明确排除了
+  「对每个 (c,h) 都存在 Shapovalov 形式」。本卡承载的正是那条被排除的更强结论。
+  代价是引入未形式化的输入 (H)（瓶颈：Mathlib v4.33.1 无 PBW 定理），
+  故本卡的有效状态上限是 **rigorous**，而那张卡是 formalized。**两张卡都要留着**：
+  下游若只需要条件形式（例如在 Lean 里推理），应引那张卡而不是本卡。
+
+  【本节点明确**不**断言】
+  (a) **(H) 在一般交换 ℚ-代数 R 上成立**。本图承载 (H) 的节点
+      math.verma-module-free-over-negative-part 设在**特征零的域**上，故 (2) 也只到域上。
+      （数学上 PBW 对「作为 R-模自由的李代数」在任意交换环上成立，因而 (H) 预期对一切
+      交换 ℚ-代数 R 都真；但**本图没有承载这一条的节点**，本卡不得据此断言它。）
+  (b) 任何 Gram 矩阵、行列式或零点集：Kac 行列式见 worldsheet.kac-determinant-v2，
+      level 2 的显式核对见 worldsheet.kac-determinant-level-two。
+  (c) 任何正定性 / 半正定性 / Hermite 化 / 酉性。B 是 **R-双线性**型；R 上无序结构时
+      「正定」无意义。物理侧的 Hermite 内积（L_n† = L_{−n}、共轭线性）是另一件事。
+  (d) ker B 是极大真子模、V(c,h)/ker B 不可约（对照 schottenloher-2008 Theorem 6.8(3)）。
+  (e) V(c,h) 的不可约性、奇异向量的存在与位置。
+  (f) dim_F V_N = p(N) 或形式特征标——那些是输入卡 (3) 与
+      math.euler-partition-generating-function 的内容，本卡只用到 (H3) 的「分块」而不用维数。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.8(1), p. 96（LNP 759, pp. 91-102）；Verma 模与其分级见 §6.2, pp. 92-95"
+    note: |
+      **文献侧对「无条件存在」最接近的带编号背书**（L1 逐字，math-sources.md §34.3）：
+      「H : M × M → ℂ is **the unique hermitian form** satisfying H(v₀,v₀) = 1, as well as
+      H(L_n v, w) = H(v, L_{−n} w) …」——**无条件**断言存在唯一，正是本卡 (2) 的形状。
+      **三条限制**：(i) 限 c, h ∈ ℝ 且 H 是 **Hermite** 形式，不是复 (c,h) 上的 R-双线性型；
+      (ii) 该书的无条件性来自默认 M(c,h) ≠ 0（背后是 PBW），即本卡的假设 (H)，
+           该书没有把它列为前提；(iii) **该定理的证明正文本项目未转录**。
+      ⇒ 本条承载「结论在文献中是无条件陈述的」这一事实与归属，**不承载论证**。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2（俄文原刊 Функц. анализ и его прил. 16:2 (1982) 第 58 页）：M_{h,c}(k) 的定义与 «называется формой Шаповалова»"
+    note: |
+      **本卡假设 (H) 就是这条来源的默认设定**（L1 逐页核实，math-sources.md §34.2(b)）：
+      FF 把 Shapovalov 形式直接**定义**成「V_{h,c} 的 k 次齐次分量上、由 PBW 基
+      e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用于真空所得基」的 Gram 矩阵，
+      即同时默认了 (H2) 的基与 (H3) 的按次数分块（p. 57 逐字设 h, c 为任意**复数**）。
+      ⇒ 「有 PBW 基 ⇒ 形式存在且可写成 Gram 矩阵」这条路线在文献里是**默认而非定理**；
+      本卡把它显式化为「(H) ⇒ 存在唯一」。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{IsShapovalovFunctional, shapovalov, shapovalov_isContravariant, existsUnique_isContravariant, exists_isContravariant_iff, eq_of_isContravariant, IsContravariant.comm, IsContravariant.eq_zero_of_level_ne, levelSpan_zero, hwvFunctional, isShapovalovFunctional_hwvFunctional}；level 移位 formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg, lie_lgen_zero_of_mem_levelSpan}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，相关提交 1731c49 / bbc1354 / 080d7f9，均已在 main。
+      **本条承载 (1) 中除「(H) ⇒ (a)」以外的每一步，且都对任意交换 ℚ-代数 R 成立**：
+      · 「Shapovalov 泛函 ⇒ 存在唯一的归一化逆变型」→ `shapovalov` / `shapovalov_isContravariant`
+        / `existsUnique_isContravariant`（即 (1)(c)）；
+      · 「f_0 杀掉负模态的像」所需的 level 移位 → `lie_lgen_mem_levelSpan_of_neg`
+        （L_n, n < 0，把 V_N 送进 V_{N+|n|}，|n| ≥ 1，**对任意 R、任意 (c,h)**）；
+      · 「L_0 在 V_N 上是 h + N」→ `lie_lgen_zero_of_mem_levelSpan`；
+      · V_0 = R·|c,h⟩ → `levelSpan_zero`（**任意 ℚ-代数**，不需要 (H)）；
+      · 对称性与 level 正交 → `IsContravariant.comm`、`IsContravariant.eq_zero_of_level_ne`。
+      ⚠ **Lean 侧的 level-0 坐标泛函 `hwvFunctional` 现只在 `[Field K] [CharZero K]` 上构造**
+      （经 `isCompl_levelSpan_zero`）；本卡 (1)(a) 在一般 R 上改用 (H) 的基来分块，
+      这一步**未形式化**，见本卡推导的 gaps (i)。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: kac-1979
+    loc: "pp. 441-445（内部编号未核实，**不得写 Theorem 1**）"
+    note: |
+      历史归属：该文标题即「Contravariant form for infinite-dimensional Lie algebras and
+      superalgebras」，逆变形式正是其主题。正文未获取，内部编号 L0
+      （math-sources.md §34.1 第 4 点）。**只承载归属，不承载论证。**
+tags: [cft, representation-theory, verma-module, shapovalov, virasoro, pbw]
+notes: |
+  【为什么新建本卡而不是改 worldsheet.shapovalov-form-existence 的陈述】
+  那张卡的推导 worldsheet.shapovalov-form-existence--via-pbw 在 notes 里逐字写过：
+  「**若日后需要它**（例如 worldsheet.kac-determinant 要显式声明「形式存在」这一前提），
+  正确做法是新建 worldsheet.shapovalov-form-unconditional-existence
+  （rigorous，depends_on math.verma-module-free-over-negative-part 与本卡），
+  而不是改本卡的陈述文本（项目原则 1）。」本卡就是 lead 分派执行的那一步。
+  两处与那段建议的差别，都是**加强**而非偏离：
+  (i) 本卡把结论从「特征零域上无条件」推广为「任意交换 ℚ-代数上以 (H) 为前提」，
+      因为 Lean 侧除「(H) ⇒ 内直和」那一步外全部对任意 ℚ-代数成立；
+  (ii) 本卡把假设写成 (H1)(H2)(H3) 三条**逐字对应输入卡 (1)(2)(3)** 的形式，
+      而不是只写「V(c,h) ≠ 0」——后者在一般 R 上**不够**（见下一段）。
+
+  【为什么一般 R 上不能只假设 V(c,h) ≠ 0】
+  worldsheet.shapovalov-form-existence (4) 证到「特征零域上 存在 ⟺ |c,h⟩ ≠ 0」，
+  其「⟸」用 level 内直和取 V_0 的坐标泛函，而内直和在 Lean 里只在
+  `[Field K] [CharZero K]` 上证到（level 分量靠 L_0 本征值 h + N 分离，
+  一般 R 上这些标量未必可区分）。那张卡的【不断言】(b) 明确登记了这一点。
+  本卡在一般 R 上改用 (H2)(H3) 的**基**来分块，绕开了「用标量分离本征值」这条路。
+  ⇒ 本卡 (1) 与那张卡 (4) **不是同一命题的强弱版**：前者的输入是 PBW 基，后者的输入是非零性。
+
+  【(H) ⇒ (a) 这一步的地位（本卡最需要 reviewer 看的一句）】
+  由 (H2)，每个 v ∈ V(c,h) 在有序词基下有唯一有限展开；由 (H3)，把展开项按 level 分组即得
+  V(c,h) = ⊕_N span_R{level N 的基元}，而 worldsheet.verma-level-spanned-by-partitions (3)
+  说 V_N **恰**是这些基元的张成（straightening，对任意交换 ℚ-代数成立且已形式化）。
+  故 (a) 是「基 + 分块」的直接读出，不是新的数学；但它在**来源里没有逐字位置**
+  （FF 与 Schottenloher 都是默认这一分级），在本仓库 Lean 里也**没有**一般 R 上的对应声明。
+  推导 gaps (i) 逐字登记了这一点。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search shapovalov / verma / level`：
+  命中 worldsheet.shapovalov-form-existence（条件版，formalized）、
+  worldsheet.shapovalov-form-uniqueness（唯一性，无条件）、
+  worldsheet.kac-determinant-level-two、math.verma-module-free-over-negative-part。
+  **没有**节点承载「无条件（或以 PBW 为前提的）存在性」——那正是既有推导
+  shapovalov-form-existence--via-pbw 的 summary 末句所说的「那条更强的结论在图上目前没有承载节点」。
+author: curator
+created: "2026-09-11"

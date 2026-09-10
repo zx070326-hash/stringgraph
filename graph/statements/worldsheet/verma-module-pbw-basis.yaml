@@ -62,7 +62,7 @@ notes: |
   wordWeight 度量的更正）也已并入该 math 推导的 gaps。
 
   **原先指向本卡的三条 depends_on 已在同一提交里改指 math 卡**：
-  worldsheet.kac-determinant--via-feigin-fuchs、worldsheet.no-ghost-theorem-brst--via-fgz、
+  worldsheet.kac-determinant-v2--via-feigin-fuchs、worldsheet.no-ghost-theorem-brst--via-fgz、
   worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman。
   ⚠ 本卡的 statement 文本按项目原则 1 **不改**；下面「引用本卡片还是 v2？」的分派规则中
   「引本卡片」一律读作「引 math.verma-module-free-over-negative-part」。
@@ -76,7 +76,7 @@ notes: |
   - 只用到「V(c,h) 的构造、最高权关系、万有性质、L_0 分级」→ 引 worldsheet.verma-module-v2；
   - 用到「基 / 维数 p(N) / 特征标 / **模非零**」→ 引本卡片。
   按此规则改指本卡片的三处（拆卡时逐条读上下文判定）：
-  - worldsheet.kac-determinant--via-feigin-fuchs：Kac 行列式是逆变形式在 level N 的
+  - worldsheet.kac-determinant-v2--via-feigin-fuchs：Kac 行列式是逆变形式在 level N 的
     **PBW 基**下的 Gram 行列式，其表述本身就需要 (1)(2)；
   - worldsheet.no-ghost-theorem-brst--via-fgz：所需的表示论输入是「模在负模态下自由」
     （FGZ Proposition 2.6 的 free ℒ^--module），即 (1) 的等价形式；

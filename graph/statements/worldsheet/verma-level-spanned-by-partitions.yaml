@@ -88,5 +88,10 @@ notes: |
 
   【与 worldsheet.descendant-weight-grading 的关系】那条只说降算符提高 L_0 本征值，
   不涉及张成或线性无关；不重复。
+
+  【与 worldsheet.verma-level-shift-by-negative-modes 的关系（2026-09-11 新增那张卡）】
+  本卡的 straightening 是**同一 level 内**把词重排成有序词；那张卡是**跨 level** 的移位
+  L_{−k}(V_N) ⊆ V_{N+k}（formalized，任意交换 ℚ-代数）。两者都不使用对方：
+  本卡 (1) 的 `straighten` 在固定总模态下做归纳，那张卡只是往词前面接一个字母。不重复。
 author: curator
 created: "2026-09-11"
