@@ -1,0 +1,62 @@
+id: math.positive-euler-surfaces-are-sphere-disk-rp2
+kind: proposition
+title: "χ > 0 的紧连通曲面恰有三种：S²（χ = 2）、D²（χ = 1）、RP²（χ = 1）"
+statement: |
+  设 M 是**紧、连通**的二维曲面，允许有边界、允许不可定向，χ(M) 是其
+  Euler–Poincaré 示性数。若
+    χ(M) > 0 ，
+  则 M 同胚于下列三者之一，且三者两两不同胚：
+    (1) 球面 S²   （可定向，0 个 contour，χ = 2）；
+    (2) 闭圆盘 D² （可定向，1 个 contour，χ = 1）；
+    (3) 实射影平面 RP²（不可定向，0 个 contour，χ = 1）。
+  反之这三者的 χ 都 > 0。
+
+  **最近的落选者**：莫比乌斯带（不可定向，1 个 contour）的 χ = 0，
+  恰好落在边界上——任何把条件放宽成「χ ≥ 0」的写法都会多纳入它（以及环面与 Klein 瓶，χ = 0）。
+
+  **本命题不断言什么**：
+  - **不**涉及复结构、共形结构、度规或模空间——它是纯拓扑陈述；
+    「这三个曲面上没有模」是另一回事，见 worldsheet.positive-euler-number-no-moduli；
+  - **不**断言这三者的共形自同构群（那在 worldsheet.sphere-/disk-/rp2-conformal-killing-group）；
+  - **不**处理不连通或非紧曲面。
+sources:
+  - ref: gallier-xu-2013
+    loc: "Definition 6.5, pp. 88–89（规范胞腔复形 type (I): p ≥ 0, q ≥ 0；type (II): p ≥ 1, q ≥ 0）"
+    note: |
+      L1 逐字（math-sources.md §39.2.2）。这条 Definition 提供枚举所需的**参数范围**。
+  - ref: gallier-xu-2013
+    loc: "pp. 89–90：χ(K) = 2 − 2p − q（type I）与 χ(K) = 2 − p − q（type II）——**无编号行间式，严禁写成定理号**；等价的属数形式在 p. 103（同样无编号）"
+    note: |
+      L1 逐字（math-sources.md §39.2.3）。⚠ 原书用**一个**属数 g 覆盖两种情形
+      （不可定向时 g 数的是交叉帽个数），即 χ = 2 − 2g − q（可定向）/ χ = 2 − g − q（不可定向），
+      **不是**「2 − 2g − b − c」那种把 handle 与 crosscap 并列相加的四参数写法。
+  - ref: gallier-xu-2013
+    loc: "身份认定：p. 89–90（p = q = 0 ⇒ 球面）、p. 102（可定向 p = 0, q = 1 ⇒ 闭圆盘；不可定向 p = 1, q = 0 ⇒ 射影平面；p = q = 1 ⇒ 莫比乌斯带）、p. 90（B(A) = a₁a₁ ⇒ 射影平面）"
+    note: |
+      L1 逐字（math-sources.md §39.2.4）。p.102 原文：「there are only two kinds of complexes having
+      a trivial group, namely, for orientable complexes for which p = q = 0, or p = 0 and q = 1.
+      The corresponding surfaces (with boundary) are a *sphere* and a *closed disk*」；
+      「in the nonorientable case when p = 1 and q = 0, a *projective plane*, or p = 1 and q = 1,
+      a *Möbius strip*」。
+  - ref: polchinski-1998-v1
+    loc: "§6.1 首句, p. 166：「There are three Riemann surfaces of positive Euler number: the sphere, the disk, and the projective plane.」；**无式号**"
+    note: |
+      L1 原书页图（math-sources.md §39.6(b)）。**这是物理侧对同一结论的逐字陈述，但原书
+      不证、不给引文**，全章无证明。登记它的作用是给出「这条陈述被弦论文献直接使用」的锚点，
+      **不承载任何论证**。
+tags: [math, topology, surface, classification, euler-characteristic, sphere, disk, projective-plane]
+notes: |
+  由 curator 于 2026-09-11 从 literature/extractions/math-sources.md §39.9(2) 建立。
+
+  **⚠ 建卡的首要理由是一条否定发现**：researcher 逐条核查后确认，
+  **「χ > 0 ⇒ 只剩 S²、D²、RP²」这条现成陈述在本轮找到的任何来源里都不存在**
+  （Gallier–Xu 全书不讨论 χ > 0；Massey 未获取正文；Munkres 77.5 不含 χ；Hatcher 没有分类定理）。
+  Polchinski §6.1 首句逐字给出结论但不证不引。
+  故本卡的推导是**本图自己完成的两行不等式求解**，见
+  math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration 的 summary 与 gaps。
+
+  **连通性是本卡自己加的前提**：来源的 Theorem 6.2 逐字不写 "connected"
+  （见 math.classification-of-compact-surfaces 的 notes）。本卡把「紧、连通」写进 statement，
+  因为不连通时结论显然为假（两个不交圆盘的 χ = 2 但不同胚于 S²）。
+author: curator-surface-class
+created: "2026-09-11"
