@@ -3,6 +3,24 @@ target: worldsheet.ddf-operators-adjoint
 kind: physical-argument
 status: physical-argument
 depends_on:
+  - id: worldsheet.vertex-operator-adjoint
+    note: |
+      【2026-09-11（三）新增，立卡后接线】本推导第 2 步**唯一的非初等步骤**
+      (V^{(n)}_J)† = V^{(−n)}_{−J}（k_0² = 0 下）现由该命题节点承载，
+      不再是本推导 summary 里的裸断言。gaps 第 2 条已相应改写。
+      该节点的论证（worldsheet.vertex-operator-adjoint--via-radial-conjugation）
+      走的是「径向厄米共轭 z ↦ 1/z̄ + 指数算符两半 E_+E_- 重排序」，
+      重排序因子 ∝ z^{2α' n² k_0²} 由类光条件为 1，与本推导 summary 第 2 步逐字一致。
+      **有效状态不因此再降**：该节点 effective = physical-argument，
+      与本推导既有的上限（worldsheet.ddf-transverse-oscillator-algebra）同级。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      【2026-09-11（三）新增，立卡后接线】目标陈述【承载断言的空间】一段定义的塔
+      T(p;k_0) = ⊕_{N∈Z} F(p + N k_0) 与其**层间正交**的双线性型现由该定义卡承载，
+      本推导不再自行引入。目标 (1) 的等式跨两层（A^i_n : 第 N 层 → 第 N+n 层），
+      故它只在塔上、且只在那条约定下有意义；单层的 worldsheet.fock-indefinite-form
+      对跨层配对不置一词。gaps 第 5 条已相应改写（约定仍是约定，只是有了承载它的节点）。
+      这条边**不是 inferred**：塔与塔上的型是目标陈述量词的定义域。
   - id: worldsheet.ddf-operators-v5
     note: |
       被断言的对象。本推导用到定义卡的全部三条结构性输入：类光条件 k_0² = 0（使两个指数算符之间
@@ -96,7 +114,8 @@ summary: |
     · (α^i_m)† = α^i_{−m}，对**一切整数 m 含 m = 0**（worldsheet.fock-indefinite-form (1)(b)
       加 worldsheet.virasoro-generators-adjoint 在 Lean 侧对 m = 0 的延拓；
       m = 0 时 α^i_0 = (2α')^{1/2} p^i 是标量，对双线性型自伴）；
-    · (V^{(n)}_J)† = V^{(−n)}_{−J}。这一步是**本推导唯一的非初等步骤**：
+    · (V^{(n)}_J)† = V^{(−n)}_{−J}。这一步是**本推导唯一的非初等步骤**
+      （【2026-09-11（三）】现由 worldsheet.vertex-operator-adjoint 承载，见依赖首条）：
       X^μ 厄米蕴含 (:e^{i n k_0·X(z)}:)† 形式上是 :e^{−i n k_0·X(1/z̄)}:，
       即 k_0 → −k_0 且模指标反射；把它写成模的等式需要把指数算符的湮灭半 E_+ 与产生半 E_-
       **重排序**（E_+E_- ↔ E_-E_+），而重排序产生的因子正比于 z^{2α' n² k_0·k_0}，
@@ -127,10 +146,10 @@ summary: |
   正定性还需要本推导的 (1) 与真空归一化。
 gaps:
   - "**文献只有一句断言，没有推导；summary 三步没有逐字来源。** GSW §2.3.3 的定位强度是章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3），GT 1972 正文未获取。教科书对伴随关系只写「A^i_n 是厄米的」一类的一句话。第 1、2 步的模反射规则与逐因子取伴随是本项目按标准径向量子化规则重建的，**未与任何原文核对**。"
-  - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤，且本图中没有承载它的节点。** 它需要指数算符两半的重排序（E_+E_- ↔ E_-E_+），以及「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则——后者在本图中同样没有节点（最接近的是 worldsheet.ope-commutator-dictionary，但那是围道形变，不是伴随）。这是本推导 status 无法高于 physical-argument 的主要原因；若 reviewer 要求，应把它单列成一条命题节点。"
+  - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，status physical-argument），本条已加为依赖，本推导 summary 第 2 步不再是裸断言。**但缺口本身没有关闭，只是搬了家**：那条命题的论证仍依赖指数算符两半的重排序（E_+E_- ↔ E_-E_+）与「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则——后者在本图中**仍然没有节点**（最接近的是 worldsheet.ope-commutator-dictionary，但那是围道形变，不是伴随），另外「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」也仍无节点。三条缺口的现址是 worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条。这仍是本推导 status 无法高于 physical-argument 的主要原因。"
   - "**Lean 侧未起步：V(b)_J† = V(−b)_{−J} 未证。** `formal/StringFormal/NoGhost/VertexOperator.lean` 已有正规序指数的两半（`Fock.creaExp`、`Fock.vertexSub`）与模 `Fock.vertexOsc`，也有 b·b = 0（`dotVec η b b = 0`）作为显式假设，但**没有任何关于伴随的定理**——worldsheet.ddf-operators-v5 的 notes (4) 逐字登记「顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做（需 E_+E_- 重排序）」。另有结构性障碍：Lean 侧只有 R-双线性型 `Fock.pairing`，**无 sesquilinear 结构**，故即使做完也只覆盖目标边界 (a) 说的实极化情形，不覆盖复 Hermitian 形式。"
   - "**「†」是双线性型的转置，不是 Hermitian 共轭**（继承 worldsheet.fock-indefinite-form 与 worldsheet.virasoro-generators-adjoint 的同一条 gap）。物理上的协变 Fock 空间是复空间，A^† 还含一次复共轭；本推导第 2 步里「X^μ 厄米」这句话在双线性型版本中要读成「转置下不变」。两者在实极化下一致，**复情形未证**。这条对本节点尤其要紧，因为无鬼定理断言的是 Hermitian 形式的半正定性。"
-  - "**塔上的双线性型本身没有独立节点。** 目标陈述把 T(p;k_0) 上的型定义为各层 worldsheet.fock-indefinite-form 的型的直和（层间正交）。该节点是**逐固定动量扇区**陈述的（其 Lean 侧 `Fock.pairing` 也是），不同动量层之间的正交性在本图中是**约定式引入**的，不是被证明的（物理上它就是动量本征态的正交性 ⟨p|p'⟩ ∝ δ(p−p')）。第 (1) 条的等式跨两个不同层，因此实质上用到了这条约定。"
+  - "**塔上的双线性型是约定式引入的，不是被证明的。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.momentum-tower-fock-space，其 (2) 把塔上的型定义为各层 worldsheet.fock-indefinite-form 之型的直和并**显式声明「层间正交是本定义规定的，不是被证明的」**；本条已加为依赖。**缺口本身没有关闭**：worldsheet.fock-indefinite-form 是**逐固定动量扇区**陈述的（其 Lean 侧 `Fock.pairing` 也是），不同动量层之间的正交性在本图中仍是输入而非结论（物理上它是动量本征态的正交性 ⟨p|p'⟩ ∝ δ^D(p−p')，而本图**没有节点**承载连续动量本征态与 δ 归一化）。目标 (1) 的等式跨两个不同层，因此实质使用这条约定。Lean 侧另缺塔上的型本身（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。"
   - "**目标 (2) 的正定性需要额外假设**：系数环是有序域（如 R = ℝ）且 ⟨0;k|0;k⟩ = 1。前者本图中最接近的登记是 worldsheet.fock-indefinite-form 的 Lean 侧 `Fock.pairing_indefinite_field`（有序环即可）；后者是归一化选择，不是被推出的。目标陈述已把两者写成前提。"
   - "**退化扇区 k_0·p = 0（含 p = 0）不覆盖**：那里 A^i_n 本身没有定义（worldsheet.ddf-operators-v5）。"
   - "**第 3 步的递推没有逐步展开**。summary 只写了递推的形状（搬伴随 → 对易穿过 → 打真空），没有写归纳的严格记账（对 Σ_{(i,n)} d(i,n) 的归纳、d ≠ e 时「某处必然剩下打不掉的湮灭因子」的精确论证）。这一步是初等的、与自由振子 Fock 空间逐字同型，但若要按 docs/STATUS_LEVELS.md 的 rigorous 例外条款单独升级第 (2) 条，必须写全并由 reviewer 复核。"
@@ -152,5 +171,16 @@ notes: |
   **本推导没有第二条独立路线**。数学侧（顶点算子代数的不变双线性型与伴随）原则上给得出严格版本，
   但需要 researcher 先取得带编号的可引用陈述；届时应新增一条 `--via-voa-invariant-form`
   的独立推导，而不是改本条。见目标节点 notes【升级路径】(ii)。
+
+  **【2026-09-11（三）接线记录，curator】** 新增两条依赖，均**非 inferred**，
+  均只是把本推导此前自带的内容换成有承载节点的引用，**不改变本推导的有效状态**
+  （仍是 physical-argument，两个新依赖同级）：
+    · worldsheet.vertex-operator-adjoint（+ 其推导 --via-radial-conjugation）
+      ← 承载 summary 第 2 步的 (V^{(n)}_J)† = V^{(−n)}_{−J}，关闭 gaps 第 2 条的
+        「本图中没有承载它的节点」一句（缺口本身搬到那条推导的 gaps 第 2、3、4 条）；
+    · worldsheet.momentum-tower-fock-space
+      ← 承载目标陈述【承载断言的空间】一段的塔与层间正交的型，
+        关闭 gaps 第 5 条的「没有独立节点」一句（约定仍是约定，见改写后的该条）。
+  summary 与 target 的陈述文本除第 2 步加的一处括号指针外未动；三条 sources 未动。
 author: curator
 created: "2026-09-11"
