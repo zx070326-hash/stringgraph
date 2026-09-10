@@ -13,7 +13,7 @@ canonical_text: |
   正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)。
 canonical_source:
   ref: goddard-thorn-1972
-  loc: "Theorem 1"
+  loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
   status: draft
   back_translation:
