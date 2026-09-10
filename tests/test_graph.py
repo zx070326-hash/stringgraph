@@ -987,3 +987,12 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     assert d["own"] == "rigorous"
     assert d["effective"] == "open"
     assert rep["effective"] == "physical-argument"
+
+
+def test_validate_warns_when_derivation_target_is_superseded():
+    from stringgraph.validate import validate
+
+    g = load_graph(ROOT)
+    msgs = [p.message for p in validate(g) if p.severity == "warning" and "is superseded by" in p.message]
+    # duality.ads-cft is superseded by holography.ads5-cft4-duality-v2 and still has a derivation
+    assert any("duality.ads-cft" in m for m in msgs)
