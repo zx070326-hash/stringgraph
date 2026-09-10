@@ -119,4 +119,240 @@ used in the trace identities. (That `dim E₈` *is* `|Φ| + rank` is Lie theory 
 proved here.) -/
 theorem e8_dim_248 : e8Roots.length + 8 = 248 := by rfl
 
+
+/-! ## Dot products with the two families of roots
+
+Both families are handled by a rewrite that turns `∑ i, α i * x i` into a short linear
+expression *before* any expansion, which is what keeps the degree-six computation below
+within reach of `ring`. -/
+
+/-- Contracting a vector-type root with `x` picks out two coordinates. (No hypothesis
+`i ≠ j` is needed: `vroot` is a sum of two one-slot terms.) -/
+theorem vroot_dot (i j : Fin 8) (a b : ℚ) (x : Fin 8 → ℚ) :
+    (∑ k, vroot i j a b k * x k) = a * x i + b * x j := by
+  simp [vroot, add_mul, Finset.sum_add_distrib, ite_mul]
+
+/-- The standard pairing of four-element tuples. -/
+def dot4 (s y : Fin 4 → ℚ) : ℚ := ∑ i, s i * y i
+
+/-- The first four coordinates of `x : ℚ⁸`. -/
+def fst4 (x : Fin 8 → ℚ) : Fin 4 → ℚ := ![x 0, x 1, x 2, x 3]
+
+/-- The last four coordinates of `x : ℚ⁸`. -/
+def snd4 (x : Fin 8 → ℚ) : Fin 4 → ℚ := ![x 4, x 5, x 6, x 7]
+
+/-- Contracting a spinor-type root with `x` splits into the two halves. -/
+theorem spinRoot_dot (s t : Fin 4 → ℚ) (x : Fin 8 → ℚ) :
+    (∑ i, spinRoot s t i * x i) = (dot4 s (fst4 x) + dot4 t (snd4 x)) / 2 := by
+  simp [spinRoot, dot4, fst4, snd4, Fin.sum_univ_eight, Fin.sum_univ_four]
+  ring
+
+/-- Sums over a `flatMap` regroup as iterated sums. (Mathlib has `Multiset.prod_join` but
+no list-level version of this.) -/
+theorem sum_map_flatMap {α β M : Type*} [AddCommMonoid M] (L : List α) (F : α → List β)
+    (g : β → M) : (((L.flatMap F).map g).sum) = (L.map fun a => ((F a).map g).sum).sum := by
+  induction L with
+  | nil => simp
+  | cons a L ih => simp [List.flatMap_cons, List.map_append, List.sum_append, ih]
+
+/-! ## Power sums over the sign patterns of one half
+
+`evenSum k y` and `oddSum k y` are the `k`-th power sums of `s ⬝ y` over the eight even
+(resp. odd) sign patterns `s ∈ {±1}⁴`. Both families are stable under `s ↦ -s`
+(negating all four signs changes the number of minus signs from `m` to `4 - m`, preserving
+its parity), so all *odd* power sums vanish; the `inner_*` lemmas below record the
+resulting binomial expansions, and it is `ring` that verifies the cancellation. -/
+
+/-- `k`-th power sum over the eight even sign patterns. -/
+def evenSum (k : ℕ) (y : Fin 4 → ℚ) : ℚ := (ev4.map fun s => (dot4 s y) ^ k).sum
+
+/-- `k`-th power sum over the eight odd sign patterns. -/
+def oddSum (k : ℕ) (y : Fin 4 → ℚ) : ℚ := (od4.map fun s => (dot4 s y) ^ k).sum
+
+set_option maxHeartbeats 1000000 in
+theorem inner_ev_two (A : ℚ) (y : Fin 4 → ℚ) :
+    (ev4.map fun t => ((A + dot4 t y) / 2) ^ 2).sum = (8 * A ^ 2 + evenSum 2 y) / 4 := by
+  simp only [ev4, evenSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+set_option maxHeartbeats 1000000 in
+theorem inner_od_two (A : ℚ) (y : Fin 4 → ℚ) :
+    (od4.map fun t => ((A + dot4 t y) / 2) ^ 2).sum = (8 * A ^ 2 + oddSum 2 y) / 4 := by
+  simp only [od4, oddSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+set_option maxHeartbeats 1000000 in
+theorem inner_ev_four (A : ℚ) (y : Fin 4 → ℚ) :
+    (ev4.map fun t => ((A + dot4 t y) / 2) ^ 4).sum
+      = (8 * A ^ 4 + 6 * A ^ 2 * evenSum 2 y + evenSum 4 y) / 16 := by
+  simp only [ev4, evenSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+set_option maxHeartbeats 1000000 in
+theorem inner_od_four (A : ℚ) (y : Fin 4 → ℚ) :
+    (od4.map fun t => ((A + dot4 t y) / 2) ^ 4).sum
+      = (8 * A ^ 4 + 6 * A ^ 2 * oddSum 2 y + oddSum 4 y) / 16 := by
+  simp only [od4, oddSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+set_option maxHeartbeats 1000000 in
+theorem inner_ev_six (A : ℚ) (y : Fin 4 → ℚ) :
+    (ev4.map fun t => ((A + dot4 t y) / 2) ^ 6).sum
+      = (8 * A ^ 6 + 15 * A ^ 4 * evenSum 2 y + 15 * A ^ 2 * evenSum 4 y + evenSum 6 y) / 64 := by
+  simp only [ev4, evenSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+set_option maxHeartbeats 1000000 in
+theorem inner_od_six (A : ℚ) (y : Fin 4 → ℚ) :
+    (od4.map fun t => ((A + dot4 t y) / 2) ^ 6).sum
+      = (8 * A ^ 6 + 15 * A ^ 4 * oddSum 2 y + 15 * A ^ 2 * oddSum 4 y + oddSum 6 y) / 64 := by
+  simp only [od4, oddSum, dot4, List.map_cons, List.map_nil, List.sum_cons, List.sum_nil,
+    Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  ring
+
+/-! ## The two blocks separately
+
+Neither block is proportional to `(∑ x_i²)^(k/2)` on its own; only their sum is. Writing
+`p_k = ∑_i x_i^k`, the identities `∑_{i≠j} x_i⁴x_j² = p₂p₄ − p₆` and
+`∑_{i<j<l} x_i²x_j²x_l² = (p₂³ − 3p₂p₄ + 2p₆)/6` have been folded into the statements. -/
+
+set_option maxHeartbeats 1000000 in
+/-- `∑_{α vector type} (α ⬝ x)² = 28 p₂`. -/
+theorem vectorRoots_power_sum_two (x : Fin 8 → ℚ) :
+    (e8VectorRoots.map fun α => (∑ i, α i * x i) ^ 2).sum = 28 * (∑ i, x i ^ 2) := by
+  simp only [e8VectorRoots, pairs28, List.flatMap_cons, List.flatMap_nil, List.map_cons,
+    List.map_nil, List.map_append, List.sum_append, List.sum_cons, List.sum_nil,
+    List.append_nil, vroot_dot]
+  rw [Fin.sum_univ_eight]
+  ring
+
+set_option maxHeartbeats 1000000 in
+/-- `∑_{α vector type} (α ⬝ x)⁴ = 16 p₄ + 12 p₂²`. -/
+theorem vectorRoots_power_sum_four (x : Fin 8 → ℚ) :
+    (e8VectorRoots.map fun α => (∑ i, α i * x i) ^ 4).sum
+      = 16 * (∑ i, x i ^ 4) + 12 * (∑ i, x i ^ 2) ^ 2 := by
+  simp only [e8VectorRoots, pairs28, List.flatMap_cons, List.flatMap_nil, List.map_cons,
+    List.map_nil, List.map_append, List.sum_append, List.sum_cons, List.sum_nil,
+    List.append_nil, vroot_dot]
+  rw [Fin.sum_univ_eight, Fin.sum_univ_eight]
+  ring
+
+set_option maxHeartbeats 1000000 in
+/-- `∑_{α vector type} (α ⬝ x)⁶ = 60 p₂p₄ − 32 p₆`. -/
+theorem vectorRoots_power_sum_six (x : Fin 8 → ℚ) :
+    (e8VectorRoots.map fun α => (∑ i, α i * x i) ^ 6).sum
+      = 60 * (∑ i, x i ^ 2) * (∑ i, x i ^ 4) - 32 * (∑ i, x i ^ 6) := by
+  simp only [e8VectorRoots, pairs28, List.flatMap_cons, List.flatMap_nil, List.map_cons,
+    List.map_nil, List.map_append, List.sum_append, List.sum_cons, List.sum_nil,
+    List.append_nil, vroot_dot]
+  rw [Fin.sum_univ_eight, Fin.sum_univ_eight, Fin.sum_univ_eight]
+  ring
+
+set_option maxHeartbeats 1000000 in
+/-- `∑_{α spinor type} (α ⬝ x)² = 32 p₂`. -/
+theorem spinorRoots_power_sum_two (x : Fin 8 → ℚ) :
+    (e8SpinorRoots.map fun α => (∑ i, α i * x i) ^ 2).sum = 32 * (∑ i, x i ^ 2) := by
+  simp only [e8SpinorRoots, List.map_append, List.sum_append, sum_map_flatMap, List.map_map,
+    Function.comp_def, spinRoot_dot, inner_ev_two, inner_od_two]
+  simp only [evenSum, oddSum, ev4, od4, List.map_cons, List.map_nil, List.sum_cons,
+    List.sum_nil]
+  simp only [dot4, fst4, snd4, Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  rw [Fin.sum_univ_eight]
+  ring
+
+set_option maxHeartbeats 1000000 in
+/-- `∑_{α spinor type} (α ⬝ x)⁴ = 24 p₂² − 16 p₄`. -/
+theorem spinorRoots_power_sum_four (x : Fin 8 → ℚ) :
+    (e8SpinorRoots.map fun α => (∑ i, α i * x i) ^ 4).sum
+      = 24 * (∑ i, x i ^ 2) ^ 2 - 16 * (∑ i, x i ^ 4) := by
+  simp only [e8SpinorRoots, List.map_append, List.sum_append, sum_map_flatMap, List.map_map,
+    Function.comp_def, spinRoot_dot, inner_ev_four, inner_od_four]
+  simp only [evenSum, oddSum, ev4, od4, List.map_cons, List.map_nil, List.sum_cons,
+    List.sum_nil]
+  simp only [dot4, fst4, snd4, Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  rw [Fin.sum_univ_eight, Fin.sum_univ_eight]
+  ring
+
+set_option maxHeartbeats 2000000 in
+/-- `∑_{α spinor type} (α ⬝ x)⁶ = 30 p₂³ − 60 p₂p₄ + 32 p₆`. -/
+theorem spinorRoots_power_sum_six (x : Fin 8 → ℚ) :
+    (e8SpinorRoots.map fun α => (∑ i, α i * x i) ^ 6).sum
+      = 30 * (∑ i, x i ^ 2) ^ 3 - 60 * (∑ i, x i ^ 2) * (∑ i, x i ^ 4)
+        + 32 * (∑ i, x i ^ 6) := by
+  simp only [e8SpinorRoots, List.map_append, List.sum_append, sum_map_flatMap, List.map_map,
+    Function.comp_def, spinRoot_dot, inner_ev_six, inner_od_six]
+  simp only [evenSum, oddSum, ev4, od4, List.map_cons, List.map_nil, List.sum_cons,
+    List.sum_nil]
+  simp only [dot4, fst4, snd4, Fin.sum_univ_four, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.head_cons, Matrix.cons_val_two, Matrix.cons_val_three, Matrix.tail_cons]
+  rw [Fin.sum_univ_eight, Fin.sum_univ_eight, Fin.sum_univ_eight]
+  ring
+
+/-! ## The power sums of the whole root system -/
+
+/-- `e8PowerSum k x = ∑_{α ∈ Φ(E₈)} (α ⬝ x)^k`. -/
+def e8PowerSum (k : ℕ) (x : Fin 8 → ℚ) : ℚ :=
+  (e8Roots.map fun α => (∑ i, α i * x i) ^ k).sum
+
+theorem e8PowerSum_split (k : ℕ) (x : Fin 8 → ℚ) :
+    e8PowerSum k x = (e8VectorRoots.map fun α => (∑ i, α i * x i) ^ k).sum
+      + (e8SpinorRoots.map fun α => (∑ i, α i * x i) ^ k).sum := by
+  simp [e8PowerSum, e8Roots, List.map_append, List.sum_append]
+
+/-- **`k = 2`.** `∑_{α ∈ Φ(E₈)} (α ⬝ x)² = 60 ∑_i x_i²`. The `60` is the index of the
+adjoint representation of `E₈` (`2h^∨ = 60`); cf. van Ritbergen–Schellekens–Vermaseren
+Table 3, `I₂ = 60`. -/
+theorem e8_power_sum_two (x : Fin 8 → ℚ) : e8PowerSum 2 x = 60 * (∑ i, x i ^ 2) := by
+  rw [e8PowerSum_split, vectorRoots_power_sum_two, spinorRoots_power_sum_two]; ring
+
+/-- **`k = 4`.** `∑_{α ∈ Φ(E₈)} (α ⬝ x)⁴ = 36 (∑_i x_i²)²`: the fourth power sum is a
+square, which is the root-system shadow of "`E₈` has no independent fourth-order Casimir
+invariant". -/
+theorem e8_power_sum_four (x : Fin 8 → ℚ) : e8PowerSum 4 x = 36 * (∑ i, x i ^ 2) ^ 2 := by
+  rw [e8PowerSum_split, vectorRoots_power_sum_four, spinorRoots_power_sum_four]; ring
+
+/-- **`k = 6`.** `∑_{α ∈ Φ(E₈)} (α ⬝ x)⁶ = 30 (∑_i x_i²)³`: likewise for the sixth order. -/
+theorem e8_power_sum_six (x : Fin 8 → ℚ) : e8PowerSum 6 x = 30 * (∑ i, x i ^ 2) ^ 3 := by
+  rw [e8PowerSum_split, vectorRoots_power_sum_six, spinorRoots_power_sum_six]; ring
+
+/-! ## The trace identities
+
+Under the hypothesis discussed in the module docstring — `Tr_248 F^k = ∑_{α ∈ Φ} (α ⬝ x)^k`
+for `F` the Cartan element `diag(x)` and `k ≥ 1` — the following are Green–Schwarz (1984)
+eqs. (12b′)(12c′) and van Ritbergen–Schellekens–Vermaseren (1998) eqs. (176)(177). What is
+added here over `e8_power_sum_*` is only that the normalisation-dependent factor `∑ x_i²`
+cancels, leaving the pure numbers `1/100` and `1/7200`. -/
+
+/-- **GS (12b′) / vRSV (176)**: `Tr F⁴ = (1/100)(Tr F²)²`. -/
+theorem e8_trace_four (x : Fin 8 → ℚ) :
+    e8PowerSum 4 x = (1 / 100) * (e8PowerSum 2 x) ^ 2 := by
+  rw [e8_power_sum_four, e8_power_sum_two]; ring
+
+/-- **GS (12c′) / vRSV (177)**: `Tr F⁶ = (1/7200)(Tr F²)³`. -/
+theorem e8_trace_six (x : Fin 8 → ℚ) :
+    e8PowerSum 6 x = (1 / 7200) * (e8PowerSum 2 x) ^ 3 := by
+  rw [e8_power_sum_six, e8_power_sum_two]; ring
+
+/-- The two `E₈` trace identities of Green–Schwarz (1984), (12b′)(12c′), in one statement:
+with `Ω₄ = Tr F²`, `Ω₈ = Tr F⁴`, `Ω₁₂ = Tr F⁶` evaluated on a Cartan element,
+`Ω₈ = Ω₄²/100` and `Ω₁₂ = Ω₄³/7200`. These are exactly the two coefficients fed to
+`StringFormal.Math.gs_factorization_e8`. -/
+theorem e8_trace_identities (x : Fin 8 → ℚ) :
+    e8PowerSum 4 x = (1 / 100) * (e8PowerSum 2 x) ^ 2 ∧
+      e8PowerSum 6 x = (1 / 7200) * (e8PowerSum 2 x) ^ 3 :=
+  ⟨e8_trace_four x, e8_trace_six x⟩
+
 end StringFormal.Math.E8
