@@ -274,6 +274,14 @@ section VertexOnVacuum
 
 variable [Algebra ℚ R]
 
+omit [Algebra ℚ R] in
+/-- A mode with **nonzero** index does not see the zero-mode parameter. -/
+lemma mode_congr_of_ne (η a c : Fin D → R) (μ : Fin D) {p : ℤ} (hp : p ≠ 0) :
+    mode η c μ p = mode η a μ p := by
+  rcases hp.lt_or_gt with h | h
+  · rw [mode_of_neg _ _ h, mode_of_neg _ _ h]
+  · rw [mode_of_pos _ _ h, mode_of_pos _ _ h]
+
 /-- Moving `V_K` past a mode with **nonzero** index: for `q ≠ 0` the mode operator does not
 see the zero-mode parameter, so `Fock.mode_vertexOsc_sub` becomes the plain commutation
 relation `V_K α^μ_q = α^μ_q V_K - b^μ V_{K-q}`. -/
@@ -281,12 +289,8 @@ lemma vertexOsc_mode_of_ne (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ =
     {q : ℤ} (hq : q ≠ 0) (K : ℤ) (P : Fock D R) :
     vertexOsc η b K (mode η a μ q P)
       = mode η a μ q (vertexOsc η b K P) - b μ • vertexOsc η b (K - q) P := by
-  have hmode : mode η (a + b) μ q = mode η a μ q := by
-    rcases hq.lt_or_gt with h | h
-    · rw [mode_of_neg _ _ h, mode_of_neg _ _ h]
-    · rw [mode_of_pos _ _ h, mode_of_pos _ _ h]
   have h := mode_vertexOsc_sub η a b hη μ q K P
-  rw [hmode] at h
+  rw [mode_congr_of_ne η a (a + b) μ hq] at h
   rw [← h]
   abel
 
@@ -404,6 +408,57 @@ theorem vertexOsc_apply_Lop_apply_one_of_neg (η a b : Fin D → R) (hη : ∀ �
   match_scalars
   all_goals (try ring1)
   all_goals linear_combination (-1 : R) * two_mul_invTwo R
+
+/-- **The conformal-weight identity on the vacuum, for `m < 0`.**
+
+`L_m^{(a+b)} Φ_J = (J - m + a·b + ½ (m+1)(b·b)) Φ_{J-m} + V_J (L_m^{(a)} |k⟩)`,
+
+the exact analogue of `Fock.Lop_apply_creaExp_of_pos_shifted` with the extra term
+`V_J (L_m^{(a)}|k⟩)` that vanishes for `m ≥ 1`.  Everything that is not proportional to
+`Φ_{J-m}` — the zero-mode term, the double-creation middle region and the truncated Euler
+tail — appears on both sides and cancels; what is left is exactly the coefficient
+`(J - m) + a·b + ½ (m+1)(b·b)` of the primary transformation law. -/
+theorem Lop_apply_creaExp_of_neg_shifted (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : m < 0) (J : ℤ) :
+    Lop η (a + b) m (creaExp η b J)
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • creaExp η b (J - m)
+        + vertexOsc η b J (Lop η a m (1 : Fock D R)) := by
+  classical
+  have hA : ∑ μ : Fin D, (η μ * (a + b) μ) • mode η (a + b) μ m (creaExp η b J)
+      = (∑ μ : Fin D, (η μ * a μ) • mode η a μ m (creaExp η b J))
+        + ∑ μ : Fin D, (η μ * b μ) • mode η a μ m (creaExp η b J) := by
+    rw [← Finset.sum_add_distrib]
+    refine Finset.sum_congr rfl fun μ _ => ?_
+    rw [mode_congr_of_ne η a (a + b) μ (show m ≠ 0 by omega), Pi.add_apply, mul_add, add_smul]
+  have hB : ∑ l ∈ Finset.Ioc (0 : ℤ) (-m), ∑ μ : Fin D,
+        (η μ * b μ) • mode η (a + b) μ (-l) (creaExp η b (J - m - l))
+      = (∑ l ∈ Finset.Ioo (0 : ℤ) (-m), ∑ μ : Fin D,
+          (η μ * b μ) • mode η a μ (-l) (creaExp η b (J - m - l)))
+        + ∑ μ : Fin D, (η μ * b μ) • mode η a μ m (creaExp η b J) := by
+    rw [← Finset.Ioo_insert_right (show (0 : ℤ) < -m by omega), Finset.sum_insert (by simp),
+      add_comm]
+    congr 1
+    · refine Finset.sum_congr rfl fun l hl => ?_
+      rw [Finset.mem_Ioo] at hl
+      exact Finset.sum_congr rfl fun μ _ => by
+        rw [mode_congr_of_ne η a (a + b) μ (show -l ≠ 0 by omega)]
+    · refine Finset.sum_congr rfl fun μ _ => ?_
+      rw [mode_congr_of_ne η a (a + b) μ (show -(-m) ≠ 0 by omega),
+        show -(-m) = m from by ring, show J - m - -m = J from by ring]
+  have hC : ∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+        η μ • mode η (a + b) μ (m - j) (mode η (a + b) μ j (creaExp η b J))
+      = ∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+          η μ • mode η a μ (m - j) (mode η a μ j (creaExp η b J)) := by
+    refine Finset.sum_congr rfl fun j hj => ?_
+    rw [Finset.mem_Ioo] at hj
+    exact Finset.sum_congr rfl fun μ _ => by
+      rw [mode_congr_of_ne η a (a + b) μ (show m - j ≠ 0 by omega),
+        mode_congr_of_ne η a (a + b) μ (show j ≠ 0 by omega)]
+  rw [Lop_apply_creaExp_of_neg η (a + b) b hη hm J,
+    vertexOsc_apply_Lop_apply_one_of_neg η a b hη hm J, hA, hB, hC]
+  match_scalars <;> ring
 
 end VertexOnVacuum
 
