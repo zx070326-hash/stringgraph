@@ -51,6 +51,10 @@ StringFormal/
   Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
+  Math/GreenSchwarzAlgebra.lean  Green-Schwarz 1984 的纯代数部分（独立小岛）：十二形式因子化
+                            Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²] 的 SO(32)/E₈ 两支（`[Field K] [CharZero K]`，
+                            系数写 48⁻¹ 而非 algebraMap ℚ）、混合反常迹条件 (N,l) = (32,−1)、
+                            tr F⁶ 系数 N + 32l 的零点与 USp 的非零。迹恒等式本身是图里的独立节点
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
