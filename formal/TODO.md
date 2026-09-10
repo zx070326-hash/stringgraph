@@ -264,6 +264,16 @@
   `StringFormal.NoGhost.Fock.spuriousShell`（并在 notes 记 `nullStates` 与 `nullStates_eq`），
   `lean_file` 填 `formal/StringFormal/NoGhost/SpuriousShell.lean`；这会撤销该卡 notes 里
   「Lean 侧没有这个子模，故不填 lean_decl」的记账。
+- [x] `quotient-form`：`H_phys / H_null` 上诱导形式良定义 ——
+  `StringFormal/NoGhost/QuotientForm.lean`（图节点 `worldsheet.spurious-orthogonal-to-physical`
+  的后半句）。`Fock.pairing_add_null`（`⟨ψ+χ, φ+χ'⟩ = ⟨ψ,φ⟩`，ψ,φ ∈ H_phys，χ,χ' ∈ H_null）、
+  `Fock.pairing_eq_of_sub_mem_nullSubmodule`（差式版本）、`Fock.nullInPhys` / `Fock.PhysQuot`
+  （= `physSubmodule ⧸ nullSubmodule.comap physSubmodule.subtype`）、两次 `Submodule.liftQ`
+  得到的 `Fock.quotientPairing : LinearMap.BilinForm R (PhysQuot η a a₀)`，计算规则
+  **`Fock.quotientPairing_mk`** 与对称性 `Fock.quotientPairing_comm`。
+  **未做**：非退化性（`∀ q', ⟨q,q'⟩ = 0 → q = 0`，形式上 routine 但没写）与正定性（无鬼定理本体）。
+  图侧：建议 `worldsheet.spurious-orthogonal-to-physical--via-lean` 的 `lean_decl` 列
+  `spuriousSubmodule_le_orthComplement` 与 `quotientPairing_mk`，从 rigorous 升回 formalized。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
@@ -291,6 +301,15 @@
     另有动量算术：`dotVec_towerMomentum_right_of_isotropic`（`k_0²=0` ⟹ `k_0·p` 沿塔不变，
     即图节点 ddf-operators-v4 说明 (b)）与 `invTwo_mul_zeroModeSq_towerMomentum`
     （`α'(k - N k_0)² = α'k² - N`，即 no-ghost-theorem-v4 (1b) 的质量壳记账）。
+  - [x] (1b) **塔上的双线性型**（`StringFormal/NoGhost/TowerPairing.lean`，图节点
+    `worldsheet.momentum-tower-fock-space` (2)(4)）：`Fock.towerPairing η = Σ_j ⟨·_j, ·_j⟩`
+    作为 `LinearMap.BilinForm`；层间正交 `towerPairing_single_single_of_ne`、对称
+    `towerPairing_comm`、以及三条伴随 `towerPairing_towerShift_left`（`(e^{ink_0·x})^† = e^{-ink_0·x}`，
+    层间关系，**不是** `Fock.lean` 任何引理的推论）、`towerPairing_towerMode_left`、
+    `towerPairing_towerLop_left`（后两条逐层继承 `pairing_mode_left` / `pairing_Lop_left`）。
+    另补 `towerShift_apply` / `towerDiag_apply` / `towerMode_apply` / `towerLop_apply`
+    （DDF.lean 只有 single 上的公式）。顶点算子 `towerVertex` 的伴随仍未做（需
+    `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`），故 `A^i_n` 的伴随不可用。
   - [x] (2) **指数顶点算子的振子部分**：`Fock.creaExp`（产生半的 Laurent 系数）、
     `Fock.vertexSub` / `Fock.vertexAnn`（湮灭半）、`Fock.vertexOsc η b K`（`z^K` 系数）。
     核心定理 **`Fock.lie_mode_vertexOsc`**：`[α^μ_p, V_K] = b^μ V_{K-p}`（`p ≠ 0`）；
