@@ -1,0 +1,30 @@
+id: swampland.pure-n2-sugra-in-swampland--via-no-known-construction
+target: swampland.pure-n2-sugra-in-swampland
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.swampland-definition
+    inferred: false
+    note: "结论断言纯 N=2 超引力'不作为完全一致量子理论的有效理论出现'，即属于 swampland。"
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3.1 A Lower Bound Conjecture, p.6（整节；本文无编号公式）"
+summary: |
+  论证：4 维 N=2 的纯超引力多重态不含标量；"There is no known construction within string theory
+  which accomplishes this. All known examples have extra scalars, such as the string coupling
+  constant or the volume of the internal manifold etc."，由此"It is natural to conjecture that
+  there is at least one such scalar in any such theory and that pure N = 2 supergravity does not
+  arise as the effective theory of a fully consistent quantum theory."
+
+  与 §2/§3 的上界型判据相反，本条是**下界型**：某些理论里**必须**有标量场，而这不是有效场论的
+  朴素一致性所要求的。
+gaps:
+  - "证据形式是'无已知弦论构造'（否定式经验证据），本身极弱"
+  - "原文自陈 'This again is going to be hard to prove'，并明确邀请反驳：'It would be interesting to verify or disprove this.'（vafa-2005#E14）"
+  - "原文没有对'所有已知例子'做任何系统枚举，也没有说明枚举范围"
+notes: |
+  from: vafa-2005#E14。
+  反例方向：构造出一个低能极限只有 4d N=2 超引力多重态的一致量子理论即构成反驳。
+  本轮无反例，故不建 refutation 推导文件。
+author: curator
+created: "2026-09-11"

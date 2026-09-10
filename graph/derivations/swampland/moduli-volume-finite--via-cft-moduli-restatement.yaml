@@ -1,0 +1,40 @@
+id: swampland.moduli-volume-finite--via-cft-moduli-restatement
+target: swampland.moduli-volume-finite
+kind: conjecture-support
+status: speculation
+depends_on:
+  - id: holography.ads5-cft4-duality-v2
+    inferred: true
+    note: >-
+      **原文没有引任何 AdS/CFT 文献**（既不引 Maldacena，也不引 GKP/Witten）；它只说
+      "This finiteness can be rephrased in the context of AdS/CFT in the following way."
+      把这条重述接到本图的 Maldacena 猜想节点上是本项目的补齐，故标 inferred。
+  - id: swampland.moduli-space-volume
+    inferred: false
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2 末, p.4–p.5（含斜体问句与脚注 5；本文无编号公式）"
+summary: |
+  §2 末把体积有限性重述为纯场论问题（逐字节选）："The moduli of scalar fields in the AdS context
+  gets translated to the moduli of the CFT. Thus the finiteness of the moduli of scalar fields is
+  the statement, in the CFT context, of the finiteness of the moduli of the CFT. Finiteness of
+  Newton's constant in the AdS context correlates with the existence of discrete spectrum of
+  operators in the CFT (rather than a continuous spectrum)."，并把它写成一个**斜体问句**：
+
+    *Is the volume of moduli space of CFT's, with a discrete spectrum of operators, finite?*
+
+  随后逐字："In all the examples we know of, for example superconformal field theories in 4
+  dimensions, this seems to be true. It also seems to be true for superconformal field theories in
+  2 dimensions. … **So this is at least a consistency check on this conjecture.**"
+
+  即：本条**只是一致性检验**，原文自己就是这么定性的；故 status 取 speculation
+  （工具对同一陈述取最强推导，本条不会影响 moduli-volume-finite 的 conjecture 级有效状态）。
+gaps:
+  - "原文这一段的核心是一个**问句**，不是断言；证据只到 'this seems to be true'（vafa-2005#E11）"
+  - "原文没有引任何 AdS/CFT 文献，字典（模空间 ↔ CFT 模空间、Newton 常数有限 ↔ 算子谱离散）也没有出处"
+  - "本图的 holography.ads5-cft4-duality-v2 是 D3 情形的具体猜想，与原文泛指的 'AdS/CFT context' 不完全对应"
+notes: |
+  from: vafa-2005#E11（脚注 5 逐字："This point was developed in discussions with E. Silverstein."）。
+  这是 swampland 区与 holography 区之间**唯一的一条原文级连线**（虽然原文未给文献）。
+author: curator
+created: "2026-09-11"

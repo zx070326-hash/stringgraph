@@ -1,0 +1,43 @@
+id: swampland.wgc-sharp-form-i--via-so32-spinor
+target: swampland.wgc-sharp-form-i
+kind: refutation
+status: physical-argument
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.11（逐字 'So (I) can't be right.'）"
+  - ref: wen-witten-1985
+    loc: "**未核实**：正文未获取（L0）。arkani-hamed-2006 §3, p.11 把'半整数荷缠绕弦'的构造引给它（其 [7]）。"
+summary: |
+  **作者本人给出的反例**，逐字（⚠ 原文排印 "that have fractionally charges"，照抄）：
+
+    "Furthermore, there are easy counterexamples to the conjecture (I) in string theory, even when
+     the minimally charged particles *are* exactly stable. For instance, in the weakly coupled
+     SO(32) heterotic string, the spinor of SO(32) is exactly stable and has minimal half-integral
+     charges under the U(1)'s inside the SO(32), but is heavy and can violate our bounds. A
+     generalization of these are the half-integrally charged winding strings considered by Wen and
+     Witten [7], that have fractionally charges but are also heavy. So (I) can't be right."
+
+  反例是双重的：(a) 弱耦合 SO(32) 杂化弦中 SO(32) 的旋量——精确稳定、在 SO(32) 内的 U(1) 下带
+  最小半整数荷、但很重；(b) Wen–Witten 的半整数荷缠绕弦，同型。
+
+  ★ **反例落在猜想的适用域内**：弦论紧化背景，有动力学引力、Planck 质量有限。这与
+  Ooguri–Vafa §3.2 的引力解耦反例（挂在 swampland.finiteness-criteria-fail-without-gravity）
+  性质完全不同——那些前提不满足，本条前提满足，**是真反驳**。
+gaps:
+  - "Wen–Witten NPB 261, 651 (1985) 正文本项目未获取（L0）；(b) 目前只有 AMNV 的转述"
+  - "'重到足以违反界'的**定量估计原文没有给出**：既没有写出 SO(32) 旋量的质量，也没有写出其 M/q 与 1 的具体比较"
+  - "'SO(32) 旋量精确稳定'这一断言原文不给论证"
+  - "反例只针对 sharp 版本 (I)（最小荷态），不触及 (II)/(III)"
+notes: |
+  from: arkani-hamed-2006#E19。
+
+  **本条是本图第一条（截至本次提交是唯一一条）真正的 kind: refutation 推导**，
+  它把 swampland.wgc-sharp-form-i 的有效状态打成 refuted（见 tools/stringgraph/propagate.py：
+  refutation 推导自身有效严格程度 ≥ physical-argument 即令目标 refuted）。
+
+  status 取 physical-argument 而非 rigorous：反例的定量部分（"heavy"到什么程度）原文未给，
+  且 Wen–Witten 正文未核实。若日后抽取 Wen–Witten 并核实质量估计，可考虑升级。
+author: curator
+created: "2026-09-11"

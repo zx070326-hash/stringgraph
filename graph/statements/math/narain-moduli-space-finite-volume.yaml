@@ -1,0 +1,53 @@
+id: math.narain-moduli-space-finite-volume
+kind: proposition
+title: "Narain 模空间 Gamma\\G/K（Gamma = SO(d,d;Z)）的体积有限"
+statement: |
+  设 G = SO(d,d;R)，K = SO(d) × SO(d) 是 G 的极大紧子群，Γ = SO(d,d;Z) 是相应的算术子群。
+  则双侧商空间
+
+    Γ \ G / K
+
+  关于 G 上不变测度诱导的测度具有**有限体积**。
+
+  这是 Borel–Harish-Chandra（1962）关于代数群的算术子群具有有限余体积的定理在 SO(d,d) 上的
+  特例。
+
+  Vafa 2005 §2 (p.4) 对该事实的引用，逐字（原文陪集写法的问题见 notes）：
+
+    "As another series of example consider compactifications of type II strings on T^d. The
+     salar fields are parameterized by the Narain moduli space
+       SO(d,d)/SO(d) x SO(d) x SO(d,d;Z)
+     which is known to be finite [3]. The existence of T-duality is *crucial* in making this
+     volume finite."
+
+  （[3] = A. Borel and Harish-Chandra, "Arithmetic Subgroups of Algebraic Groups",
+  Ann. of Math. 75, 485 (1962)。⚠ 原文排印错误 "salar"，照抄。）
+uses_conventions: []
+sources:
+  - ref: borel-harish-chandra-1962
+    loc: "**未核实**：本项目未获取该文正文，定理编号与页码均未核对（bib note 记为 L0）。仅知起始页 485（由 vafa-2005 参考文献 [3] 的 L1 转录核实）。"
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.4（'which is known to be finite [3]'；本文无编号公式）"
+    note: "此条只承载'Vafa 把该事实引给 Borel–Harish-Chandra'这一转述，不承载定理本身的论证。"
+tags: [math, arithmetic-group, moduli-space, narain, finite-volume]
+notes: |
+  from: vafa-2005#E9、#U3；bib note of borel-harish-chandra-1962。
+
+  【★ loc 未核实（本卡最大的弱点）】Borel–Harish-Chandra 1962 的**正文本项目未获取**。
+  本卡的 sources.loc 照实写"未核实"，不编定理号（graph/CLAUDE.md 的纪律：不确定编号时照实写，
+  不要编 "Theorem 1"）。**抽到该文之前，任何以本卡为依据的边都应视为待复核。**
+
+  【陪集写法】本卡用 Ooguri–Vafa 2006 §3.1 Example iv 的双侧商写法（Γ\G/K）。
+  **Vafa 2005 的写法把紧子群与算术子群写在同一个分母里、中间用乘号，是记号松散，
+  不是不同的空间**（抽取记录 vafa-2005#E9 备注 2）。
+
+  【只覆盖 T^d 那一支，不给一般猜想升格】Vafa 2005 的三类例子严格性递减：T^d 有
+  Borel–Harish-Chandra 撑着，K3 同型，Calabi–Yau 情形原文只到 "are believed to be finite in
+  volume"。故本卡单独存在，**不是** swampland.moduli-volume-finite 的推导（那条猜想是对**任意**
+  一致量子引力理论的断言，本卡只是它的一个实例）。
+
+  【⚠ 另一处待复核的陪集】Ooguri–Vafa 2006 §3.1 Example iv 的经典 K3 模空间在 v1 页图上印作
+  SO(3,19)/(SO(2) x SO(19))，按极大紧子群应为 SO(3) x SO(19)，疑为排印错误（抽取记录
+  ooguri-vafa-2006#U3）。本卡不使用该式。
+author: curator
+created: "2026-09-11"

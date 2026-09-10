@@ -1,0 +1,25 @@
+id: math.cy3-cohomology-bounded--via-string-experience
+target: math.cy3-cohomology-bounded
+kind: conjecture-support
+status: conjecture
+depends_on: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3, p.5（本文无编号公式）"
+summary: |
+  唯一的"证据"是弦论中的经验：原文逐字 "In all the examples we know in string theory, the
+  dimension of cohomology of the manifold is finite. For example, we do not know of a sequence of
+  Calabi-Yau threefolds for which the dimension of cohomologies can get unboundedly large."
+  紧接着是明确的否定自陈："It is not known if this is actually a true mathematical fact, but
+  experience with various examples in string theory gives one a strong feeling that this is going
+  to be finite."
+gaps:
+  - "**这是一个未解决的数学问题**，来源自己就是这么说的（vafa-2005#E12）"
+  - "没有任何数学文献支撑；本条的唯一来源是一篇纲领性物理短文里的一句话"
+  - "2005 年之后该问题是否有进展**本项目未检索**（vafa-2005#U6）——若有进展，本卡应换代并挂 kind: proof 的推导"
+  - "推导无依赖：这不是自洽的证明，而是'经验感觉'的记录"
+notes: |
+  from: vafa-2005#E12、#U6。
+  这是 swampland 一线中少见的、原则上可判定的数学问题，值得 researcher 专门检索。
+author: curator
+created: "2026-09-11"

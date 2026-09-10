@@ -1,0 +1,42 @@
+id: swampland.wgc-sharp-form-iii
+kind: proposition
+title: "AMNV sharp 版 (III)：存在质荷比最小的态且其 (M/q)_min ≤ 1"
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §3 (p.10) 的第三个 sharp 版本，逐字（M_Pl = 1 单位）：
+
+    "(III) (M/q)_min ≤ 1,   for the state with smallest mass/charge ratio."
+
+  其中"1"按 conv.extremality-normalization 取（大极端黑洞的 M/Q 比值）；该态精确稳定
+  （原文：as follows trivially from the triangle inequality）。
+
+  原文对本条相对 (II) 的定位（§3, p.11，逐字）："Conjecture (III) can in principle be satisfied
+  by a heavy state with large Q which would reduce the impact of the inequality on physics at low
+  energies."；并称 "most of our evidence only supports the weaker conjecture (III)"。
+
+  §6 (p.16) 的对应措辞（逐字）："The weaker statement says that there should exist *some* state
+  with mass/charge ratio smaller than for extremal black holes."
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, (III), p.10；§3, p.11（与 (II) 的关系）；§6, p.16（weaker statement 的措辞）"
+tags: [swampland, conjecture, weak-gravity, amnv]
+notes: |
+  from: arkani-hamed-2006#E18、#E20、#E21、#E22、#E23、#E25。
+
+  【"Weak Gravity Conjecture"这个名字不出自本文】id 前缀 wgc- 只是本项目的记号（抽取记录 #Q3、#U8）。
+
+  【三条推导，互相独立】
+  (a) --via-heterotic-lattice：§4 的 SO(32) 杂化弦 on T⁶ 格论检验（physical-argument）；
+  (b) --via-worldsheet-spectral-flow：§4.1 的一般化论证，覆盖任意微扰杂化紧化（physical-argument）；
+  (c) --via-finite-stable-states：从"精确稳定态数目有限"猜想推出（conjecture-support）；
+  (d) --via-form-ii：从 (II) 的一行蕴含。
+  **(a)(b) 的存在是本卡不被 (II) 与"稳定态有限"猜想拖低的原因**（工具取最强推导）。
+
+  【反例方向：原文明确邀请】§6 逐字 "if they are wrong it should be possible to find simple
+  counter-examples in string theory, though we have not found any."。本轮无反例，不建
+  refutation 推导文件。
+
+  【与 (I) 的对照】(I) 已被作者本人反驳（swampland.wgc-sharp-form-i）；(II)/(III) 存活。
+  三个版本的差别**只在"对哪个态"下断言**，不在不等式形式。
+author: curator
+created: "2026-09-11"

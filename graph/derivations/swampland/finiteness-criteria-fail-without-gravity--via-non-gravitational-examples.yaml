@@ -1,0 +1,50 @@
+id: swampland.finiteness-criteria-fail-without-gravity--via-non-gravitational-examples
+target: swampland.finiteness-criteria-fail-without-gravity
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: swampland.rigid-n2-vector-moduli-ricci-positive
+    inferred: false
+    note: "§3.2 Example b 就是这条命题的内容，原文用它说明 Conjecture 3（原文误植为 2）如何在 M_Pl → ∞ 时被违反。"
+  - id: swampland.applicability-domain
+    inferred: false
+    note: "本推导的全部意义在于这些例子落在适用域之外；适用域条件由该卡承载。"
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, p.10–p.12（引言段的 G/H 例子与 Examples a)–d)）；Abstract（'it is shown that these conditions can be violated if gravity is decoupled'）"
+summary: |
+  Ooguri–Vafa §3.2 给出的显式违反例，全部在引力解耦极限：
+
+  - 引言段：紧全局对称群 G 自发破缺到 H，模空间 G/H 半径有限 ⇒ 违反 Conjecture 1；
+    此类空间可有非平凡基本群 ⇒ 也违反 Conjecture 4。"Since string theory cannot have any
+    continuous global symmetry, such an example can exist only in the limit where we decouple
+    gravity."
+  - Example a) R^10 中平行 Dp 膜上的规范理论：沿一般方向可走到无穷远而不出现新的无质量粒子
+    ⇒ **Conjecture 1 成立而 Conjecture 2 失效**（这同时证明两条猜想逻辑独立）。
+  - Example b) 全局 N=2 的 rigid limit：向量多重态模空间 Ricci 曲率正定 ⇒ 违反 Conjecture 3
+    （原文此处误植为 conjecture 2）。
+  - Example c) 非紧 Calabi–Yau 上缠绕膜：小 P² 上缠 2-cycle 的膜的模空间是一份 P²，
+    "this space is compact (violating conjecture 1) and positively curved (violating conjecture 3)"。
+  - Example d) T² 上的 D5 膜：4 维上的形变 N=4 SYM，模空间 R⁴ × T²，
+    "This clearly violates conjecture 4 which states that the moduli space should have no
+    non-trivial loops."
+
+  原文对这一方向的措辞比正面方向强：§3.2 逐字 "It is not difficult to construct non-gravitational
+  field theory models which violate the conjectures"；摘要用 "it is shown"。
+gaps:
+  - "Example c 的模空间度规外包给 [18]–[22]（Douglas–Ooguri–Shenker、Douglas–Ooguri、Douglas–Moore、Douglas–Greene、Katz–Klemm–Vafa），本项目全部未抽取"
+  - "Example a 的'沿一般方向不出现新无质量粒子'没有给出证明，只给构造图像"
+  - "G/H 例子的'紧全局对称群破缺给有限半径模空间'未写出度规"
+  - "原文没有给出'凡引力解耦则判据必失效'的一般论证，只给四个例子加一个通例"
+notes: |
+  from: ooguri-vafa-2006#E21、#E22、#E23、#E24、#E25、#E13、#E1。
+
+  ★ **记账红线**：这些例子**不得**作为 Conjecture 0–4 的 kind: refutation 推导。
+  猜想的适用域（swampland.applicability-domain）明确要求有限 Planck 质量，而这些反例全部在
+  引力解耦极限，前提不满足。挂错会把五条猜想的 effective 全部打成 refuted。
+
+  另注：本推导用 kind: physical-argument 而非抽取记录 §5.2 建议的 kind: refutation——
+  refutation 推导会把**本推导自己的目标**（即适用域边界卡）打成 refuted，那不是抽取记录的本意。
+author: curator
+created: "2026-09-11"

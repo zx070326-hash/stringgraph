@@ -1,0 +1,47 @@
+id: swampland.moduli-space-distance
+kind: definition
+status: physical-argument
+title: 模空间上的距离 d(p₁, p₂)（最短测地线，Planck 单位）
+statement: |
+  Ooguri–Vafa 2006 §2 (p.3) 的定义，逐字：
+
+    "Given that points on M are given by the expectation value of scalar fields, we can use
+     their kinetic term to define a metric on M. We can then state our next conjecture
+     dealing with the geometry of M: Let us assume that the dimension of M is not zero.
+     Let us define d(p₁,p₂) for two points p₁, p₂ ∈ M as the distance of the shortest
+     geodesic between them measured in Planck units."
+
+  即：
+  (a) M 上的度规由标量场的动能项给出；
+  (b) 对 p₁, p₂ ∈ M，d(p₁, p₂) 定义为二者之间**最短测地线**的长度，**按 Planck 单位量**。
+
+  单标量情形的显式归一化（同文 §4.2, p.14 逐字）：
+    ds² = M_Pl^{-2} dφ²，即 φ 的值等于测地长度乘 M_Pl。
+
+  M 本身的含义（同文 §2, p.3 逐字）：
+    "Let M denote the moduli space of a consistent quantum gravity. Choosing a point p ∈ M
+     corresponds to fixing the low energy effective Lagrangian for the theory. Different
+     points in M are in different super-selection sectors."
+uses: []
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, p.3（d(p₁,p₂) 的定义与 M 的含义；本节无编号公式）；§4.2, p.14（ds² = M_Pl^{-2}dφ²）"
+tags: [swampland, definition, moduli-space, distance]
+notes: |
+  from: ooguri-vafa-2006#E8、#E6、#E28。
+
+  【status = physical-argument 的理由】"a consistent quantum gravity 的模空间"在本图中不是
+  已定义的数学对象，度规也只由"标量场动能项"这一物理描述给出（未指定作用量、未指定场论框架）。
+  测地距离本身是标准黎曼几何概念，但它作用的对象未定义，故按"不确定选低一级"取
+  physical-argument，不取 rigorous。
+
+  【逐字细节】定义用的是 **shortest geodesic**（最短测地线），不是"所有路径长度的下确界"。
+  在完备流形上两者一致，**但原文不讨论完备性**。引用时保留原措辞。
+
+  【"可局部变化"是另一条猜想，不在本卡内】同页正文说"we could ask if we can vary p locally
+  in spacetime while keeping the asymptotic boundary conditions fixed at p. Our conjecture
+  states that this is possible"——那是 Conjecture 0 的前置说明（无编号），不是距离的定义
+  （抽取记录 ooguri-vafa-2006#E6）。
+author: curator
+created: "2026-09-11"

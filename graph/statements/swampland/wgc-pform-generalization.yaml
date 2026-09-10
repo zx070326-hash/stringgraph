@@ -1,0 +1,45 @@
+id: swampland.wgc-pform-generalization
+kind: proposition
+title: "AMNV 的 p-form 推广：T_el ≲ (g²/G_N)^{1/2}，T_mag ≲ (1/(g²G_N))^{1/2}（eq. (14)）"
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §2.4 (p.8–p.9) 的 eq. (14)，逐字：
+
+    "It is natural to generalize our loose conjecture: consider a p-form Abelian gauge field in
+     any number of dimensions D; then there are electrically and magnetically charged p − 1 and
+     D − p − 1 dimensional objects with tensions
+       T_el ≲ (g²/G_N)^{1/2},      T_mag ≲ (1/(g²G_N))^{1/2},    (14)
+     where the coupling g (the charge density) has a dimension of mass^{p+1−D/2}. We have
+     discussed the case D = 4, p = 1 above. Whenever the objects carry central charges only,
+     the inequalities above are saturated and coincide with the BPS bounds. However, the
+     inequality becomes strict for other types of charges."
+
+  Figure 3 图题（p.9）逐字："For any kind of an electric field, there should exist
+  "self-non-attractive" objects for whom the electric repulsive force exceeds the strength of
+  gravity."
+
+  三条限定：
+  (1) 本式用 Newton 常数 G_N 与**张力 T**，不是 M_Pl 与质量 m；**D = 4、p = 1 才回到 eq. (1)/(2)**；
+  (2) 中心荷情形不等式**饱和**并与 BPS 界重合；非中心荷情形不等式是严格的；
+  (3) 关系符逐字是 ≲。
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.4, eq. (14), p.8–p.9；Figure 3 图题, p.9"
+tags: [swampland, conjecture, weak-gravity, p-form, brane-tension, amnv]
+notes: |
+  from: arkani-hamed-2006#E16（另见 #E9、#E17）。
+
+  【"Weak Gravity Conjecture"这个名字不出自本文】id 前缀 wgc- 只是本项目的记号（抽取记录 #Q3、#U8）。
+
+  【轴子版本未单独建卡】§2.4 eq. (18) 由 D = 4、p = 0 得 S_inst ≲ M_Pl/F（F 为轴子衰变常数），
+  并与 Banks–Dine–Fox–Gorbatov 的经验观察对照。原文写 "our constraint gives precisely"，
+  但那指的是"与 BDFG 的经验观察吻合"，不是数学精确性（抽取记录 #E17）。本轮不建。
+
+  【禁止补系数】同 swampland.wgc-electric-loose。
+
+  【原文自陈的压力测试方向】§2.3 指出 n = 2 时判据 "parametrically marginal"、n = 1 时
+  "look like they might be violated"，并检查了 AdS₅ × X 与 large-N 两条可能违反的路径，
+  结论都是 "We aren't aware of any examples"——**那是"未找到反例"而非"验证成功"**，
+  按抽取记录的红线写进推导 gaps，不作为支持证据（抽取记录 #E14、#E15）。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,48 @@
+id: swampland.ov-conjecture-0-moduli-are-scalar-vevs
+kind: proposition
+title: "Ooguri–Vafa Conjecture 0：模空间由无质量标量场的期望值参数化"
+statement: |
+  Ooguri–Vafa 2006 §2 (p.3) 的 Conjecture 0，逐字：
+
+    "Conjecture 0: M is parameterized by inequivalent expectation values of massless scalar
+     fields."
+
+  紧随其后的说明，逐字：
+
+    "This conjecture in the context of string theory is so well known that one does not even
+     bother to state it: *There are no coupling constants in string theory*; every parameter
+     can be varied by changing the expectation value of a field. This did not have to be the
+     case and one could a priori imagine a consistent gravitational theory for which the
+     parameters are fixed (and in particular cannot be varied locally). We conjecture that such
+     gravitational theories cannot exist as a fully consistent quantum gravitational theory and
+     belong to the swampland."
+
+  前置的"可局部变化"说明（同页，无编号）：
+
+    "we could ask if we can vary p *locally* in spacetime while keeping the asymptotic boundary
+     conditions fixed at p. Our conjecture states that this is possible."
+
+  适用域见 swampland.applicability-domain。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 0, p.3（含其后的说明段与前置的'可局部变化'正文）"
+tags: [swampland, conjecture, moduli-space, ooguri-vafa]
+notes: |
+  from: ooguri-vafa-2006#E7、#E6（另见 #Q1）。
+
+  【本条是全文唯一在正文里带 "belong to the swampland" 措辞的猜想说明】Conjecture 1–4 的正文
+  都不带这个词，只有摘要给 Conjecture 1 配了 swampland 措辞。
+
+  【证据形式极弱且有跨度】原文自陈 "so well known that one does not even bother to state it"
+  ——它说的是"在弦论里成立"，而猜想断言的是"对任何一致量子引力理论成立"。这一跨度写在支持推导
+  的 gaps 里。
+
+  【原文自身的张力（未裁决）】本条的说明段说"参数固定且不能局部变化的引力理论属于 swampland"，
+  似乎在说 dim M = 0 本身有问题；而 Conjecture 1 之前的正文又把 dim M = 0 排除在适用域外
+  （swampland.applicability-domain (D3)）。原文没有裁决（抽取记录 #Q1）。
+
+  【"可局部变化"没有单独编号】它是 Conjecture 0 前的正文说明，loc 只能写"§2, p.3（Conjecture 0
+  前的正文，无编号）"。
+author: curator
+created: "2026-09-11"

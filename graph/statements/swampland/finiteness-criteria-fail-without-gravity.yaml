@@ -1,0 +1,55 @@
+id: swampland.finiteness-criteria-fail-without-gravity
+kind: proposition
+title: 引力解耦（Newton 常数为零 / M_Pl → ∞）时沼泽地判据全部失效
+statement: |
+  断言：Vafa 2005 的三条有限性判据与 Ooguri–Vafa 2006 的 Conjecture 1–4，在**引力解耦**
+  （Newton 常数为零，等价地 M_Pl → ∞，或内部体积无穷）的场论模型中**不成立**——存在显式的
+  违反例。
+
+  这是**判据适用域的边界陈述**，**不是**对那些猜想的反驳：两篇原文的猜想句都自带"Newton 常数
+  非零 / 有限 Planck 质量"的前提（见 swampland.applicability-domain 与
+  swampland.moduli-volume-finite 的陈述正文），前提不满足的例子不构成反例。
+
+  两篇原文对这一方向的纲领句：
+  - Vafa 2005 §1 (p.2) 逐字："These finiteness properties can be relaxed if we turn off the
+    gravity. In other words they are *directly correlated with having a consistent quantum
+    gravity coupled to matter*."
+  - Ooguri–Vafa 2006 §3 (p.5) 逐字（⚠ 原文 "these constraints disappears" 主谓不一致，照抄）：
+    "We will also present examples in string theory that, if we decouple gravity by taking the
+    internal volume to be infinitely large, then these constraints disappears. So it is only a
+    constraint in the context of quantum theories of gravity."
+  - Ooguri–Vafa 2006 §3.2 (p.10) 逐字："We claim that the conjectures hold for theories with
+    gravity with finite Planck scale. It is not difficult to construct non-gravitational field
+    theory models which violate the conjectures. … In the following, we will present examples to
+    show how the violation of the conjectures is explicitly tied to the decoupling of gravity."
+  - Ooguri–Vafa 2006 摘要末句逐字："Moreover it is shown that these conditions can be violated
+    if gravity is decoupled."（**这是该文唯一用 "it is shown" 级动词的正面断言**，比其猜想方向强。）
+
+  具体的违反例见本卡的两条推导（Vafa 侧与 Ooguri–Vafa 侧）。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §1, p.2；§2, p.4（非紧 toric CY）；§3, p.5–p.6（6 维 A_{N-1} 的 U(N)）"
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, Abstract；§3, p.5；§3.2, Examples a)–d), p.10–p.12"
+tags: [swampland, applicability, gravity-decoupling, boundary]
+notes: |
+  from: vafa-2005#E10、#E13；ooguri-vafa-2006#E13、#E21、#E22、#E23、#E24、#E25、#E1。
+
+  【★ 本卡是本批最重要的记账装置】两篇原文里所有"反例"都发生在引力解耦极限，**不在猜想适用域
+  内**。若把它们建成 Conjecture 1–4 或 Vafa 判据的 kind: refutation 推导，工具会把那些猜想的
+  effective 全部打成 refuted——那是记账错误。正确做法就是本卡：把这些例子挂到一条独立的
+  "适用域边界"命题上（抽取记录 vafa-2005#5.2(c)、ooguri-vafa-2006#5.2 的共同红线）。
+
+  【★ 对抽取记录建议的一处修正】ooguri-vafa-2006#5.2 建议把 §3.2 四例做成 `kind: refutation`
+  的推导挂到本卡上。**本图不采纳该细节**：refutation 推导会把**本卡自己**打成 refuted
+  （见 tools/stringgraph/propagate.py 的 `_proposition`）。本卡的两条推导用
+  `kind: physical-argument`。抽取记录的实质意图（不要挂到猜想本身）已完全落实。
+
+  【本卡与真反驳的对照】本批中唯一在适用域内的真反驳是
+  swampland.wgc-sharp-form-i--via-so32-spinor（AMNV 作者本人："So (I) can't be right."）。
+
+  【Ooguri–Vafa Example a 的额外价值】平行 Dp 膜上的规范理论给出"Conjecture 1 成立而
+  Conjecture 2 失效"，即证明这**两条猜想逻辑独立**——与 §4.1 末的独立性声明一致。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,28 @@
+id: swampland.wgc-magnetic-loose--via-electric-magnetic-extension
+target: swampland.wgc-magnetic-loose
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.wgc-electric-loose
+    inferred: false
+    note: "原文逐字 'This statement should also hold for magnetic monopoles'，即把电版本外推到磁版本。"
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.1, eq. (2), p.4；§2.1, eq. (3), p.4（单极子质量 ~ Λ/g²）；§2.2, eq. (5), p.6"
+summary: |
+  论证只有一句外推："This statement should also hold for magnetic monopoles, m_mag ≲ g_mag M_Pl
+  ~ (1/g_el)M_Pl."，其中磁耦合与电耦合的关系取 g_mag ~ 1/g_el（量级，无系数）。
+
+  原文随后用它做两件事（本图未建对应节点）：由 (2) 与 m_mag ~ Λ/g²_el（(3)：单极子质量至少是其
+  磁场能量的量级，线性发散）得 Λ ≲ gM_Pl（(4)）；另一条独立的启发式是"最小荷单极子不应已经是
+  黑洞"，由 M_mon/(M²_Pl R_mon) ≲ 1 同样给出 Λ ≲ gM_Pl（(5)）。
+gaps:
+  - "原文措辞 'should also hold' 比电版本的 'we claim' 弱，且没有给出把电版本推到磁版本的论证"
+  - "g_mag ~ 1/g_el 只是量级关系，原文不写 Dirac 量子化的系数；**图中不得补系数**"
+  - "本条继承电版本的全部缺口（量级估计、存在量词、BPS 饱和）"
+notes: |
+  from: arkani-hamed-2006#E6、#E7、#E13。
+  Λ ≲ gM_Pl 的节点本轮未建（抽取记录 #E7、#E13 指出它应挂两条独立推导）。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,34 @@
+id: swampland.wgc-pform-generalization--via-natural-generalization
+target: swampland.wgc-pform-generalization
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.wgc-electric-loose
+    inferred: false
+    note: "原文逐字 'We have discussed the case D = 4, p = 1 above.'，即 (14) 是 (1)/(2) 的推广。"
+  - id: swampland.wgc-magnetic-loose
+    inferred: false
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.4 Generalizations, eq. (14), p.8–p.9；eqs. (15)–(18), p.9–p.10（extranatural inflation 与轴子情形）"
+summary: |
+  原文的论证是一句"自然推广"："It is natural to generalize our loose conjecture: consider a
+  p-form Abelian gauge field in any number of dimensions D; then there are electrically and
+  magnetically charged p − 1 and D − p − 1 dimensional objects with tensions [(14)]"，
+  并指出中心荷情形不等式饱和并与 BPS 界重合、其他荷情形不等式严格。
+
+  原文给出的应用（支持其非平凡性）：D = 5、p = 1 排除 extranatural inflation 的参数区
+  （(15)–(17)，"This is perfectly consistent in effective field theory, but it runs afoul of our
+  general constraint for D = 5, p = 1. Indeed, straightforward attempts to embed this model into
+  string theory fail."）；D = 4、p = 0 给出轴子版 S_inst ≲ M_Pl/F（(18)），与 Banks–Dine–Fox–
+  Gorbatov 关于超 Planck 衰变常数的经验观察一致。
+gaps:
+  - "'自然推广'没有独立论证：原文没有从 D = 4, p = 1 的动机（黑洞残余、极端黑洞衰变）重做一般 D、p 的论证"
+  - "(18) 与 BDFG 的一致只是与**经验观察**的吻合，不是推导；原文的 'precisely' 指的是这种吻合（arkani-hamed-2006#E17）"
+  - "g 的量纲 mass^{p+1−D/2} 给出后，(14) 两式的具体归一化（系数）原文不给"
+  - "继承 loose 版本的全部缺口"
+notes: |
+  from: arkani-hamed-2006#E16、#E17。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,39 @@
+id: swampland.ov-conjecture-2-infinitely-many-below-fixed-mass
+kind: proposition
+title: "Ooguri–Vafa Conjecture 2 第二部分：T → ∞ 时低于固定质量标度的粒子数趋于无穷"
+statement: |
+  Ooguri–Vafa 2006 §2 (p.3) 的 Conjecture 2 的**第二句**（原文自称 "the second part of the
+  conjecture 2"），逐字：
+
+    "In the T → ∞ limit, the number of extra light particles of mass less than a fixed mass
+     scale becomes infinite."
+
+  原文给出的动机（同页，逐字）：
+
+    "If the breakdown of the low energy theory is associated with an infinite number of extra
+     light particles, one-loop graphs of such particles can give rise to the distance
+     divergence. If only a finite number of particles becomes light, they alone do not generate
+     the distance divergence for dimensions higher than 2. This motivates the second part of
+     the conjecture 2."
+
+  这里 T 与 d(p,p₀) 的含义同 swampland.moduli-space-distance；适用域见
+  swampland.applicability-domain。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 2（第二句）, p.3；§4.1, p.13（一圈度规修正的动机，公式无编号）"
+tags: [swampland, conjecture, moduli-space, light-tower, ooguri-vafa]
+notes: |
+  from: ooguri-vafa-2006#E10、#E26。
+
+  【与第一部分的关系】原文把两句都放在 "Conjecture 2" 标题下，但明确称它们为 first / second
+  part 并给出不同动机。本图分两卡，**不在两卡之间加推导边**（原文没有从一句推出另一句）。
+
+  【§4.1 的一圈论证只支持"无穷塔可以产生距离发散"】它没有证明"必须有无穷塔"。原文对该段的
+  定性是 "This is consistent with the following field theory fact"。这条限制写进推导 gaps。
+
+  【记号陷阱】§4.1 用 varphi 表示被积掉的重场、phi 表示模场，纯文本转录易混；同段的 d 是
+  **时空**维数（§4.2 的 d 是空间维数）。引用 g_ij^{one-loop} 与距离积分式必须回原页图
+  （抽取记录 #U6、§1.1）。
+author: curator
+created: "2026-09-11"

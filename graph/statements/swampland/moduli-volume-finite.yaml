@@ -1,0 +1,60 @@
+id: swampland.moduli-volume-finite
+kind: proposition
+title: 标量模空间体积有限（Vafa 2005：V_Φ ≠ ∞，前提是 Newton 常数非零）
+statement: |
+  Vafa 2005 §2 (p.3) 的猜想，逐字（原文无编号公式、无编号猜想）：
+
+    "From the viewpoint of effective field theory there appears to be nothing inconsistent
+     with  V_Φ = ∞.  For example consider the case where we have one real field Φ taking
+     value in R and where no masses depend on the value of Φ. So the region B is the entire
+     real line and so V_Φ = ∞ in this case. However, as it turns out in *all* examples which
+     come from string theory this is indeed finite as long as the Newton's constant is not
+     zero (i.e. M_p ≠ ∞ and gravity is not decoupled):
+       V_Φ ≠ ∞.
+     (more precisely the conjecture is that this could go to infinity ~ |logΛ| as Λ → 0 but
+     no worse.)"
+
+  本图取的陈述：设量子引力理论耦合无势能的无质量标量场，V_Φ 按
+  swampland.moduli-space-volume 的正规化定义（V_Φ = V_Φ^Λ|_{Λ→0}）。**若 Newton 常数非零
+  （M_p ≠ ∞，引力未解耦）**，则
+
+    V_Φ ≠ ∞，
+
+  精确化为：V_Φ^Λ 至多以 ~|logΛ| 的速度随 Λ → 0 发散，"but no worse"。
+
+  三条不得省略的限定：
+  (1) **"Newton 常数非零"是猜想句的组成部分**，写在同一句里；不带这个前提的"模空间体积有限"
+      是错误陈述，作者自己在 §2 末给出引力解耦时的反例（见
+      swampland.finiteness-criteria-fail-without-gravity）。
+  (2) 陈述是 **V_Φ ≠ ∞**，不是"V_Φ 有界"：~|logΛ| 型的对数发散被**允许**。
+  (3) 相关脚注（p.4）逐字："For d = 1 finiteness follows once we consider the cutoff
+      dependent V_Φ^Λ which behaves as |logΛ|."
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.3（猜想句与 |logΛ| 精确化）；p.4 脚注 4（d = 1 情形）"
+tags: [swampland, conjecture, moduli-space, volume, finiteness]
+notes: |
+  from: vafa-2005#E7（另见 #E6、#E5、#E10、#Q4）。
+
+  【与 Ooguri–Vafa Conjecture 1 的关系——溯源红线】本卡讲的是**体积**；
+  swampland.ov-conjecture-1-unbounded-diameter 讲的是**直径**。两者相容但**独立**：
+  Ooguri–Vafa 2006 §3.1 Example ii 逐字说 IIB 的 τ 空间 "the volume of this moduli space is
+  finite yet a geodesic length toward i∞ is logarithmically divergent"。
+  **Vafa 2005 全文没有出现 distance / diameter / geodesic / tower 这类内容**；
+  把 Conjecture 1 归给本文是溯源错误（抽取记录 vafa-2005#Q4、ooguri-vafa-2006#Q5）。
+
+  【Ooguri–Vafa 对本判据的软化】Ooguri–Vafa 2006 §1 (p.1) 开篇把"体积典型有限"称为
+  "seemingly general phenomenon"，并说 "There are, however, well known counter-examples"，
+  指的是圆紧化的朴素体积发散（引入 ε 截断后为 −log ε，正落在本卡允许的 ~|logΛ| 范围内）。
+  即那不是对本卡的反驳，而是对"必须用正规化定义"的确认。
+
+  【单位缺口】Vafa 2005 未指定 g_ij 是否含 M_P 幂次；本卡通过 conv.moduli-metric-planck-units
+  按 Ooguri–Vafa 2006 补齐，这是本项目的补齐而非原文内容（抽取记录 vafa-2005#Q1）。
+
+  【"有限性 ⇒ 需要 S 对偶"未建节点】§1 逐字 "in fact *imply* the existence of certain
+  S-dualities"，§2 又只说 "closely related to"；实际论证只有 IIB 一例，且 V_τ = ∫d²τ/τ₂²
+  连积分区域都没写（应为 SL(2,Z) 基本域）。抽取记录判定只能到 speculation，本轮不建
+  （vafa-2005#Q5、#E8）。
+author: curator
+created: "2026-09-11"

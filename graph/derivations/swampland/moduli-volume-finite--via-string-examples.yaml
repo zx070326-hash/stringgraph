@@ -1,0 +1,45 @@
+id: swampland.moduli-volume-finite--via-string-examples
+target: swampland.moduli-volume-finite
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.moduli-space-volume
+    inferred: false
+    note: "V_Φ 的正规化定义（V_Φ = V_Φ^Λ|_{Λ→0}）就是猜想句所用的量，同节给出。"
+  - id: math.narain-moduli-space-finite-volume
+    inferred: false
+    note: >-
+      §2 (p.4) 的 T^d 例子逐字 "which is known to be finite [3]"，[3] = Borel–Harish-Chandra 1962。
+      这一支是全文唯一有严格数学来源的例子；但它只覆盖 T^d，不覆盖一般猜想。
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.3–p.5（猜想句、IIB τ 空间、T^d Narain、K3、Calabi–Yau、AdS/CFT 重述；本文无编号公式）"
+summary: |
+  原文的证据形式是**枚举**：逐字 "as it turns out in *all* examples which come from string theory
+  this is indeed finite as long as the Newton's constant is not zero"。所举例子（§2, p.3–p.4）：
+
+  1. 10 维 IIB 的复标量 τ：V_τ = ∫d²τ/τ₂²，"If we did not use S-duality of type IIB this would
+     indeed be infinite, violating the above conjecture. … With S-duality taken into account this
+     volume is indeed finite."
+  2. II 型在 T^d 上：Narain 模空间，"which is known to be finite [3]"（math.narain-moduli-space-finite-volume）；
+     "The existence of T-duality is *crucial* in making this volume finite."
+  3. II 型在 K3 上：同型的陪集，"again thanks to the non-trivial T-dualities"。
+  4. II 型在 Calabi–Yau 上：向量多重态标量的模空间 —— 原文只到
+     "These are believed to be finite in volume (see discussion in [4,5])"。
+
+  三类例子的严格性递减：T^d 有数学定理撑着，K3 同型，Calabi–Yau 只到"被相信"。
+gaps:
+  - "枚举式证据；作者明确承认不构成证明：§1 逐字 'Even though this by itself does not *prove* the above picture, it makes it look rather plausible.'（vafa-2005#E4）"
+  - "Calabi–Yau 一支原文只到 'are believed to be finite in volume'（#E9）；[4] Horne–Moore 与 [5] Todorov 本项目未抽取"
+  - "IIB 例子的 V_τ = ∫d²τ/τ₂² **原文没有标出积分区域**；全句逻辑要求在 SL(2,Z) 基本域上取，这是原文的记号省略（#E8 备注）"
+  - "Borel–Harish-Chandra 1962 正文未获取（L0），math.narain-moduli-space-finite-volume 的 loc 写作'未核实'"
+  - "模空间体积的单位在 Vafa 2005 中未指定；conv.moduli-metric-planck-units 是按 Ooguri–Vafa 2006 的补齐（#Q1）"
+  - "方法论自陈：§5 逐字 'The conjectures motivated in this note are motivated from the constructability or lack thereof within string theory.'（#E17）"
+notes: |
+  from: vafa-2005#E7、#E8、#E9。
+  **不得**把 §2 末的非紧 toric Calabi–Yau 例子写成本条的 refutation：猜想句自带
+  "as long as the Newton's constant is not zero"，那个例子的前提不满足，
+  挂在 swampland.finiteness-criteria-fail-without-gravity。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,50 @@
+id: swampland.gauge-rank-restricted
+kind: proposition
+title: 规范群的秩有限/受限（Vafa 2005 第三条有限性判据）
+statement: |
+  Vafa 2005 §1 末 (p.2) 把本文的判据总纲写成三条，逐字（原文无编号；⚠ 原文排印错误
+  "crieteria" 照抄）：
+
+    "The restrictions we focus on are finiteness properties including finiteness of volume of
+     scalar fields, finiteness of the number of fields and finiteness/restrictions on the rank
+     of the gauge groups. These finiteness properties can be relaxed if we turn off the
+     gravity. In other words they are *directly correlated with having a consistent quantum
+     gravity coupled to matter*. As it turns out these finiteness issues are highly non-trivial
+     and are deeply related to the dualities in string theory and in fact *imply* the existence
+     of certain S-dualities. We view these finiteness crieteria as a universal feature of any
+     potentially consistent quantum theory of gravity coupled to matter."
+
+  本卡取其中的第三条：在一致的量子引力理论（Newton 常数非零）中，规范群的**秩有限/受限**。
+
+  §4 开头给出同一主张的另一措辞（p.6，逐字）：
+
+    "The gauge fields that arise in string theory seem more restricted than would have been
+     expected based on the requirement of semiclassical consistency of the effective field
+     theory."
+
+  **"关闭引力则判据可放松"是猜想的组成部分**（原文斜体强调），不是附注：不带这个前提的陈述
+  对任意量子场论都不成立（见 swampland.finiteness-criteria-fail-without-gravity）。
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §1, p.2（三条判据总纲）；§4, p.6（规范场受限的措辞）；§3, p.5–p.6（A_{N-1} / K3 秩 ≤ 20 的对照例）"
+tags: [swampland, conjecture, gauge-group, rank, finiteness]
+notes: |
+  from: vafa-2005#E5（另见 #E13、#E15、#E16）。
+
+  【原文自称的强度】"We view these finiteness crieteria as a universal feature" —— 观点陈述，
+  不带证明动词；且全文的方法论自陈是 §5 (p.7–8) 逐字 "The conjectures motivated in this note
+  are motivated from the constructability or lack thereof within string theory."
+
+  【与 swampland.u1-496-and-u1-248-e8-in-swampland 的关系】那是本判据的一个**具体实例**
+  （10 维 N=1 的两个反常自由但造不出来的规范群），本卡是一般判据。原文没有从一般判据推出该实例，
+  也没有从实例推出一般判据；图中不加推导边。
+
+  【最干净的"引力开启才有此限制"实例】§3 (p.5–6)：6 维 IIA 在 A_{N-1} 奇点上给 U(N)，N 无界；
+  要在 6 维有非零 Newton 常数就得嵌进紧几何，而 K3 中秩被 20 卡死（原文只写 "it is known
+  that"，无来源，抽取记录 #U5）。
+
+  【"有限性 ⇒ S 对偶"不进图】§1 用 "imply"，§2 只用 "closely related to"，且实际论证只有
+  IIB 一例、积分区域缺失。抽取记录判定只能到 speculation，本轮不建（vafa-2005#Q5）。
+author: curator
+created: "2026-09-11"

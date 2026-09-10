@@ -1,0 +1,55 @@
+id: swampland.u1-496-and-u1-248-e8-in-swampland
+kind: proposition
+title: 10 维 N=1 的 U(1)^496 与 U(1)^248 × E₈ 属于 swampland（Vafa 2005 §4）
+statement: |
+  Vafa 2005 §4 (p.6–p.7) 的猜想，逐字（公式在原文无编号）：
+
+    "The gauge fields that arise in string theory seem more restricted than would have been
+     expected based on the requirement of semiclassical consistency of the effective field
+     theory. There are many such examples. For example consider N = 1 supersymmetric theories
+     in 10 dimensions with gauge groups:
+       U(1)^{496};  U(1)^{248} × E₈
+     Both of these theories are consistent as far as anomalies are concerned [6]. Thus they
+     both appear to be consistent semiclassically. However, we have no way of constructing
+     either of these theories in string theory. It is hard to believe that they actually
+     exist, though we have no proof of this. It would be very interesting either to construct
+     these or what is more likely, to find what consistency condition goes wrong with these
+     theories which renders them inconsistent."
+
+  本图取的陈述：10 维 N=1 超对称规范理论中，规范群为 U(1)^496 或 U(1)^248 × E₈ 的两个理论
+  **不作为一致量子引力理论的低能有效理论出现**（即属于 swampland）。
+
+  原文自称的强度：**"It is hard to believe that they actually exist, though we have no proof
+  of this."**
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §4, p.6–p.7（本文无编号公式）；p.7 脚注 6（Douglas 的 1-brane 提议）"
+tags: [swampland, conjecture, gauge-group, ten-dimensional, anomaly]
+notes: |
+  from: vafa-2005#E15（另见 #E16、#E17、#Q3、#U4）。
+
+  【★ 溯源矛盾（本卡最重要的记账）】原文把"这两个群反常自由"引给 [6] =
+  Green–Schwarz, Phys. Lett. B 149, 117 (1984)（本项目 bib key `green-schwarz-1984`，已 L1
+  全文抽取）。**本项目对该文的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈**（其结论句逐字：
+  "Remarkably, since the dimension of the adjoint representation of SO(32) or E₈ × E₈ is 496,
+  the cancellation occurs for either of these gauge groups."），且 dim G = 496 只让 tr R⁶ 项
+  消失；对纯 Abel 因子还需单独检验 Yang–Mills / 混合反常，**GS 1984 没有做**。四解分类在
+  GSW 第二卷第 13 章（`gsw-1987-v2`，本项目尚未抽取）。
+  => **本卡的 sources 只写 vafa-2005（承载"Vafa 如此断言"），不挂 green-schwarz-1984。**
+  （抽取记录 vafa-2005#Q3、#U4。）
+
+  【跨区接口边尚不可建】本卡本应有一条到 consistency 区"10d N=1 反常自由的规范群条件"节点的
+  依赖边（inferred，来源 gsw-1987-v2 ch.13）。**截至本次提交，图中不存在任何 consistency 区
+  节点**（graph/statements/ 只有 duality / holography / math / swampland / worldsheet），
+  故本轮不建该边；等 consistency 区建立后由后续 curator 补上并标 inferred: true。
+
+  【反例方向：原文明确邀请】逐字 "It would be very interesting either to construct these or …
+  to find what consistency condition goes wrong"。构造出这两个理论中的任何一个即构成反驳。
+  本轮不建 refutation 推导文件（无反例）。
+
+  【9 维分类不建节点】§4 (p.7) 引 [7] = de Boer 等 ATMP 4, 995 (2002) 说 9 维有"very
+  restricted list known"，原文自称 "it is difficult to imagine"、"makes it essentially clear"，
+  只到信念级；且本项目未抽该文（vafa-2005#E16）。
+author: curator
+created: "2026-09-11"

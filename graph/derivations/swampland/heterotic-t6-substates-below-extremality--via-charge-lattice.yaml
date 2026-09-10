@@ -1,0 +1,33 @@
+id: swampland.heterotic-t6-substates-below-extremality--via-charge-lattice
+target: swampland.heterotic-t6-substates-below-extremality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14"
+  - ref: sen-1995-bh-torus
+    loc: "**未核实**：正文未获取（L0）。eqs. (22)(23) 的极端黑洞解由 arkani-hamed-2006 §4 外包给该文（其 [8]）。"
+summary: |
+  论证是一个格论比较（M_Pl = 1，α' = 4）：
+  1. 电荷落在 28 维偶自对偶格上，Q_L² − Q_R² ∈ 2Z（(21)）；
+  2. 极端黑洞（Sen 1995）：Q_R² > Q_L² 时 BPS，M² = ½Q_R²（(22)）；Q_L² > Q_R² 时非 BPS 但极端，
+     M² = ½Q_L²（(23)）；
+  3. 微扰杂化弦谱：M² = ½Q_R² + N_R = ½Q_L² + N_L − 1（(24)，−1 来自左移玻色弦快子）；
+  4. 由于格上存在 Q_L² − Q_R² = 2 的电荷矢量，取 N_L = 0 即得一个质量为
+     M² = ½Q_R² = ½Q_L² − 1（(25)）的态，比同电荷的极端黑洞轻。
+
+  原文措辞是本文最强的正面措辞："the string spectrum also guarantees that … we are guaranteed to
+  find a state with a mass/charge ratio smaller than for extremal BH's"。
+gaps:
+  - "极端黑洞解 (22)(23) **外包给 Sen 1995，本项目未抽取（L0）**——正面证据的'黑洞侧'目前只有转述级"
+  - "杂化弦谱 (24) 的推导（含 −1 的来源）原文不给，只给结果；本图无对应的杂化弦谱节点"
+  - "α' = 4 与本图 canonical 的 conv.alpha-prime-regge 不是同一归一化；此处未建换算，凡把本卡接到用 conv.alpha-prime-regge 的节点上必须写 convention_map"
+  - "**[抽取者复算]**：由 (24) 取 N_L = 0、Q_L² − Q_R² = 2 得 N_R = 0 且 M² = ½Q_L² − 1，与 (25) 一致——该复算原文未显式写出（arkani-hamed-2006#E22 备注 1），属 inferred"
+  - "只覆盖 SO(32) 杂化弦 on T⁶ 的一般模空间点；对其他背景无说法"
+notes: |
+  from: arkani-hamed-2006#E22。
+  ⚠ Figure 4 图题把 "mass" 印成 "charge"（原文排印错误）。
+author: curator
+created: "2026-09-11"

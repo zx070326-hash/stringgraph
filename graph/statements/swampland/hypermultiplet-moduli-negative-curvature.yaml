@@ -1,0 +1,51 @@
+id: swampland.hypermultiplet-moduli-negative-curvature
+kind: proposition
+title: 与超引力耦合的超多重态模空间必有负标量曲率（局部 N=2 超对称的直接后果）
+statement: |
+  断言：在 4 维局部 N=2 超对称理论中，超多重态标量所参数化的（四元数 Kähler）模空间的**标量
+  曲率为负**。
+
+  Ooguri–Vafa 2006 §3.1（第一个 Example v，Calabi–Yau 三折，p.9）对该事实的引用，逐字
+  （⚠ 原文排印错误 "hypermulitplet"、"a negative scalar curvatures"，照抄；⚠ 原文把
+  "conjecture 3" 印作 "conjecture 2"，见 notes）：
+
+    "As for the hypermulitplet moduli space, though a quaternionic Kähler manifold in general
+     can have curvatures of any sign [14], it is known that those realized for hypermultiplet
+     fields coupled to supergravity must have a negative scalar curvatures [15], satisfying the
+     conjecture 2. Note that the negativity of the scalar curvature in this case is a direct
+     consequence of the local N = 2 supersymmetry, and therefore it applies to the hypermultiplet
+     moduli space after perturbative and non-perturbative quantum corrections are taken into
+     account as far as we consider the low energy effective theory with minimum number of
+     derivatives."
+
+  （[15] = J. Bagger and E. Witten, "Matter couplings in N = 2 supergravity",
+  Nucl. Phys. B 222, 1 (1983)；[14] = J. A. Wolf, J. Math. Mech. 14, 1033 (1965)。）
+
+  最后一句给出的适用范围：该结论在**微扰与非微扰量子修正之后仍成立**，只要考虑的是导数项最少
+  的低能有效理论。
+uses_conventions: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.1, 第一个 Example v（Calabi-Yau threefolds）, p.9"
+  - ref: bagger-witten-1983
+    loc: "**未核实**：本项目未获取该文正文，定理编号与页码未核对（bib note 记为 L0）。仅知起始页 1（由 ooguri-vafa-2006 参考文献 [15] 的 L1 转录核实）。"
+tags: [swampland, supergravity, hypermultiplet, curvature, quaternionic-kahler]
+notes: |
+  from: ooguri-vafa-2006#E19、#U2、#Q2。
+
+  【status = physical-argument 的理由（直到核实为止）】本卡的实质来源是 Bagger–Witten 1983，
+  **该文正文本项目未获取（L0）**；目前只有 Ooguri–Vafa 的一句 "it is known that … [15]" 转述。
+  抽取记录把它列为"swampland 区最有希望通向 rigorous 的物理支点"，但**在抽到 Bagger–Witten
+  之前只能标 physical-argument**。升级路径：抽取 Bagger–Witten 1983，核实其中确有该定理及其
+  假设，然后新建 kind: proof 的推导。
+
+  【★ 原文编号误植】上引段末的 "satisfying the conjecture 2" 按内容应为 **conjecture 3**
+  （Conjecture 2 讲轻粒子塔，与曲率无关；Conjecture 3 是唯一讲曲率的）。同文 §3.2 Example c
+  在同样语境里编号正确。这是本项目的判定，非原文（抽取记录 #Q2）。凡以本卡支持
+  swampland.ov-conjecture-3-scalar-curvature-negative 的边必须标 inferred: true 并写明此事。
+
+  【与向量多重态的对照】同一例子里向量多重态的曲率"不必为负"，只有渐近行为为负；
+  而**去掉引力**（全局 N=2 的 rigid limit）时向量多重态的 Ricci 曲率反而正定，
+  见 swampland.rigid-n2-vector-moduli-ricci-positive。
+author: curator
+created: "2026-09-11"

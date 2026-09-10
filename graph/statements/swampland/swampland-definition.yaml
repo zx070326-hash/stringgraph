@@ -1,0 +1,57 @@
+id: swampland.swampland-definition
+kind: definition
+status: physical-argument
+title: "'swampland' 的定义（Vafa 2005 的命名句，逐字）"
+statement: |
+  Vafa 2005 §1 (p.1) 第四段的命名句，逐字（原文用单引号 'swampland'，首字母小写）：
+
+    "This vast series of semiclassically consistent effective field theories which are
+     actually inconsistent we shall call the 'swampland'."
+
+  同段的图像句（逐字）：
+
+    "Thus we view the vast stringy landscape of vacua as a relatively small island in an
+     even more vast swampland of quantum inconsistent but semiclassically consistent
+     effective field theories."
+
+  中译：那一大批**半经典一致但实际上不一致**的有效场论，称为"沼泽地"；弦论真空的
+  landscape 被视为这片更广阔的沼泽地中的一个相对小岛。
+
+  三条必须逐字保留的特征：
+  (1) 被定义的对象是 **effective field theories**，不是 vacua，也不是"理论空间的点"；
+  (2) 定义体内含限定语 **semiclassically consistent**；
+  (3) 定义体内含 **actually inconsistent**，即"不是任何一致的量子引力理论的低能极限"。
+
+  由 (3)：**"某个 EFT 属于 swampland"是一条断言而非可直接判定的性质**；判据（有限性、
+  几何、引力最弱等）把某类理论划入 swampland，那些判据是猜想，与本定义卡分开记账。
+uses: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §1, p.1 第四段（本文无编号公式、无编号猜想，loc 只能到章节与页码）"
+tags: [swampland, definition, effective-field-theory]
+notes: |
+  from: vafa-2005#E2（另见 #E1、#E4）。
+
+  【status = physical-argument 的理由】按 docs/STATUS_LEVELS.md，定义卡的 status 表示该定义卡
+  本身的地位（rigorous = 数学上精确；physical-argument = 依赖未定义对象）。本定义体内含两个
+  在本图中没有定义的对象：
+  (a) **"semiclassically consistent"，Vafa 2005 从未定义**——全文三处用它（§1 第一段
+      "looks at least semiclassically consistent"、本定义句、§4 "appear to be consistent
+      semiclassically"），能读出的唯一可操作内容是"反常自由"（§4 的 "consistent as far as
+      anomalies are concerned"），但 §1 的用法明显更宽（抽取记录 vafa-2005#Q2）；
+  (b) **"actually inconsistent"预设了"完整的量子引力理论"这一未定义概念**。
+  因此本卡不能标 rigorous。按"不确定选低一级"的纪律取 physical-argument。
+  抽取记录建议把 (a)/(b) 的裁决留给 lead；本卡先按低档记，若 lead 另有裁决再换代。
+
+  【不建"semiclassically consistent"定义卡】抽取记录 vafa-2005#Q2 的建议：无法忠实定义，
+  改为在每条判据节点里写具体的半经典条件（如"反常自由的 10d N=1 规范理论"）。本图照办。
+
+  【措辞红线】Ooguri–Vafa 2006 §1 (p.1) 与 Arkani-Hamed 等 2006 §1 (p.2) 各自转述过这个定义
+  （后者写 "The space of consistent low-energy effective theories which cannot be completed to
+  a full theory was dubbed the 'swampland'"），**措辞与 Vafa 原文不同**。本卡只用 Vafa 原措辞。
+
+  【不进图的一条】Vafa 2005 §1 脚注 2 "the string landscape is of measure zero compared to the
+  swampland" 带限定语 "in the most naive sense of measure" 且无测度定义、无论证；
+  抽取记录判定只能到 speculation，本轮不建节点（vafa-2005#E3）。
+author: curator
+created: "2026-09-11"

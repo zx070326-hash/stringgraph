@@ -1,0 +1,31 @@
+id: swampland.finite-exactly-stable-states--via-totalitarian-principle
+target: swampland.finite-exactly-stable-states
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.11–p.12（本段无编号公式）；§2.2, p.6（Gell-Mann 极权原理）"
+summary: |
+  原文给出的支持有三层，全部是动机型：
+  1. 违反质荷比猜想的谱是什么样：若只有一个最小荷"基本"粒子且 M > Q，则两两净力吸引，可不断形成
+     Kepler 束缚态使 (M/Q) 单调下降并渐近趋于 1；"It is easy to see that *all* of these particles
+     are exactly stable: since (M/Q) is a decreasing function of Q, none of these states can decay
+     into a collection of particles with smaller charges." ⇒ 出现无穷多精确稳定态。
+  2. Gell-Mann 极权原理（§2.2）："there should not exist a large number of exactly stable objects
+     (extremal black holes) whose stability is not protected by any symmetries"。
+  3. 中性粒子情形与 Bekenstein 界的 species problem 相呼应。
+
+  原文并自我更正两次：先说"精确稳定粒子数有限"，随即"Actually this statement is not quite
+  correct"（BPS 态可以有无穷多），最后定为"the number of exactly stable (and safely bound) states
+  *in any given direction in charge space* is finite"。
+gaps:
+  - "没有任何独立检验：本条只有动机（Kepler 塔图像、Gell-Mann 原理、species problem），无正面证据"
+  - "'safely bound'与'电荷空间的方向'原文都没有精确定义"
+  - "作者自己修正过一次措辞，说明陈述形式尚未定型（arkani-hamed-2006#E21）"
+  - "Kepler 束缚态论证是非相对论量级图像，未讨论束缚能的可靠性"
+notes: |
+  from: arkani-hamed-2006#E21、#E12。
+author: curator
+created: "2026-09-11"
