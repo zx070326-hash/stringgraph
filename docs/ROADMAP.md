@@ -6,8 +6,8 @@
 - [x] 节点/边/里程碑 schema
 - [x] 校验、状态传播、报告、搜索、dot 导出工具
 - [x] 种子节点：从 Virasoro 代数到无鬼定理的最短链
-- [ ] Lean 工程能 `lake build`（需要网络拉 Mathlib 缓存）
-- [ ] 第一次完整 `validate` + `report` 通过并提交
+- [x] Lean 工程能 `lake build`（2026-09-10 验证：929 jobs 全过）
+- [x] 第一次完整 `validate` + `report` 通过并提交
 
 ## Phase 1：世界面理论子图（目标：约 150 个节点）
 
