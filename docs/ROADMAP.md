@@ -71,7 +71,7 @@
 - 待建：`math.euler-partition-generating-function`（Σ p(N)q^N = ∏(1−q^n)^{−1}；subcritical 推导与 Verma 特征标用到，无节点无来源）——**已派 formalizer**
 - `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
 - `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
-- `worldsheet.brst-quantization`（statement 写死 c^g = −26，是命题埋进定义卡；建 v2 改为"鬼场部门为 λ = 2 的 bc 系统，中心荷记 c^g"，不要加 uses 边——会把四个 rigorous 节点拉低）
+- ~~`worldsheet.brst-quantization`~~ 已建 v2（c^g 符号化，2026-09-11）；a^g = −1 仍在定义里，若 reviewer 坚持可再拆 v3
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
 - `worldsheet.no-ghost-theorem-v4`（(1) D=26 等距同构 与 (2) D>26 负模 的来源集合不相交：GT/Goddard/FGZ 只管 (1)，LZ 只管 (2)；拆成两卡后 LZ 可作 (2) 的独立推导。涉及里程碑指向，须在船长批准 v4 之后作为 v5 换代处理，不阻塞本次审批）
@@ -80,7 +80,7 @@
 - `worldsheet.physical-states-level-one` 的 (3) 可拆出"a = 1 处纵向光子是零模态"
 - `worldsheet.ocq-spurious-states`（定义带质量壳条件，Lean 的 spuriousSubmodule 不带；拆成"L_{−n} 像空间"（formalized）与"再交质量壳"两卡，让 spurious-orthogonal-to-physical 与 physical-states-level-one 回到 formalized）——**已完成 2026-09-11**（spurious-subspace formalized，level-one 复位）
 - `worldsheet.ddf-operators-v4`（一卡三事：A^i_n 定义、[L_m, A^i_n] = 0、[A^i_m, A^j_n] = mδδ；后两条是命题，形式化路径不同，拆成 v5 纯定义 + 两条 proposition；再加"横向性 ⟹ 模态和局部有限"命题，Lean 已有支撑）
-- `worldsheet.open-string-virasoro-modes-v2`（仍内嵌 doubling trick 命题，reviewer-batch2）
+- ~~`worldsheet.open-string-virasoro-modes-v2`~~ 已建 v3 + `open-string-doubling-trick` 命题（2026-09-11）。后续：`normal-ordering-constant-ax` 应挂 doubling-trick 边（a^X = 0 是平面 CFT 结论，搬到带边开弦需要它）
 - `worldsheet.fock-indefinite-form`（"有序域上不定"末句未形式化：加一条平凡 Lean 引理或移到 notes）
 - ~~`worldsheet.brst-cohomology-equals-ocq-physical` 拆目标~~ 已否决（2026-09-11）：LZ Lemma 2.22 p.565 逐字给出映射 ω ↦ [ω ⊗ 鬼真空]，两条推导都覆盖具体映射，不拆。
 - ~~待建：math.virasoro-universal-central-extension~~ 已建（2026-09-11，Feldvoss–Siciliano Lemma 2.6）。后续：`math.witt-algebra-perfect`（H¹(Witt) = 0，Lemma 2.6 证明用到、图里无卡）；登记 Hochschild–Serre 1953。kac-raina 2013 二版是否单独登记待裁。
