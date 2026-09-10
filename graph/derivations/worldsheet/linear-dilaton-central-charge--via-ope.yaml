@@ -1,0 +1,30 @@
+id: worldsheet.linear-dilaton-central-charge--via-ope
+target: worldsheet.linear-dilaton-central-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.linear-dilaton-cft
+  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.free-scalar-propagator
+  - id: worldsheet.free-boson-central-charge-d
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.2)，p.49（式号经 schrans-2020 核实；系数 6α' 未核实）"
+summary: |
+  照搬 worldsheet.free-boson-central-charge-d--via-ope 的 Wick 缩并计算，
+  但 T 多了 V_μ ∂^2 X^μ 项。TT OPE 的四阶极点收到两类贡献：
+  (i) 两个 :∂X∂X: 项的双缩并，给出原来的 D/(2z^4)（即 c = D）；
+  (ii) 两个 V·∂^2X 项的单缩并，给出正比于 α' V^μ V_μ 的贡献；
+  交叉项（一个 :∂X∂X: 与一个 V·∂^2X）对四阶极点无贡献。
+  把 (ii) 的系数与定义式 c/(2z^4) 比较，得附加项 6 α' V^μ V_μ，故 c = D + 6α' V·V。
+gaps:
+  - "**OPE 收敛性在来源中未证**（lead 裁决 1）：本推导只用 Wick 缩并求 OPE、
+     再比对四阶极点系数，不需围道变形；但 OPE 展开本身的收敛性仍未证。
+     与 worldsheet.free-boson-central-charge-d--via-ope 同源的缺口。"
+  - "系数 6α' 未核实（抽取记录只核实了 (2.5.2) 的式号与标题，未核实表达式）。
+     本推导的 summary 复述的是标准结果，不是从原书逐字抄来的。"
+  - "本推导没有 --via-mode-algebra 的对偶版本：线性 dilaton 的 L_m 模式表达式
+     本图未建节点，故这条无法像 c = D 那样有一条纯代数的备份路线。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

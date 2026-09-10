@@ -1,0 +1,32 @@
+id: worldsheet.traceless-holomorphic-energy-momentum--via-conformal-invariance
+target: worldsheet.traceless-holomorphic-energy-momentum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    note: |
+      来源在 §2.4 的论证是对一般共形不变理论做的，但唯一给出的显式例子（也是本图唯一
+      建了节点的能动张量）是自由标量的 T。取该节点为依赖即表示：本条在本图中至少对
+      自由标量部门成立；对一般 CFT 的版本没有单独的节点支撑。
+  - id: worldsheet.ward-identity
+  - id: worldsheet.operator-equation-of-motion
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.1)、(2.4.2)（公式号经 schrans-2020 核实，p.43）"
+summary: |
+  Weyl 变换 δg_{ab} = 2 δω g_{ab} 下作用量的变分正比于 ∫ √g δω T^a_a；
+  若理论 Weyl 不变则对任意 δω 该变分为零，故 T^a_a = 0。
+  在复坐标下 T^a_a ∝ g^{z z̄} T_{z z̄}，故 T_{z z̄} = 0。
+  再用平移不变性给出的守恒律 ∂^a T_{ab} = 0：其 b = z 分量是 ∂̄ T_{zz} + ∂ T_{z̄ z} = 0，
+  第二项因无迹而为零，于是 ∂̄ T_{zz} = 0，即 T_{zz} 只依赖 z。
+  对自由标量可直接验证：T(z) = -(1/α') :∂X·∂X: 与 ∂̄ 的作用由运动方程
+  ∂∂̄X = 0 消去（正规序积无接触项）。
+gaps:
+  - "「Weyl 不变 ⇒ T^a_a = 0」在量子层面需要路径积分测度也 Weyl 不变，而这正是不成立的
+     （worldsheet.weyl-anomaly-trace）。本推导实为经典论证 + 平坦背景下的自由场验证。"
+  - "对自由标量的直接验证用到 ∂∂̄X = 0 作为算子方程（worldsheet.operator-equation-of-motion），
+     其接触项在正规序积中被减除——这一步是 worldsheet.conformal-normal-ordering 中的形式操作。"
+  - "「T_{zz} 全纯」在有其它算子插入时只在插入点之外成立；这一限定书中默认而不显式陈述，
+     却正是下游围道变形（worldsheet.ope-commutator-dictionary）唯一能做的原因。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

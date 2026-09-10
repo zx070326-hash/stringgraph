@@ -1,0 +1,28 @@
+id: worldsheet.cylinder-plane-l0-shift--via-schwarzian
+target: worldsheet.cylinder-plane-l0-shift
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.schwarzian-transformation-of-t
+  - id: worldsheet.energy-momentum-laurent-modes
+  - id: worldsheet.tt-ope-central-charge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.9)、(2.6.10)，p.53–54（式号经 schrans-2020 核实，系数未核实）"
+summary: |
+  直接代入 worldsheet.schwarzian-transformation-of-t 的变换律，取 z = exp(-i w)：
+    ∂z/∂w = -i z,  (∂z/∂w)^2 = -z^2,
+    z' = -i z,  z'' = -z,  z''' = i z  （' = d/dw）,
+    S(z; w) = z'''/z' - (3/2)(z''/z')^2 = (-1) - (3/2)(-i)^2 = -1 + 3/2 = 1/2。
+  故 T_{cyl}(w) = (∂z/∂w)^2 T_{pl}(z) + (c/12) S(z; w) = -z^2 T_{pl}(z) + c/24。
+  再把两侧展成模：平面上 T_{pl}(z) = Σ_m L_m z^{-m-2}，柱面上 T_{cyl}(w) 的零模即
+  σ^2 平移的生成元，读出 H = L_0 + L̄_0 - (c + c̄)/24。
+gaps:
+  - "本推导继承 worldsheet.schwarzian-transformation-of-t 的全部缺口（OPE 收敛与围道变形，
+     lead 裁决 1）。Schwarzian 的值 S(z;w) = 1/2 本身是初等微积分，不构成额外缺口。"
+  - "「柱面上 T 的零模就是哈密顿量」用到径向量子化中标度变换 ↔ 柱面时间平移的对应，
+     在本图中由 worldsheet.state-operator-isomorphism 承担，此处未列为显式依赖
+     （若 reviewer 认为应显式化，可补一条边）。"
+  - "系数与符号未与原书逐字核对（(2.6.9)/(2.6.10) 只核实了式号与标题）。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

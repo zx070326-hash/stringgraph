@@ -1,0 +1,31 @@
+id: worldsheet.laplacian-log-contact-term
+kind: proposition
+title: 二维 Laplace 算子的基本解 ∂ ∂̄ ln|z|^2 = 2π δ^2(z, z̄)
+statement: |
+  在 conv.worldsheet-complex-coords 的归一化下（d^2 z = 2 dσ^1 dσ^2，∫ d^2 z δ^2(z, z̄) = 1），
+  作为 C 上的分布恒等式，
+    ∂ ∂̄ ln|z|^2 = 2π δ^2(z, z̄),
+  即对任意紧支光滑测试函数 f，
+    ∫ d^2 z  (∂ ∂̄ ln|z|^2) f(z, z̄) = 2π f(0)。
+  在 z ≠ 0 处 ln|z|^2 = ln z + ln z̄ 是调和的，故整个等式的内容全部集中在 z = 0 的接触项。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1, eq. (2.1.24)（p.36）"
+    note: |
+      公式号经 schrans-2020 目录逐字核实（`2.6 p 36: Eq. (2.1.24) ∂∂̄ ln|z|² = 2πδ²(z,z̄)`）。
+      Polchinski 在正文中直接写出该恒等式，**不给证明**。
+  - ref: headrick-2008
+    loc: "习题 2.1 的解答"
+    note: |
+      用两种正规化（围道积分；以及把 ln|z|^2 换成 ln(|z|^2 + ε) 后取 ε → 0）
+      验证 ∫ d^2 z (∂∂̄ ln|z|^2) f = 2π f(0)。**这是解答者的验证，不是 Polchinski 的论证。**
+tags: [cft, distributions, contact-term, free-field]
+notes: |
+  单列本节点的理由：它与 worldsheet.operator-equation-of-motion 的认识论地位不同。
+  运动方程作为算子方程是路径积分的形式操作；本条则是纯粹的分布论事实
+  （二维 Laplace 算子的基本解），原则上可以严格证明，也是本批节点中最容易形式化的一条。
+  它是自由场传播子归一化与一切「接触项」的唯一来源，被 free-scalar-propagator、
+  operator-equation-of-motion、conformal-normal-ordering 共同依赖。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

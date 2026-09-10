@@ -1,0 +1,38 @@
+id: worldsheet.primary-field
+kind: definition
+status: rigorous
+title: 共形权与主场（tensor / primary）
+statement: |
+  设 T(z) 是全纯能动张量（worldsheet.traceless-holomorphic-energy-momentum）。
+  局域算子 O(0,0) 的**共形权** (h, h̄) 由与 T 的 OPE 定义：
+    T(z) O(0, 0) ∼ … + (h / z^2) O(0, 0) + (1/z) ∂O(0, 0),
+    T̄(z̄) O(0, 0) ∼ … + (h̄ / z̄^2) O(0, 0) + (1/z̄) ∂̄O(0, 0)。
+  若该 OPE 中**没有比二阶更高的极点**（即上式中的 "…" 为零），则称 O 是**主场**
+  （Polchinski 称之为 tensor 或 primary）。
+
+  主场在共形变换 z → z'(z)、z̄ → z̄'(z̄) 下按
+    O'(z', z̄') = (∂z'/∂z)^{-h} (∂z̄'/∂z̄)^{-h̄}  O(z, z̄)
+  变换。非主场（如 T 自身、如 X^μ）的变换律带附加项。
+uses:
+  - worldsheet.traceless-holomorphic-energy-momentum
+  - worldsheet.operator-product-expansion
+  - worldsheet.ward-identity
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.6)（与能动张量的 OPE）、(2.4.16)（主场的共形变换）、(2.4.17)（典型算子的变换），p.44–46；另 (2.4.7) 给出 X^μ 的变换（X^μ 不是主场）"
+    note: |
+      四个公式号经 schrans-2020 目录核实（`2.18 p 44`、`2.19 p 44`、`2.23 p 46`、`2.24 p 46`）。
+      OPE 与变换律的具体形式为忠实转述，未核对原书。
+tags: [cft, primary-field, conformal-weight, definition]
+notes: |
+  两个易错点，均已核实存在于来源：
+  (1) X^μ 本身**不是**主场（(2.4.7)），因为 T(z)X^μ(0,0) 的展开带 ln 项；权 (1,0) 的主场是 ∂X^μ。
+  (2) T 自身**不是**主场，其变换律多出正比于中心荷的 Schwarzian 项，
+      见 worldsheet.schwarzian-transformation-of-t。
+
+  本节点把「共形权」与「主场」两件事写在一起：权对任意算子都有定义（由二阶极点系数读出），
+  主场是对同一 OPE 的额外条件。二者共用同一个 OPE，拆开会造成两个节点引用同一公式，
+  故合为一条定义。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

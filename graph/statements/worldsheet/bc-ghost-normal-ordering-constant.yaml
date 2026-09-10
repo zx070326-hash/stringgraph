@@ -1,0 +1,44 @@
+id: worldsheet.bc-ghost-normal-ordering-constant
+kind: proposition
+title: bc 鬼场部门的正规序常数 a^g = -1
+statement: |
+  取 λ = 2 的 bc 鬼场系统（worldsheet.bc-ghost-cft），模展开
+    b(z) = Σ_n b_n z^{-n-2},  c(z) = Σ_n c_n z^{-n+1},  {b_m, c_n} = δ_{m+n,0}。
+  设 L^g_n 为鬼场能动张量的 Laurent 模，取共形正规序（worldsheet.conformal-normal-ordering）；
+  设 |↓⟩ 为被所有正模湮灭的鬼场基态（worldsheet.bc-ghost-ground-state-ghost-number (i)）。
+  定义鬼场正规序常数 a^g 为该基态上的 L^g_0 本征值：
+    L^g_0 |↓⟩ = a^g |↓⟩。
+  则
+    a^g = -1。
+  等价刻画：态-算子同构下 |↓⟩ 对应算子 c(0)，而 λ = 2 时 c 的共形权是 h(c) = 1 - λ = -1；
+  在模语言里这就是 [L^g_0, c_1] = -c_1，故 L^g_0 (c_1|0⟩) = -(c_1|0⟩)。
+uses:
+  - worldsheet.bc-ghost-cft
+  - worldsheet.bc-ghost-ground-state-ghost-number
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.21)（鬼场正规序常数 a^g），p.61"
+    note: |
+      **式号经 schrans-2020 目录核实**（条目标题「Eq. (2.7.21) The bc Normal Ordering Constant a^g」），
+      但该目录**不含数值**，故 a^g = -1 这个值未经第三方核对源确认。
+      数值由 reviewer-ch23 于 2026-09-10 从 h(c) = 1 - λ 独立推出，并与
+      worldsheet.brst-quantization 的 §4.3 用法一致。
+tags: [cft, ghosts, bc-system, normal-ordering, brst]
+notes: |
+  与 worldsheet.normal-ordering-constant-ax（a^X = 0）平行：两者是 X 部门与鬼场部门
+  各自的共形正规序常数。取值不同不构成矛盾——X 部门基态对应单位算子（权 0），
+  鬼场基态对应 c(0)（权 1 - λ = -1）。
+
+  **历史分歧（已裁定）**：抽取记录 polchinski-1998-v1.md §1.1 与 E43 记 (2.7.21) 给出 a^g = 0；
+  reviewer-ch23（2026-09-10）裁定该记录是误记，正确值为 a^g = -1，待 researcher 订正抽取记录。
+
+  本节点的存在理由：既有节点 worldsheet.brst-quantization 的 statement 内部已把
+  a^g = -1 写死（BRST 荷的 c_0 项系数、总 L_0 的移位都依赖它），但那是一张定义卡，
+  a^g 的值在其中没有独立来源与状态。本节点把它提出来单独承载。
+  已提交节点的 statement 不可改，故此处**不**修改 brst-quantization，
+  是否让它显式依赖本节点由 lead 决定。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

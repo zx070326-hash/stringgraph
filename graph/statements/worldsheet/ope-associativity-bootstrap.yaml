@@ -1,0 +1,28 @@
+id: worldsheet.ope-associativity-bootstrap
+kind: proposition
+title: 三算子 OPE 的结合性给出结构常数的约束（共形 bootstrap）
+statement: |
+  设三个局域算子 A(z_1), B(z_2), C(z_3) 满足 |z_{12}| < |z_{13}|、|z_{23}| < |z_{13}| 等
+  使两种展开顺序都在各自收敛半径内的条件。则先做 A·B 的 OPE 再与 C 展开、
+  与先做 B·C 的 OPE 再与 A 展开，必须给出同一个结果：
+    (A B) C = A (B C)。
+  由于局域算子基完备，比较两侧同一基元的系数给出**结构常数满足的一组约束**（结合性条件）。
+  推广到四点函数并要求两种通道（s 与 t）的展开相等，即得**共形 bootstrap 方程**。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9（p.68 起），eq. (2.9.3)（三算子的 OPE），p.70"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.77 p 70: Eq (2.9.3) The OPE of Three Operators`）；
+      收敛半径的图示由 schrans-2020 §2.77 复现。
+      ⚠ 抽取记录 E45 明确指出：schrans-2020 那句「These equations are known as the conformal
+      bootstrap equations …tantamount to solving the conformal field theory completely」
+      是 **schrans-2020 的措辞，不是 Polchinski 的**，本节点不把它当作来源的断言。
+tags: [cft, ope, bootstrap, associativity]
+notes: |
+  本节点是本批中对 OPE 收敛性依赖最直接的一条：陈述本身就要把「两种展开顺序都收敛」
+  写进前提，而该前提在来源中未被证明（worldsheet.operator-product-expansion）。
+  这是共形 bootstrap 这一整套现代技术在本图中的入口；
+  后续若要建立 bootstrap 的数值结果（Ising 等），其依赖链会从这里出发。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

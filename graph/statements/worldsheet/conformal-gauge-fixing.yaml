@@ -1,0 +1,35 @@
+id: worldsheet.conformal-gauge-fixing
+kind: proposition
+title: 用 diff × Weyl 局部把世界面度规化到单位形式，残余对称性是共形变换
+statement: |
+  设世界面 M 是二维流形，度规 g_{ab} 为欧氏号差，理论具有 diff × Weyl 规范对称性
+  （Polyakov 作用量的对称性；本图未单建该节点，见 notes）。则：
+  (i) 二维的 Riemann 张量由 Ricci 标量完全决定：
+        R_{abcd} = (1/2) ( g_{ac} g_{bd} - g_{ad} g_{bc} ) R;
+  (ii) **在局部**（在 M 的任一坐标邻域上），可以用一个微分同胚加一个 Weyl 变换把度规化为
+        g_{ab} = δ_{ab}   （共形/单位规范）;
+  (iii) 该规范条件不完全固定规范：残余的规范自由度恰是保持 g_{ab} ∝ δ_{ab} 的变换，
+        即世界面上的**共形变换**（全纯坐标变换配一个补偿的 Weyl 变换）。
+
+  ⚠ 「至少局部」是关键限定：全局能否规范固定涉及模空间（moduli）与共形 Killing 向量（CKV），
+  属更后面的内容，本节点**不**断言全局规范固定的存在性。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.3（p.84 起），eq. (3.3.6)（二维 Riemann 张量由 R 决定）、(3.3.8)（规范固定后的残余共形对称性），p.85"
+    note: |
+      两个公式号经 schrans-2020 目录核实（`3.4 p 85`、`3.5 p 85`）；
+      (3.3.6) 的表达式由 schrans-2020 §5.1 正文逐字给出，**内容已核实**。
+      「至少局部」的限定见 schrans-2020 §5.1「we can thus, at least locally, go to a frame
+      that has zero Ricci scalar」。
+tags: [worldsheet, gauge-fixing, conformal-gauge, polyakov]
+notes: |
+  **依赖的缺口（跨 curator 协调）**：本节点的前提「Polyakov 作用量有 diff × Weyl 对称性」
+  对应抽取记录 E7，属第 1 章，由另一名 curator 负责（E1–E24）。
+  该节点在本分支上尚不存在，故本图把这一前提写进**陈述文本**作为假设，
+  而不是写成一条 depends_on 的边。
+  **待 E7 的节点（如 worldsheet.polyakov-action-diff-weyl）合入 main 后，
+  应给 worldsheet.conformal-gauge-fixing--via-local-frame 补一条显式的边。**
+  已 agora_send 通知另一名 curator 与 lead。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

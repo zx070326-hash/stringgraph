@@ -1,0 +1,44 @@
+id: worldsheet.bc-ghost-ground-state-ghost-number
+kind: proposition
+title: bc 鬼场的二重简并基态与真空鬼数 -1/2
+statement: |
+  取 λ = 2 的 bc 鬼场系统（worldsheet.bc-ghost-cft），模展开
+    b(z) = Σ_n b_n z^{-n-2},  c(z) = Σ_n c_n z^{-n+1},  {b_m, c_n} = δ_{m+n, 0}。
+  则：
+  (i) 零模 b_0、c_0 满足 Clifford 关系 {b_0, c_0} = 1、b_0^2 = c_0^2 = 0，
+      因而被所有正模湮灭的基态是**二重简并**的：记为 |↓⟩ 与 |↑⟩ = c_0 |↓⟩，满足
+        b_n |↓⟩ = c_n |↓⟩ = 0 (n > 0),  b_0 |↓⟩ = 0,  c_0 |↓⟩ = |↑⟩。
+  (ii) 在鬼数约定 gh(c_n) = +1、gh(b_n) = -1 下，按态-算子同构由鬼数流
+       j = -:bc: 的零模定出的鬼数算符给出
+        gh(|↓⟩) = -1/2,   gh(|↑⟩) = +1/2。
+      半整数的鬼数来自 j 的反常变换（worldsheet.bc-ghost-cft 中的 (2.5.15)–(2.5.17)），
+      即鬼数算符相对于朴素的 Σ(c_{-n}b_n - b_{-n}c_n) 有一个 -1/2 的偏移。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.17)（{b_m,c_n}）、(2.7.18)（两个简并基态 |↑⟩、|↓⟩）、(2.7.22)（鬼数算符）、(2.7.23)（鬼场的鬼数）、(2.7.24)（真空鬼数 -1/2），p.61–62"
+    note: |
+      公式号全部经 schrans-2020 目录核实（`2.55`–`2.62`, p.61–62）；
+      **数值 -1/2 也已核实**：schrans-2020 §4.44 逐字写
+      「the ghost ground state |↓⟩ that has ghost number −1/2, see (2.7.24)」。
+      **鬼数算符 (2.7.22) 的具体表达式未核实**，本节点只写它的作用效果。
+tags: [cft, ghosts, bc-system, ghost-number, brst]
+notes: |
+  与既有节点 worldsheet.brst-quantization 的一致性：该卡片已定义 |↓⟩ = c_1|0⟩、
+  |↑⟩ = c_0c_1|0⟩、{b_0,c_0} = 1、gh(c_n) = +1、gh(b_n) = -1，与本节点完全一致；
+  它**没有**给出真空的鬼数数值，本节点补上这一条（-1/2），并给出其独立来源。
+
+  **a^g 的取值：已裁定 a^g = -1**（reviewer-ch23, 2026-09-10）。
+  论证：态-算子同构下 |↓⟩ = c_1|0⟩ 对应算子 c(0)，而 λ = 2 的 bc 系统中 c 的共形权是
+  h(c) = 1 - λ = -1；于是 L_0 |↓⟩ = -|↓⟩，等价地 [L_0, c_1] = -c_1。
+  以「被正模湮灭的基态 L_0 本征值为 a^g」的约定读出 a^g = -1，
+  与既有节点 worldsheet.brst-quantization statement 里的 a^g = -1 一致。
+  抽取记录 polchinski-1998-v1.md 第 1.1 节与 E43 中的 **a^g = 0 是误记**，待 researcher 订正；
+  核对源 schrans-2020 的目录只给条目标题「Eq. (2.7.21) The bc Normal Ordering Constant a^g」
+  而不含数值，因此该误记未被第三方核对拦下。
+  数值本身另立节点 worldsheet.bc-ghost-normal-ordering-constant，与
+  worldsheet.normal-ordering-constant-ax（a^X = 0）平行。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

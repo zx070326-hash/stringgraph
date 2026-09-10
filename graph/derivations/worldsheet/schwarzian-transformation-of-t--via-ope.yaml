@@ -1,0 +1,29 @@
+id: worldsheet.schwarzian-transformation-of-t--via-ope
+target: worldsheet.schwarzian-transformation-of-t
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.ward-identity
+  - id: worldsheet.primary-field
+  - id: worldsheet.operator-product-expansion
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.23)、(2.4.27)，p.48（公式号经 schrans-2020 核实；具体系数未核实）"
+summary: |
+  按 worldsheet.ward-identity，T 自身正是共形变换的 Noether 流，故 T 在共形变换下的
+  无穷小变换由 T(z)T(0) 的 OPE 的极点结构读出：
+    二阶极点 ⇒ 权 2 的张量部分；一阶极点 ⇒ ∂T 项；
+    四阶极点 c/(2z^4) ⇒ 一个**不含算子**的附加项，即变换律中的中心项。
+  把无穷小变换指数化（对一参数共形变换族积分）得到有限变换律，中心项积分成
+  -(c/12) 乘 Schwarzian 导数——Schwarzian 是唯一满足相应上循环条件
+  （S(w∘v; z) 的复合律）且在 SL(2,C) 下为零的三阶微分不变量。
+gaps:
+  - "OPE 级数收敛与围道变形的合法性在来源中未证明（lead 裁决 1，2026-09-10）：
+     由 TT OPE 的极点读出无穷小变换用的是 Ward 恒等式的围道形式，其合法性依赖
+     worldsheet.operator-product-expansion 所断言但未被证明的有限收敛半径。"
+  - "「无穷小变换指数化为有限变换」这一步书中未给出收敛性论证；本图按物理论证记账。"
+  - "系数 -(c/12)、以及 Schwarzian 的符号，随 T 的归一化与 conv.worldsheet-complex-coords
+     而变，抽取记录未核实原书的具体写法。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

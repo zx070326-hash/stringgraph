@@ -1,0 +1,34 @@
+id: worldsheet.free-scalar-cft-action
+kind: definition
+status: rigorous
+title: 二维自由标量的欧氏作用量（世界面 CFT 的物质部门）
+statement: |
+  欧氏世界面上 D 个自由标量场 X^μ(z, z̄)（μ = 0, …, D-1，靶空间度规 η mostly-plus）的作用量为
+    S = (1/(2π α')) ∫ d^2 z  ∂X^μ(z, z̄) ∂̄X_μ(z, z̄),
+  其中 z = σ^1 + i σ^2，∂ = ∂_z，∂̄ = ∂_z̄，d^2 z = 2 dσ^1 dσ^2（conv.worldsheet-complex-coords）。
+  指标由 η_{μν} 升降；X^0 的动能项因 η_{00} = -1 而符号相反，故该作用量对实的洛伦兹型靶空间
+  不是正定的（这正是后续「鬼」问题的来源）。
+uses: []
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1（p.32 起），作用量约 eq. (2.1.10)；复坐标与 Jacobian 见 (2.1.2)/(2.1.3)/(2.1.6)/(2.1.7)"
+    note: |
+      **作用量本身的公式号未核实**（抽取记录标 (2.1.10) 为近似定位）；
+      (2.1.2)/(2.1.3)/(2.1.6)/(2.1.7) 经 schrans-2020 目录核实。
+      见 literature/extractions/polchinski-1998-v1.md E25。
+tags: [cft, free-field, worldsheet, definition]
+notes: |
+  本节点只是作用量泛函的定义，不含任何量子化断言，故 status: rigorous
+  （对光滑的 X: Σ → R^D 与紧世界面，该积分是良定义的实/复数值泛函）。
+  由它出发的一切量子结论（传播子、OPE、能动张量的量子性质）都经过路径积分，
+  status 相应降为 physical-argument，见 worldsheet.free-scalar-propagator。
+
+  本节点**不**包含第 1 章的 Polyakov 作用量与其 diff×Weyl 对称性
+  （那属于抽取记录 E5/E7，由另一名 curator 处理）。两者是同一作用量在
+  共形规范 + 欧氏化后的形式；日后应补一条把二者连起来的边。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

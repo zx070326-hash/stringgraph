@@ -1,0 +1,39 @@
+id: worldsheet.operator-product-expansion
+kind: definition
+status: physical-argument
+title: 算子乘积展开（OPE）及其收敛性假定
+statement: |
+  设 {O_i} 是理论的局域算子的一组基。算子乘积展开是如下断言：对任意两个局域算子 A、B，
+  存在只依赖坐标差的系数函数 c_i^{AB}，使得在任何期望值中
+    A(z, z̄) B(0, 0) = Σ_i c_i^{AB}(z, z̄)  O_i(0, 0),
+  该等式在算子意义下成立，即两侧插入任意其它算子后给出相同的关联函数。
+  展开的奇异部分由 z → 0 时发散的项组成，记作 A(z,z̄) B(0,0) ∼ （奇异项）。
+
+  **收敛性**：Polchinski 断言在二维共形场论中该展开不只是渐近展开，而是有**有限收敛半径**的
+  收敛级数，收敛半径由离 z = 0 最近的其它算子插入点的距离给出；OPE 的这一性质被用于
+  围道变形论证（worldsheet.ope-commutator-dictionary）与自举方程
+  （worldsheet.ope-associativity-bootstrap）。**该收敛性在来源中未被证明。**
+uses: []
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.2（p.36 起），约 eq. (2.2.1)–(2.2.4)；(2.2.4)（Taylor 展开）已核实在 p.38"
+    note: |
+      (2.2.4) 的公式号经 schrans-2020 目录核实（`2.7 p 38: Eq. (2.2.4) A Taylor Expansion`）；
+      (2.2.1)–(2.2.3) 未核实。收敛半径的图示对应 (2.9.3) 附近，schrans-2020 §2.77 复现。
+      见 literature/extractions/polchinski-1998-v1.md E27 与 Q3。
+tags: [cft, ope, definition, convergence]
+notes: |
+  **为什么 status 是 physical-argument 而不是 rigorous**：作为定义，本节点的严格程度取决于
+  被定义对象是否良定义。这里被定义的不只是「形式展开」，还附带了「存在有限收敛半径」的断言，
+  而来源既不给出算子基所在的拓扑向量空间，也不证明收敛。按 docs/STATUS_LEVELS.md
+  「不确定时选低的那级」，定义本身只能记为 physical-argument。
+
+  **lead 裁决（2026-09-10）**：本批不另建「OPE 收敛」公理节点。凡靠「围道变形 + OPE」
+  得到算子代数关系的推导（本批的 ope-commutator-dictionary、free-boson-central-charge-d--via-ope、
+  schwarzian-transformation-of-t、ope-associativity-bootstrap 等）一律 status: physical-argument，
+  并在 gaps 中写明「OPE 级数收敛与围道变形的合法性在来源中未证明」。
+  若日后要把这条瓶颈显式化（例如为形式化做准备），再单建 axiom 节点，
+  届时本节点的 notes 应指向它。抽取记录 Q3 记录了同一问题。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

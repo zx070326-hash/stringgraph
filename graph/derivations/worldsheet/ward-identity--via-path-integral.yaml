@@ -1,0 +1,26 @@
+id: worldsheet.ward-identity--via-path-integral
+target: worldsheet.ward-identity
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.operator-equation-of-motion
+  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.operator-product-expansion
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.3, eq. (2.3.5)、(2.3.11)（公式号经 schrans-2020 核实，p.41–42）"
+summary: |
+  在路径积分中对全局对称性做**局域化**的变换（参数 ε → ε(σ)，取 ε 在某个区域内为常数、
+  在区域外为零）。作用量的变分正比于 ∫ (∂^a ε) j_a，分部积分给出 -∫ ε ∂^a j_a；
+  由于对常数 ε 变换是对称性，测度与作用量的总变分只剩下 ∂^a j_a 项。
+  于是 ⟨ ∂^a j_a(σ) A(0) ⟩ = -（A 处的接触项），把该等式对包含 A 插入点的小圆盘积分并用
+  Stokes 定理，即得围道形式的 Ward 恒等式；改写成复坐标即得单极点形式。
+gaps:
+  - "与 worldsheet.operator-equation-of-motion 同源的缺口：假定路径积分测度在局域化变换下不变。
+     这一假定在有反常时失效——本图中 worldsheet.weyl-anomaly-trace 正是它失效的情形，
+     因此本推导的适用范围本身依赖于「哪些对称性无反常」这一未在本节点刻画的判据。"
+  - "把 ⟨∂^a j_a A⟩ 的接触项等同于 δA 用到了局域算子基的完备性（worldsheet.operator-product-expansion），
+     其收敛性在来源中未证明。"
+  - "Stokes 定理这一步在分布意义下做，未指定关联函数作为 σ 的函数所在的类。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

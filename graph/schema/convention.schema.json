@@ -17,7 +17,7 @@
         "type": "object",
         "required": ["ref"],
         "additionalProperties": false,
-        "properties": { "ref": { "type": "string" }, "loc": { "type": "string" } }
+        "properties": { "ref": { "type": "string" }, "loc": { "type": "string" }, "note": { "type": "string" } }
       }
     },
     "notes": { "type": "string" }

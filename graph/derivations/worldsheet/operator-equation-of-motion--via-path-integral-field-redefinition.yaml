@@ -1,0 +1,28 @@
+id: worldsheet.operator-equation-of-motion--via-path-integral-field-redefinition
+target: worldsheet.operator-equation-of-motion
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-scalar-cft-action
+  - id: worldsheet.laplacian-log-contact-term
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1, eq. (2.1.23)、(2.1.24)，p.36（公式号已由 schrans-2020 核实）"
+summary: |
+  在路径积分 ∫ DX e^{-S} 中做无穷小场重定义 X^μ → X^μ + δX^μ(z,z̄)。假定测度 DX 不变，
+  展开到一阶得 ⟨ δS · (插入) ⟩ = ⟨ δ(插入) ⟩；对局域的 δX 取支撑在远离其它插入处，
+  右端为零，由 δX 的任意性得 ⟨ ∂∂̄ X^μ(z,z̄) · 其它插入 ⟩ = 0。
+  当 δX 的支撑包含某个插入点时右端非零，其值正是该插入对 X 的变分，
+  化为 worldsheet.laplacian-log-contact-term 的 δ^2 接触项。
+gaps:
+  - "「路径积分测度在场重定义下不变」是本推导的核心假设，书中不证；
+     反常正是这一假设失效的情形（对比 worldsheet.weyl-anomaly-trace：那里测度确实不变分）。"
+  - "∫ DX 本身没有数学定义（见 worldsheet.free-scalar-propagator--via-path-integral 的同名缺口）。"
+  - "「δX 任意性 ⇒ 算子恒等式」这一步是在分布意义下做的，但书中不指定算子插入所在的函数空间。"
+notes: |
+  **依赖方向（reviewer-ch23 裁定）**：Polchinski §2.1 的顺序是先由路径积分中的场重定义得到
+  算子运动方程 (2.1.21)，再解出传播子 (2.1.22)；因此本推导**不**依赖
+  worldsheet.free-scalar-propagator，反向的边加在
+  worldsheet.free-scalar-propagator--via-path-integral 上。原先此处的传播子依赖是方向反的，已删。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

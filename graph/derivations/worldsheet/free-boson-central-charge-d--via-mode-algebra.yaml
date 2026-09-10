@@ -1,0 +1,81 @@
+id: worldsheet.free-boson-central-charge-d--via-mode-algebra
+target: worldsheet.free-boson-central-charge-d
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: virasoro-lean-2025
+    loc: "Theorem 10.1 + Corollary 10.2（c = 1，Lean 机器验证）；Appendix A.2"
+    note: |
+      **本推导的主数学来源**（Kytölä, arXiv:2510.21741，开放获取，researcher 于 2026-09-10 全文 16 页逐页核实）。
+      Theorem 10.1：在假设 (H)（Heisenberg 关系 (16)：J_k∘J_l − J_l∘J_k = k δ_{k,−l} id_V）
+      与 (T)（局部截断 (17)：对每个 v ∈ V 存在 K_v 使 l ≥ K_v 时 J_l v = 0）下，
+      算子 (19) L_n v = ½ Σ_{k∈Z} :J_{n−k}J_k: v 满足
+      L_m∘L_n − L_n∘L_m = (m−n)L_{m+n} + ((m³−m)/12) δ_{m,−n} id_V。
+      Corollary 10.2：由此得到中心荷 **c = 1** 的 Virasoro 表示。
+      完整证明在 Appendix A.2（Lemma A.6–A.12）。
+      该定理已在 Lean 中机器验证，声明名 `sugawaraRepresentation_of_representation_heisenbergAlgebra`。
+      ⚠ 来源只给 c = 1（单个 Heisenberg 族），c = D 的那一步不在来源里，见 gaps。
+  - ref: kac-raina-1987
+    loc: "Heisenberg 代数的 Fock 表示上的 Virasoro（Sugawara 型）作用；**本项目未核实任何编号，故不给 Lecture 号**"
+    note: |
+      经典来源，保留作为背景引用，**不承载本推导的论证**（论证由 virasoro-lean-2025 承载）。
+      **版本陷阱（researcher 2026-09-10）**：第 1 版（World Scientific 1987，145 页）约 12 讲，
+      第 2 版（Kac–Raina–Rozhkovskaya 2013）18 讲，两版讲次数不同，**讲号与命题号不可互换**。
+      本节点引的是 1987 年第 1 版。因未获取正文，此处**不写任何 Lecture 编号**。
+  - ref: schottenloher-2008
+    loc: "Virasoro 代数在 Heisenberg/Fock 表示上的实现（Sugawara 型构造）相关章节，**章节与定理编号未核实**"
+    note: 备选数学来源，同样编号未核实；不承载论证。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)（模式表达式，经 schrans-2020 §4.3 核实）"
+    note: |
+      提供本推导所用的模式表达式本身；Polchinski **不**走这条对易子路线，
+      他在 §2.4 用 OPE 定 c，故本条只支持「L_m 的表达式」这一步，不支持整个计算。
+summary: |
+  纯代数计算，全部在 worldsheet.virasoro-generators-free-boson 定义的 Fock 空间 F 上进行，
+  不用算子乘积展开、不用围道积分：
+  (1) 先算 [L_m, α^μ_n] = -n α^μ_{m+n}。这一步是有限计算：L_m 中只有两项与 α^μ_n 不对易，
+      用 [α^μ_p, α^ν_q] = p η^{μν} δ_{p+q,0} 展开即得。
+  (2) 由 (1) 得 [L_m, L_n] = (m-n) L_{m+n} 对 m + n ≠ 0 成立——此时和式中不出现
+      需要重排的项，正规序不产生额外常数。
+  (3) 对 n = -m（m > 0），把 [L_m, L_{-m}] 中出现的 α_{k}·α_{-k} 重排成正规序，
+      每次重排给出 c-数 η^{μν}η_{μν} = D；求和范围有限，为 k = 1,…,m-1，得中心项
+        (1/2) D Σ_{k=1}^{m-1} k(m-k) = (D/12) m(m^2 - 1)。
+      故 [L_m, L_{-m}] = 2m L_0 + (D/12) m(m^2-1)。
+  (4) 与 conv.virasoro-standard 的归一化比较，读出 c = D。
+  每一步都只涉及 Fock 空间上的有限和，因为作用在任一 v ∈ F 上时只有有限多项非零
+  （worldsheet.virasoro-generators-free-boson 的良定义性论证）。
+
+  与来源的对应：virasoro-lean-2025 的 Theorem 10.1 正是 D = 1 的情形（单个 Heisenberg 族），
+  其假设 (H)、(T) 分别对应本图的 [α_p, α_q] = p δ_{p+q,0}（单分量）与 Fock 空间上的局部截断；
+  结论 (m³−m)/12 即 c = 1。本推导把它推广到 D 个互相对易的拷贝（步骤 (3) 中的 η^{μν}η_{μν} = D）。
+gaps:
+  - "**来源只给 c = 1**（单个 Heisenberg 代数，virasoro-lean-2025 Thm 10.1 / Cor 10.2）。
+     c = D 由 D 个互相对易的拷贝相加得到，**这一步是本项目的初等推理，不在来源里**；
+     且来源全程不含洛伦兹不定内积（Kytölä 不引入号差），而不定内积正是无鬼定理的全部难点。
+     本推导只断言代数关系，不涉及内积，故这一缺口不影响本条的正确性，
+     但下游任何用到正定性的结论都不能引本条为据。"
+  - "本推导给出的是**振子代数的 Fock 表示上**的陈述，与「二维自由标量场论的中心荷」之间
+     还差一步物理解释（即该 Fock 空间就是自由标量 CFT 的态空间）；
+     那一步经 worldsheet.state-operator-isomorphism，属 --via-ope 路线的内容。
+     换言之：本条使 c = D 作为**代数命题**成立，但「c = D 是自由标量 CFT 的中心荷」
+     这一物理陈述仍封顶在 physical-argument。"
+  - "计算在 mostly-plus 号差下做，η^{μν}η_{μν} = D 与号差无关，但 Fock 空间的内积不定
+     （X^0 方向），本推导不涉及内积，故不受影响。"
+  - "kac-raina-1987 与 schottenloher-2008 的编号仍未核实，两者在本推导中只作背景引用，
+     不承载论证；不得据它们升级或降级本条的状态。"
+notes: |
+  reviewer-verified: reviewer-ch23, 2026-09-10（中心项 (1/2)DΣ_{k=1}^{m-1}k(m-k) = (D/12)m(m²-1)
+  已独立重算）。
+
+  **状态从 physical-argument 升为 rigorous 的依据**（lead 裁决 2026-09-10）：
+  (a) 主数学来源改为 virasoro-lean-2025，它是**带编号、开放获取、且已 Lean 机器验证**的定理
+      （Theorem 10.1 + Corollary 10.2，证明在 Appendix A.2），不再依赖编号未核实的 Kac–Raina；
+  (b) 剩余的「c = 1 ⇒ c = D」一步是有限步初等线性代数，已由 reviewer 独立复核，
+      符合 docs/STATUS_LEVELS.md 中 rigorous 的例外条款。
+  注意本条**不是** `formalized`：Lean 验证的是来源里 c = 1 的版本，
+  不是本图节点所述的 D 分量、洛伦兹号差版本。本图的 Lean 复用评估见 formal/NOTES-virasoro-reuse.md。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

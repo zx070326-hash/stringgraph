@@ -1,0 +1,32 @@
+id: worldsheet.cylinder-plane-l0-shift
+kind: proposition
+title: 柱面与平面之间 T 的关系与 L_0 的 -c/24 移位
+statement: |
+  设 w = σ^1 + i σ^2 是柱面坐标（σ^1 ~ σ^1 + 2π），z = exp(-i w) 是到平面的共形映射。
+  设理论的中心荷为 c、c̄。则柱面上的能动张量与平面上的能动张量相差一个中心项：
+    T_{cyl}(w) = - z^2  T_{pl}(z) + c/24,
+  该 c/24 来自 worldsheet.schwarzian-transformation-of-t 中的 Schwarzian 导数
+  （对 z = e^{-iw} 有 S(z; w) = 1/2，乘以 c/12 即 c/24）。
+  相应地柱面上的哈密顿量（σ^2 方向的平移生成元）为
+    H = L_0 + L̄_0 - (c + c̄)/24,
+  其中 L_0、L̄_0 是**平面上**的 Virasoro 零模。
+  常数 -(c+c̄)/24 即圆柱上的 Casimir 能量。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.9)（T_{zz} 与 T_{ww} 的关系）、(2.6.10)（哈密顿量），p.53–54"
+    note: |
+      两个公式号经 schrans-2020 目录核实（`2.40`、`2.41`, p.53–54），
+      但**具体形式与系数未核实**：本节点写出的 -z^2 T_pl + c/24 与 H = L_0 + L̄_0 - (c+c̄)/24
+      是由 worldsheet.schwarzian-transformation-of-t 直接算 Schwarzian 得到的标准结果，
+      未与原书逐字比对。柱面周长取 2π；若取 ℓ 则整体差一个标度因子。
+tags: [cft, central-charge, casimir, cylinder, virasoro]
+notes: |
+  这条把「正规序常数 / 零点能」与「中心荷」用几何联系起来：
+  开弦光锥正规序常数 A = -(D-2)/24（抽取记录 E16）中的 24 与本条的 24 是同一个来源，
+  即 c = D-2 个横向玻色子的 Casimir 能量 -c/24。这一联系在本图中尚未建成显式的边
+  （E16 属另一名 curator 负责的第 1 章范围），**建议日后补一条从本节点到 A = -(D-2)/24 的边**。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

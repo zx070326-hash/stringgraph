@@ -1,0 +1,31 @@
+id: worldsheet.ope-commutator-dictionary
+kind: proposition
+title: OPE ↔ 对易子字典：径向排序与围道变形
+statement: |
+  在径向量子化（径向排序 R）中，设 A(z)、B(w) 是全纯算子，其模为
+  A_m = ∮ (dz/2πi) z^{m+h_A-1} A(z)、B_n 同理。则两个围道积分的对易子可化为
+  一个绕内点的小围道积分：
+    [A_m, B_n] = ∮_{C_w} (dw / 2π i) w^{n+h_B-1} ∮_{C_w'} (dz / 2π i) z^{m+h_A-1}  R{ A(z) B(w) },
+  其中 C_w' 是绕 w 的小围道。具体做法是把「|z| > |w| 的围道」减去「|z| < |w| 的围道」，
+  差为绕 z = w 的闭围道。
+  于是 A(z)B(w) 的 OPE 中 (z-w)^{-k} 的极点系数经留数积分直接给出模式的对易关系：
+  **OPE 的极点结构 ⟺ 模的对易（反对易）关系**。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.14)（OPE 与对易关系的互换），p.55；图示见 Fig. 2.3（p.55）"
+    note: |
+      公式号与 Fig. 2.3 均经 schrans-2020 目录核实
+      （`2.42 p 55: Fig 2.3 The Contracted Contour Integration`、
+      `2.43 p 55: Eq. (2.6.14) Switching Between OPEs and Commutation Relations`）。
+tags: [cft, ope, radial-quantization, contour-deformation, virasoro]
+notes: |
+  **这是整个 CFT 部门在严格性上的关键瓶颈**（抽取记录 Q3 与 E39 备注均指出这一点）：
+  围道变形要求 R{A(z)B(w)} 在两个围道之间的环域上是 z 的全纯函数（除 z = w 外），
+  这等价于 OPE 在该环域内收敛——而收敛性在来源中不被证明
+  （worldsheet.operator-product-expansion）。
+  本图中一切「由 OPE 推出算子代数」的推导（Virasoro 代数的自由场实现、Schwarzian 变换、
+  自举方程）都经过本节点或与它同构的论证，因而都封顶在 physical-argument。
+  若日后要突破这个封顶，需要的是一条独立的、把 OPE 收敛性证明出来（或作为公理引入）的节点。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

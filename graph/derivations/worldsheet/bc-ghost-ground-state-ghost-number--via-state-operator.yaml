@@ -1,0 +1,35 @@
+id: worldsheet.bc-ghost-ground-state-ghost-number--via-state-operator
+target: worldsheet.bc-ghost-ground-state-ghost-number
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+  - id: worldsheet.state-operator-isomorphism
+  - id: worldsheet.energy-momentum-laurent-modes
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.17)、(2.7.18)、(2.7.22)–(2.7.24)，p.61–62（式号经 schrans-2020 核实；-1/2 的数值经 schrans-2020 §4.44 核实）"
+    note: |
+      核对源（lead 政策裁决 2026-09-10：公开个人笔记可登记入 bib、可作核对源，但不得作为推导 sources[] 条目承载论证）：
+      schrans-2020 §4.44 逐字写「the ghost ground state |↓⟩ that has ghost number −1/2, see (2.7.24)」，
+      据此确认 -1/2 这个数值；式号亦经其目录核实。
+summary: |
+  (i) 简并性：由 {b_0, c_0} = 1 与 b_0^2 = c_0^2 = 0，零模张成一个二维 Clifford 模。
+      「被所有正模湮灭」的条件不能同时要求 b_0 与 c_0 都湮灭（否则与 {b_0,c_0}=1 矛盾），
+      故基态空间二维，取 b_0|↓⟩ = 0 的那个为 |↓⟩，另一个是 |↑⟩ = c_0|↓⟩。
+  (ii) 鬼数：按 worldsheet.state-operator-isomorphism，|↓⟩ 对应算子 c(0)，
+      而 SL(2,C) 不变真空 |0⟩ 对应单位算子。鬼数流 j = -:bc: 的零模给出鬼数算符；
+      由于 j 不是主场（其共形变换带反常项），把柱面上的鬼数搬到平面上时产生一个常数偏移，
+      结果是 gh(|↓⟩) = -1/2、gh(|↑⟩) = +1/2 而不是整数。
+gaps:
+  - "整条论证以 worldsheet.state-operator-isomorphism 为前提（路径积分构造，非定理）。"
+  - "-1/2 这个偏移的来源是鬼数流的反常共形变换 (2.5.15)–(2.5.17)，
+     本图只核实了这些公式的**式号**，未核实其表达式，因此偏移量的推导在本图中不可完全追溯；
+     本节点接受它是因为数值 -1/2 本身经 schrans-2020 §4.44 独立确认。"
+  - "**本推导不涵盖鬼场正规序常数 a^g**（它由 worldsheet.bc-ghost-normal-ordering-constant
+     单独承载）。抽取记录 §1.1 / E43 称 (2.7.21) 给出 a^g = 0 与既有节点
+     worldsheet.brst-quantization 的 a^g = -1 曾有分歧；**reviewer-ch23 已裁定 a^g = -1**
+     （|↓⟩ = c_1|0⟩ 对应 c(0)，权 1 - λ = -1；[L_0, c_1] = -c_1），
+     抽取记录的 a^g = 0 是误记，待 researcher 订正。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

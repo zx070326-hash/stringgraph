@@ -1,0 +1,29 @@
+id: worldsheet.operator-equation-of-motion
+kind: proposition
+title: 运动方程作为算子方程：∂ ∂̄ X^μ(z,z̄) = 0 至多相差接触项
+statement: |
+  在 worldsheet.free-scalar-cft-action 的自由标量理论中，路径积分对场重定义
+  X^μ → X^μ + δX^μ 的不变性给出算子形式的运动方程：对任意其它算子插入 A_1 … A_n，
+    ⟨ ∂ ∂̄ X^μ(z, z̄)  A_1 … A_n ⟩ = 0   当 z 不与任何 A_i 的插入点重合；
+  在重合点则出现接触项，例如
+    ∂ ∂̄ ⟨ X^μ(z, z̄) X^ν(0, 0) ⟩ = -π α' η^{μν} δ^2(z, z̄)。
+  换言之「运动方程只在算子插入之外成立」，其失效完全由 worldsheet.laplacian-log-contact-term
+  的 δ 函数刻画。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1, eq. (2.1.23)（运动方程作为算子方程）与 (2.1.24)（接触项），p.36"
+    note: |
+      两个公式号经 schrans-2020 目录逐条核实
+      （`2.5 p 36: Eq. (2.1.23) The Equation of Motion as Operator Equation`、
+      `2.6 p 36: Eq. (2.1.24)`）。内容为忠实转述。
+tags: [cft, free-field, equation-of-motion, contact-term]
+notes: |
+  这条是「算子方程」概念在本图中的落点：它把经典运动方程升级为对所有关联函数成立的陈述，
+  并明确其在重合点的失效方式。正规序积满足运动方程（Polchinski (2.2.6) 下方）这一事实
+  即由本条给出，见 worldsheet.conformal-normal-ordering。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

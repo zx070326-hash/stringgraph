@@ -1,0 +1,39 @@
+id: worldsheet.bc-ghost-central-charge--via-ope
+target: worldsheet.bc-ghost-central-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.bc-ghost-cft
+  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.operator-product-expansion
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.11)（鬼场 T）、(2.5.12)（中心荷），p.50–51（式号经 schrans-2020 核实）"
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i)（λ = 2 的情形：ρ(c) = -26 Id）"
+    note: 只支持 λ = 2 的数值，不支持一般 λ 的公式；编号已核实。
+summary: |
+  用 bc 系统的基本 OPE b(z)c(0) ∼ 1/z 做 Wick 缩并（注意 b、c 反对易，缩并带符号），
+  计算 T(z)T(0)，T = :(∂b)c: - λ ∂(:bc:)。
+  四阶极点的系数由三类缩并给出：两次 b–c 缩并的直接项、以及两个 ∂(:bc:) 项与交叉项；
+  把它们对 λ 的依赖收集起来得到 -3(2λ-1)^2 + 1 的二次多项式，
+  与定义式 c/(2z^4)（worldsheet.tt-ope-central-charge）比较即读出 c^{bc}。
+  λ = 2 代入得 -26。
+  λ = 2 的情形另有一条独立的数学证据：fgz-1986 Proposition 2.1(i) 在半无限形式空间
+  Λ^∞_* 上算出鬼场表示的中心荷为 -26。
+gaps:
+  - "**OPE 收敛性在来源中未证**（lead 裁决 1）：本推导只用 Wick 缩并求 OPE、
+     再与 worldsheet.tt-ope-central-charge 的定义式比对四阶极点系数，**不需围道变形**，
+     故不依赖 worldsheet.ope-commutator-dictionary（该边已删）。
+     但 worldsheet.operator-product-expansion 所刻画的展开其**收敛半径仍未被证明**，
+     这一缺口与自由玻色子的同类计算共享。"
+  - "一般 λ 的公式 -3(2λ-1)^2 + 1 的具体形式未核实（核对源只给出 (2.5.12) 的标题）。
+     只有 λ = 2 时的数值 -26 被抽取记录标为已核实，且有 fgz-1986 的独立支持。
+     **若只需要 λ = 2，本节点的可信度高于其一般形式。**"
+  - "fgz-1986 的 Proposition 2.1(i) 是在半无限形式的数学框架下证明的，与本推导的
+     Wick 缩并计算不是同一条论证；本图把它作为同一命题（λ=2 特例）的旁证列出，
+     而没有单建一条 --via-semiinfinite-forms 的 rigorous 推导——那需要核实 FGZ 的
+     中心荷归一化与 conv.virasoro-standard 是否一致，抽取记录未做此核对。
+     **这是把本节点升级为 rigorous（至少在 λ=2 处）的最短路径，建议 researcher 跟进。**"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

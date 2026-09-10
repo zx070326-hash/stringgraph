@@ -1,0 +1,36 @@
+id: worldsheet.state-operator-isomorphism
+kind: proposition
+title: 二维 CFT 的态-算子同构
+statement: |
+  在二维共形场论中，把半无穷柱面（w = σ^1 + i σ^2，σ^2 ≤ 0，σ^1 ~ σ^1 + 2π）
+  经 z = exp(-i w) 共形映射到单位圆盘。则：
+  (i) 圆盘中心 z = 0 处插入一个局域算子 O，并对圆盘内部做路径积分（边界条件自由），
+      给出圆盘边界上的一个波函数，即柱面上的一个入态 |O⟩；
+  (ii) 反之，柱面上的任一入态可由圆盘内插入某个局域算子得到；
+  (iii) 该对应是线性同构，把单位算子 1 送到基态 |0⟩（SL(2,C) 不变真空），
+        并与共形变换相容：权 (h, h̄) 的算子对应 L_0、L̄_0 本征值为 (h, h̄) 的态。
+
+  这一对应称为**态-算子同构**，是二维 CFT 特有的（依赖于径向量子化与
+  「半无穷柱面 ≅ 圆盘」这一共形映射）。
+uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.8（p.63 起），eq. (2.8.1)（柱面到圆盘的映射）、(2.8.2)（单位算子 ↔ 基态）、(2.8.4)/(2.8.6)/(2.8.7)（一般态由带插入的圆盘路径积分给出）、(2.8.17)/(2.8.18)（反向映射）"
+    note: |
+      公式号大量经 schrans-2020 目录核实（`2.63`–`2.74`, p.63–67）。
+      「同构」在书中是**路径积分构造**，不是被证明的定理；schrans-2020 用单独一节
+      （`2.64 p 63: The State-Operator Isomorphism in 2d-CFTs`）复述。
+tags: [cft, state-operator, radial-quantization]
+notes: |
+  抽取记录 E44 的判断：「这是 CFT 部分与 Lean 形式化的最大鸿沟之一——『同构』在书中是
+  物理构造，不是被证明的定理」。本图照此记账：本节点唯一的推导为 physical-argument。
+
+  下游用途：正规序常数 a^X = 0（worldsheet.normal-ordering-constant-ax）、
+  最高权态的分次（worldsheet.descendant-weight-grading）、
+  以及径向量子化中「模作用在态上」这一整套语言（worldsheet.ope-commutator-dictionary）。
+
+  注意本节点断言的是**同构**（双向、线性、且与共形结构相容）。若日后要拆细，
+  自然的拆法是把 (i)(ii)(iii) 分成「映射良定义」「满」「与 Virasoro 作用相容」三条；
+  在有严格构造（如顶点算子代数的公理化处理）之前拆开意义不大。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

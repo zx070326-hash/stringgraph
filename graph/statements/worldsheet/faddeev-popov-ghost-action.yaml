@@ -1,0 +1,37 @@
+id: worldsheet.faddeev-popov-ghost-action
+kind: proposition
+title: Polyakov 路径积分的 Faddeev–Popov 规范固定给出 λ = 2 的 bc 鬼场作用量
+statement: |
+  在 Polyakov 路径积分 ∫ (Dg DX / V_{diff×Weyl}) e^{-S[g,X]} 中插入 Faddeev–Popov 恒等式
+    1 = Δ_{FP}(g) ∫ dζ  δ( g - ĝ^ζ ),
+  其中 ζ 遍历 diff × Weyl 规范群、ĝ 是固定的参考度规（共形规范，
+  worldsheet.conformal-gauge-fixing），可把规范群的体积分离出来并消去。
+  FP 行列式 Δ_{FP} 是规范变换对度规的作用的 Jacobian 行列式；
+  把它写成反对易场的路径积分即得**鬼场作用量**：
+    Δ_{FP} = ∫ Db Dc  e^{-S_g[b,c]},
+  其中 b_{ab} 是对称无迹张量（来自度规的对称无迹部分）、c^a 是向量（来自微分同胚参数）。
+  在共形规范与复坐标下该作用量化为
+    S_g = (1/2π) ∫ d^2 z  ( b ∂̄ c + b̄ ∂ c̄ ),
+  即 worldsheet.bc-ghost-cft 的 bc 系统，权为 **λ = 2**（b 权 (2,0)，c 权 (-1,0)）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.3, eq. (3.3.16)（度规的无穷小规范变换）、(3.3.18)（FP 行列式）、(3.3.21)（鬼场路径积分形式）、(3.3.24)（共形规范下的鬼场作用量），p.88–89"
+    note: |
+      四个公式号全部经 schrans-2020 目录核实（`3.7`–`3.10`, p.88–89）。
+      Polchinski 在脚注 2（p.87）讨论了 delta 函数的规范不变性
+      （schrans-2020 目录 `3.6 p 87: Footnote 2 The Gauge Invariance of the Delta Function` 已核实），
+      说明他本人也意识到这一步需要论证。
+tags: [worldsheet, faddeev-popov, ghosts, gauge-fixing, path-integral]
+notes: |
+  **λ = 2 的来源就在这里**：b 是度规变分的对称无迹部分（权 2）、c 是微分同胚参数（权 -1），
+  这一配对不是任选的，而是由被固定的规范对称性决定的。
+  于是 worldsheet.bc-ghost-central-charge 中的 c^g = -3(2·2-1)^2+1 = -26 也随之被定死，
+  这正是 D = 26 的两条推导（BRST 与 Weyl 反常）共同的输入。
+
+  与既有节点 worldsheet.brst-quantization 的关系：那张卡片直接从「Faddeev–Popov 鬼场是
+  权 (2,-1) 的 bc 系统」出发，不解释这一点从何而来；本节点补上这个来源。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

@@ -1,0 +1,26 @@
+id: worldsheet.linear-dilaton-central-charge
+kind: proposition
+title: 线性 dilaton CFT 的中心荷 c = D + 6 α' V^μ V_μ
+statement: |
+  worldsheet.linear-dilaton-cft 定义的线性 dilaton 共形场论的中心荷为
+    c = D + 6 α' V^μ V_μ,
+  反全纯部门同理 c̄ = D + 6 α' V^μ V_μ。
+  特别地 V_μ = 0 时回到 c = D（worldsheet.free-boson-central-charge-d）；
+  V 类时（mostly-plus 下 V·V < 0）可使 c < D，V 类空则 c > D。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.2)，p.49"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.27 p 49: Eq. (2.5.2) The Linear Dilaton Central Charge`）；
+      **中心荷表达式中的系数 6α' 未核实**（抽取记录 E35 与第 3 节未核实清单）。
+tags: [cft, central-charge, linear-dilaton]
+notes: |
+  系数 6α' 与 conv.alpha-prime-regge 及 worldsheet.free-scalar-propagator 的归一化绑定；
+  换 α' 归一化时必须同时改它。这条在本批中是「中心荷可以不是整数、也可以不是维数」的
+  第一个例子，对后续非临界弦与 Liouville 方向有用，但**不参与 D = 26 的任何一条推导**。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

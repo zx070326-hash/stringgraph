@@ -1,0 +1,32 @@
+id: worldsheet.state-operator-isomorphism--via-radial-quantization
+target: worldsheet.state-operator-isomorphism
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.operator-product-expansion
+  - id: worldsheet.energy-momentum-laurent-modes
+  - id: worldsheet.primary-field
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.8, eq. (2.8.1)–(2.8.18)，p.63–67（公式号大量经 schrans-2020 核实）"
+summary: |
+  把柱面上的「t = σ^2 → -∞ 的入态」用路径积分表示：对半无穷柱面做路径积分，
+  结果是柱面某个时刻切片上的场构型的泛函，即一个态。
+  共形映射 z = exp(-i w) 把该半无穷柱面映为去心单位圆盘；
+  由共形不变性，路径积分不变，而「无穷远的过去」被映到 z = 0 这**一个点**。
+  于是柱面上的入态 ⟺ 圆盘内部（含 z = 0）的路径积分数据 ⟺ z = 0 处插入的局域算子。
+  单位算子（不插入任何东西）给出的是基态；权 (h,h̄) 的算子由 L_0、L̄_0 的作用（在圆盘上是
+  标度变换）给出相应的本征值。反向映射由把态投影到局域算子基上得到（(2.8.17)/(2.8.18)）。
+gaps:
+  - "「路径积分定义态」在数学上未定义：需要在场构型空间上的测度以及对边界条件的处理，
+     书中不给。故 status 只能是 physical-argument。"
+  - "「无穷远的过去被映为一个点，因而对应一个**局域**算子」这一步是本论证的核心，
+     但它默认了路径积分在该点的行为可由有限个局域算子完全刻画（算子基的完备性），
+     这与 worldsheet.operator-product-expansion 的未证明收敛性是同一个缺口。"
+  - "「同构」（尤其是单射与满射）从未被证明，只是被构造性地断言；
+     严格版本需要顶点算子代数或 Wightman 型公理框架下的定理，本图暂无对应节点。"
+  - "对非幺正 CFT（如 b c 鬼场系统、mostly-plus 号差下的 X^0 部门）该构造是否仍是同构，
+     书中不讨论；本图在 worldsheet.bc-ghost-ground-state-ghost-number 与
+     worldsheet.normal-ordering-constant-ax 处照用了它。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

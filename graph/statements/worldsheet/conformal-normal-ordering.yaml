@@ -1,0 +1,43 @@
+id: worldsheet.conformal-normal-ordering
+kind: definition
+status: rigorous
+title: 自由场的正规序（减去自缩并）与交叉缩并规则
+statement: |
+  对自由标量理论（worldsheet.free-scalar-cft-action），正规序 : … : 定义为从算子的乘积中
+  减去所有**自缩并**，缩并由 worldsheet.free-scalar-propagator 给出：
+    X^μ(z_1,z̄_1) X^ν(z_2,z̄_2) 的缩并 = -(α'/2) η^{μν} ln|z_{12}|^2。
+  递归定义：
+    :X^μ(z_1,z̄_1): = X^μ(z_1,z̄_1),
+    :X^μ(z_1,z̄_1) X^ν(z_2,z̄_2): = X^μ X^ν + (α'/2) η^{μν} ln|z_{12}|^2,
+  一般地 :F: = exp( -(1/2) ∫ d^2 z_1 d^2 z_2  G(z_1, z_2) δ/δX(z_1) δ/δX(z_2) ) F，
+  其中 G 是传播子（形式表达式，逐项就是「减去所有自缩并」的组合规则）。
+
+  两个正规序算子的乘积由**交叉缩并**给出：
+    :F: :G: = Σ_{交叉缩并} :(F G 中未缩并的部分):,
+  由此可以机械地算出任意自由场算子之间的 OPE。
+  正规序积满足运动方程 ∂∂̄ :X^μ …: = 0（无接触项），因为接触项恰好被减除项抵消。
+uses:
+  - worldsheet.free-scalar-propagator
+  - worldsheet.operator-equation-of-motion
+  - worldsheet.operator-product-expansion
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.2, eq. (2.2.5)、(2.2.8)（减除与缩并）、(2.2.6) 下方（正规序积满足运动方程）、(2.2.10)（交叉缩并）、(2.2.11)（据此算 OPE），p.39–40"
+    note: |
+      五处公式号全部经 schrans-2020 目录核实（`2.8`–`2.11`，p.39–40）。
+      具体表达式为忠实转述，未核对原书。
+tags: [cft, free-field, normal-ordering, definition]
+notes: |
+  status: rigorous 的理由：给定传播子，正规序是**纯组合定义**（对每个多项式算子只涉及有限多项
+  Wick 缩并），不需要额外的解析输入。它的有效状态自然由所依赖的
+  worldsheet.free-scalar-propagator（physical-argument）拉低，这正是想要的记账方式。
+
+  ⚠ 本节点定义的是**共形正规序**（按传播子减除，与坐标有关）。它与模式展开中的
+  **产生-湮灭正规序**（把 α_{n>0} 移到右边）不是同一个操作，两者在 L_0 上相差一个常数；
+  对 X 理论该常数为零，见 worldsheet.normal-ordering-constant-ax。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"
