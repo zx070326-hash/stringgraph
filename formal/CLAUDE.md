@@ -25,9 +25,13 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 ```
 StringFormal/
-  Virasoro/Basic.lean       Virasoro 代数（占位，待换成真正的 LieAlgebra 实例或复用 arXiv:2510.21741）
+  Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
+  Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
+  Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 ```
+
+复用既有形式化的调研记录见 `NOTES-virasoro-reuse.md`。
 
 分解任务见 `TODO.md`。
 
