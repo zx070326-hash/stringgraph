@@ -23,10 +23,150 @@ canonical_source:
   ref: goddard-thorn-1972
   loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
-  status: draft
+  status: back-translated
   back_translation:
     by: physics-auditor
     text: |
+      【第三轮回译，2026-09-10，对象 worldsheet.no-ghost-theorem-v3。仅依据该节点的 statement / uses_conventions、
+      它引用的 worldsheet.old-covariant-physical-states 与 worldsheet.ddf-operators-v3 的 statement 字段、
+      以及四条约定节点（conv.metric-mostly-plus、conv.virasoro-standard、conv.alpha-prime-regge、conv.intercept-sign-a）
+      写成；无 formal_statement，无 Lean 声明。写于读 canonical_text、v3 notes、推导节点与第二轮 diff_notes 之前
+      （原稿留在 graph/build/round3-back-translation.txt，gitignore）。】
+
+      背景与约定。考虑 D 维时空中的自由玻色开弦，度规号差 (−,+,…,+)。只有一组振子 α^μ_n，Virasoro 生成元按
+      Sugawara 构造，c = D，代数 [L_m,L_n] = (m−n)L_{m+n} + (D/12)m(m²−1)δ。Fock 内积由 (α^μ_n)† = α^μ_{−n} 与
+      η_{μν} 诱导；由于 η_{00} = −1，这个内积在整个 Fock 空间上不定。物理态空间 H_phys 是满足 (L_0 − a)|ψ⟩ = 0 与
+      L_n|ψ⟩ = 0（所有 n > 0）的态；a 是截距，符号约定为 (L_0 − a)，即 Polchinski 的 A = −a。零模态指 H_phys 中
+      与全部物理态正交的态。零模 α^μ_0 = (2α')^{1/2} p^μ；F(p) 是动量本征值为 p 的 Fock 空间，
+      H_phys(p) = H_phys ∩ F(p)。质量壳 α' m² = N − a，m² = −p²，所以动量为 p 的物理态的振子能级是 N = a − α' p²。
+
+      (1) 取 D = 26、a = 1。任选一条类光射线 {λk_0 : λ > 0}（k_0² = 0）。k_0 的标度不预先固定，而是对每个被作用的
+          动量 p 按 2α' k_0·p = 1 取定（这样一来 k_0·p ≠ 0 是前提；这个条件只与射线方向有关，与标度无关）。
+          以下只讨论满足 k_0·p ≠ 0 的动量 p。
+
+          (1a) 对任意这样的 p 和任意 |ψ⟩ ∈ H_phys(p)，⟨ψ|ψ⟩ ≥ 0。即：在该扇区内不存在负模物理态。
+
+          (1b) 取一个快子壳动量 k：α' k² = 1（即 N = 0 的质量壳；mostly-plus 下 k² > 0，m² = −1/α'），
+               且 k_0·k ≠ 0，k_0 已重标为 2α' k_0·k = 1。定义
+                 - 动量塔上的物理态空间 H_phys(k;k_0) = ⊕_{N≥0} H_phys(k − N k_0)；
+                 - 其零模子空间 H_0(k;k_0) = 塔内与塔内所有态正交的态；
+                 - 横向 DDF Fock 空间 H^⊥(k) = 由 A^{i_1}_{−n_1}…A^{i_r}_{−n_r}|0;k⟩ 张成，r ≥ 0，n_j ≥ 1，
+                   i_j 取 24 个横向方向 2..25。DDF 算子 A^i_n = ∮ dz/2πi ∂X^i e^{i n k_0·X}，与所有 L_m 对易，
+                   满足 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}；A^i_n 把动量 p 移到 p + n k_0，故 A^i_{−n} 把动量
+                   移到 p − n k_0，能级升高 n。
+               陈述里给出的自洽性说明：k_0² = 0 与 2α'k_0·k = 1 使 α'(k − N k_0)² = 1 − N，所以 H_phys(k − N k_0)
+               里的态自动处在能级 N；因此 H^⊥(k) ⊂ H_phys(k;k_0)。
+               结论：
+                 (1b-i)   商 H_phys(k;k_0)/H_0(k;k_0) 上诱导的内积正定；
+                 (1b-ii)  H^⊥(k) → H_phys(k;k_0)/H_0(k;k_0)（包含再取商）是保内积的线性双射；
+                 (1b-iii) 这个双射保持能级 N：DDF 一侧 N = Σ n_j，物理态一侧 N = 振子能级 = 动量分级
+                          （p = k − N k_0）= a − α'p²。它不是 L_0 分级——在 H_phys 上 L_0 = 1 恒定。
+
+          对 k_0·k = 0 的动量（包括 k = 0）不作断言。
+
+      (2) 取 D > 26。则在 a = 1 时 H_phys 里存在负模态：∃ |ψ⟩ ∈ H_phys，⟨ψ|ψ⟩ < 0。对 a ≠ 1 不作断言。
+
+      对 D ≤ 25（任意 a）不作断言；对 D = 26、a ≠ 1 不作断言。
+
+      量词归纳：(1a) 是"∀p∀ψ"；(1b) 是"∀k（快子壳、k_0·k≠0）"下由包含+商映射给定的等距同构；(2) 是"∃ψ"。
+      结论强度：(1a) 半正定；(1b-i) 商上正定；(1b-ii) 等距同构（不只是线性同构）。陈述没有说 D = 26 是无鬼的
+      必要条件，也没有说 a = 1 是必要条件；(2) 只给出 D > 26、a = 1 的反例存在性。
+    verdict: drift
+    diff_notes: |
+      ================================================================
+      第三轮（2026-09-10，针对 worldsheet.no-ghost-theorem-v3 与按 v3 改写后的 canonical_text）
+      ================================================================
+      参照材料：canonical_text；v3 与 ddf-operators-v3 的 notes/sources；推导 worldsheet.no-ghost-theorem-v3--via-goddard-thorn；
+      literature/extractions/brst-cohomology-sources.md §1.3（FGZ Thm 2.8 逐字）、§3–§4（GT 1972 / Brower 1972 摘要级 L2，
+      Goddard 2008 综述 L3）；polchinski-1998-v1.md E58/E68。GT 1972 正文仍未获取，本轮按现有材料判。
+      第二轮的数值脚本 graph/build/noghost_round2_check.py 已不在（build/ 未入库），本轮重写为 graph/build/noghost_round3_check.py
+      （gitignore，不入库），改为**逐塔**做：α' = 1/2、mostly-plus，取 k = (0, √2, 0, …)（α'k² = 1，快子壳），
+      k_0 = (1, 1, 0, …)/√2（k_0² = 0，2α'k_0·k = 1），对 N = 1..3 取 p_N = k − N k_0，直接求 L_1..L_N 在能级 N 上的公共核得
+      H_phys(p_N)，再看 Fock Gram 矩阵在核上的特征值符号 (负, 零, 正)：
+        D=26, a=1：N=1/2/3 为 (0,1,24) / (0,26,324) / (0,375,3200)，正特征值个数 = p_24(N) = 24/324/3200，且每个 p_N 的
+                   质量壳能级 a − α'p_N² 恰为 N。⇒ (1a)、(1b-i)、(1b-ii) 的维数部分、(1b-iii) 的能级记账在 N ≤ 3 复核通过。
+        D=27, a=1：N=2 有 1 个负特征值，N=3 有 26 个；p_2、p_3 类时，故落在 k_0·p ≠ 0 扇区内。⇒ (2) 在扇区内成立。
+        D=25, a=1：无负模，正特征值 23/300/2876 > p_23(N) = 23/299/2852。⇒ 不对 D ≤ 25 断言等距同构是必要的（同第二轮）。
+        另做 p = 0、D=26、a=1：能级 1 的 26 个态全部物理（L_1 = p·α_1 = 0），Gram 符号 (1,0,25)；能级 2 为 (25,0,325)。
+        即 **p = 0 处即使 D = 26 也有负模物理态**（α^0_{−1}|0;0⟩，模 η^{00} = −1，L_0 = 1 = a）。见 A3。
+
+      A. 任务指定的核查项
+      A1. 〔(a) 动量塔自洽〕自洽。mostly-plus 下 m² = −p²，α'm² = N − a 给 N = a − α'p²。取 α'k² = a = 1（k 类空，m² = −1/α'，
+          是快子），k_0² = 0，2α'k_0·k = 1，则 α'(k − Nk_0)² = α'k² − 2Nα'k_0·k + N²α'k_0² = 1 − N，故 N(p_N) = 1 − (1 − N) = N。
+          符号要求 2α'k_0·k = **+1**（不是 −1），与 ddf-operators-v3 (★) 一致；数值复核逐塔确认能级。
+          附带一个精度缺陷（属 ddf-operators-v3，不属本里程碑）：它把 k_0 定义为射线 {λk_0 : λ > 0}，又说标度"唯一确定为
+          λ = 1/(2α'k_0·p)"；当 k_0·p < 0 时该 λ < 0，与射线的 λ > 0 矛盾。正确说法是"固定一条类光**直线**（允许 λ ∈ R∖{0}）"，
+          或在射线上要求 k_0·p > 0。对 v3 的影响：(1b) 前提 (ii) 对 k_0·k < 0 的 k 不可满足，(1b) 对这些 k 空真而非假；(1a) 的
+          结论不涉及 k_0 的标度，无影响。不改裁定，建议 ddf-v4 时修。
+      A2. 〔(b) DDF 移动方向〕一致。ddf-v3 写 A^i_n 把 p 移到 p + n k_0（顶点算子 e^{ink_0·X} 携带动量 nk_0），故 A^i_{−n}
+          移到 p − nk_0；由 A1，α'(p − nk_0)² = α'p² − n，能级升 n；与 [A^i_m, A^j_n] = mδδ_{m+n,0} 下 A_{−n}（n > 0）是产生算子
+          一致；H^⊥(k) 由 A_{−n} 作用在 N = 0 的 |0;k⟩ 上，落在塔 {k − Nk_0} 的能级 N = Σn_j 上，与 (1b-iii) 一致。
+          e^{ikX} 携带动量 +k 的符号是 α_0 = (2α')^{1/2}p 与 OPE 一起定的内部约定；若整体翻转，k_0 → −k_0 同时翻转，
+          陈述不变。
+      A3. 〔(c) 归一化 2α'k_0·p = 1〕正确且在 α' = 1/2 时退化为 GSW 的 k_0·p = 1。独立核算：开弦边界正规序下
+          e^{ik_1·X}(y)e^{ik_2·X}(y') ~ |y − y'|^{2α'k_1·k_2}，e^{ink_0·X} 作用在动量 p 的态上带 z^{2α'nk_0·p}，围道良定义要
+          2α'nk_0·p ∈ Z ∀n，取 2α'k_0·p = 1；e^{ink_0·X} 的边界权 α'n²k_0² = 0，∂X^i e^{…} 权 1，与 [L_m, A^i_n] = 0 一致。
+          另一条独立佐证：FGZ Thm 2.8 的维数 p_24(1 − p·p/2) 正是 N = a − α'p² 在 α' = 1/2、mostly-plus 下的形式。
+          v3/ddf-v3 notes 承认一般 α' 形式"无直接文献定位"——这是**定义节点的量纲换算**，初等、可复核（本轮已复核），
+          不是新物理内容；**不应单独阻止 approved**，但船长应知道 (1b) 的精确形式（一般 α'、逐塔打包）是本项目的规范化，
+          文献里没有一处逐字如此写（推导节点 gaps 已如实登记）。
+      A4. 〔(d) canonical_text ↔ v3 逐条〕
+          - 引言：canonical_text 少了 v3 的"Fock 内积由 (α^μ_n)† = α^μ_{−n} 与 η_{μν} 诱导，在 Fock 空间上不定"与"单组振子"。
+            "负模/半正定"所指的内积由此定义，canonical_text 只靠 statement_id 间接给出。压缩，非语义差异。
+          - 固定动量段、(1) 引言、(1a)：语义逐条一致。
+          - (1b)：canonical_text 未显式定义 H_0(k;k_0)（只说"其零模态子空间"），未写 H^⊥ 侧 N = Σn_j，未写 A^i_{−n} 的移动方向，
+            未重复"k_0 已按 2α'k_0·k = 1 取定"（只在 (1) 引言写"逐塔取定"）。都是压缩；"其零模态子空间"有"塔内零模"与
+            "全局零模 ∩ 塔"两种读法，v3 取塔内定义，v3 notes 说明二者相等（不同动量 Fock 态正交），可接受。
+          - 排除句：逐字同义。
+          - (2)：canonical_text「当 D > 26 时，至少在 a = 1 的情形存在负模物理态」与 v3「设 D > 26。则至少在 a = 1 时 H_phys 含
+            负模态，即存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0」语义一致，量词一致（只断言 a = 1）。两侧共有的问题见 B1。
+          - D ≤ 25 免责句：canonical_text「不对 D ≤ 25 作任何断言（无论 a 取何值），也不对 D = 26、a ≠ 1 作断言」与 v3 同义；
+            v3 多一句"不使用退耦/不幺正等措辞"，canonical_text 无此句也无此措辞。第二轮 A3 指出的无来源句已删。
+          结论：canonical_text 是 v3 的忠实压缩，无第二轮 A3 那种"多出一句"的问题。
+
+      B. 两侧共有的表述缺陷（本轮裁定 drift 的唯一实质依据）
+      B1. **第 (2) 条的动量量词缺失，照字面为空真。** (2) 写"存在 |ψ⟩ ∈ H_phys 使 ⟨ψ|ψ⟩ < 0"，对 H_phys 的动量不加限制。
+          但 p = 0 时能级 1 的态 α^0_{−1}|0;0⟩ 满足 L_1ψ = α^0_0ψ = 0（p = 0）、L_0 = N = 1 = a，是物理态，模 = η^{00} = −1
+          （本轮数值：p = 0、D = 26、a = 1，能级 1 Gram 符号 (1,0,25)）。这与 D 无关，D = 26 时同样存在。所以 (2) 照字面在
+          任何 D 下都成立，**不再区分 D > 26 与 D = 26**——它是真命题，但没有内容。
+          v3 与 canonical_text 的排除句（"k_0·k = 0 的动量扇区（特别是 k = 0）不在本陈述/里程碑范围内"）放在 (1) 之内、(2) 之前；
+          若把"本陈述范围"读成全局，则 (2) 隐含限制到 k_0·p ≠ 0 扇区，此时 (2) 有内容且为真（D = 27 在 N = 2、类时 p 处有负模）；
+          若按位置读成只管 (1)，则 (2) 空真。两种读法的差别正是"(2) 有没有内容"，形式化时必须二选一。按审计立场不脑补作者本意，
+          裁定 drift：同一命题，但 (2) 的动量范围有出入。
+          修法（statement 不可变，需 v4；canonical_text 可同步改）：(2) 写成"存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0"，
+          或把排除句移到 (1)(2) 之前的引言并写明对 (2) 同样生效。用 p ≠ 0 比 k_0·p ≠ 0 干净：p ≠ 0 时总能选 k_0 使 k_0·p ≠ 0，
+          且 FGZ Thm 2.8 的条件正是 p ≠ 0。
+      B2. 排除扇区的刻画略过宽但无害：在壳且 k_0·p = 0 的动量只有 N = 0 的部分快子（模 1，平凡半正定）、N = 1 的 p = 0 与
+          p ∥ k_0（后者物理态 ε·α_{−1}|0;p⟩，ε·p = 0，符号 (0,1,24)，无负模）；N ≥ 2 时 p 类时，与任何类光 k_0 自动 k_0·p ≠ 0。
+          所以 (1a) 真正需要排除的只有 p = 0。不改裁定。
+      B3. (1b-i) 是 (1a) 限制到塔上再模根基的直接推论，作为独立条款是冗余，无害。
+
+      C. 与来源的差异
+      C1. goddard-thorn-1972（canonical_source，L2 摘要）：只有「absence of ghosts for d ⩽ 26」，Veneziano 模型隐含 a = 1。覆盖
+          (1a)（且更宽：含 d < 26）；不含 (1b) 的等距同构措辞；不含 (2)。里程碑对 D ≤ 25 不断言是收窄，允许。
+      C2. goddard-2008（L3）：「For D = 26, if |ψ⟩ is a physical state … it can be written in the form」DDF 态 + 零模态 ⇒ (1b-ii) 的
+          满射部分；「follows for D < 26 by embedding」⇒ 不单独断言 D ≤ 25 是对的；D > 26 出鬼归给 Brower–Thorn 1971，而后者
+          摘要无维数条件（§3.2 张力未裁决）。(2) 的归属仍然只有二手证据。
+      C3. fgz-1986 Thm 2.8（L1 逐字）：固定 **p ≠ 0**，T ∩ P ≅ P/rad P，正定，维数 p_24(1 − p·p/2)。与 v3 (1b) 的差异：
+          FGZ 固定单个动量、横向空间 T 的实现不同（v3 sources 已登记）；FGZ 的排除条件是 p ≠ 0 而非 k_0·p ≠ 0（支持 B1 的修法）；
+          维数公式与 N = a − α'p²（α' = 1/2）一致，且与本轮数值 p_24(N) 一致。
+      C4. polchinski-1998-v1 E58（页码核实、措辞未核实）：A = −1、D = 26 时 OCQ 物理态模 null 后正定；经 conv.intercept-sign-a
+          换算 a = 1，与 (1a)(1b-i) 一致。E68 是 BRST 版本，属 worldsheet.no-ghost-theorem-brst。
+      C5. 一般 α' 的 (★)、逐塔打包、能级记账：无逐字来源（推导 gaps 已登记）；本轮独立核算通过（A1–A3）。
+      C6. 第二轮 D5 关于 canonical_source 只能单列的问题未变：GT 1972 摘要只覆盖 (1a)。仍建议 GT 正文到手后补 loc；不建议换成综述。
+
+      D. 建议
+      D1. **不建议船长本轮 approved。** 阻止点只有 B1：(2) 的动量量词。修法很小（v4 加 "p ≠ 0"，或把排除句提到全局），
+          修后做第四轮回译；若船长选择按"排除句全局生效"的读法直接批，应在 canonical_text 里把这层读法写明，否则形式化者无法判断。
+      D2. ddf-operators-v3 的射线/标度符号问题（A1 附带）可与 v4 一并修，不阻止本里程碑。
+      D3. 其余：(1a)、(1b) 与来源一致且经逐塔数值复核；D ≤ 25、D = 26 a ≠ 1、一般 a 的免责均恰当；第二轮 A3/B1/B2/B3/C2 全部已落实。
+
+      裁定 drift 的依据：核心命题（D = 26、a = 1：扇区内半正定 + 逐塔 H_phys/H_0 ≅ 横向 DDF Fock 空间、保能级；D > 26、a = 1 有鬼）
+      两侧一致，且 (1a)(1b) 经逐塔数值复核；偏移只在 B1（(2) 的动量范围不明，字面为空真）。未发现假命题，故不是 wrong。
+
+      ================================================================
+      第二轮回译文本（2026-09-10，针对 worldsheet.no-ghost-theorem-v2；历史记录，原样保留，自 back_translation.text 移入此处）
+      ================================================================
       【第二轮回译，2026-09-10，对象 worldsheet.no-ghost-theorem-v2。仅依据该节点的 statement / uses_conventions、
       它引用的 worldsheet.old-covariant-physical-states 与 worldsheet.ddf-operators-v2 的 statement 字段、
       以及三条约定节点写成；无 formal_statement，无 Lean 声明。写于读 canonical_text 之前。】
@@ -61,8 +201,6 @@ audit:
            k·k_0 ≠ 0 扇区（连续动量）。二者不可能作为整体等距同构，除非逐动量陈述。
         Q3 (1b) 说"分级由 L_0 给出"，但 H_phys 上 L_0 = a = 1 是常数，作为分级是平凡的；真正的分级是能级 N。
         Q4 |0; k⟩ 未要求 k 在快子壳（α' k^2 = a = 1）上；不在壳则 H^⊥ ⊄ H_phys。
-    verdict: drift
-    diff_notes: |
       【v3 变更记】2026-09-10 lead 按第二轮审计建议改指 v3，等待第三轮回译。
       具体：statement_id 由 worldsheet.no-ghost-theorem-v2 改为 worldsheet.no-ghost-theorem-v3
       （新建节点，v2 加 superseded_by 保留作历史）；canonical_text 按 v3 改写（F1：(1) 改为逐动量塔
