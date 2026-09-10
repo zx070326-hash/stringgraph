@@ -1,0 +1,66 @@
+id: math.anomaly-twelve-form-factorization
+kind: proposition
+title: 因子化恒等式 Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²] 对 SO(32) 与 E₈ 的迹多项式成立
+statement: |
+  设 R 是 ℚ-代数，x, y ∈ R。按下面两组**具体的多项式表达式**定义 Ω₄, Ω₈, Ω₁₂：
+
+  **(a) SO(32)**（math.so-usp-adjoint-fundamental-trace-identities 取 N = 32、l = −1，
+       x := tr F²、y := tr F⁴；注意此时 tr F⁶ 的系数 N + 32l = 0）：
+
+        Ω₄ := 30 x,   Ω₈ := 24 y + 3 x²,   Ω₁₂ := 15 x y
+
+  **(b) E₈**（math.e8-adjoint-trace-identities，x := Tr F² = tr F²）：
+
+        Ω₄ := x,      Ω₈ := (1/100) x²,    Ω₁₂ := (1/7200) x³
+
+  则在两种情形下都有
+
+        **Ω₁₂ = (1/48) · Ω₄ · [ Ω₈ − (1/300) · Ω₄² ]**
+
+  等价的展开形式：Ω₁₂ = (1/48) Ω₄ Ω₈ − (1/14400) Ω₄³。
+
+  **陈述的确切范围**（这一段是陈述的一部分，不是注释）：
+  1. 这是关于**上面写死的那两组多项式表达式**的恒等式，把 x, y 当作 ℚ-代数中的元素时对一切
+     x, y 成立（等价地：在多项式环 ℚ[x, y] 中作为形式恒等式成立）。
+  2. 它**不是**关于抽象李代数的定理。真实的 tr F^{2k} 在给定李代数上未必互相独立，
+     E₈ 一支恰恰是靠 Tr F⁴、Tr F⁶ 可由 Tr F² 表出才成立的。
+  3. 它**不**断言任何唯一性或分类结论（「只有 SO(32) 与 E₈ × E₈ 因子化」这类说法**不属于**
+     Green–Schwarz 1984，见 notes）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(19)；引导句（跨页）「It is important in comparing the analysis of the mixed anomalies for SO(32) and E₈ × E₈ that for both these gauge groups」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E11）。
+      **GS 只写出 (19)，不给任何证明**，也没有说它是从 (12)/(12′) 验算得来的。
+      原文写的就是这个**嵌套**形式；网上常见的展开式写法
+      「Tr F⁶ = (1/48) Tr F⁴ Tr F² − (1/14400)(Tr F²)³」是二手转述（L4），数值一致但不是原文式样。
+tags: [algebra, polynomial-identity, anomaly, factorization, so32, e8, phase2, lean-target]
+notes: |
+  【这是 Phase 2 Lean 岛的首选目标】docs/ROADMAP.md Phase 2 列「Lean 岛 2：Green–Schwarz 反常多项式的
+  因子化（代数部分）」，抽取记录 §5.1 把本条列为 A1「首选目标 / 难度极低 / 理想的第一块砖」。
+  形式化形态（抽取记录 §5.1 逐条）：在 ℚ-代数（或直接在 ℚ[x, y]）上按 (a)(b) 定义三个多项式，
+  两个 `field_simp` / `ring` 即可结案。**目标卡的 formal.lean_decl 待 formalizer 填**，
+  填好后本节点可加一条 status: formalized 的 `--via-lean` 推导（不要改本卡的 statement 文本）。
+
+  【为什么现在是 physical-argument 而不是 rigorous】按 docs/STATUS_LEVELS.md 的 rigorous 例外，
+  「前提完整 + 有限步初等计算 + reviewer 独立复核并在推导 notes 留 reviewer-verified 记录」三条齐备才可标 rigorous。
+  这里前两条成立（前提就是 (a)(b) 两组表达式，计算是两行多项式展开），**第三条尚缺**：
+  目前只有抽取者（researcher）的手工复算，没有 reviewer 的独立复核记录，也没有 Lean 声明。
+  故取低一级。升级只需 reviewer 复核一次或 formalizer 做出 Lean 声明。
+
+  【唯一性冲突，未裁决（抽取记录 E20 / Q1）】"因子化 ⟺ 规范群是 SO(32) 或 E₈ × E₈" 这条**没有**
+  在本图建节点，理由有三：
+  (i) GS 1984 全文没有此断言，只在摘要里给充分条件（"cancel **if** the gauge group is SO(32) or E₈ × E₈"），
+      正文并明写 "We only discuss SO(N), USp(N) and E₈ × E₈ explicitly"；
+  (ii) 后续文献互相冲突：schwarz-2012-history p.10 说 E₈ × E₈ 是 "the only other"，
+       而 bilal-2008 p.102–103 与 antonelli-2015 §1.1 都列**四个** 496 维解
+       （SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶）；
+  (iii) 分类的显式证明据 antonelli-2015 摘要直到 2015 才被尝试，而其"原始陈述"指向 GSW Vol. 2 第 13 章
+       （本项目未核实，bib 里也还没有 gsw-1987-v2 条目）。
+  这条冲突**留给 auditor / lead 裁决**，不要顺手建节点。
+
+  【查重】`stringgraph search anomaly / 反常 / factorization / SO(32)` 均无命中本命题。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,44 @@
+id: consistency.gravitational-anomaly-polynomial-d10
+kind: proposition
+title: 十维 N=1 超引力 + 超 YM 的纯引力反常十二形式（含 n 个物质费米子，系数出自 Alvarez-Gaumé–Witten）
+statement: |
+  在 conv.gauge-trace-normalization 的记号下（tr R^{2k} 中的 tr 是 10 × 10 切空间矩阵的迹），
+  十维 N = 1 超引力 + 超 Yang–Mills 中**只有外引力子**的六边形（及更高）图所对应的洛伦兹反常，
+  由下面这个形式上的十二形式刻画：
+
+      − [ 1/32 + (n − 496)/13824 ] (tr R²)³
+      − [ 1/8  + (n − 496)/5760  ] tr R² tr R⁴
+      − [        (n − 496)/7560  ] tr R⁶                                        (GS (20))
+
+  其中已计入：超引力部分的**一个左手 spin-3/2 引力微子**与**一个右手 spin-1/2 场**，
+  以及物质部分的 **n 个左手 spin-1/2 场**（n 只通过规范群的维数进入）。
+
+  **本节点不断言**：
+  (a) 这三个系数是怎么算出来的——GS 不算，逐字把它们「associated with the formal twelve-form [3]」，
+      即 Alvarez-Gaumé–Witten 的指标定理计算（本项目未取得该文，见 gaps）；
+  (b) 规范部分与混合部分（分别见 consistency.anomaly-twelve-form-d10 与 (22)）；
+  (c) n = 496 会发生什么——那是 consistency.gravitational-anomaly-requires-496-fermions。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(20) 及其引导句「As described above for the Yang–Mills case, Lorentz anomaly structures arising from hexagon (and higher) diagrams with external gravitons only can be associated with the formal twelve-form [3]」与费米子含量的逐字说明"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E13。
+tags: [anomaly, gravitational-anomaly, twelve-form, d10, index-theorem, alvarez-gaume-witten]
+notes: |
+  【与 Bilal 2008 的交叉核验（抽取记录 §5.5 = A5）】把 n ↔ dim G 对应后，GS (20) 括号内容
+  与 bilal-2008 (12.21) 方括号内容逐项之比**都是 3/4**：
+
+  | 项 | GS (20) | [Bi] (12.21) | 比值 |
+  |---|---|---|---|
+  | (tr R²)³ | −[1/32 + (n−496)/13824] | (dimG−64)/10368 = (dimG−496)/10368 + 1/24 | (1/13824)/(1/10368) = 3/4；(1/32)/(1/24) = 3/4 |
+  | tr R² tr R⁴ | −[1/8 + (n−496)/5760] | (dimG+224)/4320 = (dimG−496)/4320 + 1/6 | (1/5760)/(1/4320) = 3/4；(1/8)/(1/6) = 3/4 |
+  | tr R⁶ | −(n−496)/7560 | (dimG−496)/5670 | (1/7560)/(1/5670) = 3/4 |
+
+  三项比值一致说明两者只差整体归一，这提高了对 (20) 的信心，但**不构成对 AGW 的核实**。
+  该核验是 Lean 候选 A5（三个 ℚ 上的等式，`norm_num` 即可），价值中等，本轮未建 math 节点。
+
+  【易误引】(20) 的**前两项在 n = 496 时不为零**，它们要靠反项 S₂ 抵消。
+  不要写成「496 使引力反常整体为零」。
+author: curator
+created: "2026-09-11"

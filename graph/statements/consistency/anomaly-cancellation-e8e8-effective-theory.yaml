@@ -1,0 +1,50 @@
+id: consistency.anomaly-cancellation-e8e8-effective-theory
+kind: proposition
+title: E₈ × E₈：加入洛伦兹 Chern–Simons 项与 S′₁ + S₂ + S′₃ 后，十维有效场论的单圈反常全部抵消
+statement: |
+  在十维 N = 1 超引力 + 超 Yang–Mills 的**有效场论**中取规范群 **E₈ × E₈**
+  （伴随表示维数 2 × 248 = 496）。若
+
+    (i) 按 consistency.h-field-strength-chern-simons 的 (4′) 修改三形式场强
+        （两个 E₈ 因子的 Yang–Mills Chern–Simons 项各带系数 1/30，并加入洛伦兹项 −ω⁰_{3L}），
+    (ii) 把 consistency.gs-counterterms-1984 的 **S′₁ + S₂ + S′₃**（(18′)(21)(23′)）加到作用量上，
+
+  则**单圈层次**上的纯规范反常、纯引力反常与混合反常**全部抵消**。
+
+  原文逐字：「Thus, as before, the addition of S′₁ + S₂ + S′₃ to the action cancels all the one-loop
+  anomalies for E₈ × E₈.」
+
+  **本节点不断言**：
+  (a) 唯一性/分类（同 consistency.anomaly-cancellation-so32-effective-theory 的 (a)）；
+  (b) 存在一个以 E₈ × E₈ 为规范群的**超弦理论**——GS 逐字说这样的理论
+      "has not yet been constructed / formulated"，只说 "it seems very likely to us that
+      E₈ × E₈ is also possible for superstrings"；杂化弦是次年的 ghmr-1985，与本文无关；
+  (c) 超对称性、超对称流反常、大规范变换反常（同 SO(32) 节点的 (b)(c)）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120–121（重印 611–612），(18′)(23′) 与其后总结句；E₈ × E₈ 的处理分布在 (4′)(9c′)(12′)(17′)(18′)(23′) 六处"
+    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E12/E16。
+tags: [anomaly, green-schwarz-mechanism, e8, d10, effective-field-theory, phase2]
+notes: |
+  【1. ★ 论证结构与 SO(32) 不同】GS 对 E₈ × E₈ **没有独立验算混合反常**。逐字：
+  「Given the cancellation of mixed anomalies in SO(32) the possibility of their cancellation in
+  E₈ × E₈ **follows from eq. (19)**.」——即靠因子化恒等式（math.anomaly-twelve-form-factorization）
+  从 SO(32) 那一支迁移过来。规范反常一路也是同样口气：
+  「It follows from eq. (12c′) **by the same reasoning as before**」。
+  因此本节点的推导以 consistency.anomaly-cancellation-so32-effective-theory 为依赖，
+  这是原文的逻辑，不是本图的加工。
+
+  【2. ★ 历史归属（抽取记录 E19）】E₈ × E₈ 这一半**不是 GS 独立发现的**：
+  · 预印本 CALT-68-1182 题名是「…REQUIRE SO(32)」，致谢逐字承认早期版本
+    「it was noted that the gravitational anomalies cancel for E₈ × E₈, but the cancellation of
+    the other anomalies in that theory was overlooked」；
+  · 关键群论输入（E₈ 无独立四阶、六阶 Casimir 不变量）来自 **G. Chapline 与 R. Slansky**；
+  · **L. Dixon、J. Harvey、E. Witten** 与（独立地）**J. Thierry-Mieg** 也观察到
+    E₈ × E₈ 的全部规范与混合反常可以抵消。
+  这段归属同时记在 math.e8-adjoint-trace-identities 的 notes（被致谢的正是那条迹恒等式）。
+
+  【3. E₈ × E₈ 的 S₂ 与 SO(32) 相同】(21) 不含规范场。
+author: curator
+created: "2026-09-11"
