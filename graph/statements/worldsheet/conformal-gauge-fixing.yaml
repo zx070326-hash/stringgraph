@@ -24,12 +24,19 @@ sources:
       that has zero Ricci scalar」。
 tags: [worldsheet, gauge-fixing, conformal-gauge, polyakov]
 notes: |
-  **依赖的缺口（跨 curator 协调）**：本节点的前提「Polyakov 作用量有 diff × Weyl 对称性」
-  对应抽取记录 E7，属第 1 章，由另一名 curator 负责（E1–E24）。
-  该节点在本分支上尚不存在，故本图把这一前提写进**陈述文本**作为假设，
-  而不是写成一条 depends_on 的边。
-  **待 E7 的节点（如 worldsheet.polyakov-action-diff-weyl）合入 main 后，
-  应给 worldsheet.conformal-gauge-fixing--via-local-frame 补一条显式的边。**
-  已 agora_send 通知另一名 curator 与 lead。
+  **跨分支缺口已补（2026-09-10）**：抽取记录 E7 的节点已合入 main，且按「一个节点一个命题」
+  拆成两条——worldsheet.polyakov-action-symmetries（Poincaré + 微分同胚）与
+  worldsheet.polyakov-weyl-invariance（Weyl）。二者现已作为
+  worldsheet.conformal-gauge-fixing--via-local-frame 的显式 depends_on 边补上（标 inferred，
+  理由见该推导的边 note：论证在 Polchinski §1.2，本推导来源 §3.3 只是使用它）。
+
+  ⚠ **陈述文本已过时但按规则不改**：statement 里「（Polyakov 作用量的对称性；本图未单建该节点，
+  见 notes）」这句写于两个节点尚未合入时，现在已不成立。按项目规则（已提交节点的 statement
+  文本不可变），此处不改文本，只在 notes 更正。若日后需要一条文本正确的版本，
+  应新建 worldsheet.conformal-gauge-fixing-v2 并给本节点写 superseded_by。
+
+  另注：本节点 kind 是 proposition，故不能有 `uses` 字段（schema 只允许
+  definition/axiom 用 uses）；依赖只能挂在推导上，这也是上面两条边加在
+  --via-local-frame 而不是本卡片上的原因。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -5,12 +5,16 @@ status: physical-argument
 depends_on:
   - id: worldsheet.conformal-gauge-fixing
   - id: worldsheet.bc-ghost-cft
-  - id: worldsheet.free-scalar-cft-action
-    inferred: true
+  - id: worldsheet.polyakov-action
     note: |
-      Polchinski §3.3 的 FP 手续作用在 **Polyakov 作用量**上（任意世界面度规 g_{ab}），
-      而 worldsheet.free-scalar-cft-action 是已经固定到平坦度规的自由标量作用量（共形规范的结果）。
-      本图目前没有 Polyakov 作用量节点，故暂用自由标量作用量代替，这一替代是本图的补白，标 inferred。
+      FP 手续的出发点：Polchinski §3.3 的路径积分是 ∫ Dg DX e^{-S_P[g,X]}，
+      即插入 δ 函数与算行列式的对象是**任意世界面度规上的** Polyakov 作用量 S_P[g, X]
+      （worldsheet.polyakov-action），不是已固定到平坦度规的自由标量作用量。
+      2026-09-10：原先指向 worldsheet.free-scalar-cft-action 的占位边（inferred）已按此换边；
+      polyakov-action 节点来自第 1 章分支（抽取记录 E5），已合入 main。
+      ⚠ 世界面号差：polyakov-action 写的是洛伦兹号差 γ_{ab}（γ = det γ < 0，前因子 -1/4πα'），
+      §3.3 的路径积分是欧氏化之后的 S_P = (1/4πα')∫ d^2σ g^{1/2} g^{ab} ∂_a X ∂_b X。
+      欧氏化（τ → -iτ，整体反号）这一步本图未建节点，见 gaps。
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.16)、(3.3.18)、(3.3.21)、(3.3.24)，p.88–89（式号经 schrans-2020 核实）；脚注 2（p.87）讨论 delta 函数的规范不变性"
@@ -25,9 +29,15 @@ summary: |
   (5) 在共形规范 ĝ = δ 与复坐标下化简，Weyl 部分把 b 的迹消掉，剩下 (1/2π)∫(b∂̄c + b̄∂c̄)，
       即权 λ = 2 的 bc 系统。
 gaps:
-  - "对 worldsheet.free-scalar-cft-action 的边是占位边（inferred）：正确的依赖应是 Polyakov 作用量。
-     **待 worldsheet.polyakov-action 节点（第 1 章分支 agent/curator/polchinski-ch1，即将合并）建立后换边**，
-     并把 inferred 改回 false。"
+  - "占位边已换（2026-09-10）：依赖从 worldsheet.free-scalar-cft-action 改为
+     worldsheet.polyakov-action，inferred 去掉——FP 手续确实作用在任意度规上的 S_P[g,X] 上，
+     这正是 §3.3 的对象。**剩余缺口**：从洛伦兹号差的 S_P（§1.2，polyakov-action 的写法）到
+     §3.3 用的欧氏号差版本的转写（τ → -iτ、整体符号与前因子）本图没有节点，
+     也不在本推导的来源位置里论证；这一步在本推导中被默认。"
+  - "worldsheet.free-scalar-cft-action 换边后**不再是本推导的依赖**：共形规范下的自由标量作用量是
+     同一手续的**输出**（物质部门规范固定后的形式），不是输入；本推导只推鬼场部门。
+     若日后建一条「S_P 在共形规范下化为自由标量作用量」的命题，它应以 polyakov-action 与
+     conformal-gauge-fixing 为依赖，而不是反过来。"
   - "**FP 手续在数学上没有被严格化**（抽取记录 E50 的结论）：规范群的体积 V_{diff×Weyl}、
      群上的测度 dζ、以及场空间上的测度 Dg 都没有定义；『分离出无穷体积并消去』是形式操作。"
   - "delta 函数 δ(g - ĝ^ζ) 的规范不变性需要论证；Polchinski 用脚注 2（p.87）讨论，

@@ -57,5 +57,19 @@ notes: |
 
   与 formal/ 的接口：formalizer 正在建的自由玻色子 Fock 空间（formal/StringFormal/NoGhost）
   与本节点对应；若 Lean 侧完成 L_m 的定义，可在本节点填 formal.lean_decl。
+
+  **与 worldsheet.bosonic-fock-space 的关系（2026-09-10 跨分支补注）**：
+  Fock 空间的形式化定义现已单独建卡 worldsheet.bosonic-fock-space
+  （status: formalized，对应 formal/StringFormal/NoGhost/Fock.lean），
+  那里 F(D,R) 是产生算符 α^μ_{-n}（**n ≥ 1**）上的多项式代数，**不含零模**：
+  动量 k 只是「这一份 Fock 空间挂在哪个动量真空上」的外部标签，不出现在空间的任何结构里。
+  本节点的 Fock 空间**不是**它：本节点的基态满足 α^μ_0 |0;k⟩ = √(2α') k^μ |0;k⟩，
+  即 α_0 是一个真的算符，于是本节点的
+    L_0 = (1/2) α_0·α_0 + Σ_{n≥1} α_{-n}·α_n
+  含零模、依赖 k。**这部分尚未形式化**（见 bosonic-fock-space 的 notes 缺口 (i)：
+  把 Virasoro 作用装到那个空间上必须先显式扩张定义补上零模）。
+  因此本节点**不**写 `uses: [worldsheet.bosonic-fock-space]`——两者的底空间不同，
+  写成依赖会给出「L_0 已在形式化的 Fock 空间上有定义」的错误印象。
+  m ≠ 0 的 L_m 也同样含 α_0（出现在 n = 0 与 n = m 两项里），不能直接落到无零模的 F(D,R) 上。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
