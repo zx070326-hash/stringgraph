@@ -52,4 +52,82 @@ namespace StringFormal.NoGhost
 
 variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
 
+
+/-! ### The conformal weight on the DDF momentum tower, for every `m` -/
+
+/-- **The conformal-weight identity on the DDF momentum tower, for every `m : ℤ`.**
+
+`⁅L_m, V^{(n)}_K⁆ = (K - m - n + n (k_0 · p)) V^{(n)}_{K-m}`.
+
+Same statement and same proof as `lie_towerLop_towerVertex_of_ne`, with the single-Fock input
+widened from `Fock.lie_Lop_vertexOsc_of_ne` to `Fock.lie_Lop_vertexOsc`.  Note that this is the
+*only* place in the whole `m = 0` upgrade where anything has to be re-checked: the coefficient
+polynomial `J - m + a·b + ½ (m+1)(b·b)` is literally the same function of `m` in both inputs,
+so the rung-by-rung computation below is unchanged.
+
+The isotropy hypothesis `hbb : k_0² = 0` is still essential, and for the same reason as for
+`m ≠ 0`: without it the coefficient produced on rung `j` carries a `j n (b·b)` term, so the
+bracket is only rung-wise proportional to `V^{(n)}_{K-m}` and not an operator identity. -/
+theorem lie_towerLop_towerVertex (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (m n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R) - (n : R) + (n : R) * dotVec η b a)
+        • towerVertex η b n (K - m) := by
+  have hbb' : (∑ μ : Fin D, η μ * b μ * b μ) = 0 := hbb
+  have h1 : ∀ j : ℤ, (∑ μ : Fin D,
+      η μ * towerMomentum a b j μ * vertexMomentum b n μ) = (n : R) * dotVec η b a := by
+    intro j
+    have hsplit : (∑ μ : Fin D, η μ * towerMomentum a b j μ * vertexMomentum b n μ)
+        = (n : R) * (∑ μ : Fin D, η μ * a μ * b μ)
+          + ((j : R) * (n : R)) * (∑ μ : Fin D, η μ * b μ * b μ) := by
+      rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+      refine Finset.sum_congr rfl fun μ _ => ?_
+      simp only [towerMomentum_apply, vertexMomentum_apply]
+      ring
+    rw [hsplit, hbb', mul_zero, add_zero, dotVec_comm η b a]
+    rfl
+  have h2 : (∑ μ : Fin D, η μ * vertexMomentum b n μ * vertexMomentum b n μ) = 0 := by
+    have hsq : (∑ μ : Fin D, η μ * vertexMomentum b n μ * vertexMomentum b n μ)
+        = ((n : R) * (n : R)) * (∑ μ : Fin D, η μ * b μ * b μ) := by
+      rw [Finset.mul_sum]
+      refine Finset.sum_congr rfl fun μ _ => ?_
+      simp only [vertexMomentum_apply]
+      ring
+    rw [hsq, hbb', mul_zero]
+  have hidx : K - n - m = K - m - n := by ring
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    Module.End.mul_apply, towerVertex_single, towerLop_single, towerLop_single,
+    towerVertex_single, LinearMap.smul_apply, towerVertex_single, ← Finsupp.single_sub,
+    Finsupp.smul_single]
+  congr 1
+  have hmom : towerMomentum a b j + vertexMomentum b n = towerMomentum a b (j + n) := by
+    funext μ
+    simp only [Pi.add_apply, towerMomentum_apply, vertexMomentum_apply]
+    push_cast
+    ring
+  have hkey := congrArg (fun T : Module.End R (Fock D R) => T P)
+    (Fock.lie_Lop_vertexOsc η (towerMomentum a b j) (vertexMomentum b n) hη m (K - n))
+  simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply, hmom] at hkey
+  rw [hkey, h1 j, h2, hidx]
+  congr 1
+  push_cast
+  ring
+
+/-- **The DDF-normalised form for every `m : ℤ`**: with `k_0² = 0` and `2α' k_0 · p = 1` the
+tower vertex operator `:e^{i n k_0·X}:` is a weight-`0` primary,
+`⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`.
+
+At `m = 0` this reads `⁅L_0, V^{(n)}_K⁆ = K V^{(n)}_K`, i.e. `V^{(n)}_K` lowers the `L_0`
+eigenvalue by `K`; summing `α^ε_j V^{(n)}_j` over `j` is exactly what makes the two `L_0`
+shifts cancel in `A^ε_n`. -/
+theorem lie_towerLop_towerVertex_normalized (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (m n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R)) • towerVertex η b n (K - m) := by
+  rw [lie_towerLop_towerVertex η a b hη hbb m n K, hba]
+  congr 1
+  ring
+
 end StringFormal.NoGhost
