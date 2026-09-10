@@ -12,10 +12,31 @@ depends_on:
       提升为算符时。抽取记录 #E11/#E16 把二者放在同一节，来源支撑充分。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.3，约 eq. (1.3.33)–(1.3.35)（零点能求和给出 A = -(D-2)/24）"
+    loc: "§1.3：**A 的定义式是 (1.3.31)** A = ((D−2)/2)Σ_{n=1}^∞ n；正规化 (1.3.32) Σn → −1/12；截断因子 (1.3.33)；截断后 (1.3.34)；**取值 (1.3.35)，原书写作 A = (2−D)/24**（不写 −(D−2)/24），p.22"
     note: |
-      抽取记录 polchinski-1998-v1#E16，[页码已核实/式号未核实]。
-      「A = 半和」的定义方式由 Headrick 的 D24-brane 习题确认。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**一处订正 + 一条作者自承缺口**】
+
+      ⚠ **订正**：旧 loc 写「约 (1.3.33)–(1.3.35)」。**A 的定义式其实是 (1.3.31)**；
+      (1.3.33)/(1.3.34) 是光滑截断因子与截断后的表达式，(1.3.35) 才是取值。
+      「[页码已核实/式号未核实]」现予撤销，五式全部 L1。
+      另注意**原书的写法是 A = (2−D)/24**，与本图的 −(D−2)/24 恒等但不逐字。
+
+      ★ **作者自承缺口（p.21，逐字）——直接封顶本推导所服务的整条光锥路线**：
+        "**We do not wish to spend this much time on light-cone quantization, so we will try to show
+          that the result is plausible without a complete treatment. We assure the reader that we will
+          obtain the values of A and D honestly in the conformal gauge approach**, which will also give
+          us insight into why Lorentz invariance would be lost in the light-cone approach for the wrong
+          A or D."
+      即原书自陈：**A 的「诚实」取值不在 §1.3，而在协变（共形规范）路线**。
+      §3.4 开头 p.90 再次自评「as we briefly and rather **heuristically** explained in section 1.3」。
+      → 本推导的 physical-argument 定级由此得到作者本人的背书，见 gaps。
+
+      ★ **丢弃发散项的理由（p.22，逐字）**：
+        "The cutoff-dependent first term is proportional to the length ℓ of the string and can be
+         canceled by a counterterm in the action proportional to ∫d²σ(−γ)^{1/2}. **In fact, Weyl
+         invariance *requires* that it be canceled**, leaving only the cutoff-independent second term…
+         **This finite remainder is an example of a Casimir energy.**"
+      见 literature/extractions/polchinski-1998-v1.md §12.5（E10–E19、Q2）与 §12.10 表 C 第 2 项。
 summary: |
   经典约束把 α^-_0 表达为 Σ_n α^i_{-n} α^i_n 型的二次式。量子化后同一模的
   α^i_{-n} 与 α^i_n 不对易（[α_n^i, α_{-n}^i] = n），把二次式写成正规序形式
@@ -26,7 +47,21 @@ summary: |
 gaps:
   - "整条论证的非严格核心是 Σ_{n≥1} n → -1/12 的正规化处方（依赖 worldsheet.zeta-regularized-sum-of-integers，physical-argument）。"
   - "「把经典二次式提升为正规序算符」这一排序选择本身是一个约定性选择；不同排序给不同的 A，Polchinski 取的是正规序 + 正规化零点能这一组合。该组合的唯一性由洛伦兹不变性事后检验（见 worldsheet.critical-dimension-light-cone），不在本推导内。"
-  - "式号 (1.3.33)–(1.3.35) 未核对原书（抽取记录 §3 清单）。"
+  - "式号 (1.3.33)–(1.3.35) 未核对原书（抽取记录 §3 清单）。
+     **【2026-09-11 关闭并订正】** 五式全部 L1：A 的定义式是 **(1.3.31)**（不是本条原写的区间），
+     (1.3.32) 是 Σn → −1/12，(1.3.33) 是截断因子，(1.3.34) 是截断后的 A，
+     (1.3.35) 是取值且原书写作 **A = (2−D)/24**。"
+  - "**作者自陈本节的处理不完整**（p.21，逐字）：「**We do not wish to spend this much time on
+     light-cone quantization, so we will try to show that the result is plausible without a complete
+     treatment. We assure the reader that we will obtain the values of A and D honestly in the
+     conformal gauge approach**」，并在 §3.4 开头（p.90）自评 §1.3 是 rather **heuristically**。
+     → 即本推导所复现的是原书**明确声明为不完整**的那一段。这条不新增技术缺口
+     （技术缺口是上面第一条的正规化处方），但它把「本推导为何封顶 physical-argument」
+     从本图的裁断变成**作者本人的声明**。
+     ⚠ 连带结论：**「光锥洛伦兹代数 [M^{i−}, M^{j−}] = 0 闭合」在本书中根本没有被验算**
+     （原书只描述了这个验算并把它推给协变路线，也没有留成习题）。
+     凡引 polchinski-1998-v1 主张「光锥规范下洛伦兹不变性已验证」的节点都是错的。
+     （抽取记录 §12.10 表 A 的 Q2、表 C 第 2 项。）"
   - "符号约定：本推导的结论按 Polchinski 的 A 写出后已按 conv.intercept-sign-a 换算为 a = -A；若日后核实 Polchinski 的符号约定与抽取记录 §1.3 的描述不符，本节点与 conv.intercept-sign-a 须一并复查。"
 author: curator-polchinski-ch1
 created: "2026-09-10"

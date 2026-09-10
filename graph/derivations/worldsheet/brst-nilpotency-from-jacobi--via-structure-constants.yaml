@@ -37,9 +37,20 @@ summary: |
   第一个括号由约束代数为零，第二项为零 ⟺ Jacobi。故 Q_B² = (1/2){Q_B, Q_B} = 0。
 gaps:
   - "本推导是形式代数操作：场论中 φ^i、c^α 是场（无穷多自由度），指标缩并与重排的合法性未处理；正则版中 Q_B 的模式和在一般约束系统上是否良定义（受限模型条件）未声明。弦的情形已把该条件写进 worldsheet.brst-quantization。"
-  - "本推导不覆盖带中心扩张的约束代数（Virasoro）。那里 [G_i, G_j] = f_{ij}^k G_k + 中心项，上面 {Q_B, Q_B} 的第一个括号不再为零，剩余项正比于总中心荷。弦的情形见 worldsheet.critical-dimension-brst / worldsheet.brst-nilpotent-at-c26。"
+  - "本推导不覆盖带中心扩张的约束代数（Virasoro）。那里 [G_i, G_j] = f_{ij}^k G_k + 中心项，上面 {Q_B, Q_B} 的第一个括号不再为零，剩余项正比于总中心荷。弦的情形见 worldsheet.critical-dimension-brst / worldsheet.brst-nilpotent-at-c26。
+     **【2026-09-11 原书逐字：这也是作者自承的缺口，不只是本图的取舍】** 原书 p.133 在 (4.3.16)
+     正下方写：「**We have neglected central charge terms; these need to be checked by hand.**」
+     即**一般约束代数下的 BRST 幂零性在 Polchinski Vol.1 中不完整**：中心荷项被略去，
+     且原书既没有做这个检验，也没有把它留成习题。
+     两个来源在同一处留了同一个洞：fgz-1986 Proposition 1.2 也是在 H²(g) = 0、γ = 0 的前提下
+     给出 d² = 0，中心扩张的情形靠「假设 π(c) = 26」绕开。
+     （抽取记录 §12.10 表 C 第 6 项即此条。）"
   - "开规范代数（结构常数依赖场）不覆盖；那时 δ_B 只在运动方程上幂零。"
-  - "所有符号与因子取自 worldsheet.brst-gauge-fixed-action 与 worldsheet.brst-charge-general-constraint-algebra 自行固定的归一化，未与 Polchinski §4.2/§4.3 原书核对（抽取记录 E60、E65 的表达式栏均标注未核实）。"
+  - "所有符号与因子取自 worldsheet.brst-gauge-fixed-action 与 worldsheet.brst-charge-general-constraint-algebra 自行固定的归一化，未与 Polchinski §4.2/§4.3 原书核对（抽取记录 E60、E65 的表达式栏均标注未核实）。
+     **【2026-09-11 部分关闭】** §4.3 的式号与表达式现已 L1 逐字核实（约束代数 (4.3.12)、
+     鬼场反对易 (4.3.13)、BRST 荷 (4.3.14)、G^g_I (4.3.15)、幂零 (4.3.16)），
+     且**旧记录把约束代数记成 (4.3.15)、把 BRST 荷漏掉**这两处错位已订正。
+     剩余未核实的是 §4.2 一侧（点粒子示例与一般框架的归一化）。"
 notes: |
   status 说明：(2) 单独看是有限步 Grassmann 代数计算（可争取 rigorous），
   但 (3) 与正则版都依赖场论/无穷模式层面的形式操作，且本图的两条来源里

@@ -31,11 +31,23 @@ depends_on:
       解空间一维（第 (1) 条）与判别式分类（第 (3b)(3c) 条）。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.1，level 2 的物理条件与伪态条件，(4.1.19)–(4.1.28) 区间，p.124；式号未核实"
+    loc: "§4.1, **p.124 正文的结论性断言 + exercise 4.1（p.143）**。⚠ **原书 §4.1 没有 level-2 的推导，且 (4.1.24)–(4.1.28) 不存在**（§4.1 的最后一式是 (4.1.23)，§4.2 从 p.126 开始）"
     note: |
-      Polchinski 只结论性地断言"A = −1 且 D = 26 时才出现额外零态"，不给一般 (D, a) 的闭式。
-      抽取记录 polchinski-1998-v1.md#E57。schrans-2020 §4.8 的方括号编号 [4.24]/[4.28]/[4.32]
-      复现了三条物理条件，但那是笔记自己的编号，对应的原书式号未核实。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——**旧 loc 的式号区间不存在**】
+
+      原书 p.124 逐字：「The result at the next level is quite interesting: it depends on the constant
+      A and also on the spacetime dimension D. Restricting to the value A = −1 found at the first
+      excited level, the spectrum only agrees with the light-cone spectrum if in addition D = 26.
+      If D > 26, there are negative-norm states; if D < 26 the OCQ spectrum has positive norm but
+      more states than in light-cone quantization. **The derivation is left to the reader.**」
+      习题 4.1（p.143）逐字：「Extend the OCQ, for A = −1 and general D, to the second excited level
+      of the open string. **Verify the assertions made in the text about extra positive- and
+      negative-norm states.**」
+
+      → **[S] §4.8 的 [4.24]/[4.28]/[4.32] 三条物理条件是 [S] 自己做的习题解答，不是原书内容**，
+        **不得引作原书式号**。本推导的 status（rigorous，靠本项目三次独立核算 + reviewer 复核）
+        不受影响——它本来就不靠 Polchinski 承载论证——但来源栏必须写实。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E57）与 §12.10 表 B 第 12 项、表 C 第 5 项。
   - ref: gsw-1987-v1
     loc: "§2.2.2–2.2.3"
     note: 已从 mostly-minus / α' = 1/2 转写；只给零态存在条件，不给闭式。
@@ -84,7 +96,11 @@ summary: |
 gaps:
   - "本推导只覆盖由 η 与 α_0 张成的三维子空间（小群标量部分）。level-2 物理态空间的其余部分（无迹横向对称张量等）的模不在本推导范围内；那部分在 D ≤ 26 时恒正，本推导不证。"
   - "退化点 a = 2（K = 0，零动量/无质量退化）与 a = 9/4（系数矩阵奇异）被前提排除，未处理。"
-  - "文献侧只支持定性结论（D = 26、a = 1 时出现额外零态）。闭式来自本项目两次独立核算，见目标陈述的 notes。"
+  - "文献侧只支持定性结论（D = 26、a = 1 时出现额外零态）。闭式来自本项目两次独立核算，见目标陈述的 notes。
+     **【2026-09-11 加强】** 现已确认文献侧**连定性结论的推导都没有**：原书 p.124 明写
+     「**The derivation is left to the reader**」并把它留成习题 4.1。故本推导的三次独立核算
+     不是「复现文献」，而是**补出文献里根本不存在的那段推导**。凡以 polchinski-1998-v1 为
+     唯一来源的 level-2 推导，status 不得高于 physical-argument。"
   - "【2026-09-11 更新】本推导现已连 worldsheet.open-string-l0-equals-level-plus-mass（main 上的 formalized 节点，只断言 L_0 在 level N 分量上的读值，不打包 a^X = 0），故质量壳这一步不再是无来源的。仍**刻意不连** worldsheet.open-string-l0-level-form 这条边，尽管它的断言 (i)（L_0 = α'p² + N）也是本推导用的质量壳形式。理由：本推导只需要 worldsheet.virasoro-generators-free-boson 的 L_m = (1/2)Σ_n :α_{m−n}·α_n: 在 m = 0 处的读值（一行代入，纯代数，rigorous），而 open-string-l0-level-form 还打包了断言 (ii)（共形正规序与产生-湮灭正规序给同一算符，即 a^X = 0），那一条走 OPE/态-算子路线，会把本推导的有效状态压到 physical-argument。连一条本推导用不到的边去换取一个更低的有效状态，不是诚实降级而是记账错误（同 worldsheet.brst-quantization 的 notes 中「是否 uses bc-ghost-cft」的裁断）。若 reviewer 认为 (i) 与 m = 0 代入之间还有本推导未论证的一步，应把该边补回并接受降级。"
 notes: |
   reviewer-verified: reviewer-ch4, 2026-09-11
