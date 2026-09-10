@@ -55,15 +55,59 @@
 | **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3） |
 | **P0** | **ooguri-vafa-2006** | 全文（17 页） | swampland | researcher | **extracted（L1 全文 18 页逐页读图，2026-09-11）** → `extractions/ooguri-vafa-2006.md`（E1–E29）。⚠ 读的是 **arXiv v1**，编号必须写死 v1。**Conjecture 0–4 有编号（从 0 起）；全文只有两个编号公式 (1.1) 与 (3.1)；§3.1 有两个 `Example v)` ⇒ loc 不能只写「Example v」。** 四条使用限制：α 不普适（9/8、3/8、8/7、6/7）、Conj 3 是标量曲率非截面曲率、Conj 1 与 2 明确相互独立、「Swampland Distance Conjecture」这个名字不在原文。三处「conjecture 2」按内容应为「conjecture 3」（误植） |
 | **P0** | **arkani-hamed-2006** | 全文（20 页） | swampland | researcher | **extracted（L1 全文 21 页逐页读图，2026-09-11）** → `extractions/arkani-hamed-2006.md`（E1–E27）。⚠ 读的是 **arXiv v2**，且 **§5 与 (28)–(30) 极可能是 v2 新增**（其引用 hep-th/0602178 晚于 v1 日期）。公式 (1)–(30) + sharp 版本 (I)(II)(III) 均可精确引用。**★ 本项目第一条 `status: refuted` 的证据：§3 p.11 作者本人反驳 (I)，逐字「So (I) can't be right.」** 「m ≤ qM_Pl」在文内有四种写法不可互换（Q1）；极端性归一化文内不统一（Q2）；**全文无「Weak Gravity Conjecture」一词** |
-| P1 | wen-witten-1985 | 全文（NPB 261, 651–677） | swampland | 待分派 | **新增（2026-09-11，由 arkani-hamed-2006 抽取推出）**：AMNV §3 p.11 用「半整数荷缠绕弦」反驳其 sharp 版本 (I)。**这是本项目第一条 refuted 节点的一手证据来源**，现在只有 AMNV 的转述级。1985 年无 arXiv，Elsevier 预计 403 |
-| P1 | sen-1995-bh-torus | 全文（hep-th/9411187） | swampland, holography | 待分派 | **新增（2026-09-11）**：AMNV §4 的 (22)(23)（杂化弦 on T⁶ 的极端黑洞质量 M² = ½Q_R² / ½Q_L²）**全部外包给本文**。不抽它，AMNV 全部正面证据的黑洞侧只有转述级。**有 arXiv，取全文成本低，性价比高** |
-| P1 | bagger-witten-1983 | 全文（NPB 222, 1–10），特别是超多重态模空间曲率符号的定理 | swampland | 待分派 | **新增（2026-09-11，由 ooguri-vafa-2006 抽取推出）**：OV §3.1（第一个 Example v，p.9）把「耦合到超引力的超多重态模空间必有负标量曲率」归给本文，并说这是局部 N=2 超对称的**直接后果**。**⇒ 这是 swampland 区最有希望通向 `rigorous` 的物理支点**（若成立，Conjecture 3 在超多重态那一支不只是 conjecture）。1983 年无 arXiv |
-| P2 | borel-harish-chandra-1962 | 全文（Ann. of Math. 75, 485–535） | math, swampland | 待分派 | **新增（2026-09-11）**：**`vafa-2005` 全文唯一引用的严格数学定理**（§2 p.4「T^d 的 Narain 模空间体积有限」）。⇒ swampland 区唯一一条可能通向 `rigorous` 的一手**数学**来源。建议把「T^d Narain 体积有限」单独建卡，不要让它给一般体积猜想升格。⚠ 终页 535 未核实 |
+| P1 | wen-witten-1985 | 全文（NPB 261, 651–677） | swampland | researcher | **attempted, L2（摘要级；正文一字未获取，2026-09-11 第二轮）** → `extractions/wen-witten-1985.md`。**★ 本轮最重要的是一个否定结论**：逐字完整摘要里**没有 winding、没有 half-integral、没有 stable、没有 mass**；摘要讲的是「`O(10)`/`E₆` 被 Wilson 线破缺 ⇒ 最小磁荷是 Dirac 量子 `2π/e` 的整数倍 `n`，非禁闭色单态的最小电荷是电子电荷的 `1/n`」。⇒ AMNV 的「half-integrally charged winding strings」是 AMNV 的刻画，未在一手材料中证实。**终页 677 已 L2 核实。** 入口全灭：无 CDS、无 KEKSCAN（`external_system_identifiers` 只有 MSNET/SPIRES）、OSTI 不藏（标题短语查询命中 10 条全是现代 millicharged 实验文献，查询未被吞）、S2 引用语境全是泛泛的「弦论预言分数电荷」、`1509.06374` 全文搜不到 "Wen"。⚠ `INSPIRE ft "Wen and Witten"` **几乎全命中 Wang–Wen–Witten 2019「A New SU(2) Anomaly」**，两次检索因此浪费。**★ 优先级建议下调**：AMNV 的反例 (a)（`SO(32)` 旋量）不引任何文献，**那条 `refuted` 推导不靠本文**。升 L1 的唯一路线：`WebSearch` 找 `.edu` 扫描件 |
+| P1 | sen-1995-bh | 全文（hep-th/9504147，16 页） | swampland, holography | researcher | **extracted（L1 全文 16 页逐页读图，2026-09-11）** → `extractions/sen-1995-bh.md`（E1–E15）。⚠ 读的是 **arXiv v2**（页边条纹 `v2 6 May 1995`），报告号 TIFR-TH-95-19。⚠ **标题页印的 `November 26, 2024` 是 arXiv 重编译日期，不是论文日期**。**★★ 本轮最重要的发现：本文不是 AMNV (22)(23) 的出处** —— AMNV 引的是 `sen-1995-bh-torus`（hep-th/9411187），本文自己也把黑洞解引给同一篇（其 [7]，并加脚注「ref.[7] constructed the solution for `g = 1`」）。**三条红线**：(1) 本文**没有任何弱引力猜想形式**；(2) 归一化是 `α' = 16`、**`G_N = 2`**、`T = g²/32π`，与 AMNV 的 `α' = 4`、`M_Pl = 1` **完全不同且两边都不给换算**；(3) **`C = 4` 是拟合出来的**，真正非平凡的是三参数（`g, m, Q̄_L`）的函数依赖。作者自称最强只到 "It is shown that stringy effects **could** correct…" + "we could **postulate**" |
+| P1 | sen-1995-bh-torus | 全文（hep-th/9411187） | swampland, holography | 待分派 | **优先级实质上调（2026-09-11）：它现在是三处的共同上游** —— (a) AMNV §4 的 (22)(23)；(b) `sen-1995-bh` E8 的黑洞解；(c) 「杂化弦 `T⁶` 极端黑洞解」这条陈述的**唯一**一手来源。**有 arXiv，取全文成本低，是 swampland 区性价比最高的一枪。**⚠ **绝不可与 `sen-1995-bh`（hep-th/9504147）混淆**：同作者、同年、标题都以 "black hole" 开头 |
+| P1 | bagger-witten-1983 | 全文（NPB 222, 1–10），特别是超多重态模空间曲率符号的定理 | swampland | researcher | **attempted, L2 + 两条独立 L3（正文一字未获取，2026-09-11 第二轮）** → `extractions/bagger-witten-1983.md`。**终页 10 已 L2 核实。** 入口全灭：无 CDS、无 KEKSCAN、OSTI 不藏（标题短语查询 7 条主题相关但无本文）。**★ OV [15] 的归属经两条独立 L3 证实**：(i) Chang–Sezgin–Tanii **arXiv:2304.06073** = JHEP 06 (2023) 172 §2.1 逐字「showed that … QK manifold with **constant negative scalar curvature**」；(ii) Vandoren **arXiv:2501.01900v2** §2 逐字「only QK manfifolds with negative scalar curvature can be coupled to supergravity」+「Bagger and Witten computed its value to be」+ **其自己的 (2)** `R(g) = −8κ²(n²+2n)`。⚠ **`(2)` 是 Vandoren 的编号，禁止写「Bagger–Witten eq. (2)」。**⚠⚠ **口径修正**：原来说它是「swampland 区最有希望通向 `rigorous` 的支点」——**不成立**（超引力场论构造，上限 `physical-argument`；覆盖域与量词都与 OV Conjecture 3 不同）。★ **摘要第二句才是最有用的**：「全局 `N=2` 允许的自相互作用在超引力里被禁止，反之亦然」= OV §3.1 正面与 §3.2 Example (b) 反例的分界线。升 L1 的唯一路线：`WebSearch` 找 `.edu` 扫描件 |
+| P2 | wolf-1965 | J. Math. Mech. **14** (1965) 1033 | swampland, math | 待分派 | **新增（2026-09-11，由 bagger-witten-1983 抽取推出）**：`ooguri-vafa-2006` §3.1 同一句里的 **[14]**，用来支撑「**一般**的 quaternionic Kähler 流形曲率可取任意符号」。OV 的论证结构是「一般情况任意符号 [14] + 超引力情况必负 [15]」，**两条引用缺一不可**。⚠ 尚未登记进 `sources.bib`，元数据仅来自 OV 的参考文献表 |
+| P2 | borel-harish-chandra-1962 | 全文（Ann. of Math. 75 (1962) 485–?） | math, swampland | researcher | **attempted, L2 元数据 + 两条 L3 转引（正文未获取，2026-09-11）** → `extractions/math-sources.md` **§45**。**★★ 硬禁令：不得写 "Theorem 9.4"** —— 两条独立的、亲自读到的引用方**都不给编号**（arXiv:2006.04839 §4 其 ref [57]；arXiv:2509.09047 其 ref [13]），而同一篇 2006.04839 对 Siegel 是给编号的 ⇒ 负面证据较强。**★ 最有用的一条 L3 是 arXiv:2006.04839 §4「Averaging over Narain lattices」**：语境与 `vafa-2005` §2 完全一致，逐字「an arithmetic subgroup of a semisimple algebraic group has a finite volume quotient」，**并给出 Vafa 没给的条件 `c ≥ 2`**（`O(c,c)` 的单位连通分支半单 iff `c ≥ 2`）⇒ **图节点 statement 必须带 `k ≥ 2`**。⚠ **arXiv:2509.09047 引的是 cocompact 那一支，与有限体积不是同一条定理，绝不可混用**（Narain 商不紧）。⚠ **终页 535 已从 bib 移除**：Crossref 只给起始页 485。死路：**S2 不索引 DOI `10.2307/1970210`**（/citations → 404）；Morris 那本书的 ar5iv 超 10 MB。下一轮：`arxiv.org/pdf/math/0106063v1` + `Read(pages=)`，或 `WebSearch "Theorem 9.4"` |
+| P2 | narain-1986 + narain-sarmadi-witten-1987 | Phys. Lett. **B169** (1986) 41；Nucl. Phys. **B279** (1987) 369 | worldsheet, swampland | 待分派 | **新增（2026-09-11）**：Narain 紧化的一手来源，**同时被三处需要** —— `sen-1995-bh` 的 [21]（书目已 L1 抄得，见该抽取记录 E15）、`vafa-2005` E9 的 Narain 模空间、以及 `math-sources.md` §45 环节 (D)（「该双陪集就是 Narain 模空间」，目前无来源）。1986/87 年，无 arXiv。⚠ 尚未登记进 `sources.bib` |
+| P2 | sen-1994-ijmpa | Int. J. Mod. Phys. **A9** (1994) 3707，hep-th/9402002 | worldsheet, swampland | 待分派 | **新增（2026-09-11，由 sen-1995-bh 抽取推出）**：`sen-1995-bh` 全部归一化约定（**`α' = 16`**）外包给它（p.6 逐字「As in ref.[22], we use the normalization `α' = 16`」）。不核实它，`sen-1995-bh` 的一切数值系数都是 L0。**有 arXiv，成本低** |
+| P2 | polchinski-1998-v2 | §11（杂化弦谱）—— 补 `SO(32)` 旋量态的**质量**与**荷** | swampland | 待分派 | **新增（2026-09-11，由 wen-witten-1985 抽取推出）**：AMNV 反驳 `(I)` 靠的是「`SO(32)` 旋量**精确稳定**、**最小半整数荷**、但**很重**」，而 **AMNV 对这三条一个引用都不给**。⇒ **补强那条 `refuted` 推导最省力的路线不是找 Wen–Witten，而是从本项目已 L1 读过的 Vol.2 §11 里把这些数补出来** |
 | P2 | susskind-1995-remnants | 全文（hep-th/9501106） | swampland | 待分派 | **新增（2026-09-11）**：AMNV §2.2 的 remnant 论证与「量子引力无全局对称性」这一前提都引本文，§2.3 的 large-N species problem 也引它。**⇒ 图里「无全局对称性」节点的来源应是本条，不是 AMNV**（后者只引用不论证）。有 arXiv |
 | **P0** | **gubser-klebanov-polyakov-1998** | 全文（PLB 428, 105–114；arXiv 15 页） | holography | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/gubser-klebanov-polyakov-1998.md`（E1–E13）。⚠ 读的是 **arXiv v2**，式号写死 v2；PLB 发表版未核对。**三条红线**：(1) 核心式是 **(12)/(23) `W = K = S`（生成泛函 = on-shell 作用量），全文无任何配分函数陈述** —— `Z_CFT = Z_string` 不能引本文；(2) **全文无 `Δ(Δ−d) = m²`**，只有 d=4 的 (45) `Δ = 2 + √(4+(mR)²)`；(3) 边界在**有限截断 `z = R`** 而非共形边界。**全文不含 "conjecture" 一词**，最强自称 "we **propose** an identification"。**GKP 不引 Witten**（v2 的 25 条参考文献里没有 hep-th/9802150） |
 | **P0** | **witten-1998-ads** | 全文（ATMP 2, 253–291；arXiv 40 页） | holography | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/witten-1998-ads.md`（E-W1–E-W18）。⚠ 读的是 **arXiv v2**，comments 自陈含 "**assorted corrections**"，式号必须写死 v2。**核实结论**：`⟨exp∫φ₀O⟩_CFT = Z_S(φ₀)` **确为 (2.11)**，但**两边都是 `Z` 的等式是 (2.12)**（自变量是共形结构 h），流版 (2.13)；`Δ(Δ−d) = m²` **确为 (2.43)**（较大根，显式解 (2.44)，AdS 半径 = 1）。自称 "**ansatz**"，但明写 "make more precise the conjecture [13]" ⇒ **对 Maldacena 判「精确化」（与 GKP 判「独立假设」不同）**。用 **`SU(N)`** 并在 §2.6 论证不是 `U(N)`。**p.4 逐字称 GKP 为 "independent work [36]"**。发现两处原文疑误：p.35 的 `ω` 公式根号内是 `−4m²`（与 (2.44) 的 `+4m²` 矛盾）、参考文献 [13] 印作 `hep-th/971120`（少一位） |
 
+| P2 | cy3-finiteness-math | `filipazzi-hacon-svaldi-2021`（arXiv:2112.01352 = JEMS 27 (2025) 3583–3650）正文；`grassi-2023-spectrum-bounds`（2304.07819v2）Definition 3.2 与 §5 | math, swampland | 待分派 | **新增（2026-09-11，`math-sources.md` §46）**：给 `math.cy3-cohomology-bounded` 补 2005 年之后的进展。**已确定的事实**：一般 CY3 拓扑类型有限性**截至 2026-06 仍开放**（arXiv:2606.08427 §I 逐字）；**椭圆/亏格一纤维化情形已证明**（FHS 2021，已发表）；**Grassi Corollary 5.3 给 `h^{1,1}(X) ≤ 491`**（椭圆纤维化）。**⚠ 任务书给的 `h^{1,1}+h^{2,1} ≤ 502` 本轮未能核实**：Kreuzer–Skarke 原文正文里 "491"/"502"/"11" 全篇未出现，四篇 KS 统计论文的摘要也都没有 502。**下一枪最该打 arXiv:2008.01730「Bounding the Kreuzer-Skarke Landscape」正文。**⚠ **不要把 CY3 有限性称作「Reid 猜想」或「Yau 猜想」**：2606.08427 明确把 Reid's fantasy 区分为另一条（关于连通性的）猜想。⚠ **Gross 1994 是 Duke Math. J. 74（Crossref），不是 76（2606.08427 抄错）** |
+
 ## 已知获取路线备忘
+
+- **★★ 新增可用路线（2026-09-11，swampland 支点批次）：`api.semanticscholar.org/.../DOI:<doi>/citations?fields=title,year,contexts` —— 用「谁引用了它、在什么语境下引用」逼近取不到正文的 pre-arXiv 论文。**
+  对 `bagger-witten-1983`（DOI `10.1016/0550-3213(83)90605-3`）与 `wen-witten-1985`（`10.1016/0550-3213(85)90592-9`）**都成功返回**，一次调用给出 20+ 条引用语境。
+  **⚠ 三条使用限制（本轮实测）**：
+  1. **返回的每条 `context` 会被 fetch 摘要器截到约 125 字符** —— 够看「引用方说它证明了什么」，**不够拿到公式号或完整句子**。
+  2. **它索引不全**：**`10.2307/1970210`（Borel–Harish-Chandra 1962，Annals of Math）直接 HTTP 404** ⇒ 老数学期刊可能整篇不在库里。**先用一个已知在库的 DOI 做对照，再读否定结论。**
+  3. **`/paper/search?query=` 端点两次 HTTP 429**（与既有记录一致）：**只用 `DOI:` 前缀查，不要用标题查。**
+  **⚠ 更根本的一条**：引用语境的**质量取决于引用方的学科**。Wen–Witten 的引用语境全部是现代 millicharged 实验文献的泛泛表述（"fractionally charged particles are a generic prediction of string compactification"），**对内容核实毫无用处**；Bagger–Witten 的则条条命中「quaternionic Kähler」，很有用。
+- **★★ 新增可用路线（2026-09-11）：`INSPIRE 全文检索 + 现代综述` 是 pre-arXiv 物理论文的最佳 L3 替代品。**
+  手法：`inspirehep.net/api/literature?q=ft "<作者姓 and 作者姓>" and ft "<目标结论的关键词>"&fields=titles,arxiv_eprints`
+  → 拿到几篇 arXiv id → **`arxiv.org/html/<id>` 或 `ar5iv.labs.arxiv.org/html/<id>`** 读全文 → 取它对目标论文的逐字转述 + 它给目标论文编的参考文献号。
+  本轮 `ft "Bagger and Witten" and ft "negative scalar curvature"` 一枪命中两篇独立综述（2501.01900、2304.06073），
+  把 `bagger-witten-1983` 从纯 L0 抬到「两条独立 L3 + 显式公式」。
+  **⚠ 陷阱（本轮踩到，浪费两次检索）**：`ft "<姓> and <姓>"` 对**同姓氏组合**会大面积误命中。
+  `ft "Wen and Witten"` 几乎全部命中 **Wang–Wen–Witten 2019「A New SU(2) Anomaly」**，而非 Wen–Witten 1985。
+  ⇒ **作者姓氏检索必须带一个只属于目标篇的判别词**（卷号 `"B261"`、或该篇独有的术语）。
+- **⚠ 反复踩的坑（2026-09-11 第三、四次）：`arxiv.org/abs/<id>` 只回摘要。**
+  本轮又在 `abs/2501.01900`、`abs/2001.07731`、`abs/2304.07819v2` 上浪费三次调用。
+  **要正文一律用 `arxiv.org/html/<id>[vN]`（2024+ 原生 LaTeXML，且对 2023 年的论文也常有）或 `ar5iv.labs.arxiv.org/html/<id>`。**
+  本轮实测：`arxiv.org/html/2501.01900v2`、`arxiv.org/html/2304.06073`、`arxiv.org/html/2509.09047`、`arxiv.org/html/2606.08427v1`、
+  `arxiv.org/html/2304.07819v2` **全部一次成功**；`ar5iv…/html/2001.07731`、`ar5iv…/html/2006.04839`、`ar5iv…/html/hep-th/0002240` 也成功。
+- **★ 新增可用元数据源（2026-09-11）：`export.arxiv.org/api/query?search_query=...`。**
+  - `ti:"<确切标题>"` 一次可以查多篇（支持 `OR`），返回 **arXiv id（含版本）、完整作者表、published/updated 双日期、`journal_ref`、DOI**。
+    这是**给 arXiv 论文定版本与定发表信息最省事的一枪**（比 `/abs/` 强得多，因为 `/abs/` 的摘要页要额外解析）。
+  - `abs:"<词>" AND abs:"<词>"` 搜**摘要全文**，可以用来「找哪篇论文的摘要里有这个数字」。
+    本轮用 `abs:"491" AND abs:"Kreuzer-Skarke"` 一次拿到四篇独立佐证 `h^{1,1}` 最大值 = 491 的论文。
+  - ⚠ 摘要器仍受 125 字符引用限制，**要完整摘要就明确要求「分成若干段、每段 120 字符以内、编号、拼接可复原」** —— 本轮对 INSPIRE 与 arXiv API 都用这招成功取到逐字完整摘要。
+- **⚠ 死路补充（2026-09-11）：Princeton 系 pre-arXiv 论文（SPIRES 报告号形如 `Print-8X-XXXX (PRINCETON)`）无任何取件入口。**
+  `Print-` 前缀是 **SPIRES 的占位号，不是真实报告号**，拿它去查 OSTI / INIS / NTIS 一律无意义。
+  `bagger-witten-1983` 与 `wen-witten-1985` 的 `external_system_identifiers` **都只有 MSNET + SPIRES，无 CDS、无 KEKSCAN**
+  ⇒ **CDS OAI-PMH 与 KEK 两条路线在入口即排除**（不是"试了失败"，是"没有入口"）。
+  OSTI 用**标题短语**查询（按既有教训避开被吞）对两篇都返回主题相关但不含目标的结果 ⇒ **OSTI 确实不藏**。
+  **⇒ 这类论文唯一现实的路线是 `WebSearch` 找 `.edu` 课程页扫描件**（AGW 1984 即此法）。
+- **⚠ 会话级资源限制（2026-09-11 实测）：`WebSearch` 有独立于 `WebFetch` 的会话额度（本轮 200/200 用尽）。**
+  额度耗尽后**只剩已知 URL 的直取与 API 查询**，「找扫描件」这类必须靠检索的任务**完全无法执行**。
+  ⇒ **排任务时，把依赖 `WebSearch` 的目标（找扫描件、找定理编号）放在会话前段。**
+
 
 - **★★ 新增可用路线（2026-09-11）：`osti.gov/servlets/purl/<OSTI-ID>` —— 1980 年代 DOE 国家实验室报告（LBL / ANL / FNAL / SLAC…）正文的直接入口。**
   `zumino-1983-les-houches`（LBL-16747，46 印刷页）全文即以此取得（L1）。
