@@ -119,7 +119,36 @@
   注意：Mathlib v4.33.1 **已无** `LinearOrderedField` 类，有序域写作
   `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`；证明只需有序环，域与全序都用不上。
   公理检查：全部声明只用 propext / Classical.choice / Quot.sound。
-- [ ] `physical-states`：`H_phys` 子模与零模态。
+- [x] `physical-states`：`H_phys` 子模与零模态。
+  见 `StringFormal/NoGhost/PhysicalStates.lean`（约 800 行，无 sorry，公理只有标准三条）。
+  截距记作 `a₀ : R`（`a` 已被零模参数占用；符号按 `conv.intercept-sign-a`）。做到：
+  - **`L_m^† = L_{-m}`**：`pairing_Lop_left`（`⟨L_m v, w⟩ = ⟨v, L_{-m} w⟩`），经
+    `pairing_mode_left`（全部 `j : ℤ` 含 `j = 0` 标量）→ `pairing_nordPair_left` →
+    对 `lsumLocFin` 用对称有限指标区间加 `Finset.sum_equiv (Equiv.neg ℤ)`。这是
+    Sugawara 那条的缺口 5，不需要 `hη`。
+  - `physSubmodule η a a₀ = ker(L_0 - a₀) ⊓ ⨅_{n>0} ker L_n`，`mem_physSubmodule`；
+  - **齐次性**：`mode_mem_levelSubmodule` / `nordPair_mem_levelSubmodule` /
+    `Lop_mem_levelSubmodule`（`L_n` 把 level `M` 送进 level `M-n`，`M<n` 时为零）、
+    `levelComponent_Lop`（`L_n` 与 level 投影交换）；由此 **`H_phys` 按 level 分级**：
+    `levelComponent_mem_physSubmodule`、`physSubmodule_eq_iSup_inf_levelSubmodule`；
+  - **质量壳**：`mem_physSubmodule_iff_of_mem_levelSubmodule`（level `N` 上 `L_0` 条件即
+    `(α'k² + N - a₀) • ψ = 0`）、`massShell_of_mem_physSubmodule`（无零因子环上非零物理态
+    强迫 `α'k² + N = a₀`）；
+  - `nullSubmodule = H_phys ⊓ orthComplement H_phys`、`spuriousSubmodule = ⨆_{n>0} range L_{-n}`，
+    **`spuriousSubmodule_le_orthComplement`**（伪态 ⊥ 物理态）与
+    **`spurious_inf_physSubmodule_le_nullSubmodule`**（伪 ∩ 物理 ⊆ 零模）；
+  - **level 1**：`exists_polState_of_mem_levelSubmodule_one`（level 1 态都是 `ζ·α_{-1}|k⟩`）、
+    `mem_physSubmodule_inf_levelSubmodule_one_iff`（`H_phys ∩ F_1` = 横向极化 `ζ·k = 0` 加壳
+    `α'k² + 1 = a₀`）、`Lop_neg_one_apply_one_mem_nullSubmodule`（`a₀ = 1`、`k² = 0` 时
+    `L_{-1}|k⟩` 是物理零模态：光子纵向极化退耦）。
+  **本项未做**：反向包含"零模态 ⊆ 伪态"（无鬼定理核心）；`a₀ = 1` 的唯一性与 level 2 分析；
+  `⨆` 未打包成 `DirectSum.IsInternal`；双线性而非半双线性形式。
+  图侧：建议 curator 把 `worldsheet.old-covariant-physical-states` 的 `formal.lean_decl`
+  填 `StringFormal.NoGhost.Fock.physSubmodule`；`worldsheet.spurious-orthogonal-to-physical`
+  新建 `--via-lean` 推导指向 `spuriousSubmodule_le_orthComplement`；
+  `worldsheet.ocq-spurious-states` 的 `lean_decl` 填 `spuriousSubmodule`；
+  `worldsheet.open-string-intercept--via-null-state-decoupling` 的 level 1 半边可引
+  `Lop_neg_one_apply_one_mem_nullSubmodule`（但该推导还需 level 2 与唯一性，不能标 formalized）。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。

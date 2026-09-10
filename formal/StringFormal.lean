@@ -6,3 +6,4 @@ import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
 import StringFormal.NoGhost.FockSigned
+import StringFormal.NoGhost.PhysicalStates
