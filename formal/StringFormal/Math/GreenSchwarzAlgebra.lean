@@ -18,6 +18,8 @@ Convention: `conv.gauge-trace-normalization` (the graph's normalisation of gauge
 
 ## Contents
 
+* `gs_factorization_so32`, `gs_factorization_e8`, `gs_factorization_nested_eq_expanded` —
+  graph node `math.anomaly-twelve-form-factorization`.
 * `mixed_anomaly_trace_conditions_n32`, `mixed_anomaly_no_solution_l_one` —
   graph node `math.mixed-anomaly-trace-conditions-n32`.
 * `tr_f6_coefficient_vanishing`, `tr_f6_usp_positive` —
@@ -89,5 +91,76 @@ vanishes for any `N ≥ 1`. So the offending anomaly is present for every symple
 algebra. -/
 theorem tr_f6_usp_positive (N : ℤ) (hN : 1 ≤ N) : 0 < N + 32 := by
   omega
+
+
+/-! ### The twelve-form factorisation `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`
+
+Graph node `math.anomaly-twelve-form-factorization`. GS (1984) PLB p.120 (reprint 611),
+eq. (19), stated there in exactly this nested form and with no proof.
+
+**Read the scope carefully.** These are identities about the *specific polynomial
+expressions written into the statements*, valid for all `x, y` in a field of
+characteristic zero (equivalently: formal identities in `ℚ[x, y]`). They are **not**
+theorems about abstract Lie algebras. The step "for `so(32)` the invariants really are
+`Ω₄ = 30 tr F²`, `Ω₈ = 24 tr F⁴ + 3 (tr F²)²`, `Ω₁₂ = 15 tr F² tr F⁴`" is the content of
+`math.so-usp-adjoint-fundamental-trace-identities` (together with
+`tr_f6_coefficient_vanishing` above, which kills the `tr F⁶` term at `N = 32`), and
+"for `E₈`, `Tr F⁴` and `Tr F⁶` are determined by `Tr F²`" is
+`math.e8-adjoint-trace-identities`. Both are independent graph nodes; here their output
+appears only as hard-coded rational coefficients. Nothing here asserts any uniqueness or
+classification statement ("only `SO(32)` and `E₈ × E₈` factorise" is *not* a
+Green–Schwarz 1984 result, see the node's `notes`).
+
+A characteristic-zero *field* is assumed only so that `48⁻¹`, `300⁻¹`, `/100`, `/7200`
+denote what they should; the coefficients are rational, so this loses nothing. -/
+
+section Factorization
+
+variable {K : Type*} [Field K] [CharZero K]
+
+/-- **`SO(32)` branch of the GS factorisation.** With
+`Ω₄ = 30 x`, `Ω₈ = 24 y + 3 x²`, `Ω₁₂ = 15 x y` (where `x = tr F²`, `y = tr F⁴`, and the
+`tr F⁶` term has already dropped out because `N + 32l = 0` at `N = 32`, `l = -1`):
+
+  `Ω₁₂ = (1/48) · Ω₄ · (Ω₈ − (1/300) · Ω₄²)`.
+
+The mechanism is that `(1/300) Ω₄² = (1/300)(30x)² = 3x²` exactly cancels the `3x²` in
+`Ω₈`, leaving `(1/48)(30x)(24y) = 15xy`. -/
+theorem gs_factorization_so32 (x y : K) :
+    15 * x * y = 48⁻¹ * (30 * x) * ((24 * y + 3 * x ^ 2) - 300⁻¹ * (30 * x) ^ 2) := by
+  have h48 : (48 : K) ≠ 0 := by norm_num
+  have h300 : (300 : K) ≠ 0 := by norm_num
+  field_simp
+  ring
+
+/-- **`E₈` branch of the GS factorisation.** With `Ω₄ = x`, `Ω₈ = x²/100`,
+`Ω₁₂ = x³/7200` (where `x = Tr F² = tr F²`):
+
+  `Ω₁₂ = (1/48) · Ω₄ · (Ω₈ − (1/300) · Ω₄²)`.
+
+Here nothing cancels: `x²/100 − x²/300 = x²/150`, and `(1/48)·x·(x²/150) = x³/7200`. -/
+theorem gs_factorization_e8 (x : K) :
+    x ^ 3 / 7200 = 48⁻¹ * x * (x ^ 2 / 100 - 300⁻¹ * x ^ 2) := by
+  have h100 : (100 : K) ≠ 0 := by norm_num
+  have h300 : (300 : K) ≠ 0 := by norm_num
+  have h7200 : (7200 : K) ≠ 0 := by norm_num
+  field_simp
+  ring
+
+/-- The nested form of the factorisation and the expanded form
+`Ω₁₂ = (1/48) Ω₄ Ω₈ − (1/14400) Ω₄³` agree, for arbitrary `Ω₄`, `Ω₈`.
+
+GS (1984) write the nested form; the expanded form is the one usually quoted second-hand.
+This lemma says the two are the same identity, so neither branch above depends on which
+form the graph node records. -/
+theorem gs_factorization_nested_eq_expanded (Ω₄ Ω₈ : K) :
+    48⁻¹ * Ω₄ * (Ω₈ - 300⁻¹ * Ω₄ ^ 2) = 48⁻¹ * Ω₄ * Ω₈ - 14400⁻¹ * Ω₄ ^ 3 := by
+  have h48 : (48 : K) ≠ 0 := by norm_num
+  have h300 : (300 : K) ≠ 0 := by norm_num
+  have h14400 : (14400 : K) ≠ 0 := by norm_num
+  field_simp
+  ring
+
+end Factorization
 
 end StringFormal.Math
