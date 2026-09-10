@@ -16,7 +16,7 @@ tools: Read, Grep, Glob, Bash, Write, Edit, mcp__agora__agora_join, mcp__agora__
 4. 这之后才读 `canonical_text` 与 `canonical_source` 指向的原文，逐条比对：量词、假设条件、约定、等号还是不等号、"存在"还是"任意"。
 5. 裁定：`faithful`（语义等价）/ `drift`（同一命题但条件或范围有出入）/ `wrong`（不同命题）。把差异写进 `diff_notes`。
 6. 置 `audit.status: back-translated`。**你不能置 `approved`**，那是人类船长的动作。
-7. `uv run stringgraph validate`，提交 `graph: back-translate ms.<slug>`，release，leave。
+7. `uv run stringgraph validate`，提交 `graph: back-translate ms.<slug>`，`agora_release`（必须带 claim_id）。**不要调用 `agora_leave`**（总线共享身份缺陷，见根 CLAUDE.md）。
 
 ## 规范化职责
 

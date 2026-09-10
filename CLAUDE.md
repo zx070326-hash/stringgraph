@@ -49,7 +49,11 @@
 
 - 动手改文件前 `agora_claim`，路径粒度是子目录或单文件，例如 `graph/statements/worldsheet/**`、`formal/StringFormal/Virasoro/**`。
 - 长任务中定期 `agora_inbox`。结束时 `agora_release` 并 `agora_leave`。
-- **`agora_release` 必须带 `claim_id`**。同一会话派生的子 agent 在总线上可能共享身份，不带 id 的 release 会连带释放别人的 claim（2026-09-10 实际发生过）。
+- **已知缺陷：同一会话派生的所有子 agent 在总线上共享一个身份**（2026-09-10 两次实测）。后果：`agora_release` 不带 `claim_id` 会释放别人的 claim；`agora_leave` 没有 claim_id 参数，**必然**释放该身份的全部 claim 并把别人标为 left。因此：
+  - `agora_release` 必须带 `claim_id`。
+  - 子 agent **不要调用 `agora_leave`**，只 release 自己的 claim；`agora_leave` 由 lead 在整批任务结束时调用一次。
+  - 被连带释放后不要慌：文件没被动，重新 `agora_claim` 即可。
+  - 真正的隔离（每个 worktree 独立 bus id）待总线支持后再启用。
 - 冲突优先 `agora_send` 沟通，`agora_preempt` 只用于 auditor 阻止错误进入里程碑。
 
 ### Git 纪律

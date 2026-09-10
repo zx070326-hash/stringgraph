@@ -26,7 +26,7 @@ tools: Read, Grep, Glob, Bash, Write, Edit, WebSearch, WebFetch, mcp__agora__ago
 
 ## 完成定义
 
-`lake build` 通过，无 sorry，公理检查通过，图校验通过，TODO.md 打勾，提交 `formal: <一句话>`，release，leave。
+`lake build` 通过，无 sorry，公理检查通过，图校验通过，TODO.md 打勾，提交 `formal: <一句话>`，`agora_release`（必须带 claim_id）。**不要调用 `agora_leave`**（总线共享身份缺陷，见根 CLAUDE.md）。
 
 ## 报告格式
 

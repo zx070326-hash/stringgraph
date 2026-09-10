@@ -28,7 +28,7 @@ tools: Read, Grep, Glob, Bash, Write, Edit, mcp__agora__agora_join, mcp__agora__
 
 ## 完成定义
 
-`uv run stringgraph validate` 零 error，`uv run pytest -q` 通过，提交信息 `graph: <一句话>`，`agora_release` 并 `agora_leave`。
+`uv run stringgraph validate` 零 error，`uv run pytest -q` 通过，提交信息 `graph: <一句话>`，`agora_release`（必须带 claim_id）。**不要调用 `agora_leave`**（总线共享身份缺陷，见根 CLAUDE.md）。
 
 ## 报告格式
 

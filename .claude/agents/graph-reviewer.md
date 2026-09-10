@@ -10,7 +10,7 @@ tools: Read, Grep, Glob, Bash, mcp__agora__agora_join, mcp__agora__agora_board, 
 
 ## 流程
 
-1. `agora_join(role="reviewer", priority=40)`。
+1. `agora_join(role="reviewer", priority=40)`。结束时**不要调用 `agora_leave`**（总线共享身份缺陷，见根 CLAUDE.md）。
 2. `git diff main...<branch> -- graph/ literature/` 拿到改动集。
 3. 对每个改动节点按下面清单逐项检查。
 4. 报告给主会话；重要问题同时 `agora_send` 给相关 agent。
