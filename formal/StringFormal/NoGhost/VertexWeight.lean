@@ -642,6 +642,20 @@ theorem lie_Lop_vertexOsc_of_pos (η a b : Fin D → R) (hη : ∀ μ, η μ * �
       Lop_apply_creaExp_of_pos_shifted η a b hη hm K]
     abel
 
+/-- **The isotropic (`b · b = 0`) case**, which is the DDF normalisation: the vertex operator
+is a weight-`1` primary, `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b) V_{J-m}` for `m ≥ 1`.
+
+The conformal weight of `:e^{i c·X}:` is `h = ½ (b · b) = α' k_0²`, so `k_0² = 0` is exactly
+what makes the `m`-quadratic term drop out and leaves the weight-`1` transformation law used
+by the DDF construction. -/
+theorem lie_Lop_vertexOsc_of_pos_isotropic (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hb : (∑ μ : Fin D, η μ * b μ * b μ) = 0) {m : ℤ} (hm : 0 < m) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)) • vertexOsc η b (J - m) := by
+  rw [lie_Lop_vertexOsc_of_pos η a b hη hm J, hb]
+  congr 1
+  ring
+
 end LopVertexOsc
 
 end Fock
