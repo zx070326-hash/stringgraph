@@ -1,0 +1,54 @@
+id: math.cy3-elliptic-fibered-bounded--via-filipazzi-hacon-svaldi
+target: math.cy3-elliptic-fibered-bounded
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: filipazzi-hacon-svaldi-2021
+    loc: "J. Eur. Math. Soc. 27 (2025), no. 9, 3583–3650 = arXiv:2112.01352v2，标题与摘要首句"
+    note: >-
+      L2（元数据与摘要由 arXiv API 逐字取得；**正文未读，L0**）。摘要**无定理编号**，
+      loc 只到"篇 + 摘要首句"，**不得编定理号**。DOI 10.4171/JEMS/1467。
+  - ref: anderson-gray-nally-taylor-2026
+    loc: "arXiv:2606.08427v1, §I（其 ref [11]）"
+    note: >-
+      L3 独立佐证：逐字 "the number of topological types of elliptic and genus one fibered
+      Calabi-Yau threefolds is finite [8, 9, 10, 11]"。另有三条同向的旧文献
+      （Grassi 1991、Gross **Duke 74**(1994，⚠ 引用方印 76，以 Crossref 为准)、Kawamata 1997），
+      本项目均未登记、未核实。
+summary: |
+  本推导的全部内容是**引用一篇已发表的代数几何论文的主定理**：
+
+  Filipazzi–Hacon–Svaldi, "Boundedness of elliptic Calabi–Yau threefolds",
+  J. Eur. Math. Soc. 27 (2025) 3583–3650，摘要首句逐字
+  "We show that elliptic Calabi--Yau threefolds form a bounded family."
+
+  独立佐证：Anderson–Gray–Nally–Taylor (arXiv:2606.08427v1) §I 把"椭圆与亏格一纤维化 CY3 的
+  拓扑类型数目有限"归给包含该文在内的四条参考文献。
+
+  ⚠ 本推导**不**采用该摘要的第二个结论（minimal terminal threefolds of Kodaira …），
+  那一条带两个作者自陈"必需"的额外假设。
+gaps:
+  - "**正文未读（L0）**：证明本身、所用的极小模型纲领工具、'有界族'的精确定义（族的参数空间、是否允许奇点）本项目均未核实"
+  - "**摘要无定理编号**，loc 只能到'篇 + 摘要首句'；不得编定理号"
+  - "'有界族 ⇒ 拓扑类型数目有限'这一步**本项目未核实**；Anderson–Gray–Nally–Taylor §I 断言了结论但不给论证，且那句还覆盖本卡不涉及的**亏格一纤维化**情形"
+  - "AGNT 列出的另外三条来源（Grassi 1991、Gross 1994、Kawamata 1997）本项目全部未登记未核实；其中 Gross 的卷号在引用方（76）与 Crossref（74）之间冲突"
+  - "⚠ **只覆盖椭圆纤维化子类**；一般 CY3 的拓扑类型有限性截至 2026-06 仍开放（math.cy3-cohomology-bounded）"
+notes: |
+  from: literature/extractions/math-sources.md §46.3、§46.6。
+
+  【★★ 本推导故意没有出边】特别是**不指向 math.cy3-cohomology-bounded**。子类的定理不得给全类
+  升格：若建那条边，工具会把 (c) 的有效状态从 conjecture 抬到 rigorous，那是记账错误
+  （researcher §46.6(a) 的明确警告）。(c) 的 notes 里已把本卡作为"2005 年之后的进展"记账。
+
+  【status = rigorous 的理由与保留】本卡的 statement 就是被引论文**标题与摘要首句的逐字翻译**，
+  论文已在 JEMS 发表 ⇒ docs/STATUS_LEVELS.md 第 4 级的判据（有发表的、数学界接受的完整证明，
+  来源是数学文献）字面满足；未满足的只是本项目的**阅读深度**（正文未读、无定理编号），
+  这一部分记在 gaps 里。
+  ⚠ **请 reviewer 复核**：若判定"正文未读一律不得 rigorous"，本推导应降为 physical-argument。
+  **本推导没有出边，降级不影响图中任何其他节点。**
+  与之对照：math.narain-moduli-space-finite-volume-v2--via-borel-harish-chandra 本轮由 rigorous
+  降为 physical-argument，理由不同——那里被引论文含多条定理而我们不知道是哪一条，且从定理到陈述
+  还有两个完全无来源的翻译环节。
+author: curator
+created: "2026-09-11"

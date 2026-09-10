@@ -1,0 +1,71 @@
+id: math.cy3-hypersurface-h11-max-kreuzer-skarke
+kind: proposition
+title: "Kreuzer–Skarke 列表（四维反射多面体的 CY 三折超曲面）中 h^{1,1} 的最大值是 491"
+statement: |
+  设 X 取遍由 Kreuzer–Skarke 完全分类的 **473,800,776 个四维反射多面体**所给出的、环面簇中的
+  Calabi–Yau 三折超曲面。则
+
+    max_X h^{1,1}(X) = 491 ，
+
+  即该族中 h^{1,1} 的最大值为 491（且该值被取到）。
+
+  Kreuzer–Skarke 摘要逐字（arXiv:hep-th/0002240）：
+
+    "Four dimensional reflexive polyhedra encode the data for smooth Calabi-Yau threefolds that
+     are hypersurfaces in toric varieties, and have important applications both in perturbative
+     and in non-perturbative string theory. We describe how we obtained all 473,800,776 reflexive
+     polyhedra that exist in four dimensions and the 30,108 distinct pairs of Hodge numbers of the
+     resulting Calabi-Yau manifolds."
+
+  ⚠⚠ **本卡只断言 h^{1,1} 的最大值，不断言任何关于 h^{1,1} + h^{2,1} 的界。**
+  尤其**不得**写 "h^{1,1} + h^{2,1} ≤ 502"：该数在本项目找不到任何出处（见 notes）。
+
+  ⚠ **本卡只覆盖 Kreuzer–Skarke 这一族超曲面**，既不覆盖一般 Calabi–Yau 三折（那是
+  math.cy3-cohomology-bounded，仍开放），也不覆盖椭圆纤维化 CY3（那是
+  math.cy3-elliptic-fibered-bounded）。
+uses_conventions: []
+sources:
+  - ref: kreuzer-skarke-2000
+    loc: "arXiv:hep-th/0002240, 摘要（473,800,776 与 30,108 两个数）"
+    note: >-
+      ⚠⚠ **491 这个数不在本文里。** researcher 读了本文的 ar5iv 正文，逐字核对结果：
+      **"491"、"502"、"11" 三个数字全篇未出现**；§4（Results）给的是 Hodge 图的**稠密区**边界
+      （逐字 "a large region, roughly bounded by h11 ≥ 15, h12 ≥ 15 and h11 + h12 ≤ 175"）
+      与低端孤立点（{21,1}、{20,5}、{19,7}、{29,2}，"the only ones with h11+h12 < 28"），
+      **都不是全局最大值**。Kreuzer 的 CY 数据主页也只写多面体总数，不给极值。
+      ⇒ 本条只承载"这一族是什么、有多少个"，**不承载 491**。
+      ★ **491 的实际证据是四条独立的 arXiv 摘要逐字片段（L3，researcher 亲自读到），
+      这四篇本项目尚未登记进 sources.bib**，故本卡无法为它们建 source 条目，只能逐条抄在这里：
+        arXiv:2008.01730v1「Bounding the Kreuzer-Skarke Landscape」— "the extremal case h^{1,1}=491"；
+        arXiv:1808.01282v1「The Kreuzer-Skarke Axiverse」— "including all polytopes with 240 ≤ h^{1,1} ≤ 491"；
+        arXiv:2309.13145v3「Glimmers from the Axiverse」— "up to the maximum Hodge number h^{1,1}=491"；
+        arXiv:2405.08871v4「The DNA of Calabi-Yau Hypersurfaces」— "the maximal polytope with Hodge numbers h^{1,1} = 491"。
+      其中两条用了 "maximum"/"maximal" 字样。详见 literature/extractions/math-sources.md §46.5。
+      **建议 lead 排一轮把这四篇（至少 2008.01730）登记进 bib，届时应把它们提为独立 source 条目。**
+tags: [math, calabi-yau, hodge-numbers, kreuzer-skarke, toric, database]
+notes: |
+  from: literature/extractions/math-sources.md §46.1、§46.5（researcher 2026-09-11 一手核实轮）。
+
+  【★ 本卡是 math.cy3-cohomology-bounded 三层拆分中的第 (a) 层】
+    (a) 本卡：**Kreuzer–Skarke 超曲面**这一族的 h^{1,1} 最大值 = 491（经验/数据库事实）；
+    (b) math.cy3-elliptic-fibered-bounded：**椭圆纤维化** CY3 构成有界族（已证明）；
+    (c) math.cy3-cohomology-bounded：**一般** CY3 的上同调是否一致有界（**截至 2026-06 仍开放**）。
+  **三层互不蕴含，且 (a)(b) 都不得用来把 (c) 的状态抬高**，故本卡与 (c) 之间**不建边**。
+
+  【★★ 硬禁令：h^{1,1} + h^{2,1} ≤ 502 不得写入本图】该数在 Kreuzer–Skarke 原文（摘要与 ar5iv
+  正文）里**不存在**，在上述四篇的摘要里也**都没有**。要用必须先从一手来源核实
+  （最可能的位置：KS 的 Hodge 数图注，或 arXiv:2008.01730 的正文）。
+
+  【为什么 status 只到 physical-argument】491 是一条**有限计算/数据库**事实，本项目的证据是四条
+  **二手摘要（L3）**：既没读 KS 的原始数据，也没读任何一篇的正文，更没有人复算。
+  本图的状态阶梯里没有"计算机验证的枚举"这一档，按"不确定选低一级"取 physical-argument。
+  ⚠ 这**不是**说这个数可疑（四条独立来源相符），而是说本项目的溯源深度只到这一层。
+
+  【★ 一个值得注意的巧合】Grassi, arXiv:2304.07819v2 **Corollary 5.3** 逐字给出
+  "Then h^{1,1}(X) ≤ 491."，但那是对**椭圆纤维化** CY3 的一条**定理**（见
+  math.cy3-elliptic-fibered-bounded 的 notes），**且该文全文没有提 Kreuzer–Skarke**。
+  即 491 在两处是**两个不同来源的同一个数字**。二者是否同源（Grassi 的 Prop 5.1 归给其 [29] =
+  W. Taylor，具体是哪一篇本项目未查）**本项目未查**。
+  若同源，"KS 列表的极值恰好饱和椭圆纤维化的理论上界"是一条很强的结构性事实，值得单独建卡。
+author: curator
+created: "2026-09-11"

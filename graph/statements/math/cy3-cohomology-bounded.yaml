@@ -19,6 +19,17 @@ uses_conventions: []
 sources:
   - ref: vafa-2005
     loc: "arXiv:hep-th/0509212v2, §3, p.5（本文无编号公式）"
+  - ref: anderson-gray-nally-taylor-2026
+    loc: "arXiv:2606.08427v1, §I"
+    note: >-
+      ★ **2005 年之后的进展核实（researcher 2026-09-11，L3：亲自读到 arXiv 原生 HTML）**：
+      逐字 "it is not yet known whether the number of distinct topological types of Calabi-Yau
+      threefolds is finite or infinite"。该文日期 2026-06-07，是本项目能拿到的**最新**的
+      "一般情形仍开放"证据。
+      ⚠⚠ **该文并未把这个问题归给 Yau，也没有归给 Reid。** 它把 "Reid's fantasy"
+      （逐字 "conjectures that all Calabi-Yau threefolds … are connected to one another through
+      various geometric transitions"，归其 [1] = M. Reid 1987）明确区分为**另一条关于连通性的
+      猜想**。**本图不得把本卡称作 Reid 猜想或 Yau 猜想。**
 tags: [math, calabi-yau, cohomology, open-problem, conjecture]
 notes: |
   from: vafa-2005#E12、#U6。
@@ -30,6 +41,35 @@ notes: |
   【未核实项】2005 年之后该问题是否有进展**本项目未检索**（抽取记录 vafa-2005#U6 明确把它
   列为"下一轮专门检索"的对象）。这是 swampland 一线中少见的、可能升到 rigorous 的节点：
   若有数学文献解决它，本卡应换代并加 kind: proof 的推导。
+  **★ 上面这段的 #U6 已于 2026-09-11 结案，结论见下。**
+
+  【★★ #U6 结案（researcher 2026-09-11，literature/extractions/math-sources.md §46）】
+  本卡的问题被拆成三层，**三层互不蕴含**：
+
+    (a) **Kreuzer–Skarke 超曲面**（473,800,776 个四维反射多面体给出的 CY3 超曲面）的
+        h^{1,1} 最大值是 **491** —— 见 math.cy3-hypersurface-h11-max-kreuzer-skarke
+        （四条独立 arXiv 摘要 L3；status: physical-argument）。
+    (b) **椭圆纤维化** CY3 构成有界族 —— **已证明**：Filipazzi–Hacon–Svaldi,
+        J. Eur. Math. Soc. **27** (2025) 3583–3650 = arXiv:2112.01352。
+        见 math.cy3-elliptic-fibered-bounded。
+        同子类另有显式数值上界 h^{1,1} ≤ 491（Grassi, arXiv:2304.07819v2, **Corollary 5.3**）。
+    (c) **一般 CY3** 的拓扑类型数目是否有限 —— **截至 2026-06 仍开放**：
+        Anderson–Gray–Nally–Taylor, arXiv:2606.08427v1 §I 逐字
+        "it is not yet known whether the number of distinct topological types of Calabi-Yau
+        threefolds is finite or infinite"。**本卡就是 (c)，故 status 仍为 conjecture。**
+
+  【★★ (a)(b) 与本卡之间故意不建边】(a)(b) 都只覆盖 CY3 的**子族**。若把它们建成本卡的推导，
+  工具会按"取最强推导"的规则把本卡的有效状态抬到 rigorous —— **那是记账错误**。
+  子类的定理不能给全类升格。两张卡的信息以本 notes 的形式记账，图上无边。
+  （researcher §46.6(a) 明确警告了这一点。）
+
+  【★★ 三条禁令】
+    1. **不得把本卡称作 "Reid 猜想" 或 "Yau 猜想"**：arXiv:2606.08427 明确把 Reid's fantasy
+       （关于**连通性**的猜想）区分为另一条，且不把有限性问题归给任何人。
+    2. **不得写 h^{1,1} + h^{2,1} ≤ 502**：该数在 Kreuzer–Skarke 的摘要与正文、以及四篇后世论文
+       的摘要里**都不存在**，本项目找不到出处（math-sources.md §46.5）。
+    3. **不得把 Gross 1994 写成 Duke 76**：出版方元数据（Crossref `10.1215/S0012-7094-94-07414-0`）
+       给的是 **volume 74**；印成 76 的是引用方 arXiv:2606.08427 的参考文献 [9]。
 
   【本卡不是 Vafa 的原创猜想】原文只是指出"不知道是否为真数学事实"。本卡把它写成一条待判定
   的数学命题，是本项目的组织选择；其唯一来源是 Vafa 的这段话，故任何以本卡为依据的边都很弱。

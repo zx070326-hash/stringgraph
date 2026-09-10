@@ -16,10 +16,15 @@ summary: |
 gaps:
   - "**这是一个未解决的数学问题**，来源自己就是这么说的（vafa-2005#E12）"
   - "没有任何数学文献支撑；本条的唯一来源是一篇纲领性物理短文里的一句话"
-  - "2005 年之后该问题是否有进展**本项目未检索**（vafa-2005#U6）——若有进展，本卡应换代并挂 kind: proof 的推导"
+  - "★ **2026-09-11 结案（原 vafa-2005#U6）**：一般 CY3 拓扑类型有限性**截至 2026-06 仍开放**——Anderson–Gray–Nally–Taylor, arXiv:2606.08427v1 §I 逐字 'it is not yet known whether the number of distinct topological types of Calabi-Yau threefolds is finite or infinite'。**故本推导的 status 维持 conjecture。**"
+  - "★ 已解决的只是**子族**：椭圆纤维化 CY3 有界（math.cy3-elliptic-fibered-bounded，FHS = JEMS 27 (2025) 3583–3650）；Kreuzer–Skarke 超曲面的 h^{1,1} ≤ 491（math.cy3-hypersurface-h11-max-kreuzer-skarke）。**这两条与本推导之间故意不建边**——子类定理不得给全类升格"
   - "推导无依赖：这不是自洽的证明，而是'经验感觉'的记录"
 notes: |
-  from: vafa-2005#E12、#U6。
-  这是 swampland 一线中少见的、原则上可判定的数学问题，值得 researcher 专门检索。
+  from: vafa-2005#E12、#U6；2026-09-11 按 literature/extractions/math-sources.md §46 更新。
+  这是 swampland 一线中少见的、原则上可判定的数学问题。
+  **#U6（2005 年后的进展）已结案**：一般情形仍开放，子族情形已解决，详见目标陈述卡的 notes。
+
+  ⚠ 三条禁令（详见目标卡）：不得称作 Reid/Yau 猜想；不得写 h^{1,1}+h^{2,1} ≤ 502；
+  不得把 Gross 1994 写成 Duke 76（Crossref 给 74）。
 author: curator
 created: "2026-09-11"
