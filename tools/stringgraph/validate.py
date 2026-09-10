@@ -40,6 +40,8 @@ def validate(g: Graph) -> list[Problem]:
 
     for e in g.load_errors:
         err("load", e)
+    for k in g.bib_duplicate_keys:
+        err("literature/sources.bib", f"duplicate bib key '{k}' (parallel merges of curator branches; keep one entry)")
 
     schemas = {k: _load_schema(root, k) for k in ("statement", "derivation", "milestone", "convention")}
     validators = {k: jsonschema.Draft202012Validator(v) for k, v in schemas.items()}

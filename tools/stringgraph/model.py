@@ -125,6 +125,7 @@ class Graph:
     conventions: dict[str, Convention] = field(default_factory=dict)
     areas: dict[str, str] = field(default_factory=dict)
     bib_keys: set[str] = field(default_factory=set)
+    bib_duplicate_keys: list[str] = field(default_factory=list)
     # Populated by loader: raw dicts that failed to parse, with the error.
     load_errors: list[str] = field(default_factory=list)
 

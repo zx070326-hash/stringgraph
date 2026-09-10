@@ -68,7 +68,13 @@ def load_graph(root: Path | None = None) -> Graph:
 
     bib = root / "literature" / "sources.bib"
     if bib.exists():
-        g.bib_keys = set(BIB_KEY_RE.findall(bib.read_text(encoding="utf-8")))
+        keys = BIB_KEY_RE.findall(bib.read_text(encoding="utf-8"))
+        g.bib_keys = set(keys)
+        seen: set[str] = set()
+        for k in keys:
+            if k in seen and k not in g.bib_duplicate_keys:
+                g.bib_duplicate_keys.append(k)
+            seen.add(k)
 
     for path in sorted((gdir / "statements").rglob("*.yaml")):
         try:
