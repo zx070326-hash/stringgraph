@@ -1,0 +1,131 @@
+id: worldsheet.shapovalov-form-existence--via-lean
+target: worldsheet.shapovalov-form-existence
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供本推导的**核心工具**，分两块：
+      (a) **万有性质**（(1)(2) 用）：`vermaLift`（把任一 Virasoro 模里的权 (c,h) 最高权向量
+          提升为等变映射）、`vermaLift_hwv`、`vermaLift_lie`（等变性，逆变性由它一行推出）；
+          另有最高权关系 `lie_lgen_hwv_of_pos` / `lie_lgen_zero_hwv` / `lie_cgen_hwv`
+          （σ-扭对偶里 C 按标量作用那一步 `lie_cgen_eq` 经 `exists_smul_hwv` 归约到它）。
+      (b) **L_0 分级**（(4) 用）：`levelSpan`、level 移位 `lie_lgen_mem_levelSpan_of_neg`
+          （n < 0 时 L_n : V_N → V_{N+|n|}，**任意 ℚ-代数、对 c,h 无假设**）、
+          `lie_lgen_zero_of_mem_levelSpan`，以及**域上**的内直和
+          `isInternal_levelSpan` / `levelSpan_iSupIndep`（该卡陈述里「若 R = K 是特征零的域，
+          则 V(c,h) = ⊕_N V_N 且 V_N 恰是 L_0 的 (h+N)-特征子空间」那一段）。
+      **刻意未用**该卡不断言的 PBW / dim V_N = p(N) / V(c,h) ≠ 0；
+      (4) 把 V(c,h) ≠ 0 当作**假设**（并证明它同时是必要条件），不去证它。
+      字面依赖（Shapovalov.lean import Verma.lean，逐条调用）。
+  - id: math.virasoro-anti-involution
+    inferred: false
+    note: |
+      **本推导对该卡 (2)「σ 是反自同构」的依赖是实质性的**（与 uniqueness 那条推导不同）：
+      σ-扭对偶 `ContraDual` 上的作用定义为 (X·φ)(v) := φ(σ(X)·v)，
+      要验证它是**李模**（`lie_lie` 公理，Lean 的 `ContraDual.instLieRingModule`）
+      必须用 σ⁅X,Y⁆ = ⁅σY, σX⁆，即 `VirasoroAlgebra.antiInvolution_lie`
+      （该实例的 `lie_lie` 字段第一步就 rw 它）。
+      换言之：**若 σ 不是反自同构，σ-扭对偶就不是 Virasoro 模，(1)(2) 的构造路线不存在。**
+      此外 (1) 的取值 `antiInvolution_lgen`（L_n ↦ L_{−n}）、`antiInvolution_cgen`（C ↦ C）
+      在 `shapovalov_isContravariant` 与 `IsShapovalovFunctional.isHighestWeightVector`
+      里逐条用到。字面依赖（同文件，上一节）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{lie_cgen_eq, ContraDual, ContraDual.{ofLin, toLin, toLinₗ, ext, toLin_ofLin, lie_apply}, IsShapovalovFunctional, IsShapovalovFunctional.isHighestWeightVector, shapovalov, shapovalov_apply, shapovalov_hwv_hwv, shapovalov_isContravariant, existsUnique_isContravariant, hwv_ne_zero_of_isContravariant, isShapovalovFunctional_of_isContravariant, exists_isContravariant_iff, range_levelWord_zero, levelSpan_zero, hwv_mem_levelSpan_zero, posLevelSpan, levelSpan_le_posLevelSpan, isCompl_levelSpan_zero, lie_lgen_mem_posLevelSpan, hwvFunctional, hwvFunctional_of_mem_posLevelSpan, hwvFunctional_hwv, hwvFunctional_lie_lgen_of_neg, hwvFunctional_lie_lgen_zero, isShapovalovFunctional_hwvFunctional, exists_isShapovalovFunctional_of_hwv_ne_zero, exists_isContravariant_of_hwv_ne_zero, exists_isContravariant_iff_hwv_ne_zero, existsUnique_isContravariant_of_hwv_ne_zero}；上游调用 formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{vermaLift, vermaLift_hwv, vermaLift_lie, exists_smul_hwv, lie_lgen_hwv_of_pos, lie_lgen_zero_hwv, lie_cgen_hwv, lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg, lie_lgen_zero_of_mem_levelSpan, iSup_levelSpan_eq_top, isInternal_levelSpan, levelSpan_iSupIndep, eq_of_isContravariant} 与 VirasoroAlgebra.{antiInvolution_lgen, antiInvolution_cgen, antiInvolution_lie}"
+    note: |
+      本仓库，形式化侧三次提交：**1731c49**（σ-扭对偶与条件构造）、**bbc1354**（(2) 的
+      「(i) ⇒ (ii)」一半）、**080d7f9**（(4)：特征零域上 iff V(c,h) ≠ 0，含 `levelSpan_zero`、
+      `hwvFunctional` 与 Verma.lean 的 level 移位引理）。前两者经 lead 的 **b95a406**
+      合入 main，080d7f9 亦已在 main 上。Lean 4 + Mathlib v4.33.1。
+      文件头 Status 段逐字「No `sorry`, no new axioms.」；其第 1 条 gap 在 080d7f9 后改写为
+      「Existence of the normalised form is conditional on `V(c,h) ≠ 0` — which is `pbw-verma`,
+      still open. … over a field of characteristic zero the two are equivalent
+      (`exists_isContravariant_iff_hwv_ne_zero`), so there the *only* gap is `V(c,h) ≠ 0`.」
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/Shapovalov.lean 的 "Existence" 与
+  "Existence over a field of characteristic zero" 两节。
+
+  **σ-扭对偶** `ContraDual R c h`：取 V(c,h) 的**全**线性对偶 V(c,h) →ₗ[R] R（不是分级对偶、
+  不是有限维对偶），装上作用 (X·φ)(v) := φ(σ(X)·v)。这是 Virasoro 模——`add_lie`/`lie_add`/
+  `smul_lie`/`lie_smul` 平凡，`lie_lie` 用 `antiInvolution_lie` 把 σ⁅X,Y⁆ 换成 ⁅σY, σX⁆ 后
+  由 `lie_lie` 与 `map_sub` 合上。**对任意交换 ℚ-代数 R 成立，无分级、无有限性假设。**
+  （做成类型同义词是因为 Mathlib 的 `Module.Dual.instLieRingModule` 已经在同一底层类型上
+  放了未扭的余伴随作用，直接 instance 会冲突。）
+
+  **(1) 条件构造** = `shapovalov`：`IsShapovalovFunctional.isHighestWeightVector` 把泛函 f
+  变成 `ContraDual` 里权 (c,h) 的最高权向量——三条件逐条对上：
+  `lie_cgen`（用 `lie_cgen_eq`：C 在 V 上是标量 c）、`lie_lgen_zero`（f(L_0 v) = h f(v)）、
+  `lie_lgen_pos`（σ 把 L_n (n>0) 送到 L_{−n} (−n<0)，用 f 杀负模态那一条）。
+  再由万有性质 `vermaLift` 得等变映射 V(c,h) → ContraDual，定义 B(x,y) := (vermaLift f₀ x)(y)。
+  归一化 `shapovalov_hwv_hwv` 由 `vermaLift_hwv` + `hf.apply_hwv` 一行；
+  逆变性 `shapovalov_isContravariant` 由 `vermaLift_lie` + `ContraDual.lie_apply` +
+  `antiInvolution_lgen` 一行。**存在唯一** `existsUnique_isContravariant` = 上面两条
+  + worldsheet.shapovalov-form-uniqueness 的 `eq_of_isContravariant`。
+
+  **(2) 等价** = `exists_isContravariant_iff`：「⟸」是 (1)。「⟹」是
+  `isShapovalovFunctional_of_isContravariant`：取 f := B(|c,h⟩, ·)，三个字段分别为
+  归一化（apply_hwv）、n < 0 时 B(|c,h⟩, L_n v) = B(L_{−n}|c,h⟩, v) = 0（−n > 0 时
+  `lie_lgen_hwv_of_pos` 把它打成 0）、n = 0 时同法得 h·B(|c,h⟩, v)。
+
+  **(3) 必要性** = `hwv_ne_zero_of_isContravariant`（假设 `[Nontrivial R]`）：
+  |c,h⟩ = 0 代入归一化得 1 = B(0,0) = 0，与 `zero_ne_one` 矛盾。
+
+  **(4) 特征零域上的 iff** = `exists_isContravariant_iff_hwv_ne_zero`（`[Field K] [CharZero K]`）。
+  「⟹」是 (3)。「⟸」是本轮（080d7f9）新增的构造，四步：
+  · `levelSpan_zero : V_0 = span{|c,h⟩}`（经 `range_levelWord_zero`；**对任意 ℚ-代数成立**，
+    因为 0 的合成只有空词）；
+  · `posLevelSpan := ⨆_{N ≠ 0} V_N` 与 `isCompl_levelSpan_zero : IsCompl V_0 posLevelSpan`
+    （由 `levelSpan_iSupIndep` + `iSup_levelSpan_eq_top`；**这一步要域 + 特征零**）；
+  · `hwvFunctional hne`：沿上述补空间投影到 V_0，再取 |c,h⟩ 的坐标（`LinearEquiv.coord`，
+    需要 `hne : |c,h⟩ ≠ 0`）；
+  · `isShapovalovFunctional_hwvFunctional` 逐条验三性质：`hwvFunctional_hwv`（= 1）、
+    `hwvFunctional_lie_lgen_of_neg`（n < 0 时像落在 `posLevelSpan`，用
+    `lie_lgen_mem_posLevelSpan` ← `lie_lgen_mem_levelSpan_of_neg` 与 N + |n| ≥ 1）、
+    `hwvFunctional_lie_lgen_zero`（L_0 在 V_N 上是 h + N，N ≥ 1 的分量被 f₀ 杀掉）。
+  再经 (2) 得形式；`existsUnique_isContravariant_of_hwv_ne_zero` 把唯一性一并打包。
+
+  **本推导为什么是 `formalized`**：目标陈述的 (1)(2)(3)(4) 逐句对应上列具名、无 sorry 的定理，
+  两条 depends_on 指向的卡本身也是 formalized。目标陈述已把「V(c,h) ≠ 0 本身」明确排除在外
+  （其【不断言】(a)），因此这里**没有**「陈述强于证明」的落差。
+gaps:
+  - |
+    (i) **不给 V(c,h) ≠ 0**，因此仍不给无条件存在性。这是本推导与整条 Shapovalov 链的
+    唯一实质缺口：唯一已知路线是 PBW（math.verma-module-free-over-negative-part 的 (4)，
+    rigorous；Mathlib v4.33.1 无 PBW，formal/TODO.md 的 `pbw-verma` (b)）。
+    ⚠ **本轮（080d7f9）的净变化正是把缺口收窄到这里**：此前未决输入是「存在 Shapovalov 泛函」
+    这条技术假设，现在（在特征零域上）它与 V(c,h) ≠ 0 等价，而后者在图上有卡、有来源、
+    有明确瓶颈。同一目标卡的另一条推导 --via-pbw 走的就是兑现这一步的路线。
+  - |
+    (ii) **一般交换 ℚ-代数 R 上「|c,h⟩ ≠ 0 ⇒ 泛函存在」仍 open**。
+    (4) 的构造用 `isInternal_levelSpan`，它只在**特征零的域**上证到：level 分量靠 L_0 的
+    本征值 h + N 分离，一般 R 上 h + N 未必两两可区分（形式化者在文件头 Status 第 1 条
+    逐字写下这一点）。目标陈述的【不断言】(b) 已声明该限制，故这不是「陈述强于证明」，
+    而是一条**记录在案的开放问题**。
+  - |
+    (iii) **`ContraDual` 的模结构在 Lean 里是手写实例，未与 Mathlib 的对偶模理论对接**。
+    不影响正确性（`lie_lie` 等公理逐条证明），但日后若 Mathlib 引入「沿反自同构扭的对偶模」
+    这一通用构造，本文件应改写为它的特例。
+  - |
+    (iv) **不覆盖 Hermite / 实 (c,h) 情形**，也不给 ker B 的极大性
+    （schottenloher-2008 Theorem 6.8(3)）。见目标陈述的【不断言】(e)(f)。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+
+  【为什么这条推导值得单独看一眼】它是本项目里少见的「**把未证内容精确隔离成一条假设，
+  并证明该假设与结论等价**」的例子，而且这个假设在本轮被进一步**换成了图上已有的对象**：
+  (2) 的「⟹」半（bbc1354）说明技术假设 `IsShapovalovFunctional` 不过强；
+  (4)（080d7f9）在特征零域上把它替换成 V(c,h) ≠ 0，即 PBW 的那一半。
+  reviewer 若要挑战本卡的 formalized，正确的靶子是目标陈述有没有偷偷把「存在」写成无条件，
+  而不是 Lean 侧的假设多不多。
+
+  【一条给其他 curator 的提示】080d7f9 顺带在 Verma.lean 里加了
+  `lie_lgen_mem_levelSpan`（k > 0 时 L_{−k} : V_N → V_{N+k}）与
+  `lie_lgen_mem_levelSpan_of_neg`，**对任意交换 ℚ-代数、对 c,h 无任何假设**。
+  这两条与 worldsheet.descendant-weight-grading 系列的卡片直接相关，
+  但那些卡不在本任务的 claim 范围内，未动。
+author: curator
+created: "2026-09-11"
