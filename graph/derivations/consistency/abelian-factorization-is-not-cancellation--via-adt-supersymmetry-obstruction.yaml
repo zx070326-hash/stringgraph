@@ -28,7 +28,7 @@ depends_on:
     note: |
       本推导用到「Î₁₂ 中引力部分的系数正比于 n − 496，故 n = 496 时该部分为零」，
       这正是该节点承载的内容（GS (20)）。ADT 在 (7) 中独立给出同一结构。
-  - id: consistency.h-field-strength-chern-simons
+  - id: consistency.h-field-strength-definition
     inferred: false
     convention_map: |
       本图的定义卡取 GS (4) `H = dB + ω⁰_{3Y} − ω⁰_{3L}`；ADT (9) 写 `H₃ ≡ dB₂ − ω₃^Y + ω₃^R`。
@@ -39,6 +39,14 @@ depends_on:
       ADT (16) 是该定义卡在**阿贝尔**情形的对应物（每个 U(1)^{(i)} 贡献 ω₃^{(i)} = A^{(i)} ∧ dA^{(i)}）。
       ⚠ **阿贝尔那一支不在本图定义卡的陈述里**（GS 1984 只写非阿贝尔 ω⁰_{3Y}），
       ADT 把它外包给 Bergshoeff 等人。该外部输入记在 gaps。
+      【2026-09-11】原依赖 consistency.h-field-strength-chern-simons 已拆卡换代，本条改指
+      consistency.h-field-strength-definition（H 的定义那一半）。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    inferred: false
+    note: |
+      【2026-09-11 拆卡后新增的显式边】本推导用的「H 含规范 CS 项 ⇒ **B 必须在规范变换下移动**」
+      里的后半句就是 GS (9c)，原先埋在 consistency.h-field-strength-chern-simons 的第 (2) 段里，
+      拆卡后单列。ADT (10) 的 δB₂ 是它在阿贝尔情形的对应物。
   - id: consistency.gs-counterterms-1984
     inferred: false
     convention_map: |

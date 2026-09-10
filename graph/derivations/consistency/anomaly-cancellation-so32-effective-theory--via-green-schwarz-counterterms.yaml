@@ -5,10 +5,16 @@ status: physical-argument
 depends_on:
   - id: consistency.anomaly-twelve-form-d10
     note: 规范反常一路的编码框架（Ω_{4n} 与十二形式）。
-  - id: consistency.h-field-strength-chern-simons
+  - id: consistency.h-field-strength-definition
     note: |
-      提供 (4) 的 H 与 (9c) 的 δB。GS 逐字：「The nontrivial Λ transformation of B in eq. (9c)
+      提供 (4) 的 H。
+      【2026-09-11】原依赖 consistency.h-field-strength-chern-simons 已拆卡换代；
+      该卡第 (2) 段的 (9c) 现由下一条边承载。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    note: |
+      提供 (9c) 的 δB。GS 逐字：「The nontrivial Λ transformation of B in eq. (9c)
       is the key to the cancellation between δS₁ and G.」
+      ⇒ **本推导真正吃紧的是这一条**，不是 H 的写法。
   - id: consistency.descent-forms-gs-notation
     note: |
       (14)(15)(16) 用到的 ω⁰_{2n+1 Y}、ω¹_{2n Y}。

@@ -1,0 +1,75 @@
+id: consistency.b-field-gauge-lorentz-transformation
+kind: definition
+status: rigorous
+title: B、A、ω 在规范与局域洛伦兹变换下的变换律 δB = −tr(A dΛ) + tr(ω dΘ)（GS 1984 (9a,b,c)(9c′)）
+statement: |
+  在 consistency.h-field-strength-definition 的同一套场内容与约定
+  （conv.gauge-trace-normalization，楔号省略）上，Green–Schwarz 1984 规定：
+
+      δA = dΛ + [A, Λ],        δω = dΘ + [ω, Θ]                                        (9a,b)
+      δB = − tr(A dΛ) + tr(ω dΘ)                                       （SO(N)/USp(N)）  (9c)
+      δB = − (1/30) tr₁(A₁ dΛ₁) − (1/30) tr₂(A₂ dΛ₂) + tr(ω dΘ)        （E₈ × E₈）       (9c′)
+
+  其中 Λ 是规范变换参数、Θ 是局域洛伦兹变换参数，(9c′) 的下标指两个 E₈ 因子。
+  (9a,b) 是 A 与 ω 的标准（伴随）变换律；**(9c) 是本卡的实质内容：B 在两类变换下都
+  非平凡地变换**。GS 逐字强调这一点是后面反常抵消的关键：
+  「It is crucial that the potential B transforms under both kinds of transformations and that
+  the field strength H is invariant.」
+
+  **本卡不断言**：
+  (a) H 的定义——那是 consistency.h-field-strength-definition（GS (4)(4′)）；
+  (b) δF = [F, Λ]、δR = [R, Θ]、δH = 0（GS (10a,b,c)）——δH = 0 由
+      consistency.h-field-gauge-lorentz-invariant 承载；
+  (c) δB 的**整体**符号有独立物理意义：它与 H 里两个 Chern–Simons 项的符号、
+      以及 consistency.gs-counterterms-1984 里 B 的系数是**绑在一起**的，
+      三者一起做场重定义 B ↦ −B 时同时翻转（见 consistency.h-field-strength-definition notes 第 2 条）；
+  (d) 非阿贝尔的完整变换律在现代教科书里的形状——见 sources 里 Polchinski 的
+      「we only indicate the leading, Abelian, terms」。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118–119（重印 609–610），(9a,b)(9c)(9c′) 与其后正文「The subscripts in eq. (9′c) refer to the two E₈ factors. … It is crucial that the potential B transforms under both kinds of transformations and that the field strength H is invariant.」"
+    note: |
+      L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E5（逐字转录见该条）。
+      ★ **(9c) 与 (4) 联合固定 H 里两个 Chern–Simons 项的符号**；单独看任何一条都不固定。
+      **不得**把 (9c) 溯源到 zumino-*：Zumino 一侧没有 B 场（抽取记录 zumino-wu-zee-1984.md Q-Z1/Q-Z2）。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.24)(12.2.25a,b,c) pp. 99–100：`δω_{3L} = d tr(Θ dω₁)`；`δA₁ = dλ`、`δω₁ = dΘ`、`δB₂ = c Tr(λ dA₁) + c′ tr(Θ dω₁)`；(12.2.25) 下方逐字「Again, we only indicate the leading, Abelian, terms.」"
+    note: |
+      **L1**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E16）。
+      对照来源，**不是本卡采用的写法**：Polchinski 的 c、c′ 是待定常数（与 (12.2.22) 同一对），
+      故他的 δB₂ 的整体符号同样不固定。
+      ★ **他自陈只给阿贝尔领头项**——这条限定应随任何从 Polchinski 抄 δB 的转引一起搬运；
+      GS (9c) 里的 tr(A dΛ) 同样只是领头项（完整非阿贝尔形式两家都没给）。
+  - ref: bilal-2008
+    loc: "§12.4, (12.15) `(δ^gauge + δ^L)B = Q₂¹(v,A,F) − β̃ Q₂¹(v̂,ω,R)`；p.102 逐字「it is then enough to choose β̃ = 1 in (12.14) and (12.15)」"
+    note: |
+      **L1（lead 于 2026-09-11 逐页核实，记录在 literature/extractions/green-schwarz-1984.md §9）。**
+      对照来源。与 GS (9c) 整体反号，与 (12.14) 对 H 的整体反号**成套**——
+      这正是「两家由 (B, H) ↦ (−B, −H) 相联」的另一半证据。
+tags: [anomaly, chern-simons, kalb-ramond, gauge-transformation, lorentz-transformation, supergravity, green-schwarz, d10]
+notes: |
+  【0. ★ 本卡是 consistency.h-field-strength-chern-simons 的换代产物（2026-09-11）】
+  旧卡把 H 的定义与变换律写在一张定义卡里，本轮拆开。本卡承载旧卡的 (2) 部分。
+  旧卡的 `superseded_by` 指向 consistency.h-field-strength-definition（主继承者），
+  但**依赖旧卡的节点若用的是变换律那一半，应改指本卡**。
+
+  【1. 为什么变换律要单独一张卡】三个理由：
+  (a) 它与 H 的定义是**逻辑独立**的给定：可以先写下 H 再问 δB 该取什么（GS 的做法），
+      也可以反过来。把它们绑在一张卡上，任何一侧的换代都会连累另一侧；
+  (b) 下游用途不同：consistency.gs-counterterms-1984 的反项系数直接绑 δB 的符号，
+      而 consistency.anomaly-cancellation-* 里既用 H 也用 δB；
+  (c) δH = 0 这条命题恰好是「H 的定义」+「变换律」两张卡的**共同**推论
+      （consistency.h-field-gauge-lorentz-invariant），拆开后那条边才画得出来。
+
+  【2. status = rigorous 的含义】本卡只写下一组变换律，是精确的微分几何陈述。
+  它**不**断言这组变换律使任何作用量不变，也不断言理论自洽。
+  本卡不 `uses` 任何图内节点（(9c) 只用到迹与外微分），故其有效状态就是 rigorous——
+  与 consistency.h-field-strength-definition 不同，后者经 descent 卡被压到 physical-argument。
+
+  【3. 「领头阶」这条限定】GS (9c) 与 Polchinski (12.2.25c) 都只是阿贝尔领头项
+  （Polchinski 自陈，GS 未声明）。凡把本卡用在需要完整非阿贝尔变换的论证里的，
+  必须把这条写进 gaps。
+author: curator
+created: "2026-09-11"

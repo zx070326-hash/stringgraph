@@ -39,7 +39,8 @@ statement: |
   (b) 常数 c 的值；
   (c) 后世的 ∫B ∧ X₈ 打包写法（见 notes 第 1 条）。
 uses:
-  - consistency.h-field-strength-chern-simons
+  - consistency.h-field-strength-definition
+  - consistency.b-field-gauge-lorentz-transformation
   - consistency.descent-forms-gs-notation
 uses_conventions:
   - conv.gauge-trace-normalization
@@ -83,12 +84,20 @@ notes: |
   两个三形式的次序相反。三形式反对易，故 ω⁰_{3L} ω⁰_{3Y₁} = − ω⁰_{3Y₁} ω⁰_{3L}；
   但本卡**按印刷原样转录，不做合并**（抽取记录 E16 备注）。同理 (23) 的第二、第三项次序也相反。
 
-  【3. ★ H 的 CS 项符号差异（已闭合，2026-09-11）】本卡与 consistency.h-field-strength-chern-simons
+  【3. ★ H 的 CS 项符号差异（已闭合，2026-09-11）】本卡与 consistency.h-field-strength-definition
   用 GS 原文的 H = dB + ω⁰_{3Y} − ω⁰_{3L}；bilal-2008 (12.14) 的 H = dB − Q₃(A,F) + β̃ Q₃(ω,R)
   **两个 CS 项整体反号**。**β̃ = 1 已核实**（Bilal p.102 逐字），
   ⇒ 两家由场重定义 (B, H) ↦ (−B, −H) 相联，**两家一致**，物理不变量是两个 CS 项的**相对**符号。
   ⚠ 但 δB 的符号（(9c)）与本卡各反项里 B 的系数是**绑在一起**的，混用两套写法仍会得到错误的相对符号。
-  详见 consistency.h-field-strength-chern-simons notes 第 2 条与 2b 条。
+  详见 consistency.h-field-strength-definition notes 第 2 条与 2b 条。
+
+  【3b. 拆卡记录（2026-09-11）】旧卡 consistency.h-field-strength-chern-simons 已换代为三张：
+  consistency.h-field-strength-definition（H 的定义）、
+  consistency.b-field-gauge-lorentz-transformation（(9a,b,c)(9c′) 的变换律）、
+  consistency.h-field-gauge-lorentz-invariant（δH = 0）。
+  本卡的 `uses` 已改指前两张（反项系数同时绑 H 的写法与 δB 的符号，两张都要）。
+  ⚠ **本卡 statement 开头「记号见 … consistency.h-field-strength-chern-simons …」那一句里的 id
+  是旧的**：按 CLAUDE.md 原则 1，已提交的 statement 文本不改；读到那里请按本条转指新卡。
 
   【4. 为什么 status 是 physical-argument】三条理由，任一条都足够：
   (i) 常数 c 在本文里未定，GS 逐字外包给 refs. [3,9]——**而这两篇里都没有这个数**，见第 6 条；

@@ -1,0 +1,67 @@
+id: consistency.h-field-gauge-lorentz-invariant--via-descent-identity
+target: consistency.h-field-gauge-lorentz-invariant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.h-field-strength-definition
+    note: 提供 H = dB + ω⁰_{3Y} − ω⁰_{3L}（(4)）与 E₈ × E₈ 的 (4′)。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    note: 提供 δA、δω（(9a,b)）与 δB（(9c)(9c′)）。**本卡的全部内容就是这两张卡相容**。
+  - id: consistency.descent-forms-gs-notation
+    inferred: true
+    note: |
+      本推导要用的是 n = 1 的下降关系 δω⁰_{3Y} = − d ω¹_{2Y}（GS (16) 在 n = 1 的特例），
+      并把 ω¹_{2Y} 取成 −tr(Λ dA)——**GS 原文没有写出 ω¹_{2Y} 的显式表达式，也没有写出
+      δω⁰_{3Y} 的计算**（(15)(16) 是一般 n 的抽象关系，(5)(6) 只给 ω⁰_{3Y} 与 dω⁰_{3Y}）。
+      ⇒ 「δω⁰_{3Y} = d tr(Λ dA)」这一步在本图的来源里找不到逐字对应，故标 inferred: true。
+      ⚠ 洛伦兹一路（δω⁰_{3L} = d tr(Θ dω)）在 GS 原文里同样没有；
+      **polchinski-1998-v2 (12.2.24) 逐字给出了它**（`δω_{3L} = d tr(Θ dω₁)`），见 sources。
+  - id: conv.gauge-trace-normalization
+    note: 迹的表示、楔号省略、以及 (4′) 里 1/30 与 (9c′) 里 1/30 的配套。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118–119（重印 609–610），(10a,b,c) 与其后正文「It follows from eq. (10) that the terms in eq. (1) are invariant.」"
+    note: |
+      L1（抽取记录 literature/extractions/green-schwarz-1984.md E5）。
+      **GS 只断言 (10c)，不给任何计算**；下面 summary 里的三行是本图补的。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.24) p. 99 `δω_{3L} = d tr(Θ dω₁)`；(12.2.25a,b,c) 与其下方逐字「Again, we only indicate the leading, Abelian, terms.」"
+    note: |
+      **L1**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E16）。
+      ★ **这是本图目前唯一一条逐字写出 δω₃ 的一手教科书来源**（洛伦兹一路）。
+      它与 (12.2.25c) 的 δB₂ = c Tr(λ dA₁) + c′ tr(Θ dω₁) 配套，正是「δH̃₃ = 0」的机制，
+      只是 Polchinski 也没有把 δH̃₃ = 0 写成一条式子。
+      ⚠ 他自陈**只给阿贝尔领头项**——本推导的三行同样只在这个精度上成立。
+summary: |
+  三行，全部在微分形式代数内（楔号省略）。以 SO(N)/USp(N) 一支为例：
+
+  1. **规范一路**。由 ω⁰_{3Y} = tr(A F − ⅓A³) 与 δA = dΛ + [A, Λ] 直接算变分，
+     阿贝尔领头项给 δω⁰_{3Y} = d tr(Λ dA)（这一步即 depends_on 里标 inferred 的那条，
+     等价于 GS (16) 在 n = 1 时取 ω¹_{2Y} = −tr(Λ dA)）。
+  2. **洛伦兹一路**。把 (A, F, Λ) 换成 (ω, R, Θ)：δω⁰_{3L} = d tr(Θ dω)
+     ——这一式 polchinski-1998-v2 (12.2.24) 逐字给出。
+  3. **相消**。由 (9c) δB = −tr(A dΛ) + tr(ω dΘ)，
+
+         δH = d(δB) + δω⁰_{3Y} − δω⁰_{3L}
+            = d[−tr(A dΛ) + tr(ω dΘ)] + d tr(Λ dA) − d tr(Θ dω)
+            = 0 ,
+
+     用到 d tr(A dΛ) = d tr(Λ dA)（迹的循环性 + 两个一形式反对易，逐项相差一个恰当形式），
+     洛伦兹一路同理。E₈ × E₈ 一支相同，(4′) 的两个 1/30 与 (9c′) 的两个 1/30 逐项配套。
+
+  ⇒ **两个 Chern–Simons 项的相对符号与 δB 的两项符号是被这条相消锁死的**：
+  翻转 (9c) 里任一项的符号，就必须同时翻转 (4) 里对应的 CS 项，否则 δH ≠ 0。
+gaps:
+  - "**GS 不给计算**：原文对 (10c) 只有结果，对 (1) 的不变性只有「It follows from eq. (10)」。上面三行是本图补的，**尚无 reviewer 独立复核记录**，故按 docs/STATUS_LEVELS.md 取 physical-argument（`kind` 也因此只能是 physical-argument：校验器强制 kind: proof ⟹ status ∈ {formalized, rigorous}）。"
+  - "**δω⁰_{3Y} = d tr(Λ dA) 无逐字来源**：GS 只给一般 n 的抽象关系 (15)(16)，不给 ω¹_{2Y} 的显式式子；相应的边已标 inferred: true。洛伦兹一路的对应式有 polchinski-1998-v2 (12.2.24) 作一手来源，规范一路仍无。"
+  - "**只到阿贝尔领头阶**：GS (9c) 与 Polchinski (12.2.25c) 都只写领头项（后者自陈），故上面的相消同样只在这个精度上被验证。完整非阿贝尔的 δB 两家都没给。"
+  - "**局部 vs 全局**：所用的 descent 关系其唯一已核实数学来源（math.chern-simons-descent-equations ← zumino-1983-les-houches）逐字声明这类等式「really valid only locally」，而本推导在整个十维时空上用它。GS 原文对此没有对应表述。"
+  - "**不涉及 GS (1) 的玻色作用量**：GS 用 (10) 论证 (1) 各项不变，但本图没有 S₀ 的定义卡，那一步在图里无处落地（见 consistency.h-field-strength-definition notes 第 3 条）。"
+notes: |
+  **请 reviewer 复核**：summary 的三行，特别是第 1 步 δω⁰_{3Y} = d tr(Λ dA)（阿贝尔领头阶）
+  与第 3 步用到的 d tr(A dΛ) = d tr(Λ dA)。复核通过后可按 docs/STATUS_LEVELS.md 的
+  rigorous 例外把 `kind` 改 proof、`status` 改 rigorous 并在此写 `reviewer-verified: <agent>, <date>`；
+  但**有效状态仍会被 consistency.descent-forms-gs-notation 压回 physical-argument**，
+  升级的收益只在 own status 一栏。
+author: curator
+created: "2026-09-11"
