@@ -1,0 +1,79 @@
+id: worldsheet.open-string-doubling-trick
+kind: proposition
+title: doubling trick：Neumann 边界条件使 T̄ 成为 T 的镜像解析延拓，故开弦只有一套 Virasoro 代数
+statement: |
+  设开弦世界面在欧氏共形规范下共形映到上半平面 H = {z ∈ C : Im z ≥ 0}，实轴 Im z = 0 是
+  弦的边界（conv.worldsheet-euclidean、conv.worldsheet-complex-coords）。
+  设 T(z) ≡ T_{zz} 全纯、T̄(z̄) ≡ T_{z̄z̄} 反全纯
+  （worldsheet.traceless-holomorphic-energy-momentum），并设弦端点满足 Neumann 边界条件
+  （worldsheet.open-string-neumann-boundary-condition）。则：
+
+  **(i) 边界上两部门相等。** 在实轴上
+    T(z) = T̄(z̄)   对 z = z̄ ∈ ∂H。
+  等价说法：Neumann 条件使**穿过边界的能流为零**，即 T_{z z̄ 分量之外} 的法向流分量在边界上消失，
+  写成复坐标就是上式。
+
+  **(ii) 镜像延拓。** 由 (i)，函数
+    T̃(z) := T(z)      (Im z > 0),
+    T̃(z) := T̄(z^*)    (Im z < 0)      （z^* 是复共轭）
+  在实轴上两侧取值一致，故 T̃ 是**整个** C（除算子插入点外）上的单一全纯场——
+  即 T̄ 是 T 越过边界的**镜像（Schwarz 反射型）解析延拓**。
+
+  **(iii) 只有一套 Virasoro。** 因此，在 H 上分别由半圆围道定义的 {L_m} 与 {L̄_m}
+  不是两组独立的量：把半圆围道用 (ii) 补成整圆，得到
+    L_m = ∮_{|z| = r} (dz / 2π i)  z^{m+1} T̃(z),
+  这一族 {L_m : m ∈ Z} 已穷尽开弦的共形对称性生成元，且 L̄_m 由 L_m 决定（在上述反射下 L̄_m = L_m）。
+  故开弦上只有**一个** Virasoro 代数，其物理态条件只需对一族 L_n 写一次。
+  （闭弦无边界，(i) 无从谈起，{L_m} 与 {L̄_m} 保持独立——这是开闭弦最基本的结构差别。）
+
+  **本命题不断言什么**：不断言 T 或 T̄ 各自的全纯性（那是
+  worldsheet.traceless-holomorphic-energy-momentum）；不断言 L_m 满足 Virasoro 对易关系
+  （那需要 TT OPE 与围道变形字典）；不涉及零模归一化 α_0 = (2α')^{1/2} p
+  （那在 worldsheet.open-string-virasoro-modes-v3）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.25)（The Open String Boundary），p.56"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E40 备注，证据等级 **[已核实]**：
+      schrans-2020 目录条目 `2.46 p 56: Eq. (2.6.25) The Open String Boundary` 式号已核实，
+      且抽取记录逐字写「(2.6.25) 说明开弦情形下 `L` 与 `L̄` 由 doubling trick 合并成**一套**
+      Virasoro 代数」——即结论 (iii) 在二手核对源意义上已核实。
+      ⚠ **(i)(ii) 的具体表达式（边界上 T = T̄ 的写法、反射公式 T̃(z) = T̄(z^*)）未核对原书**：
+      核对源只给条目标题与「合并成一套」这一结论，中间两步是本图按标准 CFT 做法补出的措辞。
+      原书正文在付费墙后（抽取记录 §0）。
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.28)（Neumann 边界条件 ∂^σ X^μ = 0，本命题的前提）"
+    note: 见 worldsheet.open-string-neumann-boundary-condition 的来源，抽取记录 #E8，[已核实]。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.1)–(2.4.2)（T 无迹并分解为全纯 + 反全纯，本命题的另一前提）"
+    note: 式号经 schrans-2020 目录核实（`2.16`/`2.17`, p.43）；抽取记录 #E31。
+tags: [bosonic-string, open-string, virasoro, doubling-trick, boundary-condition, cft]
+notes: |
+  【本卡片由 worldsheet.open-string-virasoro-modes-v2 拆出】（curator 2026-09-11，执行
+  docs/ROADMAP.md「待拆清单」里 reviewer-batch2 的一条：「open-string-virasoro-modes-v2
+  仍内嵌 doubling trick 命题」）。v2 的 statement 首段用陈述句写出上面 (i)(ii)(iii)，
+  但 v2 是一张 definition 卡且末段自称「不断言任何由此推出的等式」，自相矛盾；
+  更实际的后果是：worldsheet.open-string-l0-level-form--via-zero-mode-substitution 的 gaps
+  里长期挂着一条「**doubling trick 本身没有被论证**：v2 把它作为定义记录下来，
+  但『Neumann ⟹ T̄ 是 T 的镜像解析延拓 ⟹ 只有一套 Virasoro』这一串本图没有推导节点」。
+  本卡片与 worldsheet.open-string-doubling-trick--via-boundary-condition 就是补上的那个节点，
+  定义那一半留在 worldsheet.open-string-virasoro-modes-v3。
+
+  **为什么是 physical-argument 而不是 rigorous**（详见推导节点的 summary 与 gaps）：
+  三步里没有一步在本图中是严格的——(i) 把经典的 Neumann 条件 ∂^σ X^μ|_∂ = 0 转成
+  **量子算符** T 在边界上的等式，靠的是「T 由 X 的正规序双线性给出」这一形式代换，
+  且需要洛伦兹世界面 → 欧氏上半平面的 Wick 旋转与共形映射（本图无节点，见 gaps）；
+  (ii) 的 Schwarz 反射对算子值分布（而非解析函数）的意义只在关联函数内、且只在算子插入点
+  之外成立；(iii) 用的 worldsheet.energy-momentum-laurent-modes 本身有效状态就是 physical-argument。
+  按 docs/STATUS_LEVELS.md「不确定时选低的那级」，取 physical-argument。
+
+  **与 D 膜的关系**（范围说明）：本命题的前提是**全部**方向都取 Neumann。若某些方向取
+  Dirichlet，镜像延拓仍存在但反射带负号（T 的那部分反号，X 的模展开也随之改变），
+  结论 (iii)「只有一套 Virasoro」仍成立而 (i) 的写法要改。本图未建 Dirichlet 支的节点
+  （见 worldsheet.open-string-neumann-boundary-condition 的 notes），故本卡片限定在纯 Neumann。
+author: curator
+created: "2026-09-11"
