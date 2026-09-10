@@ -16,8 +16,9 @@ depends_on:
       「共形正规序与产生-湮灭正规序给同一算符」（a^X = 0），故这条边不引入 OPE 层的依赖，
       不降低本推导的有效状态。
   - id: worldsheet.ocq-level-two-scalar-norm-closed-form
-    inferred: false
+    inferred: true
     note: |
+      【reviewer-batch8 2026-09-11】改为 inferred: true——summary 不用此边，仅为让机器验证可见（同 batch-4 裁决）。
       【2026-09-11（二）新增，LevelTwo.lean 合入 main（c32f026）后接线】
       该卡是本目标第 (2) 条（模的闭式）与第 (3a) 条（a = 1 处为 (D−1)(26−D)·2/25）的
       **机器验证版**：Lean 的 `Fock.pairing_levelTwoScalar_physical` 给出清分母形式
