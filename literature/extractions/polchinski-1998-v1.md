@@ -4189,6 +4189,446 @@ of articles, particularly reviews, that may be useful to the student.」
 
 待填。
 
+---
+
+## 14. ★ 原书三处单页定点核实（2026-09-11，researcher 第八轮）
+
+> **任务**：三项单页核实，全部在 Vol.1 ch.6（pp. 166–205，item hash `F440F6B46EB4150F96EAEAFDDF9F0D76`，
+> 文件名 `9780511816079c6_p166-205_CBO.pdf`）。
+> **不覆盖 §12.8 任何条目**；与 §12.8 冲突之处在本节写明「§12.8 → 订正」。
+>
+> - **14.1** pp. 182–183，**(6.4.17)/(6.4.18)**：开弦四快子振幅的极点塔是否含 `α's = 0`？与图节点
+>   `spectrum.massless-open-pole-requires-chan-paton`（纯四快子振幅在 `α's = 0` 无极点）是否冲突？
+> - **14.2** p. 193，**(6.6.10)**：Virasoro–Shapiro 振幅完整形式（前因子、Γ 比、`C_{S₂}`）逐字。
+> - **14.3** p. 195，**(6.6.23)** 的数值前因子（`πig_c²α'/(4g_o⁴)` vs `πig_c²α'/g_o⁴`）
+>   与 **(6.6.21)** 第三参数（`4α'` vs `¼α'`）。
+> - **14.4** 本轮对图的建议。
+>
+> 状态：**三项全部核完（2026-09-11）**。
+
+#### 14.0 本轮获取路线与版本锚定（与 §12.0 同源，只记增量）
+
+| 项 | 值 |
+|---|---|
+| PDF URL | `https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F440F6B46EB4150F96EAEAFDDF9F0D76/9780511816079c6_p166-205_CBO.pdf/tree-level_amplitudes.pdf` |
+| 落盘大小 | 403.7 KB / 40 页（≈10 KB/页，与 §12.0 的体积基准一致） |
+| 页码换算 | **PDF 页 = 书页 − 165**（ch.6 = pp.166–205）。p.182→17、p.183→18、p.192→27、p.193→28、p.194→29、p.195→30 |
+| **页脚逐字（版本凭据）** | `Downloaded from https://www.cambridge.org/core. Zhejiang University, on 10 Sep 2026 at 23:06:01, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms. `**`https://doi.org/10.1017/CBO9780511816079.009`** |
+
+⚠ **ch.6 的 DOI 后缀是 `.009`，不是 `.006`** —— 与 Vol.2/GSW/Schottenloher 同型，**不要用 DOI 后缀推章号**。
+⚠ 版本仍是 **Cambridge Books Online（2005 平装数字化，已含 2000 年 corrections）**，同 §12.0。
+⚠ 本节所有转录**均为单页或双页页图直读**；凡分辨率有保留之处逐条标出，不做「看起来应该是」的补全。
+
+---
+
+### 14.1 (6.4.17)/(6.4.18)：开弦四快子的极点塔 —— **不冲突；原书自己写出了 `α's = 0` 的相消，且相消范围比图卡片说的更大**
+
+**证据等级：L1（原书 pp. 182–183 页图逐字）。**
+
+#### (a) p.182 下半页，逐字
+
+> "Continuing past the pole, we encounter further singularities. Taylor expanding the integrand at `y = 0` gives
+>
+> `I(s,t) = ∫_0^r dy [ y^{−α's−2} + (α't+2) y^{−α's−1} + … ] .`   **(6.4.16)**
+>
+> The second term gives a pole at `α's = 0`,
+>
+> `I(s,t) = (u−t)/(2s)  +  terms analytic at α's = 0 .`   **(6.4.17)**
+>
+> From the further terms in the Taylor expansion, the amplitude has poles at
+>
+> `α's = −1, 0, 1, 2, … .`   **(6.4.18)**"
+
+#### (b) ★★ p.183 顶部，逐字 —— **本项目要的那句话在这里**
+
+> "These are precisely the positions of the open string states. The integral `I(s,t)` also has poles in the variable
+> `t` at the same positions (6.4.18), coming from the endpoint `y = 1`. These are due to the process of figure 6.3(b).
+> The other two terms in the amplitude (6.4.9) give further contributions to the `s`- and `t`-channel poles, and also
+> give poles in the `u`-channel, figure 6.3(c). **Because the residue at `s = 0` in (6.4.17) is odd in `u − t`, this
+> pole actually cancels that from `I(s,u)`, as do all poles at even multiples of `1/α'`. This will not be true for the
+> more general open string theories to be introduced in the next section.**"
+
+#### (c) 三条硬结论
+
+1. **(6.4.18) 确实含 `α's = 0`，逐字就是 `α's = −1, 0, 1, 2, …`** ——§12.8 的转录**无误**。
+   但 (6.4.18) 的主语是 **`I(s,t)` 这一段边界积分**（原书紧接一句「These are precisely the positions of the
+   **open string states**」，即它是**谱的位置**，不是「完整振幅在此处有极点」的断言）。
+2. **原书明确写出了 `α's = 0` 处的相消，且给出了机制**：留数 `(u−t)/2` **在 `u − t` 下是奇的**，
+   与 `I(s,u)`（`t ↔ u`）的贡献相消。
+   ⇒ **与 `spectrum.massless-open-pole-requires-chan-paton` 完全不冲突；该卡片 (1) 的相消结论
+   由「只有 [S] 一个来源」升级为「原书 p.183 逐字」。**
+3. ⚠ **任务书猜测的机制（「因子 `(1+α's)` 抵消」）不成立。** 原书的机制是**两个循环序之间的相消**
+   （`I(s,t)` 与 `I(s,u)`，靠留数在 `u−t` 下的奇性），不是单项内部的因子相消。
+   **不得把「(1+α's) 抵消」写进任何节点。**
+
+#### (d) ★ 新内容：相消不止 `α's = 0` 这一个点
+
+原书逐字「**as do all poles at even multiples of `1/α'`**」——即 `s = 0, 2/α', 4/α', …`，
+亦即 **`α's = 0, 2, 4, …` 这一整族极点在纯四快子振幅里全部相消**；
+在 (6.4.18) 的塔里**存活的只有 `α's = −1, 1, 3, …`**（`1/α'` 的奇数倍）。
+
+⚠ **这比图卡片 `spectrum.massless-open-pole-requires-chan-paton` 现在说的（只提 `α's = 0`）更强。**
+⚠ **researcher 不做推断**：原书**没有**解释为什么「偶数倍」都是奇函数留数，也**没有**把它与 G-parity
+或任何选择定则联系起来；「存活的是奇数倍」这一句是**从原书两句话直接读出的**，不是推算。
+
+#### (e) 原书自陈的边界：Chan–Paton 之后就不相消
+
+「**This will not be true for the more general open string theories to be introduced in the next section.**」
+——`next section` = §6.5（Chan–Paton 因子，pp. 184–192）。
+⇒ 图卡片 (2)「只有加 Chan–Paton 因子后极点才真实存在」在原书里的对应句就是这一句，
+但**原书这一句只说「不再相消」，没有说「留数正比于结构常数」**。卡片 (2) 后半句的来源仍是 (6.5.14) 一带，
+本轮未核。
+
+#### (f) 顺带订正 §12.8 的一处措辞
+
+§12.8 写「原书**不是**『把上限 1 换成 `r` 再取 `r → 1`』」。
+**逐字看 (6.4.16) 的积分上限确实是 `r`**（`∫_0^r dy`），`r` 是 `y = 0` 邻域的截断。
+§12.8 的意思（`r` 是邻域截断、其余项解析）是对的，但「原书里没有 `r`」这个印象是错的——
+**`r` 就印在 (6.4.16) 里**。
+
+---
+
+### 14.2 (6.6.10)：Virasoro–Shapiro 振幅 —— **逐字到手；与图卡片数值一致，但有三处排版/归属差异**
+
+**证据等级：L1（原书 p. 193 页图逐字；p. 192 为上下文）。**
+
+#### (a) p.193 全页逐字（(6.6.4)–(6.6.12)）
+
+> "where the integral runs over the complex plane **C**. Evaluating the expectation value and setting
+> `z₁ = 0, z₂ = 1, z₃ = ∞`, this becomes
+>
+> `S_{S₂}(k₁;k₂;k₃;k₄) = i g_c⁴ C_{S₂} (2π)²⁶ δ²⁶(Σ_i k_i) J(s,t,u) ,`   **(6.6.4)**
+>
+> where
+>
+> `J(s,t,u) = ∫_C d²z₄ |z₄|^{−α'u/2−4} |1−z₄|^{−α't/2−4} .`   **(6.6.5)**
+>
+> Here `s + t + u = −16/α'`, but we indicate the dependence of `J` on all three variables to emphasize its symmetry
+> among them. This amplitude converges when `s,t,u < −4/α'`. It has poles in the variable `u` from `z₄ → 0`, in the
+> variable `t` from `z₄ → 1`, and in the variable `s` from `z₄ → ∞`. The poles are at the values
+>
+> `α's , α't , α'u = −4, 0, 4, 8, … ,`   **(6.6.6)**
+>
+> which are the masses-squared of the closed string states. The pole at `α's = −4` is
+>
+> `i g_c⁴ C_{S₂} ∫_{|z₄|>1/ε} d²z₄ |z₄|^{α's/2} ∼ − 8π i g_c⁴ C_{S₂} / (α's + 4) .`   **(6.6.7)**
+>
+> Unitarity gives
+>
+> `C_{S₂} = 8π / (α' g_c²) ,`   **(6.6.8)**
+>
+> and so
+>
+> `S_{S₂}(k₁;k₂;k₃) = (8π i g_c / α') (2π)²⁶ δ²⁶(Σ_i k_i) .`   **(6.6.9)**
+>
+> Like the Veneziano amplitude, the amplitude for four closed string tachyons can be expressed in terms of gamma
+> functions (**exercise 6.10**):
+>
+> `S_{S₂}(k₁;k₂;k₃;k₄) = (8π i g_c² / α') (2π)²⁶ δ²⁶(Σ_i k_i) C(−α_c(t), −α_c(u)) ,`   **(6.6.10)**
+>
+> where `α_c(x) = 1 + α'x/4` and
+>
+> `C(a,b) = ∫_C d²z |z|^{2a−2} |1−z|^{2b−2}`
+> `        = 2π Γ(a)Γ(b)Γ(c) / ( Γ(a+b)Γ(a+c)Γ(b+c) ) ,   a + b + c = 1 .`   **(6.6.11)**
+>
+> This is the *Virasoro–Shapiro amplitude*. There is just a single term, with poles in the `s`-, `t`-, and
+> `u`-channels coming from the gamma functions in the numerator. Like the Veneziano amplitude, the Virasoro–Shapiro
+> amplitude has Regge behavior in the Regge limit,
+>
+> `S_{S₂}(k₁;k₂;k₃;k₄) ∝ s^{2α_c(t)} Γ(−α_c(t)) / Γ(1+α_c(t)) ,`   **(6.6.12)**"
+
+#### (b) 与图卡片 `spectrum.virasoro-shapiro-amplitude` 的逐项对账
+
+| 卡片写的 | 原书 (6.6.10)/(6.6.11) | 判定 |
+|---|---|---|
+| 前因子 `(8πi g_c²/α')(2π)²⁶δ²⁶(Σk)` | **逐字相同** | ✅ 升 L1 |
+| `α_c(x) = α'x/4 + 1` | `α_c(x) = 1 + α'x/4` | ✅ 同一式，仅项序 |
+| `C(−α_c(u), −α_c(t))`（**先 u 后 t**） | **`C(−α_c(t), −α_c(u))`（先 t 后 u）** | ⚠ **参数顺序与原书相反** |
+| `C(x,y) = 2π B(x,y,1−x−y)`，`B(x,y,z) = Γ(x)Γ(y)Γ(z)/(Γ(x+y)Γ(x+z)Γ(y+z))` | 原书**不定义三参数 `B`**；(6.6.11) 直接给 `C(a,b) = ∫_C d²z|z|^{2a−2}|1−z|^{2b−2} = 2πΓ(a)Γ(b)Γ(c)/(Γ(a+b)Γ(a+c)Γ(b+c))`，并把 `c` 由 **`a+b+c = 1`** 定义 | ⚠ 三参数 `B` 是 **[S] 的记号，不是原书的** |
+| `C_{S₂} = 8π/(α'g_c²)` | (6.6.8) **逐字相同** | ✅ 升 L1 |
+| 闭弦三点 `(8πi g_c/α')(2π)²⁶δ²⁶` | (6.6.9) **逐字相同** | ✅ 升 L1 |
+| 四点复积分 `∫_C d²z₄|z₄|^{−α'u/2−4}|1−z₄|^{−α't/2−4}` | (6.6.5) **逐字相同** | ✅ `closed-string-four-tachyon-integral` 升 L1 |
+
+**关于参数顺序**：原书 (6.6.11) 的 `C(a,b)` 在 `a ↔ b` 下**取值不变**（分子 `Γ(a)Γ(b)Γ(c)`、分母
+`Γ(a+b)Γ(a+c)Γ(b+c)` 都在 `a,b,c` 三者中全对称，且 `c` 由 `a+b+c=1` 定），
+所以卡片写 `C(−α_c(u),−α_c(t))` **数值上没错**。
+⚠ 但**「这不是原书的逐字排版」现在有了确切内容**：原书是 `C(−α_c(t), −α_c(u))`。
+卡片 statement 里已有「不断言这是原书 (6.6.10) 的逐字排版形式」的免责句，所以**不必换代**，
+只需把这条差异写进 note。
+
+#### (c) ★★ 本项作者自承缺口：**(6.6.10) 的 Γ 函数化在原书里是习题，不是正文推导**
+
+逐字：「the amplitude for four closed string tachyons can be expressed in terms of gamma functions
+(**exercise 6.10**)」。
+
+⇒ 与 §12.3 发现的「level 2 分析是 exercise 4.1」**同型**：
+**原书正文只给结果，不给从 (6.6.5) 到 (6.6.10) 的计算。**
+这直接影响推导节点 `spectrum.virasoro-shapiro-amplitude--via-complex-beta-integral`：
+它的 `sources[].loc = "§6.6, eq. (6.6.10), p.193"` 现在必须补一句
+**「原书把该计算留作 exercise 6.10，正文无推导」**——这也解释了为什么复 Beta 积分
+`I(a,b) = 2πB(1−a,1−b,a+b−1)` 只能靠 [S] 的计算：**原书本来就没写。**
+
+#### (d) 与 14.1 的对照（对 `massless-open-pole-requires-chan-paton` 很有用）
+
+(6.6.6) 是 (6.4.18) 的闭弦对应物：`α's, α't, α'u = −4, 0, 4, 8, …`，
+原书紧跟一句「**which are the masses-squared of the closed string states**」。
+**原书在闭弦这里没有任何「某些极点相消」的说明**，而且 p.194 明确**使用**了 `s = 0` 的极点：
+「Expanding the Virasoro–Shapiro amplitude (6.6.10) on the `s = 0` pole and using unitarity determines
+`g'_c = 2g_c/α'`」（(6.6.15)）。
+⇒ **开弦 `α's = 0` 极点相消 vs 闭弦 `α's = 0` 极点被用来定耦合**，是原书内部一处清晰的不对称。
+⚠ **原书没有把这两处并排讨论**；这一对照是抽取者的观察，**不得作为原书陈述入库**。
+
+#### (e) 顺带确认（p.193 上下文，补 §12.8）
+
+- **(6.6.2)** `S_{S₂}(k₁;k₂;k₃) = i g_c³ C_{S₂}(2π)²⁶δ²⁶(Σ_i k_i)`，`C_{S₂} = e^{−2λ}C^X_{S₂}C^g_{S₂}`（p.192，逐字）。
+- **(6.6.3)** 四闭弦快子的期望值形式（p.192）。
+- **(6.6.1)** 三闭弦快子 `= g_c³e^{−2λ}⟨∏_{i=1}^3 :c̃c e^{ik_i·X}(z_i,z̄_i):⟩_{S₂}`（p.192）。
+- p.192 逐字：「the CKG `PSL(2,C)` (the Möbius group) can be used to fix the three vertex operators to arbitrary
+  positions `z_{1,2,3}`」——`closed-string-four-tachyon-integral` 的 (1) 可据此升级。
+
+---
+
+### 14.3 (6.6.23) 的数值前因子与 (6.6.21) 的第三参数 —— **§12.8 的读图是对的；researcher 复算漏了一个 ¼**
+
+**证据等级：L1（原书 p. 195，**两次独立渲染**：单页 + 双页；两次读出的字形一致）。**
+
+#### (a) (6.6.23) 逐字（p.195）
+
+> `A_c(s,t,u,α',g_c) = ( π i g_c² α' / g_o⁴ ) · ¼ · sin[π α_c(t)] A_o(s,t,¼α',g_o) A_o(t,u,¼α',g_o)^* ,`  **(6.6.23)**
+
+**排版细节（读图）**：原书把系数排成**两个相邻的分式**——大分式 `πig_c²α'` 在上、`g_o⁴` 在下，
+**紧跟一个独立的小分式 `¼`**。
+⇒ **合并后 = `π i g_c² α' / (4 g_o⁴)`。**
+
+**三条判定：**
+
+1. **`4` 确实在（无论排版怎么归并）。** §12.8 读出的 `πig_c²α'/(4g_o⁴)` **数值上正确**。
+2. **researcher 复算的 `πig_c²α'/g_o⁴` 缺一个 `1/4`，判定为漏读那个独立的 `¼`。**
+   （注意：这个 `¼` 与两个 `A_o` 里的 `¼α'` 是**三个不同的 `¼`**，同一行里出现三次，极易漏。）
+3. **`g_o` 的幂次是 `4`（`g_o⁴`），`α'` 的幂次是 `1`**，本轮两次渲染均清晰。
+   ⇒ §12.8 标的「L1-读图存疑（数值前因子）」**可以撤销，升为 L1**。
+
+**独立自洽性复算（抽取者所做，标为推断，不入库为原书内容）**：
+由 (6.6.4)+(6.6.8) 得 `A_c = (8πig_c²/α')J`；由 (6.4.23) 的「单个循环序」得
+`A_o(s,t,α'_o,g_o) = (2ig_o²/α')I(s,t,α'_o)`，取 `α'_o = ¼α'` 得 `A_o = (8ig_o²/α')I`；
+代入 `J = −2 sin[πα_c(t)] I(s,t,¼α')I(t,u,¼α')`（(6.6.21)）后，
+**`g_o⁴`、`α'¹`、以及 `1/4` 三者全部复现**（整体符号/相位随 `A` 的定义与共轭约定而变，本轮不裁定）。
+⇒ **`1/4` 有两条独立支持：页图 + 复算。**
+
+#### (b) ★★ (6.6.21) 的第三参数：**原书页图印的是 `4α'`，但数学要求 `¼α'`**
+
+原书 p.195 逐字：
+
+> "For the four-tachyon amplitudes the integrals above are related
+>
+> `J(s,t,u,α') = −2 sin π α_c(t) I(s,t,4α') I(t,u,4α') ,`   **(6.6.21)**
+>
+> after use of the gamma function identity `Γ(x)Γ(1−x) sin(πx) = π`; we now indicate the explicit dependence of the
+> integrals on `α'`."
+
+**读图事实（两次独立渲染，均一致）**：
+- (6.6.21) 的两处第三参数**印成 `4α'`**（普通字号的 `4`，无分数线）。
+- **同一页**的 (6.6.23) 的两处印成 **`¼α'`**（小号叠分式，`1` 在 `4` 上方）。
+- **两种字形在同一页、同一字体下可区分**，这是判定的依据。
+
+**自洽性复算（抽取者所做，标为推断）**：
+把 (6.6.5) 的指数写成 `z^{a−1}z̄^{a−1}(1−z)^{b−1}(1−z̄)^{b−1}`，得 `a = −α_c(u)`、`b = −α_c(t)`；
+代入 (6.6.22)（`m_i = n_i = 0`）得
+`J = 2 sin(πb) B(a,b) B(b, 1−a−b) = −2 sin[πα_c(t)] · B(−α_c(t),−α_c(u)) · B(−α_c(s),−α_c(t))`。
+再由 (6.4.20) `I(s,t,α'_o) = B(−α_o(s),−α_o(t))`、`α_o(x) = 1+α'_o x`，
+要让 `α_o = α_c = 1+α'x/4` 必须取 **`α'_o = α'/4`**。
+⇒ **(6.6.21) 的正确参数是 `¼α'`。**
+（第二条独立佐证：**同页上文原书自己写**「if one sets `α' = 2` in the closed string and `α' = ½` in the open」
+——开弦有效斜率是闭弦的 **1/4**。第三条：(6.6.23) 用的就是 `¼α'`。）
+
+**⇒ 裁定（本节的核心结论）：**
+> **(6.6.21) 印的 `4α'` 与原书自身的其余部分不自洽；数学上必须是 `¼α'`。**
+> 这是 **Cambridge Books Online 2005 数字化本（已含 2000 年 corrections）里仍然存在的一处误印**
+> ——或者说，**至少是一处本项目无法用原书自洽性支持的印刷文本**。
+
+⚠ **诚实标注（三条）**：
+1. 「印的是 `4α'`」是**读图结论**（两次渲染一致，且与同页 `¼α'` 字形对比），**不是 OCR 文本层**；
+   本环境无法访问 PDF 文本层，**若日后有人能取文本层，值得再确认一次**。
+2. 「正确的是 `¼α'`」是**抽取者的复算**，属**推断**，按 `literature/CLAUDE.md` 规则**不得作为原书陈述入库**；
+   但它有两条**原书内部**的佐证（同页 `α'=2`/`α'=½` 那句、(6.6.23) 的 `¼α'`），可写进 note。
+3. **本项目仍未取得 Polchinski 官方勘误表**（Q14 未关闭），所以**无法判定这是原印误、还是勘误表已收录而 2005 版漏改**。
+   本轮 WebSearch 配额已用尽（200/200），未能检索勘误表，**留给下一轮**。
+
+⇒ **`spectrum.open-closed-four-point-relation-weak` 的 notes 第 3 段「(6.6.21) 的 4α' 属于读图差异或原书另一套参数约定，本图未裁定」现在可以收敛为：
+「原书印 `4α'`（读图，两次确认）；由 (6.6.5)+(6.6.22)+(6.4.20) 复算与同页 `α'=2 / α'=½` 一句，
+应为 `¼α'`；本图判定 (6.6.21) 的印刷文本不可直接引用。」**
+
+#### (c) (6.6.22) 与其后一句，逐字（复核 §12.8，无差异）
+
+> `∫_C d²z z^{a−1+m₁} z̄^{a−1+n₁} (1−z)^{b−1+m₂} (1−z̄)^{b−1+n₂}`
+> ` = 2 sin[π(b+n₂)] B(a+m₁, b+m₂) B(b+n₂, 1−a−b−n₁−n₂) .`
+> `m₁ − n₁ ∈ **Z** ,  m₂ − n₂ ∈ **Z**`   **(6.6.22)**
+>
+> "This implies a corresponding relation between four-point open and closed string amplitudes …
+> where the open string amplitudes include just one of the six cyclic permutations, with poles in the indicated
+> channels."
+
+**⇒ §12.8 对 (6.6.22)/(6.6.23) 结构、`sin[πα_c(t)]`、以及第二个 `A_o` 的复共轭 `*` 的三条裁定，本轮全部复核无误。**
+
+#### (d) 同页上下文（p.195，逐字，补 §12.8）
+
+> "The tensor structure of the closed string amplitude (6.6.19) is just two copies of that in the open string
+> amplitude (6.5.15), **if one sets `α' = 2` in the closed string and `α' = ½` in the open**. The same holds for the
+> amplitude (6.6.14). This is a consequence of the factorization of free-field expectation values on the sphere into
+> holomorphic and antiholomorphic parts. **A similar factorization holds for four or more closed strings *before*
+> integration over the vertex operator positions.** Further, by careful treatment of the contour of integration it is
+> possible to find relations between the integrated amplitudes."
+
+⚠ 注意 `α' = 2` / `α' = ½` 这句**只针对张量结构**（(6.6.19) vs (6.5.15)、以及 (6.6.14)），
+**不是** (6.6.21)/(6.6.23) 的参数替换规则的原书表述；两者比值同为 4，但**原书没有把它们等同起来**。
+
+#### (e) p.194 顺带落实（补 §12.8 的 (6.6.14)–(6.6.20)，全部逐字复核）
+
+| 式号 | 逐字内容 | 与 §12.8 |
+|---|---|---|
+| (6.6.13) | `S_{S₂} ∝ exp[ −(α'/2)( s ln sα' + t ln tα' + u ln uα' ) ]` | ✓ |
+| (6.6.14) | `= −(πiα'/2) g'_c e_{1μν} k₂₃^μ k₂₃^ν (2π)²⁶δ²⁶(Σ_i k_i)`，且 `e_{1μν}e_1^{μν} = 1` | ✓ |
+| (6.6.15) | **`g'_c = (2/α') g_c`**；原书前一句：「**Expanding the Virasoro–Shapiro amplitude (6.6.10) on the `s = 0` pole and using unitarity determines**」 | ✓（且**首次记下它依赖 (6.6.10) 的 `s=0` 极点**） |
+| (6.6.16) | `**S**_T = −½∫d²⁶x(−G)^{1/2}e^{−2Φ̃}( G^{μν}∂_μT∂_νT − (4/α')T² )` | ✓ |
+| (6.6.17) | `G̃_{μν} = η_{μν} − 2κ e_{μν} e^{ik·x}`；原书下一句「Note that this is the **Einstein metric**, whose action (3.7.25) is independent of the dilaton」 | ✓ |
+| (6.6.18) | **`κ = π α' g'_c = 2π g_c`** | ✓ |
+| (6.6.19) | `S_{S₂}(k₁,e₁;k₂,e₂;k₃,e₃) = (iκ/2)(2π)²⁶δ²⁶(Σ_i k_i) e_{1μν}e_{2αβ}e_{3γδ} T^{μαγ}T^{νβδ}` | 补（**首次抄出**） |
+| (6.6.20) | `T^{μαγ} = k₂₃^μ η^{αγ} + k₃₁^α η^{γμ} + k₁₂^γ η^{μα} + (α'/8) k₂₃^μ k₃₁^α k₁₂^γ` | 补（**首次抄出**） |
+
+---
+
+### 14.4 本轮对图的建议
+
+> 按 `literature/CLAUDE.md` 规则：以下是**给 curator 的建议**，researcher 不改 `graph/`。
+> 每条都标明「是抽取内容」还是「是抽取者的推断」。
+
+#### A. `spectrum.massless-open-pole-requires-chan-paton` —— **不需要换代；但 sources/notes 必须改，且值得考虑新建一条更强的卡**
+
+**不需要换代的理由**：卡片 statement 的 (1)(2) 与原书 p.183 **完全一致**，只是原书讲得**更强**。
+statement 文本没有任何一句被推翻。
+
+**必须改的 sources[].note（本项目本轮最有价值的一处升级）**：
+- 现 note 写「⚠ 原书是否明确写出这一相消**未核实**（[S] 的正文如此陈述）」——**此句应删除**，改为：
+  **「§14.1（原书核实 2026-09-11，p.183 逐字）：原书自己写出了相消，逐字为
+  『Because the residue at s = 0 in (6.4.17) is odd in u − t, this pole actually cancels that from I(s,u),
+  as do all poles at even multiples of 1/α'.』等级 L1。」**
+- 现 note 写「⚠ 需要下游注意的一点张力：(6.4.18) 的塔把 α's = 0 与 −1,1,2,… 并列，表面上像是在说 α's = 0 处有极点；
+  **哪一边是原书本意，本图未裁定**」——**此「未裁定」现在可以关闭**：
+  **原书 p.183 的第一句「These are precisely the positions of the open string states」表明 (6.4.18) 说的是
+  「开弦态的位置」，随后立刻声明其中偶数倍的极点在纯四快子振幅里相消。两者不矛盾，卡片 (1) 的读法就是原书本意。**
+- **loc 建议收紧**：现写 `"§6.4, eq. (6.4.17)（α's = 0 处的极点），p.179–183; …"`
+  → 建议 `"§6.4, eq. (6.4.16)–(6.4.18)，p.182；相消的原书陈述在 p.183 第 1 段（无式号）；(6.5.6)/(6.5.9) p.184–189"`。
+  **(6.4.17) 在 p.182 不在 p.183；相消那句在 p.183 且没有式号。**
+
+**★ 建议新建一条卡（不是换代，是补一条更强的兄弟卡）**：
+原书说的是**一整族**极点相消（`α's = 0, 2, 4, …`，即 `1/α'` 的偶数倍），存活的是 `α's = −1, 1, 3, …`。
+现卡片只覆盖 `α's = 0`。建议新建
+`spectrum.even-level-open-poles-cancel-without-chan-paton`（名字由 curator 定），
+statement 直接引原书那一句，`loc = §6.4, p.183 第 1 段（无式号）`，**status 由推导决定**，
+并在两卡之间建「后者蕴含前者」的关系或让新卡 supersede 旧卡（**换代与否由 curator/lead 裁量**）。
+⚠ **原书对「为什么偶数倍都相消」没有给论证**，只有 `α's = 0` 那一例给了机制（留数奇于 `u−t`）；
+新卡的推导必须把这一点写成 gap。
+
+**★ 一条必须写进 notes 的禁令**：
+**不得**把相消机制写成「因子 `(1+α's)` 抵消」。原书的机制是**不同循环序之间**的相消
+（`I(s,t)` 对 `I(s,u)`，靠留数在 `u−t` 下为奇函数）。这是本轮排除的一个具体误解。
+
+#### B. `spectrum.veneziano-amplitude-weak` —— **完整卡可以建，且本轮之后没有任何剩余障碍**
+
+- (6.4.23) 的完整表达式已由 §12.8 逐字取得（前因子 `2i g_o²/α' × (2π)²⁶δ²⁶(Σk_i)`），
+  本轮 **p.183 页图复核无误**（(6.4.19)/(6.4.20)/(6.4.21)/(6.4.22)/(6.4.23)/(6.4.24) 全部再读一遍，无差异）。
+- 卡片 notes 已写明「升级路径（须新建节点）——前提已于 2026-09-11 满足」。
+- ⇒ **建议：可以新建 `spectrum.veneziano-amplitude`（完整形式），并给 weak 卡写 `superseded_by`。**
+
+**新卡 statement 应逐字采用（L1）**：
+```
+S_{D₂}(k₁;k₂;k₃;k₄) = (2i g_o²/α') (2π)²⁶ δ²⁶(Σ_i k_i)
+    × [ B(−α_o(s),−α_o(t)) + B(−α_o(s),−α_o(u)) + B(−α_o(t),−α_o(u)) ]     (6.4.23)
+B(a,b) = ∫_0^1 dy y^{a−1}(1−y)^{b−1}                                        (6.4.19)
+α_o(x) = 1 + α'x                                                            (6.4.20)
+B(−α_o(x),−α_o(y)) = Γ(−α'x−1)Γ(−α'y−1)/Γ(−α'x−α'y−2)                      (6.4.24)
+loc = §6.4, eqs. (6.4.19)/(6.4.20)/(6.4.23)/(6.4.24), p.183
+```
+**新卡必须带的两条 note（都来自本轮/上一轮的原书核实）**：
+1. **(6.4.23) 的三项 Beta 中，`α's` 为 `1/α'` 偶数倍的极点全部相消**（p.183），
+   故**不得**由 (6.4.23) 的形式断言「所有 Beta 极点都对应物理中间态」——指向 A 节的卡片。
+2. **原书没有把「六个循环序合并成三项」的过程写出来**（weak 卡 notes 里 curator 的因子 2 对账仍是推断），
+   本轮**没有**新增证据。⚠ 这条不要因为 (6.4.23) 升 L1 而被误认为已解决。
+3. ⚠ **(6.4.22) 是 `Γ(a+b)B(a,b) = Γ(a)Γ(b)`**（p.183 逐字），即 `B` 的 Γ 商形式**在原书里有推导**
+   （从 (6.4.21) 换元 + 乘 `e^{−w}` 积分）——**这与 (6.6.10) 的复情形（exercise 6.10，无推导）形成对比**，
+   `math.euler-beta-integral` 的来源可以据此加强。
+
+#### C. `spectrum.virasoro-shapiro-amplitude` 的 loc —— **确认 `§6.6, eq. (6.6.10), p.193` 正确；但 note 要改三处**
+
+**loc 本身无需改**：`"§6.6, eq. (6.6.10)，p.193"` **经本轮页图确认完全正确**（p.193 = PDF 第 28 页）。
+
+**note 必须改的三处：**
+1. **删掉「⚠ 2026-09-11 的原书核实没有覆盖本条（negative evidence）」整段**，
+   改为「**§14.2（原书核实 2026-09-11，p.193 逐字）**：(6.6.10) 前因子 `(8πi g_c²/α')(2π)²⁶δ²⁶(Σ_i k_i)`
+   与卡片一致，`α_c(x) = 1 + α'x/4` 一致，`C_{S₂} = 8π/(α'g_c²)`（(6.6.8)）一致。**等级升 L1。**」
+2. **新增「参数顺序」一条**：**原书写 `C(−α_c(t), −α_c(u))`，卡片写 `C(−α_c(u), −α_c(t))`；
+   因 (6.6.11) 的 `C(a,b)` 在三个参数中全对称，两者取值相同，故不换代**，
+   但「不是原书逐字排版」这一免责句的**确切所指**现在是这个顺序差异（以及下一条的记号差异）。
+3. **新增「记号归属」一条**：**三参数 `B(x,y,z) = Γ(x)Γ(y)Γ(z)/(Γ(x+y)Γ(x+z)Γ(y+z))` 是 [S] 的记号，
+   原书没有这个符号**；原书 (6.6.11) 直接把 `C(a,b)` 写成 Γ 商并用 `a+b+c = 1` 定义 `c`。
+
+**★ 推导节点 `spectrum.virasoro-shapiro-amplitude--via-complex-beta-integral` 必须加一条 gap（本轮最重要的一条）**：
+> **原书把 (6.6.5) → (6.6.10) 的计算留作 exercise 6.10，正文不给推导**（p.193 逐字：
+> "can be expressed in terms of gamma functions (exercise 6.10)"）。
+> ⇒ 该推导节点的 `polchinski-1998-v1` 来源**只支持结果，不支持推导**；
+> 推导本身的唯一来源仍是 `schrans-2020` §6.64。**status 维持 `physical-argument` 是恰当的。**
+> 这条与 §12.3 的「level 2 分析是 exercise 4.1」是同一类作者自承缺口，
+> 建议一并进 §12.10 C 表（编号续 17/18）。
+
+其余可直接升 L1 的邻卡：
+- `spectrum.closed-string-four-tachyon-integral`：(6.6.2)/(6.6.4)/(6.6.5) 全部 p.192–193 逐字确认，
+  **loc 与 statement 均无需改，note 可把等级从「L1（schrans-2020 逐页读到）」改为「L1（原书 p.192–193 页图）」**。
+  ⚠ 卡片 notes 说「(2) 中被积函数的指数照抄抽取记录的转述」——**现已由原书直读证实，可去掉这层保留**。
+- `spectrum.sphere-normalization-from-factorization`：(6.6.6)/(6.6.7)/(6.6.8) 逐字确认（见 §14.2(a)），
+  **可加 note：原书 (6.6.7) 的 `∼` 号（按 Notation p.xix = "equal up to nonsingular terms"）**。
+
+#### D. `spectrum.open-closed-four-point-relation-weak` —— **数值前因子的存疑可以撤销；(6.6.21) 的张力转为「原书印刷有误」并保持不引用**
+
+1. **sources[].note 第 (3) 条「⚠ 数值前因子 πi g_c²α'/(4 g_o⁴) 是页图判读，标 L1-读图存疑」→ 可撤销存疑，升 L1。**
+   依据：本轮两次独立渲染 + 抽取者从 (6.6.4)/(6.6.8)/(6.4.23)/(6.6.21) 的复算，**两条都给出 `1/4`**。
+   同时**订正一处措辞**：原书**不是**写成单一分式 `πig_c²α'/(4g_o⁴)`，而是**分式 `πig_c²α'/g_o⁴` 后跟一个独立的 `¼`**；
+   两种排版同值，但「逐字形式」应按后者记。
+2. **notes 第 1 条里「researcher 复算的比例常数 πig_c²α'/g_o⁴ 与原书差一个 1/4，这一差异尚未裁定」→ 可关闭**：
+   **裁定为 researcher 漏读了那个独立的 `¼`**（同一行里有三个 `¼`，另两个在 `A_o` 的参数里）。
+3. **notes 最后一段「一处参数记号张力」→ 改写**（原文见该卡 line 107–113）：
+   现在的结论是「**原书 (6.6.21) 印的确实是 `4α'`（两次读图一致，且与同页 `¼α'` 字形可区分）；
+   但由 (6.6.5)+(6.6.22)+(6.4.20) 复算、以及同页『α' = 2 in the closed / α' = ½ in the open』一句，
+   正确值应为 `¼α'`。本图判定 (6.6.21) 的印刷文本不可直接引用**」。
+   **该卡不依赖 (6.6.21)，故仍不需换代。**
+4. **升级路径**：卡片 notes 说「先由 researcher 重读原书 p.195 确认前因子，**再**新建完整卡」——
+   **该前提本轮已满足**。⇒ **可以新建 `spectrum.open-closed-four-point-relation`（完整形式）并给 weak 卡写 `superseded_by`。**
+   新卡 statement 建议逐字：
+   ```
+   A_c(s,t,u,α',g_c) = (π i g_c² α'/g_o⁴)·(1/4)·sin[π α_c(t)]·A_o(s,t,¼α',g_o)·A_o(t,u,¼α',g_o)^*   (6.6.23)
+   loc = §6.6, eq. (6.6.23), p.195
+   ```
+   新卡**必须**带的 note：(i) 第二个 `A_o` 带复共轭是原书写法，[S] 认为不需要（分歧仍在案）；
+   (ii) 开弦振幅只取六个循环置换中的一个；(iii) **不得同时引用 (6.6.21)**，理由见第 3 条；
+   (iv) Q14（官方勘误表未取得）仍未关闭，(6.6.21) 的误印是否已在勘误表上**本图无法判定**。
+
+#### E. 新增/更新的疑问
+
+| 编号 | 内容 | 状态 |
+|---|---|---|
+| **Q28（新）** | **(6.6.21) 的第三参数在原书印作 `4α'`，与原书自身其余部分不自洽。** 是原印误、还是官方勘误表已收录而 2005 数字化本漏改？ | **开着**。需要 (a) Polchinski 官方勘误表（Q14 的子问题），或 (b) PDF 文本层/另一印次的独立核对。本轮 WebSearch 配额已用尽（200/200），未能检索 |
+| Q16 | (6.6.23) 的结构 / 共轭 / 数值前因子 | **本轮全部关闭**（结构与共轭 §12.8 已关，数值前因子 §14.3 关闭） |
+| Q14 | Polchinski 官方勘误表未取得 | **仍开着**，且被 Q28 再次需要 |
+
+#### F. 本轮的 negative evidence（须显式记下）
+
+1. **没有核对 (6.5.14)/(6.5.15)/(6.5.16)**（Chan–Paton 定 Yang–Mills 耦合、开弦四规范玻色子振幅）——
+   `spectrum.chan-paton-yang-mills-coupling` 与 §12.8 那条「(6.5.16) 是否也有同型式子本轮未核」**仍未核**。
+2. **没有核对 exercise 6.10 本身**（原书习题在章末，pp. 203–205 一带，本轮未读）。
+3. **没有核对 figure 6.3(b)/(c)**（p.183 的相消论证引用了它们），只读到正文引用。
+4. **没有核对 (6.6.24)/(6.6.25)** 的完整内容（只见到 (6.6.24) 的首行）。
+
+---
+
 
 
 
