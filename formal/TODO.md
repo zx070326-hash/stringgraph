@@ -485,7 +485,7 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       目前只在单个 Fock 空间上，塔上的物理子模尚未定义）。
 
   - [x] (5) **横向代数第一步：正交动量的顶点算子彼此对易**：
-    `StringFormal/NoGhost/VertexCommute.lean`，无 sorry，11 条声明公理只有标准三条
+    `StringFormal/NoGhost/VertexCommute.lean`，无 sorry，17 条声明公理只有标准三条
     （2026-09-11 用 `--import StringFormal.NoGhost.VertexCommute --all` 复核）。
     - **无缩并引理** `Fock.vertexSub_creaExp_of_dotVec_zero`：`b·b' = 0` ⟹
       `vertexSub b (Φ^{b'}_j) = Polynomial.C (Φ^{b'}_j)`，即平移 `X_{μ,l} ↦ X_{μ,l} - b^μ T^l`
@@ -515,15 +515,29 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       **数学要点**：`k_0² ≠ 0` 时结论**假**——收缩给出单值因子 `(w/z)^{mn k_0²} ≠ 1`，
       所以这条对易性是「类光参考矢量」这个假设第二次真正起作用的地方
       （第一次是 (3e) 的塔上共形权）。
-    - **未做 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
-      需要三块。① `Φ^{b+b'}_M = Σ_{j+k=M} Φ^b_j Φ^{b'}_k`（即 `E_-(b)E_-(b') = E_-(b+b')`，
-      **与正交性无关**），可照 (3a) 的欧拉递推加强归纳证，主要工作量是三角形双重求和的换序；
-      ② 局部有限性：对固定的 `P`，只有有限多个 `K` 使 `V^{(b)}_{L-K}V^{(b')}_K P ≠ 0`
-      （下端来自 `vertexOsc_apply_eq_zero_of_level`，上端要用
-      `vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}` 提到左边，再对 `Ψ^{b'}_M P` 的 level 用
-      同一条引理——**朴素的 level 计数不够**，因为 `V^{(b')}_K P` 的 level 随 `K` 增长）；
-      ③ 用 `lsumLocFin` 组装后，两边满足同一条 `b+b'` 的产生递推，
-      由 `Fock.vertexOsc_unique` 归约到真空即 ①。估计 150–250 行。
+    - **部分做了 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
+      需要三块，**① 已证**。
+      ① **相干态加法公式** `Fock.creaExpPair_eq_creaExp_add`：
+      `Φ^{b+b'}_j = Σ_{p+q=j} Φ^b_p Φ^{b'}_q`（即 `E_-(b)E_-(b') = E_-(b+b')`），
+      **对任意动量成立，不需要正交性**——产生半永远是交换环里的乘法，缩并只出在湮灭半。
+      证明是欧拉递推的唯一性：新引理 `Fock.creaExpPair`（卷积，窗口 `Icc 0 j`）、
+      `Fock.creaExpPair_eq_sum_Icc`（任何包含 `[0,j]` 的窗口都算得对）与
+      `Fock.sum_mode_creaExpPair_eq_smul`（卷积满足**同一条** `b+b'` 的欧拉递推：
+      把权 `j = p + (j-p)` 劈开，对两个因子各用一次 `Fock.sum_mode_creaExp_eq_smul`，
+      产生算子提出来后两项都重组成移位后的卷积），再在 `ℚ`-代数里除以 `j`。
+      ② **仍缺** 局部有限性：对固定的 `P`，只有有限多个 `K` 使
+      `V^{(b)}_{L-K}V^{(b')}_K P ≠ 0`（下端来自 `vertexOsc_apply_eq_zero_of_levelBound_lt`，
+      上端要用 `vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}_{K+M}` 提到左边，
+      再对 `Ψ^{b'}_M P` 用同一条引理——**朴素的 level 计数不够**，因为 `V^{(b')}_K P` 的 level
+      随 `K` 增长）。缺的辅助事实是 `vertexAnn b M` 把 level `N` 送到 level `N - M`
+      （于是 `levelBound (Ψ^b_M P) ≤ levelBound P`），估计 60–100 行。
+      ③ **仍缺** 用 `lsumLocFin` 组装后两边满足同一条 `b+b'` 的产生递推，
+      由 `Fock.vertexOsc_unique` 归约到真空即 ①（真空值 `Σ Φ^b_JΦ^{b'}_K` 正是卷积）。
+      估计 ②③ 合计 150–250 行。
+      **另一条更省的路**：湮灭半也有加法公式 `Σ_{L1+L2=M} Ψ^b_{L1}Ψ^{b'}_{L2} = Ψ^{b+b'}_M`
+      （两次平移的复合＝平移之和，代数同态在生成元上比较即可，**且这个和是有限的**），
+      配上 ① 可以把整个乘积公式化成三重和的重排；但重排里对 `K` 的求和仍是无限的，
+      局部有限性 ② 绕不过去。
     - **未做 (5b)** 加权和 `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`：这是 `[A^ε_m, A^δ_n]`
       的真正内容，(5a) 只是它的输入。物理上它是「`:(k_0·∂X) e^{i(m+n)k_0·X}:` 在 `m+n ≠ 0` 时是
       全导数 `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，留数为零；`m+n = 0` 时退化成 `k_0·∂X`，

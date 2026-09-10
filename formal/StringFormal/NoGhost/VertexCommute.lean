@@ -42,6 +42,10 @@ spacetime contraction of `StringFormal/NoGhost/DDF.lean`.
   and no monodromy factor.
 * **`towerVertex_comm_of_isotropic`**, `lie_towerVertex_towerVertex_of_isotropic` — on the
   DDF momentum tower, `k_0² = 0` ⟹ `V^{(m)}_J` and `V^{(n)}_K` commute.
+* **`Fock.creaExpPair_eq_creaExp_add`** — the addition formula
+  `Φ^{b+b'}_j = Σ_{p+q=j} Φ^b_p Φ^{b'}_q`, i.e. `E_-(b) E_-(b') = E_-(b+b')`.  This one needs
+  *no* hypothesis on the momenta; it is kept here because it is the vacuum value of the
+  same-point product of two vertex operators.
 
 ## Mathematical remarks (for the dependency graph)
 
@@ -51,12 +55,13 @@ spacetime contraction of `StringFormal/NoGhost/DDF.lean`.
    `lie_towerLop_towerVertex_of_pos`) where light-likeness of the reference vector does real
    work.
 2. **What is still missing for `[A^ε_m, A^δ_n]`.**  Two further steps, neither of which is
-   in this file:
-   (a) the *same-point product* `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L` — needs the
-   addition formula `Φ^{b+b'}_M = Σ_{j+k=M} Φ^b_j Φ^{b'}_k` (true for *all* momenta, it is
-   `E_-(b)E_-(b') = E_-(b+b')`), plus local finiteness of the `K`-sum, for which the naive
-   level count is *not* enough: one must first pull `Φ^{b'}` out to the left using
-   `Fock.vertexOsc_creaExp_mul_of_dotVec_zero`;
+   finished here:
+   (a) the *same-point product* `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`.  Its vacuum
+   value is `Fock.creaExpPair_eq_creaExp_add` (done); what is missing is local finiteness of
+   the `K`-sum — for which the naive level count is *not* enough, one must first pull
+   `Φ^{b'}` out to the left using `Fock.vertexOsc_creaExp_mul_of_dotVec_zero` and then bound
+   `levelBound (vertexAnn b' M P) ≤ levelBound P` — and the `lsumLocFin` assembly plus the
+   rigidity argument `Fock.vertexOsc_unique` for the momentum `b + b'`;
    (b) the *weighted* sum `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`, whose `δ_{m+n,0}`
    is a total-derivative (residue) statement and whose `m` is where the DDF normalisation
    `2α' k_0·p = 1` first enters.
