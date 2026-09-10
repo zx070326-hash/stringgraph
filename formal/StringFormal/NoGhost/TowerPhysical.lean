@@ -66,4 +66,31 @@ lemma mem_towerPositiveModeSubmodule {Ψ : TowerFock D R} :
 
 end PositiveMode
 
+
+/-! ### The DDF operators preserve the positive-mode subspace -/
+
+/-- **The DDF operators preserve the Virasoro primary conditions.**
+
+If `Ψ` satisfies `L_m Ψ = 0` for all `m ≥ 1`, then so does `A^ε_n Ψ`, given the DDF
+normalisations `k_0² = 0` (`hbb`), `2α' k_0 · p = 1` (`hba`) and transversality `ε · k_0 = 0`
+(`hεb`).
+
+The proof is one line of algebra on top of `lie_towerLop_ddfOp_of_pos`:
+`L_m (A^ε_n Ψ) = A^ε_n (L_m Ψ) + ⁅L_m, A^ε_n⁆ Ψ = A^ε_n 0 + 0 = 0`.
+
+This is the "positive-mode half" of the statement that the DDF operators map physical states
+to physical states.  The `L_0` half is **not** proved here and is not even stated: see the
+module docstring. -/
+theorem ddfOp_mem_towerPositiveModeSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) (n : ℤ)
+    {Ψ : TowerFock D R} (hΨ : Ψ ∈ towerPositiveModeSubmodule η a b) :
+    ddfOp η a b ε hη hεb n Ψ ∈ towerPositiveModeSubmodule η a b := by
+  rw [mem_towerPositiveModeSubmodule] at hΨ ⊢
+  intro m hm
+  have h := lie_towerLop_ddfOp_of_pos η a b ε hη hbb hba hεb hm n
+  have h' := congrArg (fun T : Module.End R (TowerFock D R) => T Ψ) h
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    LinearMap.zero_apply, sub_eq_zero] at h'
+  rw [h', hΨ m hm, map_zero]
+
 end StringFormal.NoGhost
