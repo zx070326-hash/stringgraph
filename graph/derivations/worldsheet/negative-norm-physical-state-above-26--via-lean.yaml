@@ -31,11 +31,13 @@ depends_on:
       （a^0 = 3/2、a^1 = 1/2）就是在它们之上算出 α_0·α_0 = −2 的。字面依赖。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{exists_zeroModeSq_eq_neg_two, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule, exists_mem_physSubmodule_pairing_self_neg}（末尾另有 D = 27、K = ℚ 的具体 example）"
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{exists_zeroModeSq_eq_neg_two, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule, exists_mem_physSubmodule_pairing_self_neg, exists_mem_physSubmodule_pairing_self_neg'}（末尾另有 D = 27、K = ℚ 的具体 example）"
     note: |
       本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 ea303c5（"formal: add the D>26 ghost
       (explicit negative-norm level-two physical state)"），合并进 main 的提交 c32f026。
-      全文 grep `sorry` 零命中。
+      全文 grep `sorry` 零命中。加强版 `…_neg'`（结论含 zeroModeSq b = -2 ∧ b ≠ 0）于
+      2026-09-11 由 formalizer-ghost-witness-p 加入并复核：lake build 通过，check_axioms
+      对 3 条声明 ok=3（公理仅 propext / Classical.choice / Quot.sound）。
   - ref: brower-thorn-1971
     loc: "Goddard 2008 综述 arXiv:0802.3249 归属于此文；本文摘要未见维数条件，未裁决"
     note: |
@@ -68,14 +70,8 @@ summary: |
      文件末尾另有一条具体的 `example`：D = 27、K = ℚ 时物理态子空间含鬼。
 gaps:
   - |
-    (i) **目标第 (4) 条（见证动量非零）在 Lean 中未单列为定理**。
-    `exists_mem_physSubmodule_pairing_self_neg` 的结论只写 ∃ b ψ，没有把
-    `zeroModeSq (minkowski D K) b = -2` 一并输出；α_0 ≠ 0 是由第 (1) 条的
-    α_0·α_0 = −2 ≠ 0 得到的两行推论（b = 0 ⟹ zeroModeSq = 0）。
-    这一步没有机器检查，但用到的第 (1) 条本身（`exists_zeroModeSq_eq_neg_two`）是定理。
-    **对下游要紧**：worldsheet.no-ghost-theorem-v4 第 (2) 条的量词就是 p ≠ 0，
-    若日后要把那一条完全机器化，应请 formalizer 把 `zeroModeSq b = -2`（或直接 `b ≠ 0`）
-    加进 `exists_mem_physSubmodule_pairing_self_neg` 的结论。
+    (i) 【已关闭 2026-09-11】目标第 (4) 条现由 `exists_mem_physSubmodule_pairing_self_neg'`
+    的结论 `b ≠ 0` 逐字覆盖；formalizer 指出 b ≠ 0 只需 zeroModeSq b ≠ 0，不需 D > 26。
   - |
     (ii) **只覆盖 a = 1**。「D > 26 时对任意截距 a 均有负模态」未证，也无可核实的文献来源。
   - |
@@ -90,14 +86,13 @@ gaps:
     （无完化）、对角 η、R-双线性型而非 Hermitian 半双线性型。
     因此「负模态」是双线性型意义下的 ⟨ψ,ψ⟩ < 0，不是 Hilbert 空间上的负范数。
   - |
-    (vi) **公理检查未逐字登记**。formal/TODO.md 的 `negative-norm-above-26` 条目没有像该文件
-    其余条目那样写「无 sorry，公理只有标准三条」；curator 只做了 grep（`sorry` 零命中），
-    **未重跑 `lake build`，也未跑 `uv run stringgraph check-axioms`**。
+    (vi) 【已关闭 2026-09-11】formal/TODO.md 已登记「无 sorry，公理只有标准三条」并附复核命令；
+    lead 在合并后于 main 重跑 lake build 与 check-axioms（见 sources note）。
 notes: |
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   本推导依据的是 formal/ 的自述与 formal/TODO.md 的登记，以及 c32f026 已由 lead 合并进 main；
-  公理一项的登记缺失见 gaps (vi)。
+  公理登记已补齐（gaps (vi) 关闭）。
 
   【这条推导为什么值得单列】它把 worldsheet.no-ghost-theorem-v4 第 (2) 条从
   「本项目的手算 + 无逐字来源的动量量词」变成了机器验证的存在性见证。
