@@ -52,6 +52,20 @@
 - **a^g 正规序常数**：reviewer-ch23 裁定 a^g = −1（λ = 2），抽取记录 polchinski-1998-v1 §1.1/E43 的 a^g = 0 是误记，researcher 订正中。
 - **Polchinski 原书核对**：仍无持书者。E34 改由 Kac–Raina 等数学来源支撑，E53、E58 继续挂"二手源核实"gap。
 
+## 瓶颈分析（2026-09-10，`stringgraph why`）
+
+- **光锥路线**（critical-dimension-light-cone）：瓶颈是 ζ 正规化、振子对易关系的无穷模式重排、光锥规范可达性、Polyakov–Nambu–Goto 经典等价，四处 physical-argument。
+- **Weyl 反常路线**（critical-dimension-weyl-anomaly）：全部瓶颈汇聚到两个根——`laplacian-log-contact-term`（缺数学来源，researcher 找 PDE 教材定理中）与 `operator-product-expansion`（收敛未证）。中间节点自身都 rigorous。**升级该路线唯一有效动作是严格化这两个根。** `free-boson-central-charge-d` 因 `--via-mode-algebra` 绕开 OPE 已是 rigorous。
+- **旧协变路线**：no-ghost-theorem-v3/v4 与 subcritical 均 rigorous，但可追溯性弱（GT 1972 正文未获取；LZ 1991 到本项目对象的翻译字典标 inferred）。
+
+## 待拆清单（定义卡内嵌命题）
+
+- `tt-ope-central-charge`、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
+- `worldsheet.virasoro-algebra`（唯一性断言）
+- `worldsheet.verma-module`（构造+万有性质+分级可标 formalized；PBW 基与 dim p(N) 另立）
+- `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
+- `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
+
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
 
 - **`worldsheet.ope-convergence` 公理节点**（researcher Q3）：Polchinski 用围道变形从 OPE 推 Virasoro 代数，书中不证 OPE 收敛。图里现有的 `virasoro-algebra` 是抽象李代数定义，本身 rigorous，不受影响；受影响的是尚未建立的"自由玻色子的 Sugawara 构造满足 Virasoro 关系"一类节点。建 Sugawara 节点时再决定是否挂此公理。
