@@ -28,16 +28,61 @@ sources:
   - ref: ooguri-vafa-2006
     loc: "arXiv:hep-th/0605264v1, §3.1, 第一个 Example v（Calabi-Yau threefolds）, p.9"
   - ref: bagger-witten-1983
-    loc: "**未核实**：本项目未获取该文正文，定理编号与页码未核对（bib note 记为 L0）。仅知起始页 1（由 ooguri-vafa-2006 参考文献 [15] 的 L1 转录核实）。"
+    loc: "Nucl. Phys. B222 (1983) 1–10"
+    note: >-
+      ★ **篇级定位（只能写到这一层）**。本项目未获取该文正文（L0）：**任何公式号、定理号、节号都不得写**。
+      已 L2 核实的只有元数据（INSPIRE recid 13231：卷 222、页 1–10、DOI 10.1016/0550-3213(83)90605-3）
+      与**逐字摘要**——⚠ 摘要用的词是 "a quaternionic manifold"（**不是** "quaternionic Kähler"），
+      且**摘要里没有 curvature / negative 任何一词**。"quaternionic Kähler" 是本项目沿用后世文献的术语现代化。
+      结论本身的依据是下面两条**互相独立**的 L3 转引。
+  - ref: chang-sezgin-tanii-2023
+    loc: "arXiv:2304.06073v1, §2.1（其 ref [10]）"
+    note: >-
+      **L3 佐证之一**（researcher 亲自读到 arXiv 原生 HTML）。逐字：
+      "In 1983 Bagger and Witten [10] showed that arbitrary number of hypermultiplets coupled to
+      N=2 supergravity in 4D parametrise a quaternionic Kähler (QK) manifold with constant
+      negative scalar curvature."
+      ⚠ 注意量词是**常负（constant negative）**，即处处为负；与 Ooguri–Vafa Conjecture 3 的
+      "无穷远处非正"不是同一个量词（见 notes）。
+      该文另在 (2.3)、(2.5)、§3.2 三处引 [10]——拿到 BW 原文后应先去这四处找公式号。
+  - ref: vandoren-2025-hypermultiplets
+    loc: "arXiv:2501.01900v2, §2（其 ref [23]；数值出自本文自己的公式 (2)）"
+    note: >-
+      **L3 佐证之二**（与上一条作者不相交、年份不同，两者都不引 ooguri-vafa-2006 ⇒ 相互独立）。
+      逐字："only QK manfifolds with negative scalar curvature can be coupled to supergravity"
+      （原文排印 manfifolds）+ "Bagger and Witten computed its value to be"，随后是**其自己的
+      公式 (2)** R(g) = −8κ²(n²+2n)。
+      ⚠⚠ **`(2)` 是 Vandoren 的编号，不是 Bagger–Witten 的；禁止写"Bagger–Witten eq. (2)"。**
+      该数值**不进本卡的 statement**：n 的定义与 κ 的归一化本项目未逐字取到（L0），搬运会失真。
 tags: [swampland, supergravity, hypermultiplet, curvature, quaternionic-kahler]
 notes: |
   from: ooguri-vafa-2006#E19、#U2、#Q2。
 
-  【status = physical-argument 的理由（直到核实为止）】本卡的实质来源是 Bagger–Witten 1983，
-  **该文正文本项目未获取（L0）**；目前只有 Ooguri–Vafa 的一句 "it is known that … [15]" 转述。
-  抽取记录把它列为"swampland 区最有希望通向 rigorous 的物理支点"，但**在抽到 Bagger–Witten
-  之前只能标 physical-argument**。升级路径：抽取 Bagger–Witten 1983，核实其中确有该定理及其
-  假设，然后新建 kind: proof 的推导。
+  【★ status 上限就是 physical-argument，本卡**不是**通向 rigorous 的支点（2026-09-11 口径修正）】
+  原 notes（与 bagger-witten-1983 的旧 bib note）称本卡是"swampland 区最有希望通向 rigorous 的
+  物理支点"，**这个说法已作废**。理由三条：
+    1. **Bagger–Witten 1983 是超引力的场论构造，不是数学定理** —— 它的论证是超对称变换的相容性
+       分析，不是数学文献意义上的完整证明。按 docs/STATUS_LEVELS.md 第 4 级的判据（来源必须是
+       数学或数学物理文献、有数学界接受的完整证明），它**够不到 rigorous，上限是 physical-argument**。
+       即使日后拿到 BW 正文并核实公式号，上限也不变——正文只能把 L3 升到 L1，不能改变论证的性质。
+    2. **覆盖域不同**：BW 覆盖的是 4d N=2 超多重态耦合到超引力，不是"一般量子引力理论的模空间"。
+    3. **量词不同**：L3 转引说的是"constant negative"（处处常负），Ooguri–Vafa Conjecture 3 说的是
+       "无穷远处非正"。二者互不蕴含。
+  ⇒ swampland 区目前唯一**可能**通向 rigorous 的一支是 math.narain-moduli-space-finite-volume-v2
+  （Borel–Harish-Chandra），不是本卡。详见 literature/extractions/bagger-witten-1983.md Q3。
+
+  【来源结构：一手 L0 + 两条独立 L3】本卡的实质来源 Bagger–Witten 1983 **正文本项目未获取（L0）**，
+  loc 只能写篇级 `Nucl. Phys. B222 (1983) 1–10`，**任何公式号/定理号/节号都不得写**。
+  结论内容由两条互相独立的 L3 转引支撑（chang-sezgin-tanii-2023 §2.1；vandoren-2025-hypermultiplets §2），
+  外加 Ooguri–Vafa 的一句 "it is known that … [15]"。三条都不给 BW 的公式号。
+
+  【★ BW 摘要第二句是"引力解耦反例不构成反驳"这条记账红线的物理根据】BW 摘要第二句（L2 逐字层面）
+  说：**全局 N=2 允许的某些自相互作用在超引力中被禁止，反之亦然**。这正好解释了为什么
+  Ooguri–Vafa §3.1（耦合到超引力 ⇒ 曲率必负，本卡）与 §3.2 Example (b)（取 rigid limit 去掉引力
+  ⇒ 向量多重态 Ricci 反而正定，见 swampland.rigid-n2-vector-moduli-ricci-positive）**不矛盾**：
+  解耦极限下曲率变号不是反常，而是**理论本身换了**（可容许的自相互作用集合变了）。
+  ⇒ 这条记账红线（引力解耦反例不构成对沼泽地判据的反驳）挂在
+  **swampland.finiteness-criteria-fail-without-gravity**；本卡与那张卡是同一物理事实的两侧。
 
   【★ 原文编号误植】上引段末的 "satisfying the conjecture 2" 按内容应为 **conjecture 3**
   （Conjecture 2 讲轻粒子塔，与曲率无关；Conjecture 3 是唯一讲曲率的）。同文 §3.2 Example c

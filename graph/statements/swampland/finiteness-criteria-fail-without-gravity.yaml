@@ -49,6 +49,17 @@ notes: |
   【本卡与真反驳的对照】本批中唯一在适用域内的真反驳是
   swampland.wgc-sharp-form-i--via-so32-spinor（AMNV 作者本人："So (I) can't be right."）。
 
+  【★ 这条记账红线的物理根据：Bagger–Witten 1983 摘要第二句（2026-09-11 补）】
+  为什么"解耦引力后曲率变号"不算反常？**因为解耦极限换掉的是理论本身。**
+  Bagger–Witten, Nucl. Phys. B222 (1983) 1–10 的摘要第二句（L2 逐字层面）说：**全局 N=2 允许的
+  某些自相互作用在 N=2 超引力中被禁止，反之亦然**。
+  ⇒ Ooguri–Vafa §3.1（耦合超引力 ⇒ 超多重态模空间曲率必负，
+  swampland.hypermultiplet-moduli-negative-curvature）与 §3.2 Example (b)（rigid limit ⇒ 向量
+  多重态 Ricci 正定，swampland.rigid-n2-vector-moduli-ricci-positive）是**同一物理事实的两侧**，
+  不是矛盾：两边可容许的自相互作用集合本来就不同。
+  ⚠ **本条只作记账说明，不建依赖边**：BW 正文本项目未获取（L0），且这一句是关于"自相互作用集合"
+  的一般陈述，不直接蕴含本卡的任何具体违反例。详见 literature/extractions/bagger-witten-1983.md §5.2。
+
   【Ooguri–Vafa Example a 的额外价值】平行 Dp 膜上的规范理论给出"Conjecture 1 成立而
   Conjecture 2 失效"，即证明这**两条猜想逻辑独立**——与 §4.1 末的独立性声明一致。
 author: curator

@@ -11,6 +11,10 @@ depends_on:
       原文在给出这条支撑时把编号印成 "satisfying the conjecture 2"（§3.1, 第一个 Example v, p.9）；
       按内容应为 conjecture 3（Conjecture 2 讲轻粒子塔，与曲率无关）。**该判定是本项目的，非原文**，
       故本边标 inferred（抽取记录 ooguri-vafa-2006#Q2、#U4）。
+      ⚠ **第二个 inferred 的理由（2026-09-11 补）**：依赖卡的内容（据两条 L3 转引）是
+      "constant negative scalar curvature"（**处处**常负），而 Conjecture 3 断言的是**无穷远处非正**；
+      **量词不同，互不蕴含**。且依赖卡只覆盖 4d N=2 超多重态耦合超引力，不是一般量子引力模空间。
+      见 literature/extractions/bagger-witten-1983.md Q3。
   - id: conv.moduli-metric-planck-units
 sources:
   - ref: ooguri-vafa-2006
