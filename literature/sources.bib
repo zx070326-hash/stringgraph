@@ -266,7 +266,90 @@
   journal = {Physics Letters B},
   volume  = {149},
   pages   = {117--122},
-  year    = {1984}
+  year    = {1984},
+  note    = {**全文已核实（2026-09-11，researcher，六页逐页读图）** → extractions/green-schwarz-1984.md（E1--E20）。
+             预印本 CALT-68-1182（1984-09），**预印本题名为 "...GAUGE THEORY REQUIRE SO(32)"**（INSPIRE 15583 的 titles 字段两条并存）。
+             获取途径：archive.org 重印文集 `modern-kaluza-klein-theories`（Appelquist--Chodos--Freund eds., 1987）pp.608--613，
+             走 fulltext/inside.php 定位 + BookReaderImages.php 逐页取图（scale=1）。
+             **★ 年份订正（2026-09-11 第二轮，由 alvarez-gaume-witten-1984 抽取推出）**：
+             GS 参考文献 [3] 把 Alvarez-Gaume--Witten 印作「Nucl. Phys. B234 (**1983**) 269」，
+             此前记为「GS 误印」——**该判定已推翻**。AGW 原刊页眉逐字就是「Nuclear Physics B234 (**1983**) 269--330」（L1 核实），
+             GS 只是照抄。通行引法（Elsevier DOI / INSPIRE）作 1984。**两边都不算错，note 里说明即可。**
+             四条最易误引的边界（详见抽取记录）：
+             (1) **E8 x E8 不是 GS 独立发现**（致谢逐字：早期版本 "the cancellation of the other anomalies in that theory was overlooked"；
+             群论输入来自 Chapline--Slansky，独立作出同一观察的是 Dixon--Harvey--Witten 与 Thierry-Mieg）；
+             (2) **「只有 SO(32) 与 E8 x E8」不属于本文**（原文只说 "We only discuss SO(N), USp(N) and E8 x E8 explicitly"，摘要是充分条件）；
+             (3) **所有数值系数外包给 alvarez-gaume-witten-1984**（常数 c、(20) 的三系数、(22) 的相对归一化，GS 明说 "can be deduced from eq. (63) of ref. [3]"）；
+             (4) **`B ^ X_8` 记号不出现在原文**（原文是分开的 S_1 (18) / S_2 (21) / S_3 (23)），**杂化弦也不属于本文**（原文说 E8 x E8 超弦 "has not yet been constructed"）。
+             符号陷阱：GS (4) 是 `H = dB + omega^0_{3Y} - omega^0_{3L}`，与 Bilal (12.14) **两个 CS 项整体反号**。}
+}
+
+@article{alvarez-gaume-witten-1984,
+  author  = {Alvarez-Gaum{\'e}, Luis and Witten, Edward},
+  title   = {Gravitational anomalies},
+  journal = {Nuclear Physics B},
+  volume  = {234},
+  number  = {2},
+  pages   = {269--330},
+  year    = {1984},
+  doi     = {10.1016/0550-3213(84)90066-X},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，62 页逐页读图，无遗漏）** → extractions/alvarez-gaume-witten-1984.md。
+             INSPIRE recid **192309**；报告号 **HUTP-83/A039**；`external_system_identifiers` 含 **KEKSCAN 84-02-145**；Received 7 October 1983。
+             获取途径：**McGill 大学 PHYS 675 课程页的原刊逐页扫描件**
+             https://www.physics.mcgill.ca/~keshav/675/gaumewitten.pdf （3.2 MB / 62 页；WebFetch 落盘后 Read 带 pages 读图）。
+             INSPIRE 的 documents / urls 两字段皆空。重印于 *Current Algebra and Anomalies*（Treiman--Jackiw--Zumino--Witten eds.,
+             Princeton UP / World Scientific 1985）**Princeton 版 pp. 451--514**，但 archive.org 上那份（currentalgebraan0000unse）
+             是借阅制、fulltext/inside.php **403**，**GS 用的 archive.org BookReader 路线对借阅制 item 不适用**。
+             **★ 年份陷阱（必读）：本文印刷页眉逐字为「Nuclear Physics B234 (1983) 269--330」，而 DOI/INSPIRE/通行引法作 1984。**
+             本条按通行引法登记 1984；引用 green-schwarz-1984 的 ref [3] 写 1983 时不要判为 GS 的错。
+             **可引用的编号结果（均 L1 逐字）**：
+             **eq. (63), p. 306** = green-schwarz-1984 指名引用的那条，混合规范--引力反常的生成公式
+             `I_{1/2} = -S Tr(T_L^{a_1}...T_L^{a_r}) (i/(2pi)^{n/2}) R(eps,p) prod_{i=1}^{n/2} (x_i/2)/sinh(x_i/2)`，
+             配套使用说明在 **p. 307 首句**：「Eq. (63) is to be expanded to order 1/2(n+2) - r in the x_i」；
+             **eq. (83), p. 315**（Pontryagin 类与 Tr R^{2k} 的换算：p1 = -Tr R^2/2，p2 = -Tr R^4/4 + (Tr R^2)^2/8，
+             p3 = -Tr R^6/6 + Tr R^2 Tr R^4/8 - (Tr R^2)^3/48）；
+             **eq. (82), p. 314**（A-hat 多项式的 Pontryagin 展开）；**eq. (114), p. 325**（三种自旋的生成函数 + 关键脚注）；
+             **eq. (117)/(118)/(119)/(120), pp. 326--328**（二/六/十/十四维的反常多项式）——
+             其中 **(119)** 是十维的三条：Ihat_{1/2} = (-31p1^3+44p1p2-16p3)/967680、
+             Ihat_{3/2} = (225p1^3-1620p1p2+7920p3)/967680、Ihat_A = (-256p1^3+1664p1p2-7936p3)/967680，
+             原文结论「the minimal solution is remarkably simple: -Ihat_{1/2} + Ihat_{3/2} + Ihat_A = 0」；
+             **eq. (110)/(112), pp. 324--325**（Fujikawa 路线的 ch(F)·A-hat(R)，与 (63) 等价的另一条独立推导）；
+             **eq. (32)/(38)/(56)**（自旋 1/2 / 3/2 / 自对偶张量的纯引力反常生成函数）。
+             **★ 三条硬性使用限制**：
+             (1) **本文从不固定反常的整体归一** —— (114) 逐字「apart from a factor common to the three cases」。
+             因此 **green-schwarz-1984 的常数 c 不在本文里**，**GS (22) 的十维混合十二形式也不在本文里**
+             （p. 328 末句逐字：「We will not explore here the phenomenological consequences of mixed gauge-gravitational anomalies.」）。
+             本文只给配方（p. 325：「Explicit expressions for the combined anomalies can be obtained by combining (112)
+             with the expression for A-hat(M) in (82)-(84).」）。GS 说的是 "deduced from"，措辞准确，不要读成 "given in"。
+             (2) **本文没有下降方程、没有 Chern--Simons 形式 omega^0_{2n+1} / omega^1_{2n}**（唯一提 CS 的是 p.309 一段散文）。
+             ⇒ **本文不是 GS 那套 H = dB + omega_{3Y} - omega_{3L} 符号约定的源头**；源头是本文参考文献 [7] 里的
+             「B. Zumino, W. Yong-Shi and A. Zee (Univ. Washington preprint, 1983)」= GS ref [9] = Zumino--Wu--Zee, Nucl. Phys. B239 (1984) 477。
+             (3) **本文引言 pp. 271--272 逐字预言 type I 超弦「are presumably anomalous」，并说「Introduction of a gauge group
+             cannot remove the gravitational anomaly, as one may see from formulae of sect. 12」——这正是 green-schwarz-1984 推翻的那句。**
+             **但两者不矛盾**：本文全篇只考虑「不同自旋的场之间相消」，GS 的出路是加**局域抵消项**，在本文框架之外。
+             **不得把本文标 refuted，也不得在 GS 节点上把本文列为「被推翻的依赖」。** 见抽取记录 E2 / Q-A4。
+             **★ 抽取者复算的关键结果（两篇文献之间缺失的那一步，两边原文都没写）**：
+             取「一个左手自旋 3/2 + 一个反手自旋 1/2 + n 个左手自旋 1/2」的组合 Ihat_{3/2} + (n-1)Ihat_{1/2}，
+             用 (83) 换到 tr R^{2k} 基，得到的十二形式与 **GS 1984 eq. (20) 的五个系数逐一相差同一个因子 -48**
+             （T2^3 常数部 / T2^3 的 n 部 / T2T4 常数部 / T2T4 的 n 部 / T6 部，全部 = -48）。
+             **=> green-schwarz-1984.md 的 Q3 完全闭合：GS (20) 可由本文 (119)+(83) 机械导出，「n = 496」就是 p3 系数 7936-16n 的唯一零点。**
+             该 -48 即 (114) 留空的 "common factor" 在 GS 归一下的取值。**注意这验证的是「相对归一化」，不是绝对归一化**
+             （GS 用 Minkowski 实反对称曲率、本文欧氏化，两者可能差 i 的幂次，但那只影响整体常数）。见抽取记录 §5.1。
+             **★ 数值系数的可靠性（作者自陈）**：致谢逐字「P. Ginsparg ... for writing a computer program to generate the
+             complicated power series expansions in sects. 11 and 12」，§12 首页脚注逐字「We are grateful to P. Ginsparg for
+             correcting a variety of numerical errors in an earlier version of this section.」
+             ⇒ **(82)(92)(99)-(101)(106)(117)-(120) 全是 CAS 输出且发表前出过错**，是理想的 Lean 形式化目标（抽取记录 §5）。
+             已做的两条独立核验：**内部**（图式路线 §6-§9 与 Fujikawa 路线 §11 的结果互洽）；
+             **外部**（自旋 1/2 支 = Hirzebruch A-hat genus，与 Harvard Math 272b (2005) 讲义 *The A-hat class*
+             https://abel.math.harvard.edu/archive/272b_spring_05/handouts/A-roof/A-roof.pdf 的 A1--A4 逐系数相符，L1；
+             **该讲义是匿名 CAS 输出，只作旁证，不宜作图节点的 canonical 数学来源**；canonical 应取 Hirzebruch 原书，本轮未获取）。
+             **读图存疑处（引用前须复核，详见抽取记录 §3）**：
+             (38) 的求和下限印作 j=0，**判为误排，应为 j=1**（同页上方无编号式、(65)、(114) 三处都是 j=1，且语义要求 n 项）；
+             (61) 的求积指标与上限撞用字母 k；p.306 的展开阶数印作 "1/2(n+2) - k"，而 p.307 清晰印作 "- r"（应以 p.307 为准）；
+             (101) 末项系数经与 (119) 交叉核对定为 **11/21**（不是 11/24）；
+             (114) 脚注末句的「sects. 9 and 10」与本文节标题对不上（1/8 实出自 §8 的 (56) 与 §11 的 (105)）；
+             编号 (104) 与 (113) 通读未见；p.325 自引「the formulas in (1)」应为 (114)。
+             **号差**：p.283 逐字「Our signature is (+ - - - ...)」——**显式声明**，与 green-schwarz-1984（号差未声明）不同。}
 }
 
 @article{maldacena-1997,
