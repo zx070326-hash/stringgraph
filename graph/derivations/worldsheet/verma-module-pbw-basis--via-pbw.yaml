@@ -3,108 +3,120 @@ target: worldsheet.verma-module-pbw-basis
 kind: proof
 status: rigorous
 depends_on:
+  - id: math.verma-module-free-over-negative-part
+    inferred: false
+    note: |
+      **本推导的主依赖（2026-09-11 改挂）**。该节点承载全部代数内容：V(c,h) 作为 U(vir₋)-模自由秩 1、
+      PBW 基、dim V_N = p(N)、V(c,h) ≠ 0，按其来源 virasoro-lean-2025 §12 p.11 的设定与记号陈述。
+      改挂之前，本推导自己走「诱导模识别 → PBW → 计数」三步并引一批**分节号未核实**的来源
+      （kac-1979 / kac-raina-1987 / feigin-fuchs-1982）；researcher 第三轮把 PBW 本体定位到
+      humphreys-1972 §17.3 Corollary C、把 Virasoro Verma 那一半定位到 virasoro-lean-2025 §12，
+      于是那三步搬到上游两个 math 节点（math.pbw-theorem → 本依赖），本推导只剩记号搬运与计数补写。
+      **本推导剩下的实质内容见 summary (a)(b)(c)。**
   - id: worldsheet.verma-module-v2
+    inferred: false
     note: |
-      非 inferred：本推导的对象就是该节点定义的 V(c,h) = U(Vir)/J(c,h)，
-      而且用到该节点的两条结论：(i) V(c,h) 由 |c,h⟩ 在 U(Vir) 下生成（exists_smul_hwv），
-      (ii) V_N 的定义与 L_0 在其上作用为 h + N。所引文献（kac-1979、kac-raina-1987）
-      用的是同一构造（诱导模 U(Vir) ⊗_{U(b)} K_{c,h}，与对左理想取商等价，见 summary 第 (1) 步）；
-      **但这些来源的分节/讲号未核实**，见 gaps 与各 source 的 loc。
+      **陈述层面的依赖**：目标卡片的陈述文本以「V(c,h) 为 Verma 模（worldsheet.verma-module-v2）」开头，
+      并使用该节点定义的 |c,h⟩ 与 V_N。上游 math 节点用的是同一构造
+      （virasoro-lean-2025 Lemma 12.3 的 𝒰(𝔤)/I_λ 与本节点的 U(vir)/J(c,h) 逐字对应，
+      Virasoro 情形见其 Definition 12.4），所以这条边只是把上游结论落回本项目的记号，不是重复论证。
   - id: worldsheet.virasoro-algebra-v2
+    inferred: false
     note: |
-      非 inferred：PBW 的输入是 Vir 的三角分解 Vir = Vir_- ⊕ (K L_0 ⊕ K C) ⊕ Vir_+
-      与 Vir_- 作为 K-模自由（基 {L_{-n} : n ≥ 1}），两者都直接来自该节点的陈述
-      （括号关系 + 「{L_n} ∪ {C} 张成、Vir ≅ W(K) × K」）。归一化同为 conv.virasoro-standard；
-      中心项的具体系数与本推导无关（Vir_- 内部的括号 [L_{-m}, L_{-n}] 没有中心项）。
+      提供 summary (b) 的计数所需的括号 [L_0, L_{-n}] = n L_{-n}（在目标卡片的记号与归一化下），
+      以及目标卡片使用的 conv.virasoro-standard 归一化。中心项的具体系数与本推导无关。
   - id: worldsheet.verma-level-spanned-by-partitions
     inferred: false
     note: |
-      提供 summary 第 (2)(3) 步中「有序单项式**张成** V(c,h)、且 level N 的有序词由 N 的分拆
-      指标化」这一半（目标陈述 (1) 的「张成」部分与 (2) 的「≤」部分）。该卡 formalized
-      （formal/StringFormal/Virasoro/VermaPBW.lean），2026-09-11 加入。
-      **本推导仍是 rigorous 而非 formalized**：剩下的「线性无关」一半（PBW 本体 + 诱导模自由性）
-      来自 kac-1979 / kac-raina-1987 的标准论证，Lean 侧没有。加这条边的意义是把
-      「PBW 里哪一半已被机器检查」在图上记账，而不是提升本推导的状态。
+      **记账用的边，不提升本推导的状态**。该卡 formalized（formal/StringFormal/Virasoro/VermaPBW.lean），
+      给出目标陈述里「有序单项式**张成** V(c,h)」与「dim V_N ≤ p(N)」这一半（PBW 的 straightening 一半）。
+      剩下的「线性无关」一半来自 math.verma-module-free-over-negative-part（进而 math.pbw-theorem），
+      Lean 侧没有。加这条边的意义是在图上记账「PBW 里哪一半已被机器检查」。
 sources:
-  - ref: kac-1979
-    loc: "§1（Verma 模的构造与逆变形式；PBW 基是其中行列式表述的前提）；**分节号未核实**，且 sources.bib 对本 key 指向哪一篇 Kac 存疑"
-  - ref: kac-raina-1987
-    loc: "Virasoro 代数的最高权表示、Verma 模及其特征标这一主题；**不写 Lecture 编号**（sources.bib 的版本陷阱：第 1 版与第 2 版讲号不可互换）"
-  - ref: feigin-fuchs-1982
-    loc: "§2（Verma 模之间的同态与奇异向量；论证在 level N 的 p(N) 维分量上进行）；**分节号未核实**"
+  - ref: virasoro-lean-2025
+    loc: "§12, p. 11 正文（无编号）；定义见 Definition 12.2 与 Lemma 12.3，Virasoro 情形见 Definition 12.4"
     note: |
-      本条只作旁证：Feigin–Fuchs 的正文默认 PBW 基与 dim V_N = p(N)（否则 Kac 行列式
-      无从写出），但本项目未取得正文，没有逐字核实他们在哪里陈述这一条。
+      **L1（researcher 2026-09-11 逐页读图，math-sources.md §16.3）**。实质内容已移到
+      math.verma-module-free-over-negative-part；此处保留同一 loc，是因为 summary (a) 的记号搬运
+      需要对照来源的写法（基元为 ℒ_{−n_m} ⋯ ℒ_{−n_1} v_{c,h}，1 ≤ n_1 ≤ ⋯ ≤ n_m）。
+      ⚠ 该句**无编号**，`loc` 不得写成「Lemma 12.x」。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/VermaPBW.lean（straightening，已完成）；formal/StringFormal/Virasoro/Verma.lean 的 Status 段（第 1–3 条）与 formal/TODO.md 的 `pbw-verma` 一项"
+    note: |
+      **这条 source 不是本命题的证明**，而是本命题在本项目中**哪一半已形式化、哪一半没有**这一事实的登记。
+      见 gaps 第一、二条。
 summary: |
-  标准论证，三步：
+  本推导 = 上游代数结论（math.verma-module-free-over-negative-part）+ 三处本项目侧的补写。
 
-  (1) **诱导模的识别**。设 b := span_K{L_n : n ≥ 0} ⊕ K·C（Borel 子代数），
-      χ_{c,h} : b → K 为由 L_0 ↦ h、C ↦ c、L_n ↦ 0 (n > 0) 给出的一维表示 K_{c,h}
-      （χ 是李代数同态：b 的导代数落在 {L_n : n > 0} 里）。
-      worldsheet.verma-module-v2 定义的左理想 J(c,h) 恰是 U(Vir)·ker(χ_{c,h} 在 U(b) 上的延拓)，
-      故
-        V(c,h) = U(Vir)/J(c,h) ≅ U(Vir) ⊗_{U(b)} K_{c,h}。
+  (a) **记号与排序的搬运**。上游按来源写法给出基
+        L_{-n_m} L_{-n_{m-1}} … L_{-n_1} |c,h⟩,   1 ≤ n_1 ≤ … ≤ n_m,
+      目标卡片写成
+        L_{-n_1} L_{-n_2} … L_{-n_k} |c,h⟩,       n_1 ≥ n_2 ≥ … ≥ n_k ≥ 1。
+      **这两者是同一组基元**：只是把下标序列反过来标号（k = m，本项目的 n_i = 来源的 n_{m+1-i}），
+      因子从左到右的实际排列（大下标在左）完全一致。目标卡片的范围说明 (b) 另行指出：
+      即使把序反成 n_1 ≤ … ≤ n_k，得到的是同一分拆的另一种代表元，维数结论不变。
 
-  (2) **PBW**。三角分解 Vir = Vir_- ⊕ b（K-模直和），其中 Vir_- = span_K{L_{-n} : n ≥ 1}。
-      Poincaré–Birkhoff–Witt 定理给出 K-模同构 U(Vir) ≅ U(Vir_-) ⊗_K U(b)，
-      从而诱导模作为左 U(Vir_-)-模自由、秩 1、由 1 ⊗ 1 = |c,h⟩ 生成：
-        V(c,h) ≅ U(Vir_-)  （作为 U(Vir_-)-模）。
-      再对 Vir_- 用一次 PBW（取基 L_{-1}, L_{-2}, … 与降序），得 U(Vir_-) 的 K-基
-        L_{-n_1} L_{-n_2} … L_{-n_k},  n_1 ≥ … ≥ n_k ≥ 1。
-      作用在 |c,h⟩ 上即目标陈述 (1)。
+  (b) **分级维数与特征标**。上游已给 dim_F V_N = p(N)（L_0 本征值 h + Σ n_i，基元 ↔ N 的分拆）。
+      目标卡片额外要形式特征标
+        Σ_{N ≥ 0} p(N) q^{h+N} = q^h ∏_{n ≥ 1} (1 − q^n)^{-1}，
+      这一步是 Euler 的分拆生成函数恒等式（形式幂级数恒等式，不涉及收敛）。
 
-  (3) **计数**。上述基元在 L_0 下的本征值为 h + Σ_i n_i（worldsheet.descendant-weight-grading
-      的计算，本推导不另挂依赖：它由 (2) 的基与 virasoro-algebra-v2 的括号直接得到），
-      故 level N 的基元恰对应 N 的分拆 (n_1 ≥ … ≥ n_k ≥ 1)，个数为 p(N)，给出 (2)；
-      N = 0 只有空积一项，故 dim V_0 = 1、|c,h⟩ ≠ 0，给出 (3)。
+  (c) **范围说明的落实**。目标卡片的 (a)「与不可约性无关」、(c)「未形式化」两条范围说明，
+      分别对应上游节点的范围说明与本推导 gaps 的记账，不是新的数学内容。
 
-  这条论证对**所有** (c,h) 一致成立：PBW 不看 (c,h) 取什么值。不可约性才看，那是
-  worldsheet.kac-determinant 的事。
+  目标卡片的 (3)（V(c,h) ≠ 0 对所有 (c,h)）直接就是上游的 (4)，不需要任何补写。
 gaps:
-  - "**未形式化，且不是「补细节」而是缺一条上游定理**。Mathlib v4.33.1 **没有** PBW 定理
-     （`Mathlib/Algebra/Lie/Free.lean` 与 `SerreConstruction.lean` 都注明缺此定理），
-     故 (2) 的线性无关一半做不了。formal/TODO.md 的 `pbw-verma` 一项把缺口拆成两半：
-     (a) straightening（有序词张成，给出 dim V_N ≤ p(N)）——**已形式化**（2026-09-11，
-     formal/StringFormal/Virasoro/VermaPBW.lean，图节点 worldsheet.verma-level-spanned-by-partitions，
-     本推导已加为依赖）；(b) 线性无关（= U(Vir_-) 的 PBW + 诱导模自由性，依赖上游）——**未做**。
-     换成目标陈述的编号：**(2) 的上半（dim V_N ≤ p(N)）已形式化；(1)、(2) 的等号与 (3)
-     都需要线性无关，即 PBW，Mathlib 无**。"
-  - "**原证明计划有误（formalizer 更正，2026-09-11）**：本推导与 formal/TODO.md 原先写的
-     「对（词长, 逆序数）双重归纳」**不成立**——Leibniz 律第二项 L_b (L_a X) 经内层整理后
-     长度不减（内层 straightening 可产生比原尾巴更长的词），双重归纳的度量不单调。
+  - "**未形式化，且缺口是精确的一条上游定理：Mathlib 没有 PBW（读取日期 2026-09-11）**。
+     两条 L1 证据：(i) `Mathlib/Algebra/Lie/UniversalEnveloping` 的全部 17 个声明只围绕构造与泛性质
+     （Rel、ringCon、UniversalEnvelopingAlgebra、mkAlgHom、ι、lift、lift_unique、hom_ext 等），
+     **没有滤过、没有与对称代数的同构，连 TODO 段都没有**；(ii) virasoro-lean-2025 的作者逐字自陈
+     「Mathlib does not currently have the PBW theorem」，并称补上它是 \"a major undertaking\"。
+     ⇒ **本推导的 status 上限是 rigorous，不得标 formalized，直到 Mathlib 有 PBW 为止。**
+     复查时同时看 `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 与 Mathlib 的 1000.yaml 跟踪表；
+     若届时 Mathlib 有了 PBW，本条与 math.pbw-theorem 的同名记录须一并重估。"
+  - "**图内已形式化的是哪一半**：formal/TODO.md 的 `pbw-verma` 把缺口拆成两半——
+     (a) straightening（有序词张成，给出 dim V_N ≤ p(N)）**已形式化**（2026-09-11，
+     formal/StringFormal/Virasoro/VermaPBW.lean，图节点 worldsheet.verma-level-spanned-by-partitions）；
+     (b) 线性无关（= U(vir₋) 的 PBW + 诱导模自由性）**未做**，它是 math.pbw-theorem 的下游。
+     换成目标陈述的编号：**(2) 的上半（dim V_N ≤ p(N)）已形式化；(1)、(2) 的等号与 (3) 都需要线性无关。**"
+  - "**原证明计划有误（formalizer 更正，2026-09-11）**：formal/TODO.md 原先写的
+     「对（词长, 逆序数）双重归纳」**不成立**——Leibniz 律第二项 L_b (L_a X) 经内层整理后长度不减
+     （内层 straightening 可产生比原尾巴更长的词），双重归纳的度量不单调。
      VermaPBW.lean 实际用的有效度量是 wordWeight = Σ_i i·l_i（表头不贡献），它在负模态词上 ≤ 0，
      换序步与对易子步都使它**严格增大**（故 wordMeasure = (−wordWeight).toNat 严格下降）；
-     并且 `straighten` 的结论**必须带 wordMeasure 不增**这一上界，否则嵌套整理无法被归纳假设覆盖。
-     这条 gap 记的是本推导 summary 里未写出的（也不必写出的）straightening 细节在形式化时暴露的问题，
-     不影响本推导 rigorous 的结论——文献侧的 PBW 证明不走这条归纳。"
-  - "**「V(c,h) ≠ 0」在形式化侧是空缺**。在 (b) 之前，Verma.lean 中的一切结论都可能是空洞真
-     （V(c,h) = 0 时全部平凡成立），且没有便宜替代品——任意 (c,h) 的非零最高权模本身
-     就是要构造的东西，只有 (c,h) = (0,0) 时平凡模现成可用。这正是把非零性放进本节点
+     且 `straighten` 的结论**必须带 wordMeasure 不增**这一上界，否则嵌套整理无法被归纳假设覆盖。
+     这条记的是 straightening 细节在形式化时暴露的问题，不影响本推导 rigorous 的结论——
+     文献侧的 PBW 证明不走这条归纳。"
+  - "**「V(c,h) ≠ 0」在形式化侧是空缺**。在线性无关那一半做出来之前，Verma.lean 中的一切结论
+     都可能是空洞真（V(c,h) = 0 时全部平凡成立），且没有便宜替代品——任意 (c,h) 的非零最高权模
+     本身就是要构造的东西，只有 (c,h) = (0,0) 时平凡模现成可用。这正是把非零性放进目标卡片
      而不是 worldsheet.verma-module-v2 的原因。"
-  - "**PBW 定理本身在 literature/sources.bib 中没有条目**。本推导第 (2) 步引用的是
-     Poincaré–Birkhoff–Witt 定理（任何李代数教科书；对 Vir_- 这种自由模上的李代数，
-     结论对任意交换基环成立）。建议 researcher 登记一条标准来源（如 Dixmier 或 Humphreys），
-     届时把它加进本推导的 sources。"
-  - "**文献定位强度低**。三条 source 的分节/讲号全部未核实：kac-1979 连指向哪一篇都存疑
-     （sources.bib 记有 FGZ 引 ICM Helsinki 1978 的疑点），kac-raina-1987 按 sources.bib
-     的要求不得写 Lecture 号，feigin-fuchs-1982 正文未取得。因此本推导的可核对性依赖
-     「这是教科书标准结论」这一集体判断，而不是逐字核实。若 researcher 能取得
-     kac-raina-1987 第 1 版正文并定位到具体 Lecture，应回填。"
-  - "**基环**。目标陈述限定在特征零的域 K 上，只是为了用「维数」和「特征标」的语言；
-     PBW 与自由性对任意交换环 R（Vir_- 作为 R-模自由）都成立，
-     而 worldsheet.verma-module-v2 的构造部分本就对任意 ℚ-代数成立。
-     若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
+  - "**Euler 恒等式无来源**：summary (b) 用的 Σ p(N) q^N = ∏ (1−q^n)^{-1} 是形式幂级数层面的标准恒等式，
+     本图没有为它建节点也没有登记来源。若 reviewer 要求，可补一条 math 节点；本批未做。"
+  - "**上游的两条未结案疑问会传下来**：Humphreys §17.3 的字母编号（Q14）与 §17.1 对 L 的假设（Q15，
+     决定 math.verma-module-free-over-negative-part--via-pbw-theorem 那条 inferred 边能否撤）。
+     见 math.pbw-theorem 的 notes。"
 notes: |
-  【status 的选择】按 docs/STATUS_LEVELS.md：4 = rigorous 要求「有发表的、数学界接受的
-  完整证明；来源必须是数学文献或数学物理文献」。PBW 及其对 Verma 模的推论是被数学界
-  完全接受的标准定理，来源是数学文献，故 rigorous。不能标 formalized（见 gaps 第一条），
-  也没有理由降到 physical-argument（论证里没有任何形式操作或渐近近似）。
-  本推导**不**援引 docs/STATUS_LEVELS.md 的 rigorous 例外条款（那是给「有限步初等计算 +
-  reviewer 复核」用的），它靠的是已发表的完整证明。
+  **2026-09-11 改挂记录**：本推导原先自己承担全部 PBW 论证，sources 为 kac-1979 / kac-raina-1987 /
+  feigin-fuchs-1982，三者**分节号全部未核实**（kac-1979 连指向哪一篇都存疑），gaps 里为此写着
+  「文献定位强度低」与「PBW 定理本身在 sources.bib 中没有条目」。researcher 第三轮把两半都定位到了
+  可核实的来源，于是：
+  - PBW 本体 → 新节点 math.pbw-theorem（humphreys-1972 §17.3, Corollary C, p. 92，两条独立证据互证）；
+  - Virasoro Verma 模的自由性/基/维数/非零 → 新节点 math.verma-module-free-over-negative-part
+    （virasoro-lean-2025 §12, p. 11 正文，**无编号**）；
+  - 本推导只保留记号搬运、特征标一步与形式化记账。
+  那三条未核实的来源**没有被删除**：它们仍在目标卡片 worldsheet.verma-module-pbw-basis 的 sources 里
+  （陈述卡片不可变），只是不再作为本推导的证明依据。
 
-  【与 worldsheet.descendant-weight-grading 的关系】那条命题只说降算符提高 L_0 本征值、
-  且明确声明**不**断言线性无关；本推导第 (3) 步用到的正是它的计算部分，但因为该计算
-  由 (2) 的基与 virasoro-algebra-v2 的括号直接重做只需两行，本推导没有另挂那条依赖，
-  以免制造一条只为复用两行计算的边。
+  **status 的选择**：rigorous。唯一的非平凡输入 PBW 有独立来源节点；本推导自身新增的只有
+  下标反序（重标求和指标）与 Euler 分拆恒等式，都是有限步形式代数。不标 formalized 的理由见 gaps 第一条。
+  本推导**不**援引 docs/STATUS_LEVELS.md 的 rigorous 例外条款。
+
+  **与 math.verma-module-free-over-negative-part 内容重叠的提请**：目标卡片与该上游节点的
+  (1)(2)(3) 内容高度重叠，本推导因此很薄。curator 已把「是否合并 / 谁 superseded_by 谁」
+  提请 lead 与 auditor 裁决；裁决前两张卡都保留。
+
+  **与 worldsheet.descendant-weight-grading 的关系**：那条命题只说降算符提高 L_0 本征值、
+  且明确声明**不**断言线性无关；线性无关在本链条上由 math.pbw-theorem 提供。两者不重复。
 author: curator
 created: "2026-09-11"

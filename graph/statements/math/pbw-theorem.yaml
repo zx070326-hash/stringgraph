@@ -1,0 +1,96 @@
+id: math.pbw-theorem
+kind: proposition
+title: Poincaré–Birkhoff–Witt 定理：U(L) 以有序单项式为基，等价地 S(L) ≅ gr U(L)
+statement: |
+  设 F 是域，L 是 F 上的李代数，(X, ≤) 是 L 的一组**全序**的 F-基
+  （X 可以是无限集；序是任意选定的全序）。记 U(L) 为 L 的泛包络代数，
+  ι : L → U(L) 为典范映射，S(L) 为 L 的对称代数。
+
+  **(1) 有序单项式基（PBW 基）**：集合
+
+      { ι(x_1) ι(x_2) … ι(x_n) : n ≥ 1,  x_i ∈ X,  x_1 ≤ x_2 ≤ … ≤ x_n }  ∪  { 1 }
+
+  是 U(L) 的一组 F-基。称之为 U(L) 的 **PBW 基**。
+
+  **(2) 分次形式**：赋 U(L) 以由 ι(L) 的乘积长度给出的滤过
+      F_0 U(L) ⊆ F_1 U(L) ⊆ … ，  F_m U(L) := span_F{ ι(y_1)…ι(y_k) : k ≤ m, y_i ∈ L },
+  并取相伴分次代数 gr U(L) := ⊕_m F_m U(L) / F_{m−1} U(L)。则由 L → gr_1 U(L) 诱导的
+  典范代数同态
+
+      S(L) ⟶ gr U(L)
+
+  是**同构**（特别地 gr U(L) 交换）。
+
+  **(3) 单射性**：ι : L → U(L) 是单射（(1) 的 n = 1 情形）。
+
+  【(1) 与 (2) 的关系】在来源中 (2) 是定理主体、(1) 是同一小节里的推论：一旦知道
+  S(L) ≅ gr U(L)，取 S(L) 的单项式基并逐层提升即得 (1)；反之由 (1) 逐层计数即得 (2)。
+  本节点把两者放在同一张卡上，因为来源在**同一小节**里由前者推出后者，两者**不是**被
+  分别推导的（见 notes 的编号说明）。
+
+  【范围】本节点按上面写的**任意（可无限维）李代数 + 全序基**陈述。所引来源的原书
+  语境是否允许无限维 L **未核实**，见 notes 的第二条警告与推导的 inferred 说明。
+uses_conventions: []
+sources:
+  - ref: humphreys-1972
+    loc: "§17.3 (PBW Theorem and consequences), p. 91 起；有序单项式基 = Corollary C, p. 92"
+    note: |
+      **定位由两条独立证据互证（researcher 2026-09-11，literature/extractions/math-sources.md §15.1–§15.3）**：
+      (a) ardizzoni-2010 的正文逐字点名 `[Hu, Corollary C, page 92]`（L1 读图）；
+      (b) Google Books 卷 id `mSD4DvUFa6QC` 全文检索，`"PBW Theorem and consequences"` → p.91、
+          `"Corollary C"` → p.92，且**无意义串的控制实验返回 "No results"**（该卷没有「无命中回落固定页」的病）。
+      印本本身**未取得**，本项目对 Humphreys 正文的等级是 L3/L4，不是 L1。
+  - ref: ardizzoni-2010
+    loc: "arXiv:1008.4523v2, p. 1 Introduction 第一段（逐字引用 [Hu, Corollary C, page 92] 并给出有序单项式基的措辞）；p. 15 References 的 [Hu] 条目"
+    note: |
+      **L1 逐页读图**。该文对定理的前提逐字写作「a Lie algebra which is assumed to have a totally ordered
+      basis (X, ≤)」，**没有有限维假设**——本节点 (1) 的措辞取自这一句。
+      注意版本坑：期刊版（Glasgow Math. J. 54 (2012)）把它编作 `[15, Corollary C, p. 92]`，arXiv 版写 `[Hu]`；
+      本图引 arXiv 版，因为那是被 L1 读到的那一份。
+  - ref: swanson-2015-pbw
+    loc: "研讨班讲稿 “§17: The PBW Theorem”（首行明说 based on §17 of Humphreys），9 页全文；分次版定理与有序单项式基推论的措辞"
+    note: |
+      **L1 全文读毕（9 页）**。本节点 (2) 的措辞（「The natural map 𝔖 → gr 𝔘 is an isomorphism of algebras」）
+      与 (1) 的措辞（有序基 x_{i_1}…x_{i_m}，i_1 ≤ … ≤ i_m，连同 1，构成 𝔘(L) 的基）取自该讲稿。
+      **该讲稿用自己的一套连续编号，不是 Humphreys 的字母编号；那套编号按硬性禁令不得写进图**，
+      故本 source 的 loc 只写讲稿标题与页数。该讲稿记号段写「L is a Lie algebra over F (possibly infinite
+      dimensional)」，是本节点敢按任意维数陈述的第二条旁证。
+      另记：Humphreys 原书对 gr 𝔘(L) 用记号 𝔊(L)；讲稿还指出 Humphreys 在某条推论里漏记了一处单射性
+      （"seems to forget to note that π is injective on W"），但那是证明内部的细节，不影响本节点的结论。
+tags: [algebra, lie-algebra, universal-enveloping-algebra, pbw, math-input]
+notes: |
+  **本节点为什么存在**：worldsheet.verma-module-pbw-basis--via-pbw 原先在 gaps 里写着
+  「PBW 定理本身在 literature/sources.bib 中没有条目」。researcher 第三轮把 (A) PBW 本体
+  定位到了带编号的来源，而 (B) Virasoro Verma 模那一半在文献里**没有编号**
+  （见 math.verma-module-free-over-negative-part）。把两者分成两张卡，是为了不让
+  「PBW 有干净编号」这一半被「Verma 那半只能指段落」拖低可核对性
+  （researcher 建议，math-sources.md §18 配套建议 2）。
+
+  ⚠ **警告一：编号字母未裁决（Q14）**。ardizzoni-2010 把有序单项式基定为 **Corollary C**；
+  而按 swanson-2015-pbw 的呈现顺序，它排在 §17.3 的第 4 条结论上（若「第 k 条 = 第 k 个字母」
+  成立就该是另一个字母）。两者对不上，说明那个对应假设不成立。
+  **硬性禁令：本图只允许写 `Corollary C, p. 92`（有两条独立证据落在同一处），
+  绝不允许改写成 Corollary A / B / D / E 中的任何一个，也绝不允许把讲稿的连续编号写进图。**
+  持 Humphreys 印本者看一眼 p.91–93 即可结案（math-sources.md §19.2 Q14）。
+
+  §17.3 里还有一条推论断言「H ⊆ L 为子代数时 U(L) 作为 U(H)-模自由，自由基由不涉及 H 的
+  有序单项式给出」——那正是 math.verma-module-free-over-negative-part 的直接上游。
+  本图**不引它的字母编号**（同一条禁令），需要时按本节点 (1) 重做两行论证即可。
+
+  ⚠ **警告二：无限维适用性未核实（Q15，等级 L0）**。Humphreys 全书的通行语境是
+  「代数闭、特征零域上的**有限维半单**李代数」，而 **§17.1 开头对 L 的假设本轮没有核到**。
+  本项目要把它用在 Virasoro（无限维、非半单）上，目前只有旁证：
+  ardizzoni-2010 的前提只要求「有全序基」，swanson-2015-pbw 明写「possibly infinite dimensional」。
+  ⇒ **任何从本节点出发、把 PBW 用在无限维李代数上的边必须标 `inferred: true`**
+  （math.verma-module-free-over-negative-part--via-pbw-theorem 已照此处理）。
+  Q15 结案（核到 §17.1 的假设声明）后这条 inferred 才能撤。
+
+  **形式化状态**：Mathlib **没有** PBW 定理。`Mathlib/Algebra/Lie/UniversalEnveloping` 的
+  全部 17 个声明只围绕构造与泛性质（Rel、ringCon、UniversalEnvelopingAlgebra、mkAlgHom、ι、lift、
+  lift_unique、hom_ext 等），**没有滤过、没有与对称代数的同构，连 TODO 段都没有**
+  （researcher 逐条读声明名，**读取日期 2026-09-11**）。virasoro-lean-2025 的作者亦逐字自陈
+  「Mathlib does not currently have the PBW theorem」，并称补上它是 "a major undertaking"。
+  ⇒ **本节点及其下游最高只能到 rigorous，不得标 formalized，直到 Mathlib 有 PBW 为止。**
+  复查时请同时看 `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 与 Mathlib 的 1000.yaml 跟踪表。
+author: curator
+created: "2026-09-11"
