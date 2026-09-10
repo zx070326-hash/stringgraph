@@ -1,0 +1,105 @@
+id: math.lattice-vertex-algebra--via-li-wang
+target: math.lattice-vertex-algebra
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.vertex-algebra-borcherds-identity
+    note: |
+      被验证的公理。Li–Wang 的证明路线自陈逐字（pp. 13–15）：「Next, we show that **the Jacobi identity**
+      holds.」，收尾逐字「Using this and delta-function substitutions we obtain the Jacobi identity as desired.
+      This proves the assertions on vertex algebra structure and module structure.」
+      ⇒ 「V_(𝔥,L) 是顶点代数」这一结论的实质内容就是本卡的恒等式在 (3.10) 的 Y 下成立。
+      **这条边不是 inferred**：来源明写它证的就是 Jacobi 恒等式。
+      记号对照：Li–Wang 写 Y(·, x)、模指标在圆括号内；G–N 写 𝒴(·, z)、模指标在圆括号外。
+      两者是同一条公理的不同排版，本图以 G–N 那一套为准（见该卡的「模式约定陷阱」段）。
+sources:
+  - ref: li-wang-2008
+    loc: "Theorem 3.6 及其证明, pp. 13–15（arXiv:0802.0173v1）；假设 (3.5)–(3.8), p. 12；构造 (3.9)/(3.10), p. 12；Definition 3.5（Condition C_L）, p. 13；Heisenberg 顶点代数 M(1) 的唯一性, p. 10"
+    note: |
+      **L1（researcher 2026-09-11 读 arxiv.org/pdf/0802.0173，版本戳 arXiv:0802.0173v1 [math.QA] 1 Feb 2008，
+      PDF 页 = 文章页；逐字文本见 literature/extractions/math-sources.md §36.3(b)(g)）。**
+      **本推导的全部论证取自本条。** Theorem 3.6 是一条**带编号、带完整证明**的定理，不是引用他处：
+      作者在 p. 12 逐字指出还有第三条路线「by using a theorem of [FKRW] and [MP]」，
+      然后逐字写「Here, we give a uniform treatment for both the vertex algebras and their modules.」
+      ——即本文给的是自足证明。
+  - ref: borcherds-1986
+    loc: "Section 2；Section 4, relations (i)–(v)（无编号定理、无编号公式；loc 只写节号）"
+    note: |
+      **佐证，不承载论证。** 逐字「**For any even lattice R** the operators u_n on V satisfy the following
+      relations.」独立确认「格点顶点代数对号差零假设」。但原文无编号、无证明细节，
+      且其 V 建在格自身上（与 Li–Wang 的 𝔥 ⊃ L 设定不同），故不作主要依据。
+  - ref: gebert-nicolai-1995
+    loc: "§2.2, 刊 p. 583（非退化偶 ⇒ vertex algebra；再正定 ⇒ vertex operator algebra）；刊 p. 585（必须用扭群代数）"
+    note: |
+      **佐证，承载目标陈述「不断言」清单第 1、3 条的出处。** 本身是对 [6] = Borcherds、[17] = FLM 的转述，
+      **无编号定理**（对那两家而言是 L3）。
+summary: |
+  **直接引用 Li–Wang Theorem 3.6 的前半句，无需本项目补任何一步。**
+
+  第 1 步（Heisenberg 侧）。𝔥 上非退化对称 ℂ-双线性型给出 Heisenberg 李代数 ĥ；
+  level 1 的不可约最高权模 M(1) = S(𝔥 ⊗ t^{-1}ℂ[t^{-1}]) 上有唯一的顶点代数结构，
+  满足 Y(h, x) = h(x) = Σ_{n∈Z} h(n) x^{-n-1}（Li–Wang p. 10，逐字，作者标为 "It is well known now (cf. [LL])"）。
+  ⚠ 该句在 Li–Wang 处不给 [LL] 的定理号，故本图不写 LL 的任何编号（见 gaps）。
+
+  第 2 步（格点侧的假设）。设 L ⊂ 𝔥 是加法子群，满足 (3.5) ⟨α,α⟩ ∈ 2Z，
+  并取满足 (3.6)(3.7)(3.8) 的 2-上循环 ε：这三条正是把 ℂ[L] 扭成 ℂ_ε[L] 所需的全部条件。
+  **注意这里没有任何关于 ⟨·,·⟩ 在 L 上的退化性、正定性或号差的假设**——这是本卡存在的全部理由。
+
+  第 3 步（构造与结论）。按 (3.9) 令 V_(𝔥,L) = ℂ_ε[L] ⊗ M(1)，按 (3.10) 定义 Y，
+  真空取 e^0 ⊗ 1。**Theorem 3.6 断言** (V_(𝔥,L), Y, e^0 ⊗ 1) 是顶点代数，且 M(1) 是其顶点子代数。
+
+  第 4 步（作者的证明路线，本推导不重述细节）。Li–Wang 在 pp. 13–15 逐条验证顶点代数公理，
+  核心是 Jacobi 恒等式：作者逐字「Next, we show that the Jacobi identity holds.」，
+  用 E^-(·,x)、Δ̄(·,x) 的对易性质与 delta 函数代换收尾，逐字
+  「Using this and delta-function substitutions we obtain the Jacobi identity as desired.
+  This proves the assertions on vertex algebra structure and module structure.」
+
+  第 5 步（三条独立佐证）。
+  (i) Borcherds 1986 Section 4 逐字「For any even lattice R …」——原始文献的同一结论，无编号无证明；
+  (ii) Gebert–Nicolai 刊 p. 583 成句转述「非退化偶格 ⇒ vertex algebra；再正定 ⇒ vertex operator algebra」，
+       这一句同时钉死了目标陈述「只能说 vertex algebra」的边界；
+  (iii) Bakalov–Kac Theorem 4.1 前半句在更弱假设（只要 integral）下给同一结论——
+       **但只可引前半句**，见目标陈述 sources 里的红旗。
+gaps:
+  - |
+    **E^-(·, x) 与 Δ̄(·, x) 的定义本图未展开。** 目标陈述的 (3.10) 里这两个算子照抄自 Li–Wang §2–§3，
+    本图没有单独的卡承载它们（它们是标准的顶点算子指数因子与「Δ 算子」）。
+    这不影响本推导的严格性（结论是来源的定理），但意味着**本卡的公式在图内不是自足的**，
+    要在图内做任何显式计算都得先补这两个定义。
+  - |
+    **Heisenberg 顶点代数 M(1) 的存在唯一性在来源处是 "It is well known (cf. [LL])"，不给定理号。**
+    Li–Wang p. 10 三句关键陈述（唯一顶点代数结构、模 ⟺ restricted level-ℓ 模、ℓ ≠ 0 时诸 V_ĥ(ℓ,0) 同构）
+    全部如此。⇒ 对 Lepowsky–Li 而言这是 L0，**图里不得写 LL 的任何定理号**
+    （literature/extractions/math-sources.md §38.2；任务书曾猜的 Thm 6.5.3 无任何证据）。
+    本推导因此把这一步算作「Li–Wang 自身论证的一部分」，而不是一条独立的外部引用。
+  - |
+    **扭群代数 ℂ_ε[L] 的存在性（即满足 (3.6)–(3.8) 的 ε 一定存在）本卡不断言。**
+    Li–Wang Remark 3.4 给出秩有限时的显式 ε(α_i, α_j) = (−1)^{⟨α_i,α_j⟩} (i<j), 1 (i≥j)；
+    一般情形的存在性与「所有这样的 ε 互相同调」在来源处转引 [FLM] Chapter 5（对 FLM 是 L3，原书未获取）。
+    目标陈述把 ε 写成**给定的**数据，正是为了避开这个缺口。
+  - |
+    **本推导不覆盖 vertex operator algebra、共形向量与中心荷。**
+    Li–Wang p. 10 的「中心荷 c = dim 𝔥」一句说的是**纯 Heisenberg 的 M(1)**，
+    且带「vertex operator algebra」的措辞（隐含正定/谱下有界）。目标陈述的「不断言」第 2 条已排除这一层。
+  - |
+    **Lean 侧未起步**：Mathlib/Algebra/Vertex/ 只有 VertexOperator 骨架。**本推导不得标 formalized。**
+notes: |
+  【status 定级理由】`status` 是本推导自身论证的严格程度。自身论证 = **直接引用一条带编号、带完整证明、
+  发表于数学文献（arXiv math.QA，作者 Haisheng Li 是该领域标准教材 Lepowsky–Li 的作者之一）的定理**，
+  且本项目在其上没有补任何一步：目标陈述的假设与 Li–Wang (3.5)–(3.8) 逐字一致，
+  结论与 Theorem 3.6 前半句逐字一致。故 **rigorous**。
+
+  【为什么不把 Borcherds 或 Bakalov–Kac 挂成独立推导】researcher 在 math-sources.md §38.3 建议挂三条
+  独立推导（D1 = Li–Wang, D2 = Borcherds, D3 = Bakalov–Kac）。本 curator 只落地 D1，理由：
+  · **D2（Borcherds）**：原文无编号定理、无证明细节，且其构造建在格自身上而非 𝔥 ⊃ L，
+    与目标陈述的假设不逐字对应——作为独立推导会需要一条 inferred 的「设定翻译」边，
+    白白把一条本可干净的链条弄脏。故降为本推导的佐证来源。
+  · **D3（Bakalov–Kac）**：Theorem 4.1 的后半句与该文 Definition 2.2(iii) 在不定号差下不相容
+    （researcher 的核对，无第二来源，未解决问题 Q34）。把它挂成独立推导等于让一条不自洽的定理
+    单独支撑一个节点。故同样降为佐证，并在目标陈述里逐字登记「只可引前半句」。
+  两条都写进 sources，可追溯性不损失，而图上少了两条需要 inferred 的边。
+
+  【本推导的下游】worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 是本卡在
+  「𝔥 = D 维闵氏空间的复化、L = Z k_0 类光」这一特例上的物理实例化。
+author: curator
+created: "2026-09-11"

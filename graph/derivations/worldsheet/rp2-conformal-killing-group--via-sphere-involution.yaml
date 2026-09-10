@@ -1,0 +1,174 @@
+id: worldsheet.rp2-conformal-killing-group--via-sphere-involution
+target: worldsheet.rp2-conformal-killing-group
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: |
+      提供 RP₂ = S₂/(z ∼ −1/z̄) 这一实现、该对合无不动点（故无边界、不可定向），
+      以及 χ(RP₂) = 1。本推导的「与认同相容」条件就是对它写的。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: |
+      提供**母群与母 CKV**：RP₂ 的 CKV 是 S₂ 的 CKV（δz = a₀ + a₁z + a₂z²，κ = 6，群 PSL(2,C)）
+      中与认同 z ∼ −1/z̄ 相容的那些。原书 §6.1 逐字就是这样说的
+      （「the subgroup of PSL(2,C) that respects the identification (6.1.9)」），
+      与 §6.1 的球面段落同章同节，故不标 inferred。
+  - id: worldsheet.riemann-roch-kappa-minus-mu-v2
+    note: |
+      提供 κ − μ = 3χ，配 χ(RP₂) = 1 与本条 (1) 的 μ = 0 得 **κ(RP₂) = 3**。
+      原书**不写**这个数字，但它写了 (5.2.11a) κ = 3χ（该卡承载的就是 (5.2.9)/(5.2.11a) 这条关系），
+      故这条边不标 inferred，只是数字本身是本图代入得到的（见 gaps 第二条）。
+      ⚠ 该卡的适用范围是「紧、无边」——RP₂ 无边界，落在范围内。
+  - id: worldsheet.conformal-killing-equation
+    note: κ 的定义（被计数的对象）。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: |
+      μ 的定义（(1) 中被断言为零的对象）。⚠ 该卡的定义写在**紧无边**曲面上，RP₂ 无边界，适用；
+      但该定义**未处理不可定向情形下的定向性问题**（δ'g 是张量，不需定向，故实际无碍），
+      本图未见来源对此作过说明。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」, pp. 168–169：认同式 (6.1.9) z′ = −1/z̄；「There are no moduli. The CKG is the subgroup of PSL(2,C) that respects the identification (6.1.9); this is just the ordinary rotation group SO(3).」；**该两句无式号**"
+    note: |
+      **L1 原书页图逐字**（math-sources.md §39.6(d)）。这是 (1)(2) 的全部书内论证——
+      **原书只给结论，不给推导**，见 gaps 第一条。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p. 152（κ = 3χ, μ = 0 for χ > 0）"
+    note: |
+      L1 原书页图（math-sources.md §39.6(a)）。只用它的 **κ = 3χ** 那一半来定出数字 3；
+      **不**用它的 μ = 0 那一半（见 notes 的「为什么不挂 positive-euler-number-no-moduli」）。
+  - ref: caohuu-ghisa-2004
+    loc: "Corollary 3.1（arXiv:0902.2725v1, p. 2）"
+    note: |
+      数学侧独立第二来源，L1（math-sources.md §39.7.2）：RP² 的 dianalytic 自同构都由黎曼球的
+      **旋转**给出，所用对合 h(z) = −1/z̄ 与 (6.1.9) 逐字相同。
+      ⚠ 原文**不写 SO(3)、不写 PSU(2)、不写维数 3**，证明外包给 Bârză–Ghişa 2004
+      （**该文 2026-09-11 已取得，L4-全文，见下一条 source**）。
+      ⚠ **2026-09-11 订正（math-sources.md §40.3）**：「rotation」这个词是**本文自己加的**，
+      **不在**它外包证明的那篇里。故本条承载的「群是球面旋转群」这一层，
+      其**证明并不存在于任何已取得的来源中**（本文自称证明只是半页验证）。
+      本条**不**承载 κ = 3。
+  - ref: barza-ghisa-2004
+    loc: "Cor 3.2 p.134（L4-全文，jina 文本，禁抄公式字符）"
+    note: |
+      **caohuu-ghisa-2004 Theorem 2.1「We have shown in [5]」所指的真正证明出处**
+      （Math. Bohem. 129 (2004) 129–140）。**L4-全文**：经 `r.jina.ai` 文本代理读 DML-CZ 的
+      PDF（`.cz` 域在本环境一律 Socket is closed），**非页图**，符号被破坏
+      ⇒ 可引编号页码、**禁抄公式字符**（math-sources.md §40.1）。
+      **本条只承载一层**：RP² 的 dianalytic 自同构落在 Möbius 族
+      G(z) = e^{iθ}(az+b)/(−conj(b)z + a)（|a| + |b| ≠ 0）里。
+      **全文不出现 "rotation"、不出现 SO(3)/SU(2)/PSU(2)、不把这族映射称作群、不给维数 3**
+      （两次独立全文提取一致）。⇒ 本条**不**承载 (2) 的「SO(3)」，也**不**承载 κ = 3。
+      三条禁令见目标卡同名 source（不得引 Theorem 3.1 支持自同构那条、不得当作 SO(3) 的出处、
+      不得引 Theorem 5.x）。
+summary: |
+  **(1)(2) 是原书的直接陈述，本推导只作转录 + 记号对照。**
+
+  取 S₂ 上的对合 σ : z ↦ −1/z̄（(6.1.9)），它反全纯、无不动点、且是对合，故商 RP₂ = S₂/⟨σ⟩
+  无边界且不可定向。
+
+  **(2)** 一个 S₂ 的 CKV / 共形自同构下降到 RP₂，当且仅当它与 σ 对易（"respects the
+  identification"）。在 PSL(2,C) 中作用于球面上，与「对径对合」对易的子群正是保持圆度规的
+  那一支，即通常的旋转群 **SO(3) ⊂ PSL(2,C)**。原书 §6.1 逐字给出这个结论。
+  数学侧的确认**分两层，每层各缺一块**（2026-09-11 按 math-sources.md §40.3 改写）：
+    · **第一层（有证明、无「旋转」）**：Bârză–Ghişa 2004 **Corollary 3.2 (p.134)** 对同一个对合
+      证明 RP² 的 dianalytic 自同构落在 Möbius 族 e^{iθ}(az+b)/(−b̄z+ā) 里——
+      **该文全文不出现 "rotation"、不出现 SO(3)/PSU(2)、不称之为群、不给维数**。
+    · **第二层（有「旋转」、证明外包且外包对象里没有这句）**：Cao-Huu–Ghişa 2004
+      **Corollary 3.1 (p.2)** 才写出「其中 **G 是黎曼球的一个旋转**」，
+      而它的上游 Theorem 2.1 把证明外包给上面那篇。
+    · **第三层（无任何来源）**：「球面旋转群 = SO(3)、实维 3」。唯一逐字写 SO(3) 的是
+      Polchinski p.168–169（物理书）。
+  ⇒ summary 里「与对径对合对易的 PSL(2,C) 子群 = SO(3)」这句仍然是**本图补的标准推理**，
+  数学文献侧**没有**一条定理能整条替掉它。见 gaps 前两条。
+
+  **(1)** μ(RP₂) = 0：原书 §6.1 在同一段逐字写「There are no moduli.」
+
+  **(3)** κ(RP₂) = 3：由 worldsheet.riemann-roch-kappa-minus-mu 的 κ − μ = 3χ、χ(RP₂) = 1
+  与 (1) 得 κ = 3。这与 (2) 的 SO(3) 是 3 维实李群相容——**这一致性是本图的交叉检验，
+  不是原书的论证**（原书从不写 κ(RP₂) = 3）。
+gaps:
+  - |
+    **原书对 (1)(2) 只给结论，不给推导**：§6.1 那两句是断言句，全节没有
+    「与 σ 对易 ⟹ 落在 SO(3)」的计算，也没有「RP₂ 上不存在非零全局全纯二次微分」的验证。
+    本推导 summary 里那句「与对径对合对易的 PSL(2,C) 子群 = SO(3)」是**本图补的标准推理**，
+    不是来源逐字。
+  - |
+    **★ 数学侧的两步补步都没有来源（2026-09-11 按 math-sources.md §40.3 订正）。**
+    此前本 gap 写的是「Cao-Huu–Ghişa Cor 3.1 补上了这一步的结论，但它的证明外包给
+    Bârză–Ghişa 2004（本项目未获取）」。该文**现已取得**（L4-全文，r.jina.ai 文本代理），
+    结论因此**变差而不是变好**：
+    · **补步 (ii)「那族 Möbius 变换 = 球面的旋转」无来源背书。**
+      Bârză–Ghişa 2004 **Corollary 3.2 (p.134)** 只给 Möbius 形式；
+      **该文全文不出现 "rotation"/"rotations"**（两次措辞不同的独立全文提取一致）。
+      所以「rotation」这个词是 Cao-Huu–Ghişa 自己加的，而**它的证明并不在它引作依据的那篇里**。
+      这不是「找不到」，是**确定的否定结果**。
+    · **补步 (iii)「球面旋转群 = SO(3)、实维 3」完全无来源。**
+      Bârză–Ghişa 2004 不出现 SO(3)/SU(2)/PSU(2)、不把这族映射称作**群**、不给**维数**；
+      Cao-Huu–Ghişa 2004 也不写 SO(3)/PSU(2)/维数 3。
+      唯一逐字写「SO(3)」与隐含「实维 3」的来源是 **Polchinski p.168–169（物理书）**。
+    ⇒ 本推导的 (2) 在**数学文献侧是两步无来源的补步**，只在**物理书侧**有一条逐字断言。
+    ⚠ 三条引用禁令（§40.4(3)，必须遵守）：
+    (1) 不得引 `Bârză–Ghişa 2004, Theorem 3.1` 支持「自同构」那条（那条是**全部** dianalytic
+        变换，含 2n+1 次；自同构是 **Corollary 3.2**）；
+    (2) 不得把 Bârză–Ghişa 2004 当作「旋转群/SO(3)」的出处；
+    (3) 不得引 `Bârză–Ghişa 2004, Theorem 5.x`（该文最后一条编号是 **6.1**，却印在第 5 节里）。
+  - |
+    **Bârză–Ghişa 2004 的等级只到 L4-全文，升不到 L1**：取件唯一活路是
+    `https://r.jina.ai/<DML-CZ PDF>`（`.cz` 域在本环境一律 `Socket is closed`，重试无用；
+    EMIS 的期刊镜像已整体重定向到 zbMATH）。拿到的是**全文文本**但**数学符号被破坏**，
+    且不是 researcher 本人逐页读的。⇒ **可引编号与页码，不可照抄公式字符**。
+    具体未决项（math-sources.md §40.6 Q37）：分母是 −b̄z+**ā** 还是 −b̄z+**a**（上划线是否被
+    抽取丢掉）、Corollary 3.2 的第二支是不是 G̃(z̄)。**公式字符以 caohuu-ghisa-2004 (L1) 为准。**
+  - |
+    **κ(RP₂) = 3 这个数字在原书里不存在**。它是本图把 (5.2.11a) 的 κ = 3χ 代 χ = 1 得到的。
+    而 (5.2.11a) 本身挂在 worldsheet.riemann-roch-kappa-minus-mu 上，
+    那条推导（--via-ghost-number-anomaly）的比例常数 3 是**用球面一个例子标定**出来的，
+    并且它的标定还欠着 μ(S₂) = 0 这一半（见该推导 gaps 第一条的「残余」）。
+    **本条 κ = 3 因此继承那条链的全部弱点。**
+    ⚠ 它也**不能**由 (2) 的「SO(3) 是 3 维」反推出来——那条路要先有上面的补步 (iii)，而那是无来源的。
+  - |
+    **(1) 的 μ(RP₂) = 0 在图上仍是断言**：书内的一般理由是 §5.2 的 (5.2.11a)（χ > 0 ⇒ μ = 0），
+    即 worldsheet.positive-euler-number-no-moduli 的内容；**本推导刻意不建那条边**，
+    否则与 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 构成环
+    （见 notes）。所以 (1) 的支撑只有 §6.1 的那一句逐字断言。
+  - |
+    **文献分歧未裁定**：arXiv:2502.13269 据摘要称 RP² 的 CKG 是 **SU(2)**（L4，正文未获取）。
+    与 SO(3) 差一个 Z₂。本推导按 SO(3) 写，理由见目标卡 notes；**这属于「取哪种写法」的
+    选择，不是本推导论证出来的**。
+  - |
+    **不可定向曲面上的 μ / κ 定义未被本图审查**：worldsheet.moduli-condition-traceless-transverse
+    与 worldsheet.conformal-killing-equation 都写在一般二维 Riemann 流形上，
+    但本图与来源都没有讨论「不可定向时这些定义是否需要修改」。
+  - |
+    **来源强度**：本卡的 Polchinski 条目是**本图少数几条直接读到原书页图的来源**
+    （L1，Cambridge Core ch.5/ch.6 PDF），强于本图多数经 schrans-2020 转手的条目。
+notes: |
+  由 curator 于 2026-09-11 建立（math-sources.md §39.9(4)）。
+
+  **为什么不挂 worldsheet.positive-euler-number-no-moduli**：那张卡是「χ > 0 ⇒ μ = 0」，
+  书内确实是 (1) 的一般理由。但本图的 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration
+  反过来要用 RP₂ 的 μ = 0 来关闭它的枚举第二步。两边同时建边会形成**环**
+  （positive-euler-number-no-moduli ← --via-surface-enumeration ← rp2-conformal-killing-group
+  ← --via-sphere-involution ← positive-euler-number-no-moduli）。
+  本图的取舍：**RP₂ 这一格用 §6.1 的独立逐字断言承载**（原书确实在 §6.1 单独写了
+  「There are no moduli」，不回指 §5.2），枚举推导那边引用本卡；
+  本卡这边不回挂 §5.2 的一般结论。缺口如实记在 gaps 第三条。
+
+  **status = physical-argument**（docs/STATUS_LEVELS.md「断言 + 骨架」条）：
+  来源给出清晰结论与骨架（对合 + 相容子群），关键步骤是断言，且 κ = 3 继承
+  Riemann–Roch 那条物理路线的弱点。**不标 conjecture**：结论在文献中无争议。
+  升级路径（2026-09-11 按 math-sources.md §40 改写）：
+  (a) ~~取得 Bârză–Ghişa, Math. Bohemica 129 (2004) 129–140 的正文~~ —— **已取得（L4-全文），
+      但这条路**走不通**：该文只给 Möbius 形式，**不给「旋转」、不给 SO(3)、不给维数**
+      （§40.3）。要真正替掉 (2) 的补步，需要的是另一条来源，它带证明地说
+      「与对径对合 z ↦ −1/z̄ 对易的 PSL(2,C) 子群 = PSU(2) ≅ SO(3)，实维 3」——
+      这是一条初等的线性代数/四元数事实，但本图**至今没有任何来源**。
+      可行的具体目标：(a1) 取 Bârză–Ghişa 2004 的**页图**升到 L1（§40.6 Q37）；
+      (a2) 找一本复分析或李群教材对「Aut(S²) 中保持对径对合的子群」给带证明的陈述
+      （与 math.automorphisms-of-riemann-sphere-are-mobius 同一类来源）。
+  (b) 为 κ − μ = 3χ 建一条挂数学 Riemann–Roch / 椭圆指标定理的 rigorous 推导
+      （math.riemann-roch-theorem 方向，见 math-sources.md §42）。
+  (c) 核实 arXiv:2502.13269 正文以关闭 SO(3)/SU(2) 分歧（Q34）。
+author: curator-surface-class
+created: "2026-09-11"

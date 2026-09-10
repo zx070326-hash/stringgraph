@@ -88,7 +88,7 @@ gaps:
     这不影响本卡陈述（本卡就是按 ℚ-代数陈述的），此处登记以便与
     math.witt-algebra-derived-algebra 的 gap (i) 对照。
   - |
-    (iv) **`lake build` 未由 curator 重跑**。本推导 status: formalized 的证据是 WittPerfect.lean
+    (iv) 【已关闭 2026-09-11】reviewer-batch9 重跑 lake build 与 check_axioms（17 声明 ok）；lead 合并后 main 上 check-axioms 30 ok。原文：**`lake build` 未由 curator 重跑**。本推导 status: formalized 的证据是 WittPerfect.lean
     的文件头自述、formal/TODO.md 的勾选与 20cc08f 已由 lead 合并进 main
     （合并流程要求 `lake build` + `check-axioms`）。curator 侧只做了 grep 级核对
     （`isPerfect`、`cgen_eq`、`two_smul_lgen_eq`、`two_smul_lgen_zero_eq` 的签名与证明体，

@@ -1,0 +1,41 @@
+id: branes.massless-open-string-gauge-field-and-collective-coordinates
+kind: proposition
+title: Dp 膜上的无质量开弦态：平行极化给世界体规范场，垂直极化给膜的集体坐标
+statement: |
+  设有 n 张平行的 Dp 膜（branes.d-brane-from-t-duality），端点带 Chan–Paton 指标。
+  无质量开弦态要求两端在同一张膜上（ΔX' = 0，即 i = j）且 N = 1，
+  即 α^M_{−1}|k; ii⟩。它们按极化分成两类：
+  (1) **p + 1 个平行极化** α^μ_{−1}|k; ii⟩（μ = 0, …, p）：给出膜世界体上的规范场 A^μ，
+      顶点算子 ∂_∥X^μ e^{ik·X}。θ_i 互不相同（膜互相分开）时规范群是 [U(1)]^{p+1} 型的
+      U(1)^n；θ_i 全相同（n 张膜重合）时张在不同膜之间的态也无质量，规范群为 **U(n)**；
+  (2) **25 − p 个垂直极化** α^m_{−1}|k; ii⟩（m = p+1, …, 25）：它们是紧化（对偶）方向的
+      规范场分量 Φ_m ≡ A_{m,ii}，顶点算子 ∂_⊥X'^m e^{ik·X}。
+      由 branes.wilson-line-eigenvalues-are-brane-positions，正是这些场决定膜的位置，
+      故它们是 **D 膜的集体坐标**（膜在垂直方向的位置涨落）。
+  n 张重合膜在 25 − p 个对偶方向上共给出 (25 − p) n² 个无质量标量。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.1)（两支无质量态），p.268–269"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E153，证据等级 L1
+      （Schrans §8.113–§8.114，笔记 p.527–528、p.532）。
+      ⚠ **「集体坐标」这句话 Schrans 是在「解释」而不是复述原书**（§8.114 开头逐字：
+      「**This is my understanding of this statement.** The hyperplane is fully determined
+      by the normal coordinate and by the location of the endpoint at a given worldsheet
+      time τ_0」）。
+      ⚠ Schrans 目录把 §8.113 与 §8.114 **都**标 (8.7.1)；分 a/b 两支是他正文的说法
+      （抽取记录 §10）。
+tags: [d-brane, open-string, gauge-field, collective-coordinates, spectrum, chan-paton]
+notes: |
+  这条是「D 膜的动力学由其世界体上的规范理论描述」的起点：常规范场 ↔ 膜的位置，
+  非常规范场 ↔ 膜的形变。抽取记录 #E153 记下 Schrans 把这条推到底的评语
+  （「This provides a description of D-branes in terms of gauge theory … These facts
+  provide the basis for the gauge/gravity correspondences … such as the famous AdS/CFT
+  correspondence」）——⚠ **最后那句 AdS/CFT 是 Schrans 的话，不是 Polchinski 的陈述**，
+  本图不采。
+
+  重合膜上标量场的四次势 (2πα')⁴g² tr([X_m, X_n][X^m, X^n]) 与其平坦方向
+  （膜可以自由分开）见抽取记录 #E153 末（(8.7.11)），本图未建卡。
+author: curator-polchinski-ch8
+created: "2026-09-11"

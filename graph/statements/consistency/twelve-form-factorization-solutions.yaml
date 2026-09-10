@@ -1,0 +1,121 @@
+id: consistency.twelve-form-factorization-solutions
+kind: proposition
+title: 使十维反常十二形式因子化的 496 维规范群：文献列出的四个解 SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶
+statement: |
+  **设定**：十维 N = 1 超引力 + 超 Yang–Mills 的**有效场论**。规范群 G 的伴随维数（= 无质量规范玻色子数
+  = 物质左手 spin-1/2 场数）记作 n。反常十二形式按 conv.gauge-trace-normalization 的迹约定写出。
+
+  **「使十二形式因子化」的定义**（本卡对这个词的用法，与文献一致）：
+  称 G **使十二形式因子化**，指 Î₁₂ 中**不能由局域反项抵消的那些项**全部为零，即
+
+    (i) n = 496（使正比于 n − 496 的纯引力单迹结构消失，见 consistency.gravitational-anomaly-requires-496-fermions）；
+    (ii) 纯规范的六阶单迹组合为零，即（用 ADT (7) 的写法）
+         −Tr F⁶ + (1/48) Tr F⁴ Tr F² − (Tr F²)³/14400 = 0，
+         等价于 math.anomaly-twelve-form-factorization 的恒等式 Ω₁₂ = (1/48) Ω₄[Ω₈ − (1/300)Ω₄²]；
+
+  此时 Î₁₂ 化为**因子化形式** Y₄ X₈（Y₄ 是四形式、X₈ 是八形式）。
+
+  **命题（文献断言）**：满足 (i)(ii) 的规范群恰是下面四个：
+
+      **SO(32)**,   **E₈ × E₈**,   **E₈ × U(1)²⁴⁸**,   **U(1)⁴⁹⁶**
+
+  （四者的伴随维数都是 496：32·31/2 = 496，2 × 248 = 496，248 + 248 = 496，496。）
+
+  **本节点不断言**（每条都有原文或本图节点依据）：
+  (a) ★★ **这四个群「反常抵消」**。按 consistency.abelian-factorization-is-not-cancellation
+      （Adams–DeWolfe–Taylor 2010，L1），两个**阿贝尔**解的 Green–Schwarz 抵消项**写不下来**
+      （Y₄ ≠ dH₃，与超对称 + 阿贝尔规范不变性不相容）。
+      **因子化 ≠ 抵消**；本卡只说因子化。（docs/ROADMAP.md 2026-09-11 记账红线。）
+  (b) 这四个理论是一致的量子理论，或它们可嵌入弦论。
+  (c) GSW Vol. 2 §13.5.3 的**具体措辞、式号或证明**——本项目**未取得该节正文**（L0，见 sources）。
+  (d) 「只有非阿贝尔的两个」这一更强/更窄的说法。schwarz-2012-history p.10 逐字说 E₈ × E₈ 是
+      「a second (and the **only other**) gauge group」，与本卡的四解表**冲突**；本图**不裁决**，
+      最可能的调和是他只算非阿贝尔（半单）解，但他没这么限定。
+  (e) 496 维李代数的完整分类。antonelli-2015 §2.1 逐字：「Nonetheless the set of Lie groups with
+      496 dimensions contains **many more** groups.」——本卡说的是这些群中只有四个满足 (i)(ii)，
+      不是说只有四个 496 维群。
+  (f) 混合反常与引力反常的其余条件（如 math.mixed-anomaly-trace-conditions-n32 的两条方程）。
+      本卡的 (ii) 只是六阶单迹项，**不含**那两条方程；它们在 SO(32) 上另有独立确认。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: gsw-1987-v2
+    loc: "§13.5.3「Allowed gauge groups for N = 1 superstring theories」，pp. 353–358"
+    note: |
+      ★★ **内容等级 L0：本项目未取得该节正文。**
+      **位置本身是 L1**（全书目录 pp. v–x 逐页读图，§13.5.3 的标题与页码 353–358 逐字确证；
+      抽取记录 literature/extractions/gsw-1987-v2.md E12）。
+      **正文取不到的原因**：Cambridge Core 第 13 章章级 PDF 12 MB，超出工具 10 MB 上限（同记录 §0.4），
+      需要人类在浏览器里点一次。
+      **两条独立二手证据把四解表的出处指向这一节**：antonelli-2015 §1.1 逐字
+      「mostly following the original statement found in chapter 13 of [3]」；
+      adams-dewolfe-taylor-2010 第一节把 U(1)⁴⁹⁶ / E₈ × U(1)²⁴⁸ 的来历标 [GSW]。
+      ⚠ **但两位转述者对 GSW 说了多强的话理解不一致**：Antonelli 读成「已知这四个反常抵消」，
+      ADT 只读成「satisfy **some of the same** conditions」「**might appear to be** consistent」。
+      ⚠ **红线**：本卡与本图任何节点都不得声称 GSW 第 13 章的具体式号或措辞（同记录 §3.1/§5.5）。
+  - ref: bilal-2008
+    loc: "§12.4.2，pp. 102–103：列出四个 496 维解，并逐字写「One can actually scan all 496-dimensional groups and show that there are no other possibilities」"
+    note: |
+      L1（researcher 2026-09-11 读 §12 全节 pp. 96–103）。
+      **该句无证明、无引用**——它是本卡「恰是四个」这一断言在可读来源里唯一的正面表述，
+      而它本身只是一句「可以扫描」。见推导 gaps。
+  - ref: antonelli-2015
+    loc: "§1.1, p.3（四解 + 「no proof has explicitly been carried out」）；§2.1, p.7（「It is often said that four groups cancel the anomaly」）；p.33 结论"
+    note: |
+      L1。**该文自称补上了这个证明**（摘要逐字「We prove that the swampland … is only populated by
+      U(1)⁴⁹⁶ and E₈ × U(1)²⁴⁸」；p.33「are the only groups where the anomaly is cancelled」），
+      但 **(a) 它是单作者预印本，本项目未核实到期刊发表记录；(b) 本项目未复核其证明；
+      (c) 它对「anomaly cancelled」用的正是本卡所说的「因子化」义**，
+      与 adams-dewolfe-taylor-2010 的「抵消」不是同一件事（该文 §1.1 对 ADT 的转述也失真，
+      bib note 已记为矛盾）。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352v2，第一节末（四解的归属与措辞）；第三节开头（阿贝尔两解确实因子化的独立验算）"
+    note: |
+      L1（curator 2026-09-11 另取 arXiv e-print LaTeX 源码核对）。
+      ★ **本条对本卡的价值是：它把四解表里阿贝尔的那一半独立验算了一遍**，逐字：
+      「These theories both contain n = 496 generators, and the first term in large parentheses in (7)
+      vanishes for both, so they again have anomaly polynomials which take the factorized form Y₄X₈ [GSW].」
+      ⇒ 「U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ 使十二形式因子化」这半句**不再只有 L0 来源**。
+      ⚠ 但 ADT **不**验证「恰是四个」，也**不**说这四个反常抵消——恰恰相反，见
+      consistency.abelian-factorization-is-not-cancellation。
+tags: [anomaly, factorization, classification, d10, so32, e8, effective-field-theory, unresolved-conflict, superseded]
+superseded_by: consistency.d10-anomaly-conditions-completeness-claim
+notes: |
+  【0. ★★ 本卡已被取代（2026-09-11，lead 裁决，依 literature/extractions/polchinski-1998-v2-ch12.md）】
+  本卡把两件**认识论地位完全不同**的事写在同一条陈述里：
+  · 「这四个群满足两条反常条件」——纯代数，可逐一验算、可机检；
+  · 「**恰是**这四个」——完备性，在本项目可读来源里**没有任何证明**，且各家覆盖范围互相冲突。
+  新证据（polchinski-1998-v2 §12.2 p.101 **脚注 1** 逐字：「They also **hold** for E₈ × U(1)²⁴⁸ and
+  U(1)⁴⁹⁶, but no corresponding string theories are known.」，L1 原书）表明**最可靠的一手教科书来源
+  只说两条 properties "hold"，不作任何唯一性主张**。lead 据此下达红线：**图中不得写「恰有四个」**。
+  ⇒ 本卡拆成两张：
+  · **consistency.d10-four-groups-satisfy-anomaly-conditions**（rigorous，四个群逐一验算）；
+  · **consistency.d10-anomaly-conditions-completeness-claim**（conjecture，完备性主张 + 三方冲突）。
+  `superseded_by` 指向后者（陈述的主干是完备性）。本卡的推导已删除，内容分入两条新推导。
+  **本卡不得再被引用**；下面第 1–4 条保留原文以便追溯。
+  【1. ★ 为什么标题与陈述只写「因子化」】docs/ROADMAP.md 2026-09-11 的记账红线（ADT 2010 L1 之后）：
+  U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ **只是使反常十二形式因子化**，GS 抵消项在阿贝尔情形写不下来。
+  **图中分类卡只能写「因子化」，不得写「反常抵消」。** 这条红线是本卡措辞的直接来源。
+
+  【2. ★ 三方冲突（未裁决，留给 auditor / lead）】
+  | 来源 | 说法 | 等级 |
+  |---|---|---|
+  | schwarz-2012-history p.10 | E₈ × E₈ 是「a second (and the only other) gauge group」 | L1（作者本人回忆） |
+  | bilal-2008 §12.4.2 | 四个解，「one can actually scan … no other possibilities」 | L1（无证明） |
+  | antonelli-2015 | 四个解，出处在 GSW ch.13，「no proof has explicitly been carried out」 | L1（自称补证） |
+  | gsw-1987-v2 §13.5.3 | **原文未取到** | **L0** |
+  裁决前提是读到 GSW §13.5.3 正文。**在此之前本卡的 status 不得上调。**
+
+  【3. 本卡与弦论侧那条 iff 的关系（绝不要合并）】
+  consistency.type-i-hexagon-so32-iff 是**弦论侧**：候选集是 Chan–Paton 群 SO(n)/USp(n)/U(n)，
+  结论是单圈纯规范六边形**反常为零** ⟺ SO(32)。
+  本卡是**低能场论侧**：候选集是全部 496 维李代数，结论是**因子化**。
+  两条陈述的适用域、候选集与结论词都不同。E₈ × E₈ 与两个阿贝尔解根本不在 Chan–Paton 候选集里。
+
+  【4. 本图为什么此前不建这张卡】consistency.anomaly-cancellation-so32-effective-theory notes 第 1 条
+  记录了「本图不建『因子化 ⟺ SO(32) 或 E₈ × E₈』的节点」的理由（GS 1984 原文无唯一性断言）。
+  **那条理由仍然成立**：本卡**不**挂在 green-schwarz-1984 名下（GS 原文只点名两个群，
+  extractions/green-schwarz-1984.md E20 已 L1 证明），而是挂在 GSW ch.13 / Bilal / Antonelli 名下，
+  并把 GSW 的 L0 状态写死在 sources 里。
+author: curator
+created: "2026-09-11"

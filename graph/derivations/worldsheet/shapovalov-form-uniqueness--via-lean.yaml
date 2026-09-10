@@ -1,0 +1,97 @@
+id: worldsheet.shapovalov-form-uniqueness--via-lean
+target: worldsheet.shapovalov-form-uniqueness
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供本推导的**主要输入**，且只用到该卡的两件事：
+      (a) 「负模态张成」——V(c,h) 作为 R-模由**无序**负模态词 L_{n_1}…L_{n_k}|c,h⟩（n_i < 0）
+          张成，Lean 侧 `negSpan_eq_top` / `negSpan_eq_span`；以及最高权关系
+          `lie_lgen_hwv_of_pos`、`lie_lgen_zero_hwv`（用于「B(|c,h⟩, ·) 被负模态稳定」那一步）。
+      (b) 「L_0 分级」——`levelSpan` 与 `lie_lgen_zero_of_mem_levelSpan`（L_0 在 V_N 上是标量 h+N），
+          只用于目标 (3)。
+      **刻意未用**该卡不断言的 (a) PBW 基、(b) dim V_N = p(N)、(c) V(c,h) ≠ 0；
+      这正是目标陈述「无条件」那一句的内容。字面依赖（Shapovalov.lean import Verma.lean，
+      逐条调用上述声明）。
+  - id: math.virasoro-anti-involution
+    inferred: false
+    note: |
+      提供「逆变」这一概念本身：目标里的伴随关系 L_n ↦ L_{−n} 就是 σ 在生成元上的取值。
+      ⚠ **强度说明**：Lean 的 `IsContravariant` 直接按生成元写成
+      `B ⁅L n, x⁆ y = B x ⁅L (-n), y⁆`，**没有**在证明里调用 `antiInvolution_lie`
+      （反自同构那一条）——两步子模论证只需要「L_n 的伴随是 L_{−n}」这个逐生成元的等式。
+      故本边是**概念性/记号性依赖**（σ 的定义），不是对该卡 (2) 的逻辑依赖。
+      即便如此保留这条边：目标陈述里「即 L_n 在 B 下的伴随是 σ(L_n) = L_{−n}」一句字面引用了 σ，
+      而 σ 必须在图上有定义点；且下游 worldsheet.shapovalov-form-existence 的构造
+      （σ-扭对偶）**确实**要用 `antiInvolution_lie`。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{IsContravariant, eq_top_of_hwv_mem_of_lie_neg, IsContravariant.sub, eq_of_isContravariant, IsContravariant.flip, IsContravariant.flip_eq, IsContravariant.comm, isUnit_intCast, IsContravariant.eq_zero_of_level_ne}；上游调用 StringFormal.Virasoro.{negSpan_eq_top, negSpan_eq_span, wordAct_cons, lie_lgen_hwv_of_pos, lie_lgen_zero_hwv, lie_lgen_zero_of_mem_levelSpan}"
+    note: |
+      本仓库，形式化侧提交 **1731c49**（"formal: construct the Shapovalov form from a
+      sigma-twisted dual highest weight vector"），由 lead 以 **b95a406**
+      （"merge: Shapovalov form on the Virasoro Verma module (formalizer)"）合入 main；
+      Lean 4 + Mathlib v4.33.1。文件头 Status 段逐字「No `sorry`, no new axioms.」，
+      formal/TODO.md 的 `shapovalov-form` 一条已勾选并逐字记下
+      「`eq_of_isContravariant`：唯一性无条件成立（只用 `negSpan_eq_top`，不需要 PBW / 分级 /
+      `V ≠ 0`）」。
+      **curator 未自行重跑 `lake build`**；依据是该自述、TODO 登记与 b95a406 已在 main 上。
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/Shapovalov.lean。
+
+  **共用工具** `eq_top_of_hwv_mem_of_lie_neg`：V(c,h) 的一个子模，只要含 |c,h⟩ 且对**负**模态
+  L_n（n < 0）的作用封闭，就等于 ⊤。这是 `negSpan_eq_top`（负模态词张成）加一次对词长的归纳
+  （`wordAct_cons`）。整条推导只用这一个关于 Verma 模的事实。
+
+  **(1) 唯一性** = `eq_of_isContravariant`：置 D := B − B′（`IsContravariant.sub` 说 D 仍逆变），
+  证 D = 0，分两步：
+  - **第 1 步** D(|c,h⟩, ·) = 0：集合 { y : D(|c,h⟩, y) = 0 } 是 D(|c,h⟩,·) 这个线性泛函的核，
+    含 |c,h⟩（假设 h1），且对负模态封闭——因为 n < 0 时
+    D(|c,h⟩, L_n y) = D(L_{−n}|c,h⟩, y) = 0（−n > 0，`lie_lgen_hwv_of_pos`）。用工具得核 = ⊤。
+  - **第 2 步** D = 0：集合 { x : D(x, ·) = 0 } 也是核，由第 1 步含 |c,h⟩，且对负模态封闭——
+    D(L_n x, y) = D(x, L_{−n} y) = 0。再用工具。
+  注意两步都只用到**负**模态的封闭性，这正是 `negSpan_eq_top` 提供的；上升模态只在
+  「把 L_{−n}|c,h⟩ 打成 0」处用到最高权关系。**全程没有 PBW、没有基、没有 V ≠ 0。**
+
+  **(2) 对称性** = `IsContravariant.flip_eq`：`IsContravariant.flip` 说 B 的转置 B.flip 逆变
+  （把 n 换成 −n 再 `neg_neg`）；而 `B.flip |c,h⟩ |c,h⟩ = B |c,h⟩ |c,h⟩` 在 Lean 里**定义相等**
+  （证明字面是 `rfl`），于是 (1) 直接给出 B.flip = B。逐点版本 `IsContravariant.comm`。
+  ⇒ 归一化在这里**没有用到**：对称性对任何逆变型成立。
+
+  **(3) level 正交** = `IsContravariant.eq_zero_of_level_ne`：取 n = 0 的逆变性
+  B(L_0 x, y) = B(x, L_0 y)；x ∈ V_M、y ∈ V_N 时两边分别是 (h+M)B(x,y) 与 (h+N)B(x,y)
+  （`lie_lgen_zero_of_mem_levelSpan`），故 ((M:R) − (N:R))·B(x,y) = 0。
+  `isUnit_intCast`（ℚ-代数中非零整数可逆）把 M − N 取逆，得 B(x,y) = 0。
+
+  **本推导为什么是 `formalized` 而不是 `rigorous`**：三条结论都是 Shapovalov.lean 里具名、
+  无 sorry 的定理，目标陈述逐句对应（见 sources.loc 的声明清单），且两条 depends_on
+  指向的卡本身也是 formalized。
+gaps:
+  - |
+    (i) **陈述 (1)(2) 其实对任意交换环成立，但 Lean 侧带着文件级的 `[Algebra ℚ R]`**。
+    (3) 真正用到 ℚ-代数（`isUnit_intCast`）。目标陈述统一在 ℚ-代数上叙述，因此这不是
+    「陈述强于证明」的缺口，而是**证明强于陈述**的方向；记在此以免日后有人误以为
+    (1)(2) 需要特征零。要把这条差别写进图，正确做法是新建一张更一般的卡。
+  - |
+    (ii) **「至多一个」不等于「恰好一个」**。本卡不给存在性，因此在 V(c,h) = 0 的（未排除的）
+    情形下三条结论都是空洞真。这不是本推导的漏洞——目标陈述已明写——但下游若需要
+    「Shapovalov 形式存在」必须改引 worldsheet.shapovalov-form-existence，
+    并连带 math.verma-module-free-over-negative-part（rigorous）。
+  - |
+    (iii) **不覆盖 Hermite 情形**。schottenloher-2008 Theorem 6.8 的唯一性是对
+    共轭双线性的 Hermite 形式 H 说的（c, h ∈ ℝ）。从本卡的双线性版本到 Hermite 版本
+    需要 R = C、复共轭与实 (c,h)，**这一步图里没有节点**。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+
+  【formalizer 的路线评估（Shapovalov.lean 文件头 "Route assessment" 第 1 点，逐字转述）】
+  "Uniqueness is unconditional. A contravariant bilinear form is determined by its value on
+  (|c,h⟩, |c,h⟩) by a two-step submodule argument that uses nothing but `negSpan_eq_top` …
+  In particular **symmetry is a theorem, not part of the definition**"。
+  本推导的 summary 就是这段话的展开。
+author: curator
+created: "2026-09-11"

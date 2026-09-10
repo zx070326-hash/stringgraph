@@ -1,0 +1,55 @@
+id: conv.ope-tilde-notation
+family: ope-notation
+title: "OPE 中 ∼ 的语义（相等到非奇异项）与波浪号 ~ 不是厄米共轭"
+definition: |
+  本约定固定两个在 Polchinski 全书公式里反复出现、但形式化时会咬人的记号。
+
+  (1) **算子乘积展开里的 `∼`**：写
+        A(z) B(0) ∼ Σ_{k=1}^{N} C_k(0) / z^k
+      时，`∼` 的含义是「**两边相等，至多相差在 z → 0 处非奇异的项**」，
+      即差是一个在原点解析（可展成 z 的非负幂级数）的算子值函数。
+      它**不是**渐近记号（不是 "asymptotic to"），也**不是**近似等号；
+      本书另用 `≈` 表示 "approximately equal to"、`≡` 表示 "defined as"、`≅` 表示 "equivalent to"。
+      推论：凡以 `∼` 写出的 OPE，只有其**奇异部分的系数**是被断言的内容；
+      任何从 `∼` 式读出的等式（如 c 的读出、共形权的读出、留数/围道公式）
+      都只依赖有限个奇异项，与非奇异部分无关。这正是
+      worldsheet.ope-pole-mode-commutator-dictionary 这类「从 OPE 极点读对易子」的
+      节点得以成立的记号前提。
+
+  (2) **反全纯算子上的波浪号 `~`（如 T̃(z̄)、L̃_m、α̃_n）只是「反全纯部门」的标签，
+      不是厄米共轭、也不是任何对合**。共轭在本书里另有记号：世界面坐标与模参数
+      （z、τ、q）的复共轭用上划线 `¯`，较长表达式的复共轭用星号 `*`，
+      世界面算子的欧氏伴随（Euclidean adjoint）用上划线并在 §6.7 定义，
+      时空旋量场的 Dirac 伴随用上划线（仅第二卷）。
+      因此**不得**把 T̃、L̃_m 当成 T、L_m 的伴随来读；
+      Virasoro 生成元的厄米共轭是 L_m^† = L_{−m}（(2.9.11)、(4.1.7)），
+      与波浪号无关（见 worldsheet.virasoro-generators-adjoint）。
+
+  ⚠ 使用范围：本约定描述的是**记号**，不改变任何公式的数值系数，故不进入 status 传播。
+  凡陈述文本中出现 `∼` 或带波浪号算子的节点都应声明本约定，
+  否则形式化时无法确定该式断言的强度（等号？渐近？只到奇异项？）。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "Notation, pp. xviii–xix（逐字：\"∼ equal up to nonsingular terms (in OPEs), or rough correspondence\"；\"Antiholomorphic operators are designated by tildes ~; as explained in section 2.3, these are not the adjoints of holomorphic operators.\"；\"A bar ¯ is used to denote the conjugates of world-sheet coordinates and moduli (such as z, τ, and q), but a star * is used for longer expressions... a bar on a world-sheet operator is the Euclidean adjoint (defined in section 6.7)\"）"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字全文转录）】
+      Notation 页是独立的 pp. xviii–xx（Preface 是 pp. xv–xvii）。
+      同页还给出 ≡ / ≅ / ≈ 的分工（defined as / equivalent to / approximately equal to），
+      本节点 definition (1) 末尾的对照即出自该处。
+      版本锚定：Cambridge Books Online 数字化本（© 1998, 2005）。
+      见 literature/extractions/polchinski-1998-v1.md §12.9 与 §12.10 表 B 第 5 项。
+notes: |
+  由 curator 于 2026-09-11（curator-v1-locs）按 §12.10 表 B 第 5 项新建。
+  建立动机：本图大量节点的陈述文本直接抄了原书带 `∼` 的 OPE
+  （worldsheet.tt-ope-central-charge、worldsheet.primary-field-v2、
+  worldsheet.brst-current-primary-iff-total-central-charge-zero 等），
+  而 `∼` 的强度此前没有任何节点定义过；Lean 形式化时这会直接决定要证的命题是什么。
+
+  **本次不批量给既有节点加 uses_conventions**：那是一次跨几十个文件的机械改动，
+  且其中若干文件正被其他 agent 持有（ddf-*、vertex-operator-*、kac-determinant 等）。
+  建议 lead 安排一次独立的「声明本约定」批次，或在各节点下次被触碰时顺带补上。
+
+  本 family 目前只有一个节点。若日后引入把 OPE 写成严格等号加正规序项
+  （A(z)B(0) = Σ C_k/z^k + :AB:(0)，如顶点代数文献的写法）的来源，
+  应新建一个 canonical: false 的兄弟节点并写清两种写法的换算。

@@ -1,0 +1,34 @@
+id: branes.dbi-action-is-born-infeld-type--via-open-string-effective-action
+target: branes.dbi-action-is-born-infeld-type
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+  - id: branes.massless-open-string-gauge-field-and-collective-coordinates
+    note: |
+      提供作用量中出现的场：世界体规范场 A^μ（平行极化）与膜位置 X^m（垂直极化）。
+  - id: duality.t-duality-in-decompactification-limit
+    inferred: true
+    note: |
+      按抽取记录 Q27 的建议加的边：DBI 作用量是在**未紧化**时空中的 Dp 膜上写的，
+      依赖「未紧化维 = R → ∞ 的紧化维」这一未论证的外推。原书没有把它写成前提。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.2)、(8.7.10)，p.270"
+    note: |
+      抽取记录 polchinski-1998-v1#E154/Q25。⚠ **表达式对原书 L0**：
+      没有任何来源从原书抄出该式；伴读者明说复现不出原书的推导，改用外部文献。
+summary: |
+  低能有效作用量由膜上无质量开弦的散射振幅（或等价地由开弦在常场强背景中的
+  配分函数）定出。所得作用量是 Born–Infeld 型：行列式的平方根，
+  其中规范场只通过规范不变组合 2πα'F_{μν} − B_{μν} 出现
+  （B 场的规范变换必须由 A 的平移补偿，(8.7.10)）；
+  规范场为零时化为世界体的体积泛函（Nambu–Goto 型）。
+gaps:
+  - "⚠ **本推导没有复述原书的论证**：伴读者逐字承认看不懂原书 (8.7.20) 附近的推导，尤其是 Born–Infeld 项 2πα'F_{ab} 的来源，改用两篇外部文献（抽取记录 Q25）。本项目未核实那两篇是哪两篇，也未登记它们。"
+  - "⚠ 表达式与全部数值系数**未从原书抄出**；本卡因此只作弱陈述（形状与规范不变组合），不含系数、不含张力 τ_p。"
+  - "⚠ 伴读者得到的张力 T_p 与原书 τ_p 归一化不同（他自陈）；抽取记录明令不得把该 T_p 挂到 polchinski-1998-v1。"
+  - "⚠ Schrans Open Questions 第 8 条：他看不出 (8.7.5)（作用量里的几何因子）从哪来。"
+  - "⚠ 依赖未论证的 decompactification 极限 duality.t-duality-in-decompactification-limit（抽取记录 Q27）：把未紧化方向当作 R → ∞ 的紧化方向，原书既没有论证也没有把它写成前提。该上游按 lead 2026-09-11 的「断言 + 骨架」裁决标 physical-argument（缺口记在它自己的 gaps 里），故它不再把本条压到 conjecture；但本条的有效状态仍不高于 physical-argument。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

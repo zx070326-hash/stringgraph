@@ -1,0 +1,80 @@
+id: worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra
+target: worldsheet.bc-ghost-normal-ordering-constant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      只用到无中心荷的 SL(2,R) 子代数 [L_1, L_{−1}] = 2L_0（原书 (2.6.22)）。
+      中心项在 m = 1 处为 (c/12)(1³ − 1) = 0，故本推导**与 bc 系统的 c = −26 无关**，
+      特别地不依赖 worldsheet.bc-ghost-central-charge。
+  - id: worldsheet.bc-ghost-cft
+    note: |
+      提供作用量、权 (h_b, h_c) = (λ, 1−λ)、能动张量 T = :(∂b)c: − λ∂(:bc:)
+      与模展开 {b_m, c_n} = δ_{m+n,0}（原书 (2.5.4)/(2.5.5)/(2.5.11)/(2.7.16)/(2.7.17)）。
+  - id: worldsheet.bc-ghost-ground-state-ghost-number
+    note: |
+      提供被所有正模湮灭的基态 |↓⟩（原书 (2.7.18a,b,c) 的两个简并基态之一）。
+      本推导用到的是 (i)：b_n|↓⟩ = c_n|↓⟩ = 0 对 n > 0，且 b_0|↓⟩ = 0。
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      提供 L^g_m 的正规序写法（原书用 °…° 记鬼场的产生-湮灭正规序，(2.7.19)）。
+      ⚠ 与 --via-state-operator 同样的残留：v2 的费米换序符号规则在本项目的文献核实中
+      没有对应条目（见 v2 第二条 source 的 note）。本推导只用模式反对易关系，不做 Wick 缩并，
+      故实际影响很小，但边上的弱点照记。
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: 把鬼场能动张量展成 Laurent 模 L^g_m，是 (2.7.19) 的前提。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, p.61, eq. (2.7.19)–(2.7.21)；关键步骤是 (2.7.20) 2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = (λb_0c_1)[(1−λ)b_{−1}c_0]|↓⟩ = λ(1−λ)|↓⟩，标量结论 a^g = ½λ(1−λ) 在 (2.7.20) 与 (2.7.21) **之间的无式号正文**里；用的子代数是 §2.6 eq. (2.6.22)"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）】原书 p.61：
+        "L_m = Σ_{n=−∞}^∞ (mλ − n)°b_n c_{m−n}° + δ_{m,0} a^g .   (2.7.19)
+         The ordering constant can be determined **as in eq. (2.7.8)**, which gives
+           2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = (λb_0c_1)[(1−λ)b_{−1}c_0]|↓⟩ = λ(1−λ)|↓⟩ .  (2.7.20)
+         **Thus, a^g = ½λ(1−λ) and**
+           L_m = Σ_{n=−∞}^∞ (mλ − n)°b_n c_{m−n}° + (λ(1−λ)/2)δ_{m,0} .   (2.7.21)"
+      「as in eq. (2.7.8)」这一句是本推导存在的直接依据：原书明说鬼场常数走的是
+      **与 a^X 相同的 Virasoro 代数路线**，不是态-算子路线。
+      另 p.61 有一条限定（对本推导的适用范围要紧）：
+        "To be precise, **these are only Laurent expansions if λ is an integer**, which we will assume
+         for now. The half-integer case is also of interest, but will be dealt with in detail in chapter 10."
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E42/E43/Q11）与 §12.10 表 B 第 13、14 项。
+summary: |
+  原书 §2.7 定 a^g 的**正文**路线，与 a^X 的 (2.7.8) 同型（原书逐字「as in eq. (2.7.8)」）。
+
+  由 (2.7.19)，共形正规序的 L^g_m 与产生-湮灭正规序 °…° 之差是一个只出现在 m = 0 的常数 a^g：
+    L^g_m = Σ_n (mλ − n) °b_n c_{m−n}° + δ_{m,0} a^g。
+  在基态 |↓⟩ 上双线性部分给零，故 L^g_0|↓⟩ = a^g|↓⟩。
+
+  另一方面由 SL(2,R) 子代数 (2.6.22)（中心项恒为零）2L_0 = [L_1, L_{−1}]，
+  用 (2.7.19) 在 m = ±1 处的显式模式与 {b_m, c_n} = δ_{m+n,0} 算得
+    2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = (λ b_0 c_1)[(1−λ) b_{−1} c_0]|↓⟩ = λ(1−λ)|↓⟩,
+  即 a^g = ½λ(1−λ)。弦论所需的 λ = 2 给
+    a^g = ½·2·(1 − 2) = −1。
+
+  **与 --via-state-operator 的关系**：那条走「|↓⟩ ↔ c(0)，权 1 − λ = −1」，依赖
+  worldsheet.state-operator-isomorphism；本条**不依赖**它，只用模式反对易代数，
+  是一条真正独立的路线。原书 p.72 明说两者一致：「the weight of |↓⟩ is −1
+  **in agreement with the earlier result (2.7.21) for λ = 2**」。
+gaps:
+  - "**为什么不是 rigorous**：与 X 部门那条同理——代数步骤本身是有限步计算，但
+     worldsheet.energy-momentum-laurent-modes 与 worldsheet.conformal-normal-ordering-v2
+     在本图中都不是严格的。按 docs/STATUS_LEVELS.md 取 physical-argument。"
+  - "**(2.7.20) 的中间等号是原书直接写出的结果，没有展开计算**：从
+     (L_1L_{−1} − L_{−1}L_1)|↓⟩ 到 (λb_0c_1)[(1−λ)b_{−1}c_0]|↓⟩ 这一步需要把 (2.7.19) 在
+     m = ±1 处展开、用 |↓⟩ 被正模湮灭的性质挑出唯一存活项，原书把这几步压成一个等号。
+     本图未展开复核该中间步（属 docs/STATUS_LEVELS.md「断言 + 骨架」档位）。"
+  - "**原书 (2.7.19) 把 a^g 定义为 L_m 展开式中 δ_{m,0} 的系数，而本图目标节点把 a^g 定义为
+     L^g_0 在 |↓⟩ 上的本征值。** 两者相等需要「°…° 正规序下 L_0 的双线性部分湮灭 |↓⟩」，
+     这一步本图没有独立节点（见目标节点 notes 末段的口径差记录）。"
+  - "**λ 必须是整数**：原书 p.61 明确限定「these are only Laurent expansions if λ is an integer」。
+     本推导的 a^g = ½λ(1−λ) 因此只对整数 λ 有效；半整数 λ（超弦的 βγ 系统）在原书第 10 章另行处理。
+     目标节点取 λ = 2，落在有效范围内。"
+notes: |
+  由 curator-v1-locs 于 2026-09-11 按 literature/extractions/polchinski-1998-v1.md §12.10
+  表 B 第 14 项新建：该表指出本图先前把 a^X、a^g 的推导路线都记成「态-算子对应」，
+  而原书两处走的都是 Virasoro 代数路线。既有的 --via-state-operator 未删除
+  （它对应原书自陈三条路线中的第三条），本卡补上原书正文实际走的那条。
+author: curator-v1-locs
+created: "2026-09-11"

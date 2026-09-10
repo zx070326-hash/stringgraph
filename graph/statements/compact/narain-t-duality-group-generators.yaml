@@ -1,0 +1,41 @@
+id: compact.narain-t-duality-group-generators
+kind: proposition
+title: O(k,k;Z) 的两类可辨认生成元：大坐标变换 SL(k,Z) 与 B 场的整数平移
+statement: |
+  在 k 维环面紧化中（compact.narain-lattice 的记号），T 对偶群 O(k,k;Z) 至少含以下两类元素：
+  (1) **保持周期性的大坐标变换**：X^m ⟼ L^m_n X^n，L^m_n ∈ Z 且 det L = 1（可逆性），
+      即 L ∈ SL(k,Z)。世界面作用量对一般 GL(k,R) 的线性重定义自动不变；
+      要求变换后的坐标仍满足**两条**边界条件——动量量子化 p_m = n_m/R（n_m ∈ Z）
+      与绕数条件（w^m ∈ Z）——把群压缩到 SL(k,Z)。它把 n^m ⟼ L^m_n n^n、w^m ⟼ L^m_n w^n，
+      即把偶自对偶格的一个点送到另一个点。
+  (2) **反对称张量的整数平移**：b_{mn} ⟼ b_{mn} + N_{mn}（N_{mn} 整数矩阵）。
+      由 v_m = α'n_m/R − B_{mn}w^n R，它把 n_m 平移成 n_m − N_{mn}w^n，仍是格点；
+      等价地把配分函数里的 B 场相位平移 2π 的整数倍，故谱不变。
+  这两类都保持 Γ 不变（作为集合），故属于 O(k,k;Z)。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.32)（SL(k,Z) 部分）与 (8.4.33)（B 场的整数平移），p.254"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E143，证据等级 L1
+      （Schrans §8.73–§8.74，笔记 p.481–483）。
+      ⚠ **原书这一句是一句「cryptic」的断言**：Schrans 用引号直接转引
+      「[…] large spacetime coordinate transformations respecting the periodicity
+      x'^m = L^m_n x^n with L^m_n integers and det L = 1 for invertibility」，
+      并接着说「**This rather cryptic statement deserves some explanation.**」
+      ——**上面 (1)(2) 的两页论证是 Schrans 补的，不是原书的。**
+tags: [compactification, torus, narain, t-duality, o-d-d, symmetry]
+notes: |
+  ⚠ **第三类生成元——单方向的因子化对偶（即 R ↔ α'/R，
+  duality.t-duality-spectrum-equivalence）——本书没有和前两类并列成一张生成元表**
+  （抽取记录 #E143 明记）。因此本节点只陈述「至少含这两类」，不宣称给出全部生成元。
+  Schrans 从 §8.76 起改用 Giveon et al hep-th/9401139 §2 的框架统一处理，
+  **那不是原书内容**，抽取记录明说不抽，本图也不采。
+
+  Schrans 特别强调他的 SL(k,Z) 论证「did not have to use the explicit form of the
+  momenta p_L and p_R … This reasoning is valid for any G_{mn} and B_{mn}」。
+
+  k = 2 的例子（复模 τ、ρ 各自的 PSL(2,Z) 加 τ ↔ ρ 互换，(8.4.36)–(8.4.38)，
+  抽取记录 #E145，Schrans 与 Headrick 双源）本图未建卡。
+author: curator-polchinski-ch8
+created: "2026-09-11"

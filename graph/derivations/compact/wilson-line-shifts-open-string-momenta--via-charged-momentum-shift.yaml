@@ -1,0 +1,27 @@
+id: compact.wilson-line-shifts-open-string-momenta--via-charged-momentum-shift
+target: compact.wilson-line-shifts-open-string-momenta
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.wilson-line-background
+  - id: compact.circle-momentum-quantization
+  - id: compact.open-string-no-winding
+    note: 提供无绕数的开弦紧化谱 m² = v_d² + (N−1)/α'，Wilson 线只改 v_d 的取值集合。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.3)–(8.6.6)（带电点粒子）、(8.6.8)–(8.6.10)（Chan–Paton），p.264"
+    note: |
+      抽取记录 polchinski-1998-v1#E148/#E149（L1，Schrans §8.98–§8.104，笔记 p.517–520）。
+summary: |
+  电荷 q 的粒子在背景 A_d 中，正则动量 p_d = v_d + qA_d 才是被量子化的量：p_d = n/R。
+  故运动学动量 v_d = n/R − qA_d = (2πn + qθ)/(2πR) 被整体平移。
+  带 Chan–Paton 指标的开弦态 |ij⟩ 在 U(1)_i × U(1)_j 下带电 (+1, −1)，
+  故其平移量是 (θ_i − θ_j)/(2πR)，即 v_d = (2πℓ + θ_i − θ_j)/(2πR)；
+  代入无绕数开弦的质谱得 (8.6.10)。
+gaps:
+  - "⚠ 电荷指派「|ij⟩ 在 U(1)_i 下带 +1、在 U(1)_j 下带 −1」在来源中**没有被理解也没有被论证**：Schrans 两处明说不懂为什么两端取相反符号（Open Questions 第 7 条），他只能假设它。原书的论证未获取。"
+  - "⚠ (8.6.6)（带电点粒子的哈密顿量）Schrans 与原书**符号相反**，他明说找不出错在哪（Open Questions 第 6 条）；本推导只用到动量的平移，不用哈密顿量的整体符号，但这处分歧未裁决。"
+  - "Chan–Paton 因子在本图中没有节点，故「两端各带一个内部指标」这一结构只写在陈述文本里，没有边承载。"
+  - "「θ_i 互异 ⇒ U(n) 破缺到 U(1)^n」这一步依赖对无质量谱的计数，来源未逐项验证。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

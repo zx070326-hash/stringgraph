@@ -1,0 +1,40 @@
+id: duality.t-duality-of-unoriented-theory
+kind: proposition
+title: 无取向理论的 T 对偶：世界面宇称在对偶坐标上变成宇称 × 时空反射
+statement: |
+  世界面宇称 Ω（worldsheet.worldsheet-parity）反转世界面空间坐标，其对闭弦坐标的作用是
+    **Ω : X_L^M(z) ↔ X_R^M(z)**.
+  于是在**未对偶**的坐标上
+    Ω X^μ(z, z̄) = X^μ(z̄, z)   （纯世界面宇称），
+  而在**对偶**坐标 X'^m = X_L^m − X_R^m 上
+    **Ω X'^m(z, z̄) = − X'^m(z̄, z)**,
+  即在对偶描述中，世界面宇称表现为「世界面宇称 × 时空反射 X'^m → −X'^m」的**组合**。
+  因此，把无取向弦（对 Ω = +1 投影）作 T 对偶，得到的不是普通的无取向理论，
+  而是对「宇称 × 时空反射」投影的理论；对偶背景场必须在该组合下不变，
+  例如（本图只收两侧复算一致的那几条）
+    B_{μν}(X') = − B_{μν}(X),  B_{mν}(X') = + B_{mν}(X),  B_{mn}(X') = − B_{mn}(X),
+    G_{μν}(X') = + G_{μν}(X),  G_{mν}(X') = − G_{mν}(X).
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.8, eq. (8.8.1)（Ω 对坐标的作用）与 (8.8.3)（对偶时空场的条件），p.277"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E158，证据等级 L1
+      （Schrans §8.130–§8.131，笔记 p.561–562）。
+      ⚠ 目录只有 (8.8.1) 与 (8.8.3)，**中间那式 (8.8.2) 未知**（抽取记录 §10）。
+      ⚠ **本记录未能确认原书在此处是否使用「orientifold」这个词**——
+      Schrans 的节标题用了，但那是他的标题。
+tags: [t-duality, unoriented, orientifold, worldsheet-parity, compactification]
+notes: |
+  ⚠ **一条被本图刻意排除的关系**：Schrans 在 [8.652] 写
+  G_{mn}(X') = − G_{mn}(X)（两个指标都被对偶化的情形），
+  但抽取者按他自己在 [8.650] 用的方法复算得 **+**（两个对偶化指标的两个负号相消）。
+  抽取记录明记这是**抽取者的复算（推断）**，且 Schrans 对这一步只写
+  「and similarly we find … that」没有展开；**原书写的是什么未核实**（Q26）。
+  因此本卡的陈述**不含 G_{mn} 那一条**，留待人工核对原书 p.277。
+
+  B 侧的 (−, +, −) 模式与逐项复算一致（ε^{ab} 只吃一个 ∂_1），G 侧对应的模式应是 (+, −, +)。
+
+  本卡不涉及 orientifold 平面的张力、Klein 瓶振幅或 §8.8 的图 8.6（那是纯图示）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

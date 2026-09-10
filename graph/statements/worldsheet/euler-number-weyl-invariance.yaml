@@ -12,12 +12,29 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2, eq. (1.2.32)（Weyl 重标度下曲率标量的变换，p.15）及其下方（χ 的 Weyl 不变性）"
+    loc: "§1.2, eq. **(1.2.32)**, p.15（Weyl 重标度下曲率的变换）及其下方对 χ 不变性的显式验证。⚠ **原书 (1.2.32) 写成密度形式** `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)`，**不是**本节点 statement 里的 `R′ = e^{−2ω}(R − 2∇_a∂^aω)`；两者在 2d 等价（`(−γ′)^{1/2} = e^{2ω}(−γ)^{1/2}`）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E9，证据等级 [已核实]：
-      Schrans 伴读笔记目录「1.2 p 15: Eq. (1.2.32) The Change in the Curvature under a
-      Weyl Rescaling」「1.3 p 15: Below Eq. (1.2.32) Invariance of χ under Weyl Rescaling」。
-      k' 的变换式在抽取记录中未给出，是 curator 为使相消论证完整而补的标准公式。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E9。
+      **【订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字，p.15）】**
+      式号 **(1.2.32) 与页码 p.15 都正确**（此前经 Schrans 目录核实，现升 **L1**），
+      但有两处措辞必须改：
+
+      1. **原书写的是密度形式** `(−γ′)^{1/2}R′ = (−γ)^{1/2}(R − 2∇²ω)`。
+         本节点 statement 写的 `R′ = e^{−2ω}(R − 2∇_a∂^aω)` 与之等价（在 2d），
+         但**「与原书逐字一致」的说法不成立**。按项目原则 1 不改 statement 文本，此处记账。
+         ⚠ researcher 的诚实标注：LHS 上 `γ` 的那一撇在本轮页图分辨率下接近可读极限，
+         从下一句「The variation is a total derivative」的逻辑看只能是 `γ′`；
+         **若要在图里写死逐字形式，建议再单页复核一次**。
+      2. ★ **`k′` 的变换式与边界项本身都不在 §1.2 正文里。** 原书 p.15 逐字：
+         「The integral (1.2.31) is therefore invariant for a world-sheet **without boundary**.
+         **With boundaries an additional surface term is needed (exercise 1.3).**」
+         即 **(1.2.31) 不含边界项，带边界的版本是 exercise 1.3**（见
+         worldsheet.worldsheet-euler-number 的 sources note）。
+         ⇒ 本节点 statement 里 `k′ = e^{−ω}(k + n^a∂_aω)` 那一行、以及「边界项恰好相消」
+         那半句，**在 Polchinski §1.2 正文中没有对应内容**，是 curator 为使相消论证完整
+         而补的标准微分几何公式（这一点旧 note 已诚实写出，本轮进一步确认原书连边界项
+         都没写）。这半句的正文来源应转向 §3.2 (3.2.3b)（**本项目尚未取页图**）。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(d) 与 §13.9 A#4。
 tags: [bosonic-string, geometry, topology, weyl, euler-number]
 notes: |
   「χ 是拓扑不变量」本身是 Gauss–Bonnet 的内容；本节点只主张比它弱的

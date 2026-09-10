@@ -1,0 +1,159 @@
+id: worldsheet.exponential-vertex-operator-weight-v2--via-ope-with-t
+target: worldsheet.exponential-vertex-operator-weight-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    note: |
+      **被计算的 OPE 的左因子**：T(z) = −(1/α') :∂X^μ ∂X_μ:。
+      论证的全部内容就是把这个显式表达式与 V_k 做 Wick 缩并并数极点阶数；
+      系数 −(1/α') 与权的数值 α'k²/4（或 α'k²）捆绑在一起，改它就改 h。
+      这条边**不是 inferred**：目标陈述的 (1) 式左端就是这个 T。
+  - id: worldsheet.primary-field-v2
+    note: |
+      **判据与被断言的概念**：「共形权由 T·O OPE 的二阶极点系数读出」与
+      「无更高阶极点 ⟹ 主场」这两条都是该定义卡的内容（Polchinski (2.4.6)，
+      抽取记录 #E32 **式号已核实**）。目标 (1) 逐字就是把 V_k 代进该判据。
+      这条边**不是 inferred**：所引来源（§2.4 (2.4.6) 一带）正是该定义卡的来源。
+      【2026-09-11 换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。本推导用的 T 是普通自由标量 CFT 的
+      T = −(1/α'):∂X^μ∂X_μ:（(2.4.4)），不是线性 dilaton CFT 的那一个（v2 要求声明）。
+  - id: worldsheet.operator-product-expansion
+    note: |
+      **框架**：目标 (1) 是一条 OPE 断言，「∼」的含义（奇异项的有限展开、
+      在有限半径内的展开）由该节点定义。
+      这条边**不是 inferred**：OPE 框架与 T·O OPE 在来源处是同一节（§2.2–§2.4）的内容。
+      ⚠ 该节点自身登记了「OPE 收敛性本书不证」（抽取记录 Q3），
+      本推导继承这条限定，见 gaps 第 4 条。
+  - id: worldsheet.free-scalar-propagator
+    inferred: true
+    note: |
+      **权的数值从哪里来**：h 正比于 XX 缩并的系数 −(α'/2)，
+      自缩并把 k^μ k^ν η_{μν} = k² 拉出来，故 h ∝ α' k²。
+      标 **inferred** 的理由：本推导引用的位置里**没有一处显示这条缩并被用来算指数算子的权**。
+      (2.4.17) 一带的内容本项目未核对（sources 第一条）；(8.2.27) 只断言乘积是权 (1,0) 主场、
+      不显示缩并；(6.6.24) 显示的是**互** OPE 的指数 α'k_1·k_4，不是自缩并。
+      与 worldsheet.ddf-commute-with-virasoro--via-conformal-weight 和
+      worldsheet.vertex-operator-adjoint--via-radial-conjugation 的同名边同级处理。
+  - id: worldsheet.conformal-normal-ordering-v2
+    inferred: true
+    note: |
+      **「正规序 = 减去自缩并」这条规则**：没有它，:e^{ik·X}: 里的自缩并不是「已被减掉」而是
+      发散的，T·V_k 的 OPE 根本写不出有限阶极点；交叉缩并的组合规则（该卡的「乘积规则」一段）
+      也是数极点阶数时逐项用到的。
+      标 **inferred** 的理由同上：Polchinski 在 §2.2 给出这条规则（(2.2.5)/(2.2.8)/(2.2.10)，
+      抽取记录 #E28 式号已核实），但本推导引用的**指数算子权的那几处**都不重复它。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4，(2.4.6)（权的定义式，p.44）与 (2.4.16)–(2.4.17)（主场的变换 / 典型算子的变换，p.46）一带"
+    note: |
+      抽取记录 #E32：三个式号 `[已核实]`（schrans-2020 目录），**但核实的只是式子的位置与标题**。
+      ⚠ **「指数算子的权是 α'k²/4」这句话与它的计算在本项目中从未被核对**；
+      (2.4.17) 的标题「Conformal Transformation of Typical Operators」暗示原书在那里列了
+      若干典型算子（很可能含 :e^{ik·X}:），但这是**推测**。
+      故下面 summary 第 2 步的缩并计算是本项目重建的，**没有逐字来源**（gaps 第 1 条）。
+  - ref: polchinski-1998-v1
+    loc: "§8.2，eq. (8.2.27)，p.240：V^i(n k_0, z) = (2/α')^{1/2} ∂X^i e^{i n k_0 X^+}(z) 是权 (1,0) 的主场（光锥系，(8.2.26) 给 X^+X^+ OPE 为 0）"
+    note: |
+      抽取记录 #E125，**[已核实] / L1**（schrans-2020 §8.21–§8.25，笔记 p.446–449）。
+      这是目标 (3)（类光指数权为 0）**最强**的文献依据，也是唯一一处原书把这件事写出来的地方：
+      在光锥系里 k_0 只有 + 分量、X^+X^+ 缩并为零，等价于 k_0² = 0；
+      原书据此断言乘积是权 (1,0) 主场。把它拆成「∂X^i 权 1 + 指数权 0」是本项目的一步
+      （初等，但原书不写，见 gaps 第 2 条）。
+      同一记录登记了一处与原书的分歧（k_0 = 2/(α'q^-) vs 2/(α'q^+)，schrans 认为原书有误，
+      见 Q23）；该分歧只涉及归一化常数，不影响权为 0。
+  - ref: polchinski-1998-v1
+    loc: "§6.6，eq. (6.6.24)，p.195（两个正规序指数算子之积，幂因子 |z_14|^{α'k_1·k_4}）；§8.2，eq. (8.2.9)，p.237（紧化方向配分函数的权因子 q^{α'k_L²/4} q̄^{α'k_R²/4}）"
+    note: |
+      两条都 **[已核实] / L1**（#E109 经 schrans §6.72；#E122 经 schrans §8.14–§8.17）。
+      它们承载的是目标 (2)(a) 的**数值**：(8.2.9) 的 q^{α'k_L²/4} 逐字就是闭弦权 α'k²/4
+      出现在配分函数里（q 的幂 = L_0 本征值 = 权 + 振子能级）；(6.6.24) 的 α'k_1·k_4
+      是同一条缩并的互配对版本，取 k_1 = k_4 = k 再减半与之一致。
+      ⚠ 两处都**不是**权的推导，只是它的独立数值痕迹；(6.6.24) 另依赖 OPE 收敛性（#E109 Q3）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      DDF 链主来源，目标 (3) 在那里被当作常识使用。章节页码 L4/L2
+      （literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文 L0**。
+      GSW 用 mostly-minus（已转写）、α' = 1/2。不承载论证。
+summary: |
+  标准计算，三步。第 1、3 步是照判据套用，第 2 步是唯一有内容的一步（一次 Wick 缩并的计数）。
+
+  **第 1 步（要算什么）。** 按 worldsheet.primary-field-v2 的判据，只需把 T(z) V_k(0,0) 的 OPE
+  展开，读出 1/z² 的系数（= h）并确认 1/z³ 及更高阶极点的系数为零。
+  T(z) = −(1/α') :∂X^μ ∂X_μ:(z) 含**两个** ∂X，故与 V_k = :e^{ik·X}: 的交叉缩并最多做两次，
+  极点阶数先天被截断在二阶——这就是「指数算子是主场」的结构性理由。
+
+  **第 2 步（两次缩并给出 h）。** 用 worldsheet.conformal-normal-ordering-v2 的交叉缩并规则，
+  每个 ∂X^μ(z) 与指数里的 X^ν(0) 缩并一次，代价是
+    ⟨∂X^μ(z) · i k_ν X^ν(0)⟩ = i k^μ · ∂_z[−(α'/2) ln|z|²] = −i (α'/2) k^μ / z
+  （worldsheet.free-scalar-propagator；闭弦体内归一化，全纯部分取 ln|z|² 的 ∂_z）。
+  逐项写出（T 的两个 ∂X 各可缩可不缩）：
+    T(z) V_k(0) = −(1/α')[ :∂X^μ ∂X_μ(z) e^{ik·X(0)}:
+                           + 2·(−i(α'/2) k^μ/z)·:∂X_μ(z) e^{ik·X(0)}:
+                           + (−i(α'/2)/z)² k^μ k_μ · :e^{ik·X(0)}: ]
+  · 缩并**零次**：正规序项，非奇异，落进「…」；
+  · 缩并**一次**（组合因子 2 = 两个 ∂X 任选其一）：
+      −(1/α')·2·(−i α'/2)(1/z) k^μ :∂X_μ e^{ik·X}: = (1/z) · i k·∂X V_k = (1/z) ∂V_k,
+    系数恰为 1，即目标 (1) 的一阶极点（这也是对整个计算归一化的一次校验）；
+  · 缩并**两次**（无额外组合因子：两个 ∂X 各缩一次只给一项）：
+      −(1/α') · (−i α'/2)² k² / z² = −(1/α')·(−α'²/4) k² / z² = (α'/4) k² / z²,
+    即 **h = α' k²/4**，目标 (2)(a)；
+  · 缩并**三次或更多**不存在（T 只有两个 ∂X），故无三阶及更高极点，主场性成立。
+  反全纯侧同式，给 h̄ = α' k²/4。
+  ⚠ 上式里的组合因子与符号是按本图的约定逐项重算的，**没有逐字来源**；
+  独立的数值核对是 (8.2.9) 的 q^{α'k_L²/4} 与闭弦快子壳 α'k² = 4 ⟺ h = h̄ = 1（见 sources）。
+
+  **第 3 步（开弦边界情形与类光特例）。**
+  (b) 开弦：顶点算子插在 Neumann 边界上，镜像与原点重合，使边界上的缩并是体内的**两倍**
+      （⟨X^μ X^ν⟩|_边界 = −α' η^{μν} ln|y|²）；在 doubling 后的单一手征描述里
+      （worldsheet.open-string-doubling-trick）反全纯的一半经反射与全纯的一半同点，
+      等价地说**边界算子携带的手征动量是 2k**，且只剩一套 Virasoro、权是单个数。
+      手征缩并系数仍是 α'/2（故第 2 步的 T = −(1/α'):∂X∂X: 与 ∂X 的权 1 都不变），
+      而 h 对动量二次，于是
+        h = (α'/4)(2k)² = **α' k²**，目标 (2)(b)，
+      即体内值的 **4 = 2²** 倍。
+      ⚠ **不要**把它算成「把 −(α'/2) 换成 −α' 再代进第 2 步的同一条式子」：
+      那样得到 −(1/α')(−i α')² k²/z² = 4α'k²/z²，是错的
+      （那等于同时改了 T 的归一化，会让 ∂X 的权变成 1/2）。
+      ⚠ **「边界缩并加倍 / 手征动量加倍」这一步本图没有承载节点**（文献侧是 Polchinski 的
+      边界正规序 (6.2.34)，抽取记录 #E95，L2），故它在本推导中是**输入**，见 gaps 第 3 条。
+      自洽检验两条：互 OPE 指数对动量**一次**，故只加倍，α'k_1·k_2 → 2α'k_1·k_2，
+      正是 worldsheet.ddf-operators-v5 说明 (c) 用的 z^{2α' n k_0·p}；
+      开弦快子壳 α'k² = 1 ⟺ h = 1（边际）。
+  (3) 类光：k = n k_0 且 k_0² = 0 ⟹ k² = 0 ⟹ **两种情形都给 h = 0**
+      （手征动量取 k 还是 2k 都一样，因为 (2k)² = 4k² = 0），
+      即 :e^{i n k_0·X}: 是权 0 主场。这一步是把 k² = 0 代进 (2)，**纯代数**，
+      也是唯一一处本目标不依赖第 3 步 (b) 那条无节点输入的地方。
+      文献侧的直接对应是 (8.2.27)：光锥系里 X^+X^+ 缩并为零（(8.2.26)）即 k_0² = 0，
+      原书据此断言 ∂X^i e^{i n k_0 X^+} 是权 (1,0) 主场；
+      由 ∂X^i 的权是 1，指数因子的权只能是 0。
+gaps:
+  - "**第 2 步的缩并计算没有逐字来源。** 引用的 §2.4 (2.4.17) 一带只核实到「式子在那里、标题是『典型算子的变换』」（#E32），**内容未核对**；原书是否在那里写出 h = α'k²/4、用什么记号、组合因子怎么摆，本项目都不知道。summary 第 2 步的系数与符号是按本图约定（conv.metric-mostly-plus、conv.alpha-prime-regge、worldsheet.free-scalar-propagator 的 −(α'/2)）重算的。数值有两处独立痕迹（(8.2.9) 的 q^{α'k_L²/4}、闭弦快子壳 α'k² = 4），但**痕迹不是推导**。【2026-09-11 部分关闭】抽取记录 §13.4(a) 已逐字转录 (2.4.17)（p.46）：`:e^{ik·X}: (α'k²/4, α'k²/4)`，并转录 p.47「All transform as tensors except ∂²X^μ」——**数值 α'k²/4 与主场性现有 L1 锚点**；但原书导出它的计算过程仍未逐字核对，summary 第 2 步仍是本项目重建。"
+  - "**原书只断言乘积的权，不单独断言指数因子的权。** 最强来源 (8.2.27)（**[已核实]/L1**）说的是 ∂X^i e^{i n k_0 X^+} 是权 (1,0) 主场。把它拆成「∂X^i 权 1 + 指数权 0」虽然初等（权在无交叉缩并的乘积下相加），但那条「权对张量积相加」的规则本图**没有节点**（最接近的 worldsheet.primary-field-v2 只定义单个算子的权），且在有交叉缩并时它是假的——本目标的 (3) 恰好落在交叉缩并为零（ε^i·k_0 = 0、k_0² = 0）的情形，但**本推导没有把这个条件写成论证的一部分**（它属于 worldsheet.ddf-commute-with-virasoro 的第 2 步）。"
+  - "**开弦边界情形（边界缩并加倍 / 手征动量 k → 2k）在本图中没有承载节点。** summary 第 3 步 (b) 的依据是 Neumann 镜像；文献侧是 Polchinski 的**边界正规序** (6.2.34)（抽取记录 #E95，`[已核实（式号）]` 但强度只到 **L2**，正文未读）。本图引用的 worldsheet.open-string-doubling-trick **不承载这一条**（它断言的是 T 的镜像解析延拓与「只有一套 Virasoro」，不是 Green 函数在边界上的加倍），故本推导没有把它列为依赖。建议后续立一张 `worldsheet.boundary-normal-ordering` 定义卡。在那之前 (2)(b) 的因子 4 是本推导的**输入**。⚠ 目标 (3)（类光 ⟹ h = 0）**不依赖**这条输入：k² = 0 时手征动量取 k 还是 2k 都给 0，故 DDF 链用到的那一半不受此缺口影响。"
+  - "**OPE 收敛性未证**（worldsheet.operator-product-expansion 与抽取记录 Q3 的同一条）。本推导全程在形式幂级数层面操作；目标边界 (a) 已声明这一点。这条对 (3) 的使用影响有限（代数 Fock 空间上逐模是有限和，见 worldsheet.ddf-transversality-gives-local-finiteness 与 Lean 的 `Fock.vertexOsc`），但本推导写的是 OPE 版本，故继承该限定。"
+  - "**模形式未覆盖，Lean 侧未完成。** 本推导只给 OPE 形式。Lean 侧的目标是**模形式** L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·(1/2) b·b) V_{J−m}（其中 (1/2) b·b = α'k² 即开弦权）：`Fock.creaExp_euler` 已证（VertexWeight.lean），归纳步由 `Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion` 提供，**基例（L_m 打在 `Fock.creaExp` 上）未证**（VertexOperator.lean 文件头 \"Mathematical gaps\" 第 1 条、VertexWeight.lean 文件头「尚缺」第 1 条；formalizer 在分支 agent/formalizer/vertex-weight-2 上做，未合并）。⚠ 即使做完，OPE 形式与模形式互推要经 worldsheet.ope-pole-mode-commutator-dictionary（physical-argument），故 `--via-lean` 不会自动是 formalized；正确做法是拆一张模形式的卡，见目标节点 notes【升级路径】(i)。**在基例完成前，图中不得把本目标或 [L_m, A^i_n] = 0 记为已机器验证。**"
+  - "**不覆盖复合算子**（带 ∂X 因子的如 :∂X^μ ∂̄X^ν e^{ik·X}:）与**非常动量**（k 依赖 z）的情形；也不覆盖 X^μ 本身的权（X^μ 在自由标量 CFT 里是 h = 0 主场，见 worldsheet.primary-field-v2；本推导只算指数算子）。这三条都写进了目标的边界 (f)。【2026-09-11 换代】本条原文写「X^μ 本身（非主场）」，与原书 p.47「All transform as tensors except ∂²X^μ」相反，随目标卡换代为 v2 一并订正。"
+notes: |
+  **status 定级理由**：kind 与 status 都取 physical-argument。不适用
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款，理由三条：
+  (i) 论证用 Wick 缩并与 OPE，**前提不完整**——「OPE 收敛」与「边界缩并加倍」两条前提
+      在本图中都没有承载节点（gaps 第 3、4 条）；
+  (ii) 主来源的内容**未核对**（§2.4 (2.4.17) 一带只核实到式号与标题，gaps 第 1 条）；
+  (iii) **无 reviewer-verified 记录**。
+  另外即使不看上述三点，本推导也被 worldsheet.free-scalar-propagator 与
+  worldsheet.conformal-normal-ordering-v2（两者 effective = physical-argument）从上方封顶，
+  故 status 不可能更高。
+
+  **推导名 `--via-ope-with-t`**：与同族的 `--via-conformal-weight`（那是「已知权 ⟹ 模与 L_m
+  对易」的围道形变，方向相反）和 `--via-radial-conjugation` 区分。本条是**算权本身**，
+  机器是 T 与算子的 OPE。
+
+  **本推导没有第二条独立路线。** 数学侧（格顶点算子代数里 e^{α} 的权 = (α,α)/2，FLM / Kac /
+  Frenkel–Ben-Zvi）原则上给得出严格版本，需 researcher 先取得带编号的可引用陈述；
+  届时应新增 `--via-voa-lattice-weight`，而不是改本条。见目标节点 notes【升级路径】(ii)。
+author: curator
+created: "2026-09-11"

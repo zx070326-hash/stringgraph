@@ -1,0 +1,33 @@
+id: compact.kaluza-klein-gravitational-coupling
+kind: proposition
+title: 紧化一维后的引力耦合 1/κ_d² = 2πR/κ_D²
+statement: |
+  设 D 维引力作用量含 Einstein–Hilbert 项
+    S ⊃ (1/2κ_D²) ∫ d^D x (−G)^{1/2} R_D ,
+  一个空间方向紧化在半径 R 的圆上（conv.compactification-radius），
+  且**全部场对紧化坐标无依赖**（只保留零模）。则对紧化方向积分给出因子 2πR，
+  d = D − 1 维的引力耦合为
+    **1/κ_d² = 2πR / κ_D²**,   等价地   κ_D² = 2πR κ_d².
+  同样地，Kaluza–Klein 矢量 A_μ 的 d 维规范耦合与引力耦合由 g_d² = 2κ_d²/R² 相联系
+  （在 A_μ = R Ã_μ 的归一化下）。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.12)（引力耦合）与 (8.1.11)（规范耦合），p.234"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E118，证据等级 L1
+      （Schrans §8.8–§8.9，笔记 p.434–435；他的写法是
+      g_d² = e^{2Φ_d}κ_0²/(πR³) = 2πRκ_d²/(πR³) = 2κ_d²/R²，[8.69]）。
+      ⚠ Schrans 的脚注 5 明记成立前提：「we assume there is no dependence on the
+      compactified dimension, so it can be integrated out」——本节点已把它写成显式前提。
+tags: [compactification, kaluza-klein, gravitational-coupling, torus, field-theory]
+notes: |
+  (8.1.11) 的 RHS 多出的 R² 来自定义 A_μ = R Ã_μ（Schrans 明说）。
+  本节点把两条关系写在一张卡上是因为它们出自同一次「积掉紧化方向」的操作，
+  且原书是在同一处给出的；若日后需要分别引用，可拆卡。
+
+  这条关系在 §8.3 被两次复用：定 (8.3.15)（规范耦合与弦长的数量级关系，
+  抽取记录 #E131，本图不建卡——那是数量级估算），
+  以及 T 对偶下 κ 的变换 (8.3.30)（duality.t-duality-dilaton-shift）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

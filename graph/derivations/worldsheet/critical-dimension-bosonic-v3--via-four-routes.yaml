@@ -1,0 +1,212 @@
+id: worldsheet.critical-dimension-bosonic-v3--via-four-routes
+target: worldsheet.critical-dimension-bosonic-v3
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.critical-dimension-light-cone-v2
+    note: |
+      供给 (I) 的全部内容（Δ_n 的显式形式与「闭合 ⟺ D = 26 且 a = 1」）。
+      该路线卡把正规序常数 a 当作 Δ_n 中的**待定参数**，本卡 (I) 的前提与它逐字一致
+      （这正是 v2 → v3 换代要修的 D1：v2 的 (I) 前提写「取 ζ 正规化值 a = (D−2)/24」，
+      与路线卡相反）。
+      **【2026-09-11 改指 -v2】**本边原先指向 worldsheet.critical-dimension-light-cone。
+      那张卡的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n
+      恒为零，洛伦兹代数对任意 (D, a) 都闭合，故「仅当」方向为假；D = 2 无横向振子），
+      本卡 (I) 因带 D ≥ 4 而**弱于**它、方向安全，但那是靠记账挂账而非修陈述。
+      ms.critical-dimension-bosonic 第三轮裁定 3(a) 要求换代，curator 已新建
+      worldsheet.critical-dimension-light-cone-v2（补前提 D ≥ 4 并写出
+      「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步），旧卡写 superseded_by。
+      **换代后两侧前提一致**：本卡 (I) 与路线卡都带 D ≥ 4，此前的「本卡弱于路线卡」记账消失。
+      本卡 statement 中的「（节点：worldsheet.critical-dimension-light-cone）」是散文引用，
+      按第三轮裁定 3(a) 不必动（陈述卡不可变；下次换代时同步）。
+  - id: worldsheet.critical-dimension-old-covariant-v3
+    note: |
+      供给 (II)。
+      **【2026-09-11 改指 -v3】**本边原先指向 worldsheet.critical-dimension-old-covariant-v2。
+      那张卡的 statement 把 H_0 写成「零模态（伪态）子空间」，与紧邻的定义式
+      H_0 = {χ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys}（内积的根）相冲突——正是本卡 (II) 按
+      ms.critical-dimension-bosonic 第二轮审计 D5/T4 已删去的那个括注；第三轮审计 §6 逐字点名
+      路线卡是该链上最后一处仍带括注者，交 lead 排期。curator 已换代为
+      worldsheet.critical-dimension-old-covariant-v3（**只**删该括注，其余逐字照抄 v2），
+      旧卡写 superseded_by。**换代后两侧措辞完全一致**，此前「本卡 (II) 与路线卡逐字对应、
+      只是路线卡多一个冲突括注」的记账消失。目标陈述、依赖边的集合、status、
+      有效状态（physical-argument）均不变。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
+      该卡的 (B) 恰是「D > 26 时存在负模物理态」（限 a = 1、p ≠ 0）；两者经该卡的推导
+      --via-no-ghost 由 worldsheet.no-ghost-theorem-v4 供给。
+      本卡 (II) 把 H_0 写成「Fock 内积在 H_phys 上的零模态子空间」，与该路线卡的定义
+      H_0 = {χ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys} 逐字对应；v2 的「零模态（伪态）」括注
+      已按审计第二轮 D5 删去（伪态与零模态是两个概念，二者相等在 (26,1) 是无鬼定理的内容）。
+  - id: worldsheet.critical-dimension-brst-v2
+    note: |
+      供给 (III)（Q_B² 的模式表达式、忠实性前提、以及 Q_B² = 0 ⟺ c^m = 26）。
+      本卡 (III) 的前提「诸 c_{−m} c_m 在 V 上线性无关（对忠实的 Fock 型受限模成立）」
+      是照该路线卡陈述逐字取来的（审计第二轮 D3/C2：v2 漏写了这条，而 ⟹ 方向需要它）。
+      该路线卡的陈述只到 c^m = 26，不含 c^m = D 那一步；那一步由下面
+      worldsheet.free-boson-central-charge-d 单独供边。
+  - id: worldsheet.critical-dimension-weyl-anomaly-v2
+    note: |
+      供给 (IV)（c^{tot} = c^m + c^g = 0 ⟺ c^m = 26）。
+      ⚠ **来源强度提醒（本次原书核实新增）**：Polchinski §3.4 的式号结论 (3.4.23), p.94
+      写的是 `c = c^X + c^g = D − 26` 与「The theory is Weyl-invariant only for D = 26」，
+      即**原书那里写的是 D = 26 而不是 c^m = 26**；一般物质 CFT 的形式在 §3.4 只有散文
+      （p.95「if and only if the total central charge c is zero」、p.96「if and only if
+      a₁ = −c/12 vanishes」）与 (3.4.15) 支撑，逐字的 `c^m = 26` 出现在 §4.3 (4.3.9)。
+      该路线卡自己的 notes 里把这一点登记为「原书措辞未核实」的开放疑问（Q6）；
+      **Q6 现已关闭**，结论是「原书写 D = 26」。路线卡的陈述文本本次不动，
+      本推导在 sources 与 gaps 中如实记账，并建议路线卡换代时改挂 §4.3 (4.3.9)。
+  - id: worldsheet.open-string-intercept-v2
+    note: |
+      供给 (V)（一致性要求 a = 1，只对开弦、与 D 的取值无关）。必须显式取得：路线 (III)(IV)
+      完全不给 a，故若不加这条边，本卡合取中的 a = 1 只由 (I)(II) 支撑，而 (II) 是把 a = 1
+      当作**前提**而非结论的。
+      本卡 (V) 的首句形状（「一致性要求 a = 1」，一致性 = (a)/(b)/(c) 之一）照该路线卡的陈述
+      改写（审计第二轮 N3）；(V) 中按刻画分列的**图内支撑维数范围**取自该路线卡的两条推导：
+      --via-null-state-decoupling（(a)(b)，D ≥ 2）与 --via-light-cone-representation
+      （(c)，自陈 D ≥ 5 且 D = 5 有洞，故图内只覆盖 D = 4 与 D ≥ 6）。
+      本卡因此**弱于**该路线卡陈述里的「对任意 D ≥ 4」，方向安全。
+  - id: worldsheet.free-boson-central-charge-d
+    note: |
+      供给【(III)(IV) 的结论与「D = 26」的关系】一节里的 c^m = D 那一步，即由 c^m = 26
+      得到 D = 26 的换算，本卡把它单列为 (III)(IV) 的**公共输入**。
+      **不标 inferred**：本推导的 sources 显式列出 Polchinski §2.4 eq. (2.4.22)（X^μ 的 TT OPE
+      给出 D/2z⁴）与 p.48 (2.4.24) 下方的文字陈述——这是该步被论证的位置。
+      **该定位是本次原书核实新落实的**（Q4/E34 由「无锚点」关闭为 (2.4.22)）：v2 的四路线推导
+      此前写的是「§2.4 末至 §2.5 初，约 (2.4.25)–(2.5.1)，式号与页码均未核实」。
+      有效状态不受影响：该节点有 --via-lean（formalized）。
+  - id: worldsheet.bc-ghost-central-charge
+    note: |
+      供给 c^g = −26。它是 (III)(IV) 的另一个公共输入：(III) 的
+      {Q_B,Q_B} = Σ ((c^m − 26)/12)(m³−m) c_{−m}c_m 里那个 26 就是 −c^g，
+      (IV) 的 c^{tot} = c^m − 26 里那个 26 也是 −c^g。本卡在【"独立"的确切含义】
+      一节里明写这一共享，故必须显式挂边，否则该断言在图上无依据。
+      **不标 inferred**：sources 里列出 Polchinski §2.5 eq. (2.5.12), p.51（鬼场中心荷公式，
+      式号经 schrans-2020 目录逐字核实）；另外原书在 (3.4.23) 处**显式引用 (2.5.12)**，
+      即 (IV) 用到 c^g = −26 这条边在原书里是明写的（抽取记录 §12.2）。
+      有效状态不受影响：该节点的有效状态是 physical-argument，与本推导自身相同。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.40), p.23（光锥路线的结论 `A = −1 , D = 26`，式号与内容已核实，抽取记录 §12.5 / E18 / Q2）"
+    note: |
+      **本条相对 v2 推导有两处订正。** (1) 式号由「约 (1.3.37)–(1.3.42)，页码已核实/式号未核实」
+      落实为 (1.3.40)。(2) **撤销「显式的 [J^{i−}, J^{j−}] 验证是习题 1.3」的说法**：原书核实
+      （§12.5）表明该验算书里没有做、也没有留成习题，原书只在 p.21 描述它并推给共形规范路线。
+      原书 §1.3 的论证是表示论计数。作者三处自降严格程度（逐字）：p.21「plausible without a
+      complete treatment」、p.24「We will show this **indirectly** in the coming chapters」、
+      p.90「rather **heuristically** explained in section 1.3」。这三句是路线 (I) 与本推导
+      封顶在 physical-argument 的直接文献依据。已按 conv.intercept-sign-a 做 a = −A 换算。
+  - ref: polchinski-1998-v1
+    loc: "§4.1, eq. (4.1.16)–(4.1.18), p.123–124（OCQ level 1 给 A = −1 即 a = 1；式号与内容已核实，#E56）；level 2 给 D = 26 的一步是 p.124 正文断言 + **习题 4.1**；节末 p.124–125 只陈述无鬼定理，证明在 §4.4, p.137–142"
+    note: |
+      **loc 订正**：v2 推导写 level 2 为「约 (4.1.19)–(4.1.28)」——原书核实表明
+      **(4.1.24)–(4.1.28) 不存在**，原书逐字「The derivation is left to the reader」（习题 4.1）；
+      (4.1.19) 是 A = −1 情形的规范等价 e_μ ≅ e_μ + γk_μ。见 §12.3 / §12.10 表 B 第 12 行。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. **(4.3.9)**, p.131–132（BRST 路线的陈述式：`{Q_B, Q_B} = 0` only if `c^m = 26`；式号与内容已核实，抽取记录 §12.3）；(4.3.10) 是 j_B j_B 的 OPE，其单极点给「when c^m = 26」的一半；最短推导用 Jacobi 恒等式（习题 4.3）"
+    note: |
+      **loc 订正**：v2 推导（与旧记录 #E64）把结论挂在 (4.3.10)，原书的陈述式是 (4.3.9)。
+      这是四条路线中定位最强、且**全书唯一逐字写出 `c^m`（而非 D）**的一处，
+      本卡 (III)(IV) 采用 c^m = 26 形式的式号依据即在此。它只覆盖 c^m，不覆盖 a。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. **(2.4.22)** 与 p.48（(2.4.24) 下方正文）：c^X = D（式号与内容已核实，Q4/E34 关闭）"
+    note: |
+      这是 depends_on 中 worldsheet.free-boson-central-charge-d 那条边**不**标 inferred 的依据位置。
+      **本次订正**：v2 推导在此处写「§2.4 末至 §2.5 初，约 (2.4.25)–(2.5.1)，式号与页码均未核实，
+      ⚠ 抽取记录中唯一一条核心陈述既无式号也无页码锚点」——该警告现已作废，锚点是 (2.4.22)。
+      本图另有该命题的 Lean 证明（worldsheet.free-boson-central-charge-d--via-lean）。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.12), p.51（bc 系统中心荷公式，λ = 2 给 c^g = −26；式号经 schrans-2020 目录逐字核实为 `2.31 p 51: Eq. (2.5.12) The Ghost Central Charge`，并在原书 (3.4.23) 处被显式引用）"
+    note: depends_on 中 worldsheet.bc-ghost-central-charge 那条边不标 inferred 的依据位置。
+  - ref: polchinski-1998-v1
+    loc: "§3.4 \"Discussion\", eq. **(3.4.23)**, p.94（Weyl 反常路线：`c = c^X + c^g = D − 26`，随后「The theory is Weyl-invariant only for D = 26」；式号、页码与内容均已核实）；一般物质 CFT 的形式见 p.95 与 p.96 的两处散文 iff 与 eq. (3.4.15)"
+    note: |
+      **loc 订正且疑问关闭**：v2 推导写「p.95–96，式号约在 (3.4.24)–(3.4.32) 区间，**完全未核实**，
+      并要求人工确认原书写的是 c^m = 26 还是 D = 26（Q6）」。Q6 现已关闭：
+      **原书 (3.4.23) 写的是 D = 26**；一般形式只以散文出现（p.95「a flat world-sheet CFT can be
+      coupled to a curved metric in a Weyl-invariant way if and only if the total central charge c
+      is zero」、p.96「Weyl invariance holds in the quantum theory if and only if a₁ = −c/12
+      vanishes」），带式号的是 (3.4.15)（c = −12a₁）。逐字的 c^m = 26 在 §4.3 (4.3.9)。
+      故 (IV) 的「c^m = 26」形式由「§3.4 散文 + (3.4.15) + §4.3 (4.3.9)」联合支撑（见 gaps）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.1, eq. (2.3.32)（Δ_n 的显式计算）；§2.2.1–2.2.2（OCQ 谱与截距）；§2.3.3, p.102–112（无鬼定理与谱生成代数）"
+    note: |
+      GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus
+      与 conv.alpha-prime-regge。§2.3.3 的页码经核实，式号未核实。
+      **本推导中 (I) 的 Δ_n 显式形式只由本条支撑**（Polchinski 未做该计算）。
+summary: |
+  本推导把 worldsheet.critical-dimension-bosonic-v3 的合取拆成它的各个合取项，
+  逐条指到已有节点：
+    (I)   worldsheet.critical-dimension-light-cone-v2   光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1（前提 D ≥ 4，两侧一致）
+    (II)  worldsheet.critical-dimension-old-covariant-v3  (D,a) = (26,1) 处等距同构；D > 26 有负模态（H_0 = 内积的根，无「伪态」括注）
+    (III) worldsheet.critical-dimension-brst-v2         Q_B² = 0 ⟺ c^m = 26（忠实受限模；不给 a）
+    (IV)  worldsheet.critical-dimension-weyl-anomaly-v2 c^m + c^g = 0 ⟺ c^m = 26（不给 a）
+    (V)   worldsheet.open-string-intercept-v2           一致性要求 a = 1（只对开弦）
+  外加 (III)(IV) 的两个公共输入：
+    c^m = D  worldsheet.free-boson-central-charge-d（由 c^m = 26 得到 D = 26 的那一步）
+    c^g = −26 worldsheet.bc-ghost-central-charge（(III) 的 {Q_B,Q_B} 与 (IV) 的 c^{tot} 里的同一个 26）
+
+  【本推导相对 --via-four-routes（v2 版）的变化】依赖边的**集合完全不变**（同样是 5 条路线/输入
+  加 2 条公共输入）；变化全部在目标陈述与记账上，对应 ms.critical-dimension-bosonic 第二轮
+  回译审计的裁定：
+    D1/C1 (I) 的前提改为「a 待定」，与路线卡一致——这是 v2 与路线卡**直接相反**的那处，
+          也是第二轮 drift 的主因；
+    N2    (I) 补 D ≥ 4（D = 3 单横向指标处 iff 的「仅当」方向有反例）；
+    D2/A1 删去 (I) 末句「唯一以当且仅当形式给出 D」，并在【不断言】新增 (6) 明示不作该断言；
+    D5/T4 (II) 删「（伪态）」括注，H_0 按内积的根定义；
+    D3/C2 (III) 补忠实性前提并注明只有 ⟹ 方向用到；
+    D4/C3 (V) 按刻画分列图内支撑的维数范围，并注明这是图内支撑而非真值范围；
+    N3    (V) 首句改为路线卡的形状「一致性要求 a = 1」。
+  另外，本推导的 sources 按 2026-09-11 的原书核实（literature/extractions/polchinski-1998-v1.md
+  §12.10 汇总表）重写了五处 Polchinski 定位，见各 source 的 note。
+
+  【为什么 kind/status 是 physical-argument 而不是 proof/rigorous】沿用 v2 版推导的两条理由：
+    (1) 目标卡片除四条路线的结论外，还断言了几条**关于这些论证本身**的话——「(I) 是四条中唯一
+        同时定出 D 与 a 的」「(II) 不是等价式」「(III)(IV) 的判据是同一个数、共享两个输入」
+        「(V) 三条刻画在图内支撑的维数范围」。这些是对本图现有卡片的分类与比较，不是任何文献
+        里的定理，因而不是可以「严格证出」的东西（见 gaps 第一条）。
+    (2) 合取项本身全部封顶在 physical-argument（四条路线与 open-string-intercept-v2 的有效状态
+        均为 physical-argument），故 rigorous 的标注在任何情形下都会被压下来。
+  有效状态因此仍是 physical-argument，与 v2 相同。
+gaps:
+  - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(I) 是四条路线中唯一同时定出 D 与 a 的一条」「(III)(IV) 的判据是同一个数 c^m − 26 = 0」「(I) 与 (II)(III)(IV) 的等价在本图中无节点」「(V) 三条刻画在图内支撑的维数范围」等，都是对**本图现有节点**的比较与分类，不是任何来源中的陈述。它们随图的演化而可能失效（例如若日后建了 (I) ⟺ (II) 的等价节点，或路线卡换代补上 D ≥ 4）。这是本推导标 physical-argument 的主要理由之一。"
+  - "**路线卡的 D ≤ 3 缺口已由换代修掉，但 D ≥ 4 这条限定不在来源里**：旧路线卡 worldsheet.critical-dimension-light-cone 的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合；D = 2 无横向振子）。ms.critical-dimension-bosonic 第三轮裁定 3(a) 要求换代，本边已于 2026-09-11 改指 worldsheet.critical-dimension-light-cone-v2。**剩余缺口**：GSW §2.3.1 (2.3.32) 的原文既没写 D ≥ 4，也没写「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步；这两句是本图（curator）按初等论证补出的增补，不是来源的文字。另：本卡 statement 里「（节点：…light-cone）」的散文引用仍指旧 id，陈述卡不可变，留待下次换代同步。"
+  - "**(IV) 的一般物质 CFT 形式（c^m = 26）在 Polchinski §3.4 只有散文支撑**：原书 (3.4.23), p.94 写的是 `c = c^X + c^g = D − 26` 与「Weyl-invariant only for D = 26」，即 **D = 26**；一般形式出现在 p.95/p.96 的两处 iff 散文（「if and only if the total central charge c is zero」「if and only if a₁ = −c/12 vanishes」），其带式号的形式是 (3.4.15)（c = −12a₁, T^a_a = −(c/12)R），而逐字的 `c^m = 26` 只在 §4.3 (4.3.9)。故 (IV) 采用的一般形式由三处联合支撑，**不由单一式号支撑**。路线卡 worldsheet.critical-dimension-weyl-anomaly-v2 的 notes 仍把这一点登记为未核实的开放疑问（Q6），实际上 Q6 已于 2026-09-11 关闭，路线卡换代时应改挂 §4.3 (4.3.9) 并删去该开放疑问。"
+  - "**本推导不主张四条路线互相蕴含**：四者只是各自挑出同一组 (D, a) = (26, 1) 或同一个 c^m = 26。其中 (II) 与 (III) 之间的严格等价已有节点 worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0；Kato–Ogawa 1983 提出，FGZ 1986 Theorem 2.8 第一个同构严格证明），本推导**仍不**把它加为依赖，因为目标是四条路线的**合取**而非等价链。(I) 与 (II)(III)(IV) 之间的等价仍无节点。"
+  - "**(III)(IV) 不是两份互相独立的证据**：两条共享 c^g = −26 与 c^m = D 两个输入（是本推导的显式依赖边），判据是同一个数 c^m − 26 = 0；若这两个输入中任一个算错，两条路线同时失效。"
+  - "**四条路线各自的非严格步骤**（详见各路线节点自己的 gaps，此处只列封顶原因）：(I) 零点能 Σ n = ζ(−1) = −1/12 无算子层面定义（原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」），且 [J^{i−}, J^{j−}] 的计算涉及无穷模式和的重排与正规序重整，文献按形式操作处理；**且 Polchinski 从未做这个计算**，三处自陈「plausible without a complete treatment」（p.21）、「indirectly」（p.24）、「rather heuristically」（p.90）；(II) 图中的推导链本身是 rigorous，但 2026-09-11 起其有效状态为 physical-argument（no-ghost-theorem-v4 的 DDF 支链拆卡后由 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra 两张 physical-argument 卡承载），且来源可追溯性弱（goddard-thorn-1972 正文未获取，只有摘要末句）；(III) ⟹ 方向（Q_B² = 0 ⟹ c^m = 26）**没有数学来源**（kato-ogawa-1983 摘要写「required by」，正文未获取；只有 Polchinski §4.3 的形式计算与习题 4.3 的 Jacobi 路线），⟸ 方向有 fgz-1986 Prop 1.2 经节点 worldsheet.brst-nilpotent-at-c26 承载；(IV) 路径积分测度的 Weyl 变分、Faddeev–Popov 手续、以及「有反常 ⟹ 理论不一致」这一步都是物理论断（非临界弦/Liouville 说明 c^{tot} ≠ 0 并非绝对不可处理）；(V) 两条推导的输入分别是「谱须组织成洛伦兹小群表示」与「伪态必须解耦」，都是一致性要求而非定理。"
+  - "**(II) 的适用范围限于非退化动量扇区**，且「D > 26 时存在负模物理态」也限于非零动量。目标卡片已写明，本 gap 只提醒：任何把 (II) 读成「对全部动量成立」的下游用法都是错的，细则见 graph/milestones/no-ghost-theorem.yaml。"
+  - "**(V) 的 (c) 在 D = 5 处图内无支撑**：--via-light-cone-representation 的计数论证在 D = 5 失效（SO(4) 的 3 维自对偶 2-形式表示按维数装得下 D−2 = 3 个态，且限制到 SO(3) 恰是矢量）。该洞已记入那条推导的 gaps（待 reviewer 复核）。目标卡片 (V) 只声明**图内支撑**的范围，故本卡不受影响；但若下游需要 D = 5 处的 (c)，必须另找输入（协变矢量结构或路线 (I)）。"
+notes: |
+  本推导由 curator 于 2026-09-11 随 worldsheet.critical-dimension-bosonic-v3 的换代新建，
+  与 worldsheet.critical-dimension-bosonic-v2--via-four-routes 并存（后者内容未动，
+  它指向 v2，不指向本卡的目标）。v2 那条推导本身没有错，只是目标陈述被换代。
+
+  **依赖边未变、来源定位大改**：本推导与 v2 版推导的 depends_on 是同一组 7 条边，
+  故图的形状与有效状态不变（physical-argument）。实质变化有两类：
+    (1) 目标陈述按第二轮回译审计的六项裁定改写（见 summary）；
+    (2) 五处 Polchinski 定位按 2026-09-11 的原书核实重写：
+        §1.3 (1.3.40) p.23（并撤销「习题 1.3」的说法）、§4.1 level 2 = p.124 + 习题 4.1
+        （(4.1.24)–(4.1.28) 不存在）、§4.3 (4.3.9)（不是 (4.3.10)）、
+        §3.4 (3.4.23) p.94（且原书写 D = 26，Q6 关闭）、§2.4 (2.4.22) p.48（Q4/E34 关闭）。
+  这两类改动都不改变任何依赖边的 inferred 标记：两条「不标 inferred」的公共输入边
+  （free-boson-central-charge-d、bc-ghost-central-charge）的依据位置在本次核实后**更强**了
+  （(2.4.22) 取代了无锚点的 §2.4 末，(2.5.12) 在原书 (3.4.23) 处被显式引用）。
+
+  **【2026-09-11 后续改动：(I) 的边改指 -v2】**按 ms.critical-dimension-bosonic 第三轮
+  回译审计的裁定 3(a)，路线卡 worldsheet.critical-dimension-light-cone 已换代为
+  worldsheet.critical-dimension-light-cone-v2（补上前提 D ≥ 4）。本推导的第一条依赖边
+  随之改指 -v2，**边的条数与集合结构不变**（仍是 5 条路线/输入 + 2 条公共输入），
+  目标陈述、status、有效状态（physical-argument）均不变。相应地更新了该边的 note、
+  summary 的对照表与 gaps 第 2 条的记账。指向旧路线卡的两条历史推导
+  （--via-three-routes 对 v1、--via-four-routes 对 v2）保持不动。
+
+  **【2026-09-11 后续改动之二：(II) 的边改指 -v3】**按 ms.critical-dimension-bosonic
+  第二轮回译审计 D5/T4 与第三轮 §6 的点名，路线卡 worldsheet.critical-dimension-old-covariant-v2
+  已换代为 worldsheet.critical-dimension-old-covariant-v3（**只**删去 statement 中 H_0 的括注
+  「（伪态）」）。本推导的第二条依赖边随之改指 -v3，**边的条数与集合结构不变**
+  （仍是 5 条路线/输入 + 2 条公共输入），目标陈述、status、有效状态（physical-argument）均不变。
+  相应地更新了该边的 note 与 summary 的对照表。指向 -v2 的两条历史推导
+  （--via-three-routes、v2 的 --via-four-routes）按 docs/STATUS_LEVELS.md「旧推导的去留」
+  本可不追改，但它们的 (II) 边是 2026-09-11 同一批「就地换代」加上去的，
+  故本次一并就地改指并在各自 note 里写明（与 (I) 改指 -v2 那次同款处理）。
+author: curator
+created: "2026-09-11"

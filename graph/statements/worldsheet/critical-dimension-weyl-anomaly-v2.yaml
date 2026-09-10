@@ -29,16 +29,26 @@ uses_conventions:
   - conv.worldsheet-complex-coords
 sources:
   - ref: polchinski-1998-v1
-    loc: "§3.4 的结尾部分，p.95–96，公式号约在 (3.4.24)–(3.4.32) 区间"
+    loc: "§3.4：Weyl 反常 ∝ 中心荷的核心式 **(3.4.15)**（`c = −12a₁`，`T^a_a = −(c/12)R`）；「Weyl 不变 ⟺ 总中心荷为零」的两处 **iff 散文**（p.95、p.96，无式号）；\"Discussion\" 小节 **(3.4.23)**, p.94 给的是 `c = c^X + c^g = D − 26` 与「Weyl-invariant only for **D = 26**」（式号、页码与措辞 2026-09-11 经原书核实，抽取记录 polchinski-1998-v1.md §12.2，**Q6 关闭**）"
     note: |
-      **公式号未核实**，只有硬约束：§3.4 = p.90–96（Cambridge frontmatter 目录已核实），
-      且 (3.4.31)「中心荷是常数」被核对源定位在 p.96–97，即接近节末；
-      故该结论的式号只能在 (3.4.31) 前后。抽取记录 E53 与 Q6 明确要求**不要写死式号**。
-      ⚠ **原书此处写的是「c^m = 26」还是直接写「D = 26」仍未核实**（抽取记录 Q6 要求人工核对）。
-      若原书只写 D = 26，则本卡片的陈述（对任意物质 CFT 断言 c^m = 26）强于来源，须相应修订；
-      详见 notes 的【原书措辞未核实】一段。
+      **【2026-09-11 原书核实：Q6 关闭】**本条此前写「p.95–96，公式号约在 (3.4.24)–(3.4.32) 区间，
+      公式号未核实」——现落实：结论式是 **(3.4.23), p.94**（不在节末，在 "Discussion" 小节）。
+      ⚠ **Q6 的第二问答案：原书那里写的是 `D = 26`，不是 `c^m = 26`。**
+      本卡片陈述的一般形式（对任意物质 CFT 断言 c^{tot} = 0 ⟺ c^m = 26）在 §3.4 里
+      **只有散文支撑**，逐字如下：p.95「a flat world-sheet CFT can be coupled to a curved metric
+      in a Weyl-invariant way **if and only if the total central charge c is zero**」；
+      p.96「Weyl invariance holds in the quantum theory **if and only if a₁ = −c/12 vanishes**」；
+      带式号的形式是 (3.4.15)。**逐字写出 `c^m = 26` 的是 §4.3 (4.3.9)**（见下一条）。
+      故本卡片的陈述不比来源强，但它的支撑是三处联合而非单一式号。
+      另：原书在 (3.4.23) 处**显式引用 (2.5.12)** 作为 c^g = −26 的来源。
   - ref: polchinski-1998-v1
-    loc: "§3.4, eq. (3.4.31)（中心荷为常数，p.96–97，式号已核实）；§2.5, eq. (2.5.12)（c^g = -26，式号已核实）"
+    loc: "§4.3, eq. **(4.3.9)**（全书唯一逐字写出 `c^m = 26` 的位置：「{Q_B, Q_B} = 0 only if c^m = 26」；式号与内容已核实，抽取记录 §12.3）"
+    note: |
+      本条支撑的是本卡片采用的**记号与一般性形式**（c^m = 26），不是它的论证
+      （论证是 Weyl 反常抵消，见上一条；BRST 路线另有节点 worldsheet.critical-dimension-brst-v2）。
+      抽取记录 §12.10 表 B 第 7 行的建议正是：若卡片文本是 c^m = 26，则改挂 §4.3 (4.3.9)。
+  - ref: polchinski-1998-v1
+    loc: "§3.4, eq. (3.4.31)（中心荷为常数，p.96–97，式号已核实）；§2.5, eq. (2.5.12), p.51（c^g = -26，式号已核实）"
 tags: [bosonic-string, critical-dimension, weyl-anomaly, conformal-anomaly]
 notes: |
   【本卡片换代 worldsheet.critical-dimension-weyl-anomaly】（curator，2026-09-11，依
@@ -54,12 +64,22 @@ notes: |
   **保留 worldsheet.bc-ghost-central-charge**（陈述里的 c^g = −26 仍不是该推导算出来的）。
   旧卡 statement 文本一字未动，只加 superseded_by 与一段 notes（根 CLAUDE.md 原则 1）。
 
-  【原书措辞未核实】抽取记录 Q6 要求人工确认 Polchinski §3.4 末尾写的是「c^m = 26」
-  还是直接写「D = 26」。本卡片按更一般的形式（c^m = 26）陈述。两种情形的后果：
-    · 若原书写 c^m = 26：本卡片与来源逐字对应，无需修订。
-    · 若原书只写 D = 26：本卡片的陈述**强于**来源（对任意 c^m = 26 的物质 CFT 成立，
-      而非只对 D 个平坦标量），须相应修订或补一条覆盖一般物质 CFT 的来源。
-  该疑问自旧卡起就登记在案，本次换代**未**解决它，只把它从陈述末段搬到这里并显式标注。
+  【原书措辞：Q6 已于 2026-09-11 关闭（原书核实）】此前本段写「抽取记录 Q6 要求人工确认
+  Polchinski §3.4 末尾写的是『c^m = 26』还是直接写『D = 26』……本次换代未解决它」。
+  **现已解决**（literature/extractions/polchinski-1998-v1.md §12.2 / §12.10 表 A 之 Q6）：
+    · 结论式是 **(3.4.23), p.94**（在 "Discussion" 小节，不在节末），原书逐字
+      `c = c^X + c^g = D − 26`，随后「The theory is Weyl-invariant **only for D = 26**」——
+      **原书那里写的是 D = 26**。
+    · 但 Q6 预想的第二种后果（「本卡片强于来源，须修订」）**并未发生**：一般物质 CFT 的版本
+      在 §3.4 确实存在，只是以**散文 iff** 出现而无式号——p.95「a flat world-sheet CFT can be
+      coupled to a curved metric in a Weyl-invariant way if and only if the total central charge
+      c is zero」、p.96「Weyl invariance holds in the quantum theory if and only if a₁ = −c/12
+      vanishes」，带式号的形式是 (3.4.15)（c = −12a₁）。
+    · 逐字写出 `c^m = 26` 的位置是 **§4.3 (4.3.9)**，已按抽取记录 §12.10 表 B 第 7 行的建议
+      加入本卡片的 sources。
+  因此本卡片的陈述**不比来源强**，无需修订陈述文本；变化只在 sources 的 loc/note
+  （本次由 curator 于 2026-09-11 随 worldsheet.critical-dimension-bosonic-v3 的换代一并落实，
+  陈述文本一字未动）。
 
   **这是 D = 26 的第四条路线**，与图中已有的三条并列：
     (i)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合
@@ -72,8 +92,8 @@ notes: |
   与 (iii) 的关系：两者在数学内容上高度接近——(iii) 的条件是「总 Virasoro 的中心扩张为零」，
   (iv) 的条件是「总中心荷为零」，这是同一个数 c^m - 26 = 0。
   差别在于**论证方式与所依赖的框架**：(iii) 是模式代数中 {Q_B, Q_B} 的计算（不涉及路径积分测度），
-  (iv) 是路径积分测度的 Weyl 变分（不涉及 BRST 荷）。因此二者是两条独立的证据，
-  但**不是两条完全独立的推导**：它们共享 c^g = -26 这个输入（换代后 c^m = D 那个共享输入
+  (iv) 是路径积分测度的 Weyl 变分（不涉及 BRST 荷）。因此二者论证方式不同，
+  但**不是两条独立的推导**（reviewer-batch7b 2026-09-11 指出原措辞自相矛盾，已改）：它们共享 c^g = -26 这个输入（换代后 c^m = D 那个共享输入
   已从两卡的陈述中移出，改由汇总卡片承载）。本图未建「(iii) ⟺ (iv)」的等价节点。
 
   与 (i)(ii) 的关系：那两条给出的是「D = 26 **且** a = 1」，本节点**只给 c^m，不给截距 a**，

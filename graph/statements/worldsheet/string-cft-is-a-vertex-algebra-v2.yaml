@@ -79,10 +79,27 @@ sources:
       （使用限制 (4)）：它停在 Lie 代数层面，连本节点 (i) 的单玻色子特例都不覆盖。列出它是因为它是本图中
       离本节点最近的**已形式化**结果。
   - ref: polchinski-1998-v1
-    loc: "§2.1–§2.7（物理侧：把 ∂X∂X、bc、TT 等基本 OPE 直接当作理论的定义，并断言 OPE 收敛，见 worldsheet.operator-product-expansion）"
+    loc: "§2.1–§2.7（物理侧：把 ∂X∂X、bc、TT 等基本 OPE 直接当作理论的定义）；**OPE 收敛性的论证在 §2.9, p.69**（(2.9.2) 下方正文，无式号）"
     note: |
       物理侧从未陈述、更未验证顶点代数公理；Polchinski 的做法等价于**假定**本节点成立。
       本节点就是把这个隐含假定显式化。
+
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**Q3 修正：原书给了论证**】
+      本节点旧措辞说 Polchinski「断言 OPE 收敛」。更准确的说法是：**原书 p.69 给了一个论证**，
+      逐字为「**The convergence of the OPE is just the usual convergence of a complete set in
+      quantum mechanics. The construction is possible as long as there are no other operators with
+      |z'| ≤ |z|, so that we can cut on a circle of radius |z| + ε.**」
+      → 即物理侧的收敛性依据是 **physical-argument（不是 axiom、也不是纯断言）**：
+        它把收敛归结为「量子力学里完备集的通常收敛」，并给出了收敛半径的来源
+        （切开路径积分的圆的半径）。
+      → **但这不缩小本节点所记的缺口**，反而定位得更准：该论证 (a) 建立在**态-算子对应**之上
+        （原书原句以 "By the state–operator correspondence …" 开头），而态-算子对应本身是
+        路径积分构造；(b) 「complete set 的通常收敛」在无穷维空间上是未加限定的类比，
+        无解析估计、无收敛域定理。本节点要求的正是 (b) 这一层的解析陈述
+        （见 gui-2023-lectures Definition 7.2 那条来源）。
+      → 对照材料：`polchinski-1998-v2.md` 记录 Vol.2 §11.5 有一个**原书自己承认 OPE 会出错**的实例，
+        可作为本节点的反向证据，本图尚未建节点。
+      见 literature/extractions/polchinski-1998-v1.md §12.4（Q3）与 §12.10 表 A 的 Q3。
 tags: [cft, vertex-algebra, ope, locality, gap, bottleneck, open]
 notes: |
   **statement 里「两种正规序至多相差一个 c-数、故给出同一组 L_m」一段现有独立节点**

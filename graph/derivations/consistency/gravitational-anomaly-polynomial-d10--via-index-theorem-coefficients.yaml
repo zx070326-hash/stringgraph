@@ -41,7 +41,7 @@ summary: |
 gaps:
   - "★ 三个系数完全外包给 alvarez-gaume-witten-1984，本项目**未取得该文全文**（L0）。整条 consistency.* 反常链的数值系数层因此不可追溯。"
   - "GS 未复算，也未说明费米子含量如何代入；spin-3/2 与 spin-1/2 的相对贡献系数在本图无任何来源。"
-  - "「形式上的十二维表达式」与十维反常之间的对应本身只在 zumino-wu-zee-1984（未取得）里，见 consistency.anomaly-twelve-form-d10。"
+  - "「形式上的十二维表达式」与十维反常之间的对应本身只在 zumino-wu-zee-1984 里，见 consistency.anomaly-twelve-form-d10。**状态更正（2026-09-11）**：ZWZ **正文仍未取得**（L2，仅 INSPIRE 逐字摘要；本项目已穷尽当前可用路线，抽取记录 §0.4）。同作者同期的伴随讲义 zumino-1983-les-houches **全文已取得（L1）**，但它只提供**下降链**那一半，**没有升维到 2n+2 维不变多项式**这套写法。⇒ 这条「反常 ↔ 十二形式」的字典在本图里**仍无任何已核实来源**。"
   - "升级路径：抽取 Alvarez-Gaumé–Witten 1984（尤其 eq. (63) 与引力反常表），这是本区最高优先级的 researcher 任务。"
 notes: |
   与 bilal-2008 的 3/4 因子核对由 researcher 在抽取时完成、curator 复看，**未由 reviewer 独立复核**。

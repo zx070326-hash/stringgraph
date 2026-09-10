@@ -54,8 +54,36 @@ sources:
       本节点**只**取该处的 λ = 2 bc 系统本身（模式与 L^g_n），**不**取其中心荷取值——
       取值另属 worldsheet.bc-ghost-central-charge。
   - ref: polchinski-1998-v1
-    loc: "§4.2（BRST 一般框架），§4.3（弦的 BRST 量子化）：Q_B 的模展开约 eq. (4.3.1)，鬼场正规序常数 a^g = -1"
-    note: 公式号为近似定位；Polchinski 的 Q_B 归一化与本节点一致。
+    loc: "§4.2（BRST 一般框架），§4.3（弦的 BRST 量子化）：BRST 变换 (4.3.1a,b,c)、BRST 流 (4.3.3)、**Q_B 的围道定义 (4.3.5)**、**Q_B 的模展开 (4.3.7)**（闭弦形式，末项 + a^B(c_0 + c̃_0)），鬼场正规序常数 a^B = a^g = −1 由 (4.3.8) {Q_B, b_0} = L^m_0 + L^g_0 定出；厄米共轭 (4.3.17a,b,c)、基态内积 (4.3.18a,b)"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——旧 loc 的「约 eq. (4.3.1)」是
+      近似定位，现落实为上面各式】
+
+      ⚠ **本节点作为定义卡必须记的三条原书自述（旧记录一条都没有）**：
+
+      (1) **p.135，关于内积（对无鬼定理最要紧的一条）**，逐字：
+        "The inner product (4.3.18a) is not quite the correct one to use in `Ĥ`. It is not well
+         defined: the ghost zero modes give zero, while the δ²⁶(k−k') contains a factor δ(0)
+         because the momentum support is restricted to the mass shell. **Therefore we use in `Ĥ`
+         a reduced inner product ⟨ ‖ ⟩ in which we simply ignore the X⁰ and ghost zero modes.**
+         It is this inner product that will be relevant for the probabilistic interpretation."
+      → **§4.4 无鬼定理里的内积不是 (4.3.18a)，而是一个人为约化的内积**，这是原书明说的一次
+        非平凡选择。形式化时必须写进去。已同步记入 worldsheet.no-ghost-theorem-brst 的 sources。
+
+      (2) **p.134，(4.3.19) b_0|ψ⟩ = 0 是被"断言"的**，原书逐字：
+        "we will **assert** (and later show) that physical states must satisfy" b_0|ψ⟩ = 0。
+
+      (3) **p.136 脚注 1，闭弦条件的作者自承缺口**，逐字：
+        "**S. Weinberg has pointed out that the simple argument given at the end of section 4.2
+          would only lead to the weaker condition (b_0 + b̃_0)|ψ⟩ = 0.** Nevertheless, we shall see
+          from the detailed form of string amplitudes in chapter 9 that there is a projection onto
+          states satisfying conditions (4.3.29)."
+      → **闭弦的 b_0|ψ⟩ = b̃_0|ψ⟩ = 0（(4.3.29)）在第 4 章里没有被证明**，
+        作者把依据推给第 9 章的振幅形式。本图若有闭弦 BRST 上同调节点，该依赖必须显式挂出
+        并标 physical-argument。**本图目前没有这样的节点**，已在报告中列给 lead。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）与 §12.10 表 B 第 10、29 项、
+      表 C 第 7、8 项。
   - ref: polchinski-1998-v1
     loc: "§2.7, eq. (2.7.17)（{b_m, c_n} = δ_{m,-n}）、(2.7.18)（两个简并基态）、(2.7.19)（鬼场 Virasoro 生成元），p.61–62"
     note: 式号经 schrans-2020 目录核实（`2.55`–`2.62`, p.61–62）；抽取记录 polchinski-1998-v1.md#E43。

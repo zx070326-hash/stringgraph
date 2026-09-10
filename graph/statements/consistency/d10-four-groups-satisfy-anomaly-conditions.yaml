@@ -1,0 +1,97 @@
+id: consistency.d10-four-groups-satisfy-anomaly-conditions
+kind: proposition
+title: SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶ 四者都满足十维 N=1 反常多项式的两条条件（六阶伴随迹关系 + n = 496）
+statement: |
+  **记号**：F 是取值于规范代数 𝔤 的二形式，**Tr** 是**伴随**表示的迹（conv.gauge-trace-normalization），
+  n := dim 𝔤 = 规范生成元总数。定义两条条件：
+
+    **(i)**  Tr F⁶ = (1/48) · Tr F⁴ · Tr F² − (Tr F²)³/14400
+    **(ii)** n = 496
+
+  （条件 (i) 等价于 math.anomaly-twelve-form-factorization 的嵌套写法
+   Ω₁₂ = (1/48) Ω₄[Ω₈ − (1/300)Ω₄²]，也等价于说 Adams–DeWolfe–Taylor (7) /
+   Polchinski (12.2.27) 中第一个大括号 −Tr F⁶ + (1/48)Tr F⁴Tr F² − (Tr F²)³/14400 为零。）
+
+  **命题**：下面四个规范代数**都**满足 (i) 与 (ii)：
+
+    · **𝔰𝔬(32)**：n = 32·31/2 = 496；(i) 由 so(N) 的伴随–基本迹恒等式在 N = 32 处给出。
+    · **𝔢₈ ⊕ 𝔢₈**：n = 2 × 248 = 496；(i) 由单个 𝔢₈ 的迹归约加上伴随迹对直和的可加性给出。
+    · **𝔢₈ ⊕ 𝔲(1)^{⊕248}**：n = 248 + 248 = 496；阿贝尔生成元在伴随表示下作用为零，
+      故一切含它们的伴随迹为零，(i) 退化为单个 𝔢₈ 的情形。
+    · **𝔲(1)^{⊕496}**：n = 496；一切伴随迹为零，(i) 两边同为 0，平凡成立。
+
+  **本节点不断言**（每条都是红线，见 notes）：
+  (a) ★★ **「恰有四个」/「没有别的群满足 (i)(ii)」**。本卡只说这四个**满足**条件，不说别的群不满足。
+      完备性主张另见 consistency.d10-anomaly-conditions-completeness-claim（status: conjecture）。
+      Polchinski p. 101 脚注 1 的动词是 **"hold"**，全书**无**唯一性主张。
+  (b) ★★ **这四个理论「反常抵消」或「是一致理论」**。按
+      consistency.abelian-factorization-is-not-cancellation（ADT 2010，L1），两个**阿贝尔**解的
+      Green–Schwarz 抵消项**写不下来**（Y₄ ≠ dH₃）。Polchinski 脚注同处逐字补的是
+      「**but no corresponding string theories are known**」。
+  (c) (i)(ii) 是反常抵消的**充分**条件。原文说的是：第三项是可由 GS 机制抵消的因子化形式，
+      前两项不能，**所以**要反常自由就必须让它们为零——即 (i)(ii) 是**必要**条件。
+  (d) 条件 (i)(ii) 之外的任何反常条件（如混合反常的两条方程，
+      math.mixed-anomaly-trace-conditions-n32；那两条本卡未对四个群逐一检查）。
+  (e) 十维 N=1 反常多项式 (12.2.27)/ADT (7) 本身的正确性——那是物理侧，
+      见 consistency.gravitational-anomaly-polynomial-d10 与 consistency.anomaly-twelve-form-d10。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 101：(12.2.27)(12.2.28) 与 (12.2.29) 之间的正文「…for the theory to be anomaly-free the combination of traces on the first line must vanish for the adjoint representation, and the total number of gauge generators must be 496. For the groups SO(32) and E₈ × E₈, both properties hold.」+ **p. 101 脚注 1 逐字「They also hold for E₈ × U(1)²⁴⁸ and U(1)⁴⁹⁶, but no corresponding string theories are known.」**；迹恒等式 (12.2.19a-c)（SO(n)）与 (12.2.20)（E₈）在 pp. 99–100"
+    note: |
+      **L1 原书**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E12/E13/E14）。
+      ★ **这是本项目目前唯一一条能在正文里直接读到那四个群名字的 L1 来源**（GSW ch.13 仍取不到）。
+      ⚠ **动词裁定（抽取记录 E14）**：Polchinski 用的是 **"hold"**，指代紧邻正文里的那两条 properties，
+      **既不是 "cancel" 也不是 "factorize"，更没有 "the only" / "no other"**。本卡的措辞照此。
+      ⚠ **记号不是同一套**：Polchinski 的 **tr = 切空间（Lorentz）迹**、**Tr_v / Tr_a = 规范群矢量/伴随迹**；
+      GS/GSW 的 tr = 规范群基本迹、Tr = 规范群伴随迹（抽取记录 §1.3 的对照表）。
+      本卡按本图的 conv.gauge-trace-normalization（GS 那套）书写，
+      **Polchinski 的 Tr_a ↔ 本卡的 Tr、Tr_v ↔ 本卡的 tr**；Polchinski ↔ ADT 可逐符号对译，
+      Polchinski ↔ GS **不能直接抄符号**。
+      ⚠ 原书对两条迹恒等式**都不给证明**，分别留作 Exercise 12.1 与 Exercise 12.2（p. 134）。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352**v2**，(7)(8)（= Polchinski (12.2.27)(12.2.28)，逐项逐系数相同）；第三节 p. 3：阿贝尔伴随迹为零的说明「Tr is the trace in the adjoint, and the adjoint of U(1) is the singlet, so these traces vanish」与「for U(1)⁴⁹⁶ it is simply zero term by term」"
+    note: |
+      **L1**（curator 2026-09-11 取 arXiv e-print LaTeX 源码 `universality_ten_v2.tex` 逐段核对）。
+      ★ **阿贝尔那一步（U(1) 的伴随表示是单态 ⇒ Tr = 0）原书没写，ADT 写了**，故这一步引 ADT 不引 Polchinski
+      （抽取记录 polchinski-1998-v2-ch12.md E14 末尾明确这样建议）。
+      ADT 自陈其 (7) 的排布方式「following the presentation of Polchinski [11]」，
+      抽取记录 E15 已核实两者逐项相同 ⇒ 本卡的两个来源在公式上**不是独立的**，但在措辞与阿贝尔一步上互补。
+  - ref: gsw-1987-v2
+    loc: "§10.1.2, p. 149, (10.1.12)（SO(n) 支，与 Polchinski (12.2.19c) 逐项一致）"
+    note: |
+      L1 逐页读图。**只作 SO(n) 迹恒等式的第三个独立转录**（GS 1984 (12c)、GSW (10.1.12)、
+      Polchinski (12.2.19c) 三处系数完全一致）。
+      ⚠ 本条**不**承载四解表：GSW 的四解在第 13 章，**本项目未取得该章正文（L0）**。
+tags: [anomaly, factorization, d10, so32, e8, abelian, algebra, phase2, lean-candidate]
+notes: |
+  【1. ★★ 为什么把「四个群满足条件」与「只有这四个」拆成两张卡（lead 裁决 2026-09-11）】
+  · **本卡是可机检的纯代数事实**：给定三族的迹恒等式，四个群逐一代入验证，全部是 ℚ 上的多项式恒等式；
+  · **完备性（「没有别的」）在本项目可读的来源里没有证明**，且三方表述互相冲突。
+  把两者写在一张卡上，会让可验证的那一半被不可验证的那一半拖低。
+  完备性卡：consistency.d10-anomaly-conditions-completeness-claim（status: conjecture）。
+  **红线：本卡与任何引用本卡的地方都不得写「恰有四个」。**
+
+  【2. ★★ 记账红线（docs/ROADMAP.md 2026-09-11，ADT 2010 L1）】
+  满足 (i)(ii) ⇒ 反常十二形式取因子化形式 Y₄X₈；但**因子化不蕴含抵消**。
+  两个阿贝尔解的 GS 抵消项写不下来（Y₄ ≠ dH₃），见
+  consistency.abelian-factorization-is-not-cancellation。
+  Polchinski 的措辞恰好避开了这个坑（他只说 "properties hold" + "no corresponding string theories are known"）。
+
+  【3. 三条来源的关系（不要误当成三条独立证据）】
+  · Polchinski (12.2.27)(12.2.28) 与 ADT (7)(8) **逐项相同**（抽取记录 E15 已核实），ADT 自陈引自 Polchinski 的排布；
+  · 两者的系数又都外包给 Alvarez-Gaumé–Witten（本项目未取得正文）。
+  ⇒ 在**公式**层面这是**一条**证据链；真正独立的是 GS 1984 (19)(20) 那一路
+    （其 (20) 与 ADT (7) 的纯引力部分差整体因子 −96，逐项相等，已在
+     consistency.gravitational-anomaly-requires-496-fermions 的 ADT 来源 note 里复算）。
+
+  【4. Lean 岛候选 A10（抽取记录 polchinski-1998-v2-ch12.md §5.4）】
+  本卡是候选 **A10**：三族（SO(n)、E₈^k、U(1)^m）的迹恒等式代入 + n 的算术，
+  `ring` + `norm_num`/`omega` 即可。**⚠ 形式化时必须只证「这四个满足」**；
+  「恰是这四个」需要「候选集限定在这三族及其乘积」这条额外假设，
+  写进 Lean 定理陈述时必须显式，否则就变成本项目明令禁止的完备分类主张。
+  相邻候选：A1（math.anomaly-twelve-form-factorization）、A6（迹恒等式的 l ∈ {−1,0,+1} 统一版）、
+  A7（math.hexagon-odd-twist-count）、A9（(12.2.27) 是 (12.2.11)+(12.2.12) 的恒等重排，本图未建卡）。
+author: curator
+created: "2026-09-11"

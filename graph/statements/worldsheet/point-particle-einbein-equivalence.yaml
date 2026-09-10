@@ -13,11 +13,14 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.5)–(1.2.7)"
+    loc: "§1.2：**(1.2.5)**（einbein 作用量，p.10）、**(1.2.6)**（`η′(τ′)dτ′ = η(τ)dτ`，即 η 的一维密度变换律，p.11）、**(1.2.7)**（`η² = −Ẋ^μẊ_μ/m²`，即 η 的运动方程解，p.11）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E2，证据等级
-      [页码已核实/式号未核实]。抽取记录记「这条经典等价是消去 η 的运动方程得到的，
-      属于经典场论操作」；Polchinski 原文措辞未核实（抽取记录 §0 说明全书正文未获取）。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E2。
+      **【核实 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      **式号 (1.2.5)–(1.2.7) 全部正确**，页码 p.10–11，「约」与「式号未核实」撤销，
+      位置的证据等级升到 **L1**；本节点断言的「代回后得 S_pp」这一步的**原文措辞仍未逐字核实**
+      （本轮读的是式号表，(1.2.7) 到 (1.2.8) 之间的散文没有逐字转录），故本节点的推导状态不变。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, action, point-particle, classical, equivalence]
 notes: |
   「经典等价」在此严格地指：两个作用量的 X^μ 的 Euler–Lagrange 方程有相同解集。

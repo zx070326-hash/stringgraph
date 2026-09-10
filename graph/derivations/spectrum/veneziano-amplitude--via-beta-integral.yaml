@@ -1,0 +1,81 @@
+id: spectrum.veneziano-amplitude--via-beta-integral
+target: spectrum.veneziano-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.open-string-four-tachyon-amplitude
+    note: 提供三段边界积分；每一段就是一项 Beta 函数。
+  - id: math.euler-beta-integral
+    note: 提供 ∫₀¹ t^{a−1}(1−t)^{b−1}dt = B(a,b) 与亚纯延拓（物理参数区的积分靠它定义）。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 α'(s+t+u) = −4，用来把三项的参数写成统一的 −α(x) = −1 − α'x 形式。
+  - id: spectrum.four-tachyon-factorization-disk-normalization
+    note: |
+      提供 C_{D₂} = 1/(α'g_o²)（(6.4.14)）。推导路线（[S] 的一句话）明确要求
+      「plug in the expression for C_{D₂}」。**目标换代为完整形式后（2026-09-11），
+      这条边承载的正是前因子**：i g_o⁴ C_{D₂} = i g_o²/α'，与 (6.4.23) 的 2i g_o²/α'
+      相差的因子 2 来自六个循环序的成对合并（原书未写，见 gaps）。
+  - id: worldsheet.leading-regge-trajectory
+    inferred: true
+    note: |
+      标 inferred：提供 α(x) = 1 + α'x 这个记号（开弦领头 Regge 轨迹）。
+      该节点陈述的是**谱**上的 S ≤ α'm² + 1，来源是 §1.3 (1.3.43)；
+      把它作为**振幅参数**的记号在 §6.4 里出现，两处不互相引用。
+    convention_map: |
+      conv.metric-mostly-plus 下 x = −(k_i+k_j)² = m²_int（x 为相应通道的 Mandelstam 变量，
+      等于该通道中间态质量的平方），故谱上的 α'm² + 1 与振幅参数里的 1 + α'x 在极点位置上一致
+      （α'm² = −1 ⟺ α'x = −1）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.23)，并见 (6.4.19)–(6.4.22)/(6.4.24)，p.183"
+    note: |
+      抽取记录 #E99 + **§12.8（首次页图）+ §14.1（2026-09-11 复核无误）**，
+      **等级 L1（原书 p.183 逐字，两轮独立读图）**。
+      ⚠ **[S] 没有抄出 (6.4.23)**；三项 Beta 结构取自他为 Regge 计算写的 [6.143]，
+      **前因子完全来自原书页图**，[S] 在这一点上不是独立源。
+      旧 note「整体前因子完全未核实……本推导只支持弱形式」已作废：
+      2026-09-11 起本推导的目标是完整形式 spectrum.veneziano-amplitude。
+  - ref: schrans-2020
+    loc: "§6.39（笔记 p.308）：「This is straightforward. Use (6.4.9) and plug in the expression for C_{D₂} and the expression of I in terms of the Beta functions (6.4.20).」；§6.41 [6.143]（三项 Beta 结构）"
+summary: |
+  开弦四 tachyon 振幅的边界积分沿实轴分成三段 (−∞,0)、(0,1)、(1,∞)，
+  分别对应三种把四条腿排在圆盘边界上的不等价方式。
+  每一段经变量替换化为 ∫₀¹ dt t^{a−1}(1−t)^{b−1}，即一项 Beta 函数；
+  三段的参数分别是 (−α's−1, −α't−1)、(−α's−1, −α'u−1)、(−α't−1, −α'u−1)，
+  即 (−α(s), −α(t)) 等。合起来给出陈述里的三项之和。
+  按 [S] 的路线，再乘上 C_{D₂} = 1/(α'g_o²) 与 (6.4.9) 的其余因子得 (6.4.23)。
+  **前因子 2i g_o²/α' × (2π)²⁶δ²⁶(Σk_i) 由原书 p.183 页图直接读出（L1），不是本推导算出来的**；
+  本推导算出的是 i g_o⁴C_{D₂} = i g_o²/α'，与原书差一个因子 2，该因子归于六个循环序的成对合并
+  （原书未写出合并过程，见 gaps）。
+gaps:
+  - "**（2026-09-11 §12.8 + §14.1 关闭）表达式锚定**：(6.4.23) 的完整表达式已由原书 p.183
+     页图两轮独立读出，等级 L1，此项不再是 gap。**取而代之的新 gap**：
+     **原书没有写出「六个循环序合并成三项」的过程**，因而本推导算出的 i g_o⁴C_{D₂} = i g_o²/α'
+     与原书 (6.4.23) 的 2i g_o²/α' 之间那个**因子 2 在本图里是 curator 的推断**
+     （旁证：三 tachyon 振幅 (6.4.15) 处出现同样的因子 2，那里两种循环序是显式的）。
+     §14.1 **没有**为这条对账新增任何证据。
+     ⚠ headrick-2008 Problem 6.9 算的是四规范玻色子（参数偏移不同），**不能互证**。"
+  - "**三段积分到三项 Beta 的换元本推导没有逐项写出**：只有 (0,1) 段是直接的 Euler 积分，
+     另两段需要变量替换与（在延拓意义下的）区间映射，来源与本图都没有写出细节。"
+  - "**上游 ch5 节点尚未进入 main**；**开弦 X 部门期望值无节点且只到 L2**
+     （与 spectrum.open-string-four-tachyon-amplitude 同一缺口）。"
+  - "**路径积分测度未定义**（本批次共有）。"
+  - "**极点与物理态的对应未在本推导中检验**：Beta 函数在 −α_o(s) = 0,−1,−2,… 处的极点塔
+     被解读为开弦谱，但本推导不做这个对照。⚠ **而且这个对照不能照直做**：原书 p.183 逐字说
+     α's 取 1/α' 偶数倍处的极点在三项之间**全部相消**（见
+     spectrum.even-level-open-string-poles-cancel-between-orderings 与
+     spectrum.massless-open-pole-requires-chan-paton；留数层面的内容另见
+     spectrum.four-tachyon-factorization-disk-normalization）。"
+notes: |
+  **2026-09-11（curator-ch6-sec14）：本推导由 spectrum.veneziano-amplitude-weak--via-beta-integral
+  改名为 spectrum.veneziano-amplitude--via-beta-integral，target 改指完整形式的新陈述
+  spectrum.veneziano-amplitude；`depends_on` 一条未增未减**（按 docs/STATUS_LEVELS.md
+  「旧推导的去留」lead 2026-09-11 裁决的 `git mv` + 改指路线）。
+  弱陈述 spectrum.veneziano-amplitude-weak 保留并写 superseded_by 指向新卡。
+
+  改指的依据：(6.4.23) 的完整表达式（含前因子 2i g_o²/α'）已由原书 p.183 页图两轮独立核实
+  （抽取记录 §12.8 首次、§14.1 复核无误），等级 L1。
+  ⚠ **但前因子不是本推导算出来的，是读出来的**：本推导的路线只给到 i g_o⁴C_{D₂}，
+  差的因子 2 仍是推断，见 gaps。这是本推导 status 维持 physical-argument 的理由之一。
+author: curator-polchinski-ch6
+created: "2026-09-11"

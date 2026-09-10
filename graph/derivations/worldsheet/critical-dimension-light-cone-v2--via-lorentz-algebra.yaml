@@ -1,0 +1,77 @@
+id: worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra
+target: worldsheet.critical-dimension-light-cone-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.light-cone-quantization
+  - id: worldsheet.light-cone-normal-ordering-constant
+    note: |
+      **【2026-09-11 拆清，ms.critical-dimension-bosonic 第三轮裁定 3(a) 的「顺带」项】**
+      这条边**只服务于 summary 第二段**（Polchinski §1.3 正文的那条形状：先把 ζ 正规化值
+      a = (D−2)/24 代进去，则 Δ_n 退化为 n(26−D)/12，闭合 ⟺ D = 26，而 a = 1 成为随之而来的
+      推论）。**目标陈述与本推导的主论证不用它**：目标卡把正规序常数 a 当作 Δ_n 中的**待定参数**，
+      由 n 的正幂系数得 D = 26、由 n 的负幂系数得 a = 1，全程不需要 a 的任何正规化数值。
+      因此：
+        · 本边**不是**目标陈述的前提，删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容；
+        · 保留它是因为 summary 第二段确实断言了「ζ 值配 a = 1 同样给 D = 26」，那句话需要这条边；
+        · 下游**不得**据本边推断「(I) 路线共享 ζ 正规化处方」——ms.critical-dimension-bosonic 的
+          canonical_text 已按第三轮 F2 删去该说法。
+      **非 inferred**：该结果已单列节点（Polchinski §1.3，A 的定义式 **(1.3.31)**、ζ 正规化 (1.3.32)、
+      结果 **(1.3.35)** `A = (2−D)/24`，式号 2026-09-11 经原书核实落实），已列入本推导 sources 的
+      §1.3 条目，故这条边有来源支撑。
+    convention_map: |
+      被依赖节点按 Polchinski 记号给 A = -(D-2)/24 并声明 conv.intercept-sign-a
+      （a = -A）；本推导与目标陈述用的是 a，取 a = (D-2)/24。
+  - id: worldsheet.open-string-mass-shell
+    note: |
+      本推导的 summary 用 α'm^2 = N - a 把 Δ_n = 0 的解读成谱条件。该质量壳现已单列
+      节点，来源是已核实的 Polchinski **(1.3.36)**，已列入本推导 sources 的 §1.3 条目，非 inferred。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算，给出 Δ_n）"
+    note: GSW 用 mostly-minus 号差与 α' = 1/2 归一化；Δ_n 的形式不受影响，整体因子已按 conv.alpha-prime-regge 转写。
+  - ref: polchinski-1998-v1
+    loc: "§1.3：正规序常数 A 的定义与 ζ 正规化 eq. **(1.3.31)–(1.3.35)**、质量壳 **(1.3.36)**、level 1 质量 (1.3.39)、结论式 **(1.3.40)**, p.23（逐字 `A = −1 , D = 26`；式号与内容均已核实，抽取记录 polchinski-1998-v1.md §12.5 / E18 / Q2）"
+    note: |
+      原书走的是表示论计数，不是显式对易子计算；显式计算见 GSW §2.3.1 (2.3.32)。
+      **【2026-09-11 原书核实订正】**本条此前写「习题 1.3（洛伦兹代数的直接验证）」——
+      **原书既没有做该验算，也没有把它留成习题**（抽取记录 §12.5）：p.21 只描述它并推给共形规范路线。
+      作者三处自降严格程度（逐字）：p.21「plausible without a complete treatment」、
+      p.24「We will show this **indirectly** in the coming chapters」、p.90「rather **heuristically**」。
+      另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」。
+summary: |
+  把 α^-_n = L^⊥_n/((2α')^{1/2} p^+) 代入 J^{i-}，用横向振子对易关系逐项计算
+  [J^{i-}, J^{j-}]。经典部分相消，量子部分留下 Σ_{n≥1} Δ_n (α^i_{-n}α^j_n - α^j_{-n}α^i_n)，
+  其中 Δ_n = n(26-D)/12 + (1/n)[(D-26)/12 + 2(1-a)]。
+  n 的正幂系数为零给 D = 26，n 的负幂系数随之为零给 a = 1；反之 D = 26, a = 1 时所有 Δ_n = 0。
+
+  【D ≥ 4 与「对易子为零 ⟺ 逐个 Δ_n 为零」这一步（v2 新增）】把「对易子为零」翻成「逐个系数为零」
+  需要算子族 {α^i_{-n}α^j_n - α^j_{-n}α^i_n}_{n≥1}（固定一对 i ≠ j）线性无关。它在 D ≥ 4 时成立：
+  该族的第 n 个成员把 α^j_{-m}|0;k⟩ 送到 ∝ δ_{nm} α^i_{-n}|0;k⟩，故只有第 n 个成员在
+  α^j_{-n}|0;k⟩ 上不为零。D = 3 时只有一个横向指标，整族恒为零，翻译失效（见 gaps）。
+  这一步是有限步初等计算，但 GSW 的原文没有写出来，本推导按目标卡 v2 的陈述补出。
+
+  正规序常数 a 的取值 a = (D-2)/24 由横向零点能 (D-2)/2 · Σ_{n≥1} n 经 ζ 正规化
+  (Σ_{n≥1} n → ζ(-1) = -1/12) 得到；配合 a = 1 同样给出 D = 26，这是 Polchinski §1.3 正文走的路线。
+gaps:
+  - "零点能 Σ_{n≥1} n = ζ(-1) = -1/12 用 ζ 函数正规化，未给出算子层面的严格定义；这是本推导只能记为 physical-argument 的主要原因。该正规化步骤现已单列为 worldsheet.zeta-regularized-sum-of-integers（physical-argument），其纯数学部分（收敛级数 Σ n e^{-un} 的 Laurent 常数项 = -1/12）单列为 worldsheet.regulated-sum-laurent-expansion（rigorous）。"
+  - "[J^{i-}, J^{j-}] 的计算涉及无穷多模式求和的重排与正规序重整（J^{i-} 是三次式），文献中按形式操作处理，未给出收敛性论证。"
+  - "**文献差异（2026-09-11 原书核实后加强）**：Polchinski §1.3 正文用的是表示论论证（第一激发级须为无质量 SO(D-2) 矢量，结论式 (1.3.40), p.23），**显式的洛伦兹代数验证在原书里根本没有做，也没有留成习题**（此前本条写「只作为习题 1.3」，据抽取记录 §12.5 撤销）；原书 p.21 逐字承认只求「plausible without a complete treatment」并把诚实的推导推给共形规范路线，p.24 说「We will show this indirectly」，p.90 自称 §1.3 是「rather heuristically」。因此本推导陈述的 Δ_n 显式版本**只**由 GSW §2.3.1 (2.3.32) 支撑，Polchinski 不是它的来源。"
+  - "**D ≥ 4 的限定已由换代解决，但它是 curator 加的、不在来源里**：旧目标卡 worldsheet.critical-dimension-light-cone 的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{-n}α^j_n - α^j_{-n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合，「仅当」方向为假；D = 2 无横向振子）。ms.critical-dimension-bosonic 第二轮审计 N2 提出、第三轮裁定 3(a) 要求换代，本推导已于 2026-09-11 改指 worldsheet.critical-dimension-light-cone-v2（该卡带 D ≥ 4 与线性无关一步）。**剩余缺口**：GSW §2.3.1 (2.3.32) 的原文既没写 D ≥ 4 也没写线性无关一步，Polchinski 更没做这个计算；这两句是 curator 按初等论证补出的，属于本图相对来源的**增补**，故不因其初等而提升本推导的 status。"
+  - "严格化路线：光锥洛伦兹反常可用 Virasoro 中心荷的严格代数计算重述（c^⊥ = D-2 与 a 的关系），届时可加一条 kind: proof 的新推导，不改本陈述。"
+notes: |
+  **【2026-09-11 换代改名】**本文件原为
+  worldsheet.critical-dimension-light-cone--via-lorentz-algebra，因目标陈述换代为
+  worldsheet.critical-dimension-light-cone-v2（补上前提 D ≥ 4；ms.critical-dimension-bosonic
+  第三轮裁定 3(a)）而 `git mv` 成本文件名并改 id/target——derivation id 必须写成
+  `<statement-id>--via-<method>`（graph/CLAUDE.md），无法就地改 id。
+
+  除 id 与 target 外，本次只改了三处**记账**，依赖边的集合、sources、status 一概未动：
+    (1) light-cone-normal-ordering-constant 那条边的 note 拆清了「ζ 只服务于 summary 第二段」
+        （第三轮裁定 3(a) 的顺带项）；
+    (2) summary 补出 D ≥ 4 与「对易子为零 ⟺ 逐个 Δ_n 为零」的线性无关一步，与新目标卡对齐；
+    (3) 关于 D ≥ 4 的那条 gap 由「目标陈述未限定」改写为「已由换代解决，但该限定不在来源里」。
+  status 维持 physical-argument：封顶原因（ζ 正规化无算子层面定义、无穷模式和的形式操作、
+  Polchinski 三处自降严格程度）一条都没变。
+author: curator-critdim
+created: "2026-09-10"

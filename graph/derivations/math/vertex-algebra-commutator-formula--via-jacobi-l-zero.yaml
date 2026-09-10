@@ -1,0 +1,74 @@
+id: math.vertex-algebra-commutator-formula--via-jacobi-l-zero
+target: math.vertex-algebra-commutator-formula
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.vertex-algebra-borcherds-identity
+    note: |
+      本推导的唯一实质输入：顶点代数的 Jacobi / Borcherds 恒等式，模式版 (B)（= G–N (2.36)），
+      连同正规性公理（保证两端求和有限）。
+      **这条边不是 inferred**：G–N 在刊 p. 580 于 (2.36) 与 (2.37)/(2.38) 之间逐字写
+      「In what follows we will frequently make use of two important formulas which are the special
+      cases m = 0 and l = 0, respectively, of Eq. (2.36)」——即「Jacobi 恒等式 ⇒ 对易子公式」
+      这一步在来源处有明文（literature/extractions/math-sources.md §38.4）。
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§2.1 'Vertex algebras', p. 580, eq. (2.36)（Jacobi identity）→ eq. (2.38)（Commutator formula），以及两者之间的引出句"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF，pure.mpg.de/rest/items/item_153125_1/component/file_153124/content，
+      PDF 页 = 刊页 − 570；逐字文本见 literature/extractions/math-sources.md §37.3(b)）。**
+      本推导的**全部论证**取自本条：来源自陈 (2.38) 是 (2.36) 的 l = 0 特例，本推导只是把这一步的
+      初等代入写出来（见 summary）。
+  - ref: bakalov-kac-2004
+    loc: "eq. (2.19) → (2.20) → (2.21), p. 3"
+    note: |
+      **旁证，不承载论证。** 同一逻辑在 Bakalov–Kac 处走的是留数路线：(2.19) 取
+      `F(z,w) = (z−w)^n δ(u−z)` 得 (2.20)，再取 n = 0 得**场版**对易子公式 (2.21)。
+      ⚠ 他们**没有**写出模式版，故本推导的结论只引 G–N (2.38)（§38.4 的禁令）。
+summary: |
+  **一步初等代入，全程形式级数。**
+
+  在 math.vertex-algebra-borcherds-identity 的模式版 (B)（G–N (2.36)）
+    Σ_{i ≥ 0} (−1)^i C(l, i) ( ψ_{l+m−i}(φ_{n+i} ξ) − (−1)^l φ_{l+n−i}(ψ_{m+i} ξ) )
+      = Σ_{i ≥ 0} C(m, i) (ψ_{l+i} φ)_{m+n−i} ξ,     ∀ ψ, φ, ξ ∈ ℱ, ∀ l, m, n ∈ Z
+  中取 **l = 0**。
+
+  左端：C(0, i) = δ_{i,0}（按 C(m,i) = m(m−1)⋯(m−i+1)/i! 的约定，C(0,0) = 1 且 C(0,i) = 0 对 i ≥ 1），
+  且 (−1)^l = 1，故只剩 i = 0 一项：
+    ψ_m(φ_n ξ) − φ_n(ψ_m ξ) = [ψ_m, φ_n] ξ。
+
+  右端：l = 0 使 ψ_{l+i} = ψ_i，故右端为
+    Σ_{i ≥ 0} C(m, i) (ψ_i φ)_{m+n−i} ξ。
+
+  ξ ∈ ℱ 任意，于是在 End(ℱ) 中
+    [ψ_m, φ_n] = Σ_{i ≥ 0} C(m, i) (ψ_i φ)_{m+n−i}，   ∀ m, n ∈ Z，
+  即目标陈述。右端的有限性由正规性公理给出（ψ_i φ = 0 当 i 充分大），
+  **无需任何收敛性论证**；G–N 自己也把 (2.38) 直接列为 (2.36) 的 l = 0 特例。
+gaps:
+  - |
+    **(2.36) 与 (2.30) 的等价（形式变量版 ⟺ 模式版）不在本推导内。**
+    本推导直接从模式版 (2.36) 出发；G–N 把两种写法都列出但不写展开过程。
+    这条缺口登记在 math.vertex-algebra-borcherds-identity 的边界条款 (b)。
+  - |
+    **场版 (Bakalov–Kac (2.21)) 与模式版的换算不在本推导内。** 两者由取 Res_u 相联，
+    但没有来源把这一步写出来；本推导刻意不走那条路，以免引入无来源的一步。
+  - |
+    **玻色型限制。** G–N 的 ℱ 不带 Z_2-分次，(2.38) 里没有 (−1)^{p(ψ)p(φ)} 因子。
+    含费米型场（bc 鬼场）的顶点超代数版本本推导不覆盖；下游若要在含鬼场的空间上用本公式，
+    须另找来源（Bakalov–Kac Definition 2.1 带宇称，但其对易子公式仍是场版）。
+  - |
+    **Lean 侧未起步。** Mathlib 的 Mathlib/Algebra/Vertex/ 目前只有 VertexOperator 骨架，
+    Locality 仍在 TODO 段（math.formal-distribution-locality notes，2026-09-11）。**本推导不得标 formalized。**
+notes: |
+  【status 定级理由】`status` 是本推导自身论证的严格程度。自身论证 = 在一条已登记的公理
+  （math.vertex-algebra-borcherds-identity）里代入 l = 0 并用二项式系数的约定化简，
+  是**有限步、纯形式的初等代数**，且**来源自己就把这一步的结论写成编号公式 (2.38)**。
+  故 **rigorous**（不属于 docs/STATUS_LEVELS.md 的「reviewer 复核例外」情形——本推导不是
+  自行补出的计算，而是有编号来源直接断言的结果，本 summary 只是把来源留白的一行代入补齐）。
+
+  【本卡的下游用途】worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 与
+  worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket 的第 1 步就是这一条；
+  在本卡建立之前，那两条推导只能把这一步 inferred 到 math.locality-ope-equivalences-v2
+  （Schottenloher Thm 10.10 第 5 条，形式分布版）。本卡建立后那两条边改为指向本卡且不再 inferred。
+author: curator
+created: "2026-09-11"

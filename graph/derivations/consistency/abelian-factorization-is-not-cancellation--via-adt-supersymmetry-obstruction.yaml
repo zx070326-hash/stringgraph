@@ -1,0 +1,138 @@
+id: consistency.abelian-factorization-is-not-cancellation--via-adt-supersymmetry-obstruction
+target: consistency.abelian-factorization-is-not-cancellation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.anomaly-twelve-form-d10
+    inferred: false
+    convention_map: |
+      **同一件事的两套写法**。本图的定义卡用 Green–Schwarz 1984 的记号 Ω_{4n} := Tr F^{2n}，
+      并明写「不含后世的 X₈ / ∫B ∧ X₈ 打包写法」；ADT 用现代记号 Î₁₂（自陈 "following the
+      presentation of Polchinski"）并把因子化部分打包成 Y₄X₈/768。对应关系：
+      · ADT (7) 第一个方括号 −Tr F⁶ + (1/48)Tr F⁴Tr F² − (Tr F²)³/14400 **为零**
+        ⟺ 本图 math.anomaly-twelve-form-factorization 的 Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²]
+        （curator 2026-09-11 展开复核：GS (19) 展开即 Tr F⁶ = (1/48)Tr F⁴Tr F² − (Tr F²)³/14400，逐项相同）；
+      · 两侧的 tr / Tr 语义相同（tr = 基本、Tr = 伴随），故 conv.gauge-trace-normalization 直接适用，
+        无需重标度；ADT 的 tr R^{2k} 与本图一样是 SO(1,9) 切空间的 10 × 10 迹。
+      · **整体归一化不同**：见本文件 notes 的 −96 核验。
+    note: |
+      边在来源处可查：ADT 第二节逐字「the anomaly is conveniently expressed in terms of a formal
+      twelve-form anomaly polynomial Î₁₂(F, R)」+ 下降关系 (5) + 「δ log Z ~ ∫Î₁₀」(6)，
+      与本定义卡的内容（十维反常 ↔ 形式十二形式 + 下降链）是同一套字典。
+  - id: consistency.gravitational-anomaly-polynomial-d10
+    inferred: false
+    convention_map: |
+      ADT (7) 的 (n − 496) 部分与 GS (20) 相差整体因子 **−96**（curator 复算，见 notes 第 1 条）。
+      n 的含义两侧一致：GS 的 n = 物质左手 spin-1/2 场数 = dim G；ADT 逐字 "n is the total number
+      of gauge bosons"。
+    note: |
+      本推导用到「Î₁₂ 中引力部分的系数正比于 n − 496，故 n = 496 时该部分为零」，
+      这正是该节点承载的内容（GS (20)）。ADT 在 (7) 中独立给出同一结构。
+  - id: consistency.h-field-strength-chern-simons
+    inferred: false
+    convention_map: |
+      本图的定义卡取 GS (4) `H = dB + ω⁰_{3Y} − ω⁰_{3L}`；ADT (9) 写 `H₃ ≡ dB₂ − ω₃^Y + ω₃^R`。
+      两者由 (B, H) → (−B, −H) 相联，**两个 Chern–Simons 项的相对符号一致**，按
+      literature/extractions/zumino-wu-zee-1984.md 的裁定两套都对（ADT 是第三个采用 Bilal 那套整体符号的来源）。
+      本推导只用到「H 含规范 CS 项 ⇒ B 必须在规范变换下移动」这一结构性事实，与整体符号无关。
+    note: |
+      ADT (16) 是该定义卡在**阿贝尔**情形的对应物（每个 U(1)^{(i)} 贡献 ω₃^{(i)} = A^{(i)} ∧ dA^{(i)}）。
+      ⚠ **阿贝尔那一支不在本图定义卡的陈述里**（GS 1984 只写非阿贝尔 ω⁰_{3Y}），
+      ADT 把它外包给 Bergshoeff 等人。该外部输入记在 gaps。
+  - id: consistency.gs-counterterms-1984
+    inferred: false
+    convention_map: |
+      ADT (10) 的 ΔS ~ ∫B₂ ∧ X₈ 是 GS 三段反项 S₁ + S₂ + S₃ 的现代打包写法；
+      本图的 gs-counterterms-1984 卡明写「X₈ / B ∧ X₈ 不是 GS 1984 的记号」。
+      本推导只用到「抵消引力（及非阿贝尔规范）反常需要一个含 B₂ 的局域反项」这一点，
+      两套写法在这一点上等价。
+    note: |
+      边在来源处可查：ADT 第二节逐字把机制归给 \cite{GreenSchwarz} = green-schwarz-1984
+      （参考文献逐字「M. B. Green, J. H. Schwarz, "Anomaly Cancellations in Supersymmetric D=10
+      Gauge Theory and Superstring Theory," Phys. Lett. B149, 117-122 (1984)」）。
+  - id: math.anomaly-twelve-form-factorization
+    inferred: true
+    note: |
+      **inferred 的理由**：ADT 只说 E₈ × U(1)²⁴⁸ 的 E₈ 一支「obeys the **same relation** used in the
+      E₈ × E₈ case」，**没有把那条关系写出来、也没有给出处**。本图把它识别为
+      math.anomaly-twelve-form-factorization 的 (b) 支（E₈ 的迹恒等式使 GS (19) 成立），
+      这一识别是 curator 做的，在 ADT 原文里查不到。
+      另注：从「单个 E₈ 满足该恒等式」到「E₈ ⊕ (阿贝尔) 的伴随迹组合仍使方括号为零」还需要
+      阿贝尔伴随迹为零（ADT 逐字给出：「the adjoint of U(1) is the singlet, so these traces vanish」），
+      那一步在来源里有。
+  - id: conv.gauge-trace-normalization
+    note: 固定 tr = 基本表示迹、Tr = 伴随表示迹、F 为二形式；ADT 第二节 (7) 之后逐字给出同一套定义。
+sources:
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352**v2**：摘要；第二节 (7)(8)(9)(10)(11)(12)(13)（非阿贝尔 GS 机制的复述）；第三节 (14)(15)(16)(17)(18)(19)（阿贝尔阻碍）"
+    note: |
+      L1（researcher 逐页读毕 PDF；curator 2026-09-11 另取 arXiv e-print LaTeX 源码
+      `universality_ten_v2.tex` 逐段核对式号与措辞，见目标卡 sources 的 note）。
+      作者自陈的论证强度：摘要用 "**We show**"，正文第一节用 "we demonstrate"，
+      第三节开头却是 "**We argue that this is not the case.**" ——
+      本推导按最弱的那个动词取档（physical-argument）。
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(19)(20)（用于与 ADT (7) 的两处交叉核验）"
+    note: L1。只作核验，不承载阿贝尔论证。
+summary: |
+  ADT 的论证分三步，全部在十维有效场论侧。
+
+  **第一步（因子化）。** 把 Î₁₂ 写成 (7)。对 G = U(1)⁴⁹⁶ 与 G = E₈ × U(1)²⁴⁸：
+  U(1) 的伴随表示是单态，故一切含阿贝尔生成元的伴随迹 Tr 为零，(7) 的第一个方括号
+  「for U(1)⁴⁹⁶ it is simply zero term by term」，对 E₈ × U(1)²⁴⁸ 则阿贝尔生成元全部退出、
+  E₈ 一支满足与 E₈ × E₈ 同一条关系；又两者都有 n = 496，第二个方括号为零。
+  于是 Î₁₂ = Y₄X₈/768，形式上与 SO(32)、E₈ × E₈ 一样「可以用 GS 机制」。
+
+  **第二步（阿贝尔没有反常可消）。** 规范微子与规范场的耦合只通过结构常数
+  （(14) Dχ^a = ∂χ^a − i f^{abc}A^b χ^c）。U(1) 的 f^{abc} = 0 ⇒ 阿贝尔规范场与规范微子解耦，
+  **根本不进六边形图**，故反常多项式与阿贝尔场强无关——这与第一步中阿贝尔伴随迹为零是同一件事。
+  相应地 Y₄、X₈ 里的阿贝尔迹全部消失，对 U(1)⁴⁹⁶ 剩下 (15) Y₄ = tr R²、X₈ = tr R⁴ + (tr R²)²/4。
+
+  **第三步（但超对称仍强制阿贝尔 CS 项，于是 GS 项破坏阿贝尔规范不变性）。**
+  按 Bergshoeff 等人的结果，每个 U(1)^{(i)} 都给 H₃ 贡献 ω₃^{(i)} = A^{(i)} ∧ dA^{(i)}（(16)）。
+  H₃ 的动能项规范不变要求 B₂ 移动：(17) δ_Λ B₂ = Σ_i Λ^{(i)}F^{(i)}。
+  但抵消引力反常又必须保留 GS 项 ∫B₂ ∧ X₈，其阿贝尔变分
+  (18) δ_Λ∫B₂ ∧ X₈ = ∫Σ_i Λ^{(i)}F^{(i)} ∧ X₈ 无处可消（第二步说没有阿贝尔反常）。
+  等价的判据是 (19) **Y₄ ≠ dH₃**：GS 机制成立的关键关系 (13) Y₄ = dH₃ 在这里失效，
+  因为阿贝尔场退出 Y₄（不进六边形）却被超对称留在 dH₃ 里；
+  ADT 逐字说这在反常多项式里表现为「tree-level contributions of the form F²R⁴ … which do not
+  correspond to any one-loop anomalies」。
+  结论：保阿贝尔规范不变性与保局域洛伦兹不变性二者不可得兼。
+
+  **档位理由**：全程是反常多项式 + 下降关系 + 反项规范变分的标准场论操作，
+  系数外包给指标定理计算，超对称约束外包给未取得的文献；ADT 自己在关键处用的动词是 "we argue"。
+  按 docs/STATUS_LEVELS.md，这是典型的 physical-argument，不是 rigorous。
+gaps:
+  - "★ 从本卡结论（GS 机制写不下来）到 ADT 摘要的『are not consistent quantum theories』**缺一步**：需要『除 ∫B₂ ∧ X₈ 之外没有任何别的反常抵消办法』。ADT 没有证明这一步，只在给定的两导数超引力 + 标准 GS 项框架内论证。目标卡因此明写不承载摘要那句。"
+  - "★ (16)（超对称强制每个 U(1)^{(i)} 给 H₃ 贡献 CS 项）整条外包给 Bergshoeff–de Roo–de Wit 等，Nucl. Phys. B195 (1982) 97：**本项目未取得该文（L0），未登记 bib，图中无节点**。这是本推导最实质的外部输入——若这条超对称要求不成立，整个论证垮掉。"
+  - "(7) 的系数外包给 Alvarez-Gaumé–Witten（ADT 逐字『computed by Alvarez-Gaumé and Witten [5] and, following the presentation of Polchinski [11]』）：本项目未取得 AGW 正文，见 consistency.gravitational-anomaly-polynomial-d10 的同一缺口。"
+  - "『十维反常 ↔ 形式十二形式』这条升维字典本身在本图仍无任何已核实来源（zumino-wu-zee-1984 正文 L2/未取得），见 consistency.anomaly-twelve-form-d10 notes 第 5 条。ADT 直接用 (5)(6)，不证。"
+  - "ADT 只处理 G = U(1)⁴⁹⁶ 与 G = E₈ × U(1)²⁴⁸ 两个例子。论证机制显然对任何带 U(1) 因子的十维 N=1 理论都适用，但**这一推广 ADT 没有写**，目标卡也不作此断言。"
+  - "『E₈ 一支满足与 E₈ × E₈ 同一条关系』ADT 不写出那条关系（对应边已标 inferred）。"
+notes: |
+  【1. ★ 交叉核验：ADT (7) 与 GS (20) 在纯引力扇区逐项一致（curator 2026-09-11 复算）】
+  把 ADT (7) 的引力部分（(n − 496) 方括号 + Y₄X₈/768 中的纯引力部分
+  tr R²·(tr R⁴ + (tr R²)²/4)/768）整体乘以 **−96**：
+
+  | 项 | −96 × ADT (7) | GS (20) | 一致 |
+  |---|---|---|---|
+  | tr R⁶ | −(n−496)/7560 | −(n−496)/7560 | ✓ |
+  | tr R² tr R⁴ | −(n−496)/5760 − 1/8 | −[1/8 + (n−496)/5760] | ✓ |
+  | (tr R²)³ | −(n−496)/13824 − 1/32 | −[1/32 + (n−496)/13824] | ✓ |
+
+  三项**全部逐项相同**（有理数精确相等，已用有理算术验算）。
+  这同时核实了两件事：(a) ADT (7) 与 GS (20) 只差整体归一 −96；
+  (b) GS (20) 中那两个**与 n 无关**的项（−1/32、−1/8）在 ADT 的写法里正是 Y₄X₈/768 的纯引力部分——
+  即「n = 496 后剩下的两项由反项抵消」（GS 的说法）与「剩下 Y₄X₈ 交给 GS 项」（ADT 的说法）
+  是同一件事的两种记账。**这是 GS 1984 与 ADT 2010 之间此前未登记的一条独立核验。**
+  ⚠ 这不构成对 Alvarez-Gaumé–Witten 系数的核实——两者同源（ADT 自陈引 AGW）。
+
+  【2. 第二处核验：ADT (7) 第一个方括号 = GS (19)】
+  ADT「第一个方括号为零」⟺ Tr F⁶ = (1/48)Tr F⁴Tr F² − (1/14400)(Tr F²)³
+  ⟺ math.anomaly-twelve-form-factorization 的 Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²]（展开式）。
+  符号与系数逐项一致，**两个独立来源相符**（抽取记录 gsw-1987-v2.md E14 备注 1 已指出，此处复核确认）。
+
+  【3. 版本红线】(7)(8) 的系数**只在 v2 之后正确**：ADT 致谢逐字感谢 Yuji Tachikawa 指出早期版本
+  这两式系数有误。本推导引用的一切式号与系数均按 arXiv:1006.1352**v2**。
+author: curator
+created: "2026-09-11"

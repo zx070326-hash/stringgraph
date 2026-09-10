@@ -1,0 +1,41 @@
+id: branes.d-brane-from-t-duality
+kind: definition
+status: rigorous
+title: Dp 膜：T 对偶下开弦端点被钉住的超平面
+statement: |
+  设玻色开弦理论中有 25 − p 个空间方向被 T 对偶化（每个方向对偶前紧化在半径 R、
+  端点满足 Neumann 条件）。由 duality.t-duality-exchanges-neumann-dirichlet，
+  对偶坐标 X'^m（m = p+1, …, 25）在端点满足 Dirichlet 条件，取固定值。
+  由 (8.6.15) 沿 σ¹ ∈ [0, π] 积分得（无 Wilson 线时）
+    **X'(π) − X'(0) = − 2π α' ℓ / R = − 2π ℓ R',   R' ≡ α'/R,  ℓ ∈ Z**,
+  即两端点的对偶坐标只相差对偶半径周期 2πR' 的整数倍——**两端点落在同一张超平面上**。
+
+  **定义**：这样一张由 X'^m = const（m = p+1,…,25）确定、开弦端点必须落在其上、
+  而在其余 p + 1 个方向（含时间）上端点自由移动（Neumann）的超平面，
+  称为一张 **Dp 膜**（Dirichlet 膜，世界体维数 p + 1）。
+  未紧化、全 Neumann 的开弦理论相当于 p = 25 的 **D25 膜**（端点在整个时空自由移动）。
+uses: [duality.t-duality-exchanges-neumann-dirichlet, compact.open-string-no-winding]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.15)（Neumann ↔ Dirichlet）与 (8.6.16)（X'(π) − X'(0) = −2πℓR'），p.266"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E151/#E152，证据等级 L1
+      （Schrans §8.106–§8.112，笔记 p.521–526）。
+      ⚠ 「全部开弦的全部端点必须落在**同一张**超平面上」这一条更强的结论，
+      原书是由交叉对称性（图 8.7：两根开弦经引力子相互作用，任一端点可与任一端点相连）
+      加 (8.6.16) 得到的；Schrans 的这一小节标题不带式号（= 他自补的复述，笔记 p.523–524）。
+tags: [d-brane, t-duality, open-string, dirichlet, boundary-condition, definition]
+notes: |
+  **D 膜在本书里不是新公设**：它是 T 对偶下 Neumann 条件的像
+  （抽取记录 §11 建议 3）。本卡因此把 duality.t-duality-exchanges-neumann-dirichlet
+  写成 `uses` 依赖——本卡的有效状态不会高于那条命题。
+
+  「同一张超平面」的全局性（不同的开弦不能各自钉在不同的超平面上）来自交叉对称性论证，
+  本图没有为它单建命题；它写在本卡的 source note 里。
+
+  本卡不含 D 膜的**张力**（(8.7.26) 的 τ_p，抽取记录 #E156）与**有效作用量**
+  （branes.dbi-action-is-born-infeld-type），也不含 T 对偶改变膜维数
+  （branes.t-duality-changes-brane-dimension）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

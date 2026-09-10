@@ -61,9 +61,11 @@
 
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
-`StringFormal/Math/GreenSchwarzAlgebra.lean`，独立小岛（只 import Mathlib）。
-对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5 的
-Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条。
+`StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
+`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9），两个独立小岛（只 import Mathlib）。
+A1/A2/A3 对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5；
+A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-ch12.md` §5.4。
+五项都已完成，无 sorry，公理只有标准三条。
 
 - [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
   `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
@@ -92,6 +94,76 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
 **整个岛都不碰物理**：这几条方程为什么是反常抵消条件，由
 `consistency.anomaly-cancellation-so32-effective-theory` 承载；
 "只有 `SO(32)` 与 `E₈ × E₈` 因子化" 这类唯一性断言**不是** GS 1984 的结果，图里也没有节点。
+
+### 有限可判定计算（`StringFormal/Math/FiniteCounts.lean`）
+
+同一个岛的算术角落，只 import Mathlib。两项都已完成，无 sorry，公理只有标准三条。
+
+- [x] `hexagon-odd-twist-count`：`hexagon_odd_twist_count`，
+  `∑_{k 奇, k ≤ 6} C(6,k) = 32`（`decide`）。GS 1984 (12c) / GSW v2 p.165 里那个 "32" 的
+  组合来历：六边形六条内线中奇数条带扭转的分布数 = `2⁵`。
+  建议图节点 `math.hexagon-odd-twist-count` 的 `lean_decl`（该卡尚未进 main，见下）。
+  **未做**：这个计数确实是 (12c) 系数来历这件事本身（物理/图层面的断言）。
+
+- [x] `superstring-sector-exhaustion`：namespace `SuperstringSectors`，
+  Polchinski v2 §10.6 (10.6.1)–(10.6.6) 的 `(ℤ₂)⁴` 扇区标签穷举（抽取记录 E40–E44）。
+  `sectors_card`：16 个标签里 10 个扇区非空（level matching），即原文的 "`2¹⁰` combinations"；
+  `mutuallyLocal_iff_even`：本文件的 `ZMod 2` 写法 ⟺ (10.6.5) 的整数偶性写法；
+  `consistentSpectra_eq` / `consistentSpectra_card`：三条件 (a)(b)(c) 的解**恰好十个**；
+  `maximalSpectra_card` / `halfSpectra_ssubset_maximal` / `mem_maximalSpectra_iff`：
+  原文列的六个（IIB/IIA/IIA′/IIB′/0A/0B）= 解集里的**极大**元，另四个是它们的真子群；
+  `maximalSpectra_filter_hasRamondNeveuSchwarz`：含 R–NS 扇区的极大解正好是四个 type II；
+  `tachyonSector_notMem_of_hasRamondNeveuSchwarz` / `tachyonSector_mem_of_not_...`：
+  四个 type II 不含 `(NS−,NS−)` 快子，两个 type 0 都含。
+  建议图节点 `worldsheet.superstring-sector-consistency-solutions` 的 `lean_decl`
+  （该卡尚未进 main，见下）。
+  **数学缺口（给图的建议）**：三条件按原文字面只给出十个解，原文的 "one readily finds the
+  only other solutions" 隐含了第四条未写出的条件——**谱是极大的**（"keeping all sectors
+  with …"，即 (10.6.9)–(10.6.11) 的 GSO 投影写法）。补上极大性后穷举完全正确。
+  推导卡的 `gaps` 里应记这一条，并注明补齐极大性的真正依据是 §10.7 的完整模不变性。
+  **未做**：这些标签穷尽 RNS 弦扇区；`LevelMatched` 背后的 level 计算（此处是定义）；
+  条件 (c) 作为模不变性必要条件的论证；(10.6.7) 的时空反射把 IIA′≅IIA、IIB′≅IIB
+  （故四个 type II 解只是两个物理理论）；type 0 解的模不变性。
+
+- [ ] **图接线待办**（不是 Lean 工作）：`math.hexagon-odd-twist-count` 与
+  `worldsheet.superstring-sector-consistency-solutions` 两张卡在本分支建立时都还不在 main
+  （分别在 `agent/curator/adt-abelian` 与 curator 的 GSO 支上），所以 `formal.lean_decl`
+  / `--via-lean` 推导没有一并提交。卡进 main 后由 lead 或 curator 接线，并跑
+  `uv run stringgraph check-axioms`。
+### `StringFormal/Math/AnomalyPolynomial.lean`（Polchinski §12.2）
+
+- [x] `anomaly-twelve-form-identity`（A9）：Polchinski (12.2.27)+(12.2.28a,b) 的**因子化形**
+  与 (12.2.11)+(12.2.12) 的**逐项展开形**是同一多项式。
+  `anomaly_polynomial_factorized_eq_expanded`，`[Field K] [CharZero K]` 上把
+  `tr R², tr R⁴, tr R⁶, Tr_a F², Tr_a F⁴, Tr_a F⁶` 与生成元数 `n` 当作**七个独立标量**，
+  证明是 `unfold; ring`（不需要 `field_simp`）。
+  同一声明也验证 ADT 2010 (7)+(8)（抽取记录 E15 已确认与 (12.2.27)+(12.2.28) 逐字相同）。
+  九类单项式系数已在纸上逐项复核，与抽取记录 E14 的 `[抽取者复算]` 完全一致，无一处对不上。
+  建议做 `consistency.d10-n1-anomaly-polynomial`（若建卡，见抽取记录 §7 接线表）某条
+  **推导**的 `lean_decl`，**不要**挂陈述卡本身：陈述卡说的是"这个多项式是反常"，那是物理。
+  **未做**：微分形式、楔积、指标定理、(12.2.10) 的 `−i/(2π)⁵` 归一化；
+  任何具体李代数的迹恒等式（独立节点）；因而**不断言任何群的反常抵消**。
+
+- [x] `iib-gravitational-anomaly`（A8）：Polchinski (12.2.14) 的三条整数式。
+  `iib_gravitational_anomaly_cancels`：IIB 含量 `(n_{3/2}, n_{1/2}, n_A) = (2, −2, 1)` 给零；
+  `iib_gravitational_anomaly_solutions`：三式 `↔ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A`（`omega` 一行）；
+  `iib_anomaly_polynomial_vanishes_iff` / `iib_gravitational_anomaly_free_iff`：
+  这三式**恰好**是"十二形式作为多项式恒为零"（正向靠在 (0,0,1)、(1,1,0)、(1,0,0) 处取值）。
+  系数按 Polchinski (12.2.11 取 n=1)/(12.2.12)/(12.2.13) 的分子抄，
+  与 Bilal (12.4)/(12.5) 同型（`−495n_{3/2} + n_{1/2} + 992n_A = 0` 等），归一化一致。
+  ⚠ **数学缺口（值得写进图）**：这个 3×3 方程组**秩是 2 不是 3**——任取两式就已经推出
+  `n_{3/2} = 2n_A`，第三式自动成立。Polchinski 说"三个条件、三个自由参数，barring a numerical
+  coincidence 只能全零"（E11 的 "miraculous"/"accidental"），这个记账对巧合略微高估了：
+  实际是**两个条件约束三个参数**，一维解空间是应该出现的。真正非平凡的是解恰好落在
+  IIB 超引力实现的小整数 `(2, −2, 1)` 上。建议写进
+  `consistency.iib-gravitational-anomaly-cancels` 的 `gaps` 或 `notes`。
+
+- [x] （附带，不属 A8/A9）`gs_gravitational_twelve_form_eq_polchinski`：
+  Polchinski (12.2.27) 的**纯引力部分**（令三个规范迹为零）等于 `−1/96` 乘 GS 1984 (20)，
+  **五个系数全对**，包括 Polchinski 侧来自 `Y₄X₈/768`、GS 侧写作常数 `1/8` 与 `1/32` 的那两项。
+  这比 `consistency.gravitational-anomaly-polynomial-d10` notes 里记的"与 Bilal 括号内容之比
+  都是 3/4"更强：那个比较对括号整体重标度，不检验 `n` 无关项与 `n` 相关项在同一整体归一下是否相容；
+  这里一个常数 `−1/96` 就把五个系数全部对上。建议补进该卡 notes（Lean 候选 A5 由此闭合且加强）。
 
 ## Virasoro
 
@@ -197,7 +269,53 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
     `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
     这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
     （`desc*_mem_levelSpan`），但线性无关仍缺 → 与「Kac 行列式」的等同还差 `pbw-verma` (b)。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`（对具体向量，非基）。
+  - **level 3**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelThree.lean`，无 sorry，
+    公理只有标准三条）：对 `desc3 = L₋₃v`、`desc21 = L₋₂L₋₁v`、`desc111 = L₋₁³v` 的
+    9 个内积（`gram_level_three_entries`，非对角项经 `IsContravariant.comm` 对称）：
+
+        ⟨L₋₃v, L₋₃v⟩ = 6h + 2c      ⟨L₋₃v, L₋₂L₋₁v⟩ = 10h      ⟨L₋₃v, L₋₁³v⟩ = 24h
+        ⟨L₋₂L₋₁v, L₋₂L₋₁v⟩ = 8h² + ch + 8h        ⟨L₋₂L₋₁v, L₋₁³v⟩ = 36h² + 12h
+        ⟨L₋₁³v, L₋₁³v⟩ = 48h³ + 72h² + 24h
+
+    3×3 行列式 `gram_level_three_det`：
+
+        det₃ = 48 h² (16h² + 2h(c−5) + c) (3h² + h(c−7) + c + 2)
+
+    中间因子正是 level-2 行列式除以 2h——与 Kac 公式预言的「rs = 2 的根在 N = 3 以重数
+    p(3−2) = p(1) = 1 重现」逐项吻合。`gram_level_three_det_eq_kac` 把它写成 Kac 乘积形
+
+        det₃ = 2304 (h − h₁₁)² (h − h₁₂)(h − h₂₁)(h − h₁₃)(h − h₃₁),
+
+    Kac 根只经对称函数进入（假设形式：`h₁₁ = 0`、`8(h₁₂+h₂₁) = 5−c`、`16h₁₂h₂₁ = c`、
+    `3(h₁₃+h₃₁) = 7−c`、`3h₁₃h₃₁ = c+2`），所以定理与 √((c−1)(c−25)) 的分支约定无关。
+    辅助引理 `kac_factor_rs_two` / `kac_factor_rs_three` 是清分母后的二次因式分解；
+    `kac_level_three_at_c_one` 是 c = 1 处的退化核对：det₃ = 144h²(4h−1)²(h−1)²，
+    与 `h_{r,s} = (r−s)²/4` 给的 h₁₁ = 0、h₁₂ = h₂₁ = 1/4、h₁₃ = h₃₁ = 1 一致（完全平方）。
+    另有 `desc3/desc21/desc111_mem_levelSpan` 与正交性实例
+    `gram_level_one_three` / `gram_level_two_three`。
+    ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
+    与「level-3 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`（均对具体向量，非基）。
+  - **常数 α_N 的正确形状（2026-09-11，formalizer 用 CAS 独立核对，未形式化）**：
+    `worldsheet.kac-determinant` 卡上悬而未决的 α_N，在本仓库这组 PBW 型基下满足
+
+        α_N = ∏_{r,s≥1, rs≤N} ( (2r)^s · s! )^{ p(N−rs) − p(N−r(s+1)) }。
+
+    注意指数是 **p(N−rs) − p(N−r(s+1))**，不是某些文献里随手写的 p(N−rs)。
+    数值核对：N=1 → 2；N=2 → 32（= `gram_level_two_det` 的 2·16）；
+    N=3 → 2304（= 48·16·3，本文件的 `gram_level_three_det_eq_kac`）；
+    N=4 → 37748736（= 384·16²·3·8·16，由 5×5 Gram 的 CAS 行列式反读）。
+    用 p(N−rs) 当指数会给 N=2 → 64、N=3 → 36864，与实际行列式**不符**。
+    ⇒ α_N > 0 在 N ≤ 4 上是**已核对的事实**（每个因子都是正整数），
+    但一般 N 的正性仍只是这个乘积公式的推论，而该公式本身未形式化也未在已核实来源里逐字找到。
+  - **N = 4 的下一步目标**（CAS 已给出、尚未形式化）：基 {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}，
+
+        det₄ = 384 h³ (8h + c − 1) (16h² + 2h(c−5) + c)² (3h² + h(c−7) + c + 2)
+                   (16h² + 10ch − 82h + 15c + 66),
+
+    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根），
+    末因子 = 16(h − h₁₄)(h − h₄₁)（h₁₄+h₄₁ = (41−5c)/8，h₁₄h₄₁ = (66+15c)/16）。
+    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合。
 
 ## 无鬼定理岛
 
@@ -368,8 +486,9 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
     分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
     `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
     横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
-  - [ ] (3) **共形权 `[L_m, V]`**：`m ≥ 1` **已证**（见 (3d) 单 Fock、(3e) 塔上），
-    `m < 0` 未做（见 (3c')、(3f)）。陈述是
+  - [x] (3) **共形权 `[L_m, V]`**：**一切 `m : ℤ` 已证**（`m ≥ 1` 见 (3d) 单 Fock、(3e) 塔上；
+    `m ≤ -1` 见 (3c')、(3f)；`m = 0` 见 (3g)，真空上的形式见 (3c)）。合并声明
+    `Fock.lie_Lop_vertexOsc`（`StringFormal/NoGhost/VertexWeightZero.lean`）对所有 `m` 成立。陈述是
     `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
     `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
     `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
@@ -399,9 +518,24 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       各出 `½ (a·b)`，`m = 0` 时并成一项 `½ (a·a)`，把 `m = 0` 代入 (3b) 会得到错误的
       `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 齐次元，这条直接由已有的
       `Fock.Lop_zero_apply_of_mem_levelSubmodule` 得到。
-    - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
-      共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
-      第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
+    - [x] (3c') `m < 0` 的真空等式：**已证**
+      `Fock.Lop_apply_creaExp_of_neg_shifted`（`StringFormal/NoGhost/VertexWeightNeg.lean`）
+      `L_m^{(a+b)} Φ_J = (J - m + a·b + ½(m+1)(b·b)) Φ_{J-m} + V_J (L_m^{(a)}|k⟩)`。
+      形状确实与 `m ≥ 1` 不同：第二项是含产生算子的真向量。分三步做：
+      * `Fock.Lop_apply_one_of_neg`：`L_m|k⟩ = (α_m·α_0)|k⟩ + ½ Σ_{j=m+1}^{-1}(α_{m-j}·α_j)|k⟩`
+        （Sugawara 指标集在真空上是 `Finset.Icc m 0`；两端点项相等、合起来抵掉 `½`）。
+      * `Fock.Lop_apply_creaExp_of_neg`：`L_m Φ_J` 的显式表达式。与 (3b) 的五段分法相比，
+        中间段 `m+1 ≤ j ≤ -1` 两个因子都是产生算子（非标量项，用新引理
+        `Fock.nordPair_apply_of_neg_left`：`i < 0` 时对**任意** `j` 都不必换序），
+        两条产生尾换元后只覆盖 `l ≥ -m+1`，所以欧拉递推
+        `Fock.sum_mode_creaExp_eq_smul` 要减掉头 `-m` 项。
+      * `Fock.vertexOsc_apply_Lop_apply_one_of_neg`：把 `V_J` 穿过 `L_m|k⟩` 的每个产生算子
+        （`Fock.vertexOsc_mode_of_ne` / `_apply_mode_one` / `_apply_mode_mode_one`）。
+        **数学要点**：双产生中间段经 `j ↦ m - j` 给出两个相等的单缩并求和（`½` 被吃掉），
+        双缩并的重数是 `#{m+1,…,-1} = -m-1`，产生的常数正好是
+        `-(a·b + ½(m+1)(b·b))`，与共形权系数里除 `(J-m)` 之外的全部逐项抵消。
+        这个抵消是 `m < 0` 半能成立的关键，也说明系数**对所有 `m ≠ 0` 是同一个多项式**。
+      无 sorry，公理只有标准三条。
     - [x] (3d) 完整的 `[L_m, V_J]`，`m ≥ 1`：**已证**
       `Fock.lie_Lop_vertexOsc_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
       `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`。
@@ -425,15 +559,240 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       `⁅L_m, V^{(n)}_K⁆` 在整条塔上**不是** `V^{(n)}_{K-m}` 的标量倍，只是逐级成比例、
       比例因子依赖动量级数 `j`。单 Fock 版本 (3d) 则对任意 `b` 成立，不需要 `b·b = 0`。
       无 sorry，公理只有标准三条。
-    - [ ] (3f) `m < 0` 的 `[L_m, V_J]`：**未做**。(3d) 的整条路线用了 `m ≥ 1`
-      两次（真空上 `L_m|k⟩ = 0`，以及 (3b) 的分段求和），`m < 0` 需要 (3c') 先做。
+    - [x] (3f) `m < 0` 的 `[L_m, V_J]`：**已证**
+      `Fock.lie_Lop_vertexOsc_of_neg`（`StringFormal/NoGhost/VertexWeightNeg.lean`）
+      `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½(m+1)(b·b)) • V_{J-m}`，
+      系数与 `m ≥ 1` 的 (3d) **完全相同**。(3d) 用到 `m ≥ 1` 的两处里，只有真空那处
+      真正依赖符号：`Fock.eq_zero_of_vertex_recursion` 的产生模态递推逐字照搬即可，
+      真空值换成 (3c') 的 `Fock.Lop_apply_creaExp_of_neg_shifted`。
+      合并推论：`Fock.lie_Lop_vertexOsc_of_ne`（一切 `m ≠ 0`）与
+      `Fock.lie_Lop_vertexOsc_of_ne_isotropic`（`b·b = 0`，DDF 归一化下的权 1 变换律）。
+      无 sorry，公理只有标准三条。
+      **塔上的 `m = 0` 版本已补**：`lie_towerLop_towerVertex`（见 (6)），即把 (3g) 搬到塔上。
+      （原列的「`m = 0` 的一般态算子形式」已由 (3g) 补上；
+      当时同时写下的「系数多项式在 `m = 0` 处**不适用**」是**错的**，见 (3g)。）
+    - [x] (3g) `m = 0` 的 `[L_0, V_J]`：**已证**
+      `Fock.lie_Lop_vertexOsc_zero`（`StringFormal/NoGhost/VertexWeightZero.lean`）
+      `L_0^{(a+b)} ∘ V_J - V_J ∘ L_0^{(a)} = (J + a·b + ½ (b·b)) • V_J`。
+      **数学结论（订正此前记录）：系数与 `m ≠ 0` 的通式一致。** 通式
+      `J - m + a·b + ½ (m+1)(b·b)` 在 `m = 0` 处给 `J + a·b + ½ (b·b)`，正是所证系数。
+      此前「代 `m = 0` 给错答案」的说法只对**真空引理**成立，对**对易子系数**不成立：
+      * 真空引理确实变形状。`m ≥ 1` 靠 `Fock.Lop_apply_one_of_pos`（`L_m|k⟩ = 0`）；
+        `m = 0` 时 `L_0^{(a)}|k⟩ = ½ (a·a)|k⟩`（`Fock.Lop_zero_apply_one`）非零。
+      * 相应地 `Fock.Lop_apply_creaExp_zero_shifted` 给
+        `L_0^{(a+b)} Φ_J = (J + ½ (a·a) + a·b + ½ (b·b)) Φ_J`，比
+        `Fock.Lop_apply_creaExp_of_pos_shifted` 在 `m = 0` 处的形式**多出 `½ (a·a)`**。
+      * 在对易子里 `V_J L_0^{(a)}|k⟩ = ½ (a·a) Φ_J` 恰好把这一项减掉，两处偏差抵消。
+      这就是为什么 `m = 0` 必须单独证（真空值不同），而结果又落回同一条多项式。
+      `Fock.eq_zero_of_vertex_recursion` 的产生模态递推同样不用 `m` 的符号（`m = 0` 也不例外），
+      所以 (3d) 的递推块逐字照搬。
+      合并推论：`Fock.lie_Lop_vertexOsc`（**一切 `m : ℤ`**）与
+      `Fock.lie_Lop_vertexOsc_isotropic`（`b·b = 0`，权 1 准初级场变换律，无 `m` 限制）。
+      辅助：`Fock.zeroModeSq_add`（极化 `(a+b)·(a+b) = a·a + 2 a·b + b·b`）。
+      无 sorry，5 条声明 `check_axioms` 全 `ok`，公理只有标准三条。
+  - [x] (4) **DDF 算子本身与 `⁅L_m, A^ε_n⁆ = 0`（`m ≥ 1`）**：
+    `StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条。
+    - 偏振经由**收缩**进入：`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p`（`α^ε_p`），
+      横向性是 `dotVec η ε b = 0`（`ε·k_0 = 0`）。
+      `lie_towerModeVec_towerVertex`：`⁅α^ε_p, V^{(n)}_K⁆ = n (ε·k_0) V^{(n)}_{K-p}`，
+      横向时给 `towerModeVec_mul_towerVertex_of_transverse`（严格对易，含 `p = 0`）。
+    - **局部有限性**（图节点 `worldsheet.ddf-transversality-gives-local-finiteness`）：
+      `ddfSummand_apply_eq_zero_of_notMem_window`。窗口 `ddfWindow n x =
+      Icc (n - towerLevelBound x) (towerModeBound x)`，两端机制**不同**：
+      下端只靠 `towerVertex_apply_eq_zero_of_lt`（顶点算子不能把 level 降到真空以下，
+      与横向性无关），上端**必须**用横向性把 `α^ε_j` 移到右边变成高指标湮灭算子。
+      为此新增 `Fock.levelBound`（`P.support.sup (level D)`）与
+      `Fock.vertexOsc_apply_eq_zero_of_levelBound_lt`，以及塔上的
+      `towerLevelBound` / `towerModeBound`。
+    - `ddfOp η a b ε hη hεb n`（`A^ε_n = Σ_{j∈ℤ} α^ε_j V^{(n)}_j`，用 `lsumLocFin` 组装；
+      `hη`、`hεb` 是**定义的参数**，因为求和的存在性本身依赖横向性），
+      `ddfOp_apply`（任意够大的有限窗口都算得对）。
+    - **`lie_towerLop_ddfOp_of_pos`**：`k_0² = 0`、`2α' k_0·p = 1`、`ε·k_0 = 0`、`m ≥ 1`
+      ⟹ `⁅L_m, A^ε_n⁆ = 0`。证明是逐项 Leibniz + 重标 `j ↦ j+m` 的伸缩和；
+      边界项靠窗口两端各自的消失机制。
+      辅助：`lie_towerLop_ddfSummand`（单项括号的伸缩形式）、
+      `lie_mul_end` / `lie_smul_end` / `smul_lie_end` / `lie_sum_end` / `sum_lie_end`
+      （Mathlib 的 `lie_sum` / `sum_lie` / `lie_smul` 对 `Module.End` 的括号**匹配不上**：
+      `LieRingModule.toBracket` 与 `LieRing.toBracket` 不是同一个实例路径，
+      只能从 `LieRing.of_associative_ring_bracket` 重证）。
+    - **已补齐**：`m ≤ -1` 见 (5)，`m = 0` 见 (6)；全部 `m ∈ ℤ` 已证。
+  - [x] (5) **`⁅L_m, A^ε_n⁆ = 0` 推广到一切 `m ≠ 0`**：
+    `StringFormal/NoGhost/DDFOperatorNeg.lean`，无 sorry，7 条声明公理只有标准三条。
+    把 (3f) 的单 Fock 恒等式机械搬到塔上再重跑伸缩和：
+    - `lie_towerLop_towerVertex_of_ne` / `_of_neg`：塔上共形权恒等式
+      `⁅L_m, V^{(n)}_K⁆ = (K - m - n + n(k_0·p)) V^{(n)}_{K-m}`，`m ≠ 0`。证明与 (3e) 的
+      `_of_pos` 逐字相同，只把 `Fock.lie_Lop_vertexOsc_of_pos` 换成 `..._of_ne`；
+      `k_0² = 0` 依然**必要**，理由同 (3e)（否则系数含 `j·n·(b·b)`，依赖塔的级数 `j`）。
+    - `lie_towerLop_towerVertex_of_ne_normalized` / `_of_neg_normalized`：归一化后的权 0
+      变换律 `⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`。两项 `n` 依赖的贡献
+      （单项式 `z^n` 的单值性移位与 `n(k_0·p)`）都与 `m` 无关，故抵消对符号不敏感。
+    - `lie_towerLop_ddfSummand_of_ne`、**`lie_towerLop_ddfOp_of_ne`**、
+      `lie_towerLop_ddfOp_of_neg`。
+    - **窗口两端的消失机制在 `m < 0` 时仍成立，但边界项换边**：伸缩和把
+      `∑_{[lo,up]} (g(j-m) - g(j))` 化成 `∑_{[lo-m,up-m]} g - ∑_{[lo,up]} g`。`m > 0` 时
+      多出的两条边带是 `[lo-m, lo-1]`（下端机制：顶点算子降不到真空以下）与
+      `[up-m+1, up]`（上端机制：横向性）；`m < 0` 时重标 `j ↦ j-m` 方向反转，两条边带
+      **交换到另一侧**，变成 `[lo, lo-m-1]`（位置在 `lo` 之上，却仍须由**下端**机制消灭）
+      与 `[up+1, up-m]`（仍由上端机制消灭）。修正办法：窗口两端各留 `|m|` 的余量
+      （`lo + |m| ≤ n - towerLevelBound x`、`towerModeBound x + |m| ≤ up`），
+      再把两个和都与公共大窗口 `[min lo (lo-m), max up (up-m)]` 比较，一次覆盖两种符号。
+      因为 `ddfOp_apply` 对任意够大的窗口都成立，放大窗口不花代价。
+    - **`m = 0` 已补齐，见 (6)**。当时的判断得到验证：`hm : m ≠ 0` 在
+      `lie_towerLop_ddfOp_of_ne` 里只用了一次（引用 `lie_towerLop_ddfSummand_of_ne`），
+      伸缩和与上面的窗口分析在 `m = 0` 处逐字成立（`m = 0` 时两项
+      `(j-m) G_{j-m}` 与 `j G_j` 本来就相同，单项括号自己就是零），
+      唯一要重做的就是把单 Fock 恒等式 (3g) 搬到塔上。
+  - [x] (4b) **塔上的物理子模与「`A^ε_n` 保持正模条件」**：
+    `StringFormal/NoGhost/TowerPhysical.lean`，无 sorry，8 条声明公理只有标准三条。
+    - `towerPositiveModeSubmodule η a b = {Ψ | ∀ m ≥ 1, L_m Ψ = 0}`（只正模条件），
+      展开引理 `mem_towerPositiveModeSubmodule`。
+    - **`ddfOp_mem_towerPositiveModeSubmodule`**：`k_0² = 0`、`2α' k_0·p = 1`、`ε·k_0 = 0`，
+      `Ψ` 满足正模条件 ⟹ `A^ε_n Ψ` 也满足。证明是 `lie_towerLop_ddfOp_of_pos` 的
+      一行推论：`L_m (A_n Ψ) = A_n (L_m Ψ) + ⁅L_m, A_n⁆ Ψ = 0 + 0`。
+    - `towerL0Submodule η a b a₀`、`towerPhysSubmodule η a b a₀`（= L_0 条件 ⊓ 正模条件）
+      及其展开引理；保持性定理见 (6)。
+    - **数学上的一个订正**：最初以为 `L_0` 条件在塔上逐层截距不同、不能用单一 `a₀`，
+      这是错的。`towerLop η a b 0` 本就按各层自己的动量 `p_j = a + j·b` 求值，
+      所以单一 `a₀` 是正确且均匀的条件；它在层 `j`、振子 level `N` 上读作
+      `α'k² + j + N = a₀`，恰好选出反对角线 `j + N` 为常数。
+      `invTwo_zeroModeSq_towerMomentum_add_shift_cancel` 把这个抵消写成引理：
+      `ddfSummand η a b ε n j` 把层 `+n`（`towerVertex_single`）、level `-n`
+      （顶点算子 `+(j-n)`、`α^ε_j` `-j`），`L_0` 本征值不变，且与求和指标 `j` 无关。
+      **因此阻碍不在塔结构，而纯粹在 `m = 0` 括号未形式化**——该括号已由 (6) 补上。
+  - [x] (6) **`⁅L_m, A^ε_n⁆ = 0` 对一切 `m ∈ ℤ`，以及「`A^ε_n` 保持塔上物理子空间」**：
+    `StringFormal/NoGhost/DDFOperatorAll.lean`，无 sorry，7 条声明公理只有标准三条。
+    - `lie_towerLop_towerVertex` / `_normalized`：塔上共形权恒等式与归一化的权 0 变换律
+      `⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}`，**一切 `m ∈ ℤ`**。证明与 (5) 的 `_of_ne`
+      逐字相同，只把单 Fock 输入 `Fock.lie_Lop_vertexOsc_of_ne` 换成 (3g) 的
+      `Fock.lie_Lop_vertexOsc`。这是整个 `m = 0` 升级里**唯一**需要重新核对的地方，
+      而它成立正是因为 (3g) 证明的系数多项式 `J - m + a·b + ½(m+1)(b·b)` 与 `m ≠ 0` 通式
+      同一个函数（不是"恰好在 `m = 0` 取值相同"，是同一条多项式）。
+      `k_0² = 0` 依然必要，理由同 (3e)。
+    - `lie_towerLop_ddfSummand_all`（不带后缀的名字已被 (4) 的 `m > 0` 版占用）、
+      **`lie_towerLop_ddfOp`**、`lie_towerLop_ddfOp_zero`。(5) 的预判得到确认：
+      伸缩和与窗口分析在 `m = 0` 逐字成立，`|m| = 0` 时四条边带为空、两个窗口重合，
+      论证退化为 `∑ (g j - g j) = 0`，不需要任何 case split。
+    - **`ddfOp_mem_towerL0Submodule`**：`L_0 (A_n Ψ) = A_n (L_0 Ψ) = a₀ • A_n Ψ`，
+      截距 `a₀` **不变**（算术理由是 (4b) 的
+      `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`：层 `+n` 与 level `-n` 抵消）。
+    - **`ddfOp_mem_towerPhysSubmodule`**：两半合起来，`A^ε_n` 把塔上的旧协变物理子空间
+      映到自身。这是 `worldsheet.ddf-operators-v5` 的算子内容，也是图节点
+      `worldsheet.ddf-commute-with-virasoro`（∀m）第一次可以标 formalized 的依据。
+
+  - [x] (5) **横向代数第一步：正交动量的顶点算子彼此对易**：
+    `StringFormal/NoGhost/VertexCommute.lean`，无 sorry，17 条声明公理只有标准三条
+    （2026-09-11 用 `--import StringFormal.NoGhost.VertexCommute --all` 复核）。
+    - **无缩并引理** `Fock.vertexSub_creaExp_of_dotVec_zero`：`b·b' = 0` ⟹
+      `vertexSub b (Φ^{b'}_j) = Polynomial.C (Φ^{b'}_j)`，即平移 `X_{μ,l} ↦ X_{μ,l} - b^μ T^l`
+      **原样固定**另一动量的相干态系数。这是收缩公式
+      `E_+(b,z) E_-(b',w) = exp((b·b') Σ_{l≥1} (w/z)^l / l) · E_-(b',w) E_+(b,z)` 的系数形式，
+      正交时标量因子为 `1`。证明**不需要**任何指数恒等式：对 `j` 归纳，把 (3a) 的欧拉递推
+      `Fock.creaExp_euler` 整体穿过代数同态 `vertexSub b`，多出的项是
+      `-(b'·b) T^l Φ_{j-l}`（私有引理 `vertexSub_sum_creation_mul`，**全文件唯一**用到
+      `b·b' = 0` 的地方），然后用 `ℚ`-代数里除以 `M` 消掉标量。
+    - 算子形式（题目要求的第 1 步）：`Fock.vertexAnn_creaExp_mul_of_dotVec_zero`
+      （`E_+(b)_L ∘ E_-(b')_j = E_-(b')_j ∘ E_+(b)_L`）与
+      `Fock.vertexAnn_creaExp_of_dotVec_zero`（`E_+(b)_L Φ^{b'}_j = δ_{L,0} Φ^{b'}_j`）。
+    - 真空基：`Fock.vertexOsc_apply_creaExp_of_dotVec_zero`，`V^{(b)}_J Φ^{b'}_K = Φ^b_J Φ^{b'}_K`，
+      右端对 `(b,J) ↔ (b',K)` 显然对称——这正是对易的底。
+      推广 `Fock.vertexOsc_creaExp_mul_of_dotVec_zero`：`V^{(b)}_J (Φ^{b'}_c · P) = Φ^{b'}_c · V^{(b)}_J P`。
+    - 归纳步：`Fock.eq_zero_of_vertex_recursion₂`（`eq_zero_of_vertex_recursion` 的**双指标**版）。
+      两个顶点算子的乘积满足
+      `W_{J,K}(X_v P) = X_v W_{J,K}P - b^{v.1} W_{J+n,K}P - b'^{v.1} W_{J,K+n}P`，
+      每个动量只移自己的 Laurent 指标；对易子满足同一条递推，故由真空值决定。
+    - **主定理** `Fock.vertexOsc_comm_of_dotVec_zero` / `Fock.lie_vertexOsc_vertexOsc_of_dotVec_zero`：
+      `b·b' = 0` ⟹ `V^{(b)}_J V^{(b')}_K = V^{(b')}_K V^{(b)}_J`（题目要求的第 2 步）。
+      注意这**不需要** `z ≠ w`，也没有任何单值因子：正交动量的两个指数顶点算子的 OPE 无奇点。
+    - **塔上版本**（第 3 步）：`towerVertex_comm_of_isotropic` /
+      `lie_towerVertex_towerVertex_of_isotropic`，`k_0² = 0` ⟹ `V^{(m)}_J` 与 `V^{(n)}_K` 对易。
+      动量算术是 `dotVec_vertexMomentum`：`(m k_0)·(n k_0) = mn k_0²`；零模半是层移位
+      `towerShift`，平凡对易（`j+n+m = j+m+n`）。
+      **数学要点**：`k_0² ≠ 0` 时结论**假**——收缩给出单值因子 `(w/z)^{mn k_0²} ≠ 1`，
+      所以这条对易性是「类光参考矢量」这个假设第二次真正起作用的地方
+      （第一次是 (3e) 的塔上共形权）。
+    - **[x] 做完了 (5a)** 同点乘积 `Σ_{J+K=L} V^{(b)}_J V^{(b')}_K = V^{(b+b')}_L`（`b·b'=0`）：
+      `StringFormal/NoGhost/VertexProduct.lean`，无 sorry，17 条声明公理只有标准三条
+      （2026-09-11 用 `--import StringFormal.NoGhost.VertexProduct --all` 复核）。
+      主定理 **`Fock.vertexProduct_eq_vertexOsc_add`**（算子等式）与
+      **`Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero`**（有限和形式：任何包含窗口
+      `-levelBound P ≤ K ≤ L + levelBound P` 的指标集都算得对）。三块都齐了：
+      ① **相干态加法公式** `Fock.creaExpPair_eq_creaExp_add`：
+      `Φ^{b+b'}_j = Σ_{p+q=j} Φ^b_p Φ^{b'}_q`（即 `E_-(b)E_-(b') = E_-(b+b')`），
+      **对任意动量成立，不需要正交性**——产生半永远是交换环里的乘法，缩并只出在湮灭半。
+      证明是欧拉递推的唯一性：`Fock.creaExpPair`（卷积，窗口 `Icc 0 j`）、
+      `Fock.creaExpPair_eq_sum_Icc`（任何包含 `[0,j]` 的窗口都算得对）与
+      `Fock.sum_mode_creaExpPair_eq_smul`（卷积满足**同一条** `b+b'` 的欧拉递推），
+      再在 `ℚ`-代数里除以 `j`。
+      ② **局部有限性已证**。上一位预判的辅助事实成立且是全部内容：
+      **`Fock.vertexAnn_mem_levelSubmodule`**（`Ψ^b_M` 把 level `N` 送到 level `N - M`，
+      对单项式按 level 强归纳，用 `vertexAnn_mul_X` 逐个剥 `X_v`）、
+      `Fock.vertexAnn_apply_eq_zero_of_level`（`M > N` 时为零）与推论
+      **`Fock.levelBound_vertexAnn_le`**：`levelBound (Ψ^b_M P) ≤ levelBound P`，
+      **对 `M` 一致**。有了它，`vertexOsc_creaExp_mul_of_dotVec_zero` 把 `Φ^{b'}_{K+M}`
+      提到左边后，`Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt` 给出
+      「`V^{(b)}_J V^{(b')}_K P = 0` 只要 `levelBound P + J < 0`，**与 `K` 无关**」，
+      这正是朴素 level 计数拿不到的那一步。下端 `_of_lt` 直接是
+      `vertexOsc_apply_eq_zero_of_levelBound_lt`。窗口 `Fock.vertexProdIdx`。
+      ③ **组装已证**。`Fock.vertexProduct` 用 `lsumLocFin`（局部有限性作为定义的一部分，
+      所以 `hdot` 是定义的参数）；`Fock.vertexProduct_X_mul` 是 `b+b'` 的产生递推
+      （两个 `V` 各移自己的指标，把第二个修正和重标 `K ↦ K+n` 后两项并成 `W_{L+n}`，
+      系数相加成 `(b+b')^μ`——重标用私有引理 `sum_add_right_eq_sum`）；
+      `Fock.vertexProduct_apply_one` 是真空值，正是 ① 的卷积；
+      最后 `Fock.vertexOsc_unique` 收尾。
+      **塔版本**（超出原计划）：`sum_towerVertex_towerVertex_single_of_isotropic`（单层）与
+      **`sum_towerVertex_towerVertex_of_isotropic`**（任意塔矢量）：`k_0² = 0` 时
+      `Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L`。动量算术是 `vertexMomentum_add`
+      （`m k_0 + n k_0 = (m+n) k_0`），零模半是 `j + n + m = j + (m+n)`。
+      **数学要点（供图节点 `gaps`）**：`b·b' ≠ 0` 时结论**假**，不只是没证——缩并给出
+      `exp((b·b') Σ_{l≥1} (w/z)^l/l) = (1 - w/z)^{-b·b'}`，它的展开把所有 Laurent 指标
+      混起来，`K`-求和不再局部有限，乘积也不是单个顶点算子。塔上这就是 `k_0² = 0`
+      第三次真正起作用的地方（前两次：(3e) 塔上共形权、(5) 顶点算子对易）。
+      **另一条更省的路（未走）**：湮灭半也有加法公式 `Σ_{L1+L2=M} Ψ^b_{L1}Ψ^{b'}_{L2} = Ψ^{b+b'}_M`
+      （两次平移的复合＝平移之和，代数同态在生成元上比较即可，**且这个和是有限的**），
+      配上 ① 可以把整个乘积公式化成三重和的重排；但重排里对 `K` 的求和仍是无限的，
+      局部有限性 ② 绕不过去。
+    - **未做 (5b)** 加权和 `Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`：这是 `[A^ε_m, A^δ_n]`
+      的真正内容，(5a) 只是它的输入。物理上它是「`:(k_0·∂X) e^{i(m+n)k_0·X}:` 在 `m+n ≠ 0` 时是
+      全导数 `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，留数为零；`m+n = 0` 时退化成 `k_0·∂X`，
+      留数是 `k_0·α_0 = 2α' k_0·p = 1`」，所以 **`δ_{m+n,0}` 来自全导数，`m` 来自归一化**，
+      这里第一次用到 `dotVec η b a = 1`。
+      **(5a) 做完后给下一位的两条记录**（2026-09-11）：
+      **(i) 一条走不通的路（已排查，别再试）**：拿 (3e) 的模态权恒等式
+      `⁅L_0, V^{(n)}_K⁆ = K V^{(n)}_K` 对 (5a) 的和 `S_L = Σ_K V^{(m)}_{L-K}V^{(n)}_K`
+      做 Leibniz，只能得到 `T_L + U_L = L·S_L`，其中 `T_L = Σ_K K V^{(m)}_{L-K}V^{(n)}_K`、
+      `U_L = Σ_K (L-K) V^{(m)}_{L-K}V^{(n)}_K`。这是**一个方程两个未知量**，而且我们要的
+      `L = 0` 情形下 `U_0 = -T_0`，方程退化成 `0 = 0`，**没有任何信息**。
+      直觉上的原因：`L_0` 的 Leibniz 只看得见两个因子的权之和，而 (5b) 要的是把权只挂在
+      **一个**因子上；同点乘积本身对这种不对称加权是盲的。所以 (5b) 不是 (5a) 的推论，
+      必须引入 `k_0·∂X` 这个场本身。
+      **(ii) 物理结构（未形式化，供下一位设计）**：`Σ_j j V^{(m)}_j V^{(n)}_{L-j}` 是
+      `(z∂_z V^{(m)})(z)·V^{(n)}(z)` 的模态；`k_0² = 0` 时
+      `z∂_z V^{(m)} = V^{(m)}·(i m z k_0·∂X)`（无缩并），再用 (5a) 融合两个指数得
+      `i m z (k_0·∂X) e^{i(m+n)k_0·X}`。于是 `m+n ≠ 0` 时被积量是全导数
+      `∂_z e^{i(m+n)k_0·X}/(i(m+n))`，相应系数为零；`m+n = 0` 时指数退化成 `1`
+      （**需要先证零动量顶点算子是恒等**：`Fock.vertexOsc η 0 K = if K = 0 then 1 else 0`，
+      估计 40 行），剩下 `k_0·∂X` 的零模 `k_0·α_0 = 2α' k_0·p = 1`。
+      所以真正缺的原子事实是：`Σ_j j V^{(m)}_j V^{(n)}_{-j}` 与 `k_0·α` 模态的关系。
+      候选入口是 `Fock.lie_mode_vertexOsc`（`[α^μ_p, V^{(b)}_K] = b^μ V^{(b)}_{K-p}`，
+      contract 上 `k_0` 后因 `k_0²=0` 而为零，说明 `k_0·α_p` 与塔上顶点算子**对易**——
+      这条对易性大概率是把「全导数」翻译成代数陈述的正确工具，但**未验证**）。
+      整体重估 **200–300 行**，与上一位的估计一致。
+  - **[A,A] 的整条链**（记录，供下一位）：横向性 (4) 给
+    `[A^ε_m, A^δ_n] = Σ_{j,l} [α^ε_j, α^δ_l] V^{(m)}_j V^{(n)}_l`（用到 (5) 的顶点算子对易
+    把两个 `V` 并到右边），再用 `Fock` 的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
+    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。即：(5) 与 (5a) 已做，
+    剩下 (5b) 与双重局部有限和的 Leibniz 组装（可仿 `lie_towerLop_ddfOp_of_pos`）。
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
-  - DDF 算子本身 `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` 没有定义。它的局部有限性来自横向性
-    （`lie_towerMode_towerVertex_of_eq_zero` 允许把 `α^i_m` 移到右边，那里 `m` 大时湮灭态）
-    加上 `vertexOsc_apply_eq_zero_of_level`；**这一步是本项发现的一个实质数学点**：
-    没有 `ε·k_0 = 0`，围道积分的模态和在代数 Fock 空间上**不是**有限和。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 需要顶点算子的乘积/OPE，完全未碰。
+  - `⁅L_m, A^ε_n⁆ = 0` 与「`A^ε_n` 保持 `towerPhysSubmodule`」**全部 `m` 已证**（见 (6)）；
+    剩下的是 `[A,A]` 振子代数与张成性。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 的顶点算子乘积部分已做（(5) 对易 + (5a) 同点乘积），
+    仍缺 (5b) 的加权和（留数/全导数那一步）。
+  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
+    所以「`A^ε_n` 把物理态送到物理态」还证不了。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**前两步已做**（(5) 正交动量顶点算子对易、
+    (5a) 同点乘积 `Fock.vertexProduct_eq_vertexOsc_add`），仍缺加权和 (5b)。
+  - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`

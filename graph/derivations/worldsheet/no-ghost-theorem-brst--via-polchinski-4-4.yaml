@@ -32,10 +32,51 @@ depends_on:
   - id: worldsheet.virasoro-algebra-v2
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.4（p.137–142）：光锥振子对易关系 eq. (4.4.7)；Q_B = Q_1 + Q_0 + Q_{-1} 的分级分解 eq. (4.4.10)；Q_1^2 = 0 eq. (4.4.13)；上同调态的形式 eq. (4.4.19)；内积 eq. (4.4.23)"
+    loc: "§4.4（pp.137–142）：(4.4.1) L_m = L^X_m + L^K_m + L^g_m；(4.4.6)/(4.4.7) 光锥振子组合与其对易关系；(4.4.8) N^lc；**(4.4.9)** Q_B = Q_1 + Q_0 + Q_{−1}；(4.4.10) [N^lc, Q_j] = jQ_j；(4.4.11) [N^g, Q_j] = Q_j；**(4.4.12)** 分级展开 ⇒ Q_1² = 0；(4.4.13) Q_1 的显式式；(4.4.14) R；(4.4.15) S = {Q_1,R}；(4.4.16)/(4.4.17)；(4.4.18) S + U ≡ {Q_B,R}；(4.4.19) 上同调态的形式；**(4.4.20)** ⟨ψ‖ψ'⟩ = ⟨ψ_0‖ψ_0'⟩（正定性）；(4.4.21) H_OCQ = H_BRST = H_light-cone；(4.4.22)–(4.4.27) OCQ 侧的对照"
     note: |
-      式号取自抽取记录 literature/extractions/polchinski-1998-v1.md 的 E68，由两个第三方笔记
-      交叉核对，非核对原书；证明结构（滤子 + 分级上同调 + 下三角论证）已核实。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——**两处式号错位订正**，
+      旧 note 的「非核对原书」撤销】
+
+      ⚠ 旧 loc 有两处差一号：
+        Q_B = Q_1 + Q_0 + Q_{−1}   是 **(4.4.9)**（旧写 (4.4.10)）；
+        Q_1² = 0                    是 **(4.4.12)**（旧写 (4.4.13)）。
+      另 summary 第 6 步引的「内积 (4.4.23)」应是 **(4.4.20)**；(4.4.23) 是 OCQ 侧的
+      Q_B|ψ,↓⟩ = Σ_{n≥0}c_{−n}(L^m_n − δ_{n,0})|ψ,↓⟩。（statement 与 summary 不改，此处记账。）
+
+      **本推导第 5 步（下三角论证）在原书里的逐字形式（p.140）**：
+        "Now, U = {Q_0+Q_{−1}, R} lowers N^lc by one or two units. In terms of N^lc, S is diagonal
+         and U is lower triangular. **By general properties of lower triangular matrices**, the
+         kernel of S + U can be no larger than that of its diagonal part S. In fact they are
+         isomorphic… The factors of S^{−1} make sense because they always act on states of
+         N^lc < 0, where S is invertible."
+      → 「lower triangular matrices 的一般性质」在**无穷维 Fock 空间**上不是一条现成定理；
+        原书紧接的那句 S^{−1} 辩护是它给出的全部理由。这是本推导 gaps 第一条所指的那一步，
+        现已有原书逐字定位（见 gaps）。
+
+      **第 3–4 步走的是哪条路（p.139，逐字）**：
+        "One can find the cohomology directly by considering the action of Q_1 in the occupation
+         basis. **We will leave this as an exercise**（= 习题 4.6），and instead use a standard
+         strategy which will also be useful in generalizing to Q_B."
+      → 即「直接算 Q_1 的上同调」这条路在原书里是**习题**，正文走的是 S = {Q_1,R} 的标准策略。
+
+      ★★ **【2026-09-11 第七轮：本推导的谱系，作者自陈，书末 References p.350 逐字】**
+        「The BRST operator for field theory is derived in Kato & Ogawa (1983);
+         **our proof of the no-ghost theorem is loosely patterned on the one in that paper.**」
+      ⇒ **本推导（Polchinski §4.4）的来源谱系是 `kato-ogawa-1983`（Nucl. Phys. B212, 443），
+      不是 Goddard–Thorn。** 同一段把 **Brower (1972) 与 Goddard & Thorn (1972) 列为
+      "**Classic proofs of the OCQ no-ghost theorem**"**——那是 **OCQ** 路线，
+      对应 §4.1 的 (4.1.20)，与本推导的 BRST 路线**分属两条**。
+      ⚠ 三条使用限制：
+      (1) **"loosely patterned on" 是原书用词**，不是 "follows"/"reproduces"；
+          搬进图里必须保留 "loosely"，**不得**把本推导写成「复述 Kato–Ogawa 的证明」。
+      (2) `kato-ogawa-1983` **本项目尚未取得正文**，故本轮**不**给本推导新增该 ref
+          （加 ref 会暗示它支撑本推导的论证步骤，而我们无法核对）。
+          取得正文后应新建一条独立推导 `--via-kato-ogawa`，而不是改本条。
+      (3) **不得**把 `goddard-thorn-1972` 加进本推导的 sources：原书明确把 GT 归到另一条路线。
+      见 literature/extractions/polchinski-1998-v1.md §13.2(a)(b)(c)。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E58/E68）与 §12.10 表 B 第 9 项、
+      表 C 第 9 项。
   - ref: polchinski-1998-v1
     loc: "§4.3：Q_B^2 = 0 ⟺ c^m = 26（本推导的前提，见 worldsheet.critical-dimension-brst）"
   - ref: polchinski-1998-v1
@@ -59,10 +100,37 @@ summary: |
   "这是 Polchinski 全书中最接近数学证明的一段，但仍未处理收敛/完备化"）。
   严格版本见 worldsheet.no-ghost-theorem-brst--via-fgz。
 gaps:
-  - "滤子论证（Q_B = Q_1 + Q_0 + Q_{-1}，S = {Q_1, R}，下三角性）在无穷维分级空间上的收敛性未论证；把\"下三角\"推到\"ker(S+U) ≅ ker S\"需要每个分级片有限维或谱序列在有限步退化，Polchinski 未声明该假设。"
+  - "滤子论证（Q_B = Q_1 + Q_0 + Q_{-1}，S = {Q_1, R}，下三角性）在无穷维分级空间上的收敛性未论证；把\"下三角\"推到\"ker(S+U) ≅ ker S\"需要每个分级片有限维或谱序列在有限步退化，Polchinski 未声明该假设。
+     **【2026-09-11 原书逐字定位，作者自承】** 这一步在原书 p.140 逐字是：「Now, U = {Q_0+Q_{−1}, R}
+     lowers N^lc by one or two units. In terms of N^lc, S is diagonal and U is lower triangular.
+     **By general properties of lower triangular matrices**, the kernel of S + U can be no larger than
+     that of its diagonal part S. In fact they are isomorphic… **The factors of S^{−1} make sense
+     because they always act on states of N^lc < 0, where S is invertible.**」
+     即原书把这一步交给「下三角矩阵的一般性质」，并只用最后那句话为 (4.4.19) 的级数
+     |ψ⟩ = (1 − S^{−1}U + S^{−1}US^{−1}U − …)|ψ_0⟩ 辩护。
+     **这是整条无鬼定理链上最该形式化的一步**（抽取记录 §12.10 表 C 第 9 项即此条）：
+     需要的是「N^lc 分级的每片上 S 可逆且级数在有限步终止」这类论断，原书没有陈述也没有证明。"
   - "受限模条件（见 worldsheet.brst-quantization）在 §4.4 未被提及，本推导默认它成立。"
-  - "k^+ = 0 与 k = 0 的动量扇区未覆盖：光锥振子组合的定义在那里退化。陈述已把它们排除。"
-  - "相对复形上内积的鬼场零模归一化（⟨↓|c_0|↓⟩ = 1）未与 Polchinski (4.4.23) 逐字核对。"
-  - "本推导不建立 BRST 上同调与旧协变物理态空间 H_phys/H_0 的等价（Kato–Ogawa 定理）；后者现已单独建节点 worldsheet.brst-cohomology-equals-ocq-physical（FGZ 1986 Theorem 2.8 第一个同构）。worldsheet.no-ghost-theorem-v2 与本陈述仍是两条独立命题。"
+  - "k^+ = 0 与 k = 0 的动量扇区未覆盖：光锥振子组合的定义在那里退化。陈述已把它们排除。
+     **【2026-09-11】** 原书 p.139 逐字「**We choose a Lorentz frame in which the momentum component
+     k⁺ is nonzero.**」——即 k⁺ ≠ 0 是原书**显式声明的假设**，不是本图补的限定。
+     (4.4.13)/(4.4.14) 里 Q_1 与 R 的定义式都含 k⁺ 或 1/k⁺ 因子。"
+  - "相对复形上内积的鬼场零模归一化（⟨↓|c_0|↓⟩ = 1）未与 Polchinski 的内积逐字核对。
+     **【2026-09-11 这条缺口的实质已查明】** 原书 §4.4 用的**不是** (4.3.18a) 那个内积，而是
+     p.135 明说的**约化内积** ⟨ ‖ ⟩：「Therefore we use in `Ĥ` a **reduced inner product** ⟨ ‖ ⟩
+     in which we simply **ignore the X⁰ and ghost zero modes**.」(4.4.20) 的正定性断言
+     ⟨ψ‖ψ'⟩ = ⟨ψ_0‖ψ_0'⟩ 就是在这个约化内积上作出的。
+     → 本推导目标节点用 ⟨ψ|c_0|ψ'⟩ 处理鬼场零模，与原书的「直接忽略零模」**不是同一个构造**；
+     两者是否给出同一个诱导内积，本图未验证。形式化时必须先定死用哪一个。"
+  - "**§4.4 证的是比本推导目标更强的定理，本推导只用了它的特例。** 原书 p.137 逐字设定是
+     「d free X^μ fields including μ = 0, plus some **compact unitary CFT K** of central charge 26 − d,
+     plus the ghosts」，四条假设为：(i) K 紧致（L^K_0 谱离散）；(ii) K 内积正定；
+     (iii) 总中心荷使 Q_B 幂零；(iv) k⁺ ≠ 0。目标节点 worldsheet.no-ghost-theorem-brst 取 K 平凡、
+     d = 26，(i)(ii) 自动满足。**一般形式在本图没有节点**（缺「紧致幺正 CFT」的定义卡），
+     已列入报告交 lead。"
+  - "本推导不建立 BRST 上同调与旧协变物理态空间 H_phys/H_0 的等价（Kato–Ogawa 定理）；后者现已单独建节点 worldsheet.brst-cohomology-equals-ocq-physical（FGZ 1986 Theorem 2.8 第一个同构）。worldsheet.no-ghost-theorem-v2 与本陈述仍是两条独立命题。
+     **【2026-09-11】** 原书自己把这条等价放在 (4.4.21) H_OCQ = H_BRST = H_light-cone 里一并证明
+     （(4.4.22)–(4.4.27) 是 OCQ 侧的良定义性、单射、满射三步），
+     即原书**不**把它当成独立定理。本图拆成两个节点是本项目的选择，与原书的组织方式不同。"
 author: curator
 created: "2026-09-10"

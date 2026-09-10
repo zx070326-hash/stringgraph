@@ -40,33 +40,101 @@ definition: |
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.1 开头（p.32–33）：转入欧氏世界面与 σ^2 = i σ^0；**式号未核实**（抽取者定位在 (2.1.1) 附近）"
+    loc: "§2.1, p.32，(2.1.1) 下方正文（无式号）：\"in the first seven sections all equations make sense if σ² is replaced with iσ⁰\"；欧氏约定（作用量整体变号）本身见 **Appendix A, eq. (A.1.31), p.335**（逐字是 S_E 的定义式，**不是** e^{iS_L} = e^{−S_E}，见下方 2026-09-11 note）"
     note: |
-      「第 1 章用洛伦兹世界面号差、第 2 章起 CFT 用欧氏号差」这一事实见抽取记录
-      literature/extractions/polchinski-1998-v1.md 第 1.1 节「世界面号差」一栏，
-      核实等级为 [S]（Schrans 伴读笔记目录确认 (2.1.2) 是「复坐标 z = σ^1 + i σ^2」、
-      (2.1.6) 是「复度规」，即 §2.1 已在欧氏世界面上工作）。
-      **Wick 旋转本身的公式号（σ^2 = i σ^0 出现在哪一式）未核实**：核对源的目录没有这一条；
-      本节点写的「(2.1.1) 附近」是按 §2.1 起始页 p.32 与 (2.1.2) 在 p.33 推定的区间，需人工核对原书。
-      字典 (b)(c)(d) 三行的代数是 curator 自行补出的换算（不是来源逐字内容）；
-      结论 S_P^L = i S_P^E 与 e^{iS_L} = e^{-S_E} 是标准结果，但本图未核实原书是否写出这一步。
-      【2026-09-11 追加，researcher 第三轮 Q10（polchinski-1998-v1.md §4 追加）】
-      (1) (2.1.6) 处世界面度规已是欧氏正定 ds² = (dσ¹)² + (dσ²)² = dz dz̄（schrans-2020 正文 [2.4]，L1；
-          [S] §2.6 亦逐字「we are in Euclidean space」），且 [S] 把 (2.1.2)(2.1.3)(2.1.6)(2.1.7) 四式
-          全部标在 p.33 ⇒ Wick 旋转若写出必在 (2.1.2) 之前，即 p.32–33 的 (2.1.1) 区间。
-          上一行「[S] 目录」级的核实由此升为「[S] 正文」级；式号本身仍未核实。
-      (2) σ² = iσ⁰ 与 e^{iS_L} = e^{−S_E} 在 **Schrans（schrans-2020）与 Headrick（arXiv:0812.4408）
-          两个独立二手源中都没有任何对应条目**（[S] 第 2 章目录无此条；[H] 全篇不出现
-          Wick rotation / Euclidean continuation，第 2 章只引 (2.1.23)）。这是 negative evidence
-          而非定论，但比「未核实」更强：**不得因「这是标准做法」就当作已核实**。
-      (3) 检索后端给出的「Polchinski 的欧氏延拓是 σ² = iσ⁰」唯一可核对出处是 Tong 讲义
-          （arXiv:0908.0333），属平行处理而非 Polchinski 来源，是循环佐证，**不得用它为本条 loc 背书**。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——Q10 关闭，本条 note 取代旧的
+      「[S] 与 [H] 都查不到 ⇒ 不要当成已核实」判断】
+
+      原书 p.32，§2.1，(2.1.1) 正下方那一段，逐字：
+        "This is the Polyakov action (1.2.13), except that the world-sheet metric γ_ab has been
+         replaced with a flat Euclidean metric δ_ab, signature (+,+). **The overall sign change of
+         the action is a result of the Euclidean convention (A.1.31).** As we will see, most string
+         calculations are carried out on a Euclidean world-sheet. At least for flat metrics, the
+         relation between Euclidean and Minkowski amplitudes is given by a standard analytic
+         continuation, explained in the appendix. In fact, the results of the present chapter apply
+         equally to a Minkowski world-sheet, and **in the first seven sections all equations make
+         sense if σ² is replaced with iσ⁰**. For the index μ we still take the flat Minkowski metric."
+
+      第二处，p.34，(2.1.13a,b) 正上方，逐字：
+        "**Under the Minkowski continuation σ² = iσ⁰**, a holomorphic field becomes a function only
+         of σ⁰ − σ¹ and an antiholomorphic field a function only of σ⁰ + σ¹."
+
+      三点结论（替代此前的 negative evidence 判断）：
+      (1) **σ² = iσ⁰ 确实在原书里**，但从来不是式子（两处都是散文，无式号），
+          且**方向与本节点的字典相反**：Polchinski 的行文是「本章是欧氏的；若要闵氏，
+          把 σ² 换成 iσ⁰」，不是「把闵氏 Wick 旋转到欧氏」。本节点字典 (b)(c) 仍是
+          curator 补出的换算，方向自洽，但**不得声称是原书逐字**。
+      (2) **e^{iS_L} = e^{−S_E} 不在 §2.1**。原书把「作用量整体变号」的依据外包给
+          **Appendix A, eq. (A.1.31)**（逐字 "the Euclidean convention (A.1.31)"）。
+          这是本条唯一的硬式号锚点。**(A.1.31) 本身本项目尚未取页**（Appendix A 是 pp.329–346），
+          是一条低成本后续任务，见 §12.10 表 D 第 1 项。
+      (3) **另一个必须分开的 Wick 旋转**（p.34，(2.1.14) 正下方，逐字）：
+            "The path integral over X⁰ is a wrong-sign Gaussian, so it should be understood to be
+             defined by the **analytic continuation X⁰ → −iX^D**."
+          这是**时空**方向的解析延拓，与世界面的 σ² = iσ⁰ 是两件不同的事，本节点不包含它。
+
+      措辞等级由 L0 升到 **L1**。旧 note 中「检索后端把 σ²=iσ⁰ 溯源到 Tong 是循环佐证」
+      的警告仍然有效（正确出处就是上面 p.32/p.34 两处）。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（Q10）与 §12.10 表 B 第 2 项。
   - ref: polchinski-1998-v1
     loc: "§3.2–§3.3（p.82–89）：欧氏 Polyakov 路径积分 ∫ (Dg DX / V_{diff×Weyl}) e^{-S_P[g,X]}，度规记作 g_{ab}；式号未核实"
     note: |
       §3.3 的 Faddeev–Popov 手续（(3.3.16)/(3.3.18)/(3.3.21)/(3.3.24)，式号经 schrans-2020 目录核实）
       全部在欧氏号差、度规记号 g_{ab} 下进行，是本约定在第 3 章被使用的直接证据。
       **权重写成 e^{-S} 而非 e^{iS} 这一点在本图未逐字核实原书措辞。**
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.1「Bosonic fields」，斜体小标题 *Euclidean path integrals* 之下，p.335**：闵氏拉氏路径积分权重 exp[(i/ħ)∫dt L] 是 **(A.1.14)**（p.331）；欧氏路径积分 = ∫[dq] exp[∫₀^U du L(q, i∂_u q)] 是 **(A.1.30)**（p.335）；`S_E = ∫du L_E(q, ∂_u q) = −∫du L(q, i∂_u q)` 是 **(A.1.31)**（p.335）。**本约定 definition 段 (c) 里的 e^{iS_P^L} = e^{−S_P^E} 是这三式的合成，原书没有把它写成任何一个式子。**"
+    note: |
+      【原书核实 2026-09-11（researcher 第七轮，L1 页图逐字，App. A pp.329–338 读毕）——
+      **部分推翻本卡此前的表述：(A.1.31) 不是 `e^{iS_L} = e^{−S_E}`**】
+
+      (A.1.31) 的逐字上下文（p.335）：
+        "The weight in the Euclidean path integral is **conventionally defined to be** `exp(−S_E)`,
+         so the Euclidean action contains a minus sign,
+             `S_E = ∫ du L_E(q, ∂_u q) = − ∫ du L(q, i∂_u q) .`   (A.1.31)
+         Euclidean path integrals are usually the more well-defined, because the exponential of the
+         action is damped rather than oscillatory. The Minkowski matrix elements can then be obtained
+         by analytic continuation."
+
+      三条硬结论：
+      1. **(A.1.31) 是 `S_E` 的定义式**，不是 `e^{iS_L} = e^{−S_E}`。「权重是 exp(−S_E)」是式子上方的
+         **散文**，且原书用词是 "**conventionally defined to be**"（约定如此定义），不是「可以证明等于」。
+      2. **`e^{iS_L} = e^{−S_E}` 这个等式在原书里根本不存在。** 它只有把 **(A.1.14)**（闵氏权重
+         exp[(i/ħ)∫dt L]，p.331）+ **(A.1.30)**（欧氏权重逐字写作 `exp[∫₀^U du L(q, i∂_u q)]`，
+         指数上**没有 −S_E 字样**，p.335）+ **(A.1.31)** 三者串起来才成立。
+         **这个串接是本项目做的，不是原书的任何一行。** 本卡 definition 段 (c) 末句
+         「因此权重 e^{i S_P^L} = e^{- S_P^E}」按项目原则 1 不改文本，在此记账为
+         **合成结论（相当于 inferred: true）**，凡引用该句的节点须知其来源是三式合成。
+      3. **Wick 旋转在原书里的方向是 `t = −iu`，不是 `σ² = iσ⁰`。** p.335 逐字：
+         "**Taking the times to be purely imaginary, `t = −iu` for real `u`, defines the *Euclidean*
+         amplitudes**"。`t = −iu`（App. A）与 `σ² = iσ⁰`（§2.1）方向一致（u = it），
+         但**原书从未把这两个记号并排写出**，两者的桥接同样是本项目的推断。
+
+      ★ **本轮新记的两条作者自承缺口（都直接封顶任何以路径积分为根的链）**：
+      (i) **Wick 旋转的真论证只对单自由度量子力学做过。** p.335，(A.1.27)–(A.1.29) 之间逐字：
+          "…one only encounters `exp(−iHΔt)` for positive `Δt`. Now continue analytically by uniformly
+           rotating all times in the complex plane, `t → e^{−iθ}t` for any phase `0 ≤ θ ≤ π`. The real
+           part of the exponent is `−E sinθ Δt`, where `E` is the energy of the intermediate state.
+           **Because the Hamiltonian is bounded below for a stable system**, the sum over intermediate
+           states is safely convergent and no singularities are encountered — the continued amplitude
+           is well defined."
+          即论证依赖「**H 下有界**」这条假设，且**是对单自由度量子力学做的**；
+          **原书没有说它对世界面 CFT / 弦 S-矩阵也成立。** 本卡 notes 末段那条
+          「Wick 旋转在路径积分层面的合法性本图完全没有节点」的警告因此**得到原书侧的确认**，
+          且现在知道原书能给的最强的东西是什么。
+      (ii) **路径积分公式本身的推导是 heuristic 的。** p.332 逐字：
+          "The derivation of the path integral formula treated the continuum limit `ε → 0`
+           **rather heuristically**. Renormalization theory is the study of this limiting process,
+           and is rather well understood."
+          同页还有："**Actually, we will evaluate explicitly only a few Gaussian path integrals.**
+           We use the path integral primarily to derive some general results, such as operator
+           equations and sewing relations."
+          ⇒ **凡以「Polyakov 路径积分」为根的链，其根部状态封顶 `physical-argument`，作者明说。**
+          （本卡是 convention，不参与状态传播；这两条记在这里是因为它们是同一段附录的内容，
+          真正受影响的是 worldsheet.string-s-matrix 等以路径积分为根的命题卡。）
+
+      ⚠ **本轮未读 App. A pp.339–346**（§A.2 起，推测费米场/Grassmann）。
+      见 literature/extractions/polchinski-1998-v1.md §13.1(a)(b)(c)(d)(e)。
   - ref: schrans-2020
     loc: "目录条目 2.1–2.4（p.33）、3.7–3.10（p.88–89）：公式号的核对来源，非内容来源"
 notes: |
@@ -86,3 +154,19 @@ notes: |
   以及一般（非静态、非解析）世界面上「σ^2 = i σ^0」是否有整体意义——本图完全没有节点，
   也不在 Polchinski 的论证范围内。凡跨本 family 的 convention_map 都继承这一缺口，
   因此跨号差的推导一律不高于 physical-argument。
+
+  **2026-09-11（curator-v1-locs，原书核实落地）**：definition 第 31–34 行括注里
+  「Polchinski 原文是否这样写未核实」这句现已可撤销：原书 (2.1.6) 逐字给出分量表
+  g_{zz̄} = g_{z̄z} = 1/2、g_{zz} = g_{z̄z̄} = 0、g^{zz̄} = g^{z̄z} = 2（L1，抽取记录 §12.1）。
+  按不可违背原则 1 不改 definition 文本，此处记账：该括注中的「未核实」现为**已核实**，
+  且注意**原书给的是分量表，不是 [S] 写的 ds² = dz dz̄**。
+  另：上面 sources 第二条（§3.2–§3.3）里「权重写成 e^{-S} 而非 e^{iS} 未逐字核实」这句
+  **仍然成立**——第 3 章的路径积分权重措辞未取页。
+
+  **2026-09-11（curator-v1-sec13，§13.1 落地）**：Appendix A 已取页，(A.1.31) 逐字到手，
+  结论是它**不是** `e^{iS_L} = e^{−S_E}`，而是 `S_E` 的定义式；旧 note (2) 里
+  「(A.1.31) 本身本项目尚未取页」这句现已作废。**definition 段 (c) 末句的那个等式，
+  以及 (b) 的 σ² = iσ⁰ ↔ t = −iu 桥接，都是本项目的合成/推断，不是原书逐字**——
+  详见上方新增的 Appendix A sources note。凡跨本 family 的 convention_map 除继承本卡
+  notes 已列的缺口外，还继承那条 note 里记的两条作者自承缺口
+  （Wick 旋转只对单自由度 QM 有真论证；路径积分连续极限 "rather heuristically"）。

@@ -3,7 +3,7 @@ target: worldsheet.ddf-commute-with-virasoro
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: 被断言的对象；类光条件 k_0² = 0 与横向条件 ε·k_0 = 0 都写在该定义卡里，是本论证的两个输入。
   - id: worldsheet.virasoro-generators-free-boson
     note: |
@@ -30,12 +30,24 @@ depends_on:
     note: |
       指数算符 :e^{i n k_0·X}: 与 ∂X^i 的交叉缩并规则；没有它无法把 T 与 :e^{i n k_0·X}: 的 OPE
       算成有限阶极点。同上，来源处不逐条列出，标 inferred。
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
     note: |
       「权 h 的主场」的定义与 T·O OPE 的判据。本论证的核心是：k_0² = 0 使指数算符权为 0、
       ε·k_0 = 0 使交叉缩并项消失，于是 ∂X^i e^{i n k_0·X} 是权 1 主场。
-  - id: worldsheet.exponential-vertex-operator-weight
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
+      ⚠ 本推导用的 T 是普通自由标量 CFT 的 T = −(1/α'):∂X^μ∂X_μ:（(2.4.4)），
+      **不是**线性 dilaton CFT 的那一个；v2 新增的那段要求声明这一点，此处即为声明。
+  - id: worldsheet.exponential-vertex-operator-weight-v2
     note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.exponential-vertex-operator-weight，该卡已
+      superseded_by worldsheet.exponential-vertex-operator-weight-v2。v2 只把 statement 边界 (f) 的
+      「X^μ 不是主场」改成「X^μ 是 h = 0 主场，本卡不覆盖其权」（随 worldsheet.primary-field-v2 订正），
+      并把 (1) 里指向定义卡的指针改为 -v2；(1)(2)(3) 与边界 (a)–(e) 逐字未动，
+      故换代不改变本推导所用的内容与状态。
+
       【2026-09-11（四）新增，立卡后接线】**summary 第 1 步的全部内容**现由该命题节点承载：
       「:e^{i n k_0·X}: 是共形权 h = α' n² k_0² 的主场，k_0² = 0 时 h = 0」
       （该卡 (1)(2)(b)(3)，开弦边界归一化 h = α'k²，与本推导 summary 第 1 步逐字一致）。

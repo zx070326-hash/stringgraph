@@ -37,12 +37,22 @@ depends_on:
       本推导把半圆围道补成整圆用的就是这一式。来源同为 Polchinski §2.6，不标 inferred。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.6, eq. (2.6.25)（The Open String Boundary），p.56"
+    loc: "§2.6, p.57：(2.6.26)（边界条件 T_ab n^a t^b = 0）、(2.6.27)（T_{zz} = T_{z̄z̄} at Im z = 0）、**(2.6.28)**（doubling trick：T_{zz}(z) ≡ T_{z̄z̄}(z̄'), Im z < 0）、(2.6.29)（单一围道的 L_m）、(2.6.30)（开弦 Virasoro 代数）"
     note: |
-      抽取记录 polchinski-1998-v1.md#E40 备注，**[已核实]**：schrans-2020 目录条目
-      `2.46 p 56: Eq. (2.6.25) The Open String Boundary` 式号已核实，抽取记录逐字写
-      「(2.6.25) 说明开弦情形下 `L` 与 `L̄` 由 doubling trick 合并成**一套** Virasoro 代数」。
-      **只有结论 (iii) 在这个意义上已核实**；(i)(ii) 的表达式未核对原书，见 gaps。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——⚠ **式号订正，且旧核实声明被否定**】
+
+      ⚠ 旧 loc 与旧 note 都把 doubling trick 挂在 (2.6.25) 并标 [已核实]。
+      **原书 (2.6.25) 只是开弦的坐标区域 `0 ≤ Re w ≤ π ⟺ Im z ≥ 0`**，不是 doubling trick。
+      这条旧核实来自 [S] 的条目标题，是二手源的标题误导。
+
+      订正后，本推导三步全部有一手落点且为 L1：
+        (i)   边界上两部门相等 → (2.6.26)/(2.6.27)
+        (ii)  镜像延拓          → **(2.6.28)**
+        (iii) 只有一套 Virasoro  → (2.6.29)/(2.6.30)
+      即 gaps 里「(i)(ii) 的表达式未核对原书」这一条**现予关闭**（原书写出了这两步）。
+      **但本推导的 status 不上调**：physical-argument 的理由是下面其余 gaps
+      （量子层面的边界算子等式、算子值分布的 Schwarz 反射、上游 Laurent 模本身非严格），
+      与「原书有没有写」无关。
   - ref: polchinski-1998-v1
     loc: "§1.2, eq. (1.2.28)（Neumann 边界条件），p.—"
     note: 抽取记录 #E8，[已核实]（schrans-2020 §1.11 逐字复现）。本推导的第一个前提。
@@ -73,11 +83,14 @@ summary: |
   物理态条件对它写一次即可——这正是 Polchinski (2.6.25) 的内容。
   闭弦无边界，(i) 不存在，两支保持独立。
 gaps:
-  - "**(i)(ii) 的具体表达式未核对原书**。核对源（schrans-2020 目录）只给条目标题
-     `Eq. (2.6.25) The Open String Boundary` 与抽取记录的一句结论「L 与 L̄ 合并成一套」，
-     即**只有 (iii) 已核实**。(i) 的『Neumann ⟹ 边界上 T = T̄』与 (ii) 的反射公式
-     T̃(z) = T̄(z^*) 是本图按标准 CFT 做法补出的措辞，原书正文在付费墙后（抽取记录 §0）。
-     若持原书者核对后措辞不同，须以原书为准并相应改写本推导（陈述卡则须换代）。"
+  - "**【2026-09-11 关闭并订正】** 本条原写「(i)(ii) 的具体表达式未核对原书，只有 (iii) 已核实」，
+     依据是 [S] 目录条目 `Eq. (2.6.25) The Open String Boundary`。
+     原书页图核实推翻了这个依据的两半：**(2.6.25) 根本不是 doubling trick**（它是坐标区域
+     `0 ≤ Re w ≤ π ⟺ Im z ≥ 0`），而 (i)(ii) 在原书里**写出来了**——
+     (i) 是 (2.6.26)（T_ab n^a t^b = 0）与 (2.6.27)（T_{zz} = T_{z̄z̄} at Im z = 0），
+     (ii) 是 **(2.6.28)**（T_{zz}(z) ≡ T_{z̄z̄}(z̄'), Im z < 0），(iii) 是 (2.6.29)/(2.6.30)。
+     故本条缺口消失（三步都有一手落点），**但本推导的 status 不变**：
+     physical-argument 的理由是下面其余各条，与「原书有没有写」无关。"
   - "**Wick 旋转与共形映射两步无节点承载**（见本推导第一条边的 convention_map）：
      worldsheet.open-string-neumann-boundary-condition 是在洛伦兹带状世界面上的经典变分结论，
      本推导在欧氏上半平面上用它。conv.worldsheet-euclidean 只是一个约定节点，

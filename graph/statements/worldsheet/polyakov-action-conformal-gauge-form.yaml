@@ -52,7 +52,7 @@ sources:
       不是输入……若日后建一条『S_P 在共形规范下化为自由标量作用量』的命题，它应以
       polyakov-action 与 conformal-gauge-fixing 为依赖」。本节点即该命题。
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.19)–(1.2.20)（Weyl 变换 γ'_ab = e^{2ω} γ_ab；(-γ)^{1/2} γ^{ab} 在 d 维带因子 e^{(d-2)ω}）；式号未核实"
+    loc: "§1.2, eq. **(1.2.21)**, p.13（Weyl 变换 `γ′_ab = exp(2ω)γ_ab`；「`(−γ)^{1/2}γ^{ab}` 在 d 维带因子 e^{(d−2)ω}」这句是本图补的，不是原书文字）。**【2026-09-11 订正，L1 页图】旧写「约 (1.2.19)–(1.2.20)」是错的：(1.2.19) 是 Poincaré、(1.2.20) 是 diff、**(1.2.21)** 才是 Weyl**"
     note: |
       「Weyl 因子在 d = 2 脱落」这一步的来源与 worldsheet.polyakov-weyl-invariance 相同
       （抽取记录 #E7，Weyl 变换的写法经 Headrick 习题 1.3 第 (8) 式确认，公式号未核对原书）。

@@ -1,0 +1,27 @@
+id: branes.massless-open-string-gauge-field-and-collective-coordinates--via-polarization-split
+target: branes.massless-open-string-gauge-field-and-collective-coordinates
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+  - id: branes.stretched-open-string-mass
+    note: 提供「无质量要求 ΔX' = 0」，即两端落在同一张膜上。
+  - id: branes.wilson-line-eigenvalues-are-brane-positions
+    note: 提供「垂直方向的规范场分量 = 膜的位置」这一等同，(2) 的「集体坐标」全靠它。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.1)，p.268–269"
+    note: 抽取记录 polchinski-1998-v1#E153（L1，Schrans §8.113–§8.114，笔记 p.527–528）。
+summary: |
+  无质量条件 m² = (ΔX'/2πα')² + (N−1)/α' = 0 要求 ΔX' = 0 与 N = 1，
+  即态形如 α^M_{−1}|k; ii⟩。把时空指标 M 按膜的世界体方向（∥）与垂直方向（⊥）分开：
+  ∥ 的 p+1 个分量在世界体上是矢量，即规范场；
+  ⊥ 的 25−p 个分量在世界体上是标量，且由 (8.6.18)（θ_i R' = −2πα'A_{ii}）
+  正是决定膜位置的那些场，故解释为膜的集体坐标。
+gaps:
+  - "⚠ 「垂直极化 = 膜的集体坐标」在来源中是**解释**而非复述：Schrans 明写「This is my understanding of this statement」（抽取记录 #E153）。原书的措辞未获取。"
+  - "「n 张重合膜给 U(n)」用到 i ≠ j 的态在重合时也无质量，这依赖 Chan–Paton 结构，本图无该节点。"
+  - "Schrans 目录把 §8.113/§8.114 都标 (8.7.1)，分 a/b 两支是他正文的说法（抽取记录 §10），故式号定位弱。"
+  - "上游 branes.wilson-line-eigenvalues-are-brane-positions 含勘误依赖 (8.6.19) 与未被理解的电荷指派。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

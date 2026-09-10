@@ -1,0 +1,21 @@
+id: compact.kaluza-klein-tower--via-fourier-mode-reduction
+target: compact.kaluza-klein-tower
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.circle-momentum-quantization
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.6)–(8.1.7)，p.232"
+    note: |
+      抽取记录 polchinski-1998-v1#E116（L1，Schrans §8.4–§8.5，笔记 p.421–422）。
+summary: |
+  把 D 维无质量波动方程作用在 Fourier 展开 φ = Σ_n φ_n(x^μ) e^{inx^d/R} 上：
+  ∂_d 作用给出 in/R，故 ∂_M∂^M φ = 0 化为 ∂_μ∂^μ φ_n = (n²/R²) φ_n，
+  即每个 n 对应一个 d 维质量 |n|/R 的标量。
+gaps:
+  - "前提 G^{μd} = 0（平坦背景 / 无 Kaluza–Klein 矢量）在原书中是否写出未核实；Schrans 明说必须假设它，并算出不假设时多出的一项 (in/R)G^{μd}∂_μ（抽取记录 #E116、Open Questions 第 1 条）。"
+  - "本图尚未建立 Kaluza–Klein 度规 ansatz (8.1.2) 的定义节点（抽取记录 #E113），故前提只能写在陈述文本里，无法作为一条边。"
+  - "把逐个 Fourier 模的方程与原方程等价（求和与微分交换、模之间不混合）依赖 e^{inx^d/R} 的线性无关性与收敛性，来源未讨论。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -1,0 +1,31 @@
+id: compact.circle-closed-string-mass-formula
+kind: proposition
+title: 一维圆紧化的闭弦质量公式 m² = n²/R² + w²R²/α'² + (2/α')(N + Ñ − 2)
+statement: |
+  设 D = 26 的玻色闭弦的一个空间方向紧化在半径 R 的圆上（conv.compactification-radius），
+  紧化方向的动量数为 n、绕数为 w，左右行能级算符 N、Ñ 的求和**包括**紧化方向的振子
+  α^{25}_{−n}、ᾱ^{25}_{−n}。记 m² ≡ −p_μ p^μ 为剩下 25 维中的质量。则物理态满足
+    **m² = n²/R² + w²R²/α'² + (2/α')(N + Ñ − 2)**.
+  这里 n²/R² 是 Kaluza–Klein 动量的贡献、w²R²/α'² 是绕数的贡献，
+  常数 −2 来自左右各一个截距 a = ã = 1（conv.intercept-sign-a）。
+  n = w = 0 时回到未紧化的闭弦公式 α'm² = 4(N − 1)（在 level matching N = Ñ 下）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.1)（分左右两支的质量壳）与 (8.3.2)（两支之和），p.241"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E126，证据等级 L1
+      （Schrans §8.26–§8.27，笔记 p.449–450，逐式复现 [8.137]–[8.142]）。
+      原书由 (4.3.31)/(4.3.32)（L_0 = (α'/4)(p² + m²) 与 (α'/4)m² = Σ n(N_b + N_c + ΣN_μ) − 1）
+      出发，把紧化维的动量单独拿出来。
+tags: [compactification, closed-string, winding, torus, spectrum, mass-formula]
+notes: |
+  绕数项 w²R²/α'² 与动量项 n²/R² 在 R → 0 与 R → ∞ 下互换角色，这是 T 对偶
+  （duality.t-duality-spectrum-equivalence）在谱上的全部内容。
+
+  ⚠ 本图的上游 worldsheet.closed-string-mass-formula 是**光锥规范**的形式
+  （N、Ñ 只跑横向指标 i），而原书 §8.3 用的 (4.3.31)/(4.3.32) 是**协变/BRST** 形式
+  （含鬼场能级 N_b、N_c）。两种形式在物理态上给出同一条质量壳，但这条等同
+  本图没有独立节点承载，见本节点推导的 gaps。
+author: curator-polchinski-ch8
+created: "2026-09-11"

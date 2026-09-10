@@ -27,10 +27,22 @@ uses_conventions:
   - conv.worldsheet-euclidean
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.4, eq. (6.4.23)（Veneziano 振幅），并见 (6.4.20)–(6.4.22)（Beta 函数表示），p.183"
+    loc: "§6.4, p.183：eq. (6.4.23)（Veneziano 振幅，含完整前因子）；(6.4.19)（B 的 Euler 积分定义）；(6.4.20)（I(s,t) = B(−α_o(s), −α_o(t))，α_o(x) = 1 + α'x）；(6.4.24)（Beta 的 Γ 商形式）"
     note: |
-      literature/extractions/polchinski-1998-v1.md#E99，等级 **L1（式号 + 推导路线）/ L2（表达式）**。
-      ⚠⚠ **这是本章表达式层面最弱的一条**，抽取记录逐条列出理由：
+      literature/extractions/polchinski-1998-v1.md#E99 + **§12.8（原书核实，2026-09-11）**。
+      **等级已从 L1（式号）/ L2（表达式）升为 L1（原书 p.183 逐字）**：
+      §12.8 首次取得原书页图，(6.4.23) 的完整形式为
+        S_{D₂}(k₁;k₂;k₃;k₄) = (2i g_o²/α')(2π)²⁶ δ²⁶(Σ_i k_i)
+          × [ B(−α_o(s),−α_o(t)) + B(−α_o(s),−α_o(u)) + B(−α_o(t),−α_o(u)) ]，
+      配套 (6.4.19) B(a,b) = ∫₀¹dy y^{a−1}(1−y)^{b−1}、(6.4.20) α_o(x) = 1 + α'x、
+      (6.4.24) B(−α_o(x),−α_o(y)) = Γ(−α'x−1)Γ(−α'y−1)/Γ(−α'x−α'y−2)。
+      → **本卡片 statement 里的三项 Beta 结构与原书一致**（−α_o(s) = −α's−1），
+      且 statement 里的 α(x) = 1 + α'x 与 (6.4.20) 逐字一致；
+      而 statement 里「整体前因子本图未核实」这一句**已不再成立**：
+      前因子 = **2i g_o²/α' 乘 (2π)²⁶δ²⁶(Σk_i)**。
+      ⚠ 本卡片仍留在弱形式，是因为**陈述文本一经提交不得修改**（graph/CLAUDE.md）；
+      前因子要进图必须新建节点，见 notes 的「升级路径」。
+      以下 (a)–(d) 是旧记录「二手源没抄出 (6.4.23)」的理由，作为历史说明保留：
       (a) **schrans-2020 没有把 (6.4.23) 抄出来**；他对该式的全部注释只有一句
           「This is straightforward. Use (6.4.9) and plug in the expression for C_{D₂}
           and the expression of I in terms of the Beta functions (6.4.20).」
@@ -40,21 +52,41 @@ sources:
       (c) 第二个方向一致但**不同形**：headrick-2008 Problem 6.9 算的是四**规范玻色子**振幅，
           出现 B(−α't+1,−α's−1)、B(−α't+1,−α'u+1)、B(−α'u+1,−α's−1)，
           **参数偏移不同（不是 tachyon）**，不能互证。
-      (d) 抽取记录的结论逐字：「**curator 若要写出 (6.4.23) 的显式表达式，必须先核对原书。**」
-      本卡片遵此，只建弱形式。
+      (d) 旧结论逐字：「**curator 若要写出 (6.4.23) 的显式表达式，必须先核对原书。**」
+          → **该核对已于 2026-09-11 由 §12.8 完成（原书 p.183），本条关闭。**
   - ref: schrans-2020
     loc: "§6.39–§6.41（笔记 p.308–309）：三项 Beta 结构的实际来源 [6.143]（核对源）"
+superseded_by: spectrum.veneziano-amplitude
 tags: [spectrum, tree-level, open-string, tachyon, veneziano, beta-function, four-point, weak-form]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E99 建立，**按任务书要求只建弱形式**。
+
+  **⚠ 换代后的读法**：本卡片 statement 里「整体前因子（含 g_o、C_{D₂}、i、(2π)²⁶ 的组合）
+  本图未核实、不写出」以及「本卡片不能用于任何需要绝对归一化的下游」两句
+  **在 2026-09-11 之后已不再反映本图的知识状态**——前因子已知为 2i g_o²/α' × (2π)²⁶δ²⁶(Σk_i)。
+  需要绝对归一化的下游请改用 spectrum.veneziano-amplitude。
+  按 graph/CLAUDE.md 的不可变原则，statement 文本不作修改。
 
   **历史意义（不入陈述）**：Veneziano 1968 的这个 Beta 函数拟设是弦论的起点；
   本图目前没有登记 Veneziano 的原始论文，本卡片的来源只有 Polchinski（且经二手源转述）。
   若日后 researcher 登记 veneziano-1968，可为本卡片补一条独立推导，
   并借机核对前因子——那也是把本卡片从「弱形式」升级为完整形式的自然时机。
 
-  **升级路径（须新建节点，不得改本卡）**：核对原书 (6.4.23) 后，
-  新建 spectrum.veneziano-amplitude（含前因子）并在本卡写 superseded_by。
-  按 graph/CLAUDE.md，**不得**直接修改本卡的 statement 文本。
+  **升级路径——已于 2026-09-11 走完（curator-ch6-sec14）**：
+  原书 (6.4.23) 由抽取记录 §12.8 逐字核实、§14.1 页图复核无误（p.183，前因子 2i g_o²/α'），
+  **完整形式的新卡 spectrum.veneziano-amplitude 已建立，本卡已写 superseded_by 指向它。**
+  推导 spectrum.veneziano-amplitude-weak--via-beta-integral 已 `git mv` 改名为
+  spectrum.veneziano-amplitude--via-beta-integral 并改指新陈述（depends_on 未变），
+  故**本卡片现在没有自己的推导**——这是 docs/STATUS_LEVELS.md「旧推导的去留」
+  （lead 2026-09-11 裁决）规定的换代方式。本卡片保留作为历史记录，statement 文本不再改动。
+
+  **前因子的内部对账（curator 的观察，不是原书的说明）**：
+  四点振幅的普遍前因子是 i g_o⁴ C_{D₂} = i g_o⁴ · 1/(α'g_o²) = i g_o²/α'
+  （C_{D₂} = 1/(α'g_o²) 见 (6.4.14) 与 spectrum.four-tachyon-factorization-disk-normalization），
+  与原书 (6.4.23) 的 **2**i g_o²/α' 差一个因子 2；该因子应来自把六个循环序
+  按互为反向的成对合并为三项 Beta。同样的因子 2 出现在三快子振幅
+  (6.4.15) = 2i g_o/α' 与 i g_o³C_{D₂} = i g_o/α' 之间（那里的两种循环序是显式的，
+  见 spectrum.open-string-three-tachyon-amplitude）。
+  **两处一致是对前因子读图的一个独立旁证，但原书没有把这个合并过程写出来。**
 author: curator-polchinski-ch6
 created: "2026-09-11"

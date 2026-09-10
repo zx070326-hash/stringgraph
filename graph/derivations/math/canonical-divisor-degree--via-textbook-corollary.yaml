@@ -1,0 +1,46 @@
+id: math.canonical-divisor-degree--via-textbook-corollary
+target: math.canonical-divisor-degree
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: hartshorne-1977
+    loc: "Ch. IV, §1（Riemann–Roch 之后的推论；具体编号本项目无证据）"
+    note: |
+      一手读到的是引用方 Wynter (UChicago REU 2016, pp. 11–12) 的 **Corollary 5.2**，
+      逐字「deg K = 2g − 2」，其证明在同一页由 Riemann–Roch（该文 Theorem 5.1 = Hartshorne IV.1.3）
+      取 D = K 得出。**Hartshorne 原书未取得，编号不写。**
+  - ref: farkas-kra-1992
+    loc: "§III.4–§III.5, pp. 69–90, 2nd ed.（黎曼面解析路线；正文未取得）"
+    note: 只有小节标题与页码是 L1（DNB 目录扫描）；禁止写定理号。
+summary: |
+  本条不重写证明，只记账「deg K = 2g − 2 是黎曼面理论中被完整证明的标准定理，
+  本图把它当作数学输入接进来」，与 math.riemann-roch-theorem--via-eynard 同类。
+
+  教材里的证明是一行：对 D = K 用 Riemann–Roch，
+    l(K) − l(K − K) = deg K + 1 − g  ⇒  l(K) − l(0) = deg K + 1 − g ,
+  代入 l(0) = 1（X 紧连通 ⇒ 全纯函数只有常数）与 l(K) = g（全纯 1-形式空间维数 = 亏格），
+  得 deg K = 2g − 2。
+  ⚠ **这条推理没有在图里落地为边**：本图缺 l(K) = g 与 l(0) = 1 两张卡
+  （见目标卡 notes），故 `depends_on` 为空，本条是数学输入叶子。
+
+  下游只用到它的两条推论：deg(2K) = 4g − 4 与 deg(−K) = 2 − 2g。
+gaps:
+  - |
+    **没有任何一条 `loc` 精确到定理编号**（三条来源分别是：Hartshorne 原书未取得、
+    FK 正文未取得且无法判定落在 III.4 还是 III.5、Eynard 该式的编号未逐字核到）。
+    ⇒ 本条的**可核对性弱于** math.riemann-roch-theorem--via-eynard。
+    `rigorous` 的依据是「标准定理、三本教材各有完整证明」，不是定位精度。
+    researcher 拿到任一本正文后请收紧 loc。
+  - |
+    **本项目未复核任何一份证明**（与 math.riemann-roch-theorem--via-eynard 同一条诚实声明）。
+  - |
+    **只覆盖紧、连通、无边、可定向**。不可定向曲面上没有全纯 1-形式意义下的典范除子，
+    这条边**不能**被搬到 Klein 瓶 / RP₂（math-sources.md Q34）。
+notes: |
+  **若日后要把本条升级成图内论证**：需要新建 `math.holomorphic-one-forms-dimension-equals-genus`
+  （l(K) = g；Hodge 理论或 Riemann 双线性关系）与 `math.compact-connected-holomorphic-functions-are-constant`
+  （l(0) = 1）两张卡，然后挂一条 `--via-riemann-roch-at-k` 的新推导，
+  依赖 math.riemann-roch-theorem + 上述两卡。本条保留为「教科书结论」的记账。
+author: curator-riemann-roch
+created: "2026-09-11"

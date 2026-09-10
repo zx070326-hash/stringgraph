@@ -167,17 +167,53 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     来源未核实到式号），无鬼定理的有效状态相应下降。
 
     **这是记账修正，不是论证退步**：推导 --via-goddard-thorn 自身仍标 rigorous。
-    若哪天两条命题之一升到 rigorous/formalized，本测试需要相应更新。
+
+    【2026-09-11 更新（分支 agent/curator/lattice-va）】新建格点顶点代数一族卡
+    （math.lattice-vertex-algebra、worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower、
+    math.vertex-algebra-borcherds-identity、math.vertex-algebra-commutator-formula）之后，
+    两条 G–N 顶点代数推导的桥接边不再 inferred 到 effective = open 的卡，于是
+    **ddf-commute-with-virasoro 升到 rigorous**（走 --via-vertex-algebra-primary）。
+    无鬼定理 v4 仍是 physical-argument，瓶颈换成了**内积/伴随那一层**的三条依赖
+    （见下面的断言）——即 literature/extractions/math-sources.md Q36 记的那个缺口。
+
+    【2026-09-11 再更新（分支 agent/curator/ddf-algebra-split）】
+    worldsheet.ddf-transverse-oscillator-algebra 被拆为
+    worldsheet.ddf-transverse-oscillator-algebra-v2（只含对易关系）与
+    worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators（末句的同构识别）。
+    末句比较此前把 --via-zero-mode-bracket（own rigorous）压到 physical-argument，
+    拆开后 **v2 升到 rigorous**，同构卡留在 physical-argument（本质上限：
+    worldsheet.transverse-oscillator-commutators）。无鬼定理 v4 **仍是 physical-argument**，
+    瓶颈只剩内积/伴随那一层的两条。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
     assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
-    # 瓶颈就是拆出来的两条 DDF 命题
-    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "physical-argument"
+    # 顶点代数路线已把这一条接通到 rigorous
+    # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：DDFOperatorAll.lean 的
+    # lie_towerLop_ddfOp 把 ⁅L_m, A^ε_n⁆ = 0 证到**每个** m ∈ Z，新推导 --via-lean
+    # 使本卡升为 formalized（此前是 rigorous，best_derivation 为 --via-vertex-algebra-primary）。
+    # 无鬼定理 v4 的 effective **不变**，瓶颈换成别处（见下面的注释）。
+    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "formalized"
+    # 剩下的瓶颈：横向振子代数（末句比较被 transverse-oscillator-commutators 压住）
+    # 与内积/伴随那一层的两条
+    # 拆卡后对易关系本身也接通到 rigorous（G–N 零模李括号路线）
     assert (
-        effs["worldsheet.ddf-transverse-oscillator-algebra"].name
+        effs["worldsheet.ddf-transverse-oscillator-algebra-v2"].name == "rigorous"
+    )
+    # 末句的同构识别留在 physical-argument：它本质依赖光锥侧那条链
+    assert (
+        effs["worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators"].name
         == "physical-argument"
+    )
+    assert (
+        effs["worldsheet.transverse-oscillator-commutators"].name
+        == "physical-argument"
+    )
+    # 剩下的瓶颈：内积/伴随那一层的两条
+    assert effs["worldsheet.ddf-operators-adjoint"].name == "physical-argument"
+    assert (
+        effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "physical-argument"
     )
     # 纯定义卡本身不受影响
     assert effs["worldsheet.ddf-operators-v5"].name == "rigorous"
@@ -231,31 +267,116 @@ def test_ddf_operators_v4_split_into_v5_plus_propositions() -> None:
     v4 是"一卡三事"（定义 + 两条对易关系），拆成一张纯定义卡 v5 与三条命题：
     [L_m, A^i_n] = 0、[A^i_m, A^j_n] = m δδ、以及横向性 ⟹ 模态和局部有限。
     v3 → v4 的旧链条不动（v3 的 superseded_by 仍指向 v4）。
+    v5 其后又被 v6 取代（模态和定义），见 test_ddf_operators_v6_is_the_lean_mode_sum_card。
     """
     g = load_graph(ROOT)
     assert (
         g.statements["worldsheet.ddf-operators-v4"].superseded_by
         == "worldsheet.ddf-operators-v5"
     )
-    assert g.statements["worldsheet.ddf-operators-v5"].superseded_by is None
     assert g.statements["worldsheet.ddf-operators-v5"].kind == "definition"
     for sid in (
         "worldsheet.ddf-commute-with-virasoro",
-        "worldsheet.ddf-transverse-oscillator-algebra",
-        "worldsheet.ddf-transversality-gives-local-finiteness",
+        # 2026-09-11（分支 agent/curator/ddf-algebra-split）：原 ...-algebra 已换代为 -v2
+        "worldsheet.ddf-transverse-oscillator-algebra-v2",
     ):
         assert g.statements[sid].kind == "proposition"
         assert g.statements[sid].status is None, "命题的 status 由推导计算，不得手写"
         assert g.derivations_for(sid), f"{sid} 必须有推导"
-    # 无鬼定理的推导已就地换代：不再依赖 v4，改依赖 v5 + 两条对易命题
+    # 第三条命题（局部有限性）已换代到 -v2，见下一个测试
+    assert (
+        g.statements["worldsheet.ddf-transversality-gives-local-finiteness"].kind
+        == "proposition"
+    )
+    # 无鬼定理的推导已就地换代：不再依赖 v4，改依赖当前定义卡 + 两条对易命题
     deriv = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     dep_ids = {d.id for d in deriv.depends_on}
     assert "worldsheet.ddf-operators-v4" not in dep_ids
+    assert "worldsheet.ddf-operators-v5" not in dep_ids
     assert {
-        "worldsheet.ddf-operators-v5",
+        "worldsheet.ddf-operators-v6",
         "worldsheet.ddf-commute-with-virasoro",
-        "worldsheet.ddf-transverse-oscillator-algebra",
+        "worldsheet.ddf-transverse-oscillator-algebra-v2",
     } <= dep_ids
+
+
+def test_ddf_transverse_oscillator_algebra_split_into_v2_plus_isomorphism() -> None:
+    """2026-09-11 拆卡（分支 agent/curator/ddf-algebra-split）。
+
+    旧卡 worldsheet.ddf-transverse-oscillator-algebra 把两个命题捆在一起：
+    (1) [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}；(2) 末句「与世界面横向振子 α^i_n 的代数逐字同型」。
+    (2) 把旧卡的每一条推导都拉到 worldsheet.transverse-oscillator-commutators
+    （physical-argument）之下，是 --via-zero-mode-bracket（own rigorous）唯一剩下的上限。
+    拆开后：v2 只含 (1) 且 effective = rigorous；同构卡承载 (2)，effective 仍是
+    physical-argument（本质上限，不是记账问题）。
+    """
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    old = "worldsheet.ddf-transverse-oscillator-algebra"
+    v2 = "worldsheet.ddf-transverse-oscillator-algebra-v2"
+    iso = "worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators"
+
+    assert g.statements[old].superseded_by == v2
+    assert g.statements[v2].superseded_by is None
+    # 两条推导都改指 v2（git mv 改名），故旧卡没有推导
+    assert not g.derivations_for(old)
+    assert {d.id for d in g.derivations_for(v2)} == {
+        f"{v2}--via-zero-mode-bracket",
+        f"{v2}--via-conformal-weight",
+    }
+    assert effs[v2].name == "rigorous"
+
+    # v2 的两条推导都不再依赖光锥横向振子代数：那条边只承载被拆掉的末句
+    for d in g.derivations_for(v2):
+        assert "worldsheet.transverse-oscillator-commutators" not in {
+            x.id for x in d.depends_on
+        }
+
+    # 同构卡：承载末句，依赖两侧各一条对易关系，且两条边都不是 inferred
+    assert g.statements[iso].kind == "proposition"
+    assert g.statements[iso].status is None
+    iso_der = g.derivations[f"{iso}--via-commutation-relations"]
+    assert {x.id for x in iso_der.depends_on} == {
+        v2,
+        "worldsheet.transverse-oscillator-commutators",
+    }
+    assert all(not x.inferred for x in iso_der.depends_on)
+    assert effs[iso].name == "physical-argument"
+
+    # 无鬼定理 v4 只用对易关系，不用同构（其 (1b) 的 H^⊥(k) 是用 DDF 振子定义的）
+    gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
+    gt_deps = {x.id for x in gt.depends_on}
+    assert v2 in gt_deps
+    assert old not in gt_deps
+    assert iso not in gt_deps
+
+
+def test_ddf_operators_v6_is_the_lean_mode_sum_card() -> None:
+    """ddf-operators-v5 被 v6 取代（2026-09-11，lead 裁决）。
+
+    v5 用围道积分定义 A^i_n，Lean 里没有对应物；v6 改用模态和
+    A^ε_n = Σ_m (ε·α_m) V^{(n)}_m，与 `StringFormal.NoGhost.ddfOp` 逐句对应，
+    横向性 ε·k_0 = 0 是定义的参数（Lean `hεb` 是 `ddfOp` 的显式参数）。
+    图中不得再有指向 v5 的 depends_on 边。
+    """
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    assert (
+        g.statements["worldsheet.ddf-operators-v5"].superseded_by
+        == "worldsheet.ddf-operators-v6"
+    )
+    v6 = g.statements["worldsheet.ddf-operators-v6"]
+    assert v6.superseded_by is None
+    assert v6.kind == "definition"
+    assert v6.status == "formalized"
+    assert v6.formal is not None
+    assert v6.formal.get("lean_decl") == "StringFormal.NoGhost.ddfOp"
+    assert effs["worldsheet.ddf-operators-v6"].name == "formalized"
+    for d in g.derivations.values():
+        assert "worldsheet.ddf-operators-v5" not in {
+            dep.id for dep in d.depends_on
+        }, f"{d.id} 仍依赖已被取代的 ddf-operators-v5"
+
 
 
 def test_brst_ocq_equivalence_has_two_independent_derivations() -> None:
@@ -654,7 +775,7 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     assert tree["effective"] == "physical-argument"
     assert tree["own"] == "rigorous"
     assert {c["id"] for c in tree["children"]} >= {
-        "worldsheet.critical-dimension-light-cone",
+        "worldsheet.critical-dimension-light-cone-v2",
         "worldsheet.critical-dimension-brst-v2",
     }
 
@@ -975,15 +1096,71 @@ def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
 
 def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     """own_status is the max over derivations; the per-derivation list must expose that a
-    rigorous derivation can be throttled to open by a dependency."""
+    rigorous derivation can be throttled below its own status by a dependency.
+
+    2026-09-11 (branch agent/curator/lattice-va): the throttled example used to be
+    ddf-commute-with-virasoro--via-vertex-algebra-primary (own=rigorous, effective=open,
+    bridge edge inferred to an open card). That bridge is now wired to
+    worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower, so this derivation
+    reaches rigorous. The throttling behaviour was then exercised by its sibling
+    ddf-transverse-oscillator-algebra--via-zero-mode-bracket, which stayed at
+    physical-argument because the target statement's closing comparison dragged in
+    worldsheet.transverse-oscillator-commutators.
+
+    2026-09-11 (branch agent/curator/ddf-algebra-split): that closing comparison has been
+    split off into worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators, so
+    ...-algebra-v2--via-zero-mode-bracket now reaches rigorous too. The throttled example is
+    now transverse-ddf-fock-gram-matrix--via-oscillator-recursion (own=rigorous: the Gram
+    recursion is a finite induction; effective=physical-argument because its hypothesis (H2)
+    is cashed in by worldsheet.ddf-operators-adjoint).
+    """
     from stringgraph.loader import load_graph
     from stringgraph.report import status_report
 
     g = load_graph(ROOT)
+
+    # (a) two derivations on one statement: the report takes the strongest one
     rep = status_report(g, "worldsheet.ddf-commute-with-virasoro")
     ders = {d["id"]: d for d in rep["derivations"]}
     assert "worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary" in ders
+    assert "worldsheet.ddf-commute-with-virasoro--via-conformal-weight" in ders
     d = ders["worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary"]
     assert d["own"] == "rigorous"
-    assert d["effective"] == "open"
-    assert rep["effective"] == "physical-argument"
+    assert d["effective"] == "rigorous"
+    assert ders["worldsheet.ddf-commute-with-virasoro--via-conformal-weight"][
+        "effective"
+    ] == "physical-argument"
+    # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：新增 --via-lean（formalized，
+    # lie_towerLop_ddfOp，一切 m）后本卡的 effective 升到 formalized；
+    # --via-vertex-algebra-primary 仍是 rigorous、--via-conformal-weight 仍是 physical-argument，
+    # 上面那几条「多条推导取最强者」的断言因此仍然被这张卡检验着。
+    assert rep["effective"] == "formalized"
+
+    # (a') the same two-derivation pattern after the ddf-algebra split: the zero-mode
+    # bracket route (rigorous) now wins over the OPE/contour route (physical-argument)
+    rep_v2 = status_report(g, "worldsheet.ddf-transverse-oscillator-algebra-v2")
+    ders_v2 = {d["id"]: d for d in rep_v2["derivations"]}
+    dz = ders_v2["worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket"]
+    assert dz["own"] == "rigorous"
+    assert dz["effective"] == "rigorous"
+    assert ders_v2[
+        "worldsheet.ddf-transverse-oscillator-algebra-v2--via-conformal-weight"
+    ]["effective"] == "physical-argument"
+    assert rep_v2["effective"] == "rigorous"
+
+    # (b) own > effective is still exposed per-derivation
+    rep2 = status_report(g, "worldsheet.transverse-ddf-fock-gram-matrix")
+    ders2 = {d["id"]: d for d in rep2["derivations"]}
+    d2 = ders2["worldsheet.transverse-ddf-fock-gram-matrix--via-oscillator-recursion"]
+    assert d2["own"] == "rigorous"
+    assert d2["effective"] == "physical-argument"
+    assert rep2["effective"] == "physical-argument"
+
+
+def test_validate_warns_when_derivation_target_is_superseded():
+    from stringgraph.validate import validate
+
+    g = load_graph(ROOT)
+    msgs = [p.message for p in validate(g) if p.severity == "warning" and "is superseded by" in p.message]
+    # duality.ads-cft is superseded by holography.ads5-cft4-duality-v2 and still has a derivation
+    assert any("duality.ads-cft" in m for m in msgs)

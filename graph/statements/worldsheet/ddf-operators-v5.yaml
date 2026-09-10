@@ -180,5 +180,17 @@ notes: |
     · worldsheet.vertex-operator-adjoint —— 陈述逐字声明用 (α)，未动；
     · worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint —— summary 第 2 步原用 (β)，
       **已改写为 (α)**（本图内此前唯一的例外）。
+
+  【2026-09-11（五）：本卡被 worldsheet.ddf-operators-v6 取代（lead 裁决），curator】
+  v6 把 A^ε_n 的**定义**由围道积分改写为模态和 A^ε_n = Σ_m (ε·α_m) V^{(n)}_m，
+  并把横向性 ε·k_0 = 0 提升为定义的**参数**。理由：
+  `formal/StringFormal/NoGhost/DDFOperator.lean` 的 `ddfOp` 就是这样定义的
+  （`hεb : dotVec η ε b = 0` 是该定义的显式参数，因为求和的局部有限性本身依赖横向性），
+  而本卡的围道积分在 Lean 中没有对应物。以本卡为定义卡会让整条 DDF 支路的 formalized 无处落脚。
+  **围道写法退为文献写法**；「围道 ⟹ 模态和」的字典成为一条 open 缺口，登记在 v6 的 notes
+  （本图最接近的 worldsheet.ope-pole-mode-commutator-dictionary 是形式分布版，effective = open）。
+  本卡 status 仍为 rigorous、内容不变，只是不再是下游引用的定义卡；
+  上面【2026-09-11（四）】关于指标约定 (α) 的裁决在 v6 中原样保留。
+superseded_by: worldsheet.ddf-operators-v6
 author: curator
 created: "2026-09-11"

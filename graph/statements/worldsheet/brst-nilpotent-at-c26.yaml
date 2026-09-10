@@ -11,7 +11,24 @@ sources:
   - ref: fgz-1986
     loc: "Proposition 1.2（d² = 0，在正文假设 H²(g)=0、γ=0 下）；§2.1 对 Virasoro 情形取 π(c) = 26"
   - ref: polchinski-1998-v1
-    loc: "§4.3，约 eq. (4.3.2)–(4.3.6)"
+    loc: "§4.3, **eq. (4.3.9)**, p.133（{Q_B, Q_B} = 0 only if c^m = 26 —— **陈述式**）；(4.3.10) 是 j_B j_B 的 OPE（结论由其单极点读出）；(4.3.11) 是 T j_B 的 OPE（j_B 只在 c^m = 26 时是张量）；原书注明「The shortest derivation of this uses the Jacobi identity, **exercise 4.3**」"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——一处式号订正】
+
+      ⚠ **订正**：旧 loc 写「约 eq. (4.3.2)–(4.3.6)」是区间猜测，且本图别处把这条挂在 (4.3.10)。
+      **原书 (4.3.9) 才是陈述式**；(4.3.10) 是 OPE
+        j_B(z)j_B(0) ∼ −((c^m−18)/2z³)c∂c − ((c^m−18)/4z²)c∂²c − ((c^m−26)/12z)c∂³c
+      原书逐字：「This requires a bit of calculation, being careful about minus signs from
+      anticommutation. **The single pole implies that {Q_B,Q_B} = 0 when c^m = 26.**」
+
+      **两条关于论证强度的原书自述（对本节点的 status 记账要紧）**：
+      1. 正文的 (4.3.10) 路线原书自称 "requires a bit of calculation"，且**只把单极点系数写出**，
+         中间步骤未展开（属 docs/STATUS_LEVELS.md「断言 + 骨架」档位）。
+      2. **最短的推导是习题**：原书逐字「The shortest derivation of this uses the Jacobi identity,
+         **exercise 4.3**」——即 Jacobi 路线在原书里没有正文推导。
+      本节点的自身 status 由 fgz-1986 Proposition 1.2 承载，不受这两条影响；
+      但凡以 polchinski-1998-v1 为唯一来源的 Q_B² = 0 推导都不得高于 physical-argument。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）与 §12.10 表 B 第 11 项。
 tags: [brst, bosonic-string]
 notes: |
   为什么单独建这个弱节点：FGZ 的无鬼定理（Theorem 2.8）只用到"假设 c=26 则复形微分平方为零"，

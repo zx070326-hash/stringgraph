@@ -1,0 +1,29 @@
+id: compact.circle-closed-string-mass-formula--via-l0-sum
+target: compact.circle-closed-string-mass-formula
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.left-right-momenta
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      提供未紧化时的 (α'/2)m² = N + Ñ − a − ã 与 a = ã = 1（D = 26）。
+      ⚠ 原书 §8.3 用的是 (4.3.31)/(4.3.32) 的协变/BRST 形式，本图这条上游是光锥形式；
+      「两者在物理态上给同一条质量壳」在抽取记录中没有对应位置，故标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.1)–(8.3.2)，p.241"
+    note: |
+      抽取记录 polchinski-1998-v1#E126（L1，Schrans §8.26–§8.27，笔记 p.449–450）。
+summary: |
+  紧化后零模的贡献按左右行分开：L_0 里紧化方向的 α_0² 给 (α'/4)k_L²，
+  L̄_0 里给 (α'/4)k_R²。于是质量壳分成两支
+    m² = (4/α')(N − 1) + k_L²    和    m² = (4/α')(Ñ − 1) + k_R².
+  取两支的**和**（除以 2）：m² = (2/α')(N + Ñ − 2) + (k_L² + k_R²)/2，
+  代入 k_{L,R} = n/R ± wR/α' 得 (k_L² + k_R²)/2 = n²/R² + w²R²/α'²，即所求。
+gaps:
+  - "把紧化方向的零模从 p² 里「单独拿出来」这一步依赖 L_0 中零模项按方向可分，来源未写出前提（例如紧化方向与非紧方向在度规上不混合）。"
+  - "光锥形式（本图上游）与协变/BRST 形式（原书 (4.3.31)/(4.3.32)）的质量壳等同，本图没有节点承载；上游边因此标 inferred。"
+  - "a = ã = 1 经由上游节点 worldsheet.closed-string-mass-formula 引入，该节点自身的截距论证是光锥洛伦兹不变性（physical-argument）。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

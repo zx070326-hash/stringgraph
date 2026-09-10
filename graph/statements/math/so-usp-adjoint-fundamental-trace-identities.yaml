@@ -38,7 +38,27 @@ sources:
       **该文的措辞同样是「Let us note without proof that…」**，即第二个来源也不证明。
       此处 (12.23) 用的是 SO(n) 的原版归一化，与 conv.gauge-trace-normalization 相容，
       不需要 convention_map；Bilal 的重标度只出现在 E₈ 一段（见该约定节点 notes 第 2 条）。
-  - ref: antonelli-2015
+  - ref: gsw-1987-v2
+    loc: "§10.1.2, p. 149，(10.1.11)–(10.1.14)：(10.1.11) t_{ab,cd} = ½(λ_{ac}δ_{bd} − λ_{bc}δ_{ad} − λ_{ad}δ_{bc} + λ_{bd}δ_{ac})；(10.1.12) Tr t⁶ = (n − 32) tr λ⁶ + 15 tr λ⁴ tr λ²（SO(n)）；(10.1.13) 同式 (n + 32)（USp(n)）；**(10.1.14) 同式系数为 n（U(n)）**"
+    note: |
+      **L1 逐页读图**（抽取记录 literature/extractions/gsw-1987-v2.md **E4**）。
+      与本节点在 Ω₁₂ 一行**逐项一致**（GSW 的 n = 本节点的 N，GSW 的 tr/Tr 定义与本图相同，
+      p. 149 逐字「'Tr' to denote a trace in the adjoint representation and 'tr' … in the fundamental」）。
+      引导句是「**it is easy to show that**」，**同样不给证明**。
+      ⚠ **本条只列作交叉核验与 notes 第 3 条的来源，不改本节点的陈述**：
+      GSW 的 U(n) 支不在本节点的陈述范围内（陈述明写「本节点不断言 … u(N) 等未涉及」）。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 99, (12.2.19a-c)：Tr_a(t²) = (n−2)Tr_v(t²)、Tr_a(t⁴) = (n−8)Tr_v(t⁴) + 3Tr_v(t²)Tr_v(t²)、Tr_a(t⁶) = (n−32)Tr_v(t⁶) + 15Tr_v(t²)Tr_v(t⁴)（**只给 SO(n) 支**）"
+    note: |
+      **L1 原书**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md **E12**）。
+      **第三处独立转录**：与 GS 1984 (12c)、GSW (10.1.12) 在 l = −1 时**逐项系数完全一致**。
+      ⚠ **记号不是同一套**：Polchinski 的 **Tr_v = 规范群矢量表示迹、Tr_a = 伴随迹**，
+      而他的 **tr 是切空间（Lorentz）迹**，不能作用在 F 上；本节点按 GS 那套写
+      （tr = 基本迹、Tr = 伴随迹）。对译：**Tr_v ↔ tr，Tr_a ↔ Tr**（抽取记录 §1.3 的对照表）。
+      ⚠ **同样不给证明**：原书把它留作 **Exercise 12.1**（p. 134 逐字「Derive the SO(n) trace identities
+      (12.2.19). You can assume a basis in which the generator t is a linear combination of the commuting
+      generators H^i.」）。⇒ **三个来源全都不证**，本节点 status 维持 physical-argument 的理由更充分。
+      ⚠ Polchinski **不给 USp(n) / U(n) 支**。
     loc: "p.10 Table 2（与 GS (12) 一致的迹恒等式表）；§2.3.1（SO(n) 一路的推导思路）"
     note: |
       L1（抽取记录 E7 备注）。§2.3.1 的思路：伴随表示实现为基本表示的**外平方**，
@@ -63,5 +83,31 @@ notes: |
 
   【查重】新增前跑过 `stringgraph search anomaly / 反常 / trace / SO(32) / supergravity`：
   全图此前没有 consistency 区节点，math 区也没有任何迹恒等式节点，无重复。
+
+  【3. ★ U(n) 支：GSW (10.1.14)（2026-09-11 补记，**不改本节点陈述**）】
+  GSW Vol. 2 §10.1.2 p. 149 在 (10.1.12)(10.1.13) 之后**多给了一支 GS 1984 没有的**：
+
+      **(10.1.14)  Tr t⁶ = n · tr λ⁶ + 15 · tr λ⁴ tr λ²      （U(n)）**
+
+  即在本节点的记号里相当于把 l 取作 **0**：三支统一写成 **Ω₁₂ = (N + 32 l) tr F⁶ + 15 tr F² tr F⁴**，
+  **l = −1（SO(N)）/ +1（USp(N)）/ 0（U(N)）**。
+  后果：U(n) 支的 tr F⁶ 系数是 n 本身，**对一切 n ≥ 1 恒不为零**，故 U(n) 在纯规范反常一路上被排除。
+  ⚠ **本节点的陈述不含 U(N)**（陈述里明写「u(N) 等未涉及」），本条只是备查；
+  要正式承载 U(N) 支须**新建节点**（项目原则 1）。GSW 同处引导句仍是「it is easy to show that」，无证明。
+
+  【4. ★★ l = η 的识别（**inferred**，2026-09-11）】GSW 在 §10.2.1 p. 152 用**同样的 −1 / +1 / 0**
+  作为**世界面扭转因子 η**（逐字「a factor due to twisting an odd number of lines
+  (−1 for SO(n), +1 for USp(n) and 0 for U(n))」），且 (10.2.36) 的 η·32/n 与 GS (12c) 的 N + 32l 结构一致。
+  ⇒ **「GS 的记号 l」= 「GSW 的扭转因子 η」**，这给了 l 一个 GS 从未给出的世界面来历。
+  ⚠ **这一等同是抽取者/curator 的推断，不是原文**：GSW 不引 GS 的记号，GS 全文不提「扭转」
+  （抽取记录 literature/extractions/gsw-1987-v2.md **Q5**）。
+  凡使用这一等同的边必须标 `inferred: true`——目前唯一使用它的是
+  `consistency.type-i-hexagon-so32-iff--via-planar-nonorientable-ratio` 对本节点/
+  math.tr-f6-coefficient-vanishing 的那条边，已标。
+  本节点的 notes 第 2 条（「本图不替 l 补解释」）因此仍然成立：解释记在这里，**不进陈述**。
+
+  【5. Lean 岛候选 A6】抽取记录 gsw-1987-v2.md §5.4：把三支统一成 l ∈ {−1, 0, +1}，
+  再解 N + 32l = 0（`omega` 一行），可把 GSW 的「and for no other group」变成可机检陈述，
+  **且把 U(n) 支一并覆盖**（GS 1984 没有这一支）。
 author: curator
 created: "2026-09-11"

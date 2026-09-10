@@ -26,14 +26,22 @@ statement: |
 uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.11)（BRST 流作为主场），p.133"
+    loc: "§4.3, eq. (4.3.11), p.133（逐字：T(z)j_B(0) ∼ ((c^m−26)/2z⁴)c(0) + (1/z²)j_B + (1/z)∂j_B，故 j_B 只在 c^m = 26 时是张量）"
     note: |
-      式号经 schrans-2020 目录核实（`4.27 p 133: Eq (4.3.11) The BRST Current as a Primary
-      Field`），其描述为「j_B 只有在 c^tot = 0 时才是主场」。**表达式未核实，原书未核对。**
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E64 的备注。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——**表达式现已核实**】
+      式号与内容逐字确认，旧 note 的「表达式未核实，原书未核对」撤销。
+      注意原书这里用的是 **c^m**（物质中心荷），而 §3.4 的 (3.4.23) 写的是 **D = 26**；
+      写成 c^m = 26 的是 §4.3 这一带（(4.3.9)/(4.3.10)/(4.3.11)），不是 §3.4。
+      即：一般物质 CFT 的临界条件应挂 §4.3，不是 §3.4（见 §12.2 对 Q6 的裁定）。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E62–E67）。
   - ref: polchinski-1998-v1
-    loc: "§4.3，eq. (4.3.4)（j_B 与 b、c、物质算子的 OPE），p.132"
-    note: 式号经 schrans-2020 目录核实（`4.22 p 132`），表达式未核实。
+    loc: "§4.3, eq. (4.3.3), p.131（BRST 流 j_B = cT^m + ½:cT^g: + (3/2)∂²c = cT^m + :bc∂c: + (3/2)∂²c）、(4.3.4a,b,c)（j_B 与 b、c、物质算子的三条 OPE），p.132"
+    note: |
+      【原书核实 2026-09-11，L1】(3/2) 这个系数与 j_B 的两种写法现为逐字核实。
+      原书对末项有一句要紧的自述：「The final term in the current is a total derivative and does
+      not contribute to the BRST charge; **it has been added by hand to make the BRST current a tensor**.」
+      → 即 (4.3.11) 的「j_B 是张量」这一性质**部分地是构造出来的**（靠人为加全导数项），
+      而剩下的 (c^m−26)/2z⁴ 项才是真正的约束。引用本节点时要区分这两半。
 tags: [brst, cft, primary-field, critical-dimension, bosonic-string]
 notes: |
   为什么值得单建节点：这是"D = 26"在图中的**第四种表现形式**（前三种：光锥洛伦兹不变性、

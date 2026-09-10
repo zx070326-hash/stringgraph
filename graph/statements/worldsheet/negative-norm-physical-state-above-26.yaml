@@ -68,10 +68,24 @@ sources:
       不裁决。见 literature/extractions/brst-cohomology-sources.md §3.2。
       本命题的证明**不依赖**这条来源，它是本仓库内的独立构造。
   - ref: polchinski-1998-v1
-    loc: "§4.1 末（p.124–125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本"
+    loc: "§4.1, p.124 正文的结论性断言（「If D > 26, there are negative-norm states」）+ **exercise 4.1**（p.143，原书逐字「The derivation is left to the reader」）；§4.4 是 BRST 版本，属另一条陈述"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E58（页码已核实，原文措辞未核实）。
-      Polchinski 不给 D > 26 的显式负模态构造。经 conv.intercept-sign-a 换算 A = −1 ↔ a = 1。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）】
+
+      ⚠ 旧 loc 写「§4.1 末（p.124–125）：只陈述结论，证明推迟到 §4.4 的 BRST 版本」——
+      **前半句对，后半句不准**。原书对 D > 26 的负模态**没有**把证明推给 §4.4，
+      而是**留成习题 4.1**：
+        p.124「If D > 26, there are negative-norm states; if D < 26 the OCQ spectrum has positive
+              norm but more states than in light-cone quantization. **The derivation is left to the reader.**」
+        p.143「**4.1** Extend the OCQ, for A = −1 and general D, to the second excited level of the
+              open string. **Verify the assertions made in the text about extra positive- and
+              negative-norm states.**」
+      §4.4 证的是 D = 26 那一侧（BRST 上同调正定），**不覆盖 D > 26 的反例**。
+
+      → 「Polchinski 不给 D > 26 的显式负模态构造」这句**仍然成立且现在是 L1**：
+        原书连推导都没做，只写了断言并留成习题。本命题的形式化构造（本仓库 LevelTwo.lean）
+        因此比原书**更强**，不是复现原书。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E57/E58）与 §12.10 表 B 第 12 项、表 C 第 5 项。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant, no-ghost, formalized]
 notes: |
   【本卡与 worldsheet.no-ghost-theorem-v4 第 (2) 条的关系】v4 的第 (2) 条是

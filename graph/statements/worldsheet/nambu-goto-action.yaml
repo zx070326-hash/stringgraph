@@ -14,17 +14,27 @@ uses: [worldsheet.induced-worldsheet-metric]
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.9)"
+    loc: "§1.2：诱导度规 `h_ab = ∂_aX^μ∂_bX_μ` 是 **(1.2.8)**（p.11）；Nambu–Goto 作用量在原书拆成两式 **(1.2.9a)** `S_NG = ∫_M dτdσ 𝓛_NG` 与 **(1.2.9b)** `𝓛_NG = −(1/2πα′)(−det h_ab)^{1/2}`（p.11）；`T = 1/(2πα′)` 是 **(1.2.10)**（p.11）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E3、#E4，证据等级
-      [页码已核实/式号未核实]。拉氏量前因子 -1/(2πα') 与单位长度质量
-      ρ = T = 1/(2πα') 经 Headrick 习题解答 1.1(b) 第 (4)(5)(7) 式确认（内容已核实）；
-      公式号 (1.2.9) 未核对原书，硬约束是必在已核实的 (1.2.15)（p.12）之前。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E3、#E4。
+      **【订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      旧 loc「约 eq. (1.2.9)」有两处不准：
+      1. **诱导度规是 (1.2.8)，不是 (1.2.9)**（本图另有 worldsheet.induced-worldsheet-metric 承载它）；
+      2. **Nambu–Goto 在原书里是 (1.2.9a) + (1.2.9b) 两式**（积分式 + 携带 −1/(2πα′) 前因子的
+         拉氏量密度），引用时应写 **(1.2.9a,b)**。
+      前因子 −1/(2πα′) 此前只由 Headrick 习题解答间接确认，现由原书 (1.2.9b) 直接确认，
+      证据等级升到 **L1**；「式号未核实」与「硬约束在 (1.2.15) 之前」两句作废。
+      ⚠ `T = 1/(2πα′)`（(1.2.10)）原书标 **"(exercise 1.1)"**，**正文不推导**。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, action, classical, nambu-goto]
 notes: |
   E4（张力与 Regge 斜率的关系 T = 1/(2πα')）不另建节点：它已由约定节点
-  conv.alpha-prime-regge 承载（该节点的 sources 已按抽取记录 Q1 修正为
-  §1.2 约 (1.2.9)–(1.2.10)）。本节点直接引用该约定。
+  conv.alpha-prime-regge 承载（该节点的 sources 于 2026-09-11 按原书页图定为
+  **§1.2, eq. (1.2.10), p.11**；此前的 (1.2.3) 与「约 (1.2.9)–(1.2.10)」都已作废）。
+  本节点直接引用该约定。
+  ⚠ 由此带来的一个记账点：**T = 1/(2πα') 在 Polchinski 正文里没有推导，是 exercise 1.1**。
+  作为 convention 它不参与状态传播；但若日后有节点把它当**命题**用，
+  必须另找来源或标 physical-argument。
 
   平方根形式使 S_NG 不适合路径积分量子化，这是引入 Polyakov 作用量
   （worldsheet.polyakov-action）的动机；两者的经典等价见

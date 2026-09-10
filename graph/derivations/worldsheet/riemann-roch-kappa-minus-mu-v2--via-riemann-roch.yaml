@@ -1,0 +1,156 @@
+id: worldsheet.riemann-roch-kappa-minus-mu-v2--via-riemann-roch
+target: worldsheet.riemann-roch-kappa-minus-mu-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.quadratic-differentials-minus-holomorphic-vector-fields
+    inferred: true
+    note: |
+      **本条的数学核心**：提供 dim_C H⁰(X, K²) − dim_C H⁰(X, K^{−1}) = 3g − 3，对一切 g 成立。
+      标 inferred：**没有任何一份文献把 Riemann–Roch 与弦论的 κ、μ 接在一起**——
+      Polchinski §5.2/§5.3 走的是鬼数反常，Eynard 讲义里根本没有 κ、μ 这两个量。
+      这条链是 researcher 在 literature/extractions/math-sources.md §42.2/§42.10 提出、
+      本推导落地的**图内构造**（§42.2 开头逐字声明「这段是我自己做的推导，不是从哪本书上抄的」）。
+  - id: worldsheet.ckv-holomorphic-in-conformal-gauge
+    inferred: true
+    note: |
+      **桥 (B1)**：κ = 2·dim_C H⁰(X, K^{−1})。
+      该卡给出「共形规范复坐标下 CKV 方程 ⇔ ∂̄ δz = 0，且 δz̄ = (δz)‾ 使变换保实；
+      κ = dim_R ker P₁ 等于世界面上处处正则的全纯向量场的**实**维数」。
+      本推导再把「处处正则的全纯向量场空间」认同为黎曼面 X 的 H⁰(X, K^{−1})（全纯切丛的整体截面），
+      并用 δz̄ = (δz)‾ 得实维 = 2×复维。
+      标 inferred 的两个理由（math-sources.md §42.8）：
+      (a) **本轮没有找到任何带编号的数学来源**这样陈述「CKV ↔ 全纯向量场」；
+      (b) 该卡是**共形规范**下的局部陈述，把它接到 X 上的层上同调需要全局复结构，
+          见本推导 gaps 第 2 条。
+  - id: worldsheet.moduli-holomorphic-quadratic-differentials
+    inferred: true
+    note: |
+      **桥 (B2)**：μ = 2·dim_C H⁰(X, K²)。
+      该卡给出「共形规范复坐标下模的条件 ⇔ ∂_z̄ δ'g_zz = 0，即 δ'g_zz 是全纯二次微分；
+      μ 等于处处正则的全纯二次微分空间的**实**维数」。δ'g_z̄z̄ = (δ'g_zz)‾ 给出因子 2。
+      标 inferred 的理由同上：这一步实质上是 Teichmüller 理论（coker P₁ ≅ H⁰(K²)），
+      **本轮无带编号来源**（math-sources.md §42.8、Q33），且该卡自己的 notes 也明说
+      「本图**不**声称这个数学陈述，因为来源里没有它」。
+  - id: worldsheet.conformal-killing-equation
+    note: κ 的定义（ker P₁ 的实维数）。本推导算的就是这个数。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: μ 的定义（ker P₁^T 的实维数，即无迹且无散度的度规变分）。本推导算的就是这个数。
+  - id: worldsheet.conformal-gauge-fixing
+    inferred: true
+    note: |
+      **提供两座桥所处的语境**（共形规范 ĝ_ab = δ_ab，残余对称性是共形变换）。
+      标 inferred 的理由：该卡的 statement 明写「**在局部**」并声明「本节点**不**断言全局规范固定的
+      存在性」，而本推导需要的是**整体**复结构（把 M 变成黎曼面 X）。
+      这一步（二维 Riemann 度规 ⇒ 等温坐标 ⇒ 过渡函数全纯 ⇒ 复结构）本图既无节点也无来源，
+      见 gaps 第 2 条。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}；
+      本推导只用到**拓扑等式** χ = 2 − 2g（闭、可定向、无边时 b = 0），与号差无关。
+      继承该约定登记的缺口。
+    note: 提供 χ = 2 − 2g，把数学侧的 3g − 3 换算成 3χ。
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（arXiv:1805.06405v1）——经 math.riemann-roch-theorem 与 math.quadratic-differentials-minus-holomorphic-vector-fields 接入"
+    note: |
+      本条只承载**数学输入**。⚠ 该讲义中**没有** κ、μ 这两个量，也没有本推导的组合；
+      组合是本图做的（math-sources.md §42.2 声明为抽取者的推算）。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.7)（共形 Killing 方程 = κ 的定义）、(5.2.6a)(5.2.6b)（模的条件 = μ 的定义）、(5.2.8)（共形规范复坐标下两者化为全纯性）, p.151–152；结论 (5.2.9), p.152"
+    note: |
+      本条承载**物理量的定义与结论的形状**（κ、μ 是什么，κ − μ = 3χ 长什么样）。
+      ⚠ 原书**没有走数学上的 Riemann–Roch 路线**：它在 §5.3 用鬼数流的 Weyl 反常导出，
+      且比例常数用球面这一个例子标定（见姊妹推导 --via-ghost-number-anomaly）。
+      **本推导不是原书的论证。**
+      式号强度：(5.2.7) 有源内冲突（采目录值，见 worldsheet.conformal-killing-equation 的 note）；
+      (5.2.8) 来自 schrans-2020 目录；(5.2.9) 是本章最强的一条（正文级引用）。原书均未核对。
+summary: |
+  **数学路线，不用球面标定、不用按亏格分情形。**
+
+  设 M 紧、无边、连通、可定向，带欧氏度规 g_ab。
+
+  (0) **复结构**：二维 Riemann 度规经 diff × Weyl 化到共形规范 ĝ_ab = δ_ab
+      （worldsheet.conformal-gauge-fixing，**只在局部**），各片的复坐标 z = σ¹ + iσ² 之间
+      过渡函数全纯，于是 M 带上复结构、成为**紧黎曼面 X**，亏格 g，χ = 2 − 2g。
+      ⚠ 这一步的全局性是本推导的缺口，见 gaps 第 2 条。
+
+  (1) **桥 (B1)**：共形 Killing 方程 (P₁δσ)_ab = 0 在共形规范复坐标下就是 ∂̄ δz = 0，
+      即 δz 是 X 上处处正则的**全纯向量场**；δz̄ = (δz)‾ 由保实性定死。故
+        κ = dim_R ker P₁ = 2 · dim_C H⁰(X, K^{−1}) 。
+
+  (2) **桥 (B2)**：模的条件（无迹 + 无散度）在同一规范下就是 ∂_z̄ δ'g_zz = 0，
+      即 δ'g_zz 是**全纯二次微分**；δ'g_z̄z̄ = (δ'g_zz)‾。故
+        μ = dim_R ker P₁^T = 2 · dim_C H⁰(X, K²) 。
+
+  (3) **数学输入**（一次 Riemann–Roch，取 D = 2K，用 deg K = 2g − 2）：
+        dim_C H⁰(X, K²) − dim_C H⁰(X, K^{−1}) = 3g − 3     （对**一切** g）。
+
+  (4) **合成**：
+        κ − μ = 2[ dim_C H⁰(K^{−1}) − dim_C H⁰(K²) ]
+              = −2 (3g − 3)
+              = 6 − 6g
+              = 3 (2 − 2g) = 3 χ 。   ∎
+
+  **两处与物理路线的实质差别**（这是本条存在的理由）：
+  - **比例常数 3 是算出来的**，不是用球面 (χ, μ, κ) = (2, 0, 6) 标定的。
+    姊妹推导 --via-ghost-number-anomaly 的 gap 第 1 条（含其「缺 μ(S₂) = 0」的残余）
+    在本条**根本不出现**——本条不需要任何单个曲面的数值。
+  - **不需要按 g = 0 / 1 / ≥ 2 分情形**：Riemann–Roch 对任意除子成立，
+    作差之后 g = 0、g = 1 不是例外。
+  检验（结论的推论，不是输入）：g = 0 给 κ − μ = 6 = 3·2 ✓；g = 1 给 0 = 3·0 ✓。
+gaps:
+  - |
+    **★ 主缺口：两座桥只到 physical-argument，本条的有效状态因此被压在 physical-argument。**
+    (B1) κ = 2·dim H⁰(K^{−1}) 与 (B2) μ = 2·dim H⁰(K²) 把**物理定义的计数**
+    （共形 Killing 方程的解数、无迹横向度规变分的模数）等同于**层上同调维数**，
+    这**不是 Riemann–Roch 的内容**。researcher 本轮**没有找到任何带编号的数学来源**
+    陈述这两条（math-sources.md §42.8、Q33；候选入口：Teichmüller 理论、Ahlfors–Bers 原始文献、
+    Farkas–Kra V.2）。
+    ⇒ **这是本图刻意暴露的结论：数学路线的瓶颈不在 Riemann–Roch，而在这两座桥。**
+    补上带编号来源、把两张桥卡提到 rigorous，本条的有效状态才会跟着上去。
+  - |
+    **共形规范的全局性未论证**：本推导第 (0) 步要把带度规的闭曲面变成**黎曼面**
+    （等温坐标的存在性 + 过渡函数全纯），而 worldsheet.conformal-gauge-fixing 的 statement
+    明写「**在局部**」且「**不**断言全局规范固定的存在性」。
+    本图既无「等温坐标存在性（Korn–Lichtenstein）」节点，也无来源。
+    ⚠ 注意这与「全局规范固定」不是同一件事：本推导只需要**复结构**，
+    不需要把度规整体化到单位形式（后者恰恰因为存在模而不可能）。
+  - |
+    **复维 → 实维的因子 2 只由桥卡的散文承载**：κ、μ 是**实**计数，H⁰ 是**复**维数，
+    两者差一个因子 2，依据是 δz̄ = (δz)‾、δ'g_z̄z̄ = (δ'g_zz)‾（保实性）。
+    图里没有单独的节点记这一步；若因子 2 记错，结论会差一倍。
+  - |
+    **缺 reviewer 独立复核记录**：即便两座桥日后升到 rigorous，本条自身按
+    docs/STATUS_LEVELS.md 的 rigorous 例外条款还需要 `reviewer-verified: <agent>, <date>`
+    （第 (4) 步是三行算术）。目前两条都不满足，故 kind/status 都是 physical-argument。
+  - |
+    **只覆盖可定向**（目标卡 v2 已相应收窄）。Riemann–Roch 是黎曼面上的定理，
+    不可定向世界面（Klein 瓶、RP₂、Möbius 带）要走定向双覆盖 + 对合不变子空间，
+    **本图无任何来源**（math-sources.md Q34）。这也是 v1 被 supersede 的原因。
+  - |
+    **单个数值不由本条给出**：本条只给差。要断言 μ(S₂) = 0 或 g ≥ 2 时 κ = 0，
+    还需要「deg D < 0 ⇒ l(D) = 0」（math.riemann-roch-theorem 的「不断言 (b)」），
+    本图尚无该节点。
+notes: |
+  **本推导与姊妹推导的分工**：worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly
+  是 Polchinski 的书内路线（鬼数流 Weyl 反常 + 球面标定），本条是数学路线。
+  两条并存，工具取有效状态高者；目前两条都是 physical-argument，但**弱点完全不同**：
+  前者弱在「常数靠单例标定 + 路径积分形式操作」，后者弱在「两座桥 + 全局复结构」。
+  这正是本项目希望暴露的信息。
+
+  **升级路线图（按性价比排序）**：
+  1. 给 (B1)(B2) 找带编号的数学来源（math-sources.md Q33）——**这一步收益最大**，
+     它同时把两张桥卡和本条抬起来；
+  2. 补「等温坐标存在性」节点（gaps 第 2 条）；
+  3. 请 reviewer 复核第 (4) 步的算术并补 `reviewer-verified`；
+  4. 补「deg D < 0 ⇒ l(D) = 0」，那会让图能算单个的 κ、μ 而不只是差。
+  ⚠ **不要**指望「再登记一本 Riemann–Roch 教材」能提高本条——数学定理那一环已经是 rigorous
+  （math.riemann-roch-theorem），瓶颈不在那里。
+
+  **形式化**：Mathlib 无 Riemann–Roch（见 math.riemann-roch-theorem 的 notes），
+  本链条不得标 formalized。
+author: curator-riemann-roch
+created: "2026-09-11"

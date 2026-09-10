@@ -16,11 +16,21 @@ uses_conventions:
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.4, eq. (2.4.23)（T 的共形变换）、(2.4.27)（Schwarzian 导数），p.48"
+    loc: "§2.4, eq. (2.4.26), p.48（**有限形式**：(∂_z z')² T'(z') = T(z) − (c/12){z', z}）、(2.4.27)（Schwarzian 导数 {f,z} = (2∂³_zf ∂_zf − 3∂²_zf ∂²_zf)/(2∂_zf ∂_zf)）；无穷小形式是 (2.4.24)（一般 c）与 (2.4.23)（自由标量特例 c = D）"
     note: |
-      两个公式号经 schrans-2020 目录核实（`2.25 p 48`、`2.26 p 48`）。
-      **系数 -(c/12) 与 Schwarzian 的具体写法为忠实转述，未核对原书**；
-      不同文献在此处的符号与因子（c/12 vs c/6）随 T 的归一化而异。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——一处式号订正】
+
+      ⚠ **订正**：旧 loc 把「T 的共形变换」挂在 (2.4.23)。原书 **(2.4.23) 是自由标量的特例**
+      （系数写作 D/12），一般 c 的**无穷小**变换律是 **(2.4.24)**，
+      而本节点陈述的**有限**变换律（带 Schwarzian）是 **(2.4.26)**。
+      **(2.4.27) 不变**（Schwarzian 导数的定义式，L1 确认）。
+
+      ⚠ **系数 −(c/12) 与写法**：原书 (2.4.26) 逐字是 `(∂_z z')² T'(z') = T(z) − (c/12){z', z}`，
+      与本节点 statement 的第一式 `T'(w) = (∂w/∂z)^{−2}[T(z) − (c/12)S(w;z)]` 逐字同型
+      （把 z' 记作 w、{·,·} 记作 S）。**「系数 −(c/12) 未核对原书」这句现予撤销**，
+      但 Schwarzian 本身原书用的是 `{f,z} = (2f'''f' − 3f''f'')/(2f'f')` 这个写法，
+      与 statement 里的 `w'''/w' − (3/2)(w''/w')²` 恒等而不逐字（约去 2f'f' 即得）。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E33）。
 tags: [cft, central-charge, schwarzian, energy-momentum-tensor]
 notes: |
   这条的下游用途：柱面与平面之间的 T 的关系（worldsheet.cylinder-plane-l0-shift），

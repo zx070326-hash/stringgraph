@@ -15,11 +15,44 @@ uses_conventions:
   - conv.worldsheet-complex-coords
 sources:
   - ref: polchinski-1998-v1
-    loc: "§2.1, eq. (2.1.23)（运动方程作为算子方程）与 (2.1.24)（接触项），p.36"
+    loc: "§2.1, eq. (2.1.17), p.35（**运动方程作为算子方程** ∂∂̄X̂^μ(z,z̄) = 0）；接触项是 (2.1.24) ∂∂̄ ln|z|² = 2πδ²(z,z̄)，配 (2.1.20) (1/πα')∂_z∂_z̄⟨X^μX^ν⟩ = −η^{μν}δ²(z−z',z̄−z̄')"
     note: |
-      两个公式号经 schrans-2020 目录逐条核实
-      （`2.5 p 36: Eq. (2.1.23) The Equation of Motion as Operator Equation`、
-      `2.6 p 36: Eq. (2.1.24)`）。内容为忠实转述。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——一处式号订正】
+
+      ⚠ **订正**：旧 loc 把「运动方程作为算子方程」挂在 (2.1.23)，那是 [S] 的**条目标题**，
+      不是原书内容。原书 **(2.1.23)** 是 `∂₁∂̄₁ :X^μ(z₁,z̄₁)X^ν(z₂,z̄₂): = 0`
+      （即**正规序积**满足运动方程，见本节点 notes 末句）；
+      算子方程 `∂∂̄X̂^μ(z,z̄) = 0` 本身是 **(2.1.17)**。
+      **(2.1.24) 不变**（接触项，L1 确认）。
+
+      本节点 statement 里的两条内容因此各有出处：
+        「⟨∂∂̄X^μ A_1…A_n⟩ = 0 在插入点之外」 → (2.1.17)
+        「重合点的接触项 ∂∂̄⟨X^μX^ν⟩ = −πα'η^{μν}δ²(z,z̄)」 → (2.1.20)/(2.1.24)
+      而 notes 末句「正规序积满足运动方程」的准确出处是 **(2.1.23)**（旧 notes 写 (2.2.6) 下方）。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E25/E26）与 §12.10 表 B 第 26 项。
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A, §A.1, eq. (A.1.19)–(A.1.21), pp.333–334**：单自由度量子力学里的同一件事——路径积分对场重定义的不变性给出 Schwinger–Dyson 方程 `q(t′) δS/δq(t) = i δ(t−t′)`，即**运动方程作为算子方程、失效由接触项刻画**"
+    note: |
+      【原书核实 2026-09-11（researcher 第七轮，L1 页图，App. A pp.329–338 读毕）】
+
+      **§2.1 的 (2.1.17)/(2.1.20)/(2.1.24) 这一套是 Appendix A (A.1.19)–(A.1.21) 的搬运**：
+      附录先在单自由度量子力学里把「路径积分测度对 q → q + δq 不变 ⇒ 运动方程在算子插入之外成立、
+      重合点出现 iδ(t−t′)」做出来，§2.1 再搬到二维自由标量上。故本节点要挂完整来源，
+      应同时挂 **(A.1.19)–(A.1.21)** 与 **(2.1.17)**。
+
+      ⚠⚠ **两条同页的作者自承缺口，直接决定本节点的状态上限（p.332 逐字）**：
+      (i) 「The derivation of the path integral formula treated the continuum limit `ε → 0`
+          **rather heuristically**. Renormalization theory is the study of this limiting process,
+          and is rather well understood.」
+      (ii) 「**Actually, we will evaluate explicitly only a few Gaussian path integrals.**
+          We use the path integral primarily to derive some general results, **such as operator
+          equations and sewing relations**.」
+      ⇒ (ii) 逐字点名 "operator equations" 就是本节点这一类结果，而作者同页说路径积分公式本身的
+      推导是 heuristic 的。**本节点及其下游任何以 Polyakov 路径积分为根的链，
+      在 Polchinski 侧封顶 `physical-argument`，这是作者自己写的，不是本图的判断。**
+
+      ⚠ **未读**：App. A pp.339–346（§A.2 起，推测费米场/Grassmann）；`bc` 鬼场路径积分测度的
+      一手依据仍缺。见 literature/extractions/polchinski-1998-v1.md §13.1(d)(e)。
 tags: [cft, free-field, equation-of-motion, contact-term]
 notes: |
   这条是「算子方程」概念在本图中的落点：它把经典运动方程升级为对所有关联函数成立的陈述，

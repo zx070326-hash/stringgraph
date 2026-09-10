@@ -1,0 +1,33 @@
+id: compact.self-dual-lattice-gives-modular-invariance
+kind: proposition
+title: Narain 格自对偶 ⇒ 配分函数在 τ → −1/τ 下不变（充分性）
+statement: |
+  设 D = 26 的玻色闭弦紧化在 k 维环面上，Narain 格为 Γ（compact.narain-lattice）。
+  紧化部分的环面配分函数为
+    **Z_Γ(τ) = |η(τ)|^{−2k} Σ_{ℓ ∈ Γ} e^{iπτ ℓ_L² − iπτ̄ ℓ_R²}**.
+  用格上的求和公式 Σ_{ℓ* ∈ Γ*} e^{2πi ℓ*∘ℓ} = 𝒩 Σ_{ℓ' ∈ Γ} δ(ℓ − ℓ')（𝒩 = Γ 的单位胞体积）
+  与 Gauss 积分，可得
+    **Z_Γ(τ) = V_Γ^{−1} · Z_{Γ*}(−1/τ)**,
+  其中 V_Γ 是单位胞体积。于是：
+  **若 Γ 自对偶（Γ* = Γ），则 V_Γ = V_Γ^{−1} 故 V_Γ = 1，从而
+    Z_Γ(τ) = Z_Γ(−1/τ)**，即配分函数在 S 变换下不变。
+  配合 compact.narain-lattice-is-even 给出的 T 变换不变性（Γ 为偶格），
+  偶自对偶格给出模不变的配分函数。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.21)（Z_Γ）、(8.4.22)（格上的 delta 函数）、(8.4.23)（τ → −1/τ 下的变化）、(8.4.24) 的前半句，p.251–252"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E139，证据等级 L1
+      （Schrans §8.64–§8.67，笔记 p.475–477）。
+      **这半句（充分性）原书有推导，Schrans 完整复现**；不可与同一式 (8.4.24) 的
+      后半句（必要性）混为一谈，后者见 compact.modular-invariance-requires-self-dual-lattice。
+tags: [compactification, torus, narain, lattice, modular-invariance, partition-function, consistency]
+notes: |
+  本卡与 compact.modular-invariance-requires-self-dual-lattice 一起覆盖原书的
+  (8.4.24)。**拆成两卡是必需的**（抽取记录 Q21 明确要求）：两个方向的证据强度差一个档位。
+
+  Dedekind η 的 S 变换 η(−1/τ) = (−iτ)^{1/2} η(τ)（(7.2.44b)）在本图中没有节点，
+  记为本节点推导的 gap。
+author: curator-polchinski-ch8
+created: "2026-09-11"

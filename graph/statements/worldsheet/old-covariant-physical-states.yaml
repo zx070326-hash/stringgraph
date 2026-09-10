@@ -27,11 +27,32 @@ sources:
       文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
       **curator 未自行重跑 `lake build`**。
   - ref: polchinski-1998-v1
-    loc: "§4.1（p.121 起，约 eq. (4.1.1)–(4.1.7)：只强加「湮灭」一半的 Virasoro 约束 L_m|ψ⟩ = 0（m ≥ 1）与 (L_0 + A)|ψ⟩ = 0）；零模态见 eq. (4.1.8)–(4.1.9)，p.122"
+    loc: "§4.1, **eq. (4.1.5)**, p.122（OCQ 物理态条件，原书写成一条式子涵盖 n ≥ 0：(L^m_n + Aδ_{n,0})|ψ⟩ = 0, n ≥ 0）；配 (4.1.6)（n < 0 的矩阵元自动为零）、(4.1.7)（L^{m†}_n = L^m_{−n}）；零模态是 (4.1.8) |χ⟩ = Σ_{n≥1}L^m_{−n}|χ_n⟩ 与 (4.1.9) |ψ⟩ ≅ |ψ⟩ + |χ⟩，商空间是 **(4.1.10)** H_OCQ = H_phys / H_null"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E54（**页码已核实/式号未核实**）
-      与 #E55（(4.1.8)、(4.1.9) **式号与内容已核实**）。
-      Polchinski 用 A 且写 (L_0 + A)|ψ⟩ = 0；本节点用 a = −A，见 conv.intercept-sign-a。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号落定】
+
+      ⚠ 旧 loc 写「约 eq. (4.1.1)–(4.1.7)」是一个区间猜测。原书的实际分工：
+        (4.1.1) δ⟨f|i⟩ = −(1/4π)∫d²σ g^{1/2}δg_ab⟨f|T^{ab}|i⟩（直接引 §3.4 的 (3.4.4)）
+        (4.1.2) ⟨ψ|T^{ab}(σ)|ψ'⟩ = 0
+        (4.1.3) T_ab = T^X_ab + T^g_ab
+        (4.1.4) T_ab = T^m_ab + T^g_ab —— **一般物质 CFT 在本书的引入点**
+                （原书逐字："The X^μ may be replaced by a more general CFT
+                 (which we will refer to as the *matter* CFT)"）
+        **(4.1.5) 才是物理态条件本身**
+      原书还逐字写「a physical state is **a highest weight state of weight −A**」并引 (2.9.8)
+      （最高权态的定义式）——即本图的 conv.intercept-sign-a（a = −A）在原书这一处有直接对应。
+
+      本节点 statement 与 (4.1.5) 的一处口径差：原书把 n ≥ 1 与 n = 0 两条**写成同一式**
+      （靠 δ_{n,0} 区分），本节点分开写。内容等价。
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E54–E56）与 §12.10 表 B 第 27 项。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, eq. (4.4.21), p.142（H_OCQ = H_BRST = H_light-cone）；§4.1 eq. (4.1.20), p.124（H_OCQ = H_light-cone，原书注明「as will be shown in section 4.4」）"
+    note: |
+      【原书核实 2026-09-11，L1】本条**不承载本节点的定义**，只登记 OCQ 空间在原书里
+      与另两种量子化的关系式号，供下游节点引用时对号入座：
+      **§4.1 的 (4.1.20) 只断言 H_OCQ ≅ H_light-cone**（且明说证明推给 §4.4），
+      **§4.4 的 (4.4.21) 才是三者同构 + 正定**。旧记录设想的「§4.1 讲正定性、§4.4 讲上同调」
+      与原书分工不符。见 §12.3（E58/Q7(c)）。
   - ref: gsw-1987-v1
     loc: "§2.2.1–2.2.2（物理态条件与零态，a 记号）"
     note: 定位强度 L4（目录/页码级）；式号未核实。GSW 用 mostly-minus。

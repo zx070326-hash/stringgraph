@@ -23,8 +23,14 @@ statement: |
 uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.3，Q_B^2 的计算与结论 Q_B^2 = 0 ⟺ c^m = 26，约 eq. (4.3.2)–(4.3.6)"
-    note: 公式号为近似定位。Polchinski 把物质中心荷写作 c_m，本节点改写为 c^m 以避开与鬼场模式 c_m 的记号冲突。
+    loc: "§4.3，**结论式 eq. (4.3.9)**（逐字「{Q_B, Q_B} = 0 only if c^m = 26」）；(4.3.10) 是 j_B j_B 的 OPE，原书由其单极点得「{Q_B,Q_B} = 0 when c^m = 26」；模式展开与 a^B = a^g = −1 见 (4.3.7)/(4.3.8)；最短推导用 Jacobi 恒等式，是习题 4.3（式号与内容 2026-09-11 经原书核实，抽取记录 polchinski-1998-v1.md §12.3 / §12.10 表 B 第 11 行）"
+    note: |
+      **【2026-09-11 原书核实订正】**本条此前写「约 eq. (4.3.2)–(4.3.6)，公式号为近似定位」，
+      抽取记录 #E64 则把结论挂在 (4.3.10)——两者都不准：**陈述式是 (4.3.9)**，(4.3.10) 是 OPE。
+      **这是全书唯一逐字写出 `c^m = 26`（而非 D = 26）的位置**，因此本节点「陈述只到 c^m」的
+      写法在原书里有逐字对应；相比之下 §3.4 (3.4.23) 写的是 D = 26（见
+      worldsheet.critical-dimension-weyl-anomaly-v2 的 sources）。
+      Polchinski 把物质中心荷写作 c_m，本节点改写为 c^m 以避开与鬼场模式 c_m 的记号冲突。
   - ref: kato-ogawa-1983
     loc: "摘要；正文未获取，定理编号未核实"
     note: |

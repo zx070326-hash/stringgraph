@@ -29,11 +29,25 @@ sources:
       见推导 worldsheet.free-boson-central-charge-d--via-lean 的 gaps。
       ⚠ 陈述末句「反全纯部门同理给出 c̄ = D」**不在** Lean 里。
   - ref: polchinski-1998-v1
-    loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（由 X^μ 的 TT OPE 直接算出 c = 1，D 个给 c = D）"
+    loc: "§2.4, eq. (2.4.22), p.47（TT OPE 的四阶极点显式写作 D/2z⁴，即 η^μ_μ = D 这一步）；文字陈述见 p.48，(2.4.24) 正下方正文（无式号）：\"The central charge of a free scalar is 1; for D free scalars it is D.\"；OPE 的计算本身在 (2.2.11)"
     note: |
-      **公式号完全未核实，且无页码锚点**——这是抽取记录中唯一一条核心陈述既无式号也无页码
-      （见 literature/extractions/polchinski-1998-v1.md E34 与 Q4）。内容（c = D）本身在
-      抽取记录第 1.1 节被列为「内容确认，位置见 E34」。**必须人工核对原书。**
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——Q4 关闭，本 note 取代
+      「公式号完全未核实，且无页码锚点 / 必须人工核对原书」】
+
+      原书 p.47 逐字：
+        "The OPE of the energy-momentum tensor with itself was obtained in eq. (2.2.11),
+           T(z)T(0) = η^μ_μ/(2z⁴) − (2/α'z²):∂X^μ(z)∂X_μ(0): + :T(z)T(0):
+                    ∼ D/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0) .   (2.4.22)"
+      即 `c = D` 的全部内容就是 `η^μ_μ = D` 这一步；**计算在 (2.2.11)，陈述在 (2.4.22)**。
+      旧 loc 猜的「(2.4.25)–(2.5.1)」区间是错的：(2.4.25) 是一般 c 的 TT OPE
+      `T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)`，c 在 **(2.4.24)** 首次定义。
+
+      ⚠ **陈述末句「反全纯部门同理给出 c̄ = D」在原书 (2.4.22) 处没有对应文字**
+      （(2.4.22) 只写全纯部门）；(2.5.1b)/(2.5.2) 的线性 dilaton 处才写出 `c = c̃`。
+      本条按「同理」保留，属 inferred 性质的补充，形式化时不得引 (2.4.22) 为据。
+
+      版本锚定：Cambridge Books Online 数字化本（© 1998, 2005）。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E34/Q4）与 §12.10 表 A 的 Q4、表 B 第 6 项。
   - ref: virasoro-lean-2025
     loc: "Theorem 10.1 + Corollary 10.2（c = 1，Lean 机器验证）；Appendix A.2"
     note: |

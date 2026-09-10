@@ -140,6 +140,8 @@ def validate(g: Graph) -> list[Problem]:
             err(where, f"target: unknown statement '{d.target}'")
         elif tgt.kind != "proposition":
             err(where, f"target '{d.target}' is a {tgt.kind}; derivations only target propositions")
+        elif tgt.superseded_by:
+            warn(where, f"target '{d.target}' is superseded by {tgt.superseded_by} (stale derivation; retarget or delete)")
         if d.kind == "proof" and d.status not in ("formalized", "rigorous"):
             err(where, "kind: proof requires status formalized or rigorous (else use physical-argument)")
         if d.kind == "physical-argument" and d.status != "physical-argument":

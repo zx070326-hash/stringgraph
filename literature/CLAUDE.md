@@ -16,3 +16,5 @@
 ## 默认参照
 
 Polchinski, *String Theory* Vol. 1–2 (1998) 是约定与陈述编号的默认参照。Green–Schwarz–Witten (1987)、Blumenhagen–Lüst–Theisen (2013) 为补充。
+
+- bib key 规范 `<firstauthor>-<year>`：无出版年的讲义/网页用 `<firstauthor>-<slug>`（例 `milicic-riemann-surfaces`），note 里写明"无年份"。（lead 裁决 2026-09-11）

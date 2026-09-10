@@ -1,0 +1,120 @@
+id: math.vertex-algebra-borcherds-identity
+kind: definition
+status: rigorous
+title: 顶点代数的 Borcherds / Jacobi 恒等式（形式变量版 (2.30)、模式版 (2.36)、留数版 (2.19)）
+statement: |
+  设 ℱ = ⊕_{n ∈ Z} ℱ_{(n)} 是复向量空间，带真空向量 1 ∈ ℱ 与线性映射
+    𝒴 : ℱ → (End ℱ)[[z, z^{-1}]],
+  按 **Gebert–Nicolai (2.31)** 展开
+    𝒴(ψ, z) = Σ_{n ∈ Z} ψ_n z^{-n-1}   （下标写在圆括号**外**）。
+  设正规性（regularity）公理成立：对任意 ψ, φ ∈ ℱ 有 ψ_n φ = 0 当 n 充分大（G–N (2.23)/(2.32)）。
+
+  **(A) Borcherds / Jacobi 恒等式，形式变量版**（G–N 顶点代数定义的第 5 条公理，(2.30) 逐字）：
+  对一切 ψ, φ ∈ ℱ，
+    z_0^{-1} δ((z_1 - z_2)/z_0) 𝒴(ψ, z_1) 𝒴(φ, z_2)
+      − z_0^{-1} δ((−z_2 + z_1)/z_0) 𝒴(φ, z_2) 𝒴(ψ, z_1)
+      = z_2^{-1} δ((z_1 - z_0)/z_2) 𝒴( 𝒴(ψ, z_0) φ , z_2 ).
+
+  **(B) 同一恒等式的模式版**（G–N (2.36) 逐字）：对一切 ψ, φ, ξ ∈ ℱ 与一切 l, m, n ∈ Z，
+    Σ_{i ≥ 0} (−1)^i C(l, i) ( ψ_{l+m−i}(φ_{n+i} ξ) − (−1)^l φ_{l+n−i}(ψ_{m+i} ξ) )
+      = Σ_{i ≥ 0} C(m, i) (ψ_{l+i} φ)_{m+n−i} ξ,
+  其中 C(m, i) := m(m−1)⋯(m−i+1)/i!（i ≥ 0），i < 0 时约定为 0。**两端的求和都是有限和**，
+  截断由正规性公理给出，不涉及任何收敛性。
+
+  **(C) 同一恒等式的留数版**（Bakalov–Kac (2.19) 逐字，记号 Y(a, z) = Σ_m a_{(m)} z^{-m-1}）：
+    Res_{z−w} Y( Y(a, z−w) b, w ) i_{w, z−w} F(z, w)
+      = Res_z Y(a, z) Y(b, w) i_{z, w} F(z, w) − Res_z Y(b, w) Y(a, z) i_{w, z} F(z, w),
+  「for any a, b ∈ V and **any rational function F(z, w) with poles only at z = 0, w = 0 or z = w**」。
+
+  **本卡的地位（两套公理体系）**：
+  · 在 **Gebert–Nicolai** 采用的体系里，(A)/(B) 是顶点代数**定义的第 5 条公理**
+    （另四条为 regularity (2.23)、vacuum (2.24)、injectivity (2.25)、conformal vector (2.26)–(2.29)）。
+  · 在 **Bakalov–Kac** 采用的（以局域性 + 平移 + 真空为公理的）体系里，(C) 是一条**定理**，
+    且作者逐字称它「(which along with the vacuum axioms provides **an equivalent definition** of a
+    vertex algebra)」。
+  本卡把 (A)(B)(C) 登记为**同一条恒等式的三种写法**。
+
+  ⚠ **模式约定陷阱**（G–N p. 581）：G–N 同时使用两套模式展开——
+  (2.31) 𝒴(ψ, z) = Σ_n ψ_n z^{-n-1}（下标在圆括号**外**，形式演算用）与
+  (2.47) ψ(z) = Σ_n ψ_{(n)} z^{-n-Δ_ψ}（下标在圆括号**内**，CFT 用），
+  换算为 (2.48) ψ_n ≡ ψ_{(n+1−Δ_ψ)}。**本卡的 (A)(B) 用的一律是 (2.31) 那一套。**
+  与 Virasoro 生成元记号 L_{(n)}（= ω_{n+1}）混用时必须先做这一换算。
+
+  **本卡不断言的四条**：
+  (a) **不断言 Borcherds 1986 §4 的 (v) 就是对易子公式。** (v)
+      `(u_m(v))_n(w) = Σ_{i≥0} (−1)^i C(m,i)( u_{m−i}(v_{n+i}(w)) − (−1)^m v_{m+n−i}(u_i(w)) )`
+      是本恒等式的**迭代 / 结合律**形式（左端是单个 (u_m(v))_n(w)）；对易子形式是
+      math.vertex-algebra-commutator-formula，两者是 (B) 的不同特例。
+  (b) **不断言 (A) ⟺ (B) ⟺ (C) 的逐步换算。** 三处来源都把展开留给读者；
+      「(C) + 真空公理是顶点代数的等价定义」在 Bakalov–Kac 处也只是**断言**，无证明。
+  (c) **不涉及共形向量 ω、中心荷、L_0 谱**：那些是 vertex **operator** algebra 的附加公理
+      （L_0 谱下有界 + 本征空间有限维，G–N p. 579），本卡与之无关。
+  (d) **不含任何收敛性、围道、径向排序**：z_0, z_1, z_2（或 z, w）始终是形式变量。
+uses: []
+uses_conventions: []
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§2.1 'Vertex algebras', p. 578, 公理 5 (Jacobi identity) = eq. (2.30)（形式变量版）; p. 580, eq. (2.36)（模式版）; p. 579, eq. (2.32)（regularity）与 vertex operator algebra 的两条附加条件; p. 581, eq. (2.31)/(2.47)/(2.48)（两套模式约定与换算）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF，途径
+      pure.mpg.de/rest/items/item_153125_1/component/file_153124/content；PDF 页 = 刊页 − 570）。
+      逐字文本见 literature/extractions/math-sources.md §37.3(a)(b)。**
+      本卡 (A)(B) 与「模式约定陷阱」段全部取自本条。G–N 自陈其定义「using the notation of [21]
+      (= Goddard 1989, Meromorphic conformal field theory)」、公理表取自「[15] = FHL 1993
+      (Memoirs AMS 104, no. 594)」（刊 p. 578 逐字，参考文献表见 §36.4）。
+  - ref: bakalov-kac-2004
+    loc: "Definition 2.1, p. 3（顶点代数：局域性 + 平移 (2.14) + 真空 (2.15)/(2.16)）; eq. (2.19), p. 3（Borcherds identity，留数版）"
+    note: |
+      **L1（researcher 2026-09-11 读 arxiv.org/pdf/math/0402315，PDF 页 = 文章页；math-sources.md §37.4(a)）。**
+      逐字：「The most important property of a vertex algebra V is the following *Borcherds identity*
+      (which along with the vacuum axioms provides an equivalent definition of a vertex algebra)」。
+      ⚠ **本文的 (2.21) 是「场版」对易子公式（带 δ 函数）**
+      `[Y(a,u), Y(b,w)] = Σ_{m≥0} Y(a_{(m)}b, w) ∂_w^{(m)} δ(u−w)`，
+      **不是**模式版 `[a_{(m)}, b_{(n)}] = Σ_k C(m,k)(a_{(k)}b)_{(m+n−k)}`；模式版本文未写
+      （扭转版模式展开见 Remark 3.1 的 (3.7)，取 σ = 1 需读者自己做一步）。
+      故本卡的模式版 (B) 只引 Gebert–Nicolai。
+  - ref: borcherds-1986
+    loc: "Section 4 'Vertex Algebras', relations (i)–(v)（全文无编号定理、无编号公式；作者主页重排本页码与期刊 3068–3071 不对应，故 loc 只写节号）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者主页重排本 math.berkeley.edu/~reb/papers/va/va.pdf；
+      math-sources.md §36.2、§37.2）。** 原始文献，本卡的历史出处。
+      逐字：「**For any even lattice R** the operators u_n on V satisfy the following relations.」
+      随后 (i)–(v)，再逐字：「We will call any module with linear operators D^{(i)}(u) and bilinear
+      operators u_n(v) satisfying relations i–v above a **vertex algebra**」。
+      ⚠⚠ **引用陷阱（§37.2 的负面结论）**：(v) 是**迭代 / 结合律**形式，**不是**对易子公式。
+      从 (v) 推出对易子公式是一步真实推导，原文没有写出来。
+      **任何以 Borcherds (v) 为唯一依据的边必须标 `inferred: true`。**
+      另：Borcherds 全文没有 Theorem / Proposition 编号，**图里不得写「Borcherds 1986, Theorem X」**。
+tags: [vertex-algebra, borcherds-identity, jacobi-identity, formal, axiom, math-input]
+notes: |
+  【为什么 kind = definition】本卡登记的是顶点代数**公理体系里的那一条公理**（G–N 定义的第 5 条），
+  而不是某条被证明的命题。按 docs/STATUS_LEVELS.md，定义卡的 `status` 表示该定义卡本身的地位：
+  这里是数学上精确、但未形式化，故 **rigorous**。
+  Bakalov–Kac 侧它是定理而非公理——这不改变本卡的分类，只说明「顶点代数」有多套等价的公理化，
+  本卡的边界条款 (b) 已把「等价性只是断言」这一点登记在案。
+
+  【为什么与 math.vertex-algebra-associativity 分开】那张卡是 Frenkel–Ben-Zvi Theorem 3.2.1 的
+  **结合性**：Y(A,z)Y(B,w)C = Y(Y(A,z−w)B,w)C 于 V((w))((z−w))，对应 G–N (2.37)（本卡 (B) 在 m = 0 的特例）。
+  它**严格弱于**本卡的 (B)。此前两条 G–N 推导
+  （worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 与
+  worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket）的 gaps 里逐字登记了
+  「图中没有『顶点代数 Jacobi 恒等式 / Borcherds 恒等式』卡」这个缺卡，**本卡就是补上它**。
+
+  【为什么与 math.locality-ope-equivalences-v2 分开】那张卡（Schottenloher Thm 10.10）讲的是
+  **任意两个局域形式分布**（不需要顶点代数结构），其第 5 条给出同一形状的模式对易子公式，
+  但其中的 C^j 只是「某组形式分布」；顶点代数里额外成立 C^j(w) = 𝒴(ψ_j φ, w)，即 OPE 系数场本身是顶点算子。
+  二者不互为依赖。
+
+  【引用禁令（literature/extractions/math-sources.md §38.2，researcher 2026-09-11）】
+  · **不得写** `Kac, (4.8.3)`（该编号无任何证据）；可写的只有 Kac Theorem 4.8 / (4.8.1)（编号经作者勘误表
+    L1 确认，**措辞仍 L0**），本卡未引。
+  · **不得写** `Kac, Theorem 5.5`（5.4/5.5 是**节号**不是定理号）。
+  · **不得写** `Lepowsky–Li, Theorem 6.5.3`（无任何证据；他人转引到的只有 6.2.11 / 6.3.2 / 5.7.1）。
+  · **不得写** `FLM, Theorem 8.x`（零证据，连 §8 标题都未取到）。
+  · **不得写** `Borcherds 1986, Theorem X`（原文无编号定理）；Borcherds 的 loc 只写节号，
+    因为重排本页码与 PNAS 印本不对应（未解决问题 Q33）。
+
+  【uses_conventions 为空的理由】本卡的公式里不出现度规、α'、规范场归一化等物理约定；
+  唯一需要固定的是模式展开的约定，而它已在陈述内部由 (2.31) 写死，并把与 (2.47) 的换算 (2.48) 一并写出。
+author: curator
+created: "2026-09-11"

@@ -7,13 +7,15 @@ depends_on:
     note: 提供被改写的表达式 ∏_{i<j}|z_ij|^{α'k_i·k_j} 与动量守恒 delta 函数。
   - id: worldsheet.tree-level-worldsheet-topologies
     note: 提供过渡函数 u = 1/z 与「z = ∞ 就是 u 片原点」这一约定。
-  - id: worldsheet.closed-string-mass-formula
-    inferred: true
+  - id: spectrum.covariant-external-legs-on-shell
     note: |
-      标 inferred：提供闭弦 tachyon 的质量壳条件（本图记为 α'm² = −4，配 mostly-plus 的
-      m² = −k² 即 α'k² = 4）。该节点是**光锥量子化**下的闭弦质量公式，来源（§1.4）
-      与本推导的来源（§6.2 / [H] Problem 6.1）没有互相引用；把光锥谱的质量壳条件搬到
-      协变振幅的外线上，本图没有节点承载这一步。
+      提供闭弦 tachyon **外线**的质量壳条件（该节点第 (2) 条在 N = Ñ = 0 上的实例：
+      α'k²/4 = 1，即 α'k² = 4；配 mostly-plus 的 m² = −k² 即 α'm² = −4）。
+      **2026-09-11 改挂（curator-onshell-bridge）**：原先是指向 worldsheet.closed-string-mass-formula
+      的 `inferred` 边，理由是「§1.4 的光锥谱与 §6.2 / [H] Problem 6.1 不互相引用，
+      把光锥质量壳搬到协变振幅外线上本图无节点」。该节点现已建立并承载这一步，
+      **故 inferred 撤销**。本推导处理的正是**外线**顶点算子（把某个 z_i 送到 ∞），
+      与该节点的断言范围完全吻合。
     convention_map: |
       时空号差 mostly-plus（conv.metric-mostly-plus）下 m² = −k²，故 α'm² = −4 等价于 α'k² = 4。
       抽取记录与 [H] 都直接写 α'k_i² = 4，与本图约定一致。
@@ -41,8 +43,11 @@ gaps:
   - "**这一论证的来源是习题解答而非正文**（抽取记录 Q17 明记）：原书正文是否论证了
      「顶点算子可以放到 z = ∞」未核实，可能只留给习题 6.1。按 lead 裁决，
      Headrick 作唯一成文来源时 reviewer 须复核计算——**已复核**（见 notes）。"
-  - "**质量壳条件的搬运未被节点承载**（见第三条依赖的 inferred 说明）：
-     从光锥谱的 α'm² = −4 到协变振幅外线的 α'k² = 4，本图没有节点。"
+  - "**（2026-09-11 已关闭）** 原 gap：「质量壳条件的搬运未被节点承载——从光锥谱的 α'm² = −4
+     到协变振幅外线的 α'k² = 4，本图没有节点」。节点 spectrum.covariant-external-legs-on-shell
+     已建立，第三条依赖已改挂并撤销 inferred。
+     **残余**：该桥节点是 physical-argument（本推导 `status: rigorous` 说的是换片代数本身，
+     有效状态照旧由依赖压到 physical-argument，与改挂前相同）。"
   - "**只覆盖 tachyon**：带 ∂X 的顶点算子换片时有额外幂次，本推导不涉及。"
   - "**路径积分测度未定义**（本批次共有的限制）：本推导只做代数改写，但被改写的对象
      (6.2.17)/(6.2.31) 本身是路径积分定义的。"

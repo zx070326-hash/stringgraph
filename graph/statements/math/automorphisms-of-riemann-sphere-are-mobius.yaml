@@ -1,0 +1,70 @@
+id: math.automorphisms-of-riemann-sphere-are-mobius
+kind: proposition
+title: 黎曼球的全纯自同构恰为 Möbius 变换：Aut(P¹) ≅ PSL(2,C)
+statement: |
+  设 P¹ = C ∪ {∞} 是黎曼球（紧、连通、亏格 0 的黎曼面），
+  **Aut(P¹)** 表示其全体**全纯自同构**（双全纯的双射 P¹ → P¹）在复合下构成的群。
+  对矩阵 γ = [[a, b], [c, d]] ∈ SL(2,C)（ad − bc = 1）定义 Möbius 变换
+    φ_γ(z) = (a z + b)/(c z + d) ,
+  其中 c ≠ 0 时 z = −d/c ↦ ∞、∞ ↦ a/c，c = 0 时 ∞ ↦ ∞（按极限理解）。则：
+
+  **(1)** φ_γ ∈ Aut(P¹)，γ ↦ φ_γ 是群同态，其核恰为 {±I}；
+  **(2)** 由此诱导的同态
+      PSL(2,C) = SL(2,C)/{±I} ⟶ Aut(P¹)
+  是**群同构**。特别地，P¹ 的全纯自同构**恰好**是 Möbius 变换，别无其他
+  ——满射性（任一双全纯自映射必为分式线性）是本命题的实质内容。
+
+  **本命题不断言什么**：
+  - 不断言任何**可迁性/单可迁性**（那是 math.mobius-group-sharply-three-transitive，
+    与本命题互相独立：一个说「群有多大」，一个说「群怎么作用」）；
+  - 不断言 Aut(P¹) 的**李代数**是 sl(2,C)，也不断言「P¹ 上的全局全纯向量场空间是 3 维复的」。
+    从「自同构**群**」到「全纯**向量场**空间」还需一步（每个全局全纯向量场在紧曲面上的流完备、
+    逐时全纯，故其单参群落在 Aut(P¹) 内；反之亦然），这一步**不含在本命题里**，
+    由 worldsheet.sphere-conformal-killing-group--via-automorphism-group 承担并在其 gaps 中记录；
+  - 不涉及**反全纯**（共轭）自同构，故**不**给出 P¹ 的全体保共形结构（含反定向）变换群；
+  - 不涉及带边曲面（圆盘的 Aut(D) 见 worldsheet.disk-conformal-killing-group 的
+    milicic-riemann-surfaces 来源条）与不可定向曲面（RP₂ 见 worldsheet.rp2-conformal-killing-group）；
+  - 不涉及任何世界面/物理内容（Weyl 因子、顶点算子、路径积分测度）。
+sources:
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.5.2, p.6"
+    note: |
+      **L1 逐字**（literature/extractions/math-sources.md §39.7.1；该讲义全 15 页已 L1 读完）。原文：
+      「**1.5.2. Theorem.** The homomorphism γ ⟼ φ_γ of PSL(2,C) into the group of all holomorphic
+      automorphisms Aut(P¹) of the Riemann sphere is an isomorphism.」
+      编号体系是 `<章>.<节>.<序>`（如「1.5.2. Theorem.」），引用时照抄即可，无歧义。
+      ⚠ 该文件**没有印任何年份**，故 bib key 不带年份（`milicic-riemann-surfaces`），
+      **偏离 literature/CLAUDE.md 的 `<firstauthor>-<year>` 规范，待 lead 裁决**
+      （math-sources.md §39.7.1 已提请）。
+      ⚠ 本项目逐字转录的是**定理陈述**；证明正文（该讲义 §1.4–§1.5）未逐条复核，
+      见推导 math.automorphisms-of-riemann-sphere-are-mobius--via-milicic 的 gaps。
+tags: [math, riemann-sphere, mobius, psl2c, automorphism-group, complex-analysis]
+notes: |
+  由 curator-ckg-followups 于 2026-09-11 新建，用途是给两处既有的「悬空免责声明」提供上游节点：
+
+  - **math.mobius-group-sharply-three-transitive** 的「本命题不断言什么」第二条写着
+    「不断言 PSL(2,C)、PSL(2,R) 是相应曲面的**全部**共形自同构群（那需要 Liouville 型定理，
+    本图无节点）」——本卡就是那个节点（复情形的一半；实情形的一半见下）。
+  - **worldsheet.sphere-conformal-killing-group** 的 (3)「相应的有限（整体）变换群是 PSL(2,C)」
+    此前只有 Polchinski §6.1 的断言（且原书哪一式写了「PSL(2,C)」这个记号本项目未核实）。
+    本卡给它一条**数学侧带编号来源**，接法见新推导
+    worldsheet.sphere-conformal-killing-group--via-automorphism-group。
+
+  **实情形没有对应的独立卡片（有意为之）**：Miličić 的圆盘侧是 **Theorem 1.7.3**
+  （Aut(D(0,1)) ≅ SU(1,1)/{±I}），要变成「Aut(D) ≅ PSL(2,R)」还要接 **§1.9, p.11 的无编号句**
+  （Ψ : SL(2,R) → SU(1,1) 是群同构）。**这个合成结论在该讲义里没有单一编号**
+  （math-sources.md §39.7.1 的明确警告），故本轮**不建**「Aut(D) ≅ PSL(2,R)」的卡片，
+  只把两处 loc 登记在 worldsheet.disk-conformal-killing-group 及其推导的 sources 里。
+  若日后要建，必须在 statement 里写清是两处合成，或干脆只写 SU(1,1) 版。
+
+  **与 CKV 计数的关系（重要，别混）**：本卡说的是**群**，图里要的 κ(S₂) = 6 说的是
+  **李代数 / 向量场空间的实维数**。两者之间的桥在本图中由
+  worldsheet.ckv-holomorphic-in-conformal-gauge（CKV ⟺ 处处正则的全纯向量场；
+  status: physical-argument）加上 --via-automorphism-group 里的流完备性论证承担，**不在本卡内**。
+  literature/extractions/math-sources.md §39.8 把这条桥记为 **(B1) κ = 2·dim H⁰(K^{−1})**，
+  并明写「本轮无来源」。
+
+  **不可定向侧的类比警告**：RP₂ 的共形 Killing 群在文献里有 SO(3) 与 SU(2) 两种写法
+  （math-sources.md §39.7.4），相差一个 Z₂。本卡只管 P¹，不涉及该歧义。
+author: curator-ckg-followups
+created: "2026-09-11"
