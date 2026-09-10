@@ -1,5 +1,5 @@
-id: worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly
-target: worldsheet.riemann-roch-kappa-minus-mu
+id: worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly
+target: worldsheet.riemann-roch-kappa-minus-mu-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -94,6 +94,26 @@ notes: |
   那条可以到 rigorous，本条保留为「书内路线」的记账。
 
   另注：抽取记录 E82 给的「本条应拆成 statement + derivation」的建议已按此实现——
-  陈述在 worldsheet.riemann-roch-kappa-minus-mu，本文件是它的（目前唯一的）推导。
+  陈述原在 worldsheet.riemann-roch-kappa-minus-mu，本文件曾是它的唯一推导。
+
+  **★ 改指记录（2026-09-11，curator-riemann-roch）**：目标已由
+  `worldsheet.riemann-roch-kappa-minus-mu`（v1）改为
+  `worldsheet.riemann-roch-kappa-minus-mu-v2`（限**可定向**），文件与 id 随之改名
+  （校验器强制 derivation id 必须以 `<target>--via-` 开头，见 tools/stringgraph/validate.py）。
+  **推导内容一字未改。**
+  - 换代理由见 v2 卡的 notes：v1 的 statement 写「可定向或不可定向」，而本图对不可定向情形
+    没有来源（math-sources.md Q34）。
+  - **本推导的覆盖面大于新目标**：Polchinski §5.3 的鬼数反常论证并未限定可定向，
+    收窄目标不会使本条失效，只是本条现在证的比 v2 断言的多。
+  - 图中另有若干卡片的 **notes/statement 散文**里还写着旧 id
+    `worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly`
+    （worldsheet.genus-g-ghost-path-integral、worldsheet.ghost-number-current-weyl-anomaly、
+    ghost-number-current-weyl-anomaly--via-tj-ope、
+    moduli-condition-traceless-transverse--via-orthogonal-complement）。
+    那些是散文引用、不是图边，**本轮不改**（statement 文本不可变，且改 notes 会与其他 agent 的
+    claim 冲突）；读到旧 id 请按本条对照。
+  - **本条的 gap 第 1 条（比例常数靠球面单例标定）在新增的
+    `--via-riemann-roch` 路线里根本不出现**，那条的常数 3 是算出来的。
+    两条推导并存、工具取高者，正是本项目「物理路线 + 数学路线」并列记账的用法。
 author: curator-polchinski-ch5
 created: "2026-09-11"

@@ -1,0 +1,77 @@
+id: worldsheet.riemann-roch-kappa-minus-mu-v2
+kind: proposition
+title: "Riemann–Roch（Polchinski 形式，v2：限可定向）：紧无边可定向世界面上 κ − μ = 3χ"
+statement: |
+  设 M 是**紧、无边、连通、可定向**的二维世界面，亏格为 g，χ 是它的 Euler 数
+  （worldsheet.worldsheet-euler-number；此时 χ = 2 − 2g）。记
+    μ = 世界面**度规**的实模数目（worldsheet.moduli-condition-traceless-transverse），
+    κ = 共形 Killing 向量的实数目（worldsheet.conformal-killing-equation）。
+  则
+    κ − μ = 3 χ 。
+
+  已知的检验值（紧、无边、可定向）：
+    球面 S₂：χ = 2, κ = 6, μ = 0  ⇒  6 − 0 = 3·2 ✓
+    环面 T²：χ = 0, κ = 2, μ = 2  ⇒  2 − 2 = 0 ✓
+
+  ⚠ **与 v1（worldsheet.riemann-roch-kappa-minus-mu）的唯一差别：本卡限可定向。**
+  v1 的 statement 写「可定向或**不可定向**」；不可定向情形（Klein 瓶、RP₂、Möbius 带）
+  在本图里**既没有数学来源、也没有单独的物理论证**，而 v1 的唯一推导（鬼数反常）
+  是在可定向语境下做的。本卡把陈述收缩到论证真正覆盖的范围。
+  不可定向情形若要进图，须另立一张卡（走定向双覆盖 + 对合不变子空间），见 notes。
+
+  ⚠ **μ 只数度规的模，不含顶点算子的位置。** 通行的写法「dim M_{g,n} = 6g − 6 + 2n」
+  与本式**不是同一条陈述**；两者的换算见 worldsheet.moduli-integration-parameter-count。
+
+  ⚠ **带边情形不在本卡范围内**（同 v1）。圆盘 D₂ 的数值 χ = 1, κ = 3, μ = 0 形式上也合式，
+  但带边曲面上的 κ 与 μ 必须配上边界条件，本图尚未为带边情形定义 μ。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.9), p.152（陈述）；§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E75/#E82。
+      **式号锚定强度是第 5 章最好的一条**：schrans-2020 §5.23 **正文**逐字写
+      「…which leads to the Riemann-Roch theorem (5.2.9)」，紧接 κ − μ = 3χ（条目 [5.90]），
+      即正文级引用而非目录标题（L1 对笔记；对 Polchinski 原书仍未核对）。
+      ⚠ **原书的陈述范围比本卡宽**：v1 卡照抄了原书的「可定向或不可定向」。
+      本卡刻意收窄到可定向，理由见 statement 的第一条 ⚠ 与 notes 的换代记录；
+      这是**本图**的限定，不是原书的限定。
+      ⚠ 球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)，本卡把它作为**检验值**列出。
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（数学路线的入口，经 math.* 三卡接入）"
+    note: |
+      本条**不**承载 κ − μ = 3χ 本身（Eynard 讲义里没有 κ、μ 这两个物理量），
+      只标记本卡新增的数学路线所依托的定理。落地见
+      worldsheet.riemann-roch-kappa-minus-mu-v2--via-riemann-roch 与
+      math.quadratic-differentials-minus-holomorphic-vector-fields。
+tags: [worldsheet, moduli, ckv, riemann-roch, euler-number, counting, orientable]
+notes: |
+  **★ 换代记录（2026-09-11，curator-riemann-roch）：本卡取代 worldsheet.riemann-roch-kappa-minus-mu（v1）。**
+  换代的唯一理由是**陈述覆盖面大于论证覆盖面**：v1 的 statement 明写「可定向或不可定向」，
+  而 researcher 在 literature/extractions/math-sources.md §42.10 第 4 点指出，
+  数学侧的 Riemann–Roch 只在黎曼面（=可定向）上成立，不可定向世界面要走定向双覆盖 +
+  对合不变子空间，**本图没有任何来源覆盖这一步**（Q34）。v1 的物理推导（鬼数反常）也是在
+  可定向语境下做的、并用球面标定常数。按项目原则 1（陈述文本不可变），
+  收窄范围只能靠新建节点，故有本卡；v1 已写 `superseded_by: worldsheet.riemann-roch-kappa-minus-mu-v2`。
+
+  **不可定向情形怎么办**：需要新建一张 `worldsheet.riemann-roch-kappa-minus-mu-nonorientable`
+  （Klein 瓶、RP₂、Möbius 带；χ = 2 − 2g − b − c 的交叉帽计数），
+  其唯一可用论证是 Polchinski §5.3 的鬼数反常（本身就是 physical-argument），
+  **数学路线对它无效**。本轮不建，避免在没有来源的情况下先占 id；
+  待 researcher 的 Q34 有结果、或 auditor 裁决「照抄 Polchinski 的范围也算有来源」后再建。
+
+  **本卡有两条推导，各自的弱点正好互补**：
+  (a) `--via-ghost-number-anomaly`（由 v1 原样改指本卡）：Polchinski 的书内路线，
+      只导出 κ − μ ∝ χ，**比例常数 3 靠球面这一个例子标定**；
+  (b) `--via-riemann-roch`（本轮新增）：数学路线，**比例常数是算出来的、不需要任何标定、
+      也不需要按 g 分情形**；代价是要跨两座「物理量 ↔ 上同调维数」的桥
+      （κ = 2·dim H⁰(K^{−1})、μ = 2·dim H⁰(K²)），两座桥当前都只到 physical-argument。
+  ⇒ **本卡的有效状态仍是 physical-argument**，但瓶颈已从「比例常数靠单例标定」
+  转移到「两座桥 + 共形规范的全局性」。这个转移本身就是本轮的产出：
+  它精确地告诉下一轮该去找什么来源（math-sources.md Q33：(B1)(B2) 的带编号数学来源）。
+
+  **形式化天花板 rigorous**：Mathlib 无 Riemann–Roch（证据见 math.riemann-roch-theorem 的 notes），
+  本卡不得标 formalized。
+author: curator-riemann-roch
+created: "2026-09-11"
