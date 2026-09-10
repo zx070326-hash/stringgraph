@@ -1,0 +1,109 @@
+id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2--via-lean
+target: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      恒等式里的 V_J 本身：Lean `Fock.vertexOsc η b J`，正是该定义卡的 formal.lean_decl。
+      本卡是 v1 的推导 --via-lean 的 notes【依赖为什么这么少】里逐字请求补的那张卡
+      （「应补一张 `worldsheet.exponential-vertex-operator-modes` 定义卡（formalized，
+      lean_decl `StringFormal.NoGhost.Fock.vertexOsc`）」），已建，故本推导把这条边补上。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      被作用的空间与其 level 分级：`Fock D R = MvPolynomial (Osc D) R`（代数、无零模、无完化），
+      产生/湮灭模 `Fock.mode`。本恒等式的两边都是这张卡上的线性算子。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      恒等式左边的 L_m：Sugawara 型 `Fock.Lop η q m = ½ Σ_n :α_{m−n}·α_n:`，
+      零模参数 q（本卡用 q = a + b 与 q = a 两次）。该卡是 formalized 的定义卡，
+      其局部有限性（`lsumLocFin`）是本恒等式两边都有意义的前提。
+      ⚠ 本推导**不**使用 Virasoro 括号 [L_m, L_n] 或中心荷。
+      ⚠ **m = 0 这一支对该卡的用法与 m ≠ 0 不同**：它需要 L_0 在真空上的值
+      `Fock.Lop_zero_apply_one`：L_0^{(a)}|k⟩ = ½(a·a)|k⟩（非零的标量倍），
+      而 m ≥ 1 支用的是 L_m|k⟩ = 0、m ≤ −1 支用的是含产生算子的有限和。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightZero.lean :: StringFormal.NoGhost.Fock.lie_Lop_vertexOsc（目标声明，第 164 行）；m = 0 支 StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_zero（第 118 行）与其真空引理 StringFormal.NoGhost.Fock.Lop_apply_creaExp_zero_shifted（第 88 行）、极化展开 StringFormal.NoGhost.Fock.zeroModeSq_add（第 67 行）；类光推论 StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_isotropic（第 184 行）。两支先行版本：StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_ne（formal/StringFormal/NoGhost/VertexWeightNeg.lean）、StringFormal.NoGhost.Fock.lie_Lop_vertexOsc_of_pos（formal/StringFormal/NoGhost/VertexWeight.lean）。共同骨架零件：StringFormal.NoGhost.Fock.{eq_zero_of_vertex_recursion, mode_vertexOsc_sub, lie_Lop_mode, Lop_zero_apply_one}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。VertexWeightZero.lean 由 formalizer 完成并已合入 main
+      （与 DDFOperatorAll.lean 同一批）。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: polchinski-1998-v1
+    loc: "§8.2，eq. (8.2.27)，p.240"
+    note: |
+      **不承载论证**，只作对照（原书的 OPE / 主场语言 vs 本推导的模恒等式）。见目标卡的同名 source。
+summary: |
+  机器检查的证明。结构是「一个共同骨架 + 三份真空值」，最后合并成一条对一切 m 的公式。
+
+  **共同骨架（对 J 的产生模态递推，与 m 的符号无关，m = 0 也不例外）。**
+  两边都是 F 上的线性算子；`Fock.eq_zero_of_vertex_recursion` 说：若一族算子 T_K（K ∈ Z）
+  满足 (i) 在每个产生变量 X_{μ,r} 上的"移位递推"关系与 V 相同，(ii) 在真空上取零，则 T_K ≡ 0。
+  递推那一半用 `Fock.mode_vertexOsc_sub`（α^μ_p 的双动量形式，左侧模态参数 a+b、右侧 a，
+  对**所有** p 成立）与 `Fock.lie_Lop_mode`，**从不看 m 的符号**。
+  于是整条恒等式对每个 m 都归约为**真空上的单条等式**。
+
+  **三份真空值。**
+  · m ≥ 1（`Fock.Lop_apply_one_of_pos`）：L_m^{(a)}|k⟩ = 0；
+  · m ≤ −1（`Fock.Lop_apply_one_of_neg`）：L_m^{(a)}|k⟩ = (α_m·α_0)|k⟩ + ½Σ_{j=m+1}^{−1}(α_{m−j}·α_j)|k⟩，
+    非零且含产生算子；
+  · **m = 0（`Fock.Lop_zero_apply_one`）：L_0^{(a)}|k⟩ = ½(a·a)|k⟩，是非零的标量倍。**
+  三份形状互不相同，这就是三个文件（VertexWeight / VertexWeightNeg / VertexWeightZero）
+  的由来。
+
+  **m = 0 这一支的实际内容（本推导相对 v1 的全部新增）。**
+  真空上先算 `Fock.Lop_apply_creaExp_zero_shifted`：
+    L_0^{(a+b)} Φ_J = ( J + ½(a·a) + a·b + ½(b·b) ) Φ_J，
+  其中 ½(a+b)·(a+b) 由极化展开 `Fock.zeroModeSq_add` 拆成 ½(a·a) + a·b + ½(b·b)。
+  它比 m ≥ 1 支的形式**多出 ½(a·a)**；而右边 V_J L_0^{(a)}|k⟩ = ½(a·a) Φ_J
+  恰好把这一项减掉。两处偏差抵消，剩下 ( J + a·b + ½(b·b) ) Φ_J，
+  正是通式 J − m + a·b + ½(m+1)(b·b) 在 m = 0 处的值。
+  ⇒ **最终对易子系数是一条统一的多项式，m = 0 不是例外**；需要单独做的只有真空引理。
+
+  **合并**（`lie_Lop_vertexOsc`）：`rcases eq_or_ne m 0` 两行，
+  m = 0 走 `lie_Lop_vertexOsc_zero` 并用 `push_cast; ring` 对齐系数，m ≠ 0 走 `lie_Lop_vertexOsc_of_ne`。
+
+  **类光推论**（`lie_Lop_vertexOsc_isotropic`，一切 m）：代入 b·b = 0 得 (J − m + b·a) V_{J−m}，
+  即目标卡的【类光特例】。文件头逐字称它为「weight-`1` quasi-primary field」的变换律，
+  并逐字注明「now with no restriction on `m` — in particular it covers `m = 0`」。
+gaps:
+  - |
+    **本推导只给模恒等式，不给"共形权"这个概念的任何内容**。要把 ½(b·b) = α'k² 读成权、
+    或把本恒等式与 T(z)V_k(0) 的 OPE 极点结构互推，必须经
+    worldsheet.ope-pole-mode-commutator-dictionary（其 effective = open）。
+    那一步由 worldsheet.exponential-vertex-operator-weight--via-mode-identity 承担，
+    并因此只能是 physical-argument。**本卡的量词扩到 m = 0 不改善这条缺口。**
+  - |
+    **一般交换 Q-代数，无实结构、无幺正性、无解析结构**。η 只满足 η_μ² = 1；
+    没有洛伦兹号差、没有内积正定性、没有收敛性。
+    本推导与「幺正 CFT 中权 0 主场是常数」一类结论无关。
+  - |
+    **本卡是单个 Fock 空间上的恒等式，两侧 L 的动量参数不同，不是真正的对易子。**
+    搬到动量塔上写成 ⁅L_m, V^{(n)}_K⁆ 需要**额外**假设 b·b = 0（类光）：
+    否则第 j 层的系数含层指标 j（(jn + ½(m+1)n²)(k_0²) 项），不再是标量倍。
+    塔上版本是 Lean `lie_towerLop_towerVertex(_normalized)`
+    （formal/StringFormal/NoGhost/DDFOperatorAll.lean，一切 m），
+    由 worldsheet.ddf-commute-with-virasoro--via-lean 承载，不在本推导范围内。
+  - |
+    **本推导不覆盖 V_J 之间的乘积/OPE**，故对 worldsheet.ddf-transverse-oscillator-algebra
+    一路（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）没有贡献。那一路 Lean 侧尚未起步。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【与 v1 推导的关系】
+  worldsheet.exponential-vertex-operator-mode-weight-identity--via-lean（目标是 v1，m ≠ 0，
+  lean_decl `Fock.lie_Lop_vertexOsc_of_ne`）**保留不删**，是 m ≠ 0 那一半的不可变记录
+  （docs/STATUS_LEVELS.md【旧推导的去留】）。本推导的 m ≠ 0 部分逐字复用它的定理。
+
+  【★ 更正「代 m = 0 给错答案」这句误传】
+  详见目标卡 notes 的同名段：出错的是**真空引理**（`Fock.Lop_apply_creaExp_of_pos` 的
+  `0 < m` 假设不可去），**不是**最终的对易子系数。本推导的 summary 已把两处偏差如何抵消写清。
+  本图别处（v1 的 notes、worldsheet.ddf-commute-with-nonzero-virasoro 的 notes 与推导 gaps）
+  的旧措辞按此更正阅读；那些卡的文本作为历史保留。
+author: curator
+created: "2026-09-11"
