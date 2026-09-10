@@ -149,6 +149,48 @@ theorem lie_Lop_vertexOsc_zero (η a b : Fin D → R) (hη : ∀ μ, η μ * η 
 
 end LopVertexOscZero
 
+section LopVertexOscAll
+
+variable [Algebra ℚ R]
+
+/-- **The conformal-weight identity for every `m : ℤ`.**
+
+`L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`.
+
+This merges the three cases: `Fock.lie_Lop_vertexOsc_of_pos` (`m ≥ 1`),
+`Fock.lie_Lop_vertexOsc_of_neg` (`m ≤ -1`) and `Fock.lie_Lop_vertexOsc_zero` (`m = 0`).  The
+single polynomial in `m` covers all three even though the three proofs use genuinely different
+vacuum lemmas; see the file header for why `m = 0` had to be done separately even so. -/
+theorem lie_Lop_vertexOsc (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (m J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (J - m) := by
+  rcases eq_or_ne m 0 with rfl | hm
+  · rw [show J - (0 : ℤ) = J by ring, lie_Lop_vertexOsc_zero η a b hη J]
+    congr 1
+    push_cast
+    ring
+  · exact lie_Lop_vertexOsc_of_ne η a b hη hm J
+
+/-- **The isotropic (`b · b = 0`) case for every `m : ℤ`**: the oscillator vertex operator is a
+weight-`1` quasi-primary field,
+`L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b) V_{J-m}` for all `m`.
+
+`b · b = ½⁻¹ h` is twice the conformal weight `h = α' k_0²` of `:e^{i k_0 · X}:`, so `k_0² = 0`
+is exactly what kills the `m`-quadratic term.  This is the transformation law used by the DDF
+construction, now with no restriction on `m` — in particular it covers `m = 0`, where it says
+`A`-type modes shift the `L_0` eigenvalue by `J + a·b`. -/
+theorem lie_Lop_vertexOsc_isotropic (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hb : (∑ μ : Fin D, η μ * b μ * b μ) = 0) (m J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)) • vertexOsc η b (J - m) := by
+  rw [lie_Lop_vertexOsc η a b hη m J, hb]
+  congr 1
+  ring
+
+end LopVertexOscAll
+
 end Fock
 
 end StringFormal.NoGhost
