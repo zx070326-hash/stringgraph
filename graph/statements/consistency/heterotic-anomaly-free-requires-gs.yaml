@@ -1,0 +1,89 @@
+id: consistency.heterotic-anomaly-free-requires-gs
+kind: proposition
+title: 桥接卡（占位）：杂化弦十维时空规范/坐标反常的抵消由 Green–Schwarz 机制实现，且本书的弦论侧论证是条件式的、自称 formal
+statement: |
+  **本卡是一张桥接（占位）卡**，作用是把第 11 章的杂化弦与本图 consistency 区的
+  Green–Schwarz 1984 一支接起来。它断言：
+
+  **(1)** SO(32) 与 E₈ × E₈ 杂化弦的低能有效理论是十维 N = 1 超引力 + 超 Yang–Mills
+      （规范群相应地为 SO(32) 或 E₈ × E₈，伴随维数均为 496）。
+  **(2)** 该有效理论的单圈规范、引力与混合反常**不逐图为零**；它们的抵消由
+      **Green–Schwarz 机制**实现：三形式场强按 Chern–Simons 项修改
+      （consistency.h-field-strength-chern-simons），并加入局域反项
+      （consistency.gs-counterterms-1984）。本图已有的两张结论卡是
+      consistency.anomaly-cancellation-so32-effective-theory 与
+      consistency.anomaly-cancellation-e8e8-effective-theory。
+  **(3)** 修改后的 B₂ 规范变换在杂化弦里有**世界面来源**：它来自只作用于左移世界面费米子的
+      规范变换的世界面反常（Polchinski §12.3, (12.3.32)–(12.3.36)）。
+  **(4)** ⚠ **本书对「弦论侧反常消失」的论证是条件式的，并被作者自己标为 formal**。逐字：
+      'One can prove the decoupling of null states **formally** in either field theory or string
+       theory; the issue is whether terms from the UV limit invalidate the formal argument. …
+       In the heterotic string the effective UV cutoff comes from the restriction of the
+       integration to the fundamental region of moduli space. Surface terms from the boundary of
+       the fundamental region cancel **if** the theory is modular-invariant.'
+
+  **本命题不断言的内容**：
+    (1) **不**断言杂化弦的规范群是被反常抵消定出的。恰恰相反（原书逐字，§12.2 p. 102）：
+        'In the heterotic string, the gauge group was determined by the requirement of
+         **modular invariance**. In the type I string it was determined by cancellation of
+         **tadpole divergences**.' —— 见 notes 的【边的方向】。
+    (2) 不断言 (1) 中「低能极限就是那个有效场论」这一步有本图的支撑（本图无低能有效作用量
+        的推导节点）。
+    (3) 不断言 §11.3 的其它杂化弦的反常性质（原书 §12.2 p. 101 逐字只说
+        'in all cases the anomalies factorize'，断言、无证明、无引文）。
+    (4) 不断言 GS 机制对 type I 的对应版本——本图**没有** type I 的同款桥接卡，
+        worldsheet.ten-dimensional-superstring-theories 的前提 (P5) 因此仍然悬空。
+uses_conventions:
+  - conv.gauge-trace-normalization
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.1, eq. (12.1.40)（另见 (12.1.36)–(12.1.38)）, p. 100（杂化弦的 H̃₃ = dB₂ − (κ₁₀²/g₁₀²)ω₃ 与 δB₂ = (κ₁₀²/g₁₀²)Tr_v(λ dA₁)）；§12.2, pp. 101–103（弦论侧的条件式论证与 'formally'，逐字见 statement）；§12.3, eq. (12.3.32)–(12.3.36), p. 107（δB 的世界面反常来源）"
+    note: |
+      L1（抽取记录 **literature/extractions/polchinski-1998-v2-ch12.md**，条目 -ch12#E16、-ch12#E17、
+      -ch12#E19、-ch12#E20、-ch12#E21、-ch12#E22；⚠ 该文件的 E 编号独立于 polchinski-1998-v2.md）。
+      ⚠ **本轮（§11 转图）没有逐页读第 12 章**：这条来源转录自 ch.12 的抽取记录，
+      该记录标为 L1（抽取者逐页读了 pp. 84–135 的页图）。
+  - ref: green-schwarz-1984
+    loc: "全文（十维反常抵消的原始文献）"
+    note: |
+      本图 consistency 区的 GS 一支即出自此文；本卡只是把杂化弦接到那一支，不重复其内容。
+      ⚠ GS 1984 本身**不**构造杂化弦（那是次年的 Gross–Harvey–Martinec–Rohm）：
+      consistency.anomaly-cancellation-e8e8-effective-theory 的 statement 已声明
+      「不断言存在以 E₈ × E₈ 为规范群的超弦理论」。**本卡正是补上那一步的桥。**
+  - ref: polchinski-1998-v2
+    loc: "§11.2, pp. 52–55（杂化弦的无质量谱：超引力多重态 + 伴随规范多重态）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56、E57）。本卡第 (1) 条的谱依据。
+tags: [heterotic, anomaly, green-schwarz, consistency, bridge, placeholder]
+notes: |
+  ★★【本卡是占位卡，建议在第 12 章正式入图时换代或被更精确的卡取代】
+  它的目的只有一个：让「杂化弦」与本图已有的 GS 反常抵消一支之间不再是两座孤岛。
+  真正该做的是把 Polchinski 第 12 章（已有 L1 抽取记录 polchinski-1998-v2-ch12.md）
+  整节转成节点，那时本卡应 superseded_by 更精确的卡。
+
+  ★【边的方向：反常**不是**规范群的决定者】抽取记录 -ch12#E19 逐字：
+    'In the heterotic string, the gauge group was determined by the requirement of modular
+     invariance. In the type I string it was determined by cancellation of tadpole divergences.'
+  以及 -ch12#E21 逐字：
+    'In constructing new string theories, **it is in principle not necessary to check the low
+     energy anomaly**, since this is guaranteed to vanish if the string consistency requirements
+     have been satisfied. In practice, it is very useful as a check …'
+  ⇒ 在弦论侧，唯一性来自**模不变性**（杂化弦）与 **tadpole**（type I），
+    反常抵消是**推论/检验**，不是前提。
+  ⚠ 这与 worldsheet.ten-dimensional-superstring-theories 的前提 (P5) 的表述有张力：
+    那张卡按 §10.6 原文把「时空反常」列为筛掉非 SO(32) 规范群的理由之一。
+    两处都是 Polchinski 的原文（§10.6 vs §12.2），本图**不擅自调和**；
+    已在本卡记下，建议由 auditor 或 lead 在里程碑层面裁定表述。
+
+  【(4) 的两个 'if' 必须随本卡一起传播】抽取记录 -ch12#E20 要求：
+  凡 `consistency.*-anomaly-free` 类节点 status 只能是 physical-argument，
+  且 gaps 至少抄下这两个条件（'if the theory is modular-invariant'、'if this converges'）。
+  本卡的推导已照办。
+
+  【本图缺的 type I 版本】worldsheet.ten-dimensional-superstring-theories 的 (P5) 仍无节点。
+  建 type I 版桥接卡需要 §12.2 的 type I 一支（'the "UV" limit is reinterpreted as the IR limit
+  of a closed string exchange, and the anomaly then vanishes if this converges'），
+  与 §10.8 的 tadpole 是同一件事。留给第 12 章入图那一轮。
+author: curator
+created: "2026-09-11"

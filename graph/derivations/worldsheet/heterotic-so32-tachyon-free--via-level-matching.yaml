@@ -1,0 +1,33 @@
+id: worldsheet.heterotic-so32-tachyon-free--via-level-matching
+target: worldsheet.heterotic-so32-tachyon-free
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-left-moving-zero-point-constants
+    note: 供给左移 NS 型偏移 −1（would-be tachyon）与 R 型偏移 +1。
+  - id: worldsheet.closed-superstring-mass-shell
+    note: |
+      供给闭弦的质量壳与能级匹配 (α'/4)m² = N − ν = Ñ − ν̃（右移一侧的偏移：R 为 0、NS 为 −1/2）。
+      ⚠ 杂化弦的左移一侧偏移不是 −ν 而是 (11.2.14) 的 −1/+1；本卡按 §11.2 的写法把左移偏移替换掉。
+  - id: worldsheet.gso-projection
+    note: |
+      供给右移一侧的 GSO 投影，其结果是右移最低态无质量（NS− 被投掉）。
+      没有它，右移一侧也会有 −1/2 的态，配对讨论就不同。
+  - id: worldsheet.heterotic-so32-projections
+    note: 供给左移投影 exp(πiF) = 1，用于去掉第一激发态 λ^A_{−1/2}|0⟩_NS（(11.2.15)）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, pp. 52–53（逐字：'The left-moving side, like the bosonic string, has a would-be tachyon, but there is no right-mover to pair it with so the theory is tachyon-free.'；Table 11.2 的 m² = −4/α' 行只有 NS 列非空）"
+    note: L1（抽取记录 polchinski-1998-v2.md E56）。原书的论证就是这一句 + Table 11.2 的空列。
+summary: |
+  左移 NS 型基态的偏移是 −1，对应 m² = −4/α'；右移一侧做过 GSO 投影后最低态无质量（偏移 0）。
+  闭弦能级匹配要求左右两侧给出同一个 m²，而右移一侧取不到 −4/α'，
+  故该 would-be tachyon 在闭弦谱中没有配对，不出现。
+  左移第一激发态 λ^A_{−1/2}|0⟩_NS 另被 exp(πiF) = 1 投掉。
+gaps:
+  - "**原书的论证是一句话 + 一张表**：没有把能级匹配的不等式写出来，也没有验证「右移一侧取不到 m² < 0」（这需要右移 GSO 投影后谱的下界，本图只有 worldsheet.gso-projection 的重述，没有下界命题）。"
+  - "**左移偏移的来源是零点能助记法**，其自身缺口见 worldsheet.heterotic-left-moving-zero-point-constants 的推导 gaps。"
+  - "**能级匹配本身在本图是 physical-argument**：worldsheet.closed-superstring-mass-shell 与 worldsheet.closed-string-level-matching 都不是严格结果。"
+  - "**convention 注意**：所引的 closed-superstring-mass-shell 写的是 N − ν = Ñ − ν̃（两侧都是超弦）；杂化弦左移一侧要把 −ν 换成 (11.2.14) 的 −1/+1。原书在 §11.2 直接这样用，未重述质量壳公式。"
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,52 @@
+id: worldsheet.rns-superconformal-ope
+kind: proposition
+title: Xψ SCFT 的 (T_B, T_F) 满足 N = 1 超共形 OPE，且奇异项中只出现 T_B 与 T_F
+statement: |
+  设 (T_B, T_F) 如 worldsheet.rns-superconformal-generators 所定义（D 个 X^μ 与 D 个 ψ^μ，
+  靶空间度规 mostly-plus，α' 显式保留）。则
+    T_B(z) T_B(0) ∼ 3D/(4 z^4) + (2/z^2) T_B(0) + (1/z) ∂T_B(0),
+    T_B(z) T_F(0) ∼ (3/(2 z^2)) T_F(0) + (1/z) ∂T_F(0),
+    T_F(z) T_F(0) ∼ D/z^3 + (2/z) T_B(0)。
+  两条附加断言（原书逐字）：
+    (a) **只有** T_B 与 T_F 出现在奇异项里（'only T_B and T_F appear in the singular terms'），
+        即这一对流的算子乘积在奇异项层面闭合；
+    (b) 由 T_B T_F 的 OPE，**T_F 是权 (3/2, 0) 的张量**（二阶极点系数 3/2 = 权，一阶极点为 ∂T_F）。
+  反全纯部门给出同一组关系的一份拷贝（z → z̄）。
+
+  与一般 N = 1 超共形 OPE (10.1.15) 的比对：把上式写成
+    T_B T_B ∼ c/(2z^4) + …，  T_F T_F ∼ 2c/(3z^3) + …
+  的形式，两处分别给 c = (3/2)D（见 worldsheet.rns-matter-central-charge）。
+  本卡**不**独立断言这两处给出同一个 c——那由
+  math.super-virasoro-central-charge-equality 承担。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.13a) T_BT_B、(10.1.13b) T_BT_F、(10.1.13c) T_FT_F，p. 3；'That is, only T_B and T_F appear in the singular terms' 与 'The T_B T_F OPE implies that T_F is a tensor of weight (3/2, 0)' 同页"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E7；式号与三条 OPE 均逐页读到原书页图）。
+      原书直接给出结果，无论证措辞——这是 Wick 缩并的直接计算。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.15a,b,c), p. 4（一般 N = 1 超共形 OPE，用于读出中心荷）"
+  - ref: headrick-2008
+    loc: "Problem 10.3(a)：独立复算 T_BT_B（逐字 'which does indeed reproduce (10.1.13a)'）与 T_FT_F ∼ D/z^3 − (2/α'z)∂X_μ∂X^μ + (1/z^2)ψ^μψ_μ（化简即 (10.1.13c)）"
+    note: |
+      **仅作核对源**（按 lead 2026-09-10 裁决，个人笔记不承载论证；本条不是「唯一成文来源」例外，
+      因为原书正文已给出结果）。
+      ⚠ 抽取记录记下 [H] 在 Problem 10.3(b) 里印的是 '(10.1.1b)'，页图上确实少一个 3，
+      按上下文应为 (10.1.13b)；这是解答手册的排印疏漏，不是原书问题。
+tags: [rns, superstring, ope, superconformal, central-charge]
+notes: |
+  【为什么不把 (a)(b) 拆出去】(a) 与 (b) 都是同一次 Wick 缩并计算的直接读数
+  （(a) 是「算完只剩这些项」，(b) 是二阶极点系数的解读），文献没有分别推导它们，
+  故按 graph/CLAUDE.md 的判据不拆。
+  与此对照，「两处中心项系数相等」是**另一个**论证（Jacobi 恒等式），已单独立卡。
+
+  【下游】worldsheet.rns-matter-central-charge（读出 c^m = (3/2)D）、
+  worldsheet.rns-modes-satisfy-super-virasoro（经围道字典换成模式代数）。
+author: curator
+created: "2026-09-11"

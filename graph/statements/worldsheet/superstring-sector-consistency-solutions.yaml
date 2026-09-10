@@ -1,0 +1,65 @@
+id: worldsheet.superstring-sector-consistency-solutions
+kind: proposition
+title: 三条一致性条件的解穷举：有 R–NS 扇区时得 IIB / IIA / IIA′ / IIB′（四解、两个物理理论），无 R–NS 时得 0A / 0B
+statement: |
+  在 worldsheet.superstring-sector-consistency-conditions 的三条条件（外加能级匹配）下，
+  穷举扇区组合，得到：
+
+  **情形 1：至少有一个 R–NS 扇区（(α, α̃) = (1, 0)）。** 恰有四个解：
+    IIB ： (NS+,NS+)  (R+,NS+)  (NS+,R+)  (R+,R+)
+    IIA ： (NS+,NS+)  (R+,NS+)  (NS+,R−)  (R+,R−)
+    IIA′： (NS+,NS+)  (R−,NS+)  (NS+,R+)  (R−,R+)
+    IIB′： (NS+,NS+)  (R−,NS+)  (NS+,R−)  (R−,R−)
+  这四个解只代表**两个物理上不同的理论**：时空反射 X² → −X²、ψ² → −ψ²、ψ̃² → −ψ̃²
+  把 IIA′ 变成 IIA、IIB′ 变成 IIB。这两个理论称为
+  **type IIA 与 type IIB 超弦理论**。
+
+  **情形 2：没有 R–NS 扇区。** 只有两个额外解：
+    0A ： (NS+,NS+)  (NS−,NS−)  (R+,R−)  (R−,R+)
+    0B ： (NS+,NS+)  (NS−,NS−)  (R+,R+)  (R−,R−)
+  它们是模不变的，但**都含快子且没有时空费米子**（type 0 理论）。
+
+  ★★ **一条本项目必须记准的事实**：
+  **上述四个 type II 解里没有一个包含 (NS−,NS−) 扇区**（原书逐字：'Notice that none of these
+  theories contains the tachyon, which lives in the sector (NS−,NS−).'）。
+  这才是「快子被消除」在本书里的确切内容——**先解一致性条件得到扇区组合，
+  发现解里不含快子所在的扇区**，而不是「用 GSO 投影把快子投掉」。
+  （type 0 的两个解**确实**含 (NS−,NS−)，故有快子。）
+
+  **本命题不断言的内容**：
+    (1) 不断言这个穷举是完备的（原书措辞是 'one readily finds the only other solutions'，
+        不给穷举过程）；
+    (2) 不断言三条一致性条件本身是充分的；
+    (3) 不断言 IIA/IIB 的无质量谱（见 worldsheet.type-ii-massless-spectrum）
+        或时空超对称。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.6) 下方的四行谱表（IIB / IIA / IIA′ / IIB′）与 (10.6.7)（时空反射 X² → −X², ψ² → −ψ², ψ̃² → −ψ̃²），pp. 26–27；type 0 的两个解与逐字 'These are modular-invariant, but both have a tachyon and there are no spacetime fermions.' 同处；逐字 'Notice that none of these theories contains the tachyon, which lives in the sector (NS−,NS−).' 与 'In conclusion, we have found two potentially interesting string theories, the type IIA and IIB superstring theories.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E41；四行谱表、两个 type 0 解与全部逐字措辞
+      逐页读到原书页图）。
+      ⚠ 穷举的措辞是 'Proceeding further, one readily finds the only other solutions'
+      ——**原书不展示穷举过程**。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.7), p. 21 与 p. 23（快子在开弦 NS− / 闭弦 (NS−,NS−)，m² = −2/α'）"
+    note: |
+      L1（E35）。这是「解里不含快子」这句话的另一半：必须先知道快子住在哪个扇区。
+tags: [superstring, gso, sectors, type-ii, type-0, tachyon, consistency]
+notes: |
+  ★【转节点时的关键顺序，抽取记录 E41/E42 反复强调】
+  本书的逻辑是：**三条一致性条件 → 解出扇区组合 → 把结果重述为 GSO 投影**。
+  worldsheet.gso-projection 因此依赖本卡，而不是相反。
+  通俗说法「GSO 投影把快子投掉」在本书里**不成立**——正确说法是
+  「一致性条件的（type II）解不含快子所在的扇区」。
+
+  【四解 → 两理论这一步的强度】(10.6.7) 的时空反射是一个显式的场重定义，
+  原书直接给出。本卡照录为断言，但注意「物理上不同」这个判断本身没有精确化
+  （什么算「同一个理论」原书不定义）。
+
+  【type 0 别漏】它们同样满足三条条件且模不变，只是有快子、无时空费米子。
+  这一条对「弦论没有快子」这类通俗断言是重要的反例：**一致性条件本身不排除快子**。
+author: curator
+created: "2026-09-11"

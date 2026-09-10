@@ -1,0 +1,37 @@
+id: worldsheet.heterotic-bosonic-construction-gauge-groups--via-root-lattice-identification
+target: worldsheet.heterotic-bosonic-construction-gauge-groups
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.heterotic-narain-lattice-even-self-dual
+    note: 供给「内部格必须偶自对偶」这一条件（d = 10 时为 16 维欧氏）。
+  - id: math.even-self-dual-euclidean-lattices-dimension-16
+    note: |
+      供给「16 维只有 Γ_16 与 Γ_8 ⊕ Γ_8 两种」这一分类。
+      ⚠ 这条在本图只有 Polchinski 的一句断言支撑（无数学来源），是本推导的主要瓶颈。
+  - id: worldsheet.heterotic-so32-massless-spectrum
+    note: |
+      供给费米子构造下 SO(32) 情形的规范玻色子内容（496 = 伴随），用于第 (3) 步的「同一对群」比对。
+  - id: worldsheet.heterotic-e8e8-construction
+    note: |
+      供给费米子构造下 E₈ × E₈ 情形的规范玻色子内容（120 + 128 = 248），同上。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, pp. 74–75（逐字见目标卡 sources）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E63）。
+      ⚠ 被引用的 (11.4.16)、(11.4.21) 内容未核实（pp. 61–65 跳读）。
+summary: |
+  d = 10 时内部格是 16 维偶自对偶欧氏格，只有 Γ_16 与 Γ_8 ⊕ Γ_8 两种。
+  左移零点能 −1 ⇒ 无质量态由一个单位激发给出，其中顶点算子型的是 l_L² = 2 的格点。
+  原书说这些点恰是 SO(32) 的根（Γ_16）或两份 E₈ 的根（Γ_8 ⊕ Γ_8），
+  故两个格给出的规范群与 §11.2 费米子构造得到的**同一对**：SO(32) 与 E₈ × E₈。
+  两种构造经玻色化等价（原书：'It is easy to see'）。
+gaps:
+  - "**「l_L² = 2 的格点恰是根系」这一步依赖 (11.4.16)/(11.4.21)，而这两式的内容本轮未核实**（原书 pp. 61–65 跳读，抽取者只见到对它们的引用）。要坐实必须补读那五页页图。"
+  - "**李代数根系与规范群的对应在本图无节点**：§11.4「A little Lie algebra」（E59）本轮未入图，本图没有根系、Cartan–Weyl、伴随表示维数等节点。"
+  - "**'It is easy to see that the earlier fermionic construction and the present bosonic one are equivalent under bosonization.' 是全部论证**：原书不验证两种构造的等价性；本图无玻色化节点。"
+  - "**分类那条边的上游只有教科书断言**：math.even-self-dual-euclidean-lattices-dimension-16 没有数学来源（Conway–Sloane / Serre 未登记）。这是本推导的主要瓶颈。"
+  - "**「同一对群」的比对是本图做的核对**：原书说 'the same two gauge groups … found earlier'，但不逐项对照 496 与 248 的表示内容。"
+author: curator
+created: "2026-09-11"

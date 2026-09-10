@@ -1,0 +1,54 @@
+id: consistency.heterotic-anomaly-free-requires-gs--via-green-schwarz-mechanism
+target: consistency.heterotic-anomaly-free-requires-gs
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.anomaly-cancellation-so32-effective-theory
+    note: |
+      供给 SO(32) 有效场论的反常抵消结论（GS 1984 的 S₁ + S₂ + S₃ 与修改的 H）。
+  - id: consistency.anomaly-cancellation-e8e8-effective-theory
+    note: |
+      供给 E₈ × E₈ 有效场论的反常抵消结论（S′₁ + S₂ + S′₃）。
+      ⚠ 那张卡显式声明「不断言存在以 E₈ × E₈ 为规范群的超弦理论」——本推导补的正是这一步。
+  - id: worldsheet.heterotic-so32-massless-spectrum
+    note: |
+      供给 SO(32) 杂化弦的无质量谱：N = 1 超引力多重态 + so(32) 伴随（496）规范多重态，
+      即「低能有效理论的场内容」这一端。
+  - id: worldsheet.heterotic-e8e8-construction
+    note: |
+      供给 E₈ × E₈ 杂化弦的无质量谱（伴随 248 + 248 = 496），同上。
+  - id: consistency.gravitational-anomaly-requires-496-fermions
+    inferred: true
+    note: |
+      **inferred 的理由**：496 这个数在两端各自独立出现（杂化弦：32×31/2 或 2×248；
+      有效场论：tr R⁶ 项的抵消要求 496 个左手费米子）。
+      **原书不把这两处连起来**（Polchinski §12.2 反而说低能反常检查在弦论里 'in principle
+      not necessary'）。本图连这条边只是记录这个数值巧合的来源，**不**声称它是逻辑依赖。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.2, pp. 101–103（弦论侧反常消失的条件式陈述，逐字：'One can prove the decoupling of null states formally … Surface terms from the boundary of the fundamental region cancel if the theory is modular-invariant.'）；§12.1, eq. (12.1.40), p. 100（杂化弦的 H̃₃ 与 δB₂）；§12.3, eq. (12.3.32)–(12.3.36), p. 107（δB 的世界面来源）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md，条目 -ch12#E16/E17/E19/E20/E21/E22）。
+      ⚠ 本轮（§11 转图）**未逐页读第 12 章**；这条来源转录自那份 L1 抽取记录。
+  - ref: green-schwarz-1984
+    loc: "全文"
+    note: 本图 consistency 区 GS 一支的原始文献；本推导只做接线，不重复其内容。
+summary: |
+  两端拼接：
+  (a) **弦论端**：§11.2 给出杂化弦的无质量谱——d = 10 的 N = 1 超引力多重态加上规范群
+      （SO(32) 或 E₈ × E₈）伴随表示的规范多重态，伴随维数都是 496。
+  (b) **场论端**：本图 consistency 区已有的两张卡说，正是这两个规范群的十维 N = 1
+      超引力 + 超 Yang–Mills 在加入修改的 H 与 GS 反项后单圈反常全部抵消。
+  (c) **接线**：把 (a) 的低能极限认作 (b) 的有效场论。Polchinski §12.1 (12.1.40) 明写杂化弦的
+      H̃₃ = dB₂ − (κ₁₀²/g₁₀²)ω₃ 与相应的 δB₂，§12.3 还给出这个修改的**世界面反常**来源。
+  (d) **弦论侧的独立论证是条件式的**：反常消失被归结为「模空间基本区边界上的面项相消
+      **如果**理论模不变」，且作者把整个论证标为 'formally'。
+gaps:
+  - "**'formally' 与两个 'if'**（抽取记录 -ch12#E20 要求逐条抄下）：'One can prove the decoupling of null states **formally** … the issue is whether terms from the UV limit invalidate the formal argument'；'Surface terms from the boundary of the fundamental region cancel **if** the theory is modular-invariant'；type I 一侧则是 'the anomaly then vanishes **if** this converges'。"
+  - "**「杂化弦的低能极限就是那个有效场论」这一步在本图完全没有节点**：需要弦论的低能有效作用量（§12.1）与场论反常多项式（§12.2）的对接，本轮未入图。这是本卡作为「占位」的主要理由。"
+  - "**§12.2 的十维反常多项式 (12.2.11)–(12.2.13) 原书不推导**（见 sources.bib 中 polchinski-1998-v2 的使用限制 (3)）；本图 consistency 区的对应内容来自 GS 1984 与 ADT，不来自 Polchinski。"
+  - "**496 那条边是 inferred 且刻意标为「非逻辑依赖」**：Polchinski §12.2 明说低能反常检查在弦论里 'in principle not necessary'，即方向是弦论一致性 ⇒ 反常消失，而不是反常消失 ⇒ 规范群。"
+  - "**§11.3 的其它杂化弦不在本推导范围**：原书 §12.2 p. 101 只说 'in all cases the anomalies factorize'（断言、无证明、无引文），习题 12.3 只要求验证 SO(16) × SO(16) 一例。"
+  - "**本轮未逐页读第 12 章**：本推导的 §12 来源转录自 polchinski-1998-v2-ch12.md（该记录自身是 L1）。第 12 章正式入图时应重写本卡。"
+author: curator
+created: "2026-09-11"

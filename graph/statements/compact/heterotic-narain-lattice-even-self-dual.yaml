@@ -1,0 +1,74 @@
+id: compact.heterotic-narain-lattice-even-self-dual
+kind: proposition
+title: 杂化弦的玻色构造与环面紧化：动量格必须是号差 (26−d, 10−d) 的偶自对偶洛伦兹格
+statement: |
+  **玻色构造**（§11.6）：把杂化弦的左移部门整个写成玻色子，即 **26 个左移玻色子与
+  10 个右移玻色子**（右移一侧另有 ψ̃^μ）。紧化到 d 个非紧维时，记无量纲动量
+    l_{L,R} = (α'/2)^{1/2} k_{L,R}                              （(11.6.1)），
+  紧化方向的动量 (l_L^m, l_R^n)（d ≤ m ≤ 25，d ≤ n ≤ 9）取值于一个格 Γ（(11.6.2)）。
+  定义号差为 (26−d, 10−d) 的内积
+    l ∘ l′ = l_L·l_L′ − l_R·l_R′                                （(11.6.3)）。
+
+  **断言**：一致的 CFT 要求（原书逐字：'the requirements for a consistent CFT are **locality of
+  the OPE plus modular invariance**'，并注明这是 Vol.1 §8.4 Narain 紧化的结论）
+    **Γ 必须是号差 (26−d, 10−d) 的偶自对偶洛伦兹格**：
+      l ∘ l ∈ 2Z  对一切 l ∈ Γ                                   （(11.6.4a)），
+      Γ = Γ^*（自对偶）                                          （(11.6.4b)）。
+
+  **d = 10（不紧化）的特例**：此时 ∘ 只剩左移部分、是**正定**的，
+  l_L^m 构成一个 **16 维偶自对偶欧氏格**。
+
+  **本命题不断言的内容**：
+    (1) **不**给出「locality + modular invariance ⟺ 偶自对偶」的论证。
+        原书明写把它推给 Vol.1 §8.4（'From the discussion of Narain compactification in
+        section 8.4, we know that …'），本卡不重复那里的论证。
+    (2) 不断言 16 维时这样的格恰有两个——那是
+        math.even-self-dual-euclidean-lattices-dimension-16。
+    (3) 不断言谱的完整内容。原书脚注 2（p. 75，逐字）：'To be precise it is still necessary to
+        specify the spectrum, which amounts to specifying which primary fields appear.
+        **Modular invariance generally restricts the possibilities greatly.**'
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, eq. (11.6.1)–(11.6.4b), pp. 73–74（26 左 + 10 右玻色子、无量纲动量、格 Γ、∘ 内积、偶与自对偶两条件；逐字：'the lattice must be an even self-dual Lorentzian lattice of signature (26−d, 10−d)'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E63；式号与公式逐页读到原书页图）。
+      ⚠ **§11.6 的后半（pp. 76–83）本轮跳读**（抽取记录 §3.2），
+      故 (11.6.11) 之后的内容（含 [H] 提到的 (11.6.15)）本卡不覆盖。
+  - ref: polchinski-1998-v1
+    loc: "§8.2、§8.4（Narain 紧化；原书在 §11.6 明写引用这两节）"
+    note: |
+      原书把「locality + modular invariance ⇒ 偶自对偶」的论证推给这里。
+      ⚠ 本图对应的节点在**未合并**分支 agent/curator/polchinski-ch8 上
+      （compact.narain-lattice、compact.modular-invariance-requires-self-dual-lattice、
+      compact.self-dual-lattice-gives-modular-invariance）。
+      **本轮不加边**，只在 notes 指向；待那支合并后由 lead 决定接边。
+tags: [heterotic, compactification, narain, lattice, modular-invariance, so32, e8e8]
+notes: |
+  ★【与 compact 区 Narain 一支的接口（本轮只指向，不加边）】
+  分支 agent/curator/polchinski-ch8（**未合并 main**）已建：
+    · compact.narain-lattice —— 玻色弦 D = 26 的 Narain 格；
+    · compact.modular-invariance-requires-self-dual-lattice —— 必要方向
+      （Vol.1 (8.4.24) 的后半句，原书逐字 'a little thought shows that it is also necessary'，
+       **原书对这半句无论证**，伴读者本人也复现不出）；
+    · compact.self-dual-lattice-gives-modular-invariance —— 充分方向；
+    · compact.even-lattice-gives-mutual-locality —— 偶 ⇒ 相互局域。
+  本卡是这四条在**杂化弦号差 (26−d, 10−d)** 下的版本。
+  合并后建议的接边方向：本卡 ← 那三条（必要 + 充分 + 偶⇒局域），
+  并注意本卡的号差是 (26−d, 10−d) 而 ch8 一支是 (k, k)，需要 convention_map 或换代。
+  ⚠ **在那支合并前，本卡的推导只能靠 Polchinski 的「推给 §8.4」这一句支撑**，
+  这一点已写进推导的 gaps。
+
+  【与 §11.2 费米子构造的关系】原书逐字：'**It is easy to see** that the earlier fermionic
+  construction and the present bosonic one are equivalent under bosonization.'
+  ——又一条 'easy to see'，无论证。见 worldsheet.heterotic-bosonic-construction-gauge-groups。
+
+  【为什么放在 compact 区】§11.6 的标题是 'The bosonic construction and toroidal
+  compactification'，而 (11.6.2)–(11.6.4) 讲的是紧化动量格；d = 10 只是其 Γ 退化为欧氏的特例。
+  本图 compact 区已有 Narain 一支（虽未合并），放这里可与之对齐。
+author: curator
+created: "2026-09-11"

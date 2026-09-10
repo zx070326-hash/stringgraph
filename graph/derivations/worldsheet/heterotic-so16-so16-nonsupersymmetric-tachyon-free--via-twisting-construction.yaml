@@ -1,0 +1,45 @@
+id: worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free--via-twisting-construction
+target: worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: 供给被扭曲的对象：作用量 (11.2.3) 的场内容（§11.3 的九个理论都建立在它上面）。
+  - id: worldsheet.heterotic-so32-projections
+    note: |
+      供给扭曲构造的起点与对照：(11.3.1)/(11.3.2) 的对角模不变量与对角投影
+      exp[πi(F + F̃)] = 1 是 (11.2.9)/(11.2.10) 的一个替代取法。
+  - id: worldsheet.heterotic-left-moving-zero-point-constants
+    note: |
+      供给左移偏移，用于读出 (11.3.3) 的快子 λ^A_{−1/2}|0⟩_{NS,NS}：
+      左移 −1 加一个 1/2 激发 = −1/2，与右移 NS 的 −1/2 配对得 α'm²/4 = −1/2，即 m² = −2/α'。
+  - id: worldsheet.heterotic-so32-partition-function
+    inferred: true
+    note: |
+      **inferred 的理由**：§11.3 的模不变量 (11.3.1) 是用同一套 Z^α_β 写的，
+      但原书在 §11.3 **不重述**符号论证，而是引用 Vol.1 §8.5 的扭曲构造。
+      本图连这条边只是为了让 (11.3.1) 的记号在图上有出处。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.3, eq. (11.3.1)–(11.3.3), pp. 55–56；§11.3 末, p. 59（逐字见目标卡）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E58）。
+      ⚠ **pp. 56–58 本轮跳读**：中间的具体扭曲步骤在抽取记录中是空白。
+  - ref: polchinski-1998-v1
+    loc: "§8.5（扭曲构造，原书明写引用）"
+    note: |
+      本图**没有** Vol.1 §8.5 的节点，故这条来源在图上无对应依赖。见 gaps。
+summary: |
+  从对角理论（(11.3.1)/(11.3.2)，除一个快子外自洽）出发，用 Vol.1 §8.5 的扭曲构造生成其余
+  十维杂化弦。其中一个扭曲把引力微子所在的 (R±, NS+, NS+) 扇区与快子所在的
+  (NS−, NS−, NS+)、(NS−, NS+, NS−) 扇区**同时**投掉，留下 SO(16) × SO(16) 规范对称性。
+  该理论因此既无快子也无引力微子（从而无时空超对称），
+  证明「无快子但无超对称的十维弦论是可能的」。
+gaps:
+  - "**扭曲构造的具体步骤在本图与抽取记录中都是空白**：原书 pp. 56–58 本轮跳读（抽取记录 §3.2）。本推导只由 (11.3.1)–(11.3.3) 与 p. 59 顶端的结论支撑，中间是黑箱。"
+  - "**Vol.1 §8.5 的扭曲/轨形构造在本图无节点**：原书明写以它为工具，本图接不上。这是本推导最大的结构性缺口。"
+  - "**'无引力微子 ⇒ 无超对称' 这一步没有节点**：type II 一侧的对应命题（worldsheet.type-ii-spacetime-supersymmetry）用的是「引力微子的零态等价关系 ⇒ 局域超对称」，其逆命题原书不论证。"
+  - "**该理论的模不变性与 OPE 闭合未在本图验证**：原书把它们归入扭曲构造的一般性质（Vol.1 §8.5），本轮未核实。"
+  - "**一条 inferred 边**：(11.3.1) 的 Z^α_β 记号接到 §11.2 的配分函数卡，原书在 §11.3 不作此引用。"
+author: curator
+created: "2026-09-11"

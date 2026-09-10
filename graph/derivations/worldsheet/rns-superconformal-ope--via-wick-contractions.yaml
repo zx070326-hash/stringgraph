@@ -1,0 +1,53 @@
+id: worldsheet.rns-superconformal-ope--via-wick-contractions
+target: worldsheet.rns-superconformal-ope
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-superconformal-generators
+    note: 供给 T_B、T_F 的显式表达式（(10.1.12) 与 (10.1.8)）。
+  - id: worldsheet.rns-action
+    note: 供给基本 OPE（XX ∼ −(α'/2)η ln|z|^2、ψψ ∼ η/z），即 Wick 缩并的两条基本收缩。
+  - id: worldsheet.operator-product-expansion
+    note: |
+      供给「算子乘积可按奇异项展开」这一框架本身。按 lead 裁决（2026-09-10）本图不为
+      OPE 收敛性建公理节点，凡用 OPE 的推导一律封顶在 physical-argument。
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      供给「重合算符按减去自缩并做正规序」的规则，含费米型场的换序符号——
+      本推导对 ψ^μ∂ψ_μ 与 ψ^μ∂X_μ 的缩并必须用到费米符号。
+      ⚠ Vol.2 把 : : 隐含（原书 p. 2），故原文公式里看不到正规序记号，但计算是按它做的。
+  - id: worldsheet.tt-ope-central-charge
+    note: |
+      供给 T_BT_B 的 OPE 中「二阶极点系数 = 2、一阶极点 = ∂T」这一由 T 是权 (2,0) 张量固定的
+      结构，以及四阶极点系数写作 c/2 的归一化。本推导用它来把 3D/(4z^4) 读成 c = (3/2)D
+      （那一步的结论卡是 worldsheet.rns-matter-central-charge）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.13a,b,c), p. 3（结果）；(10.1.6)、(10.1.7), p. 2（基本 OPE）；正规序体例 p. 2"
+    note: L1。原书只给结果，不展示 Wick 缩并的中间步骤。
+  - ref: headrick-2008
+    loc: "Problem 10.3(a)（第三方独立复算，核对源）"
+    note: 仅核对，不承载论证。
+summary: |
+  标准的自由场 Wick 缩并：把 T_B、T_F 中的复合算符与另一处的复合算符两两收缩，
+  用 ∂X∂X ∼ −(α'/2)η^{μν}/z^2（由 (10.1.6) 求导）与 ψψ ∼ η^{μν}/z 两条基本 OPE，
+  收集 z 的负幂次。
+    · T_BT_B：X 部门给 (D/2)/(2z^4) 型的项（每个标量贡献 1），ψ 部门给每个费米子 1/2，
+      合起来四阶极点系数 3D/4 = c/2 与 c = (3/2)D 一致；二阶与一阶极点重组成
+      (2/z^2)T_B + (1/z)∂T_B。
+    · T_BT_F：只出现二阶与一阶极点，系数 3/2 与 1，即 T_F 是权 (3/2,0) 的张量。
+    · T_FT_F：三阶极点系数 D（由 D 个 ψ∂X 对的交叉收缩），一阶极点重组成 2T_B——
+      [H] 的中间形式 D/z^3 − (2/α'z)∂X_μ∂X^μ + (1/z^2)ψ^μψ_μ 化简后正是 (10.1.13c)。
+  「奇异项里只出现 T_B、T_F」是计算完毕后的读数，不是先验的。
+
+  【status 的理由】三条：
+  (1) OPE 的收敛性与算子乘积展开的合法性在来源中未证明（lead 2026-09-10 裁决的统一口径）；
+  (2) Wick 缩并涉及重合点极限与正规序的形式操作，本图无严格构造；
+  (3) 原书不给中间步骤，本图无法逐步复核（唯一成文的中间步骤在第三方解答手册里，
+      且那也是形式计算）。
+gaps:
+  - "**OPE 级数收敛与算子乘积展开的合法性在来源中未证明**（lead 2026-09-10 裁决的标准 gap）。"
+  - "**原书不给 Wick 缩并的中间步骤**：(10.1.13) 是直接写出的结果。本图能核对的中间形式只有 headrick-2008 Problem 10.3(a)，且该手册在 Problem 10.3(b) 有一处式号排印疏漏（印 (10.1.1b)，应为 (10.1.13b)）。"
+  - "**费米型正规序的符号规则未逐条核实**：Vol.2 把 : : 隐含（p. 2），原文公式看不到正规序记号；本图用 worldsheet.conformal-normal-ordering-v2 补这一层，但那张卡自身的费米符号约定与 Vol.2 是否逐字一致未核对。"
+author: curator
+created: "2026-09-11"

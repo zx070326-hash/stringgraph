@@ -1,0 +1,70 @@
+id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+kind: proposition
+title: 环面振幅的模不变性要求横向费米子的个数是 8 的倍数（D = 10 的一条独立必要条件）
+statement: |
+  考虑 type II 超弦的环面真空振幅（Coleman–Weinberg 形式），把费米部门的迹按扇区写成
+    Z^α_β(τ) = Tr_α[ q^H exp(πiβQ) ] = (1/η(τ)) ϑ[α/2, β/2](0, τ)，
+  其中 α = 1 − 2ν 标记周期性（R: α = 1、NS: α = 0），β 标记是否插入 exp(πiF)。
+  GSO 投影后的费米配分函数取组合
+    Z_ψ^±(τ) = (1/2)[ Z^0_0(τ)⁴ − Z^0_1(τ)⁴ − Z^1_0(τ)⁴ ∓ Z^1_1(τ)⁴ ]，
+  其中的四次幂对应 **8 个横向费米子按每两个一组**（原书强调这些迹是「for a pair of dimensions」）。
+
+  **本命题的内容**（原书逐字）：'**It is necessary for the construction of this invariant that
+  there be a multiple of eight transverse fermions.**'
+  即：要让上述组合在模变换
+    Z^α_β(τ) = Z^β_{−α}(−1/τ) = exp[−πi(3α² − 1)/12] Z^α_{α+β−1}(τ+1)
+  下不变，横向费米子的个数必须是 **8 的倍数**。
+
+  **另外两条同源的事实**（本卡一并断言，它们是同一段论证的读数）：
+    (a) 模不变性**固定**了 (10.7.9) 中各项的相对符号，特别是 (Z^0_0)⁴ 与 (Z^1_0)⁴ 的相对符号，
+        而后者对应 **R 扇区态的费米统计**；
+    (b) 上述模变换是「naive」的，因为**纯左移费米子的路径积分相位没有 diff 不变的定义方式**
+        （原书逐字：'The reason these modular transformations are naive is that there is no
+        diff-invariant way to define the phase of the path integral for purely left-moving
+        fermions.'）；这个相位代表一个 *global gravitational anomaly*。
+
+  ⚠ **本命题给出的不是 D = 10，而是一个更弱的必要条件**：横向费米子个数 ≡ 0 (mod 8)。
+  在「D 个平坦 X^μψ^μ 且横向方向为 D − 2 个」的设定下它给 D − 2 ≡ 0 (mod 8)，
+  即 D ∈ {2, 10, 18, …}；**只有配合中心荷条件才挑出 D = 10**。
+  本卡因此在汇总卡里被列为一条**独立的必要条件**，不是第三条「给出 D = 10」的路线。
+
+  本命题**不**断言环面振幅本身的值（type II 的 Z_{T₂} = 0 依赖 Jacobi 恒等式 (10.7.16)
+  与 Z^1_1 = 0），也**不**断言模不变性对带顶点算子的振幅成立
+  （原书：'one can show by explicit calculation (or by indirect arguments)'）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.7a,b,c)（Z^α_β 的三种写法与 theta 函数）、(10.7.8a–d)（四个迹）、(10.7.9)（Z_ψ^± 的组合）、(10.7.14)（模变换），pp. 32–35；逐字 'It is necessary for the construction of this invariant that there be a multiple of eight transverse fermions.' 与 'We should emphasize that these traces are for a pair of dimensions.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E47；式号与逐字措辞逐页读到原书页图）。
+      ⚠ 原书对模不变性的验证措辞是 'The reader can verify that with the transformations
+      (10.7.14), the combinations Z_ψ^± are invariant under τ → −1/τ …'——**推给读者**。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, (10.7.14) 附近, p. 34（逐字：'Naively then, Z^α_β(τ) = Z^α_{α+β−1}(τ+1) … so that naively Z^α_β(τ) = Z^β_{−α}(−1/τ). The reason these modular transformations are naive is that there is no diff-invariant way to define the phase of the path integral for purely left-moving fermions.'；'The phase represents a global gravitational anomaly, an inability to define the phase of the path integral such that it is invariant under large coordinate transformations.'）"
+    note: L1（E47）。本卡断言 (b) 的来源。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, p. 35（逐字：'modular invariance forces the minus signs in the combination (10.7.9), in particular the relative sign of (Z^0_0)⁴ and (Z^1_0)⁴ which corresponds to Fermi statistics for the R sector states'）"
+    note: L1（E47）。本卡断言 (a) 的来源。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.1), p. 31（环面振幅取 Vol.1 (7.3.24) 的 Coleman–Weinberg 形式；逐字：'We make the guess, correctly it will turn out, that the torus amplitude is again given by the Coleman–Weinberg formula (7.3.24)'）"
+    note: |
+      L1。★ 又一次「猜」——这是本章第二处作者自称 guess 的地方（第一处是 §10.1 的
+      'by guesswork'）。本卡的推导据此封顶在 physical-argument。
+tags: [superstring, modular-invariance, critical-dimension, torus, consistency, gso]
+notes: |
+  【为什么单列这张卡】抽取记录 E47 明确指出：「必须有 8 的倍数个横向费米子」是模不变性的要求，
+  这是 **D = 10 的一个独立的必要条件来源**，与中心荷路线（E12/E37）不同。
+  但它给的是模 8 的条件，不是 D = 10 本身，故不能当作第三条「路线」。
+  汇总卡 worldsheet.critical-dimension-superstring 把它列为「附加的必要条件」。
+
+  【本卡未建的相邻内容】(10.7.15) 的 type 0 对角模不变量、(10.7.16) 的 Jacobi
+  「abstruse identity」Z^0_0⁴ − Z^0_1⁴ − Z^1_0⁴ = 0、以及 type II 的 Z_{T₂} = 0，本轮不建节点。
+  ⚠ 原书特别强调：一般振幅要求真空是模不变的「*without* using the vanishing of Z^1_1 or the
+  abstruse identity (10.7.16) — as we have required」，转节点时不要把 Z_{T₂} = 0 当成模不变性
+  的**依据**。
+author: curator
+created: "2026-09-11"

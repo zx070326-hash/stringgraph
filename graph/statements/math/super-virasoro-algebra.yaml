@@ -1,0 +1,79 @@
+id: math.super-virasoro-algebra
+kind: definition
+status: rigorous
+title: N = 1 超 Virasoro 代数（Ramond 与 Neveu–Schwarz 两种模式集）
+statement: |
+  设 k 是特征 0 的域（物理情形 k = C），ν ∈ {0, 1/2}。
+
+  **载体**（Z 或 (1/2)Z-分次向量空间，带 Z_2-分次）：
+    偶部由 {L_m : m ∈ Z} 与中心元 C 张成；
+    奇部由 {G_r : r ∈ Z + ν} 张成。
+  即 SVir_ν(k) := ⊕_{m∈Z} k·L_m ⊕ ⊕_{r∈Z+ν} k·G_r ⊕ k·C。
+
+  **括号**（偶-偶取交换子、偶-奇取交换子、奇-奇取反交换子；c 表示 C 在给定表示上的标量值）：
+    [L_m, L_n]  = (m − n) L_{m+n} + (c/12)(m^3 − m) δ_{m,−n},
+    {G_r, G_s}  = 2 L_{r+s} + (c/12)(4r^2 − 1) δ_{r,−s},
+    [L_m, G_r]  = ((m − 2r)/2) G_{m+r},
+    [C, ·] = 0。
+
+  **两种模式集**（这是本定义的唯一分叉，其余数据完全相同）：
+    ν = 0   ⟹ r, s ∈ Z：称 **Ramond (R) 代数**；此时存在零模 G_0，且 {G_0, G_0} = 2L_0 − c/12。
+    ν = 1/2 ⟹ r, s ∈ Z + 1/2：称 **Neveu–Schwarz (NS) 代数**；此时**没有** G_0，
+             最低的奇模是 G_{±1/2}，且 {G_{1/2}, G_{−1/2}} = 2L_0。
+  两种情形下 {L_m} ∪ {C} 张成的偶子代数的括号逐字相同。
+
+  **本卡不断言的内容**：
+    (1) 不断言上述括号满足超 Jacobi 恒等式的**逐条验证已在本图或来源中给出**。
+        文献把这组括号直接称为超 Virasoro 代数并使用其 Jacobi 恒等式
+        （Polchinski 习题 10.5 就是用 R–NS 代数的 Jacobi 恒等式做计算），
+        但本图没有该验证的节点；这是一个有限步的初等计算，待补。
+    (2) 不断言这是 Witt/Virasoro 超代数的**唯一**中心扩张，也不给任何表示论
+        （本卷讲表示论的地方是 §15.6 "Representations of the N = 1 superconformal algebra"，p. 254，
+        本轮未抽取）。
+    (3) 不断言 R 与 NS 两个代数同构或不同构。
+uses: []
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.11a) [L_m,L_n]、(10.2.11b) {G_r,G_s}、(10.2.11c) [L_m,G_r]，p. 7；R/NS 命名（'This is known as the Ramond algebra for r, s integer and the Neveu-Schwarz algebra for r, s half-integer'）在同页 (10.2.11) 下方"
+    note: |
+      式号与三条括号的内容均为 L1（抽取者逐页读原书页图，见
+      literature/extractions/polchinski-1998-v2.md §0 与 E18），并经 Headrick 解答手册
+      Problem 10.4 独立复算 (10.2.11b)/(10.2.11c) 交叉核实。
+      Polchinski 写 (c/12)(m^3 − m)，与 conv.virasoro-standard 的 (c/12)m(m^2−1) 恒等。
+      ⚠ 原书把这组括号作为 **Xψ SCFT 的模式代数**给出（即一个具体实现），
+      本卡把它抽象成代数本身；这一抽象步骤是本图的记账选择，不是原文的做法。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.15a,b,c), p. 4（同一代数的 OPE 形式：T_B T_B ~ c/(2z^4) + …、T_B T_F ~ (3/2z^2)T_F + …、T_F T_F ~ 2c/(3z^3) + (2/z)T_B）；'Here, N = 1 refers to the number of (3/2, 0) currents'"
+    note: |
+      L1。OPE 形式与模式形式的等价靠围道变形字典（worldsheet.ope-commutator-dictionary），
+      本卡不使用该等价，只记录 (10.1.15) 是同一代数的场论写法。
+      记号提醒：Polchinski 的场叫 T_F（不是常见的 G(z)），但模式仍叫 G_r，
+      (10.2.10a) 为 T_F(z) = Σ_{r∈Z+ν} G_r / z^{r+3/2}。
+tags: [algebra, super-virasoro, superconformal, definition, rns]
+notes: |
+  【与 worldsheet.virasoro-algebra-v2 的关系：只记事实，不建依赖边】
+  本卡偶部的括号 [L_m, L_n] = (m−n)L_{m+n} + (c/12)(m^3−m)δ_{m,−n} 与
+  worldsheet.virasoro-algebra-v2 所写的括号**逐字同形**（后者写 ((m^3−m)/12)δ·C）。
+  两卡是不同的对象：本卡的载体多出奇部 {G_r}，而 virasoro-algebra-v2 是纯偶的李代数，
+  且已 formalized（Lean 的 VirasoroAlgebra）。本卡**不**声明 uses: [worldsheet.virasoro-algebra-v2]，
+  理由有二：
+    (a) 抽取记录 E18 明确指出，(10.2.11a) 里的 c 是超共形理论的中心荷（平坦情形 (3/2)D），
+        L_m 里含费米子模式项，与玻色弦的 L_m 不是同一个算子；
+    (b) 「SVir 的偶部含一个同构于 Vir 的子代数」是一条需要论证的结构命题
+        （需要检查中心元与分次的匹配），本图未建该命题。
+  日后若要把 Lean 的 Virasoro 复用到超 Virasoro，应先建那条结构命题，而不是在本卡加边。
+
+  【为什么 status: rigorous 而不是 formalized 或更低】
+  这是一张纯代数定义卡：载体、分次、括号都由有限条公式确定，没有路径积分或形式操作。
+  按 docs/STATUS_LEVELS.md，definition 的 status 表示该定义卡本身的精确程度，
+  故 rigorous。没有 Lean 声明，故不是 formalized。
+  ⚠ 但见【本卡不断言的内容】(1)：「这确实是李超代数」这一句本卡刻意没有写进 statement，
+  因为超 Jacobi 的验证在本图与本卡来源中都没有。若日后补上该验证（或形式化），
+  应新建一张含该断言的卡片，不要改本卡。
+
+  【下游】worldsheet.rns-modes-satisfy-super-virasoro 是本卡的具体实现（Xψ SCFT 的模式）；
+  worldsheet.superconformal-ghost-modes 给出鬼场部门的同类模式。
+author: curator
+created: "2026-09-11"
