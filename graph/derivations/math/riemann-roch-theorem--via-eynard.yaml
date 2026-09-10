@@ -1,0 +1,65 @@
+id: math.riemann-roch-theorem--via-eynard
+target: math.riemann-roch-theorem
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4：定理与证明纲要 p. 72 eq. (1-10)；Riemann 不等式 Proposition 5.1, p. 75；补足到等式的部分在 §5.2, pp. 75–76（Theorem 5.2/5.3、Proposition 5.2/5.3）"
+    note: |
+      **L1（researcher 2026-09-11 落盘全文 2.2 MB，读 p. 1–7、71–77、84–89；math-sources.md §42.7）。**
+      文献自称的严格程度：p. 72 逐字「The Riemann-Roch theorem, that we shall prove in this chapter」，
+      即讲义在同一章内给出完整证明，不是引用外部结果。
+      该讲义是公开的 arXiv 预印本（IPhT-T18/007，Paris–Saclay IPHT 博士生课程），**任何人可免费复核**。
+  - ref: hartshorne-1977
+    loc: "Ch. IV, Theorem 1.3（GTM 52 的标准证明：用 Serre 对偶把 h¹(D) 换成 h⁰(K−D)）"
+    note: |
+      **编号 L3（一手读到引用方 Wynter, UChicago REU 2016, p. 11 逐字「Theorem IV.1.3, Hartshorne [2]」）；
+      原书未取得**，故本条只作第二来源，不作主承载。
+  - ref: farkas-kra-1992
+    loc: "§III.4 (Divisors and the Riemann–Roch Theorem), pp. 69–78, 2nd ed.（黎曼面解析路线的教科书证明）"
+    note: |
+      **只到小节（L1 目录扫描）；正文未取得，定理号 III.4.8 为 L4，禁止写进图**（math-sources.md §42.3）。
+summary: |
+  本条不重写证明，只记账「这是数学文献里有完整证明的定理，本图把它当作数学输入接进来」。
+
+  Eynard Ch. 4 的证明路线（researcher 读到的结构，p. 72–76）：
+  (1) Definition 1.2 (1-5)(1-6) 定义 ℒ(D)、r(D)、Ω(D)、i(D)；
+  (2) Theorem 1.1 (1-7)：r(D)、i(D) 只依赖除子的线性等价类 [D]；
+  (3) Proposition 5.1（Riemann 不等式，p. 75）：r(−D) ≥ deg D − 𝔤 + 1；
+  (4) §5.2（p. 75–76）的 Theorem 5.2/5.3 与 Proposition 5.2/5.3 把不等式补成等式，
+      亏损项恰为 i(D)，得 (1-10) r(−D) = deg D + 1 − 𝔤 + i(D)。
+
+  与目标卡（Hartshorne 形式）的字典：r(−D) = l(D)，i(D) = l(K − D)，𝔤 = g，
+  于是 (1-10) 就是 l(D) − l(K − D) = deg D + 1 − g。
+
+  `depends_on: []` 是**有意的**：本节点是图的一个数学输入叶子（同
+  math.laplace-fundamental-solution-2d），不是「未加论证的断言」——论证在所引来源内部自足。
+gaps:
+  - |
+    **本项目未逐行复核该证明**：researcher 读的是 p. 71–77、84–89（含定理陈述、定义、
+    Riemann 不等式与 §5.2 的证明所在页），但没有逐步验算。
+    本条的 `rigorous` 档位依据是**来源强度**（数学讲义/教科书里被完整证明的定理，
+    符合 docs/STATUS_LEVELS.md 第 4 级「有发表的、数学界接受的完整证明」），
+    不是本图自己的复核。
+  - |
+    **两条次级来源的编号可核对性弱于主来源**：hartshorne-1977 的 `Theorem IV.1.3` 是 L3
+    （只读到引用方），farkas-kra-1992 只能定位到 `§III.4`。
+    若将来要把本卡的 loc 收紧到单一编号，**只有 eynard-2018-lectures 那条是可复核的**。
+  - |
+    **不覆盖推广**：不可定向曲面、带边曲面、高维（Hirzebruch–Riemann–Roch）、
+    以及 Atiyah–Singer 指标定理形式的 P₁ 版本，都不在本条论证范围内。
+    弦论侧真正需要不可定向情形（Klein 瓶、RP₂），那一块本图**完全没有来源**
+    （math-sources.md Q34）。
+notes: |
+  **为什么不走 Atiyah–Singer**：v1 卡的 TODO 同时提到「Riemann–Roch 或 P₁ 这一椭圆算子的
+  Atiyah–Singer 指数」。researcher 只把 Riemann–Roch 定位到了带编号来源，
+  指标定理那条路线（ind P₁ = dim ker P₁ − dim ker P₁^T = 3χ 的直接指标计算）
+  **本图尚无任何来源**；若日后补上，应新建 `math.riemann-roch-theorem` 的兄弟卡或
+  直接给 worldsheet.riemann-roch-kappa-minus-mu-v2 挂一条 `--via-atiyah-singer`，
+  那条能绕开本链条里的两座桥（见目标卡 notes）。
+
+  **形式化**：Mathlib 无 Riemann–Roch（目标卡 notes 已记录官方跟踪表证据），
+  故不得新增 `--via-lean`，本节点的天花板是 rigorous。
+author: curator-riemann-roch
+created: "2026-09-11"
