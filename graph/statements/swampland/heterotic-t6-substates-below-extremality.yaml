@@ -30,7 +30,29 @@ sources:
   - ref: arkani-hamed-2006
     loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14；Figure 4 图题, p.13"
   - ref: sen-1995-bh-torus
-    loc: "**未核实**：本项目未获取该文正文（bib note 记为 L0）。eqs. (22)(23) 的极端黑洞解由 arkani-hamed-2006 §4 外包给该文（其 [8]）。"
+    loc: "Nucl. Phys. B 440 (1995) 421 [hep-th/9411187]"
+    note: >-
+      ★ **eqs. (22)(23) 的极端黑洞解的一手出处就是本条**（AMNV §4 把它外包给其 [8]，逐字
+      "A. Sen, 'Black hole solutions in heterotic string theory on a torus,' Nucl. Phys. B 440,
+      421 (1995) [arXiv:hep-th/9411187]."）。
+      **该归属已由 L1 交叉核实**：另一篇 Sen 1995（hep-th/9504147，本项目已逐页读全文）在其 p.6
+      逐字把黑洞解归给**同一篇** 9411187（"Most general electrically charged rotating black hole
+      solutions in this theory were constructed in ref.[7]"）。
+      ⚠ 本条**正文本项目未获取（L0）**，loc 只到篇级；起始页 421 已 L1（由 AMNV 参考文献转录），
+      终页 440 未核实。
+  - ref: sen-1995-bh
+    loc: "arXiv:hep-th/9504147v2, p.6 与 References [7], p.15"
+    note: >-
+      ⚠⚠ **本条不是 (22)(23) 的出处**，登在这里只承载一件事：它 L1 地证实了上一条的归属
+      （见上）。三条红线：
+      (1) **9504147 ≠ 9411187**，两个 bib key 绝不可互换（同作者、同年、标题都以 "black hole" 开头）；
+      (2) 9504147 **没有任何弱引力猜想形式**（无 m ≤ qM_Pl、无亚极端/超极端比较、无 remnant 论证），
+          不得用它支撑本卡的任何断言；
+      (3) **归一化完全不同且原文不给换算**：9504147 是 α' = 16、G_N = 2、T = g²/32π
+          （见 conv.sen-1995-normalization），本卡用的是 AMNV 的 α' = 4、M_Pl = 1。
+          **9504147 的 (24)/(37) 系数不得搬到本卡的记号里**；其 C = 4（(49)）是熵匹配的**拟合值**，
+          与本卡无关。
+      详见 literature/extractions/sen-1995-bh.md §0.3 与 §5.4。
 tags: [swampland, weak-gravity, heterotic, charge-lattice, black-hole, amnv]
 notes: |
   from: arkani-hamed-2006#E22（另见 #U3、#Q2）。
@@ -39,6 +61,14 @@ notes: |
   with α' = 4"）。否则 (24) 与 (25) 里的 −1 无意义。⚠ α' = 4 **与本图 canonical 的
   conv.alpha-prime-regge 不是同一归一化**；本卡不声明 alpha-prime 族约定，只在此记账，
   凡把本卡接到用 conv.alpha-prime-regge 的节点上的边必须写 convention_map。
+
+  【★ 第三套归一化：不要把 Sen hep-th/9504147 的系数搬进来（2026-09-11 补）】
+  另一篇 Sen 1995（hep-th/9504147 = bib key `sen-1995-bh`，本项目已 L1 逐页读全文）用的是
+  **α' = 16、G_N = 2、T = g²/32π**（见 conv.sen-1995-normalization），与本卡的 α' = 4、M_Pl = 1
+  **完全不同，且两篇都不给换算**。该文的 (24) m² = Q̄_R²/(8g²)、(37) 熵公式、(49) C = 4
+  **都不得搬到本卡的记号里**；误用 G_N = 1 会让 (37) 的系数差 2 倍。
+  ⇒ 本卡 (22)(23) 的一手出处是 **sen-1995-bh-torus（hep-th/9411187）**，不是 `sen-1995-bh`。
+  两个 bib key 是本项目已知最易撞车的一对。
 
   【(24) 里 −1 的来源】原文逐字 "The −1, coming from the tachyon in the left-moving bosonic
   string, is crucial."

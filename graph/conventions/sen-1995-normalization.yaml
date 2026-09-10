@@ -1,0 +1,53 @@
+id: conv.sen-1995-normalization
+family: alpha-prime
+title: "Sen 1995（hep-th/9504147）的归一化：α' = 16、G_N = 2、T = g²/32π"
+definition: |
+  Sen, *Extremal black holes and elementary string states*（arXiv:hep-th/9504147v2）全文使用的
+  一套归一化，与本图 canonical 的 conv.alpha-prime-regge **不同**：
+
+    α' = 16
+    G_N = 2            （**不是** G_N = 1）
+    T = g² / (32π)     （该文的弦张力，含耦合因子 g²）
+    弦度规与 Einstein 度规的关系：g = e^{−Φ} G
+
+  ⚠ 三条使用规则：
+  1. **凡引用该文公式系数的节点必须声明本约定。** 例：(24) m² = Q̄_R²/(8g²)、
+     (37) S_{B.H.} = (2πC/g)√(m² − Q̄_L²/(8g²))。误用 G_N = 1 会让 (37) 的系数差 2 倍。
+  2. **与 Arkani-Hamed–Motl–Nicolis–Vafa 2006 的 α' = 4、M_Pl = 1 不是同一套，且两篇都不给换算。**
+     凡跨这两套的边必须写 convention_map，并注明换算是本项目补的（本图目前**没有**这样的边）。
+  3. 本约定 `canonical: false`：本图的 canonical α' 归一化是 conv.alpha-prime-regge
+     （T = 1/(2πα')，无 g² 因子）。本卡的存在只是给 Sen 的系数一个可引用的位置。
+canonical: false
+sources:
+  - ref: sen-1995-bh
+    loc: "arXiv:hep-th/9504147v2, eqs. (7)(9)(12), p.5–p.6"
+    note: >-
+      L1（researcher 2026-09-11 逐页读 v2 页图，16 页全覆盖）。
+      loc 写死 **v2**（页边条纹逐字 "arXiv:hep-th/9504147v2  6 May 1995"）。
+      ⚠ 标题页印的 "November 26, 2024" 是 arXiv 重新编译源码的 \today，不是论文日期；
+      论文日期在标题页页脚 "April, 1995"。
+notes: |
+  from: literature/extractions/sen-1995-bh.md §1.1、E7、U4、U7、§5.2(a)。
+
+  【★ α' = 16 的出处本项目未核实】该文把这套归一化外包给它的 **[22] = A. Sen, IJMPA 9 (1994) 3707
+  [hep-th/9402002]**，本项目**未登记也未核实那一篇**。故本卡记的是"Sen 在 9504147 里用的是这套数"，
+  **不是**"这套数在别处如何导出"。
+
+  【★ 为什么放进 family: alpha-prime 而不是新开一个 family】α' 的取值是归一化选择，
+  与 conv.alpha-prime-regge 真正互斥（同一个量取不同数值），放同一 family 才能让 validate 的
+  convention_map 检查生效。conv.alpha-prime-regge 保持 canonical: true。
+
+  【★ 本卡当前没有被任何陈述声明】建它的目的是记账：
+  swampland.heterotic-t6-substates-below-extremality 用的是 **AMNV 的 α' = 4 + M_Pl = 1**，
+  **不是**本卡；而 AMNV eqs. (22)(23) 的极端黑洞解外包给的是
+  **sen-1995-bh-torus（hep-th/9411187）**，也不是本卡对应的 9504147。
+  本卡的作用是让"两篇 Sen 1995 的归一化互不相同、且都不与 AMNV 换算"这件事有一个固定的引用位置，
+  避免日后有人把 9504147 的 (24)/(37) 系数直接搬到 AMNV 的记号里。
+
+  【⚠ 两篇 Sen 1995 极易撞车】`sen-1995-bh` = hep-th/9504147（本卡的来源，L1 全文已抽取）；
+  `sen-1995-bh-torus` = hep-th/9411187（T⁶ 极端黑洞解的**真正**出处，本项目未抽取，L0）。
+  同作者、同年、标题都以 "black hole" 开头。**两个 bib key 绝不可互换。**
+
+  【本卡不覆盖的东西】9504147 的拉伸视界假设、熵匹配、C = 4（(49)，是拟合出来的）等都是**命题**，
+  不是约定，本卡不承载；researcher 建议为它们单独建一个 BPS/黑洞对应小簇（见报告与
+  literature/extractions/sen-1995-bh.md §5.2–§5.3），本轮未建。
