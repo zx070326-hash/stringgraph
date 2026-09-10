@@ -1,0 +1,142 @@
+id: worldsheet.physical-states-level-grading--via-lean
+target: worldsheet.physical-states-level-grading
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      提供 H_phys 本身：Lean 里 `Fock.physSubmodule η a a₀` 与其成员刻画
+      `Fock.mem_physSubmodule`（即该定义卡 formal.lean_decl 所指的对象）。
+      本推导只用该卡的 H_phys 一半，**不用**其零模态 H_0（后者要双线性型，本推导不涉及）。
+      字面依赖（同文件定义）。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供底空间 `Fock D R` 与 **level 分级** `Fock.levelSubmodule D R N`
+      （权 N(d) = Σ_{(μ,n)} n·d(μ,n) 下的加权齐次分量，Mathlib 的
+      `weightedHomogeneousSubmodule`）。第 (1)(2) 条整个是关于这套分级的陈述；
+      level 投影 `Fock.levelComponent D R N`（`weightedHomogeneousComponent`）
+      与「每个向量是其 level 分量的有限和」`Fock.sum_levelComponent`
+      虽写在 PhysicalStates.lean 里，用的是该节点定义的权函数 `Fock.oscLevel`。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_n（`Fock.Lop`）与第 (1)(2) 条**必需**的齐次性引理：
+      `Fock.Lop_mem_levelSubmodule`（L_n 把 level M 送到 level M−n）、
+      `Fock.levelComponent_Lop`（L_n 与 level 投影的交换关系 P_{N−n} ∘ L_n = L_n ∘ P_N）、
+      `Fock.Lop_apply_eq_zero_of_level_lt`（n > M 时 L_n 在 level M 上为零）。
+      这三条是「L_n 条件可以逐 level 拆开」的全部内容，全部是关于 `Lop` 的陈述，
+      故这条边不能省。字面依赖（同一批文件，逐条调用）。
+      【说明】lead 分派本卡时给的 depends_on 是 [old-covariant-physical-states,
+      open-string-l0-equals-level-plus-mass, bosonic-fock-space] 三条；
+      本条边是 curator 按「每条边都要有来源」补的第四条，
+      理由如上。它 effective = formalized，不改变本推导的状态。
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    inferred: false
+    note: |
+      提供第 (3)(4) 条的**唯一实质输入**：L_0 在 level N 分量上是标量 α'k² + N 的乘法
+      （`Fock.Lop_zero_apply_of_mem_levelSubmodule`，即该节点 formal.lean_decl）。
+      Lean 里 `Fock.sub_intercept_apply_of_mem_levelSubmodule` 一行调用它，把 (L_0 − a)
+      在 F_N 上化成标量 (α'k² + N − a)。该节点的假设 hη : ∀ μ, η μ * η μ = 1
+      由此传入本命题的第 (3)(4) 条（第 (1)(2) 条不需要它，见陈述末尾「假设的分工」）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.{levelComponent, coeff_levelComponent, levelComponent_mem, sum_levelComponent, Lop_apply_eq_zero_of_level_lt, Lop_mem_levelSubmodule, levelComponent_Lop, levelComponent_mem_physSubmodule, mem_physSubmodule_iff_levelComponent, physSubmodule_eq_iSup_inf_levelSubmodule, sub_intercept_apply_of_mem_levelSubmodule, mem_physSubmodule_iff_of_mem_levelSubmodule, mem_physSubmodule_inf_levelSubmodule_iff, massShell_of_mem_physSubmodule}"
+    note: |
+      本仓库，合并提交 2c8b577（"merge: physical-state submodule, L_m adjointness, null/spurious
+      states, level-1 analysis (formalizer)"），形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**；依据是 formal/ 的自述、formal/TODO.md 的登记，
+      以及 2c8b577 已由 lead 合并进 main。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)（level 1 的 L_0 条件给质量壳；已核实）；§2.7 eq. (2.7.25)、(2.7.27)（L_0 = α'p² + N 与 α^μ_0 = (2α')^{1/2} p^μ；经 schrans-2020 §4.3 复现核实）"
+    note: |
+      **文献侧的平行内容，不是本推导的形式化证据。** 见陈述 sources 第二条的说明：
+      Polchinski 逐 level 分析谱，但没有把「H_phys 按 level 分级」单列为定理，
+      也没有 ⨆ 与内直和的区分；本推导的第 (1)(2) 条是按 Lean 侧定理规范化出来的。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/PhysicalStates.lean 的
+  `Grading` 与 `Phys` 两节。逐条对应：
+
+  **(1) 物理态的 level 分量仍是物理态**（`levelComponent_mem_physSubmodule`；
+  双向版 `mem_physSubmodule_iff_levelComponent`）。设 ψ ∈ H_phys，即 L_0ψ = a·ψ 且
+  L_nψ = 0 (n > 0)。对 P_N ψ 验两件事：
+    · L_0 部分：由 `levelComponent_Lop`（取 n = 0，故 N' = N）得
+      L_0 (P_N ψ) = P_N (L_0 ψ) = P_N (a·ψ) = a·(P_N ψ)（末步用 P_N 的 R-线性）。
+    · n > 0 部分：分两种情形。若 N < n，则 `Lop_apply_eq_zero_of_level_lt` 直接给
+      L_n (P_N ψ) = 0（level N 的向量被指标大于 N 的 L_n 湮灭）。
+      若 n ≤ N，则由 `levelComponent_Lop`（取 N' = (N − n)）得
+      L_n (P_N ψ) = P_{N−n} (L_n ψ) = P_{N−n} 0 = 0。
+  反方向（每个分量物理 ⇒ ψ 物理）由 `sum_levelComponent`（ψ 是其分量的有限和）
+  与 H_phys 是子模（`Submodule.sum_mem`）立得。
+
+  **(2) H_phys = ⨆_N (H_phys ⊓ F_N)**（`physSubmodule_eq_iSup_inf_levelSubmodule`）。
+  两个包含：
+    · ⊇：每个 H_phys ⊓ F_N ≤ H_phys（`inf_le_left`），故上确界 ≤ H_phys。
+    · ⊆：给定 ψ ∈ H_phys，用 `sum_levelComponent` 写 ψ = Σ_N P_N ψ（有限和，
+      求和集是 ψ.support 在 level 下的像）；每一项由第 (1) 条落在 H_phys 里、
+      由 `levelComponent_mem` 落在 F_N 里，故落在 H_phys ⊓ F_N ≤ ⨆；
+      再用 `Submodule.sum_mem` 收尾。
+  **这一步只给出 ⨆（生成），没有给出内直和**：见陈述边界 (a) 与 gaps (i)。
+
+  **(3) level N 上的物理态条件**（`sub_intercept_apply_of_mem_levelSubmodule`
+  → `mem_physSubmodule_iff_of_mem_levelSubmodule` → `mem_physSubmodule_inf_levelSubmodule_iff`）。
+  第一条把 worldsheet.open-string-l0-equals-level-plus-mass 的
+  `Lop_zero_apply_of_mem_levelSubmodule` 代入 (L_0 − a₀·id)，在 ψ ∈ F_N 上得
+    (L_0 − a₀·id) ψ = (½ · zeroModeSq η a + N − a₀) • ψ,
+  其中 `invTwo R * zeroModeSq η a` 就是 α'k²（Sugawara.lean 的零模约定）。
+  于是 L_0 条件 L_0ψ = a₀·ψ 与标量条件 (α'k² + N − a₀)•ψ = 0 互推
+  （`sub_eq_zero`），n ≥ 1 的条件原样保留；再与 `Submodule.mem_inf` 拼成
+  `mem_physSubmodule_inf_levelSubmodule_iff`，即陈述第 (3) 条逐字。
+  本条需要假设 hη : ∀ μ, η μ * η μ = 1（经由上述 L_0 引理传入）。
+
+  **(4) 非零物理态强迫质量壳**（`massShell_of_mem_physSubmodule`，假设 `[NoZeroDivisors R]`）。
+  由第 (3) 条得 (α'k² + N − a₀) • ψ = 0。取 ψ 的一个非零系数 coeff d ψ ≠ 0
+  （ψ ≠ 0 时存在，否则 `MvPolynomial.ext` 给 ψ = 0），对该系数取值得
+  (α'k² + N − a₀) · coeff d ψ = 0；R 无零因子且 coeff d ψ ≠ 0 故第一个因子为零，
+  即 α'k² + N = a₀。与 conv.metric-mostly-plus 的 k² = −m² 合起来就是 α'm² = N − a。
+gaps:
+  - |
+    (i) **level 分解是 ⨆ 而非 DirectSum**（PhysicalStates.lean 文件头 gap 1）。
+    `physSubmodule_eq_iSup_inf_levelSubmodule` 只给出「H_phys 由它的 level 片生成」，
+    「该上确界是内直和」未被打包成 `DirectSum.IsInternal`
+    （根源是 Fock.lean 没有给 Fock 空间本身提供该结构）。
+    数学上直性是显然的（多项式环的加权齐次分解），但**未形式化**，
+    故陈述第 (2) 条只写 ⨆。任何要用「逐 level **唯一**分解」的下游必须先补这一条。
+  - |
+    (ii) **逐动量扇区、代数版、对角 η、R 为交换 ℚ-代数**：继承
+    worldsheet.bosonic-fock-space 的缺口与 Sugawara.lean 的零模缺口。
+    k 只以标量参数 a^μ = (2α')^{1/2} k^μ 出现，没有位置算符 x^μ，没有对 k 的直积分；
+    η 必须对角，且第 (3)(4) 条另需 η^{μμ}η_{μμ} = 1；Fock 空间是多项式代数（未完化）。
+  - |
+    (iii) **两种 L_m 定义未被证明等同**（继承 worldsheet.virasoro-generators-free-boson
+    的缺口）。Lean 覆盖的是振子双线性 + 产生-湮灭正规序的 Sugawara 型 L_m；
+    文献里同一批 L_n 也常由全纯 T 的 Laurent 模（共形正规序）定义，
+    两者在本图与 Lean 里都没有被证明给出同一组算子。
+  - |
+    (iv) **level N 不是数算符的本征值（在 Lean 里）**。N 自始至终是加权齐次次数；
+    「N = Σ_{n≥1} α_{−n}·α_n 的本征值」是标准事实但未单列节点、未形式化。
+    继承 worldsheet.open-string-l0-equals-level-plus-mass 的边界 (b)。
+  - |
+    (v) **不给出维数与配分函数**。F_N 有限生成（`Fock.levelSubmodule_fg`）已在
+    worldsheet.bosonic-fock-space 里，但 dim (H_phys ⊓ F_N) 的计数（横向自由度、
+    p(N) 型公式）既不在本推导也不在图中其他节点。
+  - |
+    (vi) **文献侧无逐字对应**。第 (1)(2) 条在 Polchinski / GSW 里是隐含的标准做法
+    （L_0 与 N 对易、L_n 移动 level），不是成文定理；本推导的陈述是按 Lean 定理
+    规范化出来的。第 (3)(4) 条在 N = 1 处有已核实的 (4.1.16) 对应，一般 N 无逐字核实。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
+
+  【记号换算】Lean 用 `a₀ : R` 表示截距、`a : Fin D → R` 表示零模参数；
+  本图的陈述里截距写 a、零模写 α_0，与 conv.intercept-sign-a、conv.alpha-prime-regge 一致。
+
+  本推导由 curator 于 2026-09-11 建立，与 worldsheet.open-string-intercept 的换代
+  （→ worldsheet.open-string-intercept-v2）同批：拆卡把「质量公式」从「a = 1」里分出来，
+  本卡则把「质量公式的逐 level 版本」补成一条独立的 formalized 命题，
+  两件事合起来使 α'm² = N − a 不再被 physical-argument 的截距断言封顶。
+author: curator
+created: "2026-09-11"
