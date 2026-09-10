@@ -295,6 +295,153 @@ lemma mode_two_apply_secondState (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) 
 
 end ModeAlgebra
 
+/-! ### The Fock form on the level-two states
+
+The six independent inner products, and the resulting closed form for the norm of the trial
+state.  All of them come from `Fock.pairing_mode_left` (`(α^μ_j)† = α^μ_{-j}`) together with
+the action of `α^μ_1`, `α^μ_2` computed above; no monomial bookkeeping is needed. -/
+
+section Pairing
+
+variable (η a : Fin D → R)
+
+lemma pairing_one_smul_one (c : R) : pairing η (1 : Fock D R) (c • (1 : Fock D R)) = c := by
+  rw [map_smul, pairing_one_one, smul_eq_mul, mul_one]
+
+lemma pairing_polState_left (e : Fin D → R) (w : Fock D R) :
+    pairing η (polState η e) w
+      = ∑ μ : Fin D, (η μ * e μ) * pairing η (1 : Fock D R) (mode η a μ 1 w) := by
+  rw [polState_eq_sum_mode η a, map_sum, LinearMap.sum_apply]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, LinearMap.smul_apply, smul_eq_mul, pairing_mode_left η a μ (-1),
+    show -(-1 : ℤ) = 1 by norm_num]
+
+lemma pairing_traceState_left (w : Fock D R) :
+    pairing η (traceState η) w
+      = ∑ μ : Fin D, η μ * pairing η (1 : Fock D R) (mode η a μ 1 (mode η a μ 1 w)) := by
+  rw [traceState_eq_sum_mode η a, map_sum, LinearMap.sum_apply]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, LinearMap.smul_apply, smul_eq_mul, pairing_mode_left η a μ (-1),
+    pairing_mode_left η a μ (-1), show -(-1 : ℤ) = 1 by norm_num]
+
+lemma pairing_secondState_left (w : Fock D R) :
+    pairing η (secondState η a) w
+      = ∑ μ : Fin D, (η μ * a μ) * pairing η (1 : Fock D R) (mode η a μ 2 w) := by
+  rw [secondState_eq_sum_mode η a, map_sum, LinearMap.sum_apply]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, LinearMap.smul_apply, smul_eq_mul, pairing_mode_left η a μ (-2),
+    show -(-2 : ℤ) = 2 by norm_num]
+
+lemma pairing_polSqState_left (w : Fock D R) :
+    pairing η (polSqState η a) w
+      = ∑ μ : Fin D, (η μ * a μ) * pairing η (polState η a) (mode η a μ 1 w) := by
+  rw [polSqState_eq_sum_mode η a, map_sum, LinearMap.sum_apply]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, LinearMap.smul_apply, smul_eq_mul, pairing_mode_left η a μ (-1),
+    show -(-1 : ℤ) = 1 by norm_num]
+
+include a in
+/-- `⟨ζ·α_{-1}k, ξ·α_{-1}k⟩ = ζ · ξ`. -/
+lemma pairing_polState_polState (hη : ∀ μ, η μ * η μ = 1) (e f : Fin D → R) :
+    pairing η (polState η e) (polState η f) = ∑ μ : Fin D, η μ * e μ * f μ := by
+  rw [pairing_polState_left η a e]
+  exact Finset.sum_congr rfl fun μ _ => by
+    rw [mode_one_apply_polState η a hη f μ, pairing_one_smul_one]
+
+lemma pairing_polState_self (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (polState η a) (polState η a) = zeroModeSq η a := by
+  rw [pairing_polState_polState η a hη a a, zeroModeSq]
+
+include a in
+/-- `⟨α_{-1}·α_{-1}k, α_{-1}·α_{-1}k⟩ = 2D`: the only place where the dimension enters. -/
+theorem pairing_traceState_traceState (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (traceState η) (traceState η) = 2 * (D : R) := by
+  rw [pairing_traceState_left η a]
+  have hterm : ∀ μ : Fin D,
+      η μ * pairing η (1 : Fock D R) (mode η a μ 1 (mode η a μ 1 (traceState η)))
+        = 2 * (η μ * η μ) := by
+    intro μ
+    rw [mode_one_apply_traceState η a hη μ, map_smul, mode_one_apply_mode_neg_one_one η a μ μ,
+      if_pos rfl, smul_smul, pairing_one_smul_one]
+    ring
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.mul_sum, sum_eta_sq η hη]
+
+theorem pairing_traceState_secondState :
+    pairing η (traceState η) (secondState η a) = 0 := by
+  rw [pairing_traceState_left η a]
+  exact Finset.sum_eq_zero fun μ _ => by
+    rw [mode_one_apply_secondState η a μ, map_zero, map_zero, mul_zero]
+
+theorem pairing_traceState_polSqState (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (traceState η) (polSqState η a) = 2 * zeroModeSq η a := by
+  rw [pairing_traceState_left η a]
+  have hterm : ∀ μ : Fin D,
+      η μ * pairing η (1 : Fock D R) (mode η a μ 1 (mode η a μ 1 (polSqState η a)))
+        = 2 * (η μ * a μ * a μ) := by
+    intro μ
+    rw [mode_one_apply_polSqState η a hη μ, map_smul, mode_one_apply_polState η a hη a μ,
+      smul_smul, pairing_one_smul_one]
+    ring
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.mul_sum, ← zeroModeSq]
+
+theorem pairing_secondState_secondState (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (secondState η a) (secondState η a) = 2 * zeroModeSq η a := by
+  rw [pairing_secondState_left η a]
+  have hterm : ∀ μ : Fin D,
+      (η μ * a μ) * pairing η (1 : Fock D R) (mode η a μ 2 (secondState η a))
+        = 2 * (η μ * a μ * a μ) := by
+    intro μ
+    rw [mode_two_apply_secondState η a hη μ, pairing_one_smul_one]
+    ring
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.mul_sum, ← zeroModeSq]
+
+theorem pairing_secondState_polSqState :
+    pairing η (secondState η a) (polSqState η a) = 0 := by
+  rw [pairing_secondState_left η a]
+  exact Finset.sum_eq_zero fun μ _ => by
+    rw [mode_two_apply_polSqState η a μ, map_zero, mul_zero]
+
+theorem pairing_polSqState_polSqState (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (polSqState η a) (polSqState η a) = 2 * zeroModeSq η a * zeroModeSq η a := by
+  rw [pairing_polSqState_left η a]
+  have hterm : ∀ μ : Fin D,
+      (η μ * a μ) * pairing η (polState η a) (mode η a μ 1 (polSqState η a))
+        = (2 * zeroModeSq η a) * (η μ * a μ * a μ) := by
+    intro μ
+    rw [mode_one_apply_polSqState η a hη μ, map_smul, smul_eq_mul, pairing_polState_self η a hη]
+    ring
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ, ← Finset.mul_sum, ← zeroModeSq]
+
+theorem pairing_secondState_traceState :
+    pairing η (secondState η a) (traceState η) = 0 := by
+  rw [pairing_comm, pairing_traceState_secondState η a]
+
+theorem pairing_polSqState_traceState (hη : ∀ μ, η μ * η μ = 1) :
+    pairing η (polSqState η a) (traceState η) = 2 * zeroModeSq η a := by
+  rw [pairing_comm, pairing_traceState_polSqState η a hη]
+
+theorem pairing_polSqState_secondState :
+    pairing η (polSqState η a) (secondState η a) = 0 := by
+  rw [pairing_comm, pairing_secondState_polSqState η a]
+
+/-- **The norm of the level-two scalar trial state, for arbitrary coefficients.**
+With `s = α_0 · α_0 = 2α' k²` (`Fock.zeroModeSq`),
+`⟨ψ₂, ψ₂⟩ = 2D + 2 s c₂² + 2 s² c₃² + 4 s c₃`.
+No physical-state condition is used here. -/
+theorem pairing_levelTwoScalar_self (hη : ∀ μ, η μ * η μ = 1) (c₂ c₃ : R) :
+    pairing η (levelTwoScalar η a c₂ c₃) (levelTwoScalar η a c₂ c₃)
+      = 2 * (D : R) + 2 * zeroModeSq η a * c₂ ^ 2
+        + 2 * zeroModeSq η a ^ 2 * c₃ ^ 2 + 4 * zeroModeSq η a * c₃ := by
+  simp only [levelTwoScalar, map_add, map_smul, LinearMap.add_apply, LinearMap.smul_apply,
+    smul_eq_mul, pairing_traceState_traceState η a hη, pairing_traceState_secondState η a,
+    pairing_traceState_polSqState η a hη, pairing_secondState_secondState η a hη,
+    pairing_secondState_polSqState η a, pairing_polSqState_polSqState η a hη,
+    pairing_secondState_traceState η a, pairing_polSqState_traceState η a hη,
+    pairing_polSqState_secondState η a]
+  ring
+
+end Pairing
+
 end Fock
 
 end StringFormal.NoGhost
