@@ -26,6 +26,28 @@ depends_on:
       本边随之改指。新目标的 (1)(2)(3)(4) 覆盖旧卡的 (1)(2)(3)；
       **唯一没有被覆盖的是旧卡 (2) 末句的形式特征标** Σ_N p(N)q^{h+N} = q^h ∏(1−q^n)^{-1}——
       而本边正是图中唯一用到特征标的地方，故已单列一条 gap，见 gaps 末尾。
+      **【2026-09-11 第三次补】** 上一句所说的 gap 现已由新增的
+      math.euler-partition-generating-function 关闭（见下一条 depends_on）：
+      本卡负责 dim_F V_N = p(N)，那卡负责 Σ_N p(N) q^N = ∏(1−q^n)^{−1}，
+      两者相乘即形式特征标。本边的内容与 inferred 标注不受影响。
+  - id: math.euler-partition-generating-function
+    inferred: false
+    note: |
+      **非 inferred：特征标那一步字面用到它**。LZ Proposition 3.4 给出 ch_q V(D,p) 的显式
+      乘积公式，Theorem 3.5 的证明比较 ch_q L(26−D,1−h) 与 sign_q L(26−D,1−h)；
+      把「按 level 的维数序列」写成「∏_{n≥1}(1 − q^n)^{−1} 型的乘积」这一步，就是本边指向的
+      Euler 分拆生成函数恒等式 Σ_{N≥0} p(N) q^N = ∏_{n≥1}(1 − q^n)^{−1}
+      （目标节点的 (4)，物理写法；更一般的无逆元形式是它的 (1)）。
+      与 math.verma-module-free-over-negative-part 的分工：那条边给
+      **dim_F V_N = p(N)**（系数），本条边给**从系数序列到乘积公式的组合学恒等式**；
+      Verma 模的形式特征标 ch_q V(c,h) = q^h ∏_{n≥1}(1 − q^n)^{−1} 是两者相乘的结果，
+      本图不为这个乘积单设节点。
+      **记号对应**：目标节点写形式变量 X 与形式幂级数环 R[[X]]，LZ 与物理文献写 q；
+      二者是同一个不定元，目标节点的陈述里已写明「X 就是物理文献里的 q」。
+      **系数环**：LZ 在特征零域（ℂ）上工作，落在目标节点 (4) 的域情形；
+      目标节点 (1) 更一般（任意交换环），本边只用到 (4)。
+      **收敛性无关**：目标节点全部在形式幂级数层面，不涉及 |q| < 1 的解析收敛；
+      LZ 的 ch_q / sign_q 也是形式的（按 L₀ 分级的逐层维数母函数），二者层面一致。
   - id: worldsheet.bosonic-fock-space
     note: |
       非 inferred：LZ (3.2) 逐字把物质模定义为 V(D,p) = sym ⊕_{μ=1}^{D} ⊕_{n=1}^{∞} C α^μ_{-n}，
@@ -175,6 +197,7 @@ gaps:
   - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。三条都不影响 Theorem 3.5 本身的逐字条件，但影响本推导 summary 第 (1) 步的转述。"
   - "【2026-09-10 追加】本推导 gaps 与 summary 中对 worldsheet.no-ghost-theorem-v3 的引用，一律可读作对其后继 **worldsheet.no-ghost-theorem-v4** 的引用：v3→v4 只改两处表述（动量限定提到全局前言；第 (2) 条显式写 p ≠ 0）与 DDF 参考方向的参数化（射线 → 去心直线），见 ms.no-ghost-theorem 第三轮审计 B1/A1。唯一需要重读的一点：v4 的第 (2) 条现在也带对 p 的存在量词，故它与本节点断言 (ii) 反方向给出的「存在某个 p 不正定」在量词结构上一致（差别只剩 LZ 还要求 (P1)–(P3)）；本节点陈述里说 v3 的 (2)「不带存在某个 p 的限定」对 v3 仍正确，对 v4 不再适用。"
   - "从文献到形式化的差距：需要把 (3) 的最后一步（Verma 模 M(c,h) 半正定的 (c,h) 区域）写成可形式化的命题，它等价于 Kac 行列式在该区域非负——本项目 worldsheet.kac-determinant 尚未形式化，math.verma-module-free-over-negative-part 也缺 PBW（Mathlib v4.33.1 无 PBW；已形式化的是构造与分级 worldsheet.verma-module-v2，以及 straightening 一半 worldsheet.verma-level-spanned-by-partitions）。故本节点短期内不可形式化。（原文写 verma-module-pbw-basis，该卡 2026-09-11 已 superseded_by 前者。）"
-  - "**【2026-09-11 新增，合并 verma 卡的副产品】特征标那一步在图上无节点承载**：summary 第 (1)(3) 步转述的 LZ Proposition 3.4 / Theorem 3.5 证明末句用的是形式特征标 ch_q（比较 ch_q L 与 sign_q L）。本边现挂的 math.verma-module-free-over-negative-part 只给到 **dim_F V_N = p(N)**，**不给** Σ_{N≥0} p(N)q^{h+N} = q^h ∏_{n≥1}(1−q^n)^{-1}。二者之间差一个 Euler 分拆生成函数恒等式（形式幂级数层面的标准恒等式，**本图既无节点也无来源登记**）。被合并的 worldsheet.verma-module-pbw-basis 曾在陈述里写出该特征标，但它同样没有为 Euler 恒等式给出来源。⇒ 这一步在本推导中是**无来源的补白**，不影响 rigorous 的判定（有限步形式幂级数恒等式），但形式化时要单独做。若日后第二处需要它，应新建一条 math 节点。"
+  - "**【2026-09-11 新增，合并 verma 卡的副产品】特征标那一步在图上无节点承载**：summary 第 (1)(3) 步转述的 LZ Proposition 3.4 / Theorem 3.5 证明末句用的是形式特征标 ch_q（比较 ch_q L 与 sign_q L）。本边现挂的 math.verma-module-free-over-negative-part 只给到 **dim_F V_N = p(N)**，**不给** Σ_{N≥0} p(N)q^{h+N} = q^h ∏_{n≥1}(1−q^n)^{-1}。二者之间差一个 Euler 分拆生成函数恒等式（形式幂级数层面的标准恒等式，**本图既无节点也无来源登记**）。被合并的 worldsheet.verma-module-pbw-basis 曾在陈述里写出该特征标，但它同样没有为 Euler 恒等式给出来源。⇒ 这一步在本推导中是**无来源的补白**，不影响 rigorous 的判定（有限步形式幂级数恒等式），但形式化时要单独做。若日后第二处需要它，应新建一条 math 节点。
+     ——**【2026-09-11 关闭，curator-euler】上一段整条已作废，保留为历史记录**。所说的 math 节点已经建成：**math.euler-partition-generating-function**（`(Σ_{N≥0} p(N)X^N)·∏_{n≥1}(1−X^n) = 1` 于任意交换环的形式幂级数环；域上等价于物理写法 Σ p(N)q^N = ∏(1−q^n)^{−1}），其唯一推导 math.euler-partition-generating-function--via-lean 是 **formalized**（Lean 4 + Mathlib v4.33.1，`StringFormal.Math.partitionGF_mul_tprod_one_sub_X_pow`，公理检查通过）。本推导已加上一条**非 inferred** 的 depends_on 指向它（理由见该边的 note：LZ Proposition 3.4 与 Theorem 3.5 的特征标比较字面用到它）。⇒ 「无来源的补白」这一条不再成立，且这一步现在是本推导链上**已形式化**的部分；「形式化时要单独做」也已完成。仍然缺的是另一半：dim_F V_N = p(N) 的**下界**（PBW，Mathlib v4.33.1 无 PBW 定理），见上一条「从文献到形式化的差距」与 math.verma-module-free-over-negative-part。"
 author: curator
 created: "2026-09-10"
