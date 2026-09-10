@@ -1,0 +1,53 @@
+id: math.anomaly-twelve-form-factorization--via-direct-expansion
+target: math.anomaly-twelve-form-factorization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    note: |
+      只用来说明情形 (a) 里那组多项式表达式（Ω₄ = 30x、Ω₈ = 24y + 3x²、Ω₁₂ = 15xy）
+      确实是 SO(32) 的伴随迹。**恒等式本身的验证不依赖这一点**：把 (a) 当作纯粹的定义，
+      计算照样成立。Lean 化时应把这条依赖留在图里、不放进 Lean 陈述（见目标节点 notes）。
+  - id: math.e8-adjoint-trace-identities
+    note: 同上，对应情形 (b)（Ω₄ = x、Ω₈ = x²/100、Ω₁₂ = x³/7200）。
+  - id: conv.gauge-trace-normalization
+    note: |
+      系数 (30, 24, 0) 与 (1/100, 1/7200) 都依赖 GS 的原版归一化。若换成 bilal-2008 的
+      重标度 tr F² := (1/30) Tr F²，(19) 的形状会变，(1/300) 这个数字尤其会变。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(19)"
+    note: |
+      **GS 只写出 (19)，不给验算。** 本推导的计算是本图（抽取者）补的，
+      逐步过程见抽取记录 literature/extractions/green-schwarz-1984.md E11 与 §5.1。
+summary: |
+  两情形各一行代数。
+
+  **(b) E₈**（先做，更短）：
+    RHS = (1/48) · x · [ x²/100 − (1/300) x² ]
+        = (1/48) · x³ · (3 − 1)/300
+        = (1/48)(1/150) x³
+        = (1/7200) x³ = Ω₁₂ ✓
+
+  **(a) SO(32)**：Ω₄ = 30x，故 (1/300) Ω₄² = (1/300)(900 x²) = 3 x²，
+    正好抵掉 Ω₈ 里的 3x²：
+    RHS = (1/48) · (30x) · [ (24y + 3x²) − 3x² ]
+        = (1/48) · 30 · 24 · x y
+        = (720/48) x y
+        = 15 x y = Ω₁₂ ✓
+
+  注意 SO(32) 这一支之所以成立，关键是**两件事同时发生**：
+  N + 32l = 0（tr F⁶ 项消失，见 math.tr-f6-coefficient-vanishing）与
+  (1/300)(N + 2l)² = 3（(tr F²)² 项对消）。后者即 (N + 2l)² = 900，配上 N + 2l = 30。
+
+  展开形式：Ω₁₂ = (1/48) Ω₄ Ω₈ − (1/14400) Ω₄³（由 (1/48)(1/300) = 1/14400）。
+gaps:
+  - "缺 reviewer 独立复核记录：按 docs/STATUS_LEVELS.md 的 rigorous 例外，前提完整 + 有限步初等计算 + `reviewer-verified` 记录三条齐备才可标 rigorous，此处只有前两条。"
+  - "缺 Lean 声明：目标卡尚无 formal.lean_decl。做出后应新增一条 `--via-lean` 的 formalized 推导，而不是改本条。"
+  - "两条依赖（迹恒等式）自身是 physical-argument，因此即使本推导升到 rigorous，目标的有效状态仍会被压到 physical-argument。若只想形式化「给定这两组多项式则因子化成立」，Lean 岛应把迹恒等式作为**假设**写进定理陈述，图里则维持现在的依赖记账。"
+notes: |
+  **计算复核记录**：本条的两行展开由 curator 于 2026-09-11 独立重算一遍，与抽取记录 E11 一致；
+  但 curator 与抽取者同属 agent，**不算 docs/STATUS_LEVELS.md 意义下的 reviewer 独立复核**，
+  故不写 `reviewer-verified`。请 reviewer 复核后补记录并升级。
+author: curator
+created: "2026-09-11"

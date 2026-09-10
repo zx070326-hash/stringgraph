@@ -1,0 +1,56 @@
+id: math.e8-adjoint-trace-identities
+kind: proposition
+title: e₈ 的迹恒等式：Tr F⁴ = (1/100)(Tr F²)²、Tr F⁶ = (1/7200)(Tr F²)³
+statement: |
+  设 F 是取值于 **e₈** 的二形式（偶次形式，分量互相交换；conv.gauge-trace-normalization）。
+  E₈ 的最低维表示就是 248 维伴随表示，故 tr = Tr。记 Ω_{4n} := Tr F^{2n}，x := Tr F²。则
+
+    Ω₄  = x
+    Ω₈  = (1/100) x²
+    Ω₁₂ = (1/7200) x³
+
+  换言之，**e₈ 没有独立的四阶与六阶 Casimir 不变量**：Tr F⁴ 与 Tr F⁶ 由 (Tr F²)² 与 (Tr F²)³
+  按上面的系数表出。
+
+  **本节点不断言**：
+  (a) 更高阶（Tr F⁸ 及以上）的任何事；
+  (b) 「e₈ 的不变量环由哪些次数生成」这一完整命题（本节点只给 4 阶与 6 阶两条关系）；
+  (c) 任何关于反常的事。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12a′)(12b′)(12c′)；引导句「For the group E₈, eq. (12) is replaced by」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E8）。
+      **GS 直接给出，无证明、无出处引用**。
+      同文致谢逐字给出这条群论输入的来源：「We are grateful to G. Chapline and R. Slansky for
+      pointing out to us that E₈ has no independent fourth- and sixth-order Casimir invariants.」
+      —— 那是**私人交流的致谢，不是可引文献**，故本图不为它建 bib 条目。
+  - ref: antonelli-2015
+    loc: "Appendix B, p.35（E₈ 的迹恒等式，该文注明取自 GSW Vol. 2）"
+    note: |
+      L1（抽取记录 E8 备注）：与 GS (12′) **逐字一致**（用的是 GS/GSW 原版归一化 1/100、1/7200）。
+      ⚠ 同一篇的 §1.3 (p.7) 却用 Bilal 的重标度版（9、75/20）——引用该文时必须指明是哪一处。
+  - ref: bilal-2008
+    loc: "§12, (12.28)–(12.29)：在**重标度约定** tr F² := (1/30) Tr F² 下写作 Tr F⁴ = 9(tr F²)²、Tr F⁶ = (75/20)(tr F²)³"
+    note: |
+      L1。**归一化不同，须换算**（换算见 conv.gauge-trace-normalization 的 sources 第二条，已复算）：
+      代入 tr_Bilal F² = Tr F²/30 得 Tr F⁴ = (1/100)(Tr F²)²、Tr F⁶ = (1/7200)(Tr F²)³，
+      与本节点一致。因为本节点与该来源的记号 tr F² **不指同一个量**，此条只作交叉核验。
+tags: [algebra, lie-algebra, trace-identity, e8, casimir, anomaly, phase2, lean-candidate]
+notes: |
+  【为什么放在 math】同 math.so-usp-adjoint-fundamental-trace-identities：纯表示论恒等式，无物理输入。
+
+  【历史归属（抽取记录 E19）】GS 1984 的**预印本版**（CALT-68-1182，题名
+  「…REQUIRE SO(32)」）只注意到 E₈ × E₈ 的引力反常抵消，逐字承认
+  「the cancellation of the other anomalies in that theory was overlooked」。
+  发表版补上 E₈ × E₈ 的关键群论输入来自 **G. Chapline 与 R. Slansky**；
+  致谢同时记 **L. Dixon、J. Harvey、E. Witten** 与 **J. Thierry-Mieg** 独立作出同一观察。
+  这段归属写在这里而不是物理节点里，因为被致谢的正是本条迹恒等式。
+
+  【Lean 化】比 so/usp 一支更简单：只需在 ℚ-代数上把 Ω₄, Ω₈, Ω₁₂ 定义成 x, x²/100, x³/7200，
+  因子化恒等式随即是一行 `field_simp; ring`。但同样注意：**「这些多项式确实是 e₈ 的伴随迹」
+  不在 Lean 岛范围内**（Mathlib 没有 E₈ 的不变量理论，连 dim E₈ = 248 都没有）。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,44 @@
+id: math.tr-f6-coefficient-vanishing--via-coefficient-inspection
+target: math.tr-f6-coefficient-vanishing
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    inferred: true
+    note: |
+      **边本身在来源处可查**：(12c) 与 (13a)(13b) 就是本推导的全部输入
+      （Ω₁₂ 中 tr F⁶ 的系数是 N + 32l，l = −1 为 SO、l = +1 为 USp）。
+      标 inferred: true 是因为**这条边所支撑的结论只有一半在来源里**：
+      GS 只写「N = 32 时该项 absent」（充分方向，SO 一支），
+      **USp 一支（N + 32 恒不为零）与「当且仅当」的必要方向，GS 全文都没有写**，
+      是抽取者/curator 由 (12c)(13b) 补的（抽取记录 green-schwarz-1984.md Q4）。
+      按 CLAUDE.md 规则 5「找不到就标 inferred: true 并留 note」处理。
+  - id: conv.gauge-trace-normalization
+    note: 固定 N 是基本表示维数、tr 是基本迹。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12c)(13a)(13b) 与其下方逐字句「The first term in eq. (12c) … is absent if the gauge group is chosen to be SO(32).」"
+    note: |
+      L1（抽取记录 E7/E9）。GS 只走**充分**方向（N = 32 ⇒ 该项 absent），
+      「当且仅当」的另一半与 USp 一支都是本图补的，见 depends_on 的 inferred 标记与 gaps。
+summary: |
+  **SO(N)（l = −1）**：系数 = N + 32(−1) = N − 32。它是 N 的一次多项式，
+  故 N − 32 = 0 ⟺ N = 32。GS 只写了 ⇐ 方向（"absent if … SO(32)"），⇒ 方向是一次方程的平凡解。
+
+  **USp(N)（l = +1）**：系数 = N + 32。对一切 N ≥ 1 有 N + 32 ≥ 33 > 0，故恒不为零。
+  （USp(N) 还要求 N 为偶数，但这里用不上。）
+
+  **本推导刻意不说的一句**：GS 在同一处断言「(12c) 第一项对应的反常不能由添加局域相互作用抵消」。
+  那是物理判断，不是代数，挂在 consistency.anomaly-cancellation-so32-effective-theory 上；
+  本节点只管系数何时为零。
+gaps:
+  - "USp 一支 GS 原文完全没有（抽取记录 Q4），是抽取者的推论；本推导据 (12c)(13b) 补出，边已标 inferred。"
+  - "「当且仅当」的 ⇒ 方向 GS 未写（只给充分条件），本图补足；平凡但归属须记清。"
+  - "缺 reviewer 独立复核记录，故不取 rigorous（docs/STATUS_LEVELS.md）。"
+notes: |
+  这条是「为什么偏偏是 32」在纯规范反常一路上的**唯一**代数入口（抽取记录 §5.3）。
+  另一条独立的算术确认来自 math.mixed-anomaly-trace-conditions-n32（混合反常给的两条方程）。
+  两者从不同反常结构出发落到同一个 N = 32，这正是 GS 说的 "two independent confirmations"
+  再加纯规范一路的第三次。
+author: curator
+created: "2026-09-11"
