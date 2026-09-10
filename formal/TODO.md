@@ -282,3 +282,4 @@
   图侧接入已做：`uv run stringgraph check-axioms`（`tools/stringgraph/axioms.py`）把结论映回节点 id，
   非标准公理同时报到陈述卡和依赖它的 `formalized` 推导上；**不进 `validate`/pre-commit**（要起 Lean）。
   2026-09-11 全图 14 个 `formal.lean_decl` 跑通：14 ok，0 bad，0 missing。
+- [ ] `basic-lean-housekeeping`：把 `toProdₗ` / `ofWitt` / `span_lgen_cgen_eq_top` 从 `Verma.lean` 挪到 `Basic.lean`（它们是 Basic 级事实；`WittPerfect.lean` 因此多 import 了 Verma）。等 Verma 区无并行 formalizer 时做。另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
