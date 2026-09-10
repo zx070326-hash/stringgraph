@@ -442,6 +442,176 @@ theorem pairing_levelTwoScalar_self (hη : ∀ μ, η μ * η μ = 1) (c₂ c₃
 
 end Pairing
 
+/-! ### The Virasoro conditions on the trial state -/
+
+section Lop
+
+variable [Algebra ℚ R] (η a : Fin D → R)
+
+lemma Lop_one_apply_creaSq (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) :
+    Lop η a 1 (mode η a μ (-1) (mode η a μ (-1) (1 : Fock D R)))
+      = ((2 : R) * a μ) • mode η a μ (-1) (1 : Fock D R) := by
+  rw [Lop_apply_mode η a hη 1 μ (-1),
+    Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 1) μ (-1),
+    show (1 : ℤ) + -1 = 0 by ring, mode_zero_apply, mode_zero_apply]
+  simp only [map_smul, smul_smul]
+  rw [← add_smul]
+  congr 1
+  push_cast
+  ring
+
+/-- `L_1 (α_{-1}·α_{-1}|k⟩) = 2 (a·α_{-1})|k⟩`. -/
+theorem Lop_one_apply_traceState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 1 (traceState η) = (2 : R) • polState η a := by
+  rw [traceState_eq_sum_mode η a, map_sum, polState_eq_sum_mode η a, Finset.smul_sum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, Lop_one_apply_creaSq η a hη μ, smul_smul, smul_smul]
+  congr 1
+  ring
+
+/-- `L_1 ((a·α_{-2})|k⟩) = 2 (a·α_{-1})|k⟩`. -/
+theorem Lop_one_apply_secondState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 1 (secondState η a) = (2 : R) • polState η a := by
+  rw [secondState_eq_sum_mode η a, map_sum, polState_eq_sum_mode η a, Finset.smul_sum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 1) μ (-2),
+    show (1 : ℤ) + -2 = -1 by ring, smul_smul, smul_smul]
+  congr 1
+  push_cast
+  ring
+
+/-- `L_1 ((a·α_{-1})²|k⟩) = 2 (α_0·α_0) (a·α_{-1})|k⟩`. -/
+theorem Lop_one_apply_polSqState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 1 (polSqState η a) = ((2 : R) * zeroModeSq η a) • polState η a := by
+  have hterm : ∀ μ : Fin D,
+      Lop η a 1 ((η μ * a μ) • mode η a μ (-1) (polState η a))
+        = (η μ * a μ * a μ) • polState η a
+          + (η μ * a μ * zeroModeSq η a) • mode η a μ (-1) (1 : Fock D R) := by
+    intro μ
+    rw [map_smul, Lop_apply_mode η a hη 1 μ (-1) (polState η a),
+      Lop_one_apply_polState η a hη a, show (1 : ℤ) + -1 = 0 by ring, mode_zero_apply,
+      ← zeroModeSq]
+    simp only [map_smul, smul_add, smul_smul]
+    congr 2
+    push_cast
+    ring
+  rw [polSqState_eq_sum_mode η a, map_sum, Finset.sum_congr rfl fun μ _ => hterm μ,
+    Finset.sum_add_distrib, ← Finset.sum_smul, ← zeroModeSq]
+  have hsum : (∑ μ : Fin D, (η μ * a μ * zeroModeSq η a) • mode η a μ (-1) (1 : Fock D R))
+      = zeroModeSq η a • polState η a := by
+    rw [polState_eq_sum_mode η a, Finset.smul_sum]
+    refine Finset.sum_congr rfl fun μ _ => ?_
+    rw [smul_smul]
+    congr 1
+    ring
+  rw [hsum, ← add_smul]
+  congr 1
+  ring
+
+lemma Lop_two_apply_creaSq (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) :
+    Lop η a 2 (mode η a μ (-1) (mode η a μ (-1) (1 : Fock D R))) = η μ • (1 : Fock D R) := by
+  rw [Lop_apply_mode η a hη 2 μ (-1), show (2 : ℤ) + -1 = 1 by ring,
+    Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 2) μ (-1),
+    show (2 : ℤ) + -1 = 1 by ring, mode_apply_one_eq_zero η a (by norm_num : (0 : ℤ) < 1),
+    smul_zero, map_zero, add_zero, mode_apply_mode η a μ 1 (-1),
+    mode_apply_one_eq_zero η a (by norm_num : (0 : ℤ) < 1), map_zero, add_zero,
+    if_pos (by ring : (1 : ℤ) + -1 = 0), smul_smul]
+  congr 1
+  push_cast
+  ring
+
+/-- `L_2 (α_{-1}·α_{-1}|k⟩) = D |k⟩`: the anomaly term that makes the level-two norm
+dimension-dependent. -/
+theorem Lop_two_apply_traceState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 2 (traceState η) = (D : R) • (1 : Fock D R) := by
+  have hterm : ∀ μ : Fin D,
+      Lop η a 2 (η μ • mode η a μ (-1) (mode η a μ (-1) (1 : Fock D R)))
+        = (η μ * η μ) • (1 : Fock D R) := fun μ => by
+    rw [map_smul, Lop_two_apply_creaSq η a hη μ, smul_smul]
+  rw [traceState_eq_sum_mode η a, map_sum, Finset.sum_congr rfl fun μ _ => hterm μ,
+    ← Finset.sum_smul, sum_eta_sq η hη]
+
+/-- `L_2 ((a·α_{-2})|k⟩) = 2 (α_0·α_0) |k⟩`. -/
+theorem Lop_two_apply_secondState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 2 (secondState η a) = ((2 : R) * zeroModeSq η a) • (1 : Fock D R) := by
+  have hterm : ∀ μ : Fin D,
+      Lop η a 2 ((η μ * a μ) • mode η a μ (-2) (1 : Fock D R))
+        = ((2 : R) * (η μ * a μ * a μ)) • (1 : Fock D R) := fun μ => by
+    rw [map_smul, Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 2) μ (-2),
+      show (2 : ℤ) + -2 = 0 by ring, mode_zero_apply, smul_smul, smul_smul]
+    congr 1
+    push_cast
+    ring
+  rw [secondState_eq_sum_mode η a, map_sum, Finset.sum_congr rfl fun μ _ => hterm μ,
+    ← Finset.sum_smul, ← Finset.mul_sum, ← zeroModeSq]
+
+/-- `L_2 ((a·α_{-1})²|k⟩) = (α_0·α_0) |k⟩`. -/
+theorem Lop_two_apply_polSqState (hη : ∀ μ, η μ * η μ = 1) :
+    Lop η a 2 (polSqState η a) = zeroModeSq η a • (1 : Fock D R) := by
+  have hterm : ∀ μ : Fin D,
+      Lop η a 2 ((η μ * a μ) • mode η a μ (-1) (polState η a))
+        = (η μ * a μ * a μ) • (1 : Fock D R) := fun μ => by
+    rw [map_smul, Lop_apply_mode η a hη 2 μ (-1), show (2 : ℤ) + -1 = 1 by ring,
+      Lop_apply_polState_of_two_le η a hη (le_refl (2 : ℤ)) a, map_zero, add_zero,
+      mode_one_apply_polState η a hη a μ, smul_smul, smul_smul]
+    congr 1
+    push_cast
+    ring
+  rw [polSqState_eq_sum_mode η a, map_sum, Finset.sum_congr rfl fun μ _ => hterm μ,
+    ← Finset.sum_smul, ← zeroModeSq]
+
+/-- **The `L_1` condition.**  `L_1 ψ₂ = (2 + 2c₂ + 2 c₃ s) (a·α_{-1})|k⟩`, `s = α_0·α_0`. -/
+theorem Lop_one_apply_levelTwoScalar (hη : ∀ μ, η μ * η μ = 1) (c₂ c₃ : R) :
+    Lop η a 1 (levelTwoScalar η a c₂ c₃)
+      = ((2 : R) + 2 * c₂ + 2 * c₃ * zeroModeSq η a) • polState η a := by
+  simp only [levelTwoScalar, map_add, map_smul, Lop_one_apply_traceState η a hη,
+    Lop_one_apply_secondState η a hη, Lop_one_apply_polSqState η a hη, smul_smul]
+  rw [← add_smul, ← add_smul]
+  congr 1
+  ring
+
+/-- **The `L_2` condition.**  `L_2 ψ₂ = (D + 2 c₂ s + c₃ s) |k⟩`, `s = α_0·α_0`. -/
+theorem Lop_two_apply_levelTwoScalar (hη : ∀ μ, η μ * η μ = 1) (c₂ c₃ : R) :
+    Lop η a 2 (levelTwoScalar η a c₂ c₃)
+      = ((D : R) + 2 * c₂ * zeroModeSq η a + c₃ * zeroModeSq η a) • (1 : Fock D R) := by
+  simp only [levelTwoScalar, map_add, map_smul, Lop_two_apply_traceState η a hη,
+    Lop_two_apply_secondState η a hη, Lop_two_apply_polSqState η a hη, smul_smul]
+  rw [← add_smul, ← add_smul]
+  congr 1
+  ring
+
+/-- `L_n ψ₂ = 0` for `n ≥ 3`: automatic, because `ψ₂` has level `2`. -/
+theorem Lop_apply_levelTwoScalar_of_three_le (c₂ c₃ : R) {n : ℤ} (hn : 3 ≤ n) :
+    Lop η a n (levelTwoScalar η a c₂ c₃) = 0 :=
+  Lop_apply_eq_zero_of_level_lt η a (levelTwoScalar_mem_levelSubmodule_two η a c₂ c₃)
+    (by push_cast; omega)
+
+/-- **The physical-state conditions for the level-two scalar.**  Mass shell `α' k² + 2 = a₀`
+together with the two Virasoro conditions `L_1 ψ₂ = 0`, `L_2 ψ₂ = 0` puts `ψ₂` in `H_phys`;
+the conditions `L_n ψ₂ = 0` for `n ≥ 3` are automatic. -/
+theorem levelTwoScalar_mem_physSubmodule (hη : ∀ μ, η μ * η μ = 1) (a₀ c₂ c₃ : R)
+    (hmass : invTwo R * zeroModeSq η a + 2 = a₀)
+    (h1 : (2 : R) + 2 * c₂ + 2 * c₃ * zeroModeSq η a = 0)
+    (h2 : (D : R) + 2 * c₂ * zeroModeSq η a + c₃ * zeroModeSq η a = 0) :
+    levelTwoScalar η a c₂ c₃ ∈ physSubmodule η a a₀ := by
+  refine (mem_physSubmodule_iff_of_mem_levelSubmodule η a a₀ hη
+    (levelTwoScalar_mem_levelSubmodule_two η a c₂ c₃)).mpr ⟨?_, ?_⟩
+  · have hz : invTwo R * zeroModeSq η a + ((2 : ℕ) : R) - a₀ = 0 := by
+      push_cast
+      rw [← hmass]
+      ring
+    rw [hz, zero_smul]
+  · intro n hn
+    rcases lt_trichotomy n 2 with h | h | h
+    · have hn1 : n = 1 := by omega
+      subst hn1
+      rw [Lop_one_apply_levelTwoScalar η a hη, h1, zero_smul]
+    · subst h
+      rw [Lop_two_apply_levelTwoScalar η a hη, h2, zero_smul]
+    · exact Lop_apply_levelTwoScalar_of_three_le η a c₂ c₃ (by omega)
+
+end Lop
+
 end Fock
 
 end StringFormal.NoGhost
