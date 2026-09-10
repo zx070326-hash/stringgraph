@@ -1,0 +1,99 @@
+id: math.riemann-roch-theorem
+kind: proposition
+title: "紧黎曼面上的 Riemann–Roch 定理：l(D) − l(K − D) = deg D + 1 − g"
+statement: |
+  设 X 是**紧、连通**的黎曼面（复一维复流形，无边；作为实曲面自动是可定向的），
+  亏格为 g。设 𝓜(X) 是 X 上的亚纯函数域，K 记**典范除子**（任一非零亚纯 1-形式 ω
+  的除子 (ω)；不同的 ω 给出线性等价的除子，下式两端与代表元的选取无关）。
+  对除子 D = Σ_p D(p)·p（有限支集的整值函数）定义
+
+    ℒ(D) := { f ∈ 𝓜(X) : f = 0 或 (f) + D ≥ 0 },    l(D) := dim_C ℒ(D),
+    deg D := Σ_p D(p).
+
+  等价地 ℒ(D) = H⁰(X, O_X(D))，l(D) = dim_C H⁰(X, O_X(D))。
+
+  **定理**：对 X 上的**任意**除子 D，
+
+    l(D) − l(K − D) = deg D + 1 − g 。
+
+  ⚠ **本卡内写死的三条约定**（不由 graph/conventions/ 承载，因为它们是纯数学记号）：
+  (1) **l 是向量空间维数**：H⁰ = 0 时 l(D) = 0。文献中另有**射影维数**约定
+      （H⁰ = 0 时记 l(D) = −1），两套约定整式差 1；抄公式时必须先认清是哪一套。
+  (2) deg 与 g 如上；g 是曲面的亏格（拓扑亏格 = dim_C H⁰(X, K)，两者相等本卡不断言）。
+  (3) **适用范围**：紧、连通、无边、可定向（= 黎曼面）。本卡**不**覆盖
+      不可定向曲面、带边曲面，也不覆盖高维（Hirzebruch–Riemann–Roch）。
+uses_conventions: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（arXiv:1805.06405**v1**）；配套定义 Definition 1.2, eq. (1-5)(1-6), p. 71；Riemann 不等式 Proposition 5.1, p. 75；证明散布在 §5.2, pp. 75–76（Theorem 5.2/5.3, Prop 5.2/5.3）"
+    note: |
+      **本卡唯一 L1 全文到手、且任何人可免费复核的来源**（researcher 2026-09-11，
+      literature/extractions/math-sources.md §42.7）。逐字：
+      「**Theorem 1.2 (Riemann-Roch)** For every divisor D we have
+        r(−D) = deg D + 1 − 𝔤 + i(D).   (1-10)」，
+      配套 (1-5)(1-6)：ℒ(D) = {f ∈ 𝓜⁰(Σ) | (f) ≥ D}，r(D) = dim ℒ(D)；
+      Ω(D) = {ω ∈ 𝓜¹(Σ) | (ω) ≥ D}，i(D) = dim Ω(D)。
+      ⚠ **三处抄写陷阱**：
+      (a) Eynard 的 ℒ(D) 用 (f) ≥ D（**不带负号**），故与本卡（Hartshorne 形式）的字典是
+          **r(−D) = l(D)**、**i(D) = l(K − D)**、𝔤 = g；负号在括号里，抄错整体差一个符号。
+      (b) 该讲义**每一章内部重新计数**（Ch. 4 与 Ch. 5 都有 Theorem 1.1/1.2），
+          文内自引写作「theorem III-3.4」这类罗马章号 + 章内号。
+          ⇒ `loc` 必须连章号一起写，只写 "Theorem 1.2" 是歧义的。
+      (c) 版本写死 v1（侧边戳记逐字 `arXiv:1805.06405v1 [math-ph] 16 May 2018`）。
+      该讲义 p. 72 逐字自陈「The Riemann-Roch theorem, that we shall prove in this chapter」，
+      即**证明在同一章内给出**。
+  - ref: hartshorne-1977
+    loc: "Ch. IV, Theorem 1.3（l(D) − l(K − D) = deg D + 1 − g）"
+    note: |
+      **编号系二手核实（L3）**：一手读到的是引用方 D. L. Wynter, *An Exposition of the
+      Riemann Roch Theorem for Curves*（University of Chicago REU 2016, p. 11）逐字写
+      「**Theorem 5.1.** … l(D) − l(K − D) = deg D + 1 − g … *Proof.* Omitted
+      (**Theorem IV.1.3, Hartshorne [2]**)」。**本项目未取得 Hartshorne 原书。**
+      本卡的公式形状与 l 的向量空间维数约定即取自这一路。
+      Wynter 那篇本身未登记进 literature/sources.bib（REU 讲义，非本图的引用源），
+      此处只作编号来源的说明。
+  - ref: farkas-kra-1992
+    loc: "§III.4 (Divisors and the Riemann–Roch Theorem), pp. 69–78, 2nd ed."
+    note: |
+      **只允许定位到小节**。出版方目录扫描（DNB `d-nb.info/920606512/04`）为 L1：
+      标题页逐字含 `Second Edition`，目录逐字 `III.4. Divisors and the Riemann–Roch Theorem  69`、
+      `III.5. Applications of the Riemann–Roch Theorem  79`。
+      ⚠ **硬性禁令**：坊间流传的定理号 `Theorem III.4.8` 本项目只有 L4 证据（一个 fandom 维基页
+      被检索后端转述），**不得写进图**。
+      ⚠ 另注：FK 里 Riemann–Roch 出现两次（`IV.10. Riemann-Roch—An Alternate Approach, p. 237`），
+      引用时必须写清是 III.4 还是 IV.10；本卡要的是 III.4。
+tags: [riemann-surface, riemann-roch, divisor, index-theorem, math-input]
+notes: |
+  **本节点为什么存在**：worldsheet.riemann-roch-kappa-minus-mu（v1）的 notes 里有一条点名给
+  researcher 的 TODO——「登记一个可核实的**数学**来源」，目的是给 κ − μ = 3χ 另起一条不靠
+  「球面标定比例常数」的推导。researcher 在 math-sources.md §42 把该定理定位到了带编号、
+  且其中一条全文可复核的来源，本卡即那条数学输入的落地。下游链条是
+    本卡 + math.canonical-divisor-degree
+      → math.quadratic-differentials-minus-holomorphic-vector-fields（对 D = 2K 用一次 RR）
+      → worldsheet.riemann-roch-kappa-minus-mu-v2--via-riemann-roch（再过两座物理↔数学的桥）。
+
+  ⚠ **形式化天花板：`rigorous`，不可能是 `formalized`**（researcher，读取日期 2026-09-11，
+  math-sources.md §42.9）。Mathlib 官方定理跟踪表 `mathlib4/docs/1000.yaml` 中标题含
+  "Riemann–Roch" 的条目共 **4** 条（`Q379048` Riemann–Roch theorem、
+  `Q4663326` Hirzebruch–Riemann–Roch、`Q7333126` Riemann–Roch for surfaces、
+  `Q17102744` Riemann–Roch for smooth manifolds），
+  **四条都只有 `title` 字段、没有 `decl`**——按该文件的字段约定这是官方的「尚未形式化」记录
+  （对照组：已形式化的条目带 `decl`）。
+  ⇒ **本节点及其全部下游不得标 `formalized`**，也不建议把它选进 Phase 2 的 Lean 岛
+  （RR 本身是一个大工程）。复查时请同时看 `docs/1000.yaml` 与 Mathlib 的代数几何目录。
+
+  ⚠ **两条被明令禁止写进图的编号**（math-sources.md §42.3、§42.5）：
+  1. `Farkas–Kra, Theorem III.4.8`（L4，只有维基转述）；
+  2. `Jost, Compact Riemann Surfaces, Corollary 5.4.2`（L4，且 **Jost 的版次未定**：
+     DNB 目录扫描与另一份 PDF 的同名小节页码相差 6 页 ⇒ 至少两个版次）。
+     **Jost 因版次未定尚未登记进 literature/sources.bib，图里一律不得引 Jost。**
+
+  ⚠ **Griffiths–Harris 本轮完全未查（L0）**，其任何编号同样不得写进图。
+
+  **本卡刻意不断言的三件事**（各自需要独立来源，别指望这一条边解决）：
+  (a) `deg K = 2g − 2` —— 另立 math.canonical-divisor-degree；
+  (b) `deg D < 0 ⇒ l(D) = 0`（负次数线丛无非零全纯截面）—— 教材里是 RR 之前的独立命题，
+      本图尚无节点；缺它就**算不出单个维数**（如 g ≥ 2 时 dim H⁰(K^{−1}) = 0），只能算差；
+  (c) `dim_C H⁰(X, K) = g`（拓扑亏格 = 全纯 1-形式的维数）。
+author: curator-riemann-roch
+created: "2026-09-11"
