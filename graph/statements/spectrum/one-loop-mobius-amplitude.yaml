@@ -1,0 +1,60 @@
+id: spectrum.one-loop-mobius-amplitude
+kind: proposition
+title: "Möbius 带真空振幅：Z_{M₂} = ±inV₂₆∫₀^∞(dt/4t)(8π²α't)^{−13}ϑ₀₀(0,2it)^{−12}η(2it)^{−12}，符号 +/− 对应 SO(n)/Sp(k)"
+statement: |
+  Möbius 带 M₂ 是 0 ≤ Re w ≤ π、w ≅ −w̄ + π + 2πit 的世界面（带子扭一下再缝合）。
+  它有一个模 t ∈ (0,∞)，没有模群，唯一的 CKV 是 σ² 平移。其真空振幅为
+
+  (1)（**算符形式**）
+        Z_{M₂} = i V_d ∫₀^∞ (dt/4t)(8π²α't)^{−d/2} Σ_{i∈H_o^⊥} Ω_i exp[−2πt(h_i − 1)] 。
+      与圆柱（spectrum.one-loop-cylinder-amplitude）**只差**迹里的 Ω 与投影算符给的 ½。
+
+  (2)（**26 维平坦时空的振子迹**）Ω 在迹里的效果是**在偶质量能级上多一个 −1**，加上
+      Chan–Paton 因子的计数：
+        exp(2πt) ∏_{n=1}^{∞} [ 1 − (−1)^n exp(−2πnt) ]^{−24} = ϑ₀₀(0, 2it)^{−12} η(2it)^{−12} 。
+
+  (3)（**Chan–Paton 计数：本卡最重要的一句**）原书逐字：
+      「For the SO(n) theory the ½n(n+1) symmetric states have Ω = +1 while the ½n(n−1)
+      antisymmetric states have Ω = −1 for a net contribution of **n**. For the Sp(k) theory these
+      degeneracies are reversed, giving **−n** (recall that in our notation Sp(k) corresponds to
+      n = 2k Chan–Paton states).」于是
+        Z_{M₂} = ± i n V₂₆ ∫₀^∞ (dt/4t)(8π²α't)^{−13} ϑ₀₀(0,2it)^{−12} η(2it)^{−12} ,
+      **上号 + 对应 SO(n)，下号 − 对应 Sp(k)（n = 2k）**。
+
+  (4)（**一个 cross-cap 的表示与长圆柱形式**）M₂ = 一端是边界、另一端是 cross-cap 的圆柱，
+      长度 **s = π/4t**；换元并用模变换得
+        Z_{M₂} = ± 2 i n (2¹³ V₂₆) / (4π (8π²α')¹³) ∫₀^∞ ds  ϑ₀₀(0, 2is/π)^{−12} η(2is/π)^{−12} 。
+      t → 0 处同样发散，对应「一个 tadpole 来自圆盘、一个来自射影平面」的过程。
+
+  **本卡不断言什么**：不断言 ϑ₀₀ 的任何性质（原书 §7.2 的 θ 函数一节**全部无证明**，
+  本图未建 θ 卡）；不断言 cross-cap 态 |C⟩ 的形式（原书未给，留作习题 7.15）；
+  不断言 ± 号与 SO/Sp 的对应被逐一验证（原书只写出计数，见本卡唯一一条推导的 gaps）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The Möbius strip」, eqs. (7.4.20)(7.4.21)(7.4.22)(7.4.23), p.228；cross-cap 表示与 s = π/4t 见 p.228 末–229 首；几何见 §7.1, eqs. (7.1.11)(7.1.12), p.208"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E5、#E37，
+      等级 **L1（原书页图逐字）**。
+      ⚠ **式号提醒**：**(7.4.22) 是 Möbius 带**、(7.4.15) 是 Klein 瓶
+      （lead 派工单把两者写反了，此处按 L1 抽取纠正）。
+      ⚠ 记号：原书写 **Sp(k)**，且明说「in our notation Sp(k) corresponds to n = 2k Chan–Paton
+      states」；本图既有节点 spectrum.chan-paton-gauge-group 用的是 **USp(n)** 记法，
+      两者的换算是 USp(n) = Sp(n/2)，见 notes。
+tags: [spectrum, one-loop, mobius-strip, unoriented, cross-cap, chan-paton, theta-function]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E37 建立。
+  **四曲面各一卡**（见 spectrum.one-loop-torus-amplitude 的 notes）。
+
+  **记号换算（必须显式）**：本卡沿用原书的 Sp(k) 记法（k = n/2）；本图既有的
+  spectrum.chan-paton-gauge-group 写作 USp(n)（n 为 Chan–Paton 指标数，n 偶）。
+  两者指同一群：**USp(n) = Sp(n/2)**。凡把本卡与那张卡连边的推导都要带这句换算。
+
+  **下游**：(3) 的 ± 号与 (4) 的 2¹³ 是 (7.4.24) 里 (2¹³ ∓ n)² 交叉项 ∓2·2¹³n 的来源，
+  见 spectrum.bosonic-unoriented-tadpole-cancellation-so8192。
+author: curator-polchinski-ch7
+created: "2026-09-11"

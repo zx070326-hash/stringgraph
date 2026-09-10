@@ -1,0 +1,60 @@
+id: spectrum.one-loop-cylinder-amplitude
+kind: proposition
+title: "圆柱（annulus）真空振幅：Z_{C₂} = ∫₀^∞(dt/2t)Tr'_o[e^{−2πtL₀}]，26 维给 iV₂₆n²∫₀^∞(dt/2t)(8π²α't)^{−13}η(it)^{−24}"
+statement: |
+  圆柱 C₂ 是 0 ≤ Re w ≤ π、w ≅ w + 2πit 的世界面：宽 π、长 2πt 的带子把两端接起来。
+  它有**一个模 t，跑遍 0 < t < ∞，且没有模群**（原书逐字：「Unlike the torus there is no
+  modular group, the long-cylinder limit t → 0 being quite different from the long-strip limit
+  t → ∞」），一个 CKV（平行边界的平移）。其真空振幅为
+
+  (1)（**算符形式**）
+        Z_{C₂} = ∫₀^∞ (dt / 2t) Tr'_o[ exp(−2πt L₀) ] ,
+      迹取遍**整个开弦 CFT**，但**去掉鬼场零模**（这就是撇号 ' 的含义）。
+
+  (2)（**一般平坦情形**）
+        Z_{C₂} = i V_d ∫₀^∞ (dt/2t)(8π²α't)^{−d/2} Σ_{i∈H_o^⊥} exp[−2πt(h_i − 1)] ,
+      H_o^⊥ 是开弦的横向 Hilbert 空间。
+
+  (3)（**26 维平坦时空、n 个 Chan–Paton 自由度**）
+        Z_{C₂} = i V₂₆ n² ∫₀^∞ (dt/2t) (8π²α't)^{−13} η(it)^{−24} 。
+      n² 来自圆柱的**两条边界各挂一个 Chan–Paton 指标**（spectrum.chan-paton-factors）；
+      η^{−24} 是 24 个横向模的**一侧**贡献（开弦只有一套振子，与环面的 −48 对照）。
+
+  ⚠ **无取向理论里 (1)–(3) 各多一个因子 ½**（来自投影算符 ½(1+Ω)，原书在 (7.4.14) 下方
+  逐字说明「there is an extra ½ in both the torus and cylinder amplitudes in the unoriented
+  theory」）。本卡的表达式是**取向**理论的；tadpole 相消的计数用的是带 ½ 的版本，见
+  spectrum.bosonic-unoriented-tadpole-cancellation-so8192。
+
+  ⚠ **t → ∞ 端发散，来自开弦快子**（原书逐字：「As in the closed string there is a divergence,
+  but only from the open string tachyon」）。t → 0 端的行为**不能**像环面那样靠模群截断
+  （本卡第一段的「没有模群」），见 spectrum.cylinder-closed-channel-open-closed-duality。
+
+  **本卡不断言什么**：不断言 t → 0 端的重解释（那是通道对偶那张卡）；
+  不给出带开弦顶点算子的单圈散射振幅（原书说「Including tachyon vertex operators is
+  straightforward」但未做）；不断言边界态 |B⟩ 表示（(7.4.11)–(7.4.13)，其归一化原书自承未定）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The cylinder」, eq. (7.4.1), p.223；圆柱的几何与「没有模群」见 §7.1, eqs. (7.1.5)–(7.1.7), p.207；无取向理论的额外 ½ 见 (7.4.14) 下方, p.226"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E3、#E29、#E36，
+      等级 **L1（原书页图逐字）**。
+      ⚠ **原书自陈走的是「猜」那条路**（p.223 逐字）：「This can be obtained either by working out
+      the path integral measure in terms of the ghost zero modes, as we did for the torus, **or by
+      guessing (correctly) that we should again sum the point-particle result (7.3.9) over the open
+      string spectrum**.」——第一条路（鬼场零模测度）只提及，**未做**。
+tags: [spectrum, one-loop, cylinder, annulus, open-string, chan-paton, vacuum-amplitude]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E29 建立。
+  **四曲面各一卡**（见 spectrum.one-loop-torus-amplitude 的 notes）。
+
+  「没有模群」这一句不是修辞：它是 §7.4 全部发散讨论的前提（抽取记录 #E3 备注）。
+  正因为没有模群，t → 0 的区域**不能**被基本域切掉，于是场论式的 UV 发散「看起来还在」；
+  第 7 章解决它的办法不是截断，而是**换通道解释**（长闭弦），见
+  spectrum.cylinder-closed-channel-open-closed-duality 与 spectrum.open-string-requires-closed-string。
+author: curator-polchinski-ch7
+created: "2026-09-11"

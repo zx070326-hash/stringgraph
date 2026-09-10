@@ -1,0 +1,57 @@
+id: spectrum.one-loop-mobius-amplitude--via-omega-projected-open-trace
+target: spectrum.one-loop-mobius-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-cylinder-amplitude
+    note: |
+      提供比较基准。原书逐字：「This differs from the result on the cylinder only by the Ω and the
+      factor of ½ from the projection operator.」即 (7.4.20) 是 (7.4.1) 加 Ω 与 ½。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      提供 Ω 的作用。26 维平坦时空里它在迹上的效果是「偶质量能级多一个 −1」
+      （原书逐字：「an extra −1 at the even mass levels」），即振子乘积里的 (−1)^n。
+  - id: spectrum.chan-paton-gauge-group
+    convention_map: |
+      记号换算：原书写 Sp(k) 且 n = 2k；本图该卡写 USp(n)（n = Chan–Paton 指标数）。
+      **USp(n) = Sp(n/2)**，故原书的「Sp(k) 给 −n」= 本图记法下「USp(n) 给 −n」。
+    note: |
+      提供 SO(n) 与 USp(n) 两支的对称/反对称态计数（½n(n+1) 与 ½n(n−1)），
+      这正是 (3) 的净贡献 ±n 的来源。⚠ 那张卡的无取向投影是对**无质量矢量能级**做的，
+      而本处需要的是**偶质量能级整体**的 Ω 本征值分布；两者相容但不是同一句话，见 gaps。
+  - id: math.dedekind-eta-modular-transformation
+    note: 提供 (4) 里 s = π/4t 换元所需的 η 模变换（原书与 (7.4.2)、(7.4.19) 同一步）。
+  - id: math.dedekind-eta-function
+    note: 提供 η 的乘积定义（(2) 的右端把 (−1)^n 的乘积拆成 ϑ₀₀ 与 η 各 −12 次幂）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.20)–(7.4.23), p.228"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E37，L1（原书页图逐字）。
+summary: |
+  **(1)** 把圆柱的迹加上 Ω 与投影的 ½，得 (7.4.20)。
+
+  **(2)** 在 26 维平坦时空里 Ω 给偶质量能级额外的 −1，于是振子迹的每个模带 (−1)^n：
+  exp(2πt)∏_{n≥1}[1−(−1)^n e^{−2πnt}]^{−24} = ϑ₀₀(0,2it)^{−12}η(2it)^{−12}（(7.4.21)）。
+  这一步是把交替符号的乘积按 θ 与 η 的乘积表示重新分组。
+
+  **(3)** Chan–Paton 侧：SO(n) 时 ½n(n+1) 个对称态 Ω = +1、½n(n−1) 个反对称态 Ω = −1，
+  净贡献 = ½n(n+1) − ½n(n−1) = **n**；Sp(k)（n = 2k）时两者互换，净贡献 **−n**。
+  得 (7.4.22) 的 ±n。
+
+  **(4)** 几何上 M₂ = 一端边界、一端 cross-cap 的圆柱，长度 s = π/4t；换元并用 η 的模变换
+  得 (7.4.23)，整体因子出现 2·2¹³。
+gaps:
+  - "**(2) 的分组只给结果**：原书直接写出 ϑ₀₀^{−12}η^{−12}，没有验算交替符号乘积如何变成这个形式；
+     且 ϑ₀₀ 的乘积表示 (7.4.38a)-型式子在原书**无证明**（θ 一节全部是断言，抽取记录 #E15）。"
+  - "**± 与 SO/Sp 的绑定未逐一验证**：原书只写出两支的简并度互换，没有对每个能级验证
+     Ω 本征值的分布（抽取记录 #E37 的判定：「± 号绑定 SO/Sp 而未逐一验证」）。"
+  - "**与 spectrum.chan-paton-gauge-group 的接口不是同一句话**：那张卡处理的是无质量矢量能级的
+     存活条件（M(λ)^T M^{−1} = −λ），本处需要的是偶质量能级上对称/反对称态的 Ω 本征值。
+     原书在 §6.5 与 §7.4 分别说，本图没有把两者接起来的独立论证。"
+  - "**cross-cap 态 |C⟩ 原书未给**（习题 7.15），故 (4) 的算符侧表述无来源。"
+  - "**θ 函数的模变换本图无节点**：(4) 里 ϑ₀₀(0,2it) → ϑ₀₀(0,2is/π) 的那一半，本图只挂了 η 的卡；
+     θ 的相应变换 (7.2.40) 在原书同样无证明，故未建卡（见 math.dedekind-eta-function 的 notes）。"
+notes: |
+  由 curator 于 2026-09-11 建立。**convention_map 已在 chan-paton 那条边上写明 Sp(k) ↔ USp(n) 的换算。**
+author: curator-polchinski-ch7
+created: "2026-09-11"

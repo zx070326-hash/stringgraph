@@ -1,0 +1,58 @@
+id: spectrum.one-loop-klein-bottle-amplitude--via-omega-projected-trace
+target: spectrum.one-loop-klein-bottle-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-torus-amplitude
+    note: |
+      提供比较基准：K₂ 的算符表达式相对取向环面只多一个 ½（投影算符 ½(1+Ω)）与一个 Ω 插入，
+      测度 dt/4t 的 4 就是这么来的。原书 (7.4.14) 就是按「相对环面」写的。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      提供宇称算符 Ω 的定义与它交换左右动模的作用——这正是「只有左右同态贡献对角元、
+      且 Ω = +1」这一步所需，也是 K₂ 的几何认同 w ≅ −w̄ + 2πit 的算符对应。
+  - id: math.dedekind-eta-modular-transformation
+    note: |
+      提供 (3) 里把 η(2it) 换到 η(is/π)（s = π/2t）所需的 S 变换。原书在 (7.4.19) 处直接用
+      (7.2.44)（与圆柱的 (7.4.2) 同一步）。
+  - id: math.dedekind-eta-function
+    note: 把「一侧的 24 个横向振子、权重加倍」的迹收成 η(2it)^{−24}。
+  - id: spectrum.point-particle-circle-path-sum
+    inferred: true
+    note: |
+      **inferred: true**。(1) 的第二行（动量高斯积分给 (4π²α't)^{−d/2}、质量壳给
+      exp[−2πt(h+h̃−2)]）与圆柱、环面同一模式，但**原书在 Klein 瓶这里没有再引 (7.3.9)**，
+      而是直接写出结果并把路径积分推导留作习题 7.13。本图挂这条边只为记录该模式的来源。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.14)–(7.4.19), p.226–227"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E36，L1（原书页图逐字）。
+summary: |
+  **(1) 算符表达式。** 无取向理论对闭弦谱作 ½(1+Ω) 投影；Klein 瓶就是迹里带 Ω 的那一项，
+  相对（取向）环面多一个 ½，故测度是 dt/4t。零模与振子的分解与环面同型，给 (7.4.14)。
+
+  **(2) 迹的计算。** Ω 交换左右动，故只有「左右处于同一状态」的态有对角元，且这些态 Ω = +1。
+  于是迹**有效地只对一侧**求和（形式上与开弦谱相同），但因左右贡献相等而**权重加倍**：
+  q^{h+h̃} 在对角元上变成 q^{2h}，即 η 的自变量由 it 变成 2it。得 (7.4.15)。
+
+  **(3) 几何与长圆柱形式。** 换一个基本区（0 ≤ σ¹ ≤ π，0 ≤ σ² ≤ 4πt），两条边各自
+  「平移半长 + 沿边反射」认同 = cross-cap，故 K₂ = 圆柱 + 两个 cross-cap（图 7.2(a)）。
+  取 s = π/2t 并用 η 的模变换，得 (7.4.19)：i(2²⁶V₂₆)/(4π(8π²α')¹³)∫ds η(is/π)^{−24}。
+  由于 t 的范围与圆柱相同，**t → 0 的发散与圆柱同型**，解释为闭弦极点（RP₂ tadpole）。
+gaps:
+  - "**正文没有从路径积分导出 (7.4.15)**：原书把这件事整体留作 exercise 7.13。
+     本推导的 (1) 因此是「相对环面的规则修改」，不是独立推导。"
+  - "**「只有左右同态有对角元且 Ω = +1」未逐项验证**：原书一句「note that the only diagonal
+     elements of Ω are those for which the right- and left-movers are in the same state, and these
+     states contribute with Ω = +1」，没有对鬼场部门与零模部门分别检查。"
+  - "**cross-cap 态 |C⟩ 原书没给**（留作 exercise 7.15），故 (3) 的算符侧表述在本图无来源。"
+  - "**(3) 依赖 η 的 S 变换**，而它在来源中零证明（math.dedekind-eta-modular-transformation）。"
+  - "**整体符号与归一化**：本章 bc 部门的整体符号是人为设定的
+     （worldsheet.bc-ghost-torus-partition-function 的 ⚠），Klein 瓶继承该约定。"
+notes: |
+  由 curator 于 2026-09-11 建立。
+  ⓘ **独立算术核验（抽取记录 §0.4）**：把 (7.4.19)、(7.4.23)（Möbius）与带 ½ 的圆柱 (7.4.3)
+  的无质量项相加，得公共因子 i·24·V₂₆/(4π(8π²α')¹³) 与 (2¹³ ∓ n)²，与 (7.4.24) 逐字读数一致。
+  这条核验同时验证了三式系数的彼此自洽（抽取者已做，本图在 tadpole 卡里引用）。
+author: curator-polchinski-ch7
+created: "2026-09-11"

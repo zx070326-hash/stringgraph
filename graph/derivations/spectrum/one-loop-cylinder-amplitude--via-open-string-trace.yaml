@@ -1,0 +1,56 @@
+id: spectrum.one-loop-cylinder-amplitude--via-open-string-trace
+target: spectrum.one-loop-cylinder-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.point-particle-circle-path-sum
+    note: |
+      提供 (7.3.9)。原书逐字承认本式是「by guessing (correctly) that we should again sum the
+      point-particle result (7.3.9) over the open string spectrum」得到的——即这条边是本推导的**主干**，
+      不是旁证。变量对应由两式的因子逐一比对定出：**l = 4πα't**——
+      则 dl/2l = dt/2t ✓，(2πl)^{−d/2} = (8π²α't)^{−d/2} ✓，
+      exp(−m²l/2) = exp(−2πα'm²t) = exp[−2πt(h−1)] ✓（用开弦质量壳 α'm² = h − 1）。
+      ⚠ 这个对应关系是 curator 由系数配平反推的，**原书没有写出 l 与 t 的关系**
+      （只在环面情形写了 (7.3.12) 的 θ + il/α' = 2πτ，即 l = 2πα'τ₂）。
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    note: |
+      提供开弦 L₀ = α'k² + N，于是 exp(−2πtL₀) 的迹分成动量高斯积分与振子求和，
+      且质量壳移位 h_i − 1 与 α'm² = N − 1 一致。
+  - id: math.dedekind-eta-function
+    note: 振子迹 q^{−1}∏_{n≥1}(1−q^n)^{−24}（q = e^{−2πt}）收成 η(it)^{−24}。
+  - id: spectrum.chan-paton-factors
+    note: |
+      提供 Chan–Paton 指标；圆柱两条边界各一个自由指标，故整体因子 n²（迹 Tr(1) = n 各一份）。
+      原书逐字「with n Chan–Paton degrees of freedom」。
+  - id: worldsheet.string-s-matrix
+    inferred: true
+    note: |
+      **inferred: true**。「另一条路：像环面那样把路径积分测度按鬼场零模写出来」需要 (5.3.9)，
+      但**原书只提这条路存在，没有做**（逐字「either by working out the path integral measure …」）。
+      本图挂这条边只为记录该未走的路线，不构成论证。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.1), p.223"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E29，L1（原书页图逐字）。
+summary: |
+  把点粒子圆拓扑路径和 (7.3.9) 对**开弦谱**求和：每个开弦态 i 的质量由 α'm_i² = h_i − 1 给出，
+  圆的模 l 与圆柱的模 t 按 l = 2πα't 对应，得 (2)。
+  在 26 维平坦时空里把 Σ_{i∈H_o^⊥} exp[−2πt(h_i−1)] 用 24 个横向振子的占据数求和算出，
+  得 η(it)^{−24}；两条边界的 Chan–Paton 指标给 n²。得 (3)。
+  测度 dt/2t 的 2t 与点粒子情形同源（平移 + 反向的过参数化），在算符语言里则表现为
+  「去掉鬼场零模」的撇号迹（(7.4.1) 第一行）。
+gaps:
+  - "**原书自陈本式是「猜对的」**：唯一真正做过的推导路线（鬼场零模测度）**没有做**。
+     故本卡不存在第二条独立推导，且这条的强度就是「与点粒子结果类比」。"
+  - "**「去掉鬼场零模的撇号迹」与「dt/2t」的等价没有论证**：原书只用撇号记号，
+     未说明它如何等价于路径积分侧的模测度。"
+  - "**(8π²α't)^{−d/2} 与环面 (4π²α'τ₂)^{−d/2} 差的因子 2 未在本章解释**：它来自开弦与闭弦
+     动量零模归一化的差别（开弦 L₀ = α'k² + N vs 闭弦 α'k²/4），对应 l = 4πα't 与 l = 2πα'τ₂。
+     原书两式都直接写出，**没有给出 l ↔ 模的换算**；本推导的换算是 curator 由系数配平反推的。"
+  - "**t → ∞ 的快子发散**（原书明说）与 t → 0 的表观 UV 发散都未在本卡处理。"
+  - "**无取向理论的 ½** 不在本卡表达式内（见目标陈述的 ⚠）。"
+notes: |
+  由 curator 于 2026-09-11 建立。inferred 边（string-s-matrix）纯粹是「未走的路线」的留痕；
+  若日后有人按鬼场零模测度补出第二条推导，应新建 --via-ghost-zero-mode-measure 而不是改本卡。
+author: curator-polchinski-ch7
+created: "2026-09-11"
