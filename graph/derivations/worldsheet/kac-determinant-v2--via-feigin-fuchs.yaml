@@ -1,5 +1,5 @@
-id: worldsheet.kac-determinant--via-feigin-fuchs
-target: worldsheet.kac-determinant
+id: worldsheet.kac-determinant-v2--via-feigin-fuchs
+target: worldsheet.kac-determinant-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -44,6 +44,10 @@ sources:
       и очевидное вычисление степеней показывает, что частное есть константа»。
       ⚠ 原文是 **det²** 且用无根号的 Φ_{α,β}，常数只被断言**非零**；三种参数化的对照与
       researcher 的一致性验算见 math-sources.md §34.8（**那一小节是推断，不是原文**）。
+      ⚠ **本条正是目标 v2 里「α_N 是非零常数」的唯一来源**，且经一步换算：
+      若 ∏_{α,β} Φ_{α,β} = ∏_{r,s} (h − h_{r,s})²，则 det² = C ∏ 与 det = α_N ∏ 给出 α_N² = C，
+      于是 «C ≠ 0» ⟺ α_N ≠ 0。这一步的参数化对照就是上面 §34.8，**属推断层**；
+      「α_N > 0」两条来源都不支持，故 v2 的陈述只写「非零」（见目标卡 notes (A)）。
       ⚠ 英译本（Funct. Anal. Appl. 16 (1982) 114–126）的编号与页码未核实（Q25）。
   - ref: kac-1979
     loc: "pp. 441-445（编号未核实，**不得写 Theorem 1**）"
@@ -74,3 +78,15 @@ summary: |
     本图对「首发权」**不做裁决**，两条线都登记在目标卡的 sources 里。
 author: seed
 created: "2026-09-10"
+notes: |
+  【2026-09-11 目标换代（curator-verma-followups）】本推导原 id 为
+  worldsheet.kac-determinant--via-feigin-fuchs，target 为 worldsheet.kac-determinant。
+  该目标卡的陈述写「α_N 是**正**常数」，而本推导的两条来源都不支持「正」
+  （feigin-fuchs-1982 只写 «ненулевая»，schottenloher-2008 写 K_N ≥ 0）。
+  lead 遂分派新建 worldsheet.kac-determinant-v2（只把「正常数」改为「非零常数」，其余逐字相同），
+  旧卡 superseded_by 之。按 graph/CLAUDE.md 的 id 规则「derivation id 写成
+  `<statement-id>--via-<method>`」，本推导随 target 改名，旧文件删除
+  （**推导不是不可变卡**，不可变的只有 statement 的 id 与文本）。
+  ⚠ **论证内容、depends_on、status（rigorous）、sources 一律未改**；唯一新增的是上面
+  feigin-fuchs-1982 那条 source note 里对 det² → det 换算的显式登记，
+  因为「非零」这三个字现在写进了目标陈述，必须指明它从来源的哪一句、经哪一步得到。

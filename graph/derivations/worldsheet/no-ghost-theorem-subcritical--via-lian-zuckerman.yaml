@@ -67,7 +67,7 @@ depends_on:
       在实系数、单项式正交基上二者的 Gram 矩阵相同，本推导只用到 Gram 矩阵与符号。
       本节点 (4) 要求 D ≥ 2 才能同时取到正负值——这与 LZ 的下界 (P4) D ≥ 2 一致；
       **但「LZ 的 D ≥ 2 就是为此」是 curator 的观察，LZ 未给出该下界的理由**，见 gaps。
-  - id: worldsheet.kac-determinant
+  - id: worldsheet.kac-determinant-v2
     inferred: true
     note: |
       LZ 证明末句只写到「iff the Verma module M(26−D, 1−h) is positive semi-definite.
@@ -83,6 +83,13 @@ depends_on:
       故按项目规则 5 标 inferred：这条边是「该步骤在数学上必须经过 Kac 行列式/Kac–Kazhdan
       的半正定区域分析」的推断，不是在指定 loc 处能读到的引用。待 researcher 复核 LZ p.571–579
       的 Lemma 3.17 / Remark 3.15 后可改为非 inferred 并补 loc。
+      **2026-09-11：本边由 worldsheet.kac-determinant 改指其接替者
+      worldsheet.kac-determinant-v2**（唯一差别是 α_N 由「正常数」改为「非零常数」）。
+      ⚠ 换代对本边**不是**纯记账：LZ 那一步要的是「M(26−D, 1−h) 半正定」，
+      而从行列式的**符号**读出半正定性需要知道 α_N 的符号——v2 只断言 α_N ≠ 0，
+      连 v1 那句无据的「正」也不再提供。这不改变本边的强度（它本来就是 inferred，
+      且 LZ 的实际论证走的是 Kac–Kazhdan 而非本图这张卡），但它说明
+      **本图目前没有任何节点承载「det 的符号 ⇒ 半正定」这一步**，见目标卡 v2 的 notes (A)。
   - id: worldsheet.brst-quantization-v2
     inferred: true
     note: |
