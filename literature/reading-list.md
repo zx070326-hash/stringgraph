@@ -50,6 +50,9 @@
 | P1 | antonelli-2015 | §1（含 1.1/1.2/1.3）、§2.1–2.2、Appendix A/B、References | consistency, swampland | researcher | **extracted（L1 部分章节，2026-09-11）** → `extractions/gsw-1987-v2.md` E13。arXiv:1507.08642，36 页，读 pp.1–8 + 33–36。**★ 唯一明说「四解分类的原始陈述在 GSW ch.13 且 no proof has explicitly been carried out」的来源。** ⚠ 单作者预印本，未见期刊发表；其「anomaly cancelled」指**十二形式因子化**，与 `adams-dewolfe-taylor-2010` 的「不能用 GS 机制抵消」不冲突但不同义；其 §1.1 对 ADT 的转述失真。**未读**：§2.3–2.5（各群非因子化的逐个证明）、§3.1–3.4 |
 | P1 | adams-dewolfe-taylor-2010 | 全文（4 页） | consistency, swampland | researcher | **extracted（L1 全文，2026-09-11）** → `extractions/gsw-1987-v2.md` E13/E14。arXiv:1006.1352**v2**（编号必须写死 v2：致谢自陈 v1 的 (7)(8) 系数有错，由 Tachikawa 指出）。**★ 本项目里第二条「作者/后人真正实现了原文邀请的反驳方向」的样本**：`vafa-2005` E15 逐字邀请「to find what consistency condition goes wrong」，ADT 给出了那个条件（超对称要求的 `BF²` 耦合 vs 阿贝尔规范不变性，`Y₄ ≠ dH₃`）。摘要限定语「without known inconsistencies」必须带上 |
 | **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3）。**2026-09-11 追加（researcher，gsw-1987-v2 抽取）**：Q3 已部分闭合 —— `antonelli-2015` 与 `adams-dewolfe-taylor-2010` **两条独立 L1 证据**把 `U(1)⁴⁹⁶`/`E₈×U(1)²⁴⁸` 的出处指向 `gsw-1987-v2` ch.13，**确认 Vafa 的引文 [6] 是溯源错误**；但 GSW 正文仍未取到，`inferred` 不能撤（除非把 source 换成那两篇）。**更重要**：ADT (2010) 直接反驳了 Vafa E15 的前提「Both of these theories are consistent as far as anomalies are concerned」，且正是 Vafa 逐字邀请的第二个反驳方向 |
+| P1 | green-schwarz-1985-hexagon | 全文 | consistency | researcher | **正文仍未取得（2026-09-11 第二轮已把五条路线跑完）** → `extractions/green-schwarz-1985-hexagon.md`（**L2 摘要级 E1–E5 + 失败路径逐条留痕**）。Nucl. Phys. **B255** (1985) 93–114，DOI `10.1016/0550-3213(85)90130-0`，预印本 **CALT-68-1224**（33 页，⚠ 不是 GS 1984 的 CALT-68-1182）。**摘要三条硬结论**：annulus 与 Möbius 各自有反常、相加后 "cancel … **if** … SO(32)"（充分条件，不得读作唯一性）、末句只 "We point out" 低能有效作用量各项的弦论起源 ⇒ **「弦论侧 ⟹ GS 1984 反项」这条边仍不得建**。失败：CDS = Anubis；CDS OAI 无 recid 入口；`lib-extopc.kek.jp` socket hang up（第三次）；OSTI 干净查询确认不藏本文；INSPIRE `documents`/`urls` absent；无大学课程页扫描件；CaltechAUTHORS 两端点 403；S2 `openAccessPdf` 空。**重印出处只有一个**（Schwarz 编 *Superstrings* Vol. 2 = archive.org 已确认无此书）⇒ 该路线先验不通。**下一轮最省力入口：GSW Vol. 2 反常章走 Cambridge Core**（同时清 `gsw-1987-v2` 的 P2 债） |
+| P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1`。**2026-09-11 追加理由（researcher，建议 lead 把本行提到 P1）**：`vafa-2005` §4 把「U(1)⁴⁹⁶ 与 U(1)²⁴⁸×E₈ 就反常而言一致」引给 `green-schwarz-1984`，但本项目对 GS 1984 的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈。本章现在同时被 GS 抽取与 Vafa 抽取两处需要，是 swampland↔consistency 接口边的唯一可能来源。见 `extractions/vafa-2005.md` Q3 |
+| **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3） |
 | **P0** | **ooguri-vafa-2006** | 全文（17 页） | swampland | researcher | **extracted（L1 全文 18 页逐页读图，2026-09-11）** → `extractions/ooguri-vafa-2006.md`（E1–E29）。⚠ 读的是 **arXiv v1**，编号必须写死 v1。**Conjecture 0–4 有编号（从 0 起）；全文只有两个编号公式 (1.1) 与 (3.1)；§3.1 有两个 `Example v)` ⇒ loc 不能只写「Example v」。** 四条使用限制：α 不普适（9/8、3/8、8/7、6/7）、Conj 3 是标量曲率非截面曲率、Conj 1 与 2 明确相互独立、「Swampland Distance Conjecture」这个名字不在原文。三处「conjecture 2」按内容应为「conjecture 3」（误植） |
 | **P0** | **arkani-hamed-2006** | 全文（20 页） | swampland | researcher | **extracted（L1 全文 21 页逐页读图，2026-09-11）** → `extractions/arkani-hamed-2006.md`（E1–E27）。⚠ 读的是 **arXiv v2**，且 **§5 与 (28)–(30) 极可能是 v2 新增**（其引用 hep-th/0602178 晚于 v1 日期）。公式 (1)–(30) + sharp 版本 (I)(II)(III) 均可精确引用。**★ 本项目第一条 `status: refuted` 的证据：§3 p.11 作者本人反驳 (I)，逐字「So (I) can't be right.」** 「m ≤ qM_Pl」在文内有四种写法不可互换（Q1）；极端性归一化文内不统一（Q2）；**全文无「Weak Gravity Conjecture」一词** |
 | P1 | wen-witten-1985 | 全文（NPB 261, 651–677） | swampland | 待分派 | **新增（2026-09-11，由 arkani-hamed-2006 抽取推出）**：AMNV §3 p.11 用「半整数荷缠绕弦」反驳其 sharp 版本 (I)。**这是本项目第一条 refuted 节点的一手证据来源**，现在只有 AMNV 的转述级。1985 年无 arXiv，Elsevier 预计 403 |
@@ -80,6 +83,23 @@
   **用 INIS 判断「有没有」，用 OSTI 拿「文件本身」。**
 - **⚠ 反爬新增一条**：`digital.library.unt.edu`（TRAIL / DOE 技术报告扫描库）返回 **Altcha 挑战页**，agent 过不去。
   与 `cds.cern.ch` 同类处理：**把 URL 交给人类点击，不要用代理绕**。
+
+- **★★ 新增可用路线（2026-09-11，researcher 第二次复用并再次成功）：DNB（德国国家图书馆）的出版方目录扫描 `https://d-nb.info/<IDN>/04`。**
+  这是**取教科书章节标题 + 印刷页码**最省事的路线，绕过 Springer 登录墙；本轮一次拿下两本：
+  **Farkas–Kra, *Riemann Surfaces*（IDN `920606512`，标题页明写 `Second Edition`）**
+  与 **Jost, *Compact Riemann Surfaces*（IDN `948901241`，标题页**无**版次字样）**。
+  1. 用普通检索搜书名，结果里会直接出现 `d-nb.info/NNNNNNNNN/04` 链接（附件号通常是 `04`）。
+  2. `WebFetch` 该 URL → 抱怨二进制但**落盘**（本轮 62 KB / 460 KB）→ `Read` 带 `pages` 读图，扫描件清晰。
+  - **★ 副产品：标题页能定版次。** FK 那份明写 `Second Edition`，Jost 那份没有 ⇒ 两本的版次可信度立刻不同。
+    **版次定不下来就不要登记进 `sources.bib`**（本轮 Jost 即因此暂缓，见 `extractions/math-sources.md` §39.11）。
+  - ⚠ 仍然拿不到年份/ISBN：`portal.dnb.de` 与 `d-nb.info/<IDN>`（不带 `/04`）在 Anubis 墙后。
+- **⚠ 死路确认（第三次）：`lib-extopc.kek.jp/preprints/PDF/<年>/<yymm>/<KEKSCAN号>.pdf` 一律 `socket hang up`。**
+  本轮用 INSPIRE 给的**确切** `KEKSCAN 85-02-154` 拼出 `…/1985/8502/8502154.pdf`，**仍然 socket hang up**
+  ⇒ 失败原因不是"号码猜错"，是主机层面不可达。**`KEKSCAN` id 今后只当书目标识用，不要再花额度试直取。**
+- **⚠ OSTI 查询的第二种"被吞"形态（补充既有教训）**：`q="CALT-68"` 返回的 5 条全是 `SLAC-PUB-*`，与查询无关
+  ⇒ **含连字符的报告号前缀也会被吞**，不只是含 `/` 的。
+  **可靠的替代做法：改用标题短语查询**（本轮 `q="hexagon gauge anomaly"` 返回 4 条全部主题相关，
+  于是"OSTI 不藏该文"才成为可用的否定证据）。**先用一个必然命中的短语确认查询没被吞，再读否定结论。**
 
 - **★★ 新增可用路线（2026-09-11）：大学课程页挂的原刊扫描件 —— `alvarez-gaume-witten-1984`（Nucl. Phys. B234, 269–330, 62 页）全文即以此取得（L1）。**
   这是第二条成功拿到 pre-arXiv 论文正文的路线，**比 archive.org 路线省事得多，应当先试**。

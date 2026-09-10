@@ -2130,7 +2130,25 @@
              用途：green-schwarz-1984 的弦论侧（单圈六边形振幅，其 (24)(25)）自陈
              「the details will be presented elsewhere」，那个 elsewhere 就是本文
              （据 schwarz-2012-history p.9，L1）。**本图不在 green-schwarz-1984 名下建弦论侧节点**；
-             要建须先抽取本文（抽取记录 green-schwarz-1984.md Q7）。}
+             要建须先抽取本文（抽取记录 green-schwarz-1984.md Q7）。
+             --- researcher 2026-09-11 追加（第二轮，抽取记录 extractions/green-schwarz-1985-hexagon.md）---
+             **状态仍是「正文未取得」，但已升到 L2：出版方摘要 + 全套书目标识已逐字核实**（INSPIRE recid 207661）。
+             DOI 10.1016/0550-3213(85)90130-0（⚠ 检索后端一度给出 ...(85)90605-4，那是另一篇论文，已证伪）。
+             预印本 CALT-68-1224（1984 年发出，REC.JAN.85，33 页；⚠ 不是 CALT-68-1182，后者是 GS 1984）。
+             KEKSCAN 85-02-154；MSNET 792246；SPIRES-1305298；**无 CDS id**。
+             重印出处**只有一个**：Schwarz 编 Superstrings, Vol. 2, 1018--1039
+             （INIS 逐字书名 Superstrings: The first 15 years of superstring theory, World Scientific 1985）
+             —— 即 goddard-thorn-1972 那轮已确认**不在 archive.org** 的同一套书，故 archive.org 路线先验不通。
+             期刊出版日 1985-06-17（INIS）。
+             **摘要要点（L2，可引，但 loc 只能写 abstract）**：annulus 与 Möbius-strip 两类图**各自**给出反常
+             （判据是 spurious longitudinal modes 不能一致解耦，**不是**反常多项式），两者相加后
+             「cancel ... **if** the gauge group is chosen to be SO(32)」——**充分条件措辞，不得读作唯一性**；
+             用了**两种不同正规化子**且结论相同；最后一句只说 We point out 低能有效作用量各项的弦论起源，
+             **没有说导出了 GS 1984 的反项** ⇒ 「弦论侧 ⟹ 场论侧反项」这条边**仍不得建**。
+             失败路线（本轮跑完五条 + 三条）：cds.cern.ch/search = Anubis 反爬页；CDS OAI 无入口（无 recid）；
+             lib-extopc.kek.jp 直取 socket hang up（第三次）；OSTI 干净查询确认**不藏本文**；
+             INSPIRE documents/urls 皆 absent；无大学课程页扫描件；CaltechAUTHORS /api 与 /search 均 403；
+             Semantic Scholar openAccessPdf 为空、status CLOSED；INIS 两条记录均 metadata-only。}
 }
 
 @article{ghmr-1985,
@@ -2194,8 +2212,7 @@
 }
 % ============================================================% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
 % 抽取记录：literature/extractions/math-sources.md §39
-% ===================================================================
-
+% ============================================================
 @book{gallier-xu-2013,
   author    = {Gallier, Jean and Xu, Dianna},
   title     = {A Guide to the Classification Theorem for Compact Surfaces},
@@ -2401,3 +2418,79 @@
             通行发表形态（Stora 一线）。**卷期页取自二手，本项目未核实；正文一字未取到。**
             ⇒ 图里**不得出现本文的任何式号或定理号**，loc 只能写「全文（未取得，L0）」。}
 }
+=======
+
+% ---------------------------------------------------------------------------
+% 数学侧：Riemann-Roch（供 worldsheet.riemann-roch-kappa-minus-mu 的 rigorous 路线）
+% 由 researcher 于 2026-09-11 登记，依据 literature/extractions/math-sources.md §39
+% ---------------------------------------------------------------------------
+
+@misc{eynard-2018-lectures,
+  author  = {Eynard, Bertrand},
+  title   = {Lectures on compact {R}iemann surfaces},
+  year    = {2018},
+  eprint  = {1805.06405},
+  archivePrefix = {arXiv},
+  primaryClass  = {math-ph},
+  note    = {由 researcher 于 2026-09-11 登记。**L1 全文到手**（PDF 落盘，读 p.1--7、71--77、84--89）。
+             报告号 IPhT-T18/007；封面逐字「Paris--Saclay's IPHT doctoral school Lecture given in winter 2018.」；
+             侧边戳记逐字 arXiv:1805.06405v1 [math-ph] 16 May 2018 => **式号写死 v1**。PDF 页码 = 印刷页码。
+             **★ 编号结构陷阱：每一章内部重新计数**（Ch.4 与 Ch.5 都有 Theorem 1.1/1.2/4.1），
+             文内自引写作「theorem III-3.4」「corollary II-3.5」式的「罗马章号-章内号」。
+             => loc 必须写成「Ch. 4, Theorem 1.2」，只写「Theorem 1.2」会歧义。
+             **可引锚点（全部 L1 逐字）**：
+             Ch.4 §1 **Theorem 1.2 (Riemann-Roch)**, p.72, eq. (1-10)：r(-D) = deg D + 1 - g + i(D)；
+             定义 (1-5)(1-6) p.71：L(D)={f | (f) >= D}, r(D)=dim L(D)；Omega(D)={w | (w) >= D}, i(D)=dim Omega(D)
+             （与 Hartshorne 形式的字典：r(-D)=l(D)、i(D)=l(K-D)；**Eynard 把负号写在括号里，抄错就整体差一个符号**）；
+             Ch.4 §5.2 p.75 **Proposition 5.1 (Riemann inequality)** 及 Theorem 5.2/5.3 —— **本讲义把 RR 证完**；
+             Ch.5 p.77 (0-1)：d_{g,n} = 3g-3+n，chi_{g,n} = 2-2g-n；
+             Ch.5 §4 p.88 逐字「Charts will be homeomorphic to R_+^{6g-6+2n}」=> dim_R M_{g,n} = 6g-6+2n；
+             Ch.5 §4.1 p.89 **Theorem 4.1** (4-7)：dim Omega_S = 3g-3+n
+             —— ⚠ **其 Omega_S 是「在标记点有二阶极点」的二次微分仿射空间，不是全纯二次微分**，
+             n=0 的退化是抽取者的推断，**不得直接当作 dim H^0(K^2)=3g-3 的来源**；
+             Ch.5 p.77 Theorem 1.1 (1-1)：M_{0,0}={(CP^1)}, Aut=PSL(2,C)（=> 球面 kappa=6）；
+             Ch.5 p.85 Corollary 2.1 及其后逐字「every translation z -> z+beta ... M_{1,0} is unstable」（=> 环面 kappa=2）；
+             Ch.5 p.86 Theorem 2.2「M_{1,1} is an orbifold of dimension 1」（⚠ 是 M_{1,1} 不是 M_{1,0}）。}
+}
+
+@book{farkas-kra-1992,
+  author    = {Farkas, Hershel M. and Kra, Irwin},
+  title     = {Riemann Surfaces},
+  edition   = {2},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {71},
+  publisher = {Springer},
+  year      = {1992},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未取得；仅出版方目录扫描为 L1**
+             （DNB 路线 d-nb.info/920606512/04，62 KB，4 页读图）。
+             标题页逐字含 **Second Edition** 与 With 27 Figures => **版次 L1 确定**；
+             ⚠ **年份 1992 未独立核实**（TOC 扫描不含年份页）。
+             **L1 目录锚点**：Chapter III「Compact Riemann Surfaces」p.54；
+             **III.4. Divisors and the Riemann-Roch Theorem  p.69**；**III.5. Applications of the Riemann-Roch Theorem  p.79**；
+             另有 **IV.10. Riemann-Roch---An Alternate Approach  p.237**（**FK 里 RR 出现两次，引用须写清是哪一处**）；
+             V.1. Hurwitz's Theorem p.257；V.2. Representations of the Automorphism Group on Spaces of Differentials p.269；
+             VII.2. Relations Among Quadratic Differentials p.333（**不是维数计数那条**）。
+             ⚠⚠ **禁止写 Theorem III.4.8**：该号本轮只有 L4 证据（一个 fandom 维基页被检索后端转述）。
+             loc 只能写到小节：「§III.4, pp. 69--78, 2nd ed.」。
+             另一条负面信号：专写全纯二次微分的综述 arXiv:1902.06406（已一手读到该段）在给 3g-3 时
+             逐字说「refer to [33] or [67], or any standard reference」，**不给 FK 的定理号**。}
+}
+
+@book{hartshorne-1977,
+  author    = {Hartshorne, Robin},
+  title     = {Algebraic Geometry},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {52},
+  publisher = {Springer},
+  year      = {1977},
+  note      = {由 researcher 于 2026-09-11 登记。**原书未取得**；**编号为 L3（一手读到引用方原文）**。
+             证据：D. L. Wynter, *An Exposition of the Riemann Roch Theorem for Curves*（UChicago REU 2016，
+             math.uchicago.edu/~may/REU2016/REUPapers/Wynter.pdf，落盘并读图，日期页逐字 Date: August 29, 2016），
+             其 **p.11 Theorem 5.1** 陈述 l(D) - l(K-D) = deg D + 1 - g，
+             证明栏逐字「Proof. Omitted (**Theorem IV.1.3, Hartshorne [2]**).」；
+             紧接 **Corollary 5.2**：deg K = 2g-2。
+             另有一条同向 L4（未一手核）：arXiv:2511.06880 据称逐字引「[Hartshorne(1977), Theorem IV.1.3]」。
+             => loc 可写「Ch. IV, Theorem 1.3」，但 note 必须注明「编号系二手核实」。
+             ⚠ **约定陷阱**：Hartshorne 的 l(D) 是**向量空间维数**约定；另有射影维数约定（H^0=0 时 l=-1），**整式差 1**。}
+}
+
