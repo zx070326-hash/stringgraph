@@ -33,25 +33,25 @@ canonical_text: |
       **不是**「幺正 ⟹ D = 26」的等价式：D ≤ 25 一侧本里程碑不作断言（该分支在图中另有节点
       worldsheet.no-ghost-theorem-subcritical，走的是补充模 + BRST 相对上同调的另一条路线，且附带 D ≥ 2
       与三条动量假设）。此路线的一切断言只在非退化动量扇区上成立（DDF 构造所需），细则见 ms.no-ghost-theorem。
-      （节点：worldsheet.critical-dimension-old-covariant → worldsheet.no-ghost-theorem-v4）
+      （节点：worldsheet.critical-dimension-old-covariant-v2 → worldsheet.no-ghost-theorem-v4）
 
   (III) BRST 路线（BRST 荷幂零）。前提：bc 系统权 λ = 2、鬼场正规序常数 a^g = −1、物质中心荷 c^m 的 BRST 荷 Q_B，
       作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化，以保证 Q_B 与 Q_B² 逐项有限）。
       结论：Q_B² = (1/2) Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m，故 Q_B² = 0 ⟺ c^m = 26 ⟺ 总中心荷
       c^m + c^g = 0；物质取 D 个平坦自由玻色子时 c^m = D，于是 D = 26。
       **⟹ 方向另需一条前提**：诸 c_{−m} c_m 在该模上线性无关（路线卡
-      worldsheet.critical-dimension-brst 的措辞是「对忠实的 Fock 型受限模成立」）。
+      worldsheet.critical-dimension-brst-v2 的措辞是「对忠实的 Fock 型受限模成立」）。
       缺此前提时 Q_B² = 0 ⟹ c^m = 26 不成立（在平凡模上 Q_B² 恒为零而 c^m 任意）；
       ⟸ 方向不需要它。
       本路线**只**定出 c^m（即 D），**不**定出截距 a。
-      （节点：worldsheet.critical-dimension-brst）
+      （节点：worldsheet.critical-dimension-brst-v2）
 
   (IV) Weyl 反常路线（总中心荷为零）。前提：Polyakov 路径积分对 diff × Weyl 取商，Weyl 是**规范冗余**并被用来
       固定规范；量子层面 Weyl 反常正比于中心荷且该中心荷为常数；Faddeev–Popov 鬼场是 λ = 2 的 bc 系统，
       贡献 c^g = −26。结论：反常抵消要求 c^{tot} = c^m + c^g = c^m − 26 = 0，即 c^m = 26；
       物质取 D 个平坦自由标量（c^m = D）时 D = 26。
       注意「c^m = 26」比「D = 26」更一般：任何中心荷为 26 的物质 CFT 都满足它，平坦 26 维时空只是其一个解。
-      （节点：worldsheet.critical-dimension-weyl-anomaly）
+      （节点：worldsheet.critical-dimension-weyl-anomaly-v2）
 
   (V) 截距 a = 1，**只对开弦**。它与 D 的取值无关地成立：(a) level N = 1 的态无质量、(b) 第一级伪态
       L_{−1}|0;k⟩ ∝ k·α_{−1}|0;k⟩ 同时是物理态（因而是零模态，给出偏振的规范自由度 e^μ → e^μ + λk^μ）、
@@ -126,7 +126,7 @@ canonical_text: |
       给出 D 的一条」。该句与 v2 自己的 (III)（Q_B² = 0 ⟺ c^m = 26，再经 c^m = D 给 ⟺ D = 26）
       抵触，(IV) 的判据 c^{tot} = 0 在实质上也是双向的。本里程碑 (I) 只断言光锥路线是四条中
       **唯一同时定出 D 与 a** 的一条（这一点不受影响：(III)(IV) 完全不给 a，(II) 把 a = 1 当前提）。
-      与 (II) 对 worldsheet.critical-dimension-old-covariant 末句关于 D < 26 的处理同款：
+      与 (II) 对 worldsheet.critical-dimension-old-covariant-v2 末句关于 D < 26 的处理同款：
       陈述卡不可变，故在本 canonical_text 中显式免责。
 
   【本 canonical_text 与 statement_id 的差异：已由 v2 解决（2026-09-11）；第一轮回译已完成，裁定 drift】
@@ -247,7 +247,7 @@ audit:
             （半正定但 (c) 不成立）；v2 比路线节点弱，方向安全。
     verdict: drift
     diff_notes: |
-      【第一轮修订记，2026-09-11，lead 授权、curator 执行】按下方第一轮审计的裁定改
+      【第一轮修订记，2026-09-11，lead 授权、curator 执行】（lead 补：route-cards 合并后 canonical_text 内三张路线卡引用已改指 -v2，共 5 处；audit 历史记录中的旧名保留）按下方第一轮审计的裁定改
       canonical_text 与 canonical_source（v2 陈述卡一字未动），逐条如下：
         A1 →【本里程碑不断言什么】新增第 (6) 条，显式声明不采用 v2 (I) 末句「也是唯一以「当且仅当」
            形式给出 D 的一条」；推导 worldsheet.critical-dimension-bosonic-v2--via-four-routes
