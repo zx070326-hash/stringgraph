@@ -302,6 +302,178 @@ theorem lie_vertexOsc_vertexOsc_of_dotVec_zero (η b b' : Fin D → R)
 
 end OrthogonalMomenta
 
+/-! ### The addition formula for coherent-state coefficients
+
+`E_-(b) E_-(b') = E_-(b+b')`.  This holds for *arbitrary* momenta — no orthogonality — and is
+the vacuum input for the same-point product of two vertex operators. -/
+
+section CreaExpAdd
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- The convolution `Σ_{p+q=j} Φ^b_p Φ^{b'}_q` of two families of coherent-state
+coefficients.  Only `0 ≤ p ≤ j` contributes, so the sum is finite and vanishes for `j < 0`. -/
+noncomputable def creaExpPair (η b b' : Fin D → R) (j : ℤ) : Fock D R :=
+  ∑ p ∈ Finset.Icc (0 : ℤ) j, creaExp η b p * creaExp η b' (j - p)
+
+/-- Any window containing `[0, j]` computes the convolution. -/
+lemma creaExpPair_eq_sum_Icc (η b b' : Fin D → R) {j u v : ℤ} (hu : u ≤ 0) (hv : j ≤ v) :
+    ∑ p ∈ Finset.Icc u v, creaExp η b p * creaExp η b' (j - p) = creaExpPair η b b' j := by
+  classical
+  refine (Finset.sum_subset (Finset.Icc_subset_Icc hu hv) ?_).symm
+  intro p _ hp'
+  simp only [Finset.mem_Icc, not_and, not_le] at hp'
+  rcases lt_or_ge p 0 with h | h
+  · rw [creaExp_of_neg η b h, zero_mul]
+  · rw [creaExp_of_neg η b' (by have := hp' h; omega : j - p < 0), mul_zero]
+
+@[simp]
+lemma creaExpPair_zero (η b b' : Fin D → R) : creaExpPair η b b' 0 = 1 := by
+  rw [creaExpPair, show Finset.Icc (0 : ℤ) 0 = {0} from rfl, Finset.sum_singleton, sub_zero,
+    creaExp_zero, creaExp_zero, mul_one]
+
+lemma creaExpPair_of_neg (η b b' : Fin D → R) {j : ℤ} (hj : j < 0) :
+    creaExpPair η b b' j = 0 := by
+  rw [creaExpPair, Finset.Icc_eq_empty (by omega), Finset.sum_empty]
+
+/-- **The convolution obeys the same Euler recursion as `Φ^{b+b'}`.**  Splitting the weight
+`j = p + (j - p)` and applying `Fock.sum_mode_creaExp_eq_smul` to each factor produces the
+creation modes of `b` on the left and of `b'` on the right; both reassemble into the
+convolution at the shifted index, and the two coefficients add up to `b + b'`. -/
+lemma sum_mode_creaExpPair_eq_smul (η a b b' : Fin D → R) {j N : ℤ} (hjN : j ≤ N) :
+    ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+        (η μ * (b + b') μ) • mode η a μ (-l) (creaExpPair η b b' (j - l))
+      = (j : R) • creaExpPair η b b' j := by
+  classical
+  have hmulL : ∀ (μ : Fin D) (l : ℤ), 0 < l → ∀ A B : Fock D R,
+      mode η a μ (-l) A * B = mode η a μ (-l) (A * B) := by
+    intro μ l hl A B
+    rw [mode_of_neg η a (by omega : -l < 0), creation_apply, creation_apply, mul_assoc]
+  have hmulR : ∀ (μ : Fin D) (l : ℤ), 0 < l → ∀ A B : Fock D R,
+      A * mode η a μ (-l) B = mode η a μ (-l) (A * B) := by
+    intro μ l hl A B
+    rw [mode_of_neg η a (by omega : -l < 0), creation_apply, creation_apply, mul_left_comm]
+  have hsplit : ∀ p ∈ Finset.Icc (0 : ℤ) j,
+      (j : R) • (creaExp η b p * creaExp η b' (j - p))
+        = (((p : ℤ) : R) • creaExp η b p) * creaExp η b' (j - p)
+          + creaExp η b p * (((j - p : ℤ) : R) • creaExp η b' (j - p)) := by
+    intro p _
+    rw [smul_mul_assoc, mul_smul_comm, ← add_smul]
+    congr 1
+    push_cast
+    ring
+  have hE1 : ∀ p ∈ Finset.Icc (0 : ℤ) j,
+      (((p : ℤ) : R) • creaExp η b p) * creaExp η b' (j - p)
+        = ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+            (η μ * b μ) • mode η a μ (-l) (creaExp η b (p - l) * creaExp η b' (j - p)) := by
+    intro p hp
+    rw [Finset.mem_Icc] at hp
+    rw [← sum_mode_creaExp_eq_smul η a b (K := p) (N := N) (by omega), Finset.sum_mul]
+    refine Finset.sum_congr rfl fun l hl => ?_
+    rw [Finset.mem_Ioc] at hl
+    rw [Finset.sum_mul]
+    exact Finset.sum_congr rfl fun μ _ => by rw [smul_mul_assoc, hmulL μ l hl.1]
+  have hE2 : ∀ p ∈ Finset.Icc (0 : ℤ) j,
+      creaExp η b p * (((j - p : ℤ) : R) • creaExp η b' (j - p))
+        = ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+            (η μ * b' μ) • mode η a μ (-l) (creaExp η b p * creaExp η b' (j - p - l)) := by
+    intro p hp
+    rw [Finset.mem_Icc] at hp
+    rw [← sum_mode_creaExp_eq_smul η a b' (K := j - p) (N := N) (by omega), Finset.mul_sum]
+    refine Finset.sum_congr rfl fun l hl => ?_
+    rw [Finset.mem_Ioc] at hl
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun μ _ => by rw [mul_smul_comm, hmulR μ l hl.1]
+  have hcomb : ∀ p ∈ Finset.Icc (0 : ℤ) j,
+      (j : R) • (creaExp η b p * creaExp η b' (j - p))
+        = ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+            ((η μ * b μ) • mode η a μ (-l) (creaExp η b (p - l) * creaExp η b' (j - p))
+              + (η μ * b' μ) • mode η a μ (-l)
+                  (creaExp η b p * creaExp η b' (j - p - l))) := by
+    intro p hp
+    rw [hsplit p hp, hE1 p hp, hE2 p hp, ← Finset.sum_add_distrib]
+    exact Finset.sum_congr rfl fun l _ => Finset.sum_add_distrib.symm
+  symm
+  calc (j : R) • creaExpPair η b b' j
+      = ∑ p ∈ Finset.Icc (0 : ℤ) j, (j : R) • (creaExp η b p * creaExp η b' (j - p)) := by
+        rw [creaExpPair, Finset.smul_sum]
+    _ = ∑ p ∈ Finset.Icc (0 : ℤ) j, ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+            ((η μ * b μ) • mode η a μ (-l) (creaExp η b (p - l) * creaExp η b' (j - p))
+              + (η μ * b' μ) • mode η a μ (-l)
+                  (creaExp η b p * creaExp η b' (j - p - l))) :=
+        Finset.sum_congr rfl hcomb
+    _ = ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ p ∈ Finset.Icc (0 : ℤ) j, ∑ μ : Fin D,
+            ((η μ * b μ) • mode η a μ (-l) (creaExp η b (p - l) * creaExp η b' (j - p))
+              + (η μ * b' μ) • mode η a μ (-l)
+                  (creaExp η b p * creaExp η b' (j - p - l))) := Finset.sum_comm
+    _ = ∑ l ∈ Finset.Ioc (0 : ℤ) N, ∑ μ : Fin D,
+            (η μ * (b + b') μ) • mode η a μ (-l) (creaExpPair η b b' (j - l)) := by
+        refine Finset.sum_congr rfl fun l hl => ?_
+        rw [Finset.mem_Ioc] at hl
+        rw [Finset.sum_comm]
+        refine Finset.sum_congr rfl fun μ _ => ?_
+        have hre1 : ∑ p ∈ Finset.Icc (0 : ℤ) j, creaExp η b (p - l) * creaExp η b' (j - p)
+            = creaExpPair η b b' (j - l) := by
+          rw [← creaExpPair_eq_sum_Icc η b b' (u := -l) (v := j - l) (by omega) (le_refl _)]
+          refine Finset.sum_equiv (Equiv.subRight l) (fun p => ?_) (fun p _ => ?_)
+          · simp only [Equiv.subRight_apply, Finset.mem_Icc]
+            omega
+          · simp only [Equiv.subRight_apply]
+            rw [show j - l - (p - l) = j - p from by ring]
+        have hre2 : ∑ p ∈ Finset.Icc (0 : ℤ) j, creaExp η b p * creaExp η b' (j - p - l)
+            = creaExpPair η b b' (j - l) := by
+          rw [← creaExpPair_eq_sum_Icc η b b' (u := 0) (v := j) (le_refl _) (by omega)]
+          exact Finset.sum_congr rfl fun p _ => by
+            rw [show j - l - p = j - p - l from by ring]
+        rw [Finset.sum_add_distrib, ← Finset.smul_sum, ← Finset.smul_sum, ← map_sum,
+          ← map_sum, hre1, hre2, ← add_smul]
+        congr 1
+        simp only [Pi.add_apply]
+        ring
+
+/-- **The addition formula for coherent-state coefficients**, `E_-(b) E_-(b') = E_-(b+b')`:
+`Φ^{b+b'}_j = Σ_{p+q=j} Φ^b_p Φ^{b'}_q`.  No hypothesis on the momenta is needed — the
+creation halves of two vertex operators always commute and multiply by adding momenta; it is
+only the *annihilation* half that produces a contraction.
+
+The proof is uniqueness for the Euler recursion: `sum_mode_creaExpPair_eq_smul` and
+`Fock.sum_mode_creaExp_eq_smul` are the same recursion for the momentum `b + b'`, the two
+sides agree at `j = 0`, and in a `ℚ`-algebra the scalar `j ≠ 0` can be cancelled. -/
+theorem creaExpPair_eq_creaExp_add (η b b' : Fin D → R) (j : ℤ) :
+    creaExpPair η b b' j = creaExp η (b + b') j := by
+  suffices h : ∀ M : ℕ, ∀ i : ℤ, i ≤ (M : ℤ) → creaExpPair η b b' i = creaExp η (b + b') i by
+    rcases lt_or_ge j 0 with hj | hj
+    · rw [creaExpPair_of_neg η b b' hj, creaExp_of_neg η (b + b') hj]
+    · exact h j.toNat j (by omega)
+  intro M
+  induction M with
+  | zero =>
+      intro i hi
+      rcases lt_or_ge i 0 with hneg | hnn
+      · rw [creaExpPair_of_neg η b b' hneg, creaExp_of_neg η (b + b') hneg]
+      · have hi0 : i = 0 := by omega
+        subst hi0
+        rw [creaExpPair_zero, creaExp_zero]
+  | succ M ih =>
+      intro i hi
+      rcases le_or_gt i (M : ℤ) with hle | hgt
+      · exact ih i hle
+      · have hkey : (i : R) • creaExpPair η b b' i = (i : R) • creaExp η (b + b') i := by
+          rw [← sum_mode_creaExpPair_eq_smul η b b b' (j := i) (N := i) (le_refl _),
+            ← sum_mode_creaExp_eq_smul η b (b + b') (K := i) (N := i) (le_refl _)]
+          refine Finset.sum_congr rfl fun l hl => ?_
+          rw [Finset.mem_Ioc] at hl
+          exact Finset.sum_congr rfl fun μ _ => by rw [ih (i - l) (by omega)]
+        have hipos : (0 : ℤ) < i := by omega
+        obtain ⟨n, hn⟩ : ∃ n : ℕ, i = ((n + 1 : ℕ) : ℤ) :=
+          ⟨i.toNat - 1, by omega⟩
+        subst hn
+        rw [show ((((n + 1 : ℕ) : ℤ)) : R) = ((n + 1 : ℕ) : R) from by push_cast; ring]
+          at hkey
+        exact natCast_smul_left_cancel (Nat.succ_ne_zero n) hkey
+
+end CreaExpAdd
+
 end Fock
 
 /-! ### The vertex operators of a light-like tower commute -/
