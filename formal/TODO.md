@@ -364,6 +364,15 @@
     有序域上 `D > 26` ⟹ `∃ ψ ∈ physSubmodule (minkowski D K) b 1, ⟨ψ,ψ⟩ < 0`；
     动量见 `Fock.exists_zeroModeSq_eq_neg_two`（`α'k² = -1`，需 `D ≥ 2` 与域，因为
     单分量的 `k² = -1` 在 ℚ 上无解）。
+  - 带动量量词的加强版：`Fock.exists_mem_physSubmodule_pairing_self_neg'`，结论多输出
+    `zeroModeSq (minkowski D K) b = -2` 与 `b ≠ 0`，可逐字对应 no-ghost-theorem-v4 第 (2) 条的
+    `∃ p ≠ 0`；`b ≠ 0` 由质壳本身逼出（`zeroModeSq η 0 = 0 ≠ -2`）。
+    图节点 `worldsheet.negative-norm-physical-state-above-26` 的 `lean_decl` 宜改指这个声明。
+  - **公理登记**（curator 要求）：上述声明均无 `sorry`，
+    `lake env lean --run scripts/check_axioms.lean --import StringFormal.NoGhost.LevelTwo --all`
+    对 `exists_mem_physSubmodule_pairing_self_neg`、`exists_mem_physSubmodule_pairing_self_neg'`、
+    `exists_zeroModeSq_eq_neg_two` 均输出 `ok`，公理集只有
+    `propext`、`Classical.choice`、`Quot.sound`（2026-09-11 复核）。
 
   **未做**：没有证明 `ψ₂` 张成 level-2 物理态的标量（`SO(D-1)` 不变）部分，所以「level-2 标量模」
   是关于这一族显式试探态的陈述，不是关于某个典范向量的。做鬼不需要这一步（一个负模态就够），
