@@ -1,0 +1,55 @@
+id: worldsheet.free-boson-central-charge-d--via-mode-algebra
+target: worldsheet.free-boson-central-charge-d
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: kac-raina-1987
+    loc: "Lecture 2 的 oscillator/Fock 表示部分（Heisenberg 代数的 Fock 表示上的 Virasoro 作用），**Lecture 编号与定理编号未核实**"
+    note: |
+      按 lead 裁决 2（2026-09-10）登记为本推导的数学来源。**编号未核实**：
+      抽取者/curator 手上没有该书，无法确认「Lecture 2」是否正确，也无定理编号。
+      故本推导不标 rigorous。见 sources.bib 中 kac-raina-1987 的 note。
+  - ref: schottenloher-2008
+    loc: "Virasoro 代数在 Heisenberg/Fock 表示上的实现（Sugawara 型构造）相关章节，**章节与定理编号未核实**"
+    note: 备选数学来源，同样编号未核实。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)（模式表达式，经 schrans-2020 §4.3 核实）"
+    note: |
+      提供本推导所用的模式表达式本身；Polchinski **不**走这条对易子路线，
+      他在 §2.4 用 OPE 定 c，故本条只支持「L_m 的表达式」这一步，不支持整个计算。
+summary: |
+  纯代数计算，全部在 worldsheet.virasoro-generators-free-boson 定义的 Fock 空间 F 上进行，
+  不用算子乘积展开、不用围道积分：
+  (1) 先算 [L_m, α^μ_n] = -n α^μ_{m+n}。这一步是有限计算：L_m 中只有两项与 α^μ_n 不对易，
+      用 [α^μ_p, α^ν_q] = p η^{μν} δ_{p+q,0} 展开即得。
+  (2) 由 (1) 得 [L_m, L_n] = (m-n) L_{m+n} 对 m + n ≠ 0 成立——此时和式中不出现
+      需要重排的项，正规序不产生额外常数。
+  (3) 对 n = -m（m > 0），把 [L_m, L_{-m}] 中出现的 α_{k}·α_{-k} 重排成正规序，
+      每次重排给出 c-数 η^{μν}η_{μν} = D；求和范围有限，为 k = 1,…,m-1，得中心项
+        (1/2) D Σ_{k=1}^{m-1} k(m-k) = (D/12) m(m^2 - 1)。
+      故 [L_m, L_{-m}] = 2m L_0 + (D/12) m(m^2-1)。
+  (4) 与 conv.virasoro-standard 的归一化比较，读出 c = D。
+  每一步都只涉及 Fock 空间上的有限和，因为作用在任一 v ∈ F 上时只有有限多项非零
+  （worldsheet.virasoro-generators-free-boson 的良定义性论证）。
+gaps:
+  - "**本推导本身是严格的代数事实**：Fock 空间上的 L_m 逐向量只有有限多项，
+     (1)–(4) 全是有限维线性代数中的恒等式，不含任何解析或路径积分输入。
+     之所以只标 physical-argument 而非 rigorous，**唯一**的原因是按 docs/STATUS_LEVELS.md
+     rigorous 要求可追溯到已核实编号的数学文献，而 kac-raina-1987 / schottenloher-2008
+     的 Lecture/章节/定理编号均未核实（lead 裁决 2 的明确指示：编号不能核实就写未核实，
+     status 相应写 physical-argument）。
+     **升级路径**：researcher 核实 Kac–Raina 中 Fock 表示上 Virasoro 作用的确切位置
+     （或 Schottenloher 的对应定理号）后，把本推导改为 kind: proof / status: rigorous。
+     届时 worldsheet.free-boson-central-charge-d 的有效状态将由本条（而非 --via-ope）决定。"
+  - "本推导给出的是**振子代数的 Fock 表示上**的陈述，与「二维自由标量场论的中心荷」之间
+     还差一步物理解释（即该 Fock 空间就是自由标量 CFT 的态空间）；
+     那一步经 worldsheet.state-operator-isomorphism，属 --via-ope 路线的内容。
+     换言之：本推导使 c = D 作为**代数命题**可望严格，但「c = D 是自由标量 CFT 的中心荷」
+     这一物理陈述仍封顶在 physical-argument。"
+  - "计算在 mostly-plus 号差下做，η^{μν}η_{μν} = D 与号差无关，但 Fock 空间的内积不定
+     （X^0 方向），本推导不涉及内积，故不受影响。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

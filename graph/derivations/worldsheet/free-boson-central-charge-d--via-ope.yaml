@@ -1,0 +1,45 @@
+id: worldsheet.free-boson-central-charge-d--via-ope
+target: worldsheet.free-boson-central-charge-d
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.free-scalar-propagator
+  - id: worldsheet.ope-commutator-dictionary
+  - id: worldsheet.energy-momentum-laurent-modes
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: true
+    note: |
+      Polchinski 在 §2.4 用 OPE 定出 c，在 §2.7 才给出模式表达式 (2.7.25)；
+      「OPE 路线定出的 c 与模式路线定义的同一组 L_m 的中心荷是同一个数」这一步
+      在来源中没有被显式论证（它默认 T 的 Laurent 模就是振子双线性式）。
+      本图把它标为 inferred: true，因为本推导的目标陈述是用模式定义的 L_m 表述的。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（**式号未核实，无页码锚点**）；用到的 TT OPE 形式见 §2.4 约 (2.4.24)–(2.4.25)"
+    note: 见 polchinski-1998-v1.md E34 与 Q4：这是本抽取中最缺锚点的核心条目。
+summary: |
+  用 worldsheet.conformal-normal-ordering 的交叉缩并规则直接算
+    T(z) T(0),  T(z) = -(1/α') : ∂X^μ ∂X_μ :(z)。
+  每次缩并给出一个 ∂∂ 作用在传播子 -(α'/2) η^{μν} ln|z|^2 上的因子，
+  即 ⟨∂X^μ(z) ∂X^ν(0)⟩ = -(α'/2) η^{μν} / z^2。
+  **双缩并**（两个 X 都缩并）给出不含算子的项：
+    (1/α'^2) · 2 · (α'/2)^2 · η^{μν}η_{μν} / z^4 = (1/2) D / z^4,
+  与 worldsheet.tt-ope-central-charge 的定义式 c/(2z^4) 比较即得 c = D
+  （η^{μν}η_{μν} = δ^μ_μ = D 是唯一出现 D 的地方）。
+  单缩并给出 (2/z^2)T(0) 与 (1/z)∂T(0)，与定义式一致，说明归一化自洽。
+  最后经 worldsheet.ope-commutator-dictionary 把该 OPE 翻译成 L_m 的对易关系，
+  得到中心荷为 D 的 Virasoro 代数。
+gaps:
+  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1，2026-09-10）：
+     最后一步（OPE ⇒ 对易关系）经 worldsheet.ope-commutator-dictionary，
+     该节点的围道变形依赖 worldsheet.operator-product-expansion 中未被证明的有限收敛半径。"
+  - "Wick 缩并规则本身来自路径积分（worldsheet.free-scalar-propagator 为 physical-argument）。"
+  - "来源定位最弱的一条：c = D 的公式号在抽取记录中既无式号也无页码锚点（Q4）。
+     在人工核对原书之前，本推导的 sources[].loc 只是区间猜测。"
+  - "「OPE 定出的 c」与「模式定义的 L_m 的中心荷」之间的等同标为 inferred（见 depends_on）。
+     独立于此的模式路线见 worldsheet.free-boson-central-charge-d--via-mode-algebra。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

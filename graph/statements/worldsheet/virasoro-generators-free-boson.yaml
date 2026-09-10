@@ -1,0 +1,59 @@
+id: worldsheet.virasoro-generators-free-boson
+kind: definition
+status: rigorous
+title: "自由玻色子 Fock 空间上的 Virasoro 生成元 L_m = (1/2) Σ_n : α_{m-n} · α_n :"
+statement: |
+  设 D 个自由玻色子的振子代数由厄米生成元 α^μ_n（μ = 0,…,D-1；n ∈ Z）张成，满足
+    [α^μ_m, α^ν_n] = m  η^{μν}  δ_{m+n, 0},   (α^μ_n)^† = α^μ_{-n},
+  其中 η 是 mostly-plus 靶空间度规（conv.metric-mostly-plus）。
+  Fock 空间 F 由基态 |0; k⟩（满足 α^μ_n |0;k⟩ = 0 对所有 n > 0，且 α^μ_0 |0;k⟩ = √(2α') k^μ |0;k⟩，
+  conv.alpha-prime-regge）用 α^μ_{-n}（n > 0）作用生成的有限线性组合张成。
+
+  在 F 上**直接**（不经过任何算子乘积展开或围道积分）定义
+    L_m ≡ (1/2) Σ_{n ∈ Z} : α_{m-n} · α_n :,   α_p · α_q ≡ η_{μν} α^μ_p α^ν_q,
+  其中 : … : 是**产生-湮灭正规序**：把指标为负的模写到左边，
+    : α^μ_p α^ν_q : = α^μ_p α^ν_q  若 p ≤ q，  = α^ν_q α^μ_p  若 p > q。
+  （两个 α 只在 p + q = 0 时不对易，故该正规序只影响 m = 0 项。）
+  特别地
+    L_0 = (1/2) α_0 · α_0 + Σ_{n ≥ 1} α_{-n} · α_n。
+
+  **良定义性**：对每个 v ∈ F 存在 N 使 α^μ_n v = 0 对所有 n > N；由于正规序把湮灭算子放在右边，
+  和式 Σ_{n∈Z} : α_{m-n}·α_n : v 只有有限多项非零。故每个 L_m 是 F 上处处有定义的线性算子，
+  无需任何收敛性假设。
+uses: []
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)、(2.7.27)（开弦的 L_m 与零模 α_0 = (2α')^{1/2} p），p.58 起"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字核实（「Recall (2.7.25) and (2.7.27) for the open string」，
+      并列出 L_0 = α'p^2 + Σ_{n≥1} α_{-n}·α_n、L_m = (1/2)Σ_n :α_{m-n}·α_n:、α_0^μ = (2α')^{1/2}p^μ）。
+      振子对易关系 [α_m, α_n] = m η δ_{m+n,0} 本身出自第 1 章（抽取记录 E14），
+      本节点把它作为定义的一部分内联写出，未单独建边。
+  - ref: kac-raina-1987
+    loc: "Lecture 2 的 oscillator/Fock 表示部分，**编号未核实**"
+    note: |
+      同一构造在数学文献中的标准位置（Heisenberg 代数的 Fock 表示上的 Virasoro 作用）。
+      **Lecture 编号与定理编号均未核实**，仅作为「这是标准数学构造」的指路，
+      不作为任何断言的可追溯来源。见 sources.bib 中 kac-raina-1987 的 note。
+tags: [cft, virasoro, fock-space, free-boson, definition, sugawara]
+notes: |
+  **lead 裁决 2（2026-09-10）**：把 c = D 拆成两个节点——本节点是 (a)，
+  即「显式正规序、不用 OPE」的定义；命题「这些 L_m 满足 Virasoro 关系且 c = D」是 (b)，
+  见 worldsheet.free-boson-central-charge-d。
+  这样拆的价值：本节点是本批中**最接近可形式化**的一条——Fock 空间是可数维的、
+  L_m 逐向量只有有限多项、全部内容是代数恒等式，没有任何路径积分或收敛性输入，
+  故 status: rigorous 且 uses 为空（不依赖传播子、OPE 或能动张量）。
+
+  与 worldsheet.energy-momentum-laurent-modes 的关系：后者是「由全纯 T 的 Laurent 系数定义 L_m」，
+  经过 OPE 与围道，status 由上游拉低；本节点是同一批 L_m 的独立、纯代数的定义。
+  两个定义给出同一组算子这件事本身是一条命题（自由场 T 的模展开 = 上述振子双线性式），
+  本图未单独建节点，而是写在 worldsheet.free-boson-central-charge-d--via-ope 的论证里。
+
+  与 formal/ 的接口：formalizer 正在建的自由玻色子 Fock 空间（formal/StringFormal/NoGhost）
+  与本节点对应；若 Lean 侧完成 L_m 的定义，可在本节点填 formal.lean_decl。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

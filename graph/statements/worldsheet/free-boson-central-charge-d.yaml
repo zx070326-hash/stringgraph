@@ -1,0 +1,44 @@
+id: worldsheet.free-boson-central-charge-d
+kind: proposition
+title: D 个自由玻色子的中心荷 c = D
+statement: |
+  设 L_m 是 worldsheet.virasoro-generators-free-boson 定义的、作用在 D 个自由玻色子的
+  Fock 空间 F 上的算子 L_m = (1/2) Σ_{n∈Z} : α_{m-n} · α_n :。则在 F 上
+    [L_m, L_n] = (m - n) L_{m+n} + (D/12) m (m^2 - 1) δ_{m+n, 0} · Id_F,
+  即这些 L_m 给出 Virasoro 代数（conv.virasoro-standard 的归一化）的一个表示，
+  其中心荷为
+    c = D  （每个自由玻色子贡献 c = 1）。
+  反全纯部门同理给出 c̄ = D。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4 末至 §2.5 初，约 eq. (2.4.25)–(2.5.1)（由 X^μ 的 TT OPE 直接算出 c = 1，D 个给 c = D）"
+    note: |
+      **公式号完全未核实，且无页码锚点**——这是抽取记录中唯一一条核心陈述既无式号也无页码
+      （见 literature/extractions/polchinski-1998-v1.md E34 与 Q4）。内容（c = D）本身在
+      抽取记录第 1.1 节被列为「内容确认，位置见 E34」。**必须人工核对原书。**
+  - ref: kac-raina-1987
+    loc: "Lecture 2 的 oscillator/Fock 表示部分，**编号未核实**"
+    note: 直接对易子计算路线的数学来源；编号未核实，见 --via-mode-algebra 的 gaps。
+  - ref: schottenloher-2008
+    loc: "Virasoro 代数的 Heisenberg/Fock 表示相关章节，**章节与定理编号未核实**"
+    note: 同上。
+tags: [cft, central-charge, free-boson, virasoro, sugawara]
+notes: |
+  **本节点是 D = 26 的三条推导的公共支点**：
+    worldsheet.critical-dimension-brst 的末句（c^m = D，故 Q_B^2 = 0 ⟺ D = 26）、
+    worldsheet.critical-dimension-weyl-anomaly（c^m + c^g = 0 ⟺ D = 26）、
+  以及一切「物质中心荷 = 时空维数」的换算。在本节点建立之前，这一步只作为
+  worldsheet.critical-dimension-brst 陈述文本中的一句话存在，没有独立的来源与状态记账
+  （见该节点 --via-three-routes 的 gaps 第三条）。**建议 lead 让后续修订把
+  critical-dimension-brst 与 critical-dimension-weyl-anomaly 的这一步显式指向本节点。**
+
+  两条推导（lead 裁决 2，2026-09-10）：
+    --via-ope          Polchinski §2.4 的 TT OPE 路线，physical-argument（OPE 收敛未证）
+    --via-mode-algebra 直接对易子计算，本质上是严格的代数事实，但因数学来源的编号未核实
+                       而暂记 physical-argument，待 researcher 核实后升级为 rigorous。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

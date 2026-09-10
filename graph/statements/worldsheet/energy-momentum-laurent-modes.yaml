@@ -1,0 +1,39 @@
+id: worldsheet.energy-momentum-laurent-modes
+kind: definition
+status: rigorous
+title: T 的 Laurent 展开与 Virasoro 生成元 L_m 的围道定义
+statement: |
+  设 T(z) 是共形场论的全纯能动张量（worldsheet.traceless-holomorphic-energy-momentum），
+  权为 (2, 0)。定义其 Laurent 模
+    T(z) = Σ_{m ∈ Z} L_m z^{-m-2},   L_m = ∮_{C_0} (dz / 2π i)  z^{m+1} T(z),
+  其中 C_0 是绕原点的逆时针围道；反全纯部门同理定义 L̄_m。
+  z^{-m-2} 中的偏移 2 是 T 的权，它使 L_m 在标度变换 z → λ z 下按 L_m → λ^{-m} L_m 变换，
+  即 L_m 把标度维数降低 m。
+
+  在径向量子化中 L_0 + L̄_0 生成标度变换（= 柱面上的时间平移），
+  L_{-1}、L_0、L_1 生成全局 SL(2,C) 变换。
+uses:
+  - worldsheet.traceless-holomorphic-energy-momentum
+  - worldsheet.tt-ope-central-charge
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6（p.52 起），eq. (2.6.4)（复坐标）、(2.6.7)（Fourier/Laurent 展开）、(2.6.8)（L_m 与 T_m 的关系），p.53–54"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.37`–`2.39`, p.53–54）。
+      围道方向与 1/2πi 的放置为忠实转述，未核对原书。
+tags: [cft, virasoro, laurent-expansion, definition]
+notes: |
+  本节点只定义模，不断言它们满足 Virasoro 代数——那需要 TT OPE 加围道变形字典
+  （worldsheet.ope-commutator-dictionary），对自由玻色子的具体实现见
+  worldsheet.free-boson-central-charge-d。
+
+  ⚠ 良定义性：把 T(z) 展成 Laurent 级数并逐项定义 L_m，隐含 T 在某个环域上的全纯性与
+  级数收敛；在本图中这一点由 worldsheet.traceless-holomorphic-energy-momentum
+  （其自身为 physical-argument）承担，不再重复记账。
+  与之对照，worldsheet.virasoro-generators-free-boson 给出的是**不经过 OPE 的**
+  显式模式定义，在 Fock 空间上逐向量只有有限多项，是可直接形式化的版本。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"
