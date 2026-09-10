@@ -124,6 +124,7 @@ gaps:
      自由性 (1) 对任意交换环 R（vir₋ 作为 R-模自由）都成立，worldsheet.verma-module-v2 的构造本就对
      任意 ℚ-代数成立。若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
 notes: |
+  核对源（lead 2026-09-11 从 sources[] 降注）：swanson-2015-pbw，原 loc：研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论
   reviewer-verified: reviewer-batch4, 2026-09-11 — 诱导模识别 → 两次 PBW → 分拆计数三步独立复核；来源无证明、论证为本图补写，按 STATUS_LEVELS 例外条款保持 rigorous。
   （reviewer-batch4 同时指出：到 verma-level-spanned-by-partitions 的记账边不被来源或 summary 使用，已改 inferred: true。）
   **status 的选择**：rigorous。按 docs/STATUS_LEVELS.md 等级 4，非平凡输入（PBW）来自数学教科书里
@@ -157,4 +158,3 @@ notes: |
   该条已在自己的 gaps 里登记这一步；若日后有第二处需要，应新建一条 math 节点承载 Euler 恒等式。
 author: curator
 created: "2026-09-11"
-# lead 2026-09-11：swanson-2015-pbw 降为核对源，原 loc："研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论"

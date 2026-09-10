@@ -33,6 +33,7 @@ depends_on:
   - id: math.euler-partition-generating-function
     inferred: false
     note: |
+      【reviewer-batch6 补注】LZ Prop 3.4 的 ch_q V(D,p) = q^{p·p/2} φ(q)^{−D} 是 D 玻色子 Fock 模的特征标（Euler 恒等式取 D 次幂），不是 Verma 的 p(N)；本边引 Euler 卡是为 φ(q)^{−1} 的展开，与 dim V_N = p(N)（Verma）是两件事。
       **非 inferred：特征标那一步字面用到它**。LZ Proposition 3.4 给出 ch_q V(D,p) 的显式
       乘积公式，Theorem 3.5 的证明比较 ch_q L(26−D,1−h) 与 sign_q L(26−D,1−h)；
       把「按 level 的维数序列」写成「∏_{n≥1}(1 − q^n)^{−1} 型的乘积」这一步，就是本边指向的

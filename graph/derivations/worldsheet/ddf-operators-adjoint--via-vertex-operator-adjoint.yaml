@@ -145,6 +145,7 @@ summary: |
   横向振子代数（worldsheet.ddf-transverse-oscillator-algebra）只给对易子，
   正定性还需要本推导的 (1) 与真空归一化。
 gaps:
+  - "【reviewer-batch6】summary 第 2 步用到『围道积分 ⟹ 模态和 A^i_n = Σ_m α^i_m V^{(n)}_m』字典；该字典图中无节点（ROADMAP 待裁决），与 ddf-transversality-gives-local-finiteness--via-mode-sum 的同一 gap 相同。"
   - "**文献只有一句断言，没有推导；summary 三步没有逐字来源。** GSW §2.3.3 的定位强度是章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3），GT 1972 正文未获取。教科书对伴随关系只写「A^i_n 是厄米的」一类的一句话。第 1、2 步的模反射规则与逐因子取伴随是本项目按标准径向量子化规则重建的，**未与任何原文核对**。"
   - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，status physical-argument），本条已加为依赖，本推导 summary 第 2 步不再是裸断言。**但缺口本身没有关闭，只是搬了家**：那条命题的论证仍依赖指数算符两半的重排序（E_+E_- ↔ E_-E_+）与「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则——后者在本图中**仍然没有节点**（最接近的是 worldsheet.ope-commutator-dictionary，但那是围道形变，不是伴随），另外「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」也仍无节点。三条缺口的现址是 worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条。这仍是本推导 status 无法高于 physical-argument 的主要原因。"
   - "**Lean 侧未起步：V(b)_J† = V(−b)_{−J} 未证。** `formal/StringFormal/NoGhost/VertexOperator.lean` 已有正规序指数的两半（`Fock.creaExp`、`Fock.vertexSub`）与模 `Fock.vertexOsc`，也有 b·b = 0（`dotVec η b b = 0`）作为显式假设，但**没有任何关于伴随的定理**——worldsheet.ddf-operators-v5 的 notes (4) 逐字登记「顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做（需 E_+E_- 重排序）」。另有结构性障碍：Lean 侧只有 R-双线性型 `Fock.pairing`，**无 sesquilinear 结构**，故即使做完也只覆盖目标边界 (a) 说的实极化情形，不覆盖复 Hermitian 形式。"
