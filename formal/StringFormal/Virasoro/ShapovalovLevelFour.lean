@@ -107,6 +107,69 @@ lemma lie_lgen_zero_neg_two : ⁅VirasoroAlgebra.lgen R 0, VirasoroAlgebra.lgen 
   rw [VirasoroAlgebra.lie_lgen_lgen]
   norm_num
 
+/-! ### Action of `L₄` on level 4: everything lands on `|c,h⟩` -/
+
+/-- `L₄ L₋₁|c,h⟩ = 0`. -/
+lemma lie_lgen_four_desc1 : ⁅VirasoroAlgebra.lgen R 4, desc1 R c h⁆ = 0 := by
+  rw [desc1, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 4), lie_zero,
+    add_zero, lie_lgen_four_neg_one, smul_lie,
+    lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 3), smul_zero]
+
+/-- `L₄ L₋₂|c,h⟩ = 0`. -/
+lemma lie_lgen_four_desc2 : ⁅VirasoroAlgebra.lgen R 4, desc2 R c h⁆ = 0 := by
+  rw [desc2, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 4), lie_zero,
+    add_zero, lie_lgen_four_neg_two, smul_lie,
+    lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 2), smul_zero]
+
+/-- `L₄ L₋₁²|c,h⟩ = 0`. -/
+lemma lie_lgen_four_desc11 : ⁅VirasoroAlgebra.lgen R 4, desc11 R c h⁆ = 0 := by
+  rw [desc11, leibniz_lie, lie_lgen_four_desc1, lie_zero, add_zero, lie_lgen_four_neg_one,
+    smul_lie, lie_lgen_three_desc1, smul_zero]
+
+/-- `L₄ L₋₁³|c,h⟩ = 0`. -/
+lemma lie_lgen_four_desc111 : ⁅VirasoroAlgebra.lgen R 4, desc111 R c h⁆ = 0 := by
+  rw [desc111, leibniz_lie, lie_lgen_four_desc11, lie_zero, add_zero, lie_lgen_four_neg_one,
+    smul_lie, lie_lgen_three_desc11, smul_zero]
+
+/-- `L₄ L₋₄|c,h⟩ = (8h + 5c)|c,h⟩`. -/
+lemma lie_lgen_four_desc4 : ⁅VirasoroAlgebra.lgen R 4, desc4 R c h⁆
+    = (8 * h + 5 * c) • hwv R c h := by
+  rw [desc4, leibniz_lie, lie_lgen_hwv_of_pos R c h (by norm_num : (0:ℤ) < 4), lie_zero,
+    add_zero, lie_lgen_four_neg_four, add_lie, smul_lie, smul_lie, lie_lgen_zero_hwv,
+    lie_cgen_hwv, smul_smul, smul_smul, ← add_smul, centralTerm_four]
+
+/-- `L₄ L₋₃L₋₁|c,h⟩ = 14h |c,h⟩`. -/
+lemma lie_lgen_four_desc31 : ⁅VirasoroAlgebra.lgen R 4, desc31 R c h⁆
+    = (14 * h) • hwv R c h := by
+  rw [desc31, leibniz_lie, lie_lgen_four_desc1, lie_zero, add_zero, lie_lgen_four_neg_three,
+    smul_lie, lie_lgen_one_desc1, smul_smul]
+  congr 1
+  ring
+
+/-- `L₄ L₋₂²|c,h⟩ = (24h + 3c)|c,h⟩`. -/
+lemma lie_lgen_four_desc22 : ⁅VirasoroAlgebra.lgen R 4, desc22 R c h⁆
+    = (24 * h + 3 * c) • hwv R c h := by
+  rw [desc22, leibniz_lie, lie_lgen_four_desc2, lie_zero, add_zero, lie_lgen_four_neg_two,
+    smul_lie, lie_lgen_two_desc2, smul_smul]
+  congr 1
+  linear_combination (3 * c) * two_mul_centralTerm_two R
+
+/-- `L₄ L₋₂L₋₁²|c,h⟩ = 36h |c,h⟩`. -/
+lemma lie_lgen_four_desc211 : ⁅VirasoroAlgebra.lgen R 4, desc211 R c h⁆
+    = (36 * h) • hwv R c h := by
+  rw [desc211, leibniz_lie, lie_lgen_four_desc11, lie_zero, add_zero, lie_lgen_four_neg_two,
+    smul_lie, lie_lgen_two_desc11, smul_smul]
+  congr 1
+  ring
+
+/-- `L₄ L₋₁⁴|c,h⟩ = 120h |c,h⟩`. -/
+lemma lie_lgen_four_desc1111 : ⁅VirasoroAlgebra.lgen R 4, desc1111 R c h⁆
+    = (120 * h) • hwv R c h := by
+  rw [desc1111, leibniz_lie, lie_lgen_four_desc111, lie_zero, add_zero, lie_lgen_four_neg_one,
+    smul_lie, lie_lgen_three_desc111, smul_smul]
+  congr 1
+  ring
+
 end Level4
 
 end StringFormal.Virasoro
