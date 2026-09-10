@@ -39,7 +39,7 @@ canonical_text: |
       **不是**「幺正 ⟹ D = 26」的等价式：D ≤ 25 一侧本里程碑不作断言（该分支在图中另有节点
       worldsheet.no-ghost-theorem-subcritical，走的是补充模 + BRST 相对上同调的另一条路线，且附带 D ≥ 2
       与三条动量假设）。此路线的一切断言只在非退化动量扇区上成立（DDF 构造所需），细则见 ms.no-ghost-theorem。
-      （节点：worldsheet.critical-dimension-old-covariant-v2 → worldsheet.no-ghost-theorem-v4）
+      （节点：worldsheet.critical-dimension-old-covariant-v3 → worldsheet.no-ghost-theorem-v4）
 
   (III) BRST 路线（BRST 荷幂零）。前提：bc 系统权 λ = 2、鬼场正规序常数 a^g = −1、物质中心荷 c^m 的 BRST 荷 Q_B，
       作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化，以保证 Q_B 与 Q_B² 逐项有限）。
