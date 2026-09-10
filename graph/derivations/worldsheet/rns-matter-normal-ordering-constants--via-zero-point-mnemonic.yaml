@@ -1,0 +1,58 @@
+id: worldsheet.rns-matter-normal-ordering-constants--via-zero-point-mnemonic
+target: worldsheet.rns-matter-normal-ordering-constants
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给 a^m 的定义位置（L_0 内部的常数）与模式内容（D 个玻色、D 个费米振子）。
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给「周期（R）/ 反周期（NS）」这个区分，助记规则对两者给不同的值。
+  - id: worldsheet.cylinder-plane-l0-shift
+    note: |
+      供给「柱面与平面的 L_0 相差一个常数位移」这一机制，即助记法所计算的那个常数的来源。
+      ⚠ 该节点是玻色弦情形（−c/24 型位移）；本推导用到的是它的超共形版本
+      （两个扇区共同的 +ĉ/16 位移），本图无节点，见 gaps。
+  - id: worldsheet.zeta-regularized-sum-of-integers
+    note: |
+      供给零点能求和的正规化（周期玻色子的 −1/24 就是 (1/2)Σn 的 ζ 值）。
+      费米型的 +1/24 与反周期的 −1/48 需要相应的交错/半整数求和，本图无节点，见 gaps。
+      **标 inferred**：Vol.2 只说「用 §2.9 末的助记法」，不在原地做正规化求和。
+    inferred: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.13), p. 7（结果值）与其上方的方法说明（逐字：'The normal ordering constant can be obtained by any of the methods from chapter 2; we will use the mnemonic from the end of section 2.9. Each periodic boson contributes −1/24. Each periodic fermion contributes +1/24 and each antiperiodic fermion −1/48.'）"
+    note: |
+      L1。⚠ 原书**只给规则与结果**，不给求和过程。同一句里的位移项写法有记号疑问（Q3），
+      本推导按目标卡片的记账只使用「两个扇区共同 +D/16」这一形式，并在那里记明这是图内推断。
+  - ref: polchinski-1998-v1
+    loc: "§2.9 末（零点能助记法：周期玻色子 −1/24、周期费米子 +1/24、反周期费米子 −1/48）；**式号未核实**，本图只知它在 §2.9 末尾"
+    note: |
+      这条位置是由 Vol.2 的两处一手引用确定的（(10.2.13) 上方一句与 exercise 10.8(b)），
+      见抽取记录 Q2：v1 的 Q5 据此订正——Vol.1 §2.9 确实有这条助记法，
+      但**本图没有读到 Vol.1 §2.9 的正文**，故规则本身的推导位置仍未核实。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.9, p. 43（逐字：'By any of the above methods, determine the ghost normal ordering constants (10.4.5).'）与 exercise 10.8, p. 43（费米基态权重）"
+    note: |
+      L1。这两道习题说明：本卡这类常数的计算在原书里**整体被推给读者**。
+      按项目原则（凡被推给习题的步骤不得记为严格），本推导封顶 physical-argument。
+summary: |
+  三步：
+  (1) 助记规则（Vol.1 §2.9 末）：柱面 L_0 的常数等于各模式零点能之和，
+      每个周期玻色子 −1/24、每个周期费米子 +1/24、每个反周期费米子 −1/48。
+  (2) 计数：物质部门有 D 个周期玻色子 X^μ 与 D 个费米子 ψ^μ，后者在 NS 扇区反周期、
+      在 R 扇区周期。
+        NS：D(−1/24) + D(−1/48) = −D/16；
+        R ：D(−1/24) + D(+1/24) = 0。
+  (3) 位移：两个扇区共同加 +D/16（原书那句 'Including the shift …' 的内容），得
+        (a^m_NS, a^m_R) = (0, D/16)，即 (10.2.13)。
+  交叉检验（三处式号自洽，抽取记录 E19 已记）：D = 10 时与鬼场常数 (10.4.5) 相加，
+  R 给 10/16 − 5/8 = 0、NS 给 0 − 1/2 = −1/2，与 (10.5.4) 的 H 一致；
+  且 (10.5.5) 用同一套规则只对 8 个横向模式求和，给 8(−1/24 − 1/48) = −1/2（NS）、
+  8(−1/24 + 1/24) = 0（R）。
+gaps:
+  - "**助记规则本身在本图没有节点，其推导位置（Vol.1 §2.9 末）未核实正文**：本图只有玻色弦的 ζ 正规化节点（worldsheet.zeta-regularized-sum-of-integers、worldsheet.light-cone-normal-ordering-constant），没有覆盖「周期费米子 +1/24、反周期费米子 −1/48」的卡片。→ 待建 worldsheet.zero-point-energy-mnemonic。"
+  - "**ζ 正规化本身无算子层面定义**（与玻色弦一侧同一个 gap）：Σn = ζ(−1) = −1/12 与其费米型对应物都是形式操作。"
+  - "**共同位移项 +D/16 的原文写法有记号疑问（抽取记录 Q3）**：印作 '+(1/16)c = (1/16)D'，若 c = (3/2)D 则字面不自洽。目标卡片记了一条图内判据（NS 值必须为 0 ⟹ 位移只能是 D/16 ⟹ 那处只能是 ĉ = D），但**页图未确认**。位移项的来源机制（柱面-平面映射在超共形情形的 L_0 位移）在本图也无节点：worldsheet.cylinder-plane-l0-shift 只是玻色弦的 −c/24。"
+  - "**原书把这类常数的计算整体推给习题**（exercise 10.8、10.9）。"
+author: curator
+created: "2026-09-11"

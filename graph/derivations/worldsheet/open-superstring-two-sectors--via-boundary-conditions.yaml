@@ -1,0 +1,30 @@
+id: worldsheet.open-superstring-two-sectors--via-boundary-conditions
+target: worldsheet.open-superstring-two-sectors
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-action
+    note: 供给费米项，其变分的表面项给出 (10.2.14) 的两个端点条件。
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给 ν 的取值集合 {0, 1/2} 与 R/NS 命名（结论 (1) 的表述框架）。
+  - id: worldsheet.rns-mode-expansions
+    note: 供给结论 (2) 之后要用的模式展开形式（doubling trick 的目的就是让开弦用同一套展开）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.14)、(10.2.15), pp. 7–8"
+    note: L1。
+summary: |
+  (a) 变分 worldsheet.rns-action 的费米项，端点处的表面项为零给出
+      ψ^μ = exp(2πiν) ψ̃^μ（σ^1 = 0）与 ψ^μ = exp(2πiν') ψ̃^μ（σ^1 = π）。
+      这与玻色场的 Neumann 条件（worldsheet.open-string-neumann-boundary-condition）是同一手续
+      的费米版本。
+  (b) 场重定义 ψ̃^μ → exp(−2πiν') ψ̃^μ 把第二个条件化为 ψ^μ = ψ̃^μ，即可取 ν' = 0；
+      剩下的 ν ∈ {0, 1/2} 就是 R/NS 两个扇区。
+  (c) 定义 ψ^μ(σ^1) := ψ̃^μ(2π − σ^1)（π ≤ σ^1 ≤ 2π）把两个半边拼成 0 ≤ σ^1 ≤ 2π 上的单一场，
+      端点条件变成该场的周期条件，于是模式展开与闭弦的全纯一侧同形。
+gaps:
+  - "**表面项计算未在图中展开**：原书直接给出 (10.2.14)，本推导只指出它是变分表面项的结果。费米场的变分与 Berezin 积分在本图无严格构造。"
+  - "**「重定义总能取 ν' = 0」未验证不产生别的后果**：重定义作用在全局场 ψ̃ 上，原书不讨论它对另一端条件、对超流周期性 (10.2.4)、或对 βγ 鬼场周期性的影响。这是本推导最弱的一步。"
+  - "**doubling trick 的合法性只在自由场层面**：与玻色弦一侧的同一缺口（worldsheet.open-string-doubling-trick 的 gaps）——把两个半边拼成一个场是形式操作，未在算子层面证明两套 Hilbert 空间同构。"
+author: curator
+created: "2026-09-11"

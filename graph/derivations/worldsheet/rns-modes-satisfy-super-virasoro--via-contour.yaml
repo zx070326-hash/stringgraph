@@ -1,0 +1,51 @@
+id: worldsheet.rns-modes-satisfy-super-virasoro--via-contour
+target: worldsheet.rns-modes-satisfy-super-virasoro
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-superconformal-ope
+    note: 供给 (T_B, T_F) 的三条 OPE，即围道字典的输入。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给 L_m、G_r 作为 T_B、T_F 的 Laurent 模式（(10.2.10) 与 (10.2.12)）。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      供给「OPE 极点系数 ⟺ 模式（反）对易子」的围道变形字典（原书所说的
+      'the usual CFT contour calculation'，Vol.1 §2.6）。按 lead 裁决（2026-09-10）
+      凡靠围道 + OPE 得到算子关系的推导一律 physical-argument。
+      ⚠ 该字典是**玻色型**的（交换子）；本推导对 {G_r, G_s} 用的是它的费米型版本
+      （反交换子），本图没有费米型字典的节点，见 gaps。
+  - id: math.super-virasoro-algebra
+    note: 供给结论的表述框架（三条括号与 R/NS 的模式集）。
+  - id: worldsheet.rns-matter-central-charge
+    note: 供给中心荷的值 c = (3/2)D。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.10a,b)、(10.2.11a,b,c), p. 7（逐字：'The usual CFT contour calculation gives the mode algebra'）"
+    note: L1。原书不展开围道计算的步骤。
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.14)（OPE ↔ 对易子的围道字典；式号见 v1 抽取记录 E39）"
+    note: |
+      Vol.2 说的 'the usual CFT contour calculation' 指的就是这条字典；[H] Problem 10.4 明写用
+      (2.6.14) 复算 (10.2.11b)/(10.2.11c)。这条依赖是文献明写的，故不标 inferred。
+  - ref: headrick-2008
+    loc: "Problem 10.4（第三方独立复算，核对源）"
+summary: |
+  标准围道论证：把模式写成围道积分
+    L_m = ∮ (dz/2πi) z^{m+1} T_B(z),   G_r = ∮ (dz/2πi) z^{r+1/2} T_F(z)
+  （由 (10.2.10) 反解），然后用 (10.1.13)/(10.1.15) 的 OPE 把双重围道积分的内积分做掉：
+  OPE 的 n 阶极点给出模式（反）对易子里的相应项。
+    · T_BT_B 的 c/(2z^4) 给中心项 (c/12)(m^3−m)δ；
+    · T_FT_F 的 2c/(3z^3) 与 (2/z)T_B 给 {G_r,G_s} = 2L_{r+s} + (c/12)(4r^2−1)δ；
+    · T_BT_F 的 (3/2z^2)T_F + (1/z)∂T_F 给 [L_m,G_r] = ((m−2r)/2)G_{m+r}。
+  R 与 NS 的差别只在 r 的取值集合（由 worldsheet.rns-fermion-periodicity 的 ν 决定
+  T_F 的 Laurent 指标），代数关系的形式完全相同。
+
+  【status 的理由】lead 2026-09-10 裁决的统一口径：围道变形 + OPE 得到的算子关系记
+  physical-argument，gaps 写明 OPE 收敛与围道变形合法性未证明。
+gaps:
+  - "**OPE 级数收敛与围道变形合法性在来源中未证明**（lead 2026-09-10 裁决的标准 gap）。"
+  - "**费米型围道字典在本图无节点**：worldsheet.ope-commutator-dictionary 与 worldsheet.ope-pole-mode-commutator-dictionary 都是玻色型（交换子）。{G_r, G_s} 那一行需要费米型版本（半整数/整数权的场、反交换子、以及 z^{r+1/2} 的分支处理）。→ 待建 worldsheet.ope-anticommutator-dictionary。这是本推导标 inferred 风险最高的一处，但由于原书明写用的是同一套字典，本图暂按同一条边记账并在此记 gap。"
+  - "**R 扇区的分支切割未处理**：R 扇区 T_F(z) 的 Laurent 指标是整数 + 3/2，围道积分的被积函数带 z^{1/2} 型分支（抽取记录 E17 逐字指出 R 扇区 'introduces a branch cut'）。原书的围道计算对此不作说明。"
+  - "**原书不展开步骤**：'The usual CFT contour calculation gives …' 是全部论证。本图唯一的成文中间步骤在 headrick-2008 Problem 10.4（核对源）。"
+author: curator
+created: "2026-09-11"

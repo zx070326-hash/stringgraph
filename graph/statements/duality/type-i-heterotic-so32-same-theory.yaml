@@ -1,0 +1,56 @@
+id: duality.type-i-heterotic-so32-same-theory
+kind: proposition
+title: type I 与 SO(32) 杂化弦是同一个理论（Polchinski §11.2 的前向引用，论证全部推给第 14 章）
+statement: |
+  **断言**：十维 type I SO(32) 超弦与 SO(32) 杂化弦是**同一个理论**（在不同的微扰展开下）。
+
+  原书（§11.2，SO(32) 杂化弦的谱给出之后）逐字：
+    '**Remarkably, however, we will see in chapter 14 that the type I and heterotic SO(32)
+      theories are one and the same.**'
+
+  **本卡的证据强度**：这是一句**前向引用**。原书在第 11 章**不给任何论证**，
+  全部内容推给第 14 章（本项目**未读**）。按本项目规则「对偶一律 conjecture」，
+  本卡的推导状态是 `conjecture`。
+
+  **本命题不断言的内容**：
+    (1) **不**给出对偶字典（哪个耦合对应哪个耦合、哪个态对应哪个态）。
+    (2) **不**断言 E₈ × E₈ 杂化弦与任何其它理论的对偶关系。
+        ⚠ 抽取记录 E50–E63 **没有**记录 §11 里出现过「E₈ × E₈ 与 SO(32) 杂化弦经 T 对偶等价」
+        这类陈述；本图因此**不**为它建卡。见 notes。
+    (3) 不断言这个等同在非微扰层面的含义（那属于第 14 章与 M 理论）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 53（无式号；逐字：'Remarkably, however, we will see in chapter 14 that the type I and heterotic SO(32) theories are one and the same.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56 备注；逐字句读到原书页图）。
+      ⚠ **前向引用**：第 14 章本项目未读，本卡在图上没有任何论证支撑。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（逐字：'we will find the same set of physical string theories from an entirely different and nonperturbative point of view in chapter 14, suggesting that all have been found'）"
+    note: |
+      L1（E53）。同一处也把第 14 章作为「同一组理论的非微扰再发现」的出处，
+      且作者对结论只用 'suggesting'。
+tags: [duality, heterotic, type-i, so32, conjecture, forward-reference]
+notes: |
+  【为什么 status 是 conjecture】根 CLAUDE.md 原则 2：「对偶就写 conjecture」。
+  此外本卡的来源只是一句前向引用，图上无任何支撑。
+  ⚠ 这不是说该对偶在文献中有争议——它是被广泛接受的（S 对偶 / 强弱耦合对偶），
+  但本项目的规则是按**本图掌握的论证**记状态，而本图对它掌握的论证是**零**。
+
+  【与 ch.10 结论卡的关系】worldsheet.ten-dimensional-superstring-theories 把 type I SO(32)
+  列为第 10 章的三个理论之一；本卡说它与第 11 章的 SO(32) 杂化弦是同一个。
+  若本卡为真，则「十维超弦理论的个数」的计数方式本身需要重新表述
+  （五个微扰理论 vs 更少的等价类）。**本图不作这个计数断言**，
+  两张来源卡都写成条件式，见各自 notes。
+
+  【E₈ × E₈ ↔ SO(32) 的 T 对偶：本轮不建卡的理由】
+  该等价（在 S¹ 上带 Wilson 线紧化时两个杂化弦给出同一个模空间）是标准结果，
+  但抽取记录 E63 只记到 §11.6 的 (11.6.1)–(11.6.10)，**pp. 76–83 本轮跳读**（抽取记录 §3.2），
+  而 T 对偶的讨论若在 §11.6 后半，本轮就没有一手依据。
+  → 建议：补读 pp. 76–83 后再建卡（同一份已落盘 PDF，见抽取记录 §3.3，无需重新 fetch）。
+  **在此之前不得据本图断言两个杂化弦 T 对偶等价。**
+
+  【升级路径】第 14 章（'String duality'）本项目未读；把本卡从 conjecture 抬起来
+  需要抽取第 14 章或原始文献（Polchinski–Witten 1995 等，**均未登记进 sources.bib**）。
+author: curator
+created: "2026-09-11"

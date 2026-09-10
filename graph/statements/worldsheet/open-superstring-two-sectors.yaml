@@ -1,0 +1,38 @@
+id: worldsheet.open-superstring-two-sectors
+kind: proposition
+title: 开超弦只有 R 与 NS 两个扇区（一次场重定义把第二个边界的相位消去），并可用 doubling trick 合成单个场
+statement: |
+  开弦世界面取 0 ≤ σ^1 ≤ π。运动方程的表面项为零要求两个端点各带一个相位：
+    ψ^μ(0, σ^2) = exp(2πi ν)  ψ̃^μ(0, σ^2),
+    ψ^μ(π, σ^2) = exp(2πi ν') ψ̃^μ(π, σ^2)。
+  **结论 (1)**：由场重定义 ψ̃^μ → exp(−2πi ν') ψ̃^μ 总可以取 ν' = 0，于是只剩一个参数 ν，
+  即开超弦只有 **R（ν = 0）与 NS（ν = 1/2）两个扇区**（闭弦有四个，
+  见 worldsheet.rns-periodicity-exhaustion）。
+  **结论 (2)（doubling trick）**：可以把 ψ 与 ψ̃ 合成一个定义在 0 ≤ σ^1 ≤ 2π 上的单一场：
+    ψ^μ(σ^1, σ^2) ≡ ψ̃^μ(2π − σ^1, σ^2)   （π ≤ σ^1 ≤ 2π），
+  从而开弦的模式展开与闭弦的一侧同形。
+
+  本命题**不**断言 Chan–Paton 因子、也不断言开弦谱要做哪种 GSO 投影
+  （后者见 worldsheet.type-i-open-string-gauge-multiplet）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.14)（两个端点的相位条件）、(10.2.15)（doubling trick 的合成公式），pp. 7–8"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E20；式号与公式内容逐页读到原书页图）。
+      原书的措辞是直接推理，无「显然/可以验证」类免责。
+tags: [rns, superstring, open-string, doubling-trick, ns-sector, ramond-sector]
+notes: |
+  【与玻色弦 doubling trick 的关系】worldsheet.open-string-doubling-trick 是玻色场 X^μ 的版本
+  （Vol.1 (2.6.25)）。本卡是费米场的版本，结构同构但对象不同，故不复用那张卡、也不设依赖边
+  （两者共享的只是「用镜像把开弦化成闭弦一侧」这个手法，不是同一条陈述）。
+  抽取记录 E20 明确记下这一同构关系。
+
+  【结论 (1) 的逻辑强度】「一次场重定义可以消去 ν'」是一个规范/记号自由度的论断：
+  重定义把 ψ̃ 的相位吸收掉，但同时改变 ψ̃ 的边界条件在另一端的表现，
+  原书对此不展开。本卡照原文记为结论，推导里记 gap。
+author: curator
+created: "2026-09-11"

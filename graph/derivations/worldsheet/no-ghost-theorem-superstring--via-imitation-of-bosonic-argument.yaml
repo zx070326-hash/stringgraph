@@ -1,0 +1,94 @@
+id: worldsheet.no-ghost-theorem-superstring--via-imitation-of-bosonic-argument
+target: worldsheet.no-ghost-theorem-superstring
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-brst-charge
+    note: 供给 Q_B（论证的对象）与 {Q_B, b_n} = L_n、[Q_B, β_r] = G_r。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给相对复形的定义（b_0 = L_0 = 0，R 扇区另加 β_0 = G_0 = 0）。
+      ⚠ R 扇区那一条在原书中只有 'the logic being the same as for (10.5.25)'，
+      是抽取记录 Q4 列出的三个结构差异之一。
+  - id: worldsheet.critical-dimension-superstring-brst
+    note: |
+      供给 Q_B² = 0（上同调有定义的前提），即 c^m = c̃^m = 15。
+  - id: worldsheet.ocq-superstring-physical-states
+    note: 供给陈述 (2) 中「OCQ 物理态空间」这一侧的对象。
+  - id: worldsheet.rns-fermion-number-operator
+    note: 供给 exp(πiF) 及其与 Q_B 交换的性质，即陈述 (4) 的前提。
+  - id: worldsheet.no-ghost-theorem-brst
+    inferred: true
+    note: |
+      ★ **这是本推导的核心依赖，也是唯一被标 inferred 的一条，理由必须读完。**
+      Vol.2 §10.5 末逐字说 'The proof is a direct imitation of the bosonic argument of
+      chapter 4.'，即把玻色弦的 BRST 无鬼定理（本图这张卡，来源 Vol.1 §4.4）当作模板。
+      **标 inferred 的理由**：原书**没有**在超弦情形复述或改写那个论证的任何一步，
+      也没有说明超弦特有的三处结构差异是否影响它（见 gaps 的前三条）。
+      因此「玻色弦的论证可以搬过来」是本图按原书那句话记下的**推断**，
+      在来源中找不到对应的论证。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    note: |
+      不供给论证，供给**反例式的警示**：βγ 有不等价真空（|1⟩ ≠ |0⟩_NS，
+      且 |1⟩ 上的 Fock 空间里没有 |0⟩_NS）。玻色弦的 §4.4 论证是在一个固定的鬼场真空上
+      做分次的；超弦版本必须先说清用哪个真空，而原书不说。挂这条边是为了让该缺口
+      在图上可见（gaps 第一条引用它）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5 末, p. 25, **无式号**（逐字全文见目标卡片 sources）"
+    note: |
+      L1。⚠ **'The proof is a direct imitation of the bosonic argument of chapter 4.' 就是全部论证。**
+      此处无脚注、无引文。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, p.137–142（模板：light-cone number 分次、Q_B = Q_1 + Q_0 + Q_{−1}、Q_1² = 0、S = {Q_1, R} 是数算符、U 严格下三角、coh(Q_B) ≅ H^⊥）"
+    note: |
+      Vol.2 指定的模板。⚠ 该论证本身在本图也只是 physical-argument
+      （worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的自评：滤子/分级论证在无穷维
+      空间上的收敛性与完备化未处理）。故即便类比成立，本推导也不可能高于 physical-argument。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.14, p. 43（低能级的手工验证；[H] Problem 10.14 有解答）"
+    note: |
+      L1。这是原书为本命题提供的唯一「证据」：低能级手算与 OCQ 结果一致。
+      **低能级一致不是定理证明。**
+summary: |
+  原书的论证是一句话：把 Vol.1 §4.4 的玻色弦 BRST 无鬼定理证明照搬。
+  该论证的结构（本图 worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 已记）是：
+    1. 引入 light-cone number 分次（用 α^±_m，需 k^+ ≠ 0）；
+    2. 按该分次把 Q_B 分解为 Q_1 + Q_0 + Q_{−1}，其中 Q_1² = 0；
+    3. 构造 R 使 S = {Q_1, R} 是数算符；S ≠ 0 的态是 Q_1-恰当的（四重态机制），
+       故 coh(Q_1) = ker S = 横向激发张成的空间；
+    4. U = {Q_B, R} − S 严格下三角，推出 coh(Q_B) ≅ coh(Q_1) = H^⊥；
+    5. H^⊥ 上诱导内积正定。
+  超弦版本需要把第 1–3 步中的「鬼场激发」扩充为同时计 b、c、β、γ 与 ψ^{0,1}。
+
+  ⚠⚠ **本推导不主张上述扩充已被验证。** 原书不做，本图也不做。
+  下面 gaps 的前三条是抽取记录 Q4 列出的三处结构差异，逐条说明「照搬」掩盖了什么。
+
+  【status 的理由】三条，任何一条都足以封顶在 physical-argument：
+  (1) 原书**不给证明、不引文献**，只有一句 'direct imitation'；
+  (2) 模板本身（Vol.1 §4.4）在本图也只是 physical-argument；
+  (3) 三处结构差异未被讨论（见 gaps）。
+  **本推导明确不标 rigorous**，尽管玻色弦一侧的部分节点有严格来源（FGZ 等）。
+gaps:
+  - "**结构差异 (i)：βγ 的不等价真空 / picture。** βγ 是对易鬼场，其 Fock 空间与 bc 不同：单位算子态 |1⟩ ≠ |0⟩_NS，且 |1⟩ 上的 Fock 空间里没有具 |0⟩_NS 性质的态（worldsheet.superconformal-ghost-unit-operator-vacuum，原书 (10.4.6)–(10.4.7)）。Vol.1 §4.4 的分次论证是在一个固定鬼场真空上做的，超弦版必须先固定真空。**原书完全不讨论。** 原书全章也不出现 'picture' 一词，而他用的顶点算子是 −1 与 −1/2 picture（(10.4.22)/(10.4.25)）。"
+  - "**结构差异 (ii)：R 扇区的 β_0 零模。** R 扇区必须额外强加 β_0|ψ⟩ = G_0|ψ⟩ = 0（(10.5.26)），原书对此只说 'the logic being the same as for (10.5.25)'。相对复形因此比玻色弦的更小，而「Q_B 保持这个更小的复形、且上同调不依赖该约化」在本图与来源中都没有论证（玻色弦一侧的对应命题是 worldsheet.brst-preserves-relative-complex，超弦版未建）。"
+  - "**结构差异 (iii)：βγ 的占据数无上界。** Vol.1 §4.4 的 S = {Q_1, R} 同时计鬼场激发与光锥振子激发，论证依赖 S 是数算符且分次有限。超弦版的 S 还必须计 β、γ 与 ψ^{0,1}，而 βγ 是对易场，其模式可以被激发任意多次（原书 §10.4 逐字：'the modes of a commuting field can be excited any number of times'）。这直接影响分次论证中「S ≠ 0 的态是恰当的」与下三角论证的收敛性。**原书完全不讨论。**"
+  - "**模板自身的 gap 继承**：Vol.1 §4.4 的论证是 Fock 空间上的形式代数操作，滤子/分级论证在无穷维空间上的收敛性与完备化未处理（worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的自评）。"
+  - "**动量条件在超弦一侧只字未提**：玻色弦的对应命题限 k^+ ≠ 0（light-cone number 分次需要它），原书在超弦一侧不提任何动量条件。目标卡片因此既不宣称覆盖全部动量，也不写 k^+ ≠ 0——这是照实记账，不是遗漏。"
+  - "**原书唯一的正面证据是低能级手算**（'The reader can again work out the first few levels by hand'，exercise 10.14）。低能级一致不是定理证明。"
+  - "**独立严格来源尚未取得**：候选 ohta-1986、henneaux-1987 等已登记 literature/reading-list.md（P1），但**均只到标题/摘要级，未抽取**。取得后应新建一条独立推导（可望达到 rigorous），而不是修改本推导。"
+notes: |
+  本推导按抽取记录 polchinski-1998-v2.md E39 与 Q4 建立。
+  Q4 的原话：「Polchinski 完全没有讨论这三点是否影响论证。全章无脚注、无引文。」
+  故本推导的 gaps 前三条逐条对应 Q4 的 (i)(ii)(iii)。
+
+  ⚠ **给日后 reviewer / auditor 的提示**：本推导的 status 是本轮最容易被质疑的一处。
+  可能的质疑方向有两个，方向相反：
+    (a) 「太高」——认为「一句 direct imitation + 三处未讨论的结构差异」连 physical-argument
+        都不够，应降到 conjecture。curator 的理由是：论证模板是明确的、低能级有验证、
+        且文献中确有独立的严格处理（只是本图尚未取得），故不降到 conjecture。
+    (b) 「太低」——认为超弦无鬼定理是公认结果，应给 rigorous。这条不成立：
+        本图的 status 记的是**该节点自身论证**的严格程度，不是公认程度
+        （根 CLAUDE.md 原则 2）。要 rigorous 必须先取得 Ohta / Henneaux 等来源并另立推导。
+author: curator
+created: "2026-09-11"

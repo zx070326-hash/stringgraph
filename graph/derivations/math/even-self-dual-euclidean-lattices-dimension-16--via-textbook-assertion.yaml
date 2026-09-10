@@ -1,0 +1,26 @@
+id: math.even-self-dual-euclidean-lattices-dimension-16--via-textbook-assertion
+target: math.even-self-dual-euclidean-lattices-dimension-16
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, pp. 74–75（逐字：'Even self-dual Euclidean lattices exist only when the dimension is a multiple of 8, and for dimension 16 there are exactly two such lattices, Γ_{16} and Γ_8 × Γ_8.'；显式描述 (11.6.5a,b)、(11.6.6a,b)）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E63）。**这一句断言 + 两个格的显式描述就是全部内容；
+      原书不证明、不引用任何文献。**
+summary: |
+  本推导**不是证明**，只是把 Polchinski 的教科书断言记录在案：
+  偶自对偶欧氏格的维数必是 8 的倍数；16 维时恰有两个，Γ_16 与 Γ_8 ⊕ Γ_8，
+  并给出它们的显式描述（全整数或全半整数分量，分量和 ∈ 2Z）。
+
+  按 docs/STATUS_LEVELS.md「断言 + 骨架」档位（lead 裁决 2026-09-11）：
+  来源只给断言、无关键步骤的，标 physical-argument 并把缺口写进 gaps，**不**标 conjecture
+  （这条定理在数学界无争议，问题只在于本图没有它的证明来源）。
+gaps:
+  - "**原书不证明也不引用任何文献**：这是一条纯数学定理，却只有一句教科书断言作为来源。"
+  - "**「维数必是 8 的倍数」的标准证明用 θ 级数的模形式性质**（偶自对偶格的 θ 级数是权 n/2 的模形式），本图无模形式节点。"
+  - "**「16 维恰有两个」的标准来源是 Conway–Sloane 或 Serre《A Course in Arithmetic》第 VII 章**，两者**均未登记进 literature/sources.bib**，故本轮不得写进 sources。升级需先登记文献（见目标卡 notes）。"
+  - "**「Γ_16 与 Γ_8 ⊕ Γ_8 不同构」未被论证**：原书只说 'exactly two'。"
+author: curator
+created: "2026-09-11"

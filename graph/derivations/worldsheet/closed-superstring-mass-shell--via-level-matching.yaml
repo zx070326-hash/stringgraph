@@ -1,0 +1,46 @@
+id: worldsheet.closed-superstring-mass-shell--via-level-matching
+target: worldsheet.closed-superstring-mass-shell
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ocq-superstring-physical-states
+    note: 供给质量壳条件 L_0|ψ⟩ = 0（常数吸进 L_0）。
+  - id: worldsheet.closed-string-level-matching
+    note: |
+      供给 L_0 = L̃_0（由 σ 平移生成元）。这是玻色弦的卡片，其论证（σ 平移的生成元是 L_0 − L̃_0）
+      对费米部分同样适用，但**原书在超弦一章没有重做这一步**，故见 gaps。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给 L_0 的显式模式表达式；闭弦零模归一化 α_0 = (α'/2)^{1/2}p 给 α'p^2/4。
+  - id: worldsheet.rns-matter-normal-ordering-constants
+    note: 供给两侧各自的物质常数。
+  - id: worldsheet.superconformal-ghost-normal-ordering-constants
+    note: "供给两侧各自的鬼场常数；两者之和给出 −ν 形式的偏移（NS 扇区 −1/2、R 扇区 0）。"
+  - id: worldsheet.rns-fermion-number-operator
+    note: |
+      只供给 NS±/R± 这套标号（exp(πiF) 的本征值），本卡推论的表述要用。
+      **不参与数值部分**。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.18), p. 23；§10.6, (10.6.3) 下方, pp. 25–26（半整数 vs 整数与 NS− 不能配对）"
+    note: L1。
+summary: |
+  (1) 单侧的 L_0。闭弦零模 α^μ_0 = (α'/2)^{1/2}p^μ 给 (1/2)α_0·α_0 = α'p^2/4；
+      加振子部分 N 与常数 a^m + a^g，后者按扇区取 −1/2（NS）或 0（R），
+      即恰好是 −ν（ν = 1/2 给 −1/2、ν = 0 给 0）。
+      于是 L_0 = α'p^2/4 + N − ν，物理态条件 L_0 = 0 配 m^2 = −p^2 给 (α'/4)m^2 = N − ν。
+  (2) 另一侧同理给 (α'/4)m^2 = Ñ − ν̃；两式相等即能级匹配 L_0 = L̃_0，
+      故 (α'/4)m^2 = N − ν = Ñ − ν̃，即 (10.5.18)。
+  (3) 推论的奇偶性：NS 扇区的 N 取半整数值（ψ_{−r} 的 r ∈ Z + 1/2），故 N − ν ∈ Z 当且仅当
+      激发的费米模式个数为奇数——按 exp(πiF) 的本征值分类，正是 NS− 给半整数、
+      NS+ 给整数；R 扇区 N ∈ Z 且 ν = 0，故 R± 都给整数。
+      于是 NS− 与其余三者无法满足 L_0 = L̃_0。这正是 §10.6 那句逐字结论。
+
+  【status 的理由】上游两个正规序常数是 physical-argument；
+  另外 L_0 = L̃_0 在超弦情形原书未重做（见 gaps）。
+gaps:
+  - "**L_0 = L̃_0 在超弦一章没有重新论证**：本推导借用玻色弦卡片 worldsheet.closed-string-level-matching（σ 平移生成元）。费米部分的 σ 平移生成元是否逐字相同、以及扇区不同时（NS–R 等）该论证是否需要修改，原书不讨论。"
+  - "**正规序常数的 gap 全部继承**（助记法无节点、βγ 规则无成文来源、原书列为习题）。"
+  - "**推论 (3) 的奇偶性论证是 curator 的补算**：原书只给结论句（'in the NS− sector the level … is half-integer, while in the sectors NS+, R+, and R− it is an integer'），不给理由。本推导 summary 的第 (3) 步补出理由，但那不是来源内容。"
+  - "**「六个扇区为空」的计数不在本推导范围**：那要先固定 16 个扇区的标号，属 worldsheet.superstring-sector-labels 与 worldsheet.superstring-sector-consistency-solutions。"
+author: curator
+created: "2026-09-11"

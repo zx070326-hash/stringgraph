@@ -1,0 +1,48 @@
+id: math.super-virasoro-central-charge-equality--via-super-jacobi
+target: math.super-virasoro-central-charge-equality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.super-virasoro-algebra
+    note: |
+      供给三条括号的形式（把两处中心项系数拆成 c_B、c_F 后即本推导的前提）。
+      本推导不使用该卡未断言的超 Jacobi 逐条成立性，只使用其中一条 Jacobi 恒等式。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, (10.1.15) 下方一句, p. 4（结论：'The Jacobi identity requires the same constant c in the T_BT_B and T_FT_F products (exercise 10.5).'）；exercise 10.5 题干在 p. 43：'From the Jacobi identity for the R-NS algebra, show that the coefficients of the central charge terms in T_BT_B and T_FT_F are related.'"
+    note: |
+      L1。**原书只给结论，不给计算。** 这是本推导的第一条 gap。
+  - ref: headrick-2008
+    loc: "Problem 10.5（Polchinski Vol.2 第 10 章解答）：设 T_BT_B 的中心荷为 c_B、T_FT_F 的为 c_F，用 0 = [L_m,{G_r,G_s}] + {G_r,[G_s,L_m]} − {G_s,[L_m,G_r]} 算得中心部分 = (1/6)(c_B − c_F)(m^3−m)δ_{m+r+s,0}，故 c_B = c_F"
+    note: |
+      按 lead 裁决（2026-09-10，docs/ROADMAP.md）：个人笔记类来源一般**不得**作为推导 sources
+      承载论证，**例外**是「Headrick 习题解答对某个显式计算是唯一成文来源时」——本条正是该例外：
+      原书把计算完全推给习题，解答手册是本图目前唯一的成文计算。该条例外要求 reviewer 复核。
+      抽取者对该解答的读取等级是 L1（逐页读 arXiv:0812.4408 的页图），见
+      literature/extractions/polchinski-1998-v2.md E10 备注。
+summary: |
+  把 [L_m, {G_r, G_s}] 的 Jacobi 恒等式展开：
+    [L_m, {G_r, G_s}] = [L_m, 2L_{r+s}] + (c_F/12)(4r^2−1)δ_{r,−s}·[L_m, 1]
+                      = 2(m − r − s)L_{m+r+s} + (c_B/6)(m^3−m)δ_{m+r+s,0},
+    {G_r, [G_s, L_m]} + (−){G_s, [L_m, G_r]}
+      用 [L_m, G_r] = ((m−2r)/2)G_{m+r} 化为 G 的反交换子，再用 {G,G} 式代回，
+      其中心部分带因子 c_F。
+  合并后中心项的系数是 (1/6)(c_B − c_F)(m^3 − m) δ_{m+r+s,0}；
+  由于 (m^3 − m) 对 |m| ≥ 2 非零，Jacobi 恒等式成立当且仅当 c_B = c_F。
+
+  【为什么 kind/status 都是 physical-argument】
+  论证本身是纯代数的有限步计算，本该记为 kind: proof；但校验器要求 kind: proof 必须配
+  status ∈ {rigorous, formalized}，而按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，标 rigorous 需要
+  「reviewer 已独立复核并在本 notes 留 reviewer-verified 记录」——目前没有，
+  且本图唯一的成文计算来自第三方解答手册而非原书或数学文献。故按「不确定选低一级」取
+  physical-argument。
+gaps:
+  - "**原书不给计算**：Polchinski 只写 'The Jacobi identity requires the same constant c … (exercise 10.5)'（(10.1.15) 下方，p. 4），正文无一步推导。本图的计算来自 headrick-2008 Problem 10.5。"
+  - "**缺 reviewer 复核记录**：这是本推导不能按 STATUS_LEVELS 的 rigorous 例外升级的唯一实质障碍。复核内容：上面 summary 里的两步展开与最终系数 (1/6)(c_B − c_F)(m^3 − m)。"
+  - "**上游未验证超 Jacobi 的其余分量**：本推导只用了一条 Jacobi 恒等式（[L, {G, G}] 型）。math.super-virasoro-algebra 未断言全部超 Jacobi 恒等式成立，故本推导的结论形式是条件式（若那一条成立则 c_B = c_F），这与目标卡片的措辞一致。"
+  - "**数学文献来源缺失**：超 Virasoro 代数的中心扩张唯一性/中心项结构在数学文献（如 Kac 的超代数著作）中应有严格处理，本图未检索登记。取得后可另立一条 rigorous 推导。"
+notes: |
+  本推导抄录的是第三方解答，不是原书论证；reviewer 复核后可升 rigorous 并在此写
+  `reviewer-verified: <agent>, <date>`。
+author: curator
+created: "2026-09-11"
