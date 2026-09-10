@@ -100,8 +100,29 @@
     Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
   `dim V_N = p(N)` 也只证到 `≤`。这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
-- [ ] `shapovalov-form`：Shapovalov 形式。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。
+- [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
+  （无 sorry，公理只有标准三条）：
+  - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
+    `antiInvolution_lie : σ⁅X,Y⁆ = ⁅σY, σX⁆`、`antiInvolution_involutive`。
+    中心项 `(n³-n)/12` 在 `n ↦ -n` 下变号，恰与括号反序的负号抵消（`cocycleBilin_antiInvolution`）。
+  - `IsContravariant B`：`B(L_n x, y) = B(x, L_{-n} y)`。
+  - **`eq_of_isContravariant`：唯一性无条件成立**（只用 `negSpan_eq_top`，不需要 PBW / 分级 /
+    `V ≠ 0`）；推论 `IsContravariant.flip_eq`（**对称性是定理不是公理**）、
+    `IsContravariant.eq_zero_of_level_ne`（不同 level 正交）。
+  - `ContraDual`：`V(c,h) →ₗ R` 带 **σ-扭** 作用 `(X·f)(v) = f(σX·v)` 的 Virasoro 模
+    （类型同义词，因为 Mathlib 的 `Module.Dual.instLieRingModule` 已经在这个类型上放了未扭的
+    余伴随作用）。
+  - **存在性只差一条**：`IsShapovalovFunctional f`（`f|c,h⟩ = 1`，且 `f` 杀掉 `L_n V (n<0)`、
+    `(L_0-h)V`）。由它经万有性质得 `shapovalov`，逆变性由 `vermaLift_lie` 一行推出；
+    `existsUnique_isContravariant` 给出存在唯一；`exists_isContravariant_iff` 说这条假设
+    **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
+    这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
+    而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
+  - 低阶 Gram：`gram_level_one`（`2h`）、`gram_level_two_aa/ab/bb`（`4h+c/2`、`6h`、`8h²+4h`）、
+    `gram_level_two_det`（`2h(16h² + 2h(c-5) + c)`，即 `N=2` 的 Kac 行列式）。
+    这些是对**具体向量** `L₋₁|c,h⟩`、`L₋₂|c,h⟩`、`L₋₁²|c,h⟩` 说的；它们张成 `V_N`
+    （`desc*_mem_levelSpan`），但线性无关仍缺 → 与「Kac 行列式」的等同还差 `pbw-verma` (b)。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`（对具体向量，非基）。
 
 ## 无鬼定理岛
 
