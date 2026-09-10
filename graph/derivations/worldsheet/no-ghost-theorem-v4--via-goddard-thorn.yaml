@@ -4,7 +4,7 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.old-covariant-physical-states
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: |
       【2026-09-11 就地换代】原为 worldsheet.ddf-operators-v4。v4 被拆成一张纯定义卡（本条）
       加三条命题（下面两条 + worldsheet.ddf-transversality-gives-local-finiteness）。

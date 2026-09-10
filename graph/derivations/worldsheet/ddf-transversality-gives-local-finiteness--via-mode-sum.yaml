@@ -3,7 +3,7 @@ target: worldsheet.ddf-transversality-gives-local-finiteness
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: 被断言的对象；ε·k_0 = 0 与 k_0² = 0、归一化 2α' k_0·p = 1 都写在该定义卡里。
   - id: worldsheet.bosonic-fock-space
     note: |

@@ -35,7 +35,7 @@ depends_on:
       顶点代数 ⊗ C[Z k_0]（含上闭链），动量塔为其模」这张卡。本卡是最接近者，但**多要鬼场、
       只断言局域性、且其场集合 E 逐字排除 e^{i k·X}**，故标 inferred。
       本卡 effective = open ⇒ **本推导的有效状态是 open**。见 gaps 第 1 条。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条；**本推导对它比对易关系那条推导更敏感，
       因为这里右端不是 0 而是 m δ^{ij}**）：

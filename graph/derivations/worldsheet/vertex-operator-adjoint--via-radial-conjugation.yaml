@@ -11,7 +11,7 @@ depends_on:
       (1) 移位算子 S_n = e^{i n k_0·x}（V^{(n)}_J 的零模因子）、
       (3) 逐层作用的振子模、以及 (4) S_n^† = S_{−n}（第 4 步）。
       这条边**不是 inferred**：塔与塔上的型是目标陈述量词的定义域。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: |
       提供 k_0² = 0（类光条件，第 3 步重排序因子为 1 的唯一理由）与归一化
       (★) 2α' k_0·p = 1（使单值性指数 2α' n k_0·p = n 为整数，从而 Laurent 指标 J ∈ Z，

@@ -231,31 +231,64 @@ def test_ddf_operators_v4_split_into_v5_plus_propositions() -> None:
     v4 是"一卡三事"（定义 + 两条对易关系），拆成一张纯定义卡 v5 与三条命题：
     [L_m, A^i_n] = 0、[A^i_m, A^j_n] = m δδ、以及横向性 ⟹ 模态和局部有限。
     v3 → v4 的旧链条不动（v3 的 superseded_by 仍指向 v4）。
+    v5 其后又被 v6 取代（模态和定义），见 test_ddf_operators_v6_is_the_lean_mode_sum_card。
     """
     g = load_graph(ROOT)
     assert (
         g.statements["worldsheet.ddf-operators-v4"].superseded_by
         == "worldsheet.ddf-operators-v5"
     )
-    assert g.statements["worldsheet.ddf-operators-v5"].superseded_by is None
     assert g.statements["worldsheet.ddf-operators-v5"].kind == "definition"
     for sid in (
         "worldsheet.ddf-commute-with-virasoro",
         "worldsheet.ddf-transverse-oscillator-algebra",
-        "worldsheet.ddf-transversality-gives-local-finiteness",
     ):
         assert g.statements[sid].kind == "proposition"
         assert g.statements[sid].status is None, "命题的 status 由推导计算，不得手写"
         assert g.derivations_for(sid), f"{sid} 必须有推导"
-    # 无鬼定理的推导已就地换代：不再依赖 v4，改依赖 v5 + 两条对易命题
+    # 第三条命题（局部有限性）已换代到 -v2，见下一个测试
+    assert (
+        g.statements["worldsheet.ddf-transversality-gives-local-finiteness"].kind
+        == "proposition"
+    )
+    # 无鬼定理的推导已就地换代：不再依赖 v4，改依赖当前定义卡 + 两条对易命题
     deriv = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     dep_ids = {d.id for d in deriv.depends_on}
     assert "worldsheet.ddf-operators-v4" not in dep_ids
+    assert "worldsheet.ddf-operators-v5" not in dep_ids
     assert {
-        "worldsheet.ddf-operators-v5",
+        "worldsheet.ddf-operators-v6",
         "worldsheet.ddf-commute-with-virasoro",
         "worldsheet.ddf-transverse-oscillator-algebra",
     } <= dep_ids
+
+
+def test_ddf_operators_v6_is_the_lean_mode_sum_card() -> None:
+    """ddf-operators-v5 被 v6 取代（2026-09-11，lead 裁决）。
+
+    v5 用围道积分定义 A^i_n，Lean 里没有对应物；v6 改用模态和
+    A^ε_n = Σ_m (ε·α_m) V^{(n)}_m，与 `StringFormal.NoGhost.ddfOp` 逐句对应，
+    横向性 ε·k_0 = 0 是定义的参数（Lean `hεb` 是 `ddfOp` 的显式参数）。
+    图中不得再有指向 v5 的 depends_on 边。
+    """
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    assert (
+        g.statements["worldsheet.ddf-operators-v5"].superseded_by
+        == "worldsheet.ddf-operators-v6"
+    )
+    v6 = g.statements["worldsheet.ddf-operators-v6"]
+    assert v6.superseded_by is None
+    assert v6.kind == "definition"
+    assert v6.status == "formalized"
+    assert v6.formal is not None
+    assert v6.formal.get("lean_decl") == "StringFormal.NoGhost.ddfOp"
+    assert effs["worldsheet.ddf-operators-v6"].name == "formalized"
+    for d in g.derivations.values():
+        assert "worldsheet.ddf-operators-v5" not in {
+            dep.id for dep in d.depends_on
+        }, f"{d.id} 仍依赖已被取代的 ddf-operators-v5"
+
 
 
 def test_brst_ocq_equivalence_has_two_independent_derivations() -> None:

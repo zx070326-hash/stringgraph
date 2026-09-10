@@ -41,7 +41,7 @@ depends_on:
       **既多要了鬼场、又只断言局域性、且其场集合 E 逐字排除 e^{i k·X}**，
       所以这条边只能标 inferred。**本卡无推导、effective 为 open，故本推导的有效状态被压到 open**，
       尽管其自身论证（status: rigorous）是 CMP 论文里的形式级数证明。见 gaps 第 1、2 条。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条）：G–N 的格点向量对应本图 α_0-归一化的动量
       （r ↔ (2α')^{1/2} p，k ↔ (2α')^{1/2} k_0），于是 G–N 的常设假设 r·k = 1 逐字对应本图的
