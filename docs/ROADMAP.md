@@ -20,7 +20,7 @@
 
 ### Phase 1 进度（2026-09-11）
 - 玻色弦：Polchinski v1 §1–4 全部入图并经 reviewer 审查；§5–6 抽取完成、转图中；§8（T 对偶）抽取中。
-- 超弦：Polchinski v2 §10–11 抽取中。
+- 超弦：Polchinski v2 §10–11 抽取完成（**Cambridge Core 章级 PDF 一手核实，61 条 L1**——同一路线正在清第一卷整张未核实式号清单）；§10 节点转换中。
 - 里程碑：`ms.no-ghost-theorem` 四轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第一轮回译 drift，修复中；`ms.critical-dimension-superstring` 待 §10–11 入图后起草。
 - Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 顶点算子振子部分 / creaExp 递推已机器验证；剩 [L_m, V_K] 共形权（进行中）、DDF 对易关系、张成定理、level-2 负模态（进行中）。
 - 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美；Shapovalov 形式进行中。
@@ -41,7 +41,7 @@
 - 目标产出：一份公开报告，列出全息扇区每条主要结论的猜想依赖集合
 
 ### Phase 3 种子（2026-09-11 已启动）
-- Maldacena 1997 全文抽取完成：原文两级主张（"we conclude" 超引力扇区包含 / "conjecture" 完整对偶），U(N) 非 SU(N)，无配分函数陈述（那是 GKP/Witten 1998）。AdS/CFT v2 搬 holography 区进行中。
+- Maldacena 1997 全文抽取完成；`holography.n4sym-contains-iib-sugra-states`（physical-argument）与 `holography.ads5-cft4-duality-v2`（conjecture，逐字猜想句、U(N)、无配分函数陈述）已建，旧 duality.ads-cft superseded。待建：D3 退耦极限等 7 张前提卡、对称性匹配独立推导、`conv.ym-coupling-normalization`。
 
 ## Phase 4：沼泽地
 
@@ -87,9 +87,7 @@
 - ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
 - ~~待建：`math.euler-partition-generating-function`~~ 已建并 formalized（2026-09-11，任意交换环上无逆元形式）；Verma 特征标的形式化缺口现只剩 PBW 下界
 - ~~`worldsheet.critical-dimension-bosonic`~~ 已建 v2（四路线分列、a = 1 限开弦、intercept-sign 约定，2026-09-11）；ms.critical-dimension-bosonic 指向 v2，待 auditor 第一轮回译
-- `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞；末句 D<26 不被 no-ghost-v4 支撑）——**已派**
-- `worldsheet.critical-dimension-brst` / `-weyl-anomaly`（末句自带 c^m = D ⟹ D = 26 一步，应移出陈述改为依赖 free-boson-central-charge-d）——**已派**
-- 待建：闭弦截距 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a 卡——**已派**
+- ~~三张路线卡 v2、闭弦截距卡~~ 已完成（2026-09-11）。后续：`no-ghost-theorem-brst` 设定段自带 c^m = D，同法换代；闭弦 OCQ 物理态条件与闭弦光锥临界维数节点缺失
 - ~~`worldsheet.brst-quantization`~~ 已建 v2（c^g 符号化，2026-09-11）；a^g = −1 仍在定义里，若 reviewer 坚持可再拆 v3
 - `worldsheet.conformal-gauge-fixing`（"本图未单建该节点"已过时）
 - `worldsheet.bc-ghost-cft`（两条内嵌命题）
