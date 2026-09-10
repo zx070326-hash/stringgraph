@@ -2044,13 +2044,21 @@
   volume  = {261},
   pages   = {651--677},
   year    = {1985},
-  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
-             元数据 L1 抄自 arkani-hamed-2006 的参考文献 [7]（逐字：「X. G. Wen and E. Witten, "Electric And Magnetic Charges
-             In Superstring Models," Nucl. Phys. B 261, 651 (1985).」）——**起始页 651 已 L1 核实，终页 677 未与出版方核对（L0）**。
-             **登记理由（价值很高）**：arkani-hamed-2006 §3, p.11 用「Wen--Witten 的半整数荷缠绕弦（有分数电荷但很重）」
-             作为反驳其 sharp 版本 **(I)** 的反例之一，并直接下结论「So (I) can't be right.」
-             **=> 本条是本项目第一条 status: refuted 图节点的证据来源。** 要让那条 refutation 推导不只依赖 AMNV 的转述，
-             必须抽本文。1985 年，无 arXiv；Elsevier 预计 403（参见 reading-list 的死路清单）。}
+  doi     = {10.1016/0550-3213(85)90592-9},
+  note    = {由 researcher 于 2026-09-11 登记；同日第二轮抽取 -> extractions/wen-witten-1985.md。
+             **正文仍一字未获取（L0）；本轮升到 L2（元数据 + 逐字完整摘要）。**
+             **已核实（L2，INSPIRE recid 214221）**：卷 261、**页 651--677（终页已核实，原 L0 关闭）**、
+             DOI 10.1016/0550-3213(85)90592-9、报告号 `Print-85-0468 (PRINCETON)`（= SPIRES 占位号，**不是真实报告号，别拿去查报告库**）。
+             **external_system_identifiers 只有 MSNET/SPIRES：无 CDS、无 KEKSCAN => 那两条取件路线在入口即排除。**
+             OSTI 用标题短语查询命中 10 条全为现代 millicharged 实验文献（查询未被吞）=> **OSTI 不藏本文。**
+             **★★ 本轮最重要的结果是一个否定结论**：逐字摘要里**没有 winding、没有 half-integral、没有 stable、没有 mass**；
+             摘要讲的是「O(10) 或 E6 被 Wilson 线破缺时，最小磁荷是 Dirac 量子 2*pi/e 的整数倍 n，
+             非禁闭色单态的最小电荷是电子电荷的 1/n」。
+             => **arkani-hamed-2006 §3 p.11 的「half-integrally charged winding strings considered by Wen and Witten」
+             是 AMNV 的刻画，本项目未在本文一手材料中证实。**
+             => **图里那条 kind: refutation 不要 depends_on 本条**（AMNV 的反例 (a) = SO(32) 旋量不引任何文献，独立于本文）；
+             只在 notes/gaps 里提。详见 extractions/wen-witten-1985.md §5.1。
+             升到 L1 的唯一现实路线：WebSearch 找 .edu 课程页扫描件（本轮会话检索额度已耗尽）。}
 }
 
 @article{sen-1995-bh-torus,
@@ -2067,7 +2075,38 @@
              Nucl. Phys. B 440, 421 (1995) [arXiv:hep-th/9411187].」）——**起始页 421 已 L1 核实，终页 440 未核对（L0）**。
              **登记理由**：arkani-hamed-2006 §4 eqs. (22)(23)（杂化弦 on T^6 的极端黑洞质量 M^2 = (1/2)Q_R^2 与 M^2 = (1/2)Q_L^2，
              M_Pl = 1 单位）**全部外包给本文**。不抽它，AMNV 全部正面证据的「极端黑洞侧」就只有转述级。
-             有 arXiv，可按 arxiv.org/pdf/hep-th/9411187 落盘 + Read 取全文。}
+             有 arXiv，可按 arxiv.org/pdf/hep-th/9411187 落盘 + Read 取全文。
+             **★★ 2026-09-11 追加（researcher，抽 sen-1995-bh 时发现）：本条与 `sen-1995-bh`（hep-th/9504147）是两篇不同的论文，
+             同作者、同年、标题都以 "black hole" 开头，是本项目已知最易撞车的一对 key。**
+             hep-th/9504147 的正文 p.6 逐字把黑洞解归给它的 [7] = **本文**（"Most general electrically charged rotating black hole
+             solutions in this theory were constructed in ref.[7]"），并加脚注「ref.[7] constructed the solution for g = 1」。
+             => **「杂化弦 T^6 极端黑洞解」这条陈述的一手来源只能是本条，不能换成 sen-1995-bh。**
+             又：hep-th/9504147 脚注 3 逐字「A preliminary version of this result was stated briefly in ref.[7]」
+             => 本文里已含 9504147 主结果的初步版本。**优先级建议上调**：本条现在是三处的共同上游。}
+}
+
+@misc{sen-1995-bh,
+  author        = {Sen, Ashoke},
+  title         = {Extremal black holes and elementary string states},
+  year          = {1995},
+  eprint        = {hep-th/9504147},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记并同日**全文抽取（L1，16 页逐页读图）** -> extractions/sen-1995-bh.md（E1--E15）。
+             ⚠ 读的是 **arXiv v2**（页边条纹逐字 `arXiv:hep-th/9504147v2  6 May 1995`），**所有 loc 写死 v2**。
+             报告号 **TIFR-TH-95-19**；标题页页脚 `April, 1995`。
+             ⚠ **标题页上印的 `November 26, 2024` 是 arXiv 重新编译源码的 \today，不是任何论文日期。**
+             **发表状态未核实（L0）**，故按 @misc + eprint 登记。
+             **★★ 与 `sen-1995-bh-torus`（hep-th/9411187）是两篇不同论文，绝不可互换**（见该条的 note）。
+             **★ 三条红线**：
+             (1) **本文不是 AMNV (22)(23) 的出处** —— AMNV 引的是 hep-th/9411187；本文自己也把黑洞解引给同一篇；
+             (2) **本文没有任何弱引力猜想形式**（无 m <= q M_Pl、无亚极端/超极端比较、无 remnant 论证）；
+             (3) **归一化与 AMNV 完全不同且原文不给换算**：本文 (9)(12) 是 `alpha' = 16`、**G_N = 2**、T = g^2/(32*pi)，
+                 AMNV 是 `alpha' = 4`、M_Pl = 1。误用 G_N = 1 会让 (37) 的系数差 2 倍。
+             **核心式**：(24) m^2 = Q_R^2/(8 g^2)（Bogomol'nyi 关系）；(37) S_BH = (2*pi*C/g)*sqrt(m^2 - Q_L^2/(8 g^2))；
+             (46) BPS 弦态质量公式；(48) S_ES = (8*pi/g)*sqrt(...)；**(49) C = 4（是拟合出来的，不是独立算出的）**。
+             作者自称最强只到「It is shown that stringy effects **could** correct ...」+「we could **postulate**」。
+             归一化约定 `alpha' = 16` 外包给其 [22] = A. Sen, IJMPA 9 (1994) 3707 [hep-th/9402002]，本项目未核实。}
 }
 
 @misc{susskind-1995-remnants,
@@ -2091,15 +2130,30 @@
   volume  = {222},
   pages   = {1--10},
   year    = {1983},
-  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
-             元数据 L1 抄自 ooguri-vafa-2006 的参考文献 [15]（逐字：「J. Bagger and E. Witten, "Matter couplings in N = 2 supergravity,"
-             Nucl. Phys. B 222, 1 (1983).」）——**起始页 1 已 L1 核实，终页 10 未核对（L0）**。
-             **登记理由（swampland 区最有希望通向 rigorous 的物理支点）**：ooguri-vafa-2006 §3.1（第一个 Example v，p.9）逐字说
-             「though a quaternionic Kähler manifold in general can have curvatures of any sign [14], **it is known that those realized for
-             hypermultiplet fields coupled to supergravity must have a negative scalar curvatures [15]**」，并补一句这是
-             「a direct consequence of the local N = 2 supersymmetry」，因此对扰动与非扰动量子修正后仍成立。
-             **=> 若本文确有该定理，则 Conjecture 3 在超多重态模空间上的那一支可能不是 conjecture 而是有定理支撑的。**
-             1983 年，无 arXiv；Elsevier 预计 403。（同处的 [14] = J. A. Wolf, J. Math. Mech. 14, 1033 (1965)，本轮未登记。）}
+  doi     = {10.1016/0550-3213(83)90605-3},
+  note    = {由 researcher 于 2026-09-11 登记；同日第二轮抽取 -> extractions/bagger-witten-1983.md。
+             **正文仍一字未获取（L0）；本轮升到 L2（元数据 + 逐字摘要）+ 两条独立 L3。**
+             **已核实（L2，INSPIRE recid 13231）**：卷 222、**页 1--10（终页已核实，原 L0 关闭）**、
+             DOI 10.1016/0550-3213(83)90605-3、报告号 `Print-83-0266 (PRINCETON)`（= SPIRES 占位号，**不是真实报告号**）。
+             **external_system_identifiers 只有 MSNET/SPIRES：无 CDS、无 KEKSCAN => 那两条路线入口即排除**；
+             OSTI 标题短语查询 7 条全主题相关但无本文 => **OSTI 不藏本文**。
+             ⚠ **摘要用的词是 "a quaternionic manifold"，不是 "quaternionic Kähler"；摘要里没有 curvature / negative 任何一词。**
+             **★ 两条独立 L3 证实了 ooguri-vafa-2006 [15] 的归属**（抽取者亲自读到这两篇）：
+             (i) Chang--Sezgin--Tanii, arXiv:2304.06073v1 = JHEP 06 (2023) 172, §2.1，其 ref [10]，逐字
+                 「In 1983 Bagger and Witten [10] showed that arbitrary number of hypermultiplets coupled to N=2 supergravity
+                 in 4D parametrise a quaternionic Kähler (QK) manifold with constant negative scalar curvature.」；
+             (ii) S. Vandoren, arXiv:2501.01900v2 §2，其 ref [23]，逐字「only QK manfifolds with negative scalar curvature
+                 can be coupled to supergravity」+「Bagger and Witten computed its value to be」，其**自己的公式 (2)**：
+                 R(g) = -8 kappa^2 (n^2 + 2n)。
+             ⚠ **`(2)` 是 Vandoren 的编号，不是 BW 的。禁止写「Bagger--Witten eq. (2)」。数值不可搬运（kappa 归一化未核实）。**
+             ⚠ **口径修正**：原 note 说本条是「swampland 区最有希望通向 rigorous 的物理支点」——**不成立**。
+             它是超引力的场论构造，status 上限 `physical-argument`；覆盖域（4d N=2 超多重态）与量词（处处常负 vs 无穷远处非正）
+             都与 OV Conjecture 3 不同。真正可能到 rigorous 的只有 borel-harish-chandra-1962 那一支。
+             详见 extractions/bagger-witten-1983.md Q3。
+             ★ **摘要第二句才是最有用的一条**：「全局 N=2 允许的某些自相互作用在超引力中被禁止，反之亦然」——
+             这正是 OV §3.1（正面）与 §3.2 Example (b)（引力解耦反例）的分界线，支持「解耦反例不构成反驳」这条记账红线。
+             升到 L1 的唯一现实路线：WebSearch 找 .edu 课程页扫描件（本轮会话检索额度已耗尽）。
+             （同处的 [14] = J. A. Wolf, J. Math. Mech. 14, 1033 (1965)，仍未登记。）}
 }
 
 @article{borel-harish-chandra-1962,
@@ -2107,17 +2161,156 @@
   title   = {Arithmetic Subgroups of Algebraic Groups},
   journal = {Annals of Mathematics},
   volume  = {75},
-  pages   = {485--535},
+  pages   = {485},
   year    = {1962},
-  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
-             元数据部分 L1：抄自 vafa-2005 的参考文献 [3]（逐字：「A. Borel and Harish-Chandra, "Arithmetic Subgroups of Algebraic Groups,"
-             Ann. of Math. 75, 485 (1962).」）——**起始页 485 已 L1 核实；终页 535 来自抽取者的通行记忆，未核对（L0），引用前须查 JSTOR/AMS。**
-             **登记理由**：这是 **vafa-2005 全文唯一引用的严格数学定理**——§2, p.4 用它支撑「T^d 的 Narain 模空间体积有限」
-             （逐字「which is known to be finite [3]」）。**=> 这是 swampland 区目前唯一一条可能通向 status: rigorous 的一手数学来源。**
-             建议做法：把「T^d Narain 模空间体积有限」单独建 statement（而不是让它给一般的体积猜想升格），
-             并在抽到本文之前把该边标 inferred: true。}
+  doi     = {10.2307/1970210},
+  note    = {由 researcher 于 2026-09-11 登记；同日第二轮核实 -> extractions/math-sources.md **§45**。
+             **正文仍一字未获取（L0）。**
+             **已核实（L2，Crossref `10.2307/1970210`）**：title "Arithmetic Subgroups of Algebraic Groups"，
+             container "The Annals of Mathematics"，volume 75，**page 485**，year 1962，publisher JSTOR，ISSN 0003-486X，
+             作者 Armand Borel + Harish-Chandra。
+             ⚠ **终页 535 已从本条目移除**：Crossref 只给起始页 485、**没有页范围**；原来的 535 是抽取者的通行记忆（L0）。
+             **需要页范围时先查 JSTOR/AMS，不要从本条抄。**
+             ⚠⚠ **硬禁令：不得写 "Theorem 9.4"。** 本轮两条独立的、抽取者亲自读到的引用方**都不给定理编号**：
+             (i) arXiv:2006.04839 §4「Averaging over Narain lattices」，其 ref [57]，逐字「it is also a special case of the
+                 theorem of Borel and Harish-Chandra [57]」+「that an arithmetic subgroup of a semisimple algebraic group
+                 has a finite volume quotient」——**这是与 vafa-2005 §2 语境完全一致的转引，且给出了 Vafa 没给的条件 `c >= 2`**；
+             (ii) arXiv:2509.09047，其 ref [13]，两处均只说「By Borel--Harish-Chandra theory [13]」，
+                 **且引的是 cocompact（余紧）那一支，不是有限体积那一支——两者不是同一条定理，绝不可混用。**
+             同一篇 2006.04839 对 Siegel 是给编号的（"Theorem 8"/"Theorem 12"）=> **「不给 BHC 编号」是有意选择，负面证据较强。**
+             **Semantic Scholar 不索引这个 DOI**（/citations 端点 HTTP 404），这条最想走的路线已死。
+             Morris《Introduction to Arithmetic Groups》的 ar5iv 渲染超出 WebFetch 10 MB 上限；
+             下一轮改走 `arxiv.org/pdf/math/0106063v1` + Read(pages=)。
+             **登记理由**：vafa-2005 全文唯一引用的严格数学定理（§2, p.4，逐字「which is known to be finite [3]」）。
+             建议做法：把「T^d Narain 模空间体积有限（**k >= 2**）」单独建 statement，不让它给一般的体积猜想升格；
+             该边标 inferred: true（因「O(k,k;Z) 是算术子群」与「该双陪集就是 Narain 模空间」两个环节本项目都无来源）。}
 }
 
+% ---------------------------------------------------------------------------
+% swampland 支点的现代二手/数学侧来源
+% （researcher 2026-09-11 登记，依据 extractions/bagger-witten-1983.md
+%  与 extractions/math-sources.md §45–§46）
+% 全部为 arXiv 公开、抽取者亲自读过的篇目；它们的作用是给 pre-arXiv 原文
+% 提供 L3 转引，或提供 2005 年之后的进展。
+% ---------------------------------------------------------------------------
+
+@misc{vandoren-2025-hypermultiplets,
+  author        = {Vandoren, Stefan},
+  title         = {The geometry of hypermultiplets},
+  year          = {2025},
+  eprint        = {2501.01900},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记。**已读（L3 用途；抽取者亲自读到 arXiv 原生 HTML）。**
+             ⚠ 读的是 **v2（2025-04-13）**，编号写死 v2。单作者（Utrecht ITP）；
+             自陈为 invited contribution to the book *Half a Century of Supergravity*, eds. A. Ceresole and G. Dall'Agata；
+             **无期刊号、无 DOI**。
+             **登记理由**：它是 `bagger-witten-1983`（正文取不到）的**两条独立 L3 转引之一**，且是唯一给出显式数值的：
+             §2 逐字「only QK manfifolds with negative scalar curvature can be coupled to supergravity」（原文排印 manfifolds）
+             +「Bagger and Witten computed its value to be」+ **其自己的公式 (2)** `R(g) = -8 kappa^2 (n^2 + 2n)`；
+             其 ref [23] 逐字「J. Bagger and E. Witten, Matter Couplings in N=2 Supergravity, Nucl. Phys. B 222 (1983) 1--10.」。
+             ⚠ **`(2)` 是本文的编号，不是 Bagger--Witten 的。** `n` 的定义与 `kappa` 的归一化本项目未逐字取到（L0）。}
+}
+
+@article{chang-sezgin-tanii-2023,
+  author        = {Chang, Hao-Yuan and Sezgin, Ergin and Tanii, Yoshiaki},
+  title         = {Higher derivative couplings of hypermultiplets},
+  journal       = {Journal of High Energy Physics},
+  volume        = {2023},
+  number        = {6},
+  pages         = {172},
+  year          = {2023},
+  doi           = {10.1007/JHEP06(2023)172},
+  eprint        = {2304.06073},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**已读（L3 用途；抽取者亲自读到 arXiv 原生 HTML）。** arXiv v1（2023-04-12）。
+             **登记理由**：`bagger-witten-1983` 的第二条独立 L3 转引，§2.1 逐字
+             「In 1983 Bagger and Witten [10] showed that arbitrary number of hypermultiplets coupled to N=2 supergravity
+             in 4D parametrise a quaternionic Kähler (QK) manifold with constant negative scalar curvature.」
+             另在其 (2.3)（vielbein 关系）、(2.5)（可积性条件）、§3.2 三处引 [10]
+             => **这四处是下一轮拿到 BW 原文后最该去找公式号的位置。**
+             与 vandoren-2025-hypermultiplets **作者不相交、年份不同、用途不同，且两者都不引 ooguri-vafa-2006**
+             => 两条 L3 相互独立。}
+}
+
+@misc{kreuzer-skarke-2000,
+  author        = {Kreuzer, Maximilian and Skarke, Harald},
+  title         = {Complete classification of reflexive polyhedra in four dimensions},
+  year          = {2000},
+  eprint        = {hep-th/0002240},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记。**摘要 L2 逐字；正文经 ar5iv 部分读到（L3/L1 混合，见下）。**
+             **发表状态未核实（L0）**，按 @misc 登记。
+             摘要逐字给出两个数：**473,800,776** 个四维反射多面体、**30,108** 个不同的 Hodge 数对。
+             ⚠⚠ **本轮最重要的否定结论：`h^{1,1}+h^{2,1} <= 502` 这个数不在本文里。**
+             抽取者读了 ar5iv 正文：**"491"、"502"、"11" 三个数字全篇未出现**；§4 给的是稠密区边界
+             （逐字「a large region, roughly bounded by h11 >= 15, h12 >= 15 and h11 + h12 <= 175」）与低端孤立点
+             （{21,1}、{20,5}、{19,7}、{29,2}，"the only ones with h11+h12 < 28"），**都不是全局最大值**。
+             => **图里不得写 `h^{1,1}+h^{2,1} <= 502` 并把它挂给本文。**
+             `h^{1,1}` 的最大值 **491** 有四条独立 arXiv 摘要佐证（2008.01730、1808.01282、2309.13145、2405.08871），
+             但那是 L3，且**都没有给 502**。详见 extractions/math-sources.md §46.5。}
+}
+
+@article{filipazzi-hacon-svaldi-2021,
+  author        = {Filipazzi, Stefano and Hacon, Christopher D. and Svaldi, Roberto},
+  title         = {Boundedness of elliptic {C}alabi--{Y}au threefolds},
+  journal       = {Journal of the European Mathematical Society},
+  volume        = {27},
+  number        = {9},
+  pages         = {3583--3650},
+  year          = {2025},
+  doi           = {10.4171/JEMS/1467},
+  eprint        = {2112.01352},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**元数据与摘要 L2（arXiv API 逐字）；正文未读（L0）。**
+             arXiv v2（2021-12-02 首发，2024-03-27 更新），comment 自陈 "Final version, to appear in J. Eur. Math. Soc. (JEMS)"；
+             categories math.AG + hep-th。
+             **登记理由**：这是 `math.cy3-cohomology-bounded` 那条卡片「2005 年之后的进展」里最硬的一条。
+             摘要逐字「We show that elliptic Calabi--Yau threefolds form a bounded family.」
+             ⚠ 摘要的**第二个**结论（minimal terminal threefolds of Kodaira ...）**带两个必需的额外假设**
+             （"upon fixing the rate of growth of pluricanonical forms and the degree of a ..."，
+             并自陈 "Both of these hypotheses are necessary"）——**引用时不要把它说成无条件的。**
+             ⚠ **它只覆盖椭圆纤维化子类；一般 CY3 的拓扑类型有限性截至 2026-06 仍开放**（见 anderson-gray-nally-taylor-2026）。}
+}
+
+@misc{anderson-gray-nally-taylor-2026,
+  author        = {Anderson, Lara and Gray, James and Nally, Richard and Taylor, Washington},
+  title         = {An elliptic approach to {R}eid's fantasy},
+  year          = {2026},
+  eprint        = {2606.08427},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**已读 §I（L3；抽取者亲自读到 arXiv 原生 HTML）。**
+             v1，2026-06-07；无期刊号、无 DOI。
+             **登记理由**：这是本项目目前能拿到的、**最新的「一般 CY 三折拓扑类型有限性仍开放」的证据**，
+             §I 逐字「it is not yet known whether the number of distinct topological types of Calabi-Yau threefolds
+             is finite or infinite」。
+             同处逐字「the number of topological types of elliptic and genus one fibered Calabi-Yau threefolds is finite [8,9,10,11]」，
+             其 [8] Grassi, Math. Ann. 290, 287 (1991)；[9] Gross, Duke Math. J. **76**, 271 (1994)；
+             [10] Kawamata, alg-geom/9701006；[11] Filipazzi--Hacon--Svaldi。
+             ⚠ **[9] 的卷号与 Crossref 冲突**：Crossref `10.1215/S0012-7094-94-07414-0` 给 **volume 74**。**以 Crossref 为准。**
+             ⚠ **本文把 "Reid's fantasy"（连通性猜想，归其 ref [1] = M. Reid 1987）与有限性问题明确区分开**
+             => **图里不要把 CY3 有限性称作「Reid 猜想」或「Yau 猜想」**（本文不作此归属）。}
+}
+
+@misc{grassi-2023-spectrum-bounds,
+  author        = {Grassi, Antonella},
+  title         = {Spectrum bounds in geometry},
+  year          = {2023},
+  eprint        = {2304.07819},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**已读 §5（L3；抽取者亲自读到 arXiv 原生 HTML）。**
+             ⚠ 读的是 **v2**（2023-04-16 首发，2023-07-27 更新），编号写死 v2；无期刊号、无 DOI。
+             **登记理由（本轮 §46 最有用的一条）**：它给出**唯一一条带编号、可精确引用的 CY3 上同调数值上界**——
+             **Corollary 5.3** 逐字「Then h^{1,1}(X) <= 491.」（对**椭圆纤维化** CY3）。
+             另 **Proposition 5.1**（归其 ref [29] = W. Taylor）与 **Corollary 5.2** 均给「CxDef(X) <= 491」。
+             ⚠ 由其 Definition 3.2（`H_unch = CxDef(X)+1` 且 `H_unch = h^{2,1}(X)+1`）可推 `CxDef(X) = h^{2,1}(X)`，
+             **但 Definition 3.2 的原文未逐字取到（L0），此推断 curator 引用须标 inferred: true。**
+             ⚠ **这些界只对椭圆纤维化 CY3 成立，不是一般 CY3。**
+             ⚠ **本文没有提 Kreuzer--Skarke**（抽取者专门核对）；它的 491 与 KS 列表的 491 是否同源本项目未查。}
+}
+
+% ---------------------------------------------------------------------------
 % Green–Schwarz 1984 反常抵消一批（curator 2026-09-11 登记，
 % 依据 literature/extractions/green-schwarz-1984.md §6）
 % ---------------------------------------------------------------------------

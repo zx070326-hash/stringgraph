@@ -6003,3 +6003,344 @@ p.10「presumably fails」）。
   FG 的 conformal infinity 定义外包给它，且它有 n = 3 的 self-dual 唯一性定理。**本轮未取。**
 - **Q42** 本项目是否要给 `fefferman-graham-1985` 的 **Proposition 3.5**（n 偶的障碍张量 / Bach 张量）单独建卡——
   它是「偶维共形反常」在数学侧的对应物，与 witten-1998-ads.md 的 E-W 系列有直接接口。
+# § Narain 模空间有限体积 + CY 三折上同调有界（swampland 区的两条数学支点）
+
+## 45. Borel–Harish-Chandra 1962：算术子群有限余体积（researcher，2026-09-11）
+
+### 45.0 需求侧：图里要的是哪一条
+
+`vafa-2005`（本项目已 L1 全文抽取）**全文只引用了一条严格数学定理**：§2, p.4，讲 `T^d` 上环面紧化的 Narain 模空间
+
+```
+O(k,k;ℤ) \ O(k,k) / (O(k) × O(k))
+```
+
+的体积时，逐字写「which is known to be finite **[3]**」，而 **[3]** 逐字是：
+
+> "A. Borel and Harish-Chandra, "Arithmetic Subgroups of Algebraic Groups," Ann. of Math. **75**, 485 (1962)."
+
+⇒ 这是 **swampland 区目前唯一一条可能通向 `status: rigorous` 的一手数学来源**（`bagger-witten-1983` 那一支上限只有 `physical-argument`，理由见 `extractions/bagger-witten-1983.md` Q3）。
+
+图里要的链条是：
+
+| 环节 | 内容 | 本轮结论 |
+|---|---|---|
+| (A) | `O(k,k;ℤ)` 是 `O(k,k)` 中的**算术子群** | **本轮无来源（L0）**，见 §45.5 |
+| (B) | `O(k,k)` 的单位连通分支是**半单**的（`k ≥ 2`） | **有一条 L3 逐字来源**，见 §45.3 |
+| (C) | 半单代数群的算术子群 ⇒ 商有**有限不变体积** | **= Borel–Harish-Chandra 的定理**；内容 L3，**编号 L0** |
+| (D) | 该商就是 Narain 模空间 | **本轮无数学侧来源**；`vafa-2005` 只给物理侧陈述 |
+
+⇒ **只把 Borel–Harish-Chandra 登记进 bib，并不能让这个节点变成 `rigorous`。** 四个环节里只有 (C) 有像样的证据，且**连它的定理编号都没拿到**。
+
+### 45.1 ★ 结论表（先看这张）
+
+| 项 | 任务书的猜测 | 本轮核实结果 | 可否写进 `loc` |
+|---|---|---|---|
+| 篇级元数据 | Ann. Math. 75, 485 | **L2 确认**：Crossref `10.2307/1970210` → title "Arithmetic Subgroups of Algebraic Groups"，container "The Annals of Mathematics"，volume **75**，page **485**，year **1962**，publisher JSTOR，ISSN 0003-486X，作者 Armand Borel + Harish-Chandra | **可以写「Ann. of Math. 75 (1962) 485」** |
+| **终页 535** | bib 里标 L0 | **仍未核实**：Crossref 只给 `page: "485"`，**没有页范围** | **不要写 535**，或标「终页未核实」 |
+| **定理号 "Theorem 9.4"** | 任务书打了问号 | **★ 未能核实（L0）。两条独立的、亲自读到的引用方都不给编号**（§45.2、§45.3） | **★ 硬禁令：不得写 "Theorem 9.4"** |
+| 定理**内容** | 算术子群有限余体积 | **有 L3 逐字来源**（§45.3） | 可写内容，但 source 要指向引用方或标 L3 |
+| 转引：Borel, *Introduction aux groupes arithmétiques*, § | 任务书点名 | **本轮 0 次调用，L0** | 不可 |
+| 转引：Platonov–Rapinchuk, Thm 4.13 | 任务书点名 | **本轮 0 次调用，L0** | 不可 |
+
+### 45.2 获取失败路径（逐条留痕）
+
+| 路线 | URL / 手法 | 结果 |
+|---|---|---|
+| **Semantic Scholar 引用上下文** | `api.semanticscholar.org/graph/v1/paper/DOI:10.2307/1970210/citations?fields=title,year,contexts&limit=80` | **HTTP 404** ⇒ S2 **不索引这个 DOI**（对比：同一 session 内对 `10.1016/0550-3213(83)90605-3` 与 `10.1016/0550-3213(85)90592-9` 的同一端点都成功返回）。**这是本轮最想要的路线，直接死掉** |
+| S2 标题检索（想换个 id 再试） | `api.semanticscholar.org/graph/v1/paper/search?query=…` | **HTTP 429，两次**（与既有记录一致：S2 的 `/search` 端点不可靠，`DOI:` 前缀才稳） |
+| **Crossref** | `api.crossref.org/works/10.2307/1970210` | **成功**，给了 §45.1 表里那批字段。**但没有页范围、没有摘要、没有目录** |
+| JSTOR 正文 | — | **未尝试**（既有记录判死路） |
+| Dave Witte Morris, *Introduction to Arithmetic Groups*（其 Notes 通常给精确出处） | `ar5iv.labs.arxiv.org/html/math/0106063` | **`maxContentLength size of 10485760 exceeded`** ⇒ 该书 ar5iv 渲染超出 WebFetch 10 MB 上限。**下一轮改走 `arxiv.org/pdf/math/0106063v1`（早期短版本）+ `Read(pages=)`** |
+| `WebSearch` | — | **本轮无法执行**：会话额度已耗尽（200/200） |
+
+### 45.3 ★★ 本轮拿到的最有用的一条（L3）：物理侧的逐字引用，**且正是 Narain 语境**
+
+**来源**：Afkhami-Jeddi 等, *Free partition functions and an averaged holographic duality*, **arXiv:2006.04839**，**§4「Averaging over Narain lattices」**；该文把 Borel–Harish-Chandra 编为参考文献 **[57]**。
+（抽取者亲自读到该文的 ar5iv HTML —— **L3，内容一手，编号二手**。）
+
+逐字（节录）：
+
+> "This finiteness can be checked directly by building a fundamental domain; it is also a special case of the theorem of Borel and Harish-Chandra **[57]**"
+
+被归属的内容，逐字：
+
+> "that an arithmetic subgroup of a semisimple algebraic group has a finite volume quotient"
+
+配套条件，逐字：
+
+> "the identity component of `O(c,c)` is semisimple iff `c ≥ 2`"
+
+**★ 四条对图直接有用的结论：**
+
+1. **这条引用的语境与 `vafa-2005` §2 完全一致**（Narain 模空间 `O(c,c)` 的商的有限体积），是本轮找到的**最贴切的转引**。
+2. **它给出了 `vafa-2005` 没有给的限制条件：`c ≥ 2`。** Vafa 写的是一般的 `T^d`，**没有说 `d = 1` 要单独处理**。
+   ⇒ **图节点的 statement 必须带 `k ≥ 2`**，否则会把一条对 `k = 1` 不成立（`O(1,1)` 的单位连通分支不是半单）的陈述写成普遍成立。**这是本轮对 `vafa-2005` E9 的一处实质补正。**
+3. **它明确指出还有第二条独立路线**：「can be checked directly by building a fundamental domain」。
+   ⇒ 图里这个节点可以挂**两条推导**：`--via-borel-harish-chandra`（一般定理）与 `--via-explicit-fundamental-domain`（直接构造）。**后者对 Narain 情形可能比前者更容易做到 `rigorous`，值得单列。**
+4. **该文不给 Borel–Harish-Chandra 的定理编号**，且抽取者专门核对：**同一篇里对 Siegel 的引用是给编号的**（逐字对照："Theorem 8"、"Theorem 12" from his lecture notes）。
+   ⇒ **「不给编号」在这篇里是有意的选择，不是疏忽** ⇒ **这条负面证据比一般的"没找到"更强。**
+
+### 45.4 第二条独立引用（L3）：**同样不给编号**，且**内容不同**
+
+**来源**：*Multi-Qubit Golden Gates*, **arXiv:2509.09047**；Borel–Harish-Chandra 是其参考文献 **[13]**。
+（抽取者亲自读到 arXiv 原生 HTML —— **L3**。）
+
+逐字（两处）：
+
+> （Lemma 2.2.1 的证明中）"By Borel–Harish-Chandra theory **[13]**, we get that any finite arithmetic subgroup of `G` is a **cocompact lattice**"
+>
+> （§2.3）"By **[13]**, `G(F)` is a **cocompact lattice** of `G(𝔸)`"
+
+**★ 三条注意事项：**
+
+1. **同样不给定理编号。** 两条独立引用都不给 ⇒ **「Theorem 9.4」这个编号在本轮的证据里完全没有支持。**
+2. ⚠ **这一篇引的是 `cocompact`（余紧），不是 `finite volume`（有限体积）。** 二者**不是同一条定理**：Borel–Harish-Chandra 那篇里**有限体积判据与余紧判据是分开的两条**（前者对应「无 `ℚ`-有理特征标」，后者还要求「`ℚ`-各向异性 / 无非平凡幂幺元」）。
+   ⇒ **图里绝不能把这两条混成一条。** Narain 模空间要的是**有限体积**那一条（Narain 商**不是**紧的），**§45.3 的引用才是对的那一条。**
+3. ⇒ **这条 L3 的价值不是支撑内容，而是佐证「引用方普遍不给编号」这一负面结论。**
+
+### 45.5 环节 (A) 与 (D)：本轮完全空白
+
+- **(A)「`O(k,k;ℤ)` 是算术子群」**：`vafa-2005` 直接写出这个陪集就往下走，**不论证**。数学侧要一条「整点子群是算术子群」的标准陈述（通常是定义的直接推论，但**图里仍需一个来源**）。
+- **(D)「Narain 模空间 = 那个双陪集」**：这是**物理侧的构造**（Narain 1986；Narain–Sarmadi–Witten 1987），本项目**尚未登记这两篇**。
+  ⚠ 巧合：`sen-1995-bh` 的参考文献 [21] 逐字给出了这两篇的完整书目（见 `extractions/sen-1995-bh.md` E15），**可以直接抄进 bib**。
+
+### 45.6 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+**建议的节点**（图中目前**没有任何** swampland 或 Narain 节点，全部是新建）：
+
+| 建议 id | kind | status | 内容 | loc | 依据 |
+|---|---|---|---|---|---|
+| `math.arithmetic-subgroup-finite-covolume` | proposition | **`rigorous`**（候选，见下方警告） | 半单代数群的算术子群，其商有有限不变体积 | **`Ann. of Math. 75 (1962) 485`（篇级；⚠ 不写定理号）** | §45.3 |
+| `swampland.narain-moduli-space-finite-volume` | proposition | `physical-argument` 或 `rigorous`（取决于 (A)(D) 是否补上） | `O(k,k;ℤ)\O(k,k)/(O(k)×O(k))` 有有限体积，**`k ≥ 2`** | `vafa-2005, §2, p.4`（物理侧）+ 上一条 | §45.0、§45.3 |
+
+**★ `loc` 的建议写法（供 curator 直接抄）：**
+
+```yaml
+# math.arithmetic-subgroup-finite-covolume
+sources:
+  - ref: borel-harish-chandra-1962
+    loc: "Ann. of Math. 75 (1962) 485"     # ⚠ 篇级。正文未获取，定理号未核实，不得写 "Theorem 9.4"
+    note: >
+      正文未获取（L0）。内容依据两条独立的一手转引：
+      arXiv:2006.04839 §4（Narain 语境，逐字 "an arithmetic subgroup of a semisimple
+      algebraic group has a finite volume quotient"，其 ref [57]）；
+      arXiv:2509.09047（其 ref [13]，但引的是 cocompact 那一支，不是本条）。
+      两条转引都不给定理编号。详见 literature/extractions/math-sources.md §45。
+
+# swampland.narain-moduli-space-finite-volume
+sources:
+  - ref: vafa-2005
+    loc: "§2, p.4（v2；无公式号）"
+    note: '逐字 "which is known to be finite [3]"'
+depends_on:
+  - math.arithmetic-subgroup-finite-covolume            # inferred: true（见下）
+```
+
+**★ 三条硬性提示（curator 必读）：**
+
+1. **`k ≥ 2` 必须写进 statement。** `vafa-2005` 没有这个限制，§45.3 的来源有。**这是本轮对 Vafa 那条陈述的实质补正。**
+2. **`depends_on` 那条边必须 `inferred: true`**，理由：环节 (A)（`O(k,k;ℤ)` 是算术子群）与 (D)（该双陪集就是 Narain 模空间）**本轮都没有来源**（§45.5）。
+3. **建议同时建第二条推导 `--via-explicit-fundamental-domain`**（§45.3 结论 3）：对 Narain 情形直接构造基本域，**不经过一般定理**。这条路线的 `status` 有可能真的到 `rigorous`，而且**不需要 (A)**。
+
+**★ 三条禁令：**
+
+- **不得写 `Theorem 9.4`**（§45.1、§45.4）。
+- **不得把「有限体积」与「余紧」混用**（§45.4 注意事项 2）。Narain 商不紧。
+- **不得因为「Vafa 引了它」就把 `swampland.moduli-volume-finite`（一般的体积猜想）升格**。`vafa-2005.md` §5.2 已经写过这条红线：`T^d` 那一支必须单独建卡。
+
+### 45.7 未解决 / 留给下一轮
+
+- **Q45.1 ★ 定理编号。** 最省力的下一招：`arxiv.org/pdf/math/0106063v1` + `Read(pages=)`（Morris 的书早期版本较短），或者**先用 `WebSearch` 搜 `"Borel" "Harish-Chandra" "Theorem 9.4"`**（本轮无额度）。
+- **Q45.2 终页**（Crossref 只给 485）。JSTOR 页面、AMS/Annals 目录、或 MathSciNet 均未试。
+- **Q45.3 Platonov–Rapinchuk Thm 4.13 与 Borel 的法文书的节号** —— 本轮 0 次调用。**注意既有教训：Google Books 页码只能当一致性检查，不能当定位。**
+- **Q45.4 环节 (A) 与 (D) 的来源**（§45.5）。(D) 的入口已知：Narain 1986 PLB 169, 41；Narain–Sarmadi–Witten 1987 NPB 279, 369（书目已由 `sen-1995-bh` [21] L1 抄得）。
+- **Q45.5** `O(k,k)` 单位连通分支半单性对 `k = 1` 失效这一点，是否影响 `vafa-2005` 的其他陈述（他的 `T^d` 例子里 `d` 可否为 1）。
+
+---
+
+## 46. `math.cy3-cohomology-bounded`：CY 三折上同调是否一致有界（researcher，2026-09-11）
+
+### 46.0 需求侧：这条卡片到底在问什么
+
+`vafa-2005` §3, p.5（**L1 逐字**，见 `extractions/vafa-2005.md` E12）：
+
+> "… For example, we do not know of a sequence of Calabi-Yau threefolds for which the dimension of cohomologies can get unboundedly large. **It is not known if this is actually a true mathematical fact, but experience with various examples in string theory gives one a strong feeling that this is going to be finite.**"
+
+⇒ 图卡 `math.cy3-cohomology-bounded`：**CY 三折的上同调维数是否一致有界**。
+`vafa-2005.md` §5.2 已建议它进 `math` area、`status: conjecture`，note 写「2005 年之后的进展未查（U6）」。**本节就是补这个 U6。**
+
+### 46.1 ★★ 结论表（先看这张）
+
+| 命题 | 2026-09 的状态 | 证据等级 |
+|---|---|---|
+| **CY 三折的拓扑类型数目有限**（⇔ 上同调维数一致有界的最强形式） | **仍然开放（open）** | **L3 逐字**（§46.2） |
+| **椭圆纤维化 / 亏格一纤维化 CY 三折的拓扑类型数目有限** | **已被证明** | **L3 逐字 + L2 书目**（§46.3） |
+| 对椭圆纤维化 CY 三折，**`h^{1,1}(X) ≤ 491`** | **已被证明**（作为一条带编号的推论） | **L3 逐字**（§46.4） |
+| Kreuzer–Skarke 列表里 **`h^{1,1}` 的最大值是 491** | **确认** | **L3，四条独立摘要**（§46.5） |
+| Kreuzer–Skarke 列表里 **`h^{1,1}+h^{2,1} ≤ 502`**（任务书给的数） | **★ 本轮未能核实（L0）** | —（§46.5） |
+| Kreuzer–Skarke 反射多面体总数 **473,800,776**；不同 Hodge 数对 **30,108** | **确认** | **L2 逐字摘要**（§46.5） |
+
+⇒ **图卡 `math.cy3-cohomology-bounded` 应保持 `status: conjecture`，但 `notes` 必须更新**：**一般情形仍开放，纤维化情形已解决，且已有显式数值上界 491。** 详见 §46.6。
+
+### 46.2 ★★ 「一般情形仍开放」的一手转引（L3）
+
+**来源**：L. Anderson, J. Gray, R. Nally, W. Taylor, *An elliptic approach to Reid's fantasy*, **arXiv:2606.08427v1**（2026-06-07；无期刊号、无 DOI），**§I（Introduction）**。
+（抽取者亲自读到 arXiv 原生 HTML —— **L3**。）
+
+逐字（节录）：
+
+> "it is not yet known whether the number of distinct topological types of Calabi-Yau threefolds is finite or infinite"
+
+**★ 两条注意：**
+
+1. ⚠ **该文并未把这个问题归给 Yau，也没有归给 Reid。** 抽取者专门核对：**"Reid's fantasy" 是另一条猜想**（关于连通性，不是关于有限性），逐字：
+   > "Reid's fantasy … conjectures that all Calabi-Yau threefolds … are connected to one another through various geometric transitions"
+   归给其参考文献 **[1] = M. Reid (1987)**。
+   ⇒ **图节点的 `notes` 里不要写「这是 Yau 猜想」或「这是 Reid 猜想」**（任务书里那个「Reid 猜想/Yau 猜想」的等同是**未经证实的**）。写「有限性问题，2026 年仍开放，见 arXiv:2606.08427 §I」。
+2. **该文日期是 2026-06-07，距本轮读取（2026-09-11）三个月** ⇒ **这是目前能拿到的、最新的「仍开放」证据。**
+
+### 46.3 「纤维化情形已解决」：四条来源，其中一条已发表
+
+**来源同上（arXiv:2606.08427v1 §I），逐字**：
+
+> "the number of topological types of elliptic and genus one fibered Calabi-Yau threefolds is finite **[8, 9, 10, 11]**"
+
+该文列出的四条参考文献（**L3，由引用方抄下**）：
+
+| 编号 | 条目 | 本轮独立核实 |
+|---|---|---|
+| [8] | A. Grassi, *Math. Ann.* **290**, 287 (1991) | **未核实（L0）** |
+| [9] | M. Gross, *Duke Math. J.* **76**, 271 (1994) | ⚠ **与 Crossref 冲突**，见下 |
+| [10] | Y. Kawamata, arXiv:**alg-geom/9701006** (1997) | **未核实（L0）** |
+| [11] | Filipazzi, Hacon, Svaldi, *J. Eur. Math. Soc.* (2024) | **已 L2 核实**，见下 |
+
+**⚠ [9] 的卷号冲突（本轮发现的一处溯源矛盾）：**
+
+- **Crossref（出版方元数据，L2）**：`api.crossref.org/works/10.1215/S0012-7094-94-07414-0` → title "A finiteness theorem for elliptic Calabi-Yau threefolds"，container "Duke Mathematical Journal"，**volume 74**，year 1994，author Mark Gross。
+- **arXiv:2606.08427v1 的参考文献 [9]（L3）**：**volume 76**。
+
+⇒ **以 Crossref 为准（出版方元数据 > 引用方转抄）：Duke Math. J. 74 (1994)。** 但**页码 Crossref 未给**（`page` 字段缺失）。
+**记下这条**：这是本项目第 N 次遇到"引用方把卷号抄错"，与 `green-schwarz-1984` 的年份问题同型。
+
+**[11] 的完整 L2 元数据（本轮由 arXiv API 逐字取得）：**
+
+> arXiv **2112.01352v2**；title "Boundedness of elliptic Calabi-Yau threefolds"；
+> authors **Stefano Filipazzi, Christopher D. Hacon, Roberto Svaldi**；
+> published 2021-12-02，updated **2024-03-27**；
+> journal_ref **"J. Eur. Math. Soc. 27 (2025), no. 9, 3583-3650"**；DOI **10.4171/JEMS/1467**；
+> categories math.AG + hep-th；comment "Final version, to appear in J. Eur. Math. Soc. (JEMS)"。
+
+其摘要逐字（片段）：
+
+> "We show that elliptic Calabi--Yau threefolds form a bounded family."
+> "We also show that the same result holds for minimal terminal threefolds of Kodaira"
+> "upon fixing the rate of growth of pluricanonical forms and the degree of a"
+> "Both of these hypotheses are necessary to prove the boundedness of such a family."
+
+⚠ **注意最后一句**：第二个结论**带两个必需的额外假设**。**引用时不要把第二个结论说成无条件的。**
+
+### 46.4 ★★ 最有用的一条：**带编号的显式数值上界**（L3）
+
+**来源**：A. Grassi, *Spectrum bounds in geometry*, **arXiv:2304.07819v2**（2023-04-16，updated 2023-07-27；无期刊号、无 DOI），**§5**。
+（抽取者亲自读到 arXiv 原生 HTML —— **L3**。）
+
+逐字（三处）：
+
+> **Proposition 5.1**（归属其参考文献 **[29] = W. Taylor**）："then `CxDef(X) ≤ 491`"
+>
+> **Corollary 5.2**（作者本人在 Prop 5.1 上的推论）："Then `CxDef(X) ≤ 491`"
+>
+> **Corollary 5.3**："Then `h^{1,1}(X) ≤ 491`."
+
+同文逐字（对 §46.3 的独立佐证）：
+
+> "there are only finitely many types of topologically different elliptically fibered Calabi-Yau threefolds"（归给其 **[6] = Filipazzi–Hacon–Svaldi**）
+
+**★ 四条注意：**
+
+1. **`Corollary 5.3` 给的是 `h^{1,1}(X) ≤ 491`** —— 这是本轮找到的**唯一一条带编号、可精确引用的 CY3 上同调数值上界**。
+2. **`CxDef(X)` 与 `h^{2,1}` 的关系**：该文 Definition 3.2 里 `H_unch = CxDef(X) + 1`，而 `H_unch = h^{2,1}(X) + 1` ⇒ **`CxDef(X) = h^{2,1}(X)`**，故 Prop 5.1 / Cor 5.2 实际上是 `h^{2,1}(X) ≤ 491` 的界。
+   ⚠ **但这一步是抽取者从被引句拼出来的，`Definition 3.2` 的原文未逐字取到** ⇒ **标 L0，curator 引用须 `inferred: true`。**
+3. ⚠ **这些界只对椭圆纤维化 CY3 成立**，不是对一般 CY3。**这正是 §46.1 表里「一般情形仍开放」与「纤维化情形已解决」的分界。**
+4. ⚠ **该文没有提 Kreuzer–Skarke**（抽取者专门核对：全文未出现该列表或其最大 Hodge 数）。**所以「491」在这里与在 §46.5 里是两个不同来源的同一个数字**——这个巧合本身值得注意（Taylor 的 491 与 KS 的 491 是否同源，本轮未查）。
+
+### 46.5 Kreuzer–Skarke 数据：确认了什么，**没**确认什么
+
+**一手摘要（L2 逐字，分段拼接）** —— M. Kreuzer, H. Skarke, **arXiv:hep-th/0002240**：
+
+> "Four dimensional reflexive polyhedra encode the data for smooth Calabi-Yau threefolds that are hypersurfaces in toric varieties, and have important applications both in perturbative and in non-perturbative string theory. We describe how we obtained all **473,800,776** reflexive polyhedra that exist in four dimensions and the **30,108** distinct pairs of Hodge numbers of the resulting Calabi-Yau manifolds. As a by-product we show that all these spaces (and hence the corresponding string vacua) are connected via a chain of singular transitions."
+
+**★ 对 `h^{1,1}` 最大值 = 491 的四条独立佐证（L3，全部是 arXiv 摘要逐字片段）：**
+
+| arXiv id | 标题 | 逐字片段 |
+|---|---|---|
+| **2008.01730v1** | Bounding the Kreuzer-Skarke Landscape | "the extremal case `h^{1,1}=491`" |
+| **1808.01282v1** | The Kreuzer-Skarke Axiverse | "including all polytopes with `240 ≤ h^{1,1} ≤ 491`" |
+| **2309.13145v3** | Glimmers from the Axiverse | "up to the maximum Hodge number `h^{1,1}=491`" |
+| **2405.08871v4** | The DNA of Calabi-Yau Hypersurfaces | "the maximal polytope with Hodge numbers `h^{1,1} = 491`" |
+
+⇒ **`h^{1,1}` 的最大值 491 是安全的**（四条独立来源，其中两条用 "maximum"/"maximal" 字样）。
+
+**★ 但任务书给的 `h^{1,1}+h^{2,1} ≤ 502` 本轮未能核实（L0）：**
+
+- Kreuzer–Skarke 原文摘要**没有**这个数。
+- 抽取者读了 `ar5iv.labs.arxiv.org/html/hep-th/0002240` 的正文：**"491"、"502"、"11" 三个数字全篇未出现**；§4（Results）里给的是 Hodge 图的**稠密区**边界，逐字：
+  > "a large region, roughly bounded by `h₁₁ ≥ 15`, `h₁₂ ≥ 15` and `h₁₁ + h₁₂ ≤ 175`"
+  以及低端的孤立点：`{21,1}`、`{20,5}`、`{19,7}`、`{29,2}`（"the only ones with `h₁₁+h₁₂ < 28`"）。
+  **这些都不是全局最大值。**
+- 对上述四篇的摘要检索：**没有一条摘要含 502。**
+- `hep.itp.tuwien.ac.at/~kreuzer/CY/`（Kreuzer 的 CY 数据主页）：只写 "The 473,800,776 reflexive polyhedra with point, vertex and Hodge numbers"，**不给极值。**
+
+⇒ **禁令：图里不得写 `h^{1,1}+h^{2,1} ≤ 502`。** 若一定要用，须先从一手来源核实（最可能的位置：KS 那篇的 Hodge 数表/图注，或某篇专门做 KS 统计的论文的正文）。
+⇒ **可以安全写的是 `h^{1,1} ≤ 491`（对 KS 超曲面）**，并注明来源是四条二手摘要。
+
+### 46.6 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+**（a）`math.cy3-cohomology-bounded` 保持 `status: conjecture`，但拆成三层**
+
+| 建议 id | kind | status | 内容 | 来源 |
+|---|---|---|---|---|
+| `math.cy3-topological-types-finite` | proposition | **`conjecture`** | CY 三折的拓扑类型数目有限（⇒ 上同调维数一致有界） | `vafa-2005 §3 p.5`（物理侧陈述）+ **arXiv:2606.08427 §I**（2026 年仍开放的证据） |
+| `math.elliptic-cy3-bounded` | proposition | **`rigorous`**（候选，须 reviewer 复核） | 椭圆/亏格一纤维化 CY 三折构成有界族 ⇒ 拓扑类型有限 | **arXiv:2112.01352 = JEMS 27 (2025) 3583–3650**（已发表）；另 Grassi 1991、Gross 1994、Kawamata 1997 |
+| `math.elliptic-cy3-h11-bound-491` | proposition | **`rigorous`**（候选） | 椭圆纤维化 CY3：`h^{1,1}(X) ≤ 491` | **arXiv:2304.07819v2, Corollary 5.3** |
+
+```
+math.cy3-topological-types-finite               status: conjecture
+  --via-string-examples          kind: conjecture-support   status: conjecture
+      sources: vafa-2005, loc "§3, p.5（v2；无公式号）"
+      summary: 逐字「we do not know of a sequence of Calabi-Yau threefolds for which
+               the dimension of cohomologies can get unboundedly large」
+      gaps: ["原文自陈 It is not known if this is actually a true mathematical fact",
+             "截至 2026-06（arXiv:2606.08427 §I）一般情形仍开放"]
+
+  --via-fibered-case             kind: conjecture-support   status: rigorous（仅覆盖纤维化子类）
+      depends_on: math.elliptic-cy3-bounded
+      ⚠ 这条边**不得**让 math.cy3-topological-types-finite 升格：
+        它只覆盖椭圆/亏格一纤维化的子类，一般情形仍开放。
+        建议 curator 明确把它建成「部分结果」而非「支持性证据」，
+        或干脆不建边，只在 notes 里记。
+```
+
+**（b）`notes` 必须写进去的四句（供 curator 直接抄）**
+
+1. 「一般 CY 三折拓扑类型有限性**截至 2026-06 仍开放**（arXiv:2606.08427 §I 逐字）。」
+2. 「**不要**把它称作 Yau 猜想或 Reid 猜想：arXiv:2606.08427 明确把 Reid's fantasy 区分为另一条（关于连通性的）猜想。」
+3. 「椭圆/亏格一纤维化情形**已证明**：Filipazzi–Hacon–Svaldi, JEMS 27 (2025) 3583–3650 = arXiv:2112.01352。」
+4. 「Kreuzer–Skarke 超曲面的 `h^{1,1}` 最大值为 **491**（四条二手摘要）；**`h^{1,1}+h^{2,1} ≤ 502` 本项目未核实，不得写入。**」
+
+**（c）三条禁令**
+
+- **不得写 `h^{1,1}+h^{2,1} ≤ 502`**（§46.5）。
+- **不得把 Gross 1994 写成 Duke **76**** —— 出版方元数据是 **74**（§46.3）。
+- **不得用「纤维化情形已解决」去把一般情形的 `status` 抬高**（§46.6(a) 的警告）。
+
+### 46.7 未解决 / 留给下一轮
+
+- **Q46.1 ★ `h^{1,1}+h^{2,1} ≤ 502` 的一手出处。** 最可能的位置：KS 那篇的 Hodge 数图注、或 `2008.01730`（Bounding the Kreuzer-Skarke Landscape）正文。**该篇标题就叫"Bounding"，是最有希望的一枪。**
+- **Q46.2** Grassi *Spectrum bounds in geometry*（2304.07819v2）的 **Definition 3.2**（`CxDef` 与 `h^{2,1}` 的关系）逐字未取到（§46.4 注 2）。取到就能把 `h^{2,1} ≤ 491` 也变成可引条目。
+- **Q46.3** Grassi 的 `Proposition 5.1` 归属的 **[29] = W. Taylor** 具体是哪一篇（本轮只知作者姓）。这是 491 这个数的真正源头。
+- **Q46.4** Gross 1994 的**页码**（Crossref 缺 `page` 字段）；Grassi 1991 *Math. Ann.* 290, 287 与 Kawamata alg-geom/9701006 **完全未核实**。
+- **Q46.5** KS 的 491 与 Taylor 的 491 是否同源（§46.4 注 4）。若同源，则「KS 列表的极值恰好饱和椭圆纤维化的理论上界」是一条很强的结构性事实，值得单独建卡。
+- **Q46.6** 本节全部证据都是 L2/L3。**四篇数学论文（Grassi 1991、Gross 1994、Kawamata 1997、FHS 2021）一篇正文都没读。** FHS 有 arXiv（`2112.01352`），**升到 L1 的成本最低**。
+
