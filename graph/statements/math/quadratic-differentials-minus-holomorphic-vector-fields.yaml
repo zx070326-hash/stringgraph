@@ -1,0 +1,77 @@
+id: math.quadratic-differentials-minus-holomorphic-vector-fields
+kind: proposition
+title: "紧黎曼面上 dim H⁰(K²) − dim H⁰(K^{−1}) = 3g − 3（对一切亏格，无需分情形）"
+statement: |
+  设 X 是**紧、连通**的黎曼面（无边），亏格为 g，K 为典范线丛（等价地典范除子）。记
+    H⁰(X, K²)   := X 上**全纯二次微分**的空间
+                   （局部写作 φ(z) dz²，φ 全纯，坐标变换下按 (dz/dz')² 变换），
+    H⁰(X, K^{−1}) := X 上**全纯向量场**的空间
+                   （局部写作 v(z) ∂_z，v 全纯，即全纯切丛的全纯截面）。
+  则对**一切** g ≥ 0（**包含 g = 0 与 g = 1，不需要分情形讨论**）
+
+    dim_C H⁰(X, K²) − dim_C H⁰(X, K^{−1}) = 3g − 3 。
+
+  以 χ = 2 − 2g 记 Euler 数，等价写法为
+
+    dim_C H⁰(X, K²) − dim_C H⁰(X, K^{−1}) = −(3/2) χ 。
+
+  ⚠ **本卡只断言这个差，不断言其中任何一个单独的维数。** 要算单个维数还需要
+  「deg D < 0 ⇒ l(D) = 0」（负次数线丛无非零全纯截面），那在教材里是 Riemann–Roch
+  之前的**独立命题**，本图尚无节点。下面两组数值取自标准结果，**本卡不断言它们**，
+  只作与差式的对照：
+    g = 0（球面）：dim H⁰(K²) = 0，dim H⁰(K^{−1}) = 3  ⇒  0 − 3 = −3 = 3·0 − 3 ✓
+    g = 1（环面）：dim H⁰(K²) = 1，dim H⁰(K^{−1}) = 1  ⇒  1 − 1 = 0 = 3·1 − 3 ✓
+uses_conventions: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（arXiv:1805.06405v1）——**本式本身不在来源里**，见 note"
+    note: |
+      ⚠⚠ **本卡的陈述是抽取者（researcher）的推算，不是任何来源的原文**——
+      math-sources.md §42.2 开头逐字自我声明「⚠ 按本项目纪律显式声明：下面这段是我自己做的推导，
+      不是从哪本书上抄的」。本条 `loc` 指向的是**推算所用的定理**（Riemann–Roch），
+      不是本卡的结论。结论的落地论证见
+      math.quadratic-differentials-minus-holomorphic-vector-fields--via-riemann-roch-at-2k。
+      ⚠ **不要**把 Eynard 的 Ch. 5, Theorem 4.1（p. 89, eq. (4-7)，dim Ω_𝒮 = 3𝔤 − 3 + n）
+      当成本卡的来源：同页逐字把 Ω_𝒮 定义为「having **double poles at the marked points**,
+      and no other poles」的二次微分构成的**仿射**空间，且该节前提是 2𝔤 − 2 + n > 0
+      并引入了 L₁,…,Lₙ > 0；n = 0 的退化是抽取者的推断，不是原文（math-sources.md §42.7(c)）。
+  - ref: farkas-kra-1992
+    loc: "§III.5 (Applications of the Riemann–Roch Theorem), pp. 79–90, 2nd ed.（g ≥ 2 时 dim H⁰(K²) = 3g − 3 的教科书出处所在小节）"
+    note: |
+      ⚠ **正文未取得，编号未知，且本卡的「差」形式很可能在文献里根本没人这样写。**
+      两条相关证据（math-sources.md §42.3）：
+      (a) 小节标题与页码是 L1（DNB 目录扫描）；
+      (b) 一篇专门写全纯二次微分的综述（arXiv:1902.06406，researcher 已一手读到该段）
+          在写 dim Q(X) = 3g − 3 时逐字说「For details of this computation, refer to [33] or [67],
+          or any standard reference for Riemann surfaces」——**连它都不给定理号**。
+      ⇒ 禁止写 `Theorem III.4.8` 或 III.5 内的任何编号。
+      ⚠ 另注：`VII.2. Relations Among Quadratic Differentials, p. 333` **不是**维数计数那条，别引错。
+tags: [riemann-surface, quadratic-differential, holomorphic-vector-field, moduli, riemann-roch, math-input]
+notes: |
+  **本卡的价值在于「无需分情形」**（math-sources.md §42.2 的核心观察）。通行写法是
+  「g ≥ 2 时 dim H⁰(K²) = 3g − 3」并对 g = 0, 1 另行讨论；把两个空间的维数**作差**之后，
+  一次 Riemann–Roch（取 D = 2K）就对**一切** g 给出 3g − 3，
+  g = 0 与 g = 1 不再是例外，也**不需要**用球面这一个例子去标定任何常数。
+  这正是它相对 worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly（v1 的物理路线）
+  的实质改进：那条路线的最大弱点就是「比例常数 3 靠球面一个例子定出」。
+
+  ⚠ **档位说明（写卡时的状态）**：本卡的推导目前是 `physical-argument`，
+  **不是因为论证有物理成分**，而是按 docs/STATUS_LEVELS.md 的 rigorous 例外条款
+  ——「前提完整 + 有限步初等计算 + `reviewer-verified` 记录」三条齐备才能标 rigorous——
+  本卡只有前两条，**缺 reviewer 独立复核记录**。
+  推导本身只用到 math.riemann-roch-theorem（rigorous）与 math.canonical-divisor-degree（rigorous）
+  加一行代数。**reviewer 复核后请按仓库惯例把推导改成 kind: proof / status: rigorous
+  并在其 notes 写 `reviewer-verified: <agent>, <date>`。**
+
+  **下游**：worldsheet.riemann-roch-kappa-minus-mu-v2--via-riemann-roch 用它 + 两座桥
+  （κ = 2·dim H⁰(K^{−1})、μ = 2·dim H⁰(K²)）给出 κ − μ = 3χ。
+  ⚠ 那两座桥当前只到 physical-argument，所以**即使本卡升到 rigorous，
+  v2 的有效状态仍会被桥压在 physical-argument**——这是有意的正确暴露：
+  数学侧的瓶颈不在 Riemann–Roch，而在物理量与上同调维数之间的等同（math-sources.md Q33）。
+
+  **本卡不断言、下游也别假设的两件事**：
+  (a) 单个维数（需要 deg D < 0 ⇒ l(D) = 0，本图无此节点）；
+  (b) 不可定向情形——黎曼面按定义可定向，Klein 瓶 / RP₂ 要走定向双覆盖 + 对合不变子空间，
+      本图**完全没有来源**（math-sources.md Q34）。
+author: curator-riemann-roch
+created: "2026-09-11"

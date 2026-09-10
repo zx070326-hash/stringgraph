@@ -1,0 +1,71 @@
+id: math.quadratic-differentials-minus-holomorphic-vector-fields--via-riemann-roch-at-2k
+target: math.quadratic-differentials-minus-holomorphic-vector-fields
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.riemann-roch-theorem
+    note: |
+      提供 l(D) − l(K − D) = deg D + 1 − g，对**任意**除子 D 成立——本推导取 D = 2K。
+      「任意 D」这一点很关键：正因为不需要 D 有效或 deg D 大，g = 0 与 g = 1 才不用分情形。
+  - id: math.canonical-divisor-degree
+    note: |
+      提供 deg K = 2g − 2，从而 deg(2K) = 4g − 4；这是把 Riemann–Roch 右端算成数字的唯一输入。
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann-Roch), eq. (1-10), p. 72（arXiv:1805.06405v1）；配套定义 Definition 1.2 (1-5)(1-6), p. 71"
+    note: |
+      ⚠ **本推导的代入计算不在来源里**：math-sources.md §42.2 逐字自我声明这是抽取者的推算。
+      来源只承载被代入的那条定理。Eynard ↔ 本图记号字典：r(−D) = l(D)，i(D) = l(K − D)，𝔤 = g。
+  - ref: farkas-kra-1992
+    loc: "§III.5 (Applications of the Riemann–Roch Theorem), pp. 79–90, 2nd ed."
+    note: |
+      教材里 dim H⁰(K²) = 3g − 3（g ≥ 2）就在这一节，作为 Riemann–Roch 的应用出现；
+      **正文未取得、编号未知**，本条只作「这类计算是标准做法」的旁证。
+summary: |
+  对除子 D = 2K 用一次 Riemann–Roch（Hartshorne 形式，l 为向量空间维数）：
+
+    l(2K) − l(K − 2K) = deg(2K) + 1 − g
+    l(2K) − l(−K)     = (4g − 4) + 1 − g       （用 deg K = 2g − 2 ⇒ deg 2K = 4g − 4）
+                      = 3g − 3 。
+
+  再用除子 ↔ 线丛的标准字典
+    l(2K) = dim_C H⁰(X, O(2K)) = dim_C H⁰(X, K^{⊗2})   （全纯二次微分），
+    l(−K) = dim_C H⁰(X, O(−K)) = dim_C H⁰(X, K^{−1})   （全纯向量场 = 全纯切丛的截面），
+  即得
+
+    dim_C H⁰(X, K²) − dim_C H⁰(X, K^{−1}) = 3g − 3 = −(3/2) χ ,   χ = 2 − 2g 。
+
+  **三点值得强调的后果**：
+  1. **对一切 g 成立，无需分 g = 0 / 1 / ≥ 2 讨论**，也不需要用球面标定任何常数
+     （对比 worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly 的 gap 第 1 条）。
+  2. 两个检验值是自动推论：g = 0 给 −3，g = 1 给 0。
+  3. 单个维数**不**由本推导给出：那要另加「deg D < 0 ⇒ l(D) = 0」。
+gaps:
+  - |
+    **缺 reviewer 独立复核记录**：按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，
+    「前提已完整写出 + 有限步初等计算 + `reviewer-verified: <agent>, <date>`」三条齐备才可标 rigorous；
+    本条只有前两条（两个依赖都是 rigorous，代入是一行整数算术），故**暂标 physical-argument**。
+    ⇒ **这是本条唯一挡在 rigorous 前面的东西**，不是论证本身有物理成分。
+    复核内容极短：deg 2K = 2(2g−2) = 4g−4；(4g−4)+1−g = 3g−3；K − 2K = −K。
+  - |
+    **除子 ↔ 线丛字典未在图里落地**：`l(2K) = dim H⁰(K^{⊗2})` 与 `l(−K) = dim H⁰(K^{−1})`
+    用的是「取定 (ω) = K 的非零亚纯 1-形式 ω，f ↦ f·ω^{⊗2}（resp. f ↦ f·ω^{−1}）给出同构」这一标准构造。
+    本图**没有**为它单建节点，也未在任一来源里逐字核到该同构的编号。
+    ⇒ 若 reviewer 认为这一步不算「初等计算」的一部分，应先补一张
+    `math.divisor-line-bundle-sections-dictionary` 卡再谈升级。
+  - |
+    **只覆盖紧、连通、无边、可定向**（黎曼面按定义可定向）。
+    不可定向曲面上本式无意义，需另走定向双覆盖 + 对合不变子空间，本图无来源（Q34）。
+notes: |
+  **档位候选说明（给 reviewer）**：本条是 docs/STATUS_LEVELS.md「rigorous 例外」的典型候选——
+  前提完整（两个依赖各自 rigorous 且陈述写死了 l 的维数约定）、证明是有限步初等计算
+  （一次代入 + 一次整数算术 + 一个标准同构）。**请复核 gaps 第 1、2 两条**；
+  若认可，请按仓库惯例把本文件改成 `kind: proof` / `status: rigorous`
+  并在本 notes 顶部加一行 `reviewer-verified: <agent>, <date>`
+  （先例：math.anomaly-twelve-form-factorization--via-direct-expansion、
+  math.mobius-three-point-fixing-jacobian--via-vandermonde）。
+
+  **curator 自查记录（不算独立复核）**：curator-riemann-roch 于 2026-09-11 重算一遍，
+  与 math-sources.md §42.2 一致；curator 与抽取者同属 agent，按既有惯例不写 `reviewer-verified`。
+author: curator-riemann-roch
+created: "2026-09-11"
