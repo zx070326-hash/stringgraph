@@ -1,0 +1,120 @@
+id: math.lattice-vertex-algebra
+kind: proposition
+title: 格点顶点代数 V_(𝔥,L) = ℂ_ε[L] ⊗ M(1) 是顶点代数（L 只需 ⟨α,α⟩ ∈ 2Z；**不**要求非退化、正定或有限秩）
+statement: |
+  **设定（Li–Wang §3 的假设，逐字复述）。**
+  设 𝔥 是复数域上的有限维向量空间，带**非退化**对称 ℂ-双线性型 ⟨·,·⟩。
+  设 ĥ = 𝔥 ⊗ ℂ[t, t^{-1}] ⊕ ℂK 是相应的 Heisenberg（仿射）李代数，
+    [h ⊗ t^m, h' ⊗ t^n] = m δ_{m+n,0} ⟨h, h'⟩ K,   [ĥ, K] = 0,
+  记 M(1) := S(𝔥 ⊗ t^{-1}ℂ[t^{-1}]) 为它在 level 1（K = 1）上的（唯一的）不可约最高权模，
+  即 **Heisenberg 顶点代数**（Fock 空间）。
+
+  设 **L ⊂ 𝔥 是加法子群**，满足
+    (3.5)  ⟨α, α⟩ ∈ 2Z    对一切 α ∈ L，
+  并给定函数 ε : L × L → ℂ^× 满足
+    (3.6)  ε(α, 0) = ε(0, α) = 1,
+    (3.7)  ε(α, β+γ) ε(β, γ) = ε(α+β, γ) ε(α, β),
+    (3.8)  ε(α, β) ε(β, α)^{-1} = (−1)^{⟨α, β⟩}      （α, β, γ ∈ L）。
+  记 ℂ_ε[L] 为由 ε 扭的群代数：基 {e^α : α ∈ L}，乘法 e^α e^β = ε(α, β) e^{α+β}。
+
+  **命题。** 令
+    (3.9)   V_(𝔥, L) := ℂ_ε[L] ⊗ M(1),
+    (3.10)  Y(e^α ⊗ u, x)(e^β ⊗ v) = ε(α, β) e^{α+β} ⊗ x^{⟨α,β⟩} E^-(−α, x) Y(Δ̄(β, x) u, x) Δ̄(α, −x) v
+  （E^-(·, x)、Δ̄(·, x) 是 Li–Wang §2–§3 的标准算子，本卡照抄为记号，见 gaps）。
+  则四元组 (V_(𝔥, L), Y, e^0 ⊗ 1) **构成一个顶点代数**（math.vertex-algebra-borcherds-identity
+  的公理体系），且 M(1) 是它的顶点子代数。
+
+  **对 L 的假设仅有 (3.5)–(3.8)。特别地：**
+  (a) **不要求 ⟨·,·⟩|_L 正定**，允许洛伦兹（不定）格；
+  (b) **不要求 ⟨·,·⟩|_L 非退化**，允许 L 含类光（迷向）方向，甚至允许 ⟨·,·⟩|_L ≡ 0；
+  (c) **不要求 L 有限秩**（有限秩只在 Li–Wang Remark 3.4 处作为额外假设出现）。
+
+  **本命题不断言的五条（每条都有明确出处或明确登记）：**
+  1. **只是 vertex algebra，不是 vertex operator algebra。**
+     VOA 还额外要求 L_0 的谱下有界且每个本征空间有限维（G–N p. 579）。
+     Gebert–Nicolai p. 583 §2.2 逐字：「Associated with each nondegenerate even lattice Λ is a
+     **vertex algebra** (ℱ, 𝒱, 1, ω). **If in addition Λ is positive definite** then (ℱ, 𝒱, 1, ω)
+     has the structure of a **vertex operator algebra**.」
+  2. **不断言共形向量 ω、中心荷或 L_0 分次。** 本卡刻意只取「是顶点代数」这一半。
+     （Bakalov–Kac Theorem 4.1 的后半句「This vertex algebra is conformal of rank l」与该文自身的
+     Definition 2.2(iii)「L_0 diagonalizable with a non-negative spectrum」在不定号差下不相容，
+     见 notes 的红旗条目；本卡不引那半句。）
+  3. **不可把 ℂ_ε[L] 换成普通群代数 ℂ[L]。** Gebert–Nicolai p. 585 逐字：
+     「it is well known that we **must replace the group algebra** ℝ[Λ] by something more delicate
+     in order to adjust the signs in the Jacobi identity for the vertex algebra.」
+     某些特例下 ε 可取为常值 1（例如 ⟨·,·⟩|_L ≡ 0 时），但那是特例的性质，不是本命题的内容。
+  4. **不涉及任何内积、号差、正定性或鬼态。** 一切都在 ℂ 上：**ℂ 上非退化对称双线性型的号差不是
+     不变量**（复正交群只有一个），所以「不定号差」这件事在顶点代数结构层面根本不出现。
+     真正不定的是 Borcherds Section 2 里那个（实的）内积，见 worldsheet.fock-indefinite-form。
+     ⇒ **本卡因此不声明任何度规号差约定**（`uses_conventions: []`），这是有意的，不是遗漏。
+  5. **不断言不可约模的构造与分类。** 那是 Li–Wang Theorem 3.6 的后半、Proposition 3.9、
+     Theorem 3.10、(3.17)、Proposition 3.11 的内容，本图挂在
+     worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower。
+uses_conventions: []
+sources:
+  - ref: li-wang-2008
+    loc: "Theorem 3.6, p. 13（arXiv:0802.0173v1）；假设 (3.5)–(3.8), p. 12；定义 (3.9)/(3.10), p. 12；Heisenberg 顶点代数 M(1), p. 10；Remark 3.4（有限秩作为额外假设）"
+    note: |
+      **L1（researcher 2026-09-11 读 arxiv.org/pdf/0802.0173，PDF 页 = 文章页；
+      逐字文本见 literature/extractions/math-sources.md §36.1、§36.3(b)(g)(h)）。**
+      Theorem 3.6 逐字前半：「Then (V_{(𝔥,L)}, Y, e⁰⊗1) **carries the structure of a vertex algebra**
+      with M(1) as a vertex subalgebra」。
+      假设逐字（p.12）：「For the rest of this section, we assume that **L is an additive subgroup of 𝔥**
+      such that ⟨α,α⟩ ∈ 2ℤ (3.5) for α ∈ L, equipped with a function ε : L × L → ℂ^× satisfying
+      (3.6)(3.7)(3.8)」——**没有非退化、没有正定、没有有限秩**。
+      标题与摘要逐字点名「**possibly degenerate even lattices**」，这正是本图需要的类光情形。
+  - ref: borcherds-1986
+    loc: "Section 2 'Construction of the Fock space V'；Section 4 'Vertex Algebras', relations (i)–(v)（原文无编号定理、无编号公式；loc 只写节号）"
+    note: |
+      **原始文献，佐证。L1（researcher 2026-09-11 逐页读 math.berkeley.edu/~reb/papers/va/va.pdf；
+      math-sources.md §36.2）。** 逐字：Section 2「**For any even lattice** R there is a central extension
+      0 → Z₂ → R̂ → R → 0」；Section 4「**For any even lattice** R the operators u_n on V satisfy the
+      following relations.」⇒ 「V(R) 是顶点代数」在原文里对号差零假设。
+      ⚠ **但本条不作主要依据**：无编号定理、无证明细节，且 Borcherds 的 V 建在格 R 自身上
+      （S(R̂⁻) ⊗ ℂ[R̂]），与 Li–Wang 的「M(1) 建在整个非退化 𝔥 上、L 只是 𝔥 的子群」设定不同——
+      这个差别对退化 L 是实质的，见 notes 的【Borcherds §5 的 n ≥ −1 限制在本卡设定下不适用】。
+  - ref: gebert-nicolai-1995
+    loc: "§2.2 'Toroidal compactification of the bosonic string', 刊 p. 583（「Associated with each nondegenerate even lattice Λ is a vertex algebra ... If in addition Λ is positive definite then ... vertex operator algebra」）；刊 p. 585（扭群代数 ℝ{Λ} 的必要性，逐字）；刊 p. 584–586, eq. (2.88)/(2.90)（中心扩张与 ℱ := S(ĥ^−) ⊗ ℝ{Λ}）；刊 p. 579（VOA 的两条附加条件）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF，pure.mpg.de/rest/items/item_153125_1/component/file_153124/content，
+      PDF 页 = 刊页 − 570；math-sources.md §36.5）。**
+      本条承载本卡「不断言」清单的第 1 条（VA vs VOA 的分界）与第 3 条（必须用扭群代数）。
+      G–N 自陈这条结果取自 [6] = Borcherds 1986 与 [17] = FLM 1988（**无编号定理**，对那两家而言是 L3）。
+      ⚠ 注意 G–N 在 **ℝ** 上工作（Λ_ℝ、η^{μν}、(2.68) `[α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}`），
+      号差在那里是真不变量；本卡在 **ℂ** 上工作，两者的关系见「不断言」清单第 4 条。
+  - ref: bakalov-kac-2004
+    loc: "Theorem 4.1 **前半句**, p. 9（'generate a vertex algebra structure on V_Q = S ⊗ ℂ_ε[Q]'）；假设见 §4.1 开头, p. 8（'Let Q be an integral lattice of rank l'）；(4.1)–(4.4) 上循环与 Heisenberg current algebra"
+    note: |
+      **第三来源，假设最弱（只要求 Q 是 integral lattice；even 与否由 Z_2-分次 (4.8)/(4.9) 处理，
+      Q 偶时宇称全 0 得普通顶点代数）。L1（researcher 2026-09-11 读 arxiv.org/pdf/math/0402315；
+      math-sources.md §37.4(b)(c)）。**
+      ⚠⚠ **只可引前半句。** Theorem 4.1 的后半句「This vertex algebra is **conformal of rank l**」
+      与本文自身 Definition 2.2(iii)（L_0 可对角化且**谱非负**）+ (2.24) 在 Q 不定号差时不相容
+      （e^α 上 L_0 本征值 = |α|²/2，Q 不定 ⇒ 谱不下有界）。这一核对是本项目（researcher）的结论，
+      **没有第二来源**（未解决问题 Q34），故本卡只在此登记，不在陈述里断言文献有误。
+tags: [vertex-algebra, lattice, heisenberg, borcherds, math-input, no-ghost]
+notes: |
+  【为什么需要这张卡】worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 与
+  worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket 的 gaps 第 1 条逐字写：
+  「图中缺一张『D 个自由玻色子（洛伦兹不定号差、含类光方向）⊗ ℂ[Z k_0] 构成顶点代数、动量塔是其模』的卡」，
+  并说补上这张卡「是把本条升到 rigorous 的唯一待办」。本卡是那张卡的**数学一般版**，
+  物理实例版是 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower。
+
+  【Borcherds §5 的「n ≥ −1」限制在本卡的设定下不适用（本项目核对，未写进陈述）】
+  Borcherds Section 5 逐字：「if R is a (possibly singular) lattice contained in a nonsingular lattice S,
+  then the operators L_i for **i ≥ −1** on the vertex algebra of S restrict to operators on the vertex
+  algebra of R … In particular if i ≥ −1 then the operator L_i can be defined on the vertex algebra V of R
+  **even when R is singular**.」——这条限制是针对「V 只建在退化格 R 自身上」的情形。
+  Li–Wang 的 V_(𝔥,L) 里 M(1) 建在**整个非退化 𝔥** 上（(3.9) 的第二个因子），共形向量若要取也在 M(1) 内，
+  故 L 的退化并不限制模指标范围。**但本卡不据此断言任何关于 L_n 的事**（见「不断言」第 2 条）——
+  这段核对没有来源，只登记在此供后续 researcher 追证。
+
+  【与 worldsheet.string-cft-is-a-vertex-algebra-v2 的分工】那张卡讲的是**含 bc 鬼场**的世界面 CFT
+  的**局域性**（且其场集合逐字排除 e^{ik·X}），且目前 effective = open。本卡不含鬼场、不含路径积分，
+  是纯代数构造。两张卡互不依赖。
+
+  【引用禁令（math-sources.md §38.2）】本卡**不得**改写成引用
+  `FLM, Theorem 8.x`（零证据）、`Lepowsky–Li, Theorem 6.5.3`（无证据）、`Kac, Theorem 5.5`（5.4/5.5 是节号）、
+  `Kac, (4.8.3)`（无证据）。Borcherds 只写节号，不写页码（重排本与 PNAS 印本页码不对应，Q33）。
+author: curator
+created: "2026-09-11"

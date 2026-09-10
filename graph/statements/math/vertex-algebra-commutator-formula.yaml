@@ -1,0 +1,76 @@
+id: math.vertex-algebra-commutator-formula
+kind: proposition
+title: 顶点代数的模式对易子公式 [ψ_m, φ_n] = Σ_{i≥0} C(m,i) (ψ_i φ)_{m+n−i}（G–N (2.38)）
+statement: |
+  设 (ℱ, 𝒴, 1) 是顶点代数（公理体系与模式约定见 math.vertex-algebra-borcherds-identity；
+  特别地模式按 G–N (2.31) 展开 𝒴(ψ, z) = Σ_{n ∈ Z} ψ_n z^{-n-1}，**下标在圆括号外**）。
+
+  **命题（对易子公式）**：对一切 ψ, φ ∈ ℱ 与一切 m, n ∈ Z，
+    [ψ_m, φ_n] = Σ_{i ≥ 0} C(m, i) (ψ_i φ)_{m+n−i},
+  其中 C(m, i) = m(m−1)⋯(m−i+1)/i! 是二项式系数（i ≥ 0；i < 0 时为 0），
+  等式在 End(ℱ) 中成立（两端作用在任意 ξ ∈ ℱ 上相等）。
+
+  **右端是有限和**：由正规性公理（ψ_i φ = 0 当 i 充分大）截断，与 ψ, φ 有关但与 m, n 无关。
+
+  **本命题的四条边界**：
+  (a) **这是模式版。** 场版（带 δ 函数）
+        [Y(a, u), Y(b, w)] = Σ_{m ≥ 0} Y(a_{(m)} b, w) ∂_w^{(m)} δ(u − w)
+      （Bakalov–Kac (2.21)）与本式由取 Res_u 相联；**该换算步骤不在本卡内**，本卡也不主张两者等价的证明。
+  (b) **不含任何收敛性、围道积分或径向排序**：z, u, w 始终是形式变量，一切都在
+      (End ℱ)[[z^{±1}]] 与形式分布层面。
+  (c) **玻色型。** 本卡按 G–N 的写法陈述，ℱ 上不带 Z_2-分次，公式中无 (−1)^{p(ψ)p(φ)} 因子。
+      顶点**超**代数（含 bc 鬼场等费米型场）的符号版本不在本卡内。
+  (d) **不断言 ψ_i φ 的显式计算。** 右端的 (ψ_i φ) 是 ℱ 中的向量，本卡只说它的顶点算子模式出现在右端；
+      在具体模型里算出它是下游各推导的事。
+
+  **与 math.locality-ope-equivalences-v2 第 5 条的关系（不是依赖，是观察）**：那条（Schottenloher
+  Thm 10.10 的第 5 条）对**任意两个局域形式分布** A, B 断言
+    [A_{(m)}, B_{(n)}] = Σ_{j=0}^{N-1} (m choose j) C^j_{(m+n−j)}，
+  其中 C^j 只是「某组由 A, B 唯一确定的形式分布」。本卡是**顶点代数内部**的版本，
+  额外的信息正是 C^j(w) = 𝒴(ψ_j φ, w)——即 OPE 系数场本身也是顶点算子。
+  两张卡各自独立成立，**互不依赖**。
+uses_conventions: []
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§2.1 'Vertex algebras', p. 580, eq. (2.38)（逐字标签 '(Commutator formula)'）；同页 eq. (2.36)（Jacobi 恒等式）与 (2.37)（Associativity formula）；引出句逐字 'In what follows we will frequently make use of two important formulas which are the special cases m = 0 and l = 0, respectively, of Eq. (2.36)'; p. 581, eq. (2.31)/(2.48)（模式约定与换算）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF，途径
+      pure.mpg.de/rest/items/item_153125_1/component/file_153124/content；PDF 页 = 刊页 − 570；
+      逐字文本见 literature/extractions/math-sources.md §37.3(b)）。**
+      逐字：`[ψ_m, φ_n] = Σ_{i≥0} C(m,i) (ψ_i φ)_{m+n−i}`，「for all ψ, φ, ξ ∈ ℱ, l, m, n ∈ Z」。
+      **这是本轮唯一一个「带编号 + 同行评议 + 逐字读到」的模式版对易子公式来源**（math-sources.md §38.1 结论表）。
+  - ref: bakalov-kac-2004
+    loc: "eq. (2.21), p. 3（commutator formula，**场版**，带 δ 函数）；由 (2.19) 经 (2.20) 取 n = 0 得到"
+    note: |
+      **L1（researcher 2026-09-11 读 arxiv.org/pdf/math/0402315；math-sources.md §37.4(a)）。**
+      ⚠ **第二来源，只支撑「对易子公式是 Borcherds 恒等式的直接推论」这一点，不支撑本卡的模式形式**：
+      (2.21) 是场版 `[Y(a,u), Y(b,w)] = Σ_{m≥0} Y(a_{(m)}b, w) ∂_w^{(m)} δ(u−w)`，
+      **Bakalov–Kac 全文没有写出模式版**（扭转版模式展开见 Remark 3.1 的 (3.7)，取 σ = 1 需读者自己做一步）。
+      §38.4 的禁令：不得把 (2.21) 当作模式版对易子公式引用。
+  - ref: schottenloher-2008
+    loc: "Theorem 10.10 第 5 条, §10（形式分布版；⚠ 印本把求和下限印作 j = 1，正确下限是 j = 0，见 literature/extractions/math-sources.md §11、§11A.3）"
+    note: |
+      **交叉来源，不承载本卡的论证。** Schottenloher 的第 5 条是**任意两个局域形式分布**的模式对易子公式
+      （即 math.locality-ope-equivalences-v2 的第 5 条），形状与本卡相同但语境更弱：那里的 C^j
+      不被断言为顶点算子。列在此处是为了让审计能一眼看到「同一形状的公式在图中出现两次、且不是重复卡」。
+tags: [vertex-algebra, commutator, borcherds-identity, formal, math-input]
+notes: |
+  【为什么单独立卡（§38.4 的结构性建议）】researcher 在 literature/extractions/math-sources.md §38.4
+  逐字指出：任务书原先把「Borcherds/Jacobi 恒等式」与「对易子公式」写在同一张卡上，
+  但两者的来源强度不同——恒等式本身在 Bakalov–Kac (2.19) 与 G–N (2.30)/(2.36) 都有；
+  **模式版对易子公式只有 G–N (2.38) 一处带编号且逐字读到**。故拆成
+  math.vertex-algebra-borcherds-identity（公理，definition）与本卡（命题）两张。
+
+  【本卡 → 上游边为什么不是 inferred】G–N 在 p. 580 逐字写出 (2.37)/(2.38)
+  「are the special cases m = 0 and l = 0, respectively, of Eq. (2.36)」，
+  即「Jacobi 恒等式 ⇒ 对易子公式」这一步**在来源处有明文**。这是本轮把这条边从 inferred 提升为有据的关键收获
+  （math-sources.md §38.4）。
+
+  【引用禁令】不得把 Borcherds 1986 §4 的 (v) 当作本公式的来源——(v) 是迭代/结合律形式
+  （math.vertex-algebra-borcherds-identity 的边界条款 (a)）。任何以 (v) 为唯一依据的边必须标 inferred。
+  另见该卡 notes 里的 Kac / LL / FLM 编号禁令。
+
+  【uses_conventions 为空的理由】本卡的公式不含度规、α' 或任何物理归一化；模式展开约定已由
+  math.vertex-algebra-borcherds-identity 的陈述写死（G–N (2.31)，下标在圆括号外），本卡逐字沿用。
+author: curator
+created: "2026-09-11"

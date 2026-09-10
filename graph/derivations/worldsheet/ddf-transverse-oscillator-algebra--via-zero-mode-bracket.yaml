@@ -8,33 +8,38 @@ depends_on:
       形式级数框架：模式展开 𝒴(ψ, z) = Σ_n ψ_n z^{-n-1} 与 Res。**本推导不用两个顶点算子的 OPE、
       不用径向排序、不用围道形变**，这正是它区别于 --via-conformal-weight 的地方：
       那里要先算 O^i_m(z) O^j_n(w) 的 OPE 再取留数，这里只用零模之间的李括号字典。
-  - id: math.locality-ope-equivalences-v2
-    inferred: true
+  - id: math.vertex-algebra-commutator-formula
     note: |
       本推导的第二环是 G–N (2.62) `[ψ_0, φ_0] = ([ψ, φ])_0`（零模映射是李代数同态）。
-      它是 commutator formula (2.38) `[ψ_m, φ_n] = Σ_{i≥0} C(m,i)(ψ_i φ)_{m+n-i}` 在 **m = n = 0** 的特例
-      （C(0,i) = δ_{i0}，故右端只剩 (ψ_0 φ)_0），而 (2.38) 与本卡第 5 条
-      `[A_{(m)}, B_{(n)}] = Σ_j (m choose j) C^j_{(m+n-j)}` 是同一条公式（C^j(w) = 𝒴(ψ_j φ, w)）。
-      **「(2.62) 是本卡第 5 条的 m = n = 0 特例」这一识别是本项目的推断**（G–N 不引 Schottenloher），
-      故标 inferred。本卡在此承担「形式分布层面的模式对易子公式是严格定理」这一半。
-  - id: math.vertex-algebra-associativity
-    inferred: true
+      它是本卡断言的 commutator formula (2.38) `[ψ_m, φ_n] = Σ_{i≥0} C(m,i)(ψ_i φ)_{m+n-i}`
+      在 **m = n = 0** 的特例（C(0,i) = δ_{i0}，故右端只剩 (ψ_0 φ)_0）。
+      **这条边不是 inferred**：本卡逐字承载的就是 G–N 自己的 (2.38)，与 (2.62) 同出一篇同一节，
+      从 (2.38) 取 m = n = 0 是一步初等代入。
+      【改挂记录，2026-09-11（curator，分支 agent/curator/lattice-va）】此前本条边指向
+      math.locality-ope-equivalences-v2（Schottenloher Thm 10.10 第 5 条，形式分布版）并标 inferred，
+      理由是「(2.38) 就是那张卡的第 5 条」这一识别属本项目推断。新卡建立后该识别不再需要。
+  - id: math.vertex-algebra-borcherds-identity
     note: |
-      **图中没有「顶点代数 Jacobi / Borcherds 恒等式」卡**，而 (2.62)/(2.38) 的出处 (2.36) 是顶点代数公理。
-      本卡（Frenkel–Ben-Zvi Theorem 3.2.1）是 (2.36) 在 m = 0 的特例（G–N (2.37)），**严格弱于**它。
-      本卡的陈述同时列出了本推导另外要用的两条公理性结构：**平移算子 T**
+      (2.62)/(2.38) 的公理出处：Jacobi / Borcherds 恒等式 (2.36)（模式版）与 (2.30)（形式变量版）。
+      本卡的陈述同时列出本推导另外要用的两条公理性结构：**平移算子 T**
       （G–N 写作 L_(−1)，(3.1) 里 k(−1)e^{nk} = (1/n)L_(−1)e^{nk} 用的就是它）与**真空**。
-      标 inferred，缺卡登记在 gaps 第 3 条。
-  - id: worldsheet.string-cft-is-a-vertex-algebra-v2
-    inferred: true
+      **这条边不是 inferred**：本卡逐字登记的就是 G–N (2.36)/(2.30)。
+      【改挂记录，2026-09-11（同上）】此前指向 math.vertex-algebra-associativity
+      （Frenkel–Ben-Zvi Thm 3.2.1，是 (2.36) 在 m = 0 的特例，**严格弱于**本推导用到的那条）并标 inferred，
+      缺卡登记在原 gaps 第 3 条；新卡已补上该缺卡。
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
     note: |
-      **桥接边：本推导有效状态的压制点之一。** 与
-      worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 的同名边理由完全相同——
-      G–N 工作在**格点顶点代数** V_Λ（偶格、洛伦兹号差、带**双乘性上闭链** ε）里，**不含 bc 鬼场**；
-      本推导需要的是图中尚不存在的「D 个自由玻色子（洛伦兹不定号差、含类光方向 k_0）的 Heisenberg
-      顶点代数 ⊗ C[Z k_0]（含上闭链），动量塔为其模」这张卡。本卡是最接近者，但**多要鬼场、
-      只断言局域性、且其场集合 E 逐字排除 e^{i k·X}**，故标 inferred。
-      本卡 effective = open ⇒ **本推导的有效状态是 open**。见 gaps 第 1 条。
+      **桥接边（本轮接好的那一条）。** 与
+      worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 的同名边理由完全相同：
+      G–N 工作在**格点顶点代数** V_Λ（偶格、洛伦兹号差、带双乘性上闭链 ε）里，**不含 bc 鬼场**。
+      本卡正是所需的那张：「D 个自由玻色子（洛伦兹 η、含类光 k_0）的 Heisenberg 顶点代数与格 Z k_0
+      给出顶点代数 V_(𝔥, Z k_0)，动量塔 ⊕_j F(p + j k_0) 是它的（不可约）模」，
+      来源 Li–Wang Theorem 3.6 + Theorem 3.10 + (3.17)。**非 inferred。**
+      ⚠ **上闭链那一点在本推导里是实质的**：G–N (3.1) 逐字用到 ε(mk, nk) = 1；
+      本卡 (1) 论证了在秩 1 类光格上 ε ≡ 1 满足 (3.6)–(3.8)，与之相容
+      （但「扭群代数在此退化为普通群代数」仍是本项目推断，见本卡推导的 gaps 第 1 条）。
+      【改挂记录，2026-09-11（同上）】此前 inferred 到 worldsheet.string-cft-is-a-vertex-algebra-v2
+      （effective = open），那是原 gaps 第 1 条登记的缺卡。
   - id: worldsheet.ddf-operators-v5
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条；**本推导对它比对易关系那条推导更敏感，
@@ -145,13 +150,18 @@ summary: |
     · 良定义性：围道路线不出现该问题，代数路线由**正规性公理 (2.32)** 保证（G–N §2.1, p. 579）。
 gaps:
   - |
-    **★ 有效状态的压制点之一：图中缺「D 个自由玻色子（洛伦兹不定号差、含类光方向）的 Heisenberg 顶点代数
-    ⊗ C[Z k_0]（含双乘性上闭链 ε），动量塔为其模」这张卡。**
-    与 worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 的 gaps 第 1 条是**同一个缺口**，
-    补一次两条推导同时受益。注意本推导比那条**多用一条结构**：**上闭链 ε 的双乘性**
-    （(3.1) 里 ε(mk,nk) = 1 的依据），它属于格点顶点代数构造（FLM / Borcherds 一系）的一部分。
-    桥接边按项目原则 5 标 inferred 到 worldsheet.string-cft-is-a-vertex-algebra-v2（effective = open），
-    故**本推导有效状态为 open**。
+    **【已解决，2026-09-11（curator，分支 agent/curator/lattice-va）】**
+    原文：「图中缺『D 个自由玻色子（洛伦兹不定号差、含类光方向）的 Heisenberg 顶点代数
+    ⊗ C[Z k_0]（含双乘性上闭链 ε），动量塔为其模』这张卡……故本推导有效状态为 open。」
+    **该卡已建**：worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    （--via-li-wang-isotropic，rigorous），上游 math.lattice-vertex-algebra（Li–Wang Thm 3.6）。
+    桥接边已改指该卡并撤销 inferred，与
+    worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 是同一次改动。
+    ⚠ **本推导比那条多用的那条结构（上闭链 ε 的双乘性、(3.1) 里 ε(mk,nk) = 1）也已覆盖**：
+    新卡 (1) 论证秩 1 类光格上 ε ≡ 1 满足 Li–Wang (3.6)–(3.8)。
+    **但「此特例下扭群代数退化为普通群代数」仍是本项目推断**（新卡推导的 gaps 第 1 条），
+    该推断即使有误也不改变结论（Li–Wang 只要求**存在**这样的 ε，而 ε ≡ 1 的验证是三行代数）。
+    ⇒ 本推导的有效状态不再被这条边压到 open；**剩下的唯一上限是下面第 6 条**（末句比较）。
   - |
     **(3.1) 的母式 (2.120) 未核实（L0）。** G–N 在 (3.1) 前逐字写「Using (2.120) we can immediately write down
     the commutator of physical states…」，而 researcher 本轮读的是 pp. 571–572, 579–583, 593–600，
@@ -159,9 +169,11 @@ gaps:
     这不改变「CMP 论文里有完整证明」这一事实（故 status 仍 rigorous），但**可追溯性上留一个洞**：
     下一轮 researcher 若重开该 PDF，请顺手读 §2.4/§2.5 一带把 (2.120) 逐字补上。
   - |
-    **图中没有「顶点代数 Jacobi / Borcherds 恒等式」卡**，(2.62)/(2.38) 的公理出处只能 inferred 到
-    math.vertex-algebra-associativity（它是 (2.36) 的 m = 0 特例，严格弱于所需）。
-    建议新建 math.vertex-algebra-jacobi-identity 后把两条 G–N 推导一起改挂。
+    **【已解决，2026-09-11（同上）】图中没有「顶点代数 Jacobi / Borcherds 恒等式」卡。**
+    **已建** math.vertex-algebra-borcherds-identity（definition，rigorous）与
+    math.vertex-algebra-commutator-formula（proposition，rigorous，--via-jacobi-l-zero），
+    两条 G–N 推导的相应边已一并改挂并撤销 inferred。
+    遗留（登记在新卡内）：(2.30) ⟺ (2.36) 的逐步换算、场版 (2.21) ⟺ 模式版的换算，来源均留白。
   - |
     **G–N ↔ 本图的归一化字典是本项目的推断，无逐字来源，且本推导对它敏感。**
     与对易关系那条推导不同，这里右端是 m δ^{ij}（不是 0），字典写错会直接改变结论：
@@ -208,8 +220,13 @@ notes: |
 
   **status 定级理由（status = 自身论证的严格程度）**：论证是 CMP 论文 §3.1 内的形式级数推导，
   每一环都有编号且 (3.1)/(3.2)/(3.4)/(2.62) 已 L1 逐字核实，没有任何解析操作，故 **rigorous**。
-  **有效状态是 open**：桥接边（缺自由玻色子顶点代数卡）压制；即便补上该卡，
-  末句比较仍把它压到 physical-argument（gaps 第 6 条）。**status 与 effective 分离是本图的设计意图。**
+  **有效状态（2026-09-11 更新，curator，分支 agent/curator/lattice-va）**：
+  本节点建立时是 **open**（桥接边缺自由玻色子顶点代数卡）。该卡已建
+  （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower，rigorous），三条边改挂并撤销 inferred，
+  于是 open 这个上限消失。**但目标陈述末句的比较仍把本推导压到 physical-argument**
+  （worldsheet.transverse-oscillator-commutators，见 gaps 第 6 条）——
+  这是本推导现在**唯一**的上限，也是拆卡建议 (1) 要解决的东西。
+  **status 与 effective 分离是本图的设计意图**：自身论证的严格程度从未变过。
 
   **★ 本推导对回译审计的价值**：目标陈述里那句「注意右端**没有**中心项以外的贡献，
   也没有 k_0 或 p 的残余依赖：这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用」

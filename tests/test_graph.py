@@ -167,17 +167,30 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     来源未核实到式号），无鬼定理的有效状态相应下降。
 
     **这是记账修正，不是论证退步**：推导 --via-goddard-thorn 自身仍标 rigorous。
-    若哪天两条命题之一升到 rigorous/formalized，本测试需要相应更新。
+
+    【2026-09-11 更新（分支 agent/curator/lattice-va）】新建格点顶点代数一族卡
+    （math.lattice-vertex-algebra、worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower、
+    math.vertex-algebra-borcherds-identity、math.vertex-algebra-commutator-formula）之后，
+    两条 G–N 顶点代数推导的桥接边不再 inferred 到 effective = open 的卡，于是
+    **ddf-commute-with-virasoro 升到 rigorous**（走 --via-vertex-algebra-primary）。
+    无鬼定理 v4 仍是 physical-argument，瓶颈换成了**内积/伴随那一层**的三条依赖
+    （见下面的断言）——即 literature/extractions/math-sources.md Q36 记的那个缺口。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
     assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
-    # 瓶颈就是拆出来的两条 DDF 命题
-    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "physical-argument"
+    # 顶点代数路线已把这一条接通到 rigorous
+    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "rigorous"
+    # 剩下的瓶颈：横向振子代数（末句比较被 transverse-oscillator-commutators 压住）
+    # 与内积/伴随那一层的两条
     assert (
         effs["worldsheet.ddf-transverse-oscillator-algebra"].name
         == "physical-argument"
+    )
+    assert effs["worldsheet.ddf-operators-adjoint"].name == "physical-argument"
+    assert (
+        effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "physical-argument"
     )
     # 纯定义卡本身不受影响
     assert effs["worldsheet.ddf-operators-v5"].name == "rigorous"
@@ -975,18 +988,42 @@ def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
 
 def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     """own_status is the max over derivations; the per-derivation list must expose that a
-    rigorous derivation can be throttled to open by a dependency."""
+    rigorous derivation can be throttled below its own status by a dependency.
+
+    2026-09-11 (branch agent/curator/lattice-va): the throttled example used to be
+    ddf-commute-with-virasoro--via-vertex-algebra-primary (own=rigorous, effective=open,
+    bridge edge inferred to an open card). That bridge is now wired to
+    worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower, so this derivation
+    reaches rigorous. The throttling behaviour is still exercised by its sibling
+    ddf-transverse-oscillator-algebra--via-zero-mode-bracket, which stays at
+    physical-argument because the target statement's closing comparison drags in
+    worldsheet.transverse-oscillator-commutators.
+    """
     from stringgraph.loader import load_graph
     from stringgraph.report import status_report
 
     g = load_graph(ROOT)
+
+    # (a) two derivations on one statement: the report takes the strongest one
     rep = status_report(g, "worldsheet.ddf-commute-with-virasoro")
     ders = {d["id"]: d for d in rep["derivations"]}
     assert "worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary" in ders
+    assert "worldsheet.ddf-commute-with-virasoro--via-conformal-weight" in ders
     d = ders["worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary"]
     assert d["own"] == "rigorous"
-    assert d["effective"] == "open"
-    assert rep["effective"] == "physical-argument"
+    assert d["effective"] == "rigorous"
+    assert ders["worldsheet.ddf-commute-with-virasoro--via-conformal-weight"][
+        "effective"
+    ] == "physical-argument"
+    assert rep["effective"] == "rigorous"
+
+    # (b) own > effective is still exposed per-derivation
+    rep2 = status_report(g, "worldsheet.ddf-transverse-oscillator-algebra")
+    ders2 = {d["id"]: d for d in rep2["derivations"]}
+    d2 = ders2["worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket"]
+    assert d2["own"] == "rigorous"
+    assert d2["effective"] == "physical-argument"
+    assert rep2["effective"] == "physical-argument"
 
 
 def test_validate_warns_when_derivation_target_is_superseded():
