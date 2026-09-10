@@ -120,5 +120,6 @@ notes: |
   命中的正规序相关节点是 v1、normal-ordering-modes-agree、
   normal-ordering-constant-ax、bc-ghost-normal-ordering-constant、
   light-cone-normal-ordering-constant，无一承载「任意自由场的正规序定义」。
+  【闭式符号勘误（reviewer-batch5b，2026-09-11）】陈述里的闭式 :F: = exp(−½ Σ ∫ G_ij δ_L/δφ_i δ_L/δφ_j) F 用左导数时对费米对给出 φ₁φ₂ + G₁₂，与递归定义的 φ₁φ₂ − G₁₂ 相反（δ_L/δφ₂(φ₁φ₂) = −φ₁，再 δ_L/δφ₁ 得 −1；(1,2) 与 (2,1) 项合计 −2G₁₂，乘 −½ 得 +G₁₂）。递归定义与四场 Pfaffian 例子正确，闭式须改用右导数或反转两个导数次序。陈述不可变；本卡以递归定义为操作定义，闭式只作提示；日后换代 v3 时改写。
 author: curator
 created: "2026-09-11"

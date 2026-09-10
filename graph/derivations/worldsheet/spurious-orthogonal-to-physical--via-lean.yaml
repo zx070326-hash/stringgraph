@@ -1,7 +1,7 @@
 id: worldsheet.spurious-orthogonal-to-physical--via-lean
 target: worldsheet.spurious-orthogonal-to-physical
 kind: proof
-status: formalized
+status: rigorous
 depends_on:
   - id: worldsheet.spurious-subspace-orthogonal-to-physical
     inferred: false
@@ -109,6 +109,7 @@ gaps:
     worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii)。没有位置算符 x^μ，没有对 k 的直积分，
     故"固定动量扇区 F(k)"在 Lean 侧是全局参数而非分解指标。
 notes: |
+  【降级记 lead 2026-09-11，依 reviewer-batch5b】status formalized → rigorous：本推导 gaps (i) 自认目标陈述 (2) 后半（加零模态不改内积、H_phys/N 上诱导形式良定义）无 Lean 引理；一条 formalized 推导须逐句覆盖目标。formalizer 补该引理后可升回。
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
