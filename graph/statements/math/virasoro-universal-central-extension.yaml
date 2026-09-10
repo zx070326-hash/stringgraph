@@ -149,6 +149,24 @@ notes: |
   （做法参照 math.witt-algebra-perfect → math.witt-algebra-derived-algebra 的拆法），
   交 lead 裁决后由 curator 执行；本次未做（不在本轮任务范围）。
 
+  【2026-09-11（四）：上一段说的拆卡已执行——**(1) 已形式化，(2)(3) 未**（curator，lead 裁决）】
+  本卡陈述的 (1) 现已单列为 **math.virasoro-algebra-perfect**（proposition，
+  推导 math.virasoro-algebra-perfect--via-lean，**status formalized**，
+  lean_decl `StringFormal.Virasoro.VirasoroAlgebra.isPerfect`，lean_file
+  `StringFormal/Virasoro/WittPerfect.lean`）。那张卡逐条写出本卡 (1) 的四件事：
+  非零模的一致见证 2L_n = [L_{n+2}, L_{−2}] − [L_{n+1}, L_{−1}]（n ≠ 0）、
+  零模 2L_0 = [L_1, L_{−1}]、**中心元的显式见证 C = 2[L_2, L_{−2}] − 4[L_1, L_{−1}]**
+  （`VirasoroAlgebra.cgen_eq`，即本卡 (1) 括号里 [L_2, L_{−2}] = 4L_0 + (1/2)C 那句的机器见证）、
+  以及完美性本身；基环是任意交换 **ℚ-代数**，比本卡限定的「特征零的域」更一般。
+  本卡的推导 --via-feldvoss-siciliano 已加一条 depends_on 指向它。
+
+  **本卡不换代、statement 一字未动、status 与推导不改、仍不填 formal.lean_decl。**
+  理由与上一段相同：本卡的 (2)（H¹ = H² = 0）与 (3)（万有性）**都没有**形式化，
+  按 docs/STATUS_LEVELS.md，一张陈述里含未形式化子句的卡不得标 formalized。
+  本卡承载的仍是完整的三段结论，其中只有 (1) 那一段在别处以 formalized 报出。
+  一句话读法：**(1) 已形式化，(2)(3) 未**。
+  陈述【本节点不断言】(e) 的读法照上一段不变。
+
   【本卡不采信的来源（researcher 的三条禁令，math-sources.md §31.4）】
   1. feldvoss-siciliano-2025 **Lemma 2.4** —— char p > 3 的受限 Virasoro 代数，不是同一对象。
   2. 「Schlichenmaier, Theorem: H²(Vir, ℂ) = 0」—— 那篇没有这样一条编号定理。
