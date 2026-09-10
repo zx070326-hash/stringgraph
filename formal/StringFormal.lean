@@ -1,6 +1,7 @@
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.Verma
+import StringFormal.Virasoro.VermaPBW
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.FockSigned
