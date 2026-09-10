@@ -5,8 +5,6 @@ status: rigorous
 depends_on:
   - id: worldsheet.brst-quantization
     note: "提供 Q_B 的模式定义、bc 反对易关系、L^g_n 的表达式、a^g = −1 与受限模条件。"
-  - id: worldsheet.virasoro-algebra
-    note: "提供 L^g_n 满足 Virasoro 关系所需的代数框架；本推导只用到 L^g_m 的显式模式表达式。"
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，eq. (4.3.6)，p.132"
@@ -44,11 +42,15 @@ gaps:
   - "受限模条件是本推导合法性的前提，它是本项目在 worldsheet.brst-quantization 中补上的假设，**Polchinski §4.3 未声明**。因此本推导证的严格来说是「受限模上的陈述」，不是原书那句无限定的 (4.3.6)。"
   - "fgz-1986 中没有以 {d, b_m} = L_m 形式出现的编号陈述，故本命题目前**没有已核实的数学文献编号来源**；可追溯性只到 Polchinski §4.3 (4.3.6)（式号由 schrans-2020 目录核实，原书未核对）。"
 notes: |
-  【status 说明，供 reviewer 裁定】按本轮任务指令中 lead 的裁决
-  （"纯代数（如 {Q_B, b_m} = L_m 的模式计算在受限模上）可 rigorous 但须写清受限模假设"）
-  标 rigorous，受限模假设已写进目标陈述与本 summary 第一段。
-  docs/STATUS_LEVELS.md 的「初等可复核」例外还要求 `reviewer-verified: <agent>, <date>`，
-  **本推导尚无该记录**，且第一条 gap 承认中间步骤未全部写出。
-  若 reviewer 不确认，应降为 physical-argument。已在 curator 的交付报告中列为待裁定项。
+  reviewer-verified: reviewer-ch4, 2026-09-11
+
+  【status】纯代数（{Q_B, b_m} = L_m 的模式计算，受限模上），受限模假设已写进目标陈述与
+  本 summary 第一段；docs/STATUS_LEVELS.md 的「初等可复核」例外三条已满足（前提完整、
+  计算在 summary 中、reviewer-ch4 于 2026-09-11 独立复核）。故保持 rigorous。
+  第一条 gap（第 2 步的符号/系数整理未逐项写出）仍在，reviewer 复核时已知悉。
+
+  【2026-09-11 修订】删去 depends_on worldsheet.virasoro-algebra：本推导只用 L^g_m 的显式
+  模式表达式（由 worldsheet.brst-quantization 提供），从未用到 Virasoro 对易关系本身；
+  且该卡已被 worldsheet.virasoro-algebra-v2 取代。
 author: curator
 created: "2026-09-11"

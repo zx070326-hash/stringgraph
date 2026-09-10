@@ -10,14 +10,15 @@ statement: |
   物理态空间
     H_phys(k) = {|ψ⟩ ∈ F(k) : (L_0 - a)|ψ⟩ = 0, L_n|ψ⟩ = 0 ∀ n > 0}。
 
-  **伪态（spurious state）**：|χ⟩ ∈ F(k) 称为伪态，若存在有限多个 |χ_k⟩ ∈ F(k)（k ≥ 1，
+  **伪态（spurious state）**：|χ⟩ ∈ F(k) 称为伪态，若存在 |χ_n⟩ ∈ F(k)（n ≥ 1，
   只有有限多个非零）使
-    |χ⟩ = Σ_{k ≥ 1} L_{-k} |χ_k⟩，
+    |χ⟩ = Σ_{n ≥ 1} L_{-n} |χ_n⟩，
   且 |χ⟩ 本身满足质量壳条件 (L_0 - a)|χ⟩ = 0。
-  等价地：伪态是 F(k) 中满足质量壳条件、且落在正模 Virasoro 生成元 L_{-k}（k ≥ 1）像空间
-  Σ_{k≥1} L_{-k} F(k) 中的向量。记该空间为 S(k)。
-  （"有限多个非零"是本节点显式补上的限定：Fock 空间的 L_0 分级中每一级有限维，故一个固定级数
-  的伪态只用到有限多个 |χ_k⟩；不加此限定则无穷和无定义。）
+  等价地：伪态是 F(k) 中满足质量壳条件、且落在正模 Virasoro 生成元 L_{-n}（n ≥ 1）像空间
+  Σ_{n≥1} L_{-n} F(k) 中的向量。记该空间为 S(k)。
+  （求和指标写 n 而不是 Polchinski (4.1.8) 的 k，以免与动量标签 k 撞号。
+  "有限多个非零"是本节点显式补上的限定：Fock 空间的 L_0 分级中每一级有限维，故一个固定级数
+  的伪态只用到有限多个 |χ_n⟩；不加此限定则无穷和无定义。）
 
   **零态（null state，Polchinski 意义）**：既是物理态又是伪态的向量，即
     N(k) := H_phys(k) ∩ S(k)。
@@ -31,7 +32,7 @@ statement: |
   的临界情形被断言。凡引用"零态"时必须指明取的是哪一个定义。
 uses:
   - worldsheet.old-covariant-physical-states
-  - worldsheet.virasoro-algebra
+  - worldsheet.virasoro-algebra-v2
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
 sources:
   - ref: polchinski-1998-v1
@@ -39,7 +40,7 @@ sources:
     note: |
       式号经第三方伴读笔记目录核实（schrans-2020：`4.1/4.2 p 122: Eq (4.1.8)/(4.1.9)
       Spurious States, I/II`），**未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E55。
-      Polchinski 写 |χ⟩ = Σ_{k≥1} L_{-k}|χ_k⟩ 并说"既是物理态又是伪态的即 null 态"；
+      Polchinski 写 |χ⟩ = Σ_{k≥1} L_{-k}|χ_k⟩（其求和指标为 k）并说"既是物理态又是伪态的即 null 态"；
       本节点的"有限多个非零"限定与"N ⊆ H_0 是命题不是定义"的区分是本项目补上的，不出自原书。
   - ref: gsw-1987-v1
     loc: "§2.2.1–2.2.2（spurious states、zero-norm states）"
@@ -52,8 +53,18 @@ notes: |
       理论或 no-ghost 定理级的输入，来源候选 kac-1979 / feigin-fuchs-1982 / thorn-1984；
     - worldsheet.ocq-level-two-scalar-norm：第二能级的显式模公式。
 
-  记号提醒：本节点用 k 同时表示动量与求和指标（照抄 Polchinski (4.1.8) 的写法）。
-  在 statement 中 |χ_k⟩ 的下标 k 是求和指标，F(k) 的 k 是动量；上下文可区分，
-  但若后续节点要引用，建议把求和指标改写为 n。
+  记号：求和指标已写作 n（2026-09-11 按 reviewer-ch4 的建议从 k 改过来），
+  k 只用作动量标签。Polchinski (4.1.8) 原文两者都写 k。
+
+  【与 Lean 的对应，2026-09-11】formal/StringFormal/NoGhost/PhysicalStates.lean 中的
+  `StringFormal.NoGhost.Fock.spuriousSubmodule η a := ⨆ n : ℤ, ⨆ _ : 0 < n, range (Lop η a (-n))`
+  与本节点的 S(k) **不是同一个对象**，故本节点**不填** `formal.lean_decl`：
+    (a) Lean 的那个子模**不含质量壳条件** (L_0 − a)|χ⟩ = 0（注释里也写明 "does not depend
+        on the intercept"），本节点的 S(k) 含；因此 Lean 的子模严格更大，
+        S(k) = spuriousSubmodule ⊓ ker(L_0 − a)。
+    (b) Lean 的 Fock 空间是固定零模参数 a : Fin D → R 的代数版，没有对动量 k 的直和/直积分，
+        故"F(k) 的 k"在 Lean 侧是全局参数而不是分解指标。
+  依赖本节点的形式化结论（worldsheet.spurious-orthogonal-to-physical--via-lean）不受影响：
+  Lean 证的是**更强**的无质量壳版本，蕴含本节点这一版。
 author: curator
 created: "2026-09-11"

@@ -18,6 +18,9 @@ statement: |
   本命题**不**断言反包含 H_0(k) ⊆ N(k)（"每个零范数物理态都是伪态"）；那是一条独立命题，
   本图尚未建节点（见 worldsheet.ocq-spurious-states 的 notes）。
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.spuriousSubmodule_le_orthComplement
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1，eq. (4.1.8)（⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0）与 eq. (4.1.9)（加零态不改变内积），p.122"
@@ -37,5 +40,12 @@ notes: |
   Goddard–Thorn 型无鬼定理商掉的是 H_0（根基），Polchinski §4.1 的行文商掉的是 N；
   在 D = 26、a = 1 时两者一致（这正是 no-ghost 定理的一部分内容），
   在一般 (D, a) 下是否一致，本图无节点承载。**这是一条建议提交里程碑流程规范化的措辞冲突。**
+
+  【formal.lean_decl 的覆盖范围，2026-09-11】填的是 `spuriousSubmodule_le_orthComplement`，
+  它对应陈述 (1)（且 Lean 侧更强：不带质量壳条件，见
+  worldsheet.spurious-orthogonal-to-physical--via-lean 的 gaps (ii)）。
+  陈述 (2) 的前半（N ⊆ H_0）在 Lean 里是 `spurious_inf_physSubmodule_le_nullSubmodule`，
+  后半（加零态不改变内积、商上形式良定义）**没有具名引理**，见该推导的 gaps (i)。
+  即：本节点的 formalized 覆盖 (1) 与 (2) 前半，不覆盖 (2) 后半。
 author: curator
 created: "2026-09-11"

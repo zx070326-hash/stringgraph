@@ -8,6 +8,13 @@ depends_on:
     note: "提供 L_m = (1/2) Σ_n : α_{m−n} · α_n : 的显式表达式，本推导对 m = 1, 2 逐项展开用它。"
   - id: worldsheet.fock-indefinite-form
     note: "提供由 ⟨0|0⟩ = 1 与 (α^μ_n)† = α^μ_{−n} 唯一确定的双线性型，本推导用它算 Gram 矩阵。"
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    note: |
+      提供质量壳的分级形式：L_0 在 level N 分量上是标量 (1/2)α_0·α_0 + N 的乘法
+      （该节点已形式化，`Fock.Lop_zero_apply_of_mem_levelSubmodule`）。本推导取 N = 2
+      得 K/2 + 2 = a，即 K = 2(a − 2)。该节点的断言 (a) 明确**不**包含
+      「共形正规序与产生-湮灭正规序给同一算符」（a^X = 0），故这条边不引入 OPE 层的依赖，
+      不降低本推导的有效状态。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.1，level 2 的物理条件与伪态条件，(4.1.19)–(4.1.28) 区间，p.124；式号未核实"
@@ -53,7 +60,10 @@ summary: |
   即陈述 (2)，正因子为 2/(4a − 9)² > 0。
 
   **推论**：a = 1 代入方括号得 16 + 2D − 74 + 84 − 3D = 26 − D，即 (3a)；
-  判别式 (2D − 74)² − 64(84 − 3D) = 4D² − 104D + 100 = 4(D − 1)(D − 25)，即 (3b)；
+  判别式 (2D − 74)² − 64(84 − 3D) = 4D² − 104D + 100 = 4(D − 1)(D − 25)；
+  它在 D ≤ 24 时为负（无实根、恒正）、在 D = 25 时恰为零（二重根
+  a = −(2D − 74)/32 = 24/32 = 3/4，代入方括号得 16·9/16 − 24·3/4 + 9 = 0）、
+  在 D ≥ 26 时为正（两个相异实根），即 (3b)；
   D = 26 代入方括号得 16a² − 22a + 6 = 2(8a − 3)(a − 1)，
   在 a = 1/2, 3/4, 9/10 处整式取值 −1, −25/8, −42/25，乘 25·2/(4a−9)² 分别得
   −50/49, −25/12, −350/243，即 (3c)。
@@ -61,8 +71,10 @@ gaps:
   - "本推导只覆盖由 η 与 α_0 张成的三维子空间（小群标量部分）。level-2 物理态空间的其余部分（无迹横向对称张量等）的模不在本推导范围内；那部分在 D ≤ 26 时恒正，本推导不证。"
   - "退化点 a = 2（K = 0，零动量/无质量退化）与 a = 9/4（系数矩阵奇异）被前提排除，未处理。"
   - "文献侧只支持定性结论（D = 26、a = 1 时出现额外零态）。闭式来自本项目两次独立核算，见目标陈述的 notes。"
-  - "本推导**刻意不连** worldsheet.open-string-l0-level-form 这条边，尽管它的断言 (i)（L_0 = α'p² + N）正是本推导用的质量壳形式。理由：本推导只需要 worldsheet.virasoro-generators-free-boson 的 L_m = (1/2)Σ_n :α_{m−n}·α_n: 在 m = 0 处的读值（一行代入，纯代数，rigorous），而 open-string-l0-level-form 还打包了断言 (ii)（共形正规序与产生-湮灭正规序给同一算符，即 a^X = 0），那一条走 OPE/态-算子路线，会把本推导的有效状态压到 physical-argument。连一条本推导用不到的边去换取一个更低的有效状态，不是诚实降级而是记账错误（同 worldsheet.brst-quantization 的 notes 中「是否 uses bc-ghost-cft」的裁断）。若 reviewer 认为 (i) 与 m = 0 代入之间还有本推导未论证的一步，应把该边补回并接受降级。"
+  - "【2026-09-11 更新】本推导现已连 worldsheet.open-string-l0-equals-level-plus-mass（main 上的 formalized 节点，只断言 L_0 在 level N 分量上的读值，不打包 a^X = 0），故质量壳这一步不再是无来源的。仍**刻意不连** worldsheet.open-string-l0-level-form 这条边，尽管它的断言 (i)（L_0 = α'p² + N）也是本推导用的质量壳形式。理由：本推导只需要 worldsheet.virasoro-generators-free-boson 的 L_m = (1/2)Σ_n :α_{m−n}·α_n: 在 m = 0 处的读值（一行代入，纯代数，rigorous），而 open-string-l0-level-form 还打包了断言 (ii)（共形正规序与产生-湮灭正规序给同一算符，即 a^X = 0），那一条走 OPE/态-算子路线，会把本推导的有效状态压到 physical-argument。连一条本推导用不到的边去换取一个更低的有效状态，不是诚实降级而是记账错误（同 worldsheet.brst-quantization 的 notes 中「是否 uses bc-ghost-cft」的裁断）。若 reviewer 认为 (i) 与 m = 0 代入之间还有本推导未论证的一步，应把该边补回并接受降级。"
 notes: |
+  reviewer-verified: reviewer-ch4, 2026-09-11
+
   【独立复核记录】
   - auditor, 2026-09-10：ms.no-ghost-theorem 第一轮回译审计条目 B1，精确有理数 Gram 矩阵计算，
     得 (D−1)[16a² + (2D−74)a + 84 − 3D] × 正因子、判别式 4(D−1)(D−25)、
@@ -70,11 +82,8 @@ notes: |
   - curator, 2026-09-11：用符号代数独立重算（上面的 summary 就是逐步记录），复现同一多项式、
     同三个数值点，并补出正因子 2/(4a − 9)²。脚本 graph/build/lvl2_check.py（gitignore，未入库）。
 
-  【status 说明，供 reviewer 裁定】按 docs/STATUS_LEVELS.md 的「初等可复核」例外，
-  rigorous 需要「前提完整 + 有限步初等计算 + reviewer 独立复核并在此写
-  `reviewer-verified: <agent>, <date>`」。前两条已满足（前提写在陈述里，计算全在本 summary 中），
-  **第三条未满足：复核者是 auditor 与 curator，不是 reviewer**。
-  若 reviewer 认为该例外只认 reviewer 的复核，应降为 physical-argument。
-  已在 curator 的交付报告中列为待裁定项。
+  【status】docs/STATUS_LEVELS.md 的「初等可复核」例外三条已全部满足：前提写在陈述里、
+  计算全在本 summary 中、reviewer-ch4 已于 2026-09-11 独立复核并记录在上（该轮同时指出
+  (3b) 在 D = 25 处的边界写错，已改）。故保持 rigorous。
 author: curator
 created: "2026-09-11"

@@ -8,6 +8,14 @@ statement: |
   （相对复形 C_rel(k) = {Ψ : b_0Ψ = 0, L_0Ψ = 0}，L_0 = L^m_0 + L^g_0 − 1）。
   固定动量 k ≠ 0，截距按 conv.intercept-sign-a 的 a = 1，α' 按 conv.alpha-prime-regge。
 
+  **L^g_0 的记号约定（重要，两个不同的算符）**：本节点与 §4.3 的其余 BRST 节点里的 L^g_0
+  指**不含正规序常数**的鬼场 level 算符，正规序参照取鬼场基态 |↓⟩，
+    L^g_0 = Σ_{j > 0} j ( b_{−j} c_j + c_{−j} b_j ),   故 L^g_0|↓⟩ = 0；
+  常数 a^g = −1 被单独写出（Q_B 的末项 −c_0，或 L_0 = L^m_0 + L^g_0 − 1 中的 −1）。
+  worldsheet.bc-ghost-normal-ordering-constant 里的 L^g_0 是**共形正规序**的那一个，
+  满足 L^g_0|↓⟩ = a^g|↓⟩ = −|↓⟩。两者相差常数 a^g：本节点的 L^g_0 = 那里的 L^g_0 − a^g。
+  引用时必须指明取的是哪一个。
+
   **level 0（总能级 N = 0）**：C_rel(k) 在该能级上一维，由 |0;k⟩ ⊗ |↓⟩ 张成（鬼数 1）。
     (1) 条件 L_0 = 0 即 α'k² − 1 = 0，故 α'm² = −1（快子）；
     (2) 该态自动 Q_B-闭（由 worldsheet.brst-charge-on-ghost-ground-state，

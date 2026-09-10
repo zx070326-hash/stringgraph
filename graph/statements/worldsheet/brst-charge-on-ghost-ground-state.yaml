@@ -5,7 +5,16 @@ statement: |
   设定与记号沿用 worldsheet.brst-quantization：Q_B 的模式展开、bc 系统权 λ = 2、
   鬼场基态 |↓⟩（b_n|↓⟩ = c_n|↓⟩ = 0 ∀ n > 0，b_0|↓⟩ = 0，c_0|↓⟩ = |↑⟩）、
   鬼场正规序常数 a^g = −1、受限模。设物质态 |ψ⟩ 属于物质受限模 V_m（不必是最高权态）。
-  截距记号按 conv.intercept-sign-a。则
+  截距记号按 conv.intercept-sign-a。
+
+  **L^g_0 的记号约定（重要，两个不同的算符）**：本节点与 §4.3 的其余 BRST 节点里的 L^g_0
+  指**不含正规序常数**的鬼场 level 算符，正规序参照取 |↓⟩，故 L^g_0|↓⟩ = 0；
+  常数 a^g = −1 被单独写成 Q_B 的末项 −c_0。
+  worldsheet.bc-ghost-normal-ordering-constant 里的 L^g_0 是**共形正规序**的那一个，
+  满足 L^g_0|↓⟩ = a^g|↓⟩ = −|↓⟩。两者相差常数 a^g。引用时必须指明取的是哪一个。
+  同理，Q_B 三次鬼场项里的 : … : 也是以 |↓⟩ 为参照的正规序（c_0 是产生子、b_0 是湮灭子）。
+
+  则
 
   (1) **显式作用公式**：
         Q_B ( |ψ⟩ ⊗ |↓⟩ ) = Σ_{n ≥ 0} c_{−n} ( L^m_n − δ_{n,0} ) |ψ⟩ ⊗ |↓⟩,
@@ -17,10 +26,6 @@ statement: |
         Q_B ( |ψ⟩ ⊗ |↓⟩ ) = 0
         ⟺  L^m_n|ψ⟩ = 0 ∀ n > 0  且  (L^m_0 − 1)|ψ⟩ = 0
         ⟺  |ψ⟩ ∈ H_phys（worldsheet.old-covariant-physical-states，截距 a = 1）。
-
-  (3) 特别地，**a = 1 在 BRST 形式中不是被推出来的，而是由 a^g = −1 编码的**：
-      若把 a^g 保持一般值，(2) 的第二个条件变成 (L^m_0 + a^g)|ψ⟩ = 0，即 a = − a^g。
-      λ = 2 的 bc 系统给 a^g = λ(1−λ)/2 = −1，故 a = 1。
 
   本命题**不**需要 c^m = 26，也**不**断言任何上同调层面的结论
   （"每个上同调类都有 |ψ⟩⊗|↓⟩ 型代表元"与"恰当性 ⟺ 零模态"是
@@ -39,6 +44,19 @@ sources:
     note: 式号经 schrans-2020 目录核实；逐字证据见抽取记录 §1.1 脚注 [†a^g]。
 tags: [brst, bosonic-string, ghosts, intercept, old-covariant, quantization]
 notes: |
+  【a = 1 的来源，2026-09-11 从陈述 (3) 移到此处】原 (3) 断言"a = 1 在 BRST 形式中不是被
+  推出来的，而是由 a^g = −1 编码的：若把 a^g 保持一般值，(2) 的第二个条件变成
+  (L^m_0 + a^g)|ψ⟩ = 0，即 a = −a^g；λ = 2 的 bc 系统给 a^g = λ(1−λ)/2 = −1，故 a = 1"。
+  这一条是**对 (1)(2) 的解读**，不是独立的新断言：a^g = −1 已经写死在
+  worldsheet.brst-quantization 的定义里，(1) 的 −δ_{n,0} 就是它。
+  把它留在陈述里会逼本推导连一条到 worldsheet.bc-ghost-normal-ordering-constant 的边，
+  而那条边会把本节点与下游的 worldsheet.brst-cohomology-low-levels 一起压到
+  physical-argument（该节点的 a^g = −1 经态-算子同构论证），换来的却不是新内容。
+  故按 reviewer-ch4 的建议移到 notes，并删去那条边。
+  另注：worldsheet.bc-ghost-normal-ordering-constant 的**陈述只断言 λ = 2 时 a^g = −1**，
+  一般公式 a^g = λ(1−λ)/2 **不在它的陈述内**（只出现在它的来源定位与等价刻画里）；
+  上面引用一般公式时，引的是 Polchinski (2.7.21)，不是那个节点。
+
   这是**旧协变量子化与 BRST 量子化之间最基本的那一格字典**，也是抽取记录 E63 备注里那句
   「这就是 a = 1 在 BRST 语言中的出现方式」的节点化。图里此前只有强得多的
   worldsheet.brst-cohomology-equals-ocq-physical（FGZ Theorem 2.8 第一个同构，

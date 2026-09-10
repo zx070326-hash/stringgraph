@@ -34,12 +34,20 @@ depends_on:
   - id: worldsheet.virasoro-generators-adjoint
     inferred: false
     note: |
-      提供第 (3) 条「零模态」的**唯一实质输入**：L_{−1}^† = L_1
-      （`Fock.pairing_Lop_left`）。链条是
+      提供第 (3) 条「零模态」的**最底层实质输入**：L_{−1}^† = L_1
+      （`Fock.pairing_Lop_left`）。链条是（中间两步另见 worldsheet.spurious-orthogonal-to-physical）
       `pairing_Lop_left` ⇒ `Fock.spuriousSubmodule_le_orthComplement`（伪态 ⊥ 物理态）
       ⇒ `Fock.spurious_inf_physSubmodule_le_nullSubmodule` ⇒ `Fock.Lop_neg_apply_mem_nullSubmodule`
       ⇒ `Fock.Lop_neg_one_apply_one_mem_nullSubmodule`。字面依赖（同文件，逐条调用）。
       第 (1)(2) 条不经过这条边。
+  - id: worldsheet.spurious-orthogonal-to-physical
+    inferred: false
+    note: |
+      提供第 (3) 条链条中间的两步命题本身：`Fock.spuriousSubmodule_le_orthComplement`
+      （伪态 ⊥ 物理态）与 `Fock.spurious_inf_physSubmodule_le_nullSubmodule`（伪态 ∩ 物理态 ⊆ 零模态）
+      就是该陈述的 (1) 与 (2) 前半，在 Lean 里由 worldsheet.spurious-orthogonal-to-physical--via-lean
+      承载。此前本推导直接把这两步记在 worldsheet.virasoro-generators-adjoint 那条边上，
+      跳过了中间这层命题；2026-09-11 按 reviewer-ch4 建议补边。字面依赖（同文件，逐条调用）。
   - id: worldsheet.fock-indefinite-form
     inferred: false
     note: |
@@ -130,6 +138,21 @@ gaps:
     worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii) 与 Sugawara.lean 的零模缺口。
     没有位置算符 x^μ，没有对 k 的直积分。
 notes: |
+  【2026-09-11 补边的记账后果，请 lead 裁定】按 reviewer-ch4 的建议补上
+  worldsheet.spurious-orthogonal-to-physical 这条边后，本节点的**有效状态从 formalized 降为
+  rigorous**。降级不是因为 Lean 侧有缺口（这条链在 Lean 里全程无 sorry），而是一个记账效应：
+  新边经 worldsheet.spurious-orthogonal-to-physical--via-lean 走到定义卡
+  worldsheet.ocq-spurious-states，而那张卡的 status 是 rigorous——因为它定义的 S(k)
+  **带质量壳条件**，与 Lean 的 `Fock.spuriousSubmodule`（不带）不是同一个对象，故没填
+  formal.lean_decl。本推导实际用到的是 Lean 那个**更大**的子模，用不到质量壳限制。
+  两条出路，都超出 curator 本轮范围：
+    (a) 把 worldsheet.ocq-spurious-states 拆成「Σ_{n≥1} L_{−n}F 的像空间」（可对上 Lean，
+        填 formal.lean_decl）与「再交质量壳」两张卡；
+    (b) 认定定义卡的 status 不应参与向下传播（docs/STATUS_LEVELS.md 对 definition 写的是
+        「有效状态等同于其依赖的最低等级」，但工具取的是 min(own, deps)）——这是工具与文档
+        的一处不一致，需 lead 或 tools 侧裁决。
+  在裁定前，本节点显示 rigorous 而非 formalized。
+
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。

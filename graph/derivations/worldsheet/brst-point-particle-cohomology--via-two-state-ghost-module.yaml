@@ -6,7 +6,11 @@ depends_on:
   - id: worldsheet.brst-charge-general-constraint-algebra
     note: "提供 Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k；本例中约束只有一个且 f = 0，故 Q_B = cG。"
   - id: worldsheet.point-particle-einbein-action
-    note: "提供 einbein 形式的点粒子规范系统，其唯一一阶约束是 G = (p² + m²)/2。"
+    inferred: true
+    note: |
+      提供 einbein 形式的点粒子规范系统。**标 inferred**：该节点的陈述**没有显式写出**
+      "唯一一阶约束是 G = (p² + m²)/2"这句话，本推导所需的约束形式是从其作用量读出来的，
+      在 sources.loc 指向的位置找不到逐字论证（同第三条 gap）。2026-09-11 按 reviewer-ch4 建议标注。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.2，eq. (4.2.20)、(4.2.22)、(4.2.23)、(4.2.25)、(4.2.26)，p.129–130"
@@ -35,11 +39,11 @@ gaps:
   - "点粒子的完整 BRST 系统（Polchinski §4.2 的 (4.2.23) BRST 作用量、(4.2.26) 正则对易关系）还含 einbein 及其共轭动量、Nakanishi–Lautrup 场；本推导直接从「约化后只剩一个约束 G 与一对鬼场零模」出发，未论证该约化。这一步在 Polchinski 是通过取规范 e = 1 完成的，本图无节点承载。"
   - "「einbein 形式的点粒子的唯一一阶约束是 G = (p² + m²)/2」由 worldsheet.point-particle-einbein-action 隐含，但该节点未显式陈述约束的形式；这条边在这个意义上是弱的。"
 notes: |
-  【status 说明，供 reviewer 裁定】本推导的核心是 2×2 矩阵上的线性代数，
-  前提在陈述中完整写出，计算全在 summary 中，无收敛/重排问题（鬼场部门有限维，
-  约束只有一个）。按本轮任务指令中 lead 的裁决（纯代数、前提写清可 rigorous）标 rigorous。
-  docs/STATUS_LEVELS.md 的「初等可复核」例外还要求 `reviewer-verified: <agent>, <date>` 记录，
-  **本推导尚无该记录**；若 reviewer 不确认应降为 physical-argument。
+  reviewer-verified: reviewer-ch4, 2026-09-11
+
+  【status】核心是 2×2 矩阵上的线性代数，前提在目标陈述中完整写出，计算全在 summary 中，
+  无收敛/重排问题（鬼场部门有限维，约束只有一个）；docs/STATUS_LEVELS.md 的「初等可复核」
+  例外三条已满足（reviewer-ch4 于 2026-09-11 独立复核）。故保持 rigorous。
   第三条 gap（约化未论证）是本推导最实在的弱点：它使"本推导证的是 Polchinski §4.2 那个系统"
   这一断言只在约化之后成立。
 author: curator

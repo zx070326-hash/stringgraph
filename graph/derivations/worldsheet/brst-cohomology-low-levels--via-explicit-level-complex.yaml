@@ -14,6 +14,16 @@ depends_on:
     note: "保证相对上同调有定义且 ⟨·,·⟩_rel 在上同调上良定义。"
   - id: worldsheet.brst-nilpotent-at-c26
     note: "D = 26 时 Q_B² = 0，本推导默认之。"
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      提供 L^m_n = (1/2) Σ_m : α_{n−m} · α_m : 的显式模式表达式，本推导算
+      L^m_1(e·α_{−1}|0;k⟩) ∝ (e·k)|0;k⟩ 与 L^m_{−1}|0;k⟩ ∝ (k·α_{−1})|0;k⟩ 用的就是它
+      （2026-09-11 按 reviewer-ch4 建议补边；该节点在 main 上已 formalized，不降低有效状态）。
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      提供物质 Fock 空间上由 (α^μ_n)† = α^μ_{−n} 唯一确定的双线性型，(4) 中
+      ⟨e·α_{−1}↓ | c_0 | e′·α_{−1}↓⟩ = e·e′（Minkowski 内积、时间方向为负）这一步用它
+      （2026-09-11 补边；该节点在 main 上有 formalized 推导，不降低有效状态）。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，eq. (4.3.23)–(4.3.27)，p.135"
@@ -23,6 +33,9 @@ summary: |
 
   **相对复形的构造**：b_0Ψ = 0 把鬼场零模 c_0 的激发排除，故鬼场部门在 |↓⟩ 上只能加
   b_{−n}、c_{−n}（n ≥ 1）。总能级 N = N_matter + N_ghost。
+
+  （记号：本推导的 L^g_0 是**不含常数**的鬼场 level 算符，L^g_0|↓⟩ = 0，常数 −1 已单独写在
+  L_0 = L^m_0 + L^g_0 − 1 里；见目标陈述的记号约定段。）
 
   **level 0**：N = 0 ⇒ 只有 |0;k⟩ ⊗ |↓⟩。L^g_0|↓⟩ = 0，故
   L_0 = L^m_0 − 1 = α'k² − 1，条件 L_0 = 0 给 α'k² = 1，即 α'm² = −1（快子），这是 (1)。
@@ -68,11 +81,12 @@ gaps:
   - "维数计数 28 = 1 + 26 + 1 与 24 = 25 − 1 是本项目自行做出的，**未与 Polchinski §4.3 的 (4.3.23)–(4.3.27) 逐条核对**（式号由 schrans-2020 目录核实，表达式未核实，原书未核对）。若原书在**绝对**复形上计数（含 c_0 激发，维数翻倍），措辞会不同但上同调相同。"
   - "只覆盖 level 0、1 与 k ≠ 0；不覆盖 k = 0 扇区（那里 (5) 的两个论断都退化）。"
 notes: |
-  【status 说明，供 reviewer 裁定】按本轮任务指令中 lead 的裁决（纯代数、前提写清可 rigorous）
-  标 rigorous：对象是有限维复形（1 维与 28 维），无收敛/重排问题。
-  docs/STATUS_LEVELS.md 的「初等可复核」例外还要求 `reviewer-verified: <agent>, <date>`，
-  **本推导尚无该记录**，且第一条 gap 承认 C⁰ → C¹ 一步未穷举。
-  若 reviewer 不确认应降为 physical-argument。已在 curator 的交付报告中列为待裁定项。
+  reviewer-verified: reviewer-ch4, 2026-09-11
+
+  【status】对象是有限维复形（1 维与 28 维），无收敛/重排问题；
+  docs/STATUS_LEVELS.md 的「初等可复核」例外三条已满足（前提完整、计算在 summary 中、
+  reviewer-ch4 于 2026-09-11 独立复核）。故保持 rigorous。
+  第一条 gap（C⁰ → C¹ 一步未穷举）仍在，reviewer 复核时已知悉。
 
   **curator 自查记录**：本节点初稿把 level 1 的相对复形写成 27 维（26 + 1），
   漏掉了鬼数 2 的 c_{−1}|0;k⟩⊗|↓⟩；漏掉后 H¹ = 24 无法从 25 − 1 得出。
