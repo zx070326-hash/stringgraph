@@ -143,5 +143,17 @@ notes: |
   该推导的有效状态在拆卡后已是 physical-argument
   （被 worldsheet.ddf-commute-with-virasoro 与 worldsheet.ddf-transverse-oscillator-algebra 拉低），
   故加入本依赖**不再进一步下降**。
+
+  【2026-09-11 下午（curator，对接 TowerPairing.lean）】本卡 (1) 用到**跨层配对**
+  （A^i_n 把第 N 层送到第 N+n 层，被配对的两个向量在不同动量层），而上面
+  【承载断言的空间】一段所说的「不同层（动量不同）互相正交」是
+  worldsheet.momentum-tower-fock-space (2) 的**约定式定义**：它现已形式化
+  （那张卡 2026-09-11 下午升为 formalized，lean_decl = `Fock.towerPairing`），
+  但在 Lean 里是 `towerPairing`（各层配对的单位权求和）的**定义**及其展开
+  `towerPairing_single_single_of_ne`，**不是物理证明**，也不是 δ^D(p − p′) 正交性的推导。
+  故本卡 (1) 与由它导出的 (2) 的 Gram 矩阵仍以这条约定为输入，而非结论。
+  Lean 侧 A^i_n 的伴随仍不可用（缺 `vertexOsc` / `towerVertex` 的伴随，即
+  worldsheet.vertex-operator-adjoint；TowerPairing.lean 文件头 Gaps 第 2 条），
+  故上面【升级路径】(i) 的内容不变。
 author: curator
 created: "2026-09-11"

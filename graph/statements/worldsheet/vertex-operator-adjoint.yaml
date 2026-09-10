@@ -162,5 +162,18 @@ notes: |
   但**逐项对应关系相反**，形式化时必须先定死一种。本卡的 V^{(n)}_J 按「z^J 的系数」定义
   （与 Lean 的 `vertexOsc` 一致）。这条只是记号，不影响本命题的任何断言
   （(1) 对**每个** J 成立，与如何求和无关）。已在报告中提请 lead/auditor 择一规范化。
+
+  【2026-09-11 下午（curator，对接 TowerPairing.lean）】本卡 (1) 用到**跨层配对**
+  （V^{(n)}_J 把第 N 层送到第 N+n 层，故等式两侧的配对发生在相邻的不同层之间），
+  而塔上型的「层间正交」是 worldsheet.momentum-tower-fock-space (2) 的**约定式定义**：
+  它现已形式化（那张卡 2026-09-11 下午升为 formalized，lean_decl = `Fock.towerPairing`），
+  但在 Lean 里它是 `towerPairing`（各层配对的**单位权求和**）的**定义**及其在 rung 基上的展开
+  `towerPairing_single_single_of_ne`，**不是物理证明**，也不是 δ^D(p − p′) 正交性的推导。
+  即：本卡引用它时借到的证据是「这套约定自洽、且塔卡的 (4) 由之推出」，不是「已被证明」。
+  连带更新上面【升级路径】(i) 里的「缺两件」：第一件（塔上的双线性型）已由 formalizer 在
+  1a7445e 落地（`Fock.towerPairing` 与三条伴随，其中**跨层的** `towerPairing_towerShift_left`
+  正是本卡 (2)(b) 的 S_n^† = S_{−n}）；现只缺第二件，即本命题本身——TowerPairing.lean
+  文件头 Gaps 第 2 条逐字把它记为未做（"The vertex operator is not yet self-adjoint …
+  graph node `worldsheet.vertex-operator-adjoint`"），因而 A^i_n 的伴随在 Lean 侧仍不可用。
 author: curator
 created: "2026-09-11"
