@@ -1,0 +1,66 @@
+id: spectrum.open-closed-four-point-relation-weak
+kind: proposition
+title: （弱形式，表达式有争议）闭弦四 tachyon 振幅分解为两个开弦四点振幅之积（α' → α'/4）乘三角因子
+statement: |
+  闭弦四 tachyon 树振幅（spectrum.virasoro-shapiro-amplitude）可以写成**两个开弦四 tachyon
+  振幅之积**（每个开弦振幅的 Regge 斜率取 α'/4 而非 α'）乘上一个三角函数因子。
+  这是 KLT（Kawai–Lewellen–Tye）型关系在树级四点的最简形式：**闭弦 ≈ 两个开弦**。
+
+  ⚠⚠⚠ **本卡片是弱形式**：本图断言的只有「分解为两个开弦四点振幅之积（α' → α'/4）
+  乘一个三角因子」这个结构。显式表达式（三角因子是哪一个、比例常数、是否取复共轭）
+  有三处已登记的争议，**不入陈述**，只记在 notes。
+
+  **本命题不断言什么**：不断言这是原书 (6.6.23) 的逐字形式；不断言一般 n 点的 KLT 关系；
+  不给出「α'_closed = α'_open/4」的独立论证。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.23)（并见 (6.6.21)），p.195"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E108，等级 **L1（[S] 的推导）/ 表达式 L0**。
+      抽取记录逐字：「**这是本章最不确定的一条，三处问题都出在 [S] 身上**（笔记 p.339）」，
+      并给出明确指示：「**curator 不得把 (6.6.23) 的显式表达式写进图节点，除非核对原书。**
+      可先建一个只说『闭弦树级四点振幅分解为两个开弦四点振幅之积（α' → α'/4）乘一个三角因子』
+      的弱陈述。」——本卡片即此。见 **Q16**。
+  - ref: schrans-2020
+    loc: "§6.71 附近（笔记 p.339）：[6.270]（带 sin）与 [6.272]（不带 sin）两式（核对源）"
+    note: |
+      ⚠ **这是 [S] 自己两行之间的不一致**：[6.270] 写
+      A_c = −(16πig_c²/α') sin(πα_c(t)) I(s,t;g_o;α'/4) I(t,u;g_o;α'/4)，
+      [6.272] 却给出 A_c = (πig_c²α'/g_o⁴)A_o(s,t;α'/4,g_o)A_o(t,u;α'/4,g_o)，**不带 sin**。
+tags: [spectrum, tree-level, klt, open-closed, four-point, weak-form, disputed, errata-dependent]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E108 建立，**按任务书与抽取记录的明确要求只建弱形式**。
+
+  **显式形式（不入陈述，2026-09-11 按 reviewer-ch6 移到 notes）**：按 researcher 的复算，结构为
+    A_c(s,t,u; α', g_c)  ∝  sin( π α_c(t) ) · A_o( s, t; α'/4, g_o ) · A_o( t, u; α'/4, g_o )   （(6.6.23)），
+  比例常数为 π i g_c² α' / g_o⁴。这一行的每个成分都有争议，见下。
+
+  **⚠ 三条争议如实登记（本卡片的核心内容）**：
+
+  1. **`sin(πα_c(t))` 因子在二手源的两行之间消失。** [S] 的 [6.270] 带 sin，[6.272] 不带。
+     **抽取者（researcher）按 (α'/(4ig_o²))² = −α'²/(16g_o⁴) 复算，认为前因子确为 +πig_c²α'/g_o⁴、
+     且 sin 项应当保留**，判定 [6.272] 漏掉了它。
+     **本卡片按「保留 sin」写——这是 researcher 的判断，不是 [S] 的原文，也未经原书核对。**
+
+  2. **第二个 A_o 是否取复共轭，[S] 与原书不一致。** [S] 逐字：
+     「**I am not sure why the second A_o is conjugated in Joe's book.** As I(x,y) is manifestly
+     positive, this would just change a sign, which is not needed. It may be due to
+     **his sign error just below (6.6.21)**.」
+     即：**原书写的是共轭，[S] 认为不需要共轭**。本卡片的写法（不带共轭）**跟随 [S]**，
+     与原书相左。⚠ 这一点尤其需要原书核对。
+
+  3. **第五处勘误/疑误依赖**：[S] 提到「his sign error just below (6.6.21)」，
+     但**没说这条在不在官方勘误表上**；**Polchinski 官方勘误表本项目未取得**（Q14）。
+
+  **对下游的要求**：任何引用本卡片的节点只能用「结构」这一层（分解为两个开弦振幅之积、
+  α' → α'/4、带一个三角因子），**不得**使用上式的系数或相位。
+
+  **升级路径（须新建节点）**：核对原书 (6.6.23) 与 (6.6.21) 下方的符号后，
+  新建 spectrum.open-closed-four-point-relation 并给本卡写 superseded_by；
+  按 graph/CLAUDE.md 不得直接修改本卡的 statement。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,62 @@
+id: spectrum.open-string-three-tachyon-amplitude
+kind: proposition
+title: 开弦三 tachyon 树振幅与三个固定位置无关（PSL(2,R) 把三点函数完全定死）
+statement: |
+  在圆盘 D₂（上半平面）上取三个开弦 tachyon 顶点算子 g_o [e^{i k_i · X(y_i)}]（边界正规序，
+  (3.6.25)），插在边界实轴的 y₁, y₂, y₃ 处；按 worldsheet.disk-conformal-killing-group，
+  这三个位置由 PSL(2,R) 固定，Faddeev–Popov 手续给出三个 c 鬼插入
+  （worldsheet.bc-ghost-disk-three-c-correlator），Euler 项给 e^{−λχ}（χ(D₂) = 1）。则：
+
+  **(1)** 振幅的形式为
+    S_{D₂}(k₁; k₂; k₃)
+      = i g_o³ C_{D₂} (2π)²⁶ δ²⁶(Σ_i k_i)
+        |y₁₂|^{1+2α' k₁·k₂} |y₁₃|^{1+2α' k₁·k₃} |y₂₃|^{1+2α' k₂·k₃}
+        + ( k₂ ↔ k₃ ),
+  第二项来自边界上三点的**另一个循环序**（worldsheet.disk-conformal-killing-group (2)）。
+
+  **(2)** 由开弦 tachyon 的质量壳条件 k_i² = 1/α' 与动量守恒 Σ_i k_i = 0 得
+    2α' k_i · k_j = −1   (i ≠ j)，
+  故 (1) 中三个指数 1 + 2α'k_i·k_j **全为零**：振幅与三个位置 y₁, y₂, y₃ **完全无关**，
+  等于一个常数乘 δ²⁶(Σk_i)。
+
+  **(3)** (2) 正是 PSL(2,R) 不变性的直接体现：三点函数被共形对称完全定死，
+  与「固定哪三个点」无关——这是本书里第一处出现该现象。
+
+  **本命题不断言什么**：不给出 (6.4.4) 的显式前因子（两种循环序合并后的常数，本图未核实）；
+  不定 C_{D₂}（那由四点因子化定出，见 spectrum.four-tachyon-factorization-disk-normalization）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.1)–(6.4.4)（三 tachyon 开弦振幅；(6.4.3) 给 2α'k_i·k_j = −1；(6.4.4) 给与 y 无关的结果），p.179"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E97，等级 **L1**（schrans-2020 §6.27–§6.29，
+      笔记 p.299–300，逐页读到）。
+      ⚠ **勘误依赖（抽取记录 Q14 第 5 条）**：[S] 逐字「which is **(6.4.2) taking into account the
+      correction on Joe's errata page**」——即他认为印刷版 (6.4.2) 有误，用的是勘误表更正版。
+      **Polchinski 官方勘误表本项目未能取得**（KITP 三条 URL 全部 404），故「印刷版有误」这一事实
+      只有 schrans-2020 一个来源，本图无法核对更正内容。
+      ⚠ **[S] 的一处转录笔误已订正**：他的 [6.98]/[6.100] 把第二个因子写成 |y₁₂|^{1+2α'k₁·k₃}，
+      按对称性**应为 |y₁₃|**；抽取记录已按 |y₁₃| 修正，本卡片沿用该修正
+      （**这是抽取者的修正，不是 [S] 的原文**）。
+  - ref: schrans-2020
+    loc: "§6.27–§6.29（笔记 p.299–300）（核对源）"
+tags: [spectrum, tree-level, disk, open-string, tachyon, three-point, psl2r, errata-dependent]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E97 建立。
+
+  **⚠ 本卡片依赖两处未核实**：(a) 勘误依赖（见 sources）；(b) [S] 的转录笔误订正。
+  两者都记录在案。结论 (2)(3)「振幅与 y 无关」本身有独立支撑（2α'k_i·k_j = −1 是初等运动学，
+  见 spectrum.mandelstam-invariants-sum-rule 的同类计算），不因这两处而悬空。
+
+  **⚠ 上游 ch5 节点尚未进入 main**：「S-矩阵 = 规范固定路径积分 (5.3.9)」与「FP 手续给出 c 鬼插入」
+  属第 5 章，本批次提交时无节点。推导 gaps 里注明**待 ch5 节点合入后补边**。
+
+  **「+ (k₂ ↔ k₃)」项的来源**是边界三点的两种循环序；抽取记录 E90 在这一点上存在
+  文献歧义（[S] 的逐字句子与转述相反），见 worldsheet.disk-conformal-killing-group 的 notes。
+  本卡片里这一项的存在**反过来是那处歧义的书内旁证**。
+author: curator-polchinski-ch6
+created: "2026-09-11"

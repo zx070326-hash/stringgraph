@@ -1,0 +1,58 @@
+id: spectrum.virasoro-shapiro-amplitude
+kind: proposition
+title: Virasoro–Shapiro 振幅：闭弦四 tachyon 树振幅 = (8πi g_c²/α')(2π)²⁶δ²⁶(Σk)·C(−α_c(u), −α_c(t))
+statement: |
+  闭弦四 tachyon 树振幅（spectrum.closed-string-four-tachyon-integral 的复积分）等于
+    **S_{S₂} = (8π i g_c² / α') (2π)²⁶ δ²⁶( Σ_i k_i ) · C( −α_c(u), −α_c(t) )**   （(6.6.10)），
+  其中
+    **α_c(x) = α' x / 4 + 1**   （闭弦领头 Regge 轨迹），
+    **C(x, y) = 2π B(x, y, 1 − x − y)**,
+    **B(x, y, z) = Γ(x)Γ(y)Γ(z) / ( Γ(x+y) Γ(x+z) Γ(y+z) )**。
+  等价写法（headrick-2008 的形式）：
+    S_{S₂} = i (2π)²⁶ δ²⁶(Σk_i) (16π² g_c²/α') · Γ(a)Γ(b)Γ(c) / ( Γ(a+b)Γ(a+c)Γ(b+c) )，
+    a = −1 − α's/4,  b = −1 − α't/4,  c = −1 − α'u/4。
+  两式等价：a = −α_c(s)、b = −α_c(t)、c = −α_c(u)，且由 α'(s+t+u) = −16 得
+  α_c(s) + α_c(t) + α_c(u) = **−1**，故 c = 1 − a − b；整体因子 2π × (8πi g_c²/α') = 16π² i g_c²/α'。
+
+  **本命题不断言什么**：不断言这是原书 (6.6.10) 的逐字排版形式（见 notes）；
+  不给出极点留数的物理解释；不与开弦振幅作对比（那在 spectrum.open-closed-four-point-relation-weak）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.10)，p.193"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E105，等级 **L1，且是本章表达式层面最硬的一条**：
+      **两个独立二手源给出两种写法，经抽取者验证等价**。
+      - schrans-2020 §6.64（笔记 p.329–331）：完整算出
+        I(a,b) = ∫d²z|z|^{−2a}|1−z|^{−2b} = 2πB(1−a, 1−b, a+b−1)（[6.226]），
+        代入得 [6.228]，并写下 α_c(x) = α'x/4 + 1 与 C(x,y) = 2πB(x,y,1−x−y)（[6.229]），
+        末句「This gives us (6.6.10)」。
+      - headrick-2008 Problem 6.11(b)（PDF p.50）逐字给出 Γ 商形式与 a,b,c 的定义。
+      ⚠ **两者都没有写出「原书 (6.6.10) 的逐字排版形式」**，只是各自给出等价式。
+      抽取记录的建议逐字：「若图节点要写 sources[].loc = §6.6, eq. (6.6.10)，note 应写
+      『表达式经 [S]+[H] 两个独立二手源交叉验证等价，但未核对原书排版』」——本 note 即此。
+  - ref: headrick-2008
+    loc: "Problem 6.11(b)（PDF p.50）：Γ 商写法，逐字"
+    note: 第二独立源（L1）。
+  - ref: schrans-2020
+    loc: "§6.64（笔记 p.329–331）：复积分 I(a,b) 的完整计算与 C(x,y) 的定义（核对源）"
+tags: [spectrum, tree-level, sphere, closed-string, tachyon, virasoro-shapiro, four-point, beta-function]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E105 建立。
+
+  **与 Veneziano 的对比（记账层面）**：抽取记录明写「**E105（Virasoro–Shapiro）是本章表达式层面
+  最可靠的一条**（[S]+[H] 两个独立写法经抽取者验证等价），可以先行建节点；
+  **E99（Veneziano）反而最弱**（没有任何源抄出 (6.4.23) 的完整表达式）」。
+  这正是本图给 Virasoro–Shapiro 建**完整形式**、给 Veneziano 只建**弱形式**的原因。
+  ⚠ 这条不对称是「文献核实状况」的反映，不是「哪条结果更可靠」的判断。
+
+  **⚠ 一处二手源内部矛盾已订正**：[S] 的 [6.236] 写「we have again used
+  α_c(s)+α_c(t)+α_c(u) = 1」，而由他自己的脚注 8（α'(s+t+u) = −16）与 α_c 的定义得
+  该和 = −4 + 3 = **−1**。本卡片采 **−1**（与 spectrum.mandelstam-invariants-sum-rule 一致）。
+  抽取记录 E106 明记「**别照抄这句**」。这不影响 (6.6.12) 的幂次结论。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,45 @@
+id: math.mobius-group-sharply-three-transitive--via-cross-ratio
+target: math.mobius-group-sharply-three-transitive
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6（(6.6.4) 附近的 SL(2,C) 三点固定）、§6.4 开头（PSL(2,R) 与两种循环序）"
+    note: |
+      抽取记录 #E104/#E90，L1。来源只使用该事实，不证明；下面是 curator 写出的标准构造性证明。
+summary: |
+  **(1) 存在性与唯一性（复情形）。** 存在性：给定互不相同的 z₁,z₂,z₃，显式的 Möbius 变换
+    T(z) = ( (z − z₁)(z₂ − z₃) ) / ( (z − z₃)(z₂ − z₁) )
+  把 (z₁,z₂,z₃) 送到 (0,1,∞)（约定 ∞ 的像按极限理解）；对 (w₁,w₂,w₃) 作同样的 S，
+  则 S^{−1} ∘ T 把 z_i 送到 w_i。
+  唯一性：若 g ∈ PSL(2,C) 固定 0, 1, ∞，写 g(z) = (αz+β)/(γz+δ)；
+  g(∞) = ∞ ⇒ γ = 0；g(0) = 0 ⇒ β = 0；g(1) = 1 ⇒ α = δ；故 g = id（在 PSL 中）。
+  于是稳定子平凡，作用单可迁。交叉比的不变性由此立得。
+
+  **(2) 实情形。** PSL(2,R) 保持 H：对实系数，Im g(z) = Im z / |γz + δ|² 与 Im z 同号。
+  它把 ∂H 映到 ∂H，且作为 H 的**保定向**共形自同构，在边界圆 ∂H ≅ S¹ 上诱导保定向同胚，
+  因而保持循环序。
+  给定 ∂H 上互不相同的实三点 (z₁,z₂,z₃)，(1) 的显式公式 T(z) 在 z_i 全实时系数全实，
+  即 T ∈ PGL(2,R)，其矩阵行列式为 det T = (z₂ − z₃)(z₂ − z₁)(z₁ − z₃) 的一个非零实倍数，
+  **符号是三点循环序的不变量**：与 (0,1,∞) 同循环序时 det > 0，可整体乘正数归一到 det = 1，
+  T ∈ PSL(2,R)；异循环序时 det < 0，整体归一化改变不了符号（乘 λ 后 det 变 λ²det），
+  T ∉ PSL(2,R)。故 PSL(2,R) 恰能把与 (0,1,∞) 同序的三点送到 (0,1,∞)，唯一性同 (1)。
+  两个循环序不能互换（保定向），故互不相同有序三元组的集合恰有两条轨道。
+gaps:
+  - "**无数学文献来源**：sources 里只有物理书中使用该事实的位置。rigorous 的依据是
+     STATUS_LEVELS 的初等可复核例外（前提完整 + 有限步初等计算 + reviewer 复核记录，见 notes）。"
+  - "**(2) 中「保定向共形自同构 ⇒ 边界保定向同胚 ⇒ 保循环序」这一步写成了直观论证**：
+     严格处理可直接用 PSL(2,R) 在 ∂H 上的显式作用验算顺序判别式；summary 里的 det 符号论证
+     已给出等价的代数版本（det 的符号 = 循环序不变量），保定向的几何说法只是读法。"
+  - "不覆盖 Liouville 型结论：本推导**不**证明 PSL(2,C)/PSL(2,R) 穷尽了 P¹/H 的全部共形自同构。"
+notes: |
+  reviewer-verified: reviewer-ch6, 2026-09-11
+  reviewer-ch6 复核 (1)(2) 并订正了 (2) 原稿的一处错误：原写「必要时整体归一化使行列式为正」，
+  但 det 的符号在整体缩放下不变（λ²），它是循环序不变量：同序 det > 0 ⇒ T ∈ PSL(2,R)，
+  异序 det < 0 ⇒ T ∉ PSL(2,R)。已按此改写。
+
+  本推导被 worldsheet.disk-conformal-killing-group 用来裁定一处文献歧义（[S] 的
+  「linked by a PSL(2,R) transformation」）；复核后 E90 的取舍成立。
+author: curator-polchinski-ch6
+created: "2026-09-11"

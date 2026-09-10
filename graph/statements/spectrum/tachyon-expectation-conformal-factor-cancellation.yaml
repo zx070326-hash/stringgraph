@@ -1,0 +1,46 @@
+id: spectrum.tachyon-expectation-conformal-factor-cancellation
+kind: proposition
+title: tachyon 期望值中的共形因子 ω 与非普适项只在动量守恒 + 质量壳条件下相消
+statement: |
+  在 S₂ 上计算 n 个重整化 tachyon 顶点算子的期望值时，Green 函数含一个**非普适**部分
+  f(z_i, z̄_i)（依赖度规的共形因子 ω 与球面上的规范选择），Gauss 积分的指数里相应出现
+  形如 Σ_i k_i² ω(z_i) 与 (Σ_i k_i) · (…) 的项。则：
+
+  **(1)** 这些项在 **Σ_i k_i = 0**（动量守恒，由零模积分强制，见
+  spectrum.sphere-zero-mode-momentum-conservation）与**所有外线满足同一个质量壳条件**
+  （tachyon：α' k_i² = 常数）时**全部相消**，只剩普适因子 ∏_{i<j}|z_ij|^{α'k_i·k_j}。
+
+  **(2)** 等价的读法：**期望值的 Weyl 不变性（对 ω 的独立性）不是恒成立的，
+  它是 on-shell 条件 + 动量守恒的推论。** 顶点算子只有在质量壳上才是权 (1,1) 的主场，
+  也只有这时把它插进路径积分才给出 Weyl 不变（因而规范固定后有意义）的结果。
+
+  **本命题不断言什么**：不给出 f 的显式表达式；不断言一般（非指数型）顶点算子的对应结论；
+  不涉及 D₂ 的边界正规序版本。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.2, eq. (6.2.17) 及其推导，p.171"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E93，等级 **L1**：schrans-2020 §6.12（笔记 p.286）
+      用 n = 3 显式验证并逐字强调「the f contribution vanishes by momentum conservation Σk_i = 0,
+      **as enforced by the delta function, which itself came from the zero mode**」。
+      抽取记录明写：「『振幅的 Weyl 不变性（ω 相消）依赖 on-shell 条件 + 动量守恒』
+      是一条独立的可建节点的陈述」——本卡片即此。
+      ⚠ 原书是否把这一点单独说出来**未核实**；(2) 的措辞是 curator 依 [S] 的验算写成的。
+tags: [spectrum, tree-level, sphere, weyl-invariance, mass-shell, momentum-conservation, tachyon]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E93 的备注建立（抽取者建议单独建节点）。
+
+  **为什么值得单列**：这是第 6 章里「质量壳条件」与「世界面规范不变性」相接的地方——
+  弦振幅之所以只对 on-shell 外线有定义，根源就在这条。它也解释了为什么本图不能把
+  (6.2.17) 当作对任意 k_i 成立的恒等式。
+
+  ⚠ 与 spectrum.vertex-operator-geodesic-renormalization 的 notes 里记的那条记号陷阱同源：
+  普通正规序 :e^{ik·X}: 与重整化算符 [e^{ik·X}]_r 之间差的正是
+  exp(−(α'/4)Σ_i k_i² ω(z_i))，即本卡片说的那一类项（抽取记录 E95）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

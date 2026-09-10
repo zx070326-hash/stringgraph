@@ -1,0 +1,52 @@
+id: cft.tensor-two-and-three-point-functions--via-mobius-invariance
+target: cft.tensor-two-and-three-point-functions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: cft.one-and-two-point-functions-mobius-fixed
+    note: 提供两点函数的幂次形式（(2)），本推导在其上再加特殊共形变换得选择定则 (1)。
+  - id: worldsheet.primary-field
+    note: 提供主场的变换律。
+  - id: math.mobius-group-sharply-three-transitive
+    note: |
+      提供 (2) 与 (3) 的计数依据：三点可被唯一固定（故三点函数无剩余自由度），
+      四点则剩一个不变量（交叉比）。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: 提供 PSL(2,C) 的三个生成元，(1) 用的 z ↦ z + ε(z−z₁)(z−z₂) 是它们的组合。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.7, eq. (6.7.5)/(6.7.6)/(6.7.7)，p.199"
+    note: |
+      抽取记录 #E111，L1（schrans-2020 §6.75–§6.77，笔记 p.342–345）。
+      ⚠ [S] 的技术手法（保持 Λ 有限、用 Mathematica 算 Jacobian）与原书可能不同。
+summary: |
+  **(1) 选择定则。** 取无穷小共形变换 δz = ε(z − z₁)(z − z₂)（这是 a₀,a₁,a₂ 的线性组合，
+  故在 PSL(2,C) 内），它同时固定 z₁ 与 z₂，但两点处的**导数**不同：
+  ∂δz|_{z₁} = ε(z₁ − z₂)、∂δz|_{z₂} = ε(z₂ − z₁)，符号相反。
+  两点函数在该变换下的变分 ∝ (h_i ∂δz|_{z₁} + h_j ∂δz|_{z₂})⟨O_iO_j⟩
+  = ε(z₁ − z₂)(h_i − h_j)⟨O_iO_j⟩。不变性 ⇒ (h_i − h_j)⟨O_iO_j⟩ = 0。
+
+  **(2) 三点函数。** Möbius 可把 (z₁,z₂,z₃) 唯一送到 (0,1,∞)，故关联函数的坐标依赖
+  完全由三个算子拾取的 Jacobian 因子决定；解相应的方程组（三个权、三个 z_ij）
+  得到唯一的幂次组合 z₁₂^{h_k−h_i−h_j}z₁₃^{h_j−h_i−h_k}z₂₃^{h_i−h_j−h_k}，
+  剩下的常数就是 C_{ijk}。
+
+  **(3) 四点函数。** 四点时 Möbius 只能固定三个，剩一个不变量——交叉比 x。
+  于是 ⟨O₁O₂O₃O₄⟩ = （幂次前因子）× G(x, x̄)，G 未定。
+gaps:
+  - "**「关联函数 Möbius 不变」这一前提无节点**（与 cft.one-and-two-point-functions-mobius-fixed
+     同一缺口）：本图没有球面上整体共形 Ward 恒等式的节点。这是本推导标 physical-argument 的
+     首要理由。"
+  - "**(1) 的变分公式没有严格化**：「关联函数在无穷小共形变换下的变分 = 各插入点权因子之和」
+     是 Ward 恒等式的推论，本图的 worldsheet.ward-identity 是局部形式，未接到这里。"
+  - "**(2) 的『解方程组得唯一幂次』没有写出**：本推导只说存在唯一解，未验算。
+     这一步是初等的（三个线性方程三个未知数），**可由 reviewer 复核**。"
+  - "**无穷远点的处理未核实**：[S] 保持截断 Λ 有限并用 Mathematica，自述这不是「应该」的做法；
+     **原书如何处理 z₃ → ∞ 未知**（抽取记录 E111、Q17 的同类问题）。"
+  - "**(3) 中『G 受更一般共形变换约束』只作定性陈述**：自举方程本身在本图与本推导中都没有写出。"
+  - "**只有二手源**（L1）：原书未核对。"
+notes: |
+  (2) 的幂次解是有限步线性代数，若 reviewer 复核可按 STATUS_LEVELS 的「初等可复核」例外
+  升级**那一步**；但第一条 gap（Möbius 不变性无节点）会继续把整条推导压在 physical-argument。
+author: curator-polchinski-ch6
+created: "2026-09-11"

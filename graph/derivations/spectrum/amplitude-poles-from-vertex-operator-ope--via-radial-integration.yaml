@@ -1,0 +1,50 @@
+id: spectrum.amplitude-poles-from-vertex-operator-ope--via-radial-integration
+target: spectrum.amplitude-poles-from-vertex-operator-ope
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.operator-product-expansion
+    note: |
+      提供 OPE 本身（(6.6.24) 只是把两个指数算子的 OPE 按 z₁₄ 展开）。
+      ⚠ 该节点的 OPE 收敛性未证（lead 裁决 2026-09-10），本推导继承该缺口。
+  - id: worldsheet.free-scalar-propagator
+    note: 提供 |z₁₄|^{α'k₁·k₄} 这个前因子的幂次（两个指数算子缩并的结果）。
+  - id: spectrum.closed-string-four-tachyon-integral
+    note: 提供被展开的积分（对 z₄ 在复平面上积分），本推导在其被积函数上做 OPE。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      标 inferred：提供「−u = 4/α' 就是闭弦 tachyon 上壳」与更高 N 的激发态质量。
+      来源（§6.6）不回指 §1.4 的闭弦质量公式。
+    convention_map: conv.metric-mostly-plus 下 u = −(k₁+k₄)²，故 α'm² = −4 ⟺ (k₁+k₄)² = 4/α'。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.24)/(6.6.25)，p.195"
+    note: 抽取记录 #E109，L1（schrans-2020 §6.72，笔记 p.339–340）。
+summary: |
+  **(1) 角向积分。** 写 z₁₄ = r e^{iθ}，d²z₁₄ ∝ r dr dθ。
+  OPE 展开的第 (n, n̄) 项带因子 z₁₄^n z̄₁₄^{n̄} = r^{n+n̄} e^{i(n−n̄)θ}。
+  θ 从 0 到 2π 积分给 2π δ_{n,n̄}：**只有 n = n̄ 的项存活**。
+  这与闭弦谱的能级匹配 N = Ñ 是同一件事在振幅里的表现。
+
+  **(2) 径向积分与极点。** 存活项的径向积分形如
+    ∫₀ dr  r^{α' k₁·k₄ + 2n + 1}，
+  在 r → 0 端按解析延拓给出 1/(α'k₁·k₄ + 2n + 2) 型单极点。
+  n = 0 给 1/(α'k₁·k₄ + 2)，即 α'k₁·k₄ = −2；配 (k₁+k₄)² = k₁² + k₄² + 2k₁·k₄
+  与 α'k_i² = 4 得 (k₁+k₄)² = 4/α'，即 −u = 4/α'：u 通道闭弦 tachyon 上壳。
+  n ≥ 1 给出 α'm² = −4 + 4n 的激发态塔。s、t 通道同理（把 z₄ 靠近其它顶点）。
+gaps:
+  - "**OPE 收敛性未证**（lead 裁决 2026-09-10 的标准表述）：把 OPE 级数逐项积分、
+     并把「级数的每一项各给一个极点」当作振幅的解析结构，需要级数在积分区域上收敛且可逐项积分。
+     来源与本图都没有论证。这是本推导标 physical-argument 的首要理由。"
+  - "**逐项积分与解析延拓的交换未论证**：每一项的径向积分在不同的参数区域收敛，
+     把它们各自延拓后再求和，与先求和再延拓是否一致，本推导不处理。"
+  - "**质量壳条件的搬运**（见第四条依赖的 inferred 说明）。"
+  - "**路径积分测度未定义**（本批次共有）；本推导操作的对象是路径积分定义的期望值。"
+  - "**(6.6.25) 的具体内容本图没有写出**：抽取记录只提到式号，没有抄出表达式。"
+notes: |
+  这条与 spectrum.four-tachyon-factorization-disk-normalization 是同一物理现象的两种看法
+  （端点发散 vs OPE 幂次）。两者都未严格化，但它们**互相独立地**给出同一批极点位置，
+  可作为彼此的一致性检验。
+author: curator-polchinski-ch6
+created: "2026-09-11"

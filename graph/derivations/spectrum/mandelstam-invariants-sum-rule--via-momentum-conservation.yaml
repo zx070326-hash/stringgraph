@@ -1,0 +1,42 @@
+id: spectrum.mandelstam-invariants-sum-rule--via-momentum-conservation
+target: spectrum.mandelstam-invariants-sum-rule
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.open-string-mass-shell
+    inferred: true
+    note: |
+      标 inferred：提供开弦 tachyon 的 α'm² = −1（取 N = 0、a = 1）。
+      该节点是光锥量子化的质量壳公式，来源（§1.3）与本命题的来源（§6.4）不互相引用；
+      「把光锥谱的质量壳条件用作协变振幅的外线条件」本图无节点承载。
+    convention_map: conv.metric-mostly-plus 下 m² = −k²，故 α'm² = −1 ⟺ α'k² = 1。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      标 inferred：提供闭弦 tachyon 的 α'm² = −4（N = Ñ = 0）。理由同上。
+    convention_map: conv.metric-mostly-plus 下 α'm² = −4 ⟺ α'k² = 4。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.7)，p.179–183；闭弦情形见 §6.6（[S] §6.66 脚注 8：α'(s+t+u) = −16）"
+    note: 抽取记录 #E98/#E106，L1（schrans-2020 §6.30–§6.37、§6.66）。
+summary: |
+  展开定义并用 Σ_i k_i = 0：
+    s + t + u = − [ (k₁+k₂)² + (k₁+k₃)² + (k₁+k₄)² ]
+              = − [ 3k₁² + k₂² + k₃² + k₄² + 2 k₁·(k₂ + k₃ + k₄) ]。
+  由 k₂ + k₃ + k₄ = −k₁ 得 2k₁·(k₂+k₃+k₄) = −2k₁²，于是
+    s + t + u = − [ k₁² + k₂² + k₃² + k₄² ] = − Σ_i k_i² = Σ_i m_i²
+  （末步用 conv.metric-mostly-plus 的 m² = −k²）。
+  代入 α'k_i² = 1（开弦 tachyon）得 −4/α'；代入 α'k_i² = 4（闭弦 tachyon）得 −16/α'。
+gaps:
+  - "**质量壳条件的搬运未被节点承载**（见两条依赖的 inferred 说明）：从光锥量子化的谱
+     到协变振幅外线的 on-shell 条件，本图没有节点。这是本图从第 1 章到第 6 章之间的一处系统性缺环，
+     值得 lead 记入待建清单。"
+  - "**「全部取入射约定」这一符号约定未核对原书**：若某些腿取出射，s、t、u 的定义相差符号，
+     结论形式不变但表达式的读法要改。"
+notes: |
+  reviewer-verified: reviewer-ch6, 2026-09-11
+  复核对象：summary 的三行代数。升级依据：初等可复核例外。另有 Lean 推导 --via-lean（formalized）。
+
+  质量壳条件搬运的 gap 不因复核消失，它需要一个新节点（lead 已记入 ROADMAP 待建）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

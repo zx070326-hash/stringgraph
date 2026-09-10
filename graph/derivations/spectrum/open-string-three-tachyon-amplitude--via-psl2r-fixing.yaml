@@ -1,0 +1,81 @@
+id: spectrum.open-string-three-tachyon-amplitude--via-psl2r-fixing
+target: spectrum.open-string-three-tachyon-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.disk-conformal-killing-group
+    note: 提供 κ(D₂) = 3（三点可固定）与两种循环序（「+ (k₂↔k₃)」项的来源）。
+  - id: worldsheet.bc-ghost-disk-three-c-correlator
+    note: 提供固定三点后 FP 手续留下的三个 c 插入的期望值 C^g_{D₂}y₁₂y₁₃y₂₃。
+  - id: math.mobius-three-point-fixing-jacobian
+    note: |
+      提供与上一条同形的 Jacobian |y₁₂y₁₃y₂₃|：两者相乘/相消正是指数里那个 +1
+      （|y_ij|^{1+2α'k_i·k_j} 中的 1）的算术来源。
+  - id: spectrum.vertex-operator-geodesic-renormalization
+    note: |
+      提供边界正规序的减除方案（(6.2.34)/(6.2.35) 是其边界版本，本图只在该卡片里提及其存在）。
+      ⚠ 边界版本的表达式在本图中没有节点，见 gaps。
+  - id: worldsheet.open-string-mass-shell
+    inferred: true
+    note: |
+      标 inferred：提供开弦 tachyon 的质量壳 α'm² = −1，配 mostly-plus 的 m² = −k² 即 k² = 1/α'，
+      这是 (2) 里 2α'k_i·k_j = −1 的输入。该节点来自**光锥量子化**（§1.3），
+      与本推导来源（§6.4）不互相引用；把光锥谱的质量壳搬到协变振幅外线上本图无节点。
+    convention_map: |
+      conv.metric-mostly-plus 下 m² = −k²，故 α'm² = −1 ⟺ α'k² = 1。
+      抽取记录 E97 直接写 k_i² = 1/α'，与本图约定一致。
+  - id: worldsheet.euler-number-weyl-invariance
+    inferred: true
+    note: |
+      标 inferred：提供 Euler 项 e^{−λχ} 中 χ 的拓扑不变性（χ(D₂) = 1）。
+      来源在 §6.4 只用 e^{−λχ} 这个因子而不回指该结果，故标 inferred。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep 声明 conv.worldsheet-lorentzian（第 1–3 章的洛伦兹
+      世界面），本推导用 conv.worldsheet-euclidean（第 6 章的欧氏 D₂）。
+      χ = (1/4π)∫ g^{1/2}R + (1/2π)∫ k 是**拓扑量**，其值只依赖曲面的拓扑，不依赖度规的号差；
+      Wick 旋转下 (−γ)^{1/2}R_γ ↔ g^{1/2}R_g（conv.worldsheet-euclidean 的字典 (a)），
+      故 χ(D₂) = 1 在两侧相同。
+      ⚠ **该等同本图没有节点承载**：与 worldsheet.open-string-doubling-trick--via-boundary-condition
+      的同类缺口同源（docs/ROADMAP.md「待建：欧氏 Polyakov 作用量定义卡……让 Wick 旋转
+      从约定节点变成有陈述承载」）。本边继承该缺口。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, eq. (6.4.1)–(6.4.4)，p.179；顶点算子归一化 g_o e^{ik·X}(y) 出自 §3.6 eq. (3.6.25)"
+    note: |
+      抽取记录 #E97，L1（schrans-2020 §6.27–§6.29，笔记 p.299–300）。
+      ⚠ 勘误依赖：[S] 说 (6.4.2) 按官方勘误表更正；**勘误表本项目未取得**（Q14）。
+      ⚠ [S] 的 [6.98]/[6.100] 有一处转录笔误（|y₁₂| 应为 |y₁₃|），抽取者已订正。
+summary: |
+  **(1) 组装。** 按第 5 章的规范固定路径积分（本图暂无节点，见 gaps），D₂ 上的三点振幅 =
+  e^{−λχ} × ⟨三个 c 鬼⟩_{D₂} × ⟨三个重整化 tachyon 顶点算子⟩_{D₂}，坐标由 PSL(2,R) 固定。
+  X 部门给出 δ²⁶(Σk) ∏_{i<j}|y_ij|^{2α'k_i·k_j}（开弦边界上的传播子是体内的两倍，故指数是
+  2α'k_i·k_j 而非 α'k_i·k_j）；鬼场部门给出 y₁₂y₁₃y₂₃。两者相乘即 (6.4.2) 中
+  |y_ij|^{1+2α'k_i·k_j} 的形式，前面配 i g_o³ C_{D₂}(2π)²⁶。
+  边界三点的第二个循环序给出 (k₂ ↔ k₃) 项。
+
+  **(2) 指数为零。** 动量守恒 Σ_i k_i = 0 给 2k_i·k_j = (k_i + k_j)² − k_i² − k_j² = k_l² − k_i² − k_j²
+  （l 是第三条腿），代入 k² = 1/α' 得 2α'k_i·k_j = 1 − 1 − 1 = −1，故 1 + 2α'k_i·k_j = 0。
+  三个因子全为 1，振幅与 y_i 无关。
+
+  **(3) 读法。** 三点函数被 PSL(2,R) 完全定死：能被共形对称固定的自由度恰好等于顶点算子的个数，
+  没有剩余积分，结果只依赖动量。
+gaps:
+  - "**上游 ch5 节点尚未进入 main**：主公式 (5.3.9)、FP 手续、以及「固定 CKV 参数 ⇒ 乘 c 鬼插入」
+     属第 5 章（抽取记录 E77/E78/E80）。本推导把它们写在 summary 里作假设。
+     **待 ch5 节点合入后补 depends_on 边**（与 E49 的处理相同）。"
+  - "**开弦（D₂）的 X 部门期望值在本图没有节点**：(6.2.32)/(6.2.33)（D₂ 的 Green 函数与
+     tachyon 期望值）与 (6.2.34)/(6.2.35)（边界正规序）在抽取记录里只到 **L2**（只读到目录条目），
+     故本推导第 (1) 步中『X 部门给出 ∏|y_ij|^{2α'k_i·k_j}』**没有节点也没有表达式级的核实**，
+     只有 (6.4.2) 的最终形式作旁证。这是本推导最实质的缺口。"
+  - "**勘误依赖（Q14 第 5 条）**：[S] 称印刷版 (6.4.2) 有误、他按官方勘误表更正；
+     **勘误表未取得**，本图无法核对。"
+  - "**[S] 的转录笔误**：其 [6.98]/[6.100] 把第二个因子写成 |y₁₂|^{1+2α'k₁·k₃}，
+     抽取者按对称性订正为 |y₁₃|。本推导沿用订正版，**该订正未经第二源确认**。"
+  - "**(6.4.4) 的显式前因子未核实**：两种循环序合并后的常数（是否恰为 2 倍）本图不写出。"
+  - "**路径积分测度未定义**（本批次共有）：status 上限 physical-argument。"
+  - "**质量壳条件的搬运**（见第五条依赖的 inferred 说明）：光锥谱 ⇒ 协变振幅外线，本图无节点。"
+notes: |
+  reviewer-verified: reviewer-ch6, 2026-09-11（仅第 (2) 步：2α'k_i·k_j = −1 ⇒ 1 + 2α'k_i·k_j = 0 的运动学）
+  整条推导受 (1) 的路径积分组装限制，status 仍为 physical-argument。
+author: curator-polchinski-ch6
+created: "2026-09-11"

@@ -1,0 +1,46 @@
+id: math.mobius-group-sharply-three-transitive
+kind: proposition
+title: PSL(2,C) 在黎曼球三点组上单可迁；PSL(2,R) 保持边界循环序，两种循环序是两条轨道
+statement: |
+  **(1)（复情形）** PSL(2,C) = SL(2,C)/{±1} 通过 z ↦ (αz + β)/(γz + δ) 作用在黎曼球
+  P¹ = C ∪ {∞} 上。该作用在**互不相同的有序三元组**上**单可迁（sharply 3-transitive）**：
+  对任意两组互不相同的三点 (z₁,z₂,z₃) 与 (w₁,w₂,w₃)，存在**唯一**的 g ∈ PSL(2,C) 使 g(z_i) = w_i。
+  特别地，任意三个不同点可以（且只能以唯一方式）被送到 (0, 1, ∞)；
+  不变量是交叉比 x = (z₁ − z₂)(z₃ − z₄) / ((z₁ − z₃)(z₂ − z₄))。
+
+  **(2)（实情形）** PSL(2,R)（同式但 α,β,γ,δ 为实、αδ − βγ = 1）把上半平面 H 映到 H、
+  把 ∂H = R ∪ {∞} 映到自身，且在 ∂H ≅ S¹ 上**保持定向**，因而**保持三点的循环序**。
+  它在「∂H 上按给定循环序排列的互不相同三元组」的集合上**单可迁**；
+  于是 ∂H 上互不相同有序三元组的集合在 PSL(2,R) 下恰好分成**两条轨道**
+  （两个循环序），(y₁,y₂,y₃) 与 (y₁,y₃,y₂) 属不同轨道。
+
+  **本命题不断言什么**：不涉及任何 Weyl/共形因子、测度或 Jacobian
+  （那在 math.mobius-three-point-fixing-jacobian）；不断言 PSL(2,C)、PSL(2,R) 是相应曲面的
+  **全部**共形自同构群（那需要 Liouville 型定理，本图无节点）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6（用 SL(2,C) 把闭弦四点的 z₁,z₂,z₃ 固定为 0,1,∞，(6.6.4) 附近，p.192–193）与 §6.4 开头（用 PSL(2,R) 固定 D₂ 边界三点，两种循环序）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E104、#E90，等级 L1（内容出自 schrans-2020
+      §6.60–§6.63、§6.27，笔记 p.299、p.326–328，逐页读到）。
+      ⚠ 来源只**使用**这条群论事实（「固定 z₁ = 0, z₂ = 1, z₃ = ∞」），**没有陈述或证明**它；
+      本卡片是 curator 为承载该步骤而拆出的数学节点，**本图目前没有数学文献来源**，见 notes。
+tags: [math, mobius, psl2c, psl2r, group-action, cross-ratio, cyclic-order]
+notes: |
+  由 curator 于 2026-09-11 拆出，用途有二：
+  (a) 承载第 6 章一切「用共形 Killing 群固定三个顶点算子坐标」的步骤
+      （spectrum.closed-string-four-tachyon-integral、cft.three-point-function-mobius-fixed 等）；
+  (b) 裁定抽取记录 E90 的一处**文献歧义**——[S] 的逐字句子说 D₂ 边界三点的两种排法
+      「are linked by a PSL(2,R) transformation」，而 (2) 说它们属**不同轨道**。
+      本图按 (2) 写，理由见 worldsheet.disk-conformal-killing-group 的 notes。
+
+  **⚠ 为什么不是 rigorous**：(1) 与 (2) 都是经典结果（任何黎曼曲面/双曲几何教材都有），
+  但本图**没有登记任何数学来源**，sources 里唯一的条目是**物理书里使用该事实的位置**。
+  按 docs/STATUS_LEVELS.md，这既不满足「数学文献来源」也没有 reviewer 复核记录，
+  故取 physical-argument。**升级路径**：researcher 登记一本复分析/黎曼曲面教材
+  （Ahlfors 复分析中的线性变换与交叉比一章，或 Beardon 的离散群几何第 4 章）并核对定理号；
+  或 reviewer 按「初等可复核」例外复核推导里的显式构造。
+  **本次没有擅自登记新文献**（literature/sources.bib 当前被另一名 curator 的 claim 占用，
+  且新条目需先核对位置）。
+author: curator-polchinski-ch6
+created: "2026-09-11"

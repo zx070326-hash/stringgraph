@@ -1,0 +1,68 @@
+id: worldsheet.tree-level-worldsheet-topologies
+kind: definition
+status: rigorous
+title: 树级世界面的三个拓扑 S₂、D₂、RP₂ 及其复坐标片
+statement: |
+  本卡片固定树级（χ > 0）闭/开/无取向世界面的复坐标描述，供第 6 章一切树级振幅使用。
+  取欧氏世界面与复坐标（conv.worldsheet-euclidean、conv.worldsheet-complex-coords）。
+
+  **(1) 球面 S₂。** 一张复平面不足以覆盖 S₂（差无穷远点），须用两片球极投影坐标：
+  由北极投影得 z ∈ C，由南极投影得 u ∈ C，重叠区（两极之外）上过渡函数为
+    u = 1/z,      因而 δu = − z^{−2} δz。
+  「z = ∞」这一点是指 **u 片的原点 u = 0**；一切「把顶点算子放到无穷远」的说法都按此定义。
+
+  **(2) 圆盘 D₂。** 在 S₂ 上作认同 z ∼ 1/z̄。该认同的不动点集是单位圆 |z| = 1，
+  故商空间是**带边**曲面，即二维圆盘；它共形等价于上半平面
+    H = {z ∈ C : Im z ≥ 0}，边界为实轴 Im z = 0。
+  本图此后一律用上半平面代表 D₂，开弦顶点算子插在实轴上（坐标记作 y ∈ R）。
+
+  **(3) 射影平面 RP₂。** 在 S₂ 上作认同 z ∼ −1/z̄。该认同**无不动点**，
+  故商空间**无边界**且**不可定向**，即实射影平面。
+
+  三者的 Euler 数分别为 χ(S₂) = 2、χ(D₂) = 1、χ(RP₂) = 1
+  （worldsheet.worldsheet-euler-number；这里只记录取值，不重新论证）。
+
+  **本卡片不断言什么**：不断言这三者穷尽 χ > 0 的曲面；不断言它们上的模空间为空
+  （μ = 0 是 Riemann–Roch 的结论，属第 5 章，本图尚无节点，见 notes）；
+  不给出任何度规，只给复结构与坐标片。
+uses:
+  - worldsheet.worldsheet-euler-number
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1（p.166 起）：S₂ 的两片坐标与过渡函数 u = 1/z；D₂ = S₂ 上 z ∼ 1/z̄ ≅ 上半平面；RP₂ = S₂ 上 z ∼ −1/z̄。**式号未核实**"
+    note: |
+      literature/extractions/polchinski-1998-v1.md#E88，等级 **L1（内容）/ L0（式号）**：
+      内容出自 schrans-2020 伴读笔记 §6.1/§6.3/§6.4（笔记 p.275–278，抽取者逐页读到页图），
+      但 [S] 这三节标题**都不带式号**（按 [S] 体例 = 他自己补的几何背景），
+      故「u = 1/z 写在原书哪一式」**没有锚点**。唯一的间接锚点：[S] §6.2 正文引 **(6.1.4a)**
+      为 δu = −z^{−2}δz，可见 (6.1.4) 附近是坐标片/过渡函数段落。
+      ⚠ L1 只保证「[S] 这么写」，不保证 Polchinski 原书这么写；原书正文本项目至今未取得
+      （抽取记录 §0 与 §5.0）。
+  - ref: schrans-2020
+    loc: "§6.1、§6.3、§6.4（笔记 p.275–278）：本卡片内容的实际读取来源（核对源，非原始来源）"
+    note: |
+      按 lead 裁决（docs/ROADMAP.md 2026-09-10）：个人笔记类来源可作核对源写进 source note，
+      不得单独承载论证。本卡片是定义卡，其数学内容（两片覆盖球面、对合的不动点集）
+      是标准复几何，不依赖该笔记的论证。
+tags: [worldsheet, tree-level, sphere, disk, projective-plane, complex-geometry, riemann-surface]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 E88 建立（Polchinski 第 6 章批次）。
+
+  **为什么 status = rigorous**：卡片内容是复流形的标准构造（P¹ 的两张仿射卡、对合商），
+  数学上精确、与路径积分无关，故按 docs/STATUS_LEVELS.md 取 rigorous（未形式化）。
+  ⚠ 但它会把下游压到自身水平：任何依赖它的振幅节点仍受路径积分测度未定义的限制而更低。
+
+  **与第 5 章的接口（待补边）**：χ > 0 ⇒ μ = 0（无模）、以及 κ（CKV 个数）由 Riemann–Roch
+  κ − μ = 3χ 给出，都属第 5 章（抽取记录 E75/E76），另一名 curator 正在建这些节点，
+  本批次提交时**尚未进入 main**。故本卡片只记录 χ 的取值，κ、μ 的论证放在
+  worldsheet.sphere-conformal-killing-group 与 worldsheet.disk-conformal-killing-group 的
+  推导里，并在那里标 inferred + gap，**待 ch5 节点合入后补边**。
+
+  **RP₂ 的 Green 函数（(6.2.38)）本图不建节点**：[S] 明说他认为原书该式有误，且这一条
+  **不在** Polchinski 官方勘误表上（抽取记录 E95、Q14）。在原书与勘误表都取不到的情况下
+  建节点会把一条未经证实的第三方更正固化进图，故本批次跳过，列入报告的「未做条目」。
+author: curator-polchinski-ch6
+created: "2026-09-11"

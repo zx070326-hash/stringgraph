@@ -1,0 +1,56 @@
+id: spectrum.sphere-normalization-from-factorization--via-tachyon-pole-factorization
+target: spectrum.sphere-normalization-from-factorization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.closed-string-four-tachyon-integral
+    note: 提供带 z₄ 积分的四点表达式与前因子 i g_c⁴ C_{S₂}，本推导对它取 s 通道极点留数。
+  - id: spectrum.four-tachyon-factorization-disk-normalization
+    inferred: true
+    note: |
+      标 inferred：提供「端点发散 = 中间态极点；留数 = 两个三点振幅 × 传播子」这套手法的开弦版本。
+      来源把 (6.6.7)/(6.6.8) 说成与 (6.4.11)–(6.4.14) 「同样的」计算而不重复细节，
+      本图没有单独的闭弦三点振幅节点（[S] 逐字「no point elaborating」），故因子化右端只能类比开弦。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 α'(s+t+u) = −16，把 |z₄| → ∞ 处的幂次 −α'(u+t)/2 − 8 改写成 α's/2。
+  - id: math.euler-beta-integral
+    note: |
+      提供「端点发散按亚纯延拓表现为单极点」的机制（|z₄| → ∞ 处取径向积分后是 Beta 型端点）。
+  - id: worldsheet.closed-string-mass-formula
+    inferred: true
+    note: |
+      标 inferred：提供 α's = −4 就是闭弦 tachyon 上壳这一识别（α'm² = −4）。
+      该节点出自光锥量子化（§1.4），§6.6 不回指它。
+    convention_map: conv.metric-mostly-plus 下 s = −(k₁+k₂)² = m²_int（中间态质量的平方），故 α'm² = −4 ⟺ α's = −4。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.7)/(6.6.8)，p.192–193"
+    note: 抽取记录 #E104，L1（schrans-2020 §6.62–§6.63，笔记 p.327–328）。
+  - ref: headrick-2008
+    loc: "Problem 6.11（PDF p.49）：C_{S₂} = 8π/(α'g_c²) 的第二独立源"
+summary: |
+  **(1) 端点 ⇒ 极点。** |z₄| → ∞ 时被积函数 ≈ |z₄|^{−α'(u+t)/2 − 8}；
+  用 spectrum.mandelstam-invariants-sum-rule 的 α'(s+t+u) = −16 得 α'(u+t) = −16 − α's，
+  故被积函数 ≈ |z₄|^{α's/2}。极坐标 d²z₄ = 2π r dr 后径向积分 ∫^∞ dr r^{α's/2 + 1}
+  在 α's/2 + 2 ≥ 0 时发散；按解析延拓表现为 1/(α's/2 + 2) 型单极点，位置 **α's = −4**，
+  与来源 (6.6.7) 一致，即闭弦 tachyon 上壳。
+  物理读法与开弦相同：z₄ → z₃ = ∞ 的区域对应一根长的中间闭弦传播。
+
+  **(2) 留数比较。** 极点附近把 S₄ 写成 (留数)/(α's + 4)，把留数与「两个闭弦三 tachyon 振幅 ×
+  传播子」的乘积比较。三点振幅正比于 g_c³ C_{S₂}（结构与开弦 (6.4.4) 相同，来源不写细节），
+  故右端 ∝ g_c⁶ C_{S₂}²，左端 ∝ g_c⁴ C_{S₂}；等式定出 C_{S₂} ∝ 1/(α'g_c²)，
+  连同来源给出的数值系数即 **C_{S₂} = 8π/(α'g_c²)**。
+gaps:
+  - "**「中间态传播子」在本图与来源中都没有定义**（与开弦情形同一缺口）：因子化右端用的是场论类比。
+     这是本推导标 physical-argument 的主要理由。"
+  - "**闭弦三 tachyon 振幅 (6.6.2) 在本图无显式节点**：[S] 逐字「no point elaborating」，
+     故因子化右端的 g_c³ C_{S₂} 结构只能类比开弦（见第二条依赖的 inferred 说明）。"
+  - "**数值系数 8π 未独立核实**：本推导的 summary 只复现标度关系 C_{S₂} ∝ 1/(α'g_c²)；
+     8π 有 [S] 与 [H] 两个二手源一致，但原书未核对。"
+  - "**上游 ch5 节点尚未进入 main**（主公式 (5.3.9)、FP 手续），与本批次其它节点同。"
+  - "**路径积分测度未定义**（本批次共有）。"
+notes: |
+  2026-09-11 按 reviewer-ch6 从 spectrum.closed-string-four-tachyon-integral--via-sl2c-fixing
+  的第 (3) 步拆出。
+author: curator-polchinski-ch6
+created: "2026-09-11"
