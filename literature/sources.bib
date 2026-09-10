@@ -2236,3 +2236,91 @@
             通行发表形态（Stora 一线）。**卷期页取自二手，本项目未核实；正文一字未取到。**
             ⇒ 图里**不得出现本文的任何式号或定理号**，loc 只能写「全文（未取得，L0）」。}
 }
+
+@article{barza-ghisa-2004,
+  author  = {B{\^a}rz{\u a}, Ilie and Ghi{\c s}a, Dorin},
+  title   = {Dynamics of dianalytic transformations of {K}lein surfaces},
+  journal = {Mathematica Bohemica},
+  volume  = {129},
+  number  = {2},
+  pages   = {129--140},
+  year    = {2004},
+  doi     = {10.21136/MB.2004.133904},
+  url     = {https://dml.cz/bitstream/handle/10338.dmlcz/133904/MathBohem_129-2004-2_3.pdf},
+  note    = {由 researcher 于 2026-09-11 登记（math-sources.md **§40**）。
+               这是 caohuu-ghisa-2004 的 Theorem 2.1「We have shown in [5]」所指的**真正证明出处**，
+               也是 barza-ghisa-2009 p.398「We have proved the following results (see [11])」所指的那篇。
+               **可引编号：Theorem 3.1（刊页 pp.133-134，全部 dianalytic 变换的形式，提升为奇次有理映射）；
+               Corollary 3.2（刊页 p.134，dianalytic 自同构）：
+               「Dianalytic automorphisms of P^2 are of the form: … G(z) = e^{i theta}(az+b)/(-conj(b) z + a),
+               where |a| + |b| != 0.」**
+               ⚠⚠ **等级只有 L4-全文，不是 L1**：`.cz` 域在本环境一律 `Socket is closed`，
+               正文是经 `https://r.jina.ai/<dml.cz PDF>` 文本代理取得的**全文文本**（非摘要、两次独立提取互证），
+               但**未见页图、数学符号被抽取破坏**（上划线/波浪号丢失）。**可引编号与页码，不得照抄公式字符。**
+               ⚠⚠ **本条是「RP^2 自同构 = 球面旋转群」链条上的关键否定结果**：
+               **本文全文不出现 "rotation"/"rotations"，不出现 SO(3)/SU(2)/PSU(2)/orthogonal group，
+               不把这族自同构称作「群」，不给维数 3。**
+               ⇒ caohuu-ghisa-2004 Corollary 3.1 里的「G is a rotation of the Riemann sphere」
+               **是该文自己加的一步，不在它所引的证明出处里**（math-sources.md §40.3）。
+               ⚠ 编号 bug：全文最后一条编号是 **Theorem 6.1**，却印在标题为「5. The case of a Klein bottle」的节里。
+               ⚠ 其它编号：Theorem 1.1/1.2/1.3（p.130-131）、Proposition 2.1-2.4（p.132）、Theorem 4.1（p.135-136）。
+               ⚠ 归一化条件 `|a|+|b| != 0` 与 caohuu-ghisa-2004 一样写得不严（PSU(2) 需 `|a|^2+|b|^2=1`），**不得照抄当定义**。}
+}
+
+@article{fefferman-graham-1985,
+  author  = {Fefferman, Charles and Graham, C. Robin},
+  title   = {Conformal invariants},
+  journal = {Ast{\'e}risque},
+  volume  = {S131},
+  pages   = {95--116},
+  year    = {1985},
+  url     = {https://www.numdam.org/item/AST_1985__S131__95_0.pdf},
+  note    = {{\'E}lie Cartan et les math{\'e}matiques d'aujourd'hui (Lyon, 25--29 juin 1984), num{\'e}ro hors s{\'e}rie.
+               由 researcher 于 2026-09-11 登记，**全文页图已 L1 读到刊页 95-111**（math-sources.md **§41.1**）。
+               取法：Numdam 直链（**PDF 页 = 刊页 - 94**），不设墙、不被拦。MR 837196；Zbl 0602.53007。
+               **本项目要的两条（Witten hep-th/9802150 刊页 p.18/p.19 引的就是这两条，其 ref [44]）**：
+               **THEOREM 2.1（刊页 p.101）** ambient metric g~ 满足 1) delta_s^* g~ = s^2 g~；2) iota^* g~ = g_0；
+               3) Ric(g~) = 0 的形式幂级数解：n 奇时唯一（模 R_+ 等变微分同胚）、[g] 实解析时收敛；
+               n 偶时**存在无解的共形结构**，须把 3) 弱化为 3')。
+               **THEOREM 2.3（刊页 p.103）** Poincare metric g^+ 满足 1) 以 [g] 为 conformal infinity；
+               2) Ric(g^+) = -n g^+；3) 在式 (2.2) g^+ = r^{-2}[dr^2 + g^+_{ij}(x,r)dx^i dx^j] 的写法下
+               g^+_{ij} 是 r 的偶函数——同样的奇偶二分。
+               ⚠ **三条必须随引用一起写的限制**：
+               (a) **是形式幂级数级的存在唯一性**，收敛只在 [g] 实解析时断言，**不能用来支持「任意边界共形结构都有体度规」**；
+               (b) n 偶有真实障碍（同文 **Proposition 3.5**，刊页 p.107；n=4 时即 Bach 张量）；
+               (c) **原文第 V 节标题逐字是「V. About the Proof of Theorem 2.1」（刊页 p.111），
+               开头自陈只讨论「some of the ingredients」——完整证明不在文内，Theorem 2.3 更没有独立证明节。**
+               ⚠ 「conformal infinity」的定义原文明写外包给 LeBrun（其 ref [16] = Proc. Roy. Soc. A 380 (1982) 171）。
+               其它可用编号：Conjecture 3.1、Proposition 3.2/3.3/3.4（刊页 pp.105-106）、Problem 5.1（p.111）。}
+}
+
+@article{graham-lee-1991,
+  author  = {Graham, C. Robin and Lee, John M.},
+  title   = {Einstein metrics with prescribed conformal infinity on the ball},
+  journal = {Advances in Mathematics},
+  volume  = {87},
+  number  = {2},
+  pages   = {186--225},
+  year    = {1991},
+  doi     = {10.1016/0001-8708(91)90071-E},
+  note    = {由 researcher 于 2026-09-11 登记，**正文未取得（L0）**（math-sources.md **§41.3**、访问日志 §41.4）。
+               书目为 L2（Crossref + OpenAlex + Lee 主页论文表三源一致）；MR 1112625。
+               ⚠ **已确认无开放获取全文**：OpenAlex `is_oa:false` / `oa_status:"closed"` / `best_oa_location:null`；
+               ScienceDirect 机器人墙 403；无 arXiv；Lee 主页该条只有 "Published Article" 链接、无 PDF；
+               scholar.archive.org 反爬；zbMATH 403。（Semantic Scholar 报 `isOpenAccess:true` 是**误报**，
+               其 openAccessPdf 只指回 DOI 落地页。）
+               ⚠⚠ **禁令 1：不得写任何定理号。** 常见的「Theorem A / Theorem B」**无任何证据**，
+               且有反证：Lee 本人 memoir（arXiv:math/0105046）引本文用的是 **「[29, Lemma 2.2]」**（分节编号）；
+               而叫「Theorem A」的其实是那本 **memoir 自己**的主定理，极易混淆。
+               ⚠⚠ **禁令 2：不得把「Theorems 2.1 and 2.3」记在本文名下**——Witten hep-th/9802150 刊页 p.18/p.19
+               引的那两条是 **[44] = fefferman-graham-1985**（本项目已 L1 核实，见该条 note）。
+               **内容可写（四条互相一致的二手转述，最完整的是 Witten 刊页 p.7，L1 页图）**：
+               S^d 上任何**充分接近标准（圆）共形结构**的共形结构，都由 B_{d+1} 上唯一（模微分同胚）的、
+               在边界有二阶极点的负宇宙常数 Einstein 度规诱导；证法是先在线性化层面证存在唯一，
+               再用隐函数定理推到小的有限扰动。
+               ⚠ Witten 参考表 [42] **把题名印错**（漏掉 "conformal"：「Einstein Metrics With Prescribed Infinity
+               On The Ball」），照抄会查不到。
+               ⚠ Witten 自列的限制：刊页 p.8「the restriction … **is probably also necessary**」、
+               p.10「the Graham-Lee theorem **presumably fails** for conformal structures … sufficiently far
+               from the round one」⇒ **这是局部结果，且局部性可能是本质的**。}
+}
