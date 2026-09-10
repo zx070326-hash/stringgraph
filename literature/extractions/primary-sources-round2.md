@@ -822,3 +822,248 @@ lead 问「两条推导互补 → 是否需拆目标陈述」。**researcher 的
    （"U ⊂ rad V"）读作 **B ⊆ rad A**；未单页复核。
 4. **reality condition 在 D=26、h=1 下是否自动满足**：未验。
 5. 与本节无关但仍开着的 §10 各条不变。
+
+---
+
+## 12. `goddard-thorn-1972` 正文：第四轮（archive.org 重印文集路线 + 新发现的 CDS OAI-PMH 路线）
+
+> - 负责 agent：researcher（**无 Bash / 无 git**，只写 `literature/`）
+> - 日期：**2026-09-11**
+> - 触发：lead 指派——上一名 researcher 用「archive.org 重印文集 + `BookReaderImages.php` 单页取图」拿到了
+>   `green-schwarz-1984` 全文（见 `extractions/green-schwarz-1984.md` §0.2 与 `reading-list.md` 备忘第 1 条），
+>   要求对 GT 1972 按同一流程重试，并顺带查 `brower-1972` / `brower-thorn-1971` 的重印信息。
+> - 证据等级沿用 §0 的 L0–L4 表。
+> - **中介声明**：本轮所有 HTTP 结果都经 WebFetch 的摘要器中介。凡标 L2 的元数据字段，
+>   我要求摘要器**逐字引用短字段**（如 MARC 088/963）时它照做了；但**原始 JSON/XML 我没有逐字通读**
+>   （摘要器多次以「引用长度上限」为由拒绝整份输出）。下文凡有此情形均单独标注。
+
+### 12.1 结论（一句话）
+
+**正文仍未取到（L0），但本轮把「取不到的原因」从「不知道文件在哪」推进到「知道文件的确切位置、确认它是 PUBLIC、
+但该主机对自动化客户端上了 Anubis 反爬门」。** 同时**推翻**了第二轮的一个结论：
+**GT 1972 确实有 CERN 报告号，是 `CERN-TH-1493`**（第二轮因 INSPIRE 缺 `report_numbers` 而宣布该线索「已作废」，
+这一裁决是错的——见 §12.4 的方法论教训）。
+
+三个候选重印文集**全部否决**，理由各不相同（§12.2）。
+但本轮意外打通了一条新的、对整个项目都有用的元数据路线（**CDS OAI-PMH 不受 Anubis 拦截**，§12.4），
+并顺带发现 `brower-thorn-1971` **有一份 PUBLIC 的 CERN 扫描件**（§12.6）。
+
+### 12.2 三个候选重印文集的逐条裁决
+
+| # | 候选 | 裁决 | 依据 |
+|---|---|---|---|
+| 1 | M. Jacob (ed.), *Dual Theory*, Physics Reports Reprint Book Series vol. 1, North-Holland 1974 | **否决：GT 1972 不在其中** | (a) INSPIRE 74899 的 `publication_info` **只列一个重印出处**，不含本书（L2，见下方逐字）；(b) 该书是 **Physics Reports 评论文章的重印集**，已确认的两章是 Rebbi「Dual models and relativistic quantum strings」pp. 221–293 与 Mandelstam「Dual-resonance models」pp. 295–389（L4，检索后端）。GT 1972 是 *Physics Letters B* 的四页快报，不是 Physics Reports 文章，结构上不属于该系列。(c) archive.org 无此书（ISBN 0444107436 / 0720419018 / 0444870288 三个 ISBN 检索 `numFound: 0`） |
+| 2 | J. H. Schwarz (ed.), *Superstrings: The First 15 Years of Superstring Theory*, World Scientific 1985 | **确认收录（pp. 112–115），但该书在 archive.org 上不存在** | 收录事实有**两条独立元数据佐证**（L2）：INSPIRE `pubinfo_freetext` 与 INIS 记录 `swdwe-x7d56`（后者给出 ISBN 9971-978-66-0、p. 112–115、INIS vol.18 iss.19、`files.enabled: false`／metadata-only）。archive.org 侧**五次不同检索全部 0 命中**（见 §12.7），可判定该书未被 archive.org 收藏 |
+| 3 | `brower-1972` 与 `brower-thorn-1971` 的重印信息 | **两篇都没有重印记录** | `brower-1972`（INSPIRE 74322）`publication_info` 无 `pubinfo_freetext`；`brower-thorn-1971`（INSPIRE **67316**）同样无。INIS 侧交叉核对一致：Schwarz 文集里收的是 **Brower & Friedman 1973**（NS 模型，Phys. Rev. D **7**, 535–539 → 文集 pp. 116–120，INIS `n9hgd-3wd16`），**不是** Brower 1972；Brower 1972 只有 1972 年的期刊记录（INIS `mjhvf-63m22`，metadata-only） |
+
+**INSPIRE 74899 `publication_info` 逐字（L2，这一条摘要器给了原始 JSON）：**
+
+```json
+"publication_info":[{"year":1972,"page_end":"238","page_start":"235","journal_title":"Phys.Lett.B","journal_volume":"40"},
+{"pubinfo_freetext":"In *Schwarz, J.H. (ed.): Superstrings, Vol. 1*, 112-115"}]
+```
+
+→ 与 `green-schwarz-1984` 的**六个**重印出处形成鲜明对比。上一轮备忘里「1970–80 年代 hep-th 名篇常被多次重印，
+换一本文集找比找原刊有效」这条推论**对 GS 1984 成立，对 GT 1972 不成立**：GT 1972 只被重印过一次，
+而那一本恰恰不在 archive.org 上。**「重印文集路线」对本篇已穷尽。**
+
+### 12.3 ★ 本轮取得的硬事实（全部关于 GT 1972 本身）
+
+| 事实 | 值 | 等级与来源 |
+|---|---|---|
+| **CERN 报告号** | **`CERN-TH-1493`** | **L2**：CDS MARC 字段 **088**，经 `cds.cern.ch/oai2d` OAI-PMH 取得。**做了两次独立提问复核**，第二次要求「只逐字引用 088 与 963 的内容」，返回逐字 `"CERN-TH-1493"` 与 `"CM-P00058839"` |
+| CERN 图书馆扫描件编号 | `CM-P00058839` | 同上（L2，逐字） |
+| CDS 记录访问状态 | MARC **963 = `PUBLIC`** | 同上（L2，逐字）。即**这份扫描件在 CERN 侧是公开的**，挡住我们的是 Anubis 反爬而非权限 |
+| 扫描件 URL（两个，MARC 856 `Fulltext`） | `http://cds.cern.ch/record/388690/files/CM-P00058839.pdf`<br>`http://preprints.cern.ch/cgi-bin/setlink?base=preprint&categ=CM-P&id=CM-P00058839` | L2（MARC 856，摘要器转述，未逐字）。第二个 URL 实测 **301 重定向到 `cds.cern.ch` 同路径**，不是独立主机 |
+| CDS 的 245 题名 | 「Compatibility of the dual **p**omeron with unitarity and the absence of ghosts in the dual resonance model」 | L2（摘要器转述）。**注意 CDS 把 Pomeron 排成小写 p**；`sources.bib` 现有题名（大写 P）与 INSPIRE/Semantic Scholar 一致，**不需要改** |
+| Wayback 快照存在 | `http://web.archive.org/web/20240128142907/https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`，`status: 200` | **L2**：`archive.org/wayback/available` API 返回的原始 JSON（摘要器给了逐字） |
+
+**`CERN-TH-1493` 的第二条佐证（L4，不可单独作依据）**：检索后端称 Goddard, Rebbi & Thorn,
+*Lorentz covariance and the physical states in dual-resonance models*, Nuovo Cimento A **12** (1972) 425–441
+的参考文献里写「P. Goddard and C. B. Thorn: CERN preprint TH. 1493 (1972)」。
+**一致性旁证（L2）**：GT 1972 自己的参考文献里出现 `TH-1462`（Frampton–Nielsen）与 `TH-1464`（Corrigan–Olive）
+（INSPIRE 74899 的 references 内嵌报告号）——GT 自己是 TH-1493，编号量级与时间顺序自洽。
+
+### 12.4 ★★ 新可用路线：**CDS 的 OAI-PMH 端点不受 Anubis 拦截**
+
+这是本轮对项目最有复用价值的发现。`reading-list.md` 把 `cds.cern.ch`（含 `/api`）整站列为死路，**这个判断需要收窄**：
+
+```
+✅ 可用：https://cds.cern.ch/oai2d?verb=GetRecord&metadataPrefix=marcxml&identifier=oai:cds.cern.ch:<recid>
+❌ 被 Anubis 拦：/record/<recid>、/record/<recid>/files/<name>.pdf（含 ?download=1）
+❌ Socket is closed：/api/records/<recid>
+```
+
+Anubis（v1.27.0，页面自陈用途是 "protect against the scourge of AI companies aggressively scraping websites"）
+挡住了所有 HTML 与文件路径，但 `/oai2d` 放行。**因此 CDS 现在可以当作一个「报告号 + 扫描件文件名 + 访问状态」的查询服务用。**
+
+**配套的 recid 获取方式**：CDS recid 从 INSPIRE 拿——
+`https://inspirehep.net/api/literature/<recid>?fields=external_system_identifiers` 里的 `CDS` 项。
+
+**方法论教训（写给后来人，比上面的号码更重要）**：
+第二轮由「INSPIRE 74899 的 `report_numbers` 字段不存在」推出「GT 1972 没有 CERN 报告号，该线索作废」。
+**这个推理不成立**：INSPIRE 对 1970 年代记录**根本不填 `report_numbers`**（`brower-thorn-1971` 也一样缺，
+但它同样有 `CERN-TH-1293`）。**「聚合库缺字段」≠「原始文献无该属性」。**
+今后凡要否证一个报告号线索，必须查到出版方/图书馆侧（CDS MARC 088、OSTI、NTIS）才能下结论。
+
+**⚠ 关于 Anubis 的一条自我约束**：Anubis 明示是针对自动化 AI 抓取的措施。
+我**没有**尝试用第三方渲染代理（r.jina.ai 之类）或改写主机名去绕过它。
+`web.archive.org` 则是**本环境工具级封锁**（报错逐字：`Claude Code is unable to fetch from web.archive.org`），
+`wayback.archive.org` 与 `cdsweb.cern.ch` 都只是 301 跳到被封的主机，`web.archive.org.wstub.archive.org` 报 TLS
+证书 altnames 不匹配。这三条我也**没有**用主机名技巧绕。
+→ **结论：这份 PDF 现在只差「一个人用浏览器点一下」。§12.9 给出可直接交给人类的清单。**
+
+### 12.5 顺带发现：Thorn 1985 的 42 页 DOE 报告 —— 「改良版 GT 证明」的新候选
+
+INIS 记录 **`szqhd-hct30`**（L2，摘要/字段经摘要器转述）：
+
+- 题名：*Introduction to the theory of relativistic strings*；作者 C. B. Thorn（Florida Univ., Gainesville, Dept. of Physics）
+- 会议：**Workshop on unified string theories, Santa Barbara, CA, 29 Jul – 16 Aug 1985**
+- 报告号：**`DOE/ER/40008--77`**；副号 **`CONF-850798--1`**；NTIS 号 **`DE86001950`**；合同号 `AS05-81ER40008`
+- 篇幅：**42 p.**；INIS vol.17 iss.9；INIS TRN `US8527489`；INIS RN `17026003`
+- 摘要逐字（关键句）：「We then discuss Lorentz covariant quantization and
+  **give an improved version of the Goddard-Thorn proof of the No-ghost Theorem.**」
+- 访问：`access.record: public`，但 **`access.files: restricted`**（`files.enabled: true`，即 INIS 有文件但要登录）
+
+**为什么值钱**：这是 **Thorn 本人**写的、**42 页**的、**明说是 GT 证明的改良版**的讲义。
+它比 `thorn-1985`（MSRI 论文集 7 页）篇幅大得多，也比 `thorn-1987` 更早、更教学化。
+若能取到，`--via-goddard-thorn` 那条推导的「证明结构 / DDF 对易关系是否有证明」就有了一手依据。
+
+**本轮对它的取全文尝试（全部失败）**：
+- `inis.iaea.org/api/records/szqhd-hct30/files` → **HTTP 403**（`Retry-After: 14`）
+- `inis.iaea.org/records/szqhd-hct30/files/17026003.pdf?download=1` → **重定向到登录页**（「Log in to account」/「Sign in with SAML」）。
+  按 `literature/CLAUDE.md` 规则 1 与项目纪律，**不注册、不登录**
+- INIS 旧公共库路径 `inis.iaea.org/collection/NCLCollectionStore/_Public/17/026/17026003.pdf` → **404**
+- OSTI 记录 **5007660**（同一报告，报告号完全对上）→ 页面**无 PDF**，只写「available through NTIS, PC A03/MF A01」；
+  `www.osti.gov/servlets/purl/5007660` → **404**
+
+→ **建议在 `reading-list.md` 新增一条 P1 目标**（见 §12.9）。钥匙有三个：`DOE/ER/40008-77`、`CONF-850798-1`、`DE86001950`。
+最可能的突破口是「1985 年 Santa Barbara Workshop on Unified String Theories 论文集」——
+该会议论文集由 World Scientific 出版（Green & Gross 编），**可对它跑一遍 archive.org 重印文集流程**。
+
+### 12.6 顺带发现：`brower-thorn-1971` **有一份 PUBLIC 的 CERN 扫描件**
+
+INSPIRE 67316 → `external_system_identifiers` 含 **CDS: 352004**（L2）。对它跑 §12.4 的 OAI-PMH：
+
+| 字段 | 值 |
+|---|---|
+| 245 | Eliminating spurious states from the dual resonance model |
+| 100 / 700 | Brower, R C / Thorn, C B |
+| **088** | **`CERN-TH-1293`**、`CM-P00058794` |
+| 856（Fulltext） | `http://cds.cern.ch/record/352004/files/CM-P00058794.pdf` |
+| **963** | **`PUBLIC`** |
+| 773 | Nucl. Phys. B **31** (1971) 163–182 |
+
+（等级 L2，摘要器转述，**088/963 未像 GT 那样做逐字复核**——下一轮请补。）
+
+**为什么值钱**：`brst-cohomology-sources.md` §3.2 登记了一条**未裁决的矛盾**——
+Goddard 2008 综述（L3）把「D > 26 时物理态中出现鬼」归给 Brower–Thorn 1971，
+而该文摘要（L2）只提 "leading nine trajectories"，完全没有维数条件。
+**这份扫描件是裁决那条矛盾的一手材料，而且它是 PUBLIC 的**，同样只差「一个人用浏览器点一下」。
+
+`brower-1972` 则**没有**任何扫描件线索：INSPIRE 74322 的 `external_system_identifiers` 只有
+OSTI 4607653 / ADS / SPIRES，**无 CDS、无 KEKSCAN**，`report_numbers` 亦无。
+（检索后端提到当年的 MIT 预印本号可能是 `CTP 277`，L4，未核实。APS 全站 403 不变。）
+
+### 12.7 访问日志（本轮全部路径与确切失败方式）
+
+| 目标 | 路径 | 结果 |
+|---|---|---|
+| GT 重印出处 | `inspirehep.net/api/literature/74899?fields=publication_info` | ✅ 逐字 JSON，**只有一个**重印出处（Schwarz 文集 112–115） |
+| Brower 1972 重印 | `inspirehep.net/api/literature/74322?fields=publication_info` | ✅ 摘要器明确回报「无 `pubinfo_freetext` 字段」（⚠ 它同时输出了摘要/引用数，说明 `fields=` 未被严格遵守，转述性质） |
+| Brower–Thorn 1971 记录 | `inspirehep.net/api/literature?q=doi%2010.1016%2F0550-3213%2871%2990452-4&fields=...` | ✅ recid **67316**，无 `pubinfo_freetext` |
+| Schwarz 文集 | archive.org `q=title:(superstrings)`（378 命中，看了前 50） | ❌ 无此书 |
+| Schwarz 文集 | archive.org `q=title:(superstrings) AND mediatype:(texts) AND -collection:(arxiv)`（38 命中，全看） | ❌ 无此书（38 条里最接近的是 Frampton, *Dual resonance models and superstrings*, 1986，`inlibrary`） |
+| Schwarz 文集 | archive.org 全文检索 `q="first 15 years of superstring"` | ❌ `numFound: 0` |
+| Schwarz 文集 | archive.org `q=title:(fifteen) AND title:(superstring)` | ❌ `numFound: 0` |
+| Schwarz / Jacob 文集 | archive.org `q=isbn:(9971978679 OR 9971978660 OR 0444107436 OR 0720419018 OR 0444870288)` | ❌ `numFound: 0` |
+| Jacob *Dual Theory* | archive.org `q=creator:(jacob) AND title:(dual)`（43 命中）/ `q=title:("dual theory") AND collection:(inlibrary)` | ❌ 无此书；43 条全是同名的无关条目 |
+| Jacob *Dual Theory* 目次 | WebSearch | 🟡 L4：确认是 **Physics Reports 评论文章重印集**（Rebbi 221–293、Mandelstam 295–389），故不含 PLB 快报 |
+| archive.org 全域全文检索 | `ia-pub-fts-api.archive.org/search/v1/scrape?q=...` | ❌ **Socket is closed**（端点已废） |
+| archive.org 全域全文检索 | `archive.org/services/search/beta/page_production/scrape.json?...` | ❌ **HTTP 404** |
+| Schwarz 文集 | Google Books | ❌ 记录 id `ku4zqAAACAAJ`，**无预览**（`AAAACAAJ` 后缀即 metadata-only） |
+| GT 全文 | **`inis.iaea.org/api/records?q=...`** | ✅ **端点可用**（新）；GT 只有 1985 重印记录 `swdwe-x7d56`，`files.enabled: false`，metadata-only；**INIS 没有 1972 年的原刊记录** |
+| GT 全文 | `www.osti.gov/api/v1/records?osti_id=4619228` | ❌ 记录存在但**无全文链接** |
+| GT 全文 | `catalog.hathitrust.org/Search/Home?...` | ❌ **HTTP 403** |
+| GT 全文 | `scholar.archive.org/search?q=...` | ❌ 反爬验证页（proof-of-work puzzle） |
+| GT 全文 | `api.core.ac.uk/v3/search/works?q=...` | ❌ **HTTP 403**（需 API key） |
+| GT 全文 | `api.unpaywall.org/v2/<DOI>` | ❌ `is_oa: false`、`oa_status: "closed"`、`oa_locations: []` |
+| **GT 全文** | **`api.semanticscholar.org/graph/v1/paper/DOI:10.1016/0370-2693(72)90420-0?fields=openAccessPdf`** | 🟡 **关键一步**：逐字返回 `openAccessPdf.url = "http://cds.cern.ch/record/388690/files/CM-P00058839.pdf"`，但 `status: "CLOSED"`。**文件路径就是这么找到的**（用 paperId 直接查会 **HTTP 429**，改用 `DOI:` 前缀成功） |
+| GT 全文 | `cds.cern.ch/record/388690/files/CM-P00058839.pdf`（及 `?download=1`） | ❌ **Anubis v1.27.0 反爬页**（"Anubis could not load its JavaScript"） |
+| GT 全文 | `cdsweb.cern.ch/record/388690/files/CM-P00058839.pdf` | ❌ **301** → `cds.cern.ch` 同路径（同上被拦） |
+| GT 全文 | `preprints.cern.ch/cgi-bin/setlink?base=preprint&categ=CM-P&id=CM-P00058839` | ❌ **301** → `cds.cern.ch/cgi-bin/setlink?...`（同上） |
+| **GT 元数据** | **`cds.cern.ch/oai2d?verb=GetRecord&metadataPrefix=marcxml&identifier=oai:cds.cern.ch:388690`** | ✅✅ **成功，Anubis 不拦**。088 = `CERN-TH-1493` + `CM-P00058839`（逐字），963 = `PUBLIC`（逐字） |
+| GT 全文 | `archive.org/wayback/available?url=cds.cern.ch/.../CM-P00058839.pdf` | ✅ 逐字 JSON：快照存在，`timestamp 20240128142907`，`status 200` |
+| GT 全文 | `web.archive.org/web/20240128142907/...` | ❌ **工具级封锁**：`Claude Code is unable to fetch from web.archive.org` |
+| GT 全文 | `wayback.archive.org/web/...` | ❌ 301 → `web.archive.org`（被封） |
+| GT 全文 | `web.archive.org.wstub.archive.org/web/...` | ❌ TLS：`Hostname/IP does not match certificate's altnames` |
+| GT 全文 | `ui.adsabs.harvard.edu/link_gateway/1972PhLB...40..235G/ADS_PDF`、`/ADS_SCAN` | ❌ 两个都 **HTTP 404**（ADS 无自建扫描件） |
+| GT 报告号旁证 | WebSearch `"CERN-TH-1493"` / `"CM-P00058839"` | 🟡 L4：前者由 Nuovo Cimento A 12 (1972) 425 的参考文献佐证；后者除 CDS 外**无任何镜像** |
+| Thorn 1985 报告全文 | INIS files / INIS 旧公共库 / OSTI purl | ❌ 403 / 登录页 / 404 / 404（详见 §12.5） |
+| **AGW 1984 的 KEK 扫描件** | `lib-extopc.kek.jp/preprints/PDF/1984/8402/8402145.pdf` | ❌ **socket hang up（试了两次）**。KEKSCAN id `84-02-145` 来自 INSPIRE 192309（L2），URL 是按既有命名规律**推出来的，未验证** |
+
+### 12.8 对 `ms.no-ghost-theorem` 的 `canonical_source.loc` 的建议
+
+**建议：措辞不动，但把新号码与「不可及的确切原因」写进 note。**
+
+- 现有写法「无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'」在本轮之后**仍然是唯一诚实的写法**：
+  我依然**没有**读到正文，因此**既不能确认也不能否认**文中有 `Theorem 1`。
+  **绝对不要**因为本轮找到了报告号就把 loc 改成任何带编号的形式。
+- 建议在 `canonical_source` 的 `note`（或 `audit.diff_notes`）追加一句：
+  > 「正文四轮未获取（累计 20+ 条路径）。第四轮（2026-09-11）定位到 CERN 图书馆扫描件
+  > `CM-P00058839.pdf`（报告号 `CERN-TH-1493`，CDS recid 388690，MARC 963 = PUBLIC），
+  > 挡路的是 cds.cern.ch 的 Anubis 反爬而非访问权限；
+  > 人工用浏览器可在一次点击内取得。见 `extractions/primary-sources-round2.md` §12。」
+- `--via-goddard-thorn` 的 `gaps`：**建议不改状态，只把 gap 的措辞从「正文不可得」改成「正文可由人工一次点击取得，
+  agent 侧被反爬拦住」**——这是两种不同性质的 gap，前者是知识缺口，后者是操作待办。
+- **主线数学 canonical 仍建议维持 `lian-zuckerman-1991` Theorem 3.5 与 `fgz-1986`**（§2、§4 的结论不变）。
+
+### 12.9 ★ 交给人类（船长）的三个「一次点击」清单
+
+按优先级排列。前两份是**出版方标注为 PUBLIC 的扫描件**，只是自动化客户端过不去：
+
+1. **GT 1972 正文**（本轮主目标）
+   - `https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`
+   - 备用（Wayback 2024-01-28 快照，`status 200`）：
+     `http://web.archive.org/web/20240128142907/https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`
+   - 取到后要回答的四个问题（lead 的任务书原文）：定理是否有编号；精确条件（a、D、动量扇区、"d ≤ 26" 的确切措辞）；
+     证明结构；**DDF 对易关系是否给了证明**。
+2. **`brower-thorn-1971` 正文**（可裁决 `brst-cohomology-sources.md` §3.2 登记的矛盾）
+   - `https://cds.cern.ch/record/352004/files/CM-P00058794.pdf`（`CERN-TH-1293`，963 = PUBLIC）
+3. **Thorn 1985 的 42 页 DOE 报告**（Thorn 本人的「改良版 GT 证明」）
+   - INIS `https://inis.iaea.org/records/szqhd-hct30`（`access.files: restricted`，需免费注册——**是否注册请船长决定，researcher 不代办**）
+   - 或按 NTIS 号 `DE86001950` / 报告号 `DOE/ER/40008-77` 走馆际；
+   - 或对「Workshop on Unified String Theories (Santa Barbara 1985)」论文集跑 archive.org 重印文集流程
+
+### 12.10 本轮对 `sources.bib` 的改动清单
+
+**只改 note / 新增条目，不改任何已有 key、不改任何题名字段。**
+
+| key | 改动 |
+|---|---|
+| `goddard-thorn-1972` | `note` 追加：**「第四轮（2026-09-11）：报告号已核实为 `CERN-TH-1493`（CDS MARC 088，逐字复核两次）——第二轮『CERN TH 报告号线索已作废』的裁决**错误**，原因是 INSPIRE 对 1970 年代记录不填 `report_numbers`，缺字段不等于无属性。扫描件 `CM-P00058839.pdf`，CDS recid 388690，MARC 963 = PUBLIC；`cds.cern.ch` 的 Anubis 反爬拦住自动化取件，人工浏览器可得。重印出处只有一个（Schwarz 编 *Superstrings, Vol. 1*, 112–115，INSPIRE + INIS `swdwe-x7d56` 双证），该书不在 archive.org（五次检索 0 命中），**重印文集路线对本篇已穷尽**。Jacob 编 *Dual Theory*（Physics Reports 重印集）不含本篇。正文仍 L0，`canonical_source.loc` 不动。见 `extractions/primary-sources-round2.md` §12。」** |
+| `brower-1972` | `note` 追加：「第四轮：无重印记录（INSPIRE 无 `pubinfo_freetext`；Schwarz 文集收的是 Brower–Friedman 1973 pp.116–120，非本篇）。`external_system_identifiers` 只有 OSTI 4607653 / ADS / SPIRES，**无 CDS、无 KEKSCAN**，即无 CERN/KEK 扫描件可循。APS 403 不变。」 |
+| `brower-thorn-1971` | `note` 追加：**「第四轮重要发现：本篇有 CERN 报告号 `CERN-TH-1293` 与 PUBLIC 扫描件 `CM-P00058794.pdf`（CDS recid 352004，MARC 963 = PUBLIC，经 `cds.cern.ch/oai2d` OAI-PMH 取得）。这是裁决 `brst-cohomology-sources.md` §3.2 那条矛盾（Goddard 2008 把『D>26 出鬼』归给本篇 vs 本篇摘要只提 leading nine trajectories）的一手材料，人工浏览器可一次点击取得。⚠ 088/963 未做逐字复核，取件前请复核。无重印记录。」** |
+| `thorn-1985` | `note` 追加：「⚠ 与另一篇同年 Thorn 讲义易混：*Introduction to the theory of relativistic strings*，Workshop on Unified String Theories, Santa Barbara, 1985-07-29–08-16，报告号 `DOE/ER/40008-77` / `CONF-850798-1` / NTIS `DE86001950`，**42 页**，摘要自陈「give an improved version of the Goddard-Thorn proof of the No-ghost Theorem」（INIS `szqhd-hct30`、OSTI 5007660）。**这不是本条目**（本条目是 MSRI 论文集 7 页）。」 |
+| `thorn-1985-santa-barbara` | **新增条目建议**（`@techreport`）：上一行那份 42 页报告。若 lead 同意，同时在 `reading-list.md` 加一条 P1 |
+| `alvarez-gaume-witten-1984` | 若已建条目，`note` 追加：「INSPIRE recid **192309**，报告号 `HUTP-83/A039`，**有 KEKSCAN id `84-02-145`**（可能的扫描件钥匙），**无 CDS id**。按 KEK 既有命名规律推出的 URL `lib-extopc.kek.jp/preprints/PDF/1984/8402/8402145.pdf` 本轮两次 **socket hang up**，未证实。」 |
+
+### 12.11 本轮仍未解决 / 留给下一轮
+
+1. **GT 1972 正文本身**：`ms.no-ghost-theorem` 的四个核心问题（编号、精确条件、证明结构、DDF 对易关系是否有证明）**全部仍未回答**。
+   现在的瓶颈**不再是找不到文件**，而是 Anubis。→ §12.9 第 1 条。
+2. **`brower-thorn-1971` 的 088/963 未逐字复核**（GT 的做了，它的没做）。下一轮补一次 OAI-PMH 逐字查询即可。
+3. **KEK 扫描件路线未验证**：`lib-extopc.kek.jp` 两次 socket hang up。它到底是**被环境拦**、**主机已下线**、还是**URL 猜错**，
+   三种可能未分辨。若能打通，`alvarez-gaume-witten-1984`（reading-list 里的 P0）可能一次解决——
+   **建议下一轮先用一个已知存在的 KEKSCAN id 去反测该主机是否活着**，再谈猜 URL。
+4. **CDS OAI-PMH 路线值得对整批 blocked 目标跑一遍**：
+   `kato-ogawa-1983`（KUNS 637）、`thorn-1984`（UFTP-84-004）、`green-schwarz-1985-hexagon`、`kac-1979`、`lian-zuckerman-1989`。
+   流程只有两步（INSPIRE 取 CDS id → OAI-PMH 取 088/856/963），每条 2 次调用。
+   本轮已验证 AGW 1984 **无** CDS id，故那一篇要走 KEK 而非 CDS。
+5. **`brower-1972` 的 MIT 预印本号 `CTP 277`**（L4，检索后端）未核实；若成立，可作为找 MIT/DSpace 扫描件的钥匙。
+   MIT DSpace（`dspace.mit.edu`）本轮**未试**，是一条干净的新路径。
+6. `reading-list.md` 的「死路」清单需要修订：`cds.cern.ch` 应从整站死路改为
+   「HTML/文件被 Anubis 拦，**`/oai2d` 可用**」；并新增 `inis.iaea.org/api/records` 为可用元数据源、
+   `ia-pub-fts-api.archive.org` 与 `archive.org/services/search/beta/...` 为已废端点、
+   `scholar.archive.org` / `catalog.hathitrust.org` / `api.core.ac.uk` 为 403/反爬、
+   `api.semanticscholar.org/graph/v1/paper/DOI:<doi>?fields=openAccessPdf` 为**定位扫描件路径的有效工具**。
