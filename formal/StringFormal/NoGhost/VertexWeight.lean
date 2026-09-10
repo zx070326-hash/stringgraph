@@ -172,6 +172,35 @@ theorem creaExp_euler (η b : Fin D → R) (M : ℕ) :
 
 end CreaExp
 
+/-! ### The action of `L_m` on the coherent-state coefficients (`m ≥ 1`)
+
+Pen-and-paper computation, recorded here before it is formalised below.
+
+Write `Φ_J = creaExp η b J` for the `z^J` coefficient of
+`E_-(z) = exp(Σ_{l ≥ 1} (η_μ b^μ / l) α^μ_{-l} z^l)`, and abbreviate the `η`-contractions
+`a · b = Σ_μ η_μ a^μ b^μ`, `b · b = Σ_μ η_μ b^μ b^μ`.  For `m ≥ 1` the Sugawara sum
+`L_m = ½ Σ_{j ∈ ℤ} :α_{m-j} · α_j:` splits into four regions of the summation index `j`:
+
+* `1 ≤ j ≤ m - 1` — both `α_{m-j}` and `α_j` annihilate, each contributing a factor `b`;
+  the `m - 1` such terms give `½ (m - 1) (b · b) Φ_{J-m}`;
+* `j = 0` and `j = m` — one `α_0 = a` and one annihilator, giving `2 · ½ (a · b) Φ_{J-m}`;
+* `j ≤ -1` and `j ≥ m + 1` — one creation operator `α_{-l}` (`l ≥ 1`) and one annihilator
+  `α_{m+l}`; both families give `Σ_{l ≥ 1} Σ_μ η_μ b^μ α^μ_{-l} Φ_{(J-m)-l}`, which by the
+  Euler recursion `creaExp_euler` is `(J - m) Φ_{J-m}`; together `2 · ½ (J - m) Φ_{J-m}`.
+
+Hence, for every `m ≥ 1` and every `J ∈ ℤ` (both sides vanish when `J < m`):
+
+`L_m Φ_J = (a · b + ½ (m - 1) (b · b) + (J - m)) · Φ_{J-m}`.
+
+Checks: `m = 1, J = 1` gives `L_1 (η_μ b^μ α^μ_{-1}|k⟩) = (a · b) |k⟩`, matching
+`Sugawara.Lop_apply_mode_one`; `m = 2, J = 2` gives `a · b + ½ b · b`, the value obtained by
+commuting `L_2` twice past `Σ_μ η_μ b^μ α^μ_{-1}`.
+
+The `m = 0` and `m < 0` cases are *not* covered by the computation above (for `m = 0` the two
+terms `j = 0` and `j = m` coincide, and for `m < 0` the middle region is replaced by a
+double-creation region); they are left for a later step.
+-/
+
 end Fock
 
 end StringFormal.NoGhost
