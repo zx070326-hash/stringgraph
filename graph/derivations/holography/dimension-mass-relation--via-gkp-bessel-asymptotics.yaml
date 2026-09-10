@@ -1,0 +1,82 @@
+id: holography.dimension-mass-relation--via-gkp-bessel-asymptotics
+target: holography.dimension-mass-relation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.gkpw-dictionary
+    inferred: false
+    note: >-
+      非 inferred：GKP 读出维数的那一步用的是 (23) W[φ] = K[φ] = S[φ]——
+      先由 K 的二阶变分得到两点函数（同 (26) 的做法），再从两点函数领头非解析项
+      ∼ (kR)^{2ν} R^{−4} 的幂次读出 Δ。没有 (23) 就没有「幂次 = 维数」这一步。
+sources:
+  - ref: gubser-klebanov-polyakov-1998
+    loc: |
+      arXiv:hep-th/9802109v2, §3, p.10 式 (39)(40)(41)；p.11 式 (43)(44)(45)；
+      (23) 与两点函数的算法在 §2.2–§2.3 p.6–7 式 (23)(24)(26)(27)。
+    note: |
+      ⚠ **本推导只覆盖 d = 4**。GKP 正文 pp.1–14 **不出现** Δ(Δ−d) = m²，
+      也没有一般 d 的版本，只有 (45) Δ = 2 + √(4 + (mR)²)
+      （抽取记录 gubser-klebanov-polyakov-1998.md E9，L1-neg 否定性核实）。
+summary: |
+  GKP §3 的推导链（式号依 arXiv v2，AdS 半径 R 显式保留，d = 4 即 3-brane 情形）：
+
+  1. 有质量体场的线性化运动方程 (39)（"minimal linear equation"，无高阶导数项）。
+  2. 与 §2 的无质量情形同样地在 AdS_5 上分离变量、取动量空间，解为修正 Bessel 函数；
+     §2 里出现的阶 ℓ + 2 被换成 ν，其中
+
+         ν = √( 4 + (mR)² ) .                              (41)
+
+     解的选取仍按视界正则性（取 K_ν(kz) 不取 I_ν(kz)），边界条件仍在截断 z = R。
+  3. 由 (23) 得到的两点函数，其领头**非解析**项的幂次是 (kR)^{2ν}（(43)(44)）。
+  4. 从该幂次读出对应 SYM 算子的维数（原文逐字 "This implies that the dimension of the
+     corresponding SYM operator is equal to"）：
+
+         Δ = 2 + ν = 2 + √( 4 + (mR)² ) .                   (45)
+
+  在 R = 1 单位下这就是本图目标陈述 (2.44) 在 d = 4 的特例
+  （代数上等价于 Δ(Δ − 4) = (mR)²，但**这一改写是编者做的，不是 GKP 原文**）。
+
+  与 Witten 支的**方法差别**：GKP 是从两点函数领头非解析项的幂次读维数，
+  Witten 是先解渐近指数 λ₊ 再由 (2.42) 的 |x−x'|^{−2(λ₊+d)} 读维数。
+  GKP 全程在动量空间与有限截断边界上做，Witten 在位置空间与共形边界上做。
+gaps:
+  - >-
+    **只覆盖 d = 4**（3-brane / AdS_5）。目标陈述是一般 d 的 Δ(Δ−d) = m²，
+    GKP 正文没有一般 d 的版本，也没有写出 Δ(Δ−d) = m² 这个形式。
+    因此本推导对目标陈述**只是部分支持**；一般 d 只能记 Witten (2.43)。
+    若 reviewer/auditor 认为这在图上不可接受，正确的修法是把 d = 4 的形式拆成独立卡
+    （例如 holography.dimension-mass-relation-ads5），而不是把 GKP 的来源记到一般 d 上。
+  - >-
+    「(45) ⟺ Δ(Δ−4) = (mR)²」是编者的代数改写，原文没有写过后一个形式。
+  - >-
+    边界取在**有限截断 z = R**，不是共形边界；两点函数里 R 既是 AdS 半径又是截断位置，
+    (44) 中的 (kR)^{2ν} 因而混合了这两个角色。原文的处理是保留非解析部分、丢弃 k² 的解析部分。
+  - >-
+    (39) 的「最小线性方程」假设有原文自列的隐患：它可能只对特定场定义成立，
+    否则会有 α'∇² 的正幂修正，因而 (44) 里的 O 与规范理论算子之间可能有**能量依赖的
+    leg factors**。原文逐字 "We hope that these leg factors do not change our conclusion about the
+    anomalous dimensions."，并说彻底解决需要精确 sigma 模型或有质量顶点算子的三点函数。
+  - >-
+    只在大 't Hooft 耦合下有效（用一圈 sigma 模型计算），且 (12)(23) 本身只捕捉大 N 领头阶。
+  - >-
+    Bessel 展开系数 (36)(43) 本项目未独立复算（抽取记录 §3 第 4 条）。
+  - >-
+    记号不统一：(46) 用 h_n 表示有质量弦态的维数谱，(45) 用 Δ，原文未显式说明二者是同一个量
+    （抽取记录 §3 第 5 条）。
+notes: |
+  from: gubser-klebanov-polyakov-1998#E9（另见 E5、E8、E10、E11、E12）。
+
+  【约定换算】GKP 显式写 (mR)²，本图目标陈述在 R = 1 单位下写 m²；
+  conv.ads-radius-unit 给出换算 m² ↦ (mR)²。目标卡与本推导声明的是同一条约定，
+  故不需要 convention_map；换算规则写在约定卡里。
+
+  【为什么仍然挂成同一目标的第二条推导】两条推导在 d = 4 时给出同一个关系，
+  方法与假设集不同（动量空间 + 截断边界 vs 位置空间 + 共形边界；洛伦兹 vs 欧氏），
+  且两篇是独立工作（Witten p.4 逐字 "independent work [36]"）。
+  把 GKP 挂成第二条推导的价值在于：若 Witten 的渐近分析被质疑，d = 4 的结论仍有第二条来源。
+  代价是本推导覆盖面窄，已在 gaps 第一条写明。
+
+  【版本】loc 锚定 arXiv:hep-th/9802109v2 (27 Mar 1998)；PLB 428 发表版式号未核对。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,78 @@
+id: holography.ads-laplace-dirichlet-unique--via-partial-wave-expansion
+target: holography.ads-laplace-dirichlet-unique
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.conformal-boundary-so2d
+    inferred: false
+    note: >-
+      非 inferred：本推导用的球模型 B_{d+1} 与度规 (2.1)、以及等价写法
+      ds² = dy² + sinh²y dΩ²（(2.5)，分波用的就是这一套坐标），都由同文 §2.1 的
+      (2.1)–(2.6) 给出；「边界是 S^d」这一说法也来自那里。
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2, §2.2, p.6–7，式 (2.7)(2.8)(2.9) 及其前后正文；
+      §2.4 提到的第二个（积分公式）存在性证明；§2.1 的坐标 (2.1)(2.5)。
+    note: |
+      ⚠ (2.7) 右端测度原文印作 d⁵y，左端是 d^{d+1}y；按上下文应为 d^{d+1}y，v2 未改。
+summary: |
+  Witten §2.2 的论证，分唯一性与存在性两段：
+
+  **唯一性**：设 φ 是 B_{d+1} 上 Laplace 方程 (2.8) 的平方可积解。分部积分给
+
+      0 = − ∫_{B_{d+1}} d^{d+1}y √g φ D_i D^i φ = ∫_{B_{d+1}} d^{d+1}y √g |dφ|²    (2.7)
+
+  故 dφ = 0，即 φ 为常数；再由平方可积性得 φ = 0。
+  于是两个有相同边界值的解之差是平方可积解，必为零。
+
+  **存在性**：在 ds² = dy² + sinh²y dΩ² 坐标下按 S^d 球谐分波，
+  大 y 处径向方程化为 (d/dy) e^{dy} (d/dy) φ_α = 0（(2.9)），两个解分别趋于常数与 e^{−dy}。
+  因此每个分波都有唯一的、在无穷远取给定常数值的解；按适当系数把各分波叠加，
+  得到在无穷远取任意给定值 φ(Ω) 的唯一解。
+
+  原文自陈的适用范围（逐字）："the proof we have given is valid for any spherically symmetric
+  metric with a double pole on the boundary. (With a little more effort, one can make the proof
+  without assuming spherical symmetry.)"；§2.4 另给一个基于积分公式（体–边界传播子）的
+  存在性证明，但那个证明需要 B_{d+1} 上度规的显式形式。
+
+  这是 Witten 全文里**唯一自称给出证明**的部分。取 status: physical-argument 而非 rigorous，
+  理由见 gaps：函数空间、边界项、收敛性都没有指定。
+gaps:
+  - >-
+    函数空间未指定：φ(Ω) 属于哪个空间（连续？L²？光滑？）、解 φ 在什么意义下「有边界值」、
+    「平方可积」相对哪个测度，原文都没有写。
+  - >-
+    分部积分 (2.7) 的边界项没有讨论：B_{d+1} 是带边（共形边界）的，
+    要让边界项消失需要对 φ 在 y → ∞ 的衰减做假设，原文只说「平方可积」。
+  - >-
+    分波叠加的收敛性没有讨论：「adding these up with suitable coefficients」是断言，
+    系数的存在性与级数收敛性均未验证。
+  - >-
+    (2.9) 是大 y 的**渐近**方程（原文明说 L²/sinh²y 项 "is still irrelevant at large y"），
+    从渐近解到整体解的延拓（内部正则性、光滑匹配）没有验证。
+  - >-
+    原文式 (2.7) 的测度印作 d⁵y（应为 d^{d+1}y），v2 未改；本图不沿用该印刷错误。
+  - >-
+    **只覆盖无质量标量**。有质量时 (2.34) 根本没有趋于常数的解，φ_0 要由 φ ∼ f^{−λ₊}φ_0
+    （(2.36)）重新定义且是共形密度；引力与规范场情形完全另论（Graham–Lee 只给局部结果，
+    规范场版 Witten 自称 "one expects" 且脚注 4 用 Chern class 证明大场下必然失败）。
+  - >-
+    §2.4 的第二个存在性证明（积分公式）本推导未收：它需要度规的显式形式，
+    且与 (2.11) 的两点函数计算纠缠在一起，属于另一条论证线。
+notes: |
+  from: witten-1998-ads#E-W2（另见 E-W3、E-W4）。
+
+  【为什么 kind 不是 proof】graph/schema/derivation.schema.json 要求 kind: proof 时
+  status 必须是 formalized 或 rigorous。本推导按 docs/STATUS_LEVELS.md 只能到
+  physical-argument（前提不完整、来源不是数学文献、未经 reviewer 独立复核），
+  故 kind 取 physical-argument。原文自称 "proof" 这件事记在这里，不体现在 kind 上。
+
+  【升级路线】本条是整个 GKPW 链上最接近可严格化的命题之一：
+  补上函数空间与衰减条件后，唯一性那半段是标准的 Rellich/能量论证。
+  升级时应新建一张前提完整的卡（写明 Sobolev 空间与边界迹的意义），
+  而不是改本卡的 statement。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

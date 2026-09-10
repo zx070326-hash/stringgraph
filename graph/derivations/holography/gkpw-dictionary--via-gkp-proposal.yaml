@@ -1,0 +1,114 @@
+id: holography.gkpw-dictionary--via-gkp-proposal
+target: holography.gkpw-dictionary
+kind: conjecture-support
+status: conjecture
+depends_on: []
+sources:
+  - ref: gubser-klebanov-polyakov-1998
+    loc: |
+      arXiv:hep-th/9802109v2：§1 p.3 末（"we propose an identification …"）；
+      §2 p.4，式 (12)(13) 与其后的四条 refinements；§2.1 p.5–6 式 (16)–(21)（Bessel 解与正则性）；
+      §2.2 p.6 式 (22)(23)；§2.2–§2.3 p.7–8 式 (24)–(32)（两点函数与 c = N²/4 的检验）；
+      近视界几何与半径字典在 §1 p.3–4 式 (8)–(11)。
+    note: |
+      三处自称逐字：p.3 "we propose an identification of the generating function of the Green's
+      functions of the superconformal world-volume theory and the supergravity action in the near
+      horizon background geometry"；p.4 "The basic idea is to identify …"；p.6 "the analogue of (12)
+      is the claim that"。摘要用最弱的 "We suggest a means of obtaining certain Green's functions"。
+      **全文正文 pp.1–14 不含 "conjecture" 一词**（L1-neg，逐页读图；抽取记录 §3 第 2 条）。
+summary: |
+  GKP 的论证结构（逐步，式号依 arXiv v2）：
+
+  1. 背景（§1，(8)–(11)）：N 根重合 D3 膜的近视界几何是 AdS_5 × S^5，
+     坐标 z = R²/r，边界方向在 z → 0（"far from the brane"），视界在 z → ∞；
+     R⁴ = N/(2π²T_3)，T_3 = √π/κ；κ 一律取十维引力常数。
+     GKP 把这条路线与非临界弦/confining string ansatz [4] 并置，
+     并说 [14]（Maldacena）"synthesized" 了两条路线。
+  2. **提出**（(12)）：把规范理论连通格林函数的生成泛函 W 与超引力作用量在给定边界条件下的
+     极小值 K 等同：W[g] = K[g] = S[g]。边界条件 (13) 取在**有限截断 z = R**
+     （"near the place where the throat turns into the asymptotically flat space"），
+     并要求全部涨落在 z → ∞ 处为零。
+  3. 原文自列的四条 refinements（(12) 后）：左边必须是**连通**格林函数的生成泛函
+     （因为右边预期满足团簇分解）；(12) 只能给出**大 N 领头阶**（展开参数 κ²/R⁸ ∼ 1/N²）；
+     α' 修正对应 (g²_YM N)^{−1} 的幂次修正；IIB 超引力没有协变作用量这件事不构成障碍，
+     因为算 n 点函数用的是作用量的第 n 次变分（n > 0 时等于协变运动方程的第 n−1 次变分）。
+  4. 解的选取（§2.1，(21) 后）：动量空间解取修正 Bessel 函数 K_ν(kz) 而非 I_ν(kz)，
+     理由逐字是 "the requirement of regularity at the horizon (far down the throat) tells us which
+     solution to keep"。
+  5. 标量版本（(22)(23)）：世界体耦合 S_int = ∫d⁴x φ O（若 φ 是膨胀子则按 [9]
+     O = (1/4g²_YM) tr F² + …），于是 W[φ] = K[φ] = S[φ]，其中 φ(x,z) 是运动方程的唯一解且
+     φ(x,z) → φ(x) 当 z → R。存在唯一性 GKP 只给一句理由：运动方程就是弯曲空间上的 Laplace 方程，
+     可把 x^λ 紧化到很大的 T⁴ 化为紧流形带边的 Dirichlet 问题。
+  6. **事后检验**（(24)–(32)）：由 (23) 两次对耦合常数求导得膨胀子两点函数 (26)，
+     再算应力张量两点函数 (32) 与 (29) 比较得中心荷 c = N²/4；
+     原文对这一步的自评逐字是 "the evaluation of this one component is a sufficient test"——
+     即自认这是**检验**而不是推导。
+
+  **全文没有任何推导把 (12)/(23) 从更基本的东西导出**；(12)(23) 始终是输入而非输出。
+  自称最强处是 "we propose an identification" / "the claim that"，
+  故 kind: conjecture-support、status: conjecture 是原文措辞的直译，不是编者判断。
+gaps:
+  - >-
+    **depends_on 为空是有意的**：GKP 自己列出的前提在本图中尚无节点——
+    (a) AdS_5×S^5 是 N 根重合 D3 膜的近视界几何（(8)–(11)）；
+    (b) 大 N 下经典超引力可靠（κ²/R⁸ ∼ 1/N²）；
+    (c) α' 修正被 (g²_YM N)^{−1} 压低；
+    (d) 视界正则性定解（取 K_ν 不取 I_ν）；
+    (e) 世界体耦合 S_int = ∫φO 与顶点算子的辨认（(22)(31)，依赖 [9,10,11]）。
+    holography.n4sym-contains-iib-sugra-states 是 Maldacena 的卡、不是 GKP 引用的东西，
+    挂上去会造成假的依赖。宁可留空并在此记账（先例：
+    holography.n4sym-contains-iib-sugra-states--via-decoupling-limit）。
+  - >-
+    **没有连到 holography.ads5-cft4-duality-v2**：GKP 只在 p.2–3 说 [14] "synthesized" 了
+    非临界弦与 D 膜两条路线，**没有**把 (12) 建立在 [14] 之上，也没有复述 Maldacena 的对偶陈述，
+    全文不含 "conjecture" 一词。抽取记录 §5 明确建议不连这条边（若连须标 inferred: true）。
+    逻辑上也确实推不出：即使承认「两个理论对偶」，也推不出「生成泛函 = on-shell 超引力作用量」
+    与「哪个体场耦合哪个算子」。若 auditor/lead 认为应当连边，请改为 inferred: true 并在此说明理由。
+  - >-
+    (12) 只捕捉**大 N 领头阶**（原文自列 refinement 2），1/N 修正需把经典作用量 S 换成有效作用量 Γ。
+  - >-
+    边界取在**有限截断 z = R** 而不是共形边界 z → 0：两点函数 (26)(27) 里的 ln(k²R²) 中的 R
+    就是这个截断位置；原文的处理是保留非解析部分、丢弃 k² 的解析部分，没有系统的重整化方案。
+  - >-
+    符号约定与现代教科书不一致：GKP 写 W = K = S 没有负号（现代常写 W = −S_on-shell），
+    且是对 K 直接求二阶导得 ⟨OO⟩（(26)）而不是 −∂²W（抽取记录 Q4）。
+  - >-
+    存在唯一性只有一句话的理由（"the equation of motion is just the laplace equation on the curved
+    space"），没有引任何定理，也没有指定函数空间。相比之下 Witten §2.2 给了显式论证
+    （本图 holography.ads-laplace-dirichlet-unique）。
+  - >-
+    有质量弦态的处理有原文自列的隐患：最小线性方程 (39) 可能只对特定场定义成立，
+    因而 (44) 里的算子 O 与规范理论算子之间可能有**能量依赖的 leg factors**；
+    原文逐字 "We hope that these leg factors do not change our conclusion about the anomalous
+    dimensions."，并说要彻底解决需要精确 sigma 模型或有质量顶点算子的三点函数。
+  - >-
+    原文结论节自列的未完成项：只做了大 't Hooft 耦合极限（用一圈 sigma 模型计算）；
+    三点函数 "We leave the details of such calculations for the future."；
+    超流多重态的技术问题 "with the expectation that they are 'bound to work' based on supersymmetry"。
+  - >-
+    c = N²/4 依赖 [11] 的归一化约定，换约定后数值会变；本项目未核实 [11]（抽取记录 §3 第 3 条）。
+notes: |
+  from: gubser-klebanov-polyakov-1998#E1–E6、E11、E12、E13；抽取记录 §5 建议节点 A。
+
+  【与 Witten 支的关系】两条推导的假设集不同、不可互相替代：
+  截断边界 z = R vs 共形边界 S^d；洛伦兹 (−,+,+,+) vs 欧氏；
+  "W = S_on-shell" vs "⟨e^{∫φ_0 O}⟩ = Z_S"。Witten p.4 亲口称 GKP 为
+  "independent work [36] in which a very similar understanding … is developed"，
+  这是把两者作为同一陈述的两条独立推导的**原文层面**背书。
+
+  【为什么不标 physical-argument】docs/STATUS_LEVELS.md 的「断言 + 骨架」裁决把
+  physical-argument 留给「来源给出论证骨架但关键步骤只有断言」的情形。
+  GKP 这里不是论证不完整，而是**根本没有论证**：(12)(23) 是直接提出的 identification，
+  原文自称 propose / claim，事后用两点函数与吸收截面做 "a sufficient test"。
+  若日后有人认为「由 D3 世界体耦合 (5)(6)(22)(31) 提供了启发式推导」而要改成 physical-argument，
+  抽取记录 §5 要求必须在此注明那是编者判断，因为原文没有这样自我描述。
+
+  【记号红线】GKP 不用 φ_0；GKP 写 O(2,4) 不是 SO(2,4)；GKP 在 p.2 写 U(N)、p.1 引 't Hooft 时
+  写 SU(N)（同一篇内部就不一致，见 holography.gauge-group-su-n-from-kk-spectrum）。
+  参考文献 [23] 与 [25] 的 arXiv 号在原文参考文献表里都印作 hep-th/9605009，至少有一处印错。
+
+  【版本】loc 锚定 arXiv:hep-th/9802109v2 (27 Mar 1998)；
+  v1 未读，arXiv comments 自陈 v2 为 "minor revisions, 1 reference added"；
+  PLB 428 (1998) 105–114 发表版式号未与 v2 核对。
+author: curator
+created: "2026-09-11"

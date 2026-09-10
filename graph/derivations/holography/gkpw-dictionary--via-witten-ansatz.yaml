@@ -1,0 +1,126 @@
+id: holography.gkpw-dictionary--via-witten-ansatz
+target: holography.gkpw-dictionary
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: holography.ads5-cft4-duality-v2
+    inferred: false
+    note: >-
+      非 inferred，有逐字背书：Witten §2.3 首句 "We will now attempt to make more precise the
+      conjecture [13] relating field theory on the boundary of AdS space to supergravity (and string
+      theory) in bulk."（p.8；[13] = Maldacena hep-th/9711200），
+      以及 p.2 "A precise recipe for computing observables of the conformal field theory in terms of
+      supergravity on AdS_{d+1} was not given in [13]; obtaining one will be the goal of the present
+      paper."。另有三处把设定挂在 [13] 上："in any one of the examples in [13]"（p.8）、
+      "in the scenario of [13]"（p.10）、"under precisely the conditions proposed in [13]"（p.2）。
+      即 Witten 支明确以 Maldacena 的对偶猜想为背景并自称是其精确化。
+  - id: holography.conformal-boundary-so2d
+    inferred: false
+    note: >-
+      非 inferred：(2.11)(2.12)(2.13) 里的 "S^d"、"边界条件"、"共形结构 h" 的含义由同文 §2.1
+      的 (2.1)–(2.6) 给出（欧氏 AdS = 单位球 B_{d+1}，边界 S^d 只带共形结构）；
+      (2.12) 的 Z_S(h) 定义直接用到 (2.2) 的 f 与共形结构的等价类。
+  - id: holography.ads-laplace-dirichlet-unique
+    inferred: false
+    note: >-
+      非 inferred：§2.3 p.8 逐字把它列为前提——"Suppose that … one has a massless scalar field φ
+      on AdS_{d+1} obeying the simple Laplace equation D_i D^i φ = 0, with no mass term or curvature
+      coupling, or some other equation with the same basic property: the existence of a unique
+      solution on B̄_{d+1} with any given boundary values."（该性质由 §2.2 的 (2.7)–(2.9) 建立）。
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2：§2.3 "Ansatz For The Effective Action", p.8–10，
+      式 (2.10)(2.11)(2.12)(2.13)；前提在 §2.2 p.6–7 与 §2.1 p.5–6；
+      自我定位在 p.2 与 p.8；对 GKP 的定性在 p.4。
+    note: |
+      §2.3 小节标题逐字就是 "Ansatz For The Effective Action"。
+summary: |
+  Witten 的论证结构（逐步，式号依 arXiv v2）：
+
+  1. 几何设定（§2.1，(2.1)–(2.6)）：欧氏化，AdS_{d+1} = 开单位球 B_{d+1}，
+     紧化后边界是 S^d，边界只带共形结构。
+  2. 适定性（§2.2，(2.7)–(2.9)）：对无质量标量，任给边界值 φ(Ω) 存在唯一的解延拓。
+     这是「φ_0 可以当自变量」的前提。
+  3. 源的身份（§2.3 p.8）：令 φ_0 = φ|_∂。**假定** φ_0 通过 ∫_{S^d} φ_0 O 与边界共形场 O 耦合。
+     原文对这一步的辩护逐字是 "This assumption is natural given the relation of the conjectured
+     CFT/AdS correspondence to analyses [8–11] of interactions of fields with branes."
+     由 φ_0 共形权重为零推出 O 的维数必须是 d（只对无质量标量成立）。
+  4. 体侧的量（(2.10)）：Z_S(φ_0) = exp(−I_S(φ))，经典超引力近似；
+     原文明说超出该近似时要加弦论修正或量子圈，判据引 [13]。
+  5. **Ansatz**（(2.11)）：⟨exp ∫_{S^d} φ_0 O⟩_CFT = Z_S(φ_0)。
+     原文逐字 "We will make an ansatz whose justification, initially, is that it combines the
+     ingredients at hand in the most natural way. Gradually, further evidence for the ansatz will
+     emerge."；紧接的唯一「初步检验」是 't Hooft 大 N 标度：I_S ∼ N²（脚注 6 给出理由：
+     Einstein 项 ∼ 1/g_s²，g_st ∼ g²_YM ∼ 1/N；RR 五形式项 F ∼ N）。
+  6. 推广到度规源与规范流（(2.12)(2.13)）：(2.12) 自称 "We interpret the CFT/AdS correspondence
+     to be that"，(2.13) 自称 "we make an ansatz precisely along the above lines: … we propose that"。
+  7. 事后证据（§2.4–§2.6）：无质量标量与 U(1) 规范场两点函数、引力作用量发散 ↔ CFT 重整化与
+     共形反常（自称 "schematically"）、KK 谱与手征算子的部分匹配（摘要称 "quantitative confirmation"）。
+
+  **本推导不是从更基本的东西导出 (2.11)**：原文自称 ansatz，没有证明。
+  status: conjecture 因此是原文措辞的直译，不是编者的贬低；
+  kind: conjecture-support 同理（假设 + 事后检验）。
+gaps:
+  - >-
+    (2.11) 自称 ansatz：Witten 全篇没有把它称作定理、也没有给出证明；
+    "conjecture" 一词在文中都指 Maldacena 的 [13] 或 "the conjectured CFT/AdS correspondence"，
+    不指 (2.11) 本身（抽取记录 §3 第 5 条，L1-neg，逐页读图的否定性结论）。
+  - >-
+    只在大 N 且大 g²_YM N 时经典超引力可靠：(2.10) 之外要加弦论修正与量子圈，判据原文外包给 [13]。
+  - >-
+    (2.10) 的红外发散：原文逐字 "The formula (2.10) makes sense unless there are infrared
+    divergences in integrating over AdS_{d+1} to define the classical action I(φ)."
+    §2.4 把这些发散解释为 CFT 的重整化与反常，但自称 "schematically"，
+    即等式右边**未经重整化时并不有限**。
+  - >-
+    (2.12) 里有一个 c-数反常被 "temporarily suppress"，其精确修正形式全文没有写出闭式。
+  - >-
+    源必须足够小：引力侧的适定性靠 Graham–Lee（只对**接近标准共形结构**的边界共形结构成立，
+    且 p.8 逐字说这个限制 "is probably also necessary for most values of d"）；
+    本项目未一手核实 Graham–Lee（sources.bib 里 graham-lee-1991 是 L0 登记）。
+  - >-
+    规范场版本的适定性**已知在大场下失败**：Witten 只说 "One expects an analog of the
+    Graham-Lee theorem …"、"hopefully similar"，且脚注 4 用 Chern class 给出显式反证：
+    在 S² × S^d 上取 ½d+1 阶 Chern 类非零的规范场，若能延拓到 S² × B_{d+1} 就会得到矛盾。
+    因此 (2.13) 的适用域有限且**已知有边界**。
+  - >-
+    生成泛函一般只在形式意义下存在：对不相关（irrelevant）算子，(2.46) 型生成泛函
+    "one cannot without a very high degree of complication and arbitrariness define"；
+    原文的补救是把源 ε_a 取成支集不交的**无穷小变量且 ε_a² = 0**，只算到每个 ε_a 的一阶。
+    即「AdS/CFT 给出 CFT 的完整生成泛函」超出原文（E-W13、QW3）。
+  - >-
+    (W1) 只覆盖**无质量**标量。有质量时 (2.34) 没有趋于常数的解，φ_0 要由 φ ∼ f^{−λ₊} φ_0
+    （(2.36)）重新定义，且是权重 λ₊ 的共形密度而非函数、依赖辅助函数 f 的选择（E-W11、QW2）。
+    原文 p.10 对「所有无质量场同时打开」与「包含有质量场」两件事逐字写 "this we postpone"。
+  - >-
+    §2.6 的 KK 谱匹配只比较了**三族**含 relevant 或 marginal 算子的谱，
+    原文逐字 "Two additional families that contain only states of positive m² will not be considered
+    here."——摘要里的 "match" 是部分匹配，不是全谱匹配。
+  - >-
+    Witten 与 GKP 的一致性本身**不是**独立检验：Witten p.4 说是在本工作基本完成后才得知 GKP，
+    两条路线的重合只说明同一想法被独立提出，不构成对 (2.11) 的证明。
+notes: |
+  from: witten-1998-ads#E-W1–E-W6、E-W13、E-W18；抽取记录 §5 建议节点 A。
+
+  【为什么 depends_on 里有 ads5-cft4-duality-v2 而 GKP 支没有】这是两篇原文措辞的差别，
+  不是编者的组织选择。Witten 明确自称「把 [13] 的猜想精确化」（见上面第一条依赖的 note）；
+  GKP 只说 [14] "synthesized" 了两条路线，没有把 (12) 建立在 [14] 之上，
+  全文也不含 "conjecture" 一词。保留这个非对称结构，stringgraph why 才能显示
+  「即使 Maldacena 对偶被推翻，GKP 那条推导仍独立地立着」。
+
+  【互引关系】Witten p.4 逐字 "After this work was substantially completed, I learned of
+  independent work [36]"（[36] = GKP hep-th/9802109）；GKP v2 的 25 条参考文献里
+  **没有** hep-th/9802150。互引是单向的。
+
+  【原文的两处印刷问题，本推导与目标卡都不沿用】(2.11) 前一句的
+  "N = 4 supergravity in four dimensions"（应为四维 N=4 SYM 对应的五维超引力）；
+  (2.12) 前一句的 "four-sphere"（应为一般 d 的 S^d）。见目标卡 sources 的 note。
+
+  【本推导没有把 §2.4–§2.6 的检验结果当作依赖边】那些是**事后检验**（两点函数、共形反常、
+  KK 谱匹配），不是 (2.11) 的前提；把它们连成 depends_on 会把因果方向搞反。
+  若要入图应作为独立的「检验/证据」节点，本轮未建。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

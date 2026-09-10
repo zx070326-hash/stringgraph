@@ -1,0 +1,43 @@
+id: conv.ads-radius-unit
+family: ads-normalization
+title: AdS 半径单位：R = 1（体场质量一律按无量纲组合 mR 理解）
+definition: |
+  AdS_{d+1} 的半径 R 取为 1：度规写成不含 R 的形式，体场质量参数 m² 一律理解为
+  无量纲组合 (mR)²，边界算子维数 Δ 与边界坐标的标度都在 R = 1 单位下。
+
+  换算规则（把带显式 R 的公式转入本图时）：
+    m²  ↦ (mR)²，   长度 ↦ 长度 / R，   动量 ↦ R · 动量。
+
+  两篇原始文献的取法：
+  - Witten hep-th/9802150v2 全篇取 R = 1。式 (2.1) 的欧氏度规
+    ds² = 4 Σ_{i=0}^{d} dy_i² / (1 − |y|²)² 与式 (2.6) 的上半空间度规
+    ds² = (1/x_0²) Σ_{i=0}^{d} (dx^i)² 里都没有 R。原文没有专门声明这一点，
+    但从这两式直接可见（抽取记录 witten-1998-ads.md §0、QW7）。
+    因此其 (2.43) Δ(Δ − d) = m² 与 (2.44) Δ = ½(d + √(d² + 4m²)) 中的 m² 实为 (mR)²。
+  - GKP hep-th/9802109v2 显式保留 R：(41) ν = √(4 + (mR)²)、(45) Δ = 2 + √(4 + (mR)²)，
+    且它把截断边界取在 z = R（不是共形边界 z → 0），两点函数里的 ln(k²R²) 中的 R
+    就是这个截断位置。
+canonical: true
+sources:
+  - ref: witten-1998-ads
+    loc: "arXiv:hep-th/9802150v2, §2.1 式 (2.1) 与 (2.6)（度规中无 R）；§2.5 式 (2.43)(2.44)"
+    note: |
+      R = 1 是从度规式子读出的，原文没有一句「we set R = 1」。等级 L1（读图），
+      见 extractions/witten-1998-ads.md §0 与 QW7。
+  - ref: gubser-klebanov-polyakov-1998
+    loc: "arXiv:hep-th/9802109v2, §3 式 (41)(45)（显式 (mR)²）；§2 式 (13)（边界在 z = R）"
+notes: |
+  由 curator 依 extractions/witten-1998-ads.md QW7 与 gubser-klebanov-polyakov-1998.md §0
+  建立（2026-09-11）。
+
+  【为什么必须有这张卡】不声明本约定就把 Witten (2.43) 的 m² 与 GKP (45) 的 (mR)² 放在
+  同一张陈述卡里，量纲不一致：前者是无量纲数，后者才是。QW7 逐字要求「合并两篇的
+  维数-质量陈述前必须统一这条约定」。
+
+  【family 里目前只有这一条】family: ads-normalization 目前只有本卡，故 canonical: true。
+  若日后需要「显式保留 R」的对偶约定卡（例如为 GKP 的截断边界方案单独建卡），
+  应放进同一 family 并把 canonical 留给本卡。
+
+  【本卡不管的事】AdS 半径与 S^5 半径相等、R^4/α'^2 = 4πgN 这类**字典**内容不属于约定，
+  它们在 holography.n4sym-contains-iib-sugra-states 与 holography.ads5-cft4-duality-v2 里。
+  本卡只管「公式里写不写 R」。

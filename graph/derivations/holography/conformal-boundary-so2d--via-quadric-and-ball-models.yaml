@@ -1,0 +1,79 @@
+id: holography.conformal-boundary-so2d--via-quadric-and-ball-models
+target: holography.conformal-boundary-so2d
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2：§1, p.1–2，式 (1.1)(1.2) 与其后的标度等价、拓扑说明；
+      §2.1, p.5–6，式 (2.1)–(2.6) 与脚注 3（Penrose 共形紧化，引 [39]）。
+    note: |
+      §2.1 逐字的欧氏化声明："So far we have assumed Lorentz signature, but the identification of
+      the boundary of AdS_{d+1} with d-dimensional Minkowski space holds also with Euclidean
+      signature, and it will be convenient to formulate the present paper in a Euclidean language."
+summary: |
+  Witten 给出的论证（式号依 arXiv v2）：
+
+  1. **为什么要紧化**：SO(2,d) 不作用在裸的 d 维 Minkowski 空间上；作用在其上的紧化是
+     二次曲面 (1.1) uv − Σ η_{ij} x^i x^j = 0 加整体标度等价 (u,v,x^i) ∼ (su,sv,sx^i)。
+  2. **体的同一族坐标**：把 (1.1) 换成 (1.2) uv − Σ η_{ij}x^i x^j = 1，并只对全体变量的
+     整体变号取等价，得到 AdS_{d+1}；M_d 就是它的边界。这样构造使 SO(2,d) 同时作用在两者上。
+  3. **对称性的两副面孔**：SO(2,d) 在 AdS_{d+1} 上是通常（等距）对称群，在 M_d 上是共形群。
+     原文由此得出「有两种方式得到带 SO(2,d) 对称的物理理论」这一观察。
+  4. **拓扑**：(1.1) 的紧化拓扑上是 (S^1 × S^{d−1})/Z_2 且有闭类时曲线，
+     故通常改用万有覆叠 S^{d−1} × R。
+  5. **欧氏版本与共形结构**：欧氏 AdS_{d+1} = 开单位球 B_{d+1}，度规 (2.1)；
+     取在边界有单零点的正函数 f，ds̃² = f² ds²（(2.2)）延拓到 B̄_{d+1} 后在 S^d 上诱导度规；
+     由 f → e^w f（(2.3)）得 ds̃² → e^{2w}ds̃²（(2.4)），故 S^d 上只有共形结构、没有度规，
+     且该共形结构在 SO(1,d+1) 下保持。脚注 3 指出这就是 Penrose 引入共形无穷远的基本想法。
+     另给两个等价写法：(2.5) ds² = dy² + sinh²y dΩ²（边界在 y = ∞）与
+     (2.6) 上半空间 ds² = (1/x_0²)Σ(dx^i)²（边界在 x_0 = 0 加无穷远一点 P）。
+
+  这些内容本身是可严格化的纯几何，但 Witten 给的是**骨架**：关键的几步（(1.1) 确实是
+  Minkowski 空间的紧化、M_d 确实是 AdS_{d+1} 的边界、拓扑判定、f 的存在性与 ds̃² 的可延拓性）
+  都只是陈述而没有验证。按 docs/STATUS_LEVELS.md 的「断言 + 骨架」裁决取 physical-argument，
+  逐条断言写进 gaps；不取 conjecture（结论在数学上没有争议）。
+gaps:
+  - >-
+    **depends_on 为空**：本图目前没有 Penrose 共形紧化、二次曲面模型、双曲空间几何这类
+    数学基础节点可挂。宁可留空并在此记账，也不挂与内容无关的占位依赖
+    （先例：holography.n4sym-contains-iib-sugra-states--via-decoupling-limit）。
+    补齐这些 math/ 卡后应改为显式边——这也是把本卡升级到 rigorous / formalized 的前置条件。
+  - >-
+    "(1.1) 加标度等价给出 d 维 Minkowski 空间的紧化" 是断言：原文没有写出从 (1.1) 的
+    仿射片到 Minkowski 空间的显式同构，也没有验证 SO(2,d) 作用的良定义性。
+  - >-
+    "M_d 是 AdS_{d+1} 的边界" 是断言：原文没有验证 (1.2) 的闭包在何种意义下以 (1.1) 为边界。
+  - >-
+    拓扑判定 (S^1 × S^{d−1})/Z_2 与「有闭类时曲线」是断言，没有证明。
+  - >-
+    "SO(2,d) 在 M_d 上作为共形群作用" 是断言：原文没有写出共形因子，
+    也没有说明这个共形作用与 (iv) 的共形结构（欧氏侧的 SO(1,d+1)）如何对应。
+  - >-
+    (iv) 中「取在边界有单零点的正函数 f，ds̃² = f²ds² 可延拓到 B̄_{d+1}」的存在性与
+    延拓的正则性没有验证；(2.2)–(2.4) 只写出了变换律。
+  - >-
+    **本推导不覆盖 p.4 的唯一性断言**："indeed this is the only possible SO(2,4)-invariant
+    relation between these two spaces"——原文没有给对称性分类的论证。
+    该断言被有意排除在目标陈述之外（见目标卡 notes）；若要入图须新建独立卡，
+    status 至多 conjecture 或标 inferred。
+  - >-
+    Graham–Lee（Adv. Math. 87 (1991) 186，Witten [42]）与 Fefferman–Graham
+    （Asterisque (1985) 95，Witten [44]）是本方向唯一有数学定理背书的部分，
+    但它们讲的是「给定边界共形结构反解体 Einstein 度规」，与本卡断言的方向相反，
+    且本项目尚未一手核实（sources.bib 里两者均为 L0 登记）。本推导没有用到它们。
+notes: |
+  from: witten-1998-ads#E-W1（另见 §0 约定段、E-W3、抽取记录 §5 建议节点 C）。
+
+  【记号】原文写 SO(2,d) / SO(2,4)（不是 SO(4,2)），欧氏侧写 SO(1, d+1)；
+  Lorentz 号差 η_{ij} 为 −+…+（(1.1) 后逐字）。
+
+  【这是最容易严格化的一块】抽取记录 §5 的判断：这部分是纯几何、可严格化
+  （二次曲面、Penrose 共形紧化、单位球模型、共形类），"远比 Graham–Lee 容易"，
+  是本方向最现实的 Lean 形式化候选。严格化的路线是先补齐上面 gaps 里的 math/ 卡，
+  再新建一条 rigorous 的推导挂到同一目标（或换代出一张前提完整的新卡）。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

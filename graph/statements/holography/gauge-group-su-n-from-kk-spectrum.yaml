@@ -1,0 +1,81 @@
+id: holography.gauge-group-su-n-from-kk-spectrum
+kind: proposition
+title: 由 AdS_5×S^5 的 KK 谱缺 k = 1 态推出对偶的规范群是 SU(N) 而非 U(N)（Witten §2.6）
+statement: |
+  在 AdS 半径取为 1 的单位下（见 conv.ads-radius-unit）：
+
+  设 3+1 维 N=4 超 Yang–Mills 与 AdS_5 × S^5 上的 IIB 超引力按 GKPW 字典对应，
+  并用维数–质量关系（d = 4）把边界算子维数换成体场质量。考虑算子
+
+      T^{z_1 z_2 … z_k} = Tr Φ^{z_1} Φ^{z_2} … Φ^{z_k} .
+
+  维数为 k 的四维共形场有 λ₊ = k − 4，对应 AdS_5 上质量 m² = λ₊(λ₊ + 4) = k(k − 4)
+  的标量场。于是预期：N=4 理论的 Kaluza–Klein 谱中，对每个 k = 2, 3, … 都有一个质量
+  m² = k(k − 4)、按 SO(6) 的第 k 阶无迹对称张量表示变换的标量。
+
+  **k = 1 的态不出现在超引力谱中**。由此得出的结论（原文逐字）：
+
+    "Note that a k = 1 state does not appear in the supergravity, which confirms that the
+     supergravity is dual to an SU(N) gauge theory and not to a U(N) theory. In fact, the
+     k = 2 state saturates the bound (2.47), and a k = 1 state would violate it."
+
+  相应地 T^{z_1…z_k} 只在 k ≥ 2 时被考虑，原文逐字 "We require k ≥ 2 as the gauge group is
+  SU(N) and not U(N)."
+
+  本陈述断言的是：**在不额外添加边界自由度的前提下**，与 AdS_5 × S^5 上 IIB 超引力
+  按上述 KK 谱匹配相容的边界规范群是 SU(N)，不是 U(N)。
+  原文脚注 7 同时给出 U(N) 情形的补救方案与另一条理由（逐字）：
+  U(1) 规范场是**自由**的，而 AdS_5 理论中一切都与引力耦合、没有自由场；
+  "To describe U(N) gauge theory on the boundary, one would have to supplement the AdS_5
+   theory with an explicit U(1) singleton field on the boundary."
+  故本陈述**不**断言「U(N) 版本的对应不可能存在」，只断言「AdS_5 体理论本身编码的是 SU(N)」。
+uses_conventions: [conv.ads-radius-unit]
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2, §2.6, p.26（T^{z_1…z_k}、k ≥ 2 的要求、m² = k(k−4)、
+      k = 1 缺席的结论）与同页脚注 7（U(1) 自由场论证与 singleton 补救）。
+      KK 谱数据 Witten 转引 [30]（Kim–Romans–van Nieuwenhuizen）的 "eqn. (2.34) and in Fig. 2
+      and Table III"，并注明该文的参数 e 被设为 1；另引 [31]（Gunaydin–Marcus）。
+    note: |
+      p.1 逐字确认全篇规范群写法："N = 4 super Yang-Mills theory in four dimensions, with gauge
+      group SU(N) and coupling constant g_YM"。
+      ⚠ 与 Maldacena hep-th/9711200 全篇的 U(N) 冲突，见 notes（extractions/witten-1998-ads.md
+      E-W14、QW5）。
+tags: [holography, ads-cft, gauge-group, kaluza-klein, spectrum, n4sym]
+notes: |
+  from: witten-1998-ads#E-W14（另见 E-W12、E-W15、QW5）。
+
+  【★ 与 holography.ads5-cft4-duality-v2 的表述不兼容——已提交里程碑规范化，不得私下统一】
+  holography.ads5-cft4-duality-v2 逐字保留 Maldacena hep-th/9711200v3 的猜想句，
+  其中规范群写的是 **U(N)**（且该文的 Higgs 分支论证依赖 U(N) → U(N−M)×U(M)，
+  见该卡 notes 的「记号红线」）。本卡则记录 Witten §2.6 **论证** 对偶的是 SU(N)。
+  这是两篇原始文献之间可核实的**实质分歧**，不是笔误：
+  - Maldacena：全篇 U(N)（maldacena-1997.md §5.5 红线清单明列「SU(N)：本文一律 U(N)」）。
+  - Witten：全篇 SU(N)，并在 §2.6 给出反对 U(N) 的论证 + 脚注 7 的补救方案。
+  - GKP：p.1 引 't Hooft 时写 SU(N)，p.2 讲 D3 世界体时写 U(N)（同一篇内部就不一致）。
+  按根 CLAUDE.md 原则 4，同一引理的不兼容表述**不得由 curator 私下统一**，须走里程碑规范化流程。
+  本卡的做法是：两条表述各自忠实于自己的来源，并列入图，冲突显式记在这里，
+  由 lead/auditor 决定规范化方案（curator 不写 graph/milestones/，也不改 ROADMAP）。
+  规范化时的候选口径（供参考，不是裁决）：
+  (a) 「体理论编码 SU(N)；U(N) 需补边界 U(1) singleton」——两篇可同时为真；
+  (b) 认定 Maldacena 的 U(N) 是把 D3 世界体规范群直接搬过来，未考虑 KK 谱约束。
+
+  【status 为什么是 physical-argument】论证链是：字典 + 维数-质量关系（(2.43)）+ 已发表的
+  KK 谱表格 + 「谱里没有 k = 1」这一否定性观察。每一步都是物理论证，且关键的 KK 谱数据
+  Witten 只是**转述** [30][31]，本项目未一手核实。不取 conjecture：结论真伪在文献中并无争议，
+  论证不完整属于 gaps 轴（docs/STATUS_LEVELS.md「断言 + 骨架」裁决）。
+
+  【有效状态会被压到 conjecture】本卡依赖 holography.dimension-mass-relation，
+  后者依赖 holography.gkpw-dictionary（conjecture）。即：
+  「对偶的规范群是 SU(N)」这一结论建立在 GKPW 字典这条猜想之上，
+  它不是一条独立于字典的场论事实。
+
+  【BF 界的角色】原文用 "the k = 2 state saturates the bound (2.47), and a k = 1 state would
+  violate it" 作为佐证。(2.47) Δ ≥ d/2 原文自称推导 "quick and nonrigorous"，
+  本图未立卡（见 holography.dimension-mass-relation 的 notes），故本卡不把它作为依赖边，
+  只在推导的 gaps 里记账。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

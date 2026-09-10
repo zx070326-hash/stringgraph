@@ -1,0 +1,97 @@
+id: holography.conformal-boundary-so2d
+kind: proposition
+title: AdS_{d+1} 的共形边界是 d 维 Minkowski 空间的共形紧化，SO(2,d) 在体内是等距群、在边界上是共形群
+statement: |
+  设 d ≥ 2。取坐标 u, v, x^1, …, x^d，η_{ij} 为 d 维 Minkowski 度规（号差 −+…+）。
+
+  (i)【边界的二次曲面模型】方程
+
+        u v − Σ_{i,j} η_{ij} x^i x^j = 0                                    (1.1)
+
+      加上整体标度等价 (u, v, x^i) ∼ (s u, s v, s x^i)（s ∈ R，s ≠ 0），
+      给出 d 维 Minkowski 空间的一个紧化 M_d，SO(2,d) 在其上作用。
+      该紧化在拓扑上是 (S^1 × S^{d−1})/Z_2，带闭类时曲线；通常改用其万有覆叠，
+      拓扑上是 S^{d−1} × R。
+
+  (ii)【体的二次曲面模型】同样的坐标，把 (1.1) 换成
+
+        u v − Σ_{i,j} η_{ij} x^i x^j = 1                                    (1.2)
+
+      并只对全体变量的整体变号取等价，给出 AdS_{d+1}；M_d 是 AdS_{d+1} 的边界。
+
+  (iii)【对称性的两副面孔】SO(2,d) 作为通常的（等距）对称群作用在 AdS_{d+1} 上，
+      而作为共形群作用在 M_d 上。
+
+  (iv)【欧氏版本与「只有共形结构」】欧氏 AdS_{d+1} 取为开单位球 B_{d+1} ⊂ R^{d+1}，度规
+
+        ds² = 4 Σ_{i=0}^{d} dy_i² / (1 − |y|²)²                             (2.1)
+
+      （AdS 半径 = 1）；紧化 B̄_{d+1} 的边界是 S^d。取 B̄_{d+1} 上任一正函数 f，
+      要求它在边界上有单零点且在边界外处处非零，令
+
+        ds̃² = f² ds²                                                        (2.2)
+
+      则 ds̃² 可延拓到 B̄_{d+1} 上并在 S^d 上诱导一个度规；f 的选择不唯一，
+      f → e^w f  (2.3) 时 ds̃² → e^{2w} ds̃²  (2.4)。因此 S^d 上得到的**不是**度规，
+      而只有一个共形结构，且该共形结构在 SO(1, d+1) 的作用下保持。
+      等价的两个体度规写法：ds² = dy² + sinh²y dΩ²（(2.5)，边界在 y = ∞）；
+      ds² = (1/x_0²) Σ_{i=0}^{d} (dx^i)²（(2.6)，边界在 x_0 = 0 加无穷远一点 P）。
+
+  本陈述**不含** Witten p.4 的断言
+  "indeed this is the only possible SO(2,4)-invariant relation between these two spaces"
+  ——那是无证明断言，见 notes；也**不含**「因此对应是全息的」这一解释性结论。
+uses_conventions: [conv.metric-mostly-plus, conv.ads-radius-unit]
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2：§1, p.1–2, 式 (1.1)(1.2) 与其后的拓扑说明；
+      §2.1, p.5–6, 式 (2.1)–(2.6) 与脚注 3（Penrose 共形紧化）。
+    note: |
+      (iii) 的逐字依据（p.1–2）："the boundary M_d of AdS_{d+1} is in fact a copy of
+      d-dimensional Minkowski space (with some points at infinity added); the symmetry group
+      SO(2,d) of AdS_{d+1} acts on M_d as the conformal group."
+      (iv) 的逐字依据（§2.1）："while AdS_{d+1} has (in its Euclidean version) a metric
+      invariant under SO(1, d+1), the boundary S^d has only a conformal structure,
+      which is preserved by the action of SO(1, d+1)."
+      欧氏化的自我定位（§2.1 逐字）："it will be convenient to formulate the present paper
+      in a Euclidean language."
+tags: [holography, ads-cft, geometry, conformal-boundary, symmetry]
+notes: |
+  from: witten-1998-ads#E-W1（另见该抽取记录 §0 约定段与 §5 建议节点 C）。
+
+  【为什么不把「唯一性」写进陈述】Witten p.4 逐字："We can certainly identify the M_4 in
+  question with the boundary of AdS_5; indeed this is the only possible SO(2,4)-invariant
+  relation between these two spaces."——原文**没有给出对称性分类的论证**，这是一句断言。
+  抽取记录 §5 建议节点 C 明写「若单独立卡，status 应为 conjecture 或标 inferred」。
+  本卡的处理是把它排除在陈述之外，只留 (i)–(iv) 的几何内容，并在唯一推导的 gaps 里记账。
+  若后续要把这条唯一性断言入图，应新建独立卡，不得改本卡的 statement。
+
+  【本卡为什么是 physical-argument 而不是更高】(i)–(iv) 本身是可严格化的纯几何
+  （二次曲面、Penrose 共形紧化、单位球模型、共形类的定义），但 Witten 给的是骨架式论证：
+  (1.1)(1.2) 的紧化性质、拓扑判定 (S^1 × S^{d−1})/Z_2、"M_d 是 AdS_{d+1} 的边界" 都只是陈述，
+  没有证明；f 的存在性与 ds̃² 可延拓到 B̄_{d+1} 这一步也没有验证。
+  按 docs/STATUS_LEVELS.md「断言 + 骨架」档位裁决，取 physical-argument，
+  把断言处逐条写进推导的 gaps，**不**降到 conjecture（结论真伪在数学上没有争议）。
+  这是本方向最容易做严格化/Lean 形式化的一块（抽取记录 §5 的判断），补齐后可升级换代。
+
+  【唯一有数学定理背书的部分不在本卡里】Witten §2.2 p.7 引 Graham–Lee（Adv. Math. 87 (1991) 186，
+  Witten 的 [42]）：任何**充分接近标准共形结构**的 S^d 上共形结构，都由 B_{d+1} 上一个
+  唯一的（差一个微分同胚）满足负宇宙常数 Einstein 方程、在边界有二阶极点的度规按 (2.2) 得到；
+  另引 Fefferman–Graham（Asterisque (1985) 95，Witten 的 [44]，"Theorems 2.1 and 2.3"）。
+  这两条是 GKPW 字典里**唯一有真数学定理背书**的一支，但
+  (a) 它们是**局部**结果（只对接近标准共形结构者成立，Witten p.8 逐字说这个限制
+      "is probably also necessary for most values of d"）；
+  (b) 规范场版本 Witten 自称 "one expects" / "hopefully similar"，且脚注 4 用 Chern class
+      给出显式反证，说明大场下**必然失败**；
+  (c) 本项目**尚未一手核实** Graham–Lee 与 Fefferman–Graham（抽取记录 §3 第 4 条）。
+  因此本轮**不为它们立卡**，只在 literature/sources.bib 里做 L0 登记
+  （key: graham-lee-1991、fefferman-graham-1985），一手核实后再决定是否建 math/ 卡。
+
+  【记号红线】原文写 SO(2,d)/SO(2,4)（不是 SO(4,2)）；欧氏版的等距群写 SO(1, d+1)。
+  Penrose 共形紧化只在脚注 3 里被点名，本卡不把它当作已入图的依赖。
+
+  【版本】所有 loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)；
+  v1 未读且 arXiv comments 自陈 v2 含 "assorted corrections"；
+  ATMP 2 (1998) 253–291 发表版式号未核对。
+author: curator
+created: "2026-09-11"
