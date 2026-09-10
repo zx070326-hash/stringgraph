@@ -1,0 +1,128 @@
+id: worldsheet.physical-states-level-grading
+kind: proposition
+title: 旧协变物理态空间按 level 分级：H_phys = ⨆_N (H_phys ∩ F_N)，且在 level N 上物理态条件化为质量壳 (α'k² + N − a)ψ = 0 与 L_n ψ = 0 (n > 0)
+statement: |
+  固定 D ∈ ℕ、交换 ℚ-代数 R、**对角**度规分量 η : {0,…,D−1} → R、零模参数
+  a^μ = α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge，固定动量扇区），
+  以及截距 a ∈ R（物理态条件写作 (L_0 − a)|ψ⟩ = 0，conv.intercept-sign-a；Polchinski 的 A = −a）。
+  设 F = F(D,R) 与其 level 分级 F_N（加权齐次分量，权 N(d) = Σ_{(μ,n)} n·d(μ,n)）
+  如 worldsheet.bosonic-fock-space，L_m 如 worldsheet.virasoro-generators-free-boson，
+  H_phys = {ψ : (L_0 − a)ψ = 0 且 L_n ψ = 0 ∀ n > 0} 如 worldsheet.old-covariant-physical-states。
+  记 P_N : F → F 为到 F_N 的 level 投影（加权齐次分量投影）；每个 ψ ∈ F 是它的
+  level 分量的**有限**和 ψ = Σ_N P_N ψ（求和范围是 ψ 的支撑上出现的有限多个 level）。
+
+  **(1) 物理态的 level 分量仍是物理态。** 若 ψ ∈ H_phys，则对每个 N ∈ ℕ 有 P_N ψ ∈ H_phys。
+  反之若对每个 N 都有 P_N ψ ∈ H_phys，则 ψ ∈ H_phys。即
+    ψ ∈ H_phys  ⟺  ∀ N ∈ ℕ, P_N ψ ∈ H_phys。
+
+  **(2) H_phys 由它的 level 片生成。**
+    H_phys = ⨆_{N ∈ ℕ} ( H_phys ∩ F_N )
+  （子模的**上确界**，即右端各子模之并所张成的子模。见下文边界 (a)：本命题**不**断言该上确界是内直和。）
+
+  **(3) level N 上的物理态条件。** 设 η 还满足 η^{μμ} η_{μμ} = 1
+  （conv.metric-mostly-plus 的 diag(−1,+1,…,+1) 满足之）。则对一切 ψ ∈ F 与 N ∈ ℕ，
+    ψ ∈ H_phys ∩ F_N
+      ⟺ ψ ∈ F_N,
+        (α' k² + N − a) · ψ = 0,
+        L_n ψ = 0 对一切 n > 0。
+  换言之：在 level N 片上，L_0 条件退化为一个**标量** (α'k² + N − a) 对 ψ 的零化
+  （因为 L_0 在 F_N 上就是标量 α'k² + N 的乘法，
+  worldsheet.open-string-l0-equals-level-plus-mass），只有 n ≥ 1 的条件是真正的线性约束。
+  这里 α'k² := (1/2) α_0·α_0 = (1/2) Σ_μ η^{μμ} a^μ a^μ。
+
+  **(4) 非零物理态强迫质量壳。** 若 R 还**无零因子**，则对每个 N 与每个
+  **非零**的 ψ ∈ H_phys ∩ F_N 有
+    α' k² + N = a。
+  在 conv.metric-mostly-plus 下 k² = −m²，故这就是
+    α' m² = N − a。
+  这是「level 与质量的对应」这一句在本图中的精确形式：它是关于 H_phys 中非零态的断言，
+  不是关于 F 中任意态的恒等式。
+
+  【本命题**不**断言什么】——六条边界：
+  (a) **(2) 的 ⨆ 不是 DirectSum。** 「该上确界是**内**直和」（各 level 片线性无关、
+      分解唯一）在数学上为真（F_N 是多项式环的加权齐次分量），但**未**被本命题断言，
+      Lean 侧也未打包成 `DirectSum.IsInternal`（PhysicalStates.lean 文件头 gap 1，
+      根源是 Fock.lean 没有给 Fock 空间本身提供该结构）。
+      任何要用「H_phys 逐 level **唯一**分解」的下游必须先补这一条。
+      注意 (1) 已给出比 ⨆ 强一点的信息（分量落在 H_phys 里、且 ψ 是其分量的有限和），
+      但仍不含唯一性/直性的打包。
+  (b) **不**断言 a = 1，也**不**断言 D = 26。a 在本命题中自始至终是自由参数。
+      a = 1 见 worldsheet.open-string-intercept-v2（physical-argument）。
+  (c) **不**涉及内积/模态正负。本命题完全不用 worldsheet.fock-indefinite-form 的双线性型，
+      因而与零模态、无鬼定理（worldsheet.no-ghost-theorem-v4）无关。
+  (d) **level N 是加权齐次次数，不是数算符的本征值。** 与
+      worldsheet.open-string-l0-equals-level-plus-mass 的边界 (b) 相同：本图与 Lean 里的 N
+      是 worldsheet.bosonic-fock-space 定义的权，「它等于 Σ_{n≥1} α_{−n}·α_n 的本征值」
+      是标准事实但未单列节点。
+  (e) **逐动量扇区。** k 只以标量参数 a^μ 出现，没有位置算符 x^μ，没有对 k 的直积分；
+      「整个弦的协变态空间」只被覆盖了单个 k 的纤维。
+  (f) **不**断言 H_phys ∩ F_N 的维数、更不给出配分函数。F_N 有限生成来自
+      worldsheet.bosonic-fock-space，但物理态片的维数计数不在本节点内。
+
+  【假设的分工】(1)(2) 对任意对角 η 成立，**不**需要 η^{μμ}η_{μμ} = 1；
+  (3)(4) 需要该假设（它经由 worldsheet.open-string-l0-equals-level-plus-mass 传入）。
+  (4) 另需 R 无零因子。R 为交换 ℚ-代数这一条对整个岛都成立
+  （worldsheet.bosonic-fock-space 的缺口）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.physSubmodule_eq_iSup_inf_levelSubmodule
+  lean_file: StringFormal/NoGhost/PhysicalStates.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.physSubmodule_eq_iSup_inf_levelSubmodule（第 (2) 条）；另有 Fock.{levelComponent_mem_physSubmodule, mem_physSubmodule_iff_levelComponent}（第 (1) 条）、Fock.{sub_intercept_apply_of_mem_levelSubmodule, mem_physSubmodule_iff_of_mem_levelSubmodule, mem_physSubmodule_inf_levelSubmodule_iff}（第 (3) 条）、Fock.massShell_of_mem_physSubmodule（第 (4) 条）；level 投影本身是 Fock.levelComponent（同文件）与 Fock.sum_levelComponent"
+    note: |
+      本仓库，合并提交 2c8b577，形式化提交 58216ac；Lean 4 + Mathlib v4.33.1。
+      `lean_decl` 只填得下一个名字，故填第 (2) 条的主定理；逐条对应见推导 --via-lean 的 summary。
+      Lean 里截距叫 `a₀ : R`（不是 `a`），因为 `a : Fin D → R` 已被零模参数占用。
+      文件头自述「Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only」。
+      **curator 未自行重跑 `lake build`**。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（OCQ 的谱按 level 逐级分析：level 0、level 1 见 eq. (4.1.16)–(4.1.18) p.123–124，level 2 见其后）；质量壳 α'm² = N − a 的协变形式见 §2.7 eq. (2.7.25)、(2.7.27) 与 §4.1"
+    note: |
+      **文献侧的平行内容，不是本节点 formalized 的证据**（证据是上一条 stringformal-2026）。
+      Polchinski 与 GSW 都默认「物理态条件可以逐 level 分析」——因为 L_0 与 N 对易、
+      L_n 把 level N 送到 level N−n——但**没有把「H_phys 按 level 分级」单列为一条定理**，
+      更没有明写 ⨆ 与内直和的区别。因此本节点的第 (1)(2) 条在文献里是**隐含的标准做法**，
+      逐字陈述是本项目按 Lean 侧的定理规范化出来的；第 (3)(4) 条在 N = 1 处对应
+      已核实的 (4.1.16)（抽取记录 polchinski-1998-v1#E56）。
+      §4.1 的一般 N 与 §2.7 的两个式号：(4.1.16) 已核实；(2.7.25)、(2.7.27) 经 schrans-2020 §4.3
+      逐字复现核实（见 worldsheet.open-string-l0-equals-level-plus-mass 的 sources）；
+      「§4.1 逐 level 组织谱」这一句本身只有目录/页码级定位（L4），未逐字核实。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2（OCQ 的谱按能级 N 分析）"
+    note: 定位强度 L4（目录/页码级），式号未核实。GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，须按 conv.metric-mostly-plus / conv.alpha-prime-regge 转写。
+tags: [bosonic-string, quantization, fock-space, level-operator, mass-shell, no-ghost, formalized]
+notes: |
+  【建卡依据】docs/ROADMAP.md「待拆清单」条目「待建：`H_phys 按 level 分级`
+  （Fock.physSubmodule_eq_iSup_inf_levelSubmodule，现成 formalized 命题）」，lead 已同意。
+  查重（2026-09-11，`uv run stringgraph search level / level 分级 / grading`）：
+  既有节点中 worldsheet.open-string-l0-equals-level-plus-mass 只讲 L_0 在 F_N 上的取值、
+  worldsheet.physical-states-level-one 只讲 N = 1 一片、worldsheet.bosonic-fock-space 只定义
+  F_N 本身；**没有**任何节点断言「H_phys 本身被 level 分级」。故本卡不构成重复。
+
+  【与邻近三卡的分工】
+  - worldsheet.bosonic-fock-space：给出 F 与 F_N（level 分级的**定义**方），本卡用之；
+  - worldsheet.open-string-l0-equals-level-plus-mass：给出「L_0 在 F_N 上 = α'k² + N」这条
+    **算符恒等式**，本卡第 (3)(4) 条的唯一实质输入；
+  - worldsheet.physical-states-level-one：本卡第 (3) 条在 N = 1 的特例**再加上**对 F_1 的
+    显式参数化（ψ = ζ·α_{−1}|k⟩、L_1 条件 = 横向性 ζ·α_0 = 0）与 a = 1 处的零模态光子。
+    那三件事都用到 level 1 单项式的分类与双线性型，本卡不涉及；反过来本卡的一般 N
+    版本不被那张卡覆盖。两卡内容互不包含，Lean 侧也是两节（`Phys`/`Grading` 与 `LevelOne`）。
+  - worldsheet.old-covariant-physical-states：给出 H_phys 与零模态的**定义**；本卡只用 H_phys 一半。
+
+  【⨆ 与 DirectSum 的区别为什么必须写进陈述】这是本卡最容易被误读的一处，
+  也是 PhysicalStates.lean 文件头列的第 1 条 gap。物理文献里「H_phys = ⊕_N H_phys^{(N)}」
+  是默认写法，其中 ⊕ 指内直和（分解唯一）。Lean 证的是 ⨆（生成），
+  外加第 (1) 条给出的「分量落在 H_phys 内且求和有限」。
+  直性本身对多项式环的加权齐次分量是显然的，但**未被形式化**，
+  故本卡按 docs/STATUS_LEVELS.md「不确定时选低的那级」的精神，只断言 ⨆。
+  下游若把本卡当作内直和使用即为误用，见边界 (a)。
+
+  【记号】本卡按图的记号用 a 表示截距、α_0 表示零模；Lean 里分别是 `a₀` 与 `a`。
+  与 Polchinski 的换算 a = −A 见 conv.intercept-sign-a。
+author: curator
+created: "2026-09-11"

@@ -1,5 +1,5 @@
-id: worldsheet.open-string-intercept--via-light-cone-representation
-target: worldsheet.open-string-intercept
+id: worldsheet.open-string-intercept-v2--via-light-cone-representation
+target: worldsheet.open-string-intercept-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -35,5 +35,20 @@ gaps:
   - "D ≤ 4 的低维情形不在论证范围内（SO(D-1) 的表示计数论证失效）；本项目只关心 D = 26 附近，未处理。"
   - "本推导给出 a = 1，不给出 D = 26。与 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 共用 light-cone-quantization 定义，但那条另外用了 ζ 正规化，本条不用。"
   - "抽取记录 literature/extractions/polchinski-1998-v1.md 现已存在，#E18 的编号与内容经 curator 核对一致（第一激发能级的 SO(D-2) 矢量计数）。但该记录的 §0 与 Q2 指出：Polchinski §1.3 正文究竟走的是表示论计数还是显式洛伦兹代数验算**未核对原书**，且 D=26 的结论必在已核实的 (1.3.36) 之后（约 (1.3.37)-(1.3.42)，式号未核实）。"
+notes: |
+  【2026-09-11 换代】本文件由 worldsheet.open-string-intercept--via-light-cone-representation
+  改挂到换代后的陈述 worldsheet.open-string-intercept-v2（旧陈述把「α'm² = N − a」与
+  「一致性要求 a = 1」绑在一张卡上，见 docs/ROADMAP.md 待拆清单）。
+  因 derivation id 必须写成 `<statement-id>--via-<method>`（graph/CLAUDE.md），
+  无法就地改 id，故 `git mv` 成本文件名并删除旧文件；**除 id 与 target 外内容一字未改**，
+  作者、created 日期、depends_on、sources、summary、gaps 全部沿用原推导。
+
+  summary 末句「这是陈述中的 (c) ⇒ (a)」在 v2 中仍然成立：v2 的 (a)(b)(c) 三条刻画
+  与旧卡逐字相同（(a) level 1 无质量、(b) 第一级伪态是物理态、(c) SO(D−2) 矢量）。
+  其中出现的 α'm² = N − a 在 v2 里是背景记号，其论证已由
+  worldsheet.open-string-l0-equals-level-plus-mass（formalized）与
+  worldsheet.physical-states-level-grading（formalized）承担；本推导仍以
+  worldsheet.open-string-mass-shell（**光锥**质量壳，N 只对横向求和）为输入，
+  未改依赖，因为光锥路线走的本来就是那条而不是协变的 L_0 分级。
 author: curator-critdim
 created: "2026-09-10"
