@@ -181,7 +181,11 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
     # 顶点代数路线已把这一条接通到 rigorous
-    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "rigorous"
+    # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：DDFOperatorAll.lean 的
+    # lie_towerLop_ddfOp 把 ⁅L_m, A^ε_n⁆ = 0 证到**每个** m ∈ Z，新推导 --via-lean
+    # 使本卡升为 formalized（此前是 rigorous，best_derivation 为 --via-vertex-algebra-primary）。
+    # 无鬼定理 v4 的 effective **不变**，瓶颈换成别处（见下面的注释）。
+    assert effs["worldsheet.ddf-commute-with-virasoro"].name == "formalized"
     # 剩下的瓶颈：横向振子代数（末句比较被 transverse-oscillator-commutators 压住）
     # 与内积/伴随那一层的两条
     assert (
@@ -1048,7 +1052,11 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     assert ders["worldsheet.ddf-commute-with-virasoro--via-conformal-weight"][
         "effective"
     ] == "physical-argument"
-    assert rep["effective"] == "rigorous"
+    # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：新增 --via-lean（formalized，
+    # lie_towerLop_ddfOp，一切 m）后本卡的 effective 升到 formalized；
+    # --via-vertex-algebra-primary 仍是 rigorous、--via-conformal-weight 仍是 physical-argument，
+    # 上面那几条「多条推导取最强者」的断言因此仍然被这张卡检验着。
+    assert rep["effective"] == "formalized"
 
     # (b) own > effective is still exposed per-derivation
     rep2 = status_report(g, "worldsheet.ddf-transverse-oscillator-algebra")
