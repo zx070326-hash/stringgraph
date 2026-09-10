@@ -1,0 +1,93 @@
+id: worldsheet.shapovalov-form-existence--via-lean
+target: worldsheet.shapovalov-form-existence
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供本推导的**核心工具——万有性质**：`vermaLift`（把任一 Virasoro 模里的权 (c,h)
+      最高权向量提升为等变映射）、`vermaLift_hwv`、`vermaLift_lie`（等变性，逆变性由它一行推出）。
+      另用到最高权关系 `lie_lgen_hwv_of_pos` / `lie_lgen_zero_hwv` / `lie_cgen_hwv`
+      （(2) 的 «(i) ⇒ (ii)» 与 σ-扭对偶里 C 按标量作用那一步 `lie_cgen_eq`，
+      后者经 `exists_smul_hwv` 把 V 的任意元写成 u·|c,h⟩ 后归约到 `lie_cgen_hwv`）。
+      **刻意未用**该卡的分级（levelSpan）与它不断言的 PBW / dim V_N = p(N) / V ≠ 0。
+      字面依赖（Shapovalov.lean import Verma.lean，逐条调用）。
+  - id: math.virasoro-anti-involution
+    inferred: false
+    note: |
+      **本推导对该卡 (2)「σ 是反自同构」的依赖是实质性的**（与 uniqueness 那条推导不同）：
+      σ-扭对偶 `ContraDual` 上的作用定义为 (X·φ)(v) := φ(σ(X)·v)，
+      要验证它是**李模**（`lie_lie` 公理，Lean 的 `ContraDual.instLieRingModule`）
+      必须用 σ⁅X,Y⁆ = ⁅σY, σX⁆，即 `VirasoroAlgebra.antiInvolution_lie`
+      （Shapovalov.lean 中该实例的 `lie_lie` 字段第一步就 rw 它）。
+      换言之：**若 σ 不是反自同构，σ-扭对偶就不是 Virasoro 模，整条构造路线不存在。**
+      此外 (1) 的取值 `antiInvolution_lgen`（L_n ↦ L_{−n}）、`antiInvolution_cgen`（C ↦ C）
+      在 `shapovalov_isContravariant` 与 `IsShapovalovFunctional.isHighestWeightVector`
+      里逐条用到。字面依赖（同文件，上一节）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{lie_cgen_eq, ContraDual, ContraDual.{ofLin, toLin, toLinₗ, ext, toLin_ofLin, lie_apply}, IsShapovalovFunctional, IsShapovalovFunctional.isHighestWeightVector, shapovalov, shapovalov_apply, shapovalov_hwv_hwv, shapovalov_isContravariant, existsUnique_isContravariant, hwv_ne_zero_of_isContravariant, isShapovalovFunctional_of_isContravariant, exists_isContravariant_iff}；上游调用 StringFormal.Virasoro.{vermaLift, vermaLift_hwv, vermaLift_lie, exists_smul_hwv, lie_lgen_hwv_of_pos, lie_lgen_zero_hwv, lie_cgen_hwv, eq_of_isContravariant} 与 VirasoroAlgebra.{antiInvolution_lgen, antiInvolution_cgen, antiInvolution_lie}"
+    note: |
+      本仓库，形式化侧提交 **1731c49**（σ-扭对偶与构造）与 **bbc1354**（等价那一半），
+      由 lead 以 **b95a406**（"merge: Shapovalov form on the Virasoro Verma module (formalizer)"）
+      合入 main；Lean 4 + Mathlib v4.33.1。文件头 Status 段逐字「No `sorry`, no new axioms.」，
+      formal/TODO.md 的 `shapovalov-form` 已勾选并逐字记「`exists_isContravariant_iff` 说这条假设
+      **不只是充分条件而是等价**」「这条假设**不可去**」。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Virasoro/Shapovalov.lean 的 "Existence" 一节。
+
+  **σ-扭对偶** `ContraDual R c h`：取 V(c,h) 的**全**线性对偶 V(c,h) →ₗ[R] R（不是分级对偶、
+  不是有限维对偶），装上作用 (X·φ)(v) := φ(σ(X)·v)。这是 Virasoro 模——`add_lie`/`lie_add`/
+  `smul_lie`/`lie_smul` 平凡，`lie_lie` 用 `antiInvolution_lie` 把 σ⁅X,Y⁆ 换成 ⁅σY, σX⁆ 后
+  由 `lie_lie` 与 `map_sub` 合上。**对任意交换 ℚ-代数 R 成立，无分级、无有限性假设。**
+  （做成类型同义词是因为 Mathlib 的 `Module.Dual.instLieRingModule` 已经在同一底层类型上
+  放了未扭的余伴随作用，直接 instance 会冲突。）
+
+  **(1) 条件构造** = `shapovalov`：`IsShapovalovFunctional.isHighestWeightVector` 把泛函 f
+  变成 `ContraDual` 里权 (c,h) 的最高权向量——三条件逐条对上：
+  `lie_cgen`（用 `lie_cgen_eq`：C 在 V 上是标量 c）、`lie_lgen_zero`（f(L_0 v) = h f(v)）、
+  `lie_lgen_pos`（σ 把 L_n (n>0) 送到 L_{−n} (−n<0)，用 f 杀负模态那一条）。
+  再由万有性质 `vermaLift` 得等变映射 V(c,h) → ContraDual，定义 B(x,y) := (vermaLift f₀ x)(y)。
+  归一化 `shapovalov_hwv_hwv` 由 `vermaLift_hwv` + `hf.apply_hwv` 一行；
+  逆变性 `shapovalov_isContravariant` 由 `vermaLift_lie` + `ContraDual.lie_apply` +
+  `antiInvolution_lgen` 一行。**存在唯一** `existsUnique_isContravariant` = 上面两条
+  + worldsheet.shapovalov-form-uniqueness 的 `eq_of_isContravariant`。
+
+  **(2) 等价** = `exists_isContravariant_iff`：«⟸» 是 (1)。«⟹» 是
+  `isShapovalovFunctional_of_isContravariant`：取 f := B(|c,h⟩, ·)，三个字段分别为
+  归一化（apply_hwv）、n < 0 时 B(|c,h⟩, L_n v) = B(L_{−n}|c,h⟩, v) = 0（−n > 0 时
+  `lie_lgen_hwv_of_pos` 把它打成 0）、n = 0 时同法得 h·B(|c,h⟩, v)。
+
+  **(3) 必要性** = `hwv_ne_zero_of_isContravariant`（假设 `[Nontrivial R]`）：
+  |c,h⟩ = 0 代入归一化得 1 = B(0,0) = 0，与 `zero_ne_one` 矛盾。
+
+  **本推导为什么是 `formalized`**：目标陈述的 (1)(2)(3) 逐句对应上列具名、无 sorry 的定理，
+  两条 depends_on 指向的卡本身也是 formalized。目标陈述已把「无条件存在性」明确排除在外
+  （其【不断言】(a)），因此这里**没有**「陈述强于证明」的落差。
+gaps:
+  - |
+    (i) **不给无条件存在性**，因为它需要 V(c,h) ≠ 0，而后者的唯一已知路线是 PBW
+    （math.verma-module-free-over-negative-part 的 (4)，rigorous，Mathlib v4.33.1 无 PBW）。
+    这**不是本推导的缺口**（目标陈述不断言它），而是本卡与 worldsheet.kac-determinant
+    之间的真实分界，记在此以免误读。同一张目标卡的另一条推导 --via-pbw 走的就是这条路线。
+  - |
+    (ii) **`ContraDual` 的模结构在 Lean 里是手写实例，未与 Mathlib 的对偶模理论对接**。
+    这不影响正确性（`lie_lie` 等公理逐条证明），但意味着日后若 Mathlib 引入
+    「沿反自同构扭的对偶模」这一通用构造，本文件应改写为它的特例。
+  - |
+    (iii) **不覆盖 Hermite / 实 (c,h) 情形**，也不给 ker B 的极大性
+    （schottenloher-2008 Theorem 6.8(3)）。见目标陈述的【不断言】(d)(e)。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+
+  【为什么这条推导值得单独看一眼】它是本项目里少见的「**把未证内容精确隔离成一条假设，
+  并证明该假设与结论等价**」的例子。(2) 的 «⟹» 半（bbc1354）不是装饰：没有它，
+  `IsShapovalovFunctional` 只是一条**看起来**够用的技术假设，读者无从判断它是否过强；
+  有了它，图上可以断言「这条路线的代价是最优的」。
+  reviewer 若要挑战本卡的 formalized，正确的靶子是目标陈述有没有偷偷把「存在」写成无条件，
+  而不是 Lean 侧的假设多不多。
+author: curator
+created: "2026-09-11"

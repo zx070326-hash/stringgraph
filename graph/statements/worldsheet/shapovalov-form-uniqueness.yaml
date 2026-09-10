@@ -1,0 +1,109 @@
+id: worldsheet.shapovalov-form-uniqueness
+kind: proposition
+title: Shapovalov（逆变）形式的唯一性、自动对称性与 level 正交性——无条件，不依赖 PBW 也不依赖 V(c,h) ≠ 0
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），|c,h⟩ 是其最高权向量，σ 是 Virasoro 反对合
+  （math.virasoro-anti-involution）。称 R-双线性型 B : V(c,h) × V(c,h) → R **逆变**
+  （contravariant），若
+
+      B(L_n x, y) = B(x, L_{−n} y)     对一切 n ∈ Z 与一切 x, y ∈ V(c,h)，
+
+  即 L_n 在 B 下的伴随是 σ(L_n) = L_{−n}。
+
+  **(1) 唯一性**：若 B, B′ 都逆变且 B(|c,h⟩, |c,h⟩) = B′(|c,h⟩, |c,h⟩)，则 B = B′。
+      特别地，**至多存在一个**满足归一化 B(|c,h⟩, |c,h⟩) = 1 的逆变双线性型；
+      它就是 **Shapovalov 形式**（若存在，见 worldsheet.shapovalov-form-existence）。
+
+  **(2) 对称性是定理，不是定义的一部分**：任一逆变双线性型自动对称，
+
+      B(x, y) = B(y, x)     对一切 x, y ∈ V(c,h)。
+
+      （证明：B 的转置 B^t 也逆变，且 B^t(|c,h⟩,|c,h⟩) = B(|c,h⟩,|c,h⟩)，用 (1)。
+      **不需要归一化**：(1) 只要求两个型在 (|c,h⟩,|c,h⟩) 上取值相同。）
+
+  **(3) 不同 L_0-level 正交**：设 V_N ⊆ V(c,h) 是 level N 分量（worldsheet.verma-module-v2
+      的「L_0 分级」，L_0 在 V_N 上作用为标量 h + N）。若 M ≠ N，则对一切 x ∈ V_M、y ∈ V_N
+
+      B(x, y) = 0。
+
+      （证明：由 n = 0 的逆变性 B(L_0 x, y) = B(x, L_0 y) 得 (h+M) B(x,y) = (h+N) B(x,y)，
+      而 M − N 是 R 中的可逆元——这一步用到 R 是 ℚ-代数。）
+
+  **(1)(2)(3) 全部无条件**：只用到「V(c,h) 由 |c,h⟩ 在负模态词下张成」
+  （worldsheet.verma-module-v2 的「负模态张成」），**不需要** PBW 基、不需要 dim V_N = p(N)、
+  **也不需要 V(c,h) ≠ 0**。若 V(c,h) = 0 则三条空洞成立，这不影响它们的正确性。
+
+  【本节点明确**不**断言】
+  (a) 逆变型的**存在性**。那是 worldsheet.shapovalov-form-existence，并且它**确实**需要
+      V(c,h) ≠ 0（归一化 B(|c,h⟩,|c,h⟩) = 1 立即蕴含 |c,h⟩ ≠ 0）。
+  (b) B 的 Gram 矩阵在 level N 上的任何行列式公式（见 worldsheet.kac-determinant 与
+      worldsheet.kac-determinant-level-two）。
+  (c) ker B 是极大真子模，或 V(c,h)/ker B 不可约。
+      （对照：schottenloher-2008 Theorem 6.8(3) 断言了这一条；本卡**不含**它。）
+  (d) 任何正定性 / 半正定性 / 酉性结论。B 是 **R-双线性**型，不是 Hermite 形式；
+      R 上没有序结构时「正定」无意义。
+  (e) 与物理侧 Hermite 内积 ⟨·|·⟩（由 L_n† = L_{−n} 定义）的等同。那需要 R = C、
+      共轭线性与实 (c,h)，见 schottenloher-2008 Theorem 6.8 的实 Hermite 版本。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.eq_of_isContravariant
+  lean_file: StringFormal/Virasoro/Shapovalov.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Shapovalov.lean :: StringFormal.Virasoro.{IsContravariant, eq_top_of_hwv_mem_of_lie_neg, IsContravariant.sub, eq_of_isContravariant, IsContravariant.flip, IsContravariant.flip_eq, IsContravariant.comm, isUnit_intCast, IsContravariant.eq_zero_of_level_ne}"
+    note: |
+      本仓库，形式化侧提交 1731c49，已由 lead 以 **b95a406** 合入 main；Lean 4 + Mathlib v4.33.1。
+      逐句对应：(1) → `eq_of_isContravariant`（本卡 formal.lean_decl）；
+      (2) → `IsContravariant.flip_eq`（型层面 `B.flip = B`）与 `IsContravariant.comm`（逐点）；
+      (3) → `IsContravariant.eq_zero_of_level_ne`（用 `isUnit_intCast` 把 M − N 取逆）。
+      「无条件」这一句对应 `eq_of_isContravariant` 的假设表：只有两条 `IsContravariant`
+      与一条 `h1 : B |c,h⟩ |c,h⟩ = B' |c,h⟩ |c,h⟩`，没有 `Nontrivial`、没有基、没有 PBW。
+      文件头 Status 段自述「No `sorry`, no new axioms」。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2（俄文原刊第 58 页）：M_{h,c}(k) 的定义与「называется формой Шаповалова」一句"
+    note: |
+      文献侧对照，**不承载本卡的论证**。FF 把 Shapovalov 形式直接定义成 PBW 基下的 Gram 矩阵
+      （«e_{−1}^k, e_{−1}^{k−2} e_{−2}, …, e_{−k} 作用到真空 v 上得到的基»，L1，
+      literature/extractions/math-sources.md §34.2(b)），因此在他们那里唯一性是构造的副产品、
+      并且**捆绑了 PBW**。本卡的内容恰恰是：唯一性与 PBW 无关。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.8(1)(2), p. 96（LNP 759, pp. 91-102）"
+    note: |
+      文献侧最接近的带编号来源（L1 逐页核实，math-sources.md §34.3）。逐字：
+      「Let h, c ∈ ℝ and M = M(c,h). 1. H : M × M → ℂ is the unique hermitian form satisfying
+      H(v₀,v₀) = 1, as well as H(L_n v, w) = H(v, L_{−n} w) and H(Zv,w) = H(v,Zw) …
+      2. H(v,w) = 0 for v ∈ V_N, w ∈ V_M with N ≠ M」。
+      **三处与本卡不同，不可直接当作本卡的来源**：
+      (i) 那里是 **Hermite（共轭双线性）**形式且限 **c, h ∈ ℝ**；本卡是任意 ℚ-代数上的
+          **R-双线性**型，覆盖复 (c,h)（FF 的设定）。
+      (ii) 那里把「唯一性」与「存在性」写在同一条里（"is the unique hermitian form"），
+          本卡按项目原则拆开：唯一性无条件，存在性另有前提。
+      (iii) 那里没有把**对称性是推论**这一点单列（Hermite 情形里对称性写进了定义）。
+      故本条只作对照与归属，本卡的严格性由 stringformal-2026 承载。
+tags: [cft, representation-theory, verma-module, shapovalov, virasoro, formalized]
+notes: |
+  【为什么把唯一性单独立卡（formalizer 的路线判断）】
+  Shapovalov 形式的教科书构造走三角分解 U(Vir) = U(vir₋) ⊗ U(vir₀) ⊗ U(vir₊) 与
+  Harish-Chandra 投影，**那一步就是 PBW**，Mathlib v4.33.1 没有（math.pbw-theorem 未形式化，
+  formal/TODO.md 的 `pbw-verma`）。formalizer 的观察是：这条路线把**两件强度完全不同的事**
+  绑在一起卖。唯一性（连同对称性、level 正交）只用「负模态词张成 V(c,h)」这一条，
+  在 Lean 里是两步子模论证（左核是 Virasoro 子模；先证 B(|c,h⟩, ·) = 0）；
+  存在性才需要真正的输入。拆成两张卡后，图上第一次能显示「唯一性已机器验证、存在性有条件」。
+
+  【(2) 的分量】把对称性写进「Shapovalov 形式」的**定义**是文献常见做法
+  （Schottenloher 的 Hermite 版本就是如此）。本卡按「一个节点一个命题」把它记为
+  **推论**：对称性不是要求，是逆变性的后果。这对下游有实际意义——检验一个候选型是否
+  Shapovalov 形式时，不必单独验对称性。
+
+  【(3) 用到 ℚ-代数在哪里】M − N ∈ Z 非零时要在 R 中可逆。取 R = C 时这是平凡的；
+  但若有人把本卡搬到 R = ZMod p，(3) 会失效（M ≡ N mod p 时论证断裂）。
+  Lean 侧 `isUnit_intCast` 把这一步显式化，故本卡的 ℚ-代数假设**不可去**。
+  (1)(2) 则对任意交换环成立（Lean 的 `[Algebra ℚ R]` 是文件级变量，(1)(2) 的证明未用到它）。
+  ⚠ 这一条差别**未写进 statement**（statement 统一在 ℚ-代数上叙述，与 Lean 的变量声明一致）；
+  日后若有人需要一般交换环上的 (1)(2)，应新建卡而不是改本卡文本。
+
+  【与 Kytölä VirasoroProject 的关系】该项目**没有** Shapovalov 形式（researcher 2026-09-11
+  逐文件核实，math-sources.md §34.7）。本卡是本项目的净增量。
+author: curator
+created: "2026-09-11"
