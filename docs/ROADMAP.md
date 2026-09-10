@@ -96,7 +96,7 @@
 - 待建：`H_phys 按 level 分级`（Fock.physSubmodule_eq_iSup_inf_levelSubmodule，现成 formalized 命题）
 - `worldsheet.physical-states-level-one` 的 (3) 可拆出"a = 1 处纵向光子是零模态"
 - `worldsheet.ocq-spurious-states`（定义带质量壳条件，Lean 的 spuriousSubmodule 不带；拆成"L_{−n} 像空间"（formalized）与"再交质量壳"两卡，让 spurious-orthogonal-to-physical 与 physical-states-level-one 回到 formalized）——**已完成 2026-09-11**（spurious-subspace formalized，level-one 复位）
-- 待建：`worldsheet.vertex-operator-adjoint`（V(b)_J† = V(−b)_{−J}，b·b = 0）与"动量塔及其双线性型"定义卡（ddf-adjoint / ddf-commute / no-ghost v4 三处隐含使用层间正交）——**已派**
+- ~~vertex-operator-adjoint 与 momentum-tower-fock-space~~ 已建（2026-09-11）。后续（curator 建议，按价值排序）：(1) `:e^{ink_0·X}:` 在 k_0² = 0 时权 0 且主场——两条瓶颈的共同上游，VertexWeight.lean 基例完成后可 formalized；(2) "径向厄米共轭规则"卡（四处散文重述）；(3) 拆 ddf-operators-adjoint 的 (2) Gram 递推走 rigorous 例外；(4) A^i_n = Σ α^i_m V^{(n)}_{−m} vs Lean 的 V^{(n)}_m 逐项对应相反，形式化前定死一种
 - `worldsheet.ddf-operators-v4`（一卡三事：A^i_n 定义、[L_m, A^i_n] = 0、[A^i_m, A^j_n] = mδδ；后两条是命题，形式化路径不同，拆成 v5 纯定义 + 两条 proposition；再加"横向性 ⟹ 模态和局部有限"命题，Lean 已有支撑）
 - ~~`worldsheet.open-string-virasoro-modes-v2`~~ 已建 v3 + `open-string-doubling-trick` 命题（2026-09-11）。后续 doubling-trick 边已加（2026-09-11）
 - `worldsheet.ocq-spurious-states`（定义带质量壳条件，Lean 的 spuriousSubmodule 不带；拆成"L_{−n} 像空间"（formalized）与"再交质量壳"两卡，让 spurious-orthogonal-to-physical 与 physical-states-level-one 回到 formalized）——**已派**
