@@ -37,13 +37,31 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§4.1，level 2 的分析，落在 eq. (4.1.16)–(4.1.18) 之后的 (4.1.19)–(4.1.28) 区间，p.124"
+    loc: "§4.1, **p.124 正文的结论性断言 + exercise 4.1（p.143）**。⚠ **§4.1 没有 level-2 的推导，也没有 (4.1.24)–(4.1.28) 这些式号**：§4.1 的最后一式是 (4.1.23)，§4.2 从 p.126 开始"
     note: |
-      **式号未核实**（抽取记录 literature/extractions/polchinski-1998-v1.md#E57 的位置栏为
-      `[页码已核实/式号未核实]`；schrans-2020 目录把 level 2 讨论标在 p.124，但其 4.7/4.8 两条
-      都写 (4.1.18)，抽取记录判为笔误之一）。Polchinski 处理的是一般 level-2 态
-      (E_{μν}α^μ_{-1}α^ν_{-1} + e_μ α^μ_{-2})|0;k⟩ 并只结论性地给出"A = −1 且 D = 26 时
-      才出现额外零态"，**本节点的显式闭式 (1)(2) 不在该处出现**，见本节点 notes。
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐页）——**旧 loc 的式号区间不存在**】
+
+      ⚠ **两层订正**：
+      1. 旧 loc 写「落在 (4.1.19)–(4.1.28) 区间」。**§4.1 的最后一个式号是 (4.1.23)**
+         （(4.1.22) 是 Mnemonic (L^m_0 + L^g_0)|ψ,↓⟩ = 0，(4.1.23) 是 (H^m + H^g)|ψ,↓⟩ = 0），
+         **(4.1.24)–(4.1.28) 根本不存在**。抽取记录 E57 转述的那套 level-2 联立方程
+         （[S] 的 [4.24]/[4.28]/[4.32]）**是 [S] 自己做的习题解答，不是原书内容**。
+      2. **原书正文不做 level-2 的推导**。p.124 逐字：
+           "The result at the next level is quite interesting: it depends on the constant A and also
+            on the spacetime dimension D. Restricting to the value A = −1 found at the first excited
+            level, the spectrum only agrees with the light-cone spectrum if in addition D = 26.
+            If D > 26, there are negative-norm states; if D < 26 the OCQ spectrum has positive norm
+            but more states than in light-cone quantization. **The derivation is left to the reader.**"
+         p.143 的**习题 4.1** 逐字：
+           "**4.1** Extend the OCQ, for A = −1 and general D, to the second excited level of the open
+            string. Verify the assertions made in the text about extra positive- and negative-norm states."
+
+      → 后果：**任何以 polchinski-1998-v1 为来源的 level-2 推导，其 status 不得高于
+        physical-argument，且不得引 [S] 的方括号编号当原书式号。** 本节点的闭式 (1)(2)
+        本来就标注为「本项目自行核算」，该定性不变；本条只是把 loc 改成原书里真实存在的位置。
+      另注意原书这段还给了 **D < 26 的情形**（正模但态数多于光锥），本节点未覆盖。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.3（E57）与 §12.10 表 B 第 12 项、表 C 第 5 项。
   - ref: gsw-1987-v1
     loc: "§2.2.2–2.2.3（第二能级伪态与 zero-norm 条件）"
     note: |
