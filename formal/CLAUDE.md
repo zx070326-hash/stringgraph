@@ -64,7 +64,7 @@ scripts/
 
 复用既有形式化的调研记录见 `NOTES-virasoro-reuse.md`。
 
-分解任务见 `TODO.md`。
+分解任务见 `TODO.md`。挑下一个目标用 `uv run stringgraph report` 末尾的 **formalization frontier**（所有依赖已 formalized、自身未形式化的节点），比 TODO 更实时。
 
 ## 规则
 
