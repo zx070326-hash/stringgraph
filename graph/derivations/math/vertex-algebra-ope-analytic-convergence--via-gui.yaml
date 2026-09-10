@@ -1,0 +1,48 @@
+id: math.vertex-algebra-ope-analytic-convergence--via-gui
+target: math.vertex-algebra-ope-analytic-convergence
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.vertex-algebra-complex-analytic-locality
+    note: |
+      Gui §7.11 引言逐字：「In this subsection, we assume the statements in Def. 7.2」；
+      定理的 f_{v,v′} 与 N 都直接取自 Definition 7.2 的第 2 条。同书同节，不标 inferred。
+sources:
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, §7.11 (pp. 77–78)：Definition 7.10 / (7.14)，Lemma 7.11 及其两行证明，Proposition 7.12 / (7.15) 及其证明，Lemma 7.13 / (7.16)–(7.17)（多变量 Laurent 展开的一般引理）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者主页 PDF；math-sources.md §8.5）**。Lemma 7.11 的证明逐字：
+      「When k ⩾ N, (z_1 − z_2)^k f_{v,v′} has no poles at z_1 = z_2. So the RHS of (7.14) vanishes.」
+      Proposition 7.12 的证明逐字：「It suffices to prove the claim on {(z_1,z_2) : 0 < |z_1−z_2| < r, r ⩽ |z_2|}
+      for all r > 0. Then this follows easily from the following basic lemma.」（即 Lemma 7.13）。
+      Lemma 7.13 的陈述与证明 researcher 只记了「多变量 Laurent 展开的一般引理，(7.16)–(7.17)」，未逐字转录。
+      文献自称的严格程度：数学讲义中带证明的 Proposition，全书宗旨即证收敛性（前言逐字）。
+      **版本陷阱**：编号只对 2026-07-15 主页版核实。
+summary: |
+  (1) 由 Definition 7.2 第 2 条，(z_1 - z_2)^N f_{v,v′} 在 C^× × C^× 上全纯，故对固定 z_2 ∈ C^×，
+      z_1 ↦ f_{v,v′}(z_1, z_2) 在 z_1 = z_2 处至多有 N 阶极点，在 0 < |z_1 - z_2| < |z_2| 的穿孔圆盘上全纯。
+  (2) Definition 7.10：用围道积分 (7.14) 定义 ⟨v′, (A_k B)(z_2) v⟩ = ∮_{C(z_2)} (z_1-z_2)^k f_{v,v′} dz_1/(2πi)；
+      由 (1)，被积函数在 C(z_2) 所围区域内除 z_1 = z_2 外全纯，积分与圆周选取无关（Cauchy）。
+  (3) Lemma 7.11：k ≥ N 时 (z_1 - z_2)^k f_{v,v′} 在 z_1 = z_2 无极点，被积函数全纯，围道积分为零，故 A_k B = 0。
+  (4) Proposition 7.12：(7.14) 正是 z_1 ↦ f_{v,v′}(z_1, z_2) 在 z_1 = z_2 处的 Laurent 系数
+      （(z_1-z_2)^{-k-1} 项的系数即 ∮ (z_1-z_2)^k f dz_1/(2πi)），于是 (7.15) 是该 Laurent 展开。
+      收敛性：只需对每个 r > 0 在 {0 < |z_1 - z_2| < r, r ≤ |z_2|} 上证 a.l.u. 收敛；
+      这由 Lemma 7.13（多变量全纯函数在「乘积型」区域上 Laurent 展开的 a.l.u. 收敛）得到；
+      对 r 取遍正数即覆盖 Ω_0 = {0 < |z_1 - z_2| < |z_2|}。
+gaps:
+  - "Lemma 7.13（多变量 Laurent 展开的 a.l.u. 收敛引理，(7.16)–(7.17)）的陈述与证明未被转录；summary 第 (4) 步的
+     「由 Lemma 7.13 得到」是照抄 Gui 的一句话，本图未复核该引理。它是标准的多复变结果（环形域上全纯函数的
+     Laurent 展开在紧集上绝对一致收敛），故不影响 status，但登记为未转录。"
+  - "Gui 全书的常设假定（V 为 N-分次、L_0 可对角化；§5.5 的 CFT-type 假设 dim V(n) < ∞ 与 V(0) = C1）
+     是否为 Proposition 7.12 所必需，本图未核实；本推导把它们视为 Definition 7.2 背景对象的一部分，
+     由依赖节点 math.vertex-algebra-complex-analytic-locality 承担。"
+  - "**前提在弦论中未被验证**：Definition 7.2 对玻色弦世界面 CFT（D 分量洛伦兹号差自由玻色子 ⊗ bc 鬼场）是否成立，
+     本图为 open（worldsheet.string-cft-is-a-vertex-algebra）。本推导本身不因此降级——它是关于任意满足 Def 7.2
+     的一对场的定理——但凡想把它用到弦论上的边都会被那条 open 节点压住。"
+notes: |
+  **为什么这一条能标 rigorous 而 worldsheet.ope-commutator-dictionary--via-contour-deformation 不能**：
+  两者用的都是「围道积分取 Laurent 系数」，差别只在前提——这里先有全纯函数 f_{v,v′}（Def 7.2 给的），
+  围道积分与逐项积分因此合法；Polchinski 那边没有任何关于 R{A(z)B(w)} 是全纯函数的前提，
+  用 Fig. 2.3 的图示代替了论证。**瓶颈不在围道技术，在前提。**
+author: curator
+created: "2026-09-11"

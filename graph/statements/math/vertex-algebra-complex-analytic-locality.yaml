@@ -1,0 +1,62 @@
+id: math.vertex-algebra-complex-analytic-locality
+kind: definition
+status: rigorous
+title: 场的局域性（复解析版，Gui Def. 7.2）：矩阵元级数 a.l.u. 收敛并解析延拓到 Conf²(C^×) 上同一个全纯函数，对角线极点阶一致有界
+statement: |
+  **背景对象**（Gui 讲义的常设假定）：V = ⊕_{n ∈ N} V(n) 是 N-分次复向量空间，P_n 是到 V(n) 的分次投影，
+  V′ = ⊕_n V(n)^* 是分次对偶，⟨v′, v⟩ 是 V′ × V → C 的双线性配对（**不是**正定内积）。
+  场 A(z) = Σ_{n ∈ Z} A_n z^{-n-1} ∈ End(V)[[z^{±1}]] 取齐次场（其模 A_n 把分次分量平移固定量；精确定义见来源）。
+  记 C^× = C \ {0}，Conf²(C^×) = {(z_1, z_2) ∈ C^× × C^× : z_1 ≠ z_2}。
+
+  **a.l.u. 收敛（Definition 7.1）**：设 Ω 是局部紧 Hausdorff 空间。函数级数 Σ_n f_n 在 Ω 上
+  **绝对且局部一致收敛**（converges absolutely and locally uniformly, a.l.u.），若每点 x_0 ∈ Ω 有邻域 U 使
+    sup_{x ∈ U} Σ_n |f_n(x)| < +∞；
+  等价地，对每个紧子集 K ⊂ Ω 有 sup_{x ∈ K} Σ_n |f_n(x)| < +∞。
+
+  **定义（局域性，复解析版；Definition 7.2）**：称齐次场 A(z) 与 B(z) **互为局域**，若对每个 v ∈ V、v′ ∈ V′ 下列两条成立：
+  1. 级数
+       ⟨v′, A(z_1)B(z_2)v⟩ := Σ_{n ∈ N} ⟨v′, A(z_1) P_n B(z_2) v⟩,                     (7.2a)
+       ⟨v′, B(z_2)A(z_1)v⟩ := Σ_{n ∈ N} ⟨v′, B(z_2) P_n A(z_1) v⟩                      (7.2b)
+     分别在开集
+       Ω_1 = {(z_1, z_2) ∈ C^2 : 0 < |z_2| < |z_1|},   Ω_2 = {(z_1, z_2) ∈ C^2 : 0 < |z_1| < |z_2|}
+     上 a.l.u. 收敛（于是 (7.2a)、(7.2b) 自动分别是 Ω_1、Ω_2 上的全纯函数）；
+  2. (7.2a) 与 (7.2b) 可以解析延拓到 Conf²(C^×) 上**同一个**全纯函数 f_{v,v′}；
+     并且存在 N ∈ N，**只依赖 A, B 而不依赖 v, v′**，使函数
+       (z_1 - z_2)^N f_{v,v′}(z_1, z_2)                                                  (7.3)
+     在 C^× × C^× 上全纯。
+
+  直观地说：(7.2a)、(7.2b) 分别在 Ω_1、Ω_2 上收敛，并延拓成 Conf²(C^×) 上同一个全纯函数，
+  它在 z_1 = z_2 处的极点阶至多为 N，且 N 与 v, v′ 无关。
+  （(7.2a)/(7.2b) 中的求和是对**分次指标** n 求和，即「插入完备基 Σ_n P_n」，不是对模式指标求和。）
+uses: []
+uses_conventions: []
+sources:
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, Definition 7.2 (Local fields (complex analytic version)), p. 70，含 (7.2a)(7.2b)(7.3) 与 Ω_1、Ω_2；Definition 7.1 (a.l.u. convergence), p. 69；分次投影 P_n 见 §7.2 p. 70 指回 (3.18)"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者主页 PDF；math-sources.md §8.3(b)）**：Definition 7.1、7.2 与
+      直观解释段全部逐字转录，本节点照抄（变量名、集合记号、编号一并保留）。
+      **版本陷阱**：只对作者主页「Last update: July 15, 2026」版核实；arXiv:2305.03822 各版编号未核实（L0）。
+      **齐次场的精确定义**（模 A_n 的分次平移量）researcher 未转录，本节点只给概述并指回来源。
+      Gui §7.7 逐字：复解析版是三个版本中「the most difficult to verify」，但「closest to how physicists understand local fields」。
+tags: [vertex-algebra, locality, complex-analytic, convergence, definition, math-input]
+notes: |
+  **为什么这是定义卡而不是命题卡**（math-sources.md §13.2 建议 1）：Gui 证明了复解析版 ⟺ 形式变量版 ⟺ Lie 括号版
+  （§7.7 散文断言 + §7.8–§7.12 分段证明，**没有编号定理**），但那是关于本定义与 math.formal-distribution-locality
+  的一条命题；本节点本身只是一条定义，不因等价性而变成定理。若日后要把「三版等价」单独立节点，
+  loc 只能写「§7.7–§7.12」，且必须注明「本书未把它写成编号定理」。
+
+  **为什么 status 是 rigorous**：被定义对象（若干多变量全纯函数的收敛与延拓性质）全部是标准复分析概念，
+  a.l.u. 收敛有逐字定义，Conf²(C^×) 有显式描述，无未定义操作。
+
+  **与物理 OPE 的关系**：这是物理侧「径向排序乘积 R{A(z_1)B(z_2)} 在环域上收敛、两种排序互为解析延拓」的严格版本
+  中**关于两个场**的那部分（M 个场是 Gui Theorem 8.1，本批未落卡）。配对是 V′-双线性配对而非正定内积，
+  故洛伦兹不定号本身对本定义不是障碍；但 Gui 全书没有一处处理不定内积下的幺正性（math-sources.md §8.8）。
+
+  **弦论能否满足本定义**：本图中为 open——worldsheet.string-cft-is-a-vertex-algebra。
+  已核实的只有单个 c = 1 自由玻色子的 Heisenberg 情形（Schottenloher pp.181–182；Kytölä Thm 10.1 / Cor 10.2，
+  且后者只到 Lie 代数层面，不含局域性）。
+
+  **本节点刻意不声明任何约定节点**：无度规、无 α'、无 Virasoro 中心项归一化。
+author: curator
+created: "2026-09-11"

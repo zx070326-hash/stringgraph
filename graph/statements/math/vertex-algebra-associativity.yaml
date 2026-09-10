@@ -1,0 +1,68 @@
+id: math.vertex-algebra-associativity
+kind: proposition
+title: 顶点代数的结合性（形式 OPE）：Y(A,z)Y(B,w)C = Y(Y(A,z−w)B,w)C 于 V((w))((z−w))
+statement: |
+  设 V 是（复数域上的）**顶点代数**：向量空间 V 带真空向量 |0⟩、平移算子 T ∈ End(V) 与态-场对应
+    Y(·, z) : V → End(V)[[z^{±1}]],   A ↦ Y(A, z) = Σ_{n ∈ Z} A_{(n)} z^{-n-1},
+  满足真空公理、平移公理，以及**局域性公理**：对任意 A, B ∈ V，形式分布 Y(A, z) 与 Y(B, w)
+  按 math.formal-distribution-locality 互为局域（存在 N 使 (z-w)^N [Y(A,z), Y(B,w)] = 0），
+  且每个 Y(A, z) 是场（对任意 C ∈ V，A_{(n)} C = 0 当 n 充分大）。
+  （公理的精确措辞以来源为准；本图目前没有单独的顶点代数定义卡，见 notes。）
+
+  **命题（结合性）**：对一切 A, B, C ∈ V，在 V((w))((z - w)) 中成立等式
+    Y(A, z) Y(B, w) C = Y(Y(A, z - w) B, w) C,                                (1)
+  其中左端按下述方式理解：由局域性，级数 Y(A,z)Y(B,w)C 是空间
+    V[[z, w]][z^{-1}, w^{-1}, (z - w)^{-1}]
+  中某个元素在 V((z))((w)) 中的展开；把该空间嵌入 V((w))((z - w))——令 z ↦ w + (z - w)，
+  z^{-1} ↦ (w + (z - w))^{-1} 并视为 (z - w)/w 的正幂级数——(1) 的左端即该元素在此嵌入下的像。
+  右端 Y(Y(A, z-w)B, w)C 作为 w 与 (z - w) 的幂级数，由分次理由本来就属于 V((w))((z - w))。
+
+  等价的另一种写法：对一切 A, B, C ∈ V 与充分大的 N ∈ Z_+，
+    z^N Y(A, z) Y(B, w) C = z^N Y(Y(A, z - w) B, w) C   在 V[[z^{±1}, w^{±1}]] 中成立，
+  其中右端的 (z - w)^{-1} 按 w/z 的正幂展开。
+
+  **本命题是纯形式的**：等式所在的场所 V((w))((z-w))、V[[z^{±1}, w^{±1}]]、
+  V[[z,w]][z^{-1},w^{-1},(z-w)^{-1}] 全是形式 Laurent 级数空间，z, w 是形式变量，不涉及任何收敛性。
+  在顶点代数语境下，物理侧的「OPE」指的就是这条结合性（把 Y(A,z-w)B = Σ_k (z-w)^{-k-1} A_{(k)}B 代入 (1)）。
+uses_conventions: []
+sources:
+  - ref: frenkel-benzvi-2004
+    loc: "Theorem 3.2.1 (associativity), §3.2 Associativity（Google Books 页码定位 p. 49，L4）；措辞取作者勘误表 corrections.pdf「To § 3.2」的修订版，非印本正文"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者勘误表 https://math.berkeley.edu/~frenkel/BOOK/corrections.pdf；
+      math-sources.md §9.1）**。勘误表逐字：「3.2.1. Theorem. Any vertex algebra V satisfies the following
+      associativity property: for all A, B, C ∈ V we have the equality in V((w))((z−w)),
+      (1) Y(A,z)Y(B,w)C = Y(Y(A,z−w)B,w)C, where by the left hand side we understand its image in
+      V((w))((z−w)) under the map described above.」嵌入方式与「另一种写法」（Remark）亦逐字取自勘误表。
+      **版次陷阱**：勘误表 PDF 元数据显示 2001-09 生成（L4），很可能是第 1 版的勘误；第 2 版（2004）大概率已把
+      修订吸收进正文。编号 Theorem 3.2.1 在第 2 版存在（Google Books 命中 p.49，带控制实验）。
+      **禁令**：不得写 Frenkel–Ben-Zvi Theorem 3.3.1（本轮证据指向该编号不存在，math-sources.md §9.2）。
+      顶点代数的公理化定义在该书 Ch. 1「Definition of vertex algebra」（web draft 目录 p.20，L4），编号未核实。
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, §5.7, p. 53：逐字「in the VOA context, OPEs are just the associativity property (4.9)」；(4.9) 本身未转录"
+    note: |
+      只用来支撑陈述末句「顶点代数语境下的 OPE 就是结合性」；Gui 的 (4.9) 措辞 researcher 未转录（L0），
+      本节点不据此写任何公式。见 math-sources.md §8.8。
+  - ref: kac-1998
+    loc: "§4.8 (Borcherds identity), Theorem 4.8 与式 (4.8.1)（编号经作者勘误表 kac-1999-corrections L1 确认；正文措辞 L0）"
+    note: |
+      Kac 把同一内容装在更强的 Borcherds 恒等式（(4.8.1)）里；结合性是其特殊化。**措辞未核实**，
+      只作「同一命题在另一本标准教材中的位置」的指路，本节点的任何公式都不取自 Kac。
+      **禁令**：不得写 Kac Theorem 2.3 / Corollary 2.2（math-sources.md §10.3）。
+tags: [vertex-algebra, associativity, ope, formal, math-input]
+notes: |
+  **为什么与 math.locality-ope-equivalences 分开**：那条是关于任意两个局域形式分布的（不需要顶点代数结构），
+  结论是 A(z)B(w) 的奇异部分由有限多个 C^j(w) 给出；本条需要完整的顶点代数结构（真空、平移、态-场对应），
+  结论是**所有** OPE 系数场 C^j 都是顶点算子 Y(A_{(j)}B, w)——即「OPE 在代数内封闭」。
+  二者在 Gui 的箭头图（2026-07-15 版 p.74）里分别对应「Formal variable」节点与「OPE」节点。
+
+  **为什么与 math.vertex-algebra-ope-analytic-convergence 分开、且绝不可合并**：本条陈述场所是形式级数空间，
+  勘误表通篇没有 converge / holomorphic / analytic continuation 任何一词；那条的场所是 O(Conf²(C^×))。
+  见 math-sources.md §9.4 的对照表。
+
+  **本图缺一张顶点代数定义卡**：陈述开头的公理列表是概述，不是逐字定义。可核实的逐字定义本轮没有拿到
+  （FBZ Ch.1 编号 L4；Kac 正文 L0；Gui 与 Schottenloher 的定义编号 researcher 未转录）。
+  建议下一轮 researcher 补 Schottenloher Ch.10 §10.4 起或 Gui §4 的定义编号后，新建 `math.vertex-algebra`
+  定义卡并让本节点 `uses` 它；本节点的 statement 文本届时不改（id 与文本冻结），只在新卡上加边。
+author: curator
+created: "2026-09-11"
