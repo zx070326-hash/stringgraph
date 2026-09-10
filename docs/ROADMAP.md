@@ -55,7 +55,7 @@
 
 ## 待船长裁决
 
-- **ms.no-ghost-theorem 审批**：第四轮回译裁定 faithful，`audit.status: back-translated`，陈述 `worldsheet.no-ghost-theorem-v4`。审计员建议 approved。**2026-09-11 更新：拆 ddf-operators-v4 后，该里程碑的有效状态从 rigorous 降为 physical-argument**——原因是 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = mδδ 两条对易关系此前以"定义的一部分"身份传播 rigorous，图中从未独立论证，文献（Goddard 2008/GSW）也只预设不证明。这不是陈述有错，是记账修正；升级路径是 Lean 共形权（进行中）与顶点算子乘积。船长审批 approved 时应知晓：**里程碑陈述忠实，但其推导链目前含两处 physical-argument**。里程碑 canonical_text 三处引 ddf-operators-v4 待 auditor 第五轮改指 v5。船长需知晓三个已登记 gap：(2) 的历史归属仅二手（Goddard 2008 → Brower–Thorn 1971）；canonical_source 仍是 GT 1972 摘要级、只覆盖 (1a)；逐塔打包与一般 α' 归一化是本项目规范化，文献无逐字。批准操作：把该文件 `audit.status` 改为 `approved` 并提交。
+- **ms.no-ghost-theorem 审批**：第四轮回译裁定 faithful，`audit.status: back-translated`，陈述 `worldsheet.no-ghost-theorem-v4`。审计员建议 approved。**2026-09-11 更新：拆 ddf-operators-v4 后，该里程碑的有效状态从 rigorous 降为 physical-argument**——原因是 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = mδδ 两条对易关系此前以"定义的一部分"身份传播 rigorous，图中从未独立论证，文献（Goddard 2008/GSW）也只预设不证明。这不是陈述有错，是记账修正；升级路径是 Lean 共形权（进行中）与顶点算子乘积。船长审批 approved 时应知晓：**里程碑陈述忠实，但其推导链目前含两处 physical-argument**。第五轮审计（2026-09-11）确认 canonical_text 不引 ddf-v4（引用只在 statement 内，不可变），忠实性裁定维持；裁定 **approved 只断言忠实性，不绑有效状态**（已写入 docs/STATUS_LEVELS.md）。船长可在 effective = physical-argument 下批准。船长需知晓三个已登记 gap：(2) 的历史归属仅二手（Goddard 2008 → Brower–Thorn 1971）；canonical_source 仍是 GT 1972 摘要级、只覆盖 (1a)；逐塔打包与一般 α' 归一化是本项目规范化，文献无逐字。批准操作：把该文件 `audit.status` 改为 `approved` 并提交。
 
 ## 瓶颈分析（2026-09-10，`stringgraph why`）
 

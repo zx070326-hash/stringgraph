@@ -49,3 +49,7 @@ holography.black-hole-entropy-strominger-vafa
 - 升级需要给出新的 derivation 并指明来源；`formalized` 升级由工具从 Lean 构建结果自动写入，不手改。
 - 降级到 `refuted` 需要一条 `kind: refutation` 的 derivation。
 - 不允许在没有新 derivation 的情况下手改 `status`。
+
+## 里程碑 `approved` 的含义（lead 裁决 2026-09-11，依 auditor 第五轮建议）
+
+`audit.status: approved` 断言的是**陈述忠实性**（canonical_text 与 statement 经回译比对无漂移、无物理错误），**不**断言任何有效状态等级。推导严格程度由工具计算的 `effective` 单独承载并在 `stringgraph report` 逐里程碑列出。船长批准时应同时看到 effective 与瓶颈链（`stringgraph why`），但 effective = physical-argument 不阻止 approved。把 approved 绑到 effective ≥ rigorous 会制造"不拆定义卡以免降级"的反向激励。
