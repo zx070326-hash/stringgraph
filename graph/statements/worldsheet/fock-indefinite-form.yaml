@@ -44,6 +44,13 @@ sources:
       伴随关系本身（(1)(b) 对 `Fock.pairing` 成立）是 `Fock.pairing_creation_left` /
       `Fock.pairing_creation_right`；被形式化的型定义是 `Fock.pairing`，
       mostly-plus 度规是 `Fock.minkowski`。全部无 sorry。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/FockSigned.lean :: StringFormal.NoGhost.Fock.pairing_indefinite、pairing_indefinite_field"
+    note: |
+      本仓库，合并提交 11b4c0f。陈述 (4) 末句「于是当 R 是有序域且 D ≥ 2 时该型不定」的
+      机器检查（2026-09-11 补，关闭推导 --via-lean 的 gap (v)）。陈述括号里写的
+      「在 Lean 中未单列为定理」是 2026-09-10 的事实，按陈述不可变原则保留原文；
+      现况见 notes【2026-09-11】。
   - ref: polchinski-1998-v1
     loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124：level 1 态 e·α_{−1}|0;k⟩ 的范数分析（A < −1 时该 level 含一个负范数态，破坏幺正性）"
     note: |
@@ -71,5 +78,13 @@ notes: |
 
   【下游】本节点是无鬼定理形式化岛的第二块砖。接下来 formal/TODO.md 的 `sugawara`
   需要先按 worldsheet.bosonic-fock-space 的缺口 (i) 补零模，才能定义 L_0。
+
+  【2026-09-11：(4) 末句已形式化】陈述 (4) 括号里「在 Lean 中未单列为定理，见推导节点的
+  gaps (v)」一句已过时：FockSigned.lean 的 `Fock.pairing_indefinite`（有序环）与
+  `Fock.pairing_indefinite_field`（有序域）把它补上了，推导 --via-lean 的 gap (v) 已标关闭。
+  陈述文本按不可变原则不改。Lean 证明只需有序环 `[CommRing R] [PartialOrder R] [IsStrictOrderedRing R]`，
+  比陈述写的「有序域」弱；鬼态存在只需 D ≥ 1，正模态需 D ≥ 2。
+  （上一段说的 `sugawara` 一项也已完成，见 worldsheet.virasoro-generators-free-boson 与
+  worldsheet.open-string-l0-equals-level-plus-mass。）
 author: curator
 created: "2026-09-10"

@@ -1,0 +1,96 @@
+id: worldsheet.verma-level-spanned-by-partitions--via-lean
+target: worldsheet.verma-level-spanned-by-partitions
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供对象与起点：`VermaModule R c h`、最高权向量 `hwv`、负模态词作用 `wordAct`、
+      level 子模 `levelSpan`（由合成 `Composition N` 指标的词张成）——全部来自
+      formal/StringFormal/Virasoro/Verma.lean（该卡 formal.lean_file），VermaPBW.lean
+      `import StringFormal.Virasoro.Verma`。目标 (3) 的左端 `levelSpan R c h N` 就是该卡定义的 V_N。
+      字面依赖。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供 straightening 用到的括号关系 [L_a, L_b] = (a − b) L_{a+b}（a, b < 0 时无中心项）：
+      Lean 里是 `VirasoroAlgebra.lie_lgen_lgen`（`VirasoroAlgebra R` 是该卡的
+      formal.lean_decl），`straighten_aux` 的换序步用 Leibniz 律
+      ⁅L_a, ⁅L_b, X⁆⁆ = ⁅⁅L_a, L_b⁆, X⁆ + ⁅L_b, ⁅L_a, X⁆⁆ 与该括号。归一化同为
+      conv.virasoro-standard；中心项系数与本推导无关。字面依赖。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/VermaPBW.lean :: StringFormal.Virasoro.finrank_levelSpan_le_card_partition"
+    note: |
+      本仓库，合并提交 11b4c0f，形式化分支 agent/formalizer/straightening-and-indefinite @ 9995a96；
+      Lean 4 + Mathlib v4.33.1。本推导链条上的声明：`StringFormal.Virasoro.{wordWeight,
+      wordWeight_nonpos, wordMeasure, IsOrdWord, ordWordSetLe, ordSpanLe, ordSpan, straighten_aux,
+      straighten, wordAct_mem_ordSpan, wordAct_mem_levelSpan, levelSpan_eq_ordSpan, partitionWord,
+      levelSpan_eq_span_range_partitionWord, finrank_levelSpan_le_card_partition}`。
+      文件头自述「No sorry, no new axioms」；formal/TODO.md pbw-verma (a) 记
+      「公理只有标准三条」。**该公理检查目前是形式化者的人工登记**，scripts/check_axioms.lean 未做。
+      formalizer 在 agora 上报告 lake build green、axioms clean（消息 #398，2026-09-11）。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/Virasoro/VermaPBW.lean 内完成。路线：
+
+  1. **测度**。对词 l = [a_0, …, a_{k−1}]（a_i < 0）定义
+       wordWeight l := Σ_i i · a_i   （表头 i = 0 不贡献），
+     它在负模态词上 ≤ 0（`wordWeight_nonpos`），取 wordMeasure l := (−wordWeight l).toNat ∈ ℕ。
+     两种改写步都使 wordWeight **严格增大**（故 wordMeasure 严格减小）：
+       · 换序 a :: b :: t ↦ b :: a :: t（a > b，即相邻逆序）：增 a − b ≥ 1；
+       · 对易子项 a :: b :: t ↦ (a+b) :: t：增 −b − t.sum ≥ 1。
+
+  2. **straightening**（`straighten_aux` 对 wordMeasure 强归纳，`straighten` 为其包装）：
+     对 a < 0 与有序词 l，L_a · (word l) 落在 ordSpanLe (a + l.sum) (wordMeasure (a :: l)) 内，
+     即**总模态相同、且测度 ≤ wordMeasure (a :: l) 的有序词**的张成。
+     若 a :: l 已有序则无事可做；否则 a > head l =: b，用 Leibniz 律
+       L_a L_b X = L_b L_a X + [L_a, L_b] X = L_b (L_a X) + (a − b) L_{a+b} X，
+     两项的测度都严格小于 a :: l 的，归纳假设分别给出有序展开；对 L_b (L_a X) 一项，
+     再对 L_a X 的有序展开里的每个词 w（测度 ≤ wordMeasure (a :: tail)）用一次归纳假设
+     整理 L_b w。**关键记账**：归纳假设的结论必须带「输出测度 ≤ 输入测度」这一上界，
+     否则内层整理产生的词可能比原尾巴更长，L_b 作用后的测度失控。
+
+  3. **任意词 ∈ 有序词张成**（`wordAct_mem_ordSpan`）：对词长归纳，每步用 (2) 把
+     L_a 作用到尾巴的有序展开上（张成是子模，逐项应用）。
+
+  4. **V_N 的两种描述相等**（`levelSpan_eq_ordSpan`、`levelSpan_eq_span_range_partitionWord`）：
+     V_N 由合成指标的词张成，(3) 给出 ⊆ 有序词张成；反向包含因有序词本身是合成词。
+     再把总模态 −N 的有序词与 N 的分拆 `Nat.Partition N` 一一对应
+     （`partitionWord N p` = 把 p.parts 取负、按 ≤ 排序后作用于 |c,h⟩），
+     得 V_N = span_R (range (partitionWord N))。
+
+  5. **维数界**（`finrank_levelSpan_le_card_partition`）：域上 span 的 finrank ≤ 指标集基数
+     （Mathlib `finrank_range_le_card`），指标集是 `Nat.Partition N`（Fintype），
+     故 dim_K V_N ≤ Fintype.card (Nat.Partition N) = p(N)。
+gaps:
+  - |
+    **只是 PBW 的「≤」一半**。线性无关（dim V_N ≥ p(N)，等价于 U(Vir_-) 的 PBW 加诱导模自由性）
+    **未证**，Mathlib v4.33.1 没有 PBW 定理。因此本推导与 V(c,h) = 0 相容：
+    目标陈述在 V(c,h) = 0 时是空洞真。V(c,h) ≠ 0 与 dim = p(N) 归
+    worldsheet.verma-module-pbw-basis（rigorous，未形式化）。
+  - |
+    **p(N) 的具体数值不可计算**：`Fintype.card (Nat.Partition N)` 经 `Fintype.ofSurjective`
+    从 `Composition N` 构造，`decide` 归约不了。它按定义就是分拆函数，但目标陈述 (4)
+    对具体 N 的数值检验（如 dim V_2 ≤ 2）在 Lean 里不能靠 `decide` 自动完成。
+  - |
+    **文献侧无独立定位**。教科书把 straightening 作为 PBW 证明的一部分一并处理，
+    不单列命题；本推导的 sources 主项是本仓库。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。本推导**未由 curator 重新运行
+  lake build**；依据是 formal/ 的自述、formal/TODO.md 的登记、formalizer 的 agora 报告，
+  以及 11b4c0f 已由 lead 合并进 main。
+
+  【formalizer 对证明计划的更正】formal/TODO.md 与 worldsheet.verma-module-pbw-basis--via-pbw
+  原先写的计划是「对（词长, 逆序数）双重归纳」。**这个计划不成立**：Leibniz 律的第二项
+  [L_a, L_b] X = (a − b) L_{a+b} X 词长减 1，但其逆序数不受控制，且后续对
+  L_b (L_a X) 的嵌套整理会产生比原尾巴更长的词，双重归纳的度量不单调。
+  实际使用的度量是单一自然数 wordMeasure = (−Σ_i i·a_i).toNat，两种改写步都使它严格下降；
+  并且 `straighten` 的结论必须带「输出有序词测度 ≤ 输入词测度」这一上界，才能让
+  嵌套整理被归纳假设覆盖。已同步写进 --via-pbw 的 gaps。
+
+  【基环】(1)(2)(3) 对任意交换 ℚ-代数 R 成立；(4) 需特征零域 K（finrank 理论）。
+  目标陈述按此分别限定。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,83 @@
+id: worldsheet.verma-level-spanned-by-partitions
+kind: proposition
+title: Verma 模的 level N 分量由 N 的分拆所指标的有序单项式张成，故 dim_K V_N ≤ p(N)（PBW 的 straightening 一半）
+statement: |
+  设 R 是交换 ℚ-代数，(c, h) ∈ R^2，V(c,h) 为 Verma 模（worldsheet.verma-module-v2），
+  |c,h⟩ 为其最高权向量，V_N ⊆ V(c,h) 为其 level N 分量（由 N 的全体合成所对应的负模态词
+  L_{-b_1} ⋯ L_{-b_k}|c,h⟩，b_1 + ⋯ + b_k = N，b_i ≥ 1，张成的 R-子模；同上引节点）。
+  称负模态词 L_{-b_1} L_{-b_2} ⋯ L_{-b_k} |c,h⟩ 为**有序**的，若 b_1 ≥ b_2 ≥ ⋯ ≥ b_k ≥ 1。
+
+  (1) **straightening**：对任意 a ≥ 1 与任意有序词 w = L_{-b_1} ⋯ L_{-b_k}|c,h⟩，
+      L_{-a} w 落在总模态为 a + Σ b_i 的有序词所张成的 R-子模内。
+
+  (2) **任意负模态词落在有序词的张成内**：对任意 n_1, …, n_k ≥ 1，
+      L_{-n_1} ⋯ L_{-n_k} |c,h⟩ ∈ span_R { 有序词，总模态 = Σ n_i }。
+
+  (3) **V_N 由分拆指标的有序词张成**：
+        V_N = span_R { L_{-b_1} ⋯ L_{-b_k} |c,h⟩ : (b_1 ≥ ⋯ ≥ b_k ≥ 1) 是 N 的整数分拆 }，
+      即一个由 N 的分拆集合 Par(N) 指标化的张成族。
+
+  (4) **维数上界**：若 R = K 是特征零的域，则
+        dim_K V_N ≤ p(N)，
+      其中 p(N) = |Par(N)| 是分拆函数。
+
+  【本节点明确**不**断言】
+  (a) 上述有序词**线性无关**，即 dim_K V_N ≥ p(N) 与 dim_K V_N = p(N)。那是
+      Poincaré–Birkhoff–Witt 定理（对 U(Vir_-)）加诱导模的自由性，由
+      worldsheet.verma-module-pbw-basis 承载（rigorous，未形式化）。
+  (b) V(c,h) ≠ 0。本节点的一切结论在 V(c,h) = 0 时平凡成立（空洞真），
+      非零性同样归 worldsheet.verma-module-pbw-basis。
+  (c) 与 Verma 模的不可约性、奇异向量、Kac 行列式无关。
+uses_conventions: [conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.Virasoro.finrank_levelSpan_le_card_partition
+  lean_file: StringFormal/Virasoro/VermaPBW.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/VermaPBW.lean :: StringFormal.Virasoro.{IsOrdWord, ordSpan, partitionWord, straighten, wordAct_mem_ordSpan, levelSpan_eq_ordSpan, levelSpan_eq_span_range_partitionWord, finrank_levelSpan_le_card_partition}"
+    note: |
+      本仓库，合并提交 11b4c0f（"merge: Fock form indefinite over ordered rings; Verma level subspaces
+      spanned by partitions (formalizer)"），形式化分支 agent/formalizer/straightening-and-indefinite
+      @ 9995a96；Lean 4 + Mathlib v4.33.1。逐条对应：
+        (1) straightening → `straighten`（结论还带 wordMeasure 不增的上界，见推导 notes）
+        (2) 任意词 ∈ 有序词张成 → `wordAct_mem_ordSpan`
+        (3) V_N = span{分拆词} → `levelSpan_eq_ordSpan` 与 `levelSpan_eq_span_range_partitionWord`
+            （`partitionWord R c h N p`，p : Nat.Partition N）
+        (4) dim_K V_N ≤ p(N) → `finrank_levelSpan_le_card_partition`
+            （p(N) 写作 `Fintype.card (Nat.Partition N)`）
+      `lean_decl` 只填得下一个名字，填了主结论 (4)。文件头自述「No sorry, no new axioms」，
+      formal/TODO.md 的 pbw-verma (a) 记「公理只有标准三条」。有序词的 Lean 定义
+      `IsOrdWord l`：l 是严格负、**非降**的整数表 [−b_1, …, −b_k]（即 b_1 ≥ ⋯ ≥ b_k ≥ 1），
+      `wordAct` 按 foldr 作用，故 `wordAct [−b_1, …, −b_k] |c,h⟩ = L_{−b_1}(⋯(L_{−b_k}|c,h⟩))`，
+      与本节点的写法一致。
+  - ref: kac-raina-1987
+    loc: "Virasoro 代数最高权表示、Verma 模的 PBW 基与特征标这一主题；**不写 Lecture 编号**（sources.bib 的版本陷阱：两版讲号不可互换）"
+    note: |
+      文献侧不把 straightening 单列为命题——它是 PBW 定理证明的「张成」一半，
+      教科书里作为 PBW 的一部分一并陈述。本节点把它拆出来单列，是因为这一半已被机器证明
+      而另一半（线性无关）没有；见 worldsheet.verma-module-pbw-basis 的推导 gaps。
+tags: [cft, representation-theory, verma-module, pbw, straightening, formalized]
+notes: |
+  【与 worldsheet.verma-module-pbw-basis 的分工】那张卡是完整的 PBW 结论
+  （有序词构成**基**、dim = p(N)、V ≠ 0），rigorous 未形式化。本卡片只是它的
+  「≤」一半（张成），formalized。那张卡的推导 --via-pbw 现在 depends_on 本卡片：
+  它的第 (2)(3) 步中「有序词张成」这一半由本卡片提供，剩下「线性无关」才是 PBW 真正的输入。
+
+  【formalizer 的三点说明】（2026-09-11，formal/TODO.md pbw-verma (a) 与 VermaPBW.lean 文件头）
+  1. (1)(2)(3) 的**张成**结论对任意交换 ℚ-代数 R 成立（`section Span` / `section Level`
+     的 `variable [CommRing R] [Algebra ℚ R]`），不需要域。
+  2. (4) 的 finrank 界需要 **特征零的域** K（`section Dim` 的 `[Field K] [CharZero K]`），
+     因为 `Module.finrank` 与 `finrank_range_le_card` 需要域上的维数理论。
+  3. `Fintype.card (Nat.Partition N)` **不可由 `decide` 核归约**：Mathlib 的 `Fintype (Nat.Partition N)`
+     实例经 `Fintype.ofSurjective` 从 `Composition N` 构造，不是可计算枚举。
+     它**按定义**就是分拆函数 p(N)（Nat.Partition N 是「正整数多重集、和为 N」），
+     不需要另证「card = p(N)」，但也不能用它算出具体数值。
+
+  【为什么不把本卡片合进 verma-module-v2】v2 是定义卡，已明确把 PBW 的两半都划出去
+  （其【不断言】(a)(b)）；本卡片是命题卡，且其 status 由推导计算（formalized），
+  与 v2 的 definition/formalized 是不同性质的东西。
+
+  【与 worldsheet.descendant-weight-grading 的关系】那条只说降算符提高 L_0 本征值，
+  不涉及张成或线性无关；不重复。
+author: curator
+created: "2026-09-11"

@@ -16,6 +16,15 @@ depends_on:
       与 Vir_- 作为 K-模自由（基 {L_{-n} : n ≥ 1}），两者都直接来自该节点的陈述
       （括号关系 + 「{L_n} ∪ {C} 张成、Vir ≅ W(K) × K」）。归一化同为 conv.virasoro-standard；
       中心项的具体系数与本推导无关（Vir_- 内部的括号 [L_{-m}, L_{-n}] 没有中心项）。
+  - id: worldsheet.verma-level-spanned-by-partitions
+    inferred: false
+    note: |
+      提供 summary 第 (2)(3) 步中「有序单项式**张成** V(c,h)、且 level N 的有序词由 N 的分拆
+      指标化」这一半（目标陈述 (1) 的「张成」部分与 (2) 的「≤」部分）。该卡 formalized
+      （formal/StringFormal/Virasoro/VermaPBW.lean），2026-09-11 加入。
+      **本推导仍是 rigorous 而非 formalized**：剩下的「线性无关」一半（PBW 本体 + 诱导模自由性）
+      来自 kac-1979 / kac-raina-1987 的标准论证，Lean 侧没有。加这条边的意义是把
+      「PBW 里哪一半已被机器检查」在图上记账，而不是提升本推导的状态。
 sources:
   - ref: kac-1979
     loc: "§1（Verma 模的构造与逆变形式；PBW 基是其中行列式表述的前提）；**分节号未核实**，且 sources.bib 对本 key 指向哪一篇 Kac 存疑"
@@ -54,11 +63,20 @@ summary: |
 gaps:
   - "**未形式化，且不是「补细节」而是缺一条上游定理**。Mathlib v4.33.1 **没有** PBW 定理
      （`Mathlib/Algebra/Lie/Free.lean` 与 `SerreConstruction.lean` 都注明缺此定理），
-     故 (2) 的两次 PBW 都做不了。formal/StringFormal/Virasoro/Verma.lean 只证到**无序**词
-     张成（`negSpan_eq_top`）与每片有限生成（`levelSpan_fg`）。
-     formal/TODO.md 的 `pbw-verma` 一项把缺口拆成两半：(a) straightening（有序词已张成，
-     给出 dim V_N ≤ p(N)，对词长与逆序数双重归纳，不依赖上游）；
-     (b) 线性无关（= U(Vir_-) 的 PBW + 诱导模自由性，依赖上游）。"
+     故 (2) 的线性无关一半做不了。formal/TODO.md 的 `pbw-verma` 一项把缺口拆成两半：
+     (a) straightening（有序词张成，给出 dim V_N ≤ p(N)）——**已形式化**（2026-09-11，
+     formal/StringFormal/Virasoro/VermaPBW.lean，图节点 worldsheet.verma-level-spanned-by-partitions，
+     本推导已加为依赖）；(b) 线性无关（= U(Vir_-) 的 PBW + 诱导模自由性，依赖上游）——**未做**。
+     换成目标陈述的编号：**(2) 的上半（dim V_N ≤ p(N)）已形式化；(1)、(2) 的等号与 (3)
+     都需要线性无关，即 PBW，Mathlib 无**。"
+  - "**原证明计划有误（formalizer 更正，2026-09-11）**：本推导与 formal/TODO.md 原先写的
+     「对（词长, 逆序数）双重归纳」**不成立**——Leibniz 律第二项 L_b (L_a X) 经内层整理后
+     长度不减（内层 straightening 可产生比原尾巴更长的词），双重归纳的度量不单调。
+     VermaPBW.lean 实际用的有效度量是 wordWeight = Σ_i i·l_i（表头不贡献），它在负模态词上 ≤ 0，
+     换序步与对易子步都使它**严格增大**（故 wordMeasure = (−wordWeight).toNat 严格下降）；
+     并且 `straighten` 的结论**必须带 wordMeasure 不增**这一上界，否则嵌套整理无法被归纳假设覆盖。
+     这条 gap 记的是本推导 summary 里未写出的（也不必写出的）straightening 细节在形式化时暴露的问题，
+     不影响本推导 rigorous 的结论——文献侧的 PBW 证明不走这条归纳。"
   - "**「V(c,h) ≠ 0」在形式化侧是空缺**。在 (b) 之前，Verma.lean 中的一切结论都可能是空洞真
      （V(c,h) = 0 时全部平凡成立），且没有便宜替代品——任意 (c,h) 的非零最高权模本身
      就是要构造的东西，只有 (c,h) = (0,0) 时平凡模现成可用。这正是把非零性放进本节点

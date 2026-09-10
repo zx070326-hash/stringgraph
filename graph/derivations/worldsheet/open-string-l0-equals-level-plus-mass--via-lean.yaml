@@ -1,0 +1,83 @@
+id: worldsheet.open-string-l0-equals-level-plus-mass--via-lean
+target: worldsheet.open-string-l0-equals-level-plus-mass
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      提供 L_0 本身：Lean 里目标定理的左端是 `Fock.Lop η a 0`，即该定义卡 formal.lean_decl
+      所指的 `Fock.Lop`；零模平方 `Fock.zeroModeSq η a = Σ_μ η^{μμ} a^μ a^μ` 与
+      `Fock.nordPair_zero_zero`（:α_0·α_0: = α_0·α_0 · id）也定义在同一文件同一命名空间。
+      字面依赖，不是重构出来的。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供承载空间与 level 分级：目标定理的假设 `hP : P ∈ levelSubmodule D R N` 用的
+      `Fock.levelSubmodule` 正是该卡定义的加权齐次分量 F_N；证明中的
+      `creation_mem_levelSubmodule` / `level` 也来自 Fock.lean。
+      Sugawara.lean `import StringFormal.NoGhost.Fock`，字面依赖。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189，形式化提交
+      c567dab9204441549ad9dd6719e6b766bb5f005b；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的声明：`Fock.{zeroModeSq, nordPair_zero_zero, Lop_zero_apply_one,
+      Lop_zero_apply_monomial, Lop_zero_apply_of_mem_levelSubmodule}`，
+      以及被调用的 `Fock.lie_Lop_mode`（[L_m, α^ν_p] = −p α^ν_{m+p}）与其逐向量形式
+      `Fock.Lop_apply_mode`（L_n α^μ_p Y = −p α^μ_{n+p} Y + α^μ_p L_n Y）。
+      Sugawara.lean 文件头自述无 sorry；formal/TODO.md「无鬼定理岛 / sugawara」记
+      「公理只有标准三条」。**该公理检查目前是形式化者的人工登记**，
+      scripts/check_axioms.lean 未做。
+summary: |
+  直接机器检查的证明，全部在 formal/StringFormal/NoGhost/Sugawara.lean 内完成。路线：
+
+  1. **真空**（`Lop_zero_apply_one`）：把 L_0 = ½ Σ_j :α_{-j}·α_j: 作用在 1 上，
+     j ≠ 0 的每一项因右侧湮灭算符或正规序而为零，只剩 j = 0 项
+     ½ :α_0·α_0: = ½ zeroModeSq · id（`nordPair_zero_zero`），得 L_0 |k⟩ = ½ α_0·α_0 |k⟩ = α'k²|k⟩。
+
+  2. **单项式**（`Lop_zero_apply_monomial`）：对 level N 做强归纳。level N ≥ 1 的单项式
+     X^d 可写成 α^μ_{-n} X^e，其中 level(e) = N − n < N。由 `Lop_apply_mode`
+     （`lie_Lop_mode` 的逐向量形式）在 n = 0、p = −n 处给出 [L_0, α^μ_{-n}] = n α^μ_{-n}，故
+       L_0 (α^μ_{-n} X^e) = α^μ_{-n} L_0 X^e + n α^μ_{-n} X^e
+                          = (½ α_0·α_0 + (N − n) + n) α^μ_{-n} X^e，
+     归纳假设用在 X^e 上。
+
+  3. **level 子模**（`Lop_zero_apply_of_mem_levelSubmodule`）：P ∈ F_N 是 level N 单项式的
+     有限线性组合（`P.as_sum` + 齐次性），L_0 线性，逐项用第 2 步。
+
+  全部内容是振子代数上的有限步代数恒等式，没有收敛性、路径积分或 OPE 输入。
+gaps:
+  - |
+    **N 是 level 分级指标，不是数算符**。Lean 侧没有定义数算符 Σ_{n≥1} α_{-n}·α_n，
+    目标陈述也刻意以 level 分级表述（见其 (b)）。「数算符在 F_N 上 = N·id」是标准事实
+    （对单项式逐项计算），但**未被机器检查**，也没有独立节点。
+    引用本推导时若把 N 读作数算符，那一步是引用方自己补的。
+  - |
+    **η 必须对角且 η_{μμ} η^{μμ} = 1**（`hη : ∀ μ, η μ * η μ = 1`）。继承
+    worldsheet.virasoro-generators-free-boson notes【Lean 对接】(1)：Lean 用同一个 η
+    既缩并又给对易关系。conv.metric-mostly-plus 的 `Fock.minkowski` 满足，一般非对角 η 未覆盖。
+  - |
+    **零模是标量参数**。`a : Fin D → R` 是固定值，没有位置算符 x^μ、没有对 k 的直积分。
+    「α^μ_0 在由 |k⟩ 生成的 Fock 空间上是标量」这一步在目标陈述里从对易关系推出，
+    但 Lean 侧是**直接取定义** `mode η a μ 0 = a μ • id`，没有从含 x^μ 的更大空间约化下来。
+  - |
+    **R 须为交换 ℚ-代数**（`invTwo R` 需 ½）。bosonic-fock-space 那种任意交换环的一般性在此丢掉。
+  - |
+    **不含断言 (ii)（a^X = 0）**。Sugawara.lean 采用产生-湮灭正规序，定义里没有加常数；
+    formalizer 明确记录「a^X = 0 在 Lean 里是定义不是定理」。目标陈述已把 (ii) 划出
+    （其 (a)），归 worldsheet.normal-ordering-constant-ax。本推导不对 (ii) 说任何话。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。本推导**未由 curator 重新运行
+  lake build**；依据是 formal/ 的自述、formal/TODO.md 的登记，以及 7af81b1 已由 lead 合并进 main。
+
+  【与旧推导的关系】worldsheet.open-string-l0-level-form--via-zero-mode-substitution
+  是旧合卡的 physical-argument 推导，其 (i) 步就是本推导的内容（人工版），其 (ii) 步是
+  a^X = 0。旧推导保留不动；本推导只覆盖 (i)，且以 level 分级表述。
+
+  【文献侧】Polchinski (2.7.25) 直接给出结论等式（以数算符表述），不给证明；
+  所以本推导的 sources 主项是本仓库，文献只挂在陈述节点上作为对照。
+author: curator
+created: "2026-09-11"

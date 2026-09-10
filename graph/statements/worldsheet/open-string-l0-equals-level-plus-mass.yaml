@@ -1,0 +1,89 @@
+id: worldsheet.open-string-l0-equals-level-plus-mass
+kind: proposition
+title: L_0 在 Fock 空间的 level N 分量上是标量 α' k^2 + N 的乘法（固定动量扇区，X 部门）
+statement: |
+  设 F(D, R) 与其 level 分级 F_N 如 worldsheet.bosonic-fock-space（R 为交换 ℚ-代数；
+  level N(d) = Σ_{(μ,n)} n·d(μ,n)），设 L_m 如 worldsheet.virasoro-generators-free-boson
+  （振子双线性式 + 产生-湮灭正规序）。在固定动量 k 的扇区上，零模按开弦归一化
+  取标量值 α^μ_0 = (2α')^{1/2} k^μ（conv.alpha-prime-regge；开弦零模归一化见
+  worldsheet.open-string-virasoro-modes-v2），故 α_0 · α_0 ≡ η_{μν} α^μ_0 α^ν_0 = 2α' k^2。
+
+  则对每个 N ∈ ℕ 与每个 P ∈ F_N，
+    L_0 P = ( (1/2) α_0 · α_0 + N ) · P = ( α' k^2 + N ) · P，
+  即 **L_0 在 level N 的加权齐次分量上恰是标量 α' k^2 + N 的乘法**。
+  特别地（N = 0）L_0 |k⟩ = α' k^2 |k⟩。
+
+  【本命题**不**断言什么】——四条边界，每条都对应一条别的节点或一处已知缺口：
+  (a) **不**断言「共形正规序（由 T 的 Laurent 模定义）的 L_0 与上式的 L_0 是同一个算子」，
+      即不断言 a^X = 0。那是 worldsheet.normal-ordering-constant-ax 的内容，
+      它在本项目中是 physical-argument（经态-算子同构），且**不在 Lean 里**。
+  (b) **不**断言「level 分级指标 N 等于数算符 Σ_{n ≥ 1} α_{-n} · α_n 的本征值」。
+      这是标准事实（单项式 X^d 是该算符的本征向量，本征值恰为 N(d)），但本节点的 N
+      自始至终是 worldsheet.bosonic-fock-space 定义的**加权齐次次数**，不是数算符；
+      两者的等同本图与 Lean 侧都未单列。若需要以数算符表述的版本，另建节点。
+  (c) **不**断言 p^2 与质量的关系。在 conv.metric-mostly-plus 下 p^2 = −m^2，
+      由此配合物理态条件 (L_0 − a)|ψ⟩ = 0 才得 α' m^2 = N − a；那一步不在本节点内
+      （截距 a 见 worldsheet.open-string-intercept，符号约定见 conv.intercept-sign-a）。
+  (d) **不**覆盖鬼场部门。鬼场的正规序常数 a^g = −1
+      （worldsheet.bc-ghost-normal-ordering-constant），不为零。
+
+  【零模是标量参数，不是算符】本节点把 k 当作固定动量扇区的标签、α^μ_0 当作该扇区上的标量。
+  这不是额外假设：由 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0} 取 m = 0 得 α^μ_0 与一切模对易，
+  故它在由 |k⟩ 生成的 Fock 空间上就是标量 (2α')^{1/2} k^μ 的乘法
+  （详见 worldsheet.virasoro-generators-free-boson 的 notes【2026-09-11 更正】一段）。
+  完整的弦 Fock 空间（含位置算符 x^μ 与对 k 的直积分）不在本节点内。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule
+  lean_file: StringFormal/NoGhost/Sugawara.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.Lop_zero_apply_of_mem_levelSubmodule（另有 Fock.Lop_zero_apply_monomial 与真空情形 Fock.Lop_zero_apply_one，以及 Fock.zeroModeSq）"
+    note: |
+      本仓库，合并提交 7af81b1ca0cacd443e2f7437d58fc34df0292189，形式化提交
+      c567dab9204441549ad9dd6719e6b766bb5f005b；Lean 4 + Mathlib v4.33.1。逐字对应：
+        `Lop_zero_apply_of_mem_levelSubmodule (hη) (hP : P ∈ levelSubmodule D R N) :`
+        `  Lop η a 0 P = (invTwo R * zeroModeSq η a + (N : R)) • P`
+      其中 `zeroModeSq η a = Σ_μ η^{μμ} a^μ a^μ = α_0 · α_0`，`invTwo R = 1/2`，
+      `a : Fin D → R` 是零模参数 a^μ = α^μ_0 = (2α')^{1/2} k^μ（Sugawara.lean 文件头 §约定），
+      故 `invTwo R * zeroModeSq η a = α' k^2`。全部实质定理带假设 `hη : ∀ μ, η μ * η μ = 1`
+      （即 η_{μμ} = η^{μμ}，`Fock.minkowski` 满足）。无 sorry。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)（L_0 = α'p^2 + Σ_{n≥1} α_{-n}·α_n）、(2.7.27)（α_0^μ = (2α')^{1/2} p^μ），p.58 起"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字复现核实（「Recall (2.7.25) and (2.7.27) for the open
+      string」）。**这是文献侧的对应结果，但它以数算符 Σ_{n≥1} α_{-n}·α_n 表述**，
+      而本节点以 level 分级表述（见上文 (b)）；两种表述的等同标准但未在本图中形式化。
+tags: [bosonic-string, open-string, virasoro, level-operator, fock-space, zero-mode, formalized]
+notes: |
+  【本卡片是 worldsheet.open-string-l0-level-form 的拆分产物】（lead 裁决 2026-09-11，
+  采纳 curator 在旧卡 notes 末尾写下的拆分建议、并由 formalizer 在 agora 上复述）。
+  旧卡把断言 (i)（纯代数的 L_0 = α'p^2 + N）与断言 (ii)（共形正规序侧 a^X = 0）
+  写在同一张卡上，理由是「(i) 单独看内容太薄」。Sugawara.lean 把 (i) 机器证明之后，
+  合卡的代价变成「一条已形式化的结果被一条 physical-argument 封顶且无法记账」，故拆。
+  本卡片承载 (i)；(ii) **不另建新卡**——它本来就已经有卡：
+  worldsheet.normal-ordering-constant-ax（及其推导 --via-state-operator）。
+  旧卡 worldsheet.open-string-l0-level-form 写 superseded_by 指向本卡片，其旧推导
+  worldsheet.open-string-l0-level-form--via-zero-mode-substitution 保留不动
+  （陈述不可变原则：旧卡文本与旧推导都不改）。
+
+  【引用本卡片还是旧卡 / normal-ordering-constant-ax？——分派规则】
+  - 只需要「L_0 在 level N 片上 = α'k^2 + N」这条纯代数事实 → 引本卡片（可继承 formalized）；
+  - 需要「CFT 侧由 T 定义的 L_0 与振子式 L_0 相同、X 部门无加性常数」→ 引
+    worldsheet.normal-ordering-constant-ax；
+  - 两者都需要（即旧卡的完整合取）→ 同时引这两张卡，不要引已换代的旧卡。
+
+  【与光锥路线的对照】worldsheet.open-string-mass-shell 给的是**光锥**质量壳
+  α' m^2 = N − a，其 N 只对横向 i = 2..D−1 求和，常数由 zeta 正规化定出
+  （worldsheet.light-cone-normal-ordering-constant）。本节点是**协变**侧的一半：
+  N 对全部 μ = 0..D−1 求和。两条路线常数取值一致不是巧合，但本图未建「两者相容」的节点。
+
+  【formalized 的限定条件】继承 worldsheet.virasoro-generators-free-boson 的
+  notes【Lean 对接：已覆盖与未覆盖】(1)(3)(4)(5)(6)(7)：η 必须对角且 η_{μμ}η^{μμ} = 1；
+  零模只是标量参数（无 x^μ、无对 k 的直积分）；两种 L_m 定义未被证等同；
+  L_m^† = L_{−m} 未证；R 必须是交换 ℚ-代数；代数版未取完化。
+author: curator
+created: "2026-09-11"
