@@ -1,0 +1,196 @@
+id: worldsheet.radial-hermitian-conjugation
+kind: definition
+status: rigorous
+title: 径向量子化中的厄米共轭（本图对「†」的定义/约定）：z ↦ 1/z̄（双线性型版 z ↦ 1/z）与权 h 场的模反射 (φ_m)† = (φ̄)_{−m}；实场 φ_m† = φ_{−m}
+statement: |
+  **本卡定义的是本图中符号「†」的含义，不是一条被证明的命题。** 它把此前散落在四张卡的
+  散文里（worldsheet.fock-indefinite-form、worldsheet.virasoro-generators-adjoint、
+  worldsheet.ddf-operators-adjoint、worldsheet.vertex-operator-adjoint 各自的 summary/notes
+  都重述了一遍）的「径向共轭规则」写成一处。
+
+  【设定】世界面取 conv.worldsheet-complex-coords 的复坐标。径向量子化按
+  worldsheet.state-operator-isomorphism：半无穷柱面 w = σ^1 + i σ^2（σ^2 ≤ 0，σ^1 ~ σ^1 + 2π）
+  经 z = exp(−i w) 映到单位圆盘，圆盘中心 z = 0 是「入」（τ → −∞），单位圆外是「出」。
+
+  (1) 【共轭映射 I】柱面上的欧氏时间反演 σ^2 ↦ −σ^2（即把入态区域换成出态区域）在 z 平面上是
+      **圆反演**
+        I : z ↦ 1/z̄    （半双线性 / Hermitian 版本），
+        I_t : z ↦ 1/z   （**R-双线性型 / 转置版本，本图与 Lean 侧实际使用的那一个**）。
+      两者都保持单位圆 |z| = 1、互换圆内与圆外，且 I∘I = id、I_t∘I_t = id（直接代入可见）。
+
+  (2) 【场的层面】设 φ(z) 是权 h 的全纯场（worldsheet.primary-field），并设给定了它的**共轭场**
+      φ̄（对自由标量 X^μ 与由它构成的场，「X^μ 厄米」是本图的输入，见边界 (c)）。定义
+        φ(z)^†   :=  z̄^{−2h} · φ̄(1/z̄)        （Hermitian 版本），
+        φ(z)^t   :=  z^{−2h} · φ(1/z)          （转置版本；φ 自共轭时）。
+      指数 −2h 不是可选项：它是「共轭后仍是权 h 的场」所要求的唯一幂次
+      （I 的 Jacobian 的 −h 次与反全纯一侧的 −h 次）。
+
+  (3) 【模的层面 —— 本图下游真正用的那一条】取本图的模约定（与
+      worldsheet.energy-momentum-laurent-modes 对 L_m 的取法一致、conv.virasoro-standard）：
+        φ_m := ∮ (dz/2πi) z^{m+h−1} φ(z)   ⟺   φ(z) = Σ_{m ∈ Z} φ_m z^{−m−h}。
+      则 (2) 在模上给出**指标反射**
+        (φ_m)^†  =  (φ̄)_{−m},
+      特别地 φ 自共轭（「实」/「厄米」）时
+        (φ_m)^†  =  φ_{−m}。
+      （换元 u = 1/z 的一行计算：∮ (dz/2πi) z^{m+h−1} · z^{−2h} φ(1/z)
+      = ∮ (du/2πi) u^{(−m)+h−1} φ(u) = φ_{−m}，围道定向的反转与 dz = −du/u² 的负号相消。）
+
+  (4) 【⚠ 另一种指标约定下反射规则变成什么：h 依赖的平移】本图的部分节点（
+      worldsheet.vertex-operator-adjoint、Lean 的 `Fock.vertexOsc`）不用 (3) 的模指标，
+      而用「**z^K 的系数**」指标：φ(z) = Σ_K c_K z^K，故 c_K = φ_{−K−h}。此时 (3) 变成
+        (c_K)^†  =  (c̄)_{−K−2h},
+      即反射是 **K ↦ −K − 2h**，只有在 **h = 0 时**才退化成纯粹的 K ↦ −K。
+      这正是 worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 summary 第 1 步
+      所说「h ≠ 0 时反射规则带 h 依赖的额外指标平移」的精确内容；
+      那里 h = 0（k_0² = 0，worldsheet.exponential-vertex-operator-weight (3)），
+      故 (V^{(n)}_J)† 的指标恰是 −J。
+      **两种指标约定在 h = 0 时给出同一条规则**（c_K = φ_{−K}，反射 K ↦ −K 与 m ↦ −m 相容），
+      h ≠ 0 时不可混用。
+
+  (5) 【本图中这条规则的五个使用处（登记，**本卡不断言其中任何一条**）】
+        h = 1 的 ∂X^μ              → (α^μ_m)† = α^μ_{−m}   （worldsheet.fock-indefinite-form (1)(b)）
+        h = 2 的 T（Sugawara L_m） → L_m† = L_{−m}          （worldsheet.virasoro-generators-adjoint）
+        h = 2 的 b、h = −1 的 c    → b_n† = b_{−n}、c_n† = c_{−n}（worldsheet.bc-ghost-hermitian-conjugation）
+        h = 0 的 :e^{i n k_0·X}:   → (V^{(n)}_J)† = V^{(−n)}_{−J}（worldsheet.vertex-operator-adjoint）
+        h = 1 的 ∂X^i e^{i n k_0·X} → (A^i_n)† = A^i_{−n}   （worldsheet.ddf-operators-adjoint）
+      每一条是否成立、在哪个配对下成立、论证强度如何，**全部由那五张卡各自承载**；
+      本卡只提供它们共用的那条规则的精确表述。
+
+  【本定义**不**断言什么】——六条边界：
+  (a) **不**断言存在一个使本卡的 † 成为伴随的配对，也不断言其唯一性。本图中这类存在唯一性
+      只在单层 Fock 空间上有：worldsheet.fock-indefinite-form (1) 由 ⟨|k⟩,|k⟩⟩ = 1 与产生/湮灭
+      互为伴随**唯一确定**那个型（那是一条命题，且其证明**不经过本卡**，见 notes）；
+      动量塔上的型则是约定式定义（worldsheet.momentum-tower-fock-space (2)）。
+  (b) **不**断言 Hermitian（半双线性）版本在本图中成立。本图与 Lean 侧一律只有
+      **R-双线性型**（`Fock.pairing`），故实际使用的是 (1) 的 I_t : z ↦ 1/z 与 (2) 的转置版本；
+      「X^μ 厄米」在那里要读成「在转置下不变」。两者**在实极化下一致**，
+      复 Fock 空间上的 Hermitian 情形本图与 Lean 侧**均未做**
+      （与 worldsheet.fock-indefinite-form 的 notes【2026-09-11（二）】、
+      worldsheet.momentum-tower-fock-space 边界 (d) 是同一条限定）。
+  (c) **不**断言共轭场 φ̄ 的存在性或唯一性。对自由标量，「X^μ 厄米（φ̄ = φ）」是本图的**输入**，
+      不是结论；对指数算子，「:e^{i n k_0·X}: 的共轭是 n ↦ −n 的那一个」同样是输入
+      （worldsheet.vertex-operator-adjoint--via-radial-conjugation 第 1 步末要确认的就是这件事）。
+  (d) **不**断言 I 或 I_t 是 CFT 的对称性（它是反全纯的 / 反保向的，不在共形群里），
+      也不断言它与路径积分测度相容。
+  (e) **不**覆盖非整数权与零模的细节：h ∉ Z 时 z^{m+h−1} 的单值性需要额外条件
+      （本图 DDF 链靠归一化 (★) 2α' k_0·p = 1 保证模指标为整数，见
+      worldsheet.ddf-operators-v5 说明 (c)）；x^μ 这类对数/零模算子不在本卡范围
+      （worldsheet.momentum-tower-fock-space 边界 (a)：本图只有沿 k_0 的整数步移位 S_n）。
+  (f) **不**覆盖鬼场零模 b_0、c_0 带来的真空配对退化（worldsheet.bc-ghost-hermitian-conjugation
+      与 Polchinski (4.3.18) 的内容）：本卡只讲模反射规则本身。
+uses:
+  - worldsheet.state-operator-isomorphism
+  - worldsheet.primary-field
+uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)，p.122：⟨ψ|χ⟩ = Σ_{k≥1} ⟨L_k ψ|χ_k⟩ = 0（伪态与物理态正交；这一步把 L_{−k} 从右矢搬到左矢，即**使用**了 L_{−k}† = L_k）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E55，**式号与内容已核实**
+      （schrans-2020 §4.1/§4.2 逐步复现，目录 `4.1/4.2 p 122`）。
+      ⚠ **这里规则被使用，而不是被陈述**：Polchinski 不把 L_{−k}† = L_k 单列，
+      也不写出 z ↦ 1/z̄。与 worldsheet.virasoro-generators-adjoint 引的是同一处、同一强度。
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.17)，p.134：鬼模的厄米共轭 b_n† = b_{−n}、c_n† = c_{−n}（另 (4.3.18)：b_0/c_0 零模使基态配对需插入鬼场）"
+    note: |
+      抽取记录 #E66，**式号已核实**（schrans-2020 目录 `4.30–4.33 p 134`）。
+      这是全书把本卡规则**写成公式**的最接近的一处（对 h = 2 的 b 与 h = −1 的 c），
+      但原书同样**不给出它的来源**（不写 z ↦ 1/z̄，也不说它对一般权 h 的形式）。
+      抽取记录在此处逐字提醒「内积的定义是无鬼定理的核心，Polchinski 在这里做了一次
+      **非平凡的选择**，转节点时应显式列为依赖」——本卡就是那条依赖的承载节点。
+  - ref: polchinski-1998-v1
+    loc: "§2.8（p.63 起），eq. (2.8.1)–(2.8.18)（柱面 → 圆盘的映射 z = exp(−i w)、态-算子同构、反向映射）"
+    note: |
+      抽取记录 #E44，式号**大量已核实**（schrans-2020 目录 `2.63–2.74 p 63–67`）。
+      这是本卡 (1) 的**几何家**：入态在 z = 0、出态在 z = ∞，共轭就是把两者互换。
+      ⚠ **公式 z ↦ 1/z̄ 本身在抽取记录里没有任何锚点（L0）**：#E44 的转述只含映射 (2.8.1)
+      与同构的两个方向，不含共轭的定义。本卡 (1)(2)(3) 的具体写法是本项目按标准径向量子化
+      规则重建的，**未与原书核对**。这是本卡最主要的来源弱点。
+  - ref: polchinski-1998-v1
+    loc: "§6.7，eq. (6.7.9)–(6.7.11)，p.200–201：⟨A'_i(∞) A_j(0)⟩_{S₂} = ∫[dφ_b] Ψ_{A_i}[φ_b^Ω] Ψ_{A_j}[φ_b]，由此定义 Zamolodchikov 内积 ⟨⟨i|j⟩⟩"
+    note: |
+      抽取记录 #E112，**[已核实] / L1**（schrans-2020 §6.78–§6.82，笔记 p.349–352）。
+      这是全书对「共轭」最精确的一处：`A'_i(∞)` 是 A_i 在**另一坐标片**（u = 1/z）原点的像，
+      两片之差逐字是 `σ → 2π − σ`，即本卡 (1) 的反演；
+      由此得到的配对被原书明确描述为「形式上是一个**卷积**而非普通内积」。
+      → 这条逐字支持本卡边界 (b)：该配对是 BPZ 型的**双线性**配对，
+      不是 Hilbert 空间的 Hermitian 内积。
+      ⚠ 同一抽取记录登记了该节的**三处论证跳跃**（其中第 3 条逐字指出「路径积分 ↔ Hilbert 空间
+      的对应在这里是**被假定**的」），并建议整节标 physical-argument。
+  - ref: gsw-1987-v1
+    loc: "§2.2.2 'Virasoro algebra and physical states'，p.79 起（伪态/零态讨论，默认 L_m† = L_{−m}）"
+    note: |
+      定位强度 L4（目录/页码级，literature/extractions/brst-cohomology-sources.md §5.1），
+      **式号未核实**。GSW 同样把本规则当常识使用、不陈述。GSW 用 mostly-minus，
+      但本规则与度规号差无关。
+tags: [cft, radial-quantization, adjoint, hermitian-conjugation, definition, no-ghost]
+notes: |
+  【为什么立卡】「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则在 2026-09-11 被
+  **两处**登记为「本图没有节点」：
+    - worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 3 条（逐字：
+      「这条规则本图没有节点。第 1、3 步都以它为前提。最接近的
+      worldsheet.ope-commutator-dictionary 讲的是**围道形变**（OPE ↔ 对易子），不是伴随」）；
+    - worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint 的 gaps 第 2 条（同一条，
+      该处写作「仍然没有节点」）。
+  同一条规则此外还在 worldsheet.fock-indefinite-form、worldsheet.virasoro-generators-adjoint、
+  worldsheet.ddf-operators-adjoint、worldsheet.vertex-operator-adjoint 四张卡的散文里
+  各被重述一次（措辞互有出入）。本卡把它写成一处，关闭「没有节点」这条登记。
+  docs/ROADMAP.md 的 tower-cards 后续第 (2) 项，lead 已同意立卡。
+
+  查重：2026-09-11 跑 `uv run stringgraph search 径向 / 共轭 / 厄米 / adjoint / radial`。
+  返回的相关节点是 worldsheet.ope-commutator-dictionary（**径向排序**与围道变形 → 对易子；
+  与本卡机器不同：那条讲两个算子乘积的排序，本卡讲单个算子的共轭）、
+  worldsheet.state-operator-isomorphism（径向量子化的几何，本卡的 uses）、
+  以及上面五处伴随实例。**没有任何节点定义「†」本身。**
+
+  【status 定级：为什么 rigorous，以及有效状态会是什么】
+  本卡 status 写 **rigorous**：按 docs/STATUS_LEVELS.md 对 definition 的 status 含义
+  （「rigorous = 数学上精确但未形式化」），(1)–(4) 作为**规则的定义**是精确的——
+  (3) 的模反射由 (2) 经一行换元得到，(4) 的指标平移 K ↦ −K − 2h 是纯记号换算。
+  ⚠ 但本卡的**有效状态会被 worldsheet.state-operator-isomorphism 拉到 physical-argument**
+  （那条命题唯一的推导是 physical-argument：径向量子化是路径积分构造，不是定理）。
+  **这是有意的、如实的**：(1) 里「柱面上的欧氏时间反演对应 z ↦ 1/z̄」这句话的依据正是
+  径向量子化这套路径积分语言，而本图没有把它严格化。
+  下游两条推导（worldsheet.vertex-operator-adjoint--via-radial-conjugation、
+  worldsheet.ddf-operators-adjoint--via-vertex-operator-adjoint）本来就是 physical-argument，
+  故加本卡为依赖**不改变任何节点的有效状态**。
+
+  【⚠ 为什么 worldsheet.fock-indefinite-form 与 worldsheet.virasoro-generators-adjoint
+  **不**把本卡列为 uses（只在 notes 加指针）】这是本次接线最重要的一条判断。
+  那两张卡是 `formalized` 的，而它们的 Lean 定义**不经过本卡的规则**：
+    · `Fock.pairing` 不是「由 z ↦ 1/z 定义的配对」，而是由**普遍性质**定义的——
+      worldsheet.fock-indefinite-form (1) 断言「⟨|k⟩,|k⟩⟩ = 1 + 产生与湮灭互为伴随」
+      唯一确定它（Lean 的 `Fock.pairing_unique`），整条论证里没有任何围道、没有任何 z；
+    · `Fock.pairing_Lop_left`（L_m† = L_{−m}）的证明是「逐项配对 + 求和指标反射 j ↦ −j」
+      （见 worldsheet.virasoro-generators-adjoint 的推导 summary），同样不经过 (2)(3)。
+  若把本卡列为它们的 uses，本卡的 physical-argument 有效状态会**无理由地**把两张
+  formalized 的卡压下去——那会是一次纯粹由记账方式造成的降级，违反「status 实话实说」。
+  正确的关系是：**本卡是文献侧对同一事实的另一种（等价但未严格化的）说法**，
+  两条路线在本图中是**独立**的；Lean 路线更强，文献路线更通用（它对 ∂X 与 L_m 之外的场
+  也给出规则，这正是 worldsheet.vertex-operator-adjoint 与 worldsheet.ddf-operators-adjoint
+  不得不走文献路线的原因：那两条的对象不是振子的有限双线性和）。
+  两张 formalized 卡只加 notes 指针，**不加 uses**。
+
+  【升级路径】
+  (i) 走数学文献（最合适）：顶点算子代数里这条规则是标准且带编号的对象——
+      「不变双线性型 / contragredient 模 / BPZ 共轭 / adjoint vertex operator」
+      （FLM、Frenkel–Ben-Zvi、Kac）。本项目的 literature/extractions/math-sources.md
+      **目前没有登记任何一条关于不变双线性型或伴随顶点算子的陈述**（2026-09-11 curator 核：
+      grep `invariant bilinear` / `adjoint` / `BPZ` / `contragredient` 只命中 Witt/Virasoro
+      上同调里的 adjoint **模**，是另一回事）。需 researcher 取得带编号的可引用陈述；
+      取得后本卡可望从「约定」升格为有严格数学定义的对象，并与
+      worldsheet.vertex-operator-adjoint 升级路径 (ii)、
+      worldsheet.ddf-operators-adjoint 升级路径 (ii) 一起解决。
+  (ii) 走 Lean：**不建议直接形式化本卡**。围道、反演、解析延拓都不在当前的代数 Fock 模型里。
+      正确的 Lean 路线是绕过本卡、按 `Fock.pairing` 的普遍性质逐个证实例
+      （(5) 的五条里前两条已经这样做完了）。本卡的价值在文献侧记账，不在形式化。
+
+  【对 auditor / lead 的一条提请】(5) 列的五条实例里，三条既有卡的散文表述互有出入：
+  worldsheet.fock-indefinite-form 写「(α^μ_n)† = α^μ_{−n}（n ≥ 1）」并在 notes 把它延拓到
+  一切整数；worldsheet.virasoro-generators-adjoint 的 summary 写「权 h 场的模在径向共轭下
+  指标反射 J_m† = J_{−m}」；worldsheet.ddf-operators-adjoint 与
+  worldsheet.vertex-operator-adjoint 各写了一遍措辞不同的同一句。
+  本卡提供了统一表述，但**没有改动任何既有卡的 statement 文本**（不可变原则）。
+  若要规范化，应走里程碑流程。
+author: curator
+created: "2026-09-11"
