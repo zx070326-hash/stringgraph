@@ -3,7 +3,7 @@ kind: definition
 status: rigorous
 title: 玻色弦的光锥量子化（开弦）
 statement: |
-  取光锥坐标 x^± = (x^0 ± x^1)/√2 与横向坐标 x^i (i = 1..D-2)，
+  取光锥坐标 x^± = (x^0 ± x^1)/√2 与横向坐标 x^i (i = 2..D-1，共 D-2 个)，
   内积写作 a·b = -(a^+ b^- + a^- b^+) + a^i b^i。
   开弦模式展开取 X^μ(τ,σ) = x^μ + 2α' p^μ τ + i(2α')^{1/2} Σ_{n≠0} (α^μ_n/n) e^{-inτ} cos(nσ)，
   约定 α^μ_0 = (2α')^{1/2} p^μ。
@@ -13,10 +13,10 @@ statement: |
   于是 Virasoro 约束 L_n = -α^+_0 α^-_n + L^⊥_n = 0 把 X^- 的振子完全解出：
     α^-_n = L^⊥_n / ((2α')^{1/2} p^+)          (n ≠ 0)，
     α^-_0 = (L^⊥_0 - a) / ((2α')^{1/2} p^+)，
-  其中横向 Virasoro 生成元 L^⊥_n = (1/2) Σ_{m∈Z} : α^i_{n-m} α^i_m : （对 i = 1..D-2 求和），
+  其中横向 Virasoro 生成元 L^⊥_n = (1/2) Σ_{m∈Z} : α^i_{n-m} α^i_m : （对 i = 2..D-1 求和），
   a 是 L^⊥_0 的正规序常数，在本定义中作为待定实参数保留。
 
-  独立自由度是零模 (x^i, p^i, x^-, p^+) 与横向振子 α^i_n (i = 1..D-2, n ∈ Z\{0})，
+  独立自由度是零模 (x^i, p^i, x^-, p^+) 与横向振子 α^i_n (i = 2..D-1, n ∈ Z\{0})，
   正则关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0}，(α^i_n)^† = α^i_{-n}。
   光锥 Fock 空间
     H_lc = span{ α^{i_1}_{-n_1} ... α^{i_k}_{-n_k} |0; k^+, k^i⟩ }，  α^i_n |0; k⟩ = 0 (n > 0)，
@@ -45,9 +45,10 @@ notes: |
 
   本节点刻意不固定 a 的值：a = (D-2)/24 来自 ζ 正规化，属于论证而非定义，
   因此放在 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 的 gaps 里。
+  a = 1 本身是一条独立命题，见 worldsheet.open-string-intercept。
   这样本定义本身是纯代数的（Fock 空间 + 二次型），可标 rigorous。
 
-  质量壳系数说明：按 conv.alpha-prime-regge（开弦 α' m^2 = N - 1）写作 α' m^2 = N - a。
+  质量壳系数说明：按 conv.alpha-prime-regge（开弦 α' m^2 = N - a，a 为截距）写作 α' m^2 = N - a。
   文献中出现的 m^2 = (2/α')(N - a) 属于另一套 α' 归一化（或闭弦式的误记），本项目不采用。
 author: curator-critdim
 created: "2026-09-10"

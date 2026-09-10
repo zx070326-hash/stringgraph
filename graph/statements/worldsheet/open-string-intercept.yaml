@@ -1,0 +1,41 @@
+id: worldsheet.open-string-intercept
+kind: proposition
+title: 开弦截距 a = 1
+statement: |
+  考虑 D 维自由玻色开弦。在旧协变量子化中（worldsheet.old-covariant-physical-states），
+  质量壳条件 (L_0 - a)|ψ⟩ = 0 配合 α^μ_0 = (2α')^{1/2} p^μ、L_0 = α' p^2 + N 给出
+    α' m^2 = N - a,
+  其中 a 是截距（intercept，Regge 轨迹在 m^2 = 0 处的截距）。
+  则一致性要求
+    a = 1.
+  等价的刻画（每条都单独等价于 a = 1，与 D 的取值无关）：
+    (a) N = 1 能级无质量，即 α' m^2 = 0 处于 N = 1；
+    (b) 第一级伪态（spurious state）L_{-1}|0;k⟩ ∝ k·α_{-1}|0;k⟩ 本身是物理态（因而是零模态），
+        从而矢量态的偏振有规范自由度 e^μ → e^μ + λ k^μ；
+    (c) N = 1 的 D-2 个态 α^i_{-1}|0;k⟩ 构成无质量小群 SO(D-2) 的矢量表示
+        （而非有质量小群 SO(D-1) 的某个表示）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1（OCQ 的第一级与第二级伪态分析；第一级给 a = 1）"
+    note: "抽取记录 polchinski-1998-v1#E57。公式号未逐条核对。"
+  - ref: polchinski-1998-v1
+    loc: "§1.3（光锥谱的第一激发级须为无质量 SO(D-2) 矢量）"
+    note: "抽取记录 polchinski-1998-v1#E18。"
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2（OCQ 谱、截距与无质量矢量）"
+    note: GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化，已转写为 conv.metric-mostly-plus 与 conv.alpha-prime-regge。
+tags: [bosonic-string, critical-dimension, intercept, open-string, spectrum]
+notes: |
+  本节点只讲**开弦**截距，且刻意与 D = 26 分离：a = 1 不需要 D = 26（上面 (a)(b)(c) 三条
+  刻画都对任意 D ≥ 4 成立），而 D = 26 的三条路线中 BRST 路线（worldsheet.critical-dimension-brst）
+  只给出 c_m = 26 而不给出 a = 1。汇总节点 worldsheet.critical-dimension-bosonic 的陈述含 a = 1，
+  故其推导必须显式依赖本节点，见 worldsheet.critical-dimension-bosonic--via-three-routes。
+
+  闭弦对应的量是 a = ã = 1（左右各一份），质量壳为 α' m^2 / 4 = N - a；需要时另建节点。
+
+  from: polchinski-1998-v1#E57, polchinski-1998-v1#E18
+  （抽取记录文件 literature/extractions/polchinski-1998-v1.md 在本分支中尚不存在，
+   编号由 reviewer/auditor 提供；合并前应确认编号与该文件一致。）
+author: curator-critdim
+created: "2026-09-10"

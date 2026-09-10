@@ -1,0 +1,35 @@
+id: worldsheet.open-string-intercept--via-null-state-decoupling
+target: worldsheet.open-string-intercept
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.old-covariant-physical-states
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1（OCQ 伪态/零态分析：第一级给 a = 1，第二级在 a = 1 下给 D = 26）"
+    note: "抽取记录 polchinski-1998-v1#E57。公式号未逐条核对。"
+  - ref: gsw-1987-v1
+    loc: "§2.2.2（伪态与零态的条件）"
+    note: 已从 mostly-minus / α'=1/2 转写。
+summary: |
+  OCQ 中伪态 |s⟩ 与所有物理态正交，一致性要求伪态若同时满足物理态条件就必须解耦（是零模态）。
+  第一级：|0;k⟩ 的伪态 L_{-1}|0;k⟩ ∝ (2α')^{1/2} k·α_{-1}|0;k⟩。
+  要它是物理态需
+    L_1 L_{-1}|0;k⟩ = 2 L_0 |0;k⟩ = 2 α' k^2 |0;k⟩ = 0  ⇒  k^2 = 0（无质量），
+    (L_0 - a) L_{-1}|0;k⟩ = (α' k^2 + 1 - a) L_{-1}|0;k⟩ = 0  ⇒  a = 1。
+  即 a = 1 当且仅当第一级规范模 k·α_{-1}|0;k⟩ 零化并给出 e^μ → e^μ + λk^μ 的规范不变性；
+  这是陈述中的 (b)，配合 α'm^2 = N - a 即 (a)。
+
+  第二级：取 |χ⟩ 满足 L_n|χ⟩ = 0 (n>0) 与 L_0|χ⟩ = (a-2)|χ⟩，令 |ψ⟩ = (L_{-2} + γ L_{-1}L_{-1})|χ⟩。
+    L_1|ψ⟩ = [3 + γ(4a-6)] L_{-1}|χ⟩ = 0        ⇒ γ = 3/(6-4a)，
+    L_2|ψ⟩ = [4(a-2) + c/2 + 6γ(a-2)] |χ⟩ = 0，  c = D。
+  两式只给出 (a, D) 的一条曲线（例如 a=0 给 D=28）；**代入 a = 1 才得到 γ = 3/2 与 D = 26**。
+  故第二级零态分析定的是 D，不是 a；a 由上面的第一级分析定。
+gaps:
+  - "'伪态必须解耦'是幺正性/规范不变性的一致性要求，不是定理；这是本推导记为 physical-argument 而非 proof 的原因。零态条件本身的代数计算是严格的。"
+  - "本推导给出 a = 1，不给出 D = 26；D = 26 见 worldsheet.critical-dimension-old-covariant 与 worldsheet.critical-dimension-brst。"
+  - "抽取记录编号 polchinski-1998-v1#E57 由 reviewer 提供，对应的抽取记录文件在本分支中不存在，编号未能自行核对。"
+  - "命名说明：reviewer 原先指定的 id 为 --via-level-two-null-state，但如上所算，a = 1 来自第一级（level 1）伪态，第二级只定 D。为避免永久性误导的 id，改名为 --via-null-state-decoupling；两级分析都写在本推导里。若 lead 坚持原名，合并前可重命名（本分支未合并，id 尚可改）。"
+author: curator-critdim
+created: "2026-09-10"

@@ -1,0 +1,27 @@
+id: worldsheet.open-string-intercept--via-light-cone-representation
+target: worldsheet.open-string-intercept
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.light-cone-quantization
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3（光锥谱：第一激发级 α^i_{-1}|0;k⟩ 须为无质量 SO(D-2) 矢量），约 eq. (1.3.32)–(1.3.36)"
+    note: "抽取记录 polchinski-1998-v1#E18。公式号为近似定位。"
+  - ref: gsw-1987-v1
+    loc: "§2.3.1（光锥谱与小群表示）"
+    note: 已从 mostly-minus / α'=1/2 转写。
+summary: |
+  光锥量子化把独立自由度定为 D-2 个横向振子，故 N = 1 能级恰有 D-2 个态 α^i_{-1}|0;k⟩
+  (i = 2..D-1)，它们构成 SO(D-2) 的矢量表示。
+  洛伦兹不变性要求每个质量能级的态构成对应小群的表示：无质量态的小群是 SO(D-2)，
+  有质量态的小群是 SO(D-1)。当 D ≥ 5 时 SO(D-1) 的最小非平凡表示是 D-1 维矢量，
+  D-2 个态装不进 SO(D-1) 的任何非平凡表示。
+  因此 N = 1 能级必须无质量，由 α' m^2 = N - a 得 0 = 1 - a，即 a = 1。这是陈述中的 (c) ⇒ (a)。
+gaps:
+  - "论证输入是'谱必须组织成洛伦兹小群表示'这一物理要求（光锥规范已破坏显式洛伦兹协变），属一致性要求而非定理，故记为 physical-argument。"
+  - "D ≤ 4 的低维情形不在论证范围内（SO(D-1) 的表示计数论证失效）；本项目只关心 D = 26 附近，未处理。"
+  - "本推导给出 a = 1，不给出 D = 26。与 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 共用 light-cone-quantization 定义，但那条另外用了 ζ 正规化，本条不用。"
+  - "抽取记录编号 polchinski-1998-v1#E18 由 reviewer 提供，对应的抽取记录文件在本分支中不存在，编号未能自行核对。"
+author: curator-critdim
+created: "2026-09-10"

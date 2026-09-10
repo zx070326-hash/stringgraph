@@ -2,8 +2,17 @@ id: conv.alpha-prime-regge
 family: alpha-prime
 title: Regge 斜率 α'
 definition: |
-  弦长尺度由 Regge 斜率 α' 表示；闭弦张力 T = 1/(2π α')；开弦质量谱 α' m^2 = N - 1。
+  弦长尺度由 Regge 斜率 α' 表示；闭弦张力 T = 1/(2π α')；
+  开弦质量谱 α' m^2 = N - a，其中 N 是能级算符本征值，a 是截距。
+  截距的取值不属于本约定：a = 1 是一条命题（worldsheet.open-string-intercept），不是归一化选择。
 canonical: true
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2, eq. (1.2.3)"
+    loc: "§1.2，约 eq. (1.2.9)–(1.2.10)（弦张力 T = 1/(2πα') 与 Regge 斜率的定义）"
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.36)（开弦光锥质量壳）"
+notes: |
+  抽取记录 polchinski-1998-v1#Q1 指出原先写的 eq. (1.2.3) 定位有误，已改为 §1.2 约 (1.2.9)–(1.2.10)；
+  新公式号仍为近似定位，需 researcher 核对。
+  原定义文本写死了 "α' m^2 = N - 1"，等于把截距 a = 1 当成归一化约定；
+  按 auditor 意见改为 α' m^2 = N - a，把 a = 1 留给命题节点。

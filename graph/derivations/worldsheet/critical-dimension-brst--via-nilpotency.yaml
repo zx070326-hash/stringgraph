@@ -10,21 +10,27 @@ sources:
     loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
     note: 公式号为近似定位。
   - ref: fgz-1986
-    loc: "半无限上同调微分 d 的构造与 d^2 = 0 的中心荷条件（数学化处理）"
-    note: 未逐节核对分节编号。
+    loc: "Theorem 1.1（PNAS 短文，编号未核实）"
+    note: 半无限上同调微分 d 的构造与 d^2 = 0 的中心荷条件；定理编号未与原文核对。
+  - ref: lian-zuckerman-1989
+    loc: "§2, Theorem 2.x（定理号未核实）"
+    note: 受限模上 BRST 微分幂零性的数学化处理，是本推导标 rigorous 的依据之一；节号与定理号未核实。
 summary: |
-  {Q_B, Q_B} 的计算是模式代数中的有限代数计算：用 {b_m, c_n} = δ_{m+n,0} 与物质 Virasoro
-  [L^m_m, L^m_n] = (m-n)L^m_{m+n} + (c_m/12) m(m^2-1) δ_{m+n,0} 展开，
+  {Q_B, Q_B} 的计算是模式代数中的有限代数计算：用 {b_k, c_n} = δ_{k+n,0} 与物质 Virasoro
+  [L^m_k, L^m_n] = (k-n) L^m_{k+n} + (c^m/12) k(k^2-1) δ_{k+n,0} 展开，
   三次鬼场项与物质项的交叉贡献相消，只剩正比于总中心荷的项
-  {Q_B, Q_B} = Σ_m ((c_m - 26)/12)(m^3 - m) c_{-m} c_m。
-  由 c_{-m} c_m 的线性无关性得 Q_B^2 = 0 ⟺ c_m = 26。
+  {Q_B, Q_B} = Σ_{m∈Z} ((c^m - 26)/12)(m^3 - m) c_{-m} c_m。
+  由 c_{-m} c_m 的线性无关性得 Q_B^2 = 0 ⟺ c^m = 26。
   等价地：Q_B^2 = 0 ⟺ 总 Virasoro L_n = L^m_n + L^g_n + a^g δ_{n,0} 无中心扩张。
+  （记号：c^m 是物质中心荷，c_n 是鬼场模式；沿用 worldsheet.brst-quantization 的上标约定。）
 
   标 rigorous 的理由：这是（物质 Virasoro ⊗ bc Clifford 代数）上的恒等式，不涉及路径积分、
-  正规化或渐近展开。在 L_0 分级、每级有限维的模上，Q_B 的模式和逐项有限，故所有重排合法。
-  半无限上同调文献（FGZ、Lian–Zuckerman）把它当作定理处理。
+  正规化或渐近展开。受限模假设（已写进陈述本身）保证 Q_B 的模式和逐项有限，故所有重排合法。
+  半无限上同调文献（FGZ 1986、Lian–Zuckerman 1989）把它当作定理处理。
 gaps:
-  - "严格性依赖于把 Q_B 作用在 L_0 分级且每级有限维的模上（Fock 型模满足），使无穷模式和逐项有限；Polchinski 的表述是形式模式计算，未声明这一限制。"
+  - "受限模假设已提升到陈述里，故不再是本推导的隐含缺口；但 Polchinski §4.3 的表述是形式模式计算，未声明该限制，本推导的严格版本取自半无限上同调文献。"
+  - "两条数学来源（fgz-1986、lian-zuckerman-1989）的定理编号未与原文核对，loc 中已标注；需 researcher 补齐后才算完整可追溯。"
   - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构（Kato–Ogawa 定理），后者需另建节点。"
+  - "本推导只定出 c^m = 26（即 D = 26），不定出开弦截距 a = 1；a = 1 由 worldsheet.open-string-intercept 独立给出。"
 author: curator-critdim
 created: "2026-09-10"
