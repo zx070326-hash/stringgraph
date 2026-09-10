@@ -21,7 +21,8 @@ summary: |
   分级结论随之：v 生成的模由这些单项式张成，各自是 L_0 的本征向量。
 gaps:
   - "本推导**不**断言最高权模是不可约的、也不断言这些单项式线性无关（Verma 模的 PBW 基底
-     与分级维数 p(N) 是另一回事，见 worldsheet.verma-module-pbw-basis）；只断言它们是 L_0 的本征向量、
+     与分级维数 p(N) 是另一回事，见 math.verma-module-free-over-negative-part——2026-09-11 起它取代
+     worldsheet.verma-module-pbw-basis）；只断言它们是 L_0 的本征向量、
      本征值为 h + Σ k_i。"
   - "本推导**不**断言「每个态要么是最高权态、要么是某个最高权态的 descendant」——
      那个分解需要幺正性或完全可约性，不在本节点范围内。"

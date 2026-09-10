@@ -86,7 +86,10 @@ notes: |
   就是要构造的东西；只有 (c,h) = (0,0) 时平凡模现成可用）。因此**本卡片里的每一条结论
   都可能是空洞真**（若 V(c,h) = 0 则全部平凡成立）。这不影响 status: formalized——
   它们确实被机器验证了——但引用本卡片的下游若需要「模非零」，**必须**改引
-  worldsheet.verma-module-pbw-basis。已按此原则对全图引用逐条分派，见该节点 notes。
+  **math.verma-module-free-over-negative-part**（其 (4)）。已按此原则对全图引用逐条分派。
+  ⚠ **本卡 statement 末尾「(a)(b)(c) 由 worldsheet.verma-module-pbw-basis 承载」那一句已过时**：
+  该卡 2026-09-11 superseded_by math.verma-module-free-over-negative-part，其推导 --via-pbw 已删除。
+  陈述文本按项目原则 1 不改，读到那句时读作新卡。
 
   【基环】构造部分对任意 ℚ-代数 R 成立；直和分解与特征子空间刻画需要特征零的**域**。
   陈述已分别限定。

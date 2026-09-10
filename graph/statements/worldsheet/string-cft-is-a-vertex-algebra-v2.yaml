@@ -57,8 +57,13 @@ sources:
       **本节点的断言在该书中没有被证明。** 该书只做单个自由玻色子（c = 1，正定 Fock 空间），
       无 D 分量、无洛伦兹号差 η、无 bc 鬼场、无路径积分定义（math-sources.md §11.4、§13.3）。
       列出它只为标明「已核实的最接近结果」在哪里。
-      Definition 10.9 的正文措辞未被 researcher 逐字转录（见 math.locality-ope-equivalences 的
-      「记号段为何标『按通行定义补写』」一段），本节点写的是通行定义。
+      ⚠ **本 loc 里写的 `:A(z)B(w): = A(z)_- B(w) + B(w) A(z)_+` 不是 Definition 10.9 的逐字文本**：
+      写这条 source 时 Definition 10.9 的正文措辞尚未被 researcher 逐字转录，故用了通行（Kac 一系）的 ± 惯例。
+      2026-09-11 第三轮的逐字转录见 **math.locality-ope-equivalences-v2**：原书是
+      A(z)_- := Σ_{n≥0} A_{(n)}z^{-n-1}、A(z)_+ := Σ_{n<0} A_{(n)}z^{-n-1}、
+      **:A(z)B(w): := A(z)_+ B(w) + B(w) A(z)_-**，即 ± 两个标签与本 loc 相反。
+      **挑出的算符是同一个**（模指标为负的那一半写在左边），本节点的断言不受影响；
+      详见 notes 的「正规序 ± 标签」一段。
   - ref: gui-2023-lectures
     loc: "2026-07-15 版, Definition 7.2, p. 70（本节点断言被满足的解析侧假设）；Theorem 5.12 (Reconstruction theorem), pp. 55–56（其假设之一逐字为「Locality: Any two fields of E are local」，**另有真空/平移/分次假设，本节点不断言**）；§6 Heisenberg VOA 的构造（本轮只读到目录级）"
     note: |
@@ -88,6 +93,21 @@ notes: |
   但该节点另有 (iv) 与依赖记账。**本节点仍不写 depends_on 指向它**——本节点无推导（有效状态 open，
   刻意为之），依赖只能挂在推导上；且如 statement 所说，局域性对加 c-数不敏感，
   真正需要该节点的是任何把 T 与 L_0 谱或中心荷挂钩的**下游**推导。
+
+  ⚠ **正规序 ± 标签（2026-09-11 登记，curator；lead 裁决第 3 条：不建 v3）**：本节点 statement 第 19 行与
+  上面 schottenloher-2008 的 source loc 都把 Definition 10.9 引作
+  `:A(z)B(w): = A(z)_- B(w) + B(w) A(z)_+`。逐字转录（**math.locality-ope-equivalences-v2**，
+  researcher 2026-09-11 第三轮读图 p. 177–178）显示原书方向**相反**：
+  A(z)_- := Σ_{n≥0} A_{(n)}z^{-n-1}（z 的**负**幂部分，含 Res）、A(z)_+ := Σ_{n<0} A_{(n)}z^{-n-1}，
+  故原书写的是 :A(z)B(w): := A(z)_+ B(w) + B(w) A(z)_-。
+  **错的只是这两个标签，不是数学内容**：本节点同一句的散文描述「把模指标为负的（产生）模写到左边的
+  那一种正规序」与来源逐字一致，两种写法挑出的**算符表达式完全相同**，也与
+  worldsheet.virasoro-generators-free-boson 的 :α_p α_q: 一致。
+  又因为本节点**只断言局域性**，而局域性对正规序的选取不敏感（statement 的 ⚠ 段已写明两种正规序至多
+  相差 c-数、且局域性对加 c-数不敏感），**(i)(ii) 两条断言都不受影响**。
+  按项目原则 1，statement 文本**已冻结、不改**，也不新建 v3（lead 裁决）；
+  引用来源方向的 ± 时以 math.locality-ope-equivalences-v2 为准。
+  同一情形另见 worldsheet.ope-pole-mode-commutator-dictionary（其「记号」段同样沿用旧标签，已同批登记）。
 
   **本节点无推导，有效状态为 open——这是刻意的。** 它是 OPE 严格化路线的真正瓶颈根（math-sources.md §13.3、Q13）：
   数学侧的定理（形式局域性的等价刻画、顶点代数结合性、复解析局域性 ⇒ OPE 收敛）遍地都是且都干净，

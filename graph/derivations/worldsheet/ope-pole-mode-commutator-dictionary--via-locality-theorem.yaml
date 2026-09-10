@@ -3,8 +3,10 @@ target: worldsheet.ope-pole-mode-commutator-dictionary
 kind: proof
 status: rigorous
 depends_on:
-  - id: math.locality-ope-equivalences
+  - id: math.locality-ope-equivalences-v2
     note: |
+      **2026-09-11 改挂**：原先挂 math.locality-ope-equivalences（v1），该卡的记号段与来源的 ± 方向相反
+      且自相矛盾，已 superseded_by v2（逐字转录版），推导亦随之改名改指；见 v2 的 notes「本卡为什么是 v2」。
       Schottenloher Theorem 10.10 第 4 条（物理写法的 OPE，奇异部分 Σ_j C^j(w)/(z−w)^{j+1}）⟺ 第 5 条
       （模式对易子 [A_(m), B_(n)] = Σ_j (m choose j) C^j_(m+n−j)）**逐字**就是目标节点的 (1)(2)(3)，
       差别只在目标节点把模指标换成物理侧的 A_m（见 summary (1)）。
@@ -39,7 +41,7 @@ summary: |
   (1) 记号换算：物理侧按 A(z) = Σ_m A_m z^{-m-h_A}（h_A 为选定的整数移位）展开，形式分布侧按
       A(z) = Σ_n A_{(n)} z^{-n-1} 展开；二者只是模指标的重标 A_{(n)} = A_{n-h_A+1}，即 A_m = A_{(m+h_A-1)}。
       目标节点的 [A_m, B_n] 就是 [A_{(m+h_A-1)}, B_{(n+h_B-1)}]。
-  (2) 由 math.locality-ope-equivalences（Theorem 10.10, 1 ⇒ 4，系数由 Proposition 10.6 唯一确定）：
+  (2) 由 math.locality-ope-equivalences-v2（Theorem 10.10, 1 ⇒ 4，系数由 Proposition 10.6 唯一确定）：
         A(z)B(w) = Σ_{j=0}^{N-1} i_{z,w} (z-w)^{-(j+1)} C^j(w) + :A(z)B(w):,
         B(w)A(z) = Σ_{j=0}^{N-1} i_{w,z} (z-w)^{-(j+1)} C^j(w) + :A(z)B(w):,
       其中 C^j(w) = Res_z (z-w)^j [A(z),B(w)]。这就是目标节点的 (1)；「|z| > |w|」在这里的含义**只是**选定
@@ -69,7 +71,7 @@ gaps:
      （worldsheet.ope-commutator-dictionary--via-contour-deformation）。"
   - "**★ 已结案（原 Q10），仅留痕**：Theorem 10.10 第 5 条的求和下限**印本印作 j = 1**，
      **本图判为排印错误，按 j = 0 写**（四条依据 + 反例见
-     math.locality-ope-equivalences--via-schottenloher 的 gaps 第一条与
+     math.locality-ope-equivalences-v2--via-schottenloher 的 gaps 第一条与
      literature/extractions/math-sources.md §11A.3）。
      **本推导对这条结案有直接的自证**：summary (4) 的 Virasoro 例子里 C⁰ = ∂T ≠ 0，
      若下限真是 j = 1 就会整个丢掉 [L_m, L_n] 中来自 ∂T 的 (m−n)L_{m+n} 项，
@@ -90,6 +92,15 @@ notes: |
   **为什么 status 写 rigorous**：本推导自身的论证（Theorem 10.10 的两个蕴含 + Proposition 10.6 的唯一性
   + 模指标重标 + 一个例子）是有限步形式代数，来源是数学教材中带证明的定理。status 是「自身论证的严格程度」，
   有效状态由工具算——这正是把 open 的前提显式列进 depends_on 而不是藏进 gaps 的意义。
+
+  ⚠ **正规序 ± 标签的登记（2026-09-11，curator）**：目标节点 worldsheet.ope-pole-mode-commutator-dictionary
+  的「记号」段写 `:A(z)B(w): := A(z)_- B(w) + B(w) A(z)_+` 并引「math.locality-ope-equivalences 的『记号』段」，
+  用的是 v1（现已 superseded）的 ± 惯例，**与 Schottenloher Definition 10.9 的逐字方向相反**
+  （来源的 `-` 是模指标 n ≥ 0 的那一半）。目标节点同句的散文「产生-湮灭正规序积」与来源一致，
+  **它挑出的算符是同一个**（模指标为负的那一半写在左边），且目标节点的 (1)(2)(3) 只用到
+  「同一个 :AB: 同时出现在 A(z)B(w) 与 B(w)A(z) 两式中」，与 ± 标签无关，**结论不受影响**。
+  按项目原则 1 目标节点的陈述文本不改，事实登记于此与 math.locality-ope-equivalences-v2 的
+  「下游一致性核查」。本推导的 summary 按 v2（来源）方向理解 ±。
 
   **与围道那条推导的关系**：worldsheet.ope-commutator-dictionary--via-contour-deformation
   （physical-argument）挂在旧的围道语言节点上，不受本次改动影响；两个陈述节点之间差的正是

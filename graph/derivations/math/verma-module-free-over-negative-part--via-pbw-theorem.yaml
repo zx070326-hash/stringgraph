@@ -34,6 +34,19 @@ depends_on:
       （vir₋ 内部 [L_{-m}, L_{-n}] 没有中心项，因为 (-m) + (-n) ≠ 0）。
       来源 virasoro-lean-2025 Definition 12.4 给的三角分解 𝔳𝔦𝔯_± = span{ℒ_n | ±n > 0}、
       𝔳𝔦𝔯₀ = span{ℒ₀, C} 与本节点写法逐字一致。
+  - id: worldsheet.verma-level-spanned-by-partitions
+    inferred: false
+    note: |
+      **记账用的边，不提升本推导的状态**（2026-09-11 合并 worldsheet.verma-module-pbw-basis 时补挂，
+      原先挂在被删的 worldsheet.verma-module-pbw-basis--via-pbw 上）。
+      该卡 formalized（formal/StringFormal/Virasoro/VermaPBW.lean ::
+      StringFormal.Virasoro.finrank_levelSpan_le_card_partition），给出 PBW 的 **straightening 一半**：
+      有序单项式**张成** V(c,h)，故 dim_K V_N ≤ p(N)。它正是本推导 summary (2) 第二次用 PBW 时
+      「有序单项式张成 U(vir₋)」那一步在 Lean 里已被机器检查的部分，也是 summary (3) 计数的上界一半。
+      **剩下的「线性无关」一半（dim_K V_N ≥ p(N)，即 (1)(2) 与 (4)）不在 Lean 里**，
+      它来自 math.pbw-theorem，Mathlib v4.33.1 没有 PBW。
+      加这条边的意义是在图上记账「PBW 里哪一半已被机器检查」；该卡与本推导的目标之间无循环
+      （它只依赖 worldsheet.verma-module-v2 与 worldsheet.virasoro-algebra-v2）。
 sources:
   - ref: virasoro-lean-2025
     loc: "§12, p. 11 正文（无编号）；定义见 Definition 12.2 与 Lemma 12.3，Virasoro 情形见 Definition 12.4"
@@ -88,11 +101,31 @@ gaps:
   - "**上游的适用范围（Q15）**：到 math.pbw-theorem 的边标了 inferred——Humphreys 的语境是有限维半单，
      而这里的 vir、vir₋ 是无限维。见该边的 note。"
   - "**未形式化，且缺口是精确的一条上游定理**：Mathlib **没有** PBW（读取日期 2026-09-11）。
-     Kytölä 的 VirasoroProject 已形式化 Verma 模的理想商构造（vermaIdeal / VermaModule /
-     VermaModule.hwVec / VermaModule.universalMap / IsVermaModule），**唯独缺显式 PBW 基**，
-     且作者逐字自陈这些关于显式基的陈述 not yet formalized。
+     两条 L1 证据：(i) `Mathlib/Algebra/Lie/UniversalEnveloping` 的全部 17 个声明只围绕构造与泛性质
+     （Rel、ringCon、UniversalEnvelopingAlgebra、mkAlgHom、ι、lift、lift_unique、hom_ext 等），
+     **没有滤过、没有与对称代数的同构，连 TODO 段都没有**；(ii) Kytölä 逐字自陈
+     「Mathlib does not currently have the PBW theorem」，并称补上它是 \"a major undertaking\"。
+     他的 VirasoroProject 已形式化 Verma 模的理想商构造（vermaIdeal / VermaModule /
+     VermaModule.hwVec / VermaModule.universalMap / IsVermaModule），**唯独缺显式 PBW 基**。
      本图侧：worldsheet.verma-level-spanned-by-partitions（straightening 一半，dim V_N ≤ p(N)）
-     已形式化，**线性无关那一半没有**。⇒ 本推导上限 rigorous。"
+     已形式化，**线性无关那一半没有**。换成本节点的编号：**(3) 的上半（dim_F V_N ≤ p(N)）已形式化；
+     (1)、(2)、(3) 的等号与 (4) 都需要线性无关。**
+     ⇒ 本推导上限 rigorous，**不得标 formalized，直到 Mathlib 有 PBW 为止**。
+     复查时同时看 `Mathlib/Algebra/Lie/UniversalEnveloping.lean` 与 Mathlib 的 1000.yaml 跟踪表；
+     若届时 Mathlib 有了 PBW，本条与 math.pbw-theorem 的同名记录须一并重估。
+     （本条的后半段来自 2026-09-11 被删的 worldsheet.verma-module-pbw-basis--via-pbw。）"
+  - "**「V(c,h) ≠ 0」（目标 (4)）在形式化侧是空缺**（并自被删的 worldsheet.verma-module-pbw-basis--via-pbw）。
+     在线性无关那一半做出来之前，formal/StringFormal/Virasoro/Verma.lean 中的一切结论都可能是空洞真
+     （V(c,h) = 0 时全部平凡成立），且没有便宜替代品——任意 (c,h) 的非零最高权模本身就是要构造的东西，
+     只有 (c,h) = (0,0) 时平凡模现成可用。这正是把非零性放进本节点而不是 worldsheet.verma-module-v2 的原因。"
+  - "**straightening 的形式化细节（formalizer 更正，2026-09-11；并自被删推导）**：formal/TODO.md 原先写的
+     「对（词长, 逆序数）双重归纳」**不成立**——Leibniz 律第二项 L_b (L_a X) 经内层整理后长度不减
+     （内层 straightening 可产生比原尾巴更长的词），双重归纳的度量不单调。
+     VermaPBW.lean 实际用的有效度量是 wordWeight = Σ_i i·l_i（表头不贡献），它在负模态词上 ≤ 0，
+     换序步与对易子步都使它**严格增大**（故 wordMeasure = (−wordWeight).toNat 严格下降）；
+     且 `straighten` 的结论**必须带 wordMeasure 不增**这一上界，否则嵌套整理无法被归纳假设覆盖。
+     这条记的是 straightening 在形式化时暴露的问题，**不影响本推导 rigorous 的结论**——
+     文献侧的 PBW 证明不走这条归纳。"
   - "**基环**。目标节点限定在特征零的域 F 上，只为使用「维数」与「分拆计数」的语言。
      自由性 (1) 对任意交换环 R（vir₋ 作为 R-模自由）都成立，worldsheet.verma-module-v2 的构造本就对
      任意 ℚ-代数成立。若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
@@ -101,10 +134,30 @@ notes: |
   已发表的完整证明，其余步骤是有限步纯代数。不标 formalized 的理由见 gaps 第四条。
   论证里没有任何形式操作、渐近或路径积分，故没有理由降到 physical-argument。
 
-  **与 worldsheet.verma-module-pbw-basis 的关系**：本节点按来源（Kytölä §12）的设定与记号陈述代数核心；
-  那张卡是本项目面向弦论的版本，额外带形式特征标、项目自身的排序写法与 Lean 记账，
-  经 worldsheet.verma-module-pbw-basis--via-pbw 依赖本节点。
-  ⚠ **两张卡的 (1)(2)(3)(4) 内容高度重叠**，curator 已就「是否应把 worldsheet 那张卡 superseded_by
-  本节点、或反之」提请 lead / auditor 裁决；在裁决前两张都保留，重叠之处在双方 notes 里互相点名。
+  **★ 合并记录（2026-09-11，lead 裁决）：worldsheet.verma-module-pbw-basis 已 superseded_by 本推导的目标节点，
+  其推导 worldsheet.verma-module-pbw-basis--via-pbw 已删除。** 两张卡的 (1)(2)(3)(4) 逐条重叠，
+  取本节点的理由是**来源更好**：那张卡的三条 sources 没有一条是可核实的命题级定位
+  （kac-1979 分节号未核实、sources.bib 对该 key 指向哪一篇存疑；kac-raina-1987 只到主题一级；
+  stringformal-2026 只是形式化状态登记），本节点的 virasoro-lean-2025 §12 p.11 是 L1 逐字转录。
+  原先指向那张卡的三条 depends_on 已改指本节点：worldsheet.kac-determinant--via-feigin-fuchs、
+  worldsheet.no-ghost-theorem-brst--via-fgz、worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman。
+  ⚠ **目标节点 statement 里「【与 worldsheet.verma-module-pbw-basis 的分工】」那一段已过时**
+  （它说那张卡「由 worldsheet.verma-module-pbw-basis--via-pbw 依赖本节点」，该推导已不存在）；
+  按项目原则 1 陈述文本不改，事实登记在此与目标节点 notes。
+
+  **下标排序的对照（并自被删推导）**：本节点按来源写基元
+    L_{-n_m} L_{-n_{m-1}} … L_{-n_1} |c,h⟩,  1 ≤ n_1 ≤ … ≤ n_m；
+  被合并的那张卡与图中若干下游写作
+    L_{-n_1} L_{-n_2} … L_{-n_k} |c,h⟩,      n_1 ≥ n_2 ≥ … ≥ n_k ≥ 1。
+  **这是同一组基元**：只是把下标序列反过来标号（k = m，后者的 n_i = 本节点的 n_{m+1-i}），
+  因子从左到右的实际排列（大下标在左）完全一致。把序真的反成「小下标在左」也只是换一组代表元，
+  维数结论不变。引用本节点时不需要任何补证，只需注意读法。
+
+  **形式特征标不由本节点承载（并自被删推导）**：被合并那张卡的 (2) 末句还写了
+    Σ_{N≥0} p(N) q^{h+N} = q^h ∏_{n≥1} (1 − q^n)^{-1}，
+  本节点**只到 dim_F V_N = p(N) 为止**，不写特征标。二者之间差一个 Euler 分拆生成函数恒等式
+  （形式幂级数层面的标准恒等式，**本图没有为它建节点，也没有登记来源**）。
+  真正用到特征标的下游是 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman（LZ 的 ch_q），
+  该条已在自己的 gaps 里登记这一步；若日后有第二处需要，应新建一条 math 节点承载 Euler 恒等式。
 author: curator
 created: "2026-09-11"

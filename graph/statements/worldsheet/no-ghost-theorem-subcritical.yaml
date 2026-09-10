@@ -95,7 +95,8 @@ sources:
   - ref: lian-zuckerman-1991
     loc: "Theorem 3.5 的证明末句, p.571（逐字：'Thus V(D,p)^{G₊}[−h]/rad is unitary for all p iff ch_q L(26−D, 1−h) = sign_q L(26−D, 1−h), i.e. iff the Verma module M(26−D, 1−h) is positive semi-definite. The latter is equivalent to precisely the conditions on (D, h), as given above.'）"
     note: |
-      L1 逐字。这一句是本节点挂 worldsheet.verma-module-pbw-basis 依赖的直接依据：判据被归结为
+      L1 逐字。这一句是本节点挂 Verma 模依赖（现为 math.verma-module-free-over-negative-part，
+      2026-09-11 起取代 worldsheet.verma-module-pbw-basis）的直接依据：判据被归结为
       Verma 模 M(26−D, 1−h) 的半正定性。**注意最后一句「The latter is equivalent to precisely
       the conditions on (D,h)」在此处没有给出引文**——把它接到 Kac 行列式 / Kac–Kazhdan 的那一步
       在抽取记录里只有转述（§8、§9.3 提到 LZ Lemma 3.17、Remark 3.15），没有逐字，
@@ -223,7 +224,8 @@ notes: |
 
   【形式化提示】
   本节点比 v3 更接近可形式化的形式（判据 = Verma 模半正定性 = Kac 行列式的符号分析），
-  但它依赖 worldsheet.verma-module-pbw-basis 这条**尚未形式化的 PBW 基**命题，且需要 Kac 行列式公式。
+  但它依赖 math.verma-module-free-over-negative-part 这条**尚未形式化的 PBW 基**命题
+  （2026-09-11 起它取代 worldsheet.verma-module-pbw-basis），且需要 Kac 行列式公式。
   形式化岛 1 的目标仍是 v3；本节点作为 v3 的判定侧补充登记。
 
   【拆卡换代记录，2026-09-11（curator）】上面陈述文本里「Verma 模见 worldsheet.verma-module」
@@ -232,5 +234,9 @@ notes: |
   worldsheet.verma-module-pbw-basis（rigorous，未形式化）。**陈述文本按纪律不改**
   （改陈述文本等于新建节点）；本节点用到的是后者，推导
   worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 的 depends_on 已就地改指。
+  ⚠ **2026-09-11 第二次换代**：worldsheet.verma-module-pbw-basis 本身也已 superseded_by
+  **math.verma-module-free-over-negative-part**（内容逐条重叠、后者来源更好），其推导 --via-pbw 已删除；
+  上述 depends_on 已再次就地改指该 math 卡。**注意新卡不含形式特征标**
+  Σ_N p(N)q^{h+N} = q^h ∏(1−q^n)^{-1}（LZ 用 ch_q 那一步需要它），该缺口已登记在推导的 gaps 末尾。
 author: curator
 created: "2026-09-10"

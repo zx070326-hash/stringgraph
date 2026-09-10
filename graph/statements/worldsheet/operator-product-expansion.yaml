@@ -40,8 +40,8 @@ notes: |
   本节点一张卡承担了至少四件事，数学侧现已拆成四个 `math` 节点，本节点的 id 与 statement 文本**不改**：
     - math.formal-distribution-locality（definition, rigorous）：形式分布的局域性 (z−w)^N[A(z),B(w)] = 0
       ← Schottenloher Def 10.7；Gui Def 7.6。
-    - math.locality-ope-equivalences（proposition, rigorous）：局域性 ⟺ delta 分解 ⟺ 物理写法的 OPE ⟺ 模式对易子公式
-      ← Schottenloher Thm 10.10。这是本节点里「A(z)B(0) ∼ 奇异项」那部分的**形式侧**严格版本。
+    - math.locality-ope-equivalences-v2（proposition, rigorous；初版 math.locality-ope-equivalences 已 superseded_by 它）：
+      局域性 ⟺ delta 分解 ⟺ 物理写法的 OPE ⟺ 模式对易子公式 ← Schottenloher Thm 10.10。这是本节点里「A(z)B(0) ∼ 奇异项」那部分的**形式侧**严格版本。
     - math.vertex-algebra-associativity（proposition, rigorous）：Y(A,z)Y(B,w)C = Y(Y(A,z−w)B,w)C 于 V((w))((z−w))
       ← Frenkel–Ben-Zvi Thm 3.2.1（勘误表措辞）。纯形式，无收敛性。
     - math.vertex-algebra-complex-analytic-locality（definition）+ math.vertex-algebra-ope-analytic-convergence
