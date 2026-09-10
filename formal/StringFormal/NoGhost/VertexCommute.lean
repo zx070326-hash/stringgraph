@@ -151,6 +151,97 @@ theorem vertexAnn_creaExp_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec 
   · rw [if_pos hL, if_pos hL, mul_one]
   · rw [if_neg hL, if_neg hL, mul_zero]
 
+/-- **The vertex operator acts on the coherent state of an orthogonal momentum by plain
+multiplication**: `V^{(b)}_J Φ^{b'}_K = Φ^b_J Φ^{b'}_K`.  Equivalently, on the vacuum,
+`V^{(b)}_J V^{(b')}_K |0⟩ = Φ^b_J Φ^{b'}_K`, which is visibly symmetric in `(b, J)` and
+`(b', K)`; this is the base case of the commutation theorem below. -/
+theorem vertexOsc_apply_creaExp_of_dotVec_zero (η b b' : Fin D → R)
+    (hdot : dotVec η b' b = 0) (J K : ℤ) :
+    vertexOsc η b J (creaExp η b' K) = creaExp η b J * creaExp η b' K := by
+  classical
+  rw [vertexOsc_apply η b J (creaExp η b' K) (s := {0}) (fun L hL => by
+      rw [vertexAnn_creaExp_of_dotVec_zero η b b' hdot K L, if_neg (by simpa using hL)]),
+    Finset.sum_singleton, vertexAnn_creaExp_of_dotVec_zero η b b' hdot K 0, if_pos rfl,
+    add_zero]
+
+omit [Algebra ℚ R] in
+/-- **Two-index form of `Fock.eq_zero_of_vertex_recursion`.**  A doubly indexed family of
+endomorphisms obeying the creation-mode recursion of a *product* of two vertex operators
+(with momenta `b` and `b'`, each shifting its own Laurent index) and killing the vacuum is
+identically zero.  As in the one-index case the proof is a plain induction over monomials;
+this is the inductive step that reduces the commutation theorem to the vacuum. -/
+theorem eq_zero_of_vertex_recursion₂ (b b' : Fin D → R)
+    (W : ℤ → ℤ → Module.End R (Fock D R))
+    (hrec : ∀ (v : Osc D) (J K : ℤ) (P : Fock D R),
+      W J K (X v * P) = X v * W J K P - b v.1 • W (J + (((v.2 : ℕ)) : ℤ)) K P
+        - b' v.1 • W J (K + (((v.2 : ℕ)) : ℤ)) P)
+    (hvac : ∀ J K : ℤ, W J K (1 : Fock D R) = 0) (J K : ℤ) : W J K = 0 := by
+  have key : ∀ (P : Fock D R) (J K : ℤ), W J K P = 0 := by
+    intro P
+    induction P using MvPolynomial.induction_on with
+    | C a =>
+        intro J K
+        rw [show (C a : Fock D R) = a • 1 by rw [MvPolynomial.smul_eq_C_mul, mul_one],
+          map_smul, hvac, smul_zero]
+    | add p q hp hq =>
+        intro J K
+        rw [map_add, hp, hq, add_zero]
+    | mul_X p v hp =>
+        intro J K
+        rw [mul_comm, hrec, hp, hp, hp, mul_zero, smul_zero, smul_zero, sub_zero, sub_zero]
+  exact LinearMap.ext fun P => by rw [key P J K, LinearMap.zero_apply]
+
+/-- **Vertex operators with orthogonal momenta commute.**  If `b·b' = 0` then every Laurent
+coefficient of `:e^{i c·X(z)}:` commutes with every Laurent coefficient of `:e^{i c'·X(w)}:`,
+with *no* `z ≠ w` prescription and no scalar (monodromy) factor: the only obstruction to
+reordering `E_+(b)` past `E_-(b')` is the contraction `Σ_{l ≥ 1} (b·b') (w/z)^l / l`, which
+vanishes identically.
+
+Proof: both sides obey the same two-index creation-mode recursion (from
+`Fock.vertexOsc_X_mul` for each factor), so by `eq_zero_of_vertex_recursion₂` the difference
+is determined by its value on the vacuum, where it is
+`Φ^b_J Φ^{b'}_K - Φ^{b'}_K Φ^b_J = 0` (`vertexOsc_apply_creaExp_of_dotVec_zero`). -/
+theorem vertexOsc_comm_of_dotVec_zero (η b b' : Fin D → R) (hdot : dotVec η b b' = 0)
+    (J K : ℤ) (P : Fock D R) :
+    vertexOsc η b J (vertexOsc η b' K P) = vertexOsc η b' K (vertexOsc η b J P) := by
+  have hdot' : dotVec η b' b = 0 := by rw [dotVec_comm]; exact hdot
+  have hrec : ∀ (v : Osc D) (J K : ℤ) (Q : Fock D R),
+      (vertexOsc η b J * vertexOsc η b' K - vertexOsc η b' K * vertexOsc η b J) (X v * Q)
+        = X v * (vertexOsc η b J * vertexOsc η b' K
+              - vertexOsc η b' K * vertexOsc η b J) Q
+          - b v.1 • (vertexOsc η b (J + (((v.2 : ℕ)) : ℤ)) * vertexOsc η b' K
+              - vertexOsc η b' K * vertexOsc η b (J + (((v.2 : ℕ)) : ℤ))) Q
+          - b' v.1 • (vertexOsc η b J * vertexOsc η b' (K + (((v.2 : ℕ)) : ℤ))
+              - vertexOsc η b' (K + (((v.2 : ℕ)) : ℤ)) * vertexOsc η b J) Q := by
+    intro v J K Q
+    simp only [LinearMap.sub_apply, Module.End.mul_apply,
+      vertexOsc_X_mul η b' v K Q, vertexOsc_X_mul η b v J Q, map_sub, map_smul,
+      vertexOsc_X_mul η b v J (vertexOsc η b' K Q),
+      vertexOsc_X_mul η b' v K (vertexOsc η b J Q), mul_sub, smul_sub]
+    abel
+  have hvac : ∀ J K : ℤ,
+      (vertexOsc η b J * vertexOsc η b' K - vertexOsc η b' K * vertexOsc η b J)
+        (1 : Fock D R) = 0 := by
+    intro J K
+    simp only [LinearMap.sub_apply, Module.End.mul_apply, vertexOsc_apply_one]
+    rw [vertexOsc_apply_creaExp_of_dotVec_zero η b b' hdot' J K,
+      vertexOsc_apply_creaExp_of_dotVec_zero η b' b hdot K J, mul_comm, sub_self]
+  have h := eq_zero_of_vertex_recursion₂ b b'
+    (fun J K => vertexOsc η b J * vertexOsc η b' K - vertexOsc η b' K * vertexOsc η b J)
+    hrec hvac J K
+  have h' := congrArg (fun T : Module.End R (Fock D R) => T P) h
+  simp only [LinearMap.sub_apply, Module.End.mul_apply, LinearMap.zero_apply] at h'
+  exact sub_eq_zero.mp h'
+
+/-- Operator form of `vertexOsc_comm_of_dotVec_zero`: the Lie bracket vanishes. -/
+theorem lie_vertexOsc_vertexOsc_of_dotVec_zero (η b b' : Fin D → R)
+    (hdot : dotVec η b b' = 0) (J K : ℤ) :
+    ⁅vertexOsc η b J, vertexOsc η b' K⁆ = 0 := by
+  refine LinearMap.ext fun P => ?_
+  rw [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    Module.End.mul_apply, vertexOsc_comm_of_dotVec_zero η b b' hdot J K P, sub_self,
+    LinearMap.zero_apply]
+
 end OrthogonalMomenta
 
 end Fock
