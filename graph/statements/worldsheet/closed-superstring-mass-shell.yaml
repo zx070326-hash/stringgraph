@@ -1,0 +1,52 @@
+id: worldsheet.closed-superstring-mass-shell
+kind: proposition
+title: 闭超弦的质量壳与能级匹配：α' m^2 / 4 = N − ν = Ñ − ν̃
+statement: |
+  取 D = 10 个平坦维，闭弦（α^μ_0 = α̃^μ_0 = (α'/2)^{1/2}p^μ）。则物理态的质量壳与
+  能级匹配条件合并为
+    (α'/4) m^2 = N − ν = Ñ − ν̃，
+  其中 (ν, ν̃) ∈ {0, 1/2}^2 是左右两侧的扇区参数（worldsheet.rns-fermion-periodicity），
+  N、Ñ 是左右两侧的能级算符本征值。
+  即：**NS 一侧（ν = 1/2）的能级偏移是 −1/2、R 一侧（ν = 0）的偏移是 0**，
+  与开弦 (10.5.4) 的两个截距完全一致（worldsheet.open-superstring-mass-shell）。
+
+  ⚠ **α' 归一化提醒**：闭弦用 α'm^2/4，开弦用 α'm^2。这不是新的约定，而是零模归一化
+  α^μ_0 = (α'/2)^{1/2}p^μ（闭弦）与 (2α')^{1/2}p^μ（开弦）的直接后果（(10.2.8)）。
+  conv.alpha-prime-regge 里写的 α'm^2 = N − a 是**开弦**形式。
+
+  **一条推论（本命题的直接读数，下游 §10.6 要用）**：在 NS− 扇区，L_0 − α'p^2/4 的取值是
+  **半整数**，而在 NS+、R+、R− 三个扇区都是**整数**；因此 NS− 无法与其余三者配对满足
+  L_0 = L̃_0。这就是原书所说十六个闭弦扇区里「有六个是空的」的机制。
+  ⚠ 本卡只断言「半整数 vs 整数」这个奇偶性事实与「NS− 不能与其余三者配对」；
+  **不**断言恰好六个扇区为空的计数（那属于 worldsheet.superstring-sector-labels 的记账，
+  其原文位置在 §10.6）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.18), p. 23（闭弦质量壳与能级匹配 (α'/4)m^2 = N − ν = Ñ − ν̃）"
+    note: L1（抽取记录 polchinski-1998-v2.md E35；式号与公式内容逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.3) 下方, pp. 25–26（逐字：'Actually, six of these sectors are empty: in the NS− sector the level L_0 − α'p^2/4 is half-integer, while in the sectors NS+, R+, and R− it is an integer. It is therefore impossible to satisfy the level-matching condition L_0 = L̃_0 if NS− is paired with one of the other three.'）"
+    note: |
+      L1（E40）。本卡的推论逐字取自此处。
+      ⚠ 「六个」这个计数在 §10.6 的上下文里（16 个扇区标号）才有意义，故本卡不断言它。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.8), p. 6（闭弦与开弦的 α^μ_0 归一化差别）"
+tags: [superstring, closed-string, mass-shell, level-matching, ns-sector, ramond-sector]
+notes: |
+  【与玻色弦对应卡的关系】worldsheet.closed-string-level-matching（L_0 = L̃_0 来自 σ 平移
+  生成元）与 worldsheet.closed-string-mass-formula。本卡是超弦版本，
+  把两件事写在一个式子里（原书 (10.5.18) 就是这样写的），
+  故按 graph/CLAUDE.md 的判据不拆——但注意本卡因此**同时**承载「质量壳」与「能级匹配」，
+  若日后需要单独引用其中一条，应依赖玻色弦那两张卡加本卡的扇区偏移部分。
+
+  【NS− 记号的前置说明】NS±/R± 里的 ± 指 exp(πiF) 的本征值
+  （worldsheet.rns-fermion-number-operator），扇区标号的完整字典在
+  worldsheet.superstring-sector-labels。本卡的推论用到 NS− 这个标号，
+  故与那张卡有记号上的耦合；图上的边由推导承担。
+author: curator
+created: "2026-09-11"

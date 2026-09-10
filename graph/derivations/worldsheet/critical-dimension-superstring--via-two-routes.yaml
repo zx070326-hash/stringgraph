@@ -1,0 +1,89 @@
+id: worldsheet.critical-dimension-superstring--via-two-routes
+target: worldsheet.critical-dimension-superstring
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.critical-dimension-superstring-brst
+    note: 供给 (I)（Q_B² = 0 ⟺ c^m = c̃^m = 15，以及可换成任意正范数 SCFT 的推广）。
+  - id: worldsheet.critical-dimension-superstring-anomaly
+    note: |
+      供给 (II)（c^tot = 0 ⟺ c^m = 15）。⚠ 该卡自身把这条前提记为**被假定**的一致性条件，
+      并在陈述里写明其唯一独立支撑是 (I)。
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给 (III)（横向费米子个数 ≡ 0 mod 8）。这条**不是**给出 D = 10 的路线，
+      本卡把它列为附加的必要条件。
+  - id: worldsheet.rns-matter-central-charge
+    note: |
+      供给【(I)(II) 的结论与「D = 10」的关系】一节里的 c^m = (3/2)D 那一步，
+      即由 c^m = 15 得到 D = 10 的换算。本卡把它单列为 (I)(II) 的**公共输入**，
+      与玻色弦汇总卡把 worldsheet.free-boson-central-charge-d 单列的做法一致。
+      **不标 inferred**：原书 (10.1.20) 就在原地把两步合写成 0 = (3/2)D − 15。
+  - id: worldsheet.superconformal-ghost-central-charge
+    note: |
+      供给 c^g = −15。它是 (I)(II) 的另一个公共输入：(I) 的「总中心荷为零」与 (II) 的
+      c^m + c^g = 0 里那个 15 是同一个数。本卡在【"独立"的确切含义】一节明写这一共享，
+      故必须显式挂边。**不标 inferred**：原书 (10.1.20) 逐字写 '−26 + 11 = −15'。
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给 (I) 的前提描述（Q_B 的构造、β/γ 与 T_F 同周期、(10.1.21) 那组鬼场生成元
+      是被一般 BRST 构造挑出的）。本卡 (I) 的前提段逐条引用这些。
+  - id: worldsheet.ocq-superstring-physical-states
+    note: |
+      供给 (II) 的逻辑地位限定（§10.5 开头的方法论声明：本书把超共形对称性定义为约束，
+      不走超-diff × 超-Weyl 规范固定）。没有这条边，本卡 (II) 里那段「与玻色弦不同」的
+      断言在图上无依据。
+  - id: worldsheet.critical-dimension-bosonic-v2
+    note: |
+      供给 (IV) 的对照内容（玻色弦四条路线，其中光锥路线唯一同时定出 D 与截距）。
+      本卡 (IV) 是一条**关于本图内容的否定性记账**（超弦没有光锥路线），
+      它需要引用玻色弦汇总卡才能说清「没有的是什么」。
+      ⚠ 这条边不供给任何超弦的物理内容。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（(II) 与合并写法 0 = (3/2)D − 15）；§10.5, p. 24, (10.5.23) 下方一段（(I)，无式号）；§10.7, pp. 32–35（(III)）；§10.5 开头段, p. 20（(II) 的逻辑地位）"
+    note: L1。四处位置的证据等级见抽取记录 polchinski-1998-v2.md §0（全部一手直读）。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.14), p. 3（公共输入 c^m = (3/2)D）；(10.1.19), p. 4 与 §11.1, (11.1.2a,b), pp. 46–47（公共输入 c^g = −15 的两处来源）"
+    note: L1。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.10)（玻色弦 BRST 路线的显式 Q_B² 公式）；§1.3（光锥路线）"
+    note: |
+      **仅作对照**：本推导用它们说明超弦一侧缺什么（本卡 (IV) 与 notes 的 (b)(c)）。
+      不承载任何超弦论证。
+summary: |
+  本推导把 worldsheet.critical-dimension-superstring 的合取拆成它的各个合取项，
+  逐条指到已有节点：
+    (I)   worldsheet.critical-dimension-superstring-brst      Q_B² = 0 ⟺ c^m = 15（不给 D，不给截距）
+    (II)  worldsheet.critical-dimension-superstring-anomaly   c^m + c^g = 0 ⟺ c^m = 15（前提被假定）
+    (III) worldsheet.modular-invariance-requires-eight-transverse-fermions
+                                                             横向费米子数 ≡ 0 mod 8（必要条件，非路线）
+    (IV)  否定性记账：本卷无光锥路线（对照 worldsheet.critical-dimension-bosonic-v2）
+  外加 (I)(II) 的两个公共输入：
+    c^m = (3/2)D  worldsheet.rns-matter-central-charge（由 c^m = 15 得到 D = 10 的那一步）
+    c^g = −15     worldsheet.superconformal-ghost-central-charge（两条路线里的同一个 15）
+
+  【为什么 kind/status 是 physical-argument】
+  (1) 目标卡片除两条路线的结论外，还断言了几条**关于这些论证本身**的话——
+      「(II) 的前提在本卷不被论证、其唯一支撑是 (I)」「(I)(II) 共享两个输入、判据是同一个数」
+      「本卷没有光锥路线」「本卷没有 Q_B² 的显式公式」。这些是对本图与本卷内容的
+      分类与比较，不是任何文献里的定理（见 gaps 第一条）。
+  (2) 合取项本身全部封顶在 physical-argument：(I) 的论证被两次推给习题且无式号，
+      (II) 的前提被假定，(III) 的振幅形式是「猜」的且模变换被原书自称 naive。
+  故有效状态为 physical-argument。
+
+  【与玻色弦汇总卡的记账对称性】worldsheet.critical-dimension-bosonic-v2--via-four-routes
+  的 depends_on 结构与本推导逐条对应（路线卡 + 公共输入 c^m = D / c^g = −26）。
+  差别是本推导多一条对照边（玻色弦汇总卡），少两条路线边（无光锥、无旧协变/无鬼路线
+  ——后者在超弦一侧存在但只是一句「direct imitation」，见 worldsheet.no-ghost-theorem-superstring，
+  本卡**不**把它列为定出 D 的路线，因为原书没有用它定 D）。
+gaps:
+  - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(II) 的前提在本卷不被论证」「(I)(II) 共享两个输入」「本卷没有光锥路线」「本卷没有 Q_B² 的显式公式」等，都是对本图现有节点与本卷内容的比较与分类，不是来源中的陈述。它们随图与抽取的演化而可能失效。这是本推导标 physical-argument 的主要理由之一。"
+  - "**(I) 的论证被两次推给习题且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证指向 Vol.1 exercise 4.3 与 Vol.2 exercise 10.13(b)。与玻色弦一侧的 Vol.1 (4.3.10)（式号与内容均已核实、有显式 Q_B² 公式）相比，这是本图中定位明显更弱的一处。"
+  - "**(II) 的前提「总中心荷必须为零」在本卷完全没有论证**：Vol.2 §10.5 开头明说不走超-diff × 超-Weyl 规范固定那条路。故本卷对 D = 10 实质上只有一条论证（(I)）加一条重述（(II)）。"
+  - "**(III) 只给模 8 的条件，不给 D = 10**：它必须与 (I) 或 (II) 配合才挑出 D = 10；且其上游 gap 很重（振幅形式是猜的、模变换被原书自称 naive、不变性验证推给读者、theta 函数模变换在本图无节点）。"
+  - "**c^m = (3/2)D 中「每个 Majorana 费米子 1/2」在本图无独立节点**，且「每个标量 1」的 Vol.1 定位问题（v1 的 E34/Q4：既无式号也无页码）在本卷没有被解决——Vol.2 只复述结论。缓解：worldsheet.free-boson-central-charge-d 有 Lean 证明。"
+  - "**c^g = −15 的两个分项（−26 与 +11）的一般 λ 表达式在 v1 抽取记录里标未核实**；本图用 Vol.2 (10.1.19) 与 (11.1.2a) 补了定位（两处式号与表达式均已 L1 核实），但推导本身在原书中不展开。"
+  - "**本卡不主张 (I)(II) 互相蕴含**：两者只是各自挑出同一个 c^m = 15。(I) 与 (II) 之间在本图无等价节点；玻色弦一侧的对应等价（worldsheet.brst-cohomology-equals-ocq-physical）在超弦情形也未建（见 worldsheet.ocq-superstring-physical-states 的 notes）。"
+author: curator
+created: "2026-09-11"

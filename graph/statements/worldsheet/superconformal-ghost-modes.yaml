@@ -1,0 +1,79 @@
+id: worldsheet.superconformal-ghost-modes
+kind: definition
+status: rigorous
+title: 超共形鬼场 βγ 与 bc 的模式、基态与鬼场 Virasoro/超 Virasoro 生成元
+statement: |
+  超弦的鬼场部门由两对场组成：
+    反对易的 (b, c)，权 (2, 0) 与 (−1, 0)（与玻色弦相同）；
+    **对易**的 (β, γ)，权 (3/2, 0) 与 (−1/2, 0)。
+  在扇区参数 ν（worldsheet.rns-fermion-periodicity）下模式展开为
+    β(z) = Σ_{r ∈ Z+ν} β_r / z^{r + 3/2},    γ(z) = Σ_{r ∈ Z+ν} γ_r / z^{r − 1/2},
+    b(z) = Σ_{m ∈ Z} b_m / z^{m+2},          c(z) = Σ_{m ∈ Z} c_m / z^{m−1},
+  （反）对易关系
+    [γ_r, β_s] = δ_{r,−s},    {b_m, c_n} = δ_{m,−n}。
+  **基态**（按原书的分组：β_0 归入降算符、γ_0 归入升算符，与玻色弦的 b_0/c_0 分组平行）
+    NS： β_r|0⟩_NS = 0 (r ≥ 1/2)，  γ_r|0⟩_NS = 0 (r ≥ 1/2)；
+    R ： β_r|0⟩_R  = 0 (r ≥ 0)，    γ_r|0⟩_R  = 0 (r ≥ 1)；
+    bc： b_m|0⟩ = 0 (m ≥ 0)，       c_m|0⟩ = 0 (m ≥ 1)。
+  **鬼场生成元**
+    L^g_m = Σ_n (m+n) °b_{m−n} c_n° + Σ_r (1/2)(m + 2r) °β_{m−r} γ_r° + a^g δ_{m,0},
+    G^g_r = − Σ_n [ (1/2)(2r + n) β_{r−n} c_n + 2 b_n γ_{r−n} ]，
+  其中 a^g 是鬼场正规序常数，本卡**保持为符号**（值见
+  worldsheet.superconformal-ghost-normal-ordering-constants）。
+
+  **一条真实的约束（BRST 荷存在性的前提）**：β 与 γ 的周期性**必须**与它们所配的约束 T_F 相同
+  （即同一个 ν）。原书逐字：'The ghosts β and γ must have the same periodicity (10.2.4) as the
+  generator T_F with which they are associated. This is necessary to make the BRST current
+  periodic, so that it can be integrated to give the BRST charge.'
+
+  本卡是定义。它**不**断言 L^g_m、G^g_r 满足超 Virasoro 代数、不断言 a^g 的值、
+  也**不**断言这个 Fock 空间上的内积性质。
+uses:
+  - worldsheet.bc-ghost-cft
+  - worldsheet.rns-fermion-periodicity
+  - worldsheet.superconformal-ghost-central-charge
+  - worldsheet.conformal-normal-ordering-v2
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.1a)（β, γ 模式）、(10.4.1b)（b, c 模式）、(10.4.2)（[γ_r,β_s] = δ、{b_m,c_n} = δ）、(10.4.3a,b,c)（三组基态条件）、(10.4.4a)（L^g_m）、(10.4.4b)（G^g_r），pp. 15–16；权重与场的引入见 §10.4 开头逐字：'To build the BRST current we will need, in addition to the anticommuting b and c ghosts of the bosonic string, commuting ghost fields β and γ of weight (3/2, 0) and (−1/2, 0)'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E28；式号与公式内容逐页读到原书页图）。
+      基态分组的理由是逐字的：'We have grouped β_0 with the lowering operators and γ_0 with the
+      raising ones, in parallel with the bosonic case.'
+  - ref: polchinski-1998-v2
+    loc: "§10.4, p. 15（β、γ 必须与 T_F 同周期的逐字理由）"
+    note: L1（E28 备注）。这条是 worldsheet.superstring-brst-charge 存在性的前提。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.17)（一阶 SCFT 作用量）、(10.1.21a,b)（λ = 2 的 T_B、T_F），pp. 4–5"
+    note: |
+      L1（E11、E13）。(10.4.4) 的 L^g、G^g 就是 (10.1.21) 的模式。
+      ⚠ §10.5 脚注 3（p. 24）指出 bcβγ 理论有一族超共形对称性（β → xβ, γ → x^{−1}γ），
+      (10.1.21) 是被一般 BRST 构造 (4.3.14) 挑出来的那一组。这个选择记在
+      worldsheet.superconformal-ghost-central-charge 的 notes 与本卡此处。
+tags: [superstring, ghosts, beta-gamma, bc-ghost, mode-expansion, definition]
+notes: |
+  【与玻色弦鬼场卡的关系】(b, c) 部分与 worldsheet.bc-ghost-cft 是同一个系统
+  （故本卡 uses 它），(β, γ) 是新的。两者的中心荷之和见
+  worldsheet.superconformal-ghost-central-charge。
+
+  【βγ 的一个结构性差别，别漏】β、γ 是**对易**场，其模式的占据数**无上界**
+  （原书 §10.4 逐字：'The βγ theory has a greater density of states than the bc theory because
+  the modes of a commuting field can be excited any number of times.'）。
+  这条差别是超弦无鬼定理「照搬玻色弦论证」为什么不能直接接受的原因之一
+  （抽取记录 Q4 的第 (iii) 条），见 worldsheet.no-ghost-theorem-superstring 的 gaps。
+
+  【βγ 真空的不等价性，别漏】单位算子对应的态 |1⟩ **不是** |0⟩_NS，
+  且 |1⟩ 上的 Fock 空间里没有具有 |0⟩_NS 性质的态——见
+  worldsheet.superconformal-ghost-unit-operator-vacuum。本卡定义的 |0⟩_NS 是按
+  (10.4.3a) 的湮灭条件取的那一个。
+
+  【status: rigorous 的理由】本卡写下的是明确的模式、（反）对易关系与湮灭条件，纯代数。
+  它 uses 的 worldsheet.superconformal-ghost-central-charge 是 physical-argument 命题，
+  故有效状态会被压到 physical-argument——这是有意的（本卡的场内容与权重来自那条中心荷记账）。
+author: curator
+created: "2026-09-11"

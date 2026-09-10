@@ -1,0 +1,37 @@
+id: worldsheet.gso-removes-tachyon--via-inspection-of-solutions
+target: worldsheet.gso-removes-tachyon
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-sector-consistency-solutions
+    note: 供给六个解的扇区表（四个 type II 与两个 type 0）。
+  - id: worldsheet.open-superstring-low-level-spectrum
+    note: |
+      供给「快子住在 NS−（开弦）/ (NS−,NS−)（闭弦）」这一事实与其质量值。
+      没有它就不知道要在解表里找哪个扇区。
+  - id: worldsheet.closed-superstring-mass-shell
+    note: |
+      供给闭弦质量壳，使 (NS−,NS−) 的 m² = −2/α' 有意义
+      （左右各 −1/2 的偏移，(α'/4)m² = −1/2 给 m² = −2/α'）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.6) 下方, pp. 26–27（type II 四解不含 (NS−,NS−) 的逐字句；type 0 两解含之）；§10.5, p. 21 与 p. 23（快子的位置与质量）"
+    note: L1。
+summary: |
+  查表，两步：
+  (1) 快子的位置：由 (10.5.7) 与 Table 10.2，开弦快子在 NS− 扇区；
+      由 §10.5 p. 23 的逐字句，闭弦快子在 (NS−, NS−)，m² = −2/α'。
+  (2) 在六个解的扇区表里查 (NS−, NS−)：
+      IIB、IIA、IIA′、IIB′ 的四行里都没有它 ⟹ 无快子；
+      0A、0B 的行里都有它 ⟹ 有快子。
+  结论即目标卡片的断言。
+
+  【status 的理由】这是一次查表（有限、可核对），但完全继承上游
+  worldsheet.superstring-sector-consistency-solutions 的状态
+  （三条条件被强加、穷举过程原书不展示）。若上游升级，本推导可随之升级。
+gaps:
+  - "**完全继承上游解表的 gap**：三条一致性条件被强加；穷举过程原书不展示（'one readily finds'），本图未复算。"
+  - "**快子位置本身依赖低能级谱的分析**，其 gap（正规序常数、SO(8) 标签、附录 B.1）见 worldsheet.open-superstring-low-level-spectrum--via-level-by-level-analysis。"
+  - "**只覆盖最低能级**：本推导只查了 (NS−,NS−) 这一个扇区。「谱中没有任何 m² < 0 的态」是更强的断言，本图不作（更高能级的负 m² 需要逐级检查或用无鬼定理加质量壳，原书不做）。"
+author: curator
+created: "2026-09-11"

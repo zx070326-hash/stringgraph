@@ -1,0 +1,95 @@
+id: worldsheet.ten-dimensional-superstring-theories
+kind: proposition
+title: 第 10 章的结论（条件形式）：在该章所列的构造与一致性条件下，无快子且无反常的十维弦论恰有三个——IIA、IIB、type I SO(32)
+statement: |
+  **⚠ 本命题必须写成条件形式，理由见【条件与限定】与 notes 的【与作者自己的警告的张力】。**
+
+  **前提（本命题的适用范围）**：
+    (P1) 世界面构造限于第 10 章的 (1,1) 超共形约束代数（RNS 形式，worldsheet.rns-action），
+         物质部门取十个平坦 X^μψ^μ SCFT；
+    (P2) 扇区组合满足 worldsheet.superstring-sector-consistency-conditions 的三条条件
+         （相互局域性、OPE 闭合、至少一个左移与一个右移 R 扇区）与能级匹配；
+    (P3) 开弦扇区与闭弦扇区的耦合满足 OPE 闭合
+         （worldsheet.type-i-open-string-gauge-multiplet）；
+    (P4) 要求单圈 NS–NS 与 R–R tadpole **各自**在拓扑求和后为零
+         （worldsheet.type-i-tadpole-cancellation-so32）；
+    (P5) 要求时空规范与坐标对称性在单圈无反常（**原书把这一条推给第 12 章，本图无节点**）。
+
+  **结论**：在 (P1)–(P5) 下，无快子且无反常的十维弦论恰有三个：
+    **type IIA、type IIB、type I SO(32)**，
+  其中 type I 的无质量内容为
+    [0] + [2] + (2) + 8′ + 56 + (8_v + 8)_{SO(n) 或 Sp(k)}，n = 32 且取正交投影。
+
+  **通往该结论的三步**（原书的论证链）：
+    (a) 开弦的无质量多重态（16 个态）是 d = 10, N = 1 超对称的表示，**不是** N = 2 的表示，
+        故开超弦**不能**耦合到有两个引力微子的取向闭超弦（IIA/IIB）；
+        它只能耦合到无取向的闭弦理论 (10.6.18)，因此开弦本身也必须是无取向的。
+    (b) 由 (10.6.18) 的手征性，开弦无质量态必须是 8_v + 8。
+    (c) 除 SO(32) 外，其余规范群（以及纯闭弦无取向理论）都有单圈发散与超共形反常（§10.8），
+        且时空规范/坐标对称性有单圈反常（第 12 章）。
+
+  **本命题不断言的内容**：
+    (1) **不**断言这是「所有十维弦论」的完备分类——见 notes 的【与作者自己的警告的张力】；
+    (2) 不断言杂化弦不存在（杂化弦在第 11 章，本轮不入图；它们同样是十维、无快子、无反常的，
+        但不在第 10 章的构造范围内）；
+    (3) 不断言 (P5) 的内容（第 12 章，本图无节点）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6 末, eq. (10.6.19), p. 31（type I 的无质量内容）；逐字结论句：'Thus we have found precisely three tachyon-free and nonanomalous string theories in this chapter: type IIA, type IIB, and type I SO(32).'；论证 (a)(b)(c) 的逐字见 statement 与 note"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E46；式号与逐字措辞逐页读到原书页图）。
+      ★ **原文的限定词是 'in this chapter'**——本命题的条件形式正是照此写的。
+      (a) 的逐字：'The open string multiplets, with 16 states, are representations of d = 10,
+      N = 1 supersymmetry but not of N = 2 supersymmetry. Thus the open superstring cannot
+      couple to the oriented closed superstring theories, which have two gravitinos.'
+      (c) 的逐字：'There is a further inconsistency in all but the SO(32) theory. We will see in
+      section 10.8 that for all other groups, as well as the purely closed unoriented theory,
+      there is a one-loop divergence and superconformal anomaly. We will also see, in chapter 12,
+      that the spacetime gauge and coordinate symmetries have an anomaly at one loop for all but
+      the SO(32) theory.'
+  - ref: polchinski-1998-v2
+    loc: "§10.6 脚注 5, p. 31（逐字：'At the world-sheet level the problem is that the total derivative null gravitino vertex operators give rise to nonzero world-sheet boundary terms. Only one linear combination of the two null gravitinos decouples, so we must make the world-sheet parity projection in order to eliminate the other.'）"
+    note: |
+      L1（E46）。这是 (a) 的世界面级理由，本图无对应节点（涉及零引力微子顶点算子的边界项）。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（作者对分类完备性的警告，逐字见 notes）"
+    note: |
+      L1（抽取记录 E53）。★★★ **这是全两卷里对「弦论分类完备」这条常见断言最直接的作者级限定**，
+      抽取记录要求：若图里有「十维一致弦论恰有 N 个」这类节点，**必须**引用本条，
+      且 status 只能是 conjecture 或 physical-argument。本卡据此写成条件形式并在 notes 记张力。
+tags: [superstring, type-i, type-ii, so32, classification, consistency]
+notes: |
+  ★★★【与作者自己的警告的张力（E46 vs E53），本卡存在的主要理由】
+  §10.6 末的结论句用了限定词 'in this chapter'：
+    'Thus we have found precisely three tachyon-free and nonanomalous string theories
+     **in this chapter**: type IIA, type IIB, and type I SO(32).'
+  而 §11.1 末（p. 48–49）作者对分类完备性给出明确警告（逐字）：
+    '**It should be emphasized that the analysis in this section had many explicit and implicit
+     assumptions, and one should be cautious in assuming that all string theories have been
+     found.** Indeed, there are some string theories that do not fall into this classification.
+     One is the Green–Schwarz form of the superstring, which has no simple covariant
+     gauge-fixing … Another exception is topological string theory, where in a covariant gauge
+     the constraints do not satisfy spin-statistics as we have assumed. …
+     In fact, we will find the same set of physical string theories from an entirely different
+     and nonperturbative point of view in chapter 14, **suggesting** that all have been found.
+     To be precise, there are other theories with stringlike excitations, but the theories found
+     in this and the previous chapter **seem to be** the only ones which have a limit where they
+     become weakly coupled, so that string perturbation theory exists.'
+  **本图的处理**：
+    · 本卡的 statement 写成 (P1)–(P5) 下的条件式，并显式声明「不断言这是完备分类」；
+    · 「三个」这个数只对第 10 章的构造成立；加上第 11 章的两个杂化弦才是通常说的「五个」，
+      而即便那样，作者用的词也是 'suggesting' 与 'seem to be'；
+    · 任何下游若要断言「十维一致超弦恰有五个」，**必须**同时引用 §11.1 末这段警告，
+      且 status 不得高于 physical-argument（抽取记录 E53 的要求）。
+
+  【本卡未覆盖的第 (P5)】时空规范与坐标反常的抵消在第 12 章（本轮未读）。
+  本图 consistency 区另有 Green–Schwarz 1984 一支（另一个 curator 的 claim），
+  那是同一物理内容的原始文献路线。**两者尚未接边**；接边前不要把本卡的 (P5) 当作已支撑。
+
+  【与 duality/M 理论的关系】§11.1 末提到第 14 章会从非微扰角度重新得到同一组理论。
+  本图 duality 区暂无对应节点。
+author: curator
+created: "2026-09-11"

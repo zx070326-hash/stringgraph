@@ -1,0 +1,54 @@
+id: worldsheet.superstring-brst-additional-conditions
+kind: definition
+status: physical-argument
+title: 超弦 BRST 量子化的附加条件：b_0 = L_0 = 0，且 R 扇区另加 β_0 = G_0 = 0
+statement: |
+  在 worldsheet.superstring-brst-charge 的设定下，可观测谱取为 Q_B 的 BRST 上同调类空间，
+  并**额外**加上下列条件：
+    b_0 |ψ⟩ = L_0 |ψ⟩ = 0        （两个扇区都加；与玻色弦相同），
+    β_0 |ψ⟩ = G_0 |ψ⟩ = 0        （**只在 R 扇区**，因为只有 R 扇区有 r = 0 的模式）。
+  原书对第二条的理由只有一句：'the logic being the same as for (10.5.25)'。
+  这里 L_0、G_0 是物质加鬼场的总生成元（与 {Q_B, b_0} = L_0、[Q_B, β_0] = G_0 相容：
+  加了 b_0 = 0 就必须加 L_0 = 0，加了 β_0 = 0 就必须加 G_0 = 0，否则条件与 Q_B 不相容）。
+
+  本卡是定义（把这两组条件取作 BRST 谱的定义的一部分）。
+  它**不**断言这样定义的相对上同调与 OCQ 物理态空间等价（那需要一条独立命题，本图未建；
+  玻色弦一侧是 worldsheet.brst-cohomology-equals-ocq-physical）。
+uses:
+  - worldsheet.superstring-brst-charge
+  - worldsheet.superconformal-ghost-modes
+uses_conventions:
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.25)（b_0|ψ> = L_0|ψ> = 0）、(10.5.26)（β_0|ψ> = G_0|ψ> = 0，只在 R 扇区），p. 25；逐字 'The observable spectrum is the space of BRST cohomology classes. As in the bosonic theory, we impose the additional conditions' 与 'In addition, in the R sector we impose … the logic being the same as for (10.5.25)'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E38；式号与逐字措辞逐页读到原书页图）。
+      ⚠ **(10.5.26) 没有独立论证**，只有 'the logic being the same as for (10.5.25)' 这一句。
+  - ref: headrick-2008
+    loc: "Problem 10.14：'|ψ> is defined to be annihilated by b_0 and β_0, which implies that it is annihilated by G^g_0. According to (10.5.26), this in turn implies that it is annihilated by G^m_0, which is exactly the OCQ condition.'"
+    note: |
+      **仅作核对源**（原书已给条件本身；本条不属 lead 裁决的「唯一成文来源」例外）。
+      抽取记录 E38 指出：(10.5.26) 是 OCQ ↔ BRST 等价在 R 扇区的技术关键。
+  - ref: polchinski-1998-v1
+    loc: "§4.3（玻色弦的 b_0、L_0 附加条件；本图节点 worldsheet.brst-preserves-relative-complex 承载相应机制）"
+    note: Vol.2 明写 'As in the bosonic theory'，故这条依赖是文献明写的。
+tags: [superstring, brst, relative-cohomology, ramond-sector, definition]
+notes: |
+  ★【本卡是超弦无鬼定理的第二个结构性障碍（抽取记录 Q4 的第 (ii) 条）】
+  R 扇区的 β_0、γ_0 零模使 (10.5.26) 成为一条**额外强加**的条件，
+  而玻色弦一侧只需要 b_0、L_0。Vol.1 §4.4 的无鬼定理证明是在
+  「b_0 = L_0 = 0 的相对复形」上做的；超弦 R 扇区要在「再交 β_0 = G_0 = 0」的更小复形上做，
+  原书只说「逻辑相同」。**这一步的合法性（相对复形仍被 Q_B 保持、上同调不依赖该约化）
+  原书不证。** → worldsheet.no-ghost-theorem-superstring 的 gaps 显式引用本卡。
+
+  【与玻色弦对应机制的关系】玻色弦一侧本图有 worldsheet.brst-preserves-relative-complex
+  （{Q_B, b_0} = L_0 保证 Q_B 保持相对复形）。超弦 R 扇区需要它的类比
+  （[Q_B, β_0] = G_0 是否同样保证 Q_B 保持更小的复形），**本图未建该命题**。
+  → 待建：worldsheet.brst-preserves-relative-complex-ramond。
+
+  【status 的理由】这是一张把「额外条件」写进定义的卡，其合理性依赖上面那条未证的类比；
+  上游 worldsheet.superstring-brst-charge 也是 physical-argument。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,66 @@
+id: worldsheet.type-ii-spacetime-supersymmetry
+kind: proposition
+title: NS–R 扇区的无质量态是引力微子，其规范等价关系是局域时空超对称的标志；IIA/IIB 各有两个引力微子（d = 10, N = 2）
+statement: |
+  在 NS–R 扇区，无质量态写作 ψ^μ_{−1/2}|0; s; k⟩_{NS–R} u_{μs}，物理态条件给
+    k² = 0,   k^μ u_{μs} = 0,   (k·Γ)_{ss'} u_{μs'} = 0，
+  且存在等价关系
+    u_{μs} ≅ u_{μs} + k_μ ζ_s。
+  原书据此断言（逐字）：'We have learned that such equivalence relations are **the signature of
+  a local spacetime symmetry**. Here the symmetry parameter ζ_s is a spacetime spinor so we have
+  **local spacetime supersymmetry**.'
+  相应的引力微子顶点算子是 V_s e^{−φ̃} ψ̃^μ e^{ik·X} 与 e^{−φ} ψ^μ Ṽ_s e^{ik·X}，
+  权重分别为 (1, 0) 与 (0, 1)。
+  由于 IIA/IIB 的谱在 NS–R 与 R–NS 扇区各有一个这样的态，
+  **取向闭超弦有两个引力微子**，即 d = 10, N = 2 时空超对称。
+
+  ⚠⚠ **原书在这里有一句赤裸的断言，必须记录**（逐字）：
+  'This is to be expected: **if all requirements for a consistent string theory are met
+  (and they are)** then the existence of the gravitinos implies that the corresponding
+  supersymmetries must be present.'
+  括号里的 '(and they are)' **不加论证**。抽取记录把这一句列为本章少见的赤裸断言，
+  并要求：若用「IIA/IIB 有时空超对称」，status 必须是 physical-argument 并把这句记进 note。
+
+  **作者对 RNS 形式的自评**（逐字，一并记录）：
+  'The reader may feel that the construction in this section, which is the *Ramond–Neveu–Schwarz
+  (RNS)* form of the superstring, is somewhat **ad hoc**. In particular one might expect that
+  the spacetime supersymmetry should be manifest from the start. **There is certainly truth to
+  this**, but the existing supersymmetric formulation (the *Green–Schwarz superstring*) seems
+  to be even more unwieldy.'
+
+  **本命题不断言的内容**：
+    (1) 不断言超对称代数的形式或其表示（原书推给附录 B.2、B.4、B.5，本轮未读）；
+    (2) 不断言「等价关系 ⟹ 局域对称性」这条一般原则（原书说 'We have learned'，
+        指向 Vol.1 的相应讨论，本图无节点）；
+    (3) 不断言 Green–Schwarz 形式的任何性质。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.12)（NS–R 引力微子态）、(10.6.13)（物理态条件）、(10.6.14)（等价关系 u_{μs} ≅ u_{μs} + k_μζ_s）、(10.6.15)（引力微子顶点算子，权 (1,0) 与 (0,1)），pp. 28–29；'the signature of a local spacetime symmetry' 与 'local spacetime supersymmetry' 逐字同处"
+    note: L1（抽取记录 polchinski-1998-v2.md E43；式号与逐字措辞逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, p. 29（逐字：'if all requirements for a consistent string theory are met (and they are) then the existence of the gravitinos implies that the corresponding supersymmetries must be present.'；以及对 RNS 形式的 'somewhat ad hoc' 自评）"
+    note: |
+      L1（E43）。★ 抽取记录：'这句括号是本章少见的赤裸断言，转节点时若要用
+      「IIA/IIB 有时空超对称」，status 应为 physical-argument，并把这句记进 note。'
+      本卡照此办理。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, p. 29（原书明写：'the reader should now study the appropriate sections of appendix B'，指 B.2 时空 SUSY、B.4 反对称张量场、B.5 IIA/IIB 超引力）"
+    note: |
+      L1。⚠ 附录 B 本轮未读（抽取记录 Q8），故超对称代数的内容在本图无支撑。
+tags: [superstring, type-ii, supersymmetry, gravitino, spectrum]
+notes: |
+  【本卡为什么是 worldsheet.ten-dimensional-superstring-theories 的依赖】
+  那张卡的论证第 (a) 步用到「IIA/IIB 有两个引力微子（N = 2），而开弦多重态是 N = 1 的表示」，
+  这一步的前一半正是本卡。
+
+  【「等价关系 ⟹ 局域对称性」这条原则】原书说 'We have learned that such equivalence relations
+  are the signature of a local spacetime symmetry'，指向 Vol.1 的相应讨论
+  （玻色弦一侧的对应现象是无质量矢量的 e^μ ≅ e^μ + λk^μ ⟹ 规范对称性，
+  本图 worldsheet.physical-states-level-one 与 worldsheet.open-string-intercept-v2 涉及）。
+  **本图没有把这条原则单独建卡**，故本卡的核心一步在图上无支撑。
+  → 待建：worldsheet.null-state-equivalence-signals-gauge-symmetry。
+author: curator
+created: "2026-09-11"

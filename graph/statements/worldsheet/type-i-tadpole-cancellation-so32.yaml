@@ -1,0 +1,70 @@
+id: worldsheet.type-i-tadpole-cancellation-so32
+kind: proposition
+title: type I 的单圈发散（R–R tadpole）只在规范群 SO(32) 时抵消：总发散 ∝ (n ∓ 32)²
+statement: |
+  把 type I 的单圈真空振幅按世界面拓扑分解为柱面 C₂、Klein 瓶 K₂、Möbius 带 M₂，
+  每个都分成闭弦 NS–NS 交换与 R–R 交换两部分。用模变换取长柱极限（s → ∞），
+  三个拓扑的 **R–R 交换发散之和**为
+    Z_1 = −i (n ∓ 32)² (V_10 / 8π(8π²α'²)^5) ∫_0^∞ ds [16 + O(exp(−2s))]，
+  其中上号对应 SO(n)、下号对应 Sp(n)。故
+    **R–R tadpole 为零当且仅当规范群是 SO(32)（n = 32 且取正交投影）**。
+  对每个拓扑，NS–NS 发散是 R–R 发散的相反数，故 SO(32) 时 dilaton–引力子 tadpole 也为零。
+
+  **这个发散为什么是「真正的不一致」而不是可以吸收的重整化**（原书的论证）：
+  发散来自一个无质量的 R–R tadpole，而唯一可能的源是一个 **10-形式势 C_10**
+  ——它的场强恒为零、没有动能项，故其传播子是 1/0，tadpole 的效应是发散 μ_10²/0。
+  由 C_10 变分得到的运动方程就是 **μ_10 = 0**；
+  原书逐字：'unlike the divergences encountered previously **this one cannot be removed by a
+  correction to the background fields. It represents an actual inconsistency.**'
+
+  ⚠ **一条容易漏的技术要点**（原书脚注 7，逐字）：
+  'In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each topology
+  separately because the trace vanishes by supersymmetry. **This is not sufficient**, because
+  they will no longer cancel when vertex operators are added near one end of each surface.
+  **The NS–NS and R–R tadpoles must vanish separately when summed over topologies.**'
+  即本命题的**逻辑形式**是：要求 NS–NS 与 R–R tadpole **各自**在拓扑求和后为零
+  ⟹ n = 32 且取正交投影。
+
+  **本命题不断言的内容**：
+    (1) 不断言时空规范/坐标反常的抵消——那在第 12 章（本轮未读），
+        是 SO(32) 唯一性的**另一个独立理由**；
+    (2) 不断言 tadpole 的整体符号：原书逐字 'This calculation does not determine the sign of
+        the tadpole, but it should be n ∓ 32'（理由是 cross-cap 数在切开曲面时只 mod 2 守恒，
+        故符号不由幺正性定出，而边界数则不然）；
+    (3) 不断言 C_10 的存在性有独立论证——原书逐字 'One can guess the resolution of this as
+        follows'，并说 'as indeed a more detailed analysis does show'（**不给该分析**）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. (10.8.1)–(10.8.2a,b)（柱面分解）、(10.8.4)（Z_{C₂,0} 的发散）、(10.8.5)（μ_10 ∫C_10）、(10.8.6)（μ_10²/0）、(10.8.11)（Klein 瓶）、(10.8.13)（Ωψ_r Ω^{−1}）、(10.8.14)（Ω² = exp(πiF)）、(10.8.15)（投影算符）、(10.8.18)（Möbius 带）、**(10.8.19)（总 R–R 发散 ∝ (n ∓ 32)²）**，pp. 37–42；逐字 'The R–R tadpole vanishes only for the gauge group SO(32).' 与 'It represents an actual inconsistency.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E48；式号与公式内容逐页读到原书页图）。
+      ⚠ 原书对 C_10 那一步的措辞是 'One can guess the resolution of this as follows'
+      与 'as indeed a more detailed analysis does show'——**猜 + 不给分析**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8 脚注 7, p. 39（逐字见 statement：NS–NS 与 R–R tadpole 必须**分别**在拓扑求和后为零）"
+    note: L1（E48 备注）。这条决定了本命题的逻辑形式，抽取记录特别标出。
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.1)、(7.4.15)、(7.4.22)（玻色弦中同类的发散与抵消；Vol.2 明写 'The cancellation is very similar to what we have already seen in the bosonic theory in chapter 7.'）"
+    note: |
+      Vol.2 明写引用。⚠ 本图**没有** Vol.1 §7.4 的节点（单圈振幅、Klein 瓶、Möbius 带），
+      故这条来源在图上无对应依赖边，见推导的 gaps。
+tags: [superstring, type-i, tadpole, so32, consistency, one-loop, divergence]
+notes: |
+  【本卡是「三个十维理论」里 SO(32) 的第一个理由】第二个理由是第 12 章的时空反常抵消
+  （本轮未读）。worldsheet.ten-dimensional-superstring-theories 的条件式写法同时挂这两个。
+
+  【本图缺的上游】Vol.1 §7.4 的单圈振幅（柱面/Klein 瓶/Möbius 带的模变换与长柱极限）
+  在本图完全没有节点，Vol.2 §10.7 的环面振幅本图也只建了模不变性那一条必要条件。
+  故本卡的推导实质上无法在图内展开计算，只能记录结论与来源。
+  → 待建（Vol.1 §7.4 + Vol.2 §10.7–10.8）：spectrum.one-loop-vacuum-amplitudes 一族。
+
+  【与 Green–Schwarz 反常抵消的关系】GS 1984 的 SO(32) / E8×E8 结论走的是时空反常路线，
+  本图 consistency 区正在建（另一个 curator 的 claim）。**本卡是世界面 tadpole 路线**，
+  两者是不同的论证，不要合并。GS 那边也只给出 SO(32) 与 E8×E8 两个解，
+  而本卡的 tadpole 只在 type I 语境下且只给 SO(32)。
+author: curator
+created: "2026-09-11"

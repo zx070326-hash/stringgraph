@@ -1,0 +1,70 @@
+id: worldsheet.superstring-sector-consistency-conditions
+kind: definition
+status: physical-argument
+title: 十维超弦扇区组合的三条一致性条件（相互局域性、OPE 闭合、至少一个 R 扇区）
+statement: |
+  用 worldsheet.superstring-sector-labels 的标号：闭弦扇区记作 (α, F, α̃, F̃)，共 2^10 种
+  子集组合。原书**强加**下列三条一致性条件（逐字标号 (a)(b)(c)）：
+
+  **(a) 相互局域性（mutual locality）**。当一个顶点算子绕另一个转一圈时，
+      两者的算子乘积获得相位 exp πi(F_1α_2 − F_2α_1 − F̃_1α̃_2 + F̃_2α̃_1)。
+      要求该相位为 1，即
+        F_1α_2 − F_2α_1 − F̃_1α̃_2 + F̃_2α̃_1 ∈ 2Z。
+      **物理理由（原书逐字）**：'the spinor fields have branch cuts in the presence of R sector
+      vertex operators. Various pairs of vertex operators will then have branch cuts in their
+      operator products — they are not mutually local. The operator F counts the number of
+      spinor fields in a vertex operator, so the net phase when one vertex operator circles
+      another is …'；'If this phase is not unity, the amplitude with both operators cannot be
+      consistently defined.'
+
+  **(b) OPE 闭合**。若 (α_1, F_1, α̃_1, F̃_1) 与 (α_2, F_2, α̃_2, F̃_2) 都在谱中，
+      则 (α_1+α_2, F_1+F_2, α̃_1+α̃_2, F̃_1+F̃_2) 也在谱中（各分量 mod 2）。
+
+  **(c) 模不变性的一个必要条件**。**必须至少有一个左移 R 扇区（α = 1）
+      与至少一个右移 R 扇区（α̃ = 1）**。
+      原书对这一条的定位逐字：'We will study modular invariance in the next section, but
+      in order to reduce the number of possibilities it is useful to extract one simple
+      necessary condition.'——即它是模不变性的**必要条件之一**，不是模不变性本身。
+
+  另有一条已经用掉的条件：能级匹配把 16 个扇区里的六个（NS− 与其余三者的配对）排除
+  （worldsheet.superstring-sector-labels）。
+
+  **本卡是「本书强加哪些条件」的记账**，不是这些条件的论证。
+  原书逐字：'Thus there are potentially 2^10 combinations of sectors, but only a few of these
+  lead to consistent string theories. **We impose three consistency conditions**'。
+  本卡**不**断言这三条是充分的，也**不**断言它们是必要的
+  （(c) 明说只是必要条件的一部分；(a)(b) 的必要性论证是物理层面的）。
+uses:
+  - worldsheet.superstring-sector-labels
+  - worldsheet.rns-fermion-number-operator
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.4)（相位）、(10.6.5)（条件 (a)）、(10.6.6)（条件 (b)）与条件 (c) 的逐字句（'There must be at least one left-moving R sector (α = 1) and at least one right-moving R sector (α̃ = 1).'），pp. 25–26；逐字 'We impose three consistency conditions'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E40；式号、公式与三条条件的逐字措辞逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.4) 上方, pp. 25–26（相互局域性的物理理由，逐字见 statement）"
+    note: L1（E40 备注）。
+tags: [superstring, gso, sectors, consistency, definition]
+notes: |
+  ★【本卡是 GSO 投影在本书里的真正起点】抽取记录 E42 明确指出：
+  **GSO 投影在本书里是这三条一致性条件之解的重述，不是独立公设**
+  （与很多教材把 GSO 当作额外投影公设不同）。
+  故本图的依赖方向是：三条条件 → 扇区组合的解（worldsheet.superstring-sector-consistency-solutions）
+  → GSO 投影的重述（worldsheet.gso-projection），**不是**反过来。
+
+  【status: physical-argument 的理由】三条条件本身是**被强加的**：
+  (a) 的理由是「否则振幅无法自洽定义」（物理论断，不是定理）；
+  (b) 是 OPE 闭合的要求，而 OPE 收敛在本图未公理化；
+  (c) 明说只是模不变性的一个必要条件，其推导（模变换）在 §10.7 才做。
+  另外上游 worldsheet.rns-fermion-number-operator 的鬼场部分经玻色化，本身是 physical-argument。
+
+  【(a) 的相位公式依赖自旋场的分支切割】即 §10.3 的谱流/自旋场（(10.3.20)–(10.3.29)）
+  与 §10.4 末的 cocycle（(10.4.26)–(10.4.28)）。**本图没有这两块的节点**
+  （玻色化、自旋场、cocycle 均未建），故 (10.6.4) 那个相位在本图无支撑推导，
+  推导的 gaps 里记明。
+author: curator
+created: "2026-09-11"
