@@ -3,7 +3,7 @@
 | 优先级 | ref | 范围 | 目标 area | 负责 | 状态 |
 |---|---|---|---|---|---|
 | P0 | polchinski-1998-v1 | §1–§6, §8（玻色弦、共形规范、光锥量子化、无鬼定理、模空间与一般亏格 FP、树级振幅；环面紧化与 T 对偶） | worldsheet | researcher | extracted（二手源，需持原书者核对 E34/E53/E58；**§5–§6 于 2026-09-11 追加 E69–E112**，其中 (6.4.23) Veneziano 表达式与 (6.6.23) 开闭弦关系最需核对；**§8 于 2026-09-11 追加 E113–E158**，其中 **(8.3.28) T 对偶「是同一个 CFT」的原文措辞最需核对（Q20）**，其次 (8.4.24)/(8.4.25) 的必要性半句（Q21/Q22）与 (8.7.2) DBI（Q25）。**§8.5 轨形未抽，见 E146**。勘误表风险见 Q14+Q24） |
-| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | extracted（二手源）。**⚠ 2026-09-11：Cambridge Core 路线已证可取 Vol.1 正文 PDF（见下方备忘），建议派一轮把 §3 未核实清单（E34 的 `c=D`、E53 的 §3.4 式号、E58 的无鬼定理措辞、(2.1.1) 的 Wick 旋转、(2.7.21) 的表达式）全部升到 L1** |
+| P0 | polchinski-1998-v1 | §1–§4（玻色弦、共形规范、光锥量子化、无鬼定理） | worldsheet | researcher | **★★ 原书核实完成（L1，2026-09-11 第六轮）** → `extractions/polchinski-1998-v1.md` **§12**。Q2/Q3/Q4/Q5/Q6/Q7/Q10/Q11/Q12/Q20/Q21/Q22 全部关闭；30 条图节点 loc 修改建议见 §12.10 B 表；15 条作者自承缺口见 C 表。**剩余最高性价比：Appendix A (A.1.31)、书末 References（Goddard–Thorn 是否被引）、§1.2 的 `T=1/(2πα')` 式号** |
 | P0 | lian-zuckerman-1991 | 全文（Thm 2.13/2.25、Cor 2.26/2.28、Thm 3.5） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `extractions/primary-sources-round2.md` §1 |
 | P0 | virasoro-lean-2025 | §9–§12 + App. A.2（Heisenberg、Sugawara c=1、Verma/Fock） | worldsheet | researcher | **extracted（L1 全文，2026-09-10）** → `primary-sources-round2.md` §5.2 |
 | P0 | fgz-1986 | 全文 | worldsheet | researcher | extracted（L1 全文）→ `brst-cohomology-sources.md` §1 |
@@ -69,6 +69,20 @@
   Vol.2 已取 item hash：contents `07FB90D821053D58A00610479EFE2978`、notation `BACF746050A6F8DC6AE8EF5FA4A6BA28`、
   ch.10 `E69C35DC077FD0BAD6B39479144D4A12`、ch.11 `C4D876C20A83F4E778152B75A219A718`、
   ch.12 `46D902501550C028C94F24884F4B9D7A`、附录 B `872CC69E98F684AFA1019EB2A955BD11`。
+  **Vol.1 全部 item hash（2026-09-11 实得，文件名规则 `9780511816079c<章号>_p<起页>-<止页>_CBO.pdf`，实测 c1–c8 全部命中）：**
+  frontmatter(i–viii) `D8E774D629783EE35C60C78122AF28B5` / contents(ix–xii) `5A6EE61D4E1E712BB9D55D142187A6B6` /
+  foreword(xiii–xiv) `55B6451C35A99B25FE283F4B1AD988A7` / preface(xv–xvii) `BB4B6DFFBB6CA9E785644A9D0693C9CD` /
+  **notation(xviii–xx) `4E431CFB7DE9E03AE982456CC6BA3BE0`（文件名例外：`9780511816079mfm_pxviii-xx_CBO.pdf`）** /
+  ch.1(1–31) `B743D2FD9DFC745DF9A39834989A0BAB` / ch.2(32–76) `5CA151E88B12C248825A262624ADC7D6` /
+  ch.3(77–120) `606E849133B4EE45657DF6128FD1C8C1` / ch.4(121–144) `12E46864E4792BDA6021FD53D3C193E2` /
+  ch.5(145–165) `2619B77DD4AE2BE4D53B5EED5D3BE3C1` / ch.6(166–205) `F440F6B46EB4150F96EAEAFDDF9F0D76` /
+  ch.7(206–230) `1FCFE9B5026DE1E5210F0F62514336B0` / ch.8(231–282) `812E73D34A5F56520ECCAA94F068E1A6` /
+  ch.9(283–328) `8787336CD0569208E89B12D418283685` / **App.A 路径积分(329–346) `D6A09941572ED2451AFC3C5C497F9A9A`** /
+  **References(347–358) `F5E26AFC8AF1D3B0E3F3866E752F8FD2`** / glossary(359–388) `41D8D3C53148B5BFBA313D3C612F7887` /
+  index(389–402) `C125CE5357865125A6B484F68E9EE3AC`。
+  ⚠ **版本锚定**：Core 数字化本是 **Cambridge Books Online（2005 平装，已含 2000 年 "with corrections"）**。
+  → 因此 [S] 说「按 Joe 勘误表更正」的那几处（(5.3.5)、(5.4.10)、(8.6.19) 等），**页图上看到的已经是更正后的文本**，
+  「官方勘误表取不到」这个系统性风险随之大幅降低（KITP 三条 URL 仍 404，但已不再是必需品）。
   ⚠ 注意 `assets.cambridge.org/.../frontmatter/*.pdf` 仍然 **Socket is closed**（与旧记录一致）；**要走 Core 的 `/services/` 端点**。
 - **⚠ Schrans 伴读笔记（[S]）没有第 2 卷版本（2026-09-11 确认）。** hepnotes.com 首页明写该 string 笔记只覆盖
   「the first 8 chapters of volume 1」，`joes-book-2.pdf` 不存在。**别再找。**
