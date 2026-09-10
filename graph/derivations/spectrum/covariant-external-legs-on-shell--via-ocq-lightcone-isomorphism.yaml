@@ -40,9 +40,16 @@ depends_on:
       由此 (1/2) α_0·α_0 = α'k²/4——这是开弦 α'k² 与闭弦 α'k²/4 之间那个因子 4 的**唯一**来源。
       §4.1 讨论闭弦时（(4.1.21a,b,c)）直接使用该归一化而不在原地回指 §1.4/§2.7 的模展开。
     convention_map: conv.alpha-prime-regge 下开弦 α^μ_0 = (2α')^{1/2} k^μ、闭弦 α^μ_0 = (α'/2)^{1/2} k^μ；两者之比为 2，故 (1/2)α_0·α_0 分别是 α'k² 与 α'k²/4。
-  - id: worldsheet.exponential-vertex-operator-weight
+  - id: worldsheet.exponential-vertex-operator-weight-v2
     inferred: true
     note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.exponential-vertex-operator-weight，该卡已
+      superseded_by worldsheet.exponential-vertex-operator-weight-v2。v2 只把 statement 边界 (f) 的
+      「X^μ 不是主场」改成「X^μ 是 h = 0 主场，本卡不覆盖其权」（随 worldsheet.primary-field-v2 订正），
+      并把 (1) 里指向定义卡的指针改为 -v2；(1)(2)(3) 与边界 (a)–(e) 逐字未动，
+      故换代不改变本推导所用的内容与状态。
+      本边原有的 inferred 标记与理由（下文）保留不变。
+
       标 inferred：提供 N = 0 的**独立核对**——:e^{ik·X}: 的权是 α'k²（开弦边界插入）
       与 (α'k²/4, α'k²/4)（闭弦体内插入），与本推导由 L_0 算出的 α'k² + N、α'k²/4 + N 在 N = 0 上逐字一致。
       §4.1 p.125 不做这个计算（它在 §2.4/§3.6/§6.2），故标 inferred。
