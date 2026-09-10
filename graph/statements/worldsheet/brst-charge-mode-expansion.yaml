@@ -1,0 +1,55 @@
+id: worldsheet.brst-charge-mode-expansion
+kind: proposition
+title: "由 BRST 流的围道积分得到的 Q_B 等于模式展开式 Σ c_n L^m_{−n} + Σ ((m−n)/2) : c_m c_n b_{−m−n} : − c_0"
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization（bc 系统权 λ = 2，模 b_n、c_n，
+  {b_m, c_n} = δ_{m+n,0}；物质 Virasoro 模 L^m_n；受限模）与
+  worldsheet.brst-current-bosonic-string（BRST 流 j_B，Q_B = ∮ (dz/2πi) j_B）。
+  记号：中心荷写上标 c^m、c^g，鬼场模写下标 c_n。
+
+  断言：把 j_B 的 Laurent 展开逐项做围道积分，得到
+    Q_B = Σ_{n ∈ Z} c_n L^m_{−n} + Σ_{m, n ∈ Z} ((m − n)/2) : c_m c_n b_{−m−n} : + a^g c_0,
+  且**鬼场正规序常数取 a^g = −1**，即末项为 − c_0。
+  这与 worldsheet.brst-quantization 中直接以模式定义的 Q_B 逐项相同。
+
+  等价的读法（这是 a^g = −1 的物理意义）：把总 Virasoro 零模写成
+    L_0 = L^m_0 + L^g_0 + a^g = L^m_0 + L^g_0 − 1，
+  末项 − c_0 就是把开弦截距 a = 1（Polchinski 记号 A = −1，conv.intercept-sign-a）
+  编码进 Q_B 的那一项：在鬼场基态 |↓⟩ 上 L^g_0|↓⟩ = 0，故 L_0(|ψ⟩⊗|↓⟩) = 0 ⟺ (L^m_0 − 1)|ψ⟩ = 0。
+
+  本命题**不**断言 Q_B² = 0（那需要 c^m = 26，见 worldsheet.critical-dimension-brst
+  与 worldsheet.brst-nilpotent-at-c26），也**不**断言 j_B 表达式中全导数项系数的取值
+  （由 worldsheet.brst-current-bosonic-string (a)，该项对 Q_B 无贡献）。
+uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard, conv.intercept-sign-a]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.7)（Q_B 的模式展开），p.132"
+    note: |
+      式号经 schrans-2020 目录核实（`4.24 p 132: Eq (4.3.7) The Mode Expansion of the BRST
+      Operator`、`4.25 p 132: Eq (4.3.7) The BRST Normal Ordering Constant`）。
+      schrans-2020 §4.46 的 [4.225] 逐字复现了含 − c_0 的模式展开，[4.226] 给出
+      Q_B|ψ,↓⟩ = Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})|ψ,↓⟩。**未核对原书**。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E63。
+  - ref: polchinski-1998-v1
+    loc: "§2.7，eq. (2.7.21)（bc 正规序常数 a^g = λ(1−λ)/2，λ = 2 给 −1）"
+    note: |
+      式号经 schrans-2020 目录核实（`2.58 p 61`）；a^g = −1 的逐字证据见抽取记录
+      polchinski-1998-v1.md §1.1 脚注 [†a^g]（schrans-2020 笔记 p.74–75、p.77）。
+      注意：抽取记录原表曾误记 a^g = 0，已由 reviewer-ch23 裁定并订正为 −1。
+tags: [brst, bosonic-string, ghosts, intercept, quantization]
+notes: |
+  本命题是把 worldsheet.brst-current-bosonic-string（CFT / 围道语言）与
+  worldsheet.brst-quantization（纯代数 / 模式语言）**接起来**的那条边。
+  在此之前，图里的 Q_B 有两个互不相干的定义，谁也没说它们是同一个算符。
+
+  它同时是**开弦截距 a = 1 在 BRST 语言中的落点**：a = 1 不是这里被推出来的，
+  而是被 a^g = −1（worldsheet.bc-ghost-normal-ordering-constant，来自 λ = 2 的 bc 系统）
+  决定的。a = 1 的独立推导见 worldsheet.open-string-intercept。
+  Kato–Ogawa 1983 的摘要把 D = 26 与 α_0 = 1 一并归给 Q_B² = 0；本图按"一个节点一个命题"
+  把两件事分开：D = 26 在 worldsheet.critical-dimension-brst，a = 1 在这里与
+  worldsheet.open-string-intercept。
+
+  本节点只写**开弦 / 全纯侧**。闭弦要把 Q_B 写成全纯与反全纯两部分之和，各带一个 − c_0 型项
+  （对应 a = ã = 1），本图无节点。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,41 @@
+id: worldsheet.spurious-orthogonal-to-physical
+kind: proposition
+title: 伪态与所有物理态正交；零态（physical ∩ spurious）不改变任何内积
+statement: |
+  设定与记号沿用 worldsheet.ocq-spurious-states（Fock 空间 F(k)、Virasoro 模 L_n、
+  (α^μ_n)† = α^μ_{-n} 诱导的 L_n† = L_{-n}、物理态空间 H_phys(k)、伪态空间 S(k)、
+  截距 a 按 conv.intercept-sign-a）。则
+
+  (1) 对任意 |ψ⟩ ∈ H_phys(k) 与任意伪态 |χ⟩ = Σ_{n ≥ 1} L_{-n}|χ_n⟩ ∈ S(k)（有限和）：
+        ⟨ψ|χ⟩ = Σ_{n ≥ 1} ⟨ψ| L_{-n} |χ_n⟩ = Σ_{n ≥ 1} ⟨ L_n ψ | χ_n ⟩ = 0。
+
+  (2) 推论：零态 N(k) = H_phys(k) ∩ S(k) 含于 H_phys(k) 的根基 H_0(k)，
+      即每个零态与所有物理态（含它自身）正交，从而范数为零；
+      并且对任意 |ψ⟩, |ψ'⟩ ∈ H_phys(k) 与任意 |χ⟩, |χ'⟩ ∈ N(k)：
+        ⟨ψ + χ | ψ' + χ'⟩ = ⟨ψ | ψ'⟩。
+      故 Fock 内积在商空间 H_phys(k)/N(k) 上诱导良定义的厄米形式。
+
+  本命题**不**断言反包含 H_0(k) ⊆ N(k)（"每个零范数物理态都是伪态"）；那是一条独立命题，
+  本图尚未建节点（见 worldsheet.ocq-spurious-states 的 notes）。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)（⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0）与 eq. (4.1.9)（加零态不改变内积），p.122"
+    note: |
+      式号经 schrans-2020 目录核实（`4.1/4.2 p 122: Eq (4.1.8)/(4.1.9) Spurious States, I/II`），
+      **未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E55。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2（spurious 与 zero-norm 态；伪态与物理态正交）"
+    note: 已从 mostly-minus / α' = 1/2 转写。
+tags: [bosonic-string, quantization, old-covariant, spurious, null-state]
+notes: |
+  这是把"物理谱应取 H_phys 模掉零态"这句话变成可检验命题的那一步，也是
+  worldsheet.no-ghost-theorem-v2/v3/v4 与 worldsheet.brst-cohomology-equals-ocq-physical
+  里"商掉零模态"操作的合法性依据。
+
+  注意商掉的对象在文献里有两个不同的候选（N 与 H_0），本命题只给 N ⊆ H_0。
+  Goddard–Thorn 型无鬼定理商掉的是 H_0（根基），Polchinski §4.1 的行文商掉的是 N；
+  在 D = 26、a = 1 时两者一致（这正是 no-ghost 定理的一部分内容），
+  在一般 (D, a) 下是否一致，本图无节点承载。**这是一条建议提交里程碑流程规范化的措辞冲突。**
+author: curator
+created: "2026-09-11"

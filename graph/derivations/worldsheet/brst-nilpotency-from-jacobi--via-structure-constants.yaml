@@ -1,0 +1,49 @@
+id: worldsheet.brst-nilpotency-from-jacobi--via-structure-constants
+target: worldsheet.brst-nilpotency-from-jacobi
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-gauge-fixed-action
+  - id: worldsheet.brst-charge-general-constraint-algebra
+    note: "提供哈密顿版的 Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k 与 {b_i, c^j} = δ_i^j，本推导用它给出 (2)(3) 的正则版验算。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.13)，p.128；§4.3，eq. (4.3.15)、(4.3.16)，p.133"
+    note: 式号经 schrans-2020 目录核实；表达式未核对原书。抽取记录 polchinski-1998-v1.md#E60、#E65。
+  - ref: fgz-1986
+    loc: "Proposition 1.2（d² = 0）"
+    note: 数学侧的对应陈述（一般分次李代数的半无限上同调微分）；编号已核实。
+summary: |
+  **(1) b_A、B_A 上**：δ_B B_A = 0 与 δ_B b_A = ε B_A 直接给 δ_B(ε_1)δ_B(ε_2) b_A
+  = ε_2 δ_B(ε_1)B_A = 0，无条件成立。
+
+  **(2) c^α 上**：δ_B c^α = (i/2) ε f^α_{βγ} c^β c^γ。作用两次：
+    δ_B(ε_1) [ (i/2) ε_2 f^α_{βγ} c^β c^γ ]
+      = (i/2) ε_2 f^α_{βγ} [ (δ_B(ε_1) c^β) c^γ + c^β (δ_B(ε_1) c^γ) ]
+      = (i/2)(i/2) ε_2 ε_1 · 2 f^α_{βγ} f^β_{δη} c^δ c^η c^γ   （用 f 的反对称性合并两项）
+      ∝ f^α_{βγ} f^β_{δη} c^δ c^η c^γ。
+  由于 c^δ c^η c^γ 关于三个指标全反对称（鬼场两两反对易），上式为零 ⟺
+  f^α_{β[γ} f^β_{δη]} = 0，即 Jacobi 恒等式。反之若 Jacobi 不成立，
+  存在使该三次型非零的鬼场配置，故是**当且仅当**。
+
+  **(3) φ^i 上**：δ_B(ε_1)δ_B(ε_2) φ^i 有两类贡献——δ_B 作用在 c^α 上（给 f 的一次项）
+  与作用在 δ_αφ^i 上（给规范代数对易子 [δ_β, δ_γ]φ^i）。代入闭合关系
+  [δ_β, δ_γ] = i f^α_{βγ} δ_α，两类贡献恰好相消。这一步正是"结构常数与场无关"的用武之处：
+  若 f 依赖 φ，还会多出 (δ f) 项，需要 Batalin–Vilkovisky 形式与高阶鬼场。
+
+  **正则版（等价写法）**：用 worldsheet.brst-charge-general-constraint-algebra 的
+  Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k 与 {b_i, c^j} = δ_i^j，直接算
+    {Q_B, Q_B} = c^i c^j ( [G_i, G_j] − f_{ij}^k G_k ) + （三次鬼场项）× f f 的 Jacobi 组合，
+  第一个括号由约束代数为零，第二项为零 ⟺ Jacobi。故 Q_B² = (1/2){Q_B, Q_B} = 0。
+gaps:
+  - "本推导是形式代数操作：场论中 φ^i、c^α 是场（无穷多自由度），指标缩并与重排的合法性未处理；正则版中 Q_B 的模式和在一般约束系统上是否良定义（受限模型条件）未声明。弦的情形已把该条件写进 worldsheet.brst-quantization。"
+  - "本推导不覆盖带中心扩张的约束代数（Virasoro）。那里 [G_i, G_j] = f_{ij}^k G_k + 中心项，上面 {Q_B, Q_B} 的第一个括号不再为零，剩余项正比于总中心荷。弦的情形见 worldsheet.critical-dimension-brst / worldsheet.brst-nilpotent-at-c26。"
+  - "开规范代数（结构常数依赖场）不覆盖；那时 δ_B 只在运动方程上幂零。"
+  - "所有符号与因子取自 worldsheet.brst-gauge-fixed-action 与 worldsheet.brst-charge-general-constraint-algebra 自行固定的归一化，未与 Polchinski §4.2/§4.3 原书核对（抽取记录 E60、E65 的表达式栏均标注未核实）。"
+notes: |
+  status 说明：(2) 单独看是有限步 Grassmann 代数计算（可争取 rigorous），
+  但 (3) 与正则版都依赖场论/无穷模式层面的形式操作，且本图的两条来源里
+  Polchinski 是教科书形式计算、FGZ Proposition 1.2 的前提（H²(g) = 0、γ = 0）
+  与本命题的前提不是同一套。按「不确定时选低的那级」整条取 physical-argument。
+author: curator
+created: "2026-09-11"

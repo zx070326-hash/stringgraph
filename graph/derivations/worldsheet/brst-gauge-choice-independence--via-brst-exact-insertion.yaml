@@ -1,0 +1,35 @@
+id: worldsheet.brst-gauge-choice-independence--via-brst-exact-insertion
+target: worldsheet.brst-gauge-choice-independence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-gauge-fixed-action
+  - id: worldsheet.brst-invariance-of-gauge-fixed-action
+    note: "(1) 是该命题第 (1) 条 δ_B(b_A F^A) = iε(S_2 + S_3) 对 F → F + δF 的线性化。"
+  - id: worldsheet.brst-nilpotency-from-jacobi
+    note: "(2) 的论证要求 δ_B² = 0：BRST 恰当插入的期望值为零这一步用到被积量的 BRST 变分再变分为零。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.8)，p.127"
+    note: 式号经 schrans-2020 目录核实；表达式未核对原书。抽取记录 polchinski-1998-v1.md#E59。
+summary: |
+  **(1)**：S_1 与 F 无关；S_2 + S_3 由 worldsheet.brst-invariance-of-gauge-fixed-action (1)
+  等于 (−i/ε) δ_B(b_A F^A)。对 F → F + δF 取差得
+    S_q[F'] − S_q[F] = (−i/ε) δ_B( b_A δF^A )，
+  这是 (1)。
+
+  **(2)**：把 e^{iS_q[F']} = e^{iS_q[F]} · e^{i(S_q[F'] − S_q[F])} 展开到 δF 的一阶，
+  差值是一个 BRST 恰当算符的插入
+    δ⟨O_1⋯O_n⟩ ∝ ⟨ δ_B( b_A δF^A ) · O_1⋯O_n ⟩_F。
+  若测度 BRST 不变，则任何 BRST 变分的期望值为零（"δ_B 是路径积分下的全导数"，
+  即 Ward 恒等式的费米版）；再由 O_k 全部 BRST 闭，δ_B 可以整体提到括号外，
+  得 δ⟨O_1⋯O_n⟩ = 0。
+  算符侧同一论证：⟨Ψ| Q_B|Λ⟩ = ⟨Q_B Ψ|Λ⟩ = 0（用 Q_B 自伴与 |Ψ⟩ 闭），
+  故振幅只依赖上同调类。
+gaps:
+  - "测度的 BRST 不变（无 BRST 反常）是假设，不在本图论证。对玻色弦，这一条与 Weyl 反常抵消/D = 26 是同一件事的不同侧面（worldsheet.critical-dimension-weyl-anomaly、worldsheet.critical-dimension-brst），但本推导不建立那个联系。"
+  - "\"BRST 变分的期望值为零\" 用的是路径积分下的形式分部积分（费米版 Ward 恒等式），未严格化。这是本推导标 physical-argument 的主要理由。"
+  - "算符侧的论证需要 Q_B 关于内积自伴，这依赖鬼场的厄米共轭约定（worldsheet.bc-ghost-hermitian-conjugation），本推导未把它连成边——因为那是弦专用的 bc 系统节点，而本命题是一般规范系统的。"
+  - "只做了 δF 的一阶；有限的规范改变需要把论证迭代/指数化，Polchinski 未处理，本推导亦未。"
+author: curator
+created: "2026-09-11"

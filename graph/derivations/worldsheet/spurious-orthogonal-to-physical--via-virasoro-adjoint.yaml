@@ -1,0 +1,50 @@
+id: worldsheet.spurious-orthogonal-to-physical--via-virasoro-adjoint
+target: worldsheet.spurious-orthogonal-to-physical
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.ocq-spurious-states
+  - id: worldsheet.old-covariant-physical-states
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      提供 F 上的双线性/厄米型及其由 (α^μ_n)† = α^μ_{-n} 唯一确定的性质，
+      本推导用它把 L_{-n} 的伴随算子定为 L_n。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)（⟨ψ|χ⟩ = Σ_k ⟨L_k ψ|χ_k⟩ = 0）、eq. (4.1.9)，p.122"
+    note: 式号经 schrans-2020 目录核实，未核对原书。抽取记录 polchinski-1998-v1.md#E55。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1–2.2.2"
+    note: 已从 mostly-minus / α' = 1/2 转写。
+summary: |
+  两步有限计算，前提在陈述中已完整写出。
+
+  第一步（伴随关系）：Fock 内积由 ⟨0;k|0;k'⟩ 的归一化与 (α^μ_n)† = α^μ_{-n} 确定
+  （worldsheet.fock-indefinite-form）。由 L_n = (1/2) Σ_m : α_{n-m} · α_m :（含零模 α_0 ∝ k，
+  k 实）逐项取伴随，正规序内的因子两两互换只改变有限多项的排列而不改变值（玻色情形对易子
+  仅在 m + (n−m) = 0 时非零，那些项已被正规序固定），得
+    (L_n)† = L_{-n}   （所有 n ∈ Z）。
+  这一步只用到有限多项：作用在 L_0 分级的某一固定级上时，L_n 的模式和只有有限多项非零。
+
+  第二步（正交性）：取 |ψ⟩ ∈ H_phys(k)，|χ⟩ = Σ_{n≥1} L_{-n}|χ_n⟩（按定义只有有限多项非零）。
+    ⟨ψ|χ⟩ = Σ_{n≥1} ⟨ψ| L_{-n} |χ_n⟩ = Σ_{n≥1} ⟨ (L_{-n})† ψ | χ_n ⟩ = Σ_{n≥1} ⟨ L_n ψ | χ_n ⟩ = 0，
+  最后一步用物理态条件 L_n|ψ⟩ = 0 (n > 0)。注意这里**不**用到 (L_0 − a)|ψ⟩ = 0，
+  质量壳条件只保证 |χ⟩ 与 |ψ⟩ 落在同一个 L_0 本征值上（否则 ⟨ψ|χ⟩ 因 L_0 自伴而自动为零，
+  结论仍成立）。
+
+  推论 (2)：|χ⟩ ∈ N(k) 时 |χ⟩ 既在 H_phys(k) 又在 S(k)，由 (1) 对每个物理态正交，
+  特别地 ⟨χ|χ⟩ = 0，故 N(k) ⊆ H_0(k)；双线性展开
+    ⟨ψ + χ|ψ' + χ'⟩ = ⟨ψ|ψ'⟩ + ⟨ψ|χ'⟩ + ⟨χ|ψ'⟩ + ⟨χ|χ'⟩
+  的后三项都是"物理态与伪态"的配对，由 (1) 全为零。
+gaps:
+  - "第一步的 (L_n)† = L_{-n} 在本图中没有独立节点承载，只在本推导内论证；worldsheet.virasoro-generators-free-boson 给出 L_m 的表达式但未陈述伴随关系。若 lead 认为值得，可拆出一条独立命题。"
+  - "本推导不给出反包含 H_0 ⊆ N（每个零范数物理态都是伪态）。该方向需要 Kac 行列式 / 奇异向量理论，本图无节点。"
+notes: |
+  【status 说明，供 reviewer 裁定】本推导标 rigorous 的依据是本轮任务指令中 lead 的裁决
+  「纯代数的模式计算（前提写清）可 rigorous」：陈述的前提（有限和、伴随关系、分级有限维）
+  已完整写在 worldsheet.ocq-spurious-states 与本陈述里，论证是两行线性代数。
+  但 docs/STATUS_LEVELS.md 的「初等可复核」例外**还要求 reviewer 独立复核并在此写
+  `reviewer-verified: <agent>, <date>`，本推导尚无该记录**。若 reviewer 不确认，
+  应按该文件的字面规则降为 physical-argument。已在 curator 的交付报告中列为待裁定项。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,61 @@
+id: worldsheet.brst-charge-on-ghost-ground-state--via-mode-algebra
+target: worldsheet.brst-charge-on-ghost-ground-state
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+    note: "提供 Q_B 的模式展开、|↓⟩ 的湮灭条件、a^g = −1、受限模。"
+  - id: worldsheet.old-covariant-physical-states
+    note: "提供 (2) 右端的 H_phys 定义（截距 a = 1 的情形）。"
+  - id: worldsheet.bc-ghost-normal-ordering-constant
+    note: "提供 a^g = λ(1−λ)/2 = −1，即 (3) 中 a = −a^g 的数值。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.7) 在 |ψ⟩ ⊗ |↓⟩ 上的作用，p.132"
+    note: |
+      schrans-2020 §4.46 的 [4.226] 逐字给出该式；对应原书式号未核实，原书未核对。
+      抽取记录 polchinski-1998-v1.md#E63。
+summary: |
+  逐项作用（受限模上，模式和逐项有限）。用 |↓⟩ 的湮灭条件 b_n|↓⟩ = c_n|↓⟩ = 0 (n > 0)、
+  b_0|↓⟩ = 0。
+
+  **物质项** Σ_{n∈Z} c_n L^m_{−n}：作用在 |ψ⟩ ⊗ |↓⟩ 上，鬼场因子是 c_n|↓⟩，
+  当 n > 0 时为零，故只剩 n ≤ 0，写成 n → −n 即 Σ_{n ≥ 0} c_{−n} L^m_n。
+
+  **三次鬼场项** Σ_{m,n} ((m−n)/2) : c_m c_n b_{−m−n} :：
+  按正规序，b 排在右侧的项遇到 b_j|↓⟩ = 0（j ≥ 0）为零；
+  b 排在左侧（即 j < 0，正规序把它移到左边）的项则要求配套的两个 c 的指标使
+  b_{−m−n} 与至少一个 c_m、c_n 之一在 |↓⟩ 上不被杀掉。逐项检查后所有项都为零：
+  湮灭条件 c_n|↓⟩ = 0 (n>0) 与 b_j|↓⟩ = 0 (j ≥ 0) 联立后，(m−n)/2 的反对称性
+  使幸存组合两两相消。故三次项在 |↓⟩ 上无贡献。
+
+  **常数项** a^g c_0 = − c_0：给 − c_0 |ψ⟩ ⊗ |↓⟩，即 n = 0 处的 − δ_{n,0}。
+
+  合起来
+    Q_B ( |ψ⟩ ⊗ |↓⟩ ) = Σ_{n ≥ 0} c_{−n} ( L^m_n − δ_{n,0} ) |ψ⟩ ⊗ |↓⟩，
+  这是 (1)。
+
+  **(2)**：诸 c_{−n}|↓⟩（n ≥ 0）在鬼场 Fock 空间中线性无关
+  （c_0|↓⟩ = |↑⟩ 与 c_{−n}|↓⟩（n ≥ 1）分别落在不同的鬼场 level），
+  故整个和为零 ⟺ 每个系数态 (L^m_n − δ_{n,0})|ψ⟩ 为零，
+  即 L^m_n|ψ⟩ = 0 (n > 0) 且 (L^m_0 − 1)|ψ⟩ = 0，正是 a = 1 的 OCQ 物理态条件。
+
+  **(3)**：把 a^g 保持一般值，常数项给 a^g c_0，n = 0 处的条件变成 (L^m_0 + a^g)|ψ⟩ = 0，
+  与 conv.intercept-sign-a 的 (L^m_0 − a)|ψ⟩ = 0 比较得 a = − a^g；
+  λ = 2 的 bc 系统给 a^g = −1，故 a = 1。
+gaps:
+  - "三次鬼场项在 |↓⟩ 上为零这一步在本 summary 中是概括性的论证（「逐项检查后所有项都为零」），未把正规序的每种指标情形穷举写出。这是本推导最实在的缺口；结果与 schrans-2020 [4.226] 一致，但那是第三方笔记，不是原书。"
+  - "受限模条件是本项目补上的假设，Polchinski §4.3 未声明。"
+  - "本推导只给 ker 一侧（Q_B 闭 ⟺ OCQ 物理态），完全不涉及 im（恰当性）与上同调；后者见 worldsheet.brst-cohomology-equals-ocq-physical。"
+  - "本命题的原书式号未核实：唯一逐字来源是第三方笔记 schrans-2020 的自编号 [4.226]。"
+notes: |
+  【status 说明，供 reviewer 裁定】按本轮任务指令中 lead 的裁决（纯代数、受限模写清可 rigorous）
+  标 rigorous。docs/STATUS_LEVELS.md 的「初等可复核」例外还要求
+  `reviewer-verified: <agent>, <date>`，**本推导尚无该记录**，且第一条 gap 承认
+  三次鬼场项一步未穷举。若 reviewer 不确认应降为 physical-argument。
+  已在 curator 的交付报告中列为待裁定项。
+
+  这条推导是本轮所有节点中**最适合先形式化**的一条：对象是 Fock 模上的有限步反对易子计算，
+  唯一需要补的是三次鬼场项的穷举，而形式化恰好能把那一步做干净。
+author: curator
+created: "2026-09-11"

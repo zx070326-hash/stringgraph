@@ -1,0 +1,71 @@
+id: worldsheet.bc-ghost-hermitian-conjugation
+kind: definition
+status: rigorous
+title: bc 鬼场的厄米共轭 b_n† = b_{−n}、c_n† = c_{−n} 与鬼场零模内积归一化
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization：权 (λ, 1−λ) = (2, −1) 的 bc 系统，
+  模 b_n、c_n，{b_m, c_n} = δ_{m+n,0}，其余反对易子为零；二重简并的鬼场基态
+    |↓⟩,  |↑⟩ = c_0|↓⟩,   b_n|↓⟩ = c_n|↓⟩ = 0 (n > 0),  b_0|↓⟩ = 0。
+
+  **厄米共轭**在鬼场 Fock 空间上定义为反线性反自同构，满足
+    b_n† = b_{−n},   c_n† = c_{−n}     （所有 n ∈ Z）。
+  （注意这一取法与 λ = 2 无关，是把 b(z)、c(z) 取成"厄米"场的模式版本。）
+
+  **零模部门与内积归一化**：b_0、c_0 生成二维 Clifford 代数 {b_0, c_0} = 1，
+  在 span{|↓⟩, |↑⟩} 上的表示给出
+    ⟨↓|↓⟩ = 0,   ⟨↑|↑⟩ = 0,   ⟨↓|c_0|↓⟩ = ⟨↓|↑⟩ = 1（**本节点固定的归一化**），
+  从而 ⟨↑|b_0|↑⟩ = ⟨↑|↓⟩ = 1（取实内积；若取厄米内积则为 ⟨↓|↑⟩ 的复共轭）。
+  换言之，**鬼场基态自身的内积为零，必须插入一个鬼场零模才非零**：
+  形如 ⟨A|B⟩ 的鬼场矩阵元非零要求 A 与 B 的鬼数之差恰好补齐一个 c_0（或 b_0）。
+
+  **相对复形上的内积**：在相对子空间
+    C_rel = { |Ψ⟩ : b_0|Ψ⟩ = 0, L^tot_0|Ψ⟩ = 0 }
+  上，上面的内积恒为零（因为 C_rel 中的态都没有 c_0 激发），故必须改用
+    ⟨Ψ, Ψ'⟩_rel := ⟨Ψ| c_0 |Ψ'⟩,
+  它在 C_rel 上是非退化的（不定的）厄米形式。这就是 worldsheet.no-ghost-theorem-brst 与
+  worldsheet.brst-cohomology-equals-ocq-physical 陈述里用的那个 ⟨·,·⟩_rel。
+
+  ⚠ **这是一次非平凡的选择，不是自动的**：Fock 空间上的"自然"内积在 C_rel 上退化，
+  插入 c_0 是为恢复非退化性而做的约定。无鬼定理断言的正定性是**这个**形式的正定性。
+uses:
+  - worldsheet.brst-quantization
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.17)（b_n† = b_{−n}、c_n† = c_{−n}）、eq. (4.3.18)（基态内积需要鬼场插入才非零），p.134"
+    note: |
+      式号经 schrans-2020 目录核实（`4.30–4.33 p 134`），其中 `4.32 Q_B takes Ĥ into itself`
+      与 `4.33 The Need for a New Inner Product on Ĥ` 是**无编号的正文断言**。
+      **表达式与归一化未核对原书。** 抽取记录 literature/extractions/polchinski-1998-v1.md#E66。
+  - ref: polchinski-1998-v1
+    loc: "§4.4，eq. (4.4.23)（无鬼定理证明末尾的内积）"
+    note: |
+      式号取自抽取记录 E68。worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的 gaps
+      记着"⟨↓|c_0|↓⟩ = 1 未与 Polchinski (4.4.23) 逐字核对"——**本节点没有消除该缺口**，
+      只是把归一化的选择显式化并集中到一个可引用的节点上。
+  - ref: fgz-1986
+    loc: "§2（Λ^∞_* 上的形式与 Theorem 2.8 中的 unitary isomorphism）"
+    note: |
+      数学侧：FGZ 在半无限形式空间上用的是使 Theorem 2.8 的同构成为 unitary 的那个形式。
+      **FGZ 是否与本节点的 ⟨↓|c_0|↓⟩ = 1 归一化一致，本图未核实**；两者相差的整体常数
+      不影响正定性断言（正定性对正数倍不变），但会影响任何绝对归一化的比较。
+tags: [brst, ghosts, bosonic-string, inner-product, quantization]
+notes: |
+  为什么单建节点：worldsheet.no-ghost-theorem-brst、
+  worldsheet.brst-cohomology-equals-ocq-physical、
+  worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 三处都在 statement/summary 里
+  写"归一化 ⟨↓|c_0|↓⟩ = 1"，却没有节点承载它，也没有地方记录"这是一次选择"。
+  抽取记录 E66 的备注原话：「**内积的定义是无鬼定理的核心，Polchinski 在这里做了一次非平凡的
+  选择，转节点时应显式列为依赖。**」本节点即为此建。
+
+  **鬼数与厄米性的相互作用**：由 b_n† = b_{−n}、c_n† = c_{−n}，鬼数算符 gh 满足
+  gh† = −gh + const（依赖真空归一化），所以非零矩阵元把鬼数**配对**而不是保持鬼数。
+  这就是"⟨↓|↓⟩ = 0，必须插 c_0"的结构性原因，也是 Polchinski 取对称归一化
+  gh(|↓⟩) = −1/2 的动机（那使 gh 反自伴）。
+  本图在 worldsheet.brst-quantization 中取的是 gh(|0⟩) = 0、gh(|↓⟩) = 1，
+  与 Polchinski 相差常数平移 3/2；本节点沿用本图的取法。
+
+  status: rigorous 的理由：本节点是二维 Clifford 模上的内积约定 + 模式的伴随关系，
+  纯代数、无收敛问题；uses 只连 worldsheet.brst-quantization（本身 rigorous 的代数节点）。
+author: curator
+created: "2026-09-11"

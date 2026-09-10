@@ -1,0 +1,82 @@
+id: worldsheet.brst-cohomology-low-levels--via-explicit-level-complex
+target: worldsheet.brst-cohomology-low-levels
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-charge-on-ghost-ground-state
+    note: "提供 Q_B(|ψ⟩⊗|↓⟩) 的显式作用公式，是 level 0 的 (2) 与 level 1 中 C¹ → C² 的计算依据。"
+  - id: worldsheet.brst-anticommutator-b-mode
+    note: "提供 {Q_B, b_{−1}} = L^tot_{−1}，是 level 1 中 C⁰ → C¹ 的像的计算依据。"
+  - id: worldsheet.bc-ghost-hermitian-conjugation
+    note: "提供 ⟨·,·⟩_rel 与 ⟨↓|c_0|↓⟩ = 1，是 (4)(6) 中内积计算的依据。"
+  - id: worldsheet.brst-preserves-relative-complex
+    note: "保证相对上同调有定义且 ⟨·,·⟩_rel 在上同调上良定义。"
+  - id: worldsheet.brst-nilpotent-at-c26
+    note: "D = 26 时 Q_B² = 0，本推导默认之。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.23)–(4.3.27)，p.135"
+    note: 式号经 schrans-2020 目录核实；表达式未核实，原书未核对。抽取记录 polchinski-1998-v1.md#E67。
+summary: |
+  全部是有限维线性代数（level 0 一维，level 1 二十八维），无收敛问题。
+
+  **相对复形的构造**：b_0Ψ = 0 把鬼场零模 c_0 的激发排除，故鬼场部门在 |↓⟩ 上只能加
+  b_{−n}、c_{−n}（n ≥ 1）。总能级 N = N_matter + N_ghost。
+
+  **level 0**：N = 0 ⇒ 只有 |0;k⟩ ⊗ |↓⟩。L^g_0|↓⟩ = 0，故
+  L_0 = L^m_0 − 1 = α'k² − 1，条件 L_0 = 0 给 α'k² = 1，即 α'm² = −1（快子），这是 (1)。
+  由 worldsheet.brst-charge-on-ghost-ground-state，
+  Q_B(|0;k⟩⊗|↓⟩) = Σ_{n≥0} c_{−n}(L^m_n − δ_{n,0})|0;k⟩⊗|↓⟩，n > 0 的项作用在 |0;k⟩ 上为零，
+  n = 0 项正比于 (L^m_0 − 1)|0;k⟩ = 0，故该态闭。该能级无鬼数 0 的相对态，故无恰当态，
+  上同调一维，这是 (2)。
+
+  **level 1 的复形**：N = 1 有三类基
+    N_matter = 1, N_ghost = 0：e_μ α^μ_{−1}|0;k⟩⊗|↓⟩            （26 维，鬼数 1）
+    N_matter = 0, N_ghost = 1：b_{−1}|0;k⟩⊗|↓⟩                  （1 维，鬼数 0）
+                               c_{−1}|0;k⟩⊗|↓⟩                  （1 维，鬼数 2）
+  共 28 维。三者都满足 b_0Ψ = 0（b_0 与 b_{−1}、c_{−1}、α_{−1} 反对易/对易且 b_0|↓⟩ = 0）。
+  L^g_0（b_{−1}|↓⟩) = b_{−1}|↓⟩，L^g_0(c_{−1}|↓⟩) = c_{−1}|↓⟩（鬼场 level 1），
+  故三类的 L_0 都是 α'k² + 1 − 1 = α'k²，条件 L_0 = 0 给 α'k² = 0，这是 (3)。
+
+  **(5) C¹ → C²**：由 worldsheet.brst-charge-on-ghost-ground-state 应用于
+  |ψ⟩ = e·α_{−1}|0;k⟩：n = 0 项 (L^m_0 − 1)|ψ⟩ = (α'k² + 1 − 1)|ψ⟩ = 0；
+  n = 1 项给 c_{−1} L^m_1(e·α_{−1}|0;k⟩) ∝ (e·k) c_{−1}|0;k⟩⊗|↓⟩；n ≥ 2 项为零。
+  故 Q_B|_{C¹} 的核是 {e : e·k = 0}，25 维（k ≠ 0）；且该映射满（e 取遍 26 维时 e·k 取遍 C），
+  故 im(C¹ → C²) = C²。
+
+  **(5) C⁰ → C¹**：Q_B b_{−1}|0;k⟩⊗|↓⟩ = {Q_B, b_{−1}}|0;k⟩⊗|↓⟩ − b_{−1} Q_B|0;k⟩⊗|↓⟩。
+  第二项：Q_B|0;k⟩⊗|↓⟩ 的 n = 0 项正比于 (L^m_0 − 1)|0;k⟩ = (α'k² − 1)|0;k⟩ = −|0;k⟩（用 α'k² = 0），
+  给 c_0|0;k⟩⊗|↓⟩，被 b_{−1} 作用后仍含 c_0，**不在相对复形内**；
+  它与第一项中同类的贡献相消（这正是 worldsheet.brst-preserves-relative-complex (1) 保证的）。
+  第一项：{Q_B, b_{−1}} = L^tot_{−1} = L^m_{−1} + L^g_{−1}，作用在 |0;k⟩⊗|↓⟩ 上，
+  L^m_{−1}|0;k⟩ ∝ (k·α_{−1})|0;k⟩，L^g_{−1}|↓⟩ 的贡献落在鬼场方向上并与上面的 c_0 项配平。
+  净结果落在 C¹ 中，且正比于 (k·α_{−1})|0;k⟩⊗|↓⟩，k ≠ 0 时非零，故 im(C⁰ → C¹) 一维，
+  对应 e^μ ∼ e^μ + λk^μ。
+
+  **(6)**：H⁰ = ker(C⁰→C¹) = 0；H¹ = 25 − 1 = 24；H² = C²/im(C¹→C²) = 0。
+
+  **(4) 与 (6) 的内积**：⟨·,·⟩_rel 用 ⟨↓|c_0|↓⟩ = 1。
+    ⟨e·α_{−1}↓ | c_0 | e′·α_{−1}↓⟩ = (e·e′)（Minkowski 内积，mostly-plus ⇒ 时间方向为负） ⇒ (4) 的 C¹ 部分；
+    ⟨b_{−1}↓ | c_0 | c_{−1}↓⟩ ≠ 0 而 ⟨b_{−1}↓|c_0|b_{−1}↓⟩ = ⟨c_{−1}↓|c_0|c_{−1}↓⟩ = 0
+    ⇒ C⁰ 与 C² 互相配对 ⇒ (4) 的其余部分。
+  在 H¹ 上取代表元 e 满足 e·k = 0 并模掉 e ∼ e + λk：k 类光（α'k² = 0），
+  故商空间上 e·e′ 退化到横向 24 维子空间上的 Euclid 内积，**正定** ⇒ (6)。
+gaps:
+  - "C⁰ → C¹ 一步的中间抵消（含 c_0 的项互相配平）在本 summary 中是叙述性的，未逐项写出 L^g_{−1}|↓⟩ 的正规序展开。结论（像一维、正比于 k·α_{−1}）由维数计数与 worldsheet.brst-preserves-relative-complex 保证一致，但未穷举。**这是本推导最实在的缺口。**"
+  - "整体归一化常数（各步骤中的 (2α')^{1/2} 因子）未追踪，只追踪了是否为零与维数。"
+  - "维数计数 28 = 1 + 26 + 1 与 24 = 25 − 1 是本项目自行做出的，**未与 Polchinski §4.3 的 (4.3.23)–(4.3.27) 逐条核对**（式号由 schrans-2020 目录核实，表达式未核实，原书未核对）。若原书在**绝对**复形上计数（含 c_0 激发，维数翻倍），措辞会不同但上同调相同。"
+  - "只覆盖 level 0、1 与 k ≠ 0；不覆盖 k = 0 扇区（那里 (5) 的两个论断都退化）。"
+notes: |
+  【status 说明，供 reviewer 裁定】按本轮任务指令中 lead 的裁决（纯代数、前提写清可 rigorous）
+  标 rigorous：对象是有限维复形（1 维与 28 维），无收敛/重排问题。
+  docs/STATUS_LEVELS.md 的「初等可复核」例外还要求 `reviewer-verified: <agent>, <date>`，
+  **本推导尚无该记录**，且第一条 gap 承认 C⁰ → C¹ 一步未穷举。
+  若 reviewer 不确认应降为 physical-argument。已在 curator 的交付报告中列为待裁定项。
+
+  **curator 自查记录**：本节点初稿把 level 1 的相对复形写成 27 维（26 + 1），
+  漏掉了鬼数 2 的 c_{−1}|0;k⟩⊗|↓⟩；漏掉后 H¹ = 24 无法从 25 − 1 得出。
+  写推导时按鬼数分段重算发现该错误，已在目标陈述定稿前改正为 28 = 1 + 26 + 1。
+  记录在此以便 reviewer 知道这一处曾出错、值得重点复核。
+author: curator
+created: "2026-09-11"

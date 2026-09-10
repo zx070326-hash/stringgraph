@@ -1,0 +1,51 @@
+id: worldsheet.brst-anticommutator-b-mode
+kind: proposition
+title: BRST 荷与反鬼模的反对易子给出总 Virasoro 生成元：{Q_B, b_m} = L^tot_m
+statement: |
+  设定与记号沿用 worldsheet.brst-quantization：物质 Virasoro 模 L^m_n（中心荷 c^m）、
+  权 (2, −1) 的 bc 鬼场模 b_n、c_n（{b_m, c_n} = δ_{m+n,0}，其余反对易子为零）、
+  鬼场 Virasoro 模 L^g_n = Σ_{k ∈ Z} (2n − k) : b_k c_{n−k} :、鬼场正规序常数 a^g = −1，
+  BRST 荷
+    Q_B = Σ_{n∈Z} c_n L^m_{−n} + Σ_{m,n∈Z} ((m−n)/2) : c_m c_n b_{−m−n} : + a^g c_0。
+  设 Q_B 与 b_m 作用在**受限模** V 上（对每个 v ∈ V 存在 N = N(v) 使
+  L^m_n v = b_n v = c_n v = 0 对所有 n > N），使一切模式和逐项有限。
+
+  断言：对每个 m ∈ Z，在 V 上
+    { Q_B, b_m } = L^m_m + L^g_m + a^g δ_{m,0} =: L^tot_m,
+  其中 L^tot_m 是总 Virasoro 生成元（中心荷 c^m + c^g = c^m − 26）。
+  特别地 m = 0 给 {Q_B, b_0} = L^tot_0 = L^m_0 + L^g_0 − 1。
+
+  本命题**不**需要 c^m = 26：它对任意物质中心荷成立。
+  它也**不**断言 Q_B² = 0（见 worldsheet.critical-dimension-brst、
+  worldsheet.brst-nilpotent-at-c26）。
+uses_conventions: [conv.virasoro-standard, conv.intercept-sign-a]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，eq. (4.3.6)（{Q_B, b_m} = L^tot_m），p.132"
+    note: |
+      式号经 schrans-2020 目录核实（`4.23 p 132: Eq (4.3.6) The Anticommutator {Q_B, b_m}`），
+      **未核对原书**。抽取记录 literature/extractions/polchinski-1998-v1.md#E63。
+  - ref: fgz-1986
+    loc: "§1–§2.1（半无限上同调微分 d 与鬼场表示 Λ^∞_*；Proposition 2.1(ii) 给 ρ(L_m) 的鬼场表示）"
+    note: |
+      数学侧的对应结构。**FGZ 中没有以 {d, b_m} = L_m 形式出现的编号陈述**
+      （literature/extractions/brst-cohomology-sources.md 中未记录该式），
+      故本条只登记"同一构造在数学文献中的位置"，不作为本命题的编号来源。
+      Proposition 2.1(ii) 的编号已核实。
+tags: [brst, bosonic-string, ghosts, virasoro, quantization]
+notes: |
+  这条恒等式是 BRST 形式的技术核心，图中至少三处在用它却没有节点承载：
+    - worldsheet.brst-quantization 的相对复形定义（"Q_B 保持 b_0|ψ⟩ = 0, L_0|ψ⟩ = 0"）；
+    - worldsheet.no-ghost-theorem-brst 的陈述（"Q_B 保持 C_rel(k)，因为 {Q_B, b_0} = L_0"）；
+    - worldsheet.brst-cohomology-equals-ocq-physical 的相对上同调设定。
+  本节点把它变成可引用的命题；worldsheet.brst-preserves-relative-complex 是它的直接推论。
+
+  它同时给出"为什么 L^tot_m 是 BRST 恰当的"这一标准论断：L^tot_m = {Q_B, b_m}
+  说明总 Virasoro 生成元在 BRST 上同调上作用为零，即上同调类只依赖于共形不变的信息。
+  该论断本图未单独建节点。
+
+  与一般约束系统的关系：worldsheet.brst-charge-general-constraint-algebra 里有一般版
+  {Q_B, b_i} = G_i^tot。本命题**不是**它的直接特例，因为弦的 Q_B 多了正规序常数项 a^g c_0，
+  而 Virasoro 代数带中心扩张；故单独立节点并单独论证。
+author: curator
+created: "2026-09-11"

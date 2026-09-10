@@ -1,0 +1,52 @@
+id: worldsheet.brst-preserves-relative-complex--via-mode-algebra
+target: worldsheet.brst-preserves-relative-complex
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.brst-anticommutator-b-mode
+    note: "提供 {Q_B, b_0} = L^tot_0，是 (1) 的全部代数内容。"
+  - id: worldsheet.bc-ghost-hermitian-conjugation
+    note: "提供 b_n† = b_{−n}、c_n† = c_{−n} 与 ⟨Ψ,Ψ'⟩_rel := ⟨Ψ|c_0|Ψ'⟩，是 (2)(3) 的前提。"
+  - id: worldsheet.brst-nilpotent-at-c26
+    note: "提供 c^m = 26 时 Q_B² = 0，用于 (1) 中 [Q_B, L_0] = 0 与 (3)。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，p.134（无编号正文断言：Q_B 保持 Ĥ；Ĥ 上需要新内积）；eq. (4.3.6)、(4.3.17)、(4.3.18)"
+    note: 式号经 schrans-2020 目录核实；p.134 的两条断言原书无编号。抽取记录 polchinski-1998-v1.md#E66。
+summary: |
+  全部是受限模上的有限步反对易子代数（每个模式和逐项有限，见 worldsheet.brst-quantization）。
+
+  **(1)** 设 b_0|Ψ⟩ = 0、L_0|Ψ⟩ = 0。
+    - b_0 Q_B|Ψ⟩ = ({b_0, Q_B} − Q_B b_0)|Ψ⟩ = L_0|Ψ⟩ − 0 = 0。
+    - [Q_B, L_0] = [Q_B, {Q_B, b_0}]。对奇算符 Q_B 与奇算符 b_0，
+      Jacobi 型恒等式给 [Q_B, {Q_B, b_0}] = {Q_B², b_0}·(常数) = 0（用 Q_B² = 0）。
+      故 L_0 Q_B|Ψ⟩ = Q_B L_0|Ψ⟩ = 0。
+  于是 Q_B|Ψ⟩ ∈ C_rel。
+
+  **(2)** 取 |Ψ⟩, |Ψ'⟩ ∈ C_rel。由 worldsheet.bc-ghost-hermitian-conjugation 的
+  b_n† = b_{−n}、c_n† = c_{−n}，把 Q_B 的每一项取伴随：
+    (c_n L^m_{−n})† = (L^m_{−n})† c_n† = L^m_n c_{−n}，
+  重新求和后与原式同形（把哑指标 n → −n），三次鬼场项同理由 : c c b : 的伴随
+  仍是 : c c b : 型（配合 (m−n)/2 的反对称性），常数项 a^g c_0 的伴随是 a^g c_0（a^g 实）。
+  故 Q_B† = Q_B 作为鬼场 Fock 空间上的形式伴随。
+  再看相对形式：⟨Q_BΨ| c_0 |Ψ'⟩ 与 ⟨Ψ| c_0 Q_B |Ψ'⟩ 相差把 Q_B 移过 c_0 的符号
+  与一项 {Q_B, c_0}；在 C_rel 上（b_0Ψ = 0）该多余项的贡献为零，
+  故存在与上述伴随约定相容的符号取法使 ⟨Q_BΨ, Ψ'⟩_rel = ⟨Ψ, Q_BΨ'⟩_rel。
+
+  **(3)** 由 (2)：⟨Ψ, Q_BΛ⟩_rel = ⟨Q_BΨ, Λ⟩_rel = 0（|Ψ⟩ 闭）。
+  故形式在 ker/im 上良定义：改变代表元 Ψ → Ψ + Q_BΛ 不改变 ⟨Ψ, Ψ'⟩_rel。
+gaps:
+  - "(2) 中「存在与上述伴随约定相容的符号取法」是本节点刻意保留的松措辞：Q_B 与 c_0 都是 Grassmann 奇，把 Q_B 移过 c_0 的整体符号依赖厄米共轭对奇算符的定义（(AB)† = B†A† 还是带额外 (−1)），而 Polchinski 在 p.134 处无公式号可对。curator 未把符号写死。**这是本推导最实在的缺口。**"
+  - "(1) 中 [Q_B, {Q_B, b_0}] = 0 用的是超李代数的 Jacobi 恒等式；在受限模上它是有限步计算，但本 summary 未逐项展开。"
+  - "受限模条件是本项目补上的假设，Polchinski §4.3 未声明。"
+  - "本推导不覆盖 k^+ = 0 / 零动量扇区（那里相对复形的结构不同），也不断言任何正定性。"
+notes: |
+  【status 说明，供 reviewer 裁定】按本轮任务指令中 lead 的裁决（纯代数、受限模假设写清可 rigorous）
+  标 rigorous。docs/STATUS_LEVELS.md 的「初等可复核」例外还要求
+  `reviewer-verified: <agent>, <date>` 记录，**本推导尚无该记录**。
+  又因第一条 gap 承认 (2) 的符号未写死，reviewer 若认为 (2) 不够硬，
+  可考虑把本推导降为 physical-argument，或把陈述拆成"(1) 保持相对复形"（硬）与
+  "(2)(3) 自伴与良定义"（软）两条。curator 已在交付报告中列为待裁定项。
+author: curator
+created: "2026-09-11"

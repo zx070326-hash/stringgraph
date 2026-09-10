@@ -1,0 +1,46 @@
+id: worldsheet.brst-point-particle-cohomology--via-two-state-ghost-module
+target: worldsheet.brst-point-particle-cohomology
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-charge-general-constraint-algebra
+    note: "提供 Q_B = c^i G_i − (1/2) f_{ij}^k c^i c^j b_k；本例中约束只有一个且 f = 0，故 Q_B = cG。"
+  - id: worldsheet.point-particle-einbein-action
+    note: "提供 einbein 形式的点粒子规范系统，其唯一一阶约束是 G = (p² + m²)/2。"
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.2，eq. (4.2.20)、(4.2.22)、(4.2.23)、(4.2.25)、(4.2.26)，p.129–130"
+    note: 式号经 schrans-2020 目录核实；表达式未核对原书。抽取记录 polchinski-1998-v1.md#E61。
+summary: |
+  设 H = H_m ⊗ H_gh，H_gh = span{|↓⟩, |↑⟩}。在基 (|↓⟩, |↑⟩) 下 c 与 b 是 2×2 矩阵
+    c = [[0,0],[1,0]]（把 |↓⟩ 送到 |↑⟩），b = [[0,1],[0,0]]，{b,c} = 1，c² = b² = 0。
+  故 Q_B = cG 满足 Q_B² = c G c G = c² G² = 0（G 与鬼场对易），无需任何条件。
+
+  写一般态 |Ψ⟩ = |ψ_↓⟩ ⊗ |↓⟩ + |ψ_↑⟩ ⊗ |↑⟩。则
+    Q_B|Ψ⟩ = (G|ψ_↓⟩) ⊗ |↑⟩。
+  于是
+    ker Q_B = { |ψ_↓⟩ ⊗ |↓⟩ : G|ψ_↓⟩ = 0 } ⊕ ( H_m ⊗ |↑⟩ ),
+    im Q_B  = ( G H_m ) ⊗ |↑⟩。
+  im Q_B 完全落在 |↑⟩ 扇区，故
+
+  (1) |↓⟩ 扇区：H = ker ∩ (|↓⟩ 扇区) = { |ψ⟩ : G|ψ⟩ = 0 } ⊗ |↓⟩，
+      而 G = (p² + m²)/2，故条件即 (p² + m²)|ψ⟩ = 0，是 Klein–Gordon 方程。
+
+  (2) |↑⟩ 扇区：ker = 全部（H_m ⊗ |↑⟩），im = (G H_m) ⊗ |↑⟩ = ((p²+m²)H_m) ⊗ |↑⟩，
+      故 H = H_m / (p² + m²)H_m。
+
+  两个扇区的鬼数相差 1，与 gh(Q_B) = +1 相容。
+gaps:
+  - "论证在 H_m 上只用到「G 是 H_m 上的线性算符」，因此 (1)(2) 作为线性代数命题对任何 H_m 成立；但 (2) 的商空间的**解释**（是否同构于质量壳上的函数）依赖 H_m 的选择，本推导不给。目标陈述已把这一点排除在断言之外。"
+  - "点粒子的完整 BRST 系统（Polchinski §4.2 的 (4.2.23) BRST 作用量、(4.2.26) 正则对易关系）还含 einbein 及其共轭动量、Nakanishi–Lautrup 场；本推导直接从「约化后只剩一个约束 G 与一对鬼场零模」出发，未论证该约化。这一步在 Polchinski 是通过取规范 e = 1 完成的，本图无节点承载。"
+  - "「einbein 形式的点粒子的唯一一阶约束是 G = (p² + m²)/2」由 worldsheet.point-particle-einbein-action 隐含，但该节点未显式陈述约束的形式；这条边在这个意义上是弱的。"
+notes: |
+  【status 说明，供 reviewer 裁定】本推导的核心是 2×2 矩阵上的线性代数，
+  前提在陈述中完整写出，计算全在 summary 中，无收敛/重排问题（鬼场部门有限维，
+  约束只有一个）。按本轮任务指令中 lead 的裁决（纯代数、前提写清可 rigorous）标 rigorous。
+  docs/STATUS_LEVELS.md 的「初等可复核」例外还要求 `reviewer-verified: <agent>, <date>` 记录，
+  **本推导尚无该记录**；若 reviewer 不确认应降为 physical-argument。
+  第三条 gap（约化未论证）是本推导最实在的弱点：它使"本推导证的是 Polchinski §4.2 那个系统"
+  这一断言只在约化之后成立。
+author: curator
+created: "2026-09-11"
