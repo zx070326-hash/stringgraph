@@ -625,6 +625,88 @@
              该文参考文献 [3] 把 Alvarez-Gaume--Witten 的年份印作 1983（通行为 1984）。}
 }
 
+@article{zumino-wu-zee-1984,
+  author  = {Zumino, Bruno and Wu, Yong-Shi and Zee, Anthony},
+  title   = {Chiral anomalies, higher dimensions, and differential geometry},
+  journal = {Nuclear Physics B},
+  volume  = {239},
+  number  = {2},
+  pages   = {477--507},
+  year    = {1984},
+  doi     = {10.1016/0550-3213(84)90259-1},
+  note    = {由 researcher 于 2026-09-11 登记。**= green-schwarz-1984 的 ref [9]**，也是 alvarez-gaume-witten-1984 的 ref [7] 里那条
+             「B. Zumino, W. Yong-Shi and A. Zee (Univ. Washington preprint, 1983)」。
+             **⚠️ 正文本项目未取到，等级 L2（仅 INSPIRE 逐字摘要 + 出版方元数据）。**
+             抽取记录 extractions/zumino-wu-zee-1984.md **的 E1--E17 讲的不是本文，而是同作者同期的伴随讲义
+             zumino-1983-les-houches**；两者关系有该讲义引言的自陈为据（逐字：「Some of the results are contained in a recent paper
+             written in collaboration with Wu Yong-Shi and Anthony Zee [2]」）。
+             **红线：本项目目前没有本文的任何式号，图里不得出现「ZWZ eq. (X)」这类引用。**
+             需要下降方程的可引位置时，改引 zumino-1983-les-houches 的式号并把该边标 inferred: true。
+             INSPIRE recid **194780**；报告号 **LBL-16443** 与 **DOE-ER-40048-18-P3**。
+             ⚠️ **报告号冲突未裁决**：zumino-1983-les-houches 的参考文献 [2] 逐字印作
+             「Univ. of Washington preprint **40048-17 P3**, (1983)」（**17** 而非 **18**）。两个都记，引用时标不确定。
+             **`external_system_identifiers` 只有 MSNET 749345 与 SPIRES-1144324：无 KEKSCAN、无 CDS**
+             ⇒ KEK 与 CDS/OAI-PMH 两条既有路线在入口上即被排除。
+             **`publication_info` 只有一条期刊条目、无 `pubinfo_freetext`** ⇒ INSPIRE 不认为本文有任何重印出处，
+             archive.org 重印文集路线在输入条件上不满足（对比 green-schwarz-1984 有六个重印出处）。
+             ⚠️ **常见误解订正**：*Current Algebra and Anomalies*（Treiman--Jackiw--Zumino--Witten eds., 1985）**不收本文**；
+             该书里 Zumino 的那一章（pp. 361--393）是 **Les Houches 讲义**（单作者），即 zumino-1983-les-houches。
+             Semantic Scholar 对本 DOI 返回 isOpenAccess: false / status: CLOSED；OSTI 与 INIS 均无文件
+             （INIS 记录 zectt-7td81 为 metadata-only）。未穷尽的入口：UNT Digital Library（被 Altcha 反爬挡住）。
+             摘要要点（L2 逐字片段）：用微分几何方法求 2n 维 abelian 与 non-abelian 手征反常，不必算费曼图
+             「as has been done by Frampton and Kephart」；所作构造「automatically satisfies the Wess-Zumino consistency condition」；
+             「the mathematical analysis is self-contained」。}
+}
+
+@techreport{zumino-1983-les-houches,
+  author      = {Zumino, Bruno},
+  title       = {Chiral anomalies and differential geometry},
+  institution = {Lawrence Berkeley Laboratory},
+  number      = {LBL-16747; UCB-PTH-83/16; DE84 004637},
+  year        = {1983},
+  month       = {10},
+  note        = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，46 印刷页逐页读图）** → extractions/zumino-wu-zee-1984.md（E1--E17）。
+                 「Lectures given at Les Houches, August 1983」，题名页逐字「Notes prepared by K. Sibold (University of Geneva)」。
+                 **★ = green-schwarz-1984 的 ref [10] 的第一项**（GS ref [10] = Zumino Les Houches 1983 + Stora Cargese 1983）。
+                 亦重印于 *Current Algebra and Anomalies*（Treiman--Jackiw--Zumino--Witten eds., 1985）**pp. 361--393**。
+                 **★ 获取途径（新路线，见 reading-list.md 备忘）**：OSTI ID **5461614**，
+                 https://www.osti.gov/servlets/purl/5461614 （529.6 KB / 48 PDF 页；WebFetch 落盘后 Read 带 pages 读图）。
+                 **印刷页码 = PDF 页码 - 1。** 扫描件是打字稿 + **手写公式**。
+                 **可引用的编号结果（均 L1 逐字）**：
+                 **(2.25)** `omega_3 = 2 int_0^1 dt Tr A(t dA + t^2 A^2) = Tr(A dA + (2/3)A^3) = Tr(AF - (1/3)A^3)`；
+                 **(2.26)** `Tr F^2 = d omega_3`；**(2.28)** `Tr F^n = d omega_{2n-1}`；
+                 **(2.29)** `omega_{2n-1} = n Tr int_0^1 dt A F_t^{n-1}`（`F_t = tF + (t^2-t)A^2`，(2.21)/(5.8)）；
+                 **(3.1)** `Tr F^n = d omega^0_{2n-1}`；**(3.31)** 按鬼场 v 的幂次展开；
+                 **★ (3.32) 下降方程组：`delta omega^0_{2n-1} + d omega^1_{2n-2} = 0`, `delta omega^1_{2n-2} + d omega^2_{2n-3} = 0`, ...,
+                 `delta omega^{2n-1}_0 = 0`**；**(3.37)** `omega^1_2 = Tr(v dA)`；**(3.38)** `omega^1_4 = Tr(v d(A dA + (1/2)A^3))`；
+                 **(4.4)** Wess--Zumino 相容条件；**(4.18)**；**(A.16)/(A.18)** 附录的 alpha_{2n-2} 公式与组合恒等式。
+                 **★★ 对 green-schwarz-1984 的三条裁定（详见抽取记录 §4）**：
+                 (1) **GS (5)(6)(15)(16) 逐字采用本文的约定与符号**：GS (5) = 本文 (2.25) 第三式；GS (6)(15) = (2.26)/(3.1)（正号，无 2pi）；
+                 **GS (16) `delta omega^0 = -d omega^1` = 本文 (3.32) 第一行**。⇒ **下降方程的符号约定源头至此闭合。**
+                 (2) **但本文不能裁决 `H` 的 Chern--Simons 符号（GS vs Bilal）**：本文**没有 B 场、没有 H、没有引力侧**
+                 （全文只做内部对称群，无自旋联络 omega、无 R、无 tr R^2、无 omega^0_{3L}）。
+                 GS (4) 与 Bilal (12.14) 由 `(B,H) -> (-B,-H)` 相联（在 Bilal 的 beta-tilde = +1 前提下），**两者都对，是同一约定的两种写法**；
+                 物理不变量是两个 CS 项的**相对**符号。⇒ **conv.h-chern-simons-sign 的来源应指 green-schwarz-1984 (4)+(9c)，不指本文。**
+                 (3) **常数 c 不在本文里**：本文 §5「Normalization of the anomalies」给的是 **2n-2 维通式 (5.13)**，
+                 且原文在该式上方**手写插注「(up to a sign)」**；不含引力侧，故不可能含 GS 那个已把引力一并归一的十维常数。
+                 ⇒ 与 alvarez-gaume-witten-1984 合起来看，**c 在三篇原始文献里都不以一个数的形式存在**，是 GS 自己合成的一步。
+                 **★ 三条作者自陈的 gap（必须随节点搬运）**：
+                 (a) p.16 逐字「Equations such as (2.24) and (2.26) are **really valid only locally**, in some finite neighborhood in x-space」
+                 （全局版需主丛联络）——**green-schwarz-1984 全文没有这句话**；
+                 (b) `k^2 = 0` 逐字「We leave the proof as an exercise to the reader」，**本文未证**；
+                 (c) p.29 逐字「**The problem of finding the most general solution of the consistency condition will not be discussed here.**」
+                 ⇒ **GS (11) 前那句「uniquely determined」在本文没有支撑**，唯一性属 Manes--Stora--Zumino, CMP 102 (1985) 157 一线。
+                 **★ 一条给 Lean 的显式许可**：p.17 逐字「in defining the operators d, l and k ... we have treated A and F as
+                 **purely algebraic objects** ... **No special relations** (such as particular commutation relations) have been used and the
+                 polynomials were not restricted by any symmetry or invariance property」⇒ `kd + dk = 1` 可在自由分次代数上形式化，不需要流形。
+                 **读图存疑（引用前须复核，详见抽取记录 §3.2）**：**(3.15) 的 alpha_4 五项式字迹最差，本项目不转录**；
+                 **(3.36) 的前置因子与指数不可靠，不得单独入图**（用 (3.37)(3.38) 替代）；
+                 **(5.13) 的 `(4pi)^{n-1}` 底数与指数有风险，不得作为定量来源**；
+                 (5.10) 分子首个阶乘印作 `(m-1)!`，**经与 (5.11) 互除定为 `(n-1)!`**；(2.25) 被积式末项定为 `t^2 A^2`。
+                 **⚠️ 参考文献 [1] `R. Stora and B. Zumino, in preparation` 是全文开篇点名的主要依据，却从未以此形式发表**
+                 ⇒ 下降方程的「原始出处」在文献学上是分叉的（Stora 一线 vs Zumino 一线）。}
+}
+
 @article{maldacena-1997,
   author  = {Maldacena, Juan},
   title   = {The large N limit of superconformal field theories and supergravity},
