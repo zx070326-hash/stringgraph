@@ -5,7 +5,7 @@ title: Green–Schwarz 1984 的三段局域反项 S₁、S₂、S₃（及 E₈ 
 statement: |
   Green–Schwarz 1984 加到十维有效作用量上的局域反项，**原文分三段给出**
   （记号见 conv.gauge-trace-normalization、consistency.h-field-strength-chern-simons、
-  consistency.descent-forms-chern-simons；楔号省略，积分是十维积分）。
+  consistency.descent-forms-gs-notation；楔号省略，积分是十维积分）。
   **c 是一个数值常数，GS 逐字说它「可以从 refs. [3, 9] 推出」，本文没有算出它。**
 
   **SO(32)**：
@@ -40,7 +40,7 @@ statement: |
   (c) 后世的 ∫B ∧ X₈ 打包写法（见 notes 第 1 条）。
 uses:
   - consistency.h-field-strength-chern-simons
-  - consistency.descent-forms-chern-simons
+  - consistency.descent-forms-gs-notation
 uses_conventions:
   - conv.gauge-trace-normalization
 sources:
@@ -50,13 +50,27 @@ sources:
       L1 逐页读图，**按印刷原样转录**（抽取记录 literature/extractions/green-schwarz-1984.md E10/E12/E14/E15/E16）。
       注意 (23′) 最后两项的 ω 次序相反，见 notes 第 2 条。
   - ref: alvarez-gaume-witten-1984
-    loc: "eq. (63)（GS ref. [3]；GS 把常数 c 与各反常之间的相对归一化都指向这里）"
+    loc: "eq. (63)（GS ref. [3]；GS 把常数 c 与各反常之间的相对归一化都指向这里）；(114) 逐字「apart from a factor common to the three cases」"
     note: |
-      **本项目未取得全文（L0）**。这是本卡「c 未定」的直接原因，也是整条反常抵消链
-      数值系数层的唯一来源。抽取记录 Q2。
+      **状态更正（2026-09-11）：本文全文已取得（L1，62 页逐页读图，
+      literature/extractions/alvarez-gaume-witten-1984.md）**；旧 note 写的「未取得全文（L0）」已过时。
+      ★ **更正后的结论比原先更强，不是更弱**：AGW **确实不含常数 c**——AGW 全文**从不固定整体归一**，
+      (114) 逐字「apart from a factor common to the three cases」，只给**相对**归一（该抽取记录 Q-A1）。
+      ⇒ 「c 未定」的原因由「本项目没读到」变成「**这篇文献里就没有这个数**」。
+  - ref: zumino-1983-les-houches
+    loc: "§5「Normalization of the anomalies」，(5.6)–(5.13)（**绝对**归一化的一路）；p.38 逐字「So both normalizations can be determined completely from purely geometric arguments.」；(5.13) 上方**手写插注「(up to a sign)」**"
+    note: |
+      **L1 逐页读图**（抽取记录 literature/extractions/zumino-wu-zee-1984.md E14/E15）。
+      = green-schwarz-1984 的 ref. [10] 的第一项，与 ref. [9]（= zumino-wu-zee-1984）同作者、同期、互引。
+      ★ **只承载「c 的另一半在哪一节」这条归属，不承载任何数值**：
+      (5.13) 是 **2n−2 维通式**、**不含引力侧**，且读图不可靠（(4π)^{n−1} 的底数与指数）
+      + 原文自注「(up to a sign)」，抽取记录 §3.2 判定**不得作为定量来源入图**。见 notes 第 6 条。
   - ref: zumino-wu-zee-1984
-    loc: "全文（GS ref. [9]）"
-    note: 本项目未取得全文（L0）。与 [3] 一起被 GS 指为 c 的来源。
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（GS ref. [9]）"
+    note: |
+      **L2（原记为 L0，2026-09-11 更正为「摘要已取得、正文未取得」）**。与 [3] 一起被 GS 指为 c 的来源。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。ZWZ 正文对本项目已穷尽当前可用路线（抽取记录 §0.4），
+      **且即便取到也未必闭合 c**（§4 Q-Z3，见 notes 第 6 条）。
 tags: [anomaly, counterterm, green-schwarz-mechanism, so32, e8, d10]
 notes: |
   【1. ★ 不写 B ∧ X₈】派工与常识里的「Green–Schwarz 抵消项 ∫B ∧ X₈」这个打包写法
@@ -69,17 +83,55 @@ notes: |
   两个三形式的次序相反。三形式反对易，故 ω⁰_{3L} ω⁰_{3Y₁} = − ω⁰_{3Y₁} ω⁰_{3L}；
   但本卡**按印刷原样转录，不做合并**（抽取记录 E16 备注）。同理 (23) 的第二、第三项次序也相反。
 
-  【3. ★ H 的 CS 项符号差异】本卡与 consistency.h-field-strength-chern-simons 用 GS 原文的
-  H = dB + ω⁰_{3Y} − ω⁰_{3L}；bilal-2008 (12.14) 的 H = dB − Q₃(A,F) + β̃ Q₃(ω,R) **两个 CS 项整体反号**。
-  δB 的符号（(9c)）与这些反项里 B 的系数是绑在一起的，混用两套约定会得到错误的相对符号。
+  【3. ★ H 的 CS 项符号差异（已闭合，2026-09-11）】本卡与 consistency.h-field-strength-chern-simons
+  用 GS 原文的 H = dB + ω⁰_{3Y} − ω⁰_{3L}；bilal-2008 (12.14) 的 H = dB − Q₃(A,F) + β̃ Q₃(ω,R)
+  **两个 CS 项整体反号**。**β̃ = 1 已核实**（Bilal p.102 逐字），
+  ⇒ 两家由场重定义 (B, H) ↦ (−B, −H) 相联，**两家一致**，物理不变量是两个 CS 项的**相对**符号。
+  ⚠ 但 δB 的符号（(9c)）与本卡各反项里 B 的系数是**绑在一起**的，混用两套写法仍会得到错误的相对符号。
+  详见 consistency.h-field-strength-chern-simons notes 第 2 条与 2b 条。
 
   【4. 为什么 status 是 physical-argument】三条理由，任一条都足够：
-  (i) 常数 c 在本文里未定，指向本项目未取得的 alvarez-gaume-witten-1984；
-  (ii) ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（见 descent 卡），故 S₁、S₃ 的显式值依赖代表元选取；
+  (i) 常数 c 在本文里未定，GS 逐字外包给 refs. [3,9]——**而这两篇里都没有这个数**，见第 6 条；
+  (ii) ω⁰_{7Y}、ω⁰_{7L} 只定到相差恰当形式（见 consistency.descent-forms-gs-notation），
+       故 S₁、S₃ 的显式值依赖代表元选取；
   (iii) 反项是加到一个只在低能展开意义下存在的有效作用量上的，GS 自陈该截断
        "probably not fully consistent"。
 
   【5. S₂ 与规范群无关】(21) 不含规范场，故 SO(32) 与 E₈ × E₈ 共用同一个 S₂。
   这一点在 consistency.anomaly-cancellation-e8e8-effective-theory 的推导里用到。
+
+  【6. ★★ 常数 c 的归属（2026-09-11 定案）：三篇原始文献都不以一个数的形式给出 c】
+  GS (17) 后逐字是「The numerical constant c **can be deduced from** refs. [3,9].」
+  ——**"deduced from" 而非 "given in"，措辞准确**。逐篇核查：
+    · **alvarez-gaume-witten-1984（= GS ref. [3]，L1 全文已取得）**：**没有 c**。
+      AGW 全文从不固定整体归一，(114) 逐字「apart from a factor common to the three cases」，
+      只提供**相对**归一（(63)）。抽取记录 alvarez-gaume-witten-1984.md Q-A1。
+    · **zumino-1983-les-houches（= GS ref. [10] 第一项，L1 全文已取得，与 ref. [9] 同作者同期互引）**：
+      §5 是「反常的绝对归一化」那一节，但其结论 (5.13) 是 **2n−2 维通式**、**不含引力侧**
+      （该文全文只做内部对称群），因此**不可能**含 GS 那个已把引力一并归一的十维常数；
+      且 (5.13) 读图不可靠、原文在该式上方**手写插注「(up to a sign)」**。
+    · **zumino-wu-zee-1984（= GS ref. [9]）**：正文本项目一字未取到（L2 仅摘要）。
+      但由上一条（其伴随讲义）可推知，Zumino 一侧能提供的是**绝对归一化的一半**，不是 c 本身。
+  ⇒ **裁定：c 是 GS 自己合成的一步（AGW 给相对归一 + Zumino 给绝对归一），
+  GS 未给中间步骤，本项目未复算。**
+  ⚠ 附带的预期下调：**即使将来取到 ZWZ 正文，c 大概率仍不会以一个数的形式出现**
+  （抽取记录 zumino-wu-zee-1984.md Q-Z3）。本卡的「不含 (b) 常数 c 的值」因此**不是暂时状态**。
+
+  【7. ★ 本轮新增的三条 Zumino 侧缺口（随下降形式卡一并继承）】
+  全部来自 zumino-1983-les-houches 的 L1 全文，**green-schwarz-1984 原文对三条都无对应表述**：
+  (a) **局部性**：来源 p.16 末逐字「Equations such as (2.24) and (2.26) are **really valid only locally,
+      in some finite neighborhood in x-space**」，全局版需主丛上的联络；
+      **而本卡的 S₁、S₂、S₃ 都是整个十维时空上的积分。**
+  (b) **k² = 0 未证**：来源逐字「We leave the proof as an exercise to the reader.」
+      （对本卡的下降形式内容不构成实际依赖，见 math.chern-simons-descent-equations--via-* 的 gaps）。
+  (c) ★ **唯一性无支撑**：来源 p.29 逐字「**The problem of finding the most general solution of the
+      consistency condition will not be discussed here.**」
+      ⇒ **GS (11) 前那句「The anomalies … are uniquely determined by the hexagon diagrams.
+      Their form can be deduced by implementing the Wess–Zumino consistency conditions [8]」
+      在 Zumino 一侧没有支撑。** 唯一性（相容反常的上同调分类）属 manes-stora-zumino-1985 一线，
+      本项目正文一字未取到。
+  这三条已写进 math.chern-simons-descent-equations--via-chern-weil-transgression、
+  consistency.descent-omega1-is-consistent-anomaly--via-brs-descent 与
+  consistency.anomaly-cancellation-*-effective-theory--via-* 的 gaps。
 author: curator
 created: "2026-09-11"

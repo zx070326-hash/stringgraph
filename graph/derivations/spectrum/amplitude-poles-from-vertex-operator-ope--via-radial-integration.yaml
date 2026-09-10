@@ -11,12 +11,19 @@ depends_on:
     note: 提供 |z₁₄|^{α'k₁·k₄} 这个前因子的幂次（两个指数算子缩并的结果）。
   - id: spectrum.closed-string-four-tachyon-integral
     note: 提供被展开的积分（对 z₄ 在复平面上积分），本推导在其被积函数上做 OPE。
-  - id: worldsheet.closed-string-mass-formula
+  - id: spectrum.covariant-external-legs-on-shell
     inferred: true
     note: |
-      标 inferred：提供「−u = 4/α' 就是闭弦 tachyon 上壳」与更高 N 的激发态质量。
-      来源（§6.6）不回指 §1.4 的闭弦质量公式。
-    convention_map: conv.metric-mostly-plus 下 u = −(k₁+k₄)²，故 α'm² = −4 ⟺ (k₁+k₄)² = 4/α'。
+      提供**外线**闭弦 tachyon 的 α'k_i² = 4（该节点第 (2) 条在 N = 0 上的实例，
+      用在 summary 第 (2) 步配 (k₁+k₄)² 的那一处），以及激发态塔的质量值
+      α'm² = 4(N − 1)（该节点第 (2) 条的一般形式，对应 n ≥ 1 的 α'm² = −4 + 4n）。
+      **2026-09-11 改挂（curator-onshell-bridge）**：原先指向 worldsheet.closed-string-mass-formula。
+      **inferred 保留**：本推导把这些质量值用在 **u 通道中间态**上（−u = 4/α' 处的极点），
+      而新节点明确只断言外线 on-shell，不承载「OPE 的第 n 项 ⟺ 第 n 个中间态上壳」
+      （其【不断言】(c)(f)）。数值有节点了，识别仍无节点。
+      ⚠ 另有一处更窄的残余：n = n̄（角向积分挑出的条件）与闭弦 level matching N = Ñ 的等同，
+      新节点第 (2) 条只在**外线**上给出 N = Ñ，OPE 里那一步是**中间态**的，同样未被承载。
+    convention_map: conv.metric-mostly-plus 下 u = −(k₁+k₄)²，故 α'm² = −4 ⟺ (k₁+k₄)² = 4/α'；外线 α'm² = −4 ⟺ α'k_i² = 4。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.6, eq. (6.6.24)/(6.6.25)，p.195"
@@ -39,7 +46,10 @@ gaps:
      来源与本图都没有论证。这是本推导标 physical-argument 的首要理由。"
   - "**逐项积分与解析延拓的交换未论证**：每一项的径向积分在不同的参数区域收敛，
      把它们各自延拓后再求和，与先求和再延拓是否一致，本推导不处理。"
-  - "**质量壳条件的搬运**（见第四条依赖的 inferred 说明）。"
+  - "**质量壳条件的搬运**（见第四条依赖的 inferred 说明）：
+     **2026-09-11 部分关闭**——质量**值**（外线 α'k² = 4、塔上 α'm² = 4(N−1)）现由
+     spectrum.covariant-external-legs-on-shell 承载；仍未被承载的是
+     「极点 ⟺ 中间态上壳」与「OPE 的 n = n̄ ⟺ 中间态 level matching」这两处**识别**。"
   - "**路径积分测度未定义**（本批次共有）；本推导操作的对象是路径积分定义的期望值。"
   - "**(6.6.25) 的具体内容本图没有写出**：抽取记录只提到式号，没有抄出表达式。"
 notes: |

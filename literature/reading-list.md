@@ -32,7 +32,7 @@
 | P2 | kac-kazhdan-1979 | Kac 行列式公式 | worldsheet | 待分派 | queued：`worldsheet.kac-determinant` 的候选一手来源，终页与标题单复数未核对 |
 | P2 | thorn-1985 | 全文（MSRI 论文集章节，pp. 411–417） | worldsheet | 待分派 | queued：与 thorn-1984 易混（引作「Thorn 1984」），登记以区分。**元数据获 L1 独立佐证（2026-09-11）**：goddard-2008 参考文献 [32] 逐字「C.B. Thorn, *A proof of the no-ghost theorem using the Kac determinant,* in *Vertex Operators in Mathematics and Physics* ed. J. Lepowsky, S. Mandelstam and I.M. Singer (Springer-Verlag, New York, 1985) 411-417.」 |
 | P2 | brower-thorn-1971 | 全文（「D>26 出鬼」的归属争议） | worldsheet | 待分派 | queued：Goddard 2008（L3）与本文摘要（L2）矛盾未裁决 |
-| P2 | gsw-1987-v1 | §2.3.3（无鬼定理与 spectrum-generating algebra，p.102–112） | worldsheet | 待分派 | queued：Google Books 只回页码不回 snippet，archive.org 无 Vol. 1，式号内容全为 L0 |
+| P2 | gsw-1987-v1 | §2.3.3（无鬼定理与 spectrum-generating algebra，p.102–112） | worldsheet | 待分派 | queued：Google Books 只回页码不回 snippet，archive.org 无 Vol. 1，式号内容全为 L0。**⚠ 2026-09-11 补（researcher）：Cambridge Core 路线对本卷同样无效** —— Vol.1 书 hash `35152940E2D9C3B0BD327EB7FF74DBBE`、online ISBN **9781139248563**；§2.3.3 所在的 ch.2「Free bosonic strings」pp. 57–120 的 PDF **标 "Save PDF (13 mb)"，超出 WebFetch 的 10 MB 上限**。GSW 扫描件约 240 KB/页 ⇒ **超过约 42 页的章节一律取不到**；Vol.1 各章页数为 ch.1 1–56 / ch.2 57–120 / ch.3 121–184 / ch.4 185–248 / ch.5 249–290 / ch.6 291–352 / ch.7 353–434，**只有 ch.5（42 页）在临界线上**。交人类点击的 URL：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/7EB8CEE02B28B374C180E9B274A19591/9781139248563c2_p57-120_CBO.pdf/free-bosonic-strings.pdf` |
 | P2 | thorn-1985 | 全文（MSRI 论文集章节，pp. 411–417） | worldsheet | 待分派 | queued：与 thorn-1984 易混（引作「Thorn 1984」），登记以区分 |
 | **P1** | **brower-thorn-1971** | 全文（「D>26 出鬼」的归属争议） | worldsheet | 待分派 | **优先级上调（2026-09-11）：扫描件已定位且是 PUBLIC** —— `CERN-TH-1293` / `CM-P00058794.pdf` / CDS recid 352004 / MARC 963 = PUBLIC（经 `cds.cern.ch/oai2d` 取得，`primary-sources-round2.md` §12.6）。人工浏览器一次点击可得。取到即可裁决 `brst-cohomology-sources.md` §3.2 的矛盾（Goddard 2008 L3 vs 本文摘要 L2）。⚠ 088/963 尚未逐字复核 |
 | P2 | lian-zuckerman-1989 | 全文（RNS 超弦 / super-Virasoro） | worldsheet | 待分派 | queued：Springer 登录墙；**注意它不能用于玻色弦结论**。可试 lian-zuckerman-1991 成功用的 Project Euclid 端点 `journalArticle/Download?urlId=cmp%2F1104179468` |
@@ -46,6 +46,11 @@
 
 | P1 | eguchi-gilkey-hanson-1980 | Â 多项式（Dirac genus）的定义与 Pontryagin 展开 | consistency | 待分派 | **新增（2026-09-11）**：Phys. Reports **66** (1980) 213 = AGW ref [6]，AGW (82) 的 Â 多项式外包给它。本轮已用 Harvard Math 272b 讲义（匿名 CAS 输出，L1）核对 Â₁–Â₄ 全部相符，但那只作旁证；canonical 数学来源应是 Hirzebruch 或本条 |
 | P1 | green-schwarz-1985-hexagon | 全文 | consistency | 待分派 | **新增（2026-09-11）**：Nucl. Phys. **B255** (1985) 93–114。GS 1984 自陈弦论侧 "details will be presented elsewhere"，Schwarz 2012（arXiv:1201.0981，L1）指认这里就是那个 elsewhere。要给「type I 单圈六边形反常抵消」建节点必须先抽它 |
+| **P1** | **gsw-1987-v2** | **第 10 章（已抽）+ 第 13 章（未取）** | consistency | researcher | **partially extracted（2026-09-11）** → `extractions/gsw-1987-v2.md`（E1–E14）。**优先级由 P2 上调至 P1**（原因见下）。<br>✅ **第 10 章「The gauge anomaly in type I superstring theory」pp. 141–174 逐页读毕（L1）**，经 **Cambridge Core 章级 PDF**（本环境有机构订阅）。核心逐字：p.143「the anomaly cancels **if and only if** the gauge group is SO(32)」+ 同段「**although the relevant calculations have not been performed**」；(10.1.11)–(10.1.14) 迹恒等式（**含 GS 1984 没有的 U(n) 支**）且紧跟一句「**(These matters are discussed further in §13.5.3.)**」；(10.2.36)(10.2.37) 「**which vanishes for the gauge group SO(32) and for no other group**」+ **「32」= 六边形内线上奇数个扭转的分布方式数**（GS 1984 完全没有的世界面来历）；§10.3 引力/混合/IIB/杂化弦在弦论侧**全部只有 "suggests"**；§10.4.2 作者自评 **"not entirely rigorous"**。<br>✅ 目录 pp. v–x 全读（L1）⇒ **§13.5.3 = "Allowed gauge groups for N = 1 superstring theories", pp. 353–358** 已确证（注意标题是 **superstring** 不是 supergravity）。<br>❌ **第 13 章 pp. 307–362 未取到（L0）**：PDF **12 MB，超出 WebFetch 的 10 MB 硬上限**。**这是工具限制不是权限问题**（同书第 10 章 9.1 MB 一次成功）。已排除：assets.cambridge.org（Socket closed）、节级 BOOK_PART（`CBO9781139248570A050/A052/A053/A054` 全部 HTTP 400，**不存在节级产品**）、archive.org 两份扫描（均 `access-restricted-item: true`，fulltext/djvu 全 403）、Google Books（两卷 id `Z-uz4svcl0QC` / `dgAhAwAAQBAJ` 均不回 snippet）。<br>**★ 交人类点击的 URL**：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`<br>取到后要回答的四问见抽取记录 §0.4。<br>**本轮对四解分类的净进展**：两条**独立** L1 二手证据（`antonelli-2015` §1.1 p.3、`adams-dewolfe-taylor-2010` p.1 与其 [7]）都把「U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸」的出处指向本书第 13 章 ⇒ **`vafa-2005` E15 把它引给 `green-schwarz-1984` 确认是溯源错误**；但**GSW 原文措辞仍 L0**，两人对 GSW「说了多强的话」理解不一致（Antonelli：「it has long been known [3] that ... are theories where quantum anomalies are cancelled」；ADT：「satisfy **some of the same conditions** ... **might appear to be** consistent」）。**Q1 三方冲突未裁决。** |
+| P1 | antonelli-2015 | §1（含 1.1/1.2/1.3）、§2.1–2.2、Appendix A/B、References | consistency, swampland | researcher | **extracted（L1 部分章节，2026-09-11）** → `extractions/gsw-1987-v2.md` E13。arXiv:1507.08642，36 页，读 pp.1–8 + 33–36。**★ 唯一明说「四解分类的原始陈述在 GSW ch.13 且 no proof has explicitly been carried out」的来源。** ⚠ 单作者预印本，未见期刊发表；其「anomaly cancelled」指**十二形式因子化**，与 `adams-dewolfe-taylor-2010` 的「不能用 GS 机制抵消」不冲突但不同义；其 §1.1 对 ADT 的转述失真。**未读**：§2.3–2.5（各群非因子化的逐个证明）、§3.1–3.4 |
+| P1 | adams-dewolfe-taylor-2010 | 全文（4 页） | consistency, swampland | researcher | **extracted（L1 全文，2026-09-11）** → `extractions/gsw-1987-v2.md` E13/E14。arXiv:1006.1352**v2**（编号必须写死 v2：致谢自陈 v1 的 (7)(8) 系数有错，由 Tachikawa 指出）。**★ 本项目里第二条「作者/后人真正实现了原文邀请的反驳方向」的样本**：`vafa-2005` E15 逐字邀请「to find what consistency condition goes wrong」，ADT 给出了那个条件（超对称要求的 `BF²` 耦合 vs 阿贝尔规范不变性，`Y₄ ≠ dH₃`）。摘要限定语「without known inconsistencies」必须带上 |
+| **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3）。**2026-09-11 追加（researcher，gsw-1987-v2 抽取）**：Q3 已部分闭合 —— `antonelli-2015` 与 `adams-dewolfe-taylor-2010` **两条独立 L1 证据**把 `U(1)⁴⁹⁶`/`E₈×U(1)²⁴⁸` 的出处指向 `gsw-1987-v2` ch.13，**确认 Vafa 的引文 [6] 是溯源错误**；但 GSW 正文仍未取到，`inferred` 不能撤（除非把 source 换成那两篇）。**更重要**：ADT (2010) 直接反驳了 Vafa E15 的前提「Both of these theories are consistent as far as anomalies are concerned」，且正是 Vafa 逐字邀请的第二个反驳方向 |
+| P1 | green-schwarz-1985-hexagon | 全文 | consistency | researcher | **正文仍未取得（2026-09-11 第二轮已把五条路线跑完）** → `extractions/green-schwarz-1985-hexagon.md`（**L2 摘要级 E1–E5 + 失败路径逐条留痕**）。Nucl. Phys. **B255** (1985) 93–114，DOI `10.1016/0550-3213(85)90130-0`，预印本 **CALT-68-1224**（33 页，⚠ 不是 GS 1984 的 CALT-68-1182）。**摘要三条硬结论**：annulus 与 Möbius 各自有反常、相加后 "cancel … **if** … SO(32)"（充分条件，不得读作唯一性）、末句只 "We point out" 低能有效作用量各项的弦论起源 ⇒ **「弦论侧 ⟹ GS 1984 反项」这条边仍不得建**。失败：CDS = Anubis；CDS OAI 无 recid 入口；`lib-extopc.kek.jp` socket hang up（第三次）；OSTI 干净查询确认不藏本文；INSPIRE `documents`/`urls` absent；无大学课程页扫描件；CaltechAUTHORS 两端点 403；S2 `openAccessPdf` 空。**重印出处只有一个**（Schwarz 编 *Superstrings* Vol. 2 = archive.org 已确认无此书）⇒ 该路线先验不通。**下一轮最省力入口：GSW Vol. 2 反常章走 Cambridge Core**（同时清 `gsw-1987-v2` 的 P2 债） |
 | P2 | gsw-1987-v2 | **第 13 章**（496 维反常自由群的分类陈述） | consistency | 待分派 | **新增（2026-09-11）**：据 Antonelli 2015（arXiv:1507.08642，L1）§1.1，「SO(32) / E₈×E₈ / U(1)⁴⁹⁶ / E₈×U(1)²⁴⁸ 四解」的原始陈述在此，且 "no proof has explicitly been carried out"。bib 里目前只有 `gsw-1987-v1`。**2026-09-11 追加理由（researcher，建议 lead 把本行提到 P1）**：`vafa-2005` §4 把「U(1)⁴⁹⁶ 与 U(1)²⁴⁸×E₈ 就反常而言一致」引给 `green-schwarz-1984`，但本项目对 GS 1984 的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈。本章现在同时被 GS 抽取与 Vafa 抽取两处需要，是 swampland↔consistency 接口边的唯一可能来源。见 `extractions/vafa-2005.md` Q3 |
 | **P0** | **vafa-2005** | 全文（10 页） | swampland | researcher | **extracted（L1 全文 10 页逐页读图，2026-09-11）** → `extractions/vafa-2005.md`（E1–E18）。⚠ 读的是 **arXiv v2**。**两条结构性禁令：本文无任何编号公式、无任何编号 Conjecture ⇒ loc 只能写「§N, p.M」。** 核心是 §1 p.1 的 swampland 定义句与 §1 p.2 的三条有限性判据（标量体积/场数目/规范群秩，均以「Newton 常数非零」为前提）。最大溯源问题：§4 的引文 [6] 与本项目对 `green-schwarz-1984` 的 L1 抽取对不上（Q3） |
 | **P0** | **ooguri-vafa-2006** | 全文（17 页） | swampland | researcher | **extracted（L1 全文 18 页逐页读图，2026-09-11）** → `extractions/ooguri-vafa-2006.md`（E1–E29）。⚠ 读的是 **arXiv v1**，编号必须写死 v1。**Conjecture 0–4 有编号（从 0 起）；全文只有两个编号公式 (1.1) 与 (3.1)；§3.1 有两个 `Example v)` ⇒ loc 不能只写「Example v」。** 四条使用限制：α 不普适（9/8、3/8、8/7、6/7）、Conj 3 是标量曲率非截面曲率、Conj 1 与 2 明确相互独立、「Swampland Distance Conjecture」这个名字不在原文。三处「conjecture 2」按内容应为「conjecture 3」（误植） |
@@ -55,6 +60,8 @@
 | P1 | bagger-witten-1983 | 全文（NPB 222, 1–10），特别是超多重态模空间曲率符号的定理 | swampland | 待分派 | **新增（2026-09-11，由 ooguri-vafa-2006 抽取推出）**：OV §3.1（第一个 Example v，p.9）把「耦合到超引力的超多重态模空间必有负标量曲率」归给本文，并说这是局部 N=2 超对称的**直接后果**。**⇒ 这是 swampland 区最有希望通向 `rigorous` 的物理支点**（若成立，Conjecture 3 在超多重态那一支不只是 conjecture）。1983 年无 arXiv |
 | P2 | borel-harish-chandra-1962 | 全文（Ann. of Math. 75, 485–535） | math, swampland | 待分派 | **新增（2026-09-11）**：**`vafa-2005` 全文唯一引用的严格数学定理**（§2 p.4「T^d 的 Narain 模空间体积有限」）。⇒ swampland 区唯一一条可能通向 `rigorous` 的一手**数学**来源。建议把「T^d Narain 体积有限」单独建卡，不要让它给一般体积猜想升格。⚠ 终页 535 未核实 |
 | P2 | susskind-1995-remnants | 全文（hep-th/9501106） | swampland | 待分派 | **新增（2026-09-11）**：AMNV §2.2 的 remnant 论证与「量子引力无全局对称性」这一前提都引本文，§2.3 的 large-N species problem 也引它。**⇒ 图里「无全局对称性」节点的来源应是本条，不是 AMNV**（后者只引用不论证）。有 arXiv |
+| **P0** | **gubser-klebanov-polyakov-1998** | 全文（PLB 428, 105–114；arXiv 15 页） | holography | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/gubser-klebanov-polyakov-1998.md`（E1–E13）。⚠ 读的是 **arXiv v2**，式号写死 v2；PLB 发表版未核对。**三条红线**：(1) 核心式是 **(12)/(23) `W = K = S`（生成泛函 = on-shell 作用量），全文无任何配分函数陈述** —— `Z_CFT = Z_string` 不能引本文；(2) **全文无 `Δ(Δ−d) = m²`**，只有 d=4 的 (45) `Δ = 2 + √(4+(mR)²)`；(3) 边界在**有限截断 `z = R`** 而非共形边界。**全文不含 "conjecture" 一词**，最强自称 "we **propose** an identification"。**GKP 不引 Witten**（v2 的 25 条参考文献里没有 hep-th/9802150） |
+| **P0** | **witten-1998-ads** | 全文（ATMP 2, 253–291；arXiv 40 页） | holography | researcher | **extracted（L1 全文逐页读图，2026-09-11）** → `extractions/witten-1998-ads.md`（E-W1–E-W18）。⚠ 读的是 **arXiv v2**，comments 自陈含 "**assorted corrections**"，式号必须写死 v2。**核实结论**：`⟨exp∫φ₀O⟩_CFT = Z_S(φ₀)` **确为 (2.11)**，但**两边都是 `Z` 的等式是 (2.12)**（自变量是共形结构 h），流版 (2.13)；`Δ(Δ−d) = m²` **确为 (2.43)**（较大根，显式解 (2.44)，AdS 半径 = 1）。自称 "**ansatz**"，但明写 "make more precise the conjecture [13]" ⇒ **对 Maldacena 判「精确化」（与 GKP 判「独立假设」不同）**。用 **`SU(N)`** 并在 §2.6 论证不是 `U(N)`。**p.4 逐字称 GKP 为 "independent work [36]"**。发现两处原文疑误：p.35 的 `ω` 公式根号内是 `−4m²`（与 (2.44) 的 `+4m²` 矛盾）、参考文献 [13] 印作 `hep-th/971120`（少一位） |
 
 ## 已知获取路线备忘
 
@@ -76,6 +83,23 @@
   **用 INIS 判断「有没有」，用 OSTI 拿「文件本身」。**
 - **⚠ 反爬新增一条**：`digital.library.unt.edu`（TRAIL / DOE 技术报告扫描库）返回 **Altcha 挑战页**，agent 过不去。
   与 `cds.cern.ch` 同类处理：**把 URL 交给人类点击，不要用代理绕**。
+
+- **★★ 新增可用路线（2026-09-11，researcher 第二次复用并再次成功）：DNB（德国国家图书馆）的出版方目录扫描 `https://d-nb.info/<IDN>/04`。**
+  这是**取教科书章节标题 + 印刷页码**最省事的路线，绕过 Springer 登录墙；本轮一次拿下两本：
+  **Farkas–Kra, *Riemann Surfaces*（IDN `920606512`，标题页明写 `Second Edition`）**
+  与 **Jost, *Compact Riemann Surfaces*（IDN `948901241`，标题页**无**版次字样）**。
+  1. 用普通检索搜书名，结果里会直接出现 `d-nb.info/NNNNNNNNN/04` 链接（附件号通常是 `04`）。
+  2. `WebFetch` 该 URL → 抱怨二进制但**落盘**（本轮 62 KB / 460 KB）→ `Read` 带 `pages` 读图，扫描件清晰。
+  - **★ 副产品：标题页能定版次。** FK 那份明写 `Second Edition`，Jost 那份没有 ⇒ 两本的版次可信度立刻不同。
+    **版次定不下来就不要登记进 `sources.bib`**（本轮 Jost 即因此暂缓，见 `extractions/math-sources.md` §39.11）。
+  - ⚠ 仍然拿不到年份/ISBN：`portal.dnb.de` 与 `d-nb.info/<IDN>`（不带 `/04`）在 Anubis 墙后。
+- **⚠ 死路确认（第三次）：`lib-extopc.kek.jp/preprints/PDF/<年>/<yymm>/<KEKSCAN号>.pdf` 一律 `socket hang up`。**
+  本轮用 INSPIRE 给的**确切** `KEKSCAN 85-02-154` 拼出 `…/1985/8502/8502154.pdf`，**仍然 socket hang up**
+  ⇒ 失败原因不是"号码猜错"，是主机层面不可达。**`KEKSCAN` id 今后只当书目标识用，不要再花额度试直取。**
+- **⚠ OSTI 查询的第二种"被吞"形态（补充既有教训）**：`q="CALT-68"` 返回的 5 条全是 `SLAC-PUB-*`，与查询无关
+  ⇒ **含连字符的报告号前缀也会被吞**，不只是含 `/` 的。
+  **可靠的替代做法：改用标题短语查询**（本轮 `q="hexagon gauge anomaly"` 返回 4 条全部主题相关，
+  于是"OSTI 不藏该文"才成为可用的否定证据）。**先用一个必然命中的短语确认查询没被吞，再读否定结论。**
 
 - **★★ 新增可用路线（2026-09-11）：大学课程页挂的原刊扫描件 —— `alvarez-gaume-witten-1984`（Nucl. Phys. B234, 269–330, 62 页）全文即以此取得（L1）。**
   这是第二条成功拿到 pre-arXiv 论文正文的路线，**比 archive.org 路线省事得多，应当先试**。
@@ -148,6 +172,30 @@
   → 因此 [S] 说「按 Joe 勘误表更正」的那几处（(5.3.5)、(5.4.10)、(8.6.19) 等），**页图上看到的已经是更正后的文本**，
   「官方勘误表取不到」这个系统性风险随之大幅降低（KITP 三条 URL 仍 404，但已不再是必需品）。
   ⚠ 注意 `assets.cambridge.org/.../frontmatter/*.pdf` 仍然 **Socket is closed**（与旧记录一致）；**要走 Core 的 `/services/` 端点**。
+- **★★ 该路线的硬天花板：WebFetch 上限 10 MB（10485760 B）—— 对 GSW 两卷是致命的（2026-09-11 实测）。**
+  Polchinski 是**排版重制**的电子书，章级 PDF 小；**GSW 是逐页扫描件，约 240 KB/页**，所以
+  **超过约 42 页的章节一律 `maxContentLength size of 10485760 exceeded`**。实测：
+  GSW v2 ch.10（38 页）**9.1 MB ✅**；GSW v2 ch.13（56 页）**12 MB ❌**；GSW v1 ch.2（64 页）**13 MB ❌**。
+  已逐条排除的绕行方案：
+  1. 去掉 URL 尾部文件名（`.../content/view/<HASH>/<file>_CBO.pdf`）→ 同样超限；
+  2. `assets.cambridge.org` 同路径 → `Socket is closed`；
+  3. **节级 PDF 不存在**：章级 `https://www.cambridge.org/core/product/identifier/CBO<ISBN>A<NNN>/type/BOOK_PART` 可访问
+     （GSW v2 ch.13 = `A049` ✅），但章 identifier 之间的空档（`A050`–`A054`）**全部 HTTP 400**——
+     那些编号只是分配空位，不对应可下载产品。**别再试推节级 hash。**
+  4. Google Books：CUP 学术书常是 "No eBook available / Pages displayed by permission"，**检索不回 snippet**，
+     只回一个可能落在索引区的页号（GSW v2 查 `"Allowed gauge groups"` 回 p.593/591，不可用）。
+  5. archive.org：GSW v2 有两份扫描 `superstringtheor0002gree` / `superstringtheor0002gree_e7j9`，
+     **两份都是 `access-restricted-item: true`（inlibrary/printdisabled）**，`fulltext/inside.php` 与
+     `download/<id>/<id>_djvu.txt` 均 **403**。GSW v1 在 archive.org 上没有。
+  ⇒ **超限章节的唯一出路是把 URL 交给人类点一次。** 已记录的两条：
+  - GSW v2 ch.13（pp.307–362）：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`
+  - GSW v1 ch.2（pp.57–120，含 §2.3.3 无鬼定理）：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/7EB8CEE02B28B374C180E9B274A19591/9781139248563c2_p57-120_CBO.pdf/free-bosonic-strings.pdf`
+  **GSW 的 Core 坐标（2026-09-11 实得）**：Vol.1 书 hash `35152940E2D9C3B0BD327EB7FF74DBBE` / online ISBN `9781139248563`；
+  Vol.2 书 hash `ABB0BC23C86B597DAF81D50D463D2FA7` / online ISBN `9781139248570`；
+  Vol.2 文件名规则 `9781139248570c<章号−7>_p<起页>-<止页>_CBO.pdf`（ch.8→c1，ch.10→c3，ch.13→c6）；
+  目录是 `9781139248570toc_pv-x_CBO.pdf`（item hash `4E0B040C8A72C8497FC384DD745EAF10`），
+  ch.10 item hash `38B434AD7713BFBAFF39E5AD96C93161`，ch.13 item hash `F2BEB1F0811FE1D8458547AAB73D12AF`。
+  ⚠ **章号与 DOI 后缀错位**（ch.10 ↔ `.004`，ch.13 ↔ `.007`），与 Schottenloher 同型，**别用 DOI 后缀推章号**。
 - **⚠ Schrans 伴读笔记（[S]）没有第 2 卷版本（2026-09-11 确认）。** hepnotes.com 首页明写该 string 笔记只覆盖
   「the first 8 chapters of volume 1」，`joes-book-2.pdf` 不存在。**别再找。**
 - **Polchinski 官方勘误表已彻底失效**：`www.kitp.ucsb.edu/joep/links/joes-big-book-string/errata` 与其父页均 **HTTP 404**

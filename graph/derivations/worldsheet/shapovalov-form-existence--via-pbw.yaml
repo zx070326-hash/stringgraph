@@ -124,6 +124,14 @@ notes: |
   正确做法是新建 worldsheet.shapovalov-form-unconditional-existence
   （rigorous，depends_on math.verma-module-free-over-negative-part 与本卡），
   而不是改本卡的陈述文本（项目原则 1）。
+  **【2026-09-11 傍晚：上面这条建议已由 lead 分派执行】** 新卡
+  worldsheet.shapovalov-form-unconditional-existence 与其推导 --via-pbw（rigorous）已建，
+  depends_on 正是这里预告的两条（外加 uniqueness / verma-module-v2 /
+  verma-level-spanned-by-partitions / virasoro-anti-involution）。
+  与预告的差别只有一处**加强**：新卡把结论写成「任意交换 ℚ-代数 R 上以 PBW 基 (H) 为前提」
+  的条件版 + 特征零域上的无条件版，因为除「(H) ⇒ level 内直和」外每一步在 Lean 里都对
+  任意 ℚ-代数成立。**本推导本身不动**（论证、depends_on、status、sources 一律未改）；
+  上文提到的 worldsheet.kac-determinant 已于同日 superseded_by worldsheet.kac-determinant-v2。
 
   【2026-09-11 的变化】main 的 080d7f9 之后，本推导里唯一未被机器检查的一步就是输入本身
   （V(c,h) ≠ 0 = PBW）。此前还差「PBW ⇒ Shapovalov 泛函」那一段 curator 重构，

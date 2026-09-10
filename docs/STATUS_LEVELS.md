@@ -57,3 +57,11 @@ holography.black-hole-entropy-strominger-vafa
 ## "断言 + 骨架"的档位（lead 裁决 2026-09-11，依 reviewer-ch5 建议）
 
 来源给出论证骨架但关键步骤只有断言（如 Polchinski "a little thought shows"、"it is straightforward to"），标 **physical-argument**，`gaps` 逐条写明断言处；**不**标 conjecture。`conjecture` 保留给来源本身把它当猜想提出、或结论真伪在文献中未定的命题（对偶、沼泽地等）。理由："论证不完整"与"结论可能为假"是两个不同的轴，前者用 gaps 记录；把无争议的断言压成 conjecture 会让 `conjectures-depended-on` 报告失去含义。
+
+## 旧推导的去留（lead 裁决，2026-09-11）
+
+陈述换代（`superseded_by`）后，指向旧陈述的推导**保留不删**：它们是旧卡论证的不可变记录，且回译审计的 history 会引用它们。`validate` 对"target 已 superseded"报 warning 是提醒不是错误；处理规则：
+- 新陈述必须有自己的推导（通常是旧推导的改名/改边版本，`git mv` 后 target 改指新 id）。
+- 旧推导不再更新 notes；若旧推导的某条 depends_on 也被换代，不追改（warning 保留作历史痕迹）。
+- 报告与 `why` 只沿新陈述走，旧推导不参与有效状态。
+

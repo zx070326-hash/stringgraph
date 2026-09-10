@@ -3172,3 +3172,1770 @@ sources:
 - **Q29** `sources.bib` 里 **`schottenloher-2008` 条目的花括号失衡**（`note = {…}` 在原第 457 行就闭合，
   其后到 481 行是游离文本，最后多一个 `}`）。**本轮我把第 6 章的补充追加进了最后那段游离文本内部，
   没有改动括号结构**（避免与别的 agent 冲突）。**建议 lead 单独修一次**。
+
+---
+
+# 洛伦兹格顶点代数与 Borcherds 恒等式（researcher，2026-09-11）
+
+> **本轮任务**：为无鬼定理链回 `rigorous` 找两张卡的数学一手来源。
+> **卡 (A)**：「D 个自由玻色子（**不定号差** η，含类光 k₀）的 Heisenberg 顶点代数 ⊗ C[Z k₀]
+> （或洛伦兹格 L 的格点顶点代数 V_L）**是**顶点代数；动量塔是其模」。
+> **卡 (B)**：「Borcherds/Jacobi 恒等式」带编号 + 对易子公式
+> `[a_(m), b_(n)] = Σ_{k≥0} C(m,k) (a_(k) b)_(m+n−k)`。
+> **本轮特别要求**：每条来源必须记 **L 等级** 与 **对格号差假设（正定？非退化？偶？）的逐字措辞**。
+>
+> **上一轮（2026-09-11 早些时候）在核实 Lepowsky–Li Thm 6.5.3 时停摆、产出全丢**，本轮改为「查到一条立即落盘」。
+
+## 36. 卡 (A)：格点顶点代数 V_L —— 号差假设的逐字核实
+
+### 36.1 ★★ Li & Wang, arXiv:0802.0173：「**possibly degenerate** even lattice」（摘要 L1，正文待补）
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | **Haisheng Li, Qing Wang** | L1 |
+| 标题 | *On vertex algebras and their modules associated with even lattices* | L1 |
+| id | **arXiv:0802.0173 [math.QA]** | L1 |
+
+摘要逐字（L1）：
+
+> "We study vertex algebras and their modules associated with **possibly degenerate even lattices**,
+> using an approach somewhat different from others. Several known results are recovered and a number
+> of new results are obtained. We also study modules for Heisenberg algebras and we classify
+> irreducible modules satisfying certain conditions and obtain a complete reducibility theorem."
+
+**为什么这条对本项目至关重要**：卡 (A) 要的正是「含**类光** k₀」的情形。类光向量 ⟨k₀,k₀⟩ = 0
+使得格上的双线性型限制到 ℤk₀ 上**退化**。绝大多数教材（FLM/LL/Kac）默认 **nondegenerate**，
+本文是本轮找到的唯一一篇**标题+摘要就点名 degenerate** 的。
+
+**正文（ar5iv 中介，L4，待 PDF 逐字复核）：**
+
+| 编号 | 内容（中介转述 + 引号内为其声称的逐字） | 用途 |
+|---|---|---|
+| **Theorem 3.6** | 构造 `V(𝔥,L)`；对 L 的假设只有「**⟨α,α⟩ ∈ 2ℤ for α ∈ L**」+ L 是 𝔥 的加法子群。**不要求非退化。** | 卡 (A) 主体 |
+| **Theorem 4.1** | 单独处理**完全退化**情形「**⟨·,·⟩\|_L = 0**」 | 类光 ℤk₀ 的极端情形 |
+| **Theorem 3.10** | 不可约 `V(𝔥,L)`-模分类：`𝔲(0)` 半单作用 ⇒ `≅ V(𝔥,L)(λ,U₁)`，`λ ∈ L°` | **卡 (A) 的「动量塔是其模」** |
+| **Proposition 3.11** | 上述模的同构判据（`λ₁+L = λ₂+L` 且 `U₁ ≅ U₂`） | 动量塔的重数 |
+
+引言里对**经典**设定的措辞（中介称逐字）：「Let L be any **nondegenerate** even lattice in the sense that
+L is a finite-rank free abelian group」——即 Li–Wang 自己把 [Bo]/[FLM] 归类为 nondegenerate 设定。
+
+参考文献标签（中介引号）：**[Bo]** = Borcherds, PNAS **83** (1986) 3068–3071；
+**[FLM]** = Pure and Applied Math. **134**, Academic Press, 1988；
+**[LL]** = Progress in Math. **227**, Birkhäuser, **2004**（注意：不是 2003）；
+**[K]** = Kac, *Infinite-dimensional Lie Algebras*, 3rd ed.（**不是** *Vertex Algebras for Beginners*）；
+**[DL]** = Dong–Lepowsky, Progress in Math. **112**, 1993。**无 [B] 标签。**
+
+*（本节按来源逐个追加；每条记 L 等级 + 号差措辞逐字。）*
+
+### 36.2 ★★★ Borcherds 1986 PNAS：**「For any even lattice R」——原文对号差零假设**（L1 全文读图）
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | Richard E. Borcherds, Trinity College, Cambridge CB2 1TQ, England | L1（标题页） |
+| 标题 | *Vertex algebras, Kac-Moody algebras, and the Monster.* | L1 |
+| 出处 | *Proc. Natl. Acad. Sci. USA* **Vol. 83, pp 3068–3071** | L1（标题页自印） |
+| 投稿 | "Communicated by Walter Feit, **December 13, 1985**" | L1 |
+| **获取** | **`https://math.berkeley.edu/~reb/papers/va/va.pdf`**（作者本人主页重排本，112 KB） | L1 |
+
+> ⚠ **引用陷阱**：这是**作者自己重排的 TeX 版**，页码是 1,2,3,4,5…，**与期刊 3068–3071 不对应**
+> （重排本至少 5 页，期刊只有 4 页）。`loc:` 字段应写**节号**（Section 2/4/5），不要写重排本页码。
+> 另：重排本与印本是否逐字一致**未独立核验**（可用 PMC 扫描件复核，见 §38 未解决问题）。
+
+#### (a) 结构：**全文没有任何编号的 Theorem / Proposition / Definition**
+
+节标题（L1 逐字）：Section 1. Introduction. / **Section 2. Construction of the Fock space V.** /
+Section 3. Vertex Operators. / **Section 4. Vertex Algebras.** / **Section 5. The Virasoro Algebra.**
+公理以**罗马数字 (i)–(vi)** 的形式列在节内，**没有编号定理，也没有编号公式**。
+⇒ **图里不能写「Borcherds 1986, Theorem X」**——不存在。只能写 "Section 4, relations (i)–(v)"。
+
+#### (b) ★★ 号差假设：**只要求 even，不要求非退化、不要求正定**（L1 逐字）
+
+Section 2 开头：
+
+> "In this section, we recall the construction of a certain Fock space `V` from an **even lattice** `R`
+> and put several structures on `V`, such as a product, a derivation, and an inner product (see ref. 2)."
+
+> "**For any even lattice** `R` there is a central extension `0 ⟶ Z₂ ⟶ R̂ ⟶ R ⟶ 0`"
+
+Section 4 开头（**这句就是卡 (A) 的核心授权**）：
+
+> "**For any even lattice** `R` the operators `u_n` on `V` satisfy the following relations."
+
+随后 (i)–(v)，然后：
+
+> "We will call any module with linear operators `D^(i)(u)` and bilinear operators `u_n(v)`
+> satisfying relations *i*–*v* above a **vertex algebra**, so `V` is a vertex algebra."
+
+**⇒ 「V(R) 是顶点代数」在 Borcherds 原文里对号差零假设：even 即可，可以不定号差，甚至可以退化（singular）。**
+
+#### (c) ★★★ Virasoro 部分**才**要求非退化，且原文**专门处理了退化情形**（L1 逐字）
+
+Section 5 第二段：
+
+> "**We assume that `R` is nonsingular**, and we let `c` be the element `½ Σ_i r_i(1)r'_i(1)` of `V`,
+> where `r_i` runs over some base of `R` and `r'_i` is the dual base. We write `L_i` for the operator `c_{i+1}`…"
+
+> `L_{−1} = D`, `L_0 = deg`
+> **`[L_i, L_j] = (i−j)L_{i+j} + (i³−i) dim(R) δ_{i,−j}/12`**
+> `L_{−i}` is the adjoint of `L_i`.
+
+> "In particular the operators `L_i` and 1 span a copy of the Virasoro algebra.
+> **If `R` is a (possibly singular) lattice contained in a nonsingular lattice `S`, then the operators
+> `L_i` for `i ≥ −1` on the vertex algebra of `S` restrict to operators on the vertex algebra of `R`
+> that do not depend on the lattice `S` containing `R`. In particular if `i ≥ −1` then the operator `L_i`
+> can be defined on the vertex algebra `V` of `R` even when `R` is singular.**"
+
+**这一段直接命中卡 (A) 的「含类光 k₀」**：类光方向使格**奇异（= 退化）**，Borcherds 明说
+顶点代数结构照样在，Virasoro 也在（但只有 `i ≥ −1`，**`L_i` for `i ≤ −2` 在奇异格上没有定义**——
+这是一个真实的限制，图里必须写进去）。
+
+**中心荷**：由上式读出 `c = dim(R)`（`(i³−i)·dim(R)/12` 对应 `c(i³−i)/12`）。
+对 `R = ℤ^{25,1}` 即 `c = 26`——**但原文没有把这句写出来**，这是我的读数，属推断。
+
+#### (d) ★★ 原文**明确出现洛伦兹格**，且明确点名**无鬼定理**（L1 逐字，Section 5 末）
+
+> "*Example:* If `R` is the 18-dimensional even unimodular **Lorentzian lattice `II_{17,1}`** and `A` is the
+> Kac-Moody algebra whose Dynkin diagram is that of `R`, then `A` has roots of norm 2, 0, −2, and −4 …"
+
+> "**Frenkel used the no-ghost theorem to prove this stronger upper bound when `R` is 26 dimensional
+> and Lorentzian.**"
+
+⇒ Borcherds 本人把「26 维洛伦兹格 + 无鬼定理」写在纸面上。**这是本轮找到的、把卡 (A) 与无鬼定理
+直接连起来的唯一一处原始文献。**
+
+#### (e) 物理态子空间 `P^i` 的定义（L1 逐字，Section 5）——顺带取到，curator 可能用得上
+
+> "We define the physical subspace `P^i` to be the elements `v` of `V` with `L_n(v) = iv` if `n = 0`,
+> 0 if `n ≥ 1`."
+
+> "If `r` is any nonzero vector of `R` the then dimension of the `r` subspace of `P¹` or `P⁰` is
+> `p_{d−1}(1 − (r,r)/2)` or `p_{d−1}(−(r,r)/2)`, where `d` is the dimension of `R` …
+> Hence the dimension of the `r` subspace of `P¹/DP⁰` is equal to `p_{d−1}(1 − (r,r)/2) − p_{d−1}(−(r,r)/2)`"
+
+（`p_{d−1}` = 分成 `d−1` 色的分拆数。注意「stronger upper bound `p_{d−2}(1 − (r,r)/2)`」正是无鬼定理给的那个。）
+
+### 36.3 ★★★ Li–Wang arXiv:0802.0173 正文 L1 核实：**Theorem 3.6 / 3.10 与整个第 4 节**
+
+获取：`https://arxiv.org/pdf/0802.0173` → 落盘 246.9 KB → `Read(pages=)`。
+版本戳（p.1 侧栏，L1）：**`arXiv:0802.0173v1 [math.QA] 1 Feb 2008`**。
+作者单位（L1）：Department of Mathematical Sciences, Rutgers University, Camden, NJ 08102；
+Qing Wang 的 permanent address 是 Xiamen University。**PDF 页 = 文章页**（无偏移）。
+
+#### (a) 引言里对**经典**情形的逐字定义（p.1，L1）——这句钉死了「经典 V_L 假设非退化」
+
+> "Let `L` be any **nondegenerate even lattice** in the sense that `L` is a finite-rank free abelian group
+> equipped with a symmetric ℤ-bilinear form `⟨·,·⟩` such that `⟨α,α⟩ ∈ 2ℤ` for `α ∈ L`.
+> Associated to `L` there exists a canonical vertex algebra `V_L` (**[Bo], [FLM]**)."
+
+> "For vertex algebras `V_L`, irreducible modules were classified in **[D]** (cf. [DLM2], **[LL]**) where
+> **Dong proved that every irreducible `V_L`-module is isomorphic to one of those constructed in [FLM]**."
+
+> "…set `𝔥 = ℂ ⊗_ℤ L` and extend the ℤ-bilinear form on `L` to a **nondegenerate** symmetric ℂ-bilinear
+> form `⟨·,·⟩` on `𝔥`."
+
+p.2（L1）：
+
+> "If the vertex algebra `V` is finitely generated, one can readily see that `L` is finitely generated,
+> so that `L` is free of finite rank (as `L` is torsion-free). In this case, `L` is a (finite rank)
+> **possibly degenerate even lattice**."
+
+> "For the vertex algebra `V_L` with `L` a **nondegenerate** even lattice, irreducible modules have been
+> constructed before in **[FLM]** and **[LL]** with quite different methods. Our treatment here is further
+> different from those of [FLM] and [LL]."
+
+⇒ **Li–Wang 自己把 FLM 与 LL 都归到「nondegenerate」设定**（这是本轮对「FLM/LL 是否覆盖不定号差」
+问题最直接的旁证：**它们覆盖不定号差没问题，覆盖退化才是问题**——见 (d) 的号差 vs 退化辨析）。
+
+#### (b) ★★★ **Theorem 3.6**（p.13，L1 逐字）——这就是卡 (A) 的「是顶点代数 + 动量塔是其模」
+
+先有 **Definition 3.5**（p.13，L1 逐字）：
+
+> "**Definition 3.5.** We say an `ĥ`-module `W` satisfies *Condition `C_L`* if `W` is a restricted
+> `ĥ`-module of level 1, satisfying the condition that for any `α ∈ L`, `α(0)` is semisimple with only
+> integer eigenvalues and `α(n)` with `n ≥ 1` are locally nilpotent."
+
+> "**Theorem 3.6.** *Let `U` be an `ĥ`-module of level 1, satisfying Condition `C_L`. Set*
+> &nbsp;&nbsp; `V_{(𝔥,L)}(U) = ℂ[L] ⊗ U.` &nbsp;&nbsp;**(3.13)**
+> *For `α, β ∈ L`, `v ∈ M(1)`, `w ∈ U`, we define*
+> &nbsp;&nbsp; `Y_W(e^α ⊗ v, x)(e^β ⊗ w) = ε(α,β) e^{α+β} ⊗ x^{⟨α,β⟩} E^−(−α,x) Y_U(Δ̄(β,x)v, x) Δ̄(α,−x) w.` &nbsp;&nbsp;**(3.14)**
+> *Then `(V_{(𝔥,L)}, Y, e⁰⊗1)` **carries the structure of a vertex algebra** with `M(1)` as a vertex
+> subalgebra and `(V_{(𝔥,L)}(U), Y_W)` **carries the structure of a `V_{(𝔥,L)}`-module**. Furthermore,
+> if `U` is irreducible, so is `V_{(𝔥,L)}(U)`.*"
+
+证明里作者自陈的路线（p.13–15，L1）：「Next, we show that **the Jacobi identity** holds.」→ 最后
+「Using this and delta-function substitutions we obtain the Jacobi identity as desired.
+This proves the assertions on vertex algebra structure and module structure.」
+**⇒ 这是一条完整的、有证明的定理，不是引用别处。**
+
+#### (c) ★★★ 动量塔：**(3.17) + Proposition 3.9 + Theorem 3.10 + Proposition 3.11**（pp.16–19，L1 逐字）
+
+> `L° = { λ ∈ 𝔥 | ⟨α,λ⟩ ∈ ℤ for all α ∈ L }` &nbsp;&nbsp;**(3.17)**
+
+> "**Proposition 3.9.** *The defined `ĥ`-module `M(1,λ,U₁)` satisfies Condition `C_L` and is irreducible.
+> On the other hand, every irreducible `ĥ`-module satisfying Condition `C_L` is isomorphic to
+> `M(1,λ,U₁)` for some `λ ∈ L°` and some irreducible restricted `ℒ₁`-module `U₁` of level 1.*"
+
+> "**Theorem 3.10.** *Let `W` be an irreducible `V_{(𝔥,L)}`-module on which `𝔲(0)` acts semisimply.
+> Then `W` is isomorphic to `V_{(𝔥,L)}(λ,U₁)` for some `λ ∈ L°` and for some irreducible restricted
+> `ℒ₁`-module `U₁` of level 1.*"
+
+其中（p.17，L1）`V_{(𝔥,L)}(λ,U₁) = ℂe^λ ⊗ ℂ[L] ⊗ U₁ ⊗ M₀(1)` as a vector space，
+`𝔲(0) = ℂu₁(0) ⊕ … ⊕ ℂu_s(0) ⊂ 𝔥(0) ⊂ ĥ`。
+
+> "**Proposition 3.11.** *Let `λ₁, λ₂ ∈ L°` … Then `V_{(𝔥,L)}(λ₁,U₁) ≃ V_{(𝔥,L)}(λ₂,U₂)` if and only if
+> `λ₁ + L = λ₂ + L` and `U₁ ≃ U₂`.*"
+
+**⇒ 「动量塔」= `λ` 跑遍 `L°/L`，正是 (3.17) 的对偶格模掉 L。**
+
+> "**Remark 3.12.** Assume that `L` is a **nondegenerate** even lattice with `𝔥 = ℂ ⊗_ℤ L`. …
+> **Thus Theorem 3.6 recovers the corresponding results of [FLM] with a different proof.**
+> In this case, the assumption in Theorem 3.10 that `𝔲(0)` is semisimple is **vacuous**.
+> Then we recover Dong's corresponding result in [D] (cf. [DLM2], [LL])."
+
+#### (d) ★★★ **第 4 节标题就是类光条件**（p.20，L1 逐字）——与卡 (A) 的 `ℂ[ℤk₀]` **逐字对上**
+
+> "**4. A characterization of vertex algebras `V_{(𝔥,L)}` with `⟨·,·⟩|_L = 0`**
+>
+> In this section we study vertex algebras `V_{(𝔥,L)}` with `⟨·,·⟩|_L = 0`. In this case, we give a
+> characterization of the vertex algebras in terms of a certain affine Lie algebra.
+>
+> Let `𝔥` be a finite-dimensional vector space equipped with a **nondegenerate symmetric bilinear form**
+> `⟨·,·⟩` and let `L ⊂ 𝔥` a free abelian group with **`⟨α,β⟩ = 0` for `α, β ∈ L`**. …
+> `⟨h+u, h'+v⟩ = ⟨h,h'⟩` for `h,h' ∈ 𝔥`, `u,v ∈ ℂ[L]`. &nbsp;&nbsp;**(4.1)**"
+
+**取 `L = ℤk₀`、`k₀` 类光，条件 `⟨α,β⟩=0 ∀α,β∈L` 就是 `⟨k₀,k₀⟩ = 0`。这是逐字命中。**
+
+#### (e) ★★ 号差 vs 退化：一条**必须写进图**的辨析（这一段是我的推断，不是原文）
+
+Li–Wang（以及 FLM/Kac/LL）全都在 **ℂ 上**做：`𝔥` 是复向量空间，形式只要求 **nondegenerate symmetric**。
+**在 ℂ 上，非退化对称双线性型的号差不是不变量**（`O(n,ℂ)` 只有一个）——
+所以「不定号差 η」这件事在**顶点代数结构层面根本不出现**。
+真正出现号差的是 **Borcherds §2 (v) 的那个内积**（`r(i)` 与 `r(−i)` 互为伴随、`(e^r,e^s)=δ`），
+它在洛伦兹格上**不定**，这才是鬼态的来源。
+
+**⇒ 给 curator 的判断**：卡 (A)「是顶点代数」这一半，**不需要**任何关于号差的假设，
+可以直接引 Borcherds §4 / Li–Wang Thm 3.6，`status: rigorous`；
+而「内积不定 / 无鬼」那一半是**另一张卡**，不要混进来。
+本轮**没有**找到任何来源把「不定 Hermitian 内积下的顶点代数」做成带编号定理。
+
+#### (f) 顺带取到的 **FLM 编号**（Li–Wang 转引，L1 见于 Li–Wang 正文 ⇒ 对 FLM 而言是 L3）
+
+| FLM 编号 | Li–Wang 用它做什么 | 页 |
+|---|---|---|
+| **[FLM] Theorem 1.7.3** | Heisenberg 代数在固定非零 level 下「只有一个不可约模、完全可约」 | p.2 |
+| **[FLM] Section 1.7** | Li–Wang §2 的完全可约定理「generalizes a theorem of [FLM] (Section 1.7)」 | p.3 |
+| **[FLM] Proposition 4.1.1** | `[h(n), E^∓(α,x)]` 的对易关系 | p.18 |
+| **[FLM] Chapter 5** | 「all the 2-cocycles `ε : S×S → ℂ^×` satisfying (3.6)—(3.8) are cohomologous」 | p.15 |
+
+**⚠ 这四条对 FLM 本身只是 L3（他人转引），FLM 原书本轮未获取。**
+
+#### (g) ★★★ **Theorem 3.6 的假设逐字**（p.12，L1）——**对 L 只要求 even，明确没有非退化条件**
+
+> "For the rest of this section, we assume that `L` is an **additive subgroup of `𝔥`** such that
+> &nbsp;&nbsp; `⟨α,α⟩ ∈ 2ℤ` &nbsp;&nbsp; for `α ∈ L`, &nbsp;&nbsp;**(3.5)**
+> equipped with a function `ε : L × L → ℂ^×`, satisfying the condition that
+> &nbsp;&nbsp; `ε(α,0) = ε(0,α) = 1` &nbsp;**(3.6)**
+> &nbsp;&nbsp; `ε(α, β+γ)ε(β,γ) = ε(α+β, γ)ε(α,β)` &nbsp;**(3.7)**
+> &nbsp;&nbsp; `ε(α,β)ε(β,α)^{−1} = (−1)^{⟨α,β⟩}` &nbsp;**(3.8)**
+> for `α, β, γ ∈ L`."
+
+> `V_{(𝔥,L)} = ℂ[L] ⊗ M(1).` &nbsp;**(3.9)**
+> `Y(e^α ⊗ u, x)(e^β ⊗ v) = ε(α,β)e^{α+β} ⊗ x^{⟨α,β⟩} E^−(−α,x) Y(Δ̄(β,x)u, x) Δ̄(α,−x)v.` &nbsp;**(3.10)**
+
+> "One can prove that the quadruple `(V_{(𝔥,L)}, Y, e⁰⊗1)` carries the structure of a vertex algebra,
+> **by using a theorem of [FKRW] and [MP]**. Here, we give a uniform treatment for both the vertex
+> algebras and their modules."
+
+⇒ **§3 对 `L` 的全部假设 = (3.5)–(3.8)**：`L` 是 `𝔥` 的加法子群、`⟨α,α⟩ ∈ 2ℤ`、存在 2-上循环 `ε`。
+**没有「非退化」，没有「正定」，没有「有限秩」**（有限秩只在 Remark 3.4 里作为额外假设出现）。
+另注：作者点名还有第三条路线 **[FKRW]（Frenkel–Kac–Radul–Wang）+ [MP]（Meurman–Primc）**。
+
+#### (h) ★★ Heisenberg 顶点代数本身（p.10，L1 逐字）——卡 (A) 的前半
+
+> "It is well known now (cf. **[LL]**) that there exists a **unique vertex algebra structure on `V_ĥ(ℓ,0)`**
+> with `1` as the vacuum vector and with `Y(h,x) = h(x) = Σ_{n∈ℤ} h(n)x^{−n−1}` for `h ∈ 𝔥`.
+> Furthermore, for every nonzero `ℓ`, `V_ĥ(ℓ,0)` is a **vertex operator algebra of central charge
+> `d = dim 𝔥`** with conformal vector
+> `ω = (1/2ℓ) Σ_{r=1}^{d} h^{(r)}(−1)h^{(r)}(−1)**1**`,
+> where `{h^{(1)},…,h^{(d)}}` is any **orthonormal basis** of `𝔥`."
+
+> "It is also known (cf. **[LL]**) that every … module `(W, Y_W)` for vertex algebra `V_ĥ(ℓ,0)` is a
+> **restricted `ĥ`-module of level `ℓ`** … **On the other hand, on every restricted `ĥ`-module `W` of
+> level `ℓ`, there is a unique module structure `Y_W` for vertex algebra `V_ĥ(ℓ,0)`** with
+> `Y_W(h,x) = h(x)` for `h ∈ 𝔥`."
+
+> "It is known (cf. [LL]) that vertex algebras `V_ĥ(ℓ,0)` for `ℓ ≠ 0` are all isomorphic. In view of this,
+> we restrict ourselves to the vertex operator algebra `V_ĥ(1,0)`. In literature, the vertex operator
+> algebra `V_ĥ(1,0)` is also often denoted by **`M(1)`**."
+
+**⇒ 中心荷 `c = dim 𝔥 = D` 是 L1 的**（且「orthonormal basis of `𝔥`」隐含 `𝔥` 非退化——
+在 ℂ 上正交基存在 ⟺ 形式非退化，**与号差无关**，再次印证 (e)）。
+**⚠ 但这三句 Li–Wang 全部写作 "It is well known (cf. [LL])"，不给 LL 的定理号 ⇒ 对 LL 是 L0。**
+**`Proposition 3.2`（p.10，L1）**：restricted level-1、`𝔥(0)` 半单、`𝔥(n)` (n≥1) locally finite ⇒ `W` 完全可约。
+
+### 36.4 ★★ **任务书点名的问题结算**：Gebert–Nicolai 1995 §2 到底自引的是谁（L1，参考文献表逐条读图）
+
+刊 p.575 §2.1 开头（L1 逐字）：
+
+> "**2. General Setup** — *2.1. Vertex algebras.* We shall provide a short primer to formal calculus and
+> vertex algebras **following closely [19]**. In **[17]** the subject is treated thoroughly."
+
+刊 p.578（L1 逐字）：
+
+> "We shall give **a definition of vertex algebra [15]** using the **notation of [21]** which we believe is
+> more accessible to physicists."
+
+刊 p.574（L1 逐字）：
+
+> "Our results are couched in the language of **vertex algebras [6, 17, 19]** (see also [33] for a treatment
+> in the BV formalism), which is entirely equivalent to **the formulation of [24, 22]**, but slightly more
+> convenient for our purposes because of its economy of notation. … they do not correspond to summable
+> operators in the sense of [17]; in this respect, vertex algebras encompassing longitudinal states
+> transcend **the definition given in [6, 17]**."
+
+参考文献表（刊 pp.620–622，**L1 逐字**）——把上面每个方括号解开：
+
+| 号 | 条目（逐字） |
+|---|---|
+| **[6]** | **Borcherds, R. E.: Vertex algebras, Kac-Moody algebras, and the monster. Proc. Nat. Acad. Sci. USA 83, 3068–3071 (1986)** |
+| **[15]** | **Frenkel, I. B., Huang, Y., Lepowsky, J.: On axiomatic approaches to vertex operator algebras and modules. Memoirs of the American Mathematical Society 104, 594 (1993)** |
+| **[17]** | **Frenkel, I. B., Lepowsky, J., Meurman, A.: Vertex Operator Algebras and the Monster. Pure and Applied Mathematics Vol. 134, San Diego, CA: Academic Press, 1988** |
+| **[19]** | **Gebert, R. W.: Introduction to vertex algebras, Borcherds algebras, and the monster Lie algebra. Int. J. Mod. Phys. A8, 5441–5503 (1993)** |
+| **[21]** | **Goddard, P.: Meromorphic conformal field theory. In: V. G. Kac (ed.), Infinite Dimensional Lie Algebras and Groups — Proceedings of the Conference held at CIRM, Luminy, July 4–8, 1988, Advanced Series in Mathematical Physics Vol. 7. Singapore: World Scientific, 1989, pp. 556–587** |
+| **[22]** | Goddard, P.: Vertex operators and algebras. In: Furlan, Jengo, Pati, Sciama, Shafi (eds.), The ICTP Series in Theoretical Physics — Vol. 2, Superstrings, Supergravity and Unified Theories, Singapore: World Scientific, 1986, pp. 255–291 |
+| **[24]** | Goddard, P., Olive, D.: Algebras, lattices and strings. In: J. Lepowsky, S. Mandelstam, I. M. Singer (eds.), Vertex Operators in Mathematics and Physics — Proceedings of a Conference November 10–17, 1983, MSRI Publications #3, New York: Springer, 1985, pp. 51–96 |
+| **[26]** | **Goddard, P., Thorne, C. B.: Compatibility of the dual Pomeron with unitarity and the absence of ghosts in the dual resonance model. Phys. Lett. 40 B, 235–238 (1972)**（**注意刊上把 Thorn 印成 "Thorne"**） |
+| [8] | Brower, R. C.: Spectrum-generating algebra and no-ghost theorem for the dual model. Phys. Rev. D6, 1655–1662 (1972) |
+| [41] | Scherk, J.: An introduction to the theory of dual models and strings. Rev. Mod. Phys. 47, 123–164 (1975) |
+
+**⇒ 任务书三选一的答案是「都不是单一一个」：**
+- **公理定义**取自 **FHL 1993 (Memoirs AMS 104, no. 594)**；
+- **记号**取自 **Goddard 1989「Meromorphic conformal field theory」**；
+- **入门叙述**跟随 **Gebert 自己的 1993 综述 [19]**，**详尽处理**指向 **FLM 1988 [17]**；
+- **"vertex algebra" 这一语言**归给 **[6] Borcherds + [17] FLM + [19] Gebert 三家并列**。
+- **Borcherds 与 FLM 被 GN 逐字点名「不够用」**：纵向 DDF 算符「do not correspond to summable operators
+  in the sense of [17] … transcend the definition given in [6, 17]」。**这条限制必须进图**：
+  含纵向态的构造超出 Borcherds/FLM 原始定义。
+
+另（刊 p.573，L1 逐字）：GN 把无鬼定理引作 **[26, 8, 41]**（Goddard–Thorn + Brower + Scherk），
+并写「the longitudinal states (or operators) have zero norm and hence decouple in 26 dimensions by
+the no-ghost theorem [26, 8, 41]」。
+
+**⚠ 与既有记忆的一致性**：本条与 `reference_web-fetch-access-blockers` 里记的 pure.mpg.de 路线一致，
+且 §34 之前记的「Goddard–Thorn 1972 = CERN-TH-1493」与这里的 Phys. Lett. 40B, 235–238 是同一篇。
+
+### 36.5 ★★★★ **本轮对「不定号差」问题的最干净答案**：Gebert–Nicolai §2.2，刊 **p.583**（L1 逐字）
+
+> "**2.2. Toroidal compactification of the bosonic string.** It is by no means obvious that nontrivial
+> examples of vertex (operator) algebras exist. However, a class of vertex algebras is provided by
+> **the following result (see [6, 17])**:
+>
+> **Associated with each nondegenerate even lattice `Λ` is a vertex algebra `(ℱ, 𝒱, 1, ω)`.
+> If in addition `Λ` is positive definite then `(ℱ, 𝒱, 1, ω)` has the structure of a vertex operator algebra.**"
+
+**⇒ 这一句把号差问题一刀切开，而且给了出处 [6] = Borcherds 1986，[17] = FLM 1988：**
+
+| 格的假设 | 得到什么 |
+|---|---|
+| **非退化 + 偶**（**号差任意**，含洛伦兹） | **vertex algebra** ✔ |
+| 再加 **正定** | vertex **operator** algebra |
+
+**这正面回答了任务书的核心问题**，并**独立证实**了我在 §37.3(a) 里标为「推断」的那条
+（洛伦兹格 ⇒ 是 VA 但不是 VOA）——**该条现在有来源，可以取消 inferred 标记**，
+出处写 **Gebert–Nicolai, CMP 172 (1995), §2.2, p.583**（本身是转述 [6]、[17]，**无编号定理**，
+所以对 Borcherds/FLM 而言仍是 L3）。
+
+#### 构造的逐字细节（刊 pp.584–586，L1）——与卡 (A) 的物理写法一一对上
+
+> "Let `Λ` be an even lattice of rank `d < ∞` with a symmetric **nondegenerate** ℤ-valued ℤ-bilinear form
+> `·⌣·` and **corresponding metric tensor `η^{μν}`**, `1 ≤ μ, ν ≤ d` (`Λ` even means that `r² ∈ 2ℤ` for all
+> `r ∈ Λ`). The vertex algebra `(ℱ, 𝒱, 1, ω)` which we shall construct can be thought of as a **bosonic
+> string theory with `d` spacetime dimensions compactified on a torus**. Thus `Λ` represents the allowed
+> momentum vectors of the theory. We take **`Λ_ℝ := ℝ ⊗_ℤ Λ`** to be the real vector space in which `Λ`
+> is embedded."
+
+**★ 注意 GN 在 ℝ 上做**（`Λ_ℝ`、`η^{μν}`、厄米性 (2.69)），**号差在这里是真不变量**——
+这与 §36.3(e) 说的「ℂ 上号差不可见」互补：**GN 是本轮唯一一个把不定 `η` 写成实矩阵的来源。**
+
+| 式号 | 内容（L1 逐字/近逐字） |
+|---|---|
+| **(2.67)** | `(Ψ_r, Ψ_s) = δ_{r,s}`（零模态 "zero mode states"，**by definition orthonormal**） |
+| **(2.68)** | **`[α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}`** ← **不定号差 `η` 出现的确切位置** |
+| **(2.69)** | `(α^μ_m)† = α^μ_{−m}` |
+| **(2.72)/(2.73)** | `r(m) := Σ_μ r_μ α^μ_m ≡ r·α_m`；`[r(m), s(n)] = m(r·s)δ_{m+n,0}` |
+| **(2.74)** | `ĥ := { r(m) \| r ∈ Λ_ℝ, m ∈ ℤ }`，正文称 "the `d`-fold **Heisenberg algebra**" |
+| **(2.76)** | `[q^ν, p^μ] = i η^{μν}` |
+| **(2.81)** | `e^r e^s = (−1)^{r·s} e^s e^r` |
+| **(2.88)** | `1 → {±1} → Λ̂ → Λ → 1`（2-上循环 ⟺ 中心扩张） |
+| **★ (2.90)** | **`ℱ := S(ĥ^−) ⊗ ℝ{Λ}`** —— "The Fock space associated with the lattice `Λ`" |
+| **(2.95)/(2.98)** | `𝒱(e^r,z) = e^{∫r_<(z)dz} e^r z^{r(0)} e^{∫r_>(z)dz} = :e^{i r·Q(z)}: c_r` |
+| **(2.97)** | `Q^μ(z) ≡ q^μ − i p^μ ln z + i Σ_{m∈ℤ} (1/m) α^μ_m z^{−m}`（Fubini–Veneziano 场） |
+
+**★★ 一条必须写进卡 (A) 的更正**（刊 p.585，L1 逐字）：
+
+> "One might expect the full Fock space `ℱ` of the vertex algebra to be `S(ĥ^−) ⊗ ℝ[Λ]`.
+> **However, it is well known that we must replace the group algebra `ℝ[Λ]` by something more delicate
+> in order to adjust the signs in the Jacobi identity for the vertex algebra.** We will multiply `e^{ir·q}`
+> by a so-called **cocycle factor** `c_r` … We will take the **twisted group algebra `ℝ{Λ}`** consisting of
+> the operators `e^r`, `r ∈ Λ`, instead of `ℝ[Λ]`."
+
+⇒ 卡 (A) 写「`⊗ ℂ[ℤk₀]`」**在一般情形是错的**，应是**扭群代数** `ℂ_ε[L]`。
+**但**：当 `L = ℤk₀` 且 `k₀` 类光时 `⟨mk₀, nk₀⟩ = 0`，由 (2.81) 知 `e^r` 互相对易，
+且 Li–Wang **Remark 3.4** 给的显式 `ε(α_i,α_j) = (−1)^{⟨α_i,α_j⟩} (i<j), 1 (i≥j)` 在秩 1 时恒为 1
+⇒ **此特例下扭群代数 = 普通群代数 `ℂ[ℤk₀]`**。
+**⚠ 这一步（"此特例下可以退化成普通群代数"）是我的推断，没有来源直接写出来 ⇒ 图里标 `inferred: true`。**
+
+#### 顺带：GN 对无鬼定理的表述（刊 p.583，L1 逐字）
+
+> "It is well known that there are **additional null physical states in `ℛ_{(1)}` if and only if the central
+> charge takes the critical value `c = 26`**, namely the space `(L_{(−2)} + (3/2)L²_{(−1)})ℛ_{(−1)}`
+> (see [27] for the calculations). **The existence of these additional null physical states is used in the
+> proof of the no-ghost-theorem [26].**"
+
+（`ℛ_{(n)}` = 权 `n` 的 primary states；**(2.63)** `g_ℱ := ℛ_{(1)}/L_{(−1)}ℛ_{(0)}` = 物理态李代数；
+**(2.64)** `L_{(−1)}ℱ_{(0)} ∩ ℛ_{(1)} = L_{(−1)}ℛ_{(0)}`，正文说这在**任何**顶点代数里都成立。）
+
+## 37. 卡 (B)：Borcherds / Jacobi 恒等式与对易子公式的带编号来源
+
+### 37.1 Gebert, *Introduction to vertex algebras, Borcherds algebras and the Monster Lie algebra*（L4，ar5iv 中介）
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | Reinhold W. Gebert | L2 |
+| 出处 | **Int. J. Mod. Phys. A8 (1993) 5441–5504**；preprint **DESY 93-120**；**arXiv:hep-th/9308151** | L2/L4 |
+
+**ar5iv HTML 读取（L4，检索中介转述，非我逐字读图）：**
+
+- **Jacobi 恒等式**是 §3.1 **Definition 1 的第 5 条**（形式变量版在定义的枚举列表里，**无独立公式号**）；
+  其**模式展开版**是**公式 (27)**，附条件 "for all ψ,φ,ξ ∈ ℱ, l,m,n ∈ ℤ"。
+- **★ 对易子公式 = 公式 (29)**，正文标签逐字 "(Commutator formula)"：
+  `[ψ_m, φ_n] = Σ_{i≥0} C(m,i) (ψ_i φ)_{m+n−i}`
+  —— **这正是卡 (B) 要的那条公式**，且与任务书给的形状一致（`i` ↔ `k`）。
+- 引言逐字：「In Section 4 we construct this important class of examples of vertex algebras (**cf. [Borc86]**).」
+  ⇒ Gebert 把格点顶点代数的出处指给 **Borcherds 1986（PNAS）**，**不是** FLM、**不是** Frenkel–Kac。
+- **⚠ 截断**：ar5iv 渲染在 §3.6 "Symmetry products" 处截断，**§4（even lattices）正文未取到**，
+  所以「Gebert 对号差的假设」本轮**仍是 L0**。
+
+*（本节按来源逐个追加。）*
+
+### 37.2 ★★★ Borcherds 1986 PNAS §4 的**原始公理 (i)–(v)**（L1 全文读图，逐字）
+
+出处同 §36.2（作者主页重排本）。**Section 4. Vertex Algebras.** 全文逐字：
+
+> "We will list some identities satisfied by the operators `u_n` and show how to construct Lie algebras
+> from them. `u`, `v`, and `w` denote elements of `V`, and 1 is the unit of `V`.
+> **For any even lattice `R` the operators `u_n` on `V` satisfy the following relations.**
+>
+> (i) `u_n(w) = 0` for `n` sufficiently large (depending on `u, w`). This ensures convergence of the following formulae.
+> (ii) `1_n(w) = 0` if `n ≠ −1`, `w` if `n = −1`.
+> (iii) `u_n(1) = D^{(−n−1)}(u)`.
+> (iv) `u_n(v) = Σ_{i≥0} (−1)^{i+n+1} D^{(i)}(v_{n+i}(u))`.
+> (v) `(u_m(v))_n(w) = Σ_{i≥0} (−1)^i C(m,i)( u_{m−i}(v_{n+i}(w)) − (−1)^m v_{m+n−i}(u_i(w)) )`.
+> (The binomial coefficient `C(m,i)` is equal to `m(m−1)…(m−i+1)/i!` if `i ≥ 0` and 0 otherwise.)"
+
+（原文用 `\binom{m}{i}`，我这里写成 `C(m,i)`；`D^{(i)}` 定义见 Section 2 (ii)：`D` 是导子，`D^{(i)} := D^i/i!`。）
+
+**⚠★ 关键的负面结论——这条必须写进图，否则会被审计打回：**
+**Borcherds 的 (v) 不是任务书要的对易子公式。** (v) 是 Borcherds 恒等式的
+**「迭代 / 结合律」形式**（左边是单个 `(u_m(v))_n(w)`）。
+任务书要的 `[a_(m), b_(n)] = Σ_k C(m,k)(a_(k)b)_(m+n−k)` 左边是**对易子**，是同一个 Jacobi 恒等式的**另一半**。
+**从 (v) 推出对易子公式是一步真实的推导，Borcherds 1986 原文没有写出来。**
+⇒ 卡 (B) 若引 Borcherds 1986，必须标 `inferred: true`，或改引下面给出对易子公式**显式**的来源
+（Gebert 公式 (29)、Kac (4.8.x)、Schottenloher Thm 10.10 第 5 条）。
+
+**模的定义（L1 逐字，Section 4 后段）** ——卡 (A) 的「动量塔是其模」用得上：
+
+> "A module over a vertex algebra `V` is a module `W` with operators `u_n` on `W` satisfying relations
+> *i*–*v* above for `u, v` in `V`, `w` in `W`. In particular `V` is a `V` module."
+
+> "If `V` is any vertex algebra then `V/DV` is a Lie algebra, where `DV` is the sum of all the spaces
+> `D^{(i)}(V)` for `i ≥ 1` and where the Lie algebra product is `[u,v] = u₀(v)`.
+> Note that `u₀(v)` is not antisymmetric on `V`. Any `V` module `W` becomes a module for the Lie algebra
+> `V/DV` by letting `v` in `V/DV` act as `v₀` on `W`."
+
+**模的定义也对号差零假设**（沿用 §4 开头的 "for any even lattice"）。
+
+### 37.3 ★★★ **本轮卡 (B) 的最佳来源**：Gebert–Nicolai, *CMP* **172** (1995) 571–622，**式 (2.38)**（L1 读图）
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | R. W. Gebert, H. Nicolai | L1 |
+| 标题 | *On `E₁₀` and the DDF Construction* | L1（页眉） |
+| 出处 | **Commun. Math. Phys. 172 (1995) 571–622**；Communicated by R. H. Dijkgraaf | L1 |
+| **获取** | **`https://pure.mpg.de/rest/items/item_153125_1/component/file_153124/content`**（2.5 MB，出版方排版扫描） | L1 |
+| **页码换算** | **PDF 页 = 刊页 − 570**（PDF p.3 = 刊 p.573） | L1 |
+
+#### (a) 顶点代数的公理表（刊 p.578，L1 逐字）
+
+> "We shall give **a definition of vertex algebra [15] using the notation of [21]** which we believe is
+> more accessible to physicists.
+> A **vertex algebra** is a ℤ-graded vector space `ℱ = ⊕_{n∈ℤ} ℱ_{(n)}` **(2.22)**, equipped with a linear
+> map `𝒱 : ℱ → (End ℱ)[[z, z^{−1}]]` … and the vertex operators satisfy the following axioms:
+> 1. **(Regularity)** … `Res_z[z^n 𝒱(ψ,z)φ] = 0` for `n` sufficiently large **(2.23)**
+> 2. **(Vacuum)** … `𝒱(1,z) = id_ℱ` **(2.24)**
+> 3. **(Injectivity)** … `𝒱(ψ,z) = 0 ⟺ ψ = 0` **(2.25)**
+> 4. **(Conformal vector)** … `𝒱(ω,z) = Σ_{n∈ℤ} L_{(n)} z^{−n−2}` **(2.26)**,
+>    a) gives the **Virasoro algebra** with some central charge `c ∈ ℝ`,
+>    `[L_{(m)}, L_{(n)}] = (m−n)L_{(m+n)} + (c/12)(m³−m)δ_{m+n,0}` **(2.27)**;
+>    b) translation generator `L_{(−1)}` **(2.28)**; c) grading via `L_{(0)}` **(2.29)**
+> 5. **(Jacobi identity)** … `z₀^{−1}δ((z₁−z₂)/z₀)𝒱(ψ,z₁)𝒱(φ,z₂) − z₀^{−1}δ((−z₂+z₁)/z₀)𝒱(φ,z₂)𝒱(ψ,z₁)
+>    = z₂^{−1}δ((z₁−z₀)/z₂)𝒱(𝒱(ψ,z₀)φ, z₂)` **(2.30)**"
+
+> "A **vertex operator algebra** is a vertex algebra with the additional assumptions that
+> 1. **the spectrum of `L_{(0)}` is bounded below**, 2. the eigenspaces `ℱ_{(n)}` of `L_{(0)}` are
+> finite-dimensional."（刊 p.579，L1 逐字）
+
+> **⚠★ 这一条对本项目极重要**：洛伦兹格上 `L_{(0)}` 的谱**不下有界**（类时动量），
+> 所以「`V_{II_{25,1}}` 是 vertex algebra 但**不是** vertex operator algebra」。
+> **卡 (A) 必须写 "vertex algebra"，绝不能写 "vertex operator algebra"。**
+> （**已结案**：GN 自己在刊 p.583 §2.2 把这条说出来了——「positive definite ⇒ vertex **operator** algebra」，
+> 见 **§36.5**。所以这不再是我的推断，**有来源**。）
+
+#### (b) ★★★ 模式形式的三条公式（刊 p.580，L1 逐字）——**卡 (B) 直接命中**
+
+> 5. **(Jacobi identity)**
+> `Σ_{i≥0} (−1)^i C(l,i) ( ψ_{l+m−i}(φ_{n+i}ξ) − (−1)^l φ_{l+n−i}(ψ_{m+i}ξ) ) = Σ_{i≥0} C(m,i) (ψ_{l+i}φ)_{m+n−i} ξ,`
+> &nbsp;&nbsp;**(2.36)** &nbsp; for all `ψ, φ, ξ ∈ ℱ`, `l, m, n ∈ ℤ`.
+
+> "In what follows we will frequently make use of two important formulas which are **the special cases
+> `m = 0` and `l = 0`, respectively, of Eq. (2.36)**:
+>
+> **(Associativity formula)** `(ψ_lφ)_n = Σ_{i≥0} (−1)^i C(l,i) ( ψ_{l−i}φ_{n+i} − (−1)^l φ_{l+n−i}ψ_i )` &nbsp;**(2.37)**
+>
+> **★ (Commutator formula)** `[ψ_m, φ_n] = Σ_{i≥0} C(m,i) (ψ_i φ)_{m+n−i}` &nbsp;**(2.38)**
+>
+> for all `ψ, φ, ξ ∈ ℱ`, `l, m, n ∈ ℤ`."
+
+**⇒ 式 (2.38) 与任务书给的 `[a_(m), b_(n)] = Σ_k C(m,k)(a_(k)b)_(m+n−k)` 逐字一致（`i ↔ k`）。**
+**这是本轮唯一一个「带编号 + 同行评议 + 我逐字读到」的对易子公式来源。**
+而且原文**明说**它是 Jacobi 恒等式 (2.36) 的 `l = 0` 特例 —— 卡 (B) 的「Borcherds 恒等式 ⇒ 对易子公式」
+这一步在这里**有出处，不必标 inferred**。
+
+**⚠ 记号陷阱（刊 p.581，L1）**：GN 同时用两套模式展开——
+`𝒱(ψ,z) = Σ_n ψ_n z^{−n−1}` **(2.31)**（形式演算用，圆括号**外**）与
+`ψ(z) = Σ_n ψ_{(n)} z^{−n−Δ_ψ}` **(2.47)**（CFT 用，圆括号**内**），换算是
+`ψ_n ≡ ψ_{(n+1−Δ_ψ)}`，`ψ_{(n)} ≡ ψ_{n−1+Δ_ψ}` **(2.48)**。
+**(2.38) 用的是不带圆括号的 `ψ_m`（即 (2.31) 那套）。**引用时必须连这条换算一起写，否则会与 Virasoro 的
+`L_{(n)}` 记号打架。
+
+其余顺带取到的编号（L1）：**(2.41)** `[L_{(n)}, 𝒱(φ,z)] = Σ_{i≥−1} C(n+1, i+1) 𝒱(L_{(i)}φ, z) z^{n−i}`；
+**(2.42)/(2.43)** 其 `n = −1, 0` 特例；**(2.50)/(2.51)** 斜对称；**(2.52)** `𝒱(ψ,z)1 = e^{zL_{(−1)}}ψ`；
+**(2.40)** `L_{(−1)}1 = 0`；**(2.16)** `Res_z[w(z)] = w_{−1}`；**(2.17)** `w_n = Res_z[z^{−n−1}w(z)]`。
+
+### 37.4 ★★ Bakalov–Kac, arXiv:math/0402315：**(2.19) Borcherds 恒等式 + (2.21) 对易子公式 + Theorem 4.1**（L1 读图）
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者 | Bojko Bakalov (NCSU), Victor G. Kac (MIT) | L1 |
+| 标题 | *Twisted Modules over Lattice Vertex Algebras* | L1（页眉逐字） |
+| id / 出处 | **arXiv:math/0402315**；出版于 *Lie Theory and Its Applications in Physics V*, World Sci., 2004, pp. 3–26 | L1 / L2 |
+| 获取 | `https://arxiv.org/pdf/math/0402315` → 落盘 213 KB → `Read(pages=)`；**PDF 页 = 文章页** | L1 |
+
+**为什么它重要**：Kac 本人是作者，且 §4.1 开头逐字写「**For more details, see [13]**」（[13] = Kac 的书），
+**所以这是「Kac 书 §5.4/5.5 内容」的作者背书版，且它是公开可取的**。
+
+#### (a) **Definition 2.1**（顶点代数，p.3，L1 逐字要点）
+
+局域性公理 + `(2.14)` 平移协变 `[T, Y(a,z)] = ∂_z Y(a,z)` + `(2.15)(2.16)` 真空公理；
+`(2.13)` `a ↦ Y(a,z) = Σ_{m∈ℤ} a_{(m)} z^{−m−1}`；`(2.17)` `Ta = a_{(−2)}|0⟩`；`(2.18)` 斜对称 `Y(a,z)b = e^{zT}Y(b,−z)a`。
+
+> "The most important property of a vertex algebra `V` is the following **Borcherds identity**
+> (which along with the vacuum axioms provides **an equivalent definition** of a vertex algebra):
+> `Res_{z−w} Y(Y(a, z−w)b, w) i_{w,z−w} F(z,w)`
+> `= Res_z Y(a,z)Y(b,w) i_{z,w} F(z,w) − Res_z Y(b,w)Y(a,z) i_{w,z} F(z,w)` &nbsp;&nbsp;**(2.19)**
+> for any `a, b ∈ V` and **any rational function `F(z,w)` with poles only at `z = 0`, `w = 0` or `z = w`**."
+
+> "Let us give some consequences of the Borcherds identity. Taking `F(z,w) = (z−w)^n δ(u−z)`,
+> viewed as a series in `u, u^{−1}`, we obtain
+> `Y(a,z)Y(b,w) i_{u,w}(u−w)^n − Y(b,w)Y(a,u) i_{w,u}(u−w)^n = Σ_{m=0}^{∞} Y(a_{(m+n)}b, w) ∂_w^{(m)} δ(u−w).`
+> &nbsp;&nbsp;**(2.20)**
+> **For `n = 0` this gives the commutator formula**
+> `[Y(a,u), Y(b,w)] = Σ_{m=0}^{∞} Y(a_{(m)}b, w) ∂_w^{(m)} δ(u−w),` &nbsp;&nbsp;**(2.21)**
+> (which implies locality). Taking `Res_u` of (2.20), we get
+> `Y(a,w)_{(n)}Y(b,w) = Y(a_{(n)}b, w), n ∈ ℤ.` &nbsp;&nbsp;**(2.22)**"
+
+**⚠ 注意 (2.21) 是「场版」对易子公式（带 `δ` 函数），不是任务书要的「模式版」
+`[a_(m), b_(n)] = Σ_k C(m,k)(a_(k)b)_(m+n−k)`。**两者由取 `Res` 相联，但 **Bakalov–Kac 没写模式版**。
+⇒ **卡 (B) 的模式版仍应首引 Gebert–Nicolai (2.38)**（§37.3），Bakalov–Kac (2.19)/(2.21) 作第二来源。
+（**扭转版**倒是给了模式版：**Remark 3.1 的 (3.7)** 是含 `σ`-扭转的 Borcherds 恒等式模式展开，
+`σ = 1` 时退化为普通情形——但要读者自己取 `σ=1`，属额外一步。）
+
+#### (b) ★★★ **Theorem 4.1**（p.9，L1 逐字）——**对格的假设弱到只剩「integral」**
+
+§4.1 开头（p.8，L1 逐字）：
+
+> "**4.1. Lattice Vertex Algebras.** The purpose of this subsection is to fix the notation and review some
+> properties of lattice vertex algebras. **For more details, see [13].**
+> **Let `Q` be an integral lattice of rank `l`.** We denote the bilinear form on `Q` by `(·|·)`, and write
+> `|α|² = (α|α)` for `α ∈ Q`. We extend the bilinear form to **`𝔥 = ℂ ⊗_ℤ Q`** by ℂ-bilinearity.
+> There exists a bimultiplicative function `ε : Q × Q → {±1}` satisfying
+> `ε(α,α) = (−1)^{|α|²(|α|²+1)/2}` **(4.1)** … `ε(α,β)ε(β,α) = (−1)^{(α|β)+|α|²|β|²}` **(4.2)**
+> … the **twisted group algebra `ℂ_ε[Q]`** … `e^α e^β = ε(α,β)e^{α+β}` **(4.3)**"
+
+> "Let `ĥ = 𝔥[t,t^{−1}] ⊕ ℂK` be the **Heisenberg current algebra**; this is a Lie algebra with the bracket
+> `[ht^m, h't^n] = m δ_{m,−n}(h\|h')K`, `[ht^m, K] = 0` **(4.4)**.
+> It has a **unique irreducible representation of level 1** (i.e., with `K = 1`) on the Fock space
+> `S = S(𝔥[t^{−1}]t^{−1})` such that `𝔥[t^{−1}]t^{−1}` acts by multiplication and `𝔥[t]1 = 0`.
+> This representation extends to the space **`V_Q = S ⊗ ℂ_ε[Q]`**"
+
+> "**Theorem 4.1.** *The fields `Y(ht^{−1}, z) = h(z)` (`h ∈ 𝔥`), of parity 0, and `Y(e^α, z) = Y_α(z)`
+> (`α ∈ Q`), of parity `p(e^α) = |α|² mod 2ℤ`, **generate a vertex algebra structure on
+> `V_Q = S ⊗ ℂ_ε[Q]`** with the vacuum vector `|0⟩ = 1 ⊗ 1` and the operator `T` defined by
+> `[T, ht^m] = −m ht^{m−1}`, `Te^α = (αt^{−1})e^α`, `h ∈ 𝔥, α ∈ Q`. **(4.15)**
+> **This vertex algebra is conformal of rank `l = rank Q`** with the conformal vector
+> `ν = ½ Σ_{i=1}^{l} (a^i t^{−1})(b^i t^{−1})`, **(4.16)**
+> where `{a^i}, {b^i}` are **dual bases** of `𝔥`.*"
+
+**假设总结（L1）**：只要求 **`Q` 是 integral lattice**。
+**没有 even**（用 ℤ₂-分次 (4.8)/(4.9) 处理奇的情形 ⇒ 一般是**顶点超代数**；`Q` 偶 ⇒ 宇称全 0 ⇒ 普通顶点代数）、
+**没有 positive definite**、**没有明写 nondegenerate**（但 (4.16) 的 "dual bases of `𝔥`" **隐含**非退化）。
+
+#### (c) ★★★ 红旗：**Theorem 4.1 的「conformal」与它自己的 Definition 2.2(iii) 在不定号差下打架**
+
+> "**Definition 2.2.** A vertex algebra `V` is *conformal* of central charge (or rank) `c ∈ ℂ` if there exists
+> a vector `ν ∈ V` (the conformal vector) with the following properties: (i) … Virasoro … (ii) `L_{−1}` is `T`
+> … **(iii) The operator `L_0` is diagonalizable with a non-negative spectrum.**" （p.4，L1 逐字）
+> "The operator `L_0` defines a gradation of `V`, **`V = ⊕_{Δ≥0} V(Δ)`**" **(2.24)**（p.4，L1）
+
+`V_Q` 上 `L_0` 在 `e^α` 上的本征值是 `|α|²/2`。**`Q` 不定 ⇒ 存在 `|α|² < 0` ⇒ 谱不下有界 ⇒ 违反 (iii)。**
+但 Theorem 4.1 对**任意** integral `Q` 都断言 "This vertex algebra is conformal of rank `l`"。
+
+**⇒ 结论（这是我的核对，不是原文自述）：Bakalov–Kac Theorem 4.1 的「conformal」一句
+在不定号差下与其 Definition 2.2(iii) 不相容；要么正定是未写出的隐含假设，要么 (iii) 在这里被默默放宽。**
+**图里若引 Theorem 4.1，只能引它的前半句「generate a vertex algebra structure on `V_Q`」，
+不得连「conformal of rank `l`」一起引**，否则会把一条不自洽的陈述带进图。
+这与 §36.5 的 Gebert–Nicolai 划分（非退化偶 ⇒ VA；再正定 ⇒ VOA）完全一致——
+**GN 的划分是对的，Bakalov–Kac 这句是松的。**
+
+## 38. 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+### 38.1 ★ 先看这张：本轮结论表
+
+| 问题 | 答案 | 等级 |
+|---|---|---|
+| **不定号差被哪本书哪个编号覆盖？** | **没有任何一本书用「不定号差」这个词给出带编号定理。**覆盖它的是**「非退化」这个更弱的条件**，而在 ℂ 上号差根本不是不变量。最干净的**带编号**覆盖是 **Li–Wang arXiv:0802.0173 Theorem 3.6**（假设只有 (3.5) `⟨α,α⟩∈2ℤ`）与 **Bakalov–Kac math/0402315 Theorem 4.1**（假设只有「`Q` integral」）。最干净的**成句**覆盖是 **Gebert–Nicolai CMP 172 (1995) p.583 §2.2**（无编号）。 | L1 |
+| 「洛伦兹格 ⇒ 顶点代数」是否成立 | **成立**，且**不需要**任何号差假设 | L1 |
+| 「洛伦兹格 ⇒ 顶点**算子**代数」 | **不成立**（需正定）。GN p.583 明写；Bakalov–Kac Def 2.2(iii) 也蕴含这一点 | L1 |
+| 类光 `k₀`（格退化） | **Borcherds §5**（`L_i`, `i ≥ −1` 在 singular 格上仍有定义）+ **Li–Wang §4 标题 `⟨·,·⟩\|_L = 0`** 双覆盖 | L1 |
+| 卡 (B) 对易子公式的最佳带编号来源 | **Gebert–Nicolai (2.38)**（模式版，且原文明说是 Jacobi (2.36) 的 `l=0` 特例） | L1 |
+| Kac 书 §5.4/5.5 的定理号 | **未核实（L0）**，见 §38.2 | L0 |
+| LL Thm 6.5.x | **未核实（L0）**，见 §38.2 | L0 |
+| FLM §8.4–8.6 Thm 8.x | **未核实（L0）**，连 §8 标题都没拿到 | L0 |
+
+### 38.2 ⚠ 未能核实的候选（**一律不写进图，`sources.bib` 也只登记书目不登记编号**）
+
+| 候选 | 本轮拿到什么 | 等级 | 结论 |
+|---|---|---|---|
+| **Kac, *VA for Beginners* 2nd ed. §5.4/5.5** | 检索后端给章节标题：**§5.4 "Lattice vertex algebras"、§5.5 "Simple lattice vertex algebras"、§5.6 "Root lattice vertex algebras and affine vertex algebras"**；**任务书猜的「Theorem 5.5」实际上 5.5 是节号不是定理号**，很可能是误读 | **L4** | **不得写 `Kac, Theorem 5.5`。**§5.4/5.5 的**定理号与号差假设本轮完全没拿到**。Kac 本人勘误表（`math/9901070`，§10 已读）**只覆盖到第 4 章，不含第 5 章** ⇒ 勘误表这条路对第 5 章无效 |
+| **Kac, (4.8.3) Borcherds identity / Thm 4.8** | §10.1 已由勘误表 L1 确认**存在** Theorem 4.8 与 **(4.8.1)**；**任务书写的 (4.8.3) 本轮无任何证据** | L1（4.8.1）/ **L0**（4.8.3） | 引 Kac 时只能写 **Theorem 4.8 / (4.8.1)**，**不要写 (4.8.3)** |
+| **Lepowsky–Li §6.3–6.5, Thm 6.5.x** | 检索后端转述某学位论文引 **「[LL] Theorem 6.2.11 and Theorem 6.3.2」**与**「[LL] Theorem 5.7.1」**；另有来源按**节**引「[LL04] Sections 6.4 and 6.5」。**任务书点名的 6.5.3 没有任何证据** | **L4** | **不得写 `LL, Theorem 6.5.3`。**Li–Wang 全篇引 [LL] 都写 "It is well known (cf. [LL])"，**一个定理号都不给** ⇒ 这个方向本轮彻底堵死。上一轮就是卡在这里停摆的，**建议下一轮改走 DNB TOC 扫描件路线**（见 §38.6） |
+| **FLM 1988 §8.4–8.6 Thm 8.x** | **零证据**。三份参考文献表只给书目；转引到的 FLM 编号全在**第 1、4、5 章**（Thm 1.7.3 / §1.7 / Prop 4.1.1 / Ch. 5），**没有一条落在第 8 章** | **L0** | **不得写 `FLM, Theorem 8.x`。**任务书假设「FLM 处理一般非退化偶格含洛伦兹」**本轮既未证实也未证伪** |
+| **Frenkel–Ben-Zvi §5.2/5.4** | 本轮**未查**（预算用于更高价值目标）。§9 与记忆里记的 FBZ 勘误表覆盖的是 **Thm 3.2.1 / Prop 3.2.8 / Lemma 3.2.6**，不含第 5 章 | **L0** | 留给下一轮 |
+| **Dolan–Goddard, *Conformal vertex algebras*** | 任务书给的 arXiv:1305.3757 **未核实该 id 是否对应此文**；本轮未查 | **L0** | 留给下一轮。**注意**：GN 引的 Goddard 是 **1989「Meromorphic conformal field theory」（会议文集，非 arXiv）**，与 Dolan–Goddard 是两回事，别混 |
+| **Gebert 1993 综述（hep-th/9308151）** | ar5iv 中介给到 **Jacobi 恒等式 = Definition 1 第 5 条 + 模式版公式 (27)**、**对易子公式 = 公式 (29)**；**§4（even lattices）被截断，号差假设未取到** | **L4** | 公式号 (27)/(29) 与 GN 的 (2.36)/(2.38) 一一对应，互为旁证；但**未逐字读过**，**不作为唯一依据**，也**不登记进 `sources.bib`** |
+
+### 38.3 卡 (A)「洛伦兹格顶点代数 + 动量塔是其模」——建议挂三条独立推导
+
+**陈述文本建议（researcher 的措辞建议，curator 可改）：**
+
+> 设 `𝔥` 是 `D` 维复向量空间、带非退化对称双线性型（其实形式的号差为 `(D−1,1)`，见下文约定注）；
+> 设 `L ⊂ 𝔥` 是加法子群且 `⟨α,α⟩ ∈ 2ℤ (∀α ∈ L)`。则 `V_{(𝔥,L)} = ℂ_ε[L] ⊗ M(1)` 带 (3.10) 定义的 `Y`、
+> 真空 `e⁰⊗1`，构成一个**顶点代数**（**不是**顶点算子代数）；其不可约模由 `λ ∈ L°/L` 与一个不可约
+> restricted `ℒ₁`-模参数化。
+
+| 推导 | 来源 | 建议 `status` | 说明 |
+|---|---|---|---|
+| **D1（首选）** | `li-wang-2008`，**Theorem 3.6**（loc: `Thm 3.6, p.13, arXiv:0802.0173v1`）+ **Theorem 3.10** + **(3.17)** | **`rigorous`** | 唯一一条**带编号 + 有完整证明 + 假设弱到覆盖类光**的。**动量塔**直接是 Thm 3.10 + (3.17) |
+| **D2** | `borcherds-1986`，**Section 4, relations (i)–(v)**（loc: `Sec. 4`，**不要写页码、不要写 Theorem**） | **`rigorous`** | 原始文献。逐字 "For any even lattice R"。**但无编号、无证明细节**，且 `L_i` 只在 `i ≥ −1` 上有定义（Section 5） |
+| **D3** | `bakalov-kac-2004`，**Theorem 4.1 前半句**（loc: `Thm 4.1, p.9`） | **`rigorous`** | 假设最弱（只要 integral）。**必须在 note 里写明「不引其 conformal 断言」**（§37.4(c) 的红旗） |
+
+**必须一并写进节点的四条限制：**
+
+1. **只能说 "vertex algebra"，不能说 "vertex operator algebra"。** 来源：`gebert-nicolai-1995` p.583 §2.2（`inferred: false`）。
+2. **`⊗ ℂ[ℤk₀]` 一般要换成扭群代数 `ℂ_ε[L]`。** 来源：`gebert-nicolai-1995` p.585 逐字。
+   秩 1 类光时可退化为普通群代数——**这一步标 `inferred: true`**（§36.5 末）。
+3. **`L_n` 只对 `n ≥ −1` 定义（当 `L` 退化时）。** 来源：`borcherds-1986` Section 5 逐字。
+4. **号差在 ℂ 上不可见**：`graph/conventions/` 里若已有「度规号差 `(−,+,…,+)`」约定，
+   本节点**不应**声明依赖它——真正依赖号差的是**内积/鬼态**那一族节点，不是本节点。
+   建议 curator 在本节点 note 里显式写这句，防止 reviewer 误判缺约定声明。
+
+**新增中心荷子节点（可选）**：`c = dim 𝔥 = D`。
+来源二选一：`li-wang-2008` p.10（"vertex operator algebra of central charge `d = dim 𝔥`"，L1 逐字，但**它说的是 `M(1)` 即纯 Heisenberg，正定情形**）
+或 `borcherds-1986` Section 5 的 `[L_i,L_j]` 公式读数（**读数属推断，标 `inferred: true`**）。
+
+### 38.4 卡 (B)「Borcherds/Jacobi 恒等式 + 对易子公式」——建议拆成两张卡
+
+**⚠ 本轮最重要的结构性发现：任务书把两条不同强度的陈述写在一张卡上了。**
+
+| 子卡 | 内容 | 首选来源 | `status` |
+|---|---|---|---|
+| **B1** | **Borcherds/Jacobi 恒等式**（公理，或与真空公理一起构成顶点代数的等价定义） | `bakalov-kac-2004` **(2.19)**（loc: `eq. (2.19), p.3`）——逐字自称 "provides **an equivalent definition** of a vertex algebra"；第二来源 `gebert-nicolai-1995` **(2.30)**（形式变量版）/ **(2.36)**（模式版） | `rigorous` |
+| **B2** | **对易子公式** `[a_(m), b_(n)] = Σ_k C(m,k)(a_(k)b)_(m+n−k)` | **`gebert-nicolai-1995` (2.38)**（loc: `eq. (2.38), p.580`）——**模式版，逐字，且原文明说是 (2.36) 的 `l = 0` 特例** | `rigorous` |
+
+**B1 → B2 这条边**：**有来源，不必标 `inferred`**——GN p.580 逐字「which are the special cases `m = 0` and `l = 0`,
+respectively, of Eq. (2.36)」。**这是本轮把这条边从 `inferred` 提升为有据的关键收获。**
+
+**不要这样引（会被审计打回）：**
+- ❌ `borcherds-1986, (v)` 当作对易子公式——(v) 是**迭代/结合律**形式，不是对易子（§37.2）。
+- ❌ `bakalov-kac-2004, (2.21)` 当作模式版对易子公式——(2.21) 是**场版（带 `δ` 函数）**（§37.4(a)）。
+- ❌ `Kac, (4.8.3)` ——该编号无任何证据（§38.2）。
+- ❌ 任何 `LL, Theorem 6.5.x`（§38.2）。
+
+**已有的第三来源**（本文件既有小节，可交叉挂）：`schottenloher-2008` **Theorem 10.10 第 5 条**（§11、§11A.3），
+注意那里印本印作 `j = 1` 而正确下限是 `j = 0`，引用时必须留痕。
+
+### 38.5 与既有图节点的关系（researcher 的观察，不是指令）
+
+- `sources.bib` 里 **`gebert-nicolai-1995` 的既有 note 已经记了 (2.36)/(2.37)/(2.38)**，
+  说明前一轮已经读到过 p.580。本轮的增量是：**(a) 把 §2 的自引全部解开（[6]/[15]/[17]/[19]/[21]/[26]/[27]）；
+  (b) 拿到 p.583 §2.2 的号差判据；(c) 结掉该条目里「[26]/[27] 身份未核实」这个 L0。**
+- 本轮**没有**找到任何来源证明「带不定 Hermitian 内积的顶点代数」的带编号定理。
+  **无鬼定理回 `rigorous` 的真瓶颈不在卡 (A)/卡 (B)**——这两张卡本轮都能挂到 `rigorous` 来源上；
+  瓶颈在**内积/正定性那一层**（Borcherds Section 2 (v) 的那个不定内积）。
+  这与本文件 §14.2 记的缺口、以及记忆 `lit-ope-vertex-algebra-numbered-theorems` 末尾的缺口**是同一个**。
+
+### 38.6 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Borcherds 1986 PNAS 全文** | **`math.berkeley.edu/~reb/papers/va/va.pdf`** | **成功**（112 KB，5 页全读；**作者主页 `~reb/papers/` 目录页可列出 38 篇的相对路径**） |
+| **Li–Wang 全文** | `arxiv.org/pdf/0802.0173` | **成功**（246.9 KB；读 pp.1–3, 10–20） |
+| **Bakalov–Kac 全文** | `arxiv.org/pdf/math/0402315` | **成功**（213 KB；读 pp.3–5, 8–12。**老式 `math/` id 在 PDF 路由下可用**） |
+| **Gebert–Nicolai 全文** | `pure.mpg.de/rest/items/item_153125_1/component/file_153124/content` | **成功**（2.5 MB 扫描 PDF；读刊 pp.573–586, 620–622。**PDF 页 = 刊页 − 570**） |
+| Gebert 1993 综述 | `ar5iv.labs.arxiv.org/html/hep-th/9308151` | **部分成功**：拿到 (27)/(29)，**§4 被截断** |
+| Li–Wang 编号（中介） | `ar5iv.labs.arxiv.org/html/0802.0173` | 成功（后被 PDF 逐字复核，**中介转述的 Thm 3.6/3.10/4.1 全部属实**） |
+| Bakalov–Kac（中介） | `arxiv.org/html/math/0402315` | **意外成功**（老论文竟有 HTML；其「[13] 无章节号」的判断被 PDF 证实） |
+| Albany 学位论文（LL 编号） | `scholarsarchive.library.albany.edu/cgi/viewcontent.cgi?article=1424&context=legacy-etd` | **失败：HTTP 403**（**新增死路**） |
+| arXiv abs 页取正文 | `arxiv.org/abs/1801.03753` | **失败（自找的）**：abs 页只有摘要。**记忆里已有这条纪律，本轮仍踩了一次** |
+| Kac 书 §5.4/5.5 | WebSearch ×2 | 只拿到**节标题**（L4），无定理号 |
+| LL Thm 6.5.x | WebSearch ×2 | 只拿到他人转引的 **6.2.11 / 6.3.2 / 5.7.1**（L4），**6.5.3 无证据** |
+
+> **本轮新增的可复用路线**：
+> **★ 作者主页 `math.berkeley.edu/~reb/papers/` 是 Borcherds 全部 38 篇论文的免费 TeX/dvi/PDF 目录**，
+> 路径形如 `~reb/papers/<slug>/<slug>.pdf`（`va` = PNAS 1986，`fake` = 1990 monster Lie algebra，
+> `monster` = 1992 Invent. Math.，`vertex` = 1998，`bonn` = "What is a vertex algebra?"）。
+> **对 pre-arXiv 的 1980 年代论文，这比任何聚合器都干净**——但注意是**作者重排本，页码与期刊不一致**。
+
+**未解决 / 留给下一轮：**
+
+- **Q30** **Kac, *VA for Beginners* 2nd ed. §5.4/5.5 的定理编号与对格的假设（L0）。**
+  勘误表只到第 4 章，Google Books 只给页码不给内容。**下一招建议：DNB TOC 扫描件
+  `d-nb.info/<IDN>/04`**（记忆里这招破过 Bourbaki 的 Springer 登录墙），或找一篇**逐字引用 §5.4/5.5 定理号**的论文。
+- **Q31** **Lepowsky–Li Chapter 6 的定理编号（L0）——这是上一轮停摆的同一堵墙。**
+  已知他人转引存在 **6.2.11 / 6.3.2 / 5.7.1**；**6.5.3 无任何证据，很可能任务书记错了。**
+  下一招：Birkhäuser/Springer 的 DNB TOC 扫描件；或 Google Books 卷 `dlxCFmV1dKIC`
+  （**先跑无意义字符串对照实验**，见记忆 `web-fetch-access-blockers`）。
+- **Q32** **FLM 1988 §8 的标题与定理号（L0）。** 本轮零证据。任务书的假设「FLM §8.4–8.6 处理含洛伦兹的
+  一般非退化偶格」**既未证实也未证伪**。注意 FLM 全书的 lattice 构造**主要在第 7–8 章**（未核实）。
+- **Q33** **Borcherds 主页重排本与 PNAS 印本是否逐字一致。** 可用 PMC 扫描件（记忆里 FGZ 1986 = PMC386946
+  的页图路线适用于同期 PNAS）复核 Section 4 的 (i)–(v)。**在复核前，`loc:` 一律写节号不写页码。**
+- **Q34** **Bakalov–Kac Theorem 4.1「conformal of rank l」与 Definition 2.2(iii) 的不相容**（§37.4(c)）。
+  这是我自己的核对结论，**没有第二来源**。若 curator 要在图里写「某某文献此处有松处」，
+  建议先找一篇指出同一问题的文献；否则只在 note 里写「本项目核对发现」。
+- **Q35** **Frenkel–Ben-Zvi §5.2/5.4 与 Dolan–Goddard（arXiv:1305.3757 的 id 是否正确）本轮未查。**
+- **Q36** **「不定 Hermitian 内积下的顶点代数」仍无任何带编号定理**（§38.5）。这是无鬼定理回 `rigorous`
+  的真瓶颈，与 §14.2 / 记忆 `lit-ope-vertex-algebra-numbered-theorems` 末尾记的缺口是同一个。
+
+---
+
+# § 紧曲面分类定理 + RP₂/圆盘的 CKV 与模
+
+## 39. 为 `positive-euler-number-no-moduli--via-surface-enumeration` 的两个缺口找带编号来源（researcher，2026-09-11）
+
+- 触发：`graph/derivations/worldsheet/positive-euler-number-no-moduli--via-surface-enumeration.yaml`
+  的 `gaps` 第 2、3 条：「**输入 (1)（曲面分类定理）在本图中无节点、无数学来源**」、
+  「**RP₂ 的 μ = 0 则连节点都缺**」。
+- 证据等级沿用 §0。
+- ⚠ **本轮最大的意外收获与任务书的预设相反**：我用 [[reference_cambridge-core-licensed-book-pdfs]] 的路线
+  取到了 Polchinski Vol.1 **第 5 章与第 6 章的原书页图**，结果是——
+  **原书自己就给了 χ > 0 ⇒ μ = 0 的直接论证（不是枚举），也自己逐字给了 RP₂ 与圆盘的 CKG。**
+  所以该推导的 `gaps` 里有**两条已经作废、一条需要改写**（见 §39.8）。
+
+### 39.0 结论表（先看这张）
+
+| 问题 | 结论 | 最佳来源与编号 | 等级 |
+|---|---|---|---|
+| **(A) 紧曲面分类（含带边、含不可定向）** | ✅ 有带编号定理 | **Gallier–Xu (2013), Theorem 6.2**（书上 p.97） | **L1** |
+| (A) 配套：χ = 2−2p−q / 2−p−q | ⚠ **有公式、无编号** | 同书 p.89–90 行间式（Definition 6.5 之后） | L1 |
+| (A) 「χ>0 只剩 S²、D²、RP²」 | ❌ **任何来源都没有这条现成陈述** | 由 Def 6.5 + χ 公式**两行算术**导出（本文件 §39.2(e)，**是我的补步**） | — |
+| (A) 第二来源 Massey | ⚠ **Theorem 5.1 有 L1 旁证；带边那条定理号 L0** | Massey (1967) Ch. I §5/§7/§10/§11（目录 L1） | L1/L0 |
+| (A) Munkres §77 | ❌ **不对口**：只讲闭曲面、不出现 Euler 数 | Theorem 77.5（第三方逐字转引） | L2 |
+| (A) Hatcher §1.2 | ❌ **根本没有分类定理**（有编号的没有，无编号的也没有） | §1.2 末只有 Prop 1.26 / Cor 1.27 / Cor 1.28 / Ex 1.29 | **L1** |
+| **(B) RP₂：μ = 0、κ = 3、CKG = SO(3)** | ✅ **Polchinski 原书逐字有** | **Polchinski §6.1「The projective plane」，书上 p.168–169，(6.1.9) 附近，无式号** | **L1** |
+| (B) 圆盘：μ = 0、CKG = PSL(2,R) | ✅ **Polchinski 原书逐字有，且有两处** | **§6.1「The disk」p.168（(6.1.8) 之后）** 与 **§6.4 开头 p.178**，均无式号 | **L1** |
+| (B) κ = 3 这个**数字** | ✅ 由原书 **(5.2.11a) κ = 3χ** + χ = 1 得到 | Polchinski (5.2.11a)，书上 p.152 | **L1** |
+| (B) 数学侧：Aut(D) | ⚠ 分成两条、合成后无单一编号 | **Miličić Theorem 1.7.3**（Aut(D)≅SU(1,1)/{±I}）+ §1.9 无编号句（SL(2,R)≅SU(1,1)） | **L1** |
+| (B) 数学侧：Aut(P¹) = PSL(2,C) | ✅ | **Miličić Theorem 1.5.2** | **L1** |
+| (B) 数学侧：Aut(RP²) = 球面旋转群 | ✅ 有编号，但期刊层级低、证明外包 | **Cao-Huu–Ghişa, arXiv:0902.2725, Corollary 3.1** | **L1** |
+| (B) 「球面旋转群 = SO(3)、实维 3」 | ❌ 上面那条推论里**没有**这句 | — | — |
+
+---
+
+### 39.1 需求侧：这条推导到底缺什么
+
+推导 `--via-surface-enumeration` 的 `summary` 把论证拆成两步：
+
+1. **曲面分类**：χ = 2 − 2g − b − c，χ > 0 只允许 S₂、D₂、RP₂；
+2. **三个曲面各自 μ = 0**。
+
+本轮要找的就是 (1) 的数学来源、(2) 里 RP₂ 那一支的来源。
+**但读完原书之后，问题的形状变了**：原书根本不是这么论证的（§39.6），
+枚举路线是本图补写的。所以下面同时给出**两条路线各自的来源**，
+并在 §39.8 建议 curator 把它们拆成两条并列的 derivation。
+
+---
+
+### 39.2 ★★ (A) 首选来源：Gallier & Xu, *A Guide to the Classification Theorem for Compact Surfaces*（L1 全章读图）
+
+#### 39.2.0 版本陷阱（必读，与 [[gui-2023-lectures]] 那次同类）
+
+同一批内容有**两个编号互不相同的公开版本**：
+
+| | 文件 | 章节 | 分类定理编号 |
+|---|---|---|---|
+| **出版版**（Springer GTC 9, 2013） | `cis.upenn.edu/~jean/surfclassif-root.pdf`（标题页日期 **January 8, 2025**，页脚 "Philadelphia, September 2012"） | **Ch. 6** | **Theorem 6.2** |
+| **arXiv 早期版**（单作者，2008） | `arxiv.org/pdf/0805.0562`（v1） | Ch. 5 | Theorem 5.3.2 |
+
+**编号交叉表（本轮逐条对照，L1）**：
+
+| 出版版 | arXiv 版 | 内容 |
+|---|---|---|
+| Lemma 6.1 | Lemma 5.2.5 | 每个胞腔复形等价于某个规范胞腔复形 |
+| Proposition 6.1 | Proposition 5.2.2 | 每个胞腔复形可细分为三角化 2-复形 |
+| Definition 6.4 | Definition 5.2.3 | 定向 / contour |
+| **Definition 6.5** | **Definition 5.2.4** | **规范胞腔复形 type (I)/(II)** |
+| **Theorem 6.1** | **Theorem 5.3.1** | 三角化版分类定理（含带边） |
+| **Theorem 6.2** | **Theorem 5.3.2** | **紧曲面版分类定理（含带边）** |
+| Theorem 6.3 | Theorem 5.3.4 | 连通和形式（闭曲面） |
+| Definition 6.6 | Definition 5.3.3 | 连通和 |
+
+⚠ **另有一个 28 页的截断文件**：`cis.upenn.edu/~jean/surfclass-n.pdf` 与镜像
+`cs.brynmawr.edu/~dxu/surfclassif.pdf` 两次下载都只回来 2.7 MB / **28 页**（只到第 1 章），
+其目录显示的是**第三套编号**（Ch. 6 同出版版，但 Appendix B 叫「Proof of Proposition 5.1」）。
+**不要用这两个 URL 取正文。**
+
+#### 39.2.1 ★★★ **Theorem 6.2**（书上 **p.97**，L1 逐字）——这就是图里要的那条
+
+> **Theorem 6.2.** *Two compact surfaces or compact surfaces with boundary are homeomorphic iff
+> they agree in character of orientability, number of contours, and Euler–Poincaré characteristic.*
+
+同页上方的三角化版：
+
+> **Theorem 6.1.** *Two (two-dimensional) compact polyhedra or compact polyhedra with boundary
+> (triangulated compact surfaces with or without boundary) are homeomorphic iff they agree in
+> character of orientability, number of contours, and Euler–Poincaré characteristic.*
+
+Theorem 6.1 与 6.2 之间（p.96 末）作者自陈缺口，**必须随引用一起写**：
+
+> "In order to finally get a version of Theorem 6.1 for compact surfaces or compact surfaces with
+> boundary (not necessarily triangulated), it is necessary to prove that every surface and every
+> surface with boundary can be triangulated. As we said in Section 1.1, this is indeed true, but the
+> proof is far from trivial. … We will present Carsten Thomassen's proof, which we consider to be
+> the most easily accessible, in Appendix E."
+
+→ **Theorem 6.2 依赖「每个曲面可三角化」（Radó），该证明在 Appendix E，不在正文**。
+本项目若要 `rigorous`，这条依赖必须显式建边或至少写进 note。
+
+#### 39.2.2 **Definition 6.5**（书上 **p.88–89**，L1 逐字）——枚举的参数范围就藏在这里
+
+> **Definition 6.5.** A *cell complex in normal form, or canonical cell complex* is a cell complex,
+> K = (F, E, B), where F = {A} is a singleton set, and either
+> (I) E = {a₁,…,a_p, b₁,…,b_p, c₁,…,c_q, h₁,…,h_q} and
+>   B(A) = a₁b₁a₁⁻¹b₁⁻¹ ⋯ a_p b_p a_p⁻¹ b_p⁻¹ c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹,
+>   **where p ≥ 0, q ≥ 0**, or
+> (II) E = {a₁,…,a_p, c₁,…,c_q, h₁,…,h_q} and
+>   B(A) = a₁a₁ ⋯ a_p a_p c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹,
+>   **where p ≥ 1, q ≥ 0**.
+
+紧接着（p.89，L1 逐字）：
+
+> "Observe that canonical complexes of type (I) are orientable, whereas canonical complexes of type (II)
+> are not. The sequences c_i h_i c_i⁻¹ yield q boundary vertices, (h_i, c_i, h_i⁻¹), and thus **q contours** (h_i) …"
+
+#### 39.2.3 χ 公式（书上 **p.89–90**）——**⚠ 无编号，只能引页码**
+
+> "Thus, in case (I), there are q+1 vertices, 2p+2q sides, and one face, and the Euler–Poincaré
+> characteristic is q+1−(2p+2q)+1 = 2−2p−q, that is,
+>   **χ(K) = 2 − 2p − q**,
+> and in case (II), there are q+1 vertices, p+2q sides, and one face, and the Euler–Poincaré
+> characteristic is q+1−(p+2q)+1 = 2−p−q, that is,
+>   **χ(K) = 2 − p − q**.
+> Note that when p = q = 0, we do get χ(K) = 2, which agrees with the fact that in this case, we assumed
+> the existence of a null vertex and there is one face. **This is the case of the sphere.**"
+
+同书 p.103（§6.6，同样**无编号**）给出等价的属数形式：
+
+> "In terms of the Euler–Poincaré characteristic, for an orientable surface, the genus g is given by the formula
+>   g = (2 − χ − q)/2,
+> and for a nonorientable surface, the genus g is given by the formula
+>   g = 2 − χ − q,
+> **where q is the number of contours.**"
+
+→ 即 **χ = 2 − 2g − q（可定向）**、**χ = 2 − g − q（不可定向）**。
+**这正是推导 `summary` 里那条「χ = 2 − 2g − b − c」的正确写法**——注意原书用**一个**属数 g
+覆盖两种情形（不可定向时 g 数的是交叉帽/射影平面个数），**不是**「2 − 2g − b − c」那种把
+handles 与 crosscaps 并列相加的四参数写法。**推导 summary 里那条公式的形式在本轮找到的任何来源里都没有出现，
+建议 curator 改写成上面两条之一。**
+
+#### 39.2.4 本书对三个目标曲面的身份认定（L1 逐字，散落）
+
+- **球面**：p.89–90「Note that when p = q = 0, we do get χ(K) = 2 … This is the case of the sphere.」
+- **圆盘**：p.102（§6.6）「there are only two kinds of complexes having a trivial group, namely, for orientable
+  complexes for which p = q = 0, or **p = 0 and q = 1**. The corresponding surfaces (with boundary) are a
+  *sphere* and a *closed disk* (a surface with boundary).」
+- **射影平面**：p.90「If a canonical cell complex has the boundary, B(A) = a₁a₁, we can think of the face A as a
+  circular disk whose boundary is divided into two semi-circles both labeled a₁. … it is homeomorphic to the
+  projective plane.」（即 type (II)、p = 1、q = 0）
+- **莫比乌斯带**（最近的落选者）：p.102「in the nonorientable case when p = 1 and q = 0, a *projective plane*,
+  or **p = 1 and q = 1, a *Möbius strip***.」→ χ = 2−1−1 = **0**，正好被 χ > 0 排除。
+
+#### 39.2.5 ★ (e) 「χ > 0 ⇒ 恰好三种」这一步：**没有任何来源写过，是我的补步**
+
+把 Definition 6.5 的参数范围代进 §39.2.3 的两条公式：
+
+- type (I)（可定向）：`2 − 2p − q > 0`，`p ≥ 0, q ≥ 0` ⟹ `(p,q) = (0,0)` 或 `(0,1)`
+  ⟹ **χ = 2 的球面**、**χ = 1 的圆盘**（身份认定见 §39.2.4）。
+- type (II)（不可定向）：`2 − p − q > 0`，`p ≥ 1, q ≥ 0` ⟹ `(p,q) = (1,0)`
+  ⟹ **χ = 1 的射影平面**。
+
+再由 **Theorem 6.2**（同不定向性 + 同 contour 数 + 同 χ ⟹ 同胚）知这三者两两不同胚且穷尽。
+
+⚠ **诚实记录**：这三行是**纯算术**，但**书上没有这段话**，也没有任何「χ > 0」的讨论。
+按本项目规矩，把它写进图时要么标 `inferred: true`，要么在 derivation 的 `summary` 里
+明写「不等式求解这一步由本图完成，来源只提供 Definition 6.5 的参数范围与 χ 公式」。
+
+---
+
+### 39.3 (A) 第二来源：Massey —— **目录 L1，定理号只有一条有旁证**
+
+**已获取**：`Algebraic Topology: An Introduction`, William S. Massey, Harcourt, Brace & World, 1967
+的**目录扫描页**（`external.dandelon.com/download/attachments/dandelon/ids/DE00420A6F9CE221E6E38C12579A000352287.pdf`，
+6 页，L1 读图）。**正文未获取。**
+
+Chapter One「Two-Dimensional Manifolds」目录逐字（L1）：
+
+| § | 标题 | 页 |
+|---|---|---|
+| 1 | Introduction | 1 |
+| 2 | Definition and examples of n-manifolds | 2 |
+| 3 | Orientable vs. nonorientable manifolds | 3 |
+| 4 | Examples of compact, connected 2-manifolds | 6 |
+| **5** | **Statement of the classification theorem for compact surfaces** | **10** |
+| 6 | Triangulations of compact surfaces | 15 |
+| **7** | **Proof of Theorem 5.1** | **18** |
+| 8 | The Euler characteristic of a surface | 29 |
+| 9 | Manifolds with boundary | 35 |
+| **10** | **The classification of compact, connected 2-manifolds with boundary** | **37** |
+| **11** | **The Euler characteristic of a bordered surface** | **42** |
+| 12 | Models of compact bordered surfaces in Euclidean 3-space | 43 |
+| 13 | Remarks on noncompact surfaces | 47 |
+
+**结论**：
+- **「紧曲面分类定理 = Theorem 5.1」有 L1 证据**——证据就是 **§7 的标题本身**「Proof of Theorem 5.1」。
+  任务书猜的 `Thm I.5.1` **对**。
+- **§10 里那条带边分类定理的编号完全没有证据（L0）。硬性禁令：不得写「Theorem 10.1」。**
+  （编号体系看起来是 `<节>.<序>`，但「看起来」不是证据。）
+- **跨版本风险**：本书后由 Springer 重印为 GTM 56（Gallier–Xu 参考文献 [16] 逐字写「second edition, 1987」），
+  Chapter I 又被吸收进 GTM 127 *A Basic Course in Algebraic Topology* (1991)。
+  **三个版本的定理编号是否一致，本轮未核实。** 引用时必须写死版本。
+
+**第三方交叉（L1，但权威性低）**：ETH Zürich 学士论文
+Ana da Silva Rodrigues, *Classification of Surfaces*, 2023（`people.math.ethz.ch/~acannas/Student_Papers/BSc_Theses/`）
+第 5 章明说「following Massey's book 'Algebraic Topology: An Introduction' [11]」，并给出自己的编号：
+
+> **Theorem 5.1**（p.43）Let M₁ and M₂ be two bordered surfaces with the same number of boundary components.
+> Then M₁ and M₂ are homeomorphic if and only if M₁* and M₂* are homeomorphic.
+> （p.45，无编号）**χ(M) = χ(M*) − k**
+> **Theorem 5.2**（p.46）Two compact bordered surfaces are homeomorphic if and only if they have the same
+> number of boundary components, they are both orientable or non-orientable, and they have the same Euler
+> characteristic.
+
+⚠ 这是**学士论文**，**不建议进 `sources.bib` 当图的来源**；只作为「Massey §10 那条定理长什么样」的旁证，
+且它的编号是**它自己的**，不是 Massey 的。
+
+---
+
+### 39.4 (A) 候选否定之一：Munkres §77 —— **编号对得上，内容不对口**
+
+第三方讲义（ETSU, R. Gardner, *Knot Theory* Section 4.2 笔记，L1 读图）**逐字转引并注明出处**
+「James Munkres' *Topology*, Second Edition, Upper Saddle River, NJ: Prentice Hall (2000)」：
+
+> **Theorem 77.5. The Classification Theorem.**
+> Let X be the quotient space obtained from a polygonal region in the plane by pasting its edges
+> together in pairs. Then X is homeomorphic to either S², to the n-fold torus T, or to the m-fold
+> projective plane P_m.
+
+→ 等级 **L2**（第三方逐字 + 出处齐全，Munkres 原书未获取）。
+
+⚠ **不能用**：这条定理 (a) **只覆盖闭曲面**（"pasting its edges together in pairs" 意味着没有自由边），
+(b) **通篇不出现 Euler 数**。本项目要的恰恰是「带边 + 用 χ 判别」。登记它只是为了钉死这个看似对口的候选。
+
+---
+
+### 39.5 (A) 候选否定之二：Hatcher §1.2 —— **L1 确认「根本没有」**
+
+取到 `pi.math.cornell.edu/~hatcher/AT/ATch1.pdf`（PDF 页 = 书页 − 20），读了书上 **pp.49–56** 全段。
+§1.2 的最后一个小标题是「**Applications to Cell Complexes**」（p.49 起），其内容**全部**是：
+
+- **Proposition 1.26**（贴 2-胞腔对 π₁ 的影响，三条 (a)(b)(c)）
+- **Corollary 1.27**：「*The surface M_g is not homeomorphic, or even homotopy equivalent, to M_h if g ≠ h.*」
+- **Corollary 1.28**：任何群都是某个 2 维胞腔复形的 π₁
+- **Example 1.29**
+- 然后 p.52 就进入 **Exercises**，p.56 是 **§1.3 Covering Spaces**。
+
+关于不可定向曲面，p.52 只有一句**无编号**的正文：
+「Hence N_g is not homotopy equivalent to N_h if g ≠ h, nor is N_g homotopy equivalent to any orientable surface M_h.」
+
+→ **结论（L1）：Hatcher §1.2 里没有紧曲面分类定理，有编号的没有、无编号的也没有；
+带边曲面一个字都没提。他只证了「标准曲面两两不同伦等价」这半边（唯一性），不证存在性/穷尽性。**
+任务书里「Hatcher §1.2 末（无编号？核实）」——**核实结果是比「无编号」更强的否定：那条定理不在那里**。
+
+---
+
+### 39.6 ★★★ (B) 本轮最重要的发现：**Polchinski 原书自己给了全部四条**（L1 原书页图）
+
+取书路线见 [[reference_cambridge-core-licensed-book-pdfs]]；本轮用到
+ch.5 `2619B77DD4AE2BE4D53B5EED5D3BE3C1` / `9780511816079c5_p145-165_CBO.pdf`、
+ch.6 `F440F6B46EB4150F96EAEAFDDF9F0D76` / `9780511816079c6_p166-205_CBO.pdf`。
+
+#### (a) **χ > 0 ⇒ μ = 0 原书有直接论证，且有独立式号 (5.2.10)/(5.2.11a)**（书上 **p.152**，L1 逐字）
+
+> "Further, κ vanishes for χ < 0 and μ vanishes for χ > 0. To show this, we first **cite the fact** that it is
+> always possible by a Weyl transformation to find a metric for which the scalar curvature R is constant.
+> The sign of R is then the same as that of χ. Now, P₁ᵀP₁ = −½∇² − ¼R, so
+>   ∫d²σ g^{1/2}(P₁δσ)_{ab}(P₁δσ)^{ab} = ∫d²σ g^{1/2} δσ_a(P₁ᵀP₁δσ)^a
+>     = ∫d²σ g^{1/2}( ½∇_aδσ_b∇^aδσ^b − (R/4) δσ_aδσ^a ) .   **(5.2.10)**
+> For negative χ the right-hand side is strictly positive, so P₁δσ cannot vanish.
+> **A similar argument shows that P₁ᵀδ′g cannot vanish for positive χ.**
+> Combining these results we have
+>   χ > 0 :  κ = 3χ ,  μ = 0 ,   **(5.2.11a)**
+>   χ < 0 :  κ = 0 ,  μ = −3χ .  **(5.2.11b)**"
+
+三条必须随引用一起写的缺口（全 L1，全是原书自陈）：
+
+1. **单值化被外包**：「we first **cite the fact** that it is always possible by a Weyl transformation to find a
+   metric for which the scalar curvature R is constant」——原书**不证**，也**不给引文**。
+2. **「R 的符号与 χ 相同」也是断言**（Gauss–Bonnet），原书同样不证不引。
+3. **χ > 0 那一半只有一句「A similar argument shows」**——即本图关心的方向，
+   **原书没有写出来**，只声明与 χ < 0 的论证同型。
+
+#### (b) **「χ > 0 的 Riemann 面只有三个」原书自己说了，但不证不引**（书上 **p.166**，§6.1 首句，L1 逐字）
+
+> "**There are three Riemann surfaces of positive Euler number: the sphere, the disk, and the projective plane.**"
+
+→ 这就是枚举路线的步骤 (1)，**原书是当作已知事实直接写出的，全章无证明、无引文**。
+所以「补一条数学来源」这件事仍然必要（§39.2），但它补的是**原书的缺口**，不是本图自造的缺口。
+
+#### (c) **圆盘：CKG = PSL(2,R)，μ = 0**（书上 **p.168**，§6.1「The disk」，L1 逐字，**无式号**）
+
+> "The CKG of the disk is the subgroup of PSL(2,**C**) that leaves the boundary of the disk fixed.
+> For the reflection (6.1.8) this is just the subgroup of (6.1.6) with α, β, γ, δ all real, which is
+> **PSL(2,R)**, the Möbius group with real parameters. One CKV is the ordinary rotational symmetry of
+> the disk. **Again, all metrics are equivalent — there are no moduli.**"
+
+（(6.1.7) 是 `z′ = 1/z̄`，(6.1.8) 是 `z′ = z̄`；(6.1.6) 是一般 Möbius 变换 `z′=(αz+β)/(γz+δ)`，
+p.168 上方明写「we can fix αδ − βγ = 1 and identify under an overall sign reversal … This defines the group PSL(2,C)」。）
+
+#### (d) **射影平面：CKG = SO(3)，μ = 0**（书上 **p.168–169**，§6.1「The projective plane」，L1 逐字，**无式号**）
+
+> "The projective plane RP₂ can also be obtained as a **Z**₂ identification of the sphere. Identify points
+> z and z′ with
+>   z′ = −1/z̄ .   **(6.1.9)**
+> These points are diametrically opposite in the round metric (6.1.3). There are no fixed points and so no
+> boundary in the resulting space, but the space is not oriented. One fundamental region for the
+> identification is the unit disk |z| ≤ 1, with points e^{iφ} and −e^{iφ} identified. Another choice is the
+> upper half-z-plane. **There are no moduli. The CKG is the subgroup of PSL(2,C) that respects the
+> identification (6.1.9); this is just the ordinary rotation group SO(3).**"
+
+#### (e) 球面（顺带，用于 `sphere-conformal-killing-group` 的第二锚点，书上 **p.167–168**，L1）
+
+> p.167：「According to the general discussion in section 5.2, **the sphere has no moduli and six CKVs**,
+> so that in particular every metric is (diff×Weyl)-equivalent to the round metric (6.1.3).」
+> **(6.1.5a)** δz = a₀ + a₁z + a₂z² …「with three complex or six real parameters as expected from the
+> Riemann–Roch theorem.」
+> p.168：「Three of the six parameters correspond to ordinary rotations, forming an **SO(3)** subgroup of PSL(2,C).」
+
+#### (f) **κ = 3 这个数字怎么来的**
+
+原书 **§6.1 里从不写「κ(D₂) = 3」或「κ(RP₂) = 3」**，只写群。
+数字 3 的书内来源是 **(5.2.11a) `κ = 3χ`** 配 χ(D₂) = χ(RP₂) = 1。
+（另可用 **(5.4.20)** `m = μ + 2n_c + n_o − κ = −3χ + 2n_c + n_o`，书上 p.164。）
+
+#### (g) ⚠ **辟谣：Polchinski Vol.1 第 5 章里没有 κ/μ/χ 的「Table 5.1」**
+
+某些检索摘要会说「Table 5.1 是你要的表」。**本轮读了书上 pp.150–165（§5.2 起到第 5 章末），
+全章只有 Fig. 5.1 / 5.2 / 5.3 三张图，没有任何表格**；第 5 章在 p.165 以习题 5.1–5.3 结束。
+（pp.145–149 = §5.1「The circle」未读，但那一节讲环面与模群，出现 κ/μ 总表的可能性极低。）
+**图里不得出现 `loc: "Table 5.1"`。**
+
+---
+
+### 39.7 (B) 数学侧的带编号来源
+
+#### 39.7.1 ★ Miličić, *Notes on Riemann Surfaces*（Univ. of Utah, Math 6220），全 15 页 L1
+
+编号体系是 `<章>.<节>.<序>`（如「1.5.2. **Theorem.**」）。本轮要的两条：
+
+> **1.5.2. Theorem.**（书上 p.6）*The homomorphism γ ⟼ φ_γ of PSL(2,**C**) into the group of all
+> holomorphic automorphisms Aut(**P**¹) of the Riemann sphere is an isomorphism.*
+
+> **1.7.3. Theorem.**（书上 p.10）*The homomorphism γ ⟼ φ₀ ∘ φ_γ ∘ φ₀⁻¹ is a surjective homomorphism of
+> SU(1,1) onto the group of all holomorphic automorphisms Aut(D(0,1)) of D(0,1).
+> The kernel of this homomorphism is {±I}.*
+
+⚠ **「Aut(D) = PSL(2,R)」在这篇里没有单一编号。** 把 SU(1,1) 换成 SL(2,R) 靠的是 §1.9（p.11）
+的**无编号正文句**：「Therefore, Ψ : SL(2,**R**) ⟶ SU(1,1) is a group isomorphism.」（Ψ(S) = TST⁻¹，
+T = (1/√2)·[[1, i],[i, 1]]）。所以引用时**要么写「Theorem 1.7.3 + §1.9」两处，要么只引 SU(1,1) 版**。
+
+同文其余可用编号（登记备用）：1.6.1 Lemma（Aut(**C**) 是仿射）、1.6.2 Theorem、1.7.1/1.7.2 Lemma、
+1.8.1 Theorem（球面自同构必有不动点）、1.8.2 Theorem、1.11.1 Theorem（单值化）。
+
+⚠ **文件上没有印年份**，`sources.bib` 里 key 只能写 `milicic-riemann-surfaces`，
+**偏离 `literature/CLAUDE.md` 的 `<firstauthor>-<year>` 规范，请 lead 裁决**。
+
+#### 39.7.2 ★ Cao-Huu & Ghişa, arXiv:0902.2725（v1, 4 页，L1 全文）——RP₂ 唯一找到的**带编号**数学陈述
+
+期刊版：*Automation, Computers, Applied Mathematics* **13** (2004) no. 1。arXiv v1 投于 2009-02-16。
+
+设定（p.1，L1）：「The antianalytic involution h : C̄ → C̄ defined by h(z) = −1/z̄ if z ≠ 0, z ≠ ∞,
+and h(0) = ∞, h(∞) = 0 makes (C̄, h) into a symmetric Riemann surface.
+The real projective plane P² = C̄/⟨h⟩ endowed with the unique dianalytic structure which makes the
+canonical projection π : C̄ → P² a dianalytic function, represents a nonorientable Klein surface.」
+——**注意 h 与 Polchinski 的 (6.1.9) `z′ = −1/z̄` 逐字相同**。
+
+> **Corollary 3.1.**（书上 p.2，L1 逐字）*The dianalytic automorphisms of P² have the representation:*
+>   g(z̃) = G̃(z)  *or*  g(z̃) = G̃(z̄), *where **G is a rotation of the Riemann sphere**.*
+
+配套的（§2，p.2，**式 (2)，非定理**）：「any dianalytic automorphism of P² has the representation
+g(z̃) = G̃(z), or g(z̃) = G̃(z̄), where G(z) = e^{iθ}(az+b)/(−b̄z+ā), |a|+|b| ≠ 0, θ ∈ R」。
+
+⚠ **四条限制，必须随引用一起写**：
+1. **原文不出现「SO(3)」、不出现「PSU(2)」、不出现「维数 3」。**
+   从「球面旋转群」到「SO(3)，实维 3、κ = 3」是**使用者的补步**（标准，但不是来源原文）。
+2. **证明外包**：上游 Theorem 2.1 明写「We have shown in [5]」，[5] = Bârză & Ghişa,
+   *Dynamics of Dianalytic Transformations of Klein Surfaces*, **Mathematica Bohemica 129 (2004) no. 2, 129–140**
+   （本轮未获取）。Corollary 3.1 的证明本身只有半页，且是「验证 z ↦ e^{iα}(z−z₀)/(1+z̄₀z) 是球面旋转」这一步。
+3. **归一化条件写得不严**：`|a| + |b| ≠ 0` 不足以刻画 PSU(2)（需 `|a|²+|b|² = 1` 后投影化；
+   前置的 `e^{iθ}` 可被吸收进 a,b，实测无碍）。**不要照抄这行当定义。**
+4. 期刊层级低、正文有笔误（§3 开头把 **Theorem 2.1** 称作「Theorem 1」）。
+
+#### 39.7.3 第二来源：Bârză & Ghişa, *Excerpts of Analysis on Klein Surfaces*, Rev. Roumaine Math. Pures Appl. **54** (2009) 5–6, 395–406（L1 pp.395–402）
+
+免费 PDF：`csm.ro/reviste/Revue_Mathematique/pdfs/2009/5-6/5Barza.pdf`。
+
+框架性定理（L1 逐字，节录）：
+- **Theorem 1**（p.396）对称 Riemann 面 (O₂; k) 的商 O₂/⟨k⟩ 是不可定向 Klein 面；反之每个不可定向
+  Klein 面都同构于某个这样的商。
+- **Theorem 3**（p.397）P²/NOKS 上的 dianalytic 映射与双叶覆盖上与 k 交换的解析映射一一对应
+  （「can be lifted to a unique **analytic** mapping F : O₂ → O₂ commuting with k」）。
+- **Theorem 4**（p.397）P² 的全部 dianalytic **变换**的显式形式（(2n+1) 次有理式）。
+
+⚠ **最容易引错的一点**：真正说「P² 的 dianalytic **自同构**都形如 G̃(cl[z]) = cl[G(z)] 或 cl[G(z̄)]，
+G(z) = e^{iθ}(az+b)/(−b̄z+ā)」的那句，在 **p.398 顶端，是 Theorem 4 与 Theorem 5 之间的无编号行间陈述**，
+**不是 Theorem 4**。（检索摘要会把它说成 Theorem 4——错的。）
+同处也自陈「We have proved the following results (see [11])」，证明同样外包。
+
+#### 39.7.4 未能找到 / 明确的空白
+
+- **Alling–Greenleaf, LNM 219 (1971)**：archive.org 有扫描（`foundationsofthe0219alli`），但是**借阅限制项**，
+  按 [[reference_archive-org-reprint-fulltext-route]] 记的规律，`fulltext/inside.php` 与 `_djvu.txt` 一律 403。
+  **本轮未取到，任何编号都是 L0。**（唯一旁证：某综述称该书的编号形如「Theorem 1.3.6 (Ahlfors), p. 16」，
+  即三级编号——但这是 L4，不足以推出别的定理号。）
+- **Klein 曲面自同构群的主流文献（Bujalance–Cirre–Gamboa 等）全部假设代数亏格 ≥ 2**（那里 Aut 有限），
+  **代数亏格 0 的 RP² 恰恰被排除在外**。这是一个真实的文献空白，不是我没找到。
+- **Farkas–Kra / Jost / Forster**：均未获取（付费墙），本轮未尝试逐条突破。
+- arXiv:2502.13269（*Superstring scattering on the real projective plane*）据检索摘要称
+  「the conformal Killing group of the real projective plane is **SU(2)**」——**L4，正文未获取**。
+  ⚠ 若属实，它与 Polchinski 的 **SO(3)** 相差一个 **Z₂**（SU(2) 是二重覆盖，有效作用的是 PSU(2) ≅ SO(3)）。
+  **这不影响 κ = 3（两者李代数同为 su(2)），但如果哪天要写「CKG 是哪个群」，两种写法并存于文献中，须写明取哪一种。**
+
+---
+
+### 39.8 ★★ 对**现有卡片**的三条订正（本轮读原书直接得到，优先级高于新建卡）
+
+#### (A) `worldsheet.positive-euler-number-no-moduli--via-surface-enumeration` 的 `gaps` 有两条已作废
+
+- gaps 第 1 条写：「**原书未给直接论证** … **Polchinski 原书是否给出直接论证，本项目未核实**」
+  → **已核实：原书给了**（§39.6(a)，(5.2.10) + (5.2.11a) + 「A similar argument shows」）。
+  这条 gap 必须改写为：「原书给的是**正定性论证**，但 χ > 0 那一半只有一句 "A similar argument shows"，
+  且论证依赖两条原书不证不引的输入（常曲率度规的存在、R 的符号 = χ 的符号）。」
+- `summary` 里「原书只把本条作为 (5.2.10) 的**对偶断言**（χ < 0 ⇒ κ = 0 的镜像）给出，未附论证」
+  **是错的**：(5.2.10) 是那条正定性积分恒等式本身，(5.2.11a/b) 才是结论对；
+  原书是**对 χ < 0 写出论证、对 χ > 0 声明同型**。
+- `notes` 的升级路径 (d)「若 researcher 拿到原书正文并确认 Polchinski 给了直接的正定性论证，
+  另建一条 `--via-positivity` 推导」→ **条件已满足，建议现在就建**（见 §39.9(3)）。
+
+#### (B) 伴读者 [S] 那段被逐字转引的枚举论证**本身有毛病**，不宜作为论证骨架
+
+现节点 `sources[].note` 逐字转引的 [S] 句子是：
+「We know that for closed oriented surfaces, the Euler number is χ = 2 − 2g … **The only close oriented
+surface with χ > 0 therefore has g = 0, i.e. is the sphere, the disk or the projective plane**」。
+——**「closed oriented surface」与「the disk or the projective plane」自相矛盾**（圆盘有边、RP₂ 不可定向），
+而且 χ = 2 − 2g 这条公式只对闭可定向曲面成立，根本推不出圆盘与 RP₂。
+**Polchinski 自己的那句（§39.6(b)，p.166）是干净的**：「There are three Riemann surfaces of positive Euler
+number: the sphere, the disk, and the projective plane.」
+→ 建议 curator **把枚举路线的书内锚点从 [S] 换成原书 p.166**，并保留 [S] 引文只作为「本图为何走枚举」的历史记录。
+
+#### (C) `worldsheet.disk-conformal-killing-group` 卡：**歧义结案 + `loc` 三处要改**
+
+1. **歧义结案（本轮最干净的一条）**。卡片 `notes` 记的「[S] 说两种循环序 *is linked by* PSL(2,R)，
+   抽取记录说 *不被* 联系，两者相反」——**原书站在「不被联系」一边，且是逐字**（书上 **p.178**，§6.4 开头，L1）：
+   > "We represent the disk as the upper half-plane so the boundary coordinate y is real. **There are no moduli.**
+   > After fixing the metric, the CKG **PSL(2,R)** can be used to fix the three vertex operators to arbitrary
+   > positions y₁, y₂, y₃ on the boundary, except that **this group does not change the cyclic ordering of the
+   > vertex operators so we must sum over the two orderings**."
+   → 卡片选的方向正确；`notes` 里理由 (a)「**这是 curator 的数学论证、不是文献内容**」这句限定
+   **可以撤销**，改成「原书 p.178 明写」。**[S] 那句确认为 Schrans 的错误**，可加进
+   [[lit-polchinski-v1-equation-anchors]] 的「[S] 已确证的错误」清单。
+2. **`loc` 的页码错了**：§6.4 开头在书上 **p.178**（不是「p.179 附近」）。
+3. **`loc` 里的「3χ = κ − μ = 3 − 0」不在 §6.4**。我读了书上 pp.178–181，**没有这条式子**。
+   §6.4 开头只说「There are no moduli」并点名 PSL(2,R)。
+   `κ − μ = 3χ` 的书内位置是 **§5.2 (5.2.9)**（原书写作 `μ − κ = −3χ`，见 [[lit-polchinski-v1-equation-anchors]]）
+   与 **(5.2.11a) `κ = 3χ, μ = 0`**。**建议把这半句从 §6.4 的 loc 里摘出去，另挂 (5.2.11a)。**
+4. **「PSL(2,R)」这个记号写在原书哪里——已核实**：出现在 **两处，均无式号**——
+   **p.168**（§6.1「The disk」，(6.1.8) 之后）与 **p.178**（§6.4 开头）。卡片里那条
+   「⚠ **「PSL(2,R)」这个记号写在原书哪一式未核实**」可以撤销。
+5. ⚠ **唯一性没有书内支持**：卡片 statement (2) 写「**存在唯一的** PSL(2,R) 元把它们送到任一组指定的同循环序的三点」。
+   原书只写「can be used to fix the three vertex operators to **arbitrary positions**」，
+   **没有「唯一」**。唯一性要么挂 `math.mobius-group-sharply-three-transitive`，要么在 note 里注明「唯一性非书内陈述」。
+
+---
+
+### 39.9 图里建议怎么加（供 curator 取舍；researcher 不改 `graph/`）
+
+> 我不代 curator/auditor 做任何裁决。以下只是把「哪条陈述能挂哪条编号」摆出来。
+
+#### (1) 新 statement `math.classification-of-compact-surfaces`
+
+```yaml
+kind: proposition          # 命题不填 status，由 derivation 计算
+title: 紧曲面分类定理（含带边、含不可定向）
+statement: |
+  两个紧曲面（含带边）同胚，当且仅当它们的可定向性、边界分支数（contour 数）与
+  Euler–Poincaré 示性数三者全部相同。
+sources:
+  - ref: gallier-xu-2013
+    loc: "Ch. 6 §6.3, Theorem 6.2, p. 97（三角化版 Theorem 6.1, p. 96）"
+    note: |
+      L1 逐页核实（math-sources.md §39.2.1）。三条限制：
+      (a) 原文用 "number of contours"，不是 "number of boundary components"；
+      (b) Theorem 6.2 依赖「每个曲面/带边曲面可三角化」，原书 p.96 自陈该证明「far from trivial」
+          且放在 Appendix E（Thomassen 的证明），正文不证；
+      (c) 出版版编号 6.2 与 arXiv 版（gallier-2008-surfaces）编号 5.3.2 不可互换。
+  - ref: massey-1967
+    loc: "Ch. I §10「The classification of compact, connected 2-manifolds with boundary」, pp. 37-42（定理编号未核实，不得写 Theorem 10.1）"
+    note: "仅目录 L1（math-sources.md §39.3）。闭曲面那条是 Theorem 5.1（由 §7 标题「Proof of Theorem 5.1」佐证）。"
+```
+
+配一条 derivation `math.classification-of-compact-surfaces--via-normal-forms`，
+`kind: proof`、`status: rigorous`，`sources` 同上，**并在 `gaps` 里写死上面的 (b)**（三角化外包）。
+
+#### (2) 新 statement `math.positive-euler-characteristic-surfaces`（**这才是 ch.5 那条推导真正要的**）
+
+```yaml
+kind: proposition
+title: χ > 0 的紧连通曲面只有三种：S²、D²、RP²
+statement: |
+  设 M 是紧连通二维曲面（允许有边、允许不可定向），χ(M) 是其 Euler 数。
+  若 χ(M) > 0，则 M 同胚于球面 S²（χ = 2）、圆盘 D²（χ = 1）或实射影平面 RP²（χ = 1）三者之一。
+```
+derivation `--via-normal-form-enumeration`：
+- `depends_on`: `math.classification-of-compact-surfaces`；
+- `sources`: `gallier-xu-2013`，`loc: "Definition 6.5, pp. 88-89（type (I) p>=0,q>=0；type (II) p>=1,q>=0）+ χ(K)=2-2p-q / χ(K)=2-p-q, pp. 89-90（无编号行间式）+ 身份认定 p.90（RP²）、p.102（圆盘 p=0,q=1；莫比乌斯带 p=q=1）"`；
+- ⚠ `summary` 里必须写明：**「χ > 0 ⇒ 只剩三种」这条不等式求解在来源里不存在，是本图补的两行算术**；
+  对应的边或该条 source 建议标 `inferred: true`，或由 auditor 判定这属于「来源直接蕴含的平凡推论」。
+- 最近的落选者 **莫比乌斯带 χ = 0**（p = q = 1）值得写进 `notes`，因为它是唯一会被「χ ≥ 0」误纳的曲面。
+
+#### (3) ★ 新 derivation `worldsheet.positive-euler-number-no-moduli--via-positivity`
+
+这是原书自己的论证，**与现有的 `--via-surface-enumeration` 并列，不替换它**。
+
+```yaml
+target: worldsheet.positive-euler-number-no-moduli
+kind: physical-argument
+status: physical-argument
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.10) 与 (5.2.11a), p.152"
+gaps:
+  - "原书对 χ < 0（κ = 0）写出了完整正定性论证，对本条（χ > 0 ⇒ μ = 0）**只有一句 'A similar argument shows that P₁ᵀδ′g cannot vanish for positive χ'**，未写出。"
+  - "论证依赖『总可用 Weyl 变换取到常数标量曲率 R 的度规』——原书逐字写 'we first **cite the fact**'，不证、不给引文（即单值化定理）。"
+  - "论证依赖『R 的符号与 χ 相同』（Gauss–Bonnet），原书同样不证不引。"
+```
+→ **status 建议 `physical-argument`**：论证骨架是原书的、方向清晰，但本图关心的那一半原书没写出来，
+且两条输入外包。**是否可升到 `rigorous`，由 auditor 定。**
+**（若采纳，`--via-surface-enumeration` 的 gaps 第 1 条与 notes(d) 应同步改写，见 §39.8(A)。）**
+
+#### (4) 新 statement `worldsheet.rp2-conformal-killing-group`
+
+```yaml
+kind: proposition
+title: 射影平面的共形 Killing 群是 SO(3)，κ(RP₂) = 3，μ(RP₂) = 0
+statement: |
+  RP₂ 实现为球面在对合 z′ = −1/z̄ 下的 Z₂ 商（无不动点，故无边界，且不可定向）。则：
+  (1) RP₂ 无模：μ(RP₂) = 0；
+  (2) 其共形 Killing 群是 PSL(2,C) 中与该认同相容的子群，即通常的旋转群 SO(3)；
+  (3) 由 χ(RP₂) = 1 与 κ = 3χ 得 κ(RP₂) = 3。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」, pp. 168-169，认同式 (6.1.9)；『There are no moduli』与『the CKG … is just the ordinary rotation group SO(3)』均为**无式号**正文句"
+    note: |
+      L1 原书页图核实（math-sources.md §39.6(d)）。⚠ 原书**不写** κ(RP₂)=3 这个数字，
+      数字来自同书 (5.2.11a) κ = 3χ 与 χ(RP₂) = 1。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p.152（κ = 3χ, μ = 0 for χ > 0）"
+  - ref: caohuu-ghisa-2004
+    loc: "Corollary 3.1（arXiv:0902.2725v1, p.2）"
+    note: |
+      数学侧独立来源，L1（math-sources.md §39.7.2）。原文逐字只说自同构「is a rotation of the
+      Riemann sphere」，**不出现 SO(3)/PSU(2)/维数 3**；证明外包给 Barza-Ghisa, Math. Bohemica 129 (2004) 129-140。
+      同文用的对合 h(z) = −1/z̄ 与 Polchinski (6.1.9) 逐字相同。
+```
+- `uses_conventions`: `conv.worldsheet-euclidean`、`conv.worldsheet-complex-coords`（与 disk 卡一致）。
+- 建议同时建 derivation `--via-sphere-involution`，`kind: physical-argument`，
+  `depends_on`: `worldsheet.sphere-conformal-killing-group`（CKG(S₂) = PSL(2,C)）
+  + `worldsheet.riemann-roch-kappa-minus-mu`（给 κ = 3χ）。
+- ⚠ **文献分歧要写进 note**：arXiv:2502.13269 据称写「CKG of RP² is **SU(2)**」（L4，未核实）。
+  SU(2) 与 SO(3) 差一个 Z₂，κ 不受影响，但群的写法两说并存。
+
+#### (5) `worldsheet.disk-conformal-killing-group`（已存在）：按 §39.8(C) 改 `loc` 与 `notes`
+
+建议的新 `loc`（可直接抄）：
+
+```yaml
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The disk」, p.168（(6.1.8) 之后）：CKG 是 PSL(2,C) 中保持圆盘边界的子群 = PSL(2,R)，且『there are no moduli』；**无式号**"
+    note: |
+      L1 原书页图核实（math-sources.md §39.6(c)）。原书用 (6.1.7) z′=1/z̄ 与共形等价的 (6.1.8) z′=z̄，
+      并在 p.168 上方由 (6.1.6) + αδ−βγ=1 + 整体反号认同定义 PSL(2,C)。
+  - ref: polchinski-1998-v1
+    loc: "§6.4 开头, p.178：『There are no moduli. After fixing the metric, the CKG PSL(2,R) can be used to fix the three vertex operators to arbitrary positions y₁,y₂,y₃ on the boundary, except that this group does not change the cyclic ordering … so we must sum over the two orderings.』；**无式号**"
+    note: |
+      L1 原书页图核实。**本条直接结案了卡片 notes 里的文献歧义：原书站「不被 PSL(2,R) 联系」一边。**
+      ⚠ 原书只说 arbitrary positions，**没有说「唯一」**；唯一性须另挂 math.mobius-group-sharply-three-transitive。
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.11a), p.152（κ = 3χ, μ = 0 for χ > 0；配 χ(D₂)=1 给 κ=3）"
+```
+并**删掉**旧 loc 里的「3χ = κ − μ = 3 − 0」与「p.179 附近」，
+**撤销** notes 里「PSL(2,R) 记号未核实」与「(a) 是 curator 的数学论证、不是文献内容」两处。
+
+#### (6) 数学侧的可选补强
+
+若 curator 想给 (4)(5) 各挂一条**纯数学**依赖：
+
+```yaml
+# 圆盘
+- ref: milicic-riemann-surfaces
+  loc: "Theorem 1.7.3, p.10（Aut(D(0,1)) ≅ SU(1,1)/{±I}）+ §1.9, p.11 的无编号句（SL(2,R) ≅ SU(1,1)）"
+  note: "L1。⚠ 「Aut(D) = PSL(2,R)」在该文献里**没有单一编号**，是两处合成。"
+# 球面（给 sphere 卡）
+- ref: milicic-riemann-surfaces
+  loc: "Theorem 1.5.2, p.6（PSL(2,C) → Aut(P¹) 是同构）"
+# 射影平面
+- ref: caohuu-ghisa-2004
+  loc: "Corollary 3.1（arXiv:0902.2725v1, p.2）"
+```
+
+#### (7) 三条禁令
+
+1. **不得写 `Massey … Theorem 10.1`**（§39.3）。
+2. **不得写 `Polchinski Vol.1 Table 5.1`**——第 5 章没有表格（§39.6(g)）。
+3. **不得把 RP² 自同构那条引成 `Bârză–Ghişa Theorem 4`**——那句是 Theorem 4 与 5 之间的**无编号**陈述（§39.7.3）。
+
+---
+
+### 39.10 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Polchinski Vol.1 ch.5 正文** | Cambridge Core `…/2619B77DD4AE2BE4D53B5EED5D3BE3C1/9780511816079c5_p145-165_CBO.pdf/…` | **成功**（243 KB；读 pp.150–165；**PDF 页 = 书页 − 144**） |
+| **Polchinski Vol.1 ch.6 正文** | Cambridge Core `…/F440F6B46EB4150F96EAEAFDDF9F0D76/9780511816079c6_p166-205_CBO.pdf/…` | **成功**（404 KB；读 pp.166–181；**PDF 页 = 书页 − 165**） |
+| **Gallier–Xu 出版版全书** | `cis.upenn.edu/~jean/surfclassif-root.pdf` | **成功**（3.5 MB；**PDF 页 = 书页 + 10**，前置 roman 页 = PDF 页 + 2） |
+| **Gallier arXiv 版** | `arxiv.org/pdf/0805.0562` | **成功**（947 KB；**PDF 页 = 书页**） |
+| Gallier 草稿版（两个镜像） | `cis.upenn.edu/~jean/surfclass-n.pdf`；`cs.brynmawr.edu/~dxu/surfclassif.pdf` | **失败：两次都只回来 28 页**（2.7 MB，只到第 1 章）——**新增死路** |
+| ar5iv 版 0805.0562 | `ar5iv.arxiv.org/html/0805.0562` | **失败**：「Conversion to HTML had a Fatal error」 |
+| **Massey 1967 目录扫描** | `external.dandelon.com/download/attachments/dandelon/ids/DE00420A6F9CE221E6E38C12579A000352287.pdf` | **成功**（92.6 KB，6 页扫描）——**新增活路：dandelon 是取旧书目录页的稳定入口** |
+| **Munkres Thm 77.5（转引）** | `faculty.etsu.edu/gardnerr/Knot-Theory/Notes-Livingston/Livingston-Knot-4-2.pdf` | **成功**（352 KB；p.2 逐字带出处） |
+| **Hatcher ch.1** | `pi.math.cornell.edu/~hatcher/AT/ATch1.pdf` | **成功**（1 MB；**PDF 页 = 书页 − 20**） |
+| **Miličić 讲义** | `math.utah.edu/~milicic/Math_6220/rsurfaces.pdf` | **成功**（163 KB，15 页全读；**PDF 页 = 书页**） |
+| **Cao-Huu–Ghişa** | `arxiv.org/pdf/0902.2725` | **成功**（72 KB，4 页全读） |
+| **Bârză–Ghişa 2009** | `csm.ro/reviste/Revue_Mathematique/pdfs/2009/5-6/5Barza.pdf` | **成功**（198 KB；读 pp.395–402；**PDF 页 = 刊页 − 394**） |
+| ETH 学士论文 | `people.math.ethz.ch/~acannas/Student_Papers/BSc_Theses/2023_bsc_da_silva_classification_of_surfaces.pdf` | **成功**（3.4 MB；**PDF 页 = 书页 + 6**） |
+| Alling–Greenleaf LNM 219 | archive.org `foundationsofthe0219alli` | **未尝试正文**（借阅限制项，按既往规律必 403） |
+| arXiv:2502.13269 正文 | `arxiv.org/abs/2502.13269` | **失败**（abs 页只有摘要，摘要里没有 CKV 陈述；未取 PDF） |
+
+> **两条可复用的经验**：
+> (1) **dandelon.com** 的 `external.dandelon.com/download/attachments/dandelon/ids/<ID>.pdf` 提供**旧书的目录扫描页**，
+> 对「只想确认某章某节标题与页码」的场景够用，且不被拦——这是本轮拿到 Massey 结构的唯一手段。
+> (2) **同一本书的作者主页往往挂着多个版本，编号可能完全不同**（Gallier 一人挂了三份），
+> 取正文前先看标题页日期与目录，**不要假设 arXiv 版 = 出版版**。
+
+**未解决 / 留给下一轮：**
+
+- **Q30** **Massey 里带边分类定理的编号（L0）。** GTM 56 (2nd ed. 1987) 或 GTM 127 (1991) 的 Ch. I §10。
+  可能的下一招：找一篇**逐字引用了它的定理号**的论文；或找 GTM 127 的公开扫描（Springer 认证墙）。
+  在拿到之前，图里只能写「Ch. I §10, pp. 37–42」。
+- **Q31** **Massey 1967 / GTM 56 / GTM 127 三个版本的 Chapter I 定理编号是否一致（L0）。**
+  本轮只有 1967 Harcourt 版的目录。
+- **Q32** **Bârză & Ghişa, Mathematica Bohemica 129 (2004) 129–140** 正文——
+  这是 RP² 自同构那条结论**唯一的真正证明出处**（0902.2725 与 RRMPA 2009 都把证明外包给它）。
+  `dml.cz` 有 Mathematica Bohemica 全文开放，值得一试。
+- **Q33** **Alling–Greenleaf LNM 219 里有没有 RP²（代数亏格 0）自同构群的带编号定理。**
+  它是这一支文献人人引的标准参考，但本轮无人给出具体编号。
+- **Q34** **arXiv:2502.13269 正文里「CKG of RP² = SU(2)」的确切措辞**，
+  以确认它与 Polchinski 的 SO(3) 是笔误还是有意（覆盖群 vs 有效作用群）。
+- **Q35** **Polchinski Vol.1 §5.1（书上 pp.145–149）未读**——用于最终排除「第 5 章有 κ/μ/χ 总表」的可能。
+- **Q36** **Miličić 讲义的年份**（文件上未印）。影响 `sources.bib` 的 key 是否合规。
+
+# § Riemann–Roch（供 `worldsheet.riemann-roch-kappa-minus-mu`）
+
+## 42. Riemann–Roch 的可引编号来源：dim H⁰(K^{−1}) 与 dim H⁰(K²)（researcher，2026-09-11）
+
+### 39.0 需求侧：图里到底要一条什么定理
+
+图卡 `worldsheet.riemann-roch-kappa-minus-mu` 的 `notes` 里有一条点名给 researcher 的 TODO：
+"登记一个可核实的**数学**来源 —— 紧黎曼面上线丛的 Riemann–Roch（或 P₁ 这一椭圆算子的 Atiyah–Singer 指数）"，
+目的是给 `κ − μ = 3χ` 另起一条能到 `rigorous` 的推导（现有唯一推导走鬼数流 Weyl 反常，且**比例常数靠球面一个例子标定**）。
+
+要支撑该卡片，需要的**不是**"随便一条 Riemann–Roch"，而是下面这条链：
+
+| 环节 | 内容 | 本轮结论 |
+|---|---|---|
+| (R) | 紧黎曼面上的 Riemann–Roch（除子形式或线丛形式） | **有多个带编号来源，其一已 L1 全文到手** |
+| (K) | `deg K = 2g − 2` | 有编号来源（一手读到引用方，见 §42.4） |
+| (A) | `dim H⁰(K²) − dim H⁰(K^{−1}) = 3g − 3`（**一次 RR 即得，无需分 g 讨论**） | 见 §42.2，**是抽取者的推算，尚未在任何来源里找到这个写法** |
+| (B1) | `κ = 2·dim H⁰(K^{−1})`（共形 Killing 向量 ↔ 全纯向量场） | **本轮无来源**（§42.8） |
+| (B2) | `μ = 2·dim H⁰(K²)`（度规模 ↔ 全纯二次微分） | **本轮无带编号来源**（§42.8） |
+| (U) | 不可定向世界面（卡片明写"可定向或不可定向"） | **本轮无来源，是最被忽视的缺口**（§42.10） |
+
+⇒ **只把 Riemann–Roch 登记进 bib，并不能让该节点变成 `rigorous`。** 详见 §42.10 的判断。
+
+### 39.1 结论表（先看这张）
+
+| 来源 | 任务书给的编号 | 本轮核实结果 | 可否写进 `loc` |
+|---|---|---|---|
+| **Eynard, arXiv:1805.06405v1**（公开讲义） | — | **★ L1 全文到手**：Ch. 4 **Theorem 1.2 (Riemann-Roch)**，p. 72，eq. **(1-10)** | **可以，且是本轮唯一全部逐字核实的来源** |
+| **Farkas–Kra, GTM 71, 2nd ed.** | Thm III.4.8 | **章节位置 L1**（出版方 TOC 扫描：**III.4. Divisors and the Riemann–Roch Theorem, p. 69**；III.5. Applications…, p. 79）；**定理号 III.4.8 仍 L4** | 只能写到**小节**：`§III.4, pp. 69–78`。**不要写 Theorem III.4.8** |
+| **Hartshorne, *Algebraic Geometry*** | Thm IV.1.3 | **L3（一手读到引用方原文）**：Wynter (UChicago REU 2016) p. 11 逐字 "Proof. Omitted (Theorem IV.1.3, Hartshorne [2])"，其 Theorem 5.1 正是 `l(D) − l(K−D) = deg D + 1 − g` | **可以写 `Ch. IV, Theorem 1.3`，但必须标"编号为二手核实"** |
+| **Jost, *Compact Riemann Surfaces*** | Thm 5.4.x | **章节位置 L1**（出版方 TOC 扫描：**5.4 Divisors. The Riemann-Roch Theorem, p. 225**）；**定理/推论号 L4**，且**版本未定**（§42.5） | 只能写 `§5.4, p. 225ff.`，**并且必须先定版本** |
+| **Griffiths–Harris** | — | **本轮未核（L0）**，一次调用都没花 | 不可 |
+| Mathlib | — | **无 Riemann–Roch**（`docs/1000.yaml` 四条 RR 词条全部只有 `title`、无 `decl`） | 该节点**不可能**是 `formalized` |
+
+### 39.2 ★ 核心观察：一次 Riemann–Roch 就够（**这一小节是抽取者的推算，不是任何来源的原文**）
+
+> ⚠ **按本项目纪律显式声明：下面这段是我自己做的推导，不是从哪本书上抄的。**
+> 之所以写进抽取记录，是因为它决定了 curator 该给这个节点接几条边、以及"数学侧到底缺什么"。
+
+设 Σ 紧、连通、**可定向**、无边，亏格 g，K 为典范线丛。对除子 `D = 2K` 用 Riemann–Roch
+（Hartshorne 形式 `l(D) − l(K − D) = deg D + 1 − g`）：
+
+```
+l(2K) − l(−K) = deg(2K) + 1 − g = (4g − 4) + 1 − g = 3g − 3
+```
+
+其中 `l(2K) = dim H⁰(K²)`（全纯二次微分），`l(−K) = dim H⁰(K^{−1})`（全纯向量场）。于是**对一切 g（含 0 和 1）**：
+
+```
+dim H⁰(K²) − dim H⁰(K^{−1}) = 3g − 3 = −(3/2) χ ,      χ = 2 − 2g
+```
+
+再用 (B1)(B2) 的 `κ = 2 dim H⁰(K^{−1})`、`μ = 2 dim H⁰(K²)`：
+
+```
+κ − μ = −2(3g − 3) = 6 − 6g = 3χ 。
+```
+
+**三条值得 curator 注意的后果：**
+
+1. **不需要按 g = 0 / 1 / ≥2 分情形**，也**不需要**任何"球面标定"。现有推导最实质的弱点
+   （`riemann-roch-kappa-minus-mu--via-ghost-number-anomaly` 的 gap 第 1 条：系数 3 靠球面一个例子定出）
+   在数学路线上**根本不出现**。
+2. 卡片里的两个检验值是这条式子的自动推论：g = 0 ⇒ `0 − 3 = −3` ✓；g = 1 ⇒ `1 − 1 = 0` ✓。
+3. 单独的数值（`κ(S₂) = 6`、`μ(S₂) = 0`、g ≥ 2 时 `κ = 0`）**另需**一条"负次数线丛无非零全纯截面"的引理
+   （`deg D < 0 ⇒ l(D) = 0`），它在教材里是 RR 之前的独立命题，**不含在 RR 里**。
+   ⇒ 若 curator 想让图同时给出 `μ(S₂) = 0`（当前 gap 的残余项），要**另挂**这条引理，别指望 RR 一条边解决。
+
+### 39.3 Farkas–Kra, *Riemann Surfaces*, GTM 71：**位置 L1、编号 L4**
+
+**怎么拿到的（新活路的复用）**：`https://d-nb.info/920606512/04` —— 德国国家图书馆的**出版方目录扫描**，
+即 [[reference-web-fetch-access-blockers]] 里记的 DNB 路线（`d-nb.info/<IDN>/04`）。落盘 62 KB，`Read pages` 读图，4 页全清晰。
+
+**标题页逐字（L1）**：`H.M. Farkas   I. Kra` / `Riemann Surfaces` / **`Second Edition`** / `With 27 Figures` / `Springer`。
+⇒ **这份 TOC 是第二版的**（这一点很重要：见 §42.5 的对照）。
+
+**Chapter III「Compact Riemann Surfaces」目录逐字（L1，书上 p. xii）**，起始页 **54**：
+
+```
+III.1.  Intersection Theory on Compact Surfaces                      54
+III.2.  Harmonic and Analytic Differentials on Compact Surfaces      56
+III.3.  Bilinear Relations                                           64
+III.4.  Divisors and the Riemann–Roch Theorem                        69
+III.5.  Applications of the Riemann–Roch Theorem                     79
+III.6.  Abel's Theorem and the Jacobi Inversion Problem              91
+III.7.  Hyperelliptic Riemann Surfaces                               99
+III.8.  Special Divisors on Compact Surfaces                        109
+III.9.  Multivalued Functions                                       126
+III.10. Projective Imbeddings                                       136
+III.11. More on the Jacobian Variety                                142
+III.12. Torelli's Theorem                                           161
+```
+
+同页另外三条与本项目有关的（L1）：
+- **`IV.10. Riemann-Roch—An Alternate Approach   237`** ⇒ **FK 里 Riemann–Roch 出现两次**，
+  引用时必须写清是 III.4 还是 IV.10（本项目要的是 III.4）。
+- **`V.1. Hurwitz's Theorem   257`**、`V.2. Representations of the Automorphism Group on Spaces of Differentials   269`
+  ⇒ 若将来要给"g ≥ 2 时 κ = 0"找**自同构有限**这条路线，入口在这里。
+- `VII.2. Relations Among Quadratic Differentials   333`（**不是**维数计数那条，别引错）。
+
+**结论**：
+- **`§III.4` 与 `§III.5` 的标题、页码是 L1 确定的**；III.4 占 pp. 69–78，故"Theorem III.4.8 在 III.4 之内"在页码上**自洽**。
+- **但 `III.4.8` 这个号本轮只有 L4 证据**：一个 fandom 维基页面（`mathbooknotes.fandom.com/wiki/Farkas_and_Kra_-_Riemann_Surfaces`）
+  被检索后端转述为逐字写着 "III.4.8 Theorem (Riemann-Roch)"。**我没有一手读到该维基页，也没有读到书。**
+- ⚠ 另一条负面证据：一篇综述（arXiv:1902.06406，**已一手读到该段**）在写 `dim Q(X) = 3g−3` 时逐字说
+  "For details of this computation, refer to [33] or [67], or any standard reference for Riemann surfaces."
+  —— **即连专门写全纯二次微分的综述都不给 FK 的定理号**。⇒ "FK 里 3g−3 的编号"很可能**在文献里根本没人引过号**。
+
+### 39.4 Hartshorne, Ch. IV, Theorem 1.3：**编号 L3（一手读到引用方）**
+
+**证据（一手读到的是引用方，不是 Hartshorne 本身）**：
+D. L. Wynter, *An Exposition of the Riemann Roch Theorem for Curves*（University of Chicago REU 2016，
+`math.uchicago.edu/~may/REU2016/REUPapers/Wynter.pdf`，日期页逐字 `Date: August 29, 2016`）。
+**该 PDF 已落盘并逐页读图（L1 对该文）**，其 **p. 11**：
+
+> **Theorem 5.1.** *Let K be the canonical class of the curve Y, D ∈ Div Y any divisor, and g the genus of the curve Y. Then we have the following:*
+> `l(D) − l(K − D) = deg D + 1 − g`
+> *Proof.* Omitted (**Theorem IV.1.3, Hartshorne [2]**).
+
+紧接的 **Corollary 5.2**（p. 11–12，逐字）：*If Y has canonical divisor K, then the degree of K is determined by the genus g of Y. More precisely, we have that* `deg K = 2g − 2`。
+
+**评级说明**：这是"**我一手读到了一篇论文，它逐字给出了 Hartshorne 的定理号**"。
+按本记录 §0 的等级，对 **Hartshorne 的编号**而言是 **L3**（二手），对 **Wynter 这篇**而言是 L1。
+另有一条同向的 L4：检索后端称 arXiv:2511.06880 亦逐字引 "[Hartshorne(1977), Theorem IV.1.3]"（**未一手核**）。
+⇒ **两条来源同向、且其中一条已一手读到**，可以写进 `loc`，但 `note` 里要写明"编号系二手核实"。
+
+⚠ **约定陷阱（Wynter p.2 与 p.11 已确认）**：Hartshorne 一路的 `l(D)` 是**向量空间维数**约定；
+另有文献（Wynter 提到的 TCU 讲义）用**射影维数**约定（`H⁰ = 0` 时 `l(D) = −1`），**整式差 1**。
+`loc` 里引 Hartshorne 时必须连约定一起写。
+
+### 39.5 Jost, *Compact Riemann Surfaces*：**小节位置 L1，编号 L4，且版本未定（本节最脏的一条）**
+
+**怎么拿到的**：同 DNB 路线，`https://d-nb.info/948901241/04`（落盘 460 KB，3 页读图）。
+
+**标题页逐字（L1）**：`Jürgen Jost` / `Compact Riemann Surfaces` / `An Introduction to Contemporary Mathematics` /
+`Translated by R. R. Simha` / `With 22 Figures` / `Springer`。
+⚠ **没有"Second/Third Edition"字样**（对比 FK 那份**明写** `Second Edition`）⇒ **这份 TOC 很可能是第 1 版（1997）**，但**未证实**。
+
+**Chapter 4/5 目录逐字（L1，书上 p. XIV）**：
+
+```
+4. Teichmüller Spaces
+   4.1  The Basic Definitions                                               167
+   4.2  Harmonic Maps, Conformal Structures and Holomorphic
+        Quadratic Differentials. Teichmüller's Theorem                      169
+   4.3  Fenchel-Nielsen Coordinates. …                                      179
+   4.4  Uniformisation of Compact Riemann Surfaces                          191
+5. Geometric Structures on Riemann Surfaces
+   5.1  Preliminaries: Cohomology and Homology Groups                       203
+   5.2  Harmonic and Holomorphic Differential Forms on Riemann Surfaces     211
+   5.3  The Periods of Holomorphic and Meromorphic Differential Forms       219
+   5.4  Divisors. The Riemann-Roch Theorem                                  225
+   5.5  Holomorphic 1-Forms and Metrics on Compact Riemann Surfaces         236
+   5.6  Divisors and Line Bundles                                           238
+   5.7  Projective Embeddings                                              247
+   5.8  Algebraic Curves                                                    254
+   5.9  Abel's Theorem and the Jacobi Inversion Theorem                     267
+   5.10 Elliptic Curves                                                     274
+```
+
+⇒ **任务书说的"Jost Thm 5.4.x"落在 `5.4 Divisors. The Riemann-Roch Theorem`（p. 225）之内，小节层面成立（L1）。**
+
+**★ 本轮追到的一条有价值线索（L4，值得下一轮钉死）**：检索后端称，一篇 2025 年的 Springer 章
+（*Differentials on a Riemann Surface*，`link.springer.com/chapter/10.1007/978-3-032-09219-9_9`，**Springer 登录墙，未取到**）
+在陈述"亏格 ≥ 2 的闭黎曼面上全纯二次微分空间 `Q(X)` 的复维数为 `3g − 3`"时，
+把证明引给 **`[219, Cor. 5.4.2]`**，而 `[219]` = Jost, *Compact Riemann Surfaces*。
+⇒ **假说：Jost 的 `Corollary 5.4.2` 就是本项目要的 `dim H⁰(K²) = 3g − 3`。**
+这与上面 L1 的 TOC 高度自洽（5.4 = RR 那一节，Corollary 5.4.2 正是"RR 的直接推论"应在的位置）。
+**但它现在只有一条 L4 证据，禁止写进图。**
+
+⚠ **版本陷阱（未解决）**：检索后端描述的另一份 Jost 全书 PDF（挂在爱丁堡某教师页）里，
+"Quadratic Differentials. Teichmüller's Theorem" 在 **p. 163**，而我 L1 读到的 TOC 是 **p. 169**；
+两者**相差 6 页**，说明**至少存在两个不同版次**。**在版次钉死之前，`Cor. 5.4.2` 这个号不可搬运。**
+⚠ 另：那份全书 PDF 是**整本 Springer 书的扫描**挂在个人页上，版权状态存疑。
+按 `literature/CLAUDE.md` 规则 1（不使用未授权扫描），**本轮没有去取它**，也不建议下一轮去取；
+要定版次应走 DNB / 出版方 / 图书馆记录。
+
+### 39.6 Griffiths–Harris：**本轮完全没查（L0）**
+
+任务书列了它，但在预算内我优先把"能拿到全文的公开讲义"（§42.7）做完了。
+诚实记录：**本轮对 GH 一次调用都没花，因此关于它的任何编号都不得写进图。**
+下一轮若要查，注意一个结构性风险：GH *Principles of Algebraic Geometry* 的结果**多以"章·节 + 页码"引用**，
+带编号定理较少 —— 也就是说它**未必**能提供本项目需要的"可逐字定位的编号"。先确认这一点再投入。
+
+### 39.7 ★ 唯一 L1 全文到手的来源：Eynard, *Lectures on compact Riemann surfaces*, arXiv:1805.06405v1
+
+**文献标识（L1，读自 PDF 首页）**：B. Eynard, *Lectures on compact Riemann surfaces.*，报告号 **IPhT-T18/007**，
+封面逐字 "Paris–Saclay's IPHT doctoral school Lecture given in winter 2018."，
+侧边戳记逐字 **`arXiv:1805.06405v1 [math-ph] 16 May 2018`**（⇒ **式号必须写死 v1**）。
+作者单位：Institut de Physique Théorique de Saclay + CRM Montréal。全书 Contents 在 p. 5–7，Bibliography 起 p. 119。
+**PDF 页码 = 印刷页码**（首页即印刷 p. 1）。
+
+**⚠ 编号结构（引用时必须照做）**：**每一章内部重新计数**（Ch. 4 有 Theorem 1.1/1.2/4.1…，Ch. 5 也有 Theorem 1.1/2.1/4.1…）。
+文内自引用的写法是**罗马章号 + 章内号**，例如正文逐字出现 "theorem III-3.4"、"corollary II-3.5"、"def. II-1.3"。
+⇒ **`loc` 里只写 "Theorem 1.2" 会歧义，必须写成 "Ch. 4, Theorem 1.2"（或按其自身风格 "IV-1.2"）。**
+
+**(a) Riemann–Roch 本体（书上 p. 72，L1 逐字）**
+
+> **Theorem 1.2 (Riemann-Roch)** *For every divisor D we have*
+> `r(−D) = deg D + 1 − 𝔤 + i(D).`   (1-10)
+
+配套定义（书上 p. 71，L1 逐字，Definition 1.2 的 (1-5)(1-6)）：
+
+> `ℒ(D) = {f ∈ 𝔐⁰(Σ) | (f) ≥ D}`  ,  `r(D) = dim ℒ(D)`,
+> `Ω(D) = {ω ∈ 𝔐¹(Σ) | (ω) ≥ D}`  ,  `i(D) = dim Ω(D)`.
+
+⇒ **与 Hartshorne 形式的字典**：`r(−D) = l(D)`，`i(D) = l(K − D)`，`𝔤 = g`。两者是同一条定理。
+（⚠ Eynard 用的是 `r(−D)`，**负号在括号里**；抄错就整体差一个符号。）
+
+**(b) 同章可引的配套结果（L1）**：Theorem 1.1 (1-7) `r(D) = r([D])`、`i(D) = i([D])`（只依赖除子类）；
+**Proposition 5.1 (Riemann inequality)**（p. 75）`r(−D) ≥ deg D − 𝔤 + 1`；证明散布在 §5.2（p. 75–76）的 Theorem 5.2/5.3、Prop 5.2/5.3。
+**⇒ 这是一份把 RR 完整证完的公开讲义**（"The Riemann-Roch theorem, that we shall prove in this chapter"，p. 72 逐字）。
+
+**(c) 模空间侧（书上 p. 77、88、89，L1 逐字）** —— 这一段直接对上图卡的 `μ`：
+
+- p. 77 章首无编号公式 **(0-1)**：`d_{𝔤,n} = 3𝔤 − 3 + n` , `χ_{𝔤,n} = 2 − 2𝔤 − n`。
+- p. 88 §4 开头逐字："We shall find an explicit atlas of the moduli space ℳ_{g,n}.
+  **Charts will be homeomorphic to ℝ₊^{6g−6+2n}**, and with gluing rules encoded by graphs."
+  ⇒ **`dim_ℝ ℳ_{g,n} = 6g − 6 + 2n` 有一条可引的公开来源了**（正是图卡 `notes` 里点名要与 `μ` 区分的那条式子）。
+- p. 89 **Theorem 4.1**：`dim Ω_𝒮 = d_{𝔤,n} = 3𝔤 − 3 + n`  (4-7)。
+  ⚠⚠ **这里的 `Ω_𝒮` 不是全纯二次微分**：同页逐字定义为"having **double poles at the marked points**, and no other poles"
+  的二次微分构成的**仿射**空间（其底下的线性空间是"在 pᵢ 处至多一阶极点"的二次微分）。
+  n = 0 时它才退化成全纯二次微分并给出 `3g − 3`，但该节的前提是 `2𝔤 − 2 + n > 0` 且引入了 `L₁,…,Lₙ > 0`。
+  ⇒ **不得直接拿 Theorem 4.1 当"dim H⁰(K²) = 3g−3"的来源**；要么另找来源，要么在 note 里写清 n = 0 的退化是抽取者的推断。
+
+**(d) 顺带 L1 核到的、可给卡片"检验值"做数学侧佐证的三条**：
+
+- **Ch. 5, Theorem 1.1 (1-1)（p. 77）**：`ℳ_{0,0} = {(ℂP¹)}` , `Aut = PSL(2,ℂ)` ⇒ 球面共形 Killing 群复维 3 ⇒ **κ(S₂) = 6**。
+- **Ch. 5, Corollary 2.1 (2-9)（p. 85）** 与其后逐字："However, each `T_τ` has an infinite group of automorphisms,
+  indeed every translation `z ↦ z + β` for `β ∈ ℂ` is an automorphism. `ℳ_{1,0}` is unstable."
+  ⇒ 环面自同构含全体平移，复维 1 ⇒ **κ(T²) = 2**。
+- **Ch. 5, Theorem 2.2（p. 86）**："`ℳ_{1,1}` is an orbifold of dimension 1"（复维 1）⇒ **μ(T²) = 2**（实）。
+  ⚠ 注意它是 `ℳ_{1,1}`（带 1 个标记点）而不是 `ℳ_{1,0}`；`ℳ_{1,0}` 在同一处被判为 **unstable**。
+  这正是图卡 `notes` 里"μ 只数度规的模、不含顶点算子位置"那条警告的数学侧对应物，**换算时必须小心**。
+
+### 39.8 最弱的一环：`κ`、`μ` 与上同调维数的**桥**（本轮无来源）
+
+图卡的 `κ`、`μ` 是**物理定义**（共形 Killing 方程的解数、无迹横向度规变分的模数），
+而 Riemann–Roch 给的是 `dim H⁰(K^{−1})`、`dim H⁰(K²)`。**这两组量之间的等同不是 RR 的内容。**
+
+- **(B1) `κ = 2 dim H⁰(K^{−1})`**：在复坐标下共形 Killing 方程即 `∂̄ v^z = 0`，属"一算就出"的一步，
+  但**本轮没有找到任何带编号的数学来源**这么陈述。（Eynard 给的是自同构**群**，不是 CKV **方程**的解空间；
+  两者相等还要一步"Aut 的李代数 = 全纯向量场"。）
+- **(B2) `μ = 2 dim H⁰(K²)`**：这一步实质上是 Teichmüller 理论（`coker P₁ ≅ H⁰(K²)`，
+  或"ℳ_g 的余切空间 = 全纯二次微分"）。**本轮同样没有带编号来源**；
+  §42.5 的 Jost `Cor. 5.4.2` 与 Jost §4.2（Teichmüller's Theorem, p. 169）是最有希望的两个入口。
+- ⇒ **curator 若现在就把 RR 挂上去，(B1)(B2) 必须显式建成节点或至少标 `inferred: true` 并留 note**，
+  否则会出现"挂了一条数学来源、却跳过了两处未论证等同"的情况 —— 这恰恰是本项目最想避免的失真。
+
+### 39.9 形式化状态：**Mathlib 没有 Riemann–Roch**
+
+`raw.githubusercontent.com/leanprover-community/mathlib4/master/docs/1000.yaml`（读取日期 **2026-09-11**）里
+标题含 "Riemann–Roch" 的条目共 **4** 条：`Q379048: Riemann–Roch theorem`、`Q4663326: Hirzebruch–Riemann–Roch theorem`、
+`Q7333126: Riemann–Roch theorem for surfaces`、`Q17102744: Riemann–Roch theorem for smooth manifolds`，
+**四条都只有 `title` 字段，没有 `decl` / `authors` / `date`** —— 按该文件的字段约定，这是**官方的"尚未形式化"记录**。
+
+⇒ **`worldsheet.riemann-roch-kappa-minus-mu` 的天花板是 `rigorous`，不可能是 `formalized`**；
+也不要指望把这一条选进 Phase 2 的 Lean 岛（RR 本身就是一个大工程）。
+
+### 39.10 ★ `loc` 建议 与「能否走 rigorous」的判断
+
+**(A) `loc` 建议（供 curator 直接抄）**
+
+```yaml
+# 首选：唯一 L1 全文到手、且免费可得
+- ref: eynard-2018-lectures
+  loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), eq. (1-10), p. 72 (arXiv:1805.06405v1)"
+  note: |
+    章内重新计数，必须连章号一起写。除子约定：ℒ(D)={f | (f) ≥ D}，定理写作 r(−D)=deg D+1−𝔤+i(D)，
+    与 Hartshorne 形式的字典是 r(−D)=l(D)、i(D)=l(K−D)。版本写死 v1。
+
+# 次选：教科书侧，编号为二手核实
+- ref: hartshorne-1977
+  loc: "Ch. IV, Theorem 1.3"
+  note: |
+    编号系二手核实（Wynter, UChicago REU 2016, p.11 逐字引作 "Theorem IV.1.3, Hartshorne"）；
+    本项目未取得 Hartshorne 原书。l(D) 用向量空间维数约定（另有射影维数约定，整式差 1）。
+
+# 只能写到小节的两条
+- ref: farkas-kra-1992
+  loc: "§III.4 (Divisors and the Riemann–Roch Theorem), pp. 69–78, 2nd ed."   # 禁写 Theorem III.4.8
+# Jost：**本轮未登记进 sources.bib（版次未定，见 §42.11(a)）**。若将来登记，loc 只能写
+#   "§5.4 (Divisors. The Riemann-Roch Theorem), p. 225ff."，且禁写 Cor. 5.4.2。
+```
+
+**(B) 能否走 rigorous —— 判断：可以，但不是"加一条边"，而是要新建 3–4 个节点；且现在还差两块**
+
+1. **数学定理本身：够格。** Riemann–Roch 在三本教科书 + 一份把它证完的公开讲义里都是**有证明的定理**，
+   来源强度足以支撑 `status: rigorous` 的推导。**Eynard 那份还能被任何人免费复核**，这一点对本项目特别有价值。
+2. **算术那一步：干净且可机检。** §42.2 的 `l(2K) − l(−K) = 3g − 3` 只用到 RR + `deg K = 2g−2`，
+   是一行代数，**没有分情形、没有"用球面标定常数"**。⇒ 数学路线一旦建成，会**同时消掉**现有推导 gap 第 1 条
+   （比例常数靠单例标定）与其"残余"（缺 `μ(S₂) = 0` 的断言）。
+3. **⚠ 仍缺第一块：(B1)(B2) 两处物理量 ↔ 上同调维数的等同**（§42.8）。**本轮无来源。**
+   在补上之前，新推导的诚实标法是 `status: rigorous` **但** 把 (B1)(B2) 作为**依赖节点**列出，
+   而那两个节点当前只能是 `physical-argument` —— 于是**有效状态仍被压到 `physical-argument`**。
+   **这是好事**：它正确地暴露了"数学侧其实卡在桥上，不卡在 RR 上"。
+4. **⚠ 仍缺第二块：不可定向情形。** 图卡 statement 明写"**可定向或不可定向**"，
+   而 Riemann–Roch 是黎曼面（可定向）上的定理。Klein 瓶 / ℝP² / Möbius 带要走**定向双覆盖 + 对合不变子空间**，
+   **本轮没有任何来源覆盖这一步**。
+   ⇒ **建议 curator 把卡片拆成两条**：可定向情形（可走 RR，能到 rigorous）与不可定向情形（暂无数学来源）。
+   若不拆，则新推导必须在 `gaps` 里明写"只覆盖可定向情形"，否则会出现**推导覆盖面小于陈述**的失真。
+5. **形式化：到此为止。** §42.9 已证 Mathlib 无 RR，`formalized` 不可能。
+
+**(C) 一句话给 lead**：登记 Riemann–Roch 是**值得做**的（它把这个节点从"靠球面标定的物理论证"变成"差两座桥的严格路线"），
+但**不要指望这一步就把节点提到 rigorous**；真正的瓶颈已经转移到 `κ`/`μ` 的定义与上同调维数之间那两处等同，
+以及不可定向情形。
+
+### 39.11 `sources.bib` 登记建议 + 访问日志 + 未解决问题
+
+**(a) 本轮 `sources.bib` 登记情况**（researcher 已写入；只增不改）：
+
+| key | 条目 | 证据等级 | 是否已登记 |
+|---|---|---|---|
+| `eynard-2018-lectures` | B. Eynard, *Lectures on compact Riemann surfaces*, arXiv:1805.06405v1 (2018), IPhT-T18/007 | **L1 全文** | **已登记** |
+| `farkas-kra-1992` | H. M. Farkas, I. Kra, *Riemann Surfaces*, 2nd ed., GTM 71, Springer | **L1 目录**（正文未取得；年份未独立核实） | **已登记** |
+| `hartshorne-1977` | R. Hartshorne, *Algebraic Geometry*, GTM 52, Springer | **L3 编号**（原书未取得） | **已登记** |
+| （Jost） | J. Jost, *Compact Riemann Surfaces*, Springer | L1 目录，但**版次未定** | **本轮不登记** |
+
+⚠ **Jost 为什么不登记**：`sources.bib` 的 key 规则是 `<firstauthor>-<year>`，而本轮**定不下版次与年份**（§42.5）；
+同一书至少有两个版次、同名小节页码相差 6 页。**先定版次，再登记**，否则 `loc` 里的页码会指向错误的版本。
+在此之前，图里**不要**引 Jost。
+
+**(b) 访问日志（本轮，供后人省事）**
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Eynard 讲义全文** | `arxiv.org/pdf/1805.06405` | **成功**（落盘 2.2 MB；读 p.1–7、71–77、84–89） |
+| Eynard HTML | `ar5iv.labs.arxiv.org/html/1805.06405` | 部分成功：**章节结构可读，但正文在 Ch.4 之前就被截断** ⇒ 定理号只能靠 PDF |
+| **Farkas–Kra 目录** | `d-nb.info/920606512/04` | **成功**（62 KB 扫描，4 页；含 `Second Edition` 字样） |
+| **Jost 目录** | `d-nb.info/948901241/04` | **成功**（460 KB 扫描，3 页；无版次字样） |
+| **Hartshorne 编号（经引用方）** | `math.uchicago.edu/~may/REU2016/REUPapers/Wynter.pdf` | **成功**（落盘 266 KB；p.11 逐字含 "Theorem IV.1.3, Hartshorne [2]"） |
+| 全纯二次微分维数的编号出处 | `ar5iv.labs.arxiv.org/html/1902.06406` | **成功但是否定结论**：该综述自己算 `3g−3`，引 FK/Jost 时**不给定理号** |
+| **Mathlib 形式化状态** | `raw.githubusercontent.com/…/mathlib4/master/docs/1000.yaml` | **成功**：4 条 RR 词条全部只有 `title` ⇒ 未形式化 |
+| Jost 全书 PDF（个人页扫描） | `webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf` | **主动不取**：整本 Springer 书扫描，版权状态存疑，按 `literature/CLAUDE.md` 规则 1 回避 |
+| Springer 章（`[219, Cor. 5.4.2]` 的出处） | `link.springer.com/chapter/10.1007/978-3-032-09219-9_9` | **未取**（Springer 登录墙，既有记录已判死路） |
+| Griffiths–Harris | — | **本轮未查（0 次调用）** |
+
+**(c) 未解决 / 留给下一轮**
+
+- **Q30** **Farkas–Kra 的 `Theorem III.4.8` 是否真是 Riemann–Roch（现 L4）。**
+  最省力的下一招不是找书，而是找**逐字引了该号的论文**（Google Books 对 GTM 71 的两个 volume id
+  `6pXuBwAAQBAJ`、`bGZDU9HxgpAC` 尚未跑过"无意义字符串"控制实验，可试，但按既有教训它只能当一致性检查）。
+- **Q31** **FK 里 `dim H⁰(K²) = 3g−3` 到底有没有编号、在 III.5 的哪一条。**
+  已有一条负面信号：专门写这个主题的综述（1902.06406）**不给号**。
+- **Q32** **Jost 的版次**（DNB 那份无版次字样；另有一份 PDF 的同名小节页码相差 6 页），
+  以及 **`Corollary 5.4.2` 的内容是否就是 `3g−3`（现 L4）**。**版次不定则编号不可搬运。**
+- **Q33** **(B1)/(B2) 两座桥的带编号数学来源**（§42.8）——本轮完全空白，是数学侧真正的瓶颈。
+  候选入口：Jost §4.2（Teichmüller's Theorem, p. 169）、FK V.2（p. 269）、Ahlfors–Bers 原始文献。
+- **Q34** **不可定向世界面上的对应陈述**（§42.10 第 4 点）——本轮无来源，且图卡的 statement 已经把它包含在内。
+- **Q35** Griffiths–Harris 是否提供**可逐字定位的编号**（§42.6）——先确认这一点再投入额度。
+

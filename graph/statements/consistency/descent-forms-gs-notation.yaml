@@ -1,0 +1,124 @@
+id: consistency.descent-forms-gs-notation
+kind: definition
+status: physical-argument
+title: Green–Schwarz 1984 标号下的下降形式 ω⁰_{2n+1 Y}、ω¹_{2n Y} 与洛伦兹一路 ω⁰_{2n+1 L}、ω¹_{2n L}
+statement: |
+  本卡把 math.chern-simons-descent-equations 特化到 green-schwarz-1984 的标号与迹约定
+  （conv.gauge-trace-normalization；楔号省略），并补上 GS 使用而本图数学卡不涵盖的**引力/洛伦兹一路**。
+
+  **(1) Yang–Mills 一路（GS 标号）**
+
+      d ω⁰_{2n+1 Y} = tr F^{n+1}                                              (GS (15))
+      δ ω⁰_{2n+1 Y} = − d ω¹_{2n Y}                                           (GS (16))
+
+  两族形式**只定到相差一个恰当形式**（GS (15) 前逐字：「where ω⁰_{2n+1 Y} is defined (up to an exact
+  form) by」）。n = 1 的标准取法由 GS 显式给出：
+
+      ω⁰_{3Y} = tr(A F − ⅓ A³),      d ω⁰_{3Y} = tr F²                        (GS (5)(6))
+
+  n = 3 给出 consistency.gs-counterterms-1984 里 S₁、S₃ 用到的 ω⁰_{7Y}；反常写成 ∫ω¹_{2n} 的形式
+  （例如 GS (17) 的 G 里出现 ω¹_{2Y}、ω¹_{6Y}）。
+
+  ★ **标号换算**：GS 的 n 与 math.chern-simons-descent-equations 的 n 差 1，
+
+      **n_Zumino = n_GS + 1**
+
+  即 GS 的 ω⁰_{3Y} = 数学卡 n = 2 的 ω⁰_3，GS 的 ω⁰_{7Y} = 数学卡 n = 4 的 ω⁰_7，
+  GS 的 ω¹_{2n Y} = 数学卡的 ω¹_{2n}（下标不变）。**符号与系数在换标后逐项相同**，见 notes 第 1 条。
+
+  **(2) 洛伦兹一路（GS 记号 L）**
+
+  把 (A, F) 换成十维切空间代数 SO(9,1) 的 10 × 10 自旋联络与曲率 (ω, R)（R = dω + ω²）、下标 Y 换成 L，
+  记号与关系相同：
+
+      ω⁰_{3L} = tr(ω R − ⅓ ω³),      d ω⁰_{3L} = tr R²                        (GS (7)(8))
+
+  S₂、S₃ 与引力反常一路用到 ω⁰_{7L}、ω¹_{10L}。
+
+  ★ **本卡对 (2) 的证据分层（必须随本卡搬运）**：
+    · **n = 1 的两式 (GS (7)(8)) 是 GS 原文逐字给出的**（L1）。
+    · **一般 n 的洛伦兹侧（ω⁰_{7L}、ω¹_{10L} 等）在 GS 原文里只被使用、从未被定义**；本图把它们理解为
+      「在 (1) 的一般公式里作代换 A → ω、F → R」。**GS 原文没有陈述这个代换**——这是本项目的推断。
+    · **该代换在 Zumino 一侧没有任何支撑**：math.chern-simons-descent-equations 的主来源
+      zumino-1983-les-houches 全文只处理内部对称群，**没有自旋联络 ω、没有 R、没有 tr R²、没有 ω⁰_{3L}**
+      （L1 全文 46 页通读确认）。⇒ **凡涉及洛伦兹一路的边一律标 `inferred: true`，且不得列 zumino-* 为来源。**
+
+  **本卡不含**
+
+  (a) ω⁰_{2n+1}、ω¹_{2n} 的一般显式表达式（n ≥ 2）：GS 逐字把它们外包给 ref. [9]
+      = zumino-wu-zee-1984（**本项目正文未取得**）。本图掌握的显式代表元来自
+      math.chern-simons-descent-equations（Yang–Mills 侧，且只有该卡列出的几个特例）。
+  (b) 任何绝对归一化（无 i、2π 因子）；GS 的常数 c 见 consistency.gs-counterterms-1984。
+  (c) 「ω¹_{2n} 就是相容反常」这条识别——见 consistency.descent-omega1-is-consistent-anomaly。
+  (d) 全局性：数学卡的唯一已核实来源逐字声明这类等式「really valid only locally」；
+      **GS 直接在整个十维时空上使用它们，本图对此没有来源**（见 notes 第 3 条）。
+uses:
+  - math.chern-simons-descent-equations
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118–119（重印 609–610），(5)(6)(7)(8)（n = 1 的显式式子）与 (15)(16)（一般 n 的下降关系）；(15) 前逐字「where ω⁰_{2n+1 Y} is defined (up to an exact form) by」；(15) 后逐字「Explicit expressions for ω⁰_{2n+1 Y} are given in ref. [9]」"
+    note: |
+      L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E9。
+      **洛伦兹一路只有 n = 1 的 (7)(8) 是原文字面**；ω⁰_{7L}、ω¹_{10L} 在原文里只被使用不被定义。
+  - ref: zumino-1983-les-houches
+    loc: "(2.25)（ω₃ = Tr(A dA + ⅔A³) = Tr(AF − ⅓A³)）；(2.26)（Tr F² = dω₃）；(2.28)(2.29) 与其 §5 重述 (5.7)（一般 n 的 ω_{2n−1} = n Tr∫₀¹dt A F_t^{n−1}）；(3.1)（Tr Fⁿ = dω⁰_{2n−1}）；(3.32) 第一行（δω⁰_{2n−1} + dω¹_{2n−2} = 0）"
+    note: |
+      ★ **L1 逐页读图；本条只承载 (1) 的 Yang–Mills 一路，不承载 (2)。**
+      本条登记的是一条**约定归属的核实结果**（抽取记录 §1.2 逐条对照表）：
+      **GS (5)(6)(15)(16) 不是「大意引用 ref [9]」，而是逐字采用了本条的约定与符号**，
+      包括 (5) 里的 `−⅓`、(6)(15) 的**正号（无 2π、无数值因子）**、以及 (16) 的那个**负号**。
+      换标为 n_Zumino = n_GS + 1 后逐项相同。
+      ⚠ 这条核实是在 **Les Houches 讲义**上做的，不是在 GS 所引的 ref [9]（= zumino-wu-zee-1984）上做的；
+      **但本条本身正是 GS 的 ref [10] 的第一项**，所以它是 GS 自己引用过的文献，不是外部替代品。
+      ⚠ **本条全文不含引力侧**，故 (2) 的任何内容都不得溯源到本条。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（GS ref. [9]）"
+    note: |
+      **L2。** 列在这里只承载一件事：本卡「不含 (a)」那一段——GS 把一般 n 的显式表达式外包给了它。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。需要下降方程的可引位置时一律改引
+      zumino-1983-les-houches 的式号。抽取记录 §0.2/§3.1。
+tags: [anomaly, chern-simons, descent-equations, differential-forms, green-schwarz, d10]
+notes: |
+  【1. ★ GS 与 Zumino 的符号逐字同一（本轮核实，L1）】抽取记录 §1.2 的对照表逐条给出：
+    · 场强：GS (2) `F ≡ ½F_{μν}dx^μ∧dx^ν = dA + A²`（省 ∧） ↔ Zumino (2.11) `F = dA + A²`（省 ∧）；
+    · 规范势：GS (3) `A = A^a_μ λ^a dx^μ`（λ^a **反厄米**） ↔ Zumino (2.10) `A = −i A^k_μ λ_k dx^μ`
+      （λ_k **厄米**）——即 `λ^a_GS = −i λ_{k,Zumino}`，**两边的 A 都是反厄米矩阵一形式**，同一约定；
+    · CS 三形式：GS (5) ↔ Zumino (2.25) 第三式，**逐字同一表达式**；
+    · 第一条下降方程：GS (6)(15) ↔ Zumino (2.26)/(3.1)，**正号，无 1/2π，无数值因子**；
+    · 第二条下降方程：GS (16) `δω⁰ = −dω¹` ↔ Zumino (3.32) 第一行 `δω⁰ + dω¹ = 0`，**含符号一致**。
+  ⇒ **「GS 的下降方程符号约定源头」这个问题至此闭合**（在 Les Houches 讲义上，L1）。
+
+  【2. ★ 为什么 status 取 physical-argument（沿用旧卡的理由，未变）】本卡定义的对象**不唯一**：
+  ω⁰_{2n+1} 与 ω¹_{2n} 各只定到恰当形式，而 consistency.gs-counterterms-1984 的 S₁ (18)、S₃ (23)
+  显式含 ω⁰_{7Y}、ω⁰_{7L}，取不同代表元会改变这些反项的具体表达式。
+  也就是说：**本图掌握的定义不足以唯一确定下游对象**，而能补上这一点的来源（zumino-wu-zee-1984 正文）
+  本项目未取得。加上 (2) 一般 n 的洛伦兹侧是本项目的推断（非原文），按「不确定选低一级」取 physical-argument。
+  ⚠ 注意本卡 `uses` 的 math.chern-simons-descent-equations 本身是 rigorous 的——
+  **状态在本卡这一层被压低是有意的记账**：数学内容严格，GS 标号下的这一层不严格。
+
+  【3. ★ 局部性 gap（本轮新发现）】math.chern-simons-descent-equations 的唯一已核实来源
+  （zumino-1983-les-houches, p.16 末）逐字限定这类等式「really valid only locally, in some finite
+  neighborhood in x-space」，全局版需要主丛上的联络而非底空间上的规范势。
+  **green-schwarz-1984 全文没有这句话**，GS 直接在整个十维时空上写 (4)–(8)、(14)–(16)。
+  这条限定此前在本图与 green-schwarz-1984.md / alvarez-gaume-witten-1984.md 里都没有被捕捉到。
+  已写进 math.chern-simons-descent-equations--via-chern-weil-transgression 的 gaps 与
+  consistency.anomaly-cancellation-*-effective-theory--via-* 的 gaps。
+
+  【4. 与现代记号的对照】现代文献常把这两族写成 Q_{2n+1}(A, F) 与 Q¹_{2n}，
+  并把整套关系叫「Stora–Zumino 下降方程」。**GS 1984 不用这些名字。**
+  bilal-2008 §12 用 Q₃(A,F)、Q₂¹(v,A,F)，且其 H 的整体符号与 GS 相反（见
+  consistency.h-field-strength-chern-simons notes 第 2 条），抄系数前必须先换算。
+
+  【5. 换代记录（2026-09-11）】本卡接手旧卡 **consistency.descent-forms-chern-simons** 的下游角色，
+  该旧卡已 `superseded_by` 本卡。旧卡把三件事写在一张定义卡里：
+  (a) 纯微分几何的下降方程 → 现为 math.chern-simons-descent-equations（proposition, rigorous）；
+  (b) GS 的标号与引力侧代换 → 本卡；
+  (c) 「反常写成 ∫ω¹」这条物理识别 → consistency.descent-omega1-is-consistent-anomaly
+      （proposition, physical-argument）。
+  拆分依据：graph/CLAUDE.md「一个节点一个命题」，以及 literature/extractions/zumino-wu-zee-1984.md §5.2
+  「不要把这两条合成一张卡——前者是定理，后者是物理识别」。
+  **旧卡的 statement 文本一字未改**（项目原则 1）。
+author: curator
+created: "2026-09-11"

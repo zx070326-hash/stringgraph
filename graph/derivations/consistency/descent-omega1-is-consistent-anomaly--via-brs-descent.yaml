@@ -1,0 +1,69 @@
+id: consistency.descent-omega1-is-consistent-anomaly--via-brs-descent
+target: consistency.descent-omega1-is-consistent-anomaly
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.chern-simons-descent-equations
+    note: |
+      提供 (iii) 的下降链 δω^p + dω^{p+1} = 0、按 v 幂次的展开 (3.31)、以及 ω¹ 的两个显式特例
+      (3.37)(3.38)。本推导只在其上加物理识别，不重证任何微分几何步骤。
+  - id: conv.gauge-trace-normalization
+sources:
+  - ref: zumino-1983-les-houches
+    loc: "(4.1)–(4.4)（X_i、其代数、G_i = X_i W[A]、相容条件）；(4.6)(4.7)（鬼场写法）；(4.8)–(4.11)（δA、δv、δ(v·G) = 0、δ² = 0）；(4.13)–(4.15)；p.28「It should be clear that (4.8), (4.9) are nothing but the BRS-transformations and (4.10) the Slavnov identity for the special case of currents.」；p.29「Hence the δ defined in (4.14), (4.15) and the d in (4.17) fulfill the algebra (3.25) (3.26) and will be identified with those operators.」；(4.17)(4.18) 与结论句「We see that ω¹_{2n−2} is linear in v and satisfies the consistency condition.」；引导句「What remains to be shown is thus only that (4.17) can be identified with …」"
+    note: L1 逐页读图，抽取记录 literature/extractions/zumino-wu-zee-1984.md E11/E12。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（L2）；正文本项目一字未取到，无可引式号"
+    note: |
+      **只作独立佐证**：摘要逐字「automatically satisfies the Wess-Zumino consistency condition」。
+      ⚠ 红线：不得写「ZWZ eq. (X)」。
+summary: |
+  四步，其中前两步是来源的物理输入，后两步靠 math.chern-simons-descent-equations。
+
+  **第一步（相容条件的来源）。** 设手征费米子在外场中的有效作用量 W[A] 存在
+  （来源逐字：「the mere existence of the functional W[A], **which we suppose to be obtained by
+  appropriate renormalization**, implies a consistency condition」）。把规范变换的泛函生成元 X_i
+  作用在 W[A] 上定义 G_i = X_i W[A]；由 X_i 满足规范代数 [X_i, X_j] = f_{ij}^k X_k δ 立刻得到
+  Wess–Zumino 相容条件 (4.4)。**这一步没有圈图计算，只用 W[A] 的存在性与 X_i 的代数。**
+
+  **第二步（鬼场重写 ⇒ BRS）。** 引入反交换标量 v_i（Faddeev–Popov 场），把 (4.4) 缩并成
+  (4.7)，等价于 δ(v·G) = 0，其中 δA_μ = v·X A_μ、δv = −½(v × v)、δ² = 0。
+  来源对此的判定逐字：「It should be clear that (4.8), (4.9) are nothing but the **BRS-transformations**
+  and (4.10) the **Slavnov identity** for the special case of currents.」
+  ⚠ 但 δ² = 0 在来源里逐字只写「Exercise: check (4.11)」，**未证**（见 gaps）。
+
+  **第三步（认同两个 δ）。** 把 (4.14)(4.15) 的 δ𝒜 = −Dv、δv = −v² 与
+  math.chern-simons-descent-equations (iii) 里的 (3.25)(3.26) 逐字比对：**两组作用律相同**。
+  来源据此直接认同两个算子（p.29 逐字：「Hence the δ defined in (4.14), (4.15) and the d in (4.17)
+  fulfill the algebra (3.25) (3.26) and **will be identified with those operators**.」）。
+  ⇒ **「下降方程的 δ = BRS 算子」是来源自己的显式认同，不是后人的重排。**
+
+  **第四步（结论）。** 在这一认同下，下降链的第二条方程 (4.18) `δω¹_{2n−2} = d(−ω²_{2n−3})`
+  就直接说：δ∫ω¹_{2n−2} = 0（可略去边界项时），即 ω¹ 对 v 线性且满足相容条件。
+  来源的结论句逐字：「We see that ω¹_{2n−2} is linear in v and satisfies the consistency condition.」
+  ⇒ 这正是 zumino-wu-zee-1984 摘要里「automatically satisfies the Wess-Zumino consistency condition」
+  那句话的技术内容：因为 ω¹ 是从下降链里读出来的，(4.18) **自动**成立。
+gaps:
+  - "★ **W[A] 的存在性是假设**：来源逐字「which we suppose to be obtained by appropriate renormalization」。整条论证的物理起点（第一步）压在这条未兑现的假设上。本图没有任何节点承载「手征费米子有效作用量存在且可重整化」。"
+  - "★ **δ² = 0 未证**：来源对 (4.11) 逐字只写「**Exercise: check (4.11)**」。BRS 算子的幂零性是第二、四步的前提。"
+  - "★ **唯一性未讨论（本轮的三条新发现之一）**：来源 p.29 逐字「**The problem of finding the most general solution of the consistency condition will not be discussed here.**」⇒ 本推导只给出相容条件的**一个**解。green-schwarz-1984 (11) 前逐字依赖的「uniquely determined」**在 Zumino 一侧没有支撑**；唯一性属 manes-stora-zumino-1985 (CMP 102 (1985) 157) 一线，**本项目正文一字未取到**。"
+  - "**「是反常而非平凡项」未验证**：来源把反常定义为相容条件中「不是基本场的局域泛函之变分」的解，但**未给出 ω¹_{2n−2} 确实不落在平凡解里的一般证明**；本图也未验证。⇒ 严格说本推导证的是「ω¹ 是相容条件的解」，「它是反常」还差这一步。"
+  - "**与一圈微扰论的两处定量对接，本项目未复算**：来源自称 (3.38) `agrees with` (2.16)，且 n = 3 时 (5.13) 配 (3.38) `agrees with` 一圈结果 (2.9)（(2.9) 引自 Adler 1969 / Bardeen 1969 / Becchi 1975）。这两处是「微分几何构造」与「一圈微扰论」之间**仅有的**定量对接，是整条归一化链的信度基础。本图未复算（需先固定来源 (2.14) 的形式↔散度字典、λ 的厄米/反厄米换算，且 (5.13) 读图不可靠）。抽取记录 Q-Z4。"
+  - "**绝对归一化不入图**：来源 §5 的 (5.13) 读图不可靠且原文手写「(up to a sign)」。本推导给出的 ω¹ 未归一，**不能**用来定任何数值系数。"
+  - "**局部性**：本推导所用的下降链继承 math.chern-simons-descent-equations 的局部性限定（来源 p.16「really valid only locally」），本推导未做全局化。"
+notes: |
+  【1. status 为什么是 physical-argument】按 docs/STATUS_LEVELS.md：第一步依赖一个只被「假定存在」的
+  重整化有效作用量，第二步的 δ² = 0 被留作习题，第三步是来源作者的直接认同（不是定理），
+  第四步才是纯代数。整体是标准的物理学家式论证，故 physical-argument。
+  ★ 按 docs/STATUS_LEVELS.md「断言 + 骨架」的档位裁决（2026-09-11），本推导**不**取 conjecture：
+  结论本身在文献中无争议，不完整的是论证，已逐条写进 gaps。
+
+  【2. 本推导没有做的事】没有做任何圈图计算；没有复算来源自称的两处 "agrees"；
+  没有处理引力/洛伦兹反常（来源全文无引力侧）；没有触及十维与 Green–Schwarz 机制。
+
+  【3. 给后续 curator 的接口】若将来取得 manes-stora-zumino-1985 正文，
+  唯一性应建成**独立的新命题节点**（例如 consistency.consistent-anomaly-cohomology-classification），
+  再由 consistency.anomaly-twelve-form-d10 与 GS 一族的推导依赖它，
+  **不要**把唯一性塞回本卡的 statement（项目原则 1）。
+author: curator
+created: "2026-09-11"

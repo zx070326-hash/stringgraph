@@ -71,7 +71,21 @@ sources:
     loc: "§2.9"
     note: "抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式未核实，主来源为 schottenloher-2008 / feigin-fuchs-1982。"
 tags: [cft, representation-theory]
+superseded_by: worldsheet.kac-determinant-v2
 notes: |
+  【本卡已换代（2026-09-11 傍晚，curator-verma-followups）】接替者
+  worldsheet.kac-determinant-v2，**唯一差别**是把 statement 里的
+  「α_N 是与 (c,h) 无关的**正**常数」改为「**非零**常数」；其余文字与全部 sources 逐字相同。
+  换代理由就是下面 (A) 已经登记的那一条：「正」在本卡两条已核实来源里都无据
+  （feigin-fuchs-1982 只写 «ненулевая»（非零）且是 det² 版本，schottenloher-2008 写 K_N ≥ 0）。
+  (A) 末尾原先写「若 auditor / lead 决定规范化，正确做法是新建 worldsheet.kac-determinant-v2」，
+  本轮由 lead 分派执行，故该建议**已落实**。
+  **本卡 statement 文本一字未动**（根 CLAUDE.md 原则 1）。
+  本卡原有的唯一推导 worldsheet.kac-determinant--via-feigin-fuchs 已改指 v2 并随之改名为
+  worldsheet.kac-determinant-v2--via-feigin-fuchs（推导不是不可变卡，旧文件删除），
+  故本卡现在**没有推导**，在报告里会作为 superseded 单列而不计入 open propositions。
+  图上原先指向本卡的四条 depends_on 也已全部改指 v2。
+
   【记号约定（curator 2026-09-11 补）】本卡 statement 用 V(c,h) 记 Verma 模、用 ⟨h|h⟩ = 1
   归一化 Shapovalov 形式；这套记号现由 conv.verma-module-notation 统一定义并给出对照表
   （Kytölä 𝒱_{c,h} / Lian–Zuckerman M(c,h) / Humphreys Z(λ)）。

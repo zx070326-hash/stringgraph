@@ -6,12 +6,15 @@ depends_on:
   - id: worldsheet.old-covariant-physical-states
   - id: worldsheet.ddf-operators-v2
   - id: worldsheet.virasoro-algebra-v2
-  - id: worldsheet.kac-determinant
+  - id: worldsheet.kac-determinant-v2
     inferred: true
     note: |
       Goddard–Thorn 原文不引用 Kac 行列式（1979 年才有）。现代数学化表述
       （如 Frenkel–Garland–Zuckerman 1986 的 BRST 上同调证明）会用到 Verma 模结构。
       标 inferred 表示"现代严格证明依赖它"而非"原文依赖它"。
+      **2026-09-11：本边由 worldsheet.kac-determinant 改指其接替者
+      worldsheet.kac-determinant-v2**（后者只把 α_N 的「正常数」改为「非零常数」，
+      其余陈述与 sources 逐字相同）。本推导不使用 α_N 的符号，故换代对本边**无实质影响**。
 sources:
   - ref: goddard-thorn-1972
     loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"

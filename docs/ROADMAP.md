@@ -19,11 +19,12 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数：main 238 statements / 176 derivations / 27 formalized；Lean 26 声明公理干净（2144 jobs）。
+- 计数：main 262 statements / 196 derivations / 32 formalized；Lean 31 声明公理干净（2145 jobs）。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
-- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（m ≥ 1）与塔上版本** / level-2 负模态（含 p ≠ 0）已机器验证；进行中：DDF 算子 A^i_n 定义 + [L_m, A]=0（m ≥ 1）。剩：m < 0、DDF 横向代数、张成定理。
+- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（所有 m ≠ 0）** / **DDF 算子 A^ε_n 作为局部有限模态和 + [L_m, A^ε_n] = 0（m ≥ 1）** / level-2 负模态（含 p ≠ 0）已机器验证。剩：m = 0（真正例外）、塔版 m < 0、DDF 横向代数 [A,A]、张成定理。图接线（v6 定义卡、弱节点 positive-virasoro）进行中。
+- 无鬼定理回 rigorous：号差在顶点代数层不是假设（一切在 ℂ 上）；Li–Wang Thm 3.6/3.10 覆盖类光格——curator 正建 lattice-VA 卡并把 G–N 推导接离 open 根。
 - 无鬼定理回 rigorous 的最短路径：Gebert–Nicolai 顶点代数推导已入图（own rigorous），只被"自由玻色子顶点代数"缺卡压成 open——researcher 正找 Kac/LL/FLM 对不定号差格的编号定理。
 - Lean 岛 2（Green–Schwarz 代数）：因子化恒等式（SO(32)/E₈）、迹条件算术 7 条声明已合入；等 GS 1984 图节点合入后接线。
 - 附带数学岛：Verma 模、Euler 分拆、Witt/Virasoro 完美、Shapovalov 形式、Möbius Jacobian、Mandelstam 和。
@@ -75,11 +76,13 @@
 
 ## 待船长裁决
 
+- **ms.critical-dimension-bosonic 审批**：第三轮回译（2026-09-11）裁定 **faithful**，`audit.status: back-translated`，陈述 `worldsheet.critical-dimension-bosonic-v3`（五条合取 (I)–(V)：(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"）。auditor 建议 approved；两处记账（F1 闭弦截距节点已存在、F2 删 ζ 共享输入一句）与光锥路线卡换代 D ≥ 4 由 curator 处理中，均不阻塞。effective = physical-argument（光锥/Weyl 路线本身如此）。批准操作：`audit.status` 改 `approved`，填 captain 与 approved_on。
 - **ms.no-ghost-theorem 审批**：第四轮回译裁定 faithful，`audit.status: back-translated`，陈述 `worldsheet.no-ghost-theorem-v4`。审计员建议 approved。**2026-09-11 更新：拆 ddf-operators-v4 后，该里程碑的有效状态从 rigorous 降为 physical-argument**——原因是 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = mδδ 两条对易关系此前以"定义的一部分"身份传播 rigorous，图中从未独立论证，文献（Goddard 2008/GSW）也只预设不证明。这不是陈述有错，是记账修正；升级路径是 Lean 共形权（进行中）与顶点算子乘积。船长审批 approved 时应知晓：**里程碑陈述忠实，但其推导链目前含两处 physical-argument**。第五轮审计（2026-09-11）确认 canonical_text 不引 ddf-v4（引用只在 statement 内，不可变），忠实性裁定维持；裁定 **approved 只断言忠实性，不绑有效状态**（已写入 docs/STATUS_LEVELS.md）。船长可在 effective = physical-argument 下批准。船长需知晓三个已登记 gap：(2) 的历史归属仅二手（Goddard 2008 → Brower–Thorn 1971）；canonical_source 仍是 GT 1972 摘要级、只覆盖 (1a)；逐塔打包与一般 α' 归一化是本项目规范化，文献无逐字。批准操作：把该文件 `audit.status` 改为 `approved` 并提交。
 
 - **需船长人工点击一次的文件**（agent 被反爬拦住，文件本身公开；见 literature/extractions/primary-sources-round2.md §12.9）：
   1. Goddard–Thorn 1972 正文：`https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`（CERN-TH-1493，MARC 963 = PUBLIC）——里程碑 canonical_source 的一手来源
   2. Brower–Thorn 1971：`https://cds.cern.ch/record/352004/files/CM-P00058794.pdf`——可裁决 D>26 负模态的历史归属
+  4. **GSW Vol.2 ch.13（pp.307–362，12 MB，超出 WebFetch 10 MB 上限）**：`https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`——本机构有 Cambridge Core 订阅；取到即可裁决四解分类的原文措辞（§13.5.3 pp.353–358）。同一天花板卡住 GSW v1 ch.2（无鬼定理 §2.3.3，13 MB）。
   3. Thorn 1985 Santa Barbara 42 页报告（自述"improved version of the Goddard–Thorn proof"）：`https://inis.iaea.org/records/szqhd-hct30`，需免费注册——是否注册请船长决定
   下载后放 `literature/raw/`（gitignore）并告知，researcher 即可逐页抽取。
 
@@ -119,15 +122,18 @@
 - ~~待建：正规序等同节点~~ 已建 `worldsheet.normal-ordering-modes-agree`（2026-09-11）。后续拆：X 半边弱节点（让 c = D 的 OPE 路线不拖进鬼场链）与不含常数值的纯代数弱节点（可走 rigorous 例外）。`conformal-normal-ordering` 已出 v2（任意自由场含费米型，2026-09-11）。
 - 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
 - **已闭合（2026-09-11）**：H 的 Chern–Simons 符号约定——Bilal 2008 β̃ = 1 已由 lead 逐页核实（(12.14)/(12.26)），GS (4) 与 Bilal (12.14) 相差 (B,H)↦(−B,−H)，两家一致；GS (5)(6)(15)(16) 与 Zumino Les Houches 1983 约定逐字同一；ZWZ 正文不可得（L2），图中不得出现"ZWZ eq. (X)"。
-- 待换代：`worldsheet.critical-dimension-light-cone` 补前提 D ≥ 4（iff 在 D ≤ 3 不成立；GSW 原文同样未写）——等 auditor 第三轮裁定。
+- 换代中：`worldsheet.critical-dimension-light-cone` → v2 补前提 D ≥ 4（auditor 第三轮要求；curator-critdim-followups）。
+- 待建：`worldsheet.no-ghost-theorem-closed`（闭弦两组振子的 H_OCQ ≅ H_lc；v4 是单组振子）——桥卡 `covariant-external-legs-on-shell` 第 (4) 步闭弦半目前是类比。
 - 待换代：`worldsheet.kac-determinant` 陈述中 α_N "正"无据（FF 写 ненулевая、Schottenloher 写 K_N ≥ 0）；lead 裁决：新建 v2 写"非零常数"并 superseded_by（不是里程碑，走普通换代）。
 - 待建：`worldsheet.shapovalov-form-unconditional-existence`（rigorous，依赖 verma-module-free-over-negative-part；`--via-pbw` 已证到但无节点承载）；`descendant-weight-grading*` 可挂 Verma.lean 新 `lie_lgen_mem_levelSpan`（任意交换 ℚ-代数、无 c,h 假设）。
-- 待拆：`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
+- **lead 裁决（2026-09-11）**：`math.chern-simons-descent-equations--via-chern-weil-transgression` 保持 rigorous——Chern–Weil transgression 是标准已发表数学定理，own status 按论证本身；但三条 canonical 数学源（Chern / Kobayashi–Nomizu / Nakahara）目前 L0，researcher 须在该卡进入任何里程碑推导链前核实到编号。
+- **记账红线（2026-09-11，ADT 2010 L1）**：U(1)⁴⁹⁶ 与 E₈×U(1)²⁴⁸ 只是使反常十二形式**因子化**，GS 抵消项在阿贝尔情形**写不下来**（Y₄ ≠ dH₃，与超对称+阿贝尔规范不变性不相容）——图中分类卡只能写"因子化"，不得写"反常抵消"；Vafa 2005 E15 的前提被 ADT 反驳。四解分类原文措辞仍 L0（GSW ch.13 待船长点击）。
+- 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
 - 待建：**`worldsheet.free-boson-vertex-algebra`**（D 个自由玻色子（不定号差）⊗ C[Z k_0] 的 Heisenberg/格点顶点代数，动量塔为其模；来源 FLM / Kac / Lepowsky–Li）与 **`math.vertex-algebra-jacobi-identity`**（Borcherds 恒等式带编号）。补上后 G–N 推导 `ddf-commute-with-virasoro--via-vertex-algebra-primary` 直接升 rigorous，无鬼定理随之回 rigorous——**这是当前最短的升级路径**（curator-gn-ddf 2026-09-11）。
 - 待处理：Polchinski v1 原书核实（§12.10）30 条 loc 修改、15 条作者自承缺口、Q6（weyl-anomaly-v2 的 c^m=26 应挂 §4.3 (4.3.9)）、Q22 撤销 Narain 压级建议、Q3（OPE 收敛 p.69 有论证）。
-- 待建：**"光锥质量壳 → 协变振幅外线 on-shell"**（§1 光锥谱与 §6 协变振幅外线之间的系统性缺环，§6 分支 6 条 inferred 边全指向它；reviewer-ch6）
+- **已建（2026-09-11）**：`spectrum.covariant-external-legs-on-shell`（撤 4 条 inferred，3 条窄化为中间态上壳）。原条目：**"光锥质量壳 → 协变振幅外线 on-shell"**（§1 光锥谱与 §6 协变振幅外线之间的系统性缺环，§6 分支 6 条 inferred 边全指向它；reviewer-ch6）
 - 待建：`compact.kaluza-klein-metric-ansatz`（(8.1.2)，KK 塔的前提 G^{μd}=0 目前只在陈述文本里）；Chan–Paton 卡就位后 Wilson 线两卡补边
 - 待建：欧氏 Polyakov 作用量定义卡或"S_P^L diff×Weyl 不变 ⟹ S_P^E 亦然"命题，让 Wick 旋转从约定节点变成有陈述承载
 

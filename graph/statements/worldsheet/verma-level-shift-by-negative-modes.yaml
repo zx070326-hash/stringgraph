@@ -1,0 +1,114 @@
+id: worldsheet.verma-level-shift-by-negative-modes
+kind: proposition
+title: Verma 模的 level 移位：负模态 L_{−k}（k ≥ 1）把 V_N 送进 V_{N+k}——任意交换 ℚ-代数，对 (c,h) 无假设，不需要 V(c,h) ≠ 0
+statement: |
+  设 R 是交换环且是 ℚ-代数，(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），|c,h⟩ 是最高权向量，V_N ⊆ V(c,h) 是 **level N 分量**
+  （同上引节点：由 N 的全体**合成** b_1 + … + b_j = N (b_i ≥ 1) 所对应的负模态词
+  L_{−b_1} L_{−b_2} … L_{−b_j} |c,h⟩ 张成的 R-子模；N = 0 时即 R·|c,h⟩）。则：
+
+  **(1) 按自然数指标**：对一切整数 k ≥ 1、一切 N ∈ N、一切 x ∈ V_N，
+
+      L_{−k} · x ∈ V_{N+k}，
+
+  即 L_{−k}(V_N) ⊆ V_{N+k}。
+
+  **(2) 按负整数指标（同一命题的重述）**：对一切整数 n < 0、一切 N ∈ N、一切 x ∈ V_N，
+
+      L_n · x ∈ V_{N + |n|}。
+
+  由 |n| ≥ 1 得目标 level **恒 ≥ N + 1 ≥ 1**，特别地**永远不是 0**。
+
+  **本命题不需要的假设**：不需要 R 是域、不需要特征零以外的条件、对 (c, h) **没有任何限制**、
+  **不需要 V(c,h) ≠ 0**（若 V(c,h) = 0 则两条平凡成立），也不需要 PBW 基或任何维数信息。
+  理由见 notes：V_N 是**按词张成**定义的，不是按 L_0 本征子空间定义的。
+
+  【本节点明确**不**断言】
+  (a) **反方向**：正模态 L_k（k ≥ 1）把 V_N 送进 V_{N−k}（N ≥ k）或送到 0（N < k）。
+      **本项目未做**：Lean 侧没有这条，图上也没有别的节点承载它。它需要把正模态推过一串
+      负模态词（Virasoro 括号的重排，且会生成中心项），属 straightening 一类的计算。
+  (b) V_N 之间的**直和/独立性**（⊕_N V_N），也不断言 ⨆_N V_N = V(c,h)。前者只在特征零的域上
+      证到（worldsheet.verma-module-v2 的 `isInternal_levelSpan`），后者是同卡的
+      `iSup_levelSpan_eq_top`。本卡只讲**一个**算子把**一个**子模送进**另一个**子模。
+  (c) V_N ≠ 0、dim V_N = p(N) 或任何维数下界（那要 PBW，见
+      math.verma-module-free-over-negative-part；上界见 worldsheet.verma-level-spanned-by-partitions）。
+  (d) V_N **恰**是 L_0 的 (h+N)-特征子空间（那是 worldsheet.verma-module-v2 在
+      `[Field K] [CharZero K]` 上的 `levelSpan_eq_eigenspace`）。本卡只用 V_N 的张成定义。
+  (e) L_0 或中心元 C 在 V_N 上的作用（`lie_lgen_zero_of_mem_levelSpan`，属 worldsheet.verma-module-v2），
+      以及词的 L_0 本征值公式（worldsheet.descendant-weight-grading-v2）。
+  (f) 一般 Virasoro 模（非 Verma）上的类似结论。本卡的 V_N 是 Verma 模上按词定义的子模。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.lie_lgen_mem_levelSpan
+  lean_file: StringFormal/Virasoro/Verma.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/Verma.lean :: StringFormal.Virasoro.{levelWord, levelSpan, consComposition, consComposition_blocks, lie_lgen_levelWord, lie_lgen_mem_levelSpan, lie_lgen_mem_levelSpan_of_neg}"
+    note: |
+      本仓库，提交 **60d999e**（"formal: add level-shift lemma lie_lgen_mem_levelSpan
+      (L_{-k} : V_N → V_{N+k})"），已在 main 上；Lean 4 + Mathlib v4.33.1。逐句对应：
+      · **(1)** → `lie_lgen_mem_levelSpan {k : ℕ} (hk : 0 < k) (N : ℕ) {x : VermaModule R c h}
+        (hx : x ∈ levelSpan R c h N) : ⁅VirasoroAlgebra.lgen R (-(k : ℤ)), x⁆ ∈
+        levelSpan R c h (N + k)`（本卡 formal.lean_decl）。证明是对 `Submodule.span_induction`
+        的四个分支：生成元一支用 `lie_lgen_levelWord`（L_{−k} 把合成 cmp 的 level 词
+        送成 `consComposition hk cmp` 的 level-(N+k) 词，即在合成的 blocks 前面接一个 k），
+        其余三支是 `lie_zero` / `lie_add` / `lie_smul`。
+      · **(2)** → `lie_lgen_mem_levelSpan_of_neg {n : ℤ} (hn : n < 0) … :
+        ⁅VirasoroAlgebra.lgen R n, x⁆ ∈ levelSpan R c h (N + (-n).toNat)`，由 (1) 经 `omega` 重标。
+      · 变量段是 `[CommRing R] [Algebra ℚ R] (c h : R)`，**没有** `[Field]`、`[CharZero]`、
+        `[Nontrivial]`，也没有关于 (c,h) 或 V(c,h) ≠ 0 的假设——这正是本卡「不需要的假设」那一段。
+      · Lean docstring 逐字给出本卡 notes 里那条理由：「It holds over any commutative `ℚ`-algebra
+        `R`, with no hypothesis on `c`, `h`, or on `V(c,h)` being nonzero, because `levelSpan`
+        is *defined* by the spanning words rather than as an `L₀`-eigenspace.」
+      文件头 Status 段自述「No `sorry`, no new axioms」（本卡核实：文件内 `sorry` 字样只出现在
+      该段说明文字里，无实际 sorry）。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+tags: [cft, representation-theory, verma-module, virasoro, grading, formalized]
+notes: |
+  【为什么无需 V(c,h) ≠ 0，也无需域或特征零——formalizer 的提醒，逐条登记】
+  V_N（Lean 的 `levelSpan R c h N`）是**按词张成**定义的：
+  `levelSpan := Submodule.span R (Set.range (levelWord R c h N))`，
+  而 `levelWord` 就是合成 b_1 + … + b_j = N 对应的 L_{−b_1} … L_{−b_j}|c,h⟩。
+  于是「L_{−k} 把 V_N 送进 V_{N+k}」只是**在词前面接一个字母**（`consComposition`）
+  再对张成做归纳，完全不涉及「V_N 是 L_0 的本征子空间」这一刻画。
+  ⇒ 与之对照：worldsheet.verma-module-v2 的 `levelSpan_eq_eigenspace`（V_N 恰是
+  (h+N)-特征子空间）与 `isInternal_levelSpan`（⊕ 分解）**都**需要 `[Field K] [CharZero K]`，
+  因为那里要用 L_0 的本征值 h + N 把不同 level 分离开，一般 R 上这些标量未必可区分。
+  本卡刻意停在**不需要分离本征值**的那一半，这是它能对任意交换 ℚ-代数成立的全部原因。
+  ⚠ 代价是本卡在 V(c,h) = 0 时也成立（平凡）——它**不**蕴含任何非零性。
+
+  【降算子方向（L_k, k ≥ 1）未做】formalizer 明确登记：Lean 侧只做了负模态方向。
+  正模态方向 L_k(V_N) ⊆ V_{N−k}（N ≥ k 时；N < k 时应为 0）需要把 L_k 推过负模态词，
+  沿途产生 [L_k, L_{−b}] = (k+b)L_{k−b} + 中心项，是一次真正的重排计算。
+  图上**没有**节点承载它；下游若需要「正模态降 level」，必须先补这条。
+
+  【本卡与相邻节点的分工（查重结论）】2026-09-11 跑
+  `uv run stringgraph search "level shift"`（无命中）与 `search level` / `search verma`：
+    · worldsheet.verma-module-v2（definition, formalized）：V(c,h) 的构造、万有性质、
+      V_N 的**定义**、L_0 在 V_N 上是 h + N、⨆_N V_N = ⊤、域上的 ⊕ 与特征子空间刻画。
+      **它不含本卡的 (1)(2)**：那里没有任何「某个生成元把 V_N 送进 V_M」的陈述。
+    · worldsheet.descendant-weight-grading-v2（proposition, formalized）：任意 Virasoro 模中
+      **词的 L_0 本征值** L_0(L_{n_1}…L_{n_r}v) = (h − Σn_i)(…)。那是**本征值**的陈述，
+      本卡是**子模包含**的陈述；前者对任意模、任意符号的词，后者只对 Verma 模的负模态。
+      两者都用不到对方。
+    · worldsheet.verma-level-spanned-by-partitions（proposition, formalized）：V_N 由**有序**词
+      （分拆）张成、dim ≤ p(N)。它的 straightening 处理的是**同一 level 内**把词排序；
+      本卡处理的是**跨 level** 的移位。不重复。
+    · math.verma-module-free-over-negative-part（rigorous）：PBW 基、dim = p(N)、V ≠ 0。
+      本卡与它无交集，也不为它提供任何一半。
+  ⇒ 无既有节点承载「L_{−k} : V_N → V_{N+k}」，故新建本卡。
+
+  【本卡在图上的用处】它是 worldsheet.shapovalov-form-unconditional-existence 里
+  「level-0 坐标泛函 f_0 杀掉一切 L_n v（n < 0）」那一步的**唯一**依据，
+  也是 worldsheet.shapovalov-form-existence (4) 在 Lean 里的构造链
+  （`hwvFunctional_lie_lgen_of_neg` ← `lie_lgen_mem_posLevelSpan` ← `lie_lgen_mem_levelSpan_of_neg`）
+  所依赖的引理。此前它只以 source loc 的形式散落在那两张卡的 note 里，没有自己的节点。
+
+  【id 用词说明（提请 lead 注意）】本卡 id 里的 "lowering" 指**负模态**（mode number n = −k < 0，
+  即物理侧的「降指标 / 产生算符」），它在 **level 与 L_0 本征值上是升的**（N ↦ N + k）。
+  Lean 的 docstring 用的是相反的叫法（把 L_{−k} 称作 raising operator）。
+  id 由 lead 在任务书里指定，本卡沿用；**若 lead 认为易混，现在（本分支未合并前）是改名的最后时机**，
+  建议的替代是 worldsheet.verma-level-shift-by-negative-modes。标题与陈述已写死为
+  「L_{−k}（k ≥ 1）」以避免任何歧义。
+author: curator
+created: "2026-09-11"

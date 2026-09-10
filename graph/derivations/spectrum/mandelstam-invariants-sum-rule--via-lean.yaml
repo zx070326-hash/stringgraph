@@ -37,8 +37,19 @@ gaps:
     check_axioms ok，仅三条标准公理）逐字承载；假设 α'm_i² = −4 与开弦版同型。
   - |
     **质量壳条件的搬运不在 Lean 内**：m_i 在 Lean 里只是满足 B(k_i,k_i) = −m_i² 的标量，
-    「它等于光锥谱的质量」这一识别由图的 inferred 边承载（lead 已记 ROADMAP 待建
-    「光锥质量壳 → 协变振幅外线 on-shell」）。
+    「它等于弦谱里那个态的质量」这一识别由图承载。
+    **2026-09-11 更新（curator-onshell-bridge）**：承载它的节点已建立——
+    `spectrum.covariant-external-legs-on-shell`（协变外线 L_0 = 1 ⟺ α'k² = 1 − N ⟺ α'm² = N − 1；
+    闭弦 (1,1) ⟺ α'm² = 4(N−1)，并接到 (4.1.20)/(4.4.21) 的 H_OCQ ≅ H_light-cone）。
+    姊妹推导 `--via-momentum-conservation` 的两条 inferred 边已改挂该节点并撤销 inferred；
+    ROADMAP 的「光锥质量壳 → 协变振幅外线 on-shell」待建项由此落地。
+    ⚠ **本 Lean 卡的 `depends_on` 仍为空、`status` 仍为 formalized**，因为 Lean 定理把
+    α'm_i² = −1 / −4 当作**假设**，其证明确实不需要任何弦论输入。
+    但目标陈述 `spectrum.mandelstam-invariants-sum-rule` 的第二句（「四开弦 tachyon 时等于 −4/α'」）
+    要成为关于**弦振幅**的断言，就需要那条识别。
+    **是否应给本卡补一条指向 `spectrum.covariant-external-legs-on-shell` 的边
+    （代价：目标陈述的 effective 由 formalized 降为 physical-argument），
+    curator 不自行裁决，提请 reviewer / lead 定夺。**
 notes: |
   status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
   （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。

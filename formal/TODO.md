@@ -368,8 +368,8 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
     分级：`Fock.vertexOsc_mem_levelSubmodule`（`V_K` 把 level `N` 抬到 `N+K`）与
     `Fock.vertexOsc_apply_eq_zero_of_level`（`N+K<0` 时为零）。
     横向性：`lie_towerMode_towerVertex_of_eq_zero`（`b^μ = 0` ⟹ 与所有 `α^μ_p` 对易）。
-  - [ ] (3) **共形权 `[L_m, V]`**：`m ≥ 1` **已证**（见 (3d) 单 Fock、(3e) 塔上），
-    `m < 0` 未做（见 (3c')、(3f)）。陈述是
+  - [x] (3) **共形权 `[L_m, V]`**：`m ≠ 0` **已证**（`m ≥ 1` 见 (3d) 单 Fock、(3e) 塔上；
+    `m ≤ -1` 见 (3c')、(3f)；`m = 0` 见 (3c)，只有真空上的形式）。陈述是
     `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J + b·a - m + (m+1)·½ b·b) V_{J-m}`，权
     `h = ½ b·b = α' k_0²`，故 `k_0² = 0` 给权 0。已做的是它的**归纳步**：
     `Fock.eq_zero_of_vertex_recursion` / `Fock.vertexOsc_unique`（满足产生模态递推且在真空上
@@ -399,9 +399,24 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       各出 `½ (a·b)`，`m = 0` 时并成一项 `½ (a·a)`，把 `m = 0` 代入 (3b) 会得到错误的
       `a·b - ½ (b·b) + J`。因为 `Φ_J` 是 level `J` 齐次元，这条直接由已有的
       `Fock.Lop_zero_apply_of_mem_levelSubmodule` 得到。
-    - [ ] (3c') `m < 0` 的真空等式：**未做**，而且形状不同。`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，
-      共形权恒等式在真空上给出 `L_m^{(a+b)} Φ_J = c · Φ_{J-m} + V_J L_m^{(a)}|k⟩`，
-      第二项是含产生算子的真向量，不能只用 `creaExp` 表达；要做必须先有 `vertexOsc` 侧的输入。
+    - [x] (3c') `m < 0` 的真空等式：**已证**
+      `Fock.Lop_apply_creaExp_of_neg_shifted`（`StringFormal/NoGhost/VertexWeightNeg.lean`）
+      `L_m^{(a+b)} Φ_J = (J - m + a·b + ½(m+1)(b·b)) Φ_{J-m} + V_J (L_m^{(a)}|k⟩)`。
+      形状确实与 `m ≥ 1` 不同：第二项是含产生算子的真向量。分三步做：
+      * `Fock.Lop_apply_one_of_neg`：`L_m|k⟩ = (α_m·α_0)|k⟩ + ½ Σ_{j=m+1}^{-1}(α_{m-j}·α_j)|k⟩`
+        （Sugawara 指标集在真空上是 `Finset.Icc m 0`；两端点项相等、合起来抵掉 `½`）。
+      * `Fock.Lop_apply_creaExp_of_neg`：`L_m Φ_J` 的显式表达式。与 (3b) 的五段分法相比，
+        中间段 `m+1 ≤ j ≤ -1` 两个因子都是产生算子（非标量项，用新引理
+        `Fock.nordPair_apply_of_neg_left`：`i < 0` 时对**任意** `j` 都不必换序），
+        两条产生尾换元后只覆盖 `l ≥ -m+1`，所以欧拉递推
+        `Fock.sum_mode_creaExp_eq_smul` 要减掉头 `-m` 项。
+      * `Fock.vertexOsc_apply_Lop_apply_one_of_neg`：把 `V_J` 穿过 `L_m|k⟩` 的每个产生算子
+        （`Fock.vertexOsc_mode_of_ne` / `_apply_mode_one` / `_apply_mode_mode_one`）。
+        **数学要点**：双产生中间段经 `j ↦ m - j` 给出两个相等的单缩并求和（`½` 被吃掉），
+        双缩并的重数是 `#{m+1,…,-1} = -m-1`，产生的常数正好是
+        `-(a·b + ½(m+1)(b·b))`，与共形权系数里除 `(J-m)` 之外的全部逐项抵消。
+        这个抵消是 `m < 0` 半能成立的关键，也说明系数**对所有 `m ≠ 0` 是同一个多项式**。
+      无 sorry，公理只有标准三条。
     - [x] (3d) 完整的 `[L_m, V_J]`，`m ≥ 1`：**已证**
       `Fock.lie_Lop_vertexOsc_of_pos`（`StringFormal/NoGhost/VertexWeight.lean`）
       `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`。
@@ -425,8 +440,19 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
       `⁅L_m, V^{(n)}_K⁆` 在整条塔上**不是** `V^{(n)}_{K-m}` 的标量倍，只是逐级成比例、
       比例因子依赖动量级数 `j`。单 Fock 版本 (3d) 则对任意 `b` 成立，不需要 `b·b = 0`。
       无 sorry，公理只有标准三条。
-    - [ ] (3f) `m < 0` 的 `[L_m, V_J]`：**未做**。(3d) 的整条路线用了 `m ≥ 1`
-      两次（真空上 `L_m|k⟩ = 0`，以及 (3b) 的分段求和），`m < 0` 需要 (3c') 先做。
+    - [x] (3f) `m < 0` 的 `[L_m, V_J]`：**已证**
+      `Fock.lie_Lop_vertexOsc_of_neg`（`StringFormal/NoGhost/VertexWeightNeg.lean`）
+      `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½(m+1)(b·b)) • V_{J-m}`，
+      系数与 `m ≥ 1` 的 (3d) **完全相同**。(3d) 用到 `m ≥ 1` 的两处里，只有真空那处
+      真正依赖符号：`Fock.eq_zero_of_vertex_recursion` 的产生模态递推逐字照搬即可，
+      真空值换成 (3c') 的 `Fock.Lop_apply_creaExp_of_neg_shifted`。
+      合并推论：`Fock.lie_Lop_vertexOsc_of_ne`（一切 `m ≠ 0`）与
+      `Fock.lie_Lop_vertexOsc_of_ne_isotropic`（`b·b = 0`，DDF 归一化下的权 1 变换律）。
+      无 sorry，公理只有标准三条。
+      **仍缺**：(a) `m = 0` 的一般态算子形式（真空上是 (3c)；`m = 0` 时 Sugawara 的
+      `j = 0` 与 `j = m` 并成一项，系数多项式在 `m = 0` 处**不适用**，见 (3c) 的要点）；
+      (b) 塔上的 `m < 0` 版本，即 (3e) `lie_towerLop_towerVertex_of_pos` 的负模对应物，
+      搬运是机械的，本轮未做。
   - [x] (4) **DDF 算子本身与 `⁅L_m, A^ε_n⁆ = 0`（`m ≥ 1`）**：
     `StringFormal/NoGhost/DDFOperator.lean`，无 sorry，28 条声明公理只有标准三条。
     - 偏振经由**收缩**进入：`towerModeVec η a b ε p = Σ_μ η_μ ε^μ α^μ_p`（`α^ε_p`），
