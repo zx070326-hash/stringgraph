@@ -69,7 +69,41 @@ sources:
       ms.no-ghost-theorem 第一轮审计 B6 指出 Polchinski §4.1 有此注；抽取记录
       literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
 tags: [bosonic-string, spectrum-generating-algebra]
+superseded_by: worldsheet.ddf-operators-v5
 notes: |
+  【已被取代，2026-09-11：拆卡】本节点是"一卡三事"——A^i_n 的**定义**、命题
+  [L_m, A^i_n] = 0、命题 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}——却挂着
+  `kind: definition` + `status: rigorous`。后果是两条**从未在本图中被独立论证过**的命题
+  以"定义的一部分"的身份继承了 rigorous，并沿
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 传播上去。
+  这违反根 CLAUDE.md 原则 1（陈述与推导分离）与「一个节点一个命题」，
+  也违反原则 2（status 只能实话实说）。
+
+  按 docs/ROADMAP.md 待拆清单（lead 已同意）拆为四个节点：
+  - **worldsheet.ddf-operators-v5**（definition，rigorous）：只保留围道积分定义与说明 (a)(b)(c)，
+    statement 逐字继承本节点的对应段落，末尾显式声明两条对易关系不属于该节点；
+  - **worldsheet.ddf-commute-with-virasoro**（proposition）：[L_m, A^i_n] = 0，
+    推导 --via-conformal-weight，status physical-argument（论证是 OPE + 围道形变）；
+  - **worldsheet.ddf-transverse-oscillator-algebra**（proposition）：
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，推导 --via-conformal-weight，status physical-argument；
+  - **worldsheet.ddf-transversality-gives-local-finiteness**（proposition）：
+    本节点 notes 第 (2) 条登记的"横向性 ⟹ 模态和局部有限 ⟹ A^i_n 良定义"独立立卡，
+    推导 --via-mode-sum，status physical-argument（Lean 两条支撑引理已在，组装未做，
+    且缺 reviewer 复核记录）。
+
+  拆卡**不改变任何论证**，只把状态记账改对。直接可见的后果是
+  worldsheet.no-ghost-theorem-v4 的有效状态由 rigorous 降到 physical-argument；
+  这是本节点长期掩盖的既有事实，不是新引入的弱点。
+
+  本节点保留作历史节点，其陈述文本与下面的全部 notes 一字未动。
+  注意 worldsheet.no-ghost-theorem-v4 的 **statement 文本**内引用了本节点的 id（记号出处），
+  按原则 1 陈述文本不可变，故那处引用**不改**；换代只在推导的 depends_on 上做。
+  里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text / 回译记录中提到本节点的地方
+  同样不改（里程碑归 auditor）。
+
+  ---
+  【以下为原 notes，一字未动】
+
   取代 worldsheet.ddf-operators-v3（v3 又取代 v2）。按项目规则陈述文本不可变，故新建本节点。
 
   【相对 v3 的唯一实质改动，来自 ms.no-ghost-theorem 第三轮审计 A1 附带项 / D2】

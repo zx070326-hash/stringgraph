@@ -1,0 +1,75 @@
+id: worldsheet.ddf-transverse-oscillator-algebra
+kind: proposition
+title: DDF 算子满足横向自由振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}
+statement: |
+  设 A^i_n 是 worldsheet.ddf-operators-v5 定义的 DDF 算子（i = 2..D-1，n ∈ Z \ {0}；
+  同一条类光参考方向 k_0² = 0，同一套横向偏振 ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}，
+  标度按 2α' k_0·p = 1 逐塔取定）。则在扇区 {p : k_0·p ≠ 0} 的动量塔上
+
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n, 0}，    i, j = 2..D-1，  m, n ∈ Z \ {0}。
+
+  即 {A^i_n} 生成一份 D-2 维横向自由玻色振子代数（Heisenberg 代数），
+  与世界面横向振子 α^i_n 的代数（worldsheet.transverse-oscillator-commutators）逐字同型。
+
+  注意右端**没有**中心项以外的贡献，也没有 k_0 或 p 的残余依赖：
+  这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      与 worldsheet.ddf-operators-v5 同一处来源；本节点承载的是 v4 陈述文本里
+      「且满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，即一个 D-2 维横向自由振子代数」
+      这一句。**式号仍未核实（L0）**；GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；
+      GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      「谱生成代数」这一名称的来源即在于本命题：DDF 算子生成一份自由振子代数，
+      从而由一个物理态生成整塔物理态。式号沿用旧节点 worldsheet.ddf-operators，未与原文核对
+      （literature/extractions/brst-cohomology-sources.md §3.1：GT 1972 正文四条获取路径全部失败）。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（DDF 态张成横向 Fock 空间的写法）"
+    note: |
+      作者本人的历史综述，**预设**本命题（把 DDF 态写成横向振子 Fock 空间）但不给证明、不给编号
+      （brst-cohomology-sources.md §3.1 第 1 条）。只作为「本命题是文献中被使用的标准事实」的
+      二手证据，不作为论证来源。
+tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra]
+notes: |
+  【拆卡来源，2026-09-11】本节点是 worldsheet.ddf-operators-v4 的拆分产物之一，
+  理由与 worldsheet.ddf-commute-with-virasoro 相同（v4 是定义卡却断言了两条命题）。
+  docs/ROADMAP.md 待拆清单的 `ddf-operators-v4` 项，lead 已同意。
+
+  【陈述文本相对 v4 的两处显式化】v4 只写 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+  没有写出右端 δ^{ij} 所隐含的**偏振正交归一** ε^i·ε^j = δ^{ij}（v4 只要求 ε·k_0 = 0），
+  也没有写出 m, n ≠ 0 的量词（v4 在定义处写了 n ∈ Z \ {0}）。本节点把这两点写进前提。
+  这不是对 v4 的纠错：v4 的横向指标沿用 worldsheet.light-cone-quantization 的
+  正交归一横向标架，δ^{ij} 本来就在那套约定里；此处只是把隐含前提写出来以便形式化。
+
+  【为什么不是 rigorous】本命题的标准论证是两个顶点算子的 OPE 加围道形变
+  （见推导 --via-conformal-weight 的 summary），不是有限步初等计算，
+  因此不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；
+  两条一手来源（GSW、GT 1972）的定位都未核实到式号，也没有可引用的数学文献严格证明
+  （kac-raina-1987 的讲号/命题号在本项目中未核实且两版不可互换，不得猜编号）。
+  故 physical-argument。
+
+  【升级路径与 Lean 现状】**Lean 侧完全未起步**：`formal/StringFormal/NoGhost/VertexOperator.lean`
+  文件头 "Mathematical gaps" 第 2 条逐字写「No operator products. `V(b, z) V(b', w)` and hence
+  `[A^i_m, A^j_n]` are untouched.」，DDF.lean 文件头 "What is NOT here" 第 1 条同样说
+  组装与该对易关系都没做。所以本条比 worldsheet.ddf-commute-with-virasoro **更远**离形式化：
+  后者只差一个基例，本条需要先有顶点算子的乘积/重排序（E_+ E_- 交换），
+  而 Lean 侧目前连伴随 V(b)_J† = V(−b)_{−J} 都没有。
+  另一条独立路线是走数学文献的顶点算子代数（DDF 算子在 Borcherds / FLM 传统里是标准对象），
+  但需要 researcher 先拿到带编号的严格陈述。
+
+  【为什么它对无鬼定理是必需的】worldsheet.no-ghost-theorem-v4 第 (1b) 条断言
+  H_phys(k;k_0)/H_0(k;k_0) 与横向 DDF Fock 空间 H^⊥(k) **等距同构**；
+  「H^⊥(k) 上的 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」这一步
+  正是本命题（加上 A^i_n 的伴随关系 (A^i_n)† = A^i_{−n}，后者本图尚无独立节点，
+  见下条）。没有本命题，无鬼定理的正定性结论没有依据。
+
+  【已知缺口，建议后续立卡】(A^i_n)† = A^i_{−n} 在本图中**没有节点**，
+  但 H^⊥(k) 上 Gram 矩阵的计算需要它（Lean 侧对应 V(b)_J† = V(−b)_{−J}，同样未做，
+  且当前只有 R-双线性型、无 sesquilinear 结构）。本节点不断言它。
+author: curator
+created: "2026-09-11"

@@ -4,7 +4,26 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.old-covariant-physical-states
-  - id: worldsheet.ddf-operators-v4
+  - id: worldsheet.ddf-operators-v5
+    note: |
+      【2026-09-11 就地换代】原为 worldsheet.ddf-operators-v4。v4 被拆成一张纯定义卡（本条）
+      加三条命题（下面两条 + worldsheet.ddf-transversality-gives-local-finiteness）。
+      本条只提供 A^i_n 的定义、类光去心直线与归一化 (★)，不再提供任何代数性质。
+      来源覆盖沿用：v5 的 sources 与 v4 逐字相同（GSW §2.3.3 / GT 1972 / Polchinski §4.1）。
+  - id: worldsheet.ddf-commute-with-virasoro
+    note: |
+      【2026-09-11 新增，来自 v4 拆卡】本推导第 (1b) 步「A^i_{-n} 作用在物理态 |0;k⟩ 上
+      得到的仍是物理态」直接就是这条命题（[L_m, A^i_n] = 0 加质量壳记账）。
+      在 v4 未拆时它是 worldsheet.ddf-operators-v4 陈述文本的一部分，故本条不是新依赖，
+      只是把已有依赖显式化。来源覆盖沿用 v4（GSW §2.3.3 / GT 1972），
+      另加 goddard-2008 作为「physical state = DDF 态 + 零模态」的二手证据。
+  - id: worldsheet.ddf-transverse-oscillator-algebra
+    note: |
+      【2026-09-11 新增，来自 v4 拆卡】本推导第 (1b) 步「其 Gram 矩阵就是 24 个横向振子
+      Fock 空间的正定 Gram 矩阵」依赖这条命题。同上，v4 未拆时它是定义卡文本的一部分，
+      不是新依赖。来源覆盖沿用 v4。
+      注意本条**不含** (A^i_n)† = A^i_{−n}（Gram 矩阵计算还需要它，本图尚无该节点，
+      见该命题的 notes 与本推导 gaps 的【2026-09-11】条）。
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.kac-determinant
     inferred: true
@@ -58,8 +77,9 @@ summary: |
   （status 仍为 rigorous）。
 
   第 (1) 条：设 D = 26、a = 1，固定类光参考方向 k_0（去心直线 {λ k_0 : λ ∈ R \ {0}}，标度按
-  2α' k_0·p = 1 逐塔取定，符号随 sign(k_0·p)，见 worldsheet.ddf-operators-v4）。DDF 算子
-  A^i_n（i = 2..25）与所有 L_m 对易，满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+  2α' k_0·p = 1 逐塔取定，符号随 sign(k_0·p)，见 worldsheet.ddf-operators-v5）。DDF 算子
+  A^i_n（i = 2..25）与所有 L_m 对易（worldsheet.ddf-commute-with-virasoro），
+  满足横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（worldsheet.ddf-transverse-oscillator-algebra），
   且把动量移到 p + n k_0。取快子壳上的基态 |0; k⟩（α' k^2 = 1，k_0·k ≠ 0，它本身是物理态），
   则 A^i_{-n} 生成的全部态都是物理态，动量落在塔 {k - N k_0 : N ≥ 0} 上，能级 N = Σ_j n_j，
   其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵。
@@ -87,7 +107,35 @@ gaps:
   - "【2026-09-11 新增，reviewer-ch4】**零态的两个定义在本推导里不是前提而是结论**：本推导商掉的 H_0（H_phys 的根基）与 worldsheet.ocq-spurious-states-v2（原 v1 已换代）的 N（物理态 ∩ 伪态）在 D = 26、a = 1 时相等，这一点**不需要单独假设**——它是 GT 分解（每个物理态 = DDF 态 + 伪态）、横向 DDF 空间上内积正定、以及 N ⊥ H_phys（worldsheet.spurious-orthogonal-to-physical）这三条的两行推论：设 ψ ∈ H_0，写 ψ = ψ_T + χ（χ 伪态），则对任意 DDF 态 φ 有 0 = ⟨ψ, φ⟩ = ⟨ψ_T, φ⟩，由横向正定得 ψ_T = 0，故 ψ = χ ∈ N；反向 N ∩ H_phys ⊆ H_0 就是 spurious-orthogonal-to-physical。因此不必为 H_0 ⊆ N 另立前提。注意 worldsheet.ocq-spurious-states-v2 与 worldsheet.spurious-orthogonal-to-physical 只证 N ⊆ H_0 这一半，反向那一半的论证在本推导内部（依赖 GT 分解），一般 (D, a) 下不成立。"
   - "【v4 新增】worldsheet.ddf-operators-v4 相对 v3 只改了参考方向的参数化（射线 → 去心直线），本推导的论证一字未变；此处登记以便日后追溯换代不影响论证强度。"
   - "【形式化进度 2026-09-11】Fock 空间（worldsheet.bosonic-fock-space）、Sugawara 构造与 c = D、老协变物理态条件、Virasoro 生成元的伴随 L_m^† = L_{−m}、以及指数顶点算子 :e^{i n k_0·X}: 的**振子部分**与 DDF **动量塔**（`formal/StringFormal/NoGhost/VertexOperator.lean`、`DDF.lean`，无 sorry，公理仅标准三条；合并提交 9691057）已在 Lean 中机器验证。**但本推导的两个核心步骤仍未形式化**：(i) DDF 算子 A^i_n = Σ_m α^i_m V^{(n)}_m 本身未定义，连带 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 未证；(ii) 第 (1) 条的**张成定理**（\"塔上任意物理态 = DDF 态 + 零模态\"）未做。待办见 formal/TODO.md 的 `ddf-operators` 与 `ddf-spans` 两项。附带发现：横向性 ε·k_0 = 0 不只是使被积量成为权 1 primary 的条件，还是 A^i_n 的模态和在代数 Fock 空间上局部有限（从而 A^i_n 良定义）的必要输入；详见 worldsheet.ddf-operators-v4 的 notes【Lean 进展 2026-09-11】。"
+  - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
+  - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
+  - "【2026-09-11 新增】(A^i_n)† = A^i_{−n} **在本图中没有节点**，但第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」需要它（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。拆卡时发现，登记为待补节点。Lean 侧对应 V(b)_J† = V(−b)_{−J}，同样未做，且当前只有 R-双线性型、无 sesquilinear 结构。"
 notes: |
+  【2026-09-11：DDF 拆卡与由此产生的状态下降（curator，本次改 depends_on / gaps / notes，
+  以及 summary 第 (1) 条里的三处节点指向（ddf-operators-v4 → v5，另把两条对易关系的节点 id 写出）；
+  **status、sources 与论证步骤一字未动**）】
+
+  worldsheet.ddf-operators-v4 被拆成一张纯定义卡 worldsheet.ddf-operators-v5 与三条命题
+  （worldsheet.ddf-commute-with-virasoro、worldsheet.ddf-transverse-oscillator-algebra、
+  worldsheet.ddf-transversality-gives-local-finiteness）。本推导的 depends_on 就地换代为
+  v5 + 前两条命题（第三条是代数路线的良定义性，本推导走解析围道路线，不经过它，故不连）。
+
+  **本推导 status 仍为 rigorous，但目标 worldsheet.no-ghost-theorem-v4 的 effective 会下降到
+  physical-argument**，因为两条 DDF 对易关系各自只有 physical-argument 的推导。
+  **这不是本次改动引入的弱点，而是 v4 定义卡长期掩盖的既有事实**：
+  v4 是 `kind: definition` + `status: rigorous`，两条从未被独立论证过的命题写在它的陈述文本里，
+  于是以"定义的一部分"的身份继承了 rigorous 并传播上来。拆卡只是把账记对。
+
+  升级路径（任一条完成即可把 effective 拉回 rigorous 及以上）：
+  - worldsheet.ddf-commute-with-virasoro：Lean 侧只差**基例**（L_m 作用在 `Fock.creaExp` 上），
+    归纳步已有；formalizer 的 `VertexWeight.lean` 正在做。
+  - worldsheet.ddf-transverse-oscillator-algebra：Lean 侧**完全未起步**（需顶点算子乘积），
+    或由 researcher 找到带编号的数学文献严格证明。
+  - 或者两条各自取得 reviewer 复核 + 更强的文献定位（GSW 式号 / GT 1972 正文）。
+
+  ---
+  【以下为原 notes，一字未动】
+
   与 worldsheet.no-ghost-theorem-v3--via-goddard-thorn 的关系：同一个论证，只换目标。v3 的推导
   保留不动（v3 陈述本身仍在图中，作为历史节点保持 rigorous）。故图中会有一条 superseded 依赖
   warning（v3 推导指向被取代的 ddf-operators-v3），这是预期的，不是错误。

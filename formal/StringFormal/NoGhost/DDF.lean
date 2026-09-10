@@ -10,7 +10,7 @@ import StringFormal.NoGhost.VertexOperator
 /-!
 # The DDF momentum tower and the vertex operator on it
 
-Graph node: `worldsheet.ddf-operators-v4`; `formal/TODO.md` item `ddf-operators`.
+Graph node: `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`; `formal/TODO.md` item `ddf-operators`.
 This file supplies the *momentum* half of the DDF construction, which
 `StringFormal/NoGhost/Fock.lean` and `StringFormal/NoGhost/Sugawara.lean` deliberately left
 out: there the momentum is an inert parameter `a : Fin D → R` standing for
@@ -21,7 +21,7 @@ momentum, so it cannot be an endomorphism of a single Fock space.
 
 * `TowerFock D R = ℤ →₀ Fock D R` — the **momentum tower** `⨁_{j ∈ ℤ} F(a + j·b)`, where
   `b^μ = (2α')^{1/2} k_0^μ` is the (rescaled) light-like reference vector of
-  `worldsheet.ddf-operators-v4`.  Rung `j` carries momentum parameter
+  `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`.  Rung `j` carries momentum parameter
   `towerMomentum a b j = a + j·b`.
   **Index convention.**  The graph node indexes the tower by the oscillator level `N` with
   momenta `k - N k_0`; here the index is `j = -N`, so that the vertex operator of
@@ -41,7 +41,7 @@ momentum, so it cannot be an endomorphism of a single Fock space.
 ## Main statements
 
 * `dotVec_towerMomentum_right_of_isotropic` — `k_0·p` is constant along the tower when
-  `k_0² = 0`: this is claim (b) of `worldsheet.ddf-operators-v4` ("one rescaling of `k_0`
+  `k_0² = 0`: this is claim (b) of `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)` ("one rescaling of `k_0`
   covers the whole tower").
 * `invTwo_mul_zeroModeSq_towerMomentum` — `α' p_j² = α' k² + j`, i.e. `α'(k - N k_0)² =
   α' k² - N`: the mass-shell bookkeeping used in `worldsheet.no-ghost-theorem-v4` (1b).
@@ -51,7 +51,7 @@ momentum, so it cannot be an endomorphism of a single Fock space.
   `Fock.lie_mode_zero_vertexOsc`); it is the rung shift that repairs it.
 * `lie_towerMode_towerVertex_of_eq_zero` — transversality: if `b^μ = 0` then `α^μ_p` commutes
   with the vertex operator for every `p`.  This is `ε·k_0 = 0` in
-  `worldsheet.ddf-operators-v4`, and it is what makes the DDF contour integral
+  `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`, and it is what makes the DDF contour integral
   `A^i_n = Σ_m α^i_m V^{(n)}_m` a *finite* sum on each state.
 
 ## What is NOT here (gaps for the dependency graph)
@@ -104,7 +104,7 @@ lemma zeroModeSq_eq_dotVec (η a : Fin D → R) : Fock.zeroModeSq η a = dotVec 
 
 /-- The momentum parameter on rung `j` of the tower: `a + j·b`, i.e. `α^μ_0 = a^μ + j b^μ`.
 With `a^μ = (2α')^{1/2} k^μ` and `b^μ = (2α')^{1/2} k_0^μ` this is the momentum `k + j k_0`;
-the graph node `worldsheet.ddf-operators-v4` writes the same tower as `k - N k_0`, so `j = -N`. -/
+the graph node `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)` writes the same tower as `k - N k_0`, so `j = -N`. -/
 def towerMomentum (a b : Fin D → R) (j : ℤ) : Fin D → R := fun μ => a μ + (j : R) * b μ
 
 @[simp]
@@ -124,7 +124,7 @@ lemma dotVec_towerMomentum_right (η a b : Fin D → R) (j : ℤ) :
   simp only [towerMomentum_apply]
   ring
 
-/-- **Claim (b) of `worldsheet.ddf-operators-v4`**: if the reference vector is light-like
+/-- **Claim (b) of `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`**: if the reference vector is light-like
 (`k_0² = 0`) then the normalisation condition `2α' k_0·p = 1` is preserved along the whole
 DDF tower, so one rescaling of `k_0` covers the entire tower. -/
 theorem dotVec_towerMomentum_right_of_isotropic (η a b : Fin D → R)
@@ -312,7 +312,7 @@ theorem lie_towerMode_towerVertex (η a b : Fin D → R) (hη : ∀ μ, η μ * 
     rw [h', show K - n - p = K - p - n from by ring]
 
 /-- **Transversality.**  If the polarisation direction `μ` is orthogonal to the reference
-vector (`b^μ = 0`, i.e. `ε·k_0 = 0` in `worldsheet.ddf-operators-v4`), then `α^μ_p` commutes
+vector (`b^μ = 0`, i.e. `ε·k_0 = 0` in `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`), then `α^μ_p` commutes
 with the vertex operator for *every* `p`.  This is what makes the DDF contour integral
 `A^i_n = Σ_m α^i_m V^{(n)}_m` a finite sum on each state: with transversality one may move
 `α^i_m` past `V^{(n)}_m` to the right, where it annihilates the state for `m` larger than its

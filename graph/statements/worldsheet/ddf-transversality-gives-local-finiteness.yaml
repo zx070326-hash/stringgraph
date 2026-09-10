@@ -1,0 +1,98 @@
+id: worldsheet.ddf-transversality-gives-local-finiteness
+kind: proposition
+title: 横向性 ε·k_0 = 0 使 DDF 模态和在代数 Fock 空间上局部有限（A^i_n 是良定义的线性算子）
+statement: |
+  设 V^{(n)}_K 是顶点算子 :e^{i n k_0·X(z)}: 在动量塔上的 z^K 洛朗系数
+  （塔 ⊕_{N} F(p + N k_0)，第 N 层动量 p + N k_0；记号与 worldsheet.ddf-operators-v5 一致，
+  k_0² = 0，标度按 2α' k_0·p = 1 取定，故单值因子 z^{2α' n k_0·p} = z^n 在整条塔上是同一个整数幂）。
+  worldsheet.ddf-operators-v5 的围道积分展成模态和即
+
+    A^i_n = Σ_{m ∈ Z} α^i_m V^{(n)}_m ，
+
+  其中 α^i_m 是横向振子模，V^{(n)}_K 把振子能级升高 K − n 并把动量移到 p + n k_0。
+
+  断言：设横向偏振满足 ε·k_0 = 0（即 A^i_n 中的横向指标 i 使 k_0^i = 0）。则对代数 Fock 塔
+  （worldsheet.bosonic-fock-space 意义下的**代数**空间：每个向量是有限多个产生算符作用在真空上的
+  有限线性组合，不做任何完化）中的每个向量 |ψ⟩，上述模态和只有**有限多项**非零；
+  更精确地，若 |ψ⟩ 处在振子能级 N，则只有指标落在有限区间
+
+    n − N ≤ m ≤ N
+
+  的项可能非零。因此 A^i_n 是代数 Fock 塔上处处有定义的线性算子，
+  **不需要任何收敛性假设、不需要完化、不需要解析延拓**。
+
+  两条截断分别来自：
+  (下界) V^{(n)}_m |ψ⟩ 的能级是 N + m − n，能级为负者为零，故 m ≥ n − N；
+  (上界) 由 ε·k_0 = 0 得 [α^i_m, V^{(n)}_K] = 0 对**所有** m（含 m = 0），
+         于是 α^i_m V^{(n)}_m |ψ⟩ = V^{(n)}_m α^i_m |ψ⟩，而 m > N 时 α^i_m |ψ⟩ = 0。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.lie_towerMode_towerVertex_of_eq_zero（横向性 ⟹ 与所有模对易）；formal/StringFormal/NoGhost/VertexOperator.lean :: StringFormal.NoGhost.Fock.vertexOsc_apply_eq_zero_of_level（V_K 杀死能级过低的态）与 StringFormal.NoGhost.Fock.vertexOsc_mem_levelSubmodule（V_K 恰好升高能级 K）"
+    note: |
+      本仓库，合并提交 9691057（formal 侧提交 4c12d36），Lean 4 + Mathlib v4.33.1，无 sorry，
+      公理仅 propext / Classical.choice / Quot.sound；**curator 未自行重跑 `lake build`**。
+      这三条引理是本命题两条截断的机器验证零件。
+      **但 A^i_n = Σ_m α^i_m V^{(n)}_m 这个和本身在 Lean 里尚未定义**
+      （DDF.lean 文件头 "What is NOT here" 第 1 条逐字：「The DDF operators themselves.
+      `A^i_n = Σ_{m ∈ ℤ} α^i_m ∘ V^{(n)}_m` is not defined.」，同处并说明局部有限性
+      「follows from `lie_towerMode_towerVertex_of_eq_zero` … together with
+      `Fock.vertexOsc_apply_eq_zero_of_level`, but neither the assembly nor
+      `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` is formalised」）。
+      故本节点**不**标 formalized，见 notes。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧的 DDF 定义处。**GSW 不作本断言**：文献只把 ε·k_0 = 0 当作「使被积量成为权 1 primary /
+      避免奇异 OPE」的条件，不讨论模态和的局部有限性（那是把围道积分当解析对象时不出现的问题）。
+      本条 source 只用于定位「被断言的对象 A^i_n 与 ε·k_0 = 0 条件」出自何处，不承载论证。
+tags: [bosonic-string, spectrum-generating-algebra, well-definedness, formalization-gap]
+notes: |
+  【本节点的来历：Lean 侧发现，文献未明写】
+  这是 worldsheet.ddf-operators-v4 的 notes 第 (2) 条登记的观察，2026-09-11 拆卡时独立立卡。
+  原文要点：横向条件 ε·k_0 = 0 **不只是**为了让被积量成为权 1 primary，
+  它还是 A^i_n 作为**代数**算子良定义的必要输入。
+  文献（GSW §2.3.3、GT 1972）把 A^i_n 写成围道积分，围道积分默认被积量是可形变的解析对象，
+  于是「和是否有限」这个问题根本不出现；一旦落到代数 Fock 空间（无完化、无解析结构）上，
+  它就是必须先证的第一件事。
+
+  【必要性方向：本节点不断言，登记备查】若 ε·k_0 ≠ 0，则由
+  `Fock.lie_mode_vertexOsc`（[α^μ_p, V_K] = b^μ V_{K−p}，b^μ = (2α')^{1/2} k_0^μ）得
+  α^i_m V^{(n)}_m |ψ⟩ = V^{(n)}_m α^i_m |ψ⟩ + n b^i V^{(n)}_0 |ψ⟩，
+  第二项与 m 无关且非零，故对一切充分大的 m 都有同一个非零贡献，模态和在代数 Fock 空间上
+  **不是**局部有限的，A^i_n 连「算子」都算不上。
+  **这一逆命题不是本节点的断言**（按根 CLAUDE.md「一个节点一个命题」）；
+  若日后需要引用，应另立节点 `worldsheet.ddf-nontransverse-mode-sum-diverges`。
+  建议见本次任务报告。
+
+  【status 与 kind 的取舍（curator 的判断，写清以便 reviewer 复核）】
+  推导 worldsheet.ddf-transversality-gives-local-finiteness--via-mode-sum 标
+  `kind: proof` + `status: physical-argument`，**不标 rigorous、不标 formalized**。理由：
+
+  (i) **不标 formalized**：Lean 侧只有两条支撑引理，A^i_n 与那个和都没有定义，
+      组装未做（见 sources 第一条的逐字引用）。按 stringformal-2026 的证据标准，
+      formalized 要求「目标声明」在 Lean 中存在且无 sorry——这里没有目标声明。
+  (ii) **不标 rigorous**：docs/STATUS_LEVELS.md 的 rigorous 例外条款要求
+      「前提完整 + 有限步初等计算 + **reviewer 已独立复核并在推导 notes 记录
+      `reviewer-verified: <agent>, <date>`**；缺此记录的一律 physical-argument」。
+      本命题确实是有限步初等计算，但**尚无 reviewer 复核记录**，故按条款只能是 physical-argument。
+      此外还有一处非初等的接缝：从 v5 的**围道积分**定义到本节点用的**模态和**
+      A^i_n = Σ_m α^i_m V^{(n)}_m，这一步是形式洛朗展开 + 取 z^{-1} 系数，
+      本图目前没有一条可引用的严格节点覆盖它
+      （最接近的 worldsheet.ope-pole-mode-commutator-dictionary 是形式分布版的模态字典，
+      不是围道 ⟹ 模态和的字典）。
+  (iii) **升级路径（两步都做完才到 formalized）**：
+      第一步，reviewer 复核上面两条截断的算术并在推导 notes 补
+      `reviewer-verified: <agent>, <date>` ⟹ rigorous（前提是同时裁定围道 ⟹ 模态和这一接缝
+      如何处理：要么把模态和写进定义卡，要么另立字典节点）；
+      第二步，Lean 侧定义 A^i_n 并证局部有限（formal/TODO.md 的 `ddf-operators` 项）⟹ formalized。
+
+  【与其他 DDF 节点的关系】
+  - worldsheet.ddf-operators-v5：本命题的对象来源（纯定义卡）。
+  - worldsheet.ddf-commute-with-virasoro、worldsheet.ddf-transverse-oscillator-algebra：
+    另两条从 v4 拆出的命题。逻辑上本命题**在它们之前**——先要 A^i_n 是算子，
+    再谈它的对易子。但那两条推导的**文献论证**走的是解析围道路线，
+    并不显式经过本命题，故本图**不**把本命题连成它们的依赖（那会是伪造的边）。
+    只有走 Lean / 代数路线时本命题才是前置条件。
+author: curator
+created: "2026-09-11"

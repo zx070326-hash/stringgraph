@@ -115,6 +115,35 @@ sources:
       换算 A = -1 ↔ a = 1。§4.4 是 BRST 版本，属另一条陈述 worldsheet.no-ghost-theorem-brst。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
 notes: |
+  【2026-09-11 补注：statement 文本内的 ddf-operators-v4 引用应读作 v5；有效状态已下降】
+  （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）
+
+  worldsheet.ddf-operators-v4 已被拆为一张纯定义卡 **worldsheet.ddf-operators-v5** 与三条命题：
+  worldsheet.ddf-commute-with-virasoro（[L_m, A^i_n] = 0）、
+  worldsheet.ddf-transverse-oscillator-algebra（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）、
+  worldsheet.ddf-transversality-gives-local-finiteness（横向性 ⟹ 模态和局部有限）。
+
+  本节点 statement 文本内两处引用 `worldsheet.ddf-operators-v4`
+  （记号段的"记号同 worldsheet.ddf-operators-v4"、(1b) 的"A^i_{-n} 是 worldsheet.ddf-operators-v4
+  的 DDF 算子"）**按根 CLAUDE.md 原则 1 不改**（已提交节点的 statement 文本不可变）。
+  读者应把这两处理解为指向 **worldsheet.ddf-operators-v5**：v5 的 statement 前半段与 v4 逐字相同，
+  唯一差别是 v4 末段多两句代数断言，而那两句现由上述两条命题承载，
+  并已在推导 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 depends_on 里显式列出。
+
+  **有效状态变化**：本节点的 effective 由 rigorous 降为 **physical-argument**。
+  原因是两条 DDF 对易关系的论证在文献里是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、
+  GT 1972 正文未获取）无一核实到式号，各自的推导只能是 physical-argument。
+  拆卡前它们写在一张 `kind: definition` + `status: rigorous` 的卡的陈述文本里，
+  以"定义的一部分"的身份把 rigorous 传播上来——**那是记账错误，不是论证更强**。
+  本推导（--via-goddard-thorn）自身的 status 仍是 rigorous，一字未改。
+  升级路径见两条命题节点的 notes 与 formal/TODO.md 的 `ddf-operators` 项。
+
+  里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到
+  ddf-operators-v4 的地方**未改**（里程碑归 auditor）；auditor 下一轮回译时需一并处理。
+
+  ---
+  【以下为原 notes，一字未动】
+
   取代 worldsheet.no-ghost-theorem-v3（v3 取代 v2，v2 取代 worldsheet.no-ghost-theorem）。
   按项目规则陈述文本不可变，故新建本节点；v3 保留作历史，其推导
   worldsheet.no-ghost-theorem-v3--via-goddard-thorn 不动。

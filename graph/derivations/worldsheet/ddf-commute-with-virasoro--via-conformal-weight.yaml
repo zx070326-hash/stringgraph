@@ -1,0 +1,107 @@
+id: worldsheet.ddf-commute-with-virasoro--via-conformal-weight
+target: worldsheet.ddf-commute-with-virasoro
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v5
+    note: 被断言的对象；类光条件 k_0² = 0 与横向条件 ε·k_0 = 0 都写在该定义卡里，是本论证的两个输入。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      目标陈述里的 L_m（Sugawara 型、产生-湮灭正规序）。本论证实际操作的是 T(z) 的 Laurent 模，
+      两者相同这件事由 worldsheet.normal-ordering-modes-agree 承担（见下条）。
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: 本论证真正使用的 L_m 定义：L_m = ∮ (dz/2πi) z^{m+1} T(z)。围道形变就在这个表示上做。
+  - id: worldsheet.normal-ordering-modes-agree
+    inferred: true
+    note: |
+      **本图内部的接缝，文献不写**：目标陈述用 Sugawara 型 L_m（worldsheet.virasoro-generators-free-boson），
+      本论证用 T 的 Laurent 模。两者给出同一组算子这件事本身是一条 physical-argument 命题。
+      GSW / GT 都在同一套记号下自由互换，从不区分，故这条边在来源处找不到对应论证，标 inferred。
+  - id: worldsheet.energy-momentum-tensor-free-scalar
+    note: T(z) = -(1/α') :∂X^μ ∂X_μ:，计算 T 与被积量 OPE 的出发点。
+  - id: worldsheet.free-scalar-propagator
+    inferred: true
+    note: |
+      XX OPE X^μ(z)X^ν(0) ∼ -(α'/2)η^{μν} ln|z|²。计算 T(z) · [∂X^i(w) e^{i n k_0·X(w)}] 的每一个缩并
+      都用它；正是它给出二阶极点系数 ∝ α' n² k_0² 与 ∝ α' n (ε·k_0)。来源处（GSW §2.3.3，式号未核实）
+      不逐条列出这一步，标 inferred。
+  - id: worldsheet.conformal-normal-ordering
+    inferred: true
+    note: |
+      指数算符 :e^{i n k_0·X}: 与 ∂X^i 的交叉缩并规则；没有它无法把 T 与 :e^{i n k_0·X}: 的 OPE
+      算成有限阶极点。同上，来源处不逐条列出，标 inferred。
+  - id: worldsheet.primary-field
+    note: |
+      「权 h 的主场」的定义与 T·O OPE 的判据。本论证的核心是：k_0² = 0 使指数算符权为 0、
+      ε·k_0 = 0 使交叉缩并项消失，于是 ∂X^i e^{i n k_0·X} 是权 1 主场。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      「OPE ⟹ 模态对易子」的围道形变步骤。这是把「被积量是权 1 主场」翻译成 [L_m, A^i_n] = 0 的那一步，
+      也是本推导止步于 physical-argument 的主要原因（该字典节点自身是 physical-argument）。
+  - id: worldsheet.old-covariant-physical-states
+    note: 目标陈述末段推论（DDF 算子把物理态映为物理态）所用的物理态条件。
+  - id: worldsheet.virasoro-algebra-v2
+    note: L_m 之间的 Virasoro 关系；推论中把 L_0 条件沿塔搬运时用到。
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧的标准论证所在处。定位强度：章节页码 L4/L2（CUP 25 周年版 frontmatter + Google Books
+      全文检索，literature/extractions/brst-cohomology-sources.md §5.2–5.3），**式号与正文内容 L0**。
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2，
+      其归一化写作 k_0·p = 1，是本图 (★) 的特例。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      原始出处链条中的一篇。四条获取路径全部失败（brst-cohomology-sources.md §3.1），
+      式号沿用旧节点 worldsheet.ddf-operators，未与原文核对。
+  - ref: goddard-2008
+    loc: "arXiv:0802.3249，无鬼定理一节（'For D = 26, if |ψ⟩ is a physical state … it can be written in the form' + DDF 态 + 零模物理态）"
+    note: |
+      作者本人的历史综述，**预设** DDF 态是物理态（即本目标的推论）却不给证明也不给编号
+      （brst-cohomology-sources.md §3.1 第 1 条）。只作为「这是文献中被反复使用的标准事实」的
+      二手证据（L3），不承载论证。
+summary: |
+  标准论证，三步。
+
+  第 1 步（指数算符的共形权）。由 XX OPE 与共形正规序，
+  T(z) :e^{i n k_0·X(w)}: 的最奇异项是二阶极点，其系数是 α' n² k_0²/…，
+  即 :e^{i n k_0·X}: 的共形权 h = α' n² k_0²（开弦边界归一化下的通用公式）。
+  类光条件 k_0² = 0 给 **h = 0**。
+
+  第 2 步（被积量是权 1 主场）。∂X^i(w) 本身是权 1 主场。把它与 :e^{i n k_0·X(w)}: 相乘时，
+  可能破坏 primary 性质的是两者之间的交叉缩并，其系数正比于 **ε·k_0**（横向偏振与参考动量的内积）；
+  横向条件 ε·k_0 = 0 使它消失。于是
+    T(z) [∂X^i e^{i n k_0·X}](w) ∼ (1/(z-w)²) [∂X^i e^{i n k_0·X}](w) + (1/(z-w)) ∂_w[…]，
+  即被积量 O(w) := ∂X^i(w) e^{i n k_0·X(w)} 是**权恰为 1 的主场**（h = 1 + 0）。
+
+  第 3 步（围道形变）。权 1 主场的零模 ∮ (dw/2πi) O(w) 与全部 L_m 对易：
+  按 worldsheet.ope-commutator-dictionary，[L_m, ∮ O] = ∮ (dw/2πi) [(h-1)(m+1) w^m O(w) + w^{m+1} ∂O(w)]，
+  h = 1 时第一项为零、第二项是全导数的围道积分故为零。得 [L_m, A^i_n] = 0 对所有 m, n。
+
+  推论（物理态 → 物理态）：若 L_m|ψ⟩ = 0 ∀ m > 0，则 L_m A^i_n|ψ⟩ = A^i_n L_m|ψ⟩ = 0。
+  L_0 一条不是"直接搬运"：A^i_n 把动量移到 p + n k_0、把振子能级移动 −n，
+  由 k_0² = 0 与 2α' k_0·p = 1 得 α'(p + n k_0)² = α' p² + n，两处变化相消，
+  故 (L_0 − a) A^i_n|ψ⟩ = 0 仍然成立（这正是 worldsheet.no-ghost-theorem-v4 (1b) 里的质量壳记账；
+  Lean 侧对应 `invTwo_mul_zeroModeSq_towerMomentum`）。
+gaps:
+  - "**式号与正文均未核实**。两条一手来源（GSW §2.3.3、GT 1972）的 loc 强度分别是 L4/L0 与 L0，两篇的正文都未获取。这是本推导可追溯性的主要弱点，与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 面对的是同一个问题。"
+  - "第 1、2 步的 OPE 计算依赖 worldsheet.free-scalar-propagator（physical-argument）与 worldsheet.conformal-normal-ordering（own rigorous / effective physical-argument），两条边在来源处都找不到逐条论证，已标 inferred。"
+  - "第 3 步的围道形变依赖 worldsheet.ope-commutator-dictionary（physical-argument：径向排序 + 围道变形，未形式化）。这是本推导 status 的直接上限：只要该字典还是 physical-argument，本推导就不可能高于 physical-argument。"
+  - "**Sugawara 型 L_m 与 T 的 Laurent 模 L_m 未被证明等同**（worldsheet.normal-ordering-modes-agree，physical-argument 且未形式化）。目标陈述写的是前者，本论证操作的是后者。文献从不区分，故该边标 inferred。要把本推导升到 rigorous，这条接缝必须先处理。"
+  - "**Lean 侧：归纳步已有，基例未做。** 可形式化的中间陈述是 L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m}（塔上两侧 L_m 的动量参数不同），共形权 h = ½ b·b = α' k_0²。`Fock.vertexOsc_unique` / `Fock.eq_zero_of_vertex_recursion` 配合 `Fock.mode_vertexOsc_sub` 与 `Fock.lie_Lop_mode` 已把它归约为真空上的单条等式（归纳步），但**基例（L_m 作用在相干态系数 `Fock.creaExp` 上）未证**——VertexOperator.lean 文件头 \"Mathematical gaps\" 第 1 条逐字：「In particular the statement \"`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`\" is **not** formalised.」formalizer 正在做 `formal/StringFormal/NoGhost/VertexWeight.lean`（截至合并提交 9691057 未合入）。在基例完成前，本推导不得标 formalized。"
+  - "本推导只谈 A^i_n 与 L_m 的对易，**不**覆盖 A^i_n 之间的对易（那是 worldsheet.ddf-transverse-oscillator-algebra），也**不**覆盖 A^i_n 作为代数算子的良定义性（那是 worldsheet.ddf-transversality-gives-local-finiteness）。三条从 worldsheet.ddf-operators-v4 拆出的命题各自独立。"
+  - "k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内：那里 A^i_n 本身没有定义（worldsheet.ddf-operators-v5 的 (★)）。"
+notes: |
+  【本推导的来历】2026-09-11 拆卡：worldsheet.ddf-operators-v4 是一张 `status: rigorous` 的
+  **定义**卡，却在末段断言了本目标（以及横向振子代数），于是这条从未被独立论证过的命题
+  以「定义的一部分」的身份继承了 rigorous。本推导把它的**实际论证**登记下来，
+  按 docs/STATUS_LEVELS.md 定级为 physical-argument。
+  这不是新发现的弱点，而是把既有弱点从「藏在定义卡里」改成「显式记账」。
+
+  **status 定级理由**：论证走 OPE + 围道形变，不是有限步初等代数计算，
+  因此不适用 docs/STATUS_LEVELS.md 的 rigorous 例外条款；两条一手来源都没有核实到式号，
+  也没有可引用的数学文献严格证明（kac-raina-1987 的讲号/命题号在本项目中未核实
+  且两版不可互换，不得猜编号）。故 physical-argument，**无 reviewer-verified 记录**。
+author: curator
+created: "2026-09-11"

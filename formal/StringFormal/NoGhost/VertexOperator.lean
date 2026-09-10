@@ -13,7 +13,7 @@ import StringFormal.NoGhost.Sugawara
 /-!
 # The oscillator part of the exponential vertex operator `:e^{i c·X(z)}:`
 
-Graph node: `worldsheet.ddf-operators-v4`; `formal/TODO.md` item `ddf-operators`.
+Graph node: `worldsheet.ddf-operators-v5 (definition; commutation relations now separate propositions ddf-commute-with-virasoro, ddf-transverse-oscillator-algebra)`; `formal/TODO.md` item `ddf-operators`.
 The momentum (zero-mode) half of the construction is in `StringFormal/NoGhost/DDF.lean`.
 
 ## Conventions
