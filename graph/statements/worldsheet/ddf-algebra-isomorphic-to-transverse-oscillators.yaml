@@ -1,0 +1,110 @@
+id: worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+kind: proposition
+title: 横向 DDF 算子代数与光锥横向振子代数同构（代数层面：A^i_n ↦ α^i_n 是李代数同构，D−2 份 Heisenberg 代数）
+statement: |
+  设 A^i_n 是 worldsheet.ddf-operators-v5 定义的 DDF 算子，前提与
+  worldsheet.ddf-transverse-oscillator-algebra-v2 逐字相同（i = 2..D-1，n ∈ Z \ {0}；
+  类光参考方向 k_0² = 0，横向偏振 ε^i·k_0 = 0 且 ε^i·ε^j = δ^{ij}，标度按 2α' k_0·p = 1
+  逐塔取定；断言只在扇区 {p : k_0·p ≠ 0} 的动量塔上作出）。
+  设 α^i_n 是 worldsheet.transverse-oscillator-commutators 的光锥横向振子
+  （同样 i = 2..D-1，n ∈ Z \ {0}）。
+
+  记
+    𝔞_DDF := span_C{A^i_n : i = 2..D-1, n ∈ Z \ {0}} ⊕ C·1，
+    𝔞_⊥   := span_C{α^i_n : i = 2..D-1, n ∈ Z \ {0}} ⊕ C·1，
+  二者各自在对易子下封闭（右端是 1 的倍数），故都是李代数。则线性映射
+    Φ : 𝔞_DDF → 𝔞_⊥,   Φ(A^i_n) = α^i_n,   Φ(1) = 1
+  是**李代数同构**：两套生成元的对易关系逐字相同
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} · 1 = [α^i_m, α^j_n]（作为 1 的倍数），
+  故 𝔞_DDF 与 𝔞_⊥ 同为同一份 (D−2) 重横向自由玻色振子（Heisenberg）代数的实现。
+
+  【本命题**不**断言的内容（范围限定，逐条）】
+  (i) **不**断言任何表示空间之间的同构。横向 DDF Fock 空间
+      H^⊥(k) = span{A^{i_1}_{-n_1}···A^{i_r}_{-n_r}|0;k⟩} 与光锥横向 Fock 空间之间的**等距**同构
+      需要另外两件东西：伴随关系 (A^i_n)† = A^i_{−n}（worldsheet.ddf-operators-adjoint）
+      与真空归一化，由此得到的 Gram 矩阵记账在
+      worldsheet.transverse-ddf-fock-gram-matrix。无鬼定理
+      worldsheet.no-ghost-theorem-v4 第 (1b) 条的「等距同构」是那一串的结论，不是本命题。
+  (ii) **不**断言 A^i_n 与 α^i_n 作用在同一个空间上，更不断言 A^i_n = α^i_n：
+      A^i_n 作用在协变（号差不定）Fock 空间的动量塔上并把动量移到 p + n k_0，
+      α^i_n 作用在光锥规范的横向 Fock 空间上且不移动量。Φ 只是生成元之间的对应。
+  (iii) **不**涉及零模（n = 0）、纵向方向、Virasoro 生成元，也不断言 Φ 与任何一侧的
+      厄米结构（† 或双线性型）相容——那正是 (i) 说要另加的东西。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594（(3.4) 之后同页正文：'In this case the transversal DDF operators … realize precisely the algebra of d − 2 transversal oscillators on the ground state e^r'）；§3.2, p. 599（d − 2 个正交归一偏振）"
+    note: |
+      **本命题最强的逐字来源**（CMP 172 (1995) 571–622；researcher L1 逐页读期刊排版 PDF，
+      literature/extractions/gsw-1987-v1.md §4 E15/E17）。逐字「one has to find a lightlike vector
+      k = k(r) such that **k·r = 1**. In this case the transversal DDF operators A^ξ_m(k)
+      realize **precisely the algebra of d − 2 transversal oscillators** on the ground state e^r」。
+      ⚠ 两点必须照实记：
+      (a) G–N 这句话是对 (3.4) 的**措辞性识别**，不是带编号的定理；文中没有把同构映射 Φ 写出来，
+          也没有验证生成元的线性无关（见 gaps 第 1 条）。被编号证明的是 (3.4) 本身，
+          那条由 worldsheet.ddf-transverse-oscillator-algebra-v2 承载。
+      (b) G–N 说的「on the ground state e^r」指的是**表示**层面的实现，而本命题只取其代数层面
+          （statement 的范围限定 (i)）；表示层面的等距同构在本图里是另一串节点。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p. 11, (5.5) 的引出句与其后正文（'noting that they really did behave like annihilation and creation operators, satisfying the appropriate commutation relations [43, 44]'）"
+    note: |
+      作者本人的历史综述（L3，二手，无证明）。「really did behave like annihilation and creation
+      operators」正是本命题的识别内容——DDF 算子**当作**横向振子用。
+      归属同 v2 的 source note：Goddard 把 (5.5) 归给 [43]/[44]（Brower–Goddard，正文均未获取，
+      L0，不得承载论证），不归给 goddard-thorn-1972。只升可追溯性，不承载论证。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      本命题就是 worldsheet.ddf-operators-v4 陈述文本里「**即一个 D-2 维横向自由振子代数**」
+      那半句、以及旧卡 worldsheet.ddf-transverse-oscillator-algebra 末句
+      「与世界面横向振子 α^i_n 的代数逐字同型」的承载处。
+      **式号与正文均未核实（L0）**；GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；
+      GSW 取 α' = 1/2，故其归一化写作 k_0·p = 1。
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.25b)（比较式右端：光锥横向振子的 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0}）"
+    note: |
+      本命题是两套对易关系之间的比较，故**右端那一套**也要有来源。它由依赖节点
+      worldsheet.transverse-oscillator-commutators 承载（抽取记录
+      literature/extractions/polchinski-1998-v1.md#E14，证据等级 [已核实]）；
+      此处列出该来源，使「依赖 transverse-oscillator-commutators」这条边不必标 inferred。
+tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra, light-cone]
+notes: |
+  【立卡来历，2026-09-11（五），curator，分支 agent/curator/ddf-algebra-split】
+  本节点承载 worldsheet.ddf-transverse-oscillator-algebra（旧卡）末句的**第二个命题**：
+  「即 {A^i_n} 生成一份 D-2 维横向自由玻色振子代数（Heisenberg 代数），
+  与世界面横向振子 α^i_n 的代数（worldsheet.transverse-oscillator-commutators）逐字同型」。
+  旧卡把它与对易关系本身捆在一张卡上，于是这句比较把旧卡的**每一条**推导都拉到
+  worldsheet.transverse-oscillator-commutators（physical-argument）之下——其中
+  --via-zero-mode-bracket 自身论证是 rigorous（G–N CMP §3.1），那句比较是它唯一剩下的上限。
+  拆卡建议原写在旧卡 notes 与该推导 gaps 第 6 条，lead 已派发。
+  对易关系本身现由 worldsheet.ddf-transverse-oscillator-algebra-v2 承载。
+
+  【「同构」是代数层面，与 Goddard–Thorn 的用途分开】这一点写进了 statement 的范围限定：
+  GT 的无鬼定理用 DDF 算子**建 DDF 态**并算 **Gram 矩阵**，要的是表示层面的等距同构，
+  那需要伴随关系 (A^i_n)† = A^i_{−n} 与真空归一化（worldsheet.ddf-operators-adjoint、
+  worldsheet.transverse-ddf-fock-gram-matrix），**不是**本命题。
+  相应地 worldsheet.no-ghost-theorem-v4--via-goddard-thorn **不依赖本节点**：
+  v4 的陈述 (1b) 只说 H_phys/H_0 与**横向 DDF Fock 空间** H^⊥(k) 等距同构，
+  通篇用 DDF 振子定义 H^⊥(k)，从不声称 H^⊥(k) 与光锥横向 Fock 空间同构。
+  （那条推导 summary 里「其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」一句读起来
+  像在用本命题，但它实际引用的是 Gram 矩阵的显式对角元，由
+  worldsheet.transverse-ddf-fock-gram-matrix 给出，与光锥振子无关。这点已写进该推导
+  depends_on 里 v2 那条边的 note。）
+
+  【status 为什么只是 physical-argument】推导 --via-commutation-relations 的论证本身是
+  有限步线性代数（两套生成元的对易关系逐字相同 ⟹ 生成元对应的线性映射是李代数同构），
+  但按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这要求「前提已完整写出」且
+  **reviewer 已独立复核并在推导 notes 记 `reviewer-verified`**。本推导**没有**该记录，
+  且前提之一（两侧生成元各自线性无关）在文献里没人写、本图也未证（见该推导 gaps 第 1 条），
+  故 physical-argument。
+  ⚠ 即使日后升到 rigorous，本节点的 **effective 仍是 physical-argument**：
+  依赖 worldsheet.transverse-oscillator-commutators 自身就是 physical-argument
+  （← light-cone-gauge-lagrangian ← polyakov-nambu-goto-classical-equivalence）。
+  要真正升级，必须先升级光锥侧那条链，与本节点无关。
+  **这正是拆卡的收益所在**：被压低的只剩这张比较卡，对易关系本身（v2）已是 rigorous。
+
+  【形式化】Lean 侧**完全未起步**，且比 v2 更远：先要有 A^i_n（VertexOperator.lean 文件头逐字
+  「No operator products. `V(b, z) V(b', w)` and hence `[A^i_m, A^j_n]` are untouched.」），
+  再要有光锥横向振子代数的 Lean 对应物与两者之间的同构。本节点**不得**标 formalized。
+author: curator
+created: "2026-09-11"
