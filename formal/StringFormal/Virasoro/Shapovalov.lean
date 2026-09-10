@@ -214,4 +214,110 @@ end VirasoroAlgebra
 
 end VirasoroAnti
 
+/-! ### Contravariant forms: definition, uniqueness, symmetry, level orthogonality -/
+
+section Contravariant
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- A submodule of `V(c,h)` containing `|c,h⟩` and stable under the *negative* modes is all of
+`V(c,h)`.  (Immediate from `negSpan_eq_top`, but used three times below.) -/
+lemma eq_top_of_hwv_mem_of_lie_neg (P : Submodule R (VermaModule R c h))
+    (h0 : hwv R c h ∈ P)
+    (hstab : ∀ n : ℤ, n < 0 → ∀ x ∈ P, ⁅VirasoroAlgebra.lgen R n, x⁆ ∈ P) : P = ⊤ := by
+  rw [eq_top_iff, ← negSpan_eq_top, negSpan_eq_span]
+  refine Submodule.span_le.mpr ?_
+  rintro x ⟨l, hl, rfl⟩
+  induction l with
+  | nil => exact h0
+  | cons a t ih =>
+    rw [wordAct_cons]
+    exact hstab a (hl a (by simp)) _ (ih fun n hn => hl n (by simp [hn]))
+
+/-- A bilinear form on `V(c,h)` is **contravariant** when `⟨L_n x, y⟩ = ⟨x, L_{-n} y⟩` for
+every `n : ℤ`, i.e. when the adjoint of the action of `X` is the action of
+`σ X` (`VirasoroAlgebra.antiInvolution`) on the generators. -/
+def IsContravariant (B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R) : Prop :=
+  ∀ (n : ℤ) (x y : VermaModule R c h),
+    B ⁅VirasoroAlgebra.lgen R n, x⁆ y = B x ⁅VirasoroAlgebra.lgen R (-n), y⁆
+
+variable {R c h}
+
+lemma IsContravariant.sub {B B' : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB : IsContravariant R c h B) (hB' : IsContravariant R c h B') :
+    IsContravariant R c h (B - B') := by
+  intro n x y
+  simp only [LinearMap.sub_apply, hB n x y, hB' n x y]
+
+/-- **Uniqueness of the contravariant form.**  Two contravariant forms that agree at
+`(|c,h⟩, |c,h⟩)` are equal.  No hypothesis beyond `negSpan_eq_top` is used; in particular this
+does *not* need PBW, a grading, or `V(c,h) ≠ 0`. -/
+theorem eq_of_isContravariant {B B' : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB : IsContravariant R c h B) (hB' : IsContravariant R c h B')
+    (h1 : B (hwv R c h) (hwv R c h) = B' (hwv R c h) (hwv R c h)) : B = B' := by
+  rw [← sub_eq_zero]
+  set D := B - B' with hDdef
+  have hD : IsContravariant R c h D := hB.sub hB'
+  -- Step 1: `⟨|c,h⟩, ·⟩` vanishes, because it kills every nonempty negative word.
+  have step1 : D (hwv R c h) = 0 := by
+    refine LinearMap.ker_eq_top.mp (eq_top_of_hwv_mem_of_lie_neg R c h _ ?_ ?_)
+    · rw [LinearMap.mem_ker, hDdef, LinearMap.sub_apply, LinearMap.sub_apply, h1, sub_self]
+    · intro n hn x _
+      rw [LinearMap.mem_ker]
+      have key := hD (-n) (hwv R c h) x
+      rw [neg_neg, lie_lgen_hwv_of_pos R c h (show (0 : ℤ) < -n by omega), map_zero,
+        LinearMap.zero_apply] at key
+      exact key.symm
+  -- Step 2: the left kernel is a Virasoro submodule containing `|c,h⟩`.
+  refine LinearMap.ker_eq_top.mp (eq_top_of_hwv_mem_of_lie_neg R c h _
+    (LinearMap.mem_ker.mpr step1) ?_)
+  intro n _ x hx
+  rw [LinearMap.mem_ker] at hx ⊢
+  exact LinearMap.ext fun y => by rw [hD n x y, hx, LinearMap.zero_apply, LinearMap.zero_apply]
+
+/-- The flip of a contravariant form is contravariant. -/
+lemma IsContravariant.flip {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB : IsContravariant R c h B) : IsContravariant R c h B.flip := by
+  intro n x y
+  simp only [LinearMap.flip_apply]
+  rw [hB (-n) y x, neg_neg]
+
+/-- **A contravariant form is automatically symmetric.**  Symmetry is a consequence of
+contravariance and the normalisation, not an extra axiom. -/
+theorem IsContravariant.flip_eq {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB : IsContravariant R c h B) : B.flip = B :=
+  eq_of_isContravariant hB.flip hB rfl
+
+theorem IsContravariant.comm {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+    (hB : IsContravariant R c h B) (x y : VermaModule R c h) : B x y = B y x :=
+  LinearMap.congr_fun₂ hB.flip_eq y x
+
+/-- A nonzero integer is a unit in a `ℚ`-algebra. -/
+lemma isUnit_intCast (R : Type*) [CommRing R] [Algebra ℚ R] {k : ℤ} (hk : k ≠ 0) :
+    IsUnit ((k : R)) := by
+  have h1 : IsUnit ((k : ℚ)) := isUnit_iff_ne_zero.mpr (Int.cast_ne_zero.mpr hk)
+  simpa using h1.map (algebraMap ℚ R)
+
+/-- **Different `L₀`-levels are orthogonal for any contravariant form.**  One line from
+contravariance at `n = 0`. -/
+theorem IsContravariant.eq_zero_of_level_ne
+    {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R} (hB : IsContravariant R c h B)
+    {M N : ℕ} (hMN : M ≠ N) {x y : VermaModule R c h}
+    (hx : x ∈ levelSpan R c h M) (hy : y ∈ levelSpan R c h N) : B x y = 0 := by
+  have key := hB 0 x y
+  rw [neg_zero, lie_lgen_zero_of_mem_levelSpan R c h M hx,
+    lie_lgen_zero_of_mem_levelSpan R c h N hy, map_smul, LinearMap.smul_apply,
+    LinearMap.map_smul, smul_eq_mul, smul_eq_mul] at key
+  have hz : (((M : ℤ) - (N : ℤ) : ℤ) : R) * B x y = 0 := by
+    push_cast
+    have hsplit : ((M : R) - (N : R)) * B x y
+        = (h + (M : R)) * B x y - (h + (N : R)) * B x y := by ring
+    rw [hsplit, key, sub_self]
+  have hne : ((M : ℤ) - (N : ℤ)) ≠ 0 := sub_ne_zero.mpr (by exact_mod_cast hMN)
+  obtain ⟨u, hu⟩ := isUnit_intCast R hne
+  calc B x y = (↑u⁻¹ : R) * (↑u * B x y) := by rw [← mul_assoc, Units.inv_mul, one_mul]
+    _ = 0 := by rw [hu, hz, mul_zero]
+
+end Contravariant
+
 end StringFormal.Virasoro
