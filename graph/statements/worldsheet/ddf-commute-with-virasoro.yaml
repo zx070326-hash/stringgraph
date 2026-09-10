@@ -19,6 +19,9 @@ statement: |
   α'(p + n k_0)² = α' p² + n（由 k_0² = 0 与 2α' k_0·p = 1）一起读，
   即 A^i_n 把能级移动 −n。因此 DDF 算子把物理态映为物理态。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.lie_towerLop_ddfOp
+  lean_file: StringFormal/NoGhost/DDFOperatorAll.lean
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -205,5 +208,68 @@ notes: |
     这就是本卡推论里「A^i_n 把能级移动 −n」那句话的准确内容。
   ⇒ **剩余障碍只有括号 [L_0, A^ε_n] = 0（formalizer 进行中），不是任何关于截距的额外约定。**
   这与上一段「⚠ 必须读准的更正」是同一件事的两面：缺的是括号，且那个括号等于零而非 −n A^ε_n。
+
+  【2026-09-11（六）：∀m 已机器验证，本卡升为 formalized；升级路径 (i) 的禁令解除，curator】
+  main 已合入 `formal/StringFormal/NoGhost/DDFOperatorAll.lean`，其中
+    `lie_towerLop_ddfOp`：k_0² = 0、2α' k_0·p = 1、ε·k_0 = 0 ⟹ ⁅L_m, A^ε_n⁆ = 0，
+    **对每个 m ∈ Z（含 m = 0）、每个 n ∈ Z**。
+  这正是本卡断言的量词，故本卡新增 `formal.lean_decl` 与推导
+  worldsheet.ddf-commute-with-virasoro--via-lean（status: formalized），
+  有效状态从 physical-argument 升为 **formalized**。
+  两条旧推导（--via-conformal-weight、--via-vertex-algebra-primary）保留不删。
+
+  ★ **上面【升级路径】(i) 里那句禁令现予解除**。该段逐字写着
+    「**在基例完成前，图中不得把 [L_m, A^i_n] = 0 或「e^{i k_0·X} 权为 0」记为已机器验证。**」
+  禁令的条件是「基例（L_m 作用在相干态系数 `Fock.creaExp` 上）未做」。
+  **基例现已由三个文件补齐**：
+    · `formal/StringFormal/NoGhost/VertexWeight.lean`（m ≥ 1，`Fock.Lop_apply_creaExp_of_pos_shifted`）；
+    · `formal/StringFormal/NoGhost/VertexWeightNeg.lean`（m ≤ −1，`Fock.Lop_apply_creaExp_of_neg_shifted`）；
+    · `formal/StringFormal/NoGhost/VertexWeightZero.lean`（m = 0，`Fock.Lop_apply_creaExp_zero_shifted`）。
+  三者合成 `Fock.lie_Lop_vertexOsc`（一切 m），图中由
+  worldsheet.exponential-vertex-operator-mode-weight-identity-v2 承载。
+  ⇒ 禁令的前提消失，本卡与该 v2 卡可以、也应当记为已机器验证。
+  ⚠ **禁令解除的只是这一条**：「e^{i k_0·X} 的**共形权**为 0」这句 **OPE 语言**的陈述
+  （worldsheet.exponential-vertex-operator-weight）**仍未**机器验证——
+  Lean 证的是模恒等式，两者之间隔着 worldsheet.ope-pole-mode-commutator-dictionary（effective = open）。
+  【升级路径】(ii) 的文献侧（GT 1972 / GSW 式号）同样一字未变，仍未拿到。
+
+  【2026-09-11（六）续：本卡陈述里「A^i_n 把能级移动 −n」这句话在塔的语言下会误导】
+  本卡【推论】末句逐字写「即 A^i_n 把能级移动 −n」。陈述文本不可变，故此处只作阅读说明：
+  · 在**塔**的语言下，A^ε_n 把第 j 层送到第 j + n 层，同时把该层的**振子能级** N 降 n；
+  · 两个移位在 L_0 本征值 α' p_j² + N = α' k² + j + N 中**逐字相消**
+    （Lean `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`），
+    故 **L_0 本征值不变**，截距 a₀ 也不变。
+  · 所以「移动 −n」说的是**振子能级**这一个分量，**不是** L_0 本征值，
+    更不是 ⁅L_0, A^ε_n⁆ 的值（那个是 0）。
+  · 与之相容的正确读法：物理条件 α' k² + j + N = a₀ 在 (j, N) 平面上是一条
+    **反对角线 j + N = 常数**，A^ε_n 沿这条线移动。
+  ⇒ 回译审计时请把该句读成「A^i_n 把**振子能级**移动 −n（层数同时 +n，L_0 本征值不变）」。
+  这与上面【★ 一处必须纠正的记账】段是同一件事，此处只是把它绑到那句具体文字上。
+
+  【2026-09-11（六）附：另一处需要按新证据更正的旧措辞】
+  本卡上文（以及 worldsheet.ddf-commute-with-nonzero-virasoro）多处写
+  「Sugawara 正规序求和在 m = 0 时 j = 0 与 j = m 两项重合……**把 m ≠ 0 的系数代进去会得到错答案**」。
+  前半句对，**后半句是误传**。`VertexWeightZero.lean` 文件头逐字：
+  「通式系数是 `J - m + a·b + ½ (m+1) (b·b)`，`m = 0` 给 `J + a·b + ½ (b·b)`，
+    而直接计算给出的也正是这个。之前记录的「代 `m = 0` 给错答案」指的是**真空引理**，
+    **不是**最终的对易子系数。」
+  即：m = 0 需要单独证的是**真空引理**，最终公式从来就是一条统一的多项式。
+  详见 worldsheet.exponential-vertex-operator-mode-weight-identity-v2 的 notes。
+
+  【2026-09-11（六）：本卡【推论】段现有独立承载卡，curator】
+  本卡陈述里的【推论】段（「因此 DDF 算子把物理态映为物理态」）已单列为
+    **worldsheet.ddf-operators-preserve-physical-states**（proposition，formalized，
+    lean_decl `StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule`，DDFOperatorAll.lean），
+  两半齐全（质壳 `ddfOp_mem_towerL0Submodule` + 正模 `ddfOp_mem_towerPositiveModeSubmodule`），
+  截距 a₀ 统一且逐字不变。
+  ⚠ 这**不是**换代：本卡的陈述文本不变，【推论】段仍属本卡；新卡只是让下游能单独引用
+  并单独记账。需要「A^ε_n 保持物理子空间」这条结论的下游**应引新卡**，
+  不必再经本卡的推论段。
+  ⚠ 上文【本卡【推论】的 caveat（供 auditor 回译时逐条对照）】写的
+  「『L_0 一条连同质量壳记账』这一半**完全未形式化**」**已过时**：
+  该半现由 `ddfOp_mem_towerL0Submodule` 覆盖，塔上的物理子模也已由
+  `towerPhysSubmodule` 定义。该段作为历史保留，请按本段更新阅读。
+  仍然成立的是：本图**没有**一张卡断言「塔上的物理子模 = 逐层 `Fock.physSubmodule` 之交」，
+  见新卡的【不断言】(f) 与其推导 gaps 第 2 条。
 author: curator
 created: "2026-09-11"

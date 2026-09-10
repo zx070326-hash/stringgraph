@@ -1,0 +1,120 @@
+id: worldsheet.ddf-contour-equals-mode-sum
+kind: proposition
+title: 文献的围道积分 DDF 算子与本图/Lean 的模态和是同一个算子：(1/2πi)∮ ε·P(z) V(n k_0, z) dz = Σ_m α^ε_m V^{(n)}_m
+statement: |
+  【本卡要接的是哪一条缝】
+  文献一律把 DDF 算子写成**围道积分**（goddard-2008 (5.1) 逐字、GSW §2.3.3、GT 1972）；
+  本图的定义卡 worldsheet.ddf-operators-v6 与 Lean 的 `ddfOp` 写成**模态和**。
+  两者是同一个算子这句话此前在本图中**没有任何节点承载**
+  （worldsheet.ddf-operators-v6 的 notes【围道 ⟹ 模态和的字典】把它登记为 open 缺口，
+  并逐字建议「(a) 建 `worldsheet.ddf-contour-equals-mode-sum` 卡并给推导（physical-argument 起步）」）。
+  本卡就是那张卡。
+
+  【设定与记号】沿用 worldsheet.ddf-operators-v6：D 维时空，度规 conv.metric-mostly-plus，
+  α' 按 conv.alpha-prime-regge；类光参考向量 k_0（k_0² = 0），基点动量 p，
+  归一化 2α' k_0·p = 1，偏振 ε 满足横向性 ε·k_0 = 0；
+  动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)。
+  记 α^ε_m := ε·α_m（m ∈ Z，含零模 α^ε_0 = (2α')^{1/2} ε·p_j，逐层用该层动量），
+  V^{(n)}_K := :e^{i n k_0·X(z)}: 的 z^K 洛朗系数（z^K-系数约定，同 v6）。
+
+  【文献侧的对象】按 goddard-2008 §5, p.11 逐字：
+    (5.1)  A^i_n = ε^i_μ A^μ_n ,   A^μ_n = (1/2πi) ∮ P^μ(z) V(n k, z) dz ,
+    (5.2)  V(α, z) = : exp{ i α·Q(z) } : ,
+    (5.3)  Q^μ(z) = q^μ − i p^μ log z + i Σ_{n≠0} (1/n) a^μ_n z^{−n} ,  P^μ(z) = i dQ^μ/dz ,
+  其中 a^μ_0 = p^μ。由 (5.3) 直接得 P^μ(z) = Σ_{m ∈ Z} α^μ_m z^{−m−1}
+  （即 ∂X^μ 的标准模展开；Goddard 取 α' = 1/2，本卡按 conv.alpha-prime-regge 恢复量纲）。
+
+  【断言】在上述数据（含横向性 ε·k_0 = 0、类光性 k_0² = 0、归一化 2α' k_0·p = 1）之下，
+  作为动量塔 T(p; k_0) 上的线性算子，对每个 n ∈ Z：
+
+    (1/2πi) ∮ ε·P(z) · V(n k_0, z) dz   =   Σ_{m ∈ Z} α^ε_m V^{(n)}_m ，
+
+  右端即 worldsheet.ddf-operators-v6 定义的 A^ε_n。
+  换言之：**文献的 A^i_n 与本图/Lean 的 A^ε_n 是同一个算子**（取 ε = e_i 时逐字同一）。
+
+  【本卡明确不断言】
+  (a) **不断言围道积分本身有解析意义**。本卡把 (1/2πi)∮ … dz 读作「取总 z^{−1} 系数」
+      （形式留数）。若要把它读成复平面上的真实积分，需要算子值函数的收敛性，
+      本图与 Lean 均无此结构，见 gaps。
+  (b) **不断言 [L_m, A^ε_n] = 0 或任何代数关系**。本卡只是两个写法之间的字典。
+  (c) **不断言 (T)(N)(S) 之外的条件可去**。特别地横向性 ε·k_0 = 0 在本卡中是
+      **两个因子在同一点相乘有意义**的条件（ε·P 与 e^{i n k_0·X} 之间无缩并），
+      不只是下游命题的假设；见 notes。
+  (d) **不断言文献各处（GSW / GT 1972 / Goddard 2008）的围道写法彼此逐字相同**。
+      本卡的文献侧锚点是 goddard-2008 (5.1)–(5.3)（L1 逐字）；
+      GSW 与 GT 1972 的式号至今未核实（L0）。
+  (e) **不断言 n = 0 的情形有文献意义**（Goddard (5.1) 写 n is an integer，未排除 0；
+      本卡对一切 n ∈ Z 陈述，与 v6 一致）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, eq. (5.1)–(5.3)（arXiv:0802.3249v1）：A^μ_n = (1/2πi)∮ P^μ(z) V(nk,z) dz；V(α,z) = :exp{iα·Q(z)}:；Q^μ(z) 与 P^μ = i dQ^μ/dz 的模展开，a^μ_0 = p^μ"
+    note: |
+      **本卡的文献侧锚点，逐字**（researcher L1 逐页读图，literature/extractions/gsw-1987-v1.md §2 E1）。
+      这是本项目第一次拿到 A^i_n 定义的逐字文本。三点对照：
+      · 偏振条件逐字「ε^i · ε^j = δ^{ij}, k · ε^i = 0」，本卡只用后者（横向性）；
+      · 归一化逐字 k·p = 1（该文取 α' = 1/2），即本卡的 2α' k_0·p = 1；
+      · 号差逐字 signature (−,+,+,+) = mostly-plus，与 conv.metric-mostly-plus 一致，无需换算。
+      ⚠ **该文不做本卡的字典**：它给出围道定义后直接使用，从不写出模态和，
+      也从不讨论两种写法的等价。本条提供的是**围道侧的逐字定义**，不是本卡论证的来源。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      同样只写围道积分。**式号与正文 L0**；GSW 用 mostly-minus，已按 conv.metric-mostly-plus 转写；
+      GSW 取 α' = 1/2。**不承载本卡的论证**。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实；正文未获取）"
+    note: |
+      DDF 原始链条中的一篇，同样是围道写法。正文四条获取路径全部失败
+      （literature/extractions/brst-cohomology-sources.md §3.1）。**不承载本卡的论证**。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfOp（本卡右端的形式化对象）；formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.towerVertex；formal/StringFormal/NoGhost/VertexOperator.lean :: StringFormal.NoGhost.Fock.vertexOsc"
+    note: |
+      本卡**右端**的对象在 Lean 中有逐字实现；**左端（围道积分）在 Lean 中没有任何对应物**，
+      本卡因此不可能是 formalized。这正是本卡存在的理由：把「左端 = 右端」这一步
+      从隐含假设变成一条显式的、状态为 physical-argument 的图节点。
+tags: [bosonic-string, spectrum-generating-algebra, vertex-operator, contour, dictionary]
+notes: |
+  查重：2026-09-11 跑 `uv run stringgraph search 围道 / contour / vertexOsc / 顶点算子模`。
+  最接近的三张卡都**不是**本卡：
+  · worldsheet.ope-commutator-dictionary：围道形变 ⟹ **对易子**，不是围道 ⟹ 模态和；
+  · worldsheet.ope-pole-mode-commutator-dictionary：形式分布版的**模态对易子**字典，
+    对象（形式分布）与这里需要的对象（塔上的洛朗系数）不同，且自身 effective = open；
+  · worldsheet.ddf-transversality-gives-local-finiteness-v2：模态和**良定义**，
+    不涉及围道写法。
+  worldsheet.ddf-operators-v6 的 notes 逐字建议建本卡（方案 (a)），lead 已同意。
+
+  【横向性在本卡中的角色比在 v6 中更基本】
+  v6 里横向性 ε·k_0 = 0 是「模态和逐向量有限」的条件。在**围道**一侧它还多一重作用：
+  (5.1) 的被积量是**两个算子在同一点 z 的乘积** ε·P(z) · V(n k_0, z)，
+  一般地这种乘积需要正规序处方；而 ε·P 与 :e^{i n k_0·X}: 之间的缩并正比于 ε·k_0，
+  **横向性使它们之间没有缩并**，乘积在同点自动有意义（这也是被积量成为权 1 primary 的原因）。
+  ⚠ 这一段是本项目的解读，**文献未逐字如此说**；已登记在本卡推导的 gaps 里。
+
+  【本卡的状态为什么只能是 physical-argument】
+  按 docs/STATUS_LEVELS.md：论证骨架清楚（洛朗展开 + 取 z^{−1} 系数，两行），
+  但关键步骤——「两个形式级数的乘积可以逐项展开并按幂次重排，且这在**算子**层面成立」——
+  在本图中没有严格承载：最接近的 worldsheet.ope-pole-mode-commutator-dictionary
+  自身 effective = open。这属于「断言 + 骨架」的档位（lead 2026-09-11 裁决），
+  故标 physical-argument 而不是 conjecture，缺口逐条写在推导的 gaps 里。
+  ⚠ **不要因为「这是两行显然的计算」就升 rigorous**：rigorous 的例外条款要求
+  「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」，
+  而本卡的前提里含一个未定义的对象（围道积分的算子值被积量）。
+
+  【本卡是回译审计的必经之处】
+  worldsheet.ddf-commute-with-virasoro、worldsheet.ddf-operators-preserve-physical-states
+  等卡的 formalized 都是相对**本图 v6 的模态和**成立的。凡要把这些结论回译成**文献**陈述
+  （首当其冲 ms.no-ghost-theorem 的回译审计）都必须经过本卡，并承担本卡的
+  physical-argument 与 gaps。这是本图为「让 Lean 的成果不被文献侧缺口拖低」
+  所付的、被显式记账的代价。
+
+  【补它的两条路（供 lead 排 ROADMAP）】
+  (i) 把「形式级数乘积的洛朗系数重排」写成一条严格的形式分布命题
+      （对象是 R[[z, z^{−1}]] 上的乘法，需局部有限性），再让本卡挂 --via-formal-distribution；
+      这条路与救活 worldsheet.ope-pole-mode-commutator-dictionary 是同一件事。
+  (ii) 在 Lean 里直接定义形式留数 Res_z 与被积量，证 `ddfOp = Res_z(...)`。
+      这条路把本卡变成 formalized，但需要先在 Lean 中引入形式洛朗级数的算子值版本，
+      目前 formal/ 中没有这个结构。
+  curator 倾向 (ii)：(i) 的对象与本卡需要的对象仍隔一层（形式分布 vs 塔上洛朗系数）。
+author: curator
+created: "2026-09-11"
