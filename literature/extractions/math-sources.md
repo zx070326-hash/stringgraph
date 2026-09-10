@@ -3172,3 +3172,357 @@ sources:
 - **Q29** `sources.bib` 里 **`schottenloher-2008` 条目的花括号失衡**（`note = {…}` 在原第 457 行就闭合，
   其后到 481 行是游离文本，最后多一个 `}`）。**本轮我把第 6 章的补充追加进了最后那段游离文本内部，
   没有改动括号结构**（避免与别的 agent 冲突）。**建议 lead 单独修一次**。
+
+---
+
+# § Riemann–Roch（供 `worldsheet.riemann-roch-kappa-minus-mu`）
+
+## 39. Riemann–Roch 的可引编号来源：dim H⁰(K^{−1}) 与 dim H⁰(K²)（researcher，2026-09-11）
+
+### 39.0 需求侧：图里到底要一条什么定理
+
+图卡 `worldsheet.riemann-roch-kappa-minus-mu` 的 `notes` 里有一条点名给 researcher 的 TODO：
+"登记一个可核实的**数学**来源 —— 紧黎曼面上线丛的 Riemann–Roch（或 P₁ 这一椭圆算子的 Atiyah–Singer 指数）"，
+目的是给 `κ − μ = 3χ` 另起一条能到 `rigorous` 的推导（现有唯一推导走鬼数流 Weyl 反常，且**比例常数靠球面一个例子标定**）。
+
+要支撑该卡片，需要的**不是**"随便一条 Riemann–Roch"，而是下面这条链：
+
+| 环节 | 内容 | 本轮结论 |
+|---|---|---|
+| (R) | 紧黎曼面上的 Riemann–Roch（除子形式或线丛形式） | **有多个带编号来源，其一已 L1 全文到手** |
+| (K) | `deg K = 2g − 2` | 有编号来源（一手读到引用方，见 §39.4） |
+| (A) | `dim H⁰(K²) − dim H⁰(K^{−1}) = 3g − 3`（**一次 RR 即得，无需分 g 讨论**） | 见 §39.2，**是抽取者的推算，尚未在任何来源里找到这个写法** |
+| (B1) | `κ = 2·dim H⁰(K^{−1})`（共形 Killing 向量 ↔ 全纯向量场） | **本轮无来源**（§39.8） |
+| (B2) | `μ = 2·dim H⁰(K²)`（度规模 ↔ 全纯二次微分） | **本轮无带编号来源**（§39.8） |
+| (U) | 不可定向世界面（卡片明写"可定向或不可定向"） | **本轮无来源，是最被忽视的缺口**（§39.10） |
+
+⇒ **只把 Riemann–Roch 登记进 bib，并不能让该节点变成 `rigorous`。** 详见 §39.10 的判断。
+
+### 39.1 结论表（先看这张）
+
+| 来源 | 任务书给的编号 | 本轮核实结果 | 可否写进 `loc` |
+|---|---|---|---|
+| **Eynard, arXiv:1805.06405v1**（公开讲义） | — | **★ L1 全文到手**：Ch. 4 **Theorem 1.2 (Riemann-Roch)**，p. 72，eq. **(1-10)** | **可以，且是本轮唯一全部逐字核实的来源** |
+| **Farkas–Kra, GTM 71, 2nd ed.** | Thm III.4.8 | **章节位置 L1**（出版方 TOC 扫描：**III.4. Divisors and the Riemann–Roch Theorem, p. 69**；III.5. Applications…, p. 79）；**定理号 III.4.8 仍 L4** | 只能写到**小节**：`§III.4, pp. 69–78`。**不要写 Theorem III.4.8** |
+| **Hartshorne, *Algebraic Geometry*** | Thm IV.1.3 | **L3（一手读到引用方原文）**：Wynter (UChicago REU 2016) p. 11 逐字 "Proof. Omitted (Theorem IV.1.3, Hartshorne [2])"，其 Theorem 5.1 正是 `l(D) − l(K−D) = deg D + 1 − g` | **可以写 `Ch. IV, Theorem 1.3`，但必须标"编号为二手核实"** |
+| **Jost, *Compact Riemann Surfaces*** | Thm 5.4.x | **章节位置 L1**（出版方 TOC 扫描：**5.4 Divisors. The Riemann-Roch Theorem, p. 225**）；**定理/推论号 L4**，且**版本未定**（§39.5） | 只能写 `§5.4, p. 225ff.`，**并且必须先定版本** |
+| **Griffiths–Harris** | — | **本轮未核（L0）**，一次调用都没花 | 不可 |
+| Mathlib | — | **无 Riemann–Roch**（`docs/1000.yaml` 四条 RR 词条全部只有 `title`、无 `decl`） | 该节点**不可能**是 `formalized` |
+
+### 39.2 ★ 核心观察：一次 Riemann–Roch 就够（**这一小节是抽取者的推算，不是任何来源的原文**）
+
+> ⚠ **按本项目纪律显式声明：下面这段是我自己做的推导，不是从哪本书上抄的。**
+> 之所以写进抽取记录，是因为它决定了 curator 该给这个节点接几条边、以及"数学侧到底缺什么"。
+
+设 Σ 紧、连通、**可定向**、无边，亏格 g，K 为典范线丛。对除子 `D = 2K` 用 Riemann–Roch
+（Hartshorne 形式 `l(D) − l(K − D) = deg D + 1 − g`）：
+
+```
+l(2K) − l(−K) = deg(2K) + 1 − g = (4g − 4) + 1 − g = 3g − 3
+```
+
+其中 `l(2K) = dim H⁰(K²)`（全纯二次微分），`l(−K) = dim H⁰(K^{−1})`（全纯向量场）。于是**对一切 g（含 0 和 1）**：
+
+```
+dim H⁰(K²) − dim H⁰(K^{−1}) = 3g − 3 = −(3/2) χ ,      χ = 2 − 2g
+```
+
+再用 (B1)(B2) 的 `κ = 2 dim H⁰(K^{−1})`、`μ = 2 dim H⁰(K²)`：
+
+```
+κ − μ = −2(3g − 3) = 6 − 6g = 3χ 。
+```
+
+**三条值得 curator 注意的后果：**
+
+1. **不需要按 g = 0 / 1 / ≥2 分情形**，也**不需要**任何"球面标定"。现有推导最实质的弱点
+   （`riemann-roch-kappa-minus-mu--via-ghost-number-anomaly` 的 gap 第 1 条：系数 3 靠球面一个例子定出）
+   在数学路线上**根本不出现**。
+2. 卡片里的两个检验值是这条式子的自动推论：g = 0 ⇒ `0 − 3 = −3` ✓；g = 1 ⇒ `1 − 1 = 0` ✓。
+3. 单独的数值（`κ(S₂) = 6`、`μ(S₂) = 0`、g ≥ 2 时 `κ = 0`）**另需**一条"负次数线丛无非零全纯截面"的引理
+   （`deg D < 0 ⇒ l(D) = 0`），它在教材里是 RR 之前的独立命题，**不含在 RR 里**。
+   ⇒ 若 curator 想让图同时给出 `μ(S₂) = 0`（当前 gap 的残余项），要**另挂**这条引理，别指望 RR 一条边解决。
+
+### 39.3 Farkas–Kra, *Riemann Surfaces*, GTM 71：**位置 L1、编号 L4**
+
+**怎么拿到的（新活路的复用）**：`https://d-nb.info/920606512/04` —— 德国国家图书馆的**出版方目录扫描**，
+即 [[reference-web-fetch-access-blockers]] 里记的 DNB 路线（`d-nb.info/<IDN>/04`）。落盘 62 KB，`Read pages` 读图，4 页全清晰。
+
+**标题页逐字（L1）**：`H.M. Farkas   I. Kra` / `Riemann Surfaces` / **`Second Edition`** / `With 27 Figures` / `Springer`。
+⇒ **这份 TOC 是第二版的**（这一点很重要：见 §39.5 的对照）。
+
+**Chapter III「Compact Riemann Surfaces」目录逐字（L1，书上 p. xii）**，起始页 **54**：
+
+```
+III.1.  Intersection Theory on Compact Surfaces                      54
+III.2.  Harmonic and Analytic Differentials on Compact Surfaces      56
+III.3.  Bilinear Relations                                           64
+III.4.  Divisors and the Riemann–Roch Theorem                        69
+III.5.  Applications of the Riemann–Roch Theorem                     79
+III.6.  Abel's Theorem and the Jacobi Inversion Problem              91
+III.7.  Hyperelliptic Riemann Surfaces                               99
+III.8.  Special Divisors on Compact Surfaces                        109
+III.9.  Multivalued Functions                                       126
+III.10. Projective Imbeddings                                       136
+III.11. More on the Jacobian Variety                                142
+III.12. Torelli's Theorem                                           161
+```
+
+同页另外三条与本项目有关的（L1）：
+- **`IV.10. Riemann-Roch—An Alternate Approach   237`** ⇒ **FK 里 Riemann–Roch 出现两次**，
+  引用时必须写清是 III.4 还是 IV.10（本项目要的是 III.4）。
+- **`V.1. Hurwitz's Theorem   257`**、`V.2. Representations of the Automorphism Group on Spaces of Differentials   269`
+  ⇒ 若将来要给"g ≥ 2 时 κ = 0"找**自同构有限**这条路线，入口在这里。
+- `VII.2. Relations Among Quadratic Differentials   333`（**不是**维数计数那条，别引错）。
+
+**结论**：
+- **`§III.4` 与 `§III.5` 的标题、页码是 L1 确定的**；III.4 占 pp. 69–78，故"Theorem III.4.8 在 III.4 之内"在页码上**自洽**。
+- **但 `III.4.8` 这个号本轮只有 L4 证据**：一个 fandom 维基页面（`mathbooknotes.fandom.com/wiki/Farkas_and_Kra_-_Riemann_Surfaces`）
+  被检索后端转述为逐字写着 "III.4.8 Theorem (Riemann-Roch)"。**我没有一手读到该维基页，也没有读到书。**
+- ⚠ 另一条负面证据：一篇综述（arXiv:1902.06406，**已一手读到该段**）在写 `dim Q(X) = 3g−3` 时逐字说
+  "For details of this computation, refer to [33] or [67], or any standard reference for Riemann surfaces."
+  —— **即连专门写全纯二次微分的综述都不给 FK 的定理号**。⇒ "FK 里 3g−3 的编号"很可能**在文献里根本没人引过号**。
+
+### 39.4 Hartshorne, Ch. IV, Theorem 1.3：**编号 L3（一手读到引用方）**
+
+**证据（一手读到的是引用方，不是 Hartshorne 本身）**：
+D. L. Wynter, *An Exposition of the Riemann Roch Theorem for Curves*（University of Chicago REU 2016，
+`math.uchicago.edu/~may/REU2016/REUPapers/Wynter.pdf`，日期页逐字 `Date: August 29, 2016`）。
+**该 PDF 已落盘并逐页读图（L1 对该文）**，其 **p. 11**：
+
+> **Theorem 5.1.** *Let K be the canonical class of the curve Y, D ∈ Div Y any divisor, and g the genus of the curve Y. Then we have the following:*
+> `l(D) − l(K − D) = deg D + 1 − g`
+> *Proof.* Omitted (**Theorem IV.1.3, Hartshorne [2]**).
+
+紧接的 **Corollary 5.2**（p. 11–12，逐字）：*If Y has canonical divisor K, then the degree of K is determined by the genus g of Y. More precisely, we have that* `deg K = 2g − 2`。
+
+**评级说明**：这是"**我一手读到了一篇论文，它逐字给出了 Hartshorne 的定理号**"。
+按本记录 §0 的等级，对 **Hartshorne 的编号**而言是 **L3**（二手），对 **Wynter 这篇**而言是 L1。
+另有一条同向的 L4：检索后端称 arXiv:2511.06880 亦逐字引 "[Hartshorne(1977), Theorem IV.1.3]"（**未一手核**）。
+⇒ **两条来源同向、且其中一条已一手读到**，可以写进 `loc`，但 `note` 里要写明"编号系二手核实"。
+
+⚠ **约定陷阱（Wynter p.2 与 p.11 已确认）**：Hartshorne 一路的 `l(D)` 是**向量空间维数**约定；
+另有文献（Wynter 提到的 TCU 讲义）用**射影维数**约定（`H⁰ = 0` 时 `l(D) = −1`），**整式差 1**。
+`loc` 里引 Hartshorne 时必须连约定一起写。
+
+### 39.5 Jost, *Compact Riemann Surfaces*：**小节位置 L1，编号 L4，且版本未定（本节最脏的一条）**
+
+**怎么拿到的**：同 DNB 路线，`https://d-nb.info/948901241/04`（落盘 460 KB，3 页读图）。
+
+**标题页逐字（L1）**：`Jürgen Jost` / `Compact Riemann Surfaces` / `An Introduction to Contemporary Mathematics` /
+`Translated by R. R. Simha` / `With 22 Figures` / `Springer`。
+⚠ **没有"Second/Third Edition"字样**（对比 FK 那份**明写** `Second Edition`）⇒ **这份 TOC 很可能是第 1 版（1997）**，但**未证实**。
+
+**Chapter 4/5 目录逐字（L1，书上 p. XIV）**：
+
+```
+4. Teichmüller Spaces
+   4.1  The Basic Definitions                                               167
+   4.2  Harmonic Maps, Conformal Structures and Holomorphic
+        Quadratic Differentials. Teichmüller's Theorem                      169
+   4.3  Fenchel-Nielsen Coordinates. …                                      179
+   4.4  Uniformisation of Compact Riemann Surfaces                          191
+5. Geometric Structures on Riemann Surfaces
+   5.1  Preliminaries: Cohomology and Homology Groups                       203
+   5.2  Harmonic and Holomorphic Differential Forms on Riemann Surfaces     211
+   5.3  The Periods of Holomorphic and Meromorphic Differential Forms       219
+   5.4  Divisors. The Riemann-Roch Theorem                                  225
+   5.5  Holomorphic 1-Forms and Metrics on Compact Riemann Surfaces         236
+   5.6  Divisors and Line Bundles                                           238
+   5.7  Projective Embeddings                                              247
+   5.8  Algebraic Curves                                                    254
+   5.9  Abel's Theorem and the Jacobi Inversion Theorem                     267
+   5.10 Elliptic Curves                                                     274
+```
+
+⇒ **任务书说的"Jost Thm 5.4.x"落在 `5.4 Divisors. The Riemann-Roch Theorem`（p. 225）之内，小节层面成立（L1）。**
+
+**★ 本轮追到的一条有价值线索（L4，值得下一轮钉死）**：检索后端称，一篇 2025 年的 Springer 章
+（*Differentials on a Riemann Surface*，`link.springer.com/chapter/10.1007/978-3-032-09219-9_9`，**Springer 登录墙，未取到**）
+在陈述"亏格 ≥ 2 的闭黎曼面上全纯二次微分空间 `Q(X)` 的复维数为 `3g − 3`"时，
+把证明引给 **`[219, Cor. 5.4.2]`**，而 `[219]` = Jost, *Compact Riemann Surfaces*。
+⇒ **假说：Jost 的 `Corollary 5.4.2` 就是本项目要的 `dim H⁰(K²) = 3g − 3`。**
+这与上面 L1 的 TOC 高度自洽（5.4 = RR 那一节，Corollary 5.4.2 正是"RR 的直接推论"应在的位置）。
+**但它现在只有一条 L4 证据，禁止写进图。**
+
+⚠ **版本陷阱（未解决）**：检索后端描述的另一份 Jost 全书 PDF（挂在爱丁堡某教师页）里，
+"Quadratic Differentials. Teichmüller's Theorem" 在 **p. 163**，而我 L1 读到的 TOC 是 **p. 169**；
+两者**相差 6 页**，说明**至少存在两个不同版次**。**在版次钉死之前，`Cor. 5.4.2` 这个号不可搬运。**
+⚠ 另：那份全书 PDF 是**整本 Springer 书的扫描**挂在个人页上，版权状态存疑。
+按 `literature/CLAUDE.md` 规则 1（不使用未授权扫描），**本轮没有去取它**，也不建议下一轮去取；
+要定版次应走 DNB / 出版方 / 图书馆记录。
+
+### 39.6 Griffiths–Harris：**本轮完全没查（L0）**
+
+任务书列了它，但在预算内我优先把"能拿到全文的公开讲义"（§39.7）做完了。
+诚实记录：**本轮对 GH 一次调用都没花，因此关于它的任何编号都不得写进图。**
+下一轮若要查，注意一个结构性风险：GH *Principles of Algebraic Geometry* 的结果**多以"章·节 + 页码"引用**，
+带编号定理较少 —— 也就是说它**未必**能提供本项目需要的"可逐字定位的编号"。先确认这一点再投入。
+
+### 39.7 ★ 唯一 L1 全文到手的来源：Eynard, *Lectures on compact Riemann surfaces*, arXiv:1805.06405v1
+
+**文献标识（L1，读自 PDF 首页）**：B. Eynard, *Lectures on compact Riemann surfaces.*，报告号 **IPhT-T18/007**，
+封面逐字 "Paris–Saclay's IPHT doctoral school Lecture given in winter 2018."，
+侧边戳记逐字 **`arXiv:1805.06405v1 [math-ph] 16 May 2018`**（⇒ **式号必须写死 v1**）。
+作者单位：Institut de Physique Théorique de Saclay + CRM Montréal。全书 Contents 在 p. 5–7，Bibliography 起 p. 119。
+**PDF 页码 = 印刷页码**（首页即印刷 p. 1）。
+
+**⚠ 编号结构（引用时必须照做）**：**每一章内部重新计数**（Ch. 4 有 Theorem 1.1/1.2/4.1…，Ch. 5 也有 Theorem 1.1/2.1/4.1…）。
+文内自引用的写法是**罗马章号 + 章内号**，例如正文逐字出现 "theorem III-3.4"、"corollary II-3.5"、"def. II-1.3"。
+⇒ **`loc` 里只写 "Theorem 1.2" 会歧义，必须写成 "Ch. 4, Theorem 1.2"（或按其自身风格 "IV-1.2"）。**
+
+**(a) Riemann–Roch 本体（书上 p. 72，L1 逐字）**
+
+> **Theorem 1.2 (Riemann-Roch)** *For every divisor D we have*
+> `r(−D) = deg D + 1 − 𝔤 + i(D).`   (1-10)
+
+配套定义（书上 p. 71，L1 逐字，Definition 1.2 的 (1-5)(1-6)）：
+
+> `ℒ(D) = {f ∈ 𝔐⁰(Σ) | (f) ≥ D}`  ,  `r(D) = dim ℒ(D)`,
+> `Ω(D) = {ω ∈ 𝔐¹(Σ) | (ω) ≥ D}`  ,  `i(D) = dim Ω(D)`.
+
+⇒ **与 Hartshorne 形式的字典**：`r(−D) = l(D)`，`i(D) = l(K − D)`，`𝔤 = g`。两者是同一条定理。
+（⚠ Eynard 用的是 `r(−D)`，**负号在括号里**；抄错就整体差一个符号。）
+
+**(b) 同章可引的配套结果（L1）**：Theorem 1.1 (1-7) `r(D) = r([D])`、`i(D) = i([D])`（只依赖除子类）；
+**Proposition 5.1 (Riemann inequality)**（p. 75）`r(−D) ≥ deg D − 𝔤 + 1`；证明散布在 §5.2（p. 75–76）的 Theorem 5.2/5.3、Prop 5.2/5.3。
+**⇒ 这是一份把 RR 完整证完的公开讲义**（"The Riemann-Roch theorem, that we shall prove in this chapter"，p. 72 逐字）。
+
+**(c) 模空间侧（书上 p. 77、88、89，L1 逐字）** —— 这一段直接对上图卡的 `μ`：
+
+- p. 77 章首无编号公式 **(0-1)**：`d_{𝔤,n} = 3𝔤 − 3 + n` , `χ_{𝔤,n} = 2 − 2𝔤 − n`。
+- p. 88 §4 开头逐字："We shall find an explicit atlas of the moduli space ℳ_{g,n}.
+  **Charts will be homeomorphic to ℝ₊^{6g−6+2n}**, and with gluing rules encoded by graphs."
+  ⇒ **`dim_ℝ ℳ_{g,n} = 6g − 6 + 2n` 有一条可引的公开来源了**（正是图卡 `notes` 里点名要与 `μ` 区分的那条式子）。
+- p. 89 **Theorem 4.1**：`dim Ω_𝒮 = d_{𝔤,n} = 3𝔤 − 3 + n`  (4-7)。
+  ⚠⚠ **这里的 `Ω_𝒮` 不是全纯二次微分**：同页逐字定义为"having **double poles at the marked points**, and no other poles"
+  的二次微分构成的**仿射**空间（其底下的线性空间是"在 pᵢ 处至多一阶极点"的二次微分）。
+  n = 0 时它才退化成全纯二次微分并给出 `3g − 3`，但该节的前提是 `2𝔤 − 2 + n > 0` 且引入了 `L₁,…,Lₙ > 0`。
+  ⇒ **不得直接拿 Theorem 4.1 当"dim H⁰(K²) = 3g−3"的来源**；要么另找来源，要么在 note 里写清 n = 0 的退化是抽取者的推断。
+
+**(d) 顺带 L1 核到的、可给卡片"检验值"做数学侧佐证的三条**：
+
+- **Ch. 5, Theorem 1.1 (1-1)（p. 77）**：`ℳ_{0,0} = {(ℂP¹)}` , `Aut = PSL(2,ℂ)` ⇒ 球面共形 Killing 群复维 3 ⇒ **κ(S₂) = 6**。
+- **Ch. 5, Corollary 2.1 (2-9)（p. 85）** 与其后逐字："However, each `T_τ` has an infinite group of automorphisms,
+  indeed every translation `z ↦ z + β` for `β ∈ ℂ` is an automorphism. `ℳ_{1,0}` is unstable."
+  ⇒ 环面自同构含全体平移，复维 1 ⇒ **κ(T²) = 2**。
+- **Ch. 5, Theorem 2.2（p. 86）**："`ℳ_{1,1}` is an orbifold of dimension 1"（复维 1）⇒ **μ(T²) = 2**（实）。
+  ⚠ 注意它是 `ℳ_{1,1}`（带 1 个标记点）而不是 `ℳ_{1,0}`；`ℳ_{1,0}` 在同一处被判为 **unstable**。
+  这正是图卡 `notes` 里"μ 只数度规的模、不含顶点算子位置"那条警告的数学侧对应物，**换算时必须小心**。
+
+### 39.8 最弱的一环：`κ`、`μ` 与上同调维数的**桥**（本轮无来源）
+
+图卡的 `κ`、`μ` 是**物理定义**（共形 Killing 方程的解数、无迹横向度规变分的模数），
+而 Riemann–Roch 给的是 `dim H⁰(K^{−1})`、`dim H⁰(K²)`。**这两组量之间的等同不是 RR 的内容。**
+
+- **(B1) `κ = 2 dim H⁰(K^{−1})`**：在复坐标下共形 Killing 方程即 `∂̄ v^z = 0`，属"一算就出"的一步，
+  但**本轮没有找到任何带编号的数学来源**这么陈述。（Eynard 给的是自同构**群**，不是 CKV **方程**的解空间；
+  两者相等还要一步"Aut 的李代数 = 全纯向量场"。）
+- **(B2) `μ = 2 dim H⁰(K²)`**：这一步实质上是 Teichmüller 理论（`coker P₁ ≅ H⁰(K²)`，
+  或"ℳ_g 的余切空间 = 全纯二次微分"）。**本轮同样没有带编号来源**；
+  §39.5 的 Jost `Cor. 5.4.2` 与 Jost §4.2（Teichmüller's Theorem, p. 169）是最有希望的两个入口。
+- ⇒ **curator 若现在就把 RR 挂上去，(B1)(B2) 必须显式建成节点或至少标 `inferred: true` 并留 note**，
+  否则会出现"挂了一条数学来源、却跳过了两处未论证等同"的情况 —— 这恰恰是本项目最想避免的失真。
+
+### 39.9 形式化状态：**Mathlib 没有 Riemann–Roch**
+
+`raw.githubusercontent.com/leanprover-community/mathlib4/master/docs/1000.yaml`（读取日期 **2026-09-11**）里
+标题含 "Riemann–Roch" 的条目共 **4** 条：`Q379048: Riemann–Roch theorem`、`Q4663326: Hirzebruch–Riemann–Roch theorem`、
+`Q7333126: Riemann–Roch theorem for surfaces`、`Q17102744: Riemann–Roch theorem for smooth manifolds`，
+**四条都只有 `title` 字段，没有 `decl` / `authors` / `date`** —— 按该文件的字段约定，这是**官方的"尚未形式化"记录**。
+
+⇒ **`worldsheet.riemann-roch-kappa-minus-mu` 的天花板是 `rigorous`，不可能是 `formalized`**；
+也不要指望把这一条选进 Phase 2 的 Lean 岛（RR 本身就是一个大工程）。
+
+### 39.10 ★ `loc` 建议 与「能否走 rigorous」的判断
+
+**(A) `loc` 建议（供 curator 直接抄）**
+
+```yaml
+# 首选：唯一 L1 全文到手、且免费可得
+- ref: eynard-2018-lectures
+  loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), eq. (1-10), p. 72 (arXiv:1805.06405v1)"
+  note: |
+    章内重新计数，必须连章号一起写。除子约定：ℒ(D)={f | (f) ≥ D}，定理写作 r(−D)=deg D+1−𝔤+i(D)，
+    与 Hartshorne 形式的字典是 r(−D)=l(D)、i(D)=l(K−D)。版本写死 v1。
+
+# 次选：教科书侧，编号为二手核实
+- ref: hartshorne-1977
+  loc: "Ch. IV, Theorem 1.3"
+  note: |
+    编号系二手核实（Wynter, UChicago REU 2016, p.11 逐字引作 "Theorem IV.1.3, Hartshorne"）；
+    本项目未取得 Hartshorne 原书。l(D) 用向量空间维数约定（另有射影维数约定，整式差 1）。
+
+# 只能写到小节的两条
+- ref: farkas-kra-1992
+  loc: "§III.4 (Divisors and the Riemann–Roch Theorem), pp. 69–78, 2nd ed."   # 禁写 Theorem III.4.8
+# Jost：**本轮未登记进 sources.bib（版次未定，见 §39.11(a)）**。若将来登记，loc 只能写
+#   "§5.4 (Divisors. The Riemann-Roch Theorem), p. 225ff."，且禁写 Cor. 5.4.2。
+```
+
+**(B) 能否走 rigorous —— 判断：可以，但不是"加一条边"，而是要新建 3–4 个节点；且现在还差两块**
+
+1. **数学定理本身：够格。** Riemann–Roch 在三本教科书 + 一份把它证完的公开讲义里都是**有证明的定理**，
+   来源强度足以支撑 `status: rigorous` 的推导。**Eynard 那份还能被任何人免费复核**，这一点对本项目特别有价值。
+2. **算术那一步：干净且可机检。** §39.2 的 `l(2K) − l(−K) = 3g − 3` 只用到 RR + `deg K = 2g−2`，
+   是一行代数，**没有分情形、没有"用球面标定常数"**。⇒ 数学路线一旦建成，会**同时消掉**现有推导 gap 第 1 条
+   （比例常数靠单例标定）与其"残余"（缺 `μ(S₂) = 0` 的断言）。
+3. **⚠ 仍缺第一块：(B1)(B2) 两处物理量 ↔ 上同调维数的等同**（§39.8）。**本轮无来源。**
+   在补上之前，新推导的诚实标法是 `status: rigorous` **但** 把 (B1)(B2) 作为**依赖节点**列出，
+   而那两个节点当前只能是 `physical-argument` —— 于是**有效状态仍被压到 `physical-argument`**。
+   **这是好事**：它正确地暴露了"数学侧其实卡在桥上，不卡在 RR 上"。
+4. **⚠ 仍缺第二块：不可定向情形。** 图卡 statement 明写"**可定向或不可定向**"，
+   而 Riemann–Roch 是黎曼面（可定向）上的定理。Klein 瓶 / ℝP² / Möbius 带要走**定向双覆盖 + 对合不变子空间**，
+   **本轮没有任何来源覆盖这一步**。
+   ⇒ **建议 curator 把卡片拆成两条**：可定向情形（可走 RR，能到 rigorous）与不可定向情形（暂无数学来源）。
+   若不拆，则新推导必须在 `gaps` 里明写"只覆盖可定向情形"，否则会出现**推导覆盖面小于陈述**的失真。
+5. **形式化：到此为止。** §39.9 已证 Mathlib 无 RR，`formalized` 不可能。
+
+**(C) 一句话给 lead**：登记 Riemann–Roch 是**值得做**的（它把这个节点从"靠球面标定的物理论证"变成"差两座桥的严格路线"），
+但**不要指望这一步就把节点提到 rigorous**；真正的瓶颈已经转移到 `κ`/`μ` 的定义与上同调维数之间那两处等同，
+以及不可定向情形。
+
+### 39.11 `sources.bib` 登记建议 + 访问日志 + 未解决问题
+
+**(a) 本轮 `sources.bib` 登记情况**（researcher 已写入；只增不改）：
+
+| key | 条目 | 证据等级 | 是否已登记 |
+|---|---|---|---|
+| `eynard-2018-lectures` | B. Eynard, *Lectures on compact Riemann surfaces*, arXiv:1805.06405v1 (2018), IPhT-T18/007 | **L1 全文** | **已登记** |
+| `farkas-kra-1992` | H. M. Farkas, I. Kra, *Riemann Surfaces*, 2nd ed., GTM 71, Springer | **L1 目录**（正文未取得；年份未独立核实） | **已登记** |
+| `hartshorne-1977` | R. Hartshorne, *Algebraic Geometry*, GTM 52, Springer | **L3 编号**（原书未取得） | **已登记** |
+| （Jost） | J. Jost, *Compact Riemann Surfaces*, Springer | L1 目录，但**版次未定** | **本轮不登记** |
+
+⚠ **Jost 为什么不登记**：`sources.bib` 的 key 规则是 `<firstauthor>-<year>`，而本轮**定不下版次与年份**（§39.5）；
+同一书至少有两个版次、同名小节页码相差 6 页。**先定版次，再登记**，否则 `loc` 里的页码会指向错误的版本。
+在此之前，图里**不要**引 Jost。
+
+**(b) 访问日志（本轮，供后人省事）**
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Eynard 讲义全文** | `arxiv.org/pdf/1805.06405` | **成功**（落盘 2.2 MB；读 p.1–7、71–77、84–89） |
+| Eynard HTML | `ar5iv.labs.arxiv.org/html/1805.06405` | 部分成功：**章节结构可读，但正文在 Ch.4 之前就被截断** ⇒ 定理号只能靠 PDF |
+| **Farkas–Kra 目录** | `d-nb.info/920606512/04` | **成功**（62 KB 扫描，4 页；含 `Second Edition` 字样） |
+| **Jost 目录** | `d-nb.info/948901241/04` | **成功**（460 KB 扫描，3 页；无版次字样） |
+| **Hartshorne 编号（经引用方）** | `math.uchicago.edu/~may/REU2016/REUPapers/Wynter.pdf` | **成功**（落盘 266 KB；p.11 逐字含 "Theorem IV.1.3, Hartshorne [2]"） |
+| 全纯二次微分维数的编号出处 | `ar5iv.labs.arxiv.org/html/1902.06406` | **成功但是否定结论**：该综述自己算 `3g−3`，引 FK/Jost 时**不给定理号** |
+| **Mathlib 形式化状态** | `raw.githubusercontent.com/…/mathlib4/master/docs/1000.yaml` | **成功**：4 条 RR 词条全部只有 `title` ⇒ 未形式化 |
+| Jost 全书 PDF（个人页扫描） | `webhomes.maths.ed.ac.uk/~v1ranick/papers/jost.pdf` | **主动不取**：整本 Springer 书扫描，版权状态存疑，按 `literature/CLAUDE.md` 规则 1 回避 |
+| Springer 章（`[219, Cor. 5.4.2]` 的出处） | `link.springer.com/chapter/10.1007/978-3-032-09219-9_9` | **未取**（Springer 登录墙，既有记录已判死路） |
+| Griffiths–Harris | — | **本轮未查（0 次调用）** |
+
+**(c) 未解决 / 留给下一轮**
+
+- **Q30** **Farkas–Kra 的 `Theorem III.4.8` 是否真是 Riemann–Roch（现 L4）。**
+  最省力的下一招不是找书，而是找**逐字引了该号的论文**（Google Books 对 GTM 71 的两个 volume id
+  `6pXuBwAAQBAJ`、`bGZDU9HxgpAC` 尚未跑过"无意义字符串"控制实验，可试，但按既有教训它只能当一致性检查）。
+- **Q31** **FK 里 `dim H⁰(K²) = 3g−3` 到底有没有编号、在 III.5 的哪一条。**
+  已有一条负面信号：专门写这个主题的综述（1902.06406）**不给号**。
+- **Q32** **Jost 的版次**（DNB 那份无版次字样；另有一份 PDF 的同名小节页码相差 6 页），
+  以及 **`Corollary 5.4.2` 的内容是否就是 `3g−3`（现 L4）**。**版次不定则编号不可搬运。**
+- **Q33** **(B1)/(B2) 两座桥的带编号数学来源**（§39.8）——本轮完全空白，是数学侧真正的瓶颈。
+  候选入口：Jost §4.2（Teichmüller's Theorem, p. 169）、FK V.2（p. 269）、Ahlfors–Bers 原始文献。
+- **Q34** **不可定向世界面上的对应陈述**（§39.10 第 4 点）——本轮无来源，且图卡的 statement 已经把它包含在内。
+- **Q35** Griffiths–Harris 是否提供**可逐字定位的编号**（§39.6）——先确认这一点再投入额度。
+
