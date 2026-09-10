@@ -35,7 +35,7 @@ depends_on:
       来源 virasoro-lean-2025 Definition 12.4 给的三角分解 𝔳𝔦𝔯_± = span{ℒ_n | ±n > 0}、
       𝔳𝔦𝔯₀ = span{ℒ₀, C} 与本节点写法逐字一致。
   - id: worldsheet.verma-level-spanned-by-partitions
-    inferred: false
+    inferred: true
     note: |
       **记账用的边，不提升本推导的状态**（2026-09-11 合并 worldsheet.verma-module-pbw-basis 时补挂，
       原先挂在被删的 worldsheet.verma-module-pbw-basis--via-pbw 上）。
@@ -55,12 +55,6 @@ sources:
       来源对本命题给的**全部**论证就是那一句「From the Poincaré–Birkhoff–Witt (PBW) theorem,
       it can be seen that a basis of 𝒱_{c,h} is …」——即它把结论归为 PBW 的直接推论而**不写证明**。
       本推导的 summary 把那三步补全（诱导模识别 → PBW → 计数）。见 gaps 第一条。
-  - ref: swanson-2015-pbw
-    loc: "研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论"
-    note: |
-      只作旁证：它说明 summary 第 (2) 步用的「U(L) 作为 U(子代数)-模自由」这条推论确实就在 Humphreys §17.3 里，
-      不是本图临时拼的。**该讲稿的连续编号与 Humphreys 的字母编号都不得写进图**（Q14 未裁决，
-      见 math.pbw-theorem 的 notes）。
 summary: |
   标准论证，三步。全部在 F-代数范畴内做，不涉及任何拓扑或收敛。
 
@@ -130,6 +124,8 @@ gaps:
      自由性 (1) 对任意交换环 R（vir₋ 作为 R-模自由）都成立，worldsheet.verma-module-v2 的构造本就对
      任意 ℚ-代数成立。若日后需要一般 R 上的版本，应新建节点而不是改本节点的陈述。"
 notes: |
+  reviewer-verified: reviewer-batch4, 2026-09-11 — 诱导模识别 → 两次 PBW → 分拆计数三步独立复核；来源无证明、论证为本图补写，按 STATUS_LEVELS 例外条款保持 rigorous。
+  （reviewer-batch4 同时指出：到 verma-level-spanned-by-partitions 的记账边不被来源或 summary 使用，已改 inferred: true。）
   **status 的选择**：rigorous。按 docs/STATUS_LEVELS.md 等级 4，非平凡输入（PBW）来自数学教科书里
   已发表的完整证明，其余步骤是有限步纯代数。不标 formalized 的理由见 gaps 第四条。
   论证里没有任何形式操作、渐近或路径积分，故没有理由降到 physical-argument。
@@ -161,3 +157,4 @@ notes: |
   该条已在自己的 gaps 里登记这一步；若日后有第二处需要，应新建一条 math 节点承载 Euler 恒等式。
 author: curator
 created: "2026-09-11"
+# lead 2026-09-11：swanson-2015-pbw 降为核对源，原 loc："研讨班讲稿 “§17: The PBW Theorem”，末节关于「H ⊆ L 为子代数时 U(L) 是自由 U(H)-模，自由基由不涉及 H 的有序单项式给出」的推论"

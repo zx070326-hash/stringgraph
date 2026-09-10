@@ -40,6 +40,7 @@ sources:
       (b) Google Books 卷 id `mSD4DvUFa6QC` 全文检索，`"PBW Theorem and consequences"` → p.91、
           `"Corollary C"` → p.92，且**无意义串的控制实验返回 "No results"**（该卷没有「无命中回落固定页」的病）。
       印本本身**未取得**，本项目对 Humphreys 正文的等级是 L3/L4，不是 L1。
+    # lead 2026-09-11：swanson-2015-pbw（研讨班讲稿）按「个人笔记只作核对源」裁决从 sources[] 降为本注；原 loc：\"研讨班讲稿 “§17: The PBW Theorem”（首行明说 based on §17 of Humphreys），9 页全文；分次版定理与有序单项式基推论的措辞\"
   - ref: ardizzoni-2010
     loc: "arXiv:1008.4523v2, p. 1 Introduction 第一段（逐字引用 [Hu, Corollary C, page 92] 并给出有序单项式基的措辞）；p. 15 References 的 [Hu] 条目"
     note: |
@@ -47,16 +48,6 @@ sources:
       basis (X, ≤)」，**没有有限维假设**——本节点 (1) 的措辞取自这一句。
       注意版本坑：期刊版（Glasgow Math. J. 54 (2012)）把它编作 `[15, Corollary C, p. 92]`，arXiv 版写 `[Hu]`；
       本图引 arXiv 版，因为那是被 L1 读到的那一份。
-  - ref: swanson-2015-pbw
-    loc: "研讨班讲稿 “§17: The PBW Theorem”（首行明说 based on §17 of Humphreys），9 页全文；分次版定理与有序单项式基推论的措辞"
-    note: |
-      **L1 全文读毕（9 页）**。本节点 (2) 的措辞（「The natural map 𝔖 → gr 𝔘 is an isomorphism of algebras」）
-      与 (1) 的措辞（有序基 x_{i_1}…x_{i_m}，i_1 ≤ … ≤ i_m，连同 1，构成 𝔘(L) 的基）取自该讲稿。
-      **该讲稿用自己的一套连续编号，不是 Humphreys 的字母编号；那套编号按硬性禁令不得写进图**，
-      故本 source 的 loc 只写讲稿标题与页数。该讲稿记号段写「L is a Lie algebra over F (possibly infinite
-      dimensional)」，是本节点敢按任意维数陈述的第二条旁证。
-      另记：Humphreys 原书对 gr 𝔘(L) 用记号 𝔊(L)；讲稿还指出 Humphreys 在某条推论里漏记了一处单射性
-      （"seems to forget to note that π is injective on W"），但那是证明内部的细节，不影响本节点的结论。
 tags: [algebra, lie-algebra, universal-enveloping-algebra, pbw, math-input]
 notes: |
   **本节点为什么存在**：worldsheet.verma-module-pbw-basis--via-pbw（该推导已于 2026-09-11 随
