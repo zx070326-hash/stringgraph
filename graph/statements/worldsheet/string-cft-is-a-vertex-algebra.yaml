@@ -84,5 +84,33 @@ notes: |
   最易验证；对自由场，模式对易关系 [α_m, α_n]、{b_m, c_n} 与 Sugawara 型 [L_m, α_n]、[L_m, L_n] 是有限计算
   （后者 Kytölä 已形式化 c = 1 情形），由 Gui §7.8→§7.9（方法出自 [FHL93]）即可升到复解析版。
   真正的新工作是 D 分量 + η + 鬼场的簿记，以及 (1)(2) 两点。
+
+  ---
+
+  ⚠ **【2026-09-11 换代：本节点已被 worldsheet.string-cft-is-a-vertex-algebra-v2 取代，勿再引用】**
+  （reviewer-batch3 必修第 2 条，curator）。
+
+  被取代的**唯一原因**是陈述末句「特别地 V 上由 E 生成一个（超）顶点算子代数，其共形向量对应
+  T = T^X + T^g，中心荷 c = D − 26」——它是与 (i)(ii) 并列的**第三条独立命题**，违反「一个节点一个命题」，
+  且其内容比 (i)(ii) 强得多：
+
+  (1) **重构定理的前提不止局域性**。Gui Theorem 5.12 另外要求真空向量 Ω 与 creation property、平移算子、
+      分次 V = ⊕_{n≥0}V(n) 且 V(0) = C·Ω、dim V(n) < ∞。弦论的 V 只能逐动量分解为 F_k，而 **k ≠ 0 的分支上
+      没有真空**：|0;k⟩ 的 L_0 本征值是 α'k²（worldsheet.virasoro-generators-free-boson），既非 0 也一般非整数，
+      故该分支上根本没有「V(0) = C·Ω 的 N-分次」，末句在 k ≠ 0 处**不良定**，而不只是「未证」。
+      （本 notes 上文「两点技术性提醒」(1) 原写「Gui 的 CFT-type 假设在固定 k 的 F_k 上成立」，
+      这句话在 k ≠ 0 时不对；v2 已改正。）
+  (2) **c = D − 26 是两条已有命题之和**：c^X = D（worldsheet.free-boson-central-charge-d）与
+      c^g = −26（worldsheet.bc-ghost-central-charge），各自在图上有推导，不该被一条无推导的 open 卡吞掉。
+  (3) **E 中「正规序积」是哪种正规序未表态**：本节点写 T^X = -(1/α'):∂X^μ∂X_μ: 并引
+      worldsheet.energy-momentum-tensor-free-scalar（**共形**正规序），却要求 E 落进 Schottenloher/Gui 的框架
+      （**产生-湮灭**正规序）。v2 把 E 的正规序钉死为产生-湮灭，并写明与共形正规序相差 c-数
+      （L_0 上为 a^X = 0 / a^g = −1）以及局域性对加 c-数不敏感。
+
+  换代时**没有任何推导指向本节点**，唯一把它列进 depends_on 的
+  worldsheet.ope-commutator-dictionary--via-locality-theorem 已在同一提交中改挂到 v2
+  （并按命名规则更名为 worldsheet.ope-pole-mode-commutator-dictionary--via-locality-theorem）。
+  本节点保留只为存档与可追溯。
+superseded_by: worldsheet.string-cft-is-a-vertex-algebra-v2
 author: curator
 created: "2026-09-11"

@@ -1,0 +1,132 @@
+id: worldsheet.string-cft-is-a-vertex-algebra-v2
+kind: proposition
+title: 玻色弦世界面 CFT（D 个洛伦兹号差自由玻色子 ⊗ λ=2 的 bc 鬼场）的场两两局域（形式版 ∧ 复解析版；**只**断言局域性）
+statement: |
+  设玻色弦的世界面 CFT 由下列两部分的张量积给出：
+  (a) D 个自由玻色子 X^μ（μ = 0, …, D-1）的 CFT（worldsheet.free-scalar-cft-action），靶空间度规
+      η = diag(-1, +1, …, +1)（conv.metric-mostly-plus），态空间为各动量 k 上的 Fock 空间
+      F_k（worldsheet.bosonic-fock-space，振子 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}），
+      生成场为 ∂X^μ(z) ∝ Σ_m α^μ_m z^{-m-1}（归一化常数依 conv.alpha-prime-regge、
+      conv.worldsheet-complex-coords，本命题不依赖其具体值）；
+  (b) λ = 2 的 bc 鬼场系统（worldsheet.bc-ghost-cft），态空间为鬼场 Fock 空间（基态二重简并），
+      生成场为 b(z) = Σ_n b_n z^{-n-2}、c(z) = Σ_n c_n z^{-n+1}（{b_m, c_n} = δ_{m+n,0}）。
+  取 V 为张量积态空间（对每个固定 k 按 level 作 N-分次），V′ 为其分次对偶，配对 ⟨v′, v⟩ 为双线性配对
+  （**不**要求正定；洛伦兹不定号见 worldsheet.fock-indefinite-form）。
+
+  **场集合 E 与正规序的选取（本节点与 v1 在此处措辞更严）**：
+  E 取为生成场 {∂X^μ, b, c} 连同它们的 ∂_z 导数与**产生-湮灭正规序积**——即把模指标为负的（产生）模写到左边的
+  那一种正规序，与 worldsheet.virasoro-generators-free-boson 的 : α_p α_q : 以及 Schottenloher Definition 10.9 的
+  :A(z)B(w): = A(z)_- B(w) + B(w) A(z)_+（math.locality-ope-equivalences 的「记号」段）**是同一种**。
+  特别地 E 中含
+    T^X(z) = -(1/α') :∂X^μ ∂X_μ:(z)（产生-湮灭序）、T^g(z)（产生-湮灭序）以及 T = T^X + T^g。
+
+  ⚠ **与 worldsheet.energy-momentum-tensor-free-scalar 的正规序不同**：该节点的 : … : 是
+  **共形正规序**（减去自缩并，worldsheet.conformal-normal-ordering）。对自由场的双线性场，两种正规序至多相差一个
+  c-数（自缩并项），故给出同一组 L_m（m ≠ 0），在 L_0 上相差一个常数：X 部门为 a^X = 0
+  （worldsheet.normal-ordering-constant-ax），鬼场部门以 |↓⟩ 为产生-湮灭真空时为 a^g = -1
+  （worldsheet.bc-ghost-normal-ordering-constant）。**本命题只断言局域性，而局域性对加 c-数不敏感**
+  （若 f(z) 是 c-数形式级数则 [A(z) + f(z)·1, B(w)] = [A(z), B(w)]），故这一差别不改变本命题的内容；
+  但它对任何把 T 与 L_0 谱或中心荷挂钩的下游推导是实质的，那里必须指明用的是哪一种正规序。
+
+  **命题**：E 中任意两个场 A(z), B(z) 互为局域，在下述两种意义下同时成立：
+  (i) **形式局域性**（math.formal-distribution-locality；Schottenloher Definition 10.7）：
+      存在 N 使 (z - w)^N [A(z), B(w)] = 0 于 End(V)[[z^{±1}, w^{±1}]]（两个都是费米型场时取反对易子）；
+  (ii) **复解析局域性**（math.vertex-algebra-complex-analytic-locality；Gui Definition 7.2）：
+      对每个 v ∈ V, v′ ∈ V′，Σ_n ⟨v′, A(z_1) P_n B(z_2) v⟩ 与 Σ_n ⟨v′, B(z_2) P_n A(z_1) v⟩ 分别在
+      0 < |z_2| < |z_1|、0 < |z_1| < |z_2| 上 a.l.u. 收敛并解析延拓到 Conf²(C^×) 上同一个全纯函数，
+      其在 z_1 = z_2 的极点阶有与 v, v′ 无关的上界。
+  于是 (V, E) 满足 math.locality-ope-equivalences（Schottenloher Theorem 10.10）与
+  math.vertex-algebra-ope-analytic-convergence（Gui Proposition 7.12）的前提，
+  并满足顶点代数重构定理（Gui Theorem 5.12）诸前提中**局域性**那一条。
+
+  **本命题刻意不断言的三件事**（这是它与被它取代的 worldsheet.string-cft-is-a-vertex-algebra 的唯一差别）：
+  (α) 不断言 V 上由 E 生成一个（超）顶点算子代数——重构定理除局域性外还要求真空向量与 creation property、
+      平移算子、分次 V = ⊕_{n≥0}V(n) 与 V(0) = C·1、dim V(n) < ∞，这些前提在逐动量分支 F_k（k ≠ 0）上
+      不成立或不良定，见 notes；
+  (β) 不断言存在共形向量、其对应 T = T^X + T^g；
+  (γ) 不断言中心荷 c = D - 26——那是 worldsheet.free-boson-central-charge-d（c^X = D）与
+      worldsheet.bc-ghost-central-charge（c^g = -26）两条独立命题相加的结果，各自另有节点与推导。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 10, Definition 10.7, p. 177（本节点断言被满足的形式侧假设）；Definition 10.9, p. 178（正规序积 :A(z)B(w): = A(z)_- B(w) + B(w) A(z)_+，即本节点 E 所用的产生-湮灭正规序）；pp. 181–182：**单个**自由玻色子的 Fock 空间实现 S = C[T_1, T_2, …]，a_n(P) = ∂P/∂T_n (n>0)，a_{−n}(P) = n T_n P，Φ(z) = Σ a_n z^{−n−1} 是场且 Φ(z)Φ(w) ∼ 1/(z−w)²；p. 179 Heisenberg 例子 [A(z),A(w)] = ∂δ(z−w) Z"
+    note: |
+      **本节点的断言在该书中没有被证明。** 该书只做单个自由玻色子（c = 1，正定 Fock 空间），
+      无 D 分量、无洛伦兹号差 η、无 bc 鬼场、无路径积分定义（math-sources.md §11.4、§13.3）。
+      列出它只为标明「已核实的最接近结果」在哪里。
+      Definition 10.9 的正文措辞未被 researcher 逐字转录（见 math.locality-ope-equivalences 的
+      「记号段为何标『按通行定义补写』」一段），本节点写的是通行定义。
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, Definition 7.2, p. 70（本节点断言被满足的解析侧假设）；Theorem 5.12 (Reconstruction theorem), pp. 55–56（其假设之一逐字为「Locality: Any two fields of E are local」，**另有真空/平移/分次假设，本节点不断言**）；§6 Heisenberg VOA 的构造（本轮只读到目录级）"
+    note: |
+      **本节点的断言在该书中没有被证明。** Gui 不做弦论：无 c = 26、无 Weyl 反常、无路径积分（math-sources.md §8.8）。
+      两条对本节点有利的事实：(1) 全书用 V′-双线性配对而非正定内积，故洛伦兹不定号本身不构成障碍；
+      (2) Gui §7.7 说 Lie 括号版局域性「the easiest to verify in concrete examples」，再经 §7.8→§7.9 得到复解析版——
+      即验证本节点的可行路线是先验模式对易关系，而不是直接验解析收敛。
+      不利的事实：书中没有一处处理不定内积下的幺正性；且 Theorem 5.12 **假设** Virasoro 关系与 c，不推导 c 的值。
+  - ref: virasoro-lean-2025
+    loc: "Theorem 10.1 / Corollary 10.2（单分量 Heisenberg 代数的 Sugawara 构造给出 c = 1 的 Virasoro 表示；Lean 已验证）"
+    note: |
+      **只有 c = 1 的单分量**，无 D 分量、无洛伦兹号差（sources.bib 使用限制 (1)(2)），且**不含任何局域性/OPE 陈述**
+      （使用限制 (4)）：它停在 Lie 代数层面，连本节点 (i) 的单玻色子特例都不覆盖。列出它是因为它是本图中
+      离本节点最近的**已形式化**结果。
+  - ref: polchinski-1998-v1
+    loc: "§2.1–§2.7（物理侧：把 ∂X∂X、bc、TT 等基本 OPE 直接当作理论的定义，并断言 OPE 收敛，见 worldsheet.operator-product-expansion）"
+    note: |
+      物理侧从未陈述、更未验证顶点代数公理；Polchinski 的做法等价于**假定**本节点成立。
+      本节点就是把这个隐含假定显式化。
+tags: [cft, vertex-algebra, ope, locality, gap, bottleneck, open]
+notes: |
+  **本节点无推导，有效状态为 open——这是刻意的。** 它是 OPE 严格化路线的真正瓶颈根（math-sources.md §13.3、Q13）：
+  数学侧的定理（形式局域性的等价刻画、顶点代数结合性、复解析局域性 ⇒ OPE 收敛）遍地都是且都干净，
+  **缺的是「弦论那个具体理论满足这些定理的假设」这一步**。本轮检索没有找到任何文献证明 D 分量洛伦兹号差
+  自由玻色子 ⊗ bc 鬼场（按路径积分定义）满足 Gui Def 7.2 / Schottenloher Def 10.7 的局域性假设。
+  **已核实的只有单个 c = 1 自由玻色子**（Kytölä Thm 10.1 / Cor 10.2，且只到 Lie 代数层面；
+  Schottenloher pp.181–182，形式层面）。
+
+  **为什么新建本节点取代 worldsheet.string-cft-is-a-vertex-algebra**（reviewer-batch3 必修第 2 条，curator 2026-09-11）：
+  v1 的陈述末句「特别地 V 上由 E 生成一个（超）顶点算子代数，其共形向量对应 T = T^X + T^g，中心荷 c = D − 26」
+  是**第三条独立命题**，与前面的 (i)(ii) 捆在同一张卡上，违反「一个节点一个命题」。三点具体理由：
+
+  (1) **重构定理的前提不止局域性**。Gui Theorem 5.12 还要求：真空向量 Ω 与 creation property、平移算子 T、
+      分次 V = ⊕_{n≥0} V(n) 且 V(0) = C·Ω、dim V(n) < ∞。弦论的 V 只能逐动量分解为 F_k，
+      而 **k ≠ 0 的分支上没有真空**：|0;k⟩ 的 L_0 本征值为 α'k²（worldsheet.virasoro-generators-free-boson
+      的 L_0 = ½α_0·α_0 + Σ_{n≥1}α_{-n}·α_n），既非 0 也一般非整数，故「V(0) = C·Ω 的 N-分次」在该分支上
+      不成立；把各 k 拼起来（直和或直积分）后 dim V(n) < ∞ 也失效。换言之 v1 的末句在 k ≠ 0 处**不良定**，
+      而不只是「未证」。
+  (2) **c = D − 26 是两条已有命题之和**：c^X = D（worldsheet.free-boson-central-charge-d）与
+      c^g = −26（worldsheet.bc-ghost-central-charge）。它们在图上各有推导，不应被一条无推导的 open 卡吞掉。
+  (3) **正规序未指明**。v1 写 T^X(z) = -(1/α'):∂X^μ∂X_μ:(z) 并引 worldsheet.energy-momentum-tensor-free-scalar
+      （共形正规序），却又要让 E 落进 Schottenloher/Gui 的框架（产生-湮灭正规序）。本节点把 E 的正规序钉死为
+      **产生-湮灭**，并写明与共形正规序的差（a^X = 0 / a^g = −1）以及「局域性对 c-数不敏感」，
+      使 (i)(ii) 的断言不再依赖这个未表态的选择。
+
+  v1 目前**没有任何推导指向它**（2026-09-11 全图 grep），故换代零成本：唯一把它列进 depends_on 的
+  worldsheet.ope-commutator-dictionary--via-locality-theorem 在同一提交里改挂到本节点。
+
+  **与无鬼定理缺口的关系**：Gui 与 Kytölä 都不做洛伦兹不定内积（math-sources.md §8.8、sources.bib
+  virasoro-lean-2025 限制 (2)）。**这与无鬼定理路线（worldsheet.no-ghost-theorem-v4）的不定内积缺口是同一个缺口**：
+  两条路线都需要「在 η^{00} = −1 的 Fock 空间上把标准数学构造重做一遍」。本节点因此被设计成可被两条路线共享的依赖。
+
+  **为什么把 (i)(ii) 放在一个节点里而不拆成两个**：本节点无推导，谁也不能给其中一条加边；
+  且在 Gui 的常设假定下 (ii) ⇒ (i)（Gui §7.10，复解析版 ⇒ 形式变量版）。
+  若日后有人只证出 (i)（例如按 Schottenloher 的形式路线逐对场验证 (z−w)^N[A,B] = 0，这在自由场里是有限计算），
+  **请新建一个只含 (i) 的弱节点**（如 worldsheet.string-cft-fields-formally-local），不要给本节点挂推导——
+  本节点的文本冻结为 (i) ∧ (ii)。
+
+  **两点技术性提醒**（验证本节点时会碰到）：
+  (1) 零模与动量：X^μ 的零模 α^μ_0 ∝ p^μ 使 L_0 的谱连续，V 只能逐动量 k 作 N-分次；
+      顶点算子 e^{ik·X} 不在本节点的 E 中。这一点对局域性 (i)(ii) 本身无碍（局域性是逐对场的等式，
+      不用到真空），但正是上面 (1) 中重构定理失效的根源。
+  (2) bc 是费米型场，(i) 中两个都是费米型场时须换成反对易子，对应的是顶点**超**代数；
+      Schottenloher Ch.10 与 Gui 讨论的是玻色型顶点代数，超代数版本的编号本轮未核实。
+
+  **验证路线的预估**（供 formalizer / 下一轮 researcher 参考，不是断言）：Gui §7.7 指出 Lie 括号版局域性
+  最易验证；对自由场，模式对易关系 [α_m, α_n]、{b_m, c_n} 与 Sugawara 型 [L_m, α_n]、[L_m, L_n] 是有限计算
+  （后者 Kytölä 已形式化 c = 1 情形），由 Gui §7.8→§7.9（方法出自 [FHL93]）即可升到复解析版。
+  真正的新工作是 D 分量 + η + 鬼场的簿记，以及 (1)(2) 两点。
+author: curator
+created: "2026-09-11"
