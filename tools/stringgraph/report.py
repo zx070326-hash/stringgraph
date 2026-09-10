@@ -107,6 +107,24 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
         f"{d.id} -> {dep.id}" for d in g.derivations.values() for dep in d.depends_on if dep.inferred
     )
     gaps = sorted((d.id, gap) for d in g.derivations.values() for gap in d.gaps)
+    # Formalization frontier: statements not yet formalized whose every statement
+    # dependency (uses for definitions; best derivation's depends_on for propositions)
+    # already is. These are the cheapest next Lean targets.
+    frontier: list[str] = []
+    for sid, st in g.statements.items():
+        if effs[sid].name == "formalized" or st.superseded_by:
+            continue
+        if st.kind == "proposition":
+            d = g.derivations.get(effs[sid].best_derivation) if effs[sid].best_derivation else None
+            if d is None:
+                continue
+            deps = [x.id for x in d.depends_on if x.id in g.statements]
+        else:
+            deps = [u for u in st.uses if u in g.statements]
+        if deps and all(effs[u].name == "formalized" for u in deps):
+            frontier.append(sid)
+    frontier.sort()
+    by_area = Counter(sid.split(".", 1)[0] for sid in g.statements)
     milestones = []
     for m in g.milestones.values():
         e: Effective | None = effs.get(m.statement_id)
@@ -128,7 +146,9 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
             "conventions": len(g.conventions),
             "by_kind": dict(by_kind),
             "by_effective_status": dict(by_eff),
+            "by_area": dict(by_area),
         },
+        "formalization_frontier": frontier,
         "milestones": milestones,
         "open_propositions": open_props,
         "superseded": superseded,
@@ -136,7 +156,7 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
         "gaps": [{"derivation": d, "gap": gp} for d, gp in gaps],
     }
     if open_only:
-        return {k: out[k] for k in ("open_propositions", "superseded", "inferred_edges", "gaps")}
+        return {k: out[k] for k in ("open_propositions", "superseded", "inferred_edges", "gaps", "formalization_frontier")}
     return out
 
 
@@ -153,6 +173,7 @@ def format_report(rep: dict) -> str:
             "by effective status: "
             + ", ".join(f"{k}={v}" for k, v in sorted(c["by_effective_status"].items(), key=lambda kv: -LEVEL[kv[0]]))
         )
+        lines.append("by area: " + ", ".join(f"{k}={v}" for k, v in sorted(c["by_area"].items())))
         lines.append("")
         lines.append("milestones:")
         for m in rep["milestones"]:
@@ -164,6 +185,8 @@ def format_report(rep: dict) -> str:
         lines.append("")
     lines.append(f"open propositions ({len(rep['open_propositions'])}):")
     lines += [f"  {x}" for x in rep["open_propositions"]]
+    lines.append(f"formalization frontier ({len(rep['formalization_frontier'])}, all deps formalized, self not):")
+    lines += [f"  {x}" for x in rep["formalization_frontier"]]
     lines.append(f"superseded ({len(rep['superseded'])}):")
     lines += [f"  {x}" for x in rep["superseded"]]
     lines.append(f"inferred edges ({len(rep['inferred_edges'])}):")

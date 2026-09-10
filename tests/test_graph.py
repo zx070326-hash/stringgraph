@@ -922,3 +922,27 @@ def test_seed_graph_decls_point_at_the_lean_island() -> None:
     assert all(u.decl.startswith("StringFormal.") for u in uses.values())
     formalized = collect_decls(g, formalized_only=True)
     assert formalized and all(u.formalized_derivations for u in formalized)
+
+
+def test_report_formalization_frontier(mini: Path) -> None:
+    """def-a formalized with a Lean decl; prop-b (rigorous, depends only on def-a) is on the frontier."""
+    _write(mini, "formal/StringFormal/X.lean", "-- stub")
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-a.yaml",
+        """
+        id: worldsheet.def-a
+        kind: definition
+        status: formalized
+        title: A
+        statement: a definition
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: "1"}]
+        formal: {lean_decl: X.a, lean_file: StringFormal/X.lean}
+        """,
+    )
+    g = load_graph(mini)
+    rep = full_report(g)
+    assert "worldsheet.prop-b" in rep["formalization_frontier"]
+    assert "worldsheet.def-a" not in rep["formalization_frontier"]
+    assert rep["counts"]["by_area"]["worldsheet"] == 2
