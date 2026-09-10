@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数：main 290 statements / 222 derivations / 37 formalized；Lean 36 声明公理干净（2154 jobs）。
+- 计数：main 345 statements / 266 derivations / 3 milestones / 44 formalized；Lean 39 声明公理干净。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
@@ -78,6 +78,7 @@
 
 ## 待船长裁决
 
+- **第三个里程碑 `ms.ddf-commute-with-virasoro`（2026-09-12 起草）**：陈述 `worldsheet.ddf-commute-with-virasoro`（∀m, n: [L_m, A^ε_n] = 0），**effective = formalized**（Lean `lie_towerLop_ddfOp`）且 own rigorous（G–N 顶点代数推导）——本项目首个同时严格且机器验证的非平凡物理命题。第一轮回译 faithful（auditor 独立回译后比对 G–N (3.5)/Goddard (5.4)）；audit.status draft，等第二轮独立回译。船长须知：Lean 证的是**模态和**版本；"文献围道定义的 A^i_n 与之相同"由一张 physical-argument 卡承载；n = 0 卡排除但来源与 Lean 都覆盖（不建议为此换代）。
 - **ms.critical-dimension-bosonic 审批**：第三轮回译（2026-09-11）裁定 **faithful**，`audit.status: back-translated`，陈述 `worldsheet.critical-dimension-bosonic-v3`（五条合取 (I)–(V)：(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"）。auditor 建议 approved；两处记账（F1 闭弦截距节点已存在、F2 删 ζ 共享输入一句）与光锥路线卡换代 D ≥ 4 由 curator 处理中，均不阻塞。effective = physical-argument（光锥/Weyl 路线本身如此）。批准操作：`audit.status` 改 `approved`，填 captain 与 approved_on。
 - **ms.no-ghost-theorem 审批**：第四轮回译裁定 faithful，`audit.status: back-translated`，陈述 `worldsheet.no-ghost-theorem-v4`。审计员建议 approved。**2026-09-11 更新：拆 ddf-operators-v4 后，该里程碑的有效状态从 rigorous 降为 physical-argument**——原因是 [L_m, A^i_n] = 0 与 [A^i_m, A^j_n] = mδδ 两条对易关系此前以"定义的一部分"身份传播 rigorous，图中从未独立论证，文献（Goddard 2008/GSW）也只预设不证明。这不是陈述有错，是记账修正；升级路径是 Lean 共形权（进行中）与顶点算子乘积。船长审批 approved 时应知晓：**里程碑陈述忠实，但其推导链目前含两处 physical-argument**。第五轮审计（2026-09-11）确认 canonical_text 不引 ddf-v4（引用只在 statement 内，不可变），忠实性裁定维持；裁定 **approved 只断言忠实性，不绑有效状态**（已写入 docs/STATUS_LEVELS.md）。船长可在 effective = physical-argument 下批准。**2026-09-12 更新（第六轮记账）**：两条对易关系已 rigorous（且 Lean 对每个 m 证得）；推导链剩余两处 physical-argument **均在伴随层**（`ddf-operators-adjoint` ← 顶点算子伴随 (V^{(b)}_J)† = V^{(−b)}_{−J}，同点 E₊E₋ 重排；`transverse-ddf-fock-gram-matrix` 被其封顶）。Lean 正做该伴随（formalizer-vertex-adjoint）。船长需知晓三个已登记 gap：(2) 的历史归属仅二手（Goddard 2008 → Brower–Thorn 1971）；canonical_source 仍是 GT 1972 摘要级、只覆盖 (1a)；逐塔打包与一般 α' 归一化是本项目规范化，文献无逐字。批准操作：把该文件 `audit.status` 改为 `approved` 并提交。
 
@@ -137,6 +138,9 @@
 - **type I SO(32) 来源已定（Polchinski v2 §10.8 L1）**：(10.8.19) (n ∓ 32)²，"The R–R tadpole vanishes only for the gauge group SO(32)"；全节零习题；但符号未算（"should be n ∓ 32"）、脚注 7 真条件是 NS–NS 与 R–R 各自拓扑求和为零。**与六边形反常无原文连接**（§10.6 p.31 并列为两件事；§12.2 E19 "determined by cancellation of tadpole divergences"）——两卡不建边。辛支 (n+32)² 无解，本书不出现 USp(32)。待建 ch10 分支 `type-i-tadpole-cancellation-so32` 修正（ch10 审查后）。
 - **两章矛盾待裁（ch11 curator 发现）**：ch10 `ten-dimensional-superstring-theories` (P5) 以"时空反常"筛选 vs §12.2 "in principle not necessary to check the low energy anomaly"——交 reviewer-v2-ch10。
 - 待建：Vol.2 ch.13 D-branes（SO(32) = 32 个 D9 + O9 荷相消，本项目空白，P1）；玻色化节点（§10.3 (10.3.5) 起，本图最大结构性空白）；§11.4–11.5 李代数/流代数/Sugawara c^{g,k}（E59–E62 ★★★）。
+- **lead 裁决（2026-09-12）**：陈述正文内嵌的**节点 id 指针**过期（如 `veneziano-regge-behavior`、`open-string-hard-scattering-exponential-falloff` 正文写 `veneziano-amplitude-weak`；`cft/one-and-two-point-functions-mobius-fixed`、`radial-hermitian-conjugation` 写 `primary-field`）**不单独换代**——纯指针不改命题内容；依赖边已指新卡；等下次实质换代时一并同步。
+- **BRST 无鬼一手来源（2026-09-12）**：Kato–Ogawa/Ohta/Henneaux 正文均未取得（L2/L3）；意外取得 L1 全文：Lian–Zuckerman 1989 CMP 125 **Thm 2.20**（超弦相对上同调 ≅ 光锥谱，自命名 "No-ghost Theorem" Cor 2.15(ii)）、Figueroa-O'Farrill–Kimura 1989、IMNU 1986（R 扇区无鬼物理证明）、Dedushenko（picture 无关性）。**FOK vs LZ 真矛盾**（Fock 空间是否 Verma 模直和）待 Brower–Friedman 1973。超弦无鬼卡经 LZ Thm 2.20 可 rigorous——curator 接线中。
+- **GGRT 1973 正文仍 L0**（CDS 394307 PUBLIC 但 Anubis 拦截；Wayback 快照存在——**船长点击清单 +1**：`https://cds.cern.ch/record/394307/files/CM-P00058492.pdf`）；Bering arXiv:1104.4446 (7.1) 是 [J^{−i},J^{−j}] 显式表达式的 L1 替代（"precisely vanishes for D = 26 and a = 1"，非 iff）；Bering 说 GGRT "sparse on details" vs Polchinski "careful treatment"——未裁。Polchinski (3.2.3b) p.82 Euler 数含边界项 L1（`worldsheet-euler-number` 可改挂）。
 - 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
