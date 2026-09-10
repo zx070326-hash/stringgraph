@@ -2,6 +2,36 @@
 
 按依赖顺序。每项完成后在这里打勾并在图里更新对应节点。
 
+## 数学基础
+
+与弦论无关、但被多条链子用到的纯数学岛。放在 `StringFormal/Math/`，**不 import 其他子目录**。
+
+- [x] `euler-partition-gf`：Euler 分拆生成函数
+  `Σ_{N≥0} p(N) q^N = ∏_{n≥1} (1 - q^n)^{-1}`，`p(N) = Fintype.card (Nat.Partition N)`。
+  见 `StringFormal/Math/EulerPartition.lean`（无 sorry，公理只有标准三条）。
+  Verma 模特征标 `ch V(c,h) = q^h ∏(1-q^n)^{-1}` 与
+  `worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman` 都默默用它，此前图里无节点无来源。
+  形式化在 `PowerSeries R`（`X` 就是 `q`），无穷乘积取 Mathlib 的
+  `PowerSeries.WithPiTopology`（逐系数/乘积拓扑），四种等价写法：
+  - `partitionGF_mul_tprod_one_sub_X_pow`：**任意交换环**上 `(Σ p(N) X^N)·∏(1-X^n) = 1`
+    （无逆元形式，最一般，推荐作为图节点的 `lean_decl`）；
+  - `partitionGF_eq_invOfUnit`：任意交换环上等于 `PowerSeries.invOfUnit`；
+  - `partitionGF_eq`：域上 `= (∏(1-X^n))⁻¹`；
+  - `partitionGF_eq_tprod_inv`：域上 `= ∏(1-X^n)⁻¹`（逐因子取逆，物理文献的字面形状）；
+  - `coeff_partitionGF_mul_prod_one_sub_X_pow_eventually_eq`：**完全无拓扑**的重述
+    （有限部分积的系数最终稳定），对标 Mathlib 的
+    `PowerSeries.coeff_prod_one_sub_X_pow_eventually_eq`。
+  **绝大部分工作是 Mathlib 的**：`Nat.Partition.hasProd_genFun`
+  （`Mathlib/Combinatorics/Enumerative/Partition/GenFun.lean`，v4.33.1 新增）与它的推论
+  `Nat.Partition.hasProd_powerSeriesMk_card_restricted`（`Partition/Glaisher.lean`）。
+  Mathlib 的 GenFun 模块文档把 `f ≡ 1` 这一特化列为 TODO（"the generating function for
+  partition function p(n) (TODO: prove this)"），本文件补的就是它，外加几何级数
+  `Σ_j X^{nj}` 到 `(1 - X^n)⁻¹` 的那一步。**Archive 里没有**分拆生成函数：
+  `Archive/Wiedijk100Theorems/Partition.lean` 在 v4.33.1 已被删除，Euler 奇/异分拆定理搬到了
+  `Partition/Glaisher.lean`（`card_odds_eq_card_distincts`），`partialGF` 框架不复存在。
+  **未做**：`p(N)` 的渐近（Hardy–Ramanujan）；Dedekind `η` 的模性；与 Verma 特征标的接线
+  （需要 PBW 下界，见 `pbw-verma` (b)）。
+
 ## Virasoro
 
 - [x] `virasoro-lie-instance`：`VirasoroAlgebra R`（`R` 为交换 ℚ-代数）已是真正的 `LieRing` +

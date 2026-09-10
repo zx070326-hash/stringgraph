@@ -1,3 +1,4 @@
+import StringFormal.Math.EulerPartition
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.Verma
