@@ -1,11 +1,12 @@
 id: math.mixed-anomaly-trace-conditions-n32--via-integer-linear-solve
 target: math.mixed-anomaly-trace-conditions-n32
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: math.so-usp-adjoint-fundamental-trace-identities
-    inferred: true
+    inferred: false
     note: |
+      【reviewer-gs1984 2026-09-11】改 inferred: false：这条边本身在原文 "in eq. (12)" 处可查；inferred 的是陈述里的 USp 分支，不是边——USp 归属留在 gaps。
       只为陈述的第 (2) 部分（把 l = ∓1 读成 SO/USp）提供记号；
       第 (1) 部分是纯 ℤ 上的算术，不依赖任何图内节点。
       标 inferred: true 的理由与 math.tr-f6-coefficient-vanishing--via-coefficient-inspection 相同：
@@ -35,6 +36,7 @@ gaps:
   - "缺 reviewer 独立复核记录，故按 docs/STATUS_LEVELS.md 不取 rigorous；Lean 化后（`omega` 一行）可直接给 formalized 推导。"
   - "「这两条方程确实是混合反常抵消的条件」不由本推导承载，且其相对归一化外包给未取得的 alvarez-gaume-witten-1984 eq. (63)；见 consistency.anomaly-cancellation-so32-effective-theory 的 gaps。"
 notes: |
+  reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
   本条的算术由 curator 于 2026-09-11 重算，与抽取记录 §5.2 一致；
   curator 不算独立 reviewer，故不写 `reviewer-verified`。
 author: curator

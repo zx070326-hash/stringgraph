@@ -10,7 +10,7 @@ sources:
       本仓库，formal 侧提交 c9e5626（"formal: prove Mandelstam sum rule s+t+u = sum m_i^2 and
       four-tachyon corollaries"）；Lean 4 + Mathlib v4.33.1。
       本推导链条上的声明：`StringFormal.Math.{mandelstamS, mandelstamT, mandelstamU, mandelstam_sum,
-      mandelstam_sum_four_tachyons, minkowskiForm, minkowskiForm_apply, minkowskiForm_symm,
+      mandelstam_sum_four_tachyons, mandelstam_sum_four_closed_tachyons, minkowskiForm, minkowskiForm_apply, minkowskiForm_symm,
       mandelstam_sum_diagonal_metric}`。
       formal/TODO.md 的 `mandelstam-sum-rule` 记「无 sorry，公理只有标准三条」。
       公理检查：`uv run stringgraph check-axioms --decl StringFormal.Math.mandelstam_sum
@@ -33,11 +33,8 @@ summary: |
   质量壳条件来自谱（见 --via-momentum-conservation 的 inferred 边与 gaps）。
 gaps:
   - |
-    **闭弦情形 α'(s+t+u) = −16 没有单独的 Lean 声明**：它是 `mandelstam_sum` 取 α'm_i² = −4 的
-    一行代入（与 `mandelstam_sum_four_tachyons` 的证明逐字同型，只把 −1 换成 −4），
-    formalizer 只写了开弦特化。建议 formalizer 补 `mandelstam_sum_four_closed_tachyons`
-    后把本条 gap 删去；在此之前，本卡陈述的第三句（闭弦 −16/α'）由 --via-momentum-conservation
-    （rigorous，reviewer-ch6 复核）承载。
+    【已关闭 2026-09-11】闭弦情形 α'(s+t+u) = −16 现由 `mandelstam_sum_four_closed_tachyons`（提交 33ebd33，
+    check_axioms ok，仅三条标准公理）逐字承载；假设 α'm_i² = −4 与开弦版同型。
   - |
     **质量壳条件的搬运不在 Lean 内**：m_i 在 Lean 里只是满足 B(k_i,k_i) = −m_i² 的标量，
     「它等于光锥谱的质量」这一识别由图的 inferred 边承载（lead 已记 ROADMAP 待建

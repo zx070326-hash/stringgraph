@@ -118,6 +118,9 @@
 - ~~待建：math.virasoro-universal-central-extension~~ 已建（2026-09-11，Feldvoss–Siciliano Lemma 2.6）。`math.witt-algebra-perfect` 与 Hochschild–Serre 登记已完成（2026-09-11）；witt-perfect 的 Lean 形式化已派；PBW 基元模态排列方向（Kytölä 递增 vs 本图递减）待统一。kac-raina 2013 二版是否单独登记待裁。
 - ~~待建：正规序等同节点~~ 已建 `worldsheet.normal-ordering-modes-agree`（2026-09-11）。后续拆：X 半边弱节点（让 c = D 的 OPE 路线不拖进鬼场链）与不含常数值的纯代数弱节点（可走 rigorous 例外）。`conformal-normal-ordering` 已出 v2（任意自由场含费米型，2026-09-11）。
 - 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
+- 待拆：`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
+- 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
+- **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
 - 待建：**`worldsheet.free-boson-vertex-algebra`**（D 个自由玻色子（不定号差）⊗ C[Z k_0] 的 Heisenberg/格点顶点代数，动量塔为其模；来源 FLM / Kac / Lepowsky–Li）与 **`math.vertex-algebra-jacobi-identity`**（Borcherds 恒等式带编号）。补上后 G–N 推导 `ddf-commute-with-virasoro--via-vertex-algebra-primary` 直接升 rigorous，无鬼定理随之回 rigorous——**这是当前最短的升级路径**（curator-gn-ddf 2026-09-11）。
 - 待处理：Polchinski v1 原书核实（§12.10）30 条 loc 修改、15 条作者自承缺口、Q6（weyl-anomaly-v2 的 c^m=26 应挂 §4.3 (4.3.9)）、Q22 撤销 Narain 压级建议、Q3（OPE 收敛 p.69 有论证）。
 - 待建：**"光锥质量壳 → 协变振幅外线 on-shell"**（§1 光锥谱与 §6 协变振幅外线之间的系统性缺环，§6 分支 6 条 inferred 边全指向它；reviewer-ch6）

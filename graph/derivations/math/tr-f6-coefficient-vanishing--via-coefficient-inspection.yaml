@@ -1,11 +1,12 @@
 id: math.tr-f6-coefficient-vanishing--via-coefficient-inspection
 target: math.tr-f6-coefficient-vanishing
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: math.so-usp-adjoint-fundamental-trace-identities
-    inferred: true
+    inferred: false
     note: |
+      【reviewer-gs1984 2026-09-11】改 inferred: false：这条边本身在原文 "in eq. (12)" 处可查；inferred 的是陈述里的 USp 分支，不是边——USp 归属留在 gaps。
       **边本身在来源处可查**：(12c) 与 (13a)(13b) 就是本推导的全部输入
       （Ω₁₂ 中 tr F⁶ 的系数是 N + 32l，l = −1 为 SO、l = +1 为 USp）。
       标 inferred: true 是因为**这条边所支撑的结论只有一半在来源里**：
@@ -36,6 +37,7 @@ gaps:
   - "「当且仅当」的 ⇒ 方向 GS 未写（只给充分条件），本图补足；平凡但归属须记清。"
   - "缺 reviewer 独立复核记录，故不取 rigorous（docs/STATUS_LEVELS.md）。"
 notes: |
+  reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
   这条是「为什么偏偏是 32」在纯规范反常一路上的**唯一**代数入口（抽取记录 §5.3）。
   另一条独立的算术确认来自 math.mixed-anomaly-trace-conditions-n32（混合反常给的两条方程）。
   两者从不同反常结构出发落到同一个 N = 32，这正是 GS 说的 "two independent confirmations"

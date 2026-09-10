@@ -31,7 +31,7 @@ sources:
       与 α_c(x) = α'x/4 + 1 得该和 = −4 + 3 = **−1**。抽取记录已记录在案，
       本卡片采 α'(s+t+u) = −16（即闭弦 s+t+u = −16/α'），与脚注 8 一致。
   - ref: stringformal-2026
-    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.{mandelstamS, mandelstamT, mandelstamU, mandelstam_sum, mandelstam_sum_four_tachyons, regge_trajectory_sum_four_tachyons, regge_intercept_sum_four_tachyons, minkowskiForm, mandelstam_sum_diagonal_metric}"
+    loc: "formal/StringFormal/Math/MobiusJacobian.lean :: StringFormal.Math.{mandelstamS, mandelstamT, mandelstamU, mandelstam_sum, mandelstam_sum_four_tachyons, mandelstam_sum_four_closed_tachyons, regge_trajectory_sum_four_tachyons, regge_intercept_sum_four_tachyons, minkowskiForm, mandelstam_sum_diagonal_metric}"
     note: |
       本仓库，formal 侧提交 c9e5626（"formal: prove Mandelstam sum rule s+t+u = sum m_i^2 and
       four-tachyon corollaries"）；Lean 4 + Mathlib v4.33.1。逐条对应：

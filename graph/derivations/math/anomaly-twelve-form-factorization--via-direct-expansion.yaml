@@ -1,7 +1,7 @@
 id: math.anomaly-twelve-form-factorization--via-direct-expansion
 target: math.anomaly-twelve-form-factorization
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: math.so-usp-adjoint-fundamental-trace-identities
     note: |
@@ -46,6 +46,7 @@ gaps:
   - "缺 Lean 声明：目标卡尚无 formal.lean_decl。做出后应新增一条 `--via-lean` 的 formalized 推导，而不是改本条。"
   - "两条依赖（迹恒等式）自身是 physical-argument，因此即使本推导升到 rigorous，目标的有效状态仍会被压到 physical-argument。若只想形式化「给定这两组多项式则因子化成立」，Lean 岛应把迹恒等式作为**假设**写进定理陈述，图里则维持现在的依赖记账。"
 notes: |
+  reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
   **计算复核记录**：本条的两行展开由 curator 于 2026-09-11 独立重算一遍，与抽取记录 E11 一致；
   但 curator 与抽取者同属 agent，**不算 docs/STATUS_LEVELS.md 意义下的 reviewer 独立复核**，
   故不写 `reviewer-verified`。请 reviewer 复核后补记录并升级。
