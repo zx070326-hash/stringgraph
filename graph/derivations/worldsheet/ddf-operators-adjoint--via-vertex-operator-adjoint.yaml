@@ -59,13 +59,23 @@ depends_on:
           只覆盖 n ≥ 1；把它延拓到全部整数的正是该节点 Lean 侧的 `Fock.pairing_mode_left`
           （见该节点 notes【顺带被证明、但不属于本命题的两条】第一条）。
           注意这条延拓**不在**该节点的 statement 文本里，故此边标 inferred 而非 inferred: false。
-  - id: worldsheet.ddf-transverse-oscillator-algebra
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       目标第 (2) 条的假设 (a)。Gram 矩阵的递推把 A^i_{+n} 逐个对易穿过 A^j_{−m} 时，
       每次产生的 c-数就是 m δ^{ij} δ_{m+n,0}；没有这条对易关系，(1) 的伴随关系
       单独算不出任何配对值。**目标第 (1) 条不依赖它**（伴随关系的论证只用顶点算子的重排序，
-      不用两个 DDF 算子之间的 OPE）。这条边是本推导 status 的直接上限之一
-      （该节点自身 effective = physical-argument）。
+      不用两个 DDF 算子之间的 OPE）。
+      【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】原指
+      worldsheet.ddf-transverse-oscillator-algebra（已 superseded）。该卡把对易关系与
+      「与光锥横向振子代数逐字同型」捆在一起，现拆为本依赖（只含对易关系）与
+      worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators（同构识别）。
+      本推导要的是**对易关系本身**（递推里每步产生的 c-数），与光锥振子的比较无关，
+      故只改指 v2，**不**加同构卡的边。
+      ⚠ 原 note 末句「这条边是本推导 status 的直接上限之一（该节点自身 effective = physical-argument）」
+      **已过时**：v2 的 effective 是 rigorous（走 --via-zero-mode-bracket 的 G–N 顶点代数路线）。
+      本推导的 effective 仍是 physical-argument，但上限换成了顶点算子伴随那一线
+      （worldsheet.vertex-operator-adjoint / worldsheet.radial-hermitian-conjugation），
+      不再有 DDF 对易关系这一条。
   - id: worldsheet.ddf-commute-with-virasoro
     inferred: true
     note: |

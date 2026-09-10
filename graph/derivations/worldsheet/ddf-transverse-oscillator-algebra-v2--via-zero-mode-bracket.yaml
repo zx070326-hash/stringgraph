@@ -1,5 +1,5 @@
-id: worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket
-target: worldsheet.ddf-transverse-oscillator-algebra
+id: worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket
+target: worldsheet.ddf-transverse-oscillator-algebra-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -66,15 +66,6 @@ depends_on:
       ℛ_(1)（(2.55) 中 Δ = 1，即 L_(n)ψ = δ_{n0}ψ ∀n ≥ 0），这与本卡的旧协变条件
       (L_0 − a)|ψ⟩ = 0 ∧ L_m|ψ⟩ = 0 (m > 0) 在 **a = 1** 时逐字相同。
       本推导用到「被取零模的那两个态是权 1 的物理态」这一前提。
-  - id: worldsheet.transverse-oscillator-commutators
-    inferred: true
-    note: |
-      目标陈述的末句断言 DDF 代数「与世界面横向振子 α^i_n 的代数逐字同型」，
-      要判断「同型」就得知道 α^i_n 的代数，故这条边承载的是**比较那一句**，不是主对易关系。
-      与 --via-conformal-weight 的同名边同理（那里也标 inferred）。
-      ⚠ **本卡 effective = physical-argument，因此它是本推导在桥接边之外的第二个上限**：
-      即使日后补上顶点代数卡，只要目标陈述里保留这句比较，本推导也只能到 physical-argument。
-      要真正解锁，应把比较句拆成独立节点（建议见 notes）。
 sources:
   - ref: gebert-nicolai-1995
     loc: "§3.1 'DDF vertex operators', p. 593, eq. (3.1)（物理态的李括号，含 k(−1)e^{nk} = (1/n)L_(−1)e^{nk} ≡ 0 (n ≠ 0) 与双乘性上闭链 ε(mk,nk) = 1）与 eq. (3.2)–(3.3)（A^ξ_m := (ξ(−1)e^{mk})_0）; p. 594, eq. (3.4) 与同页正文的归一化 k·r = 1; §2.1, p. 582, eq. (2.62)（零模字典 [ψ_0, φ_0] = ([ψ,φ])_0）; p. 580, eq. (2.36)/(2.38); §3.2, p. 599（d − 2 个 orthonormal ξ_i）"
@@ -141,7 +132,10 @@ summary: |
       （与 goddard-2008 (5.1) 后逐字的 ε^i·ε^j = δ^{ij} 一致）。
   合起来即目标陈述
     [A^i_m, A^j_n] = m δ^{ij} δ_{m+n, 0},   i, j = 2..D−1,  m, n ∈ Z \ {0}。
-  末句「与 worldsheet.transverse-oscillator-commutators 逐字同型」由该节点承担（见 depends_on）。
+  【2026-09-11（五）改名换代后】旧目标末句「与 worldsheet.transverse-oscillator-commutators 逐字同型」
+  **不再属于本推导的目标**：它已拆出为 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+  （推导 --via-commutation-relations，physical-argument），相应的依赖边已从本推导撤销。
+  本推导到上式为止，不再断言任何与光锥横向振子 α^i_n 的比较。
 
   **本路线与围道路线的分工对照**（同一结论，两套完全不同的机制）：
     · 右端为何无 α'/k_0·p 残余：围道路线靠第 2、3 步的幂次记账（该推导 gaps 第 1 条自陈未与原文核对）；
@@ -161,7 +155,7 @@ gaps:
     新卡 (1) 论证秩 1 类光格上 ε ≡ 1 满足 Li–Wang (3.6)–(3.8)。
     **但「此特例下扭群代数退化为普通群代数」仍是本项目推断**（新卡推导的 gaps 第 1 条），
     该推断即使有误也不改变结论（Li–Wang 只要求**存在**这样的 ε，而 ε ≡ 1 的验证是三行代数）。
-    ⇒ 本推导的有效状态不再被这条边压到 open；**剩下的唯一上限是下面第 6 条**（末句比较）。
+    ⇒ 本推导的有效状态不再被这条边压到 open；**剩下的唯一上限（末句比较）也已在 2026-09-11（五）解除，见下面第 6 条**。
   - |
     **(3.1) 的母式 (2.120) 未核实（L0）。** G–N 在 (3.1) 前逐字写「Using (2.120) we can immediately write down
     the commutator of physical states…」，而 researcher 本轮读的是 pp. 571–572, 579–583, 593–600，
@@ -195,11 +189,21 @@ gaps:
     **δ^{ij} 不受影响**。⇒ ε·p = 0 是代表元的选取，不是额外前提。
     「WLOG」这句话 G–N 没写，本条推理是本项目的，故登记在 gaps 而不写进 summary。
   - |
-    **第二个上限：目标陈述末句的「与横向振子代数逐字同型」把本推导拉到
+    **【已解决，2026-09-11（五）（curator，分支 agent/curator/ddf-algebra-split）】**
+    原文：「**第二个上限：目标陈述末句的「与横向振子代数逐字同型」把本推导拉到
     worldsheet.transverse-oscillator-commutators（physical-argument）之下。**
     主对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 本身不需要那张卡。
     若日后把比较句拆成独立节点（如 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators），
-    本推导即可去掉该边，届时只剩桥接边一个上限。
+    本推导即可去掉该边，届时只剩桥接边一个上限。」
+    **拆卡已做**（lead 派发）：目标换代为 worldsheet.ddf-transverse-oscillator-algebra-v2
+    （陈述逐字去掉末句），末句由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+    （--via-commutation-relations，physical-argument）承载，本推导对
+    worldsheet.transverse-oscillator-commutators 的 inferred 边**已撤销**。
+    ⇒ 本推导的 effective 由 physical-argument 升为 **rigorous**（= 自身 status），
+    目标 v2 的 effective 同为 rigorous。**论证一字未改**，变的只是记账。
+    ⚠ 仍然成立的限制：上面第 2、4、5 条（(2.120) 未读、归一化字典是本项目推断、ε·p = 0 的推理是本项目的）
+    以及第 7 条（Lean 未起步）都没有关闭；rigorous 指的是「CMP 论文 §3.1 内有完整的形式级数证明」，
+    不是「本图已逐步复核该证明」。
   - |
     **Lean 侧完全未起步，且本路线与围道路线要的 Lean 基建不同。**
     VertexOperator.lean 文件头 "Mathematical gaps" 第 2 条逐字「**No operator products.** `V(b, z) V(b', w)`
@@ -228,6 +232,16 @@ notes: |
   这是本推导现在**唯一**的上限，也是拆卡建议 (1) 要解决的东西。
   **status 与 effective 分离是本图的设计意图**：自身论证的严格程度从未变过。
 
+  **【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】上一段的末句已过时。**
+  拆卡建议 (1) 已由 lead 派发并落实：本推导的 target 由
+  worldsheet.ddf-transverse-oscillator-algebra（旧卡，已 superseded）改为
+  worldsheet.ddf-transverse-oscillator-algebra-v2（陈述逐字去掉末句比较），文件名一并改名（git mv）；
+  对 worldsheet.transverse-oscillator-commutators 的 inferred 边**已撤销**（它只承载被拆掉的末句）。
+  **⇒ 本推导的 effective 由 physical-argument 升为 rigorous，目标 v2 的 effective 同为 rigorous，
+  best_derivation 是本推导。** 末句比较现由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+  承载，那张卡的 effective 仍是 physical-argument（本质上限：它断言的就是与光锥横向振子代数的关系）。
+  **论证一字未改**；本推导的 status 自建立以来一直是 rigorous。
+
   **★ 本推导对回译审计的价值**：目标陈述里那句「注意右端**没有**中心项以外的贡献，
   也没有 k_0 或 p 的残余依赖：这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用」
   ——在本推导里有了**确切的对应位置**：G–N (3.4) 右端的算子 k(0) = k·α_0 就是那个「残余依赖」，
@@ -235,10 +249,10 @@ notes: |
   这一记账「未与任何原文核对」，现在核对上了。
 
   **建议（交 lead / auditor，本节点不动手）**：
-  (1) 目标陈述末句「与 worldsheet.transverse-oscillator-commutators 逐字同型」是**第二个命题**，
-      与主对易关系捆在一张卡上，使任何推导都被那张 physical-argument 的卡压住。
-      建议按「一个节点一个命题」拆出 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators。
-      按项目原则 1，这要新建节点 + 旧节点 superseded_by，**不是就地改文本**，故不在本任务范围内。
+  (1) **【已落实，2026-09-11（五）】** 原文：「目标陈述末句「与 worldsheet.transverse-oscillator-commutators
+      逐字同型」是**第二个命题**，与主对易关系捆在一张卡上，使任何推导都被那张 physical-argument 的卡压住。
+      建议按「一个节点一个命题」拆出 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators。」
+      lead 已派发，拆卡完成（见上面的换代段落与 gaps 第 6 条）。
   (2) worldsheet.ddf-transversality-gives-local-finiteness 的 notes 里
       「文献……于是『和是否有限』这个问题根本不出现」一句，对 GSW/GT 成立，
       **对顶点代数文献不成立**：G–N 摘要逐字「to admit **non-summable operators**」，
@@ -246,7 +260,11 @@ notes: |
       机制是动量条件 s·k = r·k；该节点讲的是横向 ε·k_0 ≠ 0），**不可互引为来源**。
       建议由持有该节点的人按 extractions/gsw-1987-v1.md §9(4) 改 notes。本节点不碰它。
 
-  **不碰的东西**：不改 --via-conformal-weight（另一 agent 持有）、不改 worldsheet.ddf-operators-v5、
-  不改 worldsheet.ddf-operators-adjoint 一线、不改 worldsheet.no-ghost-theorem-v4 的推导。
+  **不碰的东西**：不改 worldsheet.ddf-operators-v5、不改 worldsheet.ddf-operators-adjoint 一线、
+  不改 worldsheet.transverse-oscillator-commutators 及其推导、不碰 graph/milestones/。
+  （2026-09-11（五）换代那一轮由同一个 curator 任务同时改了 --via-conformal-weight
+  ——只改 target、撤销那条同名 inferred 边并记账，论证与 status 未动；
+  以及 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 等三条下游推导的 depends_on 换代。
+  上一轮写「不改 --via-conformal-weight（另一 agent 持有）」是那一轮的范围，不再适用。）
 author: curator
 created: "2026-09-11"

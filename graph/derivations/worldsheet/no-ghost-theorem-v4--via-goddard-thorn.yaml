@@ -17,12 +17,35 @@ depends_on:
       在 v4 未拆时它是 worldsheet.ddf-operators-v4 陈述文本的一部分，故本条不是新依赖，
       只是把已有依赖显式化。来源覆盖沿用 v4（GSW §2.3.3 / GT 1972），
       另加 goddard-2008 作为「physical state = DDF 态 + 零模态」的二手证据。
-  - id: worldsheet.ddf-transverse-oscillator-algebra
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       【2026-09-11 新增，来自 v4 拆卡】本推导第 (1b) 步「其 Gram 矩阵就是 24 个横向振子
       Fock 空间的正定 Gram 矩阵」依赖这条命题。同上，v4 未拆时它是定义卡文本的一部分，
       不是新依赖。来源覆盖沿用 v4。
       注意本条**不含** (A^i_n)† = A^i_{−n}（Gram 矩阵计算还需要它，见下一条依赖）。
+
+      【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】原指
+      worldsheet.ddf-transverse-oscillator-algebra（已 superseded）。那张卡把**两个命题**
+      捆在一起：对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}（现为本依赖 v2，陈述逐字去掉末句）
+      与末句「与世界面横向振子 α^i_n 的代数逐字同型」（现为
+      worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators，physical-argument）。
+      **本推导只改指 v2，不加同构卡的边**，理由：
+      (a) 目标陈述 worldsheet.no-ghost-theorem-v4 的 (1b) 断言的是 H_phys(k;k_0)/H_0(k;k_0) 与
+          **横向 DDF Fock 空间** H^⊥(k) 等距同构，H^⊥(k) 通篇由 A^i_{−n} 定义（标题逐字「24 个横向
+          **DDF** 振子的 Fock 空间」）；陈述**从不**声称 H^⊥(k) 与光锥横向振子的 Fock 空间同构，
+          故光锥侧那张卡不是本论证的输入。
+      (b) 本推导 summary 里「其 Gram 矩阵就是 24 个横向振子 Fock 空间的正定 Gram 矩阵」一句
+          读起来像在用那个同构，但它实际引用的是 Gram 矩阵的**显式对角元** ∏ n^{d} d!，
+          由 worldsheet.transverse-ddf-fock-gram-matrix（已在本推导依赖中）给出，
+          那套算术只用到 (H1) 对易关系 + (H2) 伴随关系 + 真空归一化，与 α^i_n 无关。
+      (c) 文献侧也没有逐字用到那个同构：goddard-2008 的「physical state = DDF 态 + 零模态」
+          与 fgz-1986 Theorem 2.8 的「All three isomorphic spaces are positive definite」
+          都是在 DDF / 横向空间自身上陈述正定性。
+      **有效状态的后果**：v2 的 effective 由 physical-argument 升为 **rigorous**
+      （推导 --via-zero-mode-bracket，G–N CMP §3.1 的零模李括号路线，拆卡前被末句比较压住），
+      故本条依赖**不再是**本推导的上限。目标 worldsheet.no-ghost-theorem-v4 的 effective
+      **仍是 physical-argument**，瓶颈只剩内积/伴随那一层（worldsheet.ddf-operators-adjoint
+      与 worldsheet.transverse-ddf-fock-gram-matrix，后者被前者封顶）。
   - id: worldsheet.ddf-operators-adjoint
     note: |
       【2026-09-11（二）新增，ms.no-ghost-theorem 第五轮审计建议，lead 已同意】
