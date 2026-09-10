@@ -55,9 +55,23 @@ import StringFormal.NoGhost.VertexWeight
   `#{m+1, …, -1} = -m-1`；出现的 `-(a·b + ½(m+1)(b·b))` 正好是共形权系数里除 `(J-m)` 之外的
   全部，这是 `m < 0` 半的关键抵消。
 
+* `Fock.Lop_apply_creaExp_of_neg_shifted` — 真空上的共形权恒等式，`m < 0`：
+  `L_m^{(a+b)} Φ_J = (J - m + a·b + ½(m+1)(b·b)) Φ_{J-m} + V_J (L_m^{(a)}|k⟩)`。
+  非 `Φ_{J-m}` 倍数的部分（零模项、双产生中间段、截断的欧拉尾）在两边逐项抵消。
+* `Fock.lie_Lop_vertexOsc_of_neg` — **一般态上的共形权恒等式，`m ≤ -1`**，系数与 `m ≥ 1`
+  完全相同。`Fock.eq_zero_of_vertex_recursion` 的产生模态递推从不依赖 `m` 的符号，要重做的
+  只有真空值。推论：`Fock.lie_Lop_vertexOsc_of_ne`（一切 `m ≠ 0`，与
+  `Fock.lie_Lop_vertexOsc_of_pos` 合并）与 `Fock.lie_Lop_vertexOsc_of_ne_isotropic`
+  （`b·b = 0`，DDF 归一化下的权 1 准初级场变换律）。
+
 ## 尚缺
 
-* `lie_Lop_vertexOsc_of_neg` —— 一般态上的 `m < 0` 恒等式。
+* `m = 0`。这不是本文件的疏漏而是**真的不同**：`m = 0` 时 Sugawara 求和的 `j = 0` 与
+  `j = m` 并成一项 `½ :α_0·α_0:`，中间段为空，代入 `m ≠ 0` 的系数会得到错误答案
+  （见 `NoGhost/VertexWeight.lean` 头部关于 `Fock.Lop_zero_apply_creaExp` 的说明）。
+  真空上的正确形式已有，一般态上的算子形式尚缺。
+* 塔上（`towerLop` / `towerVertex`）的 `m < 0` 版本：`VertexWeight.lean` 的
+  `lie_towerLop_towerVertex_of_pos` 还没有对应的负模版本。搬运是机械的，本轮未做。
 -/
 
 namespace StringFormal.NoGhost
@@ -461,6 +475,83 @@ theorem Lop_apply_creaExp_of_neg_shifted (η a b : Fin D → R) (hη : ∀ μ, �
   match_scalars <;> ring
 
 end VertexOnVacuum
+
+section LopVertexOscNeg
+
+variable [Algebra ℚ R]
+
+/-- **The conformal-weight identity on a general state, for `m < 0`.**
+
+`L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) V_{J-m}`,
+
+the same identity — with the same coefficient — as `Fock.lie_Lop_vertexOsc_of_pos`, but on
+the other side of the Virasoro algebra.  The creation-mode recursion of
+`Fock.eq_zero_of_vertex_recursion` never used the sign of `m`; what had to be redone is the
+vacuum value, which is `Fock.Lop_apply_creaExp_of_neg_shifted`.  (The `m = 0` case is genuinely
+different and is *not* covered: there the terms `j = 0` and `j = m` of the Sugawara sum
+coincide, see `Fock.Lop_zero_apply_creaExp`.) -/
+theorem lie_Lop_vertexOsc_of_neg (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : m < 0) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (J - m) := by
+  have hzero := eq_zero_of_vertex_recursion b
+    (fun K : ℤ => (Lop η (a + b) m ∘ₗ vertexOsc η b K - vertexOsc η b K ∘ₗ Lop η a m)
+      - (((K : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (K - m)) ?_ ?_ J
+  · rwa [sub_eq_zero] at hzero
+  · intro v K P
+    have hidx1 : K - m + ((v.2 : ℕ) : ℤ) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hidx2 : K - (m - ((v.2 : ℕ) : ℤ)) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hmv := mode_vertexOsc_sub η a b hη v.1 (m - ((v.2 : ℕ) : ℤ)) K P
+    rw [hidx2] at hmv
+    have hT2 : mode η (a + b) v.1 (m - ((v.2 : ℕ) : ℤ)) (vertexOsc η b K P)
+        = vertexOsc η b K (mode η a v.1 (m - ((v.2 : ℕ) : ℤ)) P)
+          + b v.1 • vertexOsc η b (K + ((v.2 : ℕ) : ℤ) - m) P := by
+      rw [← hmv]; abel
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply]
+    rw [vertexOsc_X_mul η b v K P, map_sub, map_smul,
+      Lop_apply_X_mul η (a + b) hη m v (vertexOsc η b K P),
+      Lop_apply_X_mul η a hη m v P, map_add, map_smul,
+      vertexOsc_X_mul η b v K (Lop η a m P),
+      vertexOsc_X_mul η b v (K - m) P, hT2, hidx1]
+    simp only [mul_sub, mul_add, mul_smul_comm]
+    push_cast
+    module
+  · intro K
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply,
+      vertexOsc_apply_one]
+    rw [Lop_apply_creaExp_of_neg_shifted η a b hη hm K]
+    abel
+
+/-- The conformal-weight identity for **every nonzero mode**, obtained by combining
+`Fock.lie_Lop_vertexOsc_of_pos` (`m ≥ 1`) with `Fock.lie_Lop_vertexOsc_of_neg` (`m ≤ -1`).
+The excluded case `m = 0` is `Fock.Lop_zero_apply_creaExp` on the vacuum. -/
+theorem lie_Lop_vertexOsc_of_ne (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : m ≠ 0) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (J - m) := by
+  rcases hm.lt_or_gt with h | h
+  · exact lie_Lop_vertexOsc_of_neg η a b hη h J
+  · exact lie_Lop_vertexOsc_of_pos η a b hη h J
+
+/-- The **isotropic** (`b · b = 0`, i.e. `k_0² = 0`) case for all `m ≠ 0`: the oscillator
+vertex operator transforms as a weight-`1` primary,
+`L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b) V_{J-m}`.  This is the transformation law the
+DDF construction uses, now available on both sides of the Virasoro algebra. -/
+theorem lie_Lop_vertexOsc_of_ne_isotropic (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hb : (∑ μ : Fin D, η μ * b μ * b μ) = 0) {m : ℤ} (hm : m ≠ 0) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)) • vertexOsc η b (J - m) := by
+  rw [lie_Lop_vertexOsc_of_ne η a b hη hm J, hb]
+  congr 1
+  ring
+
+end LopVertexOscNeg
 
 end Fock
 
