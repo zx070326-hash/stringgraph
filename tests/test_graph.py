@@ -946,3 +946,28 @@ def test_report_formalization_frontier(mini: Path) -> None:
     assert "worldsheet.prop-b" in rep["formalization_frontier"]
     assert "worldsheet.def-a" not in rep["formalization_frontier"]
     assert rep["counts"]["by_area"]["worldsheet"] == 2
+
+
+def test_swallowed_yaml_item_in_string_warns(mini: Path) -> None:
+    _write(
+        mini,
+        "graph/statements/worldsheet/def-a.yaml",
+        """
+        id: worldsheet.def-a
+        kind: definition
+        status: rigorous
+        title: A
+        statement: a definition
+        uses_conventions: [conv.metric-plus]
+        sources:
+          - ref: ref-a
+            loc: "1"
+            note: |
+              first note
+              - ref: ref-b
+                loc: "swallowed"
+        """,
+    )
+    g = load_graph(mini)
+    warns = [p for p in validate(g) if p.severity == "warning" and "swallowed" in str(p)]
+    assert warns

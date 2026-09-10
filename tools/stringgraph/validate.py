@@ -40,6 +40,22 @@ def validate(g: Graph) -> list[Problem]:
 
     for e in g.load_errors:
         err("load", e)
+    # A YAML block pasted into the previous string field is silently swallowed (still valid YAML).
+    import re as _re
+    _swallow = _re.compile(r"\n\s*- (ref|id):\s")
+    for st in g.statements.values():
+        for src in st.sources:
+            for fld in (src.loc, src.note):
+                if fld and _swallow.search(fld):
+                    warn(f"graph/statements/{st.id}", "a source loc/note contains what looks like a YAML list item ('- ref:'/'- id:'); a following entry may have been swallowed into this string")
+    for d in g.derivations.values():
+        for src in d.sources:
+            for fld in (src.loc, src.note):
+                if fld and _swallow.search(fld):
+                    warn(f"graph/derivations/{d.id}", "a source loc/note contains what looks like a YAML list item; a following entry may have been swallowed")
+        for dep in d.depends_on:
+            if dep.note and _swallow.search(dep.note):
+                warn(f"graph/derivations/{d.id}", "a depends_on note contains what looks like a YAML list item; a following entry may have been swallowed")
     for k in g.bib_duplicate_keys:
         err("literature/sources.bib", f"duplicate bib key '{k}' (parallel merges of curator branches; keep one entry)")
 
