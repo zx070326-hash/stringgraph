@@ -1,0 +1,44 @@
+id: worldsheet.no-ghost-theorem-brst--via-polchinski-4-4
+target: worldsheet.no-ghost-theorem-brst
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.critical-dimension-brst
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.4（p.137–142）：光锥振子对易关系 eq. (4.4.7)；Q_B = Q_1 + Q_0 + Q_{-1} 的分级分解 eq. (4.4.10)；Q_1^2 = 0 eq. (4.4.13)；上同调态的形式 eq. (4.4.19)；内积 eq. (4.4.23)"
+    note: |
+      式号取自抽取记录 literature/extractions/polchinski-1998-v1.md 的 E68，由两个第三方笔记
+      交叉核对，非核对原书；证明结构（滤子 + 分级上同调 + 下三角论证）已核实。
+  - ref: polchinski-1998-v1
+    loc: "§4.3：Q_B^2 = 0 ⟺ c^m = 26（本推导的前提，见 worldsheet.critical-dimension-brst）"
+  - ref: polchinski-1998-v1
+    loc: "§4.3：Q_B、b_n、c_n 的模式代数与鬼数（依赖 worldsheet.brst-quantization 的定义在此处给出）"
+summary: |
+  Polchinski §4.4 的论证（E68 的六步）：
+  1. 引入光锥振子组合 α^±_m（需要 k^+ ≠ 0），其对易关系见 (4.4.7)；
+  2. 按 "light-cone number"（计 α^+ 与鬼场 c 的激发数减去 α^- 与 b 的）给算符分次，
+     把 Q_B 分解为 Q_B = Q_1 + Q_0 + Q_{-1}（(4.4.10)），其中 Q_1 是次数最高的部分，Q_1^2 = 0（(4.4.13)）；
+  3. 构造 R 使 S = {Q_1, R} 是数算符，S 同时计鬼场激发与纵向（光锥）振子激发，且 [Q_1, S] = 0；
+  4. S ≠ 0 的态必是 Q_1-恰当的（标准的"四重态机制"/Hodge 型论证），故 coh(Q_1) = ker S
+     = 横向振子激发张成的空间 H^⊥；
+  5. U = {Q_B, R} - S 严格降低 light-cone number（下三角），由此推出 ker(S+U) ≅ ker S，
+     进而 coh(Q_B) ≅ coh(Q_1) = H^⊥（(4.4.19) 给出上同调态的形式）；
+  6. H^⊥ 上诱导的内积正定：⟨ψ|ψ'⟩ = ⟨ψ_0|ψ'_0⟩，因为交叉项的 light-cone number 不为零，
+     而 ψ_0 落在横向 Fock 空间里，横向振子代数的内积正定。
+  鬼数集中性（陈述的第 (1) 条）来自第 4 步：ker S 中的态只含横向激发与 |↓⟩，鬼数固定。
+
+  标 physical-argument 而非 rigorous 的理由：这是 Fock 空间上的形式代数操作，
+  滤子/分级论证在无穷维空间上的收敛性与完备化问题未处理（E68 的自评：
+  "这是 Polchinski 全书中最接近数学证明的一段，但仍未处理收敛/完备化"）。
+  严格版本见 worldsheet.no-ghost-theorem-brst--via-fgz。
+gaps:
+  - "滤子论证（Q_B = Q_1 + Q_0 + Q_{-1}，S = {Q_1, R}，下三角性）在无穷维分级空间上的收敛性未论证；把\"下三角\"推到\"ker(S+U) ≅ ker S\"需要每个分级片有限维或谱序列在有限步退化，Polchinski 未声明该假设。"
+  - "受限模条件（见 worldsheet.brst-quantization）在 §4.4 未被提及，本推导默认它成立。"
+  - "k^+ = 0 与 k = 0 的动量扇区未覆盖：光锥振子组合的定义在那里退化。陈述已把它们排除。"
+  - "相对复形上内积的鬼场零模归一化（⟨↓|c_0|↓⟩ = 1）未与 Polchinski (4.4.23) 逐字核对。"
+  - "本推导不建立 BRST 上同调与旧协变物理态空间 H_phys/H_0 的等价（Kato–Ogawa 定理），后者尚未建节点；worldsheet.no-ghost-theorem-v2 与本陈述是两条独立命题。"
+author: curator
+created: "2026-09-10"

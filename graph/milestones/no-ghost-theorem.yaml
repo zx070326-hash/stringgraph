@@ -1,14 +1,21 @@
 id: ms.no-ghost-theorem
-statement_id: worldsheet.no-ghost-theorem
+statement_id: worldsheet.no-ghost-theorem-v2
 canonical_text: |
-  对 D 维自由玻色弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态。
-  当 D = 26 且 a = 1 时，物理态空间上的内积半正定，且模掉零模态后由 24 个横向振子的 DDF 态张成。
-  当 D > 26 时存在负模物理态。
+  对 D 维自由玻色开弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态；
+  零模态指与所有物理态正交的物理态，H_0 为其张成的子空间。
+  (1) 当 D = 26 且 a = 1 时，物理态空间上的内积半正定，且商空间 H_phys/H_0 与 24 个横向振子的
+      Fock 空间**等距同构**（保内积的线性双射），同构由 DDF 态给出。该断言限制在动量 k 与所选
+      类光参考动量 k_0 满足 k·k_0 ≠ 0 的扇区；k·k_0 = 0（特别是 k = 0）的扇区不在本里程碑范围内。
+  (2) 当 D > 26 时，**至少在 a = 1 的情形**存在负模物理态。
+      （依本文件下方审计建议 C2，显式写出对 a 的量化：本里程碑只断言 a = 1。文献中更强的形式"对任意 a 均存在负模物理态"
+      通常归于 Brower 1972 / Thorn，其出处与确切条件尚未核实，故不纳入 canonical_text。）
+  本里程碑不对 D ≤ 25 作任何断言：旧陈述的"D ≤ 26 且 a ≤ 1 ⇒ 半正定"已被本文件下方审计记录 B1 证伪，
+  正确区域是 (D ≤ 25 且 a ≤ 1) 或 (D = 26 且 a = 1)。
 canonical_source:
   ref: goddard-thorn-1972
   loc: "Theorem 1"
 audit:
-  status: back-translated
+  status: draft
   back_translation:
     by: physics-auditor
     text: |

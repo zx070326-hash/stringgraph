@@ -1,0 +1,64 @@
+id: worldsheet.no-ghost-theorem-brst
+kind: proposition
+title: BRST 版无鬼定理：D = 26 时 Q_B 的相对上同调等距同构于 24 个横向振子的 Fock 空间
+statement: |
+  记号与设定沿用 worldsheet.brst-quantization：物质部门是 D 个自由玻色子 X^μ（中心荷 c^m = D，
+  度规 mostly-plus），鬼场是权 (λ, 1-λ) = (2, -1) 的 bc 系统（c^g = -26），
+  Q_B 是那里定义的 BRST 荷，作用在受限模上。设 D = 26，故 Q_B^2 = 0
+  （worldsheet.critical-dimension-brst），BRST 上同调有定义。
+
+  动量条件：固定动量 k，并取一组光锥坐标使 k^+ ≠ 0；等价地，存在类光 k_0 使 k·k_0 ≠ 0。
+  k^+ = 0 的扇区（特别是 k = 0）不在本陈述范围内。
+
+  相对复形：C_rel(k) = {|ψ⟩ ∈ F_matter(k) ⊗ F_ghost : b_0|ψ⟩ = 0, L_0|ψ⟩ = 0}，
+  其中 L_0 = L^m_0 + L^g_0 - 1 是总 Virasoro 零模。Q_B 保持 C_rel(k)（因为 {Q_B, b_0} = L_0），
+  故可定义相对上同调 H_rel(k) = ker(Q_B|_{C_rel}) / im(Q_B|_{C_rel})。
+
+  鬼数归一化：取 SL(2,C) 不变真空 |0⟩ 的鬼数为 0、gh(c_n) = +1、gh(b_n) = -1，
+  于是鬼场基态 |↓⟩ = c_1|0⟩ 的鬼数为 1。（Polchinski 用对称归一化 gh(|↓⟩) = -1/2，
+  与此相差常数平移 3/2；本节点采用前者。）
+
+  相对复形上的内积取 ⟨ψ, ψ'⟩_rel := ⟨ψ| c_0 |ψ'⟩（鬼场零模归一化 ⟨↓|c_0|↓⟩ = ⟨↓|↑⟩ = 1），
+  它是 C_rel(k) 上的（不定）厄米形式，且 Q_B 关于它自伴，故在上同调上诱导良定义的形式。
+
+  横向空间：H^⊥(k) := 由 α^i_{-n}（i = 2..25，即 D-2 = 24 个横向方向，记号同
+  worldsheet.light-cone-quantization；n ≥ 1）作用在 |0; k⟩ ⊗ |↓⟩ 上生成的
+  Fock 空间中满足 L_0 = 0（即 α' k^2 + N - 1 = 0）的子空间；其上的内积是横向振子代数的正定内积。
+
+  断言（D = 26，k^+ ≠ 0）：
+  (1) H_rel(k) 集中在鬼数 1：鬼数 ≠ 1 的相对上同调为零；
+  (2) 鬼数 1 处 H_rel(k) 与 H^⊥(k) 等距同构（保内积的线性双射）；
+  (3) 特别地，⟨·,·⟩_rel 在 H_rel(k) 上诱导的内积**正定**（不只是半正定）。
+uses_conventions: [conv.metric-mostly-plus, conv.virasoro-standard, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.4 The no-ghost theorem（p.137-142），eq. (4.4.7)、(4.4.10)、(4.4.13)、(4.4.19)、(4.4.23)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md 的 E68：这些式号经两个第三方笔记
+      交叉核对（不是核对原书），证明结构已核实。内积归一化 ⟨↓|c_0|↓⟩ = 1 的具体写法
+      与 Polchinski (4.4.23) 的归一化未逐字核对。
+  - ref: fgz-1986
+    loc: "Theorem 1.2（编号未核实）"
+    note: |
+      半无限上同调版本：c = 26 时相对上同调集中在一个次数上并同构于横向 Fock 空间。
+      定理编号沿用 worldsheet.critical-dimension-brst 的写法（那里引 Theorem 1.1），未与原文核对。
+  - ref: lian-zuckerman-1989
+    loc: "§2（节号未核实）"
+    note: 受限模上 BRST 上同调的数学化处理，是 FGZ 结果的推广与补全；节号未与原文核对。
+tags: [bosonic-string, unitarity, brst, cohomology, critical-dimension]
+notes: |
+  本节点与 worldsheet.no-ghost-theorem-v2 是**两条不同的陈述**：前者关于 Q_B 的相对上同调，
+  后者关于旧协变物理态空间 H_phys/H_0。抽取记录 polchinski-1998-v1 的 E58 备注明确指出
+  Polchinski §4.1 陈述的是 OCQ 版本、§4.4 证的是 BRST 版本，二者的等价性
+  （Kato-Ogawa 定理）本身是一条需要论证的命题，尚未建节点。
+
+  本节点断言的是**正定**（不是半正定）：相对上同调已经商掉了 Q_B-恰当态，
+  对应 OCQ 侧的"模掉零模态"。
+
+  DDF 算子不出现在 Polchinski §4.4 的论证里（那里用的是光锥振子组合与 light-cone number 分级），
+  故 --via-polchinski-4-4 不依赖 worldsheet.ddf-operators-v2。
+
+  k^+ ≠ 0 的条件与 v2 中 DDF 构造要求的 k·k_0 ≠ 0 是同一类条件（审计 B6）：
+  两个版本都在零动量/退化扇区外陈述。
+author: curator
+created: "2026-09-10"

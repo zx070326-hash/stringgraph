@@ -1,0 +1,41 @@
+id: worldsheet.ddf-operators-v2
+kind: definition
+status: rigorous
+title: DDF 算子（横向指标取 i = 2..D-1）
+statement: |
+  横向指标约定与 worldsheet.light-cone-quantization 一致：i = 2..D-1（共 D-2 个横向方向），
+  0、1 方向组成光锥对 ±。
+
+  在 D 维自由玻色开弦 Fock 空间上，取类光参考动量 k_0（k_0^2 = 0）与横向偏振
+  ε^i（i = 2..D-1，ε·k_0 = 0），DDF 算子
+    A^i_n := ∮ dz/(2πi) ∂X^i(z) e^{i n k_0·X(z)}，  i = 2..D-1，n ∈ Z\{0}，
+  其中 k_0 归一化使 k_0·p = 1（p 是态的动量，故要求 k_0·p ≠ 0）。
+  它们与所有 L_m 对易，且满足 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+  即一个 D-2 维横向振子代数。
+uses: [worldsheet.virasoro-algebra, worldsheet.old-covariant-physical-states]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.2，约 eq. (2.3.4x)（DDF 算子的定义式；式号未核实）"
+    note: |
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；具体式号未与原书核对，
+      需 researcher 补齐。旧节点只写 "§2.3.2"，无式号。
+  - ref: goddard-thorn-1972
+    loc: "eq. (3)–(6)（式号未核实）"
+    note: 式号沿用旧节点 worldsheet.ddf-operators，未与原文核对；GT 1972 未在 literature/extractions/ 登记。
+  - ref: polchinski-1998-v1
+    loc: "§4.1（DDF 构造需要 k_0·p ≠ 0 的注记；页码/式号未核实）"
+    note: |
+      ms.no-ghost-theorem 审计 B6 指出 Polchinski §4.1 有此注；抽取记录
+      literature/extractions/polchinski-1998-v1.md 未覆盖该注，定位未核实。
+tags: [bosonic-string, spectrum-generating-algebra]
+notes: |
+  取代 worldsheet.ddf-operators。旧节点把横向指标写作 i = 1..D-2，与已合并的
+  worldsheet.light-cone-quantization（i = 2..D-1）记号不一致；本节点统一为 i = 2..D-1。
+  除指标范围、参考动量的记号（旧节点写 k，本节点写 k_0，以便与态动量 p 区分）
+  与 sources 的精确化外，内容与旧节点相同：归一化条件仍写作 k_0·p = 1，未改动量纲/α' 因子。
+
+  参考动量条件 k_0·p ≠ 0 在旧节点里只隐含在"归一化使 k·p = 1"里，本节点显式写出
+  （ms.no-ghost-theorem 审计 B6）：k_0·p = 0 的扇区（特别是 p = 0）DDF 构造退化，需单独处理。
+author: curator
+created: "2026-09-10"
