@@ -2,6 +2,7 @@ import StringFormal.Math.EulerPartition
 import StringFormal.Math.MobiusJacobian
 import StringFormal.Math.GreenSchwarzAlgebra
 import StringFormal.Math.FiniteCounts
+import StringFormal.Math.AnomalyPolynomial
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect

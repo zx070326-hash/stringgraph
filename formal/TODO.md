@@ -61,9 +61,11 @@
 
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
-`StringFormal/Math/GreenSchwarzAlgebra.lean`，独立小岛（只 import Mathlib）。
-对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5 的
-Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条。
+`StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
+`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9），两个独立小岛（只 import Mathlib）。
+A1/A2/A3 对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5；
+A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-ch12.md` §5.4。
+五项都已完成，无 sorry，公理只有标准三条。
 
 - [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
   `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
@@ -128,6 +130,40 @@ Lean 候选 A1/A2/A3。三项都已完成，无 sorry，公理只有标准三条
   （分别在 `agent/curator/adt-abelian` 与 curator 的 GSO 支上），所以 `formal.lean_decl`
   / `--via-lean` 推导没有一并提交。卡进 main 后由 lead 或 curator 接线，并跑
   `uv run stringgraph check-axioms`。
+### `StringFormal/Math/AnomalyPolynomial.lean`（Polchinski §12.2）
+
+- [x] `anomaly-twelve-form-identity`（A9）：Polchinski (12.2.27)+(12.2.28a,b) 的**因子化形**
+  与 (12.2.11)+(12.2.12) 的**逐项展开形**是同一多项式。
+  `anomaly_polynomial_factorized_eq_expanded`，`[Field K] [CharZero K]` 上把
+  `tr R², tr R⁴, tr R⁶, Tr_a F², Tr_a F⁴, Tr_a F⁶` 与生成元数 `n` 当作**七个独立标量**，
+  证明是 `unfold; ring`（不需要 `field_simp`）。
+  同一声明也验证 ADT 2010 (7)+(8)（抽取记录 E15 已确认与 (12.2.27)+(12.2.28) 逐字相同）。
+  九类单项式系数已在纸上逐项复核，与抽取记录 E14 的 `[抽取者复算]` 完全一致，无一处对不上。
+  建议做 `consistency.d10-n1-anomaly-polynomial`（若建卡，见抽取记录 §7 接线表）某条
+  **推导**的 `lean_decl`，**不要**挂陈述卡本身：陈述卡说的是"这个多项式是反常"，那是物理。
+  **未做**：微分形式、楔积、指标定理、(12.2.10) 的 `−i/(2π)⁵` 归一化；
+  任何具体李代数的迹恒等式（独立节点）；因而**不断言任何群的反常抵消**。
+
+- [x] `iib-gravitational-anomaly`（A8）：Polchinski (12.2.14) 的三条整数式。
+  `iib_gravitational_anomaly_cancels`：IIB 含量 `(n_{3/2}, n_{1/2}, n_A) = (2, −2, 1)` 给零；
+  `iib_gravitational_anomaly_solutions`：三式 `↔ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A`（`omega` 一行）；
+  `iib_anomaly_polynomial_vanishes_iff` / `iib_gravitational_anomaly_free_iff`：
+  这三式**恰好**是"十二形式作为多项式恒为零"（正向靠在 (0,0,1)、(1,1,0)、(1,0,0) 处取值）。
+  系数按 Polchinski (12.2.11 取 n=1)/(12.2.12)/(12.2.13) 的分子抄，
+  与 Bilal (12.4)/(12.5) 同型（`−495n_{3/2} + n_{1/2} + 992n_A = 0` 等），归一化一致。
+  ⚠ **数学缺口（值得写进图）**：这个 3×3 方程组**秩是 2 不是 3**——任取两式就已经推出
+  `n_{3/2} = 2n_A`，第三式自动成立。Polchinski 说"三个条件、三个自由参数，barring a numerical
+  coincidence 只能全零"（E11 的 "miraculous"/"accidental"），这个记账对巧合略微高估了：
+  实际是**两个条件约束三个参数**，一维解空间是应该出现的。真正非平凡的是解恰好落在
+  IIB 超引力实现的小整数 `(2, −2, 1)` 上。建议写进
+  `consistency.iib-gravitational-anomaly-cancels` 的 `gaps` 或 `notes`。
+
+- [x] （附带，不属 A8/A9）`gs_gravitational_twelve_form_eq_polchinski`：
+  Polchinski (12.2.27) 的**纯引力部分**（令三个规范迹为零）等于 `−1/96` 乘 GS 1984 (20)，
+  **五个系数全对**，包括 Polchinski 侧来自 `Y₄X₈/768`、GS 侧写作常数 `1/8` 与 `1/32` 的那两项。
+  这比 `consistency.gravitational-anomaly-polynomial-d10` notes 里记的"与 Bilal 括号内容之比
+  都是 3/4"更强：那个比较对括号整体重标度，不检验 `n` 无关项与 `n` 相关项在同一整体归一下是否相容；
+  这里一个常数 `−1/96` 就把五个系数全部对上。建议补进该卡 notes（Lean 候选 A5 由此闭合且加强）。
 
 ## Virasoro
 
