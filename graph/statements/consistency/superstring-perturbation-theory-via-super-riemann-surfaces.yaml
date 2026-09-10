@@ -1,0 +1,138 @@
+id: consistency.superstring-perturbation-theory-via-super-riemann-surfaces
+kind: proposition
+title: 超弦微扰论的超黎曼面/超模空间表述（Witten 2012–2023）：在超模空间上完成全部分部积分并用超版 Deligne–Mumford 紧化作红外正规子，则多圈振幅规范不变（已知反常除外）、在预期时具有时空超对称、且具有预期的红外行为——作者自称为 "demonstration"，非 "proof"
+statement: |
+  **框架（是陈述的一部分）**：RNS 形式的超弦微扰论按如下方式表述：
+  (F1) 亏格 g 的贡献是超黎曼面模空间 𝔐_g 上的一个积分（杂化弦：ℳ_L × ℳ_R 中实余维 p|0 的**积分链** Γ 上的
+       积分，(3.61) Z_g = ∫_Γ 𝒟(𝒥,δ𝒥) F(𝒥,δ𝒥)），而**不是**先把奇模积掉、下降到普通黎曼面模空间后的积分；
+       原文（§3.3.2 p. 36 逐字）："One might have hoped to define a natural moduli space of heterotic string
+       worldsheets over which one would integrate … This appears to be too optimistic … The integration cycle Γ is
+       what exists instead."
+  (F2) **所有涉及分部积分的论证**（规范不变性、零态解耦、超对称 Ward 恒等式）都在超模空间上做
+       （1304.2832 §1 步骤 (A)）；BRST 恰当态的插入化为边界积分 (7.1)
+       ∫_Γ F_{{Q_B,𝒲₁},𝒱₂,…,𝒱_n} = −∫_{∂Γ} F_{𝒲₁,𝒱₂,…,𝒱_n}，
+       并以去掉除子 𝒟 的小邻域为截断，「there is no anomaly if the right hand side of (7.1) vanishes in this limit」。
+  (F3) 红外区用超对称版 Deligne–Mumford 紧化作自然正规子（1304.2832 §1 步骤 (B)）。
+  (F4) **图像变换算符（PCO）是被导出的，不是被假设的**：取 delta 函数型引力微子波函数 χ^{(σ)θ} = δ_{p_σ}
+       并积掉相应奇模，得 𝒴(p) = δ(β(p)) S_{zθ}(p)（(3.95)）与 ∏_{σ=1}^{2g−2} 𝒴(p_σ)（(3.97)）；
+       原文对 PCO 的定位（§6.4.6 p. 109 逐字）："In this paper, we never make any fundamental statements in terms
+       of positions of picture-changing operators (PCO's); we view the PCO's as a possible method of integration over
+       odd moduli, but not a basic definition."
+  (F5) **伪奇点（spurious singularities）被指认为非法规范固定**（§3.5 p. 42 逐字）："They are spurious because they
+       result from an invalid gauge-fixing." 正确处方是：用开覆盖 {𝒰^{(ζ)}} 分片选取引力微子基 χ^{(σ;ζ)}，
+       在每片上只提取不变量 F(𝒥,δ𝒥) 或 Ξ(x)，最后按 (3.61)/(3.71) 在 Γ̂ 上积分；
+       **不**在每片上积掉奇模得到约化空间上的测度。
+
+  **命题**（1209.5461v4 摘要与 §1 p. 2 的逐字目标，转述为三条）：在框架 (F1)–(F5) 下，
+  (a) 多圈超弦振幅是规范不变的（BRST 恰当态解耦），**已知反常除外**（"apart from known anomalies"）；
+  (b) 在预期时具有时空超对称（"satisfy space-time supersymmetry when expected"）；
+  (c) 具有「与具有相同无质量粒子和低能相互作用的场论所预期的」红外行为（"have the expected infrared behavior"）。
+  原文对此的自评（摘要逐字）："with the goal of giving a simpler and more direct **demonstration** that …"；
+  §1 p. 2："**aiming to give** simpler and more direct demonstrations that …"；
+  1304.2832 §1 p. 2："Once one understands these subtleties, one is **well-placed to demonstrate** that superstring
+  perturbation theory works to all orders in those models in which tadpoles and supersymmetry-breaking effects do not
+  arise."
+
+  **适用域（作者在 §1 p. 3 与 §7.5 p. 140 显式划定，是陈述的一部分）**：
+  只用「足以计算 S 矩阵的最简单一类顶点算符」（§2.4.1）；**不含**质量重整化；**不含**需要微扰真空移动以
+  维持时空超对称的模型；**不含** Ramond–Ramond 场期望值非零的背景；**不与** pure spinor 形式接触；
+  红外分析部分只考虑闭取向弦、无质量 S 矩阵、无质量粒子无微扰质量重整化的紧化。
+
+  **本节点不断言**：
+  (i) ★★ 「超弦微扰论到所有阶的一致性**已被证明**」。全文无 "we prove the consistency"，无结论章节；
+      最强表述是 "well-placed to demonstrate"，且带适用域「in those models in which tadpoles and
+      supersymmetry-breaking effects do not arise」。
+  (ii) ★★ 1998 年的缺口（consistency.superstring-perturbative-consistency-unproven-1998）**已被填上**。
+      两条具体技术缺口（PCO 的 ad hoc 性、高亏格歧义）在 (F4)(F5) 里被诊断并给出处方；
+      但「a fully explicit proof of the perturbative consistency」在本系列里没有任何一处宣称完成。
+  (iii) 无质量 tadpole 为零（§8.3 的归纳论证挂在未证的 "if" 上；见推导 gaps 与
+      consistency.massless-tadpole-obstruction-to-superstring-perturbation）。
+  (iv) 超模空间的（非）投影性作为**输入**——本框架不假设投影存在，Witten §3.3.2 只是引用
+      math.supermoduli-space-not-projected 说明不能指望有全局投影（两卡之间**不建边**，见 notes）。
+  (v) 2012 年 v1 的任何内容涉及 Donagi–Witten 或 Sen–Witten——本卡引的是 **v4（2023）**，见 sources note。
+  (vi) 开弦/无定向弦的 R-R tadpole ⇒ 反常这条链在弦论里「completely clear」——作者自己保留
+      （§9.4 p. 196："string theory is not well enough understood to make this statement completely clear"）。
+uses_conventions: []
+sources:
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4（2023-11-05；论文页 N = PDF 第 N+4 页），摘要；§1 pp. 2–3（目标、'not a new idea'、六条范围限制）"
+    note: |
+      **L1 逐页读图**（researcher 2026-09-11；抽取记录 literature/extractions/witten-2012-superstring-perturbation.md
+      **EW1/EW2/EW3**）。
+      ★★ **版本红线**：本卡所有式号、页码只对 **v4** 有效。**本文无期刊版**（INSPIRE recid 1188034 无
+      publication_info，2026-09-11 查）。§1 p. 3 关于 Sen 的 off-shell/SFT 系列 [19–24] 的整段
+      （含 "these papers were not available when the original version of the present paper was submitted to the arXiv
+      in 2012"）、§3.3.2 p. 35 对 [45] Donagi–Witten 的引用、§3.5 p. 43 对 [49] Sen–Witten 2015 的引用
+      **都不可能出现在 2012 年的 v1 里**（DW 首发 2013-04，晚于本文 v1 七个月；抽取记录 §3.4）。
+      ⇒ 本卡陈述的是「截至 v4 作者怎么表述」，**不是 2012 年的状态**；若需 2012 年原始状态须另读 v1。
+      ⚠ 标题两说：arXiv 元数据 "Superstring Perturbation Theory Revisited"（bib 采用），
+      v4 PDF 标题页印 "Perturbative Superstring Theory Revisited"。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §3.3.1 p. 34 (3.57)；§3.3.2 pp. 35–36, (3.58)(3.59)(3.61)：积分链 Γ、'The integration cycle Γ is what exists instead'"
+    note: L1（抽取记录 **EW6/EW7/EW8**）。(F1) 的出处。⚠ Γ 与加厚后的 Γ̂ 的帽子在页图上很小，抽取者不能逐处确认；本卡按原文 (3.61) 写 Γ，处方段写 Γ̂。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §3.5「A Basis Of Odd Moduli」, pp. 41–43, (3.76)–(3.84)：伪奇点 = 非法规范固定；分片处方；'It is also possible but cumbersome to describe a correct procedure without the geometric interpretation … See for example [49].'"
+    note: L1（抽取记录 **EW9**）。(F5) 的出处。[49] = sen-witten-2015-pco（本项目仅读摘要，L2）。⚠ 原文明说「不处理带伪奇点的算法」（"We will not try to explain how to do that here"）。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §3.6.1–§3.6.2, pp. 44–47, (3.85)–(3.103)：(3.88) 积掉 (η_σ, dη_σ)、(3.94)(3.96) delta 函数引力微子、(3.95) 𝒴(p) = δ(β(p))S_{zθ}(p)、(3.97) ∏𝒴(p_σ)；(3.99) 伪奇点判据 H⁰(Σ_red, T^{1/2}(Σ_σ p_σ)) ≠ 0；p. 47 PCO 重合极限不存在"
+    note: |
+      L1（抽取记录 **EW10/EW11**）。(F4) 的出处。原文对 (3.95)："It was originally defined rather differently in [1].
+      The definition (3.95) was first presented in [7, 46]"——即 Witten 不主张 PCO 定义的首发权，只主张「导出」。
+      ⚠ p. 46 逐字自陈 𝒴(p) 的定义「needs some clarification」（S_{zθ} 与 δ(β) 的 OPE 奇异，靠 BRST 或光滑化定义）。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §6.4.6, pp. 109–110：'we never make any fundamental statements in terms of positions of picture-changing operators'；'It is not entirely clear if this remains true in higher genus; the spurious singularities may cause trouble.'"
+    note: L1（抽取记录 **EW12/EW13**）。前一句是 (F4) 的定位，后一句是 gaps 第 5 条的出处。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §7.1 p. 123, (7.1)：BRST 恰当插入 = 边界积分；截断与取极限的反常判据"
+    note: L1（抽取记录 **EW15**）。(F2) 与 (a) 的出处。原文自评 "this phrasing of the problem is a little too schematic"。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §7.5 p. 140；§8.3 pp. 173–175, (8.38)(8.41)(8.42)：tadpole 为零与超对称的对亏格归纳（含 'If (as in most cases) general arguments show that spacetime supersymmetry is not spontaneously broken at g-loop order, then the inductive step is complete'）"
+    note: L1（抽取记录 **EW16/EW18**）。(b)(c) 的出处；那个 "if" 是 gaps 第 3 条。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §9.4 pp. 196–199：R-R tadpole 不抵消 ⇒ 反常；'One expects the same in string theory, though string theory is not well enough understood to make this statement completely clear.'"
+    note: L1（抽取记录 **EW20**）。(a) 的「已知反常除外」在开弦/无定向弦侧的内容，以及 gaps 第 4 条的出处。结论出处引 [82] = green-schwarz-1984 与 [84] = Cai–Polchinski 1988。
+  - ref: witten-2013-overview
+    loc: "arXiv:1304.2832v4（2016-07-23），§1 pp. 1–2：'were all well established by the mid-1980's. Roughly speaking, to complete that story in a natural way only requires a couple of steps: (A) … (B) …'；'one is well-placed to demonstrate that superstring perturbation theory works to all orders in those models in which tadpoles and supersymmetry-breaking effects do not arise'"
+    note: |
+      L1（抽取记录 **EW4/EW5**）。**无期刊版**（INSPIRE recid 1227826）。PDF 标题页为
+      "Superstring Perturbation Theory Via Super Riemann Surfaces: An Overview"，脚注 1 自陈改名。
+      这是全系列对「Polchinski 1998 的缺口是什么、补到了什么程度」最贴题的作者自评；本卡的 (F2)(F3) 与
+      标题里的「demonstration 非 proof」均以它为据。
+tags: [superstring, perturbation-theory, super-riemann-surface, supermoduli, pco, spurious-singularity, brst, infrared, consistency, author-admitted-gap]
+notes: |
+  【1. ★ 与 math.supermoduli-space-not-projected **不建边**】
+  本框架**本来就不假设**全纯投影存在（(F1) 直接在 𝔐_g / Γ 上积分）。Witten §3.3.2 引 [45] = Donagi–Witten
+  只是说明「不能指望有全局投影，所以 (F1) 是必要的而非可选的」；这是**动机**，不是逻辑依赖。
+  让本卡 depends_on 那张数学卡会把因果讲反（抽取记录 §5.1 边建议）。
+
+  【2. ★ PCO 方法的后续：Sen–Witten 2015「vertical integration」（L2，仅摘要）】
+  sen-witten-2015-pco（JHEP 09 (2015) 004, arXiv:1504.00609）摘要逐字：「the simplest version of the PCO procedure
+  is valid only locally on the moduli space of Riemann surfaces」；「'vertical integration' was proposed as a
+  relatively simple method to do this」；「This involves a hierarchical procedure with corrections of high order」。
+  ⇒ (F5) 的分片处方在 PCO 语言里的系统化版本；PCO 方法**被补丁化而非废弃**。**本项目未读该文正文。**
+
+  【3. 与 Polchinski 1998 的对照（抽取记录 QW1 的判定）】
+  · polchinski-1998-v2 §12.5 p. 121「the picture-changing prescription is rather *ad hoc* and it would be satisfying
+    to see it derived in some way」→ (F4) 正面回答：PCO 被导出为「delta 函数引力微子 + 积掉奇模」的特例。
+  · 同页「this prescription has a subtle ambiguity at higher genus」→ (F5) 诊断：歧义 = 伪奇点 = 切片在 (3.79) 有
+    非零解处非法；处方 = 分片 + 只提取不变量 + 在 Γ̂ 上积分。
+  · §12.5 p. 126「parameterizations that did not precisely cover supermoduli space」→ (F1)(F2)：整个论证在超模空间
+    上做，不下降。
+  · **但** §12.5 p. 126「a fully explicit proof of the perturbative consistency of the theory seems to be lacking」
+    在本系列里**没有被任何一处宣称已完成**——这就是本卡 status 为 physical-argument 且带六条 gaps 的原因。
+  详见 consistency.superstring-perturbative-consistency-unproven-1998。
+
+  【4. 抽取记录 §5.1 (P2) 建议的 id 是 consistency.superstring-perturbation-supermoduli-framework；
+  lead 派工单改为本 id（-via-super-riemann-surfaces），内容一致。】
+
+  【5. Witten 自陈沿用 Polchinski 的约定（§2.1 p. 4："section 5.3 of [32] (whose conventions we generally follow)"）】
+  只说 "generally"、限于 §5.3 那一层，本项目未做逐式比对（抽取记录 QW5）；本卡不含需要约定的公式，
+  故 uses_conventions 为空，也不给 conv.* 加兼容性注记。
+
+  【6. 建议的后续卡（本轮未建）】
+  · worldsheet.pco-prescription-derived-from-odd-moduli-integration（(F4) 单独成卡，physical-argument；
+    抽取记录 §5.2 (P5)）；
+  · worldsheet.reduction-to-ordinary-moduli-space-strategy-fails-high-genus（DW 的物理含义；§5.2 (P4)）；
+  · consistency.massless-tadpoles-vanish-by-genus-induction（§8.3 的条件式归纳；见 tadpole 卡 notes 第 2 条）。
+author: curator-superstring-pert
+created: "2026-09-11"
