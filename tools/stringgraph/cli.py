@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from .loader import find_project_root, load_graph
-from .report import format_report, full_report, search, status_report, to_dot, to_json
+from .report import format_report, format_why, full_report, search, status_report, to_dot, to_json, why_report
 from .validate import validate
 
 
@@ -26,6 +26,9 @@ def main(argv: list[str] | None = None) -> int:
     p_status = sub.add_parser("status", help="effective status of one statement")
     p_status.add_argument("id")
     p_status.add_argument("--json", action="store_true")
+    p_why = sub.add_parser("why", help="explain which chain limits a statement's effective status")
+    p_why.add_argument("id")
+    p_why.add_argument("--json", action="store_true")
     p_report = sub.add_parser("report", help="whole-graph report")
     p_report.add_argument("--open", action="store_true", help="only list work items (open props, inferred edges, gaps)")
     p_report.add_argument("--json", action="store_true")
@@ -58,6 +61,14 @@ def main(argv: list[str] | None = None) -> int:
         else:
             for k, v in rep.items():
                 print(f"{k}: {', '.join(v) if isinstance(v, list) else v}")
+        return 0
+
+    if args.cmd == "why":
+        if args.id not in g.statements:
+            print(f"unknown statement id: {args.id}", file=sys.stderr)
+            return 2
+        tree = why_report(g, args.id)
+        print(to_json(tree) if args.json else format_why(tree))
         return 0
 
     if args.cmd == "report":

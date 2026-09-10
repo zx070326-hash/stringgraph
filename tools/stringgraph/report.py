@@ -33,6 +33,57 @@ def status_report(g: Graph, sid: str) -> dict:
     }
 
 
+def why_report(g: Graph, sid: str, _effs: dict[str, Effective] | None = None, _seen: set[str] | None = None) -> dict:
+    """Explain why `sid` has its effective status: follow the best derivation and
+    report which own status / dependency is the bottleneck, recursively.
+
+    Returns a tree {id, kind, effective, own, bottleneck: str, via: derivation id|None,
+    children: [subtree for each dep whose effective level == this level]}.
+    """
+    effs = _effs if _effs is not None else compute_all(g)
+    seen = _seen if _seen is not None else set()
+    st = g.statements[sid]
+    eff = effs[sid]
+    node: dict = {"id": sid, "kind": st.kind, "effective": eff.name, "via": None, "own": None,
+                  "bottleneck": "", "children": []}
+    if sid in seen:
+        node["bottleneck"] = "(already shown above)"
+        return node
+    seen.add(sid)
+
+    if st.kind == "proposition":
+        d = g.derivations.get(eff.best_derivation) if eff.best_derivation else None
+        if d is None:
+            node["bottleneck"] = "no derivation" if eff.name == "open" else "refuted"
+            return node
+        node["via"] = d.id
+        node["own"] = d.status
+        dep_ids = [x.id for x in d.depends_on if x.id in g.statements]
+    else:
+        node["own"] = st.status or "physical-argument"
+        dep_ids = [u for u in st.uses if u in g.statements]
+
+    own_level = LEVEL.get(node["own"], LEVEL["speculation"])
+    weak = [u for u in dep_ids if effs[u].level <= eff.level]
+    if own_level <= eff.level and not weak:
+        node["bottleneck"] = f"own status {node['own']}"
+    elif own_level <= eff.level:
+        node["bottleneck"] = f"own status {node['own']} and {len(weak)} dep(s)"
+    else:
+        node["bottleneck"] = f"own status {node['own']}; limited by {len(weak)} dep(s)"
+    node["children"] = [why_report(g, u, effs, seen) for u in weak]
+    return node
+
+
+def format_why(tree: dict, indent: int = 0) -> str:
+    pad = "  " * indent
+    via = f"  via {tree['via']}" if tree.get("via") else ""
+    lines = [f"{pad}{tree['id']} [{tree['effective']}]{via}", f"{pad}  ↳ {tree['bottleneck']}"]
+    for c in tree["children"]:
+        lines.append(format_why(c, indent + 1))
+    return "\n".join(lines)
+
+
 def _own_prop_status(g: Graph, sid: str) -> str:
     ders = [d for d in g.derivations_for(sid) if d.kind != "refutation"]
     if not ders:

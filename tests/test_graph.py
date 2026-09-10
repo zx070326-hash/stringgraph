@@ -8,7 +8,7 @@ import pytest
 
 from stringgraph.loader import find_project_root, load_graph
 from stringgraph.propagate import compute_all
-from stringgraph.report import full_report, search
+from stringgraph.report import format_why, full_report, search, why_report
 from stringgraph.validate import validate
 
 ROOT = find_project_root(Path(__file__).parent)
@@ -479,3 +479,52 @@ def test_report_lists_conjecture_dependencies(mini: Path) -> None:
 def test_search_finds_by_title_and_statement(mini: Path) -> None:
     hits = search(load_graph(mini), ["conjecture"])
     assert any(sid == "duality.conj-c" for _, sid, _ in hits)
+
+
+# ---------------------------------------------------------------- why
+
+
+def test_why_points_at_bottleneck_dep(mini: Path) -> None:
+    """prop-d has a rigorous derivation but rests on conj-c: `why` must descend into conj-c
+    and stop there with the conjecture's own status as the bottleneck."""
+    g = load_graph(mini)
+    tree = why_report(g, "duality.prop-d")
+    assert tree["effective"] == "conjecture"
+    assert tree["own"] == "rigorous"
+    assert [c["id"] for c in tree["children"]] == ["duality.conj-c"]
+    leaf = tree["children"][0]
+    assert leaf["effective"] == "conjecture"
+    assert leaf["bottleneck"] == "own status conjecture"
+    assert leaf["children"] == []
+    text = format_why(tree)
+    assert "duality.prop-d [conjecture]" in text
+    assert "limited by 1 dep(s)" in text
+
+
+def test_why_on_open_proposition(mini: Path) -> None:
+    _write(
+        mini,
+        "graph/statements/duality/prop-e.yaml",
+        """
+        id: duality.prop-e
+        kind: proposition
+        title: E
+        statement: no derivation yet
+        sources: [{ref: ref-a}]
+        """,
+    )
+    g = load_graph(mini)
+    tree = why_report(g, "duality.prop-e")
+    assert tree["effective"] == "open"
+    assert tree["bottleneck"] == "no derivation"
+
+
+def test_why_seed_critical_dimension_names_three_routes() -> None:
+    g = load_graph(ROOT)
+    tree = why_report(g, "worldsheet.critical-dimension-bosonic")
+    assert tree["effective"] == "physical-argument"
+    assert tree["own"] == "rigorous"
+    assert {c["id"] for c in tree["children"]} >= {
+        "worldsheet.critical-dimension-light-cone",
+        "worldsheet.critical-dimension-brst",
+    }
