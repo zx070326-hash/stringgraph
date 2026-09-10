@@ -58,6 +58,7 @@ StringFormal/
                             α^μ_p / L_n / 顶点算子；含 p=0 的模态代数与横向性；
                             无 [L_m, V]，无 A^i_n 本身（见文件头 gaps）
   NoGhost/VertexWeight.lean   顶点算子共形权（进行中）：creaExp 欧拉递推 creaExp_euler 已证；真空上 L_m Φ_J 与 [L_m, V_K] 待做
+  NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
