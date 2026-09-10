@@ -98,8 +98,17 @@ gaps:
     ℝ、ℂ 满足。worldsheet.bosonic-fock-space 那种「任意交换环」的一般性在这里丢掉。
   - |
     **代数版 Fock 空间，未取完化**，且本推导**完全不涉及内积**：Sugawara.lean 没有一条
-    把 `Fock.Lop` 与 worldsheet.fock-indefinite-form 的 `Fock.pairing` 联系起来的引理，
-    特别是 **L_m^† = L_{-m} 未证**。因此下游任何用到正定性/幺正性的结论都不能引本条为据。
+    把 `Fock.Lop` 与 worldsheet.fock-indefinite-form 的 `Fock.pairing` 联系起来的引理。
+    因此下游任何用到正定性/幺正性的结论都不能引本条为据。
+    **【2026-09-11（二）更正】** 本条原写「特别是 **L_m^† = L_{−m} 未证**」，该句已过时：
+    L_m^† = L_{−m} 现由 `StringFormal.NoGhost.Fock.pairing_Lop_left`
+    （formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577）机器证明，
+    图节点为 **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，formalized）。
+    **注意这里的「†」是 `Fock.pairing` 这个 R-双线性型意义下的伴随（即转置），
+    不是 ℂ 上的 Hermitian 共轭**（见 worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    本 gap 的其余内容不变：**本推导自身**（Sugawara.lean 里的 `lie_Lop_Lop`）
+    仍然完全不涉及内积，需要伴随性的下游应引 worldsheet.virasoro-generators-adjoint，
+    不能引本条。
   - |
     继承 --via-mode-algebra 的第二条 gap，且在形式化下更尖锐：本条使 c = D 作为
     **振子代数的 Fock 表示上的代数命题**成为 formalized，但「c = D 是二维自由标量 CFT 的中心荷」

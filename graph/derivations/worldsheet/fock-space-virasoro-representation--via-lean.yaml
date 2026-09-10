@@ -84,23 +84,37 @@ gaps:
     worldsheet.bosonic-fock-space 的缺口 (i)(ii)(iii)，此处不重复论证。
   - |
     **与内积无关**：本推导不涉及 worldsheet.fock-indefinite-form 的 `Fock.pairing`，
-    特别是 **L_n^† = L_{-n} 未证**，故本条**不**能用来支持「F 是 Virasoro 代数的
-    幺正/*-表示」这类陈述。无鬼定理需要的正是后者。
+    故本条**不**能用来支持「F 是 Virasoro 代数的幺正/*-表示」这类陈述。
+    无鬼定理需要的正是后者。
+    **【2026-09-11（二）更正】** 本条原写「特别是 **L_n^† = L_{-n} 未证**」，该句已过时：
+    L_m^† = L_{-m} 现由 `StringFormal.NoGhost.Fock.pairing_Lop_left`
+    （formal/StringFormal/NoGhost/PhysicalStates.lean，合并提交 2c8b577）机器证明，
+    图节点为 **worldsheet.virasoro-generators-adjoint**（推导 --via-lean，formalized）。
+    那里的「†」是 `Fock.pairing` 这个 R-**双线性型**意义下的伴随（转置），
+    **不是 ℂ 上的 Hermitian 共轭**（worldsheet.fock-indefinite-form--via-lean 的 gaps (iv)）。
+    本 gap 的其余内容不变：**本推导自身**（`virRep_lie`）仍不涉及 `Fock.pairing`，
+    且 Lean 侧**没有**把 `Fock.virRep` 与 `Fock.pairing` 放进同一陈述的结果，
+    故「F 是 Virasoro 的 *-表示」这条陈述依然未被建立。
   - |
     **不断言不可约性、最高权、Verma 商结构**。Lean 里有 `eq_smul_id_of_lie_mode`
     （F 在**振子代数**上的刚性），但**没有** F 在 Virasoro 代数上的不可约性，
     也没有把 F 与 worldsheet.verma-module 联系起来的任何结果。
-  - |
-    **Vir_R 的「基」在 Lean 中未打包**（继承 worldsheet.virasoro-algebra-v2 缺口 (i)）：
-    `Basis (Option ℤ) R (VirasoroAlgebra R)` 实例尚未构造，Lean 只有「张成 + 模同构
-    Vir ≅ W(R) × R」。本节点陈述里说「Vir_R 作为 R-模自由，基为 {L_n} ∪ {C}」，
-    严格说这一句的 Lean 对应是 `toProdₗ` 加 Witt 侧的基，而不是一条 `Basis` 声明。
-    `virRep` 的良定义性并不受影响——它是由 Witt 基的 `Basis.constr` 加中心方向的
-    `toSpanSingleton` **构造**出来的，不需要 Vir 的基。
 notes: |
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   自动化公理检查脚本（formal/TODO.md 的 scripts/check_axioms.lean）仍未做。
+
+  【2026-09-11（二）：删掉了一条过时的 gap】（curator，reviewer-batch3 必修第 1 条）
+  原 gaps 最后一条写「**Vir_R 的「基」在 Lean 中未打包**……本节点陈述里说
+  『Vir_R 作为 R-模自由，基为 {L_n} ∪ {C}』」——**该引述与目标陈述不符**：
+  worldsheet.fock-space-virasoro-representation 的 statement 写的是
+  「{L_n : n ∈ Z} ∪ {C} **张成** Vir_R」，本来就没有断言它是基，
+  也没有断言 Vir_R 作为 R-模自由。既然陈述与 Lean 的「张成 + 模同构 Vir ≅ W(R) × R」
+  已经对齐，这条 gap 无所指，故删除。
+  仍然为真、且已记录在别处的事实：`Basis (Option ℤ) R (VirasoroAlgebra R)` 实例
+  在 Lean 中尚未构造（worldsheet.virasoro-algebra-v2 的缺口 (i)，
+  以及本推导目标节点 notes【Vir_R 的基未打包】一段）；`virRep` 的良定义性不依赖它
+  （它由 Witt 基的 `Basis.constr` 加中心方向的 `toSpanSingleton` 构造）。
 
   本推导由 curator 于 2026-09-11 在 Sugawara.lean 合入 main（7af81b1）后建立，
   与 worldsheet.free-boson-central-charge-d--via-lean 同批。
