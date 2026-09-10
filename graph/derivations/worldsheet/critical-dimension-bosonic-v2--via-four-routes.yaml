@@ -23,8 +23,18 @@ depends_on:
       本推导的目标是**已被换代的**旧汇总卡，其路线 (I) 没有 D ≥ 4 的限定，而换代后的输入
       路线卡有；故严格说本推导的 (I) 在 D ≤ 3 处无输入支撑。该缺口由
       worldsheet.critical-dimension-bosonic-v3（(I) 已带 D ≥ 4）修正，本条只作记账。
-  - id: worldsheet.critical-dimension-old-covariant-v2
+  - id: worldsheet.critical-dimension-old-covariant-v3
     note: |
+      【2026-09-11 换代之二】本边当日稍后再由 -v2 改指 **-v3**：-v2 已 superseded_by -v3，
+      后者**只**删去 statement 中 H_0 的括注「（伪态）」（H_0 按定义式是 Fock 内积在 H_phys 上的根，
+      「伪态」是 L_{−n} 的后代；二者相等在 (26,1) 是无鬼定理的内容而非定义。
+      ms.critical-dimension-bosonic 第二轮 D5/T4、第三轮 §6）。命题内容未变，
+      本推导的论证与状态不受影响。⚠ **记账缺口（与 (I) 边同型，不在此修）**：本推导的目标是
+      **已被换代的** worldsheet.critical-dimension-bosonic-v2，其 (II) 的陈述仍带
+      「零模态（伪态）」括注，而换代后的输入路线卡不带；方向上路线卡的 H_0 定义更严格、更窄，
+      本推导的目标卡在该处措辞含混。该缺口由 worldsheet.critical-dimension-bosonic-v3
+      （(II) 已删括注）修正。以下为改指 -v2 时的原记载，逐字保留：
+
       供给 (II)。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
       该卡的 (B) 恰是「D > 26 时存在负模物理态」（限 a = 1、p ≠ 0）；两者经该卡的推导
       --via-no-ghost 由 worldsheet.no-ghost-theorem-v4 供给。
@@ -116,7 +126,7 @@ summary: |
   逐条指到已有节点：
     (I)   worldsheet.critical-dimension-light-cone-v2   光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1
           （2026-09-11 前为 worldsheet.critical-dimension-light-cone；v2 补上前提 D ≥ 4）
-    (II)  worldsheet.critical-dimension-old-covariant-v2  (D,a) = (26,1) 处等距同构；D > 26 有负模态
+    (II)  worldsheet.critical-dimension-old-covariant-v3  (D,a) = (26,1) 处等距同构；D > 26 有负模态
     (III) worldsheet.critical-dimension-brst-v2         Q_B² = 0 ⟺ c^m = 26（不给 a）
     (IV)  worldsheet.critical-dimension-weyl-anomaly-v2 c^m + c^g = 0 ⟺ c^m = 26（不给 a）
     (V)   worldsheet.open-string-intercept-v2           a = 1（只对开弦，与 D 无关）

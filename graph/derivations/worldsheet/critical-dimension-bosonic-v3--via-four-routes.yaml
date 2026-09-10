@@ -19,9 +19,18 @@ depends_on:
       **换代后两侧前提一致**：本卡 (I) 与路线卡都带 D ≥ 4，此前的「本卡弱于路线卡」记账消失。
       本卡 statement 中的「（节点：worldsheet.critical-dimension-light-cone）」是散文引用，
       按第三轮裁定 3(a) 不必动（陈述卡不可变；下次换代时同步）。
-  - id: worldsheet.critical-dimension-old-covariant-v2
+  - id: worldsheet.critical-dimension-old-covariant-v3
     note: |
-      供给 (II)。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
+      供给 (II)。
+      **【2026-09-11 改指 -v3】**本边原先指向 worldsheet.critical-dimension-old-covariant-v2。
+      那张卡的 statement 把 H_0 写成「零模态（伪态）子空间」，与紧邻的定义式
+      H_0 = {χ ∈ H_phys : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys}（内积的根）相冲突——正是本卡 (II) 按
+      ms.critical-dimension-bosonic 第二轮审计 D5/T4 已删去的那个括注；第三轮审计 §6 逐字点名
+      路线卡是该链上最后一处仍带括注者，交 lead 排期。curator 已换代为
+      worldsheet.critical-dimension-old-covariant-v3（**只**删该括注，其余逐字照抄 v2），
+      旧卡写 superseded_by。**换代后两侧措辞完全一致**，此前「本卡 (II) 与路线卡逐字对应、
+      只是路线卡多一个冲突括注」的记账消失。目标陈述、依赖边的集合、status、
+      有效状态（physical-argument）均不变。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
       该卡的 (B) 恰是「D > 26 时存在负模物理态」（限 a = 1、p ≠ 0）；两者经该卡的推导
       --via-no-ghost 由 worldsheet.no-ghost-theorem-v4 供给。
       本卡 (II) 把 H_0 写成「Fock 内积在 H_phys 上的零模态子空间」，与该路线卡的定义
@@ -127,7 +136,7 @@ summary: |
   本推导把 worldsheet.critical-dimension-bosonic-v3 的合取拆成它的各个合取项，
   逐条指到已有节点：
     (I)   worldsheet.critical-dimension-light-cone-v2   光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1（前提 D ≥ 4，两侧一致）
-    (II)  worldsheet.critical-dimension-old-covariant-v2  (D,a) = (26,1) 处等距同构；D > 26 有负模态
+    (II)  worldsheet.critical-dimension-old-covariant-v3  (D,a) = (26,1) 处等距同构；D > 26 有负模态（H_0 = 内积的根，无「伪态」括注）
     (III) worldsheet.critical-dimension-brst-v2         Q_B² = 0 ⟺ c^m = 26（忠实受限模；不给 a）
     (IV)  worldsheet.critical-dimension-weyl-anomaly-v2 c^m + c^g = 0 ⟺ c^m = 26（不给 a）
     (V)   worldsheet.open-string-intercept-v2           一致性要求 a = 1（只对开弦）
@@ -189,5 +198,15 @@ notes: |
   目标陈述、status、有效状态（physical-argument）均不变。相应地更新了该边的 note、
   summary 的对照表与 gaps 第 2 条的记账。指向旧路线卡的两条历史推导
   （--via-three-routes 对 v1、--via-four-routes 对 v2）保持不动。
+
+  **【2026-09-11 后续改动之二：(II) 的边改指 -v3】**按 ms.critical-dimension-bosonic
+  第二轮回译审计 D5/T4 与第三轮 §6 的点名，路线卡 worldsheet.critical-dimension-old-covariant-v2
+  已换代为 worldsheet.critical-dimension-old-covariant-v3（**只**删去 statement 中 H_0 的括注
+  「（伪态）」）。本推导的第二条依赖边随之改指 -v3，**边的条数与集合结构不变**
+  （仍是 5 条路线/输入 + 2 条公共输入），目标陈述、status、有效状态（physical-argument）均不变。
+  相应地更新了该边的 note 与 summary 的对照表。指向 -v2 的两条历史推导
+  （--via-three-routes、v2 的 --via-four-routes）按 docs/STATUS_LEVELS.md「旧推导的去留」
+  本可不追改，但它们的 (II) 边是 2026-09-11 同一批「就地换代」加上去的，
+  故本次一并就地改指并在各自 note 里写明（与 (I) 改指 -v2 那次同款处理）。
 author: curator
 created: "2026-09-11"

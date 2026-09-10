@@ -1,0 +1,126 @@
+id: worldsheet.critical-dimension-light-cone-closed
+kind: proposition
+title: 闭弦光锥洛伦兹代数闭合要求 D = 26 且 a = ã = 1（左右各一份反常；前提 D ≥ 4）
+statement: |
+  **【前提】D ≥ 4**（即至少存在两个不同的横向指标 i ≠ j）。理由与开弦一侧
+  worldsheet.critical-dimension-light-cone-v2 完全相同，见下方【本命题不断言什么】(i)。
+
+  在**闭弦**光锥量子化中，横向场 X^i（i = 2..D-1）的模式展开
+  （worldsheet.closed-string-mode-expansion）含**两组互相对易**的振子：右行 α^i_n 与左行 ᾱ^i_n
+  （worldsheet.closed-string-oscillator-commutators）。两组各自带一个横向 Virasoro 生成元
+    L^⊥_n = (1/2) Σ_{m∈Z} : α^i_{n-m} α^i_m :,   L̄^⊥_n = (1/2) Σ_{m∈Z} : ᾱ^i_{n-m} ᾱ^i_m :,
+  各自带一个正规序常数 a、ã（截距记号按 conv.intercept-sign-a，Polchinski 写 A、Ã）。
+  光锥规范把 X^- 的振子完全解出，且**逐手征**地解出：
+    α^-_n ∝ L^⊥_n,   ᾱ^-_n ∝ L̄^⊥_n   (n ≠ 0)，
+  故洛伦兹生成元
+    J^{μν} = （零模部分） - i Σ_{n≥1} (1/n)(α^μ_{-n} α^ν_n - α^ν_{-n} α^μ_n)
+                          - i Σ_{n≥1} (1/n)(ᾱ^μ_{-n} ᾱ^ν_n - ᾱ^ν_{-n} ᾱ^μ_n)
+  中的 J^{i-} 是右行模式的三次式与左行模式的三次式之和。
+
+  设 H_lc^cl 是闭弦光锥 Fock 空间，H_match ⊂ H_lc^cl 是其 level matching 子空间
+  （N = Ñ，worldsheet.closed-string-level-matching）。**本命题断言：**
+
+    [J^{i-}, J^{j-}]
+      = -C Σ_{n≥1} [ Δ_n (α^i_{-n} α^j_n - α^j_{-n} α^i_n)
+                   + Δ̃_n (ᾱ^i_{-n} ᾱ^j_n - ᾱ^j_{-n} ᾱ^i_n) ],
+    Δ_n = n (26 - D)/12 + (1/n) [ (D - 26)/12 + 2(1 - a) ],
+    Δ̃_n = n (26 - D)/12 + (1/n) [ (D - 26)/12 + 2(1 - ã) ],
+
+  其中 C ≠ 0 是只依赖 α'、p^+ 与 ℓ 的约定的整体常数（Δ_n、Δ̃_n 的形式不依赖它）。
+  即：**反常逐手征地分成两份**，右行那份的系数 Δ_n 与开弦的
+  （worldsheet.critical-dimension-light-cone-v2）逐字同形，左行那份把 a 换成 ã。
+
+  在 D ≥ 4 时，固定一对 i ≠ j，算子族
+    { α^i_{-n} α^j_n - α^j_{-n} α^i_n }_{n≥1} ∪ { ᾱ^i_{-n} ᾱ^j_n - ᾱ^j_{-n} ᾱ^i_n }_{n≥1}
+  在 H_match 上线性无关（对每个 n，取 level matching 的试探态 α^j_{-n} ᾱ^j_{-n}|0;k⟩：
+  该族中只有第 n 个右行成员与第 n 个左行成员在它上面不为零，二者的像
+  n α^i_{-n} ᾱ^j_{-n}|0;k⟩ 与 n α^j_{-n} ᾱ^i_{-n}|0;k⟩ 因 i ≠ j 而线性无关）。故
+    [J^{i-}, J^{j-}] = 0 在 H_match 上  ⟺  对所有 n ≥ 1 有 Δ_n = 0 且 Δ̃_n = 0。
+  （试探态取在 H_match 内，故同一结论在整个 H_lc^cl 上也成立。）
+
+  Δ_n 中 n 的正幂系数为零给 D = 26，负幂系数随之为零给 a = 1；Δ̃_n 同样给 ã = 1。因此
+
+    **闭弦光锥洛伦兹代数闭合  ⟺  D = 26 且 a = ã = 1。**
+
+  【本命题不断言什么】
+  (i)   **对 D ≤ 3 不作任何断言**（即前提 D ≥ 4 不可省的原因，与开弦一侧同款）：
+        D = 3 时只有一个横向指标，反对称组合 α^i_{-n}α^j_n - α^j_{-n}α^i_n 与
+        ᾱ^i_{-n}ᾱ^j_n - ᾱ^j_{-n}ᾱ^i_n 恒为零，于是 [J^{i-}, J^{j-}] = 0 对**任意**
+        (D, a, ã) 成立而 Δ_n、Δ̃_n 一般不为零，「当且仅当」的**仅当**方向在那里有反例；
+        D = 2 无横向振子，J^{i-} 不存在，命题空真。
+  (ii)  **不**把 a = ã 当作前提。左右两个正规序常数在本命题中是**两个独立的待定参数**，
+        a = 1 与 ã = 1 分别由 Δ_n = 0 与 Δ̃_n = 0 定出。这一点与
+        worldsheet.closed-string-intercept 不同：那张卡把 a = ã（由
+        worldsheet.closed-string-mass-formula 的左右对称性给出）当作**输入**。
+  (iii) **不**断言闭弦的无鬼定理、谱的正定性、或闭弦旧协变量子化的任何事；本图尚无闭弦 OCQ
+        物理态空间的节点。本命题只讲光锥洛伦兹代数的闭合条件。
+  (iv)  **不**断言与开弦临界维数的等价，也不断言「D = 26 是闭弦一致性的充分条件」
+        （相互作用、模不变性、快子等一概在外）。
+  (v)   **不**覆盖紧化背景（c^m = 26 而 D ≠ 26 的解）：本命题的 D 是平坦时空的维数，
+        论证用的是 D-2 个横向自由玻色场。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4：闭弦模式展开 **(1.4.4)**、左右行振子对易关系 **(1.4.6c)/(1.4.6d)**、质量公式 **(1.4.8)**（含 A = Ã = −(D−2)/24）、σ 平移生成元与 level matching **(1.4.10)/(1.4.11)**（以上式号与内容均已核实，抽取记录 polchinski-1998-v1.md #E20–#E23）"
+    note: |
+      这四条只支撑本命题的**舞台设置**：两组互相对易的横向振子、左右各一个正规序常数、
+      以及 level matching 子空间的定义。
+      ⚠ **原书没有做闭弦的 [J^{i-}, J^{j-}] 计算，也没有留成习题。**这不是本图的猜测：
+      抽取记录 §12.5 已就**开弦**一侧核实「原书既没有做这个计算、也没有把它留成习题，
+      只在 p.21 描述它并推给共形规范路线」，作者三处自降严格程度（p.21「plausible without a
+      complete treatment」、p.24「We will show this **indirectly**」、p.90「rather
+      **heuristically**」）。闭弦一侧原书更只走质量公式 + level matching 一路。
+      抽取记录 #E22 的「原文陈述」提到「在 D = 26 且 level matching 下化为 m² = (4/α')(N−1)」，
+      但其备注明写**该化简式是否在书中显式出现未核实**，故不能据以认为原书在 §1.4 论证了 D = 26。
+  - ref: gsw-1987-v1
+    loc: "§2.3.1 'Light-cone gauge and Lorentz algebra', p.93–99, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算与 Δ_n）——**该式是开弦（单组横向振子）的版本**；闭弦的两手征版本是否出现在 §2.3.1 或 §2.3.4 'Analysis of the spectrum'（p.113–116），**未核实**"
+    note: |
+      GSW 用 mostly-minus 号差与 α' = 1/2 的开弦归一化；Δ_n 的形式与号差无关，
+      已按 conv.metric-mostly-plus 与 conv.alpha-prime-regge 转写。
+      定位证据：抽取记录 brst-cohomology-sources.md §5.1（CUP 目录，L4）给出小节页码，
+      §5.2（Google Books）把 "2.3.32" 定到 p.99 = §2.3.1 末页；
+      **式号 ↔ 内容的对应是 L0（未读到正文）**，该节 §5.4 明写「写进图节点的 loc 时必须标注未核实」。
+      ⚠ **本卡片陈述的 Δ_n / Δ̃_n 两手征形式在任何已定位的位置上都没有逐字来源**：
+      它是 curator 按手征分解从开弦版本移植来的（见推导
+      worldsheet.critical-dimension-light-cone-closed--via-lorentz-algebra-two-copies
+      的第一条依赖边与前两条 gaps）。
+tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance, closed-string]
+notes: |
+  【为什么单建这张卡片】worldsheet.closed-string-intercept 的推导
+  --via-light-cone-representation 的倒数第二条 gap 逐字写着「本推导给出 a = ã = 1，**不**给出
+  D = 26。闭弦一侧的 D = 26 需要把 a = (D-2)/24（worldsheet.light-cone-normal-ordering-constant，
+  对每行各一份）与 a = 1 联立；图中现有的 worldsheet.critical-dimension-light-cone 是**开弦**的
+  表述，闭弦版本未建节点」。本卡片就是那个节点（curator-critdim-followups 记的空缺）。
+  同样，ms.critical-dimension-bosonic 的 canonical (V) 与 worldsheet.critical-dimension-bosonic-v3
+  的 (V) 都写着「本命题/本里程碑**不**对闭弦作任何断言」——**本卡片不改动它们**，
+  它们说的是那些卡片自己的范围，与本卡片的存在不冲突（第三轮审计 F1 已把 canonical 里
+  「本图未建节点」的过期记账改成指向 worldsheet.closed-string-intercept；
+  本卡片建立后该行仍然正确，因为里程碑确实不使用闭弦一侧的任何节点）。
+
+  【与开弦卡片 worldsheet.critical-dimension-light-cone-v2 的分工与差异】
+    1. 结构平行：同一个 Δ_n，同一条「线性无关 ⟹ 逐个系数为零」的翻译，同一条前提 D ≥ 4。
+    2. 实质差异：闭弦有**两份**反常（左右各一），故结论是 D = 26 **且 a = ã = 1**；
+       本卡片把 a、ã 当作两个独立参数，不预设 a = ã。
+    3. 线性无关的试探态取在 level matching 子空间内（α^j_{-n} ᾱ^j_{-n}|0;k⟩），
+       这是开弦一侧没有的一步；开弦无 level matching。
+    4. 整体常数 C 与开弦的 -(1/(2α'(p^+)²)) 不同（闭弦零模归一化
+       α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ，开弦为 (2α')^{1/2} p^μ），本卡片不写出它的具体值，
+       因为它依赖 ℓ 与 p^+ 的约定而 Δ_n 不依赖。
+
+  【与 worldsheet.closed-string-intercept 的分工】那张卡只断言截距取值 a = ã = 1
+  （由 level (1,1) 的小群表示论定出，**与 D 无关**，且把 a = ã 当输入）；本卡片断言的是
+  洛伦兹代数闭合的充要条件，**同时**给出 D = 26 与 a = ã = 1。两者的输入不同
+  （小群表示论 vs. 显式对易子计算），是两条独立路线；把二者之一与
+  worldsheet.light-cone-normal-ordering-constant 的 a = (D-2)/24 联立也给 D = 26，
+  那是本卡片推导 summary 第二段记的第三条路线。
+
+  【记号】L̄^⊥_n 是左行的横向 Virasoro 生成元（conv.virasoro-standard 的左行副本）。
+  a、ã 是**截距**（(L_0 - a)|ψ⟩ = 0 一侧的记号），与 Polchinski 的 A、Ã 相差一个符号，
+  换算 a = -A 由 conv.intercept-sign-a 固定。
+author: curator
+created: "2026-09-11"
