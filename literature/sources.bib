@@ -869,34 +869,51 @@
 
 @article{gubser-klebanov-polyakov-1998,
   author  = {Gubser, Steven S. and Klebanov, Igor R. and Polyakov, Alexander M.},
-  title   = {Gauge theory correlators from noncritical string theory},
+  title   = {Gauge Theory Correlators from Non-Critical String Theory},
   journal = {Physics Letters B},
   volume  = {428},
   pages   = {105--114},
   year    = {1998},
   eprint  = {hep-th/9802109},
-  note    = {**未读，仅登记**（curator 2026-09-11）。登记理由：与 witten-1998-ads 一起是
-             「两边配分函数/关联函数字典」`Z_string[φ_0] = ⟨exp ∫ φ_0 O⟩` 的真正出处；
-             Maldacena 1997 全文（22 页逐页核实）**没有任何配分函数陈述**，旧节点 duality.ads-cft
-             把该字典挂到 maldacena-1997 属于溯源错误（extractions/maldacena-1997.md Q7、§5.5 红线清单）。
-             本条**尚无抽取记录，任何图节点都不得引用它**，等有人真正读过并写出
-             extractions/gubser-klebanov-polyakov-1998.md 之后才可作为 `ref` 使用。
-             书目字段取自 Maldacena 抽取记录中转录的 arXiv 编号与通行著录，**未逐字核对原文**。}
+  note    = {**已抽取（researcher 2026-09-11）** → extractions/gubser-klebanov-polyakov-1998.md（E1--E13）。
+             **版本戳：本项目挂在本 key 上的所有 loc 一律锚定 arXiv:hep-th/9802109**v2** (27 Mar 1998)**，
+             即 15 页 PDF 逐页读图（页边条纹逐字 `arXiv:hep-th/9802109v2  27 Mar 1998`，页眉报告号 PUPT-1767；
+             论文页码 p.N = PDF 第 N+1 页）。v1 (16 Feb 1998) 未读，arXiv comments 自陈 v2 为
+             「minor revisions, 1 reference added」；上面登记的 PLB 428 发表版**式号未与 v2 核对**。
+             标题已按 arXiv 原文改为逐字大小写与连字符（原登记作 "noncritical"，原文是 "Non-Critical"）。
+             **三条最易误引的核实结果**：(1) 核心字典是 (12) `W[g] = K[g] = S[g]` 与 (23) `W[φ] = K[φ] = S[φ]`，
+             两边是**生成泛函与 on-shell 作用量**，**全文没有任何配分函数（`Z`）陈述**——`Z_CFT = Z_string`
+             要引 witten-1998-ads (2.12)，不能引本文；(2) **全文不出现 `Δ(Δ−d) = m²`**，只有 d=4 的解出形式
+             (45) `Δ = 2 + √(4 + (mR)²)`；(3) 边界取在**有限截断 `z = R`**，不是共形边界 `z → 0`。
+             自称强度最强处为 "we **propose** an identification"（p.3）/ "the **claim** that"（p.6），
+             **全文不含 "conjecture" 一词**。}
 }
 
 @article{witten-1998-ads,
   author  = {Witten, Edward},
-  title   = {Anti-de Sitter space and holography},
+  title   = {Anti De Sitter Space And Holography},
   journal = {Advances in Theoretical and Mathematical Physics},
   volume  = {2},
   pages   = {253--291},
   year    = {1998},
   eprint  = {hep-th/9802150},
-  note    = {**未读，仅登记**（curator 2026-09-11）。登记理由同 gubser-klebanov-polyakov-1998：
-             配分函数型 AdS/CFT 字典的出处，晚于 maldacena-1997 且不在其 65 条参考文献里。
-             本条**尚无抽取记录，任何图节点都不得引用它**。
+  note    = {**已抽取（researcher 2026-09-11）** → extractions/witten-1998-ads.md（E-W1--E-W18）。
+             **版本戳：本项目挂在本 key 上的所有 loc 一律锚定 arXiv:hep-th/9802150**v2** (6 Apr 1998)**，
+             即 41 页 PDF 逐页读图（页边条纹逐字 `arXiv:hep-th/9802150v2  6 Apr 1998`，
+             页眉报告号 IASSNS-HEP-98-15；论文页码 p.N = PDF 第 N+1 页）。
+             ⚠ v1 (20 Feb 1998) 未读，且 arXiv comments 自陈 v2 含 "**assorted corrections**"
+             （比 GKP 的 "minor revisions" 风险高），**引具体式号必须写死 v2**；
+             ATMP 2 (1998) 253--291 发表版式号未核对。
              key 带 `-ads` 后缀以便日后登记 Witten 的其他文献。
-             书目字段**未逐字核对原文**。}
+             **四条最易误引的核实结果**：(1) `⟨exp ∫_{S^d} φ_0 O⟩_CFT = Z_S(φ_0)` 确为 **(2.11)**；
+             但**两边都写成 `Z` 的等式是 (2.12) `Z_CFT(h) = Z_S(h)`（自变量是共形结构 h）**，
+             流版本是 (2.13)；教科书通式 `Z_CFT[φ_0] = Z_bulk[φ|_∂=φ_0]` 是三式的归纳，原文未写出。
+             (2) **`Δ(Δ − d) = m²` 确为 (2.43)**（取较大根），显式解 (2.44) `Δ = ½(d + √(d²+4m²))`，
+             p-form 版 (2.45)，BF 界 (2.47) `Δ ≥ d/2`；**AdS 半径设为 1**，故 `m²` 实为 `m²R²`。
+             (3) 自称强度是 "**ansatz**"（§2.3 标题与正文），且明写 "We will now attempt to
+             **make more precise the conjecture [13]**"（p.8）——与 GKP 不同，Witten 是明确的「精确化」定位。
+             (4) 原文用 **`SU(N)`** 并在 §2.6 论证对偶的不是 `U(N)`（与 Maldacena 原文的 `U(N)` 冲突）。
+             另：Witten p.4 逐字称 GKP 为 "**independent work** [36]"，图上应作两条独立推导。}
 }
 
 @misc{virasoro-lean-2025,
