@@ -39,6 +39,7 @@ For four momenta with `Σ kᵢ = 0` and `kᵢ² = -mᵢ²` (mostly-plus signatur
 `s = -(k₁+k₂)²`, `t = -(k₁+k₃)²`, `u = -(k₁+k₄)²` satisfy `s + t + u = Σ mᵢ²`.
 Specialised to four open-string tachyons, `α' mᵢ² = -1`, this gives `α'(s+t+u) = -4`,
 i.e. `α_c(s) + α_c(t) + α_c(u) = -1` for the Regge trajectory `α_c(x) = 1 + α' x`.
+For four closed-string tachyons, `α' mᵢ² = -4`, the same substitution gives `α'(s+t+u) = -16`.
 
 ## Status
 
@@ -209,6 +210,22 @@ theorem regge_intercept_sum_four_tachyons (B : LinearMap.BilinForm K M)
   have h := regge_trajectory_sum_four_tachyons B hB k m α 1 hk hmass htach
   rw [h]
   norm_num
+
+/-- **Four closed-string tachyons.**  The closed-string ground state has `α' mᵢ² = -4`
+(`conv.alpha-prime-regge`: the closed-string mass formula `α' m²/4 = N - a` with `N = Ñ = 0`
+and intercept `a = 1`, `conv.intercept-sign-a`), i.e. `α' kᵢ² = 4` in the mostly-plus
+convention.  Feeding it into the sum rule gives `α'(s + t + u) = -16`, the constraint behind
+the `s`-`t`-`u` structure of the Virasoro–Shapiro amplitude.  The proof is the open-string
+one with `-1` replaced by `-4`. -/
+theorem mandelstam_sum_four_closed_tachyons (B : LinearMap.BilinForm K M)
+    (hB : ∀ x y, B x y = B y x)
+    (k : Fin 4 → M) (m : Fin 4 → K) (α : K)
+    (hk : ∑ i, k i = 0)
+    (hmass : ∀ i, B (k i) (k i) = -(m i) ^ 2)
+    (htach : ∀ i, α * (m i) ^ 2 = -4) :
+    α * (mandelstamS B k + mandelstamT B k + mandelstamU B k) = -16 := by
+  rw [mandelstam_sum B hB k m hk hmass, Fin.sum_univ_four]
+  linear_combination htach 0 + htach 1 + htach 2 + htach 3
 
 end Mandelstam
 

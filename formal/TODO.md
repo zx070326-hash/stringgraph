@@ -50,6 +50,7 @@
   ⟹ `s + t + u = Σ mᵢ²`，其中 `s = -B(k₁+k₂, k₁+k₂)` 等（`mandelstamS/T/U`）。
   不需要非退化、不需要号差、不需要域、连 2 可逆都不需要——纯运动学。
   `mandelstam_sum_four_tachyons`：加 `α'mᵢ² = -1` 得 `α'(s+t+u) = -4`；
+  `mandelstam_sum_four_closed_tachyons`：加 `α'mᵢ² = -4`（闭弦基态，`α'kᵢ² = 4`）得 `α'(s+t+u) = -16`；
   `regge_trajectory_sum_four_tachyons`：`α_c(x) = a + α'x` 时 `Σα_c = 3a - 4`（截距留作参数）；
   `regge_intercept_sum_four_tachyons`：`a = 1` 时 `Σα_c = -1`。
   `mandelstam_sum_diagonal_metric`：`Fin D → K` 上对角度规 `η` 的具体版本（与 `DDF.dotVec` 同形，
