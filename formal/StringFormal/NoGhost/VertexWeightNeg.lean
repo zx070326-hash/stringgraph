@@ -40,6 +40,21 @@ import StringFormal.NoGhost.VertexWeight
   两个因子都是产生算子（非标量项），以及两条产生尾 `j ≤ m-1`、`j ≥ 1` 换元后只覆盖
   `l ≥ -m+1`，所以欧拉递推 `Fock.sum_mode_creaExp_eq_smul` 要减掉头 `-m` 项。
 
+* `Fock.vertexOsc_mode_of_ne` / `Fock.vertexOsc_apply_mode_one` /
+  `Fock.vertexOsc_apply_mode_mode_one` — `q ≠ 0` 时 `V_K α^μ_q = α^μ_q V_K - b^μ V_{K-q}`
+  （由 `Fock.mode_vertexOsc_sub` 得到；`q ≠ 0` 使零模参数无关），及其在真空上作用一次、
+  两次的展开。
+* `Fock.vertexOsc_apply_Lop_apply_one_of_neg` — **`m < 0` 时多出来的那一项** `V_J (L_m^{(a)}|k⟩)`
+  的显式表达式：
+
+  `V_J L_m |k⟩ = Σ_μ η^μ a^μ α^μ_m Φ_J + ½ Σ_{j=m+1}^{-1} Σ_μ η^μ α^μ_{m-j} α^μ_j Φ_J
+                 - Σ_{l=1}^{-m-1} Σ_μ η^μ b^μ α^μ_{-l} Φ_{J-m-l}
+                 - (a·b + ½(m+1) b·b) Φ_{J-m}`。
+
+  双产生中间段经过 `j ↦ m - j` 给出两个相等的单缩并求和（因此 `½` 被吃掉），双缩并的重数是
+  `#{m+1, …, -1} = -m-1`；出现的 `-(a·b + ½(m+1)(b·b))` 正好是共形权系数里除 `(J-m)` 之外的
+  全部，这是 `m < 0` 半的关键抵消。
+
 ## 尚缺
 
 * `lie_Lop_vertexOsc_of_neg` —— 一般态上的 `m < 0` 恒等式。
@@ -254,6 +269,143 @@ theorem Lop_apply_creaExp_of_neg (η a b : Fin D → R) (hη : ∀ μ, η μ * �
     smul_add, smul_smul, invTwo_mul_two, one_smul]
 
 end LopCreaExpNeg
+
+section VertexOnVacuum
+
+variable [Algebra ℚ R]
+
+/-- Moving `V_K` past a mode with **nonzero** index: for `q ≠ 0` the mode operator does not
+see the zero-mode parameter, so `Fock.mode_vertexOsc_sub` becomes the plain commutation
+relation `V_K α^μ_q = α^μ_q V_K - b^μ V_{K-q}`. -/
+lemma vertexOsc_mode_of_ne (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D)
+    {q : ℤ} (hq : q ≠ 0) (K : ℤ) (P : Fock D R) :
+    vertexOsc η b K (mode η a μ q P)
+      = mode η a μ q (vertexOsc η b K P) - b μ • vertexOsc η b (K - q) P := by
+  have hmode : mode η (a + b) μ q = mode η a μ q := by
+    rcases hq.lt_or_gt with h | h
+    · rw [mode_of_neg _ _ h, mode_of_neg _ _ h]
+    · rw [mode_of_pos _ _ h, mode_of_pos _ _ h]
+  have h := mode_vertexOsc_sub η a b hη μ q K P
+  rw [hmode] at h
+  rw [← h]
+  abel
+
+/-- `V_J` past a single mode on the vacuum: `V_J α^μ_q |k⟩ = α^μ_q Φ_J - b^μ Φ_{J-q}`. -/
+lemma vertexOsc_apply_mode_one (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D)
+    {q : ℤ} (hq : q ≠ 0) (J : ℤ) :
+    vertexOsc η b J (mode η a μ q (1 : Fock D R))
+      = mode η a μ q (creaExp η b J) - b μ • creaExp η b (J - q) := by
+  rw [vertexOsc_mode_of_ne η a b hη μ hq J, vertexOsc_apply_one, vertexOsc_apply_one]
+
+/-- `V_J` past two modes on the vacuum. -/
+lemma vertexOsc_apply_mode_mode_one (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D)
+    {p q : ℤ} (hp : p ≠ 0) (hq : q ≠ 0) (J : ℤ) :
+    vertexOsc η b J (mode η a μ q (mode η a μ p (1 : Fock D R)))
+      = mode η a μ q (mode η a μ p (creaExp η b J))
+        - b μ • mode η a μ q (creaExp η b (J - p))
+        - b μ • mode η a μ p (creaExp η b (J - q))
+        + (b μ * b μ) • creaExp η b (J - p - q) := by
+  rw [vertexOsc_mode_of_ne η a b hη μ hq J, vertexOsc_apply_mode_one η a b hη μ hp J,
+    vertexOsc_apply_mode_one η a b hη μ hp (J - q), map_sub, map_smul, smul_sub, smul_smul,
+    show J - q - p = J - p - q from by ring]
+  abel
+
+/-- **The vertex operator applied to `L_m |k⟩` for `m < 0`.**  This is the term that has no
+counterpart in the `m ≥ 1` half of the conformal-weight identity, where `L_m |k⟩ = 0`.
+
+Starting from the explicit `Fock.Lop_apply_one_of_neg` and commuting `V_J` through every
+creation operator (`Fock.vertexOsc_apply_mode_one`, `Fock.vertexOsc_apply_mode_mode_one`), the
+double-creation middle region produces, besides the expected `½ Σ_j :α_{m-j} · α_j: Φ_J`, two
+equal single-contraction sums (they are exchanged by `j ↦ m - j`) and a double contraction
+whose multiplicity is `#{m+1, …, -1} = -m-1`. -/
+theorem vertexOsc_apply_Lop_apply_one_of_neg (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : m < 0) (J : ℤ) :
+    vertexOsc η b J (Lop η a m (1 : Fock D R))
+      = (∑ μ : Fin D, (η μ * a μ) • mode η a μ m (creaExp η b J))
+        + invTwo R • (∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+            η μ • mode η a μ (m - j) (mode η a μ j (creaExp η b J)))
+        - (∑ l ∈ Finset.Ioo (0 : ℤ) (-m), ∑ μ : Fin D,
+            (η μ * b μ) • mode η a μ (-l) (creaExp η b (J - m - l)))
+        - ((∑ μ : Fin D, η μ * a μ * b μ)
+            + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+          • creaExp η b (J - m) := by
+  classical
+  -- the single-creation (zero-mode) part
+  have hQ : ∑ μ : Fin D, (η μ * a μ) • vertexOsc η b J (mode η a μ m (1 : Fock D R))
+      = (∑ μ : Fin D, (η μ * a μ) • mode η a μ m (creaExp η b J))
+        - (∑ μ : Fin D, η μ * a μ * b μ) • creaExp η b (J - m) := by
+    rw [Finset.sum_congr rfl fun μ _ => by
+      rw [vertexOsc_apply_mode_one η a b hη μ (show m ≠ 0 by omega) J, smul_sub, smul_smul],
+      Finset.sum_sub_distrib, ← Finset.sum_smul]
+  -- one term of the double-creation middle region
+  have hterm : ∀ j ∈ Finset.Ioo m 0,
+      (∑ μ : Fin D, η μ • vertexOsc η b J (mode η a μ (m - j) (mode η a μ j (1 : Fock D R))))
+        = (∑ μ : Fin D, η μ • mode η a μ (m - j) (mode η a μ j (creaExp η b J)))
+          - (∑ μ : Fin D, (η μ * b μ) • mode η a μ (m - j) (creaExp η b (J - j)))
+          - (∑ μ : Fin D, (η μ * b μ) • mode η a μ j (creaExp η b (J - (m - j))))
+          + (∑ μ : Fin D, η μ * b μ * b μ) • creaExp η b (J - m) := by
+    intro j hj
+    rw [Finset.mem_Ioo] at hj
+    rw [Finset.sum_congr rfl fun μ _ => by
+      rw [vertexOsc_apply_mode_mode_one η a b hη μ (show j ≠ 0 by omega)
+          (show m - j ≠ 0 by omega) J,
+        show J - j - (m - j) = J - m from by ring, smul_add, smul_sub, smul_sub, smul_smul,
+        smul_smul, smul_smul, ← mul_assoc],
+      Finset.sum_add_distrib, Finset.sum_sub_distrib, Finset.sum_sub_distrib,
+      ← Finset.sum_smul]
+  -- the two single-contraction sums are exchanged by `j ↦ m - j`
+  have hswap : ∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+        (η μ * b μ) • mode η a μ j (creaExp η b (J - (m - j)))
+      = ∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+          (η μ * b μ) • mode η a μ (m - j) (creaExp η b (J - j)) := by
+    refine Finset.sum_nbij' (i := fun j : ℤ => m - j) (j := fun j : ℤ => m - j) ?_ ?_ ?_ ?_ ?_
+    · intro j hj; rw [Finset.mem_Ioo] at hj ⊢; omega
+    · intro j hj; rw [Finset.mem_Ioo] at hj ⊢; omega
+    · intro j _; omega
+    · intro j _; omega
+    · intro j _
+      exact Finset.sum_congr rfl fun μ _ => by
+        rw [show m - (m - j) = j from by ring, show J - (m - j) = J - (m - j) from rfl]
+  -- reindex the remaining sum by `l = j - m`
+  have hreindex : ∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+        (η μ * b μ) • mode η a μ (m - j) (creaExp η b (J - j))
+      = ∑ l ∈ Finset.Ioo (0 : ℤ) (-m), ∑ μ : Fin D,
+          (η μ * b μ) • mode η a μ (-l) (creaExp η b (J - m - l)) := by
+    refine Finset.sum_nbij' (i := fun j : ℤ => j - m) (j := fun l : ℤ => l + m) ?_ ?_ ?_ ?_ ?_
+    · intro j hj; rw [Finset.mem_Ioo] at hj ⊢; omega
+    · intro l hl; rw [Finset.mem_Ioo] at hl ⊢; omega
+    · intro j _; omega
+    · intro l _; omega
+    · intro j hj
+      exact Finset.sum_congr rfl fun μ _ => by
+        rw [show -(j - m) = m - j from by ring, show J - m - (j - m) = J - j from by ring]
+  -- the multiplicity of the double contraction
+  have hcard : (((Finset.Ioo m 0).card : ℕ) : R) = -(m : R) - 1 := by
+    have h1 : (((Finset.Ioo m 0).card : ℕ) : ℤ) = -m - 1 := by
+      rw [Int.card_Ioo]; omega
+    have h2 := congrArg (fun z : ℤ => (z : R)) h1
+    push_cast at h2
+    exact h2
+  rw [Lop_apply_one_of_neg η a hm]
+  simp only [map_add, map_smul, map_sum]
+  rw [hQ, Finset.sum_congr rfl hterm, Finset.sum_add_distrib, Finset.sum_sub_distrib,
+    Finset.sum_sub_distrib, Finset.sum_const, ← Nat.cast_smul_eq_nsmul R, hcard, hswap, hreindex,
+    smul_smul]
+  have hhalf : invTwo R + invTwo R = 1 := by rw [← two_mul, two_mul_invTwo]
+  generalize (∑ μ : Fin D, (η μ * a μ) • mode η a μ m (creaExp η b J)) = P
+  generalize (∑ j ∈ Finset.Ioo m 0, ∑ μ : Fin D,
+      η μ • mode η a μ (m - j) (mode η a μ j (creaExp η b J))) = Mid
+  generalize (∑ l ∈ Finset.Ioo (0 : ℤ) (-m), ∑ μ : Fin D,
+      (η μ * b μ) • mode η a μ (-l) (creaExp η b (J - m - l))) = C
+  generalize creaExp η b (J - m) = Φ
+  generalize (∑ μ : Fin D, η μ * a μ * b μ) = A
+  generalize (∑ μ : Fin D, η μ * b μ * b μ) = B
+  -- the only non-`ring` fact needed is `½ + ½ = 1` (`Fock.invTwo_mul_two`)
+  match_scalars
+  all_goals (try ring1)
+  all_goals linear_combination (-1 : R) * two_mul_invTwo R
+
+end VertexOnVacuum
 
 end Fock
 
