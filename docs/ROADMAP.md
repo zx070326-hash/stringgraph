@@ -45,6 +45,7 @@
 - **c = D / Sugawara**：建"Fock 空间上的 Virasoro 生成元"定义节点 + "满足 Virasoro 关系、c = D"命题节点；命题配 `--via-ope`（physical-argument）与 `--via-mode-algebra`（严格代数事实，来源 Kac–Raina 1987 / Schottenloher 2008，定理编号核实后才标 rigorous）两条推导。
 - **`worldsheet.virasoro-algebra` 拆卡**：同意拆。待本批 curator 分支合并后由 lead 执行：新定义卡不含唯一性断言（可标 formalized），唯一性另立命题卡，旧卡 `superseded_by`。
 - **a < 1 分支**：researcher 第二轮检索（Thorn 1987、GSW §2.3.3、Polchinski §4.1 习题）。找不到成文来源就不入库。
+- **"初等可复核"能否标 rigorous**（reviewer-ch1 第 8 条）：可以，条件是前提完整 + 有限步初等计算 + reviewer 独立复核并在推导 `notes` 留 `reviewer-verified` 记录；写入 docs/STATUS_LEVELS.md。
 - **Polchinski 原书核对**：仍无持书者。E34 改由 Kac–Raina 等数学来源支撑，E53、E58 继续挂"二手源核实"gap。
 
 ## 待裁决（历史，2026-09-10 第一批 agent 提出；处理见上）
