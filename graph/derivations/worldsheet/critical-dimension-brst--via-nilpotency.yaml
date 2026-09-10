@@ -1,0 +1,30 @@
+id: worldsheet.critical-dimension-brst--via-nilpotency
+target: worldsheet.critical-dimension-brst
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，{Q_B, Q_B} 的模式计算，约 eq. (4.3.2)–(4.3.6)"
+    note: 公式号为近似定位。
+  - ref: fgz-1986
+    loc: "半无限上同调微分 d 的构造与 d^2 = 0 的中心荷条件（数学化处理）"
+    note: 未逐节核对分节编号。
+summary: |
+  {Q_B, Q_B} 的计算是模式代数中的有限代数计算：用 {b_m, c_n} = δ_{m+n,0} 与物质 Virasoro
+  [L^m_m, L^m_n] = (m-n)L^m_{m+n} + (c_m/12) m(m^2-1) δ_{m+n,0} 展开，
+  三次鬼场项与物质项的交叉贡献相消，只剩正比于总中心荷的项
+  {Q_B, Q_B} = Σ_m ((c_m - 26)/12)(m^3 - m) c_{-m} c_m。
+  由 c_{-m} c_m 的线性无关性得 Q_B^2 = 0 ⟺ c_m = 26。
+  等价地：Q_B^2 = 0 ⟺ 总 Virasoro L_n = L^m_n + L^g_n + a^g δ_{n,0} 无中心扩张。
+
+  标 rigorous 的理由：这是（物质 Virasoro ⊗ bc Clifford 代数）上的恒等式，不涉及路径积分、
+  正规化或渐近展开。在 L_0 分级、每级有限维的模上，Q_B 的模式和逐项有限，故所有重排合法。
+  半无限上同调文献（FGZ、Lian–Zuckerman）把它当作定理处理。
+gaps:
+  - "严格性依赖于把 Q_B 作用在 L_0 分级且每级有限维的模上（Fock 型模满足），使无穷模式和逐项有限；Polchinski 的表述是形式模式计算，未声明这一限制。"
+  - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构（Kato–Ogawa 定理），后者需另建节点。"
+author: curator-critdim
+created: "2026-09-10"

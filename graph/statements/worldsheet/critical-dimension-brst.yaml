@@ -1,0 +1,25 @@
+id: worldsheet.critical-dimension-brst
+kind: proposition
+title: BRST 荷幂零 Q_B^2 = 0 当且仅当 c_m = 26
+statement: |
+  设 Q_B 是 worldsheet.brst-quantization 定义的 BRST 荷（bc 系统权 λ = 2，
+  鬼场正规序常数 a^g = -1，物质中心荷 c_m）。则在物质 ⊗ 鬼场模上
+    Q_B^2 = (1/2) {Q_B, Q_B} = (1/2) Σ_{m∈Z} ((c_m - 26)/12) (m^3 - m) c_{-m} c_m
+  （整体常数因子依赖模归一化；(m^3 - m) 的形式来自把 a^g = -1 吸收进 L_0）。
+  由于诸 c_{-m} c_m 线性无关，
+    Q_B^2 = 0  ⟺  c_m = 26  ⟺  总中心荷 c_m + c_g = c_m - 26 = 0。
+  特别地，物质部门取 D 个自由玻色子 X^μ 时 c_m = D，故 Q_B^2 = 0 ⟺ D = 26。
+uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3，Q_B^2 的计算与结论 Q_B^2 = 0 ⟺ c_m = 26，约 eq. (4.3.2)–(4.3.6)"
+    note: 公式号为近似定位。
+  - ref: fgz-1986
+    loc: "半无限上同调微分 d 的构造；d^2 = 0 当且仅当中心荷为临界值 26"
+    note: 未逐节核对该 PNAS 短文的分节编号，故 loc 用描述而非节号。
+tags: [bosonic-string, critical-dimension, brst, nilpotency]
+notes: |
+  本节点只断言幂零条件，不断言 BRST 上同调等同于旧协变物理态空间
+  （那是 Kato–Ogawa / FGZ 层面的另一条命题，尚未建节点）。
+author: curator-critdim
+created: "2026-09-10"

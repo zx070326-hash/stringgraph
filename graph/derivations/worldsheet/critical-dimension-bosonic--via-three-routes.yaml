@@ -1,0 +1,28 @@
+id: worldsheet.critical-dimension-bosonic--via-three-routes
+target: worldsheet.critical-dimension-bosonic
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.critical-dimension-light-cone
+  - id: worldsheet.critical-dimension-old-covariant
+  - id: worldsheet.critical-dimension-brst
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3（光锥）、§4.3（BRST 幂零）、§4.4（无鬼定理的 BRST 版本）"
+  - ref: gsw-1987-v1
+    loc: "§2.3（光锥洛伦兹代数与无鬼定理）"
+summary: |
+  worldsheet.critical-dimension-bosonic 现在是汇总命题：它的陈述 (i)(ii)(iii) 恰好是
+  三个独立节点的合取——
+    (i)   worldsheet.critical-dimension-light-cone（光锥洛伦兹代数闭合）
+    (ii)  worldsheet.critical-dimension-old-covariant（零模态退耦、谱幺正）
+    (iii) worldsheet.critical-dimension-brst（Q_B^2 = 0 ⟺ c_m = 26）
+  本推导只做合取，不含新的物理输入，故其自身状态为 rigorous；
+  但有效状态由三条路线中最弱的一条决定，即光锥路线的 physical-argument。
+  这正是把旧的单节点拆开的目的：旧推导 --via-no-ghost 只证明了 (ii) 却让整个汇总节点
+  显示为 rigorous（见旧推导 gaps）。
+gaps:
+  - "本推导不主张三条路线互相蕴含。三者只是各自挑出同一组 (D, a) = (26, 1)；它们之间的严格等价（例如 BRST 相对上同调与旧协变 H_phys/H_0 的同构，Kato–Ogawa / FGZ）是独立命题，尚未建节点。"
+  - "汇总节点的陈述把开弦截距 a 与闭弦情形混在一起表述；细化时应按开/闭弦分别陈述。三个新节点中，(i) 明确写开弦，(ii)(iii) 与开闭弦无关。"
+author: curator-critdim
+created: "2026-09-10"
