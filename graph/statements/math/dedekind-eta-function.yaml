@@ -1,0 +1,43 @@
+id: math.dedekind-eta-function
+kind: definition
+status: rigorous
+title: Dedekind η 函数 η(τ) = q^{1/24} ∏_{n≥1}(1 − q^n)
+statement: |
+  设 H = { τ ∈ C : Im τ > 0 } 为上半平面，并约定
+    q ≡ exp(2πiτ) ,   q^{1/24} ≡ exp(2πiτ/24) = exp(πiτ/12)
+  （即 q 的 24 次根**按 τ 取定的单值分支**，不是多值符号）。定义 Dedekind η 函数
+    η(τ) = q^{1/24} ∏_{n=1}^{∞} ( 1 − q^n ) ,   τ ∈ H 。
+  由 |q| = exp(−2π Im τ) < 1 与 Σ_n |q|^n < ∞，无穷乘积在 H 的紧子集上绝对且一致收敛
+  （初等标准事实），故 η 在 H 上全纯，且因每个因子非零而 η 在 H 上无零点。
+
+  **本卡不断言什么**：不断言 η 的任何模变换性质（那是
+  math.dedekind-eta-modular-transformation）；不断言 η 与 θ 函数的关系
+  （Polchinski (7.2.43) 的第二个等号 η = [∂_v ϑ₁₁(0,τ)/(−2π)]^{1/3}，本图未建 θ 函数卡，
+  见 notes）；不涉及 η 作为权 1/2 模形式的一般理论。
+uses: []
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.10), p.210（η(τ) = q^{1/24}∏_{n=1}^∞(1−q^n)，原文逐字「is the Dedekind eta function」）；同一乘积在 §7.2 末 eq. (7.2.43), p.216 重述"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E9、#E16，等级 **L1（原书页图逐字，
+      Cambridge Books Online 数字化本 © 1998, 2005，即 2005 平装本，已含 2000 年 "with corrections"）**。
+      原书**没有**给出收敛性讨论，也没有点明 q^{1/24} 的分支选取；本卡把这两点补全（都是初等标准事实），
+      这是**定义卡层面的补全**，不改变任何断言。
+tags: [math, modular-forms, dedekind-eta, torus, partition-function]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E9/#E16 建立。
+
+  **为什么单独立一张定义卡**：η 在本图里是三处的共同承重件——(7.2.9) 自由标量配分函数、
+  (7.3.6) 环面真空振幅、(7.4.2) 开闭弦通道对偶——而这三处用到的**性质**（模变换）在原书零证明。
+  把「定义」与「模变换」分成两张卡，才能让前者保持 rigorous 而不被后者拖低。
+
+  **形式化候选**：抽取记录 §5-C 把 (7.2.44b) 列为本章优先级最高的 Lean 岛；本卡是它的前置定义。
+  Mathlib 是否已有 DedekindEta **本轮未核实**（留给 formalizer）。
+  本图已有的相关件：math.euler-partition-generating-function（∏(1−X^n) 的形式幂级数侧）。
+
+  **未建的相邻卡**：θ 函数一族（(7.2.31)–(7.2.42)）本批次不建——原书对其**全部性质零证明**
+  （周期性唯一确定、零点唯一性、Jacobi abstruse identity 均为断言），且 Möbius 带振幅只需
+  ϑ₀₀ 的一个特值；见抽取记录 #E15 与本批次报告的「未做条目」。
+author: curator-polchinski-ch7
+created: "2026-09-11"
