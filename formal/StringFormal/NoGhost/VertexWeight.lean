@@ -49,15 +49,28 @@ import StringFormal.NoGhost.DDF
 `Fock.nordPair_creaExp_of_neg_pos`、`Fock.nordPair_creaExp_zero_pos`、
 `Fock.sum_mode_creaExp_eq_smul`。
 
+* `Fock.lie_Lop_vertexOsc_of_pos` — **一般态上的共形权恒等式，`m ≥ 1`**：
+  `L_m^{(a+b)} ∘ V_J - V_J ∘ L_m^{(a)} = (J - m + a·b + ½ (m+1)(b·b)) • V_{J-m}`，
+  其中 `V_J = vertexOsc η b J`。证明：两边作为 `ℤ → Module.End` 的族满足**同一条**
+  产生模态递推（左边用 `Fock.lie_Lop_mode`（经 `Fock.Lop_apply_X_mul`）与
+  `Fock.mode_vertexOsc_sub`，右边只用 `Fock.mode_vertexOsc_sub`），且在真空上取值相同
+  （`Fock.Lop_apply_creaExp_of_pos_shifted` 与 `Fock.Lop_apply_one_of_pos`），
+  于是 `Fock.eq_zero_of_vertex_recursion` 给出相等。递推能对上的关键是系数对 `J` 是
+  **斜率 1 的仿射函数**：`c(J+l) = c(J) + l`，恰好抵消 `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}`
+  产生的 `l · V_{J+l-m}`。推论 `Fock.lie_Lop_vertexOsc_of_pos_isotropic`（`b·b = 0`）。
+* `lie_towerLop_towerVertex_of_pos` / `lie_towerLop_towerVertex_of_pos_normalized` —
+  DDF 动量塔上的同一恒等式。**塔上版本必须假设 `k_0² = 0`**（`dotVec η b b = 0`）：
+  第 `j` 级的系数是 `(K-n) - m + n(k_0·p) + (jn + ½(m+1)n²)(k_0²)`，含 `j`，
+  `k_0² ≠ 0` 时括号不是 `V^{(n)}_{K-m}` 的标量倍。归一化后 `⁅L_m, V^{(n)}_K⁆
+  = (K-m) • V^{(n)}_{K-m}`，即 `towerVertex` 是权 **0** 的准初级场（DDF 算子的权 1
+  来自 `∂X^i`，不属于 `towerVertex`）。
+
 ## 尚缺（本文件的最终目标尚未完成）
 
 * `m < 0`。这不只是"分段计算换个写法"：`m < 0` 时 `L_m^{(a)}|k⟩ ≠ 0`，所以真空上的等式
   **不再**形如 `L_m Φ_J = c · Φ_{J-m}`——共形权恒等式右边多出 `V_J L_m^{(a)}|k⟩` 一项，
   它是真正含产生算子的向量。要处理 `m < 0` 必须把 `vertexOsc`（而不只是 `creaExp`）
-  一起搬过来。本轮未做。
-* `[L_m, V_K]` 的共形权公式。上面只是**真空上**的作用；一般态上的对易子还要把
-  `NoGhost/VertexOperator.lean` 的 `vertexOsc`（湮灭半 `vertexAnn`）一起搬过来。
-* 因此本文件目前**不**支撑图上任何 `formalized` 的推导；以上都是将来共形权推导的中间步。
+  一起搬过来。本轮未做，故 `lie_Lop_vertexOsc_of_pos` 的 `0 < m` 假设无法直接去掉。
 -/
 
 namespace StringFormal.NoGhost
@@ -561,6 +574,189 @@ theorem Lop_zero_apply_creaExp (η a b : Fin D → R) (hη : ∀ μ, η μ * η 
 
 end LopCreaExp
 
+section LopVertexOsc
+
+variable [Algebra ℚ R]
+
+/-! ### The conformal-weight identity on a general state (`m ≥ 1`)
+
+Work in progress: statements are added one at a time, each with a complete proof.
+-/
+
+/-- Moving a creation operator past `L_m`: the pointwise form of `⁅L_m, α^μ_p⁆ = -p α^μ_{m+p}`
+at `p = -l`, namely `L_m (α^μ_{-l} Q) = α^μ_{-l} (L_m Q) + l α^μ_{m-l} Q`.  Here
+`α^μ_{-l} Q = X (μ, l) * Q` is multiplication by the corresponding Fock variable. -/
+lemma Lop_apply_X_mul (η a : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (m : ℤ) (v : Osc D)
+    (Q : Fock D R) :
+    Lop η a m (X v * Q)
+      = X v * Lop η a m Q + (((v.2 : ℕ) : R)) • mode η a v.1 (m - ((v.2 : ℕ) : ℤ)) Q := by
+  obtain ⟨μ, n⟩ := v
+  have hml : m + -(((n : ℕ)) : ℤ) = m - (((n : ℕ)) : ℤ) := by ring
+  have h := congrArg (fun T : Module.End R (Fock D R) => T Q)
+    (lie_Lop_mode η a hη m μ (-(((n : ℕ)) : ℤ)))
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply,
+    Module.End.mul_apply, LinearMap.smul_apply, mode_neg_pnat, creation_apply, Int.cast_neg,
+    neg_neg, Int.cast_natCast, hml] at h
+  rw [← h]
+  abel
+
+/-- **The conformal-weight identity on a general state, for `m ≥ 1`.**
+
+`L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b + ½ (m+1) (b·b)) V_{J-m}`,
+
+where `V_J = vertexOsc η b J` is the `z^J` Laurent coefficient of the oscillator part of
+`:e^{i c·X(z)}:`, the left Virasoro generator carries the shifted zero mode `a + b` and the
+right one the original zero mode `a` (the two-momentum bookkeeping of
+`Fock.mode_vertexOsc_sub`).
+
+Proof: both sides, as families of endomorphisms indexed by `J`, satisfy the *same*
+creation-mode recursion.  For the left side this uses `Fock.lie_Lop_mode` (through
+`Fock.Lop_apply_X_mul`) together with `Fock.mode_vertexOsc_sub`; for the right side only
+`Fock.mode_vertexOsc_sub`.  The coefficient is affine in `J` with slope `1`, which is exactly
+what compensates the `l · V_{J+l-m}` term produced by `⁅α^μ_{-l}, L_m⁆ = -l α^μ_{m-l}`.  On
+the vacuum the two sides agree by `Fock.Lop_apply_creaExp_of_pos_shifted` and
+`Fock.Lop_apply_one_of_pos`.  `Fock.eq_zero_of_vertex_recursion` then forces equality.
+
+The `m < 0` case is *not* of this shape and is not covered here (see the file header). -/
+theorem lie_Lop_vertexOsc_of_pos (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    {m : ℤ} (hm : 0 < m) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (J - m) := by
+  have hzero := eq_zero_of_vertex_recursion b
+    (fun K : ℤ => (Lop η (a + b) m ∘ₗ vertexOsc η b K - vertexOsc η b K ∘ₗ Lop η a m)
+      - (((K : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)
+          + invTwo R * ((m : R) + 1) * (∑ μ : Fin D, η μ * b μ * b μ))
+        • vertexOsc η b (K - m)) ?_ ?_ J
+  · rwa [sub_eq_zero] at hzero
+  · intro v K P
+    have hidx1 : K - m + ((v.2 : ℕ) : ℤ) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hidx2 : K - (m - ((v.2 : ℕ) : ℤ)) = K + ((v.2 : ℕ) : ℤ) - m := by ring
+    have hmv := mode_vertexOsc_sub η a b hη v.1 (m - ((v.2 : ℕ) : ℤ)) K P
+    rw [hidx2] at hmv
+    have hT2 : mode η (a + b) v.1 (m - ((v.2 : ℕ) : ℤ)) (vertexOsc η b K P)
+        = vertexOsc η b K (mode η a v.1 (m - ((v.2 : ℕ) : ℤ)) P)
+          + b v.1 • vertexOsc η b (K + ((v.2 : ℕ) : ℤ) - m) P := by
+      rw [← hmv]; abel
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply]
+    rw [vertexOsc_X_mul η b v K P, map_sub, map_smul,
+      Lop_apply_X_mul η (a + b) hη m v (vertexOsc η b K P),
+      Lop_apply_X_mul η a hη m v P, map_add, map_smul,
+      vertexOsc_X_mul η b v K (Lop η a m P),
+      vertexOsc_X_mul η b v (K - m) P, hT2, hidx1]
+    simp only [mul_sub, mul_add, mul_smul_comm]
+    push_cast
+    module
+  · intro K
+    simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply,
+      vertexOsc_apply_one]
+    rw [Lop_apply_one_of_pos η a hm, map_zero,
+      Lop_apply_creaExp_of_pos_shifted η a b hη hm K]
+    abel
+
+/-- **The isotropic (`b · b = 0`) case**, which is the DDF normalisation: the vertex operator
+is a weight-`1` primary, `L_m^{(a+b)} V_J - V_J L_m^{(a)} = (J - m + a·b) V_{J-m}` for `m ≥ 1`.
+
+The conformal weight of `:e^{i c·X}:` is `h = ½ (b · b) = α' k_0²`, so `k_0² = 0` is exactly
+what makes the `m`-quadratic term drop out and leaves the weight-`1` transformation law used
+by the DDF construction. -/
+theorem lie_Lop_vertexOsc_of_pos_isotropic (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hb : (∑ μ : Fin D, η μ * b μ * b μ) = 0) {m : ℤ} (hm : 0 < m) (J : ℤ) :
+    Lop η (a + b) m ∘ₗ vertexOsc η b J - vertexOsc η b J ∘ₗ Lop η a m
+      = (((J : R) - (m : R)) + (∑ μ : Fin D, η μ * a μ * b μ)) • vertexOsc η b (J - m) := by
+  rw [lie_Lop_vertexOsc_of_pos η a b hη hm J, hb]
+  congr 1
+  ring
+
+end LopVertexOsc
+
 end Fock
+
+/-! ### The conformal weight on the DDF momentum tower -/
+
+section TowerConformalWeight
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **The conformal-weight identity on the DDF momentum tower, for `m ≥ 1`.**
+
+`⁅L_m, V^{(n)}_K⁆ = (K - m - n + n (k_0 · p)) V^{(n)}_{K-m}`.
+
+Unlike `Fock.lie_Lop_vertexOsc_of_pos`, this needs the isotropy hypothesis `k_0² = 0`
+(`dotVec η b b = 0`) — **not** merely for convenience.  On rung `j` the single-Fock identity
+produces the coefficient
+
+`(K - n) - m + (a + j·b) · (n·b) + ½ (m+1) (n·b) · (n·b)`
+  `= (K - n) - m + n (b · a) + (j n + ½ (m+1) n²) (b · b)`,
+
+which depends on the rung index `j` unless `b · b = 0`.  So for `k_0² ≠ 0` the bracket
+`⁅L_m, V^{(n)}_K⁆` is *not* a scalar multiple of `V^{(n)}_{K-m}` as an operator on the whole
+tower: it is only rung-wise proportional, with a `j`-dependent factor.  The DDF normalisation
+`k_0² = 0` is what makes it an operator identity. -/
+theorem lie_towerLop_towerVertex_of_pos (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) {m : ℤ} (hm : 0 < m) (n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R) - (n : R) + (n : R) * dotVec η b a)
+        • towerVertex η b n (K - m) := by
+  have hbb' : (∑ μ : Fin D, η μ * b μ * b μ) = 0 := hbb
+  have h1 : ∀ j : ℤ, (∑ μ : Fin D,
+      η μ * towerMomentum a b j μ * vertexMomentum b n μ) = (n : R) * dotVec η b a := by
+    intro j
+    have hsplit : (∑ μ : Fin D, η μ * towerMomentum a b j μ * vertexMomentum b n μ)
+        = (n : R) * (∑ μ : Fin D, η μ * a μ * b μ)
+          + ((j : R) * (n : R)) * (∑ μ : Fin D, η μ * b μ * b μ) := by
+      rw [Finset.mul_sum, Finset.mul_sum, ← Finset.sum_add_distrib]
+      refine Finset.sum_congr rfl fun μ _ => ?_
+      simp only [towerMomentum_apply, vertexMomentum_apply]
+      ring
+    rw [hsplit, hbb', mul_zero, add_zero, dotVec_comm η b a]
+    rfl
+  have h2 : (∑ μ : Fin D, η μ * vertexMomentum b n μ * vertexMomentum b n μ) = 0 := by
+    have hsq : (∑ μ : Fin D, η μ * vertexMomentum b n μ * vertexMomentum b n μ)
+        = ((n : R) * (n : R)) * (∑ μ : Fin D, η μ * b μ * b μ) := by
+      rw [Finset.mul_sum]
+      refine Finset.sum_congr rfl fun μ _ => ?_
+      simp only [vertexMomentum_apply]
+      ring
+    rw [hsq, hbb', mul_zero]
+  have hidx : K - n - m = K - m - n := by ring
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    Module.End.mul_apply, towerVertex_single, towerLop_single, towerLop_single,
+    towerVertex_single, LinearMap.smul_apply, towerVertex_single, ← Finsupp.single_sub,
+    Finsupp.smul_single]
+  congr 1
+  have hmom : towerMomentum a b j + vertexMomentum b n = towerMomentum a b (j + n) := by
+    funext μ
+    simp only [Pi.add_apply, towerMomentum_apply, vertexMomentum_apply]
+    push_cast
+    ring
+  have hkey := congrArg (fun T : Module.End R (Fock D R) => T P)
+    (Fock.lie_Lop_vertexOsc_of_pos η (towerMomentum a b j) (vertexMomentum b n) hη hm (K - n))
+  simp only [LinearMap.sub_apply, LinearMap.comp_apply, LinearMap.smul_apply, hmom] at hkey
+  rw [hkey, h1 j, h2, hidx]
+  congr 1
+  push_cast
+  ring
+
+/-- **The DDF-normalised form**: with `k_0² = 0` and `2α' k_0 · p = 1`, the tower vertex
+operator `:e^{i n k_0·X}:` is a weight-`0` primary,
+`⁅L_m, V^{(n)}_K⁆ = (K - m) V^{(n)}_{K-m}` for `m ≥ 1`.
+
+Weight `0` (not `1`) is correct: the DDF operator `A^i_n = ∮ ∂X^i e^{i n k_0·X}` gets its
+weight `1` from the `∂X^i` factor, which is not part of `towerVertex`.  The two `n`-dependent
+contributions — the monodromy shift `z^{2α' n k_0·p} = z^n` built into `towerVertex` and the
+`n (k_0 · p)` term of `Fock.lie_Lop_vertexOsc_of_pos` — cancel exactly. -/
+theorem lie_towerLop_towerVertex_of_pos_normalized (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    {m : ℤ} (hm : 0 < m) (n K : ℤ) :
+    ⁅towerLop η a b m, towerVertex η b n K⁆
+      = ((K : R) - (m : R)) • towerVertex η b n (K - m) := by
+  rw [lie_towerLop_towerVertex_of_pos η a b hη hbb hm n K, hba]
+  congr 1
+  ring
+
+end TowerConformalWeight
 
 end StringFormal.NoGhost
