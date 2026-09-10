@@ -129,6 +129,22 @@ sources:
   - ref: gsw-1987-v1
     loc: "§2.3.2–2.3.3（教科书版本）"
     note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+  - ref: polchinski-1998-v1
+    loc: "§4.4 末，p.143（逐字）：「Eq. (4.4.19) defines an OCQ-physical state in each cohomology class. For the special case of flat spacetime this state can be constructed more explicitly by using the **Del Giudice–Di Vecchia–Fubini (DDF) operators**. To explain these we will need to develop some more vertex operator technology, **so this is deferred to chapter 8**.」；DDF 的正文在 §8.2，eq. (8.2.27), p.240"
+    note: |
+      【2026-09-11（五）新增，researcher 第六轮原书核实，curator 落实】
+      本条**只承担可追溯性**，不承载数学论证（原书把 DDF 的构造推迟到第 8 章，
+      §4.4 内部的证明不用 DDF）。它更正了本图先前的一处事实错误：
+      「Polchinski 本书从未把 DDF 与 §4.4 接起来」是**错的**——p.143 明写了这条连接。
+      因此凡以「本书没接」为理由标 `inferred` 的边都可以撤销该标记。
+      ⚠ **实际核查结果（curator 2026-09-11，逐条扫描全图所有 `inferred: true` 边的 note）：
+      本图中没有任何一条 inferred 边是以这个理由标的。** ddf-* 一带现存的 inferred 边，
+      其理由分别是「GSW 不逐条列出缩并步骤」「机制样板而非文献引用」
+      「桥接到尚不存在的顶点代数卡」「GT 原文不引 Kac 行列式」，与 Polchinski 的 §4.4/§8.2
+      连接**无关**，故**不撤销任何标记**。
+      worldsheet.no-ghost-theorem-v4 的 statement notes 里写「具体在 ddf-* 一带……已在报告中交 lead」
+      这句**指向为空**；本条即该核查的落地记录，供 auditor 与后续 agent 免于重复排查。
+      见 literature/extractions/polchinski-1998-v1.md §12.10 表 B 第 22 项与 §12.3。
 summary: |
   本推导与 worldsheet.no-ghost-theorem-v3--via-goddard-thorn（以及更早的 v2 版本）是同一个论证，
   只是目标陈述换成了 v4（第三轮审计 B1 的动量量词 + A1 的类光去心直线），论证强度不变
