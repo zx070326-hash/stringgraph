@@ -1113,3 +1113,73 @@
             不等于 Humphreys 原书的假设；(3) 这是第三方讲稿，权威性低于原书，只用于「内容是什么」，
             不用于「编号是什么」。见 extractions/math-sources.md §15.4。}
 }
+
+% ---------------------------------------------------------------------------
+% PBW 的「任意李代数 / 任意基环」来源（researcher 2026-09-11 第四轮登记；
+% 抽取记录见 extractions/math-sources.md §33。用途：撤 math.pbw-theorem 下游那条 inferred 边）
+% ---------------------------------------------------------------------------
+
+@misc{lakos-2024-pbw,
+  author        = {Lakos, Gyula},
+  title         = {Some proofs of the {P}oincar\'e--{B}irkhoff--{W}itt theorem and related matters},
+  year          = {2024},
+  eprint        = {1812.04896},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.RA},
+  note          = {由 researcher 于 2026-09-11 登记。**v2（2024-07-23）全文可取，本轮 L1 逐页读了 p.1-6 与 p.16-22（含全部参考文献）**：
+                   arxiv.org/pdf/1812.04896 落盘 301.4 KB 后用 Read 带 pages 读图（PDF 页 = 论文页，共 22 页）。
+                   Alfred Renyi Institute of Mathematics（文末 Email address: lakos@renyi.hu）。
+                   **⚠ 版本陷阱，必须写死 v2**：v2 的 comments 逐字为「22 pages, **Part 3 of original submission
+                   arXiv:1812.04896v1, rewritten**」，v1（2018-12-12）是另一份更长稿件的一部分，**编号几乎肯定不同**。
+                   **⚠ 未发表**：abs 页无 journal-ref，只有 arXiv 自发 DOI 10.48550/arXiv.1812.04896（读取日期 2026-09-11）；
+                   自称 expository paper。MSC: Primary 17B35; Secondary 17B01, 16S30。
+                   **本条目在本项目里承担的用途只有一个，但很关键：它是目前唯一一条
+                   「带编号 + 前提逐字 + 对任意（含无限维）李代数与任意幺交换环成立 + 全文可读」的 PBW 来源，
+                   用来撤销 math.verma-module-free-over-negative-part--via-pbw-theorem 那条因「适用范围」而挂的 inferred。**
+                   **可引用的编号结果**：**Proposition 6.1（书上 p.16）逐字：「The PBW theorem holds if 𝔤 is a free K-module.」**
+                   （带完整证明，跨 p.16-17，走 Magnus-Witt 路线；Magnus-Witt 定理是本篇的 Theorem 1.5/1.6/1.7, p.5）。
+                   **第二条独立证明**：Appendix A「The Witt-Lazard proof of the global PBW theorems」的
+                   **Corollary A.4(f)（书上 p.20）**「⊗𝔤 = ⊗_η𝔤 ⊕ J𝔤」，其后正文逐字「In particular, we find the
+                   statement of the PBW theorem in (f).」，并在同页 (III) 段逐字说明「in case (i), ⊗_η𝔤 = ⊗_≤𝔤」。
+                   **⚠ 引用限制 1：Prop 6.1 的主语「the PBW theorem」是在 Introduction 里定义的，loc 必须同时指 p.1-2。**
+                   那里的逐字前提是「Assume that **K is a unital commutative ring**, and 𝔤 is a K-module with a compatible
+                   Lie-ring structure; i. e. 𝔤 is a Lie K-algebra (also called: Lie ring over K)」——**全文无任何有限维假设**；
+                   局部形式 = 「the maps 𝒎^{(n)} : ⊙^n𝔤 → 𝒰^n𝔤/𝒰^{n-1}𝔤 are isomorphisms」（= 图节点的分次形式）；
+                   全局形式 (i)（p.2）= 「𝒎_≤ : ⊗_≤𝔤 → 𝒰𝔤 (a restriction of 𝒎) is an isomorphism of K-modules」，
+                   其中基 {g_α : α ∈ A} 的**索引集 A 任意**、只要求给一个序 ≤（= 图节点的有序单项式基）；
+                   同页逐字给出两者等价：「its injectivity is equivalent to the local version of PBW theorem」。
+                   **⚠ 引用限制 2：不得把基环放宽到任意交换环。** 本篇 p.2 逐字列出成立的情形
+                   (i) K 是域 / 𝔤 自由 / 𝔤 是循环模的直和；(i') K 是 PID 或 Dedekind 环；(ii) ℚ ⊂ K；(ii') …，
+                   并逐字写「**But there are counterexamples** (see Sirsov [39], Cartier [8], Cohn [11])」。
+                   **⚠ 引用限制 3：这是未发表的 expository preprint，权威性低于教科书。**
+                   建议与 humphreys-1972 **并列**使用（教科书给权威与完整证明，本篇给适用范围），不要取代它。
+                   记号对照：本篇 𝒰𝔤 / ⊙^n𝔤 / ⊗_≤𝔤 / J𝔤 ↔ 图节点 U(L) / S(L) 的 n 次分量 / 有序单项式张成 / 关系理想。
+                   见 extractions/math-sources.md §33.2。}
+}
+
+@misc{garrett-2011-pbw,
+  author = {Garrett, Paul},
+  title  = {{P}oincar\'e--{B}irkhoff--{W}itt theorem},
+  year   = {2011},
+  note   = {由 researcher 于 2026-09-11 登记。公开讲稿（日期页眉逐字「April 8, 2011」），**全文已核实（L1，4 页逐页读毕）**：
+            https://www-users.cse.umn.edu/~garrett/m/algebra/pbw.pdf （WebFetch 落盘 93.7 KB 后 Read）。
+            **用途与 swanson-2015-pbw 相同，且受同一条裁决约束（lead 2026-09-11：个人笔记只作核对源，不进 sources[]）。**
+            它的价值在于**「无限维适用性」的第三条旁证**（前两条是 ardizzoni-2010 与 swanson-2015-pbw）：
+            该讲稿的定理**带编号且不限维数**——「**[0.0.1] Theorem**: For any basis {x_i : i in I} of a Lie algebra g
+            with *ordered* index set I, the monomials x_{i_1}^{e_1} ... x_{i_n}^{e_n} (with i_1 < ... < i_n, and integers
+            e_i > 0) form a *basis* for the enveloping algebra Ug.」「**[0.0.2] Corollary**: The natural map of a Lie algebra
+            to its universal enveloping algebra is an *injection*.」
+            p.1 逐字「The following argument does not use any further properties of the Lie algebra g, so *must* be general.」
+            p.2 逐字「The hard part of the argument is basically from Jacobson, and applies to **not-necessarily
+            finite-dimensional** Lie algebras over arbitrary fields of characteristic 0. The assumption of characteristic 0
+            is not directly used; rather, the proper definition of Lie algebra in positive characteristic includes further
+            conditions, which we ignore.」
+            另 p.1 逐字给出四条书目（可作为找一手书的地图）：N. Bourbaki, Groupes et algebres de Lie, Chap. 1,
+            Paris: Hermann, 1960；N. Jacobson, Lie Algebras, Dover, 1962；J. Humphreys, GTM 9, 1972；
+            V.S. Varadarajan, Lie Groups, Lie Algebras, and their Representations, Springer, 1974/1984；
+            并逐字说「a somewhat different argument is given in Bourbaki, and by Humphreys」。
+            **⚠ 三条使用限制**：(1) 编号 [0.0.1]/[0.0.2] 是本讲稿自己的编号，**不是任何教科书的编号，不可搬运**；
+            (2) 「char 0」是讲者自己的设定，而图节点没有特征限制——**不要把这条限制反向读进图**；
+            (3) 个人讲稿，权威性低于 lakos-2024-pbw 与教科书，只用于「无限维也成立」这一点的旁证。
+            见 extractions/math-sources.md §33.5。}
+}
