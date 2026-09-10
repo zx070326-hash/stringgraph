@@ -440,7 +440,172 @@
              **模式约定陷阱**：(2.31) `Y(psi,z) = sum_n psi_n z^{-n-1}` 与 (2.47) 的按权移位展开 `sum_n psi_(n) z^{-n-Delta}` 是两套，
              由 (2.48) `psi_n = psi_(n+1-Delta_psi)` 换算；**(2.57) 里的 psi_m 是 (2.31) 型**，混用会差一个移位。
              **未核实（L0）**：参考文献 [26]（无鬼定理）与 [27] 的具体身份（参考文献页未读），**不得代写**；第 4 章与附录 A 未读。
-             见 extractions/gsw-1987-v1.md §4。}
+             **★ 2026-09-11 第二轮 researcher 补充（L1，读 pp. 573-586, 620-622）——原「未核实（L0）」两条已结案：**
+             **[26] = Goddard, P., Thorne, C. B.: Compatibility of the dual Pomeron with unitarity and the absence of ghosts
+             in the dual resonance model. Phys. Lett. 40 B, 235-238 (1972)**（**刊上把 Thorn 误印为「Thorne」**）；
+             **[27] = Green, M. B., Schwarz, J. H., Witten, E.: Superstring Theory, Vols. 1&2. Cambridge University Press, 1988**。
+             无鬼定理在 p.573 被引作 **[26, 8, 41]**（[8] = Brower 1972 Phys. Rev. D6 1655；[41] = Scherk 1975 Rev. Mod. Phys. 47 123）。
+             **§2 的自引已钉死**：公理定义取自 **[15] = Frenkel-Huang-Lepowsky, Memoirs AMS 104, no. 594 (1993)**，
+             记号取自 **[21] = Goddard, "Meromorphic conformal field theory", in Kac (ed.), Infinite Dimensional Lie Algebras
+             and Groups (CIRM Luminy 1988), Adv. Ser. Math. Phys. 7, World Scientific 1989, pp. 556-587**，
+             入门叙述跟随 **[19] = Gebert, Int. J. Mod. Phys. A8 (1993) 5441-5503**，详尽处理指向 **[17] = FLM 1988**；
+             「vertex algebra 这一语言」归给 **[6] Borcherds 1986 + [17] FLM + [19] Gebert** 三家并列。
+             **★★ p.583 §2.2 的号差判据（L1 逐字，本项目核心）**：「Associated with each **nondegenerate even lattice** Lambda
+             is a **vertex algebra** (F, V, 1, omega). **If in addition Lambda is positive definite** then it has the structure of a
+             **vertex operator algebra**.」——引出句为「a class of vertex algebras is provided by the following result (**see [6, 17]**)」，
+             **无编号，是对 Borcherds/FLM 的转述**。p.579 逐字给出 VOA 的两条附加公理：L_(0) 谱下有界 + L_(0) 本征空间有限维。
+             **p.584-586 的洛伦兹构造（L1）**：(2.68) `[alpha^mu_m, alpha^nu_n] = m eta^{mu nu} delta_{m+n,0}`（**不定 eta 出现处**）；
+             (2.74) `h-hat := {r(m)}` 称 "the d-fold Heisenberg algebra"；**(2.90) `F := S(h-hat^-) tensor R{Lambda}`**；
+             (2.97) Fubini-Veneziano 场；(2.98) `V(e^r,z) = :e^{i r.Q(z)}: c_r`。
+             **p.585 逐字警告**：「we **must replace the group algebra R[Lambda]** by something more delicate in order to adjust
+             the signs in the Jacobi identity」——**朴素的「tensor C[L]」是错的，须用扭群代数**。
+             见 extractions/gsw-1987-v1.md §4 与 extractions/math-sources.md §36.4、§36.5、§37.3。}
+}
+
+@article{borcherds-1986,
+  author  = {Borcherds, Richard E.},
+  title   = {Vertex algebras, {Kac--Moody} algebras, and the {Monster}},
+  journal = {Proceedings of the National Academy of Sciences USA},
+  volume  = {83},
+  number  = {10},
+  pages   = {3068--3071},
+  year    = {1986},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（L1，逐页读图）**。
+             获取途径：**作者本人主页重排本 `https://math.berkeley.edu/~reb/papers/va/va.pdf`（112 KB）**，
+             WebFetch 落盘后 Read 带 pages 读图。标题页自印「Proc Natl. Acad. Sci. USA Vol. 83, pp 3068-3071」，
+             「Communicated by Walter Feit, December 13, 1985」。
+             **⚠ 引用陷阱 1：这是作者重排的 TeX 版，页码为 1,2,3,4,5...，与期刊 3068-3071 不对应。`loc:` 必须写节号，不要写页码。**
+             **⚠ 引用陷阱 2：全文没有任何编号的 Theorem / Proposition / Definition，也没有编号公式。**
+             公理以罗马数字 (i)-(v) 列在 Section 4 内。**图里不得写「Borcherds 1986, Theorem X」——不存在。**
+             节标题：1. Introduction / **2. Construction of the Fock space V** / 3. Vertex Operators /
+             **4. Vertex Algebras** / **5. The Virasoro Algebra**。
+             **★★ 号差假设（L1 逐字）**：Section 2「**For any even lattice** R there is a central extension ...」；
+             Section 4「**For any even lattice** R the operators u_n on V satisfy the following relations.」
+             ——**「V(R) 是顶点代数」对号差零假设：even 即可，允许不定号差、允许退化（singular）。**
+             **★★ Section 5 才要求非退化**：「**We assume that R is nonsingular**」，随后
+             `[L_i, L_j] = (i-j)L_{i+j} + (i^3-i) dim(R) delta_{i,-j}/12`（故中心荷 c = dim R，**此句是读者读数，非原文明写**）；
+             并明写「if R is a (possibly singular) lattice contained in a nonsingular lattice S ... **the operator L_i
+             can be defined on the vertex algebra V of R even when R is singular**」，**但只对 i >= -1**。
+             **★★ Section 5 末明确出现洛伦兹格与无鬼定理（L1 逐字）**：「If R is the 18-dimensional even unimodular
+             **Lorentzian lattice II_{17,1}** ...」；「**Frenkel used the no-ghost theorem to prove this stronger upper bound
+             when R is 26 dimensional and Lorentzian.**」
+             **Section 4 的公理 (i)-(v)**：(i) u_n(w)=0 for n large；(ii) 1_n(w)=0 if n != -1, w if n = -1；
+             (iii) u_n(1) = D^{(-n-1)}(u)；(iv) `u_n(v) = sum_{i>=0} (-1)^{i+n+1} D^{(i)}(v_{n+i}(u))`（斜对称）；
+             **(v) `(u_m(v))_n(w) = sum_{i>=0} (-1)^i C(m,i)( u_{m-i}(v_{n+i}(w)) - (-1)^m v_{m+n-i}(u_i(w)) )`**。
+             **⚠ 引用陷阱 3：(v) 是 Borcherds 恒等式的「迭代/结合律」形式，NOT 对易子公式
+             `[a_(m), b_(n)] = sum_k C(m,k)(a_(k)b)_(m+n-k)`。**从 (v) 推对易子公式是一步真实推导，原文没写；
+             若卡 (B) 引本文必须标 `inferred: true`，或改引 gebert-nicolai-1995 (2.38)。
+             模的定义（Section 4 逐字）：「A module over a vertex algebra V is a module W with operators u_n on W
+             satisfying relations i-v above for u,v in V, w in W.」——同样对号差零假设。
+             **未核实（L0）**：重排本与 PNAS 印本是否逐字一致（可用 PMC 扫描件复核）。
+             见 extractions/math-sources.md §36.2、§37.2。}
+}
+
+@misc{li-wang-2008,
+  author        = {Li, Haisheng and Wang, Qing},
+  title         = {On vertex algebras and their modules associated with even lattices},
+  year          = {2008},
+  eprint        = {0802.0173},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.QA},
+  note    = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1，读 pp. 1-3, 10-20）**。
+             获取：`https://arxiv.org/pdf/0802.0173` 落盘 246.9 KB 后 Read 带 pages 读图。
+             版本戳（p.1 侧栏 L1）：**arXiv:0802.0173v1 [math.QA] 1 Feb 2008**。**PDF 页 = 文章页**（无偏移）。
+             作者单位 Rutgers University, Camden。
+             **★★ 本条是本项目「不定号差 / 类光方向」问题的最佳带编号数学来源。**
+             **假设（p.12 L1 逐字）**：「For the rest of this section, we assume that **L is an additive subgroup of h**
+             such that **(3.5) `<alpha,alpha> in 2Z` for alpha in L**」+ 2-上循环条件 (3.6)(3.7)(3.8)。
+             **没有非退化、没有正定、没有有限秩**（有限秩只在 Remark 3.4 作额外假设）。
+             **★ Theorem 3.6（p.13）**：U 是满足 Condition C_L（**Definition 3.5**）的 level-1 h-hat 模 =>
+             `(V_{(h,L)}, Y, e^0 tensor 1)` **carries the structure of a vertex algebra** with M(1) as a vertex subalgebra，
+             且 `(V_{(h,L)}(U), Y_W)` **carries the structure of a V_{(h,L)}-module**；U 不可约则 V_{(h,L)}(U) 不可约。
+             证明自陈路线：「Next, we show that **the Jacobi identity** holds.」（完整证明，非引用他处）。
+             **★ 动量塔**：**(3.17) `L^o = {lambda in h | <alpha,lambda> in Z for all alpha in L}`**；
+             **Proposition 3.9**（不可约 h-hat 模 = M(1,lambda,U_1)，lambda in L^o）；
+             **Theorem 3.10**（u(0) 半单作用的不可约 V_{(h,L)}-模 = V_{(h,L)}(lambda,U_1)）；
+             **Proposition 3.11**（同构 <=> lambda_1 + L = lambda_2 + L 且 U_1 iso U_2）。
+             **★★ 第 4 节标题就是类光条件（p.20 L1 逐字）**：「**4. A characterization of vertex algebras V_{(h,L)} with
+             `<.,.>|_L = 0`**」，设定为「Let **h** be a finite-dimensional vector space equipped with a **nondegenerate
+             symmetric bilinear form** `<.,.>` and let **L subset h a free abelian group with `<alpha,beta> = 0`
+             for alpha, beta in L**」。**取 L = Z k_0、k_0 类光即逐字命中卡 (A)。**
+             **对经典情形的定性（p.1-2 L1 逐字）**：「Let L be any **nondegenerate** even lattice ... Associated to L there
+             exists a canonical vertex algebra V_L (**[Bo], [FLM]**)」；「For the vertex algebra V_L with L a **nondegenerate**
+             even lattice, irreducible modules have been constructed before in **[FLM]** and **[LL]**」。
+             **⚠ 号差 vs 退化（researcher 的辨析，非原文）**：本文与 FLM/Kac/LL 都在 **C 上**做，h 只要求非退化对称；
+             **C 上号差不是不变量** => 「不定号差」在顶点代数结构层面根本不出现，真正不定的是 Borcherds Section 2 (v)
+             的那个内积。故卡 (A) 的「是顶点代数」不需要任何号差假设。
+             **Heisenberg 侧（p.10 L1 逐字）**：`V_h-hat(l,0)` 有唯一顶点代数结构，非零 l 时是**中心荷 c = dim h** 的 VOA，
+             共形向量 `omega = (1/2l) sum_r h^{(r)}(-1)h^{(r)}(-1)1`（h 的**正交基**）；模 <=> level-l 的 restricted h-hat 模；
+             **但这三句全写作「It is well known (cf. [LL])」，不给 LL 定理号 => 对 LL 是 L0。**
+             **转引的 FLM 编号（对 FLM 而言是 L3）**：[FLM] **Theorem 1.7.3**（Heisenberg 完全可约，p.2）、
+             **Section 1.7**（p.3）、**Proposition 4.1.1**（`[h(n), E^∓(alpha,x)]`，p.18）、**Chapter 5**（2-上循环同调，p.15）。
+             另点名第三条构造路线 **[FKRW] + [MP]**（p.12）。
+             见 extractions/math-sources.md §36.1、§36.3。}
+}
+
+@misc{bakalov-kac-2004,
+  author        = {Bakalov, Bojko and Kac, Victor G.},
+  title         = {Twisted modules over lattice vertex algebras},
+  year          = {2004},
+  eprint        = {math/0402315},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.QA},
+  note    = {由 researcher 于 2026-09-11 登记。**相关章节全文已核实（L1，读 pp. 3-5, 8-12）**。
+             获取：`https://arxiv.org/pdf/math/0402315` 落盘 213 KB 后 Read 带 pages 读图。**PDF 页 = 文章页**。
+             出版版：*Lie Theory and Its Applications in Physics V*, World Scientific, 2004, pp. 3-26（L2）。
+             **本条的价值：Kac 本人是作者，且 §4.1 开头逐字写「For more details, see [13]」（[13] = Kac 的书），
+             所以这是「Kac 书第 5 章格点顶点代数」内容的作者背书版，且公开可取。
+             ⚠ 但它引 [13] 时只给裸引用，不给任何章节号/定理号 => 无法用它来核实 Kac 书的编号。**
+             **(2.19) = Borcherds identity**（逐字「The most important property of a vertex algebra V is the following
+             *Borcherds identity* (which along with the vacuum axioms provides **an equivalent definition** of a vertex algebra)」），
+             以 `Res_{z-w} Y(Y(a,z-w)b,w) i_{w,z-w}F(z,w) = Res_z Y(a,z)Y(b,w) i_{z,w}F(z,w) - Res_z Y(b,w)Y(a,z) i_{w,z}F(z,w)`
+             形式给出，「for any a,b in V and **any rational function F(z,w) with poles only at z=0, w=0 or z=w**」。
+             **(2.20)** 取 `F = (z-w)^n delta(u-z)` 的推论；**(2.21) = commutator formula（场版，带 delta 函数）**
+             `[Y(a,u), Y(b,w)] = sum_{m>=0} Y(a_{(m)}b, w) partial_w^{(m)} delta(u-w)`；**(2.22)** `Y(a,w)_{(n)}Y(b,w) = Y(a_{(n)}b,w)`。
+             **⚠ (2.21) 是场版，不是任务要的模式版 `[a_(m),b_(n)] = sum_k C(m,k)(a_(k)b)_(m+n-k)`。模式版本文未写。**
+             （扭转版模式展开见 **Remark 3.1 的 (3.7)**，取 sigma = 1 可退化，但需读者自己做这一步。）
+             **★★ Theorem 4.1（p.9 L1 逐字）**：「The fields Y(ht^{-1},z) = h(z) (h in h), of parity 0, and Y(e^alpha,z) = Y_alpha(z)
+             (alpha in Q), of parity p(e^alpha) = |alpha|^2 mod 2Z, **generate a vertex algebra structure on
+             V_Q = S tensor C_eps[Q]** with the vacuum vector |0> = 1 tensor 1 and the operator T defined by (4.15).
+             **This vertex algebra is conformal of rank l = rank Q** with the conformal vector (4.16) ... where {a^i},{b^i}
+             are **dual bases** of h.」
+             **假设（p.8 L1 逐字）：只有「Let Q be an integral lattice of rank l」。没有 even（用 Z_2 分次 (4.8)/(4.9) 处理，
+             一般得顶点超代数；Q 偶则宇称全 0，得普通顶点代数）、没有 positive definite、没有明写 nondegenerate
+             （但 (4.16) 的「dual bases of h」隐含非退化）。**
+             **★★★ 红旗（researcher 核对，非原文自述）：Theorem 4.1 的「conformal of rank l」与本文
+             **Definition 2.2(iii)**「The operator L_0 is diagonalizable with a **non-negative spectrum**」+(2.24)「V = ⊕_{Delta>=0} V(Delta)」
+             在 Q 不定号差时不相容（e^alpha 上 L_0 本征值 = |alpha|^2/2，Q 不定则谱不下有界）。
+             => **图里只可引 Theorem 4.1 的前半句「generate a vertex algebra structure on V_Q」，
+             不得连「conformal of rank l」一起引。** 与 gebert-nicolai-1995 p.583 的划分（非退化偶 => VA；再正定 => VOA）
+             对照可知：GN 的划分是对的，Bakalov-Kac 这句是松的。
+             其余可用编号：**Definition 2.1**（顶点代数）、(2.13)(2.14)(2.15)(2.16)(2.17)(2.18)、
+             **Definition 2.2**（conformal）、**Definition 3.1/3.2**（sigma-扭转模）、(3.6) 扭转 Borcherds 恒等式、
+             (4.1)-(4.4) 上循环与 Heisenberg current algebra、**Proposition 4.1**、**Lemma 4.1/4.2/4.3**。
+             见 extractions/math-sources.md §37.4。}
+}
+
+@book{flm-1988,
+  author    = {Frenkel, Igor B. and Lepowsky, James and Meurman, Arne},
+  title     = {Vertex Operator Algebras and the Monster},
+  series    = {Pure and Applied Mathematics},
+  volume    = {134},
+  publisher = {Academic Press},
+  address   = {Boston / San Diego, CA},
+  year      = {1988},
+  note    = {由 researcher 于 2026-09-11 登记。**⚠⚠ 原书本轮完全未获取——本条目的书目数据是 L1，内容全部是 L3。**
+             书目数据来自三份**互相独立**的参考文献表逐字读图，三者一致：
+             gebert-nicolai-1995 参考文献 [17]（刊 p.621）、li-wang-2008 参考文献 [FLM]、以及 li-wang-2008 正文引用。
+             （地址一处印「San Diego, CA」一处印「Boston」，出版社与卷号一致。）
+             **他人转引的编号（全部 L3，未经原书核实，图里引用必须标明来源是转引方）**：
+             **Theorem 1.7.3**（Heisenberg 代数固定非零 level 下只有一个不可约模、完全可约）——转引自 li-wang-2008 p.2；
+             **Section 1.7**（同上主题）——li-wang-2008 p.3；
+             **Proposition 4.1.1**（`[h(n), E^∓(alpha,x)]` 对易关系）——li-wang-2008 p.18；
+             **Chapter 5**（L 上满足给定条件的 2-上循环全部同调）——li-wang-2008 p.15。
+             **★ 号差问题上 FLM 被两方独立定性为「非退化」设定**：li-wang-2008 p.1-2 把 [FLM] 归入 nondegenerate even lattice；
+             gebert-nicolai-1995 p.583 把「非退化偶格 => 顶点代数；再正定 => 顶点算子代数」这条结果归给 **[6, 17] = Borcherds + FLM**。
+             **任务书假设的「FLM §8.4-8.6 Thm 8.x 处理一般非退化偶格含洛伦兹」本轮未能核实（L0），
+             连 §8 的标题都没拿到。图里不得写「FLM, Theorem 8.x」。**
+             见 extractions/math-sources.md §36.3(f)、§36.5、§38.2。}
 }
 
 @misc{tomassini-2008,
