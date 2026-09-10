@@ -14,7 +14,7 @@
 | 0 | `refuted` | 已反驳 | 存在被接受的反例 |
 
 不参与传播的类型：
-- `definition`：定义，不需要论证。有效状态等同于其依赖的最低等级。
+- `definition`：定义，不需要论证。自身 `status` 表示该定义卡本身的地位（`formalized` = 有 Lean 声明逐句对应；`rigorous` = 数学上精确但未形式化；`physical-argument` = 依赖路径积分等未定义对象），有效状态 = min(自身 status, 依赖的最低等级)。一张 `rigorous` 的定义卡会把依赖它的 `formalized` 命题压到 `rigorous`——这是有意的：Lean 证明用的对象若与卡片定义不逐句一致（如缺质量壳条件），命题就不该显示为 formalized；正确做法是拆卡，让 Lean 对应的那一半成为 formalized 定义卡。
 - `convention`：约定（号差、归一化）。永远不降级任何东西。
 - `axiom`：本项目明确接受为出发点的假设（如"存在自洽的二维 CFT"）。有效状态记为 `assumed`，并在报告中单列。
 
