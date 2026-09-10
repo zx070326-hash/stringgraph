@@ -1,0 +1,58 @@
+id: worldsheet.modular-invariance-requires-eight-transverse-fermions--via-theta-transformations
+target: worldsheet.modular-invariance-requires-eight-transverse-fermions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给扇区参数（(10.7.4) 的 α = 1 − 2ν 就是它的重写）。
+  - id: worldsheet.rns-fermion-number-operator
+    note: 供给 exp(πiF) 的插入，即迹 Z^α_β 中的 β 标号。
+  - id: worldsheet.superstring-sector-labels
+    note: 供给 (α, F) 标号与 NS±/R± 的字典，(10.7.8a–d) 的四个迹按此标号。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: |
+      供给迹中 q^H 里 H 的模式形式（L_0 的振子表达式）。
+      ⚠ **刻意不依赖 worldsheet.open-superstring-mass-shell**：那张卡把 D = 10 写进前提，
+      而 D = 10 的汇总卡 worldsheet.critical-dimension-superstring 又把本卡列为 (III)，
+      挂那条边会成环。本卡的结论是「横向费米子数 ≡ 0 mod 8」，
+      **不预设 D 的取值**，故只需要 H 的模式形式，不需要 D = 10 的质量壳。
+      (10.7.2) 的 m² = 4H^⊥/α' 只是记号。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.4)–(10.7.9)、(10.7.14), pp. 32–35（含逐字的 'It is necessary for the construction of this invariant that there be a multiple of eight transverse fermions.'）"
+    note: |
+      L1。⚠ 模不变性的验证被推给读者（'The reader can verify that …'）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.1)（Coleman–Weinberg 形式，取自 Vol.1 (7.3.24)），p. 31；逐字 'We make the guess, correctly it will turn out, that …'"
+    note: L1。振幅的形式本身是「猜」出来的。
+  - ref: polchinski-1998-v1
+    loc: "§7.2（theta 函数与 η 函数的模变换）、§7.3, eq. (7.3.24)（Coleman–Weinberg 形式）、§7.4"
+    note: |
+      Vol.2 明写引用这些位置（'The notation in the final line was introduced in section 7.2,
+      but our discussion of these functions in the present volume will be self-contained.'）。
+      ⚠ 本图**没有** theta 函数模变换的节点，故这条来源无对应依赖边，见 gaps。
+summary: |
+  (1) 把费米部门的配分函数按扇区写成 Z^α_β，用 (10.7.6) 的乘积公式与 theta 函数恒等式
+      化为 (1/η)ϑ[α/2, β/2](0, τ)；
+  (2) theta 与 η 在模群生成元 τ → τ + 1、τ → −1/τ 下的变换给 (10.7.14)，
+      其中 τ → τ + 1 带相位 exp[−πi(3α² − 1)/12]；
+  (3) 把 8 个横向费米子按每两个一组写成四次幂，则该相位在四次幂后变成
+      exp[−πi(3α² − 1)/3]；只有当因子的个数是 4（即费米子 8 个）或其倍数时，
+      各扇区的相位才能配平，使 (10.7.9) 的组合整体不变。这就是「8 的倍数」的来源。
+  (4) 同一次配平固定了 (10.7.9) 里各项的相对符号，其中 (Z^0_0)⁴ 与 (Z^1_0)⁴ 的相对符号
+      对应 R 扇区态的费米统计。
+
+  【status 的理由（四条）】
+  (1) 环面振幅的形式是**猜**的（原书逐字 'We make the guess'）；
+  (2) 模变换本身被原书称为 'naive'——纯左移费米子的路径积分相位没有 diff 不变定义
+      （global gravitational anomaly）；
+  (3) 不变性的验证被推给读者；
+  (4) 本图没有 theta 函数模变换的节点，第 (2)(3) 步在图上无支撑。
+gaps:
+  - "**theta 与 η 函数的模变换在本图无节点**：(10.7.14) 的相位是这套变换的直接后果，本推导只能引用 Vol.1 §7.2 与 Vol.2 §10.7 的自含讨论。→ 待建 math.theta-function-modular-transformations。"
+  - "**环面振幅的 Coleman–Weinberg 形式是猜的**（原书逐字 'We make the guess, correctly it will turn out'）；本图也没有 Vol.1 (7.3.24) 的节点。"
+  - "**模变换被原书自称 naive**：纯左移费米子的路径积分相位没有 diff 不变的定义方式，这个相位是一个 global gravitational anomaly。原书用脚注 6（'The phase factor is a holomorphic function of τ … Since it has magnitude 1, this implies that it is actually independent of τ.'）来处理它，本图未建节点。"
+  - "**不变性的验证被推给读者**（'The reader can verify …'）；summary 第 (3) 步的相位配平是 curator 按原书结论补写的，不是来源内容。"
+  - "**带顶点算子的振幅未处理**：原书说 'one can show by explicit calculation (or by indirect arguments) that the modular properties are the same with or without vertex operators'，不给论证。"
+author: curator
+created: "2026-09-11"

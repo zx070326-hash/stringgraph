@@ -1,0 +1,45 @@
+id: worldsheet.type-i-unoriented-closed-spectrum--via-omega-projection
+target: worldsheet.type-i-unoriented-closed-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.type-ii-massless-spectrum
+    note: 供给被投影的对象（IIB 的无质量谱）。
+  - id: worldsheet.gso-projection
+    note: 供给 IIB 的定义（两侧同一 GSO 投影），Ω 作用在其上。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      供给世界面宇称 Ω 及其作为可规范对称性的地位。
+      ⚠ 该卡是玻色弦语境的；超弦情形 Ω 还作用在 ψ、ψ̃ 与鬼场上
+      （§10.8 (10.8.13) 给 Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、(10.8.14) 给 Ω² = exp(πiF)），
+      本图无该扩充的节点，见 gaps。
+    inferred: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.16)–(10.6.18), pp. 29–30"
+    note: L1。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. (10.8.13)（Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ）、(10.8.14)（Ω² = exp(πiF)），p. 40"
+    note: |
+      L1（E48）。这两式给出 Ω 在超弦上的完整作用，但它们出现在 §10.8，
+      本卡的论证（§10.6）在原书中先于它们，且不引用它们。
+summary: |
+  三步：
+  (1) Ω 是 IIB 的一个对称性（左右两侧的 GSO 投影相同，故 Ω 把谱映到自身）。
+  (2) 在 R–R 扇区，顶点算子写作 V_s Ṽ_{s'}，其按 8 × 8 = [0] + [2] + [4]_+ 变换。
+      Ω 交换左右，即把 V_s Ṽ_{s'} 变成 Ṽ_{s'} V_s；由 R 顶点算子的费米性质
+      Ṽ_{s'}V_s = −V_sṼ_{s'}。故 Ω = +1 的投影挑出在交换 s ↔ s' 下**反对称**的部分，
+      即 [2]（[0] 与 [4]_+ 是对称的，被投掉）。
+  (3) NS–NS 与 NS–R / R–NS 扇区同理投影，留下 (2)（引力子）、[0]（dilaton）与
+      8′ + 56 的一份（两个引力微子里只剩一个线性组合）。
+      合起来即 (10.6.18)。
+
+  【status 的理由】上游全部 physical-argument；
+  第 (2) 步的符号（R 顶点算子的费米性质）在原书里只有一个从句，本图无节点。
+gaps:
+  - "**「R 顶点算子的费米性质给出额外负号」这一步在本图无节点**：原书只有一个从句（'where the final sign comes from the fermionic nature of the R vertex operators'）。它实质上依赖 §10.4 末的 cocycle 与 §10.6 的自旋-统计讨论（E44），本图都没有建。"
+  - "**Ω 在超弦上的作用未在图中定义**：worldsheet.worldsheet-parity 是玻色弦语境的（该依赖边已标 inferred）。超弦的完整作用（(10.8.13)、(10.8.14)：Ω² = exp(πiF)）在 §10.8 才给出，本图无节点。"
+  - "**表示论分解无支撑**：8 × 8 = [0] + [2] + [4]_+ 与「哪些部分对称/反对称」依赖附录 B.1（未读）。"
+  - "**「规范掉一个离散对称性」这一操作本身在本图无形式化**：它是世界面上对无取向曲面求和（Klein 瓶、Möbius 带），玻色弦一侧本图也只有 worldsheet.worldsheet-parity 这一张卡。"
+author: curator
+created: "2026-09-11"

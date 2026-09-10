@@ -1,0 +1,42 @@
+id: compact.heterotic-narain-lattice-even-self-dual--via-deferral-to-narain-compactification
+target: compact.heterotic-narain-lattice-even-self-dual
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: |
+      供给被玻色化的对象：左移 c = 26（10 个 X 加 c = 16 的内部部门）与右移 c̃ = 15。
+      「26 个左移玻色子 + 10 个右移玻色子」正是这个中心荷配平的玻色形式。
+  - id: worldsheet.heterotic-so32-ope-local-and-closed
+    inferred: true
+    note: |
+      **inferred 的理由**：原书在 §11.6 说一致性要求是 'locality of the OPE plus modular
+      invariance'，但**不引用** §11.2 那条 OPE 局域闭合的断言，而是引用 Vol.1 §8.4。
+      本图连这条边只是为了让「OPE 局域」这个条件在图上有一个（同样弱的）出处。
+  - id: worldsheet.heterotic-so32-partition-function
+    inferred: true
+    note: |
+      **inferred 的理由**：同上，「模不变」这个条件在本图的最近出处是 §11.2 的配分函数卡；
+      原书 §11.6 引用的是 Vol.1 §8.4（本图对应节点在未合并分支上）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, eq. (11.6.1)–(11.6.4b), pp. 73–74（逐字：'From the discussion of Narain compactification in section 8.4, we know that the requirements for a consistent CFT are locality of the OPE plus modular invariance.'；结论 'the lattice must be an even self-dual Lorentzian lattice of signature (26−d, 10−d)'）"
+    note: L1（抽取记录 polchinski-1998-v2.md E63）。
+  - ref: polchinski-1998-v1
+    loc: "§8.2、§8.4（Narain 紧化；论证被推给这里）"
+    note: |
+      ⚠ 本图对应节点在**未合并**分支 agent/curator/polchinski-ch8 上，本轮不加边。
+      那支里的必要方向（compact.modular-invariance-requires-self-dual-lattice）本身
+      是原书一句 'a little thought shows that it is also necessary'，无论证。
+summary: |
+  §11.6 不重新论证，而是把「一致的 CFT ⟺ 偶自对偶格」整体引用自 Vol.1 §8.4 的 Narain 紧化，
+  只把号差换成杂化弦的 (26−d, 10−d)：左移 26 个玻色子、右移 10 个，
+  内积 l ∘ l′ = l_L·l_L′ − l_R·l_R′，条件是 l∘l ∈ 2Z 与 Γ = Γ^*。
+gaps:
+  - "**本卡的论证被整体推给 Vol.1 §8.4**，而本图对应的 Narain 节点在**未合并**分支 agent/curator/polchinski-ch8 上。在那支合并前，本推导在图上没有真正的上游支撑。"
+  - "**即使那支合并了，必要方向仍是原书的一句断言**：Vol.1 (8.4.24) 的 'a little thought shows that it is also necessary if modular invariance is to hold for all τ'，原书不论证，伴读者本人也复现不出（compact.modular-invariance-requires-self-dual-lattice 的 notes）。"
+  - "**号差从 (k,k) 换成 (26−d, 10−d) 这一步原书不讨论**：Vol.1 §8.4 是玻色弦的对称情形；杂化弦左右维数不同，是否影响那里的论证，原书不谈。"
+  - "**两条 inferred 边**：'OPE 局域' 与 '模不变' 这两个条件在本图接到 §11.2 的两张卡，而原书 §11.6 引用的是 Vol.1 §8.4。"
+  - "**§11.6 后半（pp. 76–83）本轮跳读**：抽取记录 §3.2；(11.6.11) 之后的内容未核实。"
+author: curator
+created: "2026-09-11"

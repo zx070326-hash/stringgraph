@@ -1,0 +1,54 @@
+id: worldsheet.open-superstring-low-level-spectrum--via-level-by-level-analysis
+target: worldsheet.open-superstring-low-level-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ocq-superstring-physical-states
+    note: 供给物理态条件（含 R 扇区的 G^m_0）与零态的模去关系。
+  - id: worldsheet.open-superstring-mass-shell
+    note: "供给 H 的两个形式（NS 扇区 α'p² + N − 1/2、R 扇区 α'p² + N），即质量壳的数值内容。"
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给 G^m_{±1/2}、G^m_0 的显式模式表达式（(10.5.6a,b) 的领头项 (2α')^{1/2}p_μψ^μ_r）。
+  - id: worldsheet.rns-mode-expansions
+    note: 供给 ψ_{−1/2}、ψ_0 的（反）对易关系，用于算内积与零态。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    note: 供给 Γ^μ = 2^{1/2}ψ^μ_0，使 G^m_0 条件成为 Dirac 方程。
+  - id: worldsheet.rns-fermion-number-operator
+    note: 供给 exp(πiF) 的本征值（NS 基态 −1、第一激发态 +1；R 扇区 ±）与 Table 10.2 的行标号。
+  - id: worldsheet.open-superstring-two-sectors
+    note: 供给「开弦只有 NS 与 R 两个扇区」。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.6a,b)–(10.5.17a,b) 与 Table 10.2, pp. 21–23"
+    note: |
+      L1。原书逐级手算，中间步骤给得比较完整（这是全章计算最详细的一段之一）；
+      措辞 'The NS sector works out much as in the bosonic string.'
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.12, p. 43（逐字：'By looking at the eigenvalues of S_a, verify the spinor decompositions (10.5.17).'）"
+    note: L1。旋量分解那一步是习题。
+summary: |
+  逐级代入物理态条件：
+  (A) NS，N = 0：H = α'p² − 1/2 = 0 给 α'k² = 1/2，即 m² = −k² = −1/(2α') < 0（快子）。
+      exp(πiF)|0⟩_NS = −|0⟩_NS 给它 NS− 的标号。
+  (B) NS，N = 1/2：|e; k⟩ = e·ψ_{−1/2}|0; k⟩。
+      L_0 = α'k² + 1/2 − 1/2 = α'k² 给 k² = 0；
+      G^m_{1/2}|e; k⟩ = (2α')^{1/2}(k·e)|0; k⟩ 给 k·e = 0；
+      而 G^m_{−1/2}|0; k⟩ = (2α')^{1/2} k·ψ_{−1/2}|0; k⟩ 是伪态（由 (10.5.2) 模去），
+      给出规范自由度 e^μ ≅ e^μ + λk^μ。剩下 D − 2 = 8 个类空极化，
+      exp(πiF) = +1（一个 ψ_{−1/2} 把 NS 基态的 −1 翻成 +1）。
+  (C) R，最低级：|u; k⟩ = |s; k⟩u_s。L_0 = α'k² 给 k² = 0；
+      G^m_0 = (2α')^{1/2}p_μψ^μ_0 + … 作用给 α'^{1/2}(k·Γ)_{s's}u_s = 0，即无质量 Dirac 方程。
+      取 k 为光锥型，用 (10.5.15) 把 k·Γ 写成 −2k_1Γ⁰(S_0 − 1/2)，
+      条件化为 (S_0 − 1/2)u = 0，只留 s_0 = +1/2 的一半分量。
+  Table 10.2 汇总这四行。
+
+  【status 的理由】上游全部封顶在 physical-argument（质量壳的两个正规序常数、模式代数经
+  路径积分链）。本推导本身是有限步线性代数，但没有 reviewer 复核记录，
+  且 (10.5.17) 的旋量分解被原书推给习题、依赖未读的附录 B.1。
+gaps:
+  - "**SO(8) 表示标签（8_v / 8 / 8′）与 (10.5.17) 的旋量分解未在图中论证**：原书推给 exercise 10.12 并依赖附录 B.1（本轮未读，抽取记录 Q8）。目标卡片已把这些排除在断言之外。"
+  - "**(10.5.15) 那一步的 gamma 矩阵代数计算依赖附录 B 的表示与 S_a 的对角化基**：本图只有 worldsheet.rns-ramond-zero-modes-clifford（Clifford 关系），没有该表示的构造。"
+  - "**「D − 2 = 8 个类空极化」用到 D = 10 与无质量小群 SO(D−2) 的表示论**：后者在本图无节点（玻色弦一侧的同一缺口见 worldsheet.critical-dimension-light-cone 的 gaps）。"
+  - "**上游正规序常数的 gap 全部继承**（助记法无节点、βγ 规则无成文来源、原书列为习题）。"
+author: curator
+created: "2026-09-11"

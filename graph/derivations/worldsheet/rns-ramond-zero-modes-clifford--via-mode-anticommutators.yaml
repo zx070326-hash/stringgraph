@@ -1,0 +1,32 @@
+id: worldsheet.rns-ramond-zero-modes-clifford--via-mode-anticommutators
+target: worldsheet.rns-ramond-zero-modes-clifford
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-mode-expansions
+    note: 供给 {ψ^μ_r, ψ^ν_s} = η^{μν}δ_{r,−s}；取 r = s = 0 即得 Clifford 关系。
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给「R 扇区（ν = 0）有零模、NS 扇区（ν = 1/2）没有」这一区分。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.16)–(10.2.18), p. 8；(10.2.9a), p. 6；(10.1.4), p. 2"
+    note: |
+      L1。原书在此只做识别（'ψ^μ_0 satisfies the gamma matrix algebra (10.1.4)'）
+      并把表示的构造推给附录 B.1。
+summary: |
+  一行代数：(10.2.9a) 取 r = s = 0 给 {ψ^μ_0, ψ^ν_0} = η^{μν}；
+  重标度 Γ^μ = 2^{1/2}ψ^μ_0 把右端变成 2η^{μν}，即 (10.1.4)。
+  由于 ψ^μ_0 与「被所有 r > 0 模式湮灭」这组条件相容（零模与正模式反交换关系里
+  δ_{r,−s} 在 r > 0, s = 0 时为零），ψ^μ_0 在基态空间上作用，
+  故基态空间是该 Clifford 代数的表示。Lorentz 生成元 S_a（(10.2.21)）由 ψ_0 的双线性给出，
+  其本征值 ±1/2 说明基态是时空旋量。
+
+  【status 的理由】计算本身是一行，但两条上游节点的有效状态都是 physical-argument
+  （模式代数经 worldsheet.rns-action 挂在路径积分上），且本推导缺 reviewer 复核记录，
+  故按「不确定选低一级」取 physical-argument。
+gaps:
+  - "**表示的维数与不可约分解不在本推导范围内**：原书把它们推给附录 B.1（'This representation is worked out in section B.1; in D = 10 it has dimension 32'），本轮未读该附录（抽取记录 Q8）。目标卡片已把这些排除在断言之外。"
+  - "**「基态空间」的存在性未论证**：本推导按原书把 R 基态定义为被所有 r > 0 模式湮灭者，不讨论这样的态是否存在、是否唯一到有限重简并（这在无穷维 Fock 空间上需要构造）。玻色弦一侧的对应缺口见 worldsheet.bosonic-fock-space。"
+  - "**缺 reviewer 复核记录**（这是本推导按 STATUS_LEVELS 的 rigorous 例外升级的形式障碍；但上游封顶仍在 physical-argument）。"
+author: curator
+created: "2026-09-11"

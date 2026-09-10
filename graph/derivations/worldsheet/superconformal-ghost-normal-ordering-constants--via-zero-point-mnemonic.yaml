@@ -1,0 +1,64 @@
+id: worldsheet.superconformal-ghost-normal-ordering-constants--via-zero-point-mnemonic
+target: worldsheet.superconformal-ghost-normal-ordering-constants
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superconformal-ghost-modes
+    note: 供给 a^g 的定义位置（L^g_0 内部）与模式内容（bc 一对反对易、βγ 一对对易，权 2 与 3/2）。
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给两个扇区（βγ 与 T_F 同周期），助记法对两者给不同的值。
+  - id: worldsheet.bc-ghost-normal-ordering-constant
+    note: |
+      供给 bc 部分（λ = 2 给 −1）。**标 inferred**：Vol.2 (10.4.5) 给的是 bc + βγ 的**总**常数，
+      原书没有在此处把它拆成 −1 与 βγ 的部分；本图的拆分依据是 §10.4 p. 19 那句
+      顶点算子权重的核对（'Adding the contribution −1 of the bc ghosts …'），
+      而那句话经过玻色化。故这条边是本图的记账推断。
+    inferred: true
+  - id: worldsheet.cylinder-plane-l0-shift
+    note: |
+      供给「柱面 L_0 的常数来自柱面-平面映射」这一机制。⚠ 仅玻色弦版本（−c/24），
+      超共形/βγ 版本本图无节点。
+  - id: worldsheet.zeta-regularized-sum-of-integers
+    inferred: true
+    note: |
+      供给零点能求和的正规化。**标 inferred**：Vol.2 只说「用通常的方法」，不在原地做求和；
+      且 βγ 是对易的半整数权场，其求和的符号规则在本图完全无节点。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.5), p. 16（结果值；逐字方法说明 'determined by the usual methods'）"
+    note: L1。原书不给计算。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.9, p. 43（逐字：'By any of the above methods, determine the ghost normal ordering constants (10.4.5).'）"
+    note: |
+      L1。**这条常数的计算在原书里是习题**。按项目原则，凡被推给习题的步骤不得记为严格。
+  - ref: polchinski-1998-v1
+    loc: "§2.9 末（零点能助记法：周期玻色子 −1/24、周期费米子 +1/24、反周期费米子 −1/48）；式号未核实，本图未读该节正文"
+    note: |
+      Vol.2 在 (10.2.13) 上方与 exercise 10.8(b) 两处一手引用这条助记法（抽取记录 Q2）。
+      ⚠ 助记法本身没有覆盖 **对易的半整数权鬼场**（βγ）这一情形，
+      故本推导对 βγ 部分实际上没有成文规则可依，见 gaps。
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.21)、(10.4.24) 与 p. 19 的核对句（顶点算子权重 1/2 与 3/8 加 bc 的 −1 与 (10.4.5) 一致）"
+    note: |
+      L1。这是本推导唯一的独立核对，但它经过玻色化（本图无玻色化节点），故只作核对不作依赖。
+summary: |
+  按原书的记账，a^g 是 bc 与 βγ 两部分零点能之和加上柱面-平面位移：
+    bc 部分给 −1（与玻色弦相同，λ = 2）；
+    βγ 部分在 NS 扇区给 +1/2、在 R 扇区给 +3/8，
+  合计 −1/2（NS）与 −5/8（R），即 (10.4.5)。
+  ⚠ **上面 βγ 部分的两个数是从 (10.4.5) 与 bc 的 −1 反推出来的**，
+  不是本图独立算出的（原书不给计算，助记法也不覆盖对易的半整数权场）。
+  独立核对：顶点算子 e^{−φ}（NS，h = 1/2）与 e^{−φ/2}（R，h = 3/8）的权重恰好等于上面反推的
+  两个数——这正是原书 p. 19 那句核对的内容，但它经过玻色化。
+
+  【status 的理由】本推导实质上是「接受原书结果 + 一条经玻色化的核对」，
+  没有在图内独立得到这两个数。按「状态只能实话实说」，physical-argument 已经是能给的上限；
+  若 reviewer 认为「反推 + 未建节点的玻色化核对」不足以支撑，可要求降级或要求先建玻色化节点。
+gaps:
+  - "**原书不给计算，且把它列为习题 10.9**：本推导没有任何成文的计算过程可抄。"
+  - "**助记法不覆盖 βγ**：Vol.1 §2.9 末的规则只列周期玻色子、周期费米子、反周期费米子三种；βγ 是**对易的半整数权**场（NS 扇区半整数模式），这一情形在本图与所引来源里都没有成文规则。本推导 summary 里 βγ 的 +1/2 与 +3/8 是从 (10.4.5) 反推的。"
+  - "**bc 与 βγ 的拆分是本图的记账推断**（依赖边已标 inferred）：原书 (10.4.5) 只给总值。"
+  - "**唯一的独立核对经过玻色化**：δ(γ) ≅ e^{−φ}、Σ = e^{−φ/2} 的权重计算依赖 §10.3–§10.4 的玻色化（(10.4.13)/(10.4.19)），本图**没有**玻色化节点。→ 待建 worldsheet.beta-gamma-bosonization / worldsheet.fermion-bosonization。"
+  - "**ζ 正规化本身无算子层面定义**（与图中其他零点能节点同一 gap）。"
+author: curator
+created: "2026-09-11"

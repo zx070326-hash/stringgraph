@@ -1,0 +1,45 @@
+id: worldsheet.superstring-sector-consistency-solutions--via-exhaustion
+target: worldsheet.superstring-sector-consistency-solutions
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-sector-consistency-conditions
+    note: 供给三条被强加的条件（相互局域性、OPE 闭合、至少一个左移与一个右移 R 扇区）。
+  - id: worldsheet.superstring-sector-labels
+    note: |
+      供给 16 个扇区的标号与「六个因能级匹配为空」的约化，
+      即穷举的搜索空间。
+  - id: worldsheet.open-superstring-low-level-spectrum
+    note: |
+      供给「快子住在开弦 NS− / 闭弦 (NS−,NS−)」这一事实，
+      本卡关于「解里不含快子」的断言要用它。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.6) 下方的四行谱表与 (10.6.7)，pp. 26–27；type 0 的两个解同处"
+    note: |
+      L1。⚠ 原书措辞 'Proceeding further, one readily finds the only other solutions'
+      ——**穷举过程不展示**。
+summary: |
+  按三条条件在 10 个非空扇区上做有限搜索：
+  (1) 由条件 (c)，左右两侧各至少有一个 R 扇区；
+  (2) 由条件 (b)（OPE 闭合），扇区标号在 mod 2 加法下封闭，故解是 (Z_2)^4 的子群；
+  (3) 由条件 (a)（相互局域性），该子群上的双线性形式 F_1α_2 − F_2α_1 − F̃_1α̃_2 + F̃_2α̃_1
+      必须整体取偶值；
+  (4) 分两种情形穷举：含 R–NS 扇区时得四个解（IIB/IIA/IIA′/IIB′），
+      不含时得两个解（0A/0B）。
+  (5) (10.6.7) 的时空反射把 IIA′ ↔ IIA、IIB′ ↔ IIB，故四解只给两个物理理论。
+  (6) 读表：四个 type II 解都不含 (NS−,NS−)，而 type 0 的两个解都含它。
+
+  ⚠ **上面第 (1)–(4) 步的结构是 curator 按条件形式补写的**；
+  原书只给结果表与一句 'one readily finds'。
+
+  【status 的理由】三条条件本身是被强加的（physical-argument），
+  且穷举过程在原书中不展示、在本图中也未独立执行。
+gaps:
+  - "**穷举过程不展示**：原书只给结果（'Proceeding further, one readily finds the only other solutions'）。本图没有独立复算该穷举。这是一个**有限**的组合搜索（(Z_2)^4 的子群加两条条件），完全可以机器验证——这是本图后续可以廉价升级的一处：写一段脚本枚举并由 reviewer 复核，即可按 STATUS_LEVELS 的 rigorous 例外升级。**建议记入待办。**"
+  - "**三条一致性条件本身是被强加的**：(a) 的理由是「否则振幅无法自洽定义」（物理论断）；(b) 依赖 OPE（收敛未证）；(c) 只是模不变性的一个必要条件，其完整论证在 §10.7。"
+  - "**相位公式 (10.6.4) 在本图无支撑**：它依赖自旋场的分支切割（§10.3 的谱流/自旋场）与 §10.4 末的 cocycle。**本图没有玻色化、自旋场、cocycle 的节点。** → 待建 worldsheet.spin-field-vertex-operators 与 worldsheet.vertex-operator-cocycle。"
+  - "**「四解只给两个物理理论」中的『物理上不同』未精确化**：(10.6.7) 是显式的场重定义，但「两个理论相同」的判据原书不定义。"
+  - "**条件的充分性未断言**：满足三条条件不等于理论一致（type I 的 tadpole 与时空反常还要另外检查，见 worldsheet.ten-dimensional-superstring-theories）。"
+author: curator
+created: "2026-09-11"

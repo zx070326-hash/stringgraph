@@ -1,0 +1,27 @@
+id: worldsheet.heterotic-so32-ope-local-and-closed--via-bosonization-assertion
+target: worldsheet.heterotic-so32-ope-local-and-closed
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-so32-projections
+    note: |
+      供给被验证的对象：扇区（(11.2.9) 的两种周期条件）与投影（(11.2.10)），
+      以及玻色化记账 (11.2.11)/(11.2.12)（F = Σ_K q_K）。
+  - id: worldsheet.superstring-sector-consistency-conditions
+    note: |
+      供给「相互局域」与「OPE 闭合」这两条条件的**定义**（§10.6 的 (a)(b)，(10.6.5)/(10.6.6)）。
+      本卡断言的是杂化弦的扇区集合满足它们。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, (11.2.12) 之后, p. 51（无式号；逐字：'It is easily verified by means of bosonization that the OPE is local and closed.'）"
+    note: L1（抽取记录 polchinski-1998-v2.md E56）。**这一句就是全部论证。**
+summary: |
+  原书的论证是一句话：把 λ^A 复化并玻色化为 16 个左移标量 H^K 后，
+  保留算子写成 exp[i Σ_K q_K H^K] 型，相互局域性与 OPE 闭合可由 q 矢量的整/半整性直接读出。
+  **原书不写这个验证**，只说 'easily verified by means of bosonization'。
+gaps:
+  - "**'easily verified' 是全部论证**：原书不写验证过程。"
+  - "**本图完全没有玻色化节点**：(11.2.11)/(11.2.12) 的复化-玻色化、以及 §10.3 的 λ↔H 字典（(10.3.5) 起）都无节点。因此本推导的唯一手段在图上没有支撑。"
+  - "**玻色化标量的归一化与本图 canonical 约定不同**：§10.3 (10.3.5) 用 H(z)H(0) ∼ −ln z，对应 α' = 2；本图 conv.alpha-prime-regge 保留显式 α'。日后建玻色化节点时必须写 convention_map。"
+author: curator
+created: "2026-09-11"

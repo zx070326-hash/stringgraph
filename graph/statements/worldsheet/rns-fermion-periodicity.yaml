@@ -1,0 +1,55 @@
+id: worldsheet.rns-fermion-periodicity
+kind: definition
+status: rigorous
+title: 世界面费米子的 R / NS 周期条件与参数 ν, ν̃
+statement: |
+  取世界面柱面坐标 w = σ^1 + iσ^2，w ≅ w + 2π（Vol.2 §10.2 把周长取为 2π；
+  与本图 conv.worldsheet-coordinate-length 的一般 ℓ 的换算见该约定卡）。
+  RNS 费米子的周期条件由两个参数 ν, ν̃ ∈ {0, 1/2} 编码：
+    ψ^μ(w + 2π)  = exp(2πi ν)  ψ^μ(w),
+    ψ̃^μ(w̄ + 2π) = exp(−2πi ν̃) ψ̃^μ(w̄)，
+  其中符号对所有 μ 相同（'the sign must be the same for all μ'）。两个取值分别命名为
+    ν = 0   ：**Ramond (R)** 扇区，ψ^μ(w + 2π) = +ψ^μ(w)（周期）；
+    ν = 1/2 ：**Neveu–Schwarz (NS)** 扇区，ψ^μ(w + 2π) = −ψ^μ(w)（反周期）。
+  超流随之带同一个相位：
+    T_F(w + 2π) = exp(2πi ν) T_F(w),   T̃_F(w̄ + 2π) = exp(−2πi ν̃) T̃_F(w̄)。
+
+  **平面坐标下的表现**（本卡只记事实，供下游模式展开使用）：由半权重变换
+  ψ_{z^{1/2}}(z) = (∂_z w)^{1/2} ψ_{w^{1/2}}(w) 引入的 z^{−1/2}，
+  在 NS 扇区正好抵消原来的反周期性（模式是半整数），
+  而在 R 扇区反过来引入一条分支切割（模式是整数）。
+
+  本卡是纯粹的记号/条件定义。「只有这两种周期条件」是一条**命题**，
+  见 worldsheet.rns-periodicity-exhaustion；本卡不断言它。
+uses:
+  - worldsheet.rns-action
+  - worldsheet.rns-superconformal-generators
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.2a) R、(10.2.2b) NS、(10.2.3a,b)（统一写法 exp(2πiν)，ν, ν̃ ∈ {0,1/2}）、(10.2.4a,b)（T_F 的周期性），pp. 5–6；柱面坐标 w = σ^1 + iσ^2 与 w ≅ w + 2π 在 (10.2.1) 上方"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E15；式号与公式内容逐页读到原书页图）。
+      'where the sign must be the same for all μ' 是逐字。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, (10.2.7) 下方一句, p. 6（逐字：'Notice that in the NS sector the branch cut in z^{−1/2} offsets the original antiperiodicity, while in the R sector it introduces a branch cut.'）"
+    note: L1（E17）。这句是 R 扇区顶点算子（自旋场）之所以困难的原因。
+tags: [rns, superstring, ns-sector, ramond-sector, periodicity, definition]
+notes: |
+  【ν 与 α 两套标号】§10.6 起原书改用 α = 1 − 2ν（(10.6.2)）：R 扇区 α = 1、NS 扇区 α = 0，
+  且 α 只 mod 2 有定义。两套标号的字典写在 worldsheet.superstring-sector-labels。
+  §10.7 的模不变性一节用的也是 α（(10.7.4)）。
+
+  【βγ 必须与 T_F 同周期】原书 §10.4（p. 15，逐字）：'The ghosts β and γ must have the same
+  periodicity (10.2.4) as the generator T_F with which they are associated. This is necessary to
+  make the BRST current periodic, so that it can be integrated to give the BRST charge.'
+  这条约束记在 worldsheet.superconformal-ghost-modes，不在本卡。
+
+  【status: rigorous 的理由】本卡只写下两条周期条件与相位记号，没有任何论证成分；
+  它对 worldsheet.rns-action（physical-argument）的 uses 会把有效状态压到 physical-argument，
+  这是有意的（周期条件是关于那个作用量里的场的）。
+author: curator
+created: "2026-09-11"

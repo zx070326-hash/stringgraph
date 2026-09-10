@@ -1,0 +1,31 @@
+id: worldsheet.heterotic-internal-fermions-spacelike--via-absence-of-left-moving-fermionic-constraint
+target: worldsheet.heterotic-internal-fermions-spacelike
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: |
+      供给场内容与约束流：左移一侧只有 T_B（Virasoro），右移一侧才有 T̃_F（超流）。
+      这个左右不对称正是本论证的全部内容。
+  - id: worldsheet.fock-indefinite-form
+    note: |
+      供给「类时方向的振子激发给出负范数态」这一事实（自由玻色子情形，η^{00} = −1）。
+      ⚠ 原书没有引用这条；本图用它是为了让「负范数态」这个词在图里有支撑。
+    inferred: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 50（无式号，逐字：'In particular, none of the λ^A can have a timelike signature because there is no fermionic constraint on the left-moving side to remove states of negative norm.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E54 备注）。**这一句就是全部论证。**
+summary: |
+  嵌入坐标的类时分量 X^0 与右移费米子 ψ̃^0 产生负范数态，它们由约束代数
+  （左右两侧的 Virasoro 与右侧的超 Virasoro）从物理谱中去掉。
+  左移一侧的约束代数只有 Virasoro，**没有**超流，因此没有与 ψ̃^0 对应的费米型约束；
+  若某个内部费米子 λ^A 取类时号差，它的激发产生的负范数态就没有约束可以去掉。
+  故 32 个 λ^A 必须全部类空。
+gaps:
+  - "**原书只给一句理由，不给证明**：没有验证「类时 λ 的负范数态确实存活在 BRST 上同调中」，也不引文献。本条是构造时的**选择理由**，不是被证明的必要条件。"
+  - "**「有约束就能去掉负范数态」这一步在超弦一侧本身只有 physical-argument 支撑**：worldsheet.no-ghost-theorem-superstring 的唯一推导是 'a direct imitation of the bosonic argument of chapter 4'（原书不给证明）。杂化弦一侧更弱（worldsheet.no-ghost-theorem-heterotic）。"
+  - "**worldsheet.fock-indefinite-form 这条边是本图补的（inferred）**：原书在此处不引用任何关于 Fock 不定内积的结果，只说 'states of negative norm'。该卡讲的是玻色振子的情形，与费米子 λ^A 的情形只是类比。"
+author: curator
+created: "2026-09-11"

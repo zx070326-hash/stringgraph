@@ -1,0 +1,53 @@
+id: worldsheet.heterotic-two-supersymmetric-ten-dimensional--via-exclusion-of-groups-of-eight
+target: worldsheet.heterotic-two-supersymmetric-ten-dimensional
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-so32-projections
+    note: 供给第一个解（32 个同号，即两组 16 被迫同号）。
+  - id: worldsheet.heterotic-e8e8-construction
+    note: 供给第二个解（两组独立的 16），以及「组大小 16 时负号被平方掉」这一关键事实。
+  - id: worldsheet.heterotic-so32-partition-function
+    note: |
+      供给符号追踪的框架：Z_ψ^± 里两个相对负号的来源，以及它们在取幂后何时相消。
+      排除「八个一组」正是因为四次幂**留下**这些负号。
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给「模不变性要求 Z_ψ^± 里有负号」这一事实（§10.7 的结论），
+      即排除论证的第一步前提。
+  - id: worldsheet.heterotic-so32-ope-local-and-closed
+    note: |
+      供给排除论证第 (c) 步用到的条件（OPE 闭合）：exp(πiF) = −1 的投影与之冲突。
+  - id: worldsheet.heterotic-so32-massless-spectrum
+    inferred: true
+    note: |
+      **inferred 的理由**：论证第 (b) 步说「左移 R 扇区态是**时空标量**」，
+      这依赖于 λ^A 是内部指标、其 R 扇区态不带时空旋量指标——
+      原书在此处只作断言（'the λ are spacetime scalars and so are their R sector states'，
+      见 (11.2.13) 的论证），不指向谱表。本图连这条边是补的。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2 末, p. 55（逐字见目标卡 sources；无式号）"
+    note: L1（抽取记录 polchinski-1998-v2.md E57）。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（作者对分类完备性的警告）"
+    note: |
+      L1（E53）。本推导据此把结论记为条件式，并把 status 封在 physical-argument。
+summary: |
+  三步排除：
+  (a) 分组必须使每组的模变换相位相消；八个一组时左移配分函数是 (Z_ψ^±)⁴，
+      十六个一组时是 Z_8² 或 Z_16（负号被平方/四次方掉）。
+  (b) 八个一组时 Z_ψ^± 里的相对负号存活，会给左移 R 扇区态**负权**；
+      但这些态是**时空标量**，负权违反自旋-统计。
+  (c) 同一组负号又对应 NS 扇区的投影 exp(πiF) = −1，与 OPE 闭合冲突，交互作用不自洽。
+  故费米子必须十六个一组；十六个一组只有两种取法（同号 / 独立），
+  分别给 SO(32) 与 E₈ × E₈。
+gaps:
+  - "**「组大小只能是 8 或 16」这一步没有单独论证**：原书只把这两种情形拿来比较，不排除其它分法（非等分、O(32) 的其它离散扭曲）。"
+  - "**「时空标量不能有负权」这条自旋-统计要求原书不证**：它被当作显然的时空一致性条件使用。"
+  - "**「exp(πiF) = −1 与 OPE 闭合冲突」原书不验证**：只有一句断言；本图的 OPE 闭合卡本身也只有一句 'easily verified by means of bosonization'。"
+  - "**作者本人对分类完备性的警告（§11.1 末）**：'one should be cautious in assuming that all string theories have been found'，对「已找全」只用 'suggesting'、'seem to be'。任何把本卡读成「十维杂化弦的完备分类」的用法都与来源不符。"
+  - "**「超对称」这一限定词在本图无支撑**：本图没有杂化弦时空超对称的节点，故「只有两个**超对称**杂化弦」里的形容词只能照抄原文。"
+  - "**一条 inferred 边**：'λ 的 R 扇区态是时空标量' 这一步本图接到谱卡，原书在此处只作断言。"
+author: curator
+created: "2026-09-11"

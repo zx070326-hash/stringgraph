@@ -1,0 +1,55 @@
+id: math.even-self-dual-euclidean-lattices-dimension-16
+kind: proposition
+title: 偶自对偶欧氏格只在维数是 8 的倍数时存在；16 维时恰有两个：Γ_16 与 Γ_8 ⊕ Γ_8
+statement: |
+  **断言（Polchinski §11.6 逐字）**：'**Even self-dual Euclidean lattices exist only when the
+  dimension is a multiple of 8, and for dimension 16 there are exactly two such lattices,
+  Γ_{16} and Γ_8 × Γ_8.**'
+
+  这里「偶」指 l·l ∈ 2Z 对一切格矢 l，「自对偶」指 Γ = Γ^*（Γ^* 是对偶格），
+  内积取欧氏正定内积。
+
+  **两个格的显式描述**（原书给出）：
+    **Γ_16**：格矢是
+      (n_1, …, n_16)          （全整数，(11.6.5a)）
+      或 (n_1 + 1/2, …, n_16 + 1/2)  （全半整数，(11.6.5b)），
+      在两种情形都要求 Σ_i n_i ∈ 2Z；
+    **Γ_8**：同样的描述，分量数换成 8（(11.6.6a,b)）；Γ_8 ⊕ Γ_8 即两份 Γ_8 的正交直和。
+
+  **本命题不断言的内容**：
+    (1) **不**给出证明。Polchinski 对这条纯数学结论**不证明、不引用任何文献**。
+    (2) 不断言更高维的分类（24 维有 24 个 Niemeier 格，本书不提）。
+    (3) 不断言 Γ_16 与 Γ_8 ⊕ Γ_8 不同构——原书说 'exactly two'，隐含它们不同构，
+        但不证明。
+    (4) 不断言洛伦兹号差情形的分类（那是 (11.6.4) 的一般情形，与本卡无关）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, (11.6.4b) 之后与 eq. (11.6.5a,b)、(11.6.6a,b), pp. 74–75（逐字断言与两个格的显式描述）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E63；式号与描述逐页读到原书页图）。
+      ⚠ 抽取记录明确指出：「16 维偶自对偶欧氏格恰有两个」是一条**纯数学定理**，
+      **书中不证、不引**，是杂化弦分类的支点；
+      「若要进图，来源应另找（Conway–Sloane / Serre *A Course in Arithmetic*）」。
+tags: [lattice, number-theory, classification, heterotic, unproved-in-source]
+notes: |
+  ★★【本卡是杂化弦「恰有两个」的数学支点，而本图对它只有一条教科书断言】
+  §11.2 的费米子构造用排除法（自旋统计 + OPE 闭合）得到同样的两个理论
+  （worldsheet.heterotic-two-supersymmetric-ten-dimensional）；
+  §11.6 的玻色构造把它归结为本卡这条格论定理。
+  **后者在数学上是硬的，但本图目前只有 Polchinski 的一句断言作为来源。**
+
+  【升级路径（必须先登记文献）】这条定理在数学文献中是标准的：
+    · 「偶自对偶（unimodular）欧氏格的维数必是 8 的倍数」——通常由 θ 级数的模形式性质得出；
+    · 「16 维恰有两个」——E₈ ⊕ E₈ 与 D₁₆^+，见 Conway–Sloane *Sphere Packings, Lattices and
+      Groups* 或 Serre *A Course in Arithmetic* 第 VII 章。
+  ⚠ **本项目 literature/sources.bib 尚未登记这两本书**，故本轮**不得**把它们写进 sources
+  （根 CLAUDE.md：新文献必须先登记，ref 才能用）。
+  → 建议 lead 派一轮 researcher 任务登记 Conway–Sloane / Serre 并抽取该定理，
+    然后为本卡加一条 `--via-lattice-classification` 的 rigorous 推导。
+    在那之前本卡的有效状态只能是 physical-argument，并把杂化弦分类整条链压在这一级。
+
+  【记号对照】原书写 'Γ_8 × Γ_8'（直积），数学文献通常写正交直和 Γ_8 ⊕ Γ_8；
+  本卡用 ⊕，与 title 一致。物理文献里 Γ_8 = E₈ 根格，Γ_16 = D₁₆^+（Spin(32)/Z₂ 的权格的
+  一个自对偶子格）。⚠ 后一个认同**不在**抽取记录里，本卡不断言它。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,54 @@
+id: worldsheet.heterotic-so32-tachyon-free
+kind: proposition
+title: SO(32) 杂化弦无快子，机制是**能级匹配找不到配对**（不是 GSO 投掉快子）
+statement: |
+  worldsheet.heterotic-so32-projections 定义的 SO(32) 杂化弦的谱中**没有快子**。
+
+  **机制（原书逐字）**：'The left-moving side, like the bosonic string, has a would-be tachyon,
+  but **there is no right-mover to pair it with so the theory is tachyon-free**.'
+
+  展开说：
+    (1) 左移一侧的 NS 型基态零点能是 −1（worldsheet.heterotic-left-moving-zero-point-constants），
+        故它是**左移意义下的快子**，对应 m² = −4/α'（Table 11.2 的第一行，SO(8) × SO(32) 表示 (1,1)）；
+    (2) 右移一侧是做过 GSO 投影的超弦，其最低态是**无质量**的（偏移为 0）；
+    (3) 能级匹配 (α'/4)m² = (左移能级 − 1) = (右移能级 − ν̃) 要求两侧给出同一个 m²，
+        而右移一侧取不到 m² = −4/α'，故该左移态在闭弦谱中**无配对**，不出现。
+    (4) 左移的第一激发态 λ^A_{−1/2}|0⟩_NS（(11.2.15)）另被投影 exp(πiF) = 1 去掉。
+
+  ★ **与 type II 的机制不同**：type II 的快子（(NS−,NS−) 扇区）是被三条一致性条件的**解**
+  排除的（worldsheet.gso-removes-tachyon）；杂化弦的快子是被**能级匹配**排除的。
+  抽取记录 E56 备注特别提醒不要把两者混为一谈。
+
+  **本命题不断言的内容**：
+    (1) 不断言 Table 11.1/11.2 里 m² = −4/α' 那一行是「谱中的态」——恰恰相反，
+        它是**左移部门单独**的记账，闭弦谱里没有它。
+    (2) 不断言 §11.3 的其它杂化弦无快子（那里六个有快子，见
+        worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, (11.2.14)/(11.2.15) 之后与 Table 11.2, pp. 52–53（逐字：'The left-moving side, like the bosonic string, has a would-be tachyon, but there is no right-mover to pair it with so the theory is tachyon-free.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56；逐字句与 Table 11.2 逐页读到原书页图）。
+      ★ 抽取记录备注：「杂化弦无快子」的机制**不是** GSO 投掉，而是 level matching 找不到配对。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.18), p. 23（闭弦质量壳与能级匹配 (α'/4)m² = N − ν = Ñ − ν̃）"
+    note: |
+      L1（E35）。本卡第 (3) 步用的能级匹配即此；本图对应节点
+      worldsheet.closed-superstring-mass-shell（其中左移一侧的偏移换成 (11.2.14) 的 −1）。
+tags: [heterotic, so32, tachyon, level-matching, spectrum]
+notes: |
+  【与 conv.alpha-prime-regge 的换算】左移偏移 −1 写成质量是 α'm²/4 = −1，即 m² = −4/α'
+  （闭弦体例）。这与玻色闭弦快子 m² = −4/α' 数值相同——本来就该相同，因为左移部门与玻色弦一样。
+
+  【为什么这条值得单独建卡】它是「杂化弦是可用理论」的两条硬条件之一（另一条是无鬼定理），
+  且其机制与 type II 不同。下游 worldsheet.heterotic-two-supersymmetric-ten-dimensional
+  的「两个超对称杂化弦」结论隐含了这一条。
+
+  【右移一侧最低态无质量这一步的支撑】来自 §10 的 GSO 投影（worldsheet.gso-projection）
+  与 worldsheet.closed-superstring-mass-shell 的偏移表；本图有节点，但都是 physical-argument。
+author: curator
+created: "2026-09-11"

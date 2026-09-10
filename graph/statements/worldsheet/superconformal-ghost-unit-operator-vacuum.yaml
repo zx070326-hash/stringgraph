@@ -1,0 +1,45 @@
+id: worldsheet.superconformal-ghost-unit-operator-vacuum
+kind: proposition
+title: βγ 系统的单位算子态 |1⟩ 不是 NS 鬼场基态 |0⟩_NS，且 |1⟩ 上的 Fock 空间里没有 |0⟩_NS
+statement: |
+  在 NS 扇区的 βγ 系统中（worldsheet.superconformal-ghost-modes）：
+    (1) 与**单位算子**对应的态 |1⟩（态-算子映射，worldsheet.state-operator-isomorphism）满足
+          β_r|1⟩ = 0 (r ≥ −1/2),    γ_r|1⟩ = 0 (r ≥ 3/2)。
+    (2) 它与 (10.4.3a) 定义的鬼场基态 |0⟩_NS **不同**：γ_{1/2} 湮灭 |0⟩_NS，
+        而 |1⟩ 被其共轭 β_{−1/2} 湮灭。
+    (3) 更强：在 |1⟩ 上用升算符生成的 Fock 空间中**没有**任何态具有 |0⟩_NS 的性质
+        （原书逐字：'there is no state in the Fock space built on |1⟩ by acting with γ_{1/2}
+        that has the properties of |0⟩_NS'）。这与 bc 系统形成对照：那里有简单的关系
+        |0⟩ = c_1|1⟩。
+    (4) 与 |0⟩_NS 对应的算子记作 δ(γ)，其定义性质是
+          γ(z) δ(γ(0)) = O(z),   β(z) δ(γ(0)) = O(z^{−1})。
+
+  本命题的意义：它是「βγ 系统有多个不等价真空」这一事实在本书里的出现方式。
+  本卡**不**引入 picture number 的概念（原书全章不出现 'picture' 一词），
+  也**不**断言不等价真空的完整分类。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4「Vertex operators」, eq. (10.4.6)（|1⟩ 的湮灭条件）、(10.4.7)（δ(γ) 的两条 OPE 性质），pp. 16–17；对照 bc 的 |0⟩ = c_1|1⟩ 与逐字句 'there is no state in the Fock space built on |1⟩ …' 同处"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E29；式号与逐字措辞逐页读到原书页图）。
+      ⚠ 原书对 (10.4.7) 的措辞是 'One can show that an insertion of δ(γ) in the path integral
+      has the property (10.4.7).'——**书中不证**。
+tags: [superstring, ghosts, beta-gamma, vacuum, state-operator-map]
+notes: |
+  ★【本卡为什么重要：它是超弦无鬼定理那句「direct imitation」的第一个结构性障碍】
+  抽取记录 Q4 列出超弦相对玻色弦多出的三个结构，第 (i) 条正是本卡的内容：
+  βγ 的 Fock 空间与 bc 不同，且有 |1⟩ ≠ |0⟩_NS 的不等价真空问题。
+  Vol.1 §4.4 的无鬼定理证明是在一个固定的鬼场真空上做分次论证的；
+  超弦版本必须先说清用的是哪个真空。**Polchinski 完全没有讨论这一点。**
+  → worldsheet.no-ghost-theorem-superstring 的 gaps 显式引用本卡。
+
+  【现代文献的相关事实（本图不采信，仅备查）】抽取记录 Q4 末尾记下一条 L4 级信息
+  （检索后端综述，未核对原文）：picture number 会影响 BRST 上同调，零动量 R–R 态在不同
+  picture 下不等价。若属实，Polchinski 的无鬼定理陈述隐含了 picture 的选择
+  （他用的是 −1 与 −1/2 picture，即 (10.4.22)/(10.4.25) 的顶点算子）。
+  **这条不得作为来源使用**，只作为待查线索（reading-list 已登记 arXiv:1212.3592 等候选）。
+author: curator
+created: "2026-09-11"

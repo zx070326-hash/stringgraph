@@ -1,0 +1,82 @@
+id: worldsheet.rns-action
+kind: definition
+status: physical-argument
+title: RNS（Ramond–Neveu–Schwarz）世界面作用量：D 个玻色子加 D 对 Majorana 费米子
+statement: |
+  欧氏世界面（conv.worldsheet-euclidean）复坐标 z = σ^1 + iσ^2（conv.worldsheet-complex-coords）下，
+  RNS 弦的世界面作用量取为
+    S = (1/4π) ∫ d^2 z [ (2/α') ∂X^μ ∂̄X_μ + ψ^μ ∂̄ψ_μ + ψ̃^μ ∂ψ̃_μ ],
+  其中 μ = 0, …, D−1，指标用 η_{μν}（mostly-plus）升降；X^μ(z, z̄) 是对易场，
+  ψ^μ(z)、ψ̃^μ(z̄) 是**反对易**场（世界面 Majorana 费米子），分别取全纯与反全纯。
+  X 部门的前因子 (1/4π)(2/α') = 1/(2πα') 与 worldsheet.free-scalar-cft-action 逐字一致。
+
+  基本 OPE（本卡把它们作为定义数据的一部分列出，原书在 (10.1.6)/(10.1.7) 处写出）：
+    X^μ(z, z̄) X^ν(0, 0) ∼ −(α'/2) η^{μν} ln|z|^2,
+    ψ^μ(z) ψ^ν(0) ∼ η^{μν}/z,     ψ̃^μ(z̄) ψ̃^ν(0) ∼ η^{μν}/z̄。
+
+  **正规序体例**：Vol.2 全卷把重合算符的 : : 正规序**隐含**（原文 p. 2：'throughout this volume
+  the : : normal ordering of coincident operators will be implicit'），创生-湮灭正规序另记作 ° °。
+  本图凡从 Vol.2 抽取的公式都按此体例读。
+
+  **本卡不断言的内容**：
+    (1) 不断言这个作用量是从任何超-diff × 超-Weyl 不变的作用量规范固定得到的。
+        原书 §10.5 开头明说本书不走那条路（见 worldsheet.ocq-superstring-physical-states 的
+        notes 与本卡 notes 的 E33 引文）。
+    (2) 不断言路径积分 ∫ DX Dψ e^{−S} 有数学定义（与 worldsheet.free-scalar-cft-action 同样的缺口，
+        另加费米子的 Berezin 积分）。
+    (3) 不断言 D 的取值。D = 10 是另外的命题（worldsheet.critical-dimension-superstring）。
+uses:
+  - worldsheet.free-scalar-cft-action
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.5), p. 2（作用量，逐字公式）；(10.1.6) XX OPE（原文注 'For reference we recall from chapter 2'）、(10.1.7) ψψ 与 ψ̃ψ̃ OPE，同页；正规序体例见 p. 2 正文"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E3，式号与公式内容均逐页读到原书页图）。
+      原文对这个作用量的措辞是 'With this in mind, we **consider** the world-sheet action'
+      ——**是直接写下的定义，不是推出来的**。
+  - ref: polchinski-1998-v2
+    loc: "§10.1 章首段, p. 1（逐字：'This idea arises naturally if we try to include spacetime fermions in the spectrum, and by guesswork we are led to superconformal symmetry.'）；(10.1.1)–(10.1.4), pp. 1–2（Dirac 方程动机：'it is natural to guess'）"
+    note: |
+      L1（E1、E2）。作者自称 'by guesswork'。这是本定义卡 status 不高于 physical-argument
+      的直接文献依据之一（另一条理由是路径积分本身无定义）。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, (10.1.8) 下方, p. 2（α' 归一化提示：'The annoying factors of (2/α')^{1/2} could be eliminated by working in units where α' = 2, and then be restored if needed by dimensional analysis'）"
+    note: |
+      L1。本卡**保留显式 α'**（即 conv.alpha-prime-regge），不取 α' = 2。
+      ⚠ 但 §10.3 起的玻色化标量（H、φ、χ、ρ）**就是**按 α' = 2 归一化的
+      （原文 (10.3.5) 下方：'For world-sheet scalars not associated directly with the embedding
+      of the string in spacetime this is the normalization we will always use, corresponding to
+      α' = 2 for the embedding coordinates'）。本图暂无玻色化节点；日后建时必须在那些卡上
+      写清这一差别，不要与本卡混。
+tags: [rns, superstring, worldsheet, action, definition]
+notes: |
+  【为什么 status: physical-argument 而不是 rigorous】
+  worldsheet.free-scalar-cft-action（纯玻色情形）标的是 rigorous——那张卡只写下一个二次形式。
+  本卡多出两件事：(a) 反对易场 ψ^μ 的处理需要 Grassmann 值场与 Berezin 积分，
+  本图没有该结构的节点；(b) 更重要的是，本卡把三条 OPE 列为定义数据，
+  而 OPE 的收敛性按 lead 裁决（2026-09-10，docs/ROADMAP.md）在本图中未公理化。
+  按「不确定选低一级」取 physical-argument。
+  若日后要一张 rigorous 的纯代数卡，应把 OPE 移出，只留作用量与场的分次。
+
+  【E33 的方法论限定，必须与本卡一起读】原书 §10.5 开头（p. 20，逐字）：
+  'there is an analogous gauge-invariant form, and the superconformal algebra emerges as a
+  constraint in the gauge-fixed theory. However, it is not necessary to proceed in this way …
+  Rather we can generalize directly in the gauge-fixed form, defining the superconformal
+  symmetry to be a constraint'。
+  后果：与玻色弦不同，本图的超弦分支**没有** Weyl 反常路线可走
+  （Vol.1 的 D = 26 有一条 worldsheet.critical-dimension-weyl-anomaly-v2，超弦没有对应物）；
+  「总中心荷为零」在 Vol.2 里是被**假定**的一致性条件，见
+  worldsheet.critical-dimension-superstring-anomaly。
+  「存在超-diff × 超-Weyl 不变形式」这一断言本书不构造、不引文献（抽取记录 Q5），
+  故本图**不**为它建节点。
+
+  【本卡未建的相邻内容】(10.1.9)–(10.1.11)：超共形变换及其闭合（E5/E6）——原书把论证推给
+  习题 10.1、10.2（'as the reader can check'）。本轮不建节点；若日后建，
+  依赖 Vol.1 (2.3.11)（OPE 单极点决定变换律）是原书明写的，不必标 inferred。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,40 @@
+id: worldsheet.gso-projection--via-restatement-of-consistency-solutions
+target: worldsheet.gso-projection
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-sector-consistency-solutions
+    note: |
+      ★ 供给被重述的对象：四个扇区组合（IIB/IIA/IIA′/IIB′）与两个 type 0 解。
+      **本推导的全部内容就是把这些组合读成 exp(πiF)、exp(πiF̃) 的本征条件。**
+  - id: worldsheet.rns-fermion-number-operator
+    note: 供给 exp(πiF)、exp(πiF̃) 这两个算符及其本征值 ±1。
+  - id: worldsheet.superstring-sector-labels
+    note: 供给 α̃ 标号，IIA 的投影条件 exp(πiF̃) = (−1)^{α̃} 要用它。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.9)、(10.6.10)、(10.6.11), pp. 27–28"
+    note: |
+      L1。原书在给出四个解之后，直接以「The IIB theory is defined by keeping all sectors
+      with …」的形式重述，无中间步骤（因为这本来就是读表）。
+summary: |
+  逐行读 worldsheet.superstring-sector-consistency-solutions 的解表：
+    IIB = {(NS+,NS+), (R+,NS+), (NS+,R+), (R+,R+)}
+        每个条目左右两侧都带 +，即 exp(πiF) = exp(πiF̃) = +1。✓ 得 (10.6.9)。
+    IIA = {(NS+,NS+), (R+,NS+), (NS+,R−), (R+,R−)}
+        左侧一律 +；右侧在 NS（α̃ = 0）取 +、在 R（α̃ = 1）取 −，
+        即 exp(πiF̃) = (−1)^{α̃}。✓ 得 (10.6.10)。
+    0B  = {(NS+,NS+), (NS−,NS−), (R+,R+), (R−,R−)}
+        每个条目左右的 α 相同且 F 的符号相同，即 α = α̃ 且 exp(πiF) = exp(πiF̃)。✓ 得 (10.6.11)。
+  手征性的读数：IIA 两侧投影相反 ⟹ 谱在交换 8 ↔ 8′、56 ↔ 56′ 下不变（非手征）；
+  IIB 两侧相同 ⟹ 手征。
+
+  【status 的理由】本推导本身只是读表（有限步、可核对），
+  但它完全继承上游 worldsheet.superstring-sector-consistency-solutions 的状态
+  （三条条件被强加、穷举过程不展示），故封顶在 physical-argument。
+gaps:
+  - "**完全继承上游的 gap**：三条一致性条件是被强加的；穷举过程原书不展示、本图未复算。若日后把该穷举机器验证并经 reviewer 复核（见那条推导的 gaps 第一条），本推导可随之升级。"
+  - "**手征性的读数用到 8/8′/56/56′ 的表示标签**，其表示论内容依赖附录 B.1（本轮未读，抽取记录 Q8）。本推导只把它们当作标签。"
+  - "**「非手征 = 在时空宇称下不变」这一等价未在图中论证**：原书直接说 'the spectrum is invariant under spacetime parity, which interchanges 8 ↔ 8′ and 56 ↔ 56′'，本图无时空宇称的节点。"
+author: curator
+created: "2026-09-11"
