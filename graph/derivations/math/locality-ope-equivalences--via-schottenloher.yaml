@@ -1,0 +1,50 @@
+id: math.locality-ope-equivalences--via-schottenloher
+target: math.locality-ope-equivalences
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.formal-distribution-locality
+    note: |
+      Theorem 10.10 第 1 条逐字就是 Definition 10.7（p. 177）的条件；两者在同一章、同一记号下，
+      不是本图的跨书认同，故不标 inferred。
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 10, Theorem 10.10, p. 178（陈述与证明）；Proposition 10.6, pp. 175–176（(z−w)^N f = 0 ⇒ f 唯一地写成 Σ_{j<N} c^j(w) D_w^j δ(z−w)，且 c^n(w) = Res_z (z−w)^n f，对 N 归纳的完整证明）；Lemma 10.4–10.5, p. 174（delta 函数恒等式）；(10.1) 与 i_{z,w} 定义, p. 177；Definition 10.9（正规序积）, p. 178"
+    note: |
+      **L1（researcher 2026-09-11 逐页读图，math-sources.md §11.1–§11.3）**。文献自称的严格程度：
+      标题 Theorem，正文给证明，出处是 Springer LNP 759 的数学教材（作者是 LMU 数学系），
+      不是物理书里的形式操作。整章停在形式级数层面，证明中不出现任何收敛性论证，
+      因而也不需要任何收敛性假设——这正是它能标 rigorous 的原因。
+summary: |
+  全部在 R[[z^{±1}, w^{±1}]] 内做形式代数：
+  (1 ⇒ 2) 取 f = [A(z), B(w)]，由 (z-w)^N f = 0 与 Proposition 10.6，f 唯一地写成
+      Σ_{j=0}^{N-1} C^j(w) D^j δ(z-w)，且 C^j(w) = Res_z (z-w)^j [A(z), B(w)]。
+  (2 ⇒ 1) Lemma 10.5：(z-w)^N 零化每个 D^j δ(z-w)（j < N），故零化其 R[[w^{±1}]]-线性组合。
+  (2 ⇔ 3) 用 (10.1) D^j δ(z-w) = i_{z,w}(z-w)^{-(j+1)} - i_{w,z}(z-w)^{-(j+1)}，
+      并按 z 的幂次正负把 [A(z), B(w)] 拆成 [A(z)_-, B(w)] + [A(z)_+, B(w)]：
+      i_{z,w}(z-w)^{-(j+1)} 只含 z 的负幂、i_{w,z}(z-w)^{-(j+1)} 只含 z 的非负幂，逐幂比较即得第 3 条的两式；反向相加即回到第 2 条。
+  (3 ⇔ 4) 由正规序积的定义 :A(z)B(w): = A(z)_- B(w) + B(w) A(z)_+，
+      A(z)B(w) - :A(z)B(w): = [A(z)_-, B(w)]，B(w)A(z) - :A(z)B(w): = -[A(z)_+, B(w)]，
+      故第 3 条与第 4 条只是同一对等式的移项。
+  (2 ⇔ 5) 把 δ(z-w) = Σ_k z^{-k-1} w^k 代入第 2 条并取 z^{-m-1} w^{-n-1} 的系数：
+      D^j δ(z-w) 的 z^{-m-1} 系数为 (m choose j) w^{m-j}，与 C^j(w) = Σ_k C^j_{(k)} w^{-k-1} 相乘后
+      取 w^{-n-1} 系数得 (m choose j) C^j_{(m+n-j)}，求和即第 5 条；反向逐系数还原即第 2 条。
+  五条中的 C^j 因 Proposition 10.6 的唯一性而是同一组。
+gaps:
+  - "**转录疑点（Q10，须持原件者复核）**：Theorem 10.10 第 5 条的求和下限在 researcher 读到的页图上疑似 j = 1，
+     而第 2–4 条均为 j = 0；本推导与目标节点按 j = 0 写（与 delta 函数系数计算 (2 ⇔ 5) 一致，
+     j = 1 会漏掉 j = 0 项 C^0_{(m+n)}，与第 2 条矛盾）。若原书确为 j = 1，那是原书的排印错误而非本图的错误，
+     但仍需登记。见 literature/extractions/math-sources.md §11.3 与 §14.2 Q10。"
+  - "**记号的 L0 部分**：Definition 10.9（:A(z)B(w):）与 A(z)_± 的正文措辞未被转录；summary 中 (3 ⇔ 4) 一步
+     用的是通行定义。若 Schottenloher 的 ± 标签与通行定义相反，需要新建节点修正第 3、4 条的 ± 标签，
+     等价性本身不受影响。"
+  - "p.180 正文两处写「Theorem 10.5」「property 5 in Lemma 10.5」，几乎肯定应为 Theorem 10.10（math-sources.md §11.4 Q12）；
+     本推导不引用这两处，只登记以防后人照抄错误编号。"
+notes: |
+  **无解析缺口**：本推导的每一步都是 R[[z^{±1}, w^{±1}]] 内的系数比较，不需要任何收敛性、拓扑或范数。
+  「|z| > |w|」在整章中只用来命名 i_{z,w} 这一种形式展开（p.177 "Analytic Aspects" 段），
+  不是收敛域——这是 Kac 一系文献最容易被物理读者误读的一点（math-sources.md §10.1 关于 Kac (4.11.6) 的警告同理）。
+  **为什么不引 Kac 原书**：math-sources.md §13.4 三条硬性禁令之二——`Kac, Theorem 2.3` / `Corollary 2.2`
+  内容未核实且归属冲突，改引 Schottenloher（其正文明确把 Proposition 10.6 归功于 Kac）。
+author: curator
+created: "2026-09-11"

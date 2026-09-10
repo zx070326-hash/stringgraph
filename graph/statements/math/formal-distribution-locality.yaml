@@ -1,0 +1,67 @@
+id: math.formal-distribution-locality
+kind: definition
+status: rigorous
+title: 形式分布的局域性：(z − w)^N [A(z), B(w)] = 0
+statement: |
+  设 R 是含幺结合代数（弦论/CFT 里典型取 R = End(V)，V 为复向量空间）。R 上的**形式分布**指
+    A(z) = Σ_{n ∈ Z} A_{(n)} z^{-n-1} ∈ R[[z^{±1}]],   A_{(n)} ∈ R,
+  两变量形式分布即 R[[z^{±1}, w^{±1}]] 的元素（对 (m,n) ∈ Z^2 逐系数给定）。
+  两个单变量形式分布的乘积 A(z)B(w) 在 R[[z^{±1}, w^{±1}]] 中逐系数良定义（(m,n) 系数为 A_{(m)}B_{(n)}），
+  对易子相应地定义为
+    [A(z), B(w)] := A(z)B(w) - B(w)A(z),  其 (m,n) 系数为 [A_{(m)}, B_{(n)}]。
+  又：用 Laurent **多项式**（如 (z - w)^N，按二项式展开成有限和）乘 R[[z^{±1}, w^{±1}]] 的元素总是良定义的。
+
+  **定义（局域性）**：A, B ∈ R[[z^{±1}]] 称为**互为局域**（mutually local），若存在 N ∈ N 使
+    (z - w)^N [A(z), B(w)] = 0   在 R[[z^{±1}, w^{±1}]] 中成立。
+  满足此式的最小 N 称为该对分布的**局域阶**。约定 N = 0 时左端即 [A(z), B(w)] 本身（即两者对易）。
+
+  记号配套：形式 delta 函数
+    δ(z - w) = Σ_{n ∈ Z} z^{n-1} w^{-n} = Σ_{n ∈ Z} z^{-n-1} w^{n} ∈ R[[z^{±1}, w^{±1}]]
+  满足 (z - w) δ(z - w) = 0，故非平凡的局域分布确实存在（N = 1 即可）。
+
+  **两条必须留意的形式代数事实**（否则本定义会被误读）：
+  (1) R[[z^{±1}, w^{±1}]] **不是环**：一般两个两变量形式分布之积无定义；本定义只用到「Laurent 多项式 × 形式分布」
+      与「单变量分布之积」这两种总有定义的运算。
+  (2) (z - w)^N f = 0 **不蕴含** f = 0：R[[z^{±1}, w^{±1}]] 中 (z - w)^N 是零因子（δ(z-w) 即其零化元）。
+      （相反地，在 F((z_1))((z_2))（F 为域）中 (z_1 - z_2)^N 不是零因子。）
+      因此「局域」是一个真正的限制条件，而不是「对易」的换写。
+uses: []
+uses_conventions: []
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 10 (Vertex Algebras), Definition 10.7 (Locality), p. 177；形式分布与 Res 见 Definition 10.1, p. 173；形式 delta 函数见 Definition 10.3, p. 174"
+    note: |
+      **L1（researcher 逐页读图核实，2026-09-11，literature/extractions/math-sources.md §11.1、§11.3）**：
+      Definition 10.7 逐字为「Two formal distributions A, B ∈ R[[z^±]] are local with respect to each other
+      if there exists N ∈ N such that (z−w)^N [A(z), B(w)] = 0 in R[[z^±, w^±]]」。
+      Definition 10.3 的 delta 函数逐字为 δ(z−w) = Σ_{n∈Z} z^{n−1}w^{−n} = Σ_{n∈Z} z^{−n−1}w^{n}。
+      本章可放心写编号：schottenloher-2008 的 note 已于 2026-09-11 解除第 10 章的「编号未核实」限制。
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, Definition 7.6 (Local fields (formal variable version)), 式 (7.10), p. 72；零因子与 F((z)) 是域见 §7.6–§7.7 与 Lemma 7.7, p. 73"
+    note: |
+      **L1 逐字**：「There exists N ∈ N depending only on A and B such that the equation
+      (z_1 − z_2)^N [A(z_1), B(z_2)] = 0 holds on the level of End(V)[[z_1^{±1}, z_2^{±1}]]」。
+      与 Schottenloher Definition 10.7 是同一条件（变量名不同）。
+      **版本陷阱**：Gui 的编号只对作者主页 2026-07-15 版核实过，arXiv:2305.03822 各版未核实，
+      故 loc 一律写死版本日期（sources.bib 的 gui-2023-lectures note 与 math-sources.md §8.0）。
+      陈述中的两条形式代数事实 (1)(2) 取自 Gui §7.6–§7.7 的正文警告。
+tags: [vertex-algebra, formal-distribution, locality, definition, math-input]
+notes: |
+  **为什么 status 是 rigorous**：这是一条纯代数定义，被定义对象（R[[z^{±1}, w^{±1}]] 中的一个等式）
+  在两本数学书中逐字给出，无任何未定义的解析操作。它**不**断言任何收敛性：z, w 是形式变量，
+  不是复平面上的点。整个 Schottenloher 第 10 章停在形式级数层面（p.177 "Analytic Aspects" 段）。
+
+  **本节点刻意不声明任何约定节点**：出现的全部记号（形式分布的模指标 z^{-n-1}、delta 函数、
+  局域阶 N）都在陈述文本内写死，与来源逐字一致，不涉及度规号差、α' 归一化或 Virasoro 中心项归一化。
+  与 math.laplace-fundamental-solution-2d 的做法相同：把纯数学事实与物理侧的归一化分成两个节点，
+  换算陷阱落在两者之间的边上。
+
+  **与物理 OPE 的关系**：本节点是 worldsheet.operator-product-expansion（物理 OPE + 有限收敛半径断言，
+  physical-argument）的**形式侧**对应物之一，但**不是**它的替代品：物理 OPE 断言的是复变量的收敛级数，
+  本节点只讲形式变量。二者之间缺的那一步是 worldsheet.string-cft-is-a-vertex-algebra（无推导，open）。
+
+  **形式化前景**：Mathlib 的 Mathlib/Algebra/Vertex/VertexOperator.lean 里 `Locality` 写在模块 docstring
+  的 **TODO** 段，尚未实现（读取日期 2026-09-11，Mathlib 变动快，用前须复查）。
+  故本节点现在只能到 rigorous，不能标 formalized。见 sources.bib 的 virasoro-lean-2025 note (6)。
+author: curator
+created: "2026-09-11"

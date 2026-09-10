@@ -1,0 +1,70 @@
+id: math.locality-ope-equivalences
+kind: proposition
+title: 形式分布的局域性 ⟺ delta 分解 ⟺ 物理写法的 OPE ⟺ 模式对易子公式（Schottenloher Thm 10.10）
+statement: |
+  设 R 是含幺结合代数，A, B ∈ R[[z^{±1}]] 是形式分布（记号与 math.formal-distribution-locality 相同：
+  A(z) = Σ_n A_{(n)} z^{-n-1}），N ∈ N。
+
+  **记号**（按通行定义补写，来源正文的措辞见 notes）：
+    D^j := (1/j!) ∂_w^j；
+    对只在 z = 0、w = 0 或 |z| = |w| 有极点的有理函数 F(z, w)，i_{z,w} F 表示 F 在区域 {|z| > |w|} 上的
+    幂级数展开（即把 (z-w)^{-1} 按 w/z 的正幂展开），i_{w,z} F 表示在 {|z| < |w|} 上的展开；
+    二者之差满足 i_{z,w}(z-w)^{-1} - i_{w,z}(z-w)^{-1} = δ(z-w)；
+    A(z)_- := Σ_{n < 0} A_{(n)} z^{-n-1}，A(z)_+ := Σ_{n ≥ 0} A_{(n)} z^{-n-1}，
+    正规序积 :A(z)B(w): := A(z)_- B(w) + B(w) A(z)_+。
+
+  **命题**：下列五条性质对 A, B 与给定的 N 两两等价：
+  1. A, B 互为局域且 (z - w)^N [A(z), B(w)] = 0；
+  2. **delta 分解**：存在 C^j ∈ R[[w^{±1}]]（j = 0, …, N-1）使
+       [A(z), B(w)] = Σ_{j=0}^{N-1} C^j(w) D^j δ(z - w)；
+  3. 存在 C^j ∈ R[[w^{±1}]] 使
+       [A(z)_-, B(w)] = Σ_{j=0}^{N-1} i_{z,w} (z - w)^{-(j+1)} C^j(w),
+      -[A(z)_+, B(w)] = Σ_{j=0}^{N-1} i_{w,z} (z - w)^{-(j+1)} C^j(w)；
+  4. **物理写法的 OPE**：存在 C^j ∈ R[[w^{±1}]] 使
+       A(z)B(w) = Σ_{j=0}^{N-1} i_{z,w} (z - w)^{-(j+1)} C^j(w) + :A(z)B(w):,
+       B(w)A(z) = Σ_{j=0}^{N-1} i_{w,z} (z - w)^{-(j+1)} C^j(w) + :A(z)B(w):；
+  5. **模式对易子公式**：存在 C^j = Σ_{k ∈ Z} C^j_{(k)} w^{-k-1} ∈ R[[w^{±1}]] 使对一切 m, n ∈ Z
+       [A_{(m)}, B_{(n)}] = Σ_{j=0}^{N-1} (m choose j) C^j_{(m+n-j)}。
+  并且各条中的系数分布 C^j 是同一组，由 A, B 唯一确定：
+       C^j(w) = Res_z (z - w)^j [A(z), B(w)],   0 ≤ j < N。
+
+  物理记号下第 4 条的第一式写作 A(z)B(w) = Σ_{j=0}^{N-1} C^j(w)/(z-w)^{j+1} + :A(z)B(w):，
+  其中「默认 |z| > |w|」的含义**只是**选定 i_{z,w} 这种形式展开；只写奇异部分即
+  A(z)B(w) ∼ Σ_{j=0}^{N-1} C^j(w)/(z-w)^{j+1}。本命题**不含任何收敛性断言**：z, w 始终是形式变量。
+uses_conventions: []
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 10, Theorem 10.10 (five equivalent properties), p. 178；delta 分解的存在唯一性与系数公式 c^n(w) = Res_z (z−w)^n f(z,w) 见 Proposition 10.6, p. 175；物理记号的翻译段与「This is a kind of operator product expansion」见 p. 179；i_{z,w} / i_{w,z} 与 (10.1) 见 p. 177 \"Analytic Aspects\" 段"
+    note: |
+      **L1（researcher 逐页读图核实，2026-09-11，math-sources.md §11.2–§11.3）**：五条性质与 Proposition 10.6
+      逐字转录见该文件；本节点第 2、4、5 条的公式照抄转录，第 1 条即 Definition 10.7。
+      **转录疑点（Q10）**：第 5 条的求和**下限**在页图上疑似 j = 1，而第 2–4 条均为 j = 0，标准对易子公式
+      亦从 j = 0 起；本节点按 j = 0 写，疑点记入推导节点 gaps，**持原件者须复核**。
+      **记号的 L0 部分**：A(z)_±、:A(z)B(w): 的显式定义（Definition 10.9, p. 178）与 i_{z,w} 的定义段
+      researcher 只记了编号与要点，未逐字转录；本节点「记号」段按通行定义补写，见 notes。
+tags: [vertex-algebra, formal-distribution, locality, ope, commutator, math-input]
+notes: |
+  **本节点的作用**：它把图里「OPE 的极点结构 ⟺ 模式对易关系」这条一直只有物理论证的边
+  （worldsheet.ope-commutator-dictionary--via-contour-deformation 用围道变形）在**形式分布层面**变成一条
+  带编号的严格定理（第 4 条 ⟺ 第 5 条）。它**不能**直接替代物理侧的节点，因为：
+  (a) 它的前提是形式局域性（第 1 条），而弦论世界面 CFT 的场是否满足这一前提在本图中是 open
+      （worldsheet.string-cft-is-a-vertex-algebra）；
+  (b) 它不断言任何收敛性，物理侧 OPE 的「有限收敛半径」在解析侧另有节点
+      （math.vertex-algebra-ope-analytic-convergence，前提是复解析局域性）。
+  Schottenloher 本人在 p.179 说第 4 条「is **a kind of** operator product expansion as in Sect. 9.3」——
+  是「一种」，不是「就是」。本节点忠实保留这一措辞。
+
+  **记号段为何标「按通行定义补写」**：Definition 10.9（正规序积）与 A(z)_± 的正文措辞未被 researcher 转录，
+  本节点写的是 Kac 一系文献的通行定义（A_- 为负模/产生部分、A_+ 为非负模/湮灭部分，
+  :AB: = A_- B + B A_+）。若日后核对原页发现 Schottenloher 的 ± 记法相反，只影响第 3、4 条中 ± 的
+  标签，不影响等价性本身；届时按项目规则新建节点并 superseded_by。
+
+  **与 Kac 的关系**：Schottenloher 正文（p.175）逐字把 Proposition 10.6 归功于 Kac [Kac98*]，
+  且本章「based mainly on the course [Kac98*]」。但按 math-sources.md §10.3 的禁令，本节点**不引**
+  `Kac, Theorem 2.3` 或 `Kac, Corollary 2.2`（编号存在但内容未核实，且两个归属互相冲突）；
+  要 Kac 就引 Schottenloher 的这条可核实替身。
+
+  **建议的后续拆分**：Proposition 10.6（delta 分解的存在唯一性）本身是一条独立引理，日后若有推导
+  单独需要它，可拆成 math.formal-delta-decomposition；本批为控制节点数，把它只作为本推导的中间步骤记入 sources。
+author: curator
+created: "2026-09-11"

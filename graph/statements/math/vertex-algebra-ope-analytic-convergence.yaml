@@ -1,0 +1,50 @@
+id: math.vertex-algebra-ope-analytic-convergence
+kind: proposition
+title: 复解析局域性 ⇒ OPE 存在、a.l.u. 收敛于 0 < |z₁−z₂| < |z₂|、奇异项有限（Gui Prop. 7.12）
+statement: |
+  设 V、V′、P_n、齐次场 A(z), B(z) 如 math.vertex-algebra-complex-analytic-locality 所设，
+  且 A, B 按该定义（Gui Definition 7.2）互为局域；N 为该定义第 2 条中的整数，
+  f_{v,v′} ∈ O(Conf²(C^×)) 为该定义给出的全纯函数（v ∈ V, v′ ∈ V′）。
+  对每个 k ∈ Z 与 z_2 ∈ C^×，定义线性映射 (A_k B)(z_2) : V′ ⊗ V → C 为
+    ⟨v′, (A_k B)(z_2) v⟩ := ∮_{C(z_2)} (z_1 - z_2)^k f_{v,v′}(z_1, z_2) dz_1 / (2πi),                (7.14)
+  其中 C(z_2) 是 C^× 中绕 z_2 的任一圆周（(z_1 - z_2)^k f_{v,v′} 在 z_1 = z_2 附近除该点外全纯，故与圆周的选取无关）。
+  则：
+  (i) **奇异项有限**：k ≥ N 时 A_k B = 0；
+  (ii) **OPE 的存在与收敛**：对每个 v ∈ V, v′ ∈ V′，
+        f_{v,v′}(z_1, z_2) = Σ_{k ∈ Z} (z_1 - z_2)^{-k-1} ⟨v′, (A_k B)(z_2) v⟩,                        (7.15)
+      其中右端级数在
+        Ω_0 = {(z_1, z_2) : 0 < |z_1 - z_2| < |z_2|}
+      上 a.l.u. 收敛到左端。
+
+  用场的写法即 A(z_1)B(z_2) = Σ_{k ∈ Z} (z_1 - z_2)^{-k-1} (A_k B)(z_2)，奇异部分只有 k = 0, …, N-1 共 N 项。
+  **注意**：本命题不是无条件的「OPE 收敛」，而是「复解析局域性（Definition 7.2）⇒ OPE 存在且收敛」；
+  OPE 系数场 (A_k B) 由围道积分 (7.14) **定义**出来，不是假设存在的。
+uses_conventions: []
+sources:
+  - ref: gui-2023-lectures
+    loc: "2026-07-15 版, Proposition 7.12 与式 (7.15), p. 77；Definition 7.10 与式 (7.14)（A_k B 的围道积分定义）, p. 77；Lemma 7.11（k ≥ N ⇒ A_k B = 0）, p. 77；§7.11 引言段 p. 77"
+    note: |
+      **L1（researcher 2026-09-11 逐页读作者主页 PDF；math-sources.md §8.5）**：Definition 7.10、Lemma 7.11、
+      Proposition 7.12 及 §7.11 引言全部逐字转录，本节点照抄。§7.11 引言逐字：「In this subsection, we assume the
+      statements in Def. 7.2, and derive the OPE … Thus, the existence of OPE simply follows from complex analysis.」
+      **版本陷阱**：只对作者主页「Last update: July 15, 2026」版核实；arXiv:2305.03822 各版编号未核实（L0）。
+      这是本轮检索中**唯一**把 OPE 解析收敛性真正证出来的来源（Gui 前言逐字：「The usual algebraic approaches to VOAs
+      (e.g. [Kac, LL]) avoid showing the convergence of such series」）。
+tags: [vertex-algebra, ope, convergence, complex-analytic, math-input]
+notes: |
+  **这是 worldsheet.operator-product-expansion 里那句「OPE 是有限收敛半径的收敛级数」在数学上最贴近的对应物**，
+  但差两件事：
+  (1) 前提不同——这里的前提是 Definition 7.2（复解析局域性），Polchinski 没有任何对应的假设，直接断言收敛；
+  (2) 收敛域的表述不同——这里是 0 < |z_1 - z_2| < |z_2|（关于 z_2 = 0 处的「另一插入点」即真空插入在 0 与 ∞），
+      Polchinski 说的是「到最近的其它算子插入点的距离」，对应 Gui Theorem 8.1 / 8.4 的多点情形（本批未落卡）。
+
+  **与 math.vertex-algebra-associativity 绝不可合并**：那条是形式级数恒等式，本条是全纯函数的 Laurent 展开；
+  见 math-sources.md §9.4 对照表。
+
+  **弦论能否满足前提**：open——worldsheet.string-cft-is-a-vertex-algebra。
+
+  **可能的后续节点**（math-sources.md §13.2）：math.n-point-function-analytic-continuation ← Gui Theorem 8.1
+  （M 个两两局域的场，乘积级数在 Ω_σ 上 a.l.u. 收敛并延拓到**与排列 σ 无关**的 f ∈ O(Conf^M(C^×))，
+  即径向排序的严格版本）。本批未建，因为图里尚无节点需要它。
+author: curator
+created: "2026-09-11"
