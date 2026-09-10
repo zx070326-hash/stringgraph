@@ -51,6 +51,9 @@ StringFormal/
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
   NoGhost/PhysicalStates.lean  H_phys 子模、L_m^† = L_{-m}（pairing_Lop_left）、L_n 齐次性与 H_phys 的 level 分级、零模态/伪态、level 1 与 a₀=1 光子零模态
+  NoGhost/LevelTwo.lean     level-2 标量态 ψ₂ = [α_{-1}·α_{-1}+c₂(a·α_{-2})+c₃(a·α_{-1})²]|k⟩：
+                            L₁/L₂ 物理态条件、闭式模 (4a₀-9)²⟨ψ₂,ψ₂⟩=2(D-1)[16a₀²+(2D-74)a₀+84-3D]、
+                            有序域上 D>26 的显式负模物理态（见文件头 gaps）
   NoGhost/VertexOperator.lean  指数顶点算子 :e^{ic·X}: 的振子部分：产生半 = 乘以 creaExp、
                             湮灭半 = 变量平移 vertexSub；vertexOsc η b K 的模态代数
                             [α^μ_p, V_K] = b^μ V_{K-p}、level 分级、刚性（见文件头 gaps）
