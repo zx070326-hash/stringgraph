@@ -1,4 +1,5 @@
 import StringFormal.Math.EulerPartition
+import StringFormal.Math.MobiusJacobian
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
