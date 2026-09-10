@@ -1,0 +1,30 @@
+id: worldsheet.transverse-oscillator-commutators
+kind: proposition
+title: 横向振子的对易关系 [α_m^i, α_n^j] = m δ^{ij} δ_{m+n,0}
+statement: |
+  在光锥规范的正则量子化（worldsheet.light-cone-canonical-commutators）下，
+  开弦模式展开（worldsheet.open-string-mode-expansion）的振子模满足
+    [ α_m^i, α_n^j ] = m δ^{ij} δ_{m+n, 0}   （i, j = 2, ..., D-1；m, n ∈ Z\{0}），
+  以及 (α_n^i)^† = α_{-n}^i、[x^i, p^j] = i δ^{ij}。
+  即：对每个横向方向 i 与每个 n ≥ 1，
+    a_n^i = α_n^i / n^{1/2},  (a_n^i)^† = α_{-n}^i / n^{1/2}
+  是一份标准的玻色湮灭/产生算符对，[a_m^i, (a_n^j)^†] = δ^{ij} δ_{mn}。
+  横向振子代数因此是 (D-2) × N 份互相对易的 Heisenberg 代数，内积正定。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.25b)（自由开弦的振子对易关系），由 eq. (1.3.24b)（等时对易关系）导出"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E14，证据等级 [已核实]：
+      Headrick 习题 1.7「Using the equal time commutation relations (1.3.24b) …
+      they will come out the same as for the free string (1.3.25b)」；
+      Schrans 在 [1.53] 处写出 [α_m^i, α_n^j] = m δ^{ij} δ_{m+n,0}。
+tags: [bosonic-string, quantization, light-cone, oscillator-algebra]
+notes: |
+  这条对易关系是既有节点 worldsheet.light-cone-quantization 中直接写进定义的那条；
+  本节点把它作为**从正则量子化推出的命题**单列，使那条定义有明确的来源链。
+  两处的公式逐字一致（既有节点写 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0}），
+  不构成不兼容表述。
+  正定性（横向 Fock 空间无鬼）是无鬼定理链条中「光锥一侧」的起点。
+author: curator-polchinski-ch1
+created: "2026-09-10"

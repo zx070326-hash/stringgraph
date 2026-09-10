@@ -1,0 +1,26 @@
+id: worldsheet.polyakov-action-symmetries
+kind: proposition
+title: Polyakov 作用量的时空 Poincaré 不变性与世界面微分同胚不变性
+statement: |
+  Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）在下列两类变换下不变：
+  (i) 时空 Poincaré 变换：X'^μ(τ,σ) = Λ^μ_ν X^ν(τ,σ) + b^μ，γ'_{ab} = γ_{ab}，
+      其中 Λ ∈ O(1, D-1)，b^μ ∈ R^D 常数；
+  (ii) 世界面微分同胚（重参数化）：设世界面 M 紧，φ: M → M 为保定向微分同胚
+      且 φ(∂M) = ∂M，写成坐标形式 σ^a → σ'^a(σ)：
+      X'^μ(σ') = X^μ(σ)，  γ'_{ab}(σ') = (∂σ^c/∂σ'^a)(∂σ^d/∂σ'^b) γ_{cd}(σ)。
+  即 S_P[X', γ'] = S_P[X, γ]。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.19)–(1.2.20) 附近"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E7，证据等级
+      [页码已核实/式号未核实]；公式号未核对原书，硬约束是落在
+      已核实的 (1.2.15)（p.12）与 (1.2.28)（p.19 之前）之间。
+tags: [bosonic-string, symmetry, classical, polyakov, diffeomorphism, poincare]
+notes: |
+  Weyl 不变性是 S_P 的第三个对称性，性质不同（只在世界面维数为 2 时成立，
+  且量子层面反常），故拆成独立节点 worldsheet.polyakov-weyl-invariance。
+  抽取记录 #E7 把三者写在一条里；本图按「一个节点一个命题」拆开。
+author: curator-polchinski-ch1
+created: "2026-09-10"

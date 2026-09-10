@@ -1,0 +1,32 @@
+id: worldsheet.open-string-neumann-boundary-condition
+kind: proposition
+title: 开弦端点的 Neumann 边界条件
+statement: |
+  取世界面为带边区域，世界面空间坐标 σ ∈ [0, ℓ]（ℓ 是坐标长度，
+  见 conv.worldsheet-coordinate-length），端点 σ = 0, ℓ 是世界面的边界。
+  对 Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）关于 X^μ 变分，
+  分部积分产生的边界项是
+    -(1/(2π α')) ∫ dτ (-γ)^{1/2} δX_μ ∂^σ X^μ |_{σ=0}^{σ=ℓ}.
+  若不对端点处的变分 δX^μ 加任何限制（即端点在时空中自由运动），
+  则 δS_P = 0 对一切 δX^μ 成立 当且仅当
+    （体内运动方程 ∂_a((-γ)^{1/2} γ^{ab} ∂_b X^μ) = 0）
+    且（∂^σ X^μ(τ, 0) = ∂^σ X^μ(τ, ℓ) = 0，即 Neumann 边界条件）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2, eq. (1.2.28)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E8，证据等级 [已核实]：
+      Schrans 伴读笔记 §1.11 逐字给出「(1.2.28) is ∂^σ x^μ(τ,0) = ∂^σ x^μ(τ,ℓ) = 0」。
+      式号与内容均已核实（在二手源意义上，见抽取记录 §0 与 Q9）。
+tags: [bosonic-string, boundary-condition, open-string, classical, neumann]
+notes: |
+  另一支解是 Dirichlet 条件 δX^μ|_{∂} = 0（端点固定），它破坏该方向的时空平移不变性；
+  Polchinski 在 §1.2 取 Neumann 是因为要求端点自由运动。Dirichlet 支后来发展为 D 膜，
+  不在本节点范围。本陈述把「端点变分不受限」写成了显式前提，这一前提的表述是
+  curator 补出的，Polchinski 的原措辞未核实。
+
+  ∂^σ = γ^{σa} ∂_a 含世界面度规；在光锥规范的度规下的具体形式见
+  worldsheet.open-string-boundary-condition-light-cone。
+author: curator-polchinski-ch1
+created: "2026-09-10"

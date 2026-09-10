@@ -1,0 +1,32 @@
+id: worldsheet.closed-string-mode-expansion
+kind: definition
+status: rigorous
+title: 闭弦横向坐标的模式展开（光锥规范）
+statement: |
+  闭弦的世界面空间坐标是周期的：σ ≅ σ + ℓ（见 conv.worldsheet-coordinate-length）。
+  在光锥规范（worldsheet.light-cone-gauge）下，横向场 X^i（i = 2..D-1）的通解为
+    X^i(τ, σ) = x^i + (p^i / p^+) τ
+      + i (α'/2)^{1/2} Σ_{n ≠ 0} (1/n) { ᾱ_n^i exp[-2π i n (σ + c τ)/ℓ]
+                                        + α_n^i exp[+2π i n (σ - c τ)/ℓ] },
+  即左行模 ᾱ_n^i 与右行模 α_n^i 是**两组独立**的振子（开弦的 Neumann 边界条件
+  把两者绑在一起，闭弦没有边界故不绑）。
+  实性给出 (α_n^i)^* = α_{-n}^i、(ᾱ_n^i)^* = ᾱ_{-n}^i。
+  闭弦零模归一化取 α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ。
+uses: [worldsheet.light-cone-gauge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4（p.25 起）, eq. (1.4.4)（闭弦模式展开）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E20，证据等级 [已核实]：
+      Headrick 习题 1.9 与 Schrans §1.14 均引用 (1.4.4) 并写出该式。
+      闭弦零模归一化 α_0^μ = ᾱ_0^μ = √(α'/2) p^μ 的**式号未核实**
+      （抽取记录 §1.1 表：内容确认，式号未核实）。
+tags: [bosonic-string, mode-expansion, closed-string, light-cone]
+notes: |
+  取 ℓ = 2π、c = 1 后指数化为 exp[∓in(σ ∓ τ)]，即多数文献的写法；
+  换算见 conv.worldsheet-coordinate-length。
+  注意开弦零模 α_0^μ = (2α')^{1/2} p^μ 与闭弦 α_0^μ = (α'/2)^{1/2} p^μ 相差因子 2，
+  这正是开闭弦质量公式差因子 4 的来源。
+author: curator-polchinski-ch1
+created: "2026-09-10"

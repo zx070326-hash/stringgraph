@@ -1,0 +1,29 @@
+id: worldsheet.light-cone-coordinates
+kind: definition
+status: rigorous
+title: 时空光锥坐标
+statement: |
+  在 D 维 Minkowski 时空 R^{1,D-1}（度规号差 (-,+,...,+)）中定义光锥坐标
+    x^± = (x^0 ± x^1)/2^{1/2},
+  其余坐标称为横向坐标，指标取 i = 2, ..., D-1（共 D-2 个）。
+  在这组坐标下 Minkowski 内积写作
+    a · b = -(a^+ b^- + a^- b^+) + a^i b^i,
+  即 η_{+-} = η_{-+} = -1，η_{ij} = δ_{ij}，其余分量为零；
+  指标升降为 a_± = -a^∓，a_i = a^i。特别地 a·a = -2 a^+ a^- + a^i a^i。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3（p.16 起）光锥坐标定义；式号未核实（抽取记录 E10 只给 (1.3.1)–(1.3.8) 区间）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E10，证据等级 [部分已核实]：
+      §1.3 起于 p.16 由 CUP 目录确认；**1/√2 因子未核实**（另一种常见约定不带 1/√2，
+      此时 η_{+-} = -1 变为 -1/2）。公式号未核对原书。
+tags: [bosonic-string, light-cone, kinematics]
+notes: |
+  1/√2 的取法与既有节点 worldsheet.light-cone-quantization 的写法一致
+  （该节点也写 x^± = (x^0 ± x^1)/√2，a·b = -(a^+b^- + a^-b^+) + a^i b^i），
+  故两者可直接对接；但抽取记录标注这一因子未核对原书，若日后核实为
+  x^± = x^0 ± x^1，则本节点的内积系数需相应修改（改法：新建节点并 superseded_by）。
+author: curator-polchinski-ch1
+created: "2026-09-10"

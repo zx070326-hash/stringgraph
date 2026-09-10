@@ -1,0 +1,26 @@
+id: worldsheet.point-particle-einbein-action
+kind: definition
+status: rigorous
+title: einbein（Polyakov 型）点粒子作用量
+statement: |
+  在世界线上引入一个独立的辅助场——einbein η(τ) > 0（等价地世界线度规
+  γ_{ττ} = -η^2），并把质量参数 m ≥ 0 保留为常数。einbein 形式的点粒子作用量是
+    S'_pp[X, η] = (1/2) ∫ dτ ( η^{-1} Ẋ^μ Ẋ_μ - η m^2 ).
+  它在世界线重参数化下不变（η 按一维密度变换），对 X^μ 与 η 都是变分良定的，
+  且对 m = 0 同样有定义。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.5)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E2，证据等级
+      [页码已核实/式号未核实]；公式号 (1.2.5) 未核对原书。
+tags: [bosonic-string, action, point-particle, classical, auxiliary-field]
+notes: |
+  Polchinski 用这条作为 Polyakov 作用量（worldsheet.polyakov-action）的动机：
+  同样的把度规提升为独立场的手法在二维给出 S_P。
+  与 Nambu 型作用量 worldsheet.point-particle-action 的经典等价是一条独立命题，
+  见 worldsheet.point-particle-einbein-equivalence，不写进本定义。
+author: curator-polchinski-ch1
+created: "2026-09-10"

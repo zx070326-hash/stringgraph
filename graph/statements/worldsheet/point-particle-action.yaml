@@ -1,0 +1,27 @@
+id: worldsheet.point-particle-action
+kind: definition
+status: rigorous
+title: 相对论性点粒子的世界线作用量（Nambu 型）
+statement: |
+  设 D 维 Minkowski 时空 R^{1,D-1} 带度规 η_{μν}，世界线由映射 X^μ(τ) 给出，
+  τ 是任意的世界线参数，Ẋ^μ = dX^μ/dτ。质量 m > 0 的相对论性点粒子的作用量取为
+  质量乘以世界线的固有时长度：
+    S_pp[X] = -m ∫ dτ (-Ẋ^μ Ẋ_μ)^{1/2}.
+  作用量仅在类时世界线（Ẋ^μ Ẋ_μ < 0）上有定义，且在世界线重参数化
+  τ → τ'(τ)（dτ'/dτ > 0）下不变。
+uses: []
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2（p.9 起），约 eq. (1.2.1)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E1，证据等级
+      [页码已核实/式号未核实]：§1.2 起于 p.9 由 CUP frontmatter 目录确认，
+      公式号 (1.2.1) 未核对原书。作用量的形式由 Headrick 习题解答 1.1 第 (1) 式间接确认。
+tags: [bosonic-string, action, point-particle, classical]
+notes: |
+  m = 0 的情形本作用量退化（恒为 0），这正是引入 einbein 形式
+  （worldsheet.point-particle-einbein-action）的动机。
+  公式号未核对原书，见抽取记录 §3 未核实公式号清单。
+author: curator-polchinski-ch1
+created: "2026-09-10"

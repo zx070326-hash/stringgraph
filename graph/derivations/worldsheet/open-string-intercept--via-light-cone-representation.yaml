@@ -4,9 +4,21 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.light-cone-quantization
+  - id: worldsheet.open-string-mass-shell
+    note: |
+      本推导的最后一步「由 α'm^2 = N - a 得 0 = 1 - a」直接用质量壳条件。该条件
+      现已单列节点，来源是已核实的 Polchinski (1.3.36)，落在本推导 sources 已引的
+      「§1.3，约 eq. (1.3.32)-(1.3.36)」区间内，故非 inferred。
+  - id: worldsheet.transverse-oscillator-commutators
+    note: |
+      「N = 1 能级恰有 D-2 个态 α^i_{-1}|0;k⟩」这一计数用的是横向振子代数
+      （每个 i 一份 Heisenberg 代数、无鬼）。该代数现已单列节点，来源是已核实的
+      Polchinski (1.3.25b)，同在 §1.3，故非 inferred。
+      支撑区间为 (1.3.25b)、约 (1.3.32)–(1.3.36)；其中 (1.3.25b) 是本分支（curator-polchinski-ch1）
+      在 reviewer-ch1 审查后扩充的，原条目的 sources.loc 只写到 约 (1.3.32)–(1.3.36)。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.3（光锥谱：第一激发级 α^i_{-1}|0;k⟩ 须为无质量 SO(D-2) 矢量），约 eq. (1.3.32)–(1.3.36)"
+    loc: "§1.3（光锥谱：第一激发级 α^i_{-1}|0;k⟩ 须为无质量 SO(D-2) 矢量；横向振子代数），(1.3.25b)、约 (1.3.32)–(1.3.36)"
     note: "抽取记录 polchinski-1998-v1#E18。公式号为近似定位。"
   - ref: gsw-1987-v1
     loc: "§2.3.1（光锥谱与小群表示）"
@@ -22,6 +34,6 @@ gaps:
   - "论证输入是'谱必须组织成洛伦兹小群表示'这一物理要求（光锥规范已破坏显式洛伦兹协变），属一致性要求而非定理，故记为 physical-argument。"
   - "D ≤ 4 的低维情形不在论证范围内（SO(D-1) 的表示计数论证失效）；本项目只关心 D = 26 附近，未处理。"
   - "本推导给出 a = 1，不给出 D = 26。与 worldsheet.critical-dimension-light-cone--via-lorentz-algebra 共用 light-cone-quantization 定义，但那条另外用了 ζ 正规化，本条不用。"
-  - "抽取记录编号 polchinski-1998-v1#E18 由 reviewer 提供，对应的抽取记录文件在本分支中不存在，编号未能自行核对。"
+  - "抽取记录 literature/extractions/polchinski-1998-v1.md 现已存在，#E18 的编号与内容经 curator 核对一致（第一激发能级的 SO(D-2) 矢量计数）。但该记录的 §0 与 Q2 指出：Polchinski §1.3 正文究竟走的是表示论计数还是显式洛伦兹代数验算**未核对原书**，且 D=26 的结论必在已核实的 (1.3.36) 之后（约 (1.3.37)-(1.3.42)，式号未核实）。"
 author: curator-critdim
 created: "2026-09-10"

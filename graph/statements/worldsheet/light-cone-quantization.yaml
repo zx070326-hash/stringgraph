@@ -28,8 +28,13 @@ statement: |
     J^{μν} = x^μ p^ν - x^ν p^μ - i Σ_{n≥1} (1/n) (α^μ_{-n} α^ν_n - α^ν_{-n} α^μ_n)，
   凡出现 α^-_n 处均代入上面的横向表达式；于是 J^{i-} 是横向模式的三次式，
   其算符排序取正规序。
-uses: [worldsheet.virasoro-algebra]
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+uses:
+  - worldsheet.virasoro-algebra
+  - worldsheet.light-cone-coordinates
+  - worldsheet.light-cone-gauge
+  - worldsheet.open-string-mode-expansion
+  - worldsheet.light-cone-canonical-commutators
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.worldsheet-coordinate-length]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.3（光锥规范）：约 eq. (1.3.8) 规范条件、约 eq. (1.3.22) 开弦模式展开、约 eq. (1.3.32)–(1.3.36) 零点能与质量壳"
@@ -50,5 +55,21 @@ notes: |
 
   质量壳系数说明：按 conv.alpha-prime-regge（开弦 α' m^2 = N - a，a 为截距）写作 α' m^2 = N - a。
   文献中出现的 m^2 = (2/α')(N - a) 属于另一套 α' 归一化（或闭弦式的误记），本项目不采用。
+
+  2026-09-10（curator-polchinski-ch1）：把本定义的上游定义补上。原先 uses 只有
+  worldsheet.virasoro-algebra，本定义中出现的光锥坐标、光锥规范、开弦模式展开与
+  正则对易关系都是凭空写出的；现已分别建节点并接上：
+    worldsheet.light-cone-coordinates（x^± 与内积）、
+    worldsheet.light-cone-gauge（规范条件）、
+    worldsheet.open-string-mode-expansion（模式展开，Polchinski (1.3.22)）、
+    worldsheet.light-cone-canonical-commutators（等时对易关系，Polchinski (1.3.24b)）。
+  四者都是 definition 且 status rigorous，故本节点的有效状态不变（仍 rigorous）。
+  振子对易关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0} 与质量壳 α'm^2 = N - a 在本定义中
+  是直接写出的；它们作为命题的来源链分别见
+  worldsheet.transverse-oscillator-commutators 与 worldsheet.open-string-mass-shell，
+  不加进 uses（那会把纯代数的定义层拉低到 physical-argument）。
+
+  ℓ 的取法：本节点写 cos(nσ)、e^{-inτ}，即 ℓ = π、c = 1；Polchinski 保留一般的 ℓ。
+  已声明 conv.worldsheet-coordinate-length 说明两者的换算。
 author: curator-critdim
 created: "2026-09-10"

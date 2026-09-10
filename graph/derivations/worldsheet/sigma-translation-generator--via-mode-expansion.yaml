@@ -1,0 +1,25 @@
+id: worldsheet.sigma-translation-generator--via-mode-expansion
+target: worldsheet.sigma-translation-generator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.closed-string-mode-expansion
+  - id: worldsheet.closed-string-oscillator-commutators
+  - id: worldsheet.light-cone-gauge-lagrangian
+    note: 提供共轭动量 Π^i 的形式，Noether 荷 P = -∫dσ Π^i ∂_σ X^i 由它写出。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.10)（σ 平移生成元；已核实）"
+    note: 抽取记录 polchinski-1998-v1#E23，Headrick 习题 1.9 逐字引用。
+summary: |
+  σ 平移的 Noether 荷是世界面动量 P = -∫_0^ℓ dσ Π^i ∂_σ X^i。
+  把闭弦模式展开代入并用模函数的正交性逐模求和：
+  右行模贡献 ∝ -Σ_{n≥1} α^i_{-n}α^i_n，左行模贡献 ∝ +Σ_{n≥1} ᾱ^i_{-n}ᾱ^i_n
+  （左右行的 σ 依赖相反号），零模不贡献（∂_σ 杀掉）。
+  取正规序，左右各产生的 c-数相等因而相消，得 P = -(2π/ℓ)(N - Ñ)。
+gaps:
+  - "正规序常数在 P 中相消的论证用了 A = Ã（左右行结构相同）；A、Ã 各自的取值依赖 ζ 正规化，但它们的**差**为零这一点只需左右对称，比取值本身更稳健。本推导仍按依赖节点记为 physical-argument。"
+  - "无穷模式求和的重排按形式操作处理。"
+  - "共轭动量继承自光锥规范固定（physical-argument）。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

@@ -1,0 +1,36 @@
+id: conv.worldsheet-coordinate-length
+family: worldsheet-coordinate-length
+title: 世界面空间坐标长度 ℓ
+definition: |
+  世界面的空间坐标取 σ ∈ [0, ℓ]（开弦）或 σ ≅ σ + ℓ（闭弦），
+  其中 ℓ 是**坐标**长度，不是物理长度：它可以由世界面微分同胚任意重标度，
+  物理结论不依赖 ℓ。Polchinski Vol.1 第 1 章保留一般的 ℓ，
+  模式展开中相应出现 cos(nπσ/ℓ)、exp(∓2πin(σ ∓ cτ)/ℓ) 等因子。
+
+  与「ℓ 已定死」的写法的换算：
+    c 不是自由参数：光锥规范 X^+ = x^+ + τ_P 下由拉氏量定出 c = ℓ/(2πα' p^+)
+    （Polchinski §1.3，(1.3.11) 附近；表达式未核对原书）。
+    既有节点用的世界面时间 τ_std 与 Polchinski 的 τ_P 差一个 diff：τ_P = 2α' p^+ τ_std。
+    于是 开弦取 ℓ = π：  nπcτ_P/ℓ = n τ_std，  cos(nπσ/ℓ) → cos(nσ)，exp(-nπicτ_P/ℓ) → exp(-in τ_std)；
+        闭弦取 ℓ = 2π： 2πncτ_P/ℓ = n τ_std，exp(∓2πin(σ ∓ cτ_P)/ℓ) → exp(∓in(σ ∓ τ_std))；
+        零模项 (p^i/p^+) τ_P = 2α' p^i τ_std。
+    振子系数 α_n 的定义带固定前因子 (2α')^{1/2}（开弦）/(α'/2)^{1/2}（闭弦），
+    不随 τ 归一化改变，故 [α_m, α_n] = m δ、N、Ñ、m^2 不变。
+  本项目多数节点（如 worldsheet.light-cone-quantization）用后一种写法；
+  从 Polchinski 抽取的节点保留 ℓ，两者按上式对应。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2–§1.4（σ ∈ [0, ℓ]，ℓ 为任意坐标长度；已核实的 eq. (1.2.28)、(1.3.22)、(1.4.4) 中都带 ℓ）"
+  - ref: gsw-1987-v1
+    loc: "§2.1（开弦直接取 0 ≤ σ ≤ π，即 ℓ = π）"
+notes: |
+  由 curator 在转写 Polchinski 第 1 章时新增（2026-09-10），来源是抽取记录
+  literature/extractions/polchinski-1998-v1.md §1.1「世界面坐标长度」一栏
+  （「σ ∈ [0, ℓ]，ℓ 是可任意选取的坐标长度（不是物理长度）」，
+  由 Headrick p.7–10、Schrans p.42 的表达式确认）。
+
+  目的是让「带 ℓ 的 Polchinski 式模式展开」与「已定死 ℓ = π 的既有节点」
+  能在同一张图上共存而不被误判为不兼容表述。
+  ℓ 的取值本身不是物理内容，因此本 family 只有一个 canonical 成员，
+  其内容是「ℓ 可任意，且给出换算字典」。

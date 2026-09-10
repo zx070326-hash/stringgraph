@@ -1,0 +1,29 @@
+id: worldsheet.polyakov-nambu-goto-classical-equivalence
+kind: proposition
+title: Polyakov 作用量与 Nambu–Goto 作用量的经典等价
+statement: |
+  Polyakov 作用量 S_P[X, γ]（worldsheet.polyakov-action）对世界面度规 γ_{ab} 的变分给出
+  世界面能动张量为零的约束
+    T_{ab} ≡ -(4π/(-γ)^{1/2}) δS_P/δγ^{ab} = 0,
+  等价地
+    ∂_a X^μ ∂_b X_μ - (1/2) γ_{ab} γ^{cd} ∂_c X^μ ∂_d X_μ = 0.
+  在诱导度规 h_{ab} = ∂_a X^μ ∂_b X_μ 非退化处，该约束的通解是
+    γ_{ab} = f(τ,σ) h_{ab},  f > 0 任意（这是 Weyl 自由度）。
+  把通解代回 S_P，f 完全相消，得
+    S_P[X, γ = f h] = -(1/(2π α')) ∫ dτ dσ (-det h)^{1/2} = S_NG[X].
+  因此在 h_{ab} 非退化处，S_P 与 S_NG 给出相同的 X^μ 经典运动方程。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.15)–(1.2.16)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E6。技术引理
+      δ(-γ)^{1/2} 的公式即 eq. (1.2.15)，其位置（p.12）与内容经 Schrans 伴读笔记
+      目录 §1.1 核实（[已核实]）；T_ab = 0 约束的公式号（约 (1.2.16)）未核对原书。
+tags: [bosonic-string, action, classical, equivalence, polyakov, nambu-goto]
+notes: |
+  只主张**经典**等价。量子等价（路径积分层面）不在 §1.2 论证，
+  且事实上 Polyakov 形式在量子层面多出 Weyl 反常（见第 3 章 §3.4），
+  这正是两者量子上不等价的表现。抽取记录 #E6 明确标注「注意这只是经典等价」。
+author: curator-polchinski-ch1
+created: "2026-09-10"

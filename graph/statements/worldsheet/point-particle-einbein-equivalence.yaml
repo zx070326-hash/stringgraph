@@ -1,0 +1,26 @@
+id: worldsheet.point-particle-einbein-equivalence
+kind: proposition
+title: einbein 点粒子作用量与 Nambu 型作用量的经典等价（m > 0）
+statement: |
+  设 m > 0。einbein 作用量 S'_pp[X, η]（worldsheet.point-particle-einbein-action）
+  对 η 的变分给出代数运动方程
+    η^{-2} Ẋ^μ Ẋ_μ + m^2 = 0，  即  η = m^{-1} (-Ẋ^μ Ẋ_μ)^{1/2}
+  （取 η > 0 的分支，要求 Ẋ^μ Ẋ_μ < 0）。把该解代回 S'_pp 得
+    S'_pp[X, η(X)] = -m ∫ dτ (-Ẋ^μ Ẋ_μ)^{1/2} = S_pp[X],
+  即 Nambu 型作用量（worldsheet.point-particle-action）。
+  因此在类时世界线上，两者给出相同的 X^μ 运动方程，是经典等价的。
+  对 m = 0，S'_pp 仍良定而 S_pp 恒为零，此时不存在这种等价。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.2，约 eq. (1.2.5)–(1.2.7)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E2，证据等级
+      [页码已核实/式号未核实]。抽取记录记「这条经典等价是消去 η 的运动方程得到的，
+      属于经典场论操作」；Polchinski 原文措辞未核实（抽取记录 §0 说明全书正文未获取）。
+tags: [bosonic-string, action, point-particle, classical, equivalence]
+notes: |
+  「经典等价」在此严格地指：两个作用量的 X^μ 的 Euler–Lagrange 方程有相同解集。
+  它不主张量子等价（路径积分测度层面的等价不在此处论证，Polchinski 也不在此处论证）。
+author: curator-polchinski-ch1
+created: "2026-09-10"

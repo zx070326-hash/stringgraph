@@ -1,0 +1,27 @@
+id: worldsheet.closed-string-level-matching--via-sigma-translation
+target: worldsheet.closed-string-level-matching
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.sigma-translation-generator
+  - id: worldsheet.light-cone-gauge
+    inferred: true
+    note: |
+      用来说明「σ 的原点未被规范固定所定死」，即 σ 平移属于残余规范冗余。
+      规范固定的内容在 (1.3.7)–(1.3.10)（已核实为规范固定区间），
+      但「因此 σ 平移是冗余」这一句在抽取记录中没有对应的原文位置。
+      Polchinski 在 §1.4 直接要求物理态在 σ 平移下不变（(1.4.11)）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.10)–(1.4.11)（σ 平移生成元与 level-matching；已核实）"
+    note: 抽取记录 polchinski-1998-v1#E23，Headrick 习题 1.9 逐字引用两个式号。
+summary: |
+  闭弦世界面上 σ 的原点没有物理意义（没有端点也没有被规范条件定死），
+  故 σ 平移是残余规范变换。物理态必须是规范不变的，即被生成元 P 湮灭。
+  由 P = -(2π/ℓ)(N - Ñ) 立即得 N = Ñ。
+gaps:
+  - "「σ 平移是规范冗余而非物理对称性」是物理要求（对规范不变性的解读），不是定理；它是本推导唯一的非计算输入，故记为 physical-argument。"
+  - "抽取记录未给出 Polchinski 对这一步的原文措辞（正文未获取，见 §0）；Headrick 只说 (1.4.10) 「(therefore)」给出 (1.4.11)。"
+  - "与协变量子化中 (L_0 - L̄_0)|ψ⟩ = 0 的等价未建立；那需要 OCQ 侧的闭弦节点，目前图中没有。"
+author: curator-polchinski-ch1
+created: "2026-09-10"

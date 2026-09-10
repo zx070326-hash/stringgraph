@@ -1,0 +1,36 @@
+id: worldsheet.open-string-mode-expansion
+kind: definition
+status: rigorous
+title: 开弦横向坐标的模式展开（光锥规范）
+statement: |
+  在光锥规范（worldsheet.light-cone-gauge）下，满足二维波动方程与两端 Neumann 边界条件
+  （worldsheet.open-string-boundary-condition-light-cone）的横向场 X^i(τ,σ)
+  （i = 2, ..., D-1，σ ∈ [0, ℓ]）的通解写成模式展开
+    X^i(τ, σ) = x^i + (p^i / p^+) τ
+                + i (2α')^{1/2} Σ_{n ≠ 0} (α_n^i / n) exp(-n π i c τ / ℓ) cos(n π σ / ℓ),
+  其中 c 是把 τ 与 σ 的归一化联系起来的常数（见 conv.worldsheet-coordinate-length），
+  n 取全体非零整数，展开系数 α_n^i 称为（横向）振子模。
+  实性条件 X^i ∈ R 给出 (α_n^i)^* = α_{-n}^i（量子化后为 (α_n^i)^† = α_{-n}^i）。
+  零模按惯例记 α_0^i ∝ p^i（开弦取 α_0^μ = (2α')^{1/2} p^μ）。
+uses: [worldsheet.light-cone-gauge, worldsheet.open-string-boundary-condition-light-cone]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.22)（开弦模式展开）；零模归一化 α_0^μ = (2α')^{1/2} p^μ 见 eq. (2.7.25)/(2.7.27)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E13，证据等级 [已核实]：
+      Schrans 伴读笔记 §1.14 逐字复现 (1.3.22)。开弦零模归一化
+      α_0^μ = √(2α') p^μ 由 Schrans 引 Polchinski (2.7.25)/(2.7.27) 核实
+      （抽取记录 §1.1 表）。cos(nπσ/ℓ) 正是 Neumann 条件挑出的解。
+tags: [bosonic-string, mode-expansion, open-string, light-cone]
+notes: |
+  取 ℓ = π、c = 1 并把 τ 换成既有节点的归一化（τ_P = 2α' p^+ τ_std）后，
+  本式化为 worldsheet.light-cone-quantization 中写的
+  X^μ = x^μ + 2α' p^μ τ + i(2α')^{1/2} Σ_{n≠0} (α_n^μ/n) e^{-inτ} cos(nσ)
+  的横向分量；换算见 conv.worldsheet-coordinate-length。
+
+  本节点是**定义**（把通解按完备基展开并给展开系数命名），
+  其中「通解形如此」这一步是波动方程加 Neumann 边界条件的标准 Fourier 展开。
+  α_n^i 的对易关系不是定义的一部分，见 worldsheet.transverse-oscillator-commutators。
+author: curator-polchinski-ch1
+created: "2026-09-10"

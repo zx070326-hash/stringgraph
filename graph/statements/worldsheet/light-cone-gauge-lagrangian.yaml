@@ -1,0 +1,33 @@
+id: worldsheet.light-cone-gauge-lagrangian
+kind: proposition
+title: 光锥规范下的拉氏量：只有横向坐标是独立自由度
+statement: |
+  在 p^+ ≠ 0 下，diff × Weyl 可用光锥规范条件 (LC1)(LC2)
+  （worldsheet.light-cone-gauge）完全固定，只留下有限维的剩余变换；
+  此时 Polyakov 作用量化为
+    L = (1/(4π α')) ∫_0^ℓ dσ [ (∂_τ X^i)^2 - (∂_σ X^i)^2 ] · (关于 γ 的剩余因子)
+        + （x^- 与 p^+ 的零模项）,
+  即：D-2 个横向坐标 X^i 是自由的二维标量场，
+  而 X^- 的非零模不是独立自由度——它由 T_{ab} = 0 约束
+  （worldsheet.polyakov-nambu-goto-classical-equivalence 中的能动张量约束）
+  用 X^i 完全解出：
+    ∂_σ X^- ∝ ∂_τ X^i ∂_σ X^i,   ∂_τ X^- ∝ (∂_τ X^i)^2 + (∂_σ X^i)^2
+  （比例系数含 1/p^+），只留下积分常数 x^-；X^+ 已被规范条件定死。
+  因此经典相空间由零模 (x^i, p^i, x^-, p^+) 与横向场 X^i 的振荡部分张成。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.11)（光锥规范下的拉氏量）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E11，证据等级 [已核实]：
+      Schrans 伴读笔记目录「1.10 p 18: Eq. (1.3.11) The Lagrangian in the Light-Cone Gauge」，
+      正文逐步推导至 [1.49] 并说「Therefore, we find (1.3.11)」。
+      Schrans 特别提醒 (1.3.11) 是**拉氏量**而非拉氏密度。
+      本陈述中 ∂_σ X^-、∂_τ X^- 的显式表达式的公式号未核实。
+tags: [bosonic-string, gauge-fixing, light-cone, classical]
+notes: |
+  本陈述只写正比关系而不写系数，因为系数依赖 ℓ、c 与 τ 的归一化
+  （conv.worldsheet-coordinate-length），而抽取记录只核实了 (1.3.11) 的存在与身份，
+  未给出逐字表达式。需要精确系数时应在核对原书后新建节点。
+author: curator-polchinski-ch1
+created: "2026-09-10"

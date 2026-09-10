@@ -1,0 +1,32 @@
+id: worldsheet.closed-string-mass-formula
+kind: proposition
+title: 闭弦光锥质量公式 m^2 = (2/α')(N + Ñ + A + Ã)
+statement: |
+  在闭弦光锥量子化中，左右行各有一个能级算符
+    N = Σ_{n≥1} α^i_{-n} α^i_n,   Ñ = Σ_{n≥1} ᾱ^i_{-n} ᾱ^i_n   （i = 2..D-1），
+  各自带一个正规序常数 A、Ã，且由左右对称性 A = Ã = -(D-2)/24
+  （worldsheet.light-cone-normal-ordering-constant 对每一行各用一次）。质量壳条件为
+    m^2 = (2/α') ( N + Ñ + A + Ã ).
+  按 conv.intercept-sign-a 换算 a = -A、ã = -Ã，即
+    (α'/2) m^2 = N + Ñ - a - ã.
+  在 D = 26（故 a = ã = 1）且满足 level matching N = Ñ
+  （worldsheet.closed-string-level-matching）时化为
+    α' m^2 = 4 (N - 1).
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.8)（闭弦质量公式）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E22，证据等级 [已核实]：
+      Headrick 习题 1.9「as are the mass formula (1.4.8),
+      m^2 = (2/α')(N + Ñ + A + Ã)」。
+      **化简式 m^2 = (4/α')(N-1) 是否在书中显式出现未核实**（抽取记录 §3 清单）。
+tags: [bosonic-string, light-cone, mass-shell, spectrum, closed-string]
+notes: |
+  与开弦 α'm^2 = N - a 相比因子 4 的来源是闭弦零模归一化
+  α_0^μ = (α'/2)^{1/2} p^μ（开弦为 (2α')^{1/2} p^μ），见
+  worldsheet.closed-string-mode-expansion 的 notes。
+  既有节点 worldsheet.light-cone-quantization 的 notes 里写的闭弦对应式
+  「α' m^2 / 4 = N - a = Ñ - a」与本式在 level matching 下逐字一致。
+author: curator-polchinski-ch1
+created: "2026-09-10"

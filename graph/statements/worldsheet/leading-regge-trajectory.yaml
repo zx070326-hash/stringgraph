@@ -1,0 +1,30 @@
+id: worldsheet.leading-regge-trajectory
+kind: proposition
+title: 开弦的领头 Regge 轨迹 S ≤ α' m^2 + 1
+statement: |
+  在开弦光锥谱中，质量为 m 的能级上出现的最大自旋（即洛伦兹生成元 J^{ij}
+  在该能级本征空间上的最大本征值）满足
+    S ≤ α' m^2 + 1.
+  等号在每个能级 N 上由「所有振子都取 n = 1、指标对称化无迹」的态
+  α^{(i_1}_{-1} ⋯ α^{i_N)}_{-1}|0;k⟩ 达到，它们构成横向小群的最高自旋表示，
+  自旋 S = N；配合质量壳 α' m^2 = N - a（worldsheet.open-string-mass-shell）
+  与 a = 1（worldsheet.open-string-intercept）即得 S_max = N = α' m^2 + 1。
+  由 S 与 m^2 的这一线性关系，α' 被称为 Regge 斜率。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.43)（p.24）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E19，证据等级 [已核实]：
+      Schrans §1.13 显式推出 S^{23} ≤ N = α'm^2 + 1 并说「which is (1.3.43)」。
+tags: [bosonic-string, spectrum, regge, open-string, light-cone]
+notes: |
+  这条是「α' 叫 Regge 斜率」这个名字的直接来源，比 conv.alpha-prime-regge 原先引的
+  §1.2 位置更贴切；抽取记录 #E19 也这么建议。conv.alpha-prime-regge 现已引
+  §1.2 约 (1.2.9)–(1.2.10) 与 §1.3 (1.3.36)，本节点可作为第三个佐证位置，
+  但 curator 不擅自再改该约定节点的 sources（避免与其他 agent 冲突）。
+
+  Schrans 推的是 S^{23}（某个具体的转动生成元）的上界，
+  与「最大自旋」的表述在数学上等价（最高权），此处按后者表述。
+author: curator-polchinski-ch1
+created: "2026-09-10"
