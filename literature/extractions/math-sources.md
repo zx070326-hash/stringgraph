@@ -5523,3 +5523,483 @@ Tr_{248} H^k = Σ_{α ∈ Φ} α(H)^k          (k ≥ 1；零权不贡献)
 - **Q43** Slansky 1981 是否有可公开取得的全文（LA-UR 预印本号 / OSTI）——本轮**未查**（WebSearch 额度已耗尽）。
   按 [[osti-doe-report-fulltext-route]]，`osti.gov` 的 `q="Group theory for unified model building"` 标题短语查询值得一试。
 
+---
+
+## 40. Q32 结案：Bârză–Ghişa, *Math. Bohemica* 129 (2004) 129–140 正文（researcher，2026-09-11）
+
+- 触发：§39.10 的 **Q32**——「RP² 自同构那条结论**唯一的真正证明出处**」。
+  §39.7.2 已确认 Cao-Huu–Ghişa (arXiv:0902.2725) 的 Corollary 3.1 把证明外包给本文（其 ref [5]）。
+- 本节的结论**改变了 §39 的判断**：见 §40.3。
+
+### 40.0 结论表
+
+| 问题 | 结论 | 位置 | 等级 |
+|---|---|---|---|
+| 本文里 RP² **自同构**那条的编号 | ✅ **Corollary 3.2**（不是 Theorem，也不是 3.1） | 刊页 **p.134** | **L4-全文** |
+| 本文里 RP² 全部 dianalytic **变换**（含高次）那条 | ✅ **Theorem 3.1** | 刊页 **pp.133–134** | **L4-全文** |
+| Corollary 3.2 里有没有「rotation of the Riemann sphere」 | ❌ **没有。全文不出现 "rotation"/"rotations"** | — | **L4-全文（两次独立提取一致）** |
+| 有没有 SO(3) / SU(2) / PSU(2) / orthogonal group | ❌ 全文都没有 | — | **L4-全文** |
+| 有没有把这些自同构称作**群**、或给**维数 3** | ❌ 都没有 | — | **L4-全文** |
+| 书目元数据（卷期页、DOI） | ✅ Math. Bohem. **129** (2004) no. 2, 129–140；DOI `10.21136/MB.2004.133904` | Crossref + EuDML + Semantic Scholar 三源一致 | **L2** |
+
+### 40.1 ⚠ 证据等级说明（本节**不是 L1**，请勿在图里写成 L1）
+
+**我没有看到本文的任何页图。** 取正文的路线是：
+`https://r.jina.ai/https://dml.cz/bitstream/handle/10338.dmlcz/133904/MathBohem_129-2004-2_3.pdf`
+即用 **r.jina.ai 文本抽取代理**把 DML-CZ 的 PDF 转成纯文本，再由 WebFetch 的读取模型逐条回答。
+所以：
+
+- 拿到的是**全文文本**（不是摘要、不是二手转述），这一点强于 §0 的 L4 定义；
+- 但**数学符号被抽取严重破坏**（`e iθ`、`6 =` 代替 `≠`、波浪号/上划线丢失成空格），
+  **且不是我本人逐页读的**。
+- 为此我在本节统一记作 **「L4-全文」**：**可以引编号与页码，不可照抄公式字符**。
+  要升到 L1 必须拿到页图（见 §40.5 的死路清单）。
+- 为降低单次读取误差，**同一 URL 做了两次措辞不同的独立提取**，两次在
+  「无 rotation / 无群 / 无维数 / Corollary 3.2 是自同构那条」四点上完全一致。
+
+### 40.2 抽取所得（逐条）
+
+**编号清单（全文，按出现顺序）**：
+Theorem 1.1 (p.130)、Theorem 1.2 (p.130)、Theorem 1.3 (p.131)、
+Proposition 2.1–2.4 (p.132)、**Theorem 3.1 (pp.133–134)**、**Corollary 3.2 (p.134)**、
+Theorem 4.1 (pp.135–136)、**Theorem 6.1 (pp.138–139)**。
+
+> ⚠ **本文自身有编号 bug**：最后一条编号是 **6.1**，却出现在标题为「5. The case of a Klein bottle」的节里。
+> （与 §39.7.2 记的 Cao-Huu–Ghişa 把自己的 Theorem 2.1 叫成「Theorem 1」是同一类排印问题；
+> 这两篇同一作者圈的文章在编号上都不严谨，**引用时必须写清"哪一页"而不能只写编号**。）
+
+**节标题与页码**：
+`1. Klein surfaces` p.129；`2. Dianalytic dynamics` p.132；
+`3. Dianalytic self-maps of the real projective plane` p.133；
+`4. Dianalytic self-maps of the pointed real projective plane` p.135；
+`5. The case of a Klein bottle` p.138；References p.139。
+
+**Corollary 3.2（p.134）**——抽取所得，**字符已被破坏，下面是原样转录并标注**：
+
+> 「Dianalytic automorphisms of P 2 are of the form:」
+> …（两支 `g(˜z) = …`，抽取里两支都掉了标记，**无法判断第二支是 `G̃(z̄)` 还是别的**）…
+> 「G(z) = e iθ a z + b − ¯b z + a , where |a| + |b| 6 = 0 .」
+
+即：**G(z) = e^{iθ}(az+b)/(−b̄z+a)**，条件 **|a| + |b| ≠ 0**。
+
+> ⚠ **与 §39.7.2 的差异（必须留意）**：Cao-Huu–Ghişa (0902.2725, L1) 写的是分母 `−b̄z+ā`（a 上有横杠），
+> 这里抽取出来的是 `− ¯b z + a`（a 上**没有**横杠）。**极可能是抽取丢了上划线**，
+> 但在拿到页图之前**不能断言**。→ 图里**不得**把本文当作该公式的字符级出处；
+> 公式字符仍以 **caohuu-ghisa-2004 (L1)** 为准。
+- 归一化条件 `|a|+|b| ≠ 0` 与 §39.7.2 记的完全一样，**两篇都写得不严**（PSU(2) 要的是 `|a|²+|b|²=1`）。
+  → §39.7.2 记的「不要照抄这行当定义」**在本文同样成立**。
+
+**Theorem 3.1（pp.133–134）**：开头是「Dianalytic transformations f : P 2 → P 2 are of the form:」，
+随后给出提升 `F` 必须是**奇次**有理函数、且分子分母系数满足共轭配对关系；
+特例约化为 `F(z) = e^{iθ} z^{2n+1}`。
+> 这与 Hawkins–Randolph, arXiv:1706.09980 **式 (3.1)**（该文 p.6，本轮读了页图，**L1**）逐字对得上：
+> 「Additionally in [1] it is shown that these rational maps must be of the form:
+> f(z) = e^{iθ}(a₀z^{2n+1}+a₁z^{2n}+…+a_{2n+1}) / (−ā_{2n+1}z^{2n+1}+ā_{2n}z^{2n}−…+ā₀), |a₀|+|a_{2n+1}| ≠ 0.」
+> 其中 **[1] = Barza–Ghisa, Math. Bohemica (2004) 129–140**（该文 ar5iv 参考表，L2）。
+> ⇒ **Theorem 3.1 的内容有一个独立的 L1 转引**；**但 Hawkins–Randolph 不转引 Corollary 3.2、也不提 rotation。**
+
+**§3 开头的设定**：由「h : z → −1/z̄」生成的群对 Riemann 球作商得到 P²
+（抽取里 `−1/z` 的上划线掉了；与 Polchinski (6.1.9) `z′ = −1/z̄`、与 0902.2725 的 `h(z) = −1/z̄` 一致）。
+
+### 40.3 ★ 对 §39.7.2 判断的修正：「旋转群」这句话是 **Cao-Huu–Ghişa 加的，不是被引来源里的**
+
+§39.7.2 把 **Cao-Huu–Ghişa Corollary 3.1**（「where **G is a rotation of the Riemann sphere**」）
+列为「RP₂ 唯一找到的带编号数学陈述」，并注明其证明外包给本文。现在可以补完这条链：
+
+| 环节 | 谁说的 | 说了什么 | 等级 |
+|---|---|---|---|
+| (i) 自同构 = 那族 Möbius 变换 `e^{iθ}(az+b)/(−b̄z+ā)` | **Bârză–Ghişa 2004, Corollary 3.2 (p.134)** | 只给**公式形式** | L4-全文 |
+| (ii) 「这族 Möbius 变换 = 球面的旋转」 | **Cao-Huu–Ghişa 2004, Corollary 3.1 (0902.2725 p.2)** | 加了 "rotation of the Riemann sphere"；该文自称证明只是半页验证 | L1 |
+| (iii) 「球面旋转群 = SO(3)，实维 3，故 κ = 3」 | **没有任何来源** | 使用者的补步 | — |
+
+⇒ **§39.7.2 的「三条限制」要改成四条**：除了原有三条，还要加上
+「**(d) 上游 Bârză–Ghişa 2004 里根本不出现 "rotation" 一词**，所以 (ii) 这一步是 Cao-Huu–Ghişa 自己补的，
+而**它的证明并不在被它引作依据的那篇里**。」
+
+这不是「找不到」，是**确定的否定结果**：两次独立全文提取都报告全文无 "rotation"。
+
+### 40.4 给 curator 的建议（researcher 不改 `graph/`）
+
+#### (1) `worldsheet.rp2-conformal-killing-group` 的 `sources` 建议写成三条并列，**不要合并**
+
+```yaml
+sources:
+  # 物理侧（唯一逐字给出 SO(3) 的）
+  - ref: polchinski-1998-v1
+    loc: "§6.1「The projective plane」，书上 p.168-169（(6.1.9) 附近，无式号）"
+    note: "L1。原书逐字给 CKG = SO(3) 与 no moduli；κ=3 须另挂 (5.2.11a)。"
+  # 数学侧第一层：带编号，但「旋转」二字是本文加的
+  - ref: caohuu-ghisa-2004
+    loc: "Corollary 3.1（arXiv:0902.2725v1, p.2）"
+    note: |
+      L1。逐字含「G is a rotation of the Riemann sphere」。
+      ⚠ 该文不写 SO(3)/PSU(2)/维数 3；且「rotation」这一步**不在**它所引的证明出处里（见下条）。
+  # 数学侧第二层：真正的证明出处，但没有「旋转」
+  - ref: barza-ghisa-2004
+    loc: "Corollary 3.2，刊页 p.134（Math. Bohem. 129 (2004) 129-140）"
+    note: |
+      L4-全文（r.jina.ai 文本代理，非页图；literature/extractions/math-sources.md §40.1）。
+      这是 caohuu-ghisa-2004 Theorem 2.1「We have shown in [5]」所指的那篇。
+      ⚠ **本文只给 Moebius 形式 G(z)=e^{i theta}(az+b)/(-conj(b) z + a)，条件 |a|+|b| != 0；
+      全文不出现 "rotation"、不出现 SO(3)/SU(2)/PSU(2)、不把这族映射称作群、不给维数。**
+      ⇒ 「Aut(RP^2) 是 SO(3)、实维 3」在数学文献侧是**两步补步**，不是单条可引定理。
+```
+
+#### (2) 若节点 statement 里写了「SO(3)」或「维数 3」
+
+必须在 `notes` 里保留一句：
+> 「**SO(3)** 与「实维 3」在**任何数学来源里都不是原文**：Bârză–Ghişa 2004 Cor 3.2 只给 Möbius 形式，
+> Cao-Huu–Ghişa 2004 Cor 3.1 只加到「球面的旋转」。写 SO(3) 的唯一逐字来源是 Polchinski p.168–169（物理书）。」
+
+#### (3) 三条禁令（追加到 §39.9(7)）
+
+4. **不得写 `Bârză–Ghişa 2004, Theorem 3.1` 来支持「自同构」那条**——Theorem 3.1 是**全部 dianalytic 变换**（含 2n+1 次），
+   自同构那条是 **Corollary 3.2**。
+5. **不得把 Bârză–Ghişa 2004 当作「旋转群/SO(3)」的出处**（§40.3）。
+6. **不得引 `Bârză–Ghişa 2004, Theorem 5.x`**——该文最后一条编号是 **6.1**，却印在第 5 节里（§40.2）。
+
+### 40.5 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| EuDML 记录页 | `eudml.org/doc/249387` | **成功**（给出 DML-CZ handle `10338.dmlcz/133904` 与 PDF 直链） |
+| Crossref | `api.crossref.org/works?query.bibliographic=…` | **成功**（DOI `10.21136/mb.2004.133904`，元数据 language 字段误标 "la"） |
+| Semantic Scholar | `api.semanticscholar.org/graph/v1/paper/DOI:10.21136/MB.2004.133904` | **成功**（openAccessPdf = DML-CZ 直链，GREEN） |
+| **DML-CZ PDF 直取** | `dml.cz/bitstream/handle/10338.dmlcz/133904/…pdf`（≥6 次，含 `www.` / `?sequence=1` / handle 页 / DOI 跳转） | **全部失败：`Socket is closed`** |
+| `mb.math.cas.cz` | `mb.math.cas.cz/mb129-2/` | **失败：`Socket is closed`** |
+| EMIS 镜像 | `emis.de/journals/MB/…` | **失败：301 重定向到 `zbmath.org/serials/`（EMIS 的 MB 镜像已下线）** |
+| **★ r.jina.ai 代理** | `r.jina.ai/https://dml.cz/bitstream/…pdf` | **成功（唯一活路）**，返回抽取文本（符号破坏） |
+| allorigins 代理取二进制 | `api.allorigins.win/raw?url=…` | **失败：HTTP 520** |
+| Hawkins–Randolph 页图 | `arxiv.org/pdf/1706.09980` → 落盘 → Read pages | **成功**（24 页，读 pp.1–8, 18–21, 24；式 (3.1) 在 p.6） |
+| ar5iv 参考表 | `ar5iv.labs.arxiv.org/html/1706.09980` | **成功**（确认 [1] = Barza–Ghisa 2004） |
+
+> **两条新经验（可复用）**：
+> (1) **`.cz` 域（`dml.cz`、`mb.math.cas.cz`）在本环境一律 `Socket is closed`**，不是限流、重试无用；
+>     **绕法是 `https://r.jina.ai/<原 URL>`**，代价是只拿到文本、数学符号被破坏 ⇒ **只能升到 L4-全文，升不到 L1**。
+> (2) **EMIS 的期刊镜像（`emis.de/journals/<刊>/`）已整体重定向到 zbMATH**，旧的 EMIS 全文路线**作废**。
+
+### 40.6 遗留问题
+
+- **Q37** **Bârză–Ghişa 2004 的页图**（升 L1，确认 `−b̄z+ā` 的上划线、确认 Corollary 3.2 第二支是不是 `G̃(z̄)`）。
+  可能的下一招：某个能返回二进制的代理；或 ELibM/zbMATH 的 PDF 镜像；或纸本馆藏。
+- **Q38** 本文 Theorem 1.1–1.3（Klein 面 ↔ 对称 Riemann 面的商、dianalytic ↔ 与 h 交换的解析映射）
+  与 barza-ghisa-2009 的 **Theorem 1 / Theorem 3** 是不是同一批结果的两次发表——若是，2009 那篇可作 §40 的**独立第二来源**（已 L1）。本轮未逐条比对。
+
+---
+
+## 41. GKPW 字典的数学背书：Fefferman–Graham 1985 与 Graham–Lee 1991（researcher，2026-09-11）
+
+- 触发：`literature/extractions/witten-1998-ads.md` **第 345 行**自列的未解决项：
+  「**Graham–Lee 定理 [42]（Adv. Math. 87 (1991) 186）本身未核实**；Fefferman–Graham [44] 的
+  "Theorems 2.1 and 2.3" 亦未核实。**这两条是 GKPW 字典里唯一有真数学定理背书的部分，做形式化前必须一手核实。**」
+- 本节的结果是**一半结案、一半确认取不到**。
+
+### 41.0 结论表
+
+| 问题 | 结论 | 位置 | 等级 |
+|---|---|---|---|
+| **Fefferman–Graham 1985 全文** | ✅ **取到，页图逐页读** | Numdam 扫描件，刊页 95–116 | **L1** |
+| FG **Theorem 2.1**（ambient metric，n 奇/偶） | ✅ 逐字到手 | 刊页 **p.101** | **L1** |
+| FG **Theorem 2.3**（Poincaré metric，n 奇/偶） | ✅ 逐字到手 | 刊页 **p.103** | **L1** |
+| FG 有没有「第 5 节证明」 | ✅ 有：**「V. About the Proof of Theorem 2.1」** | 刊页 **p.111** | **L1** |
+| **Graham–Lee 1991 全文** | ❌ **未取到**（7 条路线全败，见 §41.4） | — | **L0** |
+| Graham–Lee 的主定理**编号** | ❌ **未核实**；且有反证：**任务书假设的「Theorem A/B」缺乏支持** | 见 §41.3 | **L0（+ L3 反证）** |
+| Witten 引的到底是哪一篇的 Theorems 2.1/2.3 | ✅ **是 [44] = Fefferman–Graham**，不是 Graham–Lee | Witten 刊页 p.18、p.19 | **L1** |
+| Witten 的参考编号 [42]/[43]/[44]/[45]/[46] | ✅ 逐字到手 | Witten 刊页 p.39 | **L1** |
+
+---
+
+### 41.1 ★★ Fefferman & Graham, "Conformal invariants", Astérisque **S131** (1985) 95–116（L1 全文页图）
+
+**取法（可复用）**：Numdam 有全本扫描且**不设墙、不被拦**——
+卷页 `numdam.org/issues/AST_1985__S131_/` → 篇页 `numdam.org/item/AST_1985__S131__95_0/`
+→ **PDF 直链 `numdam.org/item/AST_1985__S131__95_0.pdf`**（2.2 MB，WebFetch 落盘后用 Read 带 `pages` 读页图）。
+**PDF 页 = 刊页 − 94**（PDF p.2 = 刊页 95；封面页占 PDF p.1）。
+
+#### 41.1.1 ambient metric 的三条件（刊页 p.101，L1 逐字）
+
+> "There are three conditions to be imposed to determine the ambient metric g̃, of signature (p+1, q+1), on G̃. They are :
+> 1) δ_s* g̃ = s² g̃, s > 0;  2) ι* g̃ = g₀;  3) Ric(g̃) = 0."
+
+#### 41.1.2 ★★★ **THEOREM 2.1**（刊页 **p.101**，L1 逐字）
+
+> **THEOREM 2.1.**
+> *a) n odd. Up to a **R₊**-equivariant diffeomorphism fixing G, there is a unique formal power series
+> solution g̃ to 1)–3). If the conformal structure on M is real analytic (i.e. has a real analytic
+> representative), then this formal power series converges so that g̃ actually exists in a neighborhood of G.*
+> *b) n even. There are conformal structures for which there is no formal power series solution of 1)–3).
+> However, if 3) is replaced by :*
+> *3′) Along G, all components of Ric(g̃) vanish to order (n−4)/2 and the components tangential to G vanish
+> to order (n−2)/2,*
+> *then there is a formal power series solution for g̃ uniquely determined up to addition of terms vanishing
+> to order n/2 and up to a **R₊**-equivariant diffeomorphism fixing G.*
+
+紧接其后（同页，L1）：「As with the complex Monge-Ampère equation [11], [6], [17], one can continue the
+solution to higher order when n is even by including log terms in the expansion for g̃.」
+
+#### 41.1.3 Poincaré metric 的条件（刊页 pp.102–103，L1 逐字）
+
+条件 1)、2)（p.102）：
+> "1) g⁺ has [g] as conformal infinity   2) Ric(g⁺) = −n g⁺."
+
+写成（**式 (2.2)**，p.102）：
+> (2.2)  g⁺ = r^{−2}[ dr² + Σ_{i,j=1}^n g⁺_{ij}(x,r) dx^i dx^j ].
+
+条件 3)（p.103）：
+> "3) When written in the form (2.2), g⁺_{ij} is an even function of r, 1 ≤ i, j ≤ n."
+
+⚠ 同页作者自陈：「Although it is not obvious, it is nonetheless true that this condition is independent of
+the choice of coordinate system (x, r) …. **It would be nice to have an invariant way of stating this
+condition, but we have not succeeded in finding one.**」
+
+**「conformal infinity」的定义**（p.102，L1）：作者明写「essentially following the formulation of **LeBrun [16]**
+of this concept extant for some time in the physics literature」，即：
+N 是带边流形，r ∈ C^∞(N̄) 满足 r > 0 in N、r = 0 且 dr ≠ 0 on bN；
+若存在 m > 0 使 r^m g⁺ 光滑延拓到 N̄ 且限制到 TbN 时属于 [g]，则称 g⁺ 以 [g] 为 conformal infinity。
+
+#### 41.1.4 ★★★ **THEOREM 2.3**（刊页 **p.103**，L1 逐字）
+
+> **THEOREM 2.3.**
+> *a) n odd. Up to a diffeomorphism fixing M, there is a unique formal power series solution g⁺ to 1)–3).
+> If [g] is real analytic, then the power series converges so that g⁺ exists and r²g⁺ is analytic up to the boundary.*
+> *b) n even. There are conformal structures for which there is no formal power solution of 1)–3). However,
+> if 2) is replaced by :*
+> *2′) Along M, the components of Ric(g⁺) + ng⁺ vanish to order n−2,*
+> *then there is a formal power series solution for g⁺ uniquely determined up to addition of terms vanishing
+> to order n−2 and up to a diffeomorphism fixing M.*
+
+#### 41.1.5 ★ 三条**必须随引用一起写**的限制
+
+1. **这两条定理是「形式幂级数」的存在唯一性，不是度规的存在性。**
+   只有在 **[g] 实解析**时才断言收敛。n 偶时**存在无解的共形结构**（有障碍，见 **Proposition 3.5**，刊页 p.107）。
+   ⇒ **不能**用 FG Thm 2.1/2.3 去支持「任意边界共形结构都有体度规」。
+2. **n 偶与 n 奇的陈述本身不同**（a)/b) 两支），这正是 Witten 用来解释「共形反常只在偶 d 出现」的依据（§41.2）。
+3. **第 5 节只证 Theorem 2.1**：刊页 p.111 的节标题逐字是
+   **「V. About the Proof of Theorem 2.1」**，开头写「In this section **some of the ingredients** in the proof
+   of THEOREM 2.1 are discussed.」——即**原文并未给出完整证明**，只讨论了打破规范不变性的特殊坐标系
+   （**PROBLEM 5.1**，p.111）。**Theorem 2.3 的证明在原文里没有独立一节**（原文 p.103 说 Poincaré 问题与 ambient 问题等价，
+   并在 pp.103–104 给出从 g̃ 造 g⁺ 的显式过程与式 (2.4)）。
+
+#### 41.1.6 顺带取到的其它编号（L1，供以后复用）
+
+- **CONJECTURE 3.1**（p.105，n odd）：Every scalar conformal invariant is a linear combination of conformal Weyl invariants.
+- **PROPOSITION 3.2**（p.105）：G 上 R̃ 的分量 = t²W、t²C、(t²/(n−4))B 等四式（i)–iv)）。
+- **PROPOSITION 3.3**（p.106）、**PROPOSITION 3.4**（p.106，‖∇̃R̃‖² 对应 ‖V‖²+16(W,U)+16‖C‖²）。
+- **PROPOSITION 3.5**（p.107，n even）：存在权 (n−2)/2 的共形不变对称无迹 2-张量，**它就是 ambient metric 形式解的障碍**；n = 4 时即 Bach 张量。
+- **IV. Connection with Several Complex Variables**（p.108 起）：与复 Monge–Ampère、Cheng–Yau 的关系。
+
+---
+
+### 41.2 ★★ Witten 1998 到底引了什么（全部 L1，页图取自 `arxiv.org/pdf/hep-th/9802150`）
+
+**PDF 页 = 刊页 + 1。**
+
+#### 41.2.1 参考条目逐字（刊页 **p.39**）
+
+> [42] R. Graham and J. Lee, "**Einstein Metrics With Prescribed Infinity On The Ball**," Adv. Math. **87** (1991) 186.
+> [43] C. LeBrun, "*H*-Space With A Cosmological Constant," Proc. Roy. London Ser. A **380** (1982) 171.
+> [44] C. Fefferman and C. R. Graham, "Conformal Invariants," *Elie Cartan et les Mathématiques d'aujourdhui* (Asterisque, 1985), 95.
+> [45] H. Pedersen, "Einstein Metrics, Spinning Top Motion, And Monopoles," Math. Ann. **274** (1986) 35.
+> [46] S. Y. Cheng and S.-T. Yau, "On The Existence Of A Complete Kahler Metric On Noncompact Complex Manifolds And The Regularity Of Fefferman's Equation," Comm. Pure Appl. Math **33** (1980) 507.
+
+> ⚠ **Witten 把 Graham–Lee 的标题印错了**：真题名是 "Einstein metrics with prescribed **conformal** infinity
+> on the ball"（Crossref/OpenAlex/作者主页三源一致，L2），Witten 少了 "conformal"。
+> → 图里的 `sources[].loc` 若照抄 Witten，会引出一个**查不到的题名**。
+
+#### 41.2.2 Graham–Lee 定理被引处（刊页 **p.7**，L1 逐字）
+
+> "Conversely, by a theorem of Graham and Lee **[42]** (see **[43–46]** for earlier mathematical work), any
+> conformal structure on **S**^d that is sufficiently close to the standard one arises, by the procedure in (2.2),
+> from a unique metric on B_{d+1} that obeys the Einstein equations with negative cosmological constant and has
+> a double pole at the boundary. (Uniqueness of course means uniqueness up to diffeomorphism.) This is proved by
+> first showing existence and uniqueness at the linearized level (for a first order deformation from the standard
+> conformal structure on **S**^d) roughly along the lines of the above treatment of scalars, and then going to
+> small but finite perturbations via an implicit function argument."
+
+#### 41.2.3 Fefferman–Graham 被引处（刊页 **p.18** 与 **p.19**，L1 逐字）
+
+> （p.18）"**Theorems 2.1 and 2.3 of [44]** show that the metric of B_{d+1} is determined locally by the conformal
+> structure of **S**^d up to very high order. **The proof of the theorems in section 5 of that paper** involves showing
+> that once one picks a metric on **S**^d in its given conformal class, one can pick distinguished coordinates near the
+> boundary of B_{d+1} to very high order."
+
+> （p.19）"The conformal anomaly arises only for even d; this is related to the fact that **Theorems 2.1 and 2.3 in [44]
+> make different claims for odd and even d**. In the even d case, the theorems allow logarithmic terms that presumably
+> lead to the conformal anomaly."
+
+**三重交叉核验通过**：(i) 编号 [44] = Fefferman–Graham（p.39 逐字）；
+(ii) FG 原文确有 Theorem **2.1** 与 **2.3**，且各自分 a) n odd / b) n even 两支（§41.1，L1）；
+(iii) FG 原文的第 **V** 节标题就是 "About the Proof of Theorem 2.1"，内容正是「特殊坐标系」（§41.1.5，L1）。
+⇒ **Witten 引的确实是 Fefferman–Graham，不是 Graham–Lee。**
+
+> ⚠⚠ **本轮最容易踩的坑（已实测）**：**ar5iv 版 `ar5iv.labs.arxiv.org/html/hep-th/9802150` 给出的方括号编号与原文不同**
+> ——ar5iv 读出来是「[26]–[29]」「Theorems 2.1 and 2.3 of **[27]**」，而 **arXiv PDF 原文是 [42]、[43–46]、[44]**。
+> 若照 ar5iv 的编号去查参考表，会把 FG 误认成 LeBrun 或 Flato–Fronsdal。
+> **教训：Witten 这篇（以及一切用 `\nref` 的 harvmac 老论文）的参考编号必须以 PDF 页图为准，不能用 ar5iv。**
+> （附带：INSPIRE 的 reference label 与 PDF 编号在本篇是一致的，可作快速旁证。）
+
+---
+
+### 41.3 Graham & Lee 1991：**正文未取到（L0）**，只能挂二手转述
+
+#### 41.3.1 书目（L2，三源一致）
+
+C. Robin Graham and John M. Lee, "**Einstein metrics with prescribed conformal infinity on the ball**",
+*Advances in Mathematics* **87** (1991), no. 2, 186–225. DOI `10.1016/0001-8708(91)90071-E`；MR 1112625。
+NSF DMS-8702986 / DMS-8702618。
+
+#### 41.3.2 ★ 「Theorem A / Theorem B」这个假设**没有证据，且有反证**
+
+- 本轮**没有**在任何来源里看到 Graham–Lee 1991 的「Theorem A」「Theorem B」。
+- **反证（L3）**：Lee 本人后来的 memoir *Fredholm operators and Einstein metrics on conformally compact manifolds*
+  （arXiv:math/0105046）在正文里用的引法是 **「[29, Lemma 2.2]」**（[29] = Graham–Lee 1991）。
+  ⇒ 该文**用的是分节编号（x.y），不是字母编号**。
+- **混淆源**：Lee 的那本 **memoir 自己**的主定理才叫 **Theorem A**（「there exists an Einstein metric g on M
+  that has [ĝ] as conformal infinity」）。**极易把 memoir 的 Theorem A 误记成 Graham–Lee 1991 的 Theorem A。**
+- ⇒ **图里在拿到正文之前，`loc` 只能写「全文（未取得，L0）」或页码区间，严禁写任何定理号。**
+
+#### 41.3.3 可用的二手转述（按可靠度排序）
+
+| # | 出处 | 逐字 | 等级 |
+|---|---|---|---|
+| 1 | **Witten, hep-th/9802150, 刊页 p.7** | 见 §41.2.2（最完整：给了"接近标准共形结构"、"唯一（模微分同胚）"、"线性化 + 隐函数定理"三要素） | **L1** |
+| 2 | **Lee, math/0105046, Introduction** | "Graham and I showed in [29] that every conformal structure on **S**^n sufficiently close to that of the round metric is the conformal infinity of an Einstein metric close to the hyperbolic metric."（作者本人转述） | **L3**（ar5iv 文本） |
+| 2b | 同上，同处 | "our methods in that paper were **insufficient to prove a sharp isomorphism theorem**"（作者自陈的局限） | **L3** |
+| 3 | Graham, math/9909042, Introduction | "each conformal structure on **S**^n sufficiently near the standard one is the conformal infinity of a unique (up to diffeomorphism) conformally compact Einstein metric on the ball near the hyperbolic metric." | **L3** |
+| 4 | Anderson, hep-th/0403087, §6 | "By the Graham-Lee theorem [30], there is an AH Einstein metric g⁺ on B⁴ …"；并称 Friedrich 的结果是 "an exact analogue of the result of Graham-Lee [30]" | **L4** |
+| 5 | arXiv:2509.18430, Introduction | 称其为 "a perturbation result, which was verified via **the implicit function theorem**" | **L4** |
+
+四条转述在「**S**^n 上、**接近圆度规**、**存在且唯一（模微分同胚）**、**球上**、**微扰/隐函数定理**」五个要素上互相一致。
+⇒ **陈述内容本身可以放心写**；**只有编号与逐字措辞是 L0。**
+
+#### 41.3.4 ⚠ Witten 自己标出的两条限制（L1，来自 witten-1998-ads.md 已记录的 E-W3/E-W10，本轮页图复核一致）
+
+- 刊页 p.8：「the restriction to conformal structures that are sufficiently close to the standard one
+  **is probably also necessary** for most values of d」；
+- 刊页 p.10：「the Graham-Lee theorem **presumably fails** for conformal structures that are sufficiently far
+  from the round one」。
+⇒ **Graham–Lee 定理是局部（小邻域）结果，且 Witten 认为其局部性是本质的。**
+
+---
+
+### 41.4 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| **Numdam 卷目录** | `numdam.org/issues/AST_1985__S131_/` | **成功**（21 篇全表；FG 在 pp.95–116） |
+| **Numdam 篇页 + PDF** | `numdam.org/item/AST_1985__S131__95_0.pdf` | **成功**（2.2 MB 扫描件，落盘后 Read 页图；**PDF 页 = 刊页 − 94**） |
+| **Witten 原文 PDF** | `arxiv.org/pdf/hep-th/9802150` | **成功**（41 页，读 pp.7–13, 17–20, 39–41；**PDF 页 = 刊页 + 1**） |
+| Witten ar5iv | `ar5iv.labs.arxiv.org/html/hep-th/9802150` | **成功但编号错**（见 §41.2.3 警告） |
+| INSPIRE 参考表 | `inspirehep.net/api/literature?q=arxiv:hep-th/9802150&fields=references` | **成功**（57 条，序号与 PDF 一致） |
+| Graham–Lee 正文 | `sciencedirect.com/science/article/pii/000187089190071E` | **失败：HTTP 403**（机器人墙） |
+| Graham–Lee 正文 | `r.jina.ai/https://www.sciencedirect.com/…` | **失败**：返回 "Are you a robot?" 页 |
+| Graham–Lee OA 位置 | `api.openalex.org/works/doi:10.1016/0001-8708(91)90071-E` | **成功但结论是否定的**：`is_oa:false`, `oa_status:"closed"`, 全库无 repository 全文 |
+| Graham–Lee OA 位置 | `api.semanticscholar.org/…` | **矛盾**：报 `isOpenAccess:true`, `openAccessPdf` 却只是 `doi.org/…`（BRONZE）——**指回付费墙，不是真 PDF** |
+| Lee 主页论文表 | `sites.math.washington.edu/~lee/Research/papers.html` | **成功但结论是否定的**：该条只有 "Published Article" 链接，**无 arXiv、无 PDF** |
+| Graham 主页 | `sites.math.washington.edu/~robin/`、`/~robin/Papers/index.html` | **失败**（前者只有联系方式；后者 404） |
+| scholar.archive.org | `scholar.archive.org/search?q=…` | **失败：反爬验证页** |
+| zbMATH | `zbmath.org/?q=…`、`r.jina.ai/https://zbmath.org/…` | **失败：403 / CAPTCHA** |
+| core.ac.uk API | `api.core.ac.uk/v3/search/works?q=…` | **失败：403（需 API key）** |
+
+> **新增经验**：
+> (1) **★ Numdam 是取 Astérisque / 法国老期刊全文的可靠入口**，PDF 直链形如
+>     `numdam.org/item/<ID>.pdf`，不设墙、不被拦；`<ID>` 从 `numdam.org/issues/<卷>/` 的目录页拿。
+> (2) **Semantic Scholar 的 `isOpenAccess:true` 不可信**——它会把「DOI 落地页」当成 openAccessPdf（status=BRONZE）。
+>     **判断是否真有 OA 全文，用 OpenAlex 的 `best_oa_location`**（本轮 OpenAlex 给的是干净的 `null`）。
+> (3) **harvmac 老论文（Witten 这类）不要用 ar5iv 读参考编号**（§41.2.3）。
+
+---
+
+### 41.5 给 curator 的建议（researcher 不改 `graph/`）
+
+> 我不代 curator/auditor 做裁决；以下只是把「哪条陈述能挂哪条编号、能挂到什么等级」摆出来。
+
+#### (1) `holography.conformal-boundary-so2d`（witten-1998-ads.md 建议节点 C）：**本节不改其 sources，只加一条 note**
+
+该节点是**纯几何**的（共形紧化 + SO(2,d) 作为边界共形群），**与 FG/GL 无关**。
+建议在 `notes` 加一句，防止后来者把两件事混在一起：
+
+```yaml
+notes: |
+  ⚠ 本节点只讲「边界带共形结构、SO(2,d) 作为共形群」，**不含**「边界共形结构能否决定体度规」。
+  后者是另一条独立陈述，其数学来源见 literature/extractions/math-sources.md §41
+  （Fefferman--Graham 1985 Thm 2.1/2.3 = 形式幂级数级；Graham--Lee 1991 = 圆度规附近的真存在唯一性）。
+```
+
+#### (2) 新 statement `holography.bulk-metric-from-boundary-conformal-structure`（建议**拆成两张卡**，不要合并）
+
+**卡 (2a)：形式幂级数级（可挂 L1 编号）**
+
+```yaml
+kind: proposition
+title: Fefferman--Graham 展开：边界共形结构形式地决定体 Einstein 度规
+statement: |
+  设 M^n 带共形结构 [g]。称 M^+ 上的度规 g^+ 为 [g] 的 Poincare 度规，若
+  (1) g^+ 以 [g] 为 conformal infinity；(2) Ric(g^+) = -n g^+；
+  (3) 在 g^+ = r^{-2}[dr^2 + g^+_{ij}(x,r) dx^i dx^j] 的写法下 g^+_{ij} 是 r 的偶函数。
+  则：n 为奇数时，在固定 M 的微分同胚意义下 (1)-(3) 有**唯一的形式幂级数解**；
+  且若 [g] 实解析，该级数收敛、g^+ 存在且 r^2 g^+ 解析到边界。
+  n 为偶数时，**存在没有形式幂级数解的共形结构**；把 (2) 弱化为「Ric(g^+)+n g^+ 沿 M 消没到 n-2 阶」后，
+  形式解存在并唯一到「消没 n-2 阶的项」与微分同胚。
+sources:
+  - ref: fefferman-graham-1985
+    loc: "THEOREM 2.3，刊页 p.103（Asterisque S131 (1985) 95-116）；条件 1),2) 在 p.102、条件 3) 与式 (2.2) 在 pp.102-103"
+    note: "L1 页图（Numdam 扫描件）。配套的 ambient metric 版是同文 THEOREM 2.1，刊页 p.101。"
+# status: 该条本身是严格数学定理 -> derivation 的 own status 可写 proven（但见下面三条 gap）
+```
+
+`gaps` 必须写清三条（全部来自原文，§41.1.5）：
+1. **是形式幂级数的存在唯一性**，收敛性只在 [g] 实解析时断言；
+2. **n 偶时有真实障碍**（同文 Proposition 3.5，p.107）；
+3. **原文第 V 节只「discuss some of the ingredients」，Theorem 2.1 的完整证明不在文内，Theorem 2.3 没有独立证明节**
+   → 若要 `rigorous`/形式化，这是必须补的缺口。
+
+**卡 (2b)：真存在唯一性（只能挂 L0 来源）**
+
+```yaml
+kind: proposition
+title: Graham--Lee：球上接近标准共形结构者是唯一 Einstein 度规的共形无穷远
+statement: |
+  S^d 上任何**充分接近标准（圆）共形结构**的共形结构，都是 B_{d+1} 上某个满足负宇宙常数 Einstein 方程、
+  在边界有二阶极点的度规的 conformal infinity；该度规在微分同胚意义下**唯一**。
+sources:
+  - ref: graham-lee-1991
+    loc: "全文（未取得，L0）"
+    note: |
+      ⚠ **本项目未取得正文，任何定理号都不得写**（math-sources.md §41.3.2：
+      任务书假设的「Theorem A/B」无证据，且 Lee 本人的 memoir 用的是「[29, Lemma 2.2]」这种分节编号）。
+  - ref: witten-1998-ads
+    loc: "刊页 p.7（arXiv:hep-th/9802150 v2，PDF p.8）"
+    note: "L1。转述最完整：给出「充分接近标准共形结构」「唯一模微分同胚」「线性化 + 隐函数定理」三要素。"
+# status: physical-argument 或 conjecture 都不合适——这是**数学定理但本项目未核实**。
+# 建议由 curator/auditor 裁决用哪种 status，并在 notes 写明「未核实」而非「未证明」。
+```
+
+`notes` 建议写明 Witten 自列的两条限制（§41.3.4）：**局部性可能是本质的**（p.8「probably also necessary」、
+p.10「presumably fails」）。
+
+#### (3) 对 `witten-1998-ads.md` 第 345 行那条未解决项的处置
+
+- **Fefferman–Graham 那一半：已结案**（§41.1，L1）。可以把该行改成「已核实，见 math-sources.md §41.1」。
+- **Graham–Lee 那一半：确认取不到**（§41.4 十一条路线）。该行应保留，但改写为
+  「**已确认无开放获取全文**（OpenAlex `oa_status: closed`）；内容有四条互相一致的二手转述（§41.3.3），
+  **编号与逐字仍 L0**。」
+
+#### (4) 两条禁令
+
+7. **不得把「Theorems 2.1 and 2.3」记在 Graham–Lee 名下**——Witten p.18/p.19 引的是 **[44] = Fefferman–Graham**（§41.2.3）。
+8. **不得写 `Graham–Lee 1991, Theorem A/B`**（§41.3.2）。
+
+---
+
+### 41.6 遗留问题
+
+- **Q39** **Graham–Lee 1991 正文**（升 L1；确认主定理编号与「充分接近」的确切函数空间/范数）。
+  尚未试过的招：纸本馆藏；Elsevier open-archive 的非 `sciencedirect.com` 镜像；
+  某篇**逐字引用了它的定理号**的论文（本轮查了 6 篇引用文献，**无一给出内部编号**——这本身像是一个稳定现象）。
+- **Q40** **Fefferman–Graham 1985 的刊页 pp.112–116**（第 V 节后半与参考文献）本轮未读，
+  用于确认 Problem 5.1 之后是否还有别的编号结果。
+- **Q41** **LeBrun, Proc. Roy. Soc. A 380 (1982) 171**（Witten [43]，FG 的 [16]）——
+  FG 的 conformal infinity 定义外包给它，且它有 n = 3 的 self-dual 唯一性定理。**本轮未取。**
+- **Q42** 本项目是否要给 `fefferman-graham-1985` 的 **Proposition 3.5**（n 偶的障碍张量 / Bach 张量）单独建卡——
+  它是「偶维共形反常」在数学侧的对应物，与 witten-1998-ads.md 的 E-W 系列有直接接口。
