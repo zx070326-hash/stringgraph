@@ -1,0 +1,85 @@
+id: math.chern-simons-descent-equations--via-chern-weil-transgression
+target: math.chern-simons-descent-equations
+kind: proof
+status: rigorous
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      只用到该约定的**微分形式一半**：F = dA + A²、楔号省略、A 是反厄米矩阵一形式。
+      tr（基本）/ Tr（伴随）之分与本推导无关（结论对任一 Ad-不变迹成立）。
+sources:
+  - ref: zumino-1983-les-houches
+    loc: "(2.17)(2.18)（d Tr F² = 2 Tr DF F = 0，「Adding zero in the form 2Tr[A,F]F」）；(2.27)（一般 n）；(2.19)–(2.24)（δF = D(δA)、δTrF² = 2d Tr δA F、A_t = tA、F_t = tF + (t²−t)A²，积出 (2.24)）；(2.25)(2.26)（ω₃ 与 Tr F² = dω₃，引导句逐字「and have thus verified that」）；(2.28)–(2.31)（「Analogously one can proceed for higher powers Tr Fⁿ since …」）；(3.28)(3.29)（ℱ = Δ(𝒜+v) + (𝒜+v)²，逐字「as easily verified」；Δω⁰(𝒜+v,ℱ) = dω⁰(𝒜,ℱ)，逐字「This implies that」）；(3.31)(3.32)（按 v 幂次展开并逐次比较 ⇒ 下降方程组，逐字「Equation (3.29) implies a set of relations」）；(3.33)–(3.38)（分部积分给出 ω¹ 的两个显式特例）"
+    note: |
+      **L1 逐页读图**（抽取记录 literature/extractions/zumino-wu-zee-1984.md E4/E5/E6/E9/E10）。
+      ⚠ 该抽取记录的文件名是 ZWZ，但其内容全部出自本条（Les Houches 讲义 LBL-16747）。
+  - ref: chern-1979
+    loc: "Appendix: Geometry of Characteristic Classes（**本项目未核实，L0 待核**）"
+    note: canonical 数学来源候选；本推导的 status 依据之一，见 notes 第 1 条。
+  - ref: kobayashi-nomizu-1963
+    loc: "Vol. II (1969), Ch. XII 'Characteristic Classes'（**本项目未核实，L0 待核**）"
+    note: 同上。
+  - ref: nakahara-2003
+    loc: "Chern–Simons 形式与规范反常两章（**章节号与内容本项目一字未核实，L0 待核**）"
+    note: |
+      物理学界通行的教科书出处，登记为第三候选。**引用前必须先取全文核实章节号**，
+      本图目前**不得**据此写任何式号。
+summary: |
+  三步，全部是微分分次代数里的有限步计算。
+
+  **第一步（闭性）。** 由 F = dA + A² 得 dF = dA·A − A·dA = FA − AF，即 Bianchi 恒等式
+  DF ≡ dF + [A, F] = 0。于是
+      d Tr Fⁿ = n Tr((dF) F^{n−1}) = n Tr((DF) F^{n−1}) = 0，
+  中间一步是「加零」：Tr([A, F] F^{n−1}) = 0 由迹的循环性（带分次符号）与 F 为偶次形式给出。
+  来源把 n = 2 的情形写成 (2.17)(2.18)、一般 n 写成 (2.27)。
+
+  **第二步（transgression）。** 沿一参数族 A_t = tA 作变分：δF = D(δA)，故
+      δ Tr F_t² = 2 Tr(D(δA_t) F_t) = 2 d Tr(δA_t F_t)，
+  对 t ∈ [0,1] 积分（t = 0 端 F_0 = 0 给零）得
+      Tr F² = d [ 2 Tr ∫₀¹ dt A F_t ] = d Tr(A F − ⅓ A³)，
+  即 (2.24)(2.25)(2.26)。同一步对 Tr Fⁿ 重跑（把 F_t 的 n−1 次幂放进去）给出
+      ω⁰_{2n−1} = n Tr ∫₀¹ dt A F_t^{n−1},   Tr Fⁿ = dω⁰_{2n−1}   ((2.28)(2.29))。
+  这就是 Chern–Weil transgression：Tr Fⁿ 是闭的且其类不依赖 A，把 A 沿直线同伦到 0 得到的
+  「同伦不变量」正是 ω⁰_{2n−1}。
+
+  **第三步（下降方程）。** 把 x 方向与群参数方向的外微分并成 Δ = d + δ（Δ² = 0），
+  取 𝒜 = g⁻¹Ag + g⁻¹dg、v = g⁻¹δg，则 ℱ = d𝒜 + 𝒜² 同时等于 Δ(𝒜 + v) + (𝒜 + v)²（(3.28)），
+  即 (𝒜 + v, ℱ) 相对 Δ 与 (𝒜, ℱ) 相对 d 是同一套代数关系。把第二步的恒等式在这两套记号下各写一遍并相减，
+  得 Δ ω⁰_{2n−1}(𝒜 + v, ℱ) = d ω⁰_{2n−1}(𝒜, ℱ)（(3.29)）。
+  两边按 v 的幂次分解（(3.31)），逐次幂比较系数，v 的 p+1 次项给出
+      δ ω^p_{2n−1−p} + d ω^{p+1}_{2n−2−p} = 0,
+  最高次给出 δ ω^{2n−1}_0 = 0，即 (3.32)。
+  n = 2、n = 3 的 ω¹ 显式形式 (3.37)(3.38) 由 (3.33)–(3.36) 的分部积分得到。
+gaps:
+  - "★ **局部性（本轮新发现，GS 链上此前未被记录的限定）**：来源 p.16 末逐字「Equations such as (2.24) and (2.26) are **really valid only locally, in some finite neighborhood in x-space**. It is however well known that they can be given a global meaning by using a connection on a principal fibre bundle, rather than a vector potential on the base (x-space).」本推导只证局部/代数版本；**全局版本本图无来源、未证**。⚠ green-schwarz-1984 全文没有这句话，GS 直接在整个十维时空上使用 (4)–(8)(14)–(16)。"
+  - "★ **k² = 0 未证**：来源引入同伦算子 k := ∫₀¹ ℓ_t（(2.44)，满足 kd + dk = 1）时，对 k² = 0 逐字写「Actually, it is not difficult to show that this is a general fact, when k is defined by means of the family (2.48). **We leave the proof as an exercise to the reader.**」⇒ 本文无证明。**说明**：目标卡的 (i)(ii)(iii) 三条都不使用 k² = 0（k 只在来源 §3 推导有限规范变换下的 α_{2n−2} 时用到，那部分不在本卡范围内），故这条不影响本推导；记录在此是为了不让下游误以为来源的整套装置已闭合。"
+  - "**(3.28) → (3.29) 只有断言**：来源对 (3.28) 逐字「as easily verified」、对 (3.29) 逐字「This implies that」，**未给中间步骤**；本图未复算。本推导 status 取 rigorous 的依据是「该结果是标准的已发表数学定理」，**不是**「来源的书写完整」——见 notes 第 1 条。"
+  - "**canonical 数学来源尚未核实**：chern-1979 / kobayashi-nomizu-1963 / nakahara-2003 三条均为 **L0（本项目一字未取到）**，只凭 zumino-1983-les-houches 参考文献 [0] 的逐字指认登记。⇒ 若 auditor 认为 rigorous 必须由**已核实**的数学来源支撑，本推导应降为 physical-argument。**本 gap 就是那次裁决所需的全部信息。**"
+  - "**ω¹ 的一般积分公式不入图**：来源 (3.36) 的前置因子与末项指数读图不可靠（抽取记录 §3.2），故目标卡只收 n = 2、n = 3 两个显式特例，**一般 n 的 ω¹ 在本图里没有显式表达式**。"
+  - "**绝对归一化不入图**：来源 §5 的 (5.13) 是唯一给出 ω¹ 绝对归一的式子，但 (a) 读图不可靠（(4π)^{n−1} 的底数与指数），(b) 原文在该式上方有**手写插注「(up to a sign)」**。⇒ 本图的 ω 全部未归一。"
+notes: |
+  【1. ★ status 为什么取 rigorous，以及它到底断言了什么】
+  断言的是：**目标卡 (i)(ii)(iii) 是纯微分几何（Chern–Weil transgression + 代数下降）的标准结果，
+  在数学界有已发表且被接受的完整证明**（docs/STATUS_LEVELS.md 第 4 级的主判据）。
+  **不**断言的是：本图已逐页核实那份数学证明。本图核实到的是
+  zumino-1983-les-houches 的逐步推导（L1），它对第一、二步给了完整两行到十行的计算并逐字自称
+  「and have thus verified that」，对第三步则有一处「as easily verified / This implies that」的跳步。
+  ⇒ 若把 rigorous 的门槛定为「已核实的数学文献」，本推导应降为 physical-argument；
+  gaps 第 3、4 条就是给 auditor 的裁决材料。**本推导没有引用 docs/STATUS_LEVELS.md 的
+  「有限步初等计算 + reviewer 复核」例外条款**（未经 reviewer 复核）。
+
+  【2. 与 Lean 的关系】来源 p.17 末给了一条**对形式化极其有利的逐字许可**：
+  「in defining the operators d, ℓ and k and in studying their properties (from formula (2.36) on)
+  we have treated A and F as **purely algebraic objects** from which one can form polynomials.
+  **No special relations** (such as particular commutation relations) have been used and the polynomials
+  were not restricted by any symmetry or invariance property.」
+  ⇒ 目标卡 (0)(a) 的代数版本可以在自由分次微分代数上形式化，**不需要流形**。
+  抽取记录 §5.5 给了三个 Lean 候选（Tr Fⁿ 闭性、kd + dk = 1、附录的组合恒等式 (A.18)），
+  本推导不预设其中任何一条已完成。
+
+  【3. 本推导不覆盖的来源内容】有限规范变换下 ω⁰ 的变换律（来源 (3.5)(3.16)(3.17)）、
+  α_{2n−2} 的显式公式（(3.11)(3.13)(3.14)，附录 (A.16)(A.18)）在本图**没有节点**。
+  ⚠ 来源 (3.15)（α₄ 的五项显式式）字迹最差，抽取记录**明确不转录**；将来若要建 α 卡，
+  须用附录 (A.16) 或重取原件，**不得**从二手文献回填再挂本来源。
+author: curator
+created: "2026-09-11"
