@@ -554,3 +554,64 @@
   「AGW (119) + (83) ⟹ GS (20)」是一条**纯 `ℚ` 上多项式恒等式**，`ring` 一行即可。
 - ⇒ **新增首选 Lean 目标：AGW 记录 §5.1 的 B1。** 它把 GS 那句"496 是必需的"变成可机检的算术，价值高于本记录原有的 A1–A3。
 
+---
+
+## 10. ★ 第四轮追加（2026-09-11，researcher）：`gsw-1987-v2` 抽取完成后对 Q1 的修订
+
+> ⚠ **给 lead 的合并提示**：本节写于 `agent/researcher/gsw-1987-v2` 分支。若 `main` 上已有另一轮写入的 **§9**
+> （Zumino–Wu–Zee 抽取，含 Bilal `β̃ = 1` 的核实），**两节内容互补、不冲突**，按 `literature/CLAUDE.md` 规则 3
+> 两节都保留即可；只需确认编号不重复（本节已避开 9 取 10）。
+> 本节的 §10.5 与那一轮的 CS 符号裁定**已对齐**。
+
+> 本节**不修改** §1–§8 的任何已有条目（按 `literature/CLAUDE.md` 规则 3 只追加）。
+> **§2 E20 与 §4 Q1 在新证据下需要重读，以本节为准。**
+> 新记录：`extractions/gsw-1987-v2.md`（GSW Vol. 2 第 10 章 L1 逐页读毕；**第 13 章仍未取到**）。
+
+### 10.1 「四解出自 GSW ch.13」现在有**两条独立**证据，但 GSW 原文仍是 L0
+
+- **Antonelli, arXiv:1507.08642 §1.1, p.3（L1 逐字）**：「…mostly following **the original statement found in chapter 13 of [3]**, but no proof has explicitly been carried out.」其 **[3] = GSW Vol. 2（记年份 1988）**。
+- **Adams–DeWolfe–Taylor, arXiv:1006.1352v2, p.1（L1 逐字）**：「It has been noted that the gauge groups `G = U(1)⁴⁹⁶` and `G = E₈ × U(1)²⁴⁸` **satisfy some of the same conditions as** the `SO(32)` and `E₈ × E₈` cases **[7]**…」其 **[7] = GSW Vol. 2（记年份 1987）**。
+- ⇒ **E20 的判定「四解不属于 GS 1984，原始陈述在 GSW ch.13」得到第二条独立支持。**
+- ❌ **但 GSW §13.5.3（pp. 353–358）的正文本项目仍未取到**（Cambridge Core 章级 PDF 12 MB，超工具 10 MB 上限）。
+  **两位转述者对 GSW「说了多强的话」理解并不一致**：Antonelli 读成「已知这四个反常抵消」，ADT 只读成「满足**部分**相同条件、**看起来**可能一致」。**Q1 的三方冲突仍未裁决。**
+
+### 10.2 ★★ Q1 的性质变了：「anomaly-free」在阿贝尔情形有**两个不等价**含义
+
+**Adams–DeWolfe–Taylor 2010（L1 全文）证明**：
+
+> 摘要逐字：「the `N = 1` supergravity theories in ten dimensions with gauge groups `U(1)⁴⁹⁶` and `E₈ × U(1)²⁴⁸` **are not consistent quantum theories. Cancellation of anomalies cannot be made compatible with supersymmetry and abelian gauge invariance.**」
+> 其 (19) 逐字：`Y₄ ≠ dH₃`；结论「…**cannot be made anomaly-free by the Green–Schwarz mechanism**」。
+
+机制：阿贝尔规范场根本不进六边形图（**与本记录 §5.3 / GSW p.148 逐字「Only in the abelian case, when the theory becomes free, can `T` vanish」一致**），所以没有阿贝尔反常可消；但超对称仍要求 `B` 场与阿贝尔规范玻色子有 `BF²` 耦合，于是 GS 项 `∫B ∧ X₈` 在阿贝尔规范变换下不再不变。
+
+⇒ **必须区分**：
+- (a) **反常十二形式因子化**（`Î₁₂ ∝ Y₄X₈`）—— 四个 496 维解都满足；
+- (b) **GS 抵消项真的能写下来**（要求 `Y₄ = dH₃`）—— 两个阿贝尔解**做不到**。
+
+**本记录 §4 Q1 建议「把『496 维群中只有四个解』标 conjecture 或 physical-argument」这条仍然成立，但 statement 的措辞必须改**：应写成「**使反常十二形式因子化**」，**不得**写成「反常抵消」。详见 `extractions/gsw-1987-v2.md` §5.2。
+
+### 10.3 GSW 给 GS 1984 的两处**实质补充**（都在第 10 章，L1）
+
+1. **迹恒等式多了 `U(n)` 一支**：GSW (10.1.14) `Tr t⁶ = n trλ⁶ + 15 trλ⁴trλ²`。系数 `n` 对任意 `n ≥ 1` 恒不为零。
+   ⇒ 本记录 §5.3 的 A3（「为什么是 32」的代数入口）可以扩成 `l ∈ {−1, 0, +1}` 的统一版本（`gsw-1987-v2` §5.4 的 **A6**）。
+2. **★ GS (12c) 里那个凭空出现的整数 `32` 有了世界面来历**：GSW p.165 逐字「The number of such diagrams is equal to the number of ways in which **an odd number of twists can be distributed on the internal legs of a hexagon diagram, which is 32**.」
+   即 `Σ_{k odd} C(6,k) = 2⁵ = 32`。⇒ **新 Lean 岛候选，见 `gsw-1987-v2` §5.4 的 A7**（「内线数 = 6」这一步是抽取者从图形读出的，须标 `inferred`）。
+
+### 10.4 Q7（弦论侧的实际出处）：教科书版已到手
+
+本记录 Q7 说 GS 1984 只 "summarized" 弦论侧结果，真正的计算在 Nucl. Phys. **B255** (1985) 93–114。
+**GSW Vol. 2 第 10 章就是那篇文章的教科书版，现已 L1 逐页读毕（pp. 141–174）**，可直接承载「type I 单圈六边形规范反常」的图节点。
+⚠ 但**范围要写清**：GSW 第 10 章只算了**纯规范**六边形；**引力反常、混合反常、type IIB、杂化弦在弦论侧全部只有 "suggests"，没有计算**（GSW pp.167–168 逐字）。原始文献 `green-schwarz-1985-hexagon` 仍值得抽（本章读到的页面内没有给出它的引用）。
+
+### 10.5 CS 符号约定：ADT 是第三个采用 Bilal 整体符号的来源（**但不改变裁定**）
+
+本记录 Q6 记「GS (4) 是 `H = dB + ω⁰_{3Y} − ω⁰_{3L}`，Bilal (12.14) 反号」。
+**ADT (2)(9)（L1）**：`H₃ ≡ dB₂ − ω₃^Y`、`H₃ ≡ dB₂ − ω₃^Y + ω₃^R` —— 与 Bilal 同号、与 GS 整体反号。
+
+⚠ **不要据此写「GS 是少数派/GS 有误」。** 按 `extractions/zumino-wu-zee-1984.md` 的裁定（并行进行的另一轮抽取，
+且据 lead 转达，`main` 上已补记 Bilal 的 `β̃ = 1` 核实）：GS (4) 与 Bilal (12.14) 由 **`(B, H) → (−B, −H)` 相联，两者都对**；
+物理不变量是**两个 CS 项的相对符号**，而 GS、Bilal、ADT 三者的**相对**符号一致。
+ADT 只是第三个采用 Bilal 那套整体符号的来源。⇒ 该约定卡的来源仍应指 **GS 1984 (4)+(9c)**。
+**GSW 自己怎么写仍然未知**（在 §13.1.3 / §13.5.3，未取到）。
+
+
