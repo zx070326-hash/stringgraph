@@ -9,7 +9,7 @@ statement: |
   由 Gauss–Bonnet 定理，χ 只依赖 M 的拓扑：
     χ = 2 - 2g - b   （g 为亏格，b 为边界分支数；不可定向情形另计交叉帽）。
 uses: []
-uses_conventions: [conv.metric-mostly-plus]
+uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，约 eq. (1.2.31)（Euler 数的定义式）；同一表达式在 §3.2 重复为 eq. (3.2.3b)"

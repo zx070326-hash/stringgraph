@@ -13,6 +13,7 @@ uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge
   - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.1（p.32 起），作用量约 eq. (2.1.10)；复坐标与 Jacobian 见 (2.1.2)/(2.1.3)/(2.1.6)/(2.1.7)"
@@ -30,5 +31,15 @@ notes: |
   本节点**不**包含第 1 章的 Polyakov 作用量与其 diff×Weyl 对称性
   （那属于抽取记录 E5/E7，由另一名 curator 处理）。两者是同一作用量在
   共形规范 + 欧氏化后的形式；日后应补一条把二者连起来的边。
+
+  **该边已补（curator，2026-09-10）**：见 worldsheet.polyakov-action-conformal-gauge-form
+  （推导 --via-weyl-invariance）。那条命题从 worldsheet.polyakov-action 出发，
+  经 Wick 旋转（conv.worldsheet-euclidean 的字典）与共形规范 g_{ab} = e^{2ω}δ_{ab}，
+  用「d = 2 时 g^{1/2}g^{ab} = e^{(d-2)ω}δ^{ab} = δ^{ab}」把 Weyl 因子消掉，
+  再用 d^2z = 2dσ^1dσ^2 与 δ^{ab}∂_aX∂_bX = 4∂X∂̄X 得到**本节点的作用量（含前因子）**。
+  方向说明：那条命题**不以本节点为依赖**——本节点是它陈述里的等式右端，不是输入；
+  故本节点在图上仍是无入边的定义卡，但不再是语义上的孤岛。
+  号差声明：本节点已于同日补上 conv.worldsheet-euclidean（世界面欧氏；
+  时空仍是 conv.metric-mostly-plus 的洛伦兹 mostly-plus，两个 family 互不相干）。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

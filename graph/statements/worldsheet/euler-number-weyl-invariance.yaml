@@ -9,7 +9,7 @@ statement: |
     χ = (1/(4π)) ∫_M d^2σ (-γ)^{1/2} R + (1/(2π)) ∫_{∂M} ds k
   满足 χ[γ'] = χ[γ]：体项中的 -2∇_a∂^a ω 是全散度，其积分化为边界项，
   恰与边界项中 n^a ∂_a ω 的贡献相消。
-uses_conventions: [conv.metric-mostly-plus]
+uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2, eq. (1.2.32)（Weyl 重标度下曲率标量的变换，p.15）及其下方（χ 的 Weyl 不变性）"

@@ -7,7 +7,7 @@ statement: |
   下不变（ω 为任意光滑实函数）：S_P[X, γ'] = S_P[X, γ]。
   这一不变性是世界面维数等于 2 的特殊性质：在 d 维世界体上
   (-γ)^{1/2} γ^{ab} 在 Weyl 变换下带因子 e^{(d-2)ω}。
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，约 eq. (1.2.19)–(1.2.20) 附近（Weyl 变换 γ'_ab = e^{2ω} γ_ab）"

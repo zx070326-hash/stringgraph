@@ -31,8 +31,18 @@ sources:
     note: "公式号经 schrans-2020 目录核实（`2.46 p 56: Eq. (2.6.25) The Open String Boundary`）。"
   - ref: polchinski-1998-v1
     loc: "闭弦零模 α_0^μ = ᾱ_0^μ = (α'/2)^{1/2} p^μ：**式号未核实**（抽取记录第 1.1 节列为「内容确认，式号未核实」）"
+superseded_by: worldsheet.open-string-virasoro-modes-v2
 tags: [bosonic-string, open-string, virasoro, zero-mode, definition]
 notes: |
+  ⚠ **本卡片已被取代（curator，2026-09-10）**，见 superseded_by。
+  取代原因是下面「待拆」一条已被执行：本卡片把定义与命题混在一起。拆成
+    worldsheet.open-string-virasoro-modes-v2  —— 纯定义（doubling trick + 零模归一化）
+    worldsheet.open-string-l0-level-form      —— 命题（L_0 = α'p^2 + N，X 部门无加性常数）
+                                                 + 推导 --via-zero-mode-substitution
+  按项目规则，本卡片的 id 与 statement 文本不作任何修改。
+  拆分时本卡片在图中**没有任何入边或出边**，故拆分未改动其它节点，
+  也未改变任何节点的有效状态（本卡片原有效状态 physical-argument，v2 相同）。
+
   零模归一化 (2α')^{1/2} 与 conv.alpha-prime-regge 捆绑：它使
   L_0 = (1/2)α_0·α_0 + N = α' p^2 + N，从而质量壳条件 (L_0 - a)|ψ⟩ = 0 化为
   α' m^2 = N - a（注意 p^2 = -m^2，mostly-plus）。若改用闭弦归一化 (α'/2)^{1/2}
@@ -43,6 +53,7 @@ notes: |
 
   **待拆**（reviewer-ch23 提出，本轮不拆）：本卡片把「开弦模展开的定义」与
   「这组模满足的代数关系 / 具体表达式」写在一起；后者是命题，日后若被独立推导或引用应拆出。
+  —— **已于 2026-09-10 执行**，见本 notes 开头。
 
   **零模与形式化（2026-09-10 跨分支补注）**：Fock 空间的形式化定义见
   worldsheet.bosonic-fock-space（status: formalized，formal/StringFormal/NoGhost/Fock.lean），

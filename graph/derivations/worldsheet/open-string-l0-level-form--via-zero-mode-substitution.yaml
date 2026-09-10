@@ -1,0 +1,68 @@
+id: worldsheet.open-string-l0-level-form--via-zero-mode-substitution
+target: worldsheet.open-string-l0-level-form
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.open-string-virasoro-modes-v2
+    note: |
+      提供开弦零模归一化 α^μ_0 = (2α')^{1/2} p^μ 与「开弦只有一套 Virasoro」这一前提。
+      来源同为 Polchinski §2.7 (2.7.27) 与 §2.6 (2.6.25)，与本推导的 sources 重合。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      提供断言 (i) 的左端：产生-湮灭正规序下 L_0 = (1/2) α_0·α_0 + Σ_{n≥1} α_{-n}·α_n。
+      **这一式已逐字写在该节点的 statement 里**，且其来源正是同一处 (2.7.25)，
+      故本条边不标 inferred。
+  - id: worldsheet.normal-ordering-constant-ax
+    note: |
+      提供断言 (ii)：共形正规序与产生-湮灭正规序的 L_0 相差常数 a^X，且 a^X = 0。
+      该节点的来源是 Polchinski §2.7 (2.7.7)/(2.7.9)/(2.7.11)（式号经 schrans-2020 目录核实，
+      a^X = 0 的值出现在核对源条目标题里），与本推导 sources 的第二条同源，
+      故本条边不标 inferred。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)、(2.7.27)（L_0 = α'p^2 + N 与开弦零模），p.58 起"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字核实。**来源直接给出结论等式**，
+      本推导只是把它在本图里分解为「零模代换」+「a^X = 0」两步并记账。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)、(2.7.9)（a^X = 0）、(2.7.11)，p.59–60"
+summary: |
+  (i) 由 worldsheet.virasoro-generators-free-boson 的定义，
+        L_0 = (1/2) Σ_{n∈Z} : α_{-n}·α_n :  =  (1/2) α_0·α_0 + Σ_{n≥1} α_{-n}·α_n
+      （正规序只影响 n = 0 项；对 n ≥ 1 项 α_{-n} 在左、α_n 在右，已是正规序）。
+      代入开弦零模 α^μ_0 = (2α')^{1/2} p^μ（worldsheet.open-string-virasoro-modes-v2）：
+        (1/2) α_0·α_0 = (1/2)(2α') p·p = α' p^2,
+      故 L_0 = α' p^2 + N，N = Σ_{n≥1} α_{-n}·α_n。这一步是有限步初等代数。
+  (ii) 由 worldsheet.normal-ordering-constant-ax，CFT 侧（T 的 Laurent 模、共形正规序）的
+      L_0 与 (i) 的算子相差常数 a^X，且 a^X = 0，故两者是同一个算子，
+      结论对 CFT 侧的 L_0 也成立——**X 部门不产生加性常数**。
+
+  【状态说明】(i) 若单独成节点可望达到 rigorous（纯代数、前提完整）。
+  整条取 physical-argument，原因在 (ii)：a^X = 0 的推导
+  worldsheet.normal-ordering-constant-ax--via-state-operator 是 physical-argument
+  （态-算子同构本身经过路径积分/径向量子化），本推导不能高于它。
+  另外 worldsheet.open-string-virasoro-modes-v2 的有效状态也是 physical-argument
+  （它 uses worldsheet.energy-momentum-laurent-modes，后者经 OPE 与围道）。
+  按 docs/STATUS_LEVELS.md，取 min。
+gaps:
+  - "**doubling trick 本身没有被论证**：worldsheet.open-string-virasoro-modes-v2 把它作为
+     定义记录下来（来源 (2.6.25)），但「Neumann 边界条件 ⟹ T̄ 是 T 的镜像解析延拓
+     ⟹ 只有一套 Virasoro」这一串本图没有推导节点。本推导默认它。"
+  - "**(ii) 的两个 L_0 是否真的是同一个算子**这件事，来源是在**平面上的 CFT** 语境里说的
+     （态-算子同构、单位算子对应基态）；把它搬到带边的开弦世界面上，
+     严格说还需要 doubling trick 提供的等同。本图未把这一步单列。"
+  - "(i) 中『正规序只影响 n = 0 项』用到 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，
+     该对易关系写在 worldsheet.virasoro-generators-free-boson 的 statement 内部
+     （其来源是第 1 章抽取记录 E14，那条本身未单独建节点）。故本推导对该对易关系的
+     可追溯性只到那张定义卡为止。"
+  - "α_0 = (2α')^{1/2} p 中的 p 被当作一个算符（作用在动量本征态上给本征值），
+     但承载它的 Fock 空间在本图里只在 worldsheet.virasoro-generators-free-boson 的
+     statement 里被描述，**没有形式化版本含零模**
+     （worldsheet.bosonic-fock-space 是无零模的）。故 (i) 虽是纯代数，
+     目前也无法直接落到 Lean 侧。"
+notes: |
+  本推导与 worldsheet.open-string-l0-level-form 一并由 curator 于 2026-09-10
+  从 worldsheet.open-string-virasoro-modes 拆出（reviewer-ch23 标的「待拆」）。
+  旧卡在拆分时无任何入边/出边，故拆分不改动其它节点，也不改变任何节点的有效状态。
+author: curator-worldsheet-signature
+created: "2026-09-10"

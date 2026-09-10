@@ -15,6 +15,7 @@ statement: |
   即 worldsheet.bc-ghost-cft 的 bc 系统，权为 **λ = 2**（b 权 (2,0)，c 权 (-1,0)）。
 uses_conventions:
   - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v1

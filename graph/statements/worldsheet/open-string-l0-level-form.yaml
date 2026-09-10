@@ -1,0 +1,60 @@
+id: worldsheet.open-string-l0-level-form
+kind: proposition
+title: 开弦的 L_0 = α' p^2 + N（X 部门无额外加性常数）
+statement: |
+  设开弦的振子模与零模归一化如 worldsheet.open-string-virasoro-modes-v2
+  （α^μ_0 = (2α')^{1/2} p^μ，一套 Virasoro {L_m}），
+  N ≡ Σ_{n ≥ 1} α_{-n} · α_n 是能级算符。则在自由玻色子 Fock 空间上
+    L_0 = α' p^2 + N,
+  **且右边不含额外的加性常数**。更精确地，两个断言：
+  (i) 产生-湮灭正规序下（worldsheet.virasoro-generators-free-boson 的定义）
+        L_0^{产生-湮灭} = (1/2) α_0 · α_0 + N = α' p^2 + N;
+  (ii) 由 T 的 Laurent 模定义、采用共形正规序的 L_0
+       （worldsheet.energy-momentum-laurent-modes）与 (i) 的算子**相同**：
+        L_0^{共形} = L_0^{产生-湮灭} + a^X,   a^X = 0
+       （worldsheet.normal-ordering-constant-ax），故也等于 α' p^2 + N。
+
+  ⚠ 本命题**只覆盖 X 部门**。鬼场部门的对应常数是 a^g = -1
+  （worldsheet.bc-ghost-normal-ordering-constant），不为零；
+  物理态条件里出现的截距 a 是另一回事，其取值见 worldsheet.open-string-intercept，
+  符号约定见 conv.intercept-sign-a（Polchinski 写 A = -a）。
+  ⚠ 本命题不断言 p^2 与质量的关系；在 mostly-plus 下 p^2 = -m^2
+  （conv.metric-mostly-plus），由此配合 (L_0 - a)|ψ⟩ = 0 才得 α' m^2 = N - a，
+  那一步不在本节点内。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.25)（L_0 = α'p^2 + Σ_{n≥1} α_{-n}·α_n 与 L_m 的模式表达式）、(2.7.27)（α_0^μ = (2α')^{1/2} p^μ），p.58 起"
+    note: |
+      式号与内容经 schrans-2020 §4.3 逐字核实（「Recall (2.7.25) and (2.7.27) for the open string」，
+      并列出 L_0 = α'p^2 + Σ_{n≥1} α_{-n}·α_n）。**这条来源直接给出断言 (i) 的等式**。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.7)（L_0 的共形正规序）、(2.7.9)（a^X = 0）、(2.7.11)（产生-湮灭正规序），p.59–60"
+    note: |
+      断言 (ii) 的来源，与 worldsheet.normal-ordering-constant-ax 同源；
+      三个公式号经 schrans-2020 目录核实，且 a^X = 0 的**值本身**出现在核对源的条目标题里
+      （`2.51 p 59: Eq. (2.7.9) a^X = 0`）。
+tags: [bosonic-string, open-string, virasoro, level-operator, normal-ordering, zero-mode]
+notes: |
+  由 curator 于 2026-09-10 从 worldsheet.open-string-virasoro-modes 拆出
+  （旧卡已 superseded_by → worldsheet.open-string-virasoro-modes-v2）。
+  拆分依据是 reviewer-ch23 在旧卡 notes 里标的「待拆」：定义卡内嵌了这条等式命题。
+
+  **为什么把 (i)(ii) 写成一个节点而不是两个**：(i) 单独看是 (1/2)α_0·α_0 = α'p^2 的一步代换，
+  内容太薄；真正有内容的是「所写的 L_0 与 CFT 里由 T 定义的 L_0 是同一个算子，
+  且中间不冒出加性常数」，即 (i)+(ii) 合起来。文献（Polchinski §2.7）也是在同一节里
+  把两件事一起交代的。若日后 (i) 与 (ii) 被分别引用，可再拆。
+
+  **与光锥路线的对照**：worldsheet.open-string-mass-shell 给的是**光锥**质量壳
+  α' m^2 = N - a，其 N 只对横向 i = 2..D-1 求和，正规序常数经 zeta 正规化定出
+  （worldsheet.light-cone-normal-ordering-constant）。本节点是**协变**侧的对应物，
+  N 对全部 μ = 0..D-1 求和，常数经态-算子同构定出（a^X = 0）。
+  两条路线的常数取值一致不是巧合，但本图未建「两者相容」的节点。
+
+  **零模尚未形式化**：本命题的核心是 α_0 ∝ p，而 worldsheet.bosonic-fock-space
+  （status: formalized）的空间不含零模，故本命题不继承那条的 formalized 状态。
+author: curator-worldsheet-signature
+created: "2026-09-10"

@@ -13,9 +13,19 @@ depends_on:
       而在 §1.2（即 worldsheet.polyakov-action-symmetries 的来源）；§3.3 只是**使用**它。
       本图未核实 §3.3 是否显式回指 §1.2，故按项目规则标 inferred。
       ⚠ 世界面号差不一致：polyakov-action-symmetries 讲的是洛伦兹号差世界面度规 γ_{ab}
-      （(-,+)，conv.metric-mostly-plus 下的 Polyakov 作用量），本节点讲的是**欧氏**世界面度规
-      g_{ab}（§2.1 起的欧氏化之后）。「diff 不变性在欧氏化后仍成立」这一步是标准但未在本图
-      建节点的步骤（本图没有世界面号差的约定节点，只有时空号差的 metric family）。
+      （(-,+)），本节点讲的是**欧氏**世界面度规 g_{ab}（§2.1 起的欧氏化之后）。
+      2026-09-10：世界面号差已建 family `worldsheet-signature`
+      （conv.worldsheet-lorentzian / conv.worldsheet-euclidean），换算写在下面的 convention_map。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep 用 conv.worldsheet-lorentzian，target 用
+      conv.worldsheet-euclidean。按 conv.worldsheet-euclidean 的 Wick 旋转字典
+      （σ^2 = i σ^0；(-γ)^{1/2} ↔ g^{1/2}；S_P 前因子 -1/4πα' → +1/4πα'，S_P^L = i S_P^E）：
+        γ_{ab} → g_{ab}，  γ'_{ab} = (∂σ^c/∂σ'^a)(∂σ^d/∂σ'^b) γ_{cd} → 同式换 g，
+      即微分同胚变换律**逐字不变**（张量变换律不含号差），只是所变换的度规换成欧氏的那一支。
+      **本条 convention_map 承载的是一个未建节点的断言**：「S_P 的 diff 不变性在 Wick 旋转后
+      仍然成立」。理由是 S_P^E 与 S_P^L 都写成度规的标量密度积分，diff 不变性对两者是同一个
+      形式论证；但 Wick 旋转本身在一般（非解析）世界面上的整体意义本图没有节点
+      （见 conv.worldsheet-euclidean 的 notes）。故本边继承该缺口，见 gaps。
   - id: worldsheet.polyakov-weyl-invariance
     inferred: true
     note: |
@@ -23,9 +33,17 @@ depends_on:
       「补偿的 Weyl 变换」；两处都以 Polyakov 作用量的 Weyl 不变性为前提。
       与上一条同理：论证在 §1.2（worldsheet.polyakov-weyl-invariance 的来源），
       本推导的来源 §3.3 只使用它，故标 inferred。
-      ⚠ 同样有洛伦兹/欧氏世界面号差的未建节点转写步骤。
       另注：这里用到的是**经典** Weyl 不变性（规范自由度的存在性）；量子层面的 Weyl 反常
       不影响本节点（规范固定是经典操作），但影响下游，见 worldsheet.critical-dimension-weyl-anomaly。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep 用 conv.worldsheet-lorentzian，target 用
+      conv.worldsheet-euclidean。Weyl 变换律 γ'_{ab} = e^{2ω} γ_{ab} 在两个号差下**同形**
+      （g'_{ab} = e^{2ω} g_{ab}），且关键的维数计数也同形：
+        d 维时 (-γ)^{1/2} γ^{ab} 带因子 e^{(d-2)ω}  ↔  g^{1/2} g^{ab} 带因子 e^{(d-2)ω},
+      故 d = 2 时因子为 1 这一结论逐字搬过来。按 conv.worldsheet-euclidean 的字典
+      (-γ)^{1/2} ↔ g^{1/2}、S_P 前因子 -1/4πα' → +1/4πα'（S_P^L = i S_P^E），
+      前因子的整体符号不影响不变性陈述。
+      与上一条相同的未建节点缺口（Wick 旋转的整体合法性），见 gaps。
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.6)、(3.3.8)，p.85（式号经 schrans-2020 核实；(3.3.6) 的表达式经其 §5.1 正文核实）"
@@ -49,9 +67,12 @@ gaps:
      两条边标 inferred，因为论证在 Polchinski §1.2 而非本推导来源 §3.3。
      **剩余缺口**：陈述文本仍把这一前提写成假设并注「本图未单建该节点」，这句话已过时；
      按「不改已提交节点的 statement 文本」的规则不动它，如需更正须新建 v2 陈述。"
-  - "洛伦兹 → 欧氏世界面的转写没有节点：两条新加的边来自洛伦兹号差世界面度规 γ_{ab} 的
-     对称性（§1.2），本节点是欧氏号差 g_{ab}（§2.1 起）。本图的 metric family 只管**时空**号差，
-     没有世界面号差的约定节点。建议 lead/auditor 决定是否新建
-     conv.worldsheet-signature-euclidean 一族。"
+  - "洛伦兹 → 欧氏世界面的转写**仍然没有陈述节点**，只有约定节点。2026-09-10 已建 family
+     `worldsheet-signature`（conv.worldsheet-lorentzian / conv.worldsheet-euclidean），
+     两条边的 convention_map 写清了字典（σ^2 = i σ^0、(-γ)^{1/2} ↔ g^{1/2}、前因子反号）。
+     但 convention_map 只是记号换算，**不是论证**：『diff × Weyl 不变性在 Wick 旋转后仍成立』
+     这一断言本图没有节点，来源（Polchinski §3.3）也不论证它——它直接在欧氏号差下开工。
+     升级路径：建一条『S_P^L 的 diff×Weyl 不变性 ⟹ S_P^E 的 diff×Weyl 不变性』的命题，
+     或（更弱但更诚实）建一条欧氏 Polyakov 作用量的定义节点并让本推导直接依赖它。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

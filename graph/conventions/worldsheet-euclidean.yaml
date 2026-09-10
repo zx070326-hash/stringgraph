@@ -1,0 +1,73 @@
+id: conv.worldsheet-euclidean
+family: worldsheet-signature
+title: 世界面号差：欧氏（g_ab 正定，S_P 前因子 +1/4πα'）
+definition: |
+  世界面度规取**欧氏**号差 (+,+)，记作 g_{ab}，g ≡ det g_{ab} > 0，体积元 g^{1/2} d^2σ。
+  Polyakov 作用量写作
+    S_P^E[X, g] = + (1/(4π α')) ∫_M d^2σ  g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ,
+  路径积分权重是 e^{-S_P^E}（不是 e^{iS}）。本约定是 Polchinski Vol.1 **第 2 章起**（CFT、
+  Polyakov 路径积分、Weyl 反常、鬼场）的默认，故取为本 family 的 canonical。
+
+  ── Wick 旋转字典（洛伦兹 conv.worldsheet-lorentzian → 欧氏，本节点） ──
+  世界面坐标 (σ^0, σ^1) = (τ, σ) 连续到 (σ^1, σ^2)，取
+    σ^2 = i σ^0    （等价地 σ^0 = -i σ^2，即 τ = -i σ^2）。
+  于是逐项：
+    (a) 度规与体积元：  γ_{ab}（号差 (-,+)，γ = det γ < 0）→ g_{ab}（号差 (+,+)，g > 0），
+        (-γ)^{1/2}  ↔  g^{1/2}；平坦情形 γ_{ab} = diag(-1, +1) ↔ g_{ab} = δ_{ab}。
+    (b) 导数与测度：  ∂_0 = i ∂_2，  dσ^0 = -i dσ^2，  ∫ dσ^0 dσ^1 = i ∫ dσ^1 dσ^2。
+    (c) 作用量与前因子：把 (a)(b) 代入洛伦兹作用量
+          S_P^L = -(1/(4π α')) ∫ dσ^0 dσ^1 (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ
+        得  S_P^L = i S_P^E，  其中 S_P^E 如上式（前因子由 -1/4πα' 变为 +1/4πα'）。
+        因此权重 e^{i S_P^L} = e^{- S_P^E}。
+        **口诀：号差翻转的同时作用量整体反号**，两处符号变化都必须做，只做一处会差一个整体负号。
+    (d) 与复坐标的接口（conv.worldsheet-complex-coords）：取 z = σ^1 + i σ^2，
+          δ^{ab} ∂_a X ∂_b X = (∂_1 X)^2 + (∂_2 X)^2 = 4 ∂X ∂̄X,
+          d^2 z = 2 dσ^1 dσ^2   （即 d^2σ ≡ dσ^1 dσ^2 = (1/2) d^2 z）。
+        于是平坦（共形规范）下
+          S_P^E = (1/(4π α')) ∫ d^2σ δ^{ab} ∂_a X^μ ∂_b X_μ
+                = (1/(2π α')) ∫ d^2 z  ∂X^μ ∂̄X_μ,
+        这正是 worldsheet.free-scalar-cft-action 的形式。使用 (d) 的节点必须同时声明
+        conv.worldsheet-complex-coords，因为 d^2 z = 2 dσ^1 dσ^2 的 Jacobian 约定进入前因子。
+
+  ⚠ 本 family 只管**世界面**号差，与时空号差（family `metric`，conv.metric-mostly-plus）
+  完全独立：本图第 2–3 章的节点同时是「世界面欧氏 + 时空 mostly-plus 洛伦兹」，
+  即靶空间仍是洛伦兹的，X^0 的动能项仍带 η_{00} = -1 的相反符号
+  （这正是 worldsheet.free-scalar-cft-action 里「作用量对实洛伦兹型靶空间不正定」那句话的来源）。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.1 开头（p.32–33）：转入欧氏世界面与 σ^2 = i σ^0；**式号未核实**（抽取者定位在 (2.1.1) 附近）"
+    note: |
+      「第 1 章用洛伦兹世界面号差、第 2 章起 CFT 用欧氏号差」这一事实见抽取记录
+      literature/extractions/polchinski-1998-v1.md 第 1.1 节「世界面号差」一栏，
+      核实等级为 [S]（Schrans 伴读笔记目录确认 (2.1.2) 是「复坐标 z = σ^1 + i σ^2」、
+      (2.1.6) 是「复度规」，即 §2.1 已在欧氏世界面上工作）。
+      **Wick 旋转本身的公式号（σ^2 = i σ^0 出现在哪一式）未核实**：核对源的目录没有这一条；
+      本节点写的「(2.1.1) 附近」是按 §2.1 起始页 p.32 与 (2.1.2) 在 p.33 推定的区间，需人工核对原书。
+      字典 (b)(c)(d) 三行的代数是 curator 自行补出的换算（不是来源逐字内容）；
+      结论 S_P^L = i S_P^E 与 e^{iS_L} = e^{-S_E} 是标准结果，但本图未核实原书是否写出这一步。
+  - ref: polchinski-1998-v1
+    loc: "§3.2–§3.3（p.82–89）：欧氏 Polyakov 路径积分 ∫ (Dg DX / V_{diff×Weyl}) e^{-S_P[g,X]}，度规记作 g_{ab}；式号未核实"
+    note: |
+      §3.3 的 Faddeev–Popov 手续（(3.3.16)/(3.3.18)/(3.3.21)/(3.3.24)，式号经 schrans-2020 目录核实）
+      全部在欧氏号差、度规记号 g_{ab} 下进行，是本约定在第 3 章被使用的直接证据。
+      **权重写成 e^{-S} 而非 e^{iS} 这一点在本图未逐字核实原书措辞。**
+  - ref: schrans-2020
+    loc: "目录条目 2.1–2.4（p.33）、3.7–3.10（p.88–89）：公式号的核对来源，非内容来源"
+notes: |
+  由 curator 于 2026-09-10 新建，起因是 worldsheet.conformal-gauge-fixing--via-local-frame
+  与 worldsheet.faddeev-popov-ghost-action--via-fp-procedure 两条推导的 gaps 都明确记录了
+  「洛伦兹 → 欧氏世界面的转写没有节点……建议 lead/auditor 决定是否新建
+  conv.worldsheet-signature-euclidean 一族」。本 family 即此。
+
+  取欧氏为 canonical 的理由：本图当前的重心（CFT、Virasoro、BRST、Weyl 反常、无鬼定理）
+  全部在欧氏世界面上；第 1 章的洛伦兹号差只覆盖经典作用量与光锥量子化。
+  docs/CONVENTIONS.md 原写「欧氏号差用于 CFT 陈述，洛伦兹号差用于光锥量子化陈述，各自显式标注」，
+  没有指定 canonical；本节点按「一个 family 恰好一个 canonical」的 schema 要求取欧氏，
+  这**不表示**洛伦兹写法是错的，只表示跨号差的边由 convention_map 承担换算。
+
+  ⚠ 未建节点的物理内容：Wick 旋转在**路径积分层面**（而不只是作用量层面）的合法性
+  ——测度 DX 的连续、洛伦兹与欧氏关联函数的 Osterwalder–Schrader 型对应、
+  以及一般（非静态、非解析）世界面上「σ^2 = i σ^0」是否有整体意义——本图完全没有节点，
+  也不在 Polchinski 的论证范围内。凡跨本 family 的 convention_map 都继承这一缺口，
+  因此跨号差的推导一律不高于 physical-argument。

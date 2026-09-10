@@ -8,7 +8,7 @@ statement: |
     S_P[X, γ] = -(1/(4π α')) ∫_M dτ dσ (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ,
   即以 γ_{ab} 为背景的 D 个二维自由标量场的作用量，耦合常数由 Regge 斜率 α' 给定。
 uses: []
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，约 eq. (1.2.13)"

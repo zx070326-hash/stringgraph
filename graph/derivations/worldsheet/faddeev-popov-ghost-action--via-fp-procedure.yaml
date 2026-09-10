@@ -14,7 +14,19 @@ depends_on:
       polyakov-action 节点来自第 1 章分支（抽取记录 E5），已合入 main。
       ⚠ 世界面号差：polyakov-action 写的是洛伦兹号差 γ_{ab}（γ = det γ < 0，前因子 -1/4πα'），
       §3.3 的路径积分是欧氏化之后的 S_P = (1/4πα')∫ d^2σ g^{1/2} g^{ab} ∂_a X ∂_b X。
-      欧氏化（τ → -iτ，整体反号）这一步本图未建节点，见 gaps。
+      2026-09-10：号差已建 family `worldsheet-signature`，换算见下面的 convention_map；
+      但欧氏化这一**步骤**仍无陈述节点，见 gaps。
+    convention_map: |
+      跨 family `worldsheet-signature`：dep worldsheet.polyakov-action 用
+      conv.worldsheet-lorentzian，本推导的 target 用 conv.worldsheet-euclidean。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典（σ^2 = i σ^0）：
+        S_P^L = -(1/4πα') ∫ dσ^0 dσ^1 (-γ)^{1/2} γ^{ab} ∂_a X^μ ∂_b X_μ
+          ⟶  S_P^E = +(1/4πα') ∫ d^2σ g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ,   S_P^L = i S_P^E,
+      于是路径积分权重 e^{i S_P^L} = e^{- S_P^E}，这正是 §3.2–§3.3 写的 ∫ Dg DX e^{-S_P[g,X]}。
+      **本条 convention_map 只做记号与符号的换算，不论证欧氏化的合法性**：
+      测度 Dg DX 的连续、以及一般世界面上 σ^2 = i σ^0 的整体意义都无节点
+      （见 conv.worldsheet-euclidean 的 notes）。本推导已是 physical-argument，
+      该缺口不再进一步降级，但也不得据此把本推导升级。
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.16)、(3.3.18)、(3.3.21)、(3.3.24)，p.88–89（式号经 schrans-2020 核实）；脚注 2（p.87）讨论 delta 函数的规范不变性"
@@ -32,12 +44,14 @@ gaps:
   - "占位边已换（2026-09-10）：依赖从 worldsheet.free-scalar-cft-action 改为
      worldsheet.polyakov-action，inferred 去掉——FP 手续确实作用在任意度规上的 S_P[g,X] 上，
      这正是 §3.3 的对象。**剩余缺口**：从洛伦兹号差的 S_P（§1.2，polyakov-action 的写法）到
-     §3.3 用的欧氏号差版本的转写（τ → -iτ、整体符号与前因子）本图没有节点，
+     §3.3 用的欧氏号差版本的转写（σ^2 = i σ^0、整体符号与前因子）在图上只有**约定层面**的
+     记录（该边的 convention_map + conv.worldsheet-euclidean 的字典），**没有陈述节点**，
      也不在本推导的来源位置里论证；这一步在本推导中被默认。"
   - "worldsheet.free-scalar-cft-action 换边后**不再是本推导的依赖**：共形规范下的自由标量作用量是
      同一手续的**输出**（物质部门规范固定后的形式），不是输入；本推导只推鬼场部门。
-     若日后建一条「S_P 在共形规范下化为自由标量作用量」的命题，它应以 polyakov-action 与
-     conformal-gauge-fixing 为依赖，而不是反过来。"
+     该输出已于 2026-09-10 建成独立命题 worldsheet.polyakov-action-conformal-gauge-form
+     （推导 --via-weyl-invariance，依赖 polyakov-action + conformal-gauge-fixing +
+     polyakov-weyl-invariance），正如本条原先建议的方向。"
   - "**FP 手续在数学上没有被严格化**（抽取记录 E50 的结论）：规范群的体积 V_{diff×Weyl}、
      群上的测度 dζ、以及场空间上的测度 Dg 都没有定义；『分离出无穷体积并消去』是形式操作。"
   - "delta 函数 δ(g - ĝ^ζ) 的规范不变性需要论证；Polchinski 用脚注 2（p.87）讨论，

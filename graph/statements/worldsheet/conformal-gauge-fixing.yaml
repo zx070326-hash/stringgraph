@@ -13,7 +13,7 @@ statement: |
 
   ⚠ 「至少局部」是关键限定：全局能否规范固定涉及模空间（moduli）与共形 Killing 向量（CKV），
   属更后面的内容，本节点**不**断言全局规范固定的存在性。
-uses_conventions: [conv.worldsheet-complex-coords]
+uses_conventions: [conv.worldsheet-complex-coords, conv.worldsheet-euclidean]
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3（p.84 起），eq. (3.3.6)（二维 Riemann 张量由 R 决定）、(3.3.8)（规范固定后的残余共形对称性），p.85"

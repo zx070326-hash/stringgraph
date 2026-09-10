@@ -78,5 +78,35 @@ notes: |
   有明确定义的奇算符——受限模条件保证 Q_B 作用到任一向量只有有限多项非零。
   受限模（而非"L_0 分级且每级有限维"）才是正确的假设：分级有限维既非必要也不直接
   蕴含模式和的截断；半无限上同调文献用的正是受限模条件。
+
+  【是否应 uses worldsheet.bc-ghost-cft —— curator 2026-09-10 的裁断：**不加**】
+  worldsheet.bc-ghost-cft 的 notes 把这个问题留给了 lead。curator 在补
+  worldsheet.critical-dimension-brst--via-nilpotency 的输入边时一并检查，结论是不加，理由两条：
+  (1) **epistemic 不匹配（决定性理由）**。本卡片的 rigorous 是靠**代数**路线撑起来的：
+      bc 系统在这里被当作 Clifford 型代数上的 Fock 模，模展开、{b_m,c_n} = δ_{m+n,0}、
+      L^g_n、受限模条件全部写在本卡片的 statement 里，不需要外部输入；
+      数学来源是 fgz-1986 Proposition 2.1（半无限形式 Λ^∞_* 上的表示，编号已核实）。
+      而 worldsheet.bc-ghost-cft 走的是**路径积分/OPE** 路线，它 uses
+      operator-product-expansion、primary-field、tt-ope-central-charge，
+      有效状态被这三者封顶在 physical-argument。
+      若加这条边，本卡片会从 rigorous 掉到 physical-argument，并连带把
+      brst-nilpotent-at-c26、brst-cohomology-equals-ocq-physical、no-ghost-theorem-brst、
+      no-ghost-theorem-subcritical 四个现为 rigorous 的节点一并拉低（已实测）。
+      那不是「诚实降级」，而是**用一条不必要的边把代数路线的严格性抹掉**：
+      本定义确实不依赖 OPE 收敛性。
+  (2) schema 上 `uses` 的语义是「定义中直接用到的其他 statement id」。
+      本卡片没有「用到」bc-ghost-cft——它把同一个对象**独立写了一遍**（记号刻意保持一致）。
+      两者是同一系统的两种表述，属**平行**关系而非依赖关系。
+
+  ⚠ 但确实存在一个真问题，curator 无权在此处解决，**提请 lead / auditor 裁决**：
+  本卡片的 statement 里写死了 `c^g = -3(2λ-1)^2 + 1 = -26 (λ = 2)`，
+  这是一条**命题**（worldsheet.bc-ghost-central-charge），被埋在定义卡正文里。
+  同一问题 bc-ghost-cft 的 notes 已用「待拆」标出。正确的修法不是加 uses 边，
+  而是新建 worldsheet.brst-quantization-v2：把 c^g = -26 这一句从定义中移出，
+  改为「设鬼场部门是权 λ = 2 的 bc 系统，其中心荷记作 c^g」，
+  再让需要 c^g = -26 的**推导**（如 critical-dimension-brst--via-nilpotency，
+  已于 2026-09-10 补上指向 bc-ghost-central-charge 的 inferred 边）各自挂那条命题。
+  这样代数路线的严格性得以保留，而 -26 的来源记账也不丢。
+  在 v2 建成之前，本卡片的 rigorous 应理解为「就其**代数构造**部分而言」。
 author: curator-critdim
 created: "2026-09-10"

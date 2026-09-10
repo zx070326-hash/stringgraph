@@ -9,7 +9,7 @@ statement: |
   在嵌入为浸入（∂_a X^μ 秩为 2）且世界面为类时曲面时，h_{ab} 是号差
   (-,+) 的非退化二维洛伦兹度规，det h_{ab} < 0。
 uses: []
-uses_conventions: [conv.metric-mostly-plus]
+uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，Nambu–Goto 作用量段落（p.9–12，式号未核实）"

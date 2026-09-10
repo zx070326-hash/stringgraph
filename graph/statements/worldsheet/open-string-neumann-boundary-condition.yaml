@@ -11,7 +11,7 @@ statement: |
   则 δS_P = 0 对一切 δX^μ 成立 当且仅当
     （体内运动方程 ∂_a((-γ)^{1/2} γ^{ab} ∂_b X^μ) = 0）
     且（∂^σ X^μ(τ, 0) = ∂^σ X^μ(τ, ℓ) = 0，即 Neumann 边界条件）。
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-coordinate-length, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2, eq. (1.2.28)"

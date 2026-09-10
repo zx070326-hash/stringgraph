@@ -12,7 +12,7 @@ statement: |
   把通解代回 S_P，f 完全相消，得
     S_P[X, γ = f h] = -(1/(2π α')) ∫ dτ dσ (-det h)^{1/2} = S_NG[X].
   因此在 h_{ab} 非退化处，S_P 与 S_NG 给出相同的 X^μ 经典运动方程。
-uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.2，约 eq. (1.2.15)–(1.2.16)"
