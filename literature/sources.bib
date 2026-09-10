@@ -2509,3 +2509,189 @@
              ⚠ **约定陷阱**：Hartshorne 的 l(D) 是**向量空间维数**约定；另有射影维数约定（H^0=0 时 l=-1），**整式差 1**。}
 }
 
+% ============================================================
+% Witten 2012--2013 超黎曼面 / 超弦微扰论系列（+ Donagi--Witten）
+% 由 researcher 于 2026-09-11 登记，依据
+% literature/extractions/witten-2012-superstring-perturbation.md
+% 起因：polchinski-1998-v2-ch12.md E26/Q7（Polchinski v2 §12.5 p.126 自承
+% 「a fully explicit proof of the perturbative consistency of the theory seems to be lacking」）
+% ⚠⚠ 本批的 arXiv 号 <-> 标题映射曾被派工单弄错，下表为 arXiv API + PDF 页边条纹双源核实（L1）。
+% ============================================================
+
+@misc{witten-2012-superstring-perturbation,
+  author        = {Witten, Edward},
+  title         = {Superstring Perturbation Theory Revisited},
+  year          = {2012},
+  eprint        = {1209.5461},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**部分章节已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW1--EW20、EW25）。
+            **版本戳：本项目挂在本 key 上的所有 loc 一律锚定 arXiv:1209.5461**v4** (2023-11-05)**
+            （页边条纹逐字 `arXiv:1209.5461v4 [hep-th] 5 Nov 2023`；论文页 N = PDF 第 N+4 页；225 pp）。
+            **⚠ 无期刊发表版**：INSPIRE recid 1188034 的 `publication_info` 为空（2026-09-11 查）。
+            **⚠ 标题两说**：arXiv 元数据 `<title>` = "Superstring Perturbation Theory Revisited"（本条采用），
+            但 **v4 的 PDF 标题页印的是 "Perturbative Superstring Theory Revisited"**（词序不同，L1）。
+            **⚠ v1 (2012) 与 v4 差异很大**：§1 关于 Sen 的 off-shell/SFT 系列 [19--24] 的整段、
+            §3.5 对 [49] Sen--Witten 2015 的引用、§3.3.2 对 [45] Donagi--Witten 的引用
+            **都不可能在 v1 里**（DW 的 v1 晚于本文 v1 七个月）。
+            **=> 严禁写「Witten 2012 已处理超模空间非投影性」。**
+            **四条最易误引的核实结果**：
+            (1) **自称强度**：摘要与 §1 用 "demonstration" / "aiming to give … demonstrations"，
+            **全文无 "we prove the consistency" 类表述，无结论章节**；
+            (2) **§1 p.3 显式排除**：质量重整化、需要真空移动的模型、R-R 背景、pure spinor 形式、一般顶点算符；
+            (3) **§8.3 的归纳论证挂在一个未证的 "if"** 上（"If (as in most cases) general arguments show that
+            spacetime supersymmetry is not spontaneously broken at g-loop order …"）；
+            (4) **§6.4.6 p.109 逐字「In this paper, we never make any fundamental statements in terms of
+            positions of picture-changing operators (PCO's); we view the PCO's as a possible method of
+            integration over odd moduli, but not a basic definition.」**
+            另：§2.1 p.4 逐字自陈 "section 5.3 of [32] (whose conventions we generally follow)"，[32] = polchinski-1998-v1；
+            §7.5 p.140 有一处排印错误 "The show this"（应为 "To show this"）。}
+}
+
+@misc{witten-2013-overview,
+  author        = {Witten, Edward},
+  title         = {More On Superstring Perturbation Theory: An Overview Of Superstring Perturbation Theory Via Super Riemann Surfaces},
+  year          = {2013},
+  eprint        = {1304.2832},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**§1 全节 + §2.1 已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW4/EW5）。
+            **版本戳：arXiv:1304.2832**v4** (2016-07-23)**，69 pp；**无期刊发表版**（INSPIRE recid 1227826，
+            `publication_info` 为空）。
+            **⚠ 标题两说（作者自陈的改名）**：本条按 arXiv 元数据登记；**v4 的 PDF 标题页是
+            "Superstring Perturbation Theory Via Super Riemann Surfaces: An Overview"**，
+            且脚注 1 逐字「The arXiv version of this article was originally entitled "More on Superstring
+            Perturbation Theory."」。1209.5461 的 ref [28] 用的是 arXiv 元数据那个长标题。
+            **★ 本条的主要价值：全系列对「Polchinski 1998 的缺口是什么、补到了什么程度」最贴题的两段自评。**
+            §1 p.1 逐字：超弦微扰论的基础「were all well established by the mid-1980's. Roughly speaking,
+            to complete that story in a natural way only requires a couple of steps: **(A)** …在超黎曼面模空间上做
+            分部积分…**(B)** …仔细处理红外区只条件收敛的积分，超对称版 Deligne--Mumford 紧化给出自然的红外正规子。」
+            §1 p.2 逐字：「Once one understands these subtleties, **one is well-placed to demonstrate that
+            superstring perturbation theory works to all orders in those models in which tadpoles and
+            supersymmetry-breaking effects do not arise.**」
+            **=> 措辞是 "well-placed to demonstrate" 且带适用域，不是 "proved"。**
+            同页另一条自承缺口：真空移动的推广「can certainly be restated in terms of super Riemann surfaces,
+            **though this has not yet been done**」。
+            ⚠ 本文研究的模型（SO(32) 杂化弦 on CY，超对称一圈自发破缺、两圈有 dilaton tadpole）
+            **恰恰不是**微扰论到所有阶成立的模型（原文逐字）。}
+}
+
+@misc{witten-2012-srs-notes,
+  author        = {Witten, Edward},
+  title         = {Notes On Super Riemann Surfaces And Their Moduli},
+  year          = {2012},
+  eprint        = {1209.2459},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            ⚠⚠ **本条不是 "Superstring Perturbation Theory Revisited"**（那是 1209.5461）。
+            派工单曾把两者弄反，见 extractions/witten-2012-superstring-perturbation.md §0.0。
+            arXiv v5 (2017-05-20)，122 pp；v1 2012-09-11。**发表版：Pure Appl. Math. Quart. 15 (2019) no.1, 57--211**
+            （INSPIRE recid 1185284）——**arXiv 版页码与 PAMQ 页码不可互换**，图里 loc 只能用 arXiv 版并写死版本。
+            摘要逐字：「These are notes on the theory of super Riemann surfaces and their moduli spaces,
+            **aiming to collect results that are useful for a better understanding of superstring perturbation
+            theory in the RNS formalism.**」=> **自我定位为工具笔记，不含一致性结论。**
+            1209.5461 引它为 **[16]**（另 [15] = 1209.2199）。
+            **红线：本项目未读其正文，图里不得出现本文的任何式号、定理号或章节结论。**}
+}
+
+@misc{witten-2012-supermanifolds-notes,
+  author        = {Witten, Edward},
+  title         = {Notes On Supermanifolds and Integration},
+  year          = {2012},
+  eprint        = {1209.2199},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            arXiv v3 (2016-12-25)，42 pp；v1 2012-09-11。
+            **发表版：Pure Appl. Math. Quart. 15 (2019) no.1, 3--56**（INSPIRE recid 1185124）；页码同样不可互换。
+            摘要与 witten-2012-srs-notes 几乎同构（「supermanifolds and integration on them … aiming to collect
+            results that are useful for a better understanding of superstring perturbation theory in the RNS
+            formalism」）。1209.5461 引它为 **[15]**，并在 §3.6.3 p.48 逐字把「超流形积分里的 picture number
+            与 beta-gamma 系统里的 picture number 的类比」指向 [11]（= Belopolsky, hep-th/9706033）。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
+@misc{donagi-witten-2013,
+  author        = {Donagi, Ron and Witten, Edward},
+  title         = {Supermoduli Space Is Not Projected},
+  year          = {2013},
+  eprint        = {1304.7798},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**摘要 + §1 全节（含三条编号定理与三条 Remark）已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW21/EW22/EW23）。**§2 起的正文未读。**
+            **版本戳：arXiv:1304.7798**v2** (2023-07-19)**，57 pp（首页页脚另印 `Date: July 21, 2023.`）；v1 2013-04-29。
+            **发表版：Proc. Symp. Pure Math. 90 (2015) 19--72** —— 两源相符（INSPIRE recid 1231519；
+            witten-2012-superstring-perturbation 的 ref [45] 逐字），但**均未与 AMS 直证**。
+            **可引编号（L1 逐字，v2 p.5）**：
+            **Theorem 1.1** 「The supermanifold M_g is non-projected, and in particular non-split, for **g >= 5**.」
+            紧跟括注 **「(We suspect that this result may hold for g >= 3.)」**；
+            **Theorem 1.2** 「The supermanifold M_{g,1} is non-projected for g >= 2, **for the case of an even
+            spin structure**.」；**Theorem 1.3** 「The supermanifold M_{g,n} is non-projected for g >= 2 and
+            g-1 >= n >= 1. This holds for both even and odd spin structures if g is odd and for even spin
+            structure if g is even.」；紧跟 **「We do not resolve the question of projectedness of M_{g,n} for the
+            case of even g, odd spin structure, and n >= 1.」**
+            **Remark 1.4**：**不考虑 Deligne--Mumford 紧化**（「Our assertion is that M_g and M_{g,n} are
+            non-projected without any consideration of the compactification.」）；
+            **Remark 1.6**：研究对象其实是 moduli **stack**。
+            **⚠⚠ 最重要的一条红线（p.4 逐字）**：
+            **「The validity of superstring perturbation theory does not depend on a projection, so the existence
+            of string theory gives no hint that M_g is projected.」**
+            => **不得把本文写成「对超弦微扰论的否定」或「对 PCO 方法的否定」。**
+            被否定的是「先沿投影的纤维积分、再化约到普通模空间 SM_g」这一**策略**；
+            摘要的物理句逐字是「certain approaches to superstring perturbation theory that are very powerful
+            in low orders **have no close analog in higher orders**」。
+            低亏格（含 g=2 的 D'Hoker--Phong 计算）不受影响：witten-2012-superstring-perturbation §3.3.2 p.35
+            逐字承认「Supermoduli space is holomorphically projected in low orders」。
+            后续：arXiv:1404.6257（Donagi--Witten, *Super Atiyah classes …*, PAMQ 9 (2013) no.4, 739--788）
+            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。}
+}
+
+@misc{witten-2013-holomorphic-measures,
+  author        = {Witten, Edward},
+  title         = {Notes On Holomorphic String And Superstring Theory Measures Of Low Genus},
+  year          = {2013},
+  eprint        = {1306.3621},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            ⚠ 派工单曾把本文的 arXiv 号写成 1304.7798（那是 Donagi--Witten）。
+            arXiv v2 (2013-12-03)，55 pp；**无期刊发表版**（INSPIRE recid 1238841，`publication_info` 为空）。
+            摘要要点（L2）：亏格 g 的真空振幅原则上可由全纯性完全确定；本文「describe in a unified way how to
+            determine the bosonic string and superstring vacuum amplitude **in genus 1 and 2** via holomorphy」，
+            主要新意是亏格 2 超弦侧「a **new understanding of some of the results that previously have been
+            obtained by more explicit calculations**」。
+            **=> 只覆盖亏格 1、2 的真空振幅，不是任意阶一致性论证的一环。**
+            ⚠ **它不在 witten-2012-superstring-perturbation 的 91 条参考文献里**（抽取者逐条扫过）。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
+@article{sen-witten-2015-pco,
+  author  = {Sen, Ashoke and Witten, Edward},
+  title   = {Filling the gaps with {PCO}'s},
+  journal = {Journal of High Energy Physics},
+  volume  = {09},
+  pages   = {004},
+  year    = {2015},
+  eprint  = {1504.00609},
+  archivePrefix = {arXiv},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要）。**
+            发表信息两源相符：INSPIRE recid 1357623 与 witten-2012-superstring-perturbation 的 ref [49]
+            （逐字「JHEP 1509 (2015) 004」）；**未与出版方直证**。arXiv v2 (2015-08-19)，40 pp。
+            **登记理由（对图很重要）**：这是「PCO 方法在高亏格是否还能用」的直接回答，
+            也是 witten-2012-superstring-perturbation §3.5 p.43 逐字指向的替代路线
+            （「It is also possible but cumbersome to describe a correct procedure without the geometric
+            interpretation that we have just explained. See for example [49].」）。
+            摘要逐字片段（L2）：「a constraint must be placed on PCO insertions to avoid spurious singularities」；
+            「**the simplest version of the PCO procedure is valid only locally on the moduli space of Riemann
+            surfaces**, and … a correct PCO-based algorithm … must be based on piecing together local descriptions」；
+            「Recently, **'vertical integration'** was proposed as a relatively simple method to do this」；
+            「This involves **a hierarchical procedure with corrections of high order**」。
+            **=> PCO 方法没有被废弃，而是被补上了分片拼接规则。**
+            ⚠ 该引文只可能出现在 1209.5461 的 v3/v4，不在 2012 年的 v1 里。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
