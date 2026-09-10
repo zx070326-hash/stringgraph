@@ -78,6 +78,66 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第五轮（维护性），2026-09-11，physics-auditor。statement_id 与 canonical_text 均未变，故不重做回译；
+      第四轮回译文本与 faithful 裁定维持。本轮是拆卡后的记账核对，按任务要求先读了 canonical_text。】
+
+      R5-1. 〔任务第 1 步：canonical_text 的 ddf-operators-v4 → v5〕**未改，因为无可改之处。**逐行检查（grep）：
+            canonical_text（第 3–27 行）**不含** `ddf-operators-v4` 字样，也不含 v5；它只写「按 DDF 归一化 2α' k_0·p = 1」，
+            不指向任何 DDF 节点 id。任务前提「canonical_text 三处仍引 v4」不成立。本文件里 `ddf-operators-v4` 共出现五处，
+            全在本 audit 块内（第四轮回译文本开头的材料清单、回译第二段的括注、第四轮 diff_notes 的参照材料、
+            第三轮末尾的【v4 变更记】两处）——它们是「当时读的是哪个节点」的历史记录，改动会伪造审计过程，一律原样保留。
+            真正含三处 v4 引用的是 **statement** worldsheet.no-ghost-theorem-v4 的文本（记号段、(1) 引言的归一化出处、(1b) 的
+            A^i_{-n} 出处），按根 CLAUDE.md 原则 1 不可变，curator 已在该节点 notes 加【2026-09-11 补注】说明读作 v5。
+            核对结论：v4 与 v5 的 statement 从首段到说明 (c) 逐字相同（diff 只在末段：v4 的两句代数断言 ↔ v5 的免责段），
+            去心直线与归一化 (★) 未变；故 canonical_text (1) 引言「去心直线 {λ k_0 : λ ∈ R \ {0}}、2α' k_0·p = 1 逐塔取定、
+            λ 符号随 sign(k_0·p)」与 v5 一致，不需要任何改动。
+
+      R5-2. 〔任务第 2 步：有效状态下降的记账，`uv run stringgraph why worldsheet.no-ghost-theorem-v4`〕
+            own status rigorous，effective **physical-argument**，best_derivation 仍是 --via-goddard-thorn（自身 rigorous），
+            被两条依赖压低：
+            (a) worldsheet.ddf-commute-with-virasoro（[L_m, A^i_n] = 0）：own physical-argument，推导 --via-conformal-weight
+                走 OPE + 围道形变，7 条依赖全是 physical-argument（energy-momentum-laurent-modes、normal-ordering-modes-agree、
+                energy-momentum-tensor-free-scalar、free-scalar-propagator、conformal-normal-ordering、primary-field、
+                ope-commutator-dictionary），根部汇到 operator-product-expansion / operator-equation-of-motion。
+                **缺什么**：Lean 侧共形权恒等式 L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J + b·a − m + (m+1)·½ b·b) V_{J−m} 的
+                **基例**（L_m 作用在 `Fock.creaExp` 上），归纳步已有；formalizer 的 VertexWeight.lean **进行中**。
+            (b) worldsheet.ddf-transverse-oscillator-algebra（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）：own physical-argument，
+                4 条依赖 physical-argument（free-scalar-propagator、conformal-normal-ordering、ope-commutator-dictionary、
+                transverse-oscillator-commutators ← light-cone-gauge-lagrangian ← polyakov-nambu-goto-classical-equivalence）。
+                **缺什么**：两个顶点算子的乘积 / 重排序（VertexOperator.lean 文件头逐字「No operator products」），Lean 侧**未起步**；
+                另加 (A^i_n)† = A^i_{−n} 无节点（Gram 矩阵正定性还需要它，第 (1b) 条的隐含缺口，推导 gaps 已登记）。
+            记账性质：两条对易关系拆卡前写在 `kind: definition` + `status: rigorous` 的 ddf-operators-v4 文本里，以「定义的一部分」
+            传播 rigorous；图中从未独立论证，文献（GSW §2.3.3 式号 L0、GT 1972 正文未获取、Goddard 2008 只预设）也不证。
+            这是拆卡暴露的既有事实，不是论证退步。worldsheet.critical-dimension-old-covariant 的 effective 同步降为 physical-argument。
+            注意升级的正确形态：现有两条 --via-conformal-weight 推导被 ope-commutator-dictionary 等根节点封顶，**改它们的 status
+            字段不可能提升 effective**；须新增一条不经过 OPE 机器的推导（Lean 路线给 formalized，或数学文献顶点代数的带编号严格证明）。
+            **陈述忠实性不受影响：第四轮 faithful 裁定维持。** audit.status 保持 back-translated，本轮不置 approved。
+
+      R5-3. 〔任务第 3 步：船长在 effective = physical-argument 时 approved 是否与里程碑定义冲突〕**不冲突，建议可以批。**
+            依据：graph/CLAUDE.md 定义里程碑为「经人审计的规范陈述，指向一个 statement id」；docs/VISION.md 第一层「少数里程碑陈述
+            由物理学家（船长）逐条确认**自然语言表述与规范约定**，并通过回译审计」；本 skill 的比对项全部是量词、前提、结论强度、
+            边界情形。三处都说审计对象是**陈述的忠实性**，不是推导的严格性。推导严格性由 docs/STATUS_LEVELS.md 的 effective 承担，
+            「有效状态由工具计算，不手写」（根 CLAUDE.md 原则 2），且 `stringgraph report` 对每个里程碑单列其猜想依赖——设计上
+            就是让「已批准的陈述」与「其推导链多严格」是两个正交的轴。若把 approved 绑到 effective ≥ rigorous，会得到反向激励：
+            为了保住批准而不拆定义卡，正是本次拆卡纠正的那种记账错误。
+            两点附带建议：(i) 船长批准时应知晓 effective 目前是 physical-argument、瓶颈是 R5-2 的两条对易关系（ROADMAP「待船长裁决」
+            已写明）；(ii) 建议 lead 在 docs/STATUS_LEVELS.md 或 graph/CLAUDE.md 加一句「audit.status = approved 只断言陈述忠实，
+            不断言 effective 等级」，以免日后读者把 approved 误读为 rigorous。这是文档补充，不阻止批准。
+
+      R5-4. 〔任务第 4 步：ddf-transverse-oscillator-algebra 新增前提 vs canonical_text (1b) 的 H^⊥(k)〕**自洽。**
+            (a) m, n ≠ 0：(1b) 的 H^⊥(k) 由 A^i_{-n_j}、n_j ≥ 1 作用在 |0; k⟩ 上生成，所用指标全为 −n_j ≤ −1；Gram 矩阵计算
+                另需 (A^i_n)† = A^i_{−n}（n ≥ 1）把湮灭侧搬过来，指标为 +n ≥ 1。两侧都不含 0，**前提 m, n ≠ 0 自动满足**；
+                且 v4/v5 定义处本来就写 n ∈ Z \ {0}，命题只是把定义域的量词重复写出。
+            (b) ε^i·ε^j = δ^{ij}：canonical_text 不出现 ε，只写「24 个横向 DDF 算子 A^i_{-n}，i = 2..25」。「横向」按 v5 首句
+                「与 worldsheet.light-cone-quantization 一致」，该节点的内积 a·b = −(a^+b^- + a^-b^+) + a^i b^i 使横向坐标标架
+                正交归一，δ^{ij} 本在其中；且第二、三、四轮数值复核取 k_0 = (1,1,0,…)/√2 落在 0–1 平面，横向 ε^i = e_i 同时满足
+                ε^i·k_0 = 0 与 ε^i·ε^j = δ^{ij}。故新增前提与 (1b) 相容，不是新假设。
+                附带精度观察（属 ddf-operators-v5，不属本里程碑，不阻止）：v5 引入偏振 ε^i 却在公式里写坐标分量 ∂X^i；
+                两者一致要求 k_0 无横向分量（k_0 在 0–1 平面内），即「固定类光去心直线」同时固定了横向标架。v5 未明写这一点，
+                形式化时须显式选定；对一般方向的 k_0 应读作 ε^i·∂X。建议 curator 在 v5 notes 登记，不需要 v6。
+
+      R5-5. 本轮未改 canonical_text、statement_id、verdict、back_translation.text；只加本块。
+
       【第四轮 diff_notes，2026-09-10，对象 worldsheet.no-ghost-theorem-v4 与按 v4 改写后的 canonical_text】
       参照材料（回译写完后才读）：canonical_text；v4 / ddf-operators-v4 的 notes 与 sources；推导
       worldsheet.no-ghost-theorem-v4--via-goddard-thorn（含 gaps）；worldsheet.no-ghost-theorem-subcritical 全文；
