@@ -80,4 +80,138 @@ No `sorry`, no new axioms.  Gaps, in decreasing order of importance:
 
 namespace StringFormal.Virasoro
 
+open Module
+
+/-! ### The anti-involution `L_n ↦ L_{-n}` -/
+
+namespace WittAlgebra
+
+variable (R : Type*) [CommRing R]
+
+/-- The Witt-algebra anti-involution `ℓ n ↦ ℓ (-n)`, as an `R`-linear map. -/
+noncomputable def antiInvolutionₗ : WittAlgebra R →ₗ[R] WittAlgebra R :=
+  (lgen R).constr R fun n => lgen R (-n)
+
+@[simp] lemma antiInvolutionₗ_lgen (n : ℤ) :
+    antiInvolutionₗ R (lgen R n) = lgen R (-n) := by
+  simp only [antiInvolutionₗ, Basis.constr_basis]
+
+lemma antiInvolutionₗ_comp_self :
+    (antiInvolutionₗ R) ∘ₗ (antiInvolutionₗ R) = LinearMap.id := by
+  refine (lgen R).ext fun n => ?_
+  simp only [LinearMap.comp_apply, antiInvolutionₗ_lgen, neg_neg, LinearMap.id_coe, id_eq]
+
+lemma antiInvolutionₗ_involutive : Function.Involutive (antiInvolutionₗ R) := fun X =>
+  LinearMap.congr_fun (antiInvolutionₗ_comp_self R) X
+
+/-- `σ` reverses the Witt bracket: `σ⁅X, Y⁆ = ⁅σ Y, σ X⁆`. -/
+lemma antiInvolutionₗ_lie (X Y : WittAlgebra R) :
+    antiInvolutionₗ R ⁅X, Y⁆ = ⁅antiInvolutionₗ R Y, antiInvolutionₗ R X⁆ := by
+  have key : (bracket R).compr₂ (antiInvolutionₗ R)
+      = ((bracket R).compl₁₂ (antiInvolutionₗ R) (antiInvolutionₗ R)).flip := by
+    refine LinearMap.ext_basis (lgen R) (lgen R) fun n m => ?_
+    simp only [LinearMap.compr₂_apply, LinearMap.compl₁₂_apply, LinearMap.flip_apply,
+      bracket_lgen_lgen, map_smul, antiInvolutionₗ_lgen]
+    rw [show -m + -n = -(n + m) by ring]
+    congr 1
+    push_cast
+    ring
+  have := LinearMap.congr_fun₂ key X Y
+  simpa only [LinearMap.compr₂_apply, LinearMap.compl₁₂_apply, LinearMap.flip_apply,
+    ← lie_def] using this
+
+end WittAlgebra
+
+section VirasoroAnti
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R]
+
+/-- The Virasoro `2`-cocycle is invariant under `σ` composed with the flip. -/
+lemma cocycleBilin_antiInvolution (X Y : WittAlgebra R) :
+    cocycleBilin R (WittAlgebra.antiInvolutionₗ R Y) (WittAlgebra.antiInvolutionₗ R X)
+      = cocycleBilin R X Y := by
+  have key : ((cocycleBilin R).compl₁₂ (WittAlgebra.antiInvolutionₗ R)
+      (WittAlgebra.antiInvolutionₗ R)).flip = cocycleBilin R := by
+    refine LinearMap.ext_basis (WittAlgebra.lgen R) (WittAlgebra.lgen R) fun n m => ?_
+    simp only [LinearMap.flip_apply, LinearMap.compl₁₂_apply, WittAlgebra.antiInvolutionₗ_lgen,
+      cocycleBilin_lgen_lgen]
+    by_cases hnm : n + m = 0
+    · rw [if_pos hnm, if_pos (show -m + -n = 0 by omega), show -m = n by omega]
+    · rw [if_neg hnm, if_neg (show ¬(-m + -n = 0) by omega)]
+  exact LinearMap.congr_fun₂ key X Y
+
+namespace VirasoroAlgebra
+
+/-- The Virasoro anti-involution `L n ↦ L (-n)`, `C ↦ C`, as an `R`-linear map. -/
+noncomputable def antiInvolutionₗ : VirasoroAlgebra R →ₗ[R] VirasoroAlgebra R :=
+  (toProdₗ R).symm.toLinearMap ∘ₗ
+    ((WittAlgebra.antiInvolutionₗ R).prodMap (LinearMap.id (R := R) (M := R))) ∘ₗ
+    (toProdₗ R).toLinearMap
+
+@[simp] lemma toProd_antiInvolutionₗ (X : VirasoroAlgebra R) :
+    toProd R (antiInvolutionₗ R X)
+      = (WittAlgebra.antiInvolutionₗ R (toProd R X).1, (toProd R X).2) := by
+  show (toProdₗ R) ((toProdₗ R).symm _) = _
+  rw [LinearEquiv.apply_symm_apply]
+  rfl
+
+@[simp] lemma antiInvolutionₗ_lgen (n : ℤ) : antiInvolutionₗ R (lgen R n) = lgen R (-n) := by
+  apply toProd_injective
+  rw [toProd_antiInvolutionₗ, toProd_lgen, toProd_lgen]
+  simp
+
+@[simp] lemma antiInvolutionₗ_cgen : antiInvolutionₗ R (cgen R) = cgen R := by
+  apply toProd_injective
+  rw [toProd_antiInvolutionₗ, toProd_cgen]
+  simp
+
+lemma antiInvolutionₗ_comp_self :
+    (antiInvolutionₗ R) ∘ₗ (antiInvolutionₗ R) = LinearMap.id := by
+  refine LinearMap.ext fun X => ?_
+  apply toProd_injective
+  rw [LinearMap.comp_apply, toProd_antiInvolutionₗ, toProd_antiInvolutionₗ,
+    WittAlgebra.antiInvolutionₗ_involutive R, LinearMap.id_coe, id_eq]
+
+lemma antiInvolutionₗ_involutive : Function.Involutive (antiInvolutionₗ R) := fun X =>
+  LinearMap.congr_fun (antiInvolutionₗ_comp_self R) X
+
+/-- **`σ` is a Lie algebra anti-automorphism**: `σ⁅X, Y⁆ = ⁅σ Y, σ X⁆`.  The sign flip of the
+central term `(n³ - n)/12` under `n ↦ -n` is exactly cancelled by the reversal of the
+bracket. -/
+lemma antiInvolutionₗ_lie (X Y : VirasoroAlgebra R) :
+    antiInvolutionₗ R ⁅X, Y⁆ = ⁅antiInvolutionₗ R Y, antiInvolutionₗ R X⁆ := by
+  apply toProd_injective
+  rw [toProd_antiInvolutionₗ, toProd_lie, toProd_lie]
+  simp only [toProd_antiInvolutionₗ, witt_lie_ground, add_zero, sub_zero, Prod.mk.injEq]
+  exact ⟨WittAlgebra.antiInvolutionₗ_lie R _ _, (cocycleBilin_antiInvolution R _ _).symm⟩
+
+/-- **The anti-involution `σ : L_n ↦ L_{-n}`, `C ↦ C` of the Virasoro algebra**, as an
+`R`-linear equivalence.  It is an anti-automorphism of Lie algebras
+(`antiInvolution_lie`) and an involution (`antiInvolution_involutive`). -/
+noncomputable def antiInvolution : VirasoroAlgebra R ≃ₗ[R] VirasoroAlgebra R :=
+  LinearEquiv.ofLinearMap (antiInvolutionₗ R) (antiInvolutionₗ R)
+    (antiInvolutionₗ_comp_self R) (antiInvolutionₗ_comp_self R)
+
+@[simp] lemma antiInvolution_apply (X : VirasoroAlgebra R) :
+    antiInvolution R X = antiInvolutionₗ R X := rfl
+
+@[simp] lemma antiInvolution_lgen (n : ℤ) : antiInvolution R (lgen R n) = lgen R (-n) :=
+  antiInvolutionₗ_lgen R n
+
+@[simp] lemma antiInvolution_cgen : antiInvolution R (cgen R) = cgen R :=
+  antiInvolutionₗ_cgen R
+
+theorem antiInvolution_lie (X Y : VirasoroAlgebra R) :
+    antiInvolution R ⁅X, Y⁆ = ⁅antiInvolution R Y, antiInvolution R X⁆ :=
+  antiInvolutionₗ_lie R X Y
+
+theorem antiInvolution_involutive : Function.Involutive (antiInvolution R) :=
+  antiInvolutionₗ_involutive R
+
+@[simp] lemma antiInvolution_symm : (antiInvolution R).symm = antiInvolution R := rfl
+
+end VirasoroAlgebra
+
+end VirasoroAnti
+
 end StringFormal.Virasoro
