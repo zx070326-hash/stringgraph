@@ -1,0 +1,70 @@
+id: math.witt-algebra-perfect
+kind: proposition
+title: 双边 Witt 代数是完美的：[W, W] = W，等价地 H¹(W, k) = 0
+statement: |
+  设 k 是特征零的域，W(k) 是**双边** Witt 代数（math.witt-algebra：以 {ℓ_n : n ∈ ℤ} 为基，
+  [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}，conv.virasoro-standard）。则
+
+  **(1) 完美性。** W(k) = [W(k), W(k)]，即每个 ℓ_p（p ∈ ℤ）都落在导出代数里。
+
+  **(2) 一阶上同调消失。** 以**平凡模** k 为系数，
+    H¹(W(k), k) = 0。
+
+  **(1) ⟺ (2)**：对任意李代数 𝓛 与平凡模 k，1-上循环就是满足 f([x, y]) = 0 的线性泛函 f : 𝓛 → k，
+  而 1-上边缘只有 0，故 H¹(𝓛, k) = (𝓛 / [𝓛, 𝓛])^*；域上一个向量空间的对偶为零当且仅当该空间为零，
+  于是 H¹(𝓛, k) = 0 ⟺ 𝓛 = [𝓛, 𝓛]。这条一般字典的出处见 sources 中的 ecker-schlichenmaier-2018 §3.3.2。
+
+  **本节点不断言什么**：
+  (a) 关于 H² 的任何事。dim H²(W(k), k) = 1 是**另一条**命题
+      （worldsheet.virasoro-unique-central-extension），且它与本节点互不蕴含。
+  (b) 关于 adjoint 模系数的 H¹(W, W) = 0——那是 ecker-schlichenmaier-2018 Theorem A.1.1，
+      与本节点（平凡模）是两个不同的上同调群，不要混。
+  (c) 关于 Virasoro 代数 𝒱 = Vir(k) 的完美性或 H¹(𝒱, k) = 0——那是
+      math.virasoro-universal-central-extension 的 (1)(2)。论证形状相同，但多一步把中心元
+      经 [ℓ_{−2}, ℓ_2] = 4ℓ_0 + (1/2)C 拉进导出代数，陈述对象也不同。
+  (d) 关于**单边** Witt 代数 W_r = Der(k[x_1,…,x_r])。参见 math.witt-algebra 的 notes
+      「单边 / 双边」一段：两者的 H² 相反，本节点只说双边版本。
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: feldvoss-siciliano-2025
+    loc: "Lemma 2.6 的**证明**中作为已知事实引用（逐字：「in conjunction with `H¹(𝒲, 𝔽) = 0` and `dim_𝔽 H²(𝒲, 𝔽) = 1` (see [24, Section 2])」），p. 7；**无单独编号**"
+    note: |
+      **本节点存在的直接理由**：这正是 math.virasoro-universal-central-extension--via-feldvoss-siciliano
+      的 gaps 第 5 条所说的「Witt 侧的一半依赖在图中没有节点」。
+      逐字引文见 literature/extractions/math-sources.md 第 25.1 节（证据等级 L1，researcher 2026-09-11 全文核实）。
+      **注意该文把这条归给 [24, Section 2] = schlichenmaier-2014**，自己不给证明；
+      同文对 **𝒱**（不是 𝒲）倒是给了完整的完美性计算（[d₀, d_n] = n d_n 等三步）。
+  - ref: ecker-schlichenmaier-2018
+    loc: "arXiv:1707.06106v2, §3.3.2, p. 5：`H¹(𝓛, 𝕂) = (𝓛 / [𝓛, 𝓛])^*`（一般公式，**无编号**）"
+    note: |
+      本节点里「(1) ⟺ (2)」那条字典的出处，L1 逐字（math-sources.md 第 27.3 节）。
+      ⚠ **该文 §5.1 那张低维上同调总表是关于 Virasoro 代数 𝒱 的**（「Results for the cohomology of
+      the Virasoro algebra」，其中「The first equation is obtained from the fact that the Virasoro
+      algebra is a perfect Lie algebra」说的是 𝒱）。本项目**未核实**该文是否在别处明写
+      H¹(𝒲, 𝕂) = 0，故不把 §5.1 列为本节点的来源。
+  - ref: schlichenmaier-2014
+    loc: "arXiv:1111.6625v4, §2 'The algebras'（feldvoss-siciliano-2025 的 [24, Section 2] 指向这里）"
+    note: |
+      **本项目未核实 §2 是否明写 H¹(𝒲, 𝔽) = 0**（math-sources.md 第 26 节只逐字记录了 §6 的
+      Remark 6.4 / Lemma 6.2 / Lemma 6.3，都是 H² 的事）。列在这里只是把 FS 的转引链条写完整，
+      **不作为本节点的论证承载来源**。编号的版本陷阱同该 key 的其它引用：只对 arXiv v4 有效。
+tags: [algebra, lie-algebra, witt, cohomology, perfect]
+notes: |
+  【为什么单独建卡】math.virasoro-universal-central-extension--via-feldvoss-siciliano 的 gaps 第 5 条
+  逐字写着：「Lemma 2.6 的证明用到 H¹(𝒲, 𝔽) = 0（Witt 代数完美）与 dim H²(𝒲, 𝔽) = 1 两条。
+  后者已挂 worldsheet.virasoro-unique-central-extension，前者本图**没有**节点。」本卡片就是那个节点。
+
+  【查重】新增前跑过 `stringgraph search witt / perfect / H^1`：命中只有
+  math.witt-algebra（定义卡）、math.virasoro-universal-central-extension（关于 **𝒱** 的 H¹/H²）、
+  worldsheet.virasoro-unique-central-extension（关于 **𝒲** 的 H²），无一承载本命题。
+
+  【特征假设】陈述限定 char k = 0，与 feldvoss-siciliano-2025 的设定一致。
+  推导只用到「每个非零整数在 k 中可逆」，故 char 0 是充分的；
+  是否能放宽到某些正特征，本图**未验证**，不要顺手推广。
+
+  【记号】来源用 [d_m, d_n] = (n − m) d_{m+n}，本图用 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}
+  （conv.virasoro-standard）。二者差一个生成元重标记（d_n ↦ ±ℓ_{±n}），是同一个李代数，
+  完美性与 H¹ 对同构不变，故不需要 convention_map。
+author: curator
+created: "2026-09-11"

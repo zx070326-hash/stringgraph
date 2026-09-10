@@ -11,7 +11,7 @@ statement: |
   按 worldsheet.ward-identity，T 与算子的 OPE 决定该算子在世界面坐标变换下的变换律。
 uses:
   - worldsheet.free-scalar-cft-action
-  - worldsheet.conformal-normal-ordering
+  - worldsheet.conformal-normal-ordering-v2
   - worldsheet.ward-identity
 uses_conventions:
   - conv.metric-mostly-plus
@@ -32,7 +32,13 @@ notes: |
   （worldsheet.free-boson-central-charge-d）。改动任一约定都必须同时改这个系数。
 
   status: rigorous 是就「这是一条显式公式」而言；其有效状态由 uses 中的
-  worldsheet.conformal-normal-ordering → worldsheet.free-scalar-propagator 拉到 physical-argument。
+  worldsheet.conformal-normal-ordering-v2 → worldsheet.free-scalar-propagator 拉到 physical-argument。
+
+  【正规序卡换代（curator 2026-09-11）】uses 已从 worldsheet.conformal-normal-ordering（v1）
+  换到 worldsheet.conformal-normal-ordering-v2。**statement 文本里第 6 行仍写着 v1 的 id**，
+  按不可违背原则 1（已提交节点的 statement 文本不可改）保持原样。
+  这不造成歧义：v2 在 X 部门逐字退化为 v1（v2 放宽的是设定范围并补了费米换序符号），
+  本卡的 T(z) 只涉及玻色型的 X^μ。
 
   注意 X^μ 本身**不是**主场（Polchinski (2.4.7)），只有 ∂X^μ 才是权 (1,0) 的主场；
   见 worldsheet.primary-field 的 notes。

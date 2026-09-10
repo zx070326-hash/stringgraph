@@ -28,11 +28,22 @@ depends_on:
       「we can use the same arguments as in the proof of Lemma 2.4 in conjunction with
       H¹(𝒲, 𝔽) = 0 and dim_𝔽 H²(𝒲, 𝔽) = 1 (see [24, Section 2])」——
       其中 dim H²(𝒲, 𝔽) = 1 正是本图 worldsheet.virasoro-unique-central-extension 的 (1)。
-      **不完全覆盖**：同一句里还用到 H¹(𝒲, 𝔽) = 0（即 Witt 代数完美），本图**没有**承载这条的
-      节点，见 gaps。
+      **不完全覆盖**：同一句里还用到 H¹(𝒲, 𝔽) = 0（即 Witt 代数完美）。该条现由
+      math.witt-algebra-perfect 承载，已在下面单列一条依赖（2026-09-11 补，关掉了原 gaps 第 5 条）。
       **注意来源不同**：FS 把这两条 Witt 侧事实归给 [24, Section 2] = schlichenmaier-2014，
       而本图那张卡的最强来源是 virasoro-lean-2025 Theorem 6.2（机器验证）；两者内容一致，
       本推导不依赖于哪一份来源。
+  - id: math.witt-algebra-perfect
+    note: |
+      非 inferred，与 worldsheet.virasoro-unique-central-extension 同理：**这是证明手段上的依赖，
+      不是目标陈述的前提**。feldvoss-siciliano-2025 Lemma 2.6 的证明逐字写
+      「in conjunction with H¹(𝒲, 𝔽) = 0 and dim_𝔽 H²(𝒲, 𝔽) = 1 (see [24, Section 2])」，
+      其中 **H¹(𝒲, 𝔽) = 0** 正是本依赖节点的 (2)。两条 Witt 侧事实至此都在图内有节点。
+      **注意来源分歧**：FS 把这两条都归给 [24, Section 2] = schlichenmaier-2014；
+      math.witt-algebra-perfect 那张卡对这条转引链做了如实标注（本项目未核实 §2 明写与否），
+      并另给了一条两行的初等推导（math.witt-algebra-perfect--via-bracket-identity）。
+      本推导不依赖于采用哪一份来源，只依赖于结论 H¹(𝒲, 𝔽) = 0。
+      **⚠ 别与目标陈述的 (1)/(2) 混**：那是 **𝒱** 的完美性与 H¹(𝒱, 𝔽) = 0，本依赖是 **𝒲** 的。
 sources:
   - ref: feldvoss-siciliano-2025
     loc: "Lemma 2.6, p. 7（陈述 + 完整证明）；万有性的一般判据见 p. 5 正文"
@@ -119,16 +130,23 @@ gaps:
      若只信 (1)(2)，本节点仍然成立；(3) 的等价性是把 Lemma 2.6 的『In particular』照抄下来的
      ——所幸 Lemma 2.6 本身就断言了万有性，故 (3) 的**结论**不依赖于这两条未读来源，
      只有它的**等价形式**依赖。"
-  - "**Witt 侧的一半依赖在图中没有节点**。Lemma 2.6 的证明用到 H¹(𝒲, 𝔽) = 0（Witt 代数完美）
-     与 dim H²(𝒲, 𝔽) = 1 两条。后者已挂 worldsheet.virasoro-unique-central-extension，
-     前者本图**没有**节点（`stringgraph search perfect` 无命中）。
-     补法：建一条 math.witt-algebra-perfect（或在 witt 侧扩一张卡），
-     来源可取 ecker-schlichenmaier-2018 §5.1 附近对 Witt 的对应陈述。留给后续。"
+  - "~~**Witt 侧的一半依赖在图中没有节点**~~ **（2026-09-11 已关闭）**。Lemma 2.6 的证明用到
+     H¹(𝒲, 𝔽) = 0（Witt 代数完美）与 dim H²(𝒲, 𝔽) = 1 两条。后者一直挂在
+     worldsheet.virasoro-unique-central-extension；前者现由 **math.witt-algebra-perfect** 承载，
+     已加为本推导的一条 depends_on。
+     **残留的弱点**：那张新卡的推导（--via-bracket-identity）是本图按 FS 对 𝒱 的模板做的删减重算，
+     文献里没有一处对 𝒲 逐字写出这两行，且其 rigorous 尚**待 reviewer 复核**
+     （见该推导 notes 的 status 裁决）。故本条不是完全无痕地关闭，而是把缺口下推了一层。"
   - "**Hochschild–Serre 长正合序列未展开**。Lemma 2.6 的 H² 部分只写『same arguments as in the
      proof of Lemma 2.4』，而 Lemma 2.4 的证明用的是该文 [18, Theorem 7]
-     （Hochschild–Serre 1953）。本项目**没有**登记 Hochschild–Serre，也没有核实那条序列的
-     具体形式；本推导对这一步是**照单接受**来源的说法。这是本推导中唯一一处
-     『来源说了但本项目没看到细节』的地方，若要把该节点推向形式化，这是第一个要展开的坑。"
+     （Hochschild–Serre 1953）。该文现已登记为 `hochschild-serre-1953`
+     （literature/sources.bib，2026-09-11，**仅登记：正文未读，Theorem 7 的措辞与那条长正合序列的
+     具体形式均未核实**），故这条 gap 现在至少有一个可引的 key，**但内容缺口一点没变**：
+     本推导对这一步仍是**照单接受**来源的说法，既不知道那是谱序列的低次项正合列还是别的形式，
+     也不知道它对无限维李代数的适用条件。按 sources.bib 里对该 key 写下的使用限制，
+     它**只能出现在本 gaps 里作指针**，不得升格为 sources[] 条目。
+     这是本推导中唯一一处『来源说了但本项目没看到细节』的地方，
+     若要把该节点推向形式化，这是第一个要展开的坑。"
 notes: |
   【status 的选择】按 docs/STATUS_LEVELS.md，4 = rigorous 要求「有发表的、数学界接受的完整证明；
   来源必须是数学文献或数学物理文献」。主来源是纯数学（math.RA）预印本且带完整证明，

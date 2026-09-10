@@ -38,7 +38,7 @@ statement: |
   (c) **V(c,h) ≠ 0**。
   (a)(b)(c) 由 worldsheet.verma-module-pbw-basis 承载（rigorous，未形式化）。
 uses: [worldsheet.virasoro-algebra-v2]
-uses_conventions: [conv.virasoro-standard]
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
 formal:
   lean_decl: StringFormal.Virasoro.VermaModule
   lean_file: StringFormal/Virasoro/Verma.lean
@@ -74,6 +74,10 @@ sources:
       不作为「Verma 模」这一定义的承载来源，数学侧以 kac-1979 与本仓库 Lean 文件为准。
 tags: [cft, representation-theory, verma-module, formalized]
 notes: |
+  【记号约定（curator 2026-09-11 补）】uses_conventions 新增 conv.verma-module-notation：
+  本图记 V(c,h)、最高权向量 |c,h⟩，对照 Kytölä 𝒱_{c,h} / v_{c,h}、Lian–Zuckerman M(c,h)、
+  Humphreys Z(λ)。**statement 文本未改**（原则 1），该约定只是把已在用的记号显式化并给出对照表。
+
   【本卡片是 worldsheet.verma-module 的拆分产物】（lead 裁决 2026-09-10，见 docs/ROADMAP.md 待拆清单；
   拆分建议由 lean-formalizer 在旧卡 notes 中提出）
   旧卡把三件事写在一张定义卡上：构造 + 分级（已形式化）、PBW 基（未形式化）、

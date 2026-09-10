@@ -14,7 +14,7 @@ statement: |
 uses:
   - worldsheet.free-scalar-cft-action
   - worldsheet.energy-momentum-tensor-free-scalar
-  - worldsheet.conformal-normal-ordering
+  - worldsheet.conformal-normal-ordering-v2
   - worldsheet.tt-ope-central-charge
 uses_conventions:
   - conv.metric-mostly-plus
@@ -28,6 +28,10 @@ sources:
       **T 的具体表达式（V_μ ∂^2 X^μ 项的系数）未核实**；见 polchinski-1998-v1.md E35。
 tags: [cft, linear-dilaton, energy-momentum-tensor, definition]
 notes: |
+  【正规序卡换代（curator 2026-09-11）】uses 已从 worldsheet.conformal-normal-ordering（v1）
+  换到 worldsheet.conformal-normal-ordering-v2（任意自由场版本，X 部门逐字退化为 v1）。
+  本卡只涉及玻色型场，内容与有效状态不变。
+
   本节点是「同一个作用量可以配不同的能动张量、给出不同的 CFT」的第一个例子，
   也是后续弦论中 dilaton 背景、Liouville 理论与非临界弦的入口。
   在本图中它的作用是**限定** worldsheet.free-boson-central-charge-d 的适用范围：

@@ -33,7 +33,7 @@ statement: |
   （Kytölä §12）的设定与记号陈述；worldsheet.verma-module-pbw-basis 是**本项目面向弦论的卡片**，
   额外承载形式特征标 q^h ∏(1−q^n)^{-1}、项目自身的排序写法与 Lean 形式化状态的记账，
   并由 worldsheet.verma-module-pbw-basis--via-pbw 依赖本节点。见本节点 notes。
-uses_conventions: [conv.virasoro-standard]
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
 sources:
   - ref: virasoro-lean-2025
     loc: "§12, p. 11 正文（无编号）；定义见 Definition 12.2 与 Lemma 12.3，Virasoro 情形见 Definition 12.4"
@@ -50,6 +50,10 @@ sources:
       记号对照：Kytölä 写 ℒ_n、C、v_{c,h}、𝒱_{c,h}、𝔳𝔦𝔯_±，本节点写 L_n、C、|c,h⟩、V(c,h)、vir_±。
 tags: [algebra, lie-algebra, representation-theory, verma-module, pbw, virasoro, math-input]
 notes: |
+  【记号约定（curator 2026-09-11 补）】uses_conventions 新增 conv.verma-module-notation：
+  本图记 V(c,h)、最高权向量 |c,h⟩，对照 Kytölä 𝒱_{c,h} / v_{c,h}、Lian–Zuckerman M(c,h)、
+  Humphreys Z(λ)。**statement 文本未改**（原则 1），该约定只是把已在用的记号显式化并给出对照表。
+
   **★ 合并记录（2026-09-11，lead 裁决）：worldsheet.verma-module-pbw-basis 已 superseded_by 本节点**，
   其推导 worldsheet.verma-module-pbw-basis--via-pbw 已删除。两卡的 (1)(2)(3) ↔ (1)(2)(3)(4) 逐条重叠；
   取本节点的理由是**来源更好**（那张卡的三条 sources 没有一条是可核实的命题级定位：kac-1979 分节号未核实

@@ -5,12 +5,32 @@ status: physical-argument
 depends_on:
   - id: worldsheet.state-operator-isomorphism
   - id: worldsheet.virasoro-generators-free-boson
-  - id: worldsheet.conformal-normal-ordering
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      **换代（curator 2026-09-11）**：原为 worldsheet.conformal-normal-ordering（v1）。
+      v1 的 statement 首句限定「对自由标量理论」，v2 把设定放宽到任意自由场并写出费米换序符号；
+      X 部门逐字退化为 v1，**本推导的内容与有效状态均不变**。
   - id: worldsheet.energy-momentum-laurent-modes
   - id: worldsheet.energy-momentum-tensor-free-scalar
     note: |
       两种正规序都是对**同一个** T(z) = -(1/α') :∂X^μ ∂X_μ: 的 Laurent 模而言的；
       没有自由标量能动张量的具体表达式，「L_0 的两种写法只差一个 c-数」无从说起。
+  - id: worldsheet.open-string-doubling-trick
+    inferred: true
+    note: |
+      **为什么需要这条边**：a^X = 0 的论证发生在**无边界的平面**（径向量子化，
+      worldsheet.state-operator-isomorphism；单位算子 ↔ 原点处的基态）。但本推导要定的
+      a^X 是**开弦** L_0 的两种正规序之差：所依赖的
+      worldsheet.virasoro-generators-free-boson 的物理来源正是 Polchinski §2.7 (2.7.25)/(2.7.27)
+      的**开弦** L_m 与 α_0 = (2α')^{1/2} p（抽取记录 #E41），而开弦世界面是带边的（上半平面）。
+      把平面 CFT 上「围道 = 整圆」的 L_m 与开弦上「围道 = 半圆」的 L_m 认同，用的正是
+      doubling trick（T̄ 是 T 的镜像解析延拓，半圆补成整圆，只剩一族 {L_m}）。
+      没有这一步，「单位算子对应的态被所有 α_{n>0} 湮灭且 L_0 本征值为 0」这一平面结论
+      搬不到开弦的 Fock 空间上。
+      **标 inferred 的理由**：本推导来源 loc（§2.7 (2.7.7)/(2.7.9)/(2.7.11)）处读不到对 §2.6 (2.6.25)
+      的回指——抽取记录 #E42 逐条列出「文献列出的依赖」是 E38、E43（态-算子同构），
+      **不含** E40（§2.6，doubling trick 所在条目）；相邻的 #E41（开弦 L_m）才列了 E40。
+      原书正文在付费墙后（抽取记录 §0），本图无法核实 §2.7 原地是否有回指，故照实标 inferred。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.7, eq. (2.7.7)、(2.7.9)、(2.7.11)，p.59–60（式号与 a^X = 0 的值均经 schrans-2020 核实）"
@@ -33,5 +53,8 @@ gaps:
   - "「单位算子的共形权为 0」在来源中是定义性的（1 与 T 的 OPE 无奇异项），未单列节点。"
   - "本推导只覆盖 X 部门。鬼场的对应常数是 a^g = -1（worldsheet.bc-ghost-normal-ordering-constant）；
      抽取记录 §1.1 / E43 中的 a^g = 0 已由 reviewer-ch23（2026-09-10）裁定为误记。"
+  - "新增的 worldsheet.open-string-doubling-trick 边限定在**纯 Neumann** 边界条件
+     （见该节点 notes 的「与 D 膜的关系」）。若某些方向取 Dirichlet，本推导的结论 a^X = 0
+     是否逐字不变，本图未验证。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
