@@ -68,7 +68,7 @@
 - `tt-ope-central-charge`、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
 - ~~`worldsheet.verma-module`~~ 已拆（v2 formalized + math.verma-module-free-over-negative-part），2026-09-11
 - ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
-- 待建：`math.euler-partition-generating-function`（Σ p(N)q^N = ∏(1−q^n)^{−1}；subcritical 推导与 Verma 特征标用到，无节点无来源）——**已派 formalizer**
+- ~~待建：`math.euler-partition-generating-function`~~ 已建并 formalized（2026-09-11，任意交换环上无逆元形式）；Verma 特征标的形式化缺口现只剩 PBW 下界
 - `worldsheet.critical-dimension-bosonic`（"三种独立意义"写死，加第四路线需 v2）
 - `worldsheet.critical-dimension-old-covariant`（"退耦""不幺正"无定义措辞）
 - ~~`worldsheet.brst-quantization`~~ 已建 v2（c^g 符号化，2026-09-11）；a^g = −1 仍在定义里，若 reviewer 坚持可再拆 v3
