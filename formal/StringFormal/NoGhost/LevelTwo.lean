@@ -6,6 +6,8 @@ Authors: stringgraph lean-formalizer
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
 import Mathlib.Tactic.FieldSimp
+import Mathlib.Algebra.Algebra.Rat
+import Mathlib.Algebra.Order.Field.Basic
 import StringFormal.NoGhost.PhysicalStates
 
 /-!
@@ -32,10 +34,34 @@ and `conv.intercept-sign-a` (the intercept is `a₀`, Polchinski's `-A`).
 * `Fock.levelTwoScalar η a c₂ c₃` — the level-two scalar trial state
   `[α_{-1}·α_{-1} + c₂ (a·α_{-2}) + c₃ (a·α_{-1})²] |k⟩`.
 
-## Status
+## Main results
 
-Skeleton: the definitions and their level-two homogeneity.  The `L_1`, `L_2` computations, the
-norm and the negative-norm corollary follow in this file.
+* `Fock.pairing_levelTwoScalar_self` — the norm for **arbitrary** coefficients,
+  `⟨ψ₂, ψ₂⟩ = 2D + 2 s c₂² + 2 s² c₃² + 4 s c₃` with `s = α_0·α_0 = 2α' k²`.
+* `Fock.Lop_one_apply_levelTwoScalar`, `Fock.Lop_two_apply_levelTwoScalar` — the two Virasoro
+  conditions; `Fock.Lop_apply_levelTwoScalar_of_three_le` — `L_n ψ₂ = 0` for `n ≥ 3` is
+  automatic (level 2).
+* `Fock.levelTwoScalar_mem_physSubmodule` — the mass shell plus `L_1 ψ₂ = L_2 ψ₂ = 0` puts
+  `ψ₂` in `H_phys`.
+* `Fock.pairing_levelTwoScalar_physical` — **the closed form**
+  `(4a₀ - 9)² ⟨ψ₂, ψ₂⟩ = 2 (D - 1) [16 a₀² + (2D - 74) a₀ + 84 - 3D]`; the bracket has
+  discriminant `4 (D - 1)(D - 25)` in `a₀`.
+* `Fock.exists_levelTwoScalar_mem_physSubmodule` — over a field with `4a₀ ≠ 9` and `k² ≠ 0`
+  the solution exists, so the closed form is not vacuous.
+* `Fock.pairing_levelTwoScalar_intercept_one` — at `a₀ = 1`, `⟨ψ₂, ψ₂⟩ = -2(D-26)(D-1)/25`.
+* `Fock.exists_mem_physSubmodule_pairing_self_neg` — **the ghost**: for `D > 26` and `a₀ = 1`
+  over an ordered field, `H_phys` contains a state of strictly negative norm.
+
+## Gaps
+
+* The norm is computed for **this one** family of level-two states.  That `ψ₂` above spans the
+  scalar (`SO(D-1)`-invariant) part of the level-two physical states is not proved here, so
+  "the level-two norm" is a statement about the explicit trial state, not about a canonically
+  determined vector.  For the ghost this is irrelevant (one negative-norm vector suffices).
+* The `a₀ = 1` witness picks a specific momentum with `α_0·α_0 = -2`
+  (`Fock.exists_zeroModeSq_eq_neg_two`); it needs `D ≥ 2` and a field, because `α' k² = -1`
+  has no rational solution with a single nonzero component.
+* Nothing here says the norm is positive for `D ≤ 26`; that is the no-ghost theorem itself.
 -/
 
 namespace StringFormal.NoGhost
@@ -689,6 +715,110 @@ theorem exists_levelTwoScalar_mem_physSubmodule {K : Type*} [Field K] [Algebra �
   · exact pairing_levelTwoScalar_physical η a hη a₀ _ _ hmass hcond1 hcond2
 
 end ClosedForm
+
+/-! ### The ghost above `D = 26`
+
+At the open-string intercept `a₀ = 1` the closed form collapses to
+`⟨ψ₂, ψ₂⟩ = -2 (D - 26)(D - 1) / 25`, so for `D > 26` the physical subspace contains a
+negative-norm vector.  This is clause (2) of `worldsheet.no-ghost-theorem-v4`. -/
+
+section Ghost
+
+variable {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
+
+/-- A momentum with `α_0 · α_0 = -2`, i.e. `α' k² = -1`: the level-two mass shell at intercept
+`a₀ = 1`.  It exists as soon as `D ≥ 2` (one timelike and one spacelike component suffice). -/
+theorem exists_zeroModeSq_eq_neg_two (hD : 2 ≤ D) :
+    ∃ a : Fin D → K, zeroModeSq (minkowski D K) a = -2 := by
+  classical
+  set t : Fin D := ⟨0, by omega⟩ with ht
+  set u : Fin D := ⟨1, by omega⟩ with hu
+  have hct : ((t : Fin D) : ℕ) = 0 := by rw [ht]
+  have hcu : ((u : Fin D) : ℕ) = 1 := by rw [hu]
+  have htu : t ≠ u := fun h => by
+    have hc := congrArg (fun v : Fin D => (v : ℕ)) h
+    simp only [hct, hcu] at hc
+    exact absurd hc (by norm_num)
+  set A : Fin D → K :=
+    fun μ => if (μ : ℕ) = 0 then 3 / 2 else if (μ : ℕ) = 1 then 1 / 2 else 0 with hA
+  have hAt : A t = 3 / 2 := by rw [hA]; simp only [hct, if_pos]
+  have hAu : A u = 1 / 2 := by
+    rw [hA]
+    simp only [hcu, if_neg (by norm_num : (1 : ℕ) ≠ 0), if_pos]
+  have hzero : ∀ v ∈ Finset.univ, v ∉ ({t, u} : Finset (Fin D)) →
+      minkowski D K v * A v * A v = 0 := by
+    intro v _ hv
+    simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hv
+    have h0 : (v : ℕ) ≠ 0 := fun h => hv.1 (Fin.ext (by rw [h, hct]))
+    have h1 : (v : ℕ) ≠ 1 := fun h => hv.2 (Fin.ext (by rw [h, hcu]))
+    have hAv : A v = 0 := by rw [hA]; simp only [if_neg h0, if_neg h1]
+    rw [hAv]
+    ring
+  have hsub : ({t, u} : Finset (Fin D)) ⊆ Finset.univ := Finset.subset_univ _
+  have key : zeroModeSq (minkowski D K) A
+      = ∑ v ∈ ({t, u} : Finset (Fin D)), minkowski D K v * A v * A v :=
+    (Finset.sum_subset hsub hzero).symm
+  refine ⟨A, ?_⟩
+  rw [key, Finset.sum_pair htu, minkowski_timelike D K hct,
+    minkowski_spacelike D K (by rw [hcu]; norm_num), hAt, hAu]
+  norm_num
+
+variable (η a : Fin D → K)
+
+/-- **The level-two norm at the open-string intercept `a₀ = 1`.**
+`⟨ψ₂, ψ₂⟩ = -2 (D - 26)(D - 1) / 25`, for the coefficients `c₂ = (D-1)/5`, `c₃ = (D+4)/10`
+forced by `L_1 ψ₂ = L_2 ψ₂ = 0`. -/
+theorem pairing_levelTwoScalar_intercept_one (hη : ∀ μ, η μ * η μ = 1)
+    (hs : zeroModeSq η a = -2) :
+    pairing η (levelTwoScalar η a (((D : K) - 1) / 5) (((D : K) + 4) / 10))
+        (levelTwoScalar η a (((D : K) - 1) / 5) (((D : K) + 4) / 10))
+      = -2 * ((D : K) - 26) * ((D : K) - 1) / 25 := by
+  rw [pairing_levelTwoScalar_self η a hη, hs]
+  field_simp
+  ring
+
+/-- The state `ψ₂` at `a₀ = 1` is physical. -/
+theorem levelTwoScalar_intercept_one_mem_physSubmodule (hη : ∀ μ, η μ * η μ = 1)
+    (hs : zeroModeSq η a = -2) :
+    levelTwoScalar η a (((D : K) - 1) / 5) (((D : K) + 4) / 10) ∈ physSubmodule η a 1 := by
+  refine levelTwoScalar_mem_physSubmodule η a hη 1 _ _ ?_ ?_ ?_
+  · rw [hs]
+    linear_combination -two_mul_invTwo K
+  · rw [hs]
+    field_simp
+    ring
+  · rw [hs]
+    field_simp
+    ring
+
+/-- **The explicit ghost above the critical dimension** (clause (2) of
+`worldsheet.no-ghost-theorem-v4`).  For `D > 26` and intercept `a₀ = 1` the old covariant
+physical subspace contains a state of strictly negative norm, namely the level-two scalar
+`[α_{-1}·α_{-1} + c₂ (k·α_{-2}) + c₃ (k·α_{-1})²]|k⟩` on the mass shell `α' k² = -1`. -/
+theorem exists_mem_physSubmodule_pairing_self_neg (hD : 26 < D) :
+    ∃ (b : Fin D → K) (ψ : Fock D K),
+      ψ ∈ physSubmodule (minkowski D K) b 1 ∧ pairing (minkowski D K) ψ ψ < 0 := by
+  obtain ⟨b, hb⟩ := exists_zeroModeSq_eq_neg_two (K := K) (D := D) (by omega)
+  have hη : ∀ μ : Fin D, minkowski D K μ * minkowski D K μ = 1 := by
+    intro μ
+    by_cases h : (μ : ℕ) = 0
+    · rw [minkowski_timelike D K h]; norm_num
+    · rw [minkowski_spacelike D K h]; norm_num
+  refine ⟨b, levelTwoScalar (minkowski D K) b (((D : K) - 1) / 5) (((D : K) + 4) / 10),
+    levelTwoScalar_intercept_one_mem_physSubmodule (minkowski D K) b hη hb, ?_⟩
+  rw [pairing_levelTwoScalar_intercept_one (minkowski D K) b hη hb]
+  have h26 : (26 : K) < (D : K) := by exact_mod_cast hD
+  have hnum : -2 * ((D : K) - 26) * ((D : K) - 1) < 0 := by nlinarith
+  rw [div_neg_iff]
+  exact Or.inr ⟨hnum, by norm_num⟩
+
+/-- Sanity check on a concrete ordered field: at `D = 27` and intercept `1` the old covariant
+physical subspace over `ℚ` contains a ghost. -/
+example : ∃ (b : Fin 27 → ℚ) (ψ : Fock 27 ℚ),
+    ψ ∈ physSubmodule (minkowski 27 ℚ) b 1 ∧ pairing (minkowski 27 ℚ) ψ ψ < 0 :=
+  exists_mem_physSubmodule_pairing_self_neg (K := ℚ) (by norm_num)
+
+end Ghost
 
 end Fock
 
