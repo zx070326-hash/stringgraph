@@ -18,12 +18,15 @@
 
 同步：Lean 岛 1 无鬼定理形式化。
 
-### Phase 1 进度（2026-09-11）
-- 玻色弦：Polchinski v1 §1–4 全部入图并经 reviewer 审查；§5–6 抽取完成、转图中；§8（T 对偶）抽取中。
-- 超弦：Polchinski v2 §10–11 抽取完成（**Cambridge Core 章级 PDF 一手核实，61 条 L1**——同一路线正在清第一卷整张未核实式号清单）；§10 节点转换中。
-- 里程碑：`ms.no-ghost-theorem` 四轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第一轮回译 drift，修复中；`ms.critical-dimension-superstring` 待 §10–11 入图后起草。
-- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 顶点算子振子部分 / creaExp 递推已机器验证；剩 [L_m, V_K] 共形权（进行中）、DDF 对易关系、张成定理、level-2 负模态（进行中）。
-- 附带数学岛：Verma 模构造 + 有序词张成、Euler 分拆生成函数、Witt/Virasoro 完美、**Shapovalov 形式**（唯一性无条件、存在 ⟺ V≠0、N=2 Gram 行列式 = 2h(16h²+2h(c−5)+c) 与 Kac 公式核对通过）、Möbius Jacobian、Mandelstam 和。Kac 行列式来源核实：Feigin–Fuchs 1982 Thm 3.1（Math-Net.Ru 全文）、Schottenloher Thm 6.12；kac-1979（LNP 94）与 kac-1980-icm 是两篇。
+### Phase 1 进度（2026-09-11 深夜）
+- 计数：main 238 statements / 176 derivations / 27 formalized；Lean 26 声明公理干净（2144 jobs）。
+- 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
+- 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO 节点转换中。
+- 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` 第二轮 drift，v3 换代中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
+- Lean 岛 1（无鬼定理）：Fock / Sugawara / 物理态 / L_m 伴随 / 伪态 / 商形式 / 动量塔配对 / **[L_m, V_J] 共形权（m ≥ 1）与塔上版本** / level-2 负模态（含 p ≠ 0）已机器验证；进行中：DDF 算子 A^i_n 定义 + [L_m, A]=0（m ≥ 1）。剩：m < 0、DDF 横向代数、张成定理。
+- 无鬼定理回 rigorous 的最短路径：Gebert–Nicolai 顶点代数推导已入图（own rigorous），只被"自由玻色子顶点代数"缺卡压成 open——researcher 正找 Kac/LL/FLM 对不定号差格的编号定理。
+- Lean 岛 2（Green–Schwarz 代数）：因子化恒等式（SO(32)/E₈）、迹条件算术 7 条声明已合入；等 GS 1984 图节点合入后接线。
+- 附带数学岛：Verma 模、Euler 分拆、Witt/Virasoro 完美、Shapovalov 形式、Möbius Jacobian、Mandelstam 和。
 
 ## Phase 2：一致性与对偶子图
 
