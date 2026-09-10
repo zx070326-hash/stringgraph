@@ -73,7 +73,7 @@
 ```bash
 uv sync                               # 安装工具依赖
 uv run stringgraph validate           # 校验全图（schema、id 解析、无环、约定一致）
-uv run stringgraph status <node-id>   # 某节点的有效状态与所依赖的猜想集合
+uv run stringgraph status <node-id>   # 某节点的有效状态、每条推导的 own/effective、依赖的猜想集合
 uv run stringgraph why <node-id>      # 该节点有效状态被哪条链压低（瓶颈树）
 uv run stringgraph report             # 全图统计 + 每个里程碑的猜想依赖
 uv run stringgraph search <keyword>   # 新增前查重
