@@ -1,0 +1,88 @@
+id: consistency.d10-four-groups-satisfy-anomaly-conditions--via-trace-identity-evaluation
+target: consistency.d10-four-groups-satisfy-anomaly-conditions
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    inferred: false
+    note: |
+      𝔰𝔬(32) 一支的输入（l = −1、N = 32）。**边在多处可查**：Polchinski (12.2.19a-c)、
+      GSW (10.1.12)、GS 1984 (12c) 三处系数完全一致。
+  - id: math.e8-adjoint-trace-identities
+    inferred: false
+    note: |
+      𝔢₈ 一支的输入：Tr F⁴ = (1/100)(Tr F²)²、Tr F⁶ = (1/7200)(Tr F²)³。
+      **边在来源处可查**：Polchinski (12.2.20)（= GS (12b′)(12c′)）。
+  - id: math.anomaly-twelve-form-factorization
+    inferred: false
+    note: |
+      已承载 𝔰𝔬(32) 与**单个** 𝔢₈ 两支的验算（GS (19) 的两组多项式代入）。
+      本推导在此之上新增三件事：𝔢₈ ⊕ 𝔢₈ 的可加性、两个含 𝔲(1) 的情形、以及四者的 n = 496。
+      ⚠ 记号对照：该卡写成嵌套形式 Ω₁₂ = (1/48)Ω₄[Ω₈ − (1/300)Ω₄²]，
+      展开即本卡的条件 (i)（curator 复核：(1/48)Ω₄Ω₈ − (1/14400)Ω₄³，逐项相同）。
+  - id: conv.gauge-trace-normalization
+    note: |
+      固定 Tr = 伴随迹、F 为二形式（分量在外代数中交换，故 Tr F^{2k} 的乘积无序问题）。
+      ⚠ **Polchinski 用的是另一套符号**（tr = 切空间迹、Tr_a/Tr_v = 规范群伴随/矢量迹）；
+      对译规则写在目标卡 sources 的第一条 note 里。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.2, pp. 99–101：(12.2.19a-c)（SO(n) 迹恒等式）、(12.2.20)（E₈ 迹归约）、p. 101 正文两条条件与**脚注 1**"
+    note: |
+      L1 原书（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E12/E13/E14）。
+      **原书对四个群一个验算都不给**：正文只说 "both properties hold"，脚注只说 "They also hold"；
+      两条迹恒等式分别留作 Exercise 12.1 与 Exercise 12.2。本推导把验算显式化。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352v2, p. 3：「the adjoint of U(1) is the singlet, so these traces vanish」「for U(1)⁴⁹⁶ it is simply zero term by term」「all the abelian generators drop out analogously, while E₈ alone obeys the same relation used in the E₈ × E₈ case」"
+    note: L1（curator 另取 arXiv e-print LaTeX 源码核对）。**阿贝尔那一步的唯一书面来源。**
+summary: |
+  记 x := Tr F²（伴随迹）。逐族验证条件 (i) Tr F⁶ = (1/48)Tr F⁴ Tr F² − (Tr F²)³/14400。
+
+  **(1) 𝔰𝔬(32)。** 用 so(N) 恒等式（l = −1，N = 32），以基本迹 u := tr F²、v := tr F⁴ 为变量：
+      Tr F² = (N − 2)u = 30u,  Tr F⁴ = (N − 8)v + 3u² = 24v + 3u²,  Tr F⁶ = (N − 32)tr F⁶ + 15uv = 15uv。
+  右端 = (1/48)(30u)(24v + 3u²) − (30u)³/14400 = (15uv + (15/8)u³) − (15/8)u³ = 15uv = 左端 ✓。
+  n = dim SO(32) = 32·31/2 = 496 ✓。
+  （附带：对一般 SO(N)，两边之差可因式分解出 **(N − 32)**——即在 SO 族内条件 (i) 只在 N = 32 成立，
+   与 math.tr-f6-coefficient-vanishing 一致。这一句不进目标卡陈述，见 gaps。）
+
+  **(2) 𝔢₈。** Tr F² = x、Tr F⁴ = x²/100、Tr F⁶ = x³/7200。
+  右端 = (1/48)·x·(x²/100) − x³/14400 = x³/4800 − x³/14400 = (3 − 1)x³/14400 = x³/7200 = 左端 ✓。
+
+  **(3) 𝔢₈ ⊕ 𝔢₈。** 伴随迹对直和可加：记两因子的 Tr F² 为 x、y，则
+      Tr F² = x + y,  Tr F⁴ = (x² + y²)/100,  Tr F⁶ = (x³ + y³)/7200。
+  右端 = (x+y)(x²+y²)/4800 − (x+y)³/14400 = [3(x+y)(x²+y²) − (x+y)³]/14400
+       = (x+y)(2x² − 2xy + 2y²)/14400 = 2(x³ + y³)/14400 = (x³ + y³)/7200 = 左端 ✓。
+  n = 2 × 248 = 496 ✓。
+
+  **(4) 𝔢₈ ⊕ 𝔲(1)^{⊕248}。** U(1) 的伴随表示是单态，其生成元在伴随表示下作用为零，
+  故一切含阿贝尔生成元的伴随迹为零，全部伴随迹退化到 𝔢₈ 一支 ⇒ 由 (2) 成立 ✓。
+  n = 248 + 248 = 496 ✓。
+
+  **(5) 𝔲(1)^{⊕496}。** 一切伴随迹为零，(i) 两边同为 0，平凡成立 ✓。n = 496 ✓。
+
+  **档位理由**：给定三族的迹恒等式后，(1)–(5) 全部是 ℚ 系数多项式的有限步初等验算 + 三条维数算术
+  （496 = 32·31/2 = 2·248 = 248 + 248）。前提在陈述里已完整写出。
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，且有独立复核记录（见 notes），取 rigorous。
+  ⚠ **有效状态仍会被输入的迹恒等式压到 physical-argument**——那两条卡的来源都不给证明。
+  这是有意的记账：本推导的代数是严格的，输入不是。
+gaps:
+  - "★★ 本推导**只证「这四个满足条件」，绝不证「只有这四个」**。完备性主张见 consistency.d10-anomaly-conditions-completeness-claim（conjecture）。Polchinski p.101 脚注 1 的动词是 'hold'，无任何唯一性主张（抽取记录 polchinski-1998-v2-ch12.md E14 与 §5.5 红线）。"
+  - "★ 条件 (i)(ii) 本身是从十维 N=1 反常多项式 (12.2.27)/ADT (7) 读出的，而该多项式的系数外包给 Alvarez-Gaumé–Witten（本项目未取得正文），且 Polchinski 自陈本书**不做**这个计算（E6 逐字『we will not repeat it here but just quote the result』）。本推导只做代数，不为条件的物理来源背书。"
+  - "输入的两条迹恒等式在所有已核实来源里**都没有证明**：GS 1984 直接给出；GSW『it is easy to show that』；Polchinski 留作 Exercise 12.1 / 12.2。故本卡的 effective 被压在 physical-argument。"
+  - "『伴随迹对直和可加』(3) 这一步：Polchinski (12.2.20) 下方逐字用了 Tr_a(t^m) = Tr_{a1}(t^m) + Tr_{a2}(t^m)，故有来源；但本图未为它单建节点。"
+  - "『U(1) 的伴随表示是单态 ⇒ 伴随迹为零』只有 ADT p.3 一条书面来源；Polchinski 原书没写这一步。"
+  - "本推导只检查 (i)(ii) 两条条件，**不检查**混合反常的两条方程（math.mixed-anomaly-trace-conditions-n32），那两条本图只在 SO(32) 上验过。"
+notes: |
+  reviewer-verified: researcher（literature/extractions/polchinski-1998-v2-ch12.md E14「抽取者复算：四个群逐一验证 E14 的两条 properties」，2026-09-11）；
+  curator 于 2026-09-11 用 sympy 在 ℚ[x, y, u, v] 上独立复算，四族的两边之差均化简为 0，
+  并另验一般 SO(N) 的差可因式分解出 (N − 32)。**两次计算彼此独立、结论一致。**
+  档位依据 docs/STATUS_LEVELS.md 的「初等可复核」例外（与
+  math.tr-f6-coefficient-vanishing--via-coefficient-inspection、
+  math.mixed-anomaly-trace-conditions-n32--via-integer-linear-solve 同型处理）。
+
+  【与旧卡的关系】本卡与 consistency.d10-anomaly-conditions-completeness-claim 一起，
+  取代了 2026-09-11 早些时候在本分支上建的 consistency.twelve-form-factorization-solutions
+  （那张卡把「四个群满足条件」与「恰是四个」写在同一条陈述里，
+   经 lead 依 polchinski-1998-v2-ch12 抽取裁决后拆开）。旧卡已标 superseded_by。
+author: curator
+created: "2026-09-11"

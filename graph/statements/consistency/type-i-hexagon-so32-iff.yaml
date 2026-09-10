@@ -58,6 +58,24 @@ sources:
       ⚠ 本章**未声明时空度规号差**（抽取记录 §3.5，L0），故本卡不挂任何 conv.metric-*。
 tags: [anomaly, hexagon, type-i, so32, chan-paton, string-one-loop, gauge-anomaly]
 notes: |
+  【0. ★ 陈述 (a) 与 notes 第 2 条里的交叉引用已改道（2026-09-11）】
+  写本卡时四解表由 `consistency.twelve-form-factorization-solutions` 一张卡承载；
+  lead 依 literature/extractions/polchinski-1998-v2-ch12.md 裁决后那张卡**已拆成两张并标 superseded_by**：
+  **consistency.d10-four-groups-satisfy-anomaly-conditions**（rigorous）与
+  **consistency.d10-anomaly-conditions-completeness-claim**（conjecture）。
+  statement 文本按项目原则 1 不改，阅读时请把那处引用读作指向这两张新卡。
+
+  【0b. ★ Polchinski §12.2 走的是低能场论路线，不是本卡的弦论侧计算】
+  polchinski-1998-v2 (12.2.19c) 下方逐字写「The last of these identities implies that **precisely for SO(32)**
+  the gauge anomaly Tr_a(F₂⁶) is equal to a product of lower traces and so can be canceled by the variations of
+  S′ and S″. **This is the Green–Schwarz mechanism.**」——**这是低能场论的迹恒等式论证，
+  不是 type I 单圈六边形的弦论计算**，与本卡不是同一条推导，故**只记在 notes，不加为 source**
+  （抽取记录 polchinski-1998-v2-ch12.md §5.1 表末行的建议）。
+  ⚠ 该处的「precisely for SO(32)」适用域**只是 SO(n) 族**（上文限定 "For SO(n)"），比本卡的
+  Chan–Paton 候选集（SO(n)/USp(n)/U(n)）还窄。
+  另注：Polchinski §12.2 同处逐字承认弦论侧的对应「not surprisingly the necessary interactions occur in these
+  theories with the correct coefficients」——**没有并排比较系数**（抽取记录 E24）。
+
   【1. ★ 两个独立的「32」（本图的观察，不是原文断言）】
   · **(10.2.36) 里的 32**：GSW 逐字说它来自变量替换「from √z_r to z_r (i.e., from ν_r/2 to ν_r),
     which gives a factor of 32」——即 5 个积分变量各出一个 2，2⁵ = 32。

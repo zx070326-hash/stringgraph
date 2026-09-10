@@ -89,8 +89,28 @@ sources:
     note: |
       L1。**只作交叉核验**，不承载本卡的阿贝尔论证（GS 1984 里没有阿贝尔解）。
       核验结果见推导 notes：ADT (7) 乘以 −96 后与 GS (20) 在纯引力扇区**逐项相同**。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, pp. 100–101：(12.2.27)(12.2.28a,b) 与 (12.2.29)；p. 101 脚注 1「They also hold for E₈ × U(1)²⁴⁸ and U(1)⁴⁹⁶, but no corresponding string theories are known.」"
+    note: |
+      **L1 原书**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E14/E15）。
+      ★ **ADT (7)(8) ≡ Polchinski (12.2.27)(12.2.28a,b)，逐项逐系数完全相同**（抽取记录 E15 已核实；
+      ADT 自陈「following the presentation of Polchinski [11]」）。⇒ 本卡引用的反常多项式有第二处 L1 转录。
+      ⚠ **两者在公式上不是独立证据**（同一排布，且系数都外包给 Alvarez-Gaumé–Witten）。
+      ⚠ **记号不同**：Polchinski 的 tr = 切空间迹、Tr_a/Tr_v = 规范群伴随/矢量迹；
+      Polchinski ↔ ADT 可逐符号对译（Tr_a ↔ Tr，tr ↔ tr），Polchinski ↔ GS **不能**。
+      ★ **本条同时是本卡结论的一处旁证**：Polchinski 在脚注里对两个阿贝尔解补的话是
+      「**but no corresponding string theories are known**」，且全书**不说**它们反常抵消——
+      他的措辞恰好避开了 ADT 指出的坑。
 tags: [anomaly, green-schwarz-mechanism, abelian, d10, swampland, effective-field-theory, factorization]
 notes: |
+  【0. ★ 陈述里两处指向 consistency.twelve-form-factorization-solutions 的交叉引用已改道（2026-09-11）】
+  本卡的 statement 写于同日稍早，当时四解表由 `consistency.twelve-form-factorization-solutions` 一张卡承载。
+  lead 依 literature/extractions/polchinski-1998-v2-ch12.md 裁决后，那张卡**已拆成两张并标 superseded_by**：
+  · **consistency.d10-four-groups-satisfy-anomaly-conditions**（rigorous）——四个群满足两条反常条件（可机检）；
+  · **consistency.d10-anomaly-conditions-completeness-claim**（conjecture）——「恰是这四个」的完备性主张。
+  statement 文本按项目原则 1 不改；**阅读时请把那两处引用读作指向上面两张新卡**。
+  新增红线：**不得写「恰有四个」**（Polchinski §12.2 p.101 脚注 1 的动词只是 "hold"，无唯一性主张）。
+
   【1. ★ 这条卡是记账红线的载体（docs/ROADMAP.md 2026-09-11）】
   在 ADT 2010 之前，文献习惯把「Î₁₂ 因子化」直接说成「anomaly-free」。ADT 证明这两件事在**阿贝尔情形分裂**：
   · (a) 因子化 Î₁₂ ∝ Y₄X₈ —— 四个 496 维解都满足；

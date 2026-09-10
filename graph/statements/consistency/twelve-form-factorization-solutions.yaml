@@ -78,8 +78,21 @@ sources:
       ⇒ 「U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ 使十二形式因子化」这半句**不再只有 L0 来源**。
       ⚠ 但 ADT **不**验证「恰是四个」，也**不**说这四个反常抵消——恰恰相反，见
       consistency.abelian-factorization-is-not-cancellation。
-tags: [anomaly, factorization, classification, d10, so32, e8, effective-field-theory, unresolved-conflict]
+tags: [anomaly, factorization, classification, d10, so32, e8, effective-field-theory, unresolved-conflict, superseded]
+superseded_by: consistency.d10-anomaly-conditions-completeness-claim
 notes: |
+  【0. ★★ 本卡已被取代（2026-09-11，lead 裁决，依 literature/extractions/polchinski-1998-v2-ch12.md）】
+  本卡把两件**认识论地位完全不同**的事写在同一条陈述里：
+  · 「这四个群满足两条反常条件」——纯代数，可逐一验算、可机检；
+  · 「**恰是**这四个」——完备性，在本项目可读来源里**没有任何证明**，且各家覆盖范围互相冲突。
+  新证据（polchinski-1998-v2 §12.2 p.101 **脚注 1** 逐字：「They also **hold** for E₈ × U(1)²⁴⁸ and
+  U(1)⁴⁹⁶, but no corresponding string theories are known.」，L1 原书）表明**最可靠的一手教科书来源
+  只说两条 properties "hold"，不作任何唯一性主张**。lead 据此下达红线：**图中不得写「恰有四个」**。
+  ⇒ 本卡拆成两张：
+  · **consistency.d10-four-groups-satisfy-anomaly-conditions**（rigorous，四个群逐一验算）；
+  · **consistency.d10-anomaly-conditions-completeness-claim**（conjecture，完备性主张 + 三方冲突）。
+  `superseded_by` 指向后者（陈述的主干是完备性）。本卡的推导已删除，内容分入两条新推导。
+  **本卡不得再被引用**；下面第 1–4 条保留原文以便追溯。
   【1. ★ 为什么标题与陈述只写「因子化」】docs/ROADMAP.md 2026-09-11 的记账红线（ADT 2010 L1 之后）：
   U(1)⁴⁹⁶ 与 E₈ × U(1)²⁴⁸ **只是使反常十二形式因子化**，GS 抵消项在阿贝尔情形写不下来。
   **图中分类卡只能写「因子化」，不得写「反常抵消」。** 这条红线是本卡措辞的直接来源。
