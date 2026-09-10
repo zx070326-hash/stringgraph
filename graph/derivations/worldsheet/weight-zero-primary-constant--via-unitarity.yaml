@@ -11,7 +11,12 @@ depends_on:
       v2 逐字包含且更一般（任意 Virasoro 模、只要 L_0 v = h v）；
       本推导**不**用旧卡末句的 ⊕ 分解（那句已知在一般基环上错，见旧卡 notes），
       它需要的「每个态要么是最高权态要么是 descendant」这一分解由幺正性承担，见 gaps。
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
+    note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.state-operator-isomorphism
     note: |

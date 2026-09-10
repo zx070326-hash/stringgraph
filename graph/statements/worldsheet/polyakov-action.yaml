@@ -11,16 +11,29 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.13)"
+    loc: "§1.2, eq. **(1.2.13)**, p.12：`S_P[X,γ] = −(1/4πα′) ∫_M dτdσ (−γ)^{1/2} γ^{ab} ∂_aX^μ∂_bX_μ`"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E5，证据等级
       [页码已核实/式号未核实]。拉氏量形式 L = -(1/4πα') γ^{ab} ∂_a X^μ ∂_b X_μ
       经 Schrans 伴读笔记 §1.10（推导光锥拉氏量的起手式）确认（内容已核实）；
-      公式号 (1.2.13) 未核对原书，硬约束是必在已核实的 (1.2.15)（p.12）之前。
+      **【核实 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      式号 **(1.2.13) 正确**，页码 **p.12**；「约」与「未核对原书」两个限定撤销，
+      证据等级升到 **L1**。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, action, classical, polyakov]
 notes: |
-  Polchinski 称之为 Polyakov 作用量并指出它先由 Brink–Di Vecchia–Howe 与 Deser–Zumino
-  提出；本节点不追溯这一优先权问题（超出抽取记录范围）。
+  **【命名归属的原书逐字（2026-09-11，L1，p.12，(1.2.13) 下方）】**
+  「This is the **Brink–Di Vecchia–Howe–Deser–Zumino** action, or Polyakov action for short.
+  It was found by Brink, Di Vecchia, and Howe and by Deser and Zumino, in the course of deriving
+  a generalization with local world-sheet supersymmetry. Its virtues, especially for path integral
+  quantization, were emphasized by Polyakov.」
+  ⚠ **原书正文没有给这三处任何引文编号**（全书体例：引文集中在书末注记，p.9 逐字
+  「Annotated reference lists appear at the end of each volume.」），而且
+  **书末字母表（pp.353–358）里查无 Deser、Di Vecchia、Howe 三人的任何条目；Brink 名下只有
+  Brink & Nielsen (1973)**（L1 negative evidence，抽取记录 §13.2(f)1）。
+  ⇒ **本节点要挂原始文献，Polchinski 帮不上忙**：他只能作为**命名归属**这一事实的来源；
+  BDVH 1976 与 Deser–Zumino 1976 的书目数据须另行检索后再进 literature/sources.bib。
+  本节点仍不主张优先权裁决。
   与 Nambu–Goto 的经典等价见 worldsheet.polyakov-nambu-goto-classical-equivalence；
   对称性见 worldsheet.polyakov-action-symmetries 与 worldsheet.polyakov-weyl-invariance。
 author: curator-polchinski-ch1

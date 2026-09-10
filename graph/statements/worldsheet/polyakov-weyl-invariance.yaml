@@ -10,11 +10,15 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.19)–(1.2.20) 附近（Weyl 变换 γ'_ab = e^{2ω} γ_ab）"
+    loc: "§1.2, eq. **(1.2.21)**, p.13：`X′^μ = X^μ`, `γ′_ab(τ,σ) = exp(2ω(τ,σ)) γ_ab(τ,σ)`"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E7。Weyl 变换的写法
-      γ'_ab = e^{2ω(σ,τ)} γ_ab 在 Headrick 习题 1.3 第 (8) 式中逐字出现（内容已核实）；
-      公式号未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E7。
+      **【订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      **Weyl 不变性的式号是 (1.2.21)，p.13**，不是旧 loc 写的「约 (1.2.19)–(1.2.20) 附近」——
+      **(1.2.19) 是 Poincaré、(1.2.20) 是 diff**，三条变换在原书里各有独立式号。
+      Weyl 变换的写法 `γ′_ab = exp(2ω)γ_ab` 此前只由 Headrick 习题 1.3 第 (8) 式确认，
+      现由原书 (1.2.21) 直接确认，证据等级升到 **L1**。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, symmetry, classical, polyakov, weyl]
 notes: |
   本条是**经典**陈述。量子层面 Weyl 不变性一般被反常破坏（Weyl 反常，§3.4），

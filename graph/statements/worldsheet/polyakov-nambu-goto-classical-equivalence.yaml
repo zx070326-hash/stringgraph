@@ -15,11 +15,26 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.15)–(1.2.16)"
+    loc: "§1.2, p.12 的五步：**(1.2.14)** `δ_γS_P` 的显式变分 → **(1.2.15)** 行列式变分 `δγ = γγ^{ab}δγ_ab = −γγ_abδγ^{ab}` → **(1.2.16)** `h_ab = ½γ_abγ^{cd}h_cd`（即 T_ab = 0 的展开形式）→ **(1.2.17)** `h_ab(−h)^{−1/2} = γ_ab(−γ)^{−1/2}`（消去 Weyl 因子）→ **(1.2.18)** `S_P[X,γ] → −(1/2πα′)∫dτdσ(−h)^{1/2} = S_NG`（**经典等价的结论式**）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E6。技术引理
-      δ(-γ)^{1/2} 的公式即 eq. (1.2.15)，其位置（p.12）与内容经 Schrans 伴读笔记
-      目录 §1.1 核实（[已核实]）；T_ab = 0 约束的公式号（约 (1.2.16)）未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E6。
+      **【订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      旧 loc「约 eq. (1.2.15)–(1.2.16)」**只指到中间步**：
+      - (1.2.15) 是行列式变分这条**技术引理**（页码 p.12 与内容此前已由 Schrans 目录核实，现升 **L1**）；
+      - (1.2.16) 是 `h_ab = ½γ_abγ^{cd}h_cd`，即本节点陈述第二式的原书形式；
+      - **本节点真正断言的那件事（代回后 S_P = S_NG）是 (1.2.18)**，
+        中间还多一步 (1.2.17)（把 Weyl 因子写成 `h_ab(−h)^{−1/2} = γ_ab(−γ)^{−1/2}`）。
+      「T_ab = 0 约束的公式号未核对原书」这句作废。
+
+      ⚠ **一处留给 reviewer 的记号张力（本轮不裁决）**：本节点 statement 把能动张量写作
+      `T_{ab} ≡ −(4π/(−γ)^{1/2}) δS_P/δγ^{ab}`（下指标、对 `γ^{ab}` 变分），
+      而**原书 (1.2.22)（p.13）逐字是 `T^{ab} = −4π(−γ)^{−1/2}(δ/δγ_ab)S_P`**
+      （上指标、对 `γ_ab` 变分）。两者互为升降指标的写法，但因 `δγ_ab = −γ_acγ_bd δγ^{cd}`，
+      **逐字比对时会差一个整体符号**；本节点断言的是 `T_ab = 0`，符号不影响结论。
+      不擅自改 statement（项目原则 1），已列入报告交 reviewer/lead。
+      另注意 (1.2.22) 下方原书自陈其 `T^{ab}` **比场论通行定义多一个 `−2π`**
+      （逐字见 worldsheet.energy-momentum-tensor-free-scalar 的 notes）。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b)(c) 的 §1.2 式号全表。
 tags: [bosonic-string, action, classical, equivalence, polyakov, nambu-goto]
 notes: |
   只主张**经典**等价。量子等价（路径积分层面）不在 §1.2 论证，

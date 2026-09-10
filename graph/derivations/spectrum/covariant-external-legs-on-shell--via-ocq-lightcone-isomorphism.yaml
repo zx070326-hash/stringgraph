@@ -9,10 +9,15 @@ depends_on:
       标 inferred：只提供**框架**——(5.3.9) 里每条外线是一个顶点算子插入 ĝ^{1/2} V_j(k_i, σ_i)，
       「外线」这个词因此有意义。它**不是**本推导第 (1)–(4) 步的计算输入。
       §4.1 p.125 的那句话不回指 (5.3.9)（第 5 章在第 4 章之后）。
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
     note: |
       提供「共形权」与「主场（Polchinski 的 tensor）」的定义，即 p.125 逐字「weight 1 or (1,1) tensor」
       里两个词的含义。
+
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: worldsheet.state-operator-isomorphism
     note: |
       提供「权 (h, h̄) 的算子 ↔ L_0、L̄_0 本征值为 (h, h̄) 的态」这一对应，

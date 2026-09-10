@@ -1,0 +1,103 @@
+id: worldsheet.primary-field-v2
+kind: definition
+status: rigorous
+title: 共形权与主场（tensor / primary）（v2：删去「X^μ 不是主场」这一错误例子）
+statement: |
+  设 T(z) 是全纯能动张量（worldsheet.traceless-holomorphic-energy-momentum）。
+  局域算子 O(0,0) 的**共形权** (h, h̄) 由与 T 的 OPE 定义：
+    T(z) O(0, 0) ∼ … + (h / z^2) O(0, 0) + (1/z) ∂O(0, 0),
+    T̄(z̄) O(0, 0) ∼ … + (h̄ / z̄^2) O(0, 0) + (1/z̄) ∂̄O(0, 0)。
+  若该 OPE 中**没有比二阶更高的极点**（即上式中的 "…" 为零），则称 O 是**主场**
+  （Polchinski 称之为 tensor 或 primary；该书把这两个词当同义词用）。
+
+  主场在共形变换 z → z'(z)、z̄ → z̄'(z̄) 下按
+    O'(z', z̄') = (∂z'/∂z)^{-h} (∂z̄'/∂z̄)^{-h̄}  O(z, z̄)
+  变换。非主场的变换律带附加项；本图内的两个标准例子是 T 自身
+  （附加项正比于中心荷乘 Schwarzian 导数，见 worldsheet.schwarzian-transformation-of-t）
+  与 ∂²X^μ。
+
+  **【本定义相对哪个 CFT 而言】** 「是不是主场」不是算子表达式本身的性质，而是**相对于所选的
+  能动张量 T** 而言的性质。同一个作用量上可以有不止一个共形对称性，从而不止一个 T，
+  同一个算子在其中一个下是主场、在另一个下不是。本定义中的 T 恒指陈述所在节点声明的那一个。
+uses:
+  - worldsheet.traceless-holomorphic-energy-momentum
+  - worldsheet.operator-product-expansion
+  - worldsheet.ward-identity
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4：**(2.4.14), p.45**（权 h 的一般定义 T(z)A(0,0) = … + (h/z²)A + (1/z)∂A + …）、**(2.4.13), p.46**（权 (h,h̃) 由刚性标度 A'(z',z̄') = ζ^{−h}ζ̄^{−h̃}A(z,z̄) 定义）、**(2.4.15), p.46**（主场的有限共形变换 O'(z',z̄') = (∂_z z')^{−h}(∂_z̄ z̄')^{−h̃}O）、**(2.4.16), p.46**（主场的 T·O OPE，原书紧接一句 'the more singular terms in the general OPE (2.4.14) being absent'）、**(2.4.17), p.46**（典型算子的权表）；p.46 (2.4.15) 上方逐字给出术语等同：'An important special case is a *tensor operator* or *primary field* 𝒪'"
+    note: |
+      【原书核实 2026-09-11（researcher 第七轮，L1 页图逐字，pp.43–49 读毕）】
+
+      **(2.4.17) 的逐字转录（p.46）**：
+          `X^μ`  `(0,0)` ,      `∂X^μ`  `(1,0)` ,
+          `∂̄X^μ` `(0,1)` ,      `∂²X^μ` `(2,0)` ,     (2.4.17)
+          `:e^{ik·X}:`  `(α'k²/4, α'k²/4)` .
+      **紧跟在权表之后、p.47 第一行，逐字**：「**All transform as tensors except `∂²X^μ`.**」
+      其主语是 (2.4.17) 里列出的全部五个算符。由于本书 "tensor operator" 与 "primary field"
+      是同义词（p.46 (2.4.15) 上方逐字），这句话等价于：
+      **在自由标量 CFT 里，X^μ 是权 (0,0) 的主场，唯一的例外是 ∂²X^μ。**
+  - ref: polchinski-1998-v1
+    loc: "§2.4, **(2.4.6), p.44**（T(z)X^μ(0) ∼ (1/z)∂X^μ(0)、T̃(z̄)X^μ(0) ∼ (1/z̄)∂̄X^μ(0)）与 **(2.4.7), p.44**（δX^μ = −εv(z)∂X^μ − εv(z)*∂̄X^μ）"
+    note: |
+      【为什么 (2.4.6)/(2.4.7) 是「X^μ **是**主场」的证据，不是反证】
+
+      - (2.4.6) 就是主场 OPE (2.4.16) 在 h = h̃ = 0 的特例：`h/z²` 项因 h = 0 消失，
+        且没有更奇异的项 ⇒ **单极点结构正是 h = 0 主场的定义**。
+      - (2.4.7) 就是主场有限变换律 (2.4.15) 在 h = h̃ = 0 的无穷小形式，**无非齐次项** ⇒ 主场。
+
+      **本卡换代掉的 worldsheet.primary-field 把这两条读成了反证**（notes 写「X^μ 不是主场
+      ((2.4.7))，因为 T(z)X^μ(0,0) 的展开带 ln 项」，statement 写「非主场（如 T 自身、如 X^μ）」），
+      两处都与原书相反。见 literature/extractions/polchinski-1998-v1.md §13.4(a)(b)。
+  - ref: polchinski-1998-v1
+    loc: "§2.5「Free CFTs」→ *Linear dilaton CFT*，**(2.5.3) 正下方，p.49**：'This is a *different* conformal symmetry of the same action. **The field `X^μ` no longer transforms as a tensor**, its variation now having an inhomogeneous piece.'；同页并写 'so different values of `V^μ` are to be regarded as different CFTs'"
+    note: |
+      【「X^μ 不是 tensor」这句话在书里**确实存在**，但在**另一个 CFT** 里】
+
+      同一个作用量 (2.1.10) 上有两个不同的共形对称性：
+      - **普通自由标量 CFT**（T = (2.4.4)）：X^μ **是** (0,0) 主场；
+      - **线性 dilaton CFT**（T = (2.5.1a,b)，c = D + 6α'V_μV^μ = (2.5.2)）：
+        δX^μ 多出 −(ε/2)α'V^μ[∂v + (∂v)*] 这一非齐次项（(2.5.3)），**X^μ 不是 tensor**。
+      原书 p.49 明写两者「are to be regarded as **different CFTs**」。
+      ⇒ **凡引用「X^μ 是/不是主场」的节点必须声明是哪一个 CFT。** 本卡 statement 末段的
+      「本定义相对哪个 CFT 而言」即为此而写。
+tags: [cft, primary-field, conformal-weight, definition]
+notes: |
+  **【换代理由（2026-09-11，curator-v1-sec13）】**本卡换代自 worldsheet.primary-field。
+  旧卡的 **statement 文本**里写「非主场（如 T 自身、如 **X^μ**）的变换律带附加项」，
+  notes 里写「X^μ 本身**不是**主场（(2.4.7)），因为 T(z)X^μ(0,0) 的展开带 ln 项」。
+  两句都与原书 p.47 第一行的逐字「All transform as tensors except ∂²X^μ」相矛盾
+  （抽取记录 §13.4，L1 页图）。由于错误在 statement 文本内，按项目原则 1 不能就地改，
+  只能换代：旧卡保留原文并加 superseded_by 指向本卡。
+
+  **【v2 相对 v1 改了什么】**
+  (1) 错误的例子 X^μ **换成** ∂²X^μ（原书唯一点名的非 tensor 例子）；T 自身保留。
+  (2) 新增末段「本定义相对哪个 CFT 而言」，把自由标量 CFT 与线性 dilaton CFT 的区分
+      写进定义本身——这是旧卡歧义的根源。
+  (3) 权的定义与主场条件的其余文字**逐字未动**。
+
+  **【两个必须记住的陷阱】**
+  (a) **正规序乘积不继承朴素变换律。** 原书 p.47 (2.4.21) 一带逐字：「Notice that the conformal
+      transformation properties of normal ordered products are **not in general** given by the naive
+      transformations of the product. For example, the transformation law (2.4.7) for `X^μ` would
+      naively imply `δe^{ik·X} = −εv(z)∂e^{ik·X} − εv(z)*∂̄e^{ik·X}` (naive) (2.4.21) for the
+      exponential, **making it a tensor of weight (0,0). The modification is a quantum effect**, due
+      to the renormalization needed to define the product of operators at a point.」
+      ⇒ **X^μ 是 (0,0) 主场这件事推不出 :e^{ik·X}: 是 (0,0)**；后者的权是 (α'k²/4, α'k²/4)
+      （(2.4.17)/(2.4.19)）。**(2.4.21) 是原书唯一一个明确标 "(naive)" 的式号**，本身就是路标。
+      worldsheet.exponential-vertex-operator-weight 的依赖**不能**写成「由 X^μ 的权推出」，
+      正确来源是 (2.4.17)/(2.4.19)。
+  (b) **「主场的 OPE 决定一切场的 OPE」在 Vol.1 只是断言。** p.47 (2.4.20) 下方逐字：
+      「they determine the OPEs of *all* fields in terms of those of the primary fields.
+      **We will develop this in chapter 15**」——第 15 章在 Vol.2，**本处无证明**。
+
+  **【术语约定，影响所有「场 vs 算符」的措辞】** p.46 脚注 3 逐字：
+  「…in particular because of equivalences between different field theories, and so
+  **the term *field* is used for any local operator**.」即在本书里「field」= 任意局域算符，
+  不限于路径积分的积分变量。
+
+  本节点仍把「共形权」与「主场」两件事写在一起：权对任意算子都有定义（由二阶极点系数读出），
+  主场是对同一 OPE 的额外条件。二者共用同一个 OPE，拆开会造成两个节点引用同一公式，故合为一条定义。
+author: curator-v1-sec13
+created: "2026-09-11"

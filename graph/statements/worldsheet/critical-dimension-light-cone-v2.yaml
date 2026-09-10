@@ -48,6 +48,33 @@ sources:
       这三句是本节点的推导封顶在 physical-argument 的直接文献依据。
       另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」，
       不是任意的正规化选择。已按 conv.intercept-sign-a 做 a = −A 换算。
+
+      ★★ **【2026-09-11 第七轮：作者把 careful treatment 外包给了谁——书末第 1 章注记 p.349 逐字】**
+        「**Chapter 1**
+         …**The classical motion of the string and light-cone quantization are discussed in
+         Goddard, Goldstone, Rebbi, & Thorn (1973) and in the reviews by Rebbi (1974) and
+         Scherk (1975). The first two of these include a careful treatment of Lorentz invariance.
+         The heuristic argument that we have given is based on Brink & Nielsen (1973).**
+         Weinberg (1964) discusses the couplings of massless vector and tensor particles.」
+
+      这一段直接闭合本节点上方记的那个缺口（p.21「plausible **without a complete treatment**」）：
+      1. **Polchinski 自陈本书给的是 "the heuristic argument … based on Brink & Nielsen (1973)"**
+         （= `brink-nielsen-1973`，Phys. Lett. B45, 332）。这是本节点 Polchinski 侧封顶
+         `physical-argument` 的**第四条**、也是最直接的一条文献依据
+         （前三条是 p.21 / p.24 / §3.4 p.90 的三处自降）。
+      2. **「careful treatment of Lorentz invariance」被外包给 GGRT 1973**
+         （= `goddard-goldstone-rebbi-thorn-1973`，Nucl. Phys. B56, 109）**与 Rebbi (1974) 综述**
+         （Phys. Rep. 12, 1）。⇒ 若本节点日后要一条**不封顶在 physical-argument** 的推导，
+         正确的下一步是取得 **GGRT 1973 正文**并新建 `--via-ggrt` 推导，
+         **不是**去加固 Polchinski 这条。
+      ⚠⚠ **本轮不新增该推导，理由是诚实**：`goddard-goldstone-rebbi-thorn-1973` 已登记进
+      literature/sources.bib，但**其正文本项目完全未获取（内容等级 L0）**，
+      我们对它的了解只有 Polchinski 的一句转述。**在读到正文之前，不得据此新增任何推导、
+      也不得升级本节点的任何状态。** 已列入报告交 lead 排 researcher 取文。
+      ⚠ 另注意 **Brink & Nielsen (1973) 是 Brink, L. & Nielsen, H. B.**，与 §1.2 p.12 里
+      Polyakov 作用量的发现者 "Brink, Di Vecchia, and Howe" **不是同一篇**
+      （Polchinski 书末字母表 Brink 名下只有 Brink & Nielsen 一条）。
+      见 literature/extractions/polchinski-1998-v1.md §13.2(d) 与 §13.9 B#10/#11。
 tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance]
 notes: |
   **【换代理由（2026-09-11）】**本卡换代自 worldsheet.critical-dimension-light-cone。

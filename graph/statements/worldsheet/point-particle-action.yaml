@@ -13,15 +13,23 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2（p.9 起），约 eq. (1.2.1)"
+    loc: "§1.2, eq. **(1.2.2)**, p.10：`S_pp = −m ∫ dτ (−Ẋ^μ Ẋ_μ)^{1/2}`"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E1，证据等级
-      [页码已核实/式号未核实]：§1.2 起于 p.9 由 CUP frontmatter 目录确认，
-      公式号 (1.2.1) 未核对原书。作用量的形式由 Headrick 习题解答 1.1 第 (1) 式间接确认。
+      **【订正 2026-09-11（curator-v1-sec13，据 researcher 第七轮 L1 页图逐字，pp.9–15 读毕）】**
+      本节点旧 loc 写「约 eq. (1.2.1)」，**式号错**：
+      - **(1.2.1) 是世界线重参数化 `X′^μ(τ′(τ)) = X^μ(τ)`（p.9）**，不是作用量；
+      - 点粒子作用量是 **(1.2.2)，p.10**；
+      - 其变分 `δS_pp = −m ∫ dτ u̇_μ δX^μ` 是 (1.2.3)（p.10），归一化 D-速度
+        `u^μ = Ẋ^μ(−Ẋ^νẊ_ν)^{−1/2}` 是 (1.2.4)（p.10）。
+      ⚠ **(1.2.3) 正是 conv.alpha-prime-regge 一度误挂的那个式号**——它与 α′ 毫无关系。
+      「§1.2 起于 p.9」不变。作用量形式此前由 Headrick 习题解答 1.1 第 (1) 式间接确认，
+      现由原书页图直接确认，证据等级升到 **L1**。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, action, point-particle, classical]
 notes: |
   m = 0 的情形本作用量退化（恒为 0），这正是引入 einbein 形式
   （worldsheet.point-particle-einbein-action）的动机。
-  公式号未核对原书，见抽取记录 §3 未核实公式号清单。
+  **2026-09-11 更新**：公式号已核对原书，是 **(1.2.2), p.10**（不是 (1.2.1)）；
+  「未核对原书」的旧记录作废，见上方 sources note。
 author: curator-polchinski-ch1
 created: "2026-09-10"
