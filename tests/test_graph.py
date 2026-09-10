@@ -150,11 +150,11 @@ def test_seed_graph_validates() -> None:
     assert not errors, "\n".join(str(e) for e in errors)
 
 
-def test_seed_no_ghost_v3_is_rigorous_with_inferred_kac() -> None:
+def test_seed_no_ghost_v4_is_rigorous_with_inferred_kac() -> None:
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v3"].name == "rigorous"
-    assert effs["worldsheet.no-ghost-theorem-v3"].conjectures == set()
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
+    assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
 
 
 def test_superseded_no_ghost_v2_points_to_v3_but_keeps_its_derivation() -> None:
@@ -177,11 +177,54 @@ def test_superseded_no_ghost_v2_points_to_v3_but_keeps_its_derivation() -> None:
     assert effs["worldsheet.no-ghost-theorem-v2"].name == "rigorous"
 
 
-def test_milestone_no_ghost_points_at_v3() -> None:
-    """里程碑 ms.no-ghost-theorem 跟随陈述换代指向 v3（第三轮回译前 audit.status 为 draft）。"""
+def test_superseded_no_ghost_v3_points_to_v4_but_keeps_its_derivation() -> None:
+    """v3 被 v4 取代（第三轮审计 B1：第 (2) 条缺动量量词；A1：DDF 射线/标度符号矛盾）。
+
+    与 v2 同理，v3 的推导 --via-goddard-thorn 保留作历史，故 v3 的有效状态仍是 rigorous；
+    ddf-operators-v3 同时被 v4 取代（射线 {λ k_0 : λ > 0} → 去心直线 {λ k_0 : λ ∈ R \\ {0}}）。
+    """
+    g = load_graph(ROOT)
+    effs = compute_all(g)
+    assert (
+        g.statements["worldsheet.no-ghost-theorem-v3"].superseded_by
+        == "worldsheet.no-ghost-theorem-v4"
+    )
+    assert (
+        g.statements["worldsheet.ddf-operators-v3"].superseded_by
+        == "worldsheet.ddf-operators-v4"
+    )
+    assert g.derivations_for("worldsheet.no-ghost-theorem-v3")
+    assert effs["worldsheet.no-ghost-theorem-v3"].name == "rigorous"
+    # v4 未被取代，是当前的活节点
+    assert g.statements["worldsheet.no-ghost-theorem-v4"].superseded_by is None
+    assert g.statements["worldsheet.ddf-operators-v4"].superseded_by is None
+
+
+def test_brst_ocq_equivalence_has_two_independent_derivations() -> None:
+    """lead 2026-09-10 裁决：LZ 1991 Thm 3.5(i) 从 --via-fgz 的 sources 拆成独立推导。
+
+    两条推导都是 rigorous 的 proof，故目标陈述仍是 rigorous；
+    拆分后 --via-fgz 的 sources 里不应再出现 lian-zuckerman-1991。
+    """
+    g = load_graph(ROOT)
+    derivs = {
+        d.id: d for d in g.derivations_for("worldsheet.brst-cohomology-equals-ocq-physical")
+    }
+    assert "worldsheet.brst-cohomology-equals-ocq-physical--via-fgz" in derivs
+    assert "worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman" in derivs
+    fgz = derivs["worldsheet.brst-cohomology-equals-ocq-physical--via-fgz"]
+    lz = derivs["worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman"]
+    assert {s.ref for s in fgz.sources}.isdisjoint({"lian-zuckerman-1991"})
+    assert "lian-zuckerman-1991" in {s.ref for s in lz.sources}
+    effs = compute_all(g)
+    assert effs["worldsheet.brst-cohomology-equals-ocq-physical"].name == "rigorous"
+
+
+def test_milestone_no_ghost_points_at_v4() -> None:
+    """里程碑 ms.no-ghost-theorem 跟随陈述换代指向 v4（第四轮回译前 audit.status 为 draft）。"""
     g = load_graph(ROOT)
     ms = g.milestones["ms.no-ghost-theorem"]
-    assert ms.statement_id == "worldsheet.no-ghost-theorem-v3"
+    assert ms.statement_id == "worldsheet.no-ghost-theorem-v4"
     assert ms.statement_id in g.statements
 
 

@@ -149,6 +149,7 @@ gaps:
   - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点（worldsheet.verma-module 只到 Verma 模 M(c,h)，且其 PBW 基与 dim V_N = p(N) 尚未形式化）。建议新建 worldsheet.irreducible-highest-weight-module；在此之前本推导借 verma-module 承载这条依赖。"
   - "本推导只承接 Theorem 3.5 的 (i)(ii)。LZ §2 的一般理论（Theorem 2.13 约化公式、Theorem 2.25、Corollary 2.26 消灭定理、Corollary 2.28）本身可以各建节点，本项目暂不拆；目前它们只以 sources 的 loc 形式登记。"
   - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。三条都不影响 Theorem 3.5 本身的逐字条件，但影响本推导 summary 第 (1) 步的转述。"
+  - "【2026-09-10 追加】本推导 gaps 与 summary 中对 worldsheet.no-ghost-theorem-v3 的引用，一律可读作对其后继 **worldsheet.no-ghost-theorem-v4** 的引用：v3→v4 只改两处表述（动量限定提到全局前言；第 (2) 条显式写 p ≠ 0）与 DDF 参考方向的参数化（射线 → 去心直线），见 ms.no-ghost-theorem 第三轮审计 B1/A1。唯一需要重读的一点：v4 的第 (2) 条现在也带对 p 的存在量词，故它与本节点断言 (ii) 反方向给出的「存在某个 p 不正定」在量词结构上一致（差别只剩 LZ 还要求 (P1)–(P3)）；本节点陈述里说 v3 的 (2)「不带存在某个 p 的限定」对 v3 仍正确，对 v4 不再适用。"
   - "从文献到形式化的差距：需要把 (3) 的最后一步（Verma 模 M(c,h) 半正定的 (c,h) 区域）写成可形式化的命题，它等价于 Kac 行列式在该区域非负——本项目 worldsheet.kac-determinant 尚未形式化，worldsheet.verma-module 也缺 PBW（Mathlib v4.33.1 无 PBW）。故本节点短期内不可形式化。"
 author: curator
 created: "2026-09-10"

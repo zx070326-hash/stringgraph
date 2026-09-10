@@ -1,12 +1,16 @@
 id: ms.no-ghost-theorem
-statement_id: worldsheet.no-ghost-theorem-v3
+statement_id: worldsheet.no-ghost-theorem-v4
 canonical_text: |
   对 D 维自由玻色开弦，在旧协变量子化中定义物理态为满足 (L_0 - a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n>0) 的态
   （截距记号 a 按 conv.intercept-sign-a，即 Polchinski 的 A = -a）；零模态指与所有物理态正交的物理态。
   一切断言在**固定动量**下进行：F(p) 是建在动量本征态 |0; p⟩ 上的 Fock 空间，H_phys(p) = H_phys ∩ F(p)；
   质量壳 α' m^2 = N - a（m^2 = -p^2）把 H_phys(p) 中态的振子能级定为 N = a - α' p^2。
-  (1) 当 D = 26 且 a = 1 时，固定一条类光参考方向（射线 {λ k_0 : λ > 0}，k_0^2 = 0；k_0 的标度按 DDF
-      归一化 2α' k_0·p = 1 逐塔取定，条件 k_0·p ≠ 0 只依赖方向、不依赖标度）：
+  【全局动量限定，对下述 (1) 与 (2) **同时**生效】本里程碑的一切断言都只在非退化动量扇区上作出：
+  零动量 p = 0 一律不在范围内；在已固定类光参考方向 k_0 的语境（即 (1)）中进一步排除 k_0·p = 0 的动量。
+  理由是 DDF 构造在这些动量上退化。这条限定不是只管 (1) 的旁注——(2) 的断言同样只在 p ≠ 0 上作出，
+  并在 (2) 内部显式写出（若省去该量词，(2) 对 D = 26 亦真、丧失区分力，见第三轮审计 B1）。
+  (1) 当 D = 26 且 a = 1 时，固定一条类光参考方向（去心直线 {λ k_0 : λ ∈ R \ {0}}，k_0^2 = 0；k_0 的标度
+      按 DDF 归一化 2α' k_0·p = 1 逐塔取定，λ 的符号随 sign(k_0·p)；条件 k_0·p ≠ 0 只依赖方向、不依赖标度）：
       (a) 对扇区 {p : k_0·p ≠ 0} 内每个动量 p 与每个 |ψ⟩ ∈ H_phys(p)，⟨ψ|ψ⟩ ≥ 0（半正定）；
       (b) 对每个在快子壳上（α' k^2 = a = 1）且 k_0·k ≠ 0 的动量 k，把物理态限制到动量塔
           {k - N k_0 : N ≥ 0} 上得到 H_phys(k; k_0) = ⊕_{N ≥ 0} H_phys(k - N k_0)，模掉其零模态子空间
@@ -14,16 +18,18 @@ canonical_text: |
           （由 24 个横向 DDF 算子 A^i_{-n}，i = 2..25，n ≥ 1，作用在 |0; k⟩ 上生成）之间的**等距同构**
           （保内积的线性双射）。该同构保持**能级 N** 分级（不是 L_0 分级：在 H_phys 上 L_0 ≡ a = 1 是常数，
           L_0 分级平凡）。
-      k_0·k = 0 的动量扇区（特别是 k = 0）不在本里程碑范围内：DDF 构造在那里退化。
-  (2) 当 D > 26 时，**至少在 a = 1 的情形**存在负模物理态。
-      （依第二轮审计建议 C2 显式写出对 a 的量化：本里程碑只断言 a = 1。文献中更强的形式"对任意 a 均存在
+  (2) 当 D > 26 时，**至少在 a = 1 的情形**存在非零动量上的负模物理态：存在动量 p ≠ 0 与
+      |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0。
+      （量词 p ≠ 0 不可省：p = 0 时 α^0_{-1}|0; 0⟩ 对任意 D（含 D = 26）都是物理态且模为 η^{00} = -1，
+      故省去量词会使本条对 D = 26 亦真、区分不了 D > 26——第三轮审计 B1。
+      依第二轮审计建议 C2 显式写出对 a 的量化：本里程碑只断言 a = 1。文献中更强的形式"对任意 a 均存在
       负模物理态"通常归于 Brower 1972 / Thorn，其出处与确切条件尚未核实，故不纳入 canonical_text。）
   本里程碑不对 D ≤ 25 作任何断言（无论 a 取何值），也不对 D = 26、a ≠ 1 作断言。
 canonical_source:
   ref: goddard-thorn-1972
   loc: "无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。正文未获取，见 literature/extractions/brst-cohomology-sources.md §3"
 audit:
-  status: back-translated
+  status: draft
   back_translation:
     by: physics-auditor
     text: |
@@ -73,6 +79,28 @@ audit:
       必要条件，也没有说 a = 1 是必要条件；(2) 只给出 D > 26、a = 1 的反例存在性。
     verdict: drift
     diff_notes: |
+      【v4 变更记】2026-09-10 lead 按第三轮审计改指 worldsheet.no-ghost-theorem-v4，等待第四轮回译。
+      本轮（第三轮）的 back_translation.text 与 verdict 是针对 **v3** 写的，原样保留；下方三轮审计记录全部原样保留。
+      改动清单（只此三项，statement 文本不可变故一律新建节点）：
+        (i)  statement_id: worldsheet.no-ghost-theorem-v3 → worldsheet.no-ghost-theorem-v4。
+             v4 相对 v3 只做两处表述修复：把动量限定提到**全局前言**并写明对 (1)(2) 同时生效；
+             在 (2) 内部显式写出「存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0」。
+             这正是本轮 B1 的两条建议（两条都做，互为冗余保险）。论证、来源、status 均未变。
+        (ii) v4 的记号跟随新建的 worldsheet.ddf-operators-v4：类光参考方向由**射线** {λ k_0 : λ > 0}
+             改为**去心直线** {λ k_0 : λ ∈ R \ {0}}，λ 的符号随 sign(k_0·p)。这是本轮 A1 附带项 / D2。
+             worldsheet.ddf-operators-v3 相应加 superseded_by。
+        (iii) canonical_text 同步改：加全局动量限定段（原先写在 (1) 内部的排除句移到此处并写明对 (2) 生效）；
+             (1) 引言改去心直线并注明标度符号；(2) 写出 p ≠ 0 量词并注明为何不可省。
+             其余文字（(1a)(1b)、对 a 的量化说明、D ≤ 25 免责句）逐字未动。
+      **本轮裁定 drift 未被推翻**：v4 不是对 v3 的纠错（v3 的 (2) 在"排除句全局生效"的读法下与 v4 同义），
+      而是把读法钉死，使形式化者不必二选一（本轮 D1 的要求）。audit.status 已退回 draft，等待第四轮回译。
+      新增/改动的图节点：worldsheet.no-ghost-theorem-v4（新）、worldsheet.ddf-operators-v4（新）、
+      worldsheet.no-ghost-theorem-v4--via-goddard-thorn（新，复制自 v3 推导，只换 target 与 DDF 依赖）、
+      worldsheet.no-ghost-theorem-v3 与 worldsheet.ddf-operators-v3（加 superseded_by + 原因）、
+      worldsheet.critical-dimension-old-covariant--via-no-ghost（depends_on 就地换代到 v4）。
+      v3 的推导 worldsheet.no-ghost-theorem-v3--via-goddard-thorn 保留不动，故图中有一条
+      "指向已被取代节点"的 warning，是预期的。
+
       ================================================================
       第三轮（2026-09-10，针对 worldsheet.no-ghost-theorem-v3 与按 v3 改写后的 canonical_text）
       ================================================================

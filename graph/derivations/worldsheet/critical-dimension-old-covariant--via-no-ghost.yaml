@@ -3,7 +3,7 @@ target: worldsheet.critical-dimension-old-covariant
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.no-ghost-theorem-v3
+  - id: worldsheet.no-ghost-theorem-v4
 sources:
   - ref: goddard-thorn-1972
     loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
@@ -21,18 +21,20 @@ sources:
     loc: "§2.3.2–2.3.3"
     note: GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
 summary: |
-  无鬼定理（worldsheet.no-ghost-theorem-v3）第 (1a) 条在 D = 26、a = 1 时断言 H_phys 上内积半正定，
+  无鬼定理（worldsheet.no-ghost-theorem-v4）第 (1a) 条在 D = 26、a = 1 时断言 H_phys 上内积半正定，
   且 H_phys 模零模态与 24 个横向振子的 Fock 空间等距同构，这正是本陈述的 (a)(b)(c)
   （(b) 的"诱导内积正定"即等距同构的直接推论）。第 (2) 条 D > 26 的负模构造给出反向部分。
   本推导只是把无鬼定理的等号情形改写为"临界维数判据"的形式，不含新的物理输入。
-  注意 v2 把断言限制在动量满足 k·k_0 ≠ 0 的扇区（DDF 构造所需），本陈述未写该限制。
+  注意依赖节点把断言限制在动量满足 k_0·p ≠ 0 的扇区（DDF 构造所需），且 v4 把该限制提到全局前言、
+  并在第 (2) 条显式写出 p ≠ 0；本陈述未写这些限制。
 gaps:
   - "D < 26 的表述需按 worldsheet.no-ghost-theorem-v2 的措辞规范化（ms.no-ghost-theorem 审计 B2/B3）：本陈述末句写\"H_0 的维数不足以把 H_phys 约化到横向 Fock 空间\"、结论句写\"零模态完全退耦，物理谱在洛伦兹协变的意义下幺正\"，其中\"退耦\"无可操作定义，\"维数不足\"不精确。规范写法是\"H_phys/H_0 与 24 个横向振子的 Fock 空间之间不存在等距同构\"。按审计 N ≤ 3 的数值检查，D ≤ 25、a = 1 时未见负模（a < 1 分支不在本陈述与依赖节点内，其来源见本推导 a < 1 那条 gap 与 worldsheet.no-ghost-theorem-subcritical），故该句在 a = 1 时并不假，问题只在措辞；陈述不可变，此处登记，不新建后继节点。"
-  - "本陈述末句关于 D < 26 的断言不由依赖节点支撑：worldsheet.no-ghost-theorem-v3（同 v2）按审计 B1 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)，删去了旧节点那条为假的 \"D ≤ 26 且 a ≤ 1 ⇒ 半正定\"。D ≤ 25 的正确区域现有来源（lian-zuckerman-1991 Theorem 3.5(ii)，已建节点 worldsheet.no-ghost-theorem-subcritical），但**本推导的 depends_on 未改**：新节点走的是补充模 + BRST 相对上同调路线，与本推导的 OCQ/DDF 路线不同，且带 D ≥ 2 与三条动量假设；要让本陈述末句真正被支撑，应新建一条 --via-lian-zuckerman 的独立推导，而不是把新节点塞进本推导。"
+  - "本陈述末句关于 D < 26 的断言不由依赖节点支撑：worldsheet.no-ghost-theorem-v4（同 v3/v2）按审计 B1 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)，删去了旧节点那条为假的 \"D ≤ 26 且 a ≤ 1 ⇒ 半正定\"。D ≤ 25 的正确区域现有来源（lian-zuckerman-1991 Theorem 3.5(ii)，已建节点 worldsheet.no-ghost-theorem-subcritical），但**本推导的 depends_on 未改**：新节点走的是补充模 + BRST 相对上同调路线，与本推导的 OCQ/DDF 路线不同，且带 D ≥ 2 与三条动量假设；要让本陈述末句真正被支撑，应新建一条 --via-lian-zuckerman 的独立推导，而不是把新节点塞进本推导。"
   - "D < 26 的来源归属已核实（brst-cohomology-sources.md §3.2/§4.1）：goddard-thorn-1972 与 brower-1972（按可得的摘要证据）**都只覆盖 a = 1**——GT 摘要完全不提 intercept（Veneziano 模型以 α_0 = 1 为前提），Brower 摘要把结果限定在 unit Regge intercept。D < 26 的无鬼性并非它们的独立结果，而是由**嵌入 D = 26 的情形**得到：Goddard 2008 综述（goddard-2008）逐字「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.」故此前记的\"D ≤ 25 的无鬼性通常归于 Brower 1972 / Thorn，尚未建节点\"这一归属不成立。若要为 D < 26 单建节点，其推导应写成「嵌入 D = 26」，来源引 goddard-2008，且只覆盖 a = 1。"
-  - "a < 1 ⇒ D ≤ 25 这一支**2026-09-10 已找到成文来源**（primary-sources-round2.md §1.6、§4）：lian-zuckerman-1991 Theorem 3.5(ii)，Commun. Math. Phys. 135 (1991) 570，L1 逐字给出「D = 26, h = 1 or 26 > D ≥ 2, h ≤ 1」（h 即本项目截距 a）。已建节点 **worldsheet.no-ghost-theorem-subcritical**。三条限定必须一并引用，否则是过度断言：(1) LZ 的证明经过一个中心荷 c = 26 − D 的补充不可约 Vir 模 L(26−D, 1−h)（总中心荷凑成 26 后做 BRST 相对上同调），与本推导所依赖的 worldsheet.no-ghost-theorem-v3 的纯 D 玻色子 DDF 论证是**两条独立路线**；被断言的空间仍是纯 D 玻色子的 H_phys/H_0（补充模只在上同调一侧），D = 26、a = 1 时补充模退化为 L(0,0) 而两路线重合。(2) LZ 另加下界 D ≥ 2 与对动量 p 的三条假设（⟨p,1⟩ = 1；⟨p,x⟩ ≠ 0 对某 x ∉ C1；⟨p,α^μ_0⟩ ∈ R），本陈述与 v3 都没有这些。(3) LZ 的断言是「对每个 p 正定」的全称等价。此前的候选清单（GSW §2.3.3 / Polchinski §4.1 / thorn-1987）作废：thorn-1987 摘要**不含**该条件（primary-sources-round2.md §4）；物理侧的历史候选改为 thorn-1984（Nucl. Phys. B248, 551，Kac 行列式路线，仅摘要级 L2，正文未获取）。**本推导本身不引用新节点**：它只把 v3 的等号情形改写为临界维数判据，不跨路线论证。"
+  - "a < 1 ⇒ D ≤ 25 这一支**2026-09-10 已找到成文来源**（primary-sources-round2.md §1.6、§4）：lian-zuckerman-1991 Theorem 3.5(ii)，Commun. Math. Phys. 135 (1991) 570，L1 逐字给出「D = 26, h = 1 or 26 > D ≥ 2, h ≤ 1」（h 即本项目截距 a）。已建节点 **worldsheet.no-ghost-theorem-subcritical**。三条限定必须一并引用，否则是过度断言：(1) LZ 的证明经过一个中心荷 c = 26 − D 的补充不可约 Vir 模 L(26−D, 1−h)（总中心荷凑成 26 后做 BRST 相对上同调），与本推导所依赖的 worldsheet.no-ghost-theorem-v4 的纯 D 玻色子 DDF 论证是**两条独立路线**；被断言的空间仍是纯 D 玻色子的 H_phys/H_0（补充模只在上同调一侧），D = 26、a = 1 时补充模退化为 L(0,0) 而两路线重合。(2) LZ 另加下界 D ≥ 2 与对动量 p 的三条假设（⟨p,1⟩ = 1；⟨p,x⟩ ≠ 0 对某 x ∉ C1；⟨p,α^μ_0⟩ ∈ R），本陈述与 v4 都没有这些。(3) LZ 的断言是「对每个 p 正定」的全称等价。此前的候选清单（GSW §2.3.3 / Polchinski §4.1 / thorn-1987）作废：thorn-1987 摘要**不含**该条件（primary-sources-round2.md §4）；物理侧的历史候选改为 thorn-1984（Nucl. Phys. B248, 551，Kac 行列式路线，仅摘要级 L2，正文未获取）。**本推导本身不引用新节点**：它只把 v4 的等号情形改写为临界维数判据，不跨路线论证。"
   - "本陈述是 worldsheet.critical-dimension-bosonic 路线 (ii)（OCQ）的独立表述，与路线 (iii)（BRST 幂零）之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）。本推导不依赖它——它只把无鬼定理的等号情形改写为临界维数判据，不跨路线论证。"
-  - "本陈述倒数第二句 \"D > 26 时 (a) 失效\" 未写 a 的取值；依赖节点 worldsheet.no-ghost-theorem-v3 的第 (2) 条只覆盖 a = 1。本推导按 a = 1 理解该句。"
+  - "本陈述倒数第二句 \"D > 26 时 (a) 失效\" 未写 a 的取值；依赖节点 worldsheet.no-ghost-theorem-v4 的第 (2) 条只覆盖 a = 1（且限于 p ≠ 0）。本推导按 a = 1 理解该句。"
   - "lead 2026-09-10 就地换代：depends_on 由 no-ghost-theorem-v2 改为 v3。论证不变（只把无鬼定理的等号情形改写为临界维数判据），推导节点可变，不新建 --via-no-ghost-v3。"
+  - "lead 2026-09-10：v3→v4 就地换代，论证不变。v4 相对 v3 只改两处表述（动量限定提到全局前言；第 (2) 条显式写 p ≠ 0）与 DDF 参数化（射线 → 去心直线），见 ms.no-ghost-theorem 第三轮审计 B1/A1。本推导的其余 gaps 与 sources 未变；上一条 gap 提到的\"D > 26 时 (a) 失效未写 a\"仍按 a = 1 理解。"
 author: curator-critdim
 created: "2026-09-10"

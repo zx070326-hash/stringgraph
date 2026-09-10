@@ -1,0 +1,140 @@
+id: worldsheet.brst-cohomology-equals-ocq-physical--via-lian-zuckerman
+target: worldsheet.brst-cohomology-equals-ocq-physical
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.brst-quantization
+    inferred: true
+    note: |
+      LZ 的相对复形 C*_∞(𝒢, 𝒜; V)（Definition 1.10、1.12(i)，𝒜 = 𝒢₀ = CL₀ + Cz，p.556）
+      与本项目 worldsheet.brst-quantization 里 b₀|Ψ⟩ = 0、L₀|Ψ⟩ = 0 的相对 BRST 复形的对应，
+      **LZ 正文没有写成编号命题**：primary-sources-round2.md §1.4 明确标注「由 Definition 1.6 的
+      ⟨β̄,x⟩ 项与 Proposition 3.3(iii) 的 β̄ 得 η(z) = −26，故 θ(z)ω = 0 等价于 π(z) = 26……
+      上面这段推导是我的解读，curator 若采用须标 inferred: true」。照办。
+      （worldsheet.brst-cohomology-equals-ocq-physical--via-fgz 对同一条边未标 inferred，
+      因为 FGZ 在物理语言与上同调语言之间给了更多桥接措辞；两条推导对这条边的标注不同是
+      有意为之，反映各自来源的可追溯性，不是不一致。）
+  - id: worldsheet.old-covariant-physical-states
+    inferred: true
+    note: |
+      「LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目 H_phys(p)/H_0(p)」是抽取者的对照解读：
+      **LZ 全文没有出现 "old covariant" 字样**（primary-sources-round2.md §1.6 读法说明 3）。
+      对照依据是定义逐条相同（L_n v = 0 ∀ n > 0；L₀ v = h v；模去与全体正交的向量），
+      加上 conv.intercept-sign-a 下 h = a；本节点用 D = 26、h = 1。
+      同一条边在 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 上也标 inferred，
+      理由相同。
+  - id: worldsheet.virasoro-algebra
+    note: |
+      非 inferred：LZ 的 𝒢 就是 Virasoro 代数（含中心元 z），物质 Fock 模上的表示由
+      Proposition 3.1(i) 逐字给出 π(L_m) = (1/2) Σ_n :α_{m−n}·α_n:、π(z) = D·Id，
+      归一化与 conv.virasoro-standard 一致。
+sources:
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 3.5(i), p.570（逐字：'There is a canonical isometry V(D,p)^{G₊}[−h]/rad ≅ H⁰_∞(G, G₀; V(D,p) ⊗ L(26−D, 1−h))'）"
+    note: |
+      本推导的主来源。L1（全文 34 页逐页读毕，Theorem 3.5 所在页单页重读复核，
+      literature/extractions/primary-sources-round2.md §1.5、§1.6）。
+      本节点只用 **D = 26、h = 1** 的特例：此时补充模是 L(26−26, 1−1) = L(0, 0)，
+      即平凡一维模，(i) 退化为 V(26,p)^{𝒢₊}[−1]/rad ≅ H⁰_∞(𝒢, 𝒢₀; V(26,p))，
+      与 fgz-1986 Theorem 2.8 的第一个同构是同一条陈述。
+      LZ 写的是 **isometry（等距）**，与 FGZ 的 "unitary isomorphism" 同义，
+      直接给出目标陈述要求的"保厄米形式"。
+      **不要照抄 LZ 紧随 Theorem 3.5(ii) 的括注「The number h is called the "Regge slope"
+      in the physics literature」**——那是术语错误，h 是截距不是斜率（judgment 见
+      worldsheet.no-ghost-theorem-subcritical 的 notes 第 1 条）。
+  - ref: lian-zuckerman-1991
+    loc: "Theorem 2.13（约化公式 H*_∞(𝒢,𝒢₀; W ⊗ M(−β̄−λ)) ≅ H*(𝒢₊, W)[λ]）, p.562；Proposition 2.12（有限滤过）；Lemma 2.21（cf. [FGZ, Theorem 1.12]）；Lemma 2.23（Poincaré 对偶）；Theorem 2.25, p.566；Corollary 2.26（Vanishing Theorem）, p.567"
+    note: |
+      本推导论证链的一般理论输入，编号均已核实（L1）。Theorem 2.25 是把 Theorem 2.13 里的
+      Verma 模 M(·) 换成不可约商 L(·) 之后的版本，结论逐字含「等距」与「H^n_∞ = 0 (n ≠ 0)」。
+      **三条转录疑点必须随引用一起传递**（primary-sources-round2.md §1.5、§10.6）：
+      (a) Theorem 2.25 的假设行在扫描件里渲染为「W ∈ 𝒪 be hermitian, 𝒢-free」，按上下文
+          （Lemma 2.21/2.22 与 Proposition 3.1(v)）应为 **𝒢₋-free**；
+      (b) Corollary 2.26 第二行渲染为「= 0 for n = 0」，按上下文应为 **n ≠ 0**；
+      (c) Corollary 2.28 的公式指数与 [·]_{q⁰} 括号归属在扫描下不清晰（本推导不引用该公式本体）。
+      编号陷阱：LZ 自己的 Introduction (p.549) 把 Vanishing Theorem 误写成 "Corollary 2.19"
+      （p.564 处实为 Remark 2.19），**不要引用 "LZ 1991 Corollary 2.19"**。
+  - ref: lian-zuckerman-1991
+    loc: "Proposition 3.1, p.569（(i) π(L_m)、π(z) = D·Id；(ii) hermitian、⟨v_p,v_p⟩ = 1、α^{μ†}_n = α^μ_{−n}；(iv) dim V(D,p)[λ] < ∞；(v) V(D,p) 是 𝒢₋-free）；(3.1)–(3.3) 的 Fock 模定义与对 p 的四条假设；Proposition 3.3(iii), p.570（'(∧_∞𝒢, η) is a 𝒢-module if β̄ = −26z′ − L′₀'）；Remark 3.2(ii)（M(c,h)/L(c,h) 记号）"
+    note: |
+      L1。Proposition 3.1 验证 Theorem 2.25 的全部假设，LZ 自己把这些性质归给 "[GSW, FGZ]"，
+      不作为本文新结果。Proposition 3.3(iii) 的 **"if"（不是 "iff"）** 经单页重读复核，是 26
+      在本文出现的唯一位置且属鬼系统一侧——故本推导与 --via-fgz 一样，把 c = 26 当作构造相对
+      复形的**假设**，不推导它；本推导因此**不**依赖 worldsheet.critical-dimension-brst。
+      对 p 的四条假设（⟨p,1⟩ = 1；⟨p,x⟩ ≠ 0 对某 x ∉ C1；⟨p,α^μ_0⟩ ∈ R；D ≥ 2）在本节点的
+      D = 26 特例下与目标陈述的 k ≠ 0 的关系见 gaps。
+  - ref: fgz-1986
+    loc: "Theorem 2.8 第一个同构（P/rad P ≅ H^0_∞(ℒ, ℒ_0, V(R^{25,1}, p))，p ≠ 0）；Theorem 1.12（消灭定理）"
+    note: |
+      **不是本推导的论证来源，只作同源关系登记**：LZ 的 Lemma 2.21 自注「(cf. [FGZ, Theorem 1.12])」，
+      即两条路线的消灭定理同源；但 LZ 的整体论证走的是他自己的约化公式（Theorem 2.13）路线，
+      不是 FGZ 证明梗概的展开。FGZ 那条独立推导见
+      worldsheet.brst-cohomology-equals-ocq-physical--via-fgz。
+summary: |
+  这是目标陈述的**第二条独立推导**，与 worldsheet.brst-cohomology-equals-ocq-physical--via-fgz
+  论证同源但不是同一份证明：FGZ 1986 是 PNAS 公告体裁（5 页，只给证明梗概），
+  LZ 1991 是 Commun. Math. Phys. 长文（34 页，逐条编号的完整证明），且 LZ 走的是**他自己的
+  约化公式路线**（Theorem 2.13），只在消灭定理一步与 FGZ 同源（Lemma 2.21 自注 cf. FGZ Thm 1.12）。
+
+  论证链（全部在 Virasoro 代数 𝒢 相对于 𝒢₀ = CL₀ + Cz 的半无限上同调框架内，范畴 𝒪 与
+  全局假设 A1–A5 下；编号均已核实）：
+
+  (1) Proposition 2.12 给出相对复形的有限滤过；**Theorem 2.13（约化公式）**把带 Verma 模系数的
+      相对半无限上同调算成 Lie 代数上同调：
+        H*_∞(𝒢, 𝒢₀; W ⊗ M(−β̄ − λ)) ≅ H*(𝒢₊, W)[λ]。
+      这是 LZ 路线与 FGZ 路线的分岔点：FGZ 直接对物质模用消灭定理，LZ 先把系数里的
+      Verma 模剥掉。
+  (2) Lemma 2.21（cf. [FGZ, Theorem 1.12]）：W 是 hermitian 且 𝒢₋-free 时 H^n_∞ 集中在 n = 0；
+      Lemma 2.23 的 Poincaré 对偶把上同调与同调两侧接起来。
+  (3) **Theorem 2.25**：把 (1) 中的 Verma 模 M(·) 换成不可约商 L(·)，得到
+        H^0_∞(𝒢, 𝒢₀; W ⊗ L(−β̄ − λ)) ≅ W^{𝒢₊}[λ] / rad，
+      并且该典范同构是**等距**（保厄米形式）。Corollary 2.26 是相应的消灭定理。
+  (4) 自由玻色子实例（§3）：取 W = V(D,p)。Proposition 3.1 逐条验证 Theorem 2.25 的假设
+      （∈ 𝒪₀、hermitian、逐权有限维、𝒢₋-free），并给出 π(z) = D·Id；
+      Proposition 3.3(iii) 给出鬼一侧 β̄ = −26z′ − L′₀，故补充模的中心荷必须是 26 − D、
+      最高权 1 − h。代入 (3) 即得 **Theorem 3.5(i)**：
+        V(D,p)^{𝒢₊}[−h] / rad  ≅  H⁰_∞(𝒢, 𝒢₀; V(D,p) ⊗ L(26 − D, 1 − h))，等距。
+  (5) 特例化到本节点：取 **D = 26、h = 1**。补充模 L(26 − 26, 1 − 1) = L(0, 0) 是平凡一维模，
+      张量掉之后 (4) 读作
+        V(26,p)^{𝒢₊}[−1] / rad  ≅  H⁰_∞(𝒢, 𝒢₀; V(26,p))，等距。
+      按 depends_on 上两条 inferred 边给出的字典（LZ 的 V(D,p)^{𝒢₊}[−h]/rad = 本项目
+      H_phys(k)/H_0(k)；LZ 的相对复形 = 本项目 b₀ = L₀ = 0 的 BRST 相对复形），
+      这正是目标陈述的断言 H_phys(k)/H_0(k) ≅ H^{gh=1}_rel(k)，且"等距"给出目标陈述要求的
+      "保厄米形式的线性双射（酉同构）"。
+
+  【为什么标 rigorous】按 docs/STATUS_LEVELS.md 第 4 级：发表在 Commun. Math. Phys. 135 (1991)
+  547–580 的数学论文中的编号定理，有期刊长文级别的完整证明（受限模、分级、滤过、消解、
+  Poincaré 对偶），不含路径积分或形式重排；编号与逐字措辞已由 researcher 全文 34 页逐页核实、
+  关键页单页重读复核。
+  本推导**不**依赖 worldsheet.critical-dimension-brst：LZ 与 FGZ 一样把总中心荷 26 当作相对
+  复形的定义条件（Proposition 3.3(iii) 的 "if"），不推导它；故本推导的 rigorous 不受
+  critical-dimension-brst--via-nilpotency 为 physical-argument 的影响。
+gaps:
+  - "【本推导最软的一步】LZ Theorem 3.5(i) 只说存在**典范**等距，**没有逐字写出该等距由「把物理态嵌入相对复形的最低鬼场态」这一包含映射诱导**。目标陈述断言的是具体的映射 ι : |ψ⟩ ↦ [|ψ⟩ ⊗ |↓⟩]（这一点 fgz-1986 Theorem 2.8 逐字给出：'The inclusion of P into (V ⊗ Λ^0_∞)^{ℒ_0} … induces a unitary isomorphism'）。LZ 一侧要确认同一件事，需要读 Theorem 2.25 的证明看典范映射的构造（primary-sources-round2.md 未逐字登记该构造）。故本推导对目标陈述「ι 良定义、核恰为 H_0」这一具体形式的支持弱于 --via-fgz，只对「存在保形式的双射」这一层是逐字的。待 researcher 复核 LZ p.566–567。"
+  - "两条 inferred 边（worldsheet.brst-quantization、worldsheet.old-covariant-physical-states）是本推导可追溯性上的软处：LZ 的定理本体逐字可靠，把它翻译到本项目对象上的字典不逐字可靠（LZ 全文无 'old covariant' 字样；相对复形 ↔ b₀ = L₀ = 0 的对应未写成编号命题）。同一组字典在 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 里也标 inferred。"
+  - "次数归一化：LZ 用 H⁰_∞（半无限上同调次数 0），目标陈述用鬼数归一化 gh(|↓⟩) = 1，两者相差常数平移 1。该平移由本项目 worldsheet.brst-quantization 的 gh(c_n) = +1 约定推出，LZ 未给出鬼数与半无限次数的字典（与 --via-fgz 的同名 gap 相同）。"
+  - "动量条件：LZ 的假设是 (P1) ⟨p,1⟩ = 1、(P2) ⟨p,x⟩ ≠ 0 对某 x ∉ C1、(P3) ⟨p,α^μ_0⟩ ∈ R、(P4) D ≥ 2；目标陈述写的是 k ≠ 0（沿用 FGZ 的 p ≠ 0）。(P2) 与 k ≠ 0 是否等价**未做对照**，(P1) 的归一化在本项目记号下对应什么也未登记。本节点的 D = 26 使 (P4) 自动满足。"
+  - "度规号差：LZ (3.1) 的 g^{μν} 号差在 primary-sources-round2.md 中没有逐字登记。本推导按 conv.metric-mostly-plus 读作洛伦兹 (1, 25)，依据是 D = 26 分支与 FGZ 的 V(R^{25,1}, p) 吻合，以及 (P3) 的实性假设；这是推断而非原文措辞（与 subcritical 推导的同名 gap 相同）。"
+  - "扫描件转录疑点三条（Theorem 2.25 的 '𝒢-free' vs '𝒢₋-free'；Corollary 2.26 第二行 'n = 0' vs 'n ≠ 0'；Corollary 2.28 的公式指数与括号归属）尚待持可选中文本 PDF 者复核（primary-sources-round2.md §10.6）。前两条直接落在本推导 summary 的第 (2)(3) 步转述上；三条都不影响 Theorem 3.5(i) 本身的逐字条件。"
+  - "LZ 的不可约最高权模 L(c,h) 在本图中尚无独立节点。本推导只用 L(0,0)（平凡一维模），故未挂 worldsheet.verma-module 依赖；若日后建 worldsheet.irreducible-highest-weight-module，应把「L(0,0) 是平凡一维模」这一步显式化（它是 (5) 的关键，Kac 表中 c = 0、h = 0 的不可约模确实是一维平凡模，但本推导没有为这一步给出 loc）。"
+  - "本推导与 --via-fgz 的独立性是**部分**的：LZ Lemma 2.21 自注 cf. [FGZ, Theorem 1.12]，消灭定理一步同源；独立的是约化公式（Theorem 2.13）与 Theorem 2.25 这条主干，以及证明的完整程度。图上并列两条推导反映的是「两份可独立核对的文本」，不是「两条完全无关的数学路线」。"
+notes: |
+  【拆分记录，2026-09-10】本推导是从
+  worldsheet.brst-cohomology-equals-ocq-physical--via-fgz 里拆出来的：此前 lian-zuckerman-1991
+  Theorem 3.5(i) 被登记为 --via-fgz 的**第二条 source**，该推导的 summary 自己写明
+  「登记为本推导的第二条 source 而非新建 --via-lian-zuckerman 推导，是一个可议的取舍……
+  更干净的做法是新建 …… 让两条独立论证并列。此处从简，留待 reviewer/lead 裁决」。
+  lead 2026-09-10 裁决：**拆**。按「一条推导一个论证」的纪律，LZ 条目已从 --via-fgz 的
+  sources 移出（那里留一句交叉引用），改由本节点承载。
+  --via-fgz 的 status、depends_on、summary 主体与其余 sources 未变。
+
+  两条推导的分工：
+  - --via-fgz：FGZ 1986 Theorem 2.8 第一个同构，逐字给出「包含映射诱导酉同构」这一**具体形式**，
+    但只有证明梗概（PNAS 5 页）。
+  - 本推导：LZ 1991 Theorem 3.5(i)，完整的期刊长文证明与「等距」措辞，但没有逐字说明典范同构
+    由包含映射诱导（见 gaps 第一条）。
+  两条互补：谁都不能单独覆盖目标陈述的全部措辞，合起来才把「具体形式」与「完整证明」都盖住。
+  这一点值得 reviewer 复核：若认为 --via-fgz 的可追溯性不足以单独支撑 rigorous，
+  本推导也不能替它补上"包含映射"那一层。
+author: curator
+created: "2026-09-10"
