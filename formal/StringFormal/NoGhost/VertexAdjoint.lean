@@ -227,6 +227,64 @@ theorem towerPairing_towerVertex_right (η b : Fin D → R) (hη : ∀ μ, η μ
       = towerPairing η (towerVertex η b (-n) (-K) v) w := by
   rw [towerPairing_towerVertex_left η b hη (-n) (-K), neg_neg, neg_neg]
 
+/-! ### The adjoint of the DDF operators -/
+
+omit [Algebra ℚ R] in
+/-- `(α^ε_p)^† = α^ε_{-p}` for the polarised mode. -/
+theorem towerPairing_towerModeVec_left (η a b ε : Fin D → R) (p : ℤ) (v w : TowerFock D R) :
+    towerPairing η (towerModeVec η a b ε p v) w
+      = towerPairing η v (towerModeVec η a b ε (-p) w) := by
+  simp only [towerModeVec, LinearMap.sum_apply, map_sum, LinearMap.smul_apply, map_smul,
+    smul_eq_mul]
+  exact Finset.sum_congr rfl fun μ _ => by rw [towerPairing_towerMode_left η a b μ p]
+
+/-- `(α^ε_j V^{(n)}_j)^† = α^ε_{-j} V^{(-n)}_{-j}`: the adjoint of a single DDF summand.
+Transversality `ε·k_0 = 0` is used to put the adjoint back into the order "mode times vertex
+operator" in which the DDF sum is written. -/
+theorem towerPairing_ddfSummand_left (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (n j : ℤ) (v w : TowerFock D R) :
+    towerPairing η (ddfSummand η a b ε n j v) w
+      = towerPairing η v (ddfSummand η a b ε (-n) (-j) w) := by
+  simp only [ddfSummand, Module.End.mul_apply]
+  rw [towerPairing_towerModeVec_left, towerPairing_towerVertex_left η b hη]
+  congr 1
+  have hcomm := LinearMap.congr_fun
+    (towerModeVec_mul_towerVertex_of_transverse η a b ε hη hεb (-n) (-j) (-j)) w
+  simpa only [Module.End.mul_apply] using hcomm.symm
+
+/-- **`(A^ε_n)^† = A^ε_{-n}`**: the transverse DDF operators are adjoint in pairs for the
+tower form.  Graph node `worldsheet.ddf-operators-adjoint`.
+
+Hypotheses: only `hη` (the metric squares to one, as everywhere in this development) and the
+DDF transversality `ε·k_0 = 0`, which is already an argument of `ddfOp`.  In particular
+neither `k_0² = 0` nor the normalisation `2α' k_0·p = 1` is needed — those are what make
+`A^ε_n` commute with the Virasoro generators, not what makes it have an adjoint. -/
+theorem towerPairing_ddfOp_left (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (n : ℤ) (v w : TowerFock D R) :
+    towerPairing η (ddfOp η a b ε hη hεb n v) w
+      = towerPairing η v (ddfOp η a b ε hη hεb (-n) w) := by
+  classical
+  set s : Finset ℤ := ddfWindow n v ∪ (ddfWindow (-n) w).image (fun j => -j) with hsdef
+  have hsv : ∀ j ∉ s, ddfSummand η a b ε n j v = 0 := fun j hj =>
+    ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb n v j
+      (fun hc => hj (Finset.mem_union_left _ hc))
+  have hsw : ∀ j ∉ s.image (fun i => -i), ddfSummand η a b ε (-n) j w = 0 := by
+    intro j hj
+    refine ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb (-n) w j fun hc => hj ?_
+    refine Finset.mem_image.mpr ⟨-j, ?_, neg_neg j⟩
+    exact Finset.mem_union_right _ (Finset.mem_image.mpr ⟨j, hc, rfl⟩)
+  rw [ddfOp_apply η a b ε hη hεb n v hsv, ddfOp_apply η a b ε hη hεb (-n) w hsw,
+    map_sum, LinearMap.sum_apply, map_sum, Finset.sum_image (fun x _ y _ h => by omega)]
+  exact Finset.sum_congr rfl fun j _ =>
+    towerPairing_ddfSummand_left η a b ε hη hεb n j v w
+
+/-- `⟨v, A^ε_n w⟩ = ⟨A^ε_{-n} v, w⟩`. -/
+theorem towerPairing_ddfOp_right (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (n : ℤ) (v w : TowerFock D R) :
+    towerPairing η v (ddfOp η a b ε hη hεb n w)
+      = towerPairing η (ddfOp η a b ε hη hεb (-n) v) w := by
+  rw [towerPairing_ddfOp_left η a b ε hη hεb (-n), neg_neg]
+
 end TowerVertexAdjoint
 
 end Fock
