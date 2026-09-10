@@ -14,6 +14,24 @@ sources:
   - ref: virasoro-lean-2025
     loc: "Lean 形式化定义"
 tags: [cft, algebra, lie-algebra]
+notes: |
+  形式化状态（2026-09-10，lean-formalizer）：本卡片的**定义部分**已在 Lean 中完成，
+  `StringFormal.Virasoro.VirasoroAlgebra R`（`R` 为交换 ℚ-代数）带 `LieRing` 与
+  `LieAlgebra R` 实例，括号关系见 `VirasoroAlgebra.lie_lgen_lgen`，中心性见
+  `VirasoroAlgebra.cgen_lie` / `.ofCentre_lie`，中心扩张的正合性见
+  `.toWitt_surjective` / `.ofCentre_injective` / `.toWitt_eq_zero_iff`。
+  公理检查：只依赖 propext / Classical.choice / Quot.sound。
+
+  **缺口**：statement 文本最后一句"它是 Witt 代数的**唯一**非平凡中心扩张"**没有**形式化。
+  这需要 H²(Witt, R) 一维且由 Virasoro cocycle 的类生成；Mathlib v4.33.1 有 2-cocycle
+  （`LieModule.Cohomology.twoCocycle`）但**没有** 2-coboundary 与上同调商，无法直接表述。
+  因此本节点 status 保持 `rigorous` 而非 `formalized`。
+
+  **建议**（需 lead/curator 决定）：把这张卡片拆成两条——
+  (a) 定义卡（生成元、括号、中心性），可标 `formalized`；
+  (b) 命题卡"Virasoro 是 Witt 代数的唯一一维非平凡中心扩张"（Kytölä arXiv:2510.21741
+      形式化了 H²≠0 与一维性，可作为其 `formalized` 推导的来源）。
+  在拆分前，本卡片的有效状态以 (b) 为准，即 `rigorous`。
 formal:
   lean_decl: StringFormal.Virasoro.VirasoroAlgebra
   lean_file: StringFormal/Virasoro/Basic.lean
