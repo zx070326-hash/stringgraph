@@ -123,5 +123,174 @@ canonical_source:
     但只覆盖 D = 26、不覆盖 a）；
     §3.4（Weyl 反常，p.95–96，式号约 (3.4.24)–(3.4.32)，**完全未核实**，#E53/Q6——本里程碑定位最弱的一处）。
 audit:
-  status: draft
+  status: back-translated
+  back_translation:
+    by: physics-auditor
+    text: |
+      【回译，第一轮，physics-auditor，2026-09-11。仅依据 worldsheet.critical-dimension-bosonic-v2 的
+      statement 与 uses_conventions、四个约定节点的 definition、以及五个路线/输入节点
+      （critical-dimension-light-cone / -old-covariant / -brst / -weyl-anomaly、open-string-intercept-v2）
+      的 statement 字段写成；写成时未读 canonical_text、推导节点、notes、文献原文。】
+
+      约定：时空度规 (−,+,…,+)；Virasoro 代数 [L_m, L_n] = (m−n)L_{m+n} + (c/12)m(m²−1)δ_{m+n,0}，
+      自由玻色子 c = 1；开弦质量壳 α'm² = N − a（a 的取值不是约定而是命题）；
+      物理态条件写 (L_0 − a)|ψ⟩ = 0，Polchinski 的 A = −a，本卡 a = 1 即原书 A = −1。
+      中心荷记 c^m（物质）、c^g（鬼场）。
+
+      命题是五条断言 (I)–(V) 的合取。它只说"五条各自成立"；不说 (I)–(IV) 彼此等价或互相蕴含，
+      也不把它们当作四份互不相关的证据。
+
+      (I) 光锥路线。取开弦光锥规范量子化，J^{i−}（i = 2..D−1）经 α^−_n = L^⊥_n/((2α')^{1/2}p^+)
+          代入后是横向模式的三次式；正规序常数取 ζ 正规化的横向零点能 a = (D−2)/24。
+          则 [J^{i−}, J^{j−}] = −(1/(2α'(p^+)²)) Σ_{n≥1} Δ_n (α^i_{−n}α^j_n − α^j_{−n}α^i_n)，
+          Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]（整体因子依约定，Δ_n 的形式不依）。
+          洛伦兹代数在 H_lc 上闭合（∀ n ≥ 1: Δ_n = 0）⟺ D = 26 且 a = 1。
+          这是四条中唯一同时定出 D 与 a 的，也是唯一以"当且仅当"形式给出 D 的。
+
+      (II) 旧协变路线。H_phys = {(L_0 − a)|ψ⟩ = 0, L_n|ψ⟩ = 0 (n>0)}，H_0 ⊂ H_phys 为零模态子空间；
+          一切断言限于非零动量扇区。
+          若 D = 26 且 a = 1：(a) Fock 内积在 H_phys 半正定；(b) H_phys/H_0 上诱导内积正定；
+          (c) H_phys/H_0 与 24 个横向振子的 Fock 空间等距同构。
+          且 D > 26（a = 1、非零动量）时存在负模物理态。
+          逻辑形式是"(26,1) 处幺正、D > 26 处不幺正"，不是"幺正 ⟹ D = 26"；对 D ≤ 25 不作断言
+          （那一支另有节点 no-ghost-theorem-subcritical，走别的路线，附 D ≥ 2 与三条动量假设）。
+
+      (III) BRST 路线。Q_B 由 λ = 2 的 bc 系统、a^g = −1、物质中心荷 c^m 构成，作用在受限模上
+          （每个向量被除有限多个模式外的 L^m_n, b_n, c_n 零化）。
+          Q_B² = (1/2) Σ_m ((c^m − 26)/12)(m³ − m) c_{−m}c_m，故 Q_B² = 0 ⟺ c^m = 26 ⟺ c^m + c^g = 0。
+          只定 c^m，不定 a。
+
+      (IV) Weyl 反常路线。Polyakov 路径积分对 diff × Weyl 取商，Weyl 是被用来固定规范的规范冗余；
+          量子 Weyl 反常正比于中心荷且该中心荷为常数；FP 鬼场是 λ = 2 的 bc 系统，c^g = −26。
+          反常抵消要求 c^{tot} = c^m − 26 = 0，即 c^m = 26。只定 c^m，不定 a。
+
+      【(III)(IV) 与 D = 26 的关系】(III)(IV) 直接得到的是 c^m = 26 而非 D = 26。
+          作为约束，c^m = 26 弱于 D = 26（任何 c = 26 的物质 CFT 都满足）；作为结论，c^m = 26 强于 D = 26
+          （对任意物质 CFT 成立）。要到 D = 26 须再加 c^m = D（D 个平坦自由玻色子），这一步是
+          (III)(IV) 的公共输入而非任一路线的产物。在平坦 D 玻色子情形，(III)(IV) 各给出 D = 26。
+
+      (V) 开弦截距 a = 1，只对开弦，且与 D 无关。以下三条对任意 D ≥ 4 都各自等价于 a = 1：
+          (a) level 1 的态无质量；
+          (b) 第一级伪态 L_{−1}|0;k⟩ ∝ k·α_{−1}|0;k⟩ 本身满足物理态条件（是零模态），
+              故矢量偏振有规范自由度 e^μ → e^μ + λk^μ；
+          (c) level 1 的独立态构成无质量小群 SO(D−2) 的矢量表示，而非有质量小群 SO(D−1) 的表示。
+          a = 1 出现在 (I) 的结论与 (II) 的前提；(III)(IV) 不涉及 a。不对闭弦作断言。
+
+      【"独立"的含义】只指论证方式独立，不指输入独立：
+          (III)(IV) 共享 c^g = −26 与 c^m = D 两个输入，判据都是 c^m − 26 = 0，差别只在机制
+          （模式代数中 {Q_B,Q_B} vs 路径积分测度的 Weyl 变分）；若 c^g 或 c^m 算错，两条同时失效，
+          不得当作两份独立证据。(II)(III) 之间有等价节点 brst-cohomology-equals-ocq-physical，本命题不用它。
+          (I) 与 (II)(III)(IV) 之间的等价在图中无节点。(I)(V) 共享光锥一侧的输入。
+
+      【不断言】(1) (I)–(IV) 的互相蕴含/等价；(2) D ≤ 25 时的任何事（无论 a）；
+          (3) 闭弦截距、闭弦质量壳、紧化背景；(4) D = 26 是一致性的充分条件；
+          (5) a = 1 与 D = 26 之间的蕴含关系。
+
+      【回译时即注意到、与 canonical_text 无关的内部问题（读 canonical 前记下）】
+        R1. v2 (I) 的前提里写了 a = (D−2)/24（ζ 正规化），但路线节点 critical-dimension-light-cone 的
+            statement 里没有这条前提，它把 a 当作 Δ_n 中的自由参数。若 a 已由前提固定为 (D−2)/24，
+            则 Δ_n = n(26−D)/12，闭合 ⟺ D = 26，a = 1 是随之而来的推论，"同时定出 D 与 a"的
+            逻辑形状与路线节点不同。
+        R2. v2 (I) 末句"唯一以「当且仅当」形式给出 D 的一条"与 v2 自己的 (III)（Q_B² = 0 ⟺ c^m = 26）
+            及路线节点 critical-dimension-brst 末句"Q_B² = 0 ⟺ D = 26"相抵触。
+        R3. v2 (III) 的结论"Q_B² = 0 ⟺ c^m = 26"省掉了路线节点里的前提"诸 c_{−m}c_m 在 V 上线性无关
+            （对忠实的 Fock 型受限模成立）"——⟹ 方向需要它。
+        R4. v2 (II) 对 D ≤ 25 不作断言，但路线节点 old-covariant 的 statement 有 D < 26 的断言
+            （半正定但 (c) 不成立）；v2 比路线节点弱，方向安全。
+    verdict: drift
+    diff_notes: |
+      【第一轮审计，physics-auditor，2026-09-11。比对对象：v2 statement ↔ canonical_text ↔ 抽取记录
+      polchinski-1998-v1.md E18/E53/E56/E57/E64、Q4/Q6 ↔ brst-cohomology-sources.md §1、§2、§6 ↔
+      路线节点与其推导。裁定 drift：v2 与 canonical_text 断言的物理内容一致（(I)–(V) 的量词、前提、
+      等号/不等号、D 与 a 的取值、动量限定、"不断言"清单五条逐条对应），但有一句 v2 多出的元断言
+      与 v2 自己的 (III) 矛盾，另有 canonical_text 两处记账不实、一处范围声明缺乏图内支撑。无物理错误。】
+
+      A. v2 ⊋ canonical_text 的差异（canonical 未采用的 v2 内容）
+        A1【实质，须处理】v2 (I) 末句"也是唯一以「当且仅当」形式给出 D 的一条"——canonical_text (I) 只写
+           "唯一同时定出 D 与 a 的一条"，**没有**这半句。这半句与 v2 自己的 (III)（Q_B² = 0 ⟺ c^m = 26，
+           再经 c^m = D 给 ⟺ D = 26；路线节点 critical-dimension-brst 末句即写 "Q_B² = 0 ⟺ D = 26"）
+           直接抵触；(IV) 的 c^{tot} = 0 判据在实质上也是双向的。陈述不可变，故建议：canonical_text 在
+           【本里程碑不断言什么】加一条"不采用 v2 (I) 末句'唯一以当且仅当形式给出 D'"（与 (II) 对
+           old-covariant 末句的处理同款），推导 --via-four-routes 对 light-cone 那条边的 note 同句应删；
+           若日后换代 v3，删去该半句或改为"唯一以当且仅当形式**同时**给出 D 与 a"。
+        A2【解释性，无害】v2 有独立一节【(III)(IV) 的结论与「D = 26」的关系】（"作为约束弱、作为结论强"
+           的两面陈述 + c^m = D 是公共输入）；canonical 只在 (IV) 末尾保留"c^m = 26 更一般"一句，并把
+           c^m = D 的一步写进 (III)(IV) 各自的结论。内容相容，canonical 弱于 v2，方向安全。
+        A3【措辞】v2 (III) 只写"只定出 c^m"；canonical (III) 写"只定出 c^m（即 D）"。括注与 canonical 自己
+           (IV) 末尾"c^m = 26 比 D = 26 更一般"略有张力，建议删"（即 D）"或改"（平坦玻色子时即 D）"。
+
+      B. canonical_text 自身的记账问题（v2 无此内容，故不是 v2 的错）
+        B1【实质】【各路线的非严格步骤】(III) 写"反方向（c^m = 26 ⟹ Q_B² = 0）目前**没有文献来源**……
+           fgz-1986 与 lian-zuckerman-1991 都把 c = 26 当作假设而非结论"。这把两件事混了：FGZ 不**推导**
+           c = 26（正方向 Q_B² = 0 ⟹ c = 26 无 FGZ 来源，正确）；但"在 π(c) = 26 的相对复形上 d² = 0"
+           （FGZ Prop 1.2 + §2.1）**正是**反方向 c^m = 26 ⟹ Q_B² = 0 的数学来源，图中已有节点
+           worldsheet.brst-nilpotent-at-c26（提交 bcb83db）承载，推导 --via-nilpotency 的 gap 亦已指出。
+           真正无数学来源的是**正方向**（只有 Kato–Ogawa 摘要"required by"与 Polchinski §4.3 形式计算）。
+           建议改写该段：正方向 ⟹ 仅 kato-ogawa-1983 摘要 + Polchinski §4.3；反方向 ⟸ 有
+           brst-nilpotent-at-c26（FGZ Prop 1.2，附 H²(g) = 0、γ = 0 前提）。
+        B2【实质】canonical_source 说 §4.1 是"原书中**唯一**由一条连贯的分析同时定出 a = 1 与 D = 26 的位置"，
+           但抽取记录 E18 明写 §1.3 由同一论证给出 A = −1 并代入 A = −(D−2)/24 得 D = 26。故"唯一"不成立；
+           且同一文件里 (I) 说光锥是"四条路线中唯一同时定出 D 与 a 的一条"（指图内路线），两个"唯一"
+           指向不同对象、互相打架。建议 canonical_source 改为"原书中由 OCQ 零态分析同时定出二者的位置"，
+           并注明 §1.3 亦同时定出二者（走 ζ 正规化）。
+        B3【措辞】canonical 首段"四条……路线各自挑出的同一个值"——(III)(IV) 挑出的是 c^m = 26，
+           canonical 自己后文强调二者不同；建议改"各自挑出 D = 26（(III)(IV) 经 c^m = D）"。
+
+      C. 两侧一致、但与路线节点或其推导有出入（v2 与 canonical 同款，属图内一致性问题）
+        C1【(I) 前提】v2 与 canonical 的 (I) 前提都写"正规序常数取 ζ 正规化值 a = (D−2)/24"，路线节点
+           critical-dimension-light-cone 的 statement **没有**这条前提，它把 a 当 Δ_n 里的自由参数
+           （GSW 显式版本）；ζ 值只在其推导的 depends_on 里。若 a 已由前提固定，则 Δ_n = n(26−D)/12
+           （数值核对：D = 25/26/27 时 Δ_n = ±n/12、0），"闭合 ⟺ D = 26 且 a = 1"退化为"⟺ D = 26"，
+           a = 1 成为推论，与 (I) 末句"同时定出 D 与 a"的论证形状不符。建议 canonical 把该前提改为
+           "正规序常数 a 待定（Polchinski §1.3 另以 ζ 正规化取 a = (D−2)/24，与结论相容）"。
+        C2【(III) 前提】路线节点 (III) 的 ⟹ 方向靠"诸 c_{−m}c_m 在 V 上线性无关（对忠实的 Fock 型受限模
+           成立）"；v2 与 canonical 的 (III) 前提都只写受限模、未写忠实性。缺此前提时 Q_B² = 0 ⟹ c^m = 26
+           不成立（平凡模上 Q_B² 恒零）。建议 canonical (III) 前提补"忠实的 Fock 型受限模"。
+        C3【(V) 的 D ≥ 4，任务项 (d)】两侧都写"三条刻画对任意 D ≥ 4 都各自等价于 a = 1"，与路线节点
+           open-string-intercept-v2 同款。但该节点的两条推导都不支撑这个下界：
+             · --via-light-cone-representation 的 summary 写"当 D ≥ 5 时 SO(D−1) 的最小非平凡表示是 D−1 维
+               矢量"，gap 明写"D ≤ 4 的低维情形不在论证范围内"——推导自陈只到 D ≥ 5，陈述却写 D ≥ 4。
+             · 且该计数论证在 D = 5 有洞：SO(4) 有 3 维真表示（自对偶 2-形式 (1,0)），D−2 = 3 个态
+               按维数可以装进去，其限制到 SO(3) 恰是矢量，维数计数+限制都排除不了；SO(n ≥ 5) 的最小
+               非平凡真表示才是 n 维矢量。计数路线实际覆盖 D = 4（2 个态装不进 SO(3) 非平凡表示，
+               两个单态限制到 SO(2) 也不是矢量）与 D ≥ 6，D = 5 需要别的输入（协变矢量结构或路线 (I)）。
+             · --via-null-state-decoupling 支撑 (a)(b) ⟺ a = 1 对任意 D ≥ 2（只需存在 k ≠ 0、k² = 0），
+               不涉及计数。
+           建议 canonical (V) 把"对任意 D ≥ 4"改为"与 D 无关（(a)(b) 的等价对 D ≥ 2 成立；(c) 的表示论
+           计数在图内只对 D = 4 与 D ≥ 6 成立，D = 5 待补）"，并给 lead 发 reviewer 复核该推导。
+        C4【(II) 范围】路线节点 old-covariant 的 statement 有 D < 26 的断言与"D > 26 时 (a) 失效"（未写 a）；
+           v2 与 canonical 都刻意不采用前者、并给后者加上 a = 1 与非零动量限定。两侧一致，且弱于路线
+           节点，安全。canonical 说 subcritical 节点"附带 D ≥ 2 与三条动量假设"：核对该节点，(P1)–(P3)
+           三条动量假设 + (P4) D ≥ 2，属实。
+
+      D. 任务书指定核查项的结论
+        (a) (III) ⟺ 的反方向：v2 statement 不标注来源（statement 本不承载来源，其推导 --via-nilpotency
+            的 gaps 已如实标注）；canonical 标注了但**方向写反**（见 B1）。
+        (b) (IV) 原书 c^m = 26 还是 D = 26：canonical 在【非严格步骤】(IV) 与 canonical_source 都留有余地
+            （"尚未人工确认"）；v2 statement 本身不留，但其 sources 第 4 条 note 留了。两侧措辞都按更
+            一般的 c^m = 26 陈述，若原书只写 D = 26，则两侧同时强于来源，须同改。Q6 仍未解决。
+        (c) (II) 逻辑形式：两侧逐句一致（"(26,1) 处幺正 + D > 26 不幺正，非等价式，D ≤ 25 不断言"）。
+            与 no-ghost-theorem-v4 的 (1)(2) 及 ms.no-ghost-theorem 的动量限定相容。
+        (d) (V) D ≥ 4：见 C3，**无支撑**。
+        (e) canonical_source 单列 §4.1：loc 正文已声明"无单一位置覆盖全部合取"并逐条列出其余三处，
+            可接受；但"唯一同时定出 a 与 D"一句不实（B2）。建议把 ref/loc 结构改为主来源 §4.1 +
+            四处并列（或在 loc 首行改称"主来源"），避免读者把 §4.1 当成整条合取的出处。
+
+      E. 数值复核（graph/build/，未提交）
+        Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]：(26,1) 时 n = 1..5 全零；(27,1) 时 Δ_1 = 0、
+        Δ_2 = −1/8、Δ_3 = −2/9（非零）；(25,1) 反号；(26,0) 时 Δ_1 = 2。注意 Δ_1 = 2(1−a) 与 D 无关，
+        故"存在 n 使 Δ_n ≠ 0"在 D ≠ 26 时首见于 n = 2，两侧写"对所有 n ≥ 1 有 Δ_n = 0"是对的。
+        level 2：|ψ⟩ = (L_{−2} + γL_{−1}²)|χ⟩，L_1|ψ⟩ = 0 给 γ = 3/(6−4a)，L_2|ψ⟩ = 0 给
+        c = 2(−8a² + 37a − 42)/(2a − 3)；a = 1 时 c = 26，a = 0 时 c = 28，与推导 --via-null-state-decoupling
+        的"a = 0 给 D = 28"一致，且确认 level 2 只给 (a, D) 曲线、a 由 level 1 定。
+
+      F. 有效状态核对（uv run stringgraph status，2026-09-11）：v2 effective = physical-argument
+        （best: --via-four-routes）；old-covariant own = rigorous、effective = physical-argument；
+        open-string-intercept-v2 effective = physical-argument。与 canonical【非严格步骤】首段所述一致。
+
+      G. 未核实项（本轮未能消解，留给 researcher/船长）：E18 §1.3 式号；E53/Q6 §3.4 式号与 c^m/D 措辞；
+        E57 level 2 式号；E34/Q4 c = D 的定位；kato-ogawa-1983 正文；goddard-thorn-1972 正文。
+
+      结论：drift（可修）。修法全部落在 canonical_text / canonical_source 与推导 note，不需要动 v2 陈述。
+      置 back-translated；approved 留给船长。
 phase: 1
