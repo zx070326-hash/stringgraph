@@ -36,4 +36,34 @@ namespace StringFormal.NoGhost
 
 variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
 
+
+/-! ### The positive-mode subspace -/
+
+section PositiveMode
+
+variable (η a b : Fin D → R)
+
+/-- **The positive-mode (Virasoro primary) subspace of the momentum tower:**
+
+`{Ψ ∈ TowerFock D R | L_m Ψ = 0 for all m ≥ 1}`.
+
+This is one half of the old covariant physical-state conditions of
+`worldsheet.old-covariant-physical-states`; the missing half is the mass-shell condition
+`(L_0 - a₀) Ψ = 0`, which on the tower is rung-dependent (see the module docstring).  It is a
+submodule because it is an intersection of kernels of linear maps.
+
+Compare `Fock.physSubmodule η a a₀`, which imposes both conditions but only on a single Fock
+space `F(a)`. -/
+noncomputable def towerPositiveModeSubmodule : Submodule R (TowerFock D R) :=
+  ⨅ m : ℤ, ⨅ _ : 0 < m, LinearMap.ker (towerLop η a b m)
+
+variable {η a b}
+
+@[simp]
+lemma mem_towerPositiveModeSubmodule {Ψ : TowerFock D R} :
+    Ψ ∈ towerPositiveModeSubmodule η a b ↔ ∀ m : ℤ, 0 < m → towerLop η a b m Ψ = 0 := by
+  simp only [towerPositiveModeSubmodule, Submodule.mem_iInf, LinearMap.mem_ker]
+
+end PositiveMode
+
 end StringFormal.NoGhost
