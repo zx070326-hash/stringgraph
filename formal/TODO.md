@@ -63,8 +63,20 @@
   **本项未做（留给后续）**：零模（动量 `k`、算符 `x^μ, p^μ`）不在本文件里，
   `L₀` 依赖它们，做 Sugawara 时必须先补；度规只支持对角 `η : Fin D → R`；
   未取完化（代数 Fock 空间，不是 Hilbert 空间）；未做复双线性/埃尔米特版本。
-  图侧：建议新建节点 `worldsheet.bosonic-fock-space`（定义卡）与
-  `worldsheet.fock-indefinite-form`（命题卡），由 curator 添加。
+  图侧：节点 `worldsheet.bosonic-fock-space`（定义卡）与
+  `worldsheet.fock-indefinite-form`（命题卡）已由 curator 添加。
+- [x] `fock-indefinite-over-ordered-ring`：`worldsheet.fock-indefinite-form` 第 (4) 条末句
+  「有序域上、`D ≥ 2` 时该形式不定」的形式化（即推导节点
+  `worldsheet.fock-indefinite-form--via-lean` 的 gap (v)）。
+  见 `StringFormal/NoGhost/FockSigned.lean`（不改 `Fock.lean`，只加序假设）：
+  `pairing_timelike_neg` / `pairing_spacelike_pos`（每个 level `n ≥ 1` 的显式见证）、
+  `exists_pairing_self_neg`（需 `D ≥ 1`）、`exists_pairing_self_pos`（需 `D ≥ 2`）、
+  `pairing_indefinite`（主结论，有序环上）、`pairing_indefinite_field`（按图节点措辞的有序域版）、
+  `not_forall_pairing_self_nonneg` / `not_forall_pairing_self_nonpos`、
+  `exists_mem_levelSubmodule_pairing_self_neg`（每个 level 都有鬼，不只集中在一片）。
+  注意：Mathlib v4.33.1 **已无** `LinearOrderedField` 类，有序域写作
+  `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`；证明只需有序环，域与全序都用不上。
+  公理检查：全部声明只用 propext / Classical.choice / Quot.sound。
 - [ ] `sugawara`：`L n` 在 Fock 空间上的作用，证明满足 Virasoro 关系且 `c = D`。这一步的正规序处理是主要难点。
 - [ ] `physical-states`：`H_phys` 子模与零模态。
 - [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。
