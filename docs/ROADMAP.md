@@ -123,6 +123,7 @@
 - 待建：解析层节点"R{A(z)B(w)} 在环域全纯、两种排序互为解析延拓"（Gui Thm 8.1），使 ope-commutator-dictionary = 解析节点 + ope-pole-mode-commutator-dictionary
 - **已闭合（2026-09-11）**：H 的 Chern–Simons 符号约定——Bilal 2008 β̃ = 1 已由 lead 逐页核实（(12.14)/(12.26)），GS (4) 与 Bilal (12.14) 相差 (B,H)↦(−B,−H)，两家一致；GS (5)(6)(15)(16) 与 Zumino Les Houches 1983 约定逐字同一；ZWZ 正文不可得（L2），图中不得出现"ZWZ eq. (X)"。
 - 换代中：`worldsheet.critical-dimension-light-cone` → v2 补前提 D ≥ 4（auditor 第三轮要求；curator-critdim-followups）。
+- **已建（2026-09-11）**：Riemann–Roch 数学路线——`math.riemann-roch-theorem`（Eynard Thm 1.2，rigorous）、`math.canonical-divisor-degree`、`math.quadratic-differentials-minus-holomorphic-vector-fields`（3g−3，待 reviewer 签字）、`worldsheet.riemann-roch-kappa-minus-mu-v2`（限可定向）。`why` 瓶颈在两座桥（CKV ⇔ 全纯向量场、模 ⇔ 全纯二次微分），不在 RR——正确暴露。待建：不可定向版（只有鬼数反常路线）、`math.negative-degree-divisor-no-sections`（关 μ(S₂)=0 残余）。
 - 待建：`worldsheet.no-ghost-theorem-closed`（闭弦两组振子的 H_OCQ ≅ H_lc；v4 是单组振子）——桥卡 `covariant-external-legs-on-shell` 第 (4) 步闭弦半目前是类比。
 - 待换代：`worldsheet.kac-determinant` 陈述中 α_N "正"无据（FF 写 ненулевая、Schottenloher 写 K_N ≥ 0）；lead 裁决：新建 v2 写"非零常数"并 superseded_by（不是里程碑，走普通换代）。
 - 待建：`worldsheet.shapovalov-form-unconditional-existence`（rigorous，依赖 verma-module-free-over-negative-part；`--via-pbw` 已证到但无节点承载）；`descendant-weight-grading*` 可挂 Verma.lean 新 `lie_lgen_mem_levelSpan`（任意交换 ℚ-代数、无 c,h 假设）。
