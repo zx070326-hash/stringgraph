@@ -13,7 +13,7 @@ lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 
 ### 在 worktree 里构建
 
-worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
+worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）。**格式不是裸的 name→path 映射**，而是 `{"schemaVersion": "1.2.0", "packages": [{"type": "path", "name": "mathlib", "scope": "", "configFile": "lakefile.lean", "manifestFile": "lake-manifest.json", "inherited": false, "dir": "D:/physics/string/formal/.lake/packages/mathlib"}, …]}`，每个依赖一项（mathlib、plausible、LeanSearchClient、importGraph、proofwidgets、aesop、Qq、batteries、Cli 等，按 `lake-manifest.json` 的 packages 列表；非 mathlib 的 `inherited: true`）。**最省事：从任一现存 worktree 复制** `.claude/worktrees/agent-*/formal/.lake/package-overrides.json`（一名 formalizer 曾因写错格式丢了一个编译周期）。编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 25 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
 
 ### 读大文件的纪律
 
