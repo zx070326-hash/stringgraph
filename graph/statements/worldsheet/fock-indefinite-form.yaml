@@ -109,5 +109,21 @@ notes: |
     对**一切整数指标** j 成立，不止 n ≥ 1——`Fock.pairing_mode_left` 给出
     ⟨α^μ_j v, w⟩ = ⟨v, α^μ_{−j} w⟩，j = 0 时两边都是零模标量 a^μ = (2α')^{1/2}k^μ 的乘法。
     由它再推出 L_m^† = L_{−m}，见 worldsheet.virasoro-generators-adjoint。
+
+  【2026-09-11（四）：「径向共轭规则」现有承载节点 worldsheet.radial-hermitian-conjugation
+  （curator；**只加本段 notes 指针，不加 uses，陈述文本未动**）】
+  本卡标题与陈述 (1)(b) 的 `(α^μ_n)^† = α^μ_{−n}` 在文献里是「径向量子化中的厄米共轭」
+  这条通用规则在 h = 1 的 ∂X^μ 上的实例（规则的精确表述现见
+  worldsheet.radial-hermitian-conjugation 的 (1)(2)(3)，其 (5) 把本卡列为五个实例之一）。
+  **但本卡没有把那张卡列为 uses，这是有意的**：
+  本卡的 Lean 定义**不经过**那条规则——`Fock.pairing` 由**普遍性质**定义
+  （⟨|k⟩,|k⟩⟩ = 1 + 产生与湮灭互为伴随 ⟹ 唯一，`Fock.pairing_unique`），
+  整条论证里没有围道、没有 z、没有反演。那张卡的 own status 是 rigorous 但
+  effective 是 physical-argument（被 worldsheet.state-operator-isomorphism 封顶）；
+  若把它列为 uses，会**无理由地**把本卡的 formalized 压成 physical-argument，
+  那是纯由记账方式造成的降级。两条路线在本图中是独立的：Lean 路线更强，
+  文献路线更通用（它对振子与 L_m 之外的场也给规则，这正是
+  worldsheet.vertex-operator-adjoint 与 worldsheet.ddf-operators-adjoint 不得不走它的原因）。
+  同一判断也适用于 worldsheet.virasoro-generators-adjoint。
 author: curator
 created: "2026-09-10"

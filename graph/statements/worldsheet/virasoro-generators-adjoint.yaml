@@ -94,5 +94,22 @@ notes: |
   以及 polchinski-ch4 分支上待合并的 worldsheet.spurious-orthogonal-to-physical
   （Lean 侧已有 `Fock.spuriousSubmodule_le_orthComplement` 与
   `Fock.spurious_inf_physSubmodule_le_nullSubmodule`，合并后应把它们挂上去）。
+
+  【2026-09-11（四）：「径向共轭规则」现有承载节点 worldsheet.radial-hermitian-conjugation
+  （curator；**只加本段 notes 指针，不加 uses，陈述文本未动**）】
+  本卡的 L_m^† = L_{−m} 在文献里是「径向量子化中的厄米共轭」这条通用规则
+  在 h = 2 的能动张量上的实例（规则的精确表述见 worldsheet.radial-hermitian-conjugation
+  的 (1)(2)(3)，其 (5) 把本卡列为五个实例之一）。本卡推导 summary 里写的
+  「由厄米场构成的权 h 场，其模在径向共轭下指标反射 J_m† = J_{−m}」指的就是它。
+  **但本卡没有把那张卡列为 uses，这是有意的**：本卡的 Lean 证明
+  （`Fock.pairing_Lop_left`，经 `Fock.pairing_mode_left` / `pairing_nordPair_left`）
+  是「逐项配对 + 求和指标反射 j ↦ −j」，**不经过**围道、反演或任何 z；
+  而那张卡的 effective 是 physical-argument（被 worldsheet.state-operator-isomorphism 封顶），
+  列为 uses 会把本卡的 formalized 无理由地压下去。
+  详细论证见 worldsheet.fock-indefinite-form 的 notes【2026-09-11（四）】与
+  worldsheet.radial-hermitian-conjugation 的 notes 同名一段。
+  ⚠ 一处**真正**的关系：本卡边界 (c) 说的「由 T 的 Laurent 模定义的 L_m 与本卡的 Sugawara L_m
+  等同这件事本图与 Lean 侧都没有建立」——那条接缝（worldsheet.normal-ordering-modes-agree）
+  才是文献路线与 Lean 路线之间缺的桥，不是本段讲的共轭规则。
 author: curator
 created: "2026-09-11"
