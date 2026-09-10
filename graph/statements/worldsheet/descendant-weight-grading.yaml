@@ -1,0 +1,36 @@
+id: worldsheet.descendant-weight-grading
+kind: proposition
+title: 降算符作用提高共形权：L_{-k_1}…L_{-k_n}|O⟩ 的权为 h_O + Σ k_i
+statement: |
+  设 |O⟩ 是共形权 h_O 的最高权态（primary），k_1, …, k_n ≥ 1。则
+    L_0  ( L_{-k_1} L_{-k_2} … L_{-k_n} |O⟩ ) = ( h_O + Σ_{i=1}^n k_i ) ( L_{-k_1} … L_{-k_n} |O⟩ ),
+  即由降算符生成的**非最高权态**（descendant）的权严格大于 h_O。
+  从而在一个把态按 L_0 本征值分级的理论中，每个最高权态之下的模是按 h_O + N（N ≥ 1 为整数）
+  分级的，且非最高权态永远出现在比其最高权态更高的能级上。
+
+  ⚠ 适用范围：来源在讨论这一点时限定在**幺正** CFT 中（核对源把 (2.9.14) 的条目标题写作
+  "Non-Highest Weight States in Unitary CFTs"）。上述 L_0 本征值的计算本身只用
+  Virasoro 代数关系 [L_0, L_{-k}] = k L_{-k}，与幺正性无关；幺正性用于保证
+  「每个态要么是最高权态、要么是某个最高权态的 descendant」这一分解。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.14)，p.72"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.78 p 72: Eq (2.9.14) Non-Highest Weight States in
+      Unitary CFTs`）——「幺正 CFT」这个限定来自该条目标题。
+      ⚠ 抽取记录 Q5：**本次核实没有找到任何证据表明 Polchinski §2.9 讨论 Verma 模或 Kac 行列式**，
+      §2.9（p.68–73，标题 "More on states and operators"）中被核对源标注的只有
+      (2.9.3)、(2.9.14)、(2.9.15) 三处。这与既有节点 worldsheet.verma-module 把 loc 写成
+      「§2.9」有张力，见本节点 notes。
+tags: [cft, virasoro, highest-weight, representation-theory]
+notes: |
+  **对既有节点的提醒（未修改，交 lead / auditor 处理）**：
+  worldsheet.verma-module 的 sources 写 `polchinski-1998-v1, loc: §2.9`，
+  worldsheet.kac-determinant 亦与 §2.9 相关。按抽取记录 Q5，§2.9 很可能只讲
+  最高权态与降算符生成的模，**不讲 Verma 模的形式定义，也不讲 Kac 行列式**；
+  Kac 行列式的正确出处应是 kac-1979 / feigin-fuchs-1982（sources.bib 中已有）。
+  这是 negative evidence（核对源是选择性注释，不是完整转录），不能当定论，
+  需人工翻 p.68–73 确认。本节点只覆盖 (2.9.14) 这一条被核实的内容。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

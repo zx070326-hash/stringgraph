@@ -1,0 +1,24 @@
+id: worldsheet.weight-zero-primary-constant
+kind: proposition
+title: 幺正 CFT 中权为零的主场是常数
+statement: |
+  在幺正共形场论中，设 O 是共形权 h_O = h̄_O = 0 的主场（primary）。则
+    L_{-1} · O = ∂O = 0,   L̄_{-1} · O = ∂̄O = 0,
+  即 O 是常数（正比于单位算子）。
+  理由：L_{-1}·O 的权为 h_O + 1 = 1；若 L_{-1}·O ≠ 0，它连同整个模会给出权任意低乃至为负的
+  态与 O 的组合，在幺正理论中与「权非负、且 h = 0 只有真空」相矛盾。
+uses_conventions: [conv.virasoro-standard]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.15)，p.72"
+    note: |
+      公式号经 schrans-2020 目录核实（`2.79 p 72: Eq (2.9.15) h_O = 0 Operators`）。
+      内容为忠实转述；**论证细节（Polchinski 用的是范数非负还是别的判据）未核实**。
+tags: [cft, virasoro, highest-weight, unitarity]
+notes: |
+  这条在弦论中的用处：它是「顶点算子必须有确定的共形权、且权为零的算子平凡」这类论证的基础，
+  也用于说明 CFT 中不存在非平凡的无量纲模量算子（除非放弃幺正性）。
+  与 worldsheet.descendant-weight-grading 拆成两个节点，是因为二者是不同的命题：
+  前者是纯粹的分次计算（对任意最高权模成立），后者额外用到**幺正性**。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

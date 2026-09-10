@@ -1,0 +1,28 @@
+id: worldsheet.descendant-weight-grading--via-virasoro-commutators
+target: worldsheet.descendant-weight-grading
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.virasoro-algebra
+  - id: worldsheet.state-operator-isomorphism
+  - id: worldsheet.primary-field
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.14)，p.72（式号经 schrans-2020 核实）"
+summary: |
+  由 Virasoro 代数关系取 m = 0：[L_0, L_{-k}] = k L_{-k}。
+  于是 L_0 L_{-k_1}…L_{-k_n}|O⟩ = (Σ k_i) L_{-k_1}…L_{-k_n}|O⟩ + L_{-k_1}…L_{-k_n} L_0 |O⟩
+  = (h_O + Σ k_i) L_{-k_1}…L_{-k_n}|O⟩，逐个把 L_0 交换到右端即可。
+  由于每个 k_i ≥ 1，权严格增加。
+gaps:
+  - "L_0 本征值的计算本身是**纯代数的**（只用 [L_0, L_{-k}] = k L_{-k}，有限步）。
+     本推导之所以只标 physical-argument，是因为陈述被放在 CFT 的语境里：
+     『态』与『共形权』的意义经 worldsheet.state-operator-isomorphism 与
+     worldsheet.primary-field，二者都是 physical-argument。
+     **升级路径**：若把陈述改写为纯 Virasoro 表示论的命题（对任意最高权模成立），
+     可用 worldsheet.verma-module 作为唯一依赖并标 rigorous；
+     本图不这么做是为了忠实于来源的语境。"
+  - "陈述中「每个态要么是最高权态、要么是 descendant」的分解需要幺正性（或至少需要
+     模的完全可约性），来源在幺正 CFT 的前提下断言它，本图未单列节点。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

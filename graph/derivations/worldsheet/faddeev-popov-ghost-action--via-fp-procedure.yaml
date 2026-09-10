@@ -1,0 +1,32 @@
+id: worldsheet.faddeev-popov-ghost-action--via-fp-procedure
+target: worldsheet.faddeev-popov-ghost-action
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.conformal-gauge-fixing
+  - id: worldsheet.bc-ghost-cft
+  - id: worldsheet.free-scalar-cft-action
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.3, eq. (3.3.16)、(3.3.18)、(3.3.21)、(3.3.24)，p.88–89（式号经 schrans-2020 核实）；脚注 2（p.87）讨论 delta 函数的规范不变性"
+summary: |
+  标准 Faddeev–Popov 手续：
+  (1) 在路径积分中插入 1 = Δ_FP(g) ∫ dζ δ(g - ĝ^ζ)，其中 dζ 是规范群上的（形式）Haar 测度；
+  (2) 用变量替换把 ζ-积分变成整体因子 V_{diff×Weyl}，与分母相消；
+  (3) δ 函数把 g 固定到 ĝ，剩下 Δ_FP(ĝ) 乘 X 的路径积分；
+  (4) Δ_FP 是无穷小规范变换 δg_{ab} = 2 δω g_{ab} - ∇_a δσ_b - ∇_b δσ_a （(3.3.16)）
+      诱导的算子的行列式；用反对易场把行列式写成高斯积分（b 配度规的对称无迹部分、
+      c 配微分同胚参数），得 (3.3.21)；
+  (5) 在共形规范 ĝ = δ 与复坐标下化简，Weyl 部分把 b 的迹消掉，剩下 (1/2π)∫(b∂̄c + b̄∂c̄)，
+      即权 λ = 2 的 bc 系统。
+gaps:
+  - "**FP 手续在数学上没有被严格化**（抽取记录 E50 的结论）：规范群的体积 V_{diff×Weyl}、
+     群上的测度 dζ、以及场空间上的测度 Dg 都没有定义；『分离出无穷体积并消去』是形式操作。"
+  - "delta 函数 δ(g - ĝ^ζ) 的规范不变性需要论证；Polchinski 用脚注 2（p.87）讨论，
+     但本图未核实该脚注的实际内容是否构成证明。"
+  - "本推导只覆盖**局部**规范固定；全局的模空间与共形 Killing 向量会使 (2) 中的
+     ζ-积分不是单纯的整体因子（Gribov 型问题、模参数积分），这属第 5 章内容，本节点不涉及。"
+  - "行列式写成鬼场高斯积分这一步（无穷维行列式的正规化）在书中不讨论；
+     所有中心荷计算实际上依赖这个正规化的具体选择。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

@@ -1,0 +1,26 @@
+id: worldsheet.ope-associativity-bootstrap--via-ope
+target: worldsheet.ope-associativity-bootstrap
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.operator-product-expansion
+  - id: worldsheet.primary-field
+  - id: worldsheet.state-operator-isomorphism
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.3)，p.70（式号经 schrans-2020 核实）"
+summary: |
+  在三点插入的关联函数中，只要两个展开点对的距离都小于到第三个算子的距离，
+  两种 OPE 顺序都在各自的收敛半径内，因而都收敛到同一个关联函数。
+  把两侧都展成同一组局域算子基，用基的线性无关性逐项比较系数，
+  即得结构常数 C_{ij}^k 之间的二次约束。
+gaps:
+  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1）。
+     本条比其它节点更依赖它：结合性论证的**前提**就是两个展开的收敛域重叠，
+     而收敛半径的存在在书中只有图示（schrans-2020 §2.77 复现），没有证明。"
+  - "「局域算子基完备且线性无关」未被证明，也未指定基所在的拓扑向量空间；
+     『逐项比较系数』这一步因此是形式操作。"
+  - "本推导只给出约束的存在性，不给出四点函数的具体 bootstrap 方程形式；
+     若日后要建立具体方程（共形块分解），需要额外的节点。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

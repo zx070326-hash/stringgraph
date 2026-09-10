@@ -1,0 +1,28 @@
+id: worldsheet.weight-zero-primary-constant--via-unitarity
+target: worldsheet.weight-zero-primary-constant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.descendant-weight-grading
+  - id: worldsheet.primary-field
+  - id: worldsheet.virasoro-algebra
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.9, eq. (2.9.15)，p.72（式号经 schrans-2020 核实）"
+summary: |
+  在幺正 CFT 中所有态的范数非负，由此可推出 L_0 的谱非负、且 h = 0 的态只有真空
+  （这是 h = 0 处 Virasoro 模的标准论证：⟨O|L_1 L_{-1}|O⟩ = 2 h_O ⟨O|O⟩，
+  h_O = 0 时右端为零，故 L_{-1}|O⟩ 是零范数态；在幺正理论中零范数态必为零向量）。
+  于是 L_{-1}|O⟩ = 0，按态-算子对应即 ∂O = 0；反全纯部门同理给 ∂̄O = 0。
+gaps:
+  - "「幺正 ⇒ 零范数态为零向量」用到内积的正定性；对本图中真正关心的弦论世界面理论，
+     X^0 方向与鬼场方向的内积**都不是**正定的，因此本条**不适用于**玻色弦的完整世界面 CFT，
+     只适用于幺正的物质 CFT。本图未在陈述中把这一限定进一步细化，
+     引用本节点时须自行检查幺正性前提。"
+  - "论证经 worldsheet.state-operator-isomorphism 在态与算子之间来回（『L_{-1}|O⟩ = 0 即 ∂O = 0』），
+     继承其 physical-argument 状态；本推导未把它列为显式依赖，
+     而是通过 worldsheet.descendant-weight-grading 间接依赖。"
+  - "Polchinski 在此处的具体论证路线未核实（只核实了 (2.9.15) 的式号与标题）；
+     本 summary 复述的是标准论证。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

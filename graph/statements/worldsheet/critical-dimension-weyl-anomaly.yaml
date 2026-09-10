@@ -1,0 +1,57 @@
+id: worldsheet.critical-dimension-weyl-anomaly
+kind: proposition
+title: Weyl 反常抵消要求总中心荷为零，即 c^m = 26；对 D 个平坦标量给 D = 26
+statement: |
+  记号：中心荷写作上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 的下标记号冲突
+  （沿用 worldsheet.brst-quantization / worldsheet.critical-dimension-brst 的约定）。
+
+  Weyl 对称性在 Polyakov 表述中是**规范冗余**（不是整体对称性）：它被用来把度规的一个分量
+  消掉（worldsheet.conformal-gauge-fixing）。因此量子层面它必须无反常，否则被规范固定掉的
+  自由度重新出现，破坏理论的一致性（幺正性）。
+
+  按 worldsheet.weyl-anomaly-trace，反常正比于中心荷；按
+  worldsheet.weyl-anomaly-central-charge-constant，该中心荷是常数。
+  Faddeev–Popov 鬼场（worldsheet.faddeev-popov-ghost-action，λ = 2）贡献
+  c^g = -26（worldsheet.bc-ghost-central-charge）。故反常抵消的条件是
+    c^{tot} = c^m + c^g = c^m - 26 = 0,  即  c^m = 26。
+  特别地，物质部门取 D 个平坦时空自由标量 X^μ 时 c^m = D
+  （worldsheet.free-boson-central-charge-d），于是
+    D = 26。
+
+  ⚠ 「c^m = 26」是比「D = 26」更一般、也更强的陈述：它允许任意中心荷为 26 的物质 CFT
+  （紧化、非几何背景等），平坦的 26 维时空只是其中一个解。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.4 的结尾部分，p.95–96，公式号约在 (3.4.24)–(3.4.32) 区间"
+    note: |
+      **公式号未核实**，只有硬约束：§3.4 = p.90–96（Cambridge frontmatter 目录已核实），
+      且 (3.4.31)「中心荷是常数」被核对源定位在 p.96–97，即接近节末；
+      故 D = 26 的结论式号只能在 (3.4.31) 前后。抽取记录 E53 与 Q6 明确要求
+      **不要写死式号**。另需人工确认 Polchinski 此处写的是「c^m = 26」还是直接写「D = 26」。
+  - ref: polchinski-1998-v1
+    loc: "§3.4, eq. (3.4.31)（中心荷为常数，p.96–97，式号已核实）；§2.5, eq. (2.5.12)（c^g = -26，式号已核实）"
+tags: [bosonic-string, critical-dimension, weyl-anomaly, conformal-anomaly]
+notes: |
+  **这是 D = 26 的第四条路线**，与图中已有的三条并列：
+    (i)   worldsheet.critical-dimension-light-cone   光锥洛伦兹代数闭合
+    (ii)  worldsheet.critical-dimension-old-covariant 旧协变零模态退耦与幺正性
+    (iii) worldsheet.critical-dimension-brst          BRST 荷幂零 Q_B^2 = 0
+    (iv)  **本节点**                                   Weyl 反常抵消（总中心荷为零）
+  按 lead 指示，本批**不修改**汇总节点 worldsheet.critical-dimension-bosonic 及其推导
+  --via-three-routes（它是三条路线的合取）。**建议 lead 决定是否把汇总节点升级为四路线。**
+
+  与 (iii) 的关系：两者在数学内容上高度接近——(iii) 的条件是「总 Virasoro 的中心扩张为零」，
+  (iv) 的条件是「总中心荷为零」，这是同一个数 c^m - 26 = 0。
+  差别在于**论证方式与所依赖的框架**：(iii) 是模式代数中 {Q_B, Q_B} 的计算（不涉及路径积分测度），
+  (iv) 是路径积分测度的 Weyl 变分（不涉及 BRST 荷）。因此二者是两条独立的证据，
+  但**不是两条完全独立的推导**：它们共享 c^g = -26 与 c^m = D 这两个输入。
+  本图未建「(iii) ⟺ (iv)」的等价节点。
+
+  与 (i)(ii) 的关系：那两条给出的是「D = 26 **且** a = 1」，本节点**只给 D（或 c^m），不给截距 a**，
+  与 (iii) 相同。a = 1 由 worldsheet.open-string-intercept 独立提供。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

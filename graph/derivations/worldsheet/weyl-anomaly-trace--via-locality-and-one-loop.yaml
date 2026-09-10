@@ -1,0 +1,38 @@
+id: worldsheet.weyl-anomaly-trace--via-locality-and-one-loop
+target: worldsheet.weyl-anomaly-trace
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.traceless-holomorphic-energy-momentum
+  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.free-boson-central-charge-d
+  - id: worldsheet.bc-ghost-central-charge
+  - id: worldsheet.faddeev-popov-ghost-action
+  - id: worldsheet.conformal-gauge-fixing
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.4, eq. (3.4.6)、(3.4.8)、(3.4.9)–(3.4.12)、(3.4.15)–(3.4.19)，p.92–93（式号经 schrans-2020 核实）"
+summary: |
+  三步：
+  (1) **局域性 + 量纲分析**：⟨T^a_a(σ)⟩ 是局域算子的期望值，量纲为 2；
+      在二维、无外加标度、不破坏宇称的前提下，唯一可用的量纲为 2 的局域几何量是 R（(3.4.8)）。
+      故 ⟨T^a_a⟩ = a_1 R，只剩一个待定常数。
+  (2) **定系数**：在共形规范 g = e^{2ω} δ 下用复坐标做单圈计算（(3.4.9)–(3.4.12)、(3.4.15)），
+      把 a_1 与 TT OPE 的四阶极点系数（即中心荷 c）联系起来，得 a_1 = -c/12。
+  (3) **积分回配分函数**：把 δ_W ln Z = -(1/2π)∫√g δω ⟨T^a_a⟩ 对 ω 积分，
+      得到共形规范下 (3.4.18) 与任意度规下 (3.4.19) 的 Liouville 型表达式。
+  对玻色弦：物质部门 c^m = D（worldsheet.free-boson-central-charge-d），
+  鬼场部门 c^g = -26（worldsheet.bc-ghost-central-charge，λ = 2 由
+  worldsheet.faddeev-popov-ghost-action 定死），两者的反常相加。
+gaps:
+  - "路径积分测度的 Weyl 变分是整条论证的物理输入，其定义依赖正规化方案；
+     书中不给出测度的定义，也不证明结果与方案无关。"
+  - "步骤 (1) 的『唯一候选是 R』依赖若干未显式列全的假设（局域性、宇称、无额外标度、
+     以及只保留量纲为 2 的项）；schrans-2020 在第 3 章开头列出的两个未解疑问之一
+     正是 (3.4.22) 的展开为何可以忽略某项，说明这段推导在细节上不透明。"
+  - "步骤 (2) 是单圈计算，属标准的物理论证；系数 -c/12 的具体值在本图中未核实
+     （核对源只给式号与标题）。"
+  - "本推导用到 c^m = D 与 c^g = -26，二者各自的推导都是 physical-argument
+     （OPE 路线），故本条不可能高于 physical-argument。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

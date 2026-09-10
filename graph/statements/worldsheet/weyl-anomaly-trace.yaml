@@ -1,0 +1,35 @@
+id: worldsheet.weyl-anomaly-trace
+kind: proposition
+title: Weyl 反常：⟨T^a_a⟩ 正比于中心荷乘世界面 Ricci 标量
+statement: |
+  在弯曲世界面度规 g 上量子化二维共形场论时，Weyl 不变性一般不能保持：
+  路径积分测度的 Weyl 变分不为零，导致能动张量的迹的期望值非零。
+  由**局域性**与**量纲分析**，⟨T^a_a⟩ 只能是世界面上量纲为 2 的局域标量的线性组合；
+  在无宇称破坏与无额外量纲标度时唯一的候选是 Ricci 标量：
+    ⟨ T^a_a ⟩ = a_1  R,
+  其中 a_1 是理论的一个常数。显式计算（共形规范 + 复坐标下的单圈计算）给出
+    a_1 = - c / 12,   即  ⟨ T^a_a ⟩ = - (c/12)  R,
+  c 为该理论的中心荷（worldsheet.tt-ope-central-charge）。
+  等价地，配分函数 Z[g] 在 Weyl 变换下按 δ_W ln Z[g] 的相应表达式变化
+  （共形规范下的形式见 (3.4.18)，任意度规下见 (3.4.19)）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.4（p.90–96），eq. (3.4.6)（要求期望值的 Weyl 不变性）、(3.4.8)（⟨T^a_a⟩ 的一般形式）、(3.4.9)–(3.4.12)、(3.4.15)（复坐标下算系数）、(3.4.18)/(3.4.19)（Z[g] 的形式），p.92–93"
+    note: |
+      公式号全部经 schrans-2020 目录核实（`3.12`–`3.23`, p.92–94）。
+      **系数 -c/12 的具体值未核实**（核对源只给条目标题）；不同文献按 T 与 R 的归一化
+      写成 -c/12 或 c/24 等，本节点采用与 conv.virasoro-standard 相容的常见写法。
+tags: [worldsheet, weyl-anomaly, central-charge, trace-anomaly]
+notes: |
+  本节点与 worldsheet.traceless-holomorphic-energy-momentum 的张力：后者说共形不变蕴含
+  T^a_a = 0。二者的相容方式是——§2 的所有 OPE 都在**平坦**世界面上算（R = 0，迹反常不出现），
+  而本节点是弯曲世界面上的量子陈述。引用时须注意背景。
+
+  这条是 D = 26 的第四条路线（Weyl 反常路线）的第一步：
+  反常正比于中心荷 ⇒ 要求反常抵消即要求总中心荷为零
+  （worldsheet.critical-dimension-weyl-anomaly）。
+author: curator-polchinski-ch2-3
+created: "2026-09-10"

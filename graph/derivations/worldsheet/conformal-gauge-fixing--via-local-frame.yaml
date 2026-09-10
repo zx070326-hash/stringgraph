@@ -1,0 +1,28 @@
+id: worldsheet.conformal-gauge-fixing--via-local-frame
+target: worldsheet.conformal-gauge-fixing
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§3.3, eq. (3.3.6)、(3.3.8)，p.85（式号经 schrans-2020 核实；(3.3.6) 的表达式经其 §5.1 正文核实）"
+summary: |
+  (i) 二维时 Riemann 张量只有一个独立分量，对称性直接给出
+      R_{abcd} = (1/2)(g_{ac}g_{bd} - g_{ad}g_{bc}) R。
+  (ii) 计数：二维对称度规有 3 个独立分量；微分同胚有 2 个参数、Weyl 有 1 个，共 3 个，
+      恰好够把 g_{ab} 化为 δ_{ab}。具体地，先用微分同胚化为共形平坦形式 g_{ab} = e^{2ω} δ_{ab}
+      （二维总可局部做到——等温坐标的存在性），再用 Weyl 变换消去 e^{2ω}。
+  (iii) 残余变换是那些把 δ_{ab} 变回 ∝ δ_{ab} 的微分同胚，即（在复坐标下）全纯坐标变换
+      z → f(z)，配一个补偿的 Weyl 变换——这正是共形变换。
+gaps:
+  - "「二维度规总可局部化为共形平坦形式」即**等温坐标的存在性**。这是一条有严格证明的
+     经典微分几何定理（对足够光滑的度规），但 Polchinski 只用参数计数论证，
+     且本图没有登记任何证明该定理的数学来源。**升级路径**：researcher 补一条等温坐标存在性的
+     数学来源（核实定理编号）后，(i)(ii) 部分可望升级。"
+  - "全局规范固定不在本节点范围内：模空间与共形 Killing 向量的存在使 (ii) 只能局部成立。
+     来源本身也只写「at least locally」。"
+  - "前提『Polyakov 作用量具有 diff × Weyl 对称性』（抽取记录 E7）在本分支上没有对应节点，
+     被写进陈述文本作为假设而非依赖边；待 E7 节点合入后须补边。"
+author: curator-polchinski-ch2-3
+created: "2026-09-10"
