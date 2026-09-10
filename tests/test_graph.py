@@ -790,6 +790,7 @@ def test_check_axioms_sorry_maps_to_statement_and_derivation(mini_formal: Path) 
     assert any("downgrade this derivation" in p["message"] for p in rep["problems"])
     # the clean declaration produces no problem
     assert not any("Fake.decl_one" in p["message"] for p in rep["problems"])
+    assert "non-standard: sorryAx" in format_axioms_report(rep)
 
 
 def test_check_axioms_missing_decl_is_error(mini_formal: Path) -> None:
@@ -808,6 +809,8 @@ def test_check_axioms_missing_decl_is_error(mini_formal: Path) -> None:
         p["message"] for p in rep["problems"] if p["where"] == "graph/statements/worldsheet/def-f.yaml"
     ]
     assert msgs and "is not a declaration in the built environment" in msgs[0]
+    # a missing declaration has no axiom list; its detail is shown as a note
+    assert "note: no such constant" in format_axioms_report(rep)
 
 
 def test_check_axioms_no_verdict_for_a_requested_decl_is_error(mini_formal: Path) -> None:

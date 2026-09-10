@@ -268,10 +268,14 @@ def format_axioms_report(rep: dict) -> str:
         f"standard axioms: {', '.join(rep['standard_axioms'])})"
     )
     for entry in rep["declarations"]:
-        detail = " ".join(entry["axioms"]) if entry["axioms"] else entry["detail"]
         lines.append(f"{entry['status']:8s} {entry['decl']}")
-        if detail:
-            lines.append(f"         axioms: {detail}")
+        if entry["axioms"]:
+            lines.append(f"         axioms: {' '.join(entry['axioms'])}")
+            nonstandard = [a for a in entry["axioms"] if a not in rep["standard_axioms"]]
+            if nonstandard:
+                lines.append(f"         non-standard: {' '.join(nonstandard)}")
+        elif entry["detail"]:
+            lines.append(f"         note: {entry['detail']}")
         for sid in entry["statements"]:
             lines.append(f"         ← {sid}")
         for did in entry["formalized_derivations"]:
