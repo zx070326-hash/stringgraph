@@ -1710,7 +1710,20 @@
                （Lily Li, Weights and Verma Modules, UC Berkeley Math 261A, 2021）把它挂在
                **Theorems of the Highest Weight** 下面，不是自由性。另注意本书用 **Z(lambda)** 而非 M(lambda)。
                Virasoro Verma 模的 PBW 基请改引 **virasoro-lean-2025 §12, p.11**。
-               见 extractions/math-sources.md §15、§16。}
+               见 extractions/math-sources.md §15、§16。
+               ---- 2026-09-11 追加（researcher，§44.4）----
+               **书目数据获得第二条 L1**：Humphreys 本人在 *Reflection Groups and Coxeter Groups* 的 References
+               （书上 p. 193）逐字著录「J.E. Humphreys  1. *Introduction to Lie Algebras and Representation Theory*,
+               Springer, New York, 1972.」（同页第 2 条是 *Linear Algebraic Groups*, Springer, 1975）。
+               **新增的可用定位：§23**。依据是同一本书 p.56 的 Remark 逐字：
+               「When W is a Weyl group, a theorem of Harish-Chandra (see **Humphreys [1], §23**) allows one to derive
+               from Chevalley's Theorem a description of the center of the universal enveloping algebra of a semisimple
+               Lie algebra over C: it too is a polynomial algebra.」=> **「§23 讲的是从 Chevalley 定理往李代数侧过桥」是 L1。**
+               ⚠ 但该 Remark 指的是 **Harish-Chandra 关于 Z(U(g)) 的定理**，**不是** Chevalley 限制定理
+               S(g*)^g ≅ S(h*)^W；两者相关但不同，**别混**。
+               ⚠⚠ **禁令 3：不得写 §23.1**。「§23.1 = Invariant polynomial functions」这一级本轮只有 L4
+               （Google Books 卷 mSD4DvUFa6QC 查 "Invariant polynomial functions" 命中 **p.126**，该卷已验证诚实），
+               **小节标题与内容均未一手核实**。loc 最多写「§23」。见 extractions/math-sources.md §44.4、Q39。}
 }
 
 @misc{ardizzoni-2010,
@@ -2493,4 +2506,152 @@
              => loc 可写「Ch. IV, Theorem 1.3」，但 note 必须注明「编号系二手核实」。
              ⚠ **约定陷阱**：Hartshorne 的 l(D) 是**向量空间维数**约定；另有射影维数约定（H^0=0 时 l=-1），**整式差 1**。}
 }
+
+% ---------------------------------------------------------------------------
+% 伴随-基本迹恒等式：so/usp 与 E8（researcher 2026-09-11 登记；
+% 抽取记录见 extractions/math-sources.md §43（so/usp）与 §44（E8））
+% ---------------------------------------------------------------------------
+
+@book{cvitanovic-2008,
+  author    = {Cvitanovi\'c, Predrag},
+  title     = {Group Theory: Birdtracks, Lie's, and Exceptional Groups},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  year      = {2008},
+  note      = {由 researcher 于 2026-09-11 登记。**全文 L1**（作者自建 webbook：
+             birdtracks.eu -> menu.html -> version9.0/index.html -> version9.0/GroupTheory.pdf，4.4 MB，
+             WebFetch 落盘后 Read(pages=) 读图）。
+             ⚠⚠ **版本必须写死**：每页页眉逐字「GroupTheory   version 9.0.1, April 8, 2011」。
+             引用的是**作者持续更新的 webbook**，**页码与式号未必与 Princeton U.P. 2008 印本一致**；
+             loc 里请一并写「(webbook v9.0.1)」。合法性：作者本人域名上的公开 webbook。
+             **本项目要用的两条（L1 逐字，见 math-sources.md §43.2）**：
+             (a) **§10.1, eqs. (10.12)-(10.14), pp. 122-123**：SO(n) 的伴随表示 = **二指标反对称**张量
+             （原文：「Only the antisymmetric projection operator satisfies the invariance condition」），
+             (10.14) 给 N = tr P_A = n(n-1)/2；配套 (10.5)(10.6) 是生成元反对称性 (T_i)_{mu nu} = -(T_i)_{nu mu}。
+             (b) **§12.1, eqs. (12.8)-(12.10), p. 153**：Sp(n) 的伴随表示 = **二指标对称**张量
+             （原文：「The adjoint rep of Sp(n) is given by the symmetric subspace, as only P_3 satisfies
+             the invariance condition (12.6)」），(12.10) 给 N = n(n+1)/2。
+             ⚠ **记号翻译警告**：全书用 birdtracks + 投影算子语言，**从不写 Lambda^2 V / Sym^2 V**。
+             若图里写 Lambda^2 V，必须在 note 里注明这是本项目做的记号翻译。
+             ⚠ 该书对 SO(n) 只要求度规**对称可逆**、不要求正定（p.121 逐字），故迹恒等式不依赖号差。
+             另：Ch.17「E_8 family of invariance groups」p.186 本轮**未读**。}
+}
+
+@book{humphreys-1990-reflection,
+  author    = {Humphreys, James E.},
+  title     = {Reflection Groups and Coxeter Groups},
+  series    = {Cambridge Studies in Advanced Mathematics},
+  volume    = {29},
+  publisher = {Cambridge University Press},
+  year      = {1990},
+  note      = {由 researcher 于 2026-09-11 登记。**ch.2 / ch.3 / References 章全部 L1 读图**
+             （Cambridge Core 章级 PDF，本环境有机构订阅；书 hash 2910C1E00877D33A04A512791B6EDD72；
+             ch.2 = D2925389A4A9FDD2D6C587F55AAB1CF7 / 9780511623646c2_p29-48_CBO.pdf；
+             ch.3 = 1DD151BF79ED7B49783AAA0B265EF54E / 9780511623646c3_p49-86_CBO.pdf；
+             ⚠ References 章的文件名是 **9780511623646bib_p185-202_CBO.pdf**，不是 c9_...，用 c9 会 404）。
+             年份 1990 来自 Core 书目页「Original publication 29 June 1990」（L2）。
+             **编号体例（重要）**：Theorem/Proposition/Lemma **在正文里不带号**，但作者**自己用小节号引它们**：
+             p.56 与 p.58 两处逐字出现「**Theorem 3.5**」。=> 「§3.5, Theorem 3.5」可搬运；
+             **其余的 Proposition 本轮没见作者编号引用过，只能写「§3.7 的 Proposition」，禁写 Proposition 3.7。**
+             **本项目要用的三条（L1 逐字，见 math-sources.md §44.2-§44.3）**：
+             (a) **§2.10, pp. 42-43**：E_8 根系 = 240 根，`+-eps_i +- eps_j (i<j)` 与 `1/2 Sum +-eps_i`
+             （原文写「**even number of + signs**」；与常见的「偶数个负号」等价，因为 8-偶=偶）；同章 Table 2 (p.44) 给 |Phi|=240、|W|=2^14 3^5 5^2 7。
+             (b) **§3.5, Theorem 3.5**：Chevalley 定理（有限反射群的不变量环是多项式环）；
+             原始出处由本书 References p.188 逐字给出 = C. Chevalley, Amer. J. Math. **77** (1955) 778-782。
+             (c) **§3.7, Table 1「Degrees of basic invariants」, p. 59**：**E_8 -> 2, 8, 12, 14, 18, 20, 24, 30**
+             （即**没有 4 次、没有 6 次独立不变量** —— GS 1984 致谢里 Chapline-Slansky 那句话的数学内容）。
+             ⚠ **随引用必写的诚实话**：表下正文逐字「It will be some time before we succeed in verifying the
+             table completely」——Table 1 是先给结果、后文（§3.9-3.20 与 Ch.4）再验证，本项目**未逐条核实**那部分。
+             另：p.56 的 Remark 逐字把「从 Chevalley 定理推出 Z(U(g)) 是多项式代数」外包给 **Humphreys [1], §23**
+             （= humphreys-1972），是本项目对 GTM 9 §23 的唯一 L1 旁证。}
+}
+
+@article{van-ritbergen-1998,
+  author  = {van Ritbergen, T. and Schellekens, A. N. and Vermaseren, J. A. M.},
+  title   = {Group theory factors for {F}eynman diagrams},
+  journal = {Int. J. Mod. Phys. A},
+  volume  = {14},
+  pages   = {41--96},
+  year    = {1999},
+  eprint  = {hep-ph/9802376},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记。**全文 L1**（arxiv.org/pdf/hep-ph/9802376 落盘 419 KB，47 页，
+             按页读图；首页侧栏戳记逐字「arXiv:hep-ph/9802376v1  20 Feb 1998」，报告号 UM-TH-98-01 / NIKHEF-98-004）。
+             ⚠ **日期陷阱**：PDF 首页正文印的是「26 November 2024」——那是 arXiv 重编译时间戳，**不是论文日期**。
+             **本项目要用的两处（L1 逐字，见 math-sources.md §44.5-§44.6）**：
+             (a) **App. A.5, eqs. (176)(177), PDF p.35**（表示 (248)）：
+             `Tr F^4 = 36 (1/60 Tr F^2)^2`、`Tr F^6 = 30 (1/60 Tr F^2)^3`。
+             化简后**逐位等于 Green-Schwarz 1984 的 (12b')(12c')**：(1/100)(Tr F^2)^2 与 (1/7200)(Tr F^2)^3。
+             => 这是 GS E_8 迹恒等式的**独立、免费、带编号**第二来源。两者的 tr 都是 248 维伴随上的迹。
+             (b) **§5.11, eq. (86), PDF p.22**：`Ch_{E8,248} = Ch_{D8,128} + Ch_{D8,120}`（即 so(16) 下 248 = 120 + 128）。
+             随引用必抄的作者注：「In the first three lines all D_8 spinor representations must be from the same
+             conjugacy class, which is fixed by the decomposition one chooses for the (248).」
+             顺带：Table 3 (p.16) 给 E_8 reference rep (1,0,...,0)、dim 248、indices 60,1,1,1,1,41,199,61；
+             §5.12 说明伴随的第二指标 = 2 x 对偶 Coxeter 数（E_8: 30 => 60）。
+             ⚠ **抽取者发现的疑点（未结清，Q41）**：§5.1 的式 **(51)** 按字面展开在偶 k 时与标准的
+             Ch_{Lambda^2 R}(F) = 1/2[Ch_R(F)^2 - Ch_R(2F)] **差一个整体符号**（k=1 时正确）。
+             可能是排印或读图问题。**不要把 (51) 当作外幂迹恒等式的来源。**}
+}
+
+@book{fulton-harris-1991,
+  author    = {Fulton, William and Harris, Joe},
+  title     = {Representation Theory: A First Course},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {129},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1991},
+  note      = {由 researcher 于 2026-09-11 登记。**正文一页未取得。**
+             link.springer.com/book/10.1007/978-1-4612-0979-9 → 303 → idp.springer.com/authorize（登录墙）。
+             年份 1991 是标准著录，**本轮未独立核实**。
+             **可用的定位只有 Lecture 级**：Lecture 16「Symplectic Lie Algebras」起于 **p. 238**、
+             Lecture 18「Orthogonal Lie Algebras」起于 **p. 267**。证据：Google Books 卷 **6TwmBQAAQBAJ** 的
+             两条 &q= 正命中（238 / 267），与检索后端转述的 Springer 目录页范围
+             （L16 pp.238-252、L17 pp.253-266、L18 pp.267-281、L19 pp.282-298、L20 pp.299-315，**均为 L4**）一致。
+             ⚠ 该卷的无意义串控制**两次都没返回页码，但摘要器也没给出显式的 "No results" 字样**
+             （不如 humphreys-1972 那次干净）=> 页码命中只当区间约束。
+             ⚠⚠ **硬性禁令**：**不得写 (16.x)、(18.x)、Proposition 16.x 之类的任何编号**——
+             本轮对「sp = Sym^2 V」「so = Lambda^2 V」在 FH 里究竟是编号式、无编号显示式还是习题，**证据为零（L0）**。
+             loc 最多写到「Lecture 18 "Orthogonal Lie Algebras", pp. 267-281」。
+             同一事实**有 L1 来源**：见 cvitanovic-2008 的 (10.12)-(10.14) 与 (12.8)-(12.10)。
+             见 extractions/math-sources.md §43.3。}
+}
+
+@book{bourbaki-lie-4-6,
+  author    = {Bourbaki, Nicolas},
+  title     = {Groupes et alg\`ebres de Lie, Chapitres 4--6},
+  publisher = {Hermann},
+  address   = {Paris},
+  year      = {1968},
+  note      = {由 researcher 于 2026-09-11 登记。**正文 0 页；本轮 0 次调用。**
+             **书目数据 L1**：逐字取自 Humphreys, *Reflection Groups and Coxeter Groups*, References, 书上 p. 187:
+             「N. Bourbaki  1. *Groupes et algèbres de Lie*, Ch. 4-6, Hermann, Paris, 1968; Masson, Paris, 1981.」
+             （即 Hermann 1968 初版、Masson 1981 重印；英译 Springer 2002 是**另一个 item**，页码不可互换。）
+             **可用定位（L3）**：E_8 的根系与 Weyl 群数据在 **Ch. VI, Planche VII**；
+             依据是 Humphreys §2.10 逐字自陈「following Chapter VI of Bourbaki [1]」，
+             以及同书 p.45 两处页码引用（Bourbaki [1], p. 213 与 pp. 228-229，都是 F_4/E_6 相关的习题）。
+             ⚠⚠ **禁令（与 §33.3.4 对 Ch.1-3 的禁令同性质）**：**「Planche VII」这个编号本身本轮没有一手证据**，
+             它来自通行认知；写进图必须标 inferred: true 或在 note 里写「L3，转引自 Humphreys」。
+             **E_8 根系若要 L1，请改引 humphreys-1990-reflection §2.10, pp. 42-43**（本项目已一手读到）。
+             见 extractions/math-sources.md §44.2、§44.8。}
+}
+
+@article{slansky-1981,
+  author  = {Slansky, R.},
+  title   = {Group Theory for Unified Model Building},
+  journal = {Phys. Rept.},
+  volume  = {79},
+  pages   = {1--128},
+  year    = {1981},
+  note    = {由 researcher 于 2026-09-11 登记。**正文 0 页。**
+             书目数据 **L2**：inspirehep.net/api/literature 单条命中，逐字
+             「Group Theory for Unified Model Building」/「Slansky, R.」(Los Alamos)/ Phys.Rept. 79, 1-128, 1981。
+             **用途**：(1) 历史归属——Green-Schwarz 1984 致谢逐字「We are grateful to G. Chapline and R. Slansky for
+             pointing out to us that E_8 has no independent fourth- and sixth-order Casimir invariants.」
+             （见 extractions/green-schwarz-1984.md E8/E19）；(2) 分支规则表的常见转引出处。
+             ⚠⚠ **禁令**：**不得写任何表号**（"Table 25" 之类），本轮对本文正文证据为零（L0）。
+             **248 = 120 (+) 128 若要带编号的免费来源，请改引 van-ritbergen-1998 §5.11 eq. (86)。**
+             未查：LA-UR 预印本号 / OSTI 全文（见 math-sources.md Q43）。}
+}
+
 
