@@ -3,10 +3,17 @@ target: consistency.gravitational-anomaly-polynomial-d10
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: consistency.anomaly-twelve-form-d10
+  - id: consistency.anomaly-twelve-form-d10-v2
     note: |
-      提供「反常 ↔ 形式十二形式」的框架与下降方程记号；GS 逐字把引力一路说成
+      提供下降方程与十二形式的**记号**；GS 逐字把引力一路说成
       「As described above for the Yang–Mills case」，即明确沿用规范一路的同一套编码。
+      【2026-09-11】原依赖 consistency.anomaly-twelve-form-d10 已拆卡换代。
+  - id: consistency.anomaly-descent-to-twelve-form
+    note: |
+      【2026-09-11 拆卡后新增的显式边】「反常 ↔ 形式十二形式」这条**字典**本身，
+      原先埋在旧卡 statement 里。本推导 gaps 第一条记的正是它无已核实来源；
+      拆卡后那条缺口成为可追踪的瓶颈节点。
+      ⚠ 引力一路更弱：zumino-1983-les-houches 全文没有自旋联络与 tr R²（L1 通读确认）。
   - id: conv.gauge-trace-normalization
     note: 固定 tr R^{2k} 里的 tr 是 10 × 10 切空间矩阵的迹。
 sources:

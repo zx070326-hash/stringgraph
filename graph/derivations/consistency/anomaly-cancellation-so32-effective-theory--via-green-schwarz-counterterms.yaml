@@ -3,8 +3,22 @@ target: consistency.anomaly-cancellation-so32-effective-theory
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: consistency.anomaly-twelve-form-d10
-    note: 规范反常一路的编码框架（Ω_{4n} 与十二形式）。
+  - id: consistency.anomaly-twelve-form-d10-v2
+    note: |
+      规范反常一路的**记号**框架（Ω_{4n} := Tr F^{2n} 与「十二形式」指哪一层）。
+      【2026-09-11】原依赖 consistency.anomaly-twelve-form-d10 已拆卡换代；
+      该旧卡内嵌的两条命题现由下面两条边承载。
+  - id: consistency.anomaly-descent-to-twelve-form
+    note: |
+      【2026-09-11 拆卡后新增的显式边】把 Ω₁₂ 换成十维反常 ∫ω¹₁₀ 的那一步，
+      即本推导 (A) 段一直在用的「升维字典」。**本图对它无任何已核实论证**，
+      缺口记在该卡与其推导的 gaps（本推导 gaps 里原有的同一条保留）。
+  - id: consistency.higher-point-anomalies-fixed-by-hexagon
+    note: |
+      【2026-09-11 拆卡后新增的显式边】本推导 (A)2 步「两项之比由 Bose 对称性唯一确定」
+      与 GS 的「高点反常由六边形唯一决定」是同一处唯一性假设。
+      **本图对它无任何已核实来源**（zumino-1983-les-houches p.29 明确不讨论最一般解）；
+      本推导 gaps 里原有的同一条保留。
   - id: consistency.h-field-strength-definition
     note: |
       提供 (4) 的 H。
