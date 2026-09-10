@@ -3,18 +3,22 @@ target: worldsheet.critical-dimension-bosonic-v3
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.critical-dimension-light-cone
+  - id: worldsheet.critical-dimension-light-cone-v2
     note: |
       供给 (I) 的全部内容（Δ_n 的显式形式与「闭合 ⟺ D = 26 且 a = 1」）。
       该路线卡把正规序常数 a 当作 Δ_n 中的**待定参数**，本卡 (I) 的前提与它逐字一致
       （这正是 v2 → v3 换代要修的 D1：v2 的 (I) 前提写「取 ζ 正规化值 a = (D−2)/24」，
       与路线卡相反）。
-      ⚠ **一处已知的方向安全的不一致**：本卡 (I) 加了「D ≥ 4」的限定（审计第二轮 N2：
-      D = 3 只有一个横向指标，反对称组合 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，洛伦兹代数
-      对任意 a、任意 D 都闭合，故 iff 的「仅当」方向在 D = 3 有反例；D = 2 无横向振子），
-      而路线卡的陈述**没有**这条限定。本卡因此**弱于**路线卡（多一条前提），
-      从路线卡取 (I) 是合法的；但路线卡本身的 iff 在 D ≤ 3 处不成立，
-      应另行换代补上 D ≥ 4（见 gaps）。本次任务不动路线卡文本。
+      **【2026-09-11 改指 -v2】**本边原先指向 worldsheet.critical-dimension-light-cone。
+      那张卡的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n
+      恒为零，洛伦兹代数对任意 (D, a) 都闭合，故「仅当」方向为假；D = 2 无横向振子），
+      本卡 (I) 因带 D ≥ 4 而**弱于**它、方向安全，但那是靠记账挂账而非修陈述。
+      ms.critical-dimension-bosonic 第三轮裁定 3(a) 要求换代，curator 已新建
+      worldsheet.critical-dimension-light-cone-v2（补前提 D ≥ 4 并写出
+      「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步），旧卡写 superseded_by。
+      **换代后两侧前提一致**：本卡 (I) 与路线卡都带 D ≥ 4，此前的「本卡弱于路线卡」记账消失。
+      本卡 statement 中的「（节点：worldsheet.critical-dimension-light-cone）」是散文引用，
+      按第三轮裁定 3(a) 不必动（陈述卡不可变；下次换代时同步）。
   - id: worldsheet.critical-dimension-old-covariant-v2
     note: |
       供给 (II)。该卡的 (A) 恰是本卡 (II) 的「若 D = 26 且 a = 1 则 (a)(b)(c)」部分，
@@ -122,7 +126,7 @@ sources:
 summary: |
   本推导把 worldsheet.critical-dimension-bosonic-v3 的合取拆成它的各个合取项，
   逐条指到已有节点：
-    (I)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1（本卡另限 D ≥ 4）
+    (I)   worldsheet.critical-dimension-light-cone-v2   光锥洛伦兹代数闭合 ⟺ D = 26 且 a = 1（前提 D ≥ 4，两侧一致）
     (II)  worldsheet.critical-dimension-old-covariant-v2  (D,a) = (26,1) 处等距同构；D > 26 有负模态
     (III) worldsheet.critical-dimension-brst-v2         Q_B² = 0 ⟺ c^m = 26（忠实受限模；不给 a）
     (IV)  worldsheet.critical-dimension-weyl-anomaly-v2 c^m + c^g = 0 ⟺ c^m = 26（不给 a）
@@ -155,7 +159,7 @@ summary: |
   有效状态因此仍是 physical-argument，与 v2 相同。
 gaps:
   - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(I) 是四条路线中唯一同时定出 D 与 a 的一条」「(III)(IV) 的判据是同一个数 c^m − 26 = 0」「(I) 与 (II)(III)(IV) 的等价在本图中无节点」「(V) 三条刻画在图内支撑的维数范围」等，都是对**本图现有节点**的比较与分类，不是任何来源中的陈述。它们随图的演化而可能失效（例如若日后建了 (I) ⟺ (II) 的等价节点，或路线卡换代补上 D ≥ 4）。这是本推导标 physical-argument 的主要理由之一。"
-  - "**路线卡 worldsheet.critical-dimension-light-cone 的 iff 在 D ≤ 3 处不成立，尚未修**：D = 3 只有一个横向指标，α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合；D = 2 无横向振子。本卡 (I) 已加 D ≥ 4 的前提（故本卡弱于路线卡、方向安全），但**路线卡自身的陈述仍未加**，应另行换代（ms.critical-dimension-bosonic 第二轮审计 N2；本次任务不动路线卡文本）。GSW §2.3.1 的原文同样未写该限定。"
+  - "**路线卡的 D ≤ 3 缺口已由换代修掉，但 D ≥ 4 这条限定不在来源里**：旧路线卡 worldsheet.critical-dimension-light-cone 的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合；D = 2 无横向振子）。ms.critical-dimension-bosonic 第三轮裁定 3(a) 要求换代，本边已于 2026-09-11 改指 worldsheet.critical-dimension-light-cone-v2。**剩余缺口**：GSW §2.3.1 (2.3.32) 的原文既没写 D ≥ 4，也没写「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的线性无关一步；这两句是本图（curator）按初等论证补出的增补，不是来源的文字。另：本卡 statement 里「（节点：…light-cone）」的散文引用仍指旧 id，陈述卡不可变，留待下次换代同步。"
   - "**(IV) 的一般物质 CFT 形式（c^m = 26）在 Polchinski §3.4 只有散文支撑**：原书 (3.4.23), p.94 写的是 `c = c^X + c^g = D − 26` 与「Weyl-invariant only for D = 26」，即 **D = 26**；一般形式出现在 p.95/p.96 的两处 iff 散文（「if and only if the total central charge c is zero」「if and only if a₁ = −c/12 vanishes」），其带式号的形式是 (3.4.15)（c = −12a₁, T^a_a = −(c/12)R），而逐字的 `c^m = 26` 只在 §4.3 (4.3.9)。故 (IV) 采用的一般形式由三处联合支撑，**不由单一式号支撑**。路线卡 worldsheet.critical-dimension-weyl-anomaly-v2 的 notes 仍把这一点登记为未核实的开放疑问（Q6），实际上 Q6 已于 2026-09-11 关闭，路线卡换代时应改挂 §4.3 (4.3.9) 并删去该开放疑问。"
   - "**本推导不主张四条路线互相蕴含**：四者只是各自挑出同一组 (D, a) = (26, 1) 或同一个 c^m = 26。其中 (II) 与 (III) 之间的严格等价已有节点 worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0；Kato–Ogawa 1983 提出，FGZ 1986 Theorem 2.8 第一个同构严格证明），本推导**仍不**把它加为依赖，因为目标是四条路线的**合取**而非等价链。(I) 与 (II)(III)(IV) 之间的等价仍无节点。"
   - "**(III)(IV) 不是两份互相独立的证据**：两条共享 c^g = −26 与 c^m = D 两个输入（是本推导的显式依赖边），判据是同一个数 c^m − 26 = 0；若这两个输入中任一个算错，两条路线同时失效。"
@@ -177,5 +181,13 @@ notes: |
   这两类改动都不改变任何依赖边的 inferred 标记：两条「不标 inferred」的公共输入边
   （free-boson-central-charge-d、bc-ghost-central-charge）的依据位置在本次核实后**更强**了
   （(2.4.22) 取代了无锚点的 §2.4 末，(2.5.12) 在原书 (3.4.23) 处被显式引用）。
+
+  **【2026-09-11 后续改动：(I) 的边改指 -v2】**按 ms.critical-dimension-bosonic 第三轮
+  回译审计的裁定 3(a)，路线卡 worldsheet.critical-dimension-light-cone 已换代为
+  worldsheet.critical-dimension-light-cone-v2（补上前提 D ≥ 4）。本推导的第一条依赖边
+  随之改指 -v2，**边的条数与集合结构不变**（仍是 5 条路线/输入 + 2 条公共输入），
+  目标陈述、status、有效状态（physical-argument）均不变。相应地更新了该边的 note、
+  summary 的对照表与 gaps 第 2 条的记账。指向旧路线卡的两条历史推导
+  （--via-three-routes 对 v1、--via-four-routes 对 v2）保持不动。
 author: curator
 created: "2026-09-11"
