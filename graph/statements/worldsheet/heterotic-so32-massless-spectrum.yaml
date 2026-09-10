@@ -1,0 +1,63 @@
+id: worldsheet.heterotic-so32-massless-spectrum
+kind: proposition
+title: SO(32) 杂化弦的无质量谱：d = 10, N = 1 超引力多重态 + SO(32) 伴随（496）规范多重态
+statement: |
+  用 SO(8) × SO(32) 表示标记（左移 × 内部），Table 11.2 的无质量行为：
+    **左移（NS）**：(8_v, 1) + (1, 496)；左移 R 扇区在无质量能级为空；
+    **右移**：ÑS 给 8_v，R̃ 给 8。
+
+  **左移无质量态的来源**（(11.2.16)）：满足 H^⊥ = 0 的左移态恰有两类
+    α^i_{−1}|0⟩_NS            →  (8_v, 1)，
+    λ^A_{−1/2}λ^B_{−1/2}|0⟩_NS →  (1, [2])，
+  后者按 SO(32) 的二阶反对称表示 [2] 变换，维数 32 × 31/2 = **496**，即 so(32) 的**伴随表示**。
+
+  **无质量谱（左 × 右 的张量积）**：
+    (8_v, 1) × (8_v + 8) = (1,1) + (28,1) + (35,1) + (56,1) + (8′,1)        （(11.2.17)）
+      —— d = 10 的 N = 1 超引力多重态（dilaton 1、反对称张量 28、引力子 35、
+         引力微子 56、dilatino 8′），原书称其为 type I 超引力多重态；
+    (1, 496) × (8_v + 8) = (8_v, 496) + (8, 496)                            （(11.2.18)）
+      —— SO(32) 伴随表示的 **N = 1 规范多重态**（规范玻色子 + 规范微子）。
+
+  **本命题不断言的内容**：
+    (1) 不断言时空超对称的存在性（原书在此处只把无质量态按 N = 1 多重态分组；
+        本图无杂化弦时空超对称节点）。
+    (2) 不断言 SO(8) 表示的分解规则（8_v × 8_v = 1 + 28 + 35 等）——那属于附录 B 的
+        旋量/表示论，本图无节点，见 gaps。
+    (3) 不断言整体规范群是 SO(32) 还是 Spin(32)/Z₂：本卡断言的是**李代数** so(32) 的伴随
+        （496 维）。见 worldsheet.heterotic-string-construction 的 notes。
+    (4) 不断言 496 这个数与 consistency 区「引力反常要求 496 个左手费米子」
+        （consistency.gravitational-anomaly-requires-496-fermions）之间有推导关系——
+        本图**不加这条边**，两者是独立来源下的同一个数字，见 notes。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.16)–(11.2.18) 与 Table 11.2, pp. 52–53（H^⊥ = 0 的两类左移态、496 = 32×31/2 = 伴随、两个张量积）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56；式号、表与两个张量积逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.19) 一带, p. 31（type I 无质量内容 [0]+[2]+(2)+8′+56 的写法；本卡 (11.2.17) 的右端与之对应）"
+    note: |
+      L1（E46）。原书把 (11.2.17) 的结果直接称为 type I 超引力多重态；本图对应节点
+      worldsheet.type-i-unoriented-closed-spectrum 用的是 [0]/[2]/(2) 记号，
+      与这里的 1/28/35 是同一批场的两种写法（[2] = 28、(2) = 35）。
+tags: [heterotic, so32, spectrum, massless, supergravity, gauge-multiplet]
+notes: |
+  ★【496 的两个独立来源，本图刻意不接边】
+    (a) 本卡：32 × 31/2 = 496 是 so(32) 的维数，来自世界面上 32 个 λ^A 的配平；
+    (b) consistency.gravitational-anomaly-requires-496-fermions：十维 tr R⁶ 项不能由局域反项抵消
+        ⇒ 物质部分必须恰有 496 个左手 spin-1/2 场（Green–Schwarz 1984 的低能场论论证）。
+  两者数值相同**不是巧合**，但把它们连成边需要「杂化弦的低能极限就是那个有效场论」这一步，
+  而本图没有这一步的节点（见 consistency.heterotic-anomaly-free-requires-gs 的占位卡）。
+  ⚠ 因此本轮**不加** (a) → (b) 或 (b) → (a) 的边。
+
+  【SO(8) 表示论在本图无节点】(11.2.17)/(11.2.18) 的张量积分解（8_v × 8_v = 1 + 28 + 35、
+  8_v × 8 = 8′ + 56）属于附录 B（本轮未读，抽取记录 Q8）。
+  与 worldsheet.type-ii-massless-spectrum 的处境相同。
+
+  【与 §11.6 玻色构造的一致性】玻色构造里无质量规范玻色子来自 l_L² = 2 的格点
+  （SO(32) 的根），给出同一个伴随表示——见
+  worldsheet.heterotic-bosonic-construction-gauge-groups。
+author: curator
+created: "2026-09-11"
