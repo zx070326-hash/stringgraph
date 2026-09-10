@@ -17,11 +17,27 @@ sources:
     loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式计算与 Δ_n）"
     note: GSW 用 mostly-minus 号差；Δ_n 的表达式与号差无关，此处按 conv.metric-mostly-plus 转写。
   - ref: polchinski-1998-v1
-    loc: "§1.3，约 eq. (1.3.30)–(1.3.36)；显式的 [J^{i-}, J^{j-}] 计算见习题 1.3"
+    loc: "§1.3，结论式 **(1.3.40)**, p.23（逐字 `A = −1 , D = 26`；式号与内容已核实，抽取记录 polchinski-1998-v1.md §12.5 / E18 / Q2）；正规序常数 A 的 ζ 正规化在 (1.3.31)–(1.3.35)，质量壳 (1.3.36)"
     note: |
-      Polchinski 正文给出的是表示论版本（第一激发级必须填满 SO(D-2) 的无质量矢量表示，
-      故 a = 1；再由零点能 -(D-2)/24 = -a 得 D = 26），并把洛伦兹代数的直接验证留作习题。
-      本节点陈述的是习题/GSW 的版本。
+      Polchinski 正文给出的是表示论版本（第一激发级只有 D−2 个态 α^i_{−1}|0;k⟩，必须填满
+      SO(D-2) 的无质量矢量表示，故 A = −1；再由零点能 A = (2−D)/24 得 D = 26）。
+      **【2026-09-11 原书核实订正】**本条此前写「显式的 [J^{i-}, J^{j-}] 计算见习题 1.3」——
+      **该说法不成立**：抽取记录 §12.5 的结论是原书既没有做这个计算、也没有把它留成习题，
+      只在 p.21 描述它并推给共形规范路线。故**本节点陈述的 Δ_n 显式版本只由 GSW §2.3.1 (2.3.32)
+      支撑**，Polchinski 只支撑同一结论（D = 26 且 a = 1）的表示论形状。
+      作者三处自降严格程度（逐字，L1）：p.21「We do not wish to spend this much time on light-cone
+      quantization, so we will try to show that the result is **plausible without a complete
+      treatment**」；p.24「We will show this **indirectly** in the coming chapters」；
+      §3.4 开头 p.90「as we briefly and rather **heuristically** explained in section 1.3」。
+      这三句是本节点的推导封顶在 physical-argument 的直接文献依据。
+      另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」，
+      不是任意的正规化选择。已按 conv.intercept-sign-a 做 a = −A 换算。
+      ⚠ **本节点陈述的一处已知缺口（不改陈述文本，只在此登记）**：陈述写「闭合 ⟺ D = 26 且 a = 1」
+      未限定 D ≥ 4。D = 3 时只有一个横向指标，反对称组合 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，
+      对易子对任意 (D, a) 都消失，「仅当」方向有反例；D = 2 无横向振子。
+      （ms.critical-dimension-bosonic 第二轮回译审计 N2，2026-09-11。汇总卡片
+      worldsheet.critical-dimension-bosonic-v3 的 (I) 已写入 D ≥ 4 的前提，故它弱于本卡、方向安全；
+      本卡应另行换代补上该限定。GSW §2.3.1 的原文同样未写。）
 tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance]
 author: curator-critdim
 created: "2026-09-10"
