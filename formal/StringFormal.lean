@@ -1,6 +1,7 @@
 import StringFormal.Math.EulerPartition
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
+import StringFormal.Virasoro.WittPerfect
 import StringFormal.Virasoro.Verma
 import StringFormal.Virasoro.VermaPBW
 import StringFormal.NoGhost.Statement

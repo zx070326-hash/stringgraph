@@ -48,6 +48,15 @@
     `VirasoroAlgebra.span_lgen_cgen_eq_top`（`Vir = span_R ({C} ∪ {L n})`）与
     `VirasoroAlgebra.toProdₗ`（线性同构 `Vir ≃ₗ Witt × R`）；完整的 `Basis` 还没造，
     目前也没有地方需要它。
+- [x] `witt-virasoro-perfect`：Witt 与 Virasoro 代数完美（`⁅⊤, ⊤⁆ = ⊤`），对应图节点
+  `math.witt-algebra-perfect` 与 `math.virasoro-universal-central-extension` 的第 (1) 条。
+  见 `StringFormal/Virasoro/WittPerfect.lean`（无 sorry，公理只有标准三条）：
+  `WittAlgebra.isPerfect`（需 `[Invertible (2 : R)]`）、`VirasoroAlgebra.isPerfect`
+  （`ℚ`-代数，`C = 2⁅L 2, L (-2)⁆ - 4⁅L 1, L (-1)⁆` 见 `VirasoroAlgebra.cgen_eq`）。
+  **数学缺口**：`2` 可逆是必要的，`WittAlgebra.derivedSeries_one_eq_top_iff` 给出
+  `⁅⊤,⊤⁆ = ⊤ ↔ IsUnit (2 : R)`；`ZMod 2` 与 `ℤ` 上不完美
+  （`derivedSeries_one_ne_top_zmod_two` / `derivedSeries_one_ne_top_int`）。
+  教科书里"任意交换环上 Witt 代数完美"的说法是错的。
 - [x] `verma-module`：Verma 模 `V(c,h)` 的构造与分级；对应图节点 `worldsheet.verma-module`。
   见 `StringFormal/Virasoro/Verma.lean`（739 行，无 sorry，公理只有标准三条）。
   走的是**抽象路线**：`V(c,h) := U(Vir) ⧸ (L_n (n>0), L_0 - h, C - c 生成的左理想)`，
