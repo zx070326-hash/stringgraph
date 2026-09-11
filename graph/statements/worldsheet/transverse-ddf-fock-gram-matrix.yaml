@@ -160,6 +160,34 @@ notes: |
   其推导 --via-lean 的 summary 逐步列出了五步，可作为 DDF 版的施工图。）
   剩余两步仍在 formal/TODO.md 的 `ddf-operators` 之后。
 
+  【2026-09-11（四）：升级路径改指 math.heisenberg-family-gram-matrix（curator，small-backlog-14；
+  **只加 notes，陈述文本未动**；上面那段【升级路径】的施工图已过时，以本段为准）】
+  formalizer 已在 formal/StringFormal/NoGhost/HeisenbergGram.lean（提交 5b35c04，合并 43d7d54，
+  无 sorry）证出**本卡 (1)(2)(3) 的抽象版本**，图上由新卡 **math.heisenberg-family-gram-matrix**
+  （proposition，formalized，lean_decl `StringFormal.gram_of_heisenberg_family`）承载。
+  那条定理的载体是**任意 R-模**（不是多项式环、不需要基），四条假设与本卡的 (H1)–(H4) 逐条同型，
+  结论就是本卡的 (1)，另有 (2a) 有序环上对角元为正、(2b) 特征零域上非零、(3) 线性无关。
+  ⇒ **本卡不再需要"先证塔上的型唯一、再照搬 FockGram.lean 的条件版"那条路线**：
+  抽象版已经做完，剩下的是**实例化**。
+
+  ⚠ **归一化区别（不可混）**：新卡的 (H1) 是**正交归一**的 [A^i_m, A^j_n] = m δ_{ij} δ_{m+n,0}，
+  与本卡 (H1) 逐字相同（本卡的横向偏振按 ε^i·ε^j = δ^{ij} 取）；而 **FockGram.lean /
+  worldsheet.bosonic-fock-gram-matrix 是协变振子 α^μ_m 的版本，中心项带不定的 η^{μν}**，
+  走的是 `Fock.pairing_unique`（实质依赖"单项式是多项式环的基"）。三者的关系是：
+  新卡（抽象、δ_{ij}）⊃ 本卡所需的代数内容；FockGram（具体、η^{μν}）与新卡**互补而非包含**
+  （HeisenbergGram.lean 文件头 Mathematical notes 第 1 条逐字："the two files cover
+  complementary situations"）。本卡属于**正交归一**那一支。
+
+  ⇒ **本卡仍不标 formalized**，因为实例化没做完。按 HeisenbergGram.lean 文件头 Gaps 第 1 条，
+  把新卡用到塔上的 A^ε_n 还差三件：
+    (i)   `Fock.towerPairing η towerVacuum towerVacuum = 1`（本卡 (H4)）；
+    (ii)  `A^ε_n towerVacuum = 0`（n > 0，本卡 (H3)）；
+    (iii) 一个**横向正交归一标架**，把 `lie_ddfOp_ddfOp` 现给的 m (ε·δ) δ_{m+n,0}
+          变成 m δ^{ij}（本卡 (H1)）——即把 ε^i·ε^j = δ^{ij} 这条选择在 Lean 里落实。
+  （本卡 (H2) 互伴在塔上对应 worldsheet.ddf-operators-adjoint 的 (1)，图上仍 physical-argument；
+  但注意：本卡是**条件命题**，(H2) 是假设不是依赖，故它不压低本卡状态，只挡实例化。）
+  这三件是 formal/BLUEPRINT-noghost.md §C.4。补齐后本卡可直接引新卡 + 三条实例化引理接线。
+
   【2026-09-11（三）：结论 (2) 的一条缺口——「正整数故非零」需特征零（curator，
   分支 agent/curator/lean-wire-5；**只加 notes，陈述文本未动**）】
   本卡结论 (2) 的第一句写「每个对角元 ∏ n^{d(i,n)} · d(i,n)! 是**正整数**（正整数的有限乘积），
