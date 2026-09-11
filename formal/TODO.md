@@ -246,6 +246,22 @@
   - **仍不断言**：PSL 作用的忠实性（卡面也没断言）、S/T 生成（在 `ModularGroupGenerators.lean`）、
     基本域、η 的任何模变换性质。
 
+- [x] `mathlib-bridge-2`：桥层补两处（同文件，`check_axioms --all` 全 `ok`，全图 75 条回归全 `ok`）。
+  - `psl2z_im_pos (g : SL(2,ℤ)) (τ : ℍ) : 0 < (g • τ).im`——拆出来的命题卡
+    `math.mobius-action-preserves-upper-half-plane` 的第 (2) 条「作用保持 H」此前**只活在
+    `psl2z_im_smul_eq` 的类型里**（`g • τ : ℍ`），该卡 sources 与其 `--via-lean` 的 gaps 首条
+    都为此留了记账。现在它有自己的具名声明（证明是 Mathlib 的 `UpperHalfPlane.im_pos`）。
+  - ★ **外延性**：`psl2z_eq_quotient_pm_one : Z(SL(2,ℤ)) = Subgroup.closure {-1}`
+    与 `center_eq_zpowers_neg_one`（`= Subgroup.zpowers (-1)`）把 `center_eq_pm_one` 的集合等式
+    提到**子群等式**；`pslMk_eq_iff (g h) : pslMk g = pslMk h ↔ g = h ∨ g = -h` 则完全不提中心，
+    直接说 Mathlib 的商**恰好**按卡面的 `±` 关系粘合。
+    `math.psl2z-s-t-relations--via-lean` 与 `worldsheet.modular-group-generated-by-s-and-t-v2--via-lean`
+    的 gaps 首条（「两者的拼接是人读两条声明后作的比对，不是一条机检蕴涵」）现在有机检替代物。
+    ⚠ **口径**：这三条让「Lean 的 PSL = 卡面的 SL/{±I}」成为机检事实，但它们仍**不在**
+    `psl_S_sq` / `psl_closure_S_T` 的证明链上——那两条定理的对象本来就是 Mathlib 的 PSL，
+    不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
+    余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
