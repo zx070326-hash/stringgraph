@@ -1,45 +1,89 @@
 id: worldsheet.superstring-sector-consistency-solutions--via-exhaustion
 target: worldsheet.superstring-sector-consistency-solutions
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: worldsheet.superstring-sector-consistency-conditions
     note: 供给三条被强加的条件（相互局域性、OPE 闭合、至少一个左移与一个右移 R 扇区）。
   - id: worldsheet.superstring-sector-labels
     note: |
       供给 16 个扇区的标号与「六个因能级匹配为空」的约化，
-      即穷举的搜索空间。
+      即穷举的搜索空间（Lean 侧的 `sectors`，`sectors_card = 10`）。
   - id: worldsheet.open-superstring-low-level-spectrum
     note: |
       供给「快子住在开弦 NS− / 闭弦 (NS−,NS−)」这一事实，
-      本卡关于「解里不含快子」的断言要用它。
+      本卡关于「解里不含快子」的断言要用它（Lean 侧的 `tachyonSector` 只是那个标号，
+      「它是快子」这一识别在图内由本条依赖承载）。
 sources:
   - ref: polchinski-1998-v2
-    loc: "§10.6, (10.6.6) 下方的四行谱表与 (10.6.7)，pp. 26–27；type 0 的两个解同处"
+    loc: "§10.6, (10.6.6) 下方的四行谱表，pp. 26–27；type 0 的两个解同处"
     note: |
       L1。⚠ 原书措辞 'Proceeding further, one readily finds the only other solutions'
-      ——**穷举过程不展示**。
+      ——**穷举过程不展示**，且**漏了极大性条件**（见 gaps 第一条）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.9)–(10.6.11), pp. 27–28（'keeping all sectors with …'，即极大性）"
+    note: L1（E42）。前提 (d) 在原书里唯一的文本痕迹。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/FiniteCounts.lean :: StringFormal.Math.SuperstringSectors"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。本推导第 (1)–(4) 与 (6) 步全部由该 namespace
+      机器检查：`consistentSpectra_eq`（10 解 = 6 极大 ∪ 4 非极大）、`consistentSpectra_card = 10`、
+      `maximalSpectra_card = 6`、`halfSpectra_ssubset_maximal`（四个非极大解各为真子群）、
+      `mem_maximalSpectra_iff`（原书列表 = 极大解集合）、
+      `maximalSpectra_filter_hasRamondNeveuSchwarz`（含 R–NS 的四个极大解 = 四个 type II）、
+      `maximalSpectra_filter_not_hasRamondNeveuSchwarz`（其余两个 = 0A/0B）、
+      `tachyonSector_notMem_of_hasRamondNeveuSchwarz` / `tachyonSector_mem_of_not_hasRamondNeveuSchwarz`。
+      条件 (a) 的 ZMod 2 写法与 (10.6.5) 的整数写法之间的桥是 `mutuallyLocal_iff_even`。
 summary: |
-  按三条条件在 10 个非空扇区上做有限搜索：
+  按 (a)(b)(c) 加极大性 (d) 在 10 个非空扇区上做**有限穷举**：
   (1) 由条件 (c)，左右两侧各至少有一个 R 扇区；
-  (2) 由条件 (b)（OPE 闭合），扇区标号在 mod 2 加法下封闭，故解是 (Z_2)^4 的子群；
+  (2) 由条件 (b)（OPE 闭合）加非空，扇区标号在 mod 2 加法下封闭，故解是 (Z_2)^4 的子群
+      （注意「在 10 个非空扇区内封闭」是真约束：
+       (R+,NS+) + (NS−,NS−) = (R−,NS−) 是空扇区，故这两者不能共存）；
   (3) 由条件 (a)（相互局域性），该子群上的双线性形式 F_1α_2 − F_2α_1 − F̃_1α̃_2 + F̃_2α̃_1
       必须整体取偶值；
-  (4) 分两种情形穷举：含 R–NS 扇区时得四个解（IIB/IIA/IIA′/IIB′），
-      不含时得两个解（0A/0B）。
-  (5) (10.6.7) 的时空反射把 IIA′ ↔ IIA、IIB′ ↔ IIB，故四解只给两个物理理论。
+  (4) **穷举结果**：(a)(b)(c) 字面上共 **10** 个解；其中 **6** 个是极大解，
+      另 4 个是 (NS+,NS+) 加单个 R–R 扇区、各为某极大解的真子群。
+      加上极大性 (d) 后恰好剩 **6** 个：含 R–NS 扇区的四个（IIB/IIA/IIA′/IIB′）
+      与不含的两个（0A/0B）。
+  (5) 【本步已拆出，不在本推导内】(10.6.7) 的时空反射把 IIA′ ↔ IIA、IIB′ ↔ IIB，
+      故四解只给两个物理理论 → 见 worldsheet.type-ii-prime-reflection-equivalence。
+      （编号保留为 (5) 以便与 reviewer-v2-ch10 的复核记录对齐。）
   (6) 读表：四个 type II 解都不含 (NS−,NS−)，而 type 0 的两个解都含它。
 
-  ⚠ **上面第 (1)–(4) 步的结构是 curator 按条件形式补写的**；
-  原书只给结果表与一句 'one readily finds'。
-
-  【status 的理由】三条条件本身是被强加的（physical-argument），
-  且穷举过程在原书中不展示、在本图中也未独立执行。
+  【status: rigorous 的理由】第 (1)–(4)(6) 步是一次**有限、可判定**的组合穷举，
+  已在 formal/StringFormal/Math/FiniteCounts.lean 里由 Lean 完整机器检查（见 sources），
+  并由 reviewer-v2-ch10 独立复核（notes 有 reviewer-verified 记录），
+  符合 docs/STATUS_LEVELS.md 的 rigorous 例外条款。
+  ⚠ 这**不**意味着结论的有效状态是 rigorous：三条条件本身是被强加的
+  （worldsheet.superstring-sector-consistency-conditions 是 physical-argument 的定义卡），
+  故本卡的有效状态仍被上游压到 physical-argument，这是有意的。
 gaps:
-  - "**穷举过程不展示**：原书只给结果（'Proceeding further, one readily finds the only other solutions'）。本图没有独立复算该穷举。这是一个**有限**的组合搜索（(Z_2)^4 的子群加两条条件），完全可以机器验证——这是本图后续可以廉价升级的一处：写一段脚本枚举并由 reviewer 复核，即可按 STATUS_LEVELS 的 rigorous 例外升级。**建议记入待办。**"
-  - "**三条一致性条件本身是被强加的**：(a) 的理由是「否则振幅无法自洽定义」（物理论断）；(b) 依赖 OPE（收敛未证）；(c) 只是模不变性的一个必要条件，其完整论证在 §10.7。"
+  - "**极大性假设 (d) 是原书未明说的第四条条件**：(a)(b)(c) 字面上有 10 个解（Lean: `consistentSpectra_card = 10`），原书只列 6 个。多出的四个是 (NS+,NS+) 加单个 R–R 扇区，各为某极大解的真子群（`halfSpectra_ssubset_maximal`）。补上「谱含所有与已含扇区相容的扇区」（即 (10.6.9)–(10.6.11) 的 'keeping all sectors with …'）后穷举完全正确。**排除这四个非极大解预期要靠 §10.7 的完整模不变性，本图未建那一块**，故本推导把极大性当前提而非结论。原书的 'one readily finds the only other solutions' 是不完整的措辞。"
+  - "**三条一致性条件本身是被强加的**：(a) 的理由是「否则振幅无法自洽定义」（物理论断）；(b) 依赖 OPE（收敛未证）；(c) 只是模不变性的一个必要条件，其完整论证在 §10.7。这是本推导有效状态被压低的实际原因。"
   - "**相位公式 (10.6.4) 在本图无支撑**：它依赖自旋场的分支切割（§10.3 的谱流/自旋场）与 §10.4 末的 cocycle。**本图没有玻色化、自旋场、cocycle 的节点。** → 待建 worldsheet.spin-field-vertex-operators 与 worldsheet.vertex-operator-cocycle。"
-  - "**「四解只给两个物理理论」中的『物理上不同』未精确化**：(10.6.7) 是显式的场重定义，但「两个理论相同」的判据原书不定义。"
-  - "**条件的充分性未断言**：满足三条条件不等于理论一致（type I 的 tadpole 与时空反常还要另外检查，见 worldsheet.ten-dimensional-superstring-theories）。"
+  - "**「快子扇区就是 (NS−,NS−)」这一识别不在 Lean 里**：Lean 的 `tachyonSector` 只是那个标号，它承载快子由图内依赖 worldsheet.open-superstring-low-level-spectrum（physical-argument）提供。"
+  - "**type 0 两解的模不变性未覆盖**：原书断言 'These are modular-invariant'，本推导与 Lean 都不证它。这也是目标卡片不能标 formalized 的原因之一。"
+  - "**条件的充分性未断言**：满足 (a)(b)(c)(d) 不等于理论一致（type I 的 tadpole 与时空反常还要另外检查，见 worldsheet.ten-dimensional-superstring-theories）。"
+notes: |
+  reviewer-verified: reviewer-v2-ch10, 2026-09-11
+  复核覆盖 summary 的第 **(1)(2)(3)(4)(6)** 步，即 (Z_2)^4 上的整个有限穷举
+  （10 解 / 6 极大解 / 四个非极大解各为真子群 / 四个 type II 无快子 / 两个 type 0 有快子）。
+  复核同时**发现并订正了原书的一处缺口**：极大性条件 (d) 原书未明说，见 gaps 第一条。
+  第 (5) 步（(10.6.7) 的反射等价）**不在本次复核范围**，已拆为独立卡
+  worldsheet.type-ii-prime-reflection-equivalence（physical-argument）。
+
+  【为什么不另立 --via-lean】按 docs/STATUS_LEVELS.md 的拆卡规则，`status: formalized` 要求
+  Lean 声明与目标卡片陈述逐句对应；目标卡片还含 type 0 模不变性与扇区标号的物理内容，
+  故本推导取 rigorous，Lean 只作为「有限穷举已机器检查」的证据列在 sources 里。
+  目标卡片的 `formal.lean_decl` 指向 `mem_maximalSpectra_iff`，供 `check-axioms` 覆盖。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，Lean 4 + Mathlib v4.33.1）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.SuperstringSectors.mem_maximalSpectra_iff
+
+  输出 `ok  StringFormal.Math.SuperstringSectors.mem_maximalSpectra_iff  axioms: propext Classical.choice Quot.sound`。
+  本分支未改动 formal/ 下任何文件。
 author: curator
 created: "2026-09-11"

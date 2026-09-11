@@ -1,23 +1,32 @@
 id: worldsheet.superstring-sector-consistency-solutions
 kind: proposition
-title: 三条一致性条件的解穷举：有 R–NS 扇区时得 IIB / IIA / IIA′ / IIB′（四解、两个物理理论），无 R–NS 时得 0A / 0B
+title: 三条一致性条件加极大性的解穷举：有 R–NS 扇区时得 IIB / IIA / IIA′ / IIB′（四个极大解），无 R–NS 时得 0A / 0B（两个极大解）
 statement: |
-  在 worldsheet.superstring-sector-consistency-conditions 的三条条件（外加能级匹配）下，
-  穷举扇区组合，得到：
+  **前提**：
 
-  **情形 1：至少有一个 R–NS 扇区（(α, α̃) = (1, 0)）。** 恰有四个解：
+    (a)(b)(c) worldsheet.superstring-sector-consistency-conditions 的三条条件
+        （相互局域性、OPE 闭合、至少一个左移与一个右移 R 扇区），外加能级匹配
+        （它把 16 个标号约化为 10 个非空扇区）；
+    (d) **极大性：谱含所有与已含扇区相容的扇区**
+        ——即在满足 (a)(b)(c) 的扇区集合中只取**极大**者。
+        ⚠ 这一条**原书未明说**，它隐含在原书把同一结果重述为 GSO 投影时的措辞里：
+        (10.6.9)–(10.6.11) 逐字 'keeping **all** sectors with exp(πiF) = exp(πiF̃) = +1'
+        等等。没有 (d)，(a)(b)(c) 字面上还有四个非极大解（见下面【不断言 (1)】）。
+
+  在 (a)(b)(c)(d) 下，穷举扇区组合，得到：
+
+  **情形 1：至少有一个 R–NS 扇区（(α, α̃) = (1, 0)）。** 恰有四个极大解：
     IIB ： (NS+,NS+)  (R+,NS+)  (NS+,R+)  (R+,R+)
     IIA ： (NS+,NS+)  (R+,NS+)  (NS+,R−)  (R+,R−)
     IIA′： (NS+,NS+)  (R−,NS+)  (NS+,R+)  (R−,R+)
     IIB′： (NS+,NS+)  (R−,NS+)  (NS+,R−)  (R−,R−)
-  这四个解只代表**两个物理上不同的理论**：时空反射 X² → −X²、ψ² → −ψ²、ψ̃² → −ψ̃²
-  把 IIA′ 变成 IIA、IIB′ 变成 IIB。这两个理论称为
-  **type IIA 与 type IIB 超弦理论**。
 
-  **情形 2：没有 R–NS 扇区。** 只有两个额外解：
+  **情形 2：没有 R–NS 扇区。** 只有两个极大解：
     0A ： (NS+,NS+)  (NS−,NS−)  (R+,R−)  (R−,R+)
     0B ： (NS+,NS+)  (NS−,NS−)  (R+,R+)  (R−,R−)
-  它们是模不变的，但**都含快子且没有时空费米子**（type 0 理论）。
+  原书断言它们是模不变的，但**都含快子且没有时空费米子**（type 0 理论）。
+  （「模不变」这一句是原书的赤裸断言，**本图无支撑**，也不在本卡的机器检查范围内；
+   见 notes 的【为什么本卡不标 formalized】。）
 
   ★★ **一条本项目必须记准的事实**：
   **上述四个 type II 解里没有一个包含 (NS−,NS−) 扇区**（原书逐字：'Notice that none of these
@@ -27,27 +36,53 @@ statement: |
   （type 0 的两个解**确实**含 (NS−,NS−)，故有快子。）
 
   **本命题不断言的内容**：
-    (1) 不断言这个穷举是完备的（原书措辞是 'one readily finds the only other solutions'，
-        不给穷举过程）；
+    (1) **不断言极大性 (d) 可由 (a)(b)(c) 推出**。字面上 (a)(b)(c) 另有**四个非极大解**：
+          {(NS+,NS+), (R+,R+)}、{(NS+,NS+), (R+,R−)}、
+          {(NS+,NS+), (R−,R+)}、{(NS+,NS+), (R−,R−)}，
+        即 (NS+,NS+) 加**单个** R–R 扇区；每一个都是上面某个极大解的**真子群**。
+        合计 (a)(b)(c) 有 10 个解，加 (d) 后才是 6 个。
+        排除这四个非极大解预期要靠 §10.7 的完整模不变性（条件 (c) 只是它的一个必要条件），
+        **本图未建那一块**；故本卡把 (d) 写成前提而不是结论。
     (2) 不断言三条一致性条件本身是充分的；
-    (3) 不断言 IIA/IIB 的无质量谱（见 worldsheet.type-ii-massless-spectrum）
-        或时空超对称。
+    (3) **不断言四个 type II 解只代表两个物理理论**——(10.6.7) 的时空反射那一步已拆为
+        独立卡 worldsheet.type-ii-prime-reflection-equivalence（physical-argument）；
+    (4) 不断言 IIA/IIB 的无质量谱（见 worldsheet.type-ii-massless-spectrum）
+        或时空超对称；
+    (5) 不断言 type 0 两解的模不变性（原书断言，本图无节点）。
+formal:
+  lean_decl: StringFormal.Math.SuperstringSectors.mem_maximalSpectra_iff
+  lean_file: StringFormal/Math/FiniteCounts.lean
 uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge
 sources:
   - ref: polchinski-1998-v2
-    loc: "§10.6, (10.6.6) 下方的四行谱表（IIB / IIA / IIA′ / IIB′）与 (10.6.7)（时空反射 X² → −X², ψ² → −ψ², ψ̃² → −ψ̃²），pp. 26–27；type 0 的两个解与逐字 'These are modular-invariant, but both have a tachyon and there are no spacetime fermions.' 同处；逐字 'Notice that none of these theories contains the tachyon, which lives in the sector (NS−,NS−).' 与 'In conclusion, we have found two potentially interesting string theories, the type IIA and IIB superstring theories.'"
+    loc: "§10.6, (10.6.6) 下方的四行谱表（IIB / IIA / IIA′ / IIB′），pp. 26–27；type 0 的两个解与逐字 'These are modular-invariant, but both have a tachyon and there are no spacetime fermions.' 同处；逐字 'Notice that none of these theories contains the tachyon, which lives in the sector (NS−,NS−).' 与 'In conclusion, we have found two potentially interesting string theories, the type IIA and IIB superstring theories.'"
     note: |
       L1（抽取记录 polchinski-1998-v2.md E41；四行谱表、两个 type 0 解与全部逐字措辞
       逐页读到原书页图）。
       ⚠ 穷举的措辞是 'Proceeding further, one readily finds the only other solutions'
       ——**原书不展示穷举过程**。
+      ⚠⚠ **原书不写极大性条件 (d)**；本卡把它写成前提是 reviewer-v2-ch10 的裁决，
+      理由见 statement 的【不断言 (1)】与 notes 的【(d) 的来历】。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.9)–(10.6.11), pp. 27–28（GSO 投影的措辞：'The IIB theory is defined by keeping **all** sectors with exp(πiF) = exp(πiF̃) = +1'；IIA 与 0B 同型措辞）"
+    note: |
+      L1（E42）。**这是前提 (d) 在原书里唯一的文本痕迹**：把同一组解重述为 GSO 投影时
+      用的是 'keeping all sectors with …'，即极大性。原书在解条件时没有把它列为条件。
   - ref: polchinski-1998-v2
     loc: "§10.5, eq. (10.5.7), p. 21 与 p. 23（快子在开弦 NS− / 闭弦 (NS−,NS−)，m² = −2/α'）"
     note: |
       L1（E35）。这是「解里不含快子」这句话的另一半：必须先知道快子住在哪个扇区。
-tags: [superstring, gso, sectors, type-ii, type-0, tachyon, consistency]
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/FiniteCounts.lean :: StringFormal.Math.SuperstringSectors（mem_maximalSpectra_iff、consistentSpectra_eq、consistentSpectra_card、maximalSpectra_card、halfSpectra_ssubset_maximal、maximalSpectra_filter_hasRamondNeveuSchwarz、maximalSpectra_filter_not_hasRamondNeveuSchwarz、tachyonSector_notMem_of_hasRamondNeveuSchwarz、tachyonSector_mem_of_not_hasRamondNeveuSchwarz）"
+    note: |
+      本仓库。Lean 4 + Mathlib v4.33.1，全部 `decide`/`decide +kernel`，无 sorry。
+      (Z₂)⁴ 上的穷举把 (a)(b)(c) 的 10 个解、其中 6 个极大解、以及「四个非极大解各为某极大解真子群」
+      三件事机器检查完毕；快子扇区的有无也在内。
+      **Lean 侧不覆盖**：扇区标号穷尽 RNS 弦的谱、LevelMatched 背后的能级计算、条件 (c) 的必要性、
+      (10.6.7) 的反射等价（已拆卡）、type 0 的模不变性。
+tags: [superstring, gso, sectors, type-ii, type-0, tachyon, consistency, maximality]
 notes: |
   ★【转节点时的关键顺序，抽取记录 E41/E42 反复强调】
   本书的逻辑是：**三条一致性条件 → 解出扇区组合 → 把结果重述为 GSO 投影**。
@@ -55,11 +90,30 @@ notes: |
   通俗说法「GSO 投影把快子投掉」在本书里**不成立**——正确说法是
   「一致性条件的（type II）解不含快子所在的扇区」。
 
-  【四解 → 两理论这一步的强度】(10.6.7) 的时空反射是一个显式的场重定义，
-  原书直接给出。本卡照录为断言，但注意「物理上不同」这个判断本身没有精确化
-  （什么算「同一个理论」原书不定义）。
+  ★★【(d) 的来历：reviewer-v2-ch10 复核发现的缺口，2026-09-11】
+  formalizer 在 formal/StringFormal/Math/FiniteCounts.lean 里对 (Z₂)⁴ 做了完整枚举，
+  结果是 (a)(b)(c) **字面上有 10 个解，不是 6 个**：多出的四个是 (NS+,NS+) 加单个 R–R 扇区，
+  它们同样满足相互局域性、OPE 闭合与「左右各有一个 R 扇区」，
+  但都是原书所列解的**真子群**（Lean: halfSpectra_ssubset_maximal）。
+  原书那句 'one readily finds the only other solutions' 因此**漏了一个条件**。
+  补上极大性后穷举**完全正确**（Lean: mem_maximalSpectra_iff）。
+  → 本卡把极大性写成前提 (d)，并在 statement 的【不断言 (1)】里记明它不可由 (a)(b)(c) 推出。
+  这是本图第一次用形式化反过来订正一条教科书的穷举措辞。
 
-  【type 0 别漏】它们同样满足三条条件且模不变，只是有快子、无时空费米子。
+  【为什么本卡不标 formalized】按 docs/STATUS_LEVELS.md，`formalized` 要求 Lean 声明与卡片陈述
+  逐句对应。本卡的 statement 还含两处 Lean 不覆盖的内容：
+  (i) type 0 两解「是模不变的」（原书断言）；
+  (ii) 扇区标号与能级匹配的物理内容（由 worldsheet.superstring-sector-labels 承载，那张卡不是 formalized）。
+  故本卡的推导记 `status: rigorous`（组合穷举已机器检查 + reviewer 复核），
+  有效状态仍由上游的 physical-argument 定义卡压低——这是有意的。
+  → **可拆分建议**：若把 (i) 从本卡剥出（另立 type 0 模不变性卡），
+  并把 Lean 那半单独成卡，则那半可升 formalized。已记入报告。
+
+  【四解 → 两理论这一步已拆卡】见 worldsheet.type-ii-prime-reflection-equivalence。
+  拆卡理由：那一步是一个场重定义 + 「什么算同一个理论」的判断，与本卡的有限组合穷举
+  是两种完全不同的论证，混在一张卡里会把机器检查过的那半也压成 physical-argument。
+
+  【type 0 别漏】它们同样满足 (a)(b)(c)(d)，只是有快子、无时空费米子。
   这一条对「弦论没有快子」这类通俗断言是重要的反例：**一致性条件本身不排除快子**。
 author: curator
 created: "2026-09-11"
