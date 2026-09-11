@@ -1,0 +1,123 @@
+id: worldsheet.light-cone-monomials-span-fock-level
+kind: proposition
+title: 光锥单项式张成 Fock 空间的 level-N 分量：Fock.levelSubmodule(D,R,N) = span{光锥单项式}（任意交换环，只张成不给独立性）
+statement: |
+  这是一条**纯代数的条件命题**：把「Fock 空间的每个能级分量都由产生算子的单项式张成」这句
+  标准事实，换成「产生算子取自一个 DDF 光锥标架给出的 D 个方向 {b, b̃, ε_1,…,ε_{D−2}}」时
+  依然成立。**只断言张成，不断言这些单项式线性无关或构成基**。
+
+  【设定】D ∈ N，2 ≤ D；R 是**交换环**（不要求域、不要求 Algebra Q R）；η_μ : Fin D → R 满足
+  η_μ² = 1（∀μ）；F 是给定 (η,a,b) 的一个 **DDF 光锥标架** F : DDFLightConeFrame η a b
+  （worldsheet.ddf-light-cone-frame 的 (F1)–(F8)；本卡只用它打包出的「方向表」这一层结构，
+  不用 a、b 的具体取值，也不用 (F1)–(F8) 里任何一条单独的等式）。
+
+  【方向表】F 给出一个函数 frameVec_F : Fin D → (Fin D → R)，
+    frameVec_F(0) := b，  frameVec_F(1) := F 的共轭类光方向 b̃，
+    frameVec_F(μ) := F 的第 (μ−2) 个横向偏振 ε_{μ−2}   （2 ≤ μ ≤ D−1）。
+  它与「普通单项式」共用同一个指标集 Fin D（不建 Fin D ≃ Unit ⊕ Unit ⊕ Fin(D−2) 的双射）；
+  这一层只需 F 本身的数据，不需要额外假设。
+
+  【光锥产生算子与光锥单项式】记 Osc(D) := Fin D × Z_{>0}（振子标号：方向 × 正模数）。
+  对 w : Fin D → R 与正整数 n，定义**光锥产生算子**
+    lcCrea_η(w, n) := Σ_μ η_μ w^μ X_{(μ,n)}
+  （n = 1 时逐字是通常的偏振态 X 在 w 处的取值；X_{(μ,n)} 是 Fock 空间多项式实现里
+  单个振子的生成元）。对占据数 d : Osc(D) → N（有限支撑）定义**光锥单项式**
+    lcMonomial_F(d) := Π_{(μ,n)} [lcCrea_η(frameVec_F(μ), n)]^{d(μ,n)} 。
+  记 level(d) := Σ_{(μ,n)} n · d(μ,n)（振子能级）。
+
+  【断言】对每个 N ∈ N，
+
+      Fock.levelSubmodule(D, R, N)  =  span_R { lcMonomial_F(d) : level(d) = N } 。
+
+  即：level-N 的 Fock 空间分量既由「取任意 D 个方向的产生算子」张成，也由「只取光锥标架
+  给出的这 D 个特定方向 {b, b̃, ε_1,…,ε_{D−2}} 的产生算子」张成——换基不改变张成的子模。
+
+  【不断言】
+  (a) **不断言线性无关**：不同占据数 d ≠ e 给出的 lcMonomial_F(d)、lcMonomial_F(e) 是否线性
+      独立，本卡不判断。这正是 worldsheet.gt-longitudinal-k-algebra 与
+      worldsheet.ddf-spanning-rank-inequality 的 notes 里点名的下一个瓶颈：要从「张成」
+      升级到「基」，需要独立的一条线性无关性定理，本卡不提供。
+  (b) **不涉及动量塔、rung 分级或 D = 26**：本卡是**单个** Fock 纤维（固定动量）上的纯代数
+      事实，对一切 D ≥ 2、任意交换环 R 成立，与截距 a₀、动量 k、k_0 都无关。
+  (c) **不要求 R 是域或 Q-代数**，也不要求标架满足 DDF 归一化条件（η(b,b)=0、η(b,a)=1 等）
+      ——只用 F 打包出的方向表 frameVec_F 本身，这是 DDFLightConeFrame 结构数据的一部分，
+      不是它的某条公理。
+  (d) **不断言方向表张成整个空间**：「{b,b̃,ε_i} 张成 Fin D → R」是一条独立的引理
+      （worldsheet.ddf-light-cone-frame 的 notes 里手算过、Lean 侧另有
+      `span_range_frameVec_eq_top`），本卡的证明会用到它，但本卡陈述本身只谈 level-N 分量。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.NoGhost.levelSubmodule_eq_span_lcMonomial
+  lean_file: StringFormal/NoGhost/LightConeResolutionGen.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightConeResolutionGen.lean :: StringFormal.NoGhost.{levelSubmodule_eq_span_lcMonomial（本卡 formal.lean_decl）, levelSubmodule_eq_lcSpan, lcSpan, lcMonomial, lcCrea, lcCreaₗ, frameVec, span_range_frameVec_eq_top, X_eq_lcCrea_single}"
+    note: |
+      本仓库，formalizer-general-n-pr3（分支 agent/formalizer/general-n-pr3，合入 main
+      提交 9328c03 之后的一轮，`lake build` 与 `check_axioms --all` 由 formalizer 自跑，
+      formal/TODO.md `general-n-pr3` 项登记「无 sorry，公理集合只有
+      propext / Classical.choice / Quot.sound」。**curator 未自行重跑 `lake build`**。
+      **逐句字典**：
+        frameVec_F ⇒ `frameVec F : Fin D → (Fin D → R)`（`dite` 定义：0 ↦ b、1 ↦ F.frame.conj、
+        μ ↦ F.trans.vec ⟨μ−2,_⟩，`2 ≤ D` 时良定义）；
+        lcCrea_η(w,n) ⇒ `lcCrea η w n := Σ_μ η μ * w μ • X (μ,n)`（`lcCreaₗ` 是打包的线性映射）；
+        lcMonomial_F(d) ⇒ `lcMonomial F d := d.prod fun v k => lcCrea η (frameVec F v.1) v.2 ^ k`；
+        本卡断言 ⇒ `levelSubmodule_eq_span_lcMonomial hD F hη N`。
+      **类型类比【设定】写的还宽一档，逐字确认**：`levelSubmodule_eq_span_lcMonomial` 所在的
+      `section`（LightConeResolutionGen.lean 第 479 行起）只声明
+      `variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}`，
+      **没有** `[Algebra ℚ R]`；定理的显式假设只有 `hD : 2 ≤ D`、`F : DDFLightConeFrame η a b`、
+      `hη : ∀ μ, η μ * η μ = 1`。这不是 Lean 的 `variable` 自动包含机制掩盖了真实依赖——
+      同一文件里 `DDFLightConeFrame η a b` 本身在**没有** `[Algebra ℚ R]` 在作用域内的这个
+      section 也能通过类型检查（第 409/479 行两处 section 都只开 `[CommRing R]`），说明
+      `DDFLightConeFrame` 的八个字段（`LightConeFrame`、`TransverseFrame`、`dotVec`、
+      `towerMomentum`、`FrameSpansOrthogonal`，均在 LightCone.lean 里逐一确认只需
+      `[CommRing R]`）合起来也不需要 `[Algebra ℚ R]`。**这与 formal/BLUEPRINT-noghost.md
+      「B′ 订正（PR3 落地后）」第 6 条一致**：`exists_frame_decomp`/`frame_decomp_coeff`
+      的 `[Field]`/`[Algebra ℚ]`/`hD` 三条假设全部可去，因为 (F4)+(F3) 直接给 β = −1，
+      用不到 γ；本卡的定理是同一段代码路径的直接推论，继承同样的宽松类型类。
+      ⚠ **curator 未运行 `#check` 逐条核实**（未 `lake build` 此 worktree），
+      结论基于源码读法 + section variable 的直接对照，而非 Lean 输出；
+      若日后有人跑出与此不符的类型类要求，以 `#check` 结果为准，本条降级重写。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3（教科书对「产生算子单项式张成 Fock 空间」这句标准事实不写证明，也不换基讨论）"
+    note: |
+      **不承载论证**。教科书把「Fock 空间由产生算子的单项式张成」当作自由振子的标准事实
+      直接使用，从不讨论换到 {b,b̃,ε_i} 这组特定基是否改变张成——这正是本卡补的那一步，
+      是本项目形式化过程中为了给 (B-26) 铺路而引入的中间引理，不是文献里现成的陈述。
+      登记此条只为给本卡一个文献方位，与 worldsheet.transverse-ddf-fock-gram-matrix 的
+      同名 source 处理方式一致。
+tags: [bosonic-string, spectrum-generating-algebra, fock-space, spanning, no-ghost, formalized]
+notes: |
+  【立卡理由（curator，wire pr3/pr4）】
+  `uv run stringgraph search "light-cone monomial"` 与 `search "levelSubmodule"` 均无命中
+  （后者只命中若干无关的「level」模糊匹配）：图里此前没有任何节点承载「换到光锥标架方向后
+  Fock 空间的张成不变」这件事。它是 worldsheet.ddf-spanning-rank-inequality 与
+  worldsheet.gt-longitudinal-k-algebra 两条 notes 里都提到、但没有单独落点的一步——
+  「消元论证（下一张卡 worldsheet.physical-slice-bounded-by-transverse-count）要在光锥单项式
+  基上做，先得有『它们确实张成』这一句」。故单独立卡，不并入消元定理卡：
+  张成与消元是两个不同的命题（张成对任意 F 成立，消元还要求 hD/hη 之外的塔上结构），
+  拆开也方便日后单独攻线性无关这一半。
+
+  【与 worldsheet.ddf-light-cone-frame 的分工】那张卡定义 DDFLightConeFrame 本身（(F1)–(F8)），
+  本卡是**它的一个应用**：给定标架，Fock 空间的换基张成定理。`uses` 而非 `depends_on`——
+  本卡的证明确实要用到标架的方向表数据，但陈述本身不断言标架的存在性或八条公理各自成立，
+  故按 graph/CLAUDE.md 的 `uses` vs `depends_on` 分工（那张卡 status=formalized 的定义卡，
+  用 `uses` 不会把本卡拖到更低状态，用 `depends_on` 也不会，两者此处等价，取 `uses` 因为
+  这是「用到那张卡定义的对象」而非「本卡的证明步骤依赖那张卡的定理」）。
+
+  【与「张成」在别处的记法关系】worldsheet.ddf-light-cone-frame 的 (F8)（完备性）说的是
+  「{ε_i, v} 张成 v^⊥」，是**向量空间**层面的完备性；本卡的张成是**Fock 空间的一个 level
+  分量**（多项式代数意义下由单项式生成），两者不是同一件事，也不是互相推论的关系——
+  Lean 侧 `span_range_frameVec_eq_top`（方向表张成 Fin D → R 全空间）才是本卡证明会用到
+  的那条向量空间级张成，且它比 (F8) 更强（(F8) 只要求 v^⊥ 内的向量能分解，
+  `span_range_frameVec_eq_top` 要求**任意**向量都能分解，见该卡 sources 的记录）。
+
+  【下游】本卡是 worldsheet.physical-slice-bounded-by-transverse-count 与
+  worldsheet.ddf-spanning-rank-inequality 消元论证的地基：消元步骤（把塔上反对角片的物理子模
+  压到「不含 b̃ 的光锥单项式」+「伪态」之和）第一步就是把该片换成本卡给出的光锥单项式张成，
+  再对 b̃-次数分类讨论。
+author: curator
+created: "2026-09-12"

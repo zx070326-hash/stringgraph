@@ -1,0 +1,55 @@
+id: worldsheet.light-cone-monomials-span-fock-level--via-lean
+target: worldsheet.light-cone-monomials-span-fock-level
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      **供给标架对象 F 与方向表**：目标卡的 `frameVec_F` 是这张卡定义的 `DDFLightConeFrame`
+      结构（(F1)–(F8)）打包出的 `frameVec`。本推导只用它作为一个"给出 D 个方向"的黑箱，
+      不用 (F1)–(F8) 的任何一条等式本身（目标卡【设定】已注明）。
+      ⚠ 该卡 status/effective = formalized，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightConeResolutionGen.lean :: StringFormal.NoGhost.levelSubmodule_eq_span_lcMonomial（第 649 行起）；铺垫 levelSubmodule_eq_lcSpan（第 639 行）、lcSpan_le_levelSubmodule / levelSubmodule_le_lcSpan（张成的两个包含方向）、span_range_frameVec_eq_top（方向表张成全空间，第 443 行）"
+    note: |
+      本仓库，无 sorry（source 见目标卡）。**证明结构**：`levelSubmodule_eq_lcSpan` 分两半——
+      `≤` 用 `span_range_frameVec_eq_top` 把「level-N 齐次多项式」按普通基展开，再逐个基向量
+      换成方向表的线性组合、乘出来仍落在 `lcSpan`（多重线性）；`≥` 直接展开 `lcCrea` 的定义，
+      每个 `lcMonomial` 本身就是普通单项式的 R-线性组合，落在 `levelSubmodule` 里（子模对
+      加法数乘封闭）。`levelSubmodule_eq_span_lcMonomial` 只是把 `lcSpan`（按集合 `{d | level d
+      = N}` 的像张成）重写成对子类型 `{d // level d = N}` 取值域的张成，`rfl` 级别的改写。
+      **两个方向的证明用的假设不对称**：`≤`（"每个 level-N 元素都能写成光锥单项式的
+      线性组合"，即目标卡断言本身）用到 `span_range_frameVec_eq_top`（故要 `hD : 2 ≤ D`），
+      `≥`（"每个光锥单项式都落在 levelSubmodule 里"）只需 `lcCrea` 的定义展开，不需要
+      标架张成整个空间——这条更容易的一半在文件里独立成
+      `lcSpan_le_levelSubmodule`（无 `hD` 前提）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3（不承载论证，见目标卡同名 source）"
+    note: "只标注文献方位，教科书未讨论这一步。"
+summary: |
+  证明分两个包含方向：
+
+  **`lcSpan_le_levelSubmodule`（容易的一半，`≥`）**：光锥单项式 `lcMonomial F d` 展开定义就是
+  `lcCrea` 的乘积，而 `lcCrea η w n = Σ_μ η_μ w^μ X_{(μ,n)}` 是普通生成元 `X` 的 R-线性组合，
+  乘出来（多重线性 + `Fock.levelSubmodule` 是齐次多项式子模）仍落在同一个 `levelSubmodule`。
+  不需要 `hD`。
+
+  **`levelSubmodule_le_lcSpan`（困难的一半，`≤`，目标卡断言的实质内容）**：用
+  `span_range_frameVec_eq_top hD F` 把方向表 `frameVec F` 张成整个 `Fin D → R`，
+  于是每个普通生成元方向都能写成方向表的 R-线性组合；把这个分解代入任意 level-N
+  齐次单项式（普通基下），逐项换基后仍是 level-N（换基是线性的，不改变次数），
+  展开后落在 `lcSpan F N` 里。
+
+  两半合起来给 `levelSubmodule_eq_lcSpan`，`levelSubmodule_eq_span_lcMonomial` 只是把
+  张成的生成集合从「像集合」换写成「对子类型取值域」，`rfl` 完成。
+
+  **为什么标 formalized**：目标卡的全部断言（张成等式）由这一条无 sorry 的 Lean 定理
+  逐字给出，命名字典见目标卡 sources；唯一依赖（DDF 光锥标架对象）effective 也是
+  formalized。
+gaps:
+  - "线性无关未做（目标卡边界 (a) 本身声明的范围）：光锥单项式是否构成基，本推导不提供，也不试图提供。"
+  - "curator 未自行运行 `lake build` / `check-axioms` 核实本推导所依赖的类型类窄化说法（目标卡 sources 的 ⚠ 段）；结论基于直接读 `variable` 声明行，未跑 `#check`。"
+author: curator
+created: "2026-09-12"
