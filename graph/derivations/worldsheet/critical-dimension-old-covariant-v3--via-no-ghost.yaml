@@ -33,6 +33,12 @@ gaps:
   - "本陈述是 worldsheet.critical-dimension-bosonic-v2 路线 (II)（OCQ）的独立表述，与路线 (III)（BRST 幂零）之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）。本推导不依赖它。"
   - "历史换代记录（论证始终不变，只跟随依赖节点与目标节点的版本）：lead 2026-09-10 把 depends_on 由 no-ghost-theorem-v2 就地换到 v3、再由 v3 换到 v4（v4 相对 v3 只改两处表述：动量限定提到全局前言、第 (2) 条显式写 p ≠ 0，并把 DDF 参数化由射线改为去心直线；见 ms.no-ghost-theorem 第三轮审计 B1/A1）。curator 2026-09-11 把 target 由 worldsheet.critical-dimension-old-covariant 换到 -v2，同日再由 -v2 换到 **-v3**（本文件；v3 相对 v2 只删去 statement 里 H_0 的括注「（伪态）」，命题内容不变，见目标卡 notes 与 ms.critical-dimension-bosonic 第二轮 D5/T4、第三轮 §6），depends_on 始终不变。"
 notes: |
+  【2026-09-11 更新（curator 记账，只加本行）】下文「逐字保留」段里「DDF 支链拆卡后由两张
+  physical-argument 卡承载」已过期：worldsheet.ddf-commute-with-virasoro 已 formalized
+  （DDFOperatorAll.lean）+ rigorous（Gebert–Nicolai），worldsheet.ddf-transverse-oscillator-algebra-v2
+  为 rigorous。本推导有效状态**仍为** physical-argument，瓶颈现为 no-ghost-theorem-v4 的
+  ddf-operators-adjoint → vertex-operator-adjoint 链等三条边（`stringgraph why` 可查）。
+
   【2026-09-11 第二次换代：目标由 -v2 改指 -v3】v3 相对 v2 的唯一差别是 statement 中
   H_0 的括注「（伪态）」被删去：H_0 按定义式是 **Fock 内积在 H_phys 上的根**，而「伪态」
   是 L_{−n} 的后代，二者相等在 (D, a) = (26, 1) 是无鬼定理的内容而非定义

@@ -1,0 +1,214 @@
+id: worldsheet.kac-determinant-level-four
+kind: proposition
+title: Verma 模 level-4 的十五个 Gram 元与 5×5 行列式 det₄ = 384h³(8h+c−1)(16h²+2h(c−5)+c)²(3h²+h(c−7)+c+2)(16h²+10ch−82h+15c+66)，**且在 Lean 内部**等于 Kac 乘积形 37748736(h−h₁₁)³((h−h₁₂)(h−h₂₁))²(h−h₁₃)(h−h₃₁)(h−h₂₂)(h−h₁₄)(h−h₄₁)（张成集的 Gram，非基的 Gram）
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），v := |c,h⟩ 是最高权向量，约定 conv.virasoro-standard。
+  设 B 是 V(c,h) 上的**归一化逆变双线性型**，即 B 逆变（B(L_n x, y) = B(x, L_{−n} y)，
+  见 worldsheet.shapovalov-form-uniqueness）且 B(v, v) = 1。记 ⟨x, y⟩ := B(x, y)。
+
+  记 level-4 的五个显式降算符态（按 4 的五个整数分拆 [4]、[3,1]、[2,2]、[2,1,1]、[1,1,1,1]）
+
+      u₄ := L₋₄ v,   u₃₁ := L₋₃ L₋₁ v,   u₂₂ := L₋₂ L₋₂ v,   u₂₁₁ := L₋₂ L₋₁² v,   u₁₁₁₁ := L₋₁⁴ v。
+
+  则：
+
+  **(1) 十五个独立 Gram 元**（非对角的另一半由 worldsheet.shapovalov-form-uniqueness (2)
+  的对称性给出，不是额外假设）：
+
+      ⟨u₄, u₄⟩       = 8h + 5c
+      ⟨u₄, u₃₁⟩      = 14h
+      ⟨u₄, u₂₂⟩      = 24h + 3c
+      ⟨u₄, u₂₁₁⟩     = 36h
+      ⟨u₄, u₁₁₁₁⟩    = 120h
+      ⟨u₃₁, u₃₁⟩     = 12h² + 4ch + 12h
+      ⟨u₃₁, u₂₂⟩     = 30h
+      ⟨u₃₁, u₂₁₁⟩    = 40h² + 20h
+      ⟨u₃₁, u₁₁₁₁⟩   = 192h² + 48h
+      ⟨u₂₂, u₂₂⟩     = c²/2 + 8ch + 4c + 32h² + 32h
+      ⟨u₂₂, u₂₁₁⟩    = 48h² + 6ch + 48h
+      ⟨u₂₂, u₁₁₁₁⟩   = 216h² + 144h
+      ⟨u₂₁₁, u₂₁₁⟩   = 32h³ + 4ch² + 116h² + 2ch + 32h
+      ⟨u₂₁₁, u₁₁₁₁⟩  = 288h³ + 336h² + 96h
+      ⟨u₁₁₁₁, u₁₁₁₁⟩ = 384h⁴ + 1152h³ + 1056h² + 288h
+
+  其中 ⟨u₂₂, u₂₂⟩ 是 level 4 内**唯一**带非整系数（c²/2）的元；其无分母形式是
+  2⟨u₂₂, u₂₂⟩ = c² + 16ch + 8c + 64h² + 64h。
+
+  **(2) 5×5 行列式**（二十五个元全部代入）：
+
+      det₄ := det [ ⟨u_i, u_j⟩ ]_{i,j ∈ {4, 31, 22, 211, 1111}}
+            = 384 h³ · (8h + c − 1) · ( 16h² + 2h(c−5) + c )² · ( 3h² + h(c−7) + c + 2 )
+                    · ( 16h² + 10ch − 82h + 15c + 66 )。
+
+      因子 16h² + 2h(c−5) + c 正是 worldsheet.kac-determinant-level-two (3) 的 level-2
+      行列式除以 2h，在此**以平方出现**；因子 3h² + h(c−7) + c + 2 正是
+      worldsheet.kac-determinant-level-three (2) 的第三个因子；线性因子 8h + c − 1 与末因子
+      16h² + 10ch − 82h + 15c + 66 是 level 4 首次出现的两个新因子（rs = 4）。
+
+  **(3) 与 Kac 乘积形的相等——本条是一条 R-多项式恒等式，不含平方根**：
+  设 h₁₁, h₁₂, h₂₁, h₁₃, h₃₁, h₂₂, h₁₄, h₄₁ ∈ R 满足（全部是**清过分母**的对称函数条件）
+
+      h₁₁ = 0,
+      8(h₁₂ + h₂₁) = 5 − c,        16 h₁₂ h₂₁ = c,
+      3(h₁₃ + h₃₁) = 7 − c,        3 h₁₃ h₃₁ = c + 2,
+      8 h₂₂ = 1 − c,
+      8(h₁₄ + h₄₁) = 41 − 5c,      16 h₁₄ h₄₁ = 15c + 66,
+
+  则
+
+      det₄ = 37748736 · (h − h₁₁)³ · ((h − h₁₂)(h − h₂₁))² · (h − h₁₃)(h − h₃₁)
+                      · (h − h₂₂) · (h − h₁₄)(h − h₄₁)。
+
+  指数 3, 2, 2, 1, 1, 1, 1, 1 恰为 p(4 − 1·1) = p(3) = 3、p(4 − 2) = p(2) = 2（(1,2) 与 (2,1)）、
+  p(4 − 3) = p(1) = 1（(1,3) 与 (3,1)）、p(4 − 4) = p(0) = 1（(2,2)、(1,4)、(4,1)），
+  与 worldsheet.kac-determinant-v2 在 N = 4 的重数结构逐项吻合；总次数 3 + 4 + 2 + 3 = 12。
+  常数是 **α₄ = 384 · 8 · 16² · 3 · 16 = 37748736 = 2²² · 3² > 0**。
+  h₂₂ 是本图内第一个**非零的有理** Kac 根（h₁₁ = 0 之外），故它只需一条线性关系而非一对和/积。
+
+  **(4) c = 1 处的退化核对**：代 c = 1，Kac 权退化为 h_{r,s} = (r−s)²/4，即
+  h₁₁ = h₂₂ = 0、h₁₂ = h₂₁ = 1/4、h₁₃ = h₃₁ = 1、h₁₄ = h₄₁ = 9/4，而 (2) 的右端变成
+
+      384h³ · 8h · (16h² − 8h + 1)² · (3h² − 6h + 3) · (16h² − 72h + 81)
+        = 9216 h⁴ (4h − 1)⁴ (h − 1)² (4h − 9)² = [ 96 h² (4h − 1)² (h − 1)(4h − 9) ]²，
+
+  是完全平方。⚠ 与 level 2、3 不同，h 的偶次幂 4 **不是**由 r ↔ s 配对得到的：
+  (h − h₁₁)³ 与 (h − h₂₂)¹ 各自是奇次，是 h₂₂ 在 c = 1 处**撞到** h₁₁ = 0 才合成 h⁴。
+
+  【本节点明确**不**断言】
+  (a) **(2) 是「level-4 的 Kac 行列式」**。Kac 行列式是 Gram 矩阵在 V_4 的一组**基**上的
+      行列式；{u₄, u₃₁, u₂₂, u₂₁₁, u₁₁₁₁} 只被证明**落在** V_4 里。
+      · **张成**：V_4 由 4 的**八个**合成（[4]、[3,1]、[1,3]、[2,2]、[2,1,1]、[1,2,1]、[1,1,2]、
+        [1,1,1,1]）的词张成，其中三个非有序词 L₋₁L₋₃v、L₋₁L₋₂L₋₁v、L₋₁L₋₁L₋₂v 要用括号关系
+        化到上面五个的线性组合。这一步在一般 N 已由 worldsheet.verma-level-spanned-by-partitions
+        （formalized，`levelSpan_eq_span_range_partitionWord`）覆盖，但 ShapovalovLevelFour.lean
+        **不 import 那个文件，也没有把它实例化到 u₄…u₁₁₁₁ 的具名引理**（见推导 gaps (i)）。
+      · **线性无关**：完全没有证——那正是 PBW（math.verma-module-free-over-negative-part 的
+        (2)(3)：dim V_4 = p(4) = 5）。这里的 PBW 缺口比 level 2、3 更**承重**：level 4 是本图
+        第一个 p(N) > N 的 level，也是第一个 Kac 根以 p(N−rs) = 2 的**新**重数、且出现有理根
+        h₂₂ 的 level；「五个向量的 Gram 行列式」与「V_4 的 Kac 行列式」之间只差这一步。
+      ⇒ (2)(3) 是**张成集的 Gram 行列式**与它的一条多项式因式分解。
+  (b) **B 的存在性**。本卡的一切都以「设 B 是归一化逆变型」为前提；
+      存在性见 worldsheet.shapovalov-form-existence，无条件版本要 V(c,h) ≠ 0。
+  (c) **h_{r,s}(c) 的显式表达式**。(3) 只用八个根的**对称函数**（h₂₂ 是线性关系；其余成对给和与积），
+      **不引入** √((c−1)(c−25))，因此也**不断言**这些 h_{r,s} 在 R 中存在
+      （(3) 是「若 R 中存在满足那七条关系的元素，则……」的条件命题）。在 R = C 上
+      worldsheet.kac-determinant-v2 的 h_{r,s}(c) 满足那七条关系——这一步核对见 notes。
+  (d) **一般 N 的行列式公式与常数 α_N**。见 worldsheet.kac-determinant-v2（rigorous，未形式化）
+      与该卡 notes (D) 登记的 α_N 乘积公式（未形式化、非文献）。本卡只做 N = 4。
+  (e) **零点的表示论含义**（奇异向量、可约性、不可约商）不在本卡内。
+  (f) 任何正定性/酉性；B 是 R-双线性型，R 上无序结构。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.IsContravariant.gram_level_four_det_eq_kac
+  lean_file: StringFormal/Virasoro/ShapovalovLevelFour.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/ShapovalovLevelFour.lean :: StringFormal.Virasoro.{desc4, desc31, desc22, desc211, desc1111, centralTerm_four, lie_lgen_four_neg_four, lie_lgen_four_neg_three, lie_lgen_four_neg_two, lie_lgen_four_neg_one, lie_lgen_one_neg_two, lie_lgen_zero_neg_two, lie_lgen_four_desc1, lie_lgen_four_desc2, lie_lgen_four_desc11, lie_lgen_four_desc111, lie_lgen_four_desc4, lie_lgen_four_desc31, lie_lgen_four_desc22, lie_lgen_four_desc211, lie_lgen_four_desc1111, lie_lgen_one_desc2, lie_lgen_three_desc2, lie_lgen_three_desc31, lie_lgen_three_desc22, lie_lgen_three_desc211, lie_lgen_three_desc1111, lie_lgen_zero_desc2, lie_lgen_two_desc22, lie_lgen_two_desc211, lie_lgen_two_desc1111, lie_lgen_zero_desc111, lie_lgen_one_desc1111, desc4_mem_levelSpan, desc31_mem_levelSpan, desc22_mem_levelSpan, desc211_mem_levelSpan, desc1111_mem_levelSpan, IsContravariant.gram_level_four_44, IsContravariant.gram_level_four_4_31, IsContravariant.gram_level_four_4_22, IsContravariant.gram_level_four_4_211, IsContravariant.gram_level_four_4_1111, IsContravariant.gram_level_four_31_31, IsContravariant.gram_level_four_31_22, IsContravariant.gram_level_four_31_211, IsContravariant.gram_level_four_31_1111, IsContravariant.gram_level_four_22_22, IsContravariant.two_mul_gram_level_four_22_22, IsContravariant.gram_level_four_22_211, IsContravariant.gram_level_four_22_1111, IsContravariant.gram_level_four_211_211, IsContravariant.gram_level_four_211_1111, IsContravariant.gram_level_four_1111_1111, IsContravariant.gram_level_three_four, IsContravariant.gram_level_four_det, kac_factor_rs_two_two, kac_factor_rs_four, IsContravariant.gram_level_four_det_eq_kac, kac_level_four_at_c_one}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。该文件由 formalizer 于 2026-09-11 完成
+      （文件内最后一个提交 640d2a2 "formal: add level-4 Gram determinant and its Kac product form"），
+      由 lead 以 **54898c6**（"merge: Shapovalov level-4 Gram determinant matches Kac formula
+      (ShapovalovLevelFour.lean)"）合入 main。全文件 60 条声明。
+      逐句对应：(1) → `gram_level_four_44 / _4_31 / _4_22 / _4_211 / _4_1111 / _31_31 / _31_22 /
+      _31_211 / _31_1111 / _22_22 / _22_211 / _22_1111 / _211_211 / _211_1111 / _1111_1111`
+      （`gram_level_four_22_22` 里 1/2 写作 `centralTerm R 2`；无分母形式
+      `two_mul_gram_level_four_22_22`）；非对角另一半在 `gram_level_four_det` 的证明里经十次
+      `IsContravariant.comm` 转置；
+      (2) → `gram_level_four_det`（`Matrix.det !![…]`，5×5，`det_succ_row_zero` 展开后一句
+      `linear_combination … * two_mul_centralTerm_two R`）；
+      **(3) → `gram_level_four_det_eq_kac`（本卡 formal.lean_decl；在 Lean 内部，不是 curator 手算）**，
+      辅助 `kac_factor_rs_two_two`（8(h−h₂₂) = 8h+c−1）/ `kac_factor_rs_four`
+      （16(h−h₁₄)(h−h₄₁) = 16h²+10ch−82h+15c+66），并回调 level-3 文件的
+      `kac_factor_rs_two` / `kac_factor_rs_three`；
+      (4) → `kac_level_four_at_c_one`。
+      另有 `gram_level_three_four`（level 3 与 4 正交，worldsheet.shapovalov-form-uniqueness (3)
+      的实例，不进本卡陈述）。
+      文件头 Caveat 段逐字「That they are linearly *independent* is exactly PBW, which is not
+      available here; so … this is the determinant of an explicit `5 × 5` matrix of inner
+      products, not yet formally "the Kac determinant of `V₄`"」。
+      ⚠ 文件头 Main results 段列了「`IsContravariant.gram_level_four_matrix`: the whole `5 × 5`
+      matrix at once」，但**文件里没有这条声明**（level-3 的对应物 `gram_level_three_entries`
+      在 level 4 没有写；行列式定理直接改写十五个元）。这是文档与交付物的不一致，
+      **不涉及任何定理**；已在本轮报告中提请 formalizer 订正。
+      **curator 未自行重跑 `lake build`**；依据是 formal/TODO.md 的「N = 4 已完成…无 sorry，
+      60 条声明 `check_axioms` 全 `ok`」记录与 lead 的口头确认。合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（h_{p,q}(c) 的显式公式与重数 P(N−pq)）；Gram 矩阵定义 Definition 6.11, p. 97（LNP 759, pp. 91-102）"
+    note: |
+      **只用于本卡 notes 里「R = C 上 h_{r,s}(c) 满足 (3) 的七条对称函数关系」那一步核对，
+      不承载 (1)(2)(3)(4) 的论证**（那四条全部是 Lean 的）。L1 逐页核实
+      （literature/extractions/math-sources.md §34.3）。⚠ 该处限 c, h ∈ ℝ 且 A^N 是 **Hermite**
+      形式的 Gram 矩阵，且取 V_N 的**一组基**（Definition 6.11）——正是本卡【不断言】(a) 缺的那步。
+      书上写 K_N ≥ 0（不是 > 0）。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页）"
+    note: |
+      **只用于重数/根结构的对照**。FF 的 M_{h,c}(k) 显式定义为 PBW 基
+      e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用于真空所得基的 Gram 矩阵
+      （L1，math-sources.md §34.2(b)）；k = 4 时那组基正是本卡的
+      {u₁₁₁₁, u₂₁₁, u₂₂, u₃₁, u₄}（按 FF 的排序），**但 FF 已假定它是基**。
+      FF 的形式是 det² 而非 det，其常数 C 只被断言**非零**。
+tags: [cft, representation-theory, verma-module, shapovalov, kac-determinant, virasoro, formalized]
+notes: |
+  【本卡相对 level-three 的新内容——三件事】
+  (i) **p(N) > N 首次出现**（p(4) = 5），Gram 矩阵不再是「N × N」；
+  (ii) **有理 Kac 根 h₂₂ = (1−c)/8 首次出现**，它在 (3) 里只需一条线性关系 8h₂₂ = 1 − c，
+       不需要和/积对；这也是 det₄ 在 ℚ(c)[h] 上分解出一个**线性**因子的原因；
+  (iii) **重数 p(N−rs) = 2 首次以「新」的方式出现**：level-2 的因子 16h² + 2h(c−5) + c 在 det₄ 里
+       是平方（p(4−2) = p(2) = 2），而不是像 level 3 那样以一次幂重现。
+  「Gram 行列式 = Kac 乘积」这一步与 level 3 同样在 Lean 内部（`gram_level_four_det_eq_kac`），
+  假设只有八个根的七条**清过分母的对称函数等式**，结论是乘积形。
+
+  【「level-4 Gram 矩阵整系数」是错的】
+  ⟨u₂₂, u₂₂⟩ = c²/2 + 8ch + 4c + 32h² + 32h 带 1/2（来源是 [L₂, L₋₂] 的中心项 c/2 在
+  L₂ 两次穿过 L₋₂ 时**没有**被偶数因子吃掉：L₂ u₂₂ = (8h + 8 + c) L₋₂v，再乘 ⟨L₋₂v, L₋₂v⟩ = 4h + c/2）。
+  这是 level 4 内**唯一**的非整系数元；其余十四个都是 Z[c,h] 的元素。
+  ⚠ 但**不是** N ≤ 4 内唯一的：level 2 的 ⟨L₋₂v, L₋₂v⟩ = 4h + c/2 已经带 1/2
+  （worldsheet.kac-determinant-level-two (2)）；level 1 与 level 3 的所有元都是整系数
+  （level 3 的 ⟨u₂₁, u₂₁⟩ = 8h² + ch + 8h 里 c/2 被 ⟨L₋₁v, L₋₁v⟩ = 2h 的 2 吃掉）。
+  ⇒ 「Gram 矩阵是整系数矩阵」这个常见的随口断言在 N = 2 与 N = 4 都不成立；
+  行列式 det₄ 仍是整系数（Lean 证明里 1/2 由 `two_mul_centralTerm_two` 消掉）。
+
+  【为什么「不依赖 √((c−1)(c−25)) 分支」仍然成立】
+  与 level-three 卡同理：(3) 只用每一对 {h₁₂,h₂₁}、{h₁₃,h₃₁}、{h₁₄,h₄₁} 的**和与积**，
+  加上 h₁₁ = 0 与 h₂₂ 的线性关系；和、积在两支交换下不变，故 (3) 既不需要 R 中存在平方根，
+  也不需要选分支，更不需要 R 是域或有序。
+
+  【(3) 的七条关系与 Schottenloher 的 h_{p,q}(c) 相容——curator 手算核对，2026-09-11】
+  取 h_{p,q}(c) = (1/48)[(13−c)(p²+q²) + √Δ·(p²−q²) − 24pq − 2 + 2c]（Theorem 6.12），
+  记 Δ := (c−1)(c−25)。rs ≤ 3 的五条关系（h₁₁ = 0；(1,2)/(2,1) 的和 (5−c)/8、积 c/16；
+  (1,3)/(3,1) 的和 (7−c)/3、积 (c+2)/3）已在 worldsheet.kac-determinant-level-three 的 notes 核过，
+  此处只做 rs = 4 的两条：
+  · **h₂₂**：p = q = 2 ⇒ p²+q² = 8、pq = 4、p²−q² = 0 ⇒ (1/48)[8(13−c) − 96 − 2 + 2c]
+    = (1/48)(6 − 6c) = (1−c)/8。✓ 即 Lean 的假设 e22 : 8h₂₂ = 1 − c。
+  · **(1,4) 与 (4,1)**：p²+q² = 17、pq = 4、p²−q² = ∓15 ⇒ 记 U := 17(13−c) − 96 − 2 + 2c = 123 − 15c，
+    h₁₄ + h₄₁ = 2U/48 = (123 − 15c)/24 = (41 − 5c)/8；
+    h₁₄ · h₄₁ = (U² − 225Δ)/48² = [15129 − 3690c + 225c² − 225(c² − 26c + 25)]/2304
+              = (2160c + 9504)/2304 = (15c + 66)/16。✓
+    即 Lean 的假设 e4s : 8(h₁₄+h₄₁) = 41 − 5c 与 e4p : 16h₁₄h₄₁ = 15c + 66。
+  ⚠ **这一段是 curator 的手算，不在 Lean 里、也不是任何来源的逐字内容**。
+  它支持的只是「Lean 的 (3) 所假设的那七条关系，在 R = C 与 Schottenloher 的 h_{p,q}(c) 下
+  确实成立」；**(3) 本身的证明不依赖它**（(3) 是条件命题），故本卡的 formalized
+  不被这段手算拖低——与 level-two 卡 (4) 的情形不同，那里手算出现在**结论**里。
+
+  【α₄ = 37748736 与 α_N 的乘积公式】
+  本卡给出 α₄ = 384·8·16²·3·16 = 37748736 = 2²²·3² > 0。连同 α₁ = 2、α₂ = 32、α₃ = 2304，
+  四个值与 worldsheet.kac-determinant-v2 notes (D) 登记的乘积公式
+  α_N = ∏_{rs ≤ N} ((2r)^s · s!)^{p(N−rs) − p(N−r(s+1))} 在 N = 1, 2, 3, 4 处逐项吻合
+  （N = 4 的八个因子：(1,1) 2¹、(1,2) 8¹、(1,3) 48⁰、(1,4) 384¹、(2,1) 4¹、(2,2) 32¹、
+  (3,1) 6¹、(4,1) 8¹，乘积 2·8·384·4·32·6·8 = 37748736）。
+  本卡是该公式的**第二个 formalized 数据点**（第一个是 N = 3；N = 2 的 Kac 比较是手算），
+  也把那张卡 notes (D) 里「N = 4 来自 CAS」升级为「来自 Lean」。
+  ⚠ 该公式本身**未形式化、也不是文献逐字**，见那张卡的登记。本卡只承载 N = 4 的数字。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search kac` 与 `search level-four`：既有节点是
+  worldsheet.kac-determinant（已 superseded）、worldsheet.kac-determinant-v2（一般 N，rigorous）、
+  worldsheet.kac-determinant-level-two（N ≤ 2，formalized）、
+  worldsheet.kac-determinant-level-three（N = 3，formalized）。本卡是 level-three 的
+  **同构姊妹卡**（同一前提、同一不断言清单），**不重复**：level-three 不含 level-4 的任何 Gram 元，
+  也不含 rs = 4 的两条 Kac 关系。另有 worldsheet.verma-level-spanned-by-partitions（formalized）
+  承载一般 N 的张成一半，本卡【不断言】(a) 已指向它。
+author: curator
+created: "2026-09-11"

@@ -343,6 +343,8 @@ audit:
       · 路线卡 brst-v2 / weyl-anomaly-v2 的「公共输入记在汇总卡片 …-bosonic-v2」仍指向 v2，未随换代更新。
     verdict: faithful
     diff_notes: |
+      【2026-09-11 更新（curator 记账，lead 授权；只加本行，不动 canonical、不动 audit.status）】canonical【各路线的非严格步骤】首段所引的两张卡状态已过期：worldsheet.ddf-commute-with-virasoro 已 formalized（DDFOperatorAll.lean，`lie_towerLop_ddfOp`）+ rigorous（Gebert–Nicolai，--via-vertex-algebra-primary）；worldsheet.ddf-transverse-oscillator-algebra 已换代为 -v2（rigorous，--via-zero-mode-bracket）。(II) 的有效状态**仍为** physical-argument，但瓶颈已移至 no-ghost-theorem-v4 的另三条边（ddf-operators-adjoint → vertex-operator-adjoint 的径向共轭链、transverse-ddf-fock-gram-matrix、ddf-contour-equals-mode-sum）；见 ms.no-ghost-theorem 第六轮。canonical 那句括注留待 v4 换代同步。
+
       【第三轮修订记，2026-09-11，lead 授权、curator 执行；**纯记账，不改命题，无需第四轮回译**】
       auditor 第三轮裁定 **faithful** 并置 audit.status: back-translated，同时在 §2 与 §6 点名两处
       「canonical 的图状态记账」交 curator 在船长批准前顺手改掉（逐字：「批准前建议 curator 改 F1（一行）
