@@ -1,0 +1,211 @@
+id: worldsheet.verma-level-basis-generic-low-levels-v2
+kind: proposition
+title: Verma 模 N ≤ 4 的标准降算符向量在泛型 (c,h) 处构成 V_N 的基（条件版泛型 PBW 替代）：Kac 多项式非零 ⇒ p(N) 个向量线性无关；V_N = span 对 N = 2,3,4 无条件成立；特征零域上 dim V_N = p(N)（= 2, 3, 5）
+statement: |
+  设 R 是交换环、ℚ-代数且**无零因子**，(c,h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），v := |c,h⟩，约定 conv.virasoro-standard 与
+  conv.verma-module-notation。V_N ⊆ V(c,h) 是 level N 分量
+  （worldsheet.verma-level-spanned-by-partitions 的写法：N 的全体合成所给负模态词的张成）。
+  记各 level 的**标准降算符向量**（按分拆排序，共 p(N) 个）：
+
+      N = 2 (p = 2):  a₂ := L₋₂ v,  a₁₁ := L₋₁² v；
+      N = 3 (p = 3):  L₋₃ v,  L₋₂L₋₁ v,  L₋₁³ v；
+      N = 4 (p = 5):  L₋₄ v,  L₋₃L₋₁ v,  L₋₂² v,  L₋₂L₋₁² v,  L₋₁⁴ v。
+
+  记各 level 的 **Kac 多项式**（即 worldsheet.kac-determinant-level-{two,three,four} 算出的
+  那一族向量的 Gram 行列式）：
+
+      det₂(c,h) = 2h(16h² + 2h(c−5) + c),
+      det₃(c,h) = 48h²(16h² + 2h(c−5) + c)(3h² + h(c−7) + c + 2),
+      det₄(c,h) = 384h³(8h + c − 1)(16h² + 2h(c−5) + c)²(3h² + h(c−7) + c + 2)
+                    · (16h² + 10ch − 82h + 15c + 66)。
+
+  设 B 是 V(c,h) 上的**归一化逆变双线性型**（B 逆变且 B(v,v) = 1，
+  见 worldsheet.shapovalov-form-uniqueness / -existence）。则：
+
+  **(1) 泛型线性无关（N = 2, 3, 4）。** 对 N ∈ {2,3,4}：若 det_N(c,h) ≠ 0，
+  则上列 p(N) 个标准降算符向量在 R 上**线性无关**。
+  （机制：这 p(N) 个向量关于 B 的 Gram 矩阵的行列式**就是** det_N(c,h)
+  ——那正是 worldsheet.kac-determinant-level-{two,three,four} 的内容——
+  再用 math.gram-determinant-nonzero-implies-linear-independence 的 (2)。）
+  前提「det_N ≠ 0」是一个**多项式**在 (c,h) 处不为零的条件，故在泛型 (c,h) 处成立，
+  只在该 level 的 Kac 零点集上失效。
+
+  **(2) 张成等式（N = 2, 3, 4；无条件，不需要 B、不需要 PBW 的线性无关一半、不需要无零因子）。**
+  对任意交换 ℚ-代数 R：
+
+      V₂ = span_R { L₋₂ v, L₋₁² v },
+      V₃ = span_R { L₋₃ v, L₋₂L₋₁ v, L₋₁³ v },
+      V₄ = span_R { L₋₄ v, L₋₃L₋₁ v, L₋₂² v, L₋₂L₋₁² v, L₋₁⁴ v }。
+
+  （理由：N = 2 时 2 的合成只有 [2] 与 [1,1]，V₂ 的定义性张成集就是这两个向量，不需要 straightening。
+  N = 3, 4 时先用 worldsheet.verma-level-spanned-by-partitions 的 (3)——V_N 由总模态为 N 的
+  **有序**词 L_{−b₁}⋯L_{−b_k}v（b₁ ≥ ⋯ ≥ b_k ≥ 1）张成——再枚举这些有序词：
+  总模态 3 的有序词恰是 [3]、[2,1]、[1,1,1]，总模态 4 的恰是 [4]、[3,1]、[2,2]、[2,1,1]、[1,1,1,1]，
+  即上列标准向量。枚举是关于「非降、各项 ≥ 1、和给定」的整数列的初等算术，
+  **不使用**分拆函数的计数 p(3) = 3、p(4) = 5，也不再碰任何 Virasoro 关系——
+  3 的合成 [1,2] 给出的 L₋₁L₋₂v = L₋₂L₋₁v + L₋₃v 那一步已被 straightening 吸收。）
+
+  **(3) dim V_N = p(N)（N = 2, 3, 4；特征零域上，泛型）。** 设 R = K 是特征零的域。
+  若 det_N(c,h) ≠ 0，则
+
+      dim_K V₂ = 2,    dim_K V₃ = 3,    dim_K V₄ = 5。
+
+  这是 PBW 等式 dim V_N = p(N) 的**前三个**实例：(2) 给上界（张成集恰有 p(N) 个向量），
+  (1) 给下界（它们线性无关），故它们是 V_N 的一组**基**。
+  上界**不**经过 worldsheet.verma-level-spanned-by-partitions 的 (4)
+  （那条写成 dim ≤ |Par(N)|，需要 |Par(N)| 的数值）；它直接来自 (2) 的显式列表。
+
+  **(4) 酉区域上前提自动满足（N = 2）。** 设 K 是有序域（`[Field K] [LinearOrder K]`
+  且严格有序）。若 h > 0 且 c > 1，则 det₂(c,h) > 0
+  （见 worldsheet.kac-determinant-level-two 的 notes【2026-09-11（三）】），
+  故 (1)(3) 在 N = 2 的前提自动成立：{a₂, a₁₁} 线性无关且 dim_K V₂ = 2，**无需另加行列式假设**。
+
+  【本节点明确**不**断言】
+  (a) **本卡不是 PBW 的线性无关性一半**（math.verma-module-free-over-negative-part 的 (2)(3)，
+      即旧 worldsheet.verma-module-pbw-basis 的内容）。两处差别都是本质的：
+      · 本卡**假设**存在归一化逆变型 B，而它的存在性等价于 v ≠ 0（即 V(c,h) ≠ 0，
+        worldsheet.shapovalov-form-existence 的 (4)），后者本身是 PBW 的**推论**；
+      · 本卡只在 det_N(c,h) ≠ 0 处有结论，Kac 零点处什么也不给。
+      ⇒ math.verma-module-free-over-negative-part **不因本卡而升级为 formalized**，
+      formal/TODO.md 的 `pbw-verma` (b) 仍未完成。
+  (b) **Kac 零点处的线性相关性**。det_N(c,h) = 0 **不**蕴含那 p(N) 个向量线性相关：
+      Gram 判据单向（math.gram-determinant-nonzero-implies-linear-independence 的【不断言】(a)）。
+      已知的显式见证：c = 1、h = 1/4 处 level-2 Gram 矩阵四个元全为 3/2，det₂ = 0，
+      而退化的是**型**——(L₋₂ − L₋₁²)v 与整个 V₂ 正交（该事实已形式化，
+      见 worldsheet.kac-determinant-level-two 的 notes）；按 PBW 那两个向量对一切 (c,h) 都独立。
+  (c) **N ≥ 5**。本卡只到 N = 4。张成一半 (2) 的方法（straightening + 有序词枚举）对任意 N 都可行
+      且不需要新输入；**天花板在 (1)(3)**：只有 N ≤ 4 的 Gram 行列式被算出
+      （worldsheet.kac-determinant-level-{two,three,four}）。一般 N 的 Kac 行列式公式是
+      worldsheet.kac-determinant-v2（rigorous，未形式化），本卡不使用它、也不依赖它。
+  (d) **B 的存在性与唯一性**。见 worldsheet.shapovalov-form-existence（条件的）与
+      worldsheet.shapovalov-form-uniqueness（无条件）。本卡把 B 当**给定**。
+  (e) 任何正定性/酉性结论：(4) 只是说 det₂ > 0 使 (1)(3) 的前提自动满足，
+      **不**断言 V₂ 上的型正定，也不断言 V(c,h) 酉。
+  (f) 与奇异向量、不可约商、最小模型的关系：不在本卡内。
+  (g) **分拆函数的计数** |Par(3)| = 3、|Par(4)| = 5 作为 `Nat.Partition` 的基数：本卡**绕开**而未证明它。
+      (2)(3) 里出现的 3 与 5 是显式列表的长度，不是 `Fintype.card (Nat.Partition N)` 的值；
+      后者在 Mathlib v4.33.1 仍无引理、`decide` 也化不开。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.IsContravariant.finrank_levelSpan_four
+  lean_file: StringFormal/Virasoro/GenericIndependence.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/GenericIndependence.lean :: StringFormal.Virasoro.{descFamily2, descFamily3, descFamily4, IsContravariant.gram_det_descFamily2, IsContravariant.gram_det_descFamily3, gramMatrix_descFamily4, IsContravariant.gram_det_descFamily4, IsContravariant.linearIndependent_descFamily2, IsContravariant.linearIndependent_descFamily3, IsContravariant.linearIndependent_descFamily4, descFamily2_mem_levelSpan, descFamily3_mem_levelSpan, descFamily4_mem_levelSpan, span_descFamily2_le_levelSpan, span_descFamily3_le_levelSpan, span_descFamily4_le_levelSpan, composition_two_blocks, levelSpan_two_eq_span_descFamily2, ordWord_sum_three, levelSpan_three_eq_span_descFamily3, ordWord_sum_four, levelSpan_four_eq_span_descFamily4, levelSpan_moduleFinite, IsContravariant.finrank_levelSpan_two, IsContravariant.finrank_levelSpan_three, IsContravariant.finrank_levelSpan_four, IsContravariant.three_le_finrank_levelSpan_three, IsContravariant.five_le_finrank_levelSpan_four, IsContravariant.linearIndependent_descFamily2_of_pos, IsContravariant.finrank_levelSpan_two_of_pos}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。该文件分两批建成：
+      · (1)(4) 与 N = 2 的 (2)(3)：分支 agent/formalizer/generic-pbw（末提交 **f4df390**），
+        由 lead 以 **ff1a7d6** 合入 main；
+      · N = 3, 4 的 (2)(3)：分支 agent/formalizer/pbw-n34（提交 **8331429** 枚举 level 3、
+        **dbcaf9f** "upgrade generic PBW at levels 3 and 4 to dim V3 = 3, dim V4 = 5"、
+        **2778735** 改 module docstring、**114ca7f** 登记 TODO），由 lead 以 **1b3a6e3**
+        （"Merge branch 'agent/formalizer/pbw-n34'"）合入 main。
+      逐条对应：
+        (1) → `IsContravariant.linearIndependent_descFamily{2,3,4}`
+              （三条同形，假设为 `hB : IsContravariant R c h B`、`hB1 : B (hwv) (hwv) = 1`、
+              `hdet : <det_N 的多项式> ≠ 0`，类型类为
+              `[CommRing R] [Algebra ℚ R] [NoZeroDivisors R]`——即本卡陈述的「交换 ℚ-代数、无零因子」），
+              其 Gram 行列式一步是 `IsContravariant.gram_det_descFamily{2,3,4}`
+              （`descFamily4` 的矩阵形另由 `gramMatrix_descFamily4` 给出），
+              向量族本身是 `descFamily{2,3,4} : Fin p(N) → VermaModule R c h`；
+        (2) → **`levelSpan_two_eq_span_descFamily2`**（用 `composition_two_blocks`）、
+              **`levelSpan_three_eq_span_descFamily3`**（用 VermaPBW.lean 的 `levelSpan_eq_ordSpan`、
+              `ordSpan_eq_span` + 枚举 `ordWord_sum_three`）、
+              **`levelSpan_four_eq_span_descFamily4`**（同上 + `ordWord_sum_four`）；
+              三条的 `≥` 半边是 `span_descFamily{2,3,4}_le_levelSpan`（经 `descFamily{2,3,4}_mem_levelSpan`）。
+              类型类只有 `[CommRing R] [Algebra ℚ R]`（`section Finrank`），无 `NoZeroDivisors`，
+              无 B——即本卡 (2) 的「无条件」。
+              `ordWord_sum_three : IsOrdWord l → l.sum = -3 → l = [-3] ∨ l = [-2,-1] ∨ l = [-1,-1,-1]`，
+              `ordWord_sum_four` 同形五支；证明对表长 `match`，各支 `omega`。
+        (3) → **`IsContravariant.finrank_levelSpan_two`**（= 2）、
+              **`IsContravariant.finrank_levelSpan_three`**（= 3）、
+              **`IsContravariant.finrank_levelSpan_four`**（= 5；本卡 formal.lean_decl）。
+              三条同形：`[Field K] [CharZero K]`，`rw [levelSpan_N_eq_span_descFamilyN]` 后
+              `finrank_span_eq_card` 于 (1) 的线性无关族；配套 `levelSpan_moduleFinite`。
+              `three_le_finrank_levelSpan_three`、`five_le_finrank_levelSpan_four` 保留为 `≥` 半边推论
+              （旧卡 v1 的 (5) 就是它们）。
+        (4) → `IsContravariant.linearIndependent_descFamily2_of_pos` 与
+              `IsContravariant.finrank_levelSpan_two_of_pos`（`[Field K] [LinearOrder K]
+              [IsStrictOrderedRing K]`，前提只要 `0 < h`、`1 < c`，内部调用 `kac_level_two_pos`）。
+      文件 module docstring "## Main results" 逐字写明「the partition counts p(3) = 3, p(4) = 5 are
+      never needed, because the spanning set is cut down to an explicit finite list of ordered words」
+      与「(Mathlib has no cardinality lemmas for Nat.Partition, and decide does not reduce the
+      Fintype.ofSurjective instance, so that route is blocked.)」——本卡【不断言】(g) 是它的图侧登记；
+      "## What this does and does not give" 一节仍写明「conditional generic PBW (b), not PBW (b)」
+      ——本卡【不断言】(a)。
+      公理检查由 formalizer 跑过（总线消息 2026-09-11："lake build ok, no sorry, axioms standard,
+      validate 0 errors, check-axioms 62/62 ok"；formal/TODO.md 的 `pbw-verma` (b) 项）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**；由 lead 在合并含 formal 改动的分支时跑。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页）"
+    note: |
+      **只定位「Kac 行列式是 PBW 基的 Gram 行列式」这一经典设定，不承载本卡的任何结论**。
+      FF 把 M_{h,c}(k) 定义为 PBW 基 e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用真空所得基的
+      Gram 矩阵（L1 已核，literature/extractions/math-sources.md §34.2(b)）——
+      注意 FF **已假定那是基**，即预设了本卡想要替代的那条 PBW 线性无关性。
+      本卡的逻辑方向相反：**由**行列式非零**推出**线性无关。
+      这是「泛型替代」与「经典陈述」的实质差别，不是记号差别。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Definition 6.11（Gram 矩阵取 V_N 的一组基）、Theorem 6.12, p. 97–98"
+    note: |
+      同上，**只定位设定**：该处同样把 Gram 矩阵定义在 V_N 的**一组基** b₁,…,b_{P(N)} 上
+      （L1 逐页核实，math-sources.md §34.3），即预设线性无关。
+      本卡（与 worldsheet.kac-determinant-level-{two,three,four} 的「张成集的 Gram，非基的 Gram」
+      同一立场）不预设它；(1)(2)(3) 正是把那一步从假设变成结论——但只在泛型 (c,h) 处，
+      且以 B 的存在性为前提，见【不断言】(a)。
+tags: [cft, representation-theory, verma-module, shapovalov, kac-determinant, pbw, virasoro, formalized]
+notes: |
+  【换代记录（2026-09-11，curator，分支 agent/curator/lean-wire-7；lead 指派）】
+  本卡换代 worldsheet.verma-level-basis-generic-low-levels（v1）。换代原因：v1 的 title、(5) 与
+  【不断言】(d)(e) 写「N = 3, 4 只到 dim ≥ p(N)」并把原因归于 `Nat.Partition` 计数缺失与
+  N ≥ 3 的 straightening 对应——formalizer 分支 agent/formalizer/pbw-n34（合并 **1b3a6e3**）
+  之后这些话**字面为假**：`finrank_levelSpan_three = 3`、`finrank_levelSpan_four = 5` 已无 sorry 证出。
+  按原则 1 不改 v1 文本，新建本卡：
+  · title / (2)(3) 改为等式（N ≤ 4 全部 dim V_N = p(N)）；v1 的 (5)（只到 ≥）并入 (3)；
+  · v1【不断言】(d)(e) 删除，其余按 (a)(b)(c)(d)(e)(f) 重新编号（v1 的 (f)(g)(h) → 本卡 (d)(e)(f)），
+    新增 (g)（`Nat.Partition` 计数是**绕开**而非解决）；
+  · formal.lean_decl 由 `linearIndependent_descFamily4` 改为 `finrank_levelSpan_four`
+    （它是文件里最强的一条：(1)(2) 两半在 N = 4 的合成）。
+  v1 的推导 `--via-lean` 已 `git mv` 改指本卡（论证骨架相同、只是第 5 步由 ≥ 变 =，
+  按 docs/STATUS_LEVELS.md 2026-09-12 细则处理为换名式换代）；v1 无其他活推导依赖，
+  不触发「已换代且无推导」的 error。
+
+  【查重（2026-09-11，v1 建卡时；本轮重跑 `search 泛型 / p(N) / dim V` 结论不变）】
+  · math.verma-module-free-over-negative-part（= 旧 worldsheet.verma-module-pbw-basis 的换代）——
+    **无条件**的 PBW：基、dim V_N = p(N)、V(c,h) ≠ 0，对一切 (c,h)、一切 N。
+    本卡是它的**条件泛型片段**（N ≤ 4、det_N ≠ 0、给定 B），不能与之合卡：
+    合卡会让一条 rigorous-未形式化的无条件命题被一条 formalized 的条件命题「借光」。
+  · worldsheet.verma-level-spanned-by-partitions —— PBW 的另一半（straightening，dim ≤ p(N)），
+    已 formalized。**本卡 (2) 在 N = 3, 4 真的经过它的 (3)**（`levelSpan_eq_ordSpan`），
+    这条边在推导里现在是承重边，不再是 v1 时的记账边。
+  · worldsheet.kac-determinant-level-{two,three,four} —— 算出 Gram 行列式本身，
+    三张卡都在标题里写「张成集的 Gram，非基的 Gram」，正是因为缺本卡的 (1)。
+    ⇒ 本卡是把那三张卡的行列式**用起来**的节点，不重复它们的计算。
+  · math.gram-determinant-nonzero-implies-linear-independence —— 纯线性代数引理。
+  ⇒ **没有既有节点承载「泛型 (c,h) 处 N ≤ 4 标准向量是 V_N 的基」**。
+
+  【本卡在图中的作用：把三张「张成集的 Gram」卡的限定词在泛型点上解除——现在 N = 2, 3, 4 一视同仁】
+  worldsheet.kac-determinant-level-{two,three,four} 的【不断言】(a) 都写「(2)/(3) 是张成集的 Gram
+  行列式，不是『Kac 行列式在 N 的值』」，理由是那 p(N) 个向量的线性无关没有证。
+  本卡 (1)(2)(3) 表明：在 det_N ≠ 0 的 (c,h) 处**不必等 PBW**——那 p(N) 个向量确实是 V_N 的一组基，
+  三张卡的行列式确实就是该处的 Kac 行列式。v1 时这条解除只对 N = 2 成立，现在对 N = 3, 4 同样成立；
+  三张卡的 notes 各有一段登记（level-two 的【2026-09-11（三）】、level-three / level-four 的
+  【2026-09-11（lean-wire-7）】）。仍未解除的：Kac 零点处（要真正的 PBW）与 B 的存在性前提。
+
+  【N ≥ 5 的天花板只剩 Gram 行列式】(2) 的方法对任意 N 都是同一套：`levelSpan_eq_ordSpan` 做整序，
+  再枚举总模态 N 的有序词（N = 5 是 7 个情形、表长 ≤ 5，`match` 分支数随 N 线性增长）。
+  (1)(3) 需要 level-N 的 Gram 行列式，而 `ShapovalovLevelFive.lean` 不存在（formal/TODO.md
+  `pbw-verma` (b) 项同此登记）。⇒ 往上走的瓶颈是 Gram 行列式的计算，不是 PBW 的张成半边。
+
+  【为什么 formal.lean_decl 填 `finrank_levelSpan_four`】schema 只放得下一个名字。
+  v1 填的是 `linearIndependent_descFamily4`（(1) 的 N = 4 实例）；本卡改填 `finrank_levelSpan_four`，
+  因为它同时用到 (1)（`linearIndependent_descFamily4`）与 (2)（`levelSpan_four_eq_span_descFamily4`），
+  是文件里覆盖最多向量、把两半合起来的那条。三个 level 的全部声明列在 source loc 里。
+
+  【(4) 与 worldsheet.kac-determinant-level-two 的分工】det₂ > 0 这条**不等式本身**
+  登记在那张卡的 notes（`kac_level_two_pos`、`kac_level_two_nonneg`、`kac_level_two_at_c_one`），
+  本卡只承载它的**推论**（前提自动满足 ⇒ 线性无关与 dim = 2）。
+  两处不要重复陈述同一不等式：那张卡讲行列式的符号，本卡讲由此得到的基。
+author: curator
+created: "2026-09-11"

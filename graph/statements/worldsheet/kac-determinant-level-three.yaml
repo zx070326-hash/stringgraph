@@ -164,5 +164,17 @@ notes: |
   worldsheet.kac-determinant-level-two（N ≤ 2，formalized）。本卡是 level-two 的**同构姊妹卡**
   （同一前提、同一不断言清单、升一级），**不重复**：level-two 不含 level-3 的任何 Gram 元，
   也不含 Lean 内的 Kac 比较。
+
+  【2026-09-11（lean-wire-7）：【不断言】(a) 在 det₃ ≠ 0 处**局部解除**（curator；只加 notes，
+  陈述文本一字未动）】与 level-two 卡的【2026-09-11（三）】同样放宽：特征零域上，若本卡 (2) 的
+  det₃(c,h) ≠ 0，则 {u₃, u₂₁, u₁₁₁} 是 V₃ 的一组**基**，dim V₃ = 3 = p(3)
+  （`StringFormal.Virasoro.IsContravariant.finrank_levelSpan_three`，GenericIndependence.lean，
+  formalizer 分支 agent/formalizer/pbw-n34，lead 以 1b3a6e3 合入 main；无 sorry），
+  故 (2)(3) 在这些 (c,h) 处**就是** level-3 的 Kac 行列式本身，不只是张成集的 Gram。
+  张成一半现在也有具名引理：`levelSpan_three_eq_span_descFamily3`（无条件，任意交换 ℚ-代数），
+  【不断言】(a) 里「这条化简在 Lean 里没有具名引理」的那句已过时——化简由 VermaPBW.lean 的
+  `levelSpan_eq_ordSpan`（straightening）吸收，再由 `ordWord_sum_three` 枚举有序词。
+  仍未解除：Kac 零点处（det₃ = 0 不蕴含线性相关；要真正的 PBW）与 B 的存在性前提（【不断言】(b)）。
+  图侧承载：worldsheet.verma-level-basis-generic-low-levels-v2（(1)(2)(3)）。
 author: curator
 created: "2026-09-11"
