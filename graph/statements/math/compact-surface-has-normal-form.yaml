@@ -19,13 +19,16 @@ statement: |
   - **不**处理非紧曲面，**不**处理不连通曲面。
 sources:
   - ref: gallier-xu-2013
-    loc: "Ch. 6：Lemma 6.1（每个胞腔复形等价于某个规范胞腔复形）；Proposition 6.1（每个胞腔复形可细分为三角化 2-复形）；Definition 6.5, pp. 88–89（规范胞腔复形 type (I)/(II) 及参数范围，L1 逐字）；p. 96（Theorem 6.1 → 6.2 之间作者自陈「every surface and every surface with boundary can be triangulated … the proof is far from trivial … in **Appendix E**」）；Appendix E（Thomassen 的 Radó 定理证明）"
+    loc: "Ch. 6：Lemma 6.1, pp. 92–95（每个胞腔复形等价于某个规范胞腔复形；arXiv 版 Lemma 5.2.5）；Proposition 6.1, p. 86（每个胞腔复形可细分为三角化 2-复形；arXiv 版 Proposition 5.2.2）；Definition 6.5, pp. 88–89（规范胞腔复形 type (I)/(II) 及参数范围）；p. 96（Theorem 6.1 → 6.2 之间作者自陈「every surface and every surface with boundary can be triangulated … the proof is far from trivial … in **Appendix E**」）；Appendix E（Thomassen 的 Radó 定理证明）——以上除 Appendix E 外均 L1 逐字"
     note: |
-      抽取记录 literature/extractions/math-sources.md §39.2.0（编号交叉表，L1 逐条对照）与
-      §39.2.2（Definition 6.5 逐字）、§39.2.1（p.96 的三角化自陈逐字）。
-      ⚠ **loc 只写本项目已核到编号的条目**：Lemma 6.1 与 Proposition 6.1 的**编号与一行内容**
-      来自 §39.2.0 的交叉表（L1 读图），但**它们的逐字文本本图未转录**，故本卡不引用其原文措辞，
-      也不写页码（交叉表未给这两条的页码）。Definition 6.5 / p.96 / Appendix E 三处是逐字 L1。
+      抽取记录 literature/extractions/math-sources.md §39.2.0（编号交叉表，L1 逐条对照）、
+      §39.2.2（Definition 6.5 逐字）、§39.2.1（p.96 的三角化自陈逐字），
+      **以及 §49（2026-09-11，Lemma 6.1 / Prop 6.1 逐字与页码，L1 页图；PDF 页 = 书页 + 10）**。
+      Lemma 6.1（p. 92 逐字）：「Every cell complex, K, is equivalent to some canonical cell complex.」
+      证明 pp. 92–95 六个 Step，且逐字「We use the same steps as in the proof given in Ahlfors and Sario [1]」。
+      Proposition 6.1（p. 86 逐字）：「Every cell complex, K, can be refined to a triangulated 2-complex.」
+      证明明说化简「assuming that vertices are primitive objects」，把顶点替换为边序列的手续
+      逐字外包「It is given in Ahlfors and Sario [1]」。
       ⚠ **版本陷阱**：出版版（Springer GTC 9, 2013）Ch. 6 的编号与 arXiv 单作者版
       （gallier-2008-surfaces）Ch. 5 的编号**不可互换**（Lemma 6.1 ↔ Lemma 5.2.5，
       Proposition 6.1 ↔ Proposition 5.2.2，Definition 6.5 ↔ Definition 5.2.4）。
@@ -57,5 +60,15 @@ notes: |
   **连通性**：来源 Theorem 6.2 的逐字文本不含 "connected"，Gallier–Xu 第 1 章对 "surface"
   的定义本图未取到（同 classification 卡的同名记录）。本卡**把连通性写成显式前提**，
   这样下游不必再赌来源的定义。
+
+  **2026-09-11 补（curator-small-backlog-4，依 math-sources.md §49）**：
+  - **Proposition 6.2（p. 88，L1 逐字）是一座隐含的桥**：「For a triangulated 2-complex K viewed as a
+    cell complex, orientability of the surface K_g as given by Definition 4.6 is equivalent to orientability
+    of K as given by Definition 6.4.」它把「胞腔复形可定向（Def 6.4）」与「曲面可定向（Def 4.6）」接起来，
+    **无独立证明**（只回指 Proposition 5.8 的证明）。本卡 statement 里的 type (I)/(II) ↔ 可定向/不可定向
+    这一对应就靠它。arXiv 版编号 L0，不写。
+  - **Theorem 6.2（p. 97）在本书无独立证明**（逐字「For the record, we state the following theorem」），
+    依赖 Appendix E 的可三角化性；本卡不引 Thm 6.2，但 classification 卡引，见彼处。
+  - 出版版 ↔ arXiv:0805.0562 v1 的编号：Prop 6.1 = 5.2.2，Lemma 6.1 = 5.2.5，Thm 6.1 = 5.3.1，Thm 6.2 = 5.3.2。
 author: curator-batch10-14-fix
 created: "2026-09-11"
