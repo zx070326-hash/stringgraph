@@ -154,6 +154,24 @@ StringFormal/
                             K_m†=K_{−m}、**⁅K_m,A^ε_n⁆=0（无望远镜求和，逐项对易，窗口取并集）**；
                             towerKerK = ⋂_{n>0} ker K_n 与 ddfCharacterization = phys ⊓ towerKerK
                             （**只是定义**，「= DDF 张成」是 ddf-spans，未做）。**不**做 Brower 的 A^L_n（§A.3）
+  NoGhost/LightCone.lean    **塔上分次 + 光锥标架 + ddfSpan + 蓝图 §B.6 的 N = 1**：towerVacuum；
+                            towerRungSubmodule / towerLevelSubmodule / **towerBigrade**（= 两者之交，
+                            每片 Module.Finite）；**massShell_of_mem_towerBigrade**（质壳把双分次压成
+                            反对角线 α'k²+j+N = a₀，需 NoZeroDivisors）；结构 LightConeFrame（b·b̃=−1）与
+                            TransverseFrame（D−2 个正交归一横向偏振，横向性打包进结构因为它是 ddfOp 的
+                            定义参数）；光锥振子代数 ⁅α^b_m,α^b̃_n⁆=−m δ 等；**conjCoeff_eq_neg_dotVec**
+                            （b̃-分量 = −(b·v)，把 L_{−n} 的领头系数钉成 −1）与 L_{−1}/L_{−2} 在层真空上的
+                            领头项；**ddfOp_neg_one_apply_towerVacuum**（A^ε_{−1}|0;k⟩ = α^ε_{−1}|0;k−k_0⟩
+                            **精确**，但**需要额外假设 ε·k = 0**，四条标准假设推不出）；ddfSpan 与
+                            ddfSpan ≤ towerPhys / towerKerK / ddfCharacterization；
+                            **towerPhys_bigrade_one_le_ddfSpan_sup_spurious**（§B.6 的 N = 1，D = 26 不出现）；
+                            witnessLightConeFrame / witnessTransverseFrame（**非空性**）与
+                            witness_frameSpansOrthogonal ⟹ 显式标架上 N = 1 无条件。
+                            **FrameSpansOrthogonal（标架完备性）不是 TransverseFrame 的推论**，是独立假设
+  NoGhost/WitnessInt.lean   **整数见证**（reviewer-batch26）：η=diag(−1,1,…)、b=(1,1,0,…)、a=(0,1,1,0,…)、
+                            ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
+                            zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
+                            D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
