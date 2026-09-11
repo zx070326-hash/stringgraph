@@ -192,6 +192,30 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   IIB 超引力实现的小整数 `(2, −2, 1)` 上。建议写进
   `consistency.iib-gravitational-anomaly-cancels` 的 `gaps` 或 `notes`。
 
+- [ ] **A8′ —— IIB 引力反常抵消的完整线性代数（唯一性）**。图侧接口已建：
+  陈述 `consistency.iib-anomaly-solution-unique`，推导 `--via-linear-algebra`
+  （physical-argument，待 reviewer 复核后升 rigorous）。
+  设 `A : Matrix (Fin 3) (Fin 3) ℤ` 的行为 `(−495, 1, 992)`、`(225, 1, −448)`、`(−63, 1, 128)`
+  （作用在 `(n_{3/2}, n_{1/2}, n_A)` 上）。要证三条：
+  **(i)** `2·row₁ + 3·row₂ − 5·row₃ = 0`；**(ii)** `rank A = 2`（且 `det A = 0`）；
+  **(iii)** `ker A = span {(2, −2, 1)}`。
+  - (i) 与 (iii) 是 `decide` / `omega` 级；(ii) 需一行秩计算
+    （`Matrix.rank`，或直接给两个线性无关行 + (i) 的关系夹出 `rank = 2`）。
+  - **(iii) 已经有了**：现有 `iib_gravitational_anomaly_solutions` 就是它的等价形式
+    （`↔ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A`）。⇒ **A8′ 相对 A8 的新增内容是 (i) 与 (ii)**：
+    A8 只验证了 `(2, −2, 1)` 使三式为零，**没有排除别的解**，也没写出线性关系。
+  - 来源：`bilal-2008` §12.2 (12.4)(12.5)（印刷 p.97 = PDF p.100，v1，L1）
+    + `polchinski-1998-v2` (12.2.11)–(12.2.14)（L1，独立第二源，系数逐项相同）。
+    **两书都只断言不展示**（Bilal "Amazingly … not linearly independent"；
+    Polchinski "the coefficients … conspire to produce zero"），
+    且**都不给线性关系、不给秩、不说唯一** ⇒ (i)(ii) 是本项目补出的。
+  - 价值：把 Polchinski 亲口说的 "miraculous"/"accidental" 与 Bilal 的 "Amazingly"
+    变成一条**完全可判定**的整数矩阵事实——秩是 2 不是 3，一维解空间**是应该出现的**；
+    真正非平凡的是解射线恰好穿过 `(2, −2, 1)`，且该向量本原（gcd = 1）⇒ 整数解无整除障碍。
+  - 附带已复算（**不必进 Lean，也不是图上的断言**）：`A` 的 Smith 不变因子是 `(1, 144, 0)`。
+  - 形式化后：把 `formal.lean_decl` 挂到**陈述卡** `consistency.iib-anomaly-solution-unique`，
+    并按本图惯例**新增**一条 `--via-lean` 推导（不覆盖纸上的 `--via-linear-algebra`）。
+
 - [x] （附带，不属 A8/A9）`gs_gravitational_twelve_form_eq_polchinski`：
   Polchinski (12.2.27) 的**纯引力部分**（令三个规范迹为零）等于 `−1/96` 乘 GS 1984 (20)，
   **五个系数全对**，包括 Polchinski 侧来自 `Y₄X₈/768`、GS 侧写作常数 `1/8` 与 `1/32` 的那两项。
