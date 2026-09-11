@@ -1,0 +1,80 @@
+id: math.no-holomorphic-quadratic-differentials-on-disk
+kind: proposition
+title: "圆盘上没有非零全纯二次微分（带边界条件 + ∞ 点全纯这两条前提）"
+statement: |
+  **约定**：黎曼面 Σ 上的**全纯二次微分**是给每个全纯坐标片 (U, z) 指定一个全纯函数 φ(z)，
+  在换片 z ↦ w 时按
+    φ̃(w) = φ(z) · (dz/dw)²
+  相容变换的对象；它就是典范线丛的平方 K² = K^{⊗2} 的全纯截面。
+
+  把圆盘 D₂ 实现为上半平面 H，边界 ∂H = R ∪ {∞}；
+  D₂ 作为**紧**带边曲面 = H ∪ ∂H（含 ∞ 点），其在 ∞ 附近的坐标片取 u = 1/z。
+  设 φ dz² 满足
+    (2a)（**全纯性，含 ∞ 点**）φ 在 H 上全纯，且在 ∞ 点的坐标片上 φ̃(u) = φ(1/u)·u^{−4}
+         于 u = 0 处也全纯——即 φ dz² 是**整个紧带边曲面 D₂ 上**的全纯二次微分，
+         而不只是开上半平面上的；
+    (2b)（**边界条件**）φ 在边界上取实值，φ(y) ∈ R 对一切 y ∈ ∂H ∩ R，
+         等价地 φ dz² 在反射 z ↦ z̄ 下不变（这正是「二次微分能下降到 H 的双重 = P¹ 上」的相容条件）。
+  则 φ dz² = 0。
+
+  ⚠ **(2a) 缺一不可**：只设「φ 在 H 上全纯 + 边界取实值」时结论**字面为假**——
+  反例 φ ≡ 1：它在 H 上全纯、在实轴取实值（故满足那两条），却非零；
+  它被排除的真正理由是 φ̃(u) = u^{−4} 在 u = 0 有**四阶极点**，即违反 (2a)。
+  （这条前提是 reviewer-batch13 于 2026-09-11 指出、
+  在 math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2 换代时补进陈述的；
+  当时的推导**本来就在用**它，只是 v1 的陈述漏写。⇒ 属**陈述漏前提**，不是论证错误。）
+
+  **本命题不断言什么**（逐条，重要）：
+  - **不断言球面的情形**。那是姊妹卡 math.no-holomorphic-quadratic-differentials-on-sphere
+    （H⁰(P¹, K²) = 0），它是本卡论证的输入，且严格程度更高。
+  - **不断言 μ(D₂) = 0**。从「无非零全纯二次微分」到「模数 μ = 0」还要过桥
+    worldsheet.moduli-holomorphic-quadratic-differentials，而该桥在**带边**情形下本身缺边界条件。
+  - **不断言 (2b) 就是物理侧 μ 用的那个边界条件**。本图的 μ 定义
+    （worldsheet.moduli-condition-traceless-transverse）写在**紧无边**曲面上，
+    带边时 ker P̂₁^T 需要边界条件，本图与来源都没有给。⚠ 换个边界条件
+    （例如只要求 φ 有界、或要求 Im φ|_∂ = 0 的另一种实结构）结论可能不同。
+  - **不断言 RP₂ 的情形**（不可定向，需 dianalytic 语言；见姊妹卡的同条）。
+  - **不涉及带极点或带标记点的二次微分**（同姊妹卡的警告：Eynard Ch. 5 Thm 4.1 的 `Ω_𝒮`
+    是带二阶极点的**仿射**空间，不是 H⁰(K²)）。
+  - 不涉及任何世界面/物理内容（Weyl 因子、路径积分测度、鬼场）。
+uses_conventions: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；配套定义 (1-5)(1-6), p.71"
+    note: |
+      **L1 全文到手**（math-sources.md §39.7 与 §42）：提供除子/线丛的次数记账语言与 `l(D)` 的定义，
+      本卡经姊妹卡（球面）间接用到。
+      ⚠⚠ **框架来源，不是本命题的直接来源**：本卡的论证是 Schwarz 反射 + 归约到球面卡，
+      不直接用 Riemann–Roch。
+      ⚠ 该讲义**每章内部重新计数**，loc 必须写「Ch. 4, Theorem 1.2」。
+  - ref: farkas-kra-1992
+    loc: "§III.4「Divisors and the Riemann–Roch Theorem」, pp. 69–78, 2nd ed."
+    note: |
+      **只有小节位置是 L1**（出版方目录扫描；math-sources.md §42.3）；正文未取得。
+      ⚠⚠ **禁止写「Theorem III.4.8」**（本项目只有 L4 证据）。本条**不承载本卡的任何一步**，
+      登记为「负次数无非零截面」引理的候选落点，供 researcher 下一轮定位。
+tags: [math, quadratic-differential, disk, boundary, schwarz-reflection, moduli, canonical-bundle]
+notes: |
+  **★ 拆卡记录（2026-09-11，curator-small-backlog-2）**：本卡是
+  math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2 的 **(2)（圆盘）那一半**，
+  statement 的 (2a)(2b) 与 ⚠ 逐字搬自 v2。球面那半见
+  math.no-holomorphic-quadratic-differentials-on-sphere。
+  拆卡理由（v2 自己的 notes 里逐字写明）：两半在文献中被分别推导且严格程度不同——
+  球面那半已由 reviewer-batch13 复核为正确的初等计算，可标 rigorous；
+  **圆盘那半还有两条未复核的缺口**（双重 = P¹ 的逐点相容、边界条件与物理侧 μ 的定义是否一致），
+  故本卡的推导保持 physical-argument。合在一张卡上时球面那半被按 min 规则压住。
+  ⚠ v2 的 `superseded_by` 指向**球面卡**（v2 的主干内容与 id 里的 `sphere` 在先），
+  本卡是那次拆分的另一半；两张卡合起来等价于 v2。
+
+  **与 Polchinski 的关系**：原书 §6.1 对 D₂（p.168）有一句「there are no moduli」的**断言**，
+  不给论证；书内的一般理由是 §5.2 的 (5.2.11a)，而那正是
+  worldsheet.positive-euler-number-no-moduli 的目标本身（拿来关闭就是循环）。
+  本卡走的是**独立的数学路线**，故不把 Polchinski 列为 source。
+
+  **接边提醒（给 lead / 下一轮 curator）**：把本卡接到
+  worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 时，
+  必须同时接 worldsheet.moduli-holomorphic-quadratic-differentials（μ = 全纯二次微分空间的实维数），
+  并把上面「(2b) 未必等于物理侧边界条件」这条写进 note——否则会出现
+  「数学卡关掉了一个与物理定义未必相同的问题」。
+author: curator-small-backlog-2
+created: "2026-09-11"
