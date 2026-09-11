@@ -123,5 +123,37 @@ notes: |
   【本卡片与 worldsheet.no-ghost-theorem-v4 的分工】v4 是无鬼定理本身（含逐塔的精确表述、
   DDF 构造、归一化与分级）；本卡片只是把 v4 的等号情形改写成「临界维数判据」的形式，
   不含新的物理输入，也不重述 v4 的技术细节。需要精确表述的下游请直接引 v4。
+
+  【2026-09-12 追记（curator，claim #490，依派活任务交付物 #5；wiring
+  formal/StringFormal/NoGhost/NullSeedsTwo.lean 后核查是否要接线——结论：不接，只记账）】
+  新卡 worldsheet.level-two-null-state-requires-d26（formalized，Lean
+  `descTwo_mem_towerPhysSubmodule_iff`）与本卡同属"D=26 在何处进入无鬼定理"这一主题，
+  但**对本卡的推导 --via-no-ghost 没有任何贡献，本卡不加这条依赖边**，理由：
+
+    · --via-no-ghost 的唯一依赖是 worldsheet.no-ghost-theorem-v4；v4 自己的推导链
+      （--via-goddard-thorn）证 (A)（D=26 等距同构）走的是 DDF 谱生成代数路线
+      （worldsheet.ddf-operators-v6 一族），证 (B)（D>26 负模态）的见证是
+      worldsheet.negative-norm-physical-state-above-26（level-2 标量态显式内积计算，
+      Lean `LevelTwo.lean`）。**两条都不经过动量塔上的 𝒟₂ 算子、准物理种子 Q_M、
+      或秩不等式 `B26 N`**——那是本项目为攻克 worldsheet.ddf-spanning-hypothesis
+      （无鬼定理"张成性"那一半的另一条形式化路线，见
+      worldsheet.ddf-spanning-hypothesis--via-rank-inequalities）单独搭建的机制，
+      与 --via-no-ghost 实际使用的证明链是**两条独立路线**，互不引用。
+    · 新卡本身也在【本卡明确不断言】(c) 里写明"不断言这个 level-2 论证单独蕴含无鬼定理"，
+      与这里的判断一致。
+
+    **新卡对本卡命题主张（(A)(B) 本身）没有加强或减弱**：(A)(B) 的真值完全由 v4 支撑，
+    v4 的 effective status（physical-argument，瓶颈见 `stringgraph why
+    worldsheet.no-ghost-theorem-v4`）不因新卡出现而改变——新卡不在 v4 的
+    `depends_on` 闭包内，对 v4 的 effective 无影响，因而对本卡（--via-no-ghost 唯一依赖 v4）
+    的 effective 同样无影响。
+
+    **新卡将来可能的用处（本卡不认领，只记路标）**：若日后
+    worldsheet.ddf-spanning-hypothesis--via-rank-inequalities 这条独立路线被走通
+    （即 `B26 N` 对一切 N 关闭，见 worldsheet.ddf-spanning-rank-inequality 的
+    2026-09-12 记账），会给出无鬼定理"张成性"的**另一套**证明，与 v4 现有的
+    --via-goddard-thorn 是同一命题（worldsheet.no-ghost-theorem-v4）的两条独立推导，
+    到那时本卡是否要新增一条 --via-rank-inequalities 风格的推导（改写"张成性"版本的
+    临界维数判据）是另一个问题，与本次记账无关，留给走通那条路线的人判断。
 author: curator
 created: "2026-09-11"
