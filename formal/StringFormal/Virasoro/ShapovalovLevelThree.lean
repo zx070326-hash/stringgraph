@@ -31,7 +31,7 @@ its `3 × 3` determinant, and check that the determinant is the `N = 3` Kac poly
 ## Caveat (inherited from `Shapovalov.lean`)
 
 `levelSpan R c h 3` is spanned by the four *compositions* of `3`, and the three vectors above
-span it (`L₋₁L₋₂|c,h⟩ = desc21 - desc3` by the bracket relation).  That they are linearly
+span it (`L₋₁L₋₂|c,h⟩ = desc21 + desc3` by the bracket relation `[L₋₁, L₋₂] = L₋₃`).  That they are linearly
 *independent* is exactly PBW, which is not available; so as in `gram_level_two_det` this is the
 determinant of an explicit `3 × 3` matrix of inner products, not yet formally "the Kac
 determinant of `V₃`".
