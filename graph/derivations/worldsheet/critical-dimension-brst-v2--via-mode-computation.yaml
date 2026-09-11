@@ -1,0 +1,72 @@
+id: worldsheet.critical-dimension-brst-v2--via-mode-computation
+target: worldsheet.critical-dimension-brst-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.brst-quantization-v2
+    note: "提供 Q_B 的模式定义、bc 反对易关系、L^g_n 与受限模条件。该卡 kind: definition，status rigorous。"
+  - id: worldsheet.virasoro-algebra-v2
+    note: "物质 Virasoro 关系与 conv.virasoro-standard 归一化。该卡 formalized。"
+  - id: worldsheet.bc-ghost-central-charge-lambda-two
+    note: |
+      供给 {Q_B, Q_B} 表达式里那个 26（= −c^g）。**本条挂窄卡，不标 inferred**：
+      窄卡的陈述正是 λ = 2 的模式代数结论，与本推导同处模式代数层，来源是 FGZ Prop 2.1(i)。
+      （旧推导 --via-nilpotency 的同名边标 inferred，理由是它的 inferred 依据是
+      「Polchinski §4.3 不在原地论证 c^g、本图未核实 §4.3 是否回指 §2.5」；
+      那条边与理由保持不动。）
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.5)（Q_B 的模式展开）、(4.3.7)（a^B = a^g = −1）、**(4.3.9)**（`{Q_B, Q_B} = 0` only if `c^m = 26`）、(4.3.10)（j_B j_B 的 OPE，单极点给 when 方向）；最短路线是习题 4.3 的 Jacobi 恒等式"
+    note: |
+      **本条只提供被计算的表达式与结论的对照，不提供严格证明**：原书那里是教科书式形式模式计算
+      （未声明受限模、未论证无穷模式和重排的合法性、未写出 ⟹ 方向所需的线性无关前提），
+      且原书 p.133 对一般约束代数逐字写「We have neglected central charge terms; these need to be
+      checked by hand」。
+      ⚠ **本推导目前标 physical-argument，本条来源即是其档位依据。**
+      草案（docs/drafts/critdim-route-cards.md §C）设想的 rigorous 档位依据**不是**这条来源，
+      而是 docs/STATUS_LEVELS.md 的「初等可复核」例外条款（前提完整 + 有限步初等计算 +
+      reviewer 独立复核）；该条款的第三项（reviewer 复算）**尚未满足**，见 gaps 第 1 条。
+  - ref: kato-ogawa-1983
+    loc: "全文；摘要（L2，逐字见 critical-dimension-brst-v2 的 sources）"
+    note: "原始来源，方向 ⟹（逐字 `are required by the nilpotency`）。正文未获取，定理编号未核实，不承载本推导。"
+summary: |
+  在 worldsheet.brst-quantization-v2 定义的受限模 V 上做有限步计算（每个 v ∈ V 上只有有限多项非零）：
+  (1) 用 {b_k, c_n} = δ_{k+n,0} 与物质 Virasoro 关系展开 {Q_B, Q_B}；
+  (2) 三次鬼场项与物质项的交叉贡献相消，只剩正比于总中心荷的项
+      {Q_B, Q_B} = Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m，其中 26 = −c^g 由依赖边供给；
+  (3) ⟸ 方向：c^m = 26 时每一项为零，故 Q_B² = 0（该方向另有独立节点
+      worldsheet.brst-nilpotent-at-c26，FGZ Prop 1.2，已 rigorous）；
+  (4) ⟹ 方向：诸 c_{−m} c_m 在忠实的 Fock 型受限模上线性无关（陈述里的前提），
+      故 Q_B² = 0 迫使每个系数为零，取 m = 2 即得 c^m = 26。
+  前提在目标陈述里已完整写出（受限模、线性无关、a^g = −1、λ = 2），
+  符合 docs/STATUS_LEVELS.md 的 rigorous 例外条款第一项；
+  **但第三项（reviewer 独立复核）尚未满足，故本推导现在标 physical-argument。**
+gaps:
+  - "**本推导现在标 physical-argument，而不是草案设想的 rigorous，因为唯一能把它抬到 rigorous 的那一步还没做：reviewer 对 {Q_B, Q_B} 模式和的独立复算**（尤其是 (m³ − m) 系数、三次鬼场项与物质项交叉贡献相消的那一步、以及 a^g = −1 被吸收进 L_0 的那一步）。docs/STATUS_LEVELS.md 等级 4 的例外条款要求三项同时成立：前提完整（本推导满足，前提写在目标陈述里）、有限步初等计算（满足，受限模上逐项有限）、reviewer 已独立复核（**未满足**）。复算完成并在 notes 按格式留下 `reviewer-verified: <agent>, <date>` 后，由 lead 批准把 status 改为 rigorous；在此之前不得改。"
+  - "**没有任何数学文献印出这条判据。** 已逐一核实并排除：fgz-1986（Prop 1.2 是一般分次李代数的 d²=0，不含 26；26 只在 Prop 2.1(i) 的鬼场一侧）、lian-zuckerman-1991（Prop 1.11(i) 的 d²=0 无条件成立且不含 26；26 只在 Prop 3.3(iii) 且是单向 if）、lian-zuckerman-1989（是 RNS 超弦）。kato-ogawa-1983 正文未获取（ScienceDirect 403）。⇒ **本推导将来的 rigorous 会完全依赖 reviewer 复算**，不依赖任何印出的证明；这也是它与 --via-fgz-ghost-representation（依据是逐字核实的编号命题 + PNAS 体裁统一口径）在档位依据上的根本差别。"
+  - "⟸ 与 ⟹ 两个方向的文献可追溯性不对称（⟹ 有 KO 摘要 L2 + IMNU 1986 的 L1 转述；⟸ 只有 Polchinski 的形式计算 + brst-nilpotent-at-c26）。这一不对称与本推导的状态无关（本推导的两个方向都靠复算），但下游引用时须知。"
+  - "本推导只定出 c^m = 26，不定 D = 26（须再加 worldsheet.free-boson-central-charge-d，formalized），也不定截距 a。"
+  - "无穷模式和的重排合法性由受限模条件保证，这一点在任何来源里都没有被陈述；它是本图（陈述卡）的增补。"
+notes: |
+  reviewer-verified: **TODO —— 本推导升 rigorous 的全部依据。** 请 reviewer 独立重算
+  {Q_B, Q_B} 的模式和（尤其是 (m³ − m) 系数与 a^g = −1 被吸收进 L_0 的那一步），
+  并在此处按格式留 `reviewer-verified: <agent>, <date>`。缺此记录不得标 rigorous
+  （docs/STATUS_LEVELS.md 等级 4 的例外条款）。
+
+  **本卡按草案 §C 的条件性要求建成 physical-argument。** 草案原文逐字：
+  「⚠ **未经 reviewer 独立复算，不得标 rigorous。** 先以 `status: physical-argument` 建卡、
+  复算通过后再由 lead 批准升级」。ROADMAP R3 同样写「**未复算不得标 rigorous**，先建成
+  physical-argument」。先例是 worldsheet.free-boson-central-charge-d--via-mode-algebra
+  （同样靠 reviewer 复核 + 编号来源升 rigorous）。
+  ⚠ **后果**：worldsheet.critical-dimension-brst-v2 的 effective 现在仍是 physical-argument，
+  尚未变成 R3「(III) 整条从瓶颈树消失」所预期的 rigorous；里程碑
+  ms.critical-dimension-brst-nilpotency 因此以 `audit.status: draft` 建卡等待。
+  ⚠ **`kind` 也随之取 physical-argument（草案写的是 `kind: proof`）**：`validate` 强制
+  「kind: proof requires status formalized or rigorous」。复算通过、lead 批准升级时，
+  **kind 与 status 必须一起改**（physical-argument → proof / rigorous）。
+
+  **旧推导 --via-nilpotency 保留不动**（它是 2026-09-10/11 两轮来源核实的不可变记录，
+  且 gaps 里登记了「当且仅当为什么不拆成两条推导」的裁决）。工具取最强的一条；本推导升 rigorous 后
+  worldsheet.critical-dimension-brst-v2 的 effective 才会变 rigorous。
+author: curator
+created: "2026-09-12"
