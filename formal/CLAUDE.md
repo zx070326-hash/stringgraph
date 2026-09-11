@@ -141,6 +141,14 @@ StringFormal/
                             m ≤ 0、[A,A] 振子代数、保物理子空间均未做（见文件头 gaps）
   NoGhost/QuotientForm.lean   H_phys/H_null 上诱导形式：pairing_add_null、nullInPhys、PhysQuot、
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
+  NoGhost/TowerNull.lean    塔上伪态/零模态/商形式（蓝图 §C.1）。**通用层**（任意 R-模 M、双线性型 B、
+                            子模 P）：radicalIn / QuotRadical / quotRadicalForm（只需 `IsRefl B`）；
+                            塔层：towerOrthComplement（= Mathlib `BilinForm.orthogonal`）、
+                            towerSpuriousSubmodule、towerNullSubmodule、伪态⊥物理态、
+                            spurious ∩ phys ⊆ null、TowerPhysQuot / towerQuotientPairing。
+                            **必须先抽象再实例化**：`ℤ →₀ k` 同时是 AddMonoidAlgebra，
+                            `HasQuotient ↥P (Submodule R ↥P)` 实例合成在 TowerFock 上直接失败
+                            （纯 Mathlib 可复现，见 TODO `noghost-c1`）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
   NoGhost/LevelTwo.lean      level-2 标量物理态闭式 (4a₀−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a₀²+(2D−74)a₀+84−3D]；a₀=1、D>26 有序域上存在负模物理态（exists_mem_physSubmodule_pairing_self_neg）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）

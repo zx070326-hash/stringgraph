@@ -1314,6 +1314,36 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     全部 `ok`，公理集只有 `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
   - **仍缺**：形式仍是 `R`-双线性而非 Hermite，无正定性、无完备化；
     伴随本身**不给** DDF 态的正模态——那还需要 `[A^i_m, A^j_n]`（(5a)(5b)，见上一项）。
+- [x] `noghost-c1`（蓝图 §C.1）：**塔上的伪态 / 零模态 / 商形式** ——
+  `StringFormal/NoGhost/TowerNull.lean`。没有它连无鬼定理 (1b) 的陈述都写不出来。
+  - 通用层（`namespace StringFormal`，对**任意** `R`-模 `M`、双线性型 `B`、子模 `P`）：
+    `radicalIn B P`（`P ⊓ B.orthogonal P` 拉回到 `P` 内）、`QuotRadical B P = P ⧸ radicalIn B P`、
+    `QuotRadical.mk` / `mk_surjective`、`quotRadicalForm B P hB`（诱导双线性型）与计算规则
+    `quotRadicalForm_mk`、`quotRadicalForm_comm`、`quotRadicalForm_mk_eq_zero_of_mem_radicalIn`。
+    唯一假设是 `LinearMap.IsRefl B`（比对称弱）。
+  - 塔层：`towerOrthComplement`（**定义为** Mathlib 的 `LinearMap.BilinForm.orthogonal`）、
+    `towerSpuriousSubmodule = ⨆_{n>0} range L_{-n}`、`towerNullSubmodule = H_phys ⊓ H_phys^⊥`、
+    `towerSpuriousSubmodule_le_towerOrthComplement`（伪态 ⊥ 物理态，唯一输入是
+    `Fock.towerPairing_towerLop_left`）、`towerSpurious_inf_towerPhys_le_towerNull`（易方向）、
+    `towerPairing_add_null` 系列、`TowerPhysQuot` / `towerPhysMk` / `towerQuotientPairing`
+    / `towerQuotientPairing_mk` / `_comm` / 两条 `_eq_zero_of_mem_*`。
+  - **必须走通用层的原因（Mathlib 级障碍，不是风格选择）**：`TowerFock D R = ℤ →₀ Fock D R`
+    同时是 `AddMonoidAlgebra`，`AddCommMonoid (ℤ →₀ k)` 的两条路径
+    （`AddCommGroup.toAddCommMonoid ∘ Finsupp.instAddCommGroup` vs `Finsupp.instAddCommMonoid`）
+    不是 reducibly defeq，于是 `HasQuotient ↥P (Submodule R ↥P)` 的实例合成**失败**。
+    纯 Mathlib 最小复现：`example (R : Type) [CommRing R] (p : Submodule R (ℤ →₀ R))
+    (q : Submodule R p) : Type := p ⧸ q` 失败，而把 `ℤ →₀ R` 换成抽象 `[AddCommGroup M]` 的
+    `ℤ →₀ M` 或换成 `MvPolynomial ℕ R` 都成功。手写 `@Submodule.hasQuotient` 能过类型，
+    但后面的 `Submodule.liftQ` 在 `whnf` 超时。对抽象 `M` 证完再实例化可让实例由 unification
+    确定，绕过搜索。塔层的每条陈述因此一律用 `towerPhysMk`，不用裸 `Submodule.Quotient.mk`。
+  - 顺带记录：`Fock.orthComplement`（`PhysicalStates.lean` 自己写的）**就是** Mathlib 的
+    `LinearMap.BilinForm.orthogonal`，见 `Fock.orthComplement_eq_orthogonal`；
+    `QuotientForm.lean` 整个是通用层在 `M := Fock D R` 的实例，可重构但本分支未动。
+  - **仍缺**：(i) `H_null = H_spurious ∩ H_phys` 只有易方向（反方向要 §B 的 DDF 分解）；
+    (ii) 无非退化性陈述；(iii) 无正定性（一般交换环上没有序）；
+    (iv) 伪态子模与 DDF 算子无任何关系，塔上也没有 `SpuriousShell.lean` 的带壳版。
+  - **公理登记**：44 条声明经 `check_axioms --all` 全部 `ok`，公理集只有
+    `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
