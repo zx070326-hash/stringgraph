@@ -109,7 +109,7 @@
 
 ## 待拆清单（定义卡内嵌命题）
 
-- `tt-ope-central-charge`、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
+- ~~`tt-ope-central-charge`~~（已拆，2026-09-11 small-backlog-3：定义 v2 + 命题卡 tt-ope-pole-structure-from-conformal-invariance）、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
 - ~~`worldsheet.verma-module`~~ 已拆（v2 formalized + math.verma-module-free-over-negative-part），2026-09-11
 - ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
 - ~~待建：`math.euler-partition-generating-function`~~ 已建并 formalized（2026-09-11，任意交换环上无逆元形式）；Verma 特征标的形式化缺口现只剩 PBW 下界
