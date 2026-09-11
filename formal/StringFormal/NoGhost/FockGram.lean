@@ -234,6 +234,75 @@ theorem pairing_creationMonomial_one (d e : Osc D →₀ ℕ) :
   classical
   rw [pairing_creationMonomial, monomialNorm_one]
 
+/-! ### Linear independence -/
+
+/-- `MvPolynomial.basisMonomials` *is* the basis of creation monomials. -/
+theorem basisMonomials_eq_creationMonomial :
+    ⇑(MvPolynomial.basisMonomials (Osc D) R) = (creationMonomial R : (Osc D →₀ ℕ) → Fock D R) :=
+  funext fun d => (creationMonomial_eq_monomial d).symm
+
+/-- The creation monomials `∏ (α^μ_{-n})^{d(μ,n)} |0⟩` are linearly independent.  Over an
+ordered field with `η > 0` this also follows from positive definiteness
+(`pairing_creationMonomial_self_pos` together with `pairing_creationMonomial_of_ne`), but
+it holds over any ground ring. -/
+theorem linearIndependent_creationMonomial :
+    LinearIndependent R (creationMonomial R : (Osc D →₀ ℕ) → Fock D R) := by
+  rw [← basisMonomials_eq_creationMonomial]
+  exact (MvPolynomial.basisMonomials (Osc D) R).linearIndependent
+
+/-! ### Positivity
+
+Step (3) of the card's argument.  A positive metric `η > 0` makes the Gram matrix positive
+definite; this is the situation in the transverse sector.  For the mostly-plus Minkowski
+metric positivity fails in the timelike direction, see `Fock.pairing_X_X_minkowski_timelike`.
+-/
+
+section Positive
+
+variable {D : ℕ} {R : Type*} [CommRing R] [PartialOrder R] [IsStrictOrderedRing R]
+
+/-- For a positive metric every diagonal entry `∏ (n η^{μμ})^{d(μ,n)} d(μ,n)!` is positive. -/
+theorem monomialNorm_pos {η : Fin D → R} (hη : ∀ μ, 0 < η μ) (d : Osc D →₀ ℕ) :
+    0 < monomialNorm η d := by
+  rw [monomialNorm, Finsupp.prod]
+  refine Finset.prod_pos fun v _ => ?_
+  have h1 : 0 < oscWeight η v := by
+    rw [oscWeight]
+    exact mul_pos (by exact_mod_cast v.2.pos) (hη v.1)
+  exact mul_pos (pow_pos h1 _) (by exact_mod_cast (d v).factorial_pos)
+
+/-- Every creation monomial has positive norm when `η > 0`. -/
+theorem pairing_creationMonomial_self_pos {η : Fin D → R} (hη : ∀ μ, 0 < η μ)
+    (d : Osc D →₀ ℕ) :
+    0 < pairing η (creationMonomial R d) (creationMonomial R d) := by
+  rw [pairing_creationMonomial_self]
+  exact monomialNorm_pos hη d
+
+end Positive
+
+section PositiveDefinite
+
+variable {D : ℕ} {R : Type*} [CommRing R] [LinearOrder R] [IsStrictOrderedRing R]
+
+/-- For a positive metric the Fock form is positive definite: there are no null or negative
+norm states at all.  (Over the transverse directions this is the statement that the
+transverse Fock space is a genuine inner-product space, which is the point of the no-ghost
+theorem.) -/
+theorem pairing_self_pos_of_ne_zero {η : Fin D → R} (hη : ∀ μ, 0 < η μ) {P : Fock D R}
+    (hP : P ≠ 0) : 0 < pairing η P P := by
+  classical
+  rw [pairing_apply]
+  refine Finset.sum_pos (fun d hd => ?_) ?_
+  · have hc : coeff d P ≠ 0 := MvPolynomial.mem_support_iff.mp hd
+    have hsq : 0 < coeff d P * coeff d P := mul_self_pos.mpr hc
+    have := mul_pos hsq (monomialNorm_pos hη d)
+    calc (0 : R) < coeff d P * coeff d P * monomialNorm η d := this
+      _ = coeff d P * monomialNorm η d * coeff d P := by ring
+  · rw [Finset.nonempty_iff_ne_empty, Ne, MvPolynomial.support_eq_empty]
+    exact hP
+
+end PositiveDefinite
+
 end Fock
 
 end StringFormal.NoGhost
