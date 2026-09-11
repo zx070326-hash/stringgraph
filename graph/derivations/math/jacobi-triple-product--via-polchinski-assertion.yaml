@@ -1,0 +1,89 @@
+id: math.jacobi-triple-product--via-polchinski-assertion
+target: math.jacobi-triple-product
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.jacobi-theta-functions
+    note: |
+      供给**恒等式左端的那个对象**：ϑ₀₀(v,τ) = Σ_{n∈Z} exp(πin²τ + 2πinv)（该卡断言 (1)(2)），
+      以及 q、z 与分数次幂 q^s ≡ exp(2πisτ) 的分支约定（该卡「设定」段），
+      后者是右端 q^{m−1/2} 有确定含义的前提。
+      **非 inferred**：原书把 (7.2.31) 与 (7.2.34) 都写成「ϑ(v,τ) = …」，两式**同节同页**
+      （§7.2, p. 215），左端就是该定义卡逐字引的 (7.2.31)。
+      ⚠ 该卡自身 status = rigorous 且不依赖任何节点，故它**不**压低本推导；
+      本推导的 physical-argument 完全来自原书「只写式子不给证明」（见 summary 与 gaps）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2「Theta functions」, eq. **(7.2.34)** 与 **(7.2.35)**, p. 215（与同节 (7.2.31) 合读）"
+    note: |
+      **L1（原书页图逐字）**，抽取记录 literature/extractions/polchinski-1998-v1-ch7.md **#E15**。
+      ★★★ **本推导 status 的全部依据就是这条记录的判词**，逐字：
+      「文献自称的严格程度：**全部无证明**。(7.2.32) 的唯一性（"determine it up to normalization"）、
+       零点唯一性、Jacobi 恒等式**都是断言**。(7.2.20) 是唯一被说成「easily verified」的。」
+      ⇒ (7.2.34) 属于「都是断言」的那一批：**原书既不证明、也不给文献、也不命名**。
+      ⚠ 同条记录的「文献列出的依赖」栏逐字是「**无（数学工具，无外部引用）**」
+      ——即原书在这一整节没有引用任何数学文献。
+summary: |
+  **原书实际做的事（一句话）**：在 §7.2 的「数学工具箱」一节里，先写下级数 (7.2.31)，
+  再写下无穷乘积 (7.2.34)，**两式左端都是 ϑ(v,τ)**，中间不给任何论证、不给文献、不给名字。
+
+  **本推导因此只做两件事**：
+  (1) **把「两式左端同名」读成一条等式**，即把 (7.2.31) 的右端与 (7.2.34) 的右端相等
+      登记为一条可被图引用的命题（这是原书写法的直接读数，不是本图的外推）；
+  (2) **补上右端的收敛性**（目标卡断言的第二段）：|q| < 1 时
+      Σ_m (|q|^m + |z||q|^{m−1/2} + |z|^{−1}|q|^{m−1/2}) < ∞，故乘积绝对且局部一致收敛。
+      这是初等标准事实，与 math.dedekind-eta-function 对 ∏(1−q^n) 所作的补全同款。
+      ⚠ 原书对收敛**一字不提**。
+
+  **为什么标 physical-argument（按 docs/STATUS_LEVELS.md「断言 + 骨架」一节的档位）**
+  · 来源**连骨架都没有**，只有结论式子（比「a little thought shows」还弱一档的写法）。
+    按该节裁决，「来源给出论证骨架但关键步骤只有断言」标 physical-argument，
+    **不**标 conjecture（conjecture 保留给来源自己当猜想提出、或真伪未定的命题）。
+    本式是十九世纪的定理，真伪毫无争议，**只是本图手上没有它的证明**——
+    这正是该裁决所说的「论证不完整」那个轴。
+  · ⚠ **本推导不得标 rigorous**：STATUS_LEVELS 第 4 级要求「有发表的、数学界接受的完整证明；
+    **来源必须是数学文献或数学物理文献**」。Polchinski 在此处不是这样的来源（他不给证明），
+    而真正的数学来源**尚未登记进 literature/sources.bib**（见 gaps 第二条），故不得引。
+  · ⚠ 也不适用 2026-09-10 的 rigorous 例外（「有限步初等计算 + reviewer 已复核」）：
+    三重乘积的标准证明不是有限步初等计算（要么用 Jacobi 的函数方程 + 唯一性论证，
+    要么用分拆的组合双射），本推导也**没有**把任何一种写出来。
+
+  **本推导没有做、也不打算做的事**：不给出三重乘积的任何证明草图。
+  写半个证明会造成「图上看起来有论证」的假象；正确动作是登记数学来源后另建一条 proof 推导
+  （见 gaps 第二条与目标卡 notes 的「升级路径」）。
+gaps:
+  - "**来源零证明、零引用、零命名（本推导的主缺口，也是它的全部内容）**：
+     原书 §7.2 在写下 (7.2.34) 时不给论证、不给参考文献、不称其为三重乘积；
+     抽取记录 #E15 的「文献列出的依赖」栏逐字是「**无（数学工具，无外部引用）**」。
+     ⇒ 目标卡在图上的作用目前是**把一条从教科书导入的经典恒等式显式记账**，
+     而不是提供论证。任何依赖它的下游都会被压到 physical-argument。"
+  - "**数学侧一手来源尚未登记，因而无法建 rigorous 推导**：按根 CLAUDE.md，
+     新文献必须先登记到 literature/sources.bib，`ref` 才能用。本轮**未**登记任何数学来源。
+     ⇒ **交 researcher 的待办**：登记三重乘积的一手数学来源（检索线索见目标卡 notes：
+     Whittaker–Watson §21.3、Mumford *Tata Lectures on Theta I*；⚠ 这两条**本项目未核实**，
+     登记时必须核到页图再写 loc，不得照抄本卡里的 § 号）。登记后新增
+     math.jacobi-triple-product--via-<source>（kind proof / status rigorous），
+     本推导按 lead 2026-09-11 裁决**保留**作历史记录，工具取高者。"
+  - "**本推导只覆盖 ϑ₀₀ 一个函数**：原书 (7.2.38a–d) 的四个乘积表示不在目标卡里
+     （抽取记录未印出式子）。⇒ 需要 ϑ₀₁/ϑ₁₀/ϑ₁₁ 乘积形式的下游
+     （典型是 spectrum.long-cylinder-lightest-state-count--via-q-expansion 的第 2、3 步）
+     **暂时仍只能从原书 (10.7.6) 直接导入**，不能改接到目标卡上。
+     ⇒ 待 researcher 取 Polchinski Vol.1 p.215 页图后一并处理。"
+  - "**收敛性的补全未经 reviewer 复核**：summary 第 (2) 步（目标卡断言的第二段）是三行初等估计，
+     本推导没有 `reviewer-verified` 记录。⚠ 即使复核通过，本推导也**不会**升到 rigorous——
+     缺口在恒等式本身（gaps 第一、二条），不在收敛性。"
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立。
+
+  【与 math.dedekind-eta-s-transformation 的三条推导完全同构，可照抄其演化路径】
+  那张卡的历史是：先只有 --via-textbook-assertion（Polchinski 对 (7.2.44) 逐字只有一句
+  'It has the modular transformations' 后直接列式，零证明）；
+  researcher 登记 siegel-1954-eta 后补 --via-siegel-1954（rigorous）；
+  formalizer 做出 Lean 后再补 --via-lean（formalized），三条并存、工具取高者。
+  **本推导现在正处在那条路径的第一站。**
+
+  ⚠⚠【给后续 agent 的一条提醒】不要因为「三重乘积是众所周知的定理」就把本推导改成 rigorous。
+  项目原则 2 逐字：status 是**该节点自身论证**的严格程度，不是「大家都相信」。
+  图上现在没有这条恒等式的任何证明，也没有可引的数学来源——这**正是**本项目要暴露的那种记账。
+author: curator
+created: "2026-09-11"
