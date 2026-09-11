@@ -38,19 +38,21 @@ i.e. `a ᵥ* Gram = 0`, so `det Gram ≠ 0` gives `a = 0`.
 * `IsContravariant.linearIndependent_descFamily{2,3,4}`: **generic PBW (b) for `N ≤ 4`** — the
   standard descendants are linearly independent whenever the level-`N` Kac polynomial is
   nonzero at `(c,h)`.
-* `levelSpan_two_eq_span_descFamily2`: unconditionally `V₂ = span {L₋₂|c,h⟩, L₋₁²|c,h⟩}`
-  (there are exactly two compositions of `2`, `composition_two_blocks`).
-* `IsContravariant.finrank_levelSpan_two`: `dim V₂ = 2 = p(2)` at generic `(c,h)` — the first
-  instance of the PBW equality `dim V_N = p(N)`, of which `VermaPBW.lean` had only `≤`.
-* `IsContravariant.three_le_finrank_levelSpan_three`,
-  `IsContravariant.five_le_finrank_levelSpan_four`: `dim V₃ ≥ 3`, `dim V₄ ≥ 5` at generic
-  `(c,h)`.  These are *not* upgraded to equalities: the matching upper bound
-  `finrank_levelSpan_le_card_partition` is stated with `Fintype.card (Nat.Partition N)`, and
-  `p(3) = 3`, `p(4) = 5` are not available in that form (Mathlib has no cardinality lemmas for
-  `Nat.Partition`, and `decide` does not reduce the `Fintype.ofSurjective` instance).  At
-  `N = 2` the equality is obtained instead through `levelSpan_two_eq_span_descFamily2`, which
-  needs no partition counting; at `N = 3, 4` that route additionally needs straightening
-  (`[1,2]` is a composition of `3` but `L₋₁L₋₂|c,h⟩` is not one of the three standard vectors).
+* `levelSpan_two_eq_span_descFamily2`, `levelSpan_three_eq_span_descFamily3`,
+  `levelSpan_four_eq_span_descFamily4`: unconditionally `V_N = span` of the `p(N)` standard
+  descendants for `N = 2, 3, 4` — e.g. `V₂ = span {L₋₂|c,h⟩, L₋₁²|c,h⟩}`.  At `N = 2` this is
+  immediate from the two compositions of `2` (`composition_two_blocks`); at `N = 3, 4` it uses
+  the straightening of `VermaPBW.lean` (`levelSpan_eq_ordSpan`) plus the arithmetic enumerations
+  `ordWord_sum_three`, `ordWord_sum_four` of the *ordered* words of total mode `-3`, `-4`.
+* `IsContravariant.finrank_levelSpan_two`, `finrank_levelSpan_three`, `finrank_levelSpan_four`:
+  **`dim V_N = p(N)` for `N = 2, 3, 4` at generic `(c,h)`** (`2`, `3`, `5`) — the PBW equality,
+  of which `VermaPBW.lean` had only `≤`.  The upper bound here does *not* go through
+  `finrank_levelSpan_le_card_partition`: the partition counts `p(3) = 3`, `p(4) = 5` are never
+  needed, because the spanning set is cut down to an explicit finite list of ordered words.
+  (Mathlib has no cardinality lemmas for `Nat.Partition`, and `decide` does not reduce the
+  `Fintype.ofSurjective` instance, so that route is blocked.)
+  `IsContravariant.three_le_finrank_levelSpan_three`,
+  `IsContravariant.five_le_finrank_levelSpan_four` are the `≥` halves, kept as named corollaries.
 * `kac_level_two_pos`, `kac_level_two_nonneg`, `kac_level_two_at_c_one`: on `h > 0`, `c ≥ 1` the
   level-2 Kac determinant is `≥ 0`, and `> 0` as soon as `c > 1`.  Note there is **no upper
   restriction on `c`**: for `c > 25` the Kac quadratic does have two real roots, but both are
@@ -305,9 +307,10 @@ lemma span_descFamily4_le_levelSpan :
   exact descFamily4_mem_levelSpan R c h i
 
 /-- A composition of `2` is `[2]` or `[1,1]`: the two level-2 descendants `desc2`, `desc11`
-exhaust the generators of `V₂`.  (At level `3` the analogous list contains `[1,2]`, i.e.
-`L₋₁L₋₂|c,h⟩`, which is *not* one of the three standard descendants and needs straightening;
-that is why the exact dimension below is proved only at level `2`.) -/
+exhaust the generators of `V₂`, with no straightening needed.  (At level `3` the analogous list
+contains `[1,2]`, i.e. `L₋₁L₋₂|c,h⟩`, which is *not* one of the three standard descendants; for
+`N = 3, 4` the argument therefore goes through the ordered words of `VermaPBW.lean` instead —
+see `ordWord_sum_three`, `ordWord_sum_four`.) -/
 lemma composition_two_blocks (cmp : Composition 2) : cmp.blocks = [2] ∨ cmp.blocks = [1, 1] := by
   obtain ⟨l, hpos, hsum⟩ := cmp
   match l with
