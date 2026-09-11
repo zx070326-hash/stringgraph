@@ -1,0 +1,70 @@
+id: math.compact-lie-algebra-index-and-casimir
+kind: definition
+status: rigorous
+title: 李代数的结构常数、紧李代数的正定不变内积 d^{ab}、表示的指标 T_r 与 Casimir Q_r（Polchinski §11.4 前段）
+statement: |
+  **李代数**。生成元 T^a（a = 1, …, dim g）满足
+    [T^a, T^b] = i f^{ab}{}_c T^c                                   （(11.4.1)）
+  与 Jacobi 恒等式（(11.4.2)）；f^{ab}{}_c 称为结构常数。群元写作 exp(iθ_a T^a)（(11.4.3)），
+  但李代数只决定群的**局部**结构（原书脚注 1，逐字：'To be precise the Lie algebra determines
+  only the local structure of the group. Many groups, differing only by discrete identifications,
+  will have a common Lie algebra.'）。
+
+  **紧李代数的不变内积**。对紧群，李代数上存在正定的不变内积
+    (T^a, T^b) = d^{ab}                                            （(11.4.4)）,
+  其不变性 ([T, T′], T″) + (T′, [T, T″]) = 0（(11.4.5)）
+  等价于「f^{abc}（用 d 升降指标）完全反对称」（原书逐字：'equivalent to the statement that
+  f^{abc} is completely antisymmetric'）。d_{ab} 记 d^{ab} 的逆。
+
+  **表示的指标与 Casimir**。设 t_r^a 是表示 r 中 T^a 的矩阵，则
+    Tr(t_r^a t_r^b) = T_r d^{ab}                                    （(11.4.6)）
+  定义表示 r 的**指标** T_r；
+    t_r^a t_r^b d_{ab} = Q_r                                        （(11.4.7)）
+  是表示 r 的 **Casimir 不变量**（与单位矩阵成正比，Q_r 记其本征值）。
+
+  **本卡不断言的内容**（原书 §11.4 pp. 61–65 在抽取时跳读，下列式号只在 §11.5/§11.6 的引用中见到，
+  内容未核实，故**不**转录）：
+    (1) Cartan–Weyl 基 (H^i, E^α) 与根 α 的一般形式（(11.4.12)）；
+    (2) 生成元的归一化，特别是最长根 ψ 的长度 ψ²（(11.4.14)）；
+    (3) SO(n) 的根系（(11.4.16)）与 E₈ 的根系（(11.4.21)）；
+    (4) 对偶 Coxeter 数 h(g) 的定义处；本图只知道它在 (11.5.21) 被使用，
+        且由 (11.5.40) 的两个相等表达式可读出 h(g) ψ² = Q_g（Q_g 为伴随表示的 Casimir）——
+        **这是本图的推断**，不是原书 §11.4 的逐字定义；
+    (5) Sp(k) 的定义（(11.4.8)–(11.4.10)）：抽取记录只记了式号，未转录内容；
+    (6) E₈ 的存在性、dim E₈ = 248、E₈ ⊃ SO(16) 与分支规则 248 = 120 + 128
+        （worldsheet.heterotic-e8e8-construction 所需）——不在本卡覆盖的页内。
+uses: []
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.4 'A little Lie algebra', eq. (11.4.1)–(11.4.7) 与脚注 1, pp. 59–60（李代数、Jacobi、exp(iθ_a T^a)、紧群的正定不变内积 d^{ab}、不变性 ⟺ f^{abc} 完全反对称、指标 T_r、Casimir Q_r）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E59；式号、公式与脚注 1 逐字读自原书页图 pp. 59–60）。
+      原书对本节的自评（逐字）：'Space forbids a complete treatment; we focus on some basic ideas and some
+      specific results that will be needed later.'
+      ⚠ **pp. 61–65 未读**：(11.4.8)–(11.4.21) 的内容未核实（抽取记录 §3.2），本卡「不断言」清单据此划定。
+tags: [lie-algebra, math-input, casimir, index, invariant-form, definition]
+notes: |
+  【为什么是 rigorous 定义卡】(11.4.1)–(11.4.7) 是有限维李代数与其表示的标准定义，
+  无路径积分、无 OPE；「紧 ⇒ 存在正定不变内积」是标准事实（原书直接使用，不证），
+  本卡把它作为**紧李代数**这一概念的一部分来陈述，不作为命题断言。
+  若日后需要「半单紧李代数上正定不变内积的存在性」作为独立命题，另建卡并找数学来源。
+
+  【生成元的厄米性约定】(11.4.1) 写 [T^a,T^b] = i f T，即 T^a **厄米**（原书未在 p. 59–60 逐字声明，
+  由 exp(iθ_a T^a) 为群元读出）。这与 conv.gauge-trace-normalization（Green–Schwarz 1984 的
+  **反厄米** λ^a）相差一个 i：λ^a_GS = −i T^a。本卡**不**声明 conv.gauge-trace-normalization
+  ——那条约定管的是十维反常多项式的迹归一化，与本卡无交涉；若把本卡的 T_r 与
+  math.so-usp-adjoint-fundamental-trace-identities 的 Tr/tr 系数对接，需在边上写 convention_map。
+
+  【下游】§11.5 的流代数与 Sugawara 构造用到本卡的 d^{ab}（(11.5.7) k^{ab} = k̂ d^{ab}）、
+  f^{ab}{}_c（(11.5.5)）、T_r（(11.5.17) 自由费米子构造的 level）、Q_r 与 Q_g（(11.5.40) 主场的权）：
+  见 math.affine-lie-algebra-current-ope、worldsheet.free-fermion-so-n-current-algebra-level-one、
+  worldsheet.current-algebra-primary-weights。
+
+  【与 ch11 杂化弦卡的关系】worldsheet.heterotic-e8e8-construction 与
+  worldsheet.heterotic-bosonic-construction-gauge-groups 的推导原先在 gaps 里写「§11.4 的李代数工具节
+  本轮未入图」。本卡入图后那两条推导改指本卡，但本卡**只**覆盖 §11.4 前段，
+  它们真正需要的 (11.4.16)/(11.4.21) 根系与 E₈ 的分支规则仍是缺口（见「本卡不断言」(3)(6)）。
+  要闭合必须补读原书 pp. 61–65（同一份已落盘 PDF，抽取记录 §3.3）。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"
