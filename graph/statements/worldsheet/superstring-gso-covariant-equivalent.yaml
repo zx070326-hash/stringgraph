@@ -163,6 +163,24 @@ sources:
       Scherk and Olive [8] (GSO) in the "old covariant" formalism.'
       bib 条目由 curator 于 2026-09-11 按 lead 指示以 **L0** 登记（卷期页来自 researcher 的
       §7.7，未经 Crossref/INSPIRE 二次核对）。
+      ★★【2026-09-11 追加，researcher 已把 bib 条目升到 L2（元数据经 Crossref + INSPIRE 双核对，
+      DOI 10.1016/0550-3213(77)90206-1）；但**内容仍是 L0，归属的可追溯性没有变强**】三条限定：
+      (1) **摘要级 negative evidence**：INSPIRE 摘要逐字是 'We study the connection between the dual
+          spinor model and supersymmetry. We show that in the low-energy region, the dual spinor model
+          yields a supersymmetric Yang-Mills theory with O(4) internal symmetry and a supergravity
+          theory with O(4) internal symmetry.'
+          ——**摘要里没有 'projection'、没有 'truncation'、没有 'GSO'、没有 '10'、没有 'tachyon'、
+          没有 'chirality'/'Majorana'**。⇒ **摘要本身不能支撑「本文提出了 GSO 投影」这条归属**；
+          归属**只**靠 LZ p.328 的 L1 转引（'They were first proposed by Gliozzi, Scherk and Olive
+          [8] (GSO) in the "old covariant" formalism.'）。
+      (2) **易混陷阱**：同三位作者另有 **Phys. Lett. B 65(3) (1976) 282–286,
+          'Supergravity and the spinor dual model'**（DOI 10.1016/0370-2693(76)90183-0，Crossref 核实）
+          ——注意标题里 'spinor dual' 与本条的 'dual spinor' **词序相反**，是两篇不同的文章。
+          ⚠ **LZ 的 [8] 到底指哪一篇，本图未裁决**（LZ 的参考文献表本项目未逐条取得）。
+          本条按 LZ 转引里的 "old covariant" 语境与通行归属挂在 1977 那篇上，
+          但这一步**是本图的选择，不是已核实的事实**。
+      (3) ⇒ 引用纪律不变（sources.bib 的使用纪律 (1)(2)）：`loc` 只能写「全文」或 'pp. 253–290'，
+          本条只承载归属，**不得**用来支撑任何公式、维数或定理。
 tags: [superstring, gso, brst, cohomology, rns, g-parity]
 notes: |
   ★★【本卡为什么新建（curator，2026-09-11）】

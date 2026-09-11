@@ -98,6 +98,13 @@ sources:
     note: |
       ⚠ 只承载"GSO 截断的原始提案"这一归属，不支撑本推导的任何一步
       （见 sources.bib 里该 key 的使用纪律：loc 只能写"全文"）。
+      ⚠⚠【2026-09-11 追加】bib 条目已由 researcher 升到 **L2**（元数据双源核对 + DOI），
+      但**内容等级仍是 L0**，归属的可追溯性未变：INSPIRE 摘要里**没有** 'projection'/'truncation'/
+      'GSO'/'tachyon'/'chirality' 任何一词，⇒ **归属只靠 LZ p.328 的 [8] 转引**。
+      ⚠ **易混**：同三位作者另有 Phys. Lett. B **65**(3) (1976) 282–286,
+      'Supergravity and the **spinor dual** model'（DOI 10.1016/0370-2693(76)90183-0），
+      与本条的 'dual spinor' **词序相反**；**LZ 的 [8] 指哪一篇本图未裁决**（LZ 的文献表未逐条取得）。
+      详见目标卡同一条 source 的 note。
 summary: |
   **LZ 的论证（四步，全部逐字可核，见 sources 第一条）**：
 
