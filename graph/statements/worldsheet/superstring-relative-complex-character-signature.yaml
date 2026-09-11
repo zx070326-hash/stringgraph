@@ -69,6 +69,9 @@ sources:
       Proposition 2.14，**与 E5 转录一致、无更正**；证明 pp.312–317 的结构（引用清单与分步骤）见 §10.4，
       已写进本卡推导的 summary。剩余缺口只是 Lemma 2.14.1–2.14.5 各自证明的逐行细节（见推导 gaps）。
       ⚠ 排印差：p.312 印作 p^{(8)}_κ(κ − (p·p/2))，p.317 印作 p^{(8)}_κ(κ − p·p/2)；见本卡 notes 第三段。
+      ★ **〔2026-09-12 auditor 页图复核，已结清〕** 行内排（p.312，`/` 分数故加括号消歧）
+      vs 显示排（p.317，叠排分数故无需括号）之别，**两处都是 `κ − p·p/2`，无实质差异，
+      不构成 gap**（rulings §3，lian-zuckerman-1989.md §11）。
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.15 的证明**, p.317，逐字：'Proof. (i) We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ). Thus by Theorem 2.4, the left-hand side gives dim H⁰_rel(p,κ) while the right-hand side is char C_rel(p,κ). Hence (i) follows from Proposition 2.14 (ii). (ii) Similarly, the Euler–Poincaré Principle for signature states that Σ_{n∈Z} sign H^n_rel(p,κ) = Σ_{n∈Z} sign C^n_rel(p,κ). Again Theorem 2.4 implies that the left-hand side = sign H⁰_rel(p,κ), while the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
     note: |
@@ -112,6 +115,19 @@ notes: |
   【一处排印差，照抄勿统一】p.312 的 Prop 2.14(ii) 印作 p^{(8)}_κ(κ − (p·p/2))（自变量里 p·p/2 **带一层括号**），
   p.317 的 Corollary 2.15(i) 印作 p^{(8)}_κ(κ − p·p/2)（**无内层括号**）。本卡 statement 用的是无内层括号那种
   （与 Cor 2.15、与维数卡一致）。两者是同一表达式的两种排版，不是两个不同的量。（extraction §10.3）
+
+  ★【2026-09-12 auditor 页图复核：上面这条排印差**已结清，不构成任何 gap**】
+  physics-auditor 于 2026-09-12 用 LZ 1989 全文 PDF（4× 渲染）复核两处
+  （`literature/extractions/page-check-rulings-2026-09-12.md` §3，摘要在
+  `lian-zuckerman-1989.md` §11），读数与裁定：
+    · p.312 Prop 2.14(ii) 是**行内排**，`p·p/2` 用斜杠分数，故**外加一层圆括号消歧**；
+    · p.317 Cor 2.15(i) 是**显示排**，`p·p` 在分子、`2` 在分母的**叠排分数**，无需内层括号；
+    · **两处都是 `κ − p·p/2`，都不是 `(κ − p·p)/2`。**
+  ⇒ **裁定：无实质差异，纯排版之别。** 上面「照抄勿统一」这条纪律（逐字引文各随其页）
+  **仍然正确且继续有效**，但它**不是转录风险**：本卡 statement 写 `κ − p·p/2` 即可，
+  **不必注明括号**，也不需要在本卡或任何下游卡上为此留 gap。
+  ⚠ 本图此前**没有**任何卡把这条括号差记为 gap（auditor 本轮 grep 全图确认），
+  故本条只是把「已结清」这个状态登记下来，不涉及任何卡的增删改。
   【为什么立卡（curator 2026-09-11，small-backlog-12）】
   worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989 的 gaps 第一条逐字：
   「Proposition 2.14(ii) … 在本图没有卡 … **目标卡断言的整个右端落在一条未上图的命题上**，
