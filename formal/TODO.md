@@ -578,7 +578,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     正是被整序消掉的非标准词。`three_le_finrank_levelSpan_three`、`five_le_finrank_levelSpan_four`
     保留为等式的 `≥` 半边推论。
     原先记录的障碍（`Fintype.card (Nat.Partition 3) = 3`，Mathlib 没有基数引理且 `decide`
-    化不开 `Fintype.ofSurjective` 实例）**因此被绕过而非解决**：`Nat.Partition` 的计数仍然缺。
+    化不开 `Fintype.ofSurjective` 实例）在该文件里是被**绕过**的；**计数本身已于 2026-09-11 补上**，
+    见下一条 `partition-card`，于是 `finrank_levelSpan_le_card_partition` 可对 `N ≤ 5` 取数值
+    （`GenericIndependence.lean` 末尾的 `finrank_levelSpan_{three,four,five}_le`，无条件）。
     `N ≥ 5` 同法可做，但需要该层 Kac 行列式（`ShapovalovLevelFive.lean` 不存在）；
     有序词枚举本身在 `N = 5` 是 7 个情形、长度 ≤ 5，`match` 分支数随 `N` 线性增长，
     不是瓶颈——**瓶颈是 Gram 行列式**。
@@ -597,6 +599,25 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
   `dim V_N = p(N)` 除 generic `N = 2,3,4` 外只证到 `≤`。这一项是 `shapovalov-form` 与
   `kac-determinant` 的前提。
+- [x] `partition-card`：`p(n) = Fintype.card (Nat.Partition n)` 的显式值（`n = 2,3,4,5` 为
+  `2,3,5,7`）。见 `StringFormal/Math/PartitionCard.lean`（无 sorry，公理只有标准三条；只 import
+  三个 Mathlib 模块，不 import 本项目其他模块）。Mathlib v4.33.1 有 `Nat.Partition` 与它的
+  `Fintype` 实例，但**没有任何基数引理**。
+  - 为什么不能 `decide`：`#eval Fintype.card (Nat.Partition 4)` 确实打印 `5`（实例是可计算的），
+    但内核化不开——实例是 `Fintype.ofSurjective (Nat.Partition.ofComposition n) _`，而
+    `Fintype (Composition n)` 经 `compositionEquiv` → `CompositionAsSet.blocks` →
+    `Finset.orderEmbOfFin` → `Finset.sort` → `List.mergeSort`，后者是良基递归，`whnf` 停在
+    `match h : (Fintype.card (Nat.Partition 2)).beq 2 with ...`。`native_decide` 会引入
+    `Lean.ofReduceBool`，本项目禁止。
+  - `Nat.Partition.toFinsuppAntidiag` **只是单射**，不是到 `(Finset.Icc 1 n).finsuppAntidiag n`
+    的双射（`n = 2` 时右边有 3 个元素而 `p(2) = 2`：值向量 `(1,1)` 不是 `i ↦ count i · i` 的形状），
+    所以不能用那个 Finset 来数。
+  - 做法：`card_partition_eq_card` 把计数搬到显式的 `Finset (Multiset ℕ)` 字面量上
+    （那里 `decide` 可用，`DecidableEq (Multiset ℕ)` 经 `List.decidablePerm` 归约），
+    穷尽性由 `exists_cons_of_sum_succ`（剥一个部分）+ 对总和递归给出
+    （`multiset_sum_eq_{one,two,three,four,five}`）。
+  - 这是**可复用的**：`card_partition_eq_card` 对任意 `n` 成立，加一个 `multiset_sum_eq_six`
+    就能得 `p(6) = 11`，机械工作量随分拆数线性增长。
 - [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
   （无 sorry，公理只有标准三条）：
   - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
