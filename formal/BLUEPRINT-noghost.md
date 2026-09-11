@@ -1757,3 +1757,188 @@ Q_M := { φ ∈ towerBigrade(−N, M) : L_n φ = 0 ∀ n ≥ 1 }     （L_0 条�
 ⇒ **约 150 行，且不含任何分拆数的求值**。`Math/PartitionCard.lean`（`p(m)`，`m ≤ 5`）
 与 `Math/EulerPartition.lean`（`φ^{-1}` 生成函数）在本路线上**都用不到**
 ——这与 §B′.8 的判断一致，本节把它从「暂时用不到」加强为「结构上用不到」。
+
+### B″.6 推荐路线 (b′)：三个 PR
+
+```
+PR5a  VirasoroPBWBasis.lean   D-无关     ≈ 700 行  —— 每片的「Virasoro × 光锥」PBW 基
+PR5b  NullSeeds.lean          **D = 26** ≈ 250 行  —— Type 1 / Type 2 两族零态
+PR5c  (B-26) 的收尾            **未解决**          —— 两族的张成维数下界
+```
+
+**依赖**：PR5a 与 PR5b **互不依赖**，可并行；PR5c 需要两者。
+**交付顺序建议**：PR5b 的 `N = 2` 特例（只用 `LevelTwoSpan.lean`，约 120 行）→ PR5b 全量 →
+PR5a → PR5c。理由：PR5b 的 `N = 2` 特例是整条路线唯一便宜的**证伪点**（B″.2.2），
+而且它单独就把 `kacDet2 c (1−2) = 2(c−26)` 送进图，是 `D = 26` 临界性的最小机检见证。
+
+**PR5a 单独的价值（即使 PR5c 永远做不完）**：它关掉 PR4 遗留的**全部**非-(B-26) 缺口
+（`formal/TODO.md` 的 `general-n-pr4` 条目「仍未做」里除 (B-26) 外的两条），
+并给出 Fock 模在 `Vir⁻` 下自由的**计数版本**的一个不经 Kac 行列式的证明
+——后者是图节点 `worldsheet.fock-module-free-over-negative-virasoro`（FGZ Prop 2.6(i)）
+的一条**独立推导**，而 §B.2 判死的只是「沿 FGZ 的路走」。
+
+### B″.7 引理清单（Lean 伪代码，草案，未编译）
+
+命名空间 `StringFormal.NoGhost`。记 `hD : 2 ≤ D`，`F : DDFLightConeFrame η a b`，
+`conjDeg`/`conjIdx`/`lcMonomial`/`conjFree` 取 `SpuriousElimination.lean` 与
+`LightConeResolutionGen.lean` 的既有定义。
+
+#### PR5a `NoGhost/VirasoroPBWBasis.lean`
+
+```lean
+/-- 降序 Virasoro 下降单项式 `L_{-λ} = L_{-n₁} ⋯ L_{-n_r}`（`n₁ ≥ … ≥ n_r ≥ 1`），
+指标是 `ℕ+ →₀ ℕ`（第 `n` 位的值 = `L_{-n}` 的重数），与普通分拆同指标。 -/
+noncomputable def lopDesc (η p : Fin D → R) (lam : ℕ+ →₀ ℕ) : Module.End R (Fock D R)
+
+/-- `|λ| := Σ n · λ n`，即 `lopDesc` 抬高的 level。 -/
+noncomputable def lopWeight (lam : ℕ+ →₀ ℕ) : ℕ := Finsupp.weight (fun n : ℕ+ => (n : ℕ)) lam
+
+theorem lopDesc_mem_levelSubmodule (hη) (lam) {M : ℕ} {x : Fock D R}
+    (hx : x ∈ Fock.levelSubmodule D R M) :
+    lopDesc η p lam x ∈ Fock.levelSubmodule D R (M + lopWeight lam)
+
+/-- **排序引理**（PR5a 的技术核心）：`L_{-n}` 左乘有序单项式仍落在有序单项式的张成里。
+`[L_{-n}, L_{-m}] = (m − n) L_{-(n+m)}` 在**固定权、长度递减**的意义下是下降的，
+所以按 `lam.sum` 归纳即可；不需要抽象 PBW，也不需要 Verma 模。 -/
+theorem Lop_neg_mul_lopDesc_mem_span (hη) {n : ℕ+} (lam) (x : Fock D R) :
+    Fock.Lop η p (-(n : ℤ)) (lopDesc η p lam x)
+      ∈ Submodule.span R {y | ∃ mu : ℕ+ →₀ ℕ, lopWeight mu = lopWeight lam + n ∧
+                               y = lopDesc η p mu x}
+
+/-- (F-1) **伪态的精确张成集**。对 `M` 归纳，归纳步用 PR4 的消元 `V = C ⊔ S`。 -/
+theorem spurious_inf_levelSubmodule_eq_span (hD) (F) (hη) (hbp : dotVec η b p = 1) (M : ℕ) :
+    Fock.spuriousSubmodule η p ⊓ Fock.levelSubmodule D R M
+      = Submodule.span R { y | ∃ lam c, lam ≠ 0 ∧ conjDeg hD c = 0 ∧
+          lopWeight lam + Fock.level D c = M ∧ y = lopDesc η p lam (lcMonomial F c) }
+
+/-- (F-2) **占据函数按 `b̃` 行拆分**。纯 `Finsupp`，无物理内容。 -/
+def oscSplitConj (hD : 2 ≤ D) :
+    (Osc D →₀ ℕ) ≃ (ℕ+ →₀ ℕ) × {c : Osc D →₀ ℕ // conjDeg hD c = 0}
+theorem level_oscSplitConj (hD) (d) :
+    Fock.level D d = lopWeight (oscSplitConj hD d).1 + Fock.level D (oscSplitConj hD d).2
+
+/-- (F-3) **主定理：每个 level 片的 PBW × 光锥基**。 -/
+theorem levelSubmodule_eq_span_lopDesc_lcMonomial (hD) (F) (hη) (hbp) (M : ℕ) :
+    Fock.levelSubmodule D K M
+      = Submodule.span K { y | ∃ lam c, conjDeg hD c = 0 ∧
+          lopWeight lam + Fock.level D c = M ∧ y = lopDesc η p lam (lcMonomial F c) }
+noncomputable def pbwBasis (hD) (F) (hη) (hbp) (M : ℕ) :
+    Basis {x : (ℕ+ →₀ ℕ) × (Osc D →₀ ℕ) //
+             conjDeg hD x.2 = 0 ∧ lopWeight x.1 + Fock.level D x.2 = M}
+      K ↥(Fock.levelSubmodule D K M)
+  -- 由 `linearIndependent_of_top_le_span_of_card_eq_finrank` + (F-2) 的基数搬运
+
+/-- (F-4) 四条推论。 -/
+theorem linearIndependent_lcMonomial_conjFree (hD) (F) (hη) (hbp) (M : ℕ) :
+    LinearIndependent K fun c : {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0} =>
+      lcMonomial F (c : Osc D →₀ ℕ)
+theorem conjFree_inf_spurious_eq_bot …
+theorem finrank_spurious_inf_levelSubmodule … :
+    Module.finrank K ↥(Fock.spuriousSubmodule η p ⊓ Fock.levelSubmodule D K M)
+      = Fintype.card {d // Fock.level D d = M}
+        - Fintype.card {c // Fock.level D c = M ∧ conjDeg hD c = 0}
+theorem finrank_towerPositiveMode_inf_towerBigrade (hD) (F) (hη) (hbb) (hba) (j : ℤ) (M : ℕ) :
+    Module.finrank K ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M)
+      = Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0}   -- = p_{D−1}(M)
+```
+
+⚠ **只有下界那一半是 PR5c 真正需要的**，而下界**不需要 (F-3) 的基**：
+`Q = spurious^⊥ ⊓ 片 = ker(片 → S^*)`，秩-零化度直接给
+`dim Q ≥ dim 片 − dim S ≥ p_D(M) − (p_D(M) − p_{D−1}(M))`，只用 (F-1)+(F-2) 的
+`finrank_span_le_card`，**不需要非退化、不需要 `BilinForm.finrank_orthogonal`**
+（回避 PR4 订正第 14/16 条踩过的两个坑）。(F-3)(F-4) 是附赠品，可放在 PR5a 的第二半、
+甚至单独一个 PR。
+
+#### PR5b `NoGhost/NullSeeds.lean`（**`D = 26` 与 `a₀ = 1` 唯一进入之处**）
+
+```lean
+/-- **Type 1**：`L_{-1}` 把「`L_0` 本征值 0 的准物理态」送成零态。`D` 不出现。 -/
+theorem towerLop_neg_one_mem_towerNullSubmodule (hη) {φ : TowerFock D R}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0)
+    (hzero : towerLop η a b 0 φ = 0) :
+    towerLop η a b (-1) φ ∈ towerNullSubmodule η a b (1 : R)
+-- 三行：L₁L₋₁φ = 2L₀φ = 0；L_nL₋₁φ = (n+1)L_{n-1}φ = 0 (n ≥ 2)；L₀L₋₁φ = L₋₁φ。
+-- 截距被 `L₀(L₋₁φ) = L₋₁φ` 钉成 1，所以这里必须写死 a₀ = 1，不能像 PR0/PR1 那样放宽。
+
+/-- **Type 2 的算子** `𝒟₂ = 2L_{-2} + 3L_{-1}²`。 -/
+noncomputable def descTwo (η a b : Fin D → R) : Module.End R (TowerFock D R) :=
+  (2 : R) • towerLop η a b (-2) + (3 : R) • (towerLop η a b (-1) * towerLop η a b (-1))
+
+/-- ⭐ **截距方程**：`L_1 𝒟₂ φ = 12(h + 1) L_{-1} φ`。`h + 1 = 0` ⟺ `a₀ = 1`。 -/
+theorem towerLop_one_apply_descTwo (hη) {h : R} {φ}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0) (h0 : towerLop η a b 0 φ = h • φ) :
+    towerLop η a b 1 (descTwo η a b φ) = (12 * (h + 1)) • towerLop η a b (-1) φ
+
+/-- ⭐⭐ **临界维数方程**：`L_2 𝒟₂ φ = (D − 26) φ`（在 `L_0 φ = −φ` 上）。
+**这是整条无鬼定理链上唯一写得下 `D − 26 = 0` 的等式。** -/
+theorem towerLop_two_apply_descTwo (hη) {φ}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0) (h0 : towerLop η a b 0 φ = -φ) :
+    towerLop η a b 2 (descTwo η a b φ) = ((D : R) - 26) • φ
+
+theorem towerLop_apply_descTwo_of_three_le (hη) {n : ℤ} (hn : 3 ≤ n) {φ} (hpos) :
+    towerLop η a b n (descTwo η a b φ) = 0
+
+/-- Type 2 的零态。 -/
+theorem descTwo_mem_towerNullSubmodule (hη) (hD26 : (D : R) = 26) {φ}
+    (hpos) (h0 : towerLop η a b 0 φ = -φ) :
+    descTwo η a b φ ∈ towerNullSubmodule η a b (1 : R)
+
+/-- 与已有 Kac 行列式的对接（`Virasoro/FockFreeLowLevel.lean`），一行 `ring`。
+比现有的 `kacDet2_massShell_26`（只说「在 26 处为 0」）强：零点只有 26。 -/
+theorem kacDet2_massShell_two (c : R) : Fock.kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
+theorem kacDet2_massShell_two_eq_zero_iff [Field K] [CharZero K] (c : K) :
+    Fock.kacDet2 c ((1 : K) - 2) = 0 ↔ c = 26
+```
+
+#### PR5c （B-26）的收尾：**未解决**，目标陈述如下
+
+```lean
+theorem finrank_towerNull_inf_towerBigrade_ge (hD26 : (D : K) = 26)
+    (haa : dotVec η a a = 2) (N : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = N ∧ conjDeg hD c = 0}
+      ≤ Fintype.card {c // Fock.level D c = N ∧ conjDeg hD c = 0 ∧ lightDeg hD c = 0}
+        + Module.finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                              ⊓ towerBigrade D K (-(N : ℤ)) N)
+-- 左边 p_{D−1}(N)，右边第一项 p_{D−2}(N)（`lightDeg` 是 `b` 行的次数，与 `conjDeg` 同型）。
+-- 配 PR4 的 (P3) 与 SliceDim 的 (P2) 即得 `B26 N`。
+```
+
+### B″.8 `D = 26` 被消费的**唯一**引理
+
+`towerLop_two_apply_descTwo`（PR5b）。整条路线里 `(D : R)` 只在它的证明里被当成中心荷用到
+（经 `Fock.lie_Lop_Lop` 的 `(D : R) * Virasoro.centralTerm R m`），其余每一条引理都对任意 `D` 成立。
+`a₀ = 1`（即 `dotVec η a a = 2`）只在两处出现：`towerLop_one_apply_descTwo` 的 `h + 1 = 0`，
+以及把 `Q_{N−1}`/`Q_{N−2}` 的 `L_0` 本征值算成 `0`/`−1` 的那一步
+（`massShell_of_mem_towerBigrade`，`L_0 = a₀ + j + M`）。**其余全部 `D`-无关、截距无关。**
+
+**前置缺件**：仓库里**没有** `lie_towerLop_towerLop`（塔上的 Virasoro 关系）。
+`towerLop` 是 `towerDiag`，所以它是 `Fock.lie_Lop_Lop` 的逐纤维提升，照抄
+`lie_towerLop_towerMode`（`DDF.lean:226`）的 `Finsupp.lhom_ext` 套路即可，约 15 行。
+**这一条应当第一个提交**（它是 PR5b 全部三条方程的共同输入）。
+
+### B″.9 归纳结构
+
+只有两处归纳，都在 PR5a：
+
+* **外层：对 level `M` 的强归纳**（(F-1)）。归纳步把 `V_{M−n}` 换成 `span{L_{-μ}c}`，
+  用 PR4 的消元 + 归纳假设；`M = 0` 时 `V_0 = span{层真空} = C_0` 平凡。
+* **内层：对 Virasoro 词长度的归纳**（排序引理）。`lopWeight` 在排序中**守恒**，
+  所以只需对因子个数 `lam.sum` 归纳：`[L_{-n}, L_{-m}] = (m−n)L_{-(n+m)}` 把长度 `r` 换成 `r − 1`。
+  ⚠ 与 §B′.5 的复合测度 `μ = β(N+1) + ω` 不同，这里**不需要**复合测度。
+
+PR5b、PR5c 无归纳（PR5b 是三条直接计算；PR5c 的困难是线性代数，不是归纳）。
+
+### B″.10 行数估计
+
+| PR | 文件 | 行数 | `D = 26`? | 信心 |
+|---|---|---|---|---|
+| 前置 | `lie_towerLop_towerLop`（放进 `Glue.lean` 或 `TowerPhysical.lean`） | 15 | 否 | 高 |
+| PR5b′ | `N = 2` 特例（只用 `LevelTwoSpan.lean`） | 120 | **是** | 高 |
+| PR5b | `NoGhost/NullSeeds.lean` | 250 | **是** | 高 |
+| PR5a-i | (F-1)(F-2) + `dim Q ≥ p_{D−1}(M)` | 450 | 否 | 中 |
+| PR5a-ii | (F-3)(F-4) 基与四条推论 | 250 | 否 | 中 |
+| 前置′ | PR4 消元从反对角推广到任意 rung（B″.11 第 2 条） | 150–400 | 否 | **低** |
+| PR5c | (B-26) 收尾 | **未知** | 是 | **无** |
+
+⇒ **PR5a + PR5b + 两个前置约 1200–1500 行**，全部可交付且不含 `sorry`；
+PR5c 不在这个估计里。对比：PR0–PR4 实际约 2700 行（§B′ 订正第 19 条）。
