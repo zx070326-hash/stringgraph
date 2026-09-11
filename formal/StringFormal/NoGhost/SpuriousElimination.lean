@@ -689,4 +689,102 @@ theorem Lop_neg_apply_lcMonomial_sub_mem_lcBound (hD : 2 ≤ D) (F : DDFLightCon
 
 end Leibniz
 
+/-! ### The leading-term lemma -/
+
+section Leading
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- Multiplying the seed space by a light-cone monomial lands strictly below the measure of
+the target monomial `d' + α^{b̃}_{-n}`: every seed generator has either no `b̃` factor (measure
+at most its level `n`) or a single one of mode number `< n`. -/
+lemma lcMonomial_mul_lcSeed_le_lcLow (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (n : ℕ+)
+    (d' : Osc D →₀ ℕ) {N : ℕ} (hN : Fock.level D d' + (n : ℕ) = N) {z : Fock D R}
+    (hz : z ∈ lcSeed hD F n) :
+    lcMonomial F d' * z
+      ∈ lcLow hD F N
+          (lcMeasure hD N (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)) := by
+  classical
+  have hle : lcSeed (R := R) hD F n ≤
+      Submodule.comap (LinearMap.mulLeft R (lcMonomial F d'))
+        (lcLow hD F N
+          (lcMeasure hD N (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))) := by
+    rw [lcSeed, Submodule.span_le]
+    rintro _ ⟨e, ⟨h1, h2⟩, rfl⟩
+    rw [SetLike.mem_coe, Submodule.mem_comap, LinearMap.mulLeft_apply, ← lcMonomial_add]
+    refine lcMonomial_mem_lcLow hD F ?_ ?_
+    · rw [Fock.level_add, h1, hN]
+    · have hkey : lcMeasure hD N e < N + 1 + (n : ℕ) := by
+        rcases h2 with h2 | ⟨h2a, h2b⟩
+        · have hw := conjWt_le_level hD e
+          rw [h1] at hw
+          simp only [lcMeasure, h2, zero_mul, zero_add]
+          omega
+        · simp only [lcMeasure, h2a, one_mul]
+          omega
+      rw [lcMeasure_add, lcMeasure_add, lcMeasure_single_conj]
+      omega
+  exact hle hz
+
+variable [Algebra ℚ R]
+
+/-- **The leading-term lemma** (blueprint §B′.4's `towerLop_neg_conjDegree_leading`, on a
+single Fock fiber).
+
+For a light-cone monomial `m(d')` and `n ≥ 1`,
+
+`α^{b̃}_{-n} m(d') = -L_{-n} m(d') + (light-cone monomials of strictly smaller measure μ)`,
+
+where `μ(d) = β(d)·(N+1) + ω(d)` is the induction variable of blueprint §B′.5 and `N` is the
+common level `level(d') + n` of all terms.
+
+Two things the blueprint's draft statement spells out are *absorbed* into the remainder here:
+the explicit sum `∑_{l<n} α^b_{-(n-l)} α^{b̃}_{-l}` (its terms have `β` equal to the target's
+but `ω` strictly smaller) and the zero-mode coefficient `-(b̃·p_j)` (rung-dependent, but it
+multiplies `α^b_{-n}`, whose `β` is strictly smaller).  Consequently the statement is
+uniform in the rung `j` and needs no field. -/
+theorem lcMonomial_conj_add_Lop_mem_lcLow (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (n : ℕ+) (j : ℤ) (d' : Osc D →₀ ℕ) {N : ℕ}
+    (hN : Fock.level D d' + (n : ℕ) = N) :
+    lcMonomial F (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)
+        + Fock.Lop η (towerMomentum a b j) (-((n : ℕ) : ℤ)) (lcMonomial F d')
+      ∈ lcLow hD F N
+          (lcMeasure hD N (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)) := by
+  classical
+  subst hN
+  set p := towerMomentum a b j with hp
+  have hfac : lcMonomial F (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)
+      = lcMonomial F d' * lcCrea η F.frame.conj n := by
+    rw [lcMonomial_add, lcMonomial_single_one, frameVec_conjIdx]
+  have hsplit : lcMonomial F d' * lcCrea η F.frame.conj n
+        + Fock.Lop η p (-((n : ℕ) : ℤ)) (lcMonomial F d')
+      = (Fock.Lop η p (-((n : ℕ) : ℤ)) (lcMonomial F d')
+          - lcMonomial F d' * Fock.Lop η p (-((n : ℕ) : ℤ)) 1)
+        + lcMonomial F d'
+            * (Fock.Lop η p (-((n : ℕ) : ℤ)) 1 + lcCrea η F.frame.conj n) := by
+    ring
+  rw [hfac, hsplit]
+  refine Submodule.add_mem _ ?_ ?_
+  · refine lcBound_le_lcLow hD F ?_
+      (Lop_neg_apply_lcMonomial_sub_mem_lcBound hD F hη p n d')
+    rw [lcMeasure_add, lcMeasure_single_conj]
+    simp only [lcMeasure]
+    omega
+  · exact lcMonomial_mul_lcSeed_le_lcLow hD F n d' rfl
+      (Lop_neg_apply_one_add_conj_mem_lcSeed hD F hη n j)
+
+/-- The tower form of the leading-term lemma: the same statement, on rung `j`. -/
+theorem towerLop_neg_conjDegree_leading (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (n : ℕ+) (j : ℤ) (d' : Osc D →₀ ℕ) {N : ℕ}
+    (hN : Fock.level D d' + (n : ℕ) = N) :
+    Finsupp.single j (lcMonomial F (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))
+        + towerLop η a b (-((n : ℕ) : ℤ)) (Finsupp.single j (lcMonomial F d'))
+      ∈ Submodule.map (Finsupp.lsingle (M := Fock D R) (R := R) j)
+          (lcLow hD F N
+            (lcMeasure hD N (d' + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))) := by
+  rw [towerLop_single, ← Finsupp.single_add]
+  exact ⟨_, lcMonomial_conj_add_Lop_mem_lcLow hD F hη n j d' hN, rfl⟩
+
+end Leading
+
 end StringFormal.NoGhost
