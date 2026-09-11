@@ -26,7 +26,7 @@ effective(n) = min( status(n), min over d in deps(n) of effective(d) )
 
 其中 `convention` 节点不计入 min，`axiom` 节点使有效状态带上 `assumes: [...]` 集合。
 
-一个节点若有多条推导（derivations），取**最强的那条推导**的有效状态。这允许"物理论证的旧推导"与"严格新推导"并存，工具自动取高者。
+一个节点若有多条推导（derivations），取**最强的那条推导**的有效状态。这允许"物理论证的旧推导"与"严格新推导"并存，工具自动取高者。**同级并列时的打破规则（2026-09-12，auditor-critdim-routes F1）**：有效状态相同的多条推导，优先取**依赖下限更高**的那条（依赖全 formalized 的胜过被自身 status 封顶的），再取所依赖猜想更少的，最后按推导 id 字典序，保证 `best_derivation` 与 `why` 的瓶颈树确定且最短。此规则只影响 `best_derivation` 的选择，不改变任何节点的有效状态。
 
 ## 报告输出示例
 
