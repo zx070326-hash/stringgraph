@@ -185,5 +185,33 @@ notes: |
   **用途**：这张表是蓝图 §B.4「幺三角基变换」的代数输入，而那一步**仍未证**
   （LightCone.lean 文件头 Scope 段末条逐字：the unitriangularity … is **not** proved）。
 
+  【2026-09-12 追记（curator，分支 agent/curator/pr34-wire，PR4 落地后）：Goddard (6.2) 刻画
+  「K-条件 = 不含 α^{b̃}」现有其 ⊇ 半的 Lean 定理，⊆ 半仍缺，缺口精确定位到光锥单项式线性无关性】
+  formal/StringFormal/NoGhost/SpuriousElimination.lean（蓝图 §B′ PR4，「Bonus: half of
+  Goddard (6.2)」一节，`[CommRing R]`）证出
+    **`conjFreeSlice_le_towerKerK_inf_towerBigrade`**（hD : 2 ≤ D，标架 F : DDFLightConeFrame η a b，
+    N ∈ ℕ）：conjFreeSlice hD F N ≤ towerKerK η a b ⊓ towerBigrade D R (−N) N，
+  即「反对角片上不含 b̃ 方向的光锥单项式张成 ⟹ 满足全部 K_n（n>0）条件」，铺垫引理
+  `single_lcMonomial_mem_towerKerK`（对单个光锥单项式的强归纳：层真空被每个 n>0 的 K_n 湮灭，
+  K_n 与「乘以不含 b̃ 方向的产生算子」对易——本卡上表 `lie_kOp_transOp`（横向方向）与
+  `dotVec_light_frameVec_of_ne` 补上的「K_n 与 α^b_{−r} 本身也对易，因 η(b,b)=0」两条合起来
+  覆盖除 b̃ 之外的每个方向）。**这正是本卡断言 (5) [K_m, A^ε_n] = 0 与 K_n 自身湮灭真空
+  两件事沿光锥单项式结构逐层展开后的推论，不是本卡断言集合之外的新事实**——本卡不因此
+  改写断言，只在此记账其一个具体推论已形式化。
+  ⚠ **⊆ 半没有**：`SpuriousElimination.lean` 该节 docstring 原话「The reverse inclusion
+  `towerKerK ⊓ towerBigrade ≤ conjFreeSlice` is *not* proved: it needs linear independence
+  of the light-cone monomials, which has no cheap proof (blueprint §B′.9 item 2) and is
+  deliberately off the critical path」——即 `towerKerK_inf_towerBigrade_eq_conjFree`
+  这条等式只有一半有 Lean 定理，另一半（含 b̃ 方向的光锥单项式若混进 K-核里就必须系数为零，
+  需要光锥单项式作为一个整体线性无关）与
+  worldsheet.light-cone-monomials-span-fock-level 的 notes【本卡明确不断言】(d)
+  以及 worldsheet.physical-slice-bounded-by-transverse-count 的【不断言】(d) 记的是
+  **同一处缺口**：光锥单项式的张成（span）已 formalized（那两张卡），线性无关（independence）
+  未做，二者合起来才是「基」。
+  ⚠ **本条不改动本卡断言表**（(a)「不断言 (6.2) 的刻画」原文不变，这是刻意的边界，
+  上面这条 Lean 定理只是 (6.2) 左端「⊇」那一半的具体见证，不构成对本卡（1）–（5）的推翻或加强，
+  也不改变本卡 status/effective = formalized，只是把「若日后要立 (6.2) 刻画卡」这件事
+  （notes 上文【Lean 落地】末段已声明「按 lead 指示不另立卡」）的已知内容精确记账一遍。
+
 author: curator
 created: "2026-09-11"
