@@ -1,0 +1,47 @@
+id: math.dedekind-eta-s-transformation
+kind: proposition
+title: "Dedekind η 的 S 变换：η(−1/τ) = (−iτ)^{1/2} η(τ)（主分支）"
+statement: |
+  设 η 如 math.dedekind-eta-function 所定义（τ ∈ H，q = exp(2πiτ)，q^{1/24} = exp(πiτ/12)）。则
+    η(−1/τ) = (−iτ)^{1/2} · η(τ) ,
+  其中 (−iτ)^{1/2} 取**主分支**（τ ∈ H ⇒ −iτ 落在右半平面 Re(−iτ) > 0，
+  该处主平方根单值全纯且在 τ = i 处取值 1）。
+
+  **推论（下游实际使用的形式）**：|η(−1/τ)|⁴ = |τ|² |η(τ)|⁴，配上 Im(−1/τ) = τ₂/|τ|²，
+  得 τ₂|η(τ)|⁴ 在 S : τ ↦ −1/τ 下不变。与 math.dedekind-eta-t-transformation 的推论合起来
+  （并用「模群由 S、T 生成」，worldsheet.modular-group-generated-by-s-and-t），
+  得 τ₂|η(τ)|⁴ 在整个模群下不变。
+
+  **本卡不断言什么**：不断言 T 变换（那是 math.dedekind-eta-t-transformation，强度高两级）；
+  不断言 η 是权 1/2 模形式的一般乘子系统（对一般 (a b ; c d) ∈ SL(2,Z) 的变换含 Dedekind 和）；
+  不断言本式的任何证明（Polchinski 对它是纯断言，见本卡唯一一条推导的 gaps）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44b), p.216（原文逐字只有一句「It has the modular transformations」，随后直接列出两式）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，等级 **L1（原书页图逐字）**。
+      ⚠ **原书对本式零证明、零引用**（抽取记录逐字判定：「逐字只有『It has the modular
+      transformations』——纯断言，无证明、无引用」）。
+      ⚠ **本式是全书模不变性的承重墙**：(7.2.8)/(7.2.9)（E9）、(7.3.6)（E20）、
+      (7.4.2)（E30）、(7.4.19)、(7.4.23)、(8.4.21) 全部直接用它。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.39d)/(7.2.40d) 与 (7.2.43), p.215–216（原书把 (7.2.44) 归到 ϑ₁₁ 的模变换加上 η = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）"
+    note: |
+      抽取记录 #E16「文献列出的依赖」栏。⚠ **这条归约把问题推给 θ 函数的模变换 (7.2.40)，
+      而 (7.2.40) 在原书同样零证明**（#E15：θ 一节「全部无证明」）。因此本图**没有**把 θ 卡
+      建为本卡的依赖：那只会把一条无证明的断言接到另一条无证明的断言上，并不提高强度。
+tags: [math, modular-forms, dedekind-eta, modular-invariance, formalization-candidate]
+notes: |
+  由 curator 于 2026-09-11 从 math.dedekind-eta-modular-transformation **拆分**而来
+  （lead 依 reviewer-v1-ch7 的裁定）。旧卡合写 (7.2.44a)(7.2.44b) 并按弱者定级，
+  导致 T 半的强度被低估两级；拆分后 T 半是 math.dedekind-eta-t-transformation（rigorous），
+  本卡承载真正的缺口。旧卡的 `superseded_by` 指向本卡。
+
+  **升级路径（两条，都还没走）**：
+  (a) 在 literature/sources.bib 登记标准解析数论来源（如 Apostol《Modular Functions and
+      Dirichlet Series in Number Theory》——**章节/定理号未核实**），再建一条 --via-<来源> 推导；
+  (b) Lean 形式化（抽取记录 §5-C 的首选岛；Mathlib 是否已有 DedekindEta 未核实，留给 formalizer）。
+  在此之前**不得**因为「这是众所周知的数学事实」而升级（项目原则 2）。
+author: curator-v1-ch7
+created: "2026-09-11"

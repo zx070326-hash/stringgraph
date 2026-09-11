@@ -6,7 +6,7 @@ depends_on:
   - id: worldsheet.torus-partition-function-general-cft
     note: 提供带 (−1)^F 的迹定义与 H = L₀+L̃₀−(c+c̃)/24。
   - id: worldsheet.bc-ghost-central-charge
-    note: 提供 λ = 2 时 c = −26，于是 (qq̄)^{−(c+c̃)/24} = (qq̄)^{13/12}。
+    note: 提供 λ = 2 时 c = c̃ = −26，于是 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}。
   - id: worldsheet.bc-ghost-cft
     note: 提供 b、c 的模展开与四个鬼场基态（b₀、c₀ 的两维零模空间，左右各一份共四态）。
   - id: worldsheet.bc-ghost-hermitian-conjugation
@@ -27,7 +27,8 @@ sources:
     note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E11，L1（原书页图逐字）。
 summary: |
   **(1) 裸迹。** 每个 n ≥ 1 的 b、c 模是费米型二能级系统，给因子 (1+q^n)（左右各一份、b 与 c 各一份
-  共四次方）；零模给四个基态；前因子由 c = c̃ = −26 定为 (qq̄)^{13/12}。得 (7.2.23)。
+  共四次方）；零模给四个基态；前因子由 c = c̃ = −26 定为
+  q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}。得 (7.2.23)。
 
   **(2) 周期性修正。** 反交换场的朴素迹 = 时间方向反周期；FP 行列式要求鬼场与坐标变换同周期，
   故必须插 (−1)^F。带 (−1)^F 后四个基态两两相消（鬼数 mod 2 相反），Z(τ) = 0（(7.2.24)）。
@@ -49,5 +50,9 @@ gaps:
 notes: |
   由 curator 于 2026-09-11 建立。唯一的 inferred 边是零模投影用到的鬼场厄米共轭/零模归一化，
   原书在 (7.2.26) 处不引式号。
+
+  **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：bc-ghost-central-charge 那条边的 note 原写
+  「(qq̄)^{−(c+c̃)/24} = (qq̄)^{13/12}」，指数错一倍（c = c̃ = −26 ⇒ −(c+c̃)/24 = 13/6）。
+  已改为 q^{−c/24} q̄^{−c̃/24}；目标陈述 (1) 同步订正。
 author: curator-polchinski-ch7
 created: "2026-09-11"

@@ -5,11 +5,17 @@ status: physical-argument
 depends_on:
   - id: worldsheet.torus-partition-function-general-cft
     note: 提供逐态求和 Z(τ) = Σ_i q^{h_i−c/24}q̄^{h̃_i−c̃/24}，以及 −c/24 前因子（结论的整个内容就在它）。
-  - id: worldsheet.modular-group-generated-by-s-and-t
+  - id: worldsheet.modular-group-psl2z
     inferred: true
     note: |
-      **inferred: true**。原书此处只说「Using modular invariance」，并未指明用的是 S : τ ↦ −1/τ
-      这一个生成元（虽然 τ = iℓ ↦ i/ℓ 显然就是 S）。本图补这条边以说明所用的是哪半个模群。
+      **inferred: true**。原书此处只说「Using modular invariance」，并未指明用的是
+      S : τ ↦ −1/τ 这**一个元素**（虽然 τ = iℓ ↦ i/ℓ 显然就是 S）。本图补这条边以说明
+      所用的是模群的哪个元素。
+      ⚠ 2026-09-11 改指（reviewer-v1-ch7 建议）：原先挂
+      `worldsheet.modular-group-generated-by-s-and-t`，**那是错的层级**——本推导只用到
+      S 这**单个元素的存在与作用方式**（它是定义卡 worldsheet.modular-group-psl2z 的内容），
+      **完全不用「S、T 生成全模群」这条定理**。而后者在本图是 proposition 且原书未证，
+      挂它会把一条本推导用不到的未证命题算进依赖闭包、虚报瓶颈。
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.2, eq. (7.2.30) 与同页脚注 1, p.213"
@@ -30,5 +36,10 @@ gaps:
 notes: |
   由 curator 于 2026-09-11 建立。原书不称其为 Cardy 公式、不引 Cardy；若日后登记 Cardy (1986)，
   应新建一条以那篇为来源的推导，而不是改本卡。
+  **2026-09-11 改指（reviewer-v1-ch7 建议）**：那条 inferred 边由
+  worldsheet.modular-group-generated-by-s-and-t 改指定义卡 worldsheet.modular-group-psl2z——
+  本推导只用 S 这一个元素，不用「S、T 生成全模群」这条未证命题。改指不改变本推导的状态
+  （仍是 physical-argument，瓶颈在「模不变性是输入」与「无误差估计」两条 gap 上），
+  但它把一条虚假的依赖从闭包里去掉了。
 author: curator-polchinski-ch7
 created: "2026-09-11"

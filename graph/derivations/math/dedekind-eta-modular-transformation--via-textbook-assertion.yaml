@@ -37,6 +37,12 @@ gaps:
   - "**(a) 与 (b) 强度不同却同卡**：(a) 已在本 summary 里给出完整初等验算，(b) 没有。
      本卡按弱者定级，故 (a) 的实际强度被低估；拆卡建议见目标陈述的 notes。"
 notes: |
+  ⛔ **本推导已于 2026-09-11 随目标陈述的拆分转为历史记录，不再更新**
+  （docs/STATUS_LEVELS.md「旧推导的去留」：内容性换代，旧推导保留作历史）。
+  接替它的是 math.dedekind-eta-t-transformation--via-product-definition（rigorous，T 半）
+  与 math.dedekind-eta-s-transformation--via-textbook-assertion（physical-argument，S 半）。
+  本推导 summary 里关于 (a) 的那段验算已原样搬进 T 半的新推导。
+
   由 curator 于 2026-09-11 建立。**不得**因为「η 的模变换是众所周知的数学事实」而把本卡标 rigorous：
   按项目原则 2，status 写的是**本图所持论证**的强度，不是公认程度。升级路径只有两条：
   登记数学来源，或 Lean。

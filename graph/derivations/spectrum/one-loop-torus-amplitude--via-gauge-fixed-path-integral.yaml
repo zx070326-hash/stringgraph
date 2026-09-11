@@ -25,9 +25,14 @@ depends_on:
       (7.3.2) 把 b 插入的 ∫d²w 直接做成 2πi b_{ww}(0) 的依据。
       |η|⁴ 与标量的 |η|^{−52} 相乘给 |η|^{−48}，即「鬼场抵消两套振子」。
   - id: worldsheet.b-insertion-beltrami-form
+    inferred: true
     note: |
       提供 (1/4π)(b,∂_{t^k}ĝ) 这个插入的形式，(7.3.2) 就是把它在环面上算出来
       （用 (7.2.13) δτ = −2iτ₂ε 给出的 ∂_τ g_{w̄w̄} = i/(2τ₂)）。
+      **inferred: true**（2026-09-11 按 reviewer-v1-ch7 补标）：原书在 (7.3.1)/(7.3.2) 处
+      **没有回引** (5.3.9)/(5.4.x) 的 b 插入一般式，而是直接写出环面上的结果；
+      「(7.3.2) = 一般式在环面上的特例」这一认定是本图做的比对，来源里没有这句话。
+      按项目原则 5，来源中找不到对应论证的边必须标 inferred。
   - id: spectrum.covariant-external-legs-on-shell
     inferred: true
     note: |
@@ -73,6 +78,9 @@ gaps:
   - "**(7.3.4) 的「直接导法」缺失**：原书断言不必经过「先固定一个顶点算子」也能得到 (7.3.4)，
      未给出该导法。本图的 (1) 因此只有一条路线。"
 notes: |
-  由 curator 于 2026-09-11 建立。唯一的 inferred 边是 (3) 中 h_i − 1 的质量壳移位出处。
+  由 curator 于 2026-09-11 建立。
+  **2026-09-11 更正（reviewer-v1-ch7 建议）**：`worldsheet.b-insertion-beltrami-form` 那条边
+  补标 `inferred: true`（原书在本处不回引 b 插入的一般式，见该边的 note）。
+  故本推导现有**两条** inferred 边：b 插入的一般式，以及 (3) 中 h_i − 1 的质量壳移位出处。
 author: curator-polchinski-ch7
 created: "2026-09-11"

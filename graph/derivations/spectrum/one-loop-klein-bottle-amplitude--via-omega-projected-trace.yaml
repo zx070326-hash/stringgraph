@@ -11,10 +11,12 @@ depends_on:
     note: |
       提供宇称算符 Ω 的定义与它交换左右动模的作用——这正是「只有左右同态贡献对角元、
       且 Ω = +1」这一步所需，也是 K₂ 的几何认同 w ≅ −w̄ + 2πit 的算符对应。
-  - id: math.dedekind-eta-modular-transformation
+  - id: math.dedekind-eta-s-transformation
     note: |
       提供 (3) 里把 η(2it) 换到 η(is/π)（s = π/2t）所需的 S 变换。原书在 (7.4.19) 处直接用
       (7.2.44)（与圆柱的 (7.4.2) 同一步）。
+      ⚠ 2026-09-11 改指：原先挂的是已拆分的 math.dedekind-eta-modular-transformation，
+      本推导**只用 S 那一半**，故改指 S 卡。
   - id: math.dedekind-eta-function
     note: 把「一侧的 24 个横向振子、权重加倍」的迹收成 η(2it)^{−24}。
   - id: spectrum.point-particle-circle-path-sum
@@ -46,7 +48,7 @@ gaps:
      elements of Ω are those for which the right- and left-movers are in the same state, and these
      states contribute with Ω = +1」，没有对鬼场部门与零模部门分别检查。"
   - "**cross-cap 态 |C⟩ 原书没给**（留作 exercise 7.15），故 (3) 的算符侧表述在本图无来源。"
-  - "**(3) 依赖 η 的 S 变换**，而它在来源中零证明（math.dedekind-eta-modular-transformation）。"
+  - "**(3) 依赖 η 的 S 变换**，而它在来源中零证明（math.dedekind-eta-s-transformation）。"
   - "**整体符号与归一化**：本章 bc 部门的整体符号是人为设定的
      （worldsheet.bc-ghost-torus-partition-function 的 ⚠），Klein 瓶继承该约定。"
 notes: |
