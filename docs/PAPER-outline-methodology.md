@@ -1,5 +1,16 @@
 # Paper outline: methodology (draft skeleton)
 
+> **STATUS 2026-09-11: revision 2 FAILED adversarial re-review (reviewer-paper-outline-2c; report at
+> `C:/Users/charles/AppData/Local/Temp/claude/review-paper-outline-2c.md`). Six CONFIRMED errors remain:
+> §6/§7 counts are a copy of a stale ROADMAP snapshot (611/504/…) not a live `stringgraph report` run
+> (Revision-log row M1 is false); §3 `why` example still cites superseded ids `critical-dimension-light-cone`
+> / `critical-dimension-weyl-anomaly` (need `-v2`; row P9 false); Finding 2 headline "Exercise 3.6 contains
+> no digit 3" is contradicted by the transcribed exercise (z^{-3}); Finding 6 misattributes Prop 1.7(ii)/Ohta
+> to `superstring-relative-complex-character-signature` (belongs to `critical-dimension-superstring-brst-v2` /
+> `superstring-brst-nilpotency-requires-d10-flat`) and misquotes the misprint (LZ prints 681-1691, not 681-691);
+> Finding 4's "p·p < 0" qualifier is not in the cited extraction. Do NOT show to the captain; needs a third pass.**
+
+
 Target venue class: SciPost Physics Codebases / JOSS / CICM. This is a skeleton for the
 methodology paper about the `stringgraph` tool and dataset, not the physics results.
 Uncertain items are marked `[verify: ...]`; nothing is asserted beyond the cited files.
