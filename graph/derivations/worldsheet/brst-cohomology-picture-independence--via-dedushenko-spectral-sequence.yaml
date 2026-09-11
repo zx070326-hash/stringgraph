@@ -1,0 +1,168 @@
+id: worldsheet.brst-cohomology-picture-independence--via-dedushenko-spectral-sequence
+target: worldsheet.brst-cohomology-picture-independence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给 Q_B（本卡上同调的微分）与 {Q_B, b_n} = L_n、[Q_B, β_r] = G_r。
+      Dedushenko 用的是同一套 RNS BRST 荷（其 [2] = polchinski-1998-v1 是他明写的模板之一）。
+  - id: worldsheet.critical-dimension-superstring-brst
+    note: 供给 Q_B² = 0（D = 10 / c^m = 15），使上同调有定义。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 βγ 与 bc 的模式。**picture number A 就是 βγ 真空的标号**：
+      Dedushenko (5) 逐字 |A⟩ 被 β_r (r ≥ −A−½) 与 γ_r (r ≥ A+3/2) 零化。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    note: |
+      供给"βγ 有不等价真空"这一事实——**这正是本卡要回答的问题的前提**：
+      若 βγ 真空唯一，picture 无关性就无从谈起。
+      lian-zuckerman-1989 p.304 逐字 'Representations corresponding to distinct charges are
+      inequivalent.' 是同一事实的数学侧陈述。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给物质部门 L^m_n、G^m_r 与物质 Fock 空间（光锥/横向谱那一侧的对象）。
+  - id: worldsheet.no-ghost-theorem-brst
+    inferred: true
+    note: |
+      供给本推导 §6 显式代表元构造所仿的**模板**：Dedushenko §6 的
+      Ω = 1 − S^{−1}U + … 逐字仿 Polchinski §4.4（本图这张卡的推导
+      --via-polchinski-4-4 的第 5 步）。
+      **标 inferred**：Dedushenko 引的是 polchinski-1998-v1 §4.4 这篇文献，
+      不是本图这张卡；且他自己的主论证走谱序列，代表元构造只是补充。
+      ⇒ 本推导因此**继承**玻色弦一侧那条"下三角矩阵一般性质 / S^{−1} 级数收敛性"的缺口
+      （见 gaps）。
+sources:
+  - ref: dedushenko-2015
+    loc: "**(39)**（主结果：H*((H^A, Q_B)) ≅ (H^⊥_{A,↓} ⊕ H^⊥_{A,↑}) ∩ ker L_0，任意 picture A、两扇区、非零动量，鬼数 (A+1) ± ½）；**(5)**（picture A 真空的定义）；**Lemma 1–3**；**§6**（显式代表元 Ω = 1 − S^{−1}U + …，仿 Polchinski §4.4）；**§7–§8**（A-picture 与 (−A−2)-picture 的配对、正定厄米内积 **(61)**）"
+    note: |
+      L1（arXiv v2 全文 21 页逐页读图）。
+      ★ **作者自称**：'proven above by straightforward application of the **spectral sequence**'
+      ——完整的物理学家级证明，但谱序列的收敛性/复形完备化未处理 ⇒ physical-argument。
+      ⚠ §7–§8 的正定内积 (61) **不在本卡的断言里**（本卡只讲同构），
+      它是另一条命题（A-picture 与 (−A−2)-picture 之间的配对），本图未建卡。
+  - ref: dedushenko-2015
+    loc: "§1, p.2–3：路线分类（KO/Polchinski 型推广 'requires d ≥ 2 as it uses the existence of two free bosons X⁺ and X⁻ (the light-cone directions)'；FGZ 型 [6]/[17] 不受此限）；p.3 对 **Berkovits–Zwiebach 1998 [21]** 的转述（非零动量的相对与半相对上同调在不同 picture number 下同构；零动量的相对与半相对上同调被证明是 **picture 相关**的）；p.3 逐字 'remains an open problem'（零动量、任意 picture 的相对上同调）"
+    note: |
+      L1。本卡第二条断言（p = 0 时 picture 相关 + 相对上同调是公开问题）的唯一来源。
+      ⚠ **这一段是 Dedushenko 对 Berkovits–Zwiebach 的转述**，不是他自己的定理；
+      本项目**未登记 Berkovits–Zwiebach 1998**（见 gaps）。
+      ⚠ 另注 Dedushenko [16] = Horowitz–Myers–Martin, Phys. Lett. B 218 (1989) 309 ——
+      他把 picture 依赖问题的一手来源指向 [16] 与 [21]，**不指向 ohta-1986**
+      （literature/extractions/ohta-1986.md §3 表）。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, pp.137–142（Dedushenko §6 的代表元构造所仿的模板：S = {Q_1, R}、U 严格下三角、Ω = 1 − S^{−1}U + S^{−1}US^{−1}U − …，原书 (4.4.19)）"
+    note: |
+      Dedushenko 明写以 [2] = 本书为模板之一。本图对应节点是
+      worldsheet.no-ghost-theorem-brst 与其推导 --via-polchinski-4-4（自身 physical-argument）。
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 5.1**, p.330（NS：H⁰_rel(p,½) ≅ H^{±1/2}(p,½)，H^n(p,½) = 0 对 n ≠ ±½）；**Theorem 5.4**（R：H^n(p,0) ≅ H⁰_rel(p,0) (n=1)、≅ H⁰_rel(p,0)* ⊕ H⁰_rel(p,0) (n=0)、≅ H⁰_rel(p,0)* (n=−1)，其余 0）；**Lemma 5.3.1 (Dixon–Taylor)** 与 p.332 (18)–(23)（Q = Aγ₀ + Bβ₀ + C，A² = C² = 0、B² = CA、Ker A = Im A；逐字 'A similar structure ((18) to (23)) was first realized by Dixon and Taylor [21] … Kato and Ogawa [11] then apply it in a different context.'，证明末句 'The reader can consult [11] for details.'）；**Proposition 5.5**, p.333（p = 0 的例外情形）"
+    note: |
+      L1（全文 35 页逐页读图）。**本条作交叉核对，不作本卡断言的来源。**
+      LZ 在**固定一个** Bose-sea charge 选择（R 扇区 T₀ ⊕ T₁）下算出绝对上同调：
+      NS 两个鬼数 ±½、**R 三个鬼数 −1, 0, 1**；Dedushenko 在任意 picture 下算出**两个**鬼数
+      (A+1) ± ½。**两者不矛盾**（LZ 的空间是两个 Bose-sea 分量的直和，故多一份），
+      但**鬼数与空间都不可互换引用**（见 gaps）。
+      ★ 顺带：LZ p.332 把 KO 的关键代数结构指认为 Dixon–Taylor 型 Ker A = Im A，
+      这与本图 worldsheet.no-ghost-theorem-brst 的 kato-ogawa-1983 那条 source 的
+      证明结构反推互相印证。
+summary: |
+  Dedushenko 2015 的论证（全文 L1）：
+  1. **把 picture 参数化**：(5) 定义 A-picture 真空 |A⟩（被 β_r (r ≥ −A−½)、γ_r (r ≥ A+3/2)
+     零化），H^A 是建立在它上面的状态空间。R 扇区"被所有正指标模与 β₀ 零化"的真空是 A = −½；
+     交换 β₀ 与 γ₀ 的角色给 A = −3/2（作者逐字说明）。
+  2. **谱序列**：对 H^A 上的 Q_B 用（光锥型分次诱导的）谱序列，逐页计算，
+     Lemma 1–3 给出所需的技术引理。作者自称结果 'proven above by straightforward
+     application of the spectral sequence'。
+  3. **主结果 (39)**：对**任意** A、两个扇区、**非零动量**，
+     H*((H^A, Q_B)) ≅ (H^⊥_{A,↓} ⊕ H^⊥_{A,↑}) ∩ ker L_0，
+     即**两份**光锥（横向）谱，鬼数 (A+1) ± ½。
+     "两份"来自 bc 鬼零模的二重真空 |↓⟩、|↑⟩（绝对复形不加 b₀ = 0，故两份都留下）。
+  4. **显式代表元**（§6）：Ω = 1 − S^{−1}U + … ，逐字仿 Polchinski §4.4 的 (4.4.19)。
+  5. **零动量**（§1, p.3）：转述 Berkovits–Zwiebach 1998 —— 非零动量的相对与半相对上同调
+     在不同 picture 下同构，**零动量的相对与半相对上同调是 picture 相关的**；
+     且**零动量、任意 picture 的相对上同调** 'remains an open problem'。
+
+  ⇒ 本卡的两条断言分别由第 3 步与第 5 步给出。
+
+  【status: physical-argument 的三条理由】
+  (1) 谱序列论证的收敛性与复形完备化未处理（作者自称 'straightforward application'）；
+      §6 的代表元构造继承 Polchinski §4.4 那条"下三角矩阵的一般性质 / S^{−1} 级数"的缺口；
+  (2) **未见期刊发表版**（arXiv:1212.3592v2，2015-11-12），无同行评议记录；
+  (3) 第 5 步（零动量那一半）是**转述** Berkovits–Zwiebach 1998，本项目未登记该文。
+  ⚠ 按 docs/STATUS_LEVELS.md「断言 + 骨架」档位裁决，这是完整的物理论证，
+  **不**记 conjecture。
+gaps:
+  - |
+    ★ **picture 无关性的一手出处未登记。** Dedushenko p.3 把"非零动量时相对/半相对上同调
+    picture 无关、零动量时 picture 相关"归给 **Berkovits–Zwiebach 1998**（其 [21]），
+    本项目 **literature/sources.bib 未登记该文、未抽取**。
+    ⇒ 本卡第二条断言目前只有**转述级**（L3）的可追溯性。
+    另一条相关一手线索 **Horowitz–Myers–Martin, Phys. Lett. B 218 (1989) 309**
+    （Dedushenko [16]）同样未登记。**两篇都已列入报告交 researcher/lead。**
+  - |
+    ★ **本卡讲绝对上同调，但"picture 无关性"在文献里的主要陈述对象是相对/半相对上同调。**
+    Dedushenko (39) 算的是 **absolute** cohomology（不加 b₀ = 0）；
+    Berkovits–Zwiebach 的结论（据转述）是关于 **relative 与 semirelative** 上同调的。
+    本卡的断言一照实只写绝对上同调；**相对上同调的 picture 无关性在本图没有来源**
+    （只有转述）。⇒ 若日后要把
+    worldsheet.brst-cohomology-equals-ocq-physical-superstring（相对上同调，固定表示）
+    的结论推广到任意 picture，本卡**不够用**。
+  - |
+    ★ **与 lian-zuckerman-1989 Theorem 5.1 / 5.4 的对照差异，必须记住不可互换引用**：
+    LZ 固定一个零模表示（R 扇区 **T₀ ⊕ T₁**，两个 Bose-sea charge 的直和），
+    得到 R 扇区绝对上同调落在**三个**鬼数 n = −1, 0, 1；
+    Dedushenko (39) 在任意单一 picture A 下得**两个**鬼数 (A+1) ± ½。
+    NS 侧取 A = −1 两家一致（±½）。差别来自空间的选择，不是结果矛盾
+    （LZ 的空间相当于两份 Dedushenko 型空间的直和）。
+    **但本图不得把 LZ 的鬼数与 Dedushenko 的鬼数当同一标尺**，
+    见 conv.superstring-ghost-number-zero 的换算表 (A)(C)。
+  - |
+    **零动量的相对上同调是公开问题，但 lian-zuckerman-1989 Proposition 5.5 给出了
+    其特定表示下的显式答案**（p.333 逐字 'For p = 0, the vanishing theorem does not hold
+    because the Fock space V(p,κ) is not Vir_κ^- -free'，并列出 H^n_rel(0,κ) 与 H^n(0,κ)：
+    κ=0 在 n = 0, ±1；κ=½ 在 n = ±½, ±3/2）。
+    **两者不冲突**：LZ 固定一个表示，Dedushenko 问的是对一切 picture 的统一回答。
+    ⇒ 本图未建"p = 0 的超弦 BRST 上同调"卡；若要建，须同时写明固定的是哪个表示。
+  - |
+    **§7–§8 的正定内积 (61) 未落图。** Dedushenko 另外证明 A-picture 与 (−A−2)-picture
+    之间有配对，并由此定义正定厄米内积。这是一条**独立命题**（与
+    worldsheet.no-ghost-theorem-superstring-cohomological 在固定表示下的正定性不同：
+    那里内积在同一空间内，这里是两个不同 picture 之间的配对），本图未建卡。
+    ⇒ 本卡的断言里**不含**任何正定性。
+  - |
+    **代表元构造继承玻色弦一侧的缺口**：§6 的 Ω = 1 − S^{−1}U + … 逐字仿 Polchinski §4.4
+    (4.4.19)，而那一步在原书里只由"下三角矩阵的一般性质"与"S^{−1} 总作用在 N^lc < 0 的态上"
+    两句话支撑（见 worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的 gaps 第一条）。
+    在无穷维分级空间上的合法性本图与来源都未论证。
+  - |
+    **未见期刊发表版**：arXiv:1212.3592v2（2015-11-12），researcher 未找到期刊版
+    （literature/sources.bib 的 dedushenko-2015 条逐字记 '未见期刊发表版'）。
+    按项目惯例这不降一级，但与经同行评议的 lian-zuckerman-1989 /
+    figueroa-ofarrill-kimura-1989（均 CMP）不是同一档证据。
+  - |
+    **本卡未核实 Dedushenko 的 H^⊥_{A,↓/↑} 与本图横向空间卡的关系。**
+    (39) 右端的 H^⊥_{A,↓} ⊕ H^⊥_{A,↑} 是"两份光锥谱"，其中 ↓/↑ 是 bc 鬼零模的二重真空标号；
+    与 Polchinski 的 H^⊥（'没有 X^{0,1}、ψ^{0,1}、b、c、β、γ 激发'）、
+    lian-zuckerman-1989 的 T∩P、本图 worldsheet.ddf-operators-v6 的 DDF 空间之间的
+    逐字对应，本图未核实（四种实现，同特征标）。
+notes: |
+  【本卡解决了本图三处待查标记，但不改动任何已提交的陈述文本】
+  worldsheet.no-ghost-theorem-superstring 的 notes【picture 问题】里那条
+  「L4 级、不得入库」的现代信息（"picture number 会影响 BRST 上同调，零动量 R–R 态在不同
+  picture 下不等价"）现在有了 L1 落实：**p ≠ 0 时 picture 无关（本卡断言一），
+  p = 0 时 picture 相关（本卡断言二）**。
+  那张卡的陈述里写"不断言 picture 的选择无关性"**仍然正确**（它的设定是 Polchinski 的固定
+  picture），故不动它的陈述；本卡与它并存。
+
+  【本卡在图上的位置】
+    绝对上同调（任意 picture）      → 本卡（Dedushenko 2015，physical-argument）
+    相对上同调 ≅ OCQ ≅ 横向（固定表示）→ worldsheet.brst-cohomology-equals-ocq-physical-superstring
+                                      （lian-zuckerman-1989 Theorem 2.20，rigorous）
+    相对上同调正定（固定表示）       → worldsheet.no-ghost-theorem-superstring-cohomological
+    绝对 ↔ 相对的关系（固定表示）    → lian-zuckerman-1989 Theorem 5.1 / 5.4，**本图未建卡**
+
+  按 researcher 第七轮登记的 dedushenko-2015 全文核实结果（literature/sources.bib 该条 note、
+  literature/extractions/henneaux-1987.md §5.2、ohta-1986.md §3、lian-zuckerman-1989.md E10）
+  建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
