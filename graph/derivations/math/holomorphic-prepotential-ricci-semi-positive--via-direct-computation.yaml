@@ -32,13 +32,15 @@ gaps:
 notes: |
   from: ooguri-vafa-2006#E23。
 
-  reviewer-verified: reviewer-swampland, 2026-09-11
+  reviewer-verified: reviewer-swampland, reviewer-swampland-b, 2026-09-11
 
   **复核记录**：reviewer 独立重算得 R_{ij̄} = ¼ g^{km̄}g^{nl̄}(∂_iτ_{nm})(∂̄_jτ̄_{kl})，与本卡
   (1) 一致；并独立指出 v^i v̄^j R_{ij̄} = ¼‖g^{−1/2}Ag^{−1/2}‖² 一般只给**半**正定（τ 常数即
   自由理论给 R = 0），严格正定等价于 ∂_iτ_{nm} 对所有 v≠0 非退化，另需 Im τ > 0 才有度规。
   本推导按此结论写成，前提完整、有限步复线性代数，按 docs/STATUS_LEVELS.md 的 rigorous
   例外条款标 kind: proof / status: rigorous。
+  **第二轮独立复审（reviewer-swampland-b，2026-09-11，与第一轮互不知情）对 rigid-N=2 的裁定
+  与第一轮一致**（Ricci 只得半正定、需前提 Im τ > 0），故复核记录写两位。
 
   【★ 与原文的转录风险无关】本卡不涉及 OV 原文 F(z) = (i/8)M_Pl² + F(z) 那一段（花体/直体 F
   的字体歧义，ooguri-vafa-2006#U5）；那段属于刚性极限的取法，留在物理卡的推导里。

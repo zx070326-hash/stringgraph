@@ -37,7 +37,9 @@ notes: |
   与 conv.alpha-prime-regge 真正互斥（同一个量取不同数值），放同一 family 才能让 validate 的
   convention_map 检查生效。conv.alpha-prime-regge 保持 canonical: true。
 
-  【★ 本卡当前没有被任何陈述声明】建它的目的是记账：
+  【★ 本卡当前没有被任何陈述声明】建它的目的是记账（**2026-09-11 更新**：AMNV 那套单位现在
+  有了自己的卡 **conv.amnv-2006-units**（同 family，α' = 4、M_Pl = 1），下面提到的两张 heterotic
+  卡已改为显式声明它；本卡与它仍然是同 family 的两套不同归一化，互不换算）：
   swampland.heterotic-t6-substates-below-extremality 用的是 **AMNV 的 α' = 4 + M_Pl = 1**，
   **不是**本卡；而 AMNV eqs. (22)(23) 的极端黑洞解外包给的是
   **sen-1995-bh-torus（hep-th/9411187）**，也不是本卡对应的 9504147。

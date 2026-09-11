@@ -39,10 +39,28 @@ notes: |
   => **本卡的 sources 只写 vafa-2005（承载"Vafa 如此断言"），不挂 green-schwarz-1984。**
   （抽取记录 vafa-2005#Q3、#U4。）
 
-  【跨区接口边尚不可建】本卡本应有一条到 consistency 区"10d N=1 反常自由的规范群条件"节点的
-  依赖边（inferred，来源 gsw-1987-v2 ch.13）。**截至本次提交，图中不存在任何 consistency 区
-  节点**（graph/statements/ 只有 duality / holography / math / swampland / worldsheet），
-  故本轮不建该边；等 consistency 区建立后由后续 curator 补上并标 inferred: true。
+  【跨区接口（2026-09-11 更新，reviewer-swampland-b）】本条此前写"图中不存在任何 consistency
+  区节点"，**该记账已过时**：main 上 consistency 区已建立，与本卡直接对应的是
+  **consistency.d10-four-groups-satisfy-anomaly-conditions**，它逐条给出 SO(32)、E₈×E₈、
+  E₈×U(1)^248、U(1)^496 四者都满足十维 N=1 反常多项式的两条条件（伴随六阶迹关系 + n = 496）。
+  即 Vafa 这里说的"Both of these theories are consistent as far as anomalies are concerned"
+  在图中有了精确对应的卡。
+
+  ★ **仍然不建边，理由有两条，且都不因此改变**：
+  (1) **溯源理由（上一条）不变**：Vafa 把该事实引给 [6] = Green–Schwarz 1984，而本项目对该文的
+      L1 抽取显示它只点名 SO(32) 与 E₈×E₈。那张 consistency 卡的来源是 Polchinski v2 §12.2 与
+      Adams–DeWolfe–Taylor，**不是** Vafa 引的 [6]。建边会把 Vafa 的溯源错误掩盖成一条有据的边。
+  (2) **两张卡断言的东西不同**：consistency 卡只说四者**满足那两条条件**，并在其 (b) 条红线里
+      明确**不**断言它们"反常抵消"或"是一致理论"——按
+      consistency.abelian-factorization-is-not-cancellation（ADT 2010，L1），两个**阿贝尔**解的
+      Green–Schwarz 抵消项写不下来（Y₄ ≠ dH₃）。而 Vafa 的句子用的是"consistent as far as
+      anomalies are concerned"。**两者不是同一断言**，直接建边等于替 Vafa 把话说圆。
+
+  ⚠ 附带的一条实质观察（记账，不是本卡的推导）：Vafa 在同段邀请"find what consistency
+  condition goes wrong"；consistency.abelian-factorization-is-not-cancellation 恰好是这样一条
+  候选（阿贝尔解没有可写下的 GS 抵消项）。**但它不能作为本卡的支持推导**——本卡断言的是
+  "这两个理论属于 swampland"，而 ADT 的结论是"GS 机制对它们不适用"，后者不蕴含前者
+  （还需排除其他抵消机制）。若日后有人要建这条边，必须先建一张中间卡并说明这个间隙。
 
   【反例方向：原文明确邀请】逐字 "It would be very interesting either to construct these or …
   to find what consistency condition goes wrong"。构造出这两个理论中的任何一个即构成反驳。

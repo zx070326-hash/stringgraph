@@ -41,7 +41,21 @@ sources:
         arXiv:2309.13145v3「Glimmers from the Axiverse」— "up to the maximum Hodge number h^{1,1}=491"；
         arXiv:2405.08871v4「The DNA of Calabi-Yau Hypersurfaces」— "the maximal polytope with Hodge numbers h^{1,1} = 491"。
       其中两条用了 "maximum"/"maximal" 字样。详见 literature/extractions/math-sources.md §46.5。
-      **建议 lead 排一轮把这四篇（至少 2008.01730）登记进 bib，届时应把它们提为独立 source 条目。**
+      **2026-09-11 已部分办理**：`2008.01730` 已登记为 bib key `demirtas-2020` 并提为本卡的独立
+      source 条目（见下一条）；其余三篇（1808.01282、2309.13145、2405.08871）仍未登记，
+      其中 2309.13145 与 2405.08871 是"maximum/maximal"字样的唯一出处，**最值得下一轮登记**。
+  - ref: demirtas-2020
+    loc: "arXiv:2008.01730v1, 摘要（逐字 'including the extremal case $h^{1,1}=491$'）"
+    note: >-
+      ★ **491 在本图中唯一的登记来源（2026-09-11 补，动议来自 reviewer-swampland-b）**。
+      元数据与摘要全文由 arXiv API 直接取回逐字核对（L2；正文未读）。
+      ⚠ **精读**：摘要称 491 为 "the extremal case"，**但摘要本身没有说"它是 KS 列表中 h^{1,1} 的最大值"**。
+      "最大值"的字样出自另外两篇（2309.13145v3 "up to the maximum Hodge number h^{1,1}=491"、
+      2405.08871v4 "the maximal polytope with Hodge numbers h^{1,1} = 491"），**那两篇仍未登记**。
+      ⇒ 本条把 491 从"无任何登记来源"抬到"有一条 L2 登记来源"，
+      **但它不是对"最大值"的一手证明**，本卡的 physical-argument 状态因此不变。
+      ⚠⚠ 本篇摘要全文逐字检索**不含 "502"**（出现的大数是 "14,111 选 494 的二项式系数, 约 10^928"
+      与 $10^{428}$，都是三角剖分与拓扑类型的计数上界，与 Hodge 数之和无关）。
 tags: [math, calabi-yau, hodge-numbers, kreuzer-skarke, toric, database]
 notes: |
   from: literature/extractions/math-sources.md §46.1、§46.5（researcher 2026-09-11 一手核实轮）。

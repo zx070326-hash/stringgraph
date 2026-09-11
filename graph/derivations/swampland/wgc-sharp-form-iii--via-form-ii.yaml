@@ -29,7 +29,7 @@ gaps:
 notes: |
   from: arkani-hamed-2006#E20、#Q4。
 
-  reviewer-verified: reviewer-swampland, 2026-09-11
+  reviewer-verified: reviewer-swampland, reviewer-swampland-b, 2026-09-11
 
   **复核记录**：reviewer 独立核验 (M/q)_min ≤ M_min/q_{M_min} ≤ 1 这一行，确认前提完整——
   (a) 带电谱非空，(b) 最小值可达（存在实现 (M/q)_min 的态），(c) 两个态的 exact stability
@@ -37,6 +37,8 @@ notes: |
   smallest (M/Q) ... so both (II) and (III) are well-defined conjectures"）。按
   docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整 + 有限步初等推理 + reviewer 独立复核
   并留记录），本推导取 kind: proof / status: rigorous。
+  **两轮独立复审给出同一结论**：reviewer-swampland 与 reviewer-swampland-b（2026-09-11，
+  互不知情）都判定这一行推理前提完整、可升 rigorous。
 
   注意：(III) 的**有效状态不变**——本推导依赖 (II)，而 (II) 是 conjecture，min 之后仍是
   conjecture。升级的意义只在于如实记录这一步本身的严格程度。
