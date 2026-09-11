@@ -1467,8 +1467,6 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `massShell_of_mem_towerBigrade` 可作为 `worldsheet.no-ghost-theorem-v4` (1b) 中
     「`N = a − α'p²`」子句的 `lean_decl`；`noghost_hypotheses_satisfiable_int` 可挂在
     可满足性见证卡上（若 `Witness.lean` 的「需要 ℚ」写进了某张卡的 notes，应订正）。
-<<<<<<< HEAD
-=======
 - [x] `noghost-c4`（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
   `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
   （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。
@@ -1496,7 +1494,6 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     Gram 的对角性与正定性只用到 `D ≥ 3`（标架存在性，见 `Witness.lean`）。
   - **仍缺**：无鬼定理的组装还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（即 `ddf-spans`）。
   - **公理登记**：28 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
->>>>>>> agent/formalizer/noghost-c4
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
