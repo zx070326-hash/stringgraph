@@ -262,7 +262,36 @@
     不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
     余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
 
-## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
+- [ ] `euler-poincare`：Euler–Poincaré 原理（图卡 `math.euler-poincare-principle` (1) 特征标版
+  与 (2) 逐权分次版）。目标文件 `StringFormal/Math/EulerPoincare.lean`，只 import Mathlib。
+
+  **Mathlib 现状（2026-09-11 实查 v4.33.1）**：`Mathlib/Algebra/Homology/EulerCharacteristic.lean`
+  （全文件 176 行）只有**定义**与「finsum = 有限 Finset 和」的搬运：
+  `ComplexShape.EulerCharSigns`（符号 `c.χ : ι → ℤˣ`）、`GradedObject.eulerChar`、
+  `HomologicalComplex.eulerChar`、`HomologicalComplex.homologyEulerChar`、以及三条
+  `*_eq_sum_finSet_of_finrankSupport_subset`。**没有** `eulerChar = homologyEulerChar`
+  这条定理——即 Euler–Poincaré 原理本身在 Mathlib 里缺失（`grep -rl eulerChar Mathlib/` 只命中
+  该文件与 `Combinatorics/Enumerative/IncidenceAlgebra.lean`，后者是组合学的另一个同名概念）。
+  ⇒ 本项目要自己证，不能走桥层。
+
+  可复用的原子（都在 Mathlib）：
+  - `LinearMap.finrank_range_add_finrank_ker`（`LinearAlgebra/FiniteDimensional/Lemmas.lean:173`）：
+    `finrank K (range f) + finrank K (ker f) = finrank K V`，域上、`[FiniteDimensional K V]`；
+  - `Submodule.finrank_quotient_add_finrank`（`LinearAlgebra/Dimension/RankNullity.lean:248`）：
+    `finrank R (M ⧸ N) + finrank R N = finrank R M`；
+  - `Submodule.finrank_map_subtype_eq` + `Submodule.map_comap_subtype`
+    （`Algebra/Module/Submodule/Map.lean:459`，`map p.subtype (comap p.subtype p') = p ⊓ p'`）：
+    把 `finrank ((B n).comap (Z n).subtype)` 换回 `finrank (B n)`。
+
+  **索引设计**（踩过的坑）：不能写 `d n : V n →ₗ[K] V (n+1)` 再取 `range (d (n-1))`——
+  那是 `Submodule K (V (n-1+1))`，`n-1+1 = n` 在 ℤ 上不是 defeq，会逼出一堆 `cast`。
+  照 Mathlib `HomologicalComplex` 的办法用**双索引** `d : ∀ m n, V m →ₗ[K] V n`
+  （`m ≠ n + 1` 时为 0），则 `Z n := ker (d n (n-1))` 与 `B n := range (d (n+1) n)`
+  **同为** `Submodule K (V n)`，全程无 cast。ℕ 索引更省事：`n + 1 - 1 = n` 在 ℕ 上是 defeq，
+  且 `Z 0 = ker (d 0 (0-1)) = ker (d 0 0) = ⊤` 由截断减法自动给出。
+
+  范围：先做域上、ℕ 分次、在 `> N` 处消失的上链复形（等价于卡面 (1) 重标指标后的形式），
+  再套到每个权上得 (2)。**不做**卡面明确排除的号差版 (a)。
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
 `StringFormal/Math/AnomalyPolynomial.lean`（A8/A9）与 `StringFormal/Math/E8Roots.lean`（A11），三个独立小岛（只 import Mathlib）。
