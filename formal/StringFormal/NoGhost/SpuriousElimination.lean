@@ -9,9 +9,126 @@ import StringFormal.NoGhost.LightConeResolutionGen
 import StringFormal.NoGhost.SliceDim
 
 /-!
-# The `b̃`-degree elimination (blueprint §B′ PR4)
+# The `b̃`-degree elimination and the physical-slice bound (blueprint §B′ PR4)
 
-Work in progress; see the file docstring at the end of the branch for the final scope.
+Graph nodes: `worldsheet.ddf-spanning-hypothesis` (the consumer, through
+`NoGhost/SliceRank.lean`'s `B26`), `worldsheet.ddf-light-cone-frame` (the frame),
+`worldsheet.gt-longitudinal-k-algebra` (the bonus bridge).  Blueprint
+`formal/BLUEPRINT-noghost.md` §B′.4 (PR4) and §B′.5.
+
+This file supplies **(P3)** of blueprint §B′.2: `dim (H_phys ⊓ V_N) ≤ p_{D−1}(N)`, where
+`V_N = towerBigrade (-N) N` is the antidiagonal slice.  Together with
+`NoGhost/SliceDim.lean`'s `finrank_ddfSpan_inf_towerBigrade` (`= p_{D−2}(N)`, that is (P2))
+and `NoGhost/SliceRank.lean`'s `ddfSpansOn_bigrade_iff_b26` (that is (P1)), the whole
+`D`-independent part of the §B′ plan is now in Lean.  **`D = 26` occurs nowhere in this
+file**, and neither does the intercept beyond the normalisation `a₀ = α'k²`.
+
+## Main results
+
+### The two degrees and the induction variable (§B′.5)
+
+* `conjDeg` (`β`) and `conjWt` (`ω`) — the `b̃`-degree and the weighted `b̃`-degree of a
+  light-cone occupation function, both as `Finsupp.weight`s, hence additive for free.
+* `lcMeasure hD N d = β(d)·(N+1) + ω(d)` — the strong-induction variable.
+* `conjFree` / `conjFreeSlice` — the span of the `b̃`-free light-cone monomials of level `N`,
+  in one Fock fiber and on rung `-N` respectively.
+* `lcBound`, `lcLow`, `lcSeed` — the three bookkeeping spans the induction runs through.
+
+### The Sugawara input
+
+* `oscPair_eq_lightCone` — the metric contraction of two creation operators traded for the
+  frame: `∑_μ η_μ α^μ_{-r}α^μ_{-s} = -α^b_{-r}α^{b̃}_{-s} - α^{b̃}_{-r}α^b_{-s}
+  + ∑_i α^{ε_i}_{-r}α^{ε_i}_{-s}`.  Everything downstream is bookkeeping on the monomials.
+* `Lop_neg_apply_one` — **`L_{-n}` on a rung vacuum for every `n ≥ 1`**:
+  `L_{-n}|0;p⟩ = α^p_{-n}|0;p⟩ + ½ ∑_{l=1}^{n-1} ∑_μ η_μ α^μ_{-(n-l)}α^μ_{-l}|0;p⟩`.  The
+  repository previously had only `Fock.Lop_neg_one_apply_one` and
+  `Fock.Lop_neg_two_apply_one`.
+* `Lop_neg_apply_lcCrea_mul` — `[L_{-n}, α^w_{-r}] = r α^w_{-(n+r)}` in multiplicative form,
+  and `Lop_neg_apply_lcMonomial_sub_mem_lcBound`, its consequence: `L_{-n}` moved through a
+  whole light-cone monomial leaves the vacuum term plus terms of the *same* `β`.
+
+### The leading-term lemma and the elimination
+
+* `lcMonomial_conj_add_Lop_mem_lcLow` / `towerLop_neg_conjDegree_leading` —
+  **`α^{b̃}_{-n} m(d′) = -L_{-n} m(d′) + (strictly smaller measure)`**.  This is the lemma
+  §B′.9 item 1 named as the likeliest break point; it is proved here for **every** `n`.
+* `single_lcMonomial_mem_conjFreeSlice_sup_towerSpurious` and
+  **`towerBigrade_le_conjFreeSlice_sup_towerSpurious`** — the `β`-elimination: modulo spurious
+  states the antidiagonal slice is spanned by `b̃`-free light-cone monomials.
+
+### Nondegeneracy and (P3)
+
+* `Fock.monomialNorm_ne_zero`, `Fock.eq_zero_of_pairing_left_eq_zero`,
+  `Fock.eq_zero_of_towerPairing_left_eq_zero` — **the Fock and tower forms are nondegenerate**
+  over a characteristic-zero ring without zero divisors.  This closes gap item 2 of
+  `NoGhost/TowerNull.lean` ("no nondegeneracy statement").
+* `eq_zero_of_mem_towerBigrade_of_orthogonal` — no slice has a radical.
+* **`towerPhys_inf_towerBigrade_eq_towerOrthComplement`** — on the antidiagonal slice,
+  physical ⟺ orthogonal to every spurious state.  Needs no light-cone frame.
+* `finrank_conjFree_le`, `finrank_conjFreeSlice_le` and
+  **`finrank_towerPhys_inf_towerBigrade_le`** — (P3).
+
+### Bonus: half of Goddard (6.2)
+
+* `single_lcMonomial_mem_towerKerK`, `conjFreeSlice_le_towerKerK_inf_towerBigrade` — a
+  `b̃`-free light-cone monomial satisfies the `K`-conditions `K_n Ψ = 0` (`n > 0`).  This is
+  the cheap half of `towerKerK ⊓ towerBigrade = conjFreeSlice`.
+
+## Deviations from the blueprint's §B′.4 draft (also appended to the blueprint's "§B′ 订正")
+
+1. **The leading-term lemma needs no field and no rung information.**  §B′.4's draft statement
+   spells out the correction `∑_{l<n} α^b_{-(n-l)}α^{b̃}_{-l}`, and §B′.9 item 1(b) warns that
+   the zero-mode coefficient `-(b̃·p_j)` is rung-dependent.  Both are true, but both are
+   *absorbed into the remainder*: the `∑_{l<n}` terms have the target's `β` and a strictly
+   smaller `ω`, and the rung-dependent coefficient multiplies `α^b_{-n}`, whose `β` is
+   strictly smaller.  Consequently `lcCrea_towerMomentum` only needs to know that the
+   `b̃`-component of `p_j` is `-1` — that is `b·p_j = 1`, from (F2)+(F3) — and never evaluates
+   the `b`-component.  So the whole chain runs over `[CommRing R] [Algebra ℚ R]`, with no
+   `conj_eq_light_sub_momentum`, no `dotVec_self_eq_two`, no `(2 : R) ≠ 0`, no `a·a = 2`.
+   In particular §B′.9's closing remark ("the leading-term lemma really needs `a₀ = 1`") is
+   **wrong**: it is the *coefficient* of `α^b_{-n}` that depends on `a·a`, and that
+   coefficient never appears.
+2. **`L_{-n}` is not computed on a general monomial; it is commuted past it.**  The blueprint
+   left open how to handle "normal ordering when both mode indices are negative" on a
+   monomial (§B′.9 item 1(a)).  That case never arises: `[L_{-n}, α^w_{-r}] = r α^w_{-(n+r)}`
+   (`Fock.Lop_apply_mode`) moves `L_{-n}` through every factor, and the only Sugawara
+   computation left is on the *vacuum*, where only the range `-n ≤ m ≤ 0` survives and every
+   surviving operator is a creation operator or a zero mode.  This is what makes PR4 feasible
+   at all: no annihilation operator ever acts on a light-cone monomial.
+3. **The `⊇` half of `towerPhys_inf_towerBigrade_eq_orthogonal` is cheaper than the blueprint
+   thought.**  §B′.4 asks for "nondegeneracy on the slice" via
+   `LinearMap.BilinForm.finrank_orthogonal`; that route needs a finite-dimensional ambient
+   space, which `TowerFock` is not.  What is actually needed is only
+   `∀ Y, ⟨Y, L_m x⟩ = 0 → L_m x = 0`, i.e. nondegeneracy of the form on the *whole* tower,
+   which is three lines from `Fock.pairing_monomial_left` once `monomialNorm η d ≠ 0` is
+   known.  The `L_0` condition is free on the antidiagonal.
+4. **(P3) is proved by an embedding into a dual, not by a codimension count.**  With the form
+   nondegenerate on each slice, `x ↦ ⟨x, ·⟩` restricted to `conjFreeSlice` is injective on the
+   physical slice, so `dim ≤ dim (conjFreeSlice)^* = dim conjFreeSlice ≤ #{b̃-free d}`.  No
+   orthogonal decomposition and no `finrank_orthogonal` is used.
+5. **The index set of `p_{D−1}(N)` is `{d : Osc D →₀ ℕ // level d = N ∧ β(d) = 0}`**, a subset
+   of the *same* index type as `p_D(N)` and `p_{D−2}(N)` (continuing PR3's deviation 3).  Its
+   finiteness is `Fock.finite_setOf_level_eq`, already in `NoGhost/Fock.lean`; no new
+   encoding is needed, and no partition number is ever evaluated (§B′.8).
+6. **Line count**: ≈ 1300 lines against the blueprint's estimate of 500.  The overrun is in
+   the three bookkeeping spans (`lcBound` / `lcLow` / `lcSeed`) with their monotonicity and
+   multiplication lemmas, plus the nondegeneracy layer, which §B′.4 assumed would come from
+   Mathlib's `BilinForm` API.
+
+## Scope and gaps
+
+* **The elimination is an inclusion, not an equality.**  `towerBigrade ≤ conjFreeSlice ⊔
+  towerSpurious` is all that (P3) needs; `conjFreeSlice ⊓ towerSpurious = ⊥` is *not* proved
+  and would need linear independence of the light-cone monomials.
+* For the same reason `towerKerK ⊓ towerBigrade = conjFreeSlice` is available only in the
+  direction `⊇` (blueprint §B′.9 item 2).
+* **(B-26) is untouched.**  This file gives the upper bound on `dim (H_phys ⊓ V_N)`; the
+  lower bound on `dim (H_null ⊓ V_N)` — the one place where `D = 26` enters — is blueprint
+  PR5 and is not started.
+* `finrank_towerPhys_inf_towerBigrade_le` is stated at the intercept
+  `a₀ = invTwo R * Fock.zeroModeSq η a` only, because that is the value for which the `L_0`
+  condition is automatic on the antidiagonal; at any other intercept the slice consists of
+  non-physical vectors anyway (`massShell_of_mem_towerBigrade`), so nothing is lost.
 -/
 
 namespace StringFormal.NoGhost
@@ -1084,7 +1201,7 @@ omit [CharZero K] [Algebra ℚ K] in
 abstract vector spaces so that the `AddCommMonoid` instance path of `Module.Dual` matches
 Mathlib's `Subspace.dual_finrank_eq` (on a `Submodule` coercion the two paths are only
 defeq). -/
-private theorem finrank_le_of_injective_toDualHom {V : Type*} [AddCommGroup V] [Module K V]
+theorem finrank_le_of_injective_toDualHom {V : Type*} [AddCommGroup V] [Module K V]
     {M : Type*} [AddCommGroup M] [Module K M] (W : Submodule K M) [FiniteDimensional K ↥W]
     {f : V →ₗ[K] (↥W →ₗ[K] K)} (hf : Function.Injective f) :
     Module.finrank K V ≤ Module.finrank K ↥W := by

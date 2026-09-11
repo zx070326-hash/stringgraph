@@ -66,3 +66,4 @@ import StringFormal.NoGhost.NullDescend
 import StringFormal.NoGhost.SliceRank
 import StringFormal.NoGhost.SliceDim
 import StringFormal.NoGhost.LightConeResolutionGen
+import StringFormal.NoGhost.SpuriousElimination
