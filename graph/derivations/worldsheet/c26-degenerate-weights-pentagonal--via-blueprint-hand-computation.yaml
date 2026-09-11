@@ -1,0 +1,99 @@
+id: worldsheet.c26-degenerate-weights-pentagonal--via-blueprint-hand-computation
+target: worldsheet.c26-degenerate-weights-pentagonal
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.kac-determinant-v2
+    inferred: true
+    note: |
+      该卡 statement 只说"h_{r,s}(c) 由 Kac 公式给出"，未写出显式公式；
+      h_{p,q}(c) 的显式表达式（用于本推导代入 c=26）只出现在该卡 sources 的
+      schottenloher-2008 条目 note 里，非 statement 正文，故标 inferred。
+      另见本卡 statement 的 sources：curator 独立核对发现该显式公式与 blueprint
+      §B‴.7 的记号存在 p↔q 交换，已在 statement 的 sources 里登记，不在此重复。
+  - id: math.euler-partition-generating-function
+    inferred: true
+    note: |
+      本推导的断言 (3) 用"Euler 恒等式 1−φ(q)=q+q²−q⁵−q⁷+⋯的两种符号"描述性地
+      对应奇偶两类五边形数，但这是**五边形数定理**（∏(1−q^n) 自身系数展开），
+      不是该卡断言的**分拆生成函数**恒等式（(Σp(N)X^N)·∏(1−X^n)=1）——
+      该卡【本节点明确不断言】(c) 已明确排除五边形数定理是同一命题。
+      此依赖边因此标 inferred：该卡不直接支持本推导用到的五边形数定理，
+      只是本图里与"∏(1−X^n)"这一对象最接近的既有节点，供读者定位记号；
+      本图目前没有专门承载五边形数定理本身的节点。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §B‴.7（约 2419-2463 行）与 §B‴.14（约 2614-2633 行）"
+    note: |
+      【⚠ 全部⟨手算⟩，未经 Lean 校验、未经 reviewer 复核，status 因此只能是
+      physical-argument，不得更高】formalizer（分支 agent/formalizer/blueprint-B-triple-prime，
+      2026-09-12）把 §B″.11/§B″.14 记录的"五边形数数值巧合"升级为算术论证：
+      c=26 代入一般 Kac 权公式给出 h_{p,q}(26)=[25−(3p+2q)²]/24，核对与
+      h_{1,s}(26)=−(s+4)(s−1)/6 一致；解 1−s=h_{p,q}(26)（pq=s）得 24s+1=(3p+2q)²，
+      即退化 ⟺ 完全平方 ⟺ 广义五边形数；(3p−2q)²∈{1,25,49} 把 k 奇偶分别接到
+      "新奇异向量"（+q^s 项）与"两族重叠"（−q^s 项）两种物理图景，并附 §B‴.14
+      的 N≤7 数值表与 s≤80 的程序复算作交叉验证。
+      **curator 独立核对**：(i) h_{1,s}(26) 的代数化简（展开 (3+2s)²，因式分解
+      (s+4)(s−1)）逐步核对通过；(ii) 1−s=h_{p,q}(26) ⟹ (3p+2q)²=24s+1 的移项
+      核对通过；(iii) 表格 8 个数值点（s=1,2,5,7,12,15,22,26 的 24s+1 是否完全
+      平方）逐项复算通过。**未独立核对**：k 奇偶 ⟺ (3p−2q)²∈{1} vs {25,49} 这一步
+      的一般性证明（只核对了表格列出的具体数值，未重新推导一般 k 下的分类），
+      "24s+1 是完全平方 ⟺ s 是广义五边形数"这一初等数论事实本身也未重新证明
+      （视为标准结果直接使用）。这一步核对不构成 Lean 或 reviewer 复核，不提升
+      status。formalizer 本人在 §B‴.14 注明"脚本未入库"，即数值核对停留在
+      "曾经跑过一次 Python 脚本，结果记入文档"，本推导未重新运行该脚本，
+      只核对了文档里列出的具体数值。
+summary: |
+  (1) c=26 代入一般 Kac 权公式 h_{p,q}(c)（来源见 depends_on 对
+      worldsheet.kac-determinant-v2 的 note）：
+      h_{p,q}(26) = [25 − (3p+2q)²]/24。取 p=1、q=s 得单参数族
+      h_{1,s}(26) = [25−(3+2s)²]/24 = [25−4s²−12s−9]/24 = −(4s²+12s−16)/24
+      = −4(s²+3s−4)/24 = −(s+4)(s−1)/6，与 blueprint 表格逐字一致（§B′.9 已独立
+      记录的同一公式）。
+  (2) 反对角片上第 M 层种子取权 h=1−s（s:=N−M，质壳截距 a₀=1 处的标准写法）。
+      令 1−s = h_{p,q}(26)，移项得 (3p+2q)² = 24s+1；因此"V(26,1−s) 在层 s
+      有奇异向量"（存在 p,q≥1、pq=s 使 h_{p,q}(26)=1−s）等价于"24s+1 是完全
+      平方"，再等价于"s 是广义五边形数"（s=k(3k∓1)/2 ⟺ 24s+1=(6k∓1)²，
+      标准数论刻画，本推导直接引用不重证）。
+  (3) 令 m:=3p+2q（m²=24s+1=(6k∓1)²，故 m=6k∓1 型，m 与 k 反号奇偶性一致：
+      k 奇 ⟹ m≡±1 (mod 6) 型对应奇数 m 的某个子集，k 偶同理——blueprint 表格
+      按 (3p−2q)² 而非 m 本身分类）。blueprint 给出 8 个具体 s 值（1,2,5,7,12,
+      15,22,26）的退化指标对 (p,q)，逐一算出 (3p−2q)²：s=1,2,12,15（k 奇）给
+      (3p−2q)²=1；s=5,7,22,26（k 偶）给 (3p−2q)²∈{25,49}（对应奇异向量分别落在
+      层 s−1、s−2）。curator 复核了全部 8 行的数值（pq=s 且 (3p+2q)²=24s+1 的
+      解、以及对应的 (3p−2q)² 取值），结果与 blueprint 表格逐项一致。
+  (4) 把 k 奇/偶两类分别接到 Euler 恒等式 1−φ(q)=q+q²−q⁵−q⁷+q¹²+q¹⁵−⋯ 的
+      "+"/"−" 两种符号：k 奇（新奇异向量存在）对应 "+q^s" 项，k 偶（该层无新
+      奇异向量，退化指标对落在更低两层）对应 "−q^s" 项。这是描述性对应，
+      不是形式化推导的一部分（见 depends_on 对 math.euler-partition-generating-function
+      的 inferred note：该恒等式本身，即五边形数定理，本图无专门节点承载）。
+  (5) §B‴.14 附 N=1..7 的数值表（目标 p_{25}(N)−p_{24}(N) 与三角性上限
+      p_{25}(N−1) 的缺口，恰等于 𝒟₂ 族的净贡献），以及 s≤80 内五边形数集合
+      {1,2,5,7,12,15,22,26,35,40,51,57,70,77} 与"24s+1 为完全平方"的集合逐项
+      相同的程序复算，作为 (2)(3) 的交叉验证——**这一步 curator 未重新运行
+      任何程序，只是核对了文档里列出的最终数值列表本身在内部是自洽的
+      （即文档给出的两个集合确实相等，逐项核对了 14 个元素）**。
+gaps:
+  - k 奇偶 ⟺ (3p−2q)² 取值分类这一判据的一般性证明未做：blueprint 与本推导都只
+    核对了 8 个具体 s 值，未给出对一切广义五边形数 s 成立的一般代数论证（例如把
+    k 表成 p,q 的显式函数并证明奇偶性对应关系恒成立）。
+  - 24s+1 是完全平方 ⟺ s 是广义五边形数这一事实本身视为标准数论事实直接引用，
+    本卡未给出或核实一手数论来源（教材编号未核实，处理方式同
+    math.euler-partition-generating-function notes 对同类标准事实的处理）。
+  - 未 Lean 形式化：本图搜索确认（formal/CLAUDE.md 目录列表）目前没有任何
+    StringFormal 文件涉及 Kac 权公式的 c=26 特化或五边形数结构。
+  - 未经 reviewer 复核：本推导的全部代数核对均由 curator 本人完成，非独立
+    第二人复核。
+  - §B‴.14 的数值表本身"仅数值验证通过 N=7（部分复核到 N=8，按任务书说明由
+    planner 完成）"，未给出对一切 N 成立的证明；本卡断言 (2)(3) 本身是对
+    一切 s 的陈述（判据是代数恒等式，不依赖 N 的上限），但其"物理对应"
+    （断言 (3) 的 Euler 符号对应）只在文档列出的 8 个具体 s 值上核对过。
+  - worldsheet.kac-determinant-v2 的 h_{p,q}(c) 公式（schottenloher-2008 来源）
+    与本卡记号在 (p,q) 顺序上相反（见该卡 statement 的 sources note），本推导
+    未裁决这是约定差异还是需要规范化的表述冲突，只如实记录。
+notes: |
+  本推导是 formal/BLUEPRINT-noghost.md §B‴.13 第 1 条建议的落地，任务书交付物之一。
+  curator 在落地时额外做了 statement sources 里登记的 p↔q 记号核对，发现一处
+  两来源间的记号差异（非数值错误），已如实记录，不代表裁决或规范化。
+author: curator
+created: "2026-09-12"

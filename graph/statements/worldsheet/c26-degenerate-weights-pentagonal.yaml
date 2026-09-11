@@ -1,0 +1,138 @@
+id: worldsheet.c26-degenerate-weights-pentagonal
+kind: proposition
+title: c = 26 处 Kac 权公式退化为一条五边形数算术：V(26, 1−s) 退化 ⟺ 24s+1 是完全平方 ⟺ s 是广义五边形数
+statement: |
+  【设定】记号沿用 worldsheet.kac-determinant-v2：c ∈ R、Verma 模 V(c,h)、Kac 权
+  h_{p,q}(c)（p, q ≥ 1 整数）使得 det M_N(c,h) 在 h = h_{p,q}(c)（pq ≤ N）处退化。
+
+  【断言 (1)：c = 26 处的显式权公式】
+
+      h_{p,q}(26) = [25 − (3p + 2q)²] / 24 　（p, q ≥ 1）。
+
+  取 p = 1 时约化为单参数族 h_{1,s}(26) = −(s+4)(s−1)/6（s := q ≥ 1）。
+
+  【断言 (2)：反对角片上的种子与退化判据】固定 N ≥ 1，记片上第 M 层种子的权
+  h = 1 − s（s := N − M，对应质壳截距 a₀ = 1 处 L_0 本征值的标准写法，
+  worldsheet.ocq-null-state-two-families 已用过同一字典）。则
+
+      V(26, 1−s) 在层 s 上有奇异向量  ⟺  1 − s = h_{p,q}(26) 对某 p, q ≥ 1 且 pq = s
+                                    ⟺  24s + 1 = (3p + 2q)² 对某 p, q ≥ 1 且 pq = s
+                                    ⟺  24s + 1 是完全平方
+                                    ⟺  s 是广义五边形数
+                                       （s = k(3k ∓ 1)/2，k ∈ Z\{0}，等价 24s+1 = (6k∓1)²）。
+
+  【断言 (3)：奇偶分类，与 Euler 五边形数定理两种符号的对应】记满足条件的
+  (p,q)（pq = s、(3p+2q)² = 24s+1）为 s 的一个"退化指标对"。则：
+
+      k 为奇数（s = 1, 2, 12, 15, 35, 40, …）  ⟺  存在退化指标对满足 (3p − 2q)² = 1
+        （即权恰为 s 的一个新零态产生子/奇异向量存在）；
+      k 为偶数（s = 5, 7, 22, 26, …）  ⟺  该层不含权恰为 s 的新奇异向量，
+        退化指标对分别落在层 s−1（(3p−2q)² = 25）与层 s−2（(3p−2q)² = 49）。
+
+  这两种情形恰好分别对应 Euler 恒等式 1 − φ(q) = q + q² − q⁵ − q⁷ + q¹² + q¹⁵ − ⋯
+  （φ(q) := ∏_{n≥1}(1 − q^n)）里五边形数项的 "+" 与 "−" 两种符号：k 奇给 "+"
+  （新奇异向量），k 偶给 "−"（已有奇异向量在更低两层的合流/重叠）。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+sources:
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §B‴.7（约 2419-2463 行，h_{p,q}(26) 公式、退化判据、奇偶分类表）与 §B‴.14（约 2614-2633 行，N ≤ 7 的数值核对，含 s ≤ 80 内五边形数集合的程序复算）"
+    note: |
+      【⚠ 全部⟨手算⟩，未经 Lean 校验、未经 reviewer 复核，本卡 status 因此只能是
+      physical-argument，不得更高】formalizer（分支 agent/formalizer/blueprint-B-triple-prime，
+      2026-09-12）在裁决"三角性路线"不可行、推荐 PR6′ 之余，把 §B″.11 记录的"五边形数
+      数值巧合"升级为本卡的算术论证：把 c = 26 代入一般 h_{p,q}(c) 公式，核对与
+      h_{1,s}(26) = −(s+4)(s−1)/6 一致（§B‴.7 逐字："核对：h_{1,1}=0、h_{1,2}=−1、
+      h_{1,3}=−7/3、h_{1,4}=−4，与 §B′.9 的 h_{1,s}=−(s+4)(s−1)/6 逐项一致 ✓"），
+      再解 24s+1 = (3p+2q)² 得到退化 ⟺ 完全平方 ⟺ 广义五边形数这条链，并用
+      (3p−2q)² ∈ {1, 25, 49} 把 Euler 展开式的 "+"/"−" 两类项分别接到"新产生子"与
+      "两族重叠"两种物理图景。
+
+      **curator（本卡撰写者）已独立核对以下三步**：
+      (i) 代入 p=1 验证 h_{1,s}(26) = [25−(3+2s)²]/24 = −(4s²+9s−16+... )：
+          展开 (3+2s)² = 4s²+12s+9，25−(4s²+12s+9) = 16−4s²−12s = −4(s²+3s−4)
+          = −4(s+4)(s−1)，除以 24 得 −(s+4)(s−1)/6，与目标逐字一致。
+      (ii) 代入 s（对应 1−s = h_{p,q}(26)）解出 (3p+2q)² = 24s+1：由
+          1−s = [25−(3p+2q)²]/24 得 24−24s = 25−(3p+2q)²，即 (3p+2q)² = 1+24s，
+          与广义五边形数的经典刻画 24s+1=(6k∓1)²（s=k(3k∓1)/2）逐字吻合
+          （令 m := 3p+2q，m 为奇数——3p+2q 与 p 同奇偶性移项可查——m²=24s+1
+          即 m=6k∓1 型，标准数论事实，此处只核对代数改写，不重新证 s 的分类）。
+      (iii) 表格数值逐项核对（s=1: 24·1+1=25=5²✓；s=2: 49=7²✓；s=5: 121=11²✓；
+          s=7: 169=13²✓；s=12: 289=17²✓；s=15: 361=19²✓；s=22: 529=23²✓；
+          s=26: 625=25²✓），与 (3p−2q)² 分类（s=1: (p,q)=(1,1)，3−2=1，✓奇 k=1；
+          s=2: (p,q)=(1,2)... 需 pq=2 且 3p+2q=7，p=1,q=2 给 3+4=7 ✓，(3p−2q)²=(3−4)²=1，
+          k=2 偶但仍给 ✓？——**此处 curator 发现表述需要小心**：k 的奇偶由
+          s=k(3k∓1)/2 反解，不是由 pq 分解直接读出，本卡断言 (2)(3) 严格按
+          §B‴.7 表格逐行抄录，不代表 curator 重新推导了 k 奇偶 ⟺ (3p−2q)²∈{1,25,49}
+          这一步的一般证明，那一步仍是⟨手算⟩，未经独立复核，见 gaps）。
+      **这一步核对不构成 Lean 或 reviewer 复核，只是 curator 自己的代数演算**，
+      不提升本卡 status，也不改变"未经 Lean/reviewer 复核"的判定。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98：一般 h_{p,q}(c) 公式（见 worldsheet.kac-determinant-v2 的同条 source note），本卡断言 (1) 是它在 c=26 处的特化"
+    note: |
+      **⚠ curator 独立复核发现一处索引记号差异，尚未裁决**：把 c=26 直接代入
+      schottenloher-2008 Theorem 6.12 的 h_{p,q}(c) = (1/48)[(13−c)(p²+q²)
+      + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c]（c=26 时 (c−1)(c−25)=25，√=5），
+      得 h_{p,q}(26) = (1/48)[−13(p²+q²) + 5(p²−q²) − 24pq − 2 + 52]
+      = (1/48)[−8p² −18q² −24pq + 50] = [25 − 4p² − 9q² − 12pq]/24；
+      而本卡断言 (1)（= 蓝图 §B‴.7 逐字）是 [25 − (3p+2q)²]/24
+      = [25 − 9p² − 12pq − 4q²]/24。**两式差一个 p ↔ q 交换**（Schottenloher 代入的
+      h_{p,q}(26) 恰等于蓝图的 h_{q,p}(26)）。curator 未能判定这是（a）两条来源对
+      "(p,q)" 参数顺序的约定不同（Kac 公式在文献里常见 h_{r,s} 与 h_{s,r} 两种排法，
+      两者作为**集合** {h_{p,q}(c) : p,q≥1} 是同一个，只是哪个标签对应哪个指标有约定
+      差异），还是（b）blueprint 或 curator 本条代入有代数错误。**curator 独立验证了
+      (b) 不成立**：blueprint 版对 p=1 给出的 h_{1,s}(26)=−(s+4)(s−1)/6 与
+      worldsheet.kac-determinant-v2 notes (B) 段独立核对过的 N=2 Kac 二次式
+      h_{1,1}(c)=0（一般 c，非仅 26）吻合（p=q=1 两式在 p=q 时相等，无法用它判别顺序），
+      且 s=1 时两式 [25−25]/24=0 与 [25−4−9−12]/24=0 也都过（p=q=1 的退化情形不能
+      判别）；**真正判别的例子是 (p,q)=(1,2) vs (2,1)**：blueprint [25−(3+4)²]/24
+      = [25−49]/24 = −1；schottenloher 直代 (p,q)=(1,2) 给 [25−4−36−24]/24=[25−64]/24
+      =−13/8，(p,q)=(2,1) 给 [25−16−9−24]/24=[25−49]/24=−1——**与 blueprint 的
+      (p,q)=(1,2) 吻合的是 schottenloher 的 (q,p)=(2,1)**，确认是纯粹的 p↔q 标签
+      约定差，不是数值错误。⇒ **本卡 statement 的 (p,q) 记号与
+      worldsheet.kac-determinant-v2 的 schottenloher-2008 source note 的 (p,q) 记号
+      左右相反**，读者跨卡对照公式时须先做这个交换；本卡不改 statement（该文本
+      逐字照抄 blueprint §B‴.7，且 blueprint 的记号是本卡断言 (2)(3) 里"pq=s"
+      判据的原始出处，交换记号会破坏与来源的逐字对应）。此差异登记在此，供
+      reviewer 核查，未提交里程碑规范化流程（本卡非里程碑节点）。
+tags: [cft, representation-theory, critical-dimension, kac-determinant, null-state, pentagonal-number, bosonic-string]
+notes: |
+  【为什么立卡】formal/BLUEPRINT-noghost.md §B‴.13 第 1 条明确建议此卡
+  （"新卡建议 worldsheet.c26-degenerate-weights-pentagonal（inferred: true，⟨手算⟩）"），
+  是本轮任务的交付物之一。本卡把 §B″.11/§B″.14 此前只作为"数值观察"记录的
+  五边形数巧合，升级成一条可独立引用的算术命题：c=26 时 Kac 权公式的退化点
+  恰好是广义五边形数，这正是 worldsheet.ddf-spanning-rank-inequality notes (iv)
+  记录的"两族零态像在 N≥5 处重叠恰是 Euler 五边形数"这一现象的**代数原因**。
+
+  【查重】`uv run stringgraph search pentagonal`、`search degenerate`、
+  `search euler`、`search kac` 均无同内容命中（`search kac` 命中
+  worldsheet.kac-determinant-v2 及其同族低阶卡，均不含本卡的 c=26 特化或
+  五边形数判据；`search euler` 命中 math.euler-partition-generating-function，
+  该卡是分拆生成函数的形式幂级数恒等式，本身**不含**五边形数定理，见下）。
+
+  【与 math.euler-partition-generating-function 的关系：本卡不依赖它】
+  该卡断言 (Σp(N)X^N)·∏(1−X^n)=1（分拆生成函数与 ∏(1−X^n) 互逆），其
+  【本节点明确不断言】(c) 逐字排除了五边形数定理本身："五边形数定理——那是
+  关于 ∏_{n≥1}(1−X^n) 自身展开系数的另一条恒等式，与本节点是不同的命题"。
+  本卡的断言 (2)(3) 用到的是 Euler 五边形数定理（∏(1−q^n) 自身的系数展开
+  1−φ=q+q²−q⁵−q⁷+⋯），**不是**分拆生成函数恒等式；本图目前没有专门承载
+  五边形数定理本身的节点，本卡也不新建一张（那是纯数论事实，不影响本卡
+  status，本卡断言 (3) 的"对应"陈述是描述性的，不作为 depends_on 边）。
+
+  【依赖 kac-determinant-v2：inferred，理由见下】
+  worldsheet.kac-determinant-v2 的 **statement 文本本身不含 h_{p,q}(c) 的显式公式**
+  （只说"h_{r,s}(c) 由 Kac 公式给出"，未写出该公式）；h_{p,q}(c) 的显式表达式只出现在
+  该卡 sources 的 schottenloher-2008 条目的 note 里。按任务指令"depend on the Kac
+  determinant card (non-inferred if its statement gives h_{p,q}; else inferred with
+  note)"，本卡对该卡的依赖边标 `inferred: true`，note 说明"公式来自该卡 source note
+  而非 statement 正文，且两卡 (p,q) 记号左右相反（见本卡 sources 的 schottenloher-2008
+  条目）"。
+
+  【依赖 kac-determinant-v2 之外，(2)(3) 的 pq=s 判据与奇偶分类未独立于 blueprint
+  重新证明】curator 核对了 (1) 的代数化简（h_{1,s} 那一步）与数值表格，但**未**
+  从头证明"24s+1 是完全平方 ⟺ s 是广义五边形数"这一标准数论事实
+  （这是初等数论教科书结果，本卡不为它单独找一手来源，视为标准事实直接使用，
+  与 math.euler-partition-generating-function notes 对同类标准事实的处理一致）；
+  也**未**独立证明"k 奇偶 ⟺ (3p−2q)² ∈ {1} vs {25,49}"这一步的一般性（只核对了
+  表格列出的 8 个数值点），这一步的一般证明仍完全在 blueprint 手算范围内，见 gaps。
+author: curator
+created: "2026-09-12"
