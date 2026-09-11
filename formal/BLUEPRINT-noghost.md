@@ -2215,7 +2215,7 @@ ddfSpans_bigrade_neg_two_two … : DDFSpansOn η a b F.hη F.trans (towerBigrade
 写于 `NoGhost/LevelTwoCount.lean` 关闭 `B26 2` 之后，是 §B″ 的续篇，不取代它。
 
 > **取证等级**：本节的代数式与计数全部是 ⟨手算⟩（2026-09-12，formalizer），未经 Lean 校验；
-> 凡引用既有 Lean 声明的地方标 `[Lean]`。`N = 3` 的账在 §B‴.4 逐条列出，
+> 凡引用既有 Lean 声明的地方标 `[Lean]`。`N = 2` 与 `N = 3` 的账在 §B‴.4 与 §B‴.5 逐条列出，
 > 任何据此动手的人第一步应当复算它。
 
 
