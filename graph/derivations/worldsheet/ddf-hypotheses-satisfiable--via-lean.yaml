@@ -64,7 +64,7 @@ notes: |
   目标陈述**不点名标架**，只点名 (η)(N)(S)(T)(U)(M) 六条并逐条给见证，
   按 docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」末句「只提供「原书语境」而不承担任何
   论证的边不得存在」，这条边不该建；而且它经 transverse-frame-spans 那条链把降级传得最远
-  （本轮实测三条边合计 effective formalized 77 → 73）。
+  （本轮实测三条边合计 effective formalized 78 → 74（report 口径，净 −4））。
   ⇒ 指针改记在目标陈述卡的 `uses` 上（不参与传播）。新定义卡与本卡的**正确关系**是反向的：
   那张卡的【非空性】一段引用本卡的见证向量，而不是本卡依赖那张卡。
 author: curator

@@ -116,6 +116,6 @@ notes: |
   只作为新卡【非空性】一段的见证依据被引用。
   ⚠ 指针用 `uses` 而**不是**在 --via-lean 推导上加 `depends_on`：本卡陈述不点名标架，
   加边属 docs/STATUS_LEVELS.md 禁止的「只提供语境」，且会把本卡 effective 压到 rigorous
-  并沿 transverse-frame-spans 再传一层（实测三条同类边合计 77 → 73）。详见 --via-lean 的 notes。
+  并沿 transverse-frame-spans 再传一层（实测三条同类边合计 78 → 74（report 口径，净 −4））。详见 --via-lean 的 notes。
 author: curator
 created: "2026-09-11"
