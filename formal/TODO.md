@@ -149,8 +149,9 @@
   **全模群不变性仍缺** `worldsheet.modular-group-generated-by-s-and-t`（未形式化）。
   同样仍缺：η 对一般 `SL(2,ℤ)` 元素的乘子系统（Dedekind 和）。
 
-- [ ] `eta-modular`：`τ₂|η(τ)|⁴` 在**整个 `SL(2,ℤ)`** 下不变。
-  `StringFormal/Math/DedekindEtaModular.lean`（进行中）。
+- [x] `eta-modular`：`τ₂|η(τ)|⁴` 在**整个 `SL(2,ℤ)`** 下不变。
+  见 `StringFormal/Math/DedekindEtaModular.lean`（无 sorry，8 个声明 `check_axioms --all` 全 `ok`，
+  只有标准三条）。
 
   **调研结论（先记下来，省得后人重查）**：Mathlib v4.33.1 **有**「S、T 生成 `SL(2,ℤ)`」：
 
@@ -174,6 +175,34 @@
   （前提是图卡陈述与「`closure {S,T} = ⊤` 在 `SL(2,ℤ)` 上」逐字对得上；注意这是 `SL(2,ℤ)` 版，
   不是 `PSL(2,ℤ)` 版，且 `S` `T` 取 Mathlib 的 `ModularGroup.S = ![![0,-1],![1,0]]`、
   `ModularGroup.T = ![![1,1],![0,1]]`）。
+
+  **本文件做的事**：只有一次 `Subgroup.closure_induction`。关键技术点：归纳的谓词必须是
+  `∀ τ` 形（`im_mul_norm_eta_pow_four_modular_forall`），因为 `inv` 分支要在**另一个点**
+  `g⁻¹ • τ` 用归纳假设（`smul_inv_smul`）；`mul` 分支是 `mul_smul` + 两次归纳假设；
+  `one` 分支是 `one_smul`。两个生成元分支直接就是
+  `DedekindEtaS.im_mul_norm_eta_pow_four_modular_S_smul` 与
+  `DedekindEtaT.im_mul_norm_eta_pow_four_modular_T_smul`（一字不改）。
+
+  声明清单：`modular_group_generated_by_S_and_T`（Mathlib 定理的再导出）、
+  `im_mul_norm_eta_pow_four_modular_forall`、
+  **`im_mul_norm_eta_pow_four_modular_invariant`**（主定理，`(g • τ).im * ‖η(g•τ)‖^4 = τ.im * ‖η τ‖^4`）、
+  `norm_eta_pow_four_modular`（解出形 `‖η(g•τ)‖⁴ = (τ₂/(gτ)₂)‖η(τ)‖⁴`）、
+  `im_mul_norm_eta_pow_four_isInvariant`（函数相等形）、
+  `im_mul_norm_eta_pow_four_pow_modular`、`im_pow_mul_norm_eta_pow_modular`（任意 n 次幂）、
+  `im_pow_twelve_mul_norm_eta_pow_48_modular`（`τ₂¹²|η|⁴⁸`，即玻色单圈被积函数的倒数）。
+
+  ⚠ **给图的建议（本 agent 未改 graph/）**：
+  1. `worldsheet.modular-group-generated-by-s-and-t` 可标 `formalized`，
+     `lean_decl = StringFormal.DedekindEta.modular_group_generated_by_S_and_T`，
+     `lean_file = formal/StringFormal/Math/DedekindEtaModular.lean`。**但要先核对图卡是
+     `SL(2,ℤ)` 还是 `PSL(2,ℤ)`**：Mathlib 的是 `SL(2,ℤ)` 版。若图卡写的是 `PSL(2,ℤ)`
+     （物理文献通常如此，因为 `−1` 平凡作用在 ℍ 上），则 Lean 定理**严格更强**（`SL ⇒ PSL` 要商掉
+     `±1`，是一步平凡但未形式化的推论），应在 `gaps` 记一条「Lean 版为 SL(2,ℤ)，PSL 版未形式化」。
+  2. 若图里有「`τ₂|η|⁴` 模不变」这条卡（一般挂在单圈配分函数链上），可挂
+     `im_mul_norm_eta_pow_four_modular_invariant`。
+  3. **仍缺**（不要误标）：η 本身对一般 `g` 的乘子系统（Dedekind 和、24 次单位根），
+     以及测度 `d²τ/τ₂²` 的模不变性。本文件只控制 `‖η‖` 在 `τ₂|η|⁴` 这一特定组合里的行为；
+     `12 = (D−2)/2` 是输入不是输出。
 
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
