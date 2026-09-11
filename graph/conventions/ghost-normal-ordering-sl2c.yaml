@@ -1,0 +1,80 @@
+id: conv.ghost-normal-ordering-sl2c
+family: ghost-normal-ordering
+title: bc 鬼场正规序：SL(2,C) 序（相对 SL(2,C) 不变真空 |0⟩），与 a^g = 0 成对；非 canonical
+definition: |
+  **适用对象**：与 conv.ghost-normal-ordering-level 相同的 bc 系统（权 (λ, 1−λ) = (2, −1)，
+    {b_m, c_n} = δ_{m+n,0},  {b_m, b_n} = {c_m, c_n} = 0,
+  b(z) = Σ_n b_n z^{−n−2}、c(z) = Σ_n c_n z^{−n+1}）。本约定同样只规定记号 `: … :` 的含义。
+
+  **(1) 排序规则**。排序与配符号的做法同 conv.ghost-normal-ordering-level (1)，但湮灭 / 产生取
+    湮灭：b_n (n ≥ −1),  c_n (n ≥ 2);    产生：b_n (n ≤ −2),  c_n (n ≤ 1)。
+  等价刻画：湮灭算符恰是零化 **SL(2,C) 不变真空 |0⟩** 的那些模式
+  （b_n|0⟩ = 0, n ≥ −1；c_n|0⟩ = 0, n ≥ 2；这是使 b(z)|0⟩、c(z)|0⟩ 在 z → 0 正则、
+  与权 (2, −1) 相容的条件）。
+
+  **(2) 与 conv.ghost-normal-ordering-level 的换算**。两套序只在缩并 ⟨b_{−1} c_1⟩ 上不同
+  （本约定取 1，能级序取 0），故对同一个书写式子 L^g_n = Σ_m (2n − m) : b_m c_{n−m} :
+    **L^{g,sl2c}_n = L^{g,level}_n − δ_{n,0}**,  即 L′_0 = L_0 + α 中的 **α = −1**（以能级序为基准）。
+  相应地 L^{g,sl2c}_0 |↓⟩ = −|↓⟩，而 L^{g,level}_0 |↓⟩ = 0，其中 |↓⟩ = c_1|0⟩。
+
+  **(3) 中心项**。在本约定下鬼场生成元自身满足 conv.virasoro-standard 的**纯 (m³ − m) 形式**：
+    [L^{g,sl2c}_m, L^{g,sl2c}_n] = (m − n) L^{g,sl2c}_{m+n} + (c^g/12)(m³ − m) δ_{m+n,0},
+  无 m 线性项，λ = 2 时 c^g = −26（取值本身是命题
+  worldsheet.bc-ghost-central-charge-lambda-two，不是本约定的内容）。
+  换到能级序则中心项变成 (c^g/12)(m³ − m) − 2m（见该卡 (3) 的 −2mα）。
+  ⇒ **(m³ − m) 的系数与序无关**（两套序之差只改 m 的一次项），故 c^g 这个**数值**可以跨本 family
+  的两张卡搬运；可以跨边搬运的**只有**这个系数，m 线性项不可跨边照抄。
+
+  **(4) 与正规序常数 a^g 的成对性**。在
+    Q_B = Σ_n c_n L^m_{−n} + Σ_{m,n} ((m − n)/2) : c_m c_n b_{−m−n} : + a^g c_0
+  中，**本约定（SL(2,C) 序）配 a^g = 0**，conv.ghost-normal-ordering-level 配 a^g = −1，
+  两者给出**同一个算子 Q_B**。若把本约定与 a^g = −1 拼在一起，得到的是另一个算子
+  （多一项 −c_0），它对任何 c^m 都**不**幂零。
+
+  **(5) 本约定不规定**：c^g 的取值；物质部门的任何东西；鬼数的零点。
+canonical: false
+sources:
+  - ref: fgz-1986
+    loc: "Proposition 2.1, p.8444 右栏：(i) `ρ(c) = −26 Id_{Λ^∞_*}`；(ii) `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`"
+    note: |
+      **L1 逐字**（literature/extractions/brst-cohomology-sources.md §1.2）。FGZ 把 (ii) 的 `: :`
+      写在半无穷楔形模 Λ^∞_* 上而**未在本项目读到的五页里给出湮灭/产生清单**；
+      ⚠ 「FGZ 的 `: :` 就是本卡 (1) 的 SL(2,C) 序」是**本项目的推断**，理由是：(i) 断言中心荷为
+      −26 且（按 conv.virasoro-standard 的读法）中心项取纯 (m³ − m) 形式，而在相差 L_0 常数平移的
+      诸序中，使中心项无 m 线性项的序**唯一**（平移 α 给 −2mα，纯形式迫使 α = 0）。
+      凡把这条推断用到边上的，须标 inferred 或写 convention_map。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, p.62 逐字：「The constant can also be obtained by working out the relation between `: :` and `° °` for the CFT (exercises 2.13, 2.14).」；同节 p.61 (2.7.19) 用的是 `° °`"
+    note: |
+      **原书自己区分两套序**：`: :` 是共形正规序（按 OPE 奇异项扣除定义，§2.2），
+      `° °` 是产生–湮灭正规序（相对 |↓⟩，见 conv.ghost-normal-ordering-level 的主锚点）。
+      ⚠ 「平面上自由 bc 系统的共形正规序 = 本卡 (1) 的 SL(2,C) 序」是**标准但本项目未逐字核实**的
+      等同，按 graph/CLAUDE.md 的口径记为推断；本卡的内容不依赖这个等同——本卡 (1) 是自足的定义，
+      本条来源只用于说明「原书确实存在两套序且其差是一个常数」这一事实。
+notes: |
+  【为什么非 canonical，以及这条选择的代价】
+  family `ghost-normal-ordering` 的 canonical 成员是 conv.ghost-normal-ordering-level
+  （lead 裁决 2026-09-12，见 docs/ROADMAP.md）。理由是图里 BRST 一侧的卡全部用能级序，
+  取它为 canonical 无需换代任何陈述，且里程碑 ms.critical-dimension-brst-nilpotency 才能过
+  validate.py 的「里程碑陈述只用 canonical 约定」检查。
+  **代价（记下以免日后误判）**：数学/共形侧的标准写法（FGZ 的半无穷楔形正规序、Polchinski 的共形
+  正规序）落在本卡这一侧，因而 worldsheet.bc-ghost-central-charge-lambda-two 这张**拟形式化目标卡**
+  声明的是非 canonical 约定。这不影响它的 status，也不影响任何下游 effective：
+  非 canonical 只在里程碑那一条检查上有后果，而该卡不是里程碑陈述。
+
+  【跨 family 的边怎么写】本 family 的两张卡描述的是**同一个物理对象的两种书写**，不是真分叉
+  （不像度规号差）。因此跨两者的依赖边不需要「换掉一套物理」，只需在 convention_map 里写明
+  **搬运的是哪一部分**：(m³ − m) 的系数（= c^g/12）与序无关，可以搬；m 线性项与 L^g_0 的零点
+  依赖序，不可照抄；Q_B 的写法必须序与 a^g 成对取。
+  现图中唯一这样的边是
+  worldsheet.critical-dimension-brst-v2--via-mode-computation → worldsheet.bc-ghost-central-charge-lambda-two
+  （以及旧推导 --via-nilpotency 的同名边），已写 convention_map。
+
+  【与 R1-3 的关系】本卡与 conv.ghost-normal-ordering-level 一起关闭
+  ms.critical-dimension-brst-nilpotency 第一轮审计的 R1-3（`: :` 未定义、a^g 与序的成对性在
+  canonical_text 中丢失）。逐步论证见 docs/reviews/brst-nilpotency-recompute-2026-09-12.md §2 与 §4，
+  草案见 docs/drafts/brst-normal-ordering-convention.md。
+
+  【登记】由 physics-auditor 于 2026-09-12 建立，分支 agent/auditor/brst-milestone-r2。
+  ⚠ 草案里这张卡的拟用 id 是 `conv.ghost-normal-ordering-sl2`；按 lead 派工的命名落地为
+  **`conv.ghost-normal-ordering-sl2c`**，草案文件中的旧名不再使用。

@@ -1,0 +1,103 @@
+id: conv.ghost-normal-ordering-level
+family: ghost-normal-ordering
+title: bc 鬼场正规序：能级序（相对鬼场基态 |↓⟩ = c_1|0⟩），与 a^g = −1 成对
+definition: |
+  **适用对象**：权 (λ, 1−λ) = (2, −1) 的 bc 系统的模式代数
+    {b_m, c_n} = δ_{m+n,0},  {b_m, b_n} = {c_m, c_n} = 0   (m, n ∈ Z),
+  展开 b(z) = Σ_n b_n z^{−n−2}、c(z) = Σ_n c_n z^{−n+1}。
+  本约定规定的是**记号 `: … :` 的含义**，不规定任何算符的取值，也不断言任何命题。
+
+  **(1) 排序规则**。`: X_1 … X_k :`（X_i 为上述模式）表示：把其中的**湮灭算符**全部移到右端、
+  产生算符移到左端，每交换一对模式配一个费米符号 (−1)，并扣掉由此产生的全部缩并项
+  （等价地 `: XY : = XY − ⟨XY⟩`，其中 X 湮灭、Y 产生时 ⟨XY⟩ = {X, Y}，否则 ⟨XY⟩ = 0）。
+  湮灭 / 产生的划分取
+    湮灭：b_n (n ≥ 0),  c_n (n ≥ 1);    产生：b_n (n ≤ −1),  c_n (n ≤ 0)。
+  等价刻画：湮灭算符恰是零化**鬼场基态** |↓⟩ = c_1|0⟩ 的那些模式（b_n|↓⟩ = c_n|↓⟩ = 0, n > 0，
+  且 b_0|↓⟩ = 0），其中 |0⟩ 是 SL(2,C) 不变真空。故本约定又称「相对 |↓⟩ 的产生–湮灭正规序」。
+  零模 (b_0, c_0) 的归属（此处取 b_0 湮灭、c_0 产生）**不影响**下面 (2)(3)(4) 的任何一条：
+  L^g 的和式中 q = 0 项的系数为零，Q_B 三次项中 p = q = 0 项的系数 (p − q) 也为零。
+
+  **(2) 与同 family 的 conv.ghost-normal-ordering-sl2c 的换算**。两套序只在一个缩并上不同
+  （⟨b_{−1} c_1⟩：SL(2,C) 序取 1，本约定取 0），因此对同一个书写式子
+    L^g_n = Σ_m (2n − m) : b_m c_{n−m} :   （等价写法 L^g_m = Σ_n (m − n) : b_{m+n} c_{−n} :）
+  两套序给出的算子只差一个零模常数：
+    **L^{g,level}_n = L^{g,sl2c}_n + δ_{n,0}**,  即 L′_0 = L_0 + α 中的 **α = +1**。
+  （n ≠ 0 的项里 b_m 与 c_{n−m} 的指标不互为相反数，无缩并可差。）
+
+  **(3) 中心项**。一般地，若 L′_n = L_n + α δ_{n,0}（其余不变），则
+    [L′_m, L′_{−m}] = [L_m, L_{−m}] = 2m L_0 + C(m) = 2m L′_0 + C(m) − **2mα**,
+  即把 L_0 平移 α，中心项多出一个 **m 线性项 −2mα**。取 α = +1 得：在本约定下
+    [L^{g,level}_m, L^{g,level}_n] = (m − n) L^{g,level}_{m+n} + δ_{m+n,0} [ (−26/12)(m³ − m) − 2m ],
+  **不是** conv.virasoro-standard 的纯 (m³ − m) 形式。满足纯形式的是移位后的生成元
+  L^{g,level}_n + a^g δ_{n,0}（a^g = −1，即等于 L^{g,sl2c}_n），以及总生成元
+  L_n = L^m_n + L^g_n + a^g δ_{n,0}（其中心荷为 c^m + c^g）。
+  ⇒ 同时声明本约定与 conv.virasoro-standard 的卡，其中 conv.virasoro-standard 归一化的对象是
+  **总生成元 L_n（或移位后的鬼场生成元）**，不是 L^{g,level} 自身。
+  ⇒ (m³ − m) 的系数（即 c^g/12）**与序无关**：两套序之差只改中心项中 m 的一次项，不改 m³ 的系数。
+
+  **(4) 与正规序常数 a^g 的成对性**（本约定存在的主要理由）。在
+    Q_B = Σ_n c_n L^m_{−n} + Σ_{m,n} ((m − n)/2) : c_m c_n b_{−m−n} : + a^g c_0
+  中，`: :` 的取法与 a^g 的取值是**成对**的：
+    **本约定（能级序）配 a^g = −1**；conv.ghost-normal-ordering-sl2c 配 a^g = 0；
+  两种写法给出**同一个算子 Q_B**（三次项之差恰为 −c_0，与末项 (1 + a^g) c_0 的变化相抵）。
+  因此「a^g = −1」不是一条可与序分离的独立前提，而是「取了能级序」的另一半表述；
+  只写 a^g 而不写序、或只写序而不写 a^g，都只写了一半。
+
+  **(5) 本约定不规定**：c^g 的**取值**（那是命题 worldsheet.bc-ghost-central-charge-lambda-two）；
+  物质部门的任何东西；鬼数算符的零点（那是另一件事，见 conv.superstring-ghost-number-zero）；
+  一般 λ 的正规序常数公式 a^g = ½λ(1−λ)（那是 Polchinski §2.7 的命题，不是记号约定）。
+canonical: true
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.7, p.61, eq. (2.7.19)–(2.7.21)：`L_m = Σ_n (mλ − n) °b_n c_{m−n}° + δ_{m,0} a^g`，其中 `° °` 是**产生–湮灭正规序**；(2.7.20) 与 (2.7.21) 之间的无式号正文给 `a^g = ½λ(1−λ)`（λ = 2 ⇒ a^g = −1）"
+    note: |
+      **本约定的主锚点。** 原书把 `° °`（产生–湮灭正规序）与 `: :`（共形正规序）**区分开**，并在
+      p.62 逐字写「The constant can also be obtained by working out the relation between `: :` and
+      `° °` for the CFT (exercises 2.13, 2.14).」——即原书自己承认两套序不同、其差就是那个常数。
+      `° °` 是**相对 |↓⟩** 的序这一点由原书自己的算式定住：抽取记录转录的 [2.143]
+      `L_0|↓⟩ = (−Σ_n n °b_n c_{−n}° + a^g)|↓⟩ = a^g|↓⟩`——只有当 `° °` 的湮灭算符零化 |↓⟩ 时
+      该式才成立。本卡 (1) 的显式湮灭/产生清单即由此重构。
+      式号、页码与逐字内容经 literature/extractions/polchinski-1998-v1.md §12.1（p.61 段落逐字）
+      与 §12.10 表 B（L1，原书页图核实）确认；⚠ 同处记录了两条**旧误记**：E43 曾写 `a^g = 0`、
+      并曾把 (2.7.21) 的推导路线记成态-算子同构（实为 `2L_0 = [L_1, L_{−1}]` 的 Virasoro 路线），
+      两者均已订正，本卡不沿用。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, p.132, eq. (4.3.7)（Q_B 的模式展开，闭弦形式末项 `+ a^B(c_0 + c̃_0)`，紧接一句「The ordering constant is `a^B = a^g = −1`」）与 eq. (4.3.8)（`{Q_B, b_0} = L^m_0 + L^g_0`，这是原书定出 a^g = −1 的论证）"
+    note: |
+      承载 definition (4)：原书在 Q_B 里用的正规序常数就是 §2.7 的那个 a^g，并用 (4.3.8) 把它定成 −1。
+      ⚠ 原书在该处**没有**逐字写出 `: :` 的湮灭/产生清单；本卡 (1) 的清单是本项目的重构
+      （依据见上一条 note 与 notes (A)），不是原书文字。
+notes: |
+  【建卡缘由】ms.critical-dimension-brst-nilpotency 第一轮回译审计 R1-3（physics-auditor，2026-09-12）
+  与 reviewer 复算 docs/reviews/brst-nilpotency-recompute-2026-09-12.md 的 F2：
+  worldsheet.brst-quantization-v2 与 worldsheet.bc-ghost-central-charge-lambda-two 把 L^g 写成
+  **同一个字符串**（换指标后逐字相同），但为使各自的断言为真，两卡的 `: :` 必须取**互斥**的两套序，
+  而两卡都没有定义 `: :`。草案见 docs/drafts/brst-normal-ordering-convention.md。
+
+  【为什么本卡是 canonical（lead 裁决 2026-09-12，docs/ROADMAP.md「lead 裁决（2026-09-12，BRST
+  里程碑回译 R1 后）」第 (1) 条）】图中 BRST 一侧的卡全部用能级序（brst-quantization-v2、
+  critical-dimension-brst-v2 及其两条推导、brst-charge-on-ghost-ground-state 等），
+  只有 bc-ghost-central-charge-lambda-two 在 SL(2,C) 序一侧；取能级序为 canonical
+  使得**无需换代任何陈述**，且满足「里程碑陈述只用 canonical 约定」这条硬约束
+  （validate.py 对 milestone 强制检查）。代价写在 conv.ghost-normal-ordering-sl2c 的 notes 里。
+
+  【(A) 哪些是原文、哪些是本项目的重构】
+  · 原文（L1）：`° °` 与 `: :` 是两套不同的序、其差给出常数（p.62 逐字）；(2.7.19) 的 L_m 表达式
+    含 `+ δ_{m,0} a^g`；a^g = ½λ(1−λ)；(4.3.7)/(4.3.8) 的 a^B = a^g = −1；|↓⟩、|↑⟩ 的定义 (2.7.18)。
+  · 本项目重构（**不是原文**）：(1) 中湮灭/产生的逐条清单；(2) 的 L^{g,level}_n = L^{g,sl2c}_n + δ_{n,0}；
+    (3) 的 −2mα 与 (−26/12)(m³−m) − 2m；(4) 的「能级序 ↔ a^g = −1 / SL(2,C) 序 ↔ a^g = 0 给同一个 Q_B」。
+    (3) 的 −2mα 由 physics-auditor 独立推导（里程碑 R1-3），(4) 由 reviewer 在
+    docs/reviews/brst-nilpotency-recompute-2026-09-12.md §4 逐步证明（B_sl2c − B_level = −c_0），
+    两者相互独立且一致。**凡跨本 family 的依赖边须写 convention_map。**
+
+  【(B) 本卡与 conv.virasoro-standard 不冲突】两者不同 family：前者规定 `: :` 的含义，后者规定
+  Virasoro 括号的归一化。但请注意 definition (3) 的警告：在本约定下，**鬼场生成元自身**的括号
+  带一个 −2m，只有加上 a^g δ_{n,0} 之后才落回 conv.virasoro-standard 的纯 (m³ − m) 形式。
+  这不是两条约定打架，而是「c^g 这个数属于移位后的那组生成元」。
+
+  【(C) 查重】建卡前跑过 `uv run stringgraph search 正规序` 与 `search 鬼场`：
+  graph/conventions/ 下此前没有任何算符排序约定；唯一名字相近的 conv.intercept-sign-a
+  （family `normal-ordering-constant`）是**截距记号 a 对 A 的符号约定**，与算符排序无关，不可复用。
+
+  【登记】由 physics-auditor 于 2026-09-12 建立（约定卡 schema 无 author/created 字段，故记在此处），
+  分支 agent/auditor/brst-milestone-r2。
