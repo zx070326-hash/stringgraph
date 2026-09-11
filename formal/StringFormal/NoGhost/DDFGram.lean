@@ -516,4 +516,184 @@ theorem ddf_span_pos {x : TowerFock D K} (hx : x ∈ ddfSpan η a b hη Ε) (hne
 
 end SpanPositivity
 
+/-! ### The rung grading: a DDF state of level `N` sits on rung `-N`
+
+This section closes the second half of item (3) of `worldsheet.transverse-ddf-fock-gram-matrix`,
+which `ddfLevel` above could only assert in a docstring: the DDF state `|d⟩` really does live on
+rung `-N(d)` of the momentum tower, i.e. it carries momentum `k - N(d) k_0`.
+
+The sign convention is fixed by `DDF.lean`: `towerVertex η b n K` is `towerShift D R n` composed
+with a diagonal oscillator operator, so `V^{(n)}_K` moves rung `j` to rung `j + n`, while
+`towerMode` (hence `towerModeVec`) is diagonal and moves nothing.  Therefore `A^ε_n` shifts the
+rung by `+n`, and the creation operator `A^ε_{-n}` (`n > 0`) shifts it by `-n`.  This matches
+`ddfOp_neg_one_apply_towerVacuum` of `LightCone.lean`, where `A^ε_{-1}|0;k⟩` is supported on
+rung `-1`. -/
+
+section RungGrading
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- A vector concentrated on rung `j` is the `Finsupp.single` of its `j`-th component. -/
+lemma eq_single_of_mem_towerRungSubmodule {j : ℤ} {x : TowerFock D R}
+    (hx : x ∈ towerRungSubmodule D R j) : x = Finsupp.single j (x j) := by
+  refine Finsupp.ext fun i => ?_
+  rcases eq_or_ne i j with rfl | hi
+  · rw [Finsupp.single_eq_same]
+  · rw [Finsupp.single_eq_of_ne hi, mem_towerRungSubmodule.1 hx i hi]
+
+lemma single_mem_towerRungSubmodule (j : ℤ) (P : Fock D R) :
+    Finsupp.single j P ∈ towerRungSubmodule D R j :=
+  mem_towerRungSubmodule.2 fun _ hi => Finsupp.single_eq_of_ne hi
+
+lemma towerVacuum_mem_towerRungSubmodule : towerVacuum D R ∈ towerRungSubmodule D R 0 := by
+  have h := towerVacuum_mem_towerBigrade D R
+  rw [towerBigrade_eq_inf] at h
+  exact h.1
+
+/-- **Different rungs are orthogonal**, in submodule form.  This is
+`Fock.towerPairing_single_single_of_ne` (graph node `worldsheet.momentum-tower-fock-space` (2))
+phrased for `towerRungSubmodule`, which is the form in which the DDF states are placed. -/
+theorem towerPairing_eq_zero_of_mem_towerRungSubmodule (η : Fin D → R) {i j : ℤ} (hij : i ≠ j)
+    {v w : TowerFock D R} (hv : v ∈ towerRungSubmodule D R i)
+    (hw : w ∈ towerRungSubmodule D R j) : Fock.towerPairing η v w = 0 := by
+  rw [eq_single_of_mem_towerRungSubmodule hv, eq_single_of_mem_towerRungSubmodule hw]
+  exact Fock.towerPairing_single_single_of_ne η hij _ _
+
+/-- The polarised mode `α^ε_p` is diagonal on the tower, hence preserves the rung. -/
+lemma towerModeVec_mem_towerRungSubmodule (η a b ε : Fin D → R) (p j : ℤ)
+    {x : TowerFock D R} (hx : x ∈ towerRungSubmodule D R j) :
+    towerModeVec η a b ε p x ∈ towerRungSubmodule D R j := by
+  rw [eq_single_of_mem_towerRungSubmodule hx, towerModeVec, LinearMap.sum_apply]
+  refine Submodule.sum_mem _ fun μ _ => ?_
+  rw [LinearMap.smul_apply, towerMode_single]
+  exact Submodule.smul_mem _ _ (single_mem_towerRungSubmodule _ _)
+
+variable [Algebra ℚ R]
+
+/-- The vertex operator `V^{(n)}_K = e^{i n k_0·x} ⊗ (oscillator part)` moves rung `j` to
+rung `j + n`; the shift is carried entirely by `towerShift`. -/
+lemma towerVertex_mem_towerRungSubmodule (η b : Fin D → R) (n K j : ℤ)
+    {x : TowerFock D R} (hx : x ∈ towerRungSubmodule D R j) :
+    towerVertex η b n K x ∈ towerRungSubmodule D R (j + n) := by
+  rw [eq_single_of_mem_towerRungSubmodule hx, towerVertex_single]
+  exact single_mem_towerRungSubmodule _ _
+
+lemma ddfSummand_mem_towerRungSubmodule (η a b ε : Fin D → R) (n i j : ℤ)
+    {x : TowerFock D R} (hx : x ∈ towerRungSubmodule D R j) :
+    ddfSummand η a b ε n i x ∈ towerRungSubmodule D R (j + n) := by
+  rw [ddfSummand, Module.End.mul_apply]
+  exact towerModeVec_mem_towerRungSubmodule η a b ε i (j + n)
+    (towerVertex_mem_towerRungSubmodule η b n i j hx)
+
+/-- **The DDF operator shifts the rung by its mode index**: `A^ε_n` maps rung `j` to rung
+`j + n`, i.e. momentum `k + j k_0` to `k + (j + n) k_0`.
+
+Every summand `α^ε_i V^{(n)}_i` does this for the same reason, so the statement survives the
+locally finite sum; no hypothesis beyond the ones already needed to *define* `A^ε_n` is used. -/
+theorem ddfOp_mem_towerRungSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (n j : ℤ) {x : TowerFock D R}
+    (hx : x ∈ towerRungSubmodule D R j) :
+    ddfOp η a b ε hη hεb n x ∈ towerRungSubmodule D R (j + n) := by
+  classical
+  have hs : ∀ i ∉ ddfWindow n x, ddfSummand η a b ε n i x = 0 :=
+    fun i hi => ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb n x i hi
+  rw [ddfOp_apply η a b ε hη hεb n x hs]
+  exact Submodule.sum_mem _ fun i _ => ddfSummand_mem_towerRungSubmodule η a b ε n i j hx
+
+end RungGrading
+
+section DDFRung
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {ι : Type*} [DecidableEq ι]
+variable {η a b : Fin D → R} {ε : ι → Fin D → R}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (hεb : ∀ i, dotVec η (ε i) b = 0)
+variable (horth : ∀ i j : ι, dotVec η (ε i) (ε j) = if i = j then 1 else 0)
+
+omit [DecidableEq ι] in
+/-- Adjoining one creation operator `A^{ε_i}_{-n}` raises the DDF level by `n`. -/
+theorem ddfLevel_add_single (d : (ι × ℕ+) →₀ ℕ) (v : ι × ℕ+) :
+    ddfLevel (d + Finsupp.single v 1) = ddfLevel d + (v.2 : ℕ) := by
+  classical
+  have hsplit := Finsupp.sum_add_index' (f := d) (g := Finsupp.single v 1)
+    (h := fun (u : ι × ℕ+) (k : ℕ) => (u.2 : ℕ) * k) (fun u => mul_zero (u.2 : ℕ))
+    (fun u k₁ k₂ => mul_add (u.2 : ℕ) k₁ k₂)
+  rw [ddfLevel, ddfLevel, hsplit,
+    Finsupp.sum_single_index (a := v) (b := 1)
+      (h := fun (u : ι × ℕ+) (k : ℕ) => (u.2 : ℕ) * k) (mul_zero (v.2 : ℕ)), mul_one]
+
+/-- **A DDF state of level `N(d)` lives on rung `-N(d)`** — the second half of item (3) of
+`worldsheet.transverse-ddf-fock-gram-matrix`, i.e. the DDF state carries momentum
+`k - N(d) k_0`.
+
+Induction on the occupation function: the vacuum sits on rung `0`
+(`towerVacuum_mem_towerRungSubmodule`) and each creation operator `A^{ε_i}_{-n}` lowers the rung
+by `n` (`ddfOp_mem_towerRungSubmodule`).  Combined with `ddfMonomial_mem_towerPhysSubmodule` and
+`massShell_of_mem_towerBigrade` this is what ties a DDF state to a definite mass level. -/
+theorem ddfMonomial_mem_towerRungSubmodule (d : (ι × ℕ+) →₀ ℕ) :
+    ddfMonomial hη hbb hba hεb horth d ∈ towerRungSubmodule D R (-(ddfLevel d : ℤ)) := by
+  classical
+  induction d using finsupp_addSingle_induction with
+  | h0 =>
+    rw [ddfMonomial_zero, ddfLevel_zero, Nat.cast_zero, neg_zero]
+    exact towerVacuum_mem_towerRungSubmodule
+  | hstep d v ih =>
+    have hidx : (-((ddfLevel d + (v.2 : ℕ) : ℕ) : ℤ))
+        = -(ddfLevel d : ℤ) + -(((v.2 : ℕ) : ℤ)) := by push_cast; ring
+    rw [ddfMonomial_add_single, ddfLevel_add_single, hidx]
+    exact ddfOp_mem_towerRungSubmodule η a b (ε v.1) hη (hεb v.1) (-((v.2 : ℕ) : ℤ)) _ ih
+
+/-- **"Orthogonal by level" is "orthogonal by rung".**  A second proof of
+`ddf_gram_of_level_ne`, this time *not* through `d ≠ e` and the diagonality of the Gram matrix,
+but through the geometric fact that distinct rungs of the momentum tower are orthogonal
+(`towerPairing_eq_zero_of_mem_towerRungSubmodule`).  The two proofs agree because the rung of a
+DDF state is exactly minus its level.
+
+Mathematically this version is the stronger statement: it needs neither the orthonormality of
+the frame nor the Heisenberg recursion, only momentum conservation. -/
+theorem ddf_gram_of_level_ne_of_rung {d e : (ι × ℕ+) →₀ ℕ} (hde : ddfLevel d ≠ ddfLevel e) :
+    Fock.towerPairing η (ddfMonomial hη hbb hba hεb horth d)
+      (ddfMonomial hη hbb hba hεb horth e) = 0 :=
+  towerPairing_eq_zero_of_mem_towerRungSubmodule η
+    (fun h => hde (by exact_mod_cast neg_injective h))
+    (ddfMonomial_mem_towerRungSubmodule hη hbb hba hεb horth d)
+    (ddfMonomial_mem_towerRungSubmodule hη hbb hba hεb horth e)
+
+end DDFRung
+
+section FrameRung
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+variable {η a b : Fin D → R}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (Ε : TransverseFrame η b)
+
+/-- **`frameMonomial d` sits on rung `-N(d)`** — the bundled-frame form of
+`ddfMonomial_mem_towerRungSubmodule`. -/
+theorem frameMonomial_mem_towerRungSubmodule (d : (Fin (D - 2) × ℕ+) →₀ ℕ) :
+    frameMonomial hη hbb hba Ε d ∈ towerRungSubmodule D R (-(ddfLevel d : ℤ)) :=
+  ddfMonomial_mem_towerRungSubmodule hη hbb hba Ε.transverse Ε.orthonormal d
+
+include hbb hba in
+/-- **`ddfSpan` is the sum of its rung components.**  Every generator of `ddfSpan` is
+homogeneous for the rung grading, so the span is generated by its homogeneous parts; only
+nonpositive rungs `-N` (`N : ℕ`) occur, because DDF creation operators only lower the rung.
+
+This is the decomposition that makes `ddf_gram_diagonal` a statement about a *block diagonal*
+Gram matrix: distinct blocks are orthogonal by
+`towerPairing_eq_zero_of_mem_towerRungSubmodule`, and each block becomes finite-dimensional once
+the mass shell is imposed (`towerBigrade_finite`, `massShell_of_mem_towerBigrade`). -/
+theorem ddfSpan_eq_iSup_rung :
+    ddfSpan η a b hη Ε = ⨆ N : ℕ, ddfSpan η a b hη Ε ⊓ towerRungSubmodule D R (-(N : ℤ)) := by
+  classical
+  refine le_antisymm ?_ (iSup_le fun _ => inf_le_left)
+  conv_lhs => rw [ddfSpan_eq_span_range_frameMonomial hη hbb hba Ε]
+  refine Submodule.span_le.2 ?_
+  rintro x ⟨d, rfl⟩
+  exact Submodule.mem_iSup_of_mem (ddfLevel d)
+    ⟨frameMonomial_mem_ddfSpan hη hbb hba Ε d,
+      frameMonomial_mem_towerRungSubmodule hη hbb hba Ε d⟩
+
+end FrameRung
+
 end StringFormal.NoGhost
