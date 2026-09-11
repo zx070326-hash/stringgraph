@@ -52,3 +52,7 @@ import StringFormal.NoGhost.TowerNull
 import StringFormal.NoGhost.HeisenbergGram
 import StringFormal.NoGhost.LightCone
 import StringFormal.NoGhost.WitnessInt
+<<<<<<< HEAD
+=======
+import StringFormal.NoGhost.DDFGram
+>>>>>>> agent/formalizer/noghost-c4
