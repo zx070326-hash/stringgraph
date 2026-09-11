@@ -83,12 +83,18 @@ notes: |
   不依赖 PBW，已形式化。本卡的 (a) 只需要后者：它说明**Gram 判据不能反用**，
   这一点即使不知道那两个向量是否独立也成立（det = 0 时判据单纯地不给信息）。
 
-  【与 Mathlib 的关系】GenericIndependence.lean 文件头自述：Mathlib v4.33.1 只有
-  实/复内积空间版本 `Matrix.linearIndependent_of_det_gram_ne_zero`，没有一般交换环 +
-  一般双线性型的版本，故此处从头证。⚠ **这条比较是 formalizer 在文件头的自述，
-  curator 未独立核对 Mathlib**（核对方式：在 formal/ 下 grep 该名字）。
-  若日后发现 Mathlib 已有等价声明，应把本卡的 source 改指 Mathlib 并在此登记，
-  但陈述不必改（它比内积空间版更一般）。
+  【与 Mathlib 的关系（curator 已独立核对，2026-09-11）】GenericIndependence.lean 文件头自述
+  「Mathlib 只有实/复内积空间版本」。**核对结果：自述准确**。
+  `Matrix.linearIndependent_of_det_gram_ne_zero` 确实存在，位于
+  `Mathlib/Analysis/InnerProductSpace/GramMatrix.lean:100`（Mathlib v4.33.1，本仓库
+  formal/.lake 内），但它的假设远强于本卡：
+    · 基域 `𝕜` 必须是 `RCLike`（即 ℝ 或 ℂ），不是任意交换整环；
+    · `E` 必须是 `𝕜` 上的（半）内积空间，Gram 矩阵由**内积**而非任意双线性型给出；
+    · 其证明路线是 `linearIndependent_of_posDef_gram ∘ posSemidef_gram.posDef_iff_det_ne_zero`，
+      即经过**半正定性**——这条路在没有序、没有共轭的一般交换环上根本不存在。
+  ⇒ 本卡的陈述严格更一般，Mathlib 版本是它在 RCLike 内积情形的特例（但两者证明不同：
+  Mathlib 走正定性，本卡走「整环上 det ≠ 0 的矩阵左零化子为零」）。
+  下游用得上的恰是一般版：Virasoro 的逆变型既不是内积，基环也只假设是 ℚ-代数/整环。
 
   【本卡不声明 uses_conventions】陈述里没有任何物理量：无度规、无 α'、无截距。
   Gram 矩阵的下标顺序 (i,j) ↦ B(v_i, v_j) 在 B 不对称时有意义，
