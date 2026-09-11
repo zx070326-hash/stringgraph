@@ -20,7 +20,7 @@ statement: |
   该步不是本命题的产物，也不写进本命题的陈述；它作为 BRST 路线与 Weyl 反常路线的
   **公共输入**记在汇总卡片 worldsheet.critical-dimension-bosonic-v2 及其推导
   --via-four-routes 上。
-uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
+uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus, conv.ghost-normal-ordering-level]
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3，**结论式 eq. (4.3.9)**（逐字「{Q_B, Q_B} = 0 only if c^m = 26」）；(4.3.10) 是 j_B j_B 的 OPE，原书由其单极点得「{Q_B,Q_B} = 0 when c^m = 26」；模式展开与 a^B = a^g = −1 见 (4.3.7)/(4.3.8)；最短推导用 Jacobi 恒等式，是习题 4.3（式号与内容 2026-09-11 经原书核实，抽取记录 polchinski-1998-v1.md §12.3 / §12.10 表 B 第 11 行）"
@@ -148,5 +148,19 @@ notes: |
       复算文档 §4 表明 a^g 与序是**成对**的（能级序配 a^g = −1，SL(2,C) 序配 a^g = 0，两者给出同一个 Q_B），
       所以只写 a^g = −1 而不写序等于只写了一半。v3 时把序写明，或引用待建的鬼场正规序 conv. 卡
       （草案 docs/drafts/brst-normal-ordering-convention.md）。
+  **【2026-09-12 physics-auditor：补声明 conv.ghost-normal-ordering-level；statement 正文一字未动】**
+  本卡 statement 里的「(m³ − m) 的形式来自把 a^g = −1 吸收进 L_0」一句，其精确内容是
+  **正规序取能级序**（相对鬼场基态 |↓⟩ = c_1|0⟩），且 a^g = −1 与该序**成对**：
+  换成 SL(2,C) 序时配 a^g = 0，两种写法给出同一个 Q_B，故本卡的公式与 ⟺ 在两种写法下同时成立，
+  但**不得**把序与 a^g 拆开混搭（SL(2,C) 序配 a^g = −1 得到的算子对任何 c^m 都不幂零）。
+  新卡 conv.ghost-normal-ordering-level（canonical: true，family `ghost-normal-ordering`）把这件事写死。
+  本次只加 `uses_conventions` 的一项与本条 notes，**statement、id、status、sources 全未动**，不构成换代
+  （先例：commit 5fdda19 对 swampland.heterotic-t6-substates-below-extremality 的同型处理）。
+  ⚠ 与之相关的一条**记账**：本卡的 `--via-mode-computation` 与 `--via-nilpotency` 两条推导都依赖
+  worldsheet.bc-ghost-central-charge-lambda-two，而后者声明的是同 family 的非 canonical 成员
+  conv.ghost-normal-ordering-sl2c；两条边已各写 `convention_map`，写明**跨边搬运的只有
+  (m³ − m) 的系数（= c^g/12 = −26/12），该系数与序无关**，m 线性项与 L^g_0 的零点不可照抄。
+  来由：ms.critical-dimension-brst-nilpotency 回译审计 R1-3；lead 裁决见 docs/ROADMAP.md
+  「lead 裁决（2026-09-12，BRST 里程碑回译 R1 后）」第 (1) 条。
 author: curator
 created: "2026-09-11"
