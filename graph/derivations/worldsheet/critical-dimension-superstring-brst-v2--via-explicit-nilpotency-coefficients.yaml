@@ -56,7 +56,7 @@ sources:
       ★ **这是文献中唯一带「iff」的编号陈述**，即本卡"当且仅当"的唯一编号来源。
       ⚠⚠ **但 LZ 自己不证它**：证明外包给 [13] 与 [15]，其中
       ohta-1986 正文本项目未取得（L0，且其摘要只写 ⟹ 'are shown to follow from'），
-      Terao–Uehara PLB 168B **本项目 bib 未登记**。
+      terao-uehara-1986 **已登记但正文同样未取得（L0，仅 INSPIRE 摘要，方向也只有 'determines' ⟹）**。
       ⇒ 「iff」这个措辞的可追溯性止于 LZ 的陈述本身；其证明的可追溯性止于
       IMNU (3.8)(3.9) 的显式公式（本条上面那个 source）。
       ⚠ LZ 的中心荷归一化是 c/8，其 D = 10 对应本图 c^m = 15；LZ 的 Prop 1.2 给鬼表示
@@ -72,6 +72,18 @@ sources:
       （IMNU 的同型结果是 α₀^NS = 1/2、α₀^R = 0，(3.10)，L1）。
       ⚠ Ohta 是 lian-zuckerman-1989 Proposition 1.7(ii) 证明的外包对象之一，
       故这条 source 与上面那条 LZ source 是同一条链的两端。
+  - ref: terao-uehara-1986
+    loc: "全文；摘要（INSPIRE，L1 逐字；正文未获取，L0）。摘要逐字：'We give BRS charges of the Neveu-Schwarz-Ramond model. Nilpotency of the BRS charges determines critical dimension and leading zero-intercepts simultaneously.'"
+    note: |
+      **正文未取得（L0）**（literature/sources.bib 条目，researcher 2026-09-11 登记；
+      extractions/math-sources.md §51）；**loc 不得写页码或式号**。
+      lian-zuckerman-1989 Proposition 1.7(ii) 证明外包的另一个对象（[15]），与 ohta-1986 并列。
+      ⚠ 三条限定（全部来自摘要逐字）：
+        (a) 方向是 'determines'（⟹），**不是 iff**——本卡「⟺」的 ⟸ 方向仍无来源明写；
+        (b) 摘要**不出现数字 10、1/2、0**——具体值只能挂 IMNU (3.8)–(3.10)；
+        (c) 摘要谈的是**平坦 NSR 模型**的 BRS 荷幂零性，不涉及一般 SCFT，
+            故对本卡陈述的一般形式同样只是特例证据（见 gaps 首条）。
+      ⚠ 作者 Uehara 与 ito-morozumi-nojiri-uehara-1986 是同一人 ⇒ 不是独立于 IMNU 的第二条链。
   - ref: polchinski-1998-v2
     loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字见目标卡片 sources）"
     note: |
@@ -118,7 +130,7 @@ summary: |
   (2) 本卡陈述的范围比本推导覆盖的**更广**：陈述允许把若干 X^μψ^μ 换成**任意**正范数 SCFT，
       IMNU 只算平坦 D 个 X^μψ^μ（见 gaps）；
   (3) 「⟺」的编号来源（lian-zuckerman-1989 Prop 1.7(ii)）**自己不证**，
-      外包给 ohta-1986（正文未取得）与 Terao–Uehara（bib 未登记）。
+      外包给 ohta-1986 与 terao-uehara-1986（两者正文都未取得，L0）。
   ⇒ 即使把 v2 的陈述收窄到平坦情形，本推导也只能给到 physical-argument；
   在一般形式下它是 conjecture。它的价值是把"按同样的步骤（习题）"换成可逐系数核对的
   显式公式，并把 ⟹ / ⟸ 两个方向的证据分开记清。
@@ -139,10 +151,12 @@ gaps:
     ⇒ 与玻色弦一侧完全同型（worldsheet.critical-dimension-brst-v2--via-nilpotency 的
     同名 gap：KO 摘要只给 ⟹）。本图对超弦一侧也**不拆**这个 iff，理由同那条。
   - |
-    ★ **Terao–Uehara, Phys. Lett. 168B (1986) 70 尚未登记到 literature/sources.bib。**
+    ★ **Terao–Uehara, Phys. Lett. 168B (1986) 70 已登记为 terao-uehara-1986（researcher 2026-09-11），
+    但正文 L0，只有 INSPIRE 摘要。**
     它是 lian-zuckerman-1989 Proposition 1.7(ii) 与 (x)(xi) 证明外包的两个对象之一
     （另一个是 ohta-1986），也是 GSO 推广（LZ p.329 Remark 的 "G-parity"）的提出者之一。
-    **已列入报告交 researcher/lead。** 在登记并取得之前，「iff」的证明链有一段不可核对。
+    摘要方向是 'determines'（⟹），不给数值。在取得正文之前，「iff」的证明链仍有一段不可核对；
+    且 Uehara 同为 IMNU 作者，即使取得也不算独立于 IMNU 的复核。正文获取待 researcher。
   - |
     **系数逐个为零这一步的前提（模在 Fock 空间上线性无关 / 忠实性）IMNU 未声明。**
     与玻色弦一侧 worldsheet.critical-dimension-brst-v2 把它写进陈述（"诸 c_{−m}c_m 在 V 上

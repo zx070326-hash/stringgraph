@@ -40,6 +40,9 @@ statement: |
   (d) 任何关于 `A` 的像（image）或 Smith 标准型的断言（见 notes：已复算但不作为断言）。
 uses_conventions:
   - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.iib_rank_eq_two
+  lean_file: StringFormal/Math/IIBAnomalyUnique.lean
 sources:
   - ref: bilal-2008
     loc: "§12.2「Type IIB supergravity in ten dimensions」, **(12.4)(12.5)**，印刷 p.97 = PDF p.100（v1）。(12.4) 的三个整数组逐字为 `(−495 n_{3/2} + n_{1/2} + 992 n_A)/5670`、`(225 n_{3/2} + n_{1/2} − 448 n_A)/4320`、`(−63 n_{3/2} + n_{1/2} + 128 n_A)/10368`；(12.5) 逐字 `n_{3/2} = 2 n_A , n_{1/2} = −2 n_A`"
@@ -95,6 +98,18 @@ notes: |
   (i) 与 (iii) 是 `decide` / `omega` 级；(ii) 需要一行秩计算（`Matrix.rank` 或直接给
   两个线性无关行 + (i) 的关系）。**A8 只验证了 `(2, −2, 1)` 使三式为零，没有排除别的解**；
   本卡的 (ii) 是新增的那一半。
+  ⚠ **上一句的「A8 没有排除别的解」是建卡时的旧说法，已过时**（curator 2026-09-11 接线时订正）：
+  A8 的 `iib_gravitational_anomaly_solutions` 本来就是 ℤ 上的 iff
+  （三式 ↔ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A），别的解早已被它排除；
+  A8′ 相对 A8 的新增是 **(i) 的显式关系、(ii) 的秩与 det、以及矩阵/子模形式**，不是唯一性本身。
+
+  【★ A8′ 已形式化（2026-09-11）】`formal/StringFormal/Math/IIBAnomalyUnique.lean`，10 条声明，
+  推导见 `consistency.iib-anomaly-solution-unique--via-lean`（formalized）。
+  `formal.lean_decl` 取 `iib_rank_eq_two`（(ii) 的 ℚ 秩），它的证明经由
+  `iib_ker_mulVecLin`（(iii) 的 ℚ 核）；(i) 是 `iib_rows_relation`，(iii) 的 ℤ 版是
+  `iib_kernel_eq_int`。**Lean 只担保 (ii) 的 `rank_ℚ A = 2` 一句，statement 里
+  「等价地，在任何特征零的域上秩为 2」的全称版本未写进 Lean**（见该推导 gaps）。
+  纸上的 `--via-linear-algebra` 保留，两条推导独立。
 
   【查重】`uv run stringgraph search IIB / 反常多项式` 命中
   consistency.iib-gravitational-anomaly-cancels（本卡的 (iii) 即它的矩阵重述，

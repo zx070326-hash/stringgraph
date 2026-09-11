@@ -1,0 +1,125 @@
+id: consistency.iib-anomaly-solution-unique--via-lean
+target: consistency.iib-anomaly-solution-unique
+kind: proof
+status: formalized
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      与 consistency.iib-gravitational-anomaly-cancels--via-lean 同样处理：本卡只用到该约定的
+      **引力一路**（tr R^{2k} 是切空间 10 × 10 矩阵的迹，楔号省略；IIB 无规范场，Tr/tr 的
+      规范侧区分不出现）。三行整数 `(−495, 1, 992)`、`(225, 1, −448)`、`(−63, 1, 128)`
+      是在这套归一化下抄出的，并被写死在 Lean 的 `iibAnomalyMatrix` 里，故这条约定依赖必须留在图里。
+      ⚠ **为什么 depends_on 里没有 consistency.iib-gravitational-anomaly-cancels**：
+      纸上的 `--via-linear-algebra` 向那张卡索取 (iii)，但 Lean 侧把 (i)(ii)(iii) 在
+      `IIBAnomalyUnique.lean` 内**独立重证**（该文件只 import Mathlib，**不** import
+      `AnomalyPolynomial.lean`，不从 A8 借任何定理）。对那张卡只剩「三行系数抄自何处」的
+      **来源**关系，那属于 sources 而非 depends_on——与 `iib-gravitational-anomaly-cancels--via-lean`
+      本身只挂这一条约定、不挂图内命题的做法一致（formal/TODO.md A8′「给图的两条提醒」(a)）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/IIBAnomalyUnique.lean :: StringFormal.Math.{iibAnomalyMatrix, iibSolutionVector, iib_rows_relation, iib_det_zero, iib_minor_01_01_det, iib_mulVec_apply, iib_mulVec_eq_zero_iff, iib_kernel_eq, iib_kernel_eq_int, iibSolutionVector_ne_zero, iib_ker_mulVecLin, iib_rank_eq_two}"
+    note: |
+      本仓库，Lean 4 + Mathlib，独立小岛（只 import Mathlib），无 sorry。
+      两个定义 + 十条声明与目标 (i)(ii)(iii) 的对应（`R` 为任意 `CommRing`）：
+        · `iibAnomalyMatrix (R) : Matrix (Fin 3) (Fin 3) R := !![-495, 1, 992; 225, 1, -448; -63, 1, 128]`
+          —— 目标设定里的 `A`，行序 = 单项序、列序 = `(n_{3/2}, n_{1/2}, n_A)`；
+        · `iibSolutionVector (R) : Fin 3 → R := ![2, -2, 1]` —— IIB 含量 `(2, −2, 1)`；
+        · **(i)** `iib_rows_relation (R) : (2:R) • A 0 + (3:R) • A 1 - (5:R) • A 2 = 0`
+          —— 就是 `2r₁ + 3r₂ − 5r₃ = 0`，**对任意交换环成立**；
+        · **(ii)** `iib_det_zero (R) : (iibAnomalyMatrix R).det = 0`（任意交换环）；
+          `iib_minor_01_01_det (R) : A 0 0 * A 1 1 - A 0 1 * A 1 0 = -720`（任意交换环，见证子式）；
+          `iib_rank_eq_two : (iibAnomalyMatrix ℚ).rank = 2` —— **`formal.lean_decl` 取这条**，
+          它是目标 (ii) 的 `rank_ℚ A = 2` 一句；
+        · **(iii)** `iib_kernel_eq (x : Fin 3 → ℚ) : A *ᵥ x = 0 ↔ ∃ t : ℚ, x = t • ![2,-2,1]`
+          —— `ker_ℚ A = span_ℚ{(2, −2, 1)}` 的逐元素形式；
+          `iib_ker_mulVecLin : LinearMap.ker (iibAnomalyMatrix ℚ).mulVecLin = Submodule.span ℚ {iibSolutionVector ℚ}`
+          —— 同一句的子模等式形式；
+          `iib_kernel_eq_int (x : Fin 3 → ℤ) : A *ᵥ x = 0 ↔ ∃ t : ℤ, x = t • ![2,-2,1]`
+          —— **`ker_ℤ A = ℤ · (2, −2, 1)`**，即目标加粗的整数唯一性；
+        · 辅助：`iib_mulVec_apply`（`A *ᵥ x` 的显式三分量）、`iib_mulVec_eq_zero_iff`
+          （`A *ᵥ x = 0` ↔ Bilal (12.4) 的三条标量方程，任意交换环）、`iibSolutionVector_ne_zero`。
+      formal/TODO.md「A8′」记 **已完成（2026-09-11）**，「公理检查：10 条声明全部 ok，
+      只有 propext / Classical.choice / Quot.sound」。
+  - ref: bilal-2008
+    loc: "§12.2, (12.4)(12.5)，印刷 p.97 = PDF p.100（v1）"
+    note: |
+      被机检的三行整数系数的文献出处之一（L1，逐系数与 Lean 的 `iibAnomalyMatrix` 一致）。
+      原文只说 "the 3 equations are not linearly independent"，**不给线性关系、不给秩、不说唯一**
+      ——这三样正是 Lean 文件补出的。前提「无规范群」（§12.2 开头逐字 "We assume here that
+      there is *no gauge group*"）由这三行的选取承载，Lean 不重述。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 98, (12.2.11)（取 n = 1、三个规范迹为零）(12.2.12)(12.2.13)(12.2.14)"
+    note: |
+      三行系数的独立第二来源（L1；两书归一化相同、系数逐项相同，researcher 逐系数复算 10/10）。
+      原书只说 "the coefficients of these conspire to produce zero"，且 "three conditions /
+      three free parameters, barring a numerical coincidence" 的记账把独立条件数说成 3——
+      `iib_rank_eq_two` 正是对这个记账的机检修正（秩 2）。
+summary: |
+  全部在 formal/StringFormal/Math/IIBAnomalyUnique.lean 内完成，只 import Mathlib，
+  与 AnomalyPolynomial.lean（A8）互不 import，三部分：
+
+  **(i) 显式线性关系**：`iib_rows_relation` 对 `Fin 3` 逐分量 `fin_cases` + `simp` + `ring`，
+  在任意交换环上得 `2·row₀ + 3·row₁ − 5·row₂ = 0`。
+
+  **(ii) 秩与行列式**：`iib_det_zero` 用 `Matrix.det_fin_three` 展开后 `ring`；
+  `iib_minor_01_01_det` 直接算出左上 2×2 子式 = −720；两者都在任意交换环上。
+  `iib_rank_eq_two`（ℚ）**走秩–零化度而不是子式**：先由 (iii) 的 `iib_ker_mulVecLin`
+  得 `finrank ker = 1`（`finrank_span_singleton`，需 `iibSolutionVector_ne_zero`），
+  再由 `LinearMap.finrank_range_add_finrank_ker` 与 `finrank ℚ (Fin 3 → ℚ) = 3` 用 `omega` 得
+  `rank = 2`。
+
+  **(iii) 核**：`iib_mulVec_eq_zero_iff` 把 `A *ᵥ x = 0` 拆成 Bilal (12.4) 的三条标量方程；
+  `iib_kernel_eq`（ℚ，`linarith`）与 `iib_kernel_eq_int`（ℤ，`omega`）各自证
+  「三式 ↔ ∃ t, x = t • (2, −2, 1)」——`→` 方向由前两行解出 `x₀ = 2x₂`、`x₁ = −2x₂`，
+  第三行由 (i) 自动；`←` 方向代入 `simp; ring`。`iib_ker_mulVecLin` 把 ℚ 版改写成
+  `ker (mulVecLin A) = span {(2, −2, 1)}`。
+
+  **本推导只证代数**：「这三行是相应手征场的引力反常系数」「IIB 谱是 (2, −2, 1)」
+  「无规范群」一概不在其中，与目标卡「本卡不断言」(a)–(d) 一致。
+gaps:
+  - |
+    ★ **目标 (ii) 的「等价地，在任何特征零的域上秩为 2」一句超出 Lean 担保。**
+    `iib_rank_eq_two` 只证 `(iibAnomalyMatrix ℚ).rank = 2`；`iib_kernel_eq` / `iib_ker_mulVecLin`
+    也只在 ℚ 上。推广到任意特征零域（乃至任何 `720 ≠ 0` 的域）是同一秩–零化度论证
+    （只用到 `720 ≠ 0`，见 `iib_minor_01_01_det` 的 docstring），但**未写进 Lean**；
+    `formal.lean_decl` 只担保 ℚ 那一句。若日后要担保全称版本，需再加一条
+    `[Field K] [CharZero K]`（或 `NeZero (720 : K)`）的定理（formal/TODO.md A8′ 提醒 (b)）。
+  - |
+    **物理全部在外**：三行系数来自 Alvarez-Gaumé–Witten 的指标定理，两本书都只引用不重做
+    （Polchinski 逐字 "we will not repeat it here but just quote the result"；Bilal (12.1)–(12.3)
+    由 (11.45)–(11.48) 特化而来，后者系数未逐步推导）。本推导的严格性只到「给定这三行整数」之后，
+    与 `--via-linear-algebra` 的同名 gap 相同。
+  - |
+    **「(2, −2, 1) 本原（gcd = 1）」这句话没有单独的 Lean 定理。** 目标 (iii) 把它写成
+    `ker_ℤ A = ℤ · (2, −2, 1)` 的理由；Lean 直接证了 `iib_kernel_eq_int`（结论本身），
+    绕过了「本原 ⇒ 整数核 = 整数倍」这一步的一般论证，故 gcd = 1 这条中间事实未被机检
+    （它也不是目标的断言，只是括号里的理由）。
+  - |
+    **Smith 标准型 (1, 144, 0) 不在 Lean 内**，与目标卡「本卡不断言」(d) 一致，仅作记账。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **公理检查记录**：formalizer 2026-09-11 在其分支 agent/formalizer/iib-unique 上跑
+  `uv run stringgraph check-axioms`，记入 formal/TODO.md A8′「公理检查：10 条声明全部 ok，
+  只有 propext / Classical.choice / Quot.sound」（总线消息 #917 同述 "10 decls, no sorry, axioms
+  clean"）。该分支已于 6ac646a 合入 main。**本接线 worktree 无 .lake 构建产物，curator 未在本分支
+  重跑 check-axioms**；按根 CLAUDE.md，lead 合并前统一跑。本分支未改动 formal/ 下任何文件。
+
+  **比目标卡强的三处（Lean 侧给的比卡片断言的多）**：
+    (i) `iib_rows_relation` 对**任意交换环**成立，卡片只在 ℤ 上写；
+    det：`iib_det_zero` 对任意交换环成立，卡片只作为 (ii) 的附带在 ℚ 上写；
+    子式：`iib_minor_01_01_det = −720` 对任意交换环成立，卡片只在 `--via-linear-algebra` 的
+    reviewer 记录里提到，statement 未写。
+  这三处**不**要求改卡：卡片断言的是 Lean 结论的特例，方向正确；反方向的缺口只有 gaps 首条。
+
+  **与 A8 的关系（订正一个旧说法）**：目标卡 notes 与 formal/TODO.md 早先写「A8 只验证了
+  (2, −2, 1) 使三式为零，没有排除别的解」——这不准确：A8 的 `iib_gravitational_anomaly_solutions`
+  本来就是 ℤ 上的 iff，别的解早已被它排除。A8′ 相对 A8 **真正新增**的是 (i) 的显式关系、
+  (ii) 的秩与 det、以及矩阵/子模形式（`Matrix.rank`、`LinearMap.ker`）。
+  两个 Lean 文件互不 import，故本推导与 `iib-gravitational-anomaly-cancels--via-lean` 是
+  两条独立的形式化，不是一条借另一条。
+
+  纸上的 `--via-linear-algebra`（rigorous，reviewer-verified）保留不动；本推导按本图惯例单列。
+author: curator
+created: "2026-09-11"

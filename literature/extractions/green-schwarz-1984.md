@@ -762,6 +762,8 @@ Bilal 逐字说 "the 3 equations are **not linearly independent**"，**但没有
 
 **这比 `polchinski-1998-v2-ch12.md` §5.4 的 Lean 岛候选 A8 强**：A8 只验证了 `(2,−2,1)` 这一个向量使三式为零，**没有排除别的解**。
 
+> **更正（curator 2026-09-11，A8′ 接线时）**：上一句对 A8 的描述是按 §5.4 的**候选**写法（三条整数恒等式）说的，与已落地的 Lean 不符——`AnomalyPolynomial.lean` 的 `iib_gravitational_anomaly_solutions (a b c : ℤ)` 本来就是 ℤ 上的 **iff**（三式 ↔ `a = 2c ∧ b = −2c`，`omega`），别的解早已被它排除。A8′（`IIBAnomalyUnique.lean`，已形式化，图侧 `consistency.iib-anomaly-solution-unique--via-lean`）相对 A8 **真正新增**的是 (i) 的显式关系 `iib_rows_relation`、(ii) 的秩 `iib_rank_eq_two` 与 `iib_det_zero` / 见证子式 `iib_minor_01_01_det`，以及矩阵/子模形式（`iib_ker_mulVecLin`）；(iii) 在其中以 `iib_kernel_eq` / `iib_kernel_eq_int` 独立重证，不从 A8 借。
+
 **⇒ 建议把 A8 升级为 A8′**：
 > **A8′ —— IIB 引力反常抵消的完整线性代数**
 > 设 `A ∈ M₃(ℤ)` 的行为 `(−495, 1, 992)`、`(225, 1, −448)`、`(−63, 1, 128)`。则
