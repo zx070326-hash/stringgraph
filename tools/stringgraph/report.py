@@ -122,6 +122,11 @@ def full_report(g: Graph, open_only: bool = False) -> dict:
     for sid, st in g.statements.items():
         if effs[sid].name == "formalized" or st.superseded_by:
             continue
+        # A card whose formalization has been ruled out (e.g. it asserts more than any
+        # planned Lean statement can carry, and a narrower formalized card already exists)
+        # opts out with this tag so the list stops attracting wiring attempts.
+        if "formalization-ruled-out" in st.tags:
+            continue
         if st.kind == "proposition":
             d = g.derivations.get(effs[sid].best_derivation) if effs[sid].best_derivation else None
             if d is None:
@@ -193,7 +198,7 @@ def format_report(rep: dict) -> str:
         lines.append("")
     lines.append(f"open propositions ({len(rep['open_propositions'])}):")
     lines += [f"  {x}" for x in rep["open_propositions"]]
-    lines.append(f"formalization frontier ({len(rep['formalization_frontier'])}, all deps formalized, self not):")
+    lines.append(f"formalization frontier ({len(rep['formalization_frontier'])}, all deps formalized, self not; a candidate list, not a to-do — cards tagged formalization-ruled-out are hidden):")
     lines += [f"  {x}" for x in rep["formalization_frontier"]]
     lines.append(f"superseded ({len(rep['superseded'])}):")
     lines += [f"  {x}" for x in rep["superseded"]]

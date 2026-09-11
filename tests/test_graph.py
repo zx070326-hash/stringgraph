@@ -1292,3 +1292,40 @@ def test_validate_errors_when_dep_is_superseded_proposition_without_derivation(m
     g = load_graph(mini)
     errs = [p.message for p in validate(g) if p.severity == "error"]
     assert any("has no derivation left" in m and "worldsheet.old-prop" in m for m in errs)
+
+
+def test_report_frontier_hides_ruled_out_cards(mini: Path) -> None:
+    """A card tagged `formalization-ruled-out` (lead ruling recorded in its notes) is not listed
+    on the formalization frontier, even if all its deps are formalized."""
+    _write(mini, "graph/statements/worldsheet/def-a.yaml", """
+        id: worldsheet.def-a
+        kind: definition
+        status: formalized
+        title: a
+        statement: a
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        formal: {lean_decl: X.a, lean_file: StringFormal/X.lean}
+        """)
+    (mini / "formal" / "StringFormal").mkdir(parents=True, exist_ok=True)
+    (mini / "formal" / "StringFormal" / "X.lean").write_text("-- stub", encoding="utf-8")
+    _write(mini, "graph/statements/worldsheet/prop-b.yaml", """
+        id: worldsheet.prop-b
+        kind: proposition
+        title: b
+        statement: b
+        tags: [formalization-ruled-out]
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/derivations/worldsheet/prop-b--via-x.yaml", """
+        id: worldsheet.prop-b--via-x
+        target: worldsheet.prop-b
+        kind: proof
+        status: rigorous
+        summary: s
+        depends_on: [{id: worldsheet.def-a}]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    rep = full_report(load_graph(mini))
+    assert "worldsheet.prop-b" not in rep["formalization_frontier"]

@@ -77,3 +77,4 @@ uv run stringgraph search <keyword>  # 新增前必跑
 
 陈述文本不可变（原则 1）也适用于正文里写的其他节点 id：换代某卡后，**不**就地改别的卡 statement 里对它的字面引用；依赖边（`uses` / `depends_on`）必须改指新 id，正文指针留待那张卡下次实质换代时同步。理由：指针不改变命题内容，而就地改字会让"statement 不可变"失去可核性。zumino 分支曾就地改过三处，属例外，不再发生。
 
+- **`formalization-ruled-out` 标签**（2026-09-11）：`report` 的 "formalization frontier" 只是「依赖全 formalized、自身未 formalized」的候选名单，**不是待办**。若 lead 裁定某卡不做形式化（典型：卡断言的比任何计划中的 Lean 陈述多，且已有更窄的 formalized 拆卡，如 `ocq-level-two-scalar-norm` ↔ `-closed-form`），在 tags 加 `formalization-ruled-out` 并在 notes 写裁决；report 即隐藏它。已两次有 agent 据该名单误接线。
