@@ -476,6 +476,37 @@ not `h`. -/
 theorem kacDet2_massShell_26 : kacDet2 (26 : R) ((1 : R) - 2) = 0 := by
   rw [kacDet2]; ring
 
+section StrongerTwo
+
+variable {R}
+
+omit [Algebra ℚ R] in
+/-- **Level-2, the sharp form: the only zero of the on-shell level-2 Kac determinant is
+`c = 26`.**  Blueprint §B″.0(2) / §B″.2.
+
+On the `N = 2` mass shell (`h = a₀ - 2 = -1` at intercept `a₀ = 1`) the level-2 Kac
+determinant is `2(c - 26)` as a polynomial in `c`.  This is strictly stronger than
+`kacDet2_massShell_26`, which only says it vanishes *at* `c = 26`: here `c = 26` is pinned as
+the unique root, so this identity is the minimal machine-checked witness that the critical
+dimension is a *root of an equation* rather than an assumption.
+
+Blueprint §B″.2 identifies the matrix behind it: `2(c - 26)` is the determinant of the Gram
+matrix of `{L₋₂|p⟩, L₋₁²|p⟩}` at `p = a - 2b`, whose `(2,2)` entry is `⟨L₋₂p, L₋₂p⟩ = 4h + c/2`.
+The equation `c - 26 = 0` reappears operator-theoretically in
+`NoGhost.towerLop_two_apply_descTwo`. -/
+theorem kacDet2_massShell_two (c : R) : kacDet2 c ((1 : R) - 2) = 2 * (c - 26) := by
+  rw [kacDet2]; ring
+
+/-- The equational form of `kacDet2_massShell_two`: over a field of characteristic zero the
+on-shell level-2 Kac determinant vanishes **iff** the central charge is `26`.  Blueprint
+§B″.7, PR5b. -/
+theorem kacDet2_massShell_two_eq_zero_iff {K : Type*} [Field K] [CharZero K] (c : K) :
+    kacDet2 c ((1 : K) - 2) = 0 ↔ c = 26 := by
+  rw [kacDet2_massShell_two, mul_eq_zero, sub_eq_zero]
+  simp
+
+end StrongerTwo
+
 omit [Algebra ℚ R] in
 /-- Level-3: on the `N = 3` mass shell (`c = 26`, `h = a₀ - 3 = -2`) the Kac determinant is
 `2304 ≠ 0`, so the criterion *is* decisive. -/
