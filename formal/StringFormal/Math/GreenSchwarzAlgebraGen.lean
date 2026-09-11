@@ -39,7 +39,8 @@ defining relations in explicitly:
   `1/14400 = (1/48)(1/300)`), so it is cheaper to prove that relation by `← map_mul` +
   `norm_num` inside `ℚ`, rewrite, and then call `ring` on genuine atoms.
 
-The `MvPolynomial`-evaluation route also works but is strictly more machinery.
+An `MvPolynomial`-evaluation route was also suggested; it is strictly more machinery
+and turned out not to be needed, so it is untried.
 
 ## Scope — unchanged from the field version
 

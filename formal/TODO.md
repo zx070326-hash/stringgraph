@@ -66,6 +66,7 @@
 A1/A2/A3 对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5；
 A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-ch12.md` §5.4。
 A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根系 + §44.7 手算）。六项都已完成，无 sorry，公理只有标准三条。
+补强项 `gs-refine` 在 `StringFormal/Math/GreenSchwarzAlgebraGen.lean`，同样只 import Mathlib + 上面那个文件。
 
 - [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
   `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
@@ -74,9 +75,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `(1/48)Ω₄Ω₈ − (1/14400)Ω₄³` 是同一恒等式。
   建议图节点 `math.anomaly-twelve-form-factorization` 的 `lean_decl`（取前两条）。
   **环境选择**：陈述在 `[Field K] [CharZero K]` 上，系数写作 `48⁻¹`、`300⁻¹`、`/100`、`/7200`，
-  证明是 `field_simp; ring`。**不要**改回 `[CommRing R] [Algebra ℚ R]` + `algebraMap ℚ R (1/48)`：
-  那样 `ring` 把 `algebraMap ℚ R (1/48)` 当不透明原子，两个不同写法的有理常数不会被认同，
-  一名 formalizer 曾因此停摆一轮。系数本来就是有理数，域上陈述对图完全够用。
+  证明是 `field_simp; ring`。曾有"**不要**改回 `[CommRing R] [Algebra ℚ R]`"的告诫（`ring`
+  把 `algebraMap ℚ R (1/48)` 当不透明原子，一名 formalizer 因此停摆一轮）——
+  **该障碍已解除**，见下面的 `gs-refine`；本文件保持域上版本不动。
   **未做**：迹恒等式本身（`math.so-usp-adjoint-fundamental-trace-identities`、
   `math.e8-adjoint-trace-identities`）是独立节点，这里只把它们的输出当写死的数字系数；
   微分形式、指标定理、反常多项式的来历一概不碰。
@@ -90,6 +91,39 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `tr_f6_coefficient_vanishing`：`so(N)` 支 `N − 32 = 0 ⟺ N = 32`；
   `tr_f6_usp_positive`：`usp(N)` 支 `N + 32 > 0`（`N ≥ 1`）恒不为零。
   建议图节点 `math.tr-f6-coefficient-vanishing` 的 `lean_decl`。`omega` 一行。
+
+- [x] `gs-refine`（A1′/A2′/A3′，reviewer-gs1984b 提的三处补强）：
+  新文件 `StringFormal/Math/GreenSchwarzAlgebraGen.lean`（import 上面那个文件，**不改**它）。
+  七条声明，无 sorry，公理只有标准三条（`tr_f6_usp_ge_33` 只用两条）。
+  - `gs_factorization_so32_alg`、`gs_factorization_e8_alg`、
+    `gs_factorization_nested_eq_expanded_alg`：把三条因子化恒等式从
+    `[Field K] [CharZero K]` 推广到 `[CommRing R] [Algebra ℚ R]`。**这才是对的环境**：
+    `Ω₄/Ω₈/Ω₁₂` 真正住的地方是偶次微分形式环、`H^even(BG;ℚ)`、不变多项式环，
+    都是含幂零元与零因子的交换环，不是域；域上的陈述对它们只有"形状"上的意义。
+  - `gs_factorization_alg`：两支的合取，`math.anomaly-twelve-form-factorization` 的
+    单条 `lean_decl` 候选（比只取 `SO(32)` 一支更贴节点正文）。
+  - `gs_factorization_so32_field_of_alg`：从 `_alg` 版**逐字**重新导出
+    `gs_factorization_so32` 的陈述，证明推广没有偷改系数、`algebraMap ℚ K (1/48)`
+    确实就是 `48⁻¹`。
+  - **破局配方**（写给下一个碰到 `algebraMap` + `ring` 的人）：`ring` 把
+    `algebraMap ℚ R (1/48)` 当原子是对的，那个等式本来就**不是**这些原子上的环恒等式；
+    把定义关系显式喂进去即可。`SO(32)` 支用
+    `have h48 : (48:R) * algebraMap ℚ R (1/48) = 1 := by rw [← map_ofNat (algebraMap ℚ R) 48, ← map_mul]; norm_num`
+    （`300` 同理），然后
+    `linear_combination (-(15*x*y)) * h48 + (90 * algebraMap ℚ R (1/48) * x^3) * h300`；
+    `E₈` 支与嵌套/展开比较只需一条常数关系（`1/7200 = (1/48)(1/100 − 1/300)`、
+    `1/14400 = (1/48)(1/300)`），在 `ℚ` 里 `rw [← map_mul]; norm_num` 证掉再 `rw` 回去，
+    `ring` 就面对真原子了。（reviewer 另建议的 `MvPolynomial` 求值路线本轮没试，用不上。）
+  - `mixed_anomaly_so_each_gives_32`：`so` 支上**每条**迹条件各自等价于 `N = 32`
+    （`N + 8(−1) = 24 ↔ N = 32` 与 `N + 2(−1) = 30 ↔ N = 32` 两条独立的 iff）。
+    原文件只在 docstring 里说了"两次独立确认"，没有陈述。`omega`。
+  - `tr_f6_usp_ge_33`：`usp` 支 `N + 32 ≥ 33`（`N ≥ 1`），即图节点正文里的"≥ 33 > 0"逐字；
+    原有的 `tr_f6_usp_positive` 只记了 `> 0`。`omega`。
+  - **未接线**：本条只动 `formal/`，没改任何图节点。建议（留给 curator）：
+    `math.anomaly-twelve-form-factorization` 的 `lean_decl` 改指 `gs_factorization_alg`，
+    并在 notes 记一句"恒等式在任意交换 ℚ-代数上成立，故可直接用于反常多项式所在的环"；
+    `math.mixed-anomaly-trace-conditions-n32`、`math.tr-f6-coefficient-vanishing`
+    的 notes 各加一条指向 `mixed_anomaly_so_each_gives_32` / `tr_f6_usp_ge_33`。
 
 **整个岛都不碰物理**：这几条方程为什么是反常抵消条件，由
 `consistency.anomaly-cancellation-so32-effective-theory` 承载；
