@@ -91,6 +91,24 @@ theorem gs_factorization_so32_alg (x y : R) :
     rw [← map_ofNat (algebraMap ℚ R) 300, ← map_mul]; norm_num
   linear_combination (-(15 * x * y)) * h48 + (90 * algebraMap ℚ R (1 / 48) * x ^ 3) * h300
 
+/-- **`E₈` branch of the GS factorisation, over any commutative `ℚ`-algebra.**
+With `Ω₄ = x`, `Ω₈ = x²/100`, `Ω₁₂ = x³/7200` (where `x = Tr F² = tr F²`):
+
+  `Ω₁₂ = (1/48) · Ω₄ · (Ω₈ − (1/300) · Ω₄²)`.
+
+Generalises `gs_factorization_e8`. Nothing cancels here: the whole content is the
+coefficient relation `1/7200 = (1/48)(1/100 − 1/300)`, which is proved inside `ℚ` and then
+transported by the ring hom `algebraMap ℚ R`; after that the identity is a genuine ring
+identity in the atom `x`. -/
+theorem gs_factorization_e8_alg (x : R) :
+    algebraMap ℚ R (1 / 7200) * x ^ 3
+      = algebraMap ℚ R (1 / 48) * x *
+          (algebraMap ℚ R (1 / 100) * x ^ 2 - algebraMap ℚ R (1 / 300) * x ^ 2) := by
+  have h : algebraMap ℚ R (1 / 7200)
+      = algebraMap ℚ R (1 / 48) * (algebraMap ℚ R (1 / 100) - algebraMap ℚ R (1 / 300)) := by
+    rw [← map_sub, ← map_mul]; norm_num
+  rw [h]; ring
+
 end FactorizationAlg
 
 end StringFormal.Math
