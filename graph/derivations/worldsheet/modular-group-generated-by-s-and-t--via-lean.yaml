@@ -18,6 +18,15 @@ depends_on:
       但没有写进本卡的 lean_decl 链条。故这条边同时承担「定义」与「未被机检的那一步识别」。
       ⚠⚠ 该定义卡 own status 是 rigorous，故按 min 规则本推导 own=formalized 而
       effective=rigorous。诚实记账；与 math.dedekind-eta-s-transformation--via-lean 同型。
+      ⚠⚠⚠ **2026-09-11（curator lean-wire-10）更正上面两条 ⚠**：
+      (i) `Z(SL(2,ℤ)) = {±1}` 现已由桥层 `StringFormal.Bridge.center_eq_pm_one` 证明
+      （提交 c15b0db），故「Lean 的 PSL 取法与定义卡的 SL(2,Z)/{±I} 的细微差别」已消除，
+      见 gaps 首条的改写；
+      (ii) 该定义卡已升为 formalized（`lean_decl: StringFormal.Bridge.psl2z_smul_eq`），
+      故本推导 effective 不再被它压到 rigorous。
+      **未变的是第二条 ⚠**：「S : τ ↦ −1/τ、T : τ ↦ τ+1」这一识别仍不在本推导的 lean_decl
+      链条上；桥层的 `psl2z_S_smul` / `psl2z_T_smul` 现在把它机检了，但那是**定义卡**那一侧的
+      声明，本推导仍只在群里算。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_closure_S_T；同文件 sl_S_sq, sl_ST_cube, sl_closure_S_T, neg_one_mem_center, psl, psl_neg_one, psl_S_sq, psl_ST_cube"
@@ -64,12 +73,24 @@ summary: |
   `map psl (closure {S,T})` 化成 `closure {psl S, psl T}`，再用商映射满射得 = ⊤。
 gaps:
   - |
-    ★ **「相差 ±I」被 Lean 换成了「相差中心」。** Lean 的 PSL 是 `SL(2,ℤ)/Z(SL(2,ℤ))`；
-    文件只证 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），**没有**证 `Z(SL(2,ℤ)) = {±1}`
-    （此事为真，文件 docstring 也这么说，但"true, but unused"）。
-    ⇒ `psl_S_sq` / `psl_ST_cube` 严格说是「关系模中心成立」，比目标卡正文的
-    「在相差 ±I 的意义下」**弱一点点**；同理 `psl_closure_S_T` 断言的是模中心的商被两个像生成。
-    要逐字覆盖卡面，需再证中心恰是 {±1}（Mathlib v4.33.1 里 formalizer 未找到现成声明）。
+    ★ **已由 `StringFormal.Bridge.center_eq_pm_one` 证明（2026-09-11 补上，本条不再是缺口）。**
+    原文：「Lean 的 PSL 是 `SL(2,ℤ)/Z(SL(2,ℤ))`；`ModularGroupGenerators.lean` 只证
+    `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），没有证 `Z(SL(2,ℤ)) = {±1}`，故
+    `psl_S_sq` / `psl_ST_cube` / `psl_closure_S_T` 严格说只是「模中心」成立，
+    比目标卡正文的「在相差 ±I 的意义下」弱一点点。」
+    **现状**：桥层 `formal/StringFormal/Math/MathlibBridges.lean`（提交 c15b0db，合并 845b9b9）
+    有
+
+        theorem center_eq_pm_one :
+            (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}
+
+    （证法：Mathlib 的 `Matrix.SpecialLinearGroup.mem_center_iff` 给出中心元是纯量阵 r·I 且
+    r² = 1，在 ℤ 上迫使 r = ±1；curator 于 2026-09-11 跑 check-axioms，公理集合
+    `propext Classical.choice Quot.sound`）。子群由其承载集合决定，故
+    `Z(SL(2,ℤ))` **就是**子群 `{±I}`，Lean 的商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群，
+    「模中心」与「相差 ±I」是同一件事。
+    ⚠ 记账（不是缺口）：`center_eq_pm_one` 是另一条独立定理，不在本推导 `formal.lean_decl`
+    （`psl_closure_S_T`）的证明链上；两者的拼接是人读两条声明后作的比对，而不是一条机检蕴涵。
   - |
     **不含表现（presentation）**。目标卡正文已明确不断言 PSL(2,Z) ≅ ℤ/2 ∗ ℤ/3，
     Lean 同样不断言：`psl_S_sq`、`psl_ST_cube` 只说这两条关系成立，不说它们生成全部关系。
@@ -81,8 +102,11 @@ gaps:
     `StringFormal/Math/DedekindEtaModular.lean` 里被用到，但不在本卡的 lean_decl 链条上。
     ⇒ 目标卡正文用 Möbius 映射写 S、T，这一层翻译**靠 depends_on 的定义卡承担，未被机检**。
   - |
-    **有效状态被定义卡卡住**：worldsheet.modular-group-psl2z 是 rigorous 的定义卡，
-    故 own=formalized 而 effective=rigorous。记账缺口，不是论证缺口。
+    **（2026-09-11 已解除）有效状态曾被定义卡卡住**：worldsheet.modular-group-psl2z 当时是
+    rigorous 的定义卡，故 own=formalized 而 effective=rigorous。该定义卡已于同日接到桥层
+    （`lean_decl: StringFormal.Bridge.psl2z_smul_eq`）并升为 formalized，
+    ⇒ 本推导现在 own=formalized、effective=formalized，目标卡 effective 也随之升到 formalized。
+    这一直是记账缺口，不是论证缺口。
 notes: |
   由 curator（lean-wire-9，lead 追加的第 8 项）于 2026-09-11 建立，接的是 formalizer 分支
   `agent/formalizer/eta-modular`（新文件 `StringFormal/Math/ModularGroupGenerators.lean`）。
@@ -95,6 +119,16 @@ notes: |
   literature/sources.bib 的 stringformal-2026 证据标准；按根 CLAUDE.md，
   **lead 合并前必须跑 `lake build` + `uv run stringgraph check-axioms`**。
   本分支未改动 formal/ 下任何文件。
+
+  **check-axioms 已补跑（curator lean-wire-10, 2026-09-11）**：主工作树 D:\physics\string 的
+  `formal/.lake` 已在 13:54 重建（`ModularGroupGenerators.olean` 时间戳 12:50:41，晚于源文件
+  12:49:54），且该源文件与本分支（= main）的逐字相同（sha256 5d8bfcb0…）。在那里对本文件的
+  8 条公开声明跑 `uv run stringgraph check-axioms`：**8 ok, 0 non-standard, 0 missing; 0 errors**
+  （`sl_S_sq`、`sl_ST_cube`、`sl_closure_S_T`、`neg_one_mem_center`、`psl_neg_one`、
+  `psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`），公理集合一律
+  `propext Classical.choice Quot.sound`。另外，本轮补上 gaps 首条的
+  `StringFormal.Bridge.center_eq_pm_one` 同批检查通过（桥层 12 条全 ok）。
+  ⇒ 上一段「本轮未能重跑」的记录**已补齐**。
 
   **本推导关闭了原推导的 gap (1)**（「生成性没有证明」）。原推导
   --via-generator-relations 按 lead「旧推导保留」的裁决不动、不更新其 gaps；

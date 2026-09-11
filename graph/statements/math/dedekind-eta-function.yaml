@@ -1,6 +1,6 @@
 id: math.dedekind-eta-function
 kind: definition
-status: rigorous
+status: formalized
 title: Dedekind η 函数 η(τ) = q^{1/24} ∏_{n≥1}(1 − q^n)
 statement: |
   设 H = { τ ∈ C : Im τ > 0 } 为上半平面，并约定
@@ -16,6 +16,9 @@ statement: |
   见 notes）；不涉及 η 作为权 1/2 模形式的一般理论。
 uses: []
 uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod
+  lean_file: StringFormal/Math/MathlibBridges.lean
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.2, eq. (7.2.10), p.210（η(τ) = q^{1/24}∏_{n=1}^∞(1−q^n)，原文逐字「is the Dedekind eta function」）；同一乘积在 §7.2 末 eq. (7.2.43), p.216 重述"
@@ -24,6 +27,45 @@ sources:
       Cambridge Books Online 数字化本 © 1998, 2005，即 2005 平装本，已含 2000 年 "with corrections"）**。
       原书**没有**给出收敛性讨论，也没有点明 q^{1/24} 的分支选取；本卡把这两点补全（都是初等标准事实），
       这是**定义卡层面的补全**，不改变任何断言。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod（本卡 formal.lean_decl）；同文件 dedekindEta_eq_qpow_mul_tprod、qParam_one_eq_exp、qParam_24_eq_exp、qParam_24_eq_exp_pi_I_div_twelve、dedekindEta_ne_zero、differentiableAt_dedekindEta"
+    note: |
+      本仓库，桥层提交 **674946a**（"formal: add Mathlib bridge layer for the Dedekind eta
+      definition card"），分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。
+      `formal.lean_decl` 所指声明全文：
+
+          theorem dedekindEta_eq_exp_mul_tprod (z : ℂ) :
+              ModularForm.eta z =
+                Complex.exp (π * I * z / 12) *
+                  ∏' n : ℕ, (1 - Complex.exp (2 * π * I * z) ^ (n + 1))
+
+      **卡面三项与 Lean 声明的逐条对应**（每一项都是桥层里的一条逐字重述定理，
+      见 formal/CLAUDE.md「桥层规则」）：
+      (a) 分支约定 q = e^{2πiτ}、q^{1/24} = e^{2πiτ/24} = e^{πiτ/12}
+          → `qParam_one_eq_exp`、`qParam_24_eq_exp`、`qParam_24_eq_exp_pi_I_div_twelve`；
+      (b) 乘积公式 η(τ) = q^{1/24}∏_{n≥1}(1 − q^n)
+          → `dedekindEta_eq_exp_mul_tprod`（q 全部展开成 exp 的形状，= 本卡 lean_decl），
+          与 `dedekindEta_eq_qpow_mul_tprod`（`rfl`，即 Mathlib 对 `ModularForm.eta` 的定义本身）；
+          Lean 的 `∏' n : ℕ` 从 0 数起，`(n+1)` 次幂即卡面的 n ≥ 1，指标平移是 Lean 惯例，不是约定差异；
+      (c) η 在 H 上全纯 → `differentiableAt_dedekindEta {z} (hz : 0 < z.im)`；
+      (d) η 在 H 上无零点 → `dedekindEta_ne_zero {z} (hz : 0 < z.im)`。
+      ⇒ 卡面断言无一遗漏，故本卡 status 由 rigorous 升为 **formalized**。
+      **check-axioms 运行记录（curator lean-wire-10, 2026-09-11，在主工作树 D:\physics\string 上，
+      其 `.lake` 构建晚于源文件）**：上列 7 条声明 `7 ok, 0 non-standard, 0 missing; 0 errors`，
+      公理集合一律 `propext Classical.choice Quot.sound`。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring（\"Bridge layer: Mathlib objects restated verbatim in the graph's conventions\"）"
+    note: |
+      **诚实归属：数学内容 100% 是 Mathlib 的。** 桥层只做逐字重述，证明是 `rfl` /
+      `simp [定义]` / 直接引用。实际输入是 Mathlib v4.33.1 的
+      `Mathlib/NumberTheory/ModularForms/DedekindEta.lean`：
+        `ModularForm.eta (z : ℂ) := 𝕢 24 z * ∏' n, (1 - ModularForm.eta_q n z)`（定义）、
+        `ModularForm.eta_ne_zero`、`ModularForm.differentiableAt_eta_of_mem_upperHalfPlaneSet`，
+      其中 `Function.Periodic.qParam h z = Complex.exp (2 * π * I * z / h)`。
+      本图**不**为这些 Mathlib 声明建节点，也不审计其证明；证据标准由 stringformal-2026
+      条目规定的 `lake build` + 无 sorry + 标准三公理承载（Mathlib 在同一次构建里被检查）。
+      ⚠ 口径差一处，不影响卡面：Mathlib 的 `ModularForm.eta` 在**全 ℂ** 上有定义（H 外是垃圾值），
+      本卡只在 H 上定义 η；(c)(d) 两条带假设 `0 < z.im`，(a)(b) 对全 ℂ 成立故蕴含 H 上的情形。
 tags: [math, modular-forms, dedekind-eta, torus, partition-function]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E9/#E16 建立。
@@ -39,5 +81,23 @@ notes: |
   **未建的相邻卡**：θ 函数一族（(7.2.31)–(7.2.42)）本批次不建——原书对其**全部性质零证明**
   （周期性唯一确定、零点唯一性、Jacobi abstruse identity 均为断言），且 Möbius 带振幅只需
   ϑ₀₀ 的一个特值；见抽取记录 #E15 与本批次报告的「未做条目」。
+
+  **2026-09-11（curator lean-wire-10）：status rigorous → formalized。** 依据是 formalizer 新建的
+  桥层 `formal/StringFormal/Math/MathlibBridges.lean`（`namespace StringFormal.Bridge`），
+  见上面第二、三条 source。此前本卡停在 rigorous 的原因写在
+  `math.dedekind-eta-s-transformation--via-lean` 的 notes 末尾（"给 lead 的一条"）：
+  Mathlib 里四条断言都有，但本图要求 `lean_decl` 指向 `formal/` 下真实存在的文件。
+  桥层正是那条建议的两条出路里的第一条，现已落地。
+  ⇒ 依赖本卡的 `math.dedekind-eta-{s,t}-transformation` 两条 `--via-lean` 推导不再被本卡压低。
+  **`lean_decl` 不得直指 Mathlib**（`ModularForm.eta`），必须指桥层的重述——这是 formal/CLAUDE.md
+  的「桥层规则」，本卡是它的第一个用例。
+
+  **唯一没有逐字重述的子句（记账，不是缺口）**：卡面 (c) 之前那句「无穷乘积在 H 的紧子集上
+  绝对且一致收敛」在桥层里没有单独的重述定理。它在 Mathlib 里是
+  `ModularForm.multipliable_one_sub_pow`、`ModularForm.multipliableLocallyUniformlyOn_eta`、
+  `ModularForm.summable_eta_q`，并且被 `eta_ne_zero` 与
+  `differentiableAt_eta_of_mem_upperHalfPlaneSet` 的 Mathlib 证明直接用到；
+  卡面把它写出来是作为 (c)(d) 的**理由**而不是独立断言，两个结论都已逐字重述，故不构成缺口。
+  （若将来有人要引用「可乘性」本身，正确做法是在桥层再加一条重述，而不是改本卡。）
 author: curator-polchinski-ch7
 created: "2026-09-11"

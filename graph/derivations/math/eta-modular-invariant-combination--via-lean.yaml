@@ -38,8 +38,12 @@ depends_on:
       `UpperHalfPlane.instSMul`，即 τ ↦ (aτ+b)/(cτ+d)），以及 `ModularGroup.S`、`ModularGroup.T`
       与该定义卡写的两个矩阵逐字相同。目标卡 statement 明写「SL(2,Z) 按 g·τ = (aτ+b)/(cτ+d)
       作用在 H 上（worldsheet.modular-group-psl2z）」，故这条边是 statement 的字面依赖。
-      ⚠⚠ 该卡与 math.dedekind-eta-function 都是 **rigorous 的定义卡**，
+      ⚠⚠ 该卡与 math.dedekind-eta-function 当时都是 **rigorous 的定义卡**，
       按 min 规则把本推导从 own=formalized 压到 effective=rigorous，见 gaps 末条。
+      **2026-09-11（curator lean-wire-10）更正**：两张定义卡已接到桥层
+      `formal/StringFormal/Math/MathlibBridges.lean`（`StringFormal.Bridge.psl2z_smul_eq`、
+      `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod`）并升为 formalized，
+      本推导 effective 因此升到 formalized。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/DedekindEtaModular.lean :: StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant；支撑链 im_mul_norm_eta_pow_four_modular_forall → {im_mul_norm_eta_pow_four_modular_invariant, im_mul_norm_eta_pow_four_isInvariant}，推论链 im_mul_norm_eta_pow_four_pow_modular → im_pow_mul_norm_eta_pow_modular → im_pow_twelve_mul_norm_eta_pow_48_modular，另有 norm_eta_pow_four_modular"
@@ -89,9 +93,13 @@ gaps:
     **n = 12 是输入。** (3) 对一切 n ∈ N 成立，n = 12 只是特化；
     「12 = (D−2)/2」「D = 26」不在本推导也不在目标卡内。
   - |
-    **有效状态被两张 rigorous 定义卡压住**：math.dedekind-eta-function（经 S、T 两卡传入）
-    与 worldsheet.modular-group-psl2z。故本推导 own=formalized 而 effective=rigorous，
-    目标卡 effective 同。这是记账缺口，不是论证缺口，见目标卡 notes。
+    **（2026-09-11 已解除）有效状态曾被两张 rigorous 定义卡压住**：math.dedekind-eta-function
+    （经 S、T 两卡传入）与 worldsheet.modular-group-psl2z，故本推导 own=formalized 而
+    effective=rigorous。两张卡同日接到桥层 `StringFormal.Bridge`
+    （`dedekindEta_eq_exp_mul_tprod` / `psl2z_smul_eq`，提交 674946a + c15b0db，合并 845b9b9）
+    并升为 formalized ⇒ 本推导与目标卡的 effective 现均为 **formalized**。
+    这一直是记账缺口，不是论证缺口。
+    ⚠ 上面第一、二、三条 gaps（测度不变性、一般 g 下 η 的乘子系统、n = 12 是输入）**未变**。
 notes: |
   由 curator（lean-wire-9，lead 追加的第 8 项）于 2026-09-11 建立。
 
@@ -106,6 +114,23 @@ notes: |
   本条 formalized 的依据是 formalizer 的构建自述 + stringformal-2026 的证据标准；
   **lead 合并前必须跑 `lake build` + `uv run stringgraph check-axioms`**（根 CLAUDE.md 的硬要求）。
   本分支未改动 formal/ 下任何文件。
+
+  **check-axioms 已补跑（curator lean-wire-10, 2026-09-11）**：主工作树 D:\physics\string 的
+  `formal/.lake` 已在 13:54 重建（`DedekindEtaModular.olean` 12:50:51、
+  `ModularGroupGenerators.olean` 12:50:41，均晚于各自源文件的 12:49:54），
+  且那两个源文件与本分支（= main）的逐字相同（sha256 d58c3046… / 5d8bfcb0…）。在那里跑：
+
+      uv run stringgraph check-axioms --decl StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant …
+
+  · `DedekindEtaModular.lean` 的 7 条：**7 ok, 0 non-standard, 0 missing; 0 errors**
+    （`im_mul_norm_eta_pow_four_modular_forall`、`..._invariant`、`norm_eta_pow_four_modular`、
+    `..._isInvariant`、`..._pow_modular`、`im_pow_mul_norm_eta_pow_modular`、
+    `im_pow_twelve_mul_norm_eta_pow_48_modular`）；
+  · `ModularGroupGenerators.lean` 的 8 条：**8 ok, 0 non-standard, 0 missing; 0 errors**
+    （`sl_S_sq`、`sl_ST_cube`、`sl_closure_S_T`、`neg_one_mem_center`、`psl_neg_one`、
+    `psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`）。
+  公理集合一律 `propext Classical.choice Quot.sound`。
+  ⇒ 上一段「本轮未能重跑」的记录**已补齐**；lead 合并前仍按根 CLAUDE.md 重跑一次即可。
 
   **这条链现在是完整的**：η 的定义（Mathlib）→ S 变换（Mathlib `Discriminant.lean` + 本项目归一化）
   → T 变换（本项目，从定义两行）→ S、T 生成 SL(2,Z)（Mathlib `SL2Z_generators`）
