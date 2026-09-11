@@ -295,6 +295,18 @@ StringFormal/
                             **对任意截距 `a₀` 成立**（蓝图只写了 `a₀ = α'k²`，是无成本的加强）。
                             它是 (B-26) 构造式路线的乘法结构：把「片上造 `p_{D−1}(N)−p_{D−2}(N)` 个
                             线性无关零态」降成「每个 `m` 造 `p(m)` 个纵向种子」
+  NoGhost/SliceRank.lean    **蓝图 §B′ PR1**：把 `ddf-spans` 的最后一步压成**一条秩不等式**。
+                            `ddfSpan_inf_towerNullSubmodule_eq_bot`（DDF 扇区与零态只交于零，
+                            全序域上由 `ddf_span_pos` 得；**对任意截距 `a₀`**）；抽象判据
+                            `eq_sup_of_finrank_le`（`S,T ≤ H`、`S⊓T=⊥`、`dim H ≤ dim S + dim T`
+                            ⇒ `H = S ⊔ T`，纯线性代数）；**`def B26`**——反对角片上
+                            `dim(H_phys⊓V_N) ≤ dim(ddfSpan⊓V_N) + dim(H_null⊓V_N)`；
+                            **`ddfSpansOn_bigrade_of_b26`** 与 **`ddfSpans_of_forall_b26`**
+                            （接 `Glue.ddfSpans_of_forall_antidiagonal_slice_int`）。
+                            **`D = 26` 一次不出现**，它全部落进 `B26` 这条 `Prop`。
+                            §B′ 订正：蓝图写的 `iff` 的「⟹」半边**不免费**（要 `ddfSpan` 与
+                            `towerNullSubmodule` 对双分次齐次），故拆到 `SliceDim.lean`，
+                            PR1→PR2 与 §B′.7 画的方向相反
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
