@@ -222,6 +222,27 @@
   生成定理的搬运用 `MonoidHom.map_closure` + `Set.image_pair` + `MonoidHom.range_eq_top`
   （样板抄自 Mathlib `NumberTheory/ModularForms/LevelOne/Basic.lean:60`）。
 
+- [x] `mathlib-bridge`：`StringFormal/Math/MathlibBridges.lean`（无 sorry，19 个声明
+  `check_axioms --all` 全 `ok`）。**桥层**：两张定义卡 `math.dedekind-eta-function` 与
+  `worldsheet.modular-group-psl2z` 的对象在 Mathlib 里已经有了（`ModularForm.eta`、
+  `Matrix.ProjectiveSpecialLinearGroup`），但工具要求 `lean_decl` 指向 `formal/` 下的声明，
+  于是在 `namespace StringFormal.Bridge` 里给每张卡写一条**逐字重述定理**，证明就是
+  「这是 Mathlib 的定义」。**不重新定义对象**（重定义等于凭空多一份未经验证的副本）。
+  - η 侧：`dedekindEta_eq_qpow_mul_tprod`（= `rfl`，Mathlib 定义的展开）、
+    `qParam_one_eq_exp`（q = e^{2πiτ}）、`qParam_24_eq_exp` 与
+    `qParam_24_eq_exp_pi_I_div_twelve`（q^{1/24} = e^{2πiτ/24} = e^{πiτ/12}，即卡面**分支选取**
+    是单值的 `exp`，不是多值根式）、`dedekindEta_eq_exp_mul_tprod`（全部展开成 `exp` 的卡面形）、
+    `dedekindEta_ne_zero` 与 `differentiableAt_dedekindEta`（卡面自己断言的两条解析性质）。
+  - PSL 侧：`psl2z_smul_eq`（(aτ+b)/(cτ+d)，矩阵元写开）、`psl2z_im_smul_eq`
+    （Im(γτ) = Im τ/|cτ+d|²）、`psl2z_T_smul` / `psl2z_S_smul`、`neg_smul_eq` / `neg_one_smul_eq`、
+    `smul_eq_of_pslMk_eq` 与 `MulAction PSL2Z ℍ` 实例（`pslMk_smul`）：作用**确实降到 PSL(2,ℤ)**。
+  - ★ 顺手补上了 `psl-generators` 条目里记的那条缺口：`center_eq_pm_one : (Z(SL(2,ℤ)) : Set _)
+    = {1, -1}`（Mathlib `SpecialLinearGroup.mem_center_iff` 给「中心元 = 标量 r·I 且 r² = 1」，
+    在 ℤ 上 r = ±1）。所以 Mathlib 的 `PSL = SL/Z(SL)` **就是**卡面的 `SL(2,ℤ)/{±I}`，
+    `ModularGroupGenerators.lean` 里「只证了 −I ∈ Z」的保留意见可以撤掉。
+  - **仍不断言**：PSL 作用的忠实性（卡面也没断言）、S/T 生成（在 `ModularGroupGenerators.lean`）、
+    基本域、η 的任何模变换性质。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
