@@ -202,5 +202,22 @@ notes: |
   逐 N 有限维秩不等式族，且已知不存在「每个 N 一个层真空奇异向量」的捷径
   （该卡 notes 的 Kac 退化点硬事实）。这不是本卡的新猜想，是**同一个**猜想
   （「D=26 时零态够多」）换了一种可被逐 N 攻克的形状。
+
+  【2026-09-12 追记（curator，PR3/PR4 落地后）：上面这条唯一未证环节被进一步精确压缩，
+  N = 2 不再是一个独立瓶颈】worldsheet.ddf-spanning-rank-inequality 的 notes 同日更新记录：
+  新卡 worldsheet.physical-slice-bounded-by-transverse-count（formalized，Lean
+  `finrank_towerPhys_inf_towerBigrade_le`）对**一切 D、一切 N** 给出 dim H_N ≤ p_{D−1}(N)，
+  配合已 formalized 的 dim D_N = p_{D−2}(N)，把 worldsheet.ddf-spanning-rank-inequality
+  的开放内容精确收窄为一条零态维数下界 dim Z_N ≥ p_{D−1}(N) − p_{D−2}(N)（只在 D=26 处
+  期望成立）——即该卡【(B-26) 的三种等价写法】(iii) 的动手形式。
+  ⇒ 上面【N = 2 进行中】一节登记的「N = 2 两块硬缺口」中，(a)（领头项类比）与「完整刻画」
+  这部分工作现在只服务于同一个目标：证出这条零态下界在 N=2 时成立
+  （p_{25}(2) − p_{24}(2) = 26 个线性无关零态，见 worldsheet.ddf-spanning-rank-inequality
+  notes【(B-26) 的三种等价写法】(iii) 给出的显式拆分 26 = 24·p(1) + 1·p(2) 与两个纵向种子）；
+  **N=2 不再需要单独处理「H_N 的上界」这一半**（上界对一切 N 已由新卡统一给出），
+  故 N=2 相对 N≥3 已不再是一个独立的形式化瓶颈，三者都归约到同一条「零态够不够多」的
+  下界问题，只是 N 越大种子分拆越多。
+  ⚠ **本条不改变本卡的 effective 状态**（本卡依旧无推导，链条现状不变），只精确记录
+  剩余义务的形状。
 author: curator
 created: "2026-09-11"
