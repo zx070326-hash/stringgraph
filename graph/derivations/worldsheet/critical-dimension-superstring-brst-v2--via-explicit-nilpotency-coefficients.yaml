@@ -199,6 +199,22 @@ notes: |
     ⚠ 因此**绝不可**把 LZ Prop 1.7(ii) 当作玻色弦 c^m = 26 的 iff 来源
     （那条禁令已写进 worldsheet.critical-dimension-brst-v2 及其推导）。
 
+  【2026-09-11 追记：平坦特例已单列为 …-flat 卡（lead 裁决，修档位不对称）】
+  本推导 summary 第 1–3 步与 gaps 第一条描述的**平坦情形**（IMNU 只算平坦 D 个 X^μψ^μ，
+  结论逐字是 D = 10）现在另有一张与来源同范围的卡：
+    陈述 worldsheet.superstring-brst-nilpotency-requires-d10-flat（限平坦，结论写 D = 10，
+      受限模与鬼场数算符线性无关性写进陈述，与玻色弦 worldsheet.critical-dimension-brst-v2 同型）
+    推导 worldsheet.superstring-brst-nilpotency-requires-d10-flat--via-imnu-explicit-coefficients
+      （**physical-argument**；同一段 IMNU (3.8)–(3.10)，但目标与来源逐字同范围，故不含外推，
+       也不需要 worldsheet.rns-matter-central-charge 那条翻译边）。
+  **本推导与本推导的目标卡（一般正范数 SCFT 形式）保持不变**：
+  status 仍是 conjecture-support / conjecture，理由**一字未改**——
+  从平坦特例外推到任意正范数 SCFT 在本图仍然没有来源。
+  ⇒ 两条推导不是同一命题的两条论证，而是**两个宽度不同的命题**各自的论证；
+  需要"BRST 幂零定出 D = 10"且背景是平坦 RNS 弦的下游，请依赖 flat 卡，不要依赖本卡。
+  （超弦 D = 10 主链 worldsheet.critical-dimension-superstring--via-two-routes 的 (I) ⟹ 半
+  已于同日按 lead 裁决改指 flat 卡并撤掉指向本卡的边；见该推导的 notes。）
+
   按 researcher 第七轮抽取记录 literature/extractions/ito-morozumi-nojiri-uehara-1986.md
   （E1/E2）、lian-zuckerman-1989.md（E1、§4 Q3、§5）、ohta-1986.md（E1、§5 第 2 条）建立。
   curator，2026-09-11。

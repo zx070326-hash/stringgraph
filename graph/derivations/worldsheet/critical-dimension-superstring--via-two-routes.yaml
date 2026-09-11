@@ -9,17 +9,20 @@ depends_on:
       换成任何满足该中心荷条件的正范数 SCFT」与「超流须与 ψ^μ、β、γ 同周期」两条。
       这一半是 Polchinski Vol.2 §10.5 (10.5.23) 下方那段的原话方向（'verify nilpotence …
       **whenever** the total central charge vanishes'），状态 physical-argument。
-  - id: worldsheet.critical-dimension-superstring-brst-v2
+  - id: worldsheet.superstring-brst-nilpotency-requires-d10-flat
     note: |
-      供给 (I) 的 **⟹ 半**（Q_B² = 0 ⟹ c^m = c̃^m = 15），即「BRST 幂零**定出**临界中心荷」。
-      本卡 (I) 写的是 **⟺**，故两半都要挂。
-      ⚠ **这条边压低本推导的有效状态**：该卡在 Polchinski Vol.2 里**没有**来源（本卷只有 ⟸），
-      现有支撑是 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10) 的**平坦情形**显式系数
-      加一步向「任意正范数 SCFT」的外推，其推导 status = conjecture。
-      ⇒ 本推导（自身 physical-argument）的有效状态被拉到 conjecture。**这是实话**：
-      目标卡片 (I) 的 ⟺ 中那一半在本图现有来源下确实只到猜想级。
-      （2026-09-11 curator 依 lead 指示改指：原边指 worldsheet.critical-dimension-superstring-brst，
-      该卡已被 ch10-residuals 分支拆成上述两张单向卡并标 superseded_by。）
+      供给 (I) 的 **⟹ 半，限平坦情形**（物质部门恰为 D 个平坦 X^μψ^μ 时，Q_B² = 0 ⟹ D = 10）。
+      **不标 inferred**：本推导的 sources 里 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10)
+      就在原地给出这一步的论证（显式系数 + (3.10) 逐字 'demands D = 10'），
+      且该文算的正是平坦 D 个 X^μψ^μ——与本边所取的范围逐字相同。
+      ★ **为什么本推导只挂平坦那张卡**：目标卡片对 D = 10 的实际用法就是平坦 RNS 弦
+      （§10.1 (10.1.20) 的 0 = (3/2)D − 15、§10.5 的 X^μψ^μ SCFT、§10.7 的横向费米子计数，
+      三处都在平坦背景下）。一般正范数 SCFT 形式的 ⟹ 在本卷**不被使用**，
+      故本推导**撤掉**了原先指向 worldsheet.critical-dimension-superstring-brst-v2 的边；
+      那张卡（一般形式，status = conjecture）仍在图上，理由与状态均不变，见该卡 notes。
+      ⚠ 代价已记进 gaps 第一条：目标卡片 (I) 的文本把 ⟺ 写成一般 SCFT 形式，
+      本推导对其 ⟹ 半只覆盖平坦特例。
+      （2026-09-11 lead 裁决；改指前本边指 worldsheet.critical-dimension-superstring-brst-v2。）
   - id: worldsheet.critical-dimension-superstring-anomaly
     note: |
       供给 (II)（c^tot = 0 ⟺ c^m = 15）。⚠ 该卡自身把这条前提记为**被假定**的一致性条件，
@@ -64,6 +67,15 @@ sources:
   - ref: polchinski-1998-v2
     loc: "§10.1, eq. (10.1.14), p. 3（公共输入 c^m = (3/2)D）；(10.1.19), p. 4 与 §11.1, (11.1.2a,b), pp. 46–47（公共输入 c^g = −15 的两处来源）"
     note: L1。
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3, pp. 941–943：(3.8)(3.9) 的 (Q_B^NS)²、(Q_B^R)² 显式系数（D 与 α₀ 的多项式）；**(3.10)** 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the conformal anomaly, demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and α₀^R = 0 for the R model.'"
+    note: |
+      L1。**2026-09-11 新增**：本条是 (I) 的 **⟹ 半（平坦情形）** 的出处，
+      即依赖边 worldsheet.superstring-brst-nilpotency-requires-d10-flat 所指论证的位置
+      （故那条边**不**标 inferred）。
+      ⚠ **不是本卷**：Polchinski Vol.2 只给 ⟸（§10.5 那段的 'whenever'），
+      ⟹ 方向本卷没有——这一点已写进 gaps 第一条与目标卡片 (I) 的警告。
+      ⚠ IMNU 用 **D** 而非中心荷，且只算平坦 D 个 X^μψ^μ；量子化方案与 Polchinski 不同。
   - ref: polchinski-1998-v1
     loc: "§4.3, eq. (4.3.10)（玻色弦 BRST 路线的显式 Q_B² 公式）；§1.3（光锥路线）"
     note: |
@@ -72,9 +84,10 @@ sources:
 summary: |
   本推导把 worldsheet.critical-dimension-superstring 的合取拆成它的各个合取项，
   逐条指到已有节点：
-    (I)   worldsheet.superstring-brst-nilpotent-at-c15       c^m = 15 ⟹ Q_B² = 0（⟸ 半；本卷原话方向）
-          worldsheet.critical-dimension-superstring-brst-v2  Q_B² = 0 ⟹ c^m = 15（⟹ 半；本卷无来源，conjecture）
-                                                            两半合起来才是目标卡片 (I) 的 ⟺（不给 D，不给截距）
+    (I)   worldsheet.superstring-brst-nilpotent-at-c15            c^m = 15 ⟹ Q_B² = 0（⟸ 半；一般正范数 SCFT；本卷原话方向）
+          worldsheet.superstring-brst-nilpotency-requires-d10-flat Q_B² = 0 ⟹ D = 10（⟹ 半；**限平坦** X^μψ^μ；IMNU 显式系数）
+                                                            两半合起来给出目标卡片 (I) 在平坦背景下的内容
+                                                            （⟸ 一般、⟹ 限平坦；见 gaps 第一条）
     (II)  worldsheet.critical-dimension-superstring-anomaly   c^m + c^g = 0 ⟺ c^m = 15（前提被假定）
     (III) worldsheet.modular-invariance-requires-eight-transverse-fermions
                                                              横向费米子数 ≡ 0 mod 8（必要条件，非路线）
@@ -92,19 +105,47 @@ summary: |
       (II) 的前提被假定，(III) 的振幅形式是「猜」的且模变换被原书自称 naive。
   故有效状态为 physical-argument。
 
+  【2026-09-11 (I) 的 ⟹ 半改指（lead 裁决，修超弦链相对玻色弦链的档位不对称）】
+  原先 (I) 的 ⟹ 半挂 worldsheet.critical-dimension-superstring-brst-v2（**一般**正范数 SCFT 形式），
+  该卡唯一推导因"平坦特例 ⇒ 一般 SCFT"的无来源外推标 conjecture，
+  于是把本推导（自身 physical-argument）整条拉到 conjecture，
+  并沿 open-superstring-mass-shell → … → D 膜电荷把整条超弦链压成 conjecture，
+  而**同构的玻色弦链是 physical-argument**。
+  裁决：Polchinski 第 10 章用到 D = 10 的三处（(10.1.20)、§10.5 的 X^μψ^μ、§10.7 的横向费米子）
+  **全都在平坦背景下**，本卷从不使用一般 SCFT 形式的 ⟹；
+  故本推导改挂与来源同范围的 worldsheet.superstring-brst-nilpotency-requires-d10-flat
+  （IMNU (3.8)–(3.10)，physical-argument），并**撤掉**指向一般形式那张卡的边。
+  一般形式卡与其推导**原样保留**（status 仍 conjecture，理由不变），只是不再压低本链。
+  ⇒ 这不是把猜想改写成论证，而是把边接到"本卷实际使用的那个命题"上；
+  未被覆盖的那部分（(I) 文本里 ⟹ 的一般 SCFT 形式）老实记在 gaps 第一条。
+
   【与玻色弦汇总卡的记账对称性】worldsheet.critical-dimension-bosonic-v3--via-four-routes
   的 depends_on 结构与本推导逐条对应（路线卡 + 公共输入 c^m = D / c^g = −26）。
   差别是本推导多一条对照边（玻色弦汇总卡），少两条路线边（无光锥、无旧协变/无鬼路线
   ——后者在超弦一侧存在但只是一句「direct imitation」，见 worldsheet.no-ghost-theorem-superstring，
   本卡**不**把它列为定出 D 的路线，因为原书没有用它定 D）。
 gaps:
-  - "**(I) 的 ⟺ 只有一半有本卷来源**：⟸（c^m = 15 ⟹ Q_B² = 0）是 Vol.2 §10.5 (10.5.23) 下方那段的原话方向；⟹（Q_B² = 0 ⟹ c^m = 15）**本卷没有**，只有 IMNU 1986 (3.8)–(3.10) 的平坦情形显式系数（用 D 而非 c^m）加一步向任意正范数 SCFT 的外推，以及 Lian–Zuckerman 1989 Prop. 1.7(ii) 那条自己不证的 iff。本推导因此挂了两张单向卡，并被 ⟹ 那张（status = conjecture）拉到 conjecture。⚠ 目标卡片 (I) 的文本仍写 ⟺ 并在括号里指向已 superseded 的 worldsheet.critical-dimension-superstring-brst；按 graph/CLAUDE.md 的裁决，statement 正文里的 id 指针不就地改，留待该卡下次实质换代时同步。"
+  - "**(I) 的 ⟺ 两半范围不齐，且 ⟹ 半本卷没有来源**：⟸（c^m = 15 ⟹ Q_B² = 0）是 Vol.2 §10.5 (10.5.23) 下方那段的原话方向，且覆盖**一般**正范数 SCFT；⟹（Q_B² = 0 ⟹ 临界值）**本卷没有**，本推导挂的是与来源同范围的平坦卡 worldsheet.superstring-brst-nilpotency-requires-d10-flat（IMNU 1986 (3.8)–(3.10) 的显式系数，用 D 而非 c^m，只算平坦 D 个 X^μψ^μ）。⇒ **本推导对目标卡片 (I) 文本里那个一般 SCFT 形式的 ⟺，只覆盖到「⟸ 一般 + ⟹ 限平坦」**；一般形式的 ⟹ 在本图仍只有 worldsheet.critical-dimension-superstring-brst-v2（**status = conjecture**，靠「平坦 ⇒ 一般 SCFT」的无来源外推，外加 Lian–Zuckerman 1989 Prop. 1.7(ii) 那条自己不证的 iff），**本推导 2026-09-11 起不再挂它**（lead 裁决，理由：本卷用 D = 10 的三处都在平坦背景）。⚠ 这是本推导已知的一处**覆盖不足**，不是已被论证的步骤；要消掉它，须把目标卡片 (I) 的文本按「⟸ 一般 / ⟹ 限平坦」收窄换代（需 lead 排期），或取得一般正范数 SCFT 的 Q_B² 系数来源。⚠ 目标卡片 (I) 的文本还在括号里指向已 superseded 的 worldsheet.critical-dimension-superstring-brst；按 graph/CLAUDE.md 的裁决，statement 正文里的 id 指针不就地改，留待该卡下次实质换代时同步。"
   - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(II) 的前提在本卷不被论证」「(I)(II) 共享两个输入」「本卷没有光锥路线」「本卷没有 Q_B² 的显式公式」等，都是对本图现有节点与本卷内容的比较与分类，不是来源中的陈述。它们随图与抽取的演化而可能失效。这是本推导标 physical-argument 的主要理由之一。"
-  - "**(I) 的论证被两次推给习题且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证指向 Vol.1 exercise 4.3 与 Vol.2 exercise 10.13(b)。与玻色弦一侧的 Vol.1 (4.3.10)（式号与内容均已核实、有显式 Q_B² 公式）相比，这是本图中定位明显更弱的一处。"
+  - "**(I) 在本卷的论证被两次推给习题且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证指向 Vol.1 exercise 4.3 与 Vol.2 exercise 10.13(b)。与玻色弦一侧的 Vol.1 (4.3.10)（式号与内容均已核实、有显式 Q_B² 公式）相比，这是本图中定位明显更弱的一处。⚠ **本卷之外**有显式公式：IMNU (3.8)(3.9) 把 Q_B² 逐系数写了出来（本推导已把它列入 sources，用于 ⟹ 半的平坦卡）；但它只覆盖平坦情形、用 D 而非 c^m、且量子化方案与本卷不同，**不能**替本卷的 ⟸ 那段正文补论证。"
   - "**(II) 的前提「总中心荷必须为零」在本卷完全没有论证**：Vol.2 §10.5 开头明说不走超-diff × 超-Weyl 规范固定那条路。故本卷对 D = 10 实质上只有一条论证（(I)）加一条重述（(II)）。"
   - "**(III) 只给模 8 的条件，不给 D = 10**：它必须与 (I) 或 (II) 配合才挑出 D = 10；且其上游 gap 很重（振幅形式是猜的、模变换被原书自称 naive、不变性验证推给读者、theta 函数模变换在本图无节点）。"
   - "**c^m = (3/2)D 中「每个 Majorana 费米子 1/2」在本图无独立节点**，且「每个标量 1」的 Vol.1 定位问题（v1 的 E34/Q4：既无式号也无页码）在本卷没有被解决——Vol.2 只复述结论。缓解：worldsheet.free-boson-central-charge-d 有 Lean 证明。"
   - "**c^g = −15 的两个分项（−26 与 +11）的一般 λ 表达式在 v1 抽取记录里标未核实**；本图用 Vol.2 (10.1.19) 与 (11.1.2a) 补了定位（两处式号与表达式均已 L1 核实），但推导本身在原书中不展开。"
   - "**本卡不主张 (I)(II) 互相蕴含**：两者只是各自挑出同一个 c^m = 15。(I) 与 (II) 之间在本图无等价节点；玻色弦一侧的对应等价（worldsheet.brst-cohomology-equals-ocq-physical）在超弦情形也未建（见 worldsheet.ocq-superstring-physical-states 的 notes）。"
+notes: |
+  【2026-09-11 唯一的一处改动：(I) 的 ⟹ 半改指平坦卡（lead 裁决）】
+  depends_on 里
+    worldsheet.critical-dimension-superstring-brst-v2（一般正范数 SCFT 形式的 ⟹，conjecture）
+  被换成
+    worldsheet.superstring-brst-nilpotency-requires-d10-flat（限平坦的 ⟹，physical-argument），
+  并在 sources 里新增 ito-morozumi-nojiri-uehara-1986 §3 (3.8)–(3.10)（该边因此**不**标 inferred）。
+  其余（(II)(III)(IV) 三条边、两个公共输入边、⟸ 半的 superstring-brst-nilpotent-at-c15 边、
+  本推导自身的 kind/status = physical-argument）**一字未动**。
+  裁决理由与未覆盖部分见 summary 的【2026-09-11 (I) 的 ⟹ 半改指】与 gaps 第一条。
+  ⚠ **被撤掉的那张卡没有被降级、删除或换代**：
+  worldsheet.critical-dimension-superstring-brst-v2 及其推导
+  --via-explicit-nilpotency-coefficients 原样留在图上（status 仍 conjecture），
+  只是不再有活边经过它，因而不再压低超弦 D = 10 主链。
 author: curator
 created: "2026-09-11"
