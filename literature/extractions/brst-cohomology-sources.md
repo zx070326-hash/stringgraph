@@ -569,3 +569,109 @@ Thm 2.7 负责「把它用到 `V(E,p)` 上，并把那个常数项算成 `p_{(24
 - **`Prop 2.4` 不带独立证明**：它的证明就是上方那两句（`Thm 1.12` + Euler–Poincaré），原文用「This implies」一笔带过。
 - 同页**没有**把 `Prop 2.4` 与 `Kato–Ogawa` 或任何物理文献联系起来；p.8445 左栏末的物理归属句
   （refs 8/9 = Goddard–Thorn / Brower）是挂在**号差 `(D−1,1)` 那句**上的，不是挂在 Prop 2.4 上。
+
+### 9.10 ★ 第三轮复核（2026-09-11，researcher）——`Theorem 2.7(ii)` 与 `p_{(D)}(n)` 定义逐字 + **`Prop 2.6(i)` 的证明也靠 Kac 行列式**
+
+> 触发（lead）：图里要为 `Thm 2.7(ii)` 的维数公式单独建卡（§9.7 的建议），需要 (a) 分段子句的逐字、
+> (b) `p_{(D)}(n)` 定义的逐字与准确位置。
+> 取件：**本轮重新独立落盘同一张页图** `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`
+> （137.5 KB，`Read` 读图；期刊 **p.8445 = 扫描页 `-0018`**）。⚠ 注意：本轮**直接 fetch cdn 域成功**，
+> 不必先走 `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/…` 那一跳（§9.8 记的 301 中转可省）。
+> 本节只追加，不改 §9.1–§9.9 任何一行。证据等级 **L1**。
+
+#### 9.10.1 `Theorem 2.7` 逐字（第二次独立 L1 读取）——**与 §9.1 逐字一致，无更正**
+
+> **THEOREM 2.7.** *Suppose* `p ≠ 0`. *Then* (i) `H^i_∞(ℒ, ℒ₀, V(E, p)) = 0`, `i ≠ 0`, *and* (ii) `dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2)`, *if* `1 − p·p/2` *is a nonnegative integer and* `0` *otherwise*.
+
+**(ii) 的分段子句读法（本轮专门确认）**：原文是**一个 `if … and … otherwise` 的后置从句**，
+`0` 在 "and" 之后、"otherwise" 之前 —— 即：**当 `1 − p·p/2` 是非负整数时维数为 `p_{(24)}(1 − p·p/2)`，否则维数为 `0`**。
+⚠ **不要写成「`p_{(24)}(n)` 在 `n` 非非负整数时定义为 0」**——那是把分段挂到了 `p_{(D)}` 的定义上；
+原文的分段挂在**维数**上，`p_{(D)}(n)` 的定义（见 9.10.2）**只对 `φ(q)^{−D}` 的 `q^n` 系数而言，不含分段**。
+
+⚠ **一条此前未记的排版不一致（转录必读）**：同一页上
+- `Proposition 2.4` / `Theorem 2.5` 写 **`H^m_∞(ℒ, ℒ₀; V)`**（**分号**）；
+- `Theorem 2.7` 写 **`H^i_∞(ℒ, ℒ₀, V(E, p))`**（**逗号**）。
+
+两种写法都是原文，**照抄时不要统一**；本项目 `loc` 引用建议随原文。
+
+#### 9.10.2 ★★ `p_{(D)}(n)` 的定义逐字（p.8445 **左栏**，`Eq. [2.3]` 正下方）
+
+> 「… To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. The formal Euler character is
+>
+> `ch_q V · Σ_{m∈Z} (−1)^m ch_q Λ^m_∞ = q^{−1} φ²(q) ch_q V`,   **[2.3]**
+>
+> where `φ(q) = Π_{n≥1}(1 − q^n)`. **We denote by `p_{(D)}(n)` the coefficient of `q^n` in `φ(q)^{−D}`, so that `p_{(1)}(n)` is the classical partition function.** This implies the following.」
+
+**四条读数：**
+
+1. **定义位置确认：`p_{(D)}(n)` 定义在 `Prop 2.4` 的紧邻上文、`Eq. [2.3]` 的正下方一句，属 p.8445 左栏。**
+   **不在 `Theorem 2.7` 处**（Thm 2.7 在右栏下部）。⇒ 维数公式卡的 `p_{(24)}` 定义引用应写
+   `loc: p. 8445, left column, the sentence following Eq. [2.3]`。与 §9.9.3 的记录**一致，已核**。
+2. **`φ(q) = Π_{n≥1}(1 − q^n)`**（原文给出，就在 [2.3] 之后）。⇒ `p_{(D)}(n)` = `Π_{n≥1}(1−q^n)^{−D}` 展开中 `q^n` 的系数。
+3. **`p_{(1)}(n)` 才是经典分拆函数**（原文明写 "the classical partition function"）。
+   ⇒ `p_{(24)}` 是 **24 重分拆**（24 个横向振子），**不是**通常的 `p(n)`。建卡时公式里必须保留下标 `(24)`。
+4. **`[2.3]` 的标号是方括号**（FGZ 全文用 `[N.M]` 式号，正文引用时写 "Eq. **2.3**" 不带括号）。
+   ⇒ 引用一律写 `Eq. [2.3]` 或 `Eq. 2.3`，**不要写 "equation (2.3)"**（与 §9.9.1 注记 2 一致）。
+
+#### 9.10.3 ★★★ 本轮新发现：**`Proposition 2.6(i)`（`ℒ⁻`-freeness）的证明也建立在 Kac 行列式之上**
+
+`Thm 2.7` 自列的四条依赖里有 **`Prop 2.6` 的第一部分**（§9.3）。本轮读到了 `Prop 2.6` 后面那段证明梗概的逐字（p.8445 右栏），
+此前只记了「`Prop 2.6(ii)` 的横向空间构造引用 Kac 行列式（refs 10, 11）」（§9.7 末行），**低估了 Kac 行列式的作用范围**：
+
+> 「The subspace `T` is called the **transversal space** and can be constructed explicitly using the spectrum-generating algebra (**9**). Here we will indicate another proof of the proposition based on a more detailed study of the structure of `V(E, p)`. We note first that if `E = E' ⊕ E''` is an orthogonal decomposition of `E` into two nondegenerate subspaces and `p = p' + p''` is the corresponding decomposition of `p`, then we have a canonical isomorphism of the Hermitian ℒ-modules. `V(E, p) ≅ V(E', p') ⊗ V(E'', p'')`. We choose the decomposition such that `E'` and `E''` have signatures `(D − 1, 0)` and `(0, 1)`, respectively, and `p' ≠ 0`, `p'' ≠ 0`. **Then by Kac's determinant formula (10, 11) we know that the Verma modules `M(h, c)` are irreducible and unitary for `h > 0`, `c > 1` and are irreducible and nonunitary for `h < 0`, `c = 1`.** This implies isomorphisms for `D > 2`
+>
+> `V(E', p') ≅ ⊔_{k≥0} p_{(D−1)}(k) M(p'·p'/2 + k, D − 1)`
+> `V(E'', p'') ≅ M(p''·p''/2, 1)`.
+>
+> **We conclude from the above that `V(E, p)`, `p ≠ 0`, is a free ℒ⁻-module (in fact for any `r ≥ 2` or `s ≥ 1`).** We choose `T` to be
+>
+> `T = ⊕_{k≥0} p_{(D−2)}(k) M(p'·p'/2 + k, D − 1)^{ℒ⁺} ⊗ M(p''·p''/2, 1)^{ℒ⁺}`.   **[2.4]**」
+
+**对图的四条后果：**
+
+1. ★★ **`Prop 2.6(i)`（自由性）与 `Prop 2.6(ii)`（横向空间 `T`）共用同一段证明，而这段证明的核心输入是 Kac 行列式（refs 10, 11）。**
+   ⇒ §9.7 末行「**若**图里 Kac 行列式那条链未建，需在 note 里写明」的适用范围要**扩大**：
+   它不只影响 `Prop 2.6(ii)`，而是**影响 `Thm 2.7` 本身**（因为 `Thm 2.7` 明写依赖 `Prop 2.6` 的第一部分）。
+   **`fgz-1986, Theorem 2.7` 的 `rigorous` 判定必须把 Kac 行列式算作上游依赖。**
+2. ★ **这与 `lian-zuckerman-1989` 的超弦版结构完全平行**：LZ 的 `Corollary 2.19(iii)`（`V(p,κ)` 是 `Vir_κ⁻`-free）
+   同样只由「不可约分解」两条显式方程 (24)(25) 推出，而那两条同样由 Kac 行列式（LZ 的 [22] = Meurman–Rocha）给出。
+   见 `extractions/lian-zuckerman-1989.md` **§9.3–§9.4**。⇒ **玻色与超弦两条链在「自由性 ← Kac 行列式」这一点上同源，
+   curator 可以建两条结构相同的边。**
+3. **FGZ 明说自由性比洛伦兹号差更一般**：括注逐字 "(in fact for any `r ≥ 2` or `s ≥ 1`)"（`r` = 正号数、`s` = 负号数，
+   见 §2.2 「signature `(r, s)`, `r` pluses and `s` minuses, `r + s = D`」）。⇒ **`Prop 2.6(i)` 的卡不必写死号差 `(D−1,1)`**；
+   号差 `(D−1,1)` 与 `D ≥ 2` 是 `Prop 2.6` **陈述**里的量词，而正文的这句括注给出了更宽的成立范围（**原文自陈，非推断**）。
+4. **`[2.4]` 是 `T` 的显式构造式**（两个 Verma 模的 `ℒ⁺`-不变子空间的张量积，重数 `p_{(D−2)}(k)`）。
+   ⇒ §9.5 说的「显式代表元用 `Prop 2.6` 的第二部分」，其显式形式就是 `[2.4]`，可直接作为「横向空间 `T`」卡的 `statement`。
+   注意 `V(E', p')` 的重数是 `p_{(D−1)}(k)`，而 `T` 的重数是 **`p_{(D−2)}(k)`**——**两个下标不同，别抄混**。
+
+#### 9.10.4 本轮顺带逐字取得的一条（此前未记）：FGZ 的「物理空间」定义含**截距 `a = 1`**
+
+紧接 `Thm 2.7` 之后的两句之后（p.8445 右栏末，跨到 p.8446）：
+
+> 「We let `P = P(R^{25,1}, p) = {v ∈ V(R^{25,1}, p) : π(L_n)v = δ_{0,n}v, n ≥ 0}`. `P` is called the **physical space**. Define a map `κ: V →` …」
+
+⇒ **`π(L_0)v = v`，即 `L_0` 本征值 = 1 = 玻色弦截距 `a = 1`，是 FGZ 写在物理空间定义里的**（用 `δ_{0,n}` 表达），
+而**不是**某处额外声明的假设。⚠ 与 `lian-zuckerman-1989` 的 `Definition 2.16` 对照：LZ 写 `π(L_n)v = δ_n κv`，
+即超弦截距 `= κ`（NS 为 ½、R 为 0）。**两篇的截距都藏在物理空间的定义式里，建卡时必须显式写出来。**
+（⚠ 本行只覆盖到 p.8445 末可见的部分，`map κ` 之后的内容在 p.8446，本轮未复读。）
+
+#### 9.10.5 转录疑点（本轮新增一条，引用前须复核）
+
+- **`Prop 2.6(ii)` 的特征标印作 `ch_q T = q^{p·p/2} φ(q)^{D−2}`（§9.2 第 5 行的记录与本轮读数相同）。**
+  **但同页左栏的 `ch_q(V(E, p)) = q^{p·p/2} φ(q)^{−D}` 带明确的负号**，而 `Thm 2.7(ii)` 的答案是 `p_{(24)}(·)`
+  = `φ(q)^{−24}` 的系数（`D = 26` 时 `D − 2 = 24`）。
+  ⇒ **`φ(q)^{D−2}` 的指数前很可能丢了一个负号**（应为 `φ(q)^{−(D−2)}`）。
+  **本记录不改写原文读数**，只标为**高度可疑的扫描/排印失真**；凡把 `Prop 2.6(ii)` 的特征标写进 `statement` 的，
+  **请 auditor 用同一张页图复核该指数的负号**。（同型陷阱：`Prop 2.4` 的 `ℒ⁻` 上标减号极小，见 §9.9.1 注记 1。）
+
+#### 9.10.6 negative evidence（仅覆盖 p.8445）
+
+- **`p_{(D)}(n)` 的定义句里没有任何分段条件**；分段（"nonnegative integer … otherwise 0"）**只出现在 `Thm 2.7(ii)` 的维数陈述里**。
+- **`Thm 2.7` 的陈述里不出现 "no-ghost"、不出现 "ghost number"、不出现 `a = 1` 或 "intercept"**（截距在 p.8445 末 `P` 的定义里，见 9.10.4）。
+- **本页不出现 `Theorem 2.8`（无鬼定理）**——它在 p.8446，见 §1。
+
+#### 9.10.7 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| FGZ p.8445 | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`（**直接 fetch cdn，未走 `articles/instance/…` 的 301 中转**） | ✅ 137.5 KB PNG 落盘，`Read` 读图，整页两栏可辨 |

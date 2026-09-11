@@ -515,7 +515,28 @@
              Thm 2.7 是它在 Fock 模 `V(E,p)` 上的具体化（把那个系数算成 `p_(24)(1 - p.p/2)`）。
              **且 `Prop 2.4` 自身 = `Thm 1.12` + `Prop 1.3`** ==> Thm 2.7 自列的四条依赖
              （Thm 1.12 / Prop 1.3 / Prop 2.4 / Prop 2.6 第一部分）**逻辑上冗余，不是四个独立输入**。
-             逐字与量词对照表见 extractions/brst-cohomology-sources.md **§9.9**。}
+             逐字与量词对照表见 extractions/brst-cohomology-sources.md **§9.9**。
+             **★ 2026-09-11 第三轮（researcher）**：(a) **DOI 字段本条早已有**（`10.1073/pnas.83.22.8442`），
+             派工单「note 若无 DOI 则补」的条件**不成立，未改动 doi 字段**；
+             (b) `Theorem 2.7` 逐字第二次独立 L1 读取，**与首轮一致，无更正**；
+             (c) **`p_(D)(n)` 的定义位置确认在 p.8445 左栏、`Eq. [2.3]` 正下方一句**
+             （「the coefficient of q^n in phi(q)^{-D}, so that p_(1)(n) is the classical partition function」），
+             **不在 Thm 2.7 处**；且**该定义句不含任何分段条件**，Thm 2.7(ii) 的「非负整数否则 0」分段挂在**维数**上，不挂在 p_(D) 上；
+             (d) ★★ **新发现：`Prop 2.6(i)`（V(E,p) 是 L^- -free）的证明与 `Prop 2.6(ii)` 共用同一段，核心输入是 Kac 行列式（refs 10, 11）。**
+             由于 Thm 2.7 明写依赖「the first part of Proposition 2.6」，
+             ⇒ **Thm 2.7 的 rigorous 判定必须把 Kac 行列式算作上游依赖**（此前只以为影响 Prop 2.6(ii)）。
+             同段还给出 V(E,p) 的自由性比洛伦兹号差更一般：原文括注「in fact for any r >= 2 or s >= 1」；
+             T 的显式构造是 Eq. [2.4]，重数 p_(D-2)(k)（注意与 V(E',p') 的 p_(D-1)(k) 不同）。
+             **这与 lian-zuckerman-1989 的 Corollary 2.19(iii) 结构平行**（那里也是由不可约分解 (24)(25) 得自由性，
+             而 (24)(25) 由 Meurman-Rocha 的超 Virasoro Kac 行列式给出）——两条链同源，见 extractions/lian-zuckerman-1989.md §9.4；
+             (e) 顺带：FGZ 的物理空间定义 `P = {v: pi(L_n)v = delta_{0,n} v, n >= 0}`（p.8445 右栏末）
+             **把玻色弦截距 a = 1 写在定义式里**，不是别处的额外假设；
+             (f) ⚠ 转录疑点：`Prop 2.6(ii)` 的 `ch_q T = q^{p.p/2} phi(q)^{D-2}` 指数前**很可能丢了负号**
+             （同页 ch_q V(E,p) = q^{p.p/2} phi(q)^{-D} 的负号清晰，且 Thm 2.7(ii) 的答案是 phi(q)^{-24} 的系数）——写进 statement 前须请 auditor 复核。
+             (g) 排版不一致：Prop 2.4/Thm 2.5 写 `H^m(L, L_0; V)`（分号），Thm 2.7 写 `H^i(L, L_0, V(E,p))`（逗号），照抄勿统一。
+             本轮逐字见 extractions/brst-cohomology-sources.md **§9.10**。
+             取件补充：**本轮直接 fetch cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png 成功**，
+             可省掉 pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/... 的 301 中转。}
 }
 
 @article{lian-zuckerman-1989,
@@ -539,7 +560,29 @@
              同页 Remark 首句逐字「This was also pointed out in **[5]** in the bosonic case」，而 **[5] = fgz-1986**
              ⇒ FGZ 本人对玻色情形也说了同样的话。**订正**：本 note 上文「Note added in proof 称与 FOK 独立」的措辞偏强——
              p.335 原文只说「we received preprints from J. Figueroa-O'Farrill and T. Kimura, whose work **appears to be similar to ours**」，
-             既不确认一致也不点出矛盾；参考文献表里确实没有 FOK。}
+             既不确认一致也不点出矛盾；参考文献表里确实没有 FOK。
+             **★★ 2026-09-11 第三轮（researcher，L1 页图 pp.316-321, 334-335）：**
+             (a) **参考文献 [8] 的身份已裁决**——逐字「8. Gliozzi, F., Scherk, J., Olive, D.: Nucl. Phys. **B122**, 253-290 (1977)」，
+             即 **NPB 122 (1977) 253-290，不是 PLB 65 (1976) 282**。起止页与 Crossref 逐位一致。
+             ⇒ p.328 那句「first proposed by Gliozzi, Scherk and Olive [8] in the "old covariant" formalism」确指 1977 年 NPB 那篇。
+             ⚠ 但这只定了「[8] 是哪一篇」，**没有证实「GSO 投影首发于该篇」**（NPB 122 摘要不出现 projection/truncation/10/tachyon/chirality）——
+             该归属仍只有 LZ p.328 这一条 L1 转引。**sources.bib 目前仍无 GSO 条目，是干净的新增目标。**
+             (b) **[15] 逐字「Terao, H., Uehara, S.: Phys. Lett. 168B, 70-74 (1986)」，与 terao-uehara-1986 一致，无误印。**
+             (c) ⚠ **本参考表同页至少两处页码误印**：[13] Ohta 起页印作 681（真值 1681）；
+             **[5] FGZ 印作「Proc. Natl. Acad. Sci. USA 83, 8446 (1986)」——8446 是 FGZ 的末页不是起页**（真值 8442-8446）。
+             另 [7] 作者印作 "Qui, Z."（通行拼写 Qiu）；[23] Leites 页码印作 340-294（起页大于终页，不可能，真值未核）。
+             (d) **Corollary 2.15 页码 p.317 与逐字复核无误**；其证明**两部分都只引 `Proposition 2.14(ii)`**
+             （原文末句「follows from Proposition 2.14(ii) **also**」），**`Prop 2.14(i)`（Q*=Q）未被引用**——
+             若 curator 要补那条边须标 inferred。p != 0 经 Theorem 2.4 继承，Cor 2.15 自身无量词。
+             (e) ★★ **`Corollary 2.19(iii)`（V(p,k) 是 Vir_k^- -free）的证明不经 `Proposition 2.18` 的陈述**：
+             原文只写「Equations (24), (25) imply that V(p,k) is a direct sum of tensor products of free modules over Vir_k^-」，
+             而 (24)(25) 是印在 p.319、**位于 Prop 2.18 证明体内**的显式不可约分解。
+             对比：(i) 与 (ii) 明写引用 Proposition 2.18 本身。
+             ⇒ 图里 `Cor 2.19(iii) -> Prop 2.18` 这条边**在原文里不存在**，正确 loc 是「§2, eqs. (24)-(25), p. 319（在 Prop 2.18 的证明内）」并标 inferred。
+             再往上依赖落到 [7,9,10]（幺正性）与 **[22] = Meurman-Rocha CMP 107 (1986) 263-294（超 Virasoro Kac 行列式）**
+             ⇒ **自由性最终建立在 Kac 行列式之上**，与 fgz-1986 的 Prop 2.6(i) 结构同源。
+             (f) `Theorem 2.20` 经 Cor 2.19(i)(ii) 依赖 Prop 2.18，**但不经 Cor 2.19(iii)**；(iii) 是喂给 §3 消灭定理 (2.4) 的证明的。两条路径勿合并。
+             本轮逐字见 extractions/lian-zuckerman-1989.md **§8**（参考表）与 **§9**（Cor 2.15 / Prop 2.18 / Cor 2.19）。}
 }
 
 @article{lian-zuckerman-1991,
@@ -596,7 +639,14 @@
   note    = {由 researcher 于 2026-09-11 登记。**标题是复数 "superstrings"**（INSPIRE recid 17645 逐字；用单数检索零命中）。终页 1691 由 OSTI 5930612 "Pages: 1681-1691" 与 LZ 1989 参考文献 [13]（印作 "681–1691"，起页少一位）两条独立来源给出；期号 6、出版日 1986-03-15（OSTI/INIS）。报告号 UTTG-30-85，preprint_date 1985-12，预印本 30 页；KEKSCAN 85-12-165（主机死）；OSTI 只有引文记录（purl 404）；APS 403；无 CDS。**正文未获取（L0）。**
              摘要逐字（INSPIRE，abstract_source APS）：「A manifestly covariant quantization of the superstring is presented in the Neveu-Schwarz-Ramond formalism on the basis of the Becchi-Rouet-Stora (BRS) invariance principle. The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B^2=0 of the BRS charge. A modified form of the subsidiary condition of Kugo and Ojima Q_B|phys>=0 to define the physical subspace is sufficient to demonstrate the no-ghost theorem.」
              **★ 关键 L1 证词（ito-morozumi-nojiri-uehara-1986 p.952 Note added）：Ohta 的预印本 UTTG 30-85「did not present the proof of the no-ghost theorem in the Ramond sector」。发表版是否补上未核。⇒ 挂 no-ghost-theorem-superstring 只能挂 NS 扇区并注明。**
-             L3 转述：LZ 1989 Prop 1.7(ii) "Q^2 = 0 iff D = 10" 证明归 [13,15]；Prop 1.7(x)(xi) 两扇区零模分解「Calculations are done in [13]」；Prop 2.1 [13] {Q,b_0}=K, [Q,β_0]=D_R；p.329 G-parity 含鬼的 GSO 推广归 Terao–Uehara/Ohta；KKM 2010 (2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 归 [35,36]；Dedushenko 2015 §1 把它归入「直接推广 KO/Polchinski 玻色弦证明」一类（要求 d >= 2）。见 extractions/ohta-1986.md。}
+             L3 转述：LZ 1989 Prop 1.7(ii) "Q^2 = 0 iff D = 10" 证明归 [13,15]；Prop 1.7(x)(xi) 两扇区零模分解「Calculations are done in [13]」；Prop 2.1 [13] {Q,b_0}=K, [Q,β_0]=D_R；p.329 G-parity 含鬼的 GSO 推广归 Terao–Uehara/Ohta；KKM 2010 (2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 归 [35,36]；Dedushenko 2015 §1 把它归入「直接推广 KO/Polchinski 玻色弦证明」一类（要求 d >= 2）。见 extractions/ohta-1986.md。
+             **★ 2026-09-11 第三轮状态确认（researcher，派工单第 4 项）：正文仍为 L0，本条无内容级更新。**
+             本轮**未新增任何取正文的尝试**（既有死路：APS 403、OSTI purl 404、KEKSCAN 主机 socket hang up、无 CDS、INIS metadata-only；
+             唯一未试路线仍是 WebSearch 找 UTTG-30-85 扫描件或 .edu 课程页，而 WebSearch 本会话额度已由父会话耗尽）。
+             **read_depth 维持 abstract，不得升。**
+             顺带（L1，第二次页图确认）：lian-zuckerman-1989 参考文献 [13] 逐字印作
+             「Ohta, N.: Phys. Rev. **D33**, 681-1691 (1986)」——**起页 681 确系原刊少印首位 1**，真值 1681-1691（OSTI 双源）。
+             此前只有一次读取，本轮复核后可定案：**凡转述 LZ 的引用串必须注明「LZ 印作 681，系误印」。**}
 }
 
 @article{henneaux-1987,
