@@ -192,17 +192,35 @@
   `im_pow_twelve_mul_norm_eta_pow_48_modular`（`τ₂¹²|η|⁴⁸`，即玻色单圈被积函数的倒数）。
 
   ⚠ **给图的建议（本 agent 未改 graph/）**：
-  1. `worldsheet.modular-group-generated-by-s-and-t` 可标 `formalized`，
-     `lean_decl = StringFormal.DedekindEta.modular_group_generated_by_S_and_T`，
-     `lean_file = formal/StringFormal/Math/DedekindEtaModular.lean`。**但要先核对图卡是
-     `SL(2,ℤ)` 还是 `PSL(2,ℤ)`**：Mathlib 的是 `SL(2,ℤ)` 版。若图卡写的是 `PSL(2,ℤ)`
-     （物理文献通常如此，因为 `−1` 平凡作用在 ℍ 上），则 Lean 定理**严格更强**（`SL ⇒ PSL` 要商掉
-     `±1`，是一步平凡但未形式化的推论），应在 `gaps` 记一条「Lean 版为 SL(2,ℤ)，PSL 版未形式化」。
+  1. `worldsheet.modular-group-generated-by-s-and-t` 可标 `formalized`。**注意图卡是 `PSL(2,ℤ)` 版
+     且含两条关系**（(1) S、T 生成 PSL(2,ℤ)；(2) S² = 1、(ST)³ = 1），Mathlib 只给了 `SL(2,ℤ)` 版
+     生成定理，所以本轮另开了一个小岛
+     `StringFormal/Math/ModularGroupGenerators.lean` 把三条都补齐：
+     `ModularGroupGen.psl_closure_S_T`（(1)）、`psl_S_sq`（(2) 前半）、`psl_ST_cube`（(2) 后半）。
+     `lean_decl` 建议取 `StringFormal.ModularGroupGen.psl_closure_S_T`（主断言），
+     另两条写进 notes 或 `lean_decl_extra`（若 schema 支持列表）。
+     ✔ 图卡自己声明「**不**断言这是一个 presentation」——Lean 侧完全一致：本文件也不证
+     `PSL(2,ℤ) ≅ ℤ/2 ∗ ℤ/3`，Mathlib v4.33.1 也没有。两边口径对得上，不需要额外 gap。
+     △ 一条**真正的**缺口（建议写进 `gaps`）：Lean 里 `PSL(2,ℤ) := SL(2,ℤ)/Z(SL(2,ℤ))`
+     （Mathlib `Matrix.ProjectiveSpecialLinearGroup`），本文件**没有**证 `Z(SL(2,ℤ)) = {±1}`
+     （真命题，但用不上；只需要 `−1 ∈ Z`，即 `neg_one_mem_center`）。因此 Lean 的两条关系严格说是
+     「模去中心后成立」，若图卡想要「S² = ±I 在 SL(2,ℤ) 里」，那是 `sl_S_sq : S^2 = -1` 与
+     `sl_ST_cube : (S*T)^3 = -1`（本文件也有，且更强）。
   2. 若图里有「`τ₂|η|⁴` 模不变」这条卡（一般挂在单圈配分函数链上），可挂
      `im_mul_norm_eta_pow_four_modular_invariant`。
   3. **仍缺**（不要误标）：η 本身对一般 `g` 的乘子系统（Dedekind 和、24 次单位根），
      以及测度 `d²τ/τ₂²` 的模不变性。本文件只控制 `‖η‖` 在 `τ₂|η|⁴` 这一特定组合里的行为；
      `12 = (D−2)/2` 是输入不是输出。
+
+- [x] `psl-generators`：`StringFormal/Math/ModularGroupGenerators.lean`（无 sorry，8 个声明
+  `check_axioms --all` 全 `ok`）。只 import Mathlib，是独立小岛，被 `DedekindEtaModular` 复用。
+  `SL(2,ℤ)` 层：`sl_S_sq : S^2 = -1`、`sl_ST_cube : (S*T)^3 = -1`（两条都是
+  `ext i j; fin_cases i <;> fin_cases j <;> rfl`，`-1 : SL(2,ℤ)` 靠全局实例
+  `Fact (Even (Fintype.card (Fin 2)))` 提供 `Neg`）、`sl_closure_S_T`（Mathlib 再导出）、
+  `neg_one_mem_center`。`PSL(2,ℤ)` 层（`psl := QuotientGroup.mk'` 到 `SL/Z`）：
+  `psl_neg_one`、`psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`。
+  生成定理的搬运用 `MonoidHom.map_closure` + `Set.image_pair` + `MonoidHom.range_eq_top`
+  （样板抄自 Mathlib `NumberTheory/ModularForms/LevelOne/Basic.lean:60`）。
 
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
