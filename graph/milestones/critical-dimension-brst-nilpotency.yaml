@@ -1,0 +1,36 @@
+id: ms.critical-dimension-brst-nilpotency
+statement_id: worldsheet.critical-dimension-brst-v2
+canonical_text: |
+  【本里程碑断言什么】
+  设 Q_B 是权 λ = 2 的 bc 鬼场系统、鬼场正规序常数 a^g = −1、物质中心荷 c^m 的 BRST 荷，
+  作用在受限模 V 上（每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化），
+  且诸 c_{−m} c_m 在 V 上线性无关（忠实的 Fock 型受限模满足）。则
+    Q_B² = (1/2) Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m,
+  故 Q_B² = 0 ⟺ c^m = 26 ⟺ c^m + c^g = 0。
+
+  【本里程碑不断言什么】
+  (1) **不**断言 D = 26。由 c^m = 26 到 D = 26 需要一步 c^m = D
+      （worldsheet.free-boson-central-charge-d，**effective = formalized**），
+      该步只在物质部门取 D 个平坦自由玻色子时成立；紧化背景与非几何背景是 c^m = 26 而 D ≠ 26 的解。
+  (2) **不**断言截距 a = 1。本路线完全不涉及 a。
+  (3) **不**断言 BRST 上同调与旧协变物理态空间的同构
+      （那是 worldsheet.brst-cohomology-equals-ocq-physical，已 rigorous，本里程碑不使用）。
+  (4) **不**断言这组鬼场模式就是 Polyakov 路径积分的 FP 鬼场。
+
+  【严格性的确切位置】
+  · c^g = −26：fgz-1986 Proposition 2.1(i)（L1 逐字，PNAS 公告体裁，无印出证明）；
+  · Virasoro 关系与归一化：worldsheet.virasoro-algebra-v2（formalized）；
+  · {Q_B, Q_B} 的模式恒等式：无任何文献印出证明，靠 reviewer 独立复算
+    （docs/STATUS_LEVELS.md 等级 4 的例外条款）；
+  · ⟸ 半边另有独立的 rigorous 节点 worldsheet.brst-nilpotent-at-c26（fgz-1986 Prop 1.2）。
+canonical_source:
+  ref: polchinski-1998-v1
+  loc: |
+    §4.3, eq. (4.3.9), p.131–132（**全书唯一逐字写出 `c^m = 26` 而非 D = 26 的位置**）
+    ——另两条来源（milestone schema 只容一条 canonical_source，故并列于此，内容取自
+    docs/drafts/critdim-route-cards.md §E 的三条原文，未增删）：
+    · kato-ogawa-1983，全文；摘要（L2）。正文未获取，定理编号未核实。
+    · fgz-1986，Proposition 2.1(i), p.8444。
+audit:
+  status: draft
+phase: 1

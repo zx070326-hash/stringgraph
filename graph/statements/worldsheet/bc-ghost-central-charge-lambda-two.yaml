@@ -1,0 +1,53 @@
+id: worldsheet.bc-ghost-central-charge-lambda-two
+kind: proposition
+title: λ = 2 的 bc 鬼场系统中心荷 c^g = −26（模式代数形式，不含一般 λ 公式）
+statement: |
+  设 b_m、c_n (m, n ∈ Z) 满足反对易关系
+    {b_m, c_n} = δ_{m+n,0},  {b_m, b_n} = {c_m, c_n} = 0,
+  并设 V 是它们的一个**受限模**（每个 v ∈ V 被除有限多个模式外的 b_n、c_n 零化）。
+  在 V 上定义权 λ = 2 的 bc 系统的 Virasoro 模式
+    L^g_m = Σ_{n∈Z} (m − n) : b_{m+n} c_{−n} :
+  （等价写法 L^g_m = Σ_{n∈Z} (n − m) : c_{−n} b_{m+n} :，两者逐项相差一个由反对易造成的符号）。
+  则 {L^g_m} 满足 conv.virasoro-standard 归一化下的 Virasoro 关系，中心荷取值
+    c^g = −26,
+  即 [L^g_m, L^g_n] = (m − n) L^g_{m+n} + (−26/12) m(m² − 1) δ_{m+n,0}。
+
+  【本命题到此为止】本卡**不**断言一般 λ 的公式 c = −3(2λ−1)² + 1
+  （那是 worldsheet.bc-ghost-central-charge，其唯一推导走 OPE，physical-argument），
+  **不**断言这组模式就是 Polyakov 路径积分的 Faddeev–Popov 鬼场
+  （那一步由 worldsheet.faddeev-popov-ghost-action 承载，physical-argument），
+  也**不**断言任何关于物质中心荷或 D 的事。
+uses_conventions: [conv.virasoro-standard, conv.worldsheet-complex-coords]
+sources:
+  - ref: fgz-1986
+    loc: "Proposition 2.1, p.8444 右栏：(i) `ρ(c) = −26 Id_{Λ^∞_*}`；(ii) `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`"
+    note: |
+      **L1，全文五页逐页读毕**（literature/extractions/brst-cohomology-sources.md §1.2 与 §1.4 的
+      编号表第 11 行）。逐字转录见该抽取记录。本卡的两条内容**分别**对应 (i) 与 (ii)：
+      (ii) 是鬼场 Virasoro 模式的显式表达式，(i) 是它的中心荷取值。
+      ⚠ **FGZ 是 PNAS 公告体裁，Proposition 2.1 没有印出证明。** 按 lead 2026-09-12
+      （small-backlog-8 / small-backlog-10(c)）的统一口径——「逐字核实的编号命题 + 明写输入 +
+      gaps 记无印出证明」判 rigorous——本卡的推导取 rigorous，缺口写进 gaps。
+      ⚠ FGZ 的 26 与「D = 26」无关：紧接 Prop 2.1 的正文逐字
+      「from this point on we will assume that π(c) = 26 Id_V」，即**物质**中心荷 26 在 FGZ 里是假设。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.12), p.51（一般 λ 的鬼场中心荷公式，λ = 2 给 −26；式号经 schrans-2020 目录逐字核实）"
+    note: |
+      **只作旁证，不承载本推导**：原书那里走的是 OPE，且给的是一般 λ 公式。
+      本卡的论证由 fgz-1986 Prop 2.1 承载。
+tags: [cft, central-charge, ghosts, bc-system, brst, critical-dimension]
+notes: |
+  **本卡是 worldsheet.bc-ghost-central-charge 的窄化拆分，不是换代。** 两张卡并存：
+    · 一般 λ 公式（旧卡，--via-ope，physical-argument）——bosonization / βγ / 超共形鬼场三处要它；
+    · λ = 2 的模式代数形式（本卡，--via-fgz-ghost-representation，rigorous）——
+      BRST 与 Weyl 反常两条 D = 26 路线只要它。
+  依据 docs/STATUS_LEVELS.md 的「拆卡」原则（「正确做法是拆卡，让 Lean 对应的那一半成为
+  formalized 定义卡」）的同型处理。
+
+  **Lean 可行性（给 formalizer 的备注，不属本卡断言）**：图中已有 formalized 的
+  worldsheet.virasoro-algebra-v2、worldsheet.fock-space-virasoro-representation 与
+  worldsheet.free-boson-central-charge-d（--via-lean）。本卡是它们的 Clifford（费米）对应物，
+  中心项同样是一个有限和；若形式化成功，本卡可升 formalized，届时 BRST 路线成为本图
+  **唯一**端到端机检的 D = 26 路线。
+author: curator
+created: "2026-09-12"

@@ -1,0 +1,52 @@
+id: worldsheet.bc-ghost-central-charge-lambda-two--via-fgz-ghost-representation
+target: worldsheet.bc-ghost-central-charge-lambda-two
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    note: "提供 conv.virasoro-standard 归一化下中心荷的读法（m(m²−1)/12 的系数）。该卡 formalized。"
+sources:
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i)(ii), p.8444 右栏"
+    note: |
+      L1，逐字见 literature/extractions/brst-cohomology-sources.md §1.2：
+        `(i) ρ(c) = −26 Id_{Λ^∞_*}`，`(ii) ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`。
+      ρ 是 Virasoro 代数 ℒ 在半无穷形式空间 Λ^∞_* 上的鬼场表示。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. (2.5.12), p.51"
+    note: |
+      **只作旁证，不承载本推导**（一般 λ 的 OPE 计算）。列出以便下游核对 λ = 2 处两套来源给同一个 −26。
+summary: |
+  论证由来源直接给出，本图只做一步记号对齐（auditor 已复核，见下）：
+  (1) FGZ Prop 2.1(ii) 给出鬼场表示里的 Virasoro 模式 ρ(L_m) = Σ_n (n − m) : c_{−n} b_{m+n} :。
+  (2) FGZ Prop 2.1(i) 给出该表示上中心元的取值 ρ(c) = −26 Id。
+  (3) 记号对齐：: c_{−n} b_{m+n} : = − : b_{m+n} c_{−n} :（反对易），故
+      Σ_n (n − m) : c_{−n} b_{m+n} : = Σ_n (m − n) : b_{m+n} c_{−n} :，
+      后者正是本图 λ = 2 的 bc 系统 Virasoro 模式的标准写法
+      L^g_m = Σ_n (m(λ−1) − n) : b_{m+n} c_{−n} : 在 λ = 2 处的值。
+      **这一步由 auditor 于 2026-09-12 逐项复核**（一行符号翻转，无其他内容）。
+  (4) 半无穷形式空间 Λ^∞_* 与本卡所说的 bc 受限模是同一个对象的两种写法：
+      两者都是由 {b_m, c_n} = δ_{m+n,0} 生成的 Clifford 代数的、带局部截断的模。
+      FGZ §2.1 紧接 Prop 2.1 的正文把该复形称为「physics literature 里的 BRST operator」
+      并指向 ref. 5 = Kato–Ogawa 1983，即来源本人做了这个对应。
+gaps:
+  - "**FGZ 是 PNAS 公告体裁，Proposition 2.1 没有印出证明。** 按 lead 2026-09-12（small-backlog-8、small-backlog-10(c)）对该体裁的统一口径判 rigorous（先例：worldsheet.no-ghost-theorem-brst--via-fgz、worldsheet.brst-nilpotent-at-c26--via-fgz）。本项目未逐行复核该中心项的计算。**若 lead 收紧该口径，本推导应随同降级。**"
+  - "**Λ^∞_* ↔ bc 受限模 的字典是本图的对应，不是 FGZ 的定理**。FGZ 自己在 §2.1 正文里指认该复形就是物理文献的 BRST 复形（ref. 5 = Kato–Ogawa），但没有编号命题陈述这个字典。auditor 复核的只有 summary (3) 那一步符号翻转。"
+  - "本推导**不**覆盖一般 λ 的公式 c = −3(2λ−1)² + 1；那条仍只有 worldsheet.bc-ghost-central-charge--via-ope（physical-argument）。"
+  - "本推导**不**断言这组模式就是 Polyakov 路径积分的 FP 鬼场。该识别由 worldsheet.faddeev-popov-ghost-action（physical-argument）承载，且它**在 Weyl 反常路线里仍然是瓶颈**——改边只绕开了中心荷这一步，没有绕开 FP 手续。"
+notes: |
+  **草案里的 worldsheet.bc-ghost-cft 边已按 auditor 自己的建议删去，未落地。**
+  草案 A2 把它写成 `inferred: true` 的记号接口边，但同一条 note 里 auditor 写道
+  「若 lead 认为这条边会把本推导压回 physical-argument（bc-ghost-cft 的 effective 是
+  physical-argument），则应当直接删掉它……auditor 建议：**删掉这条边**」。
+  实测 `stringgraph status worldsheet.bc-ghost-cft` 给 own rigorous / effective physical-argument，
+  确会把本推导压到 physical-argument；且按 docs/STATUS_LEVELS.md 2026-09-12「接口边」裁决的后半句
+  （只提供语境而不承担论证的边不得存在），该边不该存在——本卡 statement 已把反对易关系与
+  L^g_m 的表达式逐字写出，不从别处取。故按建议删除，来源定位留在 sources 的 loc。
+
+  reviewer-verified: TODO（若 lead 要求，请 reviewer 独立复核 summary (3) 的符号翻转与
+  「Λ^∞_* 上 Prop 2.1(i) 的 −26 与 conv.virasoro-standard 的 c 是同一个归一化」这一点）。
+  ⚠ 本推导的 rigorous **不**依赖该复核（依据是 PNAS 公告体裁的统一口径 + 逐字核实的编号命题），
+  这与 critical-dimension-brst-v2--via-mode-computation 不同，后者的档位完全依赖复算。
+author: curator
+created: "2026-09-12"

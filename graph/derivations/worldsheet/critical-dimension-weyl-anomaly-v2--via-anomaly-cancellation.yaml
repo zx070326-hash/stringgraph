@@ -5,11 +5,25 @@ status: physical-argument
 depends_on:
   - id: worldsheet.weyl-anomaly-trace
   - id: worldsheet.weyl-anomaly-central-charge-constant
-  - id: worldsheet.bc-ghost-central-charge
+  - id: worldsheet.bc-ghost-central-charge-lambda-two
     note: |
       供给 c^g = −26。目标陈述里的「c^m − 26 = 0」中那个 26 就是 −c^g，
       本推导不重算它。（2026-09-11 换代后这条边保留；被去掉的是
       worldsheet.free-boson-central-charge-d，见 notes。）
+
+      **【2026-09-12 改指窄卡，curator 落实 auditor 草案 §B / ROADMAP R3】**
+      本边由 worldsheet.bc-ghost-central-charge（一般 λ 公式，--via-ope，physical-argument）
+      改指 worldsheet.bc-ghost-central-charge-lambda-two（λ = 2 的模式代数结论，
+      fgz-1986 Proposition 2.1(i)(ii)，rigorous）。**理由**：本推导只用到 λ = 2 处的值 −26。
+      **inferred 维持不标**，但依据位置随之改变：**已在 sources 加挂 fgz-1986 Prop 2.1(i)**，
+      原先的 §2.5 eq. (2.5.12)（一般 λ，走 OPE）退为旁证（见该条 source 的 note）。
+      ⚠ **本改动不改变本推导的 physical-argument，也不改变本路线的瓶颈**：
+      剩余的物理根仍是 worldsheet.weyl-anomaly-trace、worldsheet.weyl-anomaly-central-charge-constant、
+      worldsheet.faddeev-popov-ghost-action、worldsheet.conformal-gauge-fixing，
+      以及它们共用的 OPE / Ward 恒等式 / 自由标量传播子路径积分层。改边**只绕开中心荷这一步**，
+      **没有**绕开 FP 手续（ROADMAP R4）。
+      ⚠ summary (3) 与本文件其余处字面写 `worldsheet.bc-ghost-central-charge` 的记账文字**不动**
+      （按 graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」的精神：改边不改正文字面）。
   - id: worldsheet.faddeev-popov-ghost-action
   - id: worldsheet.conformal-gauge-fixing
 sources:
@@ -29,6 +43,18 @@ sources:
       it is a gauge redundancy and if there is an anomaly the result is that the gauge symmetry
       is broken, with implications for e.g. unitarity」——**这是 schrans-2020 的措辞，不是 Polchinski 的**
       （抽取记录 E53 明确标注），只作核对，不承载论证。
+      **【2026-09-12】**上一段「原书在 (3.4.23) 处显式引用 (2.5.12)」这条记账仍然成立，
+      但 depends_on 的 c^g 边已改指窄卡，其依据位置改为 fgz-1986 Prop 2.1(i)（见下）；
+      §2.5 (2.5.12) 在本推导里退为旁证（一般 λ，走 OPE）。
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i), p.8444 右栏：`ρ(c) = −26 Id_{Λ^∞_*}`（同条 (ii) 给出 `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`，即 λ = 2 的 bc Virasoro 模式）"
+    note: |
+      **【2026-09-12 新增】**depends_on 中 worldsheet.bc-ghost-central-charge-lambda-two
+      那条边**改指后**不标 inferred 的依据位置。L1（全文五页逐页读毕），逐字见
+      literature/extractions/brst-cohomology-sources.md §1.2。
+      ⚠ 本条**只**支持 c^g = −26 这一个输入，**不**支持本推导的主论证（Weyl 反常抵消）：
+      FGZ 不做路径积分、不推导 c^m = 26（§2.1 正文逐字「from this point on we will assume
+      that π(c) = 26 Id_V」，即假设），也不涉及 Faddeev–Popov 手续。
   - ref: polchinski-1998-v1
     loc: "§4.3, eq. **(4.3.9)**（全书唯一逐字写出 `c^m = 26` 的位置：「{Q_B, Q_B} = 0 only if c^m = 26」；式号与内容已核实，抽取记录 §12.3）"
     note: |
