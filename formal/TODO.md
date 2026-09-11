@@ -71,7 +71,11 @@
   `norm_eta_neg_inv_pow_four`（`|η(−1/τ)|⁴ = |τ|²|η(τ)|⁴`）与
   `im_mul_norm_eta_pow_four_S_invariant`（`Im(−1/τ)·|η(−1/τ)|⁴ = Im τ·|η(τ)|⁴`，
   即 `τ₂|η|⁴` 的 **S** 不变性；全模群不变性还缺 T 半与「S,T 生成模群」）。
-  其余声明：`csqrt_neg_I`、`csqrt_neg_I_mul`、`eta_S`（`τ : ℍ` 版）、`norm_eta_neg_inv_sq`。
+  其余声明：`csqrt_neg_I`、`csqrt_neg_I_mul`、`eta_S`（`τ : ℍ` 版）、`norm_eta_neg_inv_sq`，
+  以及模群作用形 `eta_modular_S_smul`（`η(S · τ) = (−iτ)^{1/2} η(τ)`）与
+  `im_mul_norm_eta_pow_four_modular_S_smul`（`(S·τ)₂|η(S·τ)|⁴ = τ₂|η(τ)|⁴`），
+  后两条是为了将来接 `worldsheet.modular-group-generated-by-s-and-t`。
+  共 9 个公开声明，`check_axioms --all` 全 `ok`。
 
   **Mathlib v4.33.1 现状清单**（2026-09-11 formalizer 逐文件读源码，L1）。
   ⚠ **图卡 `math.dedekind-eta-s-transformation` 的 notes 说「Mathlib 无 S 变换」是错的**：
