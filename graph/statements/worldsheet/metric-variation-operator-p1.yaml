@@ -34,8 +34,18 @@ sources:
       但它的分量公式在本图中只有伴读笔记的背书。
 tags: [worldsheet, moduli, ckv, differential-operator, gauge-fixing]
 notes: |
-  记号说明：本图沿用 Polchinski 的下标 1（P₁ 作用在**权 1** 的对象即向量场上），
-  Polchinski Vol.1 只用到 P₁，不涉及 P_n 的一般族。
+  记号说明：本图沿用 Polchinski 的下标 1（P₁ 作用在**权 1** 的对象即向量场上）。
+  ⚠ **2026-09-11 订正（curator-small-backlog-5，依 researcher polchinski-1998-v1.md §18.2，印刷 p.118 页图 L1）**：
+  此处原写「Polchinski Vol.1 只用到 P₁，不涉及 P_n 的一般族」——**不确**。原书 §5.3 末 (5.3.22)
+  `dim ker P_n − dim ker P_n^T = (2n+1)χ` 用到一般 n 的 P_n / P_n^T，而它们的定义在 **exercise 3.2 (b)(c)(d)**（p.118）：
+  (b) "Find a differential operator P_n that takes n-index traceless symmetric tensors into (n+1)-index traceless
+  symmetric tensors"；(c) "Find a differential operator P_n^T that does the reverse"；(d) "show that with appropriate
+  normalization (u, P_n v) = (P_n^T u, v)"，内积 (t, t′) = ∫ d²σ g^{1/2} t · t′。
+  即 **P_n 与 P_n^T 在原书里没有显式表达式（"Find"），唯一性根本不提，(d) 的归一化也不说是什么**；
+  只有 n = 1 的 P₁ 在正文 (5.2.4) 有显式定义——就是本卡。故 (5.3.22) 里的 P_n 在本书中是一个未被唯一刻画的对象，
+  凡引 (5.3.22) 的节点应把 P_n 写成「某个满足 ex. 3.2 (b)(c)(d) 要求的算子」或改挂给出显式公式的数学来源
+  （本图目前只有 worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly 及其不可定向副本在 summary/gaps 里
+  提到 (5.3.22)，均只用 n = 1）。ex. 3.2 (a)「n 指标无迹对称张量在二维恰有两个独立分量」同样是习题。
   在共形规范 + 复坐标下 P₁ 的两个非零分量是 (P₁δσ)_zz = ∇_z δσ_z、(P₁δσ)_z̄z̄ = ∇_z̄ δσ_z̄，
   这正是 worldsheet.ckv-holomorphic-in-conformal-gauge 与
   worldsheet.moduli-holomorphic-quadratic-differentials 里全纯条件的来源。
