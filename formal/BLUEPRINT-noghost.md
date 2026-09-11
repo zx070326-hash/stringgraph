@@ -464,3 +464,285 @@ theorem noGhost_level_le_two (hD : D = 26) ... :
 不是 level-2 物理态的全部，要补 `L_1/L_2` 条件的完整求解）。
 难度 **中**，价值：给图一个 `worldsheet.no-ghost-theorem-low-levels` 型的 formalized 节点，
 并在真做大工程前验证 B.1 的基础设施设计。
+
+---
+
+## C. 正定性组装
+
+这一节**不依赖 §B**，可以立刻开工，而且它包含本蓝图里性价比最高的几条。
+
+### C.1 塔上的伪态 / 零模态 / 商形式（缺失的基础设施）
+
+单 Fock 版全都有（`PhysicalStates.lean` 的 `spuriousSubmodule` / `orthComplement` /
+`nullSubmodule` / `spuriousSubmodule_le_orthComplement`，`QuotientForm.lean` 的
+`quotientPairing` / `quotientPairing_mk`），**塔上一个都没有**。
+没有它们，无鬼定理 (1b) 的陈述根本写不出来。
+
+文件建议：`StringFormal/NoGhost/TowerQuotient.lean`。
+
+```lean
+/-- 塔上的正交补。 -/
+noncomputable def towerOrthComplement (η : Fin D → R) (W : Submodule R (TowerFock D R)) :
+    Submodule R (TowerFock D R) :=
+  { carrier := {χ | ∀ ψ ∈ W, Fock.towerPairing η χ ψ = 0}, .. }
+
+/-- 塔上的伪态 `⨆_{n>0} range L_{-n}`。 -/
+noncomputable def towerSpuriousSubmodule (η a b : Fin D → R) : Submodule R (TowerFock D R) :=
+  ⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range (towerLop η a b (-n))
+
+/-- 塔上的零模态 `H_phys ⊓ H_phys^⊥`。 -/
+noncomputable def towerNullSubmodule (η a b : Fin D → R) (a₀ : R) :
+    Submodule R (TowerFock D R) :=
+  towerPhysSubmodule η a b a₀ ⊓ towerOrthComplement η (towerPhysSubmodule η a b a₀)
+
+/-- **伪态 ⊥ 物理态**（塔上版）。逐字照搬 `Fock.spuriousSubmodule_le_orthComplement`，
+唯一的输入是 `L_m† = L_{-m}`，塔上已有 `Fock.towerPairing_towerLop_left`。 -/
+theorem towerSpuriousSubmodule_le_orthComplement :
+    towerSpuriousSubmodule η a b ≤ towerOrthComplement η (towerPhysSubmodule η a b a₀)
+
+/-- 商上的诱导形式（两次 `Submodule.liftQ`，照搬 `QuotientForm.lean`）。 -/
+noncomputable def towerQuotientPairing :
+    LinearMap.BilinForm R (TowerPhysQuot η a b a₀)
+
+theorem towerQuotientPairing_mk (ψ φ : towerPhysSubmodule η a b a₀) :
+    towerQuotientPairing η a b a₀ (Quotient.mk _ ψ) (Quotient.mk _ φ)
+      = Fock.towerPairing η ψ φ
+```
+
+难度：**中**，纯机械搬运，零新数学，约 250 行。
+**建议顺带补一条**（推导 gaps 里 reviewer-ch4 那条的 Lean 版）：
+
+```lean
+/-- 「零模态 = 伪态 ∩ 物理态」的**易方向**（反方向要 §B 的 GT 分解）。 -/
+theorem towerSpurious_inf_phys_le_towerNull :
+    towerSpuriousSubmodule η a b ⊓ towerPhysSubmodule η a b a₀ ≤ towerNullSubmodule η a b a₀
+```
+
+### C.2 假设集的可满足性见证 —— **最便宜、也最该先做的一条**
+
+整个 DDF 岛的每条定理都带 `hη ∧ hbb ∧ hba ∧ hεb`，而仓库里**没有任何一条**证明这套假设
+可以同时满足。这不是吹毛求疵：`FockGram.lean` 已经吃过一次亏（`ZMod 2` 上对角元为零的反例
+是那一节最有价值的发现之一），而 `VertexAdjoint.lean` 的
+`add_self_eq_zero_of_pairing_vertexOsc_same_momentum` 正是同类「审计引理」。
+
+显式见证（`K` 为 ℚ-代数即可；正定性再要有序域）：
+
+```
+η  = mostly-plus Minkowski：η_0 = -1，η_μ = 1 (μ ≥ 1)
+b  = (1, 1, 0, …, 0)            -- k_0，类光
+b̃  = (1/2, -1/2, 0, …, 0)       -- 共轭类光方向
+a  = (1/2, 3/2, 0, …, 0)        -- 快子壳上的动量
+ε_i = Pi.single i 1  (2 ≤ i ≤ D-1)
+```
+
+逐条验算（全部 `Fin` 上的有限和，`decide`/`simp` + `ring` 可做）：
+
+```
+b·b  = -1·1·1 + 1·1·1 = 0                      ✓ 类光
+b·a  = -1·1·(1/2) + 1·1·(3/2) = 1              ✓ 2α' k_0·k = 1
+a·a  = -(1/2)² + (3/2)² = 2，故 α'k² = 1        ✓ 快子壳、a₀ = 1
+b·b̃  = -1·1·(1/2) + 1·1·(-1/2) = -1            ✓ 光锥归一
+b̃·b̃  = -(1/2)² + (1/2)² = 0                    ✓
+ε_i·b  = η_i · 1 · b_i = 0   (i ≥ 2)           ✓ 横向
+ε_i·ε_j = δ_ij  且 > 0                          ✓ 横向 Gram 正定
+```
+
+```lean
+/-- **DDF 假设集非空**：`D ≥ 3` 时存在满足全部四条几何假设的 `(a, b, ε)`，
+且横向偏振的 Gram 是单位阵。`D = 26` 时给出 24 个横向方向。 -/
+theorem exists_ddf_data (hD : 3 ≤ D) :
+    ∃ (a b : Fin D → K) (Ε : TransverseFrame (Fock.minkowski D K) b),
+      dotVec (Fock.minkowski D K) b b = 0 ∧
+      dotVec (Fock.minkowski D K) b a = 1 ∧
+      invTwo K * Fock.zeroModeSq (Fock.minkowski D K) a = 1
+```
+
+难度：**小**（约 80–120 行，主要是 `Fin D` 上求和的拆项）。
+价值：把整条 DDF 链从「一串条件命题」变成「非空的条件命题」，
+并且是后面所有具体陈述（含最终定理）的前提提供者。
+**这条应该第一个做。**
+
+### C.3 抽象 Heisenberg 族的 Gram —— 关掉 `fock-gram` 记录的缺口 (a)
+
+`FockGram.lean` 的 `pairing_creationMonomial_of_hypotheses` 是图卡
+`worldsheet.transverse-ddf-fock-gram-matrix` 的条件版，**但它只在 `Fock D R` 上、只对
+`Fock.creation` 实例化**。TODO 的 `fock-gram` 项自己记了这个缺口：
+「本文件……**没有**证明 DDF 算子满足 (H1)–(H4)——那是无鬼岛里另一项义务」。
+
+要关掉它，正确做法**不是**把 DDF 算子塞进 `Fock.creation`，而是把 Gram 递推抽象化：
+
+```lean
+/-- **抽象 Heisenberg 族的 Gram 矩阵**：只用 CCR + 伴随 + 真空归一化 + 真空湮灭。
+这就是图卡 `worldsheet.transverse-ddf-fock-gram-matrix` 的 (H1)–(H4)，
+但不预设载体是 `MvPolynomial`。 -/
+theorem gram_of_heisenberg_family
+    {M ι : Type*} [AddCommGroup M] [Module R M] [DecidableEq ι]
+    (B : LinearMap.BilinForm R M) (Ω : M) (A : ι → ℤ → Module.End R M)
+    (hccr : ∀ i j (m n : ℤ), ⁅A i m, A j n⁆
+        = (if m + n = 0 ∧ i = j then (m : R) else 0) • (LinearMap.id : Module.End R M))
+    (hadj : ∀ i (n : ℤ) (v w : M), B (A i n v) w = B v (A i (-n) w))
+    (hvac : B Ω Ω = 1)
+    (hann : ∀ i (n : ℤ), 0 < n → A i n Ω = 0)
+    (d e : (ι × ℕ+) →₀ ℕ) :
+    B (heisMonomial A Ω d) (heisMonomial A Ω e)
+      = if d = e then ∏ v ∈ d.support, ((v.2 : R) ^ (d v) * (d v)!) else 0
+```
+
+要点：
+
+* **(H1)「产生算子互相对易」不是额外假设，是 `hccr` 的推论**：两个指标都为负时
+  `m + n ≠ 0`，中心项为零。这一点 `FockGram.lean` 是单独证的（`commute_creation`），
+  抽象版里可以省掉。
+* 证明结构与 `FockGram.lean` 逐字相同：
+  `annihilation_creationMonomial`（Leibniz 一步）→ `pairing_creationMonomial_add_single`
+  （伴随给递推）→ 对 `d` 的 level 强归纳。
+* `heisMonomial` 的良定义需要产生算子互相对易（`Finsupp.prod` 的顺序无关），
+  即 `FockGram.lean` 的 `foldr_creation_vacuum` 的抽象版。
+
+难度：**中–大**（约 250–350 行）。**Mathlib 缺**：没有形式化的 Heisenberg 代数表示论
+（`Mathlib` 里既无 Fock 表示也无 Weyl 代数的 Gram），这一条要从头写。
+
+### C.4 DDF 态的 Gram 与线性无关
+
+把 C.3 实例化到 DDF 算子：
+
+```lean
+theorem towerPairing_ddfMonomial (Ε : TransverseFrame η b) (hη …) (hbb …) (hba …) (d e) :
+    Fock.towerPairing η (ddfMonomial η a b hη Ε d) (ddfMonomial η a b hη Ε e)
+      = if d = e then ∏ v ∈ d.support, ((v.2 : R) ^ (d v) * (d v)!) else 0
+```
+
+四个前件的来源，逐条已有：
+
+| 前件 | 既有声明 | 备注 |
+|---|---|---|
+| `hccr` | `lie_ddfOp_ddfOp` | 右端 `m (ε_i·ε_j) δ_{m+n,0}`，`TransverseFrame.orthonormal` 把它化成 `m δ_{ij}` |
+| `hadj` | `Fock.towerPairing_ddfOp_left` | `(A^ε_n)† = A^ε_{-n}` |
+| `hvac` | **缺，小**：`Fock.towerPairing η (towerVacuum) (towerVacuum) = 1` | 由 `Fock.pairing_monomial_monomial` + `towerPairing_single_single` |
+| `hann` | **缺，小**：`A^ε_n (towerVacuum) = 0` (`n > 0`) | **一行**：`ddfWindow n (towerVacuum) = Finset.Icc n 0 = ∅`（`towerLevelBound = towerModeBound = 0`），再用 `ddfOp_apply` 取 `s := ∅` |
+
+推论：
+
+```lean
+/-- 有序域上，DDF 态的 Gram 是正定对角阵 ⇒ 线性无关 ⇒ `ch H^⊥ = φ(q)^{-(D-2)}`。 -/
+theorem linearIndependent_ddfMonomial [Field K] [LinearOrder K] [IsStrictOrderedRing K] … :
+    LinearIndependent K (ddfMonomial η a b hη Ε)
+
+theorem towerPairing_ddfState_self_pos … : ∀ x ∈ ddfSpan …, x ≠ 0 → 0 < Fock.towerPairing η x x
+```
+
+难度：C.4 本体 **中**（实例化 + 两条小引理），推论 **小**
+（`linearIndependent_of_gram_det_ne_zero` 或直接照 `FockGram.pairing_self_pos_of_ne_zero`）。
+
+### C.5 最终组装
+
+```lean
+/-- **无鬼定理 (1a)：半正定。** -/
+theorem no_ghost_semidefinite [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+    (hD : D = 26) (hη …) (hbb …) (hba …) (hshell …) (Ε : TransverseFrame η b)
+    (hspan : towerPhysSubmodule η a b 1 ≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b 1) :
+    ∀ ψ ∈ towerPhysSubmodule η a b 1, 0 ≤ Fock.towerPairing η ψ ψ
+
+/-- **无鬼定理 (1b)：等距同构。** -/
+noncomputable def noGhostEquiv … : ddfSpan η a b hη Ε ≃ₗ[K] TowerPhysQuot η a b 1
+
+theorem noGhostEquiv_isometry … :
+    ∀ x y, towerQuotientPairing η a b 1 (noGhostEquiv … x) (noGhostEquiv … y)
+      = Fock.towerPairing η x y
+```
+
+给定 §B 的 `hspan`，C.5 的证明是两行：`ψ = f + χ`，
+`⟨ψ,ψ⟩ = ⟨f,f⟩ ≥ 0`（零模态与物理态正交，用 C.1 的 `towerNullSubmodule` 定义 + C.4 的正定性），
+单射性由「`f ∈ ddfSpan` 且 `f` 零模 ⇒ `f = 0`」。
+难度：**小**（条件化写法下）。
+
+**注意 `no_ghost_semidefinite` 把 `hspan` 作为假设是诚实的做法**：在 §B 落地之前，
+这条定理**不能**标 formalized，也**不该**在图里挂 `--via-lean` 推导。
+可以先把它作为「条件命题」的 Lean 见证放进文件，像
+`Fock.pairing_creationMonomial_of_hypotheses` 那样。
+
+---
+
+## D. 路线图
+
+### D.1 依赖顺序与工作量
+
+```
+C.2 假设见证（小）────────────────┐
+                                  ├──→ C.4 DDF Gram（中）──→ C.5 组装（小，条件版）
+A.1 K 代数（小/中）──→ A.2 K 条件（小）                        ↑
+                          │                                    │
+C.1 塔商形式（中）─────────┴────────────────────────────────────┤
+                                                               │
+C.3 抽象 Heisenberg Gram（中–大）──────────────────────────────┘
+                                                               │
+B.1 塔真空/双分级/ddfSpan（中）                                 │
+      │                                                        │
+      ├──→ B.4 幺三角基变换（大）──→ B.3 计数收尾（中）──→ (B-26)?? ──┘
+      └──→ B.6 N ≤ 2 逐层版（中，增量交付）
+```
+
+| 项 | 规模估计 | 阻塞者 |
+|---|---|---|
+| C.2 假设见证 | 80–120 行 | 无 |
+| A.1 + A.2 `K` 代数与 `K` 条件 | 200–300 行 | 无 |
+| C.1 塔商形式 | ~250 行 | 无 |
+| C.3 抽象 Heisenberg Gram | 250–350 行 | 无 |
+| C.4 DDF Gram | 150–250 行 | C.2 C.3 |
+| B.1 基础设施 | 200–300 行 | 无 |
+| B.6 `N ≤ 2` 逐层 | 300–500 行 | B.1 C.4 |
+| C.5 条件版组装 | ~100 行 | C.1 C.4 |
+| B.4 幺三角基变换 | 400–700 行 | B.1，MvPolynomial 换基 |
+| B.3 计数收尾 | 200–300 行 | B.4，`D` 色分拆生成函数 |
+| **(B-26)** | **未知，先要做文献裁决** | 见 §B.5 |
+
+### D.2 先做哪三条
+
+1. **C.2 假设可满足性见证**（`StringFormal/NoGhost/DDFData.lean`）。最小、无阻塞、
+   立刻把整条 DDF 链从「一串前提未知是否非空的条件命题」变成有内容的陈述。
+   顺带产出光锥标架 `{b, b̃, ε_i}`，是 B.4 的前置。
+2. **A.1 + A.2 纵向 `K` 算子**（`StringFormal/NoGhost/TowerK.lean`）。六条里四条是
+   现有引理在 `ε := b` 处的特例，一条（`⁅K_m, A^ε_n⁆ = 0`）照抄现成窗口套路。
+   它给图新增一张目前**完全没有节点**的卡（Goddard 2008 (6.3) 的 `K`-扩展代数），
+   并且是 §B 任何路线的共同前置。
+3. **C.1 塔上的伪态 / 零模态 / 商形式**（`StringFormal/NoGhost/TowerQuotient.lean`）。
+   纯机械搬运，零新数学，但**没有它连无鬼定理的陈述都写不出来**——
+   `NoGhost/Statement.lean` 至今是空文件的直接原因就是这个。
+
+（第四位：**C.3 抽象 Heisenberg Gram**。它单独就能关掉 `fock-gram` 项自报的缺口 (a)，
+是本蓝图里数学价值最高的一条，只是比上面三条大一号。）
+
+### D.3 对图的建议（本蓝图的产出）
+
+以下都**不是**本次提交的改动（本分支不碰 `graph/`），是给 curator / lead 的建议：
+
+1. **新建卡 `worldsheet.gt-longitudinal-k-algebra`**：Goddard 2008 §6 (6.2)(6.3) 的
+   `K_n = k_0·α_n` 与扩展代数 `[L_m,K_n] = -n K_{m+n}`、`[K_m,K_n] = 0`、`K_0 = 1`。
+   来源已 L1 核实（`literature/extractions/gsw-1987-v1.md` E7）。**图里目前没有这张卡**，
+   而它是 GT 推导 summary 里「再证塔上任意物理态可写成 DDF 态加零模态」那一步的真实输入。
+2. **新建卡 `worldsheet.brower-longitudinal-operator`**（或记入 (1) 的 notes）：
+   `Ã_n` **不**与 Virasoro 对易、必须加 `F_n`（Goddard 2008 (5.6)–(5.8)、(6.5)–(6.7)，
+   E6/E8，L1）。这条同时是横向性必要性的独立文献证据，
+   但**与 `ddf-transversality-gives-local-finiteness` 的失效模式不同**
+   （对易 vs 求和不局部有限），该记录已在 E6 的按语里，建议原样搬进卡的 notes。
+3. **在 `worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的 gaps 增一条**：
+   本推导的承重步骤是 (B-26)（「H_phys 中 DDF 之外的方向在 D = 26 恰为零模态」），
+   它在文献侧只有 Goddard 2008 (6.4) 的一句无证明结论（转引 GT 1972，正文未获取），
+   且形式化时还要在 Brower 机制（需纵向算子 `A^L`）与 GT 机制（需 `K`-条件配平）之间
+   做一次尚未做出的选择。**这与现有那条「两篇 1972 论文正文未获取」不同**：那条是可追溯性，
+   这条是论证结构。
+4. **在同一 gaps 里记一条方法论结论**：`D = 26` **不**出现在特征标/维数计数里
+   （`φ^{-D} = φ^{-1}φ^{-1}φ^{-(D-2)}` 对任意 `D` 成立），也不出现在 DDF 代数、伴随、
+   横向 Gram 正定里；它只出现在 (B-26)。这解释了为什么
+   `worldsheet.no-ghost-theorem-subcritical`（`D ≤ 25` 半正定）与本卡 (1b)（`D = 26` 等距同构）
+   是**强度不同的两件事**，而不是同一结论的两个区间。
+5. **`worldsheet.fock-module-free-over-negative-virasoro` 的 notes**：
+   记「Lean 形式化不走这条路」及理由（一般 `N` 的 Kac 行列式未做且不在本链上），
+   免得后来者反复评估。
+6. **`worldsheet.transverse-ddf-fock-gram-matrix`**：等 C.3 落地后，
+   `formal.lean_decl` 应改指抽象版 `gram_of_heisenberg_family`，
+   并在 notes 里写明「`Fock.pairing_creationMonomial_of_hypotheses` 只是它在世界面振子上的实例，
+   DDF 实例由 `towerPairing_ddfMonomial` 提供」——这正是 `fock-gram` 项自报缺口 (a) 的关闭方式。
+7. **`worldsheet.ddf-operators-v6` 的 notes**：补记 `A^ε_n |0;k⟩ = 0`（`n > 0`）在本仓库里
+   是窗口为空的平凡推论（`ddfWindow n (towerVacuum) = Icc n 0 = ∅`），
+   而文献侧通常把它当作正规序的定义性质——这是一个「形式化比文献更廉价」的例子。
