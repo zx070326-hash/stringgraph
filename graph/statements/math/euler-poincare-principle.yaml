@@ -107,6 +107,17 @@ notes: |
   不是本卡的域上上链版，只作旁证）。
   三条下游推导的 effective 本已被各自的接口卡封在 physical-argument，本卡状态不改变它们的 effective。
 
+  【已形式化（formalizer 2026-09-11）】本卡 (1)、(1) 的「特别地」一支、以及 (2)
+  都已在 Lean 4 + Mathlib v4.33.1 里机检通过，见推导 `--via-lean` 与
+  `formal/StringFormal/Math/EulerPoincare.lean`（`lean_decl` = `StringFormal.EulerPoincare.euler_poincare`）。
+  两条应记在这里的发现：
+    ★ **Mathlib 没有这条定理**。`Mathlib/Algebra/Homology/EulerCharacteristic.lean` 定义了
+      `HomologicalComplex.eulerChar` 与 `homologyEulerChar`，却**不证两者相等**。也就是说，
+      本卡在主流形式化库里是空缺的，不能当作「引一条 Mathlib 引理就完事」的背景事实。
+    ★ **卡面 (2) 里的 `H^n(C) = ⊕_λ H^n(C_λ)` 并未形式化**：Lean 侧的分次版直接以
+      「按权索引的复形族」为输入。(2) 的「分解」那一半仍是人读的，引用本卡 (2) 时
+      该步由引用者负责；详见 `--via-lean` 的 gaps。
+
   【号差版另立】LZ Cor 2.15(ii)（worldsheet.no-ghost-theorem-superstring-cohomological-v2 的推导）
   用的是 signature 版：Σ sign H^n = Σ sign C^n，前提多一个非退化厄米型与 Q* = Q。
   本卡「不断言 (a)」；建议另立 `math.euler-poincare-principle-signature`，届时该推导加边。
