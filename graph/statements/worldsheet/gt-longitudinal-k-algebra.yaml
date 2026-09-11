@@ -213,5 +213,25 @@ notes: |
   也不改变本卡 status/effective = formalized，只是把「若日后要立 (6.2) 刻画卡」这件事
   （notes 上文【Lean 落地】末段已声明「按 lead 指示不另立卡」）的已知内容精确记账一遍。
 
+  【2026-09-12 追记（curator，分支 agent/curator/b26-findings；依 formal/BLUEPRINT-noghost.md
+  §B″.3(a2)，⟨手算⟩，未经 Lean 校验、未经 reviewer 复核，全条标 inferred-grade）：
+  广为流传的「含至少一个 A^L 的态都是零态」按 (6.5) 的归一化是错的】
+  本卡「不断言 (c)」已声明 K_n 与 Brower 的 A^L_n 是两个不同对象，不重复其代数。
+  此处补记一条与 A^L_n 相关、值得单独登记的反例，供任何日后立
+  worldsheet.brower-longitudinal-operator 的人参考：
+  按 Goddard 2008 (6.5) 的对易关系 `[A^L_m, A^L_n] = (m-n)A^L_{m+n} + 2m³δ_{m+n,0}`，
+  平移 `𝓛_m := A^L_m + δ_{m,0}` 得中心荷 `c' = 24`；在快子上 `A^L_0 = b̃·a = b·a - a·a = 1-2 = -1`，
+  故 `𝓛_0 = 0`。于是
+    `⟨A^L_{-1}|k⟩, A^L_{-1}|k⟩⟩ = 2A^L_0 + 2 = 0`（零态 ✓，与 N=1 唯一零态吻合），
+    `⟨A^L_{-2}|k⟩, A^L_{-2}|k⟩⟩ = 4A^L_0 + 2·2³ = 12 = c'/2 ≠ 0`（**不是**零态）。
+  按「种子 = A^L 单项式」记账，N=2 只数出 `24 + 1 = 25` 个零态（24 个 `A^L_{-1}A^i_{-1}`，
+  加纵向 Verma `V(24,0)` 在 level 2 的根基一维），与本图 worldsheet.ddf-spanning-rank-inequality
+  notes 独立手算出的 **26**（`350 = 324 + 26`）差一。**正确的说法是：A^L 单项式张成
+  `H_phys` 中 DDF 张成的一个补，它们只在 mod DDF 的意义下是零态**（`A^L_{-2}|k⟩` 的
+  DDF 分量模长正是 `12`）。⚠ **这条与 (6.5) 的归一化之间的张力尚未裁决**：也可能是
+  Goddard 单位制与本项目 conv.alpha-prime-regge 不同导致的系数错位，本卡不裁决，只如实
+  登记为一条 open question。⟨手算，inferred: true，来源 formal/BLUEPRINT-noghost.md
+  §B″.3(a2)，约 1638-1660 行⟩
+
 author: curator
 created: "2026-09-11"
