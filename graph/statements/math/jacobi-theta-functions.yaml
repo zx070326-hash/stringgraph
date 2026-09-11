@@ -1,0 +1,169 @@
+id: math.jacobi-theta-functions
+kind: definition
+status: rigorous
+title: Jacobi ϑ 函数 ϑ_{ab}(v, τ)（a, b ∈ {0,1}）的级数定义（只含级数，不含乘积表示、周期性、模变换）
+statement: |
+  **设定（是定义的一部分）**：H = { τ ∈ C : Im τ > 0 } 为上半平面，v ∈ C。约定
+    q ≡ exp(2πiτ) ,   z ≡ exp(2πiv)
+  （Polchinski Vol.1 (7.2.35) 逐字），并对有理数 s 约定 **q^s ≡ exp(2πisτ)**
+  ——即 q 的分数次幂按 τ 取定的**单值分支**，不是多值符号
+  （与 math.dedekind-eta-function 对 q^{1/24} 的约定同款、同理由）。
+
+  **(1) 基本 ϑ 函数（原书 (7.2.31) 逐字）**：
+      ϑ(v, τ) = Σ_{n = −∞}^{∞} exp( πi n² τ + 2πi n v ) 。
+
+  **(2) 带特征标的四个函数（本图据此定义 ϑ_{ab}）**：对 a, b ∈ {0, 1}，
+      **ϑ_{ab}(v, τ) ≡ ϑ[a/2 ; b/2](v, τ) ≡ Σ_{n ∈ Z} exp[ πi (n + a/2)² τ + 2πi (n + a/2)(v + b/2) ]** 。
+    取 a = b = 0 即化回 (1)：**ϑ₀₀(v, τ) = ϑ(v, τ)**。
+    四个函数依次是 ϑ₀₀、ϑ₀₁、ϑ₁₀、ϑ₁₁。
+    ⚠⚠ **这一式的出处必须一起读**：原书在 (7.2.36) 处引入记号 ϑ[a ; b](v, τ)，
+    但本项目的抽取记录**只记下了式号与记号，没有把 (7.2.36) 的式子本身逐字印出**
+    （literature/extractions/polchinski-1998-v1-ch7.md#E15）。
+    ⇒ **本卡把上式作为本图对 ϑ_{ab} 的定义**，并在 sources / notes 里列出它与原书四处**逐字**
+      内容（(7.2.31)、(7.2.37a–d) 的 ϑ₁₁ = −ϑ₁、(7.2.43) 的 η = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}、
+      Vol.2 (10.7.6)+(10.7.7c)）的四重相容性核对。若日后取得 (7.2.36) 页图并发现不符，
+      **须新建卡并在本卡写 superseded_by**，不得就地改本卡正文。
+
+  **(3) 收敛与全纯（本卡补全的初等事实；原书对此一字不提）**：
+    |exp[πi(n + a/2)²τ]| = exp[−π (n + a/2)² Im τ]，故对任意 ε > 0 与任意有界的 v，
+    级数 (2) 在 { Im τ ≥ ε } × { |v| ≤ R } 上被一个收敛的常数级数控制，
+    从而绝对且局部一致收敛；⇒ **每个 ϑ_{ab} 在 C × H 上全纯**。
+    这是初等标准事实，属**定义卡层面的补全**，不改变任何断言。
+
+  **本定义不断言什么（逐条对应原书 §7.2 里被本卡排除的式子）**：
+    (a) ⚠ **不断言任何乘积表示**：(7.2.34) 的三重乘积
+        ϑ(v,τ) = ∏_{m≥1}(1−q^m)(1+z q^{m−1/2})(1+z^{−1} q^{m−1/2})
+        是 **math.jacobi-triple-product**；(7.2.38a–d) 的四个乘积表示本图**未建卡**
+        （抽取记录只记式号，未印出式子）。
+    (b) **不断言周期性与模变换**：(7.2.32a,b)（v ↦ v+1、v ↦ v+τ）、(7.2.33a,b)（τ ↦ τ+1、
+        τ ↦ −1/τ）、(7.2.39a–d)、(7.2.40a–d) 全部不在本卡；也**不断言**原书逐字那句
+        'and these in fact determine it up to normalization'（该唯一性在原书**无证明**）。
+    (c) **不断言零点性质**：原书逐字 'The theta function has a unique zero, up to the
+        periodicity (7.2.32), at v = ½(1+τ)'（无证明）不在本卡；**(7.2.42) ϑ₁₁(0,τ) = 0
+        也不在本卡**（它是 (2) 的两行推论，但本图本轮不为它建卡，见 notes）。
+    (d) **不断言 Jacobi 的 'abstruse identity'**（(7.2.41) ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0）
+        ——那是 **math.jacobi-abstruse-identity**。
+    (e) **不断言 η 与 ϑ₁₁ 的关系**（(7.2.43) 第二个等号 η(τ) = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）。
+    (f) **不断言 ϑ_{ab} 与世界面费米子迹的关系**（Vol.2 (10.7.7c)
+        Z^α_β(τ) = ϑ[α/2, β/2](0,τ)/η(τ)）——那条识别在
+        worldsheet.modular-invariance-requires-eight-transverse-fermions 的 statement 里。
+    (g) **不断言一般特征标**：本卡只定义 a, b ∈ {0,1}（= 原书 ϑ_{ab} 下标的取值范围）。
+        实数或复数特征标 ϑ[a;b] 的一般理论不在本卡。
+    (h) **不断言 ϑ₁…ϑ₄ 这套记号**：原书 (7.2.37a–d) 给出 ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄、ϑ₁₀ = ϑ₂、
+        **ϑ₁₁ = −ϑ₁** 的对照，但本卡**不定义** ϑ₁…ϑ₄，故也不把该对照写成断言；
+        它只作为记号词典与相容性证据记在 notes。
+uses: []
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2「Theta functions」, eq. **(7.2.31)**（ϑ(v,τ) = Σ_{n=−∞}^∞ exp(πin²τ + 2πinv)）与 **(7.2.35)**（q = exp(2πiτ)、z = exp(2πiv)）, pp. 214–215"
+    note: |
+      **L1（原书页图逐字）**，抽取记录 literature/extractions/polchinski-1998-v1-ch7.md **#E15**。
+      本卡断言 (1) 与「设定」段的 q、z 约定的直接来源。
+      ⚠ 原书**不讨论收敛**，也不指明 q 的分数次幂如何取分支；本卡断言 (3) 与
+      「q^s ≡ exp(2πisτ)」是本卡的补全（与 math.dedekind-eta-function 同款）。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. **(7.2.36)**（引入带特征标的 θ 函数 ϑ[a ; b](v, τ)）, p. 215"
+    note: |
+      ⚠⚠ **本条是本卡唯一一处「有式号、无逐字式子」的来源，必须照实登记**：
+      抽取记录 **#E15** 对 (7.2.36) 的全部内容是一行「**(7.2.36)** 带特征标的 θ 函数
+      ϑ[a;b](v,τ)」——**式子本身没有转录**（同一行的 (7.2.38a–d) 亦然：只写「四个乘积表示」）。
+      ⇒ 本卡断言 (2) 写下的级数是**本图取的定义**，不是从页图读到的逐字式。
+      ⇒ **交 researcher 的待办（本卡的唯一实质缺口）**：取 Polchinski Vol.1 p.215 页图，
+        把 (7.2.36) 与 (7.2.38a–d) 逐字入档；若与断言 (2) 不符则本卡换代。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. **(7.2.37a–d)**, p. 215（ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄、ϑ₁₀ = ϑ₂、**ϑ₁₁ = −ϑ₁**）与 **(7.2.43)**, p. 216（η(τ) = q^{1/24}∏_{m≥1}(1−q^m) = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）"
+    note: |
+      L1（#E15、#E16）。**本条不支撑任何断言**（见「不断言 (e)(h)」），
+      它是断言 (2) 的**相容性证据**，与下一条合为四重核对，详见 notes。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.6)**（Tr_α(q^H) = q^{(3α²−1)/24}∏_{m≥1}[1+q^{m−(1−α)/2}][1+q^{m−(1+α)/2}]）与 **(10.7.7c)**（Z^α_β(τ) = ϑ[α/2, β/2](0,τ)/η(τ)）, pp. 32–33；逐字 'The notation in the final line was introduced in **section 7.2**, but our discussion of these functions in the present volume will be **self-contained**.'"
+    note: |
+      L1，抽取记录 literature/extractions/polchinski-1998-v2.md **#E47**。
+      **本条同样不支撑断言**（见「不断言 (f)」），只作断言 (2) 的第四重相容性证据：
+      Vol.2 自称对这些函数的讨论 **self-contained**，而 (10.7.6)+(10.7.7c) 与
+      math.dedekind-eta-function 的 η 乘积式合起来，正好给出断言 (2) 在 v = 0 处的 q 展开
+      （核对见 notes）。
+tags: [math, theta-functions, jacobi, modular-forms, torus, partition-function, definition]
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立。
+
+  ★★★【本卡为什么存在】本图此前**没有 θ 函数卡**，而至少五处写着这条缺口，逐字：
+    · math.dedekind-eta-function 的「本卡不断言什么」：「(Polchinski (7.2.43) 的第二个等号 …
+      **本图未建 θ 函数卡**，见 notes)」；
+    · math.dedekind-eta-function 的 notes「未建的相邻卡」：「θ 函数一族（(7.2.31)–(7.2.42)）
+      本批次不建 …」；
+    · spectrum.long-cylinder-lightest-state-count--via-q-expansion 的 gaps 第一条：
+      「等价路线（由 ϑ 的**三重乘积公式**展开）同样无节点 … ⇒ 待建：
+      · math.jacobi-theta-triple-product（ϑ₀₀/ϑ₀₁/ϑ₁₀ 的乘积公式）…」；
+    · worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+      的 gaps 第一条与 notes「升级路径」：「注意本图目前**连 θ 函数卡都没有**」；
+    · polchinski-1998-v1-ch7.md §5-C 把 (7.2.41)、(7.2.32) 列为 Lean 岛次选。
+  **本卡与 math.jacobi-triple-product、math.jacobi-abstruse-identity 三张一起把这条缺口合上。**
+
+  ★★【断言 (2) 的四重相容性核对（这是本卡敢于写下该式的全部理由，请连同上面的 ⚠ 一起读）】
+  记 F_{ab}(v,τ) ≡ Σ_{n∈Z} exp[πi(n + a/2)²τ + 2πi(n + a/2)(v + b/2)]（= 断言 (2) 的右端）。
+    **(i) 与 (7.2.31) 相容**：a = b = 0 时 F₀₀(v,τ) = Σ_n exp(πin²τ + 2πinv) = ϑ(v,τ) ✓（逐字式）。
+    **(ii) 与 (7.2.37d) 的负号相容**：经典 ϑ₁(v,τ) 的级数是
+      ϑ₁ = −i Σ_n (−1)^n exp[πi(n+½)²τ + 2πi(n+½)v]，而
+      F₁₁(v,τ) = Σ_n exp[πi(n+½)²τ + 2πi(n+½)(v+½)]；注意
+      exp[2πi(n+½)·½] = exp[πi(n+½)] = i(−1)^n，故
+      F₁₁ = i Σ_n (−1)^n exp[πi(n+½)²τ + 2πi(n+½)v] = −ϑ₁。
+      **这正是 (7.2.37d) 逐字印出的 ϑ₁₁ = −ϑ₁**。⇒ 若把特征标写成别的约定（例如把 b/2 的相位
+      放成 exp[−πi(n+a/2)]，或把下标读成 a 而不是 a/2），这个负号就对不上。
+      **(7.2.37d) 的负号是本卡最强的一条外部约束。**
+    **(iii) 与 (7.2.43) 相容**：由 (ii)，∂_v F₁₁(0,τ) = −∂_vϑ₁(0,τ) = −2πη(τ)³，
+      故 [∂_vF₁₁(0,τ)/(−2π)]^{1/3} = η(τ) ✓，与 (7.2.43) 第二个等号逐字一致。
+    **(iv) 与 Vol.2 (10.7.6)+(10.7.7c) 相容**：把 F_{ab}(0,τ) 用三重乘积展开（即
+      math.jacobi-triple-product 的四个特例）得
+        F_{ab}(0,τ) = q^{a²/8} ∏_{m≥1}(1−q^m)[1 + e^{πib} q^{m−½+a/2}][1 + e^{−πib} q^{m−½−a/2}] ；
+      除以 η(τ) = q^{1/24}∏(1−q^m) 得
+        q^{(3a²−1)/24} ∏_{m≥1}[1+e^{πib}q^{m−(1−a)/2}][1+e^{−πib}q^{m−(1+a)/2}] ，
+      在 b = 0 时**逐字等于 (10.7.6)** Tr_α(q^H)（取 α = a），
+      即 (10.7.7c) Z^α_β = ϑ[α/2,β/2](0,τ)/η(τ) ✓。
+  ⚠ (iv) 用到了 math.jacobi-triple-product（本批次同时建立，status = physical-argument），
+  故 (iv) 只是**相容性核对**，不是本卡的论证，也不在本卡的 uses 里（定义卡不吃命题卡）。
+  ⚠ (ii)(iii) 用到 ϑ₁ 的经典级数与 ϑ₁'(0) = 2πη³，这两条是**本图外的标准事实**，
+  同样只作核对，不作断言（本卡「不断言 (e)(h)」已把它们排除）。
+
+  【为什么 status = rigorous】按 docs/STATUS_LEVELS.md 对 definition 的 rigorous 判据
+  （「数学上精确但未形式化」）：断言 (2) 是一个绝对收敛级数，断言 (3) 是初等的控制收敛，
+  全卡无路径积分、无形式操作。
+  ⚠ **本卡的不确定性不在「严格程度」这个轴上，而在「与原书 (7.2.36) 是否逐字一致」这个轴上**，
+  后者由上面的 ⚠、sources 第二条的 researcher 待办与四重核对承载，**不通过 status 表达**。
+  （同样的分工见 docs/STATUS_LEVELS.md「断言 + 骨架」一节的理由：
+   「论证不完整」与「结论可能为假」是两个不同的轴。）
+
+  【记号词典（读原书时用；本卡不断言，见「不断言 (h)」）】原书 §7.2 同时用两套记号，
+  (7.2.37a–d) 给出对照：**ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄、ϑ₁₀ = ϑ₂、ϑ₁₁ = −ϑ₁**（注意最后一条带负号）。
+  Vol.2 §10.7 用的是第三套：**Z^α_β(τ) = ϑ[α/2, β/2](0,τ)/η(τ)**，
+  其下标与本卡的关系是 **ϑ_{αβ} = ϑ[α/2 ; β/2]**（α, β ∈ {0,1}），
+  故 Z⁰₀ ↔ ϑ₀₀、Z⁰₁ ↔ ϑ₀₁、Z¹₀ ↔ ϑ₁₀、Z¹₁ ↔ ϑ₁₁（**都要再除以 η**）。
+  ⚠ 这一行对照本身是 (10.7.7c) 的内容，**不在本卡断言里**（「不断言 (f)」）。
+
+  【本轮**未**建的相邻卡（逐条给出理由，供 lead 排期）】
+    1. **(7.2.42) ϑ₁₁(0,τ) = 0**：它是断言 (2) 的两行推论（配对 n ↔ −1−n，相位
+       exp[±πi(n+½)] = ±i(−1)^n 相消），可以做成一张 rigorous 的小卡。
+       本轮不建的原因：它在本批次的唯一用途是给
+       worldsheet.ramond-trace-with-fermion-number-vanishes 提供第二条路线，
+       而那条路线还要 (10.7.7c)（本图在另一张卡上）；为避免一次加四张卡，
+       该推论写在那条推导的 summary 里并在其 gaps 登记。
+       **建议 lead 下轮补建 math.theta-11-vanishes-at-origin。**
+    2. **(7.2.38a–d) 四个乘积表示**：抽取记录未印出式子，且本图暂无下游直接引用；
+       建卡前应与 (7.2.36) 一起取页图。
+    3. **(7.2.32)/(7.2.33)/(7.2.39)/(7.2.40) 的周期性与模变换**：原书**全部无证明**
+       （#E15 逐字：「**全部无证明**」），建卡只会新增 physical-argument 节点；
+       真正有价值的是先找数学来源（见下）。
+
+  【形式化与数学来源情报（**均未核实，交 formalizer / researcher**）】
+    · Mathlib 疑有二变量 Jacobi ϑ 的级数定义（Mathlib/Analysis/SpecialFunctions/JacobiTheta/）；
+      **本轮未打开任何 Mathlib 文件核对**，不得据此标 formalized。若属实，本卡的 Lean 化路径
+      与 math.dedekind-eta-function 同款：在 formal/ 下建桥层逐字重述，lean_decl **指桥层**，
+      不得直指 Mathlib（formal/CLAUDE.md 桥层规则）。
+    · 数学侧一手来源（本项目 **sources.bib 尚未登记**，故本卡不得引）：
+      Whittaker–Watson "A Course of Modern Analysis" §21.3（ϑ 函数与三重乘积）、
+      Mumford "Tata Lectures on Theta I"。**交 researcher 登记**；登记后
+      math.jacobi-triple-product 可获得一条 rigorous 推导（见那张卡的 gaps）。
+  ⚠ 这两条情报都**不是**本卡的 source，本卡的全部来源就是上面 sources 里的四条 Polchinski 条目。
+author: curator
+created: "2026-09-11"
