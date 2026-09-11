@@ -249,8 +249,7 @@ just in size.
   (`ms.critical-dimension-bosonic`, `ms.ddf-commute-with-virasoro`, `ms.no-ghost-theorem`) has
   been reviewed only by agents (`curator`/`reviewer`/`auditor` roles), not by a human physicist.
   Even the three milestones are currently only at `audit.status: back-translated`, awaiting
-  captain approval (`docs/ROADMAP.md`, "待船长裁决"). `[verify: whether captain approval has
-  since been recorded]`
+  captain approval (`docs/ROADMAP.md`, "待船长裁决"). (as of 2026-09-12 all three milestones are `back-translated`, none `approved`; approval is a captain-only action)
 - **Chinese-language records.** Nearly all files under `literature/extractions/` and most
   node-level `notes` are written in Chinese by the working agents, even though statement titles
   and text are English. A reader auditing sourcing crosses a language boundary at the
@@ -296,7 +295,7 @@ uv run stringgraph check-axioms
 ```
 
 **Counts** (current snapshot, `uv run stringgraph report`): 596 statements, 492 derivations, 3
-milestones, 21 conventions. Lean side: `[verify: exact current declaration count]` — the
+milestones, 21 conventions. Lean side: 77 declarations checked, 77 ok (`uv run stringgraph check-axioms`, 2026-09-12, main 3508 Lake jobs) — the
 project log records roughly 77 axiom-clean declarations as of the last recorded check
 (`docs/ROADMAP.md`, Phase 1 progress notes); `check-axioms` must be re-run against the current
 `formal/` tree before this number is quoted in the paper.
