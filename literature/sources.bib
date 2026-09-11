@@ -174,7 +174,47 @@
   year    = {1972},
   doi     = {10.1103/PhysRevD.6.1655},
   note    = {卷/期/页/DOI 已核实（INSPIRE 74322 + ADS 1972PhRvD...6.1655B）。正文未获取（APS 403）。摘要把结果限定在 unit Regge intercept（a=1），不支持把 "(D<=25, a<=1) 或 (D=26, a=1)" 两分支表述归给本文。见 extractions/brst-cohomology-sources.md §4。
-             第二轮补充（2026-09-10）：INSPIRE 的 report_numbers / documents / urls 均无，无 preprint 可循。摘要要点复核后结论不变——「D=26 之下无鬼」是在 a=1 前提下的 D<26，不能读成 a<=1。因此 ms.no-ghost-theorem 审计 B1 批注里把 (D<=25, a<=1) 归给「Brower 1972」**按现有证据不成立**；该区域的已核实出处是 lian-zuckerman-1991 Theorem 3.5(ii)。见 extractions/primary-sources-round2.md §3、§4。}
+             第二轮补充（2026-09-10）：INSPIRE 的 report_numbers / documents / urls 均无，无 preprint 可循。摘要要点复核后结论不变——「D=26 之下无鬼」是在 a=1 前提下的 D<26，不能读成 a<=1。因此 ms.no-ghost-theorem 审计 B1 批注里把 (D<=25, a<=1) 归给「Brower 1972」**按现有证据不成立**；该区域的已核实出处是 lian-zuckerman-1991 Theorem 3.5(ii)。见 extractions/primary-sources-round2.md §3、§4。
+             ⚠ **第三轮补充（researcher 2026-09-11）：勿与 brower-friedman-1973（Phys. Rev. D7, 535，双作者，Neveu-Schwarz 模型）混淆。**
+             后者摘要自陈是「本文（intercept alpha_0 = 1 的常规对偶模型无鬼定理）向 NS 模型的推广」。}
+}
+
+@article{brower-friedman-1973,
+  author  = {Brower, Richard C. and Friedman, Kenneth A.},
+  title   = {Spectrum-Generating Algebra and No-Ghost Theorem for the {N}eveu-{S}chwarz Model},
+  journal = {Physical Review D},
+  volume  = {7},
+  number  = {2},
+  pages   = {535--539},
+  year    = {1973},
+  doi     = {10.1103/PhysRevD.7.535},
+  note    = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）；摘要 L1 逐字（INSPIRE 出版方摘要）；卷/期/页/DOI L1（Crossref）。**
+             抽取记录 extractions/brower-friedman-1973.md。**read_depth 保持 abstract，不得升。**
+             ⚠ **与 brower-1972（Phys. Rev. D6, 1655，单作者，conventional dual model）是不同论文，勿混。**
+             ⚠ **文献里这条引文会被抄错卷号**：hasiewicz 等 hep-th/9901116 参考文献 [29] 印成「Phys. Rev. **D3** (1973) 535」。
+             正确卷号由 Crossref 与 schwarz-2012-history 之外的 Schwarz hep-th/0011078 参考文献 [59] 两方 L1 佐证（均为 D7, 535）。
+             **摘要逐字**：「The no-ghost theorem of Brower for the conventional dual model (intercept alpha_0=1) is extended to the
+             Neveu-Schwarz model, and its spectrum-generating algebra is constructed. These conformally invariant generators (A_n, B_s)
+             are obtained by a systematic use of the gauges G_r. As a consequence it is demonstrated that particular dual models having
+             resonances with positive-definite norms and masses are possible.」
+             **★ 登记理由与本轮结论（裁决 figueroa-ofarrill-kimura-1989 vs lian-zuckerman-1989 的「完全可约性」矛盾）：**
+             (1) **摘要里没有 "reducible"/"Verma"/"direct sum"/"Fock space"/"representation" 任何一词**；
+             本文自称的成果是「无鬼定理推广到 NS + 谱生成代数 (A_n, B_s) + 正定范数共振态存在」。
+             (2) **标题与摘要都是 NS-only，完全没有 Ramond** ==> **FOK p.115 把一条 R 扇区的完全可约性归给本文，在本文标题/摘要里无任何支撑**；
+             FOK 自己那句括注「they do not write down the explicit spectrum generating algebra」与「本文根本没处理 R 扇区」相容（**此读法是抽取者推断**）。
+             (3) **「Verma 模直和」这个说法在整个引用网络里只有一个出处**：Semantic Scholar 的 35 篇引用上下文中，
+             只有 Figueroa-O'Farrill 本人 1989 年的另一篇（"BRST Cohomology and its Applications to Two-Dimensional CFT"）出现该措辞，
+             且两句与 FOK 1989 p.111/p.115 逐字相同 ==> **FOK 1989 与它不是两条独立证言。没有第二个人说过这件事。**
+             (4) **两条非 FOK 系的引用方只把本文归到「DDF/SGA 构造 + 无鬼定理」**：
+             hasiewicz 等 hep-th/9901116 逐字「The DDF construction for the Neveu-Schwarz model was developed long time ago by Schwarz [28],
+             and by Brower and Friedman [29]」（该文自己大量用 super-Virasoro Verma 模，却把 Verma 模度规结构外包给别人，不外包给本文）；
+             Schwarz hep-th/0011078 逐字「The no-ghost theorem for the dual pion model was also established using Brower's methods … as well as
+             by Brower and Friedman」。
+             ==> **图里不得把本条作为「完全可约性 / Verma 模直和」的 source。** 本条只能承载摘要那句（status 上限 physical-argument，loc 写 abstract）。
+             **已尝试入口（勿重试）**：Crossref OK；INSPIRE abstracts OK；INSPIRE 的 report_numbers/documents/urls **三字段全 ABSENT**，
+             external_system_identifiers 只有 OSTI 4607142 / ADS / SPIRES，**无 CDS、无 KEKSCAN**（CDS-OAI 与 KEK 路线在入口处即被排除）；
+             OSTI servlets/purl/4607142 -> **HTTP 404**；Semantic Scholar openAccessPdf -> **CLOSED、url 为空**；
+             journals.aps.org 已知全域 403（未花预算）。**唯一未执行的路线是 WebSearch 找 .edu 课程页扫描件 —— 本会话 WebSearch 额度已在任务开始前耗尽（200/200）。**}
 }
 
 @article{brower-thorn-1971,
@@ -548,7 +588,17 @@
   doi     = {10.1007/BF01218471},
   note    = {由 researcher 于 2026-09-11 登记。**全文已核实（28 页逐页读图，L1）**，获取途径 Project Euclid https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104179078 （免登录）。**DOI/卷/期/页已由 Crossref 逐字核实**（`api.crossref.org/works/10.1007/BF01218471`：CMP 124(1) 105-132, issued 1989-03）；Project Euclid 卷期目录与 Dedushenko 2015 [18] 独立佐证。
              **无编号定理，全部按公式号引用**：NS 相对消灭定理 (3.19)；R 相对消灭定理 (4.17)（Henneaux 表示）；两种 R 零模表示（Schrödinger L^2(R,dx) vs Henneaux C[γ_0]）的相对上同调同构 (5.1)（仅作为无分次空间）；绝对复形上同调 (5.2)(5.3)（鬼数 ±1/2）；无鬼定理 = 迹恒等式 (6.14)=(6.15)（NS）、(6.19)=(6.20)（R）+ p.128 Schrödinger 表示一段；附录 A (A.14) 超李代数同调消灭、附录 B (B.1) 正定内积。
-             **作者自承缺口**：R 扇区完全可约性引 Brower–Friedman 是「claim」（p.115，与 lian-zuckerman-1989 p.320 Remark 矛盾）；附录 A 定理「We have never seen a published proof」只补特例；(B.1) 正定性「left as an exercise」；零动量排除（脚注 3/6/9）；GSO 后无鬼「as an exercise」；D = 10 是假设。**引 Henneaux [12]，不引 Ohta/Kato–Ogawa/IMNU；与 LZ 1989 互不引用（LZ Note added in proof 称独立）。** 见 extractions/figueroa-ofarrill-kimura-1989.md。}
+             **作者自承缺口**：R 扇区完全可约性引 Brower–Friedman 是「claim」（p.115，与 lian-zuckerman-1989 p.320 Remark 矛盾）；附录 A 定理「We have never seen a published proof」只补特例；(B.1) 正定性「left as an exercise」；零动量排除（脚注 3/6/9）；GSO 后无鬼「as an exercise」；D = 10 是假设。**引 Henneaux [12]，不引 Ohta/Kato–Ogawa/IMNU；与 LZ 1989 互不引用（LZ Note added in proof 称独立）。** 见 extractions/figueroa-ofarrill-kimura-1989.md。
+             **★ 第二轮补充（researcher 2026-09-11，见 extractions/brower-friedman-1973.md §3）：**
+             本文赖以逐 Verma 模计算上同调的那条前提（p.111「It was proven by Brower and Friedman [11] that this representation is fully
+             reducible … infinite direct sum of Verma modules」/ p.115 R 扇区的 "claim"）**已登记来源 brower-friedman-1973，但核实结果是负面的**：
+             该文标题与摘要 **NS-only、且完全不含 "reducible"/"Verma"** ；「Verma 模直和」这个说法在整个引用网络里**只有 Figueroa-O'Farrill 本人一个出处**
+             （其 1989 年另一篇 "BRST Cohomology and its Applications to Two-Dimensional CFT" 逐字重复同两句），**不是两条独立证言**；
+             两条非 FOK 系的引用方（hep-th/9901116、hep-th/0011078）只把 Brower–Friedman 归到「NS 的 DDF/SGA 构造 + 无鬼定理」。
+             ==> **本文的 NS 无鬼定理推导应显式 depends_on 一个独立的争议节点（与 lian-zuckerman-1989 p.320 Remark 并列挂载），
+             而 lian-zuckerman-1989 的推导不依赖它（只用 Vir^- -free）** —— 这是「两条 derivation 强度其实不同」的真实例子。
+             尚未排除的调和：LZ 的措辞是 "**in general** not a direct sum"，若 FOK 实际只用一般动量 p 则两者可并存；
+             **但 FOK 全文只声明 p != 0，未声明 p 的一般性**。裁决前提是核对 LZ p.320 反例取在哪个 p（本轮未做）。}
 }
 
 @article{ito-morozumi-nojiri-uehara-1986,
@@ -2246,7 +2296,11 @@
   year    = {1995},
   eprint  = {hep-th/9411187},
   archivePrefix = {arXiv},
-  note    = {由 researcher 于 2026-09-11 登记。**内容未核实（L0），正文未获取。**
+  note    = {由 researcher 于 2026-09-11 登记，**同日全文抽取（L1，arXiv v3 共 21 页逐页读图）-> extractions/sen-1995-bh-torus.md（E1--E12）**。
+             ⚠ 读的是 **arXiv v3**（页 1 侧边条纹逐字 `arXiv:hep-th/9411187v3  3 Dec 1994`），**所有 loc 写死 v3**。
+             报告号 **TIFR-TH-94-47**；标题页页脚 `November, 1994`。
+             ⚠ **标题页正中印的 `November 26, 2024` 是 arXiv 重编译的 \today，不是任何论文日期**（与 sen-1995-bh 同型陷阱）。
+             **期刊终页 440 仍未核对（L0）**。
              元数据 L1 抄自 arkani-hamed-2006 的参考文献 [8]（逐字：「A. Sen, "Black hole solutions in heterotic string theory on a torus,"
              Nucl. Phys. B 440, 421 (1995) [arXiv:hep-th/9411187].」）——**起始页 421 已 L1 核实，终页 440 未核对（L0）**。
              **登记理由**：arkani-hamed-2006 §4 eqs. (22)(23)（杂化弦 on T^6 的极端黑洞质量 M^2 = (1/2)Q_R^2 与 M^2 = (1/2)Q_L^2，
@@ -2258,7 +2312,29 @@
              solutions in this theory were constructed in ref.[7]"），并加脚注「ref.[7] constructed the solution for g = 1」。
              => **「杂化弦 T^6 极端黑洞解」这条陈述的一手来源只能是本条，不能换成 sen-1995-bh。**
              又：hep-th/9504147 脚注 3 逐字「A preliminary version of this result was stated briefly in ref.[7]」
-             => 本文里已含 9504147 主结果的初步版本。**优先级建议上调**：本条现在是三处的共同上游。}
+             => 本文里已含 9504147 主结果的初步版本。**优先级建议上调**：本条现在是三处的共同上游。
+             **★★ 全文抽取后的五条硬结论（researcher 2026-09-11）：**
+             **(1) AMNV (22)(23) 的一手出处已钉死**：AMNV (22) `M^2 = (1/2)Q_R^2`（BPS）= 本文 **(2.60)**（Case II, alpha < beta）；
+             AMNV (23) `M^2 = (1/2)Q_L^2`（非 BPS）= 本文 **(2.56)**（Case I, alpha > beta）。
+             另有 **(2.64)**（Case III, alpha = beta）`M^2 = (1/2)Q_L^2 = (1/2)Q_R^2`，**AMNV 没引**，且 AMNV 的两个严格不等号恰好把 Q_L^2 = Q_R^2 排除在外。
+             **(2) ★ AMNV 丢掉了本文的两个前提**：(2.56)/(2.60) 只对 **a = 0（非转动）** 且 **m -> 0 保持 M 固定** 的极端极限成立；
+             本文 p.11 逐字「the extremal black holes carrying **non-zero angular momentum do not correspond to supersymmetric solutions**」。
+             **图节点 statement 必须带 J = 0。**
+             **(3) ★★ 本文不声明 alpha'、M_Pl、G_N 中的任何一个**（21 页逐页核实的否定结论）。
+             全文无 alpha'、无 M_Pl、无 Newton 常数、无弦耦合 g（g_L/g_R 是回磁比，kappa 是表面引力）；
+             唯一的 "Planck" 是 p.18「a fixed length of the order of the Planck length」（stretched horizon 厚度，非归一化）。
+             作用量 (2.3) 的整体常数 **C 作者自述「arbitrary … can be absorbed into the dilaton」** ==> 本文根本不定 G_N。
+             归一化隐含在两条读数规则里（**均为抽取者复算，转卡须 inferred**）：M 按 g^E_tt = -(1 - 2M/rho) 读出（即 G_N = 1）；Q 按 F_{rho t} -> Q/rho^2 读出。
+             **本文关于归一化的唯一自述是 p.11 那句「In the normalization convention that we have been using, the Bogomol'nyi bound … is given by M^2 >= (Q_R^2/2)[24,25]」。**
+             ==> **AMNV 的 M_Pl = 1 与 alpha' = 4 都不出自本文；两篇都不给换算。电荷侧尤其无法闭合**：
+             本文对电荷格只说一句「the 28 dimensional lattice Lambda of electric charges」（p.4, (2.7) 后，引 [7] = Narain），
+             **无量子化条件、无偶自对偶、无 Q_L^2 - Q_R^2 in 2Z**。
+             **(4) 本文没有杂化弦质量公式** ==> **AMNV (24) 与 (21) 都不得挂本条**。本文 §4 只给态密度 (4.4) d_S ~ exp(4 pi sqrt(n)) 与 (4.5) A_s ∝ ln d_S，
+             且自称全节是 "some amusing coincidences"，并对 beta -> infinity 自陈「the solution develops naked singularity, but we shall ignore this problem」。
+             **(5) status 上限 physical-argument**：解本身是 "straightforward algebraic exercise"（不展示）；
+             Bogomol'nyi 界 M^2 >= Q_R^2/2 **外包给 [24] = Gibbons-Hull PLB 109 (1982) 109 等 + [25] = Sen MPLA A8 (1993) 2023**，本文不证；
+             §3 的 58 参数 dyonic 解只给算法，非奇异性自陈 "good reason to believe"。
+             ⚠ 另：sen-1995-bh（9504147）脚注说本文「constructed the solution for g = 1」——**本文全文没有 g 这个符号**，那是 9504147 的事后追述，不是本文自述。}
 }
 
 @misc{sen-1995-bh,
@@ -2578,7 +2654,27 @@
             H = dB + omega^0_{3Y} - omega^0_{3L} **两个 CS 项整体反号**。
             另：p.102--103 列出四个 496 维解并写「One can actually scan all 496-dimensional groups and
             show that there are no other possibilities」，**无证明无引用**，与 schwarz-2012-history 的
-            「the only other」冲突，本图未裁决、未建节点。}
+            「the only other」冲突，本图未裁决、未建节点。
+            **★ 第二轮补充（researcher 2026-09-11，见 extractions/green-schwarz-1984.md §11）：**
+            **(a) 版本订正 —— 本文只有 v1。** 落盘 PDF 页 1 侧边条纹逐字 `arXiv:0802.0634v1 [hep-th] 5 Feb 2008`
+            （无版本号 URL 返回最新版）。此前记录里的「v2」应作废。报告号 **LPTENS-08/05**，标题页日期 January 2008。
+            **(b) 页码映射：PDF 页 = 印刷页 + 3**（三点核对：PDF 95→92、PDF 100→97、PDF 108→105）；**PDF 共 108 页，印刷末页 105。**
+            **(c) 章节起始页订正**：12 章题 p.96 / 12.1 p.96 / 12.2 p.97 / 12.3 p.98 / **12.4 p.99（此前记 p.100，错）** /
+            13 Concluding remarks p.103 / 14 Appendix p.103 / References p.105。
+            **(d) §12.1--§12.2 新增 L1 核实**：(12.1)(12.2)(12.3) = gravitino / 自对偶张量 / spin-1/2 的十维反常十二形式；
+            **(12.4) IIB 总反常多项式（三个整数组 -495/1/992、225/1/-448、-63/1/128 逐字无误）；(12.5) 解 n_{3/2}=2n_A、n_{1/2}=-2n_A 逐字无误。**
+            §12.2 开头逐字前提「**We assume here that there is no gauge group**」——引 (12.4)(12.5) 必须带这个前提。
+            §12.1 末逐字：Majorana 正手征要在 Î^{spin1/2} 与 Î^{gravitino} 上**额外乘 1/2**，Î^A 不乘。
+            **(e) ★ 与 polchinski-1998-v2 (12.2.11)--(12.2.14) 的归一化完全相同**（researcher 逐系数复算 10/10 全对）：
+            B_gravitino = 2 P_56/(2pi)^5、B_{spin1/2} = 2 P_8/(2pi)^5、B_A = P_SD/(2pi)^5；
+            差别只有两处记账口径——(2pi)^5 的位置（Bilal 放进 Î，Polchinski 放进 (12.2.10)）与 Majorana 1/2
+            （Bilal 显式写在 (12.4) 的 n/2，Polchinski 吸收进「两个 8'、两个 56」的重数）。
+            **tr 约定**：本文 tr_R = 规范表示迹、无下标 tr 作用在 R 上 = 切空间迹，**与 Polchinski 的 Tr/tr 同套**；
+            但 §12.4 里无下标的 tr F^2 指「参考表示」，**与 tr_R 不是一回事**。
+            **(f) 归属**：(12.4)(12.5) 之间逐字「as first observed in **[3]**」，其 **[3] = L. Alvarez-Gaume and E. Witten,
+            *Gravitational anomalies*, Nucl. Phys. B234 (1984) 269**（p.105 参考文献页 L1）。**不给式号**，且 AGW 本身不固定整体归一。
+            **(g) Bilal 只说三式「not linearly independent」，不给线性关系、不给唯一性。** researcher 复算补出：
+            2*row1 + 3*row2 - 5*row3 = 0、rank = 2、ker = span{(2,-2,1)} ——**这是 Lean 岛候选 A8'，比 A8 强**。}
 }
 
 @misc{schwarz-2012-history,
