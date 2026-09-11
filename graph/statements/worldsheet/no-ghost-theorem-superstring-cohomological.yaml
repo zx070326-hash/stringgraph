@@ -79,7 +79,10 @@ sources:
       Prop 3.3 → **Theorem 3.3.1**（超李代数同调的正合序列 (40)，自称是经典李代数同调定理的
       推广，"a good exposition is given in [18]"）+ Corollary 2.19(iii)（V(p,κ) 是自由
       Vir_κ^- 模）→ Corollary 3.4。
-      ⚠ **本图尚未为这条消灭定理单建陈述卡**（连同 R 扇区零模表示的选择问题），已列入报告交 lead。
+      ⚠ 〔2026-09-11 更新〕**这条消灭定理已单建陈述卡**：
+      worldsheet.superstring-relative-cohomology-vanishing（推导 --via-lian-zuckerman-1989），
+      本卡的 --via-lian-zuckerman-1989 推导已 depends_on 它（非 inferred，LZ 在 Corollary 2.15
+      的证明里显式引用 Theorem 2.4）。R 扇区零模表示的选择问题仍以存在量词形式留在两张卡里。
   - ref: figueroa-ofarrill-kimura-1989
     loc: "§6, pp.123–128：判据 (6.1)（Tr_{H₀} 𝒞 ≤ dim H₀，饱和 ⟺ 正定）与 (6.5)；**NS**：(6.14) = (6.15) ⇒ 逐字 'hence proving the \"no-ghost\" theorem for the Neveu-Schwarz sector'；**R（Henneaux 表示）**：(6.19) = (6.20) = Π((1+qⁿ)/(1−qⁿ))^8 ⇒ 逐字 'hence proving the \"no-ghost\" theorem'；**R（Schrödinger 表示）**：p.128 一段（由 Henneaux 表示的结果转过来）"
     note: |

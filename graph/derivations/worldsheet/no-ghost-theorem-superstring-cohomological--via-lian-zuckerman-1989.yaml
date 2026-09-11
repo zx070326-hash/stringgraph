@@ -64,6 +64,17 @@ depends_on:
       供给物质部门 L^m_n、G^m_r 的显式模式表达式（本图一侧）。LZ 一侧是 Proposition 1.1
       与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)，其中 U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩、
       R(p,½) = C、R(p,0) 是 Spin(D−1,1) 旋量表示（p.303）。
+  - id: worldsheet.superstring-relative-cohomology-vanishing
+    note: |
+      供给本推导的**核心上游步骤**：消灭定理（LZ **Theorem 2.4**，p.309 陈述 / **Corollary 3.4**，
+      p.323 证明，逐字 'Suppose p ≠ 0: then H^n_rel(p,κ) = 0 unless n = 0.'）。
+      **非 inferred**：LZ 在 Corollary 2.15 的证明里**显式引用** Theorem 2.4——正定性的论证是
+      「消灭定理 ⇒ 复形的 Euler 特征与号差都只剩 H⁰_rel 的贡献 ⇒ 配合 Proposition 2.14(ii) 的
+      char C_rel = sign C_rel 得 dim H⁰_rel = sign H⁰_rel ⇒ 正定」，没有消灭定理这一步整条论证不成立。
+      ⚠ **不构成循环**：消灭定理的证明（§3：有限过滤 + 超李代数同调正合列 + Poincaré 对偶）
+      **不用**任何厄米形式、不用 Corollary 2.15、不用 Theorem 2.20；方向是 2.4 → 2.15，与本边同向。
+      ⚠ 该卡与本卡的前提逐条相同（D = 10、p ≠ 0、相对复形、R 扇区表示的存在量词），
+      故本边不需要 convention_map。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -153,12 +164,14 @@ gaps:
      是否同构，本图未核实**：FOK (5.1) 只证了它自己的两种表示（Schrödinger 与 Henneaux）
      同构，且逐字限定 'the isomorphism is only an isomorphism of **ungraded** vector spaces'。
      ⇒ 若日后要把断言 (2) 从存在量词升为「对一切可接受表示」，本推导不够。"
-  - "**消灭定理（Theorem 2.4）在本图没有独立陈述卡。** 它是本推导的核心步骤、也是 LZ 自评
-     唯一非平凡的一步（p.335 逐字 'The only mathematically non-trivial result is the vanishing
-     theorem (2.4).'），却只以 source 的形式出现在这里。建议单建
-     worldsheet.superstring-relative-cohomology-vanishing（含 R 扇区表示选择的参数化），
-     让本推导与 --via-figueroa-ofarrill-kimura-1989 都改指它——那样两篇的**独立性**会落在
-     图的结构上而不只是 notes 里。已列入报告交 lead。"
+  - "**〔2026-09-11 已结清〕消灭定理（Theorem 2.4）此前在本图没有独立陈述卡。**
+     它是本推导的核心步骤、也是 LZ 自评唯一非平凡的一步（p.335 逐字 'The only mathematically
+     non-trivial result is the vanishing theorem (2.4).'），原先只以 source 的形式出现在这里。
+     现已单建 **worldsheet.superstring-relative-cohomology-vanishing**（推导
+     --via-lian-zuckerman-1989），本推导已加 depends_on 该卡（非 inferred）。
+     ⚠ **剩余部分**：--via-figueroa-ofarrill-kimura-1989 尚未改指它，FOK 侧的消灭定理
+     （(3.19) NS、(4.17) R，Henneaux 表示）也还没有对应的推导卡；两篇的**独立性**因此仍只落在
+     notes 里，没落在图的结构上。已列入报告交 lead。"
   - "**Theorem 2.4 的证明用到两条本图没有卡的表示论输入**：
      (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——其证明（Proposition 2.18）用
          **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性
