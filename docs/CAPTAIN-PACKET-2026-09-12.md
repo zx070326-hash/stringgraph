@@ -1,3 +1,5 @@
+> ⚠ **计数以 main 6231696（2026-09-11）现场 `uv run stringgraph report` 为准：621 statements / 514 derivations / 3 milestones / 22 conventions；effective formalized 83 / rigorous 111；Lean 86 条声明 `check-axioms` 全绿（3522 jobs，lead 实跑）。** 下文横幅与正文里的 611/504/21/82 是修订时的快照，已过时；船长签字前 lead 会再跑一次 report。第二轮 reviewer-captain-packet-b 的 2 处 CONFIRMED（第 3 节「图内尚无对应卡」自相矛盾；计数过期）与 1 处 PLAUSIBLE（点击清单第 3 项缺用途）已由 lead 直接订正。
+>
 > ✅ **修订完成（2026-09-12，分支 `agent/lead/captain-packet-fix`）**：reviewer-captain-packet 核出的 9 处 CONFIRMED + 6 处 PLAUSIBLE 问题已逐条核实并修订，详见文末「修订记录」表。修订过程中合并了 main 的后续进展，第 3 节的现场数据已按合并后状态重新核验（`uv run stringgraph validate` 在本 worktree 现场重跑：611 statements, 504 derivations, 3 milestones, 21 conventions, 0 errors, 68 warnings；与 lead 报告的 main 611/504 一致。lead 另报告 main 有 82 条 Lean 声明且 `check-axioms` 全绿，本次未重跑 `lake build`/`check-axioms`，该数字未独立复核），不是修订前的旧快照。worktree 清理脚本已按 CONFIRMED-9 重写（SAFE 需同时满足「已合并」与「工作区无未提交改动」，不再提示 `--force`）。
 
 # 船长审批包 — 2026-09-12
@@ -125,7 +127,7 @@ git commit -m "graph: captain approves ms.critical-dimension-bosonic"
 
 **Lean 覆盖**（均在 `formal/StringFormal/NoGhost/`）：
 - 已机检：DDF 算子定义 `ddfOp`（`DDFOperator.lean`）；`[L_m,A^ε_n]=0` 对全部 m,n `lie_towerLop_ddfOp`（`DDFOperatorAll.lean`）；DDF 保持旧协变物理态 `ddfOp_mem_towerPhysSubmodule`（同文件）；横向 DDF 代数 `[A^ε_m,A^δ_n]=m(ε·δ)δ` 的 `lie_ddfOp_ddfOp`（`DDFAlgebra.lean`）；顶点算子伴随与 DDF 伴随 `towerPairing_towerVertex_left` / `towerPairing_ddfOp_left`（`VertexAdjoint.lean`）；动量塔 Fock 空间与 Sugawara 基础设施（`Fock.lean`/`DDF.lean`/`Sugawara.lean`）；**横向 DDF Gram 矩阵正定性** `ddf_gram_diagonal`（`DDFGram.lean`，对应图节点 `worldsheet.transverse-ddf-fock-gram-matrix` 的新增 `--via-lean` 推导，formalized，见上 why 树更新）；`[K_m,A^ε_n]=0` 及纵向算子完整代数 `lie_towerLop_kOp`/`lie_kOp_ddfOp` 等（`Longitudinal.lean`，对应图节点 `worldsheet.gt-longitudinal-k-algebra`，formalized）；D>26 负模物理态显式见证 `exists_mem_physSubmodule_pairing_self_neg'`（`LevelTwo.lean`，对应图节点 `worldsheet.negative-norm-physical-state-above-26`，formalized）；DDF 张成引理在 **N=1** 的实例 `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`（`LightCone.lean`，对应图节点 `worldsheet.ddf-spans-physical-states-level-one`，formalized；**D=26 不进入这一步**）。
-- **Lean 已有但图内尚无对应卡**：`Assembly.lean` 的 `no_ghost_of_spans`（10 条声明，无 sorry）——给定张成假设 `DDFSpans` 即把无鬼定理条件化组装完成，对任意 D、任意有序域成立；这一步把「无鬼定理」和「张成引理」之间的推导关系也机器验证了，但该条件化定理本身还没有对应的图节点，因此不出现在上面 why 树里。
+- **条件化定理已入图（2026-09-11 lead 按 reviewer-captain-packet-b 订正）**：`Assembly.lean` 的 `no_ghost_of_spans`（10 条声明，无 sorry）——给定张成假设 `DDFSpans` 即把无鬼定理条件化组装完成，对任意 D、任意有序域成立——**已有图节点** `worldsheet.no-ghost-theorem-conditional-on-ddf-spanning`（own formalized，`--via-lean`；effective open，因其前件 `worldsheet.ddf-spanning-hypothesis` 是刻意不挂推导的 open 卡）。两张卡都列在 `stringgraph report` 的 open propositions 里。它不出现在上面 `no-ghost-theorem-v4` 的 why 树，只因它不是 `--via-goddard-thorn` 的依赖，可直接 `stringgraph status` 查询。另：同日合入的 `NoGhost/Glue.lean`（`ddfSpans_of_forall_slice`）已证「逐片 ⇒ 全体」，`CharZero` 下 `DDFSpans` 恰等价于对每个 N ≥ 2 单片 (−N, N) 上的张成；`NoGhost/LevelTwoSpan.lean`（54 条声明）把能级 2 的物理态完整刻画、A^ε_{−2} 与 A^ε_{−1}A^δ_{−1} 显式写出，**N = 2 的消元步仍未完成**（`formal/TODO.md` `noghost-n2`）。
 - **未机检 / 图内无节点**：`kac-determinant-v2`（Feigin–Fuchs 路线，当前 why 树的实际瓶颈）；一般 N 的 DDF 张成引理本身（`DDFSpans`/(B-26)，`formal/TODO.md` 的 `ddf-spans` 待办，N=1 已证、N=2 进行中、一般 N 未做）。`transverse-ddf-fock-gram-matrix`、`[K_m,A^ε_n]=0`、纵向算子构造、D>26 负模见证**已移出此列**（见上，均已形式化）。
 
 **批准操作**：（批准只对 `audit.status`/`canonical_text` 生效，不改写 `back_translation` 字段——round 1-9 的历史记录原样保留，供以后审计追溯）
@@ -152,7 +154,7 @@ git commit -m "graph: captain approves ms.no-ghost-theorem"
 
 1. Goddard–Thorn 1972 正文：`https://cds.cern.ch/record/388690/files/CM-P00058839.pdf`（CERN-TH-1493，MARC 963 = PUBLIC）
 2. Brower–Thorn 1971：`https://cds.cern.ch/record/352004/files/CM-P00058794.pdf`
-3. GSW Vol.2 ch.13（pp.307–362，12 MB，超出 WebFetch 10 MB 上限，本机构有 Cambridge Core 订阅）：
+3. GSW Vol.2 ch.13「Low-energy effective action」（pp.307–362，12 MB，超出 WebFetch 10 MB 上限，本机构有 Cambridge Core 订阅）——用途：`consistency.*` 反常抵消一组八张卡（`anomaly-cancellation-so32/e8e8-effective-theory`、`gravitational-anomaly-requires-496-fermions`、`twelve-form-factorization-solutions`、`d10-anomaly-conditions-completeness-claim` 等）的 sources 引 `gsw-1987-v2` 而正文未取得（L0），与三个里程碑无关，优先级最低：
    `https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`
 4. Thorn 1985 Santa Barbara 42 页报告（需免费注册，是否注册请船长决定）：`https://inis.iaea.org/records/szqhd-hct30`
 5. GGRT 1973 正文（CDS 394307，MARC PUBLIC 但反爬拦截；Wayback 快照存在）：`https://cds.cern.ch/record/394307/files/CM-P00058492.pdf`
