@@ -1,0 +1,123 @@
+id: worldsheet.physical-slice-bounded-by-transverse-count
+kind: proposition
+title: 反对角片上物理态维数的上界：dim(H_phys ∩ V_N) ≤ p_{D−1}(N)（不含 b̃ 方向的光锥单项式计数，任意 D，(B-26) 上界那一半）
+statement: |
+  这是 (B-26) 秩不等式（worldsheet.ddf-spanning-rank-inequality）左边 dim H_N 的一条独立上界，
+  与右边 dim D_N（已 formalized）无关地成立；**不涉及 D = 26**。
+
+  【设定】记号沿用 worldsheet.ddf-spanning-rank-inequality（同一张塔 T(k;k_0)、系数域 K，
+  a₀ := α'k² = ½η(a,a)、反对角片 V_N := towerBigrade(−N, N)、H_N := H_phys ∩ V_N，
+  H_phys 逐字取自 worldsheet.ddf-spanning-hypothesis）。另取一个 worldsheet.ddf-light-cone-frame
+  的标架对象 F: DDFLightConeFrame η a b（D ≥ 2；F 内部的 (F1) 供给 η_μ² = 1，(F3) 供给
+  η(a,b) = 1，(F2) 供给 η(b,b) = 0——即本卡不需要在 F 之外再单独假设这些）。
+
+  【计数对象：不含 b̃ 方向的 level-N 光锥占据数】沿用 worldsheet.light-cone-monomials-span-fock-level
+  的方向表 frameVec_F（0 ↦ b、1 ↦ b̃、μ ≥ 2 ↦ ε_{μ−2}）与光锥单项式指标 d : Osc(D) →₀ N
+  （Osc(D) = Fin(D) × ℕ₊）。记 conjDeg(d) := d 在方向 1（即 b̃ 方向）上诸模态次数之和
+  （「b̃-次数」，与振子能级 level(d) 无关的另一个分次）。置
+
+    p_{D−1}(N) := Fintype.card { d : Osc(D) →₀ N | level(d) = N ∧ conjDeg(d) = 0 } ，
+
+  即「用 D − 1 个方向（b 本身 + D − 2 个横向 ε_i，唯独不用 b̃）把振子能级 N 分配给可数无穷多
+  个模态槽」的占据数个数——这与文献里 D − 1 个自由色的整数配分函数计数一致，是
+  worldsheet.transverse-ddf-fock-gram-matrix 一侧 p_{D−2}(N)（只用 D − 2 个横向方向）
+  的**另一个、更大的**计数，两者不可混淆。
+
+  【断言】对一切 hD : 2 ≤ D、F : DDFLightConeFrame η a b、N ∈ N：
+
+      dim_K H_N  ≤  p_{D−1}(N) 。
+
+  【本卡明确不断言】
+  (a) **不断言这是紧的**：不给出反向不等式，也不断言等号在何时成立；「差额恰好由零态补上」
+      是 worldsheet.ddf-spanning-rank-inequality 剩余的开放内容（该卡秩不等式的另一半，
+      需要 dim(H_null ∩ V_N) ≥ p_{D−1}(N) − p_{D−2}(N)，只在 D = 26 时期望成立）。
+  (b) **不涉及 D = 26，也不涉及任何特定 D**：对一切满足 hD : 2 ≤ D 的 D 成立，
+      与截距 a₀ 的具体数值无关（a₀ 只通过 H_phys 的定义隐含出现，本卡不对它做任何假设）。
+  (c) **不给出 dim D_N 或 dim Z_N 的信息**：dim D_N = p_{D−2}(N) 由
+      worldsheet.transverse-ddf-fock-gram-matrix 一侧独立给出；本卡与它是 (B-26) 秩不等式
+      的两块独立 D-无关输入中的一块（另一块是 dim D_N 那条），合起来仍差 dim Z_N 的下界。
+  (d) **不使用光锥单项式的线性无关性**：证明只用「H_phys ∩ V_N 嵌入 conjFreeSlice 的对偶空间」
+      这一单射论证，不需要 {光锥单项式} 是一组基。
+  (e) **不断言 V_N 关于伪态/b̃-自由部分的直和分解本身**：那是
+      worldsheet.gt-longitudinal-k-algebra 与本卡共同的上游引理（b̃-次数消元），本卡只用其
+      证明中间产物，不重复断言它。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.finrank_towerPhys_inf_towerBigrade_le
+  lean_file: StringFormal/NoGhost/SpuriousElimination.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/SpuriousElimination.lean :: StringFormal.NoGhost.finrank_towerPhys_inf_towerBigrade_le
+      （本卡 formal.lean_decl，第 1263 行起，docstring 自称 "**(P3)**"）；铺垫链
+      finrank_conjFreeSlice_le（第 1186 行）、finrank_le_of_injective_toDualHom（第 1204 行）、
+      eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice（第 1217 行）、
+      physSliceToDual / physSliceToDual_apply（第 1237、1244 行）；再往下依赖
+      towerBigrade_le_conjFreeSlice_sup_towerSpurious（第 992 行，任意交换环、只需 hD 与 hη）
+      与 towerPhys_inf_towerBigrade_eq_towerOrthComplement（第 1076 行，需 [NoZeroDivisors R][CharZero R]，
+      不需要光锥标架）。
+    note: |
+      本仓库，无 sorry。**类型类核实**：`finrank_towerPhys_inf_towerBigrade_le` 所在 `section P3`
+      （第 1195 行起）声明 `variable {D}{K}[Field K][CharZero K][Algebra ℚ K]{η a b:Fin D→K}`；
+      与本 section 里另外两条定理不同——`finrank_le_of_injective_toDualHom` 前有
+      `omit [CharZero K] [Algebra ℚ K] in`、`physSliceToDual_apply` 前有 `omit [CharZero K] in`——
+      **本定理声明前没有任何 `omit`**。追踪它的证明体：它调用
+      `eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice`（同样无 `omit`，
+      其证明内部调用 `towerPhys_inf_towerBigrade_eq_towerOrthComplement`，该定理**自身声明**
+      需要 `[NoZeroDivisors R][CharZero R]`，且 `H_phys` 的定义经 `invTwo K * Fock.zeroModeSq η a`
+      用到 `invTwo`，需要 `[Algebra ℚ K]`）。故本卡按**完整**的 `[Field K][CharZero K][Algebra ℚ K]`
+      记录，**不**是「声明比 section 变量表窄」的又一个实例——这次窄化机制没有触发，
+      是因为 `CharZero K`、`Algebra ℚ K` 真的被证明体用到了。
+      **curator 未自行运行 `lake build` / `#check` 逐条核实**（本 worktree 无构建缓存，
+      见 formal/CLAUDE.md「在 worktree 里构建」一节）；结论基于直接读源码 `omit` 标注与调用链，
+      未跑编译器验证。
+      **证明结构**（docstring 自述）：把「H_phys ⊓ V_N 里两个态配对同一个 conjFreeSlice 都相等
+      则相等」（单射性，`eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice`，
+      靠先用 `towerPhys_inf_towerBigrade_eq_towerOrthComplement` 换成「与伪态正交」，
+      再用 `towerBigrade_le_conjFreeSlice_sup_towerSpurious` 把片里任何向量写成
+      「不含 b̃ 的部分 + 伪态部分」，伪态部分配对为零、不含 b̃ 部分由假设为零）打包成一个线性映射
+      `physSliceToDual`，`finrank_le_of_injective_toDualHom` 把单射映射搬成 finrank 不等式，
+      再用 `finrank_conjFreeSlice_le`（= `p_{D−1}(N)`，来自
+      worldsheet.light-cone-monomials-span-fock-level 的张成定理，通过 `conjFreeSlice_le_towerBigrade`
+      给出有限维性）收尾。**不用余维数**（docstring 与 formal/CLAUDE.md 的
+      SpuriousElimination.lean 条目 (7) 均注明：不用 `BilinForm.finrank_orthogonal`，
+      因为塔本身不是有限维环境空间）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3（不承载论证；教科书不讨论「物理态维数 ≤ 某个占据数计数」这一中间步骤，
+      直接断言塔上的完整张成结论）"
+    note: "只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, fock-space, dimension-bound, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "physical slice" / "transverse count" /
+  "codimension" / "conjFreeSlice"`，均无命中；本图此前没有承载「H_phys ∩ V_N 的维数上界」
+  这一命题的节点。
+
+  【本卡与 (B-26) 秩不等式的关系（不新增依赖边，只在此记账）】
+  worldsheet.ddf-spanning-rank-inequality 的断言是 dim H_N ≤ dim D_N + dim Z_N。
+  本卡给出 dim H_N ≤ p_{D−1}(N)；配合 worldsheet.transverse-ddf-fock-gram-matrix 一侧
+  已 formalized 的 dim D_N = p_{D−2}(N)，有
+
+      dim H_N  ≤  p_{D−1}(N)  =  p_{D−2}(N) + (p_{D−1}(N) − p_{D−2}(N))
+               =  dim D_N + (p_{D−1}(N) − p_{D−2}(N)) 。
+
+  故只要再有 dim Z_N ≥ p_{D−1}(N) − p_{D−2}(N)（这条恰是 worldsheet.ddf-spanning-rank-inequality
+  notes 里登记的、唯一在 D = 26 处成立的剩余缺口），就能推出 dim H_N ≤ dim D_N + dim Z_N，
+  即 (B-26) 本身。**本卡不建这条推导**（那需要把两张 formalized 卡与一条尚未证的下界拼接成
+  一条新推导，超出本次接线范围），只在 notes 里把逻辑摆清楚，具体记账见
+  worldsheet.ddf-spanning-rank-inequality 的 notes 更新。
+
+  【与 worldsheet.light-cone-monomials-span-fock-level 的分工】
+  本卡的 p_{D−1}(N) 计数（`conjFreeSlice`/`finrank_conjFreeSlice_le`）建立在那张卡的张成定理
+  （`levelSubmodule_eq_span_lcMonomial`）之上：`conjFreeSlice` 是 level-N 光锥单项式里
+  conjDeg = 0（不含 b̃）的子集张成，其有限维性与维数上界依赖「level-N 分量由光锥单项式张成」
+  这一事实，但本卡不重复断言张成本身，只用其推论（有限维、有限生成集给出的维数上界）。
+  按【已被证明的片】的分工原则，这里同样是 `uses`（对象/事实供给）而非 `depends_on`
+  （本卡命题的证明逻辑不经由那张卡的陈述文字，而是通过 Lean 证明内部调用其定理）。
+
+  ⚠ 与 worldsheet.transverse-ddf-fock-gram-matrix 的教训一致：本卡状态标 formalized 是因为
+  Lean 侧证明**无 sorry**且各环节的类型类需求已逐条核对（见 sources 的 note），而不是因为
+  「大家都相信 D-无关的上界成立」。
+author: curator
+created: "2026-09-12"

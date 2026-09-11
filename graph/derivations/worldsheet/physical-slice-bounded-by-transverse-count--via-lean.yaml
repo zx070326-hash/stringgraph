@@ -1,0 +1,67 @@
+id: worldsheet.physical-slice-bounded-by-transverse-count--via-lean
+target: worldsheet.physical-slice-bounded-by-transverse-count
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      供给标架对象 F（`DDFLightConeFrame η a b`）；本推导把它当黑箱使用，
+      只用其打包出的 (F1)(F2)(F3)（η_μ²=1、η(b,b)=0、η(a,b)=1）与 `frameVec`，
+      不重新论证 (F4)–(F8)（目标卡【设定】已注明）。
+      ⚠ 该卡 status/effective = formalized，不压低本推导状态。
+  - id: worldsheet.light-cone-monomials-span-fock-level
+    inferred: false
+    note: |
+      供给 `conjFreeSlice` 有限维性与「level-N 分量由光锥单项式张成」的底层事实
+      （`levelSubmodule_eq_lcSpan`），本推导的 `finrank_conjFreeSlice_le` 步骤经
+      `conjFreeSlice_le_towerBigrade` 用到它。该卡 status/effective = formalized。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/SpuriousElimination.lean :: StringFormal.NoGhost.finrank_towerPhys_inf_towerBigrade_le
+      （第 1263 行起）；完整调用链见目标卡同名 source。
+    note: |
+      本仓库，无 sorry。类型类核实（section P3 无 `omit` 标注、追踪调用链需要
+      `[NoZeroDivisors R][CharZero R]` 与 `[Algebra ℚ K]`）详见目标卡 sources note，不在此重复。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3（不承载论证，见目标卡同名 source）"
+    note: "只标注文献方位。"
+summary: |
+  证明分四步，逐一对应文件里的四条定理：
+
+  **第 1 步（`towerBigrade_le_conjFreeSlice_sup_towerSpurious`，任意交换环，只需 hD 与 hη）**：
+  片 V_N 里任何向量都能写成「不含 b̃ 的光锥单项式部分（∈ conjFreeSlice）+ 伪态部分
+  （∈ towerSpuriousSubmodule）」之和。这一步走光锥单项式的张成
+  （worldsheet.light-cone-monomials-span-fock-level）与领头项消元的强归纳（`lcMeasure`）。
+
+  **第 2 步（`towerPhys_inf_towerBigrade_eq_towerOrthComplement`，需
+  [NoZeroDivisors R][CharZero R]，不需要光锥标架）**：在反对角片上，「物理」等价于
+  「与全部伪态正交」——L_0 条件在反对角线上自动满足（本征值 α'k²+j+N，j=−N 时自动等于 a₀），
+  故只剩 L_m（m≥1）湮灭这一半，恰是与伪态正交的定义。
+
+  **第 3 步（`eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice`）**：
+  合并第 1、2 步——若 x ∈ H_phys ∩ V_N 与 conjFreeSlice 的每个元素配对都为零，则由第 2 步
+  x 与全部伪态也正交（因为 x 物理），再由第 1 步把 V_N 里任意向量拆成 conjFreeSlice 部分 +
+  伪态部分、两部分配对 x 都为零，故 x 与整个 V_N 正交，而型在片上无退化根基
+  （`eq_zero_of_mem_towerBigrade_of_orthogonal`，特征零、无零因子），故 x = 0。
+  即：配对映射 `physSliceToDual : H_phys∩V_N → (conjFreeSlice)^*` 是单射。
+
+  **第 4 步（`finrank_towerPhys_inf_towerBigrade_le`，即目标卡断言）**：单射线性映射不增加维数
+  （`finrank_le_of_injective_toDualHom`，只需 [Field K]），对偶空间与原空间同维
+  （`Subspace.dual_finrank_eq`），而 conjFreeSlice 的维数 ≤ 其生成集（level-N、conjDeg=0 的
+  光锥单项式）的基数 = p_{D−1}(N)（`finrank_conjFreeSlice_le`，只需 [Field K]，经
+  `conjFreeSlice_le_towerBigrade` 依赖光锥单项式张成定理的有限维性）。四步拼起来给
+  dim(H_phys∩V_N) ≤ p_{D−1}(N)。
+
+  **为什么标 formalized**：目标卡的全部断言由 `finrank_towerPhys_inf_towerBigrade_le` 这一条
+  无 sorry 的 Lean 定理逐字给出；两条依赖（DDF 光锥标架、光锥单项式张成）effective 均为
+  formalized，不压低本推导状态。
+gaps:
+  - "只给上界，不给紧性/等号条件（目标卡边界 (a) 本身声明的范围）：与
+    worldsheet.ddf-spanning-rank-inequality 的开放部分（null 态维数下界）拼接后才能得到 (B-26)，
+    本推导不做这一步拼接。"
+  - "curator 未自行运行 lake build / #check 逐条核实类型类窄化说法（目标卡 sources 的核实段）；
+    结论基于直接读 omit 标注与调用链，未跑编译器验证。"
+author: curator
+created: "2026-09-12"
