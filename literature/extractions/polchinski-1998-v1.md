@@ -4902,6 +4902,104 @@ the topology of the world-sheet — it is the Euler number of the world-sheet.**
 
 ---
 
+## 16. ★★ E82 复核（2026-09-11，researcher 第十轮）——§5.3 的 Riemann–Roch 推导，印刷 pp. 158–159 原书页图
+
+> 触发：**§2 E82** 标「位置：§5.3, (5.3.20)/(5.3.21), p.159 `[已核实]` — L1」，
+> 但**该条的内容与备注全部来自 [S]（Schrans 伴读笔记）**，原书未读。
+> 本节取 Cambridge Core ch.5 单章 PDF（item hash `2619B77DD4AE2BE4D53B5EED5D3BE3C1`，
+> 文件名 `9780511816079c5_p145-165_CBO.pdf`，243.1 KB / 21 页，**PDF 页 = 印刷页 − 144**，一次命中；
+> 页脚逐字 `Downloaded from https://www.cambridge.org/core. Zhejiang University, on 11 Sep 2026 at 02:17:11 …
+> https://doi.org/10.1017/CBO9780511816079.008`），读印刷 pp. **158**（PDF 14）与 **159**（PDF 15）。
+> **只加不改 §2 E82 的旧行。**
+
+### 16.1 ★ 结论表
+
+| 被复核的说法 | 结果 |
+|---|---|
+| **(5.3.20) 与 (5.3.21) 确实在印刷 p.159** | ✅ **成立**（页眉印 `5.4 More about the measure  159`，两式都在该页上半） |
+| **E82 说"用球面（χ=2, μ=0, κ=6）这一个例子定出比例常数"** | ❌ **不成立。原书 §5.3 全程没有球面、没有 `χ = 2`、没有 `κ = 6`、没有任何"定常数"的动作。** |
+| **"就地用球面标定常数 3"是否逐字成立** | ❌ **不逐字、也不实质成立。** 系数 `3` 是从 (5.3.19) 的反常系数 `(1−2λ)/4` 取 `λ = 2` **算出来**的 |
+| E82 写的 "(5.3.20) = `δ_{g#}∫[dφ]e^{−S} ∝ ε∫d²σ√g ∇_a j^a = ε∫d²σ√g((1−2λ)/4)R`" | ⚠ **把两条式子并成了一条**：`∇_a j^a = (1−2λ)R/4` 是**独立编号的 (5.3.19)，在 p.158**；(5.3.20) 是别的式子（见 16.3） |
+
+⇒ **E82 备注里「比例常数不是算出来的，而是用球面这一个例子标定的」这句话，
+描述的是 [S] 的讲法，不是原书的讲法。** 图里若据此把该推导的强度定成
+「靠一个例子定常数」，**依据不成立**；但**结论（这条推导是 `physical-argument`）仍然站得住**，
+理由换成 16.4 的三条。
+
+### 16.2 印刷 p.158 逐字（L1 页图；本轮新增，§2 从未记录过这一页）
+
+小节标题（居中斜体）：**"The Riemann–Roch theorem"**（p.158 下半）
+
+> "We can now give a path integral derivation of the Riemann–Roch theorem. For the ghost current of a
+> holomorphic `bc` system (without `b̃, c̃`), **the current conservation anomaly derived in exercise 3.6** is"
+>
+> `∇_a j^a = (1 − 2λ)/4 · R` .  **(5.3.19)**
+
+同页上文（`Δ_FP` 的零模饱和，供定位）：**(5.3.15)** `B_{Jab} = (1/ν_J)(P₁C_J)_{ab}, ν_J = ν'_J ≠ 0`；
+**(5.3.16)** 模式化的 `Δ_FP`；**(5.3.17)** 零模饱和后的 `Δ_FP`；
+**(5.3.18)** `Δ_FP = det[(B_{0k'}, ∂_k ĝ)/4π] · det C^a_{0j}(σ_i) · det'(P₁^T P₁/4π²)^{1/2}`。
+其后逐字：「Note that `C^a_{0j}(σ_i)` is a square matrix, in that `(a,i) ∈ f` runs over `κ` values as does `j`.
+The prime on the functional determinant denotes omission of zero eigenvalues.」
+
+### 16.3 印刷 p.159 逐字（L1 页图）
+
+> "Noether's theorem relates conserved currents to invariances. For a current that is not conserved,
+> one finds by the same argument that"
+>
+> `δ([dφ] exp(−S)) / ([dφ] exp(−S)) = (iε/2π) ∫ d²σ g^{1/2} ∇_a j^a → −iε (2λ−1)/2 · χ` .  **(5.3.20)**
+>
+> "The ghost number symmetry acts as `δb = −iεb`, `δc = iεc`. When the path integral is nonvanishing,
+> the transformations of the measure, action, and insertions must cancel. **Thus we learn that from the anomaly
+> the number of `c` minus the number of `b` insertions is `3χ/2`.** The path integral calculation relates the number
+> of insertions to the number of zero modes and so gives for the same difference"
+>
+> `½(κ − μ) = ½(dim ker P₁ − dim ker P₁^T)` .  **(5.3.21)**
+>
+> "**The factor of ½ appears because we have taken the holomorphic theory only; the antiholomorphic theory
+> gives an equal contribution. Equating the result from the anomaly with the result from the zero modes gives
+> the Riemann–Roch theorem `κ − μ = 3χ`.** For the general `bc` system one finds in the same way that"
+>
+> `dim ker P_n − dim ker P_n^T = (2n + 1)χ` ,  **(5.3.22)**
+>
+> "the operators being defined in exercise 3.2."
+
+（其后 p.159 即进入 **§5.4 "More about the measure"**，首式 (5.4.1)。⇒ **§5.3 到 (5.3.22) 为止**。）
+
+### 16.4 ★ 推导的真实结构（订正 E82）
+
+原书的三步，**全部在 pp.158–159，没有任何外部标定**：
+
+1. **(5.3.19)**：`bc` 系鬼流的反常 `∇_a j^a = (1−2λ)R/4` —— **外包给 exercise 3.6**（原文逐字 "derived in exercise 3.6"）。
+2. **(5.3.20)**：把它积起来得 `−iε(2λ−1)χ/2`；**取 `λ = 2` 即 `(2·2−1)/2 = 3/2`**，
+   故正文那句「the number of `c` minus the number of `b` insertions is `3χ/2`」
+   —— **系数 `3` 在这里是代 `λ = 2` 算出来的，不是拟合出来的。**
+3. **(5.3.21)**：同一差值由零模计数给出 `½(κ − μ)`；两者相等 ⇒ `κ − μ = 3χ`。
+
+**⇒ 这条推导的 `physical-argument` 定级的真正理由（三条，均 L1）：**
+(a) **反常系数被外包给习题**（exercise 3.6；而 [S] 另指出该习题在官方勘误表里有符号错误，见 §2 E81 备注）；
+(b) **(5.3.20) 里"由同样的论证可得"（"by the same argument"）没有写出论证**；
+(c) **(5.3.22) 的一般 `n` 情形只说 "one finds in the same way"，零推导**。
+**不再需要"靠球面标定常数"这个（错误的）理由。**
+
+### 16.5 本轮的 negative evidence（通读 pp.158–159 两页页图）
+
+1. **`κ = 6`、`μ = 0`、`χ = 2`、"sphere" 这些字样在 pp.158–159 上一个都没有。**
+2. **§5.3 不引用任何文献**（两页零引用）。
+3. **(5.3.21) 的左端是 `½(κ − μ)` 而不是 `κ − μ`**；E82 转述里没有这个 `½`，
+   而原书**专门用一句话解释这个 `½`**（全纯/反全纯各贡献一半）。转卡时不要丢。
+4. **(5.3.22) 是本轮新增的一条陈述**（`dim ker P_n − dim ker P_n^T = (2n+1)χ`，算子定义在 exercise 3.2），
+   §2/§5 从未登记过，**它是 (5.3.21) 的一般化**，若图里要 `n = 1` 之外的情形应引它。
+
+### 16.6 遗留
+
+- **Q16.1** exercise 3.6 与 exercise 3.2 的题面本轮**未读**（在 ch.3, pp.77–120，item hash 已知）。
+  (5.3.19) 与 (5.3.22) 的**全部严格性都押在这两道习题上**，值得下一轮花 1 次 fetch。
+- **Q16.2** §5.2 的 (5.2.9)（E75）本轮**未重读**：「球面 `χ=2, κ=6, μ=0`」那组数在原书里到底出现在
+  §5.2 还是 §6.1（§2 E75 备注引 [S] 说是 "(6.1.5)，下一章才给"）。**若要彻底结清 E82 的"球面"说法，
+  应顺手读印刷 p.153（PDF 9）附近。** 本轮预算给了 v2 ch.13 的 (13.3.12) 复核。
+
+---
+
 
 
 

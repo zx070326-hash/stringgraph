@@ -89,6 +89,9 @@
 
 | P2 | cy3-finiteness-math | `filipazzi-hacon-svaldi-2021`（arXiv:2112.01352 = JEMS 27 (2025) 3583–3650）正文；`grassi-2023-spectrum-bounds`（2304.07819v2）Definition 3.2 与 §5 | math, swampland | 待分派 | **新增（2026-09-11，`math-sources.md` §46）**：给 `math.cy3-cohomology-bounded` 补 2005 年之后的进展。**已确定的事实**：一般 CY3 拓扑类型有限性**截至 2026-06 仍开放**（arXiv:2606.08427 §I 逐字）；**椭圆/亏格一纤维化情形已证明**（FHS 2021，已发表）；**Grassi Corollary 5.3 给 `h^{1,1}(X) ≤ 491`**（椭圆纤维化）。**⚠ 任务书给的 `h^{1,1}+h^{2,1} ≤ 502` 本轮未能核实**：Kreuzer–Skarke 原文正文里 "491"/"502"/"11" 全篇未出现，四篇 KS 统计论文的摘要也都没有 502。**下一枪最该打 arXiv:2008.01730「Bounding the Kreuzer-Skarke Landscape」正文。**⚠ **不要把 CY3 有限性称作「Reid 猜想」或「Yau 猜想」**：2606.08427 明确把 Reid's fantasy 区分为另一条（关于连通性的）猜想。⚠ **Gross 1994 是 Duke Math. J. 74（Crossref），不是 76（2606.08427 抄错）** |
 
+| **P1** | **siegel-1954-eta** | 全文（Mathematika **1** (1954) 4，1 页） | math, worldsheet | researcher | **★★ extracted（L1 全文页图，2026-09-11，新登记）** → `extractions/math-sources.md` **§48**。经 **Cambridge Core 期刊文章 PDF**（机构订阅；见下方备忘新增条）。<br>**这是 `math.dedekind-eta-s-transformation` 的第一条数学侧一手来源**——此前图上只有 Polchinski v1 (7.2.43)/(7.2.44) 的断言，而 `polchinski-1998-v1-ch7.md` 已 L1 确认**原书对该变换零证明**。<br>**★ 三条引用红线**：(1) **全文无编号定理/编号公式/小节/参考文献**，要引的陈述**只出现在标题里** ⇒ `loc` 只能写 `p. 4`，**严禁写 "Theorem 1"**；(2) 原文形式是 `η(−1/τ) = η(τ)√(τ/i)`，与图里的 `(−iτ)^{1/2}` 等价，但**换算是抽取者做的**；(3) **原文不声明平方根分支、不显式写 `Im τ > 0`**。<br>**★ 形式化状态（L1 源文件全读）：Mathlib 的 `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 有 η 的定义/非零/可微/`logDeriv η = (πi/12)E₂`，但没有 S 变换** ⇒ 节点**不得标 `formalized`**；同时这是一个"地基已铺、只差一步"的 Lean 岛。<br>**未结**：Apostol GTM 41 的 **Theorem 3.1** 编号仍 L0（Springer 登录墙；INSPIRE `ft "Apostol, Theorem 3.1"` → **0 hits**；WebSearch 额度已耗尽）。**Apostol 本轮刻意未登记进 `sources.bib`**，以免被顺手引成 Theorem 3.1。Ch. 3「The Dedekind eta function」= **pp. 47–73**（Crossref L1，1976/1990 两版页码相同、DOI 不同） |
+| **P1** | **polchinski-1995-dbranes** | hep-th/9510017（= PRL **75** (1995) 4724），11 页 | branes | researcher | **partially extracted（L1，pp.4–8，2026-09-11）；尚未登记进 `sources.bib`** → 记在 `extractions/polchinski-1998-v2-ch13.md` **§6.4**。<br>**登记理由（两条，都很硬）**：(1) **它是 D 膜 R–R 荷的原始出处，且给出了书里没有的显式归一化常数 `α_p`**（(12) `S = (α_p/2)∫F*F + iμ_p∫A`），使量纲关系可独立核查——本轮正是靠它裁决了 (13.3.12) 的系数争议；(2) **p.8 的 (20) `i(n−32)μ_9∫A_10` + 「Thus, the equation of motion requires the group `SO(32)`」是「32 张 D9」这一现代表述的早期一手出处**，而 Vol.2 ch.13 只写 16（见 `-ch13.md#Q1`）——**且同篇 p.7 也写 "exactly 16 D-branes"，两种计数在 1995 年原文里就并存**。<br>⚠ 读的是 **v3**；⚠ p.6 有作者自承的未解矛盾「**We have not succeeded in reconciling these calculations**」，引其荷归一化必须带上。<br>**未读**：pp.1–3、pp.9–11（含参考文献） |
+
 ## 已知获取路线备忘
 
 - **★ Polchinski Vol.1 章级 PDF 的文件名规则已第七次验证（2026-09-11，ch.7）。**
@@ -471,3 +474,39 @@
   这修正了 `extractions/brst-cohomology-sources.md` §5.4 的谨慎口径。**控制查询用无意义串，成本一次 fetch。**
 - **长文别用 `arxiv.org/html/<id>`**：2106.16178 的 HTML 在 §5 前被截断，`/abs/` 只回摘要。
   长文一律 `/pdf/` 落盘 + `Read(pages=)`。本轮两条路各浪费一次额度。
+
+- **★★ 新增可用路线（2026-09-11，researcher 五项核实批次）：Cambridge Core 的机构订阅对 *期刊文章* 同样有效，不只对书。**
+  `siegel-1954-eta`（Mathematika **1** (1954) 4）全文即以此取得（L1，1 页，56 KB）。
+  1. `https://www.cambridge.org/core/product/identifier/<DOI 去掉 10.1112/ 前缀，大写>/type/journal_article`
+     → 文章页给出 "Save PDF (0.05 mb)" 与真实 PDF URL。例：`…/identifier/S0025579300000462/type/journal_article`。
+  2. 真实 PDF URL 形如
+     `…/core/services/aop-cambridge-core/content/view/<ITEM_HASH>/<DOI后缀>a.pdf/<标题 slug>.pdf`
+     —— **注意文件名规则与书完全不同**：书是 `<ISBN>c<N>_p<起>-<止>_CBO.pdf`，
+     期刊文章是 **`<DOI后缀>a.pdf`**（末尾那个 `a` 是文章序号，猜不出来，**必须先 fetch 文章页**）。
+  3. WebFetch 落盘 → `Read(pages=)`。页脚同样印下载机构与时间戳，可作版本锚定。
+  ⇒ **覆盖面**：Mathematika、Proc. Camb. Phil. Soc.、Compositio（部分卷）等 CUP/LMS 旧刊都值得一试。
+- **⚠ 死路新增（2026-09-11，三次实测）：Springer 的一切路径在本环境都撞登录墙。**
+  `link.springer.com/chapter/10.1007/…`、`link.springer.com/book/10.1007/…`、
+  **以及前置内容 PDF `link.springer.com/content/pdf/bfm:<ISBN>/1.pdf`** —— **三者一律 `303 See Other` 跳
+  `idp.springer.com/authorize?...`**。**别再试 `bfm` 路线取 Springer 书的目录。**
+  ⇒ **Springer 书目前唯一可用的替代是 `api.crossref.org/works?query.container-title=<书名>&filter=type:book-chapter`**，
+  它给**章标题 + 页范围 + 逐版 DOI**（本轮对 Apostol GTM 41 与 Humphreys GTM 9 都一次命中）。
+  ⚠ **但它只到"章"这一级**：GTM 9 的 `§1`–`§26` 是跨章连续编号的小节，Crossref 回答不了"§N 在哪页"。
+- **★ Google Books 的 HTML 入口 `books.google.com/books?id=<VOL>&q=<短语>` 在本环境可用（与 API 的 429 不同）。**
+  本轮对卷 `mSD4DvUFa6QC`（Humphreys GTM 9，已在 §15.3 通过无意义串控制实验）三次查询：
+  `"Root Space Decomposition"` → **Page 35**；`"Harish-Chandra"` → **Page 135**；
+  `"Generalities on characters"` → **页面未交付搜索结果区**（⚠ **这不是"无命中"，是"没拿到"，两者必须分开记**）。
+  ⚠ **只回页号，不回 snippet** ⇒ 拿不到小节标题，**不能据此写 `§N.x` 这一级编号**。
+- **★★ 新增可用路线（2026-09-11）：用 GitHub API 查 Mathlib 的形式化现状，成本极低、对 `status` 判断决定性。**
+  1. 目录：`https://api.github.com/repos/leanprover-community/mathlib4/contents/<路径>`（免 auth，返回文件清单）。
+  2. 正文：`https://raw.githubusercontent.com/leanprover-community/mathlib4/master/<路径>.lean`
+     → WebFetch 直接可读，module docstring 与声明名一次到手。
+  ⚠ **代码检索端点 `api.github.com/search/code` 需要 auth，别用**；目录 + raw 两步足够。
+  本轮成果：`NumberTheory/ModularForms/DedekindEta.lean` **无 η 的 S 变换**（⇒ 节点不得标 formalized）；
+  `Algebra/Lie/Weights/Cartan.lean` **有 `cartan_sup_iSup_rootSpace_eq_top`（根空间分解）**；
+  `Algebra/Lie/` 下**没有** Chevalley 限制定理 / Harish-Chandra 同态。
+- **★ 反直觉系数的处理纪律在本轮第三次奏效（这次是"页图对、书错"）。**
+  Polchinski v2 **(13.3.12)** 原书印 `μ_{6−p}/2κ₁₀²`，页图读数无误；
+  但与同节 (13.3.11) + 次页 (13.3.13) 复算不自洽，且 **hep-th/9510017 的 (12)–(15) 独立给出 `Φ = μ_p/α_p = 2κ₁₀²μ_p`**
+  ⇒ **判为原书排印错误（Core 2005 "with corrections" 版仍错）**。见 `extractions/polchinski-1998-v2-ch13.md` **§6**。
+  **教训升级：页图与复算冲突时，不要默认"我读错了"——先找一条书外的独立来源，两条独立证据同向才能判书错。**
