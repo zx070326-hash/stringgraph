@@ -60,7 +60,7 @@ depends_on:
       供给物质部门 L^m_n、G^m_r 与物质 Fock 空间。LZ 一侧是 Proposition 1.1 与
       V(p,κ) = R(p,κ) ⊗ U(κ)，U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩，R(p,½) = C、
       R(p,0) 是 Spin(D−1,1) 旋量表示（p.303）。
-  - id: worldsheet.no-ghost-theorem-superstring-cohomological
+  - id: worldsheet.no-ghost-theorem-superstring-cohomological-v2
     note: |
       ⚠ **本边不是"用正定性证同构"**，而是记账：本卡断言 (1)(2) 里的"**酉**同构"要求两侧的
       厄米形式良定义，而 R 扇区相对复形上的厄米形式是 LZ **Definition 2.11** 用 D_R 的原像
@@ -71,6 +71,9 @@ depends_on:
       ⚠ **不构成循环**：LZ 的 Corollary 2.15(ii)（正定）证明**不用** T 与 Theorem 2.20，
       而 Theorem 2.20 的证明**要用** Corollary 2.15(i) 的维数公式（与 2.15(ii) 同一计算）
       与 Corollary 2.19(i)(ii)。方向是 2.15 → 2.20，与本边方向一致。
+      ★ **指 v2**：目标侧那张卡 2026-09-11 换代为 -v2，唯一实质改动是 (H3)「次数是鬼数」改为
+      LZ Definition 2.2 的**相对次数** n = 鬼数 + κ ∈ Z（NS 的 n = 0 ↔ 鬼数 −½）。
+      本边的内容不变：Definition 2.11 的形式与 Theorem 2.7 的机制与分次的名目无关。
   - id: worldsheet.superstring-relative-cohomology-vanishing-v2
     note: |
       供给 Theorem 2.20 证明所依赖的上游：消灭定理（LZ **Theorem 2.4**，p.309 /

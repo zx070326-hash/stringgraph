@@ -242,5 +242,16 @@ notes: |
   ⇒ 上一段的 (i)/(ii) 取 **(i)**，措辞精确化为：结论对一切 p ≠ 0 成立，代价是 R 扇区形式的整体
      符号须按 p 的时间取向选取。本图不在 (H2) 加前提，不建 v2。两条 --via-lian-zuckerman-1989
      推导 gaps 里的"本图未判定"一句自本裁决起过时，留 curator 改指本段。
+
+  ⚠⚠ **本卡片已被取代（curator，2026-09-11，small-backlog-10）**，见 superseded_by。
+  原因只有一条：(H3) 末句写「次数是鬼数（零点按 conv.superstring-ghost-number-zero 的 canonical，
+  即相对上同调集中在 0）」是**陈述漂移**——LZ 的鬼数取值在 Z + κ，NS 扇区是半整数，
+  故按本卡字面 NS 的「鬼数 0」不可达；Corollary 2.15(ii) 的 H⁰_rel 用的是 Definition 2.2 的
+  **相对次数**（F^n = B^{n−κ} ∩ Ker K，即 n = 鬼数 + κ ∈ Z）。
+  与已换代的 worldsheet.superstring-relative-cohomology-vanishing 同病、同一轮处理。
+  v2 只改 (H3) 一条并补了换算，其余逐字未动。
+  本卡的三条推导（--via-lian-zuckerman-1989、--via-figueroa-ofarrill-kimura-1989、--via-ohta-imnu）
+  已 `git mv` 改指 v2（纯换名式换代，论证原样适用），本卡不再留推导；无活推导依赖本卡。
+superseded_by: worldsheet.no-ghost-theorem-superstring-cohomological-v2
 author: curator
 created: "2026-09-11"

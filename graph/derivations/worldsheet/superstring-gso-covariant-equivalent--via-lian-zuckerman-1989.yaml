@@ -12,7 +12,7 @@ depends_on:
       （只写 κ = 0, ½），**p ≠ 0、D = 10、复形取 p.306 (8)（R 扇区 T₀ ⊕ T₁）都是经本边继承的**。
       ⇒ 这条边不只是"用了一条引理"，它是本推导前提链的**唯一入口**。
       ★ 指 v2：相对次数 vs 鬼数的订正（见那张卡的 notes）；目标卡 (H2) 与 v2 的 (H4) 同款。
-  - id: worldsheet.no-ghost-theorem-superstring-cohomological
+  - id: worldsheet.no-ghost-theorem-superstring-cohomological-v2
     inferred: true
     note: |
       供给两件事：
@@ -27,6 +27,9 @@ depends_on:
       **不是**对 2.15(i) 的逐条引用。正解：为 Corollary 2.15(i) 单建卡后本边改指它并去掉 inferred。
       ⚠ 本推导**不需要正定性**：Prop 4.3(i)(ii) 的证明只用到 ⟨,⟩_rel 的存在与 P̄_± 的自伴性，
       不用 H⁰_rel 上形式的正定。故本边在本推导里比在 Theorem 2.20 一侧的同名边弱。
+      ★ **指 v2**：目标侧那张卡 2026-09-11 换代为 -v2（(H3)「次数是鬼数」改为相对次数
+      n = 鬼数 + κ ∈ Z），与本推导目标卡 (H2) 及 worldsheet.superstring-relative-cohomology-vanishing-v2
+      的 (H4) 同款订正。本边的内容与 inferred 判断均不变。
   - id: worldsheet.superstring-brst-charge
     note: |
       供给 Q（本图一侧），以及 Prop 4.3 证明里 **[Q, P̄_±] = 0** 这一步所说的"哪个算符与投影子
