@@ -265,6 +265,166 @@ lemma gramMatrix_vermaToFock {ι : Type*} [Fintype ι] [DecidableEq ι]
     (v : ι → VermaModule R (D : R) (vacuumWeight η a)) :
     gramMatrix (pairing η) (fun i => vermaToFock hη (v i)) = gramMatrix (fockForm hη) v := rfl
 
+/-! ### The Kac determinant polynomials for `N ≤ 4` -/
+
+section KacPolynomials
+
+variable (c hw : R)
+
+/-- Level-1 Kac determinant `2h` (the `1 × 1` Gram determinant; it does not involve `c`). -/
+def kacDet1 : R := 2 * hw
+
+/-- Level-2 Kac determinant `2h(16h² + 2h(c-5) + c)`; see
+`StringFormal.Virasoro.IsContravariant.gram_det_descFamily2`. -/
+def kacDet2 : R := 2 * hw * (16 * hw ^ 2 + 2 * hw * (c - 5) + c)
+
+/-- Level-3 Kac determinant `48h²(16h² + 2h(c-5) + c)(3h² + h(c-7) + c + 2)`; see
+`StringFormal.Virasoro.IsContravariant.gram_det_descFamily3`. -/
+def kacDet3 : R :=
+  48 * hw ^ 2 * (16 * hw ^ 2 + 2 * hw * (c - 5) + c) * (3 * hw ^ 2 + hw * (c - 7) + c + 2)
+
+/-- Level-4 Kac determinant
+`384h³(8h + c - 1)(16h² + 2h(c-5) + c)²(3h² + h(c-7) + c + 2)(16h² + 10ch - 82h + 15c + 66)`;
+see `StringFormal.Virasoro.IsContravariant.gram_det_descFamily4`. -/
+def kacDet4 : R :=
+  384 * hw ^ 3 * (8 * hw + c - 1) * (16 * hw ^ 2 + 2 * hw * (c - 5) + c) ^ 2
+    * (3 * hw ^ 2 + hw * (c - 7) + c + 2)
+    * (16 * hw ^ 2 + 10 * c * hw - 82 * hw + 15 * c + 66)
+
+end KacPolynomials
+
+/-! ### The standard Fock descendants and their Gram determinants -/
+
+section Descendants
+
+variable (η a)
+
+/-- `L₋₁|k⟩`. -/
+noncomputable def fockDesc1 : Fin 1 → Fock D R := ![Lop η a (-1) 1]
+
+/-- `L₋₂|k⟩`, `L₋₁²|k⟩`. -/
+noncomputable def fockDesc2 : Fin 2 → Fock D R :=
+  ![Lop η a (-2) 1, Lop η a (-1) (Lop η a (-1) 1)]
+
+/-- `L₋₃|k⟩`, `L₋₂L₋₁|k⟩`, `L₋₁³|k⟩`. -/
+noncomputable def fockDesc3 : Fin 3 → Fock D R :=
+  ![Lop η a (-3) 1, Lop η a (-2) (Lop η a (-1) 1),
+    Lop η a (-1) (Lop η a (-1) (Lop η a (-1) 1))]
+
+/-- `L₋₄|k⟩`, `L₋₃L₋₁|k⟩`, `L₋₂²|k⟩`, `L₋₂L₋₁²|k⟩`, `L₋₁⁴|k⟩`. -/
+noncomputable def fockDesc4 : Fin 5 → Fock D R :=
+  ![Lop η a (-4) 1,
+    Lop η a (-3) (Lop η a (-1) 1),
+    Lop η a (-2) (Lop η a (-2) 1),
+    Lop η a (-2) (Lop η a (-1) (Lop η a (-1) 1)),
+    Lop η a (-1) (Lop η a (-1) (Lop η a (-1) (Lop η a (-1) 1)))]
+
+variable {η a}
+
+lemma vermaToFock_descFamily2 :
+    (fun i => vermaToFock hη (descFamily2 R (D : R) (vacuumWeight η a) i)) = fockDesc2 η a := by
+  funext i
+  fin_cases i <;>
+    simp [descFamily2, fockDesc2, desc2, desc11, desc1]
+
+lemma vermaToFock_descFamily3 :
+    (fun i => vermaToFock hη (descFamily3 R (D : R) (vacuumWeight η a) i)) = fockDesc3 η a := by
+  funext i
+  fin_cases i <;>
+    simp [descFamily3, fockDesc3, desc3, desc21, desc111, desc11, desc1]
+
+lemma vermaToFock_descFamily4 :
+    (fun i => vermaToFock hη (descFamily4 R (D : R) (vacuumWeight η a) i)) = fockDesc4 η a := by
+  funext i
+  fin_cases i <;>
+    simp [descFamily4, fockDesc4, desc4, desc31, desc22, desc211, desc1111, desc111, desc11,
+      desc1, desc2]
+
+variable (hη)
+
+include hη in
+/-- **The level-2 Fock Gram determinant is the Kac determinant at `(c, h) = (D, α'k²)`.** -/
+theorem gram_det_fockDesc2 :
+    (gramMatrix (pairing η) (fockDesc2 η a)).det = kacDet2 (D : R) (vacuumWeight η a) := by
+  rw [← vermaToFock_descFamily2 (hη := hη), gramMatrix_vermaToFock, kacDet2]
+  exact (fockForm_isContravariant (hη := hη)).gram_det_descFamily2 fockForm_hwv_hwv
+
+include hη in
+/-- **The level-3 Fock Gram determinant is the Kac determinant at `(c, h) = (D, α'k²)`.** -/
+theorem gram_det_fockDesc3 :
+    (gramMatrix (pairing η) (fockDesc3 η a)).det = kacDet3 (D : R) (vacuumWeight η a) := by
+  rw [← vermaToFock_descFamily3 (hη := hη), gramMatrix_vermaToFock, kacDet3]
+  exact (fockForm_isContravariant (hη := hη)).gram_det_descFamily3 fockForm_hwv_hwv
+
+include hη in
+/-- **The level-4 Fock Gram determinant is the Kac determinant at `(c, h) = (D, α'k²)`.** -/
+theorem gram_det_fockDesc4 :
+    (gramMatrix (pairing η) (fockDesc4 η a)).det = kacDet4 (D : R) (vacuumWeight η a) := by
+  rw [← vermaToFock_descFamily4 (hη := hη), gramMatrix_vermaToFock, kacDet4]
+  exact (fockForm_isContravariant (hη := hη)).gram_det_descFamily4 fockForm_hwv_hwv
+
+/-- The level-1 Verma descendant packaged as a `Fin 1`-family, so that the level-1 case can be
+run through the same Gram machinery. -/
+noncomputable def vermaDesc1 : Fin 1 → VermaModule R (D : R) (vacuumWeight η a) :=
+  ![desc1 R (D : R) (vacuumWeight η a)]
+
+lemma vermaToFock_vermaDesc1 :
+    (fun i => vermaToFock hη (vermaDesc1 (η := η) (a := a) i)) = fockDesc1 η a := by
+  funext i
+  fin_cases i
+  simp [vermaDesc1, fockDesc1, desc1]
+
+include hη in
+/-- **The level-1 Fock Gram determinant is `2α'k²`**: `⟨L₋₁|k⟩, L₋₁|k⟩⟩ = 2h`. -/
+theorem gram_det_fockDesc1 :
+    (gramMatrix (pairing η) (fockDesc1 η a)).det = kacDet1 (vacuumWeight η a) := by
+  rw [← vermaToFock_vermaDesc1 (hη := hη), gramMatrix_vermaToFock, kacDet1, Matrix.det_fin_one]
+  simp only [gramMatrix_apply, vermaDesc1, Matrix.cons_val_zero]
+  exact (fockForm_isContravariant (hη := hη)).gram_level_one fockForm_hwv_hwv
+
+end Descendants
+
+/-! ### Freeness over `Vir⁻` at levels `N ≤ 4` -/
+
+section Freeness
+
+variable [NoZeroDivisors R] (hη : ∀ μ, η μ * η μ = 1)
+
+include hη in
+/-- **Level 1.**  `L₋₁|k⟩` is nonzero (indeed linearly independent as a one-element family) as
+soon as the level-1 Kac determinant `2α'k²` is nonzero. -/
+theorem linearIndependent_fockDesc1 (hdet : kacDet1 (vacuumWeight η a) ≠ 0) :
+    LinearIndependent R (fockDesc1 η a) :=
+  linearIndependent_of_gram_det_ne_zero (pairing η) _
+    (by rw [gram_det_fockDesc1 hη]; exact hdet)
+
+include hη in
+/-- **Level 2: the Fock module is free over `Vir⁻` in degree 2 at generic momentum.**
+`L₋₂|k⟩` and `L₋₁²|k⟩` are linearly independent in the Fock space whenever the level-2 Kac
+determinant at `(c, h) = (D, α'k²)` is nonzero. -/
+theorem linearIndependent_fockDesc2 (hdet : kacDet2 (D : R) (vacuumWeight η a) ≠ 0) :
+    LinearIndependent R (fockDesc2 η a) :=
+  linearIndependent_of_gram_det_ne_zero (pairing η) _
+    (by rw [gram_det_fockDesc2 hη]; exact hdet)
+
+include hη in
+/-- **Level 3.**  The three standard descendants `L₋₃|k⟩`, `L₋₂L₋₁|k⟩`, `L₋₁³|k⟩` are linearly
+independent in the Fock space when the level-3 Kac determinant at `(D, α'k²)` is nonzero. -/
+theorem linearIndependent_fockDesc3 (hdet : kacDet3 (D : R) (vacuumWeight η a) ≠ 0) :
+    LinearIndependent R (fockDesc3 η a) :=
+  linearIndependent_of_gram_det_ne_zero (pairing η) _
+    (by rw [gram_det_fockDesc3 hη]; exact hdet)
+
+include hη in
+/-- **Level 4.**  The five standard descendants are linearly independent in the Fock space when
+the level-4 Kac determinant at `(D, α'k²)` is nonzero. -/
+theorem linearIndependent_fockDesc4 (hdet : kacDet4 (D : R) (vacuumWeight η a) ≠ 0) :
+    LinearIndependent R (fockDesc4 η a) :=
+  linearIndependent_of_gram_det_ne_zero (pairing η) _
+    (by rw [gram_det_fockDesc4 hη]; exact hdet)
+
+end Freeness
+
 end Fock
 
 end StringFormal.NoGhost
