@@ -47,6 +47,7 @@ sources:
 
       见 literature/extractions/polchinski-1998-v1.md §12.1（E33/E34）与 §12.10 表 B 第 6 项。
 tags: [cft, central-charge, ope, energy-momentum-tensor, definition]
+superseded_by: worldsheet.tt-ope-central-charge-v2
 notes: |
   本节点是「中心荷」在本图中的**定义点**。它与 conv.virasoro-standard 的关系是：
   约定节点固定 Virasoro 代数的归一化，本节点给出同一个 c 的 OPE 刻画，
@@ -60,8 +61,16 @@ notes: |
   中心荷不随共形变换改变、且是常数这一点另有节点：
   worldsheet.weyl-anomaly-central-charge-constant（Wess–Zumino 相容性）。
 
-  **待拆**（reviewer-ch23 提出，本轮不拆）：本卡片除了定义中心荷（TT OPE 四阶极点系数）之外，
-  还内嵌了「TT OPE 的低阶极点结构由共形不变性完全确定」这条**命题**。
-  若日后它们被分别推导或分别引用，应拆成两个节点。
+  **已拆（superseded，curator-small-backlog-3，2026-09-11）**：reviewer-ch23 与 small-backlog-2
+  两次指出本卡片除了定义中心荷（TT OPE 四阶极点系数）之外，还内嵌了
+  「TT OPE 的低阶极点结构由共形不变性完全确定」这条**命题**
+  （statement 第 4–5 行：「二阶与一阶极点的系数（2 与 1）由 T 自身是权 (2,0) 算子这一事实固定；
+  …三阶极点因 T 的对称性而缺席」）。按 docs/STATUS_LEVELS.md 的定义传播裁决，statement 不可改，
+  故换代：
+    · 定义半 → worldsheet.tt-ope-central-charge-v2（definition，rigorous；`uses` 去掉 primary-field-v2）
+    · 命题半 → worldsheet.tt-ope-pole-structure-from-conformal-invariance（proposition；
+      推导 --via-conformal-ward-identity，physical-argument）
+  本卡的活边已按「用的是定义半还是命题半」逐条改指（清单见 v2 的 notes）；
+  其他卡 statement 正文里对本卡 id 的字面引用按 graph/CLAUDE.md 的裁决**不**就地改。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
