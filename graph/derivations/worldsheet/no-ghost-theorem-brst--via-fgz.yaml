@@ -14,6 +14,20 @@ depends_on:
   - id: worldsheet.brst-nilpotent-at-c26
     note: FGZ Theorem 2.8 只需要 c=26 时 d²=0（Prop 1.2），不需要双条件版本；lead 裁决改指弱节点。
   - id: worldsheet.virasoro-algebra-v2
+  - id: worldsheet.bosonic-relative-cohomology-vanishing
+    note: |
+      供给本推导的**核心上游步骤**：消灭定理（FGZ **Theorem 2.7(i)**，p.8445 逐字
+      'Suppose p ≠ 0. Then (i) H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0'）。
+      **非 inferred**：本推导的 sources 原先就单列了这一条（"本节点断言 (1)「上同调集中在
+      单一鬼数」的严格来源"），且 FGZ 的 Theorem 2.8 紧随 Theorem 2.7 半页之内、其"三个空间
+      都 positive definite 且维数都是 p_{(24)}(1 − p·p/2)"的断言直接建立在 2.7 上。
+      ⚠ **不构成循环**：Theorem 2.7 的证明（Prop 2.6(i) → Thm 1.12）不用 Theorem 2.8、
+      不用横向空间 T、不用正定性；方向是 2.6 → 1.12 → 2.7 → 2.8，与本边同向。
+      ⚠ **次数平移仍由本推导承担**：新卡按 FGZ 的半无限/相对次数陈述（集中在 i = 0），
+      本节点按自己的鬼数归一化说"集中在鬼数 1"，相差常数平移 1；FGZ 不给字典
+      （见 gaps 第三条与新卡的 (H5)）。
+      ★ 2026-09-11 新建该卡并接线，本推导 sources 里的 Theorem 2.7 一条**保留**
+      （推导可以同时引来源与指上游卡），但"消灭定理无独立节点"这一缺口至此关闭。
   - id: math.verma-module-free-over-negative-part
     inferred: true
     note: |
@@ -45,7 +59,12 @@ sources:
       原先引的 "Theorem 1.2" 系凭记忆填写，与原文不符，已订正。
   - ref: fgz-1986
     loc: "Theorem 2.7（(i) H^i_∞(ℒ, ℒ_0, V(E,p)) = 0 对 i ≠ 0；(ii) dim H^0 = p_{(24)}(1 - p·p/2)），此处已设 D = 26"
-    note: 本节点断言 (1)「上同调集中在单一鬼数」的严格来源；编号已核实。
+    note: |
+      本节点断言 (1)「上同调集中在单一鬼数」的严格来源；编号已核实。
+      ★ **2026-09-11：该定理已单建卡 worldsheet.bosonic-relative-cohomology-vanishing**
+      （逐字陈述与五条量词链见那张卡；L1 页图，抽取记录
+      literature/extractions/brst-cohomology-sources.md §9）。本推导已加 depends_on 该卡
+      （非 inferred），本条 source 保留作定位。
   - ref: fgz-1986
     loc: "Proposition 2.6（D ≥ 2、p ≠ 0 时 V(E,p) 是 free ℒ^--module，且存在被 ℒ^+ 湮灭的正定 T ⊂ V(E,p)）与 Theorem 1.12（消灭定理：V 是 n_--free 且带非退化厄米形式时 H^m_∞(g, g_0; V) = 0, m ≠ 0）"
     note: |

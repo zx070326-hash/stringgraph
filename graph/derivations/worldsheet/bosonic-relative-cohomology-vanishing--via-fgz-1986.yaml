@@ -1,0 +1,169 @@
+id: worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986
+target: worldsheet.bosonic-relative-cohomology-vanishing
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      供给 ℒ = Virasoro 代数这个对象与中心元 c。
+      ⚠ **归一化相容性**：本图 conv.virasoro-standard 用 (c/12)(m³ − m)；FGZ p.8445 左栏逐字
+      "[π(L_m), π(L_n)] = (m − n)π(L_{m+n}) + (D/12)(m³ − m)δ_{m+n}·Id. Thus π(c) = D·Id"
+      ——**同一归一化**（D 个自由玻色子给 c^m = D），故本边**不需要 convention_map**。
+      这与超弦侧的 LZ（c/8 (m³ − 2κm)，需 convention_map）形成对照。
+  - id: worldsheet.brst-quantization-v2
+    note: |
+      供给本图一侧的 Q_B、鬼场模式代数、受限模与相对复形的定义，即"本卡说的相对 BRST 上同调
+      是本图哪个算符的上同调"。FGZ 一侧的对应物是 §2.1 的微分 d（Proposition 1.2 给 d² = 0）
+      与那段逐字自我指认 "the differential of this subcomplex is known in the physics literature
+      as the BRST operator (see, e.g., ref. 5) and we will call this subcomplex the BRST complex."
+      （ref. 5 = kato-ogawa-1983）。
+      ⚠ 指 v2：v2 只把鬼场中心荷 c^g 从数值 −26 改回符号，取值移到 worldsheet.bc-ghost-central-charge。
+      本推导不从本图取该数值——FGZ 在自己的框架里由 Proposition 2.1(i) 算出 ρ(c) = −26。
+  - id: worldsheet.brst-nilpotent-at-c26
+    note: |
+      供给"上同调有定义"这一前提：c^m = 26 ⟹ Q_B² = 0（单向 ⟸，正是本推导需要的方向）。
+      FGZ 一侧是 **Proposition 1.2**（'d² = 0.'，前提写在正文：H²(g) = 0 且 ω₀、β 使 γ = 0）
+      加 §2.1 的**假设** π(c) = 26·Id_V。
+      ⚠ 本边**不**指双向卡：FGZ 不推导 26（目标卡"本命题不断言 (c)"），双向卡的 ⟹ 方向
+      在本图是另一条链（kato-ogawa-1983 / worldsheet.critical-dimension-brst-v2），不经过本边。
+  - id: math.verma-module-free-over-negative-part
+    inferred: true
+    note: |
+      供给本证明链的核心表示论输入：**Proposition 2.6(i)** "V(E, p) is a free ℒ^--module"
+      （p.8445 逐字，前提 号差 (D−1,1)、D ≥ 2、p ≠ 0），这正是 **Theorem 1.12** 要求的假设。
+      **标 inferred，理由由 FGZ 自己的 Remark 给出（比旧记账更硬）**：Prop 2.6 之后紧跟的
+      Remark 逐字 'We note that, although V(E, p) in the above proposition is free over ℒ_-,
+      it is **not in general a direct sum of Verma modules** or even generated as an ℒ-module by
+      V(E, p)^{ℒ^+}. As a counterexample one can choose the case in which p·p is a nonpositive
+      even integer.'
+      ⇒ **FGZ 明确否认** Fock 模是 Verma 模直和，故由本图的 Verma 模自由性卡到 FGZ 需要的
+      "Fock 模在 ℒ^- 下自由"**没有**文献中成文的一步；本边只承担"在负模下自由"这个**性质**的
+      记账（新目标卡的断言 (1)「V(c,h) 作为 U(vir₋)-模自由、秩 1」正是要的那句），
+      不承担"Fock 模 = Verma 模"。
+      ⇒ 正解是为"Fock 模在 ℒ^- 下自由"单建一张卡，本边届时改指它并去掉 inferred。
+      （与 worldsheet.no-ghost-theorem-brst--via-fgz 上的同名边口径一致，且理由现在有逐字来源。）
+  - id: worldsheet.fock-indefinite-form
+    inferred: true
+    note: |
+      供给 **Theorem 1.12** 假设里的"V 带**非退化厄米形式**"这一半，以及"该形式因 η^{00} = −1
+      而不定"这一背景（号差 (D−1,1) 正是 FGZ (H1)）。
+      **标 inferred，两条理由**：
+      (1) FGZ 只写到 V(E,p) 是**厄米** ℒ-模（p.8445 逐字 'We have π(L_m)* = π(L_{−m}),
+          so that V(E, p) is a Hermitian ℒ-module.'），**没有**把"该形式就是由 ⟨p|p⟩ = 1 与
+          (α^μ_n)† = α^μ_{−n} 唯一确定的那个"写成一条陈述——这个识别是本图补的；
+      (2) 本图这张卡断言的是**双线性型**在有序域上的**不定性**与对角形（其 (4)），
+          而 Theorem 1.12 要的是**非退化性**。非退化性可由该卡 (2) 的对角元
+          ∏(n η^{μμ})^{d} · d! 全非零读出，但该卡**没有把非退化性单列为断言**。
+      ⚠ 这比超弦侧的同名边**更实质**：LZ 的消灭定理完全不用厄米形式（auditor 2026-09-11 裁决），
+      FGZ 的 Theorem 1.12 把它写进了假设。⇒ 本边在本推导里不是纯记账。
+      有效状态不受影响：该卡自身是 formalized。
+sources:
+  - ref: fgz-1986
+    loc: "**Theorem 2.7**, p.8445 右栏，逐字 'THEOREM 2.7. Suppose p ≠ 0. Then (i) H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0, and (ii) dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2), if 1 − p·p/2 is a nonnegative integer and 0 otherwise.'（本推导只证 (i)）"
+    note: |
+      L1 页图逐字，literature/extractions/brst-cohomology-sources.md **§9.1**
+      （researcher 2026-09-11；期刊页 8445 = PMC 扫描页 pnas00326-0018）。
+  - ref: fgz-1986
+    loc: "**Theorem 2.7 正上方一句**（p.8445 右栏）逐字：'In this case the vanishing theorem (**Theorem 1.12**), the Euler–Poincaré principle (**Proposition 1.3**), **Proposition 2.4**, and **the first part of Proposition 2.6** imply the following.'"
+    note: |
+      L1，§9.3。★★ **这是本推导四条依赖边都不标 inferred（除两条有独立理由的）的依据**：
+      依赖是 FGZ **原文明写**的。
+      ★ 同时是本推导 status 的关键证据与关键限制：措辞是 **"imply the following"**，
+      即 FGZ 把 Theorem 2.7 当作前四条的**直接推论**，**本身不另给证明**。
+  - ref: fgz-1986
+    loc: "**Proposition 2.6**, p.8445 逐字 'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} […], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'；其后 Remark 逐字 'We note that, although V(E, p) in the above proposition is free over ℒ_-, it is not in general a direct sum of Verma modules or even generated as an ℒ-module by V(E, p)^{ℒ^+}. As a counterexample one can choose the case in which p·p is a nonpositive even integer.'；**Theorem 1.12**, p.8444（V 是 n_--free 且带非退化厄米形式 ⇒ H^m_∞(g, g₀; V) = 0, m ≠ 0）"
+    note: |
+      L1，§9.2 表第 5 行与 §9.6；Thm 1.12 的内容见 §1.4 编号表。
+      ⚠ 本推导只用 Prop 2.6 的**第一部分**；第二部分（横向空间 T）FGZ 逐字派给了
+      "explicitly construct representatives of the cohomology classes"（§9.5），
+      并经 Kac 行列式（FGZ refs 10, 11）——那条链本图没有，但**本推导不需要它**。
+  - ref: fgz-1986
+    loc: "**Theorem 2.5**, p.8445（绝对复形：H^m_∞(ℒ, 𝖟; V) ≅ H⁰(ℒ, ℒ₀; V) 对 m = ±½，其余为零）；p.8445 全页**不出现 'ghost' 字样**（negative evidence，仅覆盖该页）"
+    note: |
+      L1，§9.4。本条支撑目标卡 (H5)：FGZ 用的是相对复形的整数次数 i，**不用"鬼数"这个词**，
+      零点由"相对 ℒ₀"这个约定固定。引用本定理必须写明是相对复形——绝对复形的非零次数是 ±½。
+summary: |
+  **FGZ 的论证结构（四步，全部是 FGZ 自己列出的，见 sources 第 2 条逐字）**：
+
+  1. **定对象**：把 BRST 复形认作 Virasoro 代数的**半无限上同调**复形
+     （V ⊗ Λ^∞_* ℒ′，微分 d 即物理文献的 Q_B，FGZ §2.1 自我指认），
+     并取**相对于 ℒ₀** 的子复形；鬼场表示的中心荷由 Proposition 2.1(i) 算出 ρ(c) = −26，
+     物质侧**假设** π(c) = 26·Id_V（即 D = 26），于是 d² = 0（Proposition 1.2）。
+  2. **验证消灭定理的假设**：Proposition 2.6(i) 给出 **V(E,p) 是自由 ℒ^--模**
+     （前提：号差 (D−1,1)、D ≥ 2、**p ≠ 0**）；p.8445 另给出 V(E,p) 是**厄米** ℒ-模
+     （π(L_m)* = π(L_{−m})）。这两条正是 **Theorem 1.12** 要求的"n_--free + 非退化厄米形式"。
+  3. **套用消灭定理**：Theorem 1.12 给出 H^m_∞(g, g₀; V) = 0 对 m ≠ 0；特化到
+     g = ℒ、g₀ = ℒ₀、V = V(E,p)（D = 26）即目标卡的断言。
+  4. **（不属本卡）**维数由 Proposition 1.3（Euler–Poincaré）与 Proposition 2.4 定出，
+     得 Theorem 2.7(ii) 的 p_{(24)}(1 − p·p/2)。本推导**不走这一步**。
+
+  **p ≠ 0 进入哪一步**：只进第 2 步的 Proposition 2.6(i)（自由性）。去掉它，FGZ 把 p = 0
+  另案处理（Proposition 2.8 / 2.9，逐字"Theorem 1.12 不适用"），故 p ≠ 0 是**本质前提**。
+
+  【为什么标 rigorous】四条：
+  (1) 结论是**带编号的定理**（Theorem 2.7(i)），陈述已逐字核实（L1 页图）；
+  (2) **证明链是 FGZ 自己列出的**（"the vanishing theorem (Theorem 1.12), the Euler–Poincaré
+      principle (Proposition 1.3), Proposition 2.4, and the first part of Proposition 2.6
+      imply the following"），每一环都有编号，无"一点思考就知道"式的断言；
+  (3) 论证全在有定义的模范畴里（半无限上同调、受限/分次模、自由性、厄米形式），
+      **不涉及路径积分、不涉及收敛性问题**；
+  (4) 期刊是 PNAS（Communicated by I. M. Singer），作者三人是数学家，这是数学文献。
+  与 worldsheet.no-ghost-theorem-brst--via-fgz 和
+  worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989 的记账口径一致。
+  ⚠ **限制**：FGZ 的措辞是 "imply the following"，即本文**不给 Theorem 2.7 的独立证明**，
+  rigorous 是按"已核实的编号定理 + 该文明写的推论链"给的，不是按逐行复核给的（见 gaps）。
+gaps:
+  - "**fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.7 没有独立证明**：原文措辞是前四条
+     「imply the following」。本推导的 rigorous 依据的是(a) 逐字核实的定理陈述、(b) 该文明写的
+     四条输入、(c) 每条输入本身都是该文的编号命题。**未做**的是：逐行复核 Theorem 1.12 的证明
+     （p.8444，用 Kähler 恒等式 Theorem 1.9 与谱序列滤过 Prop 1.10/1.11）。
+     researcher 未能定位 FGZ 的后续长文。"
+  - "**Proposition 2.4 的前提本图未核实**：FGZ 把它列为 Theorem 2.7 的四条输入之一，
+     但抽取记录 §1.4 的一句话转述（'dim H^m_∞(ℒ, ℒ₀; V) = 0 for m ≠ 0；m = 0 时等于
+     Eq. [2.3] 中 1 的系数'）与 Theorem 2.7 的结论形式上几乎重复。既然它是**输入**，
+     它必对 V 另有假设（本图未核到）。⇒ 本推导的第 1–3 步**不经过 Prop 2.4**（只有维数那一步
+     即 Theorem 2.7(ii) 用它），故这条未核实不影响本推导；但若日后要把 (ii) 建卡，必须先核它。
+     关闭方式：回 p.8445 页图逐字读 Proposition 2.4 的假设。"
+  - "**由本图 Verma 模自由性卡到 FGZ 的 Fock 模自由性，没有成文的一步**：FGZ 在 Prop 2.6 之后的
+     Remark 里**明确否认** V(E,p) 是 Verma 模直和（逐字见 sources）。故 depends_on
+     math.verma-module-free-over-negative-part 标 inferred，且**这条 inferred 不是「懒得找」，
+     而是来源明确说了这条路不通**。正解：为「Fock 模在 ℒ^- 下自由」单建一卡。"
+  - "**Theorem 1.12 要的是「非退化厄米形式」，本图的 worldsheet.fock-indefinite-form 断言的是
+     双线性型的不定性与对角形**，非退化性只能从对角元全非零读出，未被单列为断言；且 FGZ 没把
+     V(E,p) 上的厄米形式与本图那个形式的同一性写成陈述。⇒ 该边标 inferred。"
+  - "**(ℒ, ℒ₀) 相对复形与本图 {b₀Ψ = 0, L₀Ψ = 0} 的字典，FGZ 未写出**。目标卡
+     「本命题不断言 (f)」已声明不断言逐字同一。超弦侧有 LZ Definition 2.2 把两者显式对上
+     （B^r = Ker b₀、F^n = B^{n−κ} ∩ Ker K），玻色侧没有同级别的逐字对应。"
+  - "**次数字典（FGZ 的半无限次数 i ↔ 本图的鬼数）是本图补的**：FGZ p.8445 不出现 'ghost'
+     字样，也不给字典；本图 worldsheet.no-ghost-theorem-brst 的鬼数归一化使平移为 1。
+     ⇒ 若要把本卡接到那张卡的断言 (1) 上，这个平移必须显式写出（已写在那条推导的 gaps 里）。"
+  - "**本推导不给维数公式、不给正定性、不给横向空间**：它们分别是 Theorem 2.7(ii)、
+     Theorem 2.8、Proposition 2.6(ii)。特别地 Proposition 2.6(ii)（横向空间 T 的构造）
+     在 FGZ 里要用 **Kac 行列式**（refs 10, 11），本图 worldsheet.kac-determinant-v2 未接到
+     FGZ 这条链上；**本推导不需要它**，但 Theorem 2.8 那一侧需要。"
+notes: |
+  【本推导与下游的关系】
+  worldsheet.no-ghost-theorem-brst--via-fgz 自 2026-09-11 起 depends_on 本推导的目标卡
+  （**非 inferred**：FGZ 的 Theorem 2.8 就在 Theorem 2.7 之后半页，其"三个空间维数都是
+  p_{(24)}(1 − p·p/2)"的断言直接建立在 2.7 上；那条推导的 sources 原先就已单列
+  "Theorem 2.7（…）本节点断言 (1)「上同调集中在单一鬼数」的严格来源"）。
+  ⇒ 那条推导的"消灭定理无独立卡"这一记账缺口至此关闭。
+  ⚠ **不构成循环**：Theorem 2.7 的证明（Prop 2.6(i) → Thm 1.12）不用 Theorem 2.8、
+  不用横向空间 T、不用正定性；方向是 2.6 → 1.12 → 2.7 → 2.8，与图上的边同向。
+
+  【与超弦版的分工】
+  LZ 1989 Theorem 2.4 ↔ FGZ 1986 Theorem 2.7(i)，但**论证不同型**：
+  FGZ 经 Theorem 1.12（要"ℒ^--free + 非退化厄米形式"），LZ 经"有限过滤 + 长正合列 +
+  Poincaré 对偶"且**完全不用厄米形式**。两卡的 gaps 因此不可互相搬运。
+
+  【第二个证明未登记】
+  FGZ 在 Eq. [2.5]–[2.8] 给了无鬼定理的第二个证明（Euler–Poincaré signature 论证，自述
+  "does not use the existence of the transversal space!"）。那是 Theorem 2.8 一侧的事，
+  与本推导无关；本图未登记它（可成为 --via-euler-poincare 的独立推导）。
+
+  按 researcher 2026-09-11 第二轮抽取记录
+  literature/extractions/brst-cohomology-sources.md **§9**（§9.1 逐字定理、§9.2 量词链、
+  §9.3 FGZ 自列依赖、§9.4 次数、§9.5 定理后两句、§9.6 Fock 模分次与 Verma Remark）建立。
+  curator，2026-09-11。
+author: curator
+created: "2026-09-11"

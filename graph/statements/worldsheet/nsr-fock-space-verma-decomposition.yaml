@@ -73,6 +73,34 @@ sources:
       ⚠ **LZ 不需要完全可约性**：其证明只用 `Vir_κ^-`-自由性（Corollary 2.19(iii)），
       所以这条 Remark 对 LZ 自己的推导毫无影响，**只影响 FOK 那条路线**。
       ⚠ 两篇**互不引用**（LZ p.335 Note added in proof 称收到 FOK 预印本、工作独立）。
+  - ref: fgz-1986
+    loc: "**Proposition 2.6 之后的 Remark**, p.8445，逐字：'We note that, although V(E, p) in the above proposition is free over ℒ_-, it is **not in general a direct sum of Verma modules** or even generated as an ℒ-module by V(E, p)^{ℒ^+}. As a counterexample one can choose the case in which p·p is a nonpositive even integer.'"
+    note: |
+      **L1 页图逐字**（researcher 2026-09-11，literature/extractions/brst-cohomology-sources.md §9.6）。
+      ★★ **反方向的第二条独立证言，且是玻色版**（2026-09-11 依 lead 指示加入）。
+      三条分量：
+      (1) **与 LZ p.320 Remark 同构的措辞**（"not **in general** a direct sum of Verma modules"，
+          且同样强调"尽管在负模下自由"）⇒ 争议的反方不再只有 LZ 一篇；
+      (2) **FGZ 给出了反例条件**：p·p 是**非正偶整数**（LZ 那侧给的是 p·p < 0 且 p·p/2 + n
+          命中使 M(h,10) 可约的负半整数）。两个条件**不是同一个**但同向（都在 p·p ≤ 0 一侧），
+          且 FGZ 的条件更具体（"nonpositive even integer"）；
+      (3) FGZ 还多否认了一件事：V(E,p) 甚至**不由** V(E,p)^{ℒ^+}（即横向空间那一侧）
+          作为 ℒ-模生成。
+      ⚠⚠ **作用域限定，不可直接当作对本卡的反证**：FGZ 说的是**玻色** Virasoro 与玻色 Fock 模
+      V(E,p)（只有 α^μ_n），本卡说的是 **super-Virasoro 与 NSR 物质 Fock 空间**（含 ψ^μ / d^μ）。
+      由玻色版到超版的推广**没有**文献中成文的一步。
+      ⇒ 本条的真正作用有两层：
+        (a) 它堵死了"用玻色情形的类比来支撑 NS 的完全可约性"这条退路——
+            抽取记录 brower-friedman-1973.md §6 第 1 条正是这么判的（逐字："FGZ 本人早已指出
+            玻色弦的 Fock 空间'一般也不是 Verma 模直和'… **FOK 若想用'玻色情形的类比'来支撑
+            NS 的完全可约性，这条路也被 FGZ 自己堵死了**"）；
+        (b) FOK p.111 紧接"完全可约"那句之后逐字写的是「However, we will prove their existence
+            **the way FGZ did** in the bosonic case.」——即 FOK 自己把方法归给 FGZ，
+            而 FGZ 在玻色侧明确否认 Verma 直和。
+      ⚠ 本条**不改变**本卡"不裁决"的立场（"本卡不断言 (a)"）：它是第二条同向证言，
+      不是本卡命题（超版）的反例。
+      ⚠ 抽取记录 brower-friedman-1973.md §6 的 **Q6.2** 曾问"这句在 FGZ 正文哪里"——
+      **本条关闭 Q6.2**：在 p.8445、Proposition 2.6 之后的 Remark。
 tags: [worldsheet, superstring, super-virasoro, verma-module, brst, disputed, open-question]
 notes: |
   from: literature/extractions/brower-friedman-1973.md §2–§3（本轮裁决记录）、
