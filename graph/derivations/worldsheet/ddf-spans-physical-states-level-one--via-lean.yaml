@@ -132,6 +132,35 @@ notes: |
   该边只供给「原书语境」，按 docs/STATUS_LEVELS.md 接口边裁决不得存在；文献侧识别由
   sources 里 goddard-2008 (6.4) 承担。）
 
+  【2026-09-11（lightcone-frame，curator）：曾加的第七条边与由此而来的降级——**已撤回，见下**】
+  本轮一度新增接口边 worldsheet.ddf-light-cone-frame（definition，**rigorous**），供给目标陈述点名的
+  标架对象（(T)(O)(T′)(C) = 该卡的 (F5)(F7)(F6)(F8)）。加边后 min 规则使本推导
+  effective = rigorous，目标卡随之。
+  ⚠ 那是**记账后果，不是数学后果**：`towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 与其见证版
+  一字未动，仍是无 sorry 的机检定理；且 Lean 的前提比该定义卡**更弱**（只要 `TransverseFrame`
+  加两条散装假设 `hεa`/`hspan`），所以「Lean 证的比卡面窄」这种真实风险在这里**不存在**——
+  降级纯粹来自 min 规则不区分「依赖的对象更一般」与「依赖的论证更弱」。
+
+  ⚠【同日改判（curator，同一分支，commit 5e0a984 之后）：该 depends_on 边**已撤回**，
+  改为目标陈述卡上的非传播 `uses` 指针】撤回的两条理由：
+  (1) **它属于 docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」明令禁止的那一类**：
+      目标陈述把 (T)(O)(T′)(C) 四条**逐字写在卡面**，Lean 定理的假设与之一一对应，
+      读懂 lean_decl **不需要**那张定义卡；它提供的是「这个标架在文献里叫什么、该怎么取」的语境，
+      而该裁决逐字写「只提供「原书语境」而不承担任何论证的边不得存在」。
+      ★ **上一段记录的 reviewer-batch30 CONFIRMED #1 是同一判据的先例**：K_n 那条边因完全相同的
+      理由被删。本轮的标架边若留下，会是刚被删掉的那类边的复制品。
+  (2) **实测代价与一条固定不变量冲突**：三条同类边合计使全图 effective formalized 78 → 74
+      （降级四张卡：本卡、transverse-ddf-fock-gram-matrix、ddf-hypotheses-satisfiable、
+      transverse-frame-spans-orthogonal-complement），且
+      `tests/test_graph.py::test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split`
+      钉死 `transverse-ddf-fock-gram-matrix` 的 effective 必须是 formalized，加边后 pytest 变红。
+  ⇒ 现状：目标陈述卡加 `uses: worldsheet.ddf-light-cone-frame`（proposition 上的 `uses`
+  **不参与状态传播**，见 tools/stringgraph/propagate.py 的 `_proposition`），
+  本推导仍是六条依赖、effective 仍是 formalized。
+  **若 lead 要的就是传播效果**：把 commit 5e0a984 里那段 `- id: worldsheet.ddf-light-cone-frame`
+  的 depends_on 块加回来即可，同时须改那条测试断言——工具侧改动，按项目纪律单独提交，
+  且应由 lead 裁决，不由 curator 自行改测试来迁就图数据。
+
   **本推导对 worldsheet.no-ghost-theorem-v4 的影响：没有。**
   那条卡的瓶颈是 (B-26)，而 (B-26) 从 N = 2 起才出现。本推导关闭的是
   worldsheet.ddf-operators-preserve-physical-states--via-lean 的 gaps 第 1 条

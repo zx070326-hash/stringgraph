@@ -37,6 +37,8 @@ statement: |
   (d) **不断言 k_0^⊥ 的版本**：本卡的正交补是 **v = a − b 的**，不是 b 的。二者不同
       （η(b, v) = η(b,a) − η(b,b) = 1 ≠ 0，故 b ∉ v^⊥）。
   (e) 不断言任何与内积正定性、D = 26 或截距有关的事。
+uses:
+  - worldsheet.ddf-light-cone-frame
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 formal:
   lean_decl: StringFormal.NoGhost.witness_frameSpansOrthogonal
@@ -97,5 +99,17 @@ notes: |
   ⇒ 建议的补法不是「证明一般情形」，而是把「取在 span{k_0,p}^⊥ 里」写成标架的**定义条件**
   （一张 `worldsheet.ddf-light-cone-frame` 定义卡），让 (T′) 与完备性都成为它的组成部分。
   本轮不建（见 worldsheet.ddf-operators-v6 notes 末段的同一建议）。
+
+  【2026-09-11（lightcone-frame，curator）：上一段建议的卡已建，本卡加 `uses` 指向它】
+  `worldsheet.ddf-light-cone-frame`（definition，status **rigorous**）已按上一段逐字的建议建成：
+  本卡【定义】的完备性谓词是它的条件 **(F8)**，(T′) 是 **(F6)**，(T)(O) 是 **(F5)(F7)**，
+  共轭类光方向是 **(F4)**。故本卡 `uses` 加该卡：完备性是那张定义卡的组成条件之一，
+  本卡是「该条件在显式见证上兑现」的那一半。
+  ⚠ **本卡的断言与 status 均未变**：陈述仍是「显式见证下成立 + 一般标架下独立（【不断言】(a)(b)）」，
+  `--via-lean` 推导仍指 `witness_frameSpansOrthogonal`，effective 仍是 formalized。
+  ⚠ **`uses` 在 proposition 上不参与状态传播**（tools/stringgraph/propagate.py 只对
+  definition/axiom 走 `uses`；proposition 的有效状态只由推导决定），故这条边是**记账指针**，
+  不改变任何有效状态。若日后要让它承重，应改成推导上的 `depends_on`——但那会把本卡的
+  effective 从 formalized 压到 rigorous（新卡未形式化），需先在 Lean 里把 (F1)–(F8) 打包成结构。
 author: curator
 created: "2026-09-11"

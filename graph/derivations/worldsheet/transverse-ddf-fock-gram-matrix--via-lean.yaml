@@ -112,6 +112,22 @@ summary: |
   【为什么标 formalized】目标 (1)(2) 与 (3) 的主断言各有具名无 sorry 的 Lean 声明；
   五条依赖卡 effective 全为 formalized。`--via-oscillator-recursion`（手写递推，rigorous）
   保留并存，工具取高者。
+  ⚠【2026-09-11（lightcone-frame）更新】第六条依赖 worldsheet.ddf-light-cone-frame 是
+  **rigorous** 的定义卡（接口边，供给标架定义），故上一句的「五条依赖卡 effective 全为
+  formalized」已过时，本推导 **effective = rigorous**。`status: formalized` 是本推导自身论证的
+  等级（Lean 声明无 sorry，未变）；effective 由工具计算，两者不一致正是 min 规则的预期表现。
+  详见那条依赖的 note。
+  ⚠【同日改判（同一分支，commit 1152cbf 之后）：该 depends_on 边**已撤回**】
+  上一段描述的状态**不再是现状**：本推导仍是五条依赖，effective 回到 formalized。
+  撤回理由两条：(1) 目标陈述把 ε^i·k_0 = 0 与 ε^i·ε^j = δ^{ij} 逐字写在【设定】里，
+  `ddf_gram_diagonal` 的假设与之一一对应，读懂 lean_decl 不需要那张定义卡——按
+  docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」末句，只提供语境的边**不得存在**；
+  (2) `tests/test_graph.py::test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split`
+  第 271 行钉死本目标卡 effective = formalized，加边后 pytest 变红（该测试的 docstring 末段
+  逐字记录了本卡升到 formalized 的来历，属于项目刻意保护的不变量）。
+  ⇒ 改为在目标陈述卡上加 `uses: worldsheet.ddf-light-cone-frame`（proposition 的 `uses`
+  不参与传播），指针仍在图里，状态不受影响。若 lead 要传播效果，见 commit 1152cbf 的原文，
+  并须同步改那条测试断言（工具侧改动，单独提交，由 lead 裁决）。
 gaps:
   - "**(3) 的末句已关闭（2026-09-11 追记，DDFGram rung 定位合入 main 后）**：原 gap 写「|{d}⟩ 落在塔的第 N(d) 层……没有对应声明」。现在有了：`ddfMonomial_mem_towerRungSubmodule` / `frameMonomial_mem_towerRungSubmodule` 给 |{d}⟩ ∈ towerRungSubmodule(−N(d))（即动量 k − N(d) k_0；塔的层指标取 +j·k_0，故是 **rung −N(d)**），`ddf_gram_of_level_ne_of_rung` 把「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」**改由层间正交**（`towerPairing_eq_zero_of_mem_towerRungSubmodule`）证出，逐字兑现目标 (3) 末句「也可由塔的层间正交直接读出」。`ddfSpan_eq_iSup_rung` 另给 ddfSpan = ⨆_N (ddfSpan ⊓ rung −N)，使 Gram 矩阵成为分块对角。**仍缺**：「rung 与振子能级的联动」——|{d}⟩ ∈ towerBigrade(−N(d), N(d))（即振子能级恰为 N(d)）**未做**；只有 rung 那一半，没有 level 那一半。"
   - "**目标 (1) 的『任意交换环』由母卡承载，不由本文件承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`（`ddfOp` 的构造需要 1/2 一类的有理数）。完全一般的条件命题是 `StringFormal.gram_of_heisenberg_family`（任意交换环，图上 math.heisenberg-family-gram-matrix）。见 notes (d)。"

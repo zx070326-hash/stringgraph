@@ -1,0 +1,162 @@
+id: worldsheet.ddf-light-cone-frame
+kind: definition
+status: rigorous
+title: DDF 光锥标架：类光 b、动量 a（η(b,a) = 1）、共轭类光 b̃（η(b,b̃) = −1、b̃² = 0、b̃ ∈ span{a,b}）与取在 span{k₀,p}^⊥ 内的 D−2 个正交归一横向 ε_i——把 (T′) ε·p = 0 与完备性 (C) 写成**定义条件**
+statement: |
+  【本卡解决的问题】worldsheet.ddf-operators-v6 只把 (T) ε·k_0 = 0 定为 DDF 算子定义的参数，
+  worldsheet.transverse-frame-spans-orthogonal-complement 的 Lean 对应物 `TransverseFrame` 也只要求
+  (T) 与正交归一 (O)。文献取的标架比这**窄**：偏振取在 span{k_0, p} 的正交补里，于是
+  (T′) ε·p = 0 与完备性 (C) 自动成立。宽出来的部分正好是这两条，而它们在一般交换环上
+  **不是** (T)(O) 的推论（【本卡明确不断言】(a) 的两个反例）。本卡把文献的标架写成一条定义，
+  给 (T′) 与 (C) 一个落点。
+
+  【数据】D ≥ 3；系数环 R 是交换 Q-代数；对角时空度规分量 η_μ（conv.metric-mostly-plus 下
+  η = diag(−1,+1,…,+1)），η(x, y) := Σ_μ η_μ x^μ y^μ；基点动量 p 与类光参考向量 k_0，
+  重标度 a^μ := (2α')^{1/2} p^μ、b^μ := (2α')^{1/2} k_0^μ（conv.alpha-prime-regge，记号同
+  worldsheet.ddf-operators-v6）；共轭类光向量 b̃；D − 2 个向量 ε_1, …, ε_{D−2}。
+  记 v := a − b，即动量塔 T(p;k_0) 第 **−1** 层的重标度动量
+  （worldsheet.momentum-tower-fock-space；DDF 态 A^ε_{−1}|0;k⟩ 住在该层）。
+
+  【定义】称 (η; a, b, b̃; ε_1, …, ε_{D−2}) 是一个 **DDF 光锥标架**，若下列八条成立：
+    (F1) η_μ² = 1（对一切 μ）；
+    (F2) η(b, b) = 0                    —— 即 k_0² = 0，worldsheet.ddf-operators-v6 的 (N)；
+    (F3) η(b, a) = 1                    —— 即 2α' k_0·p = 1，同卡的 (S)；
+    (F4) η(b̃, b̃) = 0，η(b, b̃) = −1，且 b̃ ∈ span_R{a, b}
+                                        —— 共轭类光方向，且它落在 {a,b} 张成的平面内；
+    (F5) η(ε_i, b) = 0（∀i）             —— (T) 横向性，同卡的定义参数；
+    (F6) η(ε_i, a) = 0（∀i）             —— **(T′) 偏振与基点动量正交**；
+    (F7) η(ε_i, ε_j) = δ_{ij}            —— (O) 正交归一；
+    (F8) **完备性 (C)**：∀ e : {0,…,D−1} → R，η(e, v) = 0 ⟹
+         ∃ c_1, …, c_{D−2}, c_0 ∈ R 使 e = Σ_{i=1}^{D−2} c_i ε_i + c_0 v 。
+  (F5)+(F6) 合起来就是「ε_i 取在 span{k_0, p} 的正交补里」这句话的逐字写法。
+
+  【一条即时推论（仅用双线性）】由 (F4) 的 b̃ ∈ span_R{a,b} 与 (F5)(F6)：
+    (F9) η(ε_i, b̃) = 0（∀i）。
+  这正是 Lean `lie_conjOp_transOp`（[α^{b̃}_m, α^{ε_i}_n] = 0）所需而 `TransverseFrame` **不**提供的
+  那条额外条件（登记在 worldsheet.gt-longitudinal-k-algebra 的 notes 里）。
+
+  【非空性：显式见证】D ≥ 3、R 交换 Q-代数时取
+    η = diag(−1,+1,…,+1)，b = (1,1,0,…,0)，a = (1/2, 3/2, 0,…,0)，b̃ = (1/2, −1/2, 0,…,0)，
+    ε_i = e_{i+1}（i = 1..D−2，即第 2 到第 D−1 个坐标向量）
+  满足 (F1)–(F8)（逐条的机检出处见 sources 的 stringformal-2026 条）。故本定义不是空的。
+  该见证还满足 η(a,a) = 2（即 α' p² = 1，截距 a₀ = 1 的快子壳）与 b̃ = b − a、v = −b̃。
+
+  【文献侧的取法（本定义的来由，**本卡不断言其一般成立**）】
+  在实洛伦兹签名（R = ℝ、η 为 Minkowski 型）下：k_0² = 0 且 k_0·p ≠ 0 ⇒ span{k_0, p} 是
+  非退化二维平面，其正交补 W := span{k_0,p}^⊥ 恰 D − 2 维且 η|_W 正定；取 W 的任一正交归一基作
+  ε_i 即得 (F5)(F6)(F7)，取 b̃ 为 span{a,b} 内由 (F4) 唯一确定的向量即得 (F4)，
+  而 (F8) 在快子壳 η(a,a) = 2 上成立（推演见 notes）。**这段论证需要实二次型的非退化性与维数计数，
+  在一般交换 Q-代数上不可用**，故本卡把 (F5)–(F8) 写成**条件**而不是推论。
+
+  【本卡明确不断言】
+  (a) **不断言 (F5)(F7) ⇒ (F6)(F8)**，两者都有反例：
+      · (T) ⇏ (T′)：formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 整数见证
+        （η = diag(−1,+1,+1)、b = (1,1,0)、a = (0,1,1)、ε = e_2）满足 (F1)(F2)(F3)(F5)(F7)
+        却有 ε·a = 1 ≠ 0（机检存在性，`noghost_hypotheses_satisfiable_int`）；
+      · (T)(O) ⇏ (C)：同一见证上 v = (−1,0,1)，e = (0,1,0) 满足 η(e,v) = 0 却不在
+        span{ε_1, v} 中（curator 手算，登记在
+        worldsheet.transverse-frame-spans-orthogonal-complement 的 notes，**未 Lean 化、未经复核**）。
+  (b) **不断言存在性的一般形式**：对任意满足 (F1)–(F4) 的 (η, a, b, b̃) 都存在 ε 使 (F5)–(F8) 成立
+      ——这在一般环上为假。本卡只给上面那一个显式见证。
+  (c) **不断言 {b, b̃, ε_1, …, ε_{D−2}} 线性无关或构成基**，也不断言 (F8) 的分解系数唯一。
+      标架的「基」形式与 (F8) 的关系见 notes，那里的推演是手算的。
+  (d) **不把质壳 η(a,a) = 2（α' p² = 1）写进定义**。notes 记一条 curator 手算观察：在域上
+      (F6)(F7)(F8) 蕴含 η(a,a) = 2，即 (F8) 已经隐含了快子壳；但该观察未形式化、未经复核，
+      故不进陈述，也不据此改动本卡的条件表。
+  (e) **不断言任何关于 DDF 算子的事**：A^ε_n 的定义、对易关系、伴随、张成，全在别的卡上
+      （worldsheet.ddf-operators-v6 起的一族）。本卡只描述标架这一层几何数据。
+  (f) 不断言 D = 26、不断言任何正定性或内积号差结论。
+uses:
+  - worldsheet.ddf-operators-v6
+  - worldsheet.momentum-tower-fock-space
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.2 末, p.599 正文：'we can always find d − 2 orthonormal vectors ξ_i ∈ Λ_ℝ, 1 ≤ i ≤ d − 2, orthogonal to both r and k'（常设归一化 r·k = 1 写在 (3.29) 之前）"
+    note: |
+      **本卡 (F6) (T′) 的文献锚点，L1 逐字**（literature/extractions/gsw-1987-v1.md E17 备注 2 与
+      §7 的 Q5；sources.bib 的 gebert-nicolai-1995 条 note 逐字转录同一句）。
+      G–N 的 r 是**态的动量**（本卡的 p，重标度后 a），k 是类光参考向量（本卡的 k_0，重标度后 b），
+      故「orthogonal to both r and k」逐字就是 (F5)+(F6)。他们在偶自对偶格 Λ 上工作，
+      号差与本卡的 conv.metric-mostly-plus 在此处无差别（只用到正交关系与 Gram = δ_{ij}）。
+      ⚠ **不承载 (F8)**：G–N 不写完备性；其 p.599 的无鬼定理引文（「account for all physical
+      states」）默认了它，但那是引 [26] = GT 1972 的结论，不是对标架的条件陈述。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, (5.1) 后正文：'the ε^i, 1 ≤ i ≤ D−2, are orthonormal polarization vectors for a photon of momentum k, i.e. ε^i · ε^j = δ^{ij}, k · ε^i = 0'"
+    note: |
+      **只承载 (F5)(F7)**，L1 逐字（literature/extractions/gsw-1987-v1.md E1）。
+      号差逐字 (−,+,+,+)，与 conv.metric-mostly-plus 一致；归一化逐字 k·p = 1，在 α' = 1/2 下即 (F3)。
+      ⚠ Goddard **不写** (F6) 与 (F8)，也不写共轭方向 b̃ 的条件 (F4)；这正是
+      worldsheet.ddf-operators-v6 的 notes 里登记的那条落差。(F6) 的逐字来源是上面的 gebert-nicolai-1995。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.{LightConeFrame, TransverseFrame, FrameSpansOrthogonal, witnessLightConeFrame, witnessTransverseFrame, dotVec_witnessTransverseFrame_witnessMomentum, witness_frameSpansOrthogonal}；formal/StringFormal/NoGhost/Witness.lean :: StringFormal.NoGhost.{witnessLight, witnessMomentum, witnessConjugate, witnessPolarization, noghost_lightcone_frame_satisfiable, noghost_transverse_gram_satisfiable, dotVec_witnessLight_witnessConjugate, dotVec_witnessConjugate_self, invTwo_mul_zeroModeSq_witnessMomentum}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-a/-b 两批，lead 以 6ed1638 与 4aded75 合入 main）。
+      **curator 未自行重跑 `lake build`**。
+      **逐句字典**：(F1) ⇒ `hη : ∀ μ, η μ * η μ = 1`（见证 `Fock.minkowski`，`minkowski_sq`）；
+      (F2) ⇒ `LightConeFrame.isotropic` = `hbb`；(F3) ⇒ `hba`；
+      (F4) 的 η(b̃,b̃) = 0 与 η(b,b̃) = −1 ⇒ `LightConeFrame.conj_isotropic` / `.pairing`，
+      **但 b̃ ∈ span{a,b} 在 Lean 里没有对应字段**（见证满足它：`witnessConjugate` = b − a，
+      由 `witnessLight`/`witnessMomentum`/`witnessConjugate` 的坐标逐字可读出）；
+      (F5) ⇒ `TransverseFrame.transverse`；(F7) ⇒ `TransverseFrame.orthonormal`；
+      (F6) ⇒ 散见的假设 `hεa : ∀ i, dotVec η (Ε.vec i) a = 0`（**不是结构字段**），
+      见证兑现是 `dotVec_witnessTransverseFrame_witnessMomentum`；
+      (F8) ⇒ `FrameSpansOrthogonal η Ε (towerMomentum a b (-1))`，见证兑现是
+      `witness_frameSpansOrthogonal`；(F9) 在 Lean 里是 `lie_conjOp_transOp` 的额外假设，未打包。
+      ⚠ **没有任何单个 Lean 声明等于本卡的八条合取**，故本卡 status 取 `rigorous` 而非 `formalized`
+      （见 notes【为什么不是 formalized】）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103）"
+    note: |
+      **不承载本卡任何条件**：该节正文与式号本项目仍未获取（L0，只有 Google Books 页码区间约束，
+      literature/extractions/gsw-1987-v1.md §1）。列在此处只为标注文献侧同一段落的位置。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, light-cone, definition, frame]
+notes: |
+  【为什么立卡（curator 2026-09-11，lightcone-frame；lead 派工）】
+  worldsheet.ddf-operators-v6 的 notes 末段逐字建议：「(T′) **不是** `ddfOp` 定义的参数……
+  正确的落点是「横向标架」那一层」；worldsheet.transverse-frame-spans-orthogonal-complement 的
+  notes【一般情形该怎么补】逐字建议：「把「取在 span{k_0,p}^⊥ 里」写成标架的**定义条件**
+  （一张 `worldsheet.ddf-light-cone-frame` 定义卡），让 (T′) 与完备性都成为它的组成部分。
+  本轮不建」。本卡即那两段点名的卡。两处 notes 已加段指向本卡（同一分支）。
+
+  【为什么不是 formalized】
+  八条条件**逐条**都有 Lean 对应物（sources 第三条的字典），但没有任何一个 Lean 声明把它们打包：
+  `LightConeFrame` 缺 (F4) 的 span 条件，`TransverseFrame` 缺 (F6)，(F8) 是独立的 `def`，
+  (F9) 只作为 `lie_conjOp_transOp` 的散装假设。按 docs/STATUS_LEVELS.md，
+  定义卡的 `formalized` 要求「有 Lean 声明**逐句对应**」，故本卡取 `rigorous`。
+  ⇒ **这是一条便宜的形式化待办**：在 LightCone.lean 加一个
+  `structure DDFLightConeFrame` 把 (F1)–(F8) 打包、并把见证造成实例，本卡即可升 formalized；
+  预计几十行，无新数学。本卡因此会出现在 `stringgraph report` 的 formalization frontier 上，
+  那是**对的**（它的两条 `uses` 都是 formalized）。
+
+  【curator 手算的三条推演（**均未形式化、未经 reviewer 复核**，故都不在陈述里）】
+  设 (F1)–(F7) 成立，并设 {b, b̃, ε_i} 张成全空间（本卡【不断言】(c) 不假设这条）。
+  (i) **b̃ 被 (F4) 唯一确定**：写 b̃ = βa + γb，则 η(b,b̃) = β η(b,a) = β，故 β = −1；
+      再由 η(b̃,b̃) = η(a,a) − 2γ η(a,b) = η(a,a) − 2γ = 0 得 γ = η(a,a)/2（此处用到 ½ ∈ R）。
+      即 b̃ = (η(a,a)/2)·b − a。见证里 η(a,a) = 2，故 b̃ = b − a，与 `witnessConjugate` 逐字一致。
+  (ii) **(F8) 隐含快子壳**：v = a − b，由 (F5)(F6) 得 η(ε_i, v) = 0。对任意 e ∈ v^⊥ 把 (F8) 的分解
+      与 v 配对：0 = η(e,v) = Σ c_i η(ε_i,v) + c_0 η(v,v) = c_0 η(v,v)。
+      在域上（η 非退化、v ≠ 0）dim v^⊥ = D − 1 > D − 2 = dim span{ε_i}（(F7) 给独立性），
+      故存在 e ∈ v^⊥ 的分解必须带 c_0 ≠ 0，于是 η(v,v) = 0。
+      而 η(v,v) = η(a,a) − 2η(a,b) + η(b,b) = η(a,a) − 2，故 **η(a,a) = 2，即 α' p² = 1**。
+      ⇒ (F8) 不是一条「纯线性代数的方便条件」：它在域上等价地钉住了截距 a₀ = 1 的快子壳。
+      这解释了为什么 worldsheet.ddf-hypotheses-satisfiable 的见证必须带质壳 (M)。
+  (iii) **「基」形式 ⇒ (F8)**：若 {b, b̃, ε_i} 是基且快子壳成立，则由 (i) b̃ = b − a = −v，
+      对 e ⊥ v 写 e = βb + β̃b̃ + Σc_iε_i，与 v = −b̃ 配对得 0 = η(e,v) = −β η(b,b̃) = β，
+      故 e = β̃b̃ + Σc_iε_i = (−β̃)v + Σc_iε_i，即 (F8)。
+      ⇒ 标架的自然形式（{b,b̃,ε} 是基）在快子壳上蕴含 Lean 用的 v^⊥ 形式。反向不成立
+      （(F8) 只给生成，不给独立性）。
+  ⚠ 三条都只是记账用的手算。要进图必须先形式化（(ii)(iii) 需要维数计数，在一般交换环上不可用），
+  或走 docs/STATUS_LEVELS.md 的 rigorous 例外（reviewer 独立复核 + 推导 notes 写 reviewer-verified）。
+
+  【与三张邻卡的分工】
+  · worldsheet.ddf-operators-v6（definition, formalized）：A^ε_n 本身；(T) 是它的定义参数，
+    (N)(S) 是它的定理假设。**本卡不改它、不换代它**（lead 指示），只在它的 notes 里加指针。
+  · worldsheet.transverse-frame-spans-orthogonal-complement（proposition, formalized）：
+    断言「显式见证标架满足 (F8)」+「(F8) 在一般标架下独立」。本卡把 (F8) 收进定义条件后，
+    那张卡的地位不变——它证的是**见证兑现**，正是本卡【非空性】一段引用的东西。
+  · worldsheet.ddf-hypotheses-satisfiable（proposition, formalized）：断言 (F1)(F2)(F3)(F5) 加
+    ε·ε = 1 与质壳可同时满足。本卡的【非空性】比它多要 (F4)(F6)(F8)，少要「ε 是单个向量」；
+    两者的见证是同一组向量。**没有重复**：那张卡是可满足性命题，本卡是定义。
+author: curator
+created: "2026-09-11"

@@ -51,5 +51,21 @@ notes: |
   按蓝图 §C.2 的说法，没有它「every theorem of the DDF island is a conditional whose hypothesis
   set is not known to be non-empty」。它没有文献对应物（文献把可满足性视为显然），
   故 sources 只有本仓库 + 一条语境引用。
+
+  【2026-09-11（lightcone-frame，curator）：第二条依赖与由此而来的降级】
+  新增接口边 worldsheet.ddf-light-cone-frame（definition，**rigorous**）。按 min 规则，本推导
+  effective 从 formalized 降为 rigorous，目标卡随之，并沿
+  `transverse-frame-spans-orthogonal-complement--via-lean` 再传一层。
+  ⚠ **记账后果，不是数学后果**：`noghost_hypotheses_satisfiable` 一字未动。
+  ⚠ **这条边是本轮三条同类边里最弱的一条**（理由写在该 depends_on 的 note 里），
+  lead/reviewer 如判定它越线，删它即可复原，且不影响另外两条。
+  ⚠【同日改判（同一分支，commit 979df6a 之后）：该 depends_on 边**已撤回**，上一段不再是现状】
+  本推导回到单依赖、effective = formalized。撤回的判据就是上一段自己写的那条：
+  目标陈述**不点名标架**，只点名 (η)(N)(S)(T)(U)(M) 六条并逐条给见证，
+  按 docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」末句「只提供「原书语境」而不承担任何
+  论证的边不得存在」，这条边不该建；而且它经 transverse-frame-spans 那条链把降级传得最远
+  （本轮实测三条边合计 effective formalized 78 → 74（report 口径，净 −4））。
+  ⇒ 指针改记在目标陈述卡的 `uses` 上（不参与传播）。新定义卡与本卡的**正确关系**是反向的：
+  那张卡的【非空性】一段引用本卡的见证向量，而不是本卡依赖那张卡。
 author: curator
 created: "2026-09-11"

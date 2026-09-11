@@ -54,6 +54,8 @@ statement: |
   (e) **不断言 Goddard 2008 (6.2) 的 K 条件刻画**「物理态 + K_n|ψ⟩ = 0 (n>0) = DDF 态」，
       也不断言无鬼定理的承重步 (B-26)（见
       worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps）。
+uses:
+  - worldsheet.ddf-light-cone-frame
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
 formal:
   lean_decl: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious
@@ -126,5 +128,15 @@ notes: |
   (6.2) 的形式（物理态 + K 条件 = DDF），且只到 N = 1；两者都不关闭 (B-26)。
   Lean 侧 `ddfCharacterization = towerPhysSubmodule ⊓ towerKerK` 与
   `ddfSpan_le_ddfCharacterization`（DDF 态满足 K 条件那一侧）已有，反向仍缺。
+
+  【2026-09-11（lightcone-frame，curator）：`uses` 加了标架定义卡，陈述与 status 均未动】
+  本卡【断言】里的四条前提 (T)(O)(T′)(C) 逐条是新定义卡 `worldsheet.ddf-light-cone-frame`
+  的 (F5)(F7)(F6)(F8)。该卡把文献的光锥标架（ε_i ∈ span{k_0,p}^⊥，另加共轭类光方向 b̃）
+  写成一条定义，是本卡这四条前提的**对象承载处**，故加入 `uses`。
+  ⚠ **不是** `depends_on`：proposition 的 `uses` 不参与状态传播，本卡 effective 仍是 formalized。
+  之所以不走 depends_on，理由写在 --via-lean 推导的 notes 末段（两条：接口边裁决 + 与
+  tests/test_graph.py 固定不变量的冲突），那里也写了 lead 要改回去该动哪两处。
+  ⚠ 新定义卡 status 是 **rigorous**（八条条件无单个 Lean 声明打包），故它**不能**用来给本卡
+  的四条前提背书成「已形式化的标架」；本卡的前提仍是各自写在卡面上的那四条。
 author: curator
 created: "2026-09-11"
