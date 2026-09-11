@@ -158,4 +158,184 @@ theorem towerLop_neg_one_injective {j : ℤ} {M : ℕ} {x : TowerFock D R}
 
 end LopNegOneInjective
 
+/-! ### Straightening for an arbitrary family of endomorphisms
+
+`Virasoro/VermaPBW.lean` proves that ordered words in the negative modes span the Verma module,
+but its `straighten` is stated for words acting on the highest-weight vector of `V(c,h)`.
+Here the same induction is run for a family `L : ℤ → Module.End R W` on an arbitrary module,
+applied to an arbitrary vector, assuming only the Witt relations among the negative modes
+(`IsNegWitt`).  The measure `wordMeasure` and the predicate `IsOrdWord` are reused verbatim. -/
+
+section Straightening
+
+open StringFormal.Virasoro
+
+variable {R : Type*} [CommRing R] {W : Type*} [AddCommGroup W] [Module R W]
+
+/-- The word `L_{n_1} ⋯ L_{n_k}` of a family of endomorphisms, applied to a vector. -/
+def wordApply (L : ℤ → Module.End R W) : List ℤ → W → W
+  | [], v => v
+  | n :: t, v => L n (wordApply L t v)
+
+@[simp] lemma wordApply_nil (L : ℤ → Module.End R W) (v : W) : wordApply L [] v = v := rfl
+
+@[simp] lemma wordApply_cons (L : ℤ → Module.End R W) (n : ℤ) (t : List ℤ) (v : W) :
+    wordApply L (n :: t) v = L n (wordApply L t v) := rfl
+
+/-- The ordered words of total mode `s` and measure at most `M`, applied to `v`. -/
+def ordWordSetLeOn (L : ℤ → Module.End R W) (v : W) (s : ℤ) (M : ℕ) : Set W :=
+  {x | ∃ l : List ℤ, IsOrdWord l ∧ l.sum = s ∧ wordMeasure l ≤ M ∧ x = wordApply L l v}
+
+/-- The span of the ordered words of total mode `s` and measure at most `M`, applied to `v`. -/
+noncomputable def ordSpanLeOn (L : ℤ → Module.End R W) (v : W) (s : ℤ) (M : ℕ) :
+    Submodule R W :=
+  Submodule.span R (ordWordSetLeOn L v s M)
+
+/-- The ordered words of total mode `s`, applied to `v`. -/
+def ordWordSetOn (L : ℤ → Module.End R W) (v : W) (s : ℤ) : Set W :=
+  {x | ∃ l : List ℤ, IsOrdWord l ∧ l.sum = s ∧ x = wordApply L l v}
+
+/-- The span of the ordered words of total mode `s`, applied to `v`. -/
+noncomputable def ordSpanOn (L : ℤ → Module.End R W) (v : W) (s : ℤ) : Submodule R W :=
+  Submodule.span R (ordWordSetOn L v s)
+
+lemma ordSpanLeOn_mono (L : ℤ → Module.End R W) (v : W) {s : ℤ} {M M' : ℕ} (hM : M ≤ M') :
+    ordSpanLeOn L v s M ≤ ordSpanLeOn L v s M' := by
+  refine Submodule.span_mono ?_
+  rintro x ⟨l, hl, hs, hm, rfl⟩
+  exact ⟨l, hl, hs, hm.trans hM, rfl⟩
+
+lemma ordSpanLeOn_le_ordSpanOn (L : ℤ → Module.End R W) (v : W) (s : ℤ) (M : ℕ) :
+    ordSpanLeOn L v s M ≤ ordSpanOn L v s := by
+  refine Submodule.span_mono ?_
+  rintro x ⟨l, hl, hs, _, rfl⟩
+  exact ⟨l, hl, hs, rfl⟩
+
+lemma mem_ordSpanLeOn (L : ℤ → Module.End R W) (v : W) {l : List ℤ} (hl : IsOrdWord l)
+    {s : ℤ} (hs : l.sum = s) {M : ℕ} (hm : wordMeasure l ≤ M) :
+    wordApply L l v ∈ ordSpanLeOn L v s M :=
+  Submodule.subset_span ⟨l, hl, hs, hm, rfl⟩
+
+lemma mem_ordSpanOn (L : ℤ → Module.End R W) (v : W) {l : List ℤ} (hl : IsOrdWord l)
+    {s : ℤ} (hs : l.sum = s) : wordApply L l v ∈ ordSpanOn L v s :=
+  Submodule.subset_span ⟨l, hl, hs, rfl⟩
+
+/-- **The straightening hypothesis**: the negative modes of `L` satisfy the Witt relations
+`L_m L_n = L_n L_m + (m - n) L_{m+n}` (no central term can appear for `m, n < 0`). -/
+def IsNegWitt (L : ℤ → Module.End R W) : Prop :=
+  ∀ m n : ℤ, m < 0 → n < 0 → ∀ v : W, L m (L n v) = L n (L m v) + ((m : R) - n) • L (m + n) v
+
+variable {L : ℤ → Module.End R W}
+
+/-- **Straightening, the key lemma** (the module-and-vector version of
+`Virasoro.straighten_aux`): applying a negative mode to an ordered word applied to `v` lands
+in the span of ordered words of the same total mode and measure at most that of the input. -/
+theorem straighten_aux (hL : IsNegWitt L) (v : W) (k : ℕ) :
+    ∀ a : ℤ, a < 0 → ∀ l : List ℤ, IsOrdWord l → wordMeasure (a :: l) ≤ k →
+      L a (wordApply L l v) ∈ ordSpanLeOn L v (a + l.sum) (wordMeasure (a :: l)) := by
+  induction k with
+  | zero =>
+    intro a ha l hl hk
+    have hnegl : ∀ n ∈ l, n < 0 := hl.neg
+    have hcast := wordMeasure_cast (IsOrdWord.cons_neg ha hl)
+    have hwl := wordWeight_nonpos hnegl
+    have hsl := sum_nonpos_of_neg hnegl
+    have hzero : l.sum = 0 := by
+      rw [wordWeight_cons] at hcast
+      omega
+    have hnil : l = [] := eq_nil_of_sum_eq_zero hnegl hzero
+    subst hnil
+    exact mem_ordSpanLeOn L v (IsOrdWord.cons ha isOrdWord_nil (by simp)) (by simp) le_rfl
+  | succ k ih =>
+    intro a ha l hl hk
+    match l with
+    | [] =>
+      exact mem_ordSpanLeOn L v (IsOrdWord.cons ha isOrdWord_nil (by simp)) (by simp) le_rfl
+    | b :: t =>
+      have hb : b < 0 := hl.head_neg
+      have ht : IsOrdWord t := hl.tail
+      have hnegt : ∀ n ∈ t, n < 0 := ht.neg
+      have hst : t.sum ≤ 0 := sum_nonpos_of_neg hnegt
+      have hwt : wordWeight t ≤ 0 := wordWeight_nonpos hnegt
+      have habt : ((wordMeasure (a :: b :: t) : ℤ))
+          = -(wordWeight t + t.sum + (b + t.sum)) := by
+        rw [wordMeasure_cast (IsOrdWord.cons_neg ha hl)]
+        simp only [wordWeight_cons, List.sum_cons]
+      by_cases hab : a ≤ b
+      · have hord : IsOrdWord (a :: b :: t) := IsOrdWord.cons_head ha hl hab
+        exact mem_ordSpanLeOn L v hord (by simp only [List.sum_cons]) le_rfl
+      · have hba : b < a := lt_of_not_ge hab
+        have hat : ((wordMeasure (a :: t) : ℤ)) = -(wordWeight t + t.sum) := by
+          rw [wordMeasure_cast (IsOrdWord.cons_neg ha ht), wordWeight_cons]
+        have hsum' : ((wordMeasure ((a + b) :: t) : ℤ)) = -(wordWeight t + t.sum) := by
+          rw [wordMeasure_cast (IsOrdWord.cons_neg (by omega) ht), wordWeight_cons]
+        have key : ∀ y ∈ ordSpanLeOn L v (a + t.sum) (wordMeasure (a :: t)),
+            L b y ∈ ordSpanLeOn L v (a + (b :: t).sum) (wordMeasure (a :: b :: t)) := by
+          intro y hy
+          rw [ordSpanLeOn] at hy
+          induction hy using Submodule.span_induction with
+          | mem z hz =>
+            obtain ⟨l', hl', hsl', hml', rfl⟩ := hz
+            have hnegl' : ∀ n ∈ l', n < 0 := hl'.neg
+            have hbl' : ((wordMeasure (b :: l') : ℤ)) = -(wordWeight l' + l'.sum) := by
+              rw [wordMeasure_cast (IsOrdWord.cons_neg hb hl'), wordWeight_cons]
+            have hl'cast : ((wordMeasure l' : ℤ)) = -wordWeight l' :=
+              wordMeasure_cast hnegl'
+            have hm3 : wordMeasure (b :: l') ≤ k := by omega
+            have h3 := ih b hb l' hl' hm3
+            rw [hsl'] at h3
+            have hsum3 : b + (a + t.sum) = a + (b :: t).sum := by
+              simp only [List.sum_cons]; ring
+            rw [hsum3] at h3
+            exact ordSpanLeOn_mono L v (by omega) h3
+          | zero => rw [map_zero]; exact Submodule.zero_mem _
+          | add y z _ _ hy hz => rw [map_add]; exact Submodule.add_mem _ hy hz
+          | smul r y _ hy => rw [map_smul]; exact Submodule.smul_mem _ _ hy
+        rw [wordApply_cons, hL a b ha hb]
+        refine Submodule.add_mem _ ?_ ?_
+        · have hm2 : wordMeasure (a :: t) ≤ k := by omega
+          exact key _ (ih a ha t ht hm2)
+        · have hm1 : wordMeasure ((a + b) :: t) ≤ k := by omega
+          have h1 := ih (a + b) (by omega) t ht hm1
+          have hsum1 : a + b + t.sum = a + (b :: t).sum := by
+            simp only [List.sum_cons]; ring
+          rw [hsum1] at h1
+          exact Submodule.smul_mem _ _ (ordSpanLeOn_mono L v (by omega) h1)
+
+/-- **Straightening**: applying a negative mode to an ordered word lands in the span of the
+ordered words of the same total mode. -/
+theorem straighten (hL : IsNegWitt L) (v : W) {a : ℤ} (ha : a < 0) {l : List ℤ}
+    (hl : IsOrdWord l) :
+    L a (wordApply L l v) ∈ ordSpanLeOn L v (a + l.sum) (wordMeasure (a :: l)) :=
+  straighten_aux hL v (wordMeasure (a :: l)) a ha l hl le_rfl
+
+/-- A negative mode maps the ordered-word span of total mode `s` into the one of total mode
+`a + s`. -/
+theorem apply_mem_ordSpanOn_of_mem (hL : IsNegWitt L) (v : W) {a : ℤ} (ha : a < 0) {s : ℤ}
+    {y : W} (hy : y ∈ ordSpanOn L v s) : L a y ∈ ordSpanOn L v (a + s) := by
+  rw [ordSpanOn] at hy
+  induction hy using Submodule.span_induction with
+  | mem z hz =>
+    obtain ⟨l, hl, rfl, rfl⟩ := hz
+    exact ordSpanLeOn_le_ordSpanOn L v _ _ (straighten hL v ha hl)
+  | zero => rw [map_zero]; exact Submodule.zero_mem _
+  | add y z _ _ hy hz => rw [map_add]; exact Submodule.add_mem _ hy hz
+  | smul r y _ hy => rw [map_smul]; exact Submodule.smul_mem _ _ hy
+
+end Straightening
+
+/-! ### The tower Virasoro operators satisfy the straightening hypothesis -/
+
+section TowerNegWitt
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- The negative modes of `towerLop` satisfy the Witt relations: `TowerVirasoro.lean`'s
+`towerLop_apply_towerLop_of_ne_zero` with `m + n < 0`. -/
+theorem isNegWitt_towerLop (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) :
+    IsNegWitt (towerLop η a b) := fun m n hm hn v =>
+  towerLop_apply_towerLop_of_ne_zero η a b hη (by omega) v
+
+end TowerNegWitt
+
 end StringFormal.NoGhost
