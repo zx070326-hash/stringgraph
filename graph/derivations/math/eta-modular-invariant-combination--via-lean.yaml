@@ -94,9 +94,17 @@ summary: |
 gaps:
   - |
     **测度不变性不在本推导内。** 目标卡「不断言」(a) 已写明：d²τ/τ₂² 的模不变性
-    是关于 SL(2,Z) 在 H 上作用的另一条事实，Lean 文件 docstring 逐字说它
-    "is **not** formalised here"。⇒ spectrum.one-loop-torus-amplitude-modular-invariant
-    的第 (2) 条**仍然没有任何形式化**，它那张卡的 (3) 也因此不能靠本卡升级。
+    是关于 SL(2,Z) 在 H 上作用的另一条事实，`DedekindEtaModular.lean` 仍然 η-only，
+    本推导不碰测度——**这一半没变**。
+    ★ **但「它至今没有任何形式化」这句已过时（2026-09-11，curator lean-wire-11）**：
+    测度那一半现由 `formal/StringFormal/Math/TorusMeasure.lean` 形式化
+    （`TorusMeasure.measure_smul_eq`、`measure_density_modular_invariant`），
+    图卡 spectrum.torus-measure-modular-invariant 已升为 **formalized**。
+    （`DedekindEtaModular.lean` 的 docstring 原写 "is **not** formalised here"，
+    同日改为指向 `TorusMeasure.lean`；"here" 这个限定依然正确。）
+    ⇒ spectrum.one-loop-torus-amplitude-modular-invariant-v2 的两个数学输入
+    （τ₂|η|⁴ 与测度）现在**都是 formalized**；该卡的瓶颈已转移到
+    spectrum.one-loop-torus-amplitude（(7.3.6) 本身，physical-argument）。
   - |
     **一般 g 下 η 本身的变换（乘子系统）不在本推导内**，Mathlib 也没有。
     本推导只控制模长的特定组合 τ₂|η|⁴；任何需要 η 的相位（例如 c − c̃ ∈ 24Z 这类论证）
