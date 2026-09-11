@@ -49,5 +49,44 @@ notes: |
   worldsheet.free-boson-central-charge-d（--via-lean）。本卡是它们的 Clifford（费米）对应物，
   中心项同样是一个有限和；若形式化成功，本卡可升 formalized，届时 BRST 路线成为本图
   **唯一**端到端机检的 D = 26 路线。
+
+  ---
+  【2026-09-12 auditor 注记（两条）：本卡的 `: :` 没有定义；「受限模」的括号注解写松了。
+  statement 不可变，本条只入 notes】
+  （physics-auditor，ms.critical-dimension-brst-nilpotency 第一轮回译审计 R1-3 与 R1-1。）
+
+  **(A) `: :` 未定义，且与 worldsheet.brst-quantization-v2 的同一字符串要求互斥。**
+  本卡写 `L^g_m = Σ_n (m − n) : b_{m+n} c_{−n} :`；brst-quantization-v2 写
+  `L^g_n = Σ_m (2n − m) : b_m c_{n−m} :`。换指标后两式**逐字相同**。但：
+    · 本卡断言 `[L^g_m, L^g_n] = (m − n) L^g_{m+n} + (−26/12) m(m² − 1) δ_{m+n,0}`
+      （纯 (m³ − m) 形式，**无 m 线性项**）⇒ 本卡的 `: :` 必须是 **SL(2,C) 序**
+      （湮灭算符 b_n (n ≥ −1)、c_n (n ≥ 2)）。这与本卡来源 fgz-1986 Prop 2.1 的半无穷楔形
+      正规序一致，故**本卡自身的断言在其自身意图下为真**。
+    · 而 brst-quantization-v2 断言「L_n = L^m_n + L^g_n + a^g δ_{n,0} 在 (m³ − m) 形式下中心荷为
+      c^m + c^g」⇒ 那张卡的 `: :` 必须是**能级序**（相对 |↓⟩ = c_1|0⟩）。
+  两序的 L^g_0 相差 1；一般地 L′_n = L_n + α δ_{n,0} 给 [L′_m, L′_{−m}] = 2m L′_0 + C(m) − 2mα，
+  故**逐字拼接两卡公式会把 m 线性项算错 2m**（= reviewer F2，
+  docs/reviews/brst-nilpotency-recompute-2026-09-12.md；本 auditor 已独立重推并确认）。
+  **本卡的结论值 c^g = −26 不受影响**：序只改 m 线性项，不改 (m³ − m) 的系数，
+  故把 −26 经依赖边供给 worldsheet.critical-dimension-brst-v2 的两条推导是正确的。
+  **修法**：本卡换代时把「`: :` 取 SL(2,C) 序」写进 statement，或引用一条鬼场正规序 conv. 卡
+  （目前 graph/conventions/ 里没有对应 family：`normal-ordering-constant` 装的是截距符号
+  conv.intercept-sign-a，是常数符号约定不是算符排序约定）。
+  草案见 docs/drafts/brst-normal-ordering-convention.md。
+  ⚠ 这条也与上面「Lean 可行性」那段相关：形式化本卡时**必须**先把 `: :` 定死，
+  否则 Lean 声明读不成卡面陈述。
+
+  **(B) statement 里「受限模」的括号注解写松了，下游已因此出错。**
+  本卡写「设 V 是它们的一个**受限模**（每个 v ∈ V 被除有限多个模式外的 b_n、c_n 零化）」。
+  按字面，这说「不零化 v 的模式只有有限多个」——任何 Fock 模都不满足它：b_{−n} v、c_{−n} v
+  对一切 n > 0 非零（它们是产生算符），故不零化 v 的模式有无穷多个。正确的（也是标准的、且
+  worldsheet.brst-quantization-v2 与 worldsheet.critical-dimension-brst-v2 都写对了的）条件是**单边**的：
+    对每个 v ∈ V 存在 N = N(v)，使 b_n v = c_n v = 0 对一切 n > N。
+  本卡的断言本身不因此为假（凡满足单边条件者本卡结论成立；括号注解只是把前提写窄到只剩平凡模，
+  属**写松的 gloss** 而非错误命题），但它已经传染下游：
+  ms.critical-dimension-brst-nilpotency 的 canonical_text 逐字抄了本卡这句 gloss，
+  而不是抄陈述卡 worldsheet.critical-dimension-brst-v2 的单边写法，构成该里程碑第一轮审计的 R1-1（drift）。
+  **修法**：本卡换代时把括号改成单边写法。在此之前，引用本卡的人请以
+  worldsheet.brst-quantization-v2 / worldsheet.critical-dimension-brst-v2 的写法为准。
 author: curator
 created: "2026-09-12"
