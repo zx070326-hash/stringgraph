@@ -388,7 +388,8 @@ end Descendants
 
 section Freeness
 
-variable [NoZeroDivisors R] (hη : ∀ μ, η μ * η μ = 1)
+variable [NoZeroDivisors R]
+variable (hη)
 
 include hη in
 /-- **Level 1.**  `L₋₁|k⟩` is nonzero (indeed linearly independent as a one-element family) as
@@ -424,6 +425,82 @@ theorem linearIndependent_fockDesc4 (hdet : kacDet4 (D : R) (vacuumWeight η a) 
     (by rw [gram_det_fockDesc4 hη]; exact hdet)
 
 end Freeness
+
+/-! ### The criterion on the physical mass shell (`D = 26`, intercept `a₀ = 1`)
+
+A level-`N` physical state of the open bosonic string satisfies `α'k² + N = a₀`, i.e.
+`h = a₀ - N`.  At the critical dimension `D = c = 26` with the standard intercept `a₀ = 1`
+the Kac determinant of level `N` evaluated at `h = 1 - N` is
+
+| `N` | `h` | `det_N` |
+|---|---|---|
+| 1 | `0`  | `0` |
+| 2 | `-1` | `0` |
+| 3 | `-2` | `2304` |
+| 4 | `-3` | `2649563136` |
+
+So **the Gram criterion of this file is vacuous at exactly the two levels where the bosonic
+string has its null states** (the `N = 1` photon null state `L₋₁|k⟩` at `α'k² = 0` and the
+`N = 2` null state at `α'k² = -1`), and is decisive at `N = 3, 4`.  Vanishing of the
+determinant does *not* say the descendants are dependent — it says this sufficient condition
+gives nothing there; on the `N = 1` shell they really are dependent only in the degenerate
+sense that `L₋₁|k⟩` is a null *vector of the form*, not that it is zero.
+-/
+
+section MassShell
+
+variable (R)
+
+omit [Algebra ℚ R] in
+/-- Level-1: on the `N = 1` mass shell (`h = a₀ - 1 = 0`) the criterion is vacuous. -/
+theorem kacDet1_massShell_26 : kacDet1 ((1 : R) - 1) = 0 := by
+  rw [kacDet1]; ring
+
+omit [Algebra ℚ R] in
+/-- Level-2: on the `N = 2` mass shell (`c = 26`, `h = a₀ - 2 = -1`) the criterion is vacuous.
+Note `16h² + 2h(c-5) + c = 16 - 42 + 26 = 0` there: it is the *second* factor that vanishes,
+not `h`. -/
+theorem kacDet2_massShell_26 : kacDet2 (26 : R) ((1 : R) - 2) = 0 := by
+  rw [kacDet2]; ring
+
+omit [Algebra ℚ R] in
+/-- Level-3: on the `N = 3` mass shell (`c = 26`, `h = a₀ - 3 = -2`) the Kac determinant is
+`2304 ≠ 0`, so the criterion *is* decisive. -/
+theorem kacDet3_massShell_26 : kacDet3 (26 : R) ((1 : R) - 3) = 2304 := by
+  rw [kacDet3]; ring
+
+omit [Algebra ℚ R] in
+/-- Level-4: on the `N = 4` mass shell (`c = 26`, `h = a₀ - 4 = -3`) the Kac determinant is
+`2649563136 = 2⁸·3⁶·… ≠ 0`. -/
+theorem kacDet4_massShell_26 : kacDet4 (26 : R) ((1 : R) - 4) = 2649563136 := by
+  rw [kacDet4]; ring
+
+variable {R}
+
+/-- **`N = 3` at `D = 26` on shell.**  For a level-3 physical state of the critical open bosonic
+string (`α'k² = a₀ - 3 = -2` with `a₀ = 1`), the three standard descendants
+`L₋₃|k⟩, L₋₂L₋₁|k⟩, L₋₁³|k⟩` are linearly independent in the Fock space. -/
+theorem linearIndependent_fockDesc3_massShell_26 [NoZeroDivisors R] [CharZero R]
+    (hη : ∀ μ, η μ * η μ = 1) (hD : D = 26) (hk : vacuumWeight η a = 1 - 3) :
+    LinearIndependent R (fockDesc3 η a) := by
+  refine linearIndependent_fockDesc3 hη ?_
+  rw [hk, hD]
+  have hcast : ((26 : ℕ) : R) = 26 := by norm_num
+  rw [hcast, kacDet3_massShell_26]
+  norm_num
+
+/-- **`N = 4` at `D = 26` on shell.**  Same for the five standard level-4 descendants at
+`α'k² = a₀ - 4 = -3`. -/
+theorem linearIndependent_fockDesc4_massShell_26 [NoZeroDivisors R] [CharZero R]
+    (hη : ∀ μ, η μ * η μ = 1) (hD : D = 26) (hk : vacuumWeight η a = 1 - 4) :
+    LinearIndependent R (fockDesc4 η a) := by
+  refine linearIndependent_fockDesc4 hη ?_
+  rw [hk, hD]
+  have hcast : ((26 : ℕ) : R) = 26 := by norm_num
+  rw [hcast, kacDet4_massShell_26]
+  norm_num
+
+end MassShell
 
 end Fock
 
