@@ -60,6 +60,12 @@ the `L_2` equation is `26 h + c`, hence `c - 26` at `h = -1`, and the `L_1` equa
   conditions, both unconditional in `D`.
 * `descTwo_mem_towerSpuriousSubmodule`, `descTwo_mem_towerPhysSubmodule`,
   `descTwo_mem_towerNullSubmodule` — **Type 2**, the last two under `(D : R) = 26`.
+* `descTwo_mem_towerBigrade` — `𝒟₂` has bidegree `(0, +2)` on the tower.
+* `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`,
+  `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade_neg_two`,
+  `descTwo_single_mem_towerNullSubmodule` — the seed hypotheses discharged **on a slice** at
+  intercept `a₀ = 1` (`k·k = 2`), including the fully concrete `N = 2` Type-2 state
+  `(2 L_{-2} + 3 L_{-1}²)|0; p_{-2}⟩`.
 
 ## What is **not** here (blueprint §B″ status after this file)
 
@@ -70,7 +76,14 @@ purely the *counting* half of blueprint §B″.2, and it is not cheap:
    constructed, and their linear independence (injectivity of `v ↦ χ_v` on the hyperplane
    `v · p = 0`, which needs the `α_{-2}`-component of `Fock.Lop_neg_one_apply_polState`) is not
    proved.
-2. Even with 26 independent null states in hand, `B26 2` needs
+2. `descTwo y ≠ 0` is not proved.  The cheap Gram criterion cannot give it: at `c = 26`,
+   `h = -1` the level-2 Kac determinant is exactly `0`
+   (`Fock.kacDet2_massShell_two`/`kacDet2_massShell_26`), so
+   `Fock.linearIndependent_fockDesc2` is vacuous there — *that vanishing is the very reason a
+   null state exists*.  Nonvanishing needs an explicit `MvPolynomial` coefficient: the
+   `X_{(μ,2)}`-coefficient of `𝒟₂|0;p⟩` is `5 η_μ p^μ`, nonzero for some `μ` because
+   `p · p = -2 ≠ 0` in characteristic zero.
+3. Even with 26 independent null states in hand, `B26 2` needs
    `card {d | level d = 2 ∧ conjDeg d = 0} - card {ddf level-2 occupations} = 26`, i.e.
    `p_{D-1}(2) - p_{D-2}(2) = D`.  Both cardinalities are deliberately **never evaluated** in
    `SpuriousElimination.lean` and `SliceDim.lean` (blueprint §B′.8); evaluating their difference
@@ -380,5 +393,107 @@ theorem descTwo_mem_towerNullSubmodule (hD26 : (D : R) = 26)
       descTwo_mem_towerPhysSubmodule η a b hη hpos hD26 h0⟩)
 
 end TypeTwo
+
+/-! ### Bidegree bookkeeping and the concrete `N = 2` seeds
+
+Both families raise the oscillator level and leave the rung alone, so they map the slice
+`(rung j, level N)` into `(rung j, level N + 1)` resp. `(rung j, level N + 2)`.  Combined with
+`towerLop_zero_apply_of_mem_towerBigrade` (`L_0 = α'k² + j + N` on a slice) this turns the
+abstract seed hypotheses `hpos` / `h0` of the previous two sections into *slice* hypotheses,
+which is the form blueprint §B″.2 uses: at intercept `a₀ = 1` (i.e. `k·k = 2`), a Type-1 seed
+lives on a slice with `j + N = -1` and a Type-2 seed on one with `j + N = -2`.
+
+For the `N = 2` antidiagonal slice `(rung -2, level 2)` of blueprint §B″.2 this gives the Type-2
+state from the rung-`(-2)` oscillator vacuum, and the Type-1 states from level-1 seeds on rung
+`-2`.  The 25 Type-1 seeds themselves (`(v · α_{-1})|0; p_{-2}⟩` with `v · p_{-2} = 0`) and the
+linear independence of the resulting 26 null states are **not** constructed here; see the module
+docstring. -/
+
+section Slices
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] (η a b : Fin D → R)
+
+/-- **`𝒟₂` has bidegree `(0, +2)`**: it preserves the rung and raises the oscillator level by
+two, since `L_{-2}` and `L_{-1}²` both do. -/
+theorem descTwo_mem_towerBigrade {j : ℤ} {N : ℕ} {y : TowerFock D R}
+    (hy : y ∈ towerBigrade D R j N) {N' : ℕ} (hN' : (N' : ℤ) = (N : ℤ) + 2) :
+    descTwo η a b y ∈ towerBigrade D R j N' := by
+  rw [descTwo_apply]
+  refine Submodule.add_mem _ (Submodule.smul_mem _ _ ?_) (Submodule.smul_mem _ _ ?_)
+  · exact towerLop_mem_towerBigrade η a b hy (by omega)
+  · exact towerLop_mem_towerBigrade η a b
+      (towerLop_mem_towerBigrade (N' := N + 1) η a b hy (by push_cast; ring))
+      (by push_cast; omega)
+
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (haa : Fock.zeroModeSq η a = 2)
+
+include hη hbb hba haa in
+/-- On a slice, at intercept `a₀ = 1` (which is what `k·k = 2` means), `L_0` acts by `1 + j + N`.
+This is `towerLop_zero_apply_of_mem_towerBigrade` with the intercept evaluated. -/
+lemma towerLop_zero_apply_of_mem_towerBigrade_of_zeroModeSq_eq_two {j : ℤ} {N : ℕ}
+    {y : TowerFock D R} (hy : y ∈ towerBigrade D R j N) :
+    towerLop η a b 0 y = ((1 : R) + (j : R) + (N : R)) • y := by
+  rw [towerLop_zero_apply_of_mem_towerBigrade η a b hη hbb hba hy, haa, invTwo_mul_two]
+
+include hη hbb hba haa in
+/-- **Type 1 on a slice** (blueprint §B″.2.1): a seed on `(rung j, level N)` with `j + N = -1`
+that is annihilated by all positive modes produces a null state on `(rung j, level N + 1)`.
+
+`D` does not appear.  At `(j, N) = (-1, 0)` this is the photon null state `L_{-1}|0; p_{-1}⟩`
+(compare `Assembly.ddfSpans_bigrade_neg_one_one`, which reaches the same slice by the DDF route);
+at `(j, N) = (-2, 1)` it is the family that supplies `D - 1 = 25` of the 26 null states of the
+`N = 2` slice. -/
+theorem towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade {j : ℤ} {N : ℕ}
+    (hjN : j + (N : ℤ) = -1) {y : TowerFock D R} (hy : y ∈ towerBigrade D R j N)
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n y = 0) :
+    towerLop η a b (-1) y
+      ∈ towerNullSubmodule η a b (1 : R) ⊓ towerBigrade D R j (N + 1) := by
+  have hs : (1 : R) + (j : R) + (N : R) = 0 := by
+    have hc : ((j + (N : ℤ) : ℤ) : R) = ((-1 : ℤ) : R) := by rw [hjN]
+    push_cast at hc
+    linear_combination hc
+  have h0 : towerLop η a b 0 y = 0 := by
+    rw [towerLop_zero_apply_of_mem_towerBigrade_of_zeroModeSq_eq_two η a b hη hbb hba haa hy, hs,
+      zero_smul]
+  exact Submodule.mem_inf.2
+    ⟨towerLop_neg_one_mem_towerNullSubmodule hη hpos h0,
+      towerLop_mem_towerBigrade η a b hy (by push_cast; ring)⟩
+
+include hη hbb hba haa in
+/-- **Type 2 on a level-`0` slice, i.e. the concrete `N = 2` null state of blueprint §B″.2.1.**
+
+A rung-`(-2)` level-`0` vector automatically satisfies both seed hypotheses: the positive modes
+annihilate it by grading, and `L_0` acts by `1 + (-2) + 0 = -1`.  Hence at `D = 26` the vector
+`𝒟₂ y = (2 L_{-2} + 3 L_{-1}²) y` is a null physical state lying in the antidiagonal slice
+`(rung -2, level 2)`.
+
+This is the one Type-2 state that blueprint §B″.2.1 adds to the 25 Type-1 states; it is where
+`D = 26` is consumed. -/
+theorem descTwo_mem_towerNullSubmodule_of_mem_towerBigrade_neg_two (hD26 : (D : R) = 26)
+    {y : TowerFock D R} (hy : y ∈ towerBigrade D R (-2) 0) :
+    descTwo η a b y ∈ towerNullSubmodule η a b (1 : R) ⊓ towerBigrade D R (-2) 2 := by
+  have hpos : ∀ n : ℤ, 0 < n → towerLop η a b n y = 0 := fun n hn =>
+    towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt η a b hy (by exact_mod_cast hn)
+  have h0 : towerLop η a b 0 y = -y := by
+    rw [towerLop_zero_apply_of_mem_towerBigrade_of_zeroModeSq_eq_two η a b hη hbb hba haa hy]
+    push_cast
+    module
+  exact Submodule.mem_inf.2
+    ⟨descTwo_mem_towerNullSubmodule η a b hη hpos hD26 h0,
+      descTwo_mem_towerBigrade η a b hy (by norm_num)⟩
+
+include hη hbb hba haa in
+/-- The fully concrete instance: the rung-`(-2)` oscillator vacuum `|0; p_{-2}⟩` is a Type-2 seed,
+so at `D = 26` and `k·k = 2` the state `(2 L_{-2} + 3 L_{-1}²)|0; p_{-2}⟩` is a null physical
+state of the `N = 2` slice.  (Whether it is *nonzero* is not proved here; see the module
+docstring.) -/
+theorem descTwo_single_mem_towerNullSubmodule (hD26 : (D : R) = 26) :
+    descTwo η a b (Finsupp.single (-2) (1 : Fock D R))
+      ∈ towerNullSubmodule η a b (1 : R) ⊓ towerBigrade D R (-2) 2 :=
+  descTwo_mem_towerNullSubmodule_of_mem_towerBigrade_neg_two η a b hη hbb hba haa hD26
+    (single_mem_towerBigrade (Fock.one_mem_levelSubmodule D R))
+
+end Slices
 
 end StringFormal.NoGhost
