@@ -178,6 +178,21 @@ notes: |
   worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的断言 (3)），释义留在 notes。
   ⇒ "这个数等于横向 Fock 空间的维数"作为**命题**是 Theorem 2.8 的内容，本卡"不断言 (g)"。
 
+  【★ FGZ 的「物理空间」定义里含截距 a = 1（2026-09-11，researcher 第三轮 §9.10.4）】
+  紧接 Theorem 2.7 之后（p.8445 右栏末）逐字：
+  「We let P = P(R^{25,1}, p) = {v ∈ V(R^{25,1}, p) : **π(L_n)v = δ_{0,n}v**, n ≥ 0}.
+   P is called the **physical space**.」
+  ⇒ **π(L₀)v = v，即 L₀ 本征值 = 1 = 玻色弦截距 a = 1，是 FGZ 写在物理空间定义式里的**
+  （用 δ_{0,n} 表达），**不是**某处额外声明的假设。
+  ⚠ **本卡不涉及 P**（P 是 Theorem 2.8 那一侧的对象），故这条不进本卡的设定；
+  记在此处是因为它解释了 (H7)：本卡公式里 "1 − p·p/2" 的那个 **1** 与 FGZ 物理空间定义里的
+  那个 **1** 是同一个截距，两处都藏在别处而不在 Theorem 2.7 的语句里。
+  ⚠ 对照：lian-zuckerman-1989 的 Definition 2.16 写 π(L_n)v = δ_n **κ**v，即超弦截距 = κ
+  （NS 为 ½、R 为 0）——这正是超弦维数卡 worldsheet.superstring-relative-cohomology-dimension
+  的公式里 p^{(8)}_κ(**κ** − p·p/2) 那个 κ。**两篇的截距都藏在物理空间的定义式里。**
+  ⚠ **negative evidence（§9.10.6，仅覆盖 p.8445）**：Theorem 2.7 的陈述里**不出现**
+  "a = 1"、不出现 "intercept"、不出现 "no-ghost"、不出现 "ghost number"。
+
   【(ℒ, ℒ₀) 与 {b₀ = L₀ = 0} 的字典】
   与消灭卡同款：FGZ 的相对复形是"相对于子代数 ℒ₀"，本图的相对复形是
   worldsheet.brst-preserves-relative-complex 的 {b₀Ψ = 0, L₀Ψ = 0}。物理文献与数学文献公认

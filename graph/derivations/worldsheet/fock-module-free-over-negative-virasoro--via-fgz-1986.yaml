@@ -24,6 +24,30 @@ depends_on:
       "V(E,p) 是 ℒ-模" 的图内对应物（该卡逐字断言 ρ : Vir_R → End_R(F)、ρ(C) = D·id_F 保李括号）。
       ⚠ 该卡在**任意交换 ℚ-代数** R 上陈述并已形式化，FGZ 在 C 上工作；本边只取"作用存在且中心荷
       = D"这一层，不主张两者的基环相同。
+  - id: worldsheet.kac-determinant-v2
+    note: |
+      ★★【2026-09-11 新增，researcher 第三/四轮页图】供给 **Proposition 2.6 证明梗概的核心输入**：
+      **Kac 行列式公式**。FGZ p.8445 右栏（Prop 2.6 之后）逐字：
+      'Then by **Kac's determinant formula (10, 11)** we know that the Verma modules M(h, c) are
+      irreducible and unitary for h > 0, c > 1 and are irreducible and nonunitary for h < 0, c = 1.'
+      由此得两条同构 V(E', p') ≅ ⊔_{k≥0} p_{(D−1)}(k) M(p'·p'/2 + k, D − 1)、
+      V(E'', p'') ≅ M(p''·p''/2, 1)，然后逐字
+      '**We conclude from the above that V(E, p), p ≠ 0, is a free ℒ⁻-module** (in fact for any
+      r ≥ 2 or s ≥ 1).'
+      **本边非 inferred**：Kac 行列式是 FGZ **原文明写**的输入（带 refs 编号），
+      且本图这张卡的 sources 里恰有 FGZ 所引的两条——**feigin-fuchs-1982** 与 **kac-1980-icm**，
+      即 FGZ 的 **ref 11** 与 **ref 10**（FGZ p.8446 参考表逐字，brst-cohomology-sources.md §10.1）。
+      ⇒ 图上这条边所指的卡与 FGZ 所引的文献**是同一批**，不是本图另找的替代来源。
+      ⚠⚠ **编号陷阱（§10.1 专门警告）**：**FGZ 的 refs 10/11 ≠ LZ 的 [9]/[10]**。
+      FGZ ref 10 = Kac 的 ICM Helsinki 1978（本 bib `kac-1980-icm`）、ref 11 = Feigin–Fuks 1982；
+      而 LZ 的 [9] = Kac LNP 94 (1979)、[10] = Kac–Wakimoto。**FGZ 全表 14 条里没有 Kac–Wakimoto、
+      没有 LNP 94、没有 Meurman–Rocha-Caridi。** 转述前必须分清是谁的编号。
+      ⚠ **本边只承载玻色 Virasoro 的 Kac 行列式**；超弦侧（LZ）用的是 **超** Virasoro 版
+      （Meurman–Rocha-Caridi），本图**没有**那张卡，见
+      worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989 的 gaps。
+      ⚠ **本推导不断言 FGZ 用的 Kac 公式与本卡陈述的公式逐字同一**：FGZ 只用它的**定性推论**
+      （某些 (h, c) 上 Verma 模不可约），不用行列式的显式形式；本卡 (v2) 断言的是完整的
+      det M_N 公式。⇒ 本边是"取该公式的一条推论"，不是"整卡搬运"。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -52,17 +76,43 @@ sources:
       ⚠ §9.9.2 逐字：「『i ≠ 0 消灭』这条结论并不需要 p ≠ 0——p ≠ 0 只在验证 V(E,p) 确为
       ℒ⁻-free（Prop 2.6(i)）时才被用到」。⇒ **p ≠ 0 的正确记账位置是本卡，不是消灭定理那张卡。**
   - ref: fgz-1986
+    loc: "**Proposition 2.6 之后的证明梗概**, p.8445 右栏，逐字：'The subspace T is called the **transversal space** and can be constructed explicitly using the spectrum-generating algebra (9). Here we will indicate another proof of the proposition based on a more detailed study of the structure of V(E, p). We note first that if E = E' ⊕ E'' is an orthogonal decomposition of E into two nondegenerate subspaces and p = p' + p'' is the corresponding decomposition of p, then we have a canonical isomorphism of the Hermitian ℒ-modules. V(E, p) ≅ V(E', p') ⊗ V(E'', p''). We choose the decomposition such that E' and E'' have signatures (D − 1, 0) and (0, 1), respectively, and p' ≠ 0, p'' ≠ 0. **Then by Kac's determinant formula (10, 11) we know that the Verma modules M(h, c) are irreducible and unitary for h > 0, c > 1 and are irreducible and nonunitary for h < 0, c = 1.** This implies isomorphisms for D > 2  V(E', p') ≅ ⊔_{k≥0} p_{(D−1)}(k) M(p'·p'/2 + k, D − 1),  V(E'', p'') ≅ M(p''·p''/2, 1).  **We conclude from the above that V(E, p), p ≠ 0, is a free ℒ⁻-module (in fact for any r ≥ 2 or s ≥ 1).** We choose T to be  T = ⊕_{k≥0} p_{(D−2)}(k) M(p'·p'/2 + k, D − 1)^{ℒ⁺} ⊗ M(p''·p''/2, 1)^{ℒ⁺}.  [2.4]'；**refs 10, 11**（p.8446 参考表逐字）：'10. Kac, V. (1978) Proceedings of the International Congress of Mathematicians (ASF, Helsinki, Finland), Vol. 1, pp. 299–304.'、'11. Feigin, B. & Fuks, D. (1982) Funkt. Anal. Prilozheniya 16, 47–63 (English translation: Functional Analysis and Its Application 16, 114–126).'"
+    note: |
+      ★★★【2026-09-11 新增，researcher 第三轮 §9.10.3 + 第四轮 §10.1/§10.2，L1 页图】
+      **本条推翻本推导原先的两条 gap**（"Prop 2.6 不带印出的证明"、"自由性的证明思路本图完全
+      没有记录"）：**FGZ 确实给出了证明梗概**，且梗概的**核心输入是 Kac 行列式**。
+      四条读数：
+      (1) **Prop 2.6(i)（自由性）与 (ii)（横向空间 T）共用同一段证明**，Kac 行列式同时喂给两者。
+          ⇒ 抽取记录 §9.7 末行"若图里 Kac 行列式那条链未建，需在 note 里写明"的适用范围要**扩大**：
+          它不只影响 2.6(ii)，而是**影响 Theorem 2.7 本身**（2.7 明写依赖 2.6 的第一部分）。
+      (2) **refs 10/11 = Kac ICM Helsinki 1978 + Feigin–Fuks 1982**（第四轮页图逐字），
+          **不是** Kac LNP 94 / Kac–Wakimoto（那是 LZ 的 [9]/[10]）。本图 worldsheet.kac-determinant-v2
+          的 sources 恰含这两条，故本推导的 Kac 边**非 inferred**。
+      (3) **FGZ 自陈自由性比洛伦兹号差更一般**：括注逐字 "(in fact for any **r ≥ 2 or s ≥ 1**)"
+          （r = 正号数、s = 负号数）。⇒ 目标卡 (H1) 写死号差 (D−1,1) 是照 Prop 2.6 的**语句**，
+          而正文这句给了更宽的成立范围，**是原文自陈、非推断**。见 gaps。
+      (4) **[2.4] 是 T 的显式构造式**，重数是 **p_{(D−2)}(k)**，而 V(E',p') 的重数是 **p_{(D−1)}(k)**
+          ——**两个下标不同，别抄混**（§9.10.3 读数 4）。本推导不用 [2.4]。
+      ⚠ **转录疑点（§9.10.5，引用前须复核）**：Prop 2.6(ii) 的特征标印作 ch_q T = q^{p·p/2} φ(q)^{D−2}，
+      **指数前很可能丢了一个负号**（同页 ch_q V(E,p) = q^{p·p/2} φ(q)^{−D} 带明确负号，且
+      Thm 2.7(ii) 的答案是 φ(q)^{−24} 的系数）。本推导不把该特征标写进任何断言。
+      ⚠ **negative evidence（§10.4）**：FGZ p.8446 全页不出现 "Kac determinant" 字样，
+      该引用点只在 p.8445 的 Prop 2.6 证明里。
+  - ref: fgz-1986
     loc: "§1.1–§1.3（半无限上同调的一般框架：Prop 1.1/1.2、Thm 1.6 Poincaré 对偶、Thm 1.8/1.9 Kähler 恒等式、Prop 1.10/1.11 谱序列滤过、**Thm 1.12** 消灭定理）；§2.2（Fock 模的定义、分次与特征标，p.8445 左栏）"
     note: |
       L1（§1.1 的章节结构、§1.4 的编号表）。列出只为说明 Prop 2.6 所在的上下文与记号来源；
       **本推导不经过 §1 的任何定理**（那些是下游消灭定理用的）。
 summary: |
   本推导没有独立的论证步骤：目标卡的断言**逐字就是** fgz-1986 Proposition 2.6 的第一部分，
-  三个量词（号差 (D−1,1)、D ≥ 2、p ≠ 0）也逐字写在该命题的语句里。本推导做的事只有两件：
-  (1) 把 FGZ 的 V(E,p) 与本图的 Fock 空间/Virasoro 作用对上（见 depends_on 三条边的 note：
+  三个量词（号差 (D−1,1)、D ≥ 2、p ≠ 0）也逐字写在该命题的语句里。本推导做的事只有三件：
+  (1) 把 FGZ 的 V(E,p) 与本图的 Fock 空间/Virasoro 作用对上（见前三条 depends_on 的 note：
       生成元同为 α^μ_{−n}、作用同为 Sugawara L_m、中心荷同为 D，归一化同为 (c/12)(m³−m)，
       分次差一个与自由性无关的常数平移 −p·p/2）；
-  (2) 把 FGZ 的 ℒ⁻ 与本图 worldsheet.virasoro-algebra-v2 的负模子代数对上。
+  (2) 把 FGZ 的 ℒ⁻ 与本图 worldsheet.virasoro-algebra-v2 的负模子代数对上；
+  (3) **〔2026-09-11 新增〕** 把 FGZ 证明梗概里明写引用的 **Kac 行列式**（refs 10/11 =
+      Kac ICM 1978 + Feigin–Fuks 1982）与本图 worldsheet.kac-determinant-v2 对上——
+      那张卡的 sources 恰是同一批文献，故该边**非 inferred**。
 
   【为什么标 rigorous】三条：
   (1) 结论是**带编号的命题**（Proposition 2.6(i)），陈述已逐字核实（L1 页图），
@@ -71,28 +121,59 @@ summary: |
   (3) 期刊是 PNAS（Communicated by I. M. Singer），作者三人是数学家，这是数学文献。
   与 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 和
   worldsheet.no-ghost-theorem-brst--via-fgz 的记账口径**逐条一致**。
-  ⚠⚠ **限制（与那两条推导同型，但在本条上更直接）**：fgz-1986 是 PNAS 公告体裁（5 页、
-  约 25 条编号陈述），**Proposition 2.6 不带印出的证明**；rigorous 是按"已核实的编号命题 +
-  数学期刊"给的，不是按逐行复核给的。见 gaps 第一条。
+  ⚠⚠ **限制（2026-09-11 订正）**：fgz-1986 是 PNAS 公告体裁（5 页、约 25 条编号陈述），
+  但 **Proposition 2.6 确实带一段印出的证明梗概**（第三轮页图 §9.10.3，逐字见 sources 第三条）：
+  正交分解 E = E' ⊕ E'' → V(E,p) ≅ V(E',p') ⊗ V(E'',p'') → **Kac 行列式**定出两个因子的
+  不可约分解 → 结论自由性，并自陈 "(in fact for any r ≥ 2 or s ≥ 1)"。
+  ⇒ 本推导旧版写的"Prop 2.6 不带印出的证明"**是错的**，已在 gaps 第一条订正；
+  rigorous 仍按"已核实的编号命题 + 数学期刊 + 该文印出的证明梗概"给，**不是**按逐行复核给的
+  （梗概里两步推理未印出，见 gaps）。
+  ⚠ **由此本推导多一条上游边**：worldsheet.kac-determinant-v2（非 inferred，FGZ refs 10/11 =
+  Kac ICM 1978 + Feigin–Fuks 1982，正是该卡的两条 sources）。
 gaps:
-  - "**Proposition 2.6 在 fgz-1986 里没有印出的证明。** 该文是 PNAS 公告（5 页、约 25 条编号陈述），
-     Prop 2.6 只给陈述。本推导的 rigorous 依据的是 (a) 逐字核实的命题陈述、(b) 它是数学期刊上
-     署名的编号命题、(c) 下游 Theorem 2.7 明写以它为输入。**未做**的是：找到 FGZ 的后续长文并
-     逐行复核该命题的证明（researcher 两轮均未定位到该长文，见 literature/extractions/
-     brst-cohomology-sources.md §7 访问日志）。
-     ⚠ 这是本卡与超弦版 worldsheet.rns-fock-module-free-over-negative-super-virasoro 的一处
-     **实质差别**：那一侧的 LZ Corollary 2.19(iii) 有印出的证明链（经 Proposition 2.18）。
-     关闭方式：定位 FGZ 的长文（或 Frenkel–Garland–Zuckerman 后续著作）并逐行复核。"
-  - "**自由性的证明思路本图完全没有记录。** 既然 FGZ 不印证明，本图也就不知道它是怎么证的
-     （标准做法是用 Kac 行列式或 Feigin–Fuchs 型论证说明 Fock 模上没有奇异向量障碍，但**这是补白，
-     不是来源**）。⇒ 本卡短期内**不可形式化**，也不宜作为 Lean 岛的候选。"
-  - "**FGZ 只说 free，不说秩。** 本卡断言 (b) 已声明不断言秩；但下游若要做特征标计数
+  - |
+    **〔2026-09-11 订正，researcher §9.10.3〕本条原写「Proposition 2.6 在 fgz-1986 里没有印出的
+     证明」——**那是错的**：FGZ 在 Prop 2.6 之后给了证明梗概（正交分解 E = E' ⊕ E'' →
+     V(E,p) ≅ V(E',p') ⊗ V(E'',p'') → **Kac 行列式**定出两个因子的不可约分解 → 结论自由性），
+     逐字见 sources 第三条。**实际的缺口比原写法窄但更具体**：
+     (a) 梗概里 'This implies isomorphisms for D > 2' 与 'We conclude from the above' 两步
+         **中间的推理未印出**（由"两个因子各是 Verma 模的直和"到"张量积在 ℒ⁻ 下自由"那一步）；
+     (b) **Kac 行列式那一步的推论形式未在本图核对**：FGZ 写 'irreducible and unitary for
+         h > 0, c > 1' 与 'irreducible and nonunitary for h < 0, c = 1'，而本图
+         worldsheet.kac-determinant-v2 断言的是 det M_N 的显式公式；由公式到这两条定性推论
+         需要一步（标准，但本图未记）。
+     关闭方式：定位 FGZ 的后续长文（researcher 三轮均未定位到），或用 Kac 行列式卡补出 (b) 那一步。
+  - |
+    **★★ Kac 行列式是本推导的上游输入（此前被本图低估）**（researcher §9.10.3 的 negative
+     evidence 之逆）：抽取记录 §9.7 末行原先只说 '**Prop 2.6(ii)** 的横向空间构造引用 Kac 行列式
+     （refs 10, 11）'，本推导旧版据此把 Kac 行列式当成**下游**（横向空间）的事，
+     在 gaps 里写成"标准做法是用 Kac 行列式……**但这是补白，不是来源**"。
+     **第三轮页图证明那是低估**：Prop 2.6 的 (i) 与 (ii) **共用同一段证明**，Kac 行列式同时是
+     自由性的输入。⇒ 本推导已补一条**非 inferred** 的边指 worldsheet.kac-determinant-v2。
+     ⚠ **连带后果（对下游）**：`fgz-1986, Theorem 2.7` 的 rigorous 判定也必须把 Kac 行列式算作
+     上游依赖（Thm 2.7 明写依赖 Prop 2.6 的第一部分）——这条已记在
+     worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 的 gaps 里。
+     ⚠ **编号陷阱**：FGZ refs 10/11 = Kac ICM Helsinki 1978 + Feigin–Fuks 1982，
+     **不是** Kac LNP 94 / Kac–Wakimoto（那是 LZ 的 [9]/[10]）；FGZ 全表 14 条无 Kac–Wakimoto、
+     无 LNP 94、无 Meurman–Rocha-Caridi（§10.1/§10.2）。
+  - |
+    **FGZ 自陈的成立范围比目标卡 (H1) 宽，本图未跟进**：Prop 2.6 的**语句**写号差 (D−1,1) 与
+     D ≥ 2，但证明梗概末尾的括注逐字是 '(in fact for any **r ≥ 2 or s ≥ 1**)'（r = 正号数、
+     s = 负号数），即自由性对更一般的号差成立。目标卡照 Prop 2.6 的语句写 (H1)，
+     **没有**把这条更宽的范围写进断言（照实登记语句，不追正文的括注）。
+     ⇒ 若日后有下游需要非洛伦兹号差的自由性，须新建一卡或为本卡换代，**不得**直接引本卡。
+  - |
+    **FGZ 只说 free，不说秩。** 本卡断言 (b) 已声明不断言秩；但下游若要做特征标计数
      （如 Theorem 2.7(ii) 的 p_{(24)}(1 − p·p/2)），需要的是「自由 + 生成元空间的特征标」，
-     那一步要 Prop 2.6(ii) 的 T 或 Euler 特征标 [2.3]，**不在本卡内**。"
-  - "**号差 (D−1,1) 与 D ≥ 2 这两条前提在本图没有独立卡承载**：本推导把它们写在目标卡的 (H1) 里
+     那一步要 Prop 2.6(ii) 的 T 或 Euler 特征标 [2.3]，**不在本卡内**。
+     ⚠ 证明梗概里的 [2.4] 给了 T 的显式构造（重数 **p_{(D−2)}(k)**，注意与 V(E',p') 的
+     **p_{(D−1)}(k)** 下标不同），本推导不用它。
+  - |
+    **号差 (D−1,1) 与 D ≥ 2 这两条前提在本图没有独立卡承载**：本推导把它们写在目标卡的 (H1) 里
      并靠 conv.metric-mostly-plus + worldsheet.fock-indefinite-form（inferred 边）记账。
-     FGZ 没有说明 D ≥ 2 在证明里用在哪一步（D = 1 时 E 只有一个方向，Fock 模退化），
-     **本图未核实**。"
+     ⚠ 证明梗概里 'This implies isomorphisms for **D > 2**' 这句表明 D 的下界在证明里确有作用
+     （FGZ 的语句写 D ≥ 2，梗概里写 D > 2，**两处不一致，本图未核实哪个是笔误**）。
+     ⇒ 这是一条新发现的转录/排印疑点，建议 auditor 用同一页图复核。
 notes: |
   【本推导在图上的作用】
   它把 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 上那条指向
@@ -103,12 +184,21 @@ notes: |
   ⚠ **FGZ 的 Remark 必须随边保留**："V(E,p) 一般**不是** Verma 模直和"——这既是旧边为什么必须
   标 inferred 的理由，也是本卡不能被 Verma 卡顶替的理由。
 
-  【与超弦版的分工】
+  【与超弦版的分工（2026-09-11 订正：两条链其实同源）】
   FGZ 1986 Proposition 2.6(i)  ↔  LZ 1989 Corollary 2.19(iii)
   （worldsheet.rns-fock-module-free-over-negative-super-virasoro）。
   两篇**互不引用**（LZ p.335 Note added in proof 称收到 FOK 预印本、工作独立），
-  论证工具也不同（LZ 经 Proposition 2.18，用**超** Virasoro 的 Kac 行列式 [22] = Meurman–Rocha
-  与 M_κ(h', 9) 的幺正性；FGZ 未印出证明）。⇒ 两卡互不依赖，各挂各的推导，gaps 不可互相搬运。
+  但 researcher 第三轮的页图证明**论证工具是同一类**：
+    - FGZ：正交分解 + **玻色 Virasoro 的 Kac 行列式**（refs 10/11 = Kac ICM 1978 + Feigin–Fuks 1982）
+      ⇒ 两个因子的不可约分解 ⇒ 自由性；
+    - LZ：Corollary 2.19(iii) 的证明逐字只写 'Equations (24), (25) imply …'，而 (24)(25)
+      印在 p.319 **Proposition 2.18 的证明体内**（不是它的陈述！），由 **超 Virasoro 的
+      Kac 行列式**（[22] = Meurman–Rocha-Caridi）与 [7,9,10] 的幺正性给出。
+  ⇒ **两条链在「自由性 ← Kac 行列式 ← 不可约分解」这一点上结构同源**（§9.10.3 读数 2）。
+  ⚠ 但**本图只有玻色版的 Kac 行列式卡**（worldsheet.kac-determinant-v2，本推导已接线），
+  **超 Virasoro 版没有卡且本轮不建**（Meurman–Rocha-Caridi 的 NS/R 行列式无定理号、
+  (9) 式的 ± 与指标条件待 auditor 页图复核，写进 statement 会立刻踩转录风险）。
+  ⇒ 两卡仍互不依赖，各挂各的推导；**gaps 不可互相搬运**，但"Kac 行列式是共同上游"这句可以。
 
   【不构成循环】
   本推导的依赖全在"Virasoro 代数 + Fock 空间 + 其上的表示"这一层，
