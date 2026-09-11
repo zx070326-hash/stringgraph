@@ -80,6 +80,25 @@ depends_on:
       **相对次数** n = 鬼数 + κ ∈ Z。纯换名式换代，论证与本边一字未变。
       ⚠ **本卡（目标）的 (H3) 也写「次数是鬼数」**，是同款措辞；本卡未在本轮换代
       （不在本次 claim 内），已列入报告交 lead 排期。
+  - id: worldsheet.rns-fock-module-free-over-negative-super-virasoro
+    note: |
+      供给 §3 证明链里的**核心表示论输入**：**Corollary 2.19(iii)**（p.320 逐字
+      'V(p,κ) is a free Vir_κ^--module.'）。它与 **Theorem 3.3.1**（超李代数同调的正合序列，
+      §3 的 (40)）一起，构成 **Proposition 3.3**（伴随分次复形的 H^m = 0, m < 0）那一步的两个输入，
+      而 Proposition 3.3 → Corollary 3.4 = **Theorem 2.4**，正是本推导经上一条边用到的消灭定理。
+      **本边非 inferred**：LZ 在 §3 的证明里显式引用 Corollary 2.19(iii)
+      （抽取记录 lian-zuckerman-1989.md E3 逐条转录了这条证明链）；本边的做法与
+      worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989 的同名边一致。
+      ★ **本边是本推导前提「p ≠ 0」的唯一落点**：Proposition 5.5, p.333 逐字
+      'For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not
+      Vir_κ^- -free' —— 即 p ≠ 0 不是在消灭那一步用的，也不是在正定性那一步用的，
+      而是在**验证自由性**这一步用的。⇒ 这条边把"前提用在哪里"变成图上可查的一条边。
+      ★★【2026-09-11 新增，reviewer-batch24】本推导的 gaps 原先写「Corollary 2.19(iii) …
+      本图没有卡，故这条输入未上图」，那条记账自 small-backlog-10 起**已过期**：
+      该卡已建（worldsheet.rns-fock-module-free-over-negative-super-virasoro，
+      推导 --via-lian-zuckerman-1989），本边据此补上。
+      ⚠ 该卡的 effective 是 physical-argument（其对象卡 worldsheet.rns-super-virasoro-generators
+      的上游是 OPE/模式展开链），与本推导已有的封顶来源相同，**不改变本推导的有效状态**。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -178,14 +197,21 @@ gaps:
      ⚠ **剩余部分**：--via-figueroa-ofarrill-kimura-1989 尚未改指它，FOK 侧的消灭定理
      （(3.19) NS、(4.17) R，Henneaux 表示）也还没有对应的推导卡；两篇的**独立性**因此仍只落在
      notes 里，没落在图的结构上。已列入报告交 lead。"
-  - "**Theorem 2.4 的证明用到两条本图没有卡的表示论输入**：
-     (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——其证明（Proposition 2.18）用
-         **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性
-         （[7, 9, 10]）。本图只有玻色 Virasoro 的 worldsheet.kac-determinant-v2，
-         **没有超 Virasoro 版**，故这条输入未上图。
+  - "**Theorem 2.4 的证明用到两条表示论输入，其中一条已上图、另一条仍无卡**：
+     (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——**〔2026-09-11 更新，reviewer-batch24〕
+         这一条已单独立卡**（worldsheet.rns-fock-module-free-over-negative-super-virasoro，
+         推导 --via-lian-zuckerman-1989），本推导已挂一条**非 inferred** 的实边指向它。
+         **仍未关闭的是它下面那一层**：Corollary 2.19(iii) 的证明逐字只写
+         'Equations **(24), (25)** imply that V(p,κ) is a direct sum of tensor products of free
+         modules over Vir_κ^-.'，而 (24)(25) 印在期刊 p.319、**位于 Proposition 2.18 的证明体内**
+         （不是它的陈述，researcher 第三轮 §9.4 的裁决）；再往上依赖 **[22] = Meurman–Rocha,
+         CMP 107 (1986) 263–294 的超 Virasoro Kac 行列式** 与 [7, 9, 10] 的幺正性。
+         **本图只有玻色 Virasoro 的 worldsheet.kac-determinant-v2，没有超 Virasoro 版；
+         Meurman–Rocha 连 bib 都未登记。** ⇒ 那一层的缺口现在记在新卡的推导 gaps 上，
+         不再由本推导承担。
      (b) **Theorem 3.3.1** 的正合序列 (40)，LZ 自述是经典李代数同调定理的推广
          （'a generalization of a theorem in the theory of classical Lie algebra homology'），
-         本图无对应卡。
+         本图无对应卡。**这一条未变。**
      ⇒ 本推导的 rigorous 是「按已核实的编号定理与其证明梗概」给的，与
      worldsheet.no-ghost-theorem-brst--via-fgz 的记账口径相同。"
   - "**Proposition 1.7(ii)（Q² = 0 iff D = 10）的证明在 LZ 是外包的**：逐字 '(ii) is done in
