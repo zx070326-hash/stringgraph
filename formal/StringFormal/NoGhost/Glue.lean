@@ -49,6 +49,14 @@ makes it work is that `H_phys` is itself spanned by its bigraded pieces
   are physical**.
 * `towerPhys_le_iSup_bigrade`, `towerPhysSubmodule_eq_iSup_inf_towerBigrade` — the physical
   subspace of the tower is spanned by its bigraded slices.
+* `ddfSpans_of_forall_slice` — **the main glue lemma**: `DDFSpansOn` on every slice gives
+  `DDFSpans`.
+* `ddfSpans_of_forall_antidiagonal_slice` — the same with the quantifier restricted to the
+  slices the mass shell allows, `(j : R) + N = 0`; over a `CharZero` ring this is the single
+  antidiagonal `j = -N` (`ddfSpans_of_forall_antidiagonal_slice_int`).
+* `towerLevelLESubmodule D R Nmax`, `ddfSpansOn_towerLevelLE`,
+  `ddfSpansOn_towerLevelLE_of_antidiagonal` — the **level-truncated** form, which is what a
+  partial §B.6 induction (currently `N = 1`, with `N = 2` in progress) actually proves.
 
 ## Gaps
 
@@ -59,6 +67,9 @@ makes it work is that `H_phys` is itself spanned by its bigraded pieces
   instance on `TowerFock D R`.  Directness is never asserted; only the (weaker, and all that
   is needed) statements "the projections reproduce the vector" and "the projections land in
   the pieces" are proved.
+* `towerLevelLESubmodule` is defined as a join of slices, not as a kernel/`Finsupp`-support
+  condition; no comparison with "oscillator degree `≤ Nmax`" as a polynomial-degree bound is
+  made (it would be true but is not needed).
 -/
 
 namespace StringFormal.NoGhost
@@ -217,5 +228,157 @@ theorem towerPhysSubmodule_eq_iSup_inf_towerBigrade :
     (iSup_le fun _ => iSup_le fun _ => inf_le_right)
 
 end PhysBigrade
+
+/-! ### The glue lemma: slice by slice implies everywhere -/
+
+section Glue
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+variable {η a b : Fin D → R} {hη : ∀ μ, η μ * η μ = 1} {Ε : TransverseFrame η b}
+
+/-- **The main glue lemma of blueprint §B.**  If the DDF spanning lemma holds on every
+bigraded slice `(rung j, oscillator level N)`, it holds globally.
+
+The content is `towerPhys_le_iSup_bigrade`: the physical subspace is the join of its
+bigraded slices, so a `⊓`-restricted statement can be assembled across slices.  The
+hypotheses `hη`, `Ε` are only carried along; nothing about `D` is used. -/
+theorem ddfSpans_of_forall_slice
+    (h : ∀ (j : ℤ) (N : ℕ), DDFSpansOn η a b hη Ε (towerBigrade D R j N)) :
+    DDFSpans η a b hη Ε :=
+  le_trans (towerPhys_le_iSup_bigrade η a b)
+    (iSup_le fun j => iSup_le fun N => le_trans (le_of_eq (inf_comm _ _)) (h j N))
+
+/-- **The mass shell restricts the quantifier to one antidiagonal.**
+
+A nonzero physical vector in the slice `(j, N)` forces `α' k² + j + N = a₀`, and at the
+ground-state intercept `a₀ = α' k²` this is `j + N = 0` in `R`
+(`massShell_of_mem_towerBigrade`).  So only the slices satisfying that equation need to be
+checked; all other slices meet `H_phys` in `0`.
+
+`NoZeroDivisors R` is inherited from `massShell_of_mem_towerBigrade`, where it is what turns
+"the scalar `α' k² + j + N - a₀` annihilates `x`" into "the scalar vanishes". -/
+theorem ddfSpans_of_forall_antidiagonal_slice [NoZeroDivisors R]
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (h : ∀ (j : ℤ) (N : ℕ), (j : R) + (N : R) = 0 →
+      DDFSpansOn η a b hη Ε (towerBigrade D R j N)) :
+    DDFSpans η a b hη Ε := by
+  refine ddfSpans_of_forall_slice fun j N => ?_
+  intro x hx
+  obtain ⟨hphys, hbig⟩ := Submodule.mem_inf.1 hx
+  rcases eq_or_ne x 0 with rfl | hne
+  · exact Submodule.zero_mem _
+  · refine h j N ?_ hx
+    have hm := massShell_of_mem_towerBigrade η a b hη hbb hba hbig
+      (Submodule.mem_inf.1 hphys).1 hne
+    have hm' : invTwo R * Fock.zeroModeSq η a + ((j : R) + (N : R))
+        = invTwo R * Fock.zeroModeSq η a + 0 := by
+      rw [add_zero, ← add_assoc]; exact hm
+    exact add_left_cancel hm'
+
+/-- The antidiagonal restriction in its integer form: over a `CharZero` ring the surviving
+slices are exactly `(rung -N, level N)`, i.e. a DDF state built with `N` units of `k_0` sits
+at rung `-N` and oscillator level `N`.  This is the shape the graded induction of §B.6
+actually produces. -/
+theorem ddfSpans_of_forall_antidiagonal_slice_int [NoZeroDivisors R] [CharZero R]
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (h : ∀ N : ℕ, DDFSpansOn η a b hη Ε (towerBigrade D R (-(N : ℤ)) N)) :
+    DDFSpans η a b hη Ε := by
+  refine ddfSpans_of_forall_antidiagonal_slice hbb hba fun j N hjn => ?_
+  have h0 : j + (N : ℤ) = 0 := by exact_mod_cast hjn
+  have hj : j = -(N : ℤ) := by omega
+  subst hj
+  exact h N
+
+end Glue
+
+/-! ### The level-truncated statement
+
+For the partial results of blueprint §B.6 (which at the time of writing reach `N = 1`, with
+`N = 2` in progress) the honest global statement is not `DDFSpans` but `DDFSpansOn` on the
+subspace spanned by the slices of oscillator level at most `Nmax`. -/
+
+section Truncation
+
+variable (D : ℕ) (R : Type*) [CommRing R]
+
+/-- **The level-`≤ Nmax` part of the tower**: the join of the bigraded slices of oscillator
+level at most `Nmax` (all rungs).  Equivalently, the vectors all of whose rung components are
+polynomials of oscillator level `≤ Nmax`. -/
+noncomputable def towerLevelLESubmodule (Nmax : ℕ) : Submodule R (TowerFock D R) :=
+  ⨆ (j : ℤ) (N : ℕ) (_ : N ≤ Nmax), towerBigrade D R j N
+
+variable {D R}
+
+theorem towerBigrade_le_towerLevelLESubmodule {Nmax : ℕ} (j : ℤ) {N : ℕ} (hN : N ≤ Nmax) :
+    towerBigrade D R j N ≤ towerLevelLESubmodule D R Nmax :=
+  le_iSup_of_le j (le_iSup_of_le N (le_iSup_of_le hN le_rfl))
+
+/-- Above the truncation the bigraded projections vanish. -/
+theorem towerBigradeProj_eq_zero_of_mem_towerLevelLESubmodule {Nmax : ℕ} {x : TowerFock D R}
+    (hx : x ∈ towerLevelLESubmodule D R Nmax) (j : ℤ) {N : ℕ} (hN : Nmax < N) :
+    towerBigradeProj D R j N x = 0 := by
+  have hle : towerLevelLESubmodule D R Nmax ≤ LinearMap.ker (towerBigradeProj D R j N) :=
+    iSup_le fun _ => iSup_le fun N' => iSup_le fun hN' => fun y hy =>
+      LinearMap.mem_ker.2 (towerBigradeProj_of_mem_ne hy (Or.inr (by omega)))
+  exact LinearMap.mem_ker.1 (hle hx)
+
+variable [Algebra ℚ R]
+
+/-- The truncated analogue of `towerPhys_le_iSup_bigrade`. -/
+theorem towerPhys_inf_towerLevelLE_le_iSup_bigrade (η a b : Fin D → R) {a₀ : R} (Nmax : ℕ) :
+    towerPhysSubmodule η a b a₀ ⊓ towerLevelLESubmodule D R Nmax
+      ≤ ⨆ (j : ℤ) (N : ℕ) (_ : N ≤ Nmax),
+          towerBigrade D R j N ⊓ towerPhysSubmodule η a b a₀ := by
+  classical
+  intro x hx
+  obtain ⟨hphys, hle⟩ := Submodule.mem_inf.1 hx
+  rw [← sum_towerBigradeProj x]
+  refine Submodule.sum_mem _ fun j _ => Submodule.sum_mem _ fun N _ => ?_
+  rcases le_or_gt N Nmax with hN | hN
+  · exact Submodule.mem_iSup_of_mem j (Submodule.mem_iSup_of_mem N
+      (Submodule.mem_iSup_of_mem hN (Submodule.mem_inf.2
+        ⟨towerBigradeProj_mem j N x,
+          towerBigradeProj_mem_towerPhysSubmodule η a b hphys j N⟩)))
+  · rw [towerBigradeProj_eq_zero_of_mem_towerLevelLESubmodule hle j hN]
+    exact Submodule.zero_mem _
+
+variable {η a b : Fin D → R} {hη : ∀ μ, η μ * η μ = 1} {Ε : TransverseFrame η b}
+
+/-- **The level-truncated glue lemma.**  Spanning on every slice of oscillator level `≤ Nmax`
+gives spanning on the whole level-`≤ Nmax` part of the tower.  This is the statable form of a
+partial §B.6 induction: with `Nmax = 1` its hypothesis is discharged by
+`ddfSpans_bigrade_neg_one_one` together with the vanishing of the off-antidiagonal slices
+(see `ddfSpansOn_towerLevelLE_of_antidiagonal`). -/
+theorem ddfSpansOn_towerLevelLE (Nmax : ℕ)
+    (h : ∀ (j : ℤ) (N : ℕ), N ≤ Nmax → DDFSpansOn η a b hη Ε (towerBigrade D R j N)) :
+    DDFSpansOn η a b hη Ε (towerLevelLESubmodule D R Nmax) :=
+  le_trans (towerPhys_inf_towerLevelLE_le_iSup_bigrade η a b Nmax)
+    (iSup_le fun j => iSup_le fun N => iSup_le fun hN =>
+      le_trans (le_of_eq (inf_comm _ _)) (h j N hN))
+
+/-- The level-truncated glue lemma with the quantifier cut down to the mass-shell
+antidiagonal: it suffices to know the spanning lemma on the `Nmax + 1` slices
+`(rung -N, level N)`, `N ≤ Nmax`. -/
+theorem ddfSpansOn_towerLevelLE_of_antidiagonal [NoZeroDivisors R] [CharZero R] (Nmax : ℕ)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (h : ∀ N : ℕ, N ≤ Nmax → DDFSpansOn η a b hη Ε (towerBigrade D R (-(N : ℤ)) N)) :
+    DDFSpansOn η a b hη Ε (towerLevelLESubmodule D R Nmax) := by
+  refine ddfSpansOn_towerLevelLE Nmax fun j N hN => ?_
+  intro x hx
+  obtain ⟨hphys, hbig⟩ := Submodule.mem_inf.1 hx
+  rcases eq_or_ne x 0 with rfl | hne
+  · exact Submodule.zero_mem _
+  · have hm := massShell_of_mem_towerBigrade η a b hη hbb hba hbig
+      (Submodule.mem_inf.1 hphys).1 hne
+    have hm' : invTwo R * Fock.zeroModeSq η a + ((j : R) + (N : R))
+        = invTwo R * Fock.zeroModeSq η a + 0 := by
+      rw [add_zero, ← add_assoc]; exact hm
+    have hjn : (j : R) + (N : R) = 0 := add_left_cancel hm'
+    have h0 : j + (N : ℤ) = 0 := by exact_mod_cast hjn
+    have hj : j = -(N : ℤ) := by omega
+    subst hj
+    exact h N hN hx
+
+end Truncation
 
 end StringFormal.NoGhost
