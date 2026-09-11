@@ -1855,6 +1855,38 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     3. 质壳把双分次压成**单条反对角线** `j = −N`（`CharZero` 下），所以 `ddf-spans` 的量词
        实际只有一个自然数参数 `N`，不是二维的。
   - **公理登记**：26 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+- [x] `general-n`（蓝图 §B′ 的 PR0/PR1/PR2）：**把 `ddf-spans` 压成一条逐 `N` 的秩不等式** ——
+  `StringFormal/NoGhost/{NullDescend,SliceRank,SliceDim}.lean`。分支
+  `agent/formalizer/general-n-pr012`。**`D = 26` 在三个文件里一次都不出现。**
+  - **PR0 `NullDescend.lean`**：`ddfOp_mem_towerNullSubmodule`——`A^ε_n` 把零态送到零态
+    （`ddfOp_mem_towerPhysSubmodule` + `(A^ε_n)† = A^ε_{−n}`）。**对任意截距 `a₀`**（蓝图只写
+    `a₀ = α'k²`，加强不花钱）。它是 (B-26) 构造式路线 (iii) 的乘法结构：把「片上造
+    `p_{D−1}(N) − p_{D−2}(N)` 个线性无关零态」降成「每个 `m` 造 `p(m)` 个纵向种子」。
+  - **PR1 `SliceRank.lean`**：`ddfSpan_inf_towerNullSubmodule_eq_bot`（DDF 扇区 ∩ 零态 = 0，
+    全序域，**唯一用到序的地方**）、抽象判据 `eq_sup_of_finrank_le`、**`def B26`**
+    （`dim(H_phys⊓V_N) ≤ dim(ddfSpan⊓V_N) + dim(H_null⊓V_N)`，签名里只有
+    `[Field K] [Algebra ℚ K]`，序与 `CharZero` 都不在）、`ddfSpansOn_bigrade_of_b26`、
+    **`ddfSpans_of_forall_b26`**（接 `Glue.ddfSpans_of_forall_antidiagonal_slice_int`）。
+    与 `Assembly.no_ghost_of_spans` 合起来：**无鬼定理 ⟸ 一族秩不等式 `B26 N`**。
+  - **PR2 `SliceDim.lean`**：**`frameMonomial_mem_towerBigrade`** 关掉 `DDFGram.lean` 自报的
+    「rung 与 level 联动未做」（不算 `ddfOp` 的 level，而是「物理 + 双分次分量仍物理 + 质壳」）；
+    `ddfSpan_inf_towerBigrade_eq_span`；**`ddfLevelFintype`**（level 固定的占据函数有限，编码到
+    `ι × Fin N → Fin (N+1)`）；`finrank_ddfSpan_inf_towerBigrade = Fintype.card {d // N(d) = N}`
+    （即 `p_{D−2}(N)`，**永不求值**，与 §B′.8 一致）。另有片间正交
+    `towerPairing_towerBigradeProj_left/_right`（新原子 `Fock.pairing_levelComponent_right`）、
+    齐次性 `towerBigradeProj_mem_ddfSpan` / `_mem_towerNullSubmodule`，据此给出
+    `b26_of_ddfSpansOn_bigrade` 与 **`ddfSpansOn_bigrade_iff_b26`**。
+  - **对蓝图的订正（已追加到 `BLUEPRINT-noghost.md` 的「§B′ 订正」节）**：
+    1. §B′.4 把 `ddfSpansOn_bigrade_iff_b26` 整条放进 PR1，但「⟹」半边**不免费**：它要把
+       分解 `x = d + z` 投回片上，因而需要 `ddfSpan` 与 `towerNullSubmodule` 对双分次齐次，
+       前者正是 PR2 的 `frameMonomial_mem_towerBigrade`。故实际依赖是 **PR1 → PR2**，
+       与 §B′.7 画的方向相反；`iff` 落在 `SliceDim.lean`。
+    2. §B′.2 说「`≥` 方向恒成立」是对的，但它**不是**格论平凡：`(A ⊔ B) ⊓ V ≥ (A⊓V) ⊔ (B⊓V)`
+       在一般模格里是严格不等，这里靠的是齐次性而不是格论。
+  - **数学判断（建议写进图卡 notes）**：`B26` 与 `DDFSpansOn` 在单片上**等价**（不是弱化），
+    所以图卡 `worldsheet.ddf-spanning-hypothesis` 的 gap (B-26) 可以改写成这条 Lean 里的
+    秩不等式而不丢信息。
+  - **公理登记**：22 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
