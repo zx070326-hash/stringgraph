@@ -64,5 +64,19 @@ notes: |
   但抽取记录明确说「这不是证明」。
   严格化路线：把零点能定义为算子的 ζ 正规化行列式，或用 Virasoro 中心荷的
   代数计算（c^⊥ = D-2）替代模式求和；届时可加一条 kind: proof 的新推导。
+
+  **2026-09-11（curator zeta-wire）：Lean 接线情况。**
+  正文括注的两条等价处方——「指数截断」与「ζ 函数解析延拓 Σ n^{-s}|_{s=-1}」——
+  现在各自都有了纯数学的 Lean 机检落点：前者是
+  worldsheet.regulated-sum-laurent-expansion（及其窄化
+  worldsheet.regulated-sum-limit-minus-one-twelfth，formalized），
+  后者是新卡 math.riemann-zeta-at-minus-one（formalized，
+  `StringFormal.Bridge.riemannZeta_neg_one`）。
+  但本节点唯一未证的那一步——「丢弃发散项后剩下的有限部分就是物理零点能」——
+  按构造没有、也不可能有 Lean 对应（这是物理诠释，不是数学命题）。
+  本节点现有的推导 --via-cutoff-subtraction 用指数截断路线论证，未在其 summary/sources
+  中引用 ζ(-1) 的数值本身，故**不新增**指向 math.riemann-zeta-at-minus-one 的 depends_on
+  边——加边要求推导实际引用该依赖；此处只是本节点正文括注提到「等价地」，不是该推导
+  论证链条的一部分。status 维持 physical-argument，不变。
 author: curator-polchinski-ch1
 created: "2026-09-10"
