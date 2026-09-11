@@ -43,5 +43,16 @@ notes: |
   【规范不变组合的写法】本卡按原书 (13.3.14) 写 B_{ab} + 2πα'F_{ab}；ch8 弱卡的 statement 写
   𝓕 = 2πα'F − B（Schrans 写法），其 notes 已记原书 §8.7 用的是 F + B/(2πα')。三者只差整体因子与
   B 的符号约定；本卡不断言 B 的符号约定与 Vol.1 一致。
+  【(13.3.15) 的势 ↔ 十维 SYM 降维 (B.6.17) ↔ Vol.1 (8.7.11)——原书背书的 branes ↔ gauge 边，本图暂未建卡】
+  App. B §B.6 (B.6.17)（p. 460，L1，抽取记录 polchinski-1998-v2-appB.md#E31）给出十维 SYM (B.6.13)
+  降到 d = 4 后的势 **V = −(1/4g²) Tr([A_m, A_n]²)**，「is nonnegative and vanishes only if [A_m, A_n] = 0
+  for all m, n」，并逐字：「**We have seen this potential before, in eq. (8.7.11) for the D-brane moduli.
+  This is no accident, as the T-duality that produces the D-brane has the effect of dimensionally reducing
+  the open string Yang–Mills action.**」这正是本卡 (13.3.15) 的 O([X^m, X^n]²) 项（A_m → X^m/2πα'）。
+  ⚠ 本图未建十维 SYM 卡（(B.6.13)(B.6.14) 原书**照录无推导**，抽取记录 §3.1 第 3 条），
+  且 Vol.1 (8.7.11) 本项目只有二手源（polchinski-1998-v1#E153 末）；故这条边暂记于此，建议下一批建
+  `branes.coincident-brane-moduli-potential-is-reduced-sym`（sources：ch.13 (13.3.15) + App. B (B.6.17)，
+  (8.7.11) 标未核），届时 (13.5.13) D0 量子力学（ch.13 E27 引 (B.6.13)）也可一并接线。
+  红线：App. B 无 "triality"、无 SO(8) 意义的 56、无 ψ_0 零模——建卡时不得把这些归给 App. B。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"
