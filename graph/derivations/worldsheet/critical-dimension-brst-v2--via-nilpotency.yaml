@@ -14,7 +14,7 @@ depends_on:
       （该边 2026-09-10 已补，故换代不新增未记账的一步，也不改变有效状态：
       bc-ghost-central-charge 的有效状态 physical-argument 与本推导自身相同）。）
   - id: worldsheet.virasoro-algebra-v2
-  - id: worldsheet.bc-ghost-central-charge
+  - id: worldsheet.bc-ghost-central-charge-lambda-two
     inferred: true
     note: |
       本推导的目标陈述把鬼场中心荷**写死为 c^g = -26**（「{Q_B,Q_B} = Σ ((c^m - 26)/12)(m^3-m) c_{-m}c_m」
@@ -30,6 +30,18 @@ depends_on:
       与本推导自身的 physical-argument 相同。
       **本条边在 2026-09-11 的 v2 换代中保留**：v2 只删掉目标陈述的末句（c^m = D 那一步），
       c^g = −26 仍写在陈述正文里。
+
+      **【2026-09-12 改指窄卡，curator 落实 auditor 草案 §B / ROADMAP R3】**
+      本边由 worldsheet.bc-ghost-central-charge 改指 worldsheet.bc-ghost-central-charge-lambda-two
+      （λ = 2 的模式代数结论 c^g = −26，来源 fgz-1986 Proposition 2.1(i)(ii)，rigorous）。
+      **理由**：本推导只用到 λ = 2 处的值 −26，不需要一般 λ 公式。
+      **`inferred: true` 维持不变**（草案 §B 明写）：标 inferred 的理由与窄卡无关，
+      它是「Polchinski §4.3 不在原地论证 c^g，本图未核实 §4.3 是否显式回指」，这一条没有变化。
+      ⚠ 上面几段字面写 `worldsheet.bc-ghost-central-charge` 的记账文字**不动**
+      （按 graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」的精神：改边不改正文字面）。
+      ⚠ 本推导自身仍是 physical-argument（教科书式形式模式计算）；本次改边**不**抬升它。
+      目标卡 worldsheet.critical-dimension-brst-v2 的另一条推导 --via-mode-computation
+      （2026-09-12 新建）走的是同一个计算但按「初等可复核」条款记账，两条并存。
 sources:
   - ref: polchinski-1998-v1
     loc: "§4.3：BRST 流 j_B = (4.3.3)、Q_B = (4.3.5)、{Q_B, b_m} = L^m_m + L^g_m = (4.3.6)、Q_B 的模式展开 (4.3.7)（末项 a^B(c_0 + c̃_0)，紧接一句 a^B = a^g = −1，依据 (4.3.8)）；**结论式 (4.3.9)**「{Q_B, Q_B} = 0 only if c^m = 26」；(4.3.10) 是 j_B j_B 的 OPE，其单极点给「when c^m = 26」的一半；最短推导用 Jacobi 恒等式，是**习题 4.3**（式号与内容 2026-09-11 经原书核实，抽取记录 polchinski-1998-v1.md §12.3）"

@@ -73,7 +73,7 @@ depends_on:
       **该定位是本次原书核实新落实的**（Q4/E34 由「无锚点」关闭为 (2.4.22)）：v2 的四路线推导
       此前写的是「§2.4 末至 §2.5 初，约 (2.4.25)–(2.5.1)，式号与页码均未核实」。
       有效状态不受影响：该节点有 --via-lean（formalized）。
-  - id: worldsheet.bc-ghost-central-charge
+  - id: worldsheet.bc-ghost-central-charge-lambda-two
     note: |
       供给 c^g = −26。它是 (III)(IV) 的另一个公共输入：(III) 的
       {Q_B,Q_B} = Σ ((c^m − 26)/12)(m³−m) c_{−m}c_m 里那个 26 就是 −c^g，
@@ -83,6 +83,18 @@ depends_on:
       式号经 schrans-2020 目录逐字核实）；另外原书在 (3.4.23) 处**显式引用 (2.5.12)**，
       即 (IV) 用到 c^g = −26 这条边在原书里是明写的（抽取记录 §12.2）。
       有效状态不受影响：该节点的有效状态是 physical-argument，与本推导自身相同。
+
+      **【2026-09-12 改指窄卡，curator 落实 auditor 草案 §B / ROADMAP R3】**
+      本边由 worldsheet.bc-ghost-central-charge（一般 λ 的公式 c = −3(2λ−1)²+1，
+      唯一推导走 OPE，physical-argument）改指 worldsheet.bc-ghost-central-charge-lambda-two
+      （只断言 λ = 2 的模式代数结论 c^g = −26，来源 fgz-1986 Proposition 2.1(i)(ii)，rigorous）。
+      **理由**：(III)(IV) 两处用到的只是 λ = 2 处的值 −26，不需要一般 λ 公式；挂窄卡使这条
+      公共输入不再被 OPE 层的 physical-argument 封顶。**inferred 维持原样（不标）**：
+      改指后本边的依据位置是 fgz-1986 Prop 2.1(i)，已加入本推导的 sources。
+      ⚠ 本边上方与 sources 里字面写 `worldsheet.bc-ghost-central-charge` 的记账文字**不动**
+      （按 graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」的精神：改边不改正文字面）。
+      ⚠ 本改动**不**改变本推导自身的 physical-argument（理由见 gaps 第 1 条的元断言），
+      也**不**改变 (IV) 的瓶颈（FP 手续、Weyl 反常层仍在链上）。
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.3, eq. (1.3.40), p.23（光锥路线的结论 `A = −1 , D = 26`，式号与内容已核实，抽取记录 §12.5 / E18 / Q2）"
@@ -115,7 +127,20 @@ sources:
       本图另有该命题的 Lean 证明（worldsheet.free-boson-central-charge-d--via-lean）。
   - ref: polchinski-1998-v1
     loc: "§2.5, eq. (2.5.12), p.51（bc 系统中心荷公式，λ = 2 给 c^g = −26；式号经 schrans-2020 目录逐字核实为 `2.31 p 51: Eq. (2.5.12) The Ghost Central Charge`，并在原书 (3.4.23) 处被显式引用）"
-    note: depends_on 中 worldsheet.bc-ghost-central-charge 那条边不标 inferred 的依据位置。
+    note: |
+      depends_on 中 worldsheet.bc-ghost-central-charge 那条边不标 inferred 的依据位置。
+      **【2026-09-12】该边已改指窄卡 worldsheet.bc-ghost-central-charge-lambda-two**（草案 §B / R3）。
+      本条 loc 随之退为**旁证**：它给的是一般 λ 的 OPE 公式，而窄卡的论证由 fgz-1986
+      Proposition 2.1(i)(ii) 承载（见下一条）。本条仍保留，因为「原书在 (3.4.23) 处显式引用
+      (2.5.12)」是 (IV) 在原书里用到 c^g = −26 这一记账事实的锚点，与窄卡无关。
+  - ref: fgz-1986
+    loc: "Proposition 2.1, p.8444 右栏：(i) `ρ(c) = −26 Id_{Λ^∞_*}`；(ii) `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`"
+    note: |
+      **【2026-09-12 新增】**depends_on 中 worldsheet.bc-ghost-central-charge-lambda-two
+      那条边**改指后**不标 inferred 的依据位置。L1，逐字见
+      literature/extractions/brst-cohomology-sources.md §1.2。
+      ⚠ 本条**只**支持 c^g = −26 这一个输入：FGZ 不推导 D = 26，也不推导 c^m = 26
+      （§2.1 正文逐字「from this point on we will assume that π(c) = 26 Id_V」，即假设）。
   - ref: polchinski-1998-v1
     loc: "§3.4 \"Discussion\", eq. **(3.4.23)**, p.94（Weyl 反常路线：`c = c^X + c^g = D − 26`，随后「The theory is Weyl-invariant only for D = 26」；式号、页码与内容均已核实）；一般物质 CFT 的形式见 p.95 与 p.96 的两处散文 iff 与 eq. (3.4.15)"
     note: |
