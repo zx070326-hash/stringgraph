@@ -80,22 +80,6 @@ depends_on:
       该节点是 worldsheet.ddf-operators-adjoint 第 (2) 条的拆卡产物，旧卡未换代。
       **有效状态不因此变化**：新节点 depends_on 旧卡与 worldsheet.ddf-transverse-oscillator-algebra，
       其 effective 同样是 physical-argument，与本推导既有的上限同级。
-  - id: worldsheet.ddf-contour-equals-mode-sum
-    inferred: false
-    note: |
-      【2026-09-11（六）新增，curator】**本推导走的是文献的围道路线，而它依赖的 DDF 定义卡
-      worldsheet.ddf-operators-v6 是模态和版本**；这条边补上两者之间的字典。
-      逐字锚点：goddard-2008 §5 'Spectrum Generating Algebra', p.11, eq. (5.1)
-      `A^μ_n = (1/2πi) ∮ P^μ(z) V(nk, z) dz`（**L1 逐字**，
-      literature/extractions/gsw-1987-v1.md §2 E1；注意本推导 sources 里 goddard-2008 的 loc
-      指的是该文的**无鬼定理**一节，不是 §5，故此处另给锚点）。
-      本推导 summary 第 (1) 条与 notes 逐字自称「本推导走解析围道路线」，
-      故这条依赖不是新引入的假设，而是把一直隐含的一步显式化。
-      ⚠ **goddard-thorn-1972 与 gsw-1987-v1 的围道写法式号至今 L0**（正文未获取），
-      故「GT 本人逐字用围道」这一点本项目只有间接证据（Goddard 2008 的综述转述）；
-      本条的 inferred: false 依据的是 goddard-2008 (5.1) 这一处 L1 锚点。
-      **有效状态不因此再降**：新依赖的 effective 是 physical-argument，
-      与本推导已有的两条 DDF 对易关系同级，目标的 effective 仍是 physical-argument。
   - id: worldsheet.momentum-tower-fock-space
     note: |
       【2026-09-11（三）新增，立卡后接线】目标陈述 (1b) 断言的空间
@@ -233,8 +217,48 @@ gaps:
   - "【2026-09-11 新增：DDF 拆卡后的诚实记账】worldsheet.ddf-operators-v4（definition, rigorous）被拆为 worldsheet.ddf-operators-v5（definition, rigorous）+ 三条命题。本推导第 (1) 条实际用到其中两条：**[L_m, A^i_n] = 0**（worldsheet.ddf-commute-with-virasoro）与 **[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}**（worldsheet.ddf-transverse-oscillator-algebra）。两条的论证在文献里都是 OPE + 围道形变，来源（GSW §2.3.3 式号 L0、GT 1972 正文未获取）无一核实到式号，故各自的推导是 **physical-argument**。于是本推导虽仍标 rigorous，目标 worldsheet.no-ghost-theorem-v4 的 **effective 状态降为 physical-argument**。拆卡前这两条命题写在一张 rigorous 的定义卡的陈述文本里，因而被当作「定义的一部分」传播为 rigorous——那是记账错误，不是论证更强。本条把这一点显式登记，以免日后被误读为「无鬼定理曾经是 rigorous 后来退步了」。"
   - "【2026-09-11 新增】worldsheet.no-ghost-theorem-v4 的 **statement 文本**内两处引用 `worldsheet.ddf-operators-v4`（记号出处：F(p) 的零模约定、A^i_{-n} 的定义）。按根 CLAUDE.md 原则 1，已提交节点的 statement 文本不可变，故那两处**不改**；换代只在本推导的 depends_on 上做。读者应把那两处理解为指向 worldsheet.ddf-operators-v5（v4 的 statement 前半段与 v5 逐字相同，差别只是 v4 末段多两句代数断言，而那两句现由本推导显式依赖的两条命题承载）。里程碑 graph/milestones/no-ghost-theorem.yaml 的 canonical_text 与回译记录中提到 ddf-operators-v4 的地方同样未改（里程碑归 auditor）。"
   - "【2026-09-11 新增；2026-09-11（二）更新；2026-09-11（三）再更新】(A^i_n)† = A^i_{−n} 是第 (1b) 步「H^⊥(k) 的 Gram 矩阵是 24 个横向振子 Fock 空间的正定 Gram 矩阵」的必需输入（横向振子代数只给对易子，正定性还要伴随关系与真空归一化）。原文写的「**在本图中没有节点**」已过时：该命题现由 **worldsheet.ddf-operators-adjoint**（推导 --via-vertex-operator-adjoint，physical-argument）承载，并已加入本推导的 depends_on。**但缺口只是从「无节点」变成「有节点、论证仍弱」**：文献侧只有一句无证明的断言（GSW §2.3.3，式号 L0）。【（三）更新】其中的顶点算子伴随 V^{(n)}_J† = V^{(−n)}_{−J} 也**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，physical-argument），故「在本图中仍无承载节点」一句同样过时；仍未关闭的是它下面三条更基础的缺口——「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」无节点、「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」无节点、指数算符两半的同点重排序无节点（现址：worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条）。Lean 侧 V(b)_J† = V(−b)_{−J} 同样未做，塔上的双线性型也未做（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核），且当前只有 R-双线性型、无 sesquilinear 结构，故连实极化以外的情形都不覆盖。【（四）更新，2026-09-11】(1b) 里的另一半——「有了伴随关系与横向振子代数之后，Gram 矩阵**是什么**」——现由 **worldsheet.transverse-ddf-fock-gram-matrix**（推导 --via-oscillator-recursion，status rigorous，条件命题，reviewer 复核待补）承载，已加入本推导的 depends_on。这一半此前是 worldsheet.ddf-operators-adjoint 陈述的第 (2) 条，混在一张 physical-argument 的卡里，看不出「递推本身是严格的、只有前件不严格」。**本推导的 effective 不变**（仍被两条 DDF 对易关系与伴随关系封顶为 physical-argument）；改动的只是可审计性。【（五）更新，2026-09-12】本条的绝大部分已消解：(i) 伴随关系现由 **worldsheet.ddf-operators-adjoint-v2** 承载且为 **formalized**（`Fock.towerPairing_ddfOp_left`，VertexAdjoint.lean，fb006f5），本推导的这条依赖已改指 v2；(ii) 其上游 worldsheet.vertex-operator-adjoint 同为 formalized（`Fock.towerPairing_towerVertex_left`）；(iii) 上面列的三条更基础缺口中，**「指数算符两半的同点重排序」这一条不是被补上而是被证明为虚构的**——伴随把正规序的 E₋(b)E₊(b) 送成 E₊(b)†E₋(b)† = E₋(−b)E₊(−b)，本身即正规序，无换序、无 c-数因子、**不需要 k_0² = 0**；另两条（指数权为 0、径向共轭 z ↦ 1/z̄）**仍是** physical-argument，但它们只出现在旧推导 --via-radial-conjugation 的路线上，**不在** formalized 路线上，故不再压低本推导。(iv)「塔上的双线性型也未做」已过时：`Fock.towerPairing` 已在 TowerPairing.lean 中（momentum-tower-fock-space 现为 formalized）。**仍未消解的只有「R-双线性、无 sesquilinear 结构」**：Lean 侧的「†」是双线性型的转置，而无鬼定理断言的是 Hermitian 形式的半正定性；这条现址是 worldsheet.ddf-operators-adjoint-v2--via-lean 的 gaps 第 2 条。"
-  - "【2026-09-11（六）新增，curator】**本推导的 A^i_n 是文献的围道积分，而本推导依赖的定义卡 worldsheet.ddf-operators-v6 是模态和**——这两件事是同一个算子，现由新依赖 worldsheet.ddf-contour-equals-mode-sum（physical-argument）承载，其推导 --via-laurent-coefficient-extraction 的 gaps 逐条写明缺口：(a) 形式级数乘积按幂次重排在算子层面未论证（最近的近亲 worldsheet.ope-pole-mode-commutator-dictionary 自身 effective = open，因对象不同未连边）；(b) 围道积分的语义未固定（本项目读作形式留数 [z^{-1}]，而本推导第 (1) 步文献侧论证用的是**形变**围道，两种读法在别处不等价）；(c) 正规序 :·: 与 Lean 的 E-E+ 拆分未对接。**此前这一步是隐含的**：DDF 定义卡在 2026-09-11 由 v5（围道）就地换代到 v6（模态和）时，本推导的 depends_on 跟着换了，但没有人为这一步立节点。现予补上。⚠ 本推导的 effective **不变**（仍是 physical-argument，与两条 DDF 对易关系同级）；改变的是可审计性：ms.no-ghost-theorem 的回译审计从此有一个明确的地方读这条缺口。"
+  - "【2026-09-11（六）新增，curator】**本推导的 A^i_n 是文献的围道积分，而本推导依赖的定义卡 worldsheet.ddf-operators-v6 是模态和**——这两件事是同一个算子，现由新依赖 worldsheet.ddf-contour-equals-mode-sum（physical-argument）承载，其推导 --via-laurent-coefficient-extraction 的 gaps 逐条写明缺口：(a) 形式级数乘积按幂次重排在算子层面未论证（最近的近亲 worldsheet.ope-pole-mode-commutator-dictionary 自身 effective = open，因对象不同未连边）；(b) 围道积分的语义未固定（本项目读作形式留数 [z^{-1}]，而本推导第 (1) 步文献侧论证用的是**形变**围道，两种读法在别处不等价）；(c) 正规序 :·: 与 Lean 的 E-E+ 拆分未对接。**此前这一步是隐含的**：DDF 定义卡在 2026-09-11 由 v5（围道）就地换代到 v6（模态和）时，本推导的 depends_on 跟着换了，但没有人为这一步立节点。现予补上。⚠ 本推导的 effective **不变**（仍是 physical-argument，与两条 DDF 对易关系同级）；改变的是可审计性：ms.no-ghost-theorem 的回译审计从此有一个明确的地方读这条缺口。【（七）更新，auditor 2026-09-11】该依赖边已撤：它不是本推导的证明步骤（summary 各步只用模态和算子的代数性质，见 notes【（七）】），而是「本图证的是否文献那条定理」的溯源记账，现由 ms.no-ghost-theorem 第七轮 R7-2 承担。缺口 (a)(b)(c) 本身**未关闭**，仍在 worldsheet.ddf-contour-equals-mode-sum 的推导 gaps 里；本推导的 effective 由 physical-argument 升为 rigorous，恰好等于自报 status，不是新证据。"
 notes: |
+  【2026-09-11（七）：撤 worldsheet.ddf-contour-equals-mode-sum 依赖边——它是溯源记账，不是证明步骤
+  （auditor 裁决，ms.no-ghost-theorem 第七轮 R7-1；分支 agent/auditor/noghost-contour；
+  **status、sources、summary 与论证步骤一字未动**，只删一条 depends_on、gaps 末条加【（七）更新】、加本段）】
+  裁定依据——逐步核对 summary 第 (1)(2) 条实际引用的 A 的性质，以及各自由哪张卡承载：
+    · (1)「A^i_n 与所有 L_m 对易」← worldsheet.ddf-commute-with-virasoro（formalized，对象是 v6 模态和）；
+    · (1)「[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}」← worldsheet.ddf-transverse-oscillator-algebra-v2
+      （rigorous，其推导 depends_on 指 v6 模态和）；
+    · (1)「把动量移到 p + n k_0」「能级 N = Σ n_j」← worldsheet.ddf-operators-v6 的 V^{(n)}_K 层移与能级记账
+      + worldsheet.momentum-tower-fock-space（均 formalized）；
+    · (1)「Gram 矩阵正定」← worldsheet.ddf-operators-adjoint-v2（formalized）+
+      worldsheet.transverse-ddf-fock-gram-matrix（rigorous），二者都以模态和为对象；
+    · (1)「塔上任意物理态 = DDF 态 + 零模态」（张成步）：由 sources（GT 1972 / GSW §2.3.3 / Goddard 2008）承载，
+      未拆成图内节点。文献的张成论证是对满足上述代数性质的算子族做的 Fock 空间计数
+      （另用 K_n = k_0·α_n 与 A^ε_{-n} 的领头项 α^ε_{-n}），**不引用 A 的围道表达式本身**；
+      这段论证对模态和算子与对围道算子逐字相同。
+    · (2) 走纵向算子构造（无图节点）与 formalized 见证 worldsheet.negative-norm-physical-state-above-26；
+      两者都不经过横向 DDF 的围道/模态和字典。
+  结论：本推导没有一步以「围道积分 = 模态和」为前提。一条「定义 A = 定义 B」的等式在证明里唯一能起的作用
+  是把**在 A 侧证得**的性质搬到 B 侧；而本图不存在任何「只在围道侧证得、本推导又用到」的性质
+  （图内所有 DDF 性质节点均以 v6 模态和为对象；--via-conformal-weight 的围道推导不是任何一条的 best_derivation）。
+  故这条边不承重。
+  它承载的真问题是：**本图证的是不是文献（canonical_source GT 1972，围道写法）那条定理**——这是
+  ms.no-ghost-theorem 的 canonical_source 忠实性问题，归回译审计，现记在该里程碑 diff_notes【第七轮记账】R7-2。
+  这与 worldsheet.ddf-commute-with-virasoro--via-lean 的 gaps 第 1 条自我记账一致（「代价必须由下游承担：
+  凡要把本结论回译成文献陈述的下游（首当其冲 ms.no-ghost-theorem 的回译审计）必须显式引用
+  worldsheet.ddf-contour-equals-mode-sum 及其 gaps」）：承担处是里程碑的审计记录，不是推导的 depends_on。
+  溯源锚点保留于此：文献侧 A^μ_n = (1/2πi)∮ P^μ(z) V(nk, z) dz 见 goddard-2008 §5, p.11, eq. (5.1)
+  （L1 逐字，literature/extractions/gsw-1987-v1.md §2 E1；本推导 sources 里 goddard-2008 的 loc 指无鬼定理一节，
+  不是 §5）；GSW §2.3.3 与 GT 1972 的围道写法式号 L0（正文未获取）。围道 ⟹ 模态和的字典及其三条缺口
+  （形式级数乘积按幂次重排未论证；围道读作形式留数；正规序展开与 E₋E₊ 拆分未对接）见
+  worldsheet.ddf-contour-equals-mode-sum 与其推导 --via-laurent-coefficient-extraction 的 gaps，**均未关闭**。
+  **有效状态后果**：`stringgraph why worldsheet.no-ghost-theorem-v4` 撤边前 limited by 1 dep = 本条（physical-argument）；
+  撤边后 **effective = rigorous**（= 本推导自身 status，无压低依赖）。
+  ⚠ 这**不等于**「无鬼定理已严格」：effective 现在恰好等于本推导**自报**的 rigorous，而 gaps 第 3 条自陈
+  可追溯性弱于 rigorous 通常要求（GT 1972 / GSW / Brower 1972 正文均未获取）；张成步、[K_m, A^ε_n] = 0 与
+  领头项结构在图内均无节点，Lean 张成定理未做（formal/TODO.md `ddf-spans`）。这些是本推导既有的、与围道字典
+  无关的缺口，撤边不掩盖也不放大它们。
+  ⚠ 下文【2026-09-12：伴随层接线到 Lean】段末「现在唯一压低 … 的是围道字典」与「目标 … effective 仍是
+  physical-argument」两句自本段起过时（原文保留）。
+
   【2026-09-11（四）：第 (2) 条接上 Lean 见证（curator，本次只改 depends_on（新增一条）
   与「(2) 的动量量词 p ≠ 0 没有逐字来源」那条 gap 的措辞；
   **status、sources、summary 与论证步骤一字未动**）】
