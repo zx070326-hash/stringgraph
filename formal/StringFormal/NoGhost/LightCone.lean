@@ -63,6 +63,10 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
   bigraded piece (rung `-1`, level `1`) every physical state is a DDF state plus a spurious
   state `L_{-1}|0; k-k_0⟩`.  `D = 26` does not enter (§B.5); two *extra* hypotheses do, see
   the gaps.
+* `witnessLightConeFrame`, `witnessTransverseFrame` — the explicit frame of
+  `NoGhost/Witness.lean` instantiates **both** structures, so none of the frame-conditional
+  results above is vacuous; `dotVec_witnessTransverseFrame_witnessMomentum` also discharges
+  the extra `ε·k = 0` hypothesis for it.
 
 ## Scope and gaps
 
@@ -81,8 +85,11 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
   (every vector decomposes) is a further statement, not needed here and not proved.
 * **`TransverseFrame` does not imply completeness.**  The `N = 1` spanning theorem therefore
   carries the explicit hypothesis `FrameSpansOrthogonal`, which says that the `D - 2`
-  transverse vectors together with `p_{-1}` span `p_{-1}^⊥`.  Discharging it for the explicit
-  witness of `NoGhost/Witness.lean` is left open (it is a concrete `Pi.single` computation).
+  transverse vectors together with `p_{-1}` span `p_{-1}^⊥`.  It is the **only** hypothesis of
+  that theorem still undischarged for the explicit witness (`witnessTransverseFrame` and
+  `dotVec_witnessTransverseFrame_witnessMomentum` handle the others).  Discharging it is a
+  concrete `Pi.single` computation: for the witness, `e ⊥ p_{-1}` reads `e_0 + e_1 = 0` and
+  then `e = (-2 e_0) • p_{-1} + Σ_{i} e_{i+2} • ε_i`.
 * `N = 2` of blueprint §B.6 is **not** done.  The two missing pieces are (a) the analogue of
   `ddfOp_neg_one_apply_towerVacuum` at `n = 2` and for `A^ε_{-1}A^δ_{-1}` (window `{-2,…,0}`,
   so the vertex operator's level-1 and level-2 coefficients `Φ_1`, `Φ_2` actually contribute)
@@ -774,5 +781,76 @@ theorem towerPhys_bigrade_one_le_ddfSpan_sup_spurious (η a b : Fin D → R)
     exact Submodule.subset_span rfl
 
 end LevelOneSpan
+
+
+/-! ### The explicit light-cone witness satisfies the two frame structures
+
+Without these the frame-based results above could be vacuous: nothing in `LightConeFrame` or
+`TransverseFrame` is obviously satisfiable, and `TransverseFrame` in particular demands
+`D - 2` mutually orthonormal vectors. -/
+
+section FrameWitness
+
+variable (D : ℕ) (R : Type*) [CommRing R]
+
+/-- The `i`-th transverse index, `μ = i + 2`. -/
+def transIdx (hD : 3 ≤ D) (i : Fin (D - 2)) : Fin D := ⟨(i : ℕ) + 2, by omega⟩
+
+variable {D}
+
+lemma transIdx_injective (hD : 3 ≤ D) : Function.Injective (transIdx D hD) := by
+  intro i j h
+  have hv := congrArg Fin.val h
+  simp only [transIdx] at hv
+  exact Fin.ext (by omega)
+
+lemma two_le_transIdx (hD : 3 ≤ D) (i : Fin (D - 2)) :
+    2 ≤ ((transIdx D hD i : Fin D) : ℕ) := by
+  simp [transIdx]
+
+variable (D)
+
+/-- **The light-cone pair of `NoGhost/Witness.lean` is a `LightConeFrame`.** -/
+noncomputable def witnessLightConeFrame [Algebra ℚ R] (hD : 3 ≤ D) :
+    LightConeFrame (Fock.minkowski D R) (witnessLight D R hD) where
+  conj := witnessConjugate D R hD
+  isotropic := dotVec_witnessLight_self hD
+  conj_isotropic := dotVec_witnessConjugate_self hD
+  pairing := dotVec_witnessLight_witnessConjugate hD
+
+/-- **The `D - 2` polarisations `e_2, …, e_{D-1}` form a `TransverseFrame`.**  In particular
+`ddfSpan` and all the frame-conditional results above are non-vacuous. -/
+noncomputable def witnessTransverseFrame (hD : 3 ≤ D) :
+    TransverseFrame (Fock.minkowski D R) (witnessLight D R hD) where
+  vec i := witnessPolarization D R (transIdx D hD i)
+  transverse i := dotVec_witnessPolarization_witnessLight hD (two_le_transIdx hD i)
+  orthonormal i j := by
+    classical
+    rw [dotVec_witnessPolarization_witnessPolarization (two_le_transIdx hD i)]
+    by_cases h : i = j
+    · subst h; rw [if_pos rfl, if_pos rfl]
+    · rw [if_neg h, if_neg fun hc => h (transIdx_injective hD hc)]
+
+variable {D R}
+
+/-- **The witness polarisations are orthogonal to the momentum too**: `ε_i · k = 0`.  This
+discharges the extra hypothesis `hεa` of `ddfOp_neg_one_apply_towerVacuum` and of the `N = 1`
+spanning theorem for the explicit frame. -/
+theorem dotVec_witnessPolarization_witnessMomentum [Algebra ℚ R] (hD : 3 ≤ D)
+    {i : Fin D} (hi : 2 ≤ (i : ℕ)) :
+    dotVec (Fock.minkowski D R) (witnessPolarization D R i) (witnessMomentum D R hD) = 0 := by
+  rw [witnessPolarization, witnessMomentum]
+  refine dotVec_single_pair_of_ne _ ?_ ?_ _ _ _
+  · simp only [ne_eq, Fin.ext_iff, frameTime]; omega
+  · simp only [ne_eq, Fin.ext_iff, frameSpace]; omega
+
+/-- The `hεa` hypothesis, for the witness transverse frame. -/
+theorem dotVec_witnessTransverseFrame_witnessMomentum [Algebra ℚ R] (hD : 3 ≤ D)
+    (i : Fin (D - 2)) :
+    dotVec (Fock.minkowski D R) ((witnessTransverseFrame D R hD).vec i)
+      (witnessMomentum D R hD) = 0 :=
+  dotVec_witnessPolarization_witnessMomentum hD (two_le_transIdx hD i)
+
+end FrameWitness
 
 end StringFormal.NoGhost
