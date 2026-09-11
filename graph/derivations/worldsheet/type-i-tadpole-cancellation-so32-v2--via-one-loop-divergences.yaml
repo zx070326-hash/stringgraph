@@ -105,8 +105,23 @@ depends_on:
     note: |
       供给 (10.7.9) 的费米迹组合，(10.8.2a,b) 的两部分就是它按 R–R / NS–NS 的拆分。
       ⚠ 只供给迹的形式，不供给模不变性本身的完整论证。
-  - id: worldsheet.gso-projection
-    note: 供给「GSO 与 Ω 投影算符各贡献一个 1/2 因子」这一记账（原书 (10.8.2) 处明写）。
+  - id: worldsheet.open-superstring-gso-projection
+    note: |
+      供给「GSO 与 Ω 投影算符各贡献一个 ½ 因子」这一记账（原书 §10.8 p.38 在 **(10.8.2)** 处明写：
+      'Note that the GSO and Ω projection operators each contribute a factor of ½.'）。
+      **非 inferred**：那句就在本推导所依据的同一节、同一页，且 (10.8.2) 是**开弦迹**
+      （圆柱那一支），所用的 GSO 正是**开弦扇区上**的 exp(πiF) 本征投影。
+      ★★【2026-09-11 改指，batch27-fix / reviewer-batch27 P2】本边原先指向
+      **worldsheet.gso-projection**——那是**闭弦** IIA/IIB/type 0 的 GSO 卡，
+      而本边要供的两个 ½（圆柱与 Möbius 带）是**开弦**的 GSO。
+      reviewer-batch23 已对圆柱那条同款边裁过 inferred，small-backlog-13 又为「开弦 GSO」
+      单建了窄卡 **worldsheet.open-superstring-gso-projection** 并让圆柱、Möbius 两条推导
+      一起改指它；本推导是**最后一处未改的**。⇒ 改指后对象同一，**非 inferred**。
+      ⚠ **Klein 瓶那一支的闭弦 GSO 不由本边承担**：(10.8.7) 里的投影算符
+      [(1+exp(πiF))/2]·[(1+exp(πiF̃))/2] 是**闭弦** IIB 的 GSO，
+      它由 worldsheet.superstring-klein-bottle-amplitude-closed-channel 那张卡
+      （及其推导里指向 worldsheet.gso-projection 的非 inferred 边）承担，本推导已有一条边指它。
+      ⇒ 本推导对三个面的 GSO 记账现在是分开的：**闭弦经 Klein 瓶卡，开弦经本边**。
   - id: worldsheet.closed-superstring-worldsheet-parity-action
     note: |
       供给 **Ω 在闭超弦费米部门上的作用**（Klein 瓶那一支真正需要的东西）：
