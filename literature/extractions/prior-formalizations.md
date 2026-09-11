@@ -406,7 +406,286 @@ blueprint 的依赖图**已经是**「节点 = 陈述、边 = 依赖、节点带
 5. Carnahan `vertexAlg` 的 `VertexBasic/Affine.lean`、`Lattice.lean`、`Borcherds.lean` 本轮**没读内容**，
    只读了 `Defs.lean` 与 `Lie/PBW.lean`。若论文要和它精确划界，这三个文件应补读。
 
+## § Zulip 与 GitHub code search（2026-09-11 追加，补上一轮最大缺口）
+
+上一轮（本文件 §「已尝试但失败的入口」）把 **Lean Zulip** 与 **GitHub code search** 记为"未执行"，
+并在「未解决的疑问」第 1 条把它们列为最可能翻出反例的地方。本节是补做记录。
+**逐条记录入口 URL 与结果，包括失败的入口**，以便下一个人不必重试。
+
+### A. GitHub code search：入口全部被封（本轮复核）
+
+| 入口 | 结果（2026-09-11） |
+|---|---|
+| `https://github.com/search?q=...&type=code`（网页） | 逐字："**Sign in to search code on GitHub** Before you can access our code search functionality please sign in or create a free account." **零结果可读** |
+| `https://api.github.com/search/code?q=...` | **HTTP 401 Unauthorized**（免认证不可用；本环境无 `gh`、无 token） |
+| `https://grep.app/api/search?q=Virasoro&filter[lang][0]=Lean` | **HTTP 429**（上一轮两次 429，本轮第三次仍 429）⇒ 判为对本环境长期不可用 |
+| `https://searchcode.com/api/codesearch_I/?q=Virasoro` | **HTTP 404**（该 API 端点已下线） |
+
+⇒ **GitHub 的"文件内容级"搜索在本环境无法执行**，这是一个**不能靠重试解决**的硬限制，
+论文里凡涉及"无人写过某个 Lean 声明"的宣称，其证据只能来自**仓库级搜索 + 目标仓库的完整目录列举**，
+不能声称做过全网代码 grep。
+
+### B. 替代路线：`api.github.com/search/repositories`（免认证可用，本轮主力）
+
+这是本轮找到的可用替代。限制必须写清：**它只搜仓库名/描述/README/topic，不搜文件内容**，
+且 `language:` 限定的是**仓库主语言**。所以"零命中"只是弱否定；"有命中"则是硬事实。
+
+| 查询 | total_count | 命中（Lean 相关的全部列出） |
+|---|---|---|
+| `Virasoro language:Lean` | **1** | `kkytola/VirasoroProject`（建 2025-01-01，最后 push **2026-06-14**） |
+| `vertex algebra language:Lean` | **4** | ① `ScottCarnahan/vertexAlg`（2026-05-15 / 2026-08-31）② **`dbrueg/lean-geometric-vertex-algebras`**（2026-09-04 建，同日 push；"Lean formalization of *Geometric Vertex Algebras*"）③ `jshemail12345-debug/SubregularAffineCells-Lean`（2026-08-21）④ **`jshemail12345-debug/ArakawaMoreauFormalAudit`**（2026-08-23；"Lean 4 formal audit for *Completing the Arakawa–Moreau Conjecture on Maximal Ideals of Affine Vertex Algebras*"） |
+| `"no-ghost"`（不限语言） | 174，**全部噪声** | Ghost 博客主题 / Discord bot / 物理引擎 "no ghost collisions"。**无一条是数学形式化** |
+
+| `Verma language:Lean` | **0** | — |
+| `Sugawara`（不限语言） | 103，**全部噪声** | 日本姓氏 Sugawara 的个人仓库 + 一个水文学 "Tank model"。**无形式化仓库** |
+| `Shapovalov`（不限语言） | 142，**全部噪声** | 斯拉夫姓氏 Shapovalov（CVPR 论文作者、蛋白质 beta-turn、个人作业）。**无形式化仓库，无 Lean** |
+| `"Kac determinant"`（不限语言） | **1**，非形式化 | `kabhay166/vira-soro-algebra`（**Python**，2023-09-24 / 2023-10-04）："computing conformal blocks and kac determinant in the viro soro algebra"。是数值/符号计算脚本，**不是证明助手** |
+| `string theory language:Lean` | **0** | —（注：Physlib 的仓库描述不含 "string theory"，故此查询漏掉它；见本文件 §2.3） |
+| `conformal field theory language:Lean` | **1** | ★★ **`Deicyde/formal-conformal`**（2026-04-21 建，最后 push 2026-06-23）："A Lean 4 formalization of Conformal Field Theory" |
+
+★ **本轮新发现三个上一轮完全不知道的 Lean 仓库**：
+`dbrueg/lean-geometric-vertex-algebras`、`jshemail12345-debug/ArakawaMoreauFormalAudit`、
+**`Deicyde/formal-conformal`**。内容核查见 §C。
+
+### C. 本轮新发现的 Lean 仓库：内容核查
+
+#### C.1 ★★ `dbrueg/lean-geometric-vertex-algebras`（最实质的新发现）
+
+- 建 **2026-09-04**，同日 push；顶层 `GeomVA.lean` + `GeomVA/` + `geom_va.tex`(67 007 B) + `docs/`
+- `GeomVA/` 目录完整列举：`Analytic/`、`Category.lean`(14 798)、`Equivalence.lean`(13 529)、
+  `Formal/`、`GVA/`、**`GVAtoVA.lean`(122 868)**、`Graded/`、`Util/`、`VA/`、**`VAtoGVA.lean`(232 682)**
+  ⇒ 约 **400 KB** Lean 源码，是一个**真正做完的**项目，不是骨架。
+- 形式化对象：Daniel Bruegmann, *Geometric Vertex Algebras*, **arXiv:2012.09717** 的
+  **Theorem 4.2**——几何顶点代数与 **ℤ-分次顶点代数**范畴等价（拆成 Φ∘Ψ=id、Ψ∘Φ=id、态射层，
+  最后用 `PhiCatIso` 打包成范畴同构）。
+- ★ README 逐字（经 WebFetch 摘要器引出）：「Every declaration is fully proved (no `sorry`);
+  the main theorems depend only on `propext`, `Classical.choice`, `Quot.sound`.」
+  toolchain `leanprover/lean4:v4.33.1`。
+- 覆盖到的前置件：全纯函数 / Laurent 展开 / **围道积分**、分次向量空间、形式分布、
+  顶点代数定义（原文 §3）、几何顶点代数定义（§2）、两个方向（§5、§6）。
+- **对本项目的影响**：这是"顶点代数领域已有一个 0-sorry 的完整定理级形式化"的最新证据，
+  ⇒ §「不可宣称的」第 4 条（顶点代数/locality/OPE 不可宣称首次）**本轮被进一步加固**，不必修改。
+  但它**不碰** Virasoro 表示、Shapovalov、Kac 行列式、洛伦兹号差、DDF、无鬼定理 ⇒ **不构成反例**。
+  注意：它有**围道积分与 Laurent 展开**的 Lean 基础设施，若本项目将来要做解析版 OPE，这是可复用资产。
+
+#### C.2 ★ `Deicyde/formal-conformal`（Stony Brook，"A Lean 4 formalization of Conformal Field Theory"）
+
+- 建 **2026-04-21**，最后 push **2026-06-23**。作者：Jack McCarthy（研究生）+ Fedor Popov（博后），
+  Stony Brook University；Apache-2.0。README 自陈部分代码/证明/文档由 Anthropic Claude 协助完成。
+- **全部 Lean 内容 = 一个文件**：`FormalConformal/Basic.lean`（**8 812 B**）。
+  顶层只有 `FormalConformal.lean`(165 B)、`Main.lean`(104 B)。
+- ★ **该文件的全部声明只有四条**（逐条列举）：
+  `VertexAlgebra`（structure）、`VertexAlgebra.mode`（abbrev）、
+  `VertexOperatorAlgebra`（structure）、`VertexOperatorAlgebra.L`（abbrev）。**`sorry` 计数 = 0**。
+- 文件头逐字："# Vertex Operator Algebras" / "This file formalizes the definition of a vertex algebra
+  and of a vertex operator algebra (VOA) **following the Wikipedia article**"；
+  References 段列 Wikipedia、FLM88、Kac98、Borcherds86、Gannon06。
+- ⇒ **尽管仓库描述叫"CFT 的 Lean 4 形式化"，实际只到 VOA 的定义（含 `L` 的 abbrev），没有任何定理。**
+  **不构成对本项目任何首次宣称的反例**，但论文写 related work 时应点名它，
+  否则读者按仓库名会以为 CFT 已被形式化。这是一个"名字比内容大得多"的仓库。
+
+#### C.3 `jshemail12345-debug/ArakawaMoreauFormalAudit`（2026-08-23，与已登记的 `jin-2026-subregular-lean` 同作者同套路）
+
+- 顶层只有 6 个文件，Lean 代码是**单个 446 445 B 的 `ArakawaMoreauFormalAudit.lean`** + `SHA256SUMS.txt`。
+- ★ README 自陈边界（与 §5.1 的 2608.20793 措辞几乎同构）：
+  "**not a from-definitions formalization of vertex operator algebras, BRST reduction, or minimal
+  W-algebras**"；未重证的背景结果以 "**literature interfaces**"（Lean 里的 theorem 参数）暴露；
+  推荐的刻画是 "**a formal audit modulo explicit interfaces**"。
+  README 说这些 literature interfaces "do not appear as custom axioms in `#print axioms`"，
+  并报告 `lake build` 成功（"Build completed successfully (8708 jobs)"）。
+- ⇒ 与 2608.20793 同样**不构成"顶点代数/BRST 已被形式化"的先例，作者本人明确否认**。
+  但它是**第二个**采用"未形式化前提当显式接口"路线的项目，
+  §6 方法论对照里"semantic interface vs 认识论状态等级"的对比可以点名两个实例而不是一个。
+
+### D. ★ Carnahan `vertexAlg` 的 `Affine.lean` / `Lattice.lean` / `Borcherds.lean`（补上一轮缺口 §「未解决的疑问」第 5 条）
+
+`api.github.com/repos/ScottCarnahan/vertexAlg/contents/VertexAlg/VertexBasic`（分支 `main`）完整列举：
+
+| 文件 | 大小 | 本轮读到的内容 |
+|---|---|---|
+| `Affine.lean` | 2 674 B | **零条 live 声明**。docstring 写"Vertex operators and vertex algebras attached to affine Lie algebras"，Definitions 段列的 `vertexOperator x V`、`vertexAlgebra χ g` 与 Main results 段三条**都是计划**；"To do"段逐字要求"写定义与证明"。`class positiveEnergy`、`class smooth`、`def affineVertexOperator`、`def vacuumModule` **全部在注释块里**；3 处 `sorry` **全在被注释掉的 `positiveEnergy` 块内**。 |
+| `Lattice.lean` | **1 088 B** | **零条声明**。只有 copyright、2 条 import（`Mathlib.Algebra.Lie.Loop`、`VertexAlg.VertexBasic.VertexOperator`）、docstring（"# Lattice vertex operators … vertex operators attached to elements in the **double cover** of an integer lattice"，Definitions 段只写了打算做 `VertexOperator.Lattice.E-` / `E+`）、一个空 `section`、一行 `variable`、一条注释掉的 `-- import Affine.`。`sorry` 计数 0（因为根本没有代码）。 |
+| `Borcherds.lean` | 19 839 B | **有实质定理**（见下） |
+
+#### D.1 `Borcherds.lean` 的真实覆盖范围（对 `math.lattice-vertex-algebra` 与 OPE 卡的判断有直接影响）
+
+docstring 首行逐字 "# Basic results on the Borcherds identity"。live 声明按序 26 条，关键结构是：
+
+- **Borcherds 恒等式本身是 `def borcherdsId`（Prop 值定义，= `borcherdsSum1 = borcherdsSum2 + borcherdsSum3`），
+  并作为 `class VertexAlgebra1` 的一个 field 出现 ⇒ 它是公理/假设，不是被证出来的定理。**
+  `theorem borcherdsIdentity` 只是把该 class field 重述成独立定理（wrapper），**不是独立证明的结果**。
+- **真正被证明的是"特化 ⟺ 其它公理"的等价**：`borcherdsId_at_zero_iff_associativity`、
+  `borcherdsId_at_zero_iff_commutatorFormula`、`borcherdsId_at_large_r_iff_weak_assoc`，
+  外加 `borcherdsSum1_eq_zero`、`locality_left_eq_borcherdsSum2`、`locality_right_eq_borcherdsSum3`、
+  `associativity_left/right`、`unit_right_order/zero`、`commutator_right_2/3` 等辅助定理，
+  以及三条 `Int` 工具引理。
+- `sorry` 共 3 处，**全部在 `/-! -/` 注释块内**（`conv_pow_succ_X_sub_Y` 与两条
+  `locality_if_Borcherds_sums_2_3_eq` / `Borcherds_sums_2_3_eq_if_locality` 的证明草稿）。
+  ⇒ **`borcherdsId_at_large_t_iff_locality`（"大 t 特化 ⟺ locality"）目前只存在于注释里，未完成。**
+
+★ **对本项目的两条可用结论**：
+
+1. **格顶点代数（lattice VOA）在 Carnahan 项目里是空的**——`Lattice.lean` 只有 docstring，零声明。
+   这与 README 把 "Lattice vertex algebras" 列进 TODO 一致，**是两条互相独立的证据**。
+   ⇒ `math.lattice-vertex-algebra` 卡若要宣称"未见先例"，本轮**没有找到反例**；
+   但措辞仍应是"我们未发现先例"而非"全网首次"（GitHub 内容级搜索本环境不可用，见 §A）。
+2. **Borcherds 恒等式 ⇔ 结合律/对易子公式的等价已被 Carnahan 证出**，
+   所以任何"OPE 与对易子的等价性首次形式化"一类宣称都**站不住**——这是本轮最接近反例的一条，
+   请 curator/formalizer 在 OPE 相关卡上避开这个说法。
+
+### E. Lean Zulip（`leanprover-community.github.io/archive`，本轮首次执行）
+
+**入口裁决**：
+- `leanprover.zulipchat.com` 的搜索页与 API（`/api/v1/messages?narrow=[{"operator":"search",...}]`）
+  **都跳到登录页**（"View without an account" 只是营销按钮，WebFetch 拿不到 SPA 内容）⇒ **死路**。
+- ✅ **可用路线**：公开归档 <https://leanprover-community.github.io/archive/>，
+  站点自报 **"last updated Feb 28 2026 at 14:05 UTC"**（本轮 2026-09-11 读到），近 100 个 stream。
+  `maths` 有 **2 986 topics**、`new members` 12 843、`general` 9 924、`lean4` 7 667、`mathlib4` 6 722、
+  `Is there code for X?` 5 499。另有专门的 **PhysLean** stream。
+  ⚠ stream 索引页会被摘要器截断（`maths` 页本轮只读到约 600 条最新 topic 标题，站点自报 "Content truncated"）
+  ⇒ **Zulip 侧的"零命中"一律是弱否定**。
+- ⚠ 配套的 GitHub 仓库是 `leanprover-community/archive`（"Replacement for the archive repo"，
+  default branch `main`，size ≈ 196 GB-KB 量级、最后 push 2026-08-25），但
+  `contents/stream` **返回 404** ⇒ 不能用目录列举绕过截断。
+
+在 `maths` 流可见的约 600 条最新 topic 标题里，关键词 `Virasoro / vertex / ghost / Verma / Kac /
+conformal / string theory / Sugawara / Shapovalov / Witt` **只命中两条**，两条都已读全文：
+
+#### E.1 topic「Virasoro algebra (and cohomology of the Witt algebra)」（14 条消息，2025-01-01 → 2025-06-15）
+
+`…/archive/stream/116395-maths/topic/Virasoro.20algebra.20(and.20cohomology.20of.20the.20Witt.20algebra).html`
+
+- **Kytölä 2025-01-01** 发布 `VirasoroProject`：Virasoro = Witt 的**唯一**一维中心扩张；
+  为此建了二次 Lie 代数上同调、从 2-cocycle 造中心扩张、中心扩张的短正合列刻画；
+  核心是 `H²(Witt)` 一维且由 Virasoro cocycle 类生成。Heisenberg 作为更简单的例子；
+  **自陈 Sugawara 当时没时间做**。
+- **Tanimoto 2025-01-02** 指出与 Carnahan 的 mathlib4 **PR #20206** 可能重叠。
+- ★ **Carnahan 2025-01-12 逐字要点**：他**没有做过上同调计算**，只有"从 2-cocycle 造中心扩张"的构造。
+  ⇒ 这条**独立佐证**了本文件 §「不可宣称的」第 3 条（`H²(Witt)` 一维归 Kytölä，不归 Carnahan/Mathlib）。
+- **Kytölä 2025-01-13 / 02-08** 追问 Carnahan 有没有**反方向**（每个中心扩张都来自 2-cocycle、
+  模 coboundary 良定）的图追踪；Carnahan 答**没做**。Kytölä 自陈这条**因证明线性性太烦而放弃**
+  ⇒ **"中心扩张 ↔ H² 的完整双向对应"至今在任何 Lean 项目里都没有做完**（双方自陈，最强的一手证据）。
+- **Kytölä 2025-06-14** 宣布加入 **基本玻色 Sugawara**，把 Heisenberg 表示装上 **c = 1** 的 Virasoro 表示；
+  计划（**当时未做**）：背景荷改中心荷、推广到仿射 Kac–Moody、**费米 Sugawara**（Ising/Majorana、辛费米子）。
+  ⇒ **再次确认 c = 1 是 Kytölä 的上限**，本文件主题对照表"Sugawara c = D"一行**本轮无反例**。
+- **全帖零次提到 no-ghost / Kac determinant / Shapovalov / Verma 的实现。**
+
+#### E.2 ★★ topic「Formal calculus for vertex algebras, sorry-free library with…」（3 条，**2026-02-28**，本轮最新的反例候选）
+
+`…/topic/Formal.20calculus.20for.20vertex.20algebras.2C.20sorry-free.20library.20with.html`
+
+- **Justin McClung（2026-02-28 00:19）** 发布 <https://github.com/JustinMcClung/formal-distribution>：
+  Nozaradan *Introduction to Vertex Algebras* **第 1 章**的 Lean 4 形式化，自陈
+  **"complete and sorry-free"**，约 **3 850 行 / 11 个文件**，覆盖
+  **形式分布、展开算子、形式 δ 的性质、分解定理、locality 与 j-th products、Fourier 变换 / λ-bracket**。
+  他自己在帖子里问"哪些值得 upstream 到 Mathlib、设计会不会和现有顶点代数开发冲突"。
+- **Weiyi Wang（01:48）**：提到另有一个**开着的 mathlib4 PR #25822** 与之相关，并已 ping Carnahan。
+- **Kevin Buzzard（09:08）**：直接问是否用了 LLM，并说社区惯例要求明确披露。
+  （⇒ 该库的署名/工具披露状态**截至归档时未解决**，引用时应注明。）
+- **对本项目的影响**：**locality 与 λ-bracket 的形式演算已有 sorry-free 实现**，
+  这进一步堵死任何"形式分布/locality 首次形式化"的说法。**但它仍不碰 Virasoro 表示论**
+  ⇒ 对本项目 A 级清单**不构成反例**。
+- ★ **新线索（本轮已查完，见 E.4）**：**mathlib4 PR #25822**。
+
+#### E.3 ⚠ `JustinMcClung/formal-distribution` 现在**取不到**（重要的引用风险）
+
+- `api.github.com/repos/JustinMcClung/formal-distribution` → **404**；
+  `api.github.com/users/JustinMcClung/repos` → **空数组 `[]`**（该用户当前**没有任何公开仓库**）；
+  仓库搜索 `formal-distribution vertex` → **0**。
+- ⇒ 该库在 2026-02-28 的 Zulip 公告之后被删除或转私。**"3 850 行、sorry-free"只有作者自述，
+  本轮无法独立核实**。论文若要引用，必须写成"Zulip 公告（2026-02-28）自述，代码当前不可获取"，
+  **不能当作已验证的先例**。（时间线上它紧跟 Buzzard 的 LLM 披露追问，但**因果关系纯属推测，不得写进论文**。）
+
+#### E.4 mathlib4 PR #25822 的真身（本轮核实，免认证 API）
+
+`api.github.com/repos/leanprover-community/mathlib4/pulls/25822`：
+- **title 逐字："WIP: experiments with vertex algebras"**；author **ScottCarnahan**；
+  created **2025-06-12**；**state = open，merged = false，merged_at = null**（读取日 2026-09-11）。
+- body 首句逐字："This is a testbed for various attempts at things. **Please don't bother reviewing.**"
+- ⇒ **Mathlib 主线至今没有合并任何顶点代数实质内容**，本文件 §1.1（`Algebra/Vertex/` 只有 2 个文件）
+  **本轮无需订正**。这是比目录列举更强的一条证据：连作者自己都把它标成 WIP testbed。
+
+#### E.5 ★★ PhysLean stream 完整列举（99 个 topic，无截断）——对 GS 反常与 BRST 卡最有用
+
+`archive/stream/479953-PhysLean/index.html` 本轮**完整读到 99 条 topic 标题**（页面未截断）。
+关键词 **string / conformal / Virasoro / vertex / anomaly / Green–Schwarz / CFT / bosonic
+在 99 条标题里零命中**。两条看似相关的已逐条读全文排除：
+
+- **"A 'WorldVolume' directory"**（6 条，2025-06-19 → 06-24）：Joseph Tooby-Smith 提议把
+  `Space`/`Time`/`SpaceTime` 合并成顶层目录，名字借用 sigma 模型的 worldvolume Σ→M。
+  **纯粹是代码目录命名讨论，最终命名为 `SpaceAndTime`（PR624）**，与弦/膜物理内容无关。
+- ★★ **"BV formalism anyone?"**（2 条，2025-11-24）：**Xi Yin** 提议形式化
+  "Batalin–Vilkovisky formalism of general quantum gauge theories"，自陈主要用例是**弦场论**，
+  并问社区有没有人做过。**Joseph Tooby-Smith（PhysLean 主导者）当日回复逐字大意：
+  "not aware of anyone having worked in a related area."**
+  ⇒ **这是"BRST/BV/弦场论在 Lean 生态里无人做过"的一手证言**，
+  由 PhysLean 的实际维护者在 2025-11 作出，强度类似 Kytölä §1.3 的那句断言。
+  本项目若涉及 BRST 相关节点，可引这条（但注意它是**社区认知**，不是穷举证明）。
+
+#### E.6 其它 stream：弱否定
+
+- `Is there code for X?`（5 499 topics）：可见约 **700** 条最新标题（2025-07 → 2026-02），
+  `Virasoro / vertex algebra / no-ghost / Verma / Kac / Sugawara / Shapovalov / Witt algebra /
+  conformal / string theory` **全部零命中**；页面自报截断 ⇒ **弱否定**。
+- `general`(9 924)、`new members`(12 843)、`mathlib4`(6 722) 本轮**未查**（必被截断，投入产出比低）。
+
+### F. 本轮未能执行的项（诚实登记）
+
+- **WebSearch 额度再次为 0**（"this session has used its web search budget (200 of 200)"，
+  与上一轮同样是被同会话前序任务耗尽）⇒ 任务里第 3 项的三条通用网页检索
+  （`"formalization" "Virasoro algebra" (Lean OR Isabelle OR Coq)`、`"no-ghost theorem" formal proof`、
+  `"Kac determinant" "proof assistant"`）**一条都没跑成**。
+  ⇒ **非英文/非 GitHub 的先行工作（例如 Coq 的 Rocq-community 之外的个人项目、
+  日文/法文博客、会议 talk）仍是未覆盖面。**
+- Zulip 的 `general` / `new members` 两个最大流未做关键词扫描。
+
 ## lead 本地复核（2026-09-12）
 
 - 矛盾点 1 已解：`ModularForm.eta_comp_eq_csqrt_I_inv` 在本地 Mathlib（formal/.lake/packages/mathlib）`Mathlib/NumberTheory/ModularForms/Discriminant.lean:136`，远程抓取是假否定。η 的 S 变换本身**不可宣称首次**（我们只补了 (√i)⁻¹√τ = (−iτ)^{1/2} 的桥）。
 - 不确定点 4：本地 grep `Mathlib/LinearAlgebra/RootSystem/` 含 "E8"/"E₈" 的文件：无。 ⇒ E₈ 根系显式 240 根与幂和恒等式在 Mathlib 无现成对象，`Math/E8Roots.lean` 的根幂和可列入 A 级（措辞：显式根集合上的幂和恒等式，不宣称根系分类）。
+
+---
+
+## § 可宣称首次清单 —— 第二轮反例复核（2026-09-11，GitHub 仓库搜索 + Lean Zulip 归档）
+
+本轮新增的检索面：GitHub 仓库级搜索（9 条查询）、Lean Zulip 公开归档（`maths` 约 600 条最新
+topic、`PhysLean` **全部 99 条**、`Is there code for X?` 约 700 条）、Carnahan 三个未读文件、
+mathlib4 PR #25822、四个新仓库的内容核查。**逐条标注"本轮是否找到反例"。**
+
+| # | 宣称 | 本轮是否找到反例 | 依据（本轮新证据） |
+|---|---|---|---|
+| A1 | Virasoro 的 **Shapovalov/逆变形式** | **否** | `Shapovalov` 仓库搜索 142 条**全是姓氏噪声、零 Lean**；Zulip Virasoro 帖全程未提；Carnahan `Lattice/Affine/Borcherds` 三文件里无内积 |
+| A2 | **Kac 行列式 N ≤ 4 的机器验证** | **否** | `"Kac determinant"` 全 GitHub 仅 1 个仓库且是 **Python** 脚本（`kabhay166/vira-soro-algebra`）；Zulip 零命中 |
+| A3 | **横向 DDF 算子及其振子代数** | **否** | 仓库搜索与 Zulip 全流零命中；Carnahan `Affine.lean` 的"attached to Lie algebra elements"仍是**注释里的计划** |
+| A4 | **洛伦兹不定 D 分量 Fock + c = D Sugawara** | **否，且被加固** | Zulip 帖里 Kytölä **2025-06-14 亲口**只做到 **c = 1 玻色 Sugawara**，费米/仿射推广列为"计划"；`Sugawara` 仓库搜索 103 条全是日本姓氏噪声 |
+| A5 | **10D GS 反常因子化 + IIB 整数解唯一性**（代数层） | **否，且被加固** | **PhysLean stream 99 条 topic 完整列举中 `anomaly`/`string`/`Green-Schwarz` 零命中**；`string theory language:Lean` 仓库搜索 = 0 |
+| A6 | **E₈ 显式 240 根的幂和恒等式**（lead 2026-09-12 追加） | **否** | 本轮未新增证据，沿用 lead 的本地 grep 结论 |
+| B6 | Witt/Virasoro 完美性、`C = 2[L₂,L₋₂] − 4[L₁,L₋₁]` | **否** | `Virasoro language:Lean` 全 GitHub **只有 `kkytola/VirasoroProject` 一个仓库**（total_count = 1）⇒ 上一轮"21 个文件名里没有"的证据本轮升级为"全 GitHub 只有这一个 Lean Virasoro 仓库" |
+| B7 | Verma level 片的有序词张成 + `dim V_N ≤ p(N)` | **否** | `Verma language:Lean` 仓库搜索 **total_count = 0** |
+| B8 | η 的 T 变换、`τ₂\|η\|⁴` 不变性 | **否**（本轮未新查） | — |
+| B9 | level-2 物理态闭式模公式、D > 26 负模态构造 | **否** | 同 A3/A4 的面 |
+| B10 | GSO 扇区穷举、六边形奇数扭转计数 | **否** | 同 A5 的面 |
+| — | `math.lattice-vertex-algebra`（格顶点代数） | **否，但须降级措辞** | ★ Carnahan `Lattice.lean` **只有 1 088 B、零条声明**（仅 docstring 提到打算做 `E±`）⇒ 无人做过；但 **GitHub 内容级搜索在本环境不可用**（§A），只能写"我们未发现先例" |
+
+### ★ 本轮找到的**接近反例 / 需要改措辞**的三条
+
+1. **⚠ 不要宣称"Borcherds 恒等式 ⇔ 结合律 / 对易子公式"的等价是首次**——
+   Carnahan `Borcherds.lean` 已有 `borcherdsId_at_zero_iff_associativity`、
+   `borcherdsId_at_zero_iff_commutatorFormula`、`borcherdsId_at_large_r_iff_weak_assoc`
+   （live 定理，非注释）。**只有"大 t ⇔ locality"那条还在注释里未完成。**
+2. **⚠ 不要宣称"形式分布 / locality / λ-bracket 的形式演算"首次**——
+   Justin McClung 在 Zulip（2026-02-28）公告过 sorry-free 的 Nozaradan 第 1 章实现。
+   **但该仓库现已 404**（§E.3），引用时必须注明"自述、当前不可核实"。
+3. **⚠ 不要宣称"顶点代数的定理级形式化"首次**——`dbrueg/lean-geometric-vertex-algebras`
+   （2026-09-04）已 0-sorry 证完 arXiv:2012.09717 Thm 4.2 的范畴等价，约 400 KB Lean。
+
+### 本轮证据强度的净变化
+
+- **变强**：A4（Kytölä 本人 c = 1 的口头确认）、A5（PhysLean 99 条完整列举 + BV 帖的维护者证言）、
+  B6/B7（仓库搜索 total_count = 1 / 0）、Mathlib 无顶点代数（PR #25822 是作者自标的 WIP testbed）。
+- **未变**：A1、A2、A3。
+- **新增的"不可宣称"面**：Borcherds 恒等式等价、形式分布/locality、几何顶点代数范畴等价、
+  **BRST/BV 与弦场论**（虽无人做过，但 Xi Yin 2025-11 已在 PhysLean 公开提出，属于**他人已宣示的方向**）。
+- **仍未覆盖**：GitHub 文件内容级 grep（结构性不可用）、WebSearch（额度 0，两轮皆然）、
+  Zulip `general` / `new members` 两大流。⇒ §「不可宣称的」第 8 条
+  （不做宽泛的领域级首创宣称）**本轮仍然成立，建议保留**。
