@@ -123,6 +123,32 @@
   `log_mul` 要的是 `arg(−i) + arg z ∈ Ioc (−π, π]`，下端由 `arg z ≥ 0` 就够）。
   全文件 90 行，其中真正的新数学是 `csqrt_neg_I_mul` 一条。
 
+- [x] `eta-t`：Dedekind η 的 T 变换 `η(τ+1) = e^{iπ/12} η(τ)`，对应图节点
+  `math.dedekind-eta-t-transformation`。见 `StringFormal/Math/DedekindEtaT.lean`
+  （无 sorry，11 个声明 `check_axioms --all` 全 `ok`，只有标准三条）。
+
+  **结论先行**：`math.dedekind-eta-t-transformation` **可以标 formalized**，
+  `lean_decl` 取 `StringFormal.DedekindEta.eta_add_one`
+  （`{z : ℂ} (hz : 0 < z.im) : ModularForm.eta (z + 1) = Complex.exp (↑π * I / 12) * ModularForm.eta z`）。
+  Mathlib v4.33.1 确实没有 `eta_T`（见上面 (6)），本文件从 `ModularForm.eta` 的定义直接证：
+  `𝕢 1 (z+1) = 𝕢 1 z`（`Complex.exp_two_pi_mul_I`）⇒ 无穷乘积**逐项**不变（`tprod_congr`）；
+  `𝕢 24 (z+1) = e^{2πi/24}·𝕢 24 z = e^{iπ/12}·𝕢 24 z`（`exp_add` + `push_cast; ring`）。
+
+  ⚠ **数学缺口/加强（建议写进图卡 notes）**：T 变换**对一切 `z : ℂ` 成立，不需要 `Im z > 0`**。
+  `ModularForm.eta` 在 ℍ 外按同一公式定义，周期性论证从不看 `Im z`，而 `tprod` 是逐项比较，
+  乘积是否收敛无关紧要。无条件版是 `eta_add_one_eq (z : ℂ)`；`eta_add_one` 只是为了与图卡逐字
+  对齐才保留（未用的）假设（`set_option linter.unusedVariables false`）。
+  这与 S 变换**性质不同**：那里 `Im z > 0` 是本质的（它把 `−iz` 放进右半平面，使主对数可加）。
+
+  其余声明：`qParam_one_add_one`、`eta_q_add_one`、`qParam_24_add_one`（三条原子），
+  `eta_T`（`τ : ℍ` 版）、`eta_modular_T_smul`（`η(T · τ) = e^{iπ/12} η(τ)`，
+  与 `eta_modular_S_smul` 配对）、`norm_exp_pi_I_div_twelve`、`norm_eta_add_one`
+  （`‖η(τ+1)‖ = ‖η(τ)‖`）、`im_mul_norm_eta_pow_four_T_invariant` 与
+  `im_mul_norm_eta_pow_four_modular_T_smul`（`τ₂|η|⁴` 的 **T** 不变性）。
+  与 `DedekindEtaS` 的 S 版合起来，`τ₂|η(τ)|⁴` 在模群**两个生成元**下都不变；
+  **全模群不变性仍缺** `worldsheet.modular-group-generated-by-s-and-t`（未形式化）。
+  同样仍缺：η 对一般 `SL(2,ℤ)` 元素的乘子系统（Dedekind 和）。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
