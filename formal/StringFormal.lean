@@ -5,6 +5,7 @@ import StringFormal.Math.GreenSchwarzAlgebraGen
 import StringFormal.Math.FiniteCounts
 import StringFormal.Math.AnomalyPolynomial
 import StringFormal.Math.E8Roots
+import StringFormal.Math.DedekindEtaS
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
