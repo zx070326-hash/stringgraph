@@ -1,0 +1,247 @@
+id: worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
+target: worldsheet.superstring-mobius-strip-amplitude-closed-channel
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-mobius-amplitude-v2
+    convention_map: |
+      **记号换算（原书 vs 本图）**：原书（Vol.1 §7.4 与 Vol.2 §10.8）写 **Sp(k)**，
+      并逐字说明 'in our notation Sp(k) corresponds to n = 2k Chan–Paton states'；
+      本图 spectrum.chan-paton-gauge-group 写 **USp(n)**（n 为 Chan–Paton 指标数）。
+      两者指同一群：**USp(n) = Sp(n/2)**。本推导与目标卡一律用 **n**（Chan–Paton 指标数）记账。
+    note: |
+      供给**母结构**：玻色弦 Möbius 带真空振幅 Vol.1 (7.4.22)（算符形式与 26 维显式形式）、
+      (7.4.21) 的 ϑ₀₀η 组合、(7.4.23) 的闭弦通道形式（±2n·2¹³V₂₆/(4π(8π²α')¹³)、s = π/4t），
+      以及 **Chan–Paton 的 ±n 计数**（SO(n)：½n(n+1) 对称态 Ω = +1、½n(n−1) 反对称态 Ω = −1，
+      净贡献 **n**；Sp(k)：简并反转，给 **−n**）。
+      **非 inferred**：原书 §10.8 p.42 逐字 '**We have used (7.4.22) in D = 10.**'
+      ⇒ 这是原书**明写**的依赖，不是本图补的；(10.8.18) 的 ± 号也正是由这条计数继承下来的。
+      ⚠ **三处必须换算**：
+        (i) 维数 26 → 10：(8π²α't)^{−13} → (8π²α't)^{−5}、V₂₆ → V₁₀、2¹³ → 2⁵；
+        (ii) 测度 dt/**4**t → dt/**8**t：那张卡的 4t 已含无取向投影的 ½，本卡多出的那个 ½
+             来自 **GSO** 投影（原书 p.38 明写）；
+        (iii) 玻色因子 ϑ₀₀(0,2it)^{−12}η(2it)^{−12} → **η(2it)^{−8} Z⁰₀(2it)^{−4}**
+              （8 个横向玻色子 ⇒ [ϑ₀₀η]^{−4}，而 Z⁰₀ = ϑ₀₀/η）。
+              ⚠ **这一步的核对是抽取者做的**（#E71 逐字：「分母 η(2it)⁸Z⁰₀(2it)⁴ 正是 Vol.1
+              (7.4.21) 的 ϑ₀₀η 组合在 D = 10 下的形式 … 与『We have used (7.4.22) in D = 10』自洽」），
+              **原书只说 'rewriting the bosonic part slightly'，不写这个对应**。见 gaps 第三条。
+      ⚠ 本边**不借**那张卡的断言 (5)（闭弦通道无质量系数 −24，本图对**玻色弦**的补算）；
+      超弦这一侧本图**未做**对应的展开，见 gaps 第四条。
+  - id: spectrum.chan-paton-factors
+    note: |
+      供给 **n** 这个计数本身：Möbius 带只有**一条边界**，故迹里只挂一个 Chan–Paton 因子，
+      给出 ±n（而圆柱有两条边界给 n²）。
+      **非 inferred**：这是 Vol.1 (7.4.22) 里 ±n 的来源，经上面那条边继承到十维。
+      ⚠ 本书记号下 **Sp(k) 对应 n = 2k**（抽取记录 §1 的记号表）。
+      ⚠ 本边只供 n 这个计数，**不**供 SO(n)/Sp(k) 两种投影的候选集（那是下一条边），
+      也**不**供「n = 32」（那是 tadpole 卡）。
+  - id: worldsheet.superstring-worldsheet-parity-action
+    note: |
+      供给**迹里插入的算符**：Ω 在开超弦费米子上的作用 (10.8.12)–(10.8.13)、
+      Ω² = exp(πiF) (10.8.14)、以及无取向 + GSO 的**四项**联合投影算符
+      (1+Ω+Ω²+Ω³)/4 (10.8.15)。本推导第 1 步写下的 R = Ω exp(πiβF) 与 (10.8.17) 里
+      「含 Ω 与含 Ω exp(πiF) 的两个迹」正是这个投影算符展开出来的两项。
+      **非 inferred**：抽取记录 **#E71 把 #E70 列为原书明写的依赖**（'文献列出的依赖：
+      Vol.1 (7.4.22)（明写）；E70（投影算符）'），且 (10.8.12)–(10.8.15) 就印在 (10.8.16) 的
+      正上方同一小节里。
+      ★ **这条边是本轮新建那张卡的唯一下游**，也是它存在的理由：玻色弦的 Ω（Ω² = 1、
+      投影 (1+Ω)/2 两项）**不足以**支撑 Möbius 带这一支。
+  - id: worldsheet.type-i-open-string-gauge-multiplet
+    note: |
+      供给两件事：
+        (a) **候选集**：无取向开超弦的 Chan–Paton 群只有 **SO(n)** 与**辛群**
+            （§10.6 p.30 逐字 'Adding Chan–Paton factors, the gauge group will again be U(n)
+            in the oriented case and **SO(n) or Sp(n) in the unoriented case**'）——
+            (10.8.18) 的 ± 两号就是这两种投影，**U(n) 属取向理论、不在候选集**；
+        (b) **开弦的 GSO 投影**：测度 dt/8t 里来自 GSO 的那个 ½，以及 (10.8.15) 里
+            'exp(πiF) = 1 by the GSO projection' 所用的开弦 GSO。
+      **非 inferred**：两件事都在同一章 §10.6 p.30 逐字可读（本推导 sources 已定位）。
+      ⚠ 对照：worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling
+      把 GSO 的 ½ 挂在 **worldsheet.gso-projection** 上并被 reviewer-batch23 改标 inferred，
+      理由是那张卡是**闭弦** IIA/IIB 的 GSO、对象不完全同一。本推导改挂**开弦** GSO 的这张卡，
+      **不需要**标 inferred。
+      ⚠ 本边**不**供给「哪一个 n」（那由 (10.8.19) 的 tadpole 条件定），也不供给伴随表示那一条。
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给**费米迹的记号与对象**：Z^α_β(τ) 的定义（§10.7 (10.7.7)–(10.7.8)，
+      'these traces are for a pair of dimensions' ⇒ 8 个横向费米子给四次幂）与 (10.7.9) 的组合。
+      (10.8.17) 右端的 Z⁰₁(2it)⁴Z¹₀(2it)⁴ 与 (10.8.18) 分母里的 Z⁰₀(2it)⁴ 全用这套记号。
+      **非 inferred**：§10.8 通篇使用 §10.7 的 Z^α_β 记号，圆柱处（#E65）逐字写明
+      'with the fermionic trace (10.7.9) from one side of the type II string'。
+      ⚠ 只借迹的**形式与记号**，**不借**那张卡的结论（横向费米子个数是 8 的倍数）。
+      ⚠ 同时供给 (10.8.3) 第二式 Z^α_β(it) = Z^β_{−α}(i/t) 的对象——它带 **naive** 限定
+      （见 gaps 第五条）。
+  - id: math.dedekind-eta-s-transformation
+    inferred: true
+    note: |
+      供给 (10.8.18) **第一行到第二行**换通道所需的 η 的 S 变换（(10.8.3) 的第一式，
+      本卡里作用在 η(2it) 上、换元 **s = π/4t**）。
+      **标 inferred**：原书在 **(10.8.18) 处直接写等号**，既不重述 (10.8.3)，也不写 Möbius
+      这一支的换元步骤（(10.8.3) 与 'Using the modular transformations … and defining s = π/t
+      this becomes' 那句是**圆柱**处的，#E66）。⇒「Möbius 用的就是这两条模变换」是本图补的识别。
+      ⚠ **换算**：那张卡的形式是 η(−1/τ) = (−iτ)^{1/2}η(τ)（主分支）；本处取 τ = 2it
+      并配合 s = π/4t，本图**未逐步展开**这条链。⇒ 见 gaps 第二条。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eqs. **(10.8.16)**、**(10.8.17)**、**(10.8.18)**, p. 42（逐字见目标卡 sources 第一条：'With R = Ω exp(πiβF) in the trace, the fields have the periodicities'、'It follows that in the R sector of the trace the fields are periodic in the σ²-direction, corresponding to the R–R exchange, while the NS sector of the trace gives the NS–NS exchange.'、'It is slightly easier to focus on the R–R exchange, where the traces with Ω and Ω exp(πiF) sum to'、'The full Möbius amplitude, rewriting the bosonic part slightly, is'、'where the upper sign is for SO(n). We have used (7.4.22) in D = 10.'）"
+    note: |
+      L1 原书页图，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E71**。
+      ★ 抽取记录对本条强度的判词逐字：「**计算；'rewriting the bosonic part slightly' 是记号整理**」。
+      ⚠⚠ **扇区识别与圆柱相反**（#E71 特别标注），本推导第 2 步照录。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eqs. **(10.8.12)**–**(10.8.15)**, pp. 41–42（Ω 在开超弦上的作用；'In the open string Ω acts as … using the doubling trick (10.2.15)'、Ω² = exp(πiF)、联合投影算符 (1+Ω+Ω²+Ω³)/4）"
+    note: |
+      L1，抽取记录 **#E70**（已单页重渲染复核）。本图对应节点
+      **worldsheet.superstring-worldsheet-parity-action**（2026-09-11 本轮新建）。
+      ⚠ (10.8.12) 明写是由 **doubling trick (10.2.15)** 得到的，而 (10.2.15) 的超弦版本图无节点
+      （那张卡的「不断言 (b)」已登记）。⇒ 见 gaps 第六条。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.17) 左端第二项的系数（页图读作 (1 − 1)⁴，其值为零；原书不解释为何写出）"
+    note: |
+      L1 页图，抽取记录 **#E71** 与 **Q3**。
+      ⚠ 抽取记录的解读（8 个横向费米子 = 4 对，两个迹逐对相消）**是抽取者的，原书不解释**；
+      本推导**不用**这个解读，(10.8.18) 的结果不依赖该项（它为零）。见 gaps 第一条。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38（归一化逐字 'Note that the GSO and Ω projection operators each contribute a factor of ½.'）、eq. **(10.8.3)**（两条模变换，原书只在圆柱处写出）、p. 40（s ↔ t 的三拓扑换算逐字，Möbius 取 s = π/4t）"
+    note: |
+      L1，抽取记录 **#E65**、**#E66**、**#E68**。
+      ⚠ **(10.8.3) 只在圆柱处被明写使用**；Möbius 处原书直接写等号（见 gaps 第二条）。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.18) 前缀 α' 幂次的复算与第二轮页图复核：抽取记录 §0.4(b)（该前缀是三个面的公因子，圆柱与 Klein 瓶两条独立换元都闭合到 1/(8π(8π²α')⁵)）与 §6（跨卷控制组；p.42 的 (10.8.18)/(10.8.19) 本轮读作单撇）"
+    note: |
+      L1 页图 + 抽取者独立复算。
+      ⇒ 目标卡采纳 **(8π²α')⁵**，依据是复算闭合 + 量纲 + 跨卷一致性（Vol.1 (7.4.23) 用 (8π²α')¹³），
+      **不是**像素判读。
+      ⚠ **不得援引 (13.3.12) 的书错先例**（§6.4：那处读数可复现，本处不可复现）。
+      ⚠ **残余不确定性（§6.5，登记不降级）**：两轮复核仍只用同一条成像管线；勘误表取不到。
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The Möbius strip」, eqs. **(7.4.20)**–**(7.4.23)**, pp. 228–229（被 Vol.2 明写引用的母式 (7.4.22)；(7.4.21) 的 ϑ₀₀η 组合；(7.4.23) 是 26 维闭弦通道形式与 s = π/4t；Chan–Paton 的 ±n 计数逐字见目标卡 sources）"
+    note: |
+      本图对应节点 **spectrum.one-loop-mobius-amplitude-v2**。
+      ★ (7.4.23) ↔ (10.8.18) 的逐式对照见抽取记录 **#E74**：
+        Möbius (7.4.23) ±2n·2¹³V₂₆/(4π(8π²α')¹³) ↔ (10.8.18) ±2n·2⁵V₁₀/(8π(8π²α')⁵)。
+      ⚠ 那张卡自己的推导 gaps 写明「原书只写出计数」（± 号与 SO/Sp 的对应未逐一验证），
+      本推导继承该限度（目标卡「不断言 (i)」）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, p. 30（逐字：'Adding Chan–Paton factors, the gauge group will again be U(n) in the oriented case and SO(n) or Sp(n) in the unoriented case.'；以及同页开弦必须做 GSO 投影的逐字句）"
+    note: |
+      本图对应节点 **worldsheet.type-i-open-string-gauge-multiplet**。
+      供给 (10.8.18) 里 ± 两号的**候选集**与开弦 GSO 的那个 ½。
+summary: |
+  **原书的四步（每一步都逐字可核）**：
+
+  1. **写下迹里插入的算符**：无取向 + GSO 的联合投影算符是 **(10.8.15) 的四项形式**
+     (1+Ω+Ω²+Ω³)/4（因开超弦上 **Ω² = exp(πiF)**，(10.8.14)），
+     展开后本步只需两个迹：含 **Ω** 与含 **Ω exp(πiF)** 的，统一写成 R = Ω exp(πiβF)。
+     测度取 dt/**8**t（GSO 与 Ω 各一个 ½）；玻色部门取 Vol.1 (7.4.22) 换到十维（原书逐字）；
+     Chan–Paton 给 **±n**（一条边界 ⇒ 一个 CP 迹；SO(n) 给 +n、Sp(k) 给 −n，Vol.1 (7.4.22) 的计数）。
+  2. **由周期性读出扇区归属**：(10.8.16) 给 ψ^μ(w + 4πit) = ψ^μ(w − 2π)，于是
+     **迹的 R 扇区**里场在 σ² 方向周期 ⇒ 对应 **R–R 交换**；**迹的 NS 扇区**给 NS–NS 交换。
+     ⚠⚠ **这条判据与圆柱相反**（圆柱按「迹里是否出现 exp(πiF)」分），Klein 瓶又是第三条。
+     原书接着说 'It is slightly easier to focus on the R–R exchange'，故本卡算的是 **R–R 一侧**。
+  3. **算两个迹之和**：(10.8.17) 给
+     −16q^{1/3}∏[1+(−1)^m q^m]⁸ − (1−1)⁴q^{1/3}∏[1−(−1)^m q^m]⁸ = Z⁰₁(2it)⁴Z¹₀(2it)⁴。
+     ⚠ 第二项系数 **(1−1)⁴ = 0**，本推导**不使用**它，也不采用抽取者对它的解读（Q3）。
+  4. **换通道并取长柱极限**：合成 (10.8.18) 第一行（'rewriting the bosonic part slightly'）；
+     用模变换并令 **s = π/4t** 得第二行；s → ∞ 展开得第三行
+     **±2in(2⁵V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]**，**上号对应 SO(n)**。
+     ⚠ **原书在这一步直接写等号**，不重述 (10.8.3)、不写换元过程（见 gaps 第二条）。
+
+  **为什么标 physical-argument（四条，按弱到强排）**：
+  (1) **第 1 步的玻色部门是「换维数照搬」**：原书只说 'We have used (7.4.22) in D = 10.'
+      与 'rewriting the bosonic part slightly'，**不说** ϑ₀₀η 的组合如何变成 η⁸Z⁰₀⁴
+      （那一步的核对是抽取者做的，见 gaps 第三条）；且 Vol.1 那一式自身的 ± 号只有计数、无验证；
+  (2) **第 4 步的模变换链原书不写**，本图也未展开；所用的 (10.8.3) 第二式带 **naive** 限定
+      （§10.7 (10.7.14)：纯左移费米子的路径积分相位没有 diff 不变的定义）；
+  (3) **(10.8.12) 依赖的超弦版 doubling trick (10.2.15) 本图无节点**（见 gaps 第六条）；
+  (4) 整个对象是单圈路径积分 / 迹的形式计算。
+  ⚠ 本推导里**最硬**的一环是前缀的复算（三个面的公因子，抽取记录 §0.4(b) 已在圆柱与 Klein 瓶
+  两条独立换元上闭合），但它**不提升**第 1–3 步。故整体 physical-argument，与另外两张同族卡
+  （圆柱、Klein 瓶）口径一致。
+gaps:
+  - "**(10.8.17) 左端第二项 (1 − 1)⁴ 原书不解释**：页图读作
+     '− (1 − 1)⁴ q^{1/3} ∏[1 − (−1)^m q^m]⁸'，其值为零。抽取者的解读（8 个横向费米子分成 4 对，
+     含 Ω 与含 Ω exp(πiF) 的两个迹在该结构上逐对相消，故系数 (1−1)⁴）**是抽取者的，原书不解释
+     为何要把一个恒为零的项写出来**（抽取记录 Q3）。
+     ⇒ 本推导**不使用**这个解读；(10.8.18) 的结果不依赖该项。目标卡「不断言 (a)」照实登记。
+     ⚠ 抽取记录 Q3 的建议逐字是「这一式不进任何节点」；本卡采取更弱的做法（照录页图读数、
+     不断言解释），理由与保留条款见目标卡 sources 第二条。"
+  - "**(10.8.18) 第一行到第二行的模变换步骤原书不写**：(10.8.3) 与 'Using the modular
+     transformations … and defining s = π/t this becomes' 那句是**圆柱**处的（#E66）；
+     Möbius 处原书直接写等号，既不重述两条模变换，也不写 s = π/4t 的换元与
+     η(2it)、Z^α_β(2it) 在该换元下的具体变换。本图**未展开**这一步，
+     math.dedekind-eta-s-transformation 那条边因此标 **inferred**。
+     ★ 可做的正解：把 Möbius 的换元链逐步写出（抽取记录 §0.4(b) 只在圆柱与 Klein 瓶上逐步复算过，
+     **Möbius 那一支没有逐步**，只由 §0.4(a) 的系数相加间接验证）。"
+  - "**玻色因子的换维数对应是抽取者核对的，不是原书写的**：原书只说 'rewriting the bosonic part
+     slightly' 与 'We have used (7.4.22) in D = 10.'，**不写** Vol.1 (7.4.21) 的
+     ϑ₀₀(0,2it)^{−12}η(2it)^{−12} 如何变成本卡分母里的 η(2it)⁸Z⁰₀(2it)⁴。
+     抽取记录 #E71 逐字记了这条核对（8 个横向玻色子 ⇒ [ϑ₀₀η]^{−4}，而 Z⁰₀ = ϑ₀₀/η），
+     并判「与『We have used (7.4.22) in D = 10』自洽」——**这是抽取者的核对**，本图照录但标明来源。"
+  - "**超弦 Möbius 的长柱展开系数本图未复算**：玻色卡 spectrum.one-loop-mobius-amplitude-v2 的
+     断言 (5)（ϑ₀₀^{−12}η^{−12} = e^{2s} **− 24** + O(e^{−2s})，与圆柱的 +24 反号）是本图对**玻色弦**
+     做的补算，专门用来解释 (7.4.22) 的 ± 与 (7.4.24) 的 ∓ 的表观矛盾。
+     ⚠ **超弦这一侧本图没有做对应的展开**：(10.8.18) 第三行的 [16 + O(e^{−2s})] 是照录原书。
+     好在超弦这里**不出现同款表观矛盾**（(10.8.18) 上号 + ↔ SO(n)，代入 §0.4(a) 的求和直接给出
+     (10.8.19) 上号 − ↔ SO(n)），但这条自洽性是**由系数相加读出的**，不是逐项验证的。
+     ⇒ 待做：复算 [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴]/[η(2is/π)⁸Z⁰₀(2is/π)⁴] 的 s → ∞ 展开，
+     验证常数项确为 16（含符号）。"
+  - "**(10.8.3) 的第二式 Z^α_β(it) = Z^β_{−α}(i/t) 在原书里是 'naive' 的**：它是 §10.7 (10.7.14)
+     的特例，而 (10.7.14) 原书明确限定（polchinski-1998-v2.md#E47 逐字）'The reason these modular
+     transformations are naive is that there is no diff-invariant way to define the phase of the
+     path integral for purely left-moving fermions'。**§10.8 直接使用而不重述**，本图照实继承
+     （目标卡「不断言 (g)」）。"
+  - "**(10.8.12) 依赖的超弦版 doubling trick (10.2.15) 本图无节点**：本推导经
+     worldsheet.superstring-worldsheet-parity-action 用到 (10.8.12)，而那张卡明写
+     '不断言 (b)：不断言超弦版 doubling trick (10.2.15) 本身'——本图的
+     worldsheet.open-string-doubling-trick 是**玻色弦**语境的（Neumann 条件 ⇒ T̄ 是 T 的镜像
+     解析延拓）。⇒ 待建 worldsheet.open-superstring-doubling-trick。
+     ⚠ 同一条限度也出现在 worldsheet.superstring-worldsheet-parity-action 的 notes 里
+     （该卡 status = rigorous 的两条保留之一）。"
+  - "**(10.8.18) 第三行的 16 的来源未被原书点明**：与圆柱、Klein 瓶两张同族卡同款。
+     ⚠ 本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边
+     （另外两张卡各有一条），理由：Möbius 这一支的整体符号不像 Klein 瓶那样需要引力子这个物理输入
+     （脚注 8 只对 Klein 瓶说），而 16 本身是三个面的**公因子**、已在另外两张卡上记过账。
+     ⇒ 正解仍是为「长柱极限里最轻态的计数」单建一卡，届时三张卡一起改指它。"
+  - "**± 号与 SO(n)/Sp(k) 的对应未逐一验证**：原书在 (10.8.18) 处只写一句
+     'the upper sign is for SO(n)'，把计数推给 Vol.1 (7.4.22)；玻色卡
+     spectrum.one-loop-mobius-amplitude-v2 的推导 gaps 也写明「原书只写出计数」。
+     ⇒ 本推导继承该限度（目标卡「不断言 (i)」）。
+     ⚠ 这与 (10.8.19) 的**整体符号**（原书自承 'This calculation does not determine the sign of
+     the tadpole, but it should be n ∓ 32'）是**两回事**，不要混：本条说的是 SO/Sp 之间的相对号，
+     那一条说的是整体号。"
+  - "**本推导不碰 NS–NS 侧，也不碰三拓扑求和**：原书在 Möbius 处只算 R–R 一侧；
+     tadpole 的识别、C₁₀ 悖论（(10.8.5)–(10.8.6)，原书 'One can guess the resolution of this as
+     follows' + 一个本书不给的 'more detailed analysis'，#E67）与 (n ∓ 32)² 都在
+     worldsheet.type-i-tadpole-cancellation-so32-v2。⇒ 本卡**不经过**该节最弱的那一环。"
+notes: |
+  ★★【本推导把 tadpole 推导里 Möbius 那一支的悬空合上（curator，2026-09-11，klein-mobius）】
+  在此之前 (10.8.16)–(10.8.18) 只活在
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的 summary 第 (3) 步
+  （逐字只有一行「Möbius 带 M₂：Z_{M₂,1} ∝ ±2n·2^5（上号 SO(n)）」）。
+  本卡与 worldsheet.superstring-klein-bottle-amplitude-closed-channel 一起，
+  把那条推导 gaps 里「Klein 瓶与 Möbius 带两支仍无节点」这一条关闭。
+
+  ★【三条扇区判据各不相同，这是本族卡最容易出错的地方】
+  · 圆柱（#E65）：按**迹里是否出现 exp(πiF)** 分——不出现 ⇒ NS–NS，出现 ⇒ R–R；
+  · Klein 瓶（#E69）：按**在 σ² → σ² + 4πt 下是否反周期**分——反周期 ⇒ NS–NS
+    （权重 Ω exp(πiF) 或 Ω exp(πiF̃) 的两项，且两者相等）；
+  · Möbius 带（#E71）：按**迹的 R / NS 扇区**分——**R 扇区 ⇒ R–R 交换**，NS 扇区 ⇒ NS–NS。
+  抽取记录在 #E71 特别标注「**注意这与圆柱相反**」。⇒ 三张卡不得互相套用判据。
+
+  ★【本卡给的是 R–R 侧，另外两张给 NS–NS 侧】做 (10.8.19) 的 R–R 求和时：
+  圆柱与 Klein 瓶要各自用 Z_{C₂,1} = −Z_{C₂,0}、Z_{K₂,1} = −Z_{K₂,0}（**两条都不在那两张卡的
+  断言里**，属 §10.7 的超对称论证），Möbius 则直接用本卡。抽取记录 §0.4(a) 的交叉核验就是这么做的：
+  −iK[n² + 2¹⁰ ∓ 2·32·n] = −iK(n ∓ 32)²，K 是三个面的公因子。
+
+  【本推导对 GSO 的记账比圆柱那张卡更贴切】圆柱推导把 GSO 的 ½ 挂在 worldsheet.gso-projection
+  （**闭弦** IIA/IIB 的 GSO）上并被 reviewer-batch23 改标 inferred；本推导挂的是
+  worldsheet.type-i-open-string-gauge-multiplet（**开弦**的 GSO 投影，§10.6 p.30 逐字），
+  对象同一，故非 inferred。⇒ 若日后为「开弦 GSO 投影」单建一张窄卡，三条推导应一起改指它。
+
+  按抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E71**（(10.8.16)–(10.8.18)）、
+  **#E70**（Ω 的作用与投影算符）、**#E65**（归一化）、**#E66**（(10.8.3) 与 naive 限定）、
+  **#E68**（s ↔ t）、**#E74**（与 Vol.1 (7.4.23) 的逐式对照）、**§0.4(a)(b)**（交叉核验与 α' 复算）、
+  **§6**（α' 裁决）、**Q3**（(1−1)⁴）建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"

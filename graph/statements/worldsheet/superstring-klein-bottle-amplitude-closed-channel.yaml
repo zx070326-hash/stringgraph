@@ -1,0 +1,209 @@
+id: worldsheet.superstring-klein-bottle-amplitude-closed-channel
+kind: proposition
+title: type I Klein 瓶真空振幅中 NS–NS 交换那一项的闭弦通道形式 (10.8.11)：Z_{K₂,0} = i(2¹⁰V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]
+statement: |
+  **设定（是陈述的一部分）**：type I 弦——十维平坦时空、**无取向**（Ω 投影）的开 + 闭超弦。
+  考虑 **Klein 瓶** K₂ 的单圈真空振幅：周长 2π、长 2πt 的圆柱两端经宇称反转 Ω 缝合
+  （spectrum.one-loop-klein-bottle-amplitude 的几何），其唯一的模记作 t ∈ (0, ∞)，**无模群**。
+  Klein 瓶**没有边界**，故本卡不含 Chan–Paton 因子。
+  费米迹记号 Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 按
+  worldsheet.modular-invariance-requires-eight-transverse-fermions（原书 §10.7 (10.7.7)–(10.7.9)，
+  **这些迹是「对一对维数」取的**，故下面出现四次幂）。
+  **归一化（必须带上）**：原书 p.38 逐字 'Note that the GSO and Ω projection operators each
+  contribute a factor of ½.'——这正是下式测度 dt/8t 的来源（对照玻色版 (7.4.15) 的 dt/4t）。
+  **闭弦通道的长度**取 **s = π/2t**（原书 p.40 逐字给出三拓扑的换算：圆柱 π/t、Möbius π/4t、
+  Klein 瓶 π/2t）。
+
+  **断言**：
+    **(1) Klein 瓶上的 GSO 投影算符**：
+          [(1 + exp(πiF))/2] · [(1 + exp(πiF̃))/2]                                (10.8.7)
+    **(2) 路径积分的边界条件**：在迹里插入 R = Ω exp(πiβF + πiβ̃F̃)，则
+          ψ(w + 2πit)  = −R ψ(w) R^{−1}  = −exp(πiβ) ψ̃(w̄)                        (10.8.8a)
+          ψ̃(w̄ + 2πit) = −R ψ̃(w̄) R^{−1} = −exp(πiβ̃) ψ(w)                        (10.8.8b)
+        （原书逐字：'with the usual extra sign for fermionic fields'），由此
+          ψ(w + 4πit) = exp[πi(β + β̃)] ψ(w)                                       (10.8.9)
+    **(3) 扇区识别与两个分迹**：**NS–NS 交换**来自在 σ² → σ² + 4πt 下**反周期**的扇区，
+        即迹里权重为 **Ω exp(πiF)** 或 **Ω exp(πiF̃)** 的两项，**且这两个迹相等**。
+        NS–NS 态与 R–R 态**都**对这些迹有贡献，分别给出
+          NS–NS：  q^{−1/3} ∏_{m=1}^∞ (1 + q^{2m−1})⁸ = Z⁰₀(2it)⁴                 (10.8.10a)
+          R–R：   −16 q^{2/3} ∏_{m=1}^∞ (1 + q^{2m})⁸ = −Z¹₀(2it)⁴                (10.8.10b)
+        其中 q = exp(−2πt)。
+    **(4) 闭弦通道（s 积分）形式**：
+          Z_{K₂,0} = iV₁₀ ∫₀^∞ (dt/8t)(4π²α't)^{−5} η(2it)^{−8}[Z⁰₀(2it)⁴ − Z¹₀(2it)⁴]
+                   = i (2¹⁰V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴]
+                   = **i (2¹⁰V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]**       (10.8.11)
+        其**玻色部分**就是 Vol.1 (7.4.15) 换到十维（原书逐字：'The bosonic part is (7.4.15)
+        converted to D = 10.'）。
+        ⚠ 第三行方括号里的 **16** 在本断言里只是**原书印出的那个数**；它「是什么的计数」
+        不属本断言，见「本命题不断言 (d)」。
+
+  **本命题不断言**：
+    (a) ⚠⚠ **不断言 (10.8.10a,b) 两个迹的整体符号是算出来的**。原书脚注 8（p. 41）逐字：
+        'In evaluating these, note that only states with identical ψ and ψ̃ excitations contribute
+        to traces containing Ω. The signs from exp(πiF) or exp(πiF̃) just cancel the signs from
+        anticommuting ψs past ψ̃s, so that all terms in each trace have the same sign. **The overall
+        sign in the NS–NS trace (positive) can be determined from the graviton, and the overall
+        sign in the R–R trace (negative) from the argument (10.6.17).**'
+        ⇒ (10.8.10a) 的 **+** 靠**引力子**这一物理输入定，(10.8.10b) 的 **−** 靠 §10.6 (10.6.17)
+        的论证（worldsheet.type-i-unoriented-closed-spectrum 的 Ṽ_{s'}V_s = −V_sṼ_{s'}）定，
+        **两者都不是本处算出来的**。本卡照实登记这一条。
+    (b) **不断言 R–R 侧的值，也不断言相消**。'Z_{K₂,1} = −Z_{K₂,0}'（原书由 §10.7 的超对称
+        论证：总费米配分函数为零）**不在本卡的断言里**；理由与
+        worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的「不断言 (a)」相同：
+        算 Z_{K₂,0} 本身不需要它。
+    (c) **不断言 Klein 瓶那一支的 tadpole 相加、(n ∓ 32)² 与 SO(32)**。那是
+        worldsheet.type-i-tadpole-cancellation-so32-v2。
+    (d) **不断言 (10.8.11) 第三行方括号里的 16「是什么的计数」**。本卡只断言原书印出的那个数。
+        「16 是十维无质量态的计数（对照玻色弦 Vol.1 (7.4.4) 的 24）」是**抽取记录的转述
+        （gloss）**，原书在 (10.8.11) 处不说 16 是什么。该释义移到 notes。
+        ⚠ 同样**不断言**这个 16 与本图别处出现的 16 相等或同源
+        （口径与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的「不断言 (h)」一致）。
+    (e) ⚠⚠ **不断言 2¹⁰ 是「2^D 的普适计数」**。原书**从不写符号形式 2^D 或 2^{D/2}**，
+        也从不把 Vol.1 (7.4.19) 的 2²⁶ 与本处的 2¹⁰ 并列比较；两者「出自同一组公式在不同 D 下取值」
+        这一点**有**原文背书（三条 'converted to D = 10' 的明写引用），而「2^{D/2} 是普适计数」
+        **没有**（抽取记录 #E74 的分层裁决 (ii)）。
+        ⚠ 尤其**不得**把本卡的 2¹⁰ / Möbius 的 2⁵ 与 GSW 六边形的 2⁵
+        （math.hexagon-odd-twist-count、consistency.type-i-hexagon-so32-iff）说成同源：
+        **没有任何文献解释这三个 32 为什么相等**（抽取记录 Q5）。
+    (f) **不断言由 (10.8.11) 第一行到第二行的模变换步骤**。原书在此**直接写等号**，
+        既不重述 (10.8.3) 的两条模变换，也不写 s = π/2t 的换元过程与 η(2it)、Z^α_β(2it)
+        在该换元下的具体变换。本图未展开这一步（见推导的 gaps）。
+    (g) **不断言 (10.8.3) 第二式的模变换是无限定的**。Z^α_β(it) = Z^β_{−α}(i/t) 是 §10.7
+        (10.7.14) 的特例，而 (10.7.14) 在原书里**明确带 'naive' 的限定**（逐字：'The reason
+        these modular transformations are naive is that there is no diff-invariant way to define
+        the phase of the path integral for purely left-moving fermions'）。
+        **§10.8 直接使用而不重述这个限定**；本卡照实记下，故断言 (4) 继承该限定。
+    (h) **不断言前缀里 α' 的幂次取自页图读数**。本卡采纳 **(8π²α')⁵**（单撇），根据是
+        **复算 + 量纲 + 跨卷控制组**三重复核，**不是**像素判读：
+          (i) 独立复算闭合：Klein 瓶取 s = π/2t、(4π²α't)^{−5}，复算给
+              2¹⁰/(8π(8π²α')⁵)（抽取记录 §0.4(b) 逐字：「Klein 瓶（s = π/2t，(4π²α't)^{−5}）
+              复算同样给出 2¹⁰/(8π(8π²α')⁵)」）；
+          (ii) 量纲：V₁₀ 需要 length¹⁰，(8π²α')⁵ 正好给 length¹⁰；
+          (iii) 跨卷一致性：Vol.1 对应式 (7.4.19) 用 (8π²α')¹³。
+        ⚠ **页图上的小字号读数不可复现**：读出 α'² 的位置与「落在被降为 \scriptstyle 的分式分母里」
+        **完全相关**；同一式**首行**以全字号出现的 (4π²α't)^{−5} 读数干净。第二轮单页重渲染
+        p.41 的 (10.8.11) **读作单撇**。⇒ 判为**渲染假象**，**不判为原书排印错误**；
+        **不得援引 (13.3.12) 的「书错」先例**（那处读数可复现，本处不可复现）。
+        ⚠ **残余不确定性（照实登记，不因此降级）**：两轮复核仍只用了**同一条成像管线**
+        （Cambridge Core PDF → 页图渲染）；官方勘误表取不到（KITP errata 页 404）。
+    (i) **不断言 cross-cap 态 |C⟩ 的形式，也不断言由路径积分导出本式**。玻色版 (7.4.15) 原书
+        留作习题 7.13、cross-cap 态留作习题 7.15（spectrum.one-loop-klein-bottle-amplitude 的
+        「不断言」已写明）；超弦版本书正文亦不做路径积分推导。
+    (j) **不断言带顶点算子的 Klein 瓶振幅**（原书此处只算真空振幅；脚注 7 指出加顶点算子后
+        NS–NS 与 R–R 的逐拓扑相消不再成立，那是 tadpole 卡的内容）。
+uses:
+  - spectrum.one-loop-klein-bottle-amplitude
+  - worldsheet.modular-invariance-requires-eight-transverse-fermions
+  - worldsheet.type-i-unoriented-closed-spectrum
+  - worldsheet.gso-projection
+  - math.dedekind-eta-s-transformation
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Klein bottle」, eqs. **(10.8.7)**、**(10.8.8a,b)**、**(10.8.9)**、**(10.8.10a,b)**、**(10.8.11)**, pp. 40–41；逐字：'With R = Ω exp(πiβF + πiβ̃F̃) in the trace, the path integral boundary conditions are … with the usual extra sign for fermionic fields.'、'As indicated by the arrows in figure 10.3, these imply that'、'The NS–NS exchange, from the sectors antiperiodic under σ² → σ² + 4πt, then comes from traces weighted by Ω exp(πiF) or Ω exp(πiF̃); further, these two traces are equal. Both NS–NS and R–R states contribute to the traces, making the separate contributions'、'where q = exp(−2πt).'、'The full Klein bottle contribution to the NS–NS exchange is then'、'and Z_{K₂,1} = −Z_{K₂,0}. **The bosonic part is (7.4.15) converted to D = 10.**'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E69**
+      （该条已单页重渲染复核）。
+      ★ 原书**明写**的两条依赖：**Vol.1 (7.4.15)**（玻色部分）与 **(10.6.17)**（R–R 迹的整体符号，
+      见脚注 8），本卡对应的两条边因此**非 inferred**。
+      ⚠ 抽取记录判本条的强度是「计算，但**两个整体符号不是算出来的**」，见「不断言 (a)」。
+  - ref: polchinski-1998-v2
+    loc: "§10.8 脚注 8, p. 41（逐字全文见本卡「不断言 (a)」）：'… The overall sign in the NS–NS trace (positive) can be determined from the graviton, and the overall sign in the R–R trace (negative) from the argument (10.6.17).'"
+    note: |
+      **L1 原书页图**，抽取记录 **#E69** 的脚注 8。
+      ★★ 这是本卡最该被记住的一处认识论线索：**两个迹的整体符号靠物理输入而非计算**
+      （抽取记录逐字：「整体符号靠物理输入而非计算，这是『实话实说』原则下必须记的一处」）。
+      ⚠ 其中 (10.6.17) 是本图 worldsheet.type-i-unoriented-closed-spectrum 的断言之一
+      （Ṽ_{s'}V_s = −V_sṼ_{s'}），故那条边**非 inferred**；
+      而「the graviton」原书**不给式号、不引 §10.6 的谱**，本图把它落到
+      worldsheet.type-ii-massless-spectrum 上是补的，那条边标 inferred。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38 归一化逐字 'Note that the GSO and Ω projection operators each contribute a factor of ½.'；p. 40 逐字（s ↔ t 的三拓扑换算）'s is related to the usual modulus t for these surfaces by s = π/t, π/4t, and π/2t for the cylinder, Möbius strip, and Klein bottle respectively.'"
+    note: |
+      L1，抽取记录 **#E65**（归一化）与 **#E68**（几何与 s ↔ t）。
+      ⚠ 这两条是**三个拓扑共用**的设定；本卡取 **s = π/2t**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. **(10.8.3)**, p. 38（两条模变换 η(it) = t^{−1/2}η(i/t)、Z^α_β(it) = Z^β_{−α}(i/t)，原书在**圆柱**处写出并使用；(10.8.11) 处直接写等号，不重述）"
+    note: |
+      L1，抽取记录 **#E66**。
+      ⚠⚠ **原书没有为 Klein 瓶写出换通道的步骤**：(10.8.11) 第一行到第二行是直接等号。
+      本卡「不断言 (f)」照实登记；推导的 gaps 里也记了这一条，对应的
+      math.dedekind-eta-s-transformation 边标 **inferred**。
+      ⚠ (10.8.3) 第二式带 **naive** 限定（见「不断言 (g)」与 polchinski-1998-v2.md#E47 逐字）。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.11) 前缀的 α' 幂次：抽取记录 §0.4(b) 的复算（Klein 瓶 s = π/2t、(4π²α't)^{−5} ⇒ 2¹⁰/(8π(8π²α')⁵)）与 §6 的第二轮页图复核（跨卷控制组 + 「假象位置 ↔ 分式分母」100% 相关）"
+    note: |
+      **L1 页图 + 独立复算**，抽取记录 **§0.4(b)** 与 **§6**（2026-09-11 第二轮裁决）。
+      ⇒ 判为 **\scriptstyle 分母中 prime 的渲染假象**，**不判原书排印错误**；
+      **p.41 的 (10.8.11) 本轮读作单撇 (8π²α')⁵**，与本卡采纳的写法一致。
+      ⚠ **不得援引 (13.3.12) 的书错先例**（§6.4 逐字：两处性质不同）。
+      ⚠ **残余不确定性（§6.5，登记但不降级）**：两轮复核仍只用同一条成像管线；
+      官方勘误表取不到。**人在 PDF 阅读器里把 p.41 放大一次即可 100% 关闭。**
+      ⚠ polchinski-1998-v2.md **E48 沿用页图读数写成 (8π²α'²)⁵，应按 §0.4(b)/§6 订正**
+      （curator 不改 literature/ 旧条目，留给 researcher）。
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The Klein bottle」, eq. **(7.4.15)**（玻色弦 Klein 瓶真空振幅，Vol.2 §10.8 逐字引用并 'converted to D = 10'）；**(7.4.19)**（26 维闭弦通道形式 2²⁶V₂₆/(4π(8π²α')¹³)，与 (10.8.11) 的 2¹⁰V₁₀/(8π(8π²α')⁵) 逐项对照）"
+    note: |
+      本图对应节点是 **spectrum.one-loop-klein-bottle-amplitude**（其断言 (1)(2) 正是 (7.4.15)、
+      (3) 正是 (7.4.19)），故本卡的这条边**非 inferred**。
+      ⚠ **测度的换算**：那张卡是玻色弦无取向理论的 dt/**4**t（已含 Ω 投影的 ½）；
+      本卡是 dt/**8**t，多出的那个 ½ 来自 **GSO** 投影（原书 p.38 明写）。
+      ⚠ 那张卡的 η(2it)^{−24} 是 24 个横向玻色模；十维换成 η(2it)^{−8}（8 个横向玻色模），
+      费米部门由 §10.7 的迹补上。
+      （抽取记录 **#E74** 给出 (7.4.19) ↔ (10.8.11) 的逐式对照表。）
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.9)**（费米迹的组合）；(10.7.7)–(10.7.8)（Z^α_β 的定义，'these traces are for a pair of dimensions'）"
+    note: |
+      本图对应节点是 **worldsheet.modular-invariance-requires-eight-transverse-fermions**
+      （其 statement 就含 (10.7.7)–(10.7.9) 的记号与组合）。
+      ⚠ 本卡只借迹的**记号与形式**，**不**借那张卡的「横向费米子个数是 8 的倍数」这个结论。
+      ⚠ §10.8 在 Klein 瓶处**不重复引用 (10.7.9)**（那句明写引用在圆柱处，#E65）；
+      本卡用的是同一套 Z^α_β 记号，故这条边按「记号与对象的供给」记账。
+tags: [superstring, type-i, klein-bottle, one-loop, ns-ns, closed-channel, cross-cap]
+notes: |
+  ★★【本卡为什么存在（curator，2026-09-11，klein-mobius）】
+  (10.8.11) 在本图此前**没有独立节点**：它只活在
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的 summary 第 (2) 步里，
+  那条推导的 gaps 逐字记着「**Klein 瓶 (10.8.7)–(10.8.11) 与 Möbius 带 (10.8.12)–(10.8.18)
+  两支仍无节点** … 那两支的模变换与长柱极限在图上仍悬空」。本卡把 Klein 那一支落到结构上，
+  与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2（圆柱那一支）成对。
+
+  【与另外两张同族卡的分工】
+  · 圆柱：worldsheet.superstring-cylinder-amplitude-closed-channel-v2，(10.8.1)–(10.8.4)，∝ n²；
+  · Klein 瓶：**本卡**，(10.8.7)–(10.8.11)，∝ 2¹⁰，**无边界故无 Chan–Paton**；
+  · Möbius 带：worldsheet.superstring-mobius-strip-amplitude-closed-channel，(10.8.16)–(10.8.18)，
+    ∝ ±2n·2⁵；
+  · 三者相加（R–R 侧）给 (10.8.19) 的 (n ∓ 32)² 与 SO(32)：
+    worldsheet.type-i-tadpole-cancellation-so32-v2。
+  三张卡的**公因子**是 K ≡ (V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]；本卡的系数是 **2¹⁰**。
+  ⚠ 抽取记录 §0.4(a) 的独立算术交叉核验正是把三者的系数 −n²、−2¹⁰、±2n·2⁵ 相加得 −(n ∓ 32)²
+  （因 2¹⁰ = 32²），**本卡的 2¹⁰ 是那次核验的三个输入之一**。
+
+  【16 的物理释义（**不进断言**，见「不断言 (d)」）】
+  把 s → ∞ 极限下方括号里的常数读作「十维无质量闭弦态的计数」，对照玻色弦 Vol.1 (7.4.4) 的 24
+  （26 维横向数），是标准的物理读法。⚠ **这是本图/抽取者的释义，不是原书在 (10.8.11) 处的断言**；
+  原书只印出这个数。口径与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2 一致。
+
+  【2¹⁰ 的来历与它**不**能被说成什么】(7.4.19) 的 2²⁶ ↔ 本卡的 2¹⁰，Möbius 的 2¹³ ↔ 2⁵；
+  原书**明写**三个面的玻色部分就是 Vol.1 (7.4.1)/(7.4.15)/(7.4.22) 'converted to D = 10'
+  ⇒「同一组公式在不同 D 下取值」有原文背书。但原书**从不写** 2^D / 2^{D/2} 的符号形式，
+  也不把两个数并列比较 ⇒「2^{D/2} 是普适计数」**没有**文献支持（抽取记录 #E74 (ii)）。
+  ⚠⚠ 本图手上有**三个各自独立出处的 32**：(a) 本节的世界面重标度计数；
+  (b) GSW (10.2.36) 的积分变量替换 √z_r → z_r；(c) GSW 六边形奇数扭转分布数
+  Σ_{k 奇} C(6,k) = 2⁵（本图节点 math.hexagon-odd-twist-count）。
+  **没有任何一本书解释这三者为什么相等**（抽取记录 Q5）；**本图不得擅自合并**。
+
+  【本卡不与 consistency.type-i-hexagon-so32-iff 建边】理由同
+  worldsheet.type-i-tadpole-cancellation-so32-v2 的（限定 4）：§10.8 全节不出现 'anomaly'，
+  §10.6 p.31 把发散与时空反常并列而非串联，§12.2 p.102 逐字说 type I 的规范群由 tadpole 相消定。
+
+  【整体符号那一条值得单独记住】脚注 8 说的是：NS–NS 迹的 + 由**引力子**定、R–R 迹的 − 由
+  **(10.6.17)** 定。前者在本图落到 worldsheet.type-ii-massless-spectrum（**inferred**，
+  原书不给式号）；后者落到 worldsheet.type-i-unoriented-closed-spectrum（**非 inferred**，
+  原书明写式号）。⇒ 本卡的 (10.8.10a,b) 与 (10.8.11) 的整体符号**不是纯计算的产物**。
+author: curator
+created: "2026-09-11"
