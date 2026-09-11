@@ -17,7 +17,9 @@ outside finitely many degrees,
 
   `Σ_n (−1)^n dim_K C^n = Σ_n (−1)^n dim_K H^n(C)`.
 
-This is part **(1)** of the card (the "characteristic" version).
+This is part **(1)** of the card (the "characteristic" version).  Part **(2)** (the graded /
+formal-character version) is `euler_poincare_graded`, which is literally (1) applied weight by
+weight, exactly as the card says it should be.
 
 ## Why this is not a bridge lemma
 
@@ -45,7 +47,10 @@ are both `Submodule K (C n)` on the nose, with no casts anywhere.  Indexing by `
 ## Scope: what is and is not proved here
 
 * Proved: the alternating-sum identity over `Finset.range N` for a complex with
-  `Subsingleton (C N)` (`euler_poincare`).
+  `Subsingleton (C N)` (`euler_poincare`), its `finsum`-over-all-degrees form
+  (`euler_poincare_finsum`), the card's "concentrated in degree 0" clause
+  (`finrank_cohomology_zero_eq`), and the graded / formal-character version
+  (`euler_poincare_graded`).
 * **Not** proved (card item (a), explicitly excluded there): the *signature* version
   `Σ_n sign H^n = Σ_n sign C^n` of Lian–Zuckerman, which needs a nondegenerate Hermitian form
   with `d` self-adjoint.
@@ -174,6 +179,87 @@ theorem euler_poincare (hd : IsComplex d) (N : ℕ) (hN : Subsingleton (C N)) :
   rw [← sub_eq_zero, ← Finset.sum_sub_distrib]
   exact hsum
 
+/-- A degree in which the complex vanishes contributes nothing to the cohomology either. -/
+lemma finrank_cohomology_eq_zero_of_subsingleton (hd : IsComplex d) (n : ℕ)
+    [Subsingleton (C n)] : finrank K (cohomology d n) = 0 := by
+  have h1 := finrank_cohomology_add_finrank_coboundaries hd n
+  have h2 : finrank K (cocycles d n) ≤ finrank K (C n) := Submodule.finrank_le _
+  have h3 : finrank K (C n) = 0 := Module.finrank_zero_of_subsingleton
+  omega
+
+/-- **Euler–Poincaré principle, sum over all degrees.**  Same as `euler_poincare`, but with the
+two alternating sums taken over *all* of `ℕ` as `finsum`s; the hypothesis is the card's
+"only finitely many `C^n` are nonzero" in the form "`C^n = 0` for `n ≥ N`". -/
+theorem euler_poincare_finsum (hd : IsComplex d) (N : ℕ)
+    (hvanish : ∀ n, N ≤ n → Subsingleton (C n)) :
+    ∑ᶠ n, (-1 : ℤ) ^ n * finrank K (C n)
+      = ∑ᶠ n, (-1 : ℤ) ^ n * finrank K (cohomology d n) := by
+  have hsuppC : Function.support (fun n => (-1 : ℤ) ^ n * (finrank K (C n) : ℤ))
+      ⊆ (Finset.range N : Set ℕ) := by
+    intro n hn
+    simp only [Finset.coe_range, Set.mem_Iio]
+    by_contra hle
+    have := hvanish n (not_lt.mp hle)
+    exact hn (by simp [Module.finrank_zero_of_subsingleton])
+  have hsuppH : Function.support (fun n => (-1 : ℤ) ^ n * (finrank K (cohomology d n) : ℤ))
+      ⊆ (Finset.range N : Set ℕ) := by
+    intro n hn
+    simp only [Finset.coe_range, Set.mem_Iio]
+    by_contra hle
+    have := hvanish n (not_lt.mp hle)
+    exact hn (by simp [finrank_cohomology_eq_zero_of_subsingleton hd n])
+  rw [finsum_eq_finsetSum_of_support_subset _ hsuppC,
+    finsum_eq_finsetSum_of_support_subset _ hsuppH]
+  exact euler_poincare hd N (hvanish N le_rfl)
+
+/-- The card's "特别地" clause: if the cohomology is concentrated in degree `0`, its dimension
+is the alternating sum of the dimensions of the complex. -/
+theorem finrank_cohomology_zero_eq (hd : IsComplex d) {N : ℕ} (hpos : 0 < N)
+    (hN : Subsingleton (C N)) (hac : ∀ n, n ≠ 0 → Subsingleton (cohomology d n)) :
+    (finrank K (cohomology d 0) : ℤ)
+      = ∑ n ∈ Finset.range N, (-1 : ℤ) ^ n * finrank K (C n) := by
+  rw [euler_poincare hd N hN]
+  have : ∑ n ∈ Finset.range N, (-1 : ℤ) ^ n * finrank K (cohomology d n)
+      = (-1 : ℤ) ^ 0 * finrank K (cohomology d 0) := by
+    refine Finset.sum_eq_single_of_mem 0 (Finset.mem_range.mpr hpos) ?_
+    intro n _ hn
+    have := hac n hn
+    simp [Module.finrank_zero_of_subsingleton]
+  rw [this]
+  simp
+
 end Finite
+
+section Graded
+
+/-!
+## The graded (formal character) version
+
+Card item (2).  The input is a family of complexes indexed by the weights `Λ`; the conclusion
+is an identity of *formal characters*, i.e. of elements of `Λ → ℤ`, where the character of a
+weight-graded space is the function sending a weight to the dimension of that weight space.
+As the card itself says, (2) is (1) applied weight by weight, and that is exactly the proof.
+
+A `Λ`-dependent vanishing degree `N Λ` is allowed at the level of the *pointwise* statement,
+which is literally `euler_poincare (dg l)`; the packaged character statement below uses one
+uniform `N`.
+-/
+
+variable {Λ : Type*} {Cg : Λ → ℕ → Type*}
+  [∀ l n, AddCommGroup (Cg l n)] [∀ l n, Module K (Cg l n)]
+  [∀ l n, FiniteDimensional K (Cg l n)]
+  {dg : ∀ l : Λ, ∀ m n : ℕ, Cg l m →ₗ[K] Cg l n}
+
+/-- **Euler–Poincaré principle, graded version** (card item (2)): the alternating sums of the
+formal characters `ch C^n = (λ ↦ dim C^n_λ)` and `ch H^n = (λ ↦ dim H^n_λ)` agree as elements
+of `Λ → ℤ`. -/
+theorem euler_poincare_graded (hdg : ∀ l, IsComplex (dg l)) (N : ℕ)
+    (hN : ∀ l, Subsingleton (Cg l N)) :
+    (∑ n ∈ Finset.range N, fun l : Λ => (-1 : ℤ) ^ n * finrank K (Cg l n))
+      = ∑ n ∈ Finset.range N, fun l : Λ => (-1 : ℤ) ^ n * finrank K (cohomology (dg l) n) := by
+  funext l
+  simpa using euler_poincare (hdg l) N (hN l)
+
+end Graded
 
 end StringFormal.EulerPoincare
