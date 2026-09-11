@@ -29,7 +29,9 @@ gaps:
      再与 worldsheet.tt-ope-central-charge 的定义式比对四阶极点系数，**不需围道变形**，
      故不依赖 worldsheet.ope-commutator-dictionary（该边已删）。
      但 worldsheet.operator-product-expansion 所刻画的展开其**收敛半径仍未被证明**，
-     这一缺口与自由玻色子的同类计算共享。"
+     这一缺口与自由玻色子的同类计算共享。
+     另：summary 里「b、c 反对易，缩并带符号」所用的费米型换序规则此前在本图无卡；
+     **费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。**"
   - "一般 λ 的公式 -3(2λ-1)^2 + 1 的具体形式未核实（核对源只给出 (2.5.12) 的标题）。
      只有 λ = 2 时的数值 -26 被抽取记录标为已核实，且有 fgz-1986 的独立支持。
      **若只需要 λ = 2，本节点的可信度高于其一般形式。**"

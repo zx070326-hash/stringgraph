@@ -44,5 +44,8 @@ notes: |
       一句话：本卡 = 新节点 + 「径向排序围道 = 形式分布残数」这一步。
   (b) **费米推广**：新节点只覆盖玻色型（偶）场；b、c 及任何奇场的反对易子版本需要 Thm 10.10 的超代数版，
       本轮未核实编号。bc 部门因此仍只有围道那条物理推导。
+      **2026-09-11 更新（curator-small-backlog-3）**：围道路线的费米版已立卡
+      worldsheet.ope-anticommutator-dictionary-fermionic（proposition，physical-argument；本卡的推广，
+      玻色型逐字退化为本卡，故不写 superseded_by）。形式分布版的费米型对应物仍待建。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

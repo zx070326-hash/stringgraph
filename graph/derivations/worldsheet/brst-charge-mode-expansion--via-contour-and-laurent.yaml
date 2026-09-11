@@ -50,7 +50,7 @@ summary: |
   5. 与 worldsheet.brst-quantization 的模式定义逐项比对：三项完全一致（该节点写的
      a^g c_0 在 a^g = −1 时即 − c_0）。故两个 Q_B 是同一个算符。
 gaps:
-  - "「围道积分 + Laurent 展开逐项交换」这一步是形式操作：模式和与围道积分的换序、正规序重排的合法性在来源中未论证。按 lead 2026-09-10 的裁决，凡靠围道变形/OPE 得到算子关系的推导一律 physical-argument，gaps 写明「OPE 级数收敛与围道变形合法性在来源中未证明」。此处正是该情形。"
+  - "「围道积分 + Laurent 展开逐项交换」这一步是形式操作：模式和与围道积分的换序、正规序重排的合法性在来源中未论证。按 lead 2026-09-10 的裁决，凡靠围道变形/OPE 得到算子关系的推导一律 physical-argument，gaps 写明「OPE 级数收敛与围道变形合法性在来源中未证明」。此处正是该情形。另：第 2 步 c_m c_n = −c_n c_m 的反对称化与 inferred 边 worldsheet.ope-commutator-dictionary 所写的玻色型字典不匹配（j_B、b、c 都是费米型）；**费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。**"
   - "第 2 步中 (m − n)/2 的系数与 j_B 中 : b c ∂c : 的归一化绑定，而 j_B 的表达式**未核对原书**（抽取记录 E62 的表达式栏）。本图的做法是：以 worldsheet.brst-quantization 的模式式为准（那一侧有 fgz-1986 Proposition 2.1 的数学支撑），本推导论证的是「存在一个使两者一致的 j_B 归一化」。若原书归一化不同，需要调整 j_B 而非模式式。"
   - "第 4 步把「三次鬼场项正规序重排产生的常数」直接等同于 bc 系统的 a^g。这个等同在来源中未逐字论证；schrans-2020 只给出结果 [4.225]。本图未核实。"
   - "只覆盖开弦/全纯侧，不覆盖闭弦的反全纯部分。"

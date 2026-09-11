@@ -68,7 +68,9 @@ gaps:
      二项式系数不变），Schottenloher Ch.10 的陈述是玻色型，超代数版本的编号本轮未核实。
      目标节点已把范围限定为玻色型，故这**不是**本推导与目标之间的缺口，而是**目标节点覆盖面的限制**：
      bc 部门的极点-对易子字典在本图中仍只有物理路线
-     （worldsheet.ope-commutator-dictionary--via-contour-deformation）。"
+     （worldsheet.ope-commutator-dictionary--via-contour-deformation）。
+     **2026-09-11 更新**：费米版字典已立卡 worldsheet.ope-anticommutator-dictionary-fermionic（physical-argument，围道路线），
+     其严格对应物（Thm 10.10 超代数版的形式分布卡）仍待建，见该卡 gaps 末条。"
   - "**★ 已结案（原 Q10），仅留痕**：Theorem 10.10 第 5 条的求和下限**印本印作 j = 1**，
      **本图判为排印错误，按 j = 0 写**（四条依据 + 反例见
      math.locality-ope-equivalences-v2--via-schottenloher 的 gaps 第一条与

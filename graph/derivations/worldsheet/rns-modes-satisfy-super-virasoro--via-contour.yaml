@@ -44,7 +44,7 @@ summary: |
   physical-argument，gaps 写明 OPE 收敛与围道变形合法性未证明。
 gaps:
   - "**OPE 级数收敛与围道变形合法性在来源中未证明**（lead 2026-09-10 裁决的标准 gap）。"
-  - "**费米型围道字典在本图无节点**：worldsheet.ope-commutator-dictionary 与 worldsheet.ope-pole-mode-commutator-dictionary 都是玻色型（交换子）。{G_r, G_s} 那一行需要费米型版本（半整数/整数权的场、反交换子、以及 z^{r+1/2} 的分支处理）。→ 待建 worldsheet.ope-anticommutator-dictionary。这是本推导标 inferred 风险最高的一处，但由于原书明写用的是同一套字典，本图暂按同一条边记账并在此记 gap。"
+  - "**费米型围道字典在本图无节点**：worldsheet.ope-commutator-dictionary 与 worldsheet.ope-pole-mode-commutator-dictionary 都是玻色型（交换子）。{G_r, G_s} 那一行需要费米型版本（半整数/整数权的场、反交换子、以及 z^{r+1/2} 的分支处理）。→ **已建（2026-09-11）：worldsheet.ope-anticommutator-dictionary-fermionic**（lead 派工指定的 id，即此处原写的 ope-anticommutator-dictionary；该卡处理 NS 型半整数指标，R 扇区分支仍在其范围外）。本推导**未改指**，待 reviewer 判定是否承重。这是本推导标 inferred 风险最高的一处，但由于原书明写用的是同一套字典，本图暂按同一条边记账并在此记 gap。"
   - "**R 扇区的分支切割未处理**：R 扇区 T_F(z) 的 Laurent 指标是整数 + 3/2，围道积分的被积函数带 z^{1/2} 型分支（抽取记录 E17 逐字指出 R 扇区 'introduces a branch cut'）。原书的围道计算对此不作说明。"
   - "**原书不展开步骤**：'The usual CFT contour calculation gives …' 是全部论证。本图唯一的成文中间步骤在 headrick-2008 Problem 10.4（核对源）。"
 author: curator

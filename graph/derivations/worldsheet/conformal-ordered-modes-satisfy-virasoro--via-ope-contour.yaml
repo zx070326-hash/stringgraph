@@ -68,7 +68,7 @@ gaps:
   - "**费米型自由场（bc/βγ）的两处不精确**：(a) worldsheet.ope-commutator-dictionary 写在
      全纯（玻色）算子上；本用例里被变形的是 T 与 T，二者都是 Grassmann 偶（b、c 的双线性），
      故这一步本身不涉及奇算子，但把 bc 的 TT OPE 算出来需要费米型 Wick 缩并，
-     其换序符号规则本图未单独核实。(b) 原书 p.61 限定「these are only Laurent expansions
+     其换序符号规则本图未单独核实。**费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。** (b) 原书 p.61 限定「these are only Laurent expansions
      if λ is an integer」，半整数 λ（βγ）在第 10 章另行处理；本推导对 bc 部门的适用范围随之受限。"
   - "**不覆盖开弦**：开弦只有一套 Virasoro（(2.6.30) 与 (2.6.19) 同形，经 (2.6.28) 的 doubling trick），
      那一格由 worldsheet.open-string-virasoro-modes-v2/v3 与 worldsheet.open-string-doubling-trick
