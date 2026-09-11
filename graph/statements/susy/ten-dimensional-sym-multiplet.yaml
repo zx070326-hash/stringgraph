@@ -1,0 +1,57 @@
+id: susy.ten-dimensional-sym-multiplet
+kind: definition
+status: physical-argument
+title: 十维超对称 Yang–Mills 理论：拉氏量 (B.6.13) 与超对称变换 (B.6.14)（规范场 + Majorana–Weyl 16 gaugino）
+statement: |
+  **十维超对称 Yang–Mills 理论**指如下场论。场内容：规范场 `A_M`（`M, N = 0, …, 9`）与
+  gaugino `λ`——一个 **Majorana–Weyl `16`**（`d = 10` 允许 M–W，见 math.clifford-majorana-weyl-mod-8
+  的 Table B.1 `10=2+8` 行）；两者都写成规范群的矩阵（伴随表示，原书逐字
+  「The gauge field and the gaugino `λ` (a Majorana–Weyl **16**) are written in matrix notation,
+  and `M, N` run from 0 to 9.」）。拉氏量密度：
+    **`−(1/4g²)Tr(F_{MN}F^{MN}) − (i/2g²)Tr(λ̄Γ^M D_M λ)`**                      (B.6.13)
+  超对称变换：
+    **`δA_M = −iζ̄Γ_Mλ`**                                                        (B.6.14a)
+    **`δλ = ½F_{MN}Γ^{MN}ζ`**                                                    (B.6.14b)
+  其中 `ζ` 是 Majorana–Weyl 参数，`Γ^{MN} = Γ^{[M}Γ^{N]}`（(B.1.33)），`D_M` 是伴随协变导数。
+
+  **本定义卡不断言**：
+  (a) (B.6.13) 在 (B.6.14) 下不变。原书**照录不证**——附录导言 p.439–440 逐字：
+      「the transformations and actions require detailed calculation, and so for these
+      **we simply cite for reference** some of the key results.」
+  (b) 这是十维唯一的（最一般的）N = 1 SYM 作用量。原书在十维**没有**作唯一性主张
+      （唯一性主张只在 `d = 4, N = 4` 约化后的 (B.6.15) 处出现，见 p.460）。
+  (c) 与开弦有效作用量的关系（那是 branes.d-brane-potential-equals-sym-commutator 与
+      branes.dbi-action-is-born-infeld-type 的内容）。
+uses_conventions: [conv.metric-mostly-plus]
+uses:
+  - math.clifford-majorana-weyl-mod-8
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.6 *d = 4, N = 4 gauge theory*, eqs. (B.6.13)(B.6.14a,b), pp.459–460；引入句逐字「It will be useful to derive the full action and SUSY transformation by dimensional reduction of ten-dimensional supersymmetric Yang–Mills theory, whose Lagrangian density is (B.6.13)」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E31，证据等级 L1（原书页图）。
+      ⚠ **照录无推导**：这两式在原书里是被引用的已知结果，不是本附录导出的。
+      附录零文献引用（§3.2 第 7 条），因此"cite for reference"实际上没有给出具体文献。
+  - ref: polchinski-1998-v2
+    loc: "App. B 导言 pp.439–440 逐字：「The reader should be able to follow the derivation of the various representations (massless, standard massive, and BPS massive). However, the transformations and actions require detailed calculation, and so for these we simply cite for reference some of the key results.」"
+    note: 抽取记录 #E15 备注（L1）。这是本卡 status 只能是 physical-argument 的直接依据。
+tags: [supersymmetry, super-yang-mills, d10, gaugino, majorana-weyl, polchinski-appendix-b]
+notes: |
+  【为什么 definition 而不是 proposition】本卡登记的是一个**理论的定义**（场内容 + 拉氏量 + 变换律），
+  不是一条待证命题。它的 `status: physical-argument` 表示：该定义本身依赖未在本项目中定义的对象
+  （规范场路径积分意义下的量子理论）且原书照录不证不引，不是数学上精确的定义。
+  按 docs/STATUS_LEVELS.md，这会把下游命题压到 physical-argument——这是有意的。
+
+  【它闭合了什么】ch13 抽取记录 E27 里悬空的 (B.6.13) 引用（D 膜世界体作用量的费米部分）。
+
+  【约定】(B.6.13) 的 `1/4g²`、`1/2g²` 归一化与 `Tr` 的取法写在陈述正文里。
+  ⚠ **原书没有说明 (B.6.13) 的 `Tr` 取哪个表示**（只说「written in matrix notation」）。
+  本卡**不**声明 conv.gauge-trace-normalization：那张约定卡是 Green–Schwarz 1984 反常多项式里
+  tr（基本）/ Tr（伴随）的专用约定，与本处无关，硬套会造成错误的跨卡换算。
+  若日后需要固定本处的迹归一化，应另建约定卡并核原书 §B.6。
+
+  【区划理由】放 `susy` 而非新建 `gauge` 区（抽取记录 §5-C 曾建议 `gauge.*`）：本项目暂无 `gauge` area，
+  且本卡的内容是超对称多重态与超对称变换，`susy` 已覆盖。若日后非超对称规范理论的卡多起来，
+  再由 lead 裁决是否拆出 `gauge`。
+author: curator-v2-appB
+created: "2026-09-11"

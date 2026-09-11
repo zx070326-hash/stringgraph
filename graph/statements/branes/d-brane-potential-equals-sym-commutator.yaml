@@ -1,0 +1,62 @@
+id: branes.d-brane-potential-equals-sym-commutator
+kind: proposition
+title: 重合 D 膜集体坐标的势就是约化超 Yang–Mills 的对易子势 V = −(1/4g²)Tr([A_m, A_n]²)——原书逐字"This is no accident"
+statement: |
+  **设定**：十维超对称 Yang–Mills（susy.ten-dimensional-sym-multiplet，(B.6.13)）在 6 个方向上作
+  维数约化到 `d = 4`，规范群 `h`。约化后 `A_M → (A_μ, A_m)`，`μ = 0,…,3`，`m = 4,…,9`，
+  `A_m` 成为伴随表示的标量场，拉氏量为 (B.6.15)，标量势为
+    **`V = −(1/4g²) Tr([A_m, A_n]²)`**                                          (B.6.17)
+
+  **命题**：
+  (i) `V` 非负，且 `V = 0` 当且仅当 `[A_m, A_n] = 0` 对所有 `m, n` 成立（原书逐字「is nonnegative and
+      vanishes only if `[A_m, A_n] = 0` for all `m, n`」）。因此在平坦方向上 `A_m` 可同时对角化，
+      模是这 `6 · rank(h)` 个本征值；一般点处规范群破缺到 `U(1)^{rank(h)}`。
+  (ii) **这个势与 D 膜集体坐标的势是同一个**。原书逐字（p.460）：
+      「**We have seen this potential before, in eq. (8.7.11) for the D-brane moduli. This is no
+      accident, as the `T`-duality that produces the D-brane has the effect of dimensionally reducing
+      the open string Yang–Mills action.**」
+      即：重合 D 膜上无质量标量（集体坐标，
+      branes.massless-open-string-gauge-field-and-collective-coordinates 的垂直极化分支）的四次势
+      与 (B.6.17) 是同一表达式；其平坦方向对应「膜可以自由分开」，对角化后的本征值就是膜的位置
+      （branes.wilson-line-eigenvalues-are-brane-positions）。
+
+  **本命题不断言**：
+  (a) Vol.1 (8.7.11) 的具体系数。原书 Vol.2 只说"we have seen this potential before"，
+      **本项目未翻页核对 Vol.1 (8.7.11) 的逐字形式**（只有二手源，见 sources 的 note）。
+      本卡因此断言的是「同一个对易子平方势」这一结构性等同，不是系数逐项相等。
+  (b) 非阿贝尔 D 膜作用量的完整形式（DBI 的非阿贝尔推广、排序歧义等）。
+  (c) `(B.6.15)` 是 `N = 4` 全局超对称下最一般作用量这一主张（原书 p.460 另有此句，本卡不含）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.6 *d = 4, N = 4 gauge theory*, eqs. (B.6.15)（约化后的拉氏量）、(B.6.17)（势）, p.460；等同句逐字「We have seen this potential before, in eq. (8.7.11) for the D-brane moduli. This is no accident, as the T-duality that produces the D-brane has the effect of dimensionally reducing the open string Yang–Mills action.」p.460"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E31，证据等级 L1（原书页图）。
+      ★ 这句是**原书自己给出的背书**，把 `susy`（约化 SYM）与 `branes`（D 膜模空间）连起来。
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.11)（重合 D 膜集体坐标的四次势，形如 (2πα')⁴g² tr([X_m, X_n][X^m, X^n])，平坦方向 = 膜可自由分开）"
+    note: |
+      ⚠ **本项目未取得 Vol.1 §8.7 的一手页图**：现有记录是二手源（Schrans 伴读笔记，
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E153 末段），且该处只有转述，
+      没有逐字式号核对。本卡对 (8.7.11) 的引用因此**只到"存在这样一个势"的层面**，
+      不断言其系数。⇒ 待 Vol.1 §8.7 一手抽取后复核。
+tags: [d-brane, moduli, super-yang-mills, dimensional-reduction, t-duality, flat-directions, polchinski-appendix-b]
+notes: |
+  【这张卡的价值】它是图上第一条把 `susy` 区（十维 SYM 及其约化）与 `branes` 区（D 膜模空间）
+  连起来的边，而且**这条边是原书明写的**（"This is no accident"），不是本项目的重构。
+  它给"D 膜的动力学由其世界体上的规范理论描述"这条叙事线提供了一个可核的落点。
+
+  【与 branes.dbi-action-d-brane 的关系】DBI 卡里的 `O([X^m, X^n]²)` 项（(13.3.15)）与本卡是同一物理内容
+  的两处出现；本卡走的是 App. B 的场论路线（(B.6.13) → (B.6.15) → (B.6.17)），DBI 卡走的是
+  §13.3 的世界体作用量路线。两卡不互为上下游，是同一事实的两个来源。
+
+  【已知的接线缺口】Vol.1 (8.7.11) 在图上**没有节点**（branes.massless-open-string-gauge-field-and-
+  collective-coordinates 的 notes 明写"本图未建卡"）。本卡的 (ii) 因此只能把边接到
+  集体坐标卡与 Wilson 线卡上，并在推导里标 inferred。待 Vol.1 §8.7 一手抽取并建出 (8.7.11) 的卡后，
+  应加一条非 inferred 的边。
+
+  【玻色 vs 超弦】集体坐标卡与 Wilson 线卡是**玻色弦**的（Vol.1 第 8 章，`m = p+1, …, 25`），
+  而 (B.6.17) 是十维超 SYM 约化到四维的结果（6 个横向方向）。原书那句话把两者等同时也跨了这一步，
+  没有说明玻色弦与超弦情形的差别。本卡把这一点记在推导 gaps 里。
+author: curator-v2-appB
+created: "2026-09-11"

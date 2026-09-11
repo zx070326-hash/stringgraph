@@ -1,0 +1,54 @@
+id: susy.brane-charges-in-susy-algebra
+kind: proposition
+title: 扩展物体的荷进入十维 type II 超对称代数：(13.2.9) 的 F 弦 NS–NS 荷与 R–R p-形式膜荷（原书自承"still not complete"）
+statement: |
+  **设定**：十维 type II（IIA 或 IIB）超弦，超荷 `Q_α`（左动）与 `Q̃_α`（右动），
+  `β^M ≡ ΓΓ^M`。荷的归一化按 §13.2 的新约定——原文逐字：
+  「Also, we have **changed conventions** so that all charges are now normalized to one per unit
+  world-volume of the respective extended object, and so the string tension `(2πα')^{−1}` appears explicitly.」
+
+  **命题**：把扩展物体携带的荷计入后，超对称代数在 App. B (B.2.36) 的点粒子形式之外多出如下项：
+    `{Q_α, Q̄_β} = −2[P_M + (2πα')^{−1}Q^{NS}_M]Γ^M_{αβ}`,                       (13.2.9a)
+    `{Q̃_α, Q̃̄_β} = −2[P_M − (2πα')^{−1}Q^{NS}_M]Γ^M_{αβ}`,                       (13.2.9b)
+    `{Q_α, Q̃̄_β} = −2Σ_p (τ_p/p!) Q^{R}_{M_1…M_p}(β^{M_1}⋯β^{M_p})_{αβ}`,        (13.2.9c)
+  其中 `Q^{NS}_M` 是**基本弦（F 弦）**所带的荷，`Q^R_{M_1…M_p}` 是与 R–R (p+1)-形式势耦合的
+  **Dp 膜荷**，IIA 求和跑偶 `p`、IIB 跑奇 `p`；且
+    `β^{μ_1}⋯β^{μ_p} = β^⊥Γ^0`（up to an overall sign）                          (13.2.10)
+  ——即出现在 (13.2.9c) 里的矩阵正是 branes.d-brane-bps-half-susy 中决定未破缺超对称组合的 `β^⊥`。
+
+  **本命题不断言**：
+  (a) 代数的完整性。原文逐字（p.145）：「Incidentally, the algebra (13.2.9) is **still not complete**:
+      the *magnetic NS–NS charge* is missing. This is not carried by D-branes or F-strings.
+      We discuss this further in the next chapter.」
+  (b) (13.2.9) 是"洛伦兹不变性允许的最一般代数"。App. B p.448 只说点粒子情形的最一般代数是 (B.2.36)，
+      并把扩展物体的项推给 §11.6 与 ch.13；ch.13 给出这些项，但**没有**补上一个新的最一般性主张。
+  (c) (13.2.10) 的整体符号（原书逐字 "up to an overall sign"）。
+  (d) 由本代数导出的任何具体 BPS 界（那是 §13.6 (13.6.1)(13.6.2) 的内容，本图未建卡）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, eqs. (13.2.9a)(13.2.9b)(13.2.9c)、(13.2.10), pp. 144–145；归一化改动的逐字句同页；自承缺口逐字「Incidentally, the algebra (13.2.9) is still not complete: the magnetic NS–NS charge is missing.」p. 145"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E14，证据等级 L1（原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, (B.2.36a,b) 之后 p.448 逐字：「To be precise, this is the most general algebra if we include only charges that can be carried by point particles. Including charges that can be carried by *extended objects*, additional terms appear. Rather than explain this here, we introduce it in its natural physical context: first in section 11.6, and then in more variety in chapter 13.」；§B.5 p.454 逐字：「additional central charges carried by extended objects are introduced in their physical context in section 13.2.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21、#E25（L1）。
+      这两句是**原书自己指定的转承关系**：App. B 给点粒子模板，§13.2 给膜荷扩展。
+tags: [supersymmetry, central-charge, brane-charge, type-ii, d-brane, f-string, bps, polchinski-ch13]
+notes: |
+  【本卡存在的理由】App. B 的 BPS 界 (B.2.39) 只对点粒子荷成立（susy.bps-bound-point-particle-d4）。
+  D 膜的 BPS 性在代数层面的依据是 (13.2.9)，而原书自承它不完整。把这两件事分成两张卡，
+  是为了让"D 膜 BPS ⇒ 依赖一个作者自承不完整的代数"这条链在图上可见（抽取记录 Q3、§5-B）。
+
+  【§11.6 未核】原书说膜荷"first in section 11.6"（杂化弦的 (11.6.32)）。本项目尚未抽 §11.6
+  （ch13 抽取记录 §3.3 标"❓未核"）；本卡只覆盖 §13.2 的十维 type II 版本。
+
+  【⚠ 与并行分支的重名风险】claim #275（分支 agent/curator/polchinski-v2-ch13，未合 main）计划以
+  `branes.brane-charges-in-susy-algebra` 建同一命题。两支都未合并；合并时应二选一。
+  已于 2026-09-11 在总线上广播。
+
+  【区划理由】放 `susy` 而非 `branes`：本卡陈述的是**超对称代数的结构**，膜只是荷的携带者；
+  同一张卡是 IIA/IIB 全部 p 的膜荷加 F 弦荷，不专属某一种膜。
+author: curator-v2-appB
+created: "2026-09-11"

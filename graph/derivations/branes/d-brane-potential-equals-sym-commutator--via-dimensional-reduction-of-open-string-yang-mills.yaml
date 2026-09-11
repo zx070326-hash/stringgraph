@@ -1,0 +1,58 @@
+id: branes.d-brane-potential-equals-sym-commutator--via-dimensional-reduction-of-open-string-yang-mills
+target: branes.d-brane-potential-equals-sym-commutator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: susy.ten-dimensional-sym-multiplet
+    note: |
+      供给被约化的对象 (B.6.13)。原书逐字：「It will be useful to derive the full action and SUSY
+      transformation by dimensional reduction of ten-dimensional supersymmetric Yang–Mills theory,
+      whose Lagrangian density is (B.6.13)」。约化 `∂_m → 0` 后 `F_{mn} → [A_m, A_n]`，
+      `−(1/4g²)Tr(F_{MN}F^{MN})` 的横向-横向部分给出 (B.6.17)。
+  - id: branes.massless-open-string-gauge-field-and-collective-coordinates
+    inferred: true
+    note: |
+      ⚠ **inferred**：供给「重合 D 膜上的垂直极化无质量标量 = 集体坐标」这一端。
+      原书 (B.6.17) 后只说「We have seen this potential before, **in eq. (8.7.11)** for the D-brane moduli」，
+      指向的是 Vol.1 (8.7.11) 这个**具体式号**，而 (8.7.11) 在本图**没有节点**
+      （该集体坐标卡的 notes 逐字写「本图未建卡」）。因此这条边是本 curator 把原书的指向接到
+      图上最接近的现有卡，**不是**在 sources.loc 指向的位置能直接读到的依赖。
+      ⇒ TODO：Vol.1 §8.7 一手抽取后为 (8.7.11) 建卡，把本边改指它并撤 inferred。
+  - id: branes.wilson-line-eigenvalues-are-brane-positions
+    inferred: true
+    note: |
+      ⚠ **inferred**：供给「势的平坦方向上 `A_m` 同时对角化后，本征值就是膜的位置」这一读法。
+      (B.6.17) 后原书只说「the moduli are just the `6 rank(h)` eigenvalues. At generic points the group
+      is broken to `U(1)^{rank(h)}`」——**没有**在 App. B 里说这些本征值是膜位置；
+      那是 Vol.1 §8.6–8.7 的内容。这条边是本图的接线，不是 App. B 的论证。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.6, p.460：(B.6.13) 约化 `M → μ, m` → (B.6.15)（`−(1/4g²)Tr(F_{μν}F^{μν} + 2D_μA_mD^μA_m − [A_m, A_n]²) − (i/2g²)Tr(λ̄Γ^μD_μλ + iλ̄Γ_m[A_m, λ])`）→ (B.6.16a–c) → (B.6.17)（`V = −(1/4g²)Tr([A_m, A_n]²)`）与其后逐字「is nonnegative and vanishes only if [A_m, A_n] = 0 for all m, n. Thus, in the flat directions the A_m can be taken simultaneously diagonal, and the moduli are just the 6 rank(h) eigenvalues. At generic points the group is broken to U(1)^{rank(h)}. We have seen this potential before, in eq. (8.7.11) for the D-brane moduli. This is no accident, as the T-duality that produces the D-brane has the effect of dimensionally reducing the open string Yang–Mills action.」"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E31（L1，原书页图）。
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.11)（被 App. B 点名的那个式号；重合 D 膜集体坐标的四次势与其平坦方向）"
+    note: |
+      ⚠ **未取得一手页图**，只有二手源（Schrans 伴读，抽取记录 polchinski-1998-v1.md#E153 末段）。
+      本推导据此只断言"同一个对易子平方势"，不断言系数。
+summary: |
+  (1) 把十维 SYM (B.6.13) 约化到四维：令场不依赖 `x^m`（`m = 4,…,9`），则 `F_{mn} = [A_m, A_n]`，
+      `F_{μm} = D_μ A_m`，拉氏量变成 (B.6.15)，其中横向-横向部分给出标量势
+      `V = −(1/4g²)Tr([A_m, A_n]²)`（(B.6.17)）。
+  (2) `V` 非负：伴随表示下 `−Tr([A_m,A_n]²) = Tr([A_m,A_n][A_m,A_n]^†) ≥ 0`（反厄米矩阵的平方迹）；
+      零点当且仅当所有对易子为零 ⇒ `A_m` 可同时对角化 ⇒ 模空间是 `6 · rank(h)` 个本征值，
+      一般点规范群破缺到 `U(1)^{rank(h)}`。
+  (3) **原书的等同**：这正是 Vol.1 (8.7.11) 中 D 膜模的势。原书给出的理由是
+      「the `T`-duality that produces the D-brane has the effect of dimensionally reducing the open
+      string Yang–Mills action」——T 对偶把开弦沿紧化方向的动量去掉，等价于对开弦 Yang–Mills
+      作用量作维数约化，因此两边得到同一个势。
+  (4) 物理读法：平坦方向 ↔ 膜可以自由分开；对角元 ↔ 各张膜的横向位置；非对角元在膜分开时获得质量
+      （与 branes.stretched-open-string-mass 的图像一致，本图未在本推导中接该边）。
+gaps:
+  - "**等同是一句断言**：原书只写「We have seen this potential before … **This is no accident**, as the T-duality … has the effect of dimensionally reducing the open string Yang–Mills action.」——没有把 T 对偶作用在开弦 Yang–Mills 作用量上并显式得到 (B.6.17)，也没有比对两边的系数。"
+  - "**Vol.1 (8.7.11) 本项目未取得一手页图**（只有二手伴读转述），图上也没有该式的节点。⇒ 本卡断言的是结构性等同，不是逐项相等；两条指向 branes 现有卡的边因此都标 inferred。"
+  - "**玻色弦 ↔ 超弦的跨越未说明**：被等同的 Vol.1 §8.7 是玻色弦（26 维，25 − p 个横向方向），(B.6.17) 是十维超 SYM 约化（6 个横向方向）。原书那句话跨过了这一步而未评论。"
+  - "**(B.6.13) 本身照录无推导**（App. B 导言逐字「we simply cite for reference」），其超对称性未验证；本推导继承该缺口。"
+  - "**`Tr` 的表示未指定**：(B.6.13)/(B.6.17) 只说「matrix notation」，原书未说明迹取哪个表示，故系数层面的比对在本图内无法闭合。"
+  - "**非阿贝尔 DBI 的排序歧义不在本卡**：(B.6.17) 是二阶导数截断的结果；高阶项（branes.dbi-action-d-brane 的 (13.3.15) `O([X^m, X^n]²)`）不由本推导覆盖。"
+author: curator-v2-appB
+created: "2026-09-11"

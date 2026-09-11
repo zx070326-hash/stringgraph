@@ -23,6 +23,19 @@ depends_on:
       原文背书：ch.13 p. 141「BPS states, which are discussed in section B.2」，以及 p. 140 斜体「*it is a BPS state*」。
       ⚠ App. B 只覆盖点粒子荷；本卡只借用其**概念**（半数超荷未破缺 ⇒ 短表示），
       D 膜荷的代数 (13.2.9) 在本卡之后（branes.brane-charges-in-susy-algebra）。
+  - id: susy.bps-bound-point-particle-d4
+    inferred: true
+    note: |
+      ⚠ **inferred，且是"术语锚定"边而非承重边**。理由三条：
+      (1) §13.2 pp.139–140 的论证（(13.2.2)–(13.2.6)）**完全没有引用任何超对称代数**：
+          它走的是「T 对偶把守恒组合变成 Q + β^9Q̃」+「goldstino 顶点算子 = 破缺超荷的边界积分」
+          这条路线，斜体句「*it is a BPS state*」是**措辞**，不是从中心荷饱和推出的结论。
+      (2) 因此本边指向的不是一条被用到的引理，而是「BPS 态」一词在图上的代数含义所在
+          （中心荷饱和 ⇒ 部分超荷湮灭态 ⇒ 短表示），补上本卡此前"悬空"的那个缺口。
+      (3) ★ **App. B 的 BPS 界只对点粒子可携带的荷成立**（p.448 逐字 caveat，见该卡陈述），
+          **D 膜 BPS 性的代数依据不是它**，而是 §13.2 (13.2.9)（susy.brane-charges-in-susy-algebra，
+          原书自承 "still not complete"）。本卡**不**加指向 (13.2.9) 那张卡的边：
+          图上的方向是 (13.2.9) 依赖本卡（(13.2.10) 用本卡的 β^⊥），反向会成环。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.2, pp. 139–140：(13.2.2) → 脚注 1 → (13.2.3)（集体坐标顶点算子 = 破缺平移的荷）→ (13.2.4)（goldstino 顶点算子 = 破缺超对称的荷）→ (13.2.5)(13.2.6)；逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」"
@@ -45,7 +58,19 @@ gaps:
   - "**符号未定**：(13.1.5)/(13.1.6) 的符号原书自陈「up to signs」，「should not distract attention from the main physical point」（§3.1 第 2 条）。β^⊥ 的整体符号因此在本卡中不作断言。"
   - "**本图无 type II 时空超对称节点**：「32 个超荷 Q、Q̃」在 main 上没有节点（ch10 分支 worldsheet.type-ii-spacetime-supersymmetry 未合）；待合入后应加边。"
   - "**「BPS 态」的代数含义只有点粒子版**：App. B §B.2 现已抽并建卡（branes.bps-bound-point-particle-d4），但其 BPS 界 (B.2.39) 只对点粒子荷（p. 448 逐字）；D 膜荷版的代数 (13.2.9) 是本卡的下游且原书自承「still not complete」。本卡的「BPS」只借用「半数超荷未破缺 ⇒ 短表示」这一概念。"
+  - "**「BPS 态」的代数含义现已入图，但只到点粒子模板**（2026-09-11 更新，原缺口「App. B §B.2 本项目未抽」已闭合）：susy.bps-bound-point-particle-d4 转了 (B.2.36)–(B.2.39)，而**原书明写该代数只含点粒子可携带的荷**（p.448 逐字「this is the most general algebra if we include only charges that can be carried by point particles … The same caveat applies to the higher-dimensional algebras」）。D 膜一侧的代数是 §13.2 (13.2.9)（susy.brane-charges-in-susy-algebra），原书自承「still not complete: the *magnetic NS–NS charge* is missing」。⇒ **本卡的 BPS 性不得被读成「由 App. B 的 BPS 界保证」**；本推导对「BPS」二字的使用仍只是原书的措辞。"
   - "**Dp 膜定义卡是玻色弦的**：超弦 D 膜的构造被原书外包给 Vol.1 第 8 章（p. 138）；超弦特有的部分（费米子边界条件、(13.1.2)）本图无节点。"
   - "**T 对偶的费米部分 (13.1.2)(13.1.3) 本图无节点**：只有玻色对偶坐标 duality.dual-coordinate；「由超共形不变性必须同时反射 ψ̃^9」这一步在图上悬空。"
+notes: |
+  【2026-09-11，curator-v2-appB 的 App. B 接线】新增一条 inferred 边指向
+  susy.bps-bound-point-particle-d4，并改写了原来那条「App. B 未抽」的 gap。要点记账：
+  **BPS 界整体不得挂 App. B。** App. B §B.2 给的是 `d = 4` 点粒子中心荷的模板与正定性论证，
+  原书在 (B.2.36b) 之后逐字限定「if we include only charges that can be carried by point particles …
+  The same caveat applies to the higher-dimensional algebras to be introduced later in this appendix」。
+  D 膜（扩展物体）的荷进入超代数是 §13.2 (13.2.9) 的内容，而那条代数原书自承不完整。
+  图上的依赖方向因此是：
+    susy.bps-bound-point-particle-d4（模板）
+      → susy.brane-charges-in-susy-algebra（(13.2.9)，扩展）→ 依赖**本卡**（(13.2.10) 的 β^⊥）
+  故本卡**不能**反向依赖 (13.2.9)，否则成环；本卡只锚定「BPS 态」一词的代数含义。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"

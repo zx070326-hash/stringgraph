@@ -1,0 +1,56 @@
+id: consistency.eleven-is-maximal-supersymmetric-dimension--via-table-b1-and-32-supercharge-bound
+target: consistency.eleven-is-maximal-supersymmetric-dimension
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.clifford-majorana-weyl-mod-8
+    note: |
+      供给 Table B.1 的 min. rep. 列：`d = 12` 的最小旋量有 64 个实分量，`d ≥ 12` 只会更大。
+      原书逐字点名这一步：「**Table B.1 then implies** that `d = 11` is the maximum in which
+      supersymmetry can exist, since the spinor representations are too large for `d ≥ 12`.」⇒ 非 inferred。
+  - id: susy.bps-bound-point-particle-d4
+    inferred: true
+    note: |
+      ⚠ **inferred**：原书这一步引的是「`d = 4` 的最大超对称代数是 `N = 8`，含 32 个超荷」，
+      而 `N = 8` 多重态与「更大的代数需要螺旋度 > 2」这段论证在 p.447–448 的
+      *Extended supersymmetry in d = 4* 小节里（抽取记录 #E20），**紧挨着**但**不等于**
+      本图 susy.bps-bound-point-particle-d4 所转的 (B.2.36)–(B.2.39)（#E21）。
+      本图目前没有单独的「`d = 4` 扩展超对称多重态表 / `N ≤ 8`」节点，故把这条边接到同一小节的
+      BPS 卡上作为占位。**这条边不是原书的论证链**。
+      ⇒ TODO：为 p.447–448 的多重态表（`N = 2` hyper/vector/sugra、`N = 4` vector/sugra、
+      `N = 8` 唯一多重态 + 「helicities greater than 2 believed impossible」）单独建一张
+      `susy.d4-extended-multiplets-helicity-bound` 卡，然后把本边改指它并撤掉 inferred。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.5 p.453：「In four dimensions the largest supersymmetry algebra, N = 8, contains 32 supercharges. This same limit holds in higher dimensions, since we could reduce to four by compactifying on tori. Table B.1 then implies that d = 11 is the maximum in which supersymmetry can exist, since the spinor representations are too large for d ≥ 12.」+ 脚注 3"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E24（L1，原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2 p.448（`N = 8` 超引力多重态 `(−2, −3/2⁸, −1²⁸, −½⁵⁶, 0⁷⁰, ½⁵⁶, 1²⁸, 3/2⁸, 2)`「there is only a single possible representation」；「Larger algebras would require helicities greater than 2, which is believed to be impossible」）；p.441（「Massless particles with helicities greater than 2 are believed to be impossible to couple to gravity」）"
+    note: |
+      抽取记录 #E20、#E15（L1）。抽取者复算 `N = 8` 多重态总数
+      `1+8+28+56+70+56+28+8+1 = 256 = 2^8` ✅（§0.3e）。
+      ⚠ 这里的 `56` 是 `d = 4, N = 8` 的螺旋度 `∓½` 态数，**不是** SO(8) 的 `56` 表示（§3.2 第 3 条、Q6）。
+  - ref: polchinski-1998-v2
+    loc: "App. B Table B.1, p.434（min. rep. 列：d=11 → 32，d=12 → 64）"
+    note: 抽取记录 #E9（L1）。
+summary: |
+  (1) `d = 4`：`N` 重超对称的无质量多重态由 `N` 对费米振子生成 `2^N` 个态，螺旋度跨度随 `N` 增大；
+      `N = 8` 时多重态跨度已到 `−2 … +2`，再大就需要螺旋度 > 2 的无质量粒子。原书断言后者
+      **"believed to be impossible"**（p.441、p.448 两处）。⇒ `d = 4` 的超荷数上界是 `4 × 8 = 32`。
+  (2) 任意 `d > 4` 的超对称理论都可以在环面上约化到 `d = 4`，超荷总数不变（原书一句话，无论证），
+      故 32 是所有维数的上界。
+  (3) 由 Table B.1 的 min. rep. 列，`d = 11` 的最小旋量恰好 32 个实分量（Majorana，无 Weyl），
+      而 `d = 12` 已是 64；周期性保证 `d > 12` 更大。因此 `d ≥ 12` 装不下哪怕一个超荷。
+  (4) 合起来：`d = 11` 是超对称可以存在的最大维数。
+gaps:
+  - "**★ 第 (1) 步的关键前提是 'believed'**：p.448 逐字「which **is believed to be impossible** (there are some uninteresting exceptions, such as free field theories). **String theory has several times turned up loopholes in such statements, but not yet here.**」——作者自己提示这类陈述曾被弦论钻出漏洞。这是本推导最弱的一环，也是本卡不能高于 physical-argument 的决定性理由。"
+  - "**★ 脚注 3 的号差漏洞**：p.453 逐字「With *two* timelike dimensions a Majorana–Weyl spinor with 32 components is allowed at `d = 12`, **but we will not try to figure out what this might mean**.」⇒ 结论只对一个类时方向成立，且作者明确不处理另一种情形。"
+  - "**「环面约化不改变超荷数」无论证**：原书只写「since we could reduce to four by compactifying on tori」。约化后超荷是否全部保留、是否给出 `d = 4` 的**标准**（无中心荷）超对称，未讨论。"
+  - "**`N ≤ 8` 的多重态分析本身是构造性列举**，不是不可能性证明；原书没有排除非标准（如无质量高自旋、非幺正）情形，只说 free field theories 是 'uninteresting exceptions'。"
+  - "**依赖 Table B.1 的全部缺口**（唯一性只有一句断言、基无关性外包给习题 B.1）——见 math.clifford-majorana-weyl-mod-8--via-explicit-gamma-construction 的 gaps。"
+  - "**通常被引作此结论出处的 Nahm 1978 全附录未被提及**（零引用），本项目也未取得该文献（L0）。"
+notes: |
+  第二条 depends_on 标 inferred，理由写在该条 note 里：本图缺 `d = 4` 扩展超对称多重态那张卡，
+  暂时接到同一小节的 BPS 卡上。这是本推导已知的接线瑕疵，不是原书论证的一部分。
+author: curator-v2-appB
+created: "2026-09-11"
