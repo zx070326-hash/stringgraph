@@ -1,0 +1,25 @@
+id: branes.stretched-open-string-mass
+kind: proposition
+title: 张在两张 D 膜之间的开弦，其质量的经典部分由膜间距给出
+statement: |
+  设两张平行的 Dp 膜在某个对偶方向上的位置分别为 X'(0) 与 X'(π)，
+  记膜间距 ΔX' ≡ X'(π) − X'(0)（branes.wilson-line-eigenvalues-are-brane-positions）。
+  张在这两张膜之间的开弦的质谱为
+    **m² = ( ΔX' / (2π α') )² + ( N − 1 ) / α'**.
+  即：**开弦的经典（非振子）质量正比于它被拉伸的长度**——张力 1/(2πα') 乘长度 ΔX'。
+  两张膜重合（ΔX' = 0）时 N = 1 的态无质量，这正是重合膜上出现非阿贝尔规范场的原因。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.20)，p.268"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E152，证据等级 L1
+      （Schrans §8.107–§8.112，笔记 p.521–526）。
+tags: [d-brane, open-string, spectrum, mass-formula, dirichlet, tension]
+notes: |
+  这条式子与 compact.wilson-line-shifts-open-string-momenta 的 m² = v_d² + (N−1)/α'
+  是**同一个谱的两种读法**：v_d = ΔX'/(2πα')。对偶前它是「动量被 Wilson 线平移」，
+  对偶后它是「弦被拉长」。本图分成两卡是因为两侧的物理解释与所依赖的对象不同
+  （前者不需要 D 膜的概念）。
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -16,7 +16,13 @@ depends_on:
   - id: worldsheet.polyakov-nambu-goto-classical-equivalence
     note: |
       这里只用其中的 T_ab = 0 约束（对 γ_ab 变分的结果），不用它导出 S_NG 的部分。
-      T_ab = 0 与该命题写在同一处（约 eq. (1.2.16)），故这条边有来源支撑。
+      T_ab = 0 与该命题写在同一处，故这条边有来源支撑。
+      **【式号订正 2026-09-11（curator-v1-sec13，L1 页图）】** 旧写「约 eq. (1.2.16)」不准：
+      **对 γ_ab 变分给出的运动方程 `T_ab = 0` 是 (1.2.24)（p.14）**；
+      (1.2.16) 是它的展开式 `h_ab = ½γ_abγ^{cd}h_cd`（p.12），
+      (1.2.22)（p.13）是 `T^{ab}` 的定义式，(1.2.23)（p.13）是无迹条件 `T^a{}_a = 0`。
+      本推导只用「T_ab = 0」这一事实，四个式号指向的是同一件事的四个面貌，
+      故订正不改变论证。见 literature/extractions/polchinski-1998-v1.md §13.3(b)。
 sources:
   - ref: polchinski-1998-v1
     loc: "§1.3, eq. (1.3.7)–(1.3.11)（规范固定并把作用量化为光锥拉氏量）"

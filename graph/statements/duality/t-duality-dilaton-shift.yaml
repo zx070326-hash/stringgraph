@@ -1,0 +1,45 @@
+id: duality.t-duality-dilaton-shift
+kind: proposition
+title: T 对偶下 dilaton 的移动 Φ' = Φ − ln(R/√α') 与引力耦合的变换
+statement: |
+  设 D = 26 的玻色闭弦有一个方向紧化在半径 R（conv.compactification-radius），
+  T 对偶取 R ⟼ R' = α'/R、n ↔ w（duality.t-duality-spectrum-equivalence）。
+  要求 n = w = 0 的引力子散射振幅在对偶下不变，且非紧化的 25 维引力耦合定义在
+  不变的那些维度上（故 κ'_{25} = κ_{25}），则由 κ²_{26} = 2πR κ²_{25}
+  （compact.kaluza-klein-gravitational-coupling）得
+    **κ'_{26} = (√α' / R) · κ_{26}**;
+  再由低能有效作用量中 κ^{−2}_{26} ∝ e^{−2Φ}（即 κ_{26} ∝ e^{Φ}）得
+    **e^{Φ'} = (√α' / R) e^{Φ},   即  Φ' = Φ − ln(R / √α')**,
+  等价地 e^{−Φ} = (√α' / R) e^{−Φ'}，这正是原书 (8.3.31) 的写法。
+  即 T 对偶不是只把半径取倒：它同时移动 dilaton，使 26 维的 Newton 常数按上式变换。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.30)（引力耦合）与 (8.3.31)（dilaton），p.248"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E134，证据等级 L1
+      （Schrans §8.45–§8.46，笔记 p.461–462）。
+      ⚠ 抽取记录明记：**这是物理论证**（「振幅必须相同」+「从低能作用量读系数」），
+      不是从 CFT 同构直接推出的。
+      ⚠ **抽取记录 #E134 的 dilaton 式有一处笔误（符号反了）**，lead 已在 main 的抽取记录
+      加订正注；本卡按原书 (8.3.31) 的 e^{−Φ} = √α' R^{−1} e^{−Φ'} 写，
+      即 Φ' = Φ − ln(R/√α')（reviewer-ch8, 2026-09-11 指出）。
+tags: [t-duality, compactification, dilaton, gravitational-coupling, closed-string]
+notes: |
+  这条属于抽取记录 §11 建议 2 所说的**第三层**（背景场的变换规则），
+  证据强度低于谱层（duality.t-duality-spectrum-equivalence）与 CFT 层
+  （duality.t-duality-is-cft-isomorphism）。
+
+  (8.3.31) 在 §8.7 被用来推 D 膜张力的递推关系 T_{p−1} = 2π√α' T_p
+  （抽取记录 #E156，本图未建卡）。
+
+  **符号自检**：κ_{26} ∝ e^{Φ} 与 κ'_{26} = (√α'/R)κ_{26} 直接给 e^{Φ'} = (√α'/R)e^{Φ}。
+  故 R → ∞（对偶方向退紧化）时 Φ' → −∞，即对偶侧弱耦合；R → 0 时 Φ' → +∞。
+  2026-09-11 前的本卡把这条写反了（写成 Φ' = Φ + ln(R/√α')），已按 reviewer-ch8 更正。
+  本卡未合并 main，故直接改陈述文本而非新建 v2（lead 2026-09-11 指示）。
+
+  与 Buscher 规则的关系：Headrick 习题 8.3 给出 G'_{25,25} = G^{−1}_{25,25} 等场变换，
+  但他明说**没有**计算 dilaton 的移动；本条正是那条被略去的信息，
+  而它在原书里是用「振幅不变 + 读作用量系数」得到的，不是从世界面路径积分得到的。
+author: curator-polchinski-ch8
+created: "2026-09-11"

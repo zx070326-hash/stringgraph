@@ -1,0 +1,34 @@
+id: compact.circle-momentum-quantization
+kind: proposition
+title: 圆紧化上的动量量子化 p = n/R（场论层面）
+statement: |
+  设一个时空坐标被紧化在半径 R 的圆上，x^d ≅ x^d + 2πR（见 conv.compactification-radius）。
+  一个在该圆上单值的场 φ 按平面波 e^{i p_d x^d} 展开时，单值性
+    e^{i p_d x^d} = e^{i p_d (x^d + 2πR)}
+  要求 p_d · 2πR ∈ 2πZ，即
+    **p_d = n / R,  n ∈ Z**,
+  于是任意场展开为 φ(x) = Σ_{n ∈ Z} φ_n(x^μ) e^{i n x^d / R}，
+  其中 x^μ 是未紧化的 d = D − 1 个坐标。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.5) 附近（p.232）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E115，证据等级 L1
+      （Schrans 伴读笔记 §8.3，笔记 p.421 的页图）。
+      ⚠ **式号定位是抽取者做的**：Schrans 的节标题是「Expanding the Compact Coordinate
+      in a Complete Set」，他没有把「p_d R = n」这句话本身认同为 (8.1.5)（抽取记录 §10）。
+      ⚠ 本条是**场论层面**（§8.1）的陈述，不是弦上的；弦上的对应物是 (8.2.2)，
+      见 compact.left-right-momenta。
+tags: [compactification, kaluza-klein, torus, momentum-quantization, field-theory]
+notes: |
+  这是本图中「动量 n/R」的最上游落点。它只用到圆上的周期性，与弦无关，
+  也与背景度规无关（只要紧化方向的周期是 2πR）。
+
+  数学上这是圆上 Fourier 分析的标准事实（Pontryagin 对偶：S^1 的对偶群是 Z）；
+  但本图不把它标 rigorous，因为图中没有写下「完备基」的精确前提
+  （哪个函数空间、什么意义下完备），来源也只到二手级。
+  升级路径：补一条以 Fourier 级数完备性为来源的数学推导，或按
+  docs/STATUS_LEVELS.md 的 rigorous 例外让 reviewer 复核并留 reviewer-verified 记录。
+author: curator-polchinski-ch8
+created: "2026-09-11"

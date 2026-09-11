@@ -1,0 +1,125 @@
+id: consistency.superstring-perturbative-consistency-unproven-1998
+kind: proposition
+title: 截至 1998 年，超弦微扰论到任意阶的完整一致性没有显式证明（Polchinski §12.5 p.126 的作者自承，历史陈述）
+statement: |
+  **这是一条历史陈述**：它断言的是**1998 年时文献的状态**，不是超弦微扰论本身的真伪。
+
+  **陈述**：截至 Polchinski《String Theory》Vol. 2（1998）成书之时，
+  超弦（RNS 形式）微扰论到任意亏格的**完整一致性**——即零态/BRST 恰当态在所有阶解耦、
+  多圈振幅规范不变、且不因红外发散或 tadpole 而失效——**没有一个显式的证明**；
+  已有的是「原则上被理解」的框架与若干特殊振幅的高阶计算。
+
+  原文逐字（§12.5 末，p. 126，无式号）：
+
+  > "It appears that superstring perturbation theory to arbitrary order is understood in principle,
+  > and certain special amplitudes have been calculated at higher orders of perturbation theory.
+  > However, **the subject is somewhat unfinished — a fully explicit proof of the perturbative
+  > consistency of the theory seems to be lacking.**"
+
+  **这条缺口在同一本书里的两处具体落点**（同为作者自陈，是本陈述的组成部分）：
+
+  (a) **§12.2 pp. 102–103（无式号）的两个条件式 "if"**：弦论侧零态解耦只是「形式地」证明的，
+      问题在于模空间的面项是否作废这个形式论证。原文逐字（斜体 "if" 为原文强调）：
+      > "One can prove the decoupling of null states *formally* in either field theory or string
+      > theory; the issue is whether terms from the UV limit invalidate the formal argument. …
+      > Surface terms from the boundary of the fundamental region cancel *if* the theory is
+      > modular-invariant. In the type I string … the anomaly then vanishes *if* this converges."
+      ——杂化弦一支挂在**模不变性**上，type I 一支挂在**闭弦交换的红外收敛**（= §10.8 的 tadpole 抵消）上，
+      两个条件在本书中都没有被证明。
+
+  (b) **§12.5 p. 121（(12.5.14) 下方，无式号）**：图像变换算符（PCO）处方本身
+      「rather *ad hoc*」且「has a subtle ambiguity at higher genus」；
+      超弦侧的一致性与幺正性只有「The same formal arguments as in the case of the bosonic string」。
+
+  **本节点不断言**：
+  (i) 超弦微扰论**不一致**，或该缺口**至今**仍未填上——1998 年之后的进展见
+      consistency.superstring-perturbation-theory-via-super-riemann-surfaces（Witten 2012–2023 的重构）
+      与 math.supermoduli-space-not-projected（Donagi–Witten 2013）；**它们不使本卡为假**，
+      因为本卡陈述的是 1998 年的状态；
+  (ii) 这个缺口「重要」或「不重要」——作者紧接着写的
+      "With the immense progress in nonperturbative string theory, filling this technical gap does not
+      seem to be a key issue" 是**价值判断**，不是证明，见 notes；
+  (iii) 任何关于 1998 年**之前**文献（如 Atick–Rabin–Sen 1988 的 "ambiguity" 文献）的具体内容——
+      Polchinski 正文不给引文编号，本项目未取 References（pp. 467–487）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.5 末（General amplitudes），p. 126，无式号：逐字 'the subject is somewhat unfinished — a fully explicit proof of the perturbative consistency of the theory seems to be lacking'"
+    note: |
+      **L1 逐页读图**（Cambridge Books Online 版，含 2000 年勘误；抽取记录
+      literature/extractions/polchinski-1998-v2-ch12.md **E26**）。
+      ⚠ 同段前文提到「There is a literature on the 'ambiguity of superstring perturbation theory,'
+      which arose from parameterizations that did not precisely cover supermoduli space」——
+      **正文不给引文编号**；witten-2012-superstring-perturbation 的 ref [48] = Atick–Rabin–Sen,
+      NPB **B299** (1988) 279 "An Ambiguity In Fermionic String Perturbation Theory" 标题逐字吻合，
+      但那是**抽取者推断**（同记录 EW25），本卡不据此写任何具体内容。
+  - ref: polchinski-1998-v2
+    loc: "§12.2 末，pp. 102–103，无式号：两个斜体 'if'（'*if* the theory is modular-invariant' / '*if* this converges'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2-ch12.md **E20**）。
+      这是本书对「超弦无反常 / 零态解耦」给出的最强论证，而它被作者自己标为 "formally" 并挂在两个未证条件上。
+      type I 的那个 "if"（闭弦交换红外收敛）与 §10.8 的 tadpole 抵消是同一件事，
+      而 gsw-1987-v2 对同一论证自评 "not entirely rigorous"（extractions/gsw-1987-v2.md E10）。
+  - ref: polchinski-1998-v2
+    loc: "§12.5，p. 121（(12.5.14) 下方），无式号：'rather *ad hoc*' / 'subtle ambiguity at higher genus' / 'The same formal arguments as in the case of the bosonic string'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2-ch12.md **E27**）。
+      与 polchinski-1998-v2.md §10.5 末「超弦无鬼定理只有一句 direct imitation」同类：
+      **超弦侧的零态解耦在本书里从头到尾只有 "formal arguments"。**
+      1998 年的这两条具体技术缺口（PCO 的 ad hoc 性、高亏格歧义）在 Witten 2012–2023 里被
+      **诊断并给出系统处方**（见 consistency.superstring-perturbation-theory-via-super-riemann-surfaces 的 notes），
+      但那不改变本卡陈述的 1998 年状态。
+tags: [superstring, perturbation-theory, consistency, historical, author-admitted-gap, open-problem, pco, supermoduli]
+notes: |
+  【1. ★ 为什么本卡**没有推导**、effective 状态是 `open`】
+  本卡是一条**历史事实陈述**：「1998 年时没有显式证明」。它的真值由原文逐字背书，
+  但本项目的 status 等级（docs/STATUS_LEVELS.md）度量的是**命题的论证严格程度**，对「文献状态的记录」
+  没有合适的档位——它既不是 physical-argument（没有物理论证可言），也不是 conjecture
+  （它不是一个待证的物理命题）。工具对「无推导的 proposition」计算出的 `open` 恰好是最诚实的标签：
+  **它是一个待处理的工作项**（`stringgraph report --open` 会列出它），处理方式不是给它挂推导，
+  而是由 lead/auditor 决定它在图里的用法（见第 3 条）。抽取记录
+  literature/extractions/witten-2012-superstring-perturbation.md §5.1 (P1) 亦建议 `status: open`。
+  **不得**为了让它「有状态」而挂一条形式上的推导。
+
+  【2. ★ 作者随即淡化这个缺口——那是价值判断】
+  原文紧接着写：
+  > "With the immense progress in nonperturbative string theory, filling this technical gap does not
+  > seem to be a key issue."
+  这是作者对**重要性**的判断，**不是**对缺口是否存在的否定；本卡照记缺口，不因作者淡化而不记
+  （抽取记录 polchinski-1998-v2-ch12.md E26 的备注与 §5.3）。
+
+  【3. ★★ 本卡作为 consistency 区「共同瓶颈」的用法（docs/ROADMAP.md 2026-09-11 条目）】
+  ROADMAP 提议把这张卡作为「所有依赖『超弦微扰论一致』的节点的共同瓶颈」。
+  **实现方式的建议（由 lead 裁决）**：
+  · **不要**让别的推导 `depends_on` 本卡——本卡 effective = `open`（等级 −1，低于 refuted），
+    任何依赖它的节点会被压到 open，那是误报（「无论证」≠「已反驳」）。
+  · 需要「超弦微扰论到所有阶成立」作前提的推导，应 `depends_on`
+    **consistency.superstring-perturbation-theory-via-super-riemann-surfaces**（physical-argument，
+    带六条 gaps），并在 gaps 文本里引用本卡的 id，让读者看到 1998 → 2012–2023 的演变。
+  · 本卡自身的价值在于：它是 Polchinski 全书对这一问题**最直白的自评**，任何把「超弦一致」
+    当作已证定理的下游卡都应在 gaps 里点到它。
+
+  【4. ★ 接口：ch10 分支的 worldsheet.ten-dimensional-superstring-theories 与 consistency 区的 GS 卡】
+  （分支 agent/curator/polchinski-v2-ch10 **尚未合入 main**，故此处只在 notes 指向，不建边。）
+  · 该卡的前提 **(P5)**「要求时空规范与坐标对称性在单圈无反常（原书把这一条推给第 12 章，本图无节点）」
+    ——第 12 章对 (P5) 的弦论侧背书正是本卡 (a) 的两个条件式 "if"（§12.2 pp. 102–103），
+    低能场论侧则是 consistency.anomaly-cancellation-so32-effective-theory /
+    consistency.anomaly-cancellation-e8e8-effective-theory / consistency.gs-counterterms-1984 /
+    consistency.type-i-hexagon-so32-iff。合并后建议在 (P5) 的说明与那几张 GS 卡的 gaps 里写一句
+    「弦论侧的完整一致性证明按 consistency.superstring-perturbative-consistency-unproven-1998 记为 1998 年未有」。
+  · Witten 2012 §9.4（pp. 196–199）把 type I 那一支升级为「R-R tadpole 不抵消 ⇒ 反常 ⇒ 整体不一致」，
+    但对「弦论里这句话是否成立」保留（"string theory is not well enough understood to make this statement
+    completely clear"），且结论出处仍引 green-schwarz-1984 与 Cai–Polchinski 1988（抽取记录 EW20/QW4）；
+    **换来源不会填上 L0 的那一环**。
+
+  【5. 1998 年之后：这个缺口填到了什么程度（抽取记录 QW1 的判定，措辞照抄）】
+  「Polchinski 1998 指出的两条具体技术缺口（PCO 的 ad hoc 性、高亏格歧义）在 Witten 2012–2013 的框架里被
+  诊断并给出了系统处方；但 Polchinski 那句话本身（*a fully explicit proof of the perturbative consistency
+  of the theory*）在本系列里没有被任何一处宣称已完成，作者自己给出的最强表述是『在没有 tadpole 且超对称
+  不自发破缺的模型中，人们处在有利位置去论证微扰论到所有阶成立』。」
+  ⇒ 本卡**不写 superseded_by**：历史陈述不被后续工作换代（抽取记录 §5.1 的边建议）。
+
+  【6. 「ADT」不是本卡的来源】派工单把 (a) 的两个 "if" 记作「ADT/§12.2」；adams-dewolfe-taylor-2010
+  是阿贝尔因子化那条线的来源，与本卡无关。本卡的两个 "if" 只出自 polchinski-1998-v2 §12.2（E20）。
+author: curator-superstring-pert
+created: "2026-09-11"

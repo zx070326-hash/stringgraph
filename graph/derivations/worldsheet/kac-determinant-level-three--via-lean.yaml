@@ -1,0 +1,161 @@
+id: worldsheet.kac-determinant-level-three--via-lean
+target: worldsheet.kac-determinant-level-three
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.shapovalov-form-uniqueness
+    inferred: false
+    note: |
+      提供两件事：
+      (a) 「归一化逆变型」这一概念本身（目标陈述的前提，Lean 侧 `IsContravariant` + `hB1`）；
+      (b) **对称性**——`gram_level_three_entries` 用三次 `hB.comm` 把 ⟨u₂₁,u₃⟩、⟨u₁₁₁,u₃⟩、
+          ⟨u₁₁₁,u₂₁⟩ 换成各自的转置，而 `IsContravariant.comm` 正是该卡 (2)
+          （经 `flip_eq`，即该卡的唯一性论证）。**这不是记号约定，是被用到的定理**。
+      另外该卡 (3) 的 level 正交在同文件给出两个实例 `gram_level_one_three`、
+      `gram_level_two_three`，它们不进目标陈述，只作旁证。
+      字面依赖：ShapovalovLevelThree.lean import Shapovalov.lean。
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      提供 V(c,h)、|c,h⟩ 与最高权关系 `lie_lgen_hwv_of_pos` / `lie_lgen_zero_hwv` /
+      `lie_cgen_hwv`——level-3 的每个 Gram 元都是「把上升模态 L₁/L₂/L₃ 推过去打到 |c,h⟩ 上」，
+      靠的就是这三条。另用到 `levelSpan` / `levelWord`（`desc3/desc21/desc111_mem_levelSpan`
+      的陈述，以及目标【不断言】(a) 里「3 的合成有四个」那句的定义依据；Lean 侧
+      `desc21_mem_levelSpan` 用 `Composition` 的 blocks `[2, 1]` 并以 `rfl` 闭合，
+      故 `levelWord` 对词 [2,1] 的约定就是 L₋₂L₋₁v）。
+      **刻意未用**该卡不断言的 PBW / dim V_N = p(N) / V(c,h) ≠ 0；这正是目标【不断言】(a)。
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      Gram 元的每一步都在用 Virasoro 括号的**具体系数**，包括两处中心项：
+      `lie_lgen_three_neg_three : ⁅L 3, L (−3)⁆ = 6·L 0 + centralTerm R 3 · C`
+      配 `centralTerm_three : centralTerm R 3 = 2`（即 ⟨u₃,u₃⟩ = 6h + **2c** 里的 2），
+      以及 level-2 已有的 `centralTerm R 2 = 1/2`（进入 ⟨u₂₁,u₂₁⟩ = 8h² + **ch** + 8h）。
+      还用到 `lie_lgen_three_neg_two : ⁅L 3, L(−2)⁆ = 5·L 1`、
+      `lie_lgen_three_neg_one : ⁅L 3, L(−1)⁆ = 4·L 2`，以及 `lie_lgen_lgen` 的一般形式。
+      ⇒ 目标 (1)(2) 的全部数值系数**完全来自**该卡的括号与中心项归一化；
+      换一套归一化（conv.virasoro-standard 之外）数字就会变。同为 conv.virasoro-standard。
+  - id: worldsheet.kac-determinant-level-two
+    inferred: false
+    note: |
+      字面依赖：ShapovalovLevelThree.lean 直接 import Shapovalov.lean，目标 (1) 的
+      ⟨u₂₁,u₂₁⟩ 与 ⟨u₁₁₁,u₁₁₁⟩ 的计算**复用**该卡的引理
+      `lie_lgen_one_desc1`、`lie_lgen_zero_desc1`、`lie_lgen_two_desc1`、`lie_lgen_two_desc11`、
+      `lie_lgen_one_desc11` 与 `two_mul_centralTerm_two`，以及定义 `desc1` / `desc11`
+      （u₂₁ = ⁅L₋₂, desc1⁆、u₁₁₁ = ⁅L₋₁, desc11⁆ 是按它们定义的）。
+      内容上的衔接：目标 (2) 的中间因子 16h² + 2h(c−5) + c 就是该卡 (3) 除以 2h。
+      ⚠ 该卡是 formalized，故这条边**不**压低目标的有效状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/ShapovalovLevelThree.lean :: StringFormal.Virasoro.IsContravariant.gram_level_three_det（目标 (2)，本推导的 formal.lean_decl 对应物）与 StringFormal.Virasoro.IsContravariant.gram_level_three_det_eq_kac（目标 (3)）；六个 Gram 元 IsContravariant.{gram_level_three_33, gram_level_three_3_21, gram_level_three_3_111, gram_level_three_21_21, gram_level_three_21_111, gram_level_three_111_111} 与合并形式 gram_level_three_entries；辅助 StringFormal.Virasoro.{desc3, desc21, desc111, centralTerm_three, lie_lgen_three_neg_three, lie_lgen_three_neg_two, lie_lgen_three_neg_one, lie_lgen_three_desc1, lie_lgen_three_desc11, lie_lgen_zero_desc11, lie_lgen_three_desc3, lie_lgen_three_desc21, lie_lgen_three_desc111, lie_lgen_two_desc21, lie_lgen_two_desc111, lie_lgen_one_desc111, kac_factor_rs_two, kac_factor_rs_three, kac_level_three_at_c_one}；上游调用 StringFormal.Virasoro.{desc1, desc11, lie_lgen_one_desc1, lie_lgen_zero_desc1, lie_lgen_two_desc1, lie_lgen_two_desc11, lie_lgen_one_desc11, two_mul_centralTerm_two, lie_lgen_hwv_of_pos, lie_lgen_zero_hwv, lie_cgen_hwv, levelWord, levelSpan, IsContravariant.comm, IsContravariant.eq_zero_of_level_ne} 与 VirasoroAlgebra.{lie_lgen_lgen, centralTerm}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。formalizer 2026-09-11 新建该文件，
+      lead 以 **fa8fafd**（"merge: Shapovalov level-3 Gram determinant matches Kac formula
+      (ShapovalovLevelThree.lean)"）合入 main。
+      文件头 Status 段自述「No `sorry`; axioms are propext, Classical.choice, Quot.sound only」。
+      **curator 未自行重跑 `lake build`**；依据是该自述、formal/TODO.md 的 `kac-determinant`
+      条目下「level 3 … 无 sorry，公理只有标准三条」的勾选记录，以及 fa8fafd 已在 main 上。
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98"
+    note: |
+      **不承载本推导的论证**。只用于目标卡 notes 里那段「Lean 的四条对称函数假设在 R = C 上
+      与 h_{p,q}(c) 相容」的 curator 手算核对；该核对不在目标的 (1)–(4) 任何一条的证明链上
+      （(3) 是条件命题）。见 gaps (ii)。
+summary: |
+  机器检查的计算，全部在 formal/StringFormal/Virasoro/ShapovalovLevelThree.lean。
+  结构与 level-2 完全平行，只多出一层括号。
+
+  **第一步：把上升模态打到真空上（六条括号作用引理）。**
+    L₃ L₋₁ v = 0                              (`lie_lgen_three_desc1`)
+    L₃ L₋₁² v = 0                             (`lie_lgen_three_desc11`)
+    L₀ L₋₁² v = (h+2)·L₋₁² v                  (`lie_lgen_zero_desc11`)
+    L₃ L₋₃ v = (6h + 2c)·v                    (`lie_lgen_three_desc3`，2c 来自 centralTerm R 3 = 2)
+    L₃ L₋₂L₋₁ v = 10h·v                       (`lie_lgen_three_desc21`，经 ⁅L3,L−2⁆ = 5L₁)
+    L₃ L₋₁³ v = 24h·v                         (`lie_lgen_three_desc111`，经 ⁅L3,L−1⁆ = 4L₂)
+    L₂ L₋₂L₋₁ v = (4(h+1) + (c/2))·L₋₁ v      (`lie_lgen_two_desc21`)
+    L₂ L₋₁³ v = (18h + 6)·L₋₁ v               (`lie_lgen_two_desc111`)
+    L₁ L₋₁³ v = (6h + 6)·L₋₁² v               (`lie_lgen_one_desc111`)
+
+  **第二步：六个 Gram 元**（每条都是「逆变性把一个降算符搬到左边变成升算符，再用第一步」）：
+    `gram_level_three_33`      ⟨u₃,u₃⟩ = ⟨v, L₃L₋₃v⟩ = 6h + 2c
+    `gram_level_three_3_21`    ⟨u₃,u₂₁⟩ = ⟨v, L₃L₋₂L₋₁v⟩ = 10h
+    `gram_level_three_3_111`   ⟨u₃,u₁₁₁⟩ = ⟨v, L₃L₋₁³v⟩ = 24h
+    `gram_level_three_21_21`   ⟨u₂₁,u₂₁⟩ = 8h² + ch + 8h（经 L₂ 打到 L₋₁v 上，回调 level-1 的 2h）
+    `gram_level_three_21_111`  ⟨u₂₁,u₁₁₁⟩ = 36h² + 12h
+    `gram_level_three_111_111` ⟨u₁₁₁,u₁₁₁⟩ = 48h³ + 72h² + 24h（经 L₁ 打到 L₋₁²v 上，
+                               回调 level-2 的 ⟨L₋₁²v, L₋₁²v⟩ = 8h² + 4h）
+  合并声明 `gram_level_three_entries` 一次给出九个元，非对角的另一半用 `IsContravariant.comm`。
+
+  **第三步：行列式（`gram_level_three_det`）。** 把九个元代入按第一行展开的 3×3 行列式，
+  一句 `ring`：
+    = 48h²(16h² + 2h(c−5) + c)(3h² + h(c−7) + c + 2)。
+
+  **第四步：与 Kac 乘积形的相等（`gram_level_three_det_eq_kac`）——本推导相对 level-2 的
+  真正新内容。** 两条辅助引理把「根的对称函数」反向变成二次因子，分母已清：
+    `kac_factor_rs_two`   : 8(h₁₂+h₂₁) = 5−c、16h₁₂h₂₁ = c ⟹ 16(h−h₁₂)(h−h₂₁) = 16h²+2h(c−5)+c
+    `kac_factor_rs_three` : 3(h₁₃+h₃₁) = 7−c、3h₁₃h₃₁ = c+2 ⟹ 3(h−h₁₃)(h−h₃₁) = 3h²+h(c−7)+c+2
+  两条都是一行 `linear_combination`。再把 h₁₁ = 0 代入 48h² = 48(h−h₁₁)²，得
+    det₃ = 2304 (h−h₁₁)²(h−h₁₂)(h−h₂₁)(h−h₁₃)(h−h₃₁)，  2304 = 48·16·3。
+  ⇒ **「Gram 行列式 = Kac 乘积」这一步在 level 3 是机器检查的**，不像 level-2 卡的 (4)
+  那样停在 curator 手算。关键技术点：只用和与积，不引入 √((c−1)(c−25))，
+  故不需要 R 中有平方根、不需要选分支、不需要 R 是域或有序。
+
+  **第五步：c = 1 的退化核对（`kac_level_three_at_c_one`）。**
+  48h²(16h²−8h+1)(3h²−6h+3) = 144h²(4h−1)²(h−1)²，一句 `ring`；
+  完全平方与 h₁₂ = h₂₁ = 1/4、h₁₃ = h₃₁ = 1 的重根相符。
+
+  **配套但不进目标陈述**：`desc3/desc21/desc111_mem_levelSpan`（属于 V_3）与正交性实例
+  `gram_level_one_three`、`gram_level_two_three`。
+gaps:
+  - |
+    (i) **{u₃, u₂₁, u₁₁₁} 张成 V_3 这件事在 Lean 里没有具名引理，而且比 level 2 更弱。**
+    Lean 只有三条 `desc*_mem_levelSpan`（**属于** levelSpan）。3 的合成有四个
+    （[3]、[2,1]、[1,2]、[1,1,1]），第四个对应 L₋₁L₋₂v，它要用括号关系
+    [L₋₁, L₋₂] = L₋₃（conv.virasoro-standard 下 (m−n)|_{m=−1,n=−2} = +1）才能写成
+    u₂₁ + u₃；**这条化简没有被写下来**。
+    对比 level 2：2 的合成只有 [2] 与 [1,1] 两个，张成性是一行枚举的直接读出，不需括号。
+    ⇒ 目标【不断言】(a) 里「它们张成 V_3」这半句是 **rigorous 级的一行推论**，
+    不是机器检查的。⚠ 这不影响 (1)(2)(3)(4) 的 formalized——那四条完全不提 V_3。
+    ⚠ 另记：Lean 文件头 Caveat 段把这条化简写成「`L₋₁L₋₂|c,h⟩ = desc21 - desc3`」，
+    符号应为 **+**。只是注释笔误，不涉及定理。
+  - |
+    (ii) **目标 notes 里「Lean 的四条对称函数假设与 Schottenloher 的 h_{p,q}(c) 相容」
+    是 curator 手算，不在 Lean、也不是来源逐字。**
+    但与 worldsheet.kac-determinant-level-two--via-lean 的 gaps (ii) **性质不同**：
+    那里手算出现在目标**结论**（level-2 卡的 (4)）里；这里手算只用来说明
+    「(3) 的假设在 R = C 上可满足」，而 (3) 本身是条件命题、其证明与手算无关。
+    ⇒ 本推导的 formalized **不**被这段手算拖低。若 reviewer 不同意这个划分，
+    正确的修法是把那段核对拆成单独的卡（physical-argument / rigorous），
+    而不是把本推导降级。
+  - |
+    (iii) **与「Kac 行列式」的等同仍缺 PBW**。见目标【不断言】(a)：需要
+    math.verma-module-free-over-negative-part 的 dim V_3 = p(3) = 3（线性无关）。
+    在此之前 (2)(3) 是张成集 Gram 矩阵的行列式及其因式分解。本推导**刻意不引**那张卡，
+    以免把 formalized 拖低成 rigorous——目标陈述已把这一步排除在外。
+    formal/TODO.md 的 `pbw-verma` (b) 是硬瓶颈（Mathlib v4.33.1 无 PBW）。
+  - |
+    (iv) **B 的存在性不在本推导内**。目标是「设 B 是归一化逆变型，则……」的条件命题；
+    存在性见 worldsheet.shapovalov-form-existence。若不存在这样的 B，目标全部空洞成立。
+  - |
+    (v) **(3) 不断言 h_{r,s} 在 R 中存在**。它是「若存在满足那四条关系的 h₁₁…h₃₁，
+    则 det₃ 等于那个乘积」。在一般 ℚ-代数 R 上这些元素可能不存在
+    （例如 R = ℚ[c] 时 h₁₂、h₂₁ 要 √((c−1)(c−25))）。这是**有意**的弱化，
+    换来的是与平方根分支无关。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【本推导在图上的位置】它是 Shapovalov / Kac 岛从 level 2 往上的第一步，
+  也是**图上第一处把「Gram 行列式 = Kac 乘积形」写进 Lean 定理**的地方
+  （level-2 卡只把这一步写在 notes 的手算里）。
+  下一级 N = 4 的 5×5 行列式 CAS 结果已记在 formal/TODO.md 的 `kac-determinant` 条目下
+  （det₄ = 384h³(8h+c−1)(16h²+2h(c−5)+c)²(3h²+h(c−7)+c+2)(16h²+10ch−82h+15c+66)，
+  重数 3,2,1,1 = p(3),p(2),p(1),p(0)），**尚未形式化，本图暂不立卡**。
+
+  【与 worldsheet.kac-determinant-v2 的关系】本推导**不**为一般 N 的公式提供任何证据，
+  只提供 N = 3 的一个独立核对（重数结构 + α₃ = 2304）。那张卡的 status 仍由
+  worldsheet.kac-determinant-v2--via-feigin-fuchs 承载。
+author: curator
+created: "2026-09-11"

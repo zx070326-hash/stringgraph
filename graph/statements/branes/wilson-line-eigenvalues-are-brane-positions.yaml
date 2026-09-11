@@ -1,0 +1,35 @@
+id: branes.wilson-line-eigenvalues-are-brane-positions
+kind: proposition
+title: Wilson 线的本征值 θ_i 就是第 i 张 D 膜的位置 X'(0) = θ_i R'
+statement: |
+  设玻色开弦带 U(n) Chan–Paton 因子，一个方向紧化在半径 R 并取 Wilson 线背景
+  A_d = −(1/2πR) diag(θ_1, …, θ_n)（compact.wilson-line-background），
+  再对该方向作 T 对偶（对偶半径 R' = α'/R）。则带 Chan–Paton 指标 (i, j) 的开弦满足
+    **X'(π) − X'(0) = − ( 2π ℓ − θ_j + θ_i ) R',   ℓ ∈ Z**,
+  且端点 i 被固定在
+    **X'(0) = θ_i R' = − 2π α' A_{ii}**   （加一个可任选的整体常数）。
+  即：**Wilson 线的本征值 θ_i 在对偶描述中就是第 i 张 D 膜在对偶方向上的位置**；
+  n 个互不相同的 θ_i 对应 n 张分开放置的平行 D 膜，θ_i 相同的那些膜重合。
+  对偶坐标的模式展开相应为
+    X'(z, z̄) = θ_i R' + (σ¹/π) ΔX' − (2α')^{1/2} Σ_{m ≠ 0} (α_m/m) e^{−mσ²} sin(mσ¹)
+  ——只含 sin 项，端点处自动固定，与 Dirichlet 条件一致。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.17)（带 Wilson 线的端点差）、(8.6.18)（X'(0) = θ_i R'）、(8.6.19)（对偶坐标的模式展开），p.266–268"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E152，证据等级 L1
+      （Schrans §8.107–§8.112，笔记 p.521–526）。
+      ⚠ **勘误依赖**：(8.6.19) 的最后一项符号——Schrans 逐字「In the last line we have
+      used (8.6.17). **The last term has a different sign from (8.6.17), but this is an
+      error found on Joe's errata page.**」本项目尚未取得勘误表（抽取记录 Q24）。
+tags: [d-brane, t-duality, wilson-line, chan-paton, open-string, dirichlet]
+notes: |
+  这条把两个看起来无关的对象等同起来：规范场的一个**内部**参数（Wilson 线本征值）
+  与一个**几何**量（膜的位置）。它是「D 膜的动力学由其上的规范理论描述」这条线索的起点
+  （branes.massless-open-string-gauge-field-and-collective-coordinates）。
+
+  ⚠ 上游 compact.wilson-line-shifts-open-string-momenta 含一处来源明说不理解的步骤
+  （Chan–Paton 态的电荷指派 ±1）；本条继承那个缺口。
+author: curator-polchinski-ch8
+created: "2026-09-11"

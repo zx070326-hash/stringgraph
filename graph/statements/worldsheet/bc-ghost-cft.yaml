@@ -21,7 +21,7 @@ statement: |
   与 worldsheet.brst-quantization 的记号一致。
 uses:
   - worldsheet.operator-product-expansion
-  - worldsheet.primary-field
+  - worldsheet.primary-field-v2
   - worldsheet.tt-ope-central-charge
   - worldsheet.conformal-normal-ordering-v2
 uses_conventions:

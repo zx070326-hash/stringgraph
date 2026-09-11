@@ -1,0 +1,39 @@
+id: compact.o-k-k-orbit-preserves-self-duality
+kind: proposition
+title: Λ ∈ O(k,k;R) 把自对偶格送成自对偶格（原书由 ∘ 积的 O(k,k;R) 不变性论证）
+statement: |
+  设 Γ ⊂ R^{k,k} 是号差 (k,k) 的偶**自对偶**格，Λ ∈ O(k,k;R)（Λ^T η Λ = η）。断言：
+    **Γ' = Λ Γ 仍是自对偶格**（(ΛΓ)* = ΛΓ）。
+  与 compact.o-k-k-orbit-preserves-evenness 合起来即原书 (8.4.25)：
+  偶自对偶格的集合被 O(k,k;R) 保持，因而 O(k,k;R) 在其上传递地作用
+  ——这是 compact.narain-moduli-space 的支点。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.25) 的「自对偶」那一半，p.252"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E140，Q22。
+      **Q22 已于 2026-09-11 按原书核实关闭（L1，抽取记录 §12.10 表 A）：
+      原书给了这一半的论证**——(8.4.19)/(8.4.24) 只通过 ∘ 积依赖格向量 ℓ，
+      而 ∘ 积在 O(k,k;R) 下不变（Λ^T η Λ = η），故自对偶性（由 ∘ 积定义）被保持。
+      ⚠ 伴读者（Schrans，笔记 p.478，Open Questions 第 4 条）明说他自己证不出这一半
+      （「I am not sure how I can show that Γ' = ΛΓ is also self-dual … Any help is
+      welcome」）——**那是他的缺口，不是原书的缺口**。
+tags: [compactification, torus, narain, lattice, o-d-d, moduli, unproved-assertion]
+notes: |
+  **这条是 §8.4 全部后续结论的支点**：没有它，「全部偶自对偶格由一个 O(k,k;R) 轨道穷尽」
+  不成立，compact.narain-moduli-space 的商空间描述就失去依据。
+
+  **2026-09-11 更正**：原先本卡（与抽取记录 #E140）写「本项目手上的两个二手源都没有
+  给出论证」，并据此说「模空间被 E140 压到最低」。按原书核实（§12.10 表 A 的 Q22）
+  **该说法已撤销**：原书确实给了论证——(8.4.19)/(8.4.24) 只通过 ∘ 积依赖 ℓ，
+  而 ∘ 积在 O(k,k;R) 下不变。缺的是伴读者的复现，不是原书的论证。
+  抽取记录 Q22 里那条「抽取者旁注」（(ΛΓ)* = (Λ^T)^{−1}Γ*，由 Λ^TηΛ = η 得
+  (Λ^T)^{−1} = ηΛη^{−1}）与原书的论证思路一致，但本图仍不把旁注当作来源，
+  推导承载的是原书的 ∘ 积不变性论证。
+
+  档位与 compact.modular-invariance-requires-self-dual-lattice 一致，按
+  lead 2026-09-11 的「断言 + 骨架」裁决（docs/STATUS_LEVELS.md）标 physical-argument；
+  本轮按 lead 指示不改档位。见本卡推导 notes 里给 lead 的升档建议。
+author: curator-polchinski-ch8
+created: "2026-09-11"

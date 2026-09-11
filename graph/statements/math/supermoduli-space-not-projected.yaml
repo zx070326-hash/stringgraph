@@ -1,0 +1,93 @@
+id: math.supermoduli-space-not-projected
+kind: proposition
+title: 超黎曼面模空间不可全纯投影（Donagi–Witten）：𝔐_g 在 g ≥ 5 时非投影（特别地非分裂）；𝔐_{g,1} 在 g ≥ 2 且偶自旋结构时非投影；𝔐_{g,n} 在 g ≥ 2、g−1 ≥ n ≥ 1 时非投影（奇 g 两种自旋结构、偶 g 仅偶自旋）
+statement: |
+  **对象与术语**（Donagi–Witten arXiv:1304.7798v2 §1；定义式的措辞取自 Witten arXiv:1209.5461v4 §3.3.2 (3.58)(3.59)）：
+  · 𝔐_g：亏格 g 超黎曼面（super Riemann surface）的模空间；𝔐_{g,n}：带 n 个（NS 型）穿孔的情形。
+    严格地说它们是模**叠**（moduli stack），见 DW Remark 1.6。其约化空间 𝒮ℳ_g 是带自旋结构的普通黎曼面
+    （spin curves）的模空间；复维数 3g−3 | 2g−2（无穿孔）。
+  · 一个复超流形 𝔐 称为**全纯投影的（holomorphically projected）**，若存在到其约化空间的全纯投影
+    𝔐 → 𝔐_red（Witten 的坐标化表述：可以选局部坐标 (m | η) 使转移函数的偶部分只依赖 m 不依赖 η）；
+    称为**全纯分裂的（holomorphically split）**，若还可以选坐标使奇坐标的转移函数在 η 中线性。
+    「every split supermanifold is projected」（DW p. 7 逐字），故非投影 ⇒ 非分裂。
+
+  **定理**（DW §1 p. 5，逐字）：
+  · **Theorem 1.1.** "The supermanifold 𝔐_g is non-projected, and in particular non-split, for g ≥ 5."
+  · **Theorem 1.2.** "The supermanifold 𝔐_{g,1} is non-projected for g ≥ 2, for the case of an even spin structure."
+  · **Theorem 1.3.** "The supermanifold 𝔐_{g,n} is non-projected for g ≥ 2 and g−1 ≥ n ≥ 1. This holds for both
+    even and odd spin structures if g is odd and for even spin structure if g is even."
+
+  **适用域红线（是陈述的一部分，全部为原文逐字或直接转述）**：
+  (1) Theorem 1.1 只到 **g ≥ 5**；紧跟的括注 "(We suspect that this result may hold for g ≥ 3.)" 是**猜测**，
+      本卡不断言 g = 3, 4。
+  (2) **低亏格存在全纯投影**：Witten §3.3.2 p. 35 逐字 "Supermoduli space is holomorphically projected in low
+      orders and this fact has been exploited in explicit computations, especially in [14]"（[14] = D'Hoker–Phong
+      两圈计算）；DW p. 4 亦说低亏格投影的存在「follows from the cohomological nature of the obstructions to
+      splitting and the nature of the reduced spaces 𝒮ℳ_g for small g」。**g = 2 的显式计算不受本定理影响。**
+  (3) 偶 g、奇自旋结构、n ≥ 1 的情形**原文明说未解决**："We do not resolve the question of projectedness of
+      𝔐_{g,n} for the case of even g, odd spin structure, and n ≥ 1."
+  (4) **不考虑 Deligne–Mumford 紧化**（Remark 1.4 逐字）："Our assertion is that 𝔐_g and 𝔐_{g,n} are non-projected
+      without any consideration of the compactification. Asking for the compactification to be projected would only
+      be a stronger condition."
+  (5) Theorem 1.3 中 n 的上界「probably not optimal」（Remark 1.5）；n ≫ g 时要求点两两不同「very likely kills the
+      obstructions to splitness」——本卡对 n > g−1 不作任何断言。
+
+  **本节点不断言**（★★ 最易误用处）：
+  (i) **对超弦微扰论或 PCO 方法的任何负面结论**。DW p. 4 逐字：
+      > "**The validity of superstring perturbation theory does not depend on a projection**, so the existence of
+      > string theory gives no hint that 𝔐_g is projected."
+      被本定理否定的是一个**特定策略**——「先沿 𝔐_g → 𝒮ℳ_g 的投影纤维积分、再化约到普通模空间上的积分」
+      （DW p. 4："a possible strategy … is to integrate over 𝔐_g by first integrating over the fibers of its
+      projection to 𝒮ℳ_g"；摘要："certain approaches to superstring perturbation theory that are very powerful
+      in low orders have no close analog in higher orders"）。PCO 方法与投影是两回事，见 notes。
+  (ii) 非投影性对**任意** g 成立（见 (1)）。
+  (iii) 紧化 𝔐̄_g 的（非）投影性（见 (4)）。
+  (iv) 本定理的证明内容——本项目只读了定理陈述所在的 §1（见推导 gaps）。
+uses_conventions: []
+sources:
+  - ref: donagi-witten-2013
+    loc: "arXiv:1304.7798v2（2023-07-19），摘要（'We prove that for genus g ≥ 5 …'）；§1 p. 5：Theorem 1.1 / 1.2 / 1.3 与紧跟的未解决声明；Remark 1.4（不考虑紧化）、Remark 1.5（n 的上界非最优）、Remark 1.6（对象是 moduli stack）；§1 p. 4：'The validity of superstring perturbation theory does not depend on a projection'；p. 7：'every split supermanifold is projected'"
+    note: |
+      **L1 逐页读图：摘要 + 目录 + §1 全节 + §2 首页**（researcher 2026-09-11；抽取记录
+      literature/extractions/witten-2012-superstring-perturbation.md **EW21/EW22**）。**§2.2 起、§3、§4（𝔐_{g,1}
+      的证明）、§5（𝔐_g 的证明）、附录 A（亏格 5 的例子）均未读。**
+      发表版 Proc. Symp. Pure Math. **90** (2015) 19–72：INSPIRE recid 1231519 与 Witten 1209.5461v4 ref [45] 两源相符，
+      **未与 AMS 直证**。
+      ⚠ 读图存疑（同记录 §3.3）：Theorem 1.3 的不等式方向页图读作 "g ≥ 2 and g−1 ≥ n ≥ 1"，
+      是三条定理中唯一带双侧界的，**建议重核**。
+  - ref: witten-2012-superstring-perturbation
+    loc: "arXiv:1209.5461v4, §3.3.2「A Hard-To-Avoid Detail」, p. 35, (3.58)(3.59)：projected / split 的坐标化定义；同页逐字 'recently it has been shown that this is not the case in general [45]' 与 '(Supermoduli space is holomorphically projected in low orders …)'"
+    note: |
+      L1（抽取记录 **EW7**）。只取定义的措辞与「低亏格可投影」这句；[45] 即 donagi-witten-2013。
+      ⚠ **版本红线**：这一句引 DW（2013-04 首发）**不可能出现在 1209.5461 的 v1（2012-09）里**，
+      本卡引的是 v4（2023-11-05）；见抽取记录 §3.4。
+tags: [supermoduli, super-riemann-surface, supermanifold, non-split, non-projected, math-input, donagi-witten]
+notes: |
+  【1. ★★ 与 consistency.superstring-perturbation-theory-via-super-riemann-surfaces 之间**不建边**】
+  Witten 的框架（在超模空间/积分链 Γ 上做全部积分，不下降到普通模空间）**本来就不假设投影存在**；
+  他在 §3.3.2 只是**引用**本定理说明「不能指望有全局投影」。若让那张卡 depends_on 本卡，
+  会把因果讲反（框架不是从非投影性推出来的）。正确做法是双向 notes 交叉引用（抽取记录 §5.1 的边建议）。
+
+  【2. ★ PCO 方法没有被本定理「反驳」——它被打了补丁】
+  Sen–Witten, "Filling The Gaps With PCO's," JHEP 09 (2015) 004, arXiv:1504.00609（bib key sen-witten-2015-pco，
+  **本项目只读了摘要，L2**）摘要逐字：「the simplest version of the PCO procedure is valid only locally on the
+  moduli space of Riemann surfaces」；「a correct PCO-based algorithm … must be based on piecing together local
+  descriptions」；「'vertical integration' was proposed as a relatively simple method to do this」；
+  「This involves a hierarchical procedure with corrections of high order」。
+  ⇒ PCO 的局部有效性来自**伪奇点**（Witten §3.5，切片在某些模处非法），与投影的存在性是两个不同的问题；
+  Witten §6.4.6 p. 109 明说「we view the PCO's as a possible method of integration over odd moduli, but not a basic
+  definition」。**图中任何地方不得写「Donagi–Witten 反驳了 PCO 方法」。**
+
+  【3. 后续工作（L2，仅摘要）】Donagi–Witten, "Super Atiyah classes and obstructions to splitting of supermoduli
+  space," arXiv:1404.6257（PAMQ 9 (2013) no. 4, 739–788；卷期年份早于 arXiv 提交日属 PAMQ 延迟出版）
+  自陈给出 **Theorem 1.2（𝔐_{g,1}）的新证明**，**不扩展 Theorem 1.1 的亏格范围**。未登记为独立 bib key。
+
+  【4. 形式化：不可能】Mathlib 无超流形、无超黎曼面、无模叠；本定理是代数几何/上同调障碍类层面的结果，
+  证明本项目未读。**不得选进 Lean 岛**（抽取记录 §5.4）。天花板 rigorous。
+
+  【5. 与 1998 年状态的接口】polchinski-1998-v2 §12.5 p. 126 说 (12.5.27) 的参数化「is always possible locally on
+  supermoduli space. It can also be used globally, with careful treatment of the modular identification and the
+  limits of moduli space」——那是 1998 年对全局问题的措辞；本定理（2013）把「全局」这一层的一个具体版本
+  （全纯投影到约化空间）在 g ≥ 5 否定了。见 consistency.superstring-perturbative-consistency-unproven-1998。
+author: curator-superstring-pert
+created: "2026-09-11"

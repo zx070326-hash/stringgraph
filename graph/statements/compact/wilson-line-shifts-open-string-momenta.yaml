@@ -1,0 +1,38 @@
+id: compact.wilson-line-shifts-open-string-momenta
+kind: proposition
+title: Wilson 线把开弦的紧化动量平移 (θ_i − θ_j)/(2πR)，把 U(n) 破缺到 U(1)^n
+statement: |
+  设玻色开弦的一个方向紧化在半径 R 的圆上，带 U(n) Chan–Paton 因子，
+  紧化方向取 Wilson 线背景 A_d = −(1/2πR) diag(θ_1, …, θ_n)
+  （compact.wilson-line-background）。
+  两端带 Chan–Paton 指标 i、j 的开弦态 |k; ij⟩ 在 U(1)_i 下带电 +1、在 U(1)_j 下带电 −1。
+  则该态在紧化方向的**运动学动量**取值为
+    **v_d = ( 2πℓ + θ_i − θ_j ) / ( 2πR ),   ℓ ∈ Z**,
+  质谱为
+    **m² = v_d² + (N − 1)/α'**.
+  于是当 θ_1, …, θ_n 互不相同时，只有 i = j 的态在 v_d 上还含 ℓ = 0 的无质量支，
+  规范群 **U(n) 被破缺到 U(1)^n**。
+  （单个带电荷 q 的点粒子的对应结论是 v^d = (2πn + qθ)/(2πR)。）
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.5)（点粒子）、(8.6.9)（Chan–Paton 情形的动量）、(8.6.10)（质谱），p.264"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E148/#E149，证据等级 L1
+      （Schrans §8.98–§8.104，笔记 p.517–520）。
+      ⚠ **Schrans 明说这一步的物理他没弄懂**（Open Questions 第 7 条，逐字）：
+      「It isn't clear to me why |ij⟩ has charge +1 under U(1)_i and change −1 under U(1)_j.
+      … **Why do they pick up a different sign?**」他只能「Assuming that the state |ij⟩
+      has charge …」往下算。
+      ⚠ **(8.6.6)（带电点粒子的哈密顿量）Schrans 与原书符号不一致**，他明说找不出错在哪
+      （Open Questions 第 6 条）。
+tags: [compactification, wilson-line, open-string, chan-paton, symmetry-breaking, spectrum]
+notes: |
+  这条命题的**几何意义**在 T 对偶后才显出来：θ_i 是第 i 张超平面（D 膜）的位置，
+  v_d 是张在第 i、j 两张膜之间的开弦的「长度/2πα'」
+  （branes.wilson-line-eigenvalues-are-brane-positions、branes.stretched-open-string-mass）。
+
+  Chan–Paton 因子本身在本图中尚无节点（另一位 curator 同期转换第 6 章）；
+  电荷指派 (+1, −1) 因此既没有上游节点、在来源里也没有被理解——见推导的 gaps。
+author: curator-polchinski-ch8
+created: "2026-09-11"

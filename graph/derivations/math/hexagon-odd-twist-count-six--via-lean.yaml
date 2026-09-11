@@ -1,0 +1,53 @@
+id: math.hexagon-odd-twist-count-six--via-lean
+target: math.hexagon-odd-twist-count-six
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/FiniteCounts.lean :: StringFormal.Math.hexagon_odd_twist_count"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1。声明全文：
+
+          theorem hexagon_odd_twist_count :
+              ∑ k ∈ (range 7).filter Odd, Nat.choose 6 k = 32 := by
+            decide
+
+      formal/TODO.md 的「Lean 岛 2 / 有限可判定计算」一节记「无 sorry，公理只有标准三条」。
+      该文件是 StringFormal/Math/ 孤岛，只 import Mathlib，不 import Virasoro/ 或 NoGhost/。
+summary: |
+  一行 `decide`：`Nat.choose` 与 `Finset.range` / `Odd` 上的判定实例把整个求和归约成
+  6 + 20 + 6 = 32 的数值计算，内核逐步求值即得。
+
+  没有任何数学内容需要人来跟：这条推导的全部价值在于**把「32」这个在 Green–Schwarz 1984 (12c)
+  与 GSW p.165 里凭空出现的整数，钉死成一条机器检查过的算术**。
+  一般 n 的二项式论证（Σ_{k 奇} C(n,k) = 2^{n−1}）见
+  math.hexagon-odd-twist-count--via-binomial-theorem，**不在本推导内**。
+gaps:
+  - |
+    **只覆盖 n = 6**。本推导不给出、也不使用一般 n 的恒等式；一般卡
+    math.hexagon-odd-twist-count 的有效状态**不因本推导改变**（两卡之间图里无边，见目标卡 notes）。
+  - |
+    **不含组合解释**。「Σ_{k 奇} C(6,k) = 六元集合中奇基数子集的个数」这一步（`Finset.card` 与
+    `Nat.choose` 的对应）不在 Lean 声明里，也不在目标卡的 statement 里。它是把本卡接到
+    GSW 那句话上的必要一环，目前只由 math.hexagon-odd-twist-count 的散文承载。
+  - |
+    **物理侧的两步仍无形式化**：(i)「六边形图的内线数 = 6」；(ii)「不可定向六边形图的数目 =
+    奇数扭转的分配方式数」。二者都是 GSW 的读图/物理断言，图里无节点。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，Lean 4 + Mathlib v4.33.1）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.hexagon_odd_twist_count
+
+  输出 `ok  StringFormal.Math.hexagon_odd_twist_count  axioms: propext Classical.choice Quot.sound`。
+  本分支未改动 formal/ 下任何文件。
+
+  **depends_on 为空是有意的**：结论是 ℕ 上的有限计算，不需要图内任何节点，
+  与 math.euler-partition-generating-function--via-lean 同型；validate 的
+  「derivation has no dependencies」warning 是预期内的。
+author: curator
+created: "2026-09-11"

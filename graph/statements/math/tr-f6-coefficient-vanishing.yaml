@@ -12,6 +12,9 @@ statement: |
   是物理判断，由 consistency.anomaly-cancellation-so32-effective-theory 承载。
 uses_conventions:
   - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.tr_f6_coefficient_vanishing
+  lean_file: StringFormal/Math/GreenSchwarzAlgebra.lean
 sources:
   - ref: green-schwarz-1984
     loc: "PLB p.119（重印 610），(12c) 与 (13a)(13b)；(12c) 下方逐字「The first term in eq. (12c) corresponds to anomalies that cannot be cancelled by the addition of local interactions to the effective action. However, it is absent if the gauge group is chosen to be SO(32).」"
@@ -31,7 +34,16 @@ notes: |
   **GS 原文同样没有这条**，且它要用到 consistency.gravitational-anomaly-requires-496-fermions
   的 496。本图暂不建该节点，记在这里备查。
 
-  【status 说明】同 math.mixed-anomaly-trace-conditions-n32：计算平凡，但缺 reviewer 复核记录，
-  按 docs/STATUS_LEVELS.md 取 physical-argument。
+  【★ 2026-09-11：Lean 声明已就位（岛 2）】formal/StringFormal/Math/GreenSchwarzAlgebra.lean
+  用**两条独立声明**覆盖本卡的两个分支（本卡 statement 是两条并列命题，各挂一个 decl）：
+  · SO(N) 分支 → `tr_f6_coefficient_vanishing (N : ℤ) : N + 32 * (-1) = 0 ↔ N = 32`
+    （`formal.lean_decl` 取这条，含 GS 只给的「⇐」与本图补的「⇒」两个方向）；
+  · USp(N) 分支 → `tr_f6_usp_positive (N : ℤ) (hN : 1 ≤ N) : 0 < N + 32`。
+  两条都是 `omega` 一行。**未被 Lean 覆盖的一句**：「Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴
+  中 tr F⁶ 的系数是 N + 32l」——那是从 GS (12c) 读出的记号事实，记在
+  math.tr-f6-coefficient-vanishing--via-lean 的 gaps。
+
+  【status 说明】原纸上推导（--via-coefficient-inspection）经 reviewer 复核后已是 rigorous；
+  本卡的有效状态现由 --via-lean 承载。
 author: curator
 created: "2026-09-11"

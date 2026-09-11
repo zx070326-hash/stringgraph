@@ -1,0 +1,32 @@
+id: duality.t-duality-spectrum-equivalence
+kind: proposition
+title: T 对偶在谱层面：R ↔ α'/R 配合 n ↔ w 保持闭弦谱不变
+statement: |
+  设 D = 26 的玻色闭弦有一个方向紧化在半径 R（conv.compactification-radius）。
+  考虑映射
+    **T : (n, w, R) ⟼ (w, n, α'/R)**   （动量数与绕数互换，半径取倒）。
+  则：
+  (1) 左右动量按 **k_L ⟼ k_L，k_R ⟼ −k_R** 变换；
+  (2) 紧化闭弦的质量公式 m² = n²/R² + w²R²/α'² + (2/α')(N + Ñ − 2) 在 T 下逐项不变；
+  (3) level matching 约束 nw + N − Ñ = 0 在 T 下不变。
+  因此半径 R 的紧化闭弦谱与半径 α'/R 的紧化闭弦谱**逐态一一对应且质量相同**：
+  在谱的层面，两个半径给出同一个理论。特别地 R = √α' 是这个映射的不动点
+  （自对偶半径）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.27)（T 对偶下的左右动量），p.247；质量公式与约束是 (8.3.2)，p.241"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E132，证据等级 L1
+      （Schrans §8.43，笔记 p.460，[8.181] 逐式验算）。
+tags: [t-duality, compactification, closed-string, winding, spectrum, torus]
+notes: |
+  这是 T 对偶**证据最硬**的一层：它只是把 k_{L,R} 的显式表达式代进去做代数验算。
+  更强的两层——「两个理论是同一个世界面 CFT」（duality.t-duality-is-cft-isomorphism）
+  与「背景场按 Buscher 规则变换」——证据强度依次下降，抽取记录 §11 的建议 2
+  明确要求三者不要合成一个节点。
+
+  N、Ñ 在 T 下不变（振子不动），这是把「谱不变」说成「逐态对应」的前提；
+  对应关系是 |n, w; N, Ñ⟩ ↦ |w, n; N, Ñ⟩。
+author: curator-polchinski-ch8
+created: "2026-09-11"

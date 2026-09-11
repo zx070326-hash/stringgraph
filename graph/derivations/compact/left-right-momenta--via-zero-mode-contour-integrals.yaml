@@ -1,0 +1,35 @@
+id: compact.left-right-momenta--via-zero-mode-contour-integrals
+target: compact.left-right-momenta
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.closed-string-winding-sector
+  - id: compact.circle-momentum-quantization
+    inferred: true
+    note: |
+      原书在弦上用的量子化条件是 (8.2.2)（p = n/R），场论层面的 (8.1.5) 是本图的
+      compact.circle-momentum-quantization。两者的论证相同（圆上的单值性），
+      但抽取记录里 (8.2.2) 只有一句交叉引用、没有独立条目（#E122 的 ⚠），
+      因此「§8.2 用的就是 §8.1 那条量子化」是 curator 的合并，不是来源写出的。
+  - id: worldsheet.closed-string-mode-expansion
+    note: |
+      提供 α_0 = ᾱ_0 = (α'/2)^{1/2} p 的零模归一化与左右行独立的模式展开；
+      紧化方向把这条归一化改为 α_0 ≠ ᾱ_0（差由绕数给出），这正是本推导的内容。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.2, eq. (8.2.5)（2πRw = ∮_C(dz ∂X + dz̄ ∂̄X)）、(8.2.6)（p = (2α')^{-1/2}(α_0 + ᾱ_0)）、(8.2.7)"
+    note: |
+      抽取记录 polchinski-1998-v1#E120/#E121/#E122（L1，Schrans §8.11–§8.13，笔记 p.436–437）。
+summary: |
+  两个零模条件联立：
+  (i) 绕数条件对模式展开取围道积分给 2πRw = ∮_C (dz ∂X + dz̄ ∂̄X) = 2π(α'/2)^{1/2}(α_0 − ᾱ_0)，
+      即 α_0 − ᾱ_0 = (2/α')^{1/2} wR;
+  (ii) Noether 动量 p = (2α')^{-1/2}(α_0 + ᾱ_0) 与量子化 p = n/R 给 α_0 + ᾱ_0 = (2α')^{1/2} n/R。
+  解出 α_0、ᾱ_0 并代入 k_{L,R} = (2/α')^{1/2} α_0、(2/α')^{1/2} ᾱ_0 得
+  k_L = n/R + wR/α'、k_R = n/R − wR/α'。
+gaps:
+  - "围道积分 (8.2.5) 用到 Laurent 展开逐项积分与围道变形；Schrans 明说第二项换元 z̄ = w 后围道反向、相对符号才是减号。级数的收敛与逐项积分的合法性在来源中未讨论（与本图既有的 OPE 收敛缺口同型，lead 裁决 2026-09-10）。"
+  - "式号 (8.2.2)（弦上的动量量子化）在抽取记录中只有一句交叉引用锚定，其目录无条目（抽取记录 §10）。"
+  - "紧化方向的 Noether 动量 (8.2.6) 是第 2 章 (2.7.3) 的复用，Schrans 未在此处重算；本图尚无 (2.7.3) 的节点。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -12,10 +12,13 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.5)"
+    loc: "§1.2, eq. **(1.2.5)**, p.10：`S′_pp = ½ ∫ dτ (η^{−1} Ẋ^μ Ẋ_μ − η m²)`"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E2，证据等级
-      [页码已核实/式号未核实]；公式号 (1.2.5) 未核对原书。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E2。
+      **【核实 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      式号 **(1.2.5) 正确**，页码 **p.10**；「约」与「公式号未核对原书」两个限定同时撤销，
+      证据等级由 [页码已核实/式号未核实] 升到 **L1**。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, action, point-particle, classical, auxiliary-field]
 notes: |
   Polchinski 用这条作为 Polyakov 作用量（worldsheet.polyakov-action）的动机：

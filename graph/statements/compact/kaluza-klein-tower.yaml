@@ -1,0 +1,35 @@
+id: compact.kaluza-klein-tower
+kind: proposition
+title: Kaluza–Klein 塔：圆紧化把无质量场化为质量 |n|/R 的无穷塔
+statement: |
+  **前提**（本图显式补出，见 notes）：D 维背景取平坦度规、紧化方向与非紧方向不混合，
+  即 Kaluza–Klein ansatz（compact.kaluza-klein-metric-ansatz 尚未建卡）中的规范场分量
+  取 G^{μd} = 0；紧化方向的周期为 2πR。
+
+  在此前提下，D 维无质量波动方程 ∂_M ∂^M φ = 0 对
+    φ(x) = Σ_{n ∈ Z} φ_n(x^μ) e^{i n x^d / R}
+  的每个 Fourier 模给出
+    **∂_μ ∂^μ φ_n = (n² / R²) φ_n**,
+  即 d = D − 1 维观察者看到的是一列质量 m_n = |n| / R 的标量场（Kaluza–Klein 塔），
+  质量壳条件 −p_μ p^μ = n²/R²。R → 0 时除 n = 0 外全部态的质量趋于无穷。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.1, eq. (8.1.6)（波动方程）与 (8.1.7)（无穷塔），p.232"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E116，证据等级 L1
+      （Schrans §8.4–§8.5，笔记 p.421–422）。
+      ⚠ **成立条件在原书里没有写清楚**：Schrans 的 Open Questions 第 1 条逐字指出
+      「In deriving the infinite tower of fields due to the Kaluza-Klein compactification,
+      one needs to assume G^{μd} = 0」，并推测原书此处默认平坦背景、只作示意；
+      他自己算出的方程比原书**多一项** (i n/R) G^{μd} ∂_μ。
+      本节点把 G^{μd} = 0 写成显式前提，这个前提的措辞是 curator 补的，不是原书的。
+tags: [compactification, kaluza-klein, torus, spectrum, field-theory]
+notes: |
+  这条是「紧化把动量量子化翻译成质量」的场论原型，弦上的对应物是
+  compact.circle-closed-string-mass-formula 里的 n²/R² 项（那里还多出绕数项 w²R²/α'²）。
+
+  前提 G^{μd} = 0 不是可有可无的技术假设：不加它，Kaluza–Klein 矢量 A_μ 与 φ_n 的
+  一阶导数耦合（Schrans [8.13]），方程不是简单的质量项。原书是否写了这个前提未核实。
+author: curator-polchinski-ch8
+created: "2026-09-11"

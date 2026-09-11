@@ -114,5 +114,29 @@ notes: |
     （Lean `Fock.physSubmodule`，两条条件都有）。本卡的 P(p;k_0) 是它在塔上的**正模那一半**。
     Lean 侧塔上的完整版 `towerPhysSubmodule` **已定义但没有保持性定理**。
   · worldsheet.ddf-commute-with-virasoro（∀m）：承载完整推论的卡，effective = physical-argument。
+
+  【2026-09-11（六）：本卡已被完整版覆盖；保留作历史（三段式攻关记录），不换代、不删，curator】
+  main 合入 `formal/StringFormal/NoGhost/DDFOperatorAll.lean` 后：
+  · `lie_towerLop_ddfOp` 把 ⁅L_m, A^ε_n⁆ = 0 证到**每个** m ∈ Z（含 m = 0）；
+  · `ddfOp_mem_towerL0Submodule` 因此得到质壳那一半；
+  · `ddfOp_mem_towerPhysSubmodule` 把两半合起来，给出**完整**的物理态保持。
+  图中新卡 **worldsheet.ddf-operators-preserve-physical-states**（formalized）承载完整版，
+  ⇒ **本卡的全部内容自此被它严格包含**（本卡是它去掉 L_0 条件后的弱化）。
+  按 lead 裁决：**保留不删、不加 `superseded_by`**，与
+  worldsheet.ddf-commute-with-nonzero-virasoro 同一处理，作为三段式攻关
+  （m ≥ 1 → m ≠ 0 → 正模保持 → 一切 m + 完整物理态保持）的可追溯记录。
+  ⚠ **新的下游不应再引本卡**，应引 worldsheet.ddf-operators-preserve-physical-states。
+
+  【上文两处已过时的措辞，按此更新阅读】
+  (1) 【剩余障碍：只差 [L_0, A^ε_n] = 0】：**障碍已清除**。
+      `Fock.lie_Lop_vertexOsc`（VertexWeightZero.lean，一切 m；图中
+      worldsheet.exponential-vertex-operator-mode-weight-identity-v2）补上了单 Fock 的 m = 0，
+      塔上的 ∀m 版本随之逐字得到。
+  (2) 同段引的 TowerPhysical.lean 文件头那句「that case is **not formalised**」
+      同样已过时（该文件写于 DDFOperatorAll.lean 之前）。
+  两段作为历史保留，不改。
+  ★ 上文【formalizer 的更正：塔上的 L_0 条件是统一截距】一段**仍然完全有效**，
+  并已由 `ddfOp_mem_towerL0Submodule` / `invTwo_zeroModeSq_towerMomentum_add_shift_cancel`
+  机器验证：截距 a₀ 是一个常数，A^ε_n 保持它不变。
 author: curator
 created: "2026-09-11"

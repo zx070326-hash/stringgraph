@@ -3,7 +3,7 @@ target: consistency.abelian-factorization-is-not-cancellation
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: consistency.anomaly-twelve-form-d10
+  - id: consistency.anomaly-twelve-form-d10-v2
     inferred: false
     convention_map: |
       **同一件事的两套写法**。本图的定义卡用 Green–Schwarz 1984 的记号 Ω_{4n} := Tr F^{2n}，
@@ -14,6 +14,16 @@ depends_on:
         （curator 2026-09-11 展开复核：GS (19) 展开即 Tr F⁶ = (1/48)Tr F⁴Tr F² − (Tr F²)³/14400，逐项相同）；
       · 两侧的 tr / Tr 语义相同（tr = 基本、Tr = 伴随），故 conv.gauge-trace-normalization 直接适用，
         无需重标度；ADT 的 tr R^{2k} 与本图一样是 SO(1,9) 切空间的 10 × 10 迹。
+      【2026-09-11】原依赖 consistency.anomaly-twelve-form-d10 已拆卡换代，本条改指其记号继承卡 -v2；
+      该旧卡内嵌的「升维字典」现由下一条边承载。
+  - id: consistency.anomaly-descent-to-twelve-form
+    inferred: false
+    note: |
+      【2026-09-11 拆卡后新增的显式边】ADT (5)(6) 用的正是这条字典
+      （Î₁₂ = dÎ₁₁、δÎ₁₁ = dÎ₁₀、δ log Z ~ ∫Î₁₀），**ADT 同样不加论证、不给引用**。
+      本推导原先只把这条缺口写在 gaps 里（见 gaps 中「升维字典」那一条），
+      拆卡后它成为一条可被 `stringgraph why` 追踪的边。边本身在 ADT §2 处可查，故 inferred: false；
+      inferred 的是**那条字典的论证**，不是这条边——缺口记在目标依赖卡的 gaps。
       · **整体归一化不同**：见本文件 notes 的 −96 核验。
     note: |
       边在来源处可查：ADT 第二节逐字「the anomaly is conveniently expressed in terms of a formal
@@ -28,7 +38,7 @@ depends_on:
     note: |
       本推导用到「Î₁₂ 中引力部分的系数正比于 n − 496，故 n = 496 时该部分为零」，
       这正是该节点承载的内容（GS (20)）。ADT 在 (7) 中独立给出同一结构。
-  - id: consistency.h-field-strength-chern-simons
+  - id: consistency.h-field-strength-definition
     inferred: false
     convention_map: |
       本图的定义卡取 GS (4) `H = dB + ω⁰_{3Y} − ω⁰_{3L}`；ADT (9) 写 `H₃ ≡ dB₂ − ω₃^Y + ω₃^R`。
@@ -39,6 +49,14 @@ depends_on:
       ADT (16) 是该定义卡在**阿贝尔**情形的对应物（每个 U(1)^{(i)} 贡献 ω₃^{(i)} = A^{(i)} ∧ dA^{(i)}）。
       ⚠ **阿贝尔那一支不在本图定义卡的陈述里**（GS 1984 只写非阿贝尔 ω⁰_{3Y}），
       ADT 把它外包给 Bergshoeff 等人。该外部输入记在 gaps。
+      【2026-09-11】原依赖 consistency.h-field-strength-chern-simons 已拆卡换代，本条改指
+      consistency.h-field-strength-definition（H 的定义那一半）。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    inferred: false
+    note: |
+      【2026-09-11 拆卡后新增的显式边】本推导用的「H 含规范 CS 项 ⇒ **B 必须在规范变换下移动**」
+      里的后半句就是 GS (9c)，原先埋在 consistency.h-field-strength-chern-simons 的第 (2) 段里，
+      拆卡后单列。ADT (10) 的 δB₂ 是它在阿贝尔情形的对应物。
   - id: consistency.gs-counterterms-1984
     inferred: false
     convention_map: |

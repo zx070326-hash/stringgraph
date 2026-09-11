@@ -12,14 +12,33 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.31)（Euler 数的定义式）；同一表达式在 §3.2 重复为 eq. (3.2.3b)"
+    loc: "**§3.2, eq. (3.2.3b)**（带边界项的完整表达式；本节点 statement 的那个式子）。⚠ **§1.2 的 (1.2.31)（p.15）不含边界项**，逐字只是 `χ = (1/4π)∫_M dτdσ(−γ)^{1/2}R`；第 1 章里带边界项的版本是 **exercise 1.3**，不是正文"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E9。定义式的 §1.2 公式号
-      (1.2.31) [未核实]（硬约束：必在已核实的 (1.2.32)（p.15）之前）；
-      但同一表达式 (1/4π)∫_M d^2σ √g R + (1/2π)∫_{∂M} k ds 在 §3.2 的 (3.2.3b)
-      被 Schrans 伴读笔记引用并给出，故**表达式本身已核实**，只是 §1.2 的式号未核实。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E9。
+      **★【重大订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字，p.15）】**
+      旧 loc 把本节点 statement 的表达式挂在「约 (1.2.31)」上，**这是错的**：
+
+      **(1.2.31) 逐字是 `χ = (1/4π) ∫_M dτdσ (−γ)^{1/2} R`，没有边界项。**
+      原书 p.15 紧接着自己说明了为什么，逐字：
+        「The variation is a total derivative, because `(−γ)^{1/2}∇_a v^a = ∂_a((−γ)^{1/2}v^a)`
+         for any `v^a`. The integral (1.2.31) is therefore invariant for a world-sheet
+         **without boundary**. **With boundaries an additional surface term is needed
+         (exercise 1.3).**」
+      ⇒ **带边界项的 Euler 数在第 1 章是习题（exercise 1.3），不是正文。**
+      本节点 statement 写的是带边界项的完整式子，故其 §1.2 挂载**必须撤销**，
+      正文出处改挂 **§3.2 (3.2.3b)**（抽取记录 E48）。
+
+      ⚠ **诚实标注**：**(3.2.3b) 本身本项目尚未取页图**（抽取记录 §13.9 D#3 明列为下一轮任务），
+      现有依据只是 Schrans 伴读笔记转引（L2）。即本节点 statement 里的**边界项部分
+      目前没有 L1 一手支撑**；`χ = 2 − 2g − b` 那半句本来就标注为 Gauss–Bonnet 的背景知识，
+      不出自 Polchinski。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(d) 与 §13.9 A#4。
 tags: [bosonic-string, geometry, topology, euler-number]
 notes: |
+  ⚠ **【2026-09-11 记账】本卡 statement 里的边界项 `(1/2π)∫_{∂M} ds k` 在 Polchinski
+  第 1 章是 exercise 1.3，不在正文（(1.2.31) 无边界项）；正文出处应是 §3.2 (3.2.3b)，
+  而 (3.2.3b) 本项目尚未取页图。** 详见上方 sources note。按项目原则 1 不改 statement 文本。
+
   Gauss–Bonnet 给出的 χ = 2 - 2g - b 是标准微分几何结果，不出自 Polchinski 的论证，
   这里作为定义的背景说明列出；本图不为它单列节点（属 math area，Phase 1 之外）。
   χ 的 Weyl 不变性是一条独立命题，见 worldsheet.euler-number-weyl-invariance。

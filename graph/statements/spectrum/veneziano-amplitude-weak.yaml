@@ -56,20 +56,29 @@ sources:
           → **该核对已于 2026-09-11 由 §12.8 完成（原书 p.183），本条关闭。**
   - ref: schrans-2020
     loc: "§6.39–§6.41（笔记 p.308–309）：三项 Beta 结构的实际来源 [6.143]（核对源）"
+superseded_by: spectrum.veneziano-amplitude
 tags: [spectrum, tree-level, open-string, tachyon, veneziano, beta-function, four-point, weak-form]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E99 建立，**按任务书要求只建弱形式**。
+
+  **⚠ 换代后的读法**：本卡片 statement 里「整体前因子（含 g_o、C_{D₂}、i、(2π)²⁶ 的组合）
+  本图未核实、不写出」以及「本卡片不能用于任何需要绝对归一化的下游」两句
+  **在 2026-09-11 之后已不再反映本图的知识状态**——前因子已知为 2i g_o²/α' × (2π)²⁶δ²⁶(Σk_i)。
+  需要绝对归一化的下游请改用 spectrum.veneziano-amplitude。
+  按 graph/CLAUDE.md 的不可变原则，statement 文本不作修改。
 
   **历史意义（不入陈述）**：Veneziano 1968 的这个 Beta 函数拟设是弦论的起点；
   本图目前没有登记 Veneziano 的原始论文，本卡片的来源只有 Polchinski（且经二手源转述）。
   若日后 researcher 登记 veneziano-1968，可为本卡片补一条独立推导，
   并借机核对前因子——那也是把本卡片从「弱形式」升级为完整形式的自然时机。
 
-  **升级路径（须新建节点，不得改本卡）——前提已于 2026-09-11 满足**：
-  原书 (6.4.23) 已由抽取记录 §12.8 逐字核实（p.183，前因子 2i g_o²/α'），
-  所以现在**可以**新建 spectrum.veneziano-amplitude（含前因子的完整形式）
-  并在本卡写 superseded_by。本轮（curator-ch6-locs）**按任务书只改 sources/notes，不换代**，
-  换代留给 lead 另派。按 graph/CLAUDE.md，**不得**直接修改本卡的 statement 文本。
+  **升级路径——已于 2026-09-11 走完（curator-ch6-sec14）**：
+  原书 (6.4.23) 由抽取记录 §12.8 逐字核实、§14.1 页图复核无误（p.183，前因子 2i g_o²/α'），
+  **完整形式的新卡 spectrum.veneziano-amplitude 已建立，本卡已写 superseded_by 指向它。**
+  推导 spectrum.veneziano-amplitude-weak--via-beta-integral 已 `git mv` 改名为
+  spectrum.veneziano-amplitude--via-beta-integral 并改指新陈述（depends_on 未变），
+  故**本卡片现在没有自己的推导**——这是 docs/STATUS_LEVELS.md「旧推导的去留」
+  （lead 2026-09-11 裁决）规定的换代方式。本卡片保留作为历史记录，statement 文本不再改动。
 
   **前因子的内部对账（curator 的观察，不是原书的说明）**：
   四点振幅的普遍前因子是 i g_o⁴ C_{D₂} = i g_o⁴ · 1/(α'g_o²) = i g_o²/α'

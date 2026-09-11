@@ -50,11 +50,48 @@ sources:
       (a) 原文**不出现 "SO(3)"、不出现 "PSU(2)"、不出现「维数 3」**——从「黎曼球的旋转群」
           到「SO(3)，实维 3」是使用者的补步（标准，但不是来源原文）；
       (b) **证明外包**：上游 Theorem 2.1 明写「We have shown in [5]」，
-          [5] = Bârză–Ghişa, *Mathematica Bohemica* **129** (2004) 129–140，本项目未获取；
+          [5] = Bârză–Ghişa, *Mathematica Bohemica* **129** (2004) 129–140，
+          **2026-09-11 已取得该文全文（L4-全文，见下一条 source）**；
       (c) 文中式 (2) 的归一化 |a| + |b| ≠ 0 写得不严（PSU(2) 需 |a|² + |b|² = 1），**不可照抄当定义**；
       (d) 期刊层级低，正文有笔误（§3 开头把 Theorem 2.1 称作「Theorem 1」）。
+      **(e) 2026-09-11 新增、最要紧的一条（math-sources.md §40.3）**：
+          「G is a **rotation** of the Riemann sphere」这句话是**本文自己加的**，
+          **不在**它外包证明的那篇（barza-ghisa-2004）里——该文两次独立全文提取都报告
+          **全文不出现 "rotation"/"rotations"**。
+          ⇒ 「这族 Möbius 变换 = 球面的旋转」这一步**没有带证明的来源**，
+          它的唯一出处就是本条这半页验证（该文自称证明只是半页）。
       ⚠ **严禁**把这条结论引成 Bârză–Ghişa 2009 的「Theorem 4」——那句是 Theorem 4 与
       Theorem 5 之间的**无编号**行间陈述（math-sources.md §39.7.3）。
+  - ref: barza-ghisa-2004
+    loc: "Cor 3.2 p.134（L4-全文，jina 文本，禁抄公式字符）"
+    note: |
+      **这是 caohuu-ghisa-2004 Theorem 2.1「We have shown in [5]」所指的真正证明出处**
+      （Math. Bohem. **129** (2004) no. 2, 129–140；DOI 10.21136/MB.2004.133904）。
+      **等级 L4-全文**（math-sources.md §40.1）：取件路径是
+      `r.jina.ai` 文本抽取代理读 DML-CZ 的 PDF（`.cz` 域在本环境一律 Socket is closed），
+      **不是页图、也不是由 researcher 本人逐页读的**；数学符号被抽取严重破坏。
+      ⇒ **可以引编号与页码，不可照抄公式字符**。为降低单次读取误差，同一 URL 做过两次
+      措辞不同的独立提取，两次在下面四点上完全一致。
+
+      **四条否定结论（两次提取一致，math-sources.md §40.0/§40.2/§40.3）**：
+      (i)   本文只给 **Möbius 形式** G(z) = e^{iθ}(az+b)/(−conj(b)z + a)，条件 |a| + |b| ≠ 0；
+      (ii)  **全文不出现 "rotation"/"rotations"**；
+      (iii) **全文不出现 SO(3) / SU(2) / PSU(2) / orthogonal group**；
+      (iv)  **全文不把这族映射称作「群」、也不给「维数 3」**。
+      ⇒ 本条承载的只有「Aut(RP²) 落在那族 Möbius 变换里」这一层；
+      「= SO(3)、实维 3」在数学文献侧是**两步补步**，不是单条可引定理（见 notes）。
+
+      **三条禁令（math-sources.md §40.4(3)）**：
+      1. **不得**引 `Bârză–Ghişa 2004, Theorem 3.1` 来支持「自同构」那条——Theorem 3.1 是
+         **全部 dianalytic 变换**（含 2n+1 次有理映射），自同构那条是 **Corollary 3.2**；
+      2. **不得**把本文当作「旋转群 / SO(3)」的出处（§40.3）；
+      3. **不得**引 `Bârză–Ghişa 2004, Theorem 5.x`——该文最后一条编号是 **6.1**，
+         却印在标题为「5. The case of a Klein bottle」的节里（该文自身的编号 bug）。
+      ⚠ **公式字符以 caohuu-ghisa-2004 (L1) 为准**：该文写分母 −b̄z+**ā**（a 上有横杠），
+      本文的抽取文本是 −b̄z+**a**（无横杠）。极可能是抽取丢了上划线，
+      但在拿到页图前**不能断言**（遗留问题 Q37）。
+      **独立旁证**：Hawkins–Randolph, arXiv:1706.09980 式 (3.1)（p.6，页图 L1）逐字转引了
+      本文 **Theorem 3.1** 的形式；**但该文不转引 Corollary 3.2、也不提 rotation。**
 tags: [worldsheet, tree-level, projective-plane, unoriented, conformal-killing-vector, so3, moduli]
 notes: |
   由 curator 于 2026-09-11 从 literature/extractions/math-sources.md §39.9(4) 建立。
@@ -69,9 +106,31 @@ notes: |
   (c) 两者李代数同为 su(2)，κ = 3 两说一致。
   **但两种写法确实并存于文献中**，日后若有人要断言「CKG 是哪个群」，须回到这条记录。
 
-  **数学侧来源只覆盖 (2) 的一半**：Cao-Huu–Ghişa Corollary 3.1 说的是 RP² 的
-  **dianalytic 自同构**是球面旋转，它给出 (2) 的群**是什么**，
-  但**不给** κ = 3 这个维数，也不给 (1)。见 sources 的限制 (a)。
+  **数学侧来源只覆盖 (2) 的一半，而且是分两层、每层各缺一块**
+  （2026-09-11 按 math-sources.md §40.3 改写；此前本节点只写「Cao-Huu–Ghişa 覆盖一半」，
+  那个说法不够准确）：
+
+  | 环节 | 谁说的 | 说了什么 | 等级 |
+  |---|---|---|---|
+  | (i) 自同构 = 那族 Möbius 变换 e^{iθ}(az+b)/(−b̄z+ā) | **barza-ghisa-2004, Corollary 3.2 (p.134)** | 只给**公式形式** | L4-全文 |
+  | (ii) 「这族 Möbius 变换 = 球面的旋转」 | **caohuu-ghisa-2004, Corollary 3.1 (p.2)** | 加了 "rotation of the Riemann sphere" | L1 |
+  | (iii) 「球面旋转群 = SO(3)，实维 3，故 κ = 3」 | **没有任何来源** | 使用者的补步 | — |
+
+  **⚠ 本卡 statement 写了「SO(3)」与「κ = 3」，按 math-sources.md §40.4(2) 必须留这一句：**
+  > 「**SO(3)** 与「实维 3」在**任何数学来源里都不是原文**：Bârză–Ghişa 2004 Cor 3.2 只给
+  > Möbius 形式，Cao-Huu–Ghişa 2004 Cor 3.1 只加到「球面的旋转」。写 SO(3) 的唯一逐字来源是
+  > Polchinski p.168–169（物理书）。」
+
+  **并且 (ii) 这一步的证明不在它所引的出处里**：Cao-Huu–Ghişa 的上游 Theorem 2.1 写
+  「We have shown in [5]」把证明外包给 barza-ghisa-2004，而那篇**全文不出现 "rotation"**
+  （两次独立全文提取一致，§40.3）。这不是「找不到」，是**确定的否定结果**。
+  ⇒ 数学文献侧的链条是 (i) 有证明但无「旋转」；(ii) 有「旋转」但证明外包且外包对象里没有这句；
+  (iii) 完全无来源。三层合起来**不构成**一条可引的「Aut(RP²) = SO(3)」定理。
+  这两步补步已逐条记在推导 worldsheet.rp2-conformal-killing-group--via-sphere-involution
+  的 gaps 里。
+  ⚠ **另外：两条数学来源都与本卡 (1) 无关**——它们讲的是自同构，**不讲模**；
+  μ(RP₂) = 0 的唯一来源仍是 Polchinski §6.1 的那句「There are no moduli.」
+  （κ = 3 的数字也只来自 (5.2.11a) 的 κ = 3χ 代 χ = 1）。
 
   **本卡与 worldsheet.sphere-/disk-conformal-killing-group 的差别**：那两张卡的 statement
   都**明确声明不断言 μ = 0**（reviewer 已指出这一点）；**本卡断言 μ(RP₂) = 0**，

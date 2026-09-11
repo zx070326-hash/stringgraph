@@ -5,8 +5,14 @@ status: physical-argument
 depends_on:
   - id: cft.one-and-two-point-functions-mobius-fixed
     note: 提供两点函数的幂次形式（(2)），本推导在其上再加特殊共形变换得选择定则 (1)。
-  - id: worldsheet.primary-field
-    note: 提供主场的变换律。
+  - id: worldsheet.primary-field-v2
+    note: |
+      提供主场的变换律。
+
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: math.mobius-group-sharply-three-transitive
     note: |
       提供 (2) 与 (3) 的计数依据：三点可被唯一固定（故三点函数无剩余自由度），

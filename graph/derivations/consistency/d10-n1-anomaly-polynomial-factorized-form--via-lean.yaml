@@ -1,0 +1,93 @@
+id: consistency.d10-n1-anomaly-polynomial-factorized-form--via-lean
+target: consistency.d10-n1-anomaly-polynomial-factorized-form
+kind: proof
+status: formalized
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      Tr_a = 伴随迹、tr = 切空间 10 × 10 矩阵的迹、楔号省略——三条都与 Polchinski §12.2 相同
+      （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md §1.1/§1.3）。
+      系数全部写死在 Lean 陈述里，故这条约定依赖必须留在图里。
+      ⚠ 本约定卡不含 Polchinski (12.2.10) 的 −i/(2π)⁵ 整体归一化；本命题也不需要它
+      （等式两边同乘任何常数不变）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/AnomalyPolynomial.lean :: StringFormal.Math.anomaly_polynomial_factorized_eq_expanded（及其用到的 Ihat8, Ihat56, Y4, X8, IhatN1Expanded, IhatN1Factorized）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，`[Field K] [CharZero K]`，证明是 `unfold; ring`
+      （连 `field_simp` 都不需要），无 sorry。声明形状：
+
+          theorem anomaly_polynomial_factorized_eq_expanded
+              (n trR2 trR4 trR6 TrF2 TrF4 TrF6 : K) :
+              IhatN1Factorized n trR2 trR4 trR6 TrF2 TrF4 TrF6
+                = IhatN1Expanded n trR2 trR4 trR6 TrF2 TrF4 TrF6
+
+      其中 `IhatN1Expanded n … = Ihat56 … − Ihat8 1 trR2 trR4 trR6 0 0 0 + Ihat8 n …`
+      —— 中性 8′ 的 `n = 1`、规范迹 `0 0 0` 就写在这里，与目标卡 statement 的转录约定逐字一致。
+      formal/TODO.md「Lean 岛 2 / AnomalyPolynomial」记 `anomaly-twelve-form-identity`（A9）
+      「无 sorry，公理只有标准三条」。该文件只 import Mathlib。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.11)(12.2.12) p. 98；(12.2.27)(12.2.28a,b) p. 101"
+    note: |
+      被机检的那条恒等式的文献出处。**原书不展示验算**（逐字只有「The anomaly has been
+      organized into a sum of three terms」）。抽取者已逐项手算复核，结果见抽取记录 E14 的
+      `[抽取者复算]` 九行；Lean 的 `ring` 与那九行一致，无一处对不上。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352v2, p. 2, eqs. (7)(8)"
+    note: |
+      独立第二来源。由于 ADT (7)(8) 与 (12.2.27)(12.2.28) 逐项相同（抽取记录 E15 已确认），
+      同一条 Lean 声明**同时**验证了 ADT 的排布。ADT 一侧同样不展示验算。
+summary: |
+  一行 `unfold; ring`。把 `IhatN1Factorized` 与 `IhatN1Expanded` 展开成七个独立符号的有理系数
+  多项式后，两边逐单项相同。全部在 formal/StringFormal/Math/AnomalyPolynomial.lean 内完成，
+  只 import Mathlib。
+
+  纸上要跟的是九类单项式（抽取记录 E14）：
+  · 纯引力 tr R₂⁶：(n − 1) + (−495) = n − 496，无 Y₄X₈ 贡献；
+  · tr R₂⁴ tr R₂²：(n − 496)/552960 + 1/768 = (n + 224)/552960 = [(n−1) + 225]/552960；
+  · (tr R₂²)³：(n − 496)/1327104 + 1/3072 = (n − 64)/1327104 = [(n−1) − 63]/1327104；
+  · Tr_a F₂⁶：两边都是 −1/1440；
+  · Tr_a F₂² Tr_a F₂⁴：+1/69120 与 −1/69120 相消；
+  · (Tr_a F₂²)³：−1/20736000 与 +1/20736000 相消；
+  · (Tr_a F₂²)² tr R₂²：Y₄X₈ 内部自相消（故 (12.2.27) 无此项）；
+  · Tr_a F₂² (tr R₂²)²：−(1/30 + 1/120)/768 = −1/18432，与 (12.2.11) 相符；
+  · Tr_a F₂² tr R₂⁴：−1/23040 两边一致。
+
+  **本推导只证代数重排**。「这些多项式是反常」「十二形式对应十维反常」「超引力谱是 56 + 8′ + 伴随 8」
+  一概不在其中——目标卡的「本卡不断言」逐条列出了这些边界。
+gaps:
+  - |
+    ★ **物理全部在外**：Polchinski 逐字「we will not repeat it here but just quote the result」
+    （抽取记录 E6），(12.2.11)–(12.2.13) 三个反常多项式本身是从 Alvarez-Gaumé–Witten 引来的，
+    本项目未取得该文。因此「(12.2.27) 是十维 N = 1 理论的反常」这句话**没有任何已核实的论证**，
+    本推导也不提供。要说那句话，必须另建 physical-argument 的卡并接
+    consistency.anomaly-descent-to-twelve-form 与 AGW 一侧的缺口。
+  - |
+    **n = Tr(1) = 1（中性 8′ 在平凡表示）这一步原书没写**。它被 (12.2.11) 上方对 n 的定义所迫，
+    且是 (n − 496) 记账成立的必要条件，但 Polchinski 没有把它写出来（抽取记录 E10/E14 均标注）。
+    目标卡把这个读法写进了 statement，故 Lean 与卡片一致；**缺口在卡片与原书之间，不在卡片与 Lean 之间**。
+    若将来发现原书别处写明，此条可撤。
+  - |
+    **七个符号的独立性是假设，不是事实**。在固定时空维数上，曲率二形式的楔单项未必逐点独立，
+    具体李代数上 Tr_a F^{2k} 之间还有迹恒等式。本命题（与 Lean 陈述）把它们当独立符号，
+    这对"两种写法相同"这件事是合法的（两边都是这些符号的多项式），但**不足以**支持任何
+    关于具体群的结论。
+  - |
+    **域 vs ℚ-代数**：Lean 取 `[Field K] [CharZero K]`。系数都是有理数，故恒等式在任意 ℚ-代数
+    （包括反常多项式真正生活的那个反交换代数的偶次部分）上同样成立，但那一步补正不在 Lean 里。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.anomaly_polynomial_factorized_eq_expanded
+
+  输出 `ok … axioms: propext Classical.choice Quot.sound`。本分支未改动 formal/ 下任何文件。
+
+  **为什么 depends_on 里只有一条约定**：目标卡的 statement 被刻意写成纯代数，
+  不引用图内任何命题；把物理接进来是另一张卡的事（见 gaps 第一条）。
+  validate 不会对「只依赖约定」报 warning，因为 depends_on 非空。
+author: curator
+created: "2026-09-11"

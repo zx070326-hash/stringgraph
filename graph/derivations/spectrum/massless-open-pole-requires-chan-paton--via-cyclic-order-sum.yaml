@@ -11,10 +11,15 @@ depends_on:
     note: 提供 B 在参数为非正整数处的单极点与留数，用来读出 (u−t)/(2s) 这一项。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§6.4, eq. (6.4.17)，p.179–183"
+    loc: "§6.4, eq. (6.4.17)，p.182；相消的原书陈述在 p.183 第 1 段（无式号）"
     note: |
-      抽取记录 #E98，L1（schrans-2020 §6.36–§6.37，笔记 p.307）。
-      ⚠ 原书是否明确写出「加上 t↔u 后极点相消」**未核实**；[S] 的正文如此陈述。
+      抽取记录 #E98 + **§14.1（原书核实 2026-09-11，pp.182–183 页图逐字）**。
+      **旧 note 的「⚠ 原书是否明确写出『加上 t↔u 后极点相消』未核实」一句已作废**：
+      原书 p.183 逐字写出了相消**及其机制**——「Because the residue at s = 0 in (6.4.17)
+      is odd in u − t, this pole actually cancels that from I(s,u), as do all poles at even
+      multiples of 1/α'.」故本推导 (2) 的结论有原书直接支持，等级 L1。
+      ⚠ 但**原书只给出机制、没有逐项验算**（没写出三段的相对权重与留数的完整表达式），
+      故本推导仍是 physical-argument；见 gaps。
 summary: |
   **(1)** 用 math.euler-beta-integral 的极点结构展开 I(s,t) = B(−α(s), −α(t)) 在 α's → 0 附近，
   得 I(s,t) = (u − t)/(2s) + 解析项（(6.4.17)）。留数 ∝ (u − t)。
@@ -28,16 +33,23 @@ summary: |
   正比于结构常数型的反对称组合，一般不为零。此时 α's = 0 的极点真实存在，
   对应中间态的无质量规范玻色子。
 gaps:
-  - "**(2) 的相消只在 [S] 的正文里被陈述，本推导没有逐项验算**：留数的符号相反这一点
-     依赖三个区间的相对权重与被积函数的幂次，而后者在本图中是**反推**的
-     （见 spectrum.open-string-four-tachyon-amplitude 的 gaps）。**建议 reviewer 复核。**"
+  - "**(2) 的相消本推导没有逐项验算**：原书 p.183 给出了机制（留数 (u−t)/2 在 u − t 下为奇，
+     故与 I(s,u) 的贡献抵消），但**没有写出三段的相对权重与留数的完整表达式**；
+     而后者在本图中是**反推**的（见 spectrum.open-string-four-tachyon-amplitude 的 gaps）。
+     **建议 reviewer 复核。**（2026-09-11 §14.1：原书出处已确定，但验算缺口未变。）"
   - "**(3) 只写出结构，没有给出留数的完整表达式**：真正的系数比较在 §6.5（(6.5.6)–(6.5.14)），
      本图在 spectrum.chan-paton-yang-mills-coupling 里另建节点，其表达式级核实靠 headrick-2008。"
-  - "**原书是否写出该相消未核实**（只有 schrans-2020 一个来源）。"
+  - "**（2026-09-11 §14.1 关闭）原书是否写出该相消**：原书 p.183 逐字写出，等级 L1，此项不再是 gap。
+     取而代之的新 gap 是：**原书对『所有 1/α' 偶数倍的极点都相消』这一族结论不给任何论证**，
+     只对 α's = 0 一例给了机制——见 spectrum.even-level-open-string-poles-cancel-between-orderings。"
   - "**路径积分测度未定义**（本批次共有）；且『极点 ⇒ 中间态』的解释依赖未建立的幺正性。"
 notes: |
   本推导是本批次里最「反直觉」的一条，也是最值得 reviewer 优先复核的三条之一
   （另两条：math.mobius-group-sharply-three-transitive 与
   spectrum.sphere-tachyon-expectation-smooth-at-infinity）。
+
+  **⚠ 禁令（§14.1，2026-09-11）**：本推导 (2) 的机制是**两个循环序之间**的相消
+  （I(s,t) 对 I(s,u)，靠留数在 u − t 下为奇函数），**不是**「因子 (1 + α's) 抵消」
+  或任何单项内部的因子相消。这是本轮排除的一个具体误解，不得写进任何节点。
 author: curator-polchinski-ch6
 created: "2026-09-11"

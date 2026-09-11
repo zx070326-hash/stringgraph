@@ -1,0 +1,80 @@
+id: spectrum.even-level-open-string-poles-cancel-between-orderings
+kind: proposition
+title: 纯四 tachyon 开弦振幅中 1/α' 偶数倍处的极点在循环序之间全部相消，存活的只有奇数倍
+statement: |
+  考虑**不带 Chan–Paton 因子**的开弦四 tachyon 树振幅
+  （spectrum.open-string-four-tachyon-amplitude）。单个循环序的边界积分 I(s,t) 在
+    α's = −1, 0, 1, 2, …    （(6.4.18)）
+  处有极点；原书紧接着说这些位置**正是开弦态的位置**
+  （逐字：「These are precisely the positions of the open string states.」），
+  同一塔也出现在变量 t 中（来自端点 y = 1）。则：
+
+  **把各循环序的贡献全部加起来后，α's 取 1/α' 的偶数倍的那些极点
+  （即 α's = 0, 2, 4, …）在完整的纯四 tachyon 振幅中全部相消**；
+  在这条塔里**存活的只有 1/α' 的奇数倍，即 α's = −1, 1, 3, …**。
+
+  原书对此给出的**唯一机制**是 α's = 0 那一例：(6.4.17) 在 s = 0 处的留数为 (u − t)/2，
+  **在 u − t 下是奇函数**，因而与 I(s, u)（t ↔ u 的那一循环序）在同一极点处的留数相消。
+
+  ⚠ **本命题的边界**：结论只对**没有 Chan–Paton 因子**的开弦理论成立。原书在同一段末尾逐字写
+  「This will not be true for the more general open string theories to be introduced in the next
+  section.」——next section = §6.5（Chan–Paton 因子，pp.184–192）。加上 Chan–Paton 迹后，
+  α's = 0 的极点真实存在（见 spectrum.massless-open-pole-requires-chan-paton (2)）。
+
+  **本命题不断言什么**：
+  - **不断言「为什么偶数倍的留数都是 u − t 的奇函数」**——原书对整族只给结论不给论证（见推导 gaps）；
+  - **不断言这与 G-parity 或任何选择定则有关**——原书没有作此联系，本图也不作；
+  - 不给出存活极点处的留数，也不断言存活极点与开弦谱中哪些态一一对应；
+  - **不涉及闭弦**。闭弦侧原书没有任何相消陈述，反而在 α's = 0 的极点上用幺正性定出 g'_c
+    （(6.6.15)，见 spectrum.gravitational-coupling-kappa）；这一开闭不对称是原书内部的事实，
+    但**原书没有把两处并排讨论**，本图不据此作任何推论。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, p.183 第 1 段（**无式号**）；配套的极点塔在 (6.4.18)、s = 0 处的留数在 (6.4.17)，均在 p.182"
+    note: |
+      literature/extractions/polchinski-1998-v1.md **§14.1**（原书核实 2026-09-11，
+      pp.182–183 页图逐字），等级 **L1（原书直读）**。
+
+      **p.183 第 1 段逐字（本卡片的全部依据）**：
+      「These are precisely the positions of the open string states. The integral I(s,t) also has poles
+      in the variable t at the same positions (6.4.18), coming from the endpoint y = 1. These are due to
+      the process of figure 6.3(b). The other two terms in the amplitude (6.4.9) give further contributions
+      to the s- and t-channel poles, and also give poles in the u-channel, figure 6.3(c).
+      **Because the residue at s = 0 in (6.4.17) is odd in u − t, this pole actually cancels that from
+      I(s,u), as do all poles at even multiples of 1/α'. This will not be true for the more general open
+      string theories to be introduced in the next section.**」
+
+      **p.182 逐字（配套）**：(6.4.16) `I(s,t) = ∫_0^r dy [ y^{−α's−2} + (α't+2) y^{−α's−1} + … ]`；
+      (6.4.17) `I(s,t) = (u−t)/(2s) + terms analytic at α's = 0`；(6.4.18) `α's = −1, 0, 1, 2, …`。
+
+      ⚠ **「存活的是 1/α' 的奇数倍」这一句不是原书的一句话**，而是把「偶数倍全部相消」
+      与 (6.4.18) 的塔相减得到的**集合差**（塔 = {−1,0,1,2,…}，去掉 {0,2,4,…}，余 {−1,1,3,…}）。
+      抽取记录 §14.1(d) 明记这是「从原书两句话直接读出的，不是推算」，且明记
+      **原书没有解释为什么偶数倍的留数都是奇函数**。见推导 gaps。
+
+      ⚠ **未核**（§14.4 F.3 的 negative evidence）：p.183 的论证引用了 figure 6.3(b)/(c)，
+      **本项目只读到正文引用，没有核对图本身**。
+tags: [spectrum, tree-level, open-string, pole, cancellation, chan-paton, veneziano, four-point]
+notes: |
+  由 curator 于 2026-09-11 按抽取记录 §14.4 A 的建议新建（分支 agent/curator/ch6-sec14）。
+
+  **为什么是兄弟卡而不是换代**：
+  已有的 spectrum.massless-open-pole-requires-chan-paton 只覆盖 α's = 0 这一个点，
+  但它额外带了 (2)（加 Chan–Paton 后极点真实存在、对应无质量规范玻色子、是 (6.5.14) 定
+  Yang–Mills 耦合所用的极点）——**这一层本卡片不覆盖**。反过来，本卡片覆盖的整族极点
+  旧卡不覆盖。两卡各有对方没有的内容，**没有一方的 statement 文本被推翻**，
+  故按 graph/CLAUDE.md 的不可变原则**并存，不写 superseded_by**。
+  两卡在 α's = 0 处的结论一致（旧卡是本卡的特例）。
+
+  **⚠ 禁令（§14.1 明确排除的一个具体误解）**：
+  **不得**把相消机制写成「因子 (1 + α's) 抵消」，也不得写成任何「单项内部的因子相消」。
+  原书的机制是**两个不同循环序之间**的相消——I(s,t) 与 I(s,u)，靠留数在 u − t 下为奇函数。
+
+  **对下游的提醒**：本卡片使得「Veneziano 振幅 (6.4.23) 的每个 Beta 极点都对应一个物理中间态」
+  这种说法**在纯四 tachyon 情形下是错的**——偶数倍的那些极点不在完整振幅里。
+  spectrum.veneziano-amplitude 的 notes 已挂上本卡片。
+author: curator-polchinski-ch6-sec14
+created: "2026-09-11"

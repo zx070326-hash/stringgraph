@@ -5,7 +5,20 @@
   author    = {Polchinski, Joseph},
   title     = {String Theory. Vol. 1: An Introduction to the Bosonic String},
   publisher = {Cambridge University Press},
-  year      = {1998}
+  year      = {1998},
+  note      = {抽取记录 extractions/polchinski-1998-v1.md。本项目实读的是 Cambridge Books Online 版
+               （2005 平装数字化，已含 2000 年 corrections）。
+               **官方勘误表 URL（2026-09-11，researcher 第七轮，L1 逐字）**：书末 References 第一页 p.347 印着
+               「For a list of corrections and other useful information see  `http://www.itp.ucsb.edu/~joep/bigbook.html` .」
+               注意是 **itp** 不是 kitp，路径是 **~joep/bigbook.html**；此前抽取记录 Q24 试过的三条 URL 都不是这条。
+               本条只登记书上印的字符串，**该 URL 本项目尚未访问**（页面是否仍在线未核实）。
+               **编辑方针（p.9 逐字，L1）**：「Annotated reference lists appear at the end of each volume.」
+               即**正文体例就是不放引文**，全部集中在书末注记（pp.347--358）。任何「第 N 章正文不引某文献」的
+               negative evidence 都必须配上这句，否则会被误读成作者不承认该来源。
+               **参考文献一节自己的免责声明（p.347 逐字，L1）**：「To represent accurately the contributions of all
+               who have worked in these many areas is an undertaking beyond the scope of this book.」
+               ⇒ **「某文献不在本书参考文献里」不足以推出任何关于该文献重要性的结论**，只能作为
+               「Polchinski 没有把它当作本书的入口文献」这一弱得多的事实。}
 }
 
 @book{polchinski-1998-v2,
@@ -13,21 +26,37 @@
   title     = {String Theory. Vol. 2: Superstring Theory and Beyond},
   publisher = {Cambridge University Press},
   year      = {1998},
-  note      = {抽取记录 extractions/polchinski-1998-v2.md（ch.10--11，E1--E63）与
-               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）。
+  note      = {抽取记录 extractions/polchinski-1998-v2.md（ch.10--11，E1--E63）、
+               extractions/polchinski-1998-v2-sec10-8.md（**§10.8 单节深读，E64--E75，续 E63 编号**，
+               引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）、
+               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）与
+               extractions/polchinski-1998-v2-ch13.md（**ch.13 D-branes，E 编号独立从 E1 起**，引用须写 `-ch13#E<n>`）。
                **本项目实读的是 Cambridge Books Online 版**：© Cambridge University Press 2001, 2005，
                DOI 10.1017/CBO9780511618123，即 2005 平装本数字化，**已含 1999/2000 两次 "with corrections"**。
                引用式号时按此版；1998 初印本个别公式内容可能不同。书 hash `2D456468D20AA8A9CE10CEB08B95B9DC`。
-               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)。
-               **未读**：Notation (xviii--xx)、ch.13 及以后、Appendix B、References (467--487)。
-               ⚠ 三条使用限制：
+               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)、ch.13 (pp.136--177)。
+               **未读**：Notation (xviii--xx)、ch.14 及以后、Appendix B、References (467--487)。
+               ⚠ 六条使用限制：
                (1) **§12.2 p.101 脚注 1 提到 `E8 x U(1)^248` 与 `U(1)^496`，但只说两条 properties "hold"，
                    既无 "cancel"/"factorize" 的动词，也无任何唯一性/完备分类主张** ——
                    不得据此写「十维 N=1 反常自由规范群恰有四个」；
                (2) **(12.2.26) 的 `c'Tr(R_2^2)` 与 p.97 的 tr/Tr 约定不符，疑似排印错误（应为 `c' tr(R_2^2)`）**，
                    Core 版已含勘误却未改，引用时须在 notes 里写明；
                (3) **§12.2 的十维反常多项式 (12.2.11)--(12.2.13) 本书不推导**，原文
-                   "we will not repeat it here but just quote the result"，且正文不给引文编号。}
+                   "we will not repeat it here but just quote the result"，且正文不给引文编号；
+               (4) **§10.8 的 (10.8.4)/(10.8.11)/(10.8.18)/(10.8.19) 与 §13.3 的 (13.3.1) 前缀在页图上共八处都读作
+                   `8*pi*(8*pi^2*alpha'^2)^5`，但 §10.8 的两次变量代换 + 量纲、以及 §13.3 独立的 alpha' 幂次记账
+                   都要求 `8*pi*(8*pi^2*alpha')^5`**（见 -sec10-8#Q1 与 -ch13#Q3；两章两条不同推导得同一结论）。
+                   **不影响 `(n -+ 32)^2` 与 SO(32) 结论**（公因子），但引用完整前缀前须由人复核 pp.38/41/42/146；
+               (5) **★★ ch.13 从不写「32 张 D9 膜」**：全章唯一给出 D9 数目的句子是 p.144
+                   「a third state that contains **16 D9-branes** (and an orientifold 9-plane) that looks like the type I theory」，
+                   且 p.143 的记账是「`2^k` 张 orientifold 面、**仍是 16 张 D 膜**、每张 O 面荷 `-2^(4-k)` 倍」。
+                   同节 p.141 另有一句「each Chan--Paton degree of freedom ... as a 9-brane」（蕴含 32 张），
+                   **原书从不调和这两种计数**（见 -ch13#Q1）。
+                   ⇒ **不得把「SO(32) = 32 张 D9 膜」这句通行说法归给本书**；要用该表述须另找来源；
+               (6) **ch.13 与 §10.8 的依赖方向是 §10.8 -> ch.13**：ch.13 三处（pp.141/142/147）都把 tadpole 相消
+                   当已知输入，p.147 逐字「We deduced from the cancellation of divergences that ...」；
+                   唯一可能的独立路线（D 膜--O 面之间的力）被明写推给读者。**ch.13 不是 SO(32) 的独立推导**。}
 }
 
 @book{gsw-1987-v1,
@@ -159,6 +188,60 @@
   note    = {Goddard 2008 综述把「D>26 时物理态中出现鬼」归给本文；但本文摘要只提 leading nine trajectories，未出现维数条件。矛盾未裁决，正文未读。}
 }
 
+@article{goddard-goldstone-rebbi-thorn-1973,
+  author  = {Goddard, Peter and Goldstone, Jeffrey and Rebbi, Claudio and Thorn, Charles B.},
+  title   = {Quantum dynamics of a massless relativistic string},
+  journal = {Nuclear Physics B},
+  volume  = {56},
+  pages   = {109--135},
+  year    = {1973},
+  doi     = {10.1016/0550-3213(73)90223-X},
+  note    = {**书目数据是 L1（Polchinski Vol.1 书末字母表 p.354 逐字转录）；正文本项目完全未获取（内容等级 L0）。**
+             登记理由：Polchinski Vol.1 第 1 章注记（p.349）逐字把光锥量子化的严格性外包给本文——
+             「The classical motion of the string and light-cone quantization are discussed in Goddard, Goldstone,
+             Rebbi, & Thorn (1973) and in the reviews by Rebbi (1974) and Scherk (1975). **The first two of these
+             include a careful treatment of Lorentz invariance.** The heuristic argument that we have given is based
+             on Brink & Nielsen (1973).」
+             ⇒ 这是 worldsheet.critical-dimension-light-cone-v2 缺的那个「谁做了 careful treatment」的书面依据。
+             ⚠ **在读到本文正文之前，不得给任何节点挂本 key 作为论证来源**，也不得据此升级
+             critical-dimension-light-cone 一系的状态：本项目对本文的了解仅限于 Polchinski 的一句转述。
+             见 extractions/polchinski-1998-v1.md §13.2(d)。
+             ---
+             **2026-09-11 第二轮（researcher）追加，抽取记录见 extractions/ggrt-1973.md：**
+             (1) 止页补齐为 135（两个独立来源：INSPIRE publication_info.page_end；Bering arXiv:1104.4446v2 参考文献 [4] 逐字）；
+             Polchinski 只印起始页 109。DOI 亦本轮补入。
+             (2) **馆藏钥匙已到手（L2，经 cds.cern.ch/oai2d OAI-PMH，MARC 088/963 逐字）**：
+             CERN 报告号 `CERN-TH-1578`、CERN 图书馆扫描件 `CM-P00058492`、CDS recid 394307、**963 = PUBLIC**。
+             全文 URL `https://cds.cern.ch/record/394307/files/CM-P00058492.pdf`（agent 被 Anubis 反爬挡住，
+             人工浏览器一次点击可得）；Wayback 快照 20220710054516 存在且 status 200，但 web.archive.org 是工具级封锁。
+             INSPIRE 的 external_system_identifiers 另有 OSTI 4480283（purl 404，无全文）与 SPIRES-78328；
+             **无 KEKSCAN**，且 publication_info **无 pubinfo_freetext ⇒ 零个重印出处**，故 KEK 与 archive.org 文集两条路线在入口即排除。
+             (3) ⚠⚠ **新增一条未裁决的矛盾（ggrt-1973.md Q-G4）**：Polchinski 说本文 "include a **careful treatment**
+             of Lorentz invariance"，而 Klaus Bering, arXiv:1104.4446v2, p.2 逐字说
+             「The original papers of Goddard, Goldstone, Rebbi and Thorn [3, 4] … **are sparse on details**」。
+             **两条一手证据对本文严格度的评价方向相反。** 在正文到手之前，这条矛盾本身就是不得据本 key 升级状态的第二个理由。
+             (4) Bering 把「光锥洛伦兹协变 ⇒ D=26」这条路线**同时**归给本文与
+             Goddard–Rebbi–Thorn, *Lorentz Covariance and the Physical States in Dual-Resonance Models*,
+             Nuovo Cimento **12A** (1972) 425–441（本项目尚未登记，建议新增 key `goddard-rebbi-thorn-1972`；
+             ⚠ 与 goddard-thorn-1972 是不同论文，三作者 vs 两作者）。}
+}
+
+@article{brink-nielsen-1973,
+  author  = {Brink, Lars and Nielsen, Holger Bech},
+  title   = {A simple physical interpretation of the critical dimension of space-time in dual models},
+  journal = {Physics Letters B},
+  volume  = {45},
+  pages   = {332},
+  year    = {1973},
+  note    = {**书目数据是 L1（Polchinski Vol.1 书末字母表 p.353 逐字转录）；正文本项目完全未获取（内容等级 L0）。**
+             登记理由：Polchinski 第 1 章注记（p.349）逐字自陈「**The heuristic argument that we have given is
+             based on Brink & Nielsen (1973).**」——即 Polchinski §1.3 那条 D = 26 论证的出处。
+             ⚠ **与 Polyakov 作用量的发现者「Brink, Di Vecchia, and Howe」不是同一篇**（同姓不同文）；
+             Polchinski 书末字母表 Brink 名下**只有本条**（L1 negative evidence，见 §13.2(f)1）。
+             ⚠ 在读到正文之前不得挂作论证来源。页码 Polchinski 只印起始页 332。
+             见 extractions/polchinski-1998-v1.md §13.2(d)。}
+}
+
 @article{thorn-1987,
   author  = {Thorn, Charles B.},
   title   = {A detailed study of the physical state conditions in covariantly quantized string theories},
@@ -197,7 +280,14 @@
   doi       = {10.1007/978-1-4613-9550-8_20},
   isbn      = {9781461395522},
   note      = {元数据经 Crossref 逐条核实（章题/书名/系列 ISSN 0940-4740/页码/ISBN 印本 9781461395522、电子 9781461395508）。
-               **年份陷阱**：会议 1983-11-10..17 举行，论文集 1985 年出版，文献里常被引成「Thorn (1984)」，与 thorn-1984（Nucl. Phys. B248）**极易混淆**，登记本条即为区分。内容未核实（未获取正文）。}
+               **年份陷阱**：会议 1983-11-10..17 举行，论文集 1985 年出版，文献里常被引成「Thorn (1984)」，与 thorn-1984（Nucl. Phys. B248）**极易混淆**，登记本条即为区分。内容未核实（未获取正文）。
+               **2026-09-11 L1 negative evidence**：本条**不在** Polchinski Vol.1 书末参考文献里。
+               p.358 Thorn 名下只有 Thorn (1987) Nucl.Phys.B286,61 与 Thorn (1989) Phys.Rep.175,1；
+               p.350 第 4 章注记列的 BRST 侧证明是 Freeman--Olive (1986)、Frenkel--Garland--Zuckerman (1986)、
+               Thorn (1987)。⇒ **Polchinski 全书不提「用 Kac 行列式证无鬼定理」这条路线**，
+               与「书末字母表无 Kac、无 Feigin--Fuchs 条目」相互印证。
+               ⚠ 按 polchinski-1998-v1 的 p.347 免责声明，这条 negative evidence 只说明 Polchinski 没把它
+               当入口文献，**不构成对本文的任何评价**。见 extractions/polchinski-1998-v1.md §13.2(b)(c)。}
 }
 
 @article{kac-1979,
@@ -370,7 +460,10 @@
   pages   = {301--335},
   year    = {1989},
   doi     = {10.1007/BF01217910},
-  note    = {标题已订正并核实（Project Euclid 卷期目录 + Crossref）：是 super-Virasoro，不是 supra-Virasoro。卷/期/页已核实。内容是 RNS 超弦（FGZ 1986 的超对称推广），不是玻色弦 c=26，勿用于玻色弦结论。全文在付费墙后，定理编号未核实。见 extractions/brst-cohomology-sources.md §2。}
+  note    = {标题已订正并核实（Project Euclid 卷期目录 + Crossref）：是 super-Virasoro，不是 supra-Virasoro。卷/期/页已核实。内容是 RNS 超弦（FGZ 1986 的超对称推广），不是玻色弦 c=26，勿用于玻色弦结论。
+             **全文已核实（2026-09-11，35 页逐页读毕）**。获取途径：Project Euclid 免费端点 https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104179468 （与 1991 那篇同一路线）。
+             可引用的编号结果：**Theorem 2.20 (p.321)** 逐字「There are unitary isomorphisms T ∩ P ≅ P/rad P ≅ H^0_rel」= 超弦无鬼定理的上同调形式（两扇区 κ=0,1/2；前提 p != 0、D = 10、p 未来向、R 扇区零模空间取 T_0 ⊕ T_1）；**Corollary 2.15(ii)** 作者自命名 "(No-ghost Theorem) H^0_rel(p,κ) is a positive definite space"；**Theorem 2.4** 消灭定理（"Suppose p != 0"）；**Theorem 2.7** R 扇区零模 supercharge 复形上同调为零（{D_R, ε} = 1）；**Proposition 1.7(ii)** 「Q^2 = 0 iff D = 10」但证明外包给 Ohta [13] 与 Terao–Uehara [15]；**Definition 2.2** 相对复形 = Ker b_0 ∩ Ker β_0 ∩ Ker K ∩ Ker D_R（κ=0）；**Proposition 4.3** GSO 子复形上同调；**Theorem 5.1 / 5.4** 绝对复形上同调；**Proposition 5.5** p = 0 例外情形；**Theorem 3.3.1** 超李代数同调正合序列；**Lemma 5.3.1 (Dixon–Taylor)** 指认 Kato–Ogawa 的 Ker A = Im A 结构。
+             **编号陷阱**：p.305 Lemma 1.4 与 p.306 Definition 1.4 同号；各章公式号重起。**与 fgz-1986 同型：D = 10 是假设不是结论。** p.320 Remark 明证 V(p,κ) 一般不是 Verma 模直和——与 figueroa-ofarrill-kimura-1989 p.111 引 Brower–Friedman 的完全可约性矛盾。引 Kato–Ogawa [11]、Ohta [13]；**不引 Henneaux**；Note added in proof 称与 FOK 独立。见 extractions/lian-zuckerman-1989.md。}
 }
 
 @article{lian-zuckerman-1991,
@@ -409,10 +502,93 @@
   pages   = {443--460},
   year    = {1983},
   doi     = {10.1016/0550-3213(83)90680-6},
-  note    = {元数据已核实（INSPIRE 记录 177600；卷页由 FGZ 1986 参考文献 5 独立佐证）。报告号 **KUNS 637**（INSPIRE report_numbers，L2；检索后端 L4 对此有异议，认为 637 属 RIFP 系列且 Kato 当时在东京——两方冲突未裁决，此处按 INSPIRE 记）。
+  note    = {元数据已核实（INSPIRE 记录 177600；卷页由 FGZ 1986 参考文献 5 与 LZ 1989 参考文献 [11] 独立佐证）。报告号 **KUNS 637**；**KUNS 归属争议已于 2026-09-11 关闭**：INSPIRE raw_affiliation 与 INIS 单位字段均为「Department of Physics, Kyoto University」，此前检索后端（L4）「637 属 RIFP、Kato 在东京」的异议不成立。preprint_date 1982-04，预印本 18 页；INIS 补 issue 3、出版日 1983-02-28；KEKSCAN 2000-33-955（主机 lib-extopc.kek.jp 已四次 socket hang up，勿再试）；无 CDS。
              **摘要已升级为逐字（INSPIRE，2026-09-10）**：「Covariant canonical quantization of the bosonic string is performed, based on the BRS invariance principle. Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition Q_B |phys> = 0 ( Q_B = BRS charge), we prove a no-ghost theorem in a simple manner. There an interesting relation between critical dimension and BRS symmetry is noticed; namely, the conditions D = 26 and alpha_0 = 1 for the space-time dimension D and the zero-intercept alpha_0 of leading trajectory are required by the nilpotency Q_B^2 = 0 of the BRS charge. In addition, ghost number fractionization is observed in this system.」
              **方向已定：给的是「Q_B^2 = 0 ==> (D = 26 且 a = 1)」（required by），摘要中没有反方向，因此没有「当且仅当」。**
-             仍未核实：是否已写成 Ker Q_B / Im Q_B = OCQ 物理态 的同构形式；定理编号。正文未获取（ScienceDirect 403；未找到 KEK/京大扫描件）。见 extractions/brst-cohomology-sources.md §6 与 primary-sources-round2.md §6。}
+             **正文仍未获取（L0）**；但 2026-09-11 经三条 L1 二手来源三角定位了证明结构（ito-morozumi-nojiri-uehara-1986 §4 五处自称「same method in Ref. 1)」；lian-zuckerman-1989 p.332 指认 Dixon–Taylor 型 Ker A = Im A 结构；kohriki-kunitomo-murata-2010 (2.1) 鬼零模二维表示归 KO）：鬼零模分离 + 光锥参考系（隐含 p^+ != 0）+ 形式参数 beta 展开 + Kugo–Ojima quartet + DDF 横向投影 ⇒ 物理学家证明，status 不能因它离开 physical-argument。「Ker Q/Im Q ≅ OCQ」的上同调语言按 LZ 1989 §0 与 Dedushenko 2015 §1 均归 FGZ 而非 KO。见 extractions/kato-ogawa-1983.md。}
+}
+
+@article{ohta-1986,
+  author  = {Ohta, Nobuyoshi},
+  title   = {Covariant quantization of superstrings based on {BRS} invariance},
+  journal = {Physical Review D},
+  volume  = {33},
+  number  = {6},
+  pages   = {1681--1691},
+  year    = {1986},
+  doi     = {10.1103/PhysRevD.33.1681},
+  note    = {由 researcher 于 2026-09-11 登记。**标题是复数 "superstrings"**（INSPIRE recid 17645 逐字；用单数检索零命中）。终页 1691 由 OSTI 5930612 "Pages: 1681-1691" 与 LZ 1989 参考文献 [13]（印作 "681–1691"，起页少一位）两条独立来源给出；期号 6、出版日 1986-03-15（OSTI/INIS）。报告号 UTTG-30-85，preprint_date 1985-12，预印本 30 页；KEKSCAN 85-12-165（主机死）；OSTI 只有引文记录（purl 404）；APS 403；无 CDS。**正文未获取（L0）。**
+             摘要逐字（INSPIRE，abstract_source APS）：「A manifestly covariant quantization of the superstring is presented in the Neveu-Schwarz-Ramond formalism on the basis of the Becchi-Rouet-Stora (BRS) invariance principle. The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B^2=0 of the BRS charge. A modified form of the subsidiary condition of Kugo and Ojima Q_B|phys>=0 to define the physical subspace is sufficient to demonstrate the no-ghost theorem.」
+             **★ 关键 L1 证词（ito-morozumi-nojiri-uehara-1986 p.952 Note added）：Ohta 的预印本 UTTG 30-85「did not present the proof of the no-ghost theorem in the Ramond sector」。发表版是否补上未核。⇒ 挂 no-ghost-theorem-superstring 只能挂 NS 扇区并注明。**
+             L3 转述：LZ 1989 Prop 1.7(ii) "Q^2 = 0 iff D = 10" 证明归 [13,15]；Prop 1.7(x)(xi) 两扇区零模分解「Calculations are done in [13]」；Prop 2.1 [13] {Q,b_0}=K, [Q,β_0]=D_R；p.329 G-parity 含鬼的 GSO 推广归 Terao–Uehara/Ohta；KKM 2010 (2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 归 [35,36]；Dedushenko 2015 §1 把它归入「直接推广 KO/Polchinski 玻色弦证明」一类（要求 d >= 2）。见 extractions/ohta-1986.md。}
+}
+
+@article{henneaux-1987,
+  author  = {Henneaux, Marc},
+  title   = {{BRST} cohomology of the fermionic string},
+  journal = {Physics Letters B},
+  volume  = {183},
+  number  = {1},
+  pages   = {59--64},
+  year    = {1987},
+  doi     = {10.1016/0370-2693(87)91417-1},
+  note    = {由 researcher 于 2026-09-11 登记。元数据 L2（INSPIRE recid 246118；pubinfo_freetext「Phys. Lett. B183 ( 1987) 59-64」；ADS 1987PhLB..183...59H；无报告号、无 CDS/KEKSCAN/OSTI）。**期号 1 与出版月 1987-01 已由 Crossref 逐字核实。** **正文未获取（L0）**：ULB 机构库 DI-fusion 的 VuFind 前端 HTTP 500 ×3，DSpace 后端 `dipot.ulb.ac.be/dspace/simple-search?query="BRST cohomology of the fermionic string"` 报「Results 1-1 of 1」但条目表未交付抓取器——**交人类点击**。
+             摘要逐字（INSPIRE）：「The BRST cohomology of the first-quantized fermionic string (Ramond model) is explicitly computed by using methods developed in a previous letter. The infinite degeneracy due to the commuting ghost zero mode is shown to be spurious by extending to the BRST context an argument originally due to Corrigan and Goddard.」⇒ **只做 R 扇区；摘要不含 "no-ghost" 字样。** "previous letter" = Phys. Lett. B 177 (1986) 35–38（recid 237921，摘要「The cohomology of the open bosonic string BRS operator is computed in a physical fashion. The method can be applied to the closed and to the fermionic models.」）。
+             L3（figueroa-ofarrill-kimura-1989 全文，五处引 [12]）：Henneaux 表示 = γ_0 生成、β_0 湮灭、Hilbert 空间 C[γ_0]（即 R 扇区 −1/2 picture，换算是推断）；F_0 上同调平凡「one can define an operator K such that {F_0, K} = 1」（脚注 9：仅 p != 0）；FOK 批评此表示下 Q 非厄米、上同调内积不自动良定（p.116）。LZ 1989 不引本文。见 extractions/henneaux-1987.md。}
+}
+
+@article{figueroa-ofarrill-kimura-1989,
+  author  = {Figueroa-O'Farrill, Jos{\'e} M. and Kimura, Takashi},
+  title   = {The {BRST} cohomology of the {NSR} string: vanishing and ``no-ghost'' theorems},
+  journal = {Communications in Mathematical Physics},
+  volume  = {124},
+  number  = {1},
+  pages   = {105--132},
+  year    = {1989},
+  doi     = {10.1007/BF01218471},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（28 页逐页读图，L1）**，获取途径 Project Euclid https://projecteuclid.org/journalArticle/Download?urlId=cmp/1104179078 （免登录）。**DOI/卷/期/页已由 Crossref 逐字核实**（`api.crossref.org/works/10.1007/BF01218471`：CMP 124(1) 105-132, issued 1989-03）；Project Euclid 卷期目录与 Dedushenko 2015 [18] 独立佐证。
+             **无编号定理，全部按公式号引用**：NS 相对消灭定理 (3.19)；R 相对消灭定理 (4.17)（Henneaux 表示）；两种 R 零模表示（Schrödinger L^2(R,dx) vs Henneaux C[γ_0]）的相对上同调同构 (5.1)（仅作为无分次空间）；绝对复形上同调 (5.2)(5.3)（鬼数 ±1/2）；无鬼定理 = 迹恒等式 (6.14)=(6.15)（NS）、(6.19)=(6.20)（R）+ p.128 Schrödinger 表示一段；附录 A (A.14) 超李代数同调消灭、附录 B (B.1) 正定内积。
+             **作者自承缺口**：R 扇区完全可约性引 Brower–Friedman 是「claim」（p.115，与 lian-zuckerman-1989 p.320 Remark 矛盾）；附录 A 定理「We have never seen a published proof」只补特例；(B.1) 正定性「left as an exercise」；零动量排除（脚注 3/6/9）；GSO 后无鬼「as an exercise」；D = 10 是假设。**引 Henneaux [12]，不引 Ohta/Kato–Ogawa/IMNU；与 LZ 1989 互不引用（LZ Note added in proof 称独立）。** 见 extractions/figueroa-ofarrill-kimura-1989.md。}
+}
+
+@article{ito-morozumi-nojiri-uehara-1986,
+  author  = {It{\=o}, Makoto and Morozumi, Takuya and Nojiri, Shin'ichi and Uehara, Shozo},
+  title   = {Covariant quantization of {N}eveu-{S}chwarz-{R}amond model},
+  journal = {Progress of Theoretical Physics},
+  volume  = {75},
+  number  = {4},
+  pages   = {934--952},
+  year    = {1986},
+  doi     = {10.1143/PTP.75.934},
+  note    = {由 researcher 于 2026-09-11 登记。**全文已核实（19 页逐页读图，L1）**。获取途径：OUP `academic.oup.com/ptp/article-lookup/doi/10.1143/PTP.75.934` → `article-pdf/75/4/934/5260521/75-4-934.pdf` → 302 至 watermark02.silverchair.com → 落盘 804 KB。**页面标「Subscribers Only」但可下载；PTP 旧刊整体可循此路线。** Received December 9, 1985。作者单位东北大/京都大/广岛大 RITP（Kato–Ogawa 学派）。
+             可引用：(3.2)(3.4) 两扇区 BRS 荷零模分解（R 含 η̄_0 ζ_0^2 = b_0 γ_0^2 项）；**(3.8)–(3.10) 幂零的显式系数公式**（"demands D = 10, α_0^NS = 1/2, α_0^R = 0"，⟺ 可读出）；(3.14) R 扇区 βγ 零模表示 ζ̄_0|0>_ζ = 0（= Henneaux 表示/−1/2 picture）；**(3.19) 度规 G^R = η_0 × δ(ζ_0)**；(3.22)–(3.26) 物理态条件（= 相对复形 Ker b_0 ∩ Ker β_0 ∩ Ker F_0）；**§4 Proposition I（Kugo–Ojima quartet）、Proposition II（β 阶归纳 + DDF 型横向投影 P(β)）、(4.21) 正半定** = R 扇区无鬼定理的物理证明；NS 扇区只有 p.947 一段评论「goes in a quite similar manner」。
+             **★ p.952 Note added 逐字：Ohta 预印本 UTTG 30-85「did not present the proof of the no-ghost theorem in the Ramond sector」。**
+             **对 kato-ogawa-1983 的反推价值**：§4 与 Appendix 五处自称「similar to / the same method in Ref. 1)」（(4.9) β 重标度、Prop II 证明等）——是 KO 证明结构最可靠的 L3。隐含假设 p^+ != 0、|φ(β)> 可按 β 展开（(4.16) 明写 "we have assumed"）。见 extractions/ito-morozumi-nojiri-uehara-1986.md。}
+}
+
+@misc{dedushenko-2015,
+  author = {Dedushenko, Mykola},
+  title  = {Superstring {BRST} no-ghost theorem at arbitrary picture number},
+  year   = {2015},
+  eprint = {1212.3592},
+  archiveprefix = {arXiv},
+  primaryclass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**全文已核实（arXiv v2，21 页，页边条纹「arXiv:1212.3592v2 [hep-th] 12 Nov 2015」；首页日期 "October 29, 2018" 是 LaTeX \today 伪迹）。** 未见期刊发表版。主结果 **(39)**：`H*((H^A, Q_B)) ≅ (H^⊥_{A,↓} ⊕ H^⊥_{A,↑}) ∩ ker L_0`——任意 picture A、两扇区、**非零动量**，绝对 BRST 上同调 ≅ 两份光锥谱（鬼数 (A+1) ± 1/2）；Lemma 1–3；§6 显式代表元 Ω = 1 − S^{-1}U + …（仿 Polchinski §4.4）；§7–8 A-picture 与 (−A−2)-picture 的配对与正定厄米内积 (61)。自称「proven above by straightforward application of the spectral sequence」——物理学家级完整证明（physical-argument）。**p.3 逐字：零动量任意 picture 的相对上同调「remains an open problem」**；p.3 转述 Berkovits–Zwiebach 1998 [21]：非零动量相对/半相对上同调 picture 无关，零动量 picture 相关。§1 对文献的分类：KO/Polchinski 路线 [12,15,20,23]（要求 d >= 2）vs FGZ 路线 [17]=LZ 1989（可做 d = 1）；[14] Henneaux 未归类。参考文献 [1] Kato–Ogawa、[12] Ohta PRD 33 1681、[13] Ohta PLB 179 347、[14] Henneaux PLB 183 59、[15] IMNU PTP 75 934、[16] Horowitz–Myers–Martin PLB 218 309、[18] FOK CMP 124 105、[19] FOK PLB 219 273。见 extractions/henneaux-1987.md §5.2。}
+}
+
+@article{kohriki-kunitomo-murata-2010,
+  author  = {Kohriki, Maiko and Kunitomo, Hiroshi and Murata, Masaki},
+  title   = {No-ghost theorem for {N}eveu-{S}chwarz string in 0-picture},
+  journal = {Progress of Theoretical Physics},
+  volume  = {124},
+  number  = {6},
+  pages   = {953--968},
+  year    = {2010},
+  doi     = {10.1143/PTP.124.953},
+  eprint  = {1009.0107},
+  archiveprefix = {arXiv},
+  primaryclass  = {hep-th},
+  note    = {由 researcher 于 2026-09-11 登记。**发表版卷/期/页/DOI 已由 Crossref 逐字核实（PTP 124(6) 953-968, 2010-12-01）。** **部分读毕（arXiv v4，页边「31 Jan 2012」；pp.1–10 = §1–§3.2，pp.16–18 = 附录 B 末 + 参考文献，L1；式号按 arXiv v4）**。报告号 YITP-10-75。价值在于对 Kato–Ogawa/Ohta 方法的 L3 转述（京都 YITP，KO 学派）：§1 p.2 逐字「The modern BRST quantization of the bosonic string theory was first performed by Kato and Ogawa.^33) They proved that the physical Hilbert space is isomorphic to the conventional one spanned by DDF states^34) and, hence, has a positive semidefinite norm.」；p.3「a similar no-ghost theorem was also proved for the NSR superstring.^35),36) … The no-ghost theorem can be proved in a completely parallel way to the case of the bosonic string.^33)」；(2.1) 鬼零模二维表示「defined by^33)」；(2.5) 物理态条件 b_0|phys>=0, Q_B|phys>=0 标 35),36)；§2.2 「Following the conventional method^33),35),36) we take another rescaling」ħ 展开 (2.10)–(2.13)；Proposition 1 (3.7)「The proof is almost the same as the standard one^33),35),36)」。[33] KO、[35] Ohta PRD 33 1681、[36] IMNU、[37] FMS、[38] Brower–Friedman、[39] Goddard–Thorn。自身结果（NS 0-picture 无鬼 + 非平凡度规 G (3.5)(3.6)）未抽取。见 extractions/kato-ogawa-1983.md §2–§3。}
 }
 
 @misc{goddard-2008,
@@ -2431,7 +2607,8 @@
              重印本把期刊页码换成书页码；本图 green-schwarz-1984 的 loc 一律写「PLB p.NNN（重印 MMM）」，
              其中「重印 608+k <-> PLB 117+k」这条映射是**推出来的**（§0.3），不是页面直证。}
 }
-% ============================================================% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
+% ============================================================
+% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
 % 抽取记录：literature/extractions/math-sources.md §39
 % ============================================================
 @book{gallier-xu-2013,
@@ -2948,3 +3125,372 @@
                p.10「the Graham-Lee theorem **presumably fails** for conformal structures … sufficiently far
                from the round one」⇒ **这是局部结果，且局部性可能是本质的**。}
 }
+% ============================================================
+% Witten 2012--2013 超黎曼面 / 超弦微扰论系列（+ Donagi--Witten）
+% 由 researcher 于 2026-09-11 登记，依据
+% literature/extractions/witten-2012-superstring-perturbation.md
+% 起因：polchinski-1998-v2-ch12.md E26/Q7（Polchinski v2 §12.5 p.126 自承
+% 「a fully explicit proof of the perturbative consistency of the theory seems to be lacking」）
+% ⚠⚠ 本批的 arXiv 号 <-> 标题映射曾被派工单弄错，下表为 arXiv API + PDF 页边条纹双源核实（L1）。
+% ============================================================
+
+@misc{witten-2012-superstring-perturbation,
+  author        = {Witten, Edward},
+  title         = {Superstring Perturbation Theory Revisited},
+  year          = {2012},
+  eprint        = {1209.5461},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**部分章节已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW1--EW20、EW25）。
+            **版本戳：本项目挂在本 key 上的所有 loc 一律锚定 arXiv:1209.5461**v4** (2023-11-05)**
+            （页边条纹逐字 `arXiv:1209.5461v4 [hep-th] 5 Nov 2023`；论文页 N = PDF 第 N+4 页；225 pp）。
+            **⚠ 无期刊发表版**：INSPIRE recid 1188034 的 `publication_info` 为空（2026-09-11 查）。
+            **⚠ 标题两说**：arXiv 元数据 `<title>` = "Superstring Perturbation Theory Revisited"（本条采用），
+            但 **v4 的 PDF 标题页印的是 "Perturbative Superstring Theory Revisited"**（词序不同，L1）。
+            **⚠ v1 (2012) 与 v4 差异很大**：§1 关于 Sen 的 off-shell/SFT 系列 [19--24] 的整段、
+            §3.5 对 [49] Sen--Witten 2015 的引用、§3.3.2 对 [45] Donagi--Witten 的引用
+            **都不可能在 v1 里**（DW 的 v1 晚于本文 v1 七个月）。
+            **=> 严禁写「Witten 2012 已处理超模空间非投影性」。**
+            **四条最易误引的核实结果**：
+            (1) **自称强度**：摘要与 §1 用 "demonstration" / "aiming to give … demonstrations"，
+            **全文无 "we prove the consistency" 类表述，无结论章节**；
+            (2) **§1 p.3 显式排除**：质量重整化、需要真空移动的模型、R-R 背景、pure spinor 形式、一般顶点算符；
+            (3) **§8.3 的归纳论证挂在一个未证的 "if"** 上（"If (as in most cases) general arguments show that
+            spacetime supersymmetry is not spontaneously broken at g-loop order …"）；
+            (4) **§6.4.6 p.109 逐字「In this paper, we never make any fundamental statements in terms of
+            positions of picture-changing operators (PCO's); we view the PCO's as a possible method of
+            integration over odd moduli, but not a basic definition.」**
+            另：§2.1 p.4 逐字自陈 "section 5.3 of [32] (whose conventions we generally follow)"，[32] = polchinski-1998-v1；
+            §7.5 p.140 有一处排印错误 "The show this"（应为 "To show this"）。}
+}
+
+@misc{witten-2013-overview,
+  author        = {Witten, Edward},
+  title         = {More On Superstring Perturbation Theory: An Overview Of Superstring Perturbation Theory Via Super Riemann Surfaces},
+  year          = {2013},
+  eprint        = {1304.2832},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**§1 全节 + §2.1 已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW4/EW5）。
+            **版本戳：arXiv:1304.2832**v4** (2016-07-23)**，69 pp；**无期刊发表版**（INSPIRE recid 1227826，
+            `publication_info` 为空）。
+            **⚠ 标题两说（作者自陈的改名）**：本条按 arXiv 元数据登记；**v4 的 PDF 标题页是
+            "Superstring Perturbation Theory Via Super Riemann Surfaces: An Overview"**，
+            且脚注 1 逐字「The arXiv version of this article was originally entitled "More on Superstring
+            Perturbation Theory."」。1209.5461 的 ref [28] 用的是 arXiv 元数据那个长标题。
+            **★ 本条的主要价值：全系列对「Polchinski 1998 的缺口是什么、补到了什么程度」最贴题的两段自评。**
+            §1 p.1 逐字：超弦微扰论的基础「were all well established by the mid-1980's. Roughly speaking,
+            to complete that story in a natural way only requires a couple of steps: **(A)** …在超黎曼面模空间上做
+            分部积分…**(B)** …仔细处理红外区只条件收敛的积分，超对称版 Deligne--Mumford 紧化给出自然的红外正规子。」
+            §1 p.2 逐字：「Once one understands these subtleties, **one is well-placed to demonstrate that
+            superstring perturbation theory works to all orders in those models in which tadpoles and
+            supersymmetry-breaking effects do not arise.**」
+            **=> 措辞是 "well-placed to demonstrate" 且带适用域，不是 "proved"。**
+            同页另一条自承缺口：真空移动的推广「can certainly be restated in terms of super Riemann surfaces,
+            **though this has not yet been done**」。
+            ⚠ 本文研究的模型（SO(32) 杂化弦 on CY，超对称一圈自发破缺、两圈有 dilaton tadpole）
+            **恰恰不是**微扰论到所有阶成立的模型（原文逐字）。}
+}
+
+@misc{witten-2012-srs-notes,
+  author        = {Witten, Edward},
+  title         = {Notes On Super Riemann Surfaces And Their Moduli},
+  year          = {2012},
+  eprint        = {1209.2459},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            ⚠⚠ **本条不是 "Superstring Perturbation Theory Revisited"**（那是 1209.5461）。
+            派工单曾把两者弄反，见 extractions/witten-2012-superstring-perturbation.md §0.0。
+            arXiv v5 (2017-05-20)，122 pp；v1 2012-09-11。**发表版：Pure Appl. Math. Quart. 15 (2019) no.1, 57--211**
+            （INSPIRE recid 1185284）——**arXiv 版页码与 PAMQ 页码不可互换**，图里 loc 只能用 arXiv 版并写死版本。
+            摘要逐字：「These are notes on the theory of super Riemann surfaces and their moduli spaces,
+            **aiming to collect results that are useful for a better understanding of superstring perturbation
+            theory in the RNS formalism.**」=> **自我定位为工具笔记，不含一致性结论。**
+            1209.5461 引它为 **[16]**（另 [15] = 1209.2199）。
+            **红线：本项目未读其正文，图里不得出现本文的任何式号、定理号或章节结论。**}
+}
+
+@misc{witten-2012-supermanifolds-notes,
+  author        = {Witten, Edward},
+  title         = {Notes On Supermanifolds and Integration},
+  year          = {2012},
+  eprint        = {1209.2199},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            arXiv v3 (2016-12-25)，42 pp；v1 2012-09-11。
+            **发表版：Pure Appl. Math. Quart. 15 (2019) no.1, 3--56**（INSPIRE recid 1185124）；页码同样不可互换。
+            摘要与 witten-2012-srs-notes 几乎同构（「supermanifolds and integration on them … aiming to collect
+            results that are useful for a better understanding of superstring perturbation theory in the RNS
+            formalism」）。1209.5461 引它为 **[15]**，并在 §3.6.3 p.48 逐字把「超流形积分里的 picture number
+            与 beta-gamma 系统里的 picture number 的类比」指向 [11]（= Belopolsky, hep-th/9706033）。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
+@misc{donagi-witten-2013,
+  author        = {Donagi, Ron and Witten, Edward},
+  title         = {Supermoduli Space Is Not Projected},
+  year          = {2013},
+  eprint        = {1304.7798},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**摘要 + §1 全节（含三条编号定理与三条 Remark）已 L1 逐页读图** ->
+            extractions/witten-2012-superstring-perturbation.md（EW21/EW22/EW23）。**§2 起的正文未读。**
+            **版本戳：arXiv:1304.7798**v2** (2023-07-19)**，57 pp（首页页脚另印 `Date: July 21, 2023.`）；v1 2013-04-29。
+            **发表版：Proc. Symp. Pure Math. 90 (2015) 19--72** —— 两源相符（INSPIRE recid 1231519；
+            witten-2012-superstring-perturbation 的 ref [45] 逐字），但**均未与 AMS 直证**。
+            **可引编号（L1 逐字，v2 p.5）**：
+            **Theorem 1.1** 「The supermanifold M_g is non-projected, and in particular non-split, for **g >= 5**.」
+            紧跟括注 **「(We suspect that this result may hold for g >= 3.)」**；
+            **Theorem 1.2** 「The supermanifold M_{g,1} is non-projected for g >= 2, **for the case of an even
+            spin structure**.」；**Theorem 1.3** 「The supermanifold M_{g,n} is non-projected for g >= 2 and
+            g-1 >= n >= 1. This holds for both even and odd spin structures if g is odd and for even spin
+            structure if g is even.」；紧跟 **「We do not resolve the question of projectedness of M_{g,n} for the
+            case of even g, odd spin structure, and n >= 1.」**
+            **Remark 1.4**：**不考虑 Deligne--Mumford 紧化**（「Our assertion is that M_g and M_{g,n} are
+            non-projected without any consideration of the compactification.」）；
+            **Remark 1.6**：研究对象其实是 moduli **stack**。
+            **⚠⚠ 最重要的一条红线（p.4 逐字）**：
+            **「The validity of superstring perturbation theory does not depend on a projection, so the existence
+            of string theory gives no hint that M_g is projected.」**
+            => **不得把本文写成「对超弦微扰论的否定」或「对 PCO 方法的否定」。**
+            被否定的是「先沿投影的纤维积分、再化约到普通模空间 SM_g」这一**策略**；
+            摘要的物理句逐字是「certain approaches to superstring perturbation theory that are very powerful
+            in low orders **have no close analog in higher orders**」。
+            低亏格（含 g=2 的 D'Hoker--Phong 计算）不受影响：witten-2012-superstring-perturbation §3.3.2 p.35
+            逐字承认「Supermoduli space is holomorphically projected in low orders」。
+            后续：arXiv:1404.6257（Donagi--Witten, *Super Atiyah classes …*, PAMQ 9 (2013) no.4, 739--788）
+            自陈给出 Theorem 1.2 的新证明，**不扩展 Theorem 1.1 的亏格范围**（摘要级，L2，本项目未登记为独立 key）。}
+}
+
+@misc{witten-2013-holomorphic-measures,
+  author        = {Witten, Edward},
+  title         = {Notes On Holomorphic String And Superstring Theory Measures Of Low Genus},
+  year          = {2013},
+  eprint        = {1306.3621},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要与元数据）。**
+            ⚠ 派工单曾把本文的 arXiv 号写成 1304.7798（那是 Donagi--Witten）。
+            arXiv v2 (2013-12-03)，55 pp；**无期刊发表版**（INSPIRE recid 1238841，`publication_info` 为空）。
+            摘要要点（L2）：亏格 g 的真空振幅原则上可由全纯性完全确定；本文「describe in a unified way how to
+            determine the bosonic string and superstring vacuum amplitude **in genus 1 and 2** via holomorphy」，
+            主要新意是亏格 2 超弦侧「a **new understanding of some of the results that previously have been
+            obtained by more explicit calculations**」。
+            **=> 只覆盖亏格 1、2 的真空振幅，不是任意阶一致性论证的一环。**
+            ⚠ **它不在 witten-2012-superstring-perturbation 的 91 条参考文献里**（抽取者逐条扫过）。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
+@article{sen-witten-2015-pco,
+  author  = {Sen, Ashoke and Witten, Edward},
+  title   = {Filling the gaps with {PCO}'s},
+  journal = {Journal of High Energy Physics},
+  volume  = {09},
+  pages   = {004},
+  year    = {2015},
+  eprint  = {1504.00609},
+  archivePrefix = {arXiv},
+  note   = {由 researcher 于 2026-09-11 登记。**正文未读（L2，仅 arXiv 摘要）。**
+            发表信息两源相符：INSPIRE recid 1357623 与 witten-2012-superstring-perturbation 的 ref [49]
+            （逐字「JHEP 1509 (2015) 004」）；**未与出版方直证**。arXiv v2 (2015-08-19)，40 pp。
+            **登记理由（对图很重要）**：这是「PCO 方法在高亏格是否还能用」的直接回答，
+            也是 witten-2012-superstring-perturbation §3.5 p.43 逐字指向的替代路线
+            （「It is also possible but cumbersome to describe a correct procedure without the geometric
+            interpretation that we have just explained. See for example [49].」）。
+            摘要逐字片段（L2）：「a constraint must be placed on PCO insertions to avoid spurious singularities」；
+            「**the simplest version of the PCO procedure is valid only locally on the moduli space of Riemann
+            surfaces**, and … a correct PCO-based algorithm … must be based on piecing together local descriptions」；
+            「Recently, **'vertical integration'** was proposed as a relatively simple method to do this」；
+            「This involves **a hierarchical procedure with corrections of high order**」。
+            **=> PCO 方法没有被废弃，而是被补上了分片拼接规则。**
+            ⚠ 该引文只可能出现在 1209.5461 的 v3/v4，不在 2012 年的 v1 里。
+            **红线：正文未读，不得引用任何式号。**}
+}
+
+@incollection{zagier-2008,
+  author    = {Zagier, Don},
+  title     = {Elliptic Modular Forms and Their Applications},
+  booktitle = {The 1-2-3 of Modular Forms},
+  editor    = {Ranestad, Kristian},
+  series    = {Universitext},
+  publisher = {Springer},
+  address   = {Berlin},
+  pages     = {1--103},
+  year      = {2008},
+  doi       = {10.1007/978-3-540-74119-0_1},
+  note      = {由 researcher 于 2026-09-11 登记。**出版社排版全文已到手并逐页读图（L1）**，
+               获取途径：作者本人 MPIM 主页
+               https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-74119-0_1/fulltext.pdf
+               （1.2 MB；WebFetch 落盘后 Read 带 pages 读页图；**PDF 页码 = 书页码**，正文首页 = p.1）。
+               这是作者自建页上的合法一手件，不是盗版扫描。
+               **可引用的编号结果：§3.2「Invariants of Even Unimodular Lattices」，书上 p. 33，Proposition 12**，逐字为
+               「Let Q : Z^m -> Z be a positive definite even unimodular quadratic form in m variables. Then
+               (i) the rank m is divisible by 8, and (ii) the number of representations of n in N by Q is given
+               for large n by the formula R_Q(n) = -(2k/B_k) sigma_{k-1}(n) + O(n^{k/2}) (n -> infinity), (38)
+               where m = 2k and B_k denotes the kth Bernoulli number.」，带完整证明（p. 33--34）。
+               证明依赖同书 p. 32 的 **Theorem (Hecke, Schoenberg)**（原书**只给人名、无编号**）与 Proposition 8、Section 2。
+               **作者自陈强度（逐字，p. 34）**：「The first statement of Proposition 12 is purely algebraic, and purely
+               algebraic proofs are known, but they are not as simple or as elegant as the modular proof just given.
+               No non-modular proof of the asymptotic formula (38) is known.」
+               **用途与陷阱**：(a) 本书对「16 维恰有两个」**只说 one knows that，无编号、无证明、正文无引文**
+               （p. 34「However, in rank 16 one knows that there are two non-equivalent lattices…」，
+               p. 36「there are two non-isomorphic even unimodular lattices Lambda_1 = Gamma_8 + Gamma_8 and
+               Lambda_2 = Gamma_16 in dimension 16」）**==> 16 维分类不得引本书**；
+               (b) 同文记号从 Lambda_8/Lambda_16（p.34）换成 Gamma_8/Gamma_16（p.36）；
+               (c) p. 34 把 Niemeier 拼成「Niemeyer」；
+               (d) p. 33 证明末句的极限变量读图存疑（见 extractions/math-sources.md §47.7 Q47.7），该句不得照抄。
+               见 extractions/math-sources.md §47.2。}
+}
+
+@misc{chenevier-lannes-2014,
+  author       = {Chenevier, Ga{\"e}tan and Lannes, Jean},
+  title        = {Formes automorphes et voisins de {K}neser des r{\'e}seaux de {N}iemeier},
+  year         = {2014},
+  eprint       = {1409.7616},
+  archivePrefix = {arXiv},
+  primaryClass = {math.NT},
+  note         = {由 researcher 于 2026-09-11 登记。**法文专著（约 380 页 + 附录）；正文页图已直读（L1）**，
+                  获取途径 arxiv.org/pdf/1409.7616v1 落盘 3.4 MB + Read 带 pages。**PDF 页 = 书页 + 4。**
+                  （注意 ar5iv.labs.arxiv.org/html/1409.7616 超 WebFetch 的 10 MB 上限，走不通。）
+                  **可引用的编号结果：ch. II「Alg{\`e}bre bilin{\'e}aire et quadratique」, §3, 书上 p. 35，Corollaire 3.6**，逐字为
+                  「Tout r{\'e}seau unimodulaire pair de dimension 16 est isomorphe {\`a} D_16^+ ou {\`a} E_8 + E_8
+                  (et ces deux r{\'e}seaux ne sont pas isomorphes).」，带完整证明（Venkov 策略：
+                  theta 级数 = 归一化 Eisenstein 级数 E_8 => |R(L)| = 480, h(L) = 30 => 「par inspection」
+                  R(L) = D_16 或 E_8 + E_8 => 格论收尾）。配套编号：**Corollaire 3.5 (p. 34)** = 8 维唯一 E_8；
+                  **Proposition 3.2 (p. 33)** Venkov 恒等式；**Proposition-D{\'e}finition 3.3 (p. 34)**；
+                  **Th{\'e}or{\`e}me 3.12 / 3.13 (p. 41)** = Leech 与 24 维的 24 类。
+                  **归属（p. 33 逐字，无编号散文句）**：「Cette classification est due {\`a} Louis J. Mordell en dimension 8,
+                  {\`a} Ernst Witt en dimension 16 et {\`a} Hans-Volker Niemeier en dimension 24 [Ni73].」
+                  **陷阱**：(a) 本书对「秩被 8 整除」只说「Il est bien connu que…」（p. 1），**不证不引 ==> (A) 不得引本书**；
+                  (b) 本书的 **E_16 就是 D_16^+**（E_n := D_n + Ze），**不是李代数**；
+                  (c) **附录 A 的 Lambda_16 是 Barnes--Wall 格，与 Zagier 的 Lambda_16（= D_16^+）是两个不同的格**；
+                  (d) **英文出版版**（Automorphic Forms and Even Unimodular Lattices, Ergebnisse 69, Springer 2019）
+                  **编号几乎肯定不同，本 bib 登记的是 arXiv 版，loc 必须写 arXiv 版的号**；
+                  (e) **版本悬案**：取到的 PDF 侧栏 stamp 印「arXiv:1409.7616v1 [math.NT] 26 Sep 2014」，
+                  扉页却印「30 juin 2022」，两者不自洽；arXiv API 报存在 v2。**引用时不要写死版本号。**
+                  见 extractions/math-sources.md §47.3、§47.7 Q47.3/Q47.4。}
+}
+
+@book{serre-1973-arithmetic,
+  author    = {Serre, Jean-Pierre},
+  title     = {A Course in Arithmetic},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {7},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1973},
+  doi       = {10.1007/978-1-4684-9884-4},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 章级定位为 L2（Crossref 单-DOI 元数据）：
+               **Ch. V「Integral Quadratic Forms with Discriminant ± 1」= pp. 48--58**
+               （章 DOI 10.1007/978-1-4684-9884-4_5）；Ch. IV「Quadratic Forms over Q_p and over Q」pp. 27--47；
+               Ch. VII「Modular Forms」pp. 77--111。
+               **红线：本书任何定理号（例如常被转引的「Ch. V, Theorem 2」）本项目均未核实，不得写入图。**
+               可写的最强形式是 loc = 「Ch. V, pp. 48--58（章定位 L2，定理号未核实）」。
+               失败路线（别再花预算）：link.springer.com 登录墙；
+               books.google.com/books?vid=ISBN9780387900407 明写「No eBook available」**无预览**，
+               故 Google Books 的 &q= 定位法对本书无效；googleapis Books API 三次 HTTP 429。
+               **旁证**：Chenevier--Lannes 参考文献（L1 逐字）引的是法文原版
+               「[Ser70] J.-P. Serre, Cours d'arithm{\'e}tique, P.U.F., Paris (1970)」，
+               并用它给出 |X_32| > 8·10^6（质量公式下界）==> 本书确有「定正情形 + 质量公式」的讨论，但编号仍未核实。
+               见 extractions/math-sources.md §47.4(a)。}
+}
+
+@book{milnor-husemoller-1973,
+  author    = {Milnor, John and Husemoller, Dale},
+  title     = {Symmetric Bilinear Forms},
+  series    = {Ergebnisse der Mathematik und ihrer Grenzgebiete},
+  volume    = {73},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {1973},
+  doi       = {10.1007/978-3-642-88330-9},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 书目由两条独立来源相符：
+               (i) Crossref 章级元数据（L2）；(ii) Chenevier--Lannes 参考文献 p. 379 逐字（L1）
+               「[MH73] J. Milnor & D. Husemoller, Symmetric bilinear forms, Ergebnisse der Math. und ihrer
+               Grenzgebiete 73, Springer Verlag (1973)」。
+               **章级目录（L2，Crossref）**：I Basic Concepts pp. 1--14；
+               **II Symmetric Inner Product Spaces over Z pp. 15--55**（全书最长的一章，41 页）；
+               III Inner Product Spaces over a Field pp. 56--83；IV Discrete Valuations and Dedekind Domains pp. 84--99；
+               V Some Examples pp. 100--109。
+               **红线：本书任何定理号（例如常被转引的「Ch. II, Theorem 5.1 / 6.1」）本项目均未核实，不得写入图。**
+               「秩/号差 ≡ 0 mod 8」若在本书，只可能在 **Ch. II**（ℤ 上的对称内积空间）。
+               见 extractions/math-sources.md §47.4(b)。}
+}
+
+@book{conway-sloane-1999,
+  author    = {Conway, John H. and Sloane, Neil J. A.},
+  title     = {Sphere Packings, Lattices and Groups},
+  edition   = {3},
+  series    = {Grundlehren der mathematischen Wissenschaften},
+  volume    = {290},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1999},
+  doi       = {10.1007/978-1-4757-6568-7},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 书目两条独立来源相符：
+               Crossref（L2）与 Chenevier--Lannes 参考文献 p. 375 逐字（L1）
+               「[CS99] J.H. Conway & N. J. A. Sloane, Sphere packings, lattices and groups,
+               Grundlehren der Math. Wissenschaften 290, Springer-Verlag, New York (1999)」。
+               **章级定位（L2，Crossref）**：**Ch. 16「Enumeration of Unimodular Lattices」= pp. 406--420，
+               在第 1 版 (1988)、第 2 版 (1993)、第 3 版 (1999) 里页码完全相同**（章 DOI 分别在
+               10.1007/978-1-4757-2016-7 / -2249-9 / -6568-7 之下的 _16）==> 引到章是版次稳健的。
+               ⚠ 但 Ch. 19「Enumeration of Extremal Self-Dual Lattices」页码**随版本变**（1988/1993: 439--442；1999: 441--444），
+               不要把「SPLAG 页码不随版本变」当通则。
+               **★ 一条重要的结构信息（L1，CL 参考文献 p. 383 逐字）**：
+               「[Ven80] B. Venkov, On the classification of integral even unimodular 24-dimensional quadratic forms,
+               **Chapitre 18 de [CS99]**」==> Venkov 的分类文章就是本书第 18 章；
+               与 chenevier-lannes-2014 Corollaire 3.6 的证明策略同源的是 **Ch. 18**，不是 Ch. 16。
+               **红线：任何定理号或表号（含常被转引的「Table 16.7」）均未核实，不得写入图。**
+               见 extractions/math-sources.md §47.4(c)。}
+}
+
+@article{witt-1941,
+  author  = {Witt, Ernst},
+  title   = {Eine Identit{\"a}t zwischen Modulformen zweiten Grades},
+  journal = {Abhandlungen aus dem Mathematischen Seminar der Universit{\"a}t Hamburg},
+  volume  = {14},
+  pages   = {323--337},
+  year    = {1941},
+  doi     = {10.1007/BF02940750},
+  note    = {由 researcher 于 2026-09-11 登记。**正文未获取（L0，Springer 墙）。**
+             书目由两条独立来源相符：(i) Crossref（L2）DOI 10.1007/BF02940750，卷 14，pp. 323--337，1941 年 12 月；
+             (ii) Chenevier--Lannes 参考文献 p. 384 逐字（L1）
+             「[Wit41] E. Witt, Eine Identit{\"a}t zwischen Modulformen zweiten Grades,
+             Abh. Math. Sem. **Hansischen** Univ. 14, 323--337 (1941)」。
+             ⚠ 刊名差异不是错：1933--1945 年汉堡大学名为「Hansische Universit{\"a}t」，1941 年那一卷印的就是 Hansischen Univ.。
+             重印：Witt, Collected Papers -- Gesammelte Abhandlungen (Springer, 1998), **pp. 313--329**,
+             DOI 10.1007/978-3-642-41970-6_37（L2）。
+             **★★ 必须记下的溯源缺口**：常见转引说「Witt 1941 证明了 16 维偶幺模格恰有两个」，
+             但本项目**没有任何来源逐字支持这一点**。Chenevier--Lannes 把 16 维分类归给「Ernst Witt」时**不给文献标签**（p. 33），
+             而他们**唯一一次带标签地引用 [Wit41]，是在附录 A (p. 340) 用于 Siegel theta 级数恒等式**：
+             「l'{\'e}galit{\'e} des s{\'e}ries th{\^e}ta ... pour g <= 3 (r{\'e}sultat d{\^u} {\`a} Witt pour **g <= 2** [Wit41])」。
+             **红线：不得写「Witt (1941) proved there are exactly two ...」，除非有人读到该文正文。**
+             见 extractions/math-sources.md §47.4(e)、§47.7 Q47.2。}
+}
+
+@book{ebeling-2013,
+  author    = {Ebeling, Wolfgang},
+  title     = {Lattices and Codes: A Course Partially Based on Lectures by Friedrich Hirzebruch},
+  edition   = {3},
+  series    = {Advanced Lectures in Mathematics},
+  publisher = {Springer Spektrum},
+  address   = {Wiesbaden},
+  year      = {2013},
+  doi       = {10.1007/978-3-658-00360-9},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 章级定位为 L2（Crossref）。
+               **⚠⚠ 三个版本的页码全不同，引用必须写死版次**：
+               「Even Unimodular Lattices」一章在 1994 版 (DOI 10.1007/978-3-322-96879-1) 是 **Ch. 3, pp. 83--103**；
+               2002 版 (10.1007/978-3-322-90014-2) 是 **Ch. 3, pp. 87--108**；
+               第 3 版 (10.1007/978-3-658-00360-9，Crossref 章条目标 2012、书条目标 2013) 是 **Ch. 3, pp. 77--95**。
+               第 3 版其余章：Ch. 1「Lattices and Codes」pp. 1--32；Ch. 2「Theta Functions and Weight Enumerators」pp. 33--75；
+               Ch. 5「Lattices over Integers of Number Fields and Self-Dual Codes」pp. 121--157。
+               **红线：定理号未核实，且连章号都未定**——「秩 ≡ 0 mod 8」按标准证法走 theta 函数，
+               **既可能在 Ch. 2 也可能在 Ch. 3**，本项目两种都无法排除。
+               本条登记的年份/版次以第 3 版为准；**若要引 1994 或 2002 版必须另建 key**。
+               见 extractions/math-sources.md §47.4(d)。}
+}
+

@@ -1,0 +1,133 @@
+id: worldsheet.exponential-vertex-operator-modes
+kind: definition
+status: formalized
+title: 正规序指数顶点算子的**振子部分**的洛朗模 V^{(b)}_J = Σ_{p+q=J} E₋(b)_p E₊(b)_q（代数 Fock 空间上，无收敛性）
+statement: |
+  【本卡定义的是什么，以及为什么单独立卡】
+  本图此前多处（worldsheet.ddf-operators-v6、worldsheet.vertex-operator-adjoint、
+  worldsheet.exponential-vertex-operator-mode-weight-identity(-v2)）都以「V^{(n)}_J 是
+  :e^{i n k_0·X(z)}: 的 z^J 洛朗系数」这句话为**记号约定**引入同一个对象，却没有一张卡
+  承载它的定义。本卡把那个对象单列出来，使上述各卡的「V」有一个可引用的指称，
+  并使它们的 formalized 有一个 formalized 的定义卡作为依赖（而不是被一张 rigorous 的
+  记号约定卡压低，见 docs/STATUS_LEVELS.md 关于 definition 的说明）。
+  **本卡只定义振子部分**：零模（动量移位）那一半由 worldsheet.momentum-tower-fock-space 承载。
+
+  【数据】D ∈ N；系数环 R 是交换 Q-代数；对角时空度规分量 η_μ 满足 η_μ² = 1
+  （conv.metric-mostly-plus 下 η = diag(−1,+1,…,+1)）。按 worldsheet.bosonic-fock-space 取
+  D 个自由玻色振子的**代数** Fock 空间 F = R[X_{μ,l} : μ ∈ Fin D, l ≥ 1]（多项式代数，无零模，
+  X_{μ,l} 对应 α^μ_{−l} 的作用）。取一个**常**向量 b ∈ R^D；按 conv.alpha-prime-regge 的重标度
+  它是顶点算子携带的动量 c 的重标度 b^μ = (2α')^{1/2} c^μ。记 x·y = Σ_μ η_μ x^μ y^μ。
+
+  【两半】把正规序指数 :e^{i c·X(z)}: 的振子部分按产生/湮灭拆成
+    E₋(b; z) = exp( Σ_{l ≥ 1} (b·α_{−l}/l) z^{l} ) ,
+    E₊(b; z) = exp( − Σ_{l ≥ 1} (b·α_{l}/l) z^{−l} ) ,
+  并记它们的洛朗系数为
+    E₋(b)_p := [z^p] E₋(b; z)   （p ∈ Z；p < 0 时为 0），
+    E₊(b)_q := [z^q] E₊(b; z)   （q ∈ Z；q > 0 时为 0）。
+  在代数 Fock 空间上两半都是**初等**对象，不需要任何解析：
+  · E₋(b)_p 是 F 中一个显式元素（level 恰为 p 的单项式的有限和，系数是经典指数权
+    ∏_v (η_μ b^μ)^{d(v)} / (v_l^{d(v)} d(v)!)），作为算子即**乘以该元素**；
+  · E₊(b)_q 是**常系数导子的指数**，即变量的平移 X_{μ,l} ↦ X_{μ,l} − b^μ T^{l}
+    （辅助变量 T 记录 z^{−1}）在 T^{−q} 处的系数；故它是多项式系数提取，逐向量是有限操作。
+
+  【定义】对每个 J ∈ Z，定义 F 上的 R-线性算子
+
+    V^{(b)}_J := Σ_{p + q = J} E₋(b)_p ∘ E₊(b)_q
+              （等价写法：Σ_{L ∈ Z} E₋(b)_{J+L} ∘ E₊(b)_{−L}）。
+
+  这个形式上无限的和在 F 上**逐向量是有限和**：对每个 P ∈ F 只有 0 ≤ L ≤ deg_T(平移后的 P)
+  的有限多个 L 使 E₊(b)_{−L} P ≠ 0。故 V^{(b)}_J 是 F 上处处有定义的 R-线性算子，
+  **不需要完化、不需要收敛性假设、不需要围道**。
+  记号对照：本图别处写的 V^{(n)}_J（DDF 语境）是本卡在 b = (2α')^{1/2} n k_0 处的取值，
+  再复合上零模移位 e^{i n k_0·x}（worldsheet.momentum-tower-fock-space (1)）。
+
+  【本卡的两条基本性质（属于定义的直接展开，不另立命题）】
+  (1) **分级**：V^{(b)}_J 把振子能级 N 的子空间送进能级 N + J 的子空间；特别地
+      N + J < 0 时 V^{(b)}_J 在该子空间上为零。
+  (2) **真空值**：V^{(b)}_J(1) = E₋(b)_J（J ≥ 0 时是 level-J 的相干态系数，J < 0 时为 0）。
+
+  【本卡明确不断言】
+  (a) **不断言任何与 L_m 的关系**（那是 worldsheet.exponential-vertex-operator-mode-weight-identity-v2）；
+  (b) **不断言任何与 α^μ_p 的对易关系**（[α^μ_p, V_K] = b^μ V_{K−p}；Lean 侧有，但本卡不承载）；
+  (c) **不断言伴随关系** (V^{(n)}_J)† = V^{(−n)}_{−J}（那是 worldsheet.vertex-operator-adjoint）；
+  (d) **不断言两个顶点算子的乘积/OPE**，也不断言 :e^{i c·X}: 的共形权数值
+      （那是 worldsheet.exponential-vertex-operator-weight，隔着 OPE 字典）；
+  (e) **不断言本卡的 V 与文献围道写法下的顶点算子是同一个对象**——
+      文献侧的形式级数 :e^{i c·X(z)}: 与本卡的两半拆分之间的字典是
+      worldsheet.ddf-contour-equals-mode-sum 所处理问题的同一类，本卡不代它断言；
+  (f) **不断言 b 类光**。本卡对任意常向量 b 有定义；k_0² = 0 只在下游命题里出现。
+uses:
+  - worldsheet.bosonic-fock-space
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.vertexOsc
+  lean_file: StringFormal/NoGhost/VertexOperator.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexOperator.lean :: StringFormal.NoGhost.Fock.vertexOsc（本卡 formal.lean_decl，第 448 行）；两半 StringFormal.NoGhost.Fock.{expWeight, creaExpNat, creaExp}（E₋）与 StringFormal.NoGhost.Fock.{vertexSub, vertexAnnNat, vertexAnn}（E₊）；局部有限性 StringFormal.NoGhost.Fock.{vertexIdx, vertexAnn_apply_eq_zero_of_notMem_vertexIdx, vertexOsc_apply}；分级 StringFormal.NoGhost.Fock.{vertexOsc_mem_levelSubmodule, vertexOsc_apply_eq_zero_of_level}；真空值 StringFormal.NoGhost.Fock.vertexOsc_apply_one"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。定义逐字（去掉证明项）：
+        `noncomputable def vertexOsc (η b : Fin D → R) (K : ℤ) : Module.End R (Fock D R) :=
+           lsumLocFin (fun L : ℤ => LinearMap.mulLeft R (creaExp η b (K + L)) ∘ₗ vertexAnn b L)
+             (vertexIdx b) …`
+      即 V_K = Σ_L E₋_{K+L} ∘ E₊^{[z^{−L}]}，与本卡的 Σ_{p+q=J}（取 p = K+L、q = −L）逐字一致。
+      文件头的【Conventions】段逐字给出两半：
+        `E_-(z) = exp(Σ_{m ≥ 1} (b·α_{-m}/m) z^m)`,  `E_+(z) = exp(-Σ_{l ≥ 1} (b·α_l/l) z^{-l})`，
+      并逐字写明「`E_+` needs no analysis at all: it is an algebra map …」「No convergence
+      hypothesis is used anywhere」。这是本卡 `status: formalized` 的依据。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      ⚠ 该文件头的【Mathematical gaps】第 1 条「No `[L_m, V_K]`」**已过时**（VertexWeight.lean /
+      VertexWeightNeg.lean / VertexWeightZero.lean 已补齐，见
+      worldsheet.exponential-vertex-operator-mode-weight-identity-v2）；本卡不依赖那一条。
+  - ref: gebert-nicolai-1995
+    loc: "§2.1 'The Fock space and DDF operators' 一带（CMP 172 (1995) 571–622），特别是 p. 593, eq. (3.2)–(3.3)：DDF 顶点算子作为形式级数的零模"
+    note: |
+      文献侧最接近本卡的**数学**表述：G–N 在格点顶点代数框架里把同类算子写成形式级数，
+      全程不用收敛性。⚠ **G–N 不把 E₋/E₊ 两半的模态积单列为一个定义**，
+      也不用本卡的 z^J-系数指标约定；本条只提供可追溯性，不逐字对应。
+      核实等级沿用 worldsheet.ddf-commute-with-virasoro 的 gebert-nicolai-1995 条目
+      （researcher L1 逐页读期刊排版 PDF，literature/extractions/gsw-1987-v1.md §4 E14–E16）；
+      §2.1 的**页码为该条目已核实的 p. 582 一带**，本卡引的 (3.2)–(3.3) 页码 L1，
+      「§2.1 一带」这个更宽的定位**未逐字核实（L2）**。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      教科书侧把 :e^{i n k_0·X}: 直接写在围道积分里，**不单独给它的洛朗模一个名字**，
+      也不做 E₋E₊ 拆分的显式记账。式号仍未核实（L0）；GSW 用 mostly-minus，
+      已按 conv.metric-mostly-plus 转写；GSW 取 α' = 1/2。
+      本条只说明「本卡定义的对象在文献里对应哪一段」，**不承载本卡的任何内容**。
+tags: [bosonic-string, vertex-operator, definition, formalized]
+notes: |
+  【为什么这张卡是 formalized 而不是 rigorous】
+  按 docs/STATUS_LEVELS.md：definition 的 `status: formalized` 要求「有 Lean 声明逐句对应」。
+  本卡陈述里的每一句都在 `Fock.vertexOsc` 及其两半上有逐字对应物（见 sources 的字典），
+  且本卡刻意**不含**任何 Lean 未覆盖的内容：围道写法、共形权数值、伴随、OPE 全部被
+  【本卡明确不断言】排除。
+  这正是 STATUS_LEVELS 里那句「正确做法是拆卡，让 Lean 对应的那一半成为 formalized 定义卡」
+  的落实：不拆的话，下游的 formalized 命题会被一张只讲围道的 rigorous 记号卡压到 rigorous。
+
+  【指标约定：z^J-系数（(α) 约定）】
+  本卡与 Lean 一致取 **z^J 的系数**（不是 z^{−J−h} 之类的场论惯例）。
+  这与 worldsheet.ddf-operators-v6、worldsheet.vertex-operator-adjoint、
+  worldsheet.exponential-vertex-operator-mode-weight-identity(-v2) 的约定相同
+  （lead 2026-09-11 裁决的 (α) 约定）。
+  ⚠ 与文献对照时注意：物理文献常把权 h 场的模写成 φ_n = ∮ dz z^{n+h−1} φ(z)，
+  与本卡差一个指标平移；本图不在本卡里做那个换算。
+
+  【E₊ 的符号约定】
+  E₊(b; z) = exp(−Σ_{l≥1} (b·α_l/l) z^{−l})，**指数上带负号**，与 Lean 的平移
+  X_{μ,l} ↦ X_{μ,l} − b^μ T^l 一致。这不是任意选择：它是把 :e^{i c·X}: 的正规序
+  按「产生在左、湮灭在右」拆开后湮灭那一半的标准形式。
+  改符号会同时改 V^{(b)}_J 的所有下游恒等式，**不要**在别处偷偷换。
+
+  【与 worldsheet.momentum-tower-fock-space 的分工】
+  本卡只有振子部分，作用在**单个** Fock 空间上，不移动动量。塔上的
+  `towerVertex η b n K`（= 零模移位 ∘ 逐层的 vertexOsc）是本卡对象与动量塔的复合，
+  由 worldsheet.momentum-tower-fock-space (1) 提供移位算子。
+  worldsheet.ddf-operators-v6 的【与 Lean 的逐句字典】里 V^{(n)}_K 那一行就是这个复合。
+
+  【本卡不引入新数学，只是把已有记号约定立成节点】
+  故本卡不改动任何已提交节点的陈述文本；受影响的卡（v6、vertex-operator-adjoint、
+  mode-weight-identity 系列）只在 `uses` / `depends_on` 上加一条指向本卡的边。
+author: curator
+created: "2026-09-11"

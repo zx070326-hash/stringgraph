@@ -91,7 +91,19 @@ notes: |
   `ring` + `norm_num`/`omega` 即可。**⚠ 形式化时必须只证「这四个满足」**；
   「恰是这四个」需要「候选集限定在这三族及其乘积」这条额外假设，
   写进 Lean 定理陈述时必须显式，否则就变成本项目明令禁止的完备分类主张。
-  相邻候选：A1（math.anomaly-twelve-form-factorization）、A6（迹恒等式的 l ∈ {−1,0,+1} 统一版）、
-  A7（math.hexagon-odd-twist-count）、A9（(12.2.27) 是 (12.2.11)+(12.2.12) 的恒等重排，本图未建卡）。
+  相邻候选（2026-09-11 更新）：
+  · A1 = math.anomaly-twelve-form-factorization —— **已接线**，`--via-lean`（own status formalized；
+    有效状态仍被迹恒等式压到 physical-argument）；
+  · A3 = math.tr-f6-coefficient-vanishing、A2 = math.mixed-anomaly-trace-conditions-n32 —— **已接线**，同上；
+  · A6（迹恒等式的 l ∈ {−1, 0, +1} 统一版）—— 未做；
+  · A7（math.hexagon-odd-twist-count）—— Lean 只做了 n = 6 的数值实例，
+    对应卡是 **math.hexagon-odd-twist-count-six**（formalized）；一般 n 的卡仍是 physical-argument；
+  · A9（(12.2.27) 是 (12.2.11)+(12.2.12) 的恒等重排）—— **已建卡并已接线**：
+    consistency.d10-n1-anomaly-polynomial-factorized-form（formalized，
+    `StringFormal.Math.anomaly_polynomial_factorized_eq_expanded`）。
+    ⚠ 那张卡是**纯代数**卡（statement 把物理逐条列进「本卡不断言」），与本卡的四个群无关；
+    本卡的 A10 仍未形式化。
+  · A8（IIB 引力反常 (12.2.14)）—— **已建卡并已接线**：
+    consistency.iib-gravitational-anomaly-cancels（formalized，含充要条件与"秩 2 非 3"的记账修正）。
 author: curator
 created: "2026-09-11"

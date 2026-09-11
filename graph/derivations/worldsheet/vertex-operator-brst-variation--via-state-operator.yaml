@@ -8,8 +8,14 @@ depends_on:
       提供「V 产生 L_0^m = 1 的最高权态 ⟹ V 是维数 1 的主场」这一步。
       ⚠ 见目标节点 notes 与抽取记录 Q18：这是态-算子对应在本书振幅部分三种用法中最弱的一种，
       不要与 §6.7 的 Hilbert 空间矩阵元用法混为一谈。
-  - id: worldsheet.primary-field
-    note: 提供「维数 1 主场」的定义与它与 T 的 OPE。
+  - id: worldsheet.primary-field-v2
+    note: |
+      提供「维数 1 主场」的定义与它与 T 的 OPE。
+
+      【2026-09-11 就地换代】原先指向 worldsheet.primary-field，该卡已 superseded_by
+      worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
+      并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
+      故换代不改变本推导的论证与状态。
   - id: worldsheet.brst-current-bosonic-string
     note: 提供 j_B 与 Q_B = ∮(dz/2πi) j_B。
   - id: worldsheet.ope-commutator-dictionary

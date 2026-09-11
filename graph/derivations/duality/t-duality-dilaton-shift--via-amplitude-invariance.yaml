@@ -1,0 +1,29 @@
+id: duality.t-duality-dilaton-shift--via-amplitude-invariance
+target: duality.t-duality-dilaton-shift
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: duality.t-duality-spectrum-equivalence
+  - id: compact.kaluza-klein-gravitational-coupling
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.30)–(8.3.31)，p.248"
+    note: |
+      抽取记录 polchinski-1998-v1#E134（L1，Schrans §8.45–§8.46，笔记 p.461–462）。
+      ⚠ 该抽取条目的 dilaton 式符号反了（lead 已在 main 加订正注）；
+      本推导按原书 (8.3.31) 与 κ ∝ e^{Φ} 的自洽写法，reviewer-ch8 2026-09-11 核对。
+summary: |
+  取 n = w = 0 的引力子散射振幅。这些态在 T 下不动，故振幅必须相同；
+  由于 25 维引力耦合定义在不变的维度上，κ'_{25} = κ_{25}。
+  把 κ²_{26} = 2πR κ²_{25} 用在两侧（右侧半径为 α'/R）：
+    κ'^2_{26} = 2π(α'/R) κ²_{25} = (α'/R²) κ²_{26}，即 κ'_{26} = (√α'/R) κ_{26}。
+  再比较 S ∝ κ^{−2}_{26}∫√(−G)R_d 与 S ∝ ∫√(−G)e^{−2Φ}(R_d + …)，读出 κ_{26} ∝ e^{Φ}，
+  代入 κ'_{26} = (√α'/R)κ_{26} 即得 **e^{Φ'} = (√α'/R)e^{Φ}**，
+  等价地 e^{−Φ} = (√α'/R)e^{−Φ'}（原书 (8.3.31) 的写法），即 Φ' = Φ − ln(R/√α')。
+gaps:
+  - "「n = w = 0 的引力子振幅在对偶下必须相同」是物理要求；它其实是 duality.t-duality-is-cft-isomorphism 的一个推论，但本推导没有走那条（更弱证据的）路线，而是把它当作输入。"
+  - "「κ_{25} 定义在不变的维度上故不变」这一步没有独立论证：它假定了对偶只作用在紧化方向上，且低能有效作用量在两侧有相同的形式。"
+  - "κ²_{26} = 2πρ κ²_{25} 成立的前提是场对紧化维无依赖（Schrans 脚注 5 明记），而 T 对偶恰恰把绕数态与动量态互换——对绕数态这个前提不成立。来源没有讨论这个张力。"
+  - "「κ^{−2}_{26} ∝ e^{−2Φ}」由比较两种写法的低能作用量读出，依赖 (8.1.9)/(3.7.20)（本图未建卡），且 (8.1.9) 是勘误依赖。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

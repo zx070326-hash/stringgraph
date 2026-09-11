@@ -1,0 +1,94 @@
+id: spectrum.veneziano-amplitude
+kind: proposition
+title: Veneziano 振幅（完整形式）：S_{D₂} = (2i g_o²/α')(2π)²⁶δ²⁶(Σk)·[B(−α_o(s),−α_o(t)) + B(−α_o(s),−α_o(u)) + B(−α_o(t),−α_o(u))]
+statement: |
+  开弦四 tachyon 树振幅（spectrum.open-string-four-tachyon-amplitude）等于
+    **S_{D₂}(k₁;k₂;k₃;k₄) = (2i g_o² / α') (2π)²⁶ δ²⁶( Σ_i k_i )
+       × [ B(−α_o(s), −α_o(t)) + B(−α_o(s), −α_o(u)) + B(−α_o(t), −α_o(u)) ]**   （(6.4.23)），
+  其中
+    **B(a, b) = ∫₀¹ dy  y^{a−1} (1 − y)^{b−1}**   （Euler Beta 积分，(6.4.19)；math.euler-beta-integral），
+    **α_o(x) = 1 + α' x**   （开弦领头 Regge 轨迹，(6.4.20)），
+  且 Beta 的 Γ 商形式为
+    **B(−α_o(x), −α_o(y)) = Γ(−α'x − 1) Γ(−α'y − 1) / Γ(−α'x − α'y − 2)**   （(6.4.24)）。
+  s、t、u 是 Mandelstam 变量，满足 α'(s + t + u) = −4
+  （spectrum.mandelstam-invariants-sum-rule）。这就是 **Veneziano 振幅**。
+
+  三项分别对应把四条腿排在圆盘边界上的三种不等价方式；由于 B(a,b) = B(b,a)，
+  三项就是参数对 {s,t}、{s,u}、{t,u}，与写出的次序无关。
+  物理参数区中三个积分都不收敛，等式在 Beta 函数亚纯延拓的意义下成立。
+
+  ⚠ **不得由本式断言「每个 Beta 极点都对应一个物理中间态」**：在**没有** Chan–Paton 因子的
+  纯四 tachyon 振幅里，α's 取 1/α' 偶数倍处的极点在三项之间全部相消
+  （spectrum.even-level-open-string-poles-cancel-between-orderings、
+  spectrum.massless-open-pole-requires-chan-paton）。
+
+  **本命题不断言什么**：不断言这三项的书写次序是原书 (6.4.23) 的逐字排版（B 对称，次序无意义）；
+  不给出「六个循环序如何合并成三项」的过程（原书未写，见 notes）；
+  不断言 Regge 或硬散射行为（那在 spectrum.veneziano-regge-behavior 与
+  spectrum.open-string-hard-scattering-exponential-falloff）；
+  不涉及带 Chan–Paton 因子的推广（§6.5）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.4, p.183：eqs. (6.4.19)（B 的 Euler 积分）、(6.4.20)（α_o(x) = 1 + α'x，I(s,t) = B(−α_o(s),−α_o(t))）、(6.4.23)（Veneziano 振幅，含完整前因子）、(6.4.24)（Beta 的 Γ 商形式）"
+    note: |
+      literature/extractions/polchinski-1998-v1.md **§12.8**（首次取得原书页图）
+      + **§14.1**（2026-09-11 第八轮，p.183 页图**复核无误**：(6.4.19)/(6.4.20)/(6.4.21)/(6.4.22)/
+      (6.4.23)/(6.4.24) 全部再读一遍，与 §12.8 无差异）。**等级：L1（原书 p.183 逐字，两轮独立读图）。**
+
+      **原书 (6.4.23) 逐字**：
+        S_{D₂}(k₁;k₂;k₃;k₄) = (2i g_o²/α')(2π)²⁶ δ²⁶(Σ_i k_i)
+          × [ B(−α_o(s),−α_o(t)) + B(−α_o(s),−α_o(u)) + B(−α_o(t),−α_o(u)) ]
+      配套 (6.4.19) B(a,b) = ∫₀¹dy y^{a−1}(1−y)^{b−1}、(6.4.20) α_o(x) = 1 + α'x、
+      (6.4.24) B(−α_o(x),−α_o(y)) = Γ(−α'x−1)Γ(−α'y−1)/Γ(−α'x−α'y−2)。
+
+      版本凭据（§14.0）：Cambridge Books Online 2005 平装数字化本（已含 2000 年 corrections），
+      ch.6 = pp.166–205，DOI 后缀 `.009`。
+
+      **本卡片相对于 spectrum.veneziano-amplitude-weak 的增量就是前因子 2i g_o²/α' 与 δ 函数**；
+      弱卡因「陈述文本不可修改」而无法就地升级，故本卡片按 graph/CLAUDE.md 新建并给弱卡写
+      superseded_by。
+  - ref: schrans-2020
+    loc: "§6.39–§6.41（笔记 p.308–309）：三项 Beta 结构 [6.143]，以及推导路线的一句话（核对源）"
+    note: |
+      ⚠ **[S] 没有抄出 (6.4.23)**：他对该式的全部注释只有「This is straightforward. Use (6.4.9)
+      and plug in the expression for C_{D₂} and the expression of I in terms of the Beta functions
+      (6.4.20).」；[6.143] 只是他为算 Regge 行为写出的「Beta 函数部分」，**不含前因子**。
+      本卡片的前因子**完全来自原书页图**，[S] 在这一点上不是独立源。
+      ⚠ headrick-2008 Problem 6.9 算的是四**规范玻色子**振幅（参数偏移不同），**不能互证**。
+tags: [spectrum, tree-level, open-string, tachyon, veneziano, beta-function, four-point, disk]
+notes: |
+  由 curator 于 2026-09-11 按抽取记录 §14.4 B 的建议新建（分支 agent/curator/ch6-sec14），
+  是 spectrum.veneziano-amplitude-weak 的换代卡（弱卡已写 superseded_by 指向本卡）。
+  弱卡与本卡的唯一差别是**前因子写不写出来**；三项 Beta 的结构两卡一致。
+
+  **⚠ 必带 note 之一（§14.4 B.1）：不得由 (6.4.23) 的形式断言「所有 Beta 极点都对应物理中间态」。**
+  原书 p.183 逐字：「Because the residue at s = 0 in (6.4.17) is odd in u − t, this pole actually
+  cancels that from I(s,u), **as do all poles at even multiples of 1/α'**.」
+  即在纯四 tachyon（无 Chan–Paton）情形下，α's = 0, 2, 4, … 的整族极点在三项之间相消，
+  存活的只有 α's = −1, 1, 3, …。见 spectrum.even-level-open-string-poles-cancel-between-orderings。
+
+  **⚠ 必带 note 之二（§14.4 B.2）：原书没有把「六个循环序合并成三项」的过程写出来。**
+  圆盘边界上四点有 4!/4 = 6 个循环序，互为反向的成对给出相同的积分，合并后得三项——
+  **这个合并过程原书一句未写**，本图也不补。与之相关的一处内部对账（**curator 的推断，不是原书的说明**）：
+  四点振幅的普遍前因子是 i g_o⁴ C_{D₂} = i g_o⁴ · 1/(α'g_o²) = i g_o²/α'
+  （C_{D₂} = 1/(α'g_o²) 见 (6.4.14) 与 spectrum.four-tachyon-factorization-disk-normalization），
+  与 (6.4.23) 的 **2**i g_o²/α' 差一个因子 2；该因子应来自上述成对合并。
+  同样的因子 2 出现在三 tachyon 振幅 (6.4.15) = 2i g_o/α' 与 i g_o³C_{D₂} = i g_o/α' 之间
+  （那里的两种循环序是显式的，见 spectrum.open-string-three-tachyon-amplitude）。
+  ⚠ **§14.1 没有为这条对账新增任何证据；不要因为 (6.4.23) 升 L1 而误以为合并过程已解决。**
+
+  **一条顺带记录（§14.4 B.3，本卡片不据此改动，留给 math 区的 curator）**：
+  原书 (6.4.22) 是 `Γ(a+b) B(a,b) = Γ(a)Γ(b)`（p.183 逐字），即 Beta 的 Γ 商形式
+  **在原书正文里有推导**（从 (6.4.21) 换元 + 乘 e^{−w} 积分）。这与闭弦侧 (6.6.10) 的复情形
+  （原书留作 exercise 6.10，正文无推导）形成对比，**math.euler-beta-integral 的来源可据此加强**——
+  本轮按任务书只动 spectrum/，未改 math/。
+
+  **历史意义（不入陈述）**：Veneziano 1968 的 Beta 函数拟设是弦论的起点；
+  本图仍未登记 veneziano-1968，本卡片的来源只有 Polchinski。
+  若日后 researcher 登记该文，可为本卡片补一条独立推导。
+author: curator-polchinski-ch6-sec14
+created: "2026-09-11"
