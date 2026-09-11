@@ -121,4 +121,35 @@ theorem im_mul_norm_eta_pow_four_isInvariant (g : SL(2, ℤ)) :
       = fun τ : UpperHalfPlane => τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 :=
   funext (im_mul_norm_eta_pow_four_modular_forall g)
 
+/-- Every power of the invariant is invariant: `(τ₂ |η(τ)|⁴)ⁿ` is `SL(2,ℤ)`-invariant. -/
+theorem im_mul_norm_eta_pow_four_pow_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) (n : ℕ) :
+    ((g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4) ^ n
+      = (τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4) ^ n := by
+  rw [im_mul_norm_eta_pow_four_modular_invariant]
+
+/-- Expanded form of the previous lemma: `τ₂ⁿ |η(τ)|⁴ⁿ` is `SL(2,ℤ)`-invariant.
+
+At `n = 12` this is `τ₂¹² |η(τ)|⁴⁸`, whose reciprocal is (up to the `τ`-independent constant
+`(4π²α')^{-12}`) the integrand of the bosonic one-loop vacuum amplitude,
+`Z(τ) = (4π² α' τ₂)^{-12} |η(τ)|^{-48}` — see `im_pow_twelve_mul_norm_eta_pow_48_modular`. -/
+theorem im_pow_mul_norm_eta_pow_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) (n : ℕ) :
+    (g • τ).im ^ n * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ (4 * n)
+      = τ.im ^ n * ‖ModularForm.eta (τ : ℂ)‖ ^ (4 * n) := by
+  have h := im_mul_norm_eta_pow_four_pow_modular g τ n
+  rwa [mul_pow, mul_pow, ← pow_mul, ← pow_mul] at h
+
+/-- **The `τ`-dependent part of the bosonic torus partition function is modular invariant.**
+`τ₂¹² |η(τ)|⁴⁸` is `SL(2,ℤ)`-invariant, hence so is its reciprocal
+`τ₂^{-12} |η(τ)|^{-48}`, which is the bosonic one-loop integrand up to the constant
+`(4π²α')^{-12}`.
+
+Caveat about what this does *and does not* say: the full statement of one-loop modular invariance
+also requires invariance of the measure `d²τ / τ₂²`, which is a fact about the `SL(2,ℤ)`-action on
+`ℍ` and is **not** formalised here; and `D = 26` enters only through the exponent `12 = (D − 2)/2`,
+which is an input, not an output, of this lemma. -/
+theorem im_pow_twelve_mul_norm_eta_pow_48_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
+    (g • τ).im ^ 12 * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 48
+      = τ.im ^ 12 * ‖ModularForm.eta (τ : ℂ)‖ ^ 48 :=
+  im_pow_mul_norm_eta_pow_modular g τ 12
+
 end StringFormal.DedekindEta
