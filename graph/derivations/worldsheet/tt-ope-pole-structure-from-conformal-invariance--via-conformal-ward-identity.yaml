@@ -88,6 +88,7 @@ gaps:
      Vol.2 第 15 章；本推导不依赖该一般原理（只对 𝒜 = T 做了显式计算），故不挂边，但目标卡的
      title 措辞「由共形不变性完全确定」与该原理同源，读者须知一般版本本处无证明。"
 notes: |
+  reviewer-verified: reviewer-batch20, 2026-09-11（**只签第 (ii) 步**：玻色对称交叉核对 2A₃ = ∂A₄ 复算；own 保持 physical-argument（围道 + Ward，lead 裁决）。lead 落地。）
   由 curator-small-backlog-3 于 2026-09-11 建立，配合 worldsheet.tt-ope-central-charge（v1）
   的拆分：v1 的 statement 把本命题当作定义的一部分写下，没有推导；本推导是本图第一次
   把「TT OPE 为什么长这样」单独记账。

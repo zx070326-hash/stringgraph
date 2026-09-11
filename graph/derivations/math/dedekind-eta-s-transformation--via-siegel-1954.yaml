@@ -72,6 +72,7 @@ gaps:
     **本图未核 Apostol GTM 41 的定理号**（math-sources.md §48.5, Q48.1）：
     「Apostol, Theorem 3.1」在本项目零证据，**不得写进任何卡**；第二数学来源待 researcher 结清。
 notes: |
+  reviewer-verified: reviewer-batch20, 2026-09-11（整条：菱形正向需 Im τ>0、∫dz/z = 4 Log(τ/i) 主值、极点计数、log η 分支相消，全部独立复算；own 已 rigorous。lead 落地。）
   由 curator（small-backlog-4）于 2026-09-11 依 researcher math-sources.md §48 建立。
   姊妹推导 math.dedekind-eta-s-transformation--via-textbook-assertion 记录的是「Polchinski
   只给断言」这一事实，按 lead 裁决保留不删；工具取两条中较强者，本条即目标卡的 best_derivation。

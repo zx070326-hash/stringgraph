@@ -198,6 +198,7 @@ gaps:
     使前提自动满足，**不**说 V₂ 上的型正定或 V(c,h) 酉；
     酉性还需要全部 level 的 Gram 矩阵半正定（本图与 Lean 侧都没有）。
 notes: |
+  reviewer-verified: reviewer-batch20, 2026-09-11（Lean 假设与陈述 (1)–(4) 逐条对应、三处 det 多项式与 hdet 逐字同；own 已 formalized。lead 落地。）
   【2026-09-11 lean-wire-7（curator）：`git mv` 自 worldsheet.verma-level-basis-generic-low-levels--via-lean】
   目标由 v1 换为 v2（原因见 v1 的换代记录）。相对 v1 版推导的改动：
   · summary 原第 5 步「N = 3,4 只到不等式，升级被 (i)(ii) 两件事挡住」改写为现在的第 5 步

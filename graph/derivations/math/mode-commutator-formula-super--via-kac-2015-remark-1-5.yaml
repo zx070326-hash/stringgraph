@@ -60,6 +60,7 @@ gaps:
     **Kac 讲义 pp. 10–17、§4 未读**（Q51.2），Theorem 1.2 的证明页 researcher 读过（pp. 6–9 含 §1.2），
     但 §2.3「Bakalov's formula and Dong's lemma」与 Schottenloher Lemma 10.11 的对照未做；对本推导无影响。
 notes: |
+  reviewer-verified: reviewer-batch20, 2026-09-11（整条：(1.24)→(1.32) 系数比较 k = m+n−j 复核，loc 与 math-sources.md §51.2(d) 逐字一致；own 已 rigorous。lead 落地。）
   由 curator-small-backlog-5 于 2026-09-11 建立。id 里的 "kac-2015" 取 arXiv 编号年份（1512.00821），
   bib key 是 kac-2017-lectures（v2 日期 2017-01-30）——同一文献。
 
