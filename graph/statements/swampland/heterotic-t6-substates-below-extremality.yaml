@@ -30,16 +30,16 @@ sources:
   - ref: arkani-hamed-2006
     loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14；Figure 4 图题, p.13"
   - ref: sen-1995-bh-torus
-    loc: "Nucl. Phys. B 440 (1995) 421 [hep-th/9411187]"
+    loc: "arXiv:hep-th/9411187v3, §2：**(2.60), p.11**（= AMNV (22)）；**(2.56), p.10**（= AMNV (23)）；另有 AMNV 未引的 (2.64), p.11（Case III）"
     note: >-
-      ★ **eqs. (22)(23) 的极端黑洞解的一手出处就是本条**（AMNV §4 把它外包给其 [8]，逐字
-      "A. Sen, 'Black hole solutions in heterotic string theory on a torus,' Nucl. Phys. B 440,
-      421 (1995) [arXiv:hep-th/9411187]."）。
-      **该归属已由 L1 交叉核实**：另一篇 Sen 1995（hep-th/9504147，本项目已逐页读全文）在其 p.6
-      逐字把黑洞解归给**同一篇** 9411187（"Most general electrically charged rotating black hole
-      solutions in this theory were constructed in ref.[7]"）。
-      ⚠ 本条**正文本项目未获取（L0）**，loc 只到篇级；起始页 421 已 L1（由 AMNV 参考文献转录），
-      终页 440 未核实。
+      ★ **eqs. (22)(23) 的极端黑洞解的一手出处就是本条**（AMNV §4 把它外包给其 [8]）。
+      **2026-09-11 订正**：此前本条 loc 只到篇级、并注「正文未获取（L0）」；
+      researcher 已于同日 L1 逐页读完 arXiv **v3** 全文（21 页），
+      **AMNV (22) = Sen (2.60)、AMNV (23) = Sen (2.56)** 已钉死
+      （literature/extractions/sen-1995-bh-torus.md E8）。
+      ⚠⚠ 同一轮抽取还发现 **AMNV 丢掉了 Sen 的两个前提（a = 0 非转动、m → 0 保 M 固定）**，
+      因此本卡已换代为 swampland.heterotic-t6-substates-below-extremality-v2；
+      **新的论证与完整来源看 v2 与 v2 的推导，本卡只作历史记录。**
   - ref: sen-1995-bh
     loc: "arXiv:hep-th/9504147v2, p.6 与 References [7], p.15"
     note: >-
@@ -53,6 +53,7 @@ sources:
           **9504147 的 (24)/(37) 系数不得搬到本卡的记号里**；其 C = 4（(49)）是熵匹配的**拟合值**，
           与本卡无关。
       详见 literature/extractions/sen-1995-bh.md §0.3 与 §5.4。
+superseded_by: swampland.heterotic-t6-substates-below-extremality-v2
 tags: [swampland, weak-gravity, heterotic, charge-lattice, black-hole, amnv]
 notes: |
   from: arkani-hamed-2006#E22（另见 #U3、#Q2）。
@@ -81,5 +82,14 @@ notes: |
   【抽取者复算（原文未显式写出）】由 (24) 取 N_L = 0 与 Q_L² − Q_R² = 2 得 N_R = 0 且
   M² = ½Q_R² = ½Q_L² − 1，比极端黑洞的 ½Q_L² 小 1，与 (25) 一致。**该复算原文没有写出**，
   在推导中标 inferred: true。
+
+  【★ 2026-09-11 换代为 v2】researcher 对 Sen hep-th/9411187 的 L1 全文抽取表明：
+  本卡正文里「极端黑洞：Q_R² − Q_L² > 0 时 BPS，M² = ½Q_R²；Q_L² − Q_R² > 0 时非 BPS，M² = ½Q_L²」
+  这两式的一手出处是 Sen (2.60) 与 (2.56)，而 Sen 那两式**只在 a = 0（非转动）且 m → 0 保持
+  (2.38) 的 M 固定的极端极限下成立**——AMNV §4 两个前提都没写，且 Sen p.11 明说
+  `J ≠ 0` 的极端黑洞**从不**饱和 Bogomol'nyi 界。
+  按根 CLAUDE.md 原则 1（陈述文本不可变），新建
+  **swampland.heterotic-t6-substates-below-extremality-v2** 补回这两个前提，本卡标 superseded_by。
+  本卡的推导 --via-charge-lattice 按 docs/STATUS_LEVELS.md 保留作历史，不再更新。
 author: curator
 created: "2026-09-11"

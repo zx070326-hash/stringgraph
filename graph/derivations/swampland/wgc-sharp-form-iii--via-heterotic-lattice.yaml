@@ -3,9 +3,13 @@ target: swampland.wgc-sharp-form-iii
 kind: conjecture-support
 status: conjecture
 depends_on:
-  - id: swampland.heterotic-t6-substates-below-extremality
+  - id: swampland.heterotic-t6-substates-below-extremality-v2
     inferred: false
-    note: "§4 的格论检验就是那条命题；本推导把它作为对普遍猜想 (III) 的证据。"
+    note: >-
+      §4 的格论检验就是那条命题；本推导把它作为对普遍猜想 (III) 的证据。
+      **2026-09-11 改指 v2**：v1 已 superseded_by v2，v2 补回了 Sen 的两个前提
+      （a = 0 非转动、m → 0 保 M 固定）。**本推导的论证内容不变**——所比较的对象现在被
+      明确限定为非转动极端黑洞，这正是 Sen 一手正文支持的情形。
   - id: conv.extremality-normalization
 sources:
   - ref: arkani-hamed-2006
@@ -17,10 +21,10 @@ summary: |
 
   **本推导只把该背景下的事实当作普遍猜想 (III) 的证据，不宣称它证明了 (III)**：目标是对**任何**
   一致量子引力理论的断言，而证据是**一个**背景族。故 status 取 conjecture，
-  而 swampland.heterotic-t6-substates-below-extremality 自身保持 physical-argument。
+  而 swampland.heterotic-t6-substates-below-extremality-v2 自身保持 physical-argument。
 gaps:
   - "一族背景的检验不构成对普遍断言的论证；原文自陈是 'Evidence for the conjecture'"
-  - "极端黑洞侧外包给 Sen 1995（未抽取）；杂化弦谱公式本图无节点"
+  - "极端黑洞侧外包给 Sen hep-th/9411187。**2026-09-11 订正：该文已 L1 全文抽取**，AMNV (22) = Sen (2.60)、AMNV (23) = Sen (2.56)；但 **Sen↔AMNV 的电荷归一化桥在两篇原文中均不存在**（见 v2 推导的 gaps 第一条）。杂化弦谱公式 (24) 本图仍无节点，且**不得挂 sen-1995-bh-torus**（Sen 全文没有杂化弦质量公式）"
   - "原文自陈本支支持的是 (III)（或更准确说是'沿一组基方向'的版本），**不是** (II)（#E22 备注 3、#E20）"
   - "α' = 4 归一化与本图 canonical 的 conv.alpha-prime-regge 不同（见目标命题卡的 notes）"
 notes: |

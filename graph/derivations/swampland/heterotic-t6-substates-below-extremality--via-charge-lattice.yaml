@@ -10,8 +10,11 @@ sources:
   - ref: sen-1995-bh-torus
     loc: "Nucl. Phys. B 440 (1995) 421 [hep-th/9411187]"
     note: >-
-      ★ eqs. (22)(23) 的极端黑洞解由 AMNV §4 外包给本条（其 [8]）；该归属已由 sen-1995-bh
-      （hep-th/9504147）p.6 的 L1 自引交叉核实。⚠ 本条正文本项目未获取（L0），loc 只到篇级。
+      ★ eqs. (22)(23) 的极端黑洞解由 AMNV §4 外包给本条（其 [8]）。
+      **2026-09-11 订正：该文已 L1 全文抽取**（arXiv v3，21 页；AMNV (22) = Sen (2.60)、
+      AMNV (23) = Sen (2.56)），此前「正文未获取（L0）、loc 只到篇级」的说法作废。
+      精确 loc 与由此发现的两个缺失前提见换代版推导
+      swampland.heterotic-t6-substates-below-extremality-v2--via-charge-lattice。
   - ref: sen-1995-bh
     loc: "arXiv:hep-th/9504147v2, p.6 与 References [7], p.15"
     note: >-
@@ -30,7 +33,7 @@ summary: |
   原文措辞是本文最强的正面措辞："the string spectrum also guarantees that … we are guaranteed to
   find a state with a mass/charge ratio smaller than for extremal BH's"。
 gaps:
-  - "极端黑洞解 (22)(23) **外包给 Sen, Nucl. Phys. B 440 (1995) 421 [hep-th/9411187]，本项目未抽取（L0）**——正面证据的'黑洞侧'目前只有转述级"
+  - "极端黑洞解 (22)(23) 外包给 Sen, hep-th/9411187。**2026-09-11 订正：该文已 L1 全文抽取**（AMNV (22) = Sen (2.60)、AMNV (23) = Sen (2.56)），且抽取发现 **AMNV 丢掉了 Sen 的两个前提（a = 0、m → 0 保 M 固定）**。⇒ 本推导已由 swampland.heterotic-t6-substates-below-extremality-v2--via-charge-lattice 取代，**本条保留作历史，不再更新**"
   - "★ **不要认错文献**：hep-th/9504147（bib key `sen-1995-bh`，本项目已 L1 全文抽取）**不是** (22)(23) 的出处；它自己也把黑洞解引给 9411187。且它的归一化是 α' = 16、G_N = 2、T = g²/32π（conv.sen-1995-normalization），与本推导的 α' = 4、M_Pl = 1 **不同且无换算**"
   - "杂化弦谱 (24) 的推导（含 −1 的来源）原文不给，只给结果；本图无对应的杂化弦谱节点"
   - "α' = 4 与本图 canonical 的 conv.alpha-prime-regge 不是同一归一化；此处未建换算，凡把本卡接到用 conv.alpha-prime-regge 的节点上必须写 convention_map"
