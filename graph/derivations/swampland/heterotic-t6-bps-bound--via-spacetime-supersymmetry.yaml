@@ -1,0 +1,91 @@
+id: swampland.heterotic-t6-bps-bound--via-spacetime-supersymmetry
+target: swampland.heterotic-t6-bps-bound
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.metric-mostly-plus
+    inferred: true
+    note: >-
+      Sen **不声明号差**；由 (2.21) `(G_{μν})_{as} = η_{μν}` 与 (2.23) Kerr 解首项 `−[…]dt²`
+      读出为 mostly-plus（`[抽取者复算]`，literature/extractions/sen-1995-bh-torus.md §1.4）。
+      结论与本图 canonical 一致，引用无需换算；**标 inferred 是因为该读出不在原文中**。
+sources:
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2, p.11，(2.65) 之后、**无式号**：「In the normalization convention that we have been using, the Bogomol'nyi bound that follows from the space-time supersymmetry of the theory, is given by M² ≥ (Q⃗_R²/2)[24, 25].」"
+    note: |
+      **L1**（researcher 2026-09-11 逐页读 v3，抽取记录 E9）。
+      ★★ **这是本推导的全部内容：一句引用。** Sen **不给任何推导**，不写超对称代数、不写中心荷、
+      不写 Nester 型论证，只说「follows from the space-time supersymmetry of the theory」并挂
+      `[24, 25]`。
+      `[24]` = G. Gibbons and C. Hull, Phys. Lett. **B109** (1982) 109；J. Harvey and J. Liu,
+      Phys. Lett. **B268** (1991) 40；R. Kallosh, A. Linde, T. Ortin, A. Peet and A. Van Proeyen,
+      Phys. Rev. **D46** (1992) 5278 [hep-th/9205027]。
+      `[25]` = A. Sen, Mod. Phys. Lett. **A8** (1993) 2023 [hep-th/9303057]。
+      ⚠ 这四篇**本项目一篇都没有登记、没有核实**（抽取记录 U3）。
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §1, pp.2–3（摘要与引言里对同一事实的复述）：逐字「For non-rotating black holes, **some of** the extremal black holes saturate the Bogomol'nyi bound and hence have unbroken supersymmetry. But black holes carrying non-zero angular momentum never saturate Bogomol'nyi bound, and hence have no unbroken supersymmetry.」"
+    note: >-
+      **L1**（抽取记录 E12）。本条只作**篇内交叉佐证**（作者在引言里也把这条界当作既有事实使用），
+      **不增加任何推导内容**。
+summary: |
+  **本推导没有论证，只有一条引用链。** 完整内容是：
+
+  1. Sen 在 p.11 直接写下 `M² ≥ (Q⃗_R²/2)`，并声明它「follows from the space-time supersymmetry
+     of the theory」，把依据整体挂给 `[24, 25]`（四篇 1982–1993 年的 BPS 界文献）。
+  2. Sen **不证明**这条界：全文没有超对称代数、没有中心荷表达式、没有 Nester–Witten 型正能量论证。
+     他只在同一段里**使用**它，来判定 Case II/III 的极端解饱和界（⇒ 超对称）、Case I 不饱和、
+     以及 `J ≠ 0` 的极端解从不饱和。
+  3. 该界的归一化与 Sen 全文的隐含读数绑定：他自己加了限定语
+     「**In the normalization convention that we have been using**」——这是他全文关于归一化的
+     **唯一**自述，而该约定从未被写成 α'/G_N/M_Pl 的取值。
+
+  ⇒ 按 docs/STATUS_LEVELS.md，来源给出结论而不给论证骨架、且把论证整体外包给本项目未核实的文献，
+  记 **physical-argument**（不是 conjecture：结论真伪在文献中并无争议，缺的是可追溯性，按 lead
+  2026-09-11 的裁决这类情形用 gaps 记录而非压成 conjecture）。
+gaps:
+  - |
+    ★★ **本推导不含任何论证。** Sen 把界整体外包给 `[24, 25]`：
+    Gibbons–Hull PLB **109** (1982) 109；Harvey–Liu PLB **268** (1991) 40；
+    Kallosh–Linde–Ortín–Peet–Van Proeyen PRD **46** (1992) 5278；Sen MPLA **A8** (1993) 2023。
+    **这四篇本项目 bib 一篇都未登记、正文一篇都未取得**（抽取记录 U3）。
+    ⇒ 要让本卡有真正的推导，必须先抽取 Gibbons–Hull（最直接的一篇），
+    **这是本区一条可立即派发的 researcher 任务**。
+  - |
+    ★ **界所依赖的归一化在原文中没有定义。** Sen 自己加的限定语
+    「In the normalization convention that we have been using」是全文唯一一处归一化自述；
+    而该约定**从未被写成 α'/G_N/M_Pl 的取值**（21 页逐页核实的否定结论）。
+    M 与 Q 只能按 `g^E_tt → −(1 − 2M/ρ)`、`F^{(a)}_{ρt} → Q^{(a)}/ρ²` 读出——
+    **两条都是 `[抽取者复算]`，原文没写**（抽取记录 §1.2、Q4）。
+    ⇒ 界里的系数 `½` 的含义依赖一个未成文的约定；换到别的归一化下系数会变。
+  - |
+    ★ **与 AMNV 的桥不存在。** AMNV 2006 §4 的 (22) `M² = ½Q_R²` 是**饱和**（等号）且工作在
+    `M_Pl = 1`、`α' = 4` 下；Sen 不声明这两者，其 Q 是连续参数、从不与格点归一化挂钩。
+    **两篇都不给换算**（抽取记录 §1.3、Q1）。凡跨这两套的边必须 `inferred: true`。
+  - |
+    **「space-time supersymmetry」这一前提本身在 Sen 文中未落实**：他没有写出该四维理论的
+    超对称代数（N = 4，来自 T⁶ 紧化），也没有指明 Q⃗_R 如何进入中心荷。
+    本图**没有**对应的四维 N = 4 超对称代数卡；susy.bps-bound-point-particle-d4 是
+    Polchinski 附录 B.2 的 d = 4 点粒子一路，**归一化与荷的含义都不同，不得互引**。
+  - |
+    **本推导不覆盖分类**（哪些解饱和界）。那一句在同一段里，但属于另一条命题，
+    见目标卡 notes 的【★ Sen p.11 那一段的完整逐字】与建议的后续卡。
+  - |
+    **引用编号 [24, 25] 的读图不确定性已留痕**（抽取记录 §0.3 U-a）：PDF 该处是超链接框、
+    数字边缘有描边。采 `[24, 25]` 的依据是**内容判据**（[24] 全是 BPS 界文献、[25] 是 Sen 自己
+    1993 年那篇；而 [21] = Marcus–Schwarz 在正文别处只用于 O(8,24)，与 BPS 界无关），
+    **不是**读图的确定结果。
+notes: |
+  from: literature/extractions/sen-1995-bh-torus.md E9、E12、§0.3 U-a、§1.2、U3、Q4、§5.1。
+
+  【版本】loc 写死 **arXiv v3**（页 1 侧边条纹逐字 `arXiv:hep-th/9411187v3  3 Dec 1994`）。
+  ⚠ 该处**无式号**，任何引用都不得编造式号。
+
+  【为什么不标 conjecture】按 docs/STATUS_LEVELS.md 的 lead 裁决（2026-09-11）：
+  「论证不完整」与「结论可能为假」是两个轴。本条的问题是**可追溯性**（外包两跳、被引文献未核实），
+  不是结论有争议，故记 physical-argument 并把缺口逐条写进 gaps。
+
+  【这张卡在图上的作用】它是一个**诚实的深度计**：一旦有人给
+  swampland.heterotic-t6-substates-below-extremality-v2 之类的卡挂上「BPS 饱和」的论证，
+  `stringgraph why` 就会把瓶颈指到这里，显示真正的依据是四篇本项目未读的 1982–1993 年文献。
+author: curator
+created: "2026-09-11"
