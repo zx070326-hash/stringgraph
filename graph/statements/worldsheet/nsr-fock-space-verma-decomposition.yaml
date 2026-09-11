@@ -21,13 +21,20 @@ statement: |
     this representation, although they **do not write down the explicit spectrum generating
     algebra**"。
 
-  **主张一般不成立的一方**——Lian–Zuckerman 1989, p.320 Remark 逐字：
+  **主张一般不成立的一方**——Lian–Zuckerman 1989, §2, eqs. (35)-(38), p. 320 的 Remark 逐字：
     "`V(p,κ)` is **in general not a direct sum of Verma modules** of `Vir_κ` even though it is
-    `Vir_κ^-`-free."（在 NS 扇区用超 Virasoro 的 **Kac 行列式**给出论证）。
+    `Vir_κ^-`-free."（在 NS 扇区用超 Virasoro（c = 10）的 **Kac 行列式**给出论证）。
+    其反例**不取某个具体的 p**，条件是 **`p·p < 0`** 且 `p·p/2 + n` 命中使 Verma 模 `M(h, 10)`
+    可约的负半整数；`p ≠ 0` 由 LZ p.303 的全局假设保证。
+    ⚠ **LZ 原文不给 Kac 行列式的层数**，用的是定性推论，**不写出显式的反例向量或层**。
+
+  **⇒ 两方的作用域不是同一范围**：**FOK 只声明 `p ≠ 0`、不限定 `p·p` 的符号**，
+  其适用范围**真包含** LZ 的反例区 `p·p < 0`。
 
   **本卡不断言：**
-  (a) 哪一方正确——两方的措辞不同（"in general not" vs 无限定的 "fully reducible"），
-      **调和的可能性尚未排除**，但裁决所需的事实（LZ 的反例取在哪个动量 p）本项目尚未核对；
+  (a) 哪一方正确——两方的措辞不同（"in general not" vs 无限定的 "fully reducible"）；
+      LZ 反例的条件已核实为 `p·p < 0`（见上），但**该反例是定性推论、不给层数、不显式**，
+      按 docs/STATUS_LEVELS.md 尚不构成"被接受的反例"，故本图**不裁决**，仅记为争议；
   (b) Brower–Friedman 1973 正文里有没有这条陈述——**该文正文本项目未取得（L0）**，
       其**摘要不含 "reducible"/"Verma"/"direct sum"/"Fock space"/"representation" 任何一词**；
   (c) `Vir_κ^-`-自由性（LZ Corollary 2.19(iii) 用的那条较弱性质）——**那一条两方都同意**，
@@ -59,7 +66,7 @@ sources:
       **摘要里没有 "reducible"、没有 "Verma"、没有 "direct sum"、没有 "Fock space"、
       没有 "representation"。** 且**标题与摘要都是 NS-only，完全没有 Ramond**。
   - ref: lian-zuckerman-1989
-    loc: "p.320 Remark，逐字 'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'（论证用超 Virasoro 的 Kac 行列式，在 NS 扇区）"
+    loc: "§2, eqs. (35)-(38), p. 320（Remark，逐字 'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'）"
     note: |
       **L1**（全文 35 页逐页读毕，literature/extractions/lian-zuckerman-1989.md）。
       ★ **反方向的明证。** 关键在措辞是 "**in general** not"——它**没有**说对每个 p 都不成立。
@@ -97,19 +104,42 @@ notes: |
       Schwarz, hep-th/0011078 逐字「The no-ghost theorem for the dual pion model was also
       established using Brower's methods … **as well as by Brower and Friedman**」。
 
-  【★ 一条尚未排除的调和可能（抽取者假设，非原文）】
-  LZ 的措辞是 "**in general** not a direct sum"。若 FOK 实际使用的是**一般动量 p**
-  （超 Virasoro Kac 行列式不为零的情形），则两者可以并存：
-    一般 p：Verma 模不可约 ⇒ `Vir^-`-自由 + 最高权向量生成 ⇒ 确实是 Verma 模直和；
-    特殊 p（Kac 行列式为零）：LZ 的反例。
-  **但 FOK 全文只声明 p ≠ 0（脚注 3/6/9），没有声明 p 的一般性。**
-  ⇒ **裁决路径是可检验的，但前提是核对 LZ p.320 Remark 的反例究竟取在哪个 p**
-  （Project Euclid `cmp%2F1104179468`，本轮未做）。
-  ⚠ **在验证之前，不要把这条调和写进任何推导的 summary 当作已知事实。**
+  【★★ 2026-09-11 追加：LZ 反例的条件已核（researcher 读 lian-zuckerman-1989 pp.319–321 页图）】
+  **LZ 的反例不取某个具体的 p**，其条件是：
 
-  【★ 若日后裁决为"不成立"该怎么做】若核实 LZ 的反例落在一般（`p ≠ 0` 的典型）动量上，
-  则本卡应新增一条 `kind: refutation` 的推导（来源 lian-zuckerman-1989 p.320）使其降为 refuted，
-  并把 FOK 那条无鬼推导的 gaps 第一条升级为"其前提已被反驳"。**本轮不做**，裁决前提未满足。
+    **`p·p < 0`，且 `p·p/2 + n` 命中使 Verma 模 `M(h, 10)` 可约的负半整数。**
+
+  其中 `p ≠ 0` 由 LZ **p.303 的全局假设**保证（不是 Remark 本地加的条件）。
+  ⚠ **LZ 原文不给 Kac 行列式的层数**，用的是**超 Virasoro（c = 10）Kac 行列式的定性推论**
+  ——即他论证的是「存在这样的 (p, n)」，而**不写出显式的反例向量或层**。
+  位置：§2, eqs. (35)-(38), p. 320。
+
+  【★★ 由此明确的作用域差异（本卡争议的真正形状）】
+    **FOK 只声明 `p ≠ 0`**（其脚注 3/6/9），**不对 `p·p` 的符号作任何限定**；
+    **LZ 的反例落在 `p·p < 0` 且命中可约点的那些 p 上。**
+  ⇒ **两者不是同一范围**：FOK 声称成立的范围**真包含**了 LZ 说不成立的那一片。
+  ⇒ 此前记录的「调和可能」（若 FOK 只用一般动量则两者可并存）**已被这条核实削弱**：
+  FOK 从未把自己限制到"一般 p"，所以调和需要的是**FOK 一侧补一个他没写的限定**，
+  而不是两篇本来就说的是不同的事。
+
+  【★ 为什么本轮仍不降为 refuted】本卡的量词是"对设定中的 p（`p ≠ 0`）"，若 LZ 的反例条件确实
+  可满足，则本卡陈述为假。**但按 docs/STATUS_LEVELS.md，`refuted` 要求"存在被接受的反例"，
+  且需要一条 `kind: refutation` 的推导**；而 LZ **不给 Kac 行列式层数、不写出显式反例**，
+  其论证是定性推论。⇒ 按根 CLAUDE.md 原则 2「不确定时选低的那级」，本轮维持 `conjecture`，
+  并把"是否够格降为 refuted"作为一条**待 lead / auditor 裁决**的事项列出（见推导 gaps）。
+
+  【★ 若日后裁决为"不成立"该怎么做】若 lead / auditor 认定 LZ 的定性反例够格，
+  则本卡应新增一条 `kind: refutation` 的推导
+  （`worldsheet.nsr-fock-space-verma-decomposition--via-lian-zuckerman-kac-determinant`，
+  来源 lian-zuckerman-1989 §2, eqs. (35)-(38), p. 320）使其降为 refuted，
+  并把 --via-figueroa-ofarrill-kimura-1989 的 gaps 第一条升级为"其前提已被反驳"。
+  **本轮不做**：LZ 不给层数、不写显式反例。
+
+  【★ 本卡的正文在本分支内被修订过一次】本卡与其推导于 2026-09-11 同日先后两次落盘：
+  第一次写成时 LZ 反例的 p 条件尚未核实，正文里写的是"裁决所需的事实本项目尚未核对"；
+  同日 researcher 读完 LZ pp.319–321 后，该句已**不成立**，故在**本卡尚未进入 main 的同一分支内**
+  改写为现在的正文。**这是对草稿的修订，不是对已发布节点的改写**；本卡在 main 上不存在过
+  中间版本，也没有任何审计记录引用过它。已在交付报告中向 lead 明示。
 
   【★ 与 brower-friedman-1973 的使用红线】图里**不得**把 brower-friedman-1973 作为
   「完全可约性 / Verma 模直和」的 source（它只能承载摘要那两件事，loc 只能写 `abstract`）。

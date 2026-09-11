@@ -28,7 +28,7 @@ sources:
       ⇒ 本条列在这里**只为让「FOK 归属给谁」这件事在图上可追**，
       **不得**被读成本命题的来源。
   - ref: lian-zuckerman-1989
-    loc: "p.320 Remark（反方向明证）：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'"
+    loc: "§2, eqs. (35)-(38), p. 320（Remark，反方向明证）：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'"
     note: >-
       **L1**。列在本推导里是为了让 status 的理由（存在反方向的明证）在同一处可见，
       **它不支持本命题**。⚠ LZ 自己**不需要**完全可约性，只用 `Vir_κ^-`-自由性
@@ -48,8 +48,11 @@ summary: |
   4. **这条主张在整个引用网络里只有一个出处**：35 篇引用方中只有 Figueroa-O'Farrill 本人
      1989 年的另一篇出现该措辞（逐字相同），**不是两条独立证言**；两条非 FOK 系的引用方
      （hep-th/9901116、hep-th/0011078）只把 Brower–Friedman 归到「NS 的 DDF/SGA 构造 + 无鬼定理」。
-  5. **有反方向的明证**：LZ 1989 p.320 Remark 用超 Virasoro 的 Kac 行列式说
-     `V(p,κ)` "**in general** not a direct sum of Verma modules"。
+  5. **有反方向的明证**：LZ 1989 §2, eqs. (35)-(38), p. 320 的 Remark 用超 Virasoro（c = 10）的
+     Kac 行列式说 `V(p,κ)` "**in general** not a direct sum of Verma modules"。
+     **该反例的条件已核实**：`p·p < 0`，且 `p·p/2 + n` 命中使 `M(h, 10)` 可约的负半整数
+     （`p ≠ 0` 由 LZ p.303 的全局假设给出）；⚠ **原文不给 Kac 行列式层数**，是定性推论。
+     ⇒ **FOK（只声明 `p ≠ 0`）的适用范围真包含 LZ 的反例区 `p·p < 0`。**
 
   ⇒ **status: conjecture。** 理由不是"论证不完整"（那种情形按 docs/STATUS_LEVELS.md 的 lead 裁决
   应记 physical-argument + gaps），而是**结论真伪在文献中未定**：同一命题有一方明确主张成立、
@@ -57,14 +60,24 @@ summary: |
   这正是 STATUS_LEVELS 里 conjecture 一栏「结论真伪在文献中未定」的情形。
 gaps:
   - |
-    ★★ **裁决的前提本轮未满足：LZ p.320 Remark 的反例究竟取在哪个动量 p，本项目尚未核对。**
-    LZ 的措辞是 "**in general** not"，**没有**说对每个 p 都不成立。存在一条尚未排除的调和路径
-    （抽取者假设，非原文）：若 FOK 实际使用的是**一般动量 p**（超 Virasoro Kac 行列式不为零），
-    则「一般 p ⇒ Verma 模不可约 ⇒ `Vir^-`-自由 + 最高权向量生成 ⇒ 确实是 Verma 模直和」，
-    与 LZ 在**特殊 p**（Kac 行列式为零）处的反例并存。
-    **但 FOK 全文只声明 p ≠ 0（脚注 3/6/9），没有声明 p 的一般性。**
-    ⇒ **裁决任务**：读 lian-zuckerman-1989 p.320 Remark 的反例构造（Project Euclid
-    `cmp%2F1104179468`），确定其 p 的取法。**在验证之前不得把这条调和当作事实使用。**
+    ★★ **已核（researcher 2026-09-11 读 lian-zuckerman-1989 pp.319–321 页图）：LZ 的反例
+    不取具体的 p，其条件是 `p·p < 0`**，且 `p·p/2 + n` 命中使 Verma 模 `M(h, 10)` 可约的
+    负半整数；`p ≠ 0` 由 LZ **p.303 的全局假设**保证。位置 **§2, eqs. (35)-(38), p. 320**。
+    ⚠ **LZ 原文不给 Kac 行列式的层数**，用的是超 Virasoro（c = 10）Kac 行列式的**定性推论**
+    ——他论证"存在这样的 (p, n)"，**不写出显式的反例向量或层**。
+    ⇒ **作用域差异因此明确**：**FOK 只声明 `p ≠ 0`、不限定 `p·p` 的符号**，
+    **LZ 的反例落在 `p·p < 0` 的那一片**，即 **FOK 声称成立的范围真包含 LZ 说不成立的范围**。
+    ⇒ 此前那条"若 FOK 只用一般动量则可并存"的调和**已被削弱**：调和需要 FOK 一侧补一个
+    他从未写过的限定。
+  - |
+    ★★ **待 lead / auditor 裁决：本卡够不够格降为 `refuted`。**
+    本卡的量词是"对设定中的 p（`p ≠ 0`）"；若 LZ 的反例条件可满足，则本卡陈述为假。
+    **但 docs/STATUS_LEVELS.md 要求 `refuted` 有"被接受的反例" + 一条 `kind: refutation` 的推导**，
+    而 LZ **不给层数、不写显式反例**（定性推论）。
+    ⇒ 本轮按根 CLAUDE.md 原则 2 维持 `conjecture`。若裁决为够格，应新增
+    `worldsheet.nsr-fock-space-verma-decomposition--via-lian-zuckerman-kac-determinant`
+    （kind: refutation），并把 --via-figueroa-ofarrill-kimura-1989 的 gaps 第一条升级为
+    "其前提已被反驳"。
   - |
     ★★ **被归属文献的正文本项目未取得（L0）。** Brower–Friedman 1973 共 5 页（PRD 7, 535–539）。
     已尝试入口逐条留痕在 literature/sources.bib 的 note 里（Crossref ✅、INSPIRE 摘要 ✅、
@@ -94,8 +107,11 @@ notes: |
   ⇒ 工具会把两条并列推导的强度差**算出来**，而不是靠 notes 口头说明：
   FOK 那条的 effective 被压到 conjecture，LZ 那条不受影响。
 
-  【★ 为什么不建 refutation 推导】LZ 的 "in general not" 若成立于一般动量，确实反驳本命题；
-  但「in general」的确切含义与反例的 p 取法本项目未核对（见 gaps 第一条）。
-  按根 CLAUDE.md 原则 2「不确定时选低的那级」，本轮只记 conjecture，不记 refuted。
+  【★ 为什么不建 refutation 推导】LZ 反例的条件**已核实**为 `p·p < 0` 且命中 `M(h, 10)` 的
+  可约点（§2, eqs. (35)-(38), p. 320），且该区间**落在 FOK 声称成立的范围 `p ≠ 0` 之内**
+  ——就命题的真假而言这已是不利证据。**但 LZ 不给 Kac 行列式层数、不写出显式反例**，
+  是定性推论，按 docs/STATUS_LEVELS.md「`refuted` 需要被接受的反例」尚不够格。
+  ⇒ 按根 CLAUDE.md 原则 2「不确定时选低的那级」，本轮只记 conjecture，不记 refuted；
+  是否够格降为 refuted 已作为 gaps 第二条交 lead / auditor 裁决。
 author: curator
 created: "2026-09-11"

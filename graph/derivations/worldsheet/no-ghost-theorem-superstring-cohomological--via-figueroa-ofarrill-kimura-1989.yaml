@@ -204,10 +204,14 @@ gaps:
     ⇒ 该矛盾**已建成独立节点 worldsheet.nsr-fock-space-verma-decomposition**（争议卡，
     其推导 --via-fok-1989-attribution 记 conjecture），并已作为本推导的一条**非 inferred**
     depends_on 边接入；**--via-lian-zuckerman-1989 不接这条边**（LZ 只用 `Vir_κ^-`-自由性）。
-    ⇒ **剩下的裁决前提有两条，都未满足**：(i) 取得 Brower–Friedman 正文（5 页，剩余唯一路线是
-    WebSearch 找 .edu 扫描件或人工从 APS 下载）；(ii) 核对 LZ p.320 Remark 的反例取在哪个动量 p
-    （LZ 的措辞是 "**in general** not"，未排除"一般 p 下成立"的调和）。
-    **在裁决前本推导不得升为 rigorous。**
+    ⇒ 裁决前提 (ii) **已于同日核实**（researcher 读 LZ pp.319–321）：LZ 的反例**不取具体 p**，
+    条件是 **`p·p < 0`** 且 `p·p/2 + n` 命中使 `M(h, 10)` 可约的负半整数（`p ≠ 0` 由 LZ p.303 的
+    全局假设保证），位置 **§2, eqs. (35)-(38), p. 320**；⚠ 原文**不给 Kac 行列式层数**，是定性推论。
+    ⇒ **作用域差异因此明确：FOK 只声明 `p ≠ 0`、不限定 `p·p` 的符号，其适用范围真包含 LZ 的反例区**
+    ——"FOK 只用一般动量所以两者可并存"这条调和已被削弱。
+    ⇒ **剩下的裁决前提只有一条，仍未满足**：取得 Brower–Friedman 正文（5 页；剩余唯一路线是
+    WebSearch 找 .edu 扫描件或人工从 APS 下载）。
+    **在裁决前本推导不得升为 rigorous**；且若争议卡日后被裁为 refuted，本推导的前提即被反驳。
   - |
     **附录 A 的超李代数同调消灭定理没有已发表的证明**（作者自承）：p.106 逐字
     'We have never seen a published proof of this theorem, although Fuks [2] hints that it is a
