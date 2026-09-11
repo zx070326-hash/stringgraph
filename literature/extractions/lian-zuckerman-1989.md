@@ -247,3 +247,241 @@
 |---|---|---|
 | LZ 1989 全文 PDF | `projecteuclid.org/download/pdf_1/euclid.cmp/1104179468` | ✅ 2.5 MB 落盘（此前只记了 `journalArticle/Download?urlId=` 端点，**`/download/pdf_1/` 这条同样有效且更短**） |
 | 期刊 pp.328–333 | `Read(pages=28-33)` | ✅ 六页页图；`PDF 页 = 期刊页 − 300` |
+
+---
+
+## 8. ★ 参考文献表复核（2026-09-11，researcher 第三轮页图）——全 23 条逐字，重点 [8]/[13]/[15]
+
+> 只追加，不改上文任何一行。触发（lead）：图里 GSO 的原始归属要挂 LZ 1989 的 **[8]**，而 Gliozzi–Scherk–Olive
+> 有两篇易混文章（NPB **122** (1977) 253–290「dual spinor model」 vs PLB **65** (1976) 282–286「spinor dual model」），
+> 此前**未裁决 [8] 指哪一篇**（见 `sources.bib` 的 GSO 相关 note 与 §7.5）。
+> 取件：与 §7.8 同一文件（`projecteuclid.org/download/pdf_1/euclid.cmp/1104179468`，2.5 MB 扫描件）→ `Read(pages=34-35)`。
+> **参考文献表在期刊 p.335 = PDF 第 35 页**（`PDF 页 = 期刊页 − 300`），单栏排版，全部可辨。证据等级 **L1**。
+
+### 8.1 ★★★ 裁决：LZ 1989 的 **[8] = Gliozzi–Scherk–Olive, Nucl. Phys. B122 (1977) 253–290**
+
+**逐字（p.335，第 8 条）：**
+
+> 「 8. Gliozzi, F., Scherk, J., Olive, D.: Nucl. Phys. **B122**, 253–290 (1977)」
+
+⇒ **是 NPB 122 (1977) 253，不是 PLB 65 (1976) 282。** 起止页 `253–290` 与 Crossref 记录（NPB 122(2) 253–290，
+DOI `10.1016/0550-3213(77)90206-1`，报告号 CERN-TH-2253）**逐位一致**，无歧义。
+⇒ §7.5 引的那句「They were first proposed by **Gliozzi, Scherk and Olive [8]** (GSO) in the "old covariant" formalism」
+**确指 1977 年那篇 NPB**。图里/`sources.bib` 里新增 GSO 条目时，key 取 `gliozzi-scherk-olive-1977`（或按 key 规范 `gliozzi-1977`），
+著录用 NPB 122 (1977) 253–290。
+⚠ **但这只裁决了「LZ 的 [8] 是哪一篇」，没有裁决「GSO 投影是否真的首发于该篇」**——
+后者的障碍仍是 **NPB 122 摘要里不出现 "projection"/"truncation"/"10"/"tachyon"/"chirality"**（L2 Crossref/INSPIRE 摘要），
+即该归属目前**仍只靠 LZ 1989 p.328 这一条 L1 转引**，正文未取得。**不要把「[8] 的身份已定」误读成「归属已证实」。**
+
+### 8.2 [13] Ohta 与 [15] Terao–Uehara 逐字
+
+> 「13. Ohta, N.: Phys. Rev. **D33**, 681–1691 (1986)」
+>
+> 「15. Terao, H., Uehara, S.: Phys. Lett. **168B**, 70–74 (1986)」
+
+- **[13] 的起页 `681` 复核属实，是原刊排印错误**（少印首位 `1`；真值 `1681–1691`，见 `ohta-1986.md` §0.3 的 OSTI 双源）。
+  本轮为**第二次 L1 页图确认**，可视为定案：**凡转述 LZ 的引用串必须注明「LZ 印作 681，系误印」。**
+- **[15] 逐字是 `Phys. Lett. 168B, 70–74 (1986)`**（旧式卷号写法 `168B`，不是 `B168`），页码 `70–74` 与
+  `sources.bib` 的 `terao-uehara-1986`（PLB 168(1–2) 70–74，DOI `10.1016/0370-2693(86)91462-0`）一致。**无误印。**
+
+### 8.3 顺带逐字取得的全表（同一页图，23 条；对图有用的都在此）
+
+> 1. Brower, R. C., Friedman, K. A.: Phys. Rev. **D7**, 535–539 (1973)
+> 2. Corrigan, E. F., Goddard, P.: Nucl. Phys. **B68**, 189–202 (1974)
+> 3. Feigin, B. L., Fuks, D. B.: Funct. Anal. Appl. **16**, 114–126 (1982)
+> 4. Feigin, B. L.: Usp. Mat. Nauk. **39**, 195–196 (1984) (English translation: Russ. Math. Surv. **39**, 155–156)
+> 5. Frenkel, I., Garland, H., Zuckerman, G. J.: Proc. Natl. Acad. Sci. **USA 83**, 8446 (1986)
+> 6. Friedan, D., Martinec, E., Shenker, S.: Nucl. Phys. **B271**, 93–165 (1986)
+> 7. Friedan, D., Qui, Z., Shenker, S.: Phys. Lett. **151B**, 37–43 (1985)
+> 8. Gliozzi, F., Scherk, J., Olive, D.: Nucl. Phys. **B122**, 253–290 (1977)
+> 9. Kac, V.: Lecture Notes in Phys. vol. **94**. Berlin, Heidelberg, New York 1979
+> 10. Kac, V., Wakimoto, M.: Proceedings of the Symposium on Conformal Groups and Structures. Lecture Notes in Phys. Berlin, Heidelberg, New York 1985
+> 11. Kato, M., Ogawa, K.: Nucl. Phys. **B212**, 443 (1983)
+> 12. Neveu, A., Schwarz, J. H.: Nucl. Phys. **B31**, 86 (1971)
+> 13. Ohta, N.: Phys. Rev. **D33**, 681–1691 (1986)
+> 14. Ramond, P.: Phys. Rev. **D3**, 2415 (1971)
+> 15. Terao, H., Uehara, S.: Phys. Lett. **168B**, 70–74 (1986)
+> 16. Witten, E.: Nucl. Phys. **B276**, 291–324 (1986)
+> 17. Zuckerman, G. J.: Yale preprint (1988); to appear in the Proceedings of AMS Conference on Theta Functions, Bowdoin College (1987). Gunning, R., Ehrenpreis, L. (eds.).
+> 18. Hilton, P. J., Stammbach, U.: A course in Homological algebra. Berlin, Heidelberg, New York: Springer 1970, Chap 7
+> 19. Green, M. B., Schwarz, J. H., Witten, E.: Superstring theory, vol. 1, 1987
+> 20. Jacobson, N.: Basic algebra. Volume II, New York: Freeman and Company 1980
+> 21. Dixon, J. A., Taylor, J. C.: Nucl. Phys. **B78**, 552 (1974)
+> 22. Meurman, A., Rocha, A.: Commun. Math. Phys. **107**, 263–294 (1986)
+> 23. Leites, D. A.: Funct. Anal. Appl. **9**, 340–294 (1975)
+
+**四条对图直接有用的读数：**
+
+1. ★ **[5]（FGZ）的页码印作 `8446`，那是 FGZ 的*末页*不是起页**（真值 8442–8446，见 `sources.bib` 的 `fgz-1986`）。
+   ⇒ **LZ 1989 的参考表在同一页上至少有两处页码误印（[5] 与 [13]）**，转述 LZ 的引用串时两处都要注明。
+2. **[18] = Hilton–Stammbach, *A course in Homological algebra*, Chap 7** —— 这正是 §2 E3 里 `Theorem 3.3.1`
+   自称「a good exposition is given in [18]」所指；[23] = Leites 是「see also」。⇒ **LZ 的超李代数同调正合序列的数学出处是标准同调代数教科书第 7 章**，
+   可作该节点 `rigorous` 的旁证。
+3. **[9] Kac LNP vol. 94 (1979) 与 [22] Meurman–Rocha CMP 107, 263–294 (1986) 分工明确**（见 p.318 Prop 2.18 证明逐字，§9.3）：
+   `[7,9,10]` 给**幺正性**，**`[22]` 给（超 Virasoro 的）Kac 行列式公式**。
+   ⇒ `brower-friedman-1973.md` / `sources.bib` 里记的「p.320 Remark 用的 Kac 行列式出处 [22] = Meurman–Rocha」**本轮复核无误**，且终页 `294` 确认。
+4. **参考表里没有 Figueroa-O'Farrill–Kimura、没有 Henneaux、没有 Brower（单作者 1972）、没有 Goddard–Thorn 1972、没有 Schwarz 1972。**
+   （[1] 是 **Brower–Friedman 1973**，不是 Brower 1972。）⇒ §3 记的「不引 Henneaux」**复核无误**；
+   并新增一条：**LZ 1989 也不引玻色弦的 Goddard–Thorn**，其玻色弦对照组只有 **[5] = FGZ**。
+
+⚠ **两条转录疑点（原刊排印，非扫描误读）**：
+- **[7] 作者印作 "Friedan, D., **Qui**, Z., Shenker, S."** —— 通行拼写是 **Qiu**（Friedan–Qiu–Shenker, PLB 151B (1985) 37）。
+- **[23] 页码印作 `340–294`**（起页大于终页，不可能）。真值未核（L0）；引用 Leites 时不要照抄这个页范围。
+- **[10] 的 Lecture Notes in Physics 卷号在本行上未印出**（只有丛书名 + 地点 + 1985）。若需卷号须另查，**不得从 [9] 的 "vol. 94" 类推**。
+
+### 8.4 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| LZ 1989 全文 PDF | `projecteuclid.org/download/pdf_1/euclid.cmp/1104179468` | ✅ 2.5 MB 落盘（第三次确认该端点可用） |
+| 期刊 pp.334–335（参考表） | `Read(pages=34-35)` | ✅ 两页页图，参考表 23 条单栏全可辨 |
+
+---
+
+## 9. ★ `Corollary 2.15(i)` 与 `Corollary 2.19(iii)` 逐字复核 + 证明链（2026-09-11，researcher 第三轮页图）
+
+> 只追加，不改上文 §2 E5/E6/E7 任何一行。触发（lead）：图里「量子化条件（维数公式）」与「`V(p,κ)` 是 `Vir_κ⁻`-free」
+> 要各建一卡，需要逐字、页码与**原文明写的证明链**。
+> 取件：与 §8.4 同一文件 → `Read(pages=16-21)`（期刊 pp.316–321）。证据等级 **L1**。
+
+### 9.1 `Corollary 2.15` 逐字（期刊 **p.317**）——**E6 已有逐字，本轮「已核」，内容无更正**
+
+> 「**Corollary 2.15.**
+> (i) (*"Quantization Condition"*)
+>   `dim H⁰_rel(p,κ) = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − p·p/2)`.
+> (ii) (*No-ghost Theorem*) `H⁰_rel(p,κ)` *is a positive definite space.*」
+
+- **页码 p.317 复核无误**（E6 记的就是 p.317；同页下方紧跟 `Definition 2.16`、`Definition 2.17`，与 E7 的 p.317 起始一致）。
+- **公式与 E6 逐字一致**，包括 `½(2κ+1)`、`dim R(p,κ)`、下标 `κ` 的 `p_κ^{(8)}`、自变量 `κ − p·p/2`。**不需要更正。**
+- (i) 的引号内标题**原文就带引号**：`("Quantization Condition")`；(ii) 的 `(No-ghost Theorem)` **不带引号**。⚠ 两者排版不同，照抄时别统一。
+
+### 9.2 ★ `Corollary 2.15` 的证明链逐字（p.317）——**两部分都只用 `Proposition 2.14(ii)`**
+
+> 「*Proof.* (i) We recall the Euler–Poincaré Principle for characteristics:
+> `Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ)`.
+> Thus by **Theorem 2.4**, the left-hand side gives `dim H⁰_rel(p,κ)` while the right-hand side is `char C_rel(p,κ)`.
+> Hence (i) follows from **Proposition 2.14 (ii)**.
+> (ii) Similarly, the Euler–Poincaré Principle for signature states that
+> `Σ_{n∈Z} sign H^n_rel(p,κ) = Σ_{n∈Z} sign C^n_rel(p,κ)`.
+> Again **Theorem 2.4** implies that the left-hand side `= sign H⁰_rel(p,κ)`, while the right-hand side is `sign C_rel(p,κ)`.
+> Thus (ii) follows from **Proposition 2.14(ii) also**. □」
+
+**四条读数（全部出自上面逐字）：**
+
+1. **Cor 2.15(i) 的依赖 = `Theorem 2.4` + Euler–Poincaré 原理（特征标版）+ `Proposition 2.14(ii)`。**
+   **Cor 2.15(ii) 的依赖 = `Theorem 2.4` + Euler–Poincaré 原理（号差版）+ `Proposition 2.14(ii)`。**
+   ⇒ 与 §2 E6 记的「Euler–Poincaré 原理 + Theorem 2.4 + Prop 2.14(ii)」**完全一致，已核**。
+2. ★ **`Proposition 2.14(i)`（`Q* = Q`）在 Cor 2.15 的证明里一个字都没被引用。**
+   两部分都指向 **2.14(ii)**（那一条同时给出 `char C_rel` 与 `sign C_rel` 两个等式，见 §2 E5）。
+   句末的 "**also**" 是内部佐证：作者明说第二次用的还是同一条。
+   ⇒ **建边时不要从 Cor 2.15 拉一条到 `Prop 2.14(i)`**；`⟨,⟩_rel` 下 `Q` 的自伴性是 `sign H^n` 有定义的**背景条件**，
+   但**原文没有把它列为依赖**，若 curator 要补这条边必须标 `inferred: true`。
+3. **`p ≠ 0` 是经 `Theorem 2.4` 继承进来的**（Thm 2.4 逐字「Suppose p ≠ 0」，见 §2 E3），Cor 2.15 **自身语句里没有任何量词**。
+   同理 `D = 10`（p.308「From now on, we will take D = 10」）与 `p` 落在半空间 `{p^D > 0}`（§6 复核-1）也都是全局前提。
+4. 强度：**Corollary，证明完整且只有三行**——真正的工作量在 `Theorem 2.4`（消灭定理，§3 全章）与 `Proposition 2.14(ii)`（特征标/号差计算，pp.312–317）。
+   p.335 结论逐字「The only mathematically non-trivial result is the vanishing theorem (2.4).」与此吻合。
+
+### 9.3 `Proposition 2.18` 逐字（期刊 **p.318**）——E7 只有转述，本节补逐字
+
+> 「**Proposition 2.18.** *There exists a subspace* `T(p,κ)` *of* `V(p,κ)^{Vir_κ^+}` (*i.e. elements annihilated by*
+> `π(L_n), π(G_{n−κ}), n > 0`) *with*
+> `ch_q T(p,κ) = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}`.
+> `T(p,½)` *is positive definite with respect to* `⟨,⟩_V`. `T(p,0)` *is a direct sum of two subspaces* `T^±` *of equal
+> characteristics, where* `T^+` (*respectively* `T^−`) *is positive* (*respectively negative*) *definite with respect to* `⟨,⟩_V`.」
+
+⚠ **下标读数注记**：`V(p,κ)^{Vir_κ^+}` 的括注是 `π(L_n), π(G_{n−κ}), n > 0`（**`n−κ`**），
+而 `Definition 2.16`（p.317）的物理态条件是 `π(G_{n+κ})v = 0, n ≥ 0`（**`n+κ`**）。**两处符号不同是原文如此、且都自洽**
+（κ=½ 时前者给 `G_{1/2}, G_{3/2}, …`、后者给 `G_{1/2}, G_{3/2}, …`；κ=0 时前者给 `G_1, G_2, …`（不含 `G_0`），后者含 `G_0`）。
+**抄写时不要「统一」成同一个符号。**
+
+**证明的输入（p.318 逐字，对图有用）：**
+
+> 「*Proof.* Using the so-called spectrum generating algebra, physicists **[1, 2]** have constructed these spaces.
+> However, we will prove their existence the way FGZ did in the bosonic case.
+> It has been shown **[7, 9, 10]** that the Verma module of `M_κ(h,c)` over `Vir_κ` is non-unitary for `h < 0, c = 1`
+> and unitary for `h > 0, c = 9`. By Kac's determinant **[22]** formula, for `h'' < 0` and `h' > 0`, `M_κ(h'',1)`, `M_κ(h',9)`
+> have no (non-zero) proper **Z₂**-graded submodule. …」
+
+⇒ 依 §8.3，**[1] = Brower–Friedman 1973、[2] = Corrigan–Goddard 1974**（谱生成代数的物理构造，LZ 明说自己**不走**这条路）；
+**[7,9,10] = Friedan–Qiu–Shenker / Kac LNP 94 / Kac–Wakimoto**（幺正性）；**[22] = Meurman–Rocha CMP 107 (1986) 263–294**（超 Virasoro 的 Kac 行列式）。
+
+### 9.4 ★★ `Corollary 2.19` 逐字（期刊 **p.320**）+ **(iii) 的证明链不经 `Proposition 2.18` 的陈述**
+
+> 「**Corollary 2.19.**
+> (i) `dim T ∩ 𝒫 = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − p·p/2)`.
+> (ii) `T ∩ 𝒫` *is positive definite with respect to* `⟨,⟩_𝒫`.
+> (iii) `V(p,κ)` *is a free* `Vir_κ^-`*-module.*」
+
+**证明逐字（p.320–321）：**
+
+> 「*Proof.*
+> (i) The case `κ = ½` is an immediate result of **Proposition 2.18**. Consider the case `κ = 0`. Clearly `T(p,0)` is left
+> invariant by `π''(G₀) ⊗ 1`. But `{π(G₀), π''(G₀) ⊗ 1} = 2π''(G₀)² ⊗ 1 = p''·p''·Id_{T(p,0)}`. (39)
+> This implies that in `T(p,0) ∩ Ker π(L₀)`, `T ∩ Ker π(G₀) = T ∩ Im π(G₀)`. (40)
+> The left-hand side is `T ∩ 𝒫`. Thus by (40) and **Proposition 2.18**, we have
+> `dim T ∩ 𝒫 = ½ dim R(p,0) p₀^{(8)}(−p·p/2)`. (41)
+> (ii) Again the `κ = ½` case follows from **Definition 2.17** and **Proposition 2.18**. Let `κ = 0, n = −p·p/2`. Then one
+> can check that `{π(G₀)1₊ ⊗ w_l(n)}_{l=1,…,dim T∩𝒫}` is basis of `T ∩ 𝒫`. By using **Definition 2.17**, and
+> Eqs. **(27), (28), (31)**, we obtain `⟨π(G₀)1₊ ⊗ w_k(n), π(G₀)1₊ ⊗ w_l(n)⟩_𝒫 = δ_{k,l}`. (42)
+> (iii) Equations **(24), (25)** imply that `V(p,κ)` is a direct sum of tensor products of free modules over `Vir_κ^-`.
+> One can easily check that each of the tensor products is also `Vir_κ^-`-free. □」
+
+**★★★ 对任务问题「2.19(iii) 经 Prop 2.18？」的直接回答：不经 `Proposition 2.18` 的*陈述*，只经其*证明内部*的两条显式方程。**
+
+| Cor 2.19 的部分 | 原文明写引用的对象 |
+|---|---|
+| (i) | **`Proposition 2.18`（陈述）** + (39)(40) |
+| (ii) | **`Definition 2.17`** + **`Proposition 2.18`（陈述）** + Eqs. (27)(28)(31) |
+| **(iii)** | **只有 Eqs. `(24)`, `(25)`** —— **`Proposition 2.18` 这四个字在 (iii) 里不出现** |
+
+- **`(24)`、`(25)` 印在期刊 p.319 的顶端，位于 `Proposition 2.18` 的证明体内**（该证明起于 p.318「*Proof.* Using the
+  so-called spectrum generating algebra…」，止于 p.319 末尾 `(34)` 之后的 `□`）。p.319 引出它们的句子逐字是
+  「Thus (i) to (iv) imply that we can express these spaces in terms of irreducible modules:」——
+  其中 `(i)`–`(iv)` 是**该证明内部的编号步骤**，不是 Prop 2.18 陈述的分条。
+- ⇒ **curator 注意**：若图里 `Prop 2.18` 的卡只承载其**陈述**（存在横向空间 `T` + 特征标 + 定号性），
+  那么 `Cor 2.19(iii) → Prop 2.18` 这条边**在原文里不存在**；正确的边是
+  `Cor 2.19(iii) → 「V(p,κ) 的不可约/Verma 分解 (24)(25)」`，而后者若无独立节点，
+  只能写 `loc: §2, eqs. (24)–(25), p. 319（在 Prop 2.18 的证明内）` 并标 `inferred: true` 说明它取自证明而非陈述。
+- ⇒ 顺着 (24)(25) 再往上，依赖落到 §9.3 引的那三组文献输入（**[7,9,10] 幺正性 + [22] 超 Virasoro Kac 行列式**），
+  即 **`V(p,κ)` 的 `Vir_κ⁻`-freeness 最终建立在 Kac 行列式之上**，不是一条组合恒等式。
+
+**(24)(25) 逐字（p.319，⚠ 下标字号极小，见下方可信度分层）：**
+
+> 「`V(p'',κ) ≅ M_κ(p''·p''/2, 1)`,  (24)
+> `V(p',κ) ≅ ⊔_{n∈(1/2)Z₊} p^{(8)}_{1/2}(n) M_{1/2}(p'·p'/2 + n, 9)`  *if* `κ = ½`
+>   `≅ ⊔_{n∈Z₊} (a_n N₊(p'·p'/2 + n, 9) ⊕ b_n N₋(p'·p'/2 + n, 9))`  *if* `κ = 0`,  (25)
+> *where* `a_n, b_n ∈ Z₊` *with* `a_n + b_n = 16 p₀^{(8)}(n)`.」
+
+- **高可信**：(24) 右端是**一个 Verma 模** `M_κ(·, 1)`；(25) 是**直和分解**，κ=½ 用 `M_{1/2}(·, 9)`、κ=0 用两族 `N_±(·, 9)`；
+  重数关系 `a_n + b_n = 16 p₀^{(8)}(n)`；两式的 `c` 值分别是 **1** 与 **9**（与 (23) `π''(c) = 1, π'(c) = 9` 一致）。
+- **需复核**：`⊔` 的指标集（`(1/2)Z₊` vs `Z₊`）、`p''·p''/2` 与 `p'·p'/2` 的撇号归属。**凡把 (24)(25) 写进 `statement` 的，先请 auditor 用同一页图复核撇号。**
+
+### 9.5 `Theorem 2.20` 证明末句的三条引用（p.321，顺带复核 §2 E8）
+
+> 「…We note that `λ` maps `𝒫` into the cocycles `Z⁰_rel` and thus induces an isometric inclusion `𝒫/λ^{−1}B⁰_rel → H⁰_rel`,
+> where `B⁰_rel` is the (zeroth) coboundaries. But `λ^{−1}B⁰_rel` is a subset of `rad 𝒫`. By **Corollary 2.19(ii)**,
+> `T ∩ 𝒫 → 𝒫/rad 𝒫` is also an isometric inclusion. … Using **Corollary 2.15(i)** and **Corollary 2.19(i)**, we have the
+> desired result. □」
+
+⇒ §2 E8 记的证明链（Cor 2.19(ii) → Cor 2.15(i) + Cor 2.19(i) 维数相等）**复核无误**；映射逐字为
+`λ(v) = v ⊗ |q_F = 1⟩ ⊗ |q_B = 1 − κ⟩, v ∈ 𝒫`（E8 写作 `|q_B = 1 − κ⟩`，一致）。
+⇒ 因此 **`Theorem 2.20` 经 `Cor 2.19(i)(ii)` 间接依赖 `Prop 2.18`，但不经 `Cor 2.19(iii)`**——
+(iii) 是喂给 **`Theorem 2.4`（消灭定理）的证明**（§3，见 §2 E3「用于 `Vir_κ^-` 与 `V(p,κ)` 自由性 Corollary 2.19(iii)」），
+不是喂给 Thm 2.20 的。**两条路径不要合并成一条边。**
+
+### 9.6 抽取者观察（**不是原文陈述**，留给 curator/auditor 裁决）
+
+p.320 的 `Remark`（「`V(p,κ)` is in general **not** a direct sum of Verma modules of `Vir_κ` even though it is `Vir_κ^-`-free」）
+与紧随其后的 `Cor 2.19(iii)` 证明（「(24), (25) imply that `V(p,κ)` is a direct sum of **tensor products** of free modules」）
+**印在同一页、相距十余行**。两句的字面区别在 "direct sum of Verma modules" vs "direct sum of **tensor products of** free modules"。
+**本记录不裁决二者如何相容**（那需要读懂 `V(p,κ) ≅ V(p'',κ) ⊗ V(p',κ)` 这条 canonical isometry 的具体含义，p.318 (iii) 附近）。
+⚠ 但**引用时必须注意**：Cor 2.19(iii) 说的是 **free**，Remark 否定的是 **Verma 模直和**；
+**把 (iii) 转述成「`V(p,κ)` 分解为 Verma 模直和」会与同页 Remark 直接冲突，且那正是与 FOK 1989 p.111 矛盾的那一点**（见 §4 Q1）。
+
+### 9.7 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 期刊 pp.316–318 | `Read(pages=16-18)` | ✅ Cor 2.15 全文 + Def 2.16/2.17 + Prop 2.18 陈述与证明首段 |
+| 期刊 pp.319–321 | `Read(pages=19-21)` | ✅ (24)(25) + p.320 Remark + Cor 2.19 全文 + Thm 2.20 全文 + Lemma 3.1 |
+| 期刊 p.317 单页重读 | `Read(pages=17)` | ✅ 专为确认 Cor 2.15 证明里两处都是 `Proposition 2.14(ii)`（"also" 为内部佐证） |
