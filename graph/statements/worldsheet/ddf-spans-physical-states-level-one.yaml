@@ -1,0 +1,130 @@
+id: worldsheet.ddf-spans-physical-states-level-one
+kind: proposition
+title: DDF 态在 N = 1 张成物理态模伪态（Goddard 2008 (6.4) 的 N = 1 增量）：塔上第 −1 层、振子能级 1 的物理态 ⊆ DDF 张成 + R·L_{−1}|0; k − k_0⟩；**D = 26 不进入**
+statement: |
+  【设定】记号沿用 worldsheet.ddf-operators-v6、worldsheet.momentum-tower-fock-space、
+  worldsheet.old-covariant-physical-states 与
+  worldsheet.transverse-frame-spans-orthogonal-complement：
+  D ∈ N；系数环 R 是交换 Q-代数；对角度规分量 η_μ 满足 (η) η_μ² = 1
+  （conv.metric-mostly-plus）；η(x, y) = Σ_μ η_μ x^μ y^μ；基点动量 p 与参考向量 k_0，
+  重标度 a^μ := (2α')^{1/2} p^μ、b^μ := (2α')^{1/2} k_0^μ（conv.alpha-prime-regge）；
+  动量塔 T(p; k_0) = ⊕_{j ∈ Z} F(p + j k_0)，第 j 层重标度动量 p_j := a + j·b；
+  L_m 是逐层作用的 Sugawara 算子（worldsheet.virasoro-generators-free-boson，零模取该层动量）。
+  记 |0; k⟩ := 第 0 层的振子真空（动量 a），|0; k − k_0⟩ := 第 **−1** 层的振子真空（动量 p_{−1} = a − b）。
+
+  【双分次与物理子空间】
+    T_{j,N} := {x ∈ T(p;k_0) : x 支撑在第 j 层，且该层分量的振子能级为 N}（第 j 层、能级 N 的双分次片）；
+    H_phys(a₀) := {x : (L_0 − a₀)x = 0 且 L_m x = 0 ∀ m ≥ 1}。
+  本卡把截距**逐字取为基态自身的值**
+    a₀ := α' p² = ½ η(a, a)
+  （即 L_0|0;k⟩ = a₀|0;k⟩ 的那个 a₀；**不**要求 a₀ = 1）。
+
+  【DDF 张成】给定横向标架 Ε = (ε_1, …, ε_{D−2}) 记
+    D(Ε) := span_R { A^{ε_{i_1}}_{−n_1} ⋯ A^{ε_{i_r}}_{−n_r} |0; k⟩ : r ≥ 0，i_1..i_r ∈ {1..D−2}，n_1..n_r ≥ 1 }
+  （r = 0 时是 |0;k⟩ 本身；A^ε_n 是 worldsheet.ddf-operators-v6 的模态和算子）。
+
+  【断言】设横向标架 Ε 满足
+    (T)  η(ε_i, b) = 0            （横向性，ε_i·k_0 = 0）；
+    (O)  η(ε_i, ε_j) = δ_{ij}      （正交归一）；
+    (T′) η(ε_i, a) = 0            （**偏振与基点动量正交**，ε_i·p = 0；
+         这是 worldsheet.ddf-operators-v6 的 notes 登记的那条缺假设，(T) 不蕴含它）；
+    (C)  Ε 在 v^⊥ 上完备，v := p_{−1} = a − b
+         （worldsheet.transverse-frame-spans-orthogonal-complement 的完备性谓词；
+         (T)(O) 不蕴含它）。
+  则
+    **H_phys(a₀) ∩ T_{−1, 1}  ⊆  D(Ε) + R · L_{−1}|0; k − k_0⟩** 。
+  即：第 −1 层、振子能级 1 上的每个物理态都是「DDF 态 + 一个伪态」，
+  其中伪态取 L_{−1} 作用在第 −1 层真空上得到的那一个。
+
+  【本断言**不**需要的假设，逐条】
+  (1) **不需要 D = 26**，也不需要 D 的任何上下界：N = 1 处的计数 (D − 1) = (D − 2) + 1
+      对一切 D 成立（D − 1 个横向-加-纵向方向 = D − 2 个横向 + 1 个动量方向）。
+  (2) **不需要 (N) k_0² = 0 与 (S) 2α' k_0·p = 1**：它们控制的质壳记账已经包含在
+      「x ∈ H_phys(a₀)」这个前提里（见 notes 的【质壳把双分次压到反对角】）。
+  (3) **不需要截距 a₀ = 1**（快子壳）：a₀ 逐字是基态值 α'p²。
+  (4) 不需要任何实结构、正定性、或对 R 的进一步限制（除 Q-代数）。
+
+  【本卡明确不断言】
+  (a) **不断言等式**。反向包含「D(Ε) + 伪态 ⊆ H_phys」是另外的命题
+      （worldsheet.ddf-operators-preserve-physical-states 那一支），本卡只给一个方向。
+  (b) **不断言 N ≥ 2 的任何情形**。N = 2 的两个缺口见推导 gaps。
+  (c) **不断言 L_{−1}|0;k−k_0⟩ 是零模态（null）**：只有在 a₀ = 1 时它才与全部物理态正交
+      （文献里 N = 1 的光子零态）；本卡不设 a₀ = 1，故只称它为**伪态**（spurious）。
+  (d) 不断言 DDF 态非零、线性无关，也不断言 D(Ε) 上的 Gram 矩阵正定。
+  (e) **不断言 Goddard 2008 (6.2) 的 K 条件刻画**「物理态 + K_n|ψ⟩ = 0 (n>0) = DDF 态」，
+      也不断言无鬼定理的承重步 (B-26)（见
+      worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious
+  lean_file: StringFormal/NoGhost/LightCone.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious（本卡 formal.lean_decl）；见证版 witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious；双分次 towerBigrade / towerBigrade_eq_inf / mem_towerBigrade；DDF 张成 ddfSpan / mem_ddfSpan_of_list / single_polState_vec_mem_ddfSpan；领头项 ddfOp_neg_one_apply_towerVacuum；伪态 towerLop_neg_one_apply_single_vacuum_eq；层化 single_mem_towerPhysSubmodule_iff。formal/StringFormal/NoGhost/PhysicalStates.lean :: StringFormal.NoGhost.Fock.mem_physSubmodule_inf_levelSubmodule_one_iff（能级 1 物理态的完整解）"
+    note: |
+      本仓库，formalizer-noghost-b（分支 agent/formalizer/noghost-b，lead 以 4aded75 合入 main），
+      Lean 4 + Mathlib v4.33.1，无 sorry。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本卡 status formalized 的依据。
+      **逐句字典**：T_{j,N} ⇒ `towerBigrade D R j N`（= `towerRungSubmodule j ⊓ towerLevelSubmodule N`）；
+      H_phys(a₀) ⇒ `towerPhysSubmodule η a b a₀`；a₀ = ½η(a,a) ⇒ `invTwo R * Fock.zeroModeSq η a`；
+      D(Ε) ⇒ `ddfSpan η a b hη Ε`；|0;k−k_0⟩ ⇒ `Finsupp.single (-1) (Fock.vacuum D R)`；
+      伪态 ⇒ `towerLop η a b (-1) (Finsupp.single (-1) (Fock.vacuum D R))`；
+      (T)(O) ⇒ `TransverseFrame.transverse` / `.orthonormal`；(T′) ⇒ `hεa : ∀ i, dotVec η (Ε.vec i) a = 0`；
+      (C) ⇒ `hspan : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))`；
+      结论的 ⊆ + 加法 ⇒ `≤ ddfSpan … ⊔ Submodule.span R {…}`（子模的 sup 就是和）。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, eq. (6.4)（arXiv:0802.3249v1）：逐字 'For D = 26, if |ψ⟩ is a physical state … it can be written in the form |ψ⟩ = |f⟩ + |n⟩'"
+    note: |
+      **不承载本卡的论证**（该文无证明，转引 goddard-thorn-1972，正文未获取；
+      逐字引文取自 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (B-26) gap，
+      researcher 2026-09-11 逐页读图，literature/extractions/gsw-1987-v1.md §2）。
+      **与本卡的三处差别**：(i) 文献在 D = 26 上断言，本卡在**一切 D** 上断言（因为只做 N = 1）；
+      (ii) 文献断言 |n⟩ 是**零模态**，本卡只说它是伪态（a₀ = 1 时两者一致）；
+      (iii) 文献对**一切能级**断言，本卡只做 N = 1。故本卡是 (6.4) 的一个**严格更弱**的增量，
+      不是 (6.4) 本身；(6.4) 的承重点 (B-26) 仍未关闭。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, formalized]
+notes: |
+  【为什么立卡（curator 2026-09-11，lean-wire-13）】
+  「DDF 态张成物理态模零模态」（formal/TODO.md 的 `ddf-spans`、蓝图 §B.6）是无鬼定理里
+  **困难的那一半**，此前在图中只以「未做」的形式出现在
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps 与
+  worldsheet.ddf-operators-preserve-physical-states--via-lean 的 gaps 第 1 条里。
+  formalizer-noghost-b 把 **N = 1 那一层做完了**，本卡登记这个增量。
+  ⚠ 它**不**改变 worldsheet.no-ghost-theorem-v4 的 effective：那条卡的瓶颈是
+  (B-26)（D = 26 唯一进入之处），与 N = 1 无关——恰恰相反，N = 1 之所以能做完，
+  正是因为 D = 26 在那里不进入。
+
+  【D = 26 为什么在 N = 1 不进入】
+  能级 1 的物理态由一个偏振向量 e 参数化（ψ = Σ_μ η_μ e^μ α^μ_{−1}|0;p_{−1}⟩），
+  L_1 条件把 e 限制在 p_{−1}^⊥ 内，那是 D − 1 个方向；右端是 D − 2 个横向 DDF 方向
+  加 1 个纵向（动量）方向，恰好 (D − 2) + 1 = D − 1。**这个计数对一切 D 都平衡**，
+  故 N = 1 不含 26。蓝图 §B.5 预言的正是这一点：26 只在 N ≥ 2 的计数
+  p_{D−1}(N) − p_{D−2}(N) 与零模态个数的比较里出现。
+
+  【质壳把双分次压到反对角（为什么取 (j, N) = (−1, 1)）】
+  `massShell_of_mem_towerBigrade`（LightCone.lean，需 (N)(S) 与 `NoZeroDivisors R`）：
+  T_{j,N} 中非零的物理态满足 **α'p² + j + N = a₀**。在本卡的截距 a₀ = α'p² 下这就是
+  **j + N = 0**：能级 N 的物理态只能住在第 −N 层。所以 N = 1 的那一片恰是 T_{−1,1}，
+  而 DDF 态 A^{ε}_{−1}|0;k⟩ 也正落在第 −1 层能级 1（A^ε_{−n} 把层 −n、能级 +n）。
+  ⚠ **本卡的断言本身不需要这条引理**（也不需要 (N)(S) 与 `NoZeroDivisors`）：
+  双分次片是前提里给定的，不是推出来的。这条引理解释的是「为什么 T_{−1,1} 是对的那一片」，
+  即本卡与 worldsheet.no-ghost-theorem-v4 (1b) 的「N = a − α'p²」那一句的接口。
+
+  【本卡的两条额外假设都是真实的，不是技术性的】
+  · (T′) η(ε_i, a) = 0：没有它，A^{ε_i}_{−1}|0;k⟩ **不等于** α^{ε_i}_{−1}|0;k−k_0⟩，
+    右端会多出 (ε·k)Φ_1|0;k−k_0⟩；机检反例见 worldsheet.ddf-operators-v6 的 notes
+    （WitnessInt.lean 的 D = 3 整数见证 ε·a = 1 ≠ 0）。
+  · (C) 完备性：没有它，L_1 条件解出的偏振 e ∈ p_{−1}^⊥ 未必能拆成「横向 + 动量」；
+    反例见 worldsheet.transverse-frame-spans-orthogonal-complement 的 notes。
+  两条在显式光锥见证上都成立，故本卡**非空**：Lean 的
+  `witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 把两条全部兑现，
+  在那个标架上本卡的结论无条件成立。
+
+  【与 worldsheet.gt-longitudinal-k-algebra 的分工】
+  那张卡给 (6.2)(6.3) 的**代数**（[L_m,K_n] = −nK_{m+n} 等），并在【不断言】(a) 里
+  明确把 (6.2) 的**刻画**留给 (B-26)。本卡走的是 (6.4) 的形式（物理态 = DDF + 伪态）而不是
+  (6.2) 的形式（物理态 + K 条件 = DDF），且只到 N = 1；两者都不关闭 (B-26)。
+  Lean 侧 `ddfCharacterization = towerPhysSubmodule ⊓ towerKerK` 与
+  `ddfSpan_le_ddfCharacterization`（DDF 态满足 K 条件那一侧）已有，反向仍缺。
+author: curator
+created: "2026-09-11"
