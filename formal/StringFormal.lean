@@ -11,6 +11,7 @@ import StringFormal.Math.DedekindEtaT
 import StringFormal.Math.DedekindEtaModular
 import StringFormal.Math.ModularGroupGenerators
 import StringFormal.Math.MathlibBridges
+import StringFormal.Math.TorusMeasure
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
