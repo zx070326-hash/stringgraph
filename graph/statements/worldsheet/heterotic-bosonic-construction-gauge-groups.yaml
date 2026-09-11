@@ -59,5 +59,27 @@ notes: |
   （与玻色弦相同）；费米子构造下是 8 × (−1/24) + 32 × (−1/48) = −1
   （worldsheet.heterotic-left-moving-zero-point-constants）。两者一致 ✓。
   ⚠ 这条核对是本图做的，原书没有并列写出。
+  ★★★【2026-09-11 落图订正：数学侧已有来源，但本卡**并未因此变严格**】
+  原先本卡 notes 说「登记 Conway–Sloane / Serre 之后，B 可以整体抬到接近 rigorous」——**那句判断过于乐观**。
+  实际落地的是另外两本书（Conway–Sloane 与 Serre 的正文本项目一本都没取到，⛔ 其定理号一律禁写）：
+    · 「偶自对偶欧氏格维数必被 8 整除」 → math.even-unimodular-rank-divisible-by-8
+      （Zagier 2008 §3.2 Proposition 12(i), p. 33，**rigorous**）；
+    · 「16 维恰有两个，且两者不同构」 → math.even-unimodular-rank-16-classification
+      （Chenevier–Lannes arXiv:1409.7616 ch. II §3 Corollaire 3.6, p. 35，**rigorous**）；
+    · Polchinski 记号 `Γ_16`/`Γ_8` 与 `D_16^+`/`E_8` 的等同 → 记号桥卡
+      math.even-self-dual-euclidean-lattices-dimension-16-v2（**physical-argument**，等同标 inferred）。
+  **认识论要点（务必不要误读）**：两张数学卡是 rigorous，**不**使「杂化弦恰有两个」成为严格结论。
+  剩下的瓶颈有三层，任何一层都足以把本卡压在 physical-argument：
+    (i) **物理桥**：§11.6 的「一致的 16 维内部 CFT（局域 OPE + 模不变）⟺ 偶自对偶欧氏格」
+        （上游 compact.heterotic-narain-lattice-even-self-dual，原书推给 v1 §8.4），仍是 physical-argument；
+    (ii) **记号桥未复核**：v2 卡的坐标比对无 `reviewer-verified` 记录（低成本升级点）；
+    (iii) 本卡自己的 (11.4.16)/(11.4.21) 与玻色化等价两处缺口（见下）。
+  ⚠ 另记一条溯源事实：Polchinski 那句 'for dimension 16 there are exactly two such lattices'
+  在原书**零出处**——不证、不引、无脚注。数学来源是本项目从 Zagier / Chenevier–Lannes 另行找到的，
+  不是原书给的。
+  ⛔ 禁令：不得写「Witt (1941) 证明了 16 维恰有两个……」（Chenevier–Lannes 把功劳归 Witt 但未挂 `[Wit41]`，
+  该书唯一带标签引 `[Wit41]` 处引的是 `g ≤ 2` 的 Siegel θ 恒等式）；不得写 Serre / Milnor–Husemöller /
+  SPLAG / Ebeling 的任何定理号或表号。见 literature/extractions/math-sources.md §47.4、§47.6(d)。
+
 author: curator
 created: "2026-09-11"

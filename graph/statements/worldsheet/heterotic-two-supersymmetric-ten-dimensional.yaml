@@ -80,7 +80,19 @@ notes: |
   ⚠ 第 (a) 步「组大小只能是 8 或 16」原书**没有单独论证**，只是把 8 与 16 两种情形拿来比较。
 
   【与 §11.6 的独立佐证】玻色构造给出同样的两个规范群，其依据是「16 维偶自对偶欧氏格恰有两个」
-  （math.even-self-dual-euclidean-lattices-dimension-16）——那是一条**纯数学定理**，
+  （原为 math.even-self-dual-euclidean-lattices-dimension-16）——那是一条**纯数学定理**，
   比本卡的排除法硬。但原书对那条定理同样不证、不引文献。
+
+  ★【2026-09-11 更新：那条数学定理现在有来源了，但这**不**抬高本卡，也**不**抬高玻色构造那条路线】
+  原卡已拆成三张：math.even-unimodular-rank-divisible-by-8（Zagier 2008 Proposition 12(i), p. 33，rigorous）、
+  math.even-unimodular-rank-16-classification（Chenevier–Lannes arXiv:1409.7616 Corollaire 3.6, p. 35，rigorous）、
+  math.even-self-dual-euclidean-lattices-dimension-16-v2（Polchinski 记号 `Γ_16`/`Γ_8` 与 `D_16^+`/`E_8`
+  的等同，physical-argument，等同标 inferred）。
+  **两条路线的瓶颈都没变**：
+    · 本卡（§11.2 费米子构造）的瓶颈仍是自旋统计 + OPE 闭合两条物理断言，与格论无关；
+    · §11.6 玻色构造的瓶颈转移到了「一致 CFT ⟺ 偶自对偶欧氏格」这条**物理桥**
+      （compact.heterotic-narain-lattice-even-self-dual，原书推给 v1 §8.4）以及记号桥未复核。
+  ⇒ 「十维杂化弦恰有两个」在本图**仍然没有**一条 rigorous 的路线；补上数学来源改变的只是
+  「哪一步是瓶颈」，不是结论的等级。
 author: curator
 created: "2026-09-11"
