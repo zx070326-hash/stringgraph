@@ -12,7 +12,7 @@ depends_on:
       贡献 ∝ n²（两条边界各一个 Chan–Paton 迹）。
   - id: spectrum.one-loop-klein-bottle-amplitude
     note: 提供 Klein 瓶的无质量 tadpole，(7.4.19) 给贡献 ∝ 2²⁶。
-  - id: spectrum.one-loop-mobius-amplitude
+  - id: spectrum.one-loop-mobius-amplitude-v2
     note: |
       提供 Möbius 带的无质量 tadpole。⚠ **这条边要同时用那张卡的 (3) 与 (5)，缺一不可**：
       (3) 给 Chan–Paton 净贡献 **±n，上号 + 对应 SO(n)**；(5) 给闭弦通道展开的无质量系数
@@ -91,5 +91,8 @@ notes: |
   「+ ↔ SO(n)」正好反号，是错的。真正的来源是闭弦通道展开的无质量系数 −24。
   已在 summary 第一步、Möbius 边 note、Möbius 卡的 (5) 三处登记；gaps 新增一条记明
   该展开是本图补算而非来源内容。
+  reviewer-verified: reviewer-batch18, 2026-09-11（仅 summary 第一步的三个无质量系数 ±24：
+  圆柱 +24、Klein 瓶 +24、Möbius −24，及其相加给出 (2¹³ ∓ n)² 的交叉项符号；status 不因此改变）
+  （Möbius 卡已于 2026-09-11 换代为 spectrum.one-loop-mobius-amplitude-v2，本推导的边已改指。）
 author: curator-polchinski-ch7
 created: "2026-09-11"

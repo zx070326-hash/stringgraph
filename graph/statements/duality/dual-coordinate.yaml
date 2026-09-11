@@ -31,8 +31,14 @@ sources:
       ⚠ 第二条恒等式 ∂_σX' = −i∂_τX 由同一换算把 X ↔ X' 互换得到，
       **原书没有逐字写出这一条**；它在 §8.6 的端点差计算里被使用
       （branes.wilson-line-eigenvalues-are-brane-positions 的推导）。
+superseded_by: duality.dual-coordinate-v2
 tags: [t-duality, dual-coordinate, definition, worldsheet, compactification, phase2]
 notes: |
+  ★【已被换代（curator，2026-09-11，依 reviewer-batch15）】本卡 statement 把导数换算
+  ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄ 归给 conv.worldsheet-complex-coords，属误标：
+  该约定是平面坐标 z = σ^1 + iσ^2（那里 ∂_1 = ∂ + ∂̄、∂_2 = i(∂ − ∂̄)），
+  而来源用的是柱面坐标 z = e^{−iw}。duality.dual-coordinate-v2 已改标，公式不变。
+
   **为什么单建这张卡**（reviewer-ch8 建议，2026-09-11）：对偶坐标原先被嵌在
   duality.t-duality-is-cft-isomorphism 里，导致凡是只需要「X' 的定义 + 导数换算」
   的下游节点（N ↔ D 交换、无取向理论的宇称、Wilson 线与膜位置）都被迫依赖

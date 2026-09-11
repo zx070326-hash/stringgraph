@@ -60,11 +60,22 @@ depends_on:
       而 k_0·(p + N k_0) = k_0·p（k_0² = 0）保证 (★) 沿整条塔成立
       （worldsheet.ddf-operators-v5 说明 (b)），故 k(0) 在整条塔上恒为 1。
       这条边不是 inferred：塔是目标陈述的定义域。
+  - id: worldsheet.free-boson-vertex-algebra-conformal-vector
+    note: |
+      供给 G–N 的 L_(n) = ω_{n+1}（共形向量 ω 存在、c = D）与本图 Sugawara 型 L_n 是同一族算子，
+      从而 G–N 的 ℛ_(1)（(2.55) 中 Δ = 1 的 primary 条件）与本图旧协变物理态条件（a = 1）是同一组条件
+      ——下一条边的 note 里那句「逐字相同」正是靠这条边成立；(3.1) 里 k(−1)e^{nk} = (1/n)L_(−1)e^{nk}
+      用到的 L_(−1) = T 也由该卡 (1)(b) 供给。**非 inferred**：该卡陈述 (2) 逐字就是这条识别。
+      【新增记录，2026-09-11（curator，fixes-batch-c，依 reviewer-batch16）】此前本推导没有任何边承载这条识别
+      （与 --via-vertex-algebra-primary 不同，这里连 inferred 边都没有），它藏在 old-covariant 那条边的 note 里。
+      ⚠ 代价：新卡是 physical-argument，本推导的有效状态由 rigorous 降到 physical-argument。
+      目标卡片 worldsheet.ddf-transverse-oscillator-algebra-v2 的 best 是 --via-lean（formalized），**不受影响**。
   - id: worldsheet.old-covariant-physical-states
     note: |
       G–N (3.1) 是**物理态之间的李括号**：ξ(−1)e^{mk} 与 η(−1)e^{nk} 都取自 G–N 的物理态空间
       ℛ_(1)（(2.55) 中 Δ = 1，即 L_(n)ψ = δ_{n0}ψ ∀n ≥ 0），这与本卡的旧协变条件
-      (L_0 − a)|ψ⟩ = 0 ∧ L_m|ψ⟩ = 0 (m > 0) 在 **a = 1** 时逐字相同。
+      (L_0 − a)|ψ⟩ = 0 ∧ L_m|ψ⟩ = 0 (m > 0) 在 **a = 1** 时逐字相同
+      （「L_(n) 与本图 L_n 是同一族」由上一条边 worldsheet.free-boson-vertex-algebra-conformal-vector 供给）。
       本推导用到「被取零模的那两个态是权 1 的物理态」这一前提。
 sources:
   - ref: gebert-nicolai-1995

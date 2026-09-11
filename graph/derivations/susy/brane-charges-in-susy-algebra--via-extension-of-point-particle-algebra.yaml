@@ -21,6 +21,14 @@ depends_on:
     note: |
       供给 (13.2.9c) 中 `Q^R_{M_1…M_p}` 的物理含义（Dp 膜带 R–R (p+1)-形式荷，IIA 偶 p / IIB 奇 p）。
       没有它，(13.2.9c) 右端只是一组无解释的守恒荷。
+  - id: branes.d-brane-tension-v2
+    note: |
+      供给 (13.2.9c) 里显式出现的 **τ_p**：荷按「每单位世界体一个」归一后（原书 p.145 的归一化改动句），
+      膜张力 τ_p 直接成为膜荷项的系数 τ_p/p!（与 F 弦项里的 (2πα')^{−1} 同理）。
+      **不标 inferred**：τ_p 是 (13.2.9c) 页面上写着的符号，该卡就是本图给 τ_p 定值的那张。
+      （2026-09-11 按 lead 裁决补边；边直接指 branes.d-brane-tension-v2——
+      branes.d-brane-tension 已于同日被换代，v2 只改了 T 对偶递推式的挂点与归属，τ_p 的值不变。）
+      ⚠ 本边只供给 τ_p 这个量本身；**(13.2.9c) 的系数 τ_p/p! 原书不推导**（见 gaps 第二条）。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.2, pp. 144–145：(13.2.9a)(13.2.9b)(13.2.9c) 与归一化改动句 → (13.2.10) → 自承缺口句「the algebra (13.2.9) is still not complete: the magnetic NS–NS charge is missing」"
@@ -38,21 +46,25 @@ summary: |
   (3) 由 (13.2.10) `β^{μ_1}⋯β^{μ_p} = β^⊥Γ^0`，(13.2.9c) 的旋量结构与 §13.2 前半得到的
       「Dp 膜保留 `Q + β^⊥Q̃`」完全对应：膜荷项与它保留的那 16 个超对称是同一结构。
   (4) 荷的归一化被改为「每单位世界体一个」，故弦张力 `(2πα')^{−1}` 与膜张力 `τ_p` 显式出现。
+      `τ_p` 的取值由 branes.d-brane-tension-v2 供给（2026-09-11 补边；此前该量在本推导里悬空）。
 gaps:
   - "**★ 原书自承代数不完整**：p.145 逐字「Incidentally, the algebra (13.2.9) is **still not complete**: the *magnetic NS–NS charge* is missing. This is not carried by D-branes or F-strings. We discuss this further in the next chapter.」⇒ 任何以 (13.2.9) 为依据的 BPS 论证都带着这个缺口。"
   - "**(13.2.9) 没有被推导**：原书直接写出这三式，没有从代数一致性、从世界体作用量、或从振幅计算把系数 `(2πα')^{−1}`、`τ_p/p!` 定出来。本推导只复述结构与来源，不复述一个不存在的论证。〔并入 branes 版〕那一版把本推导的来路记为「由 T 对偶后的守恒组合与 D 膜荷接起来、并**由类比**写出」（该版推导 id 即 `--via-t-dual-supercharges-and-brane-charges`）；两版一致的是：§13.2 **不**从世界面超荷的算子代数计算 `{Q, Q̃̄}`，系数 `(2πα')^{−1}`、`τ_p/p!` 也没有被任何计算定出来。"
   - "**没有新的最一般性主张**：App. B 的「most general algebra」限定在点粒子；ch.13 补上膜荷后**没有**声明 (13.2.9) 加上磁 NS–NS 荷就是最一般的。即图上现在没有任何节点断言十维 type II 超代数的完备形式。"
   - "**(13.2.10) 的整体符号未定**：原书逐字「up to an overall sign」（与 §13.1 (13.1.6) 的 `up to signs` 同源）。"
   - "**§11.6 未核**：原书说膜荷「first in section 11.6」（杂化弦 (11.6.32)），本项目尚未抽该节（ch13 抽取记录 §3.3）。"
+  - "**τ_p 这条边已补（2026-09-11，lead 裁决）**：原先本推导写出 (13.2.9c) 的系数 `τ_p/p!` 却没有指向任何给 τ_p 定值的卡，记为「少一条边待 lead 裁决」；现已加非 inferred 边 branes.d-brane-tension-v2。⚠ 残留缺口不变：**系数 τ_p/p! 本身原书不推导**，本边只保证 τ_p 这个符号在图上有定义与取值。"
   - "**归一化改动的影响未追踪**：'all charges normalized to one per unit world-volume' 与图上其他卡（如 branes.d-brane-rr-charge-value 的 μ_p）的荷归一化是否一致，原书没有给出换算，本图也没有核。〔并入 branes 版〕具体地：(13.2.9c) 用 `τ_p`，§13.3 的 R–R 荷用 `μ_p`（branes 版记为 (13.3.5)，其 statement 另一处写 (13.3.7)，两处自相矛盾，未复核原书）。"
 notes: |
   【去重记录（2026-09-11）】并行建卡 `branes.brane-charges-in-susy-algebra--via-t-dual-supercharges-and-brane-charges`
   论证同一命题，lead 裁决保留本卡；该版独有的 gaps 与逐字证据已并入本卡（标〔并入 branes 版〕），
   旧推导按 docs/STATUS_LEVELS.md「旧推导的去留」保留不删（预期 stale 警告）。
 
-  【★ 与 branes 版的一处实质差异：少一条边】branes 版的 depends_on 里有
+  【★ 与 branes 版的一处差异：少一条边 —— 已补（2026-09-11，lead 裁决）】branes 版的 depends_on 里有
   `branes.d-brane-tension`（理由：(13.2.9c) 显式出现 `τ_p`，荷按每单位世界体归一后张力作为系数出现），
-  本卡没有这条边。本轮去重只并 sources/notes/gaps，**未擅自加边**；建议 lead 裁决后补一条非 inferred 边。
+  本卡原先没有这条边。去重那一轮只并 sources/notes/gaps、未擅自加边并把它记为「待 lead 裁决」；
+  **lead 已裁决补边**，现已加非 inferred 边，且直接指 `branes.d-brane-tension-v2`
+  （`branes.d-brane-tension` 于同日被换代，v2 只改了 T 对偶递推式的挂点与归属，τ_p 的值不变）。
   同理，branes 版 summary 里记了 `Q^{NS}_M` 是 1-形式、**与 `B_{MN}` 耦合**，本卡 summary 未写（图上也无 F 弦荷节点）。
 author: curator-v2-appB
 created: "2026-09-11"

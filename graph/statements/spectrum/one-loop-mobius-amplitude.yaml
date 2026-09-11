@@ -26,21 +26,9 @@ statement: |
         Z_{M₂} = ± 2 i n (2¹³ V₂₆) / (4π (8π²α')¹³) ∫₀^∞ ds  ϑ₀₀(0, 2is/π)^{−12} η(2is/π)^{−12} 。
       t → 0 处同样发散，对应「一个 tadpole 来自圆盘、一个来自射影平面」的过程。
 
-  (5)（**长圆柱通道的无质量项系数是 −24**——本图补算，**原书未写出这一展开**）
-      (4) 的被积函数按 nome q' = exp(−4s)（即 τ = 2is/π、q' = e^{2πiτ}）展开：
-        ϑ₀₀(0, 2is/π)^{−12} η(2is/π)^{−12}
-          = q'^{−1/2} ∏_{m=1}^{∞} (1 − q'^m)^{−24} (1 + q'^{m−1/2})^{−24}
-          = exp(2s) **− 24** + O(exp(−2s)) ,
-      因为 q'^{1/2} 阶只有 (1 + q'^{1/2})^{−24} 贡献，系数 −24，而其余因子从 q'^1 起。
-      与圆柱 (7.4.4) 的 η(is/π)^{−24} = exp(2s) **+ 24** + O(exp(−2s)) **符号相反**。
-      ⚠ 这一条是 (7.4.24) 里 ∓ 的上号 **−** 对应 SO(n)、而本卡 (3) 的 ± 上号 **+** 对应 SO(n)
-      这个**表观矛盾的唯一来源**：把公共因子取作 +24V₂₆ 之后，Möbius 的 −24 被吸收成整体负号。
-      详见 spectrum.bosonic-unoriented-tadpole-cancellation-so8192--via-three-surface-sum。
-
   **本卡不断言什么**：不断言 ϑ₀₀ 的任何性质（原书 §7.2 的 θ 函数一节**全部无证明**，
   本图未建 θ 卡）；不断言 cross-cap 态 |C⟩ 的形式（原书未给，留作习题 7.15）；
-  不断言 ± 号与 SO/Sp 的对应被逐一验证（原书只写出计数，见本卡唯一一条推导的 gaps）；
-  (5) 不断言展开的余项估计（只给到 O(e^{−2s}) 这一阶）。
+  不断言 ± 号与 SO/Sp 的对应被逐一验证（原书只写出计数，见本卡唯一一条推导的 gaps）。
 uses_conventions:
   - conv.worldsheet-euclidean
   - conv.worldsheet-complex-coords
@@ -57,19 +45,14 @@ sources:
       ⚠ 记号：原书写 **Sp(k)**，且明说「in our notation Sp(k) corresponds to n = 2k Chan–Paton
       states」；本图既有节点 spectrum.chan-paton-gauge-group 用的是 **USp(n)** 记法，
       两者的换算是 USp(n) = Sp(n/2)，见 notes。
-      ⚠⚠ **(5) 不在这个 loc 之内**：抽取记录 #E37 逐条列出了 (7.4.20)–(7.4.23) 与 p.229 首段，
-      其中**没有**这条 s → ∞ 展开。(5) 的来源见下一条 source。
-  - ref: polchinski-1998-v1
-    loc: "§7.4, eq. (7.4.23) 与 (7.4.24) 之间的未写步骤, p.228–229（原书跳过；本条是本图的补算）"
-    note: |
-      **(5) 不是原书文字，是本图的复算**：reviewer-ch7 于 2026-09-11 独立算出
-      ϑ₀₀(0,2is/π)^{−12}η(2is/π)^{−12} = e^{2s} − 24 + O(e^{−2s})，curator 于同日复核
-      （ϑ₀₀(0,τ) = ∏(1−q^m)(1+q^{m−1/2})²、η(τ) = q^{1/24}∏(1−q^m)，q = e^{2πiτ}，τ = 2is/π）。
-      原书从 (7.4.23) 直接跳到 (7.4.24) 的合并结果，**中间这一步没有写**；
-      抽取记录 §0.4 的独立复算也只用了「Möbius 给交叉项 ∓2·2¹³n」这个**结果**，
-      没有展开出 −24。故本条按「本图补算」登记，不冒充原书逐字。
+superseded_by: spectrum.one-loop-mobius-amplitude-v2
 tags: [spectrum, one-loop, mobius-strip, unoriented, cross-cap, chan-paton, theta-function]
 notes: |
+  ★【已被换代（curator，2026-09-11，依 lead 裁决）】main 提交 2249859 曾就地在本卡 statement 里加了一条 (5)
+  （闭弦通道展开 ϑ₀₀(0,2is/π)^{−12}η(2is/π)^{−12} = e^{2s} − 24 + O(e^{−2s})，本图补算）。
+  按原则 1（陈述不可变）本卡 statement 已恢复为 2249859 之前的原文；含 (5) 的版本是
+  spectrum.one-loop-mobius-amplitude-v2。本卡 statement 本身没有错，只是少那一条。
+
   由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E37 建立。
   **四曲面各一卡**（见 spectrum.one-loop-torus-amplitude 的 notes）。
 
@@ -77,12 +60,7 @@ notes: |
   spectrum.chan-paton-gauge-group 写作 USp(n)（n 为 Chan–Paton 指标数，n 偶）。
   两者指同一群：**USp(n) = Sp(n/2)**。凡把本卡与那张卡连边的推导都要带这句换算。
 
-  **下游**：(3) 的 ± 号、(4) 的 2¹³、(5) 的 −24 共同给出 (7.4.24) 里 (2¹³ ∓ n)² 的交叉项
-  ∓2·2¹³n，见 spectrum.bosonic-unoriented-tadpole-cancellation-so8192。
-
-  **2026-09-11 增补 (5)（reviewer-v1-ch7 CONFIRMED 的必修项）**：原先本卡只有 (3) 的
-  「+ ↔ SO(n)」，而下游 tadpole 卡的 (7.4.24) 写「− ↔ SO(n)」，两处的 ± 约定相反却无任何说明，
-  读者无法判断哪一处写错。(5) 把翻转的来源（闭弦通道展开的无质量系数 −24）显式登记，
-  使两处都是对的且可核。**(5) 是本图补算，不是原书内容**，见 sources 第二条。
+  **下游**：(3) 的 ± 号与 (4) 的 2¹³ 是 (7.4.24) 里 (2¹³ ∓ n)² 交叉项 ∓2·2¹³n 的来源，
+  见 spectrum.bosonic-unoriented-tadpole-cancellation-so8192。
 author: curator-polchinski-ch7
 created: "2026-09-11"

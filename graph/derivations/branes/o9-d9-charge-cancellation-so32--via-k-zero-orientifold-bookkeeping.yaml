@@ -7,13 +7,17 @@ depends_on:
     note: 取 k = 0：一张 O9 面，荷 −2^{4−0} = −16；16 张 D9 膜。总荷 −16 + 16 = 0。
   - id: branes.d-brane-rr-coupling
     note: 供给「D9 膜是 10-形式势 C_10 的源、耦合 (13.2.7) 积分跑遍全时空」——把 §10.8 的 μ_10 ∫ C_10 读成 D9 膜。
-  - id: spectrum.chan-paton-gauge-group
-    inferred: true
+  - id: worldsheet.type-i-open-string-gauge-multiplet
     note: |
-      供给「type I 的规范群 SO(32) 是 Ω 投影下的 Chan–Paton 群」。原书此处把「type I SO(32) theory」当作
-      已知名词使用，不在本节论证 SO(32) 的 CP 来源；且那张卡是玻色弦 Vol.1 §6.5 的
-      （超弦版 worldsheet.type-i-open-string-gauge-multiplet 在 ch10 分支，未合）。故标 inferred。
-  - id: worldsheet.type-i-tadpole-cancellation-so32
+      供给「type I 的规范群是 Ω 投影下的 Chan–Paton 群 SO(n)/Sp(n)（无取向情形），
+      规范微子在伴随表示」——即本推导所用的「type I SO(32) theory」这个名词的谱学内容。
+      **不标 inferred**：该卡就是超弦（Vol.2 §10.6）版本的 Chan–Paton 陈述，
+      与本章 §13.2 使用该名词时的语境一致。
+      （2026-09-11 由 spectrum.chan-paton-gauge-group（玻色弦 Vol.1 §6.5 版、当时标 inferred）
+      改指本卡；原 note 里「超弦版在 ch10 分支未合」的说法已过时——该卡已在 main 上。）
+      ⚠ 本边只供给名词的谱学内容，**不**供给「n = 32」——那由
+      worldsheet.type-i-tadpole-cancellation-so32-v2 那条边供给。
+  - id: worldsheet.type-i-tadpole-cancellation-so32-v2
     note: |
       供给 (1) 的全部内容：type I 的 R–R tadpole 是 10-形式势 C_10 的源 μ_10 ∫ C_10，且只对 SO(32) 相消。
       三处逐字（方向均为 §10.8 → 本章）：
@@ -40,7 +44,7 @@ summary: |
   (5) 环面紧化只增加绕周期方向的世界面 = 交换有绕数的（有质量）闭弦，无危险 tadpole，
       故相消条件不受紧化影响（原书断言，未验证）。
 gaps:
-  - "★ **本推导的真正输入是 §10.8 的 tadpole 相消**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32（三处逐字见该条 depends_on 的 note；2026-09-11 随 ch10 分支接上），本卡有效状态因此不高于该卡。⚠ 残留缺口：该卡的 (n ∓ 32)² 记账与本卡的「16 D9 + 一张 O9」记账原书不调和（Q1）；且该卡不断言 tadpole 的符号，而本卡的「O9 带 −16」是带符号的。"
+  - "★ **本推导的真正输入是 §10.8 的 tadpole 相消**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32-v2（2026-09-11 由 v1 改指 v2，v2 只订正了 (10.8.19) 前缀里 α' 的幂次，物理内容不变；三处逐字见该条 depends_on 的 note；2026-09-11 随 ch10 分支接上），本卡有效状态因此不高于该卡。⚠ 残留缺口：该卡的 (n ∓ 32)² 记账与本卡的「16 D9 + 一张 O9」记账原书不调和（Q1）；且该卡不断言 tadpole 的符号，而本卡的「O9 带 −16」是带符号的。"
   - "★ **计数单位未声明**（Q1 未裁）：p. 144 写 16 张 D9，p. 141 的「each Chan–Paton degree of freedom … as a 9-brane」蕴含 32 张；原书不调和。本推导按 16 记账。"
   - "**环面紧化不改变相消**：原书逐字「it is not hard to verify explicitly that this does not happen」——未验证（抽取记录 §3.1 第 5 条）。"
   - "**「O 面是荷的汇」是从 tadpole 相消倒推的**（p. 147「We deduced from the cancellation of divergences」），本章不独立计算 O 面荷。"

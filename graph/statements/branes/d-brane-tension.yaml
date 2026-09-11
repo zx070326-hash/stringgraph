@@ -24,8 +24,15 @@ sources:
       ⚠ 原书说「the same T-duality relation as in the bosonic string」但**不写出该关系**；
       Vol.1 §8.7 的递推 τ_p = τ_{p−1}/(4π²α')^{1/2}（polchinski-1998-v1#E156，二手源）
       与本章 (13.3.23) 给出的 τ_p/τ_{p−1} = 1/(2πα'^{1/2}) 相同（抽取记录 Q7 已验，不是矛盾）。
+superseded_by: branes.d-brane-tension-v2
 tags: [d-brane, tension, type-ii, string-coupling, t-duality]
 notes: |
+  ★【已被换代（curator，2026-09-11，依 reviewer-branes）】本卡把 T 对偶递推式
+  τ_p/τ_{p−1} = 1/(2πα'^{1/2}) 紧接在 (13.3.4) 之后，读起来像原书在那里写了该式；
+  原书在 (13.3.4) 之后只有一句「This satisfies the same T-duality relation as in the bosonic
+  string.」而**不给式子**。branes.d-brane-tension-v2 把该式移到 (13.3.23) 之后并标「由 (13.3.23) 得」。
+  ⚠ 数值内容不变，改的只是归属。本卡文本按规则不改。
+
   【与 Vol.1 §8.7 的关系】玻色弦 D 膜张力 (8.7.26) 在本图无卡
   （polchinski-1998-v1#E156 是二手源，且 branes.dbi-action-is-born-infeld-type 明令不写张力）。
   本卡是本图第一张给出 τ_p 数值的卡，且只对 type II 超弦。

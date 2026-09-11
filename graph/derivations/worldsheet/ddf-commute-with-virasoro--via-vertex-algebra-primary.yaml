@@ -43,8 +43,9 @@ depends_on:
       因为那是图中最接近的卡但**多要鬼场、只断言局域性、场集合 E 逐字排除 e^{ik·X}**。
       **原 gaps 第 1 条逐字说「补上那张卡是把本条升到 rigorous 的唯一待办」——本轮补上了。**
       ⚠ 仍需注意本卡的边界 (N4)(N6)：它不断言共形向量 ω 与本图 Sugawara L_m 是同一族算子，
-      也不断言 𝒴(e^{jk}, z) 就是 :e^{i j k_0·X}:；这两条仍分别由下面的
-      worldsheet.virasoro-generators-free-boson（inferred）与 ddf-operators-v6 的 convention_map 承担。
+      也不断言 𝒴(e^{jk}, z) 就是 :e^{i j k_0·X}:；这两条分别由下面的
+      worldsheet.free-boson-vertex-algebra-conformal-vector（非 inferred，2026-09-11 起）与
+      ddf-operators-v6 的 convention_map 承担。
   - id: worldsheet.ddf-operators-v6
     convention_map: |
       G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条）：G–N 的格点向量对应本图 α_0-归一化的动量
@@ -58,13 +59,18 @@ depends_on:
       被断言的对象。G–N (3.2) 把横向 DDF 算子**定义为零模** A^ξ_m := (ξ(−1)e^{mk})_0，
       与 v5 的围道定义在上面的字典下同型；类光条件 k_0² = 0（G–N: k·k = 0）与横向条件 ε·k_0 = 0
       （G–N: ξ·k = 0）都是 v5 写死的前提，也正是 G–N (3.1)/(3.3) 逐字用到的两条。
-  - id: worldsheet.virasoro-generators-free-boson
-    inferred: true
+  - id: worldsheet.free-boson-vertex-algebra-conformal-vector
     note: |
-      目标陈述里的 L_m（Sugawara 型 ½ Σ_n :α_{m-n}·α_n:）。G–N 的 L_(n) 由公理 (2.35) ω_{n+1} = L_(n)
-      从共形向量 ω 得到；对自由玻色/格点顶点代数 ω 就是 Sugawara 向量，两者给出同一族算子。
-      **但 researcher 本轮未读到 G–N 写出 Sugawara 显式表达式的那一页**（读的是 pp. 571–572, 579–583, 593–600），
-      故这条识别在来源处找不到逐字论证，标 inferred。
+      供给「目标陈述里的 L_m（Sugawara 型 ½ Σ_n :α_{m-n}·α_n:，worldsheet.virasoro-generators-free-boson）
+      与 G–N 公理 (2.26) 从共形向量 ω 得到的 L_(n) = ω_{n+1} 在动量塔上是同一族算子」这一条识别，
+      以及 ω 的存在与 c = D。本推导第 2–5 步在 L_(n) 上工作、结论翻回本图的 L_m，全靠这条边。
+      **非 inferred**：该卡的陈述 (2) 逐字就是这条识别。
+      【改挂记录，2026-09-11（curator，fixes-batch-c，依 reviewer-batch16）】此前本条边 inferred 到
+      worldsheet.virasoro-generators-free-boson（Sugawara 定义卡），理由是「researcher 未读到 G–N 写出 Sugawara
+      显式表达式的那一页，识别无逐字论证」。现在那条识别单独成卡（status physical-argument，缺口登记在其推导 gaps），
+      本边改指新卡并撤销 inferred。⚠ 代价：新卡是 physical-argument，本推导的**有效状态**由 rigorous 降到
+      physical-argument——这是实话（识别此前藏在 inferred 边里，等价于假设成立）。目标卡片 best 仍是
+      --via-lean（formalized），不受影响。
   - id: worldsheet.momentum-tower-fock-space
     note: |
       目标陈述的量词定义域：「在该扇区的动量塔 ⊕_{N∈Z} F(p + N k_0) 上」，且 L_m 逐层用该层动量。
@@ -158,7 +164,8 @@ gaps:
     **不要求非退化、正定或有限秩**）。桥接边已改指该卡并撤销 inferred。
     **残留限制**（不再是 open，但仍是真实的接缝，已分别登记）：
     (i) 新卡的边界 (N4)：它不断言其共形向量 ω 给出的 ω_{n+1} 与本图 Sugawara 型
-        worldsheet.virasoro-generators-free-boson 的 L_m 是同一族算子——这仍是下面那条 inferred 边；
+        worldsheet.virasoro-generators-free-boson 的 L_m 是同一族算子——**2026-09-11 起由
+        worldsheet.free-boson-vertex-algebra-conformal-vector 承载（非 inferred，但 physical-argument）**；
     (ii) 新卡的边界 (N6)：𝒴(e^{jk}, z) ↔ :e^{i j k_0·X}: 的字典仍是本推导 ddf-operators-v5 那条边的
          convention_map（本项目推断，见 gaps 第 4 条）。
   - |
@@ -250,5 +257,10 @@ notes: |
 
   **不碰的东西**：本节点不改 --via-conformal-weight（另一 agent 持有），不改 worldsheet.ddf-operators-v5，
   不改 worldsheet.no-ghost-theorem-v4--via-goddard-thorn。
+
+  **有效状态（2026-09-11 再更新，curator fixes-batch-c）**：Sugawara 识别边由 inferred 改为指向
+  worldsheet.free-boson-vertex-algebra-conformal-vector（physical-argument），本推导的 effective 随之从
+  rigorous 降到 **physical-argument**。自身 status 仍 rigorous（CMP 论文内的形式级数证明没变）；
+  变的是「识别 L_(n) = ω_{n+1} ↔ Sugawara L_n」这一步现在被诚实地计入。升回 rigorous 的路径见新卡 notes。
 author: curator
 created: "2026-09-11"

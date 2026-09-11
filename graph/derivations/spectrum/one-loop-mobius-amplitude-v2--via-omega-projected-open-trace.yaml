@@ -1,5 +1,5 @@
-id: spectrum.one-loop-mobius-amplitude--via-omega-projected-open-trace
-target: spectrum.one-loop-mobius-amplitude
+id: spectrum.one-loop-mobius-amplitude-v2--via-omega-projected-open-trace
+target: spectrum.one-loop-mobius-amplitude-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -69,5 +69,9 @@ notes: |
 
   **2026-09-11 增补 (5)（reviewer-v1-ch7 CONFIRMED）**：目标陈述新增 (5)（闭弦通道无质量系数 −24），
   本推导相应补一步。这一步解释了为什么 (3) 的「+ ↔ SO(n)」与 (7.4.24) 的「− ↔ SO(n)」并不矛盾。
+  【换代记录，2026-09-11（curator，fixes-batch-c，依 lead 裁决）】(5) 原是就地写进旧卡 statement 的
+  （main 2249859），违反原则 1；现旧卡恢复原文并 superseded_by，本推导改名改指
+  spectrum.one-loop-mobius-amplitude-v2（纯换名式换代：论证原样适用）。
+  reviewer-verified: reviewer-batch18, 2026-09-11（(5) 的 −24：q'^{−1/2}(1+q'^{1/2})^{−24} 的一次项）
 author: curator-polchinski-ch7
 created: "2026-09-11"

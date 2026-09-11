@@ -23,7 +23,7 @@ depends_on:
       ⚠ 玻色弦卡；「2^k 张固定面」的计数在那张卡里没有写成命题。
   - id: branes.t-duality-changes-brane-dimension
     note: 供给「在 k 个方向上 T 对偶 ⇒ D9 → D(9−k)」；玻色弦卡，同上外包。
-  - id: worldsheet.type-i-tadpole-cancellation-so32
+  - id: worldsheet.type-i-tadpole-cancellation-so32-v2
     note: |
       供给 (1)(3) 的全部输入：type I 非 SO(32) 时的单圈发散 = R–R 10-形式场方程的不一致，
       以及「圆盘 tadpole 由无取向 cross-cap 相消」。三处逐字，方向一致（§10.8 → 本章）：
@@ -47,7 +47,7 @@ summary: |
   (4) 记账：k 个方向对偶后有 2^k 张 O 面、仍是 16 张 D 膜，总荷为零 ⇒ 每张 O 面荷 = −2^{4−k} × 一张 D 膜荷。
       （复算：2^k·(−2^{4−k}) = −16 = −(D 膜总荷)。）
 gaps:
-  - "★ **本推导的输入是 §10.8 的 tadpole 相消**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32（三处逐字见该条 depends_on 的 note；2026-09-11 随 ch10 分支接上），本卡有效状态因此不高于该卡。⚠ 残留缺口：该卡自身**不断言 tadpole 的整体符号**（原书逐字「it should be n ∓ 32」），而本推导 (4) 的记账是**带符号的**（O 面荷 = −2^{4−k} × D 膜荷）；那个负号在原书来自「汇」的物理图像与总荷为零的要求，不来自 §10.8 的计算。"
+  - "★ **本推导的输入是 §10.8 的 tadpole 相消**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32-v2（2026-09-11 由 v1 改指 v2，v2 只订正了 (10.8.19) 前缀里 α' 的幂次，物理内容不变；三处逐字见该条 depends_on 的 note；2026-09-11 随 ch10 分支接上），本卡有效状态因此不高于该卡。⚠ 残留缺口：该卡自身**不断言 tadpole 的整体符号**（原书逐字「it should be n ∓ 32」），而本推导 (4) 的记账是**带符号的**（O 面荷 = −2^{4−k} × D 膜荷）；那个负号在原书来自「汇」的物理图像与总荷为零的要求，不来自 §10.8 的计算。"
   - "**本章不重算任何 tadpole**：这是纯物理演绎（「Thus we deduce」），唯一可能的独立路线（D 膜–O 面之间的力）原书明写推给读者（p. 147）。"
   - "**「仍是 16 张 D 膜」的计数**：原书 p. 138 只说「16 D8-branes between two orientifold hyperplanes」并外包给第 8 章；「16 = 32/2（CP 指标配镜像）」的记账原书不写，且与 p. 141「each Chan–Paton degree of freedom … as a 9-brane」（蕴含 32）并存不调和（Q1 未裁）。本推导按原书数字 16 记账，不解释其来源。"
   - "**「BPS 态的总质量与总荷线性」只有 (13.2.9) 层面的支撑**，而 (13.2.9) 原书自承「still not complete」；App. B (B.2.39) 只对点粒子荷（现已抽，L1）。"

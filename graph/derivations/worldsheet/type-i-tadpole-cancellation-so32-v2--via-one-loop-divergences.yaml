@@ -1,5 +1,5 @@
-id: worldsheet.type-i-tadpole-cancellation-so32--via-one-loop-divergences
-target: worldsheet.type-i-tadpole-cancellation-so32
+id: worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences
+target: worldsheet.type-i-tadpole-cancellation-so32-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -17,7 +17,8 @@ depends_on:
     inferred: true
     note: |
       供给 Ω（Klein 瓶与 Möbius 带的来源）。**标 inferred**：本图那张卡是玻色弦语境的，
-      超弦的完整作用 (10.8.13)/(10.8.14)（Ω² = exp(πiF)）本图无节点。
+      超弦的完整作用 (10.8.12)–(10.8.15)（Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、Ω² = exp(πiF)、
+      四项投影算符 (1+Ω+Ω²+Ω³)/4）本图无节点；见下面专门为 (10.8.12) 补的来源条目。
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.8, eq. (10.8.19), p. 42（结论式；逐字 'The R–R tadpole vanishes only for the gauge group SO(32).' 与 'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32.'）"
@@ -32,7 +33,17 @@ sources:
       且所谓的 'more detailed analysis' 不给。
   - ref: polchinski-1998-v2
     loc: "§10.8 脚注 7, p. 39（NS–NS 与 R–R tadpole 必须分别在拓扑求和后为零）"
-    note: L1。决定结论的逻辑形式。
+    note: L1（sec10-8.md#E68）。决定结论的逻辑形式。
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eq. (10.8.12), pp. 41–42：'In the open string Ω acts as Ωψ^μ(w)Ω^{−1} = ψ̃^μ(π − w̄) = ψ^μ(w − π), **using the doubling trick (10.2.15)**.'；随后 (10.8.13) Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、(10.8.14) Ω² = exp(πiF)、(10.8.15) 投影算符 (1+Ω+Ω²+Ω³)/4"
+    note: |
+      L1（sec10-8.md#E70，该条已单页重渲染复核）。**新补（curator，2026-09-11，依 reviewer-v2-ch10b）**：
+      本推导的 Möbius 支完全依赖 Ω 在开超弦费米子上的作用，而这一步原书明写是由
+      **doubling trick (10.2.15)** 得到的；旧版来源清单只列到 (10.8.13)–(10.8.15)，
+      漏了 (10.8.12) 与那条明写依赖（polchinski-1998-v2.md#E48 同漏，见 sec10-8.md#E70 末尾的告警）。
+      ⚠ 本图有 worldsheet.open-string-doubling-trick，但那张卡是**玻色弦**语境（Neumann 条件使 T̄ 成为 T 的
+      镜像解析延拓）；(10.2.15) 是它在世界面费米子上的对应版本，本图无节点，
+      故这里只补来源、**不**加依赖边（加了会是一条名实不符的边）。
   - ref: polchinski-1998-v1
     loc: "§7.4, eq. (7.4.1)、(7.4.15)、(7.4.22)（玻色弦的同类计算；Vol.2 明写引用）"
     note: |
@@ -45,6 +56,8 @@ summary: |
   (2) Klein 瓶 K₂：Z_{K₂,0} ∝ 2^10，Z_{K₂,1} = −Z_{K₂,0}。
   (3) Möbius 带 M₂：Z_{M₂,1} ∝ ±2n·2^5（上号 SO(n)）。
   (4) 相加 R–R 部分：n² ∓ 2·32·n + 32² = (n ∓ 32)²，即 (10.8.19)。
+      三个拓扑的公因子是 V_10/(8π(8π²α')⁵)·∫ds[16 + O(e^{−2s})]（α' 的幂次见目标卡片
+      notes 的【v2 改了什么】：页图上的 (8π²α'²)⁵ 是误读）。
       故 R–R tadpole 为零 ⟺ n = 32 且取正交投影 ⟺ 规范群 SO(32)。
   (5) 为什么这是真正的不一致：发散对应 10-形式势 C_10 的 tadpole，
       C_10 无动能项 ⟹ 传播子 1/0 ⟹ 发散 μ_10²/0；C_10 的运动方程就是 μ_10 = 0，
@@ -58,6 +71,8 @@ summary: |
   (3) 本图没有 Vol.1 §7.4 的单圈振幅节点，计算链大部分在图上悬空；
   (4) 整个计算是路径积分/模变换层面的形式操作。
 gaps:
+  - "**(10.8.19) 前缀里 α' 的幂次不是直接读出来的**：页图上七处都看起来是 (8π²α'²)⁵，抽取者改为独立复算（两次变量代换 + 量纲分析），判定正确的是 (8π²α')⁵（sec10-8.md §0.4(b)）。目标卡片 v2 采用复算结果。**该前缀是三个拓扑的公因子，不影响 (n ∓ 32)² 与 SO(32)**，但它意味着本推导在这一处用的是抽取者的复算而不是原书页面上的字面读数。→ 待 researcher 核一份印刷版或另一版次以定案。"
+  - "**「当且仅当」的 ⟸ 半是本图做的一步算术**：原书只写 'The R–R tadpole vanishes only for the gauge group SO(32).'（⟹ 方向）。反方向（n = 32 加正交投影 ⇒ Z₁ = 0）是把 n = 32 与上号代入 (n ∓ 32)² 得 0，原书不单独写。该步平凡，但依赖 ∓ 的整体符号正确，而那个符号原书自承不是算出来的（下一条）。"
   - "**C_10 的引入是「猜」的**：原书逐字 'One can guess the resolution of this as follows' 与 'as indeed a more detailed analysis does show'——**不给该分析**。这是本推导最弱的一环，因为「发散代表真正的不一致」这个结论完全依赖它。"
   - "**tadpole 的整体符号未定**：原书逐字 'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32'。理由（cross-cap 数只 mod 2 守恒，边界数则不然）是一条幺正性论证，本图无节点。"
   - "**辛支「无解」这一步是读出来的，不是原书论证的**：候选集只有 SO(n) 与辛群（Sp(k) ↔ n = 2k）；取 (10.8.19) 的下号得 (n + 32)²，对任何 n ≥ 0 都不为零 ⇒ 辛支不给解。原书只写 'changing from a symplectic to orthogonal projection changes the sign of RP₂'，**不明说辛支无解**；§10.8 全节也不出现 'USp(32)'。同理「纯闭弦无取向理论 n = 0 也不一致」是由 (10.8.19) 代入 n = 0 读出的（Z₁ ∝ −i·32² ≠ 0），原书不单独讨论（sec10-8.md#E75）。"

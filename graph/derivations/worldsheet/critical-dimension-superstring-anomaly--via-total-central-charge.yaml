@@ -8,8 +8,12 @@ depends_on:
       供给 c^g = −15（= −26 + 11）。
       **不标 inferred**：原书 (10.1.20) 逐字写出 'The ghost central charge is then −26 + 11 = −15'，
       即在原地引用了这一步。
-  - id: worldsheet.tt-ope-central-charge
-    note: 供给中心荷的定义与加性（c^tot = c^m + c^g）。
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      供给中心荷的定义与加性（c^tot = c^m + c^g）。**用的是定义半**：本推导只需要「c 是 TT OPE
+      四阶极点系数的两倍、按 conv.virasoro-standard 归一」这一定义点，不用「极点结构由共形不变性
+      唯一确定」那条命题（已拆到 worldsheet.tt-ope-pole-structure-from-conformal-invariance）。
+      （2026-09-11 由 worldsheet.tt-ope-central-charge 改指 v2，依 lead 指示；v2 是纯定义卡。）
   - id: worldsheet.ocq-superstring-physical-states
     note: |
       供给「本卷把超共形对称性定义为约束、不走规范不变作用量路线」这一方法论前提

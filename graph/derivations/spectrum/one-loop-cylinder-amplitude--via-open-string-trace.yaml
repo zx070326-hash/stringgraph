@@ -63,5 +63,7 @@ notes: |
   挂成边会让下游的 `why`/瓶颈链把 string-s-matrix（路径积分测度层）算进本卡的依赖闭包，
   从而虚报瓶颈。已删边，改写进 gaps 第 1 条。
   若日后有人按鬼场零模测度补出第二条推导，应新建 --via-ghost-zero-mode-measure 而不是改本卡。
+  reviewer-verified: reviewer-batch18, 2026-09-11（仅 l = 4πα't 这一换算的系数配平；status 不因此改变，
+  该关系仍是本图反推、原书未写）
 author: curator-polchinski-ch7
 created: "2026-09-11"

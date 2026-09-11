@@ -19,7 +19,7 @@ depends_on:
       原书未说明（抽取记录 Q1）。对本卡的积分值无影响。
   - id: worldsheet.free-scalar-torus-partition-function
     note: 提供 (2) 里的标量部分：Z_X^{26} = (4π²α'τ₂)^{−13}|η(τ)|^{−52}，以及整体因子 iV₂₆。
-  - id: worldsheet.bc-ghost-torus-partition-function
+  - id: worldsheet.bc-ghost-torus-partition-function-v2
     note: |
       提供 ⟨b b̃ c̃ c⟩_{T²} = |η(τ)|⁴（(7.2.27)）以及它与插入位置无关这一事实——后者正是
       (7.3.2) 把 b 插入的 ∫d²w 直接做成 2πi b_{ww}(0) 的依据。

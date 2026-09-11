@@ -3,7 +3,7 @@ target: duality.t-duality-exchanges-neumann-dirichlet
 kind: proof
 status: rigorous
 depends_on:
-  - id: duality.dual-coordinate
+  - id: duality.dual-coordinate-v2
     note: |
       提供对偶坐标 X' = X_L − X_R 的定义与恒等式 ∂_σX = −i∂_τX'（纯变量替换）。
       本推导的全部代数内容来自这张卡。
@@ -14,9 +14,11 @@ depends_on:
   - id: worldsheet.open-string-neumann-boundary-condition
     convention_map: |
       上游在洛伦兹世界面（conv.worldsheet-lorentzian）上写 ∂^σX^μ = 0；
-      本节点在欧氏世界面复坐标（conv.worldsheet-euclidean / conv.worldsheet-complex-coords）
-      下写同一条件，换算是 z = e^{−iw}、w = σ¹ + iσ², ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄
-      （Schrans [8.469]–[8.471] 用的正是这套）。
+      本节点在欧氏世界面（conv.worldsheet-euclidean）的**柱面坐标** z = e^{−iw}、w = σ¹ + iσ² 下
+      写同一条件，换算是 ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄（Schrans [8.469]–[8.471] 用的正是这套）。
+      ⚠ **不是** conv.worldsheet-complex-coords 的平面坐标 z = σ¹ + iσ²（那里 ∂_1 = ∂ + ∂̄、
+      ∂_2 = i(∂ − ∂̄)）；2026-09-11 依 reviewer-batch15 订正标签，与
+      duality.dual-coordinate-v2 的改动同源。本图尚无柱面坐标的约定节点（见该卡 notes 的建议）。
   - id: worldsheet.open-string-doubling-trick
     inferred: true
     note: |

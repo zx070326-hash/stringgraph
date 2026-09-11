@@ -78,6 +78,7 @@ gaps:
     （原书用一个属数 g 覆盖两种情形）。若下游节点仍在用四参数写法，须先做记号对照。
 notes: |
   reviewer-verified: reviewer-batch11, 2026-09-11（不等式求解与身份认定；穷尽性由新卡承载）
+  reviewer-verified: reviewer-batch18, 2026-09-11（追加签名：第二位 reviewer 独立复核同一枚举）
 
   由 curator 于 2026-09-11 建立（math-sources.md §39.9(2)），同日按 reviewer-batch11 升级。
 
