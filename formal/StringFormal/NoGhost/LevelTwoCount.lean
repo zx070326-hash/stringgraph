@@ -205,4 +205,237 @@ theorem oscWeight_eq_two_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 
 
 end Finsupp
 
+/-! ### The two index families of level two
+
+`ι ⊕ Sym2 ι` indexes the level-two occupation functions on `ι` directions: the left summand is
+the single mode-`2` excitation `α^i_{-2}`, the right summand the unordered pair
+`α^i_{-1} α^j_{-1}`.  The classification says the parametrisation is onto, and an easy
+cancellation argument says it is injective; the two halves are used on opposite sides of
+`B26 2`, so they are stated separately. -/
+
+section Index
+
+variable (ι : Type*)
+
+/-- The level-two occupation function attached to an index: `α^i_{-2}` on the left summand,
+`α^i_{-1} α^j_{-1}` on the right.  Well defined on `Sym2` because the two creation operators
+commute (`add_comm`). -/
+noncomputable def levelTwoIndex : ι ⊕ Sym2 ι → ((ι × ℕ+) →₀ ℕ)
+  | Sum.inl i => Finsupp.single (i, 2) 1
+  | Sum.inr s =>
+      Sym2.lift ⟨fun i j =>
+          Finsupp.single ((i, 1) : ι × ℕ+) 1 + Finsupp.single ((j, 1) : ι × ℕ+) 1,
+        fun i j => add_comm _ _⟩ s
+
+variable {ι}
+
+@[simp]
+lemma levelTwoIndex_inl (i : ι) : levelTwoIndex ι (Sum.inl i) = Finsupp.single (i, 2) 1 := rfl
+
+@[simp]
+lemma levelTwoIndex_inr (i j : ι) :
+    levelTwoIndex ι (Sum.inr s(i, j))
+      = Finsupp.single ((i, 1) : ι × ℕ+) 1 + Finsupp.single ((j, 1) : ι × ℕ+) 1 :=
+  Sym2.lift_mk _ _ _
+
+/-- Mode one and mode two are different oscillators. -/
+lemma osc_one_ne_two (i j : ι) : ((i, 1) : ι × ℕ+) ≠ (j, 2) := by
+  have h12 : ((1 : ℕ+) = 2) → False := by decide
+  exact fun h => h12 (congrArg Prod.snd h)
+
+/-- Every index really does name a level-two occupation function. -/
+lemma oscWeight_levelTwoIndex (x : ι ⊕ Sym2 ι) :
+    Finsupp.oscWeight (levelTwoIndex ι x) = 2 := by
+  cases x with
+  | inl i => simp
+  | inr s => induction s using Sym2.ind with | _ i j => simp
+
+/-- **The parametrisation is injective.**  For two mode-one excitations this is cancellation:
+if the two unordered pairs share an element, deleting it identifies the other. -/
+lemma levelTwoIndex_injective : Function.Injective (levelTwoIndex ι) := by
+  classical
+  have hne : (1 : ℕ) ≠ 0 := one_ne_zero
+  have key : ∀ i k l : ι,
+      levelTwoIndex ι (Sum.inl i) ≠ levelTwoIndex ι (Sum.inr s(k, l)) := by
+    intro i k l heq
+    rw [levelTwoIndex_inl, levelTwoIndex_inr] at heq
+    have h1 := DFunLike.congr_fun heq ((i, 2) : ι × ℕ+)
+    have hk0 : (Finsupp.single ((k, 1) : ι × ℕ+) (1 : ℕ)) ((i, 2) : ι × ℕ+) = 0 :=
+      Finsupp.single_eq_of_ne (osc_one_ne_two k i).symm
+    have hl0 : (Finsupp.single ((l, 1) : ι × ℕ+) (1 : ℕ)) ((i, 2) : ι × ℕ+) = 0 :=
+      Finsupp.single_eq_of_ne (osc_one_ne_two l i).symm
+    rw [Finsupp.single_eq_same, Finsupp.add_apply, hk0, hl0] at h1
+    exact absurd h1 (by norm_num)
+  rintro (i | s) (k | t) heq
+  · have hik : ((i, 2) : ι × ℕ+) = (k, 2) :=
+      Finsupp.single_left_injective hne (by simpa using heq)
+    simp only [Prod.mk.injEq] at hik
+    rw [hik.1]
+  · exact absurd heq (by induction t using Sym2.ind with | _ k l => exact key i k l)
+  · exact absurd heq.symm (by induction s using Sym2.ind with | _ i j => exact key k i j)
+  · induction s using Sym2.ind with
+    | _ i j =>
+      induction t using Sym2.ind with
+      | _ k l =>
+        rw [levelTwoIndex_inr, levelTwoIndex_inr] at heq
+        -- the left-hand pair occupies `(i, 1)`, so the right-hand pair must contain `i`
+        have hmem : k = i ∨ l = i := by
+          by_contra hcon
+          have hk : ((k, 1) : ι × ℕ+) ≠ (i, 1) := fun h => hcon (Or.inl (congrArg Prod.fst h))
+          have hl : ((l, 1) : ι × ℕ+) ≠ (i, 1) := fun h => hcon (Or.inr (congrArg Prod.fst h))
+          have h1 := DFunLike.congr_fun heq ((i, 1) : ι × ℕ+)
+          have hk0 : (Finsupp.single ((k, 1) : ι × ℕ+) (1 : ℕ)) ((i, 1) : ι × ℕ+) = 0 :=
+            Finsupp.single_eq_of_ne hk.symm
+          have hl0 : (Finsupp.single ((l, 1) : ι × ℕ+) (1 : ℕ)) ((i, 1) : ι × ℕ+) = 0 :=
+            Finsupp.single_eq_of_ne hl.symm
+          rw [Finsupp.add_apply, Finsupp.add_apply, Finsupp.single_eq_same, hk0, hl0] at h1
+          omega
+        rcases hmem with rfl | rfl
+        · have hs : Finsupp.single ((j, 1) : ι × ℕ+) 1 = Finsupp.single ((l, 1) : ι × ℕ+) 1 :=
+            add_left_cancel heq
+          have hjl : ((j, 1) : ι × ℕ+) = (l, 1) := Finsupp.single_left_injective hne hs
+          simp only [Prod.mk.injEq] at hjl
+          rw [hjl.1]
+        · rw [add_comm (Finsupp.single ((k, 1) : ι × ℕ+) 1)] at heq
+          have hs : Finsupp.single ((j, 1) : ι × ℕ+) 1 = Finsupp.single ((k, 1) : ι × ℕ+) 1 :=
+            add_left_cancel heq
+          have hjk : ((j, 1) : ι × ℕ+) = (k, 1) := Finsupp.single_left_injective hne hs
+          simp only [Prod.mk.injEq] at hjk
+          rw [hjk.1, Sym2.eq_swap]
+
+end Index
+
+/-! ### The two cardinalities of `B26 2`
+
+`SliceDim.finrank_ddfSpan_inf_towerBigrade` computes `dim (ddfSpan ⊓ V_N)` as the number of
+level-`N` DDF occupation functions and `SpuriousElimination.finrank_towerPhys_inf_towerBigrade_le`
+bounds `dim (H_phys ⊓ V_N)` by the number of `b̃`-free level-`N` light-cone occupation
+functions.  At `N = 2` these are `p_{D−2}(2)` and `p_{D−1}(2)`, and only now do they have to be
+evaluated.  Only one inequality is needed on each side, so only a surjection resp. an injection
+is produced. -/
+
+section Cardinalities
+
+/-- `ddfLevel` is `oscWeight` (the two differ by `mul_comm` inside the sum). -/
+lemma ddfLevel_eq_oscWeight {ι : Type*} (d : (ι × ℕ+) →₀ ℕ) :
+    ddfLevel d = Finsupp.oscWeight d := by
+  rw [ddfLevel, Finsupp.oscWeight_apply, Finsupp.sum, Finsupp.sum]
+  exact Finset.sum_congr rfl fun v _ => mul_comm _ _
+
+/-- `Fock.level` is `oscWeight` on `Osc D = Fin D × ℕ+`. -/
+lemma level_eq_oscWeight {D : ℕ} (d : Osc D →₀ ℕ) :
+    Fock.level D d = Finsupp.oscWeight d := rfl
+
+/-- **`p_m(2) ≥ m + binom(m+1, 2)`** where `m = #ι`: the level-two DDF occupation functions are
+at least as many as the indices `ι ⊕ Sym2 ι`.  This is the lower bound on
+`dim (ddfSpan ⊓ V_2)` needed by `B26 2`; equality holds but is not needed. -/
+theorem card_ddfLevel_two_ge (ι : Type*) [Fintype ι] [DecidableEq ι] :
+    Fintype.card ι + Nat.choose (Fintype.card ι + 1) 2
+      ≤ Fintype.card {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 2} := by
+  classical
+  have hcard : Fintype.card (ι ⊕ Sym2 ι) = Fintype.card ι + Nat.choose (Fintype.card ι + 1) 2 := by
+    rw [Fintype.card_sum, Sym2.card]
+  rw [← hcard]
+  refine Fintype.card_le_of_injective
+    (fun x => (⟨levelTwoIndex ι x, ?_⟩ : {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 2})) ?_
+  · rw [ddfLevel_eq_oscWeight]; exact oscWeight_levelTwoIndex x
+  · intro x y hxy
+    exact levelTwoIndex_injective (congrArg Subtype.val hxy)
+
+variable {D : ℕ}
+
+/-- The level-two `b̃`-free light-cone occupation functions, parametrised by the directions
+other than `b̃`.  (The `b` direction *is* allowed here: `conjFree` only forbids `b̃`.) -/
+noncomputable def conjFreeIndexTwo (hD : 2 ≤ D) :
+    {μ : Fin D // μ ≠ conjIdx D hD} ⊕ Sym2 {μ : Fin D // μ ≠ conjIdx D hD} → (Osc D →₀ ℕ)
+  | Sum.inl μ => Finsupp.single (((μ : Fin D), 2) : Osc D) 1
+  | Sum.inr s =>
+      Sym2.lift ⟨fun μ ν : {μ : Fin D // μ ≠ conjIdx D hD} =>
+            Finsupp.single (((μ : Fin D), 1) : Osc D) 1
+              + Finsupp.single (((ν : Fin D), 1) : Osc D) 1,
+        fun μ ν => add_comm _ _⟩ s
+
+@[simp]
+lemma conjFreeIndexTwo_inl (hD : 2 ≤ D) (μ : {μ : Fin D // μ ≠ conjIdx D hD}) :
+    conjFreeIndexTwo hD (Sum.inl μ) = Finsupp.single (((μ : Fin D), 2) : Osc D) 1 := rfl
+
+@[simp]
+lemma conjFreeIndexTwo_inr (hD : 2 ≤ D) (μ ν : {μ : Fin D // μ ≠ conjIdx D hD}) :
+    conjFreeIndexTwo hD (Sum.inr s(μ, ν))
+      = Finsupp.single (((μ : Fin D), 1) : Osc D) 1
+        + Finsupp.single (((ν : Fin D), 1) : Osc D) 1 :=
+  Sym2.lift_mk _ _ _
+
+lemma level_conjFreeIndexTwo (hD : 2 ≤ D) (x) : Fock.level D (conjFreeIndexTwo hD x) = 2 := by
+  cases x with
+  | inl μ => simp [level_eq_oscWeight]
+  | inr s => induction s using Sym2.ind with | _ μ ν => simp [level_eq_oscWeight]
+
+lemma conjDeg_conjFreeIndexTwo (hD : 2 ≤ D) (x) : conjDeg hD (conjFreeIndexTwo hD x) = 0 := by
+  cases x with
+  | inl μ => simpa using conjDeg_single_of_ne hD (v := (((μ : Fin D), 2) : Osc D)) μ.2 1
+  | inr s =>
+      induction s using Sym2.ind with
+      | _ μ ν =>
+        rw [conjFreeIndexTwo_inr, conjDeg_add,
+          conjDeg_single_of_ne hD (v := (((μ : Fin D), 1) : Osc D)) μ.2 1,
+          conjDeg_single_of_ne hD (v := (((ν : Fin D), 1) : Osc D)) ν.2 1]
+
+/-- **`p_{D−1}(2) ≤ (D−1) + binom(D, 2)`**: the classification says the parametrisation
+`conjFreeIndexTwo` is onto the `b̃`-free level-two occupation functions.  This is the upper
+bound on `dim (H_phys ⊓ V_2)` needed by `B26 2`; equality holds but is not needed. -/
+theorem card_conjFree_two_le (hD : 2 ≤ D) :
+    Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 2 ∧ conjDeg hD d = 0}
+      ≤ (D - 1) + Nat.choose D 2 := by
+  classical
+  have hκ : Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1 := by
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have hcard : Fintype.card
+      ({μ : Fin D // μ ≠ conjIdx D hD} ⊕ Sym2 {μ : Fin D // μ ≠ conjIdx D hD})
+      = (D - 1) + Nat.choose D 2 := by
+    rw [Fintype.card_sum, Sym2.card, hκ]
+    congr 2
+    omega
+  rw [← hcard]
+  refine Fintype.card_le_of_surjective
+    (fun x => (⟨conjFreeIndexTwo hD x, level_conjFreeIndexTwo hD x,
+      conjDeg_conjFreeIndexTwo hD x⟩ :
+        {d : Osc D →₀ ℕ // Fock.level D d = 2 ∧ conjDeg hD d = 0})) ?_
+  rintro ⟨d, hlvl, hconj⟩
+  rcases Finsupp.oscWeight_eq_two_cases (d := d) (by rw [← level_eq_oscWeight]; exact hlvl) with
+    ⟨μ, rfl⟩ | ⟨μ, ν, rfl⟩
+  · have hμ : μ ≠ conjIdx D hD := by
+      intro h
+      rw [conjDeg_single, if_pos (by simpa using h)] at hconj
+      simp at hconj
+    exact ⟨Sum.inl ⟨μ, hμ⟩, rfl⟩
+  · rw [conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD := by
+      intro h
+      rw [conjDeg_single, if_pos (by simpa using h)] at hconj
+      simp at hconj
+    have hν : ν ≠ conjIdx D hD := by
+      intro h
+      rw [conjDeg_single (v := ((ν, 1) : Osc D)), if_pos (by simpa using h)] at hconj
+      simp at hconj
+    exact ⟨Sum.inr s(⟨μ, hμ⟩, ⟨ν, hν⟩), Subtype.ext (conjFreeIndexTwo_inr hD _ _)⟩
+
+/-- **`p_{D−1}(2) = p_{D−2}(2) + D`**, in the form in which `B26 2` consumes it.
+
+This is a **Pascal identity**, true for every `D`: the counting step of Goddard–Thorn at level
+two never sees the critical dimension.  What `D = 26` decides is whether the `D` extra
+dimensions are spanned by *null* states; see `NoGhost/NullSeedsTwo.lean`. -/
+theorem levelTwo_count_identity (hD : 2 ≤ D) :
+    (D - 1) + Nat.choose D 2 = ((D - 2) + Nat.choose (D - 1) 2) + D := by
+  obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+  have hpascal : Nat.choose (m + 2) 2 = Nat.choose (m + 1) 1 + Nat.choose (m + 1) 2 :=
+    Nat.choose_succ_succ (m + 1) 1
+  rw [Nat.choose_one_right] at hpascal
+  have h1 : m + 2 - 1 = m + 1 := by omega
+  have h2 : m + 2 - 2 = m := by omega
+  rw [h1, h2, hpascal]
+  omega
+
+end Cardinalities
+
 end StringFormal.NoGhost
