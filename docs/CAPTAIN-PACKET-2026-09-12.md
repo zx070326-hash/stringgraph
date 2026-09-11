@@ -1,4 +1,4 @@
-> ✅ **修订完成（2026-09-12，分支 `agent/lead/captain-packet-fix`）**：reviewer-captain-packet 核出的 9 处 CONFIRMED + 6 处 PLAUSIBLE 问题均已逐条回原始文件（`graph/milestones/*.yaml` 的 audit/diff_notes 块、两条推导 yaml 的 `depends_on`/`sources`、现场重跑的 `stringgraph status/why`、`ls formal/StringFormal/NoGhost/`、`literature/extractions/` 相关章节）核实后修订，处理结果见文末「修订记录」表。**末尾的 worktree 清理脚本已重写**：SAFE 判定现同时要求「分支已并入 main」与「工作区无未提交改动」，脚本只生成清单、不自动执行删除，`--force` 建议已整段删除。
+> ⚠ **草案，修订中（2026-09-12，分支 `agent/lead/captain-packet-fix`）**：reviewer-captain-packet 核出的 9 处 CONFIRMED + 6 处 PLAUSIBLE 问题正在逐条核实修订（第 1/2 节及部分 PLAUSIBLE 项已完成，第 3 节与 worktree 清理脚本待续）。**末尾的 worktree 清理脚本在本版本仍是旧版**（会把有未提交改动的 worktree 误判为安全，且带 `--force`）——**修订完成前请勿运行**。
 
 # 船长审批包 — 2026-09-12
 

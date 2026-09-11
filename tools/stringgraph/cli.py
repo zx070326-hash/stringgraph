@@ -23,7 +23,14 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--root", type=Path, default=None, help="project root (default: auto-detect)")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    sub.add_parser("validate", help="validate the whole graph; exit 1 on errors")
+    p_val = sub.add_parser("validate", help="validate the whole graph; exit 1 on errors")
+    p_val.add_argument(
+        "--hide-history",
+        action="store_true",
+        help="hide warnings that are expected traces of superseded cards (kind=history), "
+             "leaving only live problems",
+    )
+    p_val.add_argument("--json", action="store_true")
     p_ax = sub.add_parser(
         "check-axioms",
         help="run formal/scripts/check_axioms.lean over every formal.lean_decl; exit 1 on non-standard axioms",
@@ -60,13 +67,26 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "validate":
         problems = validate(g)
-        for p in problems:
-            print(p)
         n_err = sum(1 for p in problems if p.severity == "error")
         n_warn = len(problems) - n_err
-        print(f"\n{len(g.statements)} statements, {len(g.derivations)} derivations, "
-              f"{len(g.milestones)} milestones, {len(g.conventions)} conventions: "
-              f"{n_err} errors, {n_warn} warnings")
+        n_hist = sum(1 for p in problems if p.kind == "history")
+        shown = [p for p in problems if not (args.hide_history and p.kind == "history")]
+        if args.json:
+            print(to_json({
+                "problems": [vars(p) for p in shown],
+                "counts": {"errors": n_err, "warnings": n_warn, "history": n_hist},
+                "statements": len(g.statements),
+                "derivations": len(g.derivations),
+                "milestones": len(g.milestones),
+                "conventions": len(g.conventions),
+                "exit_code": 1 if n_err else 0,
+            }))
+        else:
+            for p in shown:
+                print(p)
+            print(f"\n{len(g.statements)} statements, {len(g.derivations)} derivations, "
+                  f"{len(g.milestones)} milestones, {len(g.conventions)} conventions: "
+                  f"{n_err} errors, {n_warn} warnings ({n_hist} history)")
         return 1 if n_err else 0
 
     if args.cmd == "check-axioms":

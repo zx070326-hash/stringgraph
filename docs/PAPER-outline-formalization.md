@@ -1,3 +1,5 @@
+> ⚠ Draft under revision (2026-09-12): reviewer-paper-outline-1 found 15 confirmed factual errors, including three misattributions (Carnahan PR #20206 is Lie extensions, not a merged VertexAlgebra class; the η T-transformation is this project's, not Mathlib's; nothing is imported from Kytölä's project) and hypothesis-set misstatements on C2–C5. Fix branch `agent/lead/paper-outline-1-fix` in progress. Do not circulate.
+
 # Paper outline: Lean 4 islands for Virasoro representation theory and the DDF construction
 
 Status: draft skeleton, ITP/CPP-style. Every claim below points at a file or a Lean

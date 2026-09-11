@@ -235,5 +235,42 @@ notes: |
     (ii) 横向性 (T) 在伴随证明中的作用是**把伴随排回 DDF 求和的书写顺序**
         （`towerModeVec_mul_towerVertex_of_transverse`：ε·k_0 = 0 ⟹ α^ε 与 V 严格对易），
         **不是**使伴随存在——底层的 `towerPairing_towerVertex_left` 完全不需要横向性。
+  ⚠【2026-09-11（lean-wire-13，curator）：**本卡缺一条假设的登记** —— A^ε_{−1} 的领头项需要 (T′) ε·p = 0】
+  formalizer-noghost-b 在 formal/StringFormal/NoGhost/LightCone.lean 证得
+    `ddfOp_neg_one_apply_towerVacuum`：A^ε_{−1}|0; k⟩ = α^ε_{−1}|0; k − k_0⟩（**精确相等，无修正项**），
+  但该定理的假设逐字是 `hη`、`hεb`（= (T)）**与 `hεa : dotVec η ε a = 0`**，即
+    **(T′) 偏振与基点动量正交：ε·p = 0（重标度后 η(ε, a) = 0）**。
+  （Lean docstring 把它写作「ε·k = 0」，那里的 k 是塔的基点动量，本卡记作 p、重标度后记作 a；
+  与参考向量 k_0（重标度 b）不是一回事。）
+  **本卡的四条常设假设 (η)(N)(S)(T) 不蕴含 (T′)**：(T) 只说 ε·k_0 = 0。
+  · **反例（机检存在性，不是手算）**：formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 整数见证
+    η = diag(−1,+1,+1)、b = (1,1,0)、a = (0,1,1)、ε = e_2 满足 (η)(N)(S)(T) 与 ε·ε = 1
+    （`noghost_hypotheses_satisfiable_int`），却有 **ε·a = 1 ≠ 0**。
+    D ≥ 4 时改取 ε = e_3 即可同时满足 (T′)（`noghost_hypotheses_satisfiable_int_transverse_momentum`），
+    Witness.lean 的 Q-代数见证也满足它（`dotVec_witnessTransverseFrame_witnessMomentum`）。
+    故「横向性足够」是**假的**，而不是「暂时没证」。
+  · **没有 (T′) 时多出什么**：DDF 和在基态上的窗口只有 j = −1、j = 0 两项，j = 0 那项是
+    标量 (ε·p_{−1}) 乘一个能级 1 的态，即 A^ε_{−1}|0;k⟩ 会多出 (ε·k) Φ_1|0; k − k_0⟩。
+    在 Lean 里就是 `hzero` 那一步（`towerModeVec_zero_apply_single` + `dotVec_vec_towerMomentum`），
+    它同时用掉 `hεa` 与 `hεb`。
+  · **为什么文献里看不到这条假设**：标准光锥标架把 ε_i 取在 span{k_0, p} 的正交补里
+    （k_0² = 0 且 k_0·p ≠ 0 ⇒ 该二维平面非退化，正交补恰 D − 2 维），于是 ε_i·p = 0 **自动**成立；
+    Goddard 2008 §5 p.11 只写 'ε^i·ε^j = δ^{ij}, k·ε^i = 0'（k 是那里的参考向量 = 本卡的 k_0）。
+    本卡的【横向标架的特例】一段只要求 e_i·k_0 = 0、e_i·e_j = δ^{ij}，**比那个标架宽**，
+    宽出来的部分正好丢掉 (T′)。
+  · **处置**：陈述文本不可变（根 CLAUDE.md 原则 1），故本卡**不加** (T′)；
+    下游凡用到「领头项」或「DDF 态 = 横向振子态」的推导已各自在 gaps 登记这一条
+    （worldsheet.no-ghost-theorem-v4--via-goddard-thorn、
+    worldsheet.ddf-operators-preserve-positive-mode-conditions--via-lean、
+    worldsheet.ddf-operators-preserve-physical-states--via-lean）。
+    新卡 worldsheet.ddf-spans-physical-states-level-one 则把 (T′) 写进自己的陈述。
+  · **建议（本轮不执行）**：下次实质换代时建 ddf-operators-v7，在【横向标架的特例】一段加
+    (T′) ε·p = 0 作为该特例的显式条件。**本轮不建**的理由有二：(a) 本卡已在多处记账，
+    再换代会把十余条下游边全部改指，收益小于风险；(b) (T′) **不是** `ddfOp` 定义的参数
+    （定义只需 (T) 保证局部有限），把它写进定义卡会与 Lean 的假设分层不一致——
+    正确的落点是「横向标架」那一层，而那一层现在另有一张卡
+    （worldsheet.transverse-frame-spans-orthogonal-complement）在承担。
+  ⚠ **本卡 status: formalized 不受影响**：`ddfOp` 的定义不需要 (T′)，受影响的只是关于 A^ε_{−1} 的**定理**。
+
 author: curator
 created: "2026-09-11"

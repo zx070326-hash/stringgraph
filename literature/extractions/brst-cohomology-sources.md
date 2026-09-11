@@ -883,3 +883,10 @@ of basis in `g` and the vacuum `ω₀ ∈ Λ*_∞`. This complex was introduced 
 | FGZ p.8446（首试，按 `-0018` 的 hash 类推） | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0019.png` | ❌ **HTTP 404**（hash 不能跨页类推） |
 | FGZ p.8446（改走 301 中转） | `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0019.png` → `cdn…/2d14d6150a94/pnas00326-0019.png` | ✅ 133.5 KB PNG 落盘，`Read` 读图，参考表 14 条全可辨 |
 
+### 9.12 ★ auditor 页图复核（2026-09-12）——`Prop 2.6` 的 `D ≥ 2` / `D > 2` 与 `ch_q T` 指数（结清 §9.10.5）
+
+> 只追加，不改 §9.1–§9.11 任何一行。完整裁决与理由见 `page-check-rulings-2026-09-12.md` §2。取件：同一张 p.8445 页图（`cdn…/275fe5e6b989/pnas00326-0018.png`，直连成功），右栏局部 5×–8× 放大。L1。
+
+- **`D ≥ 2`（语句）与 `D > 2`（梗概「This implies isomorphisms for D > 2」）两处页图均清晰，读数与 §9.10.3 一致。裁定：不是排印不一致。** `D > 2` 是 `V(E′,p′)` Verma 分解的前提（E′ 号差 (D−1,0) ⇒ c = D−1，梗概引用的 Kac 事实要 c > 1）；`D = 2` 由梗概末尾括注 "(in fact for any r ≥ 2 **or s ≥ 1**)" 的 s = 1 分支覆盖（`V(E″,p″) ≅ M(p″·p″/2, 1)` 只用 h < 0, c = 1）。**两处各自正确，卡片的 (H1) `D ≥ 2` 不改。**
+- **`ch_q T = q^{p·p/2}φ(q)^{D−2}`：8× 放大后 `D` 前确无负号；同页 `ch_q V(E,p) = q^{p·p/2}φ(q)^{−D}` 的 `−D` 清晰，排除扫描丢字。裁定：原刊排印漏负号，正确为 `φ(q)^{−(D−2)}`。** 三条内证：φ^{D−2} 有负系数不能是特征标；由 [2.4] 直接算得 Σ_k p_{(D−2)}(k) q^{p·p/2+k}；Thm 2.7(ii) 的 p_{(24)} 是 φ^{−24} 的系数。**引用纪律：loc 逐字保留 `φ(q)^{D−2}` 并注「原刊漏负号」；statement 一律写 `φ(q)^{−(D−2)}`。**
+

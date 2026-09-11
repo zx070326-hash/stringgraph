@@ -66,6 +66,7 @@ holography.black-hole-entropy-strominger-vafa
 - 报告与 `why` 只沿新陈述走，旧推导不参与有效状态。
 - **硬规则（2026-09-11，validate error）**：若旧陈述仍被任何活推导 `depends_on`，则它**必须还留有至少一条推导**——`git mv` 走人不留历史会让旧卡 effective 变 open，并沿图把所有下游压成 open（当日事故：ch10-residuals 移走一条推导，40 个节点变 open）。`validate` 对「依赖已换代且无推导的命题」报 **error**；修法二选一：活边改指新卡，或把旧推导恢复为历史（可加一段 notes 说明）。
 - **细则（2026-09-12）**：纯换名式换代（陈述只改一词、论证不变）可 `git mv` 旧推导改指新目标（verma-followups 的做法）；内容性换代（陈述加前提/删断言）保留旧推导作历史（no-ghost v2/v3 的做法）。两者并存是有意的，按"论证是否原样适用于新陈述"选。
+- **工具支持**：`validate` 给每条 warning 标 `kind`——旧推导的"target 已 superseded"、以及旧推导自身那条已换代的 `depends_on`，都是 `history`（预期的历史痕迹）；**活推导**（target 未换代）依赖已换代陈述仍是 `live`，那是要改指的活问题。`uv run stringgraph validate --hide-history` 只看 live，汇总行始终报 `(K history)`。
 
 ## 接口边（2026-09-12 裁决）
 

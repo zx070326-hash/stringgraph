@@ -1,7 +1,7 @@
 id: spectrum.long-cylinder-lightest-state-count--via-q-expansion
 target: spectrum.long-cylinder-lightest-state-count
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: math.dedekind-eta-function
     note: |
@@ -144,6 +144,7 @@ gaps:
   - "**本推导不碰任何前缀**：V₁₀/(8π(8π²α')⁵)、2¹⁰、±2n·2⁵ 都在三张振幅卡上，
      其 α' 幂次的裁决见 sec10-8.md §0.4(b) 与 §6。本推导只处理方括号里的函数。"
 notes: |
+  reviewer-verified: reviewer-batch28, 2026-09-11（精确整数级数复算到 x¹¹（x = q^{1/2}）：∏(1−qⁿ)^{−24} = 1+24q+324q²… ⇒ 24；P₊⁸ − P₋⁸ = 16x + 128x³… ⇒ 16 + 0·q^{1/2} + 256q（16 = 2×8）；Möbius 比值 = 16 − 256x + … ⇒ +16（16 = 2⁴），符号约定一致；abstruse identity 残差到 x¹¹ 为零。前提 (10.7.6)/η 乘积已写在推导内（(10.7.6) 无图节点，gaps 已记）；走 STATUS_LEVELS 例外条款。effective 仍被上游封在 physical-argument。lead 落地。）
   ★★★【本推导同时关闭了 Möbius 卡的一条待做项（curator，2026-09-11，small-backlog-13）】
   worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
   的 gaps 第四条逐字写着：

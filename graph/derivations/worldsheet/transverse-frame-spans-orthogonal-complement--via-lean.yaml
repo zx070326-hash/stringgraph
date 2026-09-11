@@ -1,0 +1,95 @@
+id: worldsheet.transverse-frame-spans-orthogonal-complement--via-lean
+target: worldsheet.transverse-frame-spans-orthogonal-complement
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-hypotheses-satisfiable
+    inferred: false
+    note: |
+      **见证向量的来源**：本推导用的 η = diag(−1,+1,…)、b = (1,1,0,…)、a = (1/2,3/2,0,…) 与
+      偏振 e_i（i ≥ 2）**就是**那张卡登记的显式见证（Lean `Fock.minkowski`、`witnessLight`、
+      `witnessMomentum`、`witnessPolarization`，Witness.lean）。机检证明链逐字调用它们的
+      计算引理（`witnessLight_frameTime`、`witnessMomentum_frameSpace`、…），
+      故这是**机检环节上的边**，不是接口边。
+      ⚠ 那张卡的【本卡明确不断言】(c) 逐字说它不覆盖横向标架的 Gram = δ_{ij}；
+      本推导用的正交归一性来自 Lean 的 `witnessTransverseFrame.orthonormal`
+      （由 `dotVec_witnessPolarization_witnessPolarization` 给出），
+      与那张卡提到的 `noghost_transverse_gram_satisfiable` 是同一事实的两种打包。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **v = a − b 这个对象的来源**：它是塔第 −1 层的重标度动量 `towerMomentum a b (-1)`。
+      机检证明第一步 `dotVec_towerMomentum_witness_neg_one` 就是在这个对象上算 η(e, v)。
+      本推导**不**使用塔上的双线性型、移位算子或逐层 L_m。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **接口边，非机检环节**：供给陈述里点名的记号与条件——η_μ² = 1、η(x,y) = Σ_μ η_μ x^μ y^μ、
+      重标度 a = (2α')^{1/2}p / b = (2α')^{1/2}k_0、以及横向性 (T) η(ε_i, b) = 0
+      （该卡把 (T) 定为 `ddfOp` 的定义参数）。桥层声明是
+      `StringFormal.NoGhost.TransverseFrame`（LightCone.lean :296），它把 (T)(O) 打包成结构；
+      但 `witness_frameSpansOrthogonal` 的证明**不使用** `TransverseFrame.transverse`
+      （它只把 `Ε.vec i` 展开成 `witnessPolarization`），故本边不在机检证明链上。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.witness_frameSpansOrthogonal（目标声明）；谓词 FrameSpansOrthogonal；证明中调用 StringFormal.NoGhost.{dotVec_towerMomentum_witness_neg_one, two_mul_invTwo, sum_transverse_apply_of_lt, sum_transverse_apply_of_two_le, towerMomentum_witness_frameTime, towerMomentum_witness_frameSpace, towerMomentum_witness_apply_of_ne, witnessTransverseFrame_vec}；下游用户 StringFormal.NoGhost.witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious"
+    note: |
+      本仓库，formalizer-noghost-b（lead 以 4aded75 合入 main），Lean 4 + Mathlib v4.33.1，无 sorry。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+summary: |
+  机器检查的证明，在 formal/StringFormal/NoGhost/LightCone.lean，是一段**逐坐标的初等线性代数**。
+
+  **第 1 步（把正交条件解出来）。** 在见证标架里 v = a − b = (−1/2, 1/2, 0, …, 0)，故
+    η(e, v) = (−1)·e_0·(−1/2) + (+1)·e_1·(1/2) = ½ (e_0 + e_1)
+  （Lean `dotVec_towerMomentum_witness_neg_one`）。两边乘 2 并用 `two_mul_invTwo`（2·½ = 1）
+  得 **η(e, v) = 0 ⟺ e_0 + e_1 = 0**。这一步是 `[Algebra Q R]` 唯一真正被用到的地方之一
+  （另一处是见证 a 本身含 1/2）。
+
+  **第 2 步（写出候选分解）。** 取
+    c_i := e_{i+1}（i = 1..D−2，即 e 在第 2..D−1 个坐标上的分量），  c_0 := −2 e_0 。
+
+  **第 3 步（逐坐标核对）。** 对 μ 分三种情形，用 `funext` 后逐个化简：
+    · μ = 0：右端 = 0 + (−2e_0)·(−1/2) = e_0 ✓（横向项在 μ < 2 时为零，
+      `sum_transverse_apply_of_lt`）；
+    · μ = 1：右端 = 0 + (−2e_0)·(1/2) = −e_0 = e_1 ✓（**这里用掉第 1 步的 e_0 + e_1 = 0**）；
+    · μ ≥ 2：v 在这些坐标上为零（`towerMomentum_witness_apply_of_ne`），
+      横向项贡献 e_μ（`sum_transverse_apply_of_two_le`：Σ_i c_i (e_{i+1})^μ = c_{μ−1} = e_μ）✓。
+  三种情形合起来即 e = Σ_i c_i ε_i + c_0 v。∎
+
+  **论证结构上值得记的一点**：分解系数 c_0 = −2 e_0 是**显式**的，不经过任何投影/正交化，
+  因此结论对任意交换 Q-代数成立，不需要 R 是域、不需要 η 非退化、不需要维数计数。
+  文献侧的标准论证恰恰相反（「span{k_0,p} 非退化 ⇒ 正交补 D−2 维」），在一般环上不可用。
+gaps:
+  - |
+    **只对一个显式标架成立，不是一般定理**。本推导证的是
+    `witness_frameSpansOrthogonal`（见证专用），不是「一切满足 (T)(O) 的标架都完备」。
+    后者**为假**（worldsheet.transverse-frame-spans-orthogonal-complement 的 notes 给了
+    D = 3 整数见证上的反例），但那个反例**未形式化、未经 reviewer 复核**，
+    故本图对独立性本身不作断言。
+  - |
+    **需要 [Algebra Q R]**。见证动量 a = (1/2, 3/2, 0, …) 含 ½，与
+    worldsheet.ddf-hypotheses-satisfiable 的【Z 上无见证】一段是同一原因
+    （该段本身已被 reviewer-batch26 更正为「只在该标架下」）。
+    formal/StringFormal/NoGhost/WitnessInt.lean 的整数见证**不满足本卡结论**（见上一条反例），
+    故这里的 Q-代数假设不能照搬那边的办法去掉。
+  - |
+    **正交补取的是 v = a − b（第 −1 层动量），不是 k_0**。k_0^⊥ 的版本既未证也不在陈述里。
+    选 v 是因为 N = 1 的物理态住在第 −1 层：那里的偏振条件是 e ⊥ p_{−1}，不是 e ⊥ k_0。
+  - |
+    **只给存在性，不给唯一性、线性无关性或基**。Lean 的结论是 `∃ c c₀`，
+    不断言 {ε_i, v} 线性无关，也不断言分解唯一（在一般环上两者都需额外论证）。
+  - |
+    **与无鬼定理的正定性无关**。本推导只是线性生成，不涉及任何双线性型的正定性；
+    它在无鬼论证里的位置是「把第 −1 层的物理偏振 e 拆成横向部分 + 动量部分」这一步，
+    见 worldsheet.ddf-spans-physical-states-level-one。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **三条依赖全部 formalized**，故目标卡 effective = formalized。
+  其中 worldsheet.ddf-operators-v6 那条按 docs/STATUS_LEVELS.md 的
+  「接口边（2026-09-12 裁决）」标注：它供给陈述里点名的记号与 (T)，
+  但不出现在 `witness_frameSpansOrthogonal` 的机检证明链上，note 已写明并指出桥层声明。
+author: curator
+created: "2026-09-11"

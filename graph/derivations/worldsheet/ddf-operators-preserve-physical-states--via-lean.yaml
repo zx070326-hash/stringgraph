@@ -107,6 +107,17 @@ gaps:
   - |
     **不断言 A^ε_n Ψ ≠ 0**。Lean 的结论是子模包含，允许像为零。
     「DDF 态非平凡」在本图与 Lean 中均无节点。
+  - |
+    【2026-09-11（lean-wire-13）新增，curator】**上面第 1 条 gap（只给包含，不给张成）在 N = 1 上
+    已关闭，但那一步需要两条本卡没有的假设**：
+    worldsheet.ddf-spans-physical-states-level-one（formalized，
+    `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`）证得第 −1 层能级 1 的物理态
+    ⊆ DDF 张成 + 伪态，代价是两条额外前提——
+    **(T′) ε_i·k = 0**（否则 A^ε_{−1}|0;k⟩ ≠ α^ε_{−1}|0;k−k_0⟩，
+    见 worldsheet.ddf-operators-v6 的 notes；四条常设假设不蕴含它，机检反例在 WitnessInt.lean）
+    与**横向标架完备性**（worldsheet.transverse-frame-spans-orthogonal-complement）。
+    ⚠ 故上面第 1 条的告诫**不变**：本卡仍**不能**被读成「DDF 态生成物理态」；
+    N ≥ 2 的张成连陈述都还写不出来（formal/TODO.md `noghost-b` 的 (a)(b)）。
 notes: |
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。

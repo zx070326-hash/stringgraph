@@ -60,6 +60,12 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
 StringFormal/
   Math/EulerPartition.lean  Euler 分拆生成函数 Σ p(N) X^N = ∏_{n≥1}(1-X^n)^{-1}（`PowerSeries`，
                             无逆元形式对任意交换环成立；域上给 `⁻¹` 形式）。独立小岛，不 import 其他子目录
+  Math/PartitionCard.lean   `p(n) = Fintype.card (Nat.Partition n)` 的显式值（n = 2,3,4,5 为 2,3,5,7）。
+                            Mathlib 无任何 `Nat.Partition` 基数引理，且 `decide` 化不开（实例经
+                            `Fintype.ofSurjective` → `Composition` → `Finset.sort` → `List.mergeSort`，
+                            良基递归）。桥引理 `card_partition_eq_card` 把计数搬到显式
+                            `Finset (Multiset ℕ)` 字面量上（那里 `decide` 可用），穷尽性靠剥一个
+                            部分 + 对总和递归。使 `finrank_levelSpan_le_card_partition` 可在 N ≤ 5 取数值
   Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
   Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
@@ -161,7 +167,7 @@ StringFormal/
                             光锥标架 η=diag(−1,1,…)、b=(1,1,0,…)、a=(1/2,3/2,0,…)、b̃=(1/2,−1/2,0,…)、
                             ε_i=Pi.single i 1 同时满足 hη∧hbb∧hba∧hεb（外加 b·b̃=−1、b̃·b̃=0、
                             横向 Gram = δ_ij、快子壳 α'k²=1）。**b·a=1 与 a·a=2 一起强制 a=(1/2,3/2,…)**，
-                            所以 ℚ-代数不是偷懒。含可复用的 dotVec 双线性/Pi.single 收缩引理
+                            所以 ℚ-代数不是偷懒（⚠ 只对该标架成立；WitnessInt.lean 给出 ℤ 见证，ℚ 只因 (M) 写法与 ddfOp 构造）。含可复用的 dotVec 双线性/Pi.single 收缩引理
   NoGhost/Longitudinal.lean **纵向 GT 算子 K_m = k_0·α_m = towerModeVec η a b b m**（偏振取 b 自身；
                             蓝图 §A.1/§A.2，Goddard 2008 (6.2)(6.3)）：⁅L_m,K_n⁆=−n K_{m+n}（只需 hη）、
                             ⁅K_m,K_n⁆=0（hbb 消中心项）、**K_0 = 1**（逐层，靠 k_0·p 沿塔不变 + hba）、
@@ -186,7 +192,7 @@ StringFormal/
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
                             D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
-  NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family
+  NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family；rung 分次：`ddfOp` 移 rung +n（纯运动学，只需 hη/hεb），`|d⟩` 在 rung −N(d)（`frameMonomial_mem_towerRungSubmodule`），`ddfSpan_eq_iSup_rung`；rung 与 level 联动未做
                             实例化到 A^ε_n。补上两条小引理 **Fock.towerPairing_towerVacuum_self**（(H3)）与
                             **ddfOp_towerVacuum_of_pos**（(H4)，一行：ddfWindow n vac = Icc n 0 = ∅）；
                             ddfFamily 打包 + 四条前件 ddfFamily_ccr/_adj/_ann（ccr 由 lie_ddfOp_ddfOp
@@ -197,6 +203,16 @@ StringFormal/
                             标架层：frameMonomial（ι = Fin (D−2)，用 LightCone 的 TransverseFrame）、
                             **ddfSpan_eq_span_range_frameMonomial**（列表生成集 = 占据数生成集）与
                             **ddf_span_pos**（全序域上 ddfSpan 里非零向量模长 > 0 —— 蓝图 §C.5 的正定性输入）
+  NoGhost/Assembly.lean     **无鬼定理的条件版组装（蓝图 §C.5）**：`DDFSpans`（`H_phys ≤ ddfSpan ⊔ H_null`，
+                            截距 `a₀ = α'k²`）**作为假设不证**，分片版 `DDFSpansOn … W`；
+                            `towerPairing_self_nonneg_…_of_spans`（无负模）、
+                            `towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans`（零模 ⟺ null）、
+                            **`no_ghost_of_spans`（`TowerPhysQuot` 上的形式正定）**。
+                            `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 把 §B.6 的
+                            「模伪态」结论升级成「模 null」，据此
+                            **`ddfSpans_bigrade_neg_one_one`** 在光子片 `(rung −1, level 1)` 上
+                            **无条件于 `D`** 关闭 `DDFSpansOn`。**`D = 26` 在本文件一次都不出现**——
+                            它全部被吸收进 `DDFSpans`（蓝图 §B.5）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

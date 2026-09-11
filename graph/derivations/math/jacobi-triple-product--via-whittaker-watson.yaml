@@ -1,0 +1,136 @@
+id: math.jacobi-triple-product--via-whittaker-watson
+target: math.jacobi-triple-product
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.jacobi-theta-functions
+    note: |
+      供给**恒等式左端的那个对象**（ϑ₀₀ 的级数）与 q、z、q^s ≡ exp(2πisτ) 的分支约定。
+      **非 inferred**：W–W §21.3 的证明对象 ϑ₄(z)/ϑ₃(z) 正是本卡定义的 ϑ₀₁/ϑ₀₀
+      （对照由 Polchinski (7.2.37a–d) 逐字给出：ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄），
+      而 W–W 的级数定义 ϑ₃(z) = 1 + 2Σ_{n≥1} q_W^{n²} cos 2nz 在下面的 convention_map 下
+      **逐项等于**该定义卡的 ϑ₀₀(v,τ)。
+      ⚠ 该定义卡自身 status = rigorous 且无依赖，故不压低本推导。
+    convention_map: |
+      **Whittaker–Watson（1920 第三版）↔ Polchinski / 本图的字典（引 W–W 时必须带，否则式子对不上）**：
+        · **宗量**：W–W 用 z，准周期 π、πτ；本图用 v，准周期 1、τ ⇒ **z = πv**（故 e^{2iz} = e^{2πiv} = 本图的 z 变量）。
+          ⚠ **同一个字母 z 在两套记号里含义不同**：W–W 的 z 是宗量，本图的 z = exp(2πiv)。下文一律写 z_W / z_本图。
+        · **展开参数**：W–W 的 **q_W = exp(πiτ)**；本图的 **q = exp(2πiτ)** ⇒ **q = q_W²**，
+          即 **q_W^{2n} = q^n、q_W^{2n−1} = q^{n−1/2}**。这一条是最容易咬人的一处。
+        · **四个函数**：W–W 的 ϑ₁, ϑ₂, ϑ₃, ϑ₄ ↔ 本图的 −ϑ₁₁, ϑ₁₀, ϑ₀₀, ϑ₀₁
+          （对照式是 Polchinski (7.2.37a–d)，L1 逐字）。
+        · **零宗量省略**：W–W 写 ϑ₂, ϑ₃, ϑ₄（不带宗量）表示 ϑ₂(0), ϑ₃(0), ϑ₄(0)（W–W 书 p.464 逐字）。
+      **字典来源**：literature/extractions/math-sources.md **§56.2(e)** 的对照表（researcher，2026-09-11，L1 页图）。
+sources:
+  - ref: whittaker-watson-1920
+    loc: "§21.3 (Jacobi's expressions for the Theta-functions as infinite products) 与 §21.42 (the value of G)；**两节缺一不可**"
+    note: |
+      **L1（archive.org 公有领域页图逐字，1920 年第三版）**，抽取记录
+      literature/extractions/math-sources.md **§56.2(b)**（researcher，2026-09-11）。
+      ⚠⚠ **必须两节并引，这是本条最容易踩的坑**（§56.0 结论表逐字列为「陷阱」）：
+      §21.3 只证出 **ϑ₄(z_W) = G ∏_{n≥1}(1 − 2q_W^{2n−1}cos 2z_W + q_W^{4n−2})**，
+      其中 **G 只被证明为「与 z_W 无关的常数」**；书里方括号预告逐字：
+      「[It will appear in § 21·42 that `G = ∏_{n=1}^{∞} (1 − q^{2n})`.]」
+      **G = ∏(1−q_W^{2n}) 要到 §21.42 才定出来**（结论式在书 p.473，逐字见 §56.2(b) 末）。
+      ⚠ **W–W 全书没有编号定理**（researcher 逐页确认），故 loc **只能写节号**；
+      ⚠ **不得写 1927 第四版的页码**——本项目核实的是 1920 第三版，第四版节号是否相同为 L0
+      （见 sources.bib 的 whittaker-watson-1920 条 note 与 §56.0 的版本警告）。
+      ⇒ 本条**按项目规则只写节号，不写页码**。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. **(7.2.37a–d)**, p. 215（ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄、ϑ₁₀ = ϑ₂、ϑ₁₁ = −ϑ₁）"
+    note: |
+      L1（抽取记录 polchinski-1998-v1-ch7.md #E15）。**本条只支撑 convention_map 里的第三行**
+      （W–W 的 ϑ₃/ϑ₄ 与本图 ϑ₀₀/ϑ₀₁ 的对应），不支撑恒等式本身。
+      ⚠ 这一行是原书**逐字印出**的对照式，故字典这一半不是本图的外推。
+      ⚠ 另外两行（z_W = πv 与 q = q_W²）**是抽取者由两书各自的定义式算出的**，
+      原书与 W–W 都不写这条对照 ⇒ 见 gaps 第一条。
+summary: |
+  **W–W 给的是一条完整的、自足的证明**（这正是本推导可以标 rigorous 的理由），骨架逐字如下：
+
+  **第 1 步（§21.3，构造并比较零点）**。令
+    f(z_W) = ∏_{n≥1}(1 − q_W^{2n−1}e^{2iz_W}) ∏_{n≥1}(1 − q_W^{2n−1}e^{−2iz_W}) 。
+  W–W 逐字：「each of the two products converges absolutely and uniformly in any bounded domain of
+  values of z, **by § 3·341**, on account of the absolute convergence of Σ q^{2n−1}; hence f(z) is
+  analytic throughout the finite part of the z-plane, and so it is an integral function.」
+  接着验证 f 与 ϑ₄ **零点相同**、**准周期因子相同**（后者引 §21.11 example 3）。
+
+  **第 2 步（§21.3，Liouville 型定理）**。于是 ϑ₄(z_W)/f(z_W) 是无零点无极点的双周期函数，
+  由 **§20.12** 它是常数 G：
+    **ϑ₄(z_W) = G ∏_{n≥1}(1 − 2q_W^{2n−1} cos 2z_W + q_W^{4n−2})** 。
+  由 z_W → z_W + ½π 得同节的
+    **ϑ₃(z_W) = G ∏_{n≥1}(1 + 2q_W^{2n−1} cos 2z_W + q_W^{4n−2})** 。
+
+  **第 3 步（§21.42，定出 G）**。W–W 逐字：「G is an analytic function of q … and from the product for
+  ϑ₃(z), we see that G → 1 as q → 0. Hence the plus sign must always be taken; and so we have
+  established the result **G = ∏_{n=1}^{∞}(1 − q^{2n})**.」
+  ⚠ 该节的论证用到 §21.41（ϑ₁′(0) = ϑ₂ϑ₃ϑ₄），W–W 对后者的脚注逐字：
+  「Several proofs of this important proposition have been given, **but none are simple.**」
+  ——**证明链比表面上长**，但每一环都在 W–W 书内、都有出处（见 gaps 第二条）。
+
+  **第 4 步（本推导做的唯一一件事：换记号）**。把第 2、3 步的 ϑ₃ 式按 convention_map 翻译：
+    · 1 + 2q_W^{2n−1}cos 2z_W + q_W^{4n−2} = (1 + q_W^{2n−1}e^{2iz_W})(1 + q_W^{2n−1}e^{−2iz_W})
+      = (1 + q^{n−1/2} z_本图)(1 + q^{n−1/2} z_本图^{−1})  ［用 q_W^{2n−1} = q^{n−1/2}、e^{2iz_W} = z_本图］；
+    · G = ∏_{n≥1}(1 − q_W^{2n}) = ∏_{n≥1}(1 − q^n) ；
+    · 左端 ϑ₃(z_W) = 1 + 2Σ_{n≥1} q_W^{n²} cos 2n z_W = Σ_{n∈Z} q_W^{n²} e^{2inz_W}
+      = Σ_{n∈Z} exp(πin²τ + 2πinv) = **目标卡左端**（= math.jacobi-theta-functions 的 ϑ₀₀）。
+  合起来**逐字**就是目标卡的断言：
+    Σ_{n∈Z} exp(πin²τ + 2πinv) = ∏_{m≥1}(1−q^m)(1+z q^{m−1/2})(1+z^{−1}q^{m−1/2}) 。✓
+  **收敛性**（目标卡断言的第二段）由第 1 步 W–W 引的 §3.341 与 G 的乘积同时给出。
+
+  **为什么是 rigorous（按 docs/STATUS_LEVELS.md 第 4 级主判据）**
+  「有发表的、数学界接受的完整证明；来源必须是数学文献或数学物理文献」——
+  W–W 是数学文献，§21.3+§21.42 给的是完整证明（Liouville 型定理 + 解析延拓定常数），
+  本推导只在第 4 步做了一次**有限步的记号翻译**。
+  ⚠ **不得标 formalized**：Mathlib 是否有三重乘积**本项目未核实**（math-sources.md **Q56.2** 明列为未查）。
+gaps:
+  - "**记号字典里有两行是抽取者算出来的，不是任一来源写下的**：
+     convention_map 的 **z_W = πv** 与 **q = q_W²**（即 q_W^{2n−1} = q^{m−1/2}）
+     由两书各自的定义式对照得出（W–W 的准周期是 π, πτ 且 q_W = e^{πiτ}；Polchinski 的是 1, τ 且 q = e^{2πiτ}），
+     **W–W 不写 Polchinski 的约定，Polchinski 也不引 W–W**。
+     出处是 researcher 的对照表 math-sources.md §56.2(e)，其中逐字警告：
+     『**q 的定义差一次方这件事，在零宗量恒等式里不影响等式成立**（两边同一个 q），
+       但**在抄乘积公式时会咬人**（W–W 的 q^{2n−1} ↔ Polchinski 的 q^{m−1/2}）。』
+     ⚠ 本推导的第 4 步**正是「抄乘积公式」的那一步**，即恰好落在该警告指的地方。
+     ⇒ 这一步是两行可手验的代换，但**未经 reviewer 独立复核**；若要把本推导的翻译步也做成
+     可核对的对象，正解是给 math.jacobi-theta-functions 加一张「W–W 记号 ↔ 本图记号」的约定卡
+     （本图 graph/conventions/ 目前没有 θ 函数记号的约定节点）。**已列入交 lead 的报告。**"
+  - "**W–W 的证明链比表面长，形式化时要算进去**：§21.3 引 §3.341（乘积一致收敛）、§21.11 example 3
+     （准周期因子）、§20.12（无零点无极点的双周期函数是常数）；§21.42 引 §21.41
+     （ϑ₁′(0) = ϑ₂ϑ₃ϑ₄），而 W–W 对 §21.41 的脚注逐字说『**none are simple**』。
+     **本推导没有复核这四个被引节的内容**（researcher 本轮只逐页读到 §21.2–§21.42 的正文，
+     未追 §3.341/§20.12/§21.11/§21.41 的证明）。⇒ 这不影响 rigorous 的判定
+     （STATUS_LEVELS 第 4 级要的是『有发表的、数学界接受的完整证明』，不是『本项目逐行复核过』），
+     但**若要形式化，这四条都是前置件**。"
+  - "**版本缺口**：本项目核实的是 **1920 年第三版**；物理文献几乎一律引 **1927 年第四版**，
+     而第四版的节号是否与第三版相同**本项目为 L0**（math-sources.md **Q56.1**；
+     1946 重印件是借阅制 item，`fulltext/inside.php` 返回 HTTP 403，本轮取不到）。
+     ⇒ 本条 loc **只写节号不写页码**；若日后核出第四版节号不同，须修 loc（不影响陈述）。"
+  - "**Mathlib 侧未查（决定本卡能否升 formalized）**：math-sources.md **Q56.2** 逐字：
+     『Mathlib 的 JacobiTheta 里有没有 ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴ 或三重乘积？本轮未查。』
+     ⚠ 教训见 math.dedekind-eta-s-transformation 的 notes：『Mathlib 没有 X』读一个文件不够，
+     反过来『Mathlib 有 X』在没读源码前同样不得写进卡片。"
+  - "**本推导只覆盖 ϑ₀₀ 一个函数**：W–W §21.3 同时给了 ϑ₁, ϑ₂, ϑ₃, ϑ₄ 四条乘积表示
+     （= Polchinski (7.2.38a–d) 的对应物），但**目标卡只断言 ϑ₀₀ 那一条**
+     （理由见目标卡「不断言 (a)」：抽取记录未把 (7.2.38a–d) 的式子逐字印出）。
+     ⇒ **升级动作（成本很低）**：新建 math.jacobi-theta-product-representations（四条），
+     其 --via-whittaker-watson 同样可标 rigorous（W–W §21.3+§21.42 四条一起给）。
+     届时 spectrum.long-cylinder-lightest-state-count--via-q-expansion 的 gaps 第一条
+     才能**完全**关闭（现在只关闭一半）。**已列入交 lead 的报告。**"
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立，**在同批次的
+  math.jacobi-triple-product--via-polchinski-assertion 之后**：建卡时本图还没有数学来源，
+  researcher-theta 当天把 whittaker-watson-1920 登记进 literature/sources.bib，本推导随即补上。
+  按 lead 2026-09-11 的裁决，旧的 --via-polchinski-assertion **保留**作「来源只给断言」的记录，
+  工具取两者中高者 ⇒ 目标卡 own status 由 physical-argument 升为 **rigorous**。
+  （与 math.dedekind-eta-s-transformation 的演化完全同款：--via-textbook-assertion →
+   登记 siegel-1954-eta → --via-siegel-1954，两条并存。）
+
+  ★【一手出处指引（给想追到源头的人）】W–W §21.3 的页脚逐字「Cf. *Fundamenta Nova*, p. 145.」
+  ——即 Jacobi 1829 年原著。math-sources.md **Q56.4** 把「取 Fundamenta Nova p.90 / p.145 页图」
+  列为未办项，并注明取件成本很低（W–W 已给出精确页码）。取到后可再加一条 --via-jacobi-1829。
+
+  ⚠【别把本推导读成「Polchinski 证了三重乘积」】Polchinski 对 (7.2.34) **零证明、零引用、零命名**
+  （抽取记录 #E15 逐字「全部无证明」）。本推导的严格性**全部来自 W–W**，
+  Polchinski 在本推导里只出现在 sources 第二条，且**只用于记号对照**（(7.2.37a–d)）。
+author: curator
+created: "2026-09-11"

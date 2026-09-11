@@ -1,0 +1,103 @@
+id: math.jacobi-triple-product
+kind: proposition
+title: "ϑ₀₀ 的无穷乘积表示（Jacobi 三重乘积）：Σ_{n∈Z} exp(πin²τ + 2πinv) = ∏_{m≥1}(1−q^m)(1+z q^{m−1/2})(1+z^{−1} q^{m−1/2})"
+statement: |
+  **设定（是陈述的一部分）**：τ ∈ H = { Im τ > 0 }，v ∈ C，记号与分支约定按
+  math.jacobi-theta-functions：q ≡ exp(2πiτ)、z ≡ exp(2πiv)，
+  且对有理数 s 取 **q^s ≡ exp(2πisτ)**（单值分支；特别地 q^{m−1/2} = exp[2πi(m−1/2)τ]）。
+
+  **断言（原书 Vol.1 (7.2.31) 与 (7.2.34) 的两端相等）**：对一切 τ ∈ H 与一切 v ∈ C，
+      **Σ_{n = −∞}^{∞} exp( πi n² τ + 2πi n v )
+         = ∏_{m = 1}^{∞} ( 1 − q^m )( 1 + z q^{m−1/2} )( 1 + z^{−1} q^{m−1/2} )** ，
+  即用 math.jacobi-theta-functions 的记号：**ϑ₀₀(v, τ) = ∏_{m≥1}(1−q^m)(1+z q^{m−1/2})(1+z^{−1}q^{m−1/2})**。
+
+  **右端的收敛（本卡一并断言；原书不提）**：|q| = exp(−2π Im τ) < 1，
+  三族因子的对数偏离之和被 Σ_m (|q|^m + |z||q|^{m−1/2} + |z|^{−1}|q|^{m−1/2}) 控制，
+  故无穷乘积在 { Im τ ≥ ε } × { r ≤ |z| ≤ R } 上绝对且一致收敛，右端在 C × H 上全纯。
+
+  **本命题不断言什么**：
+    (a) ⚠ **不断言四个 ϑ_{ab} 的乘积表示**（原书 (7.2.38a–d)）。它们是本式对
+        v ↦ v + 1/2、v ↦ v + τ/2 等平移的特例，但**抽取记录未把 (7.2.38a–d) 的式子逐字印出**
+        （见 math.jacobi-theta-functions 的 sources 第二条），故本图不为它们建卡，
+        也不在本卡里写出它们。
+        ⚠ 唯一例外是**记账式**的：math.jacobi-theta-functions 的 notes 第 (iv) 条把
+        F_{ab}(0,τ) 的乘积形式用于与 Vol.2 (10.7.6) 的相容性核对；那是核对，不是本卡的断言。
+    (b) **不断言 ϑ 的周期性、模变换或零点**（(7.2.32)/(7.2.33)/(7.2.40) 与「唯一零点在
+        v = ½(1+τ)」）。⚠ 由本式可以一眼读出零点位置（第二、三族因子的零点），
+        **但那是一条需要另行写出的推论，本卡不作**。
+    (c) **不断言 Jacobi 的 abstruse identity**（(7.2.41)）——那是 math.jacobi-abstruse-identity；
+        本图也**不**把那条恒等式接到本卡上（原书不给这条路线，见那张卡的 gaps）。
+    (d) **不断言本式与 Dedekind η 的关系**（q^{1/24}∏(1−q^m) 只是右端第一族因子乘上一个
+        q 的幂；(7.2.43) 的两个等号在 math.dedekind-eta-function 与其相邻卡上）。
+    (e) ⚠ **「Jacobi 三重乘积」这个名字是本图起的**：原书 §7.2 只写出 (7.2.34) 这个式子，
+        **既不命名、也不给证明、也不给任何文献引用**（抽取记录 #E15 逐字：「**全部无证明**」）。
+        本卡 title 用该通用名只为可检索，**不断言原书这样称呼它**。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2「Theta functions」, eq. **(7.2.34)**（ϑ(v,τ) = ∏_{m=1}^∞ (1−q^m)(1+z q^{m−1/2})(1+z^{−1}q^{m−1/2})）与 **(7.2.35)**（q = exp(2πiτ)、z = exp(2πiv)）, p. 215；左端即同节 **(7.2.31)** 的级数"
+    note: |
+      **L1（原书页图逐字）**，抽取记录 literature/extractions/polchinski-1998-v1-ch7.md **#E15**。
+      ★★ **原书把 (7.2.34) 与 (7.2.31) 都写作「ϑ(v,τ) = …」，即等号是原书写下的**；
+      本卡断言的就是这两式右端相等。
+      ⚠⚠ **原书对这条恒等式零证明、零引用、零命名**。#E15 的判词逐字：
+      「文献自称的严格程度：**全部无证明**。(7.2.32) 的唯一性（"determine it up to normalization"）、
+       零点唯一性、Jacobi 恒等式**都是断言**。」
+      ⇒ 本卡唯一的推导据此封在 physical-argument。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, (7.2.34)–(7.2.35) 之后一段, p. 215（逐字：'The q → 0 behavior can be read immediately from either the infinite sum or infinite product form. The q → 1 behavior is not manifest in either form, because an infinite number of terms contribute.'）"
+    note: |
+      L1（#E15）。★ 这句话是原书**使用**本恒等式的方式：把它当成两种表示之间的方便切换，
+      而不是当成一条需要论证的命题。它同时说明了本式在下游的实际用途
+      （q → 0 的展开，见 spectrum.long-cylinder-lightest-state-count--via-q-expansion）。
+tags: [math, theta-functions, jacobi, triple-product, q-series, modular-forms]
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立，与 math.jacobi-theta-functions、
+  math.jacobi-abstruse-identity 同批。
+
+  ★★★【本卡为什么存在】spectrum.long-cylinder-lightest-state-count--via-q-expansion 的
+  gaps 第一条逐字点名要它：
+    「等价路线（由 ϑ 的**三重乘积公式**展开）同样无节点 … ⇒ 待建（两条都是纯数学、
+      且是 Mathlib 有望覆盖的对象）：· **math.jacobi-theta-triple-product**（ϑ₀₀/ϑ₀₁/ϑ₁₀ 的乘积公式）…」
+  ⚠ **本卡只做了那条待建项的一半**：它给出 **ϑ₀₀ 的**乘积表示（= 原书逐字印出的 (7.2.34)），
+  **不**给 ϑ₀₁/ϑ₁₀ 的（原书 (7.2.38a–d)，抽取记录未印出式子——见「不断言 (a)」）。
+  ⇒ 那条 gap 因此**只关闭一半**；本轮不去改那条推导的 gaps（它在别人的 claim 范围内，
+    且半关闭的 gap 改写容易失真）。**已列入交 lead 的报告。**
+
+  【升级路径（**2026-09-11 当天已走完第一步**）】
+  三重乘积是十九世纪的经典结果，有完整的初等证明；本卡建卡当时停在 physical-argument
+  **纯粹是因为本项目的 sources.bib 里还没有一条数学来源**（项目规则：新文献必须先登记到
+  literature/sources.bib，ref 才能用）。
+    · ★★ **同日结清（researcher-theta，2026-09-11）**：**whittaker-watson-1920 已登记**
+      （1920 年**第三版**，archive.org 公有领域页图 L1；抽取记录 math-sources.md **§56**）。
+      本卡随即新增推导 **math.jacobi-triple-product--via-whittaker-watson**
+      （kind proof / status **rigorous**），来源 **§21.3 + §21.42**。
+      ⚠⚠ **两节缺一不可**：§21.3 只把乘积表示定到一个与宗量无关的常数 G，
+      **G = ∏(1−q_W^{2n}) 要到 §21.42 才定出来**。引用时不得只写 §21.3。
+      ⚠ W–W **全书没有编号定理** ⇒ loc 只写节号；**不得引 1927 第四版的页码**
+      （本项目核实的是第三版，第四版节号是否相同为 L0，见 sources.bib 的版本警告与 Q56.1）。
+      ⚠ **记号差两处会咬人**：W–W 的 q_W = exp(πiτ)（本图 q = q_W²）、宗量 z_W = πv，
+      且 W–W 的 ϑ₃/ϑ₄ = 本图的 ϑ₀₀/ϑ₀₁。字典见那条推导的 convention_map 与 §56.2(e)。
+    · 旧推导 math.jacobi-triple-product--via-polchinski-assertion 按 lead 2026-09-11 的裁决
+      **保留**作为「来源只给断言」的记录，工具取高者
+      （与 math.dedekind-eta-s-transformation 完全同款：那张卡就是先只有 --via-textbook-assertion，
+      登记 siegel-1954-eta 后补上 rigorous 推导的）。
+    · **Mumford *Tata Lectures on Theta I* 仍未登记**（math-sources.md §56.3 逐字：「本轮完全没查」，
+      且 Springer 在本环境全封）；⚠ **不得凭印象把「Thm 1.x」写进图**（Q56.3）。
+    · **形式化情报**：Mathlib 是否有三重乘积**仍未查**（math-sources.md **Q56.2**）。
+      ⚠ 教训见 math.dedekind-eta-s-transformation 的 notes：「『Mathlib 没有 X』这种否定结论，
+      读一个文件是不够的」——反过来「Mathlib 有 X」在没读源码前同样不得写进卡片。
+
+  【本卡与 math.dedekind-eta-function 的关系（别读成重复）】
+  η 的乘积式 q^{1/24}∏(1−q^m) 只涉及本卡右端的**第一族因子**；本卡的内容是三族因子的乘积
+  等于一个 ϑ 级数，两者不互相蕴含。η 卡是 formalized（Mathlib 桥层），本卡是 physical-argument；
+  **不要因为「都是无穷乘积」就把 η 卡的强度挪用过来**。
+
+  【下游（建卡时已知的用户）】
+    · spectrum.long-cylinder-lightest-state-count--via-q-expansion 第 2、3 步的 q 展开
+      （现在直接从原书导入 (10.7.6)；本卡提供的是与之等价的 ϑ 路线的一半）；
+    · math.jacobi-theta-functions 的 notes 第 (iv) 条相容性核对（**只是核对，不是依赖**）。
+  ⚠ 本轮**没有**把上述推导改接到本卡上：改接需要同时有 (7.2.38a–d)（ϑ₀₁/ϑ₁₀ 的乘积表示），
+  而那正是本卡「不断言 (a)」排除掉的部分。**待 researcher 取得 p.215 页图后一并处理。**
+author: curator
+created: "2026-09-11"

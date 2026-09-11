@@ -301,7 +301,7 @@ structure TransverseFrame (η b : Fin D → R) where
   /-- The transverse Gram matrix is the identity. -/
   orthonormal : ∀ i j, dotVec η (vec i) (vec j) = if i = j then 1 else 0
 
-/-- The longitudinal oscillator `α^b_m`; by `Longitudinal.lean` this is the Goddard–Thorn
+/-- The transverse oscillator `α^ε_m` (polarisation `ε` from the transverse frame); contrast the longitudinal `K_m = α^b_m` of `Longitudinal.lean`, the Goddard–Thorn
 operator `K_m`. -/
 noncomputable abbrev transOp (η a b ε : Fin D → R) (m : ℤ) : Module.End R (TowerFock D R) :=
   towerModeVec η a b ε m

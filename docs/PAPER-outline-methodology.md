@@ -1,3 +1,5 @@
+> ⚠ Draft under revision (2026-09-12): reviewer-paper-outline-2 found 9 confirmed factual errors (stale counts, one misattributed extraction, a mischaracterised finding); fix branch `agent/lead/paper-outline-2-fix` in progress.
+
 # Paper outline: methodology (draft skeleton)
 
 Target venue class: SciPost Physics Codebases / JOSS / CICM. This is a skeleton for the

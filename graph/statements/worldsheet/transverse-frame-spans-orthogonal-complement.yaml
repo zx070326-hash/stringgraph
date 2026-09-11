@@ -1,0 +1,101 @@
+id: worldsheet.transverse-frame-spans-orthogonal-complement
+kind: proposition
+title: 横向标架的完备性（`FrameSpansOrthogonal`）：显式光锥见证标架的 D−2 个横向向量连同第 −1 层动量 k − k_0 张成 (k − k_0)^⊥；**一般标架下这是一条独立假设，不是正交归一性 + 横向性的推论**
+statement: |
+  【设定】记号沿用 worldsheet.ddf-operators-v6 与 worldsheet.momentum-tower-fock-space：
+  D ∈ N；系数环 R 是交换 Q-代数；对角时空度规分量 η_μ（conv.metric-mostly-plus 下
+  η = diag(−1,+1,…,+1)，η_μ² = 1）；η(x, y) := Σ_μ η_μ x^μ y^μ；
+  基点动量 p 与类光参考向量 k_0，重标度 a^μ := (2α')^{1/2} p^μ、b^μ := (2α')^{1/2} k_0^μ
+  （conv.alpha-prime-regge）；动量塔第 j 层的重标度动量是 a + j·b。
+  **横向标架**是一组 D − 2 个向量 Ε = (ε_1, …, ε_{D−2}) 满足
+    (T) 横向性     η(ε_i, b) = 0（即 ε_i·k_0 = 0，worldsheet.ddf-operators-v6 的定义参数），
+    (O) 正交归一   η(ε_i, ε_j) = δ_{ij}。
+  取第 **−1** 层的动量向量
+    v := a − b   （即 (2α')^{1/2}(p − k_0)；这是 DDF 态 A^ε_{−1}|0; k⟩ 所在的那一层）。
+
+  【定义（完备性谓词）】称横向标架 Ε **在 v^⊥ 上完备**，若
+    ∀ e : {0,…,D−1} → R，  η(e, v) = 0  ⟹
+      ∃ c_1, …, c_{D−2} ∈ R 与 c_0 ∈ R，  e = Σ_{i=1}^{D−2} c_i ε_i + c_0 v 。
+  （即：与 v 正交的向量全部由 D − 2 个横向向量连同 v 自身**在 R 上**线性生成。）
+
+  【断言】设 D ≥ 3，R 是任意交换 Q-代数，取 worldsheet.ddf-hypotheses-satisfiable 的显式见证
+    η = diag(−1, +1, …, +1)，  b = (1, 1, 0, …, 0)，  a = (1/2, 3/2, 0, …, 0)，
+    ε_i := e_{i+1}（i = 1..D−2，即第 2 到第 D−1 个坐标向量）。
+  则该横向标架**在 v^⊥ 上完备**，且分解系数可显式写出：在这个标架里
+    η(e, v) = 0 ⟺ e_0 + e_1 = 0 ，
+  此时
+    e = (−2 e_0)·v + Σ_{i=1}^{D−2} e_{i+1} ε_i 。
+
+  【本卡明确不断言】
+  (a) **不断言一般标架下成立**：对满足 (T)(O) 的任意 Ε 与任意满足 k_0² = 0、2α' k_0·p = 1 的
+      (a, b)，本卡不作任何断言。完备性在本图与 Lean 中都是**显式假设**
+      （Lean `FrameSpansOrthogonal`，出现在 N = 1 张成定理
+      worldsheet.ddf-spans-physical-states-level-one 的假设位上），不是从 (T)(O) 导出的定理。
+  (b) **不断言 (T)(O) ⇏ 完备**（即不断言独立性本身）：curator 有一个初等反例（notes），
+      但它既未形式化、也未经 reviewer 复核，故不写进陈述。
+  (c) 不断言分解系数唯一，也不断言 {ε_i, v} 线性无关或构成基。
+  (d) **不断言 k_0^⊥ 的版本**：本卡的正交补是 **v = a − b 的**，不是 b 的。二者不同
+      （η(b, v) = η(b,a) − η(b,b) = 1 ≠ 0，故 b ∉ v^⊥）。
+  (e) 不断言任何与内积正定性、D = 26 或截距有关的事。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.witness_frameSpansOrthogonal
+  lean_file: StringFormal/NoGhost/LightCone.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.witness_frameSpansOrthogonal（本卡 formal.lean_decl，【断言】）；谓词 StringFormal.NoGhost.FrameSpansOrthogonal（【定义】）；标架结构 StringFormal.NoGhost.TransverseFrame（(T)(O)）与其见证 StringFormal.NoGhost.witnessTransverseFrame；辅助 StringFormal.NoGhost.{transIdx, transIdx_injective, two_le_transIdx, sum_transverse_apply_of_lt, sum_transverse_apply_of_two_le, dotVec_towerMomentum_witness_neg_one, towerMomentum_witness_frameTime, towerMomentum_witness_frameSpace, towerMomentum_witness_apply_of_ne}；见证向量来自 formal/StringFormal/NoGhost/Witness.lean :: StringFormal.NoGhost.{witnessLight, witnessMomentum, witnessPolarization, frameTime, frameSpace}"
+    note: |
+      本仓库，formalizer-noghost-b（分支 agent/formalizer/noghost-b，lead 以 4aded75 合入 main），
+      Lean 4 + Mathlib v4.33.1，无 sorry。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本卡 status formalized 的依据。
+      **逐句字典**：【定义】的完备性谓词 ⇒ `FrameSpansOrthogonal η Ε v`，逐字
+      `∀ e, dotVec η e v = 0 → ∃ (c : Fin (D-2) → R) (c₀ : R), e = (∑ i, c i • Ε.vec i) + c₀ • v`；
+      (T) ⇒ `TransverseFrame.transverse`；(O) ⇒ `TransverseFrame.orthonormal`（`if i = j then 1 else 0`）；
+      v = a − b ⇒ `towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1)`；
+      ε_i = e_{i+1}（本卡从 1 数）⇒ `witnessPolarization D R (transIdx D hD i)`，
+      `transIdx D hD i = ⟨i + 2, _⟩`（Lean 从 0 数，故是第 i+2 个坐标）。
+      ⚠ 两处记号错位已按 Lean 核对：本卡 ε_i（i = 1..D−2）对应 Lean 的 `Ε.vec ⟨i−1⟩`，
+      两者都指第 2..D−1 个坐标向量（0 起标）。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, (5.1) 后正文：'ε^i·ε^j = δ^{ij}, k·ε^i = 0'"
+    note: |
+      **不承载本卡的断言**。只定位文献侧对应的标架选取：Goddard 只写正交归一与横向，
+      **从不写完备性**（GT 的计数论证——H_phys 的 p_{D−1}(N) 与 H^⊥ 的 p_{D−2}(N)——
+      默认横向标架已把 (k − k_0)^⊥ 里除动量方向外的全部方向穷尽）。本卡登记的正是这个落差。
+tags: [bosonic-string, no-ghost, spectrum-generating-algebra, light-cone, formalized]
+notes: |
+  【为什么立卡（curator 2026-09-11，lean-wire-13；formalizer-noghost-b 的发现）】
+  formal/StringFormal/NoGhost/LightCone.lean 的 N = 1 张成定理
+  `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 带**两条**超出 DDF 岛四条常设假设的前提：
+  `hεa`（(T′) ε·p = 0，已登记在 worldsheet.ddf-operators-v6 的 notes）与 **`hspan`（本卡的完备性）**。
+  该文件的 "Scope and gaps" 一段逐字写：「**`TransverseFrame` does not imply completeness.**
+  … it does **not** follow from orthonormality plus transversality in general.」
+  本卡把这条前提从 Lean 的假设位提到图上，使 N = 1 张成卡的依赖是显式的。
+
+  【curator 手算的反例（**未形式化、未经 reviewer 复核**，故不在陈述里）】
+  取 formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 **整数**见证
+    η = diag(−1, +1, +1)，b = (1, 1, 0)，a = (0, 1, 1)，ε_1 = e_2 = (0, 0, 1)，
+  它满足 (η)(N)(S)(T)(O)（机检：`noghost_hypotheses_satisfiable_int`，D − 2 = 1）。
+  此时 v = a − b = (−1, 0, 1)，η(e, v) = e_0 + e_2。取 e = (0, 1, 0)：η(e, v) = 0，
+  但 c_1 ε_1 + c_0 v = (−c_0, 0, c_1 + c_0) 的第 1 个分量恒为 0 ≠ 1，故无解。
+  ⇒ (T)(O) **不**蕴含完备性。注意该见证同时也违反 (T′)（ε_1·a = 1 ≠ 0），这不是巧合：
+  ε_i ⊥ a 且 ε_i ⊥ b ⇒ ε_i ⊥ v，是完备性成立的必要条件（否则 ε_i ∉ v^⊥ 而右端却落在 v^⊥ 内）。
+  ⚠ 这段计算若要进图，应先形式化（Lean 里是五行）或走 docs/STATUS_LEVELS.md 的
+  rigorous 例外（reviewer 独立复核 + 在推导 notes 写 `reviewer-verified`）。
+
+  【(T′) 与完备性是两条**不同**的缺假设】
+  · (T′) ε·p = 0 使 A^ε_{−1}|0;k⟩ **等于** α^ε_{−1}|0;k−k_0⟩（领头项无修正）；
+  · 完备性使「第 −1 层能级 1 的物理偏振」**全部**落在横向方向加动量方向里。
+  前者是关于 DDF 算子的，后者是关于标架的线性代数。两者在显式见证上都成立
+  （`dotVec_witnessTransverseFrame_witnessMomentum` 与本卡），但都不是四条常设假设的推论。
+
+  【一般情形该怎么补】
+  在实洛伦兹签名、R = R 上，k_0² = 0 且 k_0·p ≠ 0 ⇒ span{k_0, p} 是非退化二维平面，
+  其正交补恰 D − 2 维，把 ε_i 取在那里即可（这正是文献默认的光锥标架），完备性随之成立。
+  但那条论证需要**实**二次型的非退化性与维数计数，本图与 Lean 都在一般交换 Q-代数上工作，
+  没有这些工具；这与 worldsheet.ddf-operators-v6【本卡明确不断言】(d) 是同一类障碍。
+  ⇒ 建议的补法不是「证明一般情形」，而是把「取在 span{k_0,p}^⊥ 里」写成标架的**定义条件**
+  （一张 `worldsheet.ddf-light-cone-frame` 定义卡），让 (T′) 与完备性都成为它的组成部分。
+  本轮不建（见 worldsheet.ddf-operators-v6 notes 末段的同一建议）。
+author: curator
+created: "2026-09-11"
