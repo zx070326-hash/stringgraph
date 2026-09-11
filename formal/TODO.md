@@ -298,8 +298,34 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     （内层整理可能产生比原尾巴更长的词）。
   - [ ] (b) **线性无关**：即 `U(Vir_-)` 的 Poincaré–Birkhoff–Witt + 诱导模的自由性。
     Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
+    **已有 generic `N ≤ 4` 替代（2026-09-11）**：见 `StringFormal/Virasoro/GenericIndependence.lean`
+    （无 sorry，公理只有标准三条）。`linearIndependent_of_gram_det_ne_zero`：任意交换整环上、
+    任意双线性型 `B`、`det [B(vᵢ,vⱼ)] ≠ 0` ⟹ `v` 线性无关（Mathlib 只有内积空间版
+    `Matrix.linearIndependent_of_det_gram_ne_zero`）。配上已算出的 Kac 行列式即得
+    `IsContravariant.linearIndependent_descFamily{2,3,4}`：**只要该层 Kac 多项式在 `(c,h)` 处不为零**
+    （即一般 `(c,h)`），`N = 2,3,4` 的 `p(N)` 个标准降算符向量线性无关。
+    `IsContravariant.finrank_levelSpan_two`：`dim V₂ = 2 = p(2)`（PBW 等式的第一个实例；
+    上界来自 (a)，下界来自 Gram 非零；`levelSpan_two_eq_span_descFamily2` 无条件给出
+    `V₂ = span{L₋₂|c,h⟩, L₋₁²|c,h⟩}`，绕开 `p(2)` 的计数）。
+    `N = 3,4` 只给到 `dim V₃ ≥ 3`、`dim V₄ ≥ 5`：升级为等式需要 `Fintype.card (Nat.Partition 3) = 3`、
+    `= 5`，Mathlib 没有 `Nat.Partition` 的基数引理且 `decide` 化不开（`Fintype.ofSurjective` 实例）；
+    另一条路（`levelSpan N = span (标准向量)`）在 `N ≥ 3` 需要整序（`[1,2]` 是 3 的组合，
+    但 `L₋₁L₋₂|c,h⟩` 不是三个标准向量之一）。
+    `kac_level_two_pos`：有序域上 `h > 0`、`c > 1` ⟹ 层 2 行列式 `> 0`，故该区无需行列式假设
+    （`linearIndependent_descFamily2_of_pos`）。**`c` 无上界限制**：`c > 25` 时 Kac 二次式确有实根，
+    但两根之和 `(5-c)/8 < 0`、积 `c/16 > 0`，故两根皆负，与 `h > 0` 无关；闭区域 `h > 0, c ≥ 1`
+    上唯一零点是 `c = 1, h = 1/4`（`kac_level_two_at_c_one`：行列式 `= 2h(4h-1)²`）。
+    该零点处的退化方向已给出：`desc2_sub_desc11_orthogonal_levelSpan_two`——`c = 1, h = 1/4` 时
+    level-2 Gram 矩阵三个元全等于 `3/2`，故 `(L₋₂ − L₋₁²)|c,h⟩` 与整个 `V₂` 正交
+    （即一般奇异向量 `(L₋₂ − 3/(2(2h+1)) L₋₁²)|c,h⟩` 在 `h = 1/4` 的系数恰为 1）。
+    **由此也说明 Gram 判据不可逆**：`det = 0` **不**蕴含向量线性相关（按 PBW 它们对所有 `(c,h)`
+    都独立），只说明形式在其张成上退化。
+    **仍未做**：真正的 (b)。generic 版**不是** PBW：它假设存在归一化逆变型（等价于 `hwv ≠ 0`，
+    见 `exists_isContravariant_iff_hwv_ne_zero`），而这正是 (b) 的推论；且在 Kac 零点处失效
+    （那里向量可能仍独立，只是形式退化）。所以这是 `dim V_N = p(N)` 的**条件**、**一般点**版本。
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
-  `dim V_N = p(N)` 也只证到 `≤`。这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
+  `dim V_N = p(N)` 除 generic `N = 2` 外只证到 `≤`。这一项是 `shapovalov-form` 与
+  `kac-determinant` 的前提。
 - [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
   （无 sorry，公理只有标准三条）：
   - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
@@ -475,6 +501,45 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   注意：Mathlib v4.33.1 **已无** `LinearOrderedField` 类，有序域写作
   `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`；证明只需有序环，域与全序都用不上。
   公理检查：全部声明只用 propext / Classical.choice / Quot.sound。
+- [x] `fock-gram`：振子 Fock 空间上**产生单项式的 Gram 矩阵**，即图卡
+  `worldsheet.transverse-ddf-fock-gram-matrix`（(H1)–(H4) 下的条件命题）在 `Fock D R` 上的实例。
+  见 `StringFormal/NoGhost/FockGram.lean`（不改 `Fock.lean`，只加新文件）：
+  - `creationMonomial R d`（`d : Osc D →₀ ℕ`）= `∏_{(μ,n)} (α^μ_{-n})^{d(μ,n)} |0⟩`；
+    `creationMonomial_eq_monomial`（= `monomial d 1`）、`creationMonomial_zero` /
+    `_single` / `_add_single`（递归刻画：逐个作用产生算子）、
+    `creationMonomial_mem_levelSubmodule`（level = `Σ n·d(μ,n)`）。
+  - (H1)：`commute_creation`（`Module.End` 里的 `Commute`）与
+    **`foldr_creation_vacuum`**——沿**任意**枚举多重集 `d` 的列表逐个作用产生算子，结果相同，
+    这是「乘积只依赖多重集」的精确含义（用 `List.count` 表述列表枚举 `d`）。
+  - 第 (1) 步 Leibniz：**`annihilation_creationMonomial`**
+    `α^μ_n ∏(α_{-m})^d |0⟩ = n η^{μμ} d(μ,n) · ∏(α_{-m})^{d-δ} |0⟩`，
+    以及 `annihilation_creationMonomial_add_single`（递归形，系数 `n η^{μμ}(d(μ,n)+1)`）、
+    `annihilation_creationMonomial_of_apply_eq_zero`。
+  - 第 (2) 步：`pairing_creationMonomial_add_single`（由伴随性 + 第 (1) 步得到的递推）与主结论
+    **`pairing_creationMonomial`**：`⟨mono d, mono e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} d(μ,n)!`
+    （`monomialNorm`），加 `_of_ne` / `_self`；`monomialNorm_one` 与
+    `pairing_creationMonomial_one` 给 η ≡ 1（横向/正定）时图卡字面的 `∏ n^{d} d!`。
+  - **`pairing_creationMonomial_of_hypotheses`**：条件版，对**任意**满足 `⟨0|0⟩ = 1`(H4) 与
+    产生/湮灭互为伴随 (H2)(H3) 的双线性型 `B` 成立（经 `Fock.pairing_unique`）。
+    这条才是图卡的忠实 Lean 对应——**`Fock.pairing` 是按单项式基对角地*定义*的**，
+    所以 `pairing_creationMonomial` 本身廉价，数学内容在 `pairing_unique` 与这条条件版里。
+    图侧推导应引这条，不要引对角那条。
+  - 第 (3) 步：`monomialNorm_pos` / `pairing_creationMonomial_self_pos`（有序环，需 `∀ μ, 0 < η μ`）、
+    `pairing_self_pos_of_ne_zero`（全序环上**正定**：η > 0 时整个 Fock 空间无零/负模态）；
+    `linearIndependent_creationMonomial` 与 `basisMonomials_eq_creationMonomial`
+    （线性无关对**任意**基环成立，比「有序域上由正定推出」更强）。
+  - **正特征退化（新发现）**：`monomialNorm_single` 与
+    **`pairing_creationMonomial_self_eq_zero_zmod_two`**——`ZMod 2` 上（η ≡ 1）
+    `(α^1_{-1})²|0⟩` 的模为 `2! = 0`。图卡结论 (1) 对**任意交换环**成立，
+    但结论 (2)（正交基 + 正定）除了序之外还需要对角元 `∏ n^d d!` 在 R 中非零，
+    即**特征 0**（有序域自动满足）。图卡应将此记入 notes/边界。
+  公理检查：25 条声明全部 `ok`，只用 `propext` / `Classical.choice` / `Quot.sound`
+  （`--import StringFormal.NoGhost.FockGram --all`，2026-09-11）。
+  **数学缺口（对图）**：(a) 本文件把 (H1)–(H4) 证成了*定理*，因此证明了图卡的结论并说明假设集自洽，
+  但**没有**证明 DDF 算子满足 (H1)–(H4)——那是无鬼岛里另一项义务；
+  (b) 正定性要求 η 逐分量为正，mostly-plus Minkowski 的类时方向不成立
+  （`Fock.pairing_X_X_minkowski_timelike`），这正是无鬼定理只谈**横向**扇区的原因；
+  (c) 零模（动量 `k`）、完化、复埃尔米特版本的缺口与 `Fock.lean` 文件头相同，未新增。
 - [x] `physical-states`：`H_phys` 子模与零模态。
   见 `StringFormal/NoGhost/PhysicalStates.lean`（约 800 行，无 sorry，公理只有标准三条）。
   截距记作 `a₀ : R`（`a` 已被零模参数占用；符号按 `conv.intercept-sign-a`）。做到：
@@ -533,7 +598,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   **未做**：非退化性（`∀ q', ⟨q,q'⟩ = 0 → q = 0`，形式上 routine 但没写）与正定性（无鬼定理本体）。
   图侧：建议 `worldsheet.spurious-orthogonal-to-physical--via-lean` 的 `lean_decl` 列
   `spuriousSubmodule_le_orthComplement` 与 `quotientPairing_mk`，从 rigorous 升回 formalized。
-- [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
+- [x] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**算子部分已完成**
+  （构造、`⁅L_m, A^ε_n⁆ = 0` ∀m、保物理子空间、伴随、`[A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0}`）；
+  张成性属于下一项 `ddf-spans`。见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
 
@@ -896,37 +963,47 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
          在 `ℤ` 上只能得到 `(m+n)·Σ_j j V^{(m)}_j V^{(n)}_{-j} = 0`。
       6. 主定理的窗口假设比"最小窗口"多留了 `towerModeBound x` 的余量
          （`m - N - M ≤ j ≤ N - n`），这正是第 3 点里中间二重和需要的；对调用者无代价。
-  - **[A,A] 的整条链**（记录，供下一位）：横向性 (4) 给
+    - **[x] 做完了 (5c)** 组装 **`[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}`**（塔上，`k_0² = 0`、
+      `2α' k_0·p = 1`、`ε·k_0 = δ·k_0 = 0`）：`StringFormal/NoGhost/DDFAlgebra.lean`，
+      无 sorry，4 条声明公理只有标准三条（`--import StringFormal.NoGhost.DDFAlgebra --all`）。
+      主定理 **`lie_ddfOp_ddfOp`**，另三条 `lie_towerMode_towerMode`（塔上 CCR）、
+      **`lie_towerModeVec_towerModeVec`**（偏振 CCR）、**`ddfOp_mul_ddfOp_apply`**（二重和）。
+      上一位预判的路线（横向性移 `V`、(5) 换 `V`、CCR、(5b) 收尾）逐字走通，
+      约 170 行，确实没有新的数学内容。三点实现上的记录：
+      1. **偏振 CCR 要用 `η_μ² = 1`**：`[α^ε_j, α^δ_l]` 含三个度规因子
+         `Σ_μ (η_μ ε^μ)(η_μ δ^μ)(m η^{μμ}) = m Σ_μ η_μ³ ε^μ δ^μ`，只有 `η² = 1` 才塌成
+         `m (ε·δ)`。`hη` 本来就是全线程的假设，但这是它**第一次**在中心项里起作用
+         （此前只用于 `[L_m, α_p]`），不是纯约定。
+      2. **两个横向性各用各的**：`δ·k_0 = 0` 用在 `A^ε_m A^δ_n` 里（把 `V^{(m)}_j` 挪过
+         `α^δ_l`），`ε·k_0 = 0` 用在反序乘积里；两者又都为 `ddfOp` 的存在性所必需。
+         所以 `lie_ddfOp_ddfOp` 有四个几何假设，一个都省不掉。
+      3. **窗口对齐用 `Finset.biUnion` 绕开显式界**：外层算子作用在 `α^δ_l V^{(n)}_l x` 上，
+         它的 `towerLevelBound` / `towerModeBound` 没有现成的估计（要重新做一遍
+         顶点算子对 level bound 的作用）。改成取 `t₁.biUnion (fun l => ddfWindow m (...))`，
+         有限性自动，完全不需要界。最后两序的公共指标集取
+         `U = V ∪ (-V)`（`V` 含四个窗口与 (5b) 的窗口 `Icc (m-N-M) (N-n)`），
+         **对 `j ↦ -j` 封闭**是为了内层 `Σ_l δ_{j+l,0}` 落回 `U` 里。
+      4. **`Module.End` 上的 `sub_mul` / `← LieRing.of_associative_ring_bracket` `rw` 不上**
+         （实例路径 `LinearMap.instSub` 与环结构的 `Sub` 不同构于语法层面）。
+         办法与 `Fock` 里既有的做法一致：`congrArg (fun T => T x)` 到向量层面，
+         再 `simp only [LinearMap.sub_apply, Module.End.mul_apply, LinearMap.smul_apply]`。
+  - **[x] [A,A] 的整条链已完成**：横向性 (4) 给
     `[A^ε_m, A^δ_n] = Σ_{j,l} [α^ε_j, α^δ_l] V^{(m)}_j V^{(n)}_l`（用到 (5) 的顶点算子对易
-    把两个 `V` 并到右边），再用 `Fock` 的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
-    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。
-    **(5)、(5a)、(5b) 全部已做**；**只剩双重局部有限和的 Leibniz 组装**
-    （可仿 `lie_towerLop_ddfOp_of_pos`）：把 `⁅A^ε_m, A^δ_n⁆` 展成对 `j`、`l` 的二重和，
-    用横向性 `lie_towerModeVec_towerVertex`（`ε·k_0 = 0` 时为零）把 `V` 挪到右边，
-    用 `Fock` 的 CCR 把 `[α^ε_j, α^δ_l]` 化成 `j(ε·δ)δ_{j+l,0}`，最后套
-    `sum_weighted_towerVertex_towerVertex`（窗口假设是
-    `m - towerLevelBound x - towerModeBound x ≤ j ≤ towerLevelBound x - n`）。
-    估计 150–250 行，主要工作量在窗口对齐，不再有新的数学内容。
+    把两个 `V` 并到右边），再用塔上的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
+    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。见 (5c)。
+
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - `⁅L_m, A^ε_n⁆ = 0` 与「`A^ε_n` 保持 `towerPhysSubmodule`」**全部 `m` 已证**（见 (6)）；
-    剩下的是 `[A,A]` 振子代数与张成性。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 的**顶点算子部分全部已做**
-    （(5) 对易 + (5a) 同点乘积 + (5b) 加权和 `sum_weighted_towerVertex_towerVertex`）；
-    只剩把它接到 `ddfOp` 上的 Leibniz 组装。
-  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
-    所以「`A^ε_n` 把物理态送到物理态」还证不了。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**三步都已做**（(5) 正交动量顶点算子对易、
-    (5a) 同点乘积 `Fock.vertexProduct_eq_vertexOsc_add`、
-    (5b) 加权和 `sum_weighted_towerVertex_towerVertex`）；剩 Leibniz 组装。
-  - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
-    仍缺同点乘积 (5a) 与加权和 (5b)。
-  - ~~`A^ε_n` 的伴随未做~~：**已做**，见下一项 `vertex-adjoint`。
+    `[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}` **已证**（见 (5c)）；`A^ε_n` 的伴随**已证**
+    （见 `vertex-adjoint`）。**本项只剩张成性，那是下一项 `ddf-spans`。**
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
+  - `lie_ddfOp_ddfOp` 右端的 `(ε·δ)` 是**任意**度规下的收缩；「横向子空间上 `ε·δ` 正定、
+    因而 DDF 态的 Gram 是欧氏振子的 Gram」需要 `R` 为有序域与 `η = (-1,1,…,1)`，
+    是 `ddf-spans` / 无鬼定理那一侧的内容，不属于本项。
 - [x] `vertex-adjoint`：顶点算子与 DDF 算子在 Fock/塔配对下的伴随 ——
   `StringFormal/NoGhost/VertexAdjoint.lean`。对应图节点 `worldsheet.vertex-operator-adjoint`
   与 `worldsheet.ddf-operators-adjoint`；补上 `VertexOperator.lean` 的缺口 (3) 与

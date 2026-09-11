@@ -35,7 +35,7 @@ summary: |
 gaps:
   - "USp 一支 GS 原文完全没有（抽取记录 Q4），是抽取者的推论；本推导据 (12c)(13b) 补出，边已标 inferred。"
   - "「当且仅当」的 ⇒ 方向 GS 未写（只给充分条件），本图补足；平凡但归属须记清。"
-  - "缺 reviewer 独立复核记录，故不取 rigorous（docs/STATUS_LEVELS.md）。"
+  - "**[已关闭 2026-09-11]** 原缺口是「缺 reviewer 独立复核记录，故不取 rigorous」。reviewer-gs1984 已符号复核（记录见 notes 首行），本条现为 `kind: proof` / `status: rigorous`。⚠ 上面两条关于 USp 一支与「当且仅当」⇒ 方向的归属缺口**仍然有效**（它们是归属问题，不是计算问题）。"
 notes: |
   reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
   这条是「为什么偏偏是 32」在纯规范反常一路上的**唯一**代数入口（抽取记录 §5.3）。

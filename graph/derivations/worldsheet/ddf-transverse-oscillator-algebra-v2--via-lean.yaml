@@ -1,0 +1,206 @@
+id: worldsheet.ddf-transverse-oscillator-algebra-v2--via-lean
+target: worldsheet.ddf-transverse-oscillator-algebra-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **被断言对易关系的那两个算子本身**：该卡的 formal.lean_decl
+      `StringFormal.NoGhost.ddfOp` 就是本推导里的 A^ε_m 与 A^δ_n，
+      模态和 A^ε_n = Σ_j (ε·α_j) V^{(n)}_j 是它的定义式，横向性 ε·k_0 = 0
+      （`hεb : dotVec η ε b = 0`）是它的**定义参数**。
+      本推导用 `ddfOp_apply`（「任意够大的窗口都算得对」）把两个算子各展成有限和。
+      ⚠ 该卡是 formalized 定义卡，这条边不压低本推导状态。
+      ⚠ **量词对照**：Lean 的 `ddfOp` 对一切 n ∈ ℤ（含 0）有定义，本目标卡写的是
+      m, n ∈ Z\{0}；本推导证的是更强的 ∀ m,n ∈ ℤ，特例化到 m,n ≠ 0 即目标。
+      按该卡【Lean 比本卡更一般的三处】(2) 的要求，**不**把本目标卡的量词自动放宽。
+  - id: worldsheet.ddf-transversality-gives-local-finiteness-v2
+    inferred: false
+    note: |
+      **使两个模态和都是有限和**，从而二重和可以逐项重排。Lean 侧本推导直接调用该卡的
+      formal.lean_decl `StringFormal.NoGhost.ddfSummand_apply_eq_zero_of_notMem_window`，
+      并用它三次：(i) 内层算子在 x 上的窗口；(ii) 外层算子在**每个**内层结果
+      α^δ_l V^{(n)}_l x 上的窗口（取 `Finset.biUnion`，见 summary 第 3 段）；
+      (iii) 把两种乘积顺序放到**同一个**指标集 U 上。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.isotropic-tower-vertex-operators-commute
+    inferred: false
+    note: |
+      **本推导中 k_0² = 0 的第一处承重**：把反序乘积里的 V^{(n)}_l V^{(m)}_j 换成
+      V^{(m)}_j V^{(n)}_l，两种顺序才能逐项相减。Lean 侧逐字调用该卡的 formal.lean_decl
+      `StringFormal.NoGhost.towerVertex_comm_of_isotropic`。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+      ⚠ 该卡自己记载：k_0² ≠ 0 时结论**假**（单值因子 (w/z)^{mn k_0²} ≠ 1），
+      故这条边不可去。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **承载断言的空间**。A^ε_m 与 A^δ_n 各自跨层（+m、+n），只有在塔
+      T(p;k_0) = ⊕_N F(p+N k_0) 上两者的复合才有意义；该卡的 formal.lean_decl 给出
+      `TowerFock D R` 与逐层作用的 α^μ_p（`towerMode`）。
+      本推导**不**用该卡的双线性型（层间正交那条约定）——对易关系是纯算子等式，
+      与配对无关。⚠ 该卡是 formalized 定义卡，不压低本推导状态。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      **中心项的来源**：振子代数 [α^μ_m, α^ν_p] = m η^{μν} δ_{m+p,0}。
+      本推导把它逐层提升到塔上（Lean 侧新证的 `lie_towerMode_towerMode`），
+      再对偏振指标收缩两次得 `lie_towerModeVec_towerModeVec`：
+      [α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}。
+      ⚠ Lean 侧被调用的具体声明是 `StringFormal.NoGhost.Fock.lie_mode_mode`
+      （**含零模、对一切 m,p ∈ ℤ** 的版本），它登记在
+      worldsheet.virasoro-generators-free-boson 的 stringformal-2026 source 里，
+      而本卡登记的是产生/湮灭分块版 `lie_annihilation_creation` 等。两条边都列上。
+      ⚠ 该卡是 formalized 定义卡，不压低本推导状态。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      只为上一条边里的 `Fock.lie_mode_mode` 提供图上的落点（该声明列在这张卡的
+      stringformal-2026 source 中，不在 worldsheet.bosonic-fock-space 里）。
+      本推导**不**使用 L_m 本身，也不使用中心荷 c = D。
+      若 curator 认为「全模态振子代数」应当单列成卡，这条边应改指那张新卡。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFAlgebra.lean :: StringFormal.NoGhost.lie_ddfOp_ddfOp；辅助 StringFormal.NoGhost.{lie_towerMode_towerMode, lie_towerModeVec_towerModeVec, ddfOp_mul_ddfOp_apply}；三块输入 VertexCommute.lean :: towerVertex_comm_of_isotropic、VertexProduct.lean :: sum_towerVertex_towerVertex_of_isotropic、VertexWeightedSum.lean :: sum_weighted_towerVertex_towerVertex；算子与窗口 DDFOperator.lean :: {ddfOp, ddfOp_apply, ddfSummand, ddfWindow, ddfSummand_apply_eq_zero_of_notMem_window, towerModeVec, towerModeVec_mul_towerVertex_of_transverse}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，`lake build` 全量通过，无 sorry；
+      四条声明 `lake env lean --run scripts/check_axioms.lean --all` 全 `ok`
+      （公理只有 propext / Classical.choice / Quot.sound）。
+      分支 agent/formalizer/ddf-algebra，尚未合入 main；合并前由 lead 跑
+      `uv run stringgraph check-axioms`。这是本推导 status: formalized 的唯一依据。
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.4)"
+    note: |
+      **只承载语境，不承载论证**：本推导与 --via-zero-mode-bracket 走的是**不同**路线
+      （G–N 用物理态的李括号 (3.1) + 零模字典 (2.62)；本推导在代数 Fock 塔上直接做二重和），
+      但两者的结论逐字相同，且右端「没有 k_0 或 p 的残余因子」的机制一致
+      （G–N 的 k(0) = k·α_0 与本推导的 `towerCurrent_zero_of_normalized` 是同一个零模，
+      归一化 k·r = 1 ↔ 2α' k_0·p = 1 把它变成 1）。列在这里是为了让读者能对照同一结论的两种论证。
+summary: |
+  机器检查的证明。链条是：**两种乘积顺序 → 同一个二重有限和 → 只剩 CCR → 指标加权和**。
+  四个几何假设（k_0² = 0、2α' k_0·p = 1、ε·k_0 = 0、δ·k_0 = 0）**一个都省不掉**，
+  且各司其职，下面逐段标出。
+
+  **第 0 步（偏振 CCR）：`lie_towerModeVec_towerModeVec`，[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}。**
+  先把 Fock 层的 `Fock.lie_mode_mode` 逐层搬到塔上（`lie_towerMode_towerMode`：
+  中心项 m η^{μν} δ_{m+p,0} **与塔的层号无关**，因为 `towerMode` 逐层用的是同一套振子），
+  再对 α^ε_p = Σ_μ η_μ ε^μ α^μ_p 的两个偏振指标求和。
+  **这一步用到 η_μ² = 1**：三个度规因子 (η_μ ε^μ)(η_μ δ^μ)(m η^{μμ}) 合成 m Σ_μ η_μ³ ε^μ δ^μ，
+  只有 η² = 1 才塌成 m (ε·δ)。这是 `hη` 第一次进入**中心项**（此前只用于 [L_m, α_p]）。
+
+  **第 1 步（乘积展成二重和）：`ddfOp_mul_ddfOp_apply`。**
+    A^ε_m A^δ_n x = Σ_{j,l} α^ε_j V^{(m)}_j α^δ_l V^{(n)}_l x
+                  = Σ_{j,l} α^ε_j α^δ_l V^{(m)}_j V^{(n)}_l x。
+  第二个等号把 V^{(m)}_j 挪过 α^δ_l，用的是**内层偏振的横向性 δ·k_0 = 0**
+  （`towerModeVec_mul_towerVertex_of_transverse`：ε·k_0 = 0 ⟹ α^ε 与 V 严格对易，无缩并）。
+  反序乘积 A^δ_n A^ε_m 同理，那里用的是 **ε·k_0 = 0**。
+  ⇒ **两个横向性各用一次，不是同一次**；它们又都是 A^ε、A^δ 各自有定义的前提（局部有限性）。
+
+  **第 2 步（窗口对齐，本推导唯一的技术内容）。**
+  外层算子作用在 α^δ_l V^{(n)}_l x 上，而这些向量的 towerLevelBound / towerModeBound
+  没有现成估计（要重做一遍顶点算子对 level bound 的作用）。绕法：内层窗口 t₁ = ddfWindow n x
+  是有限集，取 **s₁ = t₁.biUnion (fun l => ddfWindow m (α^δ_l V^{(n)}_l x))**，有限性自动、
+  无需任何显式界。两种顺序各得一对窗口，最后取公共指标集
+    U = V ∪ (−V)，  V = s₁ ∪ t₁ ∪ s₂ ∪ t₂ ∪ Icc(m − N − M, N − n)，
+  其中末项是第 4 步所需的窗口（N = towerLevelBound x，M = towerModeBound x）。
+  **U 对 j ↦ −j 封闭**，是为了第 3 步的内层 δ_{j+l,0} 落回 U 里。
+
+  **第 3 步（相减，只剩 CCR）。**
+    ⁅A^ε_m, A^δ_n⁆ x = Σ_{j,l∈U} ( α^ε_j α^δ_l − α^δ_l α^ε_j ) V^{(m)}_j V^{(n)}_l x。
+  这里把反序项的 V^{(n)}_l V^{(m)}_j 换成 V^{(m)}_j V^{(n)}_l，用的是
+  worldsheet.isotropic-tower-vertex-operators-commute（**k_0² = 0 的第一处承重**）。
+  代入第 0 步的 CCR，内层 l-求和塌成 l = −j 一项：
+    ⁅A^ε_m, A^δ_n⁆ x = (ε·δ) · Σ_{j∈U} j · V^{(m)}_j V^{(n)}_{−j} x。
+
+  **第 4 步（指标加权和）。** 由 `sum_weighted_towerVertex_towerVertex`
+    Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}，
+  完。这一步是整条链里唯一含"全导数/留数"内容的一步，也是 **2α' k_0·p = 1 的唯一入口**
+  （它使 k_0·α_0 = 1 在塔的**每一层**都成立，右端那个 m 就是它）；
+  同时 k_0² = 0 在其内部再用三次（电流权恒等式、电流与顶点算子的对易、局部有限窗口）。
+
+  **假设逐条核对**（这是 gaps 第 2、3 条的依据）：
+    用到：`hη : ∀ μ, η μ * η μ = 1`；`hbb : k_0² = 0`；`hba : 2α' k_0·p = 1`；
+          `hεb : ε·k_0 = 0`；`hδb : δ·k_0 = 0`。
+    **不**用到：m ≠ 0、n ≠ 0；ε·δ = δ^{ij}（正交归一标架）；ε·p = 0；D 的任何取值；
+                R 的有序性 / 正定性；任何解析对象（z、围道、共形权）。
+gaps:
+  - |
+    **本推导的两块最重的 Lean 输入在图上没有节点**，这是本次形式化留下的最大记账缺口，
+    建议 curator 补两张卡（formalizer 已在 Lean 文件头写好可直接改写的陈述与反例说明）：
+      (A) **同点乘积** Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L（k_0² = 0）
+          —— `StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic`
+          （单 Fock 版 `Fock.vertexProduct_eq_vertexOsc_add`）。
+          **b·b′ ≠ 0 时结论假**，不只是没证：缩并给出 (1 − w/z)^{−b·b′}，展开混合所有洛朗指标，
+          K-求和不再局部有限。
+      (B) **指标加权和** Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（k_0² = 0 且 2α' k_0·p = 1）
+          —— `StringFormal.NoGhost.sum_weighted_towerVertex_towerVertex`，
+          其原子是**电流权恒等式** Σ_J (b·α_{−J}) V^{(b)}_{L−J} = (L + b·a) V^{(b)}_L
+          （`Fock.vertexCurrent_eq`），即 z ∂_z :e^{ib·X}: = :(i b·z∂_z X) e^{ib·X}: 的代数形式。
+          **(B) 不是 (A) 的推论**：L_0 的 Leibniz 只见两个因子权的**和**，在 L = 0 处退化成 0 = 0。
+    在这两张卡建好之前，本推导的 depends_on **不完整**：图上看不出 (A)(B) 这两步。
+    它们不会压低有效状态（两条在 Lean 里都无 sorry、公理标准），但会让
+    `stringgraph why` 给出的瓶颈树漏掉两条真实的承重链。
+    **⚠ 合并提示（2026-09-11）**：总线上 claim #281（curator-lean-wire-4，分支
+    agent/curator/lean-wire-4）正在建的正是这两张卡
+    （worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators /
+    isotropic-tower-vertex-operator-fusion / exponential-vertex-operator-current-weight-identity /
+    tower-vertex-weighted-mode-sum）。两支并行、互不知情：那支声明「本卡只改 gaps/notes」，
+    本支加了 formal 块与本推导。**lead 合并时请把 (A)(B) 两条边补进本推导的 depends_on**
+    （均非 inferred：Lean 证明逐字调用它们），并核对两支对本卡 notes 的改动是否重叠。
+  - |
+    **Lean 陈述比本目标卡更一般的三处，不自动放宽本卡的量词。**
+      (1) 偏振：Lean 只要求 ε·k_0 = 0、δ·k_0 = 0，**不**要求 ε·δ = δ^{ij}，
+          右端是一般收缩 `(if m+n=0 then m·(ε·δ) else 0)`。本卡的 m δ^{ij} δ_{m+n,0}
+          是它在正交归一横向标架处的特例。
+      (2) 指标：Lean 对一切 m, n ∈ **ℤ（含 0）**成立；本卡写 m, n ∈ Z\{0}。
+      (3) 系数环：Lean 在任意交换 ℚ-代数 R 上成立，不需要有序性、实数、或正定性。
+    ⚠ 反过来，**「存在正交归一的横向标架 {ε^i}」这件事 Lean 里没有证**，也不该在一般 R 上证：
+    它是关于**实**洛伦兹二次型在类光向量正交补上的断言。本卡的 δ^{ij} 因此仍是**假设**，
+    不是结论；形式化关闭的是「给定这样的标架之后」的那一步。
+  - |
+    **围道写法与模态和写法的等价仍未形式化。** 文献（GSW §2.3.3、GT 1972、G–N §3.1）
+    写的 A^i_n 是围道积分 / 顶点算子零模；本推导证的是模态和版本
+    （worldsheet.ddf-operators-v6）。字典由 worldsheet.ddf-contour-equals-mode-sum 承载，
+    status physical-argument。本推导**没有**改善它。
+  - |
+    **本推导不给任何正模性、也不给非平凡性。** 等式两端在退化情形（ε = 0、b = 0、
+    R 中某些元素不可逆）同样成立；`A^ε_n ≠ 0` 未证。
+    无鬼定理要的「横向 DDF Fock 空间上 Gram 对角正定」是
+    worldsheet.transverse-ddf-fock-gram-matrix，它把本卡当作前件 (H1)，另需
+    (A^i_n)† = A^i_{−n}（worldsheet.ddf-operators-adjoint-v2，已 formalized）
+    与 R 为有序域。**那一步的装配仍未形式化。**
+  - |
+    **「存在类光 k_0 使 k_0·p ≠ 0」的可满足性未证**（继承 worldsheet.ddf-operators-v6 的
+    【本卡明确不断言】(d)）：这是关于实洛伦兹二次型的存在性断言，在一般交换环 R 上为假。
+    本推导在一般 R 上工作，把 k_0² = 0 与 2α' k_0·p = 1 当作给定的假设。
+  - |
+    **本目标卡 statement 里的文字指针仍写 worldsheet.ddf-operators-v5**（已被 v6 取代），
+    见该卡 notes 的【⚠ statement 里的 ... 指针】一段。本推导的 depends_on 指的是 **v6**，
+    即与 Lean `ddfOp` 逐句对应的那张卡。按项目原则 1 不就地改陈述文本；
+    若要让文字也对上，需按换代流程新建 v3。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **【与姊妹推导的关系】** 本卡现有三条推导：
+    · --via-zero-mode-bracket（G–N 零模李括号，own rigorous）——文献里的严格证明；
+    · --via-conformal-weight（GSW/GT 的 OPE + 围道形变，physical-argument）；
+    · 本条 --via-lean（formalized）。
+  三条**逻辑独立**：本条既不用围道形变（没有解析对象），也不用物理态的李括号与零模字典
+  （没有配对、没有物理子空间），走的是代数 Fock 塔上的直接计算。
+  工具取最高者，故本卡 effective 应升为 formalized。
+
+  **【本推导对"k_0² = 0 到底承重几次"的完整记账】**（三个文件合起来，共六处）：
+    1. 塔上共形权 [L_m, V^{(n)}_K]（否则系数含层号 j）——DDFOperatorAll.lean；
+    2. 两个顶点算子对易（本推导第 3 步）——VertexCommute.lean；
+    3. 同点乘积的局部有限性与融合（gaps 第 1 条 (A)）——VertexProduct.lean；
+    4–6. 加权和内部三次（电流权恒等式、电流与顶点算子对易、局部有限窗口）——VertexWeightedSum.lean。
+  **2α' k_0·p = 1 全链只用一次**（加权和的零模 k_0·α_0 = 1），右端那个 m 就是它。
+  这条记账是形式化相对纸上推导的净增量：文献从不逐处标出类光性用在哪里。
+
+  **author 是 formalizer**（Lean 证明与本条接线同一人，分支 agent/formalizer/ddf-algebra）。
+author: formalizer
+created: "2026-09-11"

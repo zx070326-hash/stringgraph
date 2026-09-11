@@ -196,10 +196,23 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     worldsheet.ddf-contour-equals-mode-sum（围道写法 ↔ 模态和写法的字典）。
     附带的数学结论：伴随**不需要** k_0² = 0，也没有「同点 E₊E₋ 重排序」这一步
     ——E₋E₊ 的伴随 E₊(−b)†E₋(−b)† 本身就是正规序。
+
+    【2026-09-11 再更新（分支 agent/formalizer/ddf-algebra）】
+    formal/StringFormal/NoGhost/DDFAlgebra.lean 的 `lie_ddfOp_ddfOp` 证出
+    ⁅A^ε_m, A^δ_n⁆ = m (ε·δ) δ_{m+n,0}（一切 m,n ∈ ℤ，任意横向 ε、δ），
+    于是 worldsheet.ddf-transverse-oscillator-algebra-v2 由 rigorous 升为 **formalized**
+    （新推导 --via-lean；原有的 --via-zero-mode-bracket / --via-conformal-weight 保留）。
+    DDF 侧的输入至此全部 formalized 或 rigorous（无鬼定理 v4 的 effective 见下一段第七轮裁决）。
+    【2026-09-11 第七轮（分支 agent/auditor/noghost-contour，auditor 裁决）】
+    worldsheet.ddf-contour-equals-mode-sum 那条边被裁定为**溯源记账而非证明步骤**并撤出
+    --via-goddard-thorn 的 depends_on（summary 各步只用模态和算子的代数性质，图内所有
+    DDF 性质卡均以 v6 模态和为对象）；围道 ↔ 模态和的忠实性备注移到
+    ms.no-ghost-theorem 第七轮 R7-2。无鬼定理 v4 的 effective 因此回到 **rigorous**
+    （= 推导自报 status，无压低依赖）；该字典卡本身仍是 physical-argument。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
     # 顶点代数路线已把这一条接通到 rigorous
     # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：DDFOperatorAll.lean 的
@@ -209,9 +222,11 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     assert effs["worldsheet.ddf-commute-with-virasoro"].name == "formalized"
     # 剩下的瓶颈：横向振子代数（末句比较被 transverse-oscillator-commutators 压住）
     # 与内积/伴随那一层的两条
-    # 拆卡后对易关系本身也接通到 rigorous（G–N 零模李括号路线）
+    # 拆卡后对易关系本身接通到 rigorous（G–N 零模李括号路线）；
+    # 2026-09-11（分支 agent/formalizer/ddf-algebra）DDFAlgebra.lean 的 lie_ddfOp_ddfOp
+    # 再把它升为 formalized。
     assert (
-        effs["worldsheet.ddf-transverse-oscillator-algebra-v2"].name == "rigorous"
+        effs["worldsheet.ddf-transverse-oscillator-algebra-v2"].name == "formalized"
     )
     # 末句的同构识别留在 physical-argument：它本质依赖光锥侧那条链
     assert (
@@ -229,11 +244,14 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     #   · transverse-ddf-fock-gram-matrix 的前件 (H2) 因此不再被压低，升为 rigorous。
     # 于是 `why worldsheet.no-ghost-theorem-v4` 的瓶颈树由三支收缩为**一支**：
     # 围道写法 ↔ 模态和写法的字典。
+    # 2026-09-11 第七轮：那一支也撤了（不是证明步骤，见上方 docstring），字典卡本身仍 physical-argument。
     assert effs["worldsheet.ddf-operators-adjoint-v2"].name == "formalized"
     assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "rigorous"
     assert (
         effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
     )
+    gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
+    assert "worldsheet.ddf-contour-equals-mode-sum" not in {d.id for d in gt.depends_on}
     # 旧卡保留其历史推导（--via-vertex-operator-adjoint 已改名改指 v2），
     # 故旧卡自身不再有推导，effective 为 open——它有 superseded_by，不进 open_propositions 报告。
     assert (
@@ -334,6 +352,11 @@ def test_ddf_transverse_oscillator_algebra_split_into_v2_plus_isomorphism() -> N
     （physical-argument）之下，是 --via-zero-mode-bracket（own rigorous）唯一剩下的上限。
     拆开后：v2 只含 (1) 且 effective = rigorous；同构卡承载 (2)，effective 仍是
     physical-argument（本质上限，不是记账问题）。
+
+    【2026-09-11 更新（分支 agent/formalizer/ddf-algebra）】v2 又多挂一条
+    --via-lean（`StringFormal.NoGhost.lie_ddfOp_ddfOp`），effective 升为 formalized。
+    同构卡**不动**：它的上限是 worldsheet.transverse-oscillator-commutators，
+    与本次形式化无关（Lean 侧只做了 DDF 一边，没有光锥横向振子那一边的对应物）。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
@@ -343,15 +366,16 @@ def test_ddf_transverse_oscillator_algebra_split_into_v2_plus_isomorphism() -> N
 
     assert g.statements[old].superseded_by == v2
     assert g.statements[v2].superseded_by is None
-    # 两条推导都改指 v2（git mv 改名），故旧卡没有推导
+    # 两条文献推导都改指 v2（git mv 改名），故旧卡没有推导；--via-lean 是后加的第三条
     assert not g.derivations_for(old)
     assert {d.id for d in g.derivations_for(v2)} == {
         f"{v2}--via-zero-mode-bracket",
         f"{v2}--via-conformal-weight",
+        f"{v2}--via-lean",
     }
-    assert effs[v2].name == "rigorous"
+    assert effs[v2].name == "formalized"
 
-    # v2 的两条推导都不再依赖光锥横向振子代数：那条边只承载被拆掉的末句
+    # v2 的三条推导都不再依赖光锥横向振子代数：那条边只承载被拆掉的末句
     for d in g.derivations_for(v2):
         assert "worldsheet.transverse-oscillator-commutators" not in {
             x.id for x in d.depends_on
@@ -1171,22 +1195,42 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     assert ders_v2[
         "worldsheet.ddf-transverse-oscillator-algebra-v2--via-conformal-weight"
     ]["effective"] == "physical-argument"
-    assert rep_v2["effective"] == "rigorous"
+    # 2026-09-11（分支 agent/formalizer/ddf-algebra）：第三条 --via-lean
+    # （`StringFormal.NoGhost.lie_ddfOp_ddfOp`）把本卡顶到 formalized；
+    # 前两条推导的 own/effective 不变，仍逐条列出——这正是本测试要盯的「三条并列、取最强」。
+    assert ders_v2[
+        "worldsheet.ddf-transverse-oscillator-algebra-v2--via-lean"
+    ]["own"] == "formalized"
+    assert ders_v2[
+        "worldsheet.ddf-transverse-oscillator-algebra-v2--via-lean"
+    ]["effective"] == "formalized"
+    assert rep_v2["effective"] == "formalized"
 
     # (b) own > effective is still exposed per-derivation.
     # 2026-09-12 (branch agent/curator/adjoint-wire): the throttled example used to be
     # transverse-ddf-fock-gram-matrix--via-oscillator-recursion, whose hypothesis (H2) was
     # cashed in by worldsheet.ddf-operators-adjoint (physical-argument). That card is now
     # superseded by -v2, which is formalized via VertexAdjoint.lean, so the Gram recursion
-    # reaches rigorous. The throttled example is now no-ghost-theorem-v4--via-goddard-thorn
-    # (own=rigorous; effective=physical-argument because of the contour/mode-sum dictionary
-    # worldsheet.ddf-contour-equals-mode-sum, now the single remaining bottleneck).
+    # reaches rigorous. Then the throttled example was no-ghost-theorem-v4--via-goddard-thorn
+    # (own=rigorous; effective=physical-argument via worldsheet.ddf-contour-equals-mode-sum).
+    # 2026-09-11 round 7 (branch agent/auditor/noghost-contour): that edge was ruled
+    # provenance-not-proof and removed, so no-ghost v4 is rigorous end to end. The throttled
+    # example is now math.mobius-three-point-fixing-jacobian--via-vandermonde (own=rigorous,
+    # effective=physical-argument), on a node whose best derivation (--via-lean) is formalized —
+    # which also re-checks "strongest derivation wins" with a throttled sibling present.
     rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
     d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
-    assert d2["effective"] == "physical-argument"
-    assert rep2["effective"] == "physical-argument"
+    assert d2["effective"] == "rigorous"
+    assert rep2["effective"] == "rigorous"
+
+    rep_mob = status_report(g, "math.mobius-three-point-fixing-jacobian")
+    ders_mob = {d["id"]: d for d in rep_mob["derivations"]}
+    d_mob = ders_mob["math.mobius-three-point-fixing-jacobian--via-vandermonde"]
+    assert d_mob["own"] == "rigorous"
+    assert d_mob["effective"] == "physical-argument"
+    assert rep_mob["effective"] == "formalized"
 
     # (b') the Gram recursion itself is no longer throttled
     rep3 = status_report(g, "worldsheet.transverse-ddf-fock-gram-matrix")

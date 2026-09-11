@@ -1,0 +1,30 @@
+id: swampland.wgc-sharp-form-ii--via-no-counterexamples
+target: swampland.wgc-sharp-form-ii
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.10–p.11（(II) 的陈述与'无反例'自陈）；§6, p.16–p.17（strongest form 的措辞与可反驳性声明）"
+summary: |
+  (II) 的全部正面支持只有"**没有找到反例**"，逐字："Even though we have no counterexamples for
+  conjecture (II) most of our evidence only supports the weaker conjecture (III)."
+
+  原文对 (II) 的定位：它是三个 sharp 版本中最强的（"Obviously (II) is the stronger of the two
+  (and it clearly implies (III)) and *forces* the effective theory to contain a light charged
+  particle"）；§6 又给出带"基方向"限定的措辞："The strongest form is that for the lightest charged
+  particle along the direction of some basis vectors in charge space, the (M/Q) ratio is smaller
+  than for extremal black holes. Such an assumption allows all extremal black holes to decay into
+  these states."
+gaps:
+  - "★ **本条没有任何正面证据**：原文自陈全部证据只支持较弱的 (III)（arkani-hamed-2006#E20）"
+  - "§3 的 (II) 与 §6 的加限定版（带'电荷空间的一组基方向'）措辞不同，原文未说明二者是否等价（#E25）"
+  - "原文自陈可反驳：'if they are wrong it should be possible to find simple counter-examples in string theory, though we have not found any.'"
+  - "同一篇里 sharp 版本 (I) 已被作者本人反驳，说明这类精细化确实可能出错"
+notes: |
+  from: arkani-hamed-2006#E18、#E20、#E25。
+  反例方向：找到一个最轻带电粒子的 M/q 大于极端黑洞比值的一致弦论背景即构成反驳。
+  本轮无反例，故不建 refutation 推导文件。
+author: curator
+created: "2026-09-11"

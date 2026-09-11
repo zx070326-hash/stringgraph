@@ -1,0 +1,75 @@
+id: math.even-self-dual-euclidean-lattices-dimension-16-v2
+kind: proposition
+title: 记号桥：Polchinski §11.6 的 Γ_16、Γ_8 分别就是 D_16^+ 与 E_8，故 16 维偶自对偶欧氏格恰是 {Γ_16, Γ_8 ⊕ Γ_8}
+statement: |
+  **本卡只做一件事：把 Polchinski §11.6 的物理侧记号接到数学侧的分类定理上。**
+  分类本身（「16 维恰有两类、且两者不同构」）**不在本卡**，在
+  math.even-unimodular-rank-16-classification。
+
+  **(P) Polchinski 给出的显式坐标（§11.6, L1）**：
+    `Γ_16`：格矢为
+      `(n_1, …, n_16)`（全整数，(11.6.5a)）或 `(n_1 + ½, …, n_16 + ½)`（全半整数，(11.6.5b)），
+      两种情形都要求 `Σ_i n_i ∈ 2Z`；
+    `Γ_8`：同样的描述，分量数换成 8（(11.6.6a,b)）；`Γ_8 ⊕ Γ_8` 是两份 `Γ_8` 的正交直和
+    （原书写作直积 `Γ_8 × Γ_8`）。
+
+  **(M) Chenevier–Lannes 给出的显式坐标（§I.1, p. 1, L1）**：
+    `E_n = D_n ⊕ Z e`，其中 `D_n = {(x_i) ∈ Z^n : Σ_i x_i ≡ 0 mod 2}`、`e = ½(1,…,1)`、`n ≡ 0 mod 8`；
+    同书 p. 33 自陈 `E_n` 亦记作 `D_n^+`（«au moins pour `n ≥ 16`»）。
+    ⚠ 这里的 `⊕` 是 `R^n` 内部生成的和（作为阿贝尔群是直和，**不是正交直和**）。
+
+  **断言**：
+    **(a)** `Γ_16 = D_16^+`（= Chenevier–Lannes 的 `E_16`），**作为 `R^16` 中的子集逐点相等**，
+        不只是同构。
+    **(b)** `Γ_8 = D_8^+ = E_8` 根格（Chenevier–Lannes 的 `E_8 = D_8 ⊕ Ze`），同样是逐点相等。
+    **(c)** 因此，把 math.even-unimodular-rank-16-classification 的两个同构类
+        `{D_16^+, E_8 ⊕ E_8}` 用 Polchinski 记号写出来，就是 `{Γ_16, Γ_8 ⊕ Γ_8}`。
+
+  **本命题不断言的内容**：
+    (1) **不**断言分类定理本身（「恰有两类」「两者不同构」）——那是上游的数学卡。
+    (2) **不**断言秩被 8 整除——那是 math.even-unimodular-rank-divisible-by-8。
+    (3) **不**断言「一致的 16 维内部 CFT ⟺ 偶自对偶欧氏格」这条物理桥；那条仍是 physical-argument，
+        在 compact.heterotic-narain-lattice-even-self-dual 一侧。
+    (4) **不**断言 `Γ_16` 与 `Spin(32)/Z_2` 权格的关系，也不断言 `l² = 2` 的格点构成根系
+        （那是 worldsheet.heterotic-bosonic-construction-gauge-groups 的内容）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, eq. (11.6.5a,b)（Γ_16）与 (11.6.6a,b)（Γ_8）, pp. 74–75"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E63）。
+      ⚠ 原书**只给坐标描述**；它既不写 `D_16^+`，也不引任何数学文献。
+  - ref: chenevier-lannes-2014
+    loc: "arXiv:1409.7616, §I.1, p. 1（`E_n = D_n ⊕ Ze` 的定义）；ch. II §3, p. 33（«Le réseau unimodulaire pair E_n est aussi noté D_n^+ (au moins pour n ≥ 16)»、«Pour n ≥ 16 … on a R(E_n) = R(D_n) = D_n»）"
+    note: |
+      L1（页图逐字；math-sources.md §47.3、§47.5）。
+tags: [lattice, notation-bridge, heterotic, inferred-identification]
+notes: |
+  ★【本卡整体是抽取者/curator 做的坐标比对，任一文献都没有明写这条等同】
+  math-sources.md §47.5 逐字：「`Γ_16 = D_16^+ = E_16(CL)` 的等同是抽取者做的比对（`inferred`，非任一文献明说）
+  … curator 若要建这条等同边，**须标 `inferred: true`**」。本卡的推导据此标了 inferred。
+
+  【比对的算术（本图补的，原文没有）】
+  `D_16 ⊕ Ze` 的元素是 `x + k e`（`x ∈ D_16`，`k ∈ Z`）：
+    · `k` 偶 ⇒ `ke = (k/2)(1,…,1)` 是整向量、分量和 `8k ≡ 0 mod 2`，故整向量部分恰为 `D_16`
+      = 「全整数且 `Σ n_i ∈ 2Z`」= (11.6.5a)；
+    · `k` 奇，写 `k = 2j+1` ⇒ `x + ke = x + j(1,…,1) + e`，即第 i 个分量为 `x_i + j + ½`；
+      取 `n_i = x_i + j` 得 `Σ n_i = Σ x_i + 16j ≡ 0 mod 2`，故半整向量部分恰为
+      「全半整数且 `Σ n_i ∈ 2Z`」= (11.6.5b)。反向包含同样逐项可验。
+  8 分量情形同理。**这段验算本项目未经第二人复核**，故推导标 physical-argument 而非 rigorous
+  （docs/STATUS_LEVELS.md 第 4 级的例外要求 `reviewer-verified:` 记录）。
+
+  【★★ 记号陷阱（math-sources.md §47.5，务必随本卡一起读）】
+    1. **`E_16` 不是李代数**：Chenevier–Lannes 的 `E_n := D_n ⊕ Ze` 只是他们对 `D_n^+` 的记号；
+       不存在 `E_16` 型李代数，`E_16` 的根系是 `D_16` 型（原书 p. 33）。
+    2. **`Λ_16` 在两处指不同的格**：Zagier (2008) p. 34 的 `Λ_16` = 16 维偶幺模不可分解格（= `D_16^+`）；
+       Chenevier–Lannes **附录 A**（p. 339）的 `Λ_16` = **Barnes–Wall 格 `BW_16`**（最小范数 4，**不是幺模格**）。
+       ⛔ 不可混。本卡一律不使用 `Λ_16` 这个符号。
+    3. Zagier 同一篇文章内部也换记号：p. 34 用 `Λ_8/Λ_16`，p. 36 用 `Γ_8/Γ_16`。
+
+  【本卡换代自】math.even-self-dual-euclidean-lattices-dimension-16（旧卡把两条独立数学定理
+  ＋ 记号描述压在一起，见 math-sources.md §47.0、§47.6(a)）。旧卡的数学内容已拆到
+  math.even-unimodular-rank-divisible-by-8 与 math.even-unimodular-rank-16-classification；
+  本卡只留记号桥这一半。
+author: curator
+created: "2026-09-11"

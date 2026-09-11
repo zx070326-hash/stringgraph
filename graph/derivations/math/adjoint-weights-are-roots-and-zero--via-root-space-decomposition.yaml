@@ -1,0 +1,62 @@
+id: math.adjoint-weights-are-roots-and-zero--via-root-space-decomposition
+target: math.adjoint-weights-are-roots-and-zero
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: humphreys-1972
+    loc: "§8「Root space decomposition」（章级定位，内容 L0）"
+    note: |
+      **本推导的名义主来源，但本项目未取得印本、内容零核实（L0）。** 下面 summary 的论证是 curator
+      按标准教材叙述复述的骨架，**不是**从该书逐字抽取的；任何一步在该书里的编号都**禁写**。
+      按 sources.bib 该条：唯一可引编号是 §17.3（PBW），与本卡无关。
+  - ref: fulton-harris-1991
+    loc: "Lecture 14（L0，讲次级定位）"
+    note: |
+      同上，正文未取得。只作第二出处登记。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/E8Roots.lean 模块 docstring「What is **not** in Lean」段；StringFormal.Math.E8.e8_dim_248"
+    note: |
+      Lean 文件把本卡的 E₈ 实例明写为 Lean 之外的前提：「it uses that the 248 weights of the adjoint
+      representation are the 240 roots together with 8 zero weights (dim E₈ = 240 + 8, evaluated on a
+      Cartan element F = diag(x)), the zero weights contributing nothing for k ≥ 1」；
+      `e8_dim_248 : e8Roots.length + 8 = 248` 只是 240 + 8 = 248 的算术，docstring 自陈
+      「That dim E₈ *is* |Φ| + rank is Lie theory and is not proved here」。
+      **这条来源只说明为什么需要本卡，不承载本卡的证明。**
+summary: |
+  标准教材论证的骨架（curator 复述，来源内容未核实）：
+
+  (1) 𝔥 是环面子代数 ⇒ ad 𝔥 由两两交换的可对角化算子组成 ⇒ 可同时对角化，
+      𝔤 = ⨁_{λ ∈ 𝔥*} 𝔤_λ，𝔤_λ := {X : [H, X] = λ(H) X ∀ H}。取 Φ := {λ ≠ 0 : 𝔤_λ ≠ 0}。
+  (2) 𝔥 极大环面 ⇒ 𝔤₀ = C_𝔤(𝔥) = 𝔥（教材里用 Killing 型非退化与 Jordan 分解证 C_𝔤(𝔥) 是交换的、
+      由半单元素组成、故等于 𝔥）。
+  (3) 对每个 α ∈ Φ，𝔤_α ⊕ 𝔤_{−α} ⊕ [𝔤_α, 𝔤_{−α}] 含一个 𝔰𝔩₂ 三元组；用 𝔰𝔩₂ 的有限维表示论
+      （权 0 与权 2 只能各出现一次）得 dim 𝔤_α = 1 且 2α ∉ Φ。这给出目标卡 (1)。
+  (4) (2) 是 (1) 的直接读数：ad 的权 = {α ∈ Φ}（各一维）∪ {0}（𝔥 那一块，维数 = rank）；
+      维数相加得 dim 𝔤 = |Φ| + rank 𝔤。
+  (5) (3) 是线性代数：ad H 在 (1) 的基下是对角阵 diag(α(H) (α ∈ Φ), 0, …, 0)，
+      (ad H)^k 的迹 = 特征值 k 次幂之和 = Σ_α α(H)^k + rank·0^k，k ≥ 1 时末项为零。
+  (6) E₈ 实例：|Φ(E₈)| = 240（math.e8-root-system）与 rank 8 代入。
+
+  没有任何非严格的步骤；status 之所以是 physical-argument，**只因来源内容在本项目 L0**。
+gaps:
+  - |
+    **来源内容未核实（L0）**。GTM 9 §8 与 FH Lecture 14 在本项目里都只有目录级定位；summary 的每一步
+    在这两本书里的具体编号与措辞本轮零证据。升级到 rigorous 需要 researcher 取到其中一本的该章
+    （或另一本已 L1 读到的教材），并把编号写进 loc。
+  - |
+    **(6) 用到 math.e8-root-system 的 |Φ| = 240，但本推导没有把它挂成 depends_on**：
+    目标卡的主体 (1)(2)(3) 是对一般半单 𝔤 说的，E₈ 实例只是代入；而「𝔢₈ 相对 𝔥 的根集合与
+    Humphreys 表同构」这一识别本身不在本图（见 math.e8-root-system 不断言 (b)）。
+    这条边在下游 math.e8-adjoint-trace-identities--via-root-power-sums 里显式挂出并写 gap。
+notes: |
+  **depends_on 为空是有意的**：输入只有半单李代数、Cartan 子代数、Killing 型、𝔰𝔩₂ 表示论这些
+  基础构造，本图没有也不打算为它们建节点（与 math.pbw-theorem--via-humphreys 的处理同一条纪律）。
+  validate 的「derivation has no dependencies」warning 是预期内的。
+
+  **kind 的选择**：schema 规定 kind: proof 只能配 rigorous/formalized；本推导 status 只能是
+  physical-argument（L0 来源），故 kind 也写 physical-argument。这不表示论证含物理输入——
+  summary 全是代数；只表示「本图掌握的论证强度」（同 math.e8-adjoint-trace-identities--via-casimir-structure
+  的 notes）。
+author: curator
+created: "2026-09-11"

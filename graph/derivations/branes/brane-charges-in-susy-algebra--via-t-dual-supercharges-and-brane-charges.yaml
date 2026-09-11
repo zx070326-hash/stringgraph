@@ -1,0 +1,45 @@
+id: branes.brane-charges-in-susy-algebra--via-t-dual-supercharges-and-brane-charges
+target: branes.brane-charges-in-susy-algebra
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.bps-bound-point-particle-d4
+    note: |
+      供给模板：(B.2.36) 点粒子中心荷代数与「中心项是守恒荷、静止系正定性 ⇒ 质量下界」的论证结构。
+      原文背书：App. B p. 448「we introduce it … in more variety in chapter 13」、§B.5 p. 454
+      「additional central charges carried by extended objects are introduced … in section 13.2」。
+      ⚠ App. B 只覆盖点粒子荷；(13.2.9) 的广延物体项不能从 App. B 推出。
+  - id: branes.d-brane-bps-half-susy
+    note: |
+      供给 β^M ≡ ΓΓ^M、β^⊥ = ∏_{m⊥} β^m 与单张 Dp 膜保留的组合 Q + β^⊥Q̃（(13.2.5)(13.2.6)）；
+      (13.2.10) β^{μ1}⋯β^{μp} = β^⊥Γ^0 正是把 (13.2.9c) 的中心项与 (13.2.5) 对上。
+  - id: branes.d-brane-rr-coupling
+    note: 供给 Q^R 的定义：与 R–R (p+1)-形式势耦合的 Dp 膜荷（(13.2.7)）；IIA 偶 p / IIB 奇 p 的求和范围亦由此来。
+  - id: branes.d-brane-tension
+    note: 供给 (13.2.9c) 显式出现的 τ_p（荷按单位世界体归一化后，张力作为系数出现）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, pp. 144–145：(13.2.9a,b,c) → 归一化句 → (13.2.10) → 「still not complete」句"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E14（L1）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, (B.2.36)–(B.2.39), pp. 448–449（点粒子模板）；p. 448 与 §B.5 p. 454 的两句「introduce … in chapter 13 / section 13.2」"
+    note: 抽取记录 polchinski-1998-v2-appB.md#E21/#E25（L1）。
+summary: |
+  (1) 模板（App. B）：点粒子超对称代数的中心项是与 δ_{αβ} 成比例的守恒荷 Z^{AB}；静止系正定性给 m ≥ q_i。
+  (2) 广延物体的荷不是标量而是带世界体指标的张量：F 弦荷 Q^NS_M（1-形式，与 B_{MN} 耦合）、
+      Dp 膜荷 Q^R_{M_1…M_p}（与 C_{p+1} 耦合，(13.2.7)）。Lorentz 协变地把它们放进 {Q, Q̄}、{Q̃, Q̃̄}
+      （NS–NS 荷以 ±(2πα')^{−1}Q^NS_M Γ^M 进入左右两侧）与 {Q, Q̃̄}（R–R 荷以 τ_p Q^R β^{M_1}⋯β^{M_p}/p! 进入
+      左右混合项），得 (13.2.9a,b,c)；IIA/IIB 的 p 奇偶性由 R–R 势的种类决定。
+  (3) 归一化：所有荷按每单位世界体归一为 1，故弦张力 (2πα')^{−1} 与膜张力 τ_p 显式出现。
+  (4) 一致性：对一张 Dp 膜，β^{μ_1}⋯β^{μ_p} = β^⊥Γ^0（(13.2.10)，相差整体符号），
+      使 (13.2.9c) 的中心项恰与单张膜保留的组合 Q + β^⊥Q̃（(13.2.5)）相容。
+  (5) 原书自承：磁 NS–NS 荷（NS5 膜）缺失，「still not complete」。
+gaps:
+  - "★ **代数不完整**：原书逐字「the algebra (13.2.9) is still not complete: the magnetic NS–NS charge is missing」（ch.13 抽取记录 §3.1 第 8 条）。补全在第 14 章，本项目未抽。"
+  - "**(13.2.9) 在 §13.2 无世界面推导**：原书由 T 对偶后的守恒组合与 D 膜荷「by analogy」写出，不从世界面超荷的算子代数计算 {Q, Q̃̄}。"
+  - "**(13.2.9c) 与 (13.2.10) 的整体符号未定**（「up to an overall sign」）。"
+  - "**τ_p（(13.2.9c)）与 μ_p（(13.3.5)）两种荷归一化原书未并排比较**；本图不断言二者在 (13.2.9c) 中的换算。"
+  - "**继承 App. B 模板卡的缺口**：「最一般代数」无证明；点粒子限定。"
+  - "**杂化弦版 (11.6.32) 未核**（ch.13 抽取记录 §3.3）。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

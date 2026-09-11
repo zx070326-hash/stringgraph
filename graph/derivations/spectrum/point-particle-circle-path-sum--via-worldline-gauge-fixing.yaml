@@ -1,0 +1,31 @@
+id: spectrum.point-particle-circle-path-sum--via-worldline-gauge-fixing
+target: spectrum.point-particle-circle-path-sum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.point-particle-einbein-action
+    note: |
+      提供点粒子的 einbein（一维度规）形式作用量——「圆的模 l」与「世界线哈密顿量 ½(k²+m²)」
+      都是在这个形式里才有的对象。原书说本式由「gauge-fixing the point-particle path integral」得到，
+      而那正是 einbein 作用量的规范固定（exercise 5.2）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.9), p.218（结果）；推导外包给 exercise 5.2, §5.1"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E22，L1（原书页图逐字）。
+summary: |
+  规范固定一维 diff 后，圆拓扑世界线只剩一个模 l（圆的固有周长），残余的离散对称性是
+  坐标平移（连续，体积 l）与反向（Z₂，因子 2），故测度是 dl/2l。
+  其余部分是零模（时空动量 k）的高斯积分：∫d^dk/(2π)^d exp(−k²l/2) = (2πl)^{−d/2}，
+  与 k⁰ 方向的转动带来的 i。合起来即 (7.3.9)。
+gaps:
+  - "**原书正文没有做这个推导**：逐字「which was given as exercise 5.2」。本图**没有**该习题的
+     解答来源，故本推导的 summary 是标准复述，不是来源里的论证。"
+  - "**k⁰ 转动**与「圆拓扑路径积分」的测度都没有数学定义（与 worldsheet.string-s-matrix 同一档）。"
+  - "**l → 0 与（m² < 0 时）l → ∞ 的发散未处理**：这正是本式在第 7 章的用途（作为对照项），
+     但表达式本身在这两端不收敛。"
+notes: |
+  由 curator 于 2026-09-11 建立。唯一的依赖边（einbein 作用量）不标 inferred：原书明说本式来自
+  点粒子路径积分的规范固定，而本图的点粒子作用量卡就是那个路径积分的被积对象；
+  ⚠ 但**具体到 exercise 5.2 的解答**，本图没有来源，见 gaps 第 1 条。
+author: curator-polchinski-ch7
+created: "2026-09-11"

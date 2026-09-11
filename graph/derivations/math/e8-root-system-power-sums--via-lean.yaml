@@ -1,0 +1,65 @@
+id: math.e8-root-system-power-sums--via-lean
+target: math.e8-root-system-power-sums
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/E8Roots.lean :: StringFormal.Math.E8.e8_trace_identities；支撑链 e8PowerSum_split → {vectorRoots, spinorRoots}_power_sum_{two,four,six} → e8_power_sum_{two,four,six} → e8_trace_{four,six}"
+    note: |
+      本仓库，主分支合并提交 **fb489ee**（含 4b75058「formal: E8 root system power sums (k=2,4,6)
+      giving the GS E8 trace identities」与 9767b56「formal: E8 roots have norm 2, are pairwise
+      distinct; Finset card 240 and Finset form of power sums」），Lean 4 + Mathlib v4.33.1。
+      目标声明全文：
+
+          theorem e8_trace_identities (x : Fin 8 → ℚ) :
+              e8PowerSum 4 x = (1 / 100) * (e8PowerSum 2 x) ^ 2 ∧
+                e8PowerSum 6 x = (1 / 7200) * (e8PowerSum 2 x) ^ 3 :=
+            ⟨e8_trace_four x, e8_trace_six x⟩
+
+      其中 `e8PowerSum k x = (e8Roots.map fun α => (∑ i, α i * x i) ^ k).sum`，
+      `e8Roots` 是 Humphreys §2.10 的 240 条显式根表。文件只 import Mathlib，不 import 本项目其它岛。
+summary: |
+  全部是 ℚ 上的多项式恒等式，由 `ring` 验证；人只需跟三步结构：
+
+  (1) **拆块**（`e8PowerSum_split`）：Φ = 向量型 ∪ 旋量型，幂和按块相加。
+  (2) **向量型**（112 条）：α·x = ±x_i ± x_j（`vroot_dot`），28 对 × 4 个符号展开后 `ring`，得
+      vec₂ = 28 p₂，vec₄ = 16 p₄ + 12 p₂²，vec₆ = 60 p₂ p₄ − 32 p₆（p_k := Σ_i x_i^k）。
+  (3) **旋量型**（128 条）：α·x = ½(s·x_前四 + t·x_后四)，其中 (s, t) 取遍 {偶}×{偶} ∪ {奇}×{奇}
+      （即八个符号里负号个数为偶）。先对固定 s 把内层 8 个 t 的和做二项展开
+      （`inner_ev_k`/`inner_od_k`，奇次项因 t ↦ −t 对称而消失），再对 s 求和 `ring`，得
+      spin₂ = 32 p₂，spin₄ = 24 p₂² − 16 p₄，spin₆ = 30 p₂³ − 60 p₂ p₄ + 32 p₆。
+  (4) **合并**：p₄、p₆ 的系数在两块之间恰好相消，
+      P₂ = 60 p₂，P₄ = 36 p₂²，P₆ = 30 p₂³；再 `ring` 消 p₂ 得 P₄ = P₂²/100、P₆ = P₂³/7200。
+
+  与 literature/extractions/math-sources.md §44.7 抽取者的手算逐项一致
+  （那里按 Σx⁴ / Σ_{i<j}x_i²x_j² / Σ_{i≠j}x_i⁴x_j² / Σ_{i<j<k} 展开，是同一组恒等式的另一种基）。
+gaps:
+  - |
+    **只覆盖显式列表**。本推导的求和范围是 Lean 里写死的 240 条向量；
+    「它们是 E₈ 根系」（math.e8-root-system）与「根表完备」都不在本推导内，也不需要——
+    目标卡的陈述本身就是对这张显式列表说的。
+  - |
+    **不含任何李理论**。从 Tr_248 F^k 到 Σ_α (α·x)^k 的两步（伴随权 = 根 ∪ 零权；
+    Chevalley 限制）由 math.adjoint-weights-are-roots-and-zero 与 math.chevalley-restriction-theorem
+    另行承载，见 math.e8-adjoint-trace-identities--via-root-power-sums。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string
+  （已 build 好的 formal/.lake，main 在 cd9ac41，含 fb489ee）跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.E8.e8_trace_identities
+
+  输出 `ok  StringFormal.Math.E8.e8_trace_identities  axioms: propext Classical.choice Quot.sound`
+  （1 declarations checked: 1 ok, 0 non-standard, 0 missing）。本分支未改动 formal/ 下任何文件。
+
+  **depends_on 为空是有意的**：结论是 ℚ 上的有限多项式恒等式，求和范围在目标卡陈述里显式写出，
+  不需要图内任何节点；与 math.hexagon-odd-twist-count-six--via-lean 同型。
+  **特别地不依赖 math.e8-root-system**：那张定义卡是 rigorous，若挂成依赖会把本卡压到 rigorous，
+  而 Lean 证明确实没有用到「这是 E₈ 根系」这一事实（它只用列表）。identification 这条边放在
+  下游的 math.e8-adjoint-trace-identities--via-root-power-sums 里。
+  validate 的「derivation has no dependencies」warning 是预期内的。
+author: curator
+created: "2026-09-11"

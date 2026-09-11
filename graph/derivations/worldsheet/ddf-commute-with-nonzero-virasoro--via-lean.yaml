@@ -17,7 +17,7 @@ depends_on:
       其构造性输入正是该卡的 `ddfSummand_apply_eq_zero_of_notMem_window`），
       一次是伸缩和的四条边带在窗口外为零（`ddfOp_apply` 允许换用任意够大的窗口，
       这正是 m < 0 时留 |m| 余量的做法）。
-  - id: worldsheet.exponential-vertex-operator-mode-weight-identity
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
     inferred: false
     note: |
       **本推导的唯一实质数学输入**：单 Fock 上的共形权恒等式（m ≠ 0），Lean

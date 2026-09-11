@@ -1,0 +1,37 @@
+id: worldsheet.heterotic-so32-partition-function--via-sign-tracking-in-modular-transformations
+target: worldsheet.heterotic-so32-partition-function
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-so32-projections
+    note: 供给要求和/投影的对象：两种周期条件 (11.2.9) 与投影 exp(πiF) = 1 (11.2.10)，即 (1/2)Σ 的记账。
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给 Z^α_β 的定义、模变换公式，以及 type II 的 Z_ψ^± 里两个相对负号的**来源**
+      （超共形鬼场的 F；时空统计）。原书 §11.2 的三条理由句句指向这张卡的内容。
+  - id: worldsheet.heterotic-string-construction
+    note: 供给「左移一侧没有超共形鬼场、λ^A 是时空标量」这两条事实（理由 (ii)(iii) 的前提）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.13) 与其上下文, pp. 51–52（三条理由逐字见目标卡；自称 'Modular invariance is straightforward.'）"
+    note: L1（抽取记录 polchinski-1998-v2.md E56）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, pp. 31–34（Z^α_β 的模变换与 Z_ψ^± 的符号）"
+    note: L1（E47）。
+summary: |
+  逐条追踪符号：
+  (1) 32 个费米子 = 16 对，故各项是 16 次幂；模变换带来的相位相对于 8 费米子（4 次幂）情形
+      是**四次方**，因而前三项必须以**共同符号**进入；
+  (2) type II 的 Z_ψ^+ 中第一、二项之间的相对负号来自**超共形鬼场的 F**，
+      而杂化弦左移一侧没有超共形鬼场 ⇒ 该负号消失；
+  (3) 第一、三项之间的相对负号来自**时空统计**，而 λ^A 及其 R 扇区态都是**时空标量**
+      ⇒ 该负号也消失。
+  结论：(11.2.13) 的四项全取正号。模不变性原书自称 'straightforward'，不做验证。
+gaps:
+  - "**'Modular invariance is straightforward.' 是全部验证**：原书不写 Z_16 在 S、T 变换下的具体行为，也不验证它与右移超弦部门、X 部门乘起来后的整体模不变性。"
+  - "**第四项 Z^1_1^16 的符号未被单独论证**：给出的三条理由只覆盖「前三项同号」与两个相对负号的消失。type II 的 Z_ψ^± 中第四项符号是 ∓（区分 IIA/IIB），杂化弦这里为何取 +，原书不说。"
+  - "**(1/2) 前因子的来源只作记账**：它对应对 (11.2.9) 的两种周期条件求和并施加 (11.2.10) 的投影；原书不推导。"
+  - "**ϑ/η 的模变换公式本身在本图无独立支撑**：worldsheet.modular-invariance-requires-eight-transverse-fermions 只记下了变换式，未给证明；本图无 ϑ 函数节点。"
+  - "**同一段里的另一条断言未进本卡**：'It is easily verified by means of bosonization that the OPE is local and closed'——见 worldsheet.heterotic-so32-ope-local-and-closed（本图无玻色化节点，那张卡的缺口更大）。"
+author: curator
+created: "2026-09-11"

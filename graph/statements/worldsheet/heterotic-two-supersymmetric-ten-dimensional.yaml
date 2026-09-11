@@ -1,0 +1,98 @@
+id: worldsheet.heterotic-two-supersymmetric-ten-dimensional
+kind: proposition
+title: 条件形式：在 §11.2 的自由费米子构造内，SO(32) 与 E₈ × E₈ 是十维**仅有**的两个超对称杂化弦
+statement: |
+  **⚠ 本命题必须写成条件形式**，理由见【前提】与 notes 的【与作者自己的警告的张力】。
+
+  **前提（本命题的适用范围）**：
+    (H1) 世界面构造限于 §11.2 的作用量 (11.2.3)，即左移部门是 8 个横向 X^i 与
+         32 个自由费米子 λ^A（worldsheet.heterotic-string-construction）；
+    (H2) λ^A 按**等分的组**取 ± 周期条件，组与组之间独立，并对所有周期组合求和后投影
+         （SO(32) 的 (11.2.9)/(11.2.10) 与 E₈ × E₈ 的 (11.2.19)–(11.2.21) 是其两个实例）；
+    (H3) 要求模不变；
+    (H4) 要求自旋-统计（时空标量不得有负权/负重数）；
+    (H5) 要求 OPE 闭合。
+
+  **结论**（原书逐字）：'Consistency requires the fermions to be in groups of 16. …
+  **The SO(32) and E₈ × E₈ theories are the only supersymmetric heterotic strings in ten
+  dimensions.**'
+
+  **排除「八个一组」的论证（原书逐字）**：
+    'We could make a modular-invariant theory using groups of eight, the left-moving partition
+     function being (Z_ψ^±)⁴. However, we have seen that modular invariance requires minus signs
+     in Z_ψ^±. These signs would give negative weight to left-moving R sector states and would
+     correspond to the projection exp(πiF) = −1 in the NS sector. **The first is inconsistent
+     with spin-statistics because these states are spacetime scalars, and the second is
+     inconsistent with closure of the OPE thus making the interactions inconsistent.**'
+
+  **本命题不断言的内容**：
+    (1) **不**断言这是十维杂化弦的完备分类。原书只排除了「八个一组」这一种替代取法，
+        没有排除 (H2) 之外的构造（例如非等分的组、O(32) 的其它离散扭曲、
+        或 §11.6 之外的内部 CFT）。
+    (2) **不**断言「十维一致弦论恰有五个」。见 notes：作者本人在 §11.1 末对分类完备性
+        给出了明确警告。
+    (3) 不断言这两个理论**有**时空超对称（本图无杂化弦时空超对称节点；
+        原书在 §11.2 只按 N = 1 多重态给谱）。
+    (4) 不断言 §11.3 的非超对称杂化弦不存在——恰恰相反，那里构造了若干个
+        （worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2 末, p. 55（逐字结论句与排除「八个一组」的论证，均无式号；引用的 (Z_ψ^±)⁴ 见 §10.7）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E57；整段逐字读到原书页图）。
+      ⚠ 抽取记录备注：「E₈ × E₈ 是唯一另一个」这条结论的论证是**排除法 + 自旋统计 + OPE 闭合**，
+      **不是穷举证明**。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（作者对分类完备性的警告，逐字见 notes）"
+    note: |
+      L1（E53）。★★★ 抽取记录要求：凡「十维一致弦论恰有 N 个」这类节点**必须**引用本条，
+      且 status 只能是 conjecture 或 physical-argument。本卡据此写成条件形式。
+  - ref: polchinski-1998-v2
+    loc: "§11.3, pp. 55–59 与 §11.2, p. 50（逐字：'Nine ten-dimensional theories based on the action (11.2.3) are known, though six have tachyons.'）"
+    note: |
+      L1（E58 备注）。★ 这句话给出本命题的**边界**：同一个作用量 (11.2.3) 上「已知」九个十维理论
+      （2 个超对称 + 1 个 SO(16)×SO(16) + 6 个有快子）。
+      ⚠ 原文用词是 'are known'，**不是** 'there are exactly nine'。
+tags: [heterotic, classification, so32, e8e8, uniqueness, conditional]
+notes: |
+  ★★★【与作者自己的警告的张力（与 worldsheet.ten-dimensional-superstring-theories 同款处理）】
+  §11.1 末（pp. 48–49，逐字）：
+    'It should be emphasized that the analysis in this section had many explicit and implicit
+     assumptions, and one should be cautious in assuming that all string theories have been found.
+     … In fact, we will find the same set of physical string theories from an entirely different
+     and nonperturbative point of view in chapter 14, **suggesting** that all have been found.
+     … the theories found in this and the previous chapter **seem to be** the only ones which have
+     a limit where they become weakly coupled …'
+  本图的处理：本卡写成 (H1)–(H5) 下的条件式，并显式声明「不断言完备分类」。
+  **「五个十维超弦理论」这个常见说法在本图里是**：
+    worldsheet.ten-dimensional-superstring-theories（第 10 章的三个，条件式）
+    + 本卡的两个（第 11 章的两个，条件式）。
+  两张卡都是条件式，且都引用了 §11.1 末的警告。**本图没有、也不应有一张断言「恰有五个」的卡**，
+  除非它同样写成条件式并把两套前提合并。
+
+  【论证的形状】这不是穷举证明，而是三步排除：
+    (a) 分组必须等分且每组的模变换相位能相消 ⇒ 组大小只能是 8 或 16（8 来自 Z_ψ^± 的四次幂结构）；
+    (b) 八个一组时 Z_ψ^± 里的负号存活 ⇒ 左移 R 扇区态带负权（违反自旋-统计，因为它们是时空标量）；
+    (c) 同时它对应 NS 扇区的投影 exp(πiF) = −1 ⇒ 违反 OPE 闭合。
+  ⚠ 第 (a) 步「组大小只能是 8 或 16」原书**没有单独论证**，只是把 8 与 16 两种情形拿来比较。
+
+  【与 §11.6 的独立佐证】玻色构造给出同样的两个规范群，其依据是「16 维偶自对偶欧氏格恰有两个」
+  （原为 math.even-self-dual-euclidean-lattices-dimension-16）——那是一条**纯数学定理**，
+  比本卡的排除法硬。但原书对那条定理同样不证、不引文献。
+
+  ★【2026-09-11 更新：那条数学定理现在有来源了，但这**不**抬高本卡，也**不**抬高玻色构造那条路线】
+  原卡已拆成三张：math.even-unimodular-rank-divisible-by-8（Zagier 2008 Proposition 12(i), p. 33，rigorous）、
+  math.even-unimodular-rank-16-classification（Chenevier–Lannes arXiv:1409.7616 Corollaire 3.6, p. 35，rigorous）、
+  math.even-self-dual-euclidean-lattices-dimension-16-v2（Polchinski 记号 `Γ_16`/`Γ_8` 与 `D_16^+`/`E_8`
+  的等同，physical-argument，等同标 inferred）。
+  **两条路线的瓶颈都没变**：
+    · 本卡（§11.2 费米子构造）的瓶颈仍是自旋统计 + OPE 闭合两条物理断言，与格论无关；
+    · §11.6 玻色构造的瓶颈转移到了「一致 CFT ⟺ 偶自对偶欧氏格」这条**物理桥**
+      （compact.heterotic-narain-lattice-even-self-dual，原书推给 v1 §8.4）以及记号桥未复核。
+  ⇒ 「十维杂化弦恰有两个」在本图**仍然没有**一条 rigorous 的路线；补上数学来源改变的只是
+  「哪一步是瓶颈」，不是结论的等级。
+author: curator
+created: "2026-09-11"

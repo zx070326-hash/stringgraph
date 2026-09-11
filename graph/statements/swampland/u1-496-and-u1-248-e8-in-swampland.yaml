@@ -1,0 +1,73 @@
+id: swampland.u1-496-and-u1-248-e8-in-swampland
+kind: proposition
+title: 10 维 N=1 的 U(1)^496 与 U(1)^248 × E₈ 属于 swampland（Vafa 2005 §4）
+statement: |
+  Vafa 2005 §4 (p.6–p.7) 的猜想，逐字（公式在原文无编号）：
+
+    "The gauge fields that arise in string theory seem more restricted than would have been
+     expected based on the requirement of semiclassical consistency of the effective field
+     theory. There are many such examples. For example consider N = 1 supersymmetric theories
+     in 10 dimensions with gauge groups:
+       U(1)^{496};  U(1)^{248} × E₈
+     Both of these theories are consistent as far as anomalies are concerned [6]. Thus they
+     both appear to be consistent semiclassically. However, we have no way of constructing
+     either of these theories in string theory. It is hard to believe that they actually
+     exist, though we have no proof of this. It would be very interesting either to construct
+     these or what is more likely, to find what consistency condition goes wrong with these
+     theories which renders them inconsistent."
+
+  本图取的陈述：10 维 N=1 超对称规范理论中，规范群为 U(1)^496 或 U(1)^248 × E₈ 的两个理论
+  **不作为一致量子引力理论的低能有效理论出现**（即属于 swampland）。
+
+  原文自称的强度：**"It is hard to believe that they actually exist, though we have no proof
+  of this."**
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §4, p.6–p.7（本文无编号公式）；p.7 脚注 6（Douglas 的 1-brane 提议）"
+tags: [swampland, conjecture, gauge-group, ten-dimensional, anomaly]
+notes: |
+  from: vafa-2005#E15（另见 #E16、#E17、#Q3、#U4）。
+
+  【★ 溯源矛盾（本卡最重要的记账）】原文把"这两个群反常自由"引给 [6] =
+  Green–Schwarz, Phys. Lett. B 149, 117 (1984)（本项目 bib key `green-schwarz-1984`，已 L1
+  全文抽取）。**本项目对该文的 L1 抽取显示原文只点名 SO(32) 与 E₈×E₈**（其结论句逐字：
+  "Remarkably, since the dimension of the adjoint representation of SO(32) or E₈ × E₈ is 496,
+  the cancellation occurs for either of these gauge groups."），且 dim G = 496 只让 tr R⁶ 项
+  消失；对纯 Abel 因子还需单独检验 Yang–Mills / 混合反常，**GS 1984 没有做**。四解分类在
+  GSW 第二卷第 13 章（`gsw-1987-v2`，本项目尚未抽取）。
+  => **本卡的 sources 只写 vafa-2005（承载"Vafa 如此断言"），不挂 green-schwarz-1984。**
+  （抽取记录 vafa-2005#Q3、#U4。）
+
+  【跨区接口（2026-09-11 更新，reviewer-swampland-b）】本条此前写"图中不存在任何 consistency
+  区节点"，**该记账已过时**：main 上 consistency 区已建立，与本卡直接对应的是
+  **consistency.d10-four-groups-satisfy-anomaly-conditions**，它逐条给出 SO(32)、E₈×E₈、
+  E₈×U(1)^248、U(1)^496 四者都满足十维 N=1 反常多项式的两条条件（伴随六阶迹关系 + n = 496）。
+  即 Vafa 这里说的"Both of these theories are consistent as far as anomalies are concerned"
+  在图中有了精确对应的卡。
+
+  ★ **仍然不建边，理由有两条，且都不因此改变**：
+  (1) **溯源理由（上一条）不变**：Vafa 把该事实引给 [6] = Green–Schwarz 1984，而本项目对该文的
+      L1 抽取显示它只点名 SO(32) 与 E₈×E₈。那张 consistency 卡的来源是 Polchinski v2 §12.2 与
+      Adams–DeWolfe–Taylor，**不是** Vafa 引的 [6]。建边会把 Vafa 的溯源错误掩盖成一条有据的边。
+  (2) **两张卡断言的东西不同**：consistency 卡只说四者**满足那两条条件**，并在其 (b) 条红线里
+      明确**不**断言它们"反常抵消"或"是一致理论"——按
+      consistency.abelian-factorization-is-not-cancellation（ADT 2010，L1），两个**阿贝尔**解的
+      Green–Schwarz 抵消项写不下来（Y₄ ≠ dH₃）。而 Vafa 的句子用的是"consistent as far as
+      anomalies are concerned"。**两者不是同一断言**，直接建边等于替 Vafa 把话说圆。
+
+  ⚠ 附带的一条实质观察（记账，不是本卡的推导）：Vafa 在同段邀请"find what consistency
+  condition goes wrong"；consistency.abelian-factorization-is-not-cancellation 恰好是这样一条
+  候选（阿贝尔解没有可写下的 GS 抵消项）。**但它不能作为本卡的支持推导**——本卡断言的是
+  "这两个理论属于 swampland"，而 ADT 的结论是"GS 机制对它们不适用"，后者不蕴含前者
+  （还需排除其他抵消机制）。若日后有人要建这条边，必须先建一张中间卡并说明这个间隙。
+
+  【反例方向：原文明确邀请】逐字 "It would be very interesting either to construct these or …
+  to find what consistency condition goes wrong"。构造出这两个理论中的任何一个即构成反驳。
+  本轮不建 refutation 推导文件（无反例）。
+
+  【9 维分类不建节点】§4 (p.7) 引 [7] = de Boer 等 ATMP 4, 995 (2002) 说 9 维有"very
+  restricted list known"，原文自称 "it is difficult to imagine"、"makes it essentially clear"，
+  只到信念级；且本项目未抽该文（vafa-2005#E16）。
+author: curator
+created: "2026-09-11"

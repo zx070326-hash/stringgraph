@@ -1,0 +1,52 @@
+id: spectrum.no-uv-region-in-moduli-space-principle
+kind: proposition
+title: "「模空间没有 UV 区」这条一般原则（作者自称 principle；唯一算过的例子是环面真空振幅）"
+statement: |
+  原书在算完环面真空振幅后提出一条一般性断言，逐字：
+    「The torus illustrates **a general principle, which holds for all string amplitudes: there is no
+    UV region of moduli space that might give rise to high energy divergences. All limits are
+    controlled by the lightest states, the long-distance physics.** For the torus with vertex
+    operators the τ-integration is still cut off as above, but there are more limits to consider as
+    vertex operators approach one another. The same general principle applies to these as well,
+    **as we will develop further in chapter 9**.」
+
+  即断言的内容是：**对一切弦振幅（任意亏格、任意数目的顶点算子），模空间里都没有会产生高能
+  发散的 UV 区；一切极限都由最轻的态、即长距离物理控制。**
+
+  ⚠ **证据基础必须写明**：
+  (1) 原书自己的用词就是 "a general principle"，**不是定理**；
+  (2) 本章唯一算过的例子是**环面真空振幅一例**
+      （spectrum.one-loop-uv-finiteness-from-modular-invariance），而那一例本身只是「区域对比」；
+  (3) 带顶点算子的情形（顶点算子互相靠近的极限）与全亏格情形**明确推迟到第 9 章**，本章一字不证；
+  (4) **开弦一侧根本不是靠这个机制**：圆柱没有模群，t → 0 不被截断，而是靠**换通道重解释**
+      （spectrum.cylinder-closed-channel-open-closed-duality）。原书自己也指出这个差别，逐字：
+      「It is curious that the mechanism that removes the UV divergence is different in the closed and
+      open string cases.」
+
+  **本卡不断言什么**：不断言任何具体振幅的收敛性；不断言第 9 章确实兑现了这条原则
+  （本图未抽取第 9 章）；不涉及超弦。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.219 末段（无式号）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E26，等级 **L1（原书页图逐字整段）**。
+      抽取记录的判定逐字：「**原书自己的用词就是「a general principle」，不是定理。**
+      全亏格、带顶点算子的情形**明确推迟到第 9 章**，本章一字不证。」
+      并指出：「**这是「弦论 UV 有限」这条流行陈述在 Vol.1 里的最强表述，而其证据基础只有
+      环面真空振幅一例。**」
+tags: [spectrum, uv-finiteness, moduli, principle, perturbation-theory]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E26 建立。
+
+  **为什么与 spectrum.one-loop-uv-finiteness-from-modular-invariance 分卡**（项目原则 1）：
+  那一条是**环面**的具体陈述（有一条可检验的区域对比论证）；本条是**对一切弦振幅**的一般断言
+  （只有一个例子 + 推迟到第 9 章）。合成一卡会让「一个例子」冒充「一般定理」，
+  这正是本项目要避免的那种漂移。lead 派工单只点了前一个 id，本卡是 curator 加的拆分，
+  已在报告里列明。
+
+  **status 选择的依据**（docs/STATUS_LEVELS.md 的「断言 + 骨架」档，lead 2026-09-11 裁决）：
+  作者把它当作**成立的**一般原则提出（不是当猜想提出），故按裁决标 **physical-argument** 而非
+  conjecture，缺口逐条写在推导的 gaps 里。
+author: curator-polchinski-ch7
+created: "2026-09-11"

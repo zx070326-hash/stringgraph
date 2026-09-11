@@ -1,0 +1,68 @@
+id: worldsheet.heterotic-so32-partition-function
+kind: proposition
+title: SO(32) 杂化弦左移部门的配分函数 Z_16 = (1/2)[Z^0_0^16 + Z^0_1^16 + Z^1_0^16 + Z^1_1^16]，四项**全取正号**，且模不变
+statement: |
+  用 §10.7 的记号（worldsheet.modular-invariance-requires-eight-transverse-fermions）：
+  Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] = ϑ[α/2, β/2](0, τ)/η(τ) 是**一对**世界面费米子的迹，
+  α 标周期性（R: α = 1、NS: α = 0），β 标是否插入 exp(πiF)。
+
+  **断言**：worldsheet.heterotic-so32-projections 定义的 SO(32) 杂化弦，其 32 个左移费米子
+  （= 16 对）的配分函数是
+    **Z_16(τ) = (1/2)[ Z^0_0(τ)^16 + Z^0_1(τ)^16 + Z^1_0(τ)^16 + Z^1_1(τ)^16 ]**   （(11.2.13)），
+  **四项全取正号**（对比 type II 的 Z_ψ^±(τ) = (1/2)[Z^0_0⁴ − Z^0_1⁴ − Z^1_0⁴ ∓ Z^1_1⁴]），
+  并且它（与右移超弦部门、X 部门一起）模不变。原书自称：'Modular invariance is straightforward.'
+
+  **原书给出的三条理由（逐字）**：
+    (i) 'With 32 rather than 8 fermions, the signs in the modular transformations are raised to
+        the fourth power and so the first three terms must enter with a common sign.'
+        （模变换相位对 16 次幂而言是 8 次幂情形的四次方，故前三项必须同号。）
+    (ii) 'the relative minus sign in the first and second terms of Z_ψ^+ came from the F of the
+        superconformal ghosts, **which we do not have on the left-moving side** of the heterotic
+        string.'
+    (iii) 'The relative minus sign in the first and third terms came from spacetime statistics,
+        **but the λ are spacetime scalars** and so are their R sector states.'
+
+  **本命题不断言的内容**：
+    (1) 不断言第四项 Z^1_1^16 的符号是被上述论证定出的。上述三条只覆盖前三项同号
+        与两个相对负号的**消失**；原书对第四项未单独论证。
+    (2) 不断言完整的模不变性验证（原书只说 'straightforward'，不做）。
+    (3) 不断言 (1/2) 这个前因子的来源（它是对两种周期条件求和再投影的记账）。
+    (4) 不断言 ϑ/η 函数的模变换公式本身——那在 §7.2/§10.7，本图只有
+        worldsheet.modular-invariance-requires-eight-transverse-fermions 一张卡记了变换式。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.13) 与其上下文, pp. 51–52（配分函数与「全 + 号」的三条理由，逐字见 statement；自称 'Modular invariance is straightforward.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56；式号、公式与三条理由的逐字措辞逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.8)–(10.7.10) 一带, pp. 31–34（Z^α_β 的定义、模变换、Z_ψ^± 的符号来源）"
+    note: |
+      L1（E47）。本卡的对比对象与三条理由的出处；本图对应节点
+      worldsheet.modular-invariance-requires-eight-transverse-fermions。
+tags: [heterotic, so32, modular-invariance, partition-function, gso]
+notes: |
+  ★【本卡的要点是「符号从哪来」】三条理由把 type II 的两个相对负号逐一注销：
+  一个来自**超共形鬼场的 F**（左移一侧没有超共形鬼场），一个来自**时空统计**
+  （λ^A 是时空标量，其 R 扇区态也是时空标量，不是时空费米子）。
+  这正是 worldsheet.heterotic-string-construction 的「左移一侧没有超流」在配分函数上的表现。
+
+  【与 E₈ × E₈ 的对照】(11.2.22) 的 Z_8² 是**八次幂的平方**，原书逐字强调
+  'It is important here that the fermions are in groups of 16, so that the minus signs from
+  Z_ψ^± (which was for eight fermions) are squared.' ——即同一条符号论证在分组为 16 时仍然成立，
+  分组为 8 时**不成立**。见 worldsheet.heterotic-two-supersymmetric-ten-dimensional。
+
+  【自称严格程度】'Modular invariance is straightforward.' 是全部论证，
+  原书不写模变换的验证。按 docs/STATUS_LEVELS.md「断言 + 骨架」档位标 physical-argument。
+
+  【与 compact 区的接口（只在 notes 指向，不加边）】玻色构造下同一件事表述为
+  「模不变 ⟺ 格偶自对偶」：compact.modular-invariance-requires-self-dual-lattice
+  与 compact.self-dual-lattice-gives-modular-invariance（均在分支 agent/curator/polchinski-ch8，
+  **本轮未合并**）。本图的 compact.heterotic-narain-lattice-even-self-dual 是杂化弦版本，
+  待那支合并后由 lead 决定是否接边。
+author: curator
+created: "2026-09-11"

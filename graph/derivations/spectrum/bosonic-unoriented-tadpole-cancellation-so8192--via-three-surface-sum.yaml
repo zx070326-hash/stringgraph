@@ -1,0 +1,95 @@
+id: spectrum.bosonic-unoriented-tadpole-cancellation-so8192--via-three-surface-sum
+target: spectrum.bosonic-unoriented-tadpole-cancellation-so8192
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-cylinder-amplitude
+    note: |
+      提供圆柱的无质量 tadpole。⚠ 相加时用的是**无取向理论**的版本，即那张卡的表达式再乘 ½
+      （(7.4.3) 的 1/2π → 1/4π）；该 ½ 的依据是 (7.4.14) 下方那句「there is an extra ½ in both the
+      torus and cylinder amplitudes in the unoriented theory」，记在
+      spectrum.one-loop-klein-bottle-amplitude 的 statement (1) 里。
+      贡献 ∝ n²（两条边界各一个 Chan–Paton 迹）。
+  - id: spectrum.one-loop-klein-bottle-amplitude
+    note: 提供 Klein 瓶的无质量 tadpole，(7.4.19) 给贡献 ∝ 2²⁶。
+  - id: spectrum.one-loop-mobius-amplitude
+    note: |
+      提供 Möbius 带的无质量 tadpole。⚠ **这条边要同时用那张卡的 (3) 与 (5)，缺一不可**：
+      (3) 给 Chan–Paton 净贡献 **±n，上号 + 对应 SO(n)**；(5) 给闭弦通道展开的无质量系数
+      **−24**（圆柱是 +24）。把公共因子取作 +24 之后，(5) 的负号把 (3) 的 ± 翻成 ∓，
+      于是 (7.4.24) 里的交叉项是 **∓2·2¹³n，上号 − 对应 SO(n)**。
+      **∓ 本身不等于 SO/Sp 的净贡献 ±n**——本条 note 在 2026-09-11 之前就是这么写的，是错的。
+  - id: spectrum.cylinder-closed-channel-open-closed-duality
+    note: |
+      提供「圆柱的无质量项系数是 **+24**」这个公共因子（(7.4.4) 的常数项），即 (7.4.24) 分子里的
+      24V₂₆。Klein 瓶的被积函数同样是 η(is/π)^{−24}，故也用 +24；**只有 Möbius 是 −24**
+      （见上一条边与 spectrum.one-loop-mobius-amplitude 的 (5)）。
+  - id: spectrum.cylinder-tadpole-divergence-is-infrared
+    note: |
+      提供「这些 ∫₀^∞ ds 型发散就是 tadpole（圆盘/RP₂ 上单闭弦顶点算子振幅）」这一解释，
+      没有它，(7.4.24) 只是一个发散积分而不是「tadpole 之和」。
+  - id: spectrum.chan-paton-gauge-group
+    convention_map: |
+      记号换算：原书写 Sp(k)、n = 2k；本图该卡写 USp(n)（n = Chan–Paton 指标数）。**USp(n) = Sp(n/2)**。
+    note: 提供 SO(n) / USp(n) 两支的存在与 Chan–Paton 指标数 n 的含义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.24), p.229；三个曲面的输入见 (7.4.3)(7.4.19)(7.4.23)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E38，L1（原书页图逐字，单页重渲染复核）。
+summary: |
+  把三个曲面的**无质量** tadpole（长圆柱表示里 ∫₀^∞ ds 的常数项）相加。
+
+  **第一步：三个被积函数在 s → ∞ 端的常数项。**
+    圆柱、Klein 瓶：  η(is/π)^{−24}                    = e^{2s} **+ 24** + O(e^{−2s})   （(7.4.4)）
+    Möbius 带：       ϑ₀₀(0,2is/π)^{−12}η(2is/π)^{−12} = e^{2s} **− 24** + O(e^{−2s})
+                                                        （spectrum.one-loop-mobius-amplitude 的 (5)，
+                                                         **本图补算，原书未写**）
+
+  **第二步：取公共因子 i·24·V₂₆/(4π(8π²α')¹³)（即 (7.4.24) 分子的 24V₂₆）后的各面贡献。**
+    圆柱（无取向，含额外 ½）：  + n²
+    Klein 瓶：                 + 2²⁶
+    Möbius 带：                **− (± 2·2¹³ n) = ∓ 2·2¹³ n**
+
+  ⚠⚠ **Möbius 项相对符号的来源必须说清**：(7.4.23) 的前置 ± 是 Chan–Paton 净贡献，
+  **上号 + 对应 SO(n)**（一手来源逐字，见 Möbius 卡的 (3)）；而 (7.4.24) 的 ∓ 是
+  **上号 − 对应 SO(n)**。**翻转不来自 Chan–Paton 计数，而来自第一步里 Möbius 的 −24**：
+  因为公共因子被取成 +24，Möbius 的 −24 只能写成「+24 × (−1)」，那个 (−1) 就吃掉了 ± 的方向。
+  本推导此前的写法（「∓ 正是 SO/Sp 的净贡献 ±n」，并在 summary 里把三面写成
+  「Möbius：∓2·2¹³n」而不解释）**把 −24 吞进了公共因子**，使两张卡的 ± 约定看起来互相矛盾。
+  2026-09-11 按 reviewer-v1-ch7 的 CONFIRMED 项订正。
+
+  **第三步：求和。** 2²⁶ ∓ 2¹⁴ n + n² = (2¹³ ∓ n)²，即 (7.4.24)。
+  故总 tadpole ∝ (2¹³ ∓ n)，在 SO(n) 支取 n = 2¹³ = 8192 时为零：
+  圆盘 tadpole 与射影平面 tadpole 相消。
+  ⓘ 上面的配平已由抽取者独立复算（抽取记录 §0.4），并据此确认页图上的 24V₂₆ 读数；
+  抽取记录的复算只用到「Möbius 给交叉项 ∓2·2¹³n」这个结果，**没有展开出 −24**，
+  那一步是 reviewer-ch7 于 2026-09-11 补的。
+gaps:
+  - "**「相消」只在无质量项这一层**：领头的闭弦快子发散（∫ds e^{2s}）不相消，只能靠解析延拓
+     定义（spectrum.cylinder-tadpole-divergence-is-infrared 的 (1)），而延拓后的能量密度是复的
+     （抽取记录 #E25 的逐字）。因此「SO(8192) 时 tadpole 为零」**不等于**该理论的单圈振幅有限。"
+  - "**Möbius 带那一项的 ± 号未逐一验证**（继承自 spectrum.one-loop-mobius-amplitude 的 gaps）：
+     原书只给出 SO/Sp 两支的简并度互换，没有对每个偶质量能级验证 Ω 本征值的分布。"
+  - "**符号翻转所依据的 −24 展开不是来源内容**：(7.4.23) → (7.4.24) 中间的 s → ∞ 展开
+     原书直接跳过；本推导第一步里 Möbius 的 −24 是 reviewer-ch7 于 2026-09-11 算出、
+     curator 复核的**本图补算**（登记在 spectrum.one-loop-mobius-amplitude 的 (5) 与其第二条 source）。
+     它还继承 ϑ₀₀ 乘积表示在原书无证明这条缺口。因此「两张卡的 ± 约定相容」这件事
+     **在本图内可核，但在来源内不可核**。"
+  - "**整体符号约定**：本章 bc 部门的整体符号是人为设为正的
+     （worldsheet.bc-ghost-torus-partition-function），三个曲面的相对符号因此不是独立算出的。"
+  - "**「作者判定玻色弦这一支 probably 无特殊意义」**：这不是缺口而是来源的自评，
+     但引用本卡时必须带上（已写进目标陈述）。"
+  - "**与超弦 SO(32) 无任何论证连接**：原书只有一句「the analogous cancellation for SO(32) in
+     superstring theory does」，无计算、无式号、无引用。**任何 8192 → 32 的推广都是本图之外的推断。**"
+notes: |
+  由 curator 于 2026-09-11 建立。六条依赖边全为实边（三个曲面卡 + 24 的来源 + tadpole 解释 +
+  Chan–Paton 群），其中 Chan–Paton 那条带 convention_map（Sp(k) ↔ USp(n)）。
+
+  **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：Möbius 边的 note 原断言
+  「(7.4.24) 的 ∓ 正是 SO/Sp 的净贡献 ±n」，与 spectrum.one-loop-mobius-amplitude (3) 的
+  「+ ↔ SO(n)」正好反号，是错的。真正的来源是闭弦通道展开的无质量系数 −24。
+  已在 summary 第一步、Möbius 边 note、Möbius 卡的 (5) 三处登记；gaps 新增一条记明
+  该展开是本图补算而非来源内容。
+author: curator-polchinski-ch7
+created: "2026-09-11"

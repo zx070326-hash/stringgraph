@@ -1,0 +1,74 @@
+id: swampland.rigid-n2-vector-moduli-ricci-positive-v2
+kind: proposition
+title: 全局 N=2 理论中向量多重态模空间的 Ricci 曲率半正定（引力解耦极限）；严格正定需 ∂τ 非退化
+statement: |
+  断言：在 4 维**全局**（非引力）N=2 超对称理论中，向量多重态模空间的度规由全纯 pre-potential
+  给出，
+
+    g_{ij̄} = Im τ_{ij},   τ_{ij} = ∂_i ∂_j F(z),   F 全纯，
+
+  且**假设 Im τ > 0**（否则 g 不是度规）。则其 Ricci 曲率满足
+
+    R_{ij̄} = −∂_i ∂̄_j log det g = (1/4) g^{km̄} g^{nl̄} (∂_i τ_{nm})(∂̄_j τ̄_{kl}),
+
+  该形式**半正定**；在点 z 处**严格正定当且仅当** v ↦ v^i ∂_i τ_{nm}(z) 对所有 v ≠ 0 非退化
+  （即该线性映射单射）。特别地，τ 为常数的自由理论给出 R ≡ 0。
+
+  **本条与 Ooguri–Vafa 原文措辞的差别见 notes**：原文断言无条件的 "positive definite"。
+
+  Ooguri–Vafa 2006 §3.2 Example b（p.11–p.12）的原文，逐字（⚠ 原文排印错误
+  "supsersymmetries"，照抄）：
+
+    "We saw in the example v in section 3.1 that, in theories with local N = 2
+     supsersymmetries, the sign of curvature of vector multiplet moduli may be indefinite, but
+     the scalar curvature becomes strictly negative near infinite distance singularities.
+     On the other hand, it is straightforward to see that, in non-gravitational theories with
+     global N = 2 supersymmetry, the Ricci curvature of the vector multiplet moduli space is
+     positive definite. In this case, the metric can be written as
+       g_{ij-bar} = Im tau_{ij},      tau_{ij} = d_i d_j F(z),
+     where F(z) is the pre-potential. The Ricci curvature then is
+       R_{ij-bar} = - d_i d-bar_j log det g
+                  = (1/4) g^{kl-bar} g^{mn-bar} (d_i tau_{km})(d-bar_j tau-bar_{l-bar n-bar}),
+     which is manifestly positive definite. The essential step is to use the fact that
+     g_{ij-bar} is the imaginary part of tau_{ij}, which is holomorphic in z."
+
+  原文接着给出刚性极限的取法（K = −log(4F − 4F̄ + z̄^i ∂_i F − z^i ∂̄_i F̄)，
+  F(z) = (i/8)M_Pl² + F(z)，令 M_Pl → ∞），并下结论（逐字，⚠ 编号误植见 notes）：
+  "This shows how the conjecture 2 can be violated by taking the decoupling limit M_Pl → ∞."
+uses_conventions: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b), p.11–p.12（本段公式无编号）"
+tags: [swampland, n2-supersymmetry, curvature, rigid-limit, gravity-decoupling]
+notes: |
+  from: ooguri-vafa-2006#E23（另见 #U5、#Q2）。
+
+  【换代原因】本卡取代 swampland.rigid-n2-vector-moduli-ricci-positive（v1）。v1 照抄原文
+  断言无条件"正定"且未写出前提 Im τ > 0。reviewer-swampland（2026-09-11）独立重算确认恒等式，
+  但指出缩并后 v^i v̄^j R_{ij̄} = ¼‖g^{−1/2}A(v)g^{−1/2}‖²（A(v)_{nm} = v^i∂_iτ_{nm}）一般只是
+  **半正定**：τ 为常数（自由理论）时 R ≡ 0。故 v2 加前提 Im τ > 0、把结论改为"半正定，非退化时
+  严格正定"。
+
+  【原文措辞被说强了】"which is manifestly positive definite" 中 "manifestly" 只支持半正定
+  （表达式是平方和形式）；严格正定需要额外的非退化条件，原文未提。这是本图的判定，不是原文。
+
+  【status = physical-argument，理由】纯数学部分（恒等式 + 半正定 + 严格正定的充要条件）已拆为
+  math.holomorphic-prepotential-ricci-semi-positive（rigorous，reviewer 复核）。本卡多出来的是
+  **物理输入**："4d 全局 N=2 向量多重态模空间的度规就是全纯 pre-potential 的虚部 Im ∂∂F"，以及
+  它由局部 N=2 经 M_Pl → ∞ 得到（原文引 [17] de Wit–Van Proeyen，本项目未抽取）。这一步是
+  物理论证，故本卡的推导取 physical-argument。
+
+  【★ 转录风险（复核前必读）】原文式 F(z) = (i/8)M_Pl² + F(z) 中左右两个 F 是**不同的量**
+  （花体 F = 引力理论的 pre-potential，直体 F = 刚性极限的），页图上字体可区分，纯文本转录后
+  丢失。**复核必须回原页图**（抽取记录 #U5）。本卡 statement 中的相应公式已按纯 ASCII 转写，
+  同样须回原页核对。
+
+  【★ 原文编号误植】末句 "the conjecture 2 can be violated" 按内容应为 **conjecture 3**
+  （曲率）。这是本项目的判定，非原文（抽取记录 #Q2；同型误植在 §3.1 Example v 有两处）。
+
+  【本卡不反驳任何猜想】它发生在 M_Pl → ∞ 的引力解耦极限，**不在**
+  swampland.applicability-domain 的适用域内，因此挂到
+  swampland.finiteness-criteria-fail-without-gravity，**不是** Conjecture 3 的 refutation。
+  结论减弱为半正定后这一点不变：半正定（含 R = 0 的自由理论）同样与"带引力时曲率为负"对立。
+author: curator
+created: "2026-09-11"

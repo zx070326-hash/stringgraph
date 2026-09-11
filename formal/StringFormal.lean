@@ -14,9 +14,11 @@ import StringFormal.Virasoro.DescendantGrading
 import StringFormal.Virasoro.Shapovalov
 import StringFormal.Virasoro.ShapovalovLevelThree
 import StringFormal.Virasoro.ShapovalovLevelFour
+import StringFormal.Virasoro.GenericIndependence
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
+import StringFormal.NoGhost.FockGram
 import StringFormal.NoGhost.FockSigned
 import StringFormal.NoGhost.PhysicalStates
 import StringFormal.NoGhost.SpuriousShell
@@ -36,3 +38,4 @@ import StringFormal.NoGhost.VertexCommute
 import StringFormal.NoGhost.VertexProduct
 import StringFormal.NoGhost.VertexAdjoint
 import StringFormal.NoGhost.VertexWeightedSum
+import StringFormal.NoGhost.DDFAlgebra

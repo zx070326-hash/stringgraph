@@ -1,0 +1,85 @@
+id: worldsheet.spin-field-vertex-operators--via-spectral-flow-and-annihilation-conditions
+target: worldsheet.spin-field-vertex-operators
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.fermion-bosonization-two-dimensions
+    inferred: false
+    note: |
+      供给玻色化字典 ψ ≅ e^{iH}、ψ̄ ≅ e^{−iH}（(10.3.10)）与"由 OPE 定出玻色等价物"的方法。
+      原书 §10.3 的这一段紧接玻色化一段，(10.3.24)/(10.3.25) 明写是用
+      「corresponding OPEs … determine the bosonic equivalent」，故此边直接可见。
+  - id: worldsheet.rns-fermion-periodicity
+    inferred: false
+    note: |
+      供给周期性参数 ν 与 R/NS 的命名，以及 R 扇区分支切割那句
+      （两卡引用同一句 (10.2.7) 下方的原文）。(10.3.20) 是那张卡的 (10.2.3) 推广到一般 ν。
+  - id: worldsheet.rns-mode-expansions
+    inferred: false
+    note: |
+      供给 (10.3.23) 里的模式 ψ_{n+ν}、ψ̄_{n+1−ν} 及其（反）对易关系——
+      湮灭条件只有在模式展开的意义下才有内容。
+  - id: worldsheet.state-operator-isomorphism
+    inferred: true
+    note: |
+      **inferred**：断言 (1)→(2) 这一步（"由态的湮灭条件得到算子"）用的是态-算子映射。
+      原书 §10.3 在 (10.3.23)–(10.3.25) 处**不引用**该同构，只说 OPE "determine" 玻色等价物。
+      本边记的是本图对这一步的读法。
+      ⚠ 更强的问题：(10.3.23) 的 |0⟩_ν 对一般实 ν 是**扭曲扇区**的态，
+      而 worldsheet.state-operator-isomorphism 讲的是未扭曲的径向量子化；
+      扭曲扇区的态-算子映射原书在 Vol.1 §8.5（orbifold）另讲，本图无节点。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    inferred: false
+    note: |
+      供给断言 (4) 的"两个简并基态"这一事实在态空间侧的来源（ψ_0^μ 的 Clifford 代数）。
+      原书 (10.3.27) 处提到 R 扇区 ν = 0 有两个简并基态，与 §10.2 的零模分析对应。
+  - id: worldsheet.vertex-operator-cocycle
+    inferred: false
+    note: |
+      供给断言 (5)/(6) 所需的修补：多种费米子并存时 (10.3.29) 按字面写下统计是错的。
+      原书 §10.3 脚注 2 **明写** 'A cocycle is needed, as in eq. (8.2.22). A general expression
+      will be given in the next section.'，故此边在脚注处直接可见，不标 inferred。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. (10.3.20)、(10.3.23)–(10.3.29) 与脚注 2, pp. 13–15"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E26）。
+      论证的两句逐字：'The conditions (10.3.23) uniquely identify the state |0⟩_ν, and so the
+      corresponding OPEs (10.3.24) determine the bosonic equivalent'；
+      'One can check the identification (10.3.25) by verifying that the weight is h = (1/2)(ν−1/2)²'。
+  - ref: polchinski-1998-v2
+    loc: "§10「Exercises」, exercise 10.8, pp. 43–44"
+    note: |
+      L1 一手（E49）。权公式的验证被推给这道习题，且题干列出三种算法
+      （(2.7.8) 的对易子、§2.9 的助记法、(2.7.11) 的正规序换算）——**正文一种都不做**。
+  - ref: polchinski-1998-v1
+    loc: "**(2.7.8)**（对易子方法）、**§2.9**（正规序常数助记法）、**(2.7.11)**（共形与创生-湮灭正规序的关系）；**§8.2**（缠绕态顶点算子）、**§8.5**（orbifold 扭曲态顶点算子）"
+    note: |
+      式号出自 Vol.2 §10.3 与 exercise 10.8 的明写引用（L1，E26「文献列出的依赖」栏与 E49）。
+      ⚠ Vol.1 侧**均无本图节点**：前三条是权公式的三条可能算法，
+      后两条是原书拿来作对照的扭曲态顶点算子构造。见 gaps。
+summary: |
+  原书 §10.3 的论证（"湮灭条件唯一定态 ⇒ OPE 唯一定算子"）：
+    (1) 把周期性推广到一般 ν（(10.3.20)），取参考态 |0⟩_ν 为被
+        ψ_{n+ν}（n ≥ 0）与 ψ̄_{n+1−ν}（n ≥ 0）全部湮灭的态（(10.3.23)）。
+        原书断言这组条件**唯一**确定该态。
+    (2) 把这组湮灭条件翻译成算子侧的 OPE 条件（(10.3.24)：ψ(z)A_ν(0) 与 ψ̄(z)A_ν(0) 的
+        分支/极点阶数），再在玻色侧找满足同样 OPE 的指数算子，得 A_ν ≅ exp[i(1/2−ν)H]（(10.3.25)）。
+        **这一步用的判据就是玻色化字典**（ψ ≅ e^{iH}：与 e^{iqH} 的 OPE 阶数是 q）。
+    (3) 交叉核对：算出 A_ν 的权应为 (1/2)(ν−1/2)²（原书说 'One can check'，推给 exercise 10.8）。
+    (4) 谱流：ν → ν + 1 与作用 ψ̄_{−ν} 给同一个态（(10.3.26)）；由此 ν 只 mod 1 有意义，
+        R 与 NS 落在同一族里。
+    (5) 特例 ν = 0：两个简并基态，玻色侧是 e^{±iH/2}（(10.3.27)），权 1/8。
+    (6) 十维：五对复化费米子 ⇒ 五个 H^a（(10.3.28)），自旋场 Θ_s = exp[i Σ_a s_a H^a]（(10.3.29)）。
+        原书**当场承认**这个写法的统计不对，需 cocycle（脚注 2），修补留到 §10.4。
+  **本推导取 physical-argument 的理由**：(1) 的"唯一确定"与 (3) 的权都是断言
+  （前者无论证、后者推给习题）；且整段建立在 physical-argument 的玻色化之上。
+gaps:
+  - "**「湮灭条件唯一确定 |0⟩_ν」是断言**：原书逐字 'uniquely identify'，无论证。对一般实 ν 这是扭曲扇区的真空唯一性，非平凡。"
+  - "**权公式 h = (ν−1/2)²/2 在正文无证明**：逐字 'One can check'，推给 exercise 10.8（题干列三种算法，正文一种都不做）。这是本推导原则上最容易升级的一环（有限步代数）。"
+  - "**扭曲扇区的态-算子映射本图无节点**：(10.3.23) → (10.3.24) 这一步需要它。worldsheet.state-operator-isomorphism 只覆盖未扭曲情形；原书拿 Vol.1 §8.2/§8.5 作对照，本图两者皆无节点。"
+  - "**(10.3.29) 按字面写下统计是错的**：原书脚注 2 自己指出 'the exponentials commute rather than anticommute'。修补依赖 worldsheet.vertex-operator-cocycle，而后者本身只有 'The reader can check' 级的论证。"
+  - "**Θ_s 的权原书不给**：(10.3.29) 处无权值。本图在 target 的 notes 里核对出 5/8（= a^m = D/16），但该核对未在原书出现。"
+  - "**继承上游的核心 gap**：'等价' 无数学陈述、手征玻色子未定义（见 worldsheet.fermion-bosonization-two-dimensions 的 gaps）。"
+author: curator
+created: "2026-09-11"

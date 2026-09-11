@@ -1,0 +1,63 @@
+id: spectrum.one-loop-klein-bottle-amplitude
+kind: proposition
+title: "Klein 瓶真空振幅：Z_{K₂} = ∫₀^∞(dt/4t)Tr'_c{Ω e^{−2πt(L₀+L̃₀)}}，26 维给 iV₂₆∫₀^∞(dt/4t)(4π²α't)^{−13}η(2it)^{−24}"
+statement: |
+  Klein 瓶 K₂ 是 w ≅ w + 2π ≅ −w̄ + 2πit 的世界面：周长 2π、长 2πt 的圆柱，
+  两端经**宇称反转 Ω** 后缝合。它有一个模 t ∈ (0,∞)，**没有模群**，唯一的 CKV 是 σ² 平移。
+  其真空振幅为
+
+  (1)（**算符形式**）
+        Z_{K₂} = ∫₀^∞ (dt/4t) Tr'_c{ Ω exp[−2πt(L₀ + L̃₀)] }
+               = i V_d ∫₀^∞ (dt/4t)(4π²α't)^{−d/2} Σ_{i∈H_c^⊥} Ω_i exp[−2πt(h_i + h̃_i − 2)] ,
+      迹取遍闭弦 Hilbert 空间（撇号同前：去掉鬼场零模）。
+      ⚠ **测度里的 4t（不是环面的 2τ₂ 或圆柱的 2t）**：相对取向理论的环面多一个 ½，
+      来自无取向投影算符 ½(1+Ω)；原书逐字「Relative to the torus in the oriented theory there is
+      an extra ½ from the projection operator ½(1+Ω). **For the same reason there is an extra ½ in
+      both the torus and cylinder amplitudes in the unoriented theory.** One can also think of this
+      as coming from the extra gauge invariance w → w̄.」
+
+  (2)（**26 维平坦时空**）Ω 的对角元只来自左右动处于同一状态的态，且这些态的 Ω = +1；
+      于是迹**有效地只对一侧**求和（等同于开弦谱），但**权重加倍**（左右两侧贡献相等）：
+        Z_{K₂} = i V₂₆ ∫₀^∞ (dt/4t) (4π²α't)^{−13} η(2it)^{−24} 。
+      （注意 η 的自变量是 **2it**，这就是「权重加倍」。）
+
+  (3)（**两个 cross-cap 的表示与长圆柱形式**）K₂ 的另一个基本区 0 ≤ σ¹ ≤ π、0 ≤ σ² ≤ 4πt 把
+      左右两条边各自「平移半个长度再沿边反射」认同——**这就是 cross-cap 的定义**——
+      故 K₂ = 一个圆柱两端各封一个 cross-cap。取长度 s = π/2t 并用 η 的模变换重写：
+        Z_{K₂} = i (2²⁶ V₂₆) / (4π (8π²α')¹³) ∫₀^∞ ds  η(is/π)^{−24} 。
+      模 t 的范围与圆柱相同，故 **t → 0 的发散与圆柱同型**，同样有闭弦极点的长距离解释；
+      对应的 tadpole 是**射影平面 RP₂ 的 tadpole**。
+
+  **本卡不断言什么**：不断言 cross-cap 态 |C⟩ 的形式（原书把它留作习题 7.15，逐字未给）；
+  不断言 (7.4.15) 的路径积分推导（原书把它留作习题 7.13，逐字：正文**没有**从路径积分导出它）；
+  不涉及 tadpole 的相加与相消（那是 spectrum.bosonic-unoriented-tadpole-cancellation-so8192）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The Klein bottle」, eqs. (7.4.14)(7.4.15)(7.4.16)–(7.4.19), p.226–227；几何见 §7.1, eqs. (7.1.8)–(7.1.10), p.207"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E4、#E36，
+      等级 **L1（原书页图逐字）**。
+      ⚠ **式号提醒**：**(7.4.15) 是 Klein 瓶**、(7.4.22) 是 Möbius 带
+      （lead 派工单把两者写反了，此处按 L1 抽取纠正）。
+      ⚠ 原书把 (7.4.15) 的路径积分推导留作 **exercise 7.13**（逐字要求「Carry out the steps,
+      parallel to those used to derive the torus amplitude (7.3.6), to obtain the vacuum Klein bottle
+      amplitude (7.4.15) from the string path integral」）⇒ **正文本身没有做**。
+tags: [spectrum, one-loop, klein-bottle, unoriented, cross-cap, vacuum-amplitude, dedekind-eta]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E36 建立。
+  **四曲面各一卡**（见 spectrum.one-loop-torus-amplitude 的 notes）。
+
+  **(1) 的 ⚠ 里那句「取向理论的环面与圆柱在无取向理论里也各多一个 ½」是本章计数的关键**：
+  spectrum.one-loop-torus-amplitude 与 spectrum.one-loop-cylinder-amplitude 两卡给的是**取向**
+  理论的表达式，做 tadpole 相加时必须补这个 ½（抽取记录 §0.4 的独立复算正是这么做的）。
+
+  **2²⁶ 的来历**：(3) 的整体因子 2²⁶ 与 Möbius 带的 2¹³ 同源（26 = 2×13），
+  它们相加正是 (7.4.24) 里 (2¹³ ∓ n)² 的展开。⚠ 但「2^{D/2} 是某种普适计数」这个说法
+  **原书没有写**（抽取记录 Q4），不得当作原文陈述使用。
+author: curator-polchinski-ch7
+created: "2026-09-11"

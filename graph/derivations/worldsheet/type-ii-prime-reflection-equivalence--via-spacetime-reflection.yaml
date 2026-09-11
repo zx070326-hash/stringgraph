@@ -1,0 +1,51 @@
+id: worldsheet.type-ii-prime-reflection-equivalence--via-spacetime-reflection
+target: worldsheet.type-ii-prime-reflection-equivalence
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-sector-consistency-solutions
+    note: 供给被比较的四个 type II 极大解的扇区表（IIB / IIA / IIA′ / IIB′）。
+  - id: worldsheet.superstring-sector-labels
+    note: |
+      供给标号 (α, F, α̃, F̃) 与「± 指 exp(πiF) = ±1」，
+      本推导第 (2) 步在标号层面追踪 (10.6.7) 时要用。
+  - id: worldsheet.rns-fermion-number-operator
+    inferred: true
+    note: |
+      供给 F（世界面费米子数）。**标 inferred**：原书**不**在 (10.6.7) 处说明
+      反号 ψ²、ψ̃² 如何作用在 F 上；「R 扇区 exp(πiF) 变号、NS 扇区不变」
+      是本图按 F 的定义补写的，图上无原书论证支撑该边。见 gaps 第一条。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.7), pp. 26–27；逐字 'These four solutions represent just two physically distinct theories.'"
+    note: |
+      L1（E41）。原书只给变换式与结论句，**不给标号层面的验算**。
+summary: |
+  两步：
+  (1) **原书给出的**：时空反射 X² → −X², ψ² → −ψ², ψ̃² → −ψ̃²（(10.6.7)）是一个场重定义，
+      把 IIA′ 变成 IIA、IIB′ 变成 IIB，故四解只给两个物理理论。
+  (2) **本图补写的标号层验算**：反号 ψ² 翻转左移 R 扇区基态的手征性、
+      即翻转 exp(πiF) 的符号（NS 扇区不变，因为 NS 基态不含被反号的那一个费米子零模）；
+      ψ̃² 对右移同理。于是 R± → R∓、NS± → NS±，代入扇区表：
+        IIA′ = {(NS+,NS+), (R−,NS+), (NS+,R+), (R−,R+)}
+             ↦ {(NS+,NS+), (R+,NS+), (NS+,R−), (R+,R−)} = IIA ✓
+        IIB′ = {(NS+,NS+), (R−,NS+), (NS+,R−), (R−,R−)}
+             ↦ {(NS+,NS+), (R+,NS+), (NS+,R+), (R+,R+)} = IIB ✓
+      两个映射都是集合层面的逐项对应，可一眼核对。
+
+  【status 的理由】第 (1) 步是原书的赤裸断言（给变换、给结论，不给验算，
+  也不定义「物理上不同」）；第 (2) 步虽是有限核对，但它依据的
+  「ψ² 反号 ⟹ R 扇区 exp(πiF) 变号」这条规则在本图**没有节点**
+  （需要 R 扇区零模代数与手征投影），故整条推导封在 physical-argument。
+gaps:
+  - "**「ψ² 反号 ⟹ R 扇区 exp(πiF) 变号」在本图无节点**：这一步要用 R 扇区费米零模构成的 Clifford 代数与手征算符 exp(πiF) 的关系（§10.2 的零模表示论）。原书在 (10.6.7) 处不作说明。依赖 worldsheet.rns-fermion-number-operator 的那条边已标 inferred。"
+  - "**「物理上不同」无判据**：原书不定义两个弦论何时算同一个理论，也不证 (10.6.7) 诱导的是理论之间的同构（谱、振幅、相互作用全部对应）。本推导只核对了扇区集合的对应，这是同构的一个**必要条件**，不是同构本身。"
+  - "**反射改变时空定向**：X² → −X² 是奇数个空间反射，故它不是 IIA 的对称性而是理论之间的映射。IIA 谱在时空宇称下不变（§10.6 (10.6.10) 下方讨论），IIB 谱手征，两件事不要混。本图无「时空宇称」节点。"
+  - "**本推导只处理 type II 四解**：type 0 两解之间是否有类似关系原书不讨论，本图也不断言。"
+notes: |
+  本推导是从 worldsheet.superstring-sector-consistency-solutions--via-exhaustion 的第 (5) 步
+  拆出来的（reviewer-v2-ch10 裁决，2026-09-11）。拆分前该步与有限组合穷举同处一条推导，
+  使得机器检查过的穷举无法标 rigorous。拆分后：穷举那条升 kind proof / rigorous，本条留 physical-argument。
+  第 (5) 步**不在** reviewer-v2-ch10 的复核范围内，故本条**没有** reviewer-verified 记录。
+author: curator
+created: "2026-09-11"

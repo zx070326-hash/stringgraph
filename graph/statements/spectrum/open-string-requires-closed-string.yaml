@@ -1,0 +1,40 @@
+id: spectrum.open-string-requires-closed-string
+kind: proposition
+title: "开弦理论必须包含闭弦：圆柱 t → 0 的发散在加外腿后变成开弦散射到中间闭弦的动量极点"
+statement: |
+  在圆柱两端各加开弦顶点算子，使它表示**单圈开弦散射振幅**。则一般情形下从一条边界流到
+  另一条边界的动量 k^μ ≠ 0，于是
+  spectrum.cylinder-closed-channel-open-closed-duality 的大 s 渐近多出一个因子
+    exp( − α' k² s / 2 ) ,
+  从而 spectrum.cylinder-tadpole-divergence-is-infrared 的 1/0 型发散变成一个
+  **位于 k² = 0 的动量极点**，它表示**开弦散射进一个中间闭弦态**。
+  由于极点（而非发散）就是「存在该中间态」的标准判据，故
+    **开弦理论必须同时包含闭弦。**
+  原书逐字：「Thus, **as claimed in chapter 3, an open string theory must include closed strings as
+  well.** It is curious that the mechanism that removes the UV divergence is different in the closed
+  and open string cases. **In the closed string it is an effective cutoff on the modular integration;
+  in the open string it is a reinterpretation of the dangerous limit of moduli space in terms of long
+  distances.**」
+
+  **本卡不断言什么**：不断言闭弦谱的具体内容（只断言存在无质量闭弦中间态所要求的极点）；
+  不断言这是唯一的论证（第 3 章另有一个基于世界面拓扑/边界的论证，本卡是第 7 章给出的**证据**）；
+  不涉及超弦或 D 膜语言下的现代表述。
+uses_conventions:
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.10) 及其上下文, p.225–226"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E34，等级 **L1（原书页图逐字整段）**。
+      ⚠ 「as claimed in chapter 3」——**第 3 章的那条断言本轮未核对**（抽取记录 §3.1），
+      故本卡是「第 7 章为第 3 章的断言提供的证据」，而不是第 3 章那条断言本身的节点。
+tags: [spectrum, one-loop, cylinder, open-closed-duality, unitarity, closed-string]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E34 建立。
+
+  **末句的对比值得整句保留**（已写进 statement）：闭弦靠模积分的有效截断，
+  开弦靠把危险的模空间极限重新解释成长距离——**两个机制不同**。
+  这是 spectrum.no-uv-region-in-moduli-space-principle 的 ⚠(4) 的原文依据。
+author: curator-polchinski-ch7
+created: "2026-09-11"

@@ -1,0 +1,74 @@
+id: math.chevalley-restriction-theorem
+kind: proposition
+title: Chevalley 限制定理：限制映射 S(𝔤*)^𝔤 → S(𝔥*)^W 是同构（不变多项式由其在 Cartan 上的限制唯一决定）
+statement: |
+  设 𝔤 是复数域上的有限维半单李代数，𝔥 ⊂ 𝔤 是一个 Cartan 子代数，W 是相应的 Weyl 群
+  （作用在 𝔥 与 𝔥* 上）。把 S(𝔤*) 看成 𝔤 上的多项式函数环，S(𝔤*)^𝔤 是其中的
+  **Ad-不变（等价地 ad-不变）**多项式子环，S(𝔥*)^W 是 𝔥 上 W-不变多项式子环。则
+  **限制映射**
+
+      res : S(𝔤*)^𝔤 ⟶ S(𝔥*)^W,   f ↦ f|_𝔥
+
+  是**良定义的分次代数同构**。特别地：
+
+  **(1) 单**（本图实际用到的方向）：一个 Ad-不变多项式函数由它在 𝔥 上的取值唯一确定；
+       于是两个 Ad-不变多项式若在 𝔥 上相等，就在整个 𝔤 上相等。
+  **(2) 满**：每个 W-不变多项式都可延拓成 𝔤 上的 Ad-不变多项式。
+  **(3) 保次数**：res 把 d 次齐次分量映到 d 次齐次分量。
+
+  **本卡不断言**：
+  (a) S(𝔥*)^W 的结构（「是多项式环，生成元次数为 d₁, …, d_n」是**另一条** Chevalley 定理，
+      即有限反射群不变量环定理；对 W(E₈) 那些次数是 2, 8, 12, 14, 18, 20, 24, 30——本图暂未立卡）；
+  (b) 泛包络代数中心 Z(U(𝔤)) 的 Harish-Chandra 同构——那是**第三条**定理，与本卡相关但不同
+      （见 notes 的记号陷阱）；
+  (c) 任何关于紧群上积分、Weyl 积分公式或特征标的事；
+  (d) 正特征或非半单情形。
+uses_conventions: []
+sources:
+  - ref: humphreys-1972
+    loc: "§23「Invariant polynomial functions」（**只到小节级；不得写 §23.1、Theorem 23.x**）"
+    note: |
+      **本项目对该小节的内容零核实（L0）。** 证据只有两条，都不足以支撑编号：
+      (i) **L1 的交叉引用**：humphreys-1990-reflection 书上 p.56（§3.5 末的 Remark）逐字
+          「When W is a Weyl group, a theorem of Harish–Chandra (see Humphreys [1], §23) allows one to
+          derive from Chevalley's Theorem a description of the center of the universal enveloping algebra
+          of a semisimple Lie algebra over C: it too is a polynomial algebra.」，其中 Humphreys [1] 由
+          同书 References p.193 逐字确定为 GTM 9。⇒ 「GTM 9 §23 是从反射群不变量往李代数侧过桥的那一节」
+          是 L1；**但那句 Remark 讲的是 Z(U(𝔤)) 的 Harish-Chandra 定理，不是本卡的 S(𝔤*)^𝔤 ≅ S(𝔥*)^W**，
+          两者相关而不同（见 notes）。
+      (ii) **L4 的页码**：Google Books 卷 mSD4DvUFa6QC（已做过无意义串控制，是「诚实卷」）查
+          "Invariant polynomial functions" → Page 126，与「§23 起于 p.126 附近」相容。
+      ⇒ 抽取记录 literature/extractions/math-sources.md §44.4 明写这是「本轮最弱的一环」，
+      并留为未解决问题 **Q39**（找一篇逐字引 [Hum, §23.1] 的文献，或另取来源）。
+  - ref: humphreys-1990-reflection
+    loc: "§3.5 末的 Remark，书上 p. 56"
+    note: |
+      L1 逐字（上一条 (i) 引全）。**本条只用来定位 GTM 9 §23 的存在与主题，不承载本卡的陈述**：
+      ⚠ 该 Remark 说的是 **Z(U(𝔤)) 是多项式代数**（Harish-Chandra），**不是** S(𝔤*)^𝔤 ≅ S(𝔥*)^W。
+      不要把这句 Remark 当成本卡的来源陈述。
+      同书 §3.5, Theorem 3.5 是**有限反射群**不变量环定理（与本卡是两条不同的定理，见「本卡不断言 (a)」）。
+tags: [algebra, lie-algebra, invariant-theory, chevalley, weyl-group, phase2, math-input, weakest-link]
+notes: |
+  【三条容易混淆的「Chevalley」】本图必须把它们分开：
+  1. **Chevalley 定理（反射群）**：有限反射群 W 的不变量环 S(V*)^W 是多项式环。
+     来源 humphreys-1990-reflection §3.5, Theorem 3.5（L1，作者本人两处这样引）。本图暂未立卡。
+  2. **Chevalley 限制定理（本卡）**：res : S(𝔤*)^𝔤 ≅ S(𝔥*)^W。来源只有 GTM 9 §23（L0）。
+  3. **Harish-Chandra 同构**：Z(U(𝔤)) ≅ S(𝔥*)^W（经 ρ-移位）。这是 Reflection Groups p.56 Remark
+     实际讲的那条。**不是本卡。**
+  把 2 与 3 混为一谈是本轮抽取记录特意标出的坑（math-sources §44.4）。
+
+  【status 与升级路径】本卡内容是标准不变量理论的教科书定理（数学上无疑问），但本项目
+  **对唯一的来源小节内容零核实**，按「不确定选低一级」标 physical-argument，
+  直至 researcher 结清 Q39（拿到带编号的一手定位，或另取 L1 来源）。
+
+  【本图其实可以绕开本卡】按 literature/extractions/math-sources.md §44.7–§44.8，
+  若把 math.e8-adjoint-trace-identities 的陈述限定为「对 Cartan 元 F = diag(x)」，
+  则只需 math.adjoint-weights-are-roots-and-zero，**不需要本卡**。本卡之所以出现在
+  math.e8-adjoint-trace-identities--via-root-power-sums 的依赖里，是因为那张迹恒等式卡的 statement
+  说的是**任意 𝔢₈ 取值的二形式 F**，比 Cartan 元宽。若日后拆出一张「Cartan 元版」的迹恒等式卡，
+  那张卡就不必经过本卡（届时有效状态由 math.adjoint-weights-are-roots-and-zero 单独决定）。
+
+  【查重】`uv run stringgraph search chevalley`、`search invariant`、`search weyl` 均无同内容节点
+  （`weyl` 的命中全是世界面 Weyl 不变性/反常，与 Weyl 群无关）。
+author: curator
+created: "2026-09-11"

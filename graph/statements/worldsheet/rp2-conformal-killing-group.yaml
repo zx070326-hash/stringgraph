@@ -95,6 +95,13 @@ sources:
 tags: [worldsheet, tree-level, projective-plane, unoriented, conformal-killing-vector, so3, moduli]
 notes: |
   由 curator 于 2026-09-11 从 literature/extractions/math-sources.md §39.9(4) 建立。
+
+  **★ 旧 id 对照（2026-09-11，curator-batch10-14-fix）**：statement (3) 的散文里写的
+  `worldsheet.riemann-roch-kappa-minus-mu` 是 v1 的 id，已 superseded；**statement 文本不可变，
+  故不改那行**。图上活的那条边现在指 **worldsheet.riemann-roch-kappa-minus-mu-nonorientable**
+  （不可定向支，2026-09-11 新建）。中间曾短暂指向 `-v2`，但 v2 的 statement **限可定向**而 RP₂
+  不可定向，属范围错位（reviewer-batch11 M1 / batch12「高」），已改正；
+  改指记录见 worldsheet.rp2-conformal-killing-group--via-sphere-involution 的 depends_on。
   本卡补上了 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的
   gaps 里点名的「**RP₂ 的 μ = 0 则连节点都缺**」。
 

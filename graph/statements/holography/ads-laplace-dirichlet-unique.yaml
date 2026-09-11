@@ -1,0 +1,81 @@
+id: holography.ads-laplace-dirichlet-unique
+kind: proposition
+title: 欧氏 AdS_{d+1} 上无质量标量的边界值问题有唯一解（Witten §2.2 自称给出证明的那一条）
+statement: |
+  设 B_{d+1} ⊂ R^{d+1} 是带度规 ds² = 4 Σ_{i=0}^{d} dy_i² / (1 − |y|²)²（Witten (2.1)，
+  AdS 半径 = 1）的欧氏 AdS_{d+1}，B̄_{d+1} 为其紧化，边界为 S^d。
+
+  则对边界 S^d 上任给的函数 φ(Ω)，B̄_{d+1} 上存在唯一的函数 φ，其边界值为 φ(Ω)
+  且在 B_{d+1} 内满足无质量标量场方程
+
+      D_i D^i φ = 0 .                                                    (2.8)
+
+  唯一性的根据是：B_{d+1} 上 Laplace 方程没有非零的平方可积解。若 φ 是这样一个解，
+  分部积分给
+
+      0 = −∫_{B_{d+1}} d^{d+1}y √g φ D_i D^i φ = ∫_{B_{d+1}} d^{d+1}y √g |dφ|² ,   (2.7)
+
+  故 dφ = 0，再由平方可积性得 φ = 0。
+
+  存在性的根据是分波展开：把 φ 按 S^d 的球谐分解，径向方程在大 y 处（y 为 (2.5) 的径向坐标，
+  ds² = dy² + sinh²y dΩ²）化为
+
+      (d/dy) e^{d y} (d/dy) φ_α = 0 ,                                    (2.9)
+
+  其两个解在无穷远分别趋于常数与 e^{−d y}；故每个分波都有唯一的、在无穷远取给定常数值的解，
+  按适当系数叠加即得在无穷远取任意给定值 φ(Ω) 的唯一解。
+
+  原文自陈的适用范围（逐字）："the proof we have given is valid for any spherically symmetric
+  metric with a double pole on the boundary"，并说去掉球对称假设 "with a little more effort" 亦可；
+  §2.4 另给一个基于积分公式的存在性证明，但那个证明需要 B_{d+1} 上度规的显式形式。
+
+  本陈述**不指定**函数空间、正则性与衰减条件，见对应推导的 gaps。
+uses_conventions: [conv.ads-radius-unit]
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2, §2.2, p.6–7, 式 (2.7)(2.8)(2.9) 及其前后正文；
+      §2.4 提到的第二个（积分公式）存在性证明在 p.13 附近。
+    note: |
+      逐字起句："A basic fact about AdS_{d+1} is that given any function φ(Ω) on the boundary S^d,
+      there is a unique extension of φ to a function on B̄_{d+1} that has the given boundary values
+      and obeys the field equation."
+      ⚠ 原文式 (2.7) 右端积分测度**印作 d⁵y**，左端是 d^{d+1}y；按上下文应为 d^{d+1}y。
+      v2 仍有此印刷错误，本卡按上下文写 d^{d+1}y，**不照抄 d⁵y**
+      （extractions/witten-1998-ads.md E-W2）。
+tags: [holography, ads-cft, boundary-value-problem, laplace]
+superseded_by: holography.ads-laplace-dirichlet-unique-v2
+notes: |
+  【★ 本卡已换代为 holography.ads-laplace-dirichlet-unique-v2（lead 裁决 2026-09-11，
+  依 reviewer-gkpw 审查）】本卡陈述文本有三处问题，v2 逐条订正：
+  (1) 把式号 **(2.8)** 贴在 D_i D^i φ = 0 上——错：原文里那条方程**无编号**，
+      (2.8) 是 (2.5) 表示下含 L²/sinh²y 项的方程（印刷页 p.6）；
+  (2) 存在性论证漏掉原文的枢纽步「某个线性组合在 y = 0 附近光滑、且该解在无穷远有非零常数项」；
+  (3) 唯一性那一步用到的「两个同边界值解之差平方可积」是**编者推断**，原文没有，
+      且与存在性那一步用同一事实有逻辑循环风险。
+  以下原始 notes 保留不动作为历史记录。
+
+  from: witten-1998-ads#E-W2（另见 E-W3、E-W4）。
+
+  【为什么单独立卡】这是 Witten 全文里**唯一自称给出证明**的部分，也是 (2.11) 那条 ansatz
+  的显式前提：E-W4 逐字要求体场满足 "the existence of a unique solution on B̄_{d+1} with any
+  given boundary values"。把它单列，才能让 holography.gkpw-dictionary 的 Witten 支有一条
+  非 inferred 的实边，而不是把「适定性」混进字典的陈述文本里。
+
+  【为什么不是 rigorous】Witten 的论证是物理学家式的：没有指定 φ 与 φ(Ω) 所在的函数空间、
+  没有讨论分部积分的边界项、没有给分波叠加的收敛性，"平方可积" 相对哪个测度也未写明。
+  按 docs/STATUS_LEVELS.md，rigorous 需要数学文献里被接受的完整证明，或前提完整 + reviewer
+  独立复核的有限步初等计算；这里两条都不满足，故取 physical-argument。
+
+  【与 Graham–Lee 的关系】本卡只管**无质量标量**（线性 Laplace 方程）。引力与规范场的对应
+  适定性完全是另一回事：引力有 Graham–Lee 定理（局部、接近标准共形结构），
+  规范场 Witten 只说 "one expects" 且脚注 4 用 Chern class 证明大场下必然失败。
+  详见 holography.conformal-boundary-so2d 的 notes 与 gkpw-dictionary--via-witten-ansatz 的 gaps。
+
+  【有质量情形不适用】有质量时 (2.34) 的解在无穷远像 e^{λ y}，**找不到**趋于常数的解，
+  φ₀ 要由 φ ∼ f^{−λ₊} φ₀（(2.36)）重新定义，而且 φ₀ 是权重 λ₊ 的共形密度而非函数
+  （E-W11、QW2）。本卡不覆盖那个情形。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

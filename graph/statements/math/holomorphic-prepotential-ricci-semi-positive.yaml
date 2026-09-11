@@ -1,0 +1,47 @@
+id: math.holomorphic-prepotential-ricci-semi-positive
+kind: proposition
+title: 由全纯 prepotential 的虚部给出的 Kähler 度规：Ricci 形式半正定，严格正定当且仅当 ∂τ 非退化
+statement: |
+  设 U ⊆ C^n 是连通开集，F : U → C 全纯，τ_{ij} := ∂_i∂_j F（对称、全纯）。假设
+
+    (H)  g_{ij̄} := Im τ_{ij} = (1/(2i))(τ_{ij} − τ̄_{ij}) 在 U 上**正定**（即 Im τ > 0），
+
+  于是 g 是 U 上的 Kähler 度规（Kähler 势 K = Im(z̄^i ∂_i F) 的一个选取给出同一 g）。则：
+
+  (1) 【恒等式】Ricci 形式满足
+        R_{ij̄} = −∂_i ∂̄_j log det g = (1/4) g^{km̄} g^{nl̄} (∂_i τ_{nm})(∂̄_j τ̄_{kl}).
+      （指标按 g^{km̄} g_{lk̄} = δ^m_l 升降；求和遍历重复指标。）
+
+  (2) 【半正定】对任意 v ∈ C^n，记 A(v)_{nm} := v^i ∂_i τ_{nm}（对称矩阵），则
+        v^i v̄^j R_{ij̄} = (1/4) ‖ g^{−1/2} A(v) g^{−1/2} ‖²_F ≥ 0,
+      其中 ‖·‖_F 是 Frobenius 范数，g^{−1/2} 是正定 Hermite 阵 g 的逆平方根。故 Ricci 形式
+      **半正定**。
+
+  (3) 【严格正定的充要条件】v^i v̄^j R_{ij̄} = 0 ⟺ A(v) = 0 ⟺ v^i ∂_i τ_{nm} = 0（对所有 n,m）。
+      因此 R 在点 z ∈ U **严格正定** ⟺ 线性映射 v ↦ v^i ∂_i τ_{··}(z) 从 C^n 到对称矩阵空间
+      是**单射**。
+
+  (4) 【半正定不可加强】τ 为常数（∂_iτ ≡ 0，例如全纯二次多项式 F）时 R ≡ 0。故"正定"作为
+      **无条件**结论为假；无条件成立的只有半正定。
+uses_conventions: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b), p.11–p.12（恒等式 (1) 即原文无编号式；原文的结论措辞为 'manifestly positive definite'）"
+    note: "原文只给恒等式与 'manifestly positive definite' 一句；(2)(3)(4) 中把结论限定到半正定、给出严格正定的充要条件、给出 τ 常数的平凡反例，是本图的订正，不在原文中。"
+tags: [math, kahler-geometry, special-kahler, curvature, prepotential]
+notes: |
+  【为什么单独立卡】本卡是**纯数学命题**：只假设 F 全纯与 Im τ > 0，不含任何物理输入。
+  它的论证是有限步复线性代数，经 reviewer 独立复核，故可标 rigorous（见
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款）。把它与"刚性 N=2 向量多重态模空间的度规**是**
+  Im τ"这条物理断言分开，是为了不让后者的 physical-argument 把前者压低——物理侧见
+  swampland.rigid-n2-vector-moduli-ricci-positive-v2，它以本卡为依赖。
+
+  【前提 Im τ > 0 是新增的】Ooguri–Vafa 原文没有写出这条前提，但没有它 g 根本不是度规
+  （det g 可为零或负，log det g 无定义），(1) 的推导与 (2) 的 g^{−1/2} 都失效。本图补上。
+
+  【与原文 "manifestly positive definite" 的关系】原文的措辞把结论说强了：形如
+  ¼ g^{−1}A g^{−1}Ā 的表达式"manifestly"给出的是**半**正定；严格正定还需 (3) 的非退化条件。
+  常数 τ（自由理论）即是 R = 0 的反例。这是本图的判定，见
+  swampland.rigid-n2-vector-moduli-ricci-positive-v2 的 notes。
+author: curator
+created: "2026-09-11"

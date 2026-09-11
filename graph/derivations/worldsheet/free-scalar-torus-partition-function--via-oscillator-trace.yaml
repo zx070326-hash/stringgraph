@@ -1,0 +1,59 @@
+id: worldsheet.free-scalar-torus-partition-function--via-oscillator-trace
+target: worldsheet.free-scalar-torus-partition-function
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.torus-partition-function-general-cft
+    note: 提供 Z(τ) = Tr[exp(2πiτ₁P − 2πτ₂H)] 与 H 里的 −(c+c̃)/24 常数，即 (qq̄)^{−d/24} 前因子。
+  - id: worldsheet.free-boson-central-charge-d
+    note: |
+      提供 c = c̃ = d，于是 H 的常数项 −(c+c̃)/24 = −d/12，(qq̄)^{−d/24} 的指数就是它。
+      原书 (7.2.5) 直接写出 (qq̄)^{−d/24}，未复述 c = d 这一步（本图补上这条边）。
+  - id: math.dedekind-eta-function
+    note: 提供 η = q^{1/24}∏(1−q^n)，把 (qq̄)^{−d/24}∏_{n}|1−q^n|^{−2d} 收成 |η|^{−2d}。
+  - id: math.euler-partition-generating-function
+    inferred: true
+    note: |
+      **inferred: true**。原书 (7.2.7) 只写 Σ_{N=0}^∞ q^{nN} = (1−q^n)^{−1}（几何级数），
+      并未引用 Euler 分拆生成函数。本图挂这条边是为了让「振子迹 = ∏(1−q^n)^{−1}」这一步
+      有一个已在图中的形式幂级数依据（该卡是 formalized）。
+      ⚠ 严格说来两者不同：本处需要的是每个模独立的几何级数之积在 |q| < 1 时收敛并可交换求和次序，
+      而 Euler 卡是形式幂级数环里的恒等式，**不含解析收敛性**。故标 inferred。
+  - id: worldsheet.open-string-l0-equals-level-plus-mass
+    inferred: true
+    note: |
+      **inferred: true**。需要「L₀ 在 level N 分量上给 α'k² + N（X 部门）」这一事实才能把迹分成
+      零模的高斯积分与振子的几何级数之积；原书 (7.2.6) 直接写出该分解，未引用任何式号。
+      本图现有的该事实是**开弦**版本（单套振子），闭弦的左右两套是它的两份拷贝，原书未复述。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eqs. (7.2.5)(7.2.6)(7.2.7)(7.2.8)(7.2.9)(7.2.10), p.209–210"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E8/#E9，L1（原书页图逐字）。
+summary: |
+  **(1) 迹分解。** Z(τ) = (qq̄)^{−d/24} Tr(q^{L₀} q̄^{L̃₀})；把 Fock 空间写成
+  「动量零模 ⊗ 各振子模的占据数」，L₀ = α'k²/4 + Σ 振子数（闭弦左动侧，右动侧同），得 (7.2.6)：
+    V_d (qq̄)^{−d/24} ∫ d^dk/(2π)^d exp(−πτ₂α'k²) ∏_{μ,n} Σ_{N,Ñ≥0} q^{nN_{μn}} q̄^{nÑ_{μn}} ，
+  其中 Σ_k → V_d(2π)^{−d}∫d^dk。
+
+  **(2) 零模积分。** ∫d^dk/(2π)^d exp(−πτ₂α'k²) 是 d 维高斯积分，逐分量给 (4π²α'τ₂)^{−1/2}。
+  ⚠ 但 k⁰ 方向的指数是**正的**（闵氏号差），积分发散；原书用 **k⁰ → ik^d 的转动**定义它，
+  代价是整体多出一个 i。这一步是本推导强度的上限来源。
+
+  **(3) 振子求和。** (7.2.7) Σ_{N≥0} q^{nN} = (1−q^n)^{−1}，对每个 μ 与每个 n ≥ 1、左右各一份，
+  得 ∏_{n≥1}|1−q^n|^{−2d}。与 (1) 的 (qq̄)^{−d/24} 合并即 |η(τ)|^{−2d}。
+
+  **(4) 合并。** Z(τ) = i V_d [(4π²α'τ₂)^{−1/2}|η(τ)|^{−2}]^d = i V_d Z_X(τ)^d。
+gaps:
+  - "**k⁰ → ik^d 的转动没有论证**：原书逐字只说这个转动是「needed to define the divergent integral」。
+     这是把一个发散积分**定义**成有限值，不是计算；本推导因此不可能高于 physical-argument。"
+  - "**「路径积分 = 迹」无论证**（继承自 worldsheet.torus-partition-function-general-cft）：
+     原书一句「In operator language this gives a trace」，见抽取记录 #E8 备注。"
+  - "**求和与积分的交换、无穷乘积的收敛未讨论**：(7.2.6) 的 ∏_{μ,n}Σ_{N,Ñ} 是无穷多个无穷和之积，
+     原书直接逐项求和。|q| < 1 时这是标准的，但原书没写，本图也没有来源。"
+  - "**τ₂ → 0 与 τ₂ → ∞ 的行为不在本卡范围**：Z_X 的表达式本身在 τ₂ → 0 发散，
+     这与 (7.3.6) 的积分区域问题是两回事，见 spectrum.one-loop-uv-finiteness-from-modular-invariance。"
+notes: |
+  由 curator 于 2026-09-11 建立。两条 inferred 边（Euler 生成函数、L₀ 的 level 形式）都是
+  「本图为了把机械步骤接到已有节点而补的边」，原书在这两处都不引任何式号。
+author: curator-polchinski-ch7
+created: "2026-09-11"

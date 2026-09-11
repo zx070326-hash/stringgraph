@@ -1,0 +1,41 @@
+id: worldsheet.superconformal-ghost-unit-operator-vacuum--via-mode-conditions
+target: worldsheet.superconformal-ghost-unit-operator-vacuum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superconformal-ghost-modes
+    note: 供给 β、γ 的模式、[γ_r, β_s] = δ_{r,−s} 与 (10.4.3a) 的 |0⟩_NS。
+  - id: worldsheet.state-operator-isomorphism
+    note: |
+      供给「算子 ↔ 态」的映射框架：|1⟩ 是单位算子对应的态，
+      其湮灭条件 (10.4.6) 来自 β(z)、γ(z) 在原点的全纯性（正幂模式湮灭真空）。
+  - id: worldsheet.bc-ghost-ground-state-ghost-number
+    note: |
+      供给作对照的 bc 情形（|0⟩ = c_1|1⟩ 型关系与鬼数记账）。
+      **标 inferred**：Vol.2 在此只说 'For the bc system we would be finished'，
+      不在原地论证 bc 的对应关系；该关系的论证位置在 Vol.1 §4.3 / 本图那张卡。
+    inferred: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.6)、(10.4.7), pp. 16–17（含逐字 'One can show that an insertion of δ(γ) in the path integral has the property (10.4.7).' 与 'there is no state in the Fock space built on |1⟩ …'）"
+    note: L1。原书不证 (10.4.7)。
+summary: |
+  (1) 单位算子的态：β(z)、γ(z) 在原点全纯（无插入），按态-算子映射，
+      Laurent 展开中使 z 的幂次非负的那些模式湮灭 |1⟩。
+      由 β(z) = Σ β_r z^{−r−3/2} 与 γ(z) = Σ γ_r z^{−r+1/2} 读出：
+      β_r|1⟩ = 0 (r ≥ −1/2)、γ_r|1⟩ = 0 (r ≥ 3/2)，即 (10.4.6)。
+  (2) 与 (10.4.3a) 比较：|0⟩_NS 被 γ_{1/2} 湮灭，|1⟩ 被 β_{−1/2}（γ_{1/2} 的共轭）湮灭。
+      由 [γ_{1/2}, β_{−1/2}] = 1，一个态不可能同时被两者湮灭，故 |1⟩ ≠ |0⟩_NS。
+  (3) 因为 β、γ 是**对易**振子，作用 γ_{1/2} 任意多次都不能把「被 β_{−1/2} 湮灭」变成
+      「被 γ_{1/2} 湮灭」——这与 bc 的情形（c_1 的平方为零，Fock 空间在该模式上只有两维）
+      本质不同。原书把这一点作为陈述给出，不给证明。
+  (4) δ(γ) 的两条 OPE 性质 (10.4.7) 原书明说 'One can show'，不给论证。
+
+  【status 的理由】(1)(2) 是有限步代数（可核对），(3)(4) 在原书中是断言。
+  取 physical-argument。
+gaps:
+  - "**(3) 的原书论证缺失**：'there is no state in the Fock space built on |1⟩ … that has the properties of |0⟩_NS' 是断言。严格版需要对 βγ 的（不定度规）Fock 表示做分类，本图无节点。"
+  - "**(4) δ(γ) 的性质原书不证**（'One can show that an insertion of δ(γ) in the path integral has the property (10.4.7)'）；δ(γ) 本身是路径积分插入，本图无定义。"
+  - "**βγ 的 Fock 表示本身在本图无构造节点**：worldsheet.bosonic-fock-space 只覆盖玻色振子 α^μ_n；对易的半整数权鬼场振子（且带不定度规）没有卡片。"
+author: curator
+created: "2026-09-11"

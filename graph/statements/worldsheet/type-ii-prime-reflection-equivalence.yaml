@@ -1,0 +1,56 @@
+id: worldsheet.type-ii-prime-reflection-equivalence
+kind: proposition
+title: 时空反射 (10.6.7) 把 IIA′ 化为 IIA、IIB′ 化为 IIB：四个 type II 扇区解只代表两个物理理论
+statement: |
+  取 worldsheet.superstring-sector-consistency-solutions 的四个 type II 极大解
+  （IIB、IIA、IIA′、IIB′）。作用**时空反射**（原书 (10.6.7)）
+
+      X² → −X²,   ψ² → −ψ²,   ψ̃² → −ψ̃²
+
+  （即反射一个横向空间方向，同时反号左移与右移的该分量世界面费米子）。则
+
+    **IIA′ 的扇区集合被映到 IIA 的扇区集合，IIB′ 的被映到 IIB 的。**
+
+  故这四个解**只代表两个物理上不同的理论**（原书逐字：'These four solutions represent
+  just two physically distinct theories.'），它们称为
+  **type IIA 与 type IIB 超弦理论**
+  （原书逐字：'In conclusion, we have found two potentially interesting string theories,
+  the type IIA and IIB superstring theories.'）。
+
+  **本命题不断言的内容**：
+    (1) **不断言「两个理论相同」的判据**。原书不定义什么算「同一个理论」，
+        也不给出「(10.6.7) 是一个理论间的同构」的意义下的证明；本卡照录该断言。
+    (2) **不断言该反射是单个理论的对称性**。它反射一个空间方向，改变时空定向，
+        是把一个理论映到另一个理论的场重定义，不是 IIA 的自同构。
+    (3) **不断言 (10.6.7) 在标号层面的作用形式有独立论证**。
+        「反号 ψ²、ψ̃² 使 R 扇区的 exp(πiF) 变号、NS 扇区不变」这一步是本图按
+        worldsheet.superstring-sector-labels 补写的（见推导的 gaps），原书只给变换与结论。
+    (4) 不断言 IIA/IIB 的无质量谱或时空超对称（见 worldsheet.type-ii-massless-spectrum）。
+    (5) 不断言 type 0 两解之间有类似关系（原书不讨论）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.7), pp. 26–27（时空反射 X² → −X², ψ² → −ψ², ψ̃² → −ψ̃²）；逐字 'These four solutions represent just two physically distinct theories.' 与 'In conclusion, we have found two potentially interesting string theories, the type IIA and IIB superstring theories.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E41；变换式与两句逐字措辞逐页读到原书页图）。
+      ⚠ 原书给出变换与结论，**不给标号层面的验算**，也不定义「物理上不同」。
+tags: [superstring, sectors, type-ii, gso, field-redefinition, consistency]
+notes: |
+  【为什么另立此卡（reviewer-v2-ch10 裁决，2026-09-11）】
+  本步原先写在 worldsheet.superstring-sector-consistency-solutions 的 statement 里，
+  与那张卡的有限组合穷举混在一起。两者的论证种类完全不同：
+  穷举是可判定的有限计算（已在 formal/StringFormal/Math/FiniteCounts.lean 机器检查），
+  而本步是一个场重定义加上「什么算同一个理论」的物理判断（原书不定义该判据）。
+  混卡会把机器检查过的那半也压成 physical-argument，故拆开。
+  FiniteCounts.lean 的 docstring 自己把本步列在「Not formalised here」：
+  'that the spacetime reflection (10.6.7) identifies IIA′ ≅ IIA and IIB′ ≅ IIB'。
+
+  【下游谁该依赖本卡】任何从「四个扇区解」走到「两个理论 IIA/IIB」的推导，
+  例如 worldsheet.ten-dimensional-superstring-theories--via-consistency-conditions
+  的第 (1) 步。穷举卡本身**不再**承载这一步。
+
+  【查重】`uv run stringgraph search reflection` / `IIA` / `等价` 均无同内容节点（2026-09-11）。
+author: curator
+created: "2026-09-11"

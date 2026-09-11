@@ -1,0 +1,31 @@
+id: worldsheet.free-fermion-so-n-current-algebra-level-one--via-fermion-bilinear-ope
+target: worldsheet.free-fermion-so-n-current-algebra-level-one
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: 供给 λ^A(z)λ^B(0) ∼ δ^{AB}/z（(11.2.4)）——(11.5.16)/(11.5.17) 的 OPE 全由它与 Wick 缩并算出。
+  - id: math.affine-lie-algebra-current-ope
+    note: 供给流代数的定义形式 (11.5.1)，把算出的 iλλ · iλλ OPE 读成 k^{ab}/z² + i f^{ab}{}_c j^c/z，从而认出 k̂。
+  - id: math.compact-lie-algebra-index-and-casimir
+    note: 供给指标 T_r（(11.4.6)）：(11.5.17) 的双极点系数是 Tr(t_r^a t_r^b) = T_r d^{ab}，故 k̂ = T_r/2、k = T_r/ψ²。
+  - id: worldsheet.conformal-normal-ordering-v2
+    inferred: true
+    note: |
+      **inferred 的理由**：iλ^Aλ^B 作为复合算子需要（费米型）正规序，二次缩并给 z^{−2} 项、单缩并给 z^{−1} 项；
+      原书 §11.5 不写出 Wick 计算（抽取记录未转录任何中间步骤），本图补此边以标明所用规则。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.16)–(11.5.17), p. 68"
+    note: L1（抽取记录 polchinski-1998-v2.md E60）；中间步骤未转录。
+summary: |
+  用 λ^Aλ^B ∼ δ^{AB}/z 对 j^a = (1/2)λ^Aλ^B t^a_{r,AB} 做 Wick 缩并：双缩并给
+  (1/2) Tr(t_r^a t_r^b)/z² = (T_r/2) d^{ab}/z²，即 k̂ = T_r/2、k = 2k̂/ψ² = T_r/ψ²；
+  单缩并给 (1/z) × (1/2)λλ [t_r^a, t_r^b] = i f^{ab}{}_c j^c/z，即闭合成 g 的流代数。
+  SO(n) 矢量表示（t^{AB} 为反对称矩阵基）给 k = 1（n ≠ 3）、n = 3 时 k = 2。
+gaps:
+  - "**Wick 计算未在抽取记录中转录**：原书 p. 68 的中间步骤本图未见，summary 是本图按 (11.2.4) 复算的骨架；k = 1 的数值依赖 ψ² 的归一化 (11.4.14)（未核实）。"
+  - "**n = 3 例外原书只给结论**（抽取记录：'n = 3 例外，k = 2'），理由未转录。"
+  - "**复合算子 iλλ 的正规序**：原书 Vol.2 全卷把 : : 当作隐含（抽取记录 §1.1），此处未明写；本图以 inferred 边指向 worldsheet.conformal-normal-ordering-v2。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

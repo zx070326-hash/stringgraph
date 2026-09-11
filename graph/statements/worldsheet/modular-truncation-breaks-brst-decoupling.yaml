@@ -1,0 +1,52 @@
+id: worldsheet.modular-truncation-breaks-brst-decoupling
+kind: proposition
+title: "把模积分区域从 F₀ 换成截断区域会造出真边界，使 BRST 零态不再解耦、理论不一致"
+statement: |
+  考虑把环面振幅（spectrum.one-loop-torus-amplitude）的积分区域从模群的基本域 F₀
+  换成一个人为截断的区域，例如原书举的例子
+    |τ₁| ≤ ½ ,  τ₂ > 1     （下边缘是**平的**，而不是 F₀ 的 |τ| = 1 圆弧）。
+  则：
+
+  (1) 由 worldsheet.brst-variation-is-moduli-space-boundary-term，BRST 零态的耦合是模空间上的
+      全导数，故只剩边界项；
+  (2) 在 F₀ 上，图 5.2 里标为 **I 与 I′、II 与 II′** 的两对表观边界分别被模变换认同，
+      两侧的面项**成对抵消**，故净边界项为零；
+  (3) 截断区域引入的是**真边界**（无认同的对象），面项不再抵消；
+  (4) 于是 BRST 零态（负模态）有非零振幅，**理论不一致**。
+
+  原书对此的定性总结（逐字）：
+  「However, in either case this would spoil the consistency of the theory: unphysical negative norm
+  states would no longer decouple. … **Modifying the region of integration introduces real
+  boundaries. Surface terms on the modified moduli space will no longer cancel, so there is nonzero
+  amplitude for null states and an inconsistent quantum theory.** This is directly analogous to what
+  happens in gravity if we try to make the theory finite by some brute force cutoff on the
+  short-distance physics: it is exceedingly difficult to do this without spoiling the local spacetime
+  symmetry and making the theory inconsistent. **String theory manages in a subtle way to soften the
+  short-distance behavior and eliminate the divergences without loss of spacetime gauge invariance.**」
+
+  **本卡不断言什么**：不给出「非零振幅」的定量估计（原书没有算任何截断后的面项）；
+  不断言 F₀ 上边界项**确实**为零的完整证明（(2) 依赖 F₀ 的边界认同，而那在原书未严格处理，
+  见 worldsheet.modular-fundamental-domain）；不涉及引力侧的类比（那只是原书的修辞）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.220 首段（无式号；截断区域的例子 |τ₁| ≤ ½、τ₂ > 1 与图 5.2 的边界标记 I/I′/II/II′ 都在这一段）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E27，
+      等级 **L1（原书页图逐字，整段已抄录）**。
+      抽取记录对本条的判定：「论证链条完整且可检验（BRST-null 态耦合 = 模空间上的全导数
+      ⇒ F₀ 的表观边界成对认同 ⇒ 面项抵消 ⇒ 截断会造出真边界），但**关键一步整体外包给 §5.4**，
+      本章不重述」。⚠ **fig. 5.2 的边界标记 I/I′/II/II′ 本身未核对**（抽取记录 §3.1：图未读）。
+tags: [worldsheet, brst, moduli, unitarity, uv-finiteness, consistency, torus]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E27 建立。
+
+  **这是本章论证价值最高的一条**：它是第 7 章唯一把「UV 有限性」与「幺正性/一致性」显式连起来的
+  论证，也是「弦论不能被人为截断」这一流行说法的原文出处。
+  与 spectrum.one-loop-uv-finiteness-from-modular-invariance 的关系：后者说「弦论的模积分区域里
+  没有 UV 区」，本卡说「你不能靠手动截断在场论里模仿这件事」——两条是不同的命题，
+  分卡是有意的。
+author: curator-polchinski-ch7
+created: "2026-09-11"

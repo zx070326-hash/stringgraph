@@ -1,0 +1,57 @@
+id: spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation
+target: spectrum.one-loop-torus-amplitude-modular-invariant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.dedekind-eta-t-transformation
+    note: |
+      提供 (1) 的 T 半：η(τ+1) = e^{iπ/12}η(τ) 给 |η| 不变（|e^{iπ/12}| = 1），
+      而 Im(τ+1) = τ₂，故 τ₂|η|⁴ 在 T 下不变。
+      ⚠ 2026-09-11 改指：原先一条边挂在已拆分的 math.dedekind-eta-modular-transformation 上；
+      本推导 T 与 S 两半都用，故拆成两条边。**本推导的有效状态由 S 半决定**（T 半是 rigorous）。
+  - id: math.dedekind-eta-s-transformation
+    note: |
+      提供 (1) 的 S 半：η(−1/τ) = (−iτ)^{1/2}η(τ) 给 |η(−1/τ)|⁴ = |τ|²|η(τ)|⁴，
+      配上 Im(−1/τ) = τ₂/|τ|² 即 τ₂|η|⁴ 在 S 下不变。
+      原书在 (7.3.7) 处逐字说这一半「is invariant by eq. (7.2.44)」。
+      **这一条是本推导强度的上限**（S 半在来源中零证明，见 gaps 第 1 条）。
+  - id: spectrum.one-loop-torus-amplitude
+    note: 提供被积函数与测度的具体形式（本卡断言的是它的不变性）。
+  - id: worldsheet.modular-group-psl2z
+    note: 提供模群的作用 τ ↦ (aτ+b)/(cτ+d) 与 Im τ 的变换 Im τ' = τ₂/|cτ+d|²（(2) 的内容就在它）。
+  - id: worldsheet.modular-group-generated-by-s-and-t
+    note: |
+      提供「只需在 S 与 T 上验证即可推到全模群」这一步。原书 §7.2 p.210 逐字用了它
+      （「thus generating the full modular group」），但**本章不证**（抽取记录 §3.3 第 6 条）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7) 及其上下文, p.217；§7.2, p.210"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20/#E9，L1（原书页图逐字）。
+summary: |
+  **(1) τ₂|η|⁴ 的不变性。** 只需在生成元上验证：T 下 τ₂ 与 |η| 都不变；S 下
+  |η(−1/τ)|⁴ = |(−iτ)^{1/2}|⁴|η(τ)|⁴ = |τ|²|η(τ)|⁴ 而 Im(−1/τ) = τ₂/|τ|²，乘积不变。
+  由「模群由 S、T 生成」推到全群。
+
+  **(2) 测度 dτdτ̄/τ₂² 的不变性。** 一般模变换 τ' = (aτ+b)/(cτ+d)（ad − bc = 1）有
+  dτ' = dτ/(cτ+d)² 与 τ₂' = τ₂/|cτ+d|²，故
+  dτ'dτ̄'/τ₂'² = [dτdτ̄/|cτ+d|⁴]·[|cτ+d|⁴/τ₂²] = dτdτ̄/τ₂²。
+  **原书没有做这一步**，逐字「it is easy to check」；上式是 curator 补的两行验算。
+
+  **(3) 合并。** 按目标陈述的配平，(7.3.6) 的被积表达式 = 常数 × (1) 的 −12 次幂 × (2)，
+  故整体模不变。
+gaps:
+  - "**(1) 的 S 半归约到 math.dedekind-eta-s-transformation，而后者在来源中零证明零引用**。
+     这是本卡强度的真正上限：整个论证只有在 (7.2.44b) 成立时才成立，而本图对 (7.2.44b) 只有断言。
+     （T 半 math.dedekind-eta-t-transformation 已是 rigorous，不构成瓶颈。）"
+  - "**(2) 原书未做**（「it is easy to check」）。本推导 summary 里的两行验算是 curator 补的，
+     **没有 reviewer 复核记录**，故不按 docs/STATUS_LEVELS.md 的 rigorous 例外条款升级。"
+  - "**只验证了不变性，没有验证「F₀ 上积分 = 模空间上积分」**：后者还需要 F₀ 确实是基本域
+     （worldsheet.modular-fundamental-domain，其边界认同在原书未严格处理）。"
+  - "**带顶点算子的模协变性未验证**：原书把它留作习题 7.1（抽取记录 #E7）。"
+notes: |
+  由 curator 于 2026-09-11 建立。
+  **2026-09-11 改指（reviewer-v1-ch7 裁定落地）**：η 那条边原先挂在合卡
+  math.dedekind-eta-modular-transformation 上；拆卡后本推导 T、S 两半都用，故挂两条边。
+  拆分后瓶颈链只剩 S 半一条，`stringgraph why` 不再把 T 半算进来。
+author: curator-polchinski-ch7
+created: "2026-09-11"

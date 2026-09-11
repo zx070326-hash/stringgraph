@@ -1,0 +1,43 @@
+id: worldsheet.type-i-unoriented-closed-spectrum
+kind: proposition
+title: 对 IIB 规范掉世界面宇称 Ω 得 type I 无取向闭弦谱 [0] + [2] + (2) + 8′ + 56（该理论单独是不一致的）
+statement: |
+  IIB 理论有世界面宇称对称性 Ω（worldsheet.worldsheet-parity）。规范掉它得到一个**无取向**闭弦理论：
+    · R–R 顶点算子写作 V_s Ṽ_{s'}，按 8 × 8 = [0] + [2] + [4]_+ 变换；
+    · 世界面宇称给 Ṽ_{s'} V_s = **−** V_s Ṽ_{s'}
+      （原书逐字：'where the final sign comes from the fermionic nature of the R vertex
+      operators'），故投影到 Ω = +1 挑出**反对称**的 [2]；
+    · 结果是 *type I closed unoriented theory*，其无质量谱为
+        **[0] + [2] + (2) + 8′ + 56 = 1 + 28 + 35 + 8′ + 56**。
+
+  ⚠ **原书紧接着的一句必须一起记**：
+  '**However, this theory by itself is inconsistent, as we will explain further below.**'
+  即这个纯闭弦无取向理论**单独不一致**；一致性要等到加上开弦扇区并取 SO(32)
+  （见 worldsheet.ten-dimensional-superstring-theories）。
+
+  本命题**不**断言不一致的原因（那在 §10.8 的 tadpole 计算，见
+  worldsheet.type-i-tadpole-cancellation-so32），也**不**断言表示标签的表示论内容
+  （依赖附录 B）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, eq. (10.6.16)（R–R 顶点算子 V_s Ṽ_{s'}）、(10.6.17)（Ṽ_{s'}V_s = −V_sṼ_{s'}）、(10.6.18)（谱 [0] + [2] + (2) + 8′ + 56 = 1 + 28 + 35 + 8′ + 56），pp. 29–30；逐字 'However, this theory by itself is inconsistent, as we will explain further below.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E45；式号与逐字措辞逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6 脚注 4, p. 30（逐字：'The analogous operation in the IIA theory would be to gauge the symmetry which is the product of world-sheet and spacetime parity, but this breaks some of the Poincaré invariance. We will encounter this in section 13.2.'）"
+    note: |
+      L1（E45）。说明为什么是对 IIB 而不是 IIA 做这个投影。
+tags: [superstring, type-i, orientifold, worldsheet-parity, spectrum]
+notes: |
+  【与既有 worldsheet.worldsheet-parity 的关系】那张卡是玻色弦语境下的世界面宇称。
+  本卡在超弦语境下用它，并额外用到「R 顶点算子的费米性质给出额外符号」这一步——
+  这一步在本图无独立节点（原书只用一句话交代），推导的 gaps 里记明。
+
+  【为什么这个理论单独不一致】原书指向 §10.8（tadpole/超共形反常）与第 12 章（时空反常）。
+  本图只建了 §10.8 那一支（worldsheet.type-i-tadpole-cancellation-so32），
+  第 12 章不在本轮范围。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,88 @@
+id: math.narain-moduli-space-finite-volume-v2
+kind: proposition
+title: "Narain 模空间 Gamma\\G/K（Gamma = SO(d,d;Z)）的体积有限，限 d >= 2（v2：补上 v1 缺的半单性条件）"
+statement: |
+  设 **d ≥ 2**，G = SO(d,d;R)，K = SO(d) × SO(d) 是 G 的极大紧子群，Γ = SO(d,d;Z) 是相应的
+  算术子群。则双侧商空间
+
+    Γ \ G / K
+
+  关于 G 上不变测度诱导的测度具有**有限体积**。
+
+  **条件 d ≥ 2 是本卡相对 v1 唯一的实质改动，且是必须的**：Borel–Harish-Chandra 型的有限余体积
+  定理要求代数群（的单位连通分支）半单，而 O(d,d) 的单位连通分支半单当且仅当 d ≥ 2。d = 1 时
+  SO(1,1) 的单位连通分支是一维阿贝尔群，不半单，本卡的论证路线在 d = 1 处失效（本卡对 d = 1
+  **不作任何断言**，既不断言真也不断言假）。
+
+  Vafa 2005 §2 (p.4) 对该事实的引用，逐字（原文陪集写法的问题见 notes）：
+
+    "As another series of example consider compactifications of type II strings on T^d. The
+     salar fields are parameterized by the Narain moduli space
+       SO(d,d)/SO(d) x SO(d) x SO(d,d;Z)
+     which is known to be finite [3]. The existence of T-duality is *crucial* in making this
+     volume finite."
+
+  （[3] = A. Borel and Harish-Chandra, "Arithmetic Subgroups of Algebraic Groups",
+  Ann. of Math. 75, 485 (1962)。⚠ 原文排印错误 "salar"，照抄。**Vafa 没有写 d ≥ 2。**）
+uses_conventions: []
+sources:
+  - ref: borel-harish-chandra-1962
+    loc: "Ann. of Math. 75 (1962) 485"
+    note: >
+      ★ **篇级定位**。本项目未获取该文正文（L0）：定理编号、精确假设、页范围（Crossref 只给起始页
+      485，无页范围）均未核实。**硬禁令：不得写 "Theorem 9.4"** —— 本项目查到的两条独立的、抽取者
+      亲自读到的引用方都不给定理编号，而同一篇对 Siegel 却是给编号的，故"不给编号"是有意选择而非
+      疏忽（见 literature/extractions/math-sources.md §45.1、§45.4 与本条的 bib note）。
+      定理**内容**的依据是 L3 转引：arXiv:2006.04839 §4「Averaging over Narain lattices」（其 ref [57]）
+      逐字 "an arithmetic subgroup of a semisimple algebraic group has a finite volume quotient"。
+      ⚠ 另一条 L3（arXiv:2509.09047，其 ref [13]）引的是 **cocompact（余紧）**那一支，
+      与本卡要的**有限体积**那一支**不是同一条定理**，绝不可混用（Narain 商不紧）。
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.4（'which is known to be finite [3]'；本文无编号公式）"
+    note: >
+      此条只承载"Vafa 把该事实引给 Borel–Harish-Chandra"这一转述，不承载定理本身的论证。
+      **Vafa 原文没有 d ≥ 2 的限制**；该限制来自 arXiv:2006.04839 §4 逐字
+      "the identity component of O(c,c) is semisimple iff c ≥ 2"（该篇尚未登记进 sources.bib，
+      其逐字内容已记在 borel-harish-chandra-1962 的 bib note 与 math-sources.md §45.3）。
+tags: [math, arithmetic-group, moduli-space, narain, finite-volume]
+notes: |
+  from: vafa-2005#E9、#U3；literature/extractions/math-sources.md §45（researcher 一手核实轮）。
+
+  【本卡为什么换代】v1（math.narain-moduli-space-finite-volume）的 statement 没有 d ≥ 2，
+  等于把一条在 d = 1 处论证失效的陈述写成对一切 d 成立。按 graph/CLAUDE.md 的不可变性纪律，
+  陈述文本要改就换代，故建本卡并在 v1 写 superseded_by。
+
+  【loc 的处理】v1 的 sources.loc 写的是"**未核实**：…"。本卡改为**篇级** `Ann. of Math. 75 (1962) 485`
+  ——这是 Crossref 的 L2 元数据，可以照写；未核实的是**定理编号**，已移到 source.note 里说明。
+  这样既不编号，也不把一条有 L2 元数据的引用写成"未核实"。
+
+  【★ 有效状态为什么只到 physical-argument】不是因为怀疑 Borel–Harish-Chandra 定理，而是因为
+  从该定理到本卡的翻译有两个环节在本项目**完全无来源**：
+    (A) "SO(d,d;Z) 是 SO(d,d) 中的算术子群"——Vafa 直接写出陪集就往下走，不论证；
+    (D) "该双陪集就是 Narain 模空间"——这是物理侧构造（Narain 1986 PLB 169, 41；
+        Narain–Sarmadi–Witten 1987 NPB 279, 369），本项目**尚未登记这两篇**。
+  加上定理编号未核实，本卡的推导标 physical-argument。**拿到正文与编号、并补上 (A)(D) 的来源后
+  才可升 rigorous**（lead 口径：rigorous 需带编号定理）。
+
+  【本轮 scope 备注】researcher 建议另建一张 `math.arithmetic-subgroup-finite-covolume` 卡承载
+  Borel–Harish-Chandra 定理本身，本卡再依赖它（inferred: true）。本轮任务的改动范围限于
+  swampland/ 与 math.narain-* / math.cy3-* 卡与新约定，故**未建该卡**；(A)(D) 两个缺口暂以本卡
+  推导的 gaps 承载。建议 lead 排一轮专门建它。
+
+  【陪集写法】本卡用 Ooguri–Vafa 2006 §3.1 Example iv 的双侧商写法（Γ\G/K）。
+  **Vafa 2005 的写法把紧子群与算术子群写在同一个分母里、中间用乘号，是记号松散，
+  不是不同的空间**（抽取记录 vafa-2005#E9 备注 2）。
+
+  【SO 还是 O】L3 来源的半单性判据是对 **O(c,c)** 的单位连通分支说的；SO(d,d) 与 O(d,d) 的单位
+  连通分支相同，故条件 d ≥ 2 对两种写法一致。本卡沿用 Vafa 与 v1 的 SO 写法。
+
+  【只覆盖 T^d 那一支，不给一般猜想升格】Vafa 2005 的三类例子严格性递减：T^d 有
+  Borel–Harish-Chandra 撑着，K3 同型，Calabi–Yau 情形原文只到 "are believed to be finite in
+  volume"。故本卡单独存在，**不是** swampland.moduli-volume-finite 的推导（那条猜想是对**任意**
+  一致量子引力理论的断言，本卡只是它的一个实例）。
+
+  【⚠ 另一处待复核的陪集】Ooguri–Vafa 2006 §3.1 Example iv 的经典 K3 模空间在 v1 页图上印作
+  SO(3,19)/(SO(2) x SO(19))，按极大紧子群应为 SO(3) x SO(19)，疑为排印错误（抽取记录
+  ooguri-vafa-2006#U3）。本卡不使用该式。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,61 @@
+id: conv.amnv-2006-units
+family: alpha-prime
+title: "AMNV 2006（hep-th/0601001）§4 的单位：α' = 4 与 M_Pl = 1"
+definition: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006（arXiv:hep-th/0601001v2）在 §4 的杂化弦检验中使用的一套
+  单位，与本图 canonical 的 conv.alpha-prime-regge **不同**：
+
+    α'   = 4          （§4，(24) 后，逐字 "where we chose units with α' = 4"）
+    M_Pl = 1          （§3 起，逐字 "Working in M_Pl = 1 units"；§4 又说一次
+                       "where we work in units with M_Pl = 1"）
+
+  在这套单位下，§4 的电荷格与质量公式取如下形式（原文 (21)–(25)，p.13–p.14）：
+
+    Q_L² − Q_R² ∈ 2Z                                   (21)
+    BPS 极端黑洞（Q_R² > Q_L²）：      M² = ½ Q_R²      (22)
+    非 BPS 极端黑洞（Q_L² > Q_R²）：   M² = ½ Q_L²      (23)
+    微扰杂化弦谱：  M² = ½Q_R² + N_R = ½Q_L² + N_L − 1  (24)
+
+  ⚠ 三条使用规则：
+
+  1. **凡引用 (21)–(27) 系数的节点必须声明本约定。** (24) 与 (25) 里的 −1 只在 α' = 4 下成立
+     （原文逐字 "The −1, coming from the tachyon in the left-moving bosonic string, is crucial."）；
+     不声明 α' 归一化时这个 −1 没有意义。
+  2. **与 conv.alpha-prime-regge 互斥，且原文不给换算。** 凡跨这两套的边必须写 convention_map，
+     并注明换算是本项目补的。
+  3. **与 conv.sen-1995-normalization（Sen hep-th/9504147 的 α' = 16、G_N = 2、T = g²/32π）
+     也不是同一套，两篇同样不给换算。** 该文的 (24) m² = Q̄_R²/(8g²)、(37) 熵公式、(49) C = 4
+     不得搬进 AMNV 的记号。
+
+  本约定 `canonical: false`：本图 canonical 的 α' 归一化是 conv.alpha-prime-regge。
+canonical: false
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, (24) 之后, p.13：逐字 'where N_{R,L} are the string oscillator contributions and where we chose units with α′ = 4'"
+    note: "L1（抽取记录逐字转录，见 literature/extractions/arkani-hamed-2006.md 第 57 行与 §(24) 段）。"
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.10：逐字 'Working in M_Pl = 1 units'；§4, p.13：逐字 'where we work in units with M_Pl = 1'"
+    note: "L1。M_Pl = 1 自 §3 起全文有效，不限于 §4。"
+notes: |
+  from: arkani-hamed-2006（抽取记录「单位」「α' 归一化」两行，均 L1）；建卡动议来自
+  reviewer-swampland-b 2026-09-11 的独立复审（两张 heterotic 卡用了 α' = 4 却没有声明任何
+  alpha-prime 族约定，只在 notes 里记账）。
+
+  【为什么放进 family: alpha-prime】α' 的取值是归一化选择，与 conv.alpha-prime-regge 真正互斥
+  （同一个量取不同数值），同 family 才能让 validate 的 convention_map 检查生效。
+  conv.alpha-prime-regge 保持 canonical: true。同族已有 conv.sen-1995-normalization（α' = 16）。
+
+  【M_Pl = 1 为什么也写在这张卡里而不另开 family】本图目前没有 planck-units 族；
+  conv.moduli-metric-planck-units 是 moduli 侧的度规单位卡，与本卡不是同一件事。AMNV 的两条
+  单位在 §4 的公式里**必须同时生效**（(24) 的 −1 要 α' = 4，(22)(23) 的 ½ 要 M_Pl = 1），
+  拆成两张卡会让"引 (24) 必须同时声明两条"这件事更难在图里强制。若日后新开 planck-units 族，
+  本卡应拆。
+
+  【声明本卡的节点】swampland.heterotic-t6-substates-below-extremality、
+  swampland.heterotic-spectral-flow-substates。两卡原先只在 notes 里记账"α' = 4 与
+  conv.alpha-prime-regge 不是同一归一化"，现在改为显式声明。
+
+  【★ 不覆盖的东西】(22)(23) 的极端黑洞解本身出自 Sen hep-th/9411187（bib key
+  `sen-1995-bh-torus`，本项目 L0 未获取正文），**该文用的是什么单位本项目不知道**；AMNV 把解
+  搬进自己的单位时是否做过换算，原文没有说。这是一条已知的溯源缺口，记在
+  swampland.heterotic-t6-substates-below-extremality 的 sources note 里。

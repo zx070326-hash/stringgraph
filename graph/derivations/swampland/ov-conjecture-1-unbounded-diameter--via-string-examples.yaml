@@ -1,0 +1,41 @@
+id: swampland.ov-conjecture-1-unbounded-diameter--via-string-examples
+target: swampland.ov-conjecture-1-unbounded-diameter
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+  - id: swampland.moduli-space-distance
+    inferred: false
+    note: "Conjecture 1 的陈述直接用这条距离定义（同页正文给出）。"
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.1, Examples i)–v), p.6–p.10（其中 §3.1 有**两个** Example v：p.8 的 Calabi–Yau 三折与 p.10 的 4d N=1）"
+summary: |
+  §3.1 逐例检验（全部为量级/显式计算，无编号公式除 (3.1)）：
+  - Example i) M 理论 on S¹：度规 (dr/r)² 给 T = |log(r/r₀)|，r 可取任意正值，
+    原文逐字"the conjecture 1 is clearly satisfied"。
+  - Example ii) 10 维 IIB 的 dilaton-axion：ds² = dτdτ̄/(Imτ)²（eq. (3.1)），
+    原文逐字"the volume of this moduli space is finite yet a geodesic length toward i∞ is
+    logarithmically divergent"，T ~ log(Imτ/Imτ₀) 无界。
+  - Example iii) IIB on S¹：T = |log(r/r₀)|，同型。
+  - Example iv) 16 超荷（M 理论 on K3、IIA/IIB on K3、杂化/I 型 on T^d）：
+    "any point which is infinite distance away from points in the middle of the moduli space is
+    dual to a decompactification limit"。
+  - Example v)（Calabi–Yau 三折，p.8）：Kähler 模空间至少有一个无穷远奇点（去紧化极限），
+    由镜像对称推得复结构模空间亦然。
+  - Example v)（4d N=1 通量紧化，p.10）：只到"To our knowledge, the conjectures 1, 2, and 4 are
+    consistent with all known examples"，并把造不出反例这一"difficulty"当作支持。
+gaps:
+  - "4d N=1 一支是**否定式经验证据**：原文逐字 'it appears that there are obstructions in constructing models with compact moduli spaces with finite diameter … and we regard this difficulty as in support of the conjectures 1, 2, and 4'（#E20）"
+  - "Example iv 的经典 K3 陪集在 v1 页图上印作 SO(3,19)/(SO(2)×SO(19))，按极大紧子群应为 SO(3)×SO(19)，疑为排印错误，本项目未回原页复核（#U3）"
+  - "§3.1 有两个 Example v，loc 必须带标题或页码（#0.3 第 3 条）"
+  - "所有例子都是弦论背景；对'其他一致量子引力理论（若存在）'没有任何检验"
+notes: |
+  from: ooguri-vafa-2006#E14、#E16、#E17、#E18、#E19、#E20。
+  **不加**与 swampland.moduli-volume-finite（Vafa 的体积判据）之间的边：两者相容但独立，
+  Example ii 正是"体积有限而测地距离发散"的干净例子（#Q5）。
+  **不加**与 Conjecture 2 之间的边：原文明说二者独立（#E27）。
+author: curator
+created: "2026-09-11"

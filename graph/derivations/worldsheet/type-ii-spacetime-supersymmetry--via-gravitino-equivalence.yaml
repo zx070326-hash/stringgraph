@@ -1,0 +1,47 @@
+id: worldsheet.type-ii-spacetime-supersymmetry--via-gravitino-equivalence
+target: worldsheet.type-ii-spacetime-supersymmetry
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.gso-projection
+    note: 供给 IIA/IIB 保留哪些 NS–R / R–NS 扇区（两个引力微子的来源）。
+  - id: worldsheet.type-ii-massless-spectrum
+    note: 供给谱中的 56 / 56′（引力微子）。
+  - id: worldsheet.ocq-superstring-physical-states
+    note: 供给物理态条件与零态的模去关系（等价关系 u ≅ u + kζ 的来源）。
+  - id: worldsheet.open-superstring-low-level-spectrum
+    note: |
+      供给单侧的内容：NS 侧的 ψ_{−1/2} 矢量与 R 侧的 Dirac 方程，
+      引力微子态是两者的乘积。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    note: 供给 (k·Γ)_{ss'}u_{μs'} = 0 中的 Γ 矩阵。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.12)–(10.6.15), pp. 28–29；含逐字 'if all requirements for a consistent string theory are met (and they are)'"
+    note: |
+      L1。⚠ 核心一步（等价关系 ⟹ 局域对称性）原书只给一句 'We have learned that …'。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, p. 29（原书要求读者转去附录 B.2、B.4、B.5）"
+    note: 附录 B 本轮未读（抽取记录 Q8）。
+summary: |
+  三步：
+  (1) 构造态：NS–R 扇区的无质量态是 NS 侧的 ψ^μ_{−1/2} 与 R 侧的基态 |s⟩ 的乘积，
+      记作 ψ^μ_{−1/2}|0; s; k⟩ u_{μs}。
+  (2) 物理态条件给 k² = 0、k^μu_{μs} = 0、(k·Γ)u = 0；
+      零态的模去给等价关系 u_{μs} ≅ u_{μs} + k_μζ_s，其中 ζ_s 是时空旋量。
+  (3) 按「等价关系是局域时空对称性的标志」这条原则（原书：'We have learned that …'），
+      参数为旋量的等价关系意味着**局域时空超对称**。
+      IIA/IIB 在 NS–R 与 R–NS 各有一个这样的态，故有两个引力微子（N = 2）。
+
+  【status 的理由（三条）】
+  (1) 第 (3) 步的原则在本图无节点，原书也只有一句 'We have learned'；
+  (2) 原书对「一致性要求都满足」用的是赤裸断言 '(and they are)'，不加论证；
+  (3) 超对称代数本身的内容推给附录 B（本轮未读）。
+gaps:
+  - "**「等价关系 ⟹ 局域对称性」这条原则在本图无节点**：原书只有 'We have learned that such equivalence relations are the signature of a local spacetime symmetry'。→ 待建 worldsheet.null-state-equivalence-signals-gauge-symmetry（玻色弦一侧的无质量矢量情形可一并覆盖）。"
+  - "**原书的赤裸断言 '(and they are)'**：'if all requirements for a consistent string theory are met (and they are) then the existence of the gravitinos implies that the corresponding supersymmetries must be present.' 括号内不加论证。抽取记录 E43 特别标出这一点。"
+  - "**超对称代数的内容依赖附录 B.2 / B.4 / B.5**（本轮未读，抽取记录 Q8）：本推导没有写出超对称代数，也没有验证引力微子确实是超对称的规范场。"
+  - "**作者自评 RNS 形式 'somewhat ad hoc'**，并说时空超对称本应从一开始就显然（'There is certainly truth to this'）。这不是技术缺口，但说明该结论在本形式下是**事后识别**出来的，不是构造出来的。"
+  - "**表示标签（56/56′、8/8′）依赖附录 B.1**。"
+author: curator
+created: "2026-09-11"

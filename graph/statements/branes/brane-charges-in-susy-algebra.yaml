@@ -1,0 +1,55 @@
+id: branes.brane-charges-in-susy-algebra
+kind: proposition
+title: type II 超对称代数中的广延物体荷：(13.2.9) 含 F 弦 NS–NS 荷 Q^NS 与 D 膜 R–R 荷 Q^R 的 {Q, Q̄}、{Q̃, Q̃̄}、{Q, Q̃̄}——原书自承「still not complete」
+statement: |
+  type II 超弦（IIA 或 IIB）中，含广延物体荷的十维超对称代数是
+    **{Q_α, Q̄_β}  = −2 [ P_M + (2πα')^{−1} Q^NS_M ] Γ^M_{αβ}**,                             (13.2.9a)
+    **{Q̃_α, Q̃̄_β} = −2 [ P_M − (2πα')^{−1} Q^NS_M ] Γ^M_{αβ}**,                             (13.2.9b)
+    **{Q_α, Q̃̄_β}  = −2 Σ_p (τ_p / p!) Q^R_{M_1…M_p} (β^{M_1} ⋯ β^{M_p})_{αβ}**,               (13.2.9c)
+  其中 Q^NS_M 是**基本弦（F 弦）**携带的荷（与 B_{MN} 耦合），Q^R_{M_1…M_p} 是与 R–R (p+1)-形式势耦合的
+  **Dp 膜荷**（branes.d-brane-rr-coupling），τ_p 是 Dp 膜张力（branes.d-brane-tension），
+  β^M ≡ ΓΓ^M；IIA 的求和跑遍偶数 p，IIB 跑遍奇数 p。
+  原文逐字（p. 145）：「Also, we have changed conventions so that all charges are now normalized to one per
+  unit world-volume of the respective extended object, and so the string tension (2πα')^{−1} appears explicitly.」
+  对一张 Dp 膜，(13.2.9c) 右端的 Γ 矩阵乘积化为
+    **β^{μ_1} ⋯ β^{μ_p} = β^⊥ Γ^0**（相差一个整体符号），                                      (13.2.10)
+  与单张 Dp 膜保留的超对称组合 Q + β^⊥Q̃（branes.d-brane-bps-half-susy，(13.2.5)(13.2.6)）一致。
+  这是 App. B (B.2.36) 点粒子中心荷代数（branes.bps-bound-point-particle-d4）向广延物体荷的推广
+  ——App. B p. 448 明写「we introduce it in its natural physical context: first in section 11.6, and then in
+  more variety in chapter 13」。
+
+  **本命题不断言**（每条都有原文依据）：
+  (a) ★ 代数的完整性。原文逐字（p. 145）：「Incidentally, the algebra (13.2.9) **is still not complete**: the
+      *magnetic NS–NS charge* is missing. This is not carried by D-branes or F-strings. We discuss this further
+      in the next chapter.」（NS5 膜荷，第 14 章，本项目未抽）；
+  (b) 由 (13.2.9) 推出的具体 BPS 界（如 (13.6.3) (p,q) 弦、(13.6.18)(13.6.19) D0–Dp）——本图未建卡；
+  (c) (13.2.9c) 的整体符号与 β 乘积的符号（(13.2.10)「up to an overall sign」）；
+  (d) 荷的归一化与 (13.3.7) μ_p 的换算——(13.2.9c) 用 τ_p 而 (13.3.5) 用 μ_p，原书未并排比较；
+  (e) 杂化弦的对应代数 (11.6.32)（本项目未核）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, eqs. (13.2.9a,b,c)（含 Q^NS、Q^R 的代数）与 (13.2.10)（β^{μ1}⋯β^{μp} = β^⊥Γ^0），pp. 144–145；归一化句与「still not complete」句逐字见 statement（p. 145）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E14 与 §3.1 第 8 条，证据等级 L1（原书页图）。
+      ⚠ 原书对 (13.2.9) 的推导：由 T 对偶把 type I 的守恒组合与 D 膜荷接起来，并「by analogy」写出；
+      §13.2 此处不从世界面算子代数推导它。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, p. 448（「Including charges that can be carried by extended objects, additional terms appear. Rather than explain this here, we introduce it in its natural physical context: first in section 11.6, and then in more variety in chapter 13.」）；§B.5, p. 454（「additional central charges carried by extended objects are introduced in their physical context in section 13.2」）"
+    note: 抽取记录 polchinski-1998-v2-appB.md#E21/#E25（L1）。这两句是本卡 depends_on App. B 模板卡的原文背书。
+tags: [supersymmetry, bps, central-charge, d-brane, f-string, type-ii, brane-charge]
+notes: |
+  【放在 branes/ 的理由】同 branes.bps-bound-point-particle-d4：areas.yaml 无 susy 区，branes 区描述含「BPS 态」。
+
+  【为什么 D 膜 BPS 链要经过本卡】抽取记录 appB Q3：App. B 的 BPS 界只覆盖点粒子中心荷；D 膜 BPS 性
+  （质量由荷决定、多膜系统能量只依赖荷与间距）的代数来源是本卡的 (13.2.9)，而 (13.2.9) 在原书里是
+  **不完整的**。故 branes.d-brane-bps-no-force 依赖本卡，而不是直接依赖 App. B。
+
+  【依赖方向（照原书顺序）】§13.2 的顺序是：(13.2.5)(13.2.6) 半 BPS（p. 140）→ (13.2.7) R–R 荷（p. 141）→
+  (13.2.9) 含膜荷的代数（pp. 144–145）。本卡因此依赖 d-brane-bps-half-susy 与 d-brane-rr-coupling，
+  **不是**反过来；App. B 模板卡是本卡与半 BPS 卡的共同上游。lead 指示里写的箭头
+  「bps-bound → brane-charges → 半 BPS → 无力」若按字面建边会与 rr-coupling 卡成环，故按原书顺序调整。
+
+  【第 14 章缺口】磁 NS–NS 荷（NS5 膜）与 (p,q) 弦的 BPS 界 (13.6.3) 本图未建；ch.14 未抽。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

@@ -23,13 +23,20 @@ depends_on:
   - id: worldsheet.moduli-condition-traceless-transverse
     note: μ 的定义。
   - id: worldsheet.sphere-conformal-killing-group
+    inferred: true
     note: |
       **比例常数的标定输入**（2026-09-11 补边，ch.5/ch.6 两支合入 main 后）：
       提供 κ(S₂) = 6（(6.1.5a)/(6.1.5b) 的两片正则性直接构造）。本推导只导出 κ − μ ∝ χ，
       系数 3 全靠球面这一个例子定出，而球面的 κ = 6 就出自该节点。
-      不标 inferred：来源在原地就用球面标定（见 summary 末的逐字转述），
-      且 [S] §6.67 逐字写「zero moduli and six conformal Killing vectors … 3χ = κ − μ = 6 − 0 = 6」，
-      即文献自己把这两章接在一起（抽取记录 E96 的「文献列出的依赖」也含 E75/E89）。
+      **★ 2026-09-11 改标 inferred（reviewer-batch10 E）**：此前这条边写「不标 inferred：
+      来源在原地就用球面标定」，但**那个『原地』的证据来自伴读笔记 [S]**（§6.67 逐字
+      「zero moduli and six conformal Killing vectors … 3χ = κ − μ = 6 − 0 = 6」，
+      以及 [S] §5.22–§5.23 对 §5.3 标定步骤的转述），**不是原书 p.159 的页图**：
+      抽取记录 E82 的位置行虽记 (5.3.20)/(5.3.21) 已核实，但其备注与「留给下一轮」表
+      （§12.10 D 表第 6 项「§5.3（pp.154–159）逐字」）都表明**原书 p.159 的页图本项目尚未读**，
+      「原书在标定处是否就地引用 §6.1 的 κ(S₂) = 6」因此**无一手证据**。
+      ⇒ 按项目原则 5（找不到就标 inferred + note），改标 inferred。
+      **撤销条件**：读到原书 p.159 页图并确认 (5.3.20)/(5.3.21) 附近就地使用球面的 (κ, μ) = (6, 0)。
       ⚠ **该卡片明确声明不断言 μ(S₂) = 0**，故标定所需的另一半（μ(S₂) = 0）**不由本条边承载**，
       见 gaps 第一条的残余部分。
   - id: worldsheet.bc-ghost-number-anomaly-sphere

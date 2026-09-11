@@ -1,0 +1,62 @@
+id: math.chevalley-restriction-theorem--via-conjugacy-and-density
+target: math.chevalley-restriction-theorem
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: humphreys-1972
+    loc: "§23「Invariant polynomial functions」（章级定位；**内容 L0，编号禁写**）"
+    note: |
+      **本推导的名义主来源，本项目未取得印本。** 下面 summary 是 curator 按标准教材复述的论证骨架，
+      **不是**从该书抽取的；该书里对应的 Theorem/Proposition 编号本轮零证据，一律不写。
+      Q39（math-sources §44.4）结清前，本推导的核实等级是 L0。
+  - ref: humphreys-1990-reflection
+    loc: "§3.5 末 Remark, p. 56（L1；只证明 GTM 9 §23 是「从 Chevalley 定理往李代数侧过桥」的那一节）"
+    note: |
+      ⚠ 该 Remark 讲的是 Z(U(𝔤))（Harish-Chandra），不是本推导要证的限制同构；
+      列在这里只作 §23 的存在与主题的旁证。
+summary: |
+  标准论证的骨架（curator 复述；来源内容未核实）：
+
+  **良定义**：f ∈ S(𝔤*)^𝔤 ⇒ f|_𝔥 是 W-不变的，因为 W = N_G(𝔥)/C_G(𝔥) 的每个元素都由某个
+  Ad g（g ∈ 伴随群 G）在 𝔥 上诱导，而 f 是 Ad-不变的。
+
+  **(1) 单射**：设 f ∈ S(𝔤*)^𝔤 且 f|_𝔥 = 0。
+  (i) 𝔤 中每个**半单**元素都 Ad-共轭到 𝔥 中某元素（所有 Cartan 子代数共轭 + 半单元素落在某个
+      Cartan 子代数里），故 f 在全体半单元素上为零；
+  (ii) 半单元素集合在 𝔤 中 **Zariski 稠密**（正则半单元素是一个非空 Zariski 开集的补集之外：
+      判别式多项式不恒为零处都是正则半单元素）；
+  (iii) 多项式函数在稠密集上为零 ⇒ 恒为零。故 f = 0。
+
+  **(2) 满射**：S(𝔥*)^W 由 W-轨道和 Σ_{w ∈ W} (wλ)^d（λ 为整权、d ≥ 0）张成；
+  对每个占优整权 λ，有限维不可约表示 V(λ) 的迹函数 X ↦ Tr_{V(λ)}(X^d) 是 𝔤 上的 Ad-不变多项式，
+  其在 𝔥 上的限制是 Σ_μ m_λ(μ) μ^d（按权计重）。对 λ 作归纳（按占优序）可把 Σ_w (wλ)^d 从这些
+  限制里解出来，从而每个 W-不变多项式都是某个 Ad-不变多项式的限制。
+
+  **(3) 保次数**：res 是代数同态且逐次齐次，显然。
+
+  本图下游只用 (1)。
+gaps:
+  - |
+    **来源内容未核实（L0）**。summary 中的每一步（Cartan 子代数共轭、半单元素稠密、特征标生成
+    W-不变量）在 GTM 9 §23 里的编号与措辞本轮零证据；本推导的可核对性是 L0。升级到 rigorous 需
+    researcher 取到 §23 或另一本 L1 教材并写入编号（Q39）。
+  - |
+    **(2) 的归纳论证只是骨架**。「Σ_w (wλ)^d 可从特征标幂和里按占优序解出」这一步的具体归纳
+    （权重数 m_λ(μ)、μ < λ 的三角性）在 summary 里没有展开；下游用不到 (2)，故不影响本图任何有效状态。
+  - |
+    **只对复数域**。目标卡限定 char 0 代数闭域上的半单 𝔤；物理侧的 𝔢₈ 是紧实形式，
+    从复代数上的多项式恒等式回到实形式是平凡的（实形式 ⊂ 复化，多项式恒等式限制即得），
+    这一步写在 math.e8-adjoint-trace-identities--via-root-power-sums 的 summary，不在本推导。
+notes: |
+  **depends_on 为空是有意的**：输入是「Cartan 子代数共轭」「Jordan 分解」「Zariski 拓扑」等
+  半单李代数基础，本图没有这些节点（与 math.pbw-theorem--via-humphreys 同一条纪律）。
+  validate 的「derivation has no dependencies」warning 是预期内的。
+
+  **kind 的选择**：status 只能是 physical-argument（来源 L0），schema 规定此时 kind 也须为
+  physical-argument；summary 里没有任何物理输入，这个标签只记录「本图掌握的论证强度」。
+
+  **这是 E₈ 迹恒等式一支的最弱一环**（math-sources §44.4 原话）。绕开它的办法见目标卡 notes：
+  把迹恒等式限定到 Cartan 元就不需要本卡。
+author: curator
+created: "2026-09-11"

@@ -30,11 +30,19 @@ depends_on:
       is the key to the cancellation between δS₁ and G.」
       ⇒ **本推导真正吃紧的是这一条**，不是 H 的写法。
   - id: consistency.descent-forms-gs-notation
+    inferred: true
     note: |
-      (14)(15)(16) 用到的 ω⁰_{2n+1 Y}、ω¹_{2n Y}。
-      ⚠ **本推导用到的洛伦兹一路（ω⁰_{3L}、ω⁰_{7L}、ω¹_{10L}）在一般 n 上是本图的推断**：
-      GS 只显式给了 n = 1 的 (7)(8)，一般 n 的 A → ω、F → R 代换 GS 原文未陈述；
-      见该依赖卡 statement (2) 的证据分层。
+      **inferred: true（洛伦兹一路，2026-09-11 改标，reviewer-batch10-12 复审）。**
+      本推导的 (14)(15)(16) 用到该卡的 ω⁰_{2n+1 Y}、ω¹_{2n Y}（Yang–Mills 一路，GS 原文有），
+      **同时**用到洛伦兹一路的 ω⁰_{3L}、ω⁰_{7L}、ω¹_{10L}——
+      而 GS 只显式给了 n = 1 的 (7)(8)，**一般 n 的 A → ω、F → R 代换 GS 原文从未陈述**；
+      下降方程的一手来源 zumino-1983-les-houches 全文也只处理内部对称群
+      （无自旋联络 ω、无 R、无 tr R²，L1 全文通读确认）。
+      ⇒ 按该依赖卡 statement (2) 的证据分层与项目原则 5，本边标 inferred。
+      ⚠ 标记范围说明：Yang–Mills 一路本身是有来源的，inferred 标的是**本边整体**——
+      因为同一条边同时承载了无来源的洛伦兹一路。这与同批的
+      consistency.gravitational-anomaly-requires-496-fermions--via-tr-r6-term 与
+      consistency.h-field-gauge-lorentz-invariant--via-descent-identity 两条的处理一致。
   - id: consistency.descent-omega1-is-consistent-anomaly
     inferred: true
     note: |

@@ -1,0 +1,66 @@
+id: math.dedekind-eta-modular-transformation
+kind: proposition
+title: "Dedekind η 的模变换：η(τ+1) = e^{iπ/12}η(τ) 与 η(−1/τ) = (−iτ)^{1/2}η(τ)"
+statement: |
+  设 η 如 math.dedekind-eta-function 所定义（τ ∈ H，q = exp(2πiτ)，q^{1/24} = exp(πiτ/12)）。则
+    (a)  η(τ + 1) = exp(iπ/12) · η(τ) ,
+    (b)  η(−1/τ) = (−iτ)^{1/2} · η(τ) ,
+  其中 (b) 里的 (−iτ)^{1/2} 取**主分支**（τ ∈ H ⇒ −iτ 落在右半平面 Re(−iτ) > 0，
+  该处主平方根单值全纯且在 τ = i 处取值 1）。
+
+  **推论（下游实际使用的形式）**：|η(τ)|² 与 τ₂ = Im τ 的组合
+    τ₂ |η(τ)|⁴
+  在 T : τ ↦ τ+1 与 S : τ ↦ −1/τ 下不变，因而在整个模群下不变
+  （用到 Im(−1/τ) = τ₂/|τ|²，|(−iτ)^{1/2}|⁴ = |τ|²）。
+
+  **本卡不断言什么**：不断言 η 是权 1/2 的模形式的一般乘子系统（对一般
+  (a b ; c d) ∈ SL(2,Z) 的变换含 Dedekind 和，本卡不涉及）；不断言 (b) 的任何证明
+  （Polchinski 对 (a)(b) 均为纯断言，见本卡唯一一条推导的 gaps）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44a)(7.2.44b), p.216（原文逐字只有一句「It has the modular transformations」，随后直接列出两式）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，等级 **L1（原书页图逐字）**。
+      ⚠ **原书对这两式零证明、零引用**（抽取记录逐字判定：「逐字只有『It has the modular
+      transformations』——纯断言，无证明、无引用」）。
+      ⚠ **(7.2.44b) 是全书模不变性的承重墙**：(7.2.8)/(7.2.9)（E9）、(7.3.6)（E20）、
+      (7.4.2)（E30）、(8.4.21) 全部直接用它。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.39d)/(7.2.40d) 与 (7.2.43), p.215–216（原书把 (7.2.44) 归到 ϑ₁₁ 的模变换加上 η = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）"
+    note: |
+      抽取记录 #E16「文献列出的依赖」栏。⚠ **这条归约把问题推给 θ 函数的模变换 (7.2.40)，
+      而 (7.2.40) 在原书同样零证明**（#E15：θ 一节「全部无证明」）。因此本图**没有**把 θ 卡
+      建为本卡的依赖：那只会把一条无证明的断言接到另一条无证明的断言上，并不提高强度。
+superseded_by: math.dedekind-eta-s-transformation
+tags: [math, modular-forms, dedekind-eta, modular-invariance, formalization-candidate]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E16 建立。
+
+  **status 说明（为什么 (a)(b) 同卡）**：原书把两式作为一对断言给出，且**都没有推导**，
+  故合成一卡不违反「一个节点一个命题」的初衷（文献未分别推导）。
+  ⚠ **但两半的可证难度天差地别**：(a) 由乘积定义两行可得（q 不变、q^{1/24} 出相位 e^{2πi/24}），
+  (b) 是 η 变换定理的实质内容。**一旦为 (b) 找到数学来源或做出 Lean 证明，就应拆卡**：
+  拆成 math.dedekind-eta-t-transformation（可 rigorous/formalized）与
+  math.dedekind-eta-s-transformation。本卡现按弱的那一半定级，这是有意的。
+  已在本批次报告里作为「建议拆分」列出。
+
+  **形式化目标**：抽取记录 §5-C 的首选 Lean 岛。Mathlib 现状（ModularForm/UpperHalfPlane/
+  SlashAction 有；DedekindEta 未核实）留给 formalizer。
+
+  ⛔ **本卡已于 2026-09-11 拆成两张，不要再往它上面挂新边**（lead 依 reviewer-v1-ch7 裁定）：
+    - **T 半** → `math.dedekind-eta-t-transformation`（**rigorous**，
+      `reviewer-verified: reviewer-ch7, 2026-09-11`；分支约定 q^{1/24} = e^{πiτ/12} 在定义卡里，
+      两行验算给出相位 e^{iπ/12}）；
+    - **S 半** → `math.dedekind-eta-s-transformation`（**physical-argument**，原书零证明零引用）。
+  `superseded_by` 指向 **S 卡**，因为真正的缺口在那一半，下游引用本卡时绝大多数用的也是 S。
+  ⚠ **但「指向 S 卡」不表示本卡的内容等于 S 卡**：本卡还含 T 半与「τ₂|η|⁴ 模不变」的推论，
+  改指时必须逐条看用的是哪一半——只用 T 的指 T 卡，只用 S 的指 S 卡，两半都用的挂两条边。
+  本批次已按此改完第 7 章内的四条推导（见各自 notes）。
+
+  **拆卡理由（reviewer-v1-ch7）**：合卡按弱者定级，使 T 半的实际强度被低估两级，
+  并把只用 T 的下游（如 (7.2.29) 整数自旋那条线、Narain 偶格那条线）无谓压低。
+  本卡 notes 里原先就写着「一旦为 (b) 找到数学来源或做出 Lean 证明，就应拆卡」；
+  reviewer 指出**不必等**：T 半今天就能按 rigorous 例外条款定级，拆卡不需要 S 半有进展。
+author: curator-polchinski-ch7
+created: "2026-09-11"

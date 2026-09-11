@@ -1,0 +1,45 @@
+id: worldsheet.high-weight-density-from-central-charge
+kind: proposition
+title: "紧酉 CFT 的高权态密度由中心荷决定：Z(iℓ) ≈ exp[π(c+c̃)/(12ℓ)]（ℓ → 0）"
+statement: |
+  设一个**紧、酉**的二维 CFT，其环面配分函数按 worldsheet.torus-partition-function-general-cft
+  定义并**假设模不变**。取 τ = iℓ（纯虚），则
+    Z(iℓ)  ≈  exp[ π(c + c̃) / (12 ℓ) ]     当 ℓ → 0 ,
+  其中 ≈ 是原书使用的渐近记号（**无误差估计**）。
+  由于 ℓ → 0 时收敛因子 q = exp(−2πℓ) → 1，配分函数由**高权态的密度**决定，
+  故上式等价地说：高权处的态密度由中心荷决定。自由玻色子情形 c = c̃ = d 只是数玻色子个数。
+
+  ⚠ **适用条件（原书同页脚注 1，逐字必须带上）**：
+  「To be precise, the result holds in **compact unitary** CFTs. In nonunitary theories there are
+  usually operators of negative weight, whose contribution will dominate that of the unit operator.
+  In the linear dilaton theory, the central charge depends on V^μ but the density of states does not:
+  here the exception occurs because of complications due to the **noncompactness** of X^μ combined
+  with **lack of translation invariance**.」
+
+  **本卡不断言什么**：不给出态密度的具体渐近形式（原书不写 Cardy 公式的
+  exp(2π√(ch/6)) 形式，也**不引 Cardy**）；不给出误差项；不断言反向（由态密度定中心荷）。
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.30) 与同页脚注 1, p.213"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E14，等级 **L1（原书页图逐字）**。
+      原文的论证骨架逐字：「Consider the partition function for τ = iℓ as ℓ → 0. The convergence
+      factor q = exp(−2πℓ) is approaching unity, so the partition function is determined by the
+      density of states at high weight. **Using modular invariance**, this is equal to the partition
+      function at τ = i/ℓ. In the latter case, q = exp(−2π/ℓ) is going to zero, so the state of lowest
+      weight dominates the sum. This is the unit state, with L₀ = L̃₀ = 0, giving …」
+      ⚠ **原书没有把它叫作 Cardy 公式，也没有引 Cardy**（抽取记录 §3.3 第 4 条）。
+tags: [cft, torus, modular-invariance, density-of-states, central-charge, cardy]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E14 建立。
+
+  **为什么建这张卡**：抽取记录称其脚注是「本章质量最高的假设显式化样本」。
+  它同时是抽取记录 Q2 的一半：τ₂ → ∞ 端「无快子时求和是否收敛」这一问题，
+  正是本卡的态密度增长 exp[π(c+c̃)/(12ℓ)] 与压制因子 exp(−πα'm²τ₂) 的竞争，
+  而原书用一句「in the absence of tachyons it will converge」带过
+  （spectrum.one-loop-torus-amplitude 的 gaps 已记）。**本图目前没有该收敛性的节点**，
+  留给 lead/auditor 按 Q2 裁决。
+author: curator-polchinski-ch7
+created: "2026-09-11"

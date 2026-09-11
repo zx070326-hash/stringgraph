@@ -1,0 +1,45 @@
+id: worldsheet.rns-matter-central-charge--via-tt-ope
+target: worldsheet.rns-matter-central-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-superconformal-ope
+    note: 供给 (10.1.13a) 的四阶极点系数 3D/4 与 (10.1.13c) 的三阶极点系数 D。
+  - id: worldsheet.tt-ope-central-charge
+    note: |
+      供给 c 的定义（TT OPE 四阶极点系数写作 c/2）与其与 conv.virasoro-standard 的相容性，
+      即「单个自由玻色子给 c = 1」的归一化。
+  - id: worldsheet.free-boson-central-charge-d
+    note: |
+      供给 (3/2)D 中「D 个标量给 D」这一半。**不标 inferred**：原书 (10.1.14) 逐字写
+      'Each scalar contributes 1 to the central charge'，即在原地引用了这一步；
+      ⚠ 但原书**不给 Vol.1 的式号**，Vol.1 的论证位置（§2.4 末至 §2.5 初）在抽取记录里
+      既无式号也无页码（v1 的 E34/Q4）。缓解：该节点另有 --via-lean（formalized）。
+  - id: math.super-virasoro-central-charge-equality
+    note: |
+      供给「(10.1.13a) 与 (10.1.13c) 两处读出的是同一个 c」这一步。若没有它，
+      本推导只能说「T_BT_B 给 c_B = (3/2)D 且 T_FT_F 给 c_F = (3/2)D」，
+      而不能把两者认同为一个中心荷。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.14), p. 3（结论与逐字理由）；比对用的 (10.1.13a)/(10.1.13c), p. 3 与 (10.1.15a)/(10.1.15c), p. 4"
+    note: L1。
+summary: |
+  一次系数比对：
+    (10.1.13a)  T_B T_B ∼ 3D/(4z^4) + …
+    (10.1.15a)  T_B T_B ∼ c/(2z^4) + …      ⟹ c = (3/2)D。
+  原书同时给出计数式理由（每个标量 1、每个 Majorana 费米子 1/2，共 (1 + 1/2)D）。
+  独立的交叉检验：
+    (10.1.13c)  T_F T_F ∼ D/z^3 + …
+    (10.1.15c)  T_F T_F ∼ 2c/(3z^3) + …     ⟹ c = (3/2)D，与上式一致。
+  两处给同一个 c 由 math.super-virasoro-central-charge-equality 保证。
+
+  【status 的理由】比对本身是一步算术，但它读的两个系数来自
+  worldsheet.rns-superconformal-ope（physical-argument：Wick 缩并 + OPE 收敛未证），
+  故本推导封顶在 physical-argument。
+gaps:
+  - "**「每个 Majorana 费米子贡献 1/2」在本图无独立节点**：本推导只能整体接受 (10.1.13a) 的系数 3D/4。待建 worldsheet.free-majorana-fermion-central-charge-half。"
+  - "**「每个标量贡献 1」的 Vol.1 定位仍未解决**：Vol.2 只复述结论、不给 Vol.1 式号（抽取记录 E8 明确指出 v1 的 Q4 在本卷没有被解决）。本图的缓解是该节点的 Lean 证明。"
+  - "**上游 OPE 的 gap 全部继承**：Wick 缩并的形式操作与 OPE 收敛性未证明。"
+author: curator
+created: "2026-09-11"

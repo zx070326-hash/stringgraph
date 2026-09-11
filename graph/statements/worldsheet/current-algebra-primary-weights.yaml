@@ -1,0 +1,49 @@
+id: worldsheet.current-algebra-primary-weights
+kind: proposition
+title: 流代数主场的 Sugawara 权：h_r = Q_r / ((k + h(g)) ψ²) = Q_r / (2k̂ + Q_g)；SU(2) level k 的自旋 j 主场 h_j = j(j+1)/(k+2)
+statement: |
+  设单李代数 g 的 level-k 流代数（math.affine-lie-algebra-current-ope）作用在 CFT 的态空间上，
+  T^s_B 为其 Sugawara 能动张量（worldsheet.sugawara-central-charge）。
+  反复用降算符 j^a_n（n > 0）作用可到达被所有 j^a_n（n > 0）湮灭的态，称为流代数的
+  **最高权态 / 主场态**；它们在零模下按 g 的某个表示 r 变换：
+    j_0^a |r, i⟩ = |r, j⟩ t^a_{r, ji}                                          （(11.5.38)）.
+  则：
+  **(1)** 这样的态也被 L_n^s（n > 0）湮灭，故是 Virasoro 代数（T^s_B）的最高权态
+      （原书逐字：'It is therefore also annihilated by the L_n^s for n > 0, eq. (11.5.26), so is a highest
+      weight state of the Virasoro algebra'）；
+  **(2)** 其 L_0^s 本征值为
+        L_0^s |r, i⟩ = ( Q_r / ((k + h(g)) ψ²) ) |r, i⟩                         （(11.5.39)）,
+      即相对于 T^s_B 的共形权
+        **h_r = Q_r / ((k + h(g)) ψ²) = Q_r / (2k̂ + Q_g)**                       （(11.5.40)）,
+      Q_r、Q_g 分别为表示 r 与伴随表示的 Casimir（math.compact-lie-algebra-index-and-casimir 的 (11.4.7)）。
+  **(3)** g = SU(2)、level k、自旋 j 的主场：
+        h_j = j(j+1) / (k + 2)                                                  （(11.5.41)）.
+
+  **本命题不断言的内容**：
+    (1) 不断言相对于完整能动张量 T_B 的权（若 T_B ≠ T^s_B，还要加陪集部分 T_B′ 的贡献；原书 (11.5.39) 写的是 L_0^s）；
+    (2) 不断言主场表示的截断 k̂ ≥ |α·λ|、k ≥ 2|J³|（(11.5.42)–(11.5.44)，'at any given level, only a finite
+        number of representations are possible'）——那是另一条命题，本轮未建卡；
+    (3) 不断言 (11.5.40) 两个表达式相等所需的 (k + h(g))ψ² = 2k̂ + Q_g 之外的任何 h(g) 定义（原书 §11.4 中段未核实）；
+    (4) 不断言 type I Chan–Paton 因子的抽象描述 (11.5.45)–(11.5.46) 与「结合律禁止 E₈ × E₈」——
+        原书用被动语态 'has been shown to' 且不给引文（抽取记录 E62 备注）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5 'Primary fields', eq. (11.5.38)–(11.5.41), pp. 72–73（最高权态的定义、被 L_n^s 湮灭故为 Virasoro 最高权态、L_0^s 本征值 Q_r/((k+h(g))ψ²)、h_r 的两个表达式、SU(2) 的 j(j+1)/(k+2)）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E62；式号与公式逐字读自原书页图 pp. 72–73）。
+tags: [current-algebra, primary-field, conformal-weight, sugawara, casimir, cft]
+notes: |
+  【数值核对（本图内部，取 f^{abc} = ε^{abc}、d^{ab} = δ^{ab} 的 SU(2) 归一化）】
+  Cartan 元 H = J³、E^± = J^±，[H, E^±] = ±E^±，故根 α = ±1、ψ² = 1；Q_j = j(j+1)，Q_g = Q_{j=1} = 2，
+  由 h(g)ψ² = Q_g 得 h = 2；(k + h)ψ² = k + 2 = 2k̂ + Q_g（k = 2k̂/ψ² = 2k̂）⇒ h_j = j(j+1)/(k+2)，与 (11.5.41) 一致 ✓。
+  同一归一化下 compact.self-dual-radius-su2-current-algebra 的中心项 (m/2)δ^{ij} 即 k̂ = 1/2、k = 1，
+  与那张卡 notes 里「level k = 1」的旁注一致 ✓。⚠ 原书 (11.4.14) 的归一化是否就是这一套，本图未核实（pp. 61–65 跳读）。
+
+  【与 Verma 模 / 幺正性的关系】(1) 说主场态是 Virasoro 最高权态（worldsheet.verma-module-v2 的语言）；
+  不需要幺正性。(2) 只用 (11.5.26a) 的形式：正模项 j^a_{−n}j^a_n 湮灭主场态，剩下 j_0^a j_0^a = Q_r。
+  截断 (11.5.42)–(11.5.44) 才用到幺正性（范数非负），故拆开。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

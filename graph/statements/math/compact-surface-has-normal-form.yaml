@@ -1,0 +1,61 @@
+id: math.compact-surface-has-normal-form
+kind: proposition
+title: "每个紧连通曲面（含带边）同胚于 Definition 6.5 的某个规范形（穷尽性）"
+statement: |
+  设 M 是**紧、连通**的二维拓扑流形，允许有边界，允许不可定向（即来源意义下的
+  "compact surface or compact surface with boundary"）。则**存在**一个 Gallier–Xu
+  Definition 6.5 意义下的规范胞腔复形 K，使 M 同胚于 K 所定的曲面；且 K 的类型与参数落在
+    type (I)（可定向）：p ≥ 0, q ≥ 0，  或   type (II)（不可定向）：p ≥ 1, q ≥ 0，
+  其中 q 是 contour 数（边界分支数）。
+
+  换言之：**Definition 6.5 的参数表穷尽了所有紧连通带边曲面**——没有任何紧连通曲面落在该表之外。
+
+  **本命题不断言什么**：
+  - **不**断言唯一性或「两两不同胚」，那是 math.classification-of-compact-surfaces
+    （Theorem 6.2：(可定向性, contour 数, χ) 是完全不变量）；本卡只给**存在**方向。
+  - **不**给出 χ 的计算公式（那在来源 pp. 89–90，是**无编号**行间式，由
+    math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration 承载）。
+  - **不**涉及任何黎曼/复结构、共形结构或度规，纯拓扑。
+  - **不**处理非紧曲面，**不**处理不连通曲面。
+sources:
+  - ref: gallier-xu-2013
+    loc: "Ch. 6：Lemma 6.1（每个胞腔复形等价于某个规范胞腔复形）；Proposition 6.1（每个胞腔复形可细分为三角化 2-复形）；Definition 6.5, pp. 88–89（规范胞腔复形 type (I)/(II) 及参数范围，L1 逐字）；p. 96（Theorem 6.1 → 6.2 之间作者自陈「every surface and every surface with boundary can be triangulated … the proof is far from trivial … in **Appendix E**」）；Appendix E（Thomassen 的 Radó 定理证明）"
+    note: |
+      抽取记录 literature/extractions/math-sources.md §39.2.0（编号交叉表，L1 逐条对照）与
+      §39.2.2（Definition 6.5 逐字）、§39.2.1（p.96 的三角化自陈逐字）。
+      ⚠ **loc 只写本项目已核到编号的条目**：Lemma 6.1 与 Proposition 6.1 的**编号与一行内容**
+      来自 §39.2.0 的交叉表（L1 读图），但**它们的逐字文本本图未转录**，故本卡不引用其原文措辞，
+      也不写页码（交叉表未给这两条的页码）。Definition 6.5 / p.96 / Appendix E 三处是逐字 L1。
+      ⚠ **版本陷阱**：出版版（Springer GTC 9, 2013）Ch. 6 的编号与 arXiv 单作者版
+      （gallier-2008-surfaces）Ch. 5 的编号**不可互换**（Lemma 6.1 ↔ Lemma 5.2.5，
+      Proposition 6.1 ↔ Proposition 5.2.2，Definition 6.5 ↔ Definition 5.2.4）。
+      ⚠ **不要**用 `surfclass-n.pdf` / `surfclassif.pdf` 这两个 28 页截断文件取正文（§39.2.0）。
+  - ref: massey-1967
+    loc: "Ch. I §10「The classification of compact, connected 2-manifolds with boundary」, pp. 37–42（**仅目录扫描页 L1，正文未获取**）"
+    note: |
+      第二来源，只登记「存在独立的第二条证明路线」这一事实（math-sources.md §39.3）。
+      ⚠ **严禁写「Massey Theorem 10.1」**（编号 L0）。
+      ⚠ Massey §10 的标题逐字含 "**connected**"，这是本卡把连通性写成显式前提的依据之一。
+tags: [math, topology, surface, classification, normal-form, exhaustiveness]
+notes: |
+  **建卡理由（2026-09-11，curator-batch10-14-fix，依 reviewer-batch11 M2）**：
+  math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration 的枚举要用
+  **两件事**：(a) 参数表穷尽所有紧连通曲面（存在规范形），(b) 同不变量 ⟹ 同胚（Theorem 6.2）。
+  此前图上只有 (b)（math.classification-of-compact-surfaces），而那张卡的 statement
+  **明确声明只给完全不变量、不给存在性**。于是 (a) 是一条**悬空依赖**：枚举推导的
+  summary 用了「每个紧带边曲面同胚于一个规范胞腔复形」这句话，图上没有节点承载它。
+  本卡就是那个承载节点。
+
+  **与 math.classification-of-compact-surfaces 的分工（不是重复卡）**：
+  | | 本卡 | classification 卡 |
+  |---|---|---|
+  | 断言 | **存在**规范形（穷尽性） | **唯一性**：(可定向性, q, χ) 是完全不变量 |
+  | 来源落点 | Lemma 6.1 + Proposition 6.1 + Appendix E | Theorem 6.2 (p.97) |
+  | 在枚举里的用处 | 保证候选表没有漏 | 保证三者两两不同胚 |
+  两卡都依赖同一条三角化事实（Appendix E），这是同一本书内的共同上游，不是重复计数。
+
+  **连通性**：来源 Theorem 6.2 的逐字文本不含 "connected"，Gallier–Xu 第 1 章对 "surface"
+  的定义本图未取到（同 classification 卡的同名记录）。本卡**把连通性写成显式前提**，
+  这样下游不必再赌来源的定义。
+author: curator-batch10-14-fix
+created: "2026-09-11"

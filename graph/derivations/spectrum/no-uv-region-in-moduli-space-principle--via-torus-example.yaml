@@ -1,0 +1,35 @@
+id: spectrum.no-uv-region-in-moduli-space-principle--via-torus-example
+target: spectrum.no-uv-region-in-moduli-space-principle
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-uv-finiteness-from-modular-invariance
+    note: |
+      提供**唯一算过的例子**：环面真空振幅的区域对比。原书逐字「The torus illustrates a general
+      principle」——即本卡的全部证据就是这一条。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.219 末段"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E26，L1（原书页图逐字）。
+summary: |
+  从环面真空振幅这一个例子（模积分区域 F₀ 里没有 τ₂ → 0 的区域，一切极限由最轻态控制）
+  推广为对一切弦振幅的一般原则。原书说带顶点算子时 τ 积分仍被同样截断，但还要考虑顶点算子
+  互相靠近的极限，并说「The same general principle applies to these as well, as we will develop
+  further in chapter 9」。
+gaps:
+  - "**一个例子推广到全部振幅**：亏格 g ≥ 2、带顶点算子的情形本章一字不证，明确推迟到第 9 章，
+     而本图**尚未抽取第 9 章**，故这条推广在本图内没有任何支撑。"
+  - "**顶点算子互相靠近的极限**（退化极限）与模积分的 τ₂ → 0 是不同的机制，原书在此只说
+     「同一原则也适用」。"
+  - "**开弦一侧的机制不同**：圆柱没有模群，t → 0 不被截断（spectrum.cylinder-closed-channel-open-closed-duality）。
+     原书自己承认「the mechanism … is different in the closed and open string cases」，
+     故「模空间没有 UV 区」这个说法对开弦面**不能照字面理解**。"
+  - "**没有收敛性讨论**（继承自唯一的依赖）。"
+  - "**「一切极限由最轻态控制」这半句在本章只在环面 τ₂ → ∞ 与圆柱 t → 0 两处被例示**，
+     且前者在有快子时发散、后者是 1/0 型极点（spectrum.cylinder-tadpole-divergence-is-infrared）。"
+notes: |
+  由 curator 于 2026-09-11 建立。**本卡是「弦论 UV 有限」这句流行话在本图中的唯一落点**，
+  它的推导只有一条边、一个例子。任何引用「弦论 UV 有限」的下游节点都应指向本卡，
+  并连带它的 gaps。
+author: curator-polchinski-ch7
+created: "2026-09-11"

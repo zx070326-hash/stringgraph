@@ -1,0 +1,56 @@
+id: worldsheet.rns-super-virasoro-generators
+kind: definition
+status: rigorous
+title: RNS 物质部门的 L_m 与 G_r（显式模式表达式，正规序常数保持为符号 a^m）
+statement: |
+  用 worldsheet.rns-mode-expansions 的模式定义
+    L_m = (1/2) Σ_{n ∈ Z} °α^μ_{m−n} α_{μ n}°
+          + (1/4) Σ_{r ∈ Z+ν} (2r − m) °ψ^μ_{m−r} ψ_{μ r}°
+          + a^m δ_{m,0},
+    G_r = Σ_{n ∈ Z} α^μ_n ψ_{μ, r−n},
+  其中 ° ° 是创生-湮灭正规序（Vol.2 的记号），a^m 是**物质部门的正规序常数**，
+  本卡把它**保持为符号**（其值见 worldsheet.rns-matter-normal-ordering-constants）。
+
+  **⚠ 常数的记账位置与 Vol.1 不同（会咬人）**：Vol.2 把正规序常数写在 L_m **内部**
+  （上式的 a^m δ_{m,0}），于是物理态条件就是 L_0|ψ⟩ = 0（(10.5.3)）；
+  Vol.1 §4.1 写 (L_0^m + A)|ψ⟩ = 0。换算：
+    **Vol.2 的 a^m = Vol.1 的 A（同号）= −a（conv.intercept-sign-a 的截距 a）**。
+  凡把本卡与本图的截距节点接边的地方都必须做这个换算。
+
+  本卡是定义（把上面两个式子取作 L_m、G_r 的定义）。它**不**断言这些模式满足超 Virasoro 代数
+  （见 worldsheet.rns-modes-satisfy-super-virasoro），也**不**给 a^m 的值。
+uses:
+  - worldsheet.rns-mode-expansions
+  - worldsheet.rns-superconformal-generators
+  - worldsheet.conformal-normal-ordering-v2
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.12a)（L_m 的显式模式表达式，含 a^m δ_{m,0}）、(10.2.12b)（G_r = Σ_n α^μ_n ψ_{μ r−n}），p. 7；° ° 记号见 p. 7 正文（'Again °° denotes creation–annihilation normal ordering'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E19；式号与公式内容逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.3), p. 21（物理态条件写成 L_0|ψ⟩ = 0，因为常数已吸进 L_0）"
+    note: |
+      L1（E34）。这是本卡【常数的记账位置】一段的依据；抽取记录 §1.3 第 1 条逐条给出与 Vol.1
+      的换算（Vol.2 的 a^m = Vol.1 的 A = −a）。
+tags: [rns, superstring, super-virasoro, normal-ordering, definition]
+notes: |
+  【为什么把 a^m 保持为符号】沿用 worldsheet.brst-quantization-v2 的做法：
+  常数值是一条独立命题（由零点能计数得到，physical-argument），
+  写进定义卡会让定义卡夹带未论证的断言。
+
+  【与玻色弦 L_m 的关系】本卡的 L_m 的第一项与玻色弦的
+  worldsheet.virasoro-generators-free-boson 同形，但多出费米子项；
+  故本图**不**复用那张卡，也不声明它为 uses（抽取记录 E18 的提醒：
+  这里的 L_m 与玻色弦的不是同一个算子）。
+
+  【G_r 里没有正规序常数】(10.2.12b) 的 G_r 是单和，α 与 ψ 的模式指标之和为 r ≠ 0 时无重排歧义；
+  r = 0（R 扇区）时 α^μ_0 ∝ p^μ 与 ψ_{μ 0} 对易，故也无歧义。原书对此不作说明，
+  本卡按 (10.2.12b) 逐字照抄，不额外断言。
+author: curator
+created: "2026-09-11"

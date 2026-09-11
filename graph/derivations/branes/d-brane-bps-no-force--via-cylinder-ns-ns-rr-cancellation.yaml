@@ -8,12 +8,26 @@ depends_on:
       供给「两张平行 Dp 膜共同保留的超对称 (13.2.5) 与单张相同、系统仍是 BPS 态」；
       原书 p. 146 逐字「For parallel Dp-branes, the unbroken supersymmetry (13.2.5) is the same as for
       a single Dp-brane.」以及「Due to supersymmetric cancellation in the trace」——(13.3.2) 的全部依据。
+  - id: branes.brane-charges-in-susy-algebra
+    note: |
+      供给「BPS 态的能量只由荷与间距决定」：原书 p. 146 逐字「The multi-object state is still supersymmetric
+      and so its energy is determined only by its charge and the separations.」——这是含膜荷的代数 (13.2.9)
+      给出的 BPS 质量–荷关系，**不是** App. B 点粒子界 (B.2.39) 能直接给的（appB 抽取记录 Q3）。
+      ⚠ (13.2.9) 原书自承「still not complete」，本卡继承该缺口。
   - id: branes.d-brane-rr-coupling
     note: |
       供给「R–R 交换是排斥的、来自膜所带的 R–R 荷」这一解释（p. 146「repulsion due to the R–R tensor」）；
       没有它，𝒜_R–R 只是圆柱振幅的一个部门，无「排斥力」的读法。
   - id: branes.d-brane-from-t-duality
     note: 供给 Dp 膜对象与 Dirichlet 方向无动量积分的记账（(13.3.1) 由 (10.8.4) 修改的第一步）。⚠ 玻色弦定义卡。
+  - id: worldsheet.type-i-tadpole-cancellation-so32
+    note: |
+      供给 (2) 的 NS–NS 侧出发点：该卡的推导覆盖 §10.8 的圆柱振幅 (10.8.4)，本章 (13.3.1) 明写是它的
+      修改版（去掉 Dirichlet 方向的动量积分、加入拉伸弦张力项 exp(−t y²/2πα')）。
+      **技术性（公式级）**依赖，故不标 inferred（抽取记录 Q5 末段把这条边交 curator 判断，判为要建）。
+      ⚠ 只用圆柱振幅这一件，**不用** (n ∓ 32)² / SO(32) 结论；本卡讲的是 type II 的两张平行 D 膜，
+      与 type I 的无取向投影无关（原书 p. 146 逐字「there is no factor of ½ from the orientation
+      projection because the physics is locally oriented」）。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.3, p. 146：开篇段落 → (13.3.1)（NS–NS，由 (10.8.4) 修改）→ (13.3.2)（𝒜_R–R = −𝒜_NS–NS，「Due to supersymmetric cancellation in the trace」）→「and so the total force vanishes as expected」；(13.3.3) 场论对照"
@@ -34,7 +48,8 @@ summary: |
       「超对称未破缺但势非零」的例外——故本命题只对平行同号静态构型断言。
 gaps:
   - "**(13.3.2) 是断言不是计算**：原书逐字「Due to supersymmetric cancellation in the trace」；R–R 侧的圆柱振幅没有被显式算出。这是本推导最弱的一环。"
-  - "**(13.3.1) 是 (10.8.4) 的修改版，而 §10.8 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合）。⇒ TODO：合入后加 depends_on。"
+  - "**「能量只由荷与间距决定」依赖含膜荷的代数 (13.2.9)，而 (13.2.9) 原书自承「still not complete」**（缺磁 NS–NS 荷）；App. B 的 BPS 界 (B.2.39) 只对点粒子荷，不能整体挂在本推导上（appB 抽取记录 Q3）。"
+  - "**(13.3.1) 是 (10.8.4) 的修改版**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32（2026-09-11 随 ch10 分支接上）。⚠ 残留缺口：图上无 (10.8.4) 的单独节点；且本推导最弱的一环 (13.3.2)（R–R 侧由超对称断言）**不**经由这条边获得任何支撑。"
   - "**(13.3.1) 的完整前缀未定**（抽取记录 Q3：α' 幂次已由记账定为一次方，π 的幂次差一次）；本推导只用其末行。"
   - "**「超对称未破缺 ⇒ 圈振幅为零」有作者自承反例**（(13.4.23) 后，Q8）：原书只给现象（16 个相位只覆盖 8 个），不给机制。本卡因此不断言一般规则；若日后建「BPS ⇒ 无力」的一般卡，须先为该例外建卡。"
   - "**场论对照 (13.3.3) 引 Vol.1 (8.7.25)**，本图无该节点（二手源）。"

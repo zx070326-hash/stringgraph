@@ -1,0 +1,45 @@
+id: worldsheet.brst-variation-is-moduli-space-boundary-term--via-b-insertion-variation
+target: worldsheet.brst-variation-is-moduli-space-boundary-term
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.string-s-matrix
+    note: 提供 (5.3.9) 的被积表达式（模积分 + b 插入 + c 插入 + 顶点算子），本卡讲的是它的 BRST 变分。
+  - id: worldsheet.b-insertion-brst-variation
+    note: |
+      提供 (5.4.6)：δ_B(b, ∂_{t^k}ĝ) = iε(T^m + T^g, ∂_{t^k}ĝ)——**「BRST 变分把 b 插入换成
+      对模求导的生成元」正是「全导数」的来源**。那张卡的 notes 明说本命题当时未建节点。
+  - id: worldsheet.vertex-operator-brst-variation
+    note: |
+      提供 (5.4.5)：δ_B V = iε∂(cV)，即顶点算子那一半的变分是世界面上的全导数、积分后为零。
+      ⚠ 原书逐字「we leave it as an exercise to show that they have the BRST variation …」
+      ——那一半是**习题**（抽取记录 polchinski-1998-v1.md §12.7 第 2 条）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.4, eqs. (5.4.5)(5.4.6) 与其下方正文, p.161"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1.md §12.7，L1（原书页图逐字）。
+  - ref: polchinski-1998-v1
+    loc: "§7.3, p.220 首段（第 7 章的复述）"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E27，L1。
+summary: |
+  (5.3.9) 的被积表达式里，BRST 变分作用在两类因子上：
+  (a) 顶点算子：δ_B V = iε∂_a(c^a V)（(5.4.5)），是**世界面**上的全导数，积掉；
+  (b) 每个模的 b 插入：δ_B(b,∂_{t^k}ĝ) = iε(T^m+T^g, ∂_{t^k}ĝ)（(5.4.6)），
+      而 (T, ∂_{t^k}ĝ) 正是「对模 t^k 求导」的生成元，故它把被积函数变成
+      **模空间上的全导数** ∂_{t^k}(…)^k。
+  于是 ∫_F d^μt ∂_{t^k}(…)^k = ∮_{∂F}(…)，即振幅的 BRST 变分只剩模空间的边界项。
+  原书随后说「in most cases there is no surface contribution, due to … the canceled propagator
+  argument」，并承认该论证在某些情形不适用。
+gaps:
+  - "**(a) 那一半是习题**：原书逐字「we leave it as an exercise to show that」（(5.4.5)）。"
+  - "**边界项是否为零没有一般论证**：原书靠 canceled propagator argument（一个解析延拓型论证）
+     打发，并逐字承认「In certain circumstances this argument does not apply」。
+     本图**没有**该论证的节点，故 (2)「负模态解耦」在本图里是**有条件的**。"
+  - "**「(T, ∂_{t^k}ĝ) = 对模求导的生成元」这一步在本图没有独立节点**：它是把能动张量与度规的模导数
+     配对解释成 ∂_{t^k} 作用在路径积分上，属路径积分层面的形式操作。"
+  - "**路径积分测度未定义**（继承自 worldsheet.string-s-matrix）；测度的 BRST 不变性（无 BRST 反常）
+     是额外假设，见 worldsheet.brst-gauge-choice-independence 的 statement。"
+notes: |
+  由 curator 于 2026-09-11 建立。三条依赖边都有原书出处，无 inferred。
+author: curator-polchinski-ch7
+created: "2026-09-11"
