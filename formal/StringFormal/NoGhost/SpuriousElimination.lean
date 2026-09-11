@@ -559,4 +559,134 @@ theorem Lop_neg_apply_one_add_conj_mem_lcSeed (hD : 2 ≤ D) (F : DDFLightConeFr
 
 end Seed
 
+/-! ### Moving `L_{-n}` past the creation operators of a light-cone monomial -/
+
+section Leibniz
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- Multiplying a `(β, ω)`-box by one light-cone creation operator shifts all three gradings
+by the gradings of that single factor. -/
+lemma lcCrea_mul_mem_lcBound (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) {N β₀ ω₀ : ℕ}
+    (v : Osc D) {x : Fock D R} (hx : x ∈ lcBound hD F N β₀ ω₀) :
+    lcCrea η (frameVec F v.1) v.2 * x
+      ∈ lcBound hD F (N + (v.2 : ℕ)) (β₀ + conjDeg hD (Finsupp.single v 1))
+          (ω₀ + conjWt hD (Finsupp.single v 1)) := by
+  classical
+  have hle : lcBound (R := R) hD F N β₀ ω₀ ≤
+      Submodule.comap (LinearMap.mulLeft R (lcCrea η (frameVec F v.1) v.2))
+        (lcBound hD F (N + (v.2 : ℕ)) (β₀ + conjDeg hD (Finsupp.single v 1))
+          (ω₀ + conjWt hD (Finsupp.single v 1))) := by
+    rw [lcBound, Submodule.span_le]
+    rintro _ ⟨e, ⟨h1, h2, h3⟩, rfl⟩
+    have hprod : lcCrea η (frameVec F v.1) v.2 * lcMonomial F e
+        = lcMonomial F (Finsupp.single v 1 + e) := by
+      rw [lcMonomial_add, lcMonomial_single_one]
+    rw [SetLike.mem_coe, Submodule.mem_comap, LinearMap.mulLeft_apply, hprod]
+    refine lcMonomial_mem_lcBound hD F ?_ ?_ ?_
+    · rw [Fock.level_add, h1, Fock.level_single, Fock.oscLevel, one_mul]
+      omega
+    · rw [conjDeg_add]
+      omega
+    · rw [conjWt_add]
+      omega
+  exact hle hx
+
+variable [Algebra ℚ R]
+
+/-- **`[L_{-n}, α^w_{-r}] = r α^w_{-n-r}`, in multiplicative form.**  The commutator of the
+Sugawara generator with a single light-cone creation operator produces another creation
+operator, so `L_{-n}` can be moved all the way through a light-cone monomial. -/
+lemma Lop_neg_apply_lcCrea_mul (η p w : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (n r : ℕ+)
+    (Y : Fock D R) :
+    Fock.Lop η p (-((n : ℕ) : ℤ)) (lcCrea η w r * Y)
+      = ((r : ℕ) : R) • (lcCrea η w (n + r) * Y)
+        + lcCrea η w r * Fock.Lop η p (-((n : ℕ) : ℤ)) Y := by
+  have hexp : ∀ (t : ℕ+) (Z : Fock D R), lcCrea η w t * Z
+      = ∑ μ : Fin D, (η μ * w μ) • Fock.mode η p μ (-((t : ℕ) : ℤ)) Z := by
+    intro t Z
+    rw [lcCrea_def, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun μ _ => by
+      rw [Fock.mode_neg_pnat, Fock.creation_apply, smul_mul_assoc]
+  have h1 : (-((-((r : ℕ) : ℤ) : ℤ) : R)) = ((r : ℕ) : R) := by push_cast; ring
+  have h2 : (-((n : ℕ) : ℤ)) + (-((r : ℕ) : ℤ)) = -(((n + r : ℕ+) : ℕ) : ℤ) := by
+    push_cast; ring
+  rw [hexp r Y, map_sum]
+  have hterm : ∀ μ : Fin D,
+      Fock.Lop η p (-((n : ℕ) : ℤ)) ((η μ * w μ) • Fock.mode η p μ (-((r : ℕ) : ℤ)) Y)
+        = (η μ * w μ) • (((r : ℕ) : R) • Fock.mode η p μ (-(((n + r : ℕ+) : ℕ) : ℤ)) Y)
+          + (η μ * w μ) • Fock.mode η p μ (-((r : ℕ) : ℤ))
+              (Fock.Lop η p (-((n : ℕ) : ℤ)) Y) := by
+    intro μ
+    rw [map_smul, Fock.Lop_apply_mode η p hη _ μ _ Y, h1, h2, smul_add]
+  rw [Finset.sum_congr rfl fun μ (_ : μ ∈ Finset.univ) => hterm μ, Finset.sum_add_distrib]
+  congr 1
+  · rw [hexp (n + r) Y, Finset.smul_sum]
+    exact Finset.sum_congr rfl fun μ _ => smul_comm _ _ _
+  · rw [hexp r (Fock.Lop η p (-((n : ℕ) : ℤ)) Y)]
+
+/-- **`L_{-n}` on a light-cone monomial, modulo lower `β`** (the "Leibniz half" of blueprint
+§B′.4's `towerLop_neg_conjDegree_leading`).
+
+Moving `L_{-n}` through the monomial with `Lop_neg_apply_lcCrea_mul` leaves the vacuum term
+`m(d)·L_{-n}|0;p⟩` plus one term per factor, each of which *replaces* a factor `α^w_{-l}` by
+`α^w_{-(n+l)}`.  Replacing never creates a new `α^{b̃}`, so every remainder term has `β`
+exactly `β(d)` — one less than the `β` of the target monomial in the elimination.  The
+momentum `p` is arbitrary: this half is rung-independent. -/
+theorem Lop_neg_apply_lcMonomial_sub_mem_lcBound (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (p : Fin D → R) (n : ℕ+) (d : Osc D →₀ ℕ) :
+    Fock.Lop η p (-((n : ℕ) : ℤ)) (lcMonomial F d)
+        - lcMonomial F d * Fock.Lop η p (-((n : ℕ) : ℤ)) 1
+      ∈ lcBound hD F (Fock.level D d + (n : ℕ)) (conjDeg hD d) (conjWt hD d + (n : ℕ)) := by
+  classical
+  induction d using finsupp_addSingle_induction with
+  | h0 =>
+      rw [lcMonomial_zero, one_mul, sub_self]
+      exact Submodule.zero_mem _
+  | hstep d v ih =>
+      have hlev : Fock.level D (d + Finsupp.single v 1) = Fock.level D d + (v.2 : ℕ) := by
+        rw [Fock.level_add, Fock.level_single, Fock.oscLevel, one_mul]
+      have hcomm : lcMonomial F (d + Finsupp.single v 1)
+          = lcCrea η (frameVec F v.1) v.2 * lcMonomial F d := by
+        rw [lcMonomial_add, lcMonomial_single_one, mul_comm]
+      rw [hcomm, Lop_neg_apply_lcCrea_mul η p _ hη n v.2 (lcMonomial F d)]
+      have hsplit : ((v.2 : ℕ) : R) • (lcCrea η (frameVec F v.1) (n + v.2) * lcMonomial F d)
+            + lcCrea η (frameVec F v.1) v.2 * Fock.Lop η p (-((n : ℕ) : ℤ)) (lcMonomial F d)
+            - lcCrea η (frameVec F v.1) v.2 * lcMonomial F d
+                * Fock.Lop η p (-((n : ℕ) : ℤ)) 1
+          = ((v.2 : ℕ) : R) • (lcCrea η (frameVec F v.1) (n + v.2) * lcMonomial F d)
+            + lcCrea η (frameVec F v.1) v.2
+                * (Fock.Lop η p (-((n : ℕ) : ℤ)) (lcMonomial F d)
+                  - lcMonomial F d * Fock.Lop η p (-((n : ℕ) : ℤ)) 1) := by
+        rw [mul_sub, mul_assoc]
+        abel
+      rw [hsplit]
+      refine Submodule.add_mem _ (Submodule.smul_mem _ _ ?_) ?_
+      · have hprod : lcCrea η (frameVec F v.1) (n + v.2) * lcMonomial F d
+            = lcMonomial F (Finsupp.single ((v.1, n + v.2) : Osc D) 1 + d) := by
+          rw [lcMonomial_add, lcMonomial_single_one]
+        rw [hprod]
+        refine lcMonomial_mem_lcBound hD F ?_ ?_ ?_
+        · rw [Fock.level_add, hlev]
+          simp only [Fock.level_single, Fock.oscLevel_apply, one_mul, PNat.add_coe]
+          omega
+        · rw [conjDeg_add, conjDeg_add, conjDeg_single, conjDeg_single]
+          split_ifs <;> omega
+        · rw [conjWt_add, conjWt_add, conjWt_single, conjWt_single]
+          simp only [PNat.add_coe]
+          split_ifs <;> omega
+      · have hmem := lcCrea_mul_mem_lcBound hD F v ih
+        have e1 : Fock.level D d + (n : ℕ) + (v.2 : ℕ)
+            = Fock.level D (d + Finsupp.single v 1) + (n : ℕ) := by
+          rw [hlev]; omega
+        have e2 : conjDeg hD d + conjDeg hD (Finsupp.single v 1)
+            = conjDeg hD (d + Finsupp.single v 1) := (conjDeg_add hD d _).symm
+        have e3 : conjWt hD d + (n : ℕ) + conjWt hD (Finsupp.single v 1)
+            = conjWt hD (d + Finsupp.single v 1) + (n : ℕ) := by
+          rw [conjWt_add]; omega
+        rw [e1, e2, e3] at hmem
+        exact hmem
+
+end Leibniz
+
 end StringFormal.NoGhost
