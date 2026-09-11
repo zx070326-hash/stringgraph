@@ -55,23 +55,6 @@ depends_on:
       ⚠ `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 的机检证明链**不经过 K_n 的任何声明**：
       它走的是 (6.4) 那条路（偏振分解），不是 (6.2) 那条路（K 条件配平）。
       故本边只作识别，不承担论证步骤。
-  - id: worldsheet.ddf-light-cone-frame
-    inferred: false
-    note: |
-      **接口边，非机检环节**：供给标架定义。目标陈述【断言】一段点名的「横向标架 Ε 满足
-      (T)(O)(T′)(C)」这四条，逐条就是该定义卡的 (F5)(F7)(F6)(F8)；该卡把它们打包成
-      「DDF 光锥标架」这一个对象，并给出文献侧的取法（ε_i ∈ span{k_0,p}^⊥）与显式见证。
-      桥层声明：`StringFormal.NoGhost.{TransverseFrame, FrameSpansOrthogonal, witnessTransverseFrame,
-      dotVec_witnessTransverseFrame_witnessMomentum, witness_frameSpansOrthogonal}`（LightCone.lean）。
-      ⚠ **机检链用的是 `TransverseFrame` + 两条散装假设 `hεa`/`hspan`，以及见证版的 `witness*`，
-      不经过该定义卡多出来的 (F4)(F9)**（共轭方向 b̃ 的条件）。就假设强度而言 Lean 定理**更强**
-      （前提更少：它对一切 `TransverseFrame` 成立，DDF 光锥标架只是其特例），故本边不削弱机检结论。
-      ⚠ **状态副作用（诚实登记）**：该定义卡 status 是 `rigorous`（八条条件没有单个 Lean 声明打包，
-      见该卡 notes【为什么不是 formalized】），按 docs/STATUS_LEVELS.md 的 min 规则，本推导的
-      **effective 因此从 formalized 降为 rigorous**，目标卡随之显示 rigorous。
-      `lean_decl` 本身未变、仍是机检无 sorry 的。恢复 formalized 的正路是**在 Lean 里把
-      (F1)–(F8) 打包成一个 structure 并把见证造成实例**（该定义卡 notes 估计几十行，无新数学），
-      而不是删这条边。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious（目标声明）；证明中调用 StringFormal.NoGhost.{mem_towerBigrade, single_mem_towerPhysSubmodule_iff, single_polState_vec_mem_ddfSpan, ddfOp_neg_one_apply_towerVacuum, towerModeVec_neg_one_apply_single_vacuum, towerLop_neg_one_apply_single_vacuum_eq, ddfOp_towerVacuum_mem_ddfSpan, mem_ddfSpan_of_list} 与 StringFormal.NoGhost.Fock.{mem_physSubmodule_inf_levelSubmodule_one_iff, polState_add, polState_smul, polState_sum, Lop_neg_one_apply_one_eq_polState}；见证版 StringFormal.NoGhost.witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious"
@@ -171,6 +154,25 @@ notes: |
   ⇒ 消除降级的正确做法是把 (F1)–(F8) 在 Lean 里打包成结构（见新卡 notes），届时自动回到 formalized。
   lead 若认为这条识别边不值这个代价，删掉它即可复原；本轮三条同类边合计使全图
   effective formalized 77 → 73（受影响的四张卡见分支报告）。
+
+  ⚠【同日改判（curator，同一分支，commit 5e0a984 之后）：该 depends_on 边**已撤回**，
+  改为目标陈述卡上的非传播 `uses` 指针】撤回的两条理由：
+  (1) **它属于 docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」明令禁止的那一类**：
+      目标陈述把 (T)(O)(T′)(C) 四条**逐字写在卡面**，Lean 定理的假设与之一一对应，
+      读懂 lean_decl **不需要**那张定义卡；它提供的是「这个标架在文献里叫什么、该怎么取」的语境，
+      而该裁决逐字写「只提供「原书语境」而不承担任何论证的边不得存在」。
+  (2) **实测代价与一条固定不变量冲突**：三条同类边合计使全图 effective formalized 77 → 73
+      （降级四张卡：本卡、transverse-ddf-fock-gram-matrix、ddf-hypotheses-satisfiable、
+      transverse-frame-spans-orthogonal-complement），且
+      `tests/test_graph.py::test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split`
+      第 271 行**钉死** `transverse-ddf-fock-gram-matrix` 的 effective 必须是 formalized，
+      加边后 pytest 变红。
+  ⇒ 现状：目标陈述卡加 `uses: worldsheet.ddf-light-cone-frame`（proposition 上的 `uses`
+  **不参与状态传播**，见 tools/stringgraph/propagate.py 的 `_proposition`），
+  本推导 effective 仍是 formalized，上面那段关于降级的描述**只是记录，不再是现状**。
+  **若 lead 要的就是传播效果**：把 commit 5e0a984 里那段 `- id: worldsheet.ddf-light-cone-frame`
+  的 depends_on 块加回来即可，同时须改 test_graph.py 第 271 行的断言——那是工具侧改动，
+  按项目纪律单独提交，且应由 lead 裁决，不由 curator 自行改测试来迁就图数据。
 
   **本推导对 worldsheet.no-ghost-theorem-v4 的影响：没有。**
   那条卡的瓶颈是 (B-26)，而 (B-26) 从 N = 2 起才出现。本推导关闭的是
