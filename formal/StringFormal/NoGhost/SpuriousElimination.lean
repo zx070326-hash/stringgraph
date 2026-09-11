@@ -985,4 +985,88 @@ theorem towerPhys_inf_towerBigrade_eq_towerOrthComplement [NoZeroDivisors R] [Ch
 
 end PhysOrthogonal
 
+/-! ### The form is nondegenerate on each slice -/
+
+section SliceRadical
+
+variable {D : ℕ} {R : Type*} [CommRing R] [NoZeroDivisors R] [CharZero R]
+
+/-- **No slice has a radical**: a vector of the bigraded piece `(j, N)` orthogonal to that
+whole piece is zero.  Distinct slices are already orthogonal
+(`towerPairing_towerBigradeProj_left`), so orthogonality to one slice upgrades to orthogonality
+to everything, and then `Fock.eq_zero_of_towerPairing_left_eq_zero` applies. -/
+theorem eq_zero_of_mem_towerBigrade_of_orthogonal {η : Fin D → R} (hη : ∀ μ, η μ * η μ = 1)
+    (j : ℤ) (N : ℕ) {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N)
+    (h : ∀ y ∈ towerBigrade D R j N, Fock.towerPairing η x y = 0) : x = 0 := by
+  have hxp : towerBigradeProj D R j N x = x := towerBigradeProj_of_mem_self hx
+  refine Fock.eq_zero_of_towerPairing_left_eq_zero hη fun y => ?_
+  have hproj := towerPairing_towerBigradeProj_left η j N x y
+  rw [hxp] at hproj
+  rw [hproj]
+  exact h _ (towerBigradeProj_mem j N y)
+
+end SliceRadical
+
+/-! ### Counting the `b̃`-free monomials -/
+
+section Counting
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- The `b̃`-free level-`N` occupation functions form a finite set: they are a subset of the
+level-`N` ones, and `Fock.finite_setOf_level_eq` already knows those are finite. -/
+theorem finite_setOf_conjFreeIndex (hD : 2 ≤ D) (N : ℕ) :
+    {d : Osc D →₀ ℕ | Fock.level D d = N ∧ conjDeg hD d = 0}.Finite :=
+  (Fock.finite_setOf_level_eq D N).subset fun _ hd => hd.1
+
+/-- The index set of blueprint §B′.4's `p_{D−1}(N)`, as a `Fintype`.  Its cardinality is never
+evaluated (§B′.8). -/
+noncomputable instance conjFreeIndexFintype {D : ℕ} (hD : 2 ≤ D) (N : ℕ) :
+    Fintype {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} :=
+  (finite_setOf_conjFreeIndex hD N).fintype
+
+lemma conjFree_le_levelSubmodule (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    conjFree (R := R) hD F N ≤ Fock.levelSubmodule D R N := by
+  rw [conjFree, Submodule.span_le]
+  rintro _ ⟨d, ⟨h1, _⟩, rfl⟩
+  exact h1 ▸ lcMonomial_mem_levelSubmodule F d
+
+lemma conjFreeSlice_le_towerBigrade (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    conjFreeSlice (R := R) hD F N ≤ towerBigrade D R (-(N : ℤ)) N :=
+  Submodule.map_mono (conjFree_le_levelSubmodule hD F N)
+
+end Counting
+
+section CountingField
+
+variable {D : ℕ} {K : Type*} [Field K] {η a b : Fin D → K}
+
+instance conjFree_finiteDimensional (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    FiniteDimensional K ↥(conjFree hD F N) := by
+  have : FiniteDimensional K ↥(Fock.levelSubmodule D K N) := Fock.levelSubmodule_finite D K N
+  exact Submodule.finiteDimensional_of_le (conjFree_le_levelSubmodule hD F N)
+
+/-- **`dim (b̃-free level-`N` span) ≤ p_{D−1}(N)`**: the `b̃`-free light-cone monomials span it,
+and they are indexed by the finite set of `b̃`-free level-`N` occupation functions.  (Only an
+inequality: the light-cone monomials are not known to be linearly independent, blueprint §B′.9
+item 2.) -/
+theorem finrank_conjFree_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    Module.finrank K ↥(conjFree hD F N)
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} := by
+  classical
+  have hrange : conjFree (R := K) hD F N
+      = Submodule.span K (Set.range fun d : {d : Osc D →₀ ℕ //
+          Fock.level D d = N ∧ conjDeg hD d = 0} => lcMonomial F (d : Osc D →₀ ℕ)) := by
+    rw [conjFree, Set.image_eq_range]
+    rfl
+  rw [hrange]
+  exact finrank_range_le_card _
+
+theorem finrank_conjFreeSlice_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    Module.finrank K ↥(conjFreeSlice hD F N)
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} :=
+  le_trans (Submodule.finrank_map_le _ _) (finrank_conjFree_le hD F N)
+
+end CountingField
+
 end StringFormal.NoGhost
