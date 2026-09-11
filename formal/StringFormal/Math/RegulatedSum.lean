@@ -132,4 +132,102 @@ theorem abs_sinh_sub_taylor_le {x : ℝ} (hx : |x| ≤ 1) :
   rw [Real.sinh_eq, abs_le]
   constructor <;> linarith
 
+/-! ### The Laurent constant `-1/12` -/
+
+/-- The third-order Taylor bound, rewritten for the quantity `(u - 2 sinh(u/2))/u³` whose limit
+is the coefficient we are after: `|(u - 2 sinh(u/2))/u³ + 1/24| ≤ u²/1600` for `0 < |u| ≤ 2`. -/
+theorem abs_shiftedSinh_add_le {u : ℝ} (hu : u ≠ 0) (hu2 : |u| ≤ 2) :
+    |(u - 2 * sinh (u / 2)) / u ^ 3 + 1 / 24| ≤ u ^ 2 / 1600 := by
+  have hx : |u / 2| ≤ 1 := by rw [abs_div, abs_two]; linarith
+  have h := abs_sinh_sub_taylor_le hx
+  have habs : |u / 2| ^ 5 / 100 = |u| ^ 5 / 3200 := by
+    rw [abs_div, abs_two]; ring
+  rw [habs] at h
+  have key : (u - 2 * sinh (u / 2)) / u ^ 3 + 1 / 24
+      = -2 * (sinh (u / 2) - (u / 2 + (u / 2) ^ 3 / 6)) / u ^ 3 := by
+    field_simp
+    ring
+  have hpos : (0 : ℝ) < |u| ^ 3 := by positivity
+  have h5 : |u| ^ 5 = |u| ^ 3 * u ^ 2 := by rw [← sq_abs u]; ring
+  rw [key, abs_div, abs_mul, abs_pow u 3, div_le_iff₀ hpos]
+  have h2 : |(-2 : ℝ)| = 2 := by norm_num
+  rw [h2]
+  nlinarith [abs_nonneg (sinh (u / 2) - (u / 2 + (u / 2) ^ 3 / 6))]
+
+/-- `(u - 2 sinh(u/2))/u³ → -1/24` as `u → 0⁺`.  (This is the `sinh` Taylor coefficient
+`sinh x = x + x³/6 + …` read off at `x = u/2`.) -/
+theorem tendsto_shiftedSinh :
+    Tendsto (fun u : ℝ => (u - 2 * sinh (u / 2)) / u ^ 3) (𝓝[>] (0 : ℝ)) (𝓝 (-1 / 24)) := by
+  have hg : Tendsto (fun u : ℝ => u ^ 2 / 1600) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
+    have hc : Continuous fun u : ℝ => u ^ 2 / 1600 := by fun_prop
+    have := hc.tendsto (0 : ℝ)
+    simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow, zero_div] at this
+    exact this.mono_left nhdsWithin_le_nhds
+  have hev : ∀ᶠ u in 𝓝[>] (0 : ℝ),
+      ‖(u - 2 * sinh (u / 2)) / u ^ 3 - (-1 / 24)‖ ≤ u ^ 2 / 1600 := by
+    filter_upwards [Ioo_mem_nhdsGT (show (0:ℝ) < 2 by norm_num)] with u hu
+    have hu0 : (0 : ℝ) < u := hu.1
+    have habs : |u| ≤ 2 := by rw [abs_of_pos hu0]; exact hu.2.le
+    have := abs_shiftedSinh_add_le hu0.ne' habs
+    rw [Real.norm_eq_abs]
+    convert this using 3
+    ring
+  have h0 := squeeze_zero_norm' hev hg
+  rwa [tendsto_sub_nhds_zero_iff] at h0
+
+/-- `2 sinh(u/2)/u → 1` as `u → 0⁺`.  Obtained from `tendsto_shiftedSinh` via the exact identity
+`2 sinh(u/2)/u = 1 - u²·(u - 2 sinh(u/2))/u³`, so no second squeeze argument is needed. -/
+theorem tendsto_twoSinh_div :
+    Tendsto (fun u : ℝ => 2 * sinh (u / 2) / u) (𝓝[>] (0 : ℝ)) (𝓝 1) := by
+  have hu2 : Tendsto (fun u : ℝ => u ^ 2) (𝓝[>] (0 : ℝ)) (𝓝 0) := by
+    have hc : Continuous fun u : ℝ => u ^ 2 := by fun_prop
+    have := hc.tendsto (0 : ℝ)
+    simp only [ne_eq, OfNat.ofNat_ne_zero, not_false_eq_true, zero_pow] at this
+    exact this.mono_left nhdsWithin_le_nhds
+  have hone : Tendsto (fun _ : ℝ => (1 : ℝ)) (𝓝[>] (0 : ℝ)) (𝓝 1) := tendsto_const_nhds
+  have h := hone.sub (hu2.mul tendsto_shiftedSinh)
+  simp only [zero_mul, sub_zero] at h
+  refine Tendsto.congr' ?_ h
+  filter_upwards [self_mem_nhdsWithin] with u hu
+  have hu0 : u ≠ 0 := (Set.mem_Ioi.mp hu).ne'
+  field_simp
+  ring
+
+/-- **The card's Laurent constant, `sinh` form**: `1/(4 sinh²(u/2)) - 1/u² → -1/12` as `u → 0⁺`.
+
+Proof is the exact factorisation, valid for `u > 0`,
+`1/(4s²) - 1/u² = [(u - 2s)/u³] · [1 + 2s/u] · [(2s/u)⁻¹]²` with `s = sinh(u/2)`,
+whose three factors tend to `-1/24`, `2` and `1`. -/
+theorem tendsto_invSinhSq_sub_invSq :
+    Tendsto (fun u : ℝ => 1 / (4 * sinh (u / 2) ^ 2) - 1 / u ^ 2) (𝓝[>] (0 : ℝ))
+      (𝓝 (-1 / 12)) := by
+  have hT := tendsto_twoSinh_div
+  have hinv : Tendsto (fun u : ℝ => (2 * sinh (u / 2) / u)⁻¹) (𝓝[>] (0 : ℝ)) (𝓝 1) := by
+    simpa using hT.inv₀ one_ne_zero
+  have hone : Tendsto (fun _ : ℝ => (1 : ℝ)) (𝓝[>] (0 : ℝ)) (𝓝 1) := tendsto_const_nhds
+  have hprod := (tendsto_shiftedSinh.mul (hone.add hT)).mul (hinv.pow 2)
+  have hval : (-1 / 24 : ℝ) * (1 + 1) * 1 ^ 2 = -1 / 12 := by norm_num
+  rw [hval] at hprod
+  refine Tendsto.congr' ?_ hprod
+  filter_upwards [self_mem_nhdsWithin] with u hu
+  have hu0 : (0 : ℝ) < u := Set.mem_Ioi.mp hu
+  have hs : sinh (u / 2) ≠ 0 :=
+    Real.sinh_ne_zero.mpr (div_ne_zero hu0.ne' two_ne_zero)
+  field_simp
+  ring
+
+/-- **`worldsheet.regulated-sum-laurent-expansion`, constant-term half**:
+`Σ_{n≥1} n e^{-un} - 1/u² → -1/12` as `u → 0⁺`.
+
+Because the limit exists and is finite, this says at once that `1/u²` is the *entire* singular
+part (no `1/u` term survives) and that the constant term is exactly `-1/12`.
+
+The card's stronger `+ O(u²)` for the remainder is **not** proved here; see the module docstring. -/
+theorem tendsto_regulatedSum_sub_invSq :
+    Tendsto (fun u : ℝ => (∑' n : ℕ, (n : ℝ) * exp (-(u * n))) - 1 / u ^ 2) (𝓝[>] (0 : ℝ))
+      (𝓝 (-1 / 12)) := by
+  refine Tendsto.congr' ?_ tendsto_invSinhSq_sub_invSq
+  filter_upwards [self_mem_nhdsWithin] with u hu
+  rw [tsum_nat_mul_exp_neg_mul_eq_inv_sinh_sq (Set.mem_Ioi.mp hu)]
+
 end StringFormal.RegulatedSum
