@@ -1,0 +1,63 @@
+id: worldsheet.heterotic-bosonic-construction-gauge-groups
+kind: proposition
+title: 玻色构造给出与费米子构造**相同**的两个规范群：l_L² = 2 的格点就是 SO(32) 或 E₈ 的根
+statement: |
+  在 compact.heterotic-narain-lattice-even-self-dual 的 d = 10 特例中，内部格是 16 维偶自对偶
+  欧氏格，由 math.even-self-dual-euclidean-lattices-dimension-16 只有 Γ_16 与 Γ_8 ⊕ Γ_8 两种。
+  断言：
+
+  **(1)** 左移零点能为 −1，故无质量态由「一个单位的左移激发」给出：
+      ∂X^μ、∂X^m，或顶点算子 e^{i k_L·X(z)} 且 **l_L² = 2**。
+  **(2)** Γ_16 中 l_L² = 2 的格点恰是 **SO(32) 的根**（(11.4.16)）；
+      Γ_8 ⊕ Γ_8 中 l_L² = 2 的格点恰是两份 **E₈ 的根**（(11.4.21)）。
+  **(3)** 因此（原书逐字）：'**Thus the two possible lattices give the same two gauge groups,
+      SO(32) and E₈ × E₈, found earlier.**'
+  **(4)** 并且（原书逐字）：'**It is easy to see** that the earlier fermionic construction and
+      the present bosonic one are equivalent under bosonization.'
+
+  **本命题不断言的内容**：
+    (1) **不**断言 (11.4.16)/(11.4.21) 的具体根系形式。抽取者**没有读到这两式本身**
+        （原书 pp. 61–65 在本轮抽取中跳读，只在 §11.5/§11.6 见到对它们的引用），
+        故本卡只记「原书说 l_L² = 2 的点就是那些根」，不转录根的坐标表达式。
+    (2) 不断言 (4) 的等价性有论证（'It is easy to see' 是全部）。
+    (3) 不断言整体规范群（SO(32) 还是 Spin(32)/Z₂）；本卡断言的是**李代数**。
+    (4) 不断言完整的谱——见 compact.heterotic-narain-lattice-even-self-dual 的脚注 2。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, pp. 74–75（左移零点能 −1、无质量态的三个来源、l_L² = 2 的点是 SO(32)/E₈ 的根、逐字结论句；'It is easy to see that the earlier fermionic construction and the present bosonic one are equivalent under bosonization.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E63；逐字句读到原书页图）。
+      ⚠ 被引用的 (11.4.16)（SO(n) 的根）与 (11.4.21)（E₈ 的根）**内容未核实**：
+      原书 pp. 61–65 本轮跳读，抽取者只在 §11.5/§11.6 的引用中见到这两个式号（抽取记录 §3.2）。
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.16)–(11.2.18)、(11.2.25) 一带, pp. 52–55（费米子构造下的同一批规范玻色子）"
+    note: |
+      L1（E56、E57）。本卡的 (3) 断言两种构造给出同一对规范群；
+      本图对应节点 worldsheet.heterotic-so32-massless-spectrum 与
+      worldsheet.heterotic-e8e8-construction。
+tags: [heterotic, lattice, gauge-group, so32, e8e8, bosonization]
+notes: |
+  ★【这是「恰有两个」的第二条独立路线】
+    路线 A（§11.2，费米子）：排除「八个一组」（自旋统计 + OPE 闭合）
+      → worldsheet.heterotic-two-supersymmetric-ten-dimensional；
+    路线 B（§11.6，玻色/格点）：16 维偶自对偶欧氏格恰有两个
+      → 本卡。
+  两条路线在本图都是 physical-argument，但**瓶颈不同**：
+  A 的瓶颈是自旋统计与 OPE 闭合两条物理断言；B 的瓶颈是一条**纯数学定理没有数学来源**
+  （math.even-self-dual-euclidean-lattices-dimension-16）。
+  → 登记 Conway–Sloane / Serre 之后，B 可以整体抬到接近 rigorous 的水平（除了
+    「一致 CFT ⟺ 偶自对偶格」那一步仍是物理论证），这是本轮发现的**性价比最高的升级点**。
+
+  【(11.4.16)/(11.4.21) 未核实，是本卡最脆的一环】要把「l_L² = 2 的点 = 根系」坐实，
+  必须补读原书 pp. 61–65 的页图（同一份已落盘 PDF，见抽取记录 §3.3，无需重新 fetch）。
+
+  【左移零点能 −1 与 §11.2 的一致性】玻色构造下 26 个左移玻色子的横向计数是 24 × (−1/24) = −1
+  （与玻色弦相同）；费米子构造下是 8 × (−1/24) + 32 × (−1/48) = −1
+  （worldsheet.heterotic-left-moving-zero-point-constants）。两者一致 ✓。
+  ⚠ 这条核对是本图做的，原书没有并列写出。
+author: curator
+created: "2026-09-11"

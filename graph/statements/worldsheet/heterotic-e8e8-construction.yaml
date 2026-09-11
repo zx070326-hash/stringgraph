@@ -1,0 +1,75 @@
+id: worldsheet.heterotic-e8e8-construction
+kind: proposition
+title: E₈ × E₈ 杂化弦：λ^A 分成两组 16 独立取周期条件，无质量矢量的伴随表示要求把 120 + 128 认作 E₈ 的 248
+statement: |
+  把 worldsheet.heterotic-string-construction 的 32 个 λ^A 分成**两组各 16 个**，
+  两组的周期条件**独立**取 ±（(11.2.19)），相应的两个费米子数算符记作
+  exp(πiF_1)、exp(πiF_1′)（(11.2.20)）；对 2³ = 8 种周期组合求和，并施加投影
+    exp(πiF_1) = exp(πiF_1′) = exp(πiF̃) = 1                （(11.2.21)）。
+  左移配分函数是
+    Z_8(τ)² = { (1/4)[ Z^0_0(τ)^8 + Z^0_1(τ)^8 + Z^1_0(τ)^8 + Z^1_1(τ)^8 ] }²   （(11.2.22)）。
+
+  **断言**：
+    **(1)** 在 R–NS′ 扇区（一组周期、另一组反周期）左移零点能常数为
+        −8/24 + 16/24 − 16/48 = **0**              （(11.2.24)），
+        故该扇区基态无质量；16 个周期 λ 的零模给出 2^8 = 256 维旋量表示，
+        GSO 投影 (11.2.21) 把它分成 **128 + 128′** 并保留前者。
+    **(2)** 左移无质量内容是（按 SO(8) × SO(16) × SO(16) 标记）
+        (8_v,1,1) + (1,120,1) + (1,1,120) + (1,128,1) + (1,1,128)    （(11.2.25)），
+        其中 120 是 SO(16) 的伴随、128 是它的旋量。
+    **(3)** 时空理论的一致性要求**无质量矢量按规范群的伴随表示变换**；
+        例外李群 **E₈** 有一个 SO(16) 子群，在其下 E₈ 的伴随 **248 分解为 120 + 128**。
+        原书逐字：'**Evidently this second heterotic string theory has gauge group E₈ × E₈.**'
+    **(4)** 额外的流由玻色化给出 exp[i Σ_{K=1}^{16} q_K H^K(z)]（(11.2.26)），
+        其中 q_K = ±1/2（K = 1, …, 8）或 0（K = 9, …, 16），且 Σ_K q_K ∈ 2Z（(11.2.27)）；
+        完整无质量谱见 (11.2.28)。
+
+  **本命题不断言的内容**：
+    (1) 第 (3) 步是**认出**（'Evidently'），不是证明：原书既不证明「无质量矢量必须在伴随表示」
+        这条时空一致性要求，也不证明 E₈ 的存在性或 248 = 120 + 128 的分支规则。
+    (2) 不断言 E₈ × E₈ 是唯一的另一个选择——那是
+        worldsheet.heterotic-two-supersymmetric-ten-dimensional。
+    (3) 不断言整体规范群（E₈ 是单连通的，但本卡不对 SO(16) 与 Spin(16) 的区别作断言）。
+    (4) 不断言模不变性的验证（原书：'Again closure and locality of the OPE and modular
+        invariance are easily verified.'）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.intercept-sign-a
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.19)–(11.2.28), pp. 53–55（两组 16、投影、Z_8²、R–NS′ 零点能 0、128+128′、(11.2.25) 的左移内容、E₈ 的 248 = 120+128、(11.2.26)/(11.2.27) 的额外流）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E57；式号与公式逐页读到原书页图）。
+      原书对第 (3) 步的措辞逐字：'Consistency of the spacetime theory requires that massless
+      vectors transform under the *adjoint* representation of the gauge group. There is indeed a
+      group, the exceptional group E₈, that has an SO(16) subgroup under which the E₈ adjoint
+      **248** transforms as 120 + 128. Evidently this second heterotic string theory has gauge
+      group E₈ × E₈.'
+  - ref: polchinski-1998-v2
+    loc: "§11.2, (11.2.22) 之后, p. 54（逐字：'It is important here that the fermions are in groups of 16, so that the minus signs from Z_ψ^± (which was for eight fermions) are squared.'；自称 'Again closure and locality of the OPE and modular invariance are easily verified.'）"
+    note: |
+      L1（E57）。这是 (11.2.22) 的符号论证与自称严格程度。
+tags: [heterotic, e8e8, spectrum, gauge-group, gso, modular-invariance]
+notes: |
+  【算术核对（本图内部）】(11.2.24)：8 个横向玻色子 −1/3；16 个周期费米子 +16/24 = +2/3；
+  16 个反周期费米子 −16/48 = −1/3。合计 0 ✓。
+  256 = 2^8：16 个实零模 → 8 个费米型产生-湮灭对 → 2^8 维旋量 ✓；128 + 128 = 256 ✓；
+  120 + 128 = 248 = dim E₈ ✓（120 = dim SO(16) = 16·15/2 ✓）。
+
+  ★【第 (3) 步是本卡最弱的一环】它由两条都不在本图的外部事实撑着：
+    (a) 「时空一致性要求无质量矢量在伴随表示」——原书不证、不引文献；
+    (b) E₈ 的存在与分支规则 248 = 120 + 128——属于李代数事实，本图无节点
+        （§11.4「A little Lie algebra」E59 本轮未入图，且原书 pp. 61–65 抽取者跳读）。
+  抽取记录 E57 备注：这条结论的论证是**排除法 + 自旋统计 + OPE 闭合**，不是穷举证明。
+
+  【与 SO(32) 情形的对照】分成两组 16 时，(11.2.13) 的「全 + 号」论证仍然成立
+  （Z_ψ^± 的负号被平方掉）；分成八个一组则不成立——这正是
+  worldsheet.heterotic-two-supersymmetric-ten-dimensional 的核心。
+
+  【(11.2.26)/(11.2.27) 的记号】q_K 是玻色化后 16 个左移标量 H^K 的动量（U(1) 荷）；
+  它与 §11.6 的格点构造是同一件事的两种写法（Γ_8 的旋量共轭类，(11.6.6b)）。
+  本图不为此加边（玻色化无节点）。
+author: curator
+created: "2026-09-11"

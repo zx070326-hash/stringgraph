@@ -1,0 +1,69 @@
+id: worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free
+kind: proposition
+title: 存在无快子且**无超对称**的十维杂化弦：§11.3 扭曲构造给出的 SO(16) × SO(16) 理论
+statement: |
+  §11.3 用**扭曲构造**（'the twisting construction introduced in section 8.5'）从一个理论出发
+  生成其余的十维杂化弦。断言：
+
+  **(1)** 「最不扭曲」的理论对应对角模不变量 (11.3.1)：所有费米子（λ^A 与 ψ̃^μ）在环面的
+      每条闭链上**同时**周期或反周期，投影为 exp[πi(F + F̃)] = 1（(11.3.2)）。
+      原书逐字：'This theory is consistent except for a tachyon'；该快子是
+      λ^A_{−1/2}|0⟩_{NS,NS}，m² = −2/α'，exp(πiF) = exp(πiF̃) = −1（(11.3.3)）。
+
+  **(2)** 存在一个由扭曲得到的理论，其谱中
+      **既没有引力微子**（它们在 (R±, NS+, NS+) 扇区）
+      **也没有快子**（它们在 (NS−, NS−, NS+) 与 (NS−, NS+, NS−) 扇区），
+      而扭曲留下的规范对称性是 **SO(16) × SO(16)**（原书逐字，§11.3 末，p. 59）。
+
+  **(3)** 因此（原书逐字）：'**This shows that a tachyon-free theory without supersymmetry is
+      possible.**'
+
+  **本命题不断言的内容**：
+    (1) **不**给出扭曲构造的细节。原书 pp. 56–58 的具体构造在本轮抽取中被**跳读**
+        （抽取记录 §3.2），本卡只覆盖 (11.3.1)–(11.3.3) 与 p. 59 顶端的结论与谱表。
+    (2) 不断言「无引力微子 ⇒ 无时空超对称」这一步（原书由无引力微子直接说 'without
+        supersymmetry'；本图无「引力微子 ⟺ 局域超对称」的杂化弦版节点，
+        type II 一侧有 worldsheet.type-ii-spacetime-supersymmetry）。
+    (3) 不断言十维杂化弦的个数。原书 p. 50 逐字只说
+        'Nine ten-dimensional theories based on the action (11.2.3) **are known**, though six
+        have tachyons.'——用词是 'are known'，**不是**「恰有九个」。
+    (4) 不断言该理论的无质量谱（p. 59 有四行谱表，本卡未逐条转录）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.3, eq. (11.3.1)–(11.3.3), pp. 55–56（对角模不变量、对角投影、快子 λ^A_{−1/2}|0⟩_{NS,NS} 与 m² = −2/α'）；§11.3 末, p. 59（逐字：'Gravitinos, in the sectors (R±, NS+, NS+), are absent from the spectrum. So also are tachyons, which are in the (NS−, NS−, NS+) and (NS−, NS+, NS−) sectors. The twists leave an SO(16) × SO(16) gauge symmetry.' 与 'This shows that a tachyon-free theory without supersymmetry is possible.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E58；式号与两处逐字读到原书页图）。
+      ⚠ **pp. 56–58（§11.3 中段的具体扭曲构造）本轮跳读**（抽取记录 §3.2），
+      故本卡对「怎么扭」不作断言。
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 50（逐字：'Nine ten-dimensional theories based on the action (11.2.3) are known, though six have tachyons.'）"
+    note: |
+      L1（E58 备注）。9 = 2 个超对称 + 1 个 SO(16)×SO(16) + 6 个有快子。
+  - ref: polchinski-1998-v1
+    loc: "§8.5（扭曲构造 / 轨形化，原书在 §11.3 开头明写引用）"
+    note: |
+      原书逐字：'The other heterotic string theories can all be constructed from a single theory
+      by the twisting construction introduced in section 8.5.'
+      ⚠ 本图**没有** Vol.1 §8.5 的节点（轨形/扭曲构造未入图），故这条来源目前只是指路。
+tags: [heterotic, so16, nonsupersymmetric, tachyon, twisting, orbifold]
+notes: |
+  ★【本卡的图论价值】它是本图里唯一一条「无快子不蕴含超对称」的记录。
+  常见的口头断言「十维无快子弦论都是超对称的」由此被证伪（在本书的构造范围内）。
+
+  【与 ch.12 的接口（只在 notes 指向，不加边）】抽取记录 polchinski-1998-v2-ch12.md E22
+  逐字记下：'Of the various additional heterotic string theories constructed in the previous
+  chapter, all but the diagonal theory are chiral, and **in all cases the anomalies factorize**.'
+  ——断言，无证明、无引文；习题 12.3 只要求验证 SO(16) × SO(16) 一例。
+  本图 ch.12 一支（consistency 区的反常节点）尚未与本卡接边。
+
+  【为什么「九个」不进 statement】原文用词是 'are known'，是**文献状况**的陈述而不是分类定理。
+  按「status 只能实话实说」，本图把它放在 sources.note 与本 notes 里，不作为命题断言。
+
+  【缺口提醒】pp. 56–58 未读 ⇒ 本卡的 (2) 是「p. 59 顶端的结论 + 谱表」的读数，
+  中间的构造在本图与抽取记录里都是空白。要把这条抬到能支撑下游，必须先补读那三页。
+author: curator
+created: "2026-09-11"

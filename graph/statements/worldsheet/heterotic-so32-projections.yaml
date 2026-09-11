@@ -1,0 +1,83 @@
+id: worldsheet.heterotic-so32-projections
+kind: definition
+status: physical-argument
+title: SO(32) 杂化弦的定义：λ^A 的周期条件只需差一个 O(32) 转动，取全部同号的 ±，并强加 exp(πiF) = exp(πiF̃) = 1
+statement: |
+  在 worldsheet.heterotic-string-construction 的场内容上，**SO(32) 杂化弦**由下列周期条件与
+  投影定义：
+
+  **(a) 周期条件的一般形式**（(11.2.6)）。能动张量 T_B（(11.2.5a)）的周期性只要求 λ^A
+  周期到一个任意的 O(32) 转动：
+    λ^A(w + 2π) = O^{AB} λ^B(w),   O ∈ O(32)。
+  原书逐字：'Periodicity of T_B only requires that the λ^A be periodic up to an arbitrary
+  O(32) rotation.'（w 是柱面坐标，w ≅ w + 2π。）
+
+  **(b) 右移一侧**。右移部门与 §10 的 RNS 超弦相同，取超弦的 GSO 投影
+    exp(πiF̃) = 1                              （(11.2.8)）
+  相互局域性在 §11.2 写成
+    s·s′ + l/2 ∈ Z                             （(11.2.7)，l = −1 在 NS、−1/2 在 R）
+  的形式（s 是 §10.3/§10.5 的 SO(8) 权矢量标号；见 notes 的记号提醒）。
+
+  **(c) 左移一侧**（本理论的定义性选择）。取
+    λ^A(w + 2π) = ± λ^A(w)                     （(11.2.9)）
+  **32 个分量同号**（即 O = ±1 ∈ O(32)），并强加
+    exp(πiF) = 1                               （(11.2.10)）。
+  这里 F 是左移的世界面费米子数。
+
+  **(d) 费米子化/玻色化的记账**（(11.2.11)、(11.2.12)）。把 λ^A 两两复化
+    λ^{K±} = 2^{−1/2}(λ^{2K−1} ± i λ^{2K}),   K = 1, …, 16，
+  再玻色化为 16 个左移标量 H^K(z)；左移费米子数是各 U(1) 荷之和
+    F = Σ_{K=1}^{16} q_K。
+
+  **本卡不断言的内容**：
+    (1) 不断言这组选择是被推导出来的。**它是定义**：原书是先写下这组周期条件与投影，
+        再验证 OPE 局域闭合与模不变（worldsheet.heterotic-so32-partition-function）。
+    (2) 不断言 O(32) 的其它取法给出什么——那是 worldsheet.heterotic-e8e8-construction
+        （分成两组 16）与 §11.3 的扭曲构造
+        （worldsheet.heterotic-so16-so16-nonsupersymmetric-tachyon-free）的内容。
+    (3) 不断言玻色化本身的严格性（本图无玻色化节点，见 notes）。
+uses:
+  - worldsheet.heterotic-string-construction
+  - worldsheet.rns-fermion-number-operator
+  - worldsheet.gso-projection
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.6)–(11.2.12), pp. 50–51（周期条件、右移 GSO、左移 ± 与 exp(πiF) = 1、复化与玻色化、F = Σ q_K）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56；式号与公式逐页读到原书页图）。
+      原书对 (a) 的逐字：'Periodicity of T_B only requires that the λ^A be periodic up to an
+      arbitrary O(32) rotation.'
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.5)（相互局域性）、(10.6.9)/(10.6.10)（GSO 投影的定义）, pp. 26–28"
+    note: |
+      L1（E40、E42）。右移一侧的投影就是第 10 章的 GSO 投影；本图对应节点
+      worldsheet.gso-projection 与 worldsheet.superstring-sector-consistency-conditions。
+tags: [heterotic, so32, gso, periodicity, bosonization, definition]
+notes: |
+  ⚠【(11.2.7) 的记号提醒】抽取记录逐字记下了 's·s′ + l/2 ∈ Z（l = −1 在 NS、−1/2 在 R）'，
+  但 s（SO(8) 权矢量）与 l 的**定义**在 §10.3/§10.5，抽取记录没有逐字转录那些定义，
+  本图也**没有**自旋场/权矢量标号的节点。
+  因此本卡把 (11.2.7) 作为**式号记录**列出，其内容不承载本卡的任何下游断言；
+  下游只用 (11.2.8) 的结论 exp(πiF̃) = 1。
+  → 若日后要把 (11.2.7) 用作论证的一环，**必须先补 §10.3/§10.5 的 s 记号节点**。
+
+  【本图没有玻色化节点】(11.2.11)/(11.2.12) 的复化与玻色化在本图无支撑：
+  第 10 章的玻色化（E25、E27、E30）本轮与上一轮均未入图。
+  后果：worldsheet.heterotic-so32-partition-function 的「OPE 局域闭合 easily verified by means
+  of bosonization」这一步在图上没有依据，已在那张卡的推导 gaps 记明。
+
+  【为什么是 definition 而不是 proposition】这组周期条件与投影是**被选定的**，
+  与 §10.6 的三条一致性条件（worldsheet.superstring-sector-consistency-conditions，
+  同样是 definition）平行。它们的**自洽性**（模不变、OPE 闭合）才是命题。
+
+  【status: physical-argument】依赖 worldsheet.rns-fermion-number-operator（其鬼场部分经玻色化，
+  本身 physical-argument）与 worldsheet.heterotic-string-construction（同级），
+  且 (11.2.6) 的「T_B 周期性只要求 O(32)」这一步本身是形式论断。
+author: curator
+created: "2026-09-11"
