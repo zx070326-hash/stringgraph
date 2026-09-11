@@ -16,8 +16,14 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§5.1, eq. (5.1.15), p.148（基本域 F₀：−½ ≤ Re τ ≤ ½ 且 |τ| ≥ 1）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E72，L1（读到 schrans-2020
-      笔记 p.248；**未核对 Polchinski 原书**）。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E72。
+      **★ 2026-09-11 升级为 L1 原书页图**（抽取记录 §12.7 的 §5.1 式号表）：此前本条写
+      「L1（读到 schrans-2020 笔记 p.248）；**未核对 Polchinski 原书**」，现已逐字核到原书 p.148——
+      式号 **(5.1.15)** 与区域 −½ ≤ Re τ ≤ ½、|τ| ≥ 1 均确认，**并读到原书自己的措辞**
+      （见本卡 notes 的【作者自承缺口】一段）。
+      ⚠ 本卡唯一推导 worldsheet.modular-fundamental-domain--via-modular-reduction 的 gaps 末条
+      仍写着「(5.1.15) 只经 schrans-2020 核对（对原书 L3）」，**那条已过时**；
+      该文件本轮不在本 curator 的 claim 范围内，已在报告中交 lead。
       ⚠ 抽取记录逐字转引了 [S] 对**原书论证完备性**的评价：
       「we have argued that F₀ is the fundamental domain of the modular group,
       we have been quite cavalier about the boundaries of F₀. Those who are interested in
@@ -25,6 +31,19 @@ sources:
       这是第三方评价，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」。
 tags: [worldsheet, torus, modular-group, moduli, fundamental-domain]
 notes: |
+  【★ 作者自承缺口（2026-09-11 补记，reviewer-batch10 D；抽取记录
+  literature/extractions/polchinski-1998-v1.md §12.10 表 C 第 10 条 + §12.7 的 §5.1 表，
+  L1 原书页图逐字）】原书 p.148 在 (5.1.15) 处的措辞是
+  > 「Using the modular transformations (5.1.13), **it can be shown that** every `τ` is equivalent
+  >  to exactly one point in the region `F₀` … **except on the boundaries which are identified as
+  >  shown in the figure**」
+  ⇒ 三点：
+  (a) **原书对本命题只有 "it can be shown"，无证明、无引文**——这是**原书自己的**缺口，
+      不再需要借 [S] 的「cavalier about the boundaries」来说明本卡为什么是 physical-argument；
+  (b) 原书**确实**把边界认同写进了结论（"except on the boundaries which are identified"），
+      故本卡 statement 里那两条边界认同不比来源强（但来源同样不证明它们穷尽重复）；
+  (c) 唯一性（"exactly one point"）也在原书逐字里，故本卡陈述的强度与来源一致。
+
   数学上正确的陈述与证明按 [S] 的指路在 Zwiebach 2nd ed. §26.6；
   **该书本项目 literature/sources.bib 尚未登记，节号未核实**，故这里只写在 notes 里，
   不作为 sources 条目。这是 researcher 的一条现成待办。
