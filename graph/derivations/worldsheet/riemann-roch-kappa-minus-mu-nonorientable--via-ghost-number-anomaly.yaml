@@ -90,15 +90,23 @@ gaps:
     ⚠ 本卡**没有任何不可定向的检验点**：RP₂ 的 κ = 3 在本图里就是用本关系代出来的（循环，
     不能当检验），Klein 瓶本图无节点。对比 v2 有球面与环面两个检验点。
   - |
-    **(a) 反常系数外包给 exercise 3.6**：(5.3.19) 的系数在正文零推导，且 [S] 称该习题在官方勘误表
-    里有符号错、勘误表本项目未取得（见 worldsheet.ghost-number-current-weyl-anomaly）。
-    这条缺口**直接压在结论系数上**。
+    **(a) 反常系数的来源链在正文与习题之间断开**（2026-09-11 依 researcher §18「Q16.1 复核」，p.119 页图 L1 改写；
+    此前写「反常系数外包给 exercise 3.6」，**不准确**——习题里没有那个数）：
+    (5.3.19) 的系数在正文零推导（"derived in exercise 3.6"），而 exercise 3.6 的题面只给换算规则
+    「Tj 的 z^{−3} 系数 + T̃j̃ 的 z̄^{−3} 系数 = 4a」且证明留读者，反常的形式 ∇_a j^a = aR 本身是
+    「On dimensional grounds … the possible anomaly」；题面不含 3、λ、bc。把规则用到 bc 系统
+    （代入 §2.5 (2.5.15) 的 z^{−3} 系数 (1−2λ)，全纯系统无 T̃j̃ 项）得 (1−2λ)/4 这一步正文与习题都不写。
+    另外 [S] 称该习题在官方勘误表里有符号错、勘误表本项目未取得（见 worldsheet.ghost-number-current-weyl-anomaly），
+    故只有系数的绝对值关系有来源。这条缺口**直接压在结论系数上**。
   - |
     **(b) (5.3.20) 的「by the same argument」没有写出论证**：把反常当作可插进任意关联函数的
     算子方程，需要论证反常的局域性与与插入的对易性，来源里只有断言。
     ⚠ 本推导恰恰把「局域性」当作跨定向性的根据（gaps 第一条），故这条缺口在本卡上比在 v2 上更吃重。
   - |
     **(c) (5.3.22) 的一般 n 情形零推导**（「one finds in the same way」）。本卡只用 n = 1。
+    ⚠ 2026-09-11 补（依 §18.2，p.118 页图 L1）：(5.3.22) 里的 P_n / P_n^T 在原书没有显式表达式、也没有唯一性刻画
+    （exercise 3.2 (b)(c) 只说 "Find a differential operator"，(d) 的伴随关系带 "with appropriate normalization"）；
+    只有 n = 1 的 P₁ 在正文 (5.2.4) 有定义（worldsheet.metric-variation-operator-p1）。
   - |
     **不可定向曲面上 κ / μ 的定义未被本图审查**：worldsheet.conformal-killing-equation 与
     worldsheet.moduli-condition-traceless-transverse 都写在一般二维 Riemann 流形上，
