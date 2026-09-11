@@ -9,22 +9,29 @@ Conventions: `conv.worldsheet-euclidean`, `conv.worldsheet-complex-coords`.  The
 *ratio* identity, so the normalisation `d²τ = 2 dτ₁dτ₂` versus `d²τ = dτ₁dτ₂` is irrelevant
 (the constant cancels on both sides); nothing here depends on it.
 
-Status: the pointwise/algebraic content is proved from scratch here
-(`mobius_deriv`, `im_smul_mul_normSq`, `measure_density_modular_invariant`).
+Status: complete, no `sorry`.  Two layers:
+* pointwise/algebraic, proved from scratch here: `mobius_deriv` (`dτ'/dτ = 1/(cτ+d)²`),
+  `im_smul_mul_normSq` (`τ₂' |cτ+d|² = τ₂`), and the card's identity
+  `measure_density_modular_invariant` (`|dτ'/dτ|² / (τ₂')² = 1/τ₂²`);
+* measure-theoretic: `measure_smul_eq` / `lintegral_inv_im_sq_smul`, i.e. `vol(g·s) = vol(s)`
+  for `vol = dτ₁dτ₂/τ₂²`.  This layer is a *restatement of Mathlib*
+  (`Mathlib.Analysis.Complex.UpperHalfPlane.Measure`, David Loeffler 2026), which already
+  proves `SMulInvariantMeasure (GL (Fin 2) ℝ) ℍ volume` by the Jacobian change-of-variables
+  formula; the only work here is `volume_eq_lintegral_inv_im_sq` (pinning Mathlib's weight
+  `(1/‖y‖₊)²` to the card's `1/τ₂²`) and the transport `GL(2,ℝ) ⇝ SL(2,ℤ)`.
 
 Gaps / what is *not* proved here:
 * No statement about `τ₂|η(τ)|⁴` (that is `math.eta-modular-invariant-combination`,
   `StringFormal/Math/DedekindEtaModular.lean`); this file is η-free.
 * No fundamental domain, no convergence of any integral, no uniqueness of the invariant
   density (the card explicitly excludes all three).
-* `measure_density_modular_invariant` is the *pointwise* Jacobian statement
-  `|dτ'/dτ|² / (τ₂')² = 1/τ₂²`.  It does not by itself say that the associated measure is
-  invariant; the change-of-variables step is supplied separately in the `Measure` section
-  below, which is a restatement of Mathlib's `UpperHalfPlane` Haar-type measure
-  (`Mathlib.Analysis.Complex.UpperHalfPlane.Measure`) and *not* new mathematics here.
+* Orientation: the measure layer is stated for the *positive* measure `dτ₁dτ₂/τ₂²`, i.e. for
+  `|dτ ∧ dτ̄|`, not for the oriented 2-form `dτ ∧ dτ̄`.  `SL(2,ℤ)` acts holomorphically hence
+  orientation-preservingly, so the signed statement follows, but it is not formalised.
 -/
 import Mathlib.Analysis.Calculus.Deriv.Inv
 import Mathlib.Analysis.Complex.UpperHalfPlane.MoebiusAction
+import Mathlib.Analysis.Complex.UpperHalfPlane.Measure
 
 namespace StringFormal.TorusMeasure
 
@@ -98,5 +105,56 @@ theorem measure_density_modular_invariant :
   field_simp
 
 end Pointwise
+
+section Measure
+
+open MeasureTheory
+open scoped NNReal ENNReal Pointwise
+
+/-- The weight appearing in Mathlib's `UpperHalfPlane` volume, `(1/‖y‖₊)²`, is the card's
+density `1/τ₂²`.  (Unconditional: at `y = 0` both sides are `0`.) -/
+theorem coe_inv_nnnorm_sq (x : ℝ) :
+    (((1 / ‖x‖₊) ^ 2 : ℝ≥0) : ℝ≥0∞) = ENNReal.ofReal (1 / x ^ 2) := by
+  have h : (1 / ‖x‖₊ : ℝ≥0) ^ 2 = Real.toNNReal (1 / x ^ 2) := by
+    apply NNReal.coe_injective
+    rw [Real.coe_toNNReal _ (by positivity)]
+    push_cast
+    rw [Real.norm_eq_abs, div_pow, one_pow, sq_abs]
+  rw [h]
+  rfl
+
+/-- **Mathlib's `ℍ`-volume is the card's measure `dτ₁ dτ₂ / τ₂²`.**  Restatement of
+`UpperHalfPlane.volume_eq_lintegral` with the weight written as `1/τ₂²`:
+`vol(s) = ∫_{s ⊆ ℂ} dτ₁dτ₂ / τ₂²`, the outer integral being the plain Lebesgue `volume` on `ℂ`. -/
+theorem volume_eq_lintegral_inv_im_sq (s : Set ℍ) :
+    (volume : Measure ℍ) s
+      = ∫⁻ z : ℂ in ((↑) : ℍ → ℂ) '' s, ENNReal.ofReal (1 / z.im ^ 2) := by
+  rw [UpperHalfPlane.volume_eq_lintegral]
+  exact lintegral_congr fun z => coe_inv_nnnorm_sq z.im
+
+/-- The measure `dτ₁dτ₂/τ₂²` is `SL(2,ℤ)`-invariant, transported from Mathlib's
+`GL(2,ℝ)`-invariance along `ModularGroup.sl_moeb : g • z = (g : GL (Fin 2) ℝ) • z`. -/
+instance : SMulInvariantMeasure SL(2, ℤ) ℍ (volume : Measure ℍ) where
+  measure_preimage_smul g _ hs :=
+    SMulInvariantMeasure.measure_preimage_smul (g : GL (Fin 2) ℝ) hs
+
+/-- **The card, measure-theoretically.**  For every `g ∈ SL(2,ℤ)` and every `s ⊆ H`,
+`vol(g·s) = vol(s)` for the measure `dτ dτ̄ / τ₂²`.  No measurability hypothesis is needed
+(`MeasureTheory.measure_smul`).  The change-of-variables content is Mathlib's
+(`Mathlib.Analysis.Complex.UpperHalfPlane.Measure`, via the Jacobian formula
+`lintegral_image_eq_lintegral_abs_det_fderiv_mul`); what is added here is only the
+identification with Polchinski (7.3.7). -/
+theorem measure_smul_eq (g : SL(2, ℤ)) (s : Set ℍ) :
+    (volume : Measure ℍ) (g • s) = volume s :=
+  measure_smul volume g s
+
+/-- **The card spelled out on subsets of `ℂ`**:
+`∫_{g·s} dτ₁dτ₂/τ₂² = ∫_s dτ₁dτ₂/τ₂²` for every `g ∈ SL(2,ℤ)` and every `s ⊆ H`. -/
+theorem lintegral_inv_im_sq_smul (g : SL(2, ℤ)) (s : Set ℍ) :
+    ∫⁻ z : ℂ in ((↑) : ℍ → ℂ) '' (g • s), ENNReal.ofReal (1 / z.im ^ 2)
+      = ∫⁻ z : ℂ in ((↑) : ℍ → ℂ) '' s, ENNReal.ofReal (1 / z.im ^ 2) := by
+  rw [← volume_eq_lintegral_inv_im_sq, ← volume_eq_lintegral_inv_im_sq, measure_smul_eq]
+
+end Measure
 
 end StringFormal.TorusMeasure
