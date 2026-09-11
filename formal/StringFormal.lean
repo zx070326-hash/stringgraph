@@ -54,3 +54,4 @@ import StringFormal.NoGhost.LightCone
 import StringFormal.NoGhost.WitnessInt
 import StringFormal.NoGhost.DDFGram
 import StringFormal.NoGhost.Assembly
+import StringFormal.NoGhost.Glue
