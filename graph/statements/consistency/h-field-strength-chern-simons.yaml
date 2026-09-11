@@ -38,6 +38,7 @@ statement: |
 
   **本卡不断言**：δH = 0（GS 由 (10) 断言，本图未建该命题节点，见 notes 第 3 条）；
   也不断言这套场内容构成一个自洽的量子理论——本卡只定义微分形式与变换律。
+superseded_by: consistency.h-field-strength-definition
 uses:
   - consistency.descent-forms-gs-notation
 uses_conventions:
@@ -67,6 +68,18 @@ sources:
       而这条本身也是**GS 说的**，不是本图核对的。GS 在同处并列 Chapline–Manton, Phys. Lett. 120B (1983) 105。
 tags: [anomaly, chern-simons, kalb-ramond, supergravity, green-schwarz, d10]
 notes: |
+  【0. ★ 本卡已换代（2026-09-11）：拆成三张】
+  本卡把**两件事**写在一张定义卡里——H 的定义 (4)(4′)（第 (1) 段与第 (3) 段）与
+  B、A、ω 的变换律 (9a,b,c)(9c′)（第 (2) 段）——违反「一个节点一个命题」。本轮拆分：
+  · **consistency.h-field-strength-definition** ← 本卡 (1) + (3)（`superseded_by` 指向它）；
+  · **consistency.b-field-gauge-lorentz-transformation** ← 本卡 (2)；
+  · **consistency.h-field-gauge-lorentz-invariant** ← 本卡 notes 第 3 条点名要补的 δH = 0 命题卡
+    （已建，附 `--via-descent-identity` 推导）。
+  按 CLAUDE.md 原则 1，本卡的 `statement` 文本**不动**；依赖本卡的 `uses` / `depends_on`
+  已按各自用到的是哪一半改指上面两张定义卡。
+  ⚠ 本卡的三张继承卡各自补了 polchinski-1998-v2 §12.2 的一手来源（(12.2.22)/(12.2.24)/(12.2.25)），
+  那是本卡没有的：Polchinski 用两个待定常数 c、c′ 写 H̃₃，是第三种（最中立的）写法。
+
   【1. status = rigorous 的含义与边界】本卡只做一件事：在给定场（B, A, ω）上写下一个三形式和一组
   变换律。这是精确的微分几何陈述，故 rigorous。它**不**承载「十维 N = 1 超引力 + 超 YM 作为量子
   理论存在且自洽」——那件事在本图里没有节点，也不该由定义卡偷偷带进来。

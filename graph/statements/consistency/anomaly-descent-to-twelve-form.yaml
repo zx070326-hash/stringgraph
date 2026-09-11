@@ -1,0 +1,95 @@
+id: consistency.anomaly-descent-to-twelve-form
+kind: proposition
+title: 升维字典：2n 维手征反常与 2n+2 维规范不变多项式相联系；D = 10 即「反常 ↔ 十二形式 Ω₁₂，反常 = ∫ω¹₁₀」
+statement: |
+  记号同 consistency.anomaly-twelve-form-d10-v2 与 consistency.descent-forms-gs-notation
+  （conv.gauge-trace-normalization；楔号省略）。
+
+  **(1) 一般形式（「升维字典」）。** 2n 维时空中的非阿贝尔手征反常与一个**形式上的
+  2n+2 维规范不变多项式** Ω_{2n+2} 相联系：由 Ω_{2n+2} 经下降链
+
+      Ω_{2n+2} = d ω⁰_{2n+1},      δ ω⁰_{2n+1} = − d ω¹_{2n}
+
+  得到的 ω¹_{2n}，其积分 ∫ω¹_{2n} **就是**该 2n 维理论的反常（相差一个归一化常数）。
+
+  **(2) D = 10 的情形（本图实际用到的那一格）。** n = 5：十维反常与形式上的十二维规范不变
+  **十二形式 Ω₁₂** 相联系，
+
+      Ω₁₂  ⇝  ω⁰_{11}  ⇝  ω¹_{10},      十维反常 = （常数）× ∫ ω¹_{10} 。
+
+  ⚠ **「形式上的」（GS 逐字 "a formal expression in twelve dimensions"）**：
+  Ω₁₂ 并不生活在一个真实的十二维时空上，它是一个记账用的不变多项式。
+
+  **本卡不断言**：
+  (a) 那个归一化常数的值（GS 把常数 c 外包给 refs. [3,9]；Polchinski 用 (12.2.10) 的 −i/(2π)⁵）；
+  (b) ω¹_{2n} 满足 Wess–Zumino 相容条件——那是 consistency.descent-omega1-is-consistent-anomaly
+      （**存在性**一侧，有 L1 来源）；本卡断言的是更强的**认同**：它就是那个反常；
+  (c) 高点反常被六边形唯一决定——consistency.higher-point-anomalies-fixed-by-hexagon；
+  (d) 任何具体的反常多项式或系数。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 上一段逐字：「The analysis of ref. [9] relates the anomalies to a formal expression in twelve dimensions, namely the gauge-invariant twelve-form Ω₁₂, where …」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E6）。
+      ★ **整套字典是 GS 引用来的**（「The analysis of ref. [9] relates」），GS 自己一步不做。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（= GS ref. [9]）"
+    note: |
+      **L2**。这是「反常 ↔ **十二形式**」这套字典的**唯一**被点名的来源，本图对它一字未核实。
+      摘要能佐证的只有更弱的一条：所作构造「automatically satisfies the Wess-Zumino consistency
+      condition」——那条已由 consistency.descent-omega1-is-consistent-anomaly 承载
+      （在同作者同期的 zumino-1983-les-houches 上 L1 核实）。
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。抽取记录 literature/extractions/zumino-wu-zee-1984.md §0.2/§3.1。
+  - ref: zumino-1983-les-houches
+    loc: "(3.1)(3.31)(3.32)（下降链本身）；p.29 逐字「The problem of finding the most general solution of the consistency condition will not be discussed here.」"
+    note: |
+      **L1 全文（46 印刷页逐页读图）**；= green-schwarz-1984 的 ref. [10] 第一项。
+      ★ **只承载「下降链」这一半，不承载「升维」那一半**：该文**没有把 2n 维反常联系到 2n+2 维
+      不变多项式**这套写法，也没有引力侧。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352v2, §2, eqs. (5)(6)：Î₁₂ = dÎ₁₁、δÎ₁₁ = dÎ₁₀、δ log Z ~ ∫Î₁₀"
+    note: |
+      **L1**。直接写下十二形式与下降关系，**不加论证、不给这条字典的引用**
+      （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md §5.1，以及
+      consistency.anomaly-twelve-form-d10 旧卡 notes 第 6 条）。
+      列为来源是为了记录「又一本 L1 文献把它当已知」，**不是**为了提供论证。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.8)–(12.2.10) 一带的下降方程与十二形式用法；逐字「we will not repeat it here but just quote the result」"
+    note: |
+      **L1**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E6/E8）。
+      同样用十二形式 + 下降方程，且**明说本书不做这个计算**。第三本把字典当已知的 L1 文献。
+tags: [anomaly, descent-equations, twelve-form, d10, zumino-wu-zee, source-gap]
+notes: |
+  【0. ★ 本卡是 consistency.anomaly-twelve-form-d10 拆分出来的命题之一（2026-09-11）】
+  旧卡是 `definition`，却把这条**升维字典**内嵌在 statement 里；旧卡 notes 第 6 条已记
+  「四条 L1 来源全部把这条字典当作已知」，但那只是散文。拆出独立节点后，它成为图里
+  可被 `stringgraph why` 追踪的瓶颈——凡是从「反常多项式」走到「十维反常」的推导都该过这一关。
+
+  【1. ★★ 这是本图 consistency 区最大的单条来源缺口】
+  本图读过的**四条**来源（green-schwarz-1984、adams-dewolfe-taylor-2010、polchinski-1998-v2 ch.12，
+  以及只到 L2 的 zumino-wu-zee-1984）**全部把这条字典当作已知**：
+  · GS：「The analysis of ref. [9] relates …」——外包；
+  · ADT：直接写 (5)(6)，无引用；
+  · Polchinski：「we will not repeat it here but just quote the result」；
+  · ZWZ：**正文未取得**，只有摘要，而摘要只支持更弱的「满足相容条件」。
+  ⇒ **「2n 维反常 ↔ 2n+2 维不变多项式」这条字典在本图里没有任何已核实的论证。**
+  ⚠ 这不是说它可疑——它是反常物理的标准内容；但**本项目的记账原则是只记已核实的东西**。
+
+  【2. 与 consistency.descent-omega1-is-consistent-anomaly 的分工（关键）】
+  那张卡（L1，zumino-1983-les-houches）说：下降链给出的 ω¹_{2n−2} **满足 WZ 相容条件，
+  是反常方程的一个解**。本卡说的是更强的：**它（相差归一化）就是那个手征费米子圈算出来的反常**。
+  「是相容条件的一个解」与「是那个反常」之间差的正是：
+  (i) 相容条件解的唯一性（consistency.higher-point-anomalies-fixed-by-hexagon，同样无来源），
+  (ii) 归一化常数的定值（外包给 AGW / (12.2.10)）。
+  ⇒ 三张卡合起来才是完整的链，而链上**两个环节无已核实来源**。
+
+  【3. 给 researcher 的具体任务】
+  (a) 取 zumino-wu-zee-1984 (Nucl. Phys. B239 (1984) 477) 正文——本项目已穷尽当前可用路线
+      （抽取记录 §0.4），可试图书馆 / ScienceDirect 机构访问；
+  (b) 取 manes-stora-zumino-1985 (CMP 102 (1985) 157) 正文，那是唯一性一侧；
+  (c) 取 alvarez-gaume-witten-1984 (Nucl. Phys. B234 (1984) 269) 正文，那是归一化一侧。
+  三者任一到手都能实质提升本卡与其下游的记账质量。
+author: curator
+created: "2026-09-11"

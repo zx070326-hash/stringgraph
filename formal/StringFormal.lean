@@ -3,6 +3,7 @@ import StringFormal.Math.MobiusJacobian
 import StringFormal.Math.GreenSchwarzAlgebra
 import StringFormal.Math.FiniteCounts
 import StringFormal.Math.AnomalyPolynomial
+import StringFormal.Math.E8Roots
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
@@ -11,6 +12,7 @@ import StringFormal.Virasoro.VermaPBW
 import StringFormal.Virasoro.DescendantGrading
 import StringFormal.Virasoro.Shapovalov
 import StringFormal.Virasoro.ShapovalovLevelThree
+import StringFormal.Virasoro.ShapovalovLevelFour
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
@@ -31,3 +33,4 @@ import StringFormal.NoGhost.LevelTwo
 import StringFormal.NoGhost.TowerPhysical
 import StringFormal.NoGhost.VertexCommute
 import StringFormal.NoGhost.VertexProduct
+import StringFormal.NoGhost.VertexAdjoint

@@ -25,8 +25,24 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§6.6, eq. (6.6.7)（α's = −4 的极点）、(6.6.8)（C_{S₂} = 8π/(α'g_c²)），p.192–193"
     note: |
-      literature/extractions/polchinski-1998-v1.md#E104，等级 **L1**（schrans-2020 §6.62–§6.63，
-      笔记 p.327–328，逐页读到）。
+      literature/extractions/polchinski-1998-v1.md#E104 + **§14.2（原书核实 2026-09-11，
+      p.193 页图逐字）**。**等级由「L1（schrans-2020 逐页读到）」改为「L1（原书 p.193 页图）」。**
+
+      **原书逐字（p.193）**：
+        (6.6.6) 极点位置 `α's, α't, α'u = −4, 0, 4, 8, …`，「which are the masses-squared of the
+          closed string states」；
+        (6.6.7) 「The pole at α's = −4 is
+          `i g_c⁴ C_{S₂} ∫_{|z₄|>1/ε} d²z₄ |z₄|^{α's/2} ∼ − 8π i g_c⁴ C_{S₂}/(α's + 4)`」；
+        (6.6.8) 「Unitarity gives `C_{S₂} = 8π/(α' g_c²)`」；
+        (6.6.9) `S_{S₂}(k₁;k₂;k₃) = (8π i g_c/α')(2π)²⁶δ²⁶(Σ_i k_i)`。
+      ⇒ **本卡片 (1)(2) 的两个式号与内容与原书逐字一致**，C_{S₂} = 8π/(α'g_c²) 三源一致
+      （原书页图 + headrick-2008 + schrans-2020）。
+
+      ⚠ **记号提醒（§14.4 C）**：**(6.6.7) 里的 `∼` 是原书 Notation（p.xix）定义的
+      「equal up to nonsingular terms」**，不是渐近等价、也不是正比。引用 (6.6.7) 时须按此读。
+      ⚠ **原书用的词是「Unitarity gives」**，即 (6.6.8) 的依据在原书里就是幺正性一句话，
+      没有写出因子化的中间步骤——本卡片 (2) 的「与两个三点振幅经中间态传播子相接比较」
+      是二手源补出的路线，见推导 gaps。
   - ref: headrick-2008
     loc: "Problem 6.11（PDF p.49）：逐字「and the result **(6.6.8)**, C_{S₂} ≡ e^{−2λ}C^X_{S₂}C^g_{S₂} = 8π/(α'g_c²)」"
     note: C_{S₂} 的第二个独立源（L1）。按 lead 裁决作核对源使用。
@@ -41,5 +57,15 @@ notes: |
   spectrum.four-tachyon-factorization-disk-normalization 是同一手法在两种曲面上的版本。
 
   **⚠ 「中间态传播子」在本图中没有定义**：与开弦情形同一缺口，见推导 gaps。
+
+  **2026-09-11（curator-ch6-sec14，§14.2）**：(6.6.6)/(6.6.7)/(6.6.8) 已由原书 p.193 页图逐字确认，
+  来源等级由「二手源逐页读到」升为「原书页图直读」。同时记下两点：
+  (a) **(6.6.7) 的 `∼` 是原书 Notation p.xix 的「equal up to nonsingular terms」**；
+  (b) **原书对 (6.6.8) 只写「Unitarity gives」**，因子化的中间步骤原书未写。
+  ⚠ 另记一条对照（抽取者的观察，**不作为原书陈述**）：(6.6.6) 是开弦 (6.4.18) 的闭弦对应物，
+  但**原书在闭弦这里没有任何「某些极点相消」的说明**，而且 p.194 明确**使用**了 s = 0 的极点
+  定出 g'_c（(6.6.15)）；开弦侧 p.183 却说 α's = 0 的极点在循环序之间相消
+  （spectrum.even-level-open-string-poles-cancel-between-orderings）。
+  **原书没有把这两处并排讨论**，本图不据此作任何推论。
 author: curator-polchinski-ch6
 created: "2026-09-11"

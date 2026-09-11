@@ -1,0 +1,114 @@
+id: spectrum.open-closed-four-point-relation--via-gamma-reflection
+target: spectrum.open-closed-four-point-relation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.virasoro-shapiro-amplitude
+    note: 提供闭弦侧的 Γ 商表达式（分解的左端）。
+  - id: spectrum.veneziano-amplitude
+    note: |
+      提供开弦侧的 Beta 结构与**前因子 2i g_o²/α'**（分解的右端）。
+      **2026-09-11：由 spectrum.veneziano-amplitude-weak 改指换代后的完整卡**——
+      目标陈述现在是完整形式，右端需要绝对归一化，弱卡（无前因子）已不够用。
+      ⚠ **本推导用的不是三项之和**：原书 (6.6.22) 之后逐字限定
+      「the open string amplitudes include just one of the six cyclic permutations」，
+      故右端的 A_o 是其中**一项**（连同相应前因子），见 gaps。
+  - id: math.euler-beta-integral
+    note: |
+      提供 B = ΓΓ/Γ 的关系；三角因子来自 Γ 函数的反射公式
+      Γ(x)Γ(1−x) = π/sin(πx)——即闭弦的三 Γ 结构与两份开弦两 Γ 结构之差。
+      ⚠ 反射公式本身在本图**没有节点**，见 gaps。
+  - id: spectrum.mandelstam-invariants-sum-rule
+    note: 提供 α_c(s)+α_c(t)+α_c(u) = −1，把闭弦的三个 Γ 参数与开弦的两组参数对上。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§6.6, eq. (6.6.23)，p.195；(6.6.22)（一般复积分 = 2 sin[π(b+n₂)] B B）及其后一句"
+    note: |
+      抽取记录 #E108 + **§12.8**（首次页图：结构、sin、共轭）+ **§14.3**（2026-09-11，
+      p.195 两次独立渲染，数值前因子 `πig_c²α'/(4g_o⁴)` 由「L1-读图存疑」升为 **L1**）。
+      ⚠ **本推导刻意不引用 (6.6.21)**：其印刷文本的第三参数是 `4α'`，本图判定为误印
+      （见目标陈述 notes 与本推导 gaps）；(6.6.21) 承载的内容由 (6.6.22) 直接给出。
+      ⚠ **原书这一段只给结论不给计算**：正文逐字只有「This implies a corresponding relation
+      between four-point open and closed string amplitudes …」，从 (6.6.22) 到 (6.6.23)
+      的代入与整理**原书一步不写**，故本推导的路线来源仍是 schrans-2020。
+  - ref: schrans-2020
+    loc: "§6.71 附近（笔记 p.339）：[6.270]/[6.272]（核对源，两行自相矛盾）"
+summary: |
+  **结构性论证**（本推导只支持这一层）：
+
+  闭弦振幅正比于 Γ(a)Γ(b)Γ(c)/(Γ(a+b)Γ(a+c)Γ(b+c))，其中 a = −α_c(s) 等、a+b+c = 1
+  （由 α_c 求和 = −1）。开弦振幅正比于 Beta 函数 Γ(x)Γ(y)/Γ(x+y)，参数取 α'/4 的轨迹。
+  把闭弦的三 Γ 商拆成两份 Beta 型的乘积，多出/少掉的 Γ 因子用反射公式
+  Γ(x)Γ(1−x) = π/sin(πx) 合并成一个 **sin(πα_c(t))** 型三角因子。
+  于是
+    A_c ∝ sin[πα_c(t)] · A_o(s,t; ¼α') · A_o(t,u; ¼α')^*。
+
+  **(2) 比例常数（2026-09-11 改写）。** 目标陈述里的 **πi g_c²α'/(4 g_o⁴)**
+  **是从原书 p.195 页图直接读出的（两次独立渲染），不是本推导算出来的。**
+  本推导能提供的是一条独立的自洽性复算（抽取者做，curator 照录）：
+  由 (6.6.4)+(6.6.8) 得 A_c = (8πi g_c²/α')J；由 (6.4.23) 的单个循环序得
+  A_o(s,t,α'_o,g_o) = (2i g_o²/α')I(s,t,α'_o)，取 α'_o = ¼α' 得 A_o = (8i g_o²/α')I；
+  代入 J = −2 sin[πα_c(t)] I(s,t,¼α') I(t,u,¼α') 后，**g_o⁴、α'¹、以及 1/4 三者全部复现**。
+  ⇒ 1/4 有**两条独立支持**：页图 + 复算。
+  ⚠ 复算原文声明「整体符号/相位随 A 的定义与共轭约定而变，本轮不裁定」，本推导照此保留。
+  ⚠ researcher 早先复算给出的 πi g_c²α'/g_o⁴ **少一个 1/4**，§14.3 裁定为漏读了原书
+  同一行里那个独立的 `¼`（该行共出现三个 ¼）。
+
+  **(3) 参数替换 α'_open = ¼α'_closed。** 本推导只把它作为使 α_o = α_c 成立的记号选择
+  （由 α_o(x) = 1 + α'_o x 与 α_c(x) = 1 + α'x/4 比较得出），**不给独立论证**；
+  原书同页那句「α' = 2 in the closed / α' = ½ in the open」只针对张量结构，见目标陈述。
+gaps:
+  - "**（2026-09-11 §12.8 关闭）争议 1（sin 因子）**：[S] 的 [6.270] 带 sin[πα_c(t)]、[6.272] 不带，
+     **同一节内自相矛盾**；**原书 (6.6.23) 逐字带 sin[πα_c(t)]**，researcher 的复算判断正确，
+     [6.272] 漏掉了它。此项不再是 gap。"
+  - "**（2026-09-11 §14.3 关闭）争议 1'（数值前因子）**：researcher 复算的 πig_c²α'/g_o⁴
+     与原书的 πig_c²α'/(4g_o⁴) 差一个 1/4，**裁定为 researcher 漏读了原书同一行里那个独立的 `¼`**
+     （该行共三个 ¼，另两个在 A_o 的参数里）。§12.8 标的「L1-读图存疑」已撤销。此项不再是 gap。"
+  - "**⚠ 争议 2（复共轭）——半关闭**：**原书写第二个 A_o 带复共轭**（§12.8 逐字读到上标星号，
+     §14.3 复核无误），目标陈述与本推导**已改为跟随原书**（旧版跟随 [S]、不带共轭，已作废）。
+     **仍开着的部分**：[S] 逐字「I am not sure why the second A_o is conjugated in Joe's book.
+     As I(x,y) is manifestly positive, this would just change a sign, which is not needed.」
+     ——他「不需要共轭」的理由本图**既未证实也未反驳**，因为本项目没有核对
+     「(6.6.21) 下方是否真有符号错」。抽取记录 Q16 的结构与共轭两问已关闭，本条只余这一层。"
+  - "**⚠ 争议 3（勘误/疑误）——加重为 Q28**：除 [S] 所指「(6.6.21) 下方有符号错」外，
+     §14.3 本身发现 **(6.6.21) 的印刷文本第三参数是 `4α'`，与原书自身其余部分不自洽**
+     （复算 + 同页 `α'=2 / α'=½` 一句 + (6.6.23) 的 `¼α'` 三条都要求 `¼α'`）。
+     **本图判定 (6.6.21) 的印刷文本不可直接引用**，本推导已改用 (6.6.22)。
+     是原印误、还是官方勘误表已收录而 2005 数字化本漏改，**本图无法判定**——
+     **Polchinski 官方勘误表仍未取得**（Q14；Q28 因此开着）。
+     ⚠ 「印的是 4α'」是**读图结论**（两次渲染一致 + 同页字形对比），不是 PDF 文本层；
+     日后若能取得文本层或另一印次，值得再确认一次。"
+  - "**开弦侧只取一个循环置换**：原书 (6.6.22) 之后逐字限定 A_o「include just one of the six
+     cyclic permutations」，而 spectrum.veneziano-amplitude 给的是**三项之和**。
+     **两者之间的对应（哪一项、前因子如何随之改变）本推导没有逐项写出**，
+     只在 (2) 的复算里按 A_o = (2ig_o²/α')I(s,t,α'_o) 取单项使用。"
+  - "**Γ 反射公式 Γ(x)Γ(1−x) = π/sin(πx) 在本图没有节点**：本推导直接使用。
+     若日后登记特殊函数数学来源，应把它建成 math 节点并补边。"
+  - "**参数配对没有逐项写出**：闭弦的 (a,b,c) 与两份开弦的 (x,y) 如何对应（哪一个是 t 通道、
+     为什么三角因子只带 α_c(t) 而不是 α_c(s) 或 α_c(u)）本推导只作结构性说明，
+     来源的中间步骤也在争议中。"
+  - "**上游两条振幅节点的路径积分缺口**（继承）。
+     ⚠ 旧 gap「开弦侧是弱形式，无前因子」已作废：上游已改指 spectrum.veneziano-amplitude（含前因子）。"
+  - "**A_c 与 A_o 的定义式未逐字取得**：(2) 的复算假定二者是剥去 (2π)²⁶δ²⁶(Σk) 之后的振幅，
+     **原书对 A_c/A_o 的定义本图未核**，故目标陈述明确不断言这一点。"
+  - "**原书从 (6.6.22) 到 (6.6.23) 一步不写**：正文只有「This implies a corresponding relation
+     between four-point open and closed string amplitudes …」。**结果 L1，推导无原书支持**
+     ——这是本推导 status 只能是 physical-argument 的直接理由。"
+notes: |
+  **2026-09-11（curator-ch6-sec14）：本推导由 spectrum.open-closed-four-point-relation-weak--via-gamma-reflection
+  改名为 spectrum.open-closed-four-point-relation--via-gamma-reflection，target 改指完整形式的新陈述**
+  （按 docs/STATUS_LEVELS.md「旧推导的去留」lead 2026-09-11 裁决的 `git mv` + 改指路线）。
+  弱陈述 spectrum.open-closed-four-point-relation-weak 保留并写 superseded_by 指向新卡。
+  `depends_on` 只改了一条：spectrum.veneziano-amplitude-weak → spectrum.veneziano-amplitude
+  （完整形式需要绝对归一化）。
+
+  **旧 notes 逐字保留作历史**：「⚠ 本推导是本批次里最不确定的一条，其目标陈述亦为弱形式。
+  按抽取记录 Q16，(6.6.23) 是『本章最该人工核对的一式』。」
+  ⇒ **Q16 已于 2026-09-11 全部关闭**（结构与共轭由 §12.8、数值前因子由 §14.3）；
+  取而代之开着的是 **Q28**（(6.6.21) 的 `4α'` 是否为勘误表已收录的印误），见 gaps。
+
+  ⚠ **本推导仍是 physical-argument**：目标陈述的表达式是**读出来的**（原书 p.195 页图），
+  不是本推导算出来的；原书从 (6.6.22) 到 (6.6.23) 一步不写。
+  本推导提供的是结构性论证 + 一条自洽性复算。
+author: curator-polchinski-ch6
+created: "2026-09-11"

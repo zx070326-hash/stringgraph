@@ -1,0 +1,54 @@
+id: consistency.h-field-gauge-lorentz-invariant
+kind: proposition
+title: 三形式场强 H 在规范与局域洛伦兹变换下不变：δH = 0（GS 1984 (10c)）
+statement: |
+  在 consistency.h-field-strength-definition 定义的 H 与
+  consistency.b-field-gauge-lorentz-transformation 规定的变换律下
+  （conv.gauge-trace-normalization，楔号省略），
+
+      δF = [F, Λ],      δR = [R, Θ],      **δH = 0**                              (10a,b,c)
+
+  即：H 在规范变换与局域洛伦兹变换下都**不变**。SO(N)/USp(N) 一支用 (4) 与 (9c)，
+  E₈ × E₈ 一支用 (4′) 与 (9c′)。
+
+  **本卡不断言**：
+  (a) 由 δH = 0 推出 GS (1) 的玻色作用量 S₀ 不变——GS 逐字「It follows from eq. (10) that the
+      terms in eq. (1) are invariant」，但本图**没有 S₀ 的定义卡**，故那一步无处落地；
+  (b) 非阿贝尔的完整变换律（GS (9c) 与 Polchinski (12.2.25c) 都只是领头项，见依赖卡）；
+  (c) 全局性——本卡与其依赖一样，只在 descent 等式成立的范围内有意义
+      （math.chern-simons-descent-equations 的唯一已核实来源只在有限坐标邻域上声明它们）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.118–119（重印 609–610），(10a,b,c) 与其后正文「It follows from eq. (10) that the terms in eq. (1) are invariant. It is crucial that the potential B transforms under both kinds of transformations and that the field strength H is invariant.」"
+    note: |
+      L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E5。
+      ★ **GS 只写出 (10c)，一个字的计算都没有**（该条抽取记录在「文献自称的严格程度」栏写的是
+      「"It follows from"（无计算）」，且那句话说的还是 (1) 的不变性，不是 (10c) 本身的证明）。
+      本卡的推导是本图补出的。
+tags: [anomaly, chern-simons, kalb-ramond, gauge-invariance, supergravity, green-schwarz, d10]
+notes: |
+  【0. ★ 本卡填的是 consistency.h-field-strength-chern-simons notes 第 3 条点名的空缺（2026-09-11）】
+  旧卡逐字写道：「GS 由 (10a,b,c) 断言 H 在两类变换下不变…这是一条微分形式的初等命题，
+  本轮**未建节点**（本批的任务边界），建议后续 curator 补 `consistency.h-gauge-lorentz-invariance`
+  + `--via-descent-identity`（status 取 physical-argument，除非 reviewer 复核
+  δω⁰_{3Y} = d tr(Λ dA) 这一步）」。本卡即该建议的落实，id 用了更贴近其它卡命名的
+  `h-field-gauge-lorentz-invariant`。
+
+  【1. 为什么这条不是「显然」】δH = 0 要求 dδB 恰好抵掉 δω⁰_{3Y} − δω⁰_{3L}，
+  即 δω⁰_{3Y} = d tr(Λ dA)（及洛伦兹一路的对应式）。这一步的符号与系数正是
+  H 与 δB 两侧约定被"锁死"的地方：改 (9c) 的任一符号就要同时改 (4)，否则 δH ≠ 0。
+  换言之，**本卡是「(4) 与 (9c) 相容」这件事的图内表达**。
+
+  【2. 与 descent 卡的关系】所需的 δω⁰_3 恒等式属 consistency.descent-forms-gs-notation 的
+  n = 1 情形（GS (16) `δω⁰ = −dω¹` 与 (5)(6)(7)(8)），但**洛伦兹一路的一般 n 在 GS 原文里
+  只被使用、从未被定义**，本卡只用到 n = 1，那一支 GS (7)(8) 是逐字给出的（L1）。
+
+  【3. 状态】推导取 physical-argument：计算本身是初等的微分形式代数，但
+  (i) GS 不给计算，(ii) 依赖的 descent 卡本身是 physical-argument，
+  (iii) 尚无 reviewer 独立复核记录。按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，
+  reviewer 复核 δω⁰_{3Y} = d tr(Λ dA) 之后可考虑升级 `kind`/`status`——
+  但即便升级，有效状态仍会被 descent 卡压回 physical-argument。
+author: curator
+created: "2026-09-11"

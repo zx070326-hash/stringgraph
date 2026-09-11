@@ -1,0 +1,96 @@
+id: math.anomaly-twelve-form-factorization--via-lean
+target: math.anomaly-twelve-form-factorization
+kind: proof
+status: formalized
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      系数 (30, 24, 3) 与 (1/100, 1/7200)、以及 (19) 里的 1/48、1/300 全都绑在 GS 的原版归一化上。
+      若换成 bilal-2008 的重标度 tr F² := (1/30) Tr F²，(a)(b) 两组表达式的数字都会变。
+      Lean 侧把这些数字**写死**在定理陈述里，因此这条约定依赖必须留在图里。
+  - id: math.tr-f6-coefficient-vanishing
+    inferred: false
+    note: |
+      **不是 Lean 证明内部用到的引理**，而是本卡情形 (a) 的**前提之一**：
+      Ω₁₂ 对 SO(N) 一般写作 (N + 32l) tr F⁶ + 15 tr F² tr F⁴（GS (12c)），
+      本卡 (a) 把它写成 15 x y，即已经假定 tr F⁶ 项消失。那一步恰是
+      math.tr-f6-coefficient-vanishing 的 SO 分支（N = 32、l = −1 ⇒ N + 32l = 0），
+      GS (12c) 下方逐字「it is absent if the gauge group is chosen to be SO(32)」。
+      该节点的**算术**已由 GreenSchwarzAlgebra.lean 的 `tr_f6_coefficient_vanishing` 机检，
+      但它自身仍依赖 math.so-usp-adjoint-fundamental-trace-identities（physical-argument），
+      ⇒ **本推导的有效状态因此被压到 physical-argument**，own status 才是 formalized。
+      这与 --via-direct-expansion 的 gaps 早已定下的记账一致：
+      「Lean 岛把迹恒等式作为假设写进定理陈述，图里则维持现在的依赖记账」。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/GreenSchwarzAlgebra.lean :: StringFormal.Math.{gs_factorization_so32, gs_factorization_e8, gs_factorization_nested_eq_expanded}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，`[Field K] [CharZero K]` 上三条声明，
+      证明都是 `field_simp; ring`，无 sorry。三条与目标陈述的对应：
+        · `gs_factorization_so32 (x y : K) :
+             15 * x * y = 48⁻¹ * (30 * x) * ((24 * y + 3 * x ^ 2) - 300⁻¹ * (30 * x) ^ 2)`
+          ← 情形 (a)（`formal.lean_decl` 取这条）；
+        · `gs_factorization_e8 (x : K) :
+             x ^ 3 / 7200 = 48⁻¹ * x * (x ^ 2 / 100 - 300⁻¹ * x ^ 2)`
+          ← 情形 (b)；
+        · `gs_factorization_nested_eq_expanded (Ω₄ Ω₈ : K) :
+             48⁻¹ * Ω₄ * (Ω₈ - 300⁻¹ * Ω₄ ^ 2) = 48⁻¹ * Ω₄ * Ω₈ - 14400⁻¹ * Ω₄ ^ 3`
+          ← 「等价的展开形式」那一句（对任意 Ω₄, Ω₈，比目标需要的更强）。
+      formal/TODO.md「Lean 岛 2」记 `gs-factorization`（A1）「无 sorry，公理只有标准三条」。
+      该文件是 StringFormal/Math/ 孤岛，只 import Mathlib。
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611），(19)"
+    note: |
+      被机检的那条恒等式的文献出处。**GS 只写出 (19)，不给验算**（抽取记录
+      literature/extractions/green-schwarz-1984.md E11）。本推导不为 (19) 的**物理含义**
+      提供任何支持，只证代数。
+summary: |
+  三行 `field_simp; ring`，全部在 formal/StringFormal/Math/GreenSchwarzAlgebra.lean 内完成，
+  不 import 本仓库其它文件，Mathlib 侧只用到域的基本代数与 `ring`。
+
+  · **(b) E₈**：x²/100 − x²/300 = x²/150，乘 (1/48)x 得 x³/7200。
+  · **(a) SO(32)**：(1/300)(30x)² = 3x² 正好抵掉 Ω₈ 里的 3x²，
+    剩 (1/48)(30x)(24y) = 15xy。关键是**两件事同时发生**：N + 32l = 0（tr F⁶ 项消失，
+    见 depends_on 第二条）与 (1/300)(N + 2l)² = 3（(tr F²)² 项对消）。
+  · **嵌套 = 展开**：(1/48)(1/300) = 1/14400，对任意 Ω₄, Ω₈ 成立。
+
+  与同目标的 `--via-direct-expansion` 的分工：那条把「(a)(b) 两组表达式确实是
+  SO(32) / E₈ 的伴随迹」记为依赖（两条 physical-argument 的迹恒等式），
+  本条**刻意不记**——因为目标卡 statement 第 2 条明说本命题不是关于抽象李代数的定理，
+  Lean 陈述也只涉及写死的多项式。两条推导承载的东西不同，都保留。
+gaps:
+  - |
+    **环境比卡片窄一格**：卡片写「R 是 ℚ-代数」（并明言等价于在 ℚ[x, y] 中作为形式恒等式成立），
+    Lean 写 `[Field K] [CharZero K]`。ℚ[x, y] 本身**不是域**，故 Lean 逐字证的是卡片的一个特例。
+    补回一般情形只需 ℚ[x, y] ↪ ℚ(x, y)（或直接对 ℚ-代数重做 `ring`，系数都是有理数），
+    但**那一步不在 Lean 里**。formal/TODO.md 记了选择域环境的理由
+    （`algebraMap ℚ R (1/48)` 会被 `ring` 当成不透明原子，曾让一名 formalizer 停摆一轮）。
+  - |
+    **「这两组多项式是那两个李代数的伴随迹」不在本推导内**。它由
+    math.so-usp-adjoint-fundamental-trace-identities（情形 a）与
+    math.e8-adjoint-trace-identities（情形 b）承载，两者都是 physical-argument（GS 不证，
+    Polchinski 也把它们留作 Exercise 12.1 / 12.2）。要用本卡说任何关于**李代数**的话，
+    必须把这两条边接上，届时有效状态会掉回 physical-argument——
+    `--via-direct-expansion` 就是那本账。
+  - |
+    **不含任何唯一性 / 分类**（「只有 SO(32) 与 E₈ × E₈ 因子化」）。Lean 侧 docstring 明写这一点。
+  - |
+    **有效状态仍是 physical-argument**，瓶颈经 math.tr-f6-coefficient-vanishing 落到
+    math.so-usp-adjoint-fundamental-trace-identities。若把本卡改写成完全不提李代数的纯多项式
+    命题（去掉 (a) 括号里对 SO(32) 的指认），本推导就会是 formalized 到底——
+    但那要新建陈述卡，本轮不做，记在此处供后续裁决。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string 跑
+
+      uv run stringgraph check-axioms --decl StringFormal.Math.gs_factorization_so32 \
+        --decl StringFormal.Math.gs_factorization_e8 \
+        --decl StringFormal.Math.gs_factorization_nested_eq_expanded
+
+  三条全部 `ok … axioms: propext Classical.choice Quot.sound`
+  （`3 declarations checked: 3 ok, 0 non-standard, 0 missing; 0 errors`）。
+  本分支未改动 formal/ 下任何文件。
+author: curator
+created: "2026-09-11"

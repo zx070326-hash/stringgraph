@@ -1,0 +1,56 @@
+id: consistency.higher-point-anomalies-fixed-by-hexagon
+kind: proposition
+title: 十维反常来自六条或更多外线的手征圈图；外线多于六条者由六边形图唯一决定，其形式由 Wess–Zumino 相容条件定出
+statement: |
+  在十维规范理论中：
+
+  **(1)** 反常来自**有六条或更多外线、圈上跑手征场**的图。
+
+  **(2)** 外线**多于**六条的反常由**六边形图唯一决定**。
+
+  **(3)** 那些高点反常的形式可以通过实施 **Wess–Zumino 相容条件**定出。
+
+  **本卡不断言**：
+  (a) 六边形反常本身的值——那是 Alvarez-Gaumé–Witten 一路的指标定理计算，本图未取得该文；
+  (b) 「2n 维反常 ↔ 2n+2 维不变多项式」这条升维字典——consistency.anomaly-descent-to-twelve-form；
+  (c) 相容条件的解**在同伦意义下唯一**（即"唯一决定"的严格版本）——见 gaps 与 notes，
+      本图对此**没有任何已核实来源**；
+  (d) 任何具体的多项式或系数。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 上一段逐字：「Anomalies in ten-dimensional gauge theories arise from loop diagrams with six or more external lines and chiral fields circulating around the loop. The anomalies corresponding to diagrams with more than six external lines are **uniquely determined** by the hexagon diagrams. Their form can be deduced by implementing the Wess–Zumino consistency conditions [8].」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E6）。
+      ★ **GS 自己不做这个推导**，逐字是「can be deduced by」；且**「uniquely determined」没有给出处**
+      （紧随的 [8] 只标在 Wess–Zumino 相容条件上，不标在唯一性上）。
+  - ref: wess-zumino-1971
+    loc: "全文（GS ref. [8]，Wess–Zumino 相容条件的出处）"
+    note: 本项目未取得全文（L0）。GS 只引不复述。相容条件本身在本图由 consistency.descent-omega1-is-consistent-anomaly 承载（其来源是 zumino-1983-les-houches，L1）。
+tags: [anomaly, hexagon, d10, wess-zumino-consistency, green-schwarz]
+notes: |
+  【0. ★ 本卡是 consistency.anomaly-twelve-form-d10 拆分出来的命题之一（2026-09-11）】
+  旧卡是 `definition`，却把这条论断内嵌在 statement 里；旧卡 notes 第 5 条已记它「在 Zumino 一侧
+  没有支撑」，但那只是散文。拆出独立节点后，这条缺口成为图里可被 `stringgraph why` 追踪的瓶颈。
+
+  【1. ★ 「唯一决定」在本图没有任何已核实来源】
+  · GS 只断言，不给出处（见 sources）；
+  · GS ref. [8] = wess-zumino-1971 本项目未取得；
+  · GS ref. [10] 第一项 zumino-1983-les-houches **全文已取得（L1）**，
+    但 p.29 逐字：「**The problem of finding the most general solution of the consistency condition
+    will not be discussed here.**」⇒ **Zumino 一侧明确把相容条件的最一般解排除在讨论之外**；
+  · 真正的唯一性（相容反常的上同调分类）属 manes-stora-zumino-1985 (CMP 102 (1985) 157) 一线，
+    **本项目正文一字未取到**。
+  ⇒ 本卡的 (2) 与 (3) 合起来所需的那半个唯一性，目前**只有 GS 的断言**。
+  这条缺口已同时写在 consistency.descent-omega1-is-consistent-anomaly--via-brs-descent 与
+  consistency.anomaly-cancellation-*-effective-theory--via-* 的 gaps 里。
+
+  【2. 与 consistency.descent-omega1-is-consistent-anomaly 的分工】那张卡说下降链给出的
+  ω¹_{2n−2} **是相容条件的一个解**（存在性，L1 有来源）；本卡说高点反常**被六边形唯一决定**
+  （唯一性，无来源）。存在性与唯一性是两条命题，不要混为一谈。
+
+  【3. (1) 那半句本身】「反常来自六条或更多外线的图」在 D = 10 是标准的维数计数
+  （2n 维的反常来自 n+1 点函数，n+1 = 6），GS 也不证。本图未为这条计数单独建节点。
+author: curator
+created: "2026-09-11"

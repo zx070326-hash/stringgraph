@@ -28,14 +28,15 @@
   year      = {1998},
   note      = {抽取记录 extractions/polchinski-1998-v2.md（ch.10--11，E1--E63）、
                extractions/polchinski-1998-v2-sec10-8.md（**§10.8 单节深读，E64--E75，续 E63 编号**，
-               引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）与
-               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）。
+               引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）、
+               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）与
+               extractions/polchinski-1998-v2-ch13.md（**ch.13 D-branes，E 编号独立从 E1 起**，引用须写 `-ch13#E<n>`）。
                **本项目实读的是 Cambridge Books Online 版**：© Cambridge University Press 2001, 2005，
                DOI 10.1017/CBO9780511618123，即 2005 平装本数字化，**已含 1999/2000 两次 "with corrections"**。
                引用式号时按此版；1998 初印本个别公式内容可能不同。书 hash `2D456468D20AA8A9CE10CEB08B95B9DC`。
-               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)。
-               **未读**：Notation (xviii--xx)、ch.13 及以后、Appendix B、References (467--487)。
-               ⚠ 四条使用限制：
+               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)、ch.13 (pp.136--177)。
+               **未读**：Notation (xviii--xx)、ch.14 及以后、Appendix B、References (467--487)。
+               ⚠ 六条使用限制：
                (1) **§12.2 p.101 脚注 1 提到 `E8 x U(1)^248` 与 `U(1)^496`，但只说两条 properties "hold"，
                    既无 "cancel"/"factorize" 的动词，也无任何唯一性/完备分类主张** ——
                    不得据此写「十维 N=1 反常自由规范群恰有四个」；
@@ -43,10 +44,19 @@
                    Core 版已含勘误却未改，引用时须在 notes 里写明；
                (3) **§12.2 的十维反常多项式 (12.2.11)--(12.2.13) 本书不推导**，原文
                    "we will not repeat it here but just quote the result"，且正文不给引文编号；
-               (4) **§10.8 的 (10.8.4)/(10.8.11)/(10.8.18)/(10.8.19) 前缀在页图上七处都读作
-                   `8*pi*(8*pi^2*alpha'^2)^5`，但两次独立变量代换与量纲都要求 `8*pi*(8*pi^2*alpha')^5`**
-                   （疑似渲染假象或系统性排印错误，见 -sec10-8#Q1）。**不影响 `(n -+ 32)^2` 与 SO(32) 结论**（公因子），
-                   但引用完整前缀前须由人复核 pp.38/41/42。}
+               (4) **§10.8 的 (10.8.4)/(10.8.11)/(10.8.18)/(10.8.19) 与 §13.3 的 (13.3.1) 前缀在页图上共八处都读作
+                   `8*pi*(8*pi^2*alpha'^2)^5`，但 §10.8 的两次变量代换 + 量纲、以及 §13.3 独立的 alpha' 幂次记账
+                   都要求 `8*pi*(8*pi^2*alpha')^5`**（见 -sec10-8#Q1 与 -ch13#Q3；两章两条不同推导得同一结论）。
+                   **不影响 `(n -+ 32)^2` 与 SO(32) 结论**（公因子），但引用完整前缀前须由人复核 pp.38/41/42/146；
+               (5) **★★ ch.13 从不写「32 张 D9 膜」**：全章唯一给出 D9 数目的句子是 p.144
+                   「a third state that contains **16 D9-branes** (and an orientifold 9-plane) that looks like the type I theory」，
+                   且 p.143 的记账是「`2^k` 张 orientifold 面、**仍是 16 张 D 膜**、每张 O 面荷 `-2^(4-k)` 倍」。
+                   同节 p.141 另有一句「each Chan--Paton degree of freedom ... as a 9-brane」（蕴含 32 张），
+                   **原书从不调和这两种计数**（见 -ch13#Q1）。
+                   ⇒ **不得把「SO(32) = 32 张 D9 膜」这句通行说法归给本书**；要用该表述须另找来源；
+               (6) **ch.13 与 §10.8 的依赖方向是 §10.8 -> ch.13**：ch.13 三处（pp.141/142/147）都把 tadpole 相消
+                   当已知输入，p.147 逐字「We deduced from the cancellation of divergences that ...」；
+                   唯一可能的独立路线（D 膜--O 面之间的力）被明写推给读者。**ch.13 不是 SO(32) 的独立推导**。}
 }
 
 @book{gsw-1987-v1,
@@ -2597,7 +2607,8 @@
              重印本把期刊页码换成书页码；本图 green-schwarz-1984 的 loc 一律写「PLB p.NNN（重印 MMM）」，
              其中「重印 608+k <-> PLB 117+k」这条映射是**推出来的**（§0.3），不是页面直证。}
 }
-% ============================================================% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
+% ============================================================
+% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
 % 抽取记录：literature/extractions/math-sources.md §39
 % ============================================================
 @book{gallier-xu-2013,
@@ -3298,5 +3309,188 @@
             **=> PCO 方法没有被废弃，而是被补上了分片拼接规则。**
             ⚠ 该引文只可能出现在 1209.5461 的 v3/v4，不在 2012 年的 v1 里。
             **红线：正文未读，不得引用任何式号。**}
+}
+
+@incollection{zagier-2008,
+  author    = {Zagier, Don},
+  title     = {Elliptic Modular Forms and Their Applications},
+  booktitle = {The 1-2-3 of Modular Forms},
+  editor    = {Ranestad, Kristian},
+  series    = {Universitext},
+  publisher = {Springer},
+  address   = {Berlin},
+  pages     = {1--103},
+  year      = {2008},
+  doi       = {10.1007/978-3-540-74119-0_1},
+  note      = {由 researcher 于 2026-09-11 登记。**出版社排版全文已到手并逐页读图（L1）**，
+               获取途径：作者本人 MPIM 主页
+               https://people.mpim-bonn.mpg.de/zagier/files/doi/10.1007/978-3-540-74119-0_1/fulltext.pdf
+               （1.2 MB；WebFetch 落盘后 Read 带 pages 读页图；**PDF 页码 = 书页码**，正文首页 = p.1）。
+               这是作者自建页上的合法一手件，不是盗版扫描。
+               **可引用的编号结果：§3.2「Invariants of Even Unimodular Lattices」，书上 p. 33，Proposition 12**，逐字为
+               「Let Q : Z^m -> Z be a positive definite even unimodular quadratic form in m variables. Then
+               (i) the rank m is divisible by 8, and (ii) the number of representations of n in N by Q is given
+               for large n by the formula R_Q(n) = -(2k/B_k) sigma_{k-1}(n) + O(n^{k/2}) (n -> infinity), (38)
+               where m = 2k and B_k denotes the kth Bernoulli number.」，带完整证明（p. 33--34）。
+               证明依赖同书 p. 32 的 **Theorem (Hecke, Schoenberg)**（原书**只给人名、无编号**）与 Proposition 8、Section 2。
+               **作者自陈强度（逐字，p. 34）**：「The first statement of Proposition 12 is purely algebraic, and purely
+               algebraic proofs are known, but they are not as simple or as elegant as the modular proof just given.
+               No non-modular proof of the asymptotic formula (38) is known.」
+               **用途与陷阱**：(a) 本书对「16 维恰有两个」**只说 one knows that，无编号、无证明、正文无引文**
+               （p. 34「However, in rank 16 one knows that there are two non-equivalent lattices…」，
+               p. 36「there are two non-isomorphic even unimodular lattices Lambda_1 = Gamma_8 + Gamma_8 and
+               Lambda_2 = Gamma_16 in dimension 16」）**==> 16 维分类不得引本书**；
+               (b) 同文记号从 Lambda_8/Lambda_16（p.34）换成 Gamma_8/Gamma_16（p.36）；
+               (c) p. 34 把 Niemeier 拼成「Niemeyer」；
+               (d) p. 33 证明末句的极限变量读图存疑（见 extractions/math-sources.md §47.7 Q47.7），该句不得照抄。
+               见 extractions/math-sources.md §47.2。}
+}
+
+@misc{chenevier-lannes-2014,
+  author       = {Chenevier, Ga{\"e}tan and Lannes, Jean},
+  title        = {Formes automorphes et voisins de {K}neser des r{\'e}seaux de {N}iemeier},
+  year         = {2014},
+  eprint       = {1409.7616},
+  archivePrefix = {arXiv},
+  primaryClass = {math.NT},
+  note         = {由 researcher 于 2026-09-11 登记。**法文专著（约 380 页 + 附录）；正文页图已直读（L1）**，
+                  获取途径 arxiv.org/pdf/1409.7616v1 落盘 3.4 MB + Read 带 pages。**PDF 页 = 书页 + 4。**
+                  （注意 ar5iv.labs.arxiv.org/html/1409.7616 超 WebFetch 的 10 MB 上限，走不通。）
+                  **可引用的编号结果：ch. II「Alg{\`e}bre bilin{\'e}aire et quadratique」, §3, 书上 p. 35，Corollaire 3.6**，逐字为
+                  「Tout r{\'e}seau unimodulaire pair de dimension 16 est isomorphe {\`a} D_16^+ ou {\`a} E_8 + E_8
+                  (et ces deux r{\'e}seaux ne sont pas isomorphes).」，带完整证明（Venkov 策略：
+                  theta 级数 = 归一化 Eisenstein 级数 E_8 => |R(L)| = 480, h(L) = 30 => 「par inspection」
+                  R(L) = D_16 或 E_8 + E_8 => 格论收尾）。配套编号：**Corollaire 3.5 (p. 34)** = 8 维唯一 E_8；
+                  **Proposition 3.2 (p. 33)** Venkov 恒等式；**Proposition-D{\'e}finition 3.3 (p. 34)**；
+                  **Th{\'e}or{\`e}me 3.12 / 3.13 (p. 41)** = Leech 与 24 维的 24 类。
+                  **归属（p. 33 逐字，无编号散文句）**：「Cette classification est due {\`a} Louis J. Mordell en dimension 8,
+                  {\`a} Ernst Witt en dimension 16 et {\`a} Hans-Volker Niemeier en dimension 24 [Ni73].」
+                  **陷阱**：(a) 本书对「秩被 8 整除」只说「Il est bien connu que…」（p. 1），**不证不引 ==> (A) 不得引本书**；
+                  (b) 本书的 **E_16 就是 D_16^+**（E_n := D_n + Ze），**不是李代数**；
+                  (c) **附录 A 的 Lambda_16 是 Barnes--Wall 格，与 Zagier 的 Lambda_16（= D_16^+）是两个不同的格**；
+                  (d) **英文出版版**（Automorphic Forms and Even Unimodular Lattices, Ergebnisse 69, Springer 2019）
+                  **编号几乎肯定不同，本 bib 登记的是 arXiv 版，loc 必须写 arXiv 版的号**；
+                  (e) **版本悬案**：取到的 PDF 侧栏 stamp 印「arXiv:1409.7616v1 [math.NT] 26 Sep 2014」，
+                  扉页却印「30 juin 2022」，两者不自洽；arXiv API 报存在 v2。**引用时不要写死版本号。**
+                  见 extractions/math-sources.md §47.3、§47.7 Q47.3/Q47.4。}
+}
+
+@book{serre-1973-arithmetic,
+  author    = {Serre, Jean-Pierre},
+  title     = {A Course in Arithmetic},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {7},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1973},
+  doi       = {10.1007/978-1-4684-9884-4},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 章级定位为 L2（Crossref 单-DOI 元数据）：
+               **Ch. V「Integral Quadratic Forms with Discriminant ± 1」= pp. 48--58**
+               （章 DOI 10.1007/978-1-4684-9884-4_5）；Ch. IV「Quadratic Forms over Q_p and over Q」pp. 27--47；
+               Ch. VII「Modular Forms」pp. 77--111。
+               **红线：本书任何定理号（例如常被转引的「Ch. V, Theorem 2」）本项目均未核实，不得写入图。**
+               可写的最强形式是 loc = 「Ch. V, pp. 48--58（章定位 L2，定理号未核实）」。
+               失败路线（别再花预算）：link.springer.com 登录墙；
+               books.google.com/books?vid=ISBN9780387900407 明写「No eBook available」**无预览**，
+               故 Google Books 的 &q= 定位法对本书无效；googleapis Books API 三次 HTTP 429。
+               **旁证**：Chenevier--Lannes 参考文献（L1 逐字）引的是法文原版
+               「[Ser70] J.-P. Serre, Cours d'arithm{\'e}tique, P.U.F., Paris (1970)」，
+               并用它给出 |X_32| > 8·10^6（质量公式下界）==> 本书确有「定正情形 + 质量公式」的讨论，但编号仍未核实。
+               见 extractions/math-sources.md §47.4(a)。}
+}
+
+@book{milnor-husemoller-1973,
+  author    = {Milnor, John and Husemoller, Dale},
+  title     = {Symmetric Bilinear Forms},
+  series    = {Ergebnisse der Mathematik und ihrer Grenzgebiete},
+  volume    = {73},
+  publisher = {Springer},
+  address   = {Berlin},
+  year      = {1973},
+  doi       = {10.1007/978-3-642-88330-9},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 书目由两条独立来源相符：
+               (i) Crossref 章级元数据（L2）；(ii) Chenevier--Lannes 参考文献 p. 379 逐字（L1）
+               「[MH73] J. Milnor & D. Husemoller, Symmetric bilinear forms, Ergebnisse der Math. und ihrer
+               Grenzgebiete 73, Springer Verlag (1973)」。
+               **章级目录（L2，Crossref）**：I Basic Concepts pp. 1--14；
+               **II Symmetric Inner Product Spaces over Z pp. 15--55**（全书最长的一章，41 页）；
+               III Inner Product Spaces over a Field pp. 56--83；IV Discrete Valuations and Dedekind Domains pp. 84--99；
+               V Some Examples pp. 100--109。
+               **红线：本书任何定理号（例如常被转引的「Ch. II, Theorem 5.1 / 6.1」）本项目均未核实，不得写入图。**
+               「秩/号差 ≡ 0 mod 8」若在本书，只可能在 **Ch. II**（ℤ 上的对称内积空间）。
+               见 extractions/math-sources.md §47.4(b)。}
+}
+
+@book{conway-sloane-1999,
+  author    = {Conway, John H. and Sloane, Neil J. A.},
+  title     = {Sphere Packings, Lattices and Groups},
+  edition   = {3},
+  series    = {Grundlehren der mathematischen Wissenschaften},
+  volume    = {290},
+  publisher = {Springer},
+  address   = {New York},
+  year      = {1999},
+  doi       = {10.1007/978-1-4757-6568-7},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 书目两条独立来源相符：
+               Crossref（L2）与 Chenevier--Lannes 参考文献 p. 375 逐字（L1）
+               「[CS99] J.H. Conway & N. J. A. Sloane, Sphere packings, lattices and groups,
+               Grundlehren der Math. Wissenschaften 290, Springer-Verlag, New York (1999)」。
+               **章级定位（L2，Crossref）**：**Ch. 16「Enumeration of Unimodular Lattices」= pp. 406--420，
+               在第 1 版 (1988)、第 2 版 (1993)、第 3 版 (1999) 里页码完全相同**（章 DOI 分别在
+               10.1007/978-1-4757-2016-7 / -2249-9 / -6568-7 之下的 _16）==> 引到章是版次稳健的。
+               ⚠ 但 Ch. 19「Enumeration of Extremal Self-Dual Lattices」页码**随版本变**（1988/1993: 439--442；1999: 441--444），
+               不要把「SPLAG 页码不随版本变」当通则。
+               **★ 一条重要的结构信息（L1，CL 参考文献 p. 383 逐字）**：
+               「[Ven80] B. Venkov, On the classification of integral even unimodular 24-dimensional quadratic forms,
+               **Chapitre 18 de [CS99]**」==> Venkov 的分类文章就是本书第 18 章；
+               与 chenevier-lannes-2014 Corollaire 3.6 的证明策略同源的是 **Ch. 18**，不是 Ch. 16。
+               **红线：任何定理号或表号（含常被转引的「Table 16.7」）均未核实，不得写入图。**
+               见 extractions/math-sources.md §47.4(c)。}
+}
+
+@article{witt-1941,
+  author  = {Witt, Ernst},
+  title   = {Eine Identit{\"a}t zwischen Modulformen zweiten Grades},
+  journal = {Abhandlungen aus dem Mathematischen Seminar der Universit{\"a}t Hamburg},
+  volume  = {14},
+  pages   = {323--337},
+  year    = {1941},
+  doi     = {10.1007/BF02940750},
+  note    = {由 researcher 于 2026-09-11 登记。**正文未获取（L0，Springer 墙）。**
+             书目由两条独立来源相符：(i) Crossref（L2）DOI 10.1007/BF02940750，卷 14，pp. 323--337，1941 年 12 月；
+             (ii) Chenevier--Lannes 参考文献 p. 384 逐字（L1）
+             「[Wit41] E. Witt, Eine Identit{\"a}t zwischen Modulformen zweiten Grades,
+             Abh. Math. Sem. **Hansischen** Univ. 14, 323--337 (1941)」。
+             ⚠ 刊名差异不是错：1933--1945 年汉堡大学名为「Hansische Universit{\"a}t」，1941 年那一卷印的就是 Hansischen Univ.。
+             重印：Witt, Collected Papers -- Gesammelte Abhandlungen (Springer, 1998), **pp. 313--329**,
+             DOI 10.1007/978-3-642-41970-6_37（L2）。
+             **★★ 必须记下的溯源缺口**：常见转引说「Witt 1941 证明了 16 维偶幺模格恰有两个」，
+             但本项目**没有任何来源逐字支持这一点**。Chenevier--Lannes 把 16 维分类归给「Ernst Witt」时**不给文献标签**（p. 33），
+             而他们**唯一一次带标签地引用 [Wit41]，是在附录 A (p. 340) 用于 Siegel theta 级数恒等式**：
+             「l'{\'e}galit{\'e} des s{\'e}ries th{\^e}ta ... pour g <= 3 (r{\'e}sultat d{\^u} {\`a} Witt pour **g <= 2** [Wit41])」。
+             **红线：不得写「Witt (1941) proved there are exactly two ...」，除非有人读到该文正文。**
+             见 extractions/math-sources.md §47.4(e)、§47.7 Q47.2。}
+}
+
+@book{ebeling-2013,
+  author    = {Ebeling, Wolfgang},
+  title     = {Lattices and Codes: A Course Partially Based on Lectures by Friedrich Hirzebruch},
+  edition   = {3},
+  series    = {Advanced Lectures in Mathematics},
+  publisher = {Springer Spektrum},
+  address   = {Wiesbaden},
+  year      = {2013},
+  doi       = {10.1007/978-3-658-00360-9},
+  note      = {由 researcher 于 2026-09-11 登记。**正文未获取（L0）。** 章级定位为 L2（Crossref）。
+               **⚠⚠ 三个版本的页码全不同，引用必须写死版次**：
+               「Even Unimodular Lattices」一章在 1994 版 (DOI 10.1007/978-3-322-96879-1) 是 **Ch. 3, pp. 83--103**；
+               2002 版 (10.1007/978-3-322-90014-2) 是 **Ch. 3, pp. 87--108**；
+               第 3 版 (10.1007/978-3-658-00360-9，Crossref 章条目标 2012、书条目标 2013) 是 **Ch. 3, pp. 77--95**。
+               第 3 版其余章：Ch. 1「Lattices and Codes」pp. 1--32；Ch. 2「Theta Functions and Weight Enumerators」pp. 33--75；
+               Ch. 5「Lattices over Integers of Number Fields and Self-Dual Codes」pp. 121--157。
+               **红线：定理号未核实，且连章号都未定**——「秩 ≡ 0 mod 8」按标准证法走 theta 函数，
+               **既可能在 Ch. 2 也可能在 Ch. 3**，本项目两种都无法排除。
+               本条登记的年份/版次以第 3 版为准；**若要引 1994 或 2002 版必须另建 key**。
+               见 extractions/math-sources.md §47.4(d)。}
 }
 

@@ -43,6 +43,16 @@ notes: |
   A6（迹恒等式的 l ∈ {−1,0,+1} 统一版）同属 Green–Schwarz 反常代数的可形式化碎片，
   且是其中**唯一一条组合学的**。**目标卡的 formal.lean_decl 待 formalizer 填。**
 
+  【★ 2026-09-11 更新：Lean 声明已就位，但只覆盖 n = 6，故另立卡】
+  formalizer 已在 formal/StringFormal/Math/FiniteCounts.lean 做出
+  `StringFormal.Math.hexagon_odd_twist_count`，其字面陈述是
+  `∑ k ∈ (range 7).filter Odd, Nat.choose 6 k = 32`——**只是 n = 6 的数值实例**，
+  既不含本卡的一般 n 恒等式，也不含「= 奇基数子集个数」这一组合解释。
+  按 docs/STATUS_LEVELS.md「Lean 证明用的对象若与卡片定义不逐句一致…正确做法是拆卡」，
+  本卡**不挂** `formal.lean_decl`、**不加** `--via-lean`；与该声明逐句对应的那一半
+  另立为 **math.hexagon-odd-twist-count-six**（formalized）。
+  ⇒ 本卡维持 physical-argument，等 reviewer 复核两行二项式论证后再按上一条升 rigorous。
+
   【与 math.mixed-anomaly-trace-conditions-n32 / math.tr-f6-coefficient-vanishing 并列】
   三者都是「为什么是 32」的算术入口，但来路不同：
   · math.tr-f6-coefficient-vanishing：纯规范反常的迹恒等式系数 N + 32l = 0；

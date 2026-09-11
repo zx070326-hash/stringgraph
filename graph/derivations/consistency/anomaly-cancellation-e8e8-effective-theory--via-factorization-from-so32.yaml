@@ -16,8 +16,13 @@ depends_on:
       as before」，即把 SO(32) 一路的论证换上 E₈ 的迹恒等式重跑一遍。
   - id: consistency.gs-counterterms-1984
     note: (18′)(21)(23′) 三段反项（S₂ 与 SO(32) 共用）。
-  - id: consistency.h-field-strength-chern-simons
-    note: (4′) 的 H（两个 E₈ 因子各带 1/30）与 (9c′) 的 δB。
+  - id: consistency.h-field-strength-definition
+    note: |
+      (4′) 的 H（两个 E₈ 因子各带 1/30）。
+      【2026-09-11】原依赖 consistency.h-field-strength-chern-simons 已拆卡换代；
+      该卡第 (2) 段的 (9c′) 现由下一条边承载。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    note: (9c′) 的 δB（两个 E₈ 因子各带 1/30，与 (4′) 配套）。
   - id: consistency.gravitational-anomaly-requires-496-fermions
     note: |
       n = 496；E₈ × E₈ 的伴随维数 2 × 248 = 496。GS 的**早期版本**恰恰只注意到这一条
