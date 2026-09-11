@@ -1,0 +1,143 @@
+id: math.dedekind-eta-s-transformation--via-lean
+target: math.dedekind-eta-s-transformation
+kind: proof
+status: formalized
+depends_on:
+  - id: math.dedekind-eta-function
+    inferred: false
+    note: |
+      **本推导的 η 就是这张定义卡的 η，逐字核对过**（2026-09-11，formalizer 读 Mathlib 源码 L1，
+      curator 复核）：Lean 侧的对象是 Mathlib 的
+        `ModularForm.eta (z : ℂ) : ℂ := 𝕢 24 z * ∏' n, (1 - ModularForm.eta_q n z)`，
+        `Function.Periodic.qParam h z = Complex.exp (2 * π * I * z / h)`，
+        `ModularForm.eta_q n z = (𝕢 1 z) ^ (n + 1)`，
+      即 𝕢 1 z = exp(2πiz) = q（本卡的 q），𝕢 24 z = exp(2πiz/24) = exp(πiz/12)（本卡的 q^{1/24}
+      **以及它指定的那个单值分支**），∏' n:ℕ (1 − q^{n+1}) = ∏_{n≥1}(1 − q^n)（指标平移，
+      Lean 一律从 0 数起）。⇒ 与定义卡 statement 的 q、q^{1/24}、乘积三项**逐字一致**，
+      没有约定转换，故本推导**不需要** convention_map。
+      定义卡里另外两条断言（H 的紧子集上一致收敛 ⇒ 全纯；无零点）在 Mathlib 里也有
+      （`multipliableLocallyUniformlyOn_eta`、`differentiableAt_eta_of_mem_upperHalfPlaneSet`、
+      `eta_ne_zero`），但本推导只用到「η = 那个乘积」这一条。
+      ⚠ Mathlib 的 `ModularForm.eta` 在 **全 ℂ** 上有定义（ℍ 外是垃圾值）；本定理的假设
+      `0 < z.im` 把讨论限回 H，与定义卡的定义域一致。
+      ⚠⚠ **这条边目前是本推导有效状态的瓶颈**：定义卡 own status 是 rigorous（未标 formalized），
+      按 docs/STATUS_LEVELS.md 的 min 规则，本推导 own=formalized 但 effective=rigorous。
+      这是**有意保留**的诚实记账，不是疏漏：解开它的正确做法是让定义卡自己成为 formalized
+      （它的四条断言在 Mathlib 里全有），而那需要 lead 裁定「lean_decl 能否指向 Mathlib 声明」
+      ——本图现有 67 条 lean_decl 全部指向 `StringFormal.*`，且 validate 要求 `formal.lean_file`
+      存在于 `formal/` 下。见本推导 notes 末尾提给 lead 的一条。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/DedekindEtaS.lean :: StringFormal.DedekindEta.eta_neg_inv；支撑链 csqrt_neg_I → csqrt_neg_I_mul → eta_neg_inv → {eta_S, eta_modular_S_smul}；推论链 csqrt_sq(private) → norm_eta_neg_inv_sq → norm_eta_neg_inv_pow_four → {im_mul_norm_eta_pow_four_S_invariant, im_mul_norm_eta_pow_four_modular_S_smul}"
+    note: |
+      本仓库，形式化侧提交 **77e171c**（"formal: prove Dedekind eta S-transformation in string
+      normalisation (eta-s)"）+ **1b29b83**（"formal: add modular-action forms of the eta
+      S-transformation"），合并提交 **4d9e721**（"Merge branch 'agent/formalizer/eta-s'"）；
+      Lean 4 + Mathlib **v4.33.1**。目标声明全文（与目标卡 statement 逐字对应）：
+
+          theorem eta_neg_inv {z : ℂ} (hz : 0 < z.im) :
+              ModularForm.eta (-z⁻¹) = (-I * z) ^ ((1 : ℂ) / 2) * ModularForm.eta z
+
+      指数 `((1:ℂ)/2)` 是 **ℂ 的 cpow 主分支**（formalizer 用 `pp.numericTypes` 复核过类型，
+      不是自然数幂也不是实数幂）；这正是目标卡「(−iτ)^{1/2} 取主分支」那一句。
+      前提只有 `0 < z.im`（= τ ∈ H），**无其它假设**。
+      伴随声明：`eta_S`（`τ : ℍ` 版）、`eta_modular_S_smul`（`η(S • τ) = (−iτ)^{1/2} η(τ)`，
+      为将来接 worldsheet.modular-group-generated-by-s-and-t 备的形状）、
+      `im_mul_norm_eta_pow_four_S_invariant`（目标卡「推论」的 S 半）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/DedekindEtaS.lean 文件头 docstring（\"What is actually proved here, and where the content comes from\"）"
+    note: |
+      **诚实归属：数学内容几乎全部是 Mathlib 的，不是本项目的。** 文件头逐字自述
+      「The mathematical content is **entirely Mathlib's**」。实际输入是 Mathlib v4.33.1 的
+        `ModularForm.eta_comp_eq_csqrt_I_inv`
+        （`Mathlib/NumberTheory/ModularForms/Discriminant.lean`，2026 新增文件，作者 Birkbeck）：
+        `upperHalfPlaneSet.EqOn (η ∘ (-1 / ·)) ((Complex.sqrt I)⁻¹ • (Complex.sqrt * η))`，
+      即 η(−1/z) = (√i)⁻¹ √z · η(z)，其中 `Complex.sqrt w = w ^ (2⁻¹ : ℂ)`
+      （`Mathlib/Analysis/RCLike/Sqrt.lean`，主分支）。Mathlib 那边的证明路线是
+      `logDeriv_eta_comp_div_eq` → `logDeriv_eta_comp_eq_logDeriv_csqrt_eta`（用 `E2_slash_action S`）
+      → `logDeriv_eqOn_iff` 定出常数 → 在 z = I 处定常数 = (√i)⁻¹。
+      ⚠ **本图不为 Mathlib 的这条定理建节点，也不审计它的证明**：证据标准由
+      `lake build` + 无 sorry + 公理集合承载（stringformal-2026 条目的规定），
+      而 Mathlib 的这条定理在同一次构建里被检查。
+      ⇒ 本项目自己加的唯一新数学是 `csqrt_neg_I_mul`（归一化那一步），见 summary。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Math/DedekindEtaS.lean（90 行）内完成，
+  数学输入是 Mathlib 的 `ModularForm.eta_comp_eq_csqrt_I_inv`。三步：
+
+  **(1) Mathlib 给出的是另一种归一化。** Mathlib 证的是
+     η(−1/z) = (√i)⁻¹ · √z · η(z)（`Complex.sqrt w = w^{1/2}` 主分支），
+  而弦论文献（Polchinski (7.2.44b)）与本目标卡写的是 η(−1/τ) = (−iτ)^{1/2} η(τ)。
+  两式差在自守因子的写法：(√i)⁻¹√z ↔ (−iz)^{1/2}。
+
+  **(2) 归一化的那一步（本项目唯一的新数学，`csqrt_neg_I_mul`）。** 在 H 上主平方根对 −i 是可乘的：
+     √(−i z) = (√i)⁻¹ √z    （0 < Im z）。
+  证法：`Complex.log_mul` 要求 arg(−i) + arg z ∈ (−π, π]；由 `Complex.arg_neg_I` 得 arg(−i) = −π/2，
+  由 `arg_nonneg_iff`（Im z ≥ 0 ⇒ arg z ≥ 0）与 `arg_le_pi`（arg z ≤ π）得
+  −π/2 ≤ arg(−i) + arg z ≤ π/2 ⊂ (−π, π]，故主对数可加：log(−iz) = log(−i) + log z。
+  两边除 2 取 exp，并用 `csqrt_neg_I`（√(−i)·√i = exp(−πi/4)·exp(πi/4) = 1 ⇒ √(−i) = (√i)⁻¹）即得。
+  ⚠ 注意**不需要** arg z > 0 的严格性：`log_mul` 的下端由 arg z ≥ 0 就够，所以 Im z > 0
+  这条假设只在「z ≠ 0」与「arg z ≥ 0」两处被用到。
+
+  **(3) 代入。** `eta_neg_inv` = Mathlib 的 `eta_comp_eq_csqrt_I_inv`（在 `hz : z ∈ ℍₒ` 处取值，
+  `simp only` 化掉 `Function.comp`/`Pi.smul_apply` 的包装）+ (2) 的重写
+  （`one_div` / `← Complex.sqrt` 把 `(-I*z)^((1:ℂ)/2)` 认成 `Complex.sqrt (-I*z)`）。
+
+  **推论（目标卡 statement 的第二段）**：`csqrt_sq`（主平方根平方回原值，对 w ≠ 0）给
+  ‖√(−iz)‖² = ‖−iz‖ = ‖z‖，于是 `norm_eta_neg_inv_sq`：|η(−1/τ)|² = |τ||η(τ)|²，
+  平方得 `norm_eta_neg_inv_pow_four`：|η(−1/τ)|⁴ = |τ|²|η(τ)|⁴；再用
+  Im(−1/z) = Im z/‖z‖²（`Complex.inv_im` + `normSq_eq_norm_sq`）得
+  `im_mul_norm_eta_pow_four_S_invariant`：Im(−1/τ)·|η(−1/τ)|⁴ = Im τ·|η(τ)|⁴，
+  即 τ₂|η|⁴ 在 **S** 下不变。模群作用形 `eta_modular_S_smul` /
+  `im_mul_norm_eta_pow_four_modular_S_smul` 由 `UpperHalfPlane.modular_S_smul` 改写而得。
+gaps:
+  - |
+    **只覆盖 S 这一个生成元。** 本推导（与目标卡）不含 T 变换
+    （math.dedekind-eta-t-transformation，2026-09-11 起也已形式化，见
+    StringFormal/Math/DedekindEtaT.lean），也不含 η 对一般 (a b; c d) ∈ SL(2,ℤ) 的乘子系统
+    （Dedekind 和）——Mathlib 也没有后者。
+    ⇒ **τ₂|η|⁴ 的「完整模不变性」仍不可标 formalized**：S 半与 T 半都有了，唯一缺的是
+    worldsheet.modular-group-generated-by-s-and-t（模群由 S、T 生成）的形式化。
+  - |
+    **有效状态被定义卡卡住。** depends_on 的 math.dedekind-eta-function 是 rigorous 的定义卡，
+    故本推导 own=formalized 而 effective=rigorous（目标卡 effective 仍是 rigorous，
+    与 --via-siegel-1954 同级）。这不是论证缺口，而是记账缺口，见那条边的 note。
+  - |
+    **Mathlib 的证明本图未审计。** 真正的解析内容（E₂ 的拟模性 → logDeriv η 的变换 → 定常数）
+    在 Mathlib 的 `Discriminant.lean` 里，本图既不为它建节点也不复核其论证；
+    我们承诺的只是「它在同一次 lake build 里通过、且目标声明的公理集合只有标准三条」。
+    与 --via-siegel-1954 的关系：那条推导是**人类可读的独立证明**（Siegel 的留数论证），
+    与本条是两条互不依赖的路径，图工具取高者。
+notes: |
+  由 curator（lean-wire-9）于 2026-09-11 依 lead 派工建立，接的是 formalizer 分支
+  `agent/formalizer/eta-s`（formal/TODO.md 的 `eta-s` 条目，已勾选）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：本 worktree 没有自己的 `.lake`，
+  故在 formalizer 的构建树 `.claude/worktrees/agent-adab9fd4d76756731`（其
+  `DedekindEtaS.olean` 时间戳 2026-09-11 12:01，晚于源文件 12:00）上跑
+
+      uv run stringgraph --root .claude/worktrees/agent-adab9fd4d76756731 \
+        check-axioms --decl StringFormal.DedekindEta.eta_neg_inv --decl ... （本文件 9 个公开声明）
+
+  输出：**9 declarations checked: 9 ok, 0 non-standard, 0 missing; 0 errors**，
+  每条的公理集合都只有 `propext Classical.choice Quot.sound`：
+  `csqrt_neg_I`、`csqrt_neg_I_mul`、`eta_neg_inv`、`eta_S`、`eta_modular_S_smul`、
+  `norm_eta_neg_inv_sq`、`norm_eta_neg_inv_pow_four`、
+  `im_mul_norm_eta_pow_four_S_invariant`、`im_mul_norm_eta_pow_four_modular_S_smul`。
+  ⚠ **该构建树上的 `DedekindEtaS.lean` 与本分支（= main）的那一份逐字相同**
+  （去掉行尾 CR 后 sha256 = e3e8d36dcec9210b02b7de176e80ffdf056328bbc1fe3899f771c0b34d5bb848，两边一致）。
+  ⚠ **主仓库工作树 D:\physics\string 的 `formal/.lake` 是 2026-09-11 11:45 的旧构建，
+  不含 `DedekindEtaS.olean`**（也不含 `IIBAnomalyUnique.olean`），所以那里跑不了本次检查；
+  lead 合并前按根 CLAUDE.md 重跑一次 `lake build` + `check-axioms` 即可覆盖。
+
+  **给 lead 的一条（记账，不是论证）**：目标卡 effective 之所以停在 rigorous，只因为
+  math.dedekind-eta-function 这张**定义卡**是 rigorous。它的四条断言（乘积定义、q^{1/24} 分支、
+  H 上全纯、无零点）在 Mathlib v4.33.1 里逐条都有（`ModularForm.eta`、
+  `multipliableLocallyUniformlyOn_eta`、`differentiableAt_eta_of_mem_upperHalfPlaneSet`、
+  `eta_ne_zero`），所以它**本可以**是 formalized。挡住的是本图的两条约定：
+  (i) 现有 67 条 `lean_decl` 全部指向 `StringFormal.*`，无指向 Mathlib 的先例；
+  (ii) `validate` 要求 `formal.lean_file` 是 `formal/` 下真实存在的文件。
+  两条出路（都不在本次派工范围内，curator 不擅自做）：让 formalizer 在
+  `StringFormal/Math/` 里加一层薄薄的重述（定义别名 + 三条性质的重新导出），
+  或由 lead 裁定允许 `lean_decl` 指向 Mathlib 并放宽 `lean_file`。
+author: curator-lean-wire-9
+created: "2026-09-11"
