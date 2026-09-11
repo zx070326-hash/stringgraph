@@ -123,6 +123,7 @@ sources:
       ⚠ 只借迹的**形式**，不借那张卡的"8 的倍数"结论。
 tags: [superstring, type-i, cylinder-amplitude, one-loop, ns-ns, closed-channel]
 notes: |
+  ⚠【reviewer-batch23，lead 落地】断言 (3)「第二行的 16 是十维无质量态的计数」是抽取记录的转述（gloss），**不是原书 (10.8.4) 处的断言**（推导 gaps 第 3 条自承原书不说 16 是什么）。statement 按原则 1 不改；下次实质换代时把该句移出断言。
   ★★【本卡为什么新建（curator，2026-09-11）】
   (10.8.4) 在本图此前**没有独立节点**：它只出现在
   worldsheet.type-i-tadpole-cancellation-so32-v2 的推导步骤里。这个缺口被两条下游推导各记了一次：

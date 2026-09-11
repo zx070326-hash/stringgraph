@@ -138,6 +138,7 @@ summary: |
   **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经由那些卡
   记账的后果。
 gaps:
+  - "**Euler–Poincaré 原理在本图无节点**（reviewer-batch23）：证明 (ii) 逐字 'By the Euler–Poincaré Principle'（LZ 用它把上同调维数换成复形的分次维数差），`search` 无命中；本推导与 `no-ghost-theorem-superstring-cohomological-*--via-lian-zuckerman-1989` 同样隐含使用。"
   - "**Proposition 4.2（char P̄_+C_rel = 8p₀^{(8)}(−p·p/2)）在本图没有卡**，它用的
      **Jacobi 公式**（theta 函数恒等式，LZ p.328 引 GSW Chap. 4）本图也没有卡。
      ⇒ 目标卡断言 (2) 的**数值**完全落在一条未上图的命题上；断言 (1) 与「n ≠ 0 时为零」不受影响。

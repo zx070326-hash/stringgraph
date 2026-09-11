@@ -35,15 +35,6 @@ depends_on:
       ★ 附带收益：本边**不经过** §10.8 最弱的一环（C₁₀ 悖论那段 'One can guess the resolution
       of this as follows' + 一个本书不给的 'more detailed analysis'，抽取记录 sec10-8.md #E67），
       而挂整张 SO(32) 卡时是经过的。
-  - id: worldsheet.type-i-tadpole-cancellation-so32-v2
-    note: |
-      **保留**作上下文边：该卡的推导覆盖 §10.8 的圆柱 / Klein 瓶 / Möbius 带真空振幅计算，
-      (10.8.4) 在原书里就长在那一节里。
-      ★ 2026-09-11 起 (10.8.4) 本身由 **worldsheet.superstring-cylinder-amplitude-closed-channel**
-      承担（见上一条边），本边退为"原书语境"的记账，**技术性内容已不再靠它**。
-      ⚠ 只用该卡推导里的圆柱振幅这一件，**不用** (n ∓ 32)² / SO(32) 结论：本卡讲 type II 的两张
-      平行 D 膜，与 type I 的无取向投影无关。
-      ⚠ 指 v2 而非 v1：v2 只订正了 (10.8.19) 前缀里 α' 的幂次，物理内容不变。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.3, p. 146：「We can calculate these forces explicitly from the usual cylinder vacuum amplitude. The exchange of light NS–NS closed strings was isolated in eq. (10.8.4). Modify this expression by removing the factors for the momentum integrations in the Dirichlet directions and introducing a term for the tension of a string stretched over a separation y^μ:」→ **(13.3.1)** 两行；同页逐字「The Chan–Paton weight is 2 here, from the two orientations of the open string, and there is no factor of ½ from the orientation projection because the physics is locally oriented.」"
@@ -116,6 +107,7 @@ gaps:
     **场论对照 (13.3.3) 与 G_d(y) 的出处引 Vol.1 (8.7.25)**，本图无该节点（二手源）。
     本卡只用 G_d 的显式表达式，不断言 (13.3.3)。
 notes: |
+  【2026-09-12 reviewer-batch23 必修，lead 落地】删去对 worldsheet.type-i-tadpole-cancellation-so32-v2 的「上下文边」：note 自承技术内容已不靠它，按原则 5 不承担论证的边不应存在；原书语境（(10.8.4) 长在 §10.8）由 sources loc 定位即可。至此本推导在结构上确实不再经过 §10.8 的 C₁₀ 环。
   reviewer-verified: reviewer-batch22, 2026-09-11（**只签前缀复算**：两行同给 iV·2^{2d−13}π^{3d/2−11}α'^{d−6}Γ(d/2−1)y^{2−d}，3−p = d−6，exp(−2πtα'm²) 与 m = y/2πα' 给 ty²/2πα'；2、π、α' 闭合；与 ch13.md §7.3 逐字一致。status 不变（原书 "combining the bosonic result" 无推导）。lead 落地。）
   【本推导是从哪条推导里拆出来的】
   branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation 的 summary 第 (2) 步

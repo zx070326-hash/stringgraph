@@ -165,6 +165,7 @@ sources:
       §7.7，未经 Crossref/INSPIRE 二次核对）。
 tags: [superstring, gso, brst, cohomology, rns, g-parity]
 notes: |
+  【reviewer-batch23，lead 落地】(H1) 的继承前提：LZ §1 常设「p 在半空间 {p^D > 0}」（auditor rulings-3 裁定 Thm 2.4 不用它），但 Prop 4.3(i) 谈的是 ⟨,⟩_rel 上的正交投影与等距，而 ⟨,⟩_R 的整体符号正靠该假设固定——故本卡 (i) 的「正交」一词隐含它；(ii) 的维数公式不依赖。
   ★★【本卡为什么新建（curator，2026-09-11）】
   worldsheet.superstring-relative-cohomology-vanishing-v2 的"本命题不断言 (e)"与
   worldsheet.no-ghost-theorem-superstring-cohomological 的"本命题不断言 (e)"都写着
