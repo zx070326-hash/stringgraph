@@ -322,7 +322,25 @@ gaps:
     与上一段【2026-09-12 再追记】「压缩到唯一一处」的定性完全一致，只是把那唯一一处
     （零态下界）本身的内部障碍（N≥5 重叠）也显式写出来。**本追记不改变任何判定**：
     本推导 `status: rigorous` 不变；目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记
-    而变化；(B-26) **仍不关闭**。"
+    而变化；(B-26) **仍不关闭**。
+
+    **【2026-09-12 四追记，curator，分支 agent/curator/b26-two-wire：`B26 2`（N = 2 秩不等式）现由
+    Lean 机检关闭，(B-26) 本身（∀N 版本）仍不关闭。本段之后一字未改上文，只追加，
+    status/sources/summary/论证步骤一字未动。】**
+    formal/StringFormal/NoGhost/LevelTwoCount.lean 把上一段【三追记】(i) 段的手算——
+    「`B26 2 ⟺ D = 26`」——第一次升级为机器验证的定理：`StringFormal.NoGhost.b26_two_of_D26`
+    证出 `D = 26 ⟹ B26 2`（`dim Z_2 ≥ D` 由 26 个线性无关零态给出，`linearIndependent_nullFamilyTwo`，
+    **独立性本身不用 `D = 26`**；`D = 26` 只通过其中一个零态——Type-2 后代
+    `𝒟₂|0;p_{−2}⟩`——的物理性这一步进入，即 `descTwo_single_mem_towerNullSubmodule`），
+    等价形式 `ddfSpans_bigrade_neg_two_two` 给出对应片上的 `DDFSpansOn`。图上新卡
+    **worldsheet.ddf-spans-physical-states-level-two**（formalized）与既有
+    worldsheet.ddf-spanning-rank-inequality 的新 notes 记录了这一步的细节，并把
+    「`¬B26 2` at `D ≠ 26`」尚未证明这件事登记为未来工作（PR5b″）。
+    ⚠ **这不关闭 (B-26)**：上文【三追记】(iv) 段的重叠问题只在 N ≥ 5 出现，N = 2 从不在那个
+    问题里（N ≤ 4 时两族零态像\"恰好相等\"，见【三追记】数值核对）；`B26 2` 关闭并不缩小
+    「两族零态像在 N ≥ 5 处的重叠」这一未解决的一般 N 问题的范围，一般 N 的 `∀N, B26 N`
+    仍是零证据的开放猜想。**本追记不改变任何判定**：本推导 `status: rigorous` 不变；
+    目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。"
   - |
     【2026-09-11（lean-wire-13）新增，curator】**第 (1b) 步用到的领头项
     A^i_{−n}|0;k⟩ = α^i_{−n}|0;k−n k_0⟩ + … 需要一条本推导没写出的假设：(T′) ε_i·k = 0**
