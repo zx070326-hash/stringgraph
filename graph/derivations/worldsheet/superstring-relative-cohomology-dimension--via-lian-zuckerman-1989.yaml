@@ -25,21 +25,6 @@ depends_on:
       ⚠ **LZ 与本图的中心荷/L₀ 归一化换算也随本边继承**（c_本图 = (3/2)c_LZ；R 扇区
       L₀^LZ = L₀^本图 − c/24），逐条写在那条推导的 convention_map 里。本推导需要它是因为
       目标卡 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 与 (H7) 的 "a = κ" 都经过该换算。
-  - id: worldsheet.rns-fock-module-free-over-negative-super-virasoro
-    inferred: true
-    note: |
-      供给 **Corollary 2.19(iii)**（V(p,κ) 是自由 Vir_κ⁻-模，p.320 逐字）。
-      **标 inferred，理由**：**Corollary 2.15 的证明里不出现这条**（§9.2 逐字，只引 Theorem 2.4、
-      Euler–Poincaré、Proposition 2.14(ii)）。自由性进入本推导是**经 Theorem 2.4 的 §3 证明链**
-      （LZ §9.5 逐字：'(iii) 是喂给 Theorem 2.4（消灭定理）的证明'），即已由上一条边承载。
-      ⇒ 本边是**记账边**，用来让"p ≠ 0 究竟用在哪一步"在图上可查（它落在自由性这一步，
-      不落在维数计算这一步）；从最小依赖集看它是冗余的。
-      ⚠ 与玻色侧的记账**刻意不同**：worldsheet.bosonic-relative-cohomology-dimension--via-fgz-1986
-      对 worldsheet.fock-module-free-over-negative-virasoro 拉的是**非 inferred** 的实边，
-      因为 FGZ 在 Theorem 2.7 正上方把 "the first part of Proposition 2.6" **明写**为 2.7 的输入
-      （2.7 是 (i)(ii) 合一的定理）；而 LZ 把消灭与维数分成 Theorem 2.4 与 Corollary 2.15 两条，
-      Cor 2.15 的证明**不重提**自由性。**这是两篇文献记账习惯的差别，不是本图的不一致。**
-      ⚠ 该卡自身的 effective 已是 physical-argument，**不改变本推导的有效状态**。
 sources:
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.15(i)**, p.317，逐字：'Corollary 2.15. (i) (\"Quantization Condition\") dim H⁰_rel(p,κ) = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − p·p/2). (ii) (No-ghost Theorem) H⁰_rel(p,κ) is a positive definite space.'（本推导只证 (i)）"
@@ -140,6 +125,7 @@ summary: |
   自身是 physical-argument（上游是 OPE / 路径积分链），按 docs/STATUS_LEVELS.md 的 min 规则封顶。
   **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经那些卡记账的后果。
 gaps:
+  - "**p ≠ 0 的落点**（reviewer-batch25，lead 落地）：Cor 2.15(i) 证明只引 Thm 2.4 / Euler–Poincaré / Prop 2.14(ii)；自由性（Cor 2.19(iii)）经 Thm 2.4 的 §3 证明进入，已由消灭卡 v2 的推导以实边承载。原挂的记账边已按 STATUS_LEVELS 接口边裁决删除（只给语境不担论证的边不得存在），与玻色侧 dimension 推导口径一致。"
   - "**Proposition 2.14(ii)（char C_rel = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel）
      在本图没有卡**，其证明（pp.312–317，含分情形计算与 Lemma 2.14.5）本图也**未逐字核实**。
      ⇒ **目标卡断言的整个右端落在一条未上图的命题上**，这是本推导最实质的记账缺口。

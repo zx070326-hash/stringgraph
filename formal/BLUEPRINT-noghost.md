@@ -99,6 +99,8 @@ variable (η a b ε : Fin D → R)
 
 ### A.0 先做一次文献裁决：是 `K_m` 还是 `A^L_n`？
 
+> **证据层级（reviewer-batch25）**：「GT 真正用的是 K_n」依据是 Goddard 2008 §6 的自述（对 GT 1972 为 L3 转引），GT 1972 正文本项目未获取。裁决对 Lean 工作量的影响不变（K_n 白送），但写进论文时须注明层级。
+
 `literature/extractions/gsw-1987-v1.md` 的 E6/E7/E8 三条（Goddard 2008 正文，标注 L1 已核实）
 把两个不同的纵向对象写得很清楚，**图里目前一个节点都没有**：
 
@@ -304,6 +306,8 @@ noncomputable def ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 
 把 `transverse` 打包进去，不能事后补。
 
 ### B.2 路线 (i)：FGZ Prop 2.6(i)（Fock 模在 ℒ⁻ 下自由）—— **判定为死路，不要走**
+
+> **订正（reviewer-batch25）**：本节引用的「FGZ 一侧未印出证明」已被 `brst-cohomology-sources.md` §9.10.3 推翻——FGZ 印了梗概，核心输入是 Kac 行列式（refs 10/11 = Kac ICM 1978、Feigin–Fuks 1982）。判死结论不变：前置仍是一般 N 的 Kac 行列式 + PBW (b)。理由 4（隔着 Thm 1.12）在逻辑上不必要：自由性 → 计数不经上同调。另 §B.5 的「ch H_phys = φ^{−(D−1)} 对任意 D」隐含 p ≠ 0（自由性）前提。
 
 图节点 `worldsheet.fock-module-free-over-negative-virasoro`（FGZ 1986 Prop 2.6(i)）。
 它在 Lean 里的成本：
