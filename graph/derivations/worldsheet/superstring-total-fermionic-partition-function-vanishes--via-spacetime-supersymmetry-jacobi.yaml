@@ -1,0 +1,192 @@
+id: worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+target: worldsheet.superstring-total-fermionic-partition-function-vanishes
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给**被断言为零的那个对象**：Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 的定义
+      （§10.7 (10.7.7a–c)、(10.7.8a–d)）与组合
+      **Z_ψ^±(τ) = ½[Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ ∓ Z¹₁⁴]**（(10.7.9)），
+      以及「这些迹是**对一对维数**取的」这条归一化（⇒ 四次幂 = 8 个横向费米子）。
+      **非 inferred**：那张卡的 statement 逐字含 (10.7.9) 的组合与 Z^α_β 的三种写法。
+      ⚠⚠ **只借记号与对象，绝不借论证方向**。原书 §10.7 专门写了一条反方向的告诫（逐字）：
+      一般振幅要求真空是模不变的 '*without* using the vanishing of Z¹₁ or the abstruse
+      identity (10.7.16) — as we have required'。
+      ⇒ **不得**用模不变性去论证本卡，也不得用本卡去论证模不变性（目标卡「不断言 (a)」）。
+      ⚠ 那张卡自己的 notes 逐字写明 **(10.7.16) 与 Z¹₁ = 0「本轮不建节点」**
+      ——即本推导第 1 步真正用到的两条事实**不由这条边供给**，见 gaps 第一条。
+  - id: worldsheet.superstring-cylinder-amplitude-closed-channel-v2
+    note: |
+      供给**断言 (2) 第一条里的两个对象**：Z_{C₂,0} 与 Z_{C₂,1} 的定义
+      （(10.8.1)(10.8.2a,b)：按 exp(πiF) 是否出现在迹里分成两项）与**扇区识别**
+      （逐字 'the part Z_{C₂,0} comes from NS–NS strings and the part Z_{C₂,1} from R–R strings'）。
+      **非 inferred**：原书那句 'We know from the previous section that the total fermionic
+      partition function vanishes by supersymmetry, so that Z_{C₂,1} = −Z_{C₂,0}' 就紧跟在
+      (10.8.2) 之后，用的正是该卡断言 (1)(2) 定义的记号。
+      ⚠⚠ **该卡的「不断言 (a)」明确把这条相消排除在它自己的断言之外**（逐字：
+      「'Z_{C₂,1} = −Z_{C₂,0}'（原书由 §10.7 的超对称论证得到 …）**不在本卡**；
+      本卡只给 Z_{C₂,0}」）。⇒ 本边只借**对象与扇区识别**，相消本身由本推导承担——
+      这正是本卡存在的理由。
+  - id: worldsheet.superstring-klein-bottle-amplitude-closed-channel
+    note: |
+      供给**断言 (2) 第二条里的对象** Z_{K₂,0}（(10.8.11)），以及 Klein 瓶上 NS–NS / R–R
+      的扇区判据（(10.8.8)–(10.8.9)：按在 σ² → σ² + 4πt 下是否反周期分）。
+      **非 inferred**：'and Z_{K₂,1} = −Z_{K₂,0}.' 这句就印在 (10.8.11) 正下方（p. 41），
+      用的正是该卡的记号。
+      ⚠ 同样地，该卡「不断言 (b)」把这条相消排除在自己的断言之外（理由逐字：
+      「算 Z_{K₂,0} 本身不需要它」）。本边只借对象。
+      ⚠ **Z_{K₂,1} 本身在本图没有独立定义**：它由「K₂ 振幅按 NS–NS / R–R 分成两项」
+      这个分法隐式定义，原书也只在这一句里用到它。见 gaps 第三条。
+  - id: worldsheet.type-ii-spacetime-supersymmetry
+    inferred: true
+    note: |
+      供给原书给出的**那个归因**：'the total fermionic partition function vanishes
+      **by supersymmetry**'（§10.8 p. 38 逐字）。
+      **标 inferred，两条理由**：
+        (i) 原书在该处**不给式号、不给论证**，也不指明是哪一条超对称陈述；
+        (ii) 本图这张卡说的是「NS–R 扇区的无质量态是引力微子，其规范等价关系是**局域时空超对称**
+             的标志；IIA/IIB 各有两个引力微子」——**不是**「费米配分函数为零」。
+             由前者到后者的那一步（时空超对称 ⇒ 玻色/费米态逐级配平 ⇒ 迹相消）
+             **原书不写、本图也没有节点**。
+      ⚠ 本边承担的是**原书自己给出的理由**（不是「原书语境」），故按 docs/STATUS_LEVELS.md
+      「接口边」一节的口径它应当存在；但它的内容是一句无指向的归因，故 inferred。
+      ⚠⚠ **对象错配的第三层**（目标卡「不断言 (g)」已登记）：type I 是 d = 10, N = 1，
+      本图这张卡讲的是 type II 的 N = 2，而 (10.7.9) 的 Z_ψ^± 又是
+      「from one side of the type II string」的迹。**三者的关系原书在 §10.8 不厘清**。
+      ⇒ 正解：建一张「时空超对称 ⇒ 每个质量级上玻色态数 = 费米态数 ⇒ 带 (−1)^F 的迹为零」的卡，
+      届时本边改指它。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38，逐字：'**We know from the previous section that the total fermionic partition function vanishes by supersymmetry, so that Z_{C₂,1} = −Z_{C₂,0};** we concentrate then on Z_{C₂,0}.'"
+    note: |
+      L1 原书页图，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**。
+      ★★★ **本推导 status = physical-argument 的首要理由就在这句话的语法里**：
+      'We know from the previous section …'——**§10.8 不证，只引用**；
+      而被引用的 §10.7 给出的是 (10.7.16) 与 Z¹₁ = 0 两条 θ 函数事实，
+      **不是**一条从超对称出发的论证。抽取记录的判词逐字：「**归约到 §10.7 的超对称论证**」。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.11) 之后, p. 41，逐字 '**and Z_{K₂,1} = −Z_{K₂,0}.**'；§10.8, p. 42 收尾段逐字 '**For each world-sheet topology the NS–NS divergence is the negative of the R–R divergence**, so the dilaton–graviton tadpole also vanishes for SO(32).'"
+    note: |
+      L1，抽取记录 sec10-8.md **#E69**（Klein 瓶）与 **#E72**（收尾段，已单页重渲染复核）。
+      ★ 这两处是**原书把同一条结论用在另外两个拓扑上**的地方；Klein 瓶那一句同样是
+      **直接写下**，没有过程。
+  - ref: polchinski-1998-v2
+    loc: "§10.8 脚注 7, p. 39（逐字见目标卡 sources 第四条：'… the sum of the NS–NS and R–R divergences is zero for each topology separately because the trace vanishes by supersymmetry. **This is not sufficient** …'）"
+    note: |
+      L1，抽取记录 sec10-8.md **#E68**。
+      ★ 这条脚注**同时**是目标卡断言 (3) 的来源与本推导的一条旁证：
+      它把「相消」的**适用范围**限死在**真空振幅**里（加了顶点算子就不再相消）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.16)**（Jacobi 的 'abstruse identity'：Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0）与 (10.7.8d)（Z¹₁ = Tr_R[exp(πiF)q^H]），pp. 34–35"
+    note: |
+      L1，抽取记录 literature/extractions/polchinski-1998-v2.md **#E47**。
+      ★★ **这是本推导第 1 步真正用到的两条事实**，而**本图对两者都没有节点**（gaps 第一条）。
+      ⚠ 原书把 (10.7.16) 称作 Jacobi 的 'abstruse identity'，**不给证明也不给文献**。
+      ⚠ **Z¹₁ = 0 的理由原书在此处也不写**（标准理由是 R 扇区带 (−1)^F 的迹上有费米零模，
+      本图无节点）。
+summary: |
+  **原书实际做的事（两句话，都可逐字核对）**
+
+  1. **§10.8 只引用，不证**：p. 38 逐字 'We know from the previous section that the total
+     fermionic partition function vanishes **by supersymmetry**, so that Z_{C₂,1} = −Z_{C₂,0};'。
+     同一条结论在 p. 41 用到 Klein 瓶（'and Z_{K₂,1} = −Z_{K₂,0}.'），
+     在 p. 42 被概括为「for each world-sheet topology the NS–NS divergence is the negative of
+     the R–R divergence」。
+  2. **§10.7 提供的技术内容是两条 θ 函数事实**：Jacobi 的 abstruse identity (10.7.16)
+     Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0，以及 Z¹₁ = 0。代入 (10.7.9)：
+       Z_ψ^± = ½[ (Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴) ∓ Z¹₁⁴ ] = ½[ 0 ∓ 0 ] = **0**。
+     **这一步本身是两行代入**，难的全在那两条被引用的事实上。
+
+  **从 Z_ψ^± = 0 到逐拓扑相消的那一步**：三个面的振幅在费米部门上用的是同一组 Z^α_β 的组合，
+  按 β = 0 / 1（即迹里有没有 exp(πiF)）拆成 NS–NS 与 R–R 两项；总和为零即两项互为相反数。
+  ⚠ **原书不把这一步写出来**——它直接从「总配分函数为零」跳到 'so that Z_{C₂,1} = −Z_{C₂,0}'。
+  三个面的扇区判据还**各不相同**（圆柱按迹里有无 exp(πiF)；Klein 瓶按在 σ² → σ² + 4πt 下
+  是否反周期；Möbius 按迹的 R / NS 扇区，且**与圆柱相反**），
+  故「拆成两项后总和为零 ⇒ 两项反号」在每个面上都要各自成立，**原书只对圆柱与 Klein 瓶写出结果**。
+
+  **为什么标 physical-argument（四条，按弱到强排）**
+  (1) ★ **原书给的理由是一句无指向的归因**：'by supersymmetry'，无式号、无论证
+      （目标卡「不断言 (a)」）。而 §10.7 实际写下的是两条 θ 函数事实——
+      **本书从不把这两种说法打通**。
+  (2) ★ **那两条 θ 函数事实在本图都没有节点**：(10.7.16) 被原书称作 'abstruse identity'
+      而不给证明不给文献；Z¹₁ = 0 的理由原书在此处也不写。⇒ 见 gaps 第一条。
+  (3) **「总和为零 ⇒ 逐项反号」这一步原书跳过**（见上），且三个面的扇区判据互不相同。
+  (4) 整个对象是单圈路径积分 / 迹的形式计算，上游三张振幅卡与 §10.7 那张卡
+      **全部是 physical-argument**（§10.7 那张卡的封顶理由是原书逐字的
+      'We make the guess, correctly it will turn out'）。
+  ⇒ 即使把 (10.7.16) 建成一张 rigorous 的数学卡，(1)(3)(4) 仍在，本推导不会自动升级。
+gaps:
+  - "**本推导真正用到的两条事实在本图都没有节点（主缺口）**：
+     · **(10.7.16)** Jacobi 的 'abstruse identity' Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0
+       ——原书给出式子与名字，**不给证明、不给文献引用**（§10.8/§10.7 全章体例如此）；
+     · **Z¹₁ = 0** ——原书在 §10.7 用到它（抽取记录 #E47 备注第 3 点逐字：
+       『type II 的 Z_{T₂} = 0 依赖 Jacobi 恒等式 (10.7.16) **与 Z¹₁ = 0**』），
+       但**不写理由**（标准理由是 R 扇区带 (−1)^F 的迹上有费米零模）。
+     本图的 worldsheet.modular-invariance-requires-eight-transverse-fermions 在 notes 里
+     **明文把两者排除在外**，逐字：『(10.7.15) 的 type 0 对角模不变量、**(10.7.16) 的 Jacobi
+     「abstruse identity」**Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0、以及 type II 的 Z_{T₂} = 0，本轮不建节点。』
+     ⇒ **待建（两条都是纯数学/自由场论，可做成较硬的卡）**：
+       · math.jacobi-abstruse-identity（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0，θ 函数的经典恒等式；
+         注意本图连 θ 函数卡都还没有，见 math.dedekind-eta-function 的『不断言』）；
+       · worldsheet.ramond-trace-with-fermion-number-vanishes（Z¹₁ = 0）。
+     在那之前，本推导第 1 步的两个输入都是**从原书导入的**。"
+  - "**『由超对称』这条归因在图上没有落点**：depends_on 里那条指向
+     worldsheet.type-ii-spacetime-supersymmetry 的边**标 inferred**，因为那张卡讲的是
+     引力微子与局域时空超对称，**不是**配分函数为零；由前者到后者需要
+     『时空超对称 ⇒ 每个质量级上玻色态数 = 费米态数 ⇒ 带 (−1)^F 的迹逐级相消』这一串，
+     **原书不写、本图无节点**。
+     ⚠ 还有一层**对象错配**（目标卡「不断言 (g)」）：type I 是 N = 1，那张卡讲的是 type II 的
+     N = 2，而 (10.7.9) 的 Z_ψ^± 是『from one side of the type II string』的迹。
+     ⇒ 待建：worldsheet.spacetime-susy-implies-boson-fermion-degeneracy。"
+  - "**Z_{K₂,1} 与 Z_{M₂,0/1} 在本图没有独立定义**：
+     · Z_{K₂,1} 由『K₂ 振幅按 NS–NS / R–R 分成两项』隐式定义，原书只在
+       'and Z_{K₂,1} = −Z_{K₂,0}.' 这一句里用到它；Klein 瓶卡只定义并计算了 Z_{K₂,0}。
+     · Möbius 一侧原书**直接算 R–R 项** Z_{M₂,1}（逐字 'It is slightly easier to focus on the
+       R–R exchange'），**从不写** Z_{M₂,0}，也从不写 Z_{M₂,1} = −Z_{M₂,0}。
+     ⇒ 目标卡「不断言 (c)」照此把 Möbius 排除在具体化之外；断言 (2) 第三条只照录原书
+     p.42 那句一般说法。"
+  - "**『总和为零 ⇒ 逐项反号』这一步原书跳过**：原书直接从『总费米配分函数为零』写到
+     'so that Z_{C₂,1} = −Z_{C₂,0}'。要把这一步补严，需要说明三个面上
+     『按 β = 0 / 1 的拆分』与『Z_ψ^± 的四项组合』如何逐项对应——而**三个面的扇区判据互不相同**
+     （圆柱按迹里有无 exp(πiF)；Klein 瓶按 σ² → σ² + 4πt 下的周期性；Möbius 按迹的 R / NS 扇区，
+     抽取记录 #E71 特别标注『**注意这与圆柱相反**』）。本推导**未展开**这一步。"
+  - "**本推导不碰任何一侧的值，也不碰 tadpole**：Z_{C₂,0}、Z_{K₂,0}、Z_{M₂,1} 的值在三张振幅卡上；
+     (n ∓ 32)²、SO(32)、C₁₀ 悖论在 worldsheet.type-i-tadpole-cancellation-so32-v2。
+     ⇒ 本推导**不经过**该节最弱的 C₁₀ 环（抽取记录 #E67 的判断）。"
+notes: |
+  ★★★【本推导关闭了 tadpole 推导里那条「第 (4) 步没有图内支撑」的 gap（curator，2026-09-11，
+  small-backlog-13）】worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences
+  的 gaps 最后一条逐字：
+    「⇒ **本推导第 (4) 步在这一处没有图内支撑**：接来的两张卡只给 NS–NS 侧，
+      翻到 R–R 侧靠的是本推导直接引原书。⚠ 这不是新引入的缺口 …
+      → 待建：worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry
+      （§10.7 的总费米配分函数为零），届时本推导加一条非 inferred 边。」
+  目标卡就是那张卡（id 按 lead 派工单改为 …-total-fermionic-partition-function-vanishes），
+  tadpole 推导已加一条**非 inferred** 边指向它。
+
+  ⚠⚠【本推导最该被记住的一条】**原书对这条结论给的是一句归因，不是一条论证。**
+  'by supersymmetry' 后面没有式号；§10.7 里能找到的只有 (10.7.16) 与 Z¹₁ = 0 两条 θ 函数事实，
+  而**本书从不把「超对称」与这两条事实的关系写出来**。
+  ⇒ 目标卡断言 (1) **同时照录两种说法并声明不断言其中任何一个蕴含另一个**（「不断言 (a)」），
+  本推导的 status 也据此封在 physical-argument。
+  ⚠ 反方向的告诫同样重要（§10.7 逐字）：模不变性的要求必须在
+  '*without* using the vanishing of Z¹₁ or the abstruse identity (10.7.16)' 的意义下成立
+  ——**不得**在本卡与 worldsheet.modular-invariance-requires-eight-transverse-fermions 之间
+  建立论证方向上的依赖（本推导对那张卡的边**只取记号**，note 已写明）。
+
+  【升级路径（给 lead 与后续 researcher）】本推导有两条互相独立的可做项，做完能实质提高强度：
+    1. **建 math.jacobi-abstruse-identity**（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0）与 **Z¹₁ = 0** 两张卡
+       ——前者是经典 θ 函数恒等式，Mathlib 方向上也许有望；注意本图目前**连 θ 函数卡都没有**
+       （math.dedekind-eta-function 的「不断言」逐字：「本图未建 θ 函数卡」）。
+    2. **建「时空超对称 ⇒ 玻色/费米态逐级配平 ⇒ 带 (−1)^F 的迹为零」的卡**，
+       把那条 inferred 的归因边落实。
+  ⚠ 两条都做完，本推导仍受 gaps 第四条（「总和为零 ⇒ 逐项反号」原书跳过）与上游三张
+  physical-argument 振幅卡的限制，**不会自动升到 rigorous**。
+
+  按抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**（p.38 那句逐字）、
+  **#E68**（脚注 7）、**#E69**（Klein 瓶那句）、**#E72**（p.42 收尾段）、
+  polchinski-1998-v2.md **#E47**（(10.7.9)/(10.7.16)/Z¹₁ 与那条反方向告诫）建立。
+  curator，2026-09-11。
+author: curator
+created: "2026-09-11"
