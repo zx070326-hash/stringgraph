@@ -3734,8 +3734,15 @@
             本文自称新颖的只是证明方法「a straightforward application of the theorem of residues,
             has not been observed before」⇒ **derivation 的 own status 可写 proven，但"首次证明"的功劳不属于本文**。
             ⚠ Crossref 返回的标题字段里连字符是乱码（`— 1/tau`），**以页图为准**。
-            ⚠ **Mathlib 的 `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 不含本变换**（§48.4，L1 源文件全读）
-            ⇒ `math.dedekind-eta-s-transformation` **不得标 formalized**。}
+            ⚠ **Mathlib 的 `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 不含本变换**（§48.4，L1 源文件全读）。
+            ⚠⚠ **2026-09-11（curator lean-wire-9）更正**：上一行后面原本接着「⇒
+            `math.dedekind-eta-s-transformation` 不得标 formalized」，**该推论已撤销**。
+            上一行本身没错（那一个文件里确实没有），但本变换在**同目录的 `Discriminant.lean`** 里
+            （`ModularForm.eta_comp_eq_csqrt_I_inv`，Mathlib v4.33.1），即 §48.7 Q48.2 当时未查的范围；
+            Q48.2 已结清。该图节点现挂 `lean_decl: StringFormal.DedekindEta.eta_neg_inv`，
+            并有 formalized 推导 `--via-lean`。
+            **本条目（Siegel 1954）的引用纪律(1)(2)(3) 一字不变**：本文仍是本卡唯一的
+            人类可读严格证明来源，`loc` 仍只能写 `p. 4 (title)`。}
 }
 
 @article{polchinski-1995-dbranes,
