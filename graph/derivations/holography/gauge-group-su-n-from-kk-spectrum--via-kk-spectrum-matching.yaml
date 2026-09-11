@@ -1,0 +1,88 @@
+id: holography.gauge-group-su-n-from-kk-spectrum--via-kk-spectrum-matching
+target: holography.gauge-group-su-n-from-kk-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.dimension-mass-relation
+    inferred: false
+    note: >-
+      非 inferred：§2.6 p.26 逐字用它——"A field of dimension k in four-dimensional conformal field
+      theory has λ₊ = k − 4 and corresponds to a scalar field in supergravity with a mass
+      m² = λ₊(λ₊ + 4) = k(k − 4)."，这就是 (2.43)/(2.35) 在 d = 4 的形式。
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2, §2.6 "Correlation Functions And Operator Dimensions" 之后的
+      KK 谱比较段落，p.26，以及同页脚注 7；BF 界 (2.47) 在 p.24；
+      §2.6 的另两族算子在 p.26–28 式 (2.49)(2.50)。
+      KK 谱数据 Witten 转引 [30]（Kim–Romans–van Nieuwenhuizen）的
+      "eqn. (2.34) and in Fig. 2 and Table III"，并注明 [30] 的参数 e 被设为 1；另引 [31]。
+    note: |
+      三处逐字：
+      (a) "We require k ≥ 2 as the gauge group is SU(N) and not U(N)."
+      (b) "Note that a k = 1 state does not appear in the supergravity, which confirms that the
+          supergravity is dual to an SU(N) gauge theory and not to a U(N) theory. In fact, the
+          k = 2 state saturates the bound (2.47), and a k = 1 state would violate it."
+      (c) 脚注 7："Another reason that the U(1) gauge field could not be coded in the AdS_5 theory
+          is that it is free, while in the AdS_5 theory everything couples to gravity and nothing is
+          free. To describe U(N) gauge theory on the boundary, one would have to supplement the
+          AdS_5 theory with an explicit U(1) singleton field on the boundary."
+summary: |
+  Witten §2.6 的论证：
+
+  1. 取手征算子族 T^{z_1…z_k} = Tr Φ^{z_1}…Φ^{z_k}（Φ 为 N=4 的六个标量，按 SO(6) 的
+     第 k 阶无迹对称张量表示）。
+  2. 用维数–质量关系（d = 4）：维数 k 的场有 λ₊ = k − 4，对应体标量质量
+     m² = λ₊(λ₊ + 4) = k(k − 4)。于是预期 AdS_5×S^5 的 KK 谱中对每个 k 都有一个
+     m² = k(k − 4) 的标量。
+  3. 对照已发表的 KK 谱（Witten 转引 [30] 的 eqn (2.34)、Fig. 2、Table III）：
+     谱中存在 k = 2, 3, … 的态，**不存在 k = 1 的态**。
+  4. 由此判定体理论对偶的是 SU(N)（U(N) 会多出 k = 1 的 Tr Φ^z，即那个自由 U(1) 的成分）。
+     两条佐证：k = 2 态恰好饱和界 (2.47)，k = 1 态会破坏它；脚注 7 指出 U(1) 规范场是自由的，
+     而 AdS_5 理论中一切都与引力耦合、没有自由场。
+  5. 脚注 7 同时给出 U(N) 情形的补救：需要在边界补一个显式的 U(1) singleton 场。
+     故结论的准确形式是「AdS_5 体理论本身编码的是 SU(N)」，不是「U(N) 对应不可能」。
+
+  另两族算子（(2.49) V^{z_1…z_t} = Tr W_αW^αΦ^{z_1}…Φ^{z_t}，m² = (k+2)(k−2)；
+  (2.50) 由 prepotential Tr a^r 得的 Q_r，m² = k(k+4)）也被对照，
+  原文自称这是 "quantitative confirmation"。
+
+  status: physical-argument——每一步都是物理论证，且关键的 KK 谱数据只是转述。
+  不取 conjecture：结论真伪在文献中并无争议，论证不完整属 gaps 轴
+  （docs/STATUS_LEVELS.md「断言 + 骨架」裁决）。
+gaps:
+  - >-
+    **KK 谱数据未一手核实**：m² = k(k−4)、(k+2)(k−2)、k(k+4) 与
+    Kim–Romans–van Nieuwenhuizen [30]、Gunaydin–Marcus [31] 的对照**只据 Witten 转述**
+    （"Fig. 2 and Table III in [30]"），本项目未读 [30][31]，也未把它们登记进 sources.bib。
+    原文还提醒 [30] 的公式含参数 e，Witten 设为 1——这个设定本身未核实。
+  - >-
+    "a k = 1 state does not appear in the supergravity" 是一条**否定性**断言，
+    依赖对 [30] 谱表的完整性判读；原文没有给出「谱表已穷尽」的论证。
+  - >-
+    佐证用到 BF 界 (2.47) Δ ≥ d/2，而 (2.47) 原文自称推导 "quick and nonrigorous"，
+    严格版外包给 [24–26]。本图未为 BF 界立卡，故这条佐证没有对应的依赖边。
+  - >-
+    只比较了**三族**算子。原文逐字 "Two additional families that contain only states of positive m²
+    will not be considered here."——摘要里的 "match" 是部分匹配，不是全谱匹配。
+  - >-
+    整条论证在 GKPW 字典的框架内进行（把 KK 模态与边界算子按维数–质量对应起来），
+    因此继承字典的全部适用限制：大 N、大 g²_YM N、经典超引力近似、源足够小等。
+  - >-
+    §3.2 脚注 8 原文自己留了一个更细的口子："in the case that the boundary theory is
+    four-dimensional gauge theory with a gauge group that is locally SU(N), it may be that the gauge
+    group is really SU(N)/Z_N"——即连 SU(N) 与 SU(N)/Z_N 的区分原文也未定。
+    本卡的陈述只到「SU(N) 而非 U(N)」这一层，不涉及中心的商。
+notes: |
+  from: witten-1998-ads#E-W14（另见 E-W12、E-W15、E-W16 脚注 8、QW5）。
+
+  【★ 冲突记账】目标卡的 notes 已写明：本结论与 holography.ads5-cft4-duality-v2
+  逐字保留的 Maldacena U(N) 表述不兼容，属根 CLAUDE.md 原则 4 所说的
+  「同一引理的不兼容表述」，须走里程碑规范化流程，curator 不私下统一，也不写 milestones/。
+  本推导**没有**依赖 ads5-cft4-duality-v2：Witten §2.6 的论证是在自己的字典框架内做的，
+  用的是 KK 谱与 (2.43)，不是从 Maldacena 的猜想句推出来的；
+  若把它挂上去，反而会造成「用 U(N) 的猜想推出 SU(N)」这种自相矛盾的边。
+
+  【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
+author: curator
+created: "2026-09-11"

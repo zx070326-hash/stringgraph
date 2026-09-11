@@ -1,0 +1,83 @@
+id: holography.dimension-mass-relation
+kind: proposition
+title: 维数–质量关系 Δ(Δ − d) = m²（取较大根；AdS 半径 = 1）
+statement: |
+  在 AdS 半径取为 1 的单位下（体场质量按无量纲组合 mR 理解，见 conv.ads-radius-unit）：
+
+  设 AdS_{d+1} 上有一个质量为 m 的标量场，与之对应的边界共形场 O 的维数为 Δ。则 Δ 是
+
+      Δ ( Δ − d ) = m²                                                     (2.43)
+
+  的**较大根**，即
+
+      Δ = ½ ( d + √( d² + 4 m² ) ) .                                       (2.44)
+
+  等价地：写 Δ = d + λ₊，其中 λ₊ 是 λ(λ + d) = m²（(2.35)）的较大根
+  （两根记为 λ₊ ≥ −d/2 ≥ λ₋；m² 被限制在该二次方程有实根的范围内）。
+
+  d = 4 时 (2.44) 读作 Δ = 2 + √(4 + m²)；恢复显式 AdS 半径 R 即
+
+      Δ = 2 + √( 4 + (mR)² ) ,                                             (GKP (45))
+
+  这是 GKP 给出的形式。
+
+  非标量的推广（同一来源、同一推导，但本卡陈述**不**覆盖，见 notes）：
+  若 C 是在边界附近像 f^{−λ₊} C_0 的有质量 p-形式场，则与 C_0 耦合的算子维数
+  Δ = d − p + λ₊，(2.43) 换成 (Δ + p)(Δ + p − d) = m²（(2.45)）。
+uses_conventions: [conv.ads-radius-unit]
+sources:
+  - ref: witten-1998-ads
+    loc: |
+      arXiv:hep-th/9802150v2, §2.5 "Computation Of Two Point Function", p.21,
+      式 (2.43)(2.44)；取根规定与 λ± 的定义在 §2.5 p.19–20 式 (2.35)；
+      §2.6 p.25 式 (2.48) 重复为 Δ = d + λ₊ = ½(d + √(d²+4m²))；p-形式版 (2.45) 在 p.22。
+    note: |
+      逐字："In sum, the dimension Δ of a conformal field on the boundary that is related to a field
+      of mass m on AdS space is Δ = d + λ₊, and is the larger root of" → (2.43)，"Thus" → (2.44)。
+      **AdS 半径 = 1**（(2.1)(2.6) 的度规里没有 R），故此处 m² 实为 (mR)²
+      （extractions/witten-1998-ads.md E-W12、QW7）。
+  - ref: gubser-klebanov-polyakov-1998
+    loc: "arXiv:hep-th/9802109v2, §3, p.10 式 (41) ν = √(4 + (mR)²)；p.11 式 (45) Δ = 2 + ν"
+    note: |
+      ⚠ **否定性核实**：GKP 正文 pp.1–14 **不出现** Δ(Δ − d) = m²，也没有一般 d 的版本；
+      只有 d = 4 的解出形式 (45)。「(45) ⟺ Δ(Δ−4) = (mR)²」这一改写是抽取者/编者做的，
+      不是原文（extractions/gubser-klebanov-polyakov-1998.md E9）。
+      故本卡的一般 d 形式**只能**记 Witten，GKP 只支撑 d = 4 的特例。
+tags: [holography, ads-cft, operator-dimension, mass, two-point-function]
+notes: |
+  from: witten-1998-ads#E-W12（另见 E-W11、E-W17、QW6、QW7）；
+  gubser-klebanov-polyakov-1998#E9（另见 E8、E10、E11）。
+
+  【★ 不入图的一处原文内部矛盾】Witten §3.3（v2 p.35）给出维数-质量关系的**第二条独立论证**
+  （态–算子对应 + AdS 上标量场的能谱，"Δ = ω"），但那里印的是
+
+      ω = ½( d + √( d² − 4 m² ) )      ← **减号**
+
+  与 (2.44) 的**加号**不可能同时成立，而正文紧接着断言 "we see that Δ = ω, as expected"。
+  脚注 9 指出所引 [24]（Breitenlohner–Freedman）用的参数 α 是本文的 −m²，
+  疑为转写时的符号处理错误。与 (2.42) 的两点函数、(2.43)、§2.6 的 m² = k(k−4) 全都一致的是
+  **加号版 (2.44)**。因此：
+  - 本卡的陈述只写加号版；
+  - **不**把 §3.3 的 Hamiltonian 论证作为第二条推导入图（否则等于给一条自相矛盾的公式背书）；
+  - 该符号是 researcher 从 PDF 渲染图判读的（等级 L1，已单独重读该页），
+    抽取记录 §3 第 3 条建议用可搜索文本（ATMP 发表版或 v1）再核一次。核实后再决定是否补卡。
+
+  【Breitenlohner–Freedman 界不在本卡里】Witten (2.47) Δ ≥ d/2（等价 m² ≥ −d²/4）
+  原文自称推导 "quick and nonrigorous"，严格版引 [24–26]（Breitenlohner–Freedman 等）。
+  本卡只在陈述里写「m² 被限制在 (2.35) 有实根的范围内」这一必要条件，
+  **不**断言 BF 界本身。若要入图应新建独立卡并挂到 BF 原始文献
+  （本项目尚未登记 Breitenlohner–Freedman）。
+
+  【p-形式版为什么写在陈述里但标注不覆盖】(2.45) 与 (2.43) 出自同一节同一推导，
+  写出来是为了防止后来者误以为 (2.43) 对任意自旋成立。按「一个节点一个命题」，
+  若要用 (2.45) 应新建卡；本卡的两条推导都只论证标量情形。
+
+  【为什么有效状态会是 conjecture】两条推导本身都是 physical-argument（可复算的推导链），
+  但都依赖字典卡（读出「两点函数的幂次 = 边界算子维数」这一步用的就是字典）：
+  Witten 支依赖 holography.gkpw-dictionary-witten，GKP 支依赖 holography.gkpw-dictionary-gkp
+  （2026-09-11 原单卡 holography.gkpw-dictionary 拆成这两张）；两张字典卡的有效状态都是 conjecture。这正是本项目要暴露的结构：
+  「维数-质量关系」不比它所依赖的字典更强。
+
+  【版本】Witten 的 loc 锚定 arXiv:hep-th/9802150v2；GKP 的 loc 锚定 arXiv:hep-th/9802109v2。
+author: curator
+created: "2026-09-11"
