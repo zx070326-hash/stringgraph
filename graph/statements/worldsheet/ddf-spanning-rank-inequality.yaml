@@ -197,5 +197,43 @@ notes: |
   内容现在不只是「零态维数下界」，而是精确等于「这个重叠上界」。两条未经验证的绕法记在
   §B″.11 第 1 条（不重复）。⟨手算，inferred: true，来源 §B″.4.1 与 §B″.11，
   约 1702-1770 行、1953-1978 行⟩
+
+  【2026-09-12 追记（curator，claim #490，依派活任务交付物 #4；wiring
+  formal/StringFormal/NoGhost/NullSeedsTwo.lean + TowerVirasoro.lean，只记账，
+  不改变本卡 status/effective——本卡仍 open，`B26` 无推导）】
+  新卡 **worldsheet.level-two-null-state-requires-d26**（formalized，Lean
+  `descTwo_mem_towerPhysSubmodule_iff`）把上面 (i) 段"手算"的**其中一半**升级成了
+  Lean：对**一个具体向量** `𝒟₂φ = (2L₋₂+3L₋₁²)φ`（φ 是任意满足 `L_nφ=0 (n≥1)`、
+  `L₀φ=−φ` 的种子，不限于层真空），`𝒟₂φ ∈ H_phys(a₀=1) ⟺ D=26` 现在是机器验证的 iff
+  （`[NoZeroDivisors R]`，条件比 (i) 用到的 `CharZero` 更弱）。这与 (i) 的
+  `det G₂ = 2(c-26)`、`rank G = 1 当 c=26` 是**同一个数值事实的两种独立呈现**
+  （算子作用 vs 2×2 Gram 行列式，两者差一个整体因子 2，见
+  worldsheet.level-two-null-state-requires-d26 的【不断言】(d)）。
+
+  ⚠ **但这不能推进 `B26 2` 本身，本卡仍 open，原因是 `B26 2` 问的是三个 finrank 的比较**
+  （`dim H_2 ≤ dim D_2 + dim Z_2`，整片 `V_2` 上的维数不等式），**不是**"某个特定 𝒟₂φ
+  是否物理"这一单点命题。新 Lean 卡证明的是后者；`B26 2` 的证明骨架
+  （`NullSeedsTwo.lean` 文件头 Gap，逐字）仍然是：
+    (1) 25 个 Type-1 生成元 `L₋₁(v·α₋₁)|p⟩`（`v ∈ K^{D-1}`，模去 `p` 方向）的**线性无关**——
+        未做（本卡 (i) 段与 worldsheet.ocq-null-state-two-families notes 都记过）；
+    (2) 占据数计数 `dim Q_M = p_{D-1}(M)`（本卡 (iv) 段引用的公式；N=2 时退化为
+        `dim Q_1 = D-1`、`dim Q_0 = 1`）——**这才是当前的真实阻碍**，不是独立性证不出，
+        而是 `Osc D →₀ ℕ`（占据函数类型）上 `decide` 无法展开有限维基数，与
+        `formal/StringFormal/Math/PartitionCard.lean` 撞的是同一堵墙（需要桥引理把
+        `Nat.Partition`/占据函数的基数搬到显式 `Finset` 字面量上才能数值核验）。
+  ⇒ **阻碍是计数，不是独立性**——与本卡 (i)(ii) 段"任何只用维数恒等式的路线都是循环的"
+  这条结论并不矛盾：(ii) 说的是"不造零态就推不出 D=26"，这里说的是"即使不造零态、
+  只想验证 N=2 这一个已知的具体数字 26 = D 也要先会数 `dim Q_M`"，是比 (ii) 更基础的
+  一层技术缺口。
+
+  **建议**：在蓝图 §B″ 的 PR5b（`NullSeedsTwo.lean`，已完成，见本卡与
+  worldsheet.level-two-null-state-requires-d26）与 PR5c（若干候选：`GenericIndependence`
+  一族向 N=2 之外推广，或直接攻 `Glue.lean` 拼装）之间，插入一个独立的
+  "level-2 occupation counting" PR：只做 `dim Q_1 = D-1`（`L_1 : F_1 → F_0` 满射核维数）
+  与 `dim Q_0 = 1`（层真空）这两个**最小、可独立验证**的 finrank 等式，不涉及占据数
+  生成函数的一般 N 版本。⚠ **此建议仅记账，不代表本卡认领该工作**：一个后台 agent
+  （id `a95e434cd6c263ae9`，"Lean: level-2 occupation counting (B26 2)"，工作文件
+  `formal/StringFormal/NoGhost/LevelTwoCount.lean`）已在做这件事；本条 notes 写于
+  2026-09-12，只描述现状（`B26 2` 仍未关闭），不重复其工作、不代其宣称已解决。
 author: curator
 created: "2026-09-12"
