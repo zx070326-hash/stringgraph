@@ -1,5 +1,5 @@
-id: worldsheet.critical-dimension-superstring-brst--via-nilpotency
-target: worldsheet.critical-dimension-superstring-brst
+id: worldsheet.superstring-brst-nilpotent-at-c15--via-nilpotency
+target: worldsheet.superstring-brst-nilpotent-at-c15
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -39,7 +39,10 @@ summary: |
   (1) {Q_B, Q_B} = 2Q_B² 的计算按 Q_B 的鬼数分次逐项进行；
       与玻色弦相同，非中心的项因约束代数的 Jacobi 恒等式（结构常数的相容性）逐项抵消；
   (2) 剩下的是中心项，正比于总中心荷 c^tot = c^m + c^g = c^m − 15；
-  (3) 故 Q_B² = 0 ⟺ c^m = 15；反全纯部门同理给 c̃^m = 15。
+  (3) 故总中心荷为零（c^m = 15）时中心项消失，**Q_B² = 0**；反全纯部门同理给 c̃^m = 15。
+      ⚠ **本推导只给这一个方向**：原书的 'whenever the total central charge vanishes' 是 ⟸。
+      反方向（Q_B² = 0 ⟹ c^m = 15）见 worldsheet.critical-dimension-superstring-brst-v2，
+      它在本卷没有来源。
   (4) 「可以把平坦 X^μψ^μ 换成任意正范数 SCFT」的推广，理由是上面每一步只用到
       约束代数的形式与中心荷的值，不用物质部门的具体实现。
   (5) 周期性条件：j_B 里含 γT^m_F，故 SCFT 的超流必须与 β、γ 同周期，否则 j_B 不周期、
@@ -54,8 +57,14 @@ summary: |
 gaps:
   - "**原书不给幂零性计算，且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证两次被推给习题（Vol.1 exercise 4.3、Vol.2 exercise 10.13(b)）。与玻色弦一侧的 Vol.1 (4.3.10)（有显式 Q_B² 公式、式号与内容均已核实）相比，这是本图中一处明显更弱的定位。"
   - "**「按同样的步骤」的类比未被检验**：worldsheet.brst-nilpotency-from-jacobi 是纯 Virasoro（玻色）情形；超共形情形多出 {G, G} = 2L + 中心项 这一类反交换子，其 Jacobi 恒等式（含奇-奇-奇分量）在本图与来源中都没有验证。该依赖边已标 inferred。"
-  - "**反方向（c^m = 15 ⟹ Q_B² = 0）没有独立来源**：与玻色弦一侧的同一问题（worldsheet.critical-dimension-brst-v2 的 gaps：kato-ogawa-1983 摘要只给一个方向，FGZ 与 Lian–Zuckerman 把 c = 26 当作假设）。超弦一侧本图连那种级别的数学文献都没有登记。"
+  - "**反方向（Q_B² = 0 ⟹ c^m = 15）不在本推导范围，本卷也没有来源**：§10.5 那句逐字是 'one can verify nilpotence … **whenever** the total central charge vanishes'，只给 ⟸。该方向由 worldsheet.critical-dimension-superstring-brst-v2 单独承载，其来源全部在本卷之外（ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10) 只算平坦 D 个 X^μψ^μ；lian-zuckerman-1989 Proposition 1.7(ii) 写 'Q² = 0 iff D = 10.' 但自己不证；ohta-1986 只有摘要）。⚠ 2026-09-11 reviewer-v2-ch10b 订正：本条原先把方向写反了（写成「反方向（c^m = 15 ⟹ Q_B² = 0）」），而 c^m = 15 ⟹ Q_B² = 0 正是本推导给出的那一方向。"
   - "**受限模的定义在超弦情形未审视**：βγ 是对易场、占据数无上界（原书 §10.4 逐字），故保证 Q_B、Q_B² 逐项有限的模条件可能与玻色弦不同。目标卡片按玻色弦的写法声明受限模，那是本图的补充，不是原书内容。"
   - "**中心项正比于 c^tot 这一步没有在图中算出**：summary 的第 (2) 步是按玻色弦的类比写的，超弦的系数（对应玻色弦的 ((c^m − 26)/12)(m³ − m)）在本图与来源中都没有显式形式。"
+notes: |
+  【改指记录】2026-09-11（reviewer-v2-ch10b 必修）：原 target 是双向卡
+  worldsheet.critical-dimension-superstring-brst（「Q_B² = 0 ⟺ c^m = 15」，已 superseded）；
+  因 §10.5 原句只给 ⟸，本推导改指单向弱卡
+  worldsheet.superstring-brst-nilpotent-at-c15，文件名随之改。
+  ⟹ 方向由 worldsheet.critical-dimension-superstring-brst-v2 承载（本卷无来源）。
 author: curator
 created: "2026-09-11"

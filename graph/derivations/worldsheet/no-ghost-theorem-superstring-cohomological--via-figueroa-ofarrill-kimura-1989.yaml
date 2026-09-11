@@ -28,12 +28,15 @@ depends_on:
             只能相对 L₀（FOK p.115）。
       ⇒ 本图该卡（b₀ = L₀ = 0，R 另加 β₀ = G₀ = 0）对应的是 FOK 的 **Henneaux 表示**那一路；
       Schrödinger 表示那一路在本图**没有对应的相对复形卡**（见 gaps）。
-  - id: worldsheet.critical-dimension-superstring-brst
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
     note: |
       供给 Q_B² = 0。
       ⚠ **在 FOK 这里 D = 10 是假设，不是结论**：p.111 / p.115 把物质 SCFT 取为
       'with the opposite central charge (in the critical dimension)'，鬼中心荷 c ↦ −15。
       与 fgz-1986 对玻色弦的处理同型（π(c) = 26 是假设）。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.superconformal-ghost-central-charge
     note: 供给 c^g = −15；FOK p.111、p.115 逐字取鬼 Fock 空间中心荷 c ↦ −15 Id。
   - id: worldsheet.superconformal-ghost-modes

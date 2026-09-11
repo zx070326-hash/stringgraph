@@ -38,12 +38,15 @@ depends_on:
       与 LZ **Definition 2.2**、**Definition 2.3** 逐条对应。
       本卡断言 (1) 的映射 λ(v) = v ⊗ |q_F = 1⟩ ⊗ |q_B = 1 − κ⟩ 落在 C⁰_rel 里，
       正是靠这组条件（|q_F = 1⟩ 与 |q_B = 1 − κ⟩ 的选择使 λ(v) 被 b₀、β₀ 零化）。
-  - id: worldsheet.critical-dimension-superstring-brst
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
     note: |
       供给 Q_B² = 0（上同调有定义的前提）。LZ 一侧是 **Proposition 1.7(ii)** 逐字
       'Q² = 0 iff D = 10.'，但 **LZ 自己不证**（'(ii) is done in [13, 15].'，
       [13] = ohta-1986、[15] = Terao–Uehara PLB 168B）。显式系数公式见
       ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10)。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.superconformal-ghost-modes
     note: |
       供给 bc、βγ 的模式与基态，以及**零模表示的选择**——本推导用 LZ p.306 (7) 的

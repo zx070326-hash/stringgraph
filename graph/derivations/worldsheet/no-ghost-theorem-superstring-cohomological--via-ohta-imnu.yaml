@@ -25,7 +25,7 @@ depends_on:
       Q_B|phys⟩ = 0, when we restrict the Fock spaces as (3.26)'。
       ⇒ **Polchinski (10.5.25)(10.5.26) 那两条只有"the logic being the same"的条件，
       在 IMNU 这里有显式式号与推导句。** 这是本推导对目标卡的一处实质贡献。
-  - id: worldsheet.critical-dimension-superstring-brst
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
     note: |
       供给 Q_B² = 0（上同调有定义的前提）。
       ★ IMNU (3.8)–(3.10) 给出**显式系数公式**（本图现有来源里唯一的一处）：
@@ -39,6 +39,9 @@ depends_on:
       no-ghost theorem in the next section.'
       ⚠ IMNU 自称的方向是 ⟹（"demands"）；但各系数独立为零使 ⟺ 从公式可读出。
       注 R 扇区末项 α₀^R ζ₀² 含 βγ 零模——α₀^R = 0 同时消掉它。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.superconformal-ghost-modes
     note: |
       供给 bc 与 βγ 的模式与基态。IMNU (2.17) 模展开、(2.20) {η₀, η̄₀} = 1 与
