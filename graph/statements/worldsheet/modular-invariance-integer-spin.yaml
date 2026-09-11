@@ -50,6 +50,10 @@ notes: |
   **按项目原则 1 不就地改本卡的 statement**；修正的形状是换代
   worldsheet.modular-invariance-integer-spin-v2（把四条前提写进 statement 并改量词），
   届时本卡标 superseded_by。**在那之前引用本卡的 (1) 必须带上这条 ⚠。**
+  ✅ **2026-09-11 已换代**：worldsheet.modular-invariance-integer-spin-v2 已建
+  （四条前提写进 statement，(1) 的量词改为「对每个净简并度非零的层」），本卡已标 superseded_by，
+  两条下游活边（compact.narain-lattice-is-even--via-modular-t-invariance、
+  spectrum.field-theory-region-sum-over-string-spectrum--via-spectrum-sum）已改指 v2。
 
   **本卡的「模不变性」是假设，不是结论**：Polchinski 在这里把模不变性当作对 CFT 谱的**要求**
   （因为环面振幅的模积分要在基本域上做才不重复计数，见 worldsheet.modular-fundamental-domain
@@ -69,5 +73,6 @@ notes: |
       对 (7.2.44b) 的依赖接到了 `math.dedekind-eta-s-transformation`。
   (c) 自对偶格（S 变换那一半）与本卡无关：第 7 章不提供，且 §8.4 的必要方向在原书只有
       "a little thought shows"（#E139），抽取记录建议拆成三卡。
+superseded_by: worldsheet.modular-invariance-integer-spin-v2
 author: curator-polchinski-ch7
 created: "2026-09-11"
