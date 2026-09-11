@@ -406,4 +406,157 @@ theorem Lop_neg_apply_one (η p : Fin D → R) (n : ℕ+) :
 
 end LopVacuum
 
+/-! ### The light-cone form of `L_{-n}` on a rung vacuum -/
+
+section Seed
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- The index of the `i`-th transverse row in the light-cone direction table. -/
+def transIdxLc (D : ℕ) (hD : 2 ≤ D) (i : Fin (D - 2)) : Fin D :=
+  ⟨(i : ℕ) + 2, by have := i.isLt; omega⟩
+
+@[simp]
+lemma frameVec_lightIdx (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    frameVec F (lightIdx D hD) = b := frameVec_zero hD F
+
+@[simp]
+lemma frameVec_conjIdx (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    frameVec F (conjIdx D hD) = F.frame.conj := frameVec_one hD F
+
+@[simp]
+lemma frameVec_transIdxLc (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (i : Fin (D - 2)) :
+    frameVec F (transIdxLc D hD i) = F.trans.vec i := frameVec_trans hD F i
+
+lemma transIdxLc_ne_conjIdx (hD : 2 ≤ D) (i : Fin (D - 2)) :
+    transIdxLc D hD i ≠ conjIdx D hD := by
+  simp [transIdxLc, conjIdx, Fin.ext_iff]
+
+lemma lcMonomial_single_one (F : DDFLightConeFrame η a b) (v : Osc D) :
+    lcMonomial F (Finsupp.single v 1) = lcCrea η (frameVec F v.1) v.2 := by
+  rw [lcMonomial_single, pow_one]
+
+lemma lcCrea_mul_lcCrea_eq_lcMonomial (F : DDFLightConeFrame η a b) (t t' : Fin D) (r s : ℕ+) :
+    lcCrea η (frameVec F t) r * lcCrea η (frameVec F t') s
+      = lcMonomial F (Finsupp.single ((t, r) : Osc D) 1 + Finsupp.single ((t', s) : Osc D) 1) := by
+  rw [lcMonomial_add, lcMonomial_single, lcMonomial_single, pow_one, pow_one]
+
+/-- **The seed space**: the light-cone monomials of level `n` that `L_{-n}|0;p⟩` produces
+*besides* the leading `-α^{b̃}_{-n}`.  Every element of the defining set has either no `b̃`
+factor at all, or exactly one whose mode number is `< n`; both cases lower the measure `μ` of
+blueprint §B′.5 below that of `α^{b̃}_{-n}`. -/
+noncomputable def lcSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (n : ℕ+) :
+    Submodule R (Fock D R) :=
+  Submodule.span R (lcMonomial F '' {e : Osc D →₀ ℕ |
+    Fock.level D e = (n : ℕ) ∧
+      (conjDeg hD e = 0 ∨ (conjDeg hD e = 1 ∧ conjWt hD e < (n : ℕ)))})
+
+lemma lcMonomial_mem_lcSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) {n : ℕ+}
+    {e : Osc D →₀ ℕ} (h1 : Fock.level D e = (n : ℕ))
+    (h2 : conjDeg hD e = 0 ∨ (conjDeg hD e = 1 ∧ conjWt hD e < (n : ℕ))) :
+    lcMonomial F e ∈ lcSeed (R := R) hD F n :=
+  Submodule.subset_span ⟨e, ⟨h1, h2⟩, rfl⟩
+
+/-- A contracted pair of creation operators whose mode numbers add up to `n` lies in the seed
+space: the completeness relation turns it into `b`/`b̃` mixed terms (one `b̃` factor, mode
+number `< n`) and purely transverse terms (no `b̃` factor). -/
+theorem oscPair_mem_lcSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) {n r s : ℕ+} (hrs : (r : ℕ) + (s : ℕ) = (n : ℕ)) :
+    (∑ μ : Fin D, η μ • ((X ((μ, r) : Osc D) : Fock D R) * X ((μ, s) : Osc D)))
+      ∈ lcSeed hD F n := by
+  classical
+  have hr1 : 1 ≤ (r : ℕ) := r.2
+  have hs1 : 1 ≤ (s : ℕ) := s.2
+  rw [oscPair_eq_lightCone F hη r s]
+  have hlev : ∀ t t' : Fin D,
+      Fock.level D (Finsupp.single ((t, r) : Osc D) 1 + Finsupp.single ((t', s) : Osc D) 1)
+        = (n : ℕ) := by
+    intro t t'
+    simp only [Fock.level_add, Fock.level_single, Fock.oscLevel_apply, one_mul]
+    exact hrs
+  have hmul : ∀ (t t' : Fin D) (w w' : Fin D → R), frameVec F t = w → frameVec F t' = w' →
+      lcCrea η w r * lcCrea η w' s
+        = lcMonomial F (Finsupp.single ((t, r) : Osc D) 1
+            + Finsupp.single ((t', s) : Osc D) 1) := by
+    intro t t' w w' hw hw'
+    rw [← hw, ← hw', lcCrea_mul_lcCrea_eq_lcMonomial]
+  refine Submodule.add_mem _ (Submodule.sub_mem _ (Submodule.neg_mem _ ?_) ?_)
+    (Submodule.sum_mem _ fun i _ => ?_)
+  · rw [hmul (lightIdx D hD) (conjIdx D hD) b F.frame.conj (frameVec_lightIdx hD F)
+      (frameVec_conjIdx hD F)]
+    refine lcMonomial_mem_lcSeed hD F (hlev _ _) (Or.inr ⟨?_, ?_⟩)
+    · rw [conjDeg_add, conjDeg_single_of_ne hD (lightIdx_ne_conjIdx hD), conjDeg_single_conj,
+        zero_add]
+    · rw [conjWt_add, conjWt_single_of_ne hD (lightIdx_ne_conjIdx hD), conjWt_single_conj,
+        zero_add]
+      omega
+  · rw [hmul (conjIdx D hD) (lightIdx D hD) F.frame.conj b (frameVec_conjIdx hD F)
+      (frameVec_lightIdx hD F)]
+    refine lcMonomial_mem_lcSeed hD F (hlev _ _) (Or.inr ⟨?_, ?_⟩)
+    · rw [conjDeg_add, conjDeg_single_conj, conjDeg_single_of_ne hD (lightIdx_ne_conjIdx hD),
+        add_zero]
+    · rw [conjWt_add, conjWt_single_conj, conjWt_single_of_ne hD (lightIdx_ne_conjIdx hD),
+        add_zero]
+      omega
+  · rw [hmul (transIdxLc D hD i) (transIdxLc D hD i) (F.trans.vec i) (F.trans.vec i)
+      (frameVec_transIdxLc hD F i) (frameVec_transIdxLc hD F i)]
+    refine lcMonomial_mem_lcSeed hD F (hlev _ _) (Or.inl ?_)
+    rw [conjDeg_add, conjDeg_single_of_ne hD (transIdxLc_ne_conjIdx hD i),
+      conjDeg_single_of_ne hD (transIdxLc_ne_conjIdx hD i), add_zero]
+
+lemma negPNat_coe_of_neg {i : ℤ} (hi : i < 0) : ((negPNat i : ℕ+) : ℕ) = (-i).toNat := by
+  rw [negPNat, Nat.toPNat'_coe, if_pos (by omega)]
+
+/-- **The `b̃`-component of a rung momentum is `-1`, uniformly in the rung.**  The `b`
+component `lam` is left unevaluated on purpose: it is rung-dependent
+(`DDFLightConeFrame.dotVec_conj_towerMomentum` computes it as `1 + j` over a field) but the
+elimination never needs its value, which is why nothing below requires `[Field R]`. -/
+theorem lcCrea_towerMomentum (F : DDFLightConeFrame η a b) (n : ℕ+) (j : ℤ) :
+    ∃ lam : R, lcCrea η (towerMomentum a b j) n
+      = lam • lcCrea η b n - lcCrea η F.frame.conj n := by
+  classical
+  obtain ⟨lam, mu, c, hdec⟩ := F.exists_frame_decomp (towerMomentum a b j)
+  obtain ⟨_, h2, h3⟩ := F.frame_decomp_coeff hdec
+  have hmu : mu = -1 := by
+    rw [h2, dotVec_towerMomentum_right_of_isotropic η a b F.frame.isotropic j, F.hba]
+  have hc : ∀ i, c i = 0 := fun i => by rw [h3 i, F.dotVec_trans_towerMomentum i j]
+  refine ⟨lam, ?_⟩
+  rw [hdec, lcCrea_add, lcCrea_add, lcCrea_smul, lcCrea_smul, hmu, lcCrea_sum]
+  rw [Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => by rw [hc i, zero_smul, lcCrea_zero]]
+  rw [Finset.sum_const_zero, add_zero, neg_one_smul, ← sub_eq_add_neg]
+
+variable [Algebra ℚ R]
+
+/-- **The leading term of `L_{-n}` on a rung vacuum** (blueprint §B′.4's
+`towerLop_neg_conjDegree_leading`, at the vacuum):
+
+`L_{-n}|0;p_j⟩ = -α^{b̃}_{-n}|0;p_j⟩ + (seed terms)`,
+
+where the seed terms all have strictly smaller measure.  The coefficient of `α^{b̃}_{-n}` is
+`-(b·p_j) = -1` and is **rung-independent**; the rung-dependent coefficient `-(b̃·p_j)` sits
+in front of `α^b_{-n}`, i.e. inside the seed space (blueprint §B′.9 item 1(b)). -/
+theorem Lop_neg_apply_one_add_conj_mem_lcSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (n : ℕ+) (j : ℤ) :
+    Fock.Lop η (towerMomentum a b j) (-((n : ℕ) : ℤ)) (1 : Fock D R)
+        + lcCrea η F.frame.conj n ∈ lcSeed hD F n := by
+  classical
+  obtain ⟨lam, hlam⟩ := lcCrea_towerMomentum F n j
+  rw [Lop_neg_apply_one η (towerMomentum a b j) n, hlam]
+  rw [show ∀ S : Fock D R, lam • lcCrea η b n - lcCrea η F.frame.conj n + invTwo R • S
+        + lcCrea η F.frame.conj n = lam • lcCrea η b n + invTwo R • S from fun S => by abel]
+  refine Submodule.add_mem _ (Submodule.smul_mem _ _ ?_) (Submodule.smul_mem _ _ ?_)
+  · have hbn : lcCrea η b n = lcMonomial F (Finsupp.single ((lightIdx D hD, n) : Osc D) 1) := by
+      rw [lcMonomial_single_one, frameVec_lightIdx]
+    rw [hbn]
+    refine lcMonomial_mem_lcSeed hD F ?_ (Or.inl ?_)
+    · simp
+    · exact conjDeg_single_of_ne hD (lightIdx_ne_conjIdx hD) 1
+  · refine Submodule.sum_mem _ fun m hm => ?_
+    rw [Finset.mem_Ioo] at hm
+    refine oscPair_mem_lcSeed hD F hη ?_
+    rw [negPNat_coe_of_neg (by omega : (-((n : ℕ) : ℤ) - m) < 0), negPNat_coe_of_neg hm.2]
+    omega
+
+end Seed
+
 end StringFormal.NoGhost
