@@ -82,12 +82,26 @@ StringFormal/
                             `volume_eq_lintegral_inv_im_sq` 把 Mathlib 权重 `(1/‖y‖₊)²` 钉成 `1/τ₂²`。
                             η-free；**取向版（带符号的 2-形式 dτ ∧ dτ̄）未形式化**
   Math/MathlibBridges.lean  **桥层**（`namespace StringFormal.Bridge`）：`math.dedekind-eta-function`
-                            与 `worldsheet.modular-group-psl2z` 两张定义卡。η 侧把 Mathlib 的
+                            与 `worldsheet.modular-group-psl2z` 两张定义卡，外加 **ζ(−1) 节**。η 侧把 Mathlib 的
                             `ModularForm.eta` 逐字展开成 `q^{1/24}∏(1−q^n)` 并接上分支约定
                             `q = e^{2πiτ}`、`q^{1/24} = e^{πiτ/12}`；PSL 侧给出 `(aτ+b)/(cτ+d)`、
                             `Im(γτ) = Imτ/|cτ+d|²`、S/T 的作用、**`Z(SL(2,ℤ)) = {±I}`**
                             （`center_eq_pm_one`，Mathlib 与本项目此前都没有）与作用降到
-                            `PSL(2,ℤ)`（`MulAction PSL2Z ℍ`）
+                            `PSL(2,ℤ)`（`MulAction PSL2Z ℍ`）；ζ 侧 **`riemannZeta_neg_one : ζ(−1) = −1/12`**
+                            （Mathlib 只有一般式 `riemannZeta_neg_nat_eq_bernoulli`，**没有**具名的 ζ(−1)）
+                            与卡 `worldsheet.light-cone-normal-ordering-constant` 的算术部分
+                            `lightCone_normalOrderingConstant : ((D−2)/2)·ζ(−1) = −(D−2)/24`（D=26 版给 −1）。
+                            ⚠ 这些**不**触及 `worldsheet.zeta-regularized-sum-of-integers`：那张卡多主张
+                            「有限部分就是物理零点能」，Lean 里无对应物，不因此升档
+  Math/RegulatedSum.lean    指数截断和（图卡 `worldsheet.regulated-sum-laurent-expansion`）：
+                            闭式 `Σ_{n≥1} n e^{−un} = e^{−u}/(1−e^{−u})² = 1/(4 sinh²(u/2))`（`u>0`）、
+                            **sinh 的三阶 Taylor 界** `|sinh x −(x+x³/6)| ≤ |x|⁵/100`（|x|≤1，由 Mathlib
+                            `Real.exp_bound` n=5，偶次项在 sinh 里抵消）、**Laurent 常数项**
+                            `Σ_{n≥1} n e^{−un} − 1/u² → −1/12 (u→0⁺)`（精确分解
+                            `1/(4s²)−1/u² = [(u−2s)/u³]·[1+2s/u]·[(2s/u)⁻¹]²`，三因子极限 −1/24、2、1，
+                            只用一次 squeeze）、形式幂级数版 `(Σ n Xⁿ)(1−X)² = X`（任意交换环，
+                            由 Mathlib `mk_add_choose_mul_one_sub_pow_eq_one` d=1 加位移）。
+                            **未做**：`O(u²)` 余项（只给极限）、u 的 `LaurentSeries` 版、θ-推广
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）

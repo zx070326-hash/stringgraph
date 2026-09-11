@@ -262,7 +262,7 @@
     不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
     余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
 
-- [ ] `zeta-bridge`：「Σ_{n≥1} n → −1/12」的两半。图里这一步**已经被拆成两张卡**，
+- [x] `zeta-bridge`：「Σ_{n≥1} n → −1/12」的两半。图里这一步**已经被拆成两张卡**，
   形式化必须尊重这个拆分：
   - `worldsheet.regulated-sum-laurent-expansion`（rigorous，纯数学）：
     `Σ_{n≥1} n e^{−un} = e^{−u}/(1−e^{−u})² = 1/(4 sinh²(u/2)) = 1/u² − 1/12 + O(u²)`。
@@ -286,6 +286,27 @@
     与「卡 A 的算术部分」`((D−2)/2)·ζ(−1) = −(D−2)/24`。
   - `StringFormal/Math/RegulatedSum.lean`：截断和的闭式、`1/(4 sinh²(u/2))` 形式、
     Laurent 常数项，以及形式幂级数版。
+
+  **已完成（2026-09-11，15 条声明，`check_axioms` 全 `ok`，只有标准三公理）**：
+  - 桥层 `StringFormal.Bridge.riemannZeta_neg_one`（+`riemannZeta_neg_one_eq_bernoulli`、
+    `lightCone_normalOrderingConstant`、`lightCone_normalOrderingConstant_of_26`）。
+  - `StringFormal.RegulatedSum`：`hasSum_nat_mul_exp_neg_mul` / `tsum_nat_mul_exp_neg_mul`
+    （闭式，Mathlib `hasSum_coe_mul_geometric_of_norm_lt_one`）、
+    `exp_neg_div_one_sub_sq_eq_inv_sinh_sq` / `tsum_nat_mul_exp_neg_mul_eq_inv_sinh_sq`（sinh 形）、
+    `abs_sinh_sub_taylor_le`（`|sinh x −(x+x³/6)| ≤ |x|⁵/100`，Mathlib `Real.exp_bound` n=5）、
+    `abs_shiftedSinh_add_le` → `tendsto_shiftedSinh`（−1/24）→ `tendsto_twoSinh_div`（1）→
+    `tendsto_invSinhSq_sub_invSq` → **`tendsto_regulatedSum_sub_invSq`**
+    （`Σ n e^{−un} − 1/u² → −1/12`）、`powerSeries_nat_mul_one_sub_sq`（`(Σ n Xⁿ)(1−X)² = X`）。
+
+  **仍未做**（对图卡 `regulated-sum-laurent-expansion` 的 gaps 应照录）：
+  - 卡面写的是 `= 1/u² − 1/12 + O(u²)`，Lean 只给了**极限**
+    `f(u) − 1/u² → −1/12`。这已经蕴含「奇异部分只有 1/u²、没有 1/u 项、常数项 = −1/12」，
+    但 `O(u²)` 余项阶数**没有**证（要 sinh 的下一阶）。若卡面要机检到字面，
+    需补 `Asymptotics.IsBigO`。
+  - u 方向的 `LaurentSeries`：`powerSeries_nat_mul_one_sub_sq` 活在 `R⟦X⟧`，
+    `X = e^{−u}` 是形式变元，那里 `u → 0⁺`（即 `X → 1`）无意义，所以形式幂级数版
+    **看不到** Laurent 展开，只看到有理函数 `X/(1−X)²`。
+  - θ-推广（Headrick 习题 1.5）。
 
   **口径警告（写图卡时必读）**：ζ(−1) = −1/12 与 `Σ n e^{−un}` 的 Laurent 常数项 = −1/12
   是**两条不同的定理**（解析延拓 vs. 收敛级数的渐近展开），图卡 notes 已点明。
