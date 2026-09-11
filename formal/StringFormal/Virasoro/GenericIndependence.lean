@@ -124,6 +124,45 @@ theorem IsContravariant.linearIndependent_descFamily2 [NoZeroDivisors R]
 
 end Level2
 
+/-! ### Level 3 -/
+
+section Level3
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The three standard level-3 descendants `L₋₃|c,h⟩`, `L₋₂L₋₁|c,h⟩`, `L₋₁³|c,h⟩`. -/
+noncomputable def descFamily3 : Fin 3 → VermaModule R c h :=
+  ![desc3 R c h, desc21 R c h, desc111 R c h]
+
+variable {R c h}
+variable {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+
+/-- The `3 × 3` Gram determinant of `descFamily3` is the level-3 Kac polynomial
+`48h²(16h² + 2h(c-5) + c)(3h² + h(c-7) + c + 2)`.  Restatement of
+`IsContravariant.gram_level_three_det` with the matrix packaged as `gramMatrix`. -/
+theorem IsContravariant.gram_det_descFamily3 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    (gramMatrix B (descFamily3 R c h)).det
+      = 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+          * (3 * h ^ 2 + h * (c - 7) + c + 2) := by
+  rw [Matrix.det_fin_three]
+  simp only [gramMatrix_apply, descFamily3, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons]
+  linear_combination hB.gram_level_three_det hB1
+
+/-- **Generic PBW at level 3.**  If the level-3 Kac polynomial is nonzero then
+`L₋₃|c,h⟩`, `L₋₂L₋₁|c,h⟩`, `L₋₁³|c,h⟩` are linearly independent, so `dim V₃ = 3 = p(3)`.
+Same caveats as `IsContravariant.linearIndependent_descFamily2`. -/
+theorem IsContravariant.linearIndependent_descFamily3 [NoZeroDivisors R]
+    (hB : IsContravariant R c h B) (hB1 : B (hwv R c h) (hwv R c h) = 1)
+    (hdet : 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+        * (3 * h ^ 2 + h * (c - 7) + c + 2) ≠ 0) :
+    LinearIndependent R (descFamily3 R c h) :=
+  linearIndependent_of_gram_det_ne_zero B _ (by
+    rw [hB.gram_det_descFamily3 hB1]; exact hdet)
+
+end Level3
+
 end Virasoro
 
 end StringFormal
