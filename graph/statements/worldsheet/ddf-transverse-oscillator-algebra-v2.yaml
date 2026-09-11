@@ -142,7 +142,8 @@ notes: |
       图节点 worldsheet.isotropic-tower-vertex-operators-commute，formalized）——
       这正是当年被认作障碍的"交叉缩并"，`k_0² = 0` 时缩并因子恰为 1，**无奇点、无单值因子**；
     · **同点乘积** Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L
-      （`sum_towerVertex_towerVertex_of_isotropic`，**图上暂无节点**，见 --via-lean 的 gaps）；
+      （`sum_towerVertex_towerVertex_of_isotropic`，**图上暂无节点**，见 --via-lean 的 gaps；
+      ⚠ 该"暂无节点"已于同日作废，见下一段）；
     · **指标加权和** Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}
       （`sum_weighted_towerVertex_towerVertex`，**图上暂无节点**，同上）——
       这是"全导数留数"的纯代数版本，也是右端那个 m 的来源；
