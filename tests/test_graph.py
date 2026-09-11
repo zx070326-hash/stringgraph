@@ -884,10 +884,12 @@ def test_why_seed_critical_dimension_names_three_routes() -> None:
     tree = why_report(g, "worldsheet.critical-dimension-bosonic")
     assert tree["effective"] == "physical-argument"
     assert tree["own"] == "rigorous"
-    assert {c["id"] for c in tree["children"]} >= {
-        "worldsheet.critical-dimension-light-cone-v2",
-        "worldsheet.critical-dimension-brst-v2",
-    }
+    children = {c["id"] for c in tree["children"]}
+    assert "worldsheet.critical-dimension-light-cone-v2" in children
+    # 2026-09-12 (reviewer-brst-nilpotency): the BRST route reached effective=rigorous
+    # after the independent recomputation of {Q_B, Q_B}, so it is no longer a bottleneck
+    # and correctly drops out of the why-tree (docs/ROADMAP.md R3 "(III) drops out").
+    assert "worldsheet.critical-dimension-brst-v2" not in children
 
 
 # ---------------------------------------------------------------- bib
