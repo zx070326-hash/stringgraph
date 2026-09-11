@@ -312,5 +312,18 @@ notes: |
   逐动量塔表述比 v2 更接近可形式化的形式（每个塔是可数维分级空间）；v4 的全局动量限定与 (2) 的
   显式量词消除了形式化时必须二选一的读法歧义（审计 D1）。抽取记录 E68 建议：
   BRST 版本（worldsheet.no-ghost-theorem-brst）的分级 + 三角矩阵论证也应同时参考。
+
+  【2026-09-11（noghost-conditional）追记，curator——**status 不改**】
+  本节点 (1a)(1b) 的**条件版已机检**：worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+  （`StringFormal.NoGhost.no_ghost_of_spans`，Assembly.lean，own formalized）证明「若塔上每个物理态都是
+  DDF 态 + 零态，则 H_phys/H_null 上诱导型正定」，对**任意 D、任意有序域**成立，文件里 26 一次不出现。
+  那个前件已立为独立节点 **worldsheet.ddf-spanning-hypothesis**（open，刻意无推导）：它是本节点 (1) 那一半
+  **唯一**剩余的非机检假设，也是 D = 26 在整条链上唯一进入之处（--via-goddard-thorn 的 (B-26) gap 的包含式形式）。
+  记账结论：**本节点 (1) = 条件版（formalized）+ 张成假设（open）**；其余每一步（Gram 对角、DDF 扇区正定、
+  零态正交、商型良定义、DDF 态物理）都已 formalized 且与 D 无关。
+  ⚠ 本节点 effective 仍由 --via-goddard-thorn（rigorous，带 (B-26) gap）决定，**不因此升降**；
+  条件版节点 effective = open（由前件压低），这是条件命题的正确读数，不是矛盾。
+  等距同构 (1b) 不另建条件版：满射逐字 = 张成假设（Assembly.lean Gaps 第 2 条）。
+  已证片：worldsheet.ddf-spans-physical-states-level-one-modulo-null（(rung −1, level 1)，一切 D）。
 author: curator
 created: "2026-09-10"
