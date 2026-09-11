@@ -30,8 +30,26 @@ sources:
       ⚠ 抽取记录明确指出：「16 维偶自对偶欧氏格恰有两个」是一条**纯数学定理**，
       **书中不证、不引**，是杂化弦分类的支点；
       「若要进图，来源应另找（Conway–Sloane / Serre *A Course in Arithmetic*）」。
+superseded_by: math.even-self-dual-euclidean-lattices-dimension-16-v2
 tags: [lattice, number-theory, classification, heterotic, unproved-in-source]
 notes: |
+  ★★★【已换代（2026-09-11）：本卡是**三条独立命题的合取**，已拆成三张卡】
+  按 literature/extractions/math-sources.md §47.0 与 §47.6(a) 的裁断，本卡的文字里压着：
+    (A) 「偶自对偶欧氏格的维数必是 8 的倍数」 → **math.even-unimodular-rank-divisible-by-8**
+        （Zagier 2008 §3.2 Proposition 12(i), p. 33；**rigorous**）；
+    (B) 「16 维恰有两个，且两者不同构」 → **math.even-unimodular-rank-16-classification**
+        （Chenevier–Lannes arXiv:1409.7616 ch. II §3 Corollaire 3.6, p. 35；**rigorous**，
+        原文括号自带 «et ces deux réseaux ne sont pas isomorphes»）；
+    (C) 「Polchinski 记号 `Γ_16`、`Γ_8` 的显式坐标及其与 `D_16^+`、`E_8` 的等同」
+        → **math.even-self-dual-euclidean-lattices-dimension-16-v2**（记号桥，等同标 inferred）。
+  ⚠ (A) **不蕴涵** (B)，(B) 也**不是** (A) 的 n = 16 特例；两条的证明手段、原始文献、可形式化难度全不同，
+  压在一张卡里会让 (B) 的「par inspection」有限枚举与 (A) 的模形式论证互相污染。
+  `superseded_by` 只能填一个 id，故指向 (C)（保留了本卡的物理侧记号内容）；
+  (A)(B) 是**新增**的数学卡，不是本卡的换代。
+  下游改指：依赖本卡的推导应同时接 (B) 与 (C)（必要时再加 (A)）。
+
+  ────────── 以下为换代前的原始 notes，保留作历史记录（其中「文献未登记」一节已被 2026-09-11 的
+  researcher 轮次推翻：zagier-2008 与 chenevier-lannes-2014 已登记进 literature/sources.bib）──────────
   ★★【本卡是杂化弦「恰有两个」的数学支点，而本图对它只有一条教科书断言】
   §11.2 的费米子构造用排除法（自旋统计 + OPE 闭合）得到同样的两个理论
   （worldsheet.heterotic-two-supersymmetric-ten-dimensional）；

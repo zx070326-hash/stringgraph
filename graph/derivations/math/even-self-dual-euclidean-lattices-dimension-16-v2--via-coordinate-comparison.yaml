@@ -1,0 +1,46 @@
+id: math.even-self-dual-euclidean-lattices-dimension-16-v2--via-coordinate-comparison
+target: math.even-self-dual-euclidean-lattices-dimension-16-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.even-unimodular-rank-16-classification
+    inferred: true
+    note: |
+      供给「16 维偶幺模格恰有两类 `D_16^+` 与 `E_8 ⊕ E_8`」，本推导第 (3) 步据此把
+      Polchinski 的两个格认成那两类的代表元。
+      **inferred 的理由**：Polchinski 对这条数学定理不证不引（§11.6 那句 'exactly two such lattices'
+      **零出处**），Chenevier–Lannes 也不知道 Polchinski 的记号——**没有任何一处文献把这两侧连起来**。
+      这条边是本项目做的比对（math-sources.md §47.5 明确要求标 inferred）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.6, eq. (11.6.5a,b)、(11.6.6a,b), pp. 74–75（Γ_16 与 Γ_8 的显式坐标）"
+    note: L1（抽取记录 polchinski-1998-v2.md E63）。原书只给坐标，不给 `D_16^+` 这个名字。
+  - ref: chenevier-lannes-2014
+    loc: "arXiv:1409.7616, §I.1, p. 1（`E_n = D_n ⊕ Ze`, `D_n = {x ∈ Z^n : Σ x_i ≡ 0 mod 2}`, `e = ½(1,…,1)`）；ch. II §3, p. 33（`E_n` 亦记 `D_n^+`；`R(E_n) = R(D_n) = D_n` for `n ≥ 16`）"
+    note: L1（页图逐字；math-sources.md §47.3、§47.5）。
+summary: |
+  纯坐标比对，三步：
+
+  (1) **整向量部分**：`(D_16 ⊕ Ze) ∩ Z^16 = D_16 + Z(1,…,1) = D_16`（因 `(1,…,1)` 的分量和 16 是偶数，
+      本已属 `D_16`），而 `D_16` 按定义就是「全整数且 `Σ n_i ∈ 2Z`」= Polchinski (11.6.5a)。
+  (2) **半整向量部分**：`x + (2j+1)e` 的第 i 个分量是 `x_i + j + ½`；令 `n_i = x_i + j`，
+      则 `Σ n_i = Σ x_i + 16j ≡ 0 mod 2`。反之任给满足 `Σ n_i ∈ 2Z` 的 `(n_i + ½)`，
+      取 `x = (n_i)`、`k = 1` 即得。故半整部分恰为 Polchinski (11.6.5b)。
+      (1)+(2) ⇒ **`Γ_16 = D_16^+`（逐点相等）**。分量数换成 8 同理 ⇒ **`Γ_8 = D_8^+`**。
+  (3) 把 math.even-unimodular-rank-16-classification 的两个类
+      `{D_16^+, E_8 ⊕ E_8}` 用 (1)(2) 的字典翻译过来，即 `{Γ_16, Γ_8 ⊕ Γ_8}`。
+
+  status 取 **physical-argument** 而不是 rigorous：这一步确实是有限步初等计算，但按
+  docs/STATUS_LEVELS.md 第 4 级的例外条款，需要 `reviewer-verified: <agent>, <date>` 记录才可标 rigorous，
+  本图**尚无**该记录。→ 这是一处**低成本升级点**：reviewer 独立复核上面两步算术后即可升 rigorous。
+gaps:
+  - "**`Γ_8 = E_8 根格` 这一步只到「= `D_8^+` = Chenevier–Lannes 的 `E_8`」**：该书把 `E_n := D_n ⊕ Ze` 对一切 `n ≡ 0 mod 8` 定义，并在 p. 33 只对 `n ≥ 16` 声明 `R(E_n) = R(D_n)`（言下之意 `n = 8` 是例外，根系为 `E_8` 型），但**本项目没有逐字读到「`D_8^+` 的根系是 `E_8` 型」这句话**。「`D_8^+ ≅ E_8` 根格」是标准事实，但在本图属未核实转述。"
+  - "**两步算术未经第二人复核**：见上方 status 说明；无 `reviewer-verified` 记录。"
+  - "**`E_8 ⊕ E_8` 侧的比对是平凡的正交直和**，本推导未单独论证 Polchinski 的 `Γ_8 × Γ_8`（直积写法）与数学侧 `E_8 ⊕ E_8`（正交直和）措辞一致；两者在本图视为同一对象（旧卡 notes 已记此记号差）。"
+notes: |
+  ⚠ 本推导**不**证明分类定理，也**不**证明「秩被 8 整除」；它只是记号字典。
+  上游的分类边标了 `inferred: true`，理由见该边 note。
+  ⛔ 不得把 `Λ_16` 用于本卡涉及的任何格：该符号在 Chenevier–Lannes 附录 A 指 Barnes–Wall 格 `BW_16`
+  （非幺模），与此处的 `D_16^+` 不是同一个东西（math-sources.md §47.5）。
+author: curator
+created: "2026-09-11"
