@@ -55,6 +55,23 @@ depends_on:
       ⚠ `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 的机检证明链**不经过 K_n 的任何声明**：
       它走的是 (6.4) 那条路（偏振分解），不是 (6.2) 那条路（K 条件配平）。
       故本边只作识别，不承担论证步骤。
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      **接口边，非机检环节**：供给标架定义。目标陈述【断言】一段点名的「横向标架 Ε 满足
+      (T)(O)(T′)(C)」这四条，逐条就是该定义卡的 (F5)(F7)(F6)(F8)；该卡把它们打包成
+      「DDF 光锥标架」这一个对象，并给出文献侧的取法（ε_i ∈ span{k_0,p}^⊥）与显式见证。
+      桥层声明：`StringFormal.NoGhost.{TransverseFrame, FrameSpansOrthogonal, witnessTransverseFrame,
+      dotVec_witnessTransverseFrame_witnessMomentum, witness_frameSpansOrthogonal}`（LightCone.lean）。
+      ⚠ **机检链用的是 `TransverseFrame` + 两条散装假设 `hεa`/`hspan`，以及见证版的 `witness*`，
+      不经过该定义卡多出来的 (F4)(F9)**（共轭方向 b̃ 的条件）。就假设强度而言 Lean 定理**更强**
+      （前提更少：它对一切 `TransverseFrame` 成立，DDF 光锥标架只是其特例），故本边不削弱机检结论。
+      ⚠ **状态副作用（诚实登记）**：该定义卡 status 是 `rigorous`（八条条件没有单个 Lean 声明打包，
+      见该卡 notes【为什么不是 formalized】），按 docs/STATUS_LEVELS.md 的 min 规则，本推导的
+      **effective 因此从 formalized 降为 rigorous**，目标卡随之显示 rigorous。
+      `lean_decl` 本身未变、仍是机检无 sorry 的。恢复 formalized 的正路是**在 Lean 里把
+      (F1)–(F8) 打包成一个 structure 并把见证造成实例**（该定义卡 notes 估计几十行，无新数学），
+      而不是删这条边。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious（目标声明）；证明中调用 StringFormal.NoGhost.{mem_towerBigrade, single_mem_towerPhysSubmodule_iff, single_polState_vec_mem_ddfSpan, ddfOp_neg_one_apply_towerVacuum, towerModeVec_neg_one_apply_single_vacuum, towerLop_neg_one_apply_single_vacuum_eq, ddfOp_towerVacuum_mem_ddfSpan, mem_ddfSpan_of_list} 与 StringFormal.NoGhost.Fock.{mem_physSubmodule_inf_levelSubmodule_one_iff, polState_add, polState_smul, polState_sum, Lop_neg_one_apply_one_eq_polState}；见证版 StringFormal.NoGhost.witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious"
@@ -141,6 +158,19 @@ notes: |
   其中 worldsheet.gt-longitudinal-k-algebra 那条按 docs/STATUS_LEVELS.md 的
   「接口边（2026-09-12 裁决）」标注：它供给文献侧的识别（本卡是 (6.4) 的 N = 1 增量），
   但不在机检证明链上，note 已写明桥层声明。
+
+  【2026-09-11（lightcone-frame，curator）：第八条依赖与由此而来的降级】
+  新增接口边 worldsheet.ddf-light-cone-frame（definition，**rigorous**），供给目标陈述点名的
+  标架对象（(T)(O)(T′)(C) = 该卡的 (F5)(F7)(F6)(F8)）。
+  **上一段「七条依赖全部 formalized，故 effective = formalized」由此过时**：现在八条依赖里有一条
+  rigorous，min 规则使本推导 effective = rigorous，目标卡随之显示 rigorous。
+  ⚠ 这是**记账后果，不是数学后果**：`towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 与其见证版
+  一字未动，仍是无 sorry 的机检定理；且 Lean 的前提比该定义卡**更弱**（只要 `TransverseFrame`
+  加两条散装假设 `hεa`/`hspan`），所以「Lean 证的比卡面窄」这种真实风险在这里**不存在**——
+  降级纯粹来自 min 规则不区分「依赖的对象更一般」与「依赖的论证更弱」。
+  ⇒ 消除降级的正确做法是把 (F1)–(F8) 在 Lean 里打包成结构（见新卡 notes），届时自动回到 formalized。
+  lead 若认为这条识别边不值这个代价，删掉它即可复原；本轮三条同类边合计使全图
+  effective formalized 77 → 73（受影响的四张卡见分支报告）。
 
   **本推导对 worldsheet.no-ghost-theorem-v4 的影响：没有。**
   那条卡的瓶颈是 (B-26)，而 (B-26) 从 N = 2 起才出现。本推导关闭的是
