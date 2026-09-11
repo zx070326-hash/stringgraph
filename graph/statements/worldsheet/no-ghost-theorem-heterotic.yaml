@@ -1,0 +1,76 @@
+id: worldsheet.no-ghost-theorem-heterotic
+kind: proposition
+title: 杂化弦的无鬼定理（Polchinski §11.2 的半句断言）：可构造幂零 BRST 荷并证明无鬼定理，对任何 BRST 不变的周期条件成立
+statement: |
+  设杂化弦如 worldsheet.heterotic-string-construction 所构造。断言：
+
+  **(1)** 可以构造幂零的 BRST 荷 Q_B（右移鬼场与 RNS 超弦相同，即 b̃c̃ 与 β̃γ̃；
+      左移鬼场与玻色弦相同，即 bc）；
+  **(2)** 无鬼定理成立，**且对任何 BRST 不变的周期条件成立**
+      （'with any BRST-invariant periodicity conditions'）；
+  **(3)** 若把任意几个空间方向的 (X^μ, ψ̃^μ) 与 λ^A 替换成中心荷相同的**幺正 (0,1) SCFT**，
+      结论仍然成立。
+
+  ⚠⚠ **本卡的全部来源是原书的一句话，书中不构造、不证明、不引文献。** 逐字：
+    'The right-moving ghosts are the same as in the RNS superstring, and the left-movers are as
+     in the bosonic string. **It is straightforward to construct the nilpotent BRST charge and
+     show the no-ghost theorem, with any BRST-invariant periodicity conditions.** As usual this
+     still holds if we replace any of the spatial (X^μ, ψ̃^μ) and the λ^A with a unitary (0,1)
+     SCFT of the equivalent central charge.'
+
+  **本命题不断言的内容**：
+    (1) **不**给出 Q_B 的表达式（原书不写；本卡也不写，以免编造）。
+    (2) **不**给出「无鬼定理」在杂化弦情形的精确陈述。
+        与超弦一侧（worldsheet.no-ghost-theorem-superstring）不同，原书在这里
+        **连横向 Hilbert 空间 H^⊥ 的定义都没有给**，只用了「the no-ghost theorem」这个词。
+        本卡只能断言「原书声称它成立」，其精确内容由类比确定。
+    (3) 不断言动量条件（k^+ ≠ 0 之类）；原书只字不提。
+    (4) 不断言「BRST 不变的周期条件」是哪些——原书不列举。
+        §11.2/§11.3 实际用到的周期条件见 worldsheet.heterotic-so32-projections
+        与 worldsheet.heterotic-e8e8-construction。
+    (5) 不断言 (3) 中「幺正 (0,1) SCFT」的存在性或分类。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 50, **无式号**（(11.2.5c) 与 (11.2.6) 之间的一段；逐字见 statement）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E55；整段逐字读到原书页图）。
+      ⚠ **无式号是原书事实**，抽取记录明确要求 loc 只能写「§11.2, p. 50（无式号）」，不得编造式号。
+      ⚠ 抽取记录评价：这是本卷第二条「无鬼定理靠类比」的陈述，且**比 §10.5 末那条更弱**
+      （那条至少给了 H^⊥ 的定义与三重结论；这里连陈述都只有半句）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 末, p. 25（超弦无鬼定理，同样无式号；'The proof is a direct imitation of the bosonic argument of chapter 4.'）"
+    note: |
+      L1（E39）。杂化弦的右移一侧即此；本图对应节点 worldsheet.no-ghost-theorem-superstring。
+  - ref: polchinski-1998-v1
+    loc: "§4.4, pp. 137–142（玻色弦无鬼定理的 BRST 证明）"
+    note: |
+      杂化弦的左移一侧即此；本图对应节点 worldsheet.no-ghost-theorem-brst。
+      两侧都是原书明写的类比对象（'the left-movers are as in the bosonic string'）。
+tags: [heterotic, no-ghost-theorem, brst, unitarity, assertion]
+notes: |
+  ★★【本卡是本轮 §11 抽取里论证最薄弱的一张，建卡的理由是「让这个缺口在图上可见」】
+  抽取记录 Q4 把它与 §10.5 末那条并列，并指出超弦相对玻色弦至少多出三个结构，
+  而 Polchinski **完全没有讨论**它们是否影响论证：
+    (i) βγ 是**对易**鬼场，Fock 空间与 bc 不同，且有 |1⟩ ≠ |0⟩_NS 的不等价真空问题；
+    (ii) R 扇区有 β_0、γ_0 零模，(10.5.26) 是**额外强加**的条件；
+    (iii) Vol.1 §4.4 的证明用「light-cone number 分次 + S = {Q_1, R} 是数算符 + 严格下三角」，
+          而超弦版的 S 必须还计 β、γ 与 ψ^{0,1}，**βγ 的占据数无上界**。
+  杂化弦在此之上还多出：
+    (iv) 左右两侧的鬼场系统**不同**（左 bc、右 b̃c̃ + β̃γ̃），
+         而 Vol.1 §4.4 与 §10.5 的论证都是单侧的；两侧如何拼接原书不谈；
+    (v) 「任何 BRST 不变的周期条件」这个全称量词**没有任何论证**，
+         而 §11.2/§11.3 恰恰要对多种周期条件（O(32) 扭曲、分成两组 16、§11.3 的扭曲构造）使用它。
+
+  【升级路径】与超弦一侧共用：ohta-1986、henneaux-1987 等（见
+  worldsheet.no-ghost-theorem-superstring 的 notes；**均未抽取，不得直接入库**）。
+  杂化弦特有的 (iv)(v) 是否被那些文献覆盖，本轮未查。
+
+  【为什么不标 conjecture】按 docs/STATUS_LEVELS.md「断言 + 骨架」档位（lead 裁决 2026-09-11）：
+  「论证不完整」与「结论可能为假」是两个轴。此处结论在文献中无争议，
+  故标 physical-argument 并把缺口逐条写进推导的 gaps，**不**标 conjecture。
+author: curator
+created: "2026-09-11"

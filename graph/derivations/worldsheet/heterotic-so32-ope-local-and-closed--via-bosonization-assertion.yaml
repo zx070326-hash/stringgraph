@@ -1,0 +1,68 @@
+id: worldsheet.heterotic-so32-ope-local-and-closed--via-bosonization-assertion
+target: worldsheet.heterotic-so32-ope-local-and-closed
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-so32-projections
+    note: |
+      供给被验证的对象：扇区（(11.2.9) 的两种周期条件）与投影（(11.2.10)），
+      以及玻色化记账 (11.2.11)/(11.2.12)（F = Σ_K q_K）。
+  - id: worldsheet.superstring-sector-consistency-conditions
+    note: |
+      供给「相互局域」与「OPE 闭合」这两条条件的**定义**（§10.6 的 (a)(b)，(10.6.5)/(10.6.6)）。
+      本卡断言的是杂化弦的扇区集合满足它们。
+  - id: worldsheet.fermion-bosonization-two-dimensions
+    inferred: false
+    note: |
+      供给本推导**唯一的论证手段**：原书这一句的全文逐字是
+      'It is easily verified **by means of bosonization** that the OPE is local and closed.'
+      ——即「玻色化」被原书**逐字点名**为手段，故此边不标 inferred。
+      具体内容：(11.2.11)/(11.2.12) 把 32 个 λ^A 两两复化成 16 个 λ^{K±}，
+      再玻色化成 16 个左移标量 H^K，左移费米子数 F = Σ_K q_K；
+      保留算子写成 exp[i Σ_K q_K H^K] 型后，相互局域性与 OPE 闭合就是 q 矢量的
+      整/半整性与格的闭合性。这一步用的就是 §10.3 的 ψ ≅ e^{iH} 字典。
+      ⚠ **本边不使推导变严格**：玻色化卡自身是 physical-argument，
+      且原书对本推导的验证仍然只有 'easily verified' 一句（见 gaps）。
+    convention_map: |
+      玻色化卡（worldsheet.fermion-bosonization-two-dimensions）用
+      conv.nonembedding-scalar-normalization：H^K(z)H^L(0) ∼ −δ^{KL} ln z，即 α' = 2、
+      只取全纯一半；而 worldsheet.heterotic-so32-projections 与本推导其余部分声明的是
+      conv.alpha-prime-regge（嵌入坐标 X^μ 保留显式 α'）。
+      两者不冲突：λ^A / H^K 是**非嵌入**世界面场，X^μ 是嵌入坐标，
+      按 conv.nonembedding-scalar-normalization 的要点 (1) 各用各的。
+  - id: worldsheet.vertex-operator-cocycle
+    inferred: true
+    note: |
+      **inferred**：把顶点算子写成 exp[i Σ_K q_K H^K] 型时，不同 K 的指数**相互交换**，
+      故按字面写下统计是错的，需要 cocycle（§10.3 脚注 2 的同一问题在 16 个 H^K 上重现，
+      而 (10.4.26)–(10.4.28) 正是格点动量情形的一般表达式，格就是这里的 SO(32)/E₈ 权格）。
+      **原书 §11.2 在说 'by means of bosonization' 时不提 cocycle**，
+      故这条边在 p. 51 找不到对应论证，标 inferred。
+      ⚠ 这不是形式上的补充：「相互局域性」正是关于算子互绕一圈的相位，
+      而 cocycle 恰恰改变这个相位。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, (11.2.12) 之后, p. 51（无式号；逐字：'It is easily verified by means of bosonization that the OPE is local and closed.'）"
+    note: L1（抽取记录 polchinski-1998-v2.md E56）。**这一句就是全部论证。**
+summary: |
+  原书的论证是一句话：把 λ^A 复化并玻色化为 16 个左移标量 H^K 后，
+  保留算子写成 exp[i Σ_K q_K H^K] 型，相互局域性与 OPE 闭合可由 q 矢量的整/半整性直接读出。
+  **原书不写这个验证**，只说 'easily verified by means of bosonization'。
+gaps:
+  - "**'easily verified' 是全部论证**：原书不写验证过程。"
+  - "**玻色化本身只到 physical-argument**：本轮（2026-09-11，curator-bosonization）已把 §10.3 的玻色化建成节点（worldsheet.fermion-bosonization-two-dimensions）并接上本推导，故「唯一手段在图上无支撑」这条已消除；但那张卡的论证是「OPE 逐条同形 ⇒ 等价」，`≅` 没有数学陈述，手征玻色子未定义。见该卡 derivation 的 gaps。"
+  - "**(11.2.11)/(11.2.12) 这一步本身无节点**：本推导接的是 §10.3 的**一般**玻色化字典（一对复费米子 ↔ 一个玻色子），而把 32 个 λ^A 复化成 16 对、再玻色化成 16 个 H^K 这一**具体**记账，由 worldsheet.heterotic-so32-projections 的断言 (d) 照抄原书公式承载，没有独立推导。"
+  - "**cocycle 未被原书提及**：16 个 H^K 的指数相互交换，按字面写下统计是错的（§10.3 脚注 2 的同一问题）。本推导补了一条指向 worldsheet.vertex-operator-cocycle 的 inferred 边，但原书 §11.2 在这里不提 cocycle，且那张卡的公式因 Vol.1 §8.4 记号未核实而当前不可计算。"
+author: curator
+created: "2026-09-11"
+notes: |
+  【2026-09-11 补边（curator-bosonization）】本推导原先只有两条 depends_on，
+  gaps 里写着「**本图完全没有玻色化节点**…因此本推导的唯一手段在图上没有支撑」。
+  本轮建出 §10.3/§10.4 的玻色化组节点后补了两条边：
+    - worldsheet.fermion-bosonization-two-dimensions（**非 inferred**：原书逐字
+      'by means of bosonization'，手段被点名）；
+    - worldsheet.vertex-operator-cocycle（**inferred**：原书 §11.2 不提 cocycle）。
+  同时按新建的 conv.nonembedding-scalar-normalization 写了 convention_map
+  （原 gaps 第三条要求的正是这件事，已落实，故该条从 gaps 移除并改写为上面第二条）。
+  **status 不变（physical-argument）**：补边不改变原书只有 'easily verified' 一句的事实。
+

@@ -1,0 +1,48 @@
+id: worldsheet.rns-matter-central-charge
+kind: proposition
+title: RNS 物质部门的中心荷 c^m = (3/2)D（每个标量 1，每个 Majorana 费米子 1/2）
+statement: |
+  worldsheet.rns-action 的 Xψ 理论（D 个自由标量 X^μ 与 D 个世界面 Majorana 费米子 ψ^μ）
+  的物质中心荷为
+    c^m = (1 + 1/2) D = (3/2) D，
+  反全纯部门同样给 c̃^m = (3/2)D。
+  这里 c 的归一化由 TT OPE 的四阶极点定义（worldsheet.tt-ope-central-charge，
+  与 conv.virasoro-standard 相容）：(10.1.13a) 的 3D/(4z^4) 与一般形式 c/(2z^4) 比对即得。
+  等价地，T_F T_F 的三阶极点 D/z^3 与一般形式 2c/(3z^3) 比对也给 c = (3/2)D
+  （两处给同一个 c 是 math.super-virasoro-central-charge-equality 的内容）。
+
+  【记号】中心荷一律写上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 撞号
+  （沿用 worldsheet.critical-dimension-bosonic-v2 的记号规定）。
+
+  本命题**不**断言 D 的取值，也**不**断言总中心荷为零。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.14), p. 3（逐字：'Each scalar contributes 1 to the central charge and each fermion 1/2, for a total' c = (1 + 1/2)D = (3/2)D）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E8；式号与内容逐页读到原书页图）。
+      原书把它作为 (10.1.13a) 的 3D/(4z^4) 的直接读数给出。
+      ⚠ 原书在此只**复述**「每个自由标量 c = 1」而不给 Vol.1 的式号；
+      Vol.1 那一步的定位问题（抽取记录 v1 的 E34/Q4：既无式号也无页码）在本卷**没有**被解决。
+      本图的缓解是 worldsheet.free-boson-central-charge-d 另有 Lean 证明。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.13a), p. 3（3D/(4z^4)）与 eq. (10.1.15a), p. 4（c/(2z^4)）"
+tags: [rns, superstring, central-charge, superconformal]
+notes: |
+  【与 worldsheet.free-boson-central-charge-d 的关系】那张卡断言 D 个自由玻色子给 c = D
+  （并有 Lean 证明，formalized）。本卡的 (3/2)D 中的 D 那一半正是它；
+  另一半（每个 Majorana 费米子 1/2）在本图**没有**独立节点，
+  它在本卡里由 (10.1.13a) 的整体系数 3D/4 一次性承载。
+  → 待建（本轮未做）：`worldsheet.free-majorana-fermion-central-charge-half`。
+  建了之后本卡可改挂两条独立输入，届时应新建 v2 而不是改本卡。
+
+  【本卡是 D = 10 的直接输入】它与 worldsheet.superconformal-ghost-central-charge（c^g = −15）
+  一起给 (3/2)D − 15 = 0 ⟹ D = 10，见
+  worldsheet.critical-dimension-superstring-anomaly 与汇总卡
+  worldsheet.critical-dimension-superstring。
+author: curator
+created: "2026-09-11"

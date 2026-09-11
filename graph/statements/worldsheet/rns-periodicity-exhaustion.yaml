@@ -1,0 +1,53 @@
+id: worldsheet.rns-periodicity-exhaustion
+kind: proposition
+title: 在最大 Poincaré 不变性与 Lorentz 不变性下，世界面费米子只有 R 与 NS 两种周期条件；闭弦因此有四个扇区
+statement: |
+  **前提（三条，必须一起读）**：
+    (P1) X^μ 在 w ≅ w + 2π 下**周期**。原书给的理由是：'Since we are initially interested in
+         theories with the maximum Poincaré invariance, X^μ must be periodic.'
+         ⚠ 反周期的 X^μ 并非不可能（原书括注：'(Antiperiodicity of X^μ is interesting, and we
+         have already encountered it for the twisted strings on an orbifold, but it would break
+         some of the translation invariance.)'），故 (P1) 是一个**额外假设**，不是定理。
+    (P2) 世界面费米作用量 (1/4π)∫d^2w (ψ^μ ∂_w̄ ψ_μ + ψ̃^μ ∂_w ψ̃_μ) 在该周期下不变。
+    (P3) 时空 Lorentz 不变性：周期条件中的相位对所有 μ 相同。
+
+  **结论**：在 (P1)–(P3) 下，ψ^μ 的周期条件只有两种可能：
+    R : ψ^μ(w + 2π) = +ψ^μ(w),    NS : ψ^μ(w + 2π) = −ψ^μ(w)，
+  即 worldsheet.rns-fermion-periodicity 的 ν ∈ {0, 1/2}；ψ̃^μ 同理给 ν̃ ∈ {0, 1/2}。
+
+  **闭弦的推论**：左右两侧的选择独立，故闭弦有 **四**种把理论放在圆上的方式
+    (ν, ν̃) ∈ {NS–NS, NS–R, R–NS, R–R}，
+  每一种给出一个不同的 Hilbert 空间（原书：'essentially there are four different kinds of
+  closed superstring'，并指出它们类比于 Z_2 orbifold 的扭曲/未扭曲扇区）。
+
+  本命题**不**断言完整的弦谱是这四个扇区的哪一种组合——那需要 §10.6 的一致性条件
+  （worldsheet.superstring-sector-consistency-solutions）。原书在此只预告
+  'consistency requires that the full string spectrum contain certain combinations of states
+  from each sector'。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-coordinate-length
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.1)（柱面费米作用量）、(10.2.2a,b)、(10.2.3a,b)，pp. 5–6；逐字 'This condition plus Lorentz invariance still allows two possible periodicity conditions'；X^μ 周期性的理由与 orbifold 括注同页"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E15；式号与逐字措辞均逐页读到原书页图）。
+      ⚠ 抽取记录特别提醒：「只有 R 与 NS 两种」这个结论**依赖「要最大 Poincaré 不变性」
+      这个额外假设**，转节点时必须写进陈述本身——本卡的 (P1) 即此。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, (10.2.4) 下方, p. 6（四个闭弦扇区，逐字：'Thus there are four different ways to put the theory on a circle, each of which will lead to a different Hilbert space … We will denote these by (ν, ν̃) or by NS–NS, NS–R, R–NS, and R–R. They are analogous to the twisted and untwisted sectors of the Z_2 orbifold.'）"
+    note: L1（E16）。
+tags: [rns, superstring, ns-sector, ramond-sector, periodicity, sectors]
+notes: |
+  【为什么把闭弦四扇区并入本卡而不单列】原书 E16 的整段就是 (10.2.3) 的一行推论
+  （左右独立各两种 ⟹ 四种），没有独立论证；按 graph/CLAUDE.md「文献分别推导才拆」的判据不拆。
+  开弦的情形不同（要用边界条件与一次场重定义），故单列
+  worldsheet.open-superstring-two-sectors。
+
+  【本卡刻意不写的一步】「四个扇区各自给出一个不同的 Hilbert 空间」这句里的「不同」
+  在原书是描述性的（'essentially there are four different kinds of closed superstring'），
+  本卡照抄为推论，不主张它们两两不同构。
+author: curator
+created: "2026-09-11"

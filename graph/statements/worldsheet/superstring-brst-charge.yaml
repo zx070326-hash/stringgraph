@@ -1,0 +1,81 @@
+id: worldsheet.superstring-brst-charge
+kind: definition
+status: physical-argument
+title: 超弦的 BRST 荷 Q_B（超共形约束代数的 BRST 算符）
+statement: |
+  取物质部门 (T^m_B, T^m_F)（worldsheet.rns-superconformal-generators）与鬼场部门
+  (b, c, β, γ)（worldsheet.superconformal-ghost-modes，λ = 2 的一阶 SCFT）。BRST 流与 BRST 荷取为
+    j_B = c T^m_B + γ T^m_F + (1/2)(c T^g_B + γ T^g_F)
+        = c T^m_B + γ T^m_F + b c ∂c + (3/4)(∂c)βγ + (1/4) c (∂β)γ − (3/4) c β ∂γ − b γ²,
+    Q_B = (1/2πi) ∮ ( dz j_B − dz̄ j̃_B )。
+  模式展开：
+    Q_B = Σ_m c_{−m} L^m_m + Σ_r γ_{−r} G^m_r
+          − Σ_{m,n} (1/2)(n − m) °b_{−m−n} c_m c_n°
+          + Σ_{m,r} [ (1/2)(2r − m) °β_{−m−r} c_m γ_r° − °b_{−m} γ_{m−r} γ_r° ]
+          + a^g c_0,
+  其中 m, n ∈ Z、r ∈ Z + ν，a^g 是鬼场正规序常数（worldsheet.superconformal-ghost-normal-ordering-constants：
+  NS 扇区 −1/2、R 扇区 −5/8）。
+  **两条定义性的算子关系**（原书由 (10.5.22) 的 OPE 读出）：
+    {Q_B, b_n} = L_n,     [Q_B, β_r] = G_r，
+  其中 L_n、G_r 是**物质加鬼场**的总生成元。
+
+  **两条前提，必须与本卡一起读**：
+    (P1) β、γ 的周期性必须与 T_F 相同（同一个 ν），否则 j_B 不周期、Q_B 无法由围道积分定义
+         （worldsheet.superconformal-ghost-modes 已记该逐字理由）。
+    (P2) bcβγ 理论有一族由 β → xβ、γ → x^{−1}γ 联系的超共形对称性；上式用的 (T^g_B, T^g_F)
+         是 (10.1.21) 那一组，它是被**一般 BRST 构造 (4.3.14) 挑出来**的
+         （原书 §10.5 脚注 3，逐字见 sources）。
+
+  本卡是定义。它**不**断言 Q_B² = 0（见 worldsheet.critical-dimension-superstring-brst），
+  也**不**断言上同调的任何性质（见 worldsheet.no-ghost-theorem-superstring）。
+uses:
+  - worldsheet.brst-charge-general-constraint-algebra
+  - worldsheet.rns-superconformal-generators
+  - worldsheet.superconformal-ghost-modes
+  - worldsheet.rns-super-virasoro-generators
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5「BRST quantization」, eq. (10.5.20)（Q_B 的围道积分）、(10.5.21)（j_B 的两种写法）、(10.5.22)（j_B 与 b、β 的 OPE）、(10.5.23)（{Q_B,b_n} = L_n、[Q_B,β_r] = G_r）、(10.5.24)（模式展开），p. 24"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E36；式号与公式内容逐页读到原书页图）。
+      原书开头逐字：'From the general structure discussed in chapter 4, in particular the
+      expression (4.3.14) for the BRST operator for a general constraint algebra, the BRST
+      operator can be constructed as a simple extension of the bosonic one'。
+      末项 a^g c_0 与玻色弦 (4.3.7) 的 −c_0 平行，但数值不同（NS −1/2、R −5/8）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 脚注 3, p. 24（逐字：'The bcβγ theory actually has a one-parameter family of superconformal symmetries, related by rescaling β → xβ and γ → x^{−1}γ. The general BRST construction (4.3.14) singles out the symmetry (10.1.21); this is most easily verified by noting that it correctly leads to the OPEs (10.5.22).'）"
+    note: |
+      L1（E13 备注）。这是本卡 (P2) 的来源，抽取记录明确要求转节点时显式记录这个非平凡选择。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.14)（一般约束代数的 BRST 算符表达式）"
+    note: |
+      Vol.2 明写引用这一式号，故 uses worldsheet.brst-charge-general-constraint-algebra 是
+      文献明写的依赖。★ 抽取记录 E36 记下一条对 v1 的订正：v1 的 E65 把 (4.3.15)/(4.3.16)
+      记为「一般约束代数的 BRST 荷及其幂零条件」，而 Vol.2 这里引用的是 **(4.3.14)**；
+      「(4.3.14) 是一般约束代数的 BRST 算符表达式」现在有了 Vol.2 的一手背书（L1）。
+tags: [superstring, brst, ghosts, definition, rns]
+notes: |
+  【status: physical-argument 的理由】(a) j_B 是复合算符（要正规序，Vol.2 隐含 : :）；
+  (b) Q_B 由围道积分定义，收敛与围道变形合法性未证（lead 2026-09-10 裁决）；
+  (c) 上游 worldsheet.superconformal-ghost-modes 与 worldsheet.rns-superconformal-generators
+  的有效状态都是 physical-argument。
+
+  【与玻色弦 BRST 卡的关系】worldsheet.brst-quantization-v2（bc 鬼场、c^g 符号化）是玻色弦版本。
+  本卡是超弦版本：多出 γT^m_F 项与四个含 β、γ 的鬼场项，且常数按扇区取两个值。
+  **不复用**那张卡的 Q_B（不是同一个算子）。
+
+  【受限模的问题】玻色弦一侧的 worldsheet.brst-quantization-v2 明确把 Q_B 定义在「受限模」上
+  （每个向量被除有限多个模式外的生成元零化），以保证 Q_B、Q_B² 逐项有限。
+  ⚠ 超弦的情形更糟：βγ 是对易场，占据数无上界（worldsheet.superconformal-ghost-modes 的 notes），
+  故「受限模」的构造需要重新审视。**原书对此完全不讨论。**
+  本卡按原书照录 (10.5.24)，不声明定义域；这个缺口在
+  worldsheet.critical-dimension-superstring-brst 与 worldsheet.no-ghost-theorem-superstring
+  的 gaps 里记明。
+author: curator
+created: "2026-09-11"

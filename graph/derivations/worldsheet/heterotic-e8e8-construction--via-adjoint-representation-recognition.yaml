@@ -1,0 +1,47 @@
+id: worldsheet.heterotic-e8e8-construction--via-adjoint-representation-recognition
+target: worldsheet.heterotic-e8e8-construction
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-string-construction
+    note: 供给 32 个 λ^A 与左移 c = 16 的配平；本卡只是换一种周期条件的取法。
+  - id: worldsheet.heterotic-so32-projections
+    note: |
+      供给对照的取法（32 个同号）与右移 GSO 投影 exp(πiF̃) = 1；
+      (11.2.19)–(11.2.21) 是把左移的 (11.2.9)/(11.2.10) 换成两组独立的版本。
+  - id: worldsheet.heterotic-left-moving-zero-point-constants
+    note: |
+      供给零点能助记法在左移部门的用法；(11.2.24) 的 −8/24 + 16/24 − 16/48 = 0
+      是同一条助记法在「16 周期 + 16 反周期」下的读数。
+  - id: worldsheet.heterotic-so32-partition-function
+    note: |
+      供给「Z^α_β 的模变换相位在取幂后如何相消」这条符号论证；
+      (11.2.22) 用的是同一条论证的「八次幂再平方」版本
+      （原书逐字：'the minus signs from Z_ψ^± (which was for eight fermions) are squared'）。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    inferred: true
+    note: |
+      **inferred 的理由**：「16 个周期实费米子的零模给出 2^8 = 256 维旋量表示」用的是
+      Clifford 代数表示这一事实，原书在 §11.2 **不重述**、不引 §10.2。
+      本图连到 §10.2 的 R 扇区零模卡，是本图补的边。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.19)–(11.2.28), pp. 53–55（逐字见目标卡 sources）"
+    note: L1（抽取记录 polchinski-1998-v2.md E57）。
+summary: |
+  (1) 把 32 个 λ^A 分成两组 16，独立取周期条件（(11.2.19)），对 8 种组合求和并投影（(11.2.21)）；
+      左移配分函数变成 Z_8²（(11.2.22)），符号论证仍成立，因为 8 费米子的负号被**平方**掉。
+  (2) R–NS′ 扇区的左移零点能常数按助记法算得 0（(11.2.24)），故其基态无质量；
+      16 个周期 λ 的零模给出 256 维旋量，投影后留下 128。
+  (3) 把左移无质量内容按 SO(16) × SO(16) 分类得 (11.2.25)：
+      两份 120（伴随）+ 两份 128（旋量）+ 一份 (8_v,1,1)。
+  (4) **认出**：时空一致性要求无质量矢量在规范群的伴随表示中，而 E₈ 的伴随 248 在其 SO(16)
+      子群下分解为 120 + 128 —— 故规范群是 E₈ × E₈（原书用词 'Evidently'）。
+gaps:
+  - "**第 (4) 步是「认出」而不是推导**：原书用 'There is indeed a group … Evidently'。既不证明「无质量矢量必须在伴随表示」这条时空一致性要求，也不给 E₈ 的构造或 248 = 120 + 128 的分支规则。"
+  - "**李代数事实在本图完全没有节点**：dim E₈ = 248、E₈ ⊃ SO(16)、分支规则 248 = 120 + 128。§11.4「A little Lie algebra」（E59）本轮未入图，且原书 pp. 61–65 在抽取时被跳读（抽取记录 §3.2）。"
+  - "**'Again closure and locality of the OPE and modular invariance are easily verified.' 是全部验证**：原书不做。与 worldsheet.heterotic-so32-ope-local-and-closed 的缺口相同（本图无玻色化节点）。"
+  - "**Clifford 零模那条边是 inferred**：原书在 §11.2 不重述「周期费米子零模给旋量表示」的论证。"
+  - "**(11.2.28) 的完整无质量谱本卡只作指引，未逐条转录**：抽取记录只记了式号，未逐字列出各项。要用必须补读 p. 55 页图。"
+author: curator
+created: "2026-09-11"

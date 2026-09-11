@@ -1,0 +1,30 @@
+id: duality.type-i-heterotic-so32-same-theory--via-forward-reference-to-chapter-14
+target: duality.type-i-heterotic-so32-same-theory
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: worldsheet.heterotic-so32-massless-spectrum
+    note: 供给对偶一端：SO(32) 杂化弦的无质量谱（N = 1 超引力 + so(32) 伴随规范多重态）。
+  - id: worldsheet.ten-dimensional-superstring-theories
+    note: |
+      供给对偶另一端：type I SO(32)（该卡的结论之一，无质量内容 (10.6.19)）。
+      ⚠ 那张卡本身是条件式的（(P1)–(P5)）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, p. 53（无式号；逐字：'Remarkably, however, we will see in chapter 14 that the type I and heterotic SO(32) theories are one and the same.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56 备注）。**这一句就是全部内容；论证推给第 14 章。**
+summary: |
+  本推导**不是论证**，只是把 Polchinski 在 §11.2 的一句前向引用记录在案，
+  并把它的两端（SO(32) 杂化弦、type I SO(32)）接到本图已有的两张谱卡上，
+  使这条对偶在图上可见、可被 `stringgraph why` 追踪。
+
+  按根 CLAUDE.md 原则 2（对偶一律 conjecture）与本图对它掌握的论证量（零），
+  status 定为 conjecture。
+gaps:
+  - "**本书在第 11 章不给任何论证**：全部内容推给第 14 章，而第 14 章本项目未读、未抽取。"
+  - "**没有对偶字典**：耦合常数的对应（g_I ↔ 1/g_het 之类）、态的对应、以及在什么意义下「同一个理论」，本图全无。"
+  - "**两端的谱卡本身都是 physical-argument 且条件式**：type I 一端来自 worldsheet.ten-dimensional-superstring-theories 的 (P1)–(P5)。"
+  - "**原始文献未登记**：把这条抬起来需要第 14 章或 Polchinski–Witten 1995 等，均不在 literature/sources.bib 中。"
+author: curator
+created: "2026-09-11"

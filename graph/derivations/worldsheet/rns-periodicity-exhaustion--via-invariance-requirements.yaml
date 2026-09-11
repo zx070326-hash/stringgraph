@@ -1,0 +1,40 @@
+id: worldsheet.rns-periodicity-exhaustion--via-invariance-requirements
+target: worldsheet.rns-periodicity-exhaustion
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-action
+    note: |
+      供给柱面上的费米作用量（(10.2.1) 是 (10.1.5) 在 w 坐标下的写法）与场 ψ^μ, ψ̃^μ 的定义。
+  - id: worldsheet.rns-fermion-periodicity
+    note: 供给 ν, ν̃ 与相位记号，即结论的表述框架。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, pp. 5–6：eq. (10.2.1)–(10.2.3a,b)；逐字 'This condition plus Lorentz invariance still allows two possible periodicity conditions'；'Since we are initially interested in theories with the maximum Poincaré invariance, X^μ must be periodic.'；orbifold 括注同页"
+    note: |
+      L1。⚠ 原书**没有**给出「相位必须是 ±1」这一步的推导，只说作用量不变性加 Lorentz 不变性
+      「仍允许两种」。本推导下面的 summary 把这一步补出来，但那是 curator 的补算，不是原文。
+summary: |
+  原书给的论证只有一句（见 sources 的逐字）。把它展开成可核对的形式：
+  (1) 由 (P3)（Lorentz 不变性）周期条件必须是 ψ^μ(w+2π) = e^{2πiν} ψ^μ(w) 且相位与 μ 无关，
+      否则不同分量的周期性不同，会破坏时空 Lorentz 变换（它把不同 μ 混起来）。
+  (2) 由 (P2)（作用量的费米项 ψ^μ∂_w̄ψ_μ 在绕圈后不变）：该项在相位下带 e^{4πiν}，
+      故需 e^{4πiν} = 1，即 2ν ∈ Z，即 ν ∈ {0, 1/2} mod 1。
+  (3) 由 (P1)（X^μ 周期）：超流 T_F ∝ ψ^μ∂X_μ 的周期相位等于 ψ 的相位（(10.2.4)），
+      从而 R/NS 的选择同时是约束代数的选择；若 X^μ 反周期则可能有别的组合，
+      但那会破坏部分平移不变性（原书括注），故被 (P1) 排除。
+  (4) 左右两侧独立 ⟹ 闭弦四扇区。
+
+  【status 的理由（三条）】
+  (1) 关键一步（相位只能是 ±1）在原书中没有推导，本推导 summary 的第 (1)(2) 步是 curator
+      的补算，来源只保证结论；
+  (2) 前提 (P1) 本身是一个**物理选择**（要最大 Poincaré 不变性），不是数学条件——
+      原书自己指出反周期 X^μ 是「interesting」的，只是会破坏平移不变性；
+  (3) 「作用量不变」这条判据用的是路径积分/经典作用量层面的论断，本图无严格版本。
+gaps:
+  - "**「相位对所有 μ 相同」这一步的原书论证只有 'plus Lorentz invariance' 五个字**：本推导 summary 第 (1) 步是 curator 补出的理由，不是来源内容。"
+  - "**前提 (P1)「最大 Poincaré 不变性 ⟹ X^μ 周期」是物理选择而非定理**：原书明写反周期 X^μ 可能（orbifold 扭曲弦）但会破坏部分平移不变性。任何下游把「只有 R、NS 两种」读成绝对结论的用法都错。"
+  - "**没有处理更一般的周期性**：原书 §10.7 (10.7.4) 与 §10.3 (10.3.20) 都用到一般实 ν 的费米子（谱流），即一般相位在技术上是有意义的；本卡的结论只在 (P1)–(P3) 下成立。"
+  - "**「四个扇区给出四个不同的 Hilbert 空间」未论证不同构**：原书措辞是描述性的。"
+author: curator
+created: "2026-09-11"

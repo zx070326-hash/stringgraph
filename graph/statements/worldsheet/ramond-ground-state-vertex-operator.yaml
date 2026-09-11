@@ -1,0 +1,91 @@
+id: worldsheet.ramond-ground-state-vertex-operator
+kind: proposition
+title: "R 扇区基态的顶点算子：βγ 侧的自旋场 Σ = e^{−φ/2}（权 3/8，由 β、γ 与它的半整数幂 OPE 定出），全算子 V_s = e^{−φ/2} Θ_s；加上 bc 鬼场的 −1 后与正规序常数 (10.4.5) 相符"
+statement: |
+  【设定】worldsheet.beta-gamma-bosonization 的玻色化字典（β ≅ e^{−φ}∂ξ、γ ≅ e^{φ}η，
+  φ 按 conv.nonembedding-scalar-normalization 归一），与
+  worldsheet.spin-field-vertex-operators 的物质侧自旋场 Θ_s ≅ exp[i Σ_{a=0}^{4} s_a H^a]。
+  λ' = 3/2（弦论的超共形鬼场）。
+
+  【断言 (1)：βγ 侧 R 扇区算子由半整数幂 OPE 定出】要求算子 Σ 满足
+        β(z) Σ(0) = O(z^{−1/2}),        γ(z) Σ(0) = O(z^{1/2})        （(10.4.23)）
+  （即与 β、γ 的 OPE 带 z^{±1/2} 型**分支切割**——这正是 R 扇区的特征），
+  则
+        Σ  =  e^{− φ/2},        其权  h = 3/8                        （(10.4.24)）
+
+  【断言 (2)：R 基态的完整顶点算子】
+        V_s  =  e^{− φ/2}  Θ_s                                       （(10.4.25)）
+  即"鬼场侧的自旋场"乘"物质侧的自旋场"。
+
+  【断言 (3)：与鬼场正规序常数的一致性核对】原书逐字：
+  "Adding the contribution **−1** of the bc ghosts, the weight of e^{−φ/2} and of e^{−φ}
+   **agree with the values (10.4.5)**."
+  即：3/8 + (−1) = −5/8 = a^g(R)，1/2 + (−1) = −1/2 = a^g(NS)，
+  与 worldsheet.superconformal-ghost-normal-ordering-constants 的两个值相符。
+
+  【本命题不断言的内容】
+    (1) **不**断言断言 (1) 的推导。原书的措辞是"(10.4.23) 确定 Σ"，没有给出这个"确定"的论证
+        （与 §10.3 的 (10.3.24)/(10.3.25) 同一手法，那里也只有 'determine'）。
+    (2) **不**断言 V_s 的总权。原书在 (10.4.25) 处不写；本图的算术核对见 notes。
+    (3) **不**断言 V_s 是**物理**（BRST 闭且非平凡）顶点算子，也不断言它满足质量壳条件——
+        那是 §10.5/§10.6 的内容（worldsheet.superstring-brst-charge、
+        worldsheet.type-ii-massless-spectrum）。
+    (4) **不**断言"−1 是 bc 鬼场基态算子 c 的权"这一身份（原书只说 'the contribution −1 of
+        the bc ghosts'；本图的读法见 notes，标为未在该处核实）。
+    (5) **不**断言 s 的取值范围与时空旋量表示的关系（附录 B.1，本图无节点）。
+    (6) **不**断言 cocycle 修补已被包含在 (10.4.25) 里——Θ_s 按字面写下统计是错的
+        （worldsheet.spin-field-vertex-operators 断言 (6)），需
+        worldsheet.vertex-operator-cocycle。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. **(10.4.23)**（β(z)Σ(0) = O(z^{−1/2})、γ(z)Σ(0) = O(z^{1/2})）、**(10.4.24)**（Σ = e^{−φ/2}, h = 3/8）、**(10.4.25)**（V_s = e^{−φ/2}Θ_s）, p. 19；断言 (3) 的逐字句在同处"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E31；抽取者逐页读了
+      原书 §10.4 p. 19 的页图，三条式号与公式内容以及那句核对的措辞均直接看到）。
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. **(10.4.5)**, p. 16（a^g：R 为 −5/8、NS 为 −1/2）"
+    note: |
+      L1 一手（E28）。断言 (3) 要核对的目标值。
+      本图对应节点 worldsheet.superconformal-ghost-normal-ordering-constants。
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. **(10.3.29)**, p. 15（Θ_s ≅ exp[i Σ_a s_a H^a]）"
+    note: |
+      L1 一手（E26）。(10.4.25) 里的 Θ_s 明写是 (10.3.29) 的自旋场；
+      本图对应节点 worldsheet.spin-field-vertex-operators。
+tags: [superstring, ghosts, beta-gamma, bosonization, ramond-sector, spin-field, vertex-operator]
+notes: |
+  【算术核对（部分是原书的、部分是本图的）】
+    - **原书的**：3/8 + (−1) = −5/8 = a^g(R)；1/2 + (−1) = −1/2 = a^g(NS)（断言 (3) 逐字）。
+    - **本图的**：按 worldsheet.beta-gamma-bosonization 的 notes 重建的权公式
+      h(e^{lφ}) = −l²/2 − (λ'−1/2)l（λ' = 3/2 ⇒ κ = −1），l = −1/2 给
+      −1/8 + 1/2 = **3/8** ✓（= (10.4.24)），l = −1 给 **1/2** ✓（= (10.4.21)）。
+      这条一致性是本卡与 worldsheet.beta-gamma-bosonization 相互支持的旁证，
+      但那条权公式**未在原书核实**。
+    - **本图的**：V_s 的总权 = 3/8（鬼场侧）+ 5/8（物质侧 Θ_s，五个 s_a = ±1/2）= **1**。
+      即 V_s 是权 1 的算子（开弦边界算子的正确权），与 (10.6.15) 里引力微子顶点算子
+      V_s e^{−φ̃}ψ̃^μ e^{ik·X} 的权 (1,0) 相容。**原书在 (10.4.25) 处不写这个数。**
+    - **本图的**："−1 是 bc 鬼场的贡献"按本图的读法就是 h_c = 1 − λ = −1（λ = 2），
+      即 bc 基态对应的算子 c 的权（worldsheet.bc-ghost-cft）。原书只说 'the contribution −1
+      of the bc ghosts'，不点明是哪个算子。
+
+  ★【本卡把 §10.3 与 §10.4 两侧的自旋场接上了】R 扇区顶点算子是**两个**自旋场的乘积：
+  物质侧 Θ_s = exp[i Σ_a s_a H^a]（§10.3）与鬼场侧 Σ = e^{−φ/2}（§10.4）。
+  两侧都由"与基本场的 OPE 带半整数幂"这同一个判据定出，两侧都经玻色化。
+  这条也解释了为什么 §10.6 的 (10.6.4) 相位公式用 F 计数"顶点算子里自旋场的个数"
+  （worldsheet.superstring-sector-consistency-conditions 断言 (a) 的逐字理由）。
+
+  【与 worldsheet.rns-fermion-number-operator 的接口】那张卡记的"F 对 β、γ 取奇值、
+  是 (10.4.9) 电流的荷、对 e^{lφ} 取值 l"与本卡是 §10.4 同一页（p. 19）的内容。
+  本卡不重复它（那是 F 的定义，属那张卡），只提供 e^{−φ/2}、e^{−φ} 这两个具体算子。
+
+  【picture 的位置（本图不采信，仅备查）】现代文献把 e^{−φ}、e^{−φ/2} 称为
+  "−1 picture"与"−1/2 picture"的顶点算子。**原书全章不用 picture 一词**，
+  故本图不引入该概念；相关线索记在 worldsheet.superconformal-ghost-unit-operator-vacuum 的 notes。
+author: curator
+created: "2026-09-11"

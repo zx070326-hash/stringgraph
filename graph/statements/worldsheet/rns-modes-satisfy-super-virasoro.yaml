@@ -1,0 +1,46 @@
+id: worldsheet.rns-modes-satisfy-super-virasoro
+kind: proposition
+title: RNS 物质模式 (L_m, G_r) 实现 R / NS 超 Virasoro 代数，中心荷 c = (3/2)D
+statement: |
+  设 (L_m, G_r) 如 worldsheet.rns-super-virasoro-generators 所定义（扇区参数 ν）。则它们满足
+    [L_m, L_n] = (m − n) L_{m+n} + (c/12)(m^3 − m) δ_{m,−n},
+    {G_r, G_s} = 2 L_{r+s} + (c/12)(4r^2 − 1) δ_{r,−s},
+    [L_m, G_r] = ((m − 2r)/2) G_{m+r},
+  即 math.super-virasoro-algebra 中 ν 所对应的代数（ν = 0 给 Ramond 代数、
+  ν = 1/2 给 Neveu–Schwarz 代数），且中心荷取值
+    c = (3/2) D
+  （worldsheet.rns-matter-central-charge）。反全纯模式给同一代数的第二份拷贝。
+
+  本命题断言的是**一个具体实现**：抽象代数的生成元被上述振子双线性式取代。
+  它**不**断言该表示不可约、也**不**断言 Fock 空间上的内积性质
+  （负范数态的存在见 worldsheet.rns-mode-expansions 的末段）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.11a,b,c), p. 7；逐字：'The usual CFT contour calculation gives the mode algebra'；'This is known as the Ramond algebra for r, s integer and the Neveu-Schwarz algebra for r, s half-integer. The antiholomorphic fields give a second copy of these algebras.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E18）。原书的论证是「通常的 CFT 围道计算」，
+      即 Vol.1 §2.6 的 OPE ↔ 对易子字典，不展开步骤。
+  - ref: headrick-2008
+    loc: "Problem 10.4：用 Vol.1 (2.6.14) 独立复算 (10.2.11b)、(10.2.11c)，并注明 (10.2.11a) 'is as in the bosonic case'"
+    note: |
+      **仅作核对源**（原书正文已给结论，不属 lead 裁决的「唯一成文来源」例外）。
+      抽取记录记为三源一致（原书 + [H] + Vol.1 字典）。
+tags: [rns, superstring, super-virasoro, mode-algebra, ope]
+notes: |
+  【本卡是 math.super-virasoro-algebra 的实现卡】抽象代数在 math 区，实现在 worldsheet 区，
+  与本图 math.witt-algebra ↔ worldsheet.virasoro-generators-free-boson 的分工一致。
+
+  【第二条推导的可能路线（未建）】原书 (10.2.9) 处逐字写 'The OPE and the Laurent expansions
+  (or canonical quantization) give the anticommutators'，提示模式代数也可以**不经 OPE**、
+  直接从正则量子化的（反）对易关系逐项重排得到。玻色弦一侧本图已有这样一条
+  worldsheet.free-boson-central-charge-d--via-mode-algebra（绕开 OPE，可达 rigorous）。
+  → 待建：worldsheet.rns-modes-satisfy-super-virasoro--via-mode-algebra。
+  那条路线的障碍是无穷模式和的重排与中心项的正规序常数处理（玻色弦一侧已有数学来源，
+  超对称一侧本图未检索）。
+author: curator
+created: "2026-09-11"

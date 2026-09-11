@@ -1,0 +1,48 @@
+id: worldsheet.heterotic-so32-ope-local-and-closed
+kind: proposition
+title: SO(32) 杂化弦的顶点算子 OPE 局域且闭合（原书：'easily verified by means of bosonization'）
+statement: |
+  对 worldsheet.heterotic-so32-projections 定义的扇区与投影，保留下来的顶点算子集合满足
+    **(a) 相互局域性**（算子乘积无分支切割），
+    **(b) OPE 闭合**（任意两个保留算子的 OPE 里只出现保留的算子）。
+
+  原书对此的全部论证是一句：'**It is easily verified by means of bosonization** that the OPE
+  is local and closed.'（玻色化即 (11.2.11)/(11.2.12)：把 32 个 λ^A 复化成 16 个 λ^{K±}，
+  再写成 16 个左移标量 H^K，费米子数 F = Σ_K q_K。）
+
+  **本命题不断言的内容**：
+    (1) 不给出验证过程（原书不给）。
+    (2) 不断言这两条**足以**保证理论一致——模不变性是另一条（
+        worldsheet.heterotic-so32-partition-function）。
+    (3) 不断言玻色化本身成立（本图无玻色化节点）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, (11.2.12) 之后, p. 51（无式号；逐字：'It is easily verified by means of bosonization that the OPE is local and closed.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E56，「文献自称的严格程度」栏逐字）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.5)、(10.6.6), pp. 25–26（相互局域性与 OPE 闭合这两条条件在本书里的定义）"
+    note: |
+      L1（E40）。本卡断言的两条正是那里强加的条件 (a)(b)；本图对应节点
+      worldsheet.superstring-sector-consistency-conditions。
+tags: [heterotic, so32, ope, locality, bosonization, assertion]
+notes: |
+  ★【为什么值得单独建卡】E₈ × E₈ 的唯一性论证（worldsheet.heterotic-two-supersymmetric-ten-dimensional）
+  明确用到「OPE 闭合」来排除「分成 8 个一组」的取法（原书逐字：'the second is inconsistent with
+  closure of the OPE thus making the interactions inconsistent'）。
+  若不把 OPE 闭合建成节点，那条唯一性论证在图上就是悬空的。
+
+  【本图的最大缺口：没有玻色化节点】(11.2.11)/(11.2.12) 的复化与玻色化、以及 §10.3/§10.4 的
+  玻色化（E25、E27、E30）本图**全无节点**。因此「by means of bosonization」这个唯一的
+  论证手段在图上没有任何支撑，只能靠 gaps 记录。
+  → 建议后续任务：把 Vol.2 §10.3（(10.3.5)–(10.3.29)）的玻色化建成一组节点，
+    并注意那里的标量归一化是 α' = 2（H(z)H(0) ∼ −ln z），与本图 conv.alpha-prime-regge 不同，
+    需要 convention_map。
+
+  【与 §10.6 三条件的关系】本卡断言的 (a)(b) 与 §10.6 的条件 (a)(b) 是同一对条件，
+  只是这里是对杂化弦的扇区集合验证它们，而不是用它们求解扇区组合。
+author: curator
+created: "2026-09-11"
