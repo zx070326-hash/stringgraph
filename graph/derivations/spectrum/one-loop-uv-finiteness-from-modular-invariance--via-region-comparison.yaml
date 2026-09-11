@@ -12,10 +12,13 @@ depends_on:
       提供「F₀ 是基本域」，即弦论的模积分只该在 F₀ 上做。原书 §7.3 把这件事整体外包给 §5.1
       （(7.3.1) 处逐字「The fundamental region F₀ … were discussed in section 5.1」）。
       ⚠ 该卡用闭区域写法，(7.3.14) 用开区域写法，差一层零测度边界（抽取记录 Q1）。
-  - id: spectrum.one-loop-torus-amplitude-modular-invariant
+  - id: spectrum.one-loop-torus-amplitude-modular-invariant-v2
     note: |
       提供「为什么可以只在 F₀ 上积分」的另一半：被积表达式模不变，故限制到基本域不丢信息。
       没有这一条，「区域是 F₀」就只是一个选择而不是结论。
+      ⚠ 2026-09-11 改指（curator-small-backlog-6）：原指 spectrum.one-loop-torus-amplitude-modular-invariant，
+      该卡已换代为 v2（它把「测度模不变」拆给了 spectrum.torus-measure-modular-invariant）。
+      本边需要的是「被积表达式（含测度）整体模不变」，即 v2 的结论 (3)，内容未变。
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.3, eq. (7.3.14) 及其上下文, p.219"

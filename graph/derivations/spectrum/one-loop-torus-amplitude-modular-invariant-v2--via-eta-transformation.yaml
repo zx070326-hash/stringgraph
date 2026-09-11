@@ -1,0 +1,68 @@
+id: spectrum.one-loop-torus-amplitude-modular-invariant-v2--via-eta-transformation
+target: spectrum.one-loop-torus-amplitude-modular-invariant-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.eta-modular-invariant-combination
+    note: |
+      供给目标卡的 (1)：对一切 g ∈ SL(2,Z) 与一切 τ ∈ H，Im(g·τ)|η(g·τ)|⁴ = Im τ|η(τ)|⁴，
+      以及本卡配平所需的 n = 12 幂版本 τ₂¹²|η|⁴⁸ 不变（等价地 [τ₂|η|⁴]^{−12} 不变）。
+      **非 inferred**：该卡的断言逐字就是本卡的 (1)，且已 Lean 验证
+      （StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant）。
+      ⚠ 2026-09-11 改指：v1 的推导把这一条拆成 T 半与 S 半、分别挂
+      math.dedekind-eta-t-transformation 与 math.dedekind-eta-s-transformation 两条边；
+      新上游卡把「由两个生成元推到整群」这一步做完了（原书 §7.2 p.210 用而不证），
+      故改挂一条边代两条。两张 η 生成元卡仍是新上游卡的上游，链没有变短。
+  - id: spectrum.torus-measure-modular-invariant
+    note: |
+      供给测度 dτ dτ̄ / τ₂² 的模不变性——v1 把它写在目标卡断言里（第 (2) 条），
+      v2 拆成独立卡，这里改成一条依赖边。原书对它只写 "it is easy to check"（§7.3, p.217）。
+  - id: spectrum.one-loop-torus-amplitude
+    note: 供给被积函数与测度的具体形式 (7.3.6)（本卡断言的是它的不变性）。
+  - id: worldsheet.modular-group-psl2z
+    note: 供给模群及其在 H 上的作用；本推导的「不变」一词按该作用理解。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7) 及其上下文, p.217；§7.2, p.210"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20/#E9，L1（原书页图逐字）。
+      ⚠ 原书对两半分别只写「is invariant by eq. (7.2.44)」与「it is easy to check」，
+      **且完全不写配平这一步**（见 gaps 第 1 条）。
+summary: |
+  **(1) τ₂|η|⁴ 的不变性：引用上游。** math.eta-modular-invariant-combination 对一切
+  g ∈ SL(2,Z) 给出 Im(g·τ)|η(g·τ)|⁴ = Im τ|η(τ)|⁴，并给出 n 次幂版本；取 n = 12 即本卡
+  配平里的 [τ₂|η(τ)|⁴]^{−12}。本推导不重做这一步。
+
+  **(2) 测度的不变性：引用上游。** spectrum.torus-measure-modular-invariant 给出
+  dτ'dτ̄'/(τ₂')² = dτ dτ̄/τ₂²。本推导不重做这一步（v1 在这里内联了两行验算，现已随卡搬走）。
+
+  **(3) 合并（本推导唯一自己做的一步）。** 把 (7.3.6) 的被积表达式（含测度）改写成
+    (dτ dτ̄ / 4τ₂)(4π²α'τ₂)^{−13}|η(τ)|^{−48}
+      = (1/4)(4π²α')^{−13} · (dτ dτ̄ / τ₂²) · [τ₂|η(τ)|⁴]^{−12} ,
+  幂次核对：τ₂ 侧 τ₂^{−2}·τ₂^{−12} = τ₂^{−14} = τ₂^{−1}·τ₂^{−13} ✓；|η| 侧 (|η|⁴)^{−12} = |η|^{−48} ✓；
+  常数侧 (1/4)(4π²α')^{−13} 与 (1/4)(4π²α')^{−13} ✓。右端是「常数 × 模不变测度 × 模不变标量的幂」，
+  三个因子逐个不变（常数与 τ 无关）⇒ 整体不变。
+  由此在任一基本域上积分给出同一个数，特别地 F₀ 上的积分良定义。
+gaps:
+  - "**配平这一步原书完全不写**：原书只写两个因子各自不变，**没有**把 (7.3.6) 的被积表达式分解成
+     「常数 × dτdτ̄/τ₂² × [τ₂|η|⁴]^{−12}」。summary (3) 的分解与幂次核对是本图补的算术；
+     可机械核对，但**没有 reviewer 复核记录**，故按 docs/STATUS_LEVELS.md 不走 rigorous 例外条款。"
+  - "**「逐个因子不变 ⇒ 乘积不变」在测度层面需要一句话**：dτdτ̄ 是 2-形式而 [τ₂|η|⁴]^{−12} 是函数，
+     两者在同一点取值后相乘，故乘积的变换就是两者变换的乘积。这一步平凡但原书与本推导都未逐字写出。"
+  - "**只验证了不变性，没有验证「F₀ 上积分 = 模空间上积分」**：后者还需要 F₀ 确实是基本域
+     （worldsheet.modular-fundamental-domain，其边界认同在原书未严格处理；抽取记录 Q1 另记
+     (5.1.15) 闭区域与 (7.3.14) 开区域不一致）。"
+  - "**带顶点算子的模协变性未验证**：原书把它留作习题 7.1（抽取记录 #E7）。"
+  - "**上游 spectrum.torus-measure-modular-invariant 仍是 physical-argument**（原书 'it is easy to check'，
+     且本图无 reviewer 复核记录）⇒ 本推导的有效状态被它与自身共同封在 physical-argument。
+     上游 math.eta-modular-invariant-combination 虽 own=formalized，但其 effective 被两张 rigorous
+     定义卡压到 rigorous，**不是**本链的瓶颈。"
+notes: |
+  由 curator（small-backlog-6）于 2026-09-11 建立，是
+  spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 v2 版：
+  **目标改指 v2 卡；(1) 的两条生成元边合并为一条 math.eta-modular-invariant-combination 边；
+  (2) 的内联验算搬到新卡 spectrum.torus-measure-modular-invariant 并改成一条依赖边。**
+  旧推导按 docs/STATUS_LEVELS.md「旧推导的去留」保留不删（本次是内容性换代：v1 的断言 (2) 被移出），
+  它是 v1 卡论证的不可变记录。
+author: curator-small-backlog-6
+created: "2026-09-11"

@@ -68,5 +68,16 @@ notes: |
   ⚠ **不要误以为本卡整条可以升级**：新卡只覆盖 (1)。**(2) 测度 dτdτ̄/τ₂² 的模不变性
   至今没有任何形式化**（新卡的 Lean 文件 docstring 逐字写明它"is not formalised here"），
   (3) 依赖 (1) 与 (2)，故也不能升。
+
+  【★ 2026-09-11 换代（curator-small-backlog-6）】本卡已被
+  **spectrum.one-loop-torus-amplitude-modular-invariant-v2** 取代。唯一的实质改动：
+  断言 **(2)「测度 dτdτ̄/τ₂² 模不变」已移出**，拆成独立卡
+  **spectrum.torus-measure-modular-invariant**，并作为 v2 推导的一条依赖边；
+  公式、幂次配平与结论 (3) 一字未改。同时 v2 的推导把 (1) 的两条生成元边
+  （S 卡 + T 卡）合并为一条 math.eta-modular-invariant-combination 边（本卡 notes 上一段留的待办）。
+  本卡的旧推导 --via-eta-transformation 按 docs/STATUS_LEVELS.md「旧推导的去留」**保留不删**
+  （内容性换代：断言被移出，旧论证不原样适用于新陈述），作为本卡论证的不可变记录；
+  报告与 `why` 只沿 v2 走。
+superseded_by: spectrum.one-loop-torus-amplitude-modular-invariant-v2
 author: curator-polchinski-ch7
 created: "2026-09-11"

@@ -59,8 +59,12 @@ sources:
       L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md E6）。
       ★ **"No-ghost Theorem" 是作者自己给这条推论起的名字**，不是本图的命名。
       前提链（全文散布，引用必须集齐）：p ≠ 0（Theorem 2.4 逐字 "Suppose p ≠ 0"）；
-      D = 10（p.308 逐字 "From now on, we will take D = 10"）；p 在未来半光锥
-      （p.305 Remark 逐字 "we will assume that p is always in the future half R^{D−1,1}_+"）；
+      D = 10（p.308 逐字 "From now on, we will take D = 10"）；p 在半空间 R^{D−1,1}_+ = {p: p^D > 0}
+      （p.305 Remark，逐字 "For convenience, we will assume that p is always in the future half
+      R^{D−1,1}_+ of R^{D−1,1}, i.e. R^{D−1,1}_+ = {p ∈ R^{D−1,1}: p^D > 0}."）——
+      ⚠ **是半空间，不是"未来半光锥"**（它不限制 p·p 的符号），且它**只**用来定
+      R 扇区旋量因子 R(p,0) 上厄米型 ⟨,⟩_R 的**整体符号**，**非本质前提**
+      （auditor 2026-09-11 裁决，LZ 扫描件逐页复核；详见 worldsheet.no-ghost-theorem-superstring-cohomological 的 notes 裁决段）；
       空间取 p.306 (8) 的 C(p,κ)，**R 扇区用 T₀ ⊕ T₁**。
       ⚠ LZ 的中心荷归一化是 c/8 (m³ − 2κm)，故其 D = 10 对应本图的 c^m = 15；
       **R 扇区 LZ 的 L₀ 比本图 math.super-virasoro-algebra 的 L₀ 低 c/24**
@@ -153,8 +157,10 @@ notes: |
         激发"的态空间；LZ 的 T ∩ P 是 V(p,κ) 里被 Vir_κ^+ 湮灭的正定子空间（DDF 型）。
         两者作为分级内积空间同构（都是 8 个横向玻色 + 8 个横向费米振子），但不是同一子空间。
         本卡不涉及横向空间，该对照留给 worldsheet.brst-cohomology-equals-ocq-physical-superstring。
-    (c) **动量条件**：Polchinski 那张卡在超弦一侧对动量**只字不提**；本卡显式要求 p ≠ 0，
-        并按 LZ 的假设另加"p 在未来半光锥"（见 sources 的 note）。
+    (c) **动量条件**：Polchinski 那张卡在超弦一侧对动量**只字不提**；本卡显式要求 p ≠ 0。
+        LZ 另设 p 在**半空间** {p^D > 0}（p.305 Remark），但那只定 R 扇区厄米型的整体符号、
+        **非本质前提**（auditor 2026-09-11，见下方裁决段），故本卡 (H2) 只写 p ≠ 0 是对的，
+        不需要"另加"任何动量假设；旧措辞"并按 LZ 的假设另加 p 在未来半光锥"已过时。
     (d) **鬼数零点不同**：本卡按 conv.superstring-ghost-number-zero 把相对上同调放在鬼数 0；
         本图玻色弦一侧（worldsheet.no-ghost-theorem-brst）放在鬼数 1。差常数平移，
         已在该约定卡的 notes 里标为待 lead/auditor 统一。
@@ -205,6 +211,11 @@ notes: |
       ((D−1)+, 1−)，故 p^D 是时间分量。⚠ **R^{D−1,1}_+ 是半空间 {p^D > 0}，不是"未来半光锥"**：
       它不限制 p·p 的符号。本卡 sources 的 note 与上一段（reviewer-batch17b）写的"未来半光锥"
       是误译，抽取记录 §1 同款；本卡 statement 未含该词，不受影响。
+      〔curator 2026-09-11 执行本裁决〕本卡 sources 的 note、notes (c)，以及两条 --via-lian-zuckerman-1989
+      推导的前提链与 gaps 已改写为「半空间 {p^D > 0}、只定 R 扇区厄米型整体符号、非本质前提」；
+      上一段（reviewer-batch17b）的原文作为历史记录保留不改。
+      ⚠ 另一张卡 worldsheet.brst-cohomology-equals-ocq-physical-superstring 的 **statement 设定段确实含有**
+      该误译（并且作为附加假设强于 LZ 实际所设，方向安全），按原则 1 不就地改，已在那张卡 notes (3) 记档。
   (b) LZ 自述的用途。Remark 前一句逐字："We note that ⟨,⟩_R above is defined so that (p·d₀)* = −p·d₀.
       We will see later that this indeed gives the correct signature for the physical space."
       即该假设**只**进入 Definition 1.3(ii)（p.305）对 R(p,0) 的形式的定义：取手征基 Ψ^i_→，

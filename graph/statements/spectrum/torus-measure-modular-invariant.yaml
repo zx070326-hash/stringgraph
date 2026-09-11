@@ -1,0 +1,60 @@
+id: spectrum.torus-measure-modular-invariant
+kind: proposition
+title: "环面模参数的测度 dτ dτ̄ / τ₂² 在模群下不变"
+statement: |
+  设 H = {τ ∈ C : Im τ > 0}，τ₂ = Im τ，SL(2,Z) 按
+    τ ↦ τ' = (a τ + b) / (c τ + d) ,   a, b, c, d ∈ Z ,  a d − b c = 1
+  作用在 H 上（worldsheet.modular-group-psl2z；−I 作用平凡，故实际作用的是 PSL(2,Z)）。
+  则模参数空间上的测度
+    dτ dτ̄ / τ₂²                                                         (7.3.7)
+  在该作用下不变：对一切这样的 (a,b,c,d) 与一切 τ ∈ H，
+    dτ' dτ̄' / (τ₂')² = dτ dτ̄ / τ₂² 。
+  等价地：τ₂^{−2} 是 H 上的 PSL(2,Z) 不变密度（即双曲面积元 dτ₁ dτ₂ / τ₂² 的模不变性）。
+
+  **本命题不断言什么**：
+  (a) **不断言 τ₂ |η(τ)|⁴ 的模不变性**——那是 math.eta-modular-invariant-combination；
+      本卡与 η 完全无关。
+  (b) 不断言环面真空振幅整体模不变（spectrum.one-loop-torus-amplitude-modular-invariant-v2）。
+  (c) 不断言基本域 F₀ 的存在、唯一或其边界认同（worldsheet.modular-fundamental-domain），
+      也不断言「F₀ 上积分 = 模空间上积分」。
+  (d) 不断言任何积分的收敛性。
+  (e) **不断言 τ₂^{−2} 是唯一的不变密度**（不变密度在常数倍下的唯一性本图未建卡）。
+  (f) 不涉及 d²τ 与 dτ dτ̄ 的归一化常数：本命题是一个比值恒等式，对 d²τ ≡ 2 dτ₁ dτ₂
+      与 d²τ ≡ dτ₁ dτ₂ 两种约定同样成立（见 notes）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7), p.217，逐字：「… and **it is easy to check** that dτdτ̄/τ₂² (7.3.7) is modular-invariant as well.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20，**L1（原书页图逐字，该条已单页重渲染复核）**。
+      ⚠ **原书对本命题零论证**：逐字只写 "it is easy to check"，验算留给读者。
+      本卡推导里那两行验算是本图补的（见 --via-sl2z-action 的 gaps）。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13), p.148（一般模变换 τ' = (aτ+b)/(cτ+d)，ad − bc = 1，模群 = SL(2,Z)/Z₂）；(5.1.12), p.148（S、T 的矩阵形式）"
+    note: |
+      本卡所用的群作用即此式；抽取记录 polchinski-1998-v1-ch7.md 的跨章定点核对一栏记：p.148 页图
+      本轮读到（L1），但 (5.1.12)/(5.1.13) **未逐式抄录**。图上的对应节点是
+      worldsheet.modular-group-psl2z（定义卡，其 Im(γ·τ) = Im τ/|cτ+d|² 一式由 curator 补，非来源逐字）。
+tags: [spectrum, torus, moduli, modular-invariance, measure, modular-group]
+notes: |
+  【为什么从 spectrum.one-loop-torus-amplitude-modular-invariant 拆出（curator-small-backlog-6，2026-09-11）】
+  旧卡把三件事写在一张上：(1) τ₂|η|⁴ 不变、(2) 测度 dτdτ̄/τ₂² 不变、(3) 故 (7.3.6) 的被积表达式整体不变、
+  F₀ 上积分良定义。三者在文献中是**分别**成立、分别论证的（原书对 (1) 归约到 (7.2.44)，对 (2) 只写
+  "it is easy to check"），且 (1) 现已有一张 formalized 的数学上游 math.eta-modular-invariant-combination，
+  而 (2) **至今没有任何形式化**（该 Lean 文件 docstring 逐字写明测度的不变性 "is not formalised here"）。
+  按 graph/CLAUDE.md「一个节点一个命题」，把 (2) 拆成本卡；旧卡换代为
+  spectrum.one-loop-torus-amplitude-modular-invariant-v2（只留 (1)+(3)）并 depends_on 本卡。
+
+  【与 conv.worldsheet-complex-coords 的关系】本卡声明该约定是为了让 dτ dτ̄ 的含义确定
+  （该约定规定 d²z ≡ 2 dσ¹dσ²，对模参数同款）。但本命题是**比值恒等式**：两端同时改写成
+  d²τ = 2 dτ₁dτ₂ 或 d²τ = dτ₁dτ₂，常数因子相消，结论不变。⇒ 采用另一套复测度约定的节点
+  可以直接引用本卡，无需 convention_map。
+
+  【形式化候选】本卡是一条两行复分析计算（dτ' = dτ/(cτ+d)²、τ₂' = τ₂/|cτ+d|²），
+  且 Mathlib 已有 UpperHalfPlane 的 SL(2,Z) 作用与 UpperHalfPlane.im_smul_eq_div_normSq，
+  是一个成本很低的形式化岛；它一旦 formalized，本图对「F₀ 上积分良定义」的两条输入就都不再
+  只靠 "it is easy to check"。已列入报告交 lead。
+author: curator-small-backlog-6
+created: "2026-09-11"
