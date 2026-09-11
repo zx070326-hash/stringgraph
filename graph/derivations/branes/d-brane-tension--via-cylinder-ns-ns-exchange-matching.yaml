@@ -1,0 +1,42 @@
+id: branes.d-brane-tension--via-cylinder-ns-ns-exchange-matching
+target: branes.d-brane-tension
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+    note: |
+      供给 Dp 膜这一对象及「Dirichlet 方向无动量积分」这一记账（(13.3.1) 由 (10.8.4)
+      「removing the factors for the momentum integrations in the Dirichlet directions」得到）。
+      ⚠ 玻色弦定义卡；超弦版原书外包给第 8 章。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, pp. 146–147：(13.3.1)（圆柱振幅的 NS–NS 长程部分，由 (10.8.4) 修改而来）→ (13.3.3)（场论：引力子 + dilaton 交换 2iκ²τ_p²G_{9−p}(y)，由 Vol.1 (8.7.25) 把 6 = (D−2)/4 换成 2）→ (13.3.4)；「Coupling constants」小节 pp. 150–151：(13.3.20) → (13.3.21) 定义 g → (13.3.22) → (13.3.23)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16/#E17/#E22（L1）。
+      逐字（p. 146）：「The Chan–Paton weight is 2 here, from the two orientations of the open string,
+      and there is no factor of ½ from the orientation projection because the physics is locally oriented.」
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.25)（玻色弦 D 膜之间引力子 + dilaton 交换的场论振幅；本章逐字引用并把 6 换成 2）"
+    note: |
+      ⚠ 本图无该式的节点（polchinski-1998-v1#E156 是二手源）；本条来源在图上无对应依赖边。
+summary: |
+  (1) 两张平行 Dp 膜相距 y 的圆柱真空振幅，在长柱极限下取轻 NS–NS 闭弦交换部分：
+      从 (10.8.4) 出发，去掉 Dirichlet 方向的动量积分，加入拉伸弦张力项 exp(−t y²/2πα')，得
+        𝒜_NS–NS ≈ [前缀] ∫_0^∞ (dt/t²)(8π²α't)^{(9−p)/2} exp(−t y²/2πα')
+                = i V_{p+1} · 2π (4π²α')^{3−p} G_{9−p}(y),                           (13.3.1)
+      G_d(y) = 2^{−2} π^{−d/2} Γ(½d − 1) y^{2−d} 是 d 维无质量标量 Green 函数。
+      Chan–Paton 权重 2（开弦两种取向），无取向投影的 ½（体内物理局域有取向）。
+  (2) 场论侧：两张张力为 τ_p 的膜通过引力子与 dilaton 交换的振幅是 2iκ²τ_p² G_{9−p}(y)（(13.3.3)，
+      由 Vol.1 (8.7.25) 把 6 = (D−2)/4 换成十维的 2）。
+  (3) 令 (1) = (2)：τ_p² = (π/κ²)(4π²α')^{3−p}（(13.3.4)）。递推 τ_p/τ_{p−1} = (4π²α')^{−1/2}。
+  (4) 显式化：取 p = 1 得 τ_D1 = 4π^{5/2}α'/κ；与 τ_F1 = 1/(2πα') 之比 (13.3.20) 被**定义**为 g（(13.3.21)），
+      反解 κ² = ½(2π)^7 g² α'^4（(13.3.22)），代回 (13.3.4) 得 (13.3.23)
+      τ_p = 1/(g(2π)^p α'^{(p+1)/2}) = (2κ²)^{−1/2}(2π)^{(7−2p)/2} α'^{(3−p)/2}。
+gaps:
+  - "**(13.3.1) 是 (10.8.4) 的修改版，而 (10.8.4) 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 的推导覆盖 §10.8 全部计算，未合）。⇒ TODO：合入后加 depends_on。原书用「≈」（只取轻闭弦交换、长柱极限）。"
+  - "**(13.3.1) 的完整前缀未定**（抽取记录 Q3）：页图读作 8π(8π²α'²)⁵，纯 α' 幂次记账要求 α'（一次方）；代入 G_d 后 π 的幂次仍差一次。本推导只用 (13.3.1) 的末行（它被 (13.3.3)+(13.3.4) 独立背书）。须由人复核印刷页 146。"
+  - "**场论侧 (13.3.3) 引 Vol.1 (8.7.25)**，本图无该节点（二手源）；「把 6 换成 2」这一步原书只说结果。"
+  - "**「Chan–Paton 权重 2、无 ½」依赖体内物理局域有取向（E4）**，本图无「T 对偶后体内是 type II」的节点。"
+  - "整个计算是路径积分/模变换层面的形式操作；κ 的「物理测得」含义依赖低能有效作用量与 dilaton 背景的对应（§12.1），本图 consistency/duality 区无相应节点。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

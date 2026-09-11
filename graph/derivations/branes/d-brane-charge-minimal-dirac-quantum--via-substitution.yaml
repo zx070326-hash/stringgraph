@@ -1,0 +1,25 @@
+id: branes.d-brane-charge-minimal-dirac-quantum--via-substitution
+target: branes.d-brane-charge-minimal-dirac-quantum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-rr-charge-value
+    note: 供给 μ_p² = (π/κ₁₀²)(4π²α')^{3−p}（(13.3.7)），对 p 与 6−p 各用一次。
+  - id: branes.rr-charge-quantization
+    note: 供给条件 μ_pμ_{6−p} = πn/κ₁₀²（(13.3.13)），被代入后读出 n。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, (13.3.13) 之后一句，p. 149（「Remarkably, … with the minimum quantum n = 1」）；输入式 (13.3.7) p. 147"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E19、§0.3(b)（L1；抽取者复算通过）。
+summary: |
+  μ_p = (π/κ₁₀²)^{1/2}(4π²α')^{(3−p)/2}，μ_{6−p} = (π/κ₁₀²)^{1/2}(4π²α')^{(3−(6−p))/2} = (π/κ₁₀²)^{1/2}(4π²α')^{(p−3)/2}。
+  相乘：μ_pμ_{6−p} = (π/κ₁₀²)(4π²α')^{(3−p)/2 + (p−3)/2} = π/κ₁₀²。
+  与 (13.3.13) πn/κ₁₀² 比较得 n = 1。
+  （取 μ_p > 0 的平方根。(13.3.13) 右端是 πn/κ₁₀² 而非 2πn/κ₁₀²，因为 (13.3.12) 带因子 1/2κ₁₀²；
+  这一记账在上游卡 branes.rr-charge-quantization 完成，本推导只做代入。）
+gaps:
+  - "**代入本身无缺口**（两行代数，researcher 已复算，抽取记录 §0.3(b)）。按 STATUS_LEVELS 的 rigorous 例外，需 reviewer 独立复核并记 reviewer-verified 方可把本推导升为 rigorous；本 curator 未标。"
+  - "**有效状态受上游压制**：两条依赖均为 physical-argument（μ_p 来自超对称断言 (13.3.2)，Dirac 条件来自弦不可观测的物理论证），故本卡有效状态为 physical-argument，与推导自身的严格程度无关。"
+  - "**平方根的符号**：原书取 μ_p > 0；D 膜与反 D 膜（μ_p < 0）的情形 n = −1，原书未讨论。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

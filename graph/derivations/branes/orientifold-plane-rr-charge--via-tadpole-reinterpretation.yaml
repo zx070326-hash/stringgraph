@@ -1,0 +1,41 @@
+id: branes.orientifold-plane-rr-charge--via-tadpole-reinterpretation
+target: branes.orientifold-plane-rr-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-rr-coupling
+    note: 供给「每张 D 膜发出 R–R 场线」（D 膜是 R–R 势的源）；原书 p. 142「field lines emerging from each D-brane」。
+  - id: branes.d-brane-bps-half-susy
+    note: |
+      供给「整套 D 膜仍是 BPS 态 ⇒ 所有 D 膜荷同号」；原书 p. 142「the full set of D-branes is still a BPS state,
+      being T-dual to the type I theory, and the total mass is linear in the total charge for a BPS state」。
+      ⚠「质量与总荷线性」本身引 App. B，本图未抽。
+  - id: duality.t-duality-of-unoriented-theory
+    note: |
+      供给「Ω 在对偶坐标上 = 宇称 × 时空反射」⇒ 固定面（orientifold 面）与「体内有取向」；
+      原书 p. 138 把超弦版外包给第 8 章（「by the same arguments as for the bosonic string in chapter 8」）。
+      ⚠ 玻色弦卡；「2^k 张固定面」的计数在那张卡里没有写成命题。
+  - id: branes.t-duality-changes-brane-dimension
+    note: 供给「在 k 个方向上 T 对偶 ⇒ D9 → D(9−k)」；玻色弦卡，同上外包。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, pp. 142–143（无式号，逐字见 statement）；§13.2 开篇 p. 138（16 张 D8 膜、外包给第 8 章）；§13.3, p. 147（「We deduced from the cancellation of divergences」）"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E3/#E12/#E18（L1）。
+summary: |
+  (1) type I 的单圈发散（非 SO(32) 群）来自 R–R 10-形式场方程（§10.8）；T 对偶到 D 膜图像后
+      它仍是 R–R 场方程的不一致：D 膜发出的 R–R 场线正交于非紧方向，必须终止于某处。
+  (2) 所有 D 膜荷同号：整套 D 膜是 type I 的 T 对偶像、是 BPS 态，BPS 态的总质量与总荷线性。
+  (3) 已知（§10.8）圆盘 tadpole 由无取向 cross-cap 相消；T 对偶时空中体内弦论有取向，
+      cross-cap 只能局域在 orientifold 面附近 ⇒ O 面是 R–R 荷的汇。
+  (4) 记账：k 个方向对偶后有 2^k 张 O 面、仍是 16 张 D 膜，总荷为零 ⇒ 每张 O 面荷 = −2^{4−k} × 一张 D 膜荷。
+      （复算：2^k·(−2^{4−k}) = −16 = −(D 膜总荷)。）
+gaps:
+  - "★ **本推导的输入是 §10.8 的 tadpole 相消（「We know that the disk tadpole is canceled by the unoriented cross-cap」、「We deduced from the cancellation of divergences」），而该卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合；任务书写作 spectrum.type-i-tadpole-cancellation-so32）。⇒ **TODO：合入后必须加 depends_on（不 inferred，三处逐字支持）**，且本卡有效状态必须不高于它。在此之前本推导的第 (1)(3) 步在图上悬空。"
+  - "**本章不重算任何 tadpole**：这是纯物理演绎（「Thus we deduce」），唯一可能的独立路线（D 膜–O 面之间的力）原书明写推给读者（p. 147）。"
+  - "**「仍是 16 张 D 膜」的计数**：原书 p. 138 只说「16 D8-branes between two orientifold hyperplanes」并外包给第 8 章；「16 = 32/2（CP 指标配镜像）」的记账原书不写，且与 p. 141「each Chan–Paton degree of freedom … as a 9-brane」（蕴含 32）并存不调和（Q1 未裁）。本推导按原书数字 16 记账，不解释其来源。"
+  - "**「BPS 态的总质量与总荷线性」引 App. B**，本项目未抽。"
+  - "**「体内弦论有取向 ⇒ cross-cap 局域在 O 面附近」**是定性论断，原书未给 cross-cap 在 T 对偶时空中的显式定位。"
+  - "**上游三张 T 对偶卡均为玻色弦**（Vol.1 第 8 章）；超弦版原书外包（p. 138）。"
+  - "**禁止的边**：不与 consistency.type-i-hexagon-so32-iff 建边（本章无 anomaly/hexagon）。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

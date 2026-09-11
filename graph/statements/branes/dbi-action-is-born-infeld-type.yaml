@@ -49,5 +49,11 @@ notes: |
 
   若图中日后需要 DBI 的严格来源，应另找（抽取记录 Q25 建议 Leigh 1989 /
   Abouelsaood–Callan–Nappi–Yost 1987 / Tseytlin 综述）；本项目尚未登记这些文献。
+
+  **与 branes.dbi-action-d-brane（Vol.2 (13.3.14) 显式形式）的关系——不合并（curator-polchinski-v2-ch13, 2026-09-11）**：
+  那张卡是 type II 超弦 Dp 膜作用量的显式形式，表达式与系数 μ_p e^{−Φ} 均 L1 从 Vol.2 p. 149 页图抄出；
+  原书把其论证整体外包给 §8.7（「exactly as in the bosonic case, section 8.7」），故它的推导以本卡为上游，
+  有效状态不高于本卡。本卡仍是弱陈述：**不得**用 Vol.2 的表达式去「核实」上面那行 L0 的 S_p——
+  Vol.2 用的系数是 μ_p（R–R 荷），Vol.1 用的是 τ_p，切换原书不解释（-ch13 抽取记录 Q6）。
 author: curator-polchinski-ch8
 created: "2026-09-11"

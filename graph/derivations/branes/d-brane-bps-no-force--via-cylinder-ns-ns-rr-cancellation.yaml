@@ -1,0 +1,43 @@
+id: branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation
+target: branes.d-brane-bps-no-force
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-bps-half-susy
+    note: |
+      供给「两张平行 Dp 膜共同保留的超对称 (13.2.5) 与单张相同、系统仍是 BPS 态」；
+      原书 p. 146 逐字「For parallel Dp-branes, the unbroken supersymmetry (13.2.5) is the same as for
+      a single Dp-brane.」以及「Due to supersymmetric cancellation in the trace」——(13.3.2) 的全部依据。
+  - id: branes.d-brane-rr-coupling
+    note: |
+      供给「R–R 交换是排斥的、来自膜所带的 R–R 荷」这一解释（p. 146「repulsion due to the R–R tensor」）；
+      没有它，𝒜_R–R 只是圆柱振幅的一个部门，无「排斥力」的读法。
+  - id: branes.d-brane-from-t-duality
+    note: 供给 Dp 膜对象与 Dirichlet 方向无动量积分的记账（(13.3.1) 由 (10.8.4) 修改的第一步）。⚠ 玻色弦定义卡。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, p. 146：开篇段落 → (13.3.1)（NS–NS，由 (10.8.4) 修改）→ (13.3.2)（𝒜_R–R = −𝒜_NS–NS，「Due to supersymmetric cancellation in the trace」）→「and so the total force vanishes as expected」；(13.3.3) 场论对照"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16（L1）。
+  - ref: polchinski-1998-v2
+    loc: "§13.4, (13.4.23) 之后，p. 157（例外：「supersymmetry is unbroken but the potential is nonzero」）"
+    note: 抽取记录 #E25/Q8（L1）；本推导**不**覆盖该构型，只用它划定适用域。
+summary: |
+  (1) 两张平行 Dp 膜相距 y 的圆柱真空振幅 = 开弦单圈 = 闭弦树级交换。长柱极限下只剩轻闭弦：
+      NS–NS 部门给引力子 + dilaton 交换，R–R 部门给 (p+1)-形式势交换。
+  (2) NS–NS 侧：从 (10.8.4) 出发去掉 Dirichlet 方向的动量积分、加入拉伸弦张力项 exp(−t y²/2πα')，
+      得 (13.3.1)，末行 i V_{p+1}·2π(4π²α')^{3−p} G_{9−p}(y)（引力 + dilaton 的吸引势）。
+  (3) R–R 侧：**由超对称在迹中的相消**（两膜系统保留 (13.2.5)，开弦谱玻色–费米配对）断言
+      𝒜_R–R = −𝒜_NS–NS（(13.3.2)），总力为零。
+  (4) 一致性：场论侧引力子 + dilaton 交换 2iκ²τ_p²G（(13.3.3)）与 R–R 交换 −2iκ₁₀²μ_p²G（(13.3.6)）
+      对照，正是 branes.d-brane-tension 与 branes.d-brane-rr-charge-value 的来源。
+  (5) 适用域：反平行时 R–R 项变号、同为吸引；相对运动破坏超对称；任意夹角构型中原书自承存在
+      「超对称未破缺但势非零」的例外——故本命题只对平行同号静态构型断言。
+gaps:
+  - "**(13.3.2) 是断言不是计算**：原书逐字「Due to supersymmetric cancellation in the trace」；R–R 侧的圆柱振幅没有被显式算出。这是本推导最弱的一环。"
+  - "**(13.3.1) 是 (10.8.4) 的修改版，而 §10.8 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合）。⇒ TODO：合入后加 depends_on。"
+  - "**(13.3.1) 的完整前缀未定**（抽取记录 Q3：α' 幂次已由记账定为一次方，π 的幂次差一次）；本推导只用其末行。"
+  - "**「超对称未破缺 ⇒ 圈振幅为零」有作者自承反例**（(13.4.23) 后，Q8）：原书只给现象（16 个相位只覆盖 8 个），不给机制。本卡因此不断言一般规则；若日后建「BPS ⇒ 无力」的一般卡，须先为该例外建卡。"
+  - "**场论对照 (13.3.3) 引 Vol.1 (8.7.25)**，本图无该节点（二手源）。"
+  - "**「体内物理局域有取向 ⇒ 无 ½、Chan–Paton 权重 2」**依赖 E4（T 对偶后体内是 type II），本图无节点。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"
