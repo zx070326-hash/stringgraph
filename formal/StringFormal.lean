@@ -1,4 +1,5 @@
 import StringFormal.Math.EulerPartition
+import StringFormal.Math.PartitionCard
 import StringFormal.Math.MobiusJacobian
 import StringFormal.Math.GreenSchwarzAlgebra
 import StringFormal.Math.GreenSchwarzAlgebraGen
