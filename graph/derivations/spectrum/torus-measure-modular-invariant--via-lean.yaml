@@ -92,6 +92,7 @@ gaps:
     （worldsheet.modular-fundamental-domain），也**没有**说任何积分收敛——
     目标卡「不断言」(c)(d) 已排除，Lean 一致。
 notes: |
+  reviewer-verified: reviewer-batch22, 2026-09-11（check-axioms 于 `measure_smul_eq` 1 ok（curator 当时未能重跑）；取向 gap 保留。lead 落地。）
   由 curator（lean-wire-11）于 2026-09-11 建立，接的是 formalizer 分支
   `agent/formalizer/torus-measure`（新文件 `StringFormal/Math/TorusMeasure.lean`，
   提交 6fb41a8，合并 26447bb）。本分支未改动该 Lean 文件（只改了
