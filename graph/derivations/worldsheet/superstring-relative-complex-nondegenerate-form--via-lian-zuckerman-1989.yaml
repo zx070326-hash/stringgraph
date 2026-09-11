@@ -161,6 +161,12 @@ gaps:
   - "**Definition 2.12(i) 的另两条前提不在本卡**：sign 有定义还要 dim C^n_rel < +∞ 与 C^n_rel = 0 for large positive n。本卡只承担非退化那一条（目标卡「不断言 (g)」）；另两条仍记在 worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989 的 gaps 里，两处不要重复记账。"
   - "**p = 0 未覆盖**：LZ Proposition 5.5 说 p = 0 时消灭定理不成立（V(p,κ) 非 Vir_κ⁻-自由）。本卡的 (H2) 排除 p = 0；Theorem 2.7 也要 p ≠ 0（ε = d¹₀/p¹）。p = 0 时 ⟨,⟩_rel 是否仍良定义/非退化，本图未核。"
 notes: |
+  reviewer-verified: reviewer-batch31, 2026-09-11 — κ = 0 支的三行重建（summary 末：设 ⟨u,·⟩_rel ≡ 0，
+  用 {D_R, ε} = 1 分解 w = D_Rεw + εD_Rw，第一项由 D_R* = −D_R 与 D_Ru = 0 为零，第二项由 ⟨,⟩_rel 的
+  D_R-原像定义化为 −√−1⟨u, D_Rw⟩_rel = 0，故 ⟨u,·⟩_ℬ 在 ℱ(p,0) 上恒零，由 Prop 2.10(i) 得 u = 0）
+  经 reviewer 独立逐步复核：前提只用卡上已列四条（Thm 2.7、Prop 2.10(ii)/1.7(iii) 陈述、Def 2.11+Remark、
+  Prop 2.10(i)），有限步初等线性代数，无收敛性/维数计数。据 docs/STATUS_LEVELS.md rigorous 例外条款，
+  status: rigorous 维持（lead 落地）。gaps 第一条「未经 reviewer 独立复核」自此失效，保留作历史。
   【本卡在图上的位置（curator 2026-09-11，lz-thm27）】
   上游：worldsheet.superstring-ramond-zero-mode-cohomology-trivial（LZ Theorem 2.7）。
   下游：worldsheet.superstring-relative-complex-character-signature（Prop 2.14(ii)，经
