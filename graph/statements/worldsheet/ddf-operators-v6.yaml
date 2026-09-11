@@ -215,5 +215,25 @@ notes: |
   worldsheet.momentum-tower-fock-space 提供；本卡字典里
   `towerVertex η b n K = towerShift n ∘ towerDiag (… Fock.vertexOsc η (n·b) (K − n))`
   正是两者的复合。
+
+  【2026-09-12：伴随一族已换代并升为 formalized（curator，分支 agent/curator/adjoint-wire；
+  **只加本段 notes，陈述文本与 status 未动**）】
+  本卡上面【Lean 比本卡更一般的三处】(2) 的 ⚠ 写「下游凡引用『A^i_n（n ≠ 0）』的命题
+  （首当其冲 worldsheet.ddf-operators-adjoint 与 worldsheet.ddf-transverse-oscillator-algebra）
+  仍按各自陈述的 n ≠ 0 读，**本卡的 n ∈ Z 不自动放宽它们**」。这条原则不变，但**第一张卡已按流程换代**：
+    · worldsheet.ddf-operators-adjoint → **worldsheet.ddf-operators-adjoint-v2**
+      （只含伴随关系 (1)；量词显式写成 n ∈ Z **含 n = 0**、ε 只需横向 ε·k_0 = 0，
+      正是为了对上 Lean 的 `ddfOp`，不是自动放宽）。
+      v2 现为 **formalized**（推导 --via-lean，lean_decl
+      `StringFormal.NoGhost.Fock.towerPairing_ddfOp_left`，VertexAdjoint.lean，fb006f5）。
+    · worldsheet.ddf-transverse-oscillator-algebra（对易关系那条）**未换代**，仍按 n ≠ 0 读。
+  **顺带的两条数学订正**（本卡未受影响，但与本卡的记账口径有关，记在此处备查）：
+    (i) 伴随关系**不需要 (N) 类光性 k_0² = 0、也不需要 (S) 归一化 2α' k_0·p = 1**。
+        Lean 侧 `towerPairing_ddfOp_left` 的假设逐字只有 `hη` 与 `hεb`（横向性）。
+        这与本卡「(N) 与 (S) 是关于 A^ε_n 的**定理的假设**，不是**定义的参数**」的判断一致，
+        并进一步指出：对伴随这条定理而言它们连假设都不是。
+    (ii) 横向性 (T) 在伴随证明中的作用是**把伴随排回 DDF 求和的书写顺序**
+        （`towerModeVec_mul_towerVertex_of_transverse`：ε·k_0 = 0 ⟹ α^ε 与 V 严格对易），
+        **不是**使伴随存在——底层的 `towerPairing_towerVertex_left` 完全不需要横向性。
 author: curator
 created: "2026-09-11"
