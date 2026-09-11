@@ -1,0 +1,124 @@
+/-
+Copyright (c) 2026 stringgraph contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: stringgraph lean-formalizer
+-/
+import StringFormal.Math.DedekindEtaS
+import StringFormal.Math.DedekindEtaT
+import Mathlib.LinearAlgebra.Matrix.FixedDetMatrices
+
+/-!
+# Full `SL(2,ℤ)` invariance of `τ₂ |η(τ)|⁴`
+
+Graph nodes: `math.dedekind-eta-s-transformation`, `math.dedekind-eta-t-transformation`,
+`worldsheet.modular-group-generated-by-s-and-t` (this file is where the last one is *used*).
+
+`StringFormal/Math/DedekindEtaS.lean` and `StringFormal/Math/DedekindEtaT.lean` prove that
+`τ ↦ Im τ · ‖η(τ)‖⁴` is invariant under the two generators
+
+* `S · τ = −1/τ` (`im_mul_norm_eta_pow_four_modular_S_smul`), and
+* `T · τ = τ + 1` (`im_mul_norm_eta_pow_four_modular_T_smul`).
+
+This file upgrades that to invariance under **every** `g ∈ SL(2,ℤ)`.
+
+## Where the group theory comes from
+
+Mathlib `v4.33.1` already contains the generation statement:
+
+```
+SpecialLinearGroup.SL2Z_generators : Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤
+```
+
+(`Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean`, Chris Birkbeck, proved by a Euclidean
+reduction `FixedDetMatrices.induction_on` on integral matrices of determinant `1`).  So the
+generation theorem is *not* reproved here; it is re-exported as `modular_group_generated_by_S_and_T`
+so that the graph node `worldsheet.modular-group-generated-by-s-and-t` has a declaration to point
+at.  The only work in this file is the induction over `Subgroup.closure`.
+
+## Main results
+
+* `modular_group_generated_by_S_and_T` : re-export of Mathlib's `SL2Z_generators`.
+* `im_mul_norm_eta_pow_four_modular_invariant` :
+  `(g • τ).im * ‖η(g • τ)‖⁴ = τ.im * ‖η(τ)‖⁴` for every `g : SL(2,ℤ)`, `τ : ℍ`.
+* `norm_eta_pow_four_modular` : the solved form `‖η(g • τ)‖⁴ = (τ.im / (g • τ).im) · ‖η(τ)‖⁴`.
+* `im_mul_norm_eta_pow_four_isInvariant` : the same fact packaged as
+  "`τ ↦ τ.im * ‖η τ‖⁴` is constant on `SL(2,ℤ)`-orbits".
+
+## Scope remarks
+
+* The statement is about `SL(2,ℤ)`, not `PSL(2,ℤ)`.  Nothing is lost: `−1` acts trivially on `ℍ`,
+  so the invariance descends, but the Lean statement quantifies over `SL(2,ℤ)` because that is the
+  group Mathlib's action and generation theorem are stated for.
+* This gives **no** information about `η` itself under a general `g`: the multiplier system
+  (Dedekind sums, a 24-th root of unity times `(cτ+d)^{1/2}`) is still not formalised.  Only the
+  modulus `‖η‖`, in the specific combination `τ₂|η|⁴`, is controlled here — which is exactly what
+  one-loop modular invariance of the bosonic partition function needs.
+-/
+
+namespace StringFormal.DedekindEta
+
+open Complex
+open scoped Real MatrixGroups
+
+/-- **`S` and `T` generate `SL(2,ℤ)`** — graph node
+`worldsheet.modular-group-generated-by-s-and-t`.  This is a re-export of Mathlib's
+`SpecialLinearGroup.SL2Z_generators`; here `S = ![![0, -1], ![1, 0]]` and `T = ![![1, 1], ![0, 1]]`
+are `ModularGroup.S` and `ModularGroup.T`. -/
+theorem modular_group_generated_by_S_and_T :
+    Subgroup.closure ({ModularGroup.S, ModularGroup.T} : Set SL(2, ℤ)) = ⊤ :=
+  SpecialLinearGroup.SL2Z_generators
+
+/-- Invariance of `τ₂ |η(τ)|⁴` under all of `SL(2,ℤ)`, in the `∀ τ` form that the induction over
+`Subgroup.closure` needs (the `inv` step applies the inductive hypothesis at a *different* point
+`g⁻¹ • τ`, so the quantifier must be inside). -/
+theorem im_mul_norm_eta_pow_four_modular_forall (g : SL(2, ℤ)) :
+    ∀ τ : UpperHalfPlane,
+      (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
+        = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 := by
+  have hg : g ∈ Subgroup.closure ({ModularGroup.S, ModularGroup.T} : Set SL(2, ℤ)) := by
+    rw [modular_group_generated_by_S_and_T]
+    exact Subgroup.mem_top g
+  induction hg using Subgroup.closure_induction with
+  | mem x hx =>
+      simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx
+      rcases hx with h | h
+      · subst h; exact im_mul_norm_eta_pow_four_modular_S_smul
+      · subst h; exact im_mul_norm_eta_pow_four_modular_T_smul
+  | one => intro τ; rw [one_smul]
+  | mul x y _ _ ihx ihy => intro τ; rw [mul_smul, ihx (y • τ), ihy τ]
+  | inv x _ ihx =>
+      intro τ
+      have h := ihx (x⁻¹ • τ)
+      rw [smul_inv_smul] at h
+      exact h.symm
+
+/-- **Modular invariance of `τ₂ |η(τ)|⁴`.**  For every `g ∈ SL(2,ℤ)` and every `τ` in the upper
+half-plane, `Im(g · τ) · ‖η(g · τ)‖⁴ = Im τ · ‖η(τ)‖⁴`.
+
+Together with `Im(g · τ) = Im τ / |cτ + d|²` this is the statement that the one-loop measure
+`d²τ / τ₂² · (τ₂ |η|⁴)^{-…}` is modular invariant; the two generator cases are
+`DedekindEtaS.im_mul_norm_eta_pow_four_modular_S_smul` and
+`DedekindEtaT.im_mul_norm_eta_pow_four_modular_T_smul`, and the passage to all of `SL(2,ℤ)` uses
+`modular_group_generated_by_S_and_T`. -/
+theorem im_mul_norm_eta_pow_four_modular_invariant (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
+    (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
+      = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 :=
+  im_mul_norm_eta_pow_four_modular_forall g τ
+
+/-- The solved form: `‖η(g · τ)‖⁴ = (Im τ / Im(g · τ)) · ‖η(τ)‖⁴`. -/
+theorem norm_eta_pow_four_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
+    ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
+      = τ.im / (g • τ).im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 := by
+  have hpos : (g • τ).im ≠ 0 := ne_of_gt (g • τ).im_pos
+  have h := im_mul_norm_eta_pow_four_modular_invariant g τ
+  field_simp
+  linarith [h]
+
+/-- The same fact packaged as invariance of the function `τ ↦ Im τ · ‖η(τ)‖⁴` under the
+`SL(2,ℤ)`-action on `ℍ`. -/
+theorem im_mul_norm_eta_pow_four_isInvariant (g : SL(2, ℤ)) :
+    (fun τ : UpperHalfPlane => (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4)
+      = fun τ : UpperHalfPlane => τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 :=
+  funext (im_mul_norm_eta_pow_four_modular_forall g)
+
+end StringFormal.DedekindEta
