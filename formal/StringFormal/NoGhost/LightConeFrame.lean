@@ -6,6 +6,8 @@ Authors: stringgraph lean-formalizer
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
 import StringFormal.NoGhost.LightCone
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # The DDF light-cone frame, bundled
@@ -39,13 +41,17 @@ conditions (F1)–(F8) of the card together, which is why the card was `rigorous
 * `DDFLightConeFrame.lie_conjOp_transOp` — the corollary discharging that hypothesis from a
   `DDFLightConeFrame`: `⁅α^b̃_m, α^{ε_i}_n⁆ = 0` needs no hypothesis beyond the frame data.
 
+## Bonus: completeness forces the tachyonic mass shell
+
+* `DDFLightConeFrame.dotVec_self_eq_two` — the curator's hand computation "(F6)(F7)(F8) over a
+  field force `η(a,a) = 2`" (card notes, item (ii)): a codimension-one orthogonal-complement
+  argument (rank–nullity for the linear functional `e ↦ η(e,v)`, `v := a - b`, plus a
+  spanning-set dimension bound for `{ε_i}`).  Needs `[Field R]` (not just `[CommRing R]`); the
+  card's condition table is left unchanged (`(F8)` is still stated as a hypothesis, not
+  weakened to this consequence), per the card's explicit "不断言" (d).
+
 ## Scope and gaps
 
-* The curator's hand computation "(F6)(F7)(F8) over a field force `η(a,a) = 2`" (card notes,
-  item (ii)) is **not** attempted here: it needs a codimension-one orthogonal-complement
-  argument (rank–nullity for the linear functional `e ↦ η(e,v)`, plus a spanning-set dimension
-  bound for `{ε_i}`) that is a separate, more substantial piece of finite-dimensional linear
-  algebra than the bundling done in this file.  Left for a follow-up.
 * This file does not touch `NoGhost/Witness.lean`; the three small `witnessConjugate_*`
   component lemmas needed for `hconjSpan` are proved locally here, mirroring the existing
   `witnessMomentum_*`/`witnessLight_*` lemmas of `NoGhost/LightCone.lean`.
@@ -183,5 +189,123 @@ theorem DDFLightConeFrame.lie_conjOp_transOp {η a b : Fin D → R}
     (by rw [dotVec_comm]; exact F.dotVec_trans_conj_eq_zero i) F.hη m n
 
 end F9
+
+/-! ### Bonus: completeness forces the tachyonic mass shell -/
+
+section MassShellAux
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- `dotVec` is additive in its left argument for a finite sum. -/
+private lemma dotVec_sum_left {ι : Type*} (s : Finset ι) (f : ι → Fin D → R) (η y : Fin D → R) :
+    dotVec η (∑ i ∈ s, f i) y = ∑ i ∈ s, dotVec η (f i) y := by
+  simp only [dotVec, Finset.sum_apply, Finset.mul_sum, Finset.sum_mul]
+  rw [Finset.sum_comm]
+
+/-- `dotVec` is linear in its left argument (scalar half). -/
+private lemma dotVec_smul_left (η x y : Fin D → R) (c : R) :
+    dotVec η (c • x) y = c * dotVec η x y := by
+  rw [dotVec_comm, dotVec_smul_right, dotVec_comm η y x]
+
+/-- Bilinearity of `dotVec` against the rung-`j` momentum, in an arbitrary left slot
+(generalising `dotVec_towerMomentum_right`, which only treats the left slot `b`). -/
+private lemma dotVec_towerMomentum_right_of (η x a b : Fin D → R) (j : ℤ) :
+    dotVec η x (towerMomentum a b j) = dotVec η x a + (j : R) * dotVec η x b := by
+  have hj : towerMomentum a b j = a + (j : R) • b := by
+    funext μ; simp [towerMomentum_apply]
+  rw [hj, dotVec_add_right, dotVec_smul_right]
+
+end MassShellAux
+
+/-! The main bonus (ii) theorem needs `[Field R]`.  It is kept in its own section, without a
+separate `[CommRing R]` variable, to avoid two overlapping instance paths to the same ring
+structure on `R` (Lean's `overlappingInstances` linter flags `[CommRing R]` together with
+`[Field R]` in one declaration as unsafe: the two give defeq-but-not-syntactically-equal
+instances for `Add R`, `Zero R`, etc., which broke several `rw`/term-mode steps below in an
+earlier draft).  The `MassShellAux` lemmas above, proved for a generic `[CommRing R]`, apply
+here through the `CommRing` that `Field.toCommRing` supplies — no second instance is declared. -/
+
+section MassShell
+
+variable {D : ℕ} {R : Type*} [Field R]
+
+/-- **Bonus (ii) of the curator's hand computation** (card `worldsheet.ddf-light-cone-frame`,
+notes item (ii)): over a field, (F6)+(F7)+(F8) force the tachyonic mass shell `η(a,a) = 2`.
+
+Proof sketch (matching the card's hand derivation exactly): let `v := a - b`
+(`towerMomentum a b (-1)`).  The functional `L e := η(e,v)` has `finrank (range L) ≤ 1`, so
+rank–nullity gives `finrank (ker L) ≥ D - 1`.  The span of the `D - 2` polarisations has
+`finrank ≤ D - 2 < D - 1 ≤ finrank (ker L)`, so `ker L ⊄ span{ε_i}`: pick `e ∈ ker L` outside
+that span.  Completeness (F8) writes `e = Σ c_i ε_i + c_0 v` with `c_0 ≠ 0` (else `e` would lie
+in `span{ε_i}`).  Pairing this decomposition with `v` and using `η(ε_i, v) = 0` (from (F6) and
+`ε_i·b = 0`) collapses `0 = η(e,v)` to `c_0 · η(v,v) = 0`, so `η(v,v) = 0`; expanding
+`η(v,v) = η(a,a) - 2η(a,b) + η(b,b) = η(a,a) - 2` via (F2)(F3) finishes. -/
+theorem DDFLightConeFrame.dotVec_self_eq_two {η a b : Fin D → R} (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) : dotVec η a a = 2 := by
+  classical
+  -- η(v,v) = η(a,a) - 2, from (F2)(F3) and bilinearity, `v := towerMomentum a b (-1) = a - b`.
+  have hvv_eq : dotVec η (towerMomentum a b (-1)) (towerMomentum a b (-1))
+      = dotVec η a a - 2 := by
+    rw [← zeroModeSq_eq_dotVec, zeroModeSq_towerMomentum, zeroModeSq_eq_dotVec, F.hba,
+      F.frame.isotropic]
+    push_cast
+    ring
+  -- Each polarisation is orthogonal to `v`, from (F5)(F6).
+  have hεv : ∀ i, dotVec η (F.trans.vec i) (towerMomentum a b (-1)) = 0 := by
+    intro i
+    rw [dotVec_towerMomentum_right_of, F.hεa i, F.trans.transverse i]
+    ring
+  -- The pairing functional `L e := η(e,v)` as a linear map.
+  let L : (Fin D → R) →ₗ[R] R :=
+    { toFun := fun e => dotVec η e (towerMomentum a b (-1))
+      map_add' := fun x y => dotVec_add_left η x y _
+      map_smul' := fun c x => by
+        show dotVec η (c • x) (towerMomentum a b (-1))
+          = c • dotVec η x (towerMomentum a b (-1))
+        rw [dotVec_smul_left, smul_eq_mul] }
+  have hLker : ∀ e, e ∈ LinearMap.ker L ↔ dotVec η e (towerMomentum a b (-1)) = 0 :=
+    fun e => Iff.rfl
+  -- `finrank (range L) ≤ 1`, since `R` is one-dimensional over itself.
+  have hrange : Module.finrank R (LinearMap.range L) ≤ 1 := by
+    have := Submodule.finrank_le (R := R) (M := R) (LinearMap.range L)
+    rwa [CommSemiring.finrank_self R] at this
+  -- Rank–nullity: `finrank (range L) + finrank (ker L) = D`.
+  have hrn : Module.finrank R (LinearMap.range L) + Module.finrank R (LinearMap.ker L) = D := by
+    have h := LinearMap.finrank_range_add_finrank_ker (K := R) L
+    rwa [Module.finrank_pi R, Fintype.card_fin] at h
+  -- `finrank (span {ε_i}) ≤ D - 2`.
+  have hspanle : Module.finrank R (Submodule.span R (Set.range F.trans.vec)) ≤ D - 2 := by
+    have h := finrank_range_le_card (R := R) F.trans.vec
+    rwa [Fintype.card_fin] at h
+  -- Hence `ker L` cannot sit inside `span {ε_i}`: its dimension is strictly bigger.
+  have hgt : Module.finrank R (Submodule.span R (Set.range F.trans.vec))
+      < Module.finrank R (LinearMap.ker L) := by omega
+  have hfin : Module.Finite R (Submodule.span R (Set.range F.trans.vec)) :=
+    Module.Finite.span_of_finite R (Set.finite_range _)
+  have hnle : ¬ (LinearMap.ker L ≤ Submodule.span R (Set.range F.trans.vec)) := by
+    intro hle
+    have := Submodule.finrank_mono (R := R) (M := Fin D → R) hle
+    omega
+  obtain ⟨e, heker, henotin⟩ := SetLike.not_le_iff_exists.mp hnle
+  have he0 : dotVec η e (towerMomentum a b (-1)) = 0 := (hLker e).mp heker
+  obtain ⟨c, c₀, hdecomp⟩ := F.hspan e he0
+  -- `c₀ ≠ 0`: otherwise `e ∈ span {ε_i}`, contradicting the choice of `e`.
+  have hc0 : c₀ ≠ 0 := by
+    intro hc0
+    apply henotin
+    rw [hc0, zero_smul, add_zero] at hdecomp
+    rw [hdecomp]
+    exact Submodule.sum_mem _ fun i _ =>
+      Submodule.smul_mem _ _ (Submodule.subset_span ⟨i, rfl⟩)
+  -- Pair the decomposition with `v`: `0 = η(e,v) = c₀ · η(v,v)`.
+  have hspan0 : dotVec η (∑ i, c i • F.trans.vec i) (towerMomentum a b (-1)) = 0 := by
+    rw [dotVec_sum_left]
+    exact Finset.sum_eq_zero fun i _ => by rw [dotVec_smul_left, hεv i, mul_zero]
+  rw [hdecomp, dotVec_add_left, hspan0, zero_add, dotVec_smul_left] at he0
+  have hvv0 : dotVec η (towerMomentum a b (-1)) (towerMomentum a b (-1)) = 0 :=
+    (mul_eq_zero.mp he0).resolve_left hc0
+  exact sub_eq_zero.mp (hvv_eq.symm.trans hvv0)
+
+end MassShell
 
 end StringFormal.NoGhost
