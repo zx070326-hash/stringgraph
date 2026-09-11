@@ -11,6 +11,9 @@ statement: |
   注意右端**没有**中心项以外的贡献，也没有 k_0 或 p 的残余依赖：
   这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.lie_ddfOp_ddfOp
+  lean_file: StringFormal/NoGhost/DDFAlgebra.lean
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -64,6 +67,16 @@ sources:
       全程形式级数：推导见 worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket。
       ⚠ 同页那句「realize precisely the algebra of d − 2 transversal oscillators」是**同型识别**，
       不是本节点的内容：它由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators 承载。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFAlgebra.lean :: StringFormal.NoGhost.lie_ddfOp_ddfOp；辅助 StringFormal.NoGhost.{lie_towerMode_towerMode, lie_towerModeVec_towerModeVec, ddfOp_mul_ddfOp_apply}；三块输入 formal/StringFormal/NoGhost/VertexCommute.lean :: StringFormal.NoGhost.towerVertex_comm_of_isotropic、formal/StringFormal/NoGhost/VertexProduct.lean :: StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic、formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.sum_weighted_towerVertex_towerVertex；算子与窗口 formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.{ddfOp, ddfOp_apply, ddfSummand, ddfWindow, ddfSummand_apply_eq_zero_of_notMem_window, towerModeVec, towerModeVec_mul_towerVertex_of_transverse}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry，四条声明 `check_axioms` 全 `ok`
+      （公理只有 propext / Classical.choice / Quot.sound），分支 agent/formalizer/ddf-algebra。
+      **这是本节点 formal.lean_decl 与推导 --via-lean 的唯一依据。**
+      Lean 侧的陈述比本卡**更一般**（记在 --via-lean 的 gaps 里）：
+      偏振 ε、δ 任意横向（不要求正交归一），右端是一般收缩 `m (ε·δ) δ_{m+n,0}`，
+      m、n 跑遍 **ℤ（含 0）**。本卡的 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 是它在
+      ε := ε^i、δ := ε^j 且 ε^i·ε^j = δ^{ij}、m, n ≠ 0 处的直接特例。
 tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra]
 notes: |
   【换代来历，2026-09-11（五），curator，分支 agent/curator/ddf-algebra-split】
@@ -120,6 +133,27 @@ notes: |
     相关进展：worldsheet.ddf-operators-adjoint-v2 与 worldsheet.vertex-operator-adjoint
     已升为 formalized，但它们走的是伴随那条线，与本卡的对易关系**逻辑独立**
     （伴随的论证不用任何两个 DDF 算子之间的 OPE，反之亦然）。
+
+  【✅ 上面那条「不得标 formalized」已于 2026-09-11（六）作废，formalizer，
+  分支 agent/formalizer/ddf-algebra】上面路线 (i) 里唯一真正的障碍
+  「两个不同插入点算符之积 V(b,z)V(b′,w) 的重排序（交叉缩并）」**已经做完**，
+  而且走的**不是**围道/OPE 那条路，是纯代数的四步：
+    · **正交动量的顶点算子逐对对易**（`towerVertex_comm_of_isotropic`，
+      图节点 worldsheet.isotropic-tower-vertex-operators-commute，formalized）——
+      这正是当年被认作障碍的"交叉缩并"，`k_0² = 0` 时缩并因子恰为 1，**无奇点、无单值因子**；
+    · **同点乘积** Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L
+      （`sum_towerVertex_towerVertex_of_isotropic`，**图上暂无节点**，见 --via-lean 的 gaps）；
+    · **指标加权和** Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}
+      （`sum_weighted_towerVertex_towerVertex`，**图上暂无节点**，同上）——
+      这是"全导数留数"的纯代数版本，也是右端那个 m 的来源；
+    · **Leibniz 组装**（`lie_ddfOp_ddfOp`），只剩二重局部有限和的窗口对齐。
+  ⇒ 本卡自 2026-09-11 起有 `formal.lean_decl: StringFormal.NoGhost.lie_ddfOp_ddfOp`
+  与推导 worldsheet.ddf-transverse-oscillator-algebra-v2--via-lean（status: formalized）。
+  **VertexOperator.lean 文件头 "No operator products" 那条缺口也已作废**
+  （乘积现在住在 VertexCommute / VertexProduct / VertexWeightedSum 三个文件里）。
+  ⚠ **本卡陈述文本一字未动**，只加 formal 块、一条 stringformal-2026 的 source 与本段 notes。
+  Lean 侧比本卡更一般的三处（任意横向偏振而非正交归一标架、一般收缩 ε·δ 而非 δ^{ij}、
+  m,n ∈ ℤ 含 0）逐条记在 --via-lean 的 gaps 里，**不自动放宽本卡的量词**。
 
   【⚠ statement 里的 worldsheet.ddf-operators-v5 指针：合并 main 后已被 v6 取代（2026-09-11（五）晚，curator）】
   本卡的 statement 逐字照抄旧卡，因此写的是「worldsheet.ddf-operators-v5 定义的 DDF 算子」。

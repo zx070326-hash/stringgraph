@@ -38,3 +38,4 @@ import StringFormal.NoGhost.VertexCommute
 import StringFormal.NoGhost.VertexProduct
 import StringFormal.NoGhost.VertexAdjoint
 import StringFormal.NoGhost.VertexWeightedSum
+import StringFormal.NoGhost.DDFAlgebra
