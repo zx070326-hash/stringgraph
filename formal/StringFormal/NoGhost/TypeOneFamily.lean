@@ -695,4 +695,183 @@ instance ordSeedSpanPos_finiteDimensional (hD : 2 ≤ D) (F : DDFLightConeFrame 
 
 end SeedCountInj
 
+/-! ### The exact dimension of a bigraded piece, and the count split -/
+
+section BigradeDim
+
+variable {D : ℕ}
+
+/-- `dim (level-`M` piece of one Fock fiber) = #{d | level d = M}` (`= p_D(M)`, never
+evaluated): Mathlib's `basisRestrictSupport` on `weightedHomogeneousSubmodule`. -/
+theorem Fock.finrank_levelSubmodule (D : ℕ) (K : Type*) [Field K] (M : ℕ) :
+    Module.finrank K ↥(Fock.levelSubmodule D K M)
+      = Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M} := by
+  have h : Fock.levelSubmodule D K M
+      = MvPolynomial.restrictSupport K
+          {d : Osc D →₀ ℕ | Finsupp.weight (Fock.oscLevel D) d = M} := by
+    rw [Fock.levelSubmodule, weightedHomogeneousSubmodule_eq_finsupp_supported]
+    rfl
+  rw [(LinearEquiv.ofEq _ _ h).finrank_eq,
+    Module.finrank_eq_nat_card_basis (MvPolynomial.basisRestrictSupport K _)]
+  rfl
+
+/-- `dim V_{j,M} = #{d | level d = M}`: the rung embedding is injective. -/
+theorem finrank_towerBigrade (K : Type*) [Field K] (j : ℤ) (M : ℕ) :
+    Module.finrank K ↥(towerBigrade D K j M)
+      = Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M} := by
+  rw [towerBigrade, ← (Submodule.equivMapOfInjective (Finsupp.lsingle (M := Fock D K) (R := K) j)
+    (fun x y h => Finsupp.single_injective j h) _).finrank_eq]
+  exact Fock.finrank_levelSubmodule D K M
+
+/-- `p_D(M) = p_{D−1}(M) + (p_D(M) − p_{D−1}(M))`: the level-`M` occupation functions split
+into the `b̃`-free ones and the ones with at least one `b̃` factor. -/
+theorem nat_card_level_split (hD : 2 ≤ D) (M : ℕ) :
+    Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M}
+      = Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ conjDeg hD d = 0}
+        + Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} := by
+  classical
+  have hfin : Finite {d : Osc D →₀ ℕ // Fock.level D d = M} :=
+    (Fock.finite_setOf_level_eq D M).to_subtype
+  rw [← Nat.card_congr
+    (Equiv.sumCompl fun x : {d : Osc D →₀ ℕ // Fock.level D d = M} => conjDeg hD x.1 = 0),
+    Nat.card_sum]
+  congr 1
+  · exact Nat.card_congr (Equiv.subtypeSubtypeEquivSubtypeInter
+      (fun d : Osc D →₀ ℕ => Fock.level D d = M) (fun d => conjDeg hD d = 0))
+  · refine Nat.card_congr ((Equiv.subtypeSubtypeEquivSubtypeInter
+      (fun d : Osc D →₀ ℕ => Fock.level D d = M) (fun d => ¬ conjDeg hD d = 0)).trans
+      (Equiv.subtypeEquivRight fun d => ?_))
+    simp only [and_congr_right_iff]
+    intro _
+    omega
+
+end BigradeDim
+
+/-! ### The seed space and its lower bound (blueprint §B‴.9's `le_finrank_towerSeed`) -/
+
+section Seed
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] (η a b : Fin D → R)
+
+/-- **The seed space `Q_{j,M}`** (blueprint §B‴.3): states on the bigraded piece `(j, M)`
+killed by every positive mode.  No `L_0` condition, so it is defined on every rung and level;
+on the antidiagonal `j = -M` at intercept `a₀ = α'k²` it coincides with the physical slice. -/
+noncomputable def towerSeed (j : ℤ) (M : ℕ) : Submodule R (TowerFock D R) :=
+  towerPositiveModeSubmodule η a b ⊓ towerBigrade D R j M
+
+variable {η a b}
+
+lemma mem_towerSeed {j : ℤ} {M : ℕ} {x : TowerFock D R} :
+    x ∈ towerSeed η a b j M
+      ↔ (∀ m : ℤ, 0 < m → towerLop η a b m x = 0) ∧ x ∈ towerBigrade D R j M := by
+  rw [towerSeed, Submodule.mem_inf, mem_towerPositiveModeSubmodule]
+
+end Seed
+
+section SeedBound
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+omit [CharZero K] [Algebra ℚ K] in
+/-- A linear map into the dual of a finite-dimensional space has rank at most that dimension.
+Stated on abstract vector spaces for the same instance-path reason as
+`SpuriousElimination.finrank_le_of_injective_toDualHom`. -/
+theorem finrank_range_toDualHom_le {V : Type*} [AddCommGroup V] [Module K V]
+    {M : Type*} [AddCommGroup M] [Module K M] (W : Submodule K M) [FiniteDimensional K ↥W]
+    (f : V →ₗ[K] (↥W →ₗ[K] K)) :
+    Module.finrank K ↥(LinearMap.range f) ≤ Module.finrank K ↥W := by
+  have hfin : Module.Finite K (↥W →ₗ[K] K) :=
+    (inferInstance : FiniteDimensional K (Module.Dual K ↥W))
+  exact le_trans (Submodule.finrank_le _)
+    (le_of_eq (Subspace.dual_finrank_eq (K := K) (V := ↥W)))
+
+/-- The pairing of the bigraded piece `V_{j,M}` against the non-empty seed family, as a linear
+map into the dual of that family.  Its kernel is (contained in) the seed space `Q_{j,M}`, and
+rank–nullity then gives the lower bound on `dim Q_{j,M}` — no nondegeneracy of the form on the
+slice is needed for this direction (blueprint §B‴.9). -/
+noncomputable def sliceToSeedDual (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    ↥(towerBigrade D K j M) →ₗ[K] (↥(ordSeedSpanPos hD F j M) →ₗ[K] K) :=
+  LinearMap.domRestrict ((Fock.towerPairing η).compl₂ (ordSeedSpanPos hD F j M).subtype) _
+
+omit [CharZero K] in
+@[simp]
+lemma sliceToSeedDual_apply (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ)
+    (x : ↥(towerBigrade D K j M)) (s : ↥(ordSeedSpanPos hD F j M)) :
+    sliceToSeedDual hD F j M x s
+      = Fock.towerPairing η (x : TowerFock D K) (s : TowerFock D K) := rfl
+
+/-- **The kernel of `sliceToSeedDual` consists of seeds.**  For `0 < n ≤ M`,
+`⟨L_n x, y⟩ = ⟨L_n x, y_{(j,M-n)}⟩ = ⟨x, L_{-n} y_{(j,M-n)}⟩`, and `L_{-n} y_{(j,M-n)}` lies in
+the non-empty seed family of level `M` by (F-1) plus straightening; nondegeneracy of the tower
+form then gives `L_n x = 0`.  For `n > M` the mode kills the slice outright. -/
+theorem mem_towerSeed_of_mem_ker_sliceToSeedDual (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (j : ℤ) (M : ℕ) {x : ↥(towerBigrade D K j M)}
+    (hx : x ∈ LinearMap.ker (sliceToSeedDual hD F j M)) :
+    (x : TowerFock D K) ∈ towerSeed η a b j M := by
+  rw [mem_towerSeed]
+  refine ⟨fun m hm => ?_, x.2⟩
+  have hker : ∀ s ∈ ordSeedSpanPos hD F j M, Fock.towerPairing η (x : TowerFock D K) s = 0 := by
+    intro s hs
+    have := congrArg (fun g : ↥(ordSeedSpanPos hD F j M) →ₗ[K] K => g ⟨s, hs⟩)
+      (LinearMap.mem_ker.1 hx)
+    simpa using this
+  by_cases hMm : (M : ℤ) < m
+  · exact towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt η a b x.2 hMm
+  · obtain ⟨n, rfl⟩ : ∃ n : ℕ+, m = ((n : ℕ) : ℤ) :=
+      ⟨⟨m.toNat, by omega⟩, by simp only [PNat.mk_coe]; omega⟩
+    have hnM : (n : ℕ) ≤ M := by omega
+    have hM' : ((M - (n : ℕ) : ℕ) : ℤ) = (M : ℤ) - ((n : ℕ) : ℤ) := by omega
+    have hLx : towerLop η a b ((n : ℕ) : ℤ) x ∈ towerBigrade D K j (M - (n : ℕ)) :=
+      towerLop_mem_towerBigrade η a b x.2 hM'
+    refine Fock.eq_zero_of_towerPairing_left_eq_zero F.hη fun y => ?_
+    have hproj : towerBigradeProj D K j (M - (n : ℕ)) (towerLop η a b ((n : ℕ) : ℤ) x)
+        = towerLop η a b ((n : ℕ) : ℤ) x := towerBigradeProj_of_mem_self hLx
+    rw [← hproj, towerPairing_towerBigradeProj_left, hproj, Fock.towerPairing_towerLop_left]
+    refine hker _ ?_
+    have := towerLop_neg_mem_ordSeedSpanPos_of_mem_towerBigrade hD F F.hη j n
+      (towerBigradeProj_mem j (M - (n : ℕ)) y)
+    rwa [show M - (n : ℕ) + (n : ℕ) = M by omega] at this
+
+/-- **(F-1)+(F-2), the lower-bound half** (blueprint §B‴.9's `le_finrank_towerSeed`):
+
+`dim Q_{j,M} ≥ p_{D−1}(M)`,
+
+the right-hand side being the number of `b̃`-free level-`M` light-cone occupation functions.
+
+Rank–nullity for `Ψ = sliceToSeedDual : V_{j,M} → (seed family)^*`:
+`dim ker Ψ = dim V_{j,M} − rank Ψ ≥ p_D(M) − (p_D(M) − p_{D−1}(M))`, using
+`dim V_{j,M} = p_D(M)` (`finrank_towerBigrade`), `rank Ψ ≤ dim (seed family) ≤ p_D(M) − p_{D−1}(M)`
+(`finrank_ordSeedSpanPos_le`, the injective half of (F-2)), and `ker Ψ ⊆ Q_{j,M}`.
+
+`D = 26` does not appear, nor does the intercept: the statement holds on **every** rung `j` and
+every level `M`.  Combined with `SpuriousElimination.finrank_towerPositiveMode_inf_towerBigrade_le`
+this is an equality. -/
+theorem le_finrank_towerSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0}
+      ≤ Module.finrank K ↥(towerSeed η a b j M) := by
+  classical
+  have hrn := LinearMap.finrank_range_add_finrank_ker (K := K) (V := ↥(towerBigrade D K j M))
+    (V₂ := ↥(ordSeedSpanPos hD F j M) →ₗ[K] K) (sliceToSeedDual hD F j M)
+  have hS : FiniteDimensional K ↥(ordSeedSpanPos hD F j M) :=
+    ordSeedSpanPos_finiteDimensional hD F j M
+  have h1 := finrank_range_toDualHom_le (K := K) (V := ↥(towerBigrade D K j M))
+    (M := TowerFock D K) (ordSeedSpanPos hD F j M) (sliceToSeedDual hD F j M)
+  have h2 := finrank_ordSeedSpanPos_le hD F j M
+  have hVfin : FiniteDimensional K ↥(towerBigrade D K j M) := towerBigrade_finite j M
+  have hseedfin : FiniteDimensional K ↥(towerSeed η a b j M) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b j M) (S₂ := towerBigrade D K j M) inf_le_right
+  have hker : Module.finrank K ↥(LinearMap.ker (sliceToSeedDual hD F j M))
+      ≤ Module.finrank K ↥(towerSeed η a b j M) := by
+    rw [← Submodule.finrank_map_subtype_eq (towerBigrade D K j M)]
+    refine Submodule.finrank_mono ?_
+    rintro _ ⟨x, hx, rfl⟩
+    exact mem_towerSeed_of_mem_ker_sliceToSeedDual hD F j M hx
+  have hV := finrank_towerBigrade (D := D) K j M
+  have hsplit := nat_card_level_split hD M
+  rw [← Nat.card_eq_fintype_card]
+  omega
+
+end SeedBound
+
 end StringFormal.NoGhost
