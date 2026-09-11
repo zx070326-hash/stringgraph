@@ -198,5 +198,43 @@ notes: |
   **该公式本身未形式化**，也未在任何已核实来源里逐字找到。
   ⚠ 下游仍然成立的告诫（与 (A) 同）：任何把「α_N > 0」当前提的步骤在本图里**没有来源背书**；
   本卡不提供它，(D) 也不提供它（(D) 只是本项目的一条待核验计算）。
+
+  ---
+  **【(E) 开弦物理态质壳 D=26、a₀=1（h = 1 − N）处的行列式**取值**——与 (D) 的 α_N 是两个不同的量，
+  不要混淆（curator，2026-09-11，wiring FockFreeLowLevel.lean）】
+
+  `formal/StringFormal/Virasoro/FockFreeLowLevel.lean` 用本卡 statement 同款的四个 Kac
+  多项式（Lean 侧 `kacDet1, kacDet2, kacDet3, kacDet4`，与本卡「(c,h) ↦ det M_N(c,h)」的
+  N = 1,2,3,4 实例逐项一致，`ring` 证明核对无误）在 **c = 26、h = 1 − N**（经典开弦、
+  a₀ = 1、无鬼定理关心的那条质壳线）处代入，得到：
+
+      det M₁(26, 0)  = 0,        det M₂(26, −1) = 0,
+      det M₃(26, −2) = 2304,     det M₄(26, −3) = 2649563136。
+
+  （decl 名 `kacDet{1,2,3,4}_massShell_26`；curator 已手算复核四个数值，`ring` 证明无可疑之处。）
+
+  **N = 1, 2 恰为零**：这正是开弦谱在这两层**存在零模态**（L₋₁|0;k⟩ 型与 Virasoro 判据
+  在这里预期空转）的代数体现，不是漏洞。
+
+  **⚠ 两处容易混淆、必须分开读的「不同的数」**：
+  · 本条 (E) 的 det₃ = 2304、det₄ = 2649563136 是 Kac 行列式在 **c=26, h=1−N 这一个特定
+    质壳点**上、把本卡 statement 的多项式**代入具体数值后的取值**；
+  · 上面 (D) 的 α₃ = 2304、α₄ = 37748736 是本卡 statement 里 det M_N(c,h) 因式分解
+    det M_N(c,h) = α_N ∏(h−h_{r,s}(c))^{p(N−rs)} 中、**与 (c,h) 无关的首项系数**。
+  两族数在 **N = 3 处碰巧同为 2304**（curator 未逐项核实这个巧合背后的代数原因，只确认了
+  两处的**定义**本来就不同，不能互相替代或互相印证），在 **N = 4 处不相等**
+  （2649563136 ≠ 37748736），这正说明「质壳处的行列式值」与「一般公式的首项系数」是两个
+  不同的量：前者还包含了全部 ∏(h−h_{r,s}(26))^{p(4−rs)} 因子在 h=1−4=−3 处的取值，
+  后者把这些因子全部剥掉了只剩常数。
+
+  **本条 (E) 对本卡 statement、status 或 sources 均无影响，纯记账**：本卡仍是 rigorous、
+  未形式化（瓶颈见上面 (C)：Mathlib 缺 PBW）——(E) 这四个 `ring` 恒等式是把本卡的**多项式
+  公式**（statement 本身，不涉及 dim V_N = p(N) 或线性无关）代入数值，不构成对 Gram 行列式
+  非零处线性无关性的形式化，也不涉及一般 N（只到 N=4）。
+  **本条 (E) 对 worldsheet.no-ghost-theorem-v4 的形式化瓶颈无任何影响**：瓶颈链是
+  worldsheet.kac-determinant-v2 → math.verma-module-free-over-negative-part → PBW，
+  N ≤ 4 的质壳数值不缩短、不绕过这条链（本卡仍需要一般 N 的 dim V_N = p(N) 才能升级）。
+  图侧承载「这四个数值蕴含了什么线性无关结论」见
+  worldsheet.fock-module-free-over-negative-virasoro-low-level 的 notes；本卡只记录数值本身。
 author: curator
 created: "2026-09-11"
