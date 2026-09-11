@@ -44,6 +44,7 @@ sources:
   - ref: polchinski-1998-v2
     loc: "§13.4「Branes at general angles」, (13.4.23) 之后一段，p. 157（作者自承的例外：超对称未破缺但势非零）；反平行快子 (13.4.27) 附近，p. 158"
     note: 抽取记录 #E25 与 Q8（L1）。这条决定了本卡适用域的写法。
+superseded_by: branes.d-brane-bps-no-force-v2
 tags: [d-brane, bps, no-force, cylinder-amplitude, ns-ns, r-r, type-ii]
 notes: |
   【为什么把例外写进 statement】抽取记录 Q8 明令：若图里要建「BPS ⇒ 无力」的一般命题，
@@ -82,5 +83,18 @@ notes: |
   depends_on worldsheet.type-i-tadpole-cancellation-so32（抽取记录 Q5 末段把这条边交 curator 判断，
   判为**要建**，因为它是技术性而非叙事性的公式依赖）。只借用该卡推导里的圆柱振幅 (10.8.4)，
   **不借用** (n ∓ 32)² / SO(32) 结论；本推导最弱的一环 (13.3.2) 也不因这条边而变强。
+
+  ★★【2026-09-11 换代为 branes.d-brane-bps-no-force-v2（curator, small-backlog-7）】
+  换代理由是**拆卡**，不是纠错：本卡 statement 同时断言 (13.3.1)（NS–NS 长程形式）与
+  (13.3.2)（R–R 与 NS–NS 相消 ⇒ 无力），而原书对这两件的论证强度不同——前者是显式计算
+  （抽取记录 §7.3 已复算闭合），后者是「Due to supersymmetric cancellation in the trace」的断言
+  （R–R 侧的圆柱振幅从未被显式算出）。
+  (13.3.1) 已独立为 branes.d-brane-cylinder-long-distance-ns-ns；
+  v2 只保留 (13.3.2) 并 depends_on 那张新卡。
+  本卡的唯一推导 --via-cylinder-ns-ns-rr-cancellation 已 `git mv` 改指 v2；
+  (13.3.1) 的计算部分移入新卡的推导，相消那一半原样适用于 v2。
+  故本卡自换代起**无推导**；同时唯一一条活边
+  （branes.d-brane-rr-charge-value--via-rr-exchange-field-theory-matching）已改指 v2，
+  故不触发「依赖已换代且无推导的命题」这条 validate error。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"

@@ -1,0 +1,87 @@
+id: branes.d-brane-cylinder-long-distance-ns-ns
+kind: proposition
+title: 两张平行 Dp 膜之间圆柱振幅的 NS–NS 长程部分 (13.3.1)：𝒜_NS–NS ≈ iV_{p+1}·2π(4π²α')^{3−p}G_{9−p}(y)（含完整前缀与被积测度）
+statement: |
+  **设定（适用域，是陈述的一部分）**：type II 超弦中两张**平行、同维、相对静止**的 Dp 膜
+  （#ND = 0，branes.d-brane-from-t-duality），相距 y（y² = y^μ y_μ 取 Dirichlet 方向上的间距）。
+  考虑两膜之间的圆柱（annulus）真空振幅，即张在两膜之间的开弦的单圈迹。Chan–Paton 权重取 2
+  （开弦的两种取向），**不**乘无取向投影的 ½——原书逐字：「The Chan–Paton weight is 2 here,
+  from the two orientations of the open string, and there is no factor of ½ from the orientation
+  projection because the physics is locally oriented.」
+
+  **命题**：该振幅中**轻 NS–NS 闭弦交换**的部分（即引力子 + dilaton 交换），可由 §10.8 的
+  (10.8.4) 去掉 Dirichlet 方向的动量积分因子、并加入拉伸弦的张力项而得到，其值为
+    **𝒜_NS–NS ≈ [ i V_{p+1} · 4 × 16 / (8π (8π²α')⁵) ] ∫₀^∞ (π dt / t²) (8π²α't)^{(9−p)/2}
+                 exp(−t y² / 2πα')
+              = i V_{p+1} · 2π (4π²α')^{3−p} G_{9−p}(y)**,                       (13.3.1)
+  其中 V_{p+1} 是膜世界体体积，
+    **G_d(y) = 2^{−2} π^{−d/2} Γ(½d − 1) y^{2−d}**
+  是 d 维无质量标量的 Green 函数。原书写的是「≈」：等式只在**长程（y 大）/ 轻闭弦交换**的意义下成立。
+
+  **本命题不断言**：
+  (1) **R–R 侧的振幅，也不断言任何相消**。(13.3.2) 的 𝒜_R–R = −𝒜_NS–NS 与由此得到的"无力"
+      是 branes.d-brane-bps-no-force-v2 的内容，本卡**只**给 NS–NS 这一侧。
+      特别地，本卡**不使用**两膜系统保留的超对称，也不需要 BPS 性。
+  (2) 张力 τ_p 的值（branes.d-brane-tension-v2 用本式与场论侧 (13.3.3) 对照得出）。
+  (3) 有限 t（短柱 / 开弦通道）上的完整圆柱振幅：本卡只给长柱极限里轻闭弦交换的那一项，
+      这正是原书用「≈」的原因。
+  (4) **前缀的两个读数不是页图共识**：分母 (8π²α')⁵ 里 α' 的幂次与被积测度里的 π
+      在不同轮次的页图判读中出现过冲突；本图采纳的形式的真正根据是**把第一行积出来与第二行
+      逐位比对后 2、π、α' 三者幂次同时闭合**（抽取记录 §7.3(b)(c)），不是像素读数。
+      若日后有更高分辨率页图或官方勘误表，以那个为准。
+  (5) 反平行（膜–反膜）、任意夹角或相对运动的构型（§13.4、§13.5）。
+uses:
+  - branes.d-brane-from-t-duality
+  - branes.stretched-open-string-mass
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, eq. (13.3.1)，p. 146（连同其前的两句：「We can calculate these forces explicitly from the usual cylinder vacuum amplitude. The exchange of light NS–NS closed strings was isolated in eq. (10.8.4). Modify this expression by removing the factors for the momentum integrations in the Dirichlet directions and introducing a term for the tension of a string stretched over a separation y^μ:」）；Chan–Paton 权重与无 ½ 的逐字说明同页"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16，证据等级 L1（原书页图）。
+      ★ **完整前缀与被积测度以同文件 §7.3 为准**（researcher 2026-09-11 独立 L1 页图复核，
+      Cambridge Core ch.13 单章 PDF，印刷 p.146 = PDF p.11）：
+        (i) **被积测度是 (π dt/t²)**，分子带 π——旧转录漏的正是这个 π，它就是抽取记录 Q3
+            「π 幂次差一次」的成因；Q3 原列的三个候选解释（前缀分母少一个 π / 4×16 读错 /
+            指数读错）全都不对，正确答案是第四种。
+        (ii) 分母是 **(8π²α')⁵**（α' 一次方，本轮页图直接读到；旧记录「页图读作 α'²」判为
+            嵌套上标的读图失真，与 -sec10-8.md#Q1 的「α'² 是系统性假象」裁定同向，构成第三条证据）。
+      **复算闭合（抽取记录 §7.3(b)）**：记 d = 9−p、a = y²/2πα'，把第一行积出得
+      iV_{p+1}·2^{2d−13}π^{3d/2−11}α'^{d−6}Γ(d/2−1)y^{2−d}，与第二行代入 G_d 后**逐项相同**，
+      2、π、α' 三者幂次同时闭合，无残留因子。
+      ⚠ 原书写「≈」；(13.3.1) 明写是 (10.8.4) 的修改版（技术性的公式级依赖，抽取记录 Q5）。
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.25)（玻色弦 D 膜之间引力子 + dilaton 交换的场论振幅；§13.3 的 (13.3.3) 逐字引用它并把 6 = (D−2)/4 换成十维的 2）"
+    note: |
+      ⚠ **本条只用来定位 G_d(y) 与场论对照式的出处，本卡不断言 (13.3.3)**。
+      本图无 (8.7.25) 的节点（polchinski-1998-v1#E156 是二手源），故本条来源在图上无对应依赖边。
+tags: [d-brane, cylinder-amplitude, ns-ns, type-ii, long-distance]
+notes: |
+  ★★【本卡为什么新建：从 branes.d-brane-bps-no-force 拆出（curator，2026-09-11）】
+  旧卡 branes.d-brane-bps-no-force 的 statement 里同时写了两件事：
+    (A) (13.3.1) 的 NS–NS 长程形式；
+    (B) (13.3.2) 的 𝒜_R–R = −𝒜_NS–NS 相消，故无力。
+  这两件在原书里是**分别得到**的，且强度差一个档：
+    - (A) 是一条**显式计算**（从 (10.8.4) 改写 + 积分，抽取记录 §7.3 已复算闭合）；
+    - (B) 是一句**断言**（原书逐字「Due to supersymmetric cancellation in the trace」，
+      R–R 侧的圆柱振幅从未被显式算出）。
+  按 graph/CLAUDE.md「文献把两件事写在一个定理里而它们被分别推导时，拆开」，
+  (A) 独立为本卡，(B) 留在换代后的 branes.d-brane-bps-no-force-v2，后者 depends_on 本卡。
+  ⇒ 记账上的收益：branes.d-brane-tension-v2 只需要 (A)（它的推导只用 NS–NS 侧），
+  而 branes.d-brane-rr-charge-value 需要 (A) + (B)；拆开后这两条下游路径的强度差别
+  能落在图的结构上，而不是埋在 notes 里。
+
+  【前缀的记账史】旧卡把完整前缀只放在 notes 与推导 summary 里、陈述只用 (13.3.1) 的末行，
+  理由是「Q3 未关闭时完整前缀不进节点」。Q3 已于 2026-09-11 关闭（抽取记录 §7.3），
+  故本卡把**完整两行**都写进陈述，并把 §7.3(c) 的谨慎保留原样搬进"本命题不断言 (4)"。
+
+  【与 branes.d-brane-tension-v2 的关系（未接线，已列入报告）】
+  branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的 summary (1) 逐字重算了
+  同一条 (13.3.1)，却没有 depends_on 本卡（本卡此前不存在）。建议 lead 派一轮把那条边补上，
+  本轮未做（不在本次积压的 claim 范围内）。
+
+  【(10.8.4) 在图上没有独立节点】本卡的母式 (10.8.4) 只出现在
+  worldsheet.type-i-tadpole-cancellation-so32-v2 的推导里，图上无单独的陈述卡。
+  这是旧卡推导 gaps 已记的残留缺口，本卡继承之。
+author: curator
+created: "2026-09-11"

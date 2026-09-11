@@ -1,0 +1,104 @@
+id: branes.d-brane-bps-no-force-v2
+kind: proposition
+title: 平行同号静态 Dp 膜之间无力：圆柱振幅中 R–R 交换与 NS–NS 交换精确相消 (13.3.2)（v2：NS–NS 长程形式 (13.3.1) 拆出为独立卡）
+statement: |
+  **设定（适用域，是陈述的一部分）**：type II 超弦中两张**平行、同维、R–R 荷同号、相对静止**的
+  Dp 膜（#ND = 0），相距 y。它们共同保留的超对称与单张 Dp 膜相同（(13.2.5)，
+  branes.d-brane-bps-half-susy），两膜系统仍是 BPS 态。原书 §13.3 开篇逐字：
+  「There is no force between static BPS objects of like charge. The multi-object state is still
+  supersymmetric and so its energy is determined only by its charge and **is independent of** the
+  separations. For parallel Dp-branes, the unbroken supersymmetry (13.2.5) is the same as for a
+  single Dp-brane.」
+
+  **命题**：圆柱真空振幅在长柱极限下分成 NS–NS 交换（引力子 + dilaton，吸引）与 R–R 交换
+  （(p+1)-形式势，排斥）两部分，二者**精确相消**：
+    **𝒜_R–R = − 𝒜_NS–NS**,                                        (13.3.2)
+  故两膜之间的静力为零。原书逐字：「Due to supersymmetric cancellation in the trace, the R–R
+  exchange amplitude is 𝒜_R–R = −𝒜_NS–NS and so the total force vanishes as expected.」
+  以及「The vanishing of the force comes about from a cancellation between attraction due to the
+  graviton and dilaton and repulsion due to the R–R tensor.」
+
+  **本命题不断言**（每条都有原文依据）：
+  (1) **𝒜_NS–NS 本身的值**。(13.3.1) 的长程形式（含完整前缀与被积测度）是独立的一张卡
+      branes.d-brane-cylinder-long-distance-ns-ns；本卡只断言两侧**互为相反数**，
+      其中一侧的具体表达式由那张卡提供。
+  (2) 反平行（膜–反膜）构型：那时 NS–NS 与 R–R 同为吸引，间距 y² < 2π²α' 时圆柱振幅发散、出现快子
+      （§13.4，「evidently it represents D4-brane/anti-D4-brane annihilation」）。
+  (3) 相对运动：超对称全破，有 O(v⁴) 的速度依赖势（(13.5.7)）。
+  (4) ★ **「超对称未破缺 ⇒ 真空圈振幅为零」这条一般规则**。原书在任意夹角 D4 膜的势 (13.4.23) 之后
+      自承反例，逐字：「Curiously this covers only eight of the sixteen phases (13.4.11), so that if some
+      phases (13.4.11) are unity but not those of the form exp(±2iφ'_a), then **supersymmetry is
+      unbroken but the potential is nonzero. This is an exception to the usual rule that the vacuum
+      loop amplitudes vanish by Bose–Fermi cancellation.**」原书只给现象，不给机制；
+      本图不为该例外建卡，只把它作为本命题适用域的边界记录。
+      因此本卡只对上述**平行、同维、同号、静态**构型断言无力，**不**由「BPS」二字推广到任意保留超对称的构型。
+  (5) 张力 τ_p 与荷 μ_p 的数值（branes.d-brane-tension-v2、branes.d-brane-rr-charge-value）。
+  (6) **R–R 侧圆柱振幅的显式计算**：原书从未算出 𝒜_R–R，(13.3.2) 是由「迹中的超对称相消」
+      直接断言的（见推导 gaps 第一条）。
+uses:
+  - branes.d-brane-cylinder-long-distance-ns-ns
+  - branes.d-brane-bps-half-susy
+  - branes.d-brane-rr-coupling
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, eq. (13.3.2)，p. 146；开篇段落逐字「There is no force between static BPS objects of like charge. The multi-object state is still supersymmetric and so its energy is determined only by its charge and is independent of the separations.」与「Due to supersymmetric cancellation in the trace, the R–R exchange amplitude is 𝒜_R–R = −𝒜_NS–NS and so the total force vanishes as expected.」；BPS 性与保留的超对称见 §13.2, (13.2.5), p. 140"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16，证据等级 L1（原书页图）。
+      ★ **开篇逐字以同文件 §7.1 为准**：E16 旧逐字块漏抄了 "is independent of"，语义恰好反转成
+      「能量由荷**与间距**共同决定」；原句说的是能量**与间距无关**，即无力性本身的同义说法
+      （auditor 一手核 p.146 发现，researcher 用 Cambridge Core ch.13 PDF 独立复核，印刷 p.146 = PDF p.11）。
+      ⚠ (13.3.2) **不是独立算出的**，而是「Due to supersymmetric cancellation in the trace」
+      直接断言——**超对称输入而非计算输出**。这是本卡最弱的一环。
+  - ref: polchinski-1998-v2
+    loc: "§13.4「Branes at general angles」, (13.4.23) 之后一段，p. 157（作者自承的例外：超对称未破缺但势非零）；反平行快子 (13.4.27) 附近，p. 158"
+    note: 抽取记录 #E25 与 Q8（L1）。这条决定了本卡适用域的写法。
+tags: [d-brane, bps, no-force, cylinder-amplitude, ns-ns, r-r, type-ii]
+notes: |
+  ★★【v2 改了什么（curator，2026-09-11）：把 (13.3.1) 拆出去，只留 (13.3.2)】
+  v1（branes.d-brane-bps-no-force）的 statement 里同时写了两件事：
+    (A) (13.3.1) 的 NS–NS 长程形式（含 G_d(y)）；
+    (B) (13.3.2) 的 𝒜_R–R = −𝒜_NS–NS 相消，故无力。
+  这两件在原书里**分别得到**，且强度差一个档：(A) 是显式计算（抽取记录 §7.3 已复算闭合），
+  (B) 是一句断言（R–R 侧的圆柱振幅从未被显式算出）。按 graph/CLAUDE.md
+  「文献把两件事写在一个定理里而它们被分别推导时，拆开」，
+  (A) 已独立为 **branes.d-brane-cylinder-long-distance-ns-ns**，本卡（v2）只留 (B) 并 depends_on 它。
+  ⇒ 记账收益：branes.d-brane-tension-v2 只需要 (A)，branes.d-brane-rr-charge-value 需要 (A)+(B)；
+  拆开后这两条下游路径的强度差别落在图的结构上，不再埋在 notes 里。
+
+  【v2 顺带修掉的两处 v1 已知过时文字（不是改写，是新卡不再含有）】
+  (a) v1 的「本命题不断言 (4)」括号里写「(13.3.1) 的完整前缀系数（页图读数与复算相差一个 π 的幂）」
+      ——抽取记录 Q3 已于 2026-09-11 关闭（漏的 π 在被积测度里），v1 按原则 1 不就地改，
+      v2 不再含该括号；相应的保留条款改写在新卡
+      branes.d-brane-cylinder-long-distance-ns-ns 的「本命题不断言 (4)」里，按 §7.3(c) 的原话。
+  (b) v1 的 statement 里没有原书开篇那句的逐字（只在 notes 里，且一度漏抄 "is independent of"）；
+      v2 把订正后的逐字写进 statement，使「能量与间距无关」这一读法在卡面上可核。
+  ⚠ 除上述两点与 (13.3.1) 的移出外，v2 的命题内容与 v1 **完全相同**：仍限定平行、同维、同号、静态，
+  仍把 (13.4.23) 后的作者自承反例列为不断言。
+
+  【为什么把例外写进 statement】抽取记录 Q8 明令：若图里要建「BPS ⇒ 无力」的一般命题，
+  (13.4.23) 后的例外必须写进限定，否则该卡是错的。本卡因此把命题收窄到 #ND = 0 的平行构型，
+  并把一般规则明列为「不断言」。
+
+  【BPS 链（lead 指示 2026-09-11，依 appB 抽取 §5-B / Q3）】
+  susy.bps-bound-point-particle-d4（App. B (B.2.36)–(B.2.39)，**仅点粒子荷**）
+  → susy.brane-charges-in-susy-algebra（§13.2 (13.2.9)，原书自承「still not complete」）
+  → 本卡。
+  ⚠ 本卡**不**直接依赖 App. B：(B.2.39) 只对点粒子荷（p.448 逐字），不得整体挂在 D 膜的 BPS 界上。
+  ⚠ auditor 2026-09-11 裁决（rulings-3）：本卡推导对 susy.brane-charges-in-susy-algebra 的边
+  维持 `inferred: true`（术语锚定，不承重）——原书开篇那句 "its energy … is independent of the
+  separations" 是本命题**结论**的文字预告，不是一条独立的质量–荷引理；(13.3.2) 的唯一依据是
+  "supersymmetric cancellation in the trace"。该裁决对 v2 原样有效。
+  branes.d-brane-bps-half-susy 是 (13.2.9) 的上游（原书顺序：(13.2.5) → (13.2.7) → (13.2.9)）。
+
+  【本卡是哪张下游卡的输入】
+  - branes.d-brane-rr-charge-value：用 (13.3.2) 把 R–R 交换与场论 (13.3.6) 对照得 μ_p² = e^{2Φ₀}τ_p²；
+    该卡的推导已于本轮把边从 v1 改指本卡。
+  - branes.d-brane-tension-v2 的推导**不**依赖本卡（只用 NS–NS 侧 (13.3.1) 与 (13.3.3)）
+    ——拆卡后这一点在图上直接可见：它该依赖的是新卡
+    branes.d-brane-cylinder-long-distance-ns-ns（那条边本轮未补，已列入报告）。
+
+  【与 §10.8 的关系】(13.3.1) 是 (10.8.4) 的修改版；这条技术依赖随 (13.3.1) 一起移到新卡
+  branes.d-brane-cylinder-long-distance-ns-ns 的推导上，本卡推导不再直接挂它。
+author: curator
+created: "2026-09-11"

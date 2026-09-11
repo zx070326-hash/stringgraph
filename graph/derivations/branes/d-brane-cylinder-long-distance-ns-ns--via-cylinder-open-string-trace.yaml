@@ -1,0 +1,109 @@
+id: branes.d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace
+target: branes.d-brane-cylinder-long-distance-ns-ns
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+    note: |
+      供给 Dp 膜这一对象，以及「Dirichlet 方向没有动量积分」这一记账——原书 p. 146 逐字
+      「Modify this expression by **removing the factors for the momentum integrations in the
+      Dirichlet directions**」，这正是 (10.8.4) → (13.3.1) 的第一步改写，也是前缀里
+      (8π²α't)^{(9−p)/2} 这个 p 依赖幂次的来源（10 − (p+1) = 9−p 个 Dirichlet 方向）。
+      ⚠ 该卡是**玻色**弦的 D 膜定义卡；超弦版原书外包给第 8 章。
+  - id: branes.stretched-open-string-mass
+    note: |
+      供给 (10.8.4) → (13.3.1) 的第二步改写——原书 p. 146 逐字「and introducing a term for the
+      **tension of a string stretched over a separation y^μ**」，即被积函数里的
+      exp(−t y²/2πα')：张在两膜之间的开弦有经典质量 m = y/(2πα')，单圈迹里给出
+      exp(−2πt α' m²) = exp(−t y²/2πα')。
+      ⇒ 本边是 y 依赖（从而是 G_{9−p}(y) 的 y^{2−d} 长程行为）的唯一来源。
+  - id: worldsheet.type-i-tadpole-cancellation-so32-v2
+    note: |
+      供给本式的**母式 (10.8.4)**：该卡的推导覆盖 §10.8 的圆柱 / Klein 瓶 / Möbius 带真空振幅
+      计算，其中 (10.8.4) 就是本卡 (13.3.1) 的出发点（原书 p. 146 明写 (13.3.1) 由 (10.8.4)
+      修改而得）。**技术性（公式级）**依赖，故不标 inferred（抽取记录 Q5 末段把这条边交 curator
+      判断，判为要建；与 branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 同款）。
+      ⚠ 只用该卡推导里的圆柱振幅这一件，**不用** (n ∓ 32)² / SO(32) 结论：本卡讲 type II 的两张
+      平行 D 膜，与 type I 的无取向投影无关——原书 p. 146 逐字「there is no factor of ½ from the
+      orientation projection because the physics is locally oriented」。
+      ⚠ 指 v2 而非 v1：v2 只订正了 (10.8.19) 前缀里 α' 的幂次，物理内容不变。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, p. 146：「We can calculate these forces explicitly from the usual cylinder vacuum amplitude. The exchange of light NS–NS closed strings was isolated in eq. (10.8.4). Modify this expression by removing the factors for the momentum integrations in the Dirichlet directions and introducing a term for the tension of a string stretched over a separation y^μ:」→ **(13.3.1)** 两行；同页逐字「The Chan–Paton weight is 2 here, from the two orientations of the open string, and there is no factor of ½ from the orientation projection because the physics is locally oriented.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16（L1，原书页图）。
+      ★ 完整前缀与被积测度以同文件 **§7.3** 为准（researcher 2026-09-11 独立 L1 页图 +
+      三重幂次复算）；§7.1 同时订正了 E16 逐字块漏抄的 "is independent of"（那句话属
+      branes.d-brane-bps-no-force-v2，与本卡无关）。
+  - ref: polchinski-1998-v2
+    loc: "§10.8（(10.8.4)：type I 圆柱真空振幅中轻 NS–NS 闭弦交换被 isolate 出来的那一式）"
+    note: |
+      ⚠ 图上**没有** (10.8.4) 的独立陈述卡；它只出现在 worldsheet.type-i-tadpole-cancellation-so32-v2
+      的推导里。本条来源对应的依赖边就挂在那张卡上（见 depends_on 第三条），
+      这是"母式无节点"这一缺口的现有记账方式（见 gaps）。
+summary: |
+  (1) **母式**：§10.8 的 (10.8.4) 已把 type I 圆柱真空振幅里轻 NS–NS 闭弦交换的部分 isolate 出来
+      （长柱 t → 0 极限保留最轻的闭弦态，给出闭弦树级交换的形式）。
+  (2) **两步改写**（原书 p. 146 逐字给出，不是本图补的）：
+      (a) 去掉 Dirichlet 方向的动量积分因子——两膜的位置被钉住，横向 9−p 个方向没有连续动量，
+          这把幂次改成 (8π²α't)^{(9−p)/2}；
+      (b) 加入拉伸开弦的张力项 exp(−t y²/2πα')——张在相距 y 的两膜之间的开弦经典质量
+          m = y/(2πα')，单圈迹里给出这个 Boltzmann 因子（branes.stretched-open-string-mass）。
+      再取 Chan–Paton 权重 2（开弦两种取向），且**不**乘 ½（体内物理局域有取向），得
+        𝒜_NS–NS ≈ [i V_{p+1}·4×16 / (8π(8π²α')⁵)] ∫₀^∞ (π dt/t²)(8π²α't)^{(9−p)/2} exp(−t y²/2πα').
+  (3) **把积分做出来**：记 d = 9−p、a = y²/2πα'，
+        ∫₀^∞ (π dt/t²)(8π²α't)^{d/2} e^{−at} = π(8π²α')^{d/2} Γ(d/2−1) a^{1−d/2}
+                                            = π(8π²α')^{d/2} (2πα')^{d/2−1} Γ(d/2−1) y^{2−d}，
+      乘上前因子 iV_{p+1}·8/(π(8π²α')⁵)（= 4×16/8π 整理后）得
+        iV_{p+1}·2^{2d−13} π^{3d/2−11} α'^{d−6} Γ(d/2−1) y^{2−d}，
+      而第二行 iV_{p+1}·2π(4π²α')^{d−6} G_d(y) 代入 G_d = 2^{−2}π^{−d/2}Γ(d/2−1)y^{2−d} 给出
+      **同一个表达式**——2、π、α' 三者幂次同时闭合（抽取记录 §7.3(b)）。⇒ (13.3.1) 的两行自洽。
+  (4) 长程含义：G_{9−p}(y) ∝ y^{2−(9−p)} = y^{p−7} 正是 9−p 个横向维数里无质量场交换的
+      静势行为，即引力子 + dilaton 的**吸引**（原书 p. 146「attraction due to the graviton and
+      dilaton」）。本卡到此为止，**不**碰 R–R 侧。
+
+  【为什么标 physical-argument 而不是 rigorous】三条：
+  (1) 母式 (10.8.4) 本身是路径积分 / 单圈迹的形式计算，其上游是 §10.8 的超弦振幅链；
+  (2) 原书写的是「≈」：从完整圆柱振幅取"轻闭弦交换部分"这一步没有被控制（无误差估计，
+      也没说明重闭弦的贡献在什么范围内可忽略）；
+  (3) 两步改写（去掉动量积分、加张力项）是按物理图像做的替换，原书不给推导。
+  ⚠ 本推导里**唯一**严格的一环是第 (3) 步的积分与幂次比对（有限步初等计算，已复算闭合），
+  但它只保证 (13.3.1) 两行之间自洽，不提升第 (1)(2) 步的强度。故整体 physical-argument。
+gaps:
+  - |
+    **(10.8.4) 在图上没有独立陈述卡**：它只出现在 worldsheet.type-i-tadpole-cancellation-so32-v2
+    的推导里，故本推导的依赖边挂在那张卡上（只借圆柱振幅，不借 SO(32) 结论）。
+    ⇒ 「母式」这一步的可追溯性止于那张卡的推导 summary，不止于一个专门的节点。
+    这是旧卡 branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation 已记的残留缺口，本推导继承。
+  - |
+    **前缀的两个读数与旧轮页图判读冲突**（抽取记录 §7.3(c) 的原话）：被积测度里的 π 与分母
+    (8π²α')⁵ 的 α' 幂次，都是同一张页图的视觉判读；下结论的真正根据是 §7.3(b) 的三重幂次
+    复算闭合，**不是像素**。若将来有更高分辨率页图或官方勘误表，以那个为准。
+    目标卡「本命题不断言 (4)」已照实写出这一保留。
+  - |
+    **「≈」的含义未被定量化**：原书没有给出「轻 NS–NS 闭弦交换」与完整圆柱振幅之差的估计，
+    也没有指定 y 要多大才成立。本卡因此断言的是一条**长程渐近形式**，而渐近的意义未被控制。
+  - |
+    **「体内物理局域有取向 ⇒ 无 ½、Chan–Paton 权重 2」**依赖「T 对偶后体内是 type II」
+    （抽取记录 E4），本图无对应节点。旧卡推导已记同一条。
+  - |
+    **场论对照 (13.3.3) 与 G_d(y) 的出处引 Vol.1 (8.7.25)**，本图无该节点（二手源）。
+    本卡只用 G_d 的显式表达式，不断言 (13.3.3)。
+notes: |
+  【本推导是从哪条推导里拆出来的】
+  branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation 的 summary 第 (2) 步
+  （即 (13.3.1) 的计算）整段移到本推导，并按抽取记录 §7.3(b) 补全了积分与幂次比对；
+  那条推导 git mv 为 branes.d-brane-bps-no-force-v2--via-cylinder-ns-ns-rr-cancellation，
+  只保留 (13.3.2) 的相消论证，并 depends_on 本卡的目标。
+  ⇒ 拆分的实质收益：旧推导里最强的一环（(13.3.1) 的显式计算）与最弱的一环
+  （(13.3.2) 的超对称断言）不再共用一个 status 记账。两者**都**是 physical-argument，
+  但理由完全不同：本推导弱在母式与「≈」，v2 那条弱在"R–R 侧从未算出"。
+
+  【与 branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的重叠】
+  那条推导的 summary (1) 独立重写了同一条 (13.3.1)。本卡建立后，那条推导理应 depends_on
+  branes.d-brane-cylinder-long-distance-ns-ns 而不是自己重算；**本轮未改**（不在 claim 范围），
+  已列入报告交 lead。
+
+  按抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16 与 §7.3 建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
