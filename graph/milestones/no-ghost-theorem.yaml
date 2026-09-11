@@ -78,6 +78,25 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第九轮记账（2026-09-12）】physics-auditor，分支 agent/auditor/noghost-r9。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R8。
+
+      R9-1. 〔条件版无鬼定理已 Lean〕`StringFormal/NoGhost/Assembly.lean` `no_ghost_of_spans`（TODO noghost-c5 已勾，10 条声明，无 sorry）：给定 `DDFSpans`
+            （H_phys ≤ ddfSpan ⊔ H_null，截距 a₀ = α'k²），`towerQuotientPairing` 在 H_phys ⧸ H_null 上正定（0 ≤ ⟨x,x⟩ 且 ⟨x,x⟩ = 0 → x = 0）；
+            对**任意 D**、任意有序域 K（`Field`+`LinearOrder`+`IsStrictOrderedRing`+`Algebra ℚ`）；Assembly.lean 的声明与证明中 D = 26 一次不出现（只在 docstring 里）。
+
+      R9-2. 〔与 canonical_text 断言的对应〕(1a) 半正定 = `towerPairing_self_nonneg_of_mem_towerPhys_of_spans`，(1b) 正定 = `no_ghost_of_spans`，两者都在 DDFSpans 之下；
+            (1b) 的等距同构 `ddfSpan ≃ₗ H_phys⧸H_null` 未构造（满射性即 DDFSpans，单射性由 `ddf_span_pos`）。(2) D > 26 负模 = `LevelTwo.lean`
+            `exists_mem_physSubmodule_pairing_self_neg'`，独立见证，不经 DDFSpans（R8 已记）。
+
+      R9-3. 〔**船长须知**〕整条链的全部猜想负担现集中于 `DDFSpans`（= R8-3 的 (B-26)）：它是唯一未机检、且 D = 26 唯一进入的命题。文献支撑仅 Goddard 2008 §6 (6.4)
+            一句无证明结论转引 GT 1972（正文未获取）。已证片：`ddfSpans_bigrade_neg_one_one`（rung −1、level 1，任意 D，带前件 hεa 与 FrameSpansOrthogonal）；
+            N = 2 进行中（总线有 formalizer 对 LevelTwoSpan.lean 的 claim，本 worktree 未见文件）。TODO `ddf-spans` 仍未勾。
+
+      R9-4. 〔有效状态〕`status` / `why` 本轮实测：own rigorous，effective **rigorous**，best_derivation --via-goddard-thorn；瓶颈树单支
+            kac-determinant-v2 → verma-module-free-over-negative-part → pbw-theorem，全部 rigorous（纯数学）。与 R8-1 一致。
+            注意：effective rigorous 是图对 GT 1972 数学证明的登记，不是 Lean 结论；Lean 侧的 formalized 要等 DDFSpans 关闭。
+
       【第八轮记账（2026-09-12）】physics-auditor，分支 agent/auditor/noghost-r8。kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6/R7。
 
