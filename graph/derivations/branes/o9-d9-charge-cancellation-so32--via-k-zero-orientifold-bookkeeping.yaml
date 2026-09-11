@@ -31,7 +31,7 @@ gaps:
   - "★ **计数单位未声明**（Q1 未裁）：p. 144 写 16 张 D9，p. 141 的「each Chan–Paton degree of freedom … as a 9-brane」蕴含 32 张；原书不调和。本推导按 16 记账。"
   - "**环面紧化不改变相消**：原书逐字「it is not hard to verify explicitly that this does not happen」——未验证（抽取记录 §3.1 第 5 条）。"
   - "**「O 面是荷的汇」是从 tadpole 相消倒推的**（p. 147「We deduced from the cancellation of divergences」），本章不独立计算 O 面荷。"
-  - "**继承 branes.orientifold-plane-rr-charge 的全部缺口**（App. B 的 BPS 线性、玻色弦 T 对偶卡外包等）。"
+  - "**继承 branes.orientifold-plane-rr-charge 的全部缺口**（BPS 质量–荷线性只有不完整的 (13.2.9) 支撑、玻色弦 T 对偶卡外包等）。"
   - "**禁止的边**：不与 consistency.type-i-hexagon-so32-iff 建边（本章无 anomaly/hexagon；与 -sec10-8 裁决一致）。"
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"

@@ -23,7 +23,10 @@ statement: |
       translationally invariant state」；但对超对称「supersymmetry can be broken even by a
       zero-dimensional object」，故本命题的 BPS 性对 p ≤ 1 仍成立，只是平移破缺的图像不成立。
   (b) 超对称代数中带膜荷的中心项 (13.2.9)（本图未建卡）。
-  (c) 「BPS 态必须携带守恒荷」——那是 App. B.2 的内容，本图未抽（见 branes.d-brane-rr-coupling）。
+  (c) 「BPS 态必须携带守恒荷」——那是以 App. B.2 的 BPS 概念为前提的推论（见 branes.d-brane-rr-coupling）。
+      「BPS 态」一词在本卡按 App. B §B.2 的含义使用：被一部分超荷湮灭的短表示
+      （branes.bps-bound-point-particle-d4；ch.13 p. 141 逐字「BPS states, which are discussed in section B.2」），
+      但 App. B 的界只对点粒子荷，D 膜荷版的代数是 (13.2.9)（branes.brane-charges-in-susy-algebra，在本卡之后）。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
 sources:
   - ref: polchinski-1998-v2
@@ -47,8 +50,10 @@ notes: |
   ⚠ **本图缺的上游**（不是本卡的错，是图的现状）：
   1. type II 的时空超对称（32 个超荷、两个 gravitino）在 main 上无节点
      （ch10 分支有 worldsheet.type-ii-spacetime-supersymmetry，未合）；
-  2. Vol.2 App. B §B.2 的 BPS 态定义与「BPS ⇒ 带守恒荷、质量与荷线性」——本项目**完全未抽**，
-     是本区最大的悬空依赖（抽取记录 §3.3）；
+  2. Vol.2 App. B §B.2 的 BPS 界 (B.2.39) **现已抽（L1，2026-09-11）并建卡 branes.bps-bound-point-particle-d4**；
+     但它只对点粒子荷（p. 448 逐字「if we include only charges that can be carried by point particles」），
+     D 膜荷的代数是 (13.2.9)（branes.brane-charges-in-susy-algebra，原书自承「still not complete」）。
+     「BPS ⇒ 质量与荷线性」对 D 膜因此只有 (13.2.9) 层面的支撑；
   3. Dp 膜的定义卡 branes.d-brane-from-t-duality 是**玻色弦**的；超弦版原书只说
      「by the same arguments as for the bosonic string in chapter 8, which the reader should review」（p. 138）。
   待这些补齐后本卡的推导应改边。

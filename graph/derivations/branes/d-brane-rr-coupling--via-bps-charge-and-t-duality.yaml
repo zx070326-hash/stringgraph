@@ -5,8 +5,13 @@ status: physical-argument
 depends_on:
   - id: branes.d-brane-bps-half-susy
     note: |
-      供给「Dp 膜是 BPS 态」；原书由此推「BPS states … must carry conserved charges」（p. 141），
-      ⚠ 但「BPS ⇒ 带守恒荷」本身被引到 App. B.2，本图未抽，故这一步在图上只有一半支撑。
+      供给「Dp 膜是 BPS 态」；原书由此推「BPS states … must carry conserved charges」（p. 141）。
+  - id: branes.bps-bound-point-particle-d4
+    note: |
+      供给「BPS 态必须带守恒荷」：(B.2.36) 的中心项 Z^{AB} 是守恒荷，短表示要求 q_i = m ≠ 0（(B.2.39) 之后）。
+      原文背书：p. 141「BPS states, which are discussed in section B.2, must carry conserved charges」。
+      ⚠ App. B 只覆盖点粒子荷；对 Dp 膜（p ≥ 1）这句是**类比**——广延物体荷的代数 (13.2.9) 在本卡之后
+      （branes.brane-charges-in-susy-algebra）。
   - id: branes.t-duality-changes-brane-dimension
     note: |
       供给「每对一个方向作 T 对偶，p 减 1」；原书 p. 141 逐字「each time we T-dualize in an additional
@@ -31,7 +36,7 @@ summary: |
       Dp 膜是前者的电源、后者的磁源，故 Dp 与 D(6−p) 互为对偶。
 gaps:
   - "**C_10 的存在由 §10.8 推出，而 §10.8 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合；任务书写作 spectrum.*）。⇒ TODO：合入后加 depends_on。在此之前，(2) 这一步在图上悬空。且 §10.8 那一步原书自称是「猜」（One can guess the resolution）。"
-  - "**「BPS ⇒ 带守恒荷」引到 App. B.2，本项目未抽**（抽取记录 §3.3）。"
+  - "**「BPS ⇒ 带守恒荷」只有点粒子版的支撑**：App. B §B.2 现已抽并建卡，但 (B.2.36)–(B.2.39) 明写只对点粒子荷；对 p ≥ 1 的膜这一步是原书的类比，其代数 (13.2.9) 在本卡之后且原书自承不完整。"
   - "**R–R 顶点算子的 T 对偶 (13.1.4)(13.1.5) 本图无节点**，且原书自陈只到「up to signs」。"
   - "**「具有正确 Lorentz 性质的自然候选」是选择而非推导**：原书没有排除其他可能的守恒荷。"
   - "**T 对偶改变膜维数的卡是玻色弦的**；超弦版被原书外包给第 8 章。"

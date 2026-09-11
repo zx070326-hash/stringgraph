@@ -47,6 +47,13 @@ notes: |
   (13.4.23) 后的例外必须写进限定，否则该卡是错的。本卡因此把命题收窄到 #ND = 0 的平行构型，
   并把一般规则明列为「不断言」。
 
+  【BPS 链（lead 指示 2026-09-11，依 appB 抽取 §5-B / Q3）】
+  branes.bps-bound-point-particle-d4（App. B (B.2.36)–(B.2.39)，**仅点粒子荷**）
+  → branes.brane-charges-in-susy-algebra（§13.2 (13.2.9)，原书自承「still not complete」）
+  → 本卡（「energy is determined only by its charge and the separations」）。
+  本卡**不**直接依赖 App. B：(B.2.39) 只对点粒子荷（p. 448 逐字），不得整体挂在 D 膜的 BPS 界上。
+  branes.d-brane-bps-half-susy 是 (13.2.9) 的上游（原书顺序：(13.2.5) → (13.2.7) → (13.2.9)）。
+
   【本卡是两张下游卡的输入】
   - branes.d-brane-rr-charge-value：用 (13.3.2) 把 R–R 交换与场论 (13.3.6) 对照得 μ_p² = e^{2Φ₀}τ_p²；
   - branes.d-brane-tension 的推导**不**依赖本卡（只用 NS–NS 侧 (13.3.1) 与 (13.3.3)）。
