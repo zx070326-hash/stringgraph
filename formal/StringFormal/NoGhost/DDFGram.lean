@@ -9,6 +9,7 @@ import StringFormal.NoGhost.HeisenbergGram
 import StringFormal.NoGhost.DDFAlgebra
 import StringFormal.NoGhost.VertexAdjoint
 import StringFormal.NoGhost.DDFOperatorAll
+import StringFormal.NoGhost.LightCone
 
 /-!
 # The Gram matrix of the transverse DDF states
@@ -30,11 +31,14 @@ the DDF operators `A^ε_n` of `StringFormal/NoGhost/DDFOperator.lean`.
 
 ## Main definitions
 
-* `towerVacuum D R` — the tower vacuum `|0; k⟩ = Finsupp.single 0 1`, the Fock vacuum sitting on
-  rung `0` of the momentum tower.
 * `ddfFamily η a b ε hη hεb` — the DDF operators packaged as a Heisenberg family
-  `ι → ℤ → Module.End R (TowerFock D R)`, `i ↦ n ↦ A^{ε_i}_n`.
-* `ddfMonomial` — the DDF state `∏_{(i,n)} (A^{ε_i}_{-n})^{d(i,n)} |0; k⟩`.
+  `ι → ℤ → Module.End R (TowerFock D R)`, `i ↦ n ↦ A^{ε_i}_n`.  The polarisation index type `ι`
+  is arbitrary; `frameMonomial` specialises to the bundled `TransverseFrame` of
+  `StringFormal/NoGhost/LightCone.lean`, i.e. `ι = Fin (D - 2)`.
+* `ddfMonomial` / `frameMonomial` — the DDF state `∏_{(i,n)} (A^{ε_i}_{-n})^{d(i,n)} |0; k⟩`.
+
+The tower vacuum `towerVacuum D R` itself is defined in
+`StringFormal/NoGhost/LightCone.lean`.
 
 ## Main statements
 
@@ -53,6 +57,11 @@ the DDF operators `A^ε_n` of `StringFormal/NoGhost/DDFOperator.lean`.
   linearly independent.  This is the input to `ch H^⊥ = φ(q)^{-(D-2)}` in §B.3 of the blueprint.
 * `ddfMonomial_mem_towerPhysSubmodule` — every DDF state is an old covariant physical state of
   the tower, with intercept `a₀ = α' k²` read off the vacuum.
+* `ddfSpan_eq_span_range_frameMonomial` — `ddfSpan` (defined in `LightCone.lean` as the span of
+  iterated creation operators applied to the vacuum) is the span of the DDF states, i.e. the
+  list-indexed generating set and the occupation-function-indexed one agree.
+* **`ddf_span_pos`** — over a linearly ordered field every nonzero element of `ddfSpan` has
+  strictly positive norm.  This is the positivity input of blueprint §C.5.
 
 ## Mathematical notes (for the dependency graph)
 
@@ -65,20 +74,23 @@ the DDF operators `A^ε_n` of `StringFormal/NoGhost/DDFOperator.lean`.
 2. **The intercept is not free.**  `ddfMonomial_mem_towerPhysSubmodule` holds with
    `a₀ = ½ α_0² = α' k²` — the value forced by the vacuum, not an independent parameter.  The
    tachyonic normalisation `α' k² = 1` of `Witness.lean` is what makes it `a₀ = 1`.
-3. **Positivity is stated per state, not on the span.**  `ddf_gram_pos` says each diagonal entry
-   is positive; "every nonzero element of the span of the DDF states has positive norm"
-   additionally uses orthogonality and is not proved here (see the gaps).
+3. **Positivity on the span needs a linear order, not just a partial one.**  `ddf_gram_pos`
+   (each diagonal entry is positive) holds over any strictly ordered commutative ring;
+   `ddf_span_pos` (every nonzero vector of the span has positive norm) goes through
+   `Finset.sum_pos'` on the coefficients and is stated over a linearly ordered field.
 4. **No spanning.**  Nothing here says the DDF states exhaust the transverse physical spectrum;
    that is `ddf-spans` (§B of the blueprint) and remains the hard half of no-ghost.
 
 ## Gaps
 
-1. **No positivity on the span.**  `⟨Σ c_d |d⟩, Σ c_d |d⟩⟩ = Σ c_d² heisNorm d > 0` for
-   `c ≠ 0` follows formally from `ddf_gram_diagonal`, but is not stated; it is what blueprint
-   §C.5 (`no_ghost_semidefinite`) will need, together with a submodule `ddfSpan`.
-2. The frame index type `ι` is arbitrary.  Tying `ι` to `Fin (D - 2)` requires a bijection with
-   `{i : Fin D // 2 ≤ (i : ℕ)}`, which is bookkeeping without mathematical content and is not
-   done.
+1. **No assembly of the no-ghost theorem.**  `ddf_span_pos` plus
+   `LightCone.ddfSpan_le_towerPhysSubmodule` give "the DDF sector is a positive-definite
+   subspace of the physical subspace"; the semidefiniteness of the whole physical subspace
+   (blueprint §C.5 `no_ghost_semidefinite`) needs `hspan : H_phys ≤ ddfSpan ⊔ H_null`, which is
+   `ddf-spans` and is not available.
+2. **The transverse frame is an input, not a construction.**  `TransverseFrame η b` exists over
+   a `ℚ`-algebra with `D ≥ 3` (`Witness.lean`, `LightCone.witnessTransverseFrame`), but nothing
+   here says every light-like `b` admits one; over a general ring it does not.
 -/
 
 namespace StringFormal.NoGhost
@@ -91,29 +103,12 @@ section TowerVacuum
 
 variable {D : ℕ} {R : Type*} [CommRing R]
 
-/-- **The tower vacuum** `|0; k⟩`: the Fock vacuum of `StringFormal/NoGhost/Fock.lean` placed on
-rung `0` of the momentum tower, i.e. at momentum parameter `towerMomentum a b 0 = a`. -/
-noncomputable def towerVacuum (D : ℕ) (R : Type*) [CommRing R] : TowerFock D R :=
-  Finsupp.single 0 (Fock.vacuum D R)
-
-lemma towerVacuum_def : towerVacuum D R = Finsupp.single 0 (Fock.vacuum D R) := rfl
-
-@[simp]
-lemma towerVacuum_apply_zero : (towerVacuum D R) 0 = Fock.vacuum D R := by
-  simp [towerVacuum]
-
+/-- The tower vacuum `|0; k⟩ = Finsupp.single 0 1` is defined in
+`StringFormal/NoGhost/LightCone.lean`; only its support is needed here. -/
 lemma support_towerVacuum_subset : (towerVacuum D R).support ⊆ {0} :=
   Finsupp.support_single_subset
 
 namespace Fock
-
-/-- The vacuum has no monomial above level `0`
-(`levelBound_one` is in `StringFormal/NoGhost/VertexProduct.lean`). -/
-@[simp]
-lemma levelBound_vacuum : levelBound (vacuum D R) = 0 := levelBound_one
-
-@[simp]
-lemma modeBound_vacuum : modeBound (vacuum D R) = 0 := modeBound_one
 
 /-- **The tower vacuum is normalised**: `⟨0;k|0;k⟩ = 1`.  This is hypothesis (H3) of
 `worldsheet.transverse-ddf-fock-gram-matrix`, and it is what pins the overall scale of the
@@ -121,7 +116,8 @@ whole DDF Gram matrix. -/
 @[simp]
 theorem towerPairing_towerVacuum_self (η : Fin D → R) :
     towerPairing η (towerVacuum D R) (towerVacuum D R) = 1 := by
-  rw [towerVacuum_def, towerPairing_single_single, if_pos rfl, pairing_vacuum_vacuum]
+  rw [towerVacuum_def, towerPairing_single_single, if_pos rfl, ← vacuum_def,
+    pairing_vacuum_vacuum]
 
 end Fock
 
@@ -359,20 +355,6 @@ variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotV
 variable (hεb : ∀ i, dotVec η (ε i) b = 0)
 variable (horth : ∀ i j : ι, dotVec η (ε i) (ε j) = if i = j then 1 else 0)
 
-/-- **The tower vacuum is an old covariant physical state**, with intercept
-`a₀ = ½ α_0² = α' k²` read off the vacuum itself (`Fock.Lop_zero_apply_one`).  The intercept is
-therefore *not* a free parameter of this statement; the tachyonic value `a₀ = 1` of
-`Witness.lean` corresponds to the mass-shell condition `α' k² = 1`. -/
-theorem towerVacuum_mem_towerPhysSubmodule (η a b : Fin D → R) :
-    towerVacuum D R ∈ towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) := by
-  rw [mem_towerPhysSubmodule]
-  constructor
-  · rw [towerVacuum_def, towerLop_single, towerMomentum_zero, Fock.vacuum_def,
-      Fock.Lop_zero_apply_one, Finsupp.smul_single]
-  · intro m hm
-    rw [towerVacuum_def, towerLop_single, towerMomentum_zero, Fock.vacuum_def,
-      Fock.Lop_apply_one_of_pos η a hm, Finsupp.single_zero]
-
 /-- **Every DDF state is physical.**  Induction on the occupation function: the vacuum is
 physical (`towerVacuum_mem_towerPhysSubmodule`) and each creation operator `A^{ε_i}_{-n}`
 preserves the physical subspace (`ddfOp_mem_towerPhysSubmodule`, itself a corollary of
@@ -386,11 +368,133 @@ theorem ddfMonomial_mem_towerPhysSubmodule (d : (ι × ℕ+) →₀ ℕ) :
       ∈ towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) := by
   classical
   induction d using finsupp_addSingle_induction with
-  | h0 => rw [ddfMonomial_zero]; exact towerVacuum_mem_towerPhysSubmodule η a b
+  | h0 => rw [ddfMonomial_zero]; exact towerVacuum_mem_towerPhysSubmodule η a b hη hbb hba
   | hstep d v ih =>
     rw [ddfMonomial_add_single]
     exact ddfOp_mem_towerPhysSubmodule η a b (ε v.1) hη hbb hba (hεb v.1) _ ih
 
 end Physical
+
+/-! ### The transverse frame: `ddfSpan` and positivity on it -/
+
+section Frame
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+variable {η a b : Fin D → R}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (Ε : TransverseFrame η b)
+
+/-- The DDF state attached to a bundled transverse frame (`TransverseFrame` of
+`StringFormal/NoGhost/LightCone.lean`): `ddfMonomial` with `ι = Fin (D - 2)`. -/
+noncomputable def frameMonomial (d : (Fin (D - 2) × ℕ+) →₀ ℕ) : TowerFock D R :=
+  ddfMonomial hη hbb hba Ε.transverse Ε.orthonormal d
+
+/-- **The Gram matrix of the transverse DDF states, in the bundled form of blueprint §C.4.** -/
+theorem towerPairing_frameMonomial (d e : (Fin (D - 2) × ℕ+) →₀ ℕ) :
+    Fock.towerPairing η (frameMonomial hη hbb hba Ε d) (frameMonomial hη hbb hba Ε e)
+      = if d = e then heisNorm R d else 0 :=
+  ddf_gram_diagonal hη hbb hba Ε.transverse Ε.orthonormal d e
+
+/-- The DDF state of an occupation function is the iterated application of creation operators
+along any list enumerating it; this is the bridge to the generating set of `ddfSpan`. -/
+theorem frameMonomial_toFinsupp (l : List (Fin (D - 2) × ℕ+)) :
+    frameMonomial hη hbb hba Ε (Multiset.toFinsupp (l : Multiset (Fin (D - 2) × ℕ+)))
+      = l.foldr (fun q y => ddfOp η a b (Ε.vec q.1) hη (Ε.transverse q.1)
+          (-((q.2 : ℕ) : ℤ)) y) (towerVacuum D R) := by
+  classical
+  induction l with
+  | nil => simp [frameMonomial]
+  | cons q l ih =>
+    have hm : Multiset.toFinsupp ((q :: l : List (Fin (D - 2) × ℕ+)) :
+          Multiset (Fin (D - 2) × ℕ+))
+        = Multiset.toFinsupp (l : Multiset (Fin (D - 2) × ℕ+)) + Finsupp.single q 1 := by
+      rw [← Multiset.cons_coe, ← Multiset.singleton_add, map_add,
+        Multiset.toFinsupp_singleton, add_comm]
+    rw [hm, frameMonomial, ddfMonomial_add_single hη hbb hba Ε.transverse Ε.orthonormal,
+      List.foldr_cons, ← ih, frameMonomial]
+
+/-- The generating set of `ddfSpan` is exactly the set of DDF states. -/
+theorem ddfSpan_eq_span_range_frameMonomial :
+    ddfSpan η a b hη Ε = Submodule.span R (Set.range (frameMonomial hη hbb hba Ε)) := by
+  classical
+  rw [ddfSpan]
+  congr 1
+  refine Set.eq_of_subset_of_subset ?_ ?_
+  · rintro x ⟨l, rfl⟩
+    exact ⟨Multiset.toFinsupp (l : Multiset (Fin (D - 2) × ℕ+)),
+      frameMonomial_toFinsupp hη hbb hba Ε l⟩
+  · rintro x ⟨d, rfl⟩
+    refine ⟨(Finsupp.toMultiset d).toList, ?_⟩
+    rw [← frameMonomial_toFinsupp hη hbb hba Ε, Multiset.coe_toList]
+    simp
+
+theorem frameMonomial_mem_ddfSpan (d : (Fin (D - 2) × ℕ+) →₀ ℕ) :
+    frameMonomial hη hbb hba Ε d ∈ ddfSpan η a b hη Ε := by
+  rw [ddfSpan_eq_span_range_frameMonomial hη hbb hba Ε]
+  exact Submodule.subset_span ⟨d, rfl⟩
+
+end Frame
+
+section SpanPositivity
+
+variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (Ε : TransverseFrame η b)
+
+omit [LinearOrder K] [IsStrictOrderedRing K] in
+/-- The norm of a finite linear combination of DDF states, in terms of the diagonal Gram
+matrix: `⟨Σ c_d |d⟩, Σ c_d |d⟩⟩ = Σ c_d² ∏ n^{d(i,n)} d(i,n)!`. -/
+theorem towerPairing_linearCombination_frameMonomial
+    (c : ((Fin (D - 2) × ℕ+) →₀ ℕ) →₀ K) :
+    Fock.towerPairing η (Finsupp.linearCombination K (frameMonomial hη hbb hba Ε) c)
+        (Finsupp.linearCombination K (frameMonomial hη hbb hba Ε) c)
+      = ∑ d ∈ c.support, c d ^ 2 * heisNorm K d := by
+  classical
+  have hexp : ∀ v : TowerFock D K,
+      Fock.towerPairing η (∑ d ∈ c.support, c d • frameMonomial hη hbb hba Ε d) v
+        = ∑ d ∈ c.support, c d * Fock.towerPairing η (frameMonomial hη hbb hba Ε d) v := by
+    intro v
+    rw [map_sum, LinearMap.sum_apply]
+    exact Finset.sum_congr rfl fun d _ => Fock.towerPairing_smul_left _ _ _ _
+  rw [Finsupp.linearCombination_apply, Finsupp.sum, hexp]
+  refine Finset.sum_congr rfl fun d hd => ?_
+  have hinner : Fock.towerPairing η (frameMonomial hη hbb hba Ε d)
+      (∑ e ∈ c.support, c e • frameMonomial hη hbb hba Ε e) = c d * heisNorm K d := by
+    rw [map_sum]
+    refine (Finset.sum_eq_single_of_mem d hd ?_).trans ?_
+    · intro e _ hed
+      rw [Fock.towerPairing_smul_right, towerPairing_frameMonomial, if_neg (Ne.symm hed),
+        mul_zero]
+    · rw [Fock.towerPairing_smul_right, towerPairing_frameMonomial, if_pos rfl]
+  rw [hinner]
+  ring
+
+include hbb hba in
+/-- **The DDF sector is positive definite** (blueprint §C.5 input): over a linearly ordered
+field every nonzero element of `ddfSpan` has strictly positive norm.
+
+Combined with `ddfSpan_le_towerPhysSubmodule` of `StringFormal/NoGhost/LightCone.lean` this is
+the "no ghosts in the DDF sector" half of Goddard-Thorn.  What is missing for the full theorem
+is the converse inclusion `H_phys ≤ ddfSpan ⊔ H_null` (`ddf-spans`). -/
+theorem ddf_span_pos {x : TowerFock D K} (hx : x ∈ ddfSpan η a b hη Ε) (hne : x ≠ 0) :
+    0 < Fock.towerPairing η x x := by
+  classical
+  rw [ddfSpan_eq_span_range_frameMonomial hη hbb hba Ε] at hx
+  obtain ⟨c, hc⟩ := Finsupp.mem_span_range_iff_exists_finsupp.mp hx
+  have hxc : x = Finsupp.linearCombination K (frameMonomial hη hbb hba Ε) c := by
+    rw [Finsupp.linearCombination_apply, hc]
+  have hcne : c ≠ 0 := by
+    rintro rfl
+    exact hne (by simpa using hxc)
+  obtain ⟨d₀, hd₀⟩ : ∃ d₀, c d₀ ≠ 0 := by
+    by_contra hcon
+    exact hcne (Finsupp.ext fun d => by simpa using not_not.mp (not_exists.mp hcon d))
+  rw [hxc, towerPairing_linearCombination_frameMonomial hη hbb hba Ε]
+  refine Finset.sum_pos' (fun d _ => ?_) ⟨d₀, Finsupp.mem_support_iff.mpr hd₀, ?_⟩
+  · exact mul_nonneg (sq_nonneg _) (heisNorm_pos d).le
+  · exact mul_pos (by positivity) (heisNorm_pos d₀)
+
+end SpanPositivity
 
 end StringFormal.NoGhost
