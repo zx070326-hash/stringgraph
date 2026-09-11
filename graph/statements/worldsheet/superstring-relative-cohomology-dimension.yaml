@@ -1,0 +1,259 @@
+id: worldsheet.superstring-relative-cohomology-dimension
+kind: proposition
+title: 超弦（RNS）相对 BRST 上同调的维数公式（LZ 1989 Corollary 2.15(i)，作者自命名 "Quantization Condition"）：dim H⁰_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2)
+statement: |
+  **设定**（数学侧表述，照 lian-zuckerman-1989 的记号；与
+  worldsheet.superstring-relative-cohomology-vanishing-v2 的 (H1)–(H5) 逐条同构，
+  故意重写以使本卡自足）。取 N = 1 超 Virasoro 代数（math.super-virasoro-algebra），
+  扇区标号 κ = ½（Neveu–Schwarz，模式 r ∈ Z + ½）与 κ = 0（Ramond，模式 r ∈ Z）。
+    (H1) **临界维数**：物质部门是 D = 10 个自由 X^μψ^μ，物质中心荷 c^m = (3/2)D = 15
+         （LZ 归一化下 c_LZ = D = 10，p.308 逐字 "From now on, we will take D = 10"）；
+         鬼部门是 λ = 2 的 bcβγ 一阶 SCFT，c^g = −15。总中心荷为零，故 Q_B² = 0
+         （worldsheet.superstring-brst-nilpotent-at-c15），BRST 上同调有定义。
+    (H2) **动量**：固定质心动量 p，**p ≠ 0**（LZ p.303 逐字
+         "p will always be assumed non-zero until Sect. 5"）。
+    (H3) **相对复形**：C_rel(p,κ) 取为被下列算符零化的子复形——
+           NS：b₀ 与 L₀；
+           R： b₀、β₀、L₀ 与 G₀，
+         其中 L₀、G₀ 是**物质加鬼场**的总生成元（即
+         worldsheet.superstring-brst-additional-conditions 所加的条件）。
+         因 {Q_B, b₀} = L₀、[Q_B, β₀] = G₀，Q_B 保持 C_rel，记
+         H^n_rel(p,κ) = ker(Q_B|_{C_rel}) / im(Q_B|_{C_rel})。
+    (H4) **次数是 LZ Definition 2.2 的「相对次数」，不是鬼数**（与
+         worldsheet.superstring-relative-cohomology-vanishing-v2 的 (H4) 同款）。
+         LZ 的鬼数是 U + κ 的本征值，取值在 **Z + κ**（NS 半整数、R 整数）；
+         相对复形按 Definition 2.2 定义为
+           F^n = B^{n−κ} ∩ Ker K（κ=½）、C^n_rel = F^n ∩ Ker D_R（κ=0），
+         其中 B^r 是鬼数 r 的子空间。⇒ **相对次数 n = 鬼数 + κ，两扇区都取整数值**；
+         本卡给的是 **n = 0 分量**的维数。换算：NS 的 n = 0 对应**鬼数 −½**；R 的 n = 0 对应鬼数 0。
+         零点按 conv.superstring-ghost-number-zero 的 canonical（LZ 家）。
+    (H5) **R 扇区 βγ 零模表示**：β₀、γ₀ 是**对易**的鬼零模，表示不唯一且不等价
+         （LZ p.304 逐字 "Representations corresponding to distinct charges are inequivalent."）。
+         LZ 全文取 p.306 (7) 的选择：κ = ½ 取 T_{1/2}，**κ = 0 取 T₀ ⊕ T₁**，
+         理由逐字 "Fortunately, for each sector κ = ½, 0, there is a unique such space in which
+         deg is bounded above"。**本卡的维数公式是在这个选择下成立的**，见"不断言 (d)"。
+    (H6) **右端三个因子的含义**：
+         - **½(2κ+1)**：κ = ½ 时为 1，κ = 0 时为 ½。这是 LZ 写在 Proposition 2.14(ii)、
+           Corollary 2.15(i) 与 Corollary 2.19(i) 三处的**同一个**前因子。
+         - **dim R(p,κ)**：物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ) 的旋量因子的维数
+           （LZ p.303）：**R(p,½) = C**（故 dim = 1）；**R(p,0) 是 Spin(D−1,1) 的旋量表示**。
+           ⚠ 本卡**不给出** dim R(p,0) 的数值（见"不断言 (e)"）。
+         - **p^{(8)}_κ(·)**：LZ 的计数记号，**本图未逐字取得它的定义**（L0）。
+           本卡**只照抄 LZ 的记号**，不代入任何读法。
+           ⚠ 抽取记录里能见到的最强旁证是 LZ Proposition 2.18 的
+           ch_q T(p,κ) = dim R(p,κ)·q^{p·p/2}·φ_κ(q)^{−8}，据此**合理猜测**
+           p^{(8)}_κ(n) = [q^n] φ_κ(q)^{−8}（与 FGZ 的 p_{(D)}(n) = [q^n] φ(q)^{−D} 同型，
+           8 = D − 2 是横向数）；**但本卡不断言这个读法**，φ_κ(q) 的定义本图也未取得。
+    (H7) **κ 同时是该扇区的截距**：LZ Definition 2.16 逐字把物理态定义为
+         "π(L_n)v = δ_n κv, π(G_{n+κ})v = 0, n ≥ 0"，即 **L₀ 本征值 = κ**（NS 为 ½、R 为 0）。
+         公式右端 p^{(8)}_κ 的自变量 "κ − p·p/2" 里的 κ 就是这个截距。
+         ⚠ 本图 conv.intercept-sign-a 写 (L₀ − a)|ψ⟩ = 0，故 **a = κ**；
+         ⚠ 且 LZ 的 R 扇区 L₀ 比本图 math.super-virasoro-algebra 的 L₀ 低 c/24
+         （LZ 的 {G₀,G₀} = 2L₀ 无中心项，本图是 2L₀ − c/12），换算见推导的 convention_map。
+
+  **断言**（Corollary 2.15(i)，p.317 逐字：**"Corollary 2.15. (i) ("Quantization Condition")
+  dim H⁰_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2). (ii) (No-ghost Theorem)
+  H⁰_rel(p,κ) is a positive definite space."**）：
+
+    在 (H1)–(H5) 之下，对 **κ = ½ 与 κ = 0 两个扇区**，
+
+      **dim H⁰_rel(p,κ) = ½(2κ+1) · dim R(p,κ) · p^{(8)}_κ(κ − p·p/2)**。
+
+    特别地 H⁰_rel(p,κ) 是**有限维**的。
+
+  **本命题不断言**：
+    (a) 不断言 H⁰_rel 上的任何**正定性**。那是同一推论的 **(ii)**，LZ 自命名 "No-ghost Theorem"，
+        在本图是 worldsheet.no-ghost-theorem-superstring-cohomological-v2。
+        两条同号不同条，按 graph/CLAUDE.md「一个节点一个命题」分开。
+    (b) 不断言 **n ≠ 0 时的消灭**。那是 LZ **Theorem 2.4**，在本图是
+        worldsheet.superstring-relative-cohomology-vanishing-v2；本卡把它作为**依赖**而非结论。
+    (c) 不断言 H⁰_rel 与**横向空间 T ∩ P** 或 **OCQ 物理态 P/rad P** 的同构。那是
+        LZ **Theorem 2.20**（worldsheet.brst-cohomology-equals-ocq-physical-superstring-v2）。
+        ⚠ 但 LZ **Corollary 2.19(i)** 给出 dim(T ∩ P) 的公式与本卡右端**逐字相同**；
+        Theorem 2.20 正是用"两边维数相等"收尾的。**那个维数相等是 Theorem 2.20 的内容，不是本卡的。**
+    (d) 不断言维数公式对**一切** R 扇区 βγ 零模表示成立。本卡的公式是在 (H5) 的
+        T₀ ⊕ T₁ 选择下给出的；换成 FOK / Henneaux 的 C[γ₀]（单个 Bose-sea charge）时
+        右端是否不变，本图**未核实**。
+    (e) 不断言 **dim R(p,0) 的数值**。LZ 只写 "R(p,0) 是 Spin(D−1,1) 的旋量表示"（p.303）；
+        D = 10 时把它读成 32（Dirac 旋量）从而使 ½·dim R(p,0) = 16，是**本图的算术推断**，
+        本卡不据此断言任何事（见 notes 与推导 gaps）。
+    (f) 不断言 **p = 0**。零动量时消灭定理失效（LZ Proposition 5.5 逐字
+        "For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not
+        Vir_κ^- -free"），本卡的推导链随之断掉；LZ 在 §5 另行给出 p = 0 的上同调。
+    (g) 不断言**绝对**（非相对）复形上同调的维数。那要经 LZ Theorem 5.1（NS）/ Theorem 5.4（R）
+        另行推（worldsheet.brst-cohomology-picture-independence 一侧的内容）。
+    (h) 不断言 **GSO 投影后**的维数。那是 LZ Proposition 4.3(ii)
+        （worldsheet.superstring-gso-covariant-equivalent，dim H⁰(P̄₊C_rel) = 8p₀^{(8)}(−p·p/2)）。
+        ⚠ 注意那条公式与本卡**不是同一个数**：LZ 在 p.328 逐字说
+        "**Corollary 2.15 (i)** implies that dim H⁰_rel(p,0) ≠ dim H⁰_rel(p,½)"，
+        而 GSO 投影后两扇区的维数才相等。
+    (i) 不断言 **"1 − p·p/2 非非负整数时为零"那种分段**。FGZ 的玻色版
+        （worldsheet.bosonic-relative-cohomology-dimension）显式写出分段第二支，
+        **LZ 的 Corollary 2.15(i) 语句里没有这一支**，本卡照实不补。
+        ⚠ 相关的逐字线索在别处：LZ p.314 有 "C_rel(p,0) is zero unless p·p/2 is a
+        non-positive integer"（auditor 2026-09-11 转录），但那是**复形**为零的条件、
+        在 R 扇区、且本图未把它建成陈述。
+    (j) 不断言本卡的相对复形与 Polchinski §10.5 的 {b₀ = L₀ = 0, β₀ = G₀ = 0} 逐字同一。
+        设定是数学侧的；对照见 worldsheet.no-ghost-theorem-superstring-cohomological-v2 的 notes。
+uses:
+  - math.super-virasoro-algebra
+  - worldsheet.superstring-brst-charge
+  - worldsheet.superstring-brst-additional-conditions
+  - worldsheet.superconformal-ghost-modes
+  - worldsheet.superconformal-ghost-unit-operator-vacuum
+  - worldsheet.superstring-brst-nilpotent-at-c15
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.superstring-ghost-number-zero
+  - conv.intercept-sign-a
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15(i)**, p.317，逐字：'Corollary 2.15. (i) (\"Quantization Condition\") dim H⁰_rel(p,κ) = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − p·p/2). (ii) (No-ghost Theorem) H⁰_rel(p,κ) is a positive definite space.'（本卡只取 (i)）"
+    note: |
+      L1，literature/extractions/lian-zuckerman-1989.md **E6**（第一轮）+ **§9.1**（第三轮页图复核，
+      逐字与页码**均已核，无更正**）。
+      ★ **"Quantization Condition" 是 LZ 自己给 (i) 起的名字**，且 **(i) 的标题原文带引号、
+      (ii) 的 "(No-ghost Theorem)" 原文不带引号**（§9.1 专门提醒"照抄时别统一"）。
+      ⚠ **本卡只取 (i)**；(ii) 是正定性，已立卡
+      worldsheet.no-ghost-theorem-superstring-cohomological-v2，按「一个节点一个命题」分开。
+      ⚠ **Corollary 2.15 自身语句里没有任何量词**（§9.2 读数 3）：p ≠ 0 经 Theorem 2.4 继承，
+      D = 10（p.308）与 p 落在半空间 {p^D > 0}（p.305 Remark）是全局前提。
+      本卡 (H1)(H2) 已逐条写出；半空间那条按 auditor 2026-09-11 裁决是**非本质前提**
+      （只定 R 扇区厄米型的整体符号），故不进本卡设定，见 notes。
+      ⚠ **编号陷阱**：p.305 **Lemma** 1.4 与 p.306 **Definition** 1.4 同号，引用必须带类型词；
+      各章公式号重起（§1 的 (1)–(8)、§2 的 (1)–(42)、§3 的 (1)–(40) …），引用公式必须带章号。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15 的证明**, p.317，逐字：'Proof. (i) We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ). Thus by **Theorem 2.4**, the left-hand side gives dim H⁰_rel(p,κ) while the right-hand side is char C_rel(p,κ). Hence (i) follows from **Proposition 2.14 (ii)**. (ii) Similarly, the Euler–Poincaré Principle for signature states that Σ_{n∈Z} sign H^n_rel(p,κ) = Σ_{n∈Z} sign C^n_rel(p,κ). Again Theorem 2.4 implies that the left-hand side = sign H⁰_rel(p,κ), while the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
+    note: |
+      L1，**§9.2**（researcher 第三轮页图，2026-09-11）。★★ **这是本卡依赖边的逐字依据**：
+      (i) 的依赖恰是 **Theorem 2.4 + Euler–Poincaré 原理（特征标版）+ Proposition 2.14(ii)**，
+      三条都是原文明写。
+      ★★ **negative evidence（§9.2 读数 2）：`Proposition 2.14(i)`（Q* = Q）在 Corollary 2.15 的
+      证明里一个字都没被引用。** 两部分都指向 **2.14(ii)**（句末的 "also" 是内部佐证：
+      作者明说第二次用的还是同一条）。
+      ⇒ **本卡的推导不从 Prop 2.14(i) 拉边**；⟨,⟩_rel 下 Q 的自伴性是 sign H^n 有定义的
+      **背景条件**，但原文没把它列为依赖，若日后要补这条边**必须标 inferred: true**。
+      ★ 强度：**Corollary，证明完整且只有三行**——真正的工作量在 Theorem 2.4（§3 全章）与
+      Proposition 2.14(ii)（pp.312–317 的特征标/号差计算）。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.14(ii)**, pp.311–312：特征标 / 号差公式 'char C_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel(p,κ)'；**Definition 2.11**, p.311（相对复形上的厄米形式：κ=½ 取 ⟨u,v⟩_rel = ⟨u,v⟩_B；κ=0 取 √−1⟨u, v̂⟩_B，其中 v = D_R v̂）；**Proposition 2.14(i)**：Q* = Q w.r.t. ⟨,⟩_rel"
+    note: |
+      L1，抽取记录 **E5**。★★ **这是本卡右端那个表达式的真正出处**：
+      Corollary 2.15(i) 的右端就是 Proposition 2.14(ii) 的 **char C_rel(p,κ)**，
+      Euler–Poincaré + Theorem 2.4 把 char 变成 dim H⁰。
+      ⚠ **Proposition 2.14(ii) 在本图没有卡**（见推导 gaps）：本卡右端表达式的**内容**
+      完全落在一条未上图的命题上。
+      ⚠ Proposition 2.14(ii) 同时断言 char = **sign**（号差），那一半是 Corollary 2.15(**ii**)
+      正定性那张卡用的，本卡只用 char 那一半。
+      ⚠ **Proposition 2.14(i) 列在本条 loc 里只为给出该命题的完整分条**，
+      **不是**本卡的依赖（见上一条 source 的 negative evidence）。
+      ⚠ **R 扇区的 ⟨,⟩_rel 不是朴素内积**：p.310 逐字动机 '⟨·, c₀·⟩_C ≡ 0 when restricted to
+      C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'，故须用 D_R 的原像定义。这与 (H5) 的 T₀ ⊕ T₁ 选择绑定。
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.4**, p.309（陈述）/ **Corollary 3.4**, p.323（证明），逐字：'Suppose p ≠ 0: then H^n_rel(p,κ) = 0 unless n = 0.'，紧随逐字 'This is the analogue of the vanishing theorem proven by FGZ.'；作者自评 p.335 逐字 'The only mathematically non-trivial result is the vanishing theorem (2.4).'"
+    note: |
+      L1，E3。本条是本卡的**关键上游**：没有消灭定理，Euler–Poincaré 只给交错和
+      Σ_n (−1)^n dim H^n_rel，不给 dim H⁰_rel。
+      ⇒ 本图对应卡 worldsheet.superstring-relative-cohomology-vanishing-v2，本卡的推导
+      **非 inferred** 地指它。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.18**, p.318，逐字：'Proposition 2.18. There exists a subspace T(p,κ) of V(p,κ)^{Vir_κ^+} (i.e. elements annihilated by π(L_n), π(G_{n−κ}), n > 0) with ch_q T(p,κ) = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}. T(p,½) is positive definite with respect to ⟨,⟩_V. T(p,0) is a direct sum of two subspaces T^± of equal characteristics, where T^+ (respectively T^−) is positive (respectively negative) definite with respect to ⟨,⟩_V.'；其证明逐字 'Using the so-called spectrum generating algebra, physicists [1, 2] have constructed these spaces. However, we will prove their existence the way FGZ did in the bosonic case. It has been shown [7, 9, 10] that the Verma module of M_κ(h,c) over Vir_κ is non-unitary for h < 0, c = 1 and unitary for h > 0, c = 9. By Kac's determinant [22] formula, …'；**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)，U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩，R(p,½) = C，R(p,0) 是 Spin(D−1,1) 旋量表示）；**Definition 2.16**, p.317 逐字 'Let P(p,κ) = {v ∈ V(p,κ): π(L_n)v = δ_n κv, π(G_{n+κ})v = 0, n ≥ 0}. It is called the space of physical states.'"
+    note: |
+      L1，E7 + **§9.3**（researcher 第三轮补的逐字）。本条是 (H6)(H7) 的来源：
+      (a) **dim R(p,κ)** 这个因子的定义（p.303）；
+      (b) **φ_κ(q)^{−8}** 出现在 Prop 2.18 的特征标里，是猜测 p^{(8)}_κ(n) = [q^n] φ_κ(q)^{−8} 的
+          **唯一旁证**——⚠ 但 LZ 对 p^{(8)}_κ 的定义本图**未逐字取得**，(H6) 已声明只照抄记号；
+      (c) **κ = 截距**（Definition 2.16 的 π(L₀)v = κv）。
+      ⚠ **下标读数注记（§9.3，照抄时不要"统一"）**：Prop 2.18 的括注写 π(G_{**n−κ**}), n > 0，
+      而 Definition 2.16 的物理态条件写 π(G_{**n+κ**})v = 0, n ≥ 0。**两处符号不同是原文如此且都自洽**
+      （κ=0 时前者不含 G₀、后者含 G₀）。
+      ⚠ **本卡不依赖 Prop 2.18**：Corollary 2.15(i) 的证明（§9.2 逐字）只引 Theorem 2.4、
+      Euler–Poincaré、Proposition 2.14(ii)。本条只为给出 (H6)(H7) 里记号的语境。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.19**, p.320，逐字：'(i) dim T ∩ 𝒫 = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − p·p/2). (ii) T ∩ 𝒫 is positive definite with respect to ⟨,⟩_𝒫. (iii) V(p,κ) is a free Vir_κ^--module.'；**Theorem 2.20**, p.321 逐字 'There are unitary isomorphisms T ∩ P ≅ P/rad P ≅ H⁰_rel.'，其证明末句逐字 'Using **Corollary 2.15(i)** and **Corollary 2.19(i)**, we have the desired result.'"
+    note: |
+      L1，E7/E8 + **§9.4/§9.5**（researcher 第三轮页图逐字）。
+      ★★ **Corollary 2.19(i) 的右端与本卡逐字相同**——这不是巧合，而是 Theorem 2.20 的证明手法：
+      LZ 用 Cor 2.19(ii)（T∩𝒫 正定）把 T∩𝒫 → 𝒫/rad 𝒫 做成等距含入，再用
+      **Cor 2.15(i)（本卡）与 Cor 2.19(i) 的维数相等**收尾（§9.5 逐字复核无误）。
+      ⇒ **"两个空间维数相等"属于 Theorem 2.20 那张卡**，本卡"不断言 (c)"照此写。
+      ⚠ **Cor 2.19(iii)（自由性）与本卡无直接边**：§9.5 明写 "(iii) 是喂给 Theorem 2.4（消灭定理）
+      的证明，不是喂给 Thm 2.20 的"。本卡对自由性的依赖是**经消灭定理卡间接**的。
+      ⚠ **Cor 2.19(iii) 的证明不经 Prop 2.18 的陈述**（§9.4）：原文只写
+      'Equations (24), (25) imply that V(p,κ) is a direct sum of tensor products of free modules
+      over Vir_κ^-.'，而 (24)(25) 印在 p.319、位于 **Prop 2.18 的证明体内**；
+      再往上落到 [7,9,10] 的幺正性与 **[22] = Meurman–Rocha 的超 Virasoro Kac 行列式**。
+      ⇒ 该记账在本图属 worldsheet.rns-fock-module-free-over-negative-super-virasoro 那张卡。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 5.5**, p.333（p = 0 的例外情形），逐字：'For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not Vir_κ^- -free'；**Theorem 5.1**, p.330（NS 绝对上同调）；**Theorem 5.4**, p.331 附近（R 绝对上同调）；**Proposition 4.3(ii)**, p.329–330（GSO 子复形：dim H^n(P̄₊C_rel) = 8p₀^{(8)}(−p·p/2) 仅 n = 0）；**p.328** 逐字 'However, Corollary 2.15 (i) implies that dim H⁰_rel(p,0) ≠ dim H⁰_rel(p,½).'"
+    note: |
+      L1，E9/E10 与 researcher 第二轮 §7.5。本条是"不断言 (f)(g)(h)"的来源。
+      ★★ **p.328 那句逐字是 LZ 自己对本卡断言的一次使用**：他把 Corollary 2.15(i) 用来说明
+      GSO 之前两扇区维数**不等**（这是 §4 开头列的"两个不良特征"之一）。
+      ⇒ 这条使用也是 worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989
+      那条边 2026-09-11 得以从 inferred 改指本卡的依据。
+tags: [superstring, brst, cohomology, dimension-formula, rns, ramond-sector, quantization-condition]
+notes: |
+  ★★【本卡为什么新建（curator，2026-09-11）】两条既有记账缺口逐字点名要它：
+  (1) worldsheet.superstring-relative-cohomology-vanishing-v2 的"本命题不断言 (b)"：
+      「不断言 H⁰_rel 的**维数**（LZ Corollary 2.15(i) 的 "Quantization Condition"）」；
+  (2) worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989 的 gaps
+      逐字：「**Corollary 2.15(i)（维数公式 / 'Quantization Condition'）本图没有卡**：
+      depends_on worldsheet.no-ghost-theorem-superstring-cohomological 因此标 inferred
+      （那张卡的 statement 是 2.15(ii) 正定性）。**正解是为 2.15(i) 单建卡。**」
+  本卡关闭这两条，且那条 inferred 边已同批改指本卡并去掉 inferred。
+  与玻色侧 worldsheet.bosonic-relative-cohomology-dimension（FGZ Theorem 2.7(ii)）
+  是同一批、同一结构的两张卡。
+
+  【为什么"消灭"与"维数"与"正定"必须分三张卡】
+  LZ 自己就把它们分成三处编号结果：**Theorem 2.4**（消灭）、**Corollary 2.15(i)**（维数，本卡）、
+  **Corollary 2.15(ii)**（正定）。三者的论证输入不同：
+    - 消灭：§3 的有限过滤 + 长正合列 + Poincaré 对偶 + Cor 2.19(iii)，**不用任何厄米形式**；
+    - 维数（本卡）：Euler–Poincaré + 消灭 + Proposition 2.14(ii) 的 **char**；
+    - 正定：同上，但用 Proposition 2.14(ii) 的 **sign**（号差）那一半。
+  ⇒ 本卡与正定卡共用两条输入、各取 Prop 2.14(ii) 的一半，**不是互为推论**。
+
+  【p^{(8)}_κ 与 dim R(p,0) 两处未核实（**都不进断言**）】
+  (a) **p^{(8)}_κ 的定义**：本图未逐字取得。合理猜测 p^{(8)}_κ(n) = [q^n] φ_κ(q)^{−8}
+      （旁证见 sources 里的 Prop 2.18），与 FGZ 的 p_{(D)}(n) = [q^n] φ(q)^{−D} 同型，
+      8 = D − 2 是横向数；**φ_κ(q) 本身的定义（NS/R 两扇区的费米因子）本图也没有**。
+      同一条缺口已记在 worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989
+      的 gaps 第三条（"计数记号 p₀^{(8)}(·) 的定义本图未核实"）。
+  (b) **dim R(p,0)**：LZ 只说它是 Spin(D−1,1) 的旋量表示。D = 10 的 Dirac 旋量维数是 32，
+      于是 ½(2·0+1)·dim R(p,0) = ½·32 = **16**，与 auditor 2026-09-11 转录的 LZ p.314
+      "Case 1（p·p = 0）**sign C_rel(p,0) = 16**" 一致。⚠ **这是本图的算术核对，不是 LZ 的字**：
+      LZ 未在抽取记录覆盖的位置写出 dim R(p,0) = 32。故"不断言 (e)"。
+      ⚠ 这个 16 与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2 里那个 16
+      （开弦迹里的 R 扇区计数）**看起来同源但本图未建立等同**，不得互相搬运。
+
+  【★ Proposition 2.14(i)（Q* = Q）**不是**本卡的依赖（researcher 第三轮 §9.2 的 negative evidence）】
+  Corollary 2.15 的三行证明逐字只引 **Theorem 2.4、Euler–Poincaré 原理、Proposition 2.14(ii)**，
+  两部分都指向 2.14(**ii**)（句末 "also" 是作者自己的佐证）。**2.14(i) 在该证明里一个字都没出现。**
+  ⟨,⟩_rel 下 Q 的自伴性确实是"sign H^n 有定义"的背景条件，但那是 Corollary 2.15(**ii**) 一侧
+  更关心的事，且原文没把它列为依赖。⇒ 本卡的推导**不拉这条边**；日后若有人要补，**必须标 inferred**。
+
+  【与玻色侧 worldsheet.bosonic-relative-cohomology-dimension 的对应与差别】
+  对应：LZ Corollary 2.15(i) ↔ FGZ Theorem 2.7(ii)。LZ 在 Theorem 2.4 紧随句逐字自述
+  'This is the analogue of the vanishing theorem proven by FGZ.'，在 Prop 2.18 的证明里又说
+  'we will prove their existence the way FGZ did in the bosonic case'——**两篇的整体路线自觉平行**。
+  四处实质差别：
+    (a) **公式形状**：FGZ 是 p_{(24)}(1 − p·p/2)（单个系数）；LZ 是
+        ½(2κ+1)·dim R(p,κ)·p^{(8)}_κ(κ − p·p/2)（带扇区前因子与旋量维数因子）。
+        自变量里的常数项也不同：玻色是 1（截距 a = 1），超弦是 κ（NS 的 ½、R 的 0）。
+    (b) **分段**：FGZ 显式写"1 − p·p/2 非非负整数时为 0"；**LZ 的语句里没有这一支**，
+        本卡照实不补（"不断言 (i)"）。
+    (c) **上游**：FGZ 经 Proposition 2.4（= Thm 1.12 + Euler–Poincaré）；
+        LZ 经 Proposition 2.14(ii)（char = sign）+ Theorem 2.4 + Euler–Poincaré。
+        ⇒ **两条链的共同项只有 Euler–Poincaré 原理**，而本图对它连一张卡都没有（两侧同款 gap）。
+    (d) **厄米形式**：FGZ 的消灭定理（Thm 1.12）假设里含非退化厄米形式；LZ 的消灭定理完全不用，
+        厄米形式只在 Proposition 2.14 这一层进入（即本卡与正定卡这一层），**不在消灭那一层**。
+  ⇒ 两卡**互不依赖**：两篇文献各自独立证明自己那一侧，本图不主张由一侧推出另一侧。
+
+  【R 扇区零模表示的选择绑定在本卡上】
+  与消灭卡（断言写成存在量词）不同，**本卡的维数公式是在 (H5) 的 T₀ ⊕ T₁ 下给出的具体数**，
+  换表示后右端是否不变本图未核实（"不断言 (d)"）。这是本卡比消灭卡**更依赖表示选择**的地方：
+  Definition 2.11 的 ⟨,⟩_rel（R 扇区要用 D_R 原像）正是因为 ⟨T₁, T₁⟩_T = 0，
+  而 Proposition 2.14(ii) 的 char/sign 公式建立在这个形式上。
+author: curator
+created: "2026-09-11"
