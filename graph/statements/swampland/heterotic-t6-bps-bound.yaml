@@ -1,0 +1,91 @@
+id: swampland.heterotic-t6-bps-bound
+kind: proposition
+title: "杂化弦 on T⁶ 的 Bogomol'nyi 界 M² ≥ Q⃗_R²/2（Sen 的归一化约定下；Sen 外包给 [24][25]，本文不证）"
+statement: |
+  **设定（这一段是陈述的一部分，不是注释）。**
+  杂化弦紧化在六维环面 T⁶ 上，四维无质量场谱与有效作用量取 Sen (2.1)–(2.5)
+  （28 个 U(1) 规范场 A^{(a)}_μ，L = diag(−I₂₂, I₆)，作用量整体常数 C 作者自述任意）。
+  电荷按 (2.42) 分解为 `Q⃗_{L/R} := ½(I₂₈ ∓ L) Q⃗`，于是 **Q⃗_L 是 22 维、Q⃗_R 是 6 维矢量**。
+  质量 M 与电荷 Q^{(a)} 按 Sen 的隐含读数取（`g^E_tt → −(1 − 2M/ρ)`，`F^{(a)}_{ρt} → Q^{(a)}/ρ²`；
+  原文**不声明 α'、G_N、M_Pl 中的任何一个**，这两条读数规则是抽取者复算的，见 gaps）。
+
+  **命题（Sen p.11 逐字，无式号）。**
+
+      "In the normalization convention that we have been using, the Bogomol'nyi bound that
+       follows from the space-time supersymmetry of the theory, is given by
+
+           M² ≥ (Q⃗_R²/2)   [24, 25]."
+
+  即：在上述归一化下，该理论中任何（渐近平坦的）态的质量满足 **M² ≥ ½ Q⃗_R²**。
+
+  **本卡明确记录的三件事：**
+  (i) **这条界是 Sen 从外部引入的，本文不给任何推导**——原文把它整体外包给
+      `[24]`（Gibbons–Hull, Phys. Lett. B109 (1982) 109；Harvey–Liu, Phys. Lett. B268 (1991) 40；
+      Kallosh–Linde–Ortín–Peet–Van Proeyen, Phys. Rev. D46 (1992) 5278）
+      与 `[25]`（A. Sen, Mod. Phys. Lett. A8 (1993) 2023）。
+      **本项目这几篇一篇都没有登记、没有核实**（见 gaps）。
+  (ii) **"In the normalization convention that we have been using" 是 Sen 全文关于归一化的唯一自述**
+      ——他承认结论依赖归一化，但**通篇没有把这套约定写成 α'/G_N/M_Pl 的取值**。
+  (iii) 界里出现的是 **Q⃗_R（右移荷）而非 Q⃗_L**，这是该理论中 BPS 结构的不对称来源。
+
+  **本卡不断言：**
+  (a) 哪些解饱和这条界——那是 Sen p.11 紧随其后的分类（Case II/III 饱和、Case I 不饱和、
+      `J ≠ 0` 从不饱和），本图未建卡，见 notes；
+  (b) 这条界的任何推导、或时空超对称代数的形式（本图 susy 区的 BPS 卡是 d = 4 点粒子一路，
+      与本卡的归一化、荷的含义都不同，**不得互引系数**）；
+  (c) Q⃗_R 与任何电荷格、量子化条件的关系（Sen 全文没有）；
+  (d) 本卡的 Q⃗_R 与 Arkani-Hamed–Motl–Nicolis–Vafa 2006 的 Q_R 是同一归一化下的同一个量。
+uses_conventions:
+  - conv.metric-mostly-plus
+sources:
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2, p.11，(2.65) 之后、**无式号**的一段（整段逐字见 statement 与 notes）"
+    note: |
+      **L1**（researcher 2026-09-11 逐页读 v3；抽取记录 literature/extractions/sen-1995-bh-torus.md **E9**）。
+      ⚠ **该处没有公式编号**，引用时**不得编式号**，只能写 "p.11，(2.65) 之后，无式号"。
+      ⚠ **引用编号 [24, 25] 的读图留痕**（抽取记录 §0.3 的 U-a）：PDF 该处是超链接框、数字边缘有描边；
+      读作 `[24, 25]`，并有**内容判据**支持——[24] 全是 BPS 界文献、[25] 是 Sen MPLA A8 (1993) 2023，
+      而 [21] = Marcus–Schwarz 在正文别处只用于 O(8,24) 对称性、与 BPS 界无关。
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2, (2.42), p.9（Q⃗_{L/R} 的投影定义与 22 + 6 维分裂）；(2.1)–(2.5), p.3（场内容与作用量）"
+    note: >-
+      **L1**（抽取记录 E1、E2、E6）。本条只供给 statement 设定段里 Q⃗_{L/R} 的定义与理论内容，
+      **不供给界本身**。
+tags: [swampland, bps, bogomolnyi, heterotic, black-hole, sen-1995, outsourced-claim]
+notes: |
+  from: literature/extractions/sen-1995-bh-torus.md E9（含 §0.3 U-a 的引用编号留痕）、§1.2、§5.1–§5.2。
+
+  【★ 为什么单独建这张卡 —— 一条"被引用而非被证明"的界】
+  swampland.heterotic-t6-substates-below-extremality（及其 v2）里「BPS 黑洞 M² = ½Q_R²」这条
+  **饱和**关系，其背后的**不等式**从来没有在本图里出现过。Sen 是唯一给出该不等式原文的一手来源，
+  但他自己也只是引用。把它单列出来，是为了让「AMNV 说 (22) 是 BPS」这句话的依据在图上可见，
+  **并让它的真实来源深度（外包两跳、本项目未核实）如实反映在 effective status 与 gaps 上**。
+
+  【★ Sen p.11 那一段的完整逐字（分类部分，本卡不断言，留作后续卡的来源）】
+    "In the normalization convention that we have been using, the Bogomol'nyi bound that follows
+     from the space-time supersymmetry of the theory, is given by M² ≥ (Q⃗_R²/2)[24, 25]. Thus we
+     see that the extremal black holes in **cases II and III saturate the Bogomol'nyi bound, and
+     hence give rise to supersymmetric solutions, whereas those in case I do not**. Also for
+     non-zero J, eqs.(2.38)-(2.40) shows that M² is always larger than (Q⃗_R²/2), even in the
+     extremal limit a → m. This shows that **the extremal black holes carrying non-zero angular
+     momentum do not correspond to supersymmetric solutions.** (Similar observations have been
+     made in ref.[26].) For special cases α = β and α = 0, the non-rotating solutions constructed
+     here reproduce the solutions discussed in ref.[5]."
+  ⇒ **建议的后续卡**（本轮未建，交 lead 排期）：
+     `swampland.heterotic-t6-extremal-susy-classification`（Case II/III 饱和 ⇒ 超对称、Case I 不）
+     与 `swampland.heterotic-t6-rotating-extremal-not-susy`（J ≠ 0 从不饱和）。
+     二者都 depends_on 本卡 + swampland.heterotic-t6-extremal-nonrotating-mass-formulas。
+
+  【★ 不要把本卡当成 AMNV 的 (22) 的来源】AMNV (22) 说的是**饱和**（等号），本卡说的是**不等式**。
+  而且两边的 Q_R 归一化无法闭合（见 conv.sen-1995-normalization 的 notes 与
+  swampland.heterotic-t6-extremal-nonrotating-mass-formulas 的 notes）。
+
+  【★ 与本图 susy 区 BPS 卡的关系】susy.bps-bound-point-particle-d4 是 d = 4 扩展超对称中心荷的
+  BPS 界 m ≥ q_i（Polchinski 附录 B.2 一路，**仅对点粒子可携带的荷**），与本卡**不是同一条界**：
+  归一化不同、荷的含义不同（本卡的 Q⃗_R 是 28 维电荷的右移 6 维投影）。**两卡之间本图不建边**，
+  因为把它们对上需要一个两处原文都不给的字典。
+
+  【查重】`uv run stringgraph search Bogomol / 极端黑洞` 只命中 susy/branes 两张 d = 4 点粒子 BPS 卡
+  与 AMNV 一系的 swampland 卡，无同内容者。
+author: curator
+created: "2026-09-11"

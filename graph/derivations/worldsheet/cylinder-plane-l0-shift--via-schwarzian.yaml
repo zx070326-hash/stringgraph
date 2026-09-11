@@ -5,7 +5,10 @@ status: physical-argument
 depends_on:
   - id: worldsheet.schwarzian-transformation-of-t
   - id: worldsheet.energy-momentum-laurent-modes
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。本推导用的是**定义半**（c = TT OPE 四阶极点系数的两倍、及其与 conv.virasoro-standard 的归一化），故改指 v2；论证与有效状态不变。
+      本推导只用 c 这个数（经 worldsheet.schwarzian-transformation-of-t 进入 (c/12)S(z;w)）及其归一化——只用定义。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.6, eq. (2.6.9)、(2.6.10)，p.53–54（式号经 schrans-2020 核实，系数未核实）"

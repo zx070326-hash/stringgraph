@@ -98,6 +98,7 @@
 - **reviewer-v2-ch10b 残余**：tadpole 前缀 (8π²α')^5 换代；bosonic-v2→v3 边；(10.8.12)/(10.2.15) 来源。Q_B²=0 ⟺ c=15 已拆单向（9ff17d1）。
 - **gkpw**：d=4 拆卡已落地（gkpw-ads5）。
 - **去重事故**：`branes.bps-bound-point-particle-d4` / `branes.brane-charges-in-susy-algebra` 与 `susy.*` 同名命题并行建卡，保留 susy.*，branes.* superseded（派工中）。**教训：同一命题不得同时派给两个 curator。**
+- **lead 裁决（2026-09-11，three-checks）**：(a) `consistency.iib-gravitational-anomaly-cancels` **不**为「无规范群」换代——statement 已以「三个规范迹为零」写出前提；(b) `worldsheet.nsr-fock-space-verma-decomposition` 维持 conjecture 不降 refuted——LZ 反例区 p·p<0 真含于 FOK 的 p≠0，是不利证据，但 LZ 不给层数不写显式反例，不满足「被接受的反例」；(c) 超弦无鬼两卡 (H2) 只写 p≠0、LZ p.305 另设「p 未来向」——**待裁**，先由下一轮 auditor 在回译时判定是否本质前提；(d) 2 待登记文献：Gibbons–Hull PLB 109 (1982) 109、Terao–Uehara PLB 168B (1986) 70、Schwarz NPB 46 (1972) 61。
 - **researcher 五项**（派工中）：η S 变换数学来源（Apostol Thm 3.1 / Siegel 1954——ch7 子图最集中的单点缺口）；Polchinski v1 p.159 页图；LZ 1989 p.320 Remark 反例的 p；Gallier–Xu Lemma 6.1/Prop 6.1 逐字；Humphreys GTM 9 §23/§8 入口。
 
 ## 瓶颈分析（2026-09-10，`stringgraph why`）
@@ -108,7 +109,7 @@
 
 ## 待拆清单（定义卡内嵌命题）
 
-- `tt-ope-central-charge`、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
+- ~~`tt-ope-central-charge`~~（已拆，2026-09-11 small-backlog-3：定义 v2 + 命题卡 tt-ope-pole-structure-from-conformal-invariance）、`bc-ghost-cft`、`open-string-virasoro-modes`（reviewer-ch23）
 - ~~`worldsheet.verma-module`~~ 已拆（v2 formalized + math.verma-module-free-over-negative-part），2026-09-11
 - ~~`worldsheet.virasoro-algebra`~~ 已拆（v2 formalized + virasoro-unique-central-extension），2026-09-11
 - ~~待建：`math.euler-partition-generating-function`~~ 已建并 formalized（2026-09-11，任意交换环上无逆元形式）；Verma 特征标的形式化缺口现只剩 PBW 下界

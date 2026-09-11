@@ -1,0 +1,105 @@
+id: consistency.iib-anomaly-solution-unique
+kind: proposition
+title: "IIB 引力反常三式的完整线性代数：2r₁ + 3r₂ − 5r₃ = 0、rank = 2、ker = span{(2, −2, 1)}"
+statement: |
+  **设定（这一段是陈述的一部分，不是注释）。**
+  设 `A ∈ M₃(ℤ)` 的三行依次为
+
+      r₁ = (−495,  1,  992)
+      r₂ = ( 225,  1, −448)
+      r₃ = ( −63,  1,  128)
+
+  把行看作 `(n_{3/2}, n_{1/2}, n_A)` 上的线性泛函，即 `A` 是十维**纯引力**反常十二形式的三个单项
+  `tr R₂⁶`、`tr R₂⁴ tr R₂²`、`(tr R₂²)³` 的系数所组成的矩阵
+  （行序 = 单项序，列序 = `n_{3/2}, n_{1/2}, n_A`；
+  数值来源见 sources，两本书归一化相同、系数逐项相同）。
+
+  **命题。**
+  (i) **显式线性关系**：`2 r₁ + 3 r₂ − 5 r₃ = 0`（三个分量都为零）。
+  (ii) **秩**：`rank_ℚ A = 2`（等价地，在任何特征零的域上秩为 2）；`det A = 0`。
+  (iii) **核**：`ker_ℚ A = span_ℚ{(2, −2, 1)}`；且因 `(2, −2, 1)` 是本原向量（分量的 gcd = 1），
+       **`ker_ℤ A = ℤ · (2, −2, 1)`**。
+
+  **⇒ 由 (ii)(iii)：使三条纯引力反常条件同时成立的整数组恰好是 `(2c, −2c, c)`，`c ∈ ℤ`，
+  没有别的解。**
+
+  **本卡与 consistency.iib-gravitational-anomaly-cancels 的分工（务必照此读）：**
+  - **(iii) 不是本卡的新内容**：它是 `consistency.iib-gravitational-anomaly-cancels` 那条
+    「Î ≡ 0 ⟺ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A」在矩阵语言下的重述（该卡已 `formalized`，
+    Lean 声明 `iib_gravitational_anomaly_free_iff`）。本卡**不重新论证 (iii)**，而是
+    **由那张卡供给**（见推导的 depends_on）。
+  - **本卡真正新增的是 (i) 与 (ii)**：那张卡的 notes 已指出「三式秩 2 而非 3」，
+    但同时逐字注明「⚠『秩 2』与『任取两条蕴含第三条』这两句话本身**不是**单独的 Lean 定理」。
+    本卡把它们变成可陈述、可机检的命题，并给出**显式的线性关系** `2r₁ + 3r₂ − 5r₃ = 0`
+    ——**这条关系两本书都没有写出**（见下）。
+
+  **本卡不断言：**
+  (a) 这三行系数**是**相应手征场的引力反常——那是指标定理计算，两本书都只引用不重做；
+  (b) IIB 超引力的手征含量确实是 `(2, −2, 1)`；
+  (c) 「无规范群」这一物理前提的成立——本卡只处理已给定的整数矩阵；
+  (d) 任何关于 `A` 的像（image）或 Smith 标准型的断言（见 notes：已复算但不作为断言）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: bilal-2008
+    loc: "§12.2「Type IIB supergravity in ten dimensions」, **(12.4)(12.5)**，印刷 p.97 = PDF p.100（v1）。(12.4) 的三个整数组逐字为 `(−495 n_{3/2} + n_{1/2} + 992 n_A)/5670`、`(225 n_{3/2} + n_{1/2} − 448 n_A)/4320`、`(−63 n_{3/2} + n_{1/2} + 128 n_A)/10368`；(12.5) 逐字 `n_{3/2} = 2 n_A , n_{1/2} = −2 n_A`"
+    note: |
+      **L1**（researcher 2026-09-11 逐页读图；literature/extractions/green-schwarz-1984.md §11.2/§11.4）。
+      **版本写死 v1**（页 1 侧边条纹逐字 `arXiv:0802.0634v1 [hep-th] 5 Feb 2008`，本文只有 v1）；
+      **页码映射：PDF 页 = 印刷页 + 3**（三点核对）。
+      ⚠ **章节订正**：(12.4)(12.5) 在 **§12.2**（起于印刷 p.97），**不在 §12.4**
+      （§12.4 起于印刷 p.99）；派工单里写的「§12.4」是把式号 (12.4) 误当章节号。
+      ★★ **本卡 (i)(ii) 的来源缺口就在这里**：Bilal 逐字只说 "the 3 equations are **not
+      linearly independent** and do admit non-trivial solutions"，
+      **既不给出线性关系，也不给解空间维数，更不说"唯一"**——他只说 "these solutions are very
+      simple"。⇒ (i) 的显式关系与 (ii) 的秩都是本项目补出的（见推导 notes 的逐系数复算）。
+      ★ **归属**：(12.4) 与 (12.5) 之间逐字 "Amazingly, however, **as first observed in [3]**"，
+      其 **[3] = L. Alvarez-Gaumé and E. Witten, *Gravitational anomalies*, Nucl. Phys. B234
+      (1984) 269**（印刷 p.105 参考文献页 L1）。⚠ Bilal **不给 AGW 的式号**，且 AGW 本身不固定
+      整体归一 ⇒ **这只是"来源如此归属"，不足以把 AGW 写成本卡系数的来源**。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 98：(12.2.11)（取 n = 1、三个规范迹为零）、(12.2.12)、(12.2.13) 的分子系数即本卡的 r₁、r₂、r₃ 的三列来源；(12.2.14) `Î_IIB = −2Î₈ + 2Î₅₆ + Î_SD = 0`"
+    note: |
+      **L1**（literature/extractions/polchinski-1998-v2-ch12.md E10）。
+      ★ **独立第二来源**：researcher 已对两书**逐系数复算 10/10 全对**
+      （`B_gravitino = 2 P₅₆/(2π)⁵`、`B_{spin 1/2} = 2 P₈/(2π)⁵`、`B_A = P_SD/(2π)⁵`），
+      差别只有两处**记账口径**而非归一化：`(2π)⁵` 的位置（Bilal 放进 Î，Polchinski 放进
+      (12.2.10)）与 Majorana–Weyl 的 ½（Bilal 显式写在 (12.4) 的 `n/2`，Polchinski 吸收进
+      「两个 8′、两个 56」的重数计数）。
+      ⇒ **本卡的三行整数在两本书里是同一批数**，这不是转述，是两条独立核实。
+      ⚠ Polchinski 同样只断言 "the coefficients of these conspire to produce zero"，**不展示算术**。
+tags: [anomaly, gravitational-anomaly, twelve-form, d10, type-iib, linear-algebra, lean-island-2, lean-candidate]
+notes: |
+  from: literature/extractions/green-schwarz-1984.md §11.2、§11.3、§11.4（researcher 第五轮，L1）
+  + polchinski-1998-v2-ch12.md E10/E11。
+
+  【★ 为什么值得单独建卡】Polchinski 在 p.98 逐字自评这件事 "somewhat **miraculous**" /
+  "it seems **accidental** that there are any consistent chiral theories at all"，
+  Bilal 逐字用 "**Amazingly**"。本卡把这个"奇迹"化成一条**完全可判定的整数矩阵事实**：
+  秩是 2 不是 3，所以一维解空间**是应该出现的**，不是奇迹；
+  真正非平凡的是这条解射线**恰好穿过 IIB 超引力实现的小整数点 `(2, −2, 1)`**，
+  而且 `(2, −2, 1)` 本原 ⇒ 整数解恰是它的整数倍，没有整除障碍。
+
+  【★ 两本书都没写的东西，本卡补出了什么】
+    Bilal：只说 "not linearly independent"，**不给线性关系、不给维数、不说唯一**；
+    Polchinski：只说 "conspire to produce zero"，**不展示算术**，也不给充要条件。
+  ⇒ **(i) 的显式关系 `2r₁ + 3r₂ − 5r₃ = 0` 与 (ii) 的 `rank = 2` 在两本书里都不存在。**
+
+  【本卡未作断言、但已复算的两条附带事实（记账用，不得当作本卡的断言引用）】
+  curator 2026-09-11 复算：`det A = 0`（已含在 (ii) 里）；
+  **`A` 的 Smith 标准型不变因子是 (1, 144, 0)**（`d₁ = 全体元素的 gcd = 1`，
+  `d₂ = 全体 2×2 子式的 gcd = 144`）。后者刻画的是 `A` 的**像**在 ℤ³ 中的指数结构，
+  与本卡关心的**核**无关，故**不写进 statement**，只在此留痕，供日后 Lean 化时参考。
+
+  【★ Lean 岛候选 A8′】见 formal/TODO.md 的 `StringFormal/Math/AnomalyPolynomial.lean` 一节。
+  (i) 与 (iii) 是 `decide` / `omega` 级；(ii) 需要一行秩计算（`Matrix.rank` 或直接给
+  两个线性无关行 + (i) 的关系）。**A8 只验证了 `(2, −2, 1)` 使三式为零，没有排除别的解**；
+  本卡的 (ii) 是新增的那一半。
+
+  【查重】`uv run stringgraph search IIB / 反常多项式` 命中
+  consistency.iib-gravitational-anomaly-cancels（本卡的 (iii) 即它的矩阵重述，
+  本卡由推导的 depends_on 向它索取，**不重复论证**）、
+  consistency.d10-n1-anomaly-polynomial-factorized-form（N = 1 一路，含规范迹，命题不同）、
+  math.anomaly-twelve-form-factorization（因子化恒等式，命题不同），无同内容者。
+author: curator
+created: "2026-09-11"

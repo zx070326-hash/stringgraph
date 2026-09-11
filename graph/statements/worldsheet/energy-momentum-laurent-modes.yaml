@@ -14,7 +14,7 @@ statement: |
   L_{-1}、L_0、L_1 生成全局 SL(2,C) 变换。
 uses:
   - worldsheet.traceless-holomorphic-energy-momentum
-  - worldsheet.tt-ope-central-charge
+  - worldsheet.tt-ope-central-charge-v2
 uses_conventions:
   - conv.worldsheet-complex-coords
   - conv.virasoro-standard
@@ -35,5 +35,6 @@ notes: |
   （其自身为 physical-argument）承担，不再重复记账。
   与之对照，worldsheet.virasoro-generators-free-boson 给出的是**不经过 OPE 的**
   显式模式定义，在 Fock 空间上逐向量只有有限多项，是可直接形式化的版本。
+  **2026-09-11 `uses` 换代改指（curator-small-backlog-3）**：worldsheet.tt-ope-central-charge（v1）→ worldsheet.tt-ope-central-charge-v2。v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance；本卡 `uses` 里用的是**定义半**（中心荷 c 的定义与归一化），故改指 v2。statement 正文里对 v1 id 的字面引用按 graph/CLAUDE.md 的裁决不就地改。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

@@ -3,7 +3,15 @@ target: worldsheet.schwarzian-transformation-of-t
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.tt-ope-pole-structure-from-conformal-invariance
+    note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。
+      本推导用的是**命题半**：summary 逐字说「T 在共形变换下的无穷小变换由 T(z)T(0) 的 OPE 的极点结构读出：
+      二阶极点 ⇒ 权 2 的张量部分；一阶极点 ⇒ ∂T 项；四阶极点 c/(2z⁴) ⇒ 中心项」——用到的是
+      「OPE 恰有这三项、且系数如此」这条断言，故改指命题卡。
+      ⚠ 本推导与命题卡的推导 --via-conformal-ward-identity 互为逆向（那条由 (2.4.24) 推 (2.4.25)，
+      本条由 (2.4.25) 推有限变换律 (2.4.26)），二者都以 worldsheet.ward-identity 为转换器；
+      目标不同，不构成环（validate 已核）。定义半经命题卡的推导间接进入。
   - id: worldsheet.ward-identity
   - id: worldsheet.primary-field-v2
     note: |

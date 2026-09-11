@@ -3501,7 +3501,7 @@ as the **canceled propagator argument**.」
 |---|---|---|---|
 | 1 | `conv.metric-mostly-plus` | §1.2 | **Notation, p. xviii**（逐字：MTW (1973) `+++` conventions，`(−++…+)`） |
 | 2 | `conv.worldsheet-euclidean` | §2.1，(2.1.1) 附近，式号未核实 | **§2.1, p.32，(2.1.1) 下方正文（无式号）；欧氏约定本身见 Appendix A, eq. (A.1.31)**；note 换成 §12.1 的逐字引文 |
-| 3 | `conv.virasoro-standard` | `(c/12)m(m²−1)` | 原书 **(2.6.19)** 写 `(c/12)(m³−m)`；等价，但「与原书逐字一致」的说法要改 |
+| 3 | `conv.virasoro-standard` | `(c/12)m(m²−1)` | 原书 **(2.6.19)** 写 `(c/12)(m³−m)`；等价，但「与原书逐字一致」的说法要改。**已在约定卡 notes 记录**（curator-small-backlog-3，2026-09-11：definition 不改，notes 加「恒等但非逐字；逐字见 sources[0] 与 worldsheet.conformal-ordered-modes-satisfy-virasoro」一段） |
 | 4 | **新增** `conv.complex-coordinate-measure` | — | `d²z ≡ 2dxdy`、`δ²(z,z̄) ≡ ½δ(x)δ(y)`，loc = **Notation p.xviii + (2.1.7)/(2.1.8) + p.33 脚注 1**；note 写「与多数文献差因子 2」 |
 | 5 | **新增** `conv.ope-tilde-notation` | — | `∼` = OPE 中相等到非奇异项；`~` 不是厄米共轭。loc = **Notation pp. xviii–xix** |
 | 6 | `c = D`（E34） | 无 loc | **§2.4, eq. (2.4.22)；文字陈述 p.48（(2.4.24) 下方）** |

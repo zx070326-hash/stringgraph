@@ -1,0 +1,94 @@
+id: worldsheet.tt-ope-pole-structure-from-conformal-invariance--via-conformal-ward-identity
+target: worldsheet.tt-ope-pole-structure-from-conformal-invariance
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      提供结论所指的那个形式 T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0) 以及「四阶极点系数
+      的两倍叫 c」这一命名（原书 (2.4.25)）。⚠ 那是一张**定义**卡，本条边只让结论「OPE 取此形式、
+      参数就是中心荷」有所指，不提供论证。
+  - id: worldsheet.ward-identity
+    note: |
+      提供「守恒流与算子的 OPE 的极点 ⟺ 算子的无穷小变换」这一转换器（原书 (2.3.5)/(2.3.11)，
+      在 §2.4 以 (2.4.11)–(2.4.12) 的形式用于 T·𝒜）。本推导把 𝒜 取为 T 自身。
+      ⚠ 该卡自己声明其 i 因子约定未定；本推导只用「各阶极点系数与 v 的各阶导数逐项对应」
+      这一结构，不依赖该因子。
+  - id: worldsheet.primary-field-v2
+    note: |
+      提供共形权的 OPE 定义 T(z)𝒪(0) ∼ … + (h/z²)𝒪 + (1/z)∂𝒪（原书 (2.4.14)），
+      即「权 h ⇒ 二阶极点系数 h、一阶极点 ∂𝒪」。取 𝒪 = T、h = 2 得 (i)。
+      本推导只用该卡对权的定义与非主场「…」项的存在，不用「主场」这一特殊情形。
+  - id: worldsheet.traceless-holomorphic-energy-momentum
+    note: |
+      提供 T 是全纯的、权 (2,0)（原书 (2.4.1)–(2.4.4)）；全纯性使 T(z)T(0) 的展开是 z 的
+      Laurent 型展开、系数为全纯算子，是逐项比对的前提。
+  - id: worldsheet.operator-product-expansion
+    note: |
+      提供 OPE 本身（奇异项有限多、系数为局域算子）及其收敛域假定（原书 §2.2）。
+      围道积分与 OPE 逐项交换的合法性归到这里（gaps 第 1 条）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.24) → (2.4.25), p.48（一般 CFT：由 T 的变换律写出 TT OPE）；同一论证在自由标量情形是 (2.4.22) ⇄ (2.4.23), p.47–48"
+    note: |
+      【L1，researcher 第六轮】原书对一般 c 的情形只并列写出 (2.4.24) 与 (2.4.25)，
+      不展示代入 Ward 恒等式的中间步骤；自由标量情形则是反向——先由 (2.2.11) 算出 OPE (2.4.22)，
+      再「读出」变换律 (2.4.23)。本推导的 summary 是对这两处之间那一步的复述。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.11)–(2.4.12), p.45–46（T·𝒜 OPE 的各阶极点系数由 𝒜 的共形变换决定）；eq. (2.4.14), p.45（权 h 的 OPE 定义）"
+    note: 式号与页码经抽取记录 §12.4(e) 表（L1）核实；(2.4.12) 处原书逐字「the operators 𝒜^{(n)} are determined by the conformal transformation of 𝒜」。
+summary: |
+  设 T(z)T(0) 的奇异部分为 Σ_{n≥1} z^{−n} A_n(0)，A_n 是权 4 − n 的全纯局域算子。
+  按 Ward 恒等式，T 生成的共形变换 δz = εv(z) 作用在 T(0) 上给
+    ε^{−1} δT(0) ∝ Res_{z→0} v(z) T(z)T(0)
+                 = v(0) A_1 + ∂v(0) A_2 + ½∂²v(0) A_3 + (1/6)∂³v(0) A_4 + (1/24)∂⁴v(0) A_5 + … ，
+  其中把 v(z) 在 0 处 Taylor 展开、逐项取留数。v 是任意全纯函数，其各阶导数在一点的值
+  彼此独立，故上式与前提 (2.4.24)
+    ε^{−1} δT = −(c/12)∂³v − 2∂v T − v∂T
+  逐项比对（整体符号与 i 因子按 worldsheet.ward-identity 的约定吸收）得：
+    v   项：A_1 = ∂T            → (i) 一阶极点是 ∂T；
+    ∂v  项：A_2 = 2T            → (i) 二阶极点系数 2 = h_T；
+    ∂²v 项：(2.4.24) 中无此项  → A_3 = 0，即 (ii) 三阶极点缺席；
+    ∂³v 项：(1/6)A_4 = c/12     → A_4 = c/2，且是 c-数，即 (iii)；
+    ∂^{k}v，k ≥ 4：(2.4.24) 中无 → A_{k+1} = 0，即 (iv) 无高于四阶的极点。
+  合起来即 T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)，唯一自由参数是 c。
+
+  **(ii) 的独立交叉核对（本图补白）**：即使不预设 (2.4.24) 里没有 ∂²v 项，
+  玻色对称 T(z)T(w) = T(w)T(z) 也强制 A_3 = 0：把右端在 w 处重新展开，
+    Σ_n (z−w)^{−n} A_n(w) = Σ_n (−1)^n (z−w)^{−n} [A_n(w) + (z−w)∂A_n(w) + …] ，
+  比较 (z−w)^{−3} 阶得 A_3 = −A_3 + ∂A_4，即 2A_3 = ∂A_4；A_4 = c/2 为常数 ⇒ A_3 = 0。
+  这就是 v1 卡「三阶极点因 T 的对称性而缺席」的含义：它是 (iii) + 玻色对称的推论，
+  与「(2.4.24) 无 ∂²v 项」互相印证。
+gaps:
+  - "**前提 (2.4.24) 的一般性在来源中只是给出、未在此处论证**：原书 p.48 把它作为一般 CFT 中 T 的
+     变换律写下（c 为常数的论证在脚注 5：∂_a c = 0 + 「与位置无关的算子必为 c-数」），
+     但「反常项为何只有 ∂³v 一项、为何不含算子」的一般性论证抽取记录未转录。
+     本推导据此把 (2.4.24) 记为目标卡的**前提**而非结论。标准的补全论证是权计数 + 幺正性 +
+     真空唯一性（见目标卡 notes 末段），需要额外前提，本图未立卡。"
+  - "**围道积分与 OPE 逐项交换、Ward 恒等式的围道形式**：合法性依赖 OPE 在环域内收敛
+     （worldsheet.operator-product-expansion 所断言但未被证明的有限收敛半径），
+     以及 worldsheet.ward-identity 本身是路径积分论证（其有效状态为 physical-argument）。
+     这是本推导封顶在 physical-argument 的主因（lead 裁决 1，2026-09-10）。"
+  - "**原书不展示 (2.4.24) → (2.4.25) 的代入步骤**：summary 的逐项比对是本图对原书一句话跳步的复述
+     （docs/STATUS_LEVELS.md「断言 + 骨架」档位），未经 reviewer 独立复核；
+     Ward 恒等式的整体符号与 i 因子按 worldsheet.ward-identity 的未定约定处理，本推导只用逐项对应的结构。"
+  - "**「一般两算符 OPE 由共形对称性完全决定」的一般原理**在原书 §2.4 (2.4.20) 下方只断言、推迟到
+     Vol.2 第 15 章；本推导不依赖该一般原理（只对 𝒜 = T 做了显式计算），故不挂边，但目标卡的
+     title 措辞「由共形不变性完全确定」与该原理同源，读者须知一般版本本处无证明。"
+notes: |
+  由 curator-small-backlog-3 于 2026-09-11 建立，配合 worldsheet.tt-ope-central-charge（v1）
+  的拆分：v1 的 statement 把本命题当作定义的一部分写下，没有推导；本推导是本图第一次
+  把「TT OPE 为什么长这样」单独记账。
+
+  **为什么不是 rigorous**：gaps 第 1、2 条——前提 (2.4.24) 的一般性与围道/OPE 收敛都未证明，
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款第一条「前提已完整写出」在收敛性这一层不满足。
+
+  **下游改指本卡的推导**（换代时判定为「用命题半」）：
+    worldsheet.conformal-ordered-modes-satisfy-virasoro--via-ope-contour（把 (2.4.25) 的三个极点逐个围道变形）、
+    worldsheet.schwarzian-transformation-of-t--via-ope（由 (2.4.25) 的极点结构反读变换律，是本推导的逆向）、
+    worldsheet.rns-superconformal-ope--via-wick-contractions（用「二阶极点 = 2、一阶极点 = ∂T」核对 T_BT_B 的结构）。
+  ⚠ schwarzian-transformation-of-t--via-ope 与本推导互为逆向（OPE ⇄ 变换律），两者都以
+  worldsheet.ward-identity 为转换器；本推导把 (2.4.24) 当前提、那条把 (2.4.25) 当前提，
+  **不构成环**（本推导的目标是极点结构，那条的目标是有限变换律）。
+author: curator-small-backlog-3
+created: "2026-09-11"

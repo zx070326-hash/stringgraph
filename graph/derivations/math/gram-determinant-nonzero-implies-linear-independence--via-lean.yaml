@@ -1,0 +1,59 @@
+id: math.gram-determinant-nonzero-implies-linear-independence--via-lean
+target: math.gram-determinant-nonzero-implies-linear-independence
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/GenericIndependence.lean :: StringFormal.{gramMatrix, gramMatrix_apply, vecMul_gramMatrix_eq_zero, linearIndependent_of_gram_det_ne_zero}（节 `GramIndependence`，文件第 80–118 行附近）"
+    note: |
+      本仓库，形式化侧分支 agent/formalizer/generic-pbw（该文件最后一个提交 **f4df390**），
+      由 lead 以 **ff1a7d6** 合入 main；Lean 4 + Mathlib v4.33.1，**无 sorry**。
+      本推导不新增 Lean 代码，只做图侧接线。目标声明全文：
+
+          theorem linearIndependent_of_gram_det_ne_zero [NoZeroDivisors R]
+              (B : M →ₗ[R] M →ₗ[R] R) (v : ι → M)
+              (hdet : (gramMatrix B v).det ≠ 0) : LinearIndependent R v
+
+      在变量 `{R M ι : Type*} [CommRing R] [AddCommGroup M] [Module R M] [Fintype ι]
+      [DecidableEq ι]` 之下。**没有** `[Field R]`、序、有限维、对称性假设。
+      公理检查由 formalizer 跑过（formal/TODO.md 的 `pbw-verma` (b) 项，2026-09-11）：
+      只用 propext / Classical.choice / Quot.sound。**curator 未自行重跑 `lake build`**。
+summary: |
+  纯线性代数，两步，逐字照 Lean 的两条声明：
+
+  **第 1 步（目标 (1)）`vecMul_gramMatrix_eq_zero`。** 设 Σ_i g_i • v_i = 0。对每个 j：
+
+      0 = B(0, v_j) = B(Σ_i g_i • v_i, v_j) = Σ_i g_i · B(v_i, v_j) = (g ᵥ* Gram(B,v))_j 。
+
+  Lean 里就是 `map_sum` + `LinearMap.map_smul` + `LinearMap.sum_apply` 之后
+  `simpa [Matrix.vecMul, dotProduct]`。**只用 B 对第一个变量线性**，
+  不用对称性、不用 R 无零因子，也不用 ι 有限之外的任何有限性。
+
+  **第 2 步（目标 (2)）`linearIndependent_of_gram_det_ne_zero`。**
+  由 `Fintype.linearIndependent_iff`，要证的是「∀ g，Σ_i g_i • v_i = 0 ⇒ ∀ i, g_i = 0」。
+  取定这样的 g，第 1 步给 g ᵥ* Gram(B,v) = 0；由 Mathlib 的
+  `Matrix.eq_zero_of_vecMul_eq_zero`（前提：det ≠ 0，基环 `[NoZeroDivisors R]`）得 g = 0，
+  再 `congrFun` 取分量。∎
+
+  **两处值得记下的边界**（已写进目标的【不断言】）：
+  · 第 2 步是把 det ≠ 0 用作「Gram 矩阵的左零化子为零」，这在**整环**上成立；
+    有零因子时该推理失效（行列式非零的矩阵可以有非零左零化子）。
+  · 整个论证**不**可逆：det = 0 时第 1 步什么也不给（它只是必要条件的来源），
+    故不能由 det = 0 推出存在非零的 g。目标 notes 里给了 Virasoro 侧的显式反例
+    （c = 1, h = 1/4：det = 0 而向量独立，退化的是型）。
+notes: |
+  **status: formalized 的依据**：目标 (1)(2) 各由一条无 sorry 的 Lean 声明逐字承载，
+  且这两条声明的假设与目标陈述的假设逐字一致（整环、ι 有限、B 任意双线性）。
+  **depends_on 为空是诚实的**：本命题不依赖本图中的任何其他节点——它用到的
+  `Matrix.eq_zero_of_vecMul_eq_zero` 与 `Fintype.linearIndependent_iff` 是 Mathlib 的内容，
+  本图不为 Mathlib 的基础线性代数建节点（与 math.e8-root-system-power-sums--via-lean、
+  math.euler-partition-generating-function--via-lean 的同一做法）。
+  `validate` 会因此报一条 "derivation has no dependencies" 的 **warning**，属预期。
+
+  **下游**：worldsheet.verma-level-basis-generic-low-levels（N ≤ 4 的泛型 PBW 替代）
+  把本卡与已算出的 level-2/3/4 Kac 行列式拼起来。那里用的是本卡的 (2)，
+  且必须同时引用本卡【不断言】(a)：Kac 零点处本判据不给信息，
+  那不等于向量相关（真正的 PBW 仍未形式化，见 math.verma-module-free-over-negative-part）。
+author: curator
+created: "2026-09-11"

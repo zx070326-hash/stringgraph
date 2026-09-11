@@ -1,0 +1,126 @@
+id: swampland.heterotic-t6-substates-below-extremality-v2--via-charge-lattice
+target: swampland.heterotic-t6-substates-below-extremality-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.extremality-normalization
+  - id: swampland.heterotic-t6-extremal-nonrotating-mass-formulas
+    inferred: true
+    convention_map: |
+      ★★ **不存在**——这是本边标 inferred 的全部理由。
+      被依赖卡（Sen hep-th/9411187）**不声明 α'、G_N、M_Pl 中的任何一个**，因此本图**没有**给它挂
+      任何 α' 族约定；本卡（AMNV）用的是 conv.amnv-2006-units（α' = 4、M_Pl = 1）。
+      **两篇原文都不给换算**：即便把 M_Pl² := 1/G_N 使**质量侧**对上（Sen 的 M 按
+      `g^E_tt → −(1 − 2M/ρ)` 读出即 G_N = 1，但这条读数规则是抽取者复算、原文没写；
+      AMNV 也不声明 M_Pl 的定义是 1/G_N 还是 1/(8πG_N)），**电荷侧仍无法闭合**：
+      Sen 的 Q 是连续参数 (2.40)，从不与任何格点归一化挂钩；AMNV 的 Q 受其 (21) 的 28 维
+      偶自对偶格条件约束。记账位置：conv.sen-1995-normalization 的 notes。
+    note: >-
+      供给黑洞侧的 (22)(23)：**AMNV (22) = Sen (2.60)（Case II）、AMNV (23) = Sen (2.56)（Case I）**，
+      以及本卡 v2 新增的两个前提 (P1) a = 0、(P2) m → 0 保 M 固定。
+      **标 inferred 的理由见 convention_map**：两侧量的同一性在两篇原文中都没有依据。
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14"
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2：**(2.60), p.11**（= AMNV (22)）；**(2.56), p.10**（= AMNV (23)）；(2.64), p.11（Case III，AMNV 未引）；(2.52) 之前的公共设定（a = 0；m → 0 保 (2.38) 的 M 固定）；p.11 无式号一段（J ≠ 0 的极端黑洞从不饱和 Bogomol'nyi 界）"
+    note: |
+      ★★ **L1 全文核实（researcher 2026-09-11 逐页读 v3，21 页全覆盖）**，抽取记录
+      literature/extractions/sen-1995-bh-torus.md **E8、E9、E11、§1.1–§1.3**。
+      **v1 推导里「本项目未抽取（L0）、loc 只到篇级」的说法已作废。**
+      ⚠⚠ **弦谱 (24) 与电荷格 (21) 绝不得挂本条**：Sen 全文**没有杂化弦质量公式**
+      （§4 只给态密度 (4.4)，且自称是 "some amusing coincidences"），
+      **也没有电荷格的量子化条件**（只在 p.4 提了一句 Λ 存在并引 Narain [7]）。
+  - ref: sen-1995-bh
+    loc: "arXiv:hep-th/9504147v2, p.6 与 References [7], p.15"
+    note: >-
+      ⚠⚠ **不是 (22)(23) 的出处**；只承载"9504147 自己也把黑洞解引给 9411187"这一 L1 交叉核实。
+      其归一化（α' = 16、G_N = 2、T = g²/32π，见 conv.sen-1995-normalization）与本推导用的
+      AMNV α' = 4、M_Pl = 1 不同，两篇都不给换算，**其任何系数都不得搬进本推导**。
+summary: |
+  论证是一个格论比较（M_Pl = 1，α' = 4）：
+  1. 电荷落在 28 维偶自对偶格上，Q_L² − Q_R² ∈ 2Z（AMNV (21)）；
+  2. **非转动**极端黑洞（Sen 1995，(P1) a = 0、(P2) m → 0 保 M 固定）：
+     Q_R² > Q_L² 时 BPS，M² = ½Q_R²（AMNV (22) = Sen (2.60)）；
+     Q_L² > Q_R² 时非 BPS 但极端，M² = ½Q_L²（AMNV (23) = Sen (2.56)）；
+  3. 微扰杂化弦谱：M² = ½Q_R² + N_R = ½Q_L² + N_L − 1（AMNV (24)，−1 来自左移玻色弦快子）；
+  4. 由于格上存在 Q_L² − Q_R² = 2 的电荷矢量，取 N_L = 0 即得一个质量为
+     M² = ½Q_R² = ½Q_L² − 1（AMNV (25)）的态，比同电荷的极端黑洞轻。
+
+  原文措辞是 AMNV 全文最强的正面措辞："the string spectrum also guarantees that … we are
+  guaranteed to find a state with a mass/charge ratio smaller than for extremal BH's"。
+
+  **相对 v1 推导的实质改动**：第 2 步的两个前提由 Sen 的一手正文补回（AMNV 两个都没写），
+  并把「Sen 的 (M, Q_L, Q_R)」与「AMNV 的 (M, Q_L, Q_R)」之间那座**在两篇原文中都不存在的
+  归一化桥**从"未记录"升级为一条显式的 inferred 边 + convention_map + gaps。
+gaps:
+  - |
+    ★★ **Sen ↔ AMNV 的电荷归一化桥在两篇原文中均不存在**（本推导的首要缺口）。
+    Sen hep-th/9411187 **全文不出现 α'、M_Pl、Newton 常数、弦耦合**（21 页逐页核实的否定结论），
+    其作用量 (2.3) 的整体常数 C 作者自述 "arbitrary … can be absorbed into the dilaton"；
+    M 与 Q 只能按 `g^E_tt → −(1 − 2M/ρ)`、`F^{(a)}_{ρt} → Q^{(a)}/ρ²` 从渐近行为读出，
+    **这两条读数规则原文一个字都没写**（`[抽取者复算]`）。
+    AMNV 侧自称 `M_Pl = 1`、`α' = 4`，但**不声明 M_Pl 的定义**（1/G_N 还是 1/(8πG_N)），
+    其 Q 受 (21) 的偶自对偶格条件约束。**两篇都不给换算。**
+    ⇒ 质量侧至多能在补两个原文都没有的约定后对上；**电荷侧完全无法闭合**
+    （Sen 的 Q 是连续参数，从不与格点归一化挂钩）。
+    ⇒ **这不是 Sen 的缺口，也不是 AMNV 的缺口，而是两篇拼接处的缺口**
+    （抽取记录 §1.3、Q1；arkani-hamed-2006 的 Q2）。
+  - |
+    ★ **AMNV 丢掉了 Sen 的两个前提**（本卡 v2 补回，但补回这一步本身依赖 Sen 的一手正文，
+    AMNV 侧无任何对应文字）：(P1) `a = 0`（非转动）、(P2) `m → 0` 且保持 (2.38) 的 M 固定。
+    且 Sen p.11 逐字："the extremal black holes carrying **non-zero angular momentum do not
+    correspond to supersymmetric solutions**"，并指出 `J ≠ 0` 时 `M²` 恒大于 `Q⃗_R²/2`
+    （即便在极端极限 `a → m` 下）。
+    ⇒ **AMNV §4 的论证若被读成对一般（含转动）极端黑洞成立，则是错的**；本卡限定在 J = 0。
+  - |
+    ★ **AMNV 的两式不覆盖 Q_L² = Q_R²**：(22)(23) 用严格不等号 `Q_R² − Q_L² > 0` /
+    `Q_L² − Q_R² > 0` 划分，恰好把边界情形排除。该情形是 Sen 的 **Case III (2.64)**
+    `M² = ½Q⃗_L² = ½Q⃗_R²`，且 Sen p.11 说它**也**饱和 Bogomol'nyi 界。**AMNV 从未引用 Case III。**
+  - |
+    **「BPS」这一判定本身不在本推导内**：AMNV (22) 称之为 BPS，其依据是 Bogomol'nyi 界
+    `M² ≥ Q⃗_R²/2`。该界在 Sen 文中**只是引用**（p.11，外包给 [24][25]，本文不证），
+    本图已单列为 swampland.heterotic-t6-bps-bound（其 gaps 记明四篇被引文献本项目一篇未读）。
+    本推导**不依赖**它——(25) 的论证只用 (21)(23)(24) 的算术——故不建边；
+    但凡有人要用「(22) 是 BPS 饱和」作论据，必须接那张卡。
+  - |
+    **极端黑洞解 (2.29)–(2.37) 本身 Sen 只说 "straightforward algebraic exercise"、不展示**，
+    守恒量 (2.38)–(2.41) 的引出句是 "One can easily verify"。
+    本项目未独立复算（抽取记录 U4）。⇒ 黑洞侧的 status 上限是 physical-argument。
+  - |
+    **杂化弦谱 (24) 的推导（含 −1 的来源）AMNV 原文不给，只给结果**；本图无对应的杂化弦谱节点。
+    ⚠ **(24) 不得挂 sen-1995-bh-torus**：Sen 全文没有杂化弦质量公式（抽取记录 E11 备注 1）。
+  - |
+    **电荷格条件 (21) `Q_L² − Q_R² ∈ 2Z` 只有 AMNV 一个来源**。
+    ⚠ **不得挂 sen-1995-bh-torus**：Sen 只在 p.4 (2.7) 之后提了一句「the 28 dimensional lattice
+    Λ of electric charges」并引 Narain [7]，**无量子化条件、无偶自对偶**（抽取记录 §1.1）。
+  - |
+    **α' = 4 与本图 canonical 的 conv.alpha-prime-regge 不是同一归一化**；此处未建换算，
+    凡把本卡接到用 conv.alpha-prime-regge 的节点上必须写 convention_map。
+  - |
+    **[抽取者复算]**：由 (24) 取 N_L = 0、Q_L² − Q_R² = 2 得 N_R = 0 且 M² = ½Q_L² − 1，
+    与 (25) 一致——该复算 AMNV 原文未显式写出（arkani-hamed-2006#E22 备注 1），属 inferred。
+  - |
+    **只覆盖 SO(32) 杂化弦 on T⁶ 的一般模空间点**；对其他背景无说法
+    （另一条独立证据见 swampland.heterotic-spectral-flow-substates）。
+notes: |
+  from: arkani-hamed-2006#E22 + literature/extractions/sen-1995-bh-torus.md E8、E9、E11、§1.1–§1.3、Q1–Q3。
+
+  【★ 本推导与 v1 推导（swampland.heterotic-t6-substates-below-extremality--via-charge-lattice）
+  的关系】v1 推导按 docs/STATUS_LEVELS.md「旧推导的去留」保留作历史，**不再更新**；
+  本推导是它的换代版，改动有三：
+  (1) **loc 由篇级升为式号级**（Sen (2.56)/(2.60)/(2.64) 与页码，L1 全文核实）；
+  (2) **新增一条 inferred 边** depends_on swampland.heterotic-t6-extremal-nonrotating-mass-formulas，
+      并在 convention_map 里写死「Sen↔AMNV 的归一化桥不存在」；
+  (3) **gaps 重写**：v1 的第一条（"Sen 未抽取，L0，黑洞侧只有转述级"）已作废；
+      换成拼接处的归一化缺口、AMNV 丢失的两个前提、以及 (21)(24) 不得挂 Sen 的两条红线。
+
+  【⚠ Figure 4 图题把 "mass" 印成 "charge"】AMNV 原文排印错误。
+
+  【researcher 建议但本轮未建的东西】sen-1995-bh（9504147）的实质内容（拉伸视界假设、
+  Bogomol'nyi 关系 (24)、BPS 态简并 (46)(47)、熵匹配 (48)(49) 与 C = 4）应另建一个独立的
+  BPS/黑洞对应小簇，**不挂到 swampland 主线**（该文没有任何弱引力猜想形式）。
+  另建议：`swampland.heterotic-t6-general-rotating-charged-solution`（28 参数解本身）与
+  `swampland.heterotic-t6-rotating-extremal-not-susy`（J ≠ 0 从不饱和界）。已在报告中提请 lead 排期。
+author: curator
+created: "2026-09-11"

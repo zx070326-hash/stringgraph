@@ -1,0 +1,72 @@
+id: worldsheet.tt-ope-central-charge-v2
+kind: definition
+status: rigorous
+title: 中心荷 c 的定义：TT 算子乘积展开四阶极点的系数（v2：纯定义，极点结构的确定性拆出）
+statement: |
+  设 T(z) 是二维共形场论的全纯能动张量，并设其与自身的算子乘积展开取如下形式
+    T(z) T(0) ∼ c/(2 z^4) + (2/z^2) T(0) + (1/z) ∂T(0),
+  其中 c 是一个常数。则称 c 为该理论的**中心荷**（反全纯部门同理给出 c̄）。
+  换言之，c 是 T(z)T(0) 展开中 z^{-4} 项系数的两倍；本卡是「中心荷」在本图中的定义点。
+
+  **本卡只定义，不断言。** 上式右端的形状——二阶极点的系数为 2、一阶极点为 ∂T、
+  无三阶极点、无高于四阶的极点、四阶极点是不含算子的 c-数——在本卡中是**被假定的形式**，
+  不是被论证的结论。「这一形状由共形不变性完全确定、唯一自由参数就是 c」是一条独立的命题，
+  见 worldsheet.tt-ope-pole-structure-from-conformal-invariance。
+
+  归一化：本式与 conv.virasoro-standard 相容，即由此定义的 c 与 Virasoro 代数
+  [L_m, L_n] = (m-n)L_{m+n} + (c/12) m(m^2-1) δ_{m+n,0} 中的 c 是同一个数，
+  从而单个自由玻色子给 c = 1。
+uses:
+  - worldsheet.traceless-holomorphic-energy-momentum
+  - worldsheet.operator-product-expansion
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.25), p.48（一般 c 的 TT OPE：T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)）；中心荷 c 在 (2.4.24) 首次定义（ε^{−1}δT(z) = −(c/12)∂³_z v − 2∂_z v T − v∂_z T）；自由标量的特例是 (2.4.23) 与 (2.4.22)"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）——式号落定】
+      §2.4 末尾五式全部 L1：
+        (2.4.22) 自由标量的 TT OPE，四阶极点显式为 D/2z⁴（→ worldsheet.free-boson-central-charge-d）
+        (2.4.23) ε^{−1}δT(z) = −(D/12)∂³_z v − 2∂_z v T − v∂_z T （自由标量特例）
+        (2.4.24) 同式换成一般 c —— **c 在此首次定义**
+        (2.4.25) **本节点陈述的 TT OPE**，系数 c/2、2、1 逐字一致
+        (2.4.26) 有限形式 (∂_z z')²T'(z') = T(z) − (c/12){z',z}
+        (2.4.27) Schwarzian 导数的定义
+      即原书**先**用 T 的变换律定义 c（(2.4.24)），**再**把它写成 TT OPE（(2.4.25)）；
+      本节点把 OPE 取作定义点，与原书的顺序相反但内容等价（(2.4.24) ⇔ (2.4.25) 由围道字典）。
+      **不得**声称本节点的 OPE 是原书的「中心荷定义式」——原书的定义式是 (2.4.24)。
+
+      「中心荷是常数」（∂_a c = 0）在原书 p.48 (2.4.24) 之后有一条 CFT 内部的论证（脚注 5），
+      与 §3.4 (3.4.31) 的 Wess–Zumino 论证是两条不同的论证；本图目前只有后者立卡
+      （worldsheet.weyl-anomaly-central-charge-constant），**两条不要合并**。
+
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E33/E34）与 §12.10 表 B 第 6 项。
+tags: [cft, central-charge, ope, energy-momentum-tensor, definition]
+notes: |
+  **v2 换代说明**（curator-small-backlog-3，2026-09-11；reviewer-ch23 与 small-backlog-2 两次指出）：
+  v1（worldsheet.tt-ope-central-charge）的 statement 在定义 c 之余还内嵌了一条命题
+  「二阶与一阶极点的系数（2 与 1）由 T 自身是权 (2,0) 算子这一事实固定；
+  三阶极点因 T 的对称性而缺席」。按 docs/STATUS_LEVELS.md 的定义传播裁决
+  （定义卡不该承载需要论证的断言），本卡只保留**定义**那一半，把命题那一半拆到
+  worldsheet.tt-ope-pole-structure-from-conformal-invariance（proposition，physical-argument）。
+  随之 `uses` 去掉 worldsheet.primary-field-v2（「T 是权 (2,0) 算子」只有命题半才用到）。
+  归一化段落与来源逐字未动。
+
+  **哪些下游用定义半、哪些用命题半**（换代时逐条判定，见各推导的 depends_on note）：
+    · 用定义半（改指本卡）：所有「算出某个具体理论的 TT OPE，再与 c/(2z⁴) 比对读出 c」的推导
+      （free-boson-central-charge-d、bc-ghost-central-charge、beta-gamma-central-charge、
+      linear-dilaton-central-charge、rns-matter-central-charge、superconformal-ghost-central-charge、
+      sugawara-central-charge），以及只用 c 的定义/加性/归一化的推导
+      （brst-current-primary-iff-total-central-charge-zero、cylinder-plane-l0-shift、weyl-anomaly-trace）。
+    · 用命题半（改指新命题卡）：把 (2.4.25) 的**全部**极点结构当作输入去推别的东西的推导
+      （conformal-ordered-modes-satisfy-virasoro--via-ope-contour、schwarzian-transformation-of-t--via-ope、
+      rns-superconformal-ope--via-wick-contractions 中「二阶极点 = 2、一阶极点 = ∂T」那一半）。
+
+  本节点与 conv.virasoro-standard 的关系：约定节点固定 Virasoro 代数的归一化，本节点给出
+  同一个 c 的 OPE 刻画，两者的一致性由 worldsheet.ope-commutator-dictionary（围道变形字典）建立。
+  中心荷不随共形变换改变、且是常数这一点另有节点：
+  worldsheet.weyl-anomaly-central-charge-constant（Wess–Zumino 相容性）。
+author: curator-small-backlog-3
+created: "2026-09-11"

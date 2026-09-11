@@ -12,8 +12,10 @@ depends_on:
       worldsheet.primary-field-v2。v2 只把 statement 里错误的非主场例子「X^μ」换成「∂²X^μ」
       并加了一段「本定义相对哪个 CFT 而言」；权的定义、主场判据、有限变换律逐字未动，
       故换代不改变本推导的论证与状态。
-  - id: worldsheet.tt-ope-central-charge
-    note: "提供 T(z)T(w) OPE 中的 c/2·(z−w)^{−4} 项，是三阶极点系数正比于 c^tot 的来源。"
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。本推导用的是**定义半**（c = TT OPE 四阶极点系数的两倍、及其与 conv.virasoro-standard 的归一化），故改指 v2；论证与有效状态不变。
+      提供 T(z)T(w) OPE 中的 c/2·(z−w)^{−4} 项，是三阶极点系数正比于 c^tot 的来源。
   - id: worldsheet.bc-ghost-central-charge
     note: "提供 c^g = −3(2λ−1)² + 1 = −26（λ = 2），把 c^tot = c^m + c^g 写成 c^m − 26。"
   - id: worldsheet.operator-product-expansion

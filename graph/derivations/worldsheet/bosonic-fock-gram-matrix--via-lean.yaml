@@ -1,0 +1,155 @@
+id: worldsheet.bosonic-fock-gram-matrix--via-lean
+target: worldsheet.bosonic-fock-gram-matrix
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      **承载被断言的一切对象与三条「在本卡里是定理」的事实**。该卡的 formal.lean_decl
+      `StringFormal.NoGhost.Fock` 就是本推导里的 F(D,R)（`MvPolynomial (Osc D) R` 的 abbrev），
+      其 source loc 已登记本推导逐字调用的声明：
+        · `Fock.creation` / `Fock.annihilation` / `Fock.vacuum` / `Fock.oscWeight`
+          —— 陈述 (0)(1)(2) 里的 α^μ_{−n}、α^μ_n、|k⟩ 与因子 n η^{μμ}；
+        · `Fock.lie_creation_creation`（配套 `Fock.creation_creation_comm`）
+          —— (0) 的次序无关性（即那张 DDF 卡的 (H1) 在此是定理，见目标【不断言】(a)）；
+        · `Fock.lie_annihilation_creation` —— 对易子 [α^μ_m, α^ν_{−n}] = (m η^{μμ}) δ^{μν} δ_{mn}，
+          Leibniz 步 (1) 的系数就是它；
+        · `Fock.annihilation_vacuum` —— α^μ_n|k⟩ = 0（那张 DDF 卡的 (H3) 在此是定理）；
+        · `Fock.level` / `levelSubmodule` —— (0) 末句的 level 归属
+          （`creationMonomial_mem_levelSubmodule`）；
+        · F 作为 R-模在单项式上**自由**（该卡陈述「Osc(D) 上的自由交换 R-代数」）
+          —— 这是 (4) 线性无关的**唯一**来源（Lean 侧 `MvPolynomial.basisMonomials`）。
+      ⚠ 该卡是 status: formalized 的定义卡，不压低本推导状态。
+      ⚠ 量词对照：该卡与 Lean 都用 n ≥ 1（`ℕ+`）标产生算符，与目标陈述逐字一致，无放宽。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      **把「任意满足 (H2)(H3)(H4) 的 B」归约到那一个型**。目标 (2) 的 Lean 证明
+      `pairing_creationMonomial_of_hypotheses` 的第一步就是 `rw [pairing_unique η B hvac hleft hright]`，
+      即该卡 (1) 的唯一性：满足 (H4) 真空归一化与 (H2)(H3) 互伴的 R-双线性型至多一个，
+      故 B = `Fock.pairing η`，随后 (2) 化为对角那条 `pairing_creationMonomial`。
+      该卡的 formal.lean_decl 正是 `StringFormal.NoGhost.Fock.pairing_unique`，逐字对上。
+      同时该卡的 (2) 给出 `Fock.pairing` 上的同一对角公式（`pairing_monomial_monomial`），
+      本推导第 2 步把它与 `creationMonomial_eq_monomial` 拼起来；
+      (3b) 的正定证明用的是该卡的型在单项式支撑上的展开（Lean 侧 `pairing_apply`）。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+      ⚠ 目标 (3b) 里「⟨·,·⟩ 是 (2) 的型（由该卡 (1) 它唯一存在）」这句话的**存在性**一半
+      也来自该卡：本推导不另证存在性。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/FockGram.lean（全文；主声明 StringFormal.NoGhost.Fock.pairing_creationMonomial_of_hypotheses）；依赖 formal/StringFormal/NoGhost/Fock.lean :: Fock.{pairing_unique, pairing_monomial_monomial, pairing_creation_left, pairing_creation_right, pairing_one_one, pairing_apply, creation_creation_comm, lie_annihilation_creation, annihilation_vacuum, monomialNorm, oscWeight}"
+    note: |
+      形式化侧提交 **f3603a1**（分支 agent/formalizer/fock-gram，"formal: Fock-space Gram matrix
+      of creation monomials (orthogonal, diagonal prod n^d d!)"；同分支前两个提交
+      87f5e0a「ordering independence (H1)」与 11021c3「positivity and linear independence」），
+      由 lead 以 **05afdea** 合入 main。Lean 4 + Mathlib v4.33.1，**无 sorry**。
+      公理检查由 formalizer 跑过：`--import StringFormal.NoGhost.FockGram --all`，
+      25 条声明全部 ok，仅 propext / Classical.choice / Quot.sound
+      （formal/TODO.md 的 `fock-gram` 项，2026-09-11）。
+      **curator 未自行重跑 `lake build` 与 `check-axioms`**；按项目纪律合并含 formal 改动的分支
+      时由 lead 跑。本推导不新增 Lean 代码，只做图侧接线。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124"
+    note: |
+      文献侧只有 |d| = 1 的实例（单振子态范数 ∝ η^{μμ}），**不承载本推导**。
+      一般 d 的 Gram 矩阵在教科书里被当作自由振子的标准事实直接使用而不被陈述与证明；
+      本推导的论证是 Lean 侧的机器证明，不是对任何文献段落的复述。
+summary: |
+  本推导是**图侧接线**：目标陈述的每一条都由 formal/StringFormal/NoGhost/FockGram.lean 中
+  一条无 sorry 的 Lean 定理逐字承载（对应表见目标卡的 stringformal-2026 source note）。
+  Lean 证明的骨架（与那条 DDF 条件命题
+  worldsheet.transverse-ddf-fock-gram-matrix--via-oscillator-recursion 的手写归纳逐步同构）：
+
+  **第 0 步（对象）。** `creationMonomial R d := d.prod fun v k => (X v)^k`，
+  并证 `creationMonomial_eq_monomial : creationMonomial R d = monomial d 1`
+  （`MvPolynomial.prod_X_pow_eq_monomial`）。由此 `creationMonomial_zero`（d = 0 给真空）与
+  `creationMonomial_add_single : |{d + 1_v}⟩ = creation R v.1 v.2 |{d}⟩`（用 `creation_monomial`），
+  即目标 (0) 的递归刻画。次序无关性是 **`foldr_creation_vacuum`**：
+  对任意列表 l 与任意 d，若 `∀ v, l.count v = d v`，则 `l.foldr creation (vacuum) = creationMonomial R d`；
+  证明是对 l 归纳，用 `Finsupp.tsub_apply` / `single_eq_same` 把 `List.count` 的记账与 `d − 1_a` 对上，
+  **交换性来自多项式乘法交换**（`commute_creation`，即 `Fock.creation_creation_comm`），
+  这就是目标 (0) 说的「与因子次序无关」。level 归属是 `creationMonomial_mem_levelSubmodule`
+  （单项式的支撑是单点 {d}，其 level 为 Σ n·d(μ,n)）。
+
+  **第 1 步（Leibniz，目标 (1)）。** `annihilation_creationMonomial`：把 `annihilation` 展成
+  `oscWeight η v • pderiv v`（定义），再用 `MvPolynomial.pderiv_monomial`，得
+
+    α^μ_n |{d}⟩ = (oscWeight η (μ,n) · d(μ,n)) • |{d − 1_{(μ,n)}}⟩,   oscWeight η (μ,n) = n · η^{μμ}。
+
+  「只有与 α^μ_n 同标签的那 d(μ,n) 个产生算符贡献、每个贡献 n η^{μμ}」在这里由偏导数的
+  幂法则一步给出——这正是手写证明里「对易子是中心的，故 Leibniz 展开只剩收缩项」那段的机器版本。
+  配套 `annihilation_creationMonomial_add_single`（系数 n η^{μμ}(d(μ,n)+1)）与
+  `annihilation_creationMonomial_of_apply_eq_zero`（d(μ,n) = 0 时为 0，含真空被湮灭的情形）。
+
+  **第 2 步（条件 Gram 矩阵，目标 (2)）。** 两小步：
+  (i) **对任意 B 的归约**：`pairing_creationMonomial_of_hypotheses` 的假设是
+      `hvac : B |k⟩ |k⟩ = 1`(H4)、`hleft : ∀ μ n P Q, B (creation P) Q = B P (annihilation Q)`(H2)、
+      `hright : ∀ μ n P Q, B P (creation Q) = B (annihilation P) Q`(H3)；
+      第一步 `rw [pairing_unique η B hvac hleft hright]` 把 B 换成 `Fock.pairing η`
+      （worldsheet.fock-indefinite-form 的 (1)：这三条假设唯一确定该型）。
+  (ii) **对角那条**：`pairing_creationMonomial` = `pairing_monomial_monomial` 在
+      `creationMonomial_eq_monomial` 下的重写，给
+      `pairing η |{d}⟩ |{e}⟩ = if d = e then monomialNorm η d else 0`，
+      其中 `monomialNorm η d = d.prod fun v k => oscWeight η v ^ k * k !` 就是目标的 G(d)。
+      递推步本身（由 (H2)/(H3) 加第 1 步得到）单列为 `pairing_creationMonomial_add_single`。
+      η ≡ 1 的字面形由 `monomialNorm_one` / `pairing_creationMonomial_one` 给出：
+      `∏ n^{d(μ,n)} · d(μ,n)!`，即目标 (2) 末句。
+  注意 (ii) 在 Lean 里廉价（`Fock.pairing` 按单项式基对角地**定义**），
+  **数学内容在 (i)**；这是目标卡 formal.lean_decl 填 `_of_hypotheses` 的理由。
+
+  **第 3 步（正定，目标 (3)）。** `monomialNorm_pos`：在 `[PartialOrder R] [IsStrictOrderedRing R]`
+  与 `∀ μ, 0 < η μ` 下，`Finset.prod_pos` 把 G(d) > 0 化为逐因子
+  `pow_pos (mul_pos (n > 0) (η > 0))` 与 `Nat.factorial_pos`。
+  由它得 `pairing_creationMonomial_self_pos`（对角元为正，目标 (3a)），
+  再由 **`pairing_self_pos_of_ne_zero`** 得整空间正定（目标 (3b)）：
+  在 `[LinearOrder R]` 下把 `pairing_apply` 展成支撑上的和 Σ_{d ∈ support P} c_d · G(d) · c_d，
+  用 `mul_self_pos` 与 `Finset.sum_pos`（支撑非空 ⟸ P ≠ 0，`support_eq_empty`）。
+  ⚠ Lean 侧 (3a) 只需偏序，(3b) 只需全序 + 严格有序环，**都不需要域**；目标陈述写的
+  「严格有序交换环」已按此措辞，比「有序域」弱。
+
+  **第 4 步（线性无关，目标 (4)）。** `basisMonomials_eq_creationMonomial` 说
+  `MvPolynomial.basisMonomials (Osc D) R` 的底层函数**就是** `creationMonomial R`，
+  于是 `linearIndependent_creationMonomial` 直接是该基的 `linearIndependent`。
+  **对任意交换环成立**，且完全不经过型——这是目标 (4) 与 (f) 能并存的原因。
+
+  **第 5 步（特征零边界，目标 (f)）。** `monomialNorm_single` 给
+  `monomialNorm η (single v k) = oscWeight η v ^ k * k !`；代入 R = ZMod 2、η ≡ 1、v = (1,1)、k = 2
+  得 `pairing_creationMonomial_self_eq_zero_zmod_two`：`(α^1_{−1})²|k⟩` 的模 = 1^2 · 2! = 2 = 0
+  （`Nat.factorial_two` + `decide`）。该向量非零（它是一个单项式，由第 4 步线性无关），
+  故型在其上退化：**「对角元是正整数故非零」这一步默默用了特征零**。
+gaps:
+  - |
+    **(i) 只是单个动量上的协变振子 Fock 空间，不是 DDF 版本。** 目标卡与本推导都**不**触及
+    A^i_n 与动量塔；worldsheet.transverse-ddf-fock-gram-matrix 仍未形式化
+    （A^i_n 已有 Lean 定义 `StringFormal.NoGhost.ddfOp`，但那张卡要的是**塔上**的型
+     与 A^i_{−n} 单项式，两者尚未在 Lean 中同时具备）。本推导不关闭那张卡的 gap (iv)。
+  - |
+    **(ii) 「†」是双线性型的转置，不是 Hermitian 共轭；复情形未做。** 与
+    worldsheet.fock-indefinite-form 的推导 --via-lean 的同一条 gap
+    （目标【不断言】(g) 已登记）。(3b) 的 Hermitian 版本（Σ |c_d|² G(d) > 0）在 Lean 中没有。
+  - |
+    **(iii) 零模缺失。** 继承 worldsheet.bosonic-fock-space 的缺口 (i)：没有 x^μ、p^μ、α^μ_0，
+    动量 k 只是标签。因此目标不能直接当作「物理态空间上的内积」用；
+    接到物理态需经 worldsheet.old-covariant-physical-states 一线。
+  - |
+    **(iv) (2) 的假设集自洽性由 F 上的实例保证，但「(H2)(H3)(H4) 在物理内积上成立」不在本推导内。**
+    Lean 侧 `Fock.pairing` 满足三条（`pairing_one_one`、`pairing_creation_left/right`），
+    故假设非空洞；但那是关于**这个**代数型的陈述，不是关于复 Hilbert 空间物理内积的陈述（见 (ii)）。
+notes: |
+  **status: formalized 的依据**：目标陈述 (0)(1)(2)(3)(4)(f) 六条各有一条无 sorry 的 Lean 定理
+  逐字承载（对应表在目标卡 source note 里），两条 depends_on 的 effective 都是 formalized，
+  故 effective = formalized。**本推导不含任何手写补充论证**：凡 Lean 未证的东西（复情形、
+  DDF 版本、零模）都写进了 gaps 与目标的【不断言】，没有靠 notes 把它们悄悄算进结论。
+
+  **推导名 `--via-lean`**：与 DDF 侧手写的 `--via-oscillator-recursion` 区分。
+  两者是同一段算术的两个独立记账：那条在动量塔上对 A^i_n 做手写归纳（status: rigorous），
+  本条在单个 Fock 空间上对 α^μ_n 做机器验证（status: formalized）。
+  **目标不同，不可互相替代**；本条**不**被登记为那张卡的第二条推导（那会是伪造的形式化）。
+
+  **与 worldsheet.fock-indefinite-form--via-lean 的分工**：那条证的是「型存在唯一 + 该型在
+  单项式基上的对角形 + Minkowski 不定」；本条证的是「任意满足三条假设的型都有这个 Gram 矩阵
+  + 单项式是算符乘积 + η > 0 时整空间正定 + 正特征反例」。两条推导共用 Fock.lean，
+  但目标卡与结论集互不包含（见目标【不断言】(c)）。
+author: curator
+created: "2026-09-11"

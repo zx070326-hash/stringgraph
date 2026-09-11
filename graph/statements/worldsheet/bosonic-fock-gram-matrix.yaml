@@ -1,0 +1,182 @@
+id: worldsheet.bosonic-fock-gram-matrix
+kind: proposition
+title: 玻色振子 Fock 空间上创生单项式的 Gram 矩阵（条件版：对任意满足互伴 (H2)(H3) 与真空归一化 (H4) 的双线性型）——正交、对角元 ∏ (n η^{μμ})^{d} · d!，η > 0 时整个空间正定；「对角元非零」需特征零
+statement: |
+  【设定】设 D ∈ ℕ，R 是交换环，F = F(D,R) 是 worldsheet.bosonic-fock-space 给出的
+  Fock 空间（Osc(D) = {(μ,n) : μ = 0..D−1, n ≥ 1} 上的多项式代数，真空 |k⟩ = 1），
+  η 为该卡的对角度规（分量 η^{μμ} ∈ R），算符按该卡
+    α^μ_{−n} = 乘以 X_{(μ,n)}（产生），   α^μ_n = (n η^{μμ}) ∂/∂X_{(μ,n)}（湮灭），  n ≥ 1。
+
+  对每个有限支撑的 d : Osc(D) → ℕ 记**创生单项式**
+
+      |{d}⟩ := ∏_{(μ,n)} (α^μ_{−n})^{d(μ,n)} |k⟩ ,
+
+  并记 G(d) := ∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} · d(μ,n)!（有限乘积；整数按 Z → R 的典范同态读入）。
+
+  则：
+
+  **(0) 良定义与次序无关（任意交换环 R）。** 产生算符两两交换，故 |{d}⟩ 与因子次序无关：
+  对**任意**枚举多重集 d 的列表 l（即对一切 v ∈ Osc(D)，l 中 v 的出现次数 = d(v)），
+  沿 l 逐个作用产生算符所得的向量都等于 |{d}⟩；且 |{d}⟩ = X^d（单项式），
+  |{d + 1_{(μ,n)}}⟩ = α^μ_{−n} |{d}⟩，|{d}⟩ 落在 level Σ n·d(μ,n) 的分量里。
+  （这正是「|{d}⟩ 是算符乘积 ∏ (α^μ_{−n})^{d(μ,n)} 作用在真空上」这句话的精确含义。
+  注意本卡里「产生算符交换」是**定理**而非假设，见【不断言】(a)。）
+
+  **(1) 湮灭算符穿过创生算符串（Leibniz，任意交换环 R）。** 对一切 (μ,n) 与一切有限支撑 d：
+
+      α^μ_n |{d}⟩ = (n η^{μμ}) · d(μ,n) · |{d − 1_{(μ,n)}}⟩
+
+  （d(μ,n) = 0 时右端为 0）。等价的递推形：α^μ_n |{d + 1_{(μ,n)}}⟩ = (n η^{μμ})(d(μ,n)+1) |{d}⟩。
+
+  **(2) 条件 Gram 矩阵（任意交换环 R；本卡的主结论）。** 设 B : F × F → R 是**任意**
+  R-双线性型，满足
+
+      (H4) 真空归一化：  B(|k⟩, |k⟩) = 1；
+      (H2) 互伴（左）：  B(α^μ_{−n} P, Q) = B(P, α^μ_n Q)   （一切 μ、n ≥ 1、P, Q ∈ F）；
+      (H3) 互伴（右）：  B(P, α^μ_{−n} Q) = B(α^μ_n P, Q)   （同上）。
+
+  则对一切有限支撑的 d, e：
+
+      B(|{d}⟩, |{e}⟩) = δ_{d,e} · G(d) = δ_{d,e} · ∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} · d(μ,n)! 。
+
+  特别地（η ≡ 1，即全部 η^{μμ} = 1 的正定度规，如横向扇区）对角元就是字面的
+  ∏_{(μ,n)} n^{d(μ,n)} · d(μ,n)!。
+  **本条不需要任何序结构、任何特征假设、任何可逆性**，也不假设 B 对称或非退化。
+
+  **(3) η > 0 时整个 Fock 空间正定（需序）。** 设 R 另有全序使之成为严格有序交换环
+  （例如 R = ℝ），且 η^{μμ} > 0 对一切 μ。则
+    (3a) 每个对角元 G(d) > 0；
+    (3b) **对一切 P ∈ F，P ≠ 0 ⇒ ⟨P, P⟩ > 0**，其中 ⟨·,·⟩ 是 (2) 的型
+         （由 worldsheet.fock-indefinite-form (1) 它唯一存在）。
+  即：型在**整个** F 上正定——不只是「单项式之间正交、对角元为正」，
+  而是没有任何非零的零模态或负模态。
+
+  **(4) 创生单项式线性无关（任意交换环 R，且与型无关）。** {|{d}⟩ : d 有限支撑} 是
+  F 的一组 R-基，特别地线性无关。**理由是 F 作为 R-模在单项式上自由**
+  （worldsheet.bosonic-fock-space 的构造），**不是**由 (2)(3) 的正定性推出的；
+  故 (4) 在型退化的情形（见【不断言】(f)）依然成立。
+
+  【本节点明确**不**断言】
+  (a) **(H1)（产生算符互相交换）不是本卡的假设**：在 F 上它是定理（乘法交换），
+      与之配套的 [α^μ_m, α^ν_{−n}] = (m η^{μμ}) δ^{μν} δ_{mn} 以及 α^μ_n|k⟩ = 0（n ≥ 1）
+      同样是定理（worldsheet.bosonic-fock-space）。只有 (H2)(H3)(H4) 是对 B 的假设。
+      ⚠ **编号与 worldsheet.transverse-ddf-fock-gram-matrix 不一致**：那张卡的
+      (H1) = 振子代数、(H2) = 伴随、(H3) = 真空湮灭、(H4) = 真空归一化；
+      本卡沿用 formal/StringFormal/NoGhost/FockGram.lean 的编号，(H2)(H3) 是伴随的**两个方向**、
+      (H4) 是真空归一化，而那张卡的 (H1)(H3) 在本卡里是定理。对照两卡时不要按编号硬对。
+  (b) **不**断言 (H2)(H3)(H4) 在物理内积/DDF 设定下成立。满足这三条的型**存在且唯一**
+      是 worldsheet.fock-indefinite-form 的 (1)；本卡只证「若 B 满足三条，则 (2)」这一步蕴含。
+  (c) **不**重复 worldsheet.fock-indefinite-form 的 (2)。那张卡给的是**那一个特定型**
+      `Fock.pairing`（按单项式基对角地定义）上的同一公式；本卡的增量是
+      ①把 B 放宽为任意满足 (H2)(H3)(H4) 的型（条件版，才是那类条件命题的忠实对应，
+      见 notes【为什么要条件版】）、②(0)(1) 把单项式读成**算符乘积**并给出 Leibniz 步、
+      ③(3b) 的整空间正定、④(f) 的特征零边界。
+  (d) **不**涉及 DDF 算子 A^i_n、不涉及动量塔。本卡只在**单个动量**上的协变振子 Fock 空间里工作。
+      DDF 版本是 worldsheet.transverse-ddf-fock-gram-matrix（条件命题，未形式化）；
+      本卡**不**证明 DDF 算子满足那张卡的 (H1)–(H4)，那是无鬼岛里另一项义务。
+  (e) **不**断言 Minkowski 情形正定：conv.metric-mostly-plus 下 η^{00} = −1，
+      类时方向的模为 −n < 0（worldsheet.fock-indefinite-form (4)）。(3) 要求 η 逐分量为正，
+      即横向/欧氏扇区——这正是无鬼定理只谈横向扇区的原因。
+  (f) **「对角元非零」不对任意交换环成立——「正交基」与正定需特征零。**
+      (2) 对任意交换环成立，但「G(d) ≠ 0」不然：在 R = ZMod 2、η ≡ 1 上，
+      (α^1_{−1})² |k⟩ 是**非零**向量而其模 G = 2! = 0。
+      故正特征下型在创生单项式上真退化（虽由 (4) 它们仍线性无关，但不构成非退化型的正交基）；
+      worldsheet.transverse-ddf-fock-gram-matrix 结论 (2) 里的「有序域」假设**承重**，
+      它承重的方式是逼出特征零，而不只是提供序。
+  (g) 「†」是 R-双线性型意义下的**转置**，不是 Hilbert 空间的 Hermitian 共轭；
+      复（半双线性）情形本图与 Lean 侧均未做。继承 worldsheet.fock-indefinite-form
+      的 notes【2026-09-11（二）】的同一条限定。(3b) 在 Hermitian 版本里应读作 Σ |c_d|² G(d) > 0。
+  (h) 零模（x^μ、p^μ、α^μ_0）、拓扑完化、以及 L_0/物理态条件均不在本卡内：
+      继承 worldsheet.bosonic-fock-space 的缺口 (i)(ii)。
+uses_conventions: [conv.metric-mostly-plus]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.pairing_creationMonomial_of_hypotheses
+  lean_file: StringFormal/NoGhost/FockGram.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/FockGram.lean :: StringFormal.NoGhost.Fock.{creationMonomial, creationMonomial_eq_monomial, creationMonomial_zero, creationMonomial_single, creationMonomial_add_single, creationMonomial_mem_levelSubmodule, commute_creation, foldr_creation_vacuum, annihilation_creationMonomial, annihilation_creationMonomial_add_single, annihilation_creationMonomial_of_apply_eq_zero, pairing_creationMonomial_add_single, pairing_creationMonomial, pairing_creationMonomial_of_ne, pairing_creationMonomial_self, pairing_creationMonomial_of_hypotheses, monomialNorm_one, pairing_creationMonomial_one, basisMonomials_eq_creationMonomial, linearIndependent_creationMonomial, monomialNorm_pos, pairing_creationMonomial_self_pos, pairing_self_pos_of_ne_zero, monomialNorm_single, pairing_creationMonomial_self_eq_zero_zmod_two}"
+    note: |
+      本仓库，形式化侧提交 **f3603a1**（分支 agent/formalizer/fock-gram），由 lead 以 **05afdea**
+      （"Merge branch 'agent/formalizer/fock-gram'"）合入 main；Lean 4 + Mathlib v4.33.1，无 sorry。
+      逐条对应：
+        (0) → `creationMonomial`（定义）、`creationMonomial_eq_monomial`（= X^d）、
+              `creationMonomial_zero` / `_single` / `_add_single`（递归刻画）、
+              `creationMonomial_mem_levelSubmodule`（level）、
+              `commute_creation`（(H1) 作为 `Module.End` 里的 `Commute`）、
+              **`foldr_creation_vacuum`**（沿任意用 `List.count` 枚举 d 的列表逐个作用，结果相同）；
+        (1) → **`annihilation_creationMonomial`**，递推形 `annihilation_creationMonomial_add_single`，
+              以及 `annihilation_creationMonomial_of_apply_eq_zero`；
+        (2) → **`pairing_creationMonomial_of_hypotheses`**（本卡 formal.lean_decl；
+              假设逐字为 `hvac`(H4)、`hleft`(H2)、`hright`(H3)，B 是任意 `F →ₗ F →ₗ R`），
+              其无条件特例 `pairing_creationMonomial`（`= if d = e then monomialNorm η d else 0`）、
+              `_of_ne` / `_self`；η ≡ 1 的字面形 `monomialNorm_one` 与 `pairing_creationMonomial_one`；
+              递推步 `pairing_creationMonomial_add_single`；
+        (3a) → `monomialNorm_pos`、`pairing_creationMonomial_self_pos`
+              （只需 `[CommRing R] [PartialOrder R] [IsStrictOrderedRing R]`，比本卡陈述的全序弱）；
+        (3b) → **`pairing_self_pos_of_ne_zero`**（`[LinearOrder R] [IsStrictOrderedRing R]`）；
+        (4) → `basisMonomials_eq_creationMonomial` + `linearIndependent_creationMonomial`；
+        (f) → `monomialNorm_single` 与 **`pairing_creationMonomial_self_eq_zero_zmod_two`**
+              （ZMod 2 上 (α^1_{−1})²|k⟩ 的模 = 2! = 0 的机器反例）。
+      **公理检查已由 formalizer 跑过**：`--import StringFormal.NoGhost.FockGram --all`，
+      25 条声明全部 ok，只用 propext / Classical.choice / Quot.sound（formal/TODO.md 的
+      `fock-gram` 项，2026-09-11）。**curator 未自行重跑 `lake build`**；
+      合并 formal 改动时仍应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.16)–(4.1.18)，p.123–124（level 1 态 e·α_{−1}|0;k⟩ 的范数）"
+    note: |
+      **只覆盖 |d| = 1 的对角元，不承载本卡的递推**。抽取记录
+      literature/extractions/polchinski-1998-v1.md#E56，证据等级 [已核实]（式号与内容经第三方笔记复现）。
+      Polchinski 在此按 (α^μ_n)† = α^μ_{−n} 直接算单个振子态的范数（即 G(1_{(μ,1)}) = η^{μμ}），
+      **不写一般 d 的 Gram 矩阵、不做 Leibniz 归纳、不讨论基环特征**。
+      这是本项目在文献侧能定位到的最接近的陈述；一般 d 的公式在教科书里是「自由振子的标准事实」，
+      被直接使用而不被陈述（与 worldsheet.transverse-ddf-fock-gram-matrix 的 gsw source note 同一判断）。
+  - ref: gsw-1987-v1
+    loc: "§2.2.1 'Commutation relations and mode expansions'，p.75 起（振子代数与模式展开）"
+    note: |
+      定位强度 L4：目录页码由检索后端读取 CUP frontmatter PDF 得到
+      （literature/extractions/brst-cohomology-sources.md §5.1），**未逐字核对正文，式号未核实**。
+      只定位对象（振子代数与 Fock 空间），**不承载本卡任何结论**。
+      GSW 用 mostly-minus，已按 conv.metric-mostly-plus 反号读。
+tags: [bosonic-string, fock-space, gram-matrix, oscillator-algebra, positive-definite, characteristic-zero, no-ghost, formalized]
+notes: |
+  【查重（2026-09-11，curator，分支 agent/curator/lean-wire-5）】
+  跑 `uv run stringgraph search Gram / determinant / Fock / 线性无关`。命中并逐卡比对：
+  · worldsheet.fock-indefinite-form —— 其 (2) 已给出**同一公式**，但对象是**那一个特定型**
+    `Fock.pairing`（Lean 里按单项式基对角地定义）。本卡是条件版 + 算符乘积读法 + 整空间正定 +
+    特征零边界，见【不断言】(c) 的四条增量。**不新建会丢掉的正是这四条**，
+    其中 ① 是 formal/TODO.md 的 `fock-gram` 项逐字要求「图侧推导应引这条，不要引对角那条」。
+  · worldsheet.transverse-ddf-fock-gram-matrix —— 同一段算术在 **DDF 算子 A^i_n 与动量塔**上，
+    是条件命题、未形式化（A^i_n 与塔上的型在 Lean 中尚未同时具备）。两卡目标对象不同，
+    本卡**不**取代它，只为它提供「假设集自洽 + 条件版蕴含已被机器验证」的对照与升级样板。
+  · worldsheet.ddf-operators-adjoint（已 superseded）/ -v2 —— 讲伴随关系本身，不算 Gram 矩阵。
+  · worldsheet.transverse-oscillator-commutators —— 只给光锥横向振子的对易子，不算配对。
+  ⇒ **没有既有节点承载「创生单项式（作为算符乘积）的 Gram 矩阵之条件版」**。
+
+  【为什么要条件版（本卡存在的核心理由）】Lean 里 `Fock.pairing` 是用
+  `basisMonomials.constr` **按单项式基对角地定义**的，所以 `pairing_creationMonomial`
+  （= 结论 (2) 的无条件特例）本身廉价：它几乎是定义的展开。数学内容在两处：
+  ① `Fock.pairing_unique`（满足 (H2)(H3)(H4) 的型唯一——这是 worldsheet.fock-indefinite-form 的 (1)），
+  ② 本卡的 (2)，它把「对角性」从**定义**降级为**结论**：任何满足三条假设的型都有这个 Gram 矩阵。
+  只有 ②（Lean 侧 `pairing_creationMonomial_of_hypotheses`，经 `pairing_unique` 归约）
+  才与 worldsheet.transverse-ddf-fock-gram-matrix 那种「型不预设对角」的条件命题同型。
+  故本卡的 formal.lean_decl 填 `_of_hypotheses` 而**不是** `pairing_creationMonomial`。
+
+  【一卡多条的取舍】(0)(1) 是 (2) 的两个证明步骤，但都独立可陈述且下游会单独引用
+  （(0) 是「算符乘积只依赖多重集」，(1) 是 Leibniz 记账），故与 (2) 同卡；
+  (3)(4)(f) 是同一个 Gram 矩阵在不同基环假设下的三种读法，也留同卡
+  （与 worldsheet.kac-determinant-level-two 把 (1)–(4) 放一卡是同一取舍）。
+  若日后 (3b) 的整空间正定要被单独引用（例如无鬼定理的横向正定一步），
+  按项目原则应**拆出新卡**而不是改本卡陈述。
+
+  【(f) 的意义：一条机器发现的边界】`pairing_creationMonomial_self_eq_zero_zmod_two`
+  是形式化过程中**新发现**的（formal/TODO.md `fock-gram` 项标注「正特征退化（新发现）」）：
+  在 worldsheet.transverse-ddf-fock-gram-matrix 的结论 (2) 里，
+  「每个对角元是正整数故非零」这一步在有序域上是对的，但它**默默用了特征零**
+  （正整数在 ZMod 2 里可以是 0）。只假设「交换环 + 序」不够。
+  本卡把这条边界显式登记，并已把它写进那张卡的 notes（同一分支）。
+
+  【下游】(3b) 是无鬼定理「横向 Fock 空间正定」那一步在**协变振子**侧的机器验证样板；
+  真正接进 worldsheet.no-ghost-theorem-v4 还要经 DDF 侧的
+  worldsheet.transverse-ddf-fock-gram-matrix（未形式化，见那张卡的升级路径）。
+author: curator
+created: "2026-09-11"
