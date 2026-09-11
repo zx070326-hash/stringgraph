@@ -100,6 +100,7 @@ StringFormal/
   NoGhost/VertexProduct.lean  b·b′=0 ⇒ 同点乘积 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L（vertexProduct_eq_vertexOsc_add；levelBound_vertexAnn_le 对 M 一致）；塔版 sum_towerVertex_towerVertex_of_isotropic。**b·b′≠0 时为假**（(1−w/z)^{−b·b′} 混合所有指标）。(5b) Σ_j j V_j V_{−j} = mδ **不是** (5a) 推论（L_0 Leibniz 只见权和）
   NoGhost/VertexAdjoint.lean  Fock 配对下顶点算子伴随 pairing (V(b)_K v) w = pairing v (V(−b)_{−K} w)（**任意 b，不需 b·b=0，无重排序步**——E₋E₊ 的伴随本身正规序）；塔版 (V^{(n)}_K)† = V^{(−n)}_{−K}；**(A^ε_n)† = A^ε_{−n}**（towerPairing_ddfOp_left）。同动量版本被证伪（2b=0）
   NoGhost/VertexWeightedSum.lean  (5b) Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（塔上）；关键原子**电流权恒等式** Σ_J (b·α_{−J}) V^{(b)}_{L−J} = (L + b·a) V^{(b)}_L（vertexCurrent_eq；常数含 b·a）；"全导数" = 权恒等式用两次；k_0²=0 用三次、2α'k_0·p=1 用一次（给出 m）；ℚ-代数必需（除 m+n）。剩 [A,A] 的 Leibniz 组装
+  NoGhost/DDFAlgebra.lean   **横向 DDF 振子代数 ⁅A^ε_m, A^δ_n⁆ = m(ε·δ)δ_{m+n,0}**（lie_ddfOp_ddfOp，一切 m,n ∈ ℤ）：塔上 CCR lie_towerMode_towerMode、偏振 CCR **lie_towerModeVec_towerModeVec**（三个度规因子塌成一个，**η²=1 首次进中心项**）、二重有限和 ddfOp_mul_ddfOp_apply。两个横向性**各用一次**（δ·k_0 在正序、ε·k_0 在反序）；窗口用 `Finset.biUnion` 绕开对 α^δ_l V^{(n)}_l x 的显式 level/mode 界，公共指标集取 U = V ∪ (−V)。`Module.End` 上 `sub_mul` / `← LieRing.of_associative_ring_bracket` 的 `rw` 匹配不上（实例路径不同），一律 congrArg 到向量层再 simp
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、

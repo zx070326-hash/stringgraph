@@ -533,7 +533,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   **未做**：非退化性（`∀ q', ⟨q,q'⟩ = 0 → q = 0`，形式上 routine 但没写）与正定性（无鬼定理本体）。
   图侧：建议 `worldsheet.spurious-orthogonal-to-physical--via-lean` 的 `lean_decl` 列
   `spuriousSubmodule_le_orthComplement` 与 `quotientPairing_mk`，从 rigorous 升回 formalized。
-- [ ] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**部分完成**，见
+- [x] `ddf-operators`：DDF 算子及其对易关系（横向振子代数）。**算子部分已完成**
+  （构造、`⁅L_m, A^ε_n⁆ = 0` ∀m、保物理子空间、伴随、`[A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0}`）；
+  张成性属于下一项 `ddf-spans`。见
   `StringFormal/NoGhost/VertexOperator.lean`（顶点算子振子部分）与
   `StringFormal/NoGhost/DDF.lean`（动量塔）。两个文件都无 sorry，公理只有标准三条。
 
@@ -896,37 +898,47 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
          在 `ℤ` 上只能得到 `(m+n)·Σ_j j V^{(m)}_j V^{(n)}_{-j} = 0`。
       6. 主定理的窗口假设比"最小窗口"多留了 `towerModeBound x` 的余量
          （`m - N - M ≤ j ≤ N - n`），这正是第 3 点里中间二重和需要的；对调用者无代价。
-  - **[A,A] 的整条链**（记录，供下一位）：横向性 (4) 给
+    - **[x] 做完了 (5c)** 组装 **`[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}`**（塔上，`k_0² = 0`、
+      `2α' k_0·p = 1`、`ε·k_0 = δ·k_0 = 0`）：`StringFormal/NoGhost/DDFAlgebra.lean`，
+      无 sorry，4 条声明公理只有标准三条（`--import StringFormal.NoGhost.DDFAlgebra --all`）。
+      主定理 **`lie_ddfOp_ddfOp`**，另三条 `lie_towerMode_towerMode`（塔上 CCR）、
+      **`lie_towerModeVec_towerModeVec`**（偏振 CCR）、**`ddfOp_mul_ddfOp_apply`**（二重和）。
+      上一位预判的路线（横向性移 `V`、(5) 换 `V`、CCR、(5b) 收尾）逐字走通，
+      约 170 行，确实没有新的数学内容。三点实现上的记录：
+      1. **偏振 CCR 要用 `η_μ² = 1`**：`[α^ε_j, α^δ_l]` 含三个度规因子
+         `Σ_μ (η_μ ε^μ)(η_μ δ^μ)(m η^{μμ}) = m Σ_μ η_μ³ ε^μ δ^μ`，只有 `η² = 1` 才塌成
+         `m (ε·δ)`。`hη` 本来就是全线程的假设，但这是它**第一次**在中心项里起作用
+         （此前只用于 `[L_m, α_p]`），不是纯约定。
+      2. **两个横向性各用各的**：`δ·k_0 = 0` 用在 `A^ε_m A^δ_n` 里（把 `V^{(m)}_j` 挪过
+         `α^δ_l`），`ε·k_0 = 0` 用在反序乘积里；两者又都为 `ddfOp` 的存在性所必需。
+         所以 `lie_ddfOp_ddfOp` 有四个几何假设，一个都省不掉。
+      3. **窗口对齐用 `Finset.biUnion` 绕开显式界**：外层算子作用在 `α^δ_l V^{(n)}_l x` 上，
+         它的 `towerLevelBound` / `towerModeBound` 没有现成的估计（要重新做一遍
+         顶点算子对 level bound 的作用）。改成取 `t₁.biUnion (fun l => ddfWindow m (...))`，
+         有限性自动，完全不需要界。最后两序的公共指标集取
+         `U = V ∪ (-V)`（`V` 含四个窗口与 (5b) 的窗口 `Icc (m-N-M) (N-n)`），
+         **对 `j ↦ -j` 封闭**是为了内层 `Σ_l δ_{j+l,0}` 落回 `U` 里。
+      4. **`Module.End` 上的 `sub_mul` / `← LieRing.of_associative_ring_bracket` `rw` 不上**
+         （实例路径 `LinearMap.instSub` 与环结构的 `Sub` 不同构于语法层面）。
+         办法与 `Fock` 里既有的做法一致：`congrArg (fun T => T x)` 到向量层面，
+         再 `simp only [LinearMap.sub_apply, Module.End.mul_apply, LinearMap.smul_apply]`。
+  - **[x] [A,A] 的整条链已完成**：横向性 (4) 给
     `[A^ε_m, A^δ_n] = Σ_{j,l} [α^ε_j, α^δ_l] V^{(m)}_j V^{(n)}_l`（用到 (5) 的顶点算子对易
-    把两个 `V` 并到右边），再用 `Fock` 的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
-    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。
-    **(5)、(5a)、(5b) 全部已做**；**只剩双重局部有限和的 Leibniz 组装**
-    （可仿 `lie_towerLop_ddfOp_of_pos`）：把 `⁅A^ε_m, A^δ_n⁆` 展成对 `j`、`l` 的二重和，
-    用横向性 `lie_towerModeVec_towerVertex`（`ε·k_0 = 0` 时为零）把 `V` 挪到右边，
-    用 `Fock` 的 CCR 把 `[α^ε_j, α^δ_l]` 化成 `j(ε·δ)δ_{j+l,0}`，最后套
-    `sum_weighted_towerVertex_towerVertex`（窗口假设是
-    `m - towerLevelBound x - towerModeBound x ≤ j ≤ towerLevelBound x - n`）。
-    估计 150–250 行，主要工作量在窗口对齐，不再有新的数学内容。
+    把两个 `V` 并到右边），再用塔上的 `[α^ε_j, α^δ_l] = j (ε·δ) δ_{j+l,0}` 得
+    `(ε·δ) Σ_j j V^{(m)}_j V^{(n)}_{-j}`，最后由 (5b) 收尾。见 (5c)。
+
 
   **未做（下一项 `ddf-spans` 之前必须补）**：
   - `⁅L_m, A^ε_n⁆ = 0` 与「`A^ε_n` 保持 `towerPhysSubmodule`」**全部 `m` 已证**（见 (6)）；
-    剩下的是 `[A,A]` 振子代数与张成性。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}` 的**顶点算子部分全部已做**
-    （(5) 对易 + (5a) 同点乘积 + (5b) 加权和 `sum_weighted_towerVertex_towerVertex`）；
-    只剩把它接到 `ddfOp` 上的 Leibniz 组装。
-  - `⁅L_m, A^ε_n⁆ = 0` 只有 `m ≥ 1`（见 (4)）；`m = 0` 与 `m < 0` 未做，
-    所以「`A^ε_n` 把物理态送到物理态」还证不了。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**三步都已做**（(5) 正交动量顶点算子对易、
-    (5a) 同点乘积 `Fock.vertexProduct_eq_vertexOsc_add`、
-    (5b) 加权和 `sum_weighted_towerVertex_towerVertex`）；剩 Leibniz 组装。
-  - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
-  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
-    仍缺同点乘积 (5a) 与加权和 (5b)。
-  - ~~`A^ε_n` 的伴随未做~~：**已做**，见下一项 `vertex-adjoint`。
+    `[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}` **已证**（见 (5c)）；`A^ε_n` 的伴随**已证**
+    （见 `vertex-adjoint`）。**本项只剩张成性，那是下一项 `ddf-spans`。**
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
+  - `lie_ddfOp_ddfOp` 右端的 `(ε·δ)` 是**任意**度规下的收缩；「横向子空间上 `ε·δ` 正定、
+    因而 DDF 态的 Gram 是欧氏振子的 Gram」需要 `R` 为有序域与 `η = (-1,1,…,1)`，
+    是 `ddf-spans` / 无鬼定理那一侧的内容，不属于本项。
 - [x] `vertex-adjoint`：顶点算子与 DDF 算子在 Fock/塔配对下的伴随 ——
   `StringFormal/NoGhost/VertexAdjoint.lean`。对应图节点 `worldsheet.vertex-operator-adjoint`
   与 `worldsheet.ddf-operators-adjoint`；补上 `VertexOperator.lean` 的缺口 (3) 与
