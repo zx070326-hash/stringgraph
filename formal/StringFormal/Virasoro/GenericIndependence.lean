@@ -6,6 +6,7 @@ Authors: stringgraph lean-formalizer
 import Mathlib.LinearAlgebra.Matrix.Nondegenerate
 import StringFormal.Virasoro.ShapovalovLevelFour
 import StringFormal.Virasoro.VermaPBW
+import StringFormal.Math.PartitionCard
 
 /-!
 # Linear independence of the low-level descendants at generic `(c,h)`
@@ -50,7 +51,12 @@ i.e. `a ᵥ* Gram = 0`, so `det Gram ≠ 0` gives `a = 0`.
   `finrank_levelSpan_le_card_partition`: the partition counts `p(3) = 3`, `p(4) = 5` are never
   needed, because the spanning set is cut down to an explicit finite list of ordered words.
   (Mathlib has no cardinality lemmas for `Nat.Partition`, and `decide` does not reduce the
-  `Fintype.ofSurjective` instance, so that route is blocked.)
+  `Fintype.ofSurjective` instance, so that route was blocked when this file was written.
+  **The counting gap is now closed** by `StringFormal/Math/PartitionCard.lean`
+  (`Math.card_partition_{two,three,four,five}` = `2, 3, 5, 7`), so
+  `finrank_levelSpan_le_card_partition` can be instantiated numerically for `N ≤ 5`; see
+  `finrank_levelSpan_three_le` and `finrank_levelSpan_five_le` below.  The proofs in this file
+  are unchanged — the ordered-word route is still what gives the *sharp* `N ≤ 4` bounds.)
   `IsContravariant.three_le_finrank_levelSpan_three`,
   `IsContravariant.five_le_finrank_levelSpan_four` are the `≥` halves, kept as named corollaries.
 * `kac_level_two_pos`, `kac_level_two_nonneg`, `kac_level_two_at_c_one`: on `h > 0`, `c ≥ 1` the
@@ -553,6 +559,33 @@ theorem IsContravariant.five_le_finrank_levelSpan_four (hB : IsContravariant K c
         * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) ≠ 0) :
     5 ≤ Module.finrank K (levelSpan K c h 4) :=
   (hB.finrank_levelSpan_four hB1 hdet).ge
+
+/-! ### Numeric upper bounds from the partition count
+
+`VermaPBW.lean` proves `dim V_N ≤ p(N) = Fintype.card (Nat.Partition N)` for every `N`, but that
+cardinality was an opaque term: `decide` cannot reduce Mathlib's `Fintype (Nat.Partition N)`
+instance.  `StringFormal/Math/PartitionCard.lean` now evaluates it for `N ≤ 5`, which turns the
+bound into a number.  At `N ≤ 4` this only re-derives what `levelSpan_{two,three,four}_eq_span_*`
+already gives; at `N = 5` it is the *only* available bound, since no `ordWord_sum_five`
+enumeration exists here.  All of these are unconditional: no `IsContravariant`, no Kac
+determinant, no genericity. -/
+
+/-- `dim V₃ ≤ 3 = p(3)`, unconditionally, via `p(3) = 3`
+(`StringFormal.Math.card_partition_three`).  Subsumed by `levelSpan_three_eq_span_descFamily3`;
+recorded to exhibit the closed counting gap. -/
+theorem finrank_levelSpan_three_le : Module.finrank K (levelSpan K c h 3) ≤ 3 :=
+  (finrank_levelSpan_le_card_partition K c h 3).trans_eq Math.card_partition_three
+
+/-- `dim V₄ ≤ 5 = p(4)`, unconditionally, via `p(4) = 5`
+(`StringFormal.Math.card_partition_four`). -/
+theorem finrank_levelSpan_four_le : Module.finrank K (levelSpan K c h 4) ≤ 5 :=
+  (finrank_levelSpan_le_card_partition K c h 4).trans_eq Math.card_partition_four
+
+/-- **`dim V₅ ≤ 7 = p(5)`**, unconditionally, via `p(5) = 7`
+(`StringFormal.Math.card_partition_five`).  Unlike levels `2, 3, 4` there is no ordered-word
+enumeration at level 5 in this file, so this is the only route to the number `7`. -/
+theorem finrank_levelSpan_five_le : Module.finrank K (levelSpan K c h 5) ≤ 7 :=
+  (finrank_levelSpan_le_card_partition K c h 5).trans_eq Math.card_partition_five
 
 end FinrankField
 

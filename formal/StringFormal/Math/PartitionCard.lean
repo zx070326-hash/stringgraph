@@ -3,14 +3,18 @@ Copyright (c) 2026 stringgraph contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: stringgraph lean-formalizer
 -/
-import Mathlib
+import Mathlib.Combinatorics.Enumerative.Partition.Basic
+import Mathlib.Data.Finset.Card
+import Mathlib.Tactic.IntervalCases
 
 /-!
 # Cardinality of `Nat.Partition n` for small `n`
 
 Graph node: supporting lemma for `worldsheet.verma-level-basis-generic-low-levels-v2`
 (the `dim V_N ≤ p(N)` half lives in `StringFormal/Virasoro/VermaPBW.lean`).
-No physics convention is used; this file imports only Mathlib.
+No physics convention is used; this file imports only Mathlib (three modules, no
+`import Mathlib`, so that `Virasoro/GenericIndependence.lean` can import it cheaply)
+and no other `StringFormal` module.
 
 Mathlib `v4.33.1` has `Nat.Partition` and a `Fintype` instance for it, but **no cardinality
 lemmas**: `p(n)` is never computed.  This file closes that gap for `n ≤ 5`, which is exactly
