@@ -1977,7 +1977,8 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     与 `towerKerK ⊓ towerBigrade = conjFreeSlice` 的 `⊆` 半边（都要光锥单项式线性无关，
     §B′.9 第 2 条）。
   - **公理登记**：85 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
-- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
+- [ ] `noghost-pr5`（蓝图 **§B″**，2026-09-12 planner-b26-seeds）：(B-26) 零态下界。顺序：前置 `lie_towerLop_towerLop`（塔上 Virasoro 关系，~15 行）→ **`kacDet2_massShell_two : Fock.kacDet2 c (1 - 2) = 2 * (c - 26)`（一行 `ring`，把「26 处为零」加强为「零点只有 26」）** → PR5b′ `N = 2` 特例（`LevelTwoSpan.lean`，~120 行，整条路线唯一便宜的证伪点；`D = 26` 唯一消费点 `towerLop_two_apply_descTwo`，方程 `L_2(2L_{−2}+3L_{−1}²)φ = (c−26)φ`，`a₀ = 1` 只进 `L_1(…)φ = 12(h+1)L_{−1}φ`）→ PR5b `NullSeeds.lean`（Type 1 / Type 2 两族，~250 行）→ PR5a `VirasoroPBWBasis.lean`（每片 Virasoro × 光锥 PBW 基，~700 行；独立价值：关掉 PR4 全部非-(B-26) 缺口）。**致命断点**：两族像在 `N ≥ 5` 的重叠恰为 Euler 五边形数（超出 1, 25, 351），要下界须给 `dim(U ⊓ W)` 上界 = Verma 模 BGG 嵌入结构；建议绕法是按含 `b̃` 占据函数逐指标造零态、用与 `C_N` 配对矩阵三角性证独立。§B″.5 证明 (B-26) **不可能**由任何维数记账推出（候选 (c) 否决）。
+- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），唯一剩余是 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
       `(−N, N)`」）；`N ≤ 1` 已整块关闭（`ddfSpansOn_towerLevelLE_one`，任意 `D`）。
