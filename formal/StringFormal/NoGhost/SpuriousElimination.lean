@@ -1172,4 +1172,97 @@ theorem finrank_towerPhys_inf_towerBigrade_le (hD : 2 ≤ D) (F : DDFLightConeFr
 
 end P3
 
+/-! ### The Goddard (6.2) bridge: `b̃`-free ⟹ `K`-condition -/
+
+section KerK
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- Every light-cone direction except `b̃` is orthogonal to `b`: `b·b = 0` (F2) and
+`b·ε_i = 0` (F5).  This is exactly why `K_n = α^b_n` sees only the `b̃` row. -/
+lemma dotVec_light_frameVec_of_ne (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) {t : Fin D}
+    (ht : t ≠ conjIdx D hD) : dotVec η b (frameVec F t) = 0 := by
+  by_cases h0 : (t : ℕ) = 0
+  · rw [frameVec, dif_pos h0]
+    exact F.frame.isotropic
+  · by_cases h1 : (t : ℕ) = 1
+    · exact absurd (Fin.ext (by simpa [conjIdx] using h1)) ht
+    · rw [frameVec, dif_neg h0, dif_neg h1, dotVec_comm]
+      exact F.trans.transverse _
+
+/-- Multiplying by a light-cone creation operator, on a rung, *is* the tower mode
+`α^w_{-r}`.  (`Longitudinal.kOp` is the same construction with `w = b` and a positive mode
+number, which is why the two commute by the light-cone oscillator algebra.) -/
+lemma towerModeVec_neg_single (η a b w : Fin D → R) (r : ℕ+) (j : ℤ) (P : Fock D R) :
+    towerModeVec η a b w (-((r : ℕ) : ℤ)) (Finsupp.single j P)
+      = Finsupp.single j (lcCrea η w r * P) := by
+  rw [towerModeVec, LinearMap.sum_apply]
+  have hterm : ∀ μ : Fin D,
+      ((η μ * w μ) • towerMode η a b μ (-((r : ℕ) : ℤ))) (Finsupp.single j P)
+        = Finsupp.lsingle (R := R) j ((η μ * w μ) • ((X ((μ, r) : Osc D) : Fock D R) * P)) := by
+    intro μ
+    rw [LinearMap.smul_apply, towerMode_single, Fock.mode_neg_pnat, Fock.creation_apply,
+      Finsupp.lsingle_apply, Finsupp.smul_single]
+  rw [Finset.sum_congr rfl fun μ (_ : μ ∈ Finset.univ) => hterm μ, ← map_sum,
+    Finsupp.lsingle_apply, lcCrea_def, Finset.sum_mul]
+  exact congrArg _ (Finset.sum_congr rfl fun μ _ => (smul_mul_assoc _ _ _).symm)
+
+/-- **A `b̃`-free light-cone monomial satisfies the Goddard–Thorn `K`-conditions.**
+
+Induction on the monomial: the rung vacuum is killed by every `K_n` with `n > 0`
+(`kOp_apply_single_vacuum_of_pos`), and `K_n` commutes with multiplication by `α^w_{-r}`
+whenever `b·w = 0` (`lie_towerModeVec_towerModeVec`), which by
+`dotVec_light_frameVec_of_ne` is the case for every light-cone direction except `b̃`. -/
+theorem single_lcMonomial_mem_towerKerK (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    {d : Osc D →₀ ℕ} (hd : conjDeg hD d = 0) :
+    Finsupp.single j (lcMonomial F d) ∈ towerKerK η a b := by
+  classical
+  induction d using finsupp_addSingle_induction with
+  | h0 =>
+      rw [lcMonomial_zero, ← Fock.vacuum_def]
+      exact single_vacuum_mem_towerKerK η a b j
+  | hstep d v ih =>
+      rw [conjDeg_add] at hd
+      have hdz : conjDeg hD d = 0 := by omega
+      have hvz : conjDeg hD (Finsupp.single v 1) = 0 := by omega
+      have hvne : v.1 ≠ conjIdx D hD := by
+        intro hv
+        rw [conjDeg_single, if_pos hv, mul_one] at hvz
+        exact one_ne_zero hvz
+      have hbw : dotVec η b (frameVec F v.1) = 0 := dotVec_light_frameVec_of_ne hD F hvne
+      have hfac : Finsupp.single j (lcMonomial F (d + Finsupp.single v 1))
+          = towerModeVec η a b (frameVec F v.1) (-((v.2 : ℕ) : ℤ))
+              (Finsupp.single j (lcMonomial F d)) := by
+        rw [towerModeVec_neg_single, lcMonomial_add, lcMonomial_single_one, mul_comm]
+      rw [hfac]
+      refine mem_towerKerK.2 fun n hn => ?_
+      have hcomm := lie_towerModeVec_towerModeVec η a b b (frameVec F v.1) F.hη n
+        (-((v.2 : ℕ) : ℤ))
+      rw [hbw, mul_zero, ite_self, zero_smul] at hcomm
+      have happ := congrArg (fun T : Module.End R (TowerFock D R) =>
+        T (Finsupp.single j (lcMonomial F d))) hcomm
+      simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+        LinearMap.zero_apply, sub_eq_zero] at happ
+      have hker : towerModeVec η a b b n (Finsupp.single j (lcMonomial F d)) = 0 := by
+        rw [← kOp_eq_towerModeVec]
+        exact mem_towerKerK.1 (ih hdz) n hn
+      rw [kOp_eq_towerModeVec, happ, hker, map_zero]
+
+/-- **The Goddard (6.2) bridge, `⊇` half**: the `b̃`-free light-cone monomials on the
+antidiagonal slice satisfy the `K`-conditions.
+
+The reverse inclusion `towerKerK ⊓ towerBigrade ≤ conjFreeSlice` is *not* proved: it needs
+linear independence of the light-cone monomials, which has no cheap proof (blueprint §B′.9
+item 2) and is deliberately off the critical path.  So `towerKerK_inf_towerBigrade_eq_conjFree`
+remains an equality only one of whose halves is available. -/
+theorem conjFreeSlice_le_towerKerK_inf_towerBigrade (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (N : ℕ) :
+    conjFreeSlice hD F N ≤ towerKerK η a b ⊓ towerBigrade D R (-(N : ℤ)) N := by
+  refine le_inf ?_ (conjFreeSlice_le_towerBigrade hD F N)
+  rw [conjFreeSlice, conjFree, Submodule.map_span, Submodule.span_le]
+  rintro _ ⟨_, ⟨d, ⟨_, hd⟩, rfl⟩, rfl⟩
+  exact single_lcMonomial_mem_towerKerK hD F _ hd
+
+end KerK
+
 end StringFormal.NoGhost
