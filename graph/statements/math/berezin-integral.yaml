@@ -1,0 +1,82 @@
+id: math.berezin-integral
+kind: definition
+status: rigorous
+title: Berezin 积分：Grassmann 变量上的线性泛函 ∫dθ 1 = 0、∫dθ θ = 1
+statement: |
+  设 Λ 是域 C 上由 n 个生成元 θ_1, …, θ_n 生成的 Grassmann（外）代数：
+    θ_m θ_n = − θ_n θ_m，  特别地 θ_n² = 0。
+  因 θ² = 0，单个生成元的最一般函数形如 f(θ) = a + θ b（a, b ∈ C）。
+
+  **(1) 单变量的 Berezin 积分**定义为使
+      ∫ dθ  1 = 0,      ∫ dθ  θ = − ∫ θ  dθ = 1
+  成立的**线性**映射；更一般的表达式由**要求积分线性、并规定 dθ 与所有 Grassmann 变量反对易**
+  唯一确定。
+
+  **(2) 多变量**：对 f(θ) = … + θ_n θ_{n−1} … θ_1 c（即把 f 展开后取「最高次项」的系数 c），
+      ∫ dθ_1 … dθ_n  f(θ) = c.
+  即 Berezin 积分**挑出最高次系数**。
+
+  **(3) 与普通积分共有的性质**（这三条正是把玻色路径积分的论证搬到费米场上所用到的全部）：
+    (a) 线性；
+    (b) 交换积分次序至多改变一个符号；
+    (c) 分部积分，等价地「全导数的积分为零」：∫ dθ (d/dθ)(a + θ b) = ∫ dθ  b = 0。
+
+  **(4) 变量替换的 Jacobian 与玻色情形互为倒数**：若 θ' = θ a（a ∈ C^×）则 dθ' = a^{−1} dθ。
+  一般的（玻色 + 费米）无穷小变量替换下测度的变化为
+      δ(d^m x  d^n θ) = d^m x  d^n θ  ( Σ_i (∂/∂x_i) δx_i − Σ_j (∂/∂θ_j) δθ_j ),
+  **注意费米部分带相反的符号**。
+
+  ⚠ **本节点断言的是什么**：∫dθ **不是任何通常意义上的积分**，而是从 Λ 到 C 的一个线性映射；
+  「积分」记号只是助记。因此本节点**不依赖任何测度论、可测性或收敛性内容**。
+uses: []
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.2, pp.341–342**（L1 页图逐字）：定义前逐字「There is a natural notion of integration over Grassmann variables, **the Berezin integral**. Notice that if `θ` is a Grassmann variable then `θ² = 0`, and so the most general function of `θ` is of the form `a + θb`.」；**(A.2.3)** `∫dθ = 0 , ∫dθ θ = −∫θ dθ = 1`；定义后逐字「Integrals of more general expressions are determined by **requiring the integral to be linear and by defining `dθ` to anticommute with all Grassmann variables**.」；**(A.2.4)** `∫dθ (d/dθ)(a+θb) = ∫dθ b = 0`（“the integral of a total derivative is zero”）；**(A.2.5)** `∫dθ₁…dθ_n f(θ) = c` 与 **(A.2.6)** `f(θ) = … + θ_n θ_{n−1} … θ₁ c`；生成元反对易是 **(A.2.2)**；(4) 的 Jacobian 与一般变量替换式 **(A.2.29)** 在 **p.345**"
+    note: |
+      **【2026-09-11 新建（curator-v1-sec15，researcher 第九轮 App. A 页图，L1）】**
+
+      ★ **status = rigorous 的直接依据是作者自陈（脚注 3, p.342，逐字）**：
+        "**It is not useful to think of `∫dθ` as an integral in any ordinary sense: it is simply a
+         linear mapping from functions of `θ` to the complex numbers. Since it shares so many of the
+         properties of ordinary integrals, the integral notation is a useful mnemonic.**"
+      ⇒ 本卡是**外代数上的一个线性泛函**的定义，纯代数、无收敛问题、无测度论内容。
+      **不得**给本卡挂任何「积分收敛 / 可测 / 测度存在性」型依赖（抽取记录 §15.2(a) 的明确指示）。
+
+      statement (3) 的三条性质来自 p.342 逐字：「Looking back at the discussion of the bosonic path
+      integral, one sees that **all of the properties of ordinary integrals that were used are also
+      true for the Berezin integral: linearity, invariance (except for a sign) under change of order
+      of integration, and integration by parts**.³」
+
+      statement (4) 来自 p.345：(A.2.29) 之前逐字「A useful result about Berezin integrals: from the
+      definition it follows that **if `θ' = θa` then `dθ' = a^{−1}dθ`. That is, the Jacobian is the
+      inverse of the bosonic case.**」，一般变量替换式是 **(A.2.29)**。
+
+      ⚠ **本卡不包含的东西**（negative evidence，抽取记录 §15.2(g)）：
+      - 费米**路径积分**（(A.2.17) 的连续极限）与行列式公式 (A.2.24)–(A.2.27) **不在本卡**，
+        它们是把本卡的有限维规则外推到无穷维，属 physical-argument 层，
+        落点见 worldsheet.genus-g-ghost-path-integral。
+      - 「路径积分公式的推导 rather heuristically」那句在 **A.1, p.332**，**不是 A.2**；
+        本卡与那条自陈无关。
+      见 literature/extractions/polchinski-1998-v1.md §15.2(a)(e)。
+tags: [math, grassmann, berezin, exterior-algebra, fermion, lean-island-candidate]
+notes: |
+  **为什么建在 math 而不是 worldsheet**：本卡的内容与世界面、弦、共形权全都无关，
+  它是外代数上的线性泛函；`bc` 鬼场、`βγ` 系统只是它的使用者。
+
+  **Lean 小岛候选（formalizer 用）**：本卡是本图中最容易落地的形式化目标之一——
+  Mathlib 侧对应的是**外代数上的线性泛函**（`ExteriorAlgebra` / 最高次分量的投影），
+  **不是** `MeasureTheory` 里的任何东西（作者脚注 3 已明说）。建议的形式化形状：
+  取 `ExteriorAlgebra R M`（M 自由、秩 n），`∫dθ_1…dθ_n` = 到 `⋀^n M ≅ R` 的投影再取坐标；
+  statement (1)(2) 是该投影的定义性质，(3a) 是线性性，(3c)（全导数积分为零）是
+  「∂/∂θ 降次一次 ⇒ 像落在 ⋀^{<n}」的直接推论，(4) 的 `θ' = θa ⇒ dθ' = a^{−1}dθ`
+  是最高次分量在标量伸缩下的一次齐性。**本卡不主张任何无穷维内容。**
+
+  ⚠ **符号约定是一次选择**：`∫dθ θ = +1`（而不是 −1）、以及多变量时 (A.2.6) 把系数写在
+  `θ_n θ_{n−1} … θ_1` 之后（而不是之前），都是 Polchinski 的取法。
+  文献中另有把 `dθ` 写在右边、或把最高次项写成 `θ_1 … θ_n c` 的传统，两者相差
+  `(−1)^{n(n−1)/2}` 型的符号。本图凡引用本卡做具体符号计算的节点须声明沿用本卡的取法。
+  **这也正是作者自承缺口 #18（“We will fix the sign by hand”, p.345）的根源**：
+  费米路径积分给出的行列式符号依赖测度里 Grassmann 因子的书写顺序。
+author: curator-v1-sec15
+created: "2026-09-11"

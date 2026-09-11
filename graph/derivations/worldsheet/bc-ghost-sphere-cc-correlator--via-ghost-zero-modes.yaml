@@ -41,6 +41,15 @@ gaps:
   - "**在 u = 1/z 片的正则性没有检验**：|z₁₂|²|z₁₃|²|z₂₃|² 在 z_i → ∞ 时发散，
      其与 X 部门因子的组合才在 u 片光滑（对照 spectrum.sphere-tachyon-expectation-smooth-at-infinity）。
      本推导不做这个检验。"
+  - "**归一化常数 C^g_{S₂} 的整体符号在原书里是手工定的（作者自承缺口 #18）**：Appendix A §A.2, p.345 逐字
+     \"Bosonic path integrals actually give the absolute values of determinants, while fermionic path integrals
+     give the determinant with a sign that depends on **the precise order of Grassmann factors in the measure**.
+     **We will fix the sign by hand.**\" ⇒ 本推导括号里那条「等价的直接做法：把 c、c̄ 按零模展开做 Grassmann
+     积分」**给不出 C^g_{S₂} 的符号**（它依赖测度里 Grassmann 因子的书写顺序），
+     该符号在本书中是约定。测度与行列式规则本身见 (A.2.24)–(A.2.27), pp.344–345。
+     另：零模处理在附录里只有一条**非定理**的一般表述（p.345 逐字「If `Δ` has zero eigenvalues, the path
+     integral vanishes in the fermionic case … **there is always a good reason** … the integrals of interest
+     will have appropriate insertions to give a finite result」）。抽取记录 §15.2(e)(f)。"
 notes: |
   (6.3.5) 与 (6.3.8)（多鬼场振幅的两个等价表达式）的等价性**本批次没有建节点**：
   抽取记录 E96 逐字记录 [S]「why the permutations evidently sum up, is a mystery to me」，

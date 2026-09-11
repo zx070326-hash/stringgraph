@@ -28,6 +28,46 @@ sources:
       抽取记录 literature/extractions/polchinski-1998-v1.md#E79，L1（读到 schrans-2020 §5.14，
       笔记 p.254；**未核对 Polchinski 原书**）。
       (3.3.21) 的式号已在 worldsheet.faddeev-popov-ghost-action 处经 schrans-2020 目录核实。
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.2, eq. (A.2.24)–(A.2.27), pp.344–345**（L1 页图逐字）：**一般** Grassmann 路径积分的测度与行列式规则——(A.2.24) `⟨1⟩ = ∫[dψ dχ] exp(∫d^dx χΔψ)`；(A.2.25a,b,c) 本征模展开与配对归一化；**(A.2.26) `Define [dψ dχ] = ∏_i dψ_i dχ_i` ⇒ `⟨1⟩ = ∏_i λ_i = det Δ`**；(A.2.27) `∫[dψ] exp(∫d^dx ψΔψ) = (det Δ)^{1/2}`（要求 `Δ` **antisymmetric**），并逐字「These fermionic path integrals are just the **inverse** of the corresponding bosonic integrals」。⚠ **A.2 不写 `bc` 系统**（通篇不出现 `b`/`c` 作鬼场名、无 `bc` 作用量）；`bc` 系统本身见 **§3.3 / §4.3**"
+    note: |
+      **【2026-09-11 新增（curator-v1-sec15，researcher 第九轮 App. A 页图，pp.344–345，L1）】**
+      本卡 statement 里的 `[db dc]` 与「把玻色行列式换成费米路径积分」这一步，
+      其**测度与行列式规则**的原书位置现已确定：**(A.2.24)–(A.2.27)**。
+
+      ⚠ **措辞纪律（抽取记录 §15.2(c) 第 3 条）**：不得写成「`bc` 鬼场路径积分测度定义于
+      Appendix A.2」——那是**过强**的说法。准确表述是：
+      **「`bc` 鬼场路径积分所用的一般 Grassmann 测度与行列式规则见 A.2 (A.2.24)–(A.2.27)；
+      `bc` 系统本身见 §3.3 / §4.3」**。A.2 给的是一般费米场 `ψ`、`χ` 与一般算子 `Δ`，
+      与世界面、鬼场、共形权都无关。
+
+      ★★ **两条作者自承缺口（本卡 status 已是 physical-argument，这两条说明它为什么不可能更高）**：
+      **#18（p.345 逐字）**："Curiously, we can be more cavalier for functional determinants, where
+        these can be eliminated by rescaling the fields. **Bosonic path integrals actually give the
+        absolute values of determinants, while fermionic path integrals give the determinant with a
+        sign that depends on the precise order of Grassmann factors in the measure. We will fix the
+        sign by hand.**⁴"
+        ⇒ **`det Δ` 的整体符号在本书里是手工定的，不是从测度推出来的。**
+        本卡 statement 里的 `Δ_FP = (1/n_R)∫[db dc] exp(−S_g)…` 的**整体符号**因此没有来源；
+        任何依赖该符号的下游结论（FP 行列式的符号、配分函数的相对符号、零模关联函数的
+        整体常数 `C^g`）**自身封顶 `physical-argument`，且不可形式化为定理**。
+      **#19（p.345 脚注 4 逐字）**："A fine point: when the world-sheet theory is parity-asymmetric,
+        **even the phase of the path integral is ambiguous**. The point is that `Δ` is not Hermitian
+        in this case, because the Euclidean adjoint includes a time-reversal (which is the same as a
+        parity flip plus Euclidean rotation). One must instead take the determinant of the Hermitian
+        operator `Δ†Δ`, which determines that of `Δ` **only up to a phase**. We will encounter this in
+        section 10.7, for example, where we will have to check that there is a consistent definition
+        of the phase."
+        ⇒ 手性/宇称不对称世界面（杂化弦、无取向弦）上**路径积分的相位本身未定义**；
+        原书把「检查相位有一致定义」这件事推到 **Vol.2 §10.7**。本卡覆盖的是玻色弦
+        （宇称对称）情形，故 #19 对本卡**不直接生效**，但凡把本卡搬到手性世界面的节点必须带上它。
+
+      ★ **零模：原书只给原则不给定理（p.345 逐字）**："**If `Δ` has zero eigenvalues, the path integral
+      vanishes in the fermionic case and diverges in the bosonic case. When this occurs there is always
+      a good reason, as we will see in practice, and the integrals of interest will have appropriate
+      insertions to give a finite result.**"
+      ⇒ 本卡「μ 个 `b` 插入与 κ 个 `c` 插入不是外加的」那句话在附录侧只有这条**非定理**的一般表述支撑。
+      见 literature/extractions/polchinski-1998-v1.md §15.2(e)(f)。
 tags: [worldsheet, faddeev-popov, ghosts, moduli, path-integral, bc-system]
 notes: |
   **status = physical-argument**：与上游同理（Grassmann 路径积分 [db dc] 在本项目无数学定义），
@@ -35,6 +75,13 @@ notes: |
 
   下游意义：这条正是 worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly
   的输入——鬼数流计的是 c 的个数减 b 的个数，即 κ − μ。
+  **【2026-09-11 记账（curator-v1-sec15）】** 本卡新增的 App. A §A.2 来源**不改变 status**
+  （仍是 physical-argument），它做的是三件事：给 `[db dc]` 与 `det Δ` 一个一手位置、
+  把「测度来自 A.2」这类过强措辞的正确写法写死、以及记下作者自承的符号/相位缺口 #18/#19。
+  **注意不要据 (A.2.18a,b) 给本卡加「依赖鬼场内积非正定」的边**：原书 p.343 逐字说
+  「the derivation of the path integral was independent of the choice of inner product」，
+  详见 worldsheet.bc-ghost-hermitian-conjugation 的对应 source note。
+
   与 worldsheet.bc-ghost-cft 的关系：那张卡是平面共形规范下的 bc 系统（复坐标、λ = 2），
   本卡是任意度规 ĝ 上的协变写法；两者在共形规范下由 (3.3.24) 相联，
   **本图未建那条改写的节点**。

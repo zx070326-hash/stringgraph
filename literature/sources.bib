@@ -3494,3 +3494,52 @@
                见 extractions/math-sources.md §47.4(d)。}
 }
 
+
+@misc{bering-2011,
+  author = {Bering, Klaus},
+  title  = {A Note on Angular Momentum Commutators in Light-Cone Formulation of Open Bosonic String Theory},
+  year   = {2011},
+  eprint = {1104.4446},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 curator-v1-sec15 于 2026-09-11 登记，抽取记录 extractions/ggrt-1973.md §3 E-L3-1（researcher 逐页读图 pp.1--2, 7--11，**L1**）。
+            **★ 版本必须写死 v2**：页边条纹逐字 `arXiv:1104.4446v2 28 Feb 2012`；标题页日期栏印的 `April 29, 2022` 是 arXiv 重编译日期，
+            **不是论文日期**。11 页，Masaryk University。**期刊发表信息本项目未查。**
+            登记理由：这是「光锥洛伦兹代数 ⇒ D = 26, a = 1」这条路线上**本项目目前唯一能核实到公式级的来源**
+            （goddard-goldstone-rebbi-thorn-1973 正文仍是 L0）。
+            **可引用的硬内容（p.7，加框的 (7.1)，L1 逐字）**：
+            `[J^{-i}, J^{-j}] = (2 hbar^2/(alpha_0^+)^2) Sum_{n != 0} : alpha^i_{-n} alpha^j_n : kappa^{|n|} [ n((D-2)/24 - 1) - (1/n)((D-2)/24 - a) ] + O(kappa-1)`，
+            紧接逐字 "which, in the limit `kappa -> 1`, **precisely vanishes for `D = 26` and `a = 1`**"。
+            ⚠⚠ **三条引用纪律**：
+            (1) **原文措辞是 "precisely vanishes for"，不是 "if and only if"、也不是 "necessary"**。
+                括号里两个系数相互独立 ⇒ 必要性在数学上显然，**但那是本项目的推断，不得写成原文措辞**。
+            (2) **`kappa` 是 Bering 自创的记账/正规化参数**（摘要逐字 "a novel bookkeeping/regularization parameter"），
+                `kappa -> 1` 是取极限；引用 (7.1) 必须带这个前提。
+            (3) **状态上限 `physical-argument`**：物理式算符计算 + 自创正规化，不是数学定理。
+            另外三条元信息（都 L1，p.2）：四条检测 D=26 的路线的分类（光锥洛伦兹协变 [3,4]、无鬼 [5]、Weyl 反常 [6]、BRST 幂零 [7]）；
+            对 GGRT 的评价「**are sparse on details**」（与 Polchinski 的 "careful treatment" 方向相反，见 goddard-goldstone-rebbi-thorn-1973 的 note）；
+            对 GSW 证明的批评（脚注 †：GSW「gives a proof by **sandwiching** [J^{-i},J^{-j}] between a bra and a ket, **which depend on the choice of vacuum**」）。}
+}
+
+@article{goddard-rebbi-thorn-1972,
+  author  = {Goddard, Peter and Rebbi, Claudio and Thorn, Charles B.},
+  title   = {Lorentz Covariance and the Physical States in Dual-Resonance Models},
+  journal = {Nuovo Cimento A},
+  volume  = {12},
+  pages   = {425--441},
+  year    = {1972},
+  note    = {由 curator-v1-sec15 于 2026-09-11 登记。**书目数据等级 L1 但是转抄**：逐字抄自 bering-2011 参考文献 [3]
+            （arXiv:1104.4446v2, p.11：「P. Goddard, C. Rebbi and C.B. Thorn, *Lorentz Covariance and the Physical States in
+            Dual-Resonance Models*, Nuovo Cimento **12A** (1972) 425-441.」），**未与出版方/INSPIRE 交叉核对**（DOI 未取）。
+            **正文完全未获取（内容等级 L0）。**
+            登记理由：bering-2011 p.2 把「Preservation of Lorentz covariance in the light-cone formulation」这条 D = 26 路线
+            **同时**归给本文与 goddard-goldstone-rebbi-thorn-1973（其 [3, 4]），而本项目此前只知道后者。
+            ⇒ 本文**可能才是 [J^{i-}, J^{j-}] 反常的首次出处**（ggrt-1973.md Q-G5，**未裁决**）。
+            ⚠⚠ **极易混淆的三兄弟，登记时已各自分开**：
+            - `goddard-rebbi-thorn-1972`（本条，**三作者**，Nuovo Cimento 12A 425--441）：光锥洛伦兹协变；
+            - `goddard-thorn-1972`（**两作者**，Phys. Lett. B40 235--238）：无鬼定理；
+            - `goddard-goldstone-rebbi-thorn-1973`（**四作者**，Nucl. Phys. B56 109--135）：弦的量子动力学。
+            ⚠ **在读到正文之前，不得给任何节点挂本 key 作为论证来源**，也不得据此升级
+            worldsheet.critical-dimension-light-cone-v2 一系的状态（与另两个 key 同一禁令）。
+            见 extractions/ggrt-1973.md §3 E-L3-1(b) 与 §5 B2。}
+}
