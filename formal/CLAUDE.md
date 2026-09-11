@@ -99,6 +99,7 @@ StringFormal/
   NoGhost/VertexCommute.lean  b·b′ = 0 ⇒ 顶点算子对易（vertexOsc_comm_of_dotVec_zero；E₊ 穿过 E₋ 只在此用正交性，E₋E₋ = E₋(b+b′) 对任意动量）；塔上 k_0²=0 ⇒ towerVertex 对易（**k_0² ≠ 0 时有单值性因子，不对易**）；[A,A] 剩同点乘积局部有限性 + 全导数留数
   NoGhost/VertexProduct.lean  b·b′=0 ⇒ 同点乘积 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L（vertexProduct_eq_vertexOsc_add；levelBound_vertexAnn_le 对 M 一致）；塔版 sum_towerVertex_towerVertex_of_isotropic。**b·b′≠0 时为假**（(1−w/z)^{−b·b′} 混合所有指标）。(5b) Σ_j j V_j V_{−j} = mδ **不是** (5a) 推论（L_0 Leibniz 只见权和）
   NoGhost/VertexAdjoint.lean  Fock 配对下顶点算子伴随 pairing (V(b)_K v) w = pairing v (V(−b)_{−K} w)（**任意 b，不需 b·b=0，无重排序步**——E₋E₊ 的伴随本身正规序）；塔版 (V^{(n)}_K)† = V^{(−n)}_{−K}；**(A^ε_n)† = A^ε_{−n}**（towerPairing_ddfOp_left）。同动量版本被证伪（2b=0）
+  NoGhost/VertexWeightedSum.lean  (5b) Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（塔上）；关键原子**电流权恒等式** Σ_J (b·α_{−J}) V^{(b)}_{L−J} = (L + b·a) V^{(b)}_L（vertexCurrent_eq；常数含 b·a）；"全导数" = 权恒等式用两次；k_0²=0 用三次、2α'k_0·p=1 用一次（给出 m）；ℚ-代数必需（除 m+n）。剩 [A,A] 的 Leibniz 组装
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、
