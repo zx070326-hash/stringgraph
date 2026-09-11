@@ -149,6 +149,79 @@
   **全模群不变性仍缺** `worldsheet.modular-group-generated-by-s-and-t`（未形式化）。
   同样仍缺：η 对一般 `SL(2,ℤ)` 元素的乘子系统（Dedekind 和）。
 
+- [x] `eta-modular`：`τ₂|η(τ)|⁴` 在**整个 `SL(2,ℤ)`** 下不变。
+  见 `StringFormal/Math/DedekindEtaModular.lean`（无 sorry，8 个声明 `check_axioms --all` 全 `ok`，
+  只有标准三条）。
+
+  **调研结论（先记下来，省得后人重查）**：Mathlib v4.33.1 **有**「S、T 生成 `SL(2,ℤ)`」：
+
+  ```
+  SpecialLinearGroup.SL2Z_generators : Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤
+  ```
+
+  在 `Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean:274`（`section SL2Z_generators`，
+  `open ModularGroup Subgroup`，作者 Chris Birkbeck，Lean 3 原型来自 kbb 仓库）。它由同文件的
+  `FixedDetMatrices.induction_on`（对 `FixedDetMatrix (Fin 2) ℤ 1` 的欧几里得型归约，cases
+  `h0`/`hS`/`hT`）证出。用法样板见
+  `Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean:200`
+  （`G2_slash_action`：`have : γ ∈ Subgroup.closure {S, T} := by simp [SpecialLinearGroup.SL2Z_generators]`
+  然后 `induction this using Subgroup.closure_induction with | one | mem | mul | inv`）。
+  另一处用法：`Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean:60`。
+
+  ⇒ 因此 **不需要**自己证生成定理，也**不必**退化成条件版
+  `… (hg : g ∈ Subgroup.closure {S, T})`。图节点
+  `worldsheet.modular-group-generated-by-s-and-t` 的数学内容**在 Mathlib 里已形式化**，
+  可以用 `lean_decl = SpecialLinearGroup.SL2Z_generators` 标 `formalized`
+  （前提是图卡陈述与「`closure {S,T} = ⊤` 在 `SL(2,ℤ)` 上」逐字对得上；注意这是 `SL(2,ℤ)` 版，
+  不是 `PSL(2,ℤ)` 版，且 `S` `T` 取 Mathlib 的 `ModularGroup.S = ![![0,-1],![1,0]]`、
+  `ModularGroup.T = ![![1,1],![0,1]]`）。
+
+  **本文件做的事**：只有一次 `Subgroup.closure_induction`。关键技术点：归纳的谓词必须是
+  `∀ τ` 形（`im_mul_norm_eta_pow_four_modular_forall`），因为 `inv` 分支要在**另一个点**
+  `g⁻¹ • τ` 用归纳假设（`smul_inv_smul`）；`mul` 分支是 `mul_smul` + 两次归纳假设；
+  `one` 分支是 `one_smul`。两个生成元分支直接就是
+  `DedekindEtaS.im_mul_norm_eta_pow_four_modular_S_smul` 与
+  `DedekindEtaT.im_mul_norm_eta_pow_four_modular_T_smul`（一字不改）。
+
+  声明清单：`modular_group_generated_by_S_and_T`（Mathlib 定理的再导出）、
+  `im_mul_norm_eta_pow_four_modular_forall`、
+  **`im_mul_norm_eta_pow_four_modular_invariant`**（主定理，`(g • τ).im * ‖η(g•τ)‖^4 = τ.im * ‖η τ‖^4`）、
+  `norm_eta_pow_four_modular`（解出形 `‖η(g•τ)‖⁴ = (τ₂/(gτ)₂)‖η(τ)‖⁴`）、
+  `im_mul_norm_eta_pow_four_isInvariant`（函数相等形）、
+  `im_mul_norm_eta_pow_four_pow_modular`、`im_pow_mul_norm_eta_pow_modular`（任意 n 次幂）、
+  `im_pow_twelve_mul_norm_eta_pow_48_modular`（`τ₂¹²|η|⁴⁸`，即玻色单圈被积函数的倒数）。
+
+  ⚠ **给图的建议（本 agent 未改 graph/）**：
+  1. `worldsheet.modular-group-generated-by-s-and-t` 可标 `formalized`。**注意图卡是 `PSL(2,ℤ)` 版
+     且含两条关系**（(1) S、T 生成 PSL(2,ℤ)；(2) S² = 1、(ST)³ = 1），Mathlib 只给了 `SL(2,ℤ)` 版
+     生成定理，所以本轮另开了一个小岛
+     `StringFormal/Math/ModularGroupGenerators.lean` 把三条都补齐：
+     `ModularGroupGen.psl_closure_S_T`（(1)）、`psl_S_sq`（(2) 前半）、`psl_ST_cube`（(2) 后半）。
+     `lean_decl` 建议取 `StringFormal.ModularGroupGen.psl_closure_S_T`（主断言），
+     另两条写进 notes 或 `lean_decl_extra`（若 schema 支持列表）。
+     ✔ 图卡自己声明「**不**断言这是一个 presentation」——Lean 侧完全一致：本文件也不证
+     `PSL(2,ℤ) ≅ ℤ/2 ∗ ℤ/3`，Mathlib v4.33.1 也没有。两边口径对得上，不需要额外 gap。
+     △ 一条**真正的**缺口（建议写进 `gaps`）：Lean 里 `PSL(2,ℤ) := SL(2,ℤ)/Z(SL(2,ℤ))`
+     （Mathlib `Matrix.ProjectiveSpecialLinearGroup`），本文件**没有**证 `Z(SL(2,ℤ)) = {±1}`
+     （真命题，但用不上；只需要 `−1 ∈ Z`，即 `neg_one_mem_center`）。因此 Lean 的两条关系严格说是
+     「模去中心后成立」，若图卡想要「S² = ±I 在 SL(2,ℤ) 里」，那是 `sl_S_sq : S^2 = -1` 与
+     `sl_ST_cube : (S*T)^3 = -1`（本文件也有，且更强）。
+  2. 若图里有「`τ₂|η|⁴` 模不变」这条卡（一般挂在单圈配分函数链上），可挂
+     `im_mul_norm_eta_pow_four_modular_invariant`。
+  3. **仍缺**（不要误标）：η 本身对一般 `g` 的乘子系统（Dedekind 和、24 次单位根），
+     以及测度 `d²τ/τ₂²` 的模不变性。本文件只控制 `‖η‖` 在 `τ₂|η|⁴` 这一特定组合里的行为；
+     `12 = (D−2)/2` 是输入不是输出。
+
+- [x] `psl-generators`：`StringFormal/Math/ModularGroupGenerators.lean`（无 sorry，8 个声明
+  `check_axioms --all` 全 `ok`）。只 import Mathlib，是独立小岛，被 `DedekindEtaModular` 复用。
+  `SL(2,ℤ)` 层：`sl_S_sq : S^2 = -1`、`sl_ST_cube : (S*T)^3 = -1`（两条都是
+  `ext i j; fin_cases i <;> fin_cases j <;> rfl`，`-1 : SL(2,ℤ)` 靠全局实例
+  `Fact (Even (Fintype.card (Fin 2)))` 提供 `Neg`）、`sl_closure_S_T`（Mathlib 再导出）、
+  `neg_one_mem_center`。`PSL(2,ℤ)` 层（`psl := QuotientGroup.mk'` 到 `SL/Z`）：
+  `psl_neg_one`、`psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`。
+  生成定理的搬运用 `MonoidHom.map_closure` + `Set.image_pair` + `MonoidHom.range_eq_top`
+  （样板抄自 Mathlib `NumberTheory/ModularForms/LevelOne/Basic.lean:60`）。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与

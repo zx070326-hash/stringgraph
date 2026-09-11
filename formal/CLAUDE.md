@@ -63,6 +63,15 @@ StringFormal/
   Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
   Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
+  Math/DedekindEtaModular.lean  `τ₂|η(τ)|⁴` 在**整个 SL(2,ℤ)** 下不变（对 `Subgroup.closure` 归纳，
+                            谓词必须取 `∀ τ` 形，因为 inv 分支在 `g⁻¹•τ` 用归纳假设）；
+                            `τ₂ⁿ|η|⁴ⁿ` 与 `τ₂¹²|η|⁴⁸`（玻色单圈被积函数的倒数）。乘子系统与
+                            测度 `d²τ/τ₂²` 的不变性仍缺
+  Math/ModularGroupGenerators.lean  S、T 生成 `PSL(2,ℤ)` 且 `S² = (ST)³ = 1`（图卡
+                            `worldsheet.modular-group-generated-by-s-and-t`）。`SL(2,ℤ)` 层的生成定理
+                            是 Mathlib 的 `SpecialLinearGroup.SL2Z_generators`（本项目只再导出），
+                            新做的是 `(ST)³ = −1` 与到 `SL/Z` 的搬运。**不**证 presentation
+                            （`PSL ≅ ℤ/2 ∗ ℤ/3`），也**不**证 `Z(SL(2,ℤ)) = {±1}`
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
