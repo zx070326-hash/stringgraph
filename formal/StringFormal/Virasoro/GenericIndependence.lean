@@ -5,6 +5,7 @@ Authors: stringgraph lean-formalizer
 -/
 import Mathlib.LinearAlgebra.Matrix.Nondegenerate
 import StringFormal.Virasoro.ShapovalovLevelFour
+import StringFormal.Virasoro.VermaPBW
 
 /-!
 # Linear independence of the low-level descendants at generic `(c,h)`
@@ -345,6 +346,70 @@ lemma levelSpan_two_eq_span_descFamily2 :
   · have hw : levelWord R c h 2 cmp = desc11 R c h := by rw [levelWord, hb]; rfl
     rw [hw]
     exact Submodule.subset_span ⟨1, rfl⟩
+
+/-! #### Enumerating the ordered words at levels 3 and 4
+
+`VermaPBW.levelSpan_eq_ordSpan` has already done the straightening: `V_N` is spanned by the
+**ordered** words `L_{-b₁} ⋯ L_{-b_k}|c,h⟩` with `b₁ ≥ ⋯ ≥ b_k ≥ 1` and `Σ bᵢ = N`.  (The
+identity that makes this work is `⁅L_a, L_b⁆ = (a-b) L_{a+b}` with no central term for
+`a, b < 0`, e.g. `L₋₁L₋₂|c,h⟩ = L₋₂L₋₁|c,h⟩ + L₋₃|c,h⟩`.)  So upgrading `dim V_N ≥ p(N)` to an
+equality only needs the *list* of those words, which is pure arithmetic on non-decreasing lists
+of negative integers — no Virasoro relation and no `Nat.Partition` cardinality. -/
+
+/-- The ordered words of total mode `-3` are exactly `[-3]`, `[-2,-1]`, `[-1,-1,-1]`, i.e. the
+three standard level-3 descendants `L₋₃|c,h⟩`, `L₋₂L₋₁|c,h⟩`, `L₋₁³|c,h⟩`.  Note `[-1,-2]` is
+*not* ordered, which is exactly why `Composition 3` (four blocks) overcounts. -/
+lemma ordWord_sum_three {l : List ℤ} (hl : IsOrdWord l) (hs : l.sum = -3) :
+    l = [-3] ∨ l = [-2, -1] ∨ l = [-1, -1, -1] := by
+  match l with
+  | [] => simp at hs
+  | [a] =>
+      left
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      simp [hs]
+  | [a, b] =>
+      right; left
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hab : a ≤ b := (List.pairwise_cons.mp hl.sorted).1 b (by simp)
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      have h1 : a = -2 := by omega
+      have h2 : b = -1 := by omega
+      simp [h1, h2]
+  | [a, b, d] =>
+      right; right
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hd := hl.neg d (by simp)
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      have h1 : a = -1 := by omega
+      have h2 : b = -1 := by omega
+      have h3 : d = -1 := by omega
+      simp [h1, h2, h3]
+  | a :: b :: d :: e :: t =>
+      exfalso
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hd := hl.neg d (by simp)
+      have he := hl.neg e (by simp)
+      have hts : t.sum ≤ 0 := sum_nonpos_of_neg fun n hn => hl.neg n (by simp [hn])
+      simp only [List.sum_cons] at hs
+      omega
+
+/-- **`V₃` is spanned by the three standard level-3 descendants**:
+`V₃ = span {L₋₃|c,h⟩, L₋₂L₋₁|c,h⟩, L₋₁³|c,h⟩}`.  Unconditional; no PBW and no form needed.
+The straightening is supplied by `levelSpan_eq_ordSpan`, the enumeration by
+`ordWord_sum_three`. -/
+lemma levelSpan_three_eq_span_descFamily3 :
+    levelSpan R c h 3 = Submodule.span R (Set.range (descFamily3 R c h)) := by
+  refine le_antisymm ?_ (span_descFamily3_le_levelSpan R c h)
+  rw [levelSpan_eq_ordSpan, ordSpan_eq_span, Submodule.span_le]
+  rintro x ⟨l, hl, hsum, rfl⟩
+  have hs : l.sum = -3 := by simpa using hsum
+  rcases ordWord_sum_three hl hs with rfl | rfl | rfl
+  · exact Submodule.subset_span ⟨0, rfl⟩
+  · exact Submodule.subset_span ⟨1, rfl⟩
+  · exact Submodule.subset_span ⟨2, rfl⟩
 
 end Finrank
 
