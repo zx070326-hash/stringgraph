@@ -121,11 +121,26 @@ sources:
       2. ⚠ **§4.1 与 §4.4 的分工与旧记录设想的不同**：§4.1 (4.1.20) 陈述的是
          **H_OCQ ≅ H_light-cone（同构）**，**不是**「内积正定」；三者同构 + 正定是 §4.4 的 (4.4.21)。
          旧 note 写「§4.1 末只陈述结论」这一点仍对，但结论的内容要按上面写。
-      3. ⚠ **是否引用 Goddard–Thorn / Brower：答案是否**。§4.1–§4.4 与习题 4.1–4.6 的正文中
-         **没有任何文献引用标记**（pp.121–144 逐页看过）；Polchinski 的体例是把参考文献集中在
-         书末 References（pp.347–358），**该部分本项目尚未取页**。
-         → **本节点不得声称「Polchinski 把无鬼定理归功于 Goddard–Thorn」**。
-           本节点的归属依据只有 goddard-2008 与 fgz-1986 两条（见上）。
+      3. **是否引用 Goddard–Thorn / Brower：正文不引，书末注记引，且正是归给本卡这一条。**
+         §4.1–§4.4 与习题 4.1–4.6 的**正文**中没有任何文献引用标记（pp.121–144 逐页看过）——
+         这一点不变；Polchinski 的体例是把参考文献集中在书末注记（p.9 逐字「Annotated reference
+         lists appear at the end of each volume」）。
+         ★ **2026-09-11 更新（reviewer-batch14；抽取记录 §13.3(a)，p.350 第 4 章注记 L1 逐字）**：
+         旧 note 写「书末 References（pp.347–358）本项目尚未取页」——**该部分现已取页**，逐字为
+           「**Classic proofs of the OCQ no-ghost theorem are Brower (1972) and Goddard & Thorn
+            (1972).** … The BRST operator for field theory is derived in Kato & Ogawa (1983);
+            **our proof of the no-ghost theorem is loosely patterned on the one in that paper.**」
+         ⇒ 两条硬结论：
+           (i) **本卡（OCQ 版，DDF 构造）正是原书所说的 "OCQ no-ghost theorem"**，
+               而 Polchinski 明确把它的 classic proofs 归给 **Brower (1972) 与 Goddard & Thorn (1972)**
+               （书目数据：Phys. Lett. B40, 235；Phys. Rev. D6, 1655，pp.353–354 逐字）。
+               故「Polchinski 把（OCQ 版）无鬼定理归功于 Goddard–Thorn/Brower」**现在有 L1 背书**，
+               旧 note 的禁令撤销。本卡的归属依据由 goddard-2008 + fgz-1986 两条扩为三条。
+           (ii) ⚠ **但 §4.4 的证明不是 GT 的复述**：原书自陈它 "**loosely** patterned on"
+                Kato & Ogawa (1983)（BRST 路线），与 GT/Brower 的 OCQ 路线**分属两条**。
+                故不得把「Polchinski §4.4 —→ goddard-thorn-1972」画成「复述/follows」边；
+                BRST 那一支的归属见 worldsheet.no-ghost-theorem-brst，
+                且「loosely」这个限定词必须保留。
 
       ⚠ **另一处与本节点直接相关、本图先前记反的事实**（p.143，逐字）：
         "Eq. (4.4.19) defines an OCQ-physical state in each cohomology class. For the special case
