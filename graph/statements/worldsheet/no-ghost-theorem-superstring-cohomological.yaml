@@ -195,5 +195,38 @@ notes: |
   说明 LZ 确实在意 `p·p` 的符号；这使 (i) 与 (ii) 的分辨更有必要，而不是更不必要。
   ⇒ 裁决前提：读 LZ p.305 Remark 的上下文，确定该假设是"为方便"还是"为必要"。
   **本轮未做**（researcher 已读 pp.319–321，未覆盖 p.305 的动机）。
+
+  【★ 2026-09-11 裁决（physics-auditor，分支 agent/auditor/rulings-3）：「p 未来向」**不是本质前提**，
+  是 R 扇区旋量因子 R(p,0) 上厄米形式的整体符号约定；(H2) 只写 p ≠ 0 **维持**，本卡**不换代**】
+  依据（LZ 1989 Project Euclid 扫描件逐页复核，非转述）：
+  (a) 假设原文与定义域。p.305 Remark 逐字："For convenience, we will assume that p is always in the
+      future half R^{D−1,1}_+ of R^{D−1,1}, i.e. R^{D−1,1}_+ = {p ∈ R^{D−1,1}: p^D > 0}. For if we
+      allow p^D < 0, "time reversal" will reverse the signature of ⟨,⟩_R." 号差按 p.302 是
+      ((D−1)+, 1−)，故 p^D 是时间分量。⚠ **R^{D−1,1}_+ 是半空间 {p^D > 0}，不是"未来半光锥"**：
+      它不限制 p·p 的符号。本卡 sources 的 note 与上一段（reviewer-batch17b）写的"未来半光锥"
+      是误译，抽取记录 §1 同款；本卡 statement 未含该词，不受影响。
+  (b) LZ 自述的用途。Remark 前一句逐字："We note that ⟨,⟩_R above is defined so that (p·d₀)* = −p·d₀.
+      We will see later that this indeed gives the correct signature for the physical space."
+      即该假设**只**进入 Definition 1.3(ii)（p.305）对 R(p,0) 的形式的定义：取手征基 Ψ^i_→，
+      Ψ^i_← := p·d₀Ψ^i_→，令 ⟨Ψ^i_→, Ψ^j_←⟩_R = √−1 δ^{ij}、其余为零；p^D 的符号决定这个形式的
+      号差取向，取 p^D > 0 是让 Corollary 2.15(ii) 读作 "positive definite" 而非 "negative definite"。
+  (c) 逐条核对**不用**它的步骤：Theorem 2.4 / Corollary 3.4（消灭定理）与 Proposition 3.3 的前提
+      只写 "p ≠ 0"（p.309、p.323），证明是有限过滤 + 长正合列，不涉及任何厄米形式；Theorem 2.7 的
+      收缩同伦 {D_R|_F, d¹₀/p¹} = 1 只需某个分量 p¹ ≠ 0（p.310）；Corollary 2.15(i) 与 2.19(i) 的
+      维数公式是特征标计算（p.313–314 (4)(5)(6)、p.319 (33)），与符号无关；NS 扇区（κ = ½）
+      R(p,½) = C、⟨1,1⟩_R = 1（Definition 1.3(i)），全程不涉及 p 的取向。
+  (d) **用到**它的步骤全在 R 扇区号差计算：p.314 Case 1（p·p = 0）sign C_rel(p,0) = 16、
+      p.316 Lemma 2.14.5 (16) 的 σm δ_ij（m = √(−p·p/2) > 0）、p.321 (42) 的 δ_kl——这些正号都
+      取自 ⟨,⟩_R 的取向。按 LZ 的 Remark，p^D < 0 时号差整体反号，即 H⁰_rel(p,0) 变为**负定**
+      （同一空间、同一维数、仍无混合号差），不是定理失效。
+  (e) 裁定理由：本卡断言 (2) 没有把 R(p,0) 上的形式钉在 Definition 1.3(ii) 的处方上（只写
+      "其上的厄米形式"），而旋量因子上厄米形式的整体符号本就是约定（(p·d₀)* = −p·d₀ 之下 ±⟨,⟩_R
+      皆合格），故对一切 p ≠ 0 都存在使 H⁰_rel(p,0) 正定的符号选择；无鬼定理的物理内容（诱导形式
+      **定号**、无相对负模）不依赖 sgn(p^D)。附带两点：p.314 逐字 "C_rel(p,0) is zero unless p·p/2
+      is a non-positive integer"，故 R 扇区非空的动量都是类时或类光，那里 sgn(p^D) 才有洛伦兹不变
+      意义；NS 快子能级 p·p = 1 为类空，p^D 的符号无不变意义——进一步说明这是约定而非物理前提。
+  ⇒ 上一段的 (i)/(ii) 取 **(i)**，措辞精确化为：结论对一切 p ≠ 0 成立，代价是 R 扇区形式的整体
+     符号须按 p 的时间取向选取。本图不在 (H2) 加前提，不建 v2。两条 --via-lian-zuckerman-1989
+     推导 gaps 里的"本图未判定"一句自本裁决起过时，留 curator 改指本段。
 author: curator
 created: "2026-09-11"
