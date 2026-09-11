@@ -143,4 +143,23 @@ theorem gs_factorization_alg :
 
 end FactorizationAlg
 
+/-! ### The generalisation really does subsume the field statement
+
+`algebraMap ℚ K (1/48)` is a compound term; a reader is entitled to ask whether it denotes
+the rational number `1/48` acting on `K` or something else, i.e. whether the `_alg`
+statements above say what the field statements in `GreenSchwarzAlgebra.lean` say. The
+lemma below settles that mechanically: it re-derives the *verbatim* statement of
+`gs_factorization_so32` from `gs_factorization_so32_alg` alone. It is deliberately a
+duplicate of an existing theorem — its content is the derivation, not the statement.
+-/
+
+/-- `gs_factorization_so32` (stated over a characteristic-zero field with the coefficients
+written `48⁻¹`, `300⁻¹`) is exactly the `R = K` instance of `gs_factorization_so32_alg`.
+
+So the `ℚ`-algebra version strictly generalises the field version already recorded in the
+graph, and no coefficient was silently changed in the move. -/
+theorem gs_factorization_so32_field_of_alg {K : Type*} [Field K] [CharZero K] (x y : K) :
+    15 * x * y = 48⁻¹ * (30 * x) * ((24 * y + 3 * x ^ 2) - 300⁻¹ * (30 * x) ^ 2) := by
+  simpa using gs_factorization_so32_alg (R := K) x y
+
 end StringFormal.Math
