@@ -15,22 +15,6 @@ depends_on:
     note: |
       两种正规序都是对**同一个** T(z) = -(1/α') :∂X^μ ∂X_μ: 的 Laurent 模而言的；
       没有自由标量能动张量的具体表达式，「L_0 的两种写法只差一个 c-数」无从说起。
-  - id: worldsheet.open-string-doubling-trick
-    inferred: true
-    note: |
-      **为什么需要这条边**：a^X = 0 的论证发生在**无边界的平面**（径向量子化，
-      worldsheet.state-operator-isomorphism；单位算子 ↔ 原点处的基态）。但本推导要定的
-      a^X 是**开弦** L_0 的两种正规序之差：所依赖的
-      worldsheet.virasoro-generators-free-boson 的物理来源正是 Polchinski §2.7 (2.7.25)/(2.7.27)
-      的**开弦** L_m 与 α_0 = (2α')^{1/2} p（抽取记录 #E41），而开弦世界面是带边的（上半平面）。
-      把平面 CFT 上「围道 = 整圆」的 L_m 与开弦上「围道 = 半圆」的 L_m 认同，用的正是
-      doubling trick（T̄ 是 T 的镜像解析延拓，半圆补成整圆，只剩一族 {L_m}）。
-      没有这一步，「单位算子对应的态被所有 α_{n>0} 湮灭且 L_0 本征值为 0」这一平面结论
-      搬不到开弦的 Fock 空间上。
-      **标 inferred 的理由**：本推导来源 loc（§2.7 (2.7.7)/(2.7.9)/(2.7.11)）处读不到对 §2.6 (2.6.25)
-      的回指——抽取记录 #E42 逐条列出「文献列出的依赖」是 E38、E43（态-算子同构），
-      **不含** E40（§2.6，doubling trick 所在条目）；相邻的 #E41（开弦 L_m）才列了 E40。
-      原书正文在付费墙后（抽取记录 §0），本图无法核实 §2.7 原地是否有回指，故照实标 inferred。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.9「Zero-point energies」小节，p.72–73（态-算子映射定正规序常数）+ exercises 2.13, 2.14；另 §2.7 p.60 (2.7.11)/(2.7.12) 是**另一条**路线（两种正规序的关系），原书逐字 \"giving a second derivation of a^X = 0\""
@@ -76,8 +60,15 @@ gaps:
      Virasoro 代数路线 (2.7.8)，见 worldsheet.normal-ordering-constant-ax--via-virasoro-algebra。
      本推导保留的价值在于它是一条**独立**路线（不用 (2.6.22) 的 SL(2,R) 子代数），
      但它的认识论代价是必须假定 worldsheet.state-operator-isomorphism。"
-  - "新增的 worldsheet.open-string-doubling-trick 边限定在**纯 Neumann** 边界条件
-     （见该节点 notes 的「与 D 膜的关系」）。若某些方向取 Dirichlet，本推导的结论 a^X = 0
-     是否逐字不变，本图未验证。"
+  - "**doubling-trick 边已于 2026-09-11 撤回**（reviewer-batch10 A）：此前本推导挂了一条
+     `worldsheet.open-string-doubling-trick`（inferred），理由写成「a^X 是**开弦** L_0 的两种
+     正规序之差，平面结论要靠 doubling trick 搬到带边世界面上」。
+     ⚠ 那个理由与目标卡不符：worldsheet.normal-ordering-constant-ax 的 statement 说的是
+     「D 个自由标量的**共形场论**」里 L_0 两种正规序之差，通篇没有开弦、没有边界；
+     本推导的论证（单位算子 ↔ 基态，权 0）也完全在无边界的平面上完成。
+     ⇒ 开弦那一层是**下游应用**（把 α_0 换成 (2α')^{1/2}p，由
+     worldsheet.open-string-virasoro-modes-v2/v3 自己承载），不是本推导的前提。
+     撤边不改变本推导的状态（physical-argument），但去掉了一条不该计入的 inferred 边，
+     也一并去掉了随它而来的『限纯 Neumann 边界条件』这条伪限制。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
