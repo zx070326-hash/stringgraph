@@ -6,6 +6,7 @@ Authors: stringgraph lean-formalizer
 import Mathlib.Analysis.Complex.UpperHalfPlane.MoebiusAction
 import Mathlib.LinearAlgebra.Matrix.ProjectiveSpecialLinearGroup
 import Mathlib.NumberTheory.ModularForms.DedekindEta
+import Mathlib.NumberTheory.LSeries.HurwitzZetaValues
 
 /-!
 # Bridge layer: Mathlib objects restated verbatim in the graph's conventions
@@ -59,6 +60,15 @@ card's `lean_decl` point at that restatement.
 * `smul_eq_of_pslMk_eq` and the `MulAction PSL2Z ℍ` instance (`pslMk_smul`) : the action
   **descends to `PSL(2,ℤ)`** — the card's "the group acting effectively is `PSL(2,ℤ)`".
 
+### `worldsheet.zeta-regularized-sum-of-integers` (analytic-continuation clause only)
+
+* `riemannZeta_neg_one` : `ζ(−1) = −1/12`, the `k = 1` case of Mathlib's
+  `riemannZeta_neg_nat_eq_bernoulli` (Mathlib has no named `ζ(−1)`).
+* `riemannZeta_neg_one_eq_bernoulli` : the same with `B₂` left visible.
+* `lightCone_normalOrderingConstant`, `lightCone_normalOrderingConstant_of_26` : the arithmetic
+  `((D−2)/2)·ζ(−1) = −(D−2)/24`, and `= −1` at `D = 26`
+  (card `worldsheet.light-cone-normal-ordering-constant`).
+
 ## What is *not* claimed here
 
 Nothing about modular transformations of `η` (those are `StringFormal/Math/DedekindEta{S,T}.lean`
@@ -68,6 +78,9 @@ On the `PSL(2,ℤ)` side: no faithfulness of the `PSL(2,ℤ)`-action (true, but 
 assert it), no generation by `S`, `T` (that is
 `StringFormal/Math/ModularGroupGenerators.lean` / `worldsheet.modular-group-generated-by-s-and-t`),
 no fundamental domain, and no claim that `PSL(2,ℤ)` is the modular equivalence of the torus.
+
+On the `ζ` side: **no** assertion that `ζ(−1)` "is" the divergent sum `Σ_{n≥1} n`, and **no**
+assertion that it is a physical zero-point energy.  See the `RiemannZeta` section docstring.
 -/
 
 namespace StringFormal.Bridge
@@ -300,5 +313,71 @@ noncomputable scoped instance : MulAction PSL2Z ℍ := MulAction.compHom ℍ psl
 theorem pslMk_smul (g : SL(2, ℤ)) (τ : ℍ) : (pslMk g : PSL2Z) • τ = g • τ := rfl
 
 end ModularGroup
+
+section RiemannZeta
+
+open Complex
+
+/-!
+### `ζ(−1) = −1/12`
+
+Graph cards touched: `worldsheet.zeta-regularized-sum-of-integers` (the *analytic-continuation*
+half of its parenthetical "or equivalently the `ζ`-function continuation `Σ n^{-s}|_{s=-1}`")
+and `worldsheet.light-cone-normal-ordering-constant` (the arithmetic `A = ((D−2)/2)·(−1/12)`).
+
+Mathlib has the general formula `riemannZeta_neg_nat_eq_bernoulli` (in
+`Mathlib/NumberTheory/LSeries/HurwitzZetaValues.lean`) but **no named `ζ(−1)` instance**; the only
+named special values at non-positive integers are `riemannZeta_zero` and the trivial zeros
+`riemannZeta_neg_two_mul_nat_add_one`.  So the specialisation below is the bridge.
+
+**Scope warning — what this does *not* say.**  `riemannZeta (-1)` is the value of the *analytic
+continuation* of `Σ_{n≥1} n^{-s}` at `s = -1`.  It is **not** a sum of the divergent series
+`Σ_{n≥1} n`, and it is **not** the assertion that this number is a physical zero-point energy.
+The card `worldsheet.zeta-regularized-sum-of-integers` is `physical-argument` precisely because of
+that last step ("the finite remainder *is* the Casimir energy"), which has no Lean counterpart and
+is untouched by anything in this section.  Formalising `ζ(−1)` must not be used to upgrade it.
+Also note `ζ(−1) = −1/12` and the Laurent constant of `Σ_{n≥1} n e^{−un}`
+(`StringFormal/Math/RegulatedSum.lean`, card `worldsheet.regulated-sum-laurent-expansion`) are two
+*different* theorems that happen to give the same number; the graph keeps them on separate cards.
+-/
+
+/-- **`ζ(−1) = −1/12`.**  Specialisation of Mathlib's `riemannZeta_neg_nat_eq_bernoulli` to
+`k = 1`, using `bernoulli 2 = 1/6`:  `ζ(−1) = (−1)^1 · B₂ / 2 = −(1/6)/2 = −1/12`.
+
+Card: the `ζ`-continuation clause of `worldsheet.zeta-regularized-sum-of-integers`.  See the
+section docstring for what this statement deliberately does **not** claim. -/
+theorem riemannZeta_neg_one : riemannZeta (-1) = -1 / 12 := by
+  have h := riemannZeta_neg_nat_eq_bernoulli 1
+  rw [Nat.cast_one] at h
+  rw [h]
+  norm_num [bernoulli_two]
+
+/-- The same value written as `ζ(−1) = −(1/12)` with an explicit `Bernoulli` witness: the general
+Mathlib formula at `k = 1`.  Kept so that a reader can see the bridge really is one substitution. -/
+theorem riemannZeta_neg_one_eq_bernoulli :
+    riemannZeta (-1) = (-1 : ℂ) ^ (1 : ℕ) * (bernoulli 2 : ℚ) / 2 := by
+  have h := riemannZeta_neg_nat_eq_bernoulli 1
+  rw [Nat.cast_one] at h
+  rw [h]
+  norm_num
+
+/-- **The arithmetic of `worldsheet.light-cone-normal-ordering-constant`**: with the divergent sum
+`Σ_{n≥1} n` replaced by `ζ(−1)`, Polchinski's normal-ordering constant
+`A = ((D−2)/2) · "Σ_{n≥1} n"` evaluates to `−(D−2)/24`.
+
+This is the *numerical* half of that card and nothing more: the input `"Σ n" ⟶ ζ(−1)` is the
+regularisation prescription, which is the card `worldsheet.zeta-regularized-sum-of-integers`
+(`physical-argument`).  Lean here only checks `((D−2)/2)·(−1/12) = −(D−2)/24`. -/
+theorem lightCone_normalOrderingConstant (D : ℂ) :
+    (D - 2) / 2 * riemannZeta (-1) = -(D - 2) / 24 := by
+  rw [riemannZeta_neg_one]; ring
+
+/-- `D = 26` gives Polchinski's `A = −1` (equivalently the intercept `a = 1` under
+`conv.intercept-sign-a`). -/
+theorem lightCone_normalOrderingConstant_of_26 :
+    ((26 : ℂ) - 2) / 2 * riemannZeta (-1) = -1 := by
+  rw [lightCone_normalOrderingConstant]; norm_num
+
+end RiemannZeta
 
 end StringFormal.Bridge
