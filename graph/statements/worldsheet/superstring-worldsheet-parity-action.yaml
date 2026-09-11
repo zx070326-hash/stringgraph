@@ -1,0 +1,126 @@
+id: worldsheet.superstring-worldsheet-parity-action
+kind: definition
+status: rigorous
+title: 世界面宇称 Ω 在**开超弦**上的作用：Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、Ω² = exp(πiF)，故无取向 + GSO 的联合投影算符是 (1+Ω+Ω²+Ω³)/4
+statement: |
+  **设定（是陈述的一部分）**：**开**超弦（RNS 形式），世界面为条带 0 ≤ Re w ≤ π
+  （conv.worldsheet-euclidean、conv.worldsheet-complex-coords），ψ^μ 与 ψ̃^μ 是世界面费米子，
+  F 是世界面费米数算符（exp(πiF) 即 GSO 投影所用的算符，worldsheet.gso-projection 的记号）。
+  世界面宇称 Ω 在玻色部门上的作用按 worldsheet.worldsheet-parity（开弦 σ ↦ ℓ − σ，
+  Ω α_n^i Ω^{−1} = (−1)^n α_n^i）。本卡给出它在**费米部门**上的作用。
+
+  **定义与断言**：
+    **(1) 场的层面**（原书逐字：'In the open string Ω acts as'，'**using the doubling trick
+        (10.2.15)**'）：
+          Ω ψ^μ(w) Ω^{−1} = ψ̃^μ(π − w̄) = ψ^μ(w − π)                              (10.8.12)
+    **(2) 模的层面**（原书逐字：'In terms of the modes this is'）：
+          Ω ψ_r^μ Ω^{−1} = exp(−πir) ψ_r^μ                                        (10.8.13)
+        （NS 扇区 r ∈ Z + ½，R 扇区 r ∈ Z。）
+    **(3) Ω 的平方不是恒等，而是世界面费米数算符**（原书逐字：'**The phase is imaginary in the
+        NS sector and squares to −1.** Thus'）：
+          Ω² = exp(πiF)                                                           (10.8.14)
+    **(4) 联合投影算符是四项的**（原书逐字：'Since exp(πiF) = 1 by the GSO projection, this is
+        physically the same as squaring to the identity, but **the combined Ω and GSO projections
+        require a single projection operator**'）：
+          (1 + Ω + Ω² + Ω³)/4                                                     (10.8.15)
+        ⚠ 同一句里的限定必须一起记：**因 GSO 投影已令 exp(πiF) = 1，在物理谱上 Ω² 塌回恒等**，
+        即这个 Z₄ 结构在物理谱上等价于 Z₂；四项写法是为了把 Ω 投影与 GSO 投影**合成一个**算符。
+
+  **本定义不断言**：
+    (a) ⚠ **不断言 R 扇区的相位论证**。原书给出的理由逐字只到 '**The phase is imaginary in the
+        NS sector and squares to −1**'——即只对 **NS 扇区**（r ∈ Z + ½ ⇒ exp(−πir) 为纯虚）
+        说明了 Ω² 的由来；**R 扇区（r ∈ Z，exp(−πir) = (−1)^r 为实）原书不单独讨论**。
+        本卡照录 (10.8.14) 作为原书写下的式子，但**不断言**它在 R 扇区的论证已由原书给出。
+    (b) **不断言超弦版 doubling trick (10.2.15) 本身**。(10.8.12) 是**用它**得到的（原书明写），
+        而本图的 worldsheet.open-string-doubling-trick 是**玻色弦**语境的（Neumann 条件使
+        T̄ 成为 T 的镜像解析延拓）；**(10.2.15) 在世界面费米子上的对应版本本图无节点**。
+        故本卡**不**把它列入 uses，只在 sources 里定位（口径与
+        worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的处理一致：
+        「加了会是一条名实不符的边」）。
+    (c) ⚠⚠ **不断言 Ω 在闭超弦上的作用**。闭弦那一支在本图分散在两处、且都不在本卡：
+        · 世界面费米子层面：原书只以 Klein 瓶的边界条件 (10.8.8a,b) 给出
+          （R = Ω exp(πiβF + πiβ̃F̃) 时 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），
+          见 worldsheet.superstring-klein-bottle-amplitude-closed-channel；
+        · 态/顶点算子层面：§10.6 (10.6.16)–(10.6.18)，见
+          worldsheet.type-i-unoriented-closed-spectrum（含 Ṽ_{s'}V_s = −V_sṼ_{s'}）。
+        **本卡只覆盖开弦。**
+    (d) **不断言 Chan–Paton 指标上的转置与 SO(n)/Sp(k) 的二选一**。那是
+        spectrum.chan-paton-gauge-group（Vol.1 §6.5，M(λ^a)^T M^{−1} 与 M 的对称/反对称）。
+        本卡只给 Ω 在世界面费米子上的作用。
+    (e) **不断言任何振幅**。Möbius 带振幅是
+        worldsheet.superstring-mobius-strip-amplitude-closed-channel；
+        Klein 瓶是 worldsheet.superstring-klein-bottle-amplitude-closed-channel。
+    (f) **不断言 orientifold / O 面的现代表述**（属 branes area）。
+uses:
+  - worldsheet.worldsheet-parity
+  - worldsheet.type-i-open-string-gauge-multiplet
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eqs. **(10.8.12)**、**(10.8.13)**、**(10.8.14)**、**(10.8.15)**, pp. 41–42；逐字：'In the open string Ω acts as  Ω ψ^μ(w) Ω^{−1} = ψ̃^μ(π − w̄) = ψ^μ(w − π),  **using the doubling trick (10.2.15)**. In terms of the modes this is  Ω ψ_r^μ Ω^{−1} = exp(−πir) ψ_r^μ.  **The phase is imaginary in the NS sector and squares to −1.** Thus  Ω² = exp(πiF).  Since exp(πiF) = 1 by the GSO projection, this is physically the same as squaring to the identity, but **the combined Ω and GSO projections require a single projection operator**  (1 + Ω + Ω² + Ω³)/4.'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E70**
+      （该条已单页重渲染复核）。
+      ★★ 抽取记录逐字：「**这是本项目里 Ω² = exp(πiF) 的一手带式号来源**」，
+      并列出三点「值得进节点」的内容，本卡逐条照办：
+        1. Ω 在开超弦上的平方不是恒等，而是世界面费米数算符——这是超弦相对玻色弦的**真正新结构**；
+        2. 因此无取向投影算符是 **(1+Ω+Ω²+Ω³)/4（四项）**，不是玻色弦的 (1+Ω)/2；
+        3. 原书自己指出 'physically the same as squaring to the identity'（GSO 已投掉
+           exp(πiF) = −1），**即 Z₄ 在物理谱上塌回 Z₂——这个限定必须带上**（本卡断言 (4) 已带）。
+      ⚠ 抽取记录同时告警：`polchinski-1998-v2.md` **E48 记了 (10.8.13)/(10.8.14)/(10.8.15) 三式，
+      但漏了 (10.8.12) 与「doubling trick (10.2.15)」这条明写依赖**。本卡把两者都补上。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. **(10.2.15)**（doubling trick；被 (10.8.12) 明写引用）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md **#E20**）。
+      ⚠⚠ **本图无对应节点**：worldsheet.open-string-doubling-trick 是**玻色弦**语境的
+      （Neumann 条件 ⇒ T̄ 是 T 的镜像解析延拓），(10.2.15) 是它在**世界面费米子**上的版本。
+      故本卡只在此定位来源，**不**建依赖边（见「本定义不断言 (b)」）。
+      ⇒ 待建：worldsheet.open-superstring-doubling-trick（超弦版 (10.2.15)）。
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.19) 附近（玻色弦的世界面宇称：开弦 σ ↦ ℓ − σ、Ω α_n^i Ω^{−1} = (−1)^n α_n^i、Ω² = 1、无取向投影 (1+Ω)/2）"
+    note: |
+      本图对应节点 **worldsheet.worldsheet-parity**（本卡的 uses 之一）。
+      ★ **两张卡的关键差别（也是本卡存在的理由）**：玻色弦上 **Ω² = 1**，无取向投影是
+      **(1+Ω)/2** 两项；开超弦上 **Ω² = exp(πiF)**，与 GSO 合成后是 **(1+Ω+Ω²+Ω³)/4** 四项。
+      ⚠ 这正是玻色版 Ω 卡**不能**替代超弦语境的原因，也是此前若干条推导把 Ω 边标 inferred 的原因。
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, p. 30（开弦必须做 GSO 投影；'Adding Chan–Paton factors, the gauge group will again be U(n) in the oriented case and SO(n) or Sp(n) in the unoriented case.'）"
+    note: |
+      本图对应节点 **worldsheet.type-i-open-string-gauge-multiplet**（本卡的 uses 之一）。
+      供给断言 (4) 里「exp(πiF) = 1 by the **GSO projection**」所用的**开弦** GSO 投影。
+      ⚠ 本图另有 worldsheet.gso-projection，但那张卡是**闭弦** IIA/IIB/type 0 的 GSO；
+      (10.8.15) 说的是**开弦**扇区的 GSO，故本卡取前者。
+tags: [superstring, type-i, worldsheet-parity, orientifold-projection, gso, definition]
+notes: |
+  ★★【本卡为什么存在（curator，2026-09-11，klein-mobius）】
+  在此之前，本图里凡需要「Ω 在超弦上的作用」的推导都只能把边挂到**玻色弦**的
+  worldsheet.worldsheet-parity 上并标 **inferred**，并各自在 gaps 里记一句同样的话：
+    · worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences：
+      「**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**（依赖边已标 inferred）」；
+    · worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling：
+      「超弦的完整作用 ((10.8.12)–(10.8.15) …) 本图无节点 … Möbius 带那一支才真正需要这些式子」。
+  本卡把这条缺口在**开弦**一侧合上。**闭弦一侧仍未合上**（见「不断言 (c)」）。
+
+  ★【为什么 status 取 rigorous】(10.8.13) 是在自由世界面费米子的模代数上给出的**精确算符定义**
+  （给定 r 的取值范围，Ω 由相位 exp(−πir) 与真空上的取值唯一确定），
+  (10.8.14) 由它经**有限步初等计算**得到（NS：r ∈ Z + ½ ⇒ exp(−πir) 纯虚 ⇒ 平方为 −1）。
+  这符合 docs/STATUS_LEVELS.md 对 definition 的 `rigorous` 判据（数学上精确但未形式化）。
+  ⚠ **两处照实登记的保留**（不因此降级，但必须写明）：
+    (i) **R 扇区的论证原书不给**（见「不断言 (a)」）——原书只写了 NS 扇区那一句；
+    (ii) **(10.8.12) 所用的超弦版 doubling trick (10.2.15) 在本图无节点**（见「不断言 (b)」），
+         即「几何上的 σ ↦ π − σ」到 (10.8.12) 这一步是从原书导入的。
+  ⇒ 本卡的 effective 由 uses 的最低级压下来（worldsheet.type-i-open-string-gauge-multiplet 是
+  physical-argument），这是有意的：(10.8.15) 的四项写法确实依赖开弦 GSO 这条物理论证。
+
+  【下游】本卡目前的下游是
+  worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
+  （Möbius 带的迹里插入的正是 (10.8.15) 的投影算符，抽取记录 #E71 把 #E70 列为明写依赖）。
+  ⚠ **Klein 瓶那一支用不到本卡**（那是闭弦拓扑，需要的是 Ω 在闭弦费米子上的作用），
+  其推导的 Ω 边仍指玻色卡并保持 inferred。
+author: curator
+created: "2026-09-11"
