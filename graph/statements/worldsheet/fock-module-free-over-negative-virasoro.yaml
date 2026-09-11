@@ -1,0 +1,134 @@
+id: worldsheet.fock-module-free-over-negative-virasoro
+kind: proposition
+title: 玻色弦 Fock 模在 Virasoro 负部下自由：号差 (D−1,1)、D ≥ 2、p ≠ 0 时 V(E,p) 是自由 ℒ⁻-模（FGZ 1986 Proposition 2.6(i)）
+statement: |
+  **设定**（数学侧表述，照 FGZ 1986 的记号；与本图物理侧对象的对照见 notes）。
+  记 ℒ 为 Virasoro 代数（worldsheet.virasoro-algebra-v2 的 Vir），ℒ⁻ ⊂ ℒ 为由 {L_n : n < 0}
+  张成的子代数（**不含中心元**），U(ℒ⁻) 为其泛包络代数。
+    (H1) **号差 (D−1, 1) 与 D ≥ 2**：E 是 D 维实向量空间，带号差 (D−1,1) 的非退化对称双线性型
+         （本图的 conv.metric-mostly-plus），且 **D ≥ 2**。两条都逐字写在命题语句里：
+         "Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0."（p.8445）。
+    (H2) **Fock 模 V(E,p)**：FGZ §2.2 的 Fock 模——由 α^μ_{−n}（n ≥ 1）作用在动量 p 的真空 |p⟩
+         上生成的空间，ℒ 经 Sugawara 型 L_m 作用，π(c) = D·Id（本图对应
+         worldsheet.fock-space-virasoro-representation）；分次为
+         deg(α^{μ₁}_{m₁} … |p⟩) = (Σ m_i) − p·p/2，形式特征标 ch_q V(E,p) = q^{p·p/2} φ(q)^{−D}
+         （p.8445 左栏逐字，FGZ 称之为 **Fock module**）。
+    (H3) **动量**：p ∈ E，**p ≠ 0**。
+
+  **断言**（FGZ Proposition 2.6 的**第一部分**，p.8445 逐字：
+  "Then (i) V(E, p) is a free ℒ^--module …"）：
+
+    在 (H1)(H3) 之下，**V(E,p) 作为 U(ℒ⁻)-模是自由的**。
+
+  **本命题不断言**：
+    (a) **不断言 V(E,p) 是 Verma 模的直和**，也不断言它作为 ℒ-模由 V(E,p)^{ℒ⁺} 生成。
+        FGZ 在同一命题之后的 Remark 里**逐字否认这两件事**："We note that, although V(E, p) in
+        the above proposition is free over ℒ_-, it is **not in general a direct sum of Verma modules**
+        or even generated as an ℒ-module by V(E, p)^{ℒ^+}. As a counterexample one can choose the
+        case in which p·p is a nonpositive even integer."
+        ⇒ **「在负部下自由」与「是 Verma 模直和」是两件不同的事，后者一般为假。**
+        本图把那一条争议（超版）记在 worldsheet.nsr-fock-space-verma-decomposition。
+    (b) 不断言自由模的**秩**，也不给出一组显式基。
+    (c) 不断言**横向空间 T 的存在与正定性**——那是同一命题的 **(ii)**（"there exists a positive
+        definite subspace T ⊂ V(E, p)^{ℒ^+} … such that ch_q T = q^{p·p/2}φ(q)^{D−2}"），
+        FGZ 用它构造上同调类的显式代表元，其证明另引 Kac 行列式（FGZ refs 10, 11）。本卡只取 (i)。
+    (d) 不断言 **D = 26**。Prop 2.6 的语句里只有 D ≥ 2；D = 26（等价地 π(c) = 26·Id）是 FGZ
+        §2.2 后文为**相对上同调**另设的假设，不是本命题的前提。
+    (e) 不断言 **p = 0**。p = 0 时 FGZ 另案处理（Proposition 2.8 / 2.9，逐字 Theorem 1.12 不适用）。
+    (f) 不断言**超弦（RNS）版本**——那是
+        worldsheet.rns-fock-module-free-over-negative-super-virasoro（LZ 1989 Corollary 2.19(iii)）。
+        两卡**互不依赖**，各挂各的推导：两篇文献各自独立证明自己那一侧，本图不主张由一侧推出另一侧。
+uses:
+  - worldsheet.virasoro-algebra-v2
+  - worldsheet.bosonic-fock-space
+  - worldsheet.fock-space-virasoro-representation
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+sources:
+  - ref: fgz-1986
+    loc: "**Proposition 2.6(i)**, p.8445，逐字：'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} [= all v ∈ V(E, p), annihilated by ℒ^+], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'"
+    note: |
+      **L1 页图逐字**（literature/extractions/brst-cohomology-sources.md §9.2 表格第 5 行）。
+      ★ 本条是 FGZ 自己为 Theorem 2.7 列出的四条输入之一，逐字 "**the first part of
+      Proposition 2.6**"（§9.3），也正是 **Theorem 1.12**（消灭定理）假设里的 "ℒ⁻-free" 那一半。
+      ⚠ **fgz-1986 是 PNAS 公告体裁（5 页、约 25 条编号陈述），Prop 2.6 不带印出的证明**；
+      本卡推导的 rigorous 是按"已核实的编号命题 + 数学期刊"给的，不是按逐行复核给的，见推导 gaps。
+      ⚠ 扫描件上 "ℒ^-" 的上标减号极小，易误读为 "ℒ-free"；§9.9.1 记了同型陷阱
+      （lian-zuckerman-1991 Thm 2.25 的 𝒢₋ 同样被渲染成 𝒢）。本条按上下文锁定为 **ℒ⁻**。
+  - ref: fgz-1986
+    loc: "**Proposition 2.4**, p.8445 左栏（Theorem 2.5 正上方），逐字：'PROPOSITION 2.4. dim H^m_∞(ℒ, ℒ₀; V) = 0 for m ≠ 0, and for m = 0 is equal to the coefficient of 1 in Eq. 2.3, when V is a Hermitian ℒ⁻-free ℒ-module in 𝒪₀.'"
+    note: |
+      **L1 页图逐字**（§9.9.1，researcher 2026-09-11 第二轮）。
+      ★★ **本条不是本卡断言的来源，而是本卡值得单独立卡的证据**：FGZ 的一般消灭命题把
+      **ℒ⁻-自由性写进假设**，而 p ≠ 0、D、号差在其语句里**一律不出现**。§9.9.2 的逐字结论：
+      「『i ≠ 0 消灭』这条结论并不需要 p ≠ 0——p ≠ 0 只在**验证 V(E,p) 确为 ℒ⁻-free**
+      （Prop 2.6(i)）时才被用到。凡建『相对上同调消灭』的卡，量词应挂在 ℒ⁻-freeness 上，
+      p ≠ 0 是它在 Fock 模情形的**充分条件**，不是消灭定理本身的假设。」
+      ⇒ 本卡就是"那一步"的落点：它把 (H1)(H3) 这些 Fock 模专属的量词吸收掉，
+      交给下游的只剩"ℒ⁻-自由"这一条性质。
+      ⚠ 同页 §9.9.3 逐字显示 **Prop 2.4 = Theorem 1.12 + Proposition 1.3**，自身不另给证明
+      （"This implies the following"）；故 FGZ 为 Thm 2.7 列的四条输入在逻辑上冗余，
+      见 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 的 summary/gaps。
+  - ref: fgz-1986
+    loc: "**Proposition 2.6 之后的 Remark**, p.8445，逐字：'We note that, although V(E, p) in the above proposition is free over ℒ_-, it is **not in general a direct sum of Verma modules** or even generated as an ℒ-module by V(E, p)^{ℒ^+}. As a counterexample one can choose the case in which p·p is a nonpositive even integer.'"
+    note: |
+      **L1 页图逐字**（§9.6 第二条，§9.9.5 复核无误）。
+      ★ 本条是"本命题不断言 (a)"的来源，也是本卡**不能**由
+      math.verma-module-free-over-negative-part 顶替的硬理由：**由 Verma 模的自由性到 Fock 模的
+      自由性没有成文的一步，而且来源明确说了"Fock 模不是 Verma 模直和"这条路不通。**
+      ⚠ 反例条件是 **p·p 为非正偶整数**——注意它落在 p ≠ 0 的范围**之内**：
+      即使在本卡成立的动量上，Verma 直和也可能失败。两件事互不蕴含，这正是本卡的存在理由。
+  - ref: fgz-1986
+    loc: "p.8445 左栏（Fock 模的分次与特征标）逐字：'The module V(E, p) is also a graded ℒ-module under the following definition of grading: deg α^{μ₁}_{m₁} … |p⟩ = (Σ^N_{i=1} m_i) − (p·p/2). The formal character of V(E, p) is given by ch_q(V(E, p)) = q^{p·p/2}φ(q)^{−D}. The graded ℒ-module V(E, p) will be called a Fock module.'"
+    note: |
+      L1 页图逐字（§9.6 第一条）。本条是 (H2) 的来源：它把 FGZ 的 V(E,p) 与本图的
+      worldsheet.fock-space-virasoro-representation / worldsheet.bosonic-fock-space 对上
+      （同一批 α^μ_{−n} 生成元、同一 Sugawara 作用、π(c) = D）。
+      ⚠ 同页逐字还有 "We have π(L_m)* = π(L_{−m}), so that V(E, p) is a Hermitian ℒ-module."
+      ——那一条是 **Theorem 1.12 的另一半假设**（厄米性），**不在本卡断言里**；
+      本卡只承担 "ℒ⁻-free" 这一半。
+tags: [worldsheet, bosonic-string, virasoro, fock-module, free-module, representation-theory]
+notes: |
+  ★★【为什么单建这张卡（curator，2026-09-11，small-backlog-10）】
+  在此之前，"Fock 模在 ℒ⁻ 下自由"这条性质在图上**没有节点**，
+  worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 只能把它挂在
+  **math.verma-module-free-over-negative-part** 上并标 `inferred`，那条边的 note 逐字写着：
+  「由本图的 Verma 模自由性卡到 FGZ 需要的『Fock 模在 ℒ⁻ 下自由』**没有**文献中成文的一步…
+  正解是为『Fock 模在 ℒ⁻ 下自由』单建一张卡，本边届时改指它并去掉 inferred。」
+  本卡即该"正解"，那条边已改指本卡并**去掉 inferred**。
+  三条理由（与 researcher 的两轮 FGZ 复核逐条对应）：
+    (1) **来源明确否认 Verma 路线**（Prop 2.6 后的 Remark 逐字见 sources）⇒ 旧边不是"懒得找"，
+        而是那条路根本不通；
+    (2) **FGZ 的一般消灭命题 Proposition 2.4 把 ℒ⁻-自由性写进假设**，而 p ≠ 0 / D / 号差一律
+        不在其语句里（§9.9.1–§9.9.2 逐字）⇒ "p ≠ 0" 的真正落点就是本卡，把它挂在消灭定理上
+        是记账位置错误；
+    (3) 它是**两处**下游的共同输入（玻色侧 Theorem 2.7(i)；超侧的同型命题另有一卡），
+        不立卡就要重复记账。
+
+  ★★【为什么与超弦版拆成两张卡（本卡 ↔ worldsheet.rns-fock-module-free-over-negative-super-virasoro）】
+  ⚠ 这一点**偏离了派活时"一张卡同时写 V(E,p) 与 V(p,κ)"的字面要求**，理由有两条，已在交付报告里
+  向 lead 明示，如判定不妥可合并回一卡：
+    (a) **graph/CLAUDE.md 的"一个节点一个命题"**：两半是**两篇互不引用的文献各自独立证明的两条
+        编号结果**（FGZ Proposition 2.6(i) ↔ LZ Corollary 2.19(iii)），且论证工具不同
+        （LZ 一侧经 Proposition 2.18，用**超** Virasoro 的 Kac 行列式与幺正性；FGZ 一侧未印出证明）。
+        按该判据应当拆开。
+    (b) **合并会把玻色侧的有效状态压低，且是纯记账造成的**：超侧的对象卡
+        worldsheet.rns-super-virasoro-generators 的 effective 是 physical-argument（上游是
+        OPE/路径积分链），而玻色侧的对象卡（worldsheet.fock-space-virasoro-representation 等）
+        是 formalized。合成一卡后 min 规则会把
+        worldsheet.bosonic-relative-cohomology-vanishing 从现在的 **rigorous 拉到
+        physical-argument**——那不是认识论上的发现，而是把两条无关的链绑在一起的副作用。
+  ⇒ 两卡互不依赖、互相在"本命题不断言 (f)"里指名对方。
+
+  【与本图物理侧对象的对照】
+  FGZ 的 V(E,p) ↔ 本图 worldsheet.bosonic-fock-space 的 F(D,R) 加上动量标号，
+  ℒ 的作用 ↔ worldsheet.virasoro-generators-free-boson 的 Sugawara L_m，
+  中心荷 ↔ worldsheet.fock-space-virasoro-representation 的 ρ(C) = D·id。
+  ⚠ 本图那几张卡是在**任意交换 ℚ-代数** R 上建的（并已形式化），FGZ 在 **C** 上工作且要求
+  E 的号差为 (D−1,1)；号差只在本卡的 (H1) 里出现，本卡不断言号差无关的版本。
+
+  【查重】`uv run stringgraph search free / Fock` 命中的是 DDF/Gram/Verma 一系与
+  math.verma-module-free-over-negative-part（Verma 模，不是 Fock 模），无同内容者。
+author: curator
+created: "2026-09-11"
