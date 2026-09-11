@@ -186,6 +186,17 @@ StringFormal/
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
                             D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
+  NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family
+                            实例化到 A^ε_n。补上两条小引理 **Fock.towerPairing_towerVacuum_self**（(H3)）与
+                            **ddfOp_towerVacuum_of_pos**（(H4)，一行：ddfWindow n vac = Icc n 0 = ∅）；
+                            ddfFamily 打包 + 四条前件 ddfFamily_ccr/_adj/_ann（ccr 由 lie_ddfOp_ddfOp
+                            **加标架正交归一** 得到——正交归一是真前件，不是横向性的推论）；
+                            主定理 **ddf_gram_diagonal**（⟨d,e⟩ = δ_{d,e} ∏ n^d d!，任意交换 ℚ-代数）、
+                            ddf_gram_pos（有序环）、**linearIndependent_ddfMonomial**（特征 0 域）、
+                            ddfMonomial_mem_towerPhysSubmodule（截距 a₀ = α'k² 由真空定死，非自由参数）。
+                            标架层：frameMonomial（ι = Fin (D−2)，用 LightCone 的 TransverseFrame）、
+                            **ddfSpan_eq_span_range_frameMonomial**（列表生成集 = 占据数生成集）与
+                            **ddf_span_pos**（全序域上 ddfSpan 里非零向量模长 > 0 —— 蓝图 §C.5 的正定性输入）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
