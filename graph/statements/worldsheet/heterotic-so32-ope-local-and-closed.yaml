@@ -44,5 +44,25 @@ notes: |
 
   【与 §10.6 三条件的关系】本卡断言的 (a)(b) 与 §10.6 的条件 (a)(b) 是同一对条件，
   只是这里是对杂化弦的扇区集合验证它们，而不是用它们求解扇区组合。
+
+  ⚠⚠【2026-09-11 陈旧提醒（curator-batch28，reviewer-batch18 记录）】statement「不断言 (3)」
+  与上面【本图的最大缺口】那段写的「本图无玻色化节点」**现已过时**：`uv run stringgraph
+  search bosoniz` 现在返回若干玻色化节点，其中最相关的是
+    · worldsheet.fermion-bosonization-two-dimensions（二维玻色化：一对世界面费米子 ≅ 一个全纯标量，
+      ψ ≅ e^{iH}、ψ̄ ≅ e^{−iH}）；
+    · worldsheet.u1-current-algebra-is-free-boson（U(1) 流代数 ≅ 自由玻色子，j^a = i∂H^a）；
+    · worldsheet.vertex-operator-cocycle（格点动量顶点算子的 cocycle 因子）；
+  另有 worldsheet.bc-ghost-bosonization、worldsheet.beta-gamma-bosonization、
+  worldsheet.ramond-ground-state-vertex-operator、worldsheet.spin-field-vertex-operators 等
+  （鬼场/超对称侧的玻色化，与本卡关系较远）。
+  ⚠ **这不构成对 statement 的即时换代**：本卡断言 (3) 说的是「本图无玻色化节点」，
+  按 graph/CLAUDE.md「statement 正文不可变」的规则，正文里这句陈旧的话**不就地改**；
+  上面【本图的最大缺口】那段（notes，非 statement）同样是历史记录，留作对照。
+  ⚠ 且现有节点均未逐字覆盖本卡需要的那一步——**32 个 λ^A 复化成 16 个 λ^{K±} 再写成 16 个左移
+  标量 H^K**（(11.2.11)/(11.2.12)）——`fermion-bosonization-two-dimensions` 只给「一对费米子 ↔
+  一个标量」的一般模式，不给「16 个左移标量」这个杂化弦专属的复化步骤。
+  ⇒ 若日后要把本卡的 gaps 实质关闭（把「by means of bosonization」接成图内推导），仍需专门为
+  (11.2.11)/(11.2.12) 建卡或建推导，不能直接借用上述任何一张现有节点当 depends_on。
+  ⇒ 本卡 statement 与「不断言 (3)」保持不变（原则 1）；下一次本卡实质换代时应重写这一句。
 author: curator
 created: "2026-09-11"
