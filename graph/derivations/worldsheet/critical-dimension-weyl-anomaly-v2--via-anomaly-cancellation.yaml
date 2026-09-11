@@ -65,6 +65,9 @@ gaps:
      本节点按更一般的形式（c^m = 26）陈述，若原书只写 D = 26，
      则本节点的陈述强于来源，须相应修订。该疑问在换代中**未**解决。"
   - "本推导只定 c^m，不定截距 a = 1，也不定 D；与 worldsheet.critical-dimension-brst-v2 相同。"
+  - "**【2026-09-12 auditor 路线严格化审计：本路线不可严格化，且剩余的物理节点应当留在树里】**（裁决全文见 docs/ROADMAP.md「auditor 裁决（2026-09-12，critdim-routes）」R4，草案见 docs/drafts/critdim-route-cards.md。本轮只记账，本推导一字未改。）本路线的内容就是 Polyakov 路径积分测度的 Weyl 变分 + Faddeev–Popov 手续 + 「有反常 ⇒ 理论不一致」三步，**本图没有被构造的测度对象**——这不是「还没做」而是「没有对象」，故与 (I)(V) 一样封顶在 physical-argument，且不应尝试抬升。
+     **唯一可做的一步是把 c^g = −26 那条边换掉**：按 auditor R3，新建只覆盖 λ = 2 的窄卡 `worldsheet.bc-ghost-central-charge-lambda-two`（来源 fgz-1986 Proposition 2.1(i)(ii)，rigorous）后，本推导的 `worldsheet.bc-ghost-central-charge` 边应改指该窄卡，**并同步改 sources 的 loc**（现挂 §2.5 (2.5.12) 是一般 λ 的 OPE 公式，窄卡的来源是 FGZ Prop 2.1(i)）。⚠ 改边**只绕开中心荷这一步**：改后本路线剩余的物理根仍是 worldsheet.weyl-anomaly-trace、worldsheet.weyl-anomaly-central-charge-constant、worldsheet.faddeev-popov-ghost-action、worldsheet.conformal-gauge-fixing，以及它们共用的 worldsheet.operator-product-expansion / worldsheet.ward-identity / worldsheet.free-scalar-propagator 路径积分层。**这些是真物理，不得压缩、不得藏进定义层。**
+     ⚠ 另记：本推导 depends_on 与 note 正文里字面写的 `worldsheet.bc-ghost-central-charge`，以及目标卡 worldsheet.critical-dimension-weyl-anomaly-v2 的 statement 里点名的同一个 id，按 graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」**只改边、不改正文**，留待下次实质换代同步。"
 notes: |
   【2026-09-11 换代】本文件由 worldsheet.critical-dimension-weyl-anomaly--via-anomaly-cancellation
   改挂到换代后的陈述 worldsheet.critical-dimension-weyl-anomaly-v2（旧卡末段把 c^m = D 这一步

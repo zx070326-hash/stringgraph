@@ -79,6 +79,46 @@
 - **非官方全本扫描**（如大学个人页挂出的 Weibel 全本 PDF）：按 literature/CLAUDE.md 规则 1 的精神**不使用**，与既定的 nzdr.ru 口径一致；出版社/作者本人/课程页挂出的**单章**扫描可用（如 Lieb–Loss Ch.6、Schottenloher 各章）。
 - **Polchinski 原书核对**：仍无持书者。E34 改由 Kac–Raina 等数学来源支撑，E53、E58 继续挂"二手源核实"gap。
 
+### auditor 裁决（2026-09-12，critdim-routes）：ms.critical-dimension-bosonic 四条路线的严格化审计
+
+> 执行：physics-auditor，分支 `agent/auditor/critdim-routes`。卡片草案（新卡 / 新推导 / 边改动的完整 YAML）
+> 在 `docs/drafts/critdim-route-cards.md`；本节只写裁决与理由。本轮**未动**任何陈述卡文本、
+> 未动任何 status、未动 `graph/milestones/`（未 claim）。
+
+**R0（主裁定）：四条路线都不能把这个里程碑抬离 physical-argument，且原因是陈述形状而不是证据。建议按 physical-argument 签署。**（即任务书的选项 (c)。）三条独立的封顶，每条单独就够：
+
+1. `worldsheet.critical-dimension-bosonic-v3` 是 (I)–(V) 的**合取**，`effective = min`。其中 (IV) 是路径积分测度的 Weyl 变分 + Faddeev–Popov 手续 + 「有反常 ⇒ 理论不一致」，本图**没有被构造的测度对象**——这不是「还没做」而是「没有对象」；(V) 两条推导的输入都是一致性**要求**（谱须组织成小群表示 / 伪态须解耦），不是定理。两者不可严格化。
+2. `--via-four-routes` 自身 `status: physical-argument` 的理由成立且不可消除：目标卡里有一批**关于本图自身**的元断言（「(I) 是唯一同时定出 D 与 a 的」「(III)(IV) 的判据是同一个数」「(V) 三条刻画在图内支撑的维数范围」），它们不是任何文献里的定理。该推导 gaps 第 1 条写得对。⇒ **即使五个合取项全部 formalized，里程碑仍是 physical-argument。**
+3. 因此「用新卡把里程碑抬到 rigorous」这个目标，在不改 v3 陈述的前提下**不存在解**；而为了抬状态去换代 v4 删掉弱合取项，是拿真实内容换状态数字，auditor 不建议。要那个更窄的命题，正确做法是**另立里程碑**（见 R6）。
+
+**R1（记账订正，先说，因为任务书的前提已过期）：路线 (II) 已经 rigorous，且早已不在瓶颈树里。** `worldsheet.critical-dimension-old-covariant-v3 [rigorous] → no-ghost-theorem-v4 [rigorous] → kac-determinant-v2 → math.verma-module-free-over-negative-part → math.pbw-theorem`，全链 rigorous（2026-09-11 第七轮 DDF 接线之后）。四条路线里**只有它已经脱离 physical-argument**。任务书里「瓶颈树全是物理论证（含旧协变路线）」的描述不成立。
+
+**R2（路线 I）：ζ 正规化不是它的前提；两条非承载边一删，`why` 就只剩一个物理节点——但删边必须配一句点名，否则是把物理藏进定义层。**
+
+- 事实：`--via-lorentz-algebra` 的两条边 `light-cone-normal-ordering-constant` 与 `open-string-mass-shell` **都不为目标陈述服务**。前者的 note 自己逐字写着「本边**不是**目标陈述的前提，删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容」；后者只用于 summary 把 Δ_n = 0「解读成谱条件」，而目标卡 `critical-dimension-light-cone-v2` 的 statement 里**没有任何质量公式**。先例：auditor 第七轮把 `ddf-contour-equals-mode-sum` 撤出 `no-ghost-theorem-v4--via-goddard-thorn`（溯源记账非证明步骤），以及 2026-09-12「接口边」裁决的后半句（只提供语境不承担论证的边不得存在）。
+- 模拟（auditor 本地跑 `why` 后已回滚）：删两条边后 (I) 一支塌成两行 `critical-dimension-light-cone-v2 [physical-argument] ↳ own status physical-argument`，**0 个压低依赖**。审计面从 8 个物理节点压到 1 个；effective 不变。
+- ⚠ **honesty caveat（本轮最重要的一条）**：删边后正则量子化那一步不再出现在 (I) 的树里，因为它在 `worldsheet.light-cone-quantization` 这张 **definition** 卡里被**直接写出**——该卡 notes 逐字：「振子对易关系 … 与质量壳 … 在本定义中是直接写出的；它们作为命题的来源链分别见 `transverse-oscillator-commutators` 与 `open-string-mass-shell`，**不加进 uses（那会把纯代数的定义层拉低到 physical-argument）**」。这个立场本身站得住（定义可以规定一个代数系统），但它意味着 **(I) 断言的是「被定义的那个光锥代数系统」的性质**，不是「物理弦」的性质。故删边**必须**同时在推导 gaps 里点名三张承载物理识别的卡（`transverse-oscillator-commutators` / `light-cone-gauge-lagrangian` / `polyakov-nambu-goto-classical-equivalence`，全 physical-argument）并写明它们不在本链上。逐字条目见草案 §D。**不写这一句，删边就是状态谎报。**
+- (I) 能否 rigorous：只有 STATUS_LEVELS 的「初等可复核」例外条款一条路（reviewer 独立复算 [J^{i−}, J^{j−}]）。三次式 + 无穷模式重排，代价远高于 R3，而收益为零（抬不动里程碑）。**本阶段不建议做。**
+
+**R3（路线 III）：四条里唯一可严格化的一条。最小改动 = 一张新卡 + 两条新推导 + 三条边改指。**
+
+- **A（新卡）** `worldsheet.bc-ghost-central-charge-lambda-two`：只断言 λ = 2 的模式代数结论 c^g = −26，推导 `--via-fgz-ghost-representation` 标 **rigorous**。来源 `fgz-1986` **Proposition 2.1**，p.8444 右栏，L1 全文五页逐页读毕（`literature/extractions/brst-cohomology-sources.md` §1.2 逐字：`(i) ρ(c) = −26 Id_{Λ^∞_*}`、`(ii) ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`）。**字典由同一条命题的 (ii) 印出**：auditor 已逐项复核 `:c_{−n}b_{m+n}: = −:b_{m+n}c_{−n}:` 使 (ii) 与 λ = 2 的标准式 `L^g_m = Σ_n (m(λ−1)−n) :b_{m+n}c_{−n}:` 逐字相同（一次符号翻转，无其他内容）。档位依据是 lead 2026-09-12 small-backlog-8 / -10(c) 对 PNAS 公告体裁的统一口径（逐字核实的编号命题 + 明写输入 + gaps 记无印出证明），先例 `no-ghost-theorem-brst--via-fgz`、`brst-nilpotent-at-c26--via-fgz`。
+- **为什么必须新建窄卡**：`worldsheet.bc-ghost-central-charge` 断言的是**一般 λ** 的 `c = −3(2λ−1)²+1`，FGZ 只覆盖 λ = 2。给它挂一条只覆盖 λ = 2 的 rigorous 推导，工具会把一般 λ 公式算成 rigorous。旧卡保留（bosonization / βγ / 超共形鬼场三处要一般 λ）。
+- **B（三条边改指）**：`critical-dimension-brst-v2--via-nilpotency`（维持 inferred）、`critical-dimension-weyl-anomaly-v2--via-anomaly-cancellation`、`critical-dimension-bosonic-v3--via-four-routes`（两者须同步改 sources 的 loc）。陈述与 note 正文里字面写的旧 id **不动**（陈述不可变；按 graph/CLAUDE.md 的换代内嵌 id 细则）。
+- **C（新推导）** `critical-dimension-brst-v2--via-mode-computation`，**条件性 rigorous**：目标卡前提已完整写在陈述里（受限模、`c_{−m}c_m` 线性无关、a^g = −1、λ = 2），符合例外条款第一项；但 **{Q_B,Q_B} 的模式恒等式没有任何数学文献印出证明**（fgz-1986 / lian-zuckerman-1991 / lian-zuckerman-1989 已逐一核实排除，kato-ogawa-1983 正文未获取），故其 rigorous **完全依赖 reviewer 独立复算**。**未复算不得标 rigorous**，先建成 physical-argument。先例是 `free-boson-central-charge-d--via-mode-algebra`（同样靠 reviewer 复核 + 编号来源升 rigorous）。
+- 效果（模拟已跑）：(III) **整条从瓶颈树消失**。
+
+**R4（路线 IV）：不可严格化，且剩余的物理节点应当留在树里。** B 改边后 (IV) 的剩余物理根是 `weyl-anomaly-trace`、`weyl-anomaly-central-charge-constant`、`faddeev-popov-ghost-action`、`conformal-gauge-fixing`，以及它们共用的 `operator-product-expansion` / `ward-identity` / `free-scalar-propagator` 路径积分层。这些是真物理，不该被压缩。注意改边**只绕开了中心荷那一步**，没有绕开 FP 手续。
+
+**R5（路线 V）：不可严格化，但可以把物理压到一个点，且其中一半是工具问题。** `open-string-intercept-v2` 的两条推导同为 physical-argument，`tools/stringgraph/propagate.py:125` 在同档位时先到先得（= 按 id 字母序），于是 `why` 走了依赖链最长的 `--via-light-cone-representation`（拖进整条 ζ 链），而 `--via-null-state-decoupling` 的三条依赖**全部 formalized**。两条建议：(a) 工具在同档位时优先取压低依赖更少的那条（属 `tools/` 改动，单独提交）；(b) 新建纯代数卡 `worldsheet.level-one-spurious-physical-iff-intercept-one`（k² = 0 时 `L_{−1}|0;k⟩` 满足物理态条件 ⟺ a = 1），依赖全 formalized，Lean 侧已有 `Fock.sub_intercept_apply_of_mem_levelSubmodule` 可接，有望直接 formalized。两者都不改 (V) 的 effective。
+
+**R6（建议新立里程碑）`ms.critical-dimension-brst-nilpotency`**，`statement_id: worldsheet.critical-dimension-brst-v2`，在 A/B/C 落地后 effective = **rigorous**。由 c^m = 26 到 D = 26 的一步由 `free-boson-central-charge-d`（**formalized**）单独承载，写进 canonical_text 但不并进陈述。这样船长手上会有两张诚实的牌：一张 physical-argument 的「四条路线合取」，一张 rigorous 的「BRST 判据」——后者是本图唯一有望端到端机器验证的 D = 26 路线（`virasoro-algebra-v2`、`fock-space-virasoro-representation`、`free-boson-central-charge-d` 都已 formalized，缺的只是 bc 侧的 Clifford 对应物）。
+
+**R7（可追溯性，本轮已落地）**：`--via-lorentz-algebra` 的 Δ_n 此前**只**由 GSW §2.3.1 (2.3.32) 支撑，而该式号未核实。本轮加挂 `bering-2011` (7.1)（L1，加框，页图逐字）并记录 auditor 的独立复核：Bering 的 `n((D−2)/24 − 1) − (1/n)((D−2)/24 − a)` 与本图的 `Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]` 在整体因子 **−2** 下**两个系数逐项相同**（该因子被 `Σ_{n≠0}` 与 `Σ_{n≥1}` 的反对称化、以及前因子约定吸收）。⇒ 「两个系数同时为零 ⟺ D = 26 且 a = 1」在两个来源上一致。⚠ 引用纪律不变：Bering 原文措辞是 "precisely vanishes for" 而非 iff，且 κ 是他自创的正规化参数（`sources.bib` 的 `bering-2011` note）。
+
+**R8（给船长的一句话）**：`ms.critical-dimension-bosonic` 按 physical-argument 签署；被隔离出来的物理节点是——(I) `critical-dimension-light-cone-v2` 的 [J,J] 模式计算（+ 定义层的正则量子化假定，见 R2 caveat）、(IV) 的四张路径积分卡、(V) 的「一致性要求」。(II) 已 rigorous，(III) 按 R3 可变 rigorous。**里程碑的 `approved` 只断言忠实性**（docs/STATUS_LEVELS.md 2026-09-11 裁决），第三轮回译的 faithful 裁定不受本轮影响。
+
+
 ## 待船长裁决
 
 - **第三个里程碑 `ms.ddf-commute-with-virasoro`（2026-09-12 起草）**：陈述 `worldsheet.ddf-commute-with-virasoro`（∀m, n: [L_m, A^ε_n] = 0），**effective = formalized**（Lean `lie_towerLop_ddfOp`）且 own rigorous（G–N 顶点代数推导）——本项目首个同时严格且机器验证的非平凡物理命题。**两轮独立回译均 faithful，`audit.status: back-translated`——船长可批**（批准操作：`audit.status` 改 `approved`，填 captain/approved_on）。船长须知：Lean 证的是**模态和**版本；"文献围道定义的 A^i_n 与之相同"由一张 physical-argument 卡承载；n = 0 卡排除但来源与 Lean 都覆盖（不建议为此换代）。

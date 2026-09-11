@@ -39,6 +39,39 @@ sources:
       作者三处自降严格程度（逐字）：p.21「plausible without a complete treatment」、
       p.24「We will show this **indirectly** in the coming chapters」、p.90「rather **heuristically**」。
       另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」。
+  - ref: bering-2011
+    loc: "arXiv:1104.4446**v2**, §7, **加框的 (7.1)**, p.7（开弦光锥的 [J^{−i}, J^{−j}] 显式重算；§7 的证明分 Part 1/Part 2，以 □ 收尾）"
+    note: |
+      **【2026-09-12 auditor 新增：Δ_n 的第二个来源，且是本图目前唯一核实到公式级的一个】**
+      本推导此前的 Δ_n **只**由 gsw-1987-v1 §2.3.1 (2.3.32) 支撑，而该式号本项目未核实
+      （四路线推导的 GSW 条目逐字：「§2.3.3 的页码经核实，式号未核实」）。
+      bering-2011 (7.1) 是 L1（researcher 逐页读图 pp.1–2, 7–11，抽取记录
+      literature/extractions/ggrt-1973.md §3 E-L3-1），逐字：
+        `[J^{−i}, J^{−j}] = (2ℏ²/(α₀⁺)²) Σ_{n≠0} : α^i_{−n} α^j_n : κ^{|n|}
+           [ n((D−2)/24 − 1) − (1/n)((D−2)/24 − a) ] + O(κ−1)`
+      紧接逐字 "which, in the limit `κ → 1`, **precisely vanishes for `D = 26` and `a = 1`**"。
+
+      **auditor 逐项复核（2026-09-12）：与本图的 Δ_n 在整体因子 −2 下逐项相同。**
+        · n 的正幂：Bering `n[(D−2)/24 − 1] = n(D−26)/24`；本图 `n(26−D)/12`。比值 −2。
+        · n 的负幂：Bering `−[(D−2)/24 − a] = a − (D−2)/24`；
+          本图 `(D−26)/12 + 2(1−a) = −2[a − (D−2)/24]`。比值 −2。
+      该整体因子被两处约定吸收：Bering 求和跑遍 n ≠ 0 且写正规序，本图对 n ≥ 1 写反对称组合
+      α^i_{−n}α^j_n − α^j_{−n}α^i_n（差一个 2）；前因子 2ℏ²/(α₀⁺)² 与 −1/(2α'(p⁺)²) 的
+      归一化不同（差一个符号）。⇒ **「两个系数同时为零 ⟺ D = 26 且 a = 1」在两个来源上一致。**
+
+      ⚠ **引用纪律三条（sources.bib 的 bering-2011 note 已写死，此处重申）**：
+      (1) 原文措辞是 "precisely vanishes for"，**不是** "if and only if"、也不是 "necessary"；
+          必要性虽显然，但那是本项目的推断，不得写成原文措辞。
+      (2) **κ 是 Bering 自创的记账/正规化参数**（摘要逐字 "a novel bookkeeping/regularization
+          parameter"），(7.1) 只在 κ → 1 的极限下成立；引用必须带这个前提。
+      (3) **状态上限 physical-argument**：物理式算符计算 + 自创正规化，不是数学定理。
+          故本条**不**改变本推导的 status，只改善可追溯性。
+      ⚠ 另注：Bering (7.1) 里 `(D−2)/24` 已是**代入过的** ζ 值，即他走的是本图 (I) 所说的
+      「Polchinski 形状」的变体（a 与 (D−2)/24 并列出现，两个系数独立为零）；
+      本推导主论证把 a 当自由参数的形状与之相容（两式逐项对应，见上）。
+      ⚠ Bering p.2 对 GGRT 的评价逐字 "**are sparse on details**"，与 Polchinski 书末
+      p.349 的 "careful treatment" 方向相反（ggrt-1973.md Q-G4，未裁决）；
+      在 GGRT 正文取得之前，本推导的 status 不得据任一方改动。
 summary: |
   把 α^-_n = L^⊥_n/((2α')^{1/2} p^+) 代入 J^{i-}，用横向振子对易关系逐项计算
   [J^{i-}, J^{j-}]。经典部分相消，量子部分留下 Σ_{n≥1} Δ_n (α^i_{-n}α^j_n - α^j_{-n}α^i_n)，
@@ -59,6 +92,9 @@ gaps:
   - "**文献差异（2026-09-11 原书核实后加强）**：Polchinski §1.3 正文用的是表示论论证（第一激发级须为无质量 SO(D-2) 矢量，结论式 (1.3.40), p.23），**显式的洛伦兹代数验证在原书里根本没有做，也没有留成习题**（此前本条写「只作为习题 1.3」，据抽取记录 §12.5 撤销）；原书 p.21 逐字承认只求「plausible without a complete treatment」并把诚实的推导推给共形规范路线，p.24 说「We will show this indirectly」，p.90 自称 §1.3 是「rather heuristically」。因此本推导陈述的 Δ_n 显式版本**只**由 GSW §2.3.1 (2.3.32) 支撑，Polchinski 不是它的来源。"
   - "**D ≥ 4 的限定已由换代解决，但它是 curator 加的、不在来源里**：旧目标卡 worldsheet.critical-dimension-light-cone 的 iff 未限定 D ≥ 4，在 D = 3 有反例（单横向指标处 α^i_{-n}α^j_n - α^j_{-n}α^i_n 恒为零，洛伦兹代数对任意 (D, a) 都闭合，「仅当」方向为假；D = 2 无横向振子）。ms.critical-dimension-bosonic 第二轮审计 N2 提出、第三轮裁定 3(a) 要求换代，本推导已于 2026-09-11 改指 worldsheet.critical-dimension-light-cone-v2（该卡带 D ≥ 4 与线性无关一步）。**剩余缺口**：GSW §2.3.1 (2.3.32) 的原文既没写 D ≥ 4 也没写线性无关一步，Polchinski 更没做这个计算；这两句是 curator 按初等论证补出的，属于本图相对来源的**增补**，故不因其初等而提升本推导的 status。"
   - "严格化路线：光锥洛伦兹反常可用 Virasoro 中心荷的严格代数计算重述（c^⊥ = D-2 与 a 的关系），届时可加一条 kind: proof 的新推导，不改本陈述。"
+  - "**【2026-09-12 auditor 裁定：本推导有两条非承载边，建议删】**（裁决全文见 docs/ROADMAP.md 「auditor 裁决（2026-09-12，critdim-routes）」R2，卡片草案见 docs/drafts/critdim-route-cards.md §D。本轮只记账，**边未动**，由 lead 派 curator 执行。）(1) `worldsheet.light-cone-normal-ordering-constant`：该边自己的 note 已逐字写明「本边**不是**目标陈述的前提，删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容」，它只服务于 summary 第二段的 Polchinski 形状。(2) `worldsheet.open-string-mass-shell`：该边的 note 写它用于把 Δ_n = 0「解读成谱条件」，而目标卡 worldsheet.critical-dimension-light-cone-v2 的 statement 里**没有任何质量公式**。两条边都属 2026-09-12「接口边」裁决后半句所禁（只提供语境而不承担论证），先例是 auditor 第七轮把 ddf-contour-equals-mode-sum 撤出 no-ghost-theorem-v4--via-goddard-thorn。**删边不改 effective**（仍 physical-argument），但把 (I) 在 `stringgraph why` 里的瓶颈树从 8 个物理节点压到 1 个（auditor 本地模拟已跑并回滚）。"
+  - "**【2026-09-12 auditor：正则量子化那一步在哪里——删边前后都必须点名】** 本推导的另一条依赖 `worldsheet.light-cone-quantization` 是 **kind: definition、status rigorous**，它把横向振子对易关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0} 与质量壳 α'm² = N − a **直接写出**；该卡 notes 逐字说明为何不把它们加进 uses：「那会把纯代数的定义层拉低到 physical-argument」。这个立场站得住（定义可以规定一个代数系统），但它意味着**本推导断言的是「被定义的那个光锥代数系统」的性质，不是「物理弦」的性质**。「该系统就是 Nambu–Goto 弦的量子化」这一物理识别由 worldsheet.transverse-oscillator-commutators（physical-argument，--via-canonical-quantization）、worldsheet.light-cone-gauge-lagrangian（physical-argument）与 worldsheet.polyakov-nambu-goto-classical-equivalence（physical-argument）承载，**这三张卡不在本推导的链上**（删掉上一条 gap 所说的两条边之后，它们连间接地也不在）。任何把本条读成「关于物理弦的 D = 26」的下游用法，必须另外取得这三张卡。"
+  - "**【2026-09-12 auditor：本推导能否升 rigorous】** 只有一条路——按 docs/STATUS_LEVELS.md 等级 4 的「初等可复核」例外条款，由 reviewer 独立复算 [J^{i−}, J^{j−}]（前提 D ≥ 4 与线性无关一步已写进目标卡 v2，符合该条款第一项）。代价远高于 BRST 路线的同类动作（三次式 + 无穷模式重排），且收益为零：ms.critical-dimension-bosonic 是五条的合取且其 --via-four-routes 自身封顶 physical-argument，(I) 单独升级抬不动里程碑（ROADMAP R0）。**本阶段 auditor 不建议做。** 上一条 gap 所说的「严格化路线：用 Virasoro 中心荷的代数计算重述」同样不解决问题：本图里通往 c^⊥ = D−2 的非 OPE 路线（free-boson-central-charge-d--via-mode-algebra / --via-lean）给的是**代数命题**，而把它接回光锥零点能仍要经 cylinder-plane-l0-shift（Schwarzian → OPE，physical-argument）。"
 notes: |
   **【2026-09-11 换代改名】**本文件原为
   worldsheet.critical-dimension-light-cone--via-lorentz-algebra，因目标陈述换代为
