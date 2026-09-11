@@ -1,0 +1,79 @@
+id: math.affine-lie-algebra-current-ope
+kind: definition
+status: physical-argument
+title: 流代数 / 仿射李代数 / (仿射) Kac–Moody 代数：(1,0) 流的 OPE j^a j^b ∼ k^{ab}/z² + i c^{ab}{}_c j^c/z、模代数 (11.5.3)、单李代数时 k^{ab} = k̂ d^{ab} 与 level k = 2k̂/ψ²
+statement: |
+  设二维 CFT 含一组全纯的、共形权 (1, 0) 的流 j^a(z)（a = 1, …, dim g；主场）。
+
+  **OPE 形式**。共形不变性要求它们的 OPE 具有形式
+    j^a(z) j^b(0) ∼ k^{ab}/z² + i c^{ab}{}_c j^c(0)/z                     （(11.5.1)）
+  （原书逐字：'Dimensionally, the z^{−2} term must be a c-number and the z^{−1} term must be
+  proportional to a current.'）。
+
+  **模代数**。Laurent 系数 j^a(z) = Σ_{m=−∞}^{∞} j_m^a / z^{m+1}（(11.5.2)）满足闭合代数
+    [j_m^a, j_n^b] = m k^{ab} δ_{m,−n} + i c^{ab}{}_c j^c_{m+n}              （(11.5.3)）.
+  特别地 m = 0 的模构成一个李代数
+    [j_0^a, j_0^b] = i c^{ab}{}_c j_0^c                                     （(11.5.4)）,
+  记为 g，于是 c^{ab}{}_c = f^{ab}{}_c 是 g 的结构常数（(11.5.5)；
+  math.compact-lie-algebra-index-and-casimir 的 (11.4.1)）。
+  j_1^a j_1^b j_{−1}^c 的 Jacobi 恒等式要求
+    f^{bc}{}_d k^{ad} + f^{ba}{}_d k^{dc} = 0                              （(11.5.6)）,
+  故对**单**李代数 g，
+    k^{ab} = k̂ d^{ab}                                                      （(11.5.7)）,
+  d^{ab} 为 g 的不变内积（(11.4.4)）。
+
+  **命名**（原书逐字）：'The algebra (11.5.3) is variously known as a *current algebra*, an
+  *affine Lie algebra*, or an *(affine) Kac–Moody algebra*.'
+
+  **与 Virasoro 的关系**。流是 (1, 0) 张量，故
+    [L_m, j_n^a] = −n j^a_{m+n}                                            （(11.5.8)）.
+
+  **level 的记号**。k̂ 称为中心扩张或 Schwinger 项。取 g 的最长根 ψ（Cartan–Weyl 归一化按原书 (11.4.14)，
+  **其内容本图未核实**），定义
+    k := 2k̂/ψ²                                                            （(11.5.13)）
+  为流代数的 **level**。本卡只把 k 作为记号引入；k̂ > 0 与 k ∈ Z_{≥0} 是两条独立命题
+  （worldsheet.current-algebra-central-term-positive、worldsheet.current-algebra-level-quantization）。
+
+  **本卡不断言的内容**：
+    (1) 不断言 k̂ 的正性或 k 的整数性（见上）；
+    (2) 不断言存在由流构造的能动张量（Sugawara，worldsheet.sugawara-central-charge）；
+    (3) 不断言 U(1) 情形与自由玻色子的同构（worldsheet.u1-current-algebra-is-free-boson）；
+    (4) 不断言 (11.5.3) 作为抽象李代数的任何结构定理（Kac 意义下的仿射代数理论不在本卡）。
+uses:
+  - math.compact-lie-algebra-index-and-casimir
+  - worldsheet.operator-product-expansion
+  - worldsheet.primary-field-v2
+  - worldsheet.ope-commutator-dictionary
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5 'Current algebras', eq. (11.5.1)–(11.5.8) 与 (11.5.13), pp. 66–68（(1,0) 流的 OPE、Laurent 模、模代数、零模构成 g、Jacobi ⇒ k^{ab} = k̂ d^{ab}、命名句、[L_m, j_n^a] = −n j_{m+n}^a、level k = 2k̂/ψ²）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E60；式号与公式逐字读自原书页图 pp. 66–68）。
+      原书从 (11.5.1) 到 (11.5.3) 的过渡用的是 Laurent 展开 + 围道（Vol.1 (2.6.14) 的字典），
+      本卡在 uses 里挂 worldsheet.ope-commutator-dictionary。
+      「Dimensionally, the z^{−2} term must be a c-number …」是原书对 (11.5.1) 形式的全部论证。
+tags: [current-algebra, affine-lie-algebra, kac-moody, cft, definition, lie-algebra]
+notes: |
+  【为什么 status 是 physical-argument 而不是 rigorous】本卡把「流代数」定义为**CFT 里 (1,0) 流的 OPE**
+  (11.5.1)，并断言其 Laurent 模满足 (11.5.3)。前者依赖 worldsheet.operator-product-expansion
+  （physical-argument），后者经 worldsheet.ope-commutator-dictionary（围道变形，physical-argument）。
+  **单独看 (11.5.3)–(11.5.7) 是一条严格的李代数定义**（有限个生成元关系 + Jacobi）；
+  若形式化或数学侧需要纯代数版的仿射 Kac–Moody 代数（Kac 的 ĝ = g ⊗ C[t,t^{−1}] ⊕ C K 定义），
+  请**另建** `math.affine-kac-moody-algebra` 一类的 rigorous 定义卡并登记数学来源（Kac 1990 / Goddard–Olive 1986），
+  不要给本卡升级——本卡的内容是 Polchinski 的 CFT 表述。
+
+  【与 compact.self-dual-radius-su2-current-algebra 的关系】那张卡是本卡在 g = su(2) 的具体实现
+  （自对偶半径的 j^± = e^{±2i(α')^{−1/2}X_L}，Vol.1 (8.3.14)），其 notes 明记「原书此处不展开仿射李代数的一般理论」。
+  本卡就是那个一般理论的入口；本轮不给那张卡加边（它已提交，且原书 §8.3 不前引 §11.5）。
+
+  【ψ² 的归一化未核实】(11.5.13) 的 k = 2k̂/ψ² 依赖最长根 ψ 的长度，而 Cartan–Weyl 归一化 (11.4.14) 在
+  原书 pp. 61–65（抽取跳读区）。c^{g,k} = k dim g/(k + h(g)) 这类**只含 k 与 h(g) 的比值**的公式不受影响
+  （k 与 h(g) 都是 ψ² 归一化下的比值），但 (11.5.21) 里显式的 (k + h(g))ψ² 受影响。
+
+  【本卡与 U(1) 因子】(11.5.6)–(11.5.7) 只对单李代数成立；U(1) 流的归一化 (11.5.14) 与自由玻色子同构
+  (11.5.15) 单列为 worldsheet.u1-current-algebra-is-free-boson。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

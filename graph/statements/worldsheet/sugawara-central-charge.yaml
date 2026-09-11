@@ -1,0 +1,96 @@
+id: worldsheet.sugawara-central-charge
+kind: proposition
+title: "Sugawara 构造：T^s_B = (1/((k + h(g))ψ²)) :jj: 与流的 OPE 同 T_B，且满足 TT OPE，中心荷 c^{g,k} = k dim(g)/(k + h(g))"
+statement: |
+  设二维 CFT（能动张量 T_B）含单李代数 g 的流代数 j^a（math.affine-lie-algebra-current-ope），
+  中心扩张 k̂、level k = 2k̂/ψ²，h(g) 为 g 的对偶 Coxeter 数（原书 (11.5.21) 的记号；
+  由 (11.5.40) 可读出 h(g)ψ² = Q_g，Q_g 为伴随表示的 Casimir）。定义正规序双线性
+    :jj:(z_1) := lim_{z_2 → z_1} [ j^a(z_1) j^a(z_2) − k̂ dim(g)/z_{12}² ]           （(11.5.18)，a 求和）
+  与 **Sugawara 能动张量**
+    T^s_B(z) := (1/((k + h(g)) ψ²)) :jj:(z)                                    （(11.5.21)）.
+  则：
+
+  **(1)** T^s_B 与每个流的 OPE 同 T_B 与该流的 OPE：
+    T^s_B(z) j^c(0) ∼ T_B(z) j^c(0)                                            （(11.5.22)）,
+  即 j^c 相对于 T^s_B 是权 (1,0) 的主场。
+
+  **(2)** T^s_B 与自身的 OPE 是标准的 TT OPE（worldsheet.tt-ope-central-charge）
+    T^s_B(z_1) T^s_B(z_3) ∼ c^{g,k}/(2 z_{13}⁴) + (2/z_{13}²) T^s_B(z_3) + (1/z_{13}) ∂T^s_B(z_3)   （(11.5.24)）,
+  中心荷
+    **c^{g,k} = k dim(g) / (k + h(g))**                                        （(11.5.25)）.
+
+  **(3)** 其 Laurent 系数
+    L_0^s = (1/((k+h(g))ψ²)) ( j_0^a j_0^a + 2 Σ_{n=1}^∞ j^a_{−n} j^a_n )          （(11.5.26a)）,
+    L_m^s = (1/((k+h(g))ψ²)) Σ_{n=−∞}^{∞} j^a_{m−n} j^a_n,  m ≠ 0                 （(11.5.26b)）
+  满足中心荷为 c^{g,k} 的 Virasoro 代数（原书逐字：'satisfy a Virasoro algebra with this central
+  charge'），且 L_0^s 的正规序常数为零。
+
+  **本命题不断言的内容**：
+    (1) 不断言 T_B = T^s_B；陪集分解 T_B′ = T_B − T^s_B、c′ = c − c^{g,k}、幺正时 c^{g,k} ≤ c
+        （(11.5.28)–(11.5.33)）是另一条命题，本轮未建卡；
+    (2) 不断言界 rank(g) ≤ c^{g,k} ≤ dim(g)（(11.5.37)）；
+    (3) 不断言单 laced 情形的化简 c^{g,1} = rank(g)（worldsheet.sugawara-level-one-simply-laced）；
+    (4) 不断言 U(1) 情形 T^s = (1/2):jj:（(11.5.27)，原书由自由玻色子反推；见
+        worldsheet.u1-current-algebra-is-free-boson）；
+    (5) 不断言 ψ² 与 h(g) 的数值定义（原书 §11.4 pp. 61–65 未核实）：(11.5.25) 只含比值 k、h(g)，
+        不受 ψ² 归一化影响，但 (11.5.21)/(11.5.26) 的显式系数受影响。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5 'The Sugawara construction', eq. (11.5.18)–(11.5.26), pp. 69–71（:jj: 的定义、全纯性论证 (11.5.19)–(11.5.20)、T^s = :jj:/((k+h(g))ψ²)、T^s j^c ∼ T_B j^c、T^s T^s 的 TT OPE、c^{g,k} = k dim(g)/(k+h(g))、L^s_m 的模式表达式与 'satisfy a Virasoro algebra with this central charge'）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E61；式号与公式逐字读自原书页图 pp. 69–72）。
+      原书自评（逐字，三处）：
+        · 'We first wish to show that up to normalization the OPE of :jj: with j^a is the same as that of T_B
+          with j^a. **This takes a bit of effort**; the same calculation is organized in a different way in
+          **exercise 11.7**.'
+        · 'The vanishing of the normal ordering constant in L_0^s **can be deduced** by noting that holomorphicity
+          requires L_0^s and also j_n^a for n ≥ 0 to annihilate the state |1⟩.'
+        · 关于 OPE 的使用范围的两段（见 notes，逐字）。
+tags: [sugawara, current-algebra, central-charge, virasoro, cft, ope-convergence, bottleneck]
+notes: |
+  ★【原书自己指出「朴素嵌套 OPE 给出错误的 c^{g,k}」——OPE 收敛域问题的一手实例】
+  原书 p. 69–71 逐字（抽取记录 E61 转录）：
+
+    (a) 'The OPE of the product :jj: is not the same as the product of the OPEs, because the two currents
+        in :jj: are closer to each other than they are to the third current; we must make a less direct
+        argument using holomorphicity.'
+
+    (b) 'We have used the jj OPE to determine the :jj: :jj: OPE. We could not do this directly, because the
+        jj OPE is valid only for two operators close compared to all others, and in this case there are two
+        additional currents in the vicinity. **Naive application of the OPE would give the wrong
+        normalization for T^s and c^{g,k}.** The argument above uses the OPE only where it is valid, and
+        then takes advantage of holomorphicity.'
+
+  这两段是本图迄今**唯一**一处原书明确承认「OPE 只在其收敛域内有效、越界使用会算错」的文字。
+  它对本图 OPE 严格化路线的意义：
+    · worldsheet.operator-product-expansion（physical-argument 的定义卡）里「有限收敛半径」那句的**边界**
+      在这里被原书自己用一个具体计算演示出来：把 jj OPE 用在「附近还有另外两个流」的场合就出错；
+    · worldsheet.string-cft-is-a-vertex-algebra-v2 的 polchinski-1998-v1 来源 note 曾预告
+      「Vol.2 §11.5 有一个原书自己承认 OPE 会出错的实例，本图尚未建节点」——本卡就是那个节点；
+    · 数学侧的对应物：math.vertex-algebra-associativity（Y(A,z)Y(B,w)C = Y(Y(A,z−w)B,w)C，**形式级数**恒等式，
+      对应「:jj: 的 OPE ≠ OPE 的乘积」这一层的正确处理——结合性要在 V((w))((z−w)) 里做，不能在
+      V((z))((w)) 里做）与 math.vertex-algebra-ope-analytic-convergence（收敛域 0 < |z_1 − z_2| < |z_2|，
+      正是「两个流比第三个流更近」的解析表述）。
+    · **原书的替代论证（全纯性 + 只在有效域内用 OPE）本身仍是 physical-argument**：
+      它依赖「:jj: :jj: 的 OPE 由其奇异部分 + 全纯性唯一决定」，即 OPE 的收敛与围道变形——
+      worldsheet.ope-commutator-dictionary 那条瓶颈。本卡因此封顶在 physical-argument。
+
+  【级联到形式化】若形式化这一条，正确的对象是 **Sugawara 构造作为顶点代数的定理**
+  （Frenkel–Ben-Zvi / Kac 一系：仿射顶点代数 V_k(g) 的共形向量 ω = (1/(2(k+h^∨))) Σ_a J^a_{−1}J^a_{−1}|0⟩，
+  中心荷 k dim g/(k+h^∨)，条件 k ≠ −h^∨）——那需要先建纯代数版仿射代数卡（见
+  math.affine-lie-algebra-current-ope 的 notes）。本图 formal/ 已有 Heisenberg (U(1)) 情形的 Sugawara
+  （virasoro-lean-2025，c = 1；见 worldsheet.string-cft-is-a-vertex-algebra-v2 的来源），非 abel 情形没有。
+
+  【数值核对（本图内部）】U(1)：dim = 1、h = 0 ⇒ c = 1 ✓（与 worldsheet.free-boson-central-charge-d 的单玻色子一致，
+  但如抽取记录 E61 备注所说，(11.5.27) 是原书由自由玻色子**反推**的，不是独立证明，**不建边**）。
+  SU(2)：dim = 3、h = 2 ⇒ c = 3k/(k+2) = 1, 3/2, 9/5, 2, 15/7, … → 3（(11.5.36)）✓。
+  SO(n) level 1（n ≥ 4）：dim = n(n−1)/2、h = n − 2 ⇒ c = n(n−1)/(2(n−1)) = n/2 = n 个实费米子的中心荷 ✓
+  ——这是 worldsheet.free-fermion-so-n-current-algebra-level-one 的陪集 c′ = 0 的数值证据，本卡不断言。
+
+  【h(g) 的定义未核实】原书 (11.5.21) 称 h(g) 为 'dual Coxeter number'，其定义处在 §11.4 中段（跳读区）。
+  本卡用 (11.5.40) 两个相等表达式读出 h(g)ψ² = Q_g（**本图推断**）。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

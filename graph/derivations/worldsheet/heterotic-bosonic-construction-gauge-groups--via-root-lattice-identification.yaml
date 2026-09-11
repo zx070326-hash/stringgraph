@@ -15,6 +15,15 @@ depends_on:
   - id: worldsheet.heterotic-e8e8-construction
     note: |
       供给费米子构造下 E₈ × E₈ 情形的规范玻色子内容（120 + 128 = 248），同上。
+  - id: math.compact-lie-algebra-index-and-casimir
+    inferred: false
+    note: |
+      原书 §11.6 p. 75 **明写**回指 §11.4：'the points of length-squared two are just the SO(32) roots (11.4.16)' /
+      'the E₈ roots (11.4.21)'，故第 (2) 步对 §11.4 的依赖是原书自己给出的，非本图推断。
+      ⚠ 但该卡**只**覆盖 §11.4 前段 (11.4.1)–(11.4.7)（李代数、不变内积、指标、Casimir），
+      被引用的 (11.4.16)/(11.4.21) 根系本身在 pp. 61–65 跳读区、内容未核实、**不在该卡上**
+      （该卡「不断言」(3)）。这条边把依赖落到原书指定的节，但没有闭合根系缺口——见 gaps 第 1 条。
+      边由本图补（2026-09-11，curator-polchinski-v2-ch11-current）。
 sources:
   - ref: polchinski-1998-v2
     loc: "§11.6, pp. 74–75（逐字见目标卡 sources）"
@@ -29,7 +38,7 @@ summary: |
   两种构造经玻色化等价（原书：'It is easy to see'）。
 gaps:
   - "**「l_L² = 2 的格点恰是根系」这一步依赖 (11.4.16)/(11.4.21)，而这两式的内容本轮未核实**（原书 pp. 61–65 跳读，抽取者只见到对它们的引用）。要坐实必须补读那五页页图。"
-  - "**李代数根系与规范群的对应在本图无节点**：§11.4「A little Lie algebra」（E59）本轮未入图，本图没有根系、Cartan–Weyl、伴随表示维数等节点。"
+  - "**李代数根系与规范群的对应在本图只有半张卡**：2026-09-11 起 §11.4 前段（(11.4.1)–(11.4.7)）入图为 math.compact-lie-algebra-index-and-casimir 并按原书回指接入；但根系、Cartan–Weyl 基、伴随表示维数（(11.4.12)–(11.4.21)）仍无节点。"
   - "**'It is easy to see that the earlier fermionic construction and the present bosonic one are equivalent under bosonization.' 是全部论证**：原书不验证两种构造的等价性；本图无玻色化节点。"
   - "**分类那条边的上游只有教科书断言**：math.even-self-dual-euclidean-lattices-dimension-16 没有数学来源（Conway–Sloane / Serre 未登记）。这是本推导的主要瓶颈。"
   - "**「同一对群」的比对是本图做的核对**：原书说 'the same two gauge groups … found earlier'，但不逐项对照 496 与 248 的表示内容。"

@@ -1,0 +1,48 @@
+id: worldsheet.free-fermion-so-n-current-algebra-level-one
+kind: proposition
+title: 自由费米子的流代数：n 个左移实费米子的双线性 iλ^Aλ^B 构成 level-1 的 SO(n) 流代数（n = 3 时 level 2）；一般表示 r 的构造 (1/2)λ^Aλ^B t^a_{r,AB} 给 level k = T_r/ψ²
+statement: |
+  设 λ^A(z)（A = 1, …, n）是 n 个全纯（左移）实费米子，OPE 为 λ^A(z) λ^B(0) ∼ δ^{AB}/z
+  （worldsheet.heterotic-string-construction 的 (11.2.4)）。则：
+
+  **(1) SO(n) 情形**。双线性
+    j^{AB}(z) = i λ^A λ^B(z)                                              （(11.5.16)）
+  是权 (1, 0) 的流，其 OPE 闭合成 SO(n) 的流代数（math.affine-lie-algebra-current-ope 的 (11.5.1)），
+  level **k = 1**；例外是 n = 3，此时 level **k = 2**（抽取记录 E60 转述原书 p. 68；原书措辞未逐字转录）。
+
+  **(2) 一般表示**。若 λ^A 处于李代数 g 的（实）表示 r，矩阵为 t^a_{r,AB}，则
+    j^a(z) = (1/2) λ^A λ^B t^a_{r,AB}                                      （(11.5.17)）
+  构成 g 的流代数，level
+    k = T_r / ψ²,
+  T_r 为表示 r 的指标（math.compact-lie-algebra-index-and-casimir 的 (11.4.6)），ψ 为最长根。
+
+  **本命题不断言的内容**：
+    (1) 不断言 ψ² 的数值（原书 (11.4.14) 的归一化未核实；(1) 中 k = 1 是原书给出的数值结论，
+        本图未用 (2) 复算）；
+    (2) 不断言 n = 3 例外的解释（SO(3) 的矢量表示即 SU(2) 的伴随表示，T_adj/ψ² = 2——这是本图旁注，原书未展开）；
+    (3) 不断言这些流生成的 CFT 是自由费米子 CFT 的全部（Sugawara 陪集 c′ = c − c^{g,k} 是否为零另论；
+        对 SO(n) level 1，c^{so(n),1} = n/2 恰等于 n 个实费米子的 c，但本卡不断言此等式）；
+    (4) 不断言杂化弦的**整体**规范群（只到李代数）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.16)–(11.5.17), p. 68（杂化弦的流 iλ^Aλ^B 构成 SO(n) 代数、level k = 1、n = 3 例外 k = 2；一般表示 r 的自由费米子构造 (1/2)λ^Aλ^B t^a_{r,AB}、level k = T_r/ψ²）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E60）。
+      抽取记录只记了这两式与结论，未转录原书由 λλ OPE 算出 (11.5.1) 系数的中间步骤；
+      原书本段自评（E60 所录的逐字之一）：'It is easy to see that…'。
+tags: [current-algebra, free-fermion, so-n, level-one, heterotic, cft]
+notes: |
+  【与 ch11 杂化弦卡的关系】这是原书 §11.5 对 §11.2 的**回指**：SO(32) 杂化弦的 32 个 λ^A 给 level-1 的 SO(32)
+  流代数，E₈ × E₈ 杂化弦的两组 16 个 λ 各给 level-1 的 SO(16)（再由 (11.2.26) 的旋量流扩大到 E₈——
+  **该扩大原书 §11.5 未陈述**，本卡不断言）。worldsheet.heterotic-so32-massless-spectrum 推导里
+  「λ^A_{−1/2}λ^B_{−1/2}|0⟩ 按 SO(32) 的 [2] = 伴随变换」的李代数事实，其在原书内的支撑就是 (11.5.16)：
+  双线性 iλ^Aλ^B 的零模就是 so(n) 的生成元。该推导加了一条 inferred 边指向本卡
+  （§11.2 不前引 §11.5，故 inferred）。
+
+  【与 U(1) 与玻色化的关系】复化 λ^{K±}（(11.2.11)）后 Cartan 子代数的流 iλ^{2K−1}λ^{2K} = i∂H^K
+  就是 worldsheet.u1-current-algebra-is-free-boson 的 (11.5.15) 与 worldsheet.fermion-bosonization-two-dimensions 的接口；
+  本卡不加边（原书此处不写）。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

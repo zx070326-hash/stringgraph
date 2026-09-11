@@ -1,0 +1,35 @@
+id: worldsheet.current-algebra-central-term-positive--via-norm-of-current-state
+target: worldsheet.current-algebra-central-term-positive
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.affine-lie-algebra-current-ope
+    note: |
+      供给模代数 (11.5.3) 在 m = 1, n = −1, a = b 时的读数
+      [j_1^a, j_{−1}^a] = k̂ d^{aa} + i f^{aa}{}_c j_0^c = k̂ d^{aa}（f 反对称故第二项为零），
+      以及 k^{ab} = k̂ d^{ab}（(11.5.7)）。
+  - id: math.compact-lie-algebra-index-and-casimir
+    note: 供给 d^{ab} 的正定性（(11.4.4)），使 d^{aa} > 0、从而 k̂ ≥ 0。
+  - id: worldsheet.state-operator-isomorphism
+    inferred: true
+    note: |
+      **inferred 的理由**：原书 (11.5.9) 下方直接写 'Thus k̂ = 0 only if the current vanishes identically'，
+      不写出「j^a_{−1}|1⟩ 是 j^a 对应的态、其范数为零即 j^a = 0」这一步；
+      该步是态-算子对应 + 幺正性，本图补的边。
+      同时 (11.5.9) 用到 j^a_n|1⟩ = 0（n ≥ 0，(11.5.2) 在 |1⟩ 上的全纯性），也是态-算子对应的内容。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.9) 与其前后正文, p. 67"
+    note: L1（抽取记录 polchinski-1998-v2.md E60）。
+summary: |
+  取模代数 (11.5.3) 的 m = 1、n = −1、a = b 分量作用在 |1⟩ 上：
+  ⟨1|[j_1^a, j_{−1}^a]|1⟩ = k̂ d^{aa}（f^{aa}{}_c = 0）。
+  又 j_1^a|1⟩ = 0（全纯性：j_n^a|1⟩ = 0 对 n ≥ 0），故左端 = ⟨1|j_1^a j_{−1}^a|1⟩ = ‖j_{−1}^a|1⟩‖²
+  （幺正理论中 (j_1^a)† = j_{−1}^a）。右端非负、d^{aa} > 0，故 k̂ ≥ 0；
+  等号成立当且仅当 j_{−1}^a|1⟩ = 0，即（态-算子对应）j^a = 0。
+gaps:
+  - "**幺正性与厄米性未在原书此处陈述**：(j_1^a)† = j_{−1}^a 需要流为厄米场且理论幺正（内积正定）；原书只说 'in a unitary theory'，不写出模的厄米共轭。本图的 worldsheet.radial-hermitian-conjugation 给出实场的 φ_m† = φ_{−m}，但本推导未加该边（原书未引）。"
+  - "**「k̂ = 0 ⇒ 流恒为零」是一步未写出的态-算子对应**（见 inferred 边）。"
+  - "**|1⟩ 与 j_n^a|1⟩ = 0（n ≥ 0）**：原书把它当作全纯性的直接后果（Laurent 展开 (11.5.2) 在 z = 0 无奇异性），未写出；本图 worldsheet.state-operator-isomorphism 承担。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

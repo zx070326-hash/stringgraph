@@ -1,0 +1,38 @@
+id: worldsheet.sugawara-level-one-simply-laced
+kind: proposition
+title: 单 laced 李代数的 Sugawara 中心荷：c^{g,k} = k dim(g) rank(g) / (dim(g) + (k−1) rank(g))，特别地 c^{g,1} = rank(g)
+statement: |
+  设 g 是单 laced（所有根等长）的单李代数。对其 level-k 流代数的 Sugawara 中心荷
+  c^{g,k} = k dim(g)/(k + h(g))（worldsheet.sugawara-central-charge 的 (11.5.25)），利用单 laced 代数的恒等式
+    h(g) + 1 = dim(g) / rank(g)
+  得
+    c^{g,k} = k dim(g) rank(g) / ( dim(g) + (k − 1) rank(g) )                  （(11.5.34)）,
+  于是 level 1 时
+    **c^{g,1} = rank(g)**                                                       （(11.5.35)）.
+
+  例（原书 (11.5.36)，g = SU(2) = SO(3)，dim 3、rank 1）：c^{su(2),k} = 3k/(2 + k) = 1, 3/2, 9/5, 2, 15/7, … → 3。
+
+  **本命题不断言的内容**：
+    (1) 不断言 h(g) + 1 = dim(g)/rank(g) 的证明（原书作为事实给出；对单 laced 代数它等价于
+        「根的个数 dim(g) − rank(g) = rank(g)·h(g)」，本图未建卡）；
+    (2) 不断言 c^{g,1} = rank(g) 与「rank(g) 个自由玻色子」之间的同构（Frenkel–Kac 顶点构造）——原书
+        §11.4/§11.5 **没有**这条陈述（抽取记录 E59–E62 无此内容；§11.6 的玻色构造只到规范玻色子的计数）；
+    (3) 不断言一般界 rank(g) ≤ c^{g,k} ≤ dim(g)（(11.5.37)）。
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.34)–(11.5.36), p. 72（单 laced：h(g) + 1 = dim(g)/rank(g)，c^{g,k} 的化简式，c^{g,1} = rank(g)，SU(2) 序列 1, 3/2, 9/5, 2, 15/7, … → 3）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E61；式号与公式逐字读自原书页图 p. 72）。
+tags: [sugawara, central-charge, simply-laced, level-one, current-algebra, cft]
+notes: |
+  【为什么单列】c^{g,1} = rank(g) 是杂化弦规范群与「16 个左移玻色子」对接的关键数字：
+  SO(32) 与 E₈ × E₈ 都是 rank 16 的单 laced 代数，level 1 的 Sugawara 中心荷恰为 16 = 32 × (1/2)。
+  但**原书 §11.5 没有把这句话写出来**（E61 只到 (11.5.37)），本图不加边到杂化弦卡。
+
+  【数值核对】E₈：dim 248、rank 8 ⇒ h = 30，c^{E₈,1} = 248/31 = 8 ✓。SO(32)：dim 496、rank 16 ⇒ h = 30，
+  c = 496/31 = 16 ✓。SU(2)：dim 3、rank 1 ⇒ h = 2，c = 3/3 = 1 ✓（与 (11.5.36) 的首项一致）。
+  这些核对是本图做的。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

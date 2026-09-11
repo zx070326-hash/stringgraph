@@ -1,0 +1,47 @@
+id: worldsheet.current-algebra-level-quantization
+kind: proposition
+title: 流代数的 level 量子化：幺正理论中 k = 2k̂/ψ² 是非负整数（非平凡流时为正整数）
+statement: |
+  设幺正二维 CFT 含单李代数 g 的流代数（math.affine-lie-algebra-current-ope），中心扩张 k̂，
+  取 g 的 Cartan–Weyl 基 (H^i, E^α)（根 α；归一化按原书 (11.4.12)/(11.4.14)，**其内容本图未核实**，
+  本卡只按原书记号使用）。对任意根 α 定义
+    J³ = α·H/α²,   J^± = E^{±α}                                            （(11.5.10)）,
+  它们满足 SU(2) 代数（(11.5.11)）。则不仅零模组
+    ( α·H_0/α²,  E_0^α,  E_0^{−α} )                                         （(11.5.12a)）
+  满足 SU(2) 代数，**移位后的**一组（原书称 *pseudospin*）
+    ( (α·H_0 + k̂)/α²,  E_1^α,  E_{−1}^{−α} )                                （(11.5.12b)）
+  也满足 SU(2) 代数。由于 SU(2) 的任何幺正表示中 2J³ 取整数值，(11.5.12b) 作用在 (11.5.12a) 的任一
+  权向量上给出 2k̂/α² ∈ Z，对每个根 α 成立；取最长根 ψ 时条件最强。于是 **level**
+    k := 2k̂/ψ²                                                            （(11.5.13)）
+  是非负整数，且对非平凡的流为正整数（原书逐字：'is then a nonnegative integer, and positive for
+  a nontrivial current'）。
+
+  **本命题不断言的内容**：
+    (1) 不断言 k ≥ 0 的论证——那是 worldsheet.current-algebra-central-term-positive；
+    (2) 不断言对短根 α 条件 2k̂/α² ∈ Z 比 k ∈ Z 更强或更弱（原书只说取长根 'the strongest' ）；
+    (3) 不断言非幺正理论的任何事；
+    (4) 不断言表示的截断 k ≥ 2|J³|（(11.5.42)–(11.5.44)），那是另一条命题（本轮未建卡）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.10)–(11.5.13), pp. 67–68（SU(2) 子代数 J³ = α·H/α²、J^± = E^{±α}；(11.5.12a) 零模组与 (11.5.12b) pseudospin 组；2J³ ∈ Z ⇒ 2k̂/α² ∈ Z；取长根 ψ 定义 level k = 2k̂/ψ²，'is then a nonnegative integer, and positive for a nontrivial current'）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E60）。
+      原书自评（逐字）：'**The reader can verify** that the two sets … also satisfy the SU(2) algebra'——
+      即 (11.5.12a,b) 的 SU(2) 关系原书不算，留给读者。
+tags: [current-algebra, level, quantization, unitarity, su2, cft]
+notes: |
+  【论证的骨架】(i) 用 (11.5.3) 在 Cartan–Weyl 基下验证 (11.5.12b) 闭合成 SU(2)（原书留给读者）；
+  (ii) SU(2) 幺正表示中 2J³ ∈ Z（有限维表示论，原书不引）；
+  (iii) (11.5.12a) 与 (11.5.12b) 的 J³ 相差 k̂/α²，两者的 2J³ 都是整数 ⇒ 2k̂/α² ∈ Z。
+  (ii) 隐含「理论的态空间按 (11.5.12b) 的 SU(2) 分解为幺正表示的直和」——这需要幺正性
+  （正定内积 ⇒ 完全可约、且 J³ 谱为半整数）。原书没有说明这一点。
+
+  【与 ψ² 归一化的关系】k 的定义依赖 ψ²（(11.4.14)，未核实），但「k 是整数」这条**陈述**只依赖
+  「2k̂/α² ∈ Z 对一切根 α」再取长根；ψ² 的具体值不影响整数性，只影响 k 的数值标签。
+
+  【下游】worldsheet.sugawara-central-charge 的 c^{g,k} 公式以 k 为参数；
+  worldsheet.free-fermion-so-n-current-algebra-level-one 给出 k = 1（n ≠ 3）的具体实现。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"
