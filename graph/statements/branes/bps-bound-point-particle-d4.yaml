@@ -1,0 +1,61 @@
+id: branes.bps-bound-point-particle-d4
+kind: proposition
+title: d = 4 扩展超对称的中心荷与 BPS 界 m ≥ q_i（(B.2.39)）——仅对点粒子可携带的荷；短/超短表示的计数
+statement: |
+  **设定（适用域，是陈述的一部分）**：d = 4、N 个 Majorana 超荷 Q^A_α（A = 1, …, N），
+  号差 (−, +, +, +)，Clifford 代数 {Γ^μ, Γ^ν} = 2η^{μν}，Dirac 共轭 Q̄ = Q†Γ^0。
+  **只计入点粒子可携带的荷**。原文逐字（p. 448）：「To be precise, this is the most general algebra if we
+  include only charges that can be carried by point particles. Including charges that can be carried by
+  *extended objects*, additional terms appear. Rather than explain this here, we introduce it in its
+  natural physical context: first in section 11.6, and then in more variety in chapter 13. The same
+  caveat applies to the higher-dimensional algebras to be introduced later in this appendix.」
+
+  **命题**：
+  (i) 在上述设定下，Lorentz 不变性允许的最一般扩展超对称代数是
+        {Q^A_α, Q̄^B_β} = −2 δ^{AB} P_μ Γ^μ_{αβ} − 2i Z^{AB} δ_{αβ},                        (B.2.36a)
+        [P^μ, Q^A_α] = [Z^{AB}, Q^C_α] = [Z^{AB}, P_μ] = [Z^{AB}, Z^{CD}] = 0,                  (B.2.36b)
+      Z^{AB} 是一组守恒荷（中心荷），由 Majorana 性质与荷共轭矩阵 C 的反对称性知 Z^{AB} 在 AB 上反对称。
+  (ii) 静止系中代数为 {Q^A_α, Q^{B†}_β} = 2m δ^{AB} δ_{αβ} + 2i Z^{AB} Γ^0_{αβ}（(B.2.37)）；取 Z 的本征态并
+      化到 (B.2.38) 的分块反对称标准形（本征值对 ±q_i，q_i ≥ 0）。左端作为 (Aα, Bβ) 上的矩阵非负，
+      故右端本征值 2(m ± q_i) 非负，即 **Bogomolnyi–Prasad–Sommerfield（BPS）界**
+        **m ≥ q_i**.                                                                          (B.2.39)
+      特别地无质量态必须中性。
+  (iii) 若 m 严格大于所有 q_i，有质量表示不受影响，含 2^{2N} 个态；若最大的 k 个 q_i 都等于 m，
+      代数要求 2k 对费米振子湮灭该态（正如无质量表示中一半振子那样），给出 **短（BPS）表示**，
+      含 2^{2(N−k)} 个态；若所有 q_i 都等于 m，得 **超短表示**，维数 2^N（N 偶），与无质量表示相同。
+
+  **本命题不断言**（每条都有原文依据）：
+  (a) 含广延物体（弦、膜）荷的代数——原文明写推给 §11.6 与第 13 章；本图为 D 膜建的是
+      branes.brane-charges-in-susy-algebra（(13.2.9)，且原书自承「still not complete」）；
+  (b) d > 4 的代数（(B.5.1)(B.5.4)(B.5.5)(B.6.12) 只写动量与 KK 荷，「The same caveat applies」）；
+  (c) 「最一般代数」这一句的证明——原书无证明、无引用（Haag–Łopuszański–Sohnius 未被提及）；
+  (d) 任何弦论内容（App. B 不含 α'、不含弦振幅）。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2「Extended supersymmetry in d = 4」, eqs. (B.2.36a,b)（最一般代数）、(B.2.37)（静止系）、(B.2.38)（Z 的标准形）、(B.2.39)（m ≥ q_i），pp. 448–449；点粒子限定句逐字见 statement（p. 448）；短/超短表示计数 p. 449"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21 与 Q3，证据等级 L1（原书页图）。
+      ★ 这是 App. B 唯一的 BPS 界，且仅限 d = 4 点粒子中心荷；十一维/十维代数不含膜荷（抽取记录 §3.2 第 5 条）。
+      原文自陈强度：「The most general … allowed by Lorentz invariance is」（无证明）；
+      BPS 界本身的推导是完整的正定性论证（「must therefore also be nonnegative, implying」）。
+  - ref: polchinski-1998-v2
+    loc: "App. B 导言 pp. 439–440：「The reader should be able to follow the derivation of the various representations (massless, standard massive, and BPS massive). However, the transformations and actions require detailed calculation, and so for these we simply cite for reference some of the key results.」"
+    note: 抽取记录 #E15 备注（L1）。表示的推导原书认为读者可跟随；本卡只用到表示层。
+tags: [supersymmetry, bps, central-charge, d4, extended-supersymmetry, short-multiplet]
+notes: |
+  【放在 branes/ 的理由】graph/schema/areas.yaml 没有 susy 区（areas 只有 worldsheet/cft/spectrum/consistency/
+  duality/compact/branes/holography/swampland/sft/math/conv）；branes 区描述含「BPS 态」，且本卡在本图的
+  唯一用途是给 D 膜 BPS 链提供模板。lead 指示（2026-09-11）「若 susy 区不在 areas.yaml 则放 consistency/ 或
+  branes/ 并报告」。若日后开 susy 区，应新建卡并 superseded_by（id 不改）。
+
+  【在 branes 区的角色】**模板 + 正定性论证**，不是 D 膜 BPS 界的来源（抽取记录 appB §5-B）。
+  D 膜链：本卡 → branes.brane-charges-in-susy-algebra（(13.2.9)）→ branes.d-brane-bps-no-force。
+  branes.d-brane-bps-half-susy 直接依赖本卡提供的「BPS 态 = 被一半超荷湮灭的短表示」这一**概念**
+  （ch.13 p. 141「BPS states, which are discussed in section B.2」）。
+  **不得**把 (B.2.39) 直接当作 D 膜张力–荷等式 μ_p = e^{Φ₀}τ_p 的依据（Q3）。
+
+  【红线（抽取记录 appB §3.2）】App. B 无 "triality"、无 SO(8) 意义的 56（p. 448 的 56 是 d = 4, N = 8 的
+  螺旋度 ∓½ 态数）、无世界面 R 扇区零模 ψ_0^μ、无膜荷代数。本卡不涉及这些。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

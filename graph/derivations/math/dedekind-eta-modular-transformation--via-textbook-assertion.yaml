@@ -1,0 +1,50 @@
+id: math.dedekind-eta-modular-transformation--via-textbook-assertion
+target: math.dedekind-eta-modular-transformation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.dedekind-eta-function
+    note: 提供 η 的乘积定义与 q^{1/24} 的分支约定；没有分支约定，(a) 的相位 e^{iπ/12} 无意义。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44a)(7.2.44b), p.216"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，L1（原书页图逐字）。
+      原书全部内容就是一句「It has the modular transformations」+ 两式。
+summary: |
+  **本推导记录的是「来源只给了断言」这一事实本身**，不是一条论证。
+
+  (a) 的一行验算（本图补，属初等）：τ ↦ τ+1 时 q = e^{2πiτ} 不变，故 ∏(1−q^n) 不变；
+  前因子 q^{1/24} = e^{πiτ/12} ↦ e^{πi(τ+1)/12} = e^{iπ/12} e^{πiτ/12}。得 (a)。
+  **这半条是完整的**（只用到 math.dedekind-eta-function 的分支约定）。
+
+  (b) 的来源状况：Polchinski 只给结果。原书在 §7.2 末把它与 θ 函数的 (7.2.40d) 并列，
+  即形式上可由 ϑ₁₁ 的 S 变换加 (7.2.43) 的 η–ϑ₁₁ 关系导出，**但 (7.2.40) 在原书同样无证明**，
+  故这条归约不构成证明。标准数学证明（Poisson 求和 / Siegel 的留数论证 / 用 E₂ 的准模性）
+  在本图**没有来源**：`sources.bib` 里目前没有任何解析数论文献。
+
+  因此本卡整体只能是 physical-argument：不是因为论证有物理性，而是因为
+  **来源级别的论证不存在**，而 docs/STATUS_LEVELS.md 的 rigorous 要求「有发表的、
+  数学界接受的完整证明」作为来源。
+gaps:
+  - "**(b) 在来源中零证明零引用**（抽取记录 #E16 逐字判定）。这是本章下游一切模不变性论证的公共缺口：
+     (7.2.9)、(7.3.6)、(7.3.7)、(7.4.2)、(7.4.19)、(7.4.23) 全部经由本卡。"
+  - "**归约到 θ 函数不解决问题**：(7.2.40)（θ 的 τ→−1/τ 变换）与 (7.2.32) 的唯一性断言在原书同样无证明，
+     见抽取记录 #E15（「θ 一节全部无证明」）。"
+  - "**本图缺解析数论来源**：要把本卡升到 rigorous，需先在 literature/sources.bib 登记一本标准来源
+     （如 Apostol《Modular Functions and Dirichlet Series in Number Theory》Thm 3.1，**未登记、章节号未核实**），
+     或直接做 Lean 证明（抽取记录 §5-C 的首选岛）。researcher/formalizer 待办。"
+  - "**(a) 与 (b) 强度不同却同卡**：(a) 已在本 summary 里给出完整初等验算，(b) 没有。
+     本卡按弱者定级，故 (a) 的实际强度被低估；拆卡建议见目标陈述的 notes。"
+notes: |
+  ⛔ **本推导已于 2026-09-11 随目标陈述的拆分转为历史记录，不再更新**
+  （docs/STATUS_LEVELS.md「旧推导的去留」：内容性换代，旧推导保留作历史）。
+  接替它的是 math.dedekind-eta-t-transformation--via-product-definition（rigorous，T 半）
+  与 math.dedekind-eta-s-transformation--via-textbook-assertion（physical-argument，S 半）。
+  本推导 summary 里关于 (a) 的那段验算已原样搬进 T 半的新推导。
+
+  由 curator 于 2026-09-11 建立。**不得**因为「η 的模变换是众所周知的数学事实」而把本卡标 rigorous：
+  按项目原则 2，status 写的是**本图所持论证**的强度，不是公认程度。升级路径只有两条：
+  登记数学来源，或 Lean。
+author: curator-polchinski-ch7
+created: "2026-09-11"

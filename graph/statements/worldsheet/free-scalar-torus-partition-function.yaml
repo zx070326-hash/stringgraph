@@ -1,0 +1,46 @@
+id: worldsheet.free-scalar-torus-partition-function
+kind: proposition
+title: "自由标量的环面配分函数 Z_X(τ) = (4π²α'τ₂)^{−1/2}|η(τ)|^{−2}，d 个标量给 Z = iV_d Z_X^d"
+statement: |
+  设 d 个无质量自由标量 X^μ（μ = 0,…,d−1）构成的 CFT 定义在 T²(τ) 上，时空体积为 V_d，
+  配分函数按 worldsheet.torus-partition-function-general-cft 的迹定义（玻色，(−1)^F ≡ 1）。则
+    Z(τ) = i V_d · Z_X(τ)^d ,     Z_X(τ) = (4π²α'τ₂)^{−1/2} |η(τ)|^{−2} ,
+  其中 τ₂ = Im τ，η 是 Dedekind η（math.dedekind-eta-function）。
+  分解成因子的来历：
+    (a) 每个标量的**动量零模**给 (4π²α'τ₂)^{−1/2}——来自 ∫d^dk/(2π)^d exp(−πτ₂α'k²) 与
+        Σ_k → V_d(2π)^{−d}∫d^dk；
+    (b) 每个标量的**振子**给 |η(τ)|^{−2}——来自 (qq̄)^{−1/24}∏_{n≥1}|1−q^n|^{−2}，
+        用 Σ_{N≥0} q^{nN} = (1−q^n)^{−1}；
+    (c) 整体因子 i **来自把发散的 k⁰ 积分定义为 k⁰ → i k^d 的转动**（原书逐字：
+        "the i comes from the rotation k⁰ → ik^d needed to define the divergent integral"）。
+
+  **本卡不断言什么**：不断言 Z(τ) 的模不变性（那需要 math.dedekind-eta-modular-transformation，
+  是 worldsheet.torus-vacuum-amplitude 一侧的内容）；不断言带顶点算子的期望值 (7.2.4)；
+  不断言用全纯性重算的 (7.2.22)（那条在原书里**整体数值系数定不出来**，见 notes）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eqs. (7.2.8)(7.2.9)(7.2.10), p.210；迹的展开见 (7.2.5)–(7.2.7), p.209"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E8、#E9，等级 **L1（原书页图逐字）**。
+      原文逐字（p.210）：「Also, the i comes from the rotation k⁰ → ik^d needed to define the
+      divergent integral. Also, the earlier C^X_{T²}(τ) is Z_X(τ)^d.」
+tags: [worldsheet, cft, torus, partition-function, free-scalar, dedekind-eta]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E9 建立。
+
+  **τ₂^{−1/2}|η|^{−2} 这个组合是全书模不变性论证的原子**：(7.3.6)、(8.2.11)、(8.4.21) 都靠它
+  （抽取记录 #E9 备注）。
+
+  **原书的第二条路线（全纯法）本图不建卡**：(7.2.11)–(7.2.22) 用 ⟨T_{ww}⟩ 与度规微扰重算，
+  得 (7.2.22) Z(τ) = |∂_wϑ₁(0|τ)|^{−2d/3}τ₂^{−d/2}，**紧接一句逐字「up to a numerical coefficient
+  that must be fixed by other means」**（抽取记录 #E10）——即该路线自承定不出整体常数，
+  靠与 (7.2.8) 对照来固定。它**不是**一条独立的完整推导，故不作为本卡的第二条 derivation；
+  原书另说「We leave to the reader the direct path integral evaluation」，第三条路线完全没做。
+  详见抽取记录 Q6。
+author: curator-polchinski-ch7
+created: "2026-09-11"

@@ -1,0 +1,29 @@
+id: swampland.ov-conjecture-0-moduli-are-scalar-vevs--via-string-folklore
+target: swampland.ov-conjecture-0-moduli-are-scalar-vevs
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+    note: "§2 开头的适用域声明就写在 Conjecture 0 之前，对五条猜想统一生效。"
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 0 及其说明段, p.3"
+summary: |
+  原文给出的唯一支持是弦论中的众所周知性，逐字："This conjecture in the context of string theory
+  is so well known that one does not even bother to state it: *There are no coupling constants in
+  string theory*; every parameter can be varied by changing the expectation value of a field."
+  并把否命题判入 swampland："This did not have to be the case and one could a priori imagine a
+  consistent gravitational theory for which the parameters are fixed (and in particular cannot be
+  varied locally). We conjecture that such gravitational theories cannot exist as a fully
+  consistent quantum gravitational theory and belong to the swampland."
+gaps:
+  - "**证据与断言之间有跨度**：证据是'在弦论里成立'，断言是'对任何一致量子引力理论成立'（ooguri-vafa-2006#E7 备注 2）"
+  - "'弦论里没有耦合常数'这一断言原文不给引用，也不给论证"
+  - "前置的'可局部变化'本身是一条无编号的猜想（#E6），本图未单独建节点"
+  - "与 dim M = 0 的关系原文未裁决（#Q1）"
+notes: |
+  from: ooguri-vafa-2006#E7、#E6。
+author: curator
+created: "2026-09-11"

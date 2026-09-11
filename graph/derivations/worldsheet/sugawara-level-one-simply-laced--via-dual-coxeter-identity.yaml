@@ -1,0 +1,24 @@
+id: worldsheet.sugawara-level-one-simply-laced--via-dual-coxeter-identity
+target: worldsheet.sugawara-level-one-simply-laced
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.sugawara-central-charge
+    note: 供给 c^{g,k} = k dim(g)/(k + h(g))（(11.5.25)）。
+  - id: math.compact-lie-algebra-index-and-casimir
+    note: |
+      供给 dim(g)、rank(g)（Cartan 子代数维数）等记号。⚠ 恒等式 h(g) + 1 = dim(g)/rank(g) **不在**该卡上：
+      它要么在原书 §11.4 中段（跳读区）推导，要么在 p. 72 作为事实引用；抽取记录只记了后者。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.34)–(11.5.35), p. 72"
+    note: L1（抽取记录 polchinski-1998-v2.md E61）。
+summary: |
+  把 h(g) = dim(g)/rank(g) − 1 代入 c^{g,k} = k dim(g)/(k + h(g))：
+  分母 k + dim(g)/rank(g) − 1 = (dim(g) + (k − 1) rank(g))/rank(g)，
+  故 c^{g,k} = k dim(g) rank(g)/(dim(g) + (k−1) rank(g))（(11.5.34)）；k = 1 时分母为 dim(g)，得 rank(g)（(11.5.35)）。
+gaps:
+  - "**h(g) + 1 = dim(g)/rank(g) 对单 laced 代数的证明不在来源此处**：原书 p. 72 直接使用；本图无「单 laced 代数的根数 = rank × Coxeter 数」节点。除此之外本推导是两行代数。"
+  - "**自身 status 取 physical-argument 而非 rigorous**：按 docs/STATUS_LEVELS.md 的 rigorous 例外需 reviewer 复核记录，且前提（上条恒等式）未在图内建立。有效状态无论如何被 worldsheet.sugawara-central-charge 压到 physical-argument。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

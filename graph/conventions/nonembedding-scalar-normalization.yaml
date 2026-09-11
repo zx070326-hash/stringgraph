@@ -1,0 +1,87 @@
+id: conv.nonembedding-scalar-normalization
+family: scalar-normalization
+title: "非嵌入世界面标量的归一化：H(z)H(0) ∼ −ln z（等价于对嵌入坐标取 α' = 2）"
+definition: |
+  本约定固定**不直接对应弦在时空中嵌入**的那些世界面标量场的归一化。
+  Polchinski Vol.2 从 §10.3 起对这类标量（玻色化用的 H、超共形鬼场玻色化用的 φ、χ，
+  以及 bc 玻色化里的厄米场 ρ）一律取全纯二点 OPE
+
+    H(z) H(0)  ∼  − ln z,
+
+  等价地 ∂H(z) ∂H(0) ∼ −1/z²。原书逐字（p. 11，(10.3.5) 下方）：
+
+    "For world-sheet scalars **not associated directly with the embedding** of the string in
+     spacetime this is the normalization we will always use, **corresponding to α' = 2 for the
+     embedding coordinates**."
+
+  **与 conv.alpha-prime-regge 的关系（本约定的要点，凡引 §10.3/§10.4 公式者必读）**：
+
+    (1) **嵌入坐标 X^μ 不受本约定影响**。Vol.2 里 α' 仍是 Regge 斜率
+        （conv.alpha-prime-regge，canonical），嵌入标量的 OPE 仍是
+          X^μ(z, z̄) X^ν(0,0) ∼ −(α'/2) η^{μν} ln|z|²   （(10.1.6)）
+        且 α' 在公式里显式保留（(10.1.8) 的 (2/α')^{1/2}、(10.5.4) 的 α'p² 等）。
+        **两条约定不冲突**：它们管的是不同的场。
+
+    (2) **非嵌入标量的归一化被固定死，不是"可以取"**。§10.1（p. 2，(10.1.8) 下方）另有一句
+        "The annoying factors of (2/α')^{1/2} could be eliminated by working in units where
+        α' = 2, and then be restored if needed by dimensional analysis"——那是**可选**的单位选择；
+        而 (10.3.5) 下方那句是**已经采用**的归一化（"this is the normalization we will always use"）。
+        本约定记的是后者。
+
+    (3) **换算字典**。把 conv.alpha-prime-regge 下的单个（手征）嵌入标量公式搬到本约定，
+        令 α' = 2 且只取全纯一半：
+          −(α'/2) ln z  ⟼  − ln z,
+          h( :e^{i k·X}: ) = α' k²/4（体内插入，每个手征部门）⟼  k²/2。
+        故本约定下 h(e^{iH}) = 1/2（= 费米子 ψ 的权，玻色化所要求的）、
+        h(e^{iH/2}) = 1/8（R 扇区自旋场的权）。
+        ⚠ 若上游节点声明的是 conv.alpha-prime-regge，下游用本约定时**必须在 depends_on 写
+        convention_map**，写明 α' = 2、单个标量、只取全纯一半这三件事。
+
+    (4) **本约定不涉及背景荷（线性 dilaton）项**。§10.3/§10.4 的若干玻色化里 T_B 带
+        ∂²H 或 ∂²φ 项（(10.3.31) 一类），那会改变指数算子的权；
+        那是各命题节点的内容，不是本归一化约定的内容。
+
+  ⚠ 使用范围：本约定是**归一化**（带数值系数），但按 docs/STATUS_LEVELS.md，
+  convention 节点不参与状态传播、不降级任何节点。
+canonical: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. **(10.3.5)** 与其下方一句, p. 11（逐字：'For world-sheet scalars not associated directly with the embedding of the string in spacetime this is the normalization we will always use, corresponding to α' = 2 for the embedding coordinates.'）"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md §1.1「非嵌入标量的归一化」栏
+      与 E25；抽取者逐页读了原书 §10.3 的页图，式号与逐字措辞均直接看到）。
+      版本锚定：Cambridge Books Online 版（© 2001, 2005；DOI 10.1017/CBO9780511618123），
+      即 2005 平装本的数字化，已含 2000 年 "with corrections" 的订正。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. **(10.1.6)**（X X OPE 保留显式 α'）与 (10.1.8) 下方一句, p. 2（逐字：'The annoying factors of (2/α')^{1/2} could be eliminated by working in units where α' = 2, and then be restored if needed by dimensional analysis'）"
+    note: |
+      L1 一手（同上记录 §1.1）。引在此处是为了把「§10.1 的**可选**单位」与
+      「§10.3 的**已采用**归一化」区分开——这两处很容易被混成一回事。
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.9)（φ(z)φ(0) ∼ −ln z）、(10.4.19a)（χ）；§10.3, eq. (10.3.34)（H → iρ 的厄米改写）"
+    note: |
+      L1 一手（E30、E27）。这三处确认本约定的适用对象确实是「H、φ、χ、ρ 全部」，
+      不只是 §10.3 的 H。
+      ⚠ (10.3.34)：由于 b、c 需为厄米，bc 玻色化里的 H 必须**反**厄米，
+      原书改写为厄米场 ρ（H → iρ）。**本约定只管二点函数的系数，不管场的厄米性**；
+      厄米性记在 worldsheet.bc-ghost-bosonization。
+notes: |
+  由 curator 于 2026-09-11（curator-bosonization）按抽取记录 polchinski-1998-v2.md §1.2
+  对 conv.alpha-prime-regge 的告警新建：
+  「Vol.2 里 α' 仍是 Regge 斜率，但 (10.3.5) 那一处不是「可以取」而是「就是这么取的」：
+    所有玻色化标量按 α' = 2 归一。→ curator 若从 §10.3/§10.4 抽公式，conv 声明必须写清楚是哪一套。」
+
+  【为什么单开一个 family 而不是做 conv.alpha-prime-regge 的兄弟】
+  同一个 family 内的约定是**互斥**的（工具会检查恰好一个 canonical）。
+  但本约定与 conv.alpha-prime-regge **不互斥**：同一张卡里嵌入坐标用 α'（Regge）、
+  非嵌入标量用 α' = 2，两者同时成立。故新开 family `scalar-normalization`
+  （管「哪些标量按哪套系数归一」），而 family `alpha-prime` 继续只管 Regge 斜率的定义。
+  本 family 目前只有本节点，canonical: true。
+  若日后引入把非嵌入标量按别的系数归一的来源
+  （数学顶点代数文献常用 ⟨H H⟩ = −ln z 与 h = q²/2 之外的系数），
+  应新建一个 canonical: false 的兄弟节点并写清换算。
+
+  【一个已知的记号陷阱，别与本约定混】§10.4 的 φ 上的指数是**实**的（e^{lφ}，l ∈ Z/2），
+  而 §10.3 的 H 上的指数是**虚**的（e^{iqH}）。两者的归一化系数相同（都 ∼ −ln z），
+  但由此读出的权相差一个符号（q²/2 对 −l²/2），再加背景荷项才得到原书的 h(e^{−φ}) = 1/2、
+  h(e^{−φ/2}) = 3/8。**这不是归一化的差别**，见 worldsheet.beta-gamma-bosonization 的 notes。

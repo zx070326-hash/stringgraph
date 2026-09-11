@@ -1,0 +1,35 @@
+id: swampland.wgc-sharp-form-iii--via-finite-stable-states
+target: swampland.wgc-sharp-form-iii
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.finite-exactly-stable-states
+    inferred: false
+    note: >-
+      原文逐字："So our mass/charge ratio conjecture (III) can be seen to follow from a very simple
+      general conjecture … The number of exactly stable particles in a theory of quantum gravity in
+      asymptotically flat space is finite."（随后被作者自己修正为'在电荷空间任一给定方向上'）。
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, p.11–p.12"
+summary: |
+  反证式论证：若 (III) 不成立（即所有态的 M/Q 都大于极端黑洞比值），则最小荷粒子之间净力吸引，
+  可不断形成 Kepler 束缚态，(M/Q) 随电荷单调下降并渐近趋于 1，而单调性保证**所有这些态都精确
+  稳定**——于是在给定电荷方向上有无穷多精确稳定态，与 swampland.finite-exactly-stable-states
+  矛盾。
+
+  反之若存在 (M/Q) < 1 的态，则宏观黑洞总能衰变，精确稳定态数目有限；原文进一步论证若"稳定态数目
+  典型为几个"，则最小的满足 (M/Q) < 1 的电荷 Q_min 不会太大，"This then substantiates our loose
+  conjectures m ≲ gM_Pl."
+gaps:
+  - "所依赖的'精确稳定态数目有限'本身是一条**无正面证据的猜想**（swampland.finite-exactly-stable-states）"
+  - "Kepler 束缚态论证是非相对论量级图像；束缚能的可靠性、束缚态是否真的存在于强场区未讨论"
+  - "'safely bound'与'电荷空间的方向'无精确定义；作者自己修正过一次陈述"
+  - "从'稳定态有限'到 (III) 的一步原文写作 'can be seen to follow from'，没有写出严格推理"
+notes: |
+  from: arkani-hamed-2006#E21、#E3。
+  注意工具的传播规则：本推导的有效状态被上游猜想拖到 conjecture；(III) 不被拖得更低是因为
+  另有 --via-heterotic-lattice 与 --via-worldsheet-spectral-flow 两条独立推导。
+author: curator
+created: "2026-09-11"

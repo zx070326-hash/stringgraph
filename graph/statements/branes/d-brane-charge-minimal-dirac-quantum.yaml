@@ -1,0 +1,33 @@
+id: branes.d-brane-charge-minimal-dirac-quantum
+kind: proposition
+title: D 膜的 R–R 荷 (13.3.7) 恰以最小量子 n = 1 满足 Dirac 条件 μ_p μ_{6−p} = π n / κ₁₀²
+statement: |
+  把 branes.d-brane-rr-charge-value 给出的荷
+    μ_p² = (π / κ₁₀²)(4π²α')^{3−p}
+  代入 Dirac 量子化条件 μ_p μ_{6−p} = π n / κ₁₀²（branes.rr-charge-quantization），得
+    **μ_p μ_{6−p} = (π / κ₁₀²)(4π²α')^{(3−p)/2}(4π²α')^{(p−3)/2} = π / κ₁₀²,   即 n = 1**——
+  (4π²α') 的幂次恰好互相抵消，与 α' 无关。
+  原文逐字：「**Remarkably, the charges (13.3.7), arrived at in an entirely different way, satisfy this
+  relation with the minimum quantum n = 1.**」
+  即：由圆柱振幅（与 Dirac 条件完全无关的途径）定出的 D 膜荷，恰好是 R–R 荷的最小允许单位。
+
+  **本命题不断言**：不存在荷更小的其他 R–R 荷载体（原书未讨论）；p = 3 自对偶情形的额外微妙之处。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.string-coupling-tension-ratio]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「Dirac quantization condition」, (13.3.13) 之后一句，p. 149：「Remarkably, the charges (13.3.7), arrived at in an entirely different way, satisfy this relation with the minimum quantum n = 1.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E19 与 §0.3(b)，证据等级 L1（原书页图）。
+      **抽取者已独立复算**：n = 1 精确成立，且 (4π²α') 的幂次 (3−p)/2 + (p−3)/2 = 0 恰好抵消
+      ——这正是「arrived at in an entirely different way」的那个巧合的来源。
+tags: [d-brane, rr-charge, dirac-quantization, consistency-check, type-ii]
+notes: |
+  【逻辑方向，抽取记录 E19 备注】这是**一致性检验**：输入是 (13.3.7) 与 (13.3.13)，输出是 n = 1。
+  不能反过来把它当作 μ_p 的推导。
+
+  【status】代入本身是两行精确代数（researcher 已复算）。按 docs/STATUS_LEVELS.md 的 rigorous 例外
+  （lead 裁决 2026-09-10），若 reviewer 独立复核并在推导 notes 写 reviewer-verified，推导可升 rigorous；
+  但本卡的**有效状态**仍受两条上游（均为 physical-argument）压制，升级不改变有效状态。
+  本 curator 未擅自标 rigorous。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

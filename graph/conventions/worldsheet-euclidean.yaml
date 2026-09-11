@@ -77,11 +77,48 @@ sources:
       的警告仍然有效（正确出处就是上面 p.32/p.34 两处）。
       见 literature/extractions/polchinski-1998-v1.md §12.1（Q10）与 §12.10 表 B 第 2 项。
   - ref: polchinski-1998-v1
-    loc: "§3.2–§3.3（p.82–89）：欧氏 Polyakov 路径积分 ∫ (Dg DX / V_{diff×Weyl}) e^{-S_P[g,X]}，度规记作 g_{ab}；式号未核实"
+    loc: "**★ 本约定在原书里的一手落点：§3.2, p.82 开篇（(3.2.1) 之上，无式号）逐字：\"We make one change from chapter 1: **the Minkowskian world-sheet metric `γ_ab` is replaced with a Euclidean world-sheet metric `g_ab(σ¹,σ²)`, of signature `(+,+)`**. The integral runs over all Euclidean metrics and over all embeddings `X^μ(σ¹,σ²)` of the world-sheet in Minkowski spacetime:\"，紧接 **(3.2.1)** `∫ [dX dg] exp(−S)`、**(3.2.2)** `S = S_X + λχ`、**(3.2.3a)** `S_X = (1/4πα') ∫_M d²σ g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ`**"
     note: |
-      §3.3 的 Faddeev–Popov 手续（(3.3.16)/(3.3.18)/(3.3.21)/(3.3.24)，式号经 schrans-2020 目录核实）
-      全部在欧氏号差、度规记号 g_{ab} 下进行，是本约定在第 3 章被使用的直接证据。
-      **权重写成 e^{-S} 而非 e^{iS} 这一点在本图未逐字核实原书措辞。**
+      **【2026-09-11 新增（curator-v1-sec15，researcher 第九轮 ch.3 页图，印刷 p.82–83，L1）】**
+      本条是本约定此前**空着的那个 loc**：§13.1 已把 (A.1.31) 排除为本约定的出处
+      （(A.1.31) 是 `S_E` 的定义式，讲的是单自由度量子力学的欧氏作用量，不是世界面号差），
+      本轮补上正确的一条 —— **世界面号差由闵氏改欧氏这件事，原书是在 §3.2 开篇一句散文里宣布的**
+      （无式号），逐字见上方 loc。
+
+      同时关闭两条旧记账：
+      1. **「权重写成 e^{−S} 而非 e^{iS} 未逐字核实」**（本卡上一条 source 的 note 末句）
+         **现已核实**：**(3.2.1) 逐字就是 `∫ [dX dg] exp(−S)`**（p.82），L1。
+      2. **欧氏 Polyakov 作用量的式号与前因子确认**：(3.2.3a) 逐字 `S_X = (1/4πα') ∫_M d²σ
+         g^{1/2} g^{ab} ∂_a X^μ ∂_b X_μ`，与本卡 definition 里的 `S_P^E` **前因子 +1/(4πα')
+         与 `g^{1/2}` 写法逐字一致**（此前只经 schrans-2020 目录核实式号）。
+
+      ★★ **本轮最重要的一条：原书自陈的强度（三处逐字，p.82–83）**，
+      它决定任何「欧氏世界面路径积分 = 闵氏振幅」为前提的链的状态上限：
+      (i) p.82："We will take the Euclidean theory (3.2.1) as our starting point … **However, let us
+          give a brief formal argument that it is equivalent to the Minkowski theory with which we
+          began.**"
+      (ii) p.83："The same procedure works for the Polyakov action if we write the metric in terms of
+          a tetrad, `γ_ab = −e⁰_a e⁰_b + e¹_a e¹_b`, and make the same rotation on `e⁰_a`.
+          **This provides a formal justification for the equivalence of the Minkowski and Euclidean
+          path integrals.¹ It has been shown by explicit calculation that they define the same
+          amplitudes, respectively, in the light-cone and conformal gauges.**"
+          ⚠ "It has been shown" 是**被动、无引文**（第 3 章正文不带引文，见 §13.3(f)）。
+      (iii) **脚注 1（p.83）逐字**："In more than two dimensions, things are not so simple because the
+          Hilbert action behaves in a more complicated way under the rotation. No simple rotation
+          damps the path integral. **In particular, the meaning of the Euclidean path integral for
+          four-dimensional gravity is very uncertain.**"
+      ⇒ **在本书里，世界面欧氏化的地位是 "a brief formal argument" / "a formal justification"**，
+      与 §13.1 记的 App. A 一线（Wick 旋转的真论证只对单自由度 QM 做过，且路径积分公式本身
+      "rather heuristically"）完全一致。**凡跨本 family 的 convention_map、以及任何断言
+      「欧氏路径积分 = 闵氏振幅」的命题卡，其自身状态封顶 `physical-argument`**，
+      且脚注 1 说明这条论证在二维以上根本不成立（不是本图的判断，是作者写的）。
+      见 literature/extractions/polchinski-1998-v1.md §15.1(a)(c)(d)。
+  - ref: polchinski-1998-v1
+    loc: "§3.3（p.87–89）：Faddeev–Popov 手续 (3.3.16)/(3.3.18)/(3.3.21)/(3.3.24) 全在欧氏号差、度规记号 g_{ab} 下进行（式号经 schrans-2020 目录核实）"
+    note: |
+      §3.3 的 FP 手续是本约定在第 3 章被使用的直接证据。
+      ~~**权重写成 e^{-S} 而非 e^{iS} 这一点在本图未逐字核实原书措辞。**~~
+      **【2026-09-11 作废，已核实】(3.2.1) 逐字 `∫ [dX dg] exp(−S)`，p.82，L1**——见上一条 source。
   - ref: polchinski-1998-v1
     loc: "**Appendix A §A.1「Bosonic fields」，斜体小标题 *Euclidean path integrals* 之下，p.335**：闵氏拉氏路径积分权重 exp[(i/ħ)∫dt L] 是 **(A.1.14)**（p.331）；欧氏路径积分 = ∫[dq] exp[∫₀^U du L(q, i∂_u q)] 是 **(A.1.30)**（p.335）；`S_E = ∫du L_E(q, ∂_u q) = −∫du L(q, i∂_u q)` 是 **(A.1.31)**（p.335）。**本约定 definition 段 (c) 里的 e^{iS_P^L} = e^{−S_P^E} 是这三式的合成，原书没有把它写成任何一个式子。**"
     note: |
@@ -133,8 +170,13 @@ sources:
           （本卡是 convention，不参与状态传播；这两条记在这里是因为它们是同一段附录的内容，
           真正受影响的是 worldsheet.string-s-matrix 等以路径积分为根的命题卡。）
 
-      ⚠ **本轮未读 App. A pp.339–346**（§A.2 起，推测费米场/Grassmann）。
-      见 literature/extractions/polchinski-1998-v1.md §13.1(a)(b)(c)(d)(e)。
+      ⚠ ~~**本轮未读 App. A pp.339–346**（§A.2 起，推测费米场/Grassmann）。~~
+      **【2026-09-11 关闭（curator-v1-sec15）】App. A pp.339–346 已由 researcher 第九轮读毕**：
+      §A.2 是 Grassmann（Berezin）积分与费米路径积分，**确实不含任何世界面号差内容**，
+      对本约定无新增；它给出的是一般费米测度 (A.2.24)–(A.2.27) 与两条作者自承缺口
+      （行列式符号手工固定、宇称不对称时相位不确定），落点见 math.berezin-integral 与
+      worldsheet.genus-g-ghost-path-integral。
+      见 literature/extractions/polchinski-1998-v1.md §13.1(a)(b)(c)(d)(e) 与 §15.2。
   - ref: schrans-2020
     loc: "目录条目 2.1–2.4（p.33）、3.7–3.10（p.88–89）：公式号的核对来源，非内容来源"
 notes: |

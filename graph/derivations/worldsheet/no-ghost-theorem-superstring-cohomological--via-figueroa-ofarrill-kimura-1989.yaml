@@ -1,0 +1,240 @@
+id: worldsheet.no-ghost-theorem-superstring-cohomological--via-figueroa-ofarrill-kimura-1989
+target: worldsheet.no-ghost-theorem-superstring-cohomological
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.super-virasoro-algebra
+    note: |
+      供给超 Virasoro 括号。**约定与本图一致**：FOK (3.1)–(3.3) 逐字
+      [l_m, l_n] = (m−n)l_{m+n} + (c/12)m(m²−1)δ_{m,−n}、
+      {g_r, g_s} = 2l_{r+s} + (c/3)(r² − ¼)δ_{r,−s}、[l_n, g_r] = (n/2 − r)g_{r+n}，
+      即 **c/12 归一化**（与 lian-zuckerman-1989 的 c/8 不同，故本推导不需要
+      --via-lian-zuckerman-1989 那条 convention_map 的第 (1) 项）。
+      注：FOK 的 {g,g} 中心项写作 (c/3)(r² − ¼) = (c/12)(4r² − 1)，与本图逐项相同。
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给本图一侧的 Q_B。FOK 一侧的对应物是 (4.20) 型分解
+      Q = c₀L₀ − 2b₀T − γ₀²b₀ + Q̂（Schrödinger 表示）与 (5.10) 的 𝒯 = −2(T + ½γ₀²)。
+      ⚠ 与 --via-lian-zuckerman-1989 同：本边使本推导的**有效状态**被封顶在
+      physical-argument；但本推导自身的 status 之所以也是 physical-argument，
+      是另外的理由（见 summary 与 gaps 第一条），两者不要混为一谈。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给相对复形的定义。FOK 一侧**分扇区不同**，这一点必须照实记：
+        NS：(3.5) 逐字 {ω | L₀ω = b₀ω = 0}——**只相对 L₀ 与 b₀**；
+        R（Henneaux 表示）：(4.5) C_∞(R, R₀; M) = {ω | F₀ω = b₀ω = β₀ω = 0}，
+            即再相对 β₀ 与零模 supercharge F₀（R₀ = L₀ ⊕ F₀）；
+        R（Schrödinger 表示）：β₀ = x· **没有本征值**，**不能**施加 β₀ω = 0，
+            只能相对 L₀（FOK p.115）。
+      ⇒ 本图该卡（b₀ = L₀ = 0，R 另加 β₀ = G₀ = 0）对应的是 FOK 的 **Henneaux 表示**那一路；
+      Schrödinger 表示那一路在本图**没有对应的相对复形卡**（见 gaps）。
+  - id: worldsheet.critical-dimension-superstring-brst
+    note: |
+      供给 Q_B² = 0。
+      ⚠ **在 FOK 这里 D = 10 是假设，不是结论**：p.111 / p.115 把物质 SCFT 取为
+      'with the opposite central charge (in the critical dimension)'，鬼中心荷 c ↦ −15。
+      与 fgz-1986 对玻色弦的处理同型（π(c) = 26 是假设）。
+  - id: worldsheet.superconformal-ghost-central-charge
+    note: 供给 c^g = −15；FOK p.111、p.115 逐字取鬼 Fock 空间中心荷 c ↦ −15 Id。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式与基态。
+      ⚠ **FOK 的鬼振子不是本图的自然振子**，须记一条换算警示：p.111 附近逐字
+      'Our ghost oscillators are not the natural ones but are unitarily related to them'，
+      其模展开写作 b(σ) = b₀ + Σ√m(b_m e^{imσ} + b_{−m}e^{−imσ}) 等（带 √m 因子）。
+      该酉变换的显式形式本图未核对（见 gaps）。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    note: |
+      供给"βγ 有不等价真空"这一事实，即目标卡 (H4) 与断言 (2) 的存在量词所以必要的理由。
+      FOK §4 是文献里对这一点最直接的处理：p.106 逐字
+      'In fact there has not appeared in the literature a unique treatment of these zero modes
+      and thus we treat them in **two different ways**. The cohomologies turn out to be isomorphic
+      although one of them does not admit a grading by ghost number.'
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给物质部门 l_n、g_r 的显式模式表达式（本图一侧）。
+  - id: worldsheet.fock-indefinite-form
+    inferred: true
+    note: |
+      供给"Fock 形式不定"这一前提（正定性因此才是待证命题）。
+      **标 inferred**：该卡是玻色弦的 Fock 形式；FOK 的正定内积是由**自伴对合 𝒞**
+      重新定义的 ⟨ψ,φ⟩_𝒞 = ⟨ψ, 𝒞φ⟩（附录 B (B.1)，𝒞c_n𝒞 = b_n 等），
+      与本卡的不定形式是两个不同的双线性型，二者关系本图未核实。
+sources:
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "§6「The \"no-ghost\" theorem」, pp.123–128。判据：(6.1) Tr_{H₀} 𝒞 ≤ dim H₀（饱和 ⟺ 正定）、(6.5) 化为 Tr_{C_∞} q^L 𝒞 ≤ Tr_{C_∞} q^L (−1)^𝒢。**NS**：(6.14) Tr_{C_∞}(−1)^𝒢 q^L = Π(1−qⁿ)^{−8} × Π(1+q^r)^8 与 (6.15) Tr_{C_∞} 𝒞 q^L 同值 ⇒ 逐字 'hence proving the \"no-ghost\" theorem for the Neveu-Schwarz sector'。**R（Henneaux 表示）**：(6.19) = (6.20) = Π((1+qⁿ)/(1−qⁿ))^8 ⇒ 逐字 'hence proving the \"no-ghost\" theorem'。**R（Schrödinger 表示）**：p.128 一段（Q 厄米 ⇒ 上同调内积良定义；取 Tψ = 0 的代表元，归一化零模空间内积使 ‖ψ ⊗ 1‖ = ‖ψ‖，再由 Henneaux 表示的结果得正定）"
+    note: |
+      L1（全文 28 页逐页读图，literature/extractions/figueroa-ofarrill-kimura-1989.md E5）。
+      ⚠⚠ **本文没有编号定理**（§2 的三条 'Theorem/Theorem′/Theorem″' 是引用的谱序列标准结果，
+      无编号）；一切结果按公式号定位，**不要编定理号**。
+      方法自述（p.123 逐字）：'we prove the "no-ghost" theorem for the NSR string along the lines
+      suggested in [4]. This method was used to prove the similar result for the bosonic string in
+      [1] and [3].'（[1] = fgz-1986，[3] = Spiegelglas，[4] = 作者自己的预印本 ITP-SB-88-34）。
+      ⚠ 脚注 11 逐字：'As it stands this next equation is ill-defined since H₀ is infinite
+      dimensional. These quantities are to be understood as **weighted traces**.'
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "§3 消灭定理（NS）：(3.18) H^m_∞(NS, L₀; H) ≅ H^{−m}_∞(NS, L₀; H)、(3.19) H^{m≠0}_∞(NS, L₀; H) = 0；证明经相对子复形 (3.5)、半整数过滤 (3.8)–(3.9)、谱序列 E₁ = Künneth (3.16)(3.17)、附录 A 的 H^b_∞(NS_−; M) = 0 (b ≠ 0)。§4 消灭定理（R，Henneaux 表示）：(4.17) H^{m≠0}_∞(R, R₀; H) = 0；证明用双复形 (4.10)–(4.13)、纵向上同调平凡（{F₀, K} = 1，引 Henneaux [12]，脚注 9 限 p ≠ 0）、两条谱序列合并 (4.14)(4.16)"
+    note: |
+      L1。这是本推导的上游关键步骤（与 lian-zuckerman-1989 Theorem 2.4 对应，两篇独立）。
+      ⚠ Poincaré 对偶 (3.18) 与判据 (6.1) 都**外包**给作者自己的预印本
+      [4] = ITP-SB-88-34 (revised)，本项目**未取得其发表版**（Dedushenko [19] 引 FOK 的
+      Phys. Lett. B 219 (1989) 273 'Some results on the BRST cohomology of the NSR string'，
+      可能即其发表版，L4）。
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "§4「The Henneaux Representation」, p.116：𝒦 = C[γ₀]，γ₀ 生成、β₀ 湮灭，β₀ 与 γ₀ 互为伴随；缺点逐字 'Changing the hermiticity properties of γ₀ and β₀ changes the hermiticity properties of the BRST operator: it is no longer hermitian. This means that it is no longer guaranteed that the cohomology space inherits a well-defined (i.e. independent of the representative) inner product.'。p.115 Schrödinger 表示：𝒦 = L²(R, dx)、β₀ = x·、γ₀ = i d/dx；p.120 该表示下鬼数算符 ½((a†)² − a²) 无本征值 ⇒ 上同调无鬼数分次。(5.1)：H_∞(R, L₀; H) ≅ H_∞(R, R₀; H)，p.120 逐字限定 'the isomorphism is only an isomorphism of ungraded vector spaces'"
+    note: |
+      L1。★ 这是**目标卡断言 (2) 的存在量词由哪个实例见证**的定位：本推导的见证是
+      **Henneaux 表示 C[γ₀]**（与 ito-morozumi-nojiri-uehara-1986 (3.14) 同一选择，
+      与 lian-zuckerman-1989 的 T₀ ⊕ T₁ **不同**）。
+      FOK 的做法是先在 Henneaux 表示证无鬼（(6.19)(6.20)），再转到 Schrödinger 表示（p.128），
+      因为 Henneaux 表示下 Q 非厄米、上同调内积不自动良定义。
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "附录 B：正定内积由自伴对合 𝒞 定义，⟨ψ,φ⟩_𝒞 = ⟨ψ, 𝒞φ⟩ (B.1)，(B.2)–(B.10) 给 𝒞c_n𝒞 = b_n 等；p.132 逐字 'To show that the new inner product defined by (B.1) is indeed positive-definite is completely straightforward and is left as an exercise for the reader.' 与 'following Henneaux [12], we can treat them as annihilation and creation operators, in which case β₀ and γ₀ are mutual adjoints. It is interesting to remark that in this case there is no self-adjoint involution 𝒞 which yields this adjointness property'"
+    note: |
+      L1。⚠ **两条作者自承的缺口，直接决定本推导的 status**（见 gaps 第三条）：
+      (a) (B.1) 的正定性「left as an exercise」；
+      (b) Henneaux 表示下**不存在**给出该伴随性质的自伴对合 𝒞——而 §6 的判据 (6.1) 正是用
+          Tr 𝒞 写的。
+  - ref: henneaux-1987
+    loc: "全文；摘要（L2）。摘要逐字：'The infinite degeneracy due to the commuting ghost zero mode is shown to be spurious by extending to the BRST context an argument originally due to Corrigan and Goddard.'"
+    note: |
+      **正文未取得（L0）**，loc 只能写「全文；摘要（L2）」。
+      本条支撑的是本推导 R 扇区证明链里的一步：FOK p.118 逐字
+      'This space, however, turns out to be trivial [12]. In fact, one can⁹ define an operator K
+      such that {F₀, K} = 1. Therefore the vertical cohomology is zero except in dimension zero
+      where it is isomorphic to C^{F₀}.'；脚注 9 逐字 'Strictly speaking, this is only possible
+      for states whose center of mass momentum is **different from zero**' ⇒ 这正是目标卡 (H2)
+      p ≠ 0 在 R 扇区的技术来源。又 p.119 逐字 'Since the cohomology of F₀ is trivial, as proven
+      in [12], so is the cohomology of F₀ + K.'
+      ⚠ Henneaux 摘要**只说 cohomology computed，不含 "no-ghost" 字样**；是否证明内积正定 L0。
+      ⇒ 本条**不**支撑目标卡的断言，只支撑这一个引理。
+      LZ Theorem 2.7（{D_R, ε} = 1）是同一机制的数学版，两篇互不引用。
+summary: |
+  FOK 1989 与 lian-zuckerman-1989 **独立**地给出了 RNS 弦无鬼定理的数学证明（两篇互不引用，
+  LZ p.335 Note added in proof 逐字 'we received preprints from J. Figueroa-O'Farrill and
+  T. Kimura, whose work appears to be similar to ours'）。FOK 的路线与 LZ 不同：
+
+  1. **相对复形与消灭定理**：NS 取 (3.5) 的 {ω | L₀ω = b₀ω = 0}，用半整数过滤 (3.8)–(3.9)
+     与 Künneth 型 E₁ (3.16)(3.17) 的谱序列，加附录 A 的超李代数同调消灭 (A.14)，
+     经 Poincaré 对偶 (3.18) 得 (3.19) H^{m≠0} = 0。
+     R 扇区在 **Henneaux 表示** C[γ₀] 下取 (4.5) 的 {ω | F₀ω = b₀ω = β₀ω = 0}，
+     用横向 Q、纵向 F₀ 的双复形 (4.10)–(4.13)；纵向上同调平凡（{F₀, K} = 1，引 Henneaux，
+     **只在 p ≠ 0**），两条谱序列合并得 (4.17) H^{m≠0} = 0。
+  2. **正定性判据**（§6，路线自述"沿 [4] 的建议，与 [1][3] 对玻色弦所用同法"）：
+     引入自伴对合 𝒞（附录 B (B.1)）把不定形式换成正定形式；判据 (6.1)
+     Tr_{H₀} 𝒞 ≤ dim H₀，**等号成立 ⟺ 上同调上的内积正定**；(6.5) 把它化为复形上的
+     加权迹恒等式 Tr_{C_∞} q^L 𝒞 ≤ Tr_{C_∞} q^L (−1)^𝒢。
+  3. **逐扇区验算迹恒等式**：NS 得 (6.14) = (6.15) = Π(1−qⁿ)^{−8}·Π(1+q^r)^8；
+     R（Henneaux 表示）得 (6.19) = (6.20) = Π((1+qⁿ)/(1−qⁿ))^8。两处都饱和 ⇒ 正定。
+  4. **换到 Schrödinger 表示**（p.128）：因 Henneaux 表示下 Q 非厄米，FOK 再论证在
+     Schrödinger 表示（Q 厄米、上同调内积良定义）下取 Tψ = 0 的代表元并归一化零模空间内积，
+     由第 3 步的结果得正定。
+  ⇒ 目标卡断言 (1)（NS）与 (2)（R，见证 Henneaux 表示 C[γ₀]）得证。
+
+  【★ 为什么 status 是 physical-argument 而不是 rigorous——一条**真矛盾**，不是风格问题】
+  FOK 的 NS 与 R 两处消灭定理都建立在**物质表示完全可约（Verma 模的无穷直和）**之上：
+  p.111 逐字 'It was proven by Brower and Friedman [11] that this representation is **fully
+  reducible** … infinite direct sum of Verma modules'，并据此逐 Verma 模算上同调
+  （附录 A 的 (A.14) 就是对 **Verma 模** M 陈述的）。
+  而 lian-zuckerman-1989 p.320 Remark **明确给出反例**：逐字
+  'V(p,κ) is in general **not** a direct sum of Verma modules of Vir_κ even though it is
+  Vir_κ^- -free.'，并用（超 Virasoro 的）**Kac 行列式**在 NS 扇区证明之。
+  两篇对同一事实的陈述**直接矛盾**；**LZ 不需要它**（用自由性 Corollary 2.19(iii) 即可），
+  **FOK 需要它**（附录 A 的定理只对 Verma 模证）。
+  ⇒ 按 docs/STATUS_LEVELS.md「不确定时选低的那级」，本推导记 **physical-argument**，
+  并把矛盾写进 gaps 待裁决（需读 Brower–Friedman, Phys. Rev. D 7 (1973) 535）。
+  ⚠ 这**不是**说 FOK 的结论错：结论与 LZ 一致，且 LZ 独立地严格证明了它；
+  只是**FOK 这条路线的可追溯性目前断在一处两篇互相矛盾的引用上**。
+  另有三条作者自承缺口（附录 A 定理无已发表证明、(B.1) 正定性 left as an exercise、
+  判据与对偶外包给未见发表版的预印本 [4]），任何一条都足以不给 rigorous。
+gaps:
+  - |
+    ★★ **与 lian-zuckerman-1989 的一处真矛盾（本推导不标 rigorous 的首要理由）**：
+    FOK p.111 逐字 'It was proven by Brower and Friedman [11] that this representation is
+    fully reducible … infinite direct sum of Verma modules'；R 扇区 p.115 措辞更弱，逐字
+    'Brower and Friedman **claim** to have proven full reducibility of this representation,
+    although they do not write down the explicit spectrum generating algebra'。
+    而 lian-zuckerman-1989 p.320 Remark 逐字 'V(p,κ) is in general **not** a direct sum of
+    Verma modules of Vir_κ even though it is Vir_κ^- -free.'（用 Kac 行列式在 NS 扇区明证）。
+    **FOK 的证明需要完全可约性**（附录 A 的 (A.14) 只对 Verma 模 M 陈述），**LZ 不需要**。
+    ⇒ 裁决须读 **Brower–Friedman, Phys. Rev. D 7 (1973) 535**（本项目 bib **尚未登记该文**，
+    已列入报告交 researcher/lead）。在裁决前本推导不得升为 rigorous。
+  - |
+    **附录 A 的超李代数同调消灭定理没有已发表的证明**（作者自承）：p.106 逐字
+    'We have never seen a published proof of this theorem, although Fuks [2] hints that it is a
+    straightforward generalization'；(A.14) 只对所需特例补证，脚注 12 逐字
+    'this theorem holds for any superalgebra with values in a free module but we shall omit the
+    general proof'。本图无对应卡。
+  - |
+    **正定性判据与 Poincaré 对偶外包给未见发表版的预印本**：(6.1) 与 (3.18) 都引作者自己的
+    [4] = ITP-SB-88-34 (revised)。Dedushenko 2015 [19] 引 FOK 的
+    Phys. Lett. B 219 (1989) 273 'Some results on the BRST cohomology of the NSR string'，
+    可能即其发表版（**L4，未核**）。另 (B.1) 的正定性 p.132 逐字
+    'is completely straightforward and is left as an exercise for the reader'。
+  - |
+    **判据用的对合 𝒞 与 Henneaux 表示不相容（作者自己指出）**：p.132 逐字
+    'in this case there is **no** self-adjoint involution 𝒞 which yields this adjointness
+    property'。而 §6 的 R 扇区验算 (6.19)(6.20) 恰是在 Henneaux 表示下用 Tr 𝒞 做的。
+    两处如何相容，FOK 未展开；本图未核实。这是本推导第 3→4 步之间的一处实质缺口。
+  - |
+    **FOK 的鬼振子与本图的不是同一组**：p.111 附近逐字 'Our ghost oscillators are not the
+    natural ones but are **unitarily related** to them'（模展开带 √m 因子）。
+    该酉变换的显式形式、以及它是否影响迹恒等式 (6.14)–(6.20) 的取值，本图未核对。
+  - |
+    **Schrödinger 表示那一路在本图没有相对复形卡**：该表示下 β₀ = x· 没有本征值，
+    **不能**施加 β₀ω = 0（FOK p.115），故其相对复形只相对 L₀，与本图
+    worldsheet.superstring-brst-additional-conditions（R 扇区要求 β₀ = G₀ = 0）不同；
+    且该表示下鬼数算符 ½((a†)² − a²) 无本征值，**上同调没有鬼数分次**（p.120）
+    ⇒ conv.superstring-ghost-number-zero 在该表示下无意义。
+    本推导因此只用 Henneaux 表示那一路作为目标卡断言 (2) 的见证。
+  - |
+    **两种表示的相对上同调只作为无分次向量空间同构**：(5.1) H_∞(R, L₀; H) ≅ H_∞(R, R₀; H)，
+    p.120 逐字 'the isomorphism is only an isomorphism of **ungraded** vector spaces'。
+    且 FOK 的两种表示与 lian-zuckerman-1989 的 T₀ ⊕ T₁ 之间的关系，**两篇都没写**，本图未核实。
+    ⇒ 这条与 --via-lian-zuckerman-1989 的同名 gap 是同一个未决问题的两侧。
+  - |
+    **D = 10 在 FOK 是假设不是结论**（p.111、p.115：物质 SCFT 取 'with the opposite central
+    charge (in the critical dimension)'），与 fgz-1986 对玻色弦的处理同型。
+    故 worldsheet.critical-dimension-superstring-brst 那条边供给的是 FOK 的**前提**，
+    不是 FOK 证明的一部分。
+  - |
+    **零动量一律排除**：脚注 3（NS）、脚注 6（R）逐字 'the vanishing theorem as it stands does
+    not apply to the case where the center of mass momentum is zero. In this case the cohomology
+    is again easy to compute explicitly'；脚注 9（{F₀,K} = 1 只对 p ≠ 0）。
+    与目标卡 (H2) 一致，但 FOK **没有**像 lian-zuckerman-1989 Proposition 5.5 那样把
+    p = 0 的结果显式列出。
+  - |
+    **GSO 投影后的无鬼是习题**：p.128 逐字 'we remark that the GSO projected NSR string is also
+    free of ghosts. … We leave the details of this calculation as an exercise.'
+    ⇒ 目标卡"本命题不断言 (e)"在 FOK 一侧同样未覆盖；严格化的候选来源是
+    lian-zuckerman-1989 Proposition 4.3。
+  - |
+    **FOK 的玻色弦附带结果不要误引**：(6.8) 附近作者自陈那部分是 'essentially the "no-ghost"
+    theorem for the bosonic string … away from the critical dimension'，但同时自评
+    'has no cohomological significance'（此处 D = 10 算的是 8 个横向）。
+    ⇒ **不得**把 figueroa-ofarrill-kimura-1989 挂到本图玻色弦一侧的任何无鬼节点上。
+notes: |
+  【本推导与 --via-lian-zuckerman-1989 的独立性】
+  两篇互不引用：FOK 参考文献只有 14 条（引 Henneaux [12]、Spiegelglas [3]、FGZ [1]、
+  Brower–Friedman [11]），**不引 Ohta、Kato–Ogawa、IMNU、Lian–Zuckerman**；
+  LZ p.335 Note added in proof 称收到 FOK 预印本、工作独立。
+  ⇒ 两条推导并列不是重复记账。
+
+  【三处 βγ 差异：FOK 与 LZ 的处理对照】（researcher 汇总表见
+  literature/extractions/henneaux-1987.md §5.2；本表是该表的图内副本）
+  | 差异 | lian-zuckerman-1989 | figueroa-ofarrill-kimura-1989 |
+  |---|---|---|
+  | (i) βγ 不等价真空 / picture | p.304 'Representations corresponding to distinct charges are inequivalent.'；p.306 (7) 只选一个（κ=½ 取 T_{1/2}、κ=0 取 T₀ ⊕ T₁），理由是唯一使 deg 有上界 | §4 p.115–116 **两种表示都做**（Schrödinger L²(R,dx) 与 Henneaux C[γ₀]）；(5.1) 证两者相对上同调作为**无分次**空间同构；§6 与 p.128 两种表示都证无鬼 |
+  | (ii) R 扇区 β₀ 零模 | Definition 2.2 的相对复形 = Ker b₀ ∩ Ker β₀ ∩ Ker K ∩ Ker D_R；**Theorem 2.7**（p≠0 时 (F, D_R) 上同调为零）；Definition 2.11 用 ⟨u,v⟩_rel = √−1⟨u, v̂⟩ 解决朴素内积在 Ker β₀ 上恒零 | §4 (4.10)–(4.17) 双复形 + 谱序列，{F₀, K} = 1（**引 Henneaux [12]**）；(4.20)–(4.28) 在 Schrödinger 表示下 Q = c₀L₀ − 2b₀T − γ₀²b₀ + Q̂ |
+  | (iii) βγ 占据数无上界 | p.306 'A space in which deg … is bounded neither above nor below will give rise to various difficulties. Fortunately … there is a unique such space in which deg is bounded above'；Prop 3.2 有限过滤 | p.112 固定 Verma 模、固定 L₀ 本征值的相对子复形 'is finite dimensional'；p.113 过滤有界 |
+  ⇒ **两篇对 Polchinski 完全不讨论的这三点都有显式处理**，且处理方式不同——
+  这是本图把两篇并列为独立推导的实质内容，不只是"多一条来源"。
+
+  【物理侧的对应关系】本推导（FOK，用 Henneaux 表示 C[γ₀]）与
+  --via-ohta-imnu 里 IMNU (3.14) 的零模表示（ζ̄₀ ~ β₀ 湮灭、ζ₀ ~ γ₀ 生成）是**同一选择**；
+  换算为 Dedushenko 2015 (5) 的 **R 扇区 −½ picture**（那一步换算是 researcher 的推断，
+  见 literature/extractions/henneaux-1987.md §3 第 1 条）。
+
+  按 researcher 第七轮抽取记录 literature/extractions/figueroa-ofarrill-kimura-1989.md
+  （E1–E6、§3 六条自承缺口、§4 Q1–Q3、§5）与 henneaux-1987.md §5.2 建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"

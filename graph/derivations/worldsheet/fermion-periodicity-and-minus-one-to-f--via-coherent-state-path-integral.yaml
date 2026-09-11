@@ -1,0 +1,62 @@
+id: worldsheet.fermion-periodicity-and-minus-one-to-f--via-coherent-state-path-integral
+target: worldsheet.fermion-periodicity-and-minus-one-to-f
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.berezin-integral
+    note: |
+      提供 ∫dψ 的定义与其三条性质（线性、换序至多差一个符号、分部积分/全导数积分为零）。
+      本推导第 (1) 步「把 ⟨ψ|Â|ψ⟩ 展开后做 ∫dψ 挑出最高次系数」就是 math.berezin-integral
+      的 statement (2)，第 (3) 步的时间切片拼接用到 (A.2.12) 的完备性，而完备性本身
+      又是 Berezin 积分的性质的直接推论。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.2, pp.342–344**（L1 页图逐字）：相干态 **(A.2.7a,b)** `|ψ⟩ = |↓⟩ + |↑⟩ψ`、`ψ̂|ψ⟩ = |ψ⟩ψ`；**(A.2.8)** `⟨ψ|ψ'⟩ = ψ − ψ'`（\"the Grassmann version of the Dirac delta function\"）；**(A.2.10)** `∫dψ (ψ−ψ')f(ψ) = f(ψ')`；**(A.2.12)** `∫|ψ⟩ dψ ⟨ψ| = 1`（完备性）；**(A.2.14)** `⟨ψ|↓⟩ = ψ , ⟨ψ|↑⟩ = −1`；**(A.2.16)** `−⟨ψ|f(χ̂,ψ̂)|ψ'⟩ = ∫dχ f(χ,ψ') exp[χ(ψ'−ψ)]`（逐字「with the prescription that it is written with the `ψ̂` on the right」）；**(A.2.17)** 时间切片乘积 → `∫[dχ dψ] exp{∫₀^T dt [−χψ̇ − iH(χ,ψ)]}`；结论 **(A.2.22)**、**(A.2.23)**"
+    note: |
+      **【2026-09-11 新建（curator-v1-sec15）】** 全部式号与逐字来自 researcher 第九轮
+      App. A pp.341–345 的逐页读图，抽取记录 literature/extractions/polchinski-1998-v1.md §15.2(a)(b)(d)。
+      ⚠ **A.2 通篇不写 `bc` 系统、不出现 `b`/`c` 作鬼场名**（§15.2(g) 第 2 条），
+      本推导因此也不涉及任何世界面内容；它是 0+1 维的一个费米自由度。
+summary: |
+  **(1) 有限步代数（= (A.2.22)）。** 用 (A.2.7a) 的相干态与 (A.2.14) 的 ⟨ψ|↓⟩ = ψ、⟨ψ|↑⟩ = −1，
+  把 ⟨ψ|Â|ψ⟩ 按基态展开，再用 math.berezin-integral 的「∫dψ 挑出 ψ 的系数」，得
+    ∫dψ ⟨ψ|Â|ψ⟩ = A_{↓↓} − A_{↑↑}.
+  右边正是 Tr[(−1)^F̂ Â]，只要按 (A.2.22) 下方的定义取 F̂ 在 |↓⟩ 上偶、在 |↑⟩ 上奇。
+  **这一步是二维态空间上的有限步计算，本身没有极限过程。**
+
+  **(2) 相干态路径积分（= (A.2.17)）。** 把 exp(−ĤU) 切成 N 片，每片之间插入完备性 (A.2.12)，
+  用 (A.2.16) 把每个矩阵元写成 ∫dχ f(χ,ψ') exp[χ(ψ'−ψ)]（要求 Ĥ 写成 ψ̂ 在右的形式），
+  得到离散乘积；令 N → ∞ 记作 ∫[dχ dψ] exp{∫dt[−χψ̇ − iH]}。
+  原书注明「The inconvenient sign in the integral representation has been offset by
+  **reversing the order of Grassmann integrations**」，且对 L = iχψ̇ − H 这类一阶拉氏量
+  「the Hamiltonian and Lagrangian formulations coincide」。
+
+  **(3) 合成（= (A.2.23)）。** 把 (2) 的表示代入 (1) 并取 Â = exp(−ĤU)：外层的 ∫dψ 把
+  路径两端的 Grassmann 变量等同起来，即**周期**边条件，于是
+    ∫dψ ⟨ψ,U|ψ,0⟩ = Tr[(−1)^F̂ exp(−ĤU)].
+  **(4) 反周期。** 原书以一句话给出对偶的结论：反周期边条件给不带权的迹 Tr[exp(−ĤU)]。
+gaps:
+  - "**(2) 的连续极限没有被论证**：(A.2.17) 的离散式在原书里以 `≈` 写出，再以箭头写成泛函积分；
+     §A.2 不讨论 N → ∞ 的收敛性。⚠ 注意：原书那句著名的 \"the derivation of the path integral formula
+     treated the continuum limit ε → 0 **rather heuristically**\" 在 **A.1, p.332**，**讲的是玻色情形**；
+     抽取记录 §15.2(g) 第 1 条明确要求**不要把 A.1 的自陈搬到 A.2 头上**。本条缺口是本图按
+     「同类极限、同样未论证」作出的判断，不是作者对 A.2 的自陈。这是本推导封顶
+     physical-argument 的主要原因。"
+  - "**statement (3)（反周期 ⇒ 普通迹）在原书里只有一句散文，没有显式等式**：逐字只有
+     「the periodic path integral gives the trace weighted by `(−1)^F̂` and the antiperiodic path
+     integral gives the simple trace」。本推导第 (4) 步因此只是转述，没有计算；
+     「反周期」的精确定义（两端 Grassmann 变量差一个负号）也是本图按上下文补出的。"
+  - "**用作对照的玻色结果 (A.1.33)/(A.1.34) 本项目未核**（抽取记录 §15.2(g) 第 4 条）：
+     它们只在 (A.2.23) 下方被引用。故 target 卡末句「与玻色情形相反」的玻色那一半无一手支撑。"
+  - "**只覆盖一个费米自由度**：原书在 (A.2.24) 处才「switch to the notation of field theory」，
+     把结论搬到无穷多自由度（世界面上的费米场、环面配分函数）需要额外的正规化，本推导不涉及；
+     相应的测度与行列式规则见 (A.2.24)–(A.2.27)（落点 worldsheet.genus-g-ghost-path-integral）。"
+  - "**本项目尚未回头核对第 7 章是否显式引用 (A.2.23)**（抽取记录 §15.2(g) 第 5 条）。
+     在把 ch.7 环面配分函数节点接到本卡之前，不得声称原书在那里做了这个引用。"
+notes: |
+  **为什么不是 rigorous**：summary (1) 单独看是有限步代数（可争取 rigorous），
+  但 target 卡的 (2)(3) 含路径积分的连续极限，按「一条推导取其最弱一步」封顶 physical-argument。
+  若日后需要一条更强的边，正确做法是把 (A.2.22) 拆成独立的 rigorous 卡（见 target 卡 notes），
+  而不是抬高本推导。
+author: curator-v1-sec15
+created: "2026-09-11"

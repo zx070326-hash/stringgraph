@@ -1,0 +1,49 @@
+id: worldsheet.heterotic-so32-massless-spectrum--via-level-by-level-analysis
+target: worldsheet.heterotic-so32-massless-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.heterotic-so32-projections
+    note: 供给保留哪些扇区与哪些态（左移 exp(πiF) = 1、右移 exp(πiF̃) = 1）。
+  - id: worldsheet.heterotic-left-moving-zero-point-constants
+    note: 供给左移偏移 −1，据此定出 H^⊥ = 0 的左移态是「级数 1」的那些（(11.2.16) 的两类）。
+  - id: worldsheet.heterotic-so32-tachyon-free
+    note: 供给「m² < 0 的行在闭弦谱中为空」，即无质量能级是最低的物理能级。
+  - id: worldsheet.type-ii-massless-spectrum
+    inferred: true
+    note: |
+      **inferred 的理由**：右移一侧的无质量内容 8_v + 8（ÑS 与 R̃）与 type II 的单侧内容相同，
+      但原书在 §11.2 **不引用** §10.6 的谱表，只在 Table 11.2 里直接列出 8_v 与 8。
+      本图连这条边是为了让「右移单侧为什么是 8_v + 8」有支撑；这一步是本图补的。
+  - id: worldsheet.type-i-unoriented-closed-spectrum
+    inferred: true
+    note: |
+      **inferred 的理由**：原书说 (11.2.17) 的结果「是 type I 超引力多重态」，
+      但**不写**它与 (10.6.18)/(10.6.19) 的对照。本图连这条边是为了把两处的同一批场认同起来
+      （[2] = 28、(2) = 35、8′、56），这一步是本图补的。
+  - id: worldsheet.free-fermion-so-n-current-algebra-level-one
+    inferred: true
+    note: |
+      **inferred 的理由**：「λ^A_{−1/2}λ^B_{−1/2}|0⟩ 按 SO(32) 的 [2] = 伴随变换」是李代数事实；
+      原书在 §11.2 **不前引** §11.5，但 §11.5 (11.5.16) 回指杂化弦：双线性 iλ^Aλ^B 构成 SO(n) 的
+      level-1 流代数，其零模就是 so(n) 的生成元，故 λλ 型的态恰按伴随变换。
+      本图以此卡承接原 gaps 里「§11.4 的李代数工具节 E59 本轮未入图」那一条；边由本图补（2026-09-11，
+      curator-polchinski-v2-ch11-current）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.2, eq. (11.2.16)–(11.2.18) 与 Table 11.2, pp. 52–53"
+    note: L1（抽取记录 polchinski-1998-v2.md E56）。
+summary: |
+  (1) 左移偏移 −1 ⇒ 无质量（H^⊥ = 0）的左移态是「一个单位激发」的那些；
+      在 exp(πiF) = 1 的投影下恰有两类：α^i_{−1}|0⟩_NS 与 λ^A_{−1/2}λ^B_{−1/2}|0⟩_NS，
+      后者是 SO(32) 的 [2]，维数 32×31/2 = 496 = 伴随。
+  (2) 右移一侧（GSO 投影后的超弦）无质量内容是 8_v（ÑS）+ 8（R̃）。
+  (3) 闭弦态是两侧的张量积，给出 (11.2.17)（N = 1 超引力多重态）与
+      (11.2.18)（SO(32) 伴随的 N = 1 规范多重态）。
+gaps:
+  - "**SO(8) 表示的张量积分解本图无节点**：8_v × 8_v = 1 + 28 + 35 与 8_v × 8 = 8′ + 56 的依据在附录 B（本轮未读，抽取记录 Q8）。原书直接写出结果。"
+  - "**「496 = so(32) 伴随」用到李代数表示论**：32×31/2 = 496 是算术，但「[2] 就是伴随表示」是李代数事实。2026-09-11 起以 inferred 边指向 worldsheet.free-fermion-so-n-current-algebra-level-one（§11.5 (11.5.16)：iλ^Aλ^B 的零模生成 so(n)）；「反对称二阶张量 = so(n) 伴随」作为纯李代数陈述本图仍无节点。"
+  - "**「这是 N = 1 多重态」是分组断言**：原书按 d = 10, N = 1 超对称多重态给结果，但本图没有杂化弦时空超对称的节点（type II 一侧有 worldsheet.type-ii-spacetime-supersymmetry，杂化弦一侧原书在 §11.2 不重做那个论证）。"
+  - "**两条 inferred 边**：右移单侧内容取自 type II 谱卡；(11.2.17) 与 type I 超引力多重态的认同取自 §10.6 谱卡。原书在 §11.2 都不作这两处引用。"
+author: curator
+created: "2026-09-11"

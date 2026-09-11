@@ -1,0 +1,50 @@
+id: swampland.rigid-n2-vector-moduli-ricci-positive-v2--via-holomorphic-prepotential
+target: swampland.rigid-n2-vector-moduli-ricci-positive-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.holomorphic-prepotential-ricci-semi-positive
+    inferred: true
+    note: "原文把恒等式与半正定当作一步（'it is straightforward to see'），未把纯数学部分单列；本图拆出该数学卡并在此建边。边是本图补的，故 inferred。"
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b) Rigid Limit of N = 2 Theories in Four Dimensions, p.11–p.12（公式无编号）"
+summary: |
+  【物理输入】4d 全局 N=2 的向量多重态模空间度规为 g_{ij̄} = Im τ_{ij}，τ_{ij} = ∂_i∂_j F(z)，
+  F 是全纯 pre-potential；并假设 Im τ > 0（度规正定，原文未写出这条前提）。
+
+  【纯数学部分（外包）】在上述前提下，
+    R_{ij̄} = −∂_i∂̄_j log det g = ¼ g^{km̄} g^{nl̄} (∂_iτ_{nm})(∂̄_jτ̄_{kl})
+  且该形式半正定、严格正定 ⟺ v ↦ v^i∂_iτ_{··} 非退化——见
+  math.holomorphic-prepotential-ricci-semi-positive（rigorous，reviewer 复核）。原文的
+  "The essential step is to use the fact that g_{ij̄} is the imaginary part of τ_{ij}, which is
+  holomorphic in z." 正是该数学卡 (1) 中"混合二阶导为零"那一步。
+
+  【如何到达刚性极限】原文显示这如何由引力解耦极限得到：局部 N=2 的 Kähler 势为
+  K = −log(4F − 4F̄ + z̄^i∂_iF − z^i∂̄_iF̄)（引 [17] de Wit–Van Proeyen），取
+  F(z) = (i/8)M_Pl² + F(z) 并令 M_Pl → ∞，K 展开后度规退化成全纯 τ_{ij} 的虚部。原文下结论：
+  "This shows how the conjecture 2 can be violated by taking the decoupling limit M_Pl → ∞."
+  （⚠ 按内容应为 conjecture 3。）
+
+  【结论的强度】原文写 "manifestly positive definite"；按上面的数学卡，无条件成立的只有
+  **半正定**（τ 常数的自由理论给 R ≡ 0），严格正定需非退化条件。本推导的目标卡 v2 已照此减弱。
+gaps:
+  - "★ status = physical-argument 的理由：数学部分已拆出并标 rigorous；剩下的是物理输入——'全局 N=2 向量多重态模空间的度规就是 Im ∂∂F'，以及 M_Pl → ∞ 极限的取法。这一步是物理论证，且 Kähler 势的形式外包给未抽取的 [17]"
+  - "[17] de Wit–Van Proeyen NPB 245, 89 (1984) 本项目未抽取；K = −log(4F − 4F̄ + z̄∂F − z∂̄F̄) 的形式未独立核对"
+  - "M_Pl → ∞ 展开的逐项论证原文未写（只给出 F = (i/8)M_Pl² + F 的取法与结论）"
+  - "前提 Im τ > 0 原文未写出，本图补；模空间上何处满足该前提、是否全局满足，原文未讨论"
+  - "转录风险：F(z) = (i/8)M_Pl² + F(z) 中左右两个 F 是不同的量（花体 vs 直体），页图字体可区分而纯文本丢失；复核必须回原页图（ooguri-vafa-2006#U5）"
+  - "原文末句的猜想编号误植（印作 conjecture 2，应为 3），本项目判定（#Q2）"
+notes: |
+  from: ooguri-vafa-2006#E23。
+
+  本推导是 swampland.rigid-n2-vector-moduli-ricci-positive--via-holomorphic-prepotential 的
+  换代版本（v1 推导保留不动，作为旧卡论证的记录；见 docs/STATUS_LEVELS.md"旧推导的去留"）。
+
+  改动相对 v1 推导：
+  (a) 结论减弱为半正定（+ 严格正定的充要条件），依 reviewer-swampland 2026-09-11 的独立复核；
+  (b) 恒等式与半正定这部分外包给 math.holomorphic-prepotential-ricci-semi-positive（rigorous）；
+  (c) 本推导只承载物理输入，保持 physical-argument。v1 推导 gaps 里"缺 reviewer 复核记录"
+      那一条已由 (b) 处理：复核记录落在数学卡上，不落在本卡上。
+author: curator
+created: "2026-09-11"

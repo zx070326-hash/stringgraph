@@ -184,6 +184,18 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     拆开后 **v2 升到 rigorous**，同构卡留在 physical-argument（本质上限：
     worldsheet.transverse-oscillator-commutators）。无鬼定理 v4 **仍是 physical-argument**，
     瓶颈只剩内积/伴随那一层的两条。
+
+    【2026-09-12 再更新（分支 agent/curator/adjoint-wire）】
+    formal/StringFormal/NoGhost/VertexAdjoint.lean（fb006f5）证出
+    `Fock.pairing_vertexOsc_left`（⟨V(b)_K v, w⟩ = ⟨v, V(−b)_{−K} w⟩，**任意 b**）、
+    `Fock.towerPairing_towerVertex_left` 与 `Fock.towerPairing_ddfOp_left`
+    （(A^ε_n)† = A^ε_{−n}）。于是内积/伴随那一层的两条全部让开：
+    worldsheet.ddf-operators-adjoint 换代为 -v2（只含伴随关系）并升为 **formalized**，
+    worldsheet.transverse-ddf-fock-gram-matrix 随之升为 **rigorous**。
+    无鬼定理 v4 **仍是 physical-argument**，但瓶颈树由三支收缩为一支：
+    worldsheet.ddf-contour-equals-mode-sum（围道写法 ↔ 模态和写法的字典）。
+    附带的数学结论：伴随**不需要** k_0² = 0，也没有「同点 E₊E₋ 重排序」这一步
+    ——E₋E₊ 的伴随 E₊(−b)†E₋(−b)† 本身就是正规序。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
@@ -210,10 +222,23 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
         effs["worldsheet.transverse-oscillator-commutators"].name
         == "physical-argument"
     )
-    # 剩下的瓶颈：内积/伴随那一层的两条
-    assert effs["worldsheet.ddf-operators-adjoint"].name == "physical-argument"
+    # 剩下的瓶颈：2026-09-12（分支 agent/curator/adjoint-wire）之前是内积/伴随那一层的两条；
+    # VertexAdjoint.lean（fb006f5）接线后它们都不再是瓶颈：
+    #   · worldsheet.ddf-operators-adjoint 已 superseded_by -v2，v2 走 --via-lean
+    #     （Fock.towerPairing_ddfOp_left）升为 formalized；
+    #   · transverse-ddf-fock-gram-matrix 的前件 (H2) 因此不再被压低，升为 rigorous。
+    # 于是 `why worldsheet.no-ghost-theorem-v4` 的瓶颈树由三支收缩为**一支**：
+    # 围道写法 ↔ 模态和写法的字典。
+    assert effs["worldsheet.ddf-operators-adjoint-v2"].name == "formalized"
+    assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "rigorous"
     assert (
-        effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "physical-argument"
+        effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
+    )
+    # 旧卡保留其历史推导（--via-vertex-operator-adjoint 已改名改指 v2），
+    # 故旧卡自身不再有推导，effective 为 open——它有 superseded_by，不进 open_propositions 报告。
+    assert (
+        g.statements["worldsheet.ddf-operators-adjoint"].superseded_by
+        == "worldsheet.ddf-operators-adjoint-v2"
     )
     # 纯定义卡本身不受影响
     assert effs["worldsheet.ddf-operators-v5"].name == "rigorous"
@@ -1148,13 +1173,27 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     ]["effective"] == "physical-argument"
     assert rep_v2["effective"] == "rigorous"
 
-    # (b) own > effective is still exposed per-derivation
-    rep2 = status_report(g, "worldsheet.transverse-ddf-fock-gram-matrix")
+    # (b) own > effective is still exposed per-derivation.
+    # 2026-09-12 (branch agent/curator/adjoint-wire): the throttled example used to be
+    # transverse-ddf-fock-gram-matrix--via-oscillator-recursion, whose hypothesis (H2) was
+    # cashed in by worldsheet.ddf-operators-adjoint (physical-argument). That card is now
+    # superseded by -v2, which is formalized via VertexAdjoint.lean, so the Gram recursion
+    # reaches rigorous. The throttled example is now no-ghost-theorem-v4--via-goddard-thorn
+    # (own=rigorous; effective=physical-argument because of the contour/mode-sum dictionary
+    # worldsheet.ddf-contour-equals-mode-sum, now the single remaining bottleneck).
+    rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
-    d2 = ders2["worldsheet.transverse-ddf-fock-gram-matrix--via-oscillator-recursion"]
+    d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
     assert d2["effective"] == "physical-argument"
     assert rep2["effective"] == "physical-argument"
+
+    # (b') the Gram recursion itself is no longer throttled
+    rep3 = status_report(g, "worldsheet.transverse-ddf-fock-gram-matrix")
+    ders3 = {d["id"]: d for d in rep3["derivations"]}
+    d3 = ders3["worldsheet.transverse-ddf-fock-gram-matrix--via-oscillator-recursion"]
+    assert d3["own"] == "rigorous"
+    assert d3["effective"] == "rigorous"
 
 
 def test_validate_warns_when_derivation_target_is_superseded():

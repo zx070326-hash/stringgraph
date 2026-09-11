@@ -1,0 +1,81 @@
+id: math.even-unimodular-rank-16-classification
+kind: proposition
+title: 16 维偶幺模（欧氏）格恰有两个同构类：D_16^+ 与 E_8 ⊕ E_8，且两者不同构
+statement: |
+  **逐字（Chenevier–Lannes, Corollaire 3.6, 书上 p. 35，法文原文）**：
+
+  > «Tout réseau unimodulaire pair de dimension 16 est isomorphe à `D_16^+` ou à `E_8 ⊕ E_8`
+  > (et ces deux réseaux ne sont pas isomorphes).»
+
+  **中译**：任一 **16 维偶幺模格**同构于 `D_16^+` 或 `E_8 ⊕ E_8`，**且这两个格互不同构**。
+
+  **前提的展开（同书 §I.1, p. 1 的定义，逐字）**：
+    «Un réseau unimodulaire pair de rang n est un réseau `L ⊂ R^n` de covolume 1 et tel que
+    `x·x ∈ 2Z` pour tout `x ∈ L`.»
+    —— 即：`R^n` 中（**欧氏正定内积**下）covolume = 1 且 `x·x ∈ 2Z` 的格。
+  **两个格的定义（同书 §I.1, p. 1，逐字）**：
+    «`E_n = D_n ⊕ Z e` où `D_n = {(x_i) ∈ Z^n, Σ_i x_i ≡ 0 mod 2}`, `e = ½(1,1,…,1)`, et `n ≡ 0 mod 8`.»
+    该书 p. 33 自陈记号：«Le réseau unimodulaire pair `E_n` est aussi noté `D_n^+` (au moins pour `n ≥ 16`)»。
+    ⇒ 本卡的 `D_16^+` 就是该书 §I.1 的 `E_16`。**`E_16` 不是李代数**（不存在 `E_16` 型李代数）；
+    该书 p. 33 另注 «Pour `n ≥ 16` … on a `R(E_n) = R(D_n) = D_n`»，即 `E_16` 的根系是 `D_16` 型。
+
+  **本命题包含的两半**：「至多两个」（每个都同构于二者之一）与「至少两个」（二者不同构）。
+  括号里那半句是原文自带的，故**不需要**另找「两者不同构」的来源。
+
+  **本命题不断言的内容**：
+    (1) **不**断言秩被 8 整除——那是独立的 math.even-unimodular-rank-divisible-by-8，
+        ⚠ 本卡**不是**它的 n = 16 特例，它也**不蕴涵**本卡。
+    (2) 不断言 8 维或 24 维的分类（同节 `Corollaire 3.5` 与 `Théorème 3.13` 分别给出，见 notes）。
+    (3) 不断言不定号差（洛伦兹）情形的任何结论。
+    (4) **不**断言这两个格与 Polchinski §11.6 记号 `Γ_16`、`Γ_8 × Γ_8` 的等同——
+        那条记号比对是 math.even-self-dual-euclidean-lattices-dimension-16-v2，且标为 inferred。
+sources:
+  - ref: chenevier-lannes-2014
+    loc: "arXiv:1409.7616, ch. II «Algèbre bilinéaire et quadratique», §3, Corollaire 3.6, p. 35（证明在同页）"
+    note: |
+      L1（页图逐字；抽取记录 literature/extractions/math-sources.md §47.3）。
+      ⚠ 编号是 §3 的章内流水号，页图上印的标签就是 `Corollaire 3.6`（**不是** `II.3.6`）。
+      ⚠ **不要写版本号**：取到的文件侧栏 stamp 为 `v1 [math.NT] 26 Sep 2014`，扉页却印 `30 juin 2022`，
+      两者不自洽，arXiv API 报该条目存在 v2（math-sources.md Q47.3）。
+      ⚠ **不得**改写成英文出版版（*Automorphic Forms and Even Unimodular Lattices*,
+      Ergebnisse 69, Springer 2019）的定理号——英文版编号几乎肯定重排，本项目未核实（Q47.4）。
+tags: [lattice, number-theory, classification, root-systems, heterotic]
+notes: |
+  【同节顺带可用的编号（均 L1 页图，本卡不断言，仅备查）】
+    · **`Corollaire 3.5`（p. 34）**：«Tout réseau unimodulaire pair de dimension 8 est isomorphe à `E_8`.»
+      —— 8 维唯一，即 `E_8`。若将来需要，应**另建一张卡**，不要塞进本卡。
+    · `Proposition 3.2`（p. 33）Venkov 恒等式；`Proposition-Définition 3.3`（p. 34）根系/équicoxeter/`|R(L)| = n·h(L)`；
+    · `Théorème 3.12`（p. 41）无根向量者 ≅ Leech 格；`Théorème 3.13`（p. 41）24 维恰 24 类。
+
+  【归属：原文怎么说的，以及禁令】
+  该书 p. 33 小标题 «CLASSIFICATION DES RÉSEAUX UNIMODULAIRES PAIRS EN DIMENSION 8, 16 ET 24»
+  下第一句逐字：
+  «Cette classification est due à **Louis J. Mordell** en dimension 8, à **Ernst Witt** en dimension 16
+  et à **Hans-Volker Niemeier** en dimension 24 [Ni73].»
+  —— 这是**无编号的散文句**（p. 33），只入本 notes，不作为可引定理。
+  ⚠ 原文**只**给 Niemeier 挂了文献标签 `[Ni73]`，对 Mordell 与 Witt **没给标签**。
+  ⛔ **禁令（math-sources.md §47.4(e)、§47.6(d)）：不得在图里写「Witt (1941) 证明了 16 维恰有两个……」。**
+    本项目找到的是**反向线索**：Chenevier–Lannes 唯一带标签引用 `[Wit41]` 的地方，引的是 `g ≤ 2` 的
+    Siegel θ 恒等式，**不是分类**；witt-1941 正文本项目未取到（L0）。可写的最强表述只是
+    「Chenevier–Lannes 把 16 维分类归给 Witt 但未给出处」。
+  ⛔ **禁令**：Serre *A Course in Arithmetic*、Milnor–Husemöller、Conway–Sloane *SPLAG*、Ebeling
+    四本书的**定理号/表号（含常被转引的 "Table 16.7"）一律不得写入图**——四本正文本项目一本都没取到。
+
+  【★★ 两个真会咬人的记号陷阱（math-sources.md §47.5）】
+    1. **`E_16` 不是李代数**：Chenevier–Lannes 的 `E_n := D_n ⊕ Ze` 是他们对 `D_n^+` 的记号。
+       同一本书 §I.1 写 `E_16`、§II.3 写 `D_16^+`，指**同一个格**，不要当成两条不同结论。
+    2. **`Λ_16` 在两处指不同的格**：Zagier (2008) p. 34 的 `Λ_16` = 16 维偶幺模不可分解格（= `D_16^+`）；
+       Chenevier–Lannes **附录 A**（p. 339）的 `Λ_16` = **Barnes–Wall 格 `BW_16`**（最小范数 4，**不是幺模格**）。
+       ⛔ 两者不可混。
+
+  【Zagier 对本条的态度：只能当旁证，不能当来源】
+  Zagier (2008) p. 34 写 «However, in rank 16 one knows that there are two non-equivalent lattices …»，
+  p. 36 写 «there are two non-isomorphic even unimodular lattices `Λ_1 = Γ_8 ⊕ Γ_8` and `Λ_2 = Γ_16`
+  in dimension 16»——但**不给编号、不给证明、正文不给文献**（该文体例是把参考文献集中到文末）。
+  ⇒ **本卡的 sources 不挂 zagier-2008。**
+
+  【认识论：本卡是 rigorous，但它不会把杂化弦「恰有两个」抬到 rigorous】
+  杂化弦那条结论的瓶颈是另一条**物理桥**「一致的 16 维内部 CFT（局域 OPE + 模不变）⟺ 偶自对偶欧氏格」
+  （Polchinski §11.6，推给 v1 §8.4），那条仍是 `physical-argument`。
+author: curator
+created: "2026-09-11"

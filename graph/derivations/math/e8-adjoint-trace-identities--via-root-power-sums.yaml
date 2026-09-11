@@ -1,0 +1,126 @@
+id: math.e8-adjoint-trace-identities--via-root-power-sums
+target: math.e8-adjoint-trace-identities
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.e8-root-system-power-sums
+    inferred: false
+    note: |
+      系数的全部来路：Σ_α (α·x)⁴ = (1/100)(Σ_α (α·x)²)²、Σ_α (α·x)⁶ = (1/7200)(Σ_α (α·x)²)³
+      对一切 x ∈ ℚ⁸（Lean，formalized）。E8Roots.lean docstring 把本推导其余各步明写为 Lean 之外的前提。
+  - id: math.e8-root-system
+    inferred: false
+    note: |
+      幂和的求和范围是 Humphreys §2.10 的 240 元显式列表；本边把「𝔢₈ 相对 𝔥 的根集合」与该列表对上
+      （识别本身有一处 gap，见 gaps 第 2 条）。
+  - id: math.adjoint-weights-are-roots-and-zero
+    inferred: false
+    note: |
+      第一座桥：对 Cartan 元 H，Tr_248 (ad H)^k = Σ_{α ∈ Φ} α(H)^k（k ≥ 1；8 个零权不贡献）。
+      E8Roots.lean docstring 逐字列为前提。physical-argument（来源 L0）。
+  - id: math.chevalley-restriction-theorem
+    inferred: false
+    note: |
+      第二座桥（只用单射方向）：两个 Ad-不变多项式在 𝔥 上相等 ⇒ 在整个 𝔢₈ 上相等。
+      E8Roots.lean docstring 逐字列为前提（「if one wants the identity for all F rather than only for F
+      in a Cartan subalgebra, the Chevalley restriction theorem」）。physical-argument（来源 L0）。
+      **本推导的有效状态被它与上一条桥压在 physical-argument。**
+  - id: conv.gauge-trace-normalization
+    note: 固定 tr = Tr（E₈ 最低维表示即伴随）、F 为偶次形式、Ω_{4n} := Tr F^{2n}。约定不参与状态传播。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/E8Roots.lean 模块 docstring「What is **not** in Lean」段与「The trace identities」段；StringFormal.Math.E8.e8_trace_identities"
+    note: |
+      本仓库，主分支合并提交 fb489ee。docstring 逐字给出本推导的链条：「The step from the adjoint trace
+      Tr_{248} F^k to the root power sum ∑_α (α ⬝ x)^k is a mathematical *hypothesis* here, not a theorem:
+      it uses that the 248 weights of the adjoint representation are the 240 roots together with 8 zero
+      weights (…), and, if one wants the identity for all F rather than only for F in a Cartan subalgebra,
+      the Chevalley restriction theorem. Neither is formalised. The graph carries those steps separately;
+      this file is only the root-system arithmetic, which is what makes the *numbers* 1/100 and 1/7200
+      come out.」——本推导就是「the graph carries those steps separately」的落实。
+  - ref: van-ritbergen-1998
+    loc: "App. A.5「Indices and trace identities for E₈」, eqs. (176)(177)，PDF p. 35"
+    note: |
+      **独立的第二来源，与目标卡逐位相等**（L1 逐字，抽取记录 math-sources §44.5）：
+      (176) Tr F⁴ = 36 (Tr F²/60)² = (36/3600)(Tr F²)² = (1/100)(Tr F²)²；
+      (177) Tr F⁶ = 30 (Tr F²/60)³ = (30/216000)(Tr F²)³ = (1/7200)(Tr F²)³。
+      vRSV 明写「in the representation (248)」，与目标卡的 Tr（伴随迹）同一归一化，无需换算。
+      同文 Table 3 给 E₈ 伴随的 I₂ = 60，与 math.e8-root-system-power-sums 的 P₂ = 60|x|² 的 60 一致。
+      vRSV 的方法（§5.11 经 D₈ 子代数展开特征标）与本推导（根幂和）**不同**，故是独立确认，不是转引。
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12a′)(12b′)(12c′)"
+    note: |
+      目标卡的原始出处（直接给出，无证明）。本推导给出的是 GS 没写的那份算术。
+  - ref: humphreys-1990-reflection
+    loc: "§2.10, pp. 42–43（E₈ 根表）"
+    note: |
+      L1。本推导第 (2) 步用的根表出处；经 math.e8-root-system 挂边。
+summary: |
+  目标：对取值于 𝔢₈ 的偶次形式 F，Tr F⁴ = (1/100)(Tr F²)²，Tr F⁶ = (1/7200)(Tr F²)³，
+  其中 Tr 是 248 维伴随表示的迹。分六步：
+
+  **(1) Cartan 元上，迹 = 根幂和**（math.adjoint-weights-are-roots-and-zero (3)）。
+  取 𝔢₈ 的 Cartan 子代数 𝔥（8 维）与 H ∈ 𝔥：ad H 的特征值是 α(H)（α ∈ Φ(𝔢₈, 𝔥)，各一次）
+  与 0（8 次），故 k ≥ 1 时 Tr_248 (ad H)^k = Σ_{α ∈ Φ} α(H)^k。
+
+  **(2) 根集合 = Humphreys 的 240 元列表**（math.e8-root-system）。
+  Φ(𝔢₈, 𝔥) 是 E₈ 型根系，与 Humphreys §2.10 的显式 Φ ⊂ ℝ⁸ 同构；取 𝔥* 的基 ε_i 使该同构成为恒等，
+  再取 𝔥 的对偶基 h_i，H = Σ x_i h_i，则 α(H) = Σ_i α_i x_i = α·x。
+  （这一步不用任何内积：α(H) 是泛函取值。Killing 型与标准内积的比例常数不进入下面的齐次比值。）
+
+  **(3) 根幂和的算术**（math.e8-root-system-power-sums，Lean）。
+  对一切 x ∈ ℚ⁸：Σ_α (α·x)² = 60|x|²，Σ_α (α·x)⁴ = 36|x|⁴，Σ_α (α·x)⁶ = 30|x|⁶，
+  故 Σ_α (α·x)⁴ = (1/100)(Σ_α (α·x)²)²，Σ_α (α·x)⁶ = (1/7200)(Σ_α (α·x)²)³。
+  Lean 证到的是 ℚ⁸；两边是 x 的多项式，在 ℚ⁸ 上恒等 ⇒ 作为 ℚ[x₁,…,x₈] 的元素相等 ⇒ 对 x ∈ ℂ⁸ 也成立。
+
+  **(4) 合 (1)(2)(3)**：对一切 H ∈ 𝔥，
+  Tr(ad H)⁴ = (1/100)(Tr(ad H)²)²，Tr(ad H)⁶ = (1/7200)(Tr(ad H)²)³。
+
+  **(5) 从 𝔥 推到整个 𝔢₈**（math.chevalley-restriction-theorem (1)）。
+  X ↦ Tr(ad X)^k 是 𝔢₈ 上的 Ad-不变多项式（ad(Ad_g X) = Ad_g ∘ ad X ∘ Ad_g⁻¹，迹共轭不变）；
+  (4) 的两边都是 Ad-不变多项式且在 𝔥 上相等，由限制映射的单性它们在整个 𝔢₈(ℂ) 上相等。
+  限制到紧实形式（物理侧 F 的取值代数）即得对一切 X ∈ 𝔢₈(ℝ) 的多项式恒等式。
+
+  **(6) 从李代数元推到李代数取值的偶次形式**（curator 补的一步，来源不写）。
+  取 𝔢₈ 的基 T_a（a = 1..248），F = Σ_a F^a T_a，F^a 是偶次形式，在外代数里两两交换。
+  Tr F^k = Σ_{a₁…a_k} F^{a₁}⋯F^{a_k} Tr(ad T_{a₁} ⋯ ad T_{a_k})，与多项式函数
+  x ↦ Tr(ad(Σ x^a T_a))^k 的系数**逐项相同**。(5) 说 p(x) := Tr(ad X)⁴ − (1/100)(Tr(ad X)²)²
+  在 ℝ²⁴⁸ 上恒为零；ℝ 无限，故 p 作为 ℝ[x^a] 的元素为零，于是把交换元 F^a 代入仍为零。
+  k = 6 同理。这就是目标卡的 Ω₈ = (1/100)Ω₄²、Ω₁₂ = (1/7200)Ω₄³（Ω_{4n} := Tr F^{2n}）。
+
+  **与旧推导的关系**：--via-casimir-structure 的两条 gap（结构性事实无证明；系数来历无处可查）
+  在本推导里分别由 (1)–(5) 与 (3) 填上；vRSV (176)(177) 作为独立数值确认。
+  Humphreys Table 1 的次数表（2, 8, 12, 14, 18, 20, 24, 30）解释「为什么」是 |x|² 的幂，本推导**不需要**它。
+gaps:
+  - |
+    **两座桥的来源在本项目 L0**：math.adjoint-weights-are-roots-and-zero（GTM 9 §8）与
+    math.chevalley-restriction-theorem（GTM 9 §23）内容都未核实，两卡有效状态 physical-argument，
+    本推导被压在 physical-argument。researcher 结清 Q39 并核实 §8 后两卡可升 rigorous。
+  - |
+    **(2) 的根系识别没有节点**：「𝔢₈ 相对 𝔥 的根集合是 E₈ 型根系，且 E₈ 型根系在同构意义下唯一，
+    故与 Humphreys 的显式列表同构」——前半句是 𝔢₈ 的定义方式（以 Dynkin 图 E₈ 定义的单李代数）
+    加 Serre 存在定理，后半句是根系分类的唯一性部分；两者本图都无卡。math.e8-root-system 明写不断言 (b)。
+    这是一条**未写进 depends_on 的隐含依赖**，记在这里。
+  - |
+    **(6) 是 curator 自己写的**：从 𝔤 上的多项式恒等式到 𝔤 取值偶次形式的恒等式。论证只用「无限域上
+    多项式函数为零 ⇒ 多项式为零」与「多项式恒等式在任意交换代数上代入仍成立」，初等；但没有来源，
+    也没有 reviewer 复核。
+  - |
+    **本推导自身的 (4)(5)(6) 是有限步初等推理**，若 reviewer 复核并按 docs/STATUS_LEVELS.md 的例外条款
+    记 `reviewer-verified`，本推导的 own status 可改 rigorous（kind 改 proof）；届时有效状态仍由两座桥决定。
+  - |
+    **Lean 证的是 ℚ⁸，用在 ℂ⁸/ℝ²⁴⁸ 上**：(3) 末与 (6) 的域扩张论证是多项式恒等式的标准事实，
+    未形式化；E8Roots.lean 的 docstring 未提这一点。
+notes: |
+  【为什么目标卡不挂 lean_decl】reviewer 已裁：Lean 声明 e8_trace_identities 说的是根幂和，
+  目标卡说的是 𝔢₈ 取值二形式的伴随迹，中间隔着 (1)(2)(5)(6) 四步非 Lean 的内容。
+  Lean 逐句对应的那一半是 math.e8-root-system-power-sums（formalized），本推导把它接到目标卡上。
+
+  【与 vRSV 的双向核对】vRSV (176)(177) 的 36、30 与 Lean 的 P₄ = 36|x|⁴、P₆ = 30|x|⁶ 在
+  Tr F² ↔ 60|x|² 的对应下逐位一致；抽取记录 math-sources §44.7 的手算（按 Σx⁴、Σ_{i<j}x_i²x_j² 等展开）
+  是第三份独立复算。三者互证。
+
+  【有效状态】physical-argument（被两座桥压住）。这比 --via-casimir-structure 的 physical-argument
+  在**内容**上强得多（系数有了机器检查的来路），但在等级上暂时持平；工具取最强推导，两条并存。
+author: curator
+created: "2026-09-11"

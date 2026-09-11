@@ -75,6 +75,9 @@ StringFormal/
   Math/FiniteCounts.lean    六边形奇数扭转数 Σ_{k odd} C(6,k) = 32（GS (12c) 的"32"）；**GSO 扇区穷举**（Polchinski §10.6 (a)(b)(c) 字面有 10 解，maximal 者恰 6 个 = IIA/IIB/IIA′/IIB′/0A/0B——"maximality" 是原书未明说的第四条件）
   Math/AnomalyPolynomial.lean  Polchinski (12.2.27)+(12.2.28) ≡ (12.2.11)+(12.2.12)（`ring`，同时验证 ADT (7)）；IIB 引力反常整数解 (2,−2,1) 射线（三式秩 2 非 3）；GS (20) = −96 × Polchinski 引力部分
   Math/E8Roots.lean       E₈ 240 根显式列表；幂和 Σ(α·x)^k = 60Σx² / 36(Σx²)² / 30(Σx²)³ 对**任意 x ∈ ℚ⁸**（分块 + 符号二项展开，避免 240 项 ring）；⇒ (12b′)(12c′)。**Tr₂₄₈ = 根幂和 + Chevalley 限制**是 docstring 假设不在 Lean 内
+  Math/GreenSchwarzAlgebraGen.lean  GS 因子化在**任意交换 ℚ-代数**上（scope 修正：Ω 形式活在带幂零元的环，非域；技巧：`h48 : 48 * algebraMap ℚ R (1/48) = 1` 由 `map_ofNat`+`norm_num`，再 `linear_combination`）；`mixed_anomaly_so_each_gives_32`、`tr_f6_usp_ge_33`
+  NoGhost/FockGram.lean            创生单项式 Gram 矩阵对角、`∏ n^d d!`；条件版 `pairing_creationMonomial_of_hypotheses`（任意双线性型 + (H2)(H3)(H4)）；`ZMod 2` 退化反例（需特征零）
+  Virasoro/GenericIndependence.lean  `linearIndependent_of_gram_det_ne_zero`（任意交换整环、任意双线性型）；N≤4 Kac 行列式非零 ⇒ p(N) 个标准子态线性无关；`finrank_levelSpan_two = 2`；c=1,h=1/4 零向量 (L₋₂−L₋₁²)v
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
   NoGhost/Sugawara.lean     L_n = ½Σ:α·α:、[L_m,α_p] = -p α_{m+p}、Virasoro 关系与 c = D（lie_Lop_Lop）、L_0 = α'k²+N；零模为标量参数
@@ -99,6 +102,7 @@ StringFormal/
   NoGhost/VertexCommute.lean  b·b′ = 0 ⇒ 顶点算子对易（vertexOsc_comm_of_dotVec_zero；E₊ 穿过 E₋ 只在此用正交性，E₋E₋ = E₋(b+b′) 对任意动量）；塔上 k_0²=0 ⇒ towerVertex 对易（**k_0² ≠ 0 时有单值性因子，不对易**）；[A,A] 剩同点乘积局部有限性 + 全导数留数
   NoGhost/VertexProduct.lean  b·b′=0 ⇒ 同点乘积 Σ_{J+K=L} V^{(b)}_J V^{(b′)}_K = V^{(b+b′)}_L（vertexProduct_eq_vertexOsc_add；levelBound_vertexAnn_le 对 M 一致）；塔版 sum_towerVertex_towerVertex_of_isotropic。**b·b′≠0 时为假**（(1−w/z)^{−b·b′} 混合所有指标）。(5b) Σ_j j V_j V_{−j} = mδ **不是** (5a) 推论（L_0 Leibniz 只见权和）
   NoGhost/VertexAdjoint.lean  Fock 配对下顶点算子伴随 pairing (V(b)_K v) w = pairing v (V(−b)_{−K} w)（**任意 b，不需 b·b=0，无重排序步**——E₋E₊ 的伴随本身正规序）；塔版 (V^{(n)}_K)† = V^{(−n)}_{−K}；**(A^ε_n)† = A^ε_{−n}**（towerPairing_ddfOp_left）。同动量版本被证伪（2b=0）
+  NoGhost/VertexWeightedSum.lean  (5b) Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（塔上）；关键原子**电流权恒等式** Σ_J (b·α_{−J}) V^{(b)}_{L−J} = (L + b·a) V^{(b)}_L（vertexCurrent_eq；常数含 b·a）；"全导数" = 权恒等式用两次；k_0²=0 用三次、2α'k_0·p=1 用一次（给出 m）；ℚ-代数必需（除 m+n）。剩 [A,A] 的 Leibniz 组装
   NoGhost/DDFOperator.lean  横向 DDF 算子 A^ε_n = Σ_j α^ε_j V^{(n)}_j：偏振收缩 towerModeVec、
                             level/mode 上界（Fock.levelBound、towerLevelBound、towerModeBound）、
                             **局部有限性 ddfSummand_apply_eq_zero_of_notMem_window**（横向性给上端截断）、

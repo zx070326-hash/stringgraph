@@ -633,4 +633,163 @@
 ADT 只是第三个采用 Bilal 那套整体符号的来源。⇒ 该约定卡的来源仍应指 **GS 1984 (4)+(9c)**。
 **GSW 自己怎么写仍然未知**（在 §13.1.3 / §13.5.3，未取到）。
 
+---
+
+## 11. ★ 第五轮追加（2026-09-11，researcher）：Bilal 2008 `(12.1)`–`(12.5)` 单页复核 + 与 Polchinski `(12.2.11)`–`(12.2.14)` 的逐系数对照
+
+> 本节**不修改** §1–§10 的任何已有条目（`literature/CLAUDE.md` 规则 3 只追加）。
+> 本节回应的是 `consistency.iib-gravitational-anomaly-cancels` 由 L2 升 L1 的需求。
+> ⚠ **本节对 §9 的两处元数据作订正**，见 §11.0。
+
+### 11.0 获取途径、版本与页码映射
+
+- 途径：`https://arxiv.org/pdf/0802.0634` → WebFetch 落盘 → `Read(pages=)` 逐页读图。**L1。**
+- ★ **版本订正**：页 1 侧边条纹逐字 **`arXiv:0802.0634v1 [hep-th] 5 Feb 2008`**。
+  无版本号的 arXiv URL 返回**最新**版 ⇒ **本文只有 v1，不存在 v2。§9 写的「arXiv:0802.0634 v2」应订正为 v1。**
+  标题页右上角报告号 **LPTENS-08/05**，日期 **January 2008**。
+- **页码映射：PDF 页 = 印刷页 + 3**（三点独立核对：PDF 95→印刷 92；PDF 100→印刷 97；PDF 108→印刷 105）。
+  **PDF 共 108 页 ⇒ 印刷末页 105（References [1]–[14] 结束处）。**
+- ★ **章节结构订正**：§9 记「§12.4 pp.100–103」。实际（L1 逐页）：
+  **§12（章题）p.96 / §12.1 "The ten-dimensional anomaly polynomials" p.96 / §12.2 "Type IIB supergravity in ten dimensions" p.97 /
+  §12.3 "Anomaly cancellation by inflow and Green-Schwarz mechanism" p.98 / §12.4 "Anomaly cancellation in the (field theory limits of)
+  type I `SO(32)` and `E₈×E₈` heterotic superstrings" **p.99**（不是 p.100）/ §13 "Concluding remarks" p.103 / §14 Appendix p.103 / References p.105。**
+  §9 引的「四解分类 p.103 逐字」经本轮复核**位置正确**（就在 §12.4 末尾、§13 之前）。
+
+### 11.1 `(12.1)`–`(12.3)`：三种场的十维反常十二形式（L1 逐字，印刷 p.96）
+
+引出句（逐字）："Specializing the previous formulae to ten dimensions, i.e. `r = 5`, and a gravitino which is a spin-`3/2` field without gauge interactions, we get from (11.45) to (11.48)"
+
+- **(12.1)**　`Î₁₂^{gravitino} = 1/(64(2π)⁵) [ −(11/126) tr R⁶ + (5/96) tr R⁴ tr R² − (7/1152) (tr R²)³ ]`
+- **(12.2)**　`Î₁₂^{A} = 1/(8(2π)⁵) [ (31/2835) tr R⁶ − (7/1080) tr R⁴ tr R² + (1/1296) (tr R²)³ ]`
+- **(12.3)**　`Î₁₂^{spin 1/2} = 1/(64(2π)⁵) (tr_R 1) [ (1/5670) tr R⁶ + (1/4320) tr R⁴ tr R² + (1/10368) (tr R²)³ ]`
+  `− 1/(32(2π)⁵) (tr_R F²) [ (1/360) tr R⁴ + (1/288) (tr R²)² ]`
+  `+ 1/(1152(2π)⁵) (tr_R F⁴) tr R² − 1/(720(2π)⁵) tr_R F⁶`
+
+**紧接其后的约定句（逐字，极重要）**：
+> "As just mentioned, in ten dimensions one can have Majorana-Weyl spinors, i.e. chiral fields that in addition obey a reality condition. All our `Î` are for complex positive chirality spinors. If the spinors are Majorana positive chirality one has to include an **additional factor `½`** in `Î₁₂^{spin 1/2}` and in `Î₁₂^{gravitino}`."
+> "Of course, there is no extra factor of `½` for `Î₁₂^A` (we already included one in (11.48) to take into account the reality of the antisymmetric tensor field)."
+
+**依赖（作者自述）**：`(12.1)`–`(12.3)` 由 `(11.45)`–`(11.48)` 特化而来；`(11.45)` 是 `Â(M₂ₘ)(tr e^{iR/2π} − 1)` 的展开、`(11.46)` 是 Hirzebruch 多项式 `L(M₂ₘ)` 的展开、`(11.47)/(11.48)` 是 spin-3/2 与自对偶张量的反常多项式（`(11.48)` 带显式因子 `(−½)·¼`）。
+
+**记号约定（L1，与 §1.2 的 `[Bi]` 换算表互补）**：本章里 **`tr_R` = 规范群表示 `R` 的迹**（`tr_R 1` = 表示维数），**无下标的 `tr` 作用在曲率上时 = 切空间（Lorentz）迹**。
+⚠ **但在 §12.4 里 `tr F²`（无下标）指的是"参考表示"的迹**（(12.14) 上下文逐字 "We fix the trace to be in some reference representation"），与 `tr_R` 不是一回事。**引用 Bilal 的公式必须连上下文一起看是哪一种 `tr`。**
+
+### 11.2 ★★ `(12.4)`–`(12.5)`：IIB 引力反常抵消（L1 逐字，印刷 p.97）
+
+**§12.2 开头的设定（逐字）**：
+> "Consider a ten-dimensional theory that may involve a certain number of Majorana-Weyl gravitinos (spin `3/2`), Majorana-Weyl spin `½` fields and (anti) self-dual antisymmetric tensor fields. **We assume here that there is *no gauge group*, as is the case for IIB supergravity.**⁴⁶ The case with gauge group is more complicated and will be treated in a later subsection. Let `n_{3/2}`, resp. `n_{1/2}` be the number of positive chirality Majorana-Weyl gravitinos, resp. spin `½` fields, **minus** the number of negative chirality ones. Similarly let `n_A` be the number of self-dual **minus** the number of anti self-dual antisymmetric tensor fields. Then the total anomaly polynomial for such a theory is"
+
+- **(12.4)**（逐字，两行）
+  ```
+  Î₁₂^total(n_{3/2}, n_{1/2}, n_A) = (n_{3/2}/2) Î₁₂^{gravitino} + (n_{1/2}/2) Î₁₂^{spin 1/2} + n_A Î₁₂^{A}
+
+      = 1/(128(2π)⁵) { [(−495 n_{3/2} + n_{1/2} + 992 n_A)/5670]   tr R⁶
+                     + [( 225 n_{3/2} + n_{1/2} − 448 n_A)/4320]   tr R⁴ tr R²
+                     + [( −63 n_{3/2} + n_{1/2} + 128 n_A)/10368]  (tr R²)³ }
+  ```
+  ⇒ **派工单给的三个整数组 `−495 n_{3/2} + n_{1/2} + 992 n_A`、`225 n_{3/2} + n_{1/2} − 448 n_A`、`−63 n_{3/2} + n_{1/2} + 128 n_A` 逐字核实无误。**
+
+- **(12.4) 与 (12.5) 之间的正文（逐字）**：
+  > "The vanishing of this total anomaly polynomial constitutes a homogenous linear system of 3 equations in 3 variables. In general such a system has only the trivial solution `n_{3/2} = n_{1/2} = n_A = 0`. Amazingly, however, **as first observed in [3]**, the 3 equations are **not linearly independent** and do admit non-trivial solutions. Moreover, these solutions are very simple, namely"
+
+- **(12.5)**（逐字）　`n_{3/2} = 2 n_A ,　 n_{1/2} = −2 n_A .`
+  ⇒ **派工单给的解 `n_{3/2} = 2n_A`、`n_{1/2} = −2n_A` 逐字核实无误。**
+
+- **(12.5) 之后的正文（逐字）**：
+  > "The simplest case, `n_A = 1` corresponds to one self-dual antisymmetric tensor field, a pair of positive chirality Majorana-Weyl gravitinos and a pair of negative chirality Majorana-Weyl spin-`½` fields. This is precisely the (chiral) field content of ten-dimensional type IIB supergravity! Hence, not only is type IIB supergravity in ten dimensions free of gravitational anomalies, it is also **the simplest chiral theory in ten dimensions in which gravitational anomaly cancellation occurs**."
+
+- **脚注 46（逐字，术语约定）**：
+  > "A word on terminology: in any dimension, a theory with the minimal amount of supersymmetry is referred to as `𝒩 = 1`, with twice the minimal amount of supersymmetry as `𝒩 = 2`, etc. In ten dimensions, an `𝒩 = 1` supergravity has one Majorana-Weyl gravitino and an `𝒩 = 2` supergravity has two Majorana-Weyl gravitinos. In the latter case, if both gravitinos have opposite chirality, the supergravity is called IIA (it is non-chiral and trivially free of anomalies), while if the two gravitinos have the same chirality, the supergravity is called IIB."
+
+**★ 归属（对图直接有用）**：`[3] = L. Alvarez-Gaumé and E. Witten, *Gravitational anomalies*, Nucl. Phys. **B234** (1984) 269.`（L1，印刷 p.105 参考文献页逐字）
+⇒ **Bilal 把「三式线性相关、存在非平凡解」这一观察归给 AGW 1984**，与本项目 `alvarez-gaume-witten-1984.md` 的抽取对口。
+⚠ 但 Bilal **没有**给 AGW 的式号，且 AGW 本身**不固定整体归一**（见 §8.3）。**这条归属只是"来源如此归属"，不足以把 AGW 写成 (12.4) 的数值来源。**
+
+### 11.3 ★★ 与 Polchinski `(12.2.11)`–`(12.2.14)` 的对照：**归一化完全相同**
+
+Polchinski 侧引自 `extractions/polchinski-1998-v2-ch12.md` E9/E10（L1）：
+```
+Î_8(F₂,R₂)  = −Tr(F₂⁶)/1440 + Tr(F₂⁴)tr(R₂²)/2304 − Tr(F₂²)tr(R₂⁴)/23040 − Tr(F₂²)[tr(R₂²)]²/18432
+              + n tr(R₂⁶)/725760 + n tr(R₂⁴)tr(R₂²)/552960 + n [tr(R₂²)]³/1327104        (12.2.11)
+Î_56(R₂)    = −495 tr(R₂⁶)/725760 + 225 tr(R₂⁴)tr(R₂²)/552960 − 63 [tr(R₂²)]³/1327104     (12.2.12)
+Î_SD(R₂)    =  992 tr(R₂⁶)/725760 − 448 tr(R₂⁴)tr(R₂²)/552960 + 128 [tr(R₂²)]³/1327104     (12.2.13)
+Î_IIB(R₂)   = −2Î_8 + 2Î_56 + Î_SD = 0                                                     (12.2.14)
+```
+
+**`[抽取者复算]`（逐系数，10/10 全对）** —— 记 `B_X` 为 Bilal 的 `Î₁₂^X`（**已含 `1/(2π)⁵`**），`P_X` 为 Polchinski 的 `Î_X`（**不含 `2π`**，其 `(12.2.10)` 里另有 `(−i/(2π)⁵)` 前因子）：
+
+| 项 | Bilal 侧（取 Majorana 因子 `½`） | Polchinski 侧 | 结论 |
+|---|---|---|---|
+| 引力子 `tr R⁶` | `(1/128)(−11/126) = −11/16128` | `−495/725760 = −11/16128` | ✔ |
+| 引力子 `tr R⁴tr R²` | `(1/128)(5/96) = 5/12288` | `225/552960 = 5/12288` | ✔ |
+| 引力子 `(tr R²)³` | `(1/128)(−7/1152) = −7/147456` | `−63/1327104 = −7/147456` | ✔ |
+| 自对偶 `tr R⁶` | `(1/8)(31/2835) = 31/22680` | `992/725760 = 31/22680` | ✔ |
+| 自对偶 `tr R⁴tr R²` | `(1/8)(−7/1080) = −7/8640` | `−448/552960 = −7/8640` | ✔ |
+| 自对偶 `(tr R²)³` | `(1/8)(1/1296) = 1/10368` | `128/1327104 = 1/10368` | ✔ |
+| spin-½ `tr_R 1` 三项 | `1/725760`、`1/552960`、`1/1327104` | `n/725760`、`n/552960`、`n/1327104` | ✔（`n = Tr(1) = tr_R 1`） |
+| spin-½ `tr_R F² tr R⁴` | `−(1/2)(1/32)(1/360) = −1/23040` | `−1/23040` | ✔ |
+| spin-½ `tr_R F² (tr R²)²` | `−(1/2)(1/32)(1/288) = −1/18432` | `−1/18432` | ✔ |
+| spin-½ `tr_R F⁴ tr R²` | `(1/2)(1/1152) = 1/2304` | `1/2304` | ✔ |
+| spin-½ `tr_R F⁶` | `−(1/2)(1/720) = −1/1440` | `−1/1440` | ✔ |
+
+⇒ **精确关系（`[抽取者复算]`，非任一作者陈述）**：
+```
+B_gravitino = 2 P_56 /(2π)⁵ ,　B_{spin 1/2} = 2 P_8 /(2π)⁵ ,　B_A = P_SD /(2π)⁵
+```
+即 **两书的反常多项式归一化完全相同**，差别只有两处、且都是**记账口径**而非归一化：
+1. **`(2π)⁵` 的位置**：Bilal 放进 `Î` 里，Polchinski 放进 `(12.2.10)` 的 `δ ln Z = (−i/(2π)⁵)∫Î_d` 里。
+2. **Majorana-Weyl 的 `½`**：Bilal 显式写在 `(12.4)` 的 `n/2` 里（并在 §12.1 末逐字说明），Polchinski 把它吸收进"两个 `8′`、两个 `56`"的**重数计数**里。
+
+**IIB 情形的字典（`[抽取者复算]`）**：`(n_{3/2}, n_{1/2}, n_A) = (2, −2, 1)` ⇒
+`(12.4) = B_grav − B_{1/2} + B_A = [2P_56 − 2P_8 + P_SD]/(2π)⁵ = Î_IIB^{Polchinski}/(2π)⁵`。
+**与 `(12.2.14)` 是同一条恒等式，逐项逐系数相同。**
+
+**tr/Tr 对照**：Polchinski p.97 的 `tr` = 切空间、`Tr` = 规范表示（`n = Tr(1)`）；Bilal 的 `tr`（作用在 `R` 上）= 切空间、`tr_R` = 规范表示（`tr_R 1` = 维数）。
+⇒ **Polchinski ↔ Bilal 可逐符号对译；Polchinski/Bilal ↔ GS 1984/GSW 不能**（后者 `tr` = 规范群基本表示，见 `polchinski-1998-v2-ch12.md` §「tr/Tr 约定」）。
+
+### 11.4 ★ 本轮新增的可机检事实（Bilal 说了"线性相关"但没写出关系）
+
+Bilal 逐字说 "the 3 equations are **not linearly independent**"，**但没有给出线性关系，也没有给出解空间维数**。
+
+**`[抽取者复算]`**：把 `(12.4)` 的三个系数看成 `(n_{3/2}, n_{1/2}, n_A)` 上的线性泛函
+`r₁ = (−495, 1, 992)`、`r₂ = (225, 1, −448)`、`r₃ = (−63, 1, 128)`，则
+
+1. **显式线性关系**：`2 r₁ + 3 r₂ − 5 r₃ = 0`
+   （逐分量：`2(−495)+3(225)−5(−63) = −990+675+315 = 0`；`2+3−5 = 0`；`2(992)+3(−448)−5(128) = 1984−1344−640 = 0`）。
+2. **秩恰为 2**（`r₂`、`r₃` 线性无关：`r₂ − r₃ = (288, 0, −576) ≠ 0` 且二者不成比例）。
+3. ⇒ **核空间恰为 1 维，由 `(n_{3/2}, n_{1/2}, n_A) = (2, −2, 1)` 张成**，即 `(12.5)` 是**唯一**（至多差一个标量）的解。
+   **Bilal 只说"解很简单"，没说"唯一"；本条把它补成一条完整的线性代数陈述。**
+
+**这比 `polchinski-1998-v2-ch12.md` §5.4 的 Lean 岛候选 A8 强**：A8 只验证了 `(2,−2,1)` 这一个向量使三式为零，**没有排除别的解**。
+
+**⇒ 建议把 A8 升级为 A8′**：
+> **A8′ —— IIB 引力反常抵消的完整线性代数**
+> 设 `A ∈ M₃(ℤ)` 的行为 `(−495, 1, 992)`、`(225, 1, −448)`、`(−63, 1, 128)`。则
+> (i) `2·row₁ + 3·row₂ − 5·row₃ = 0`；(ii) `rank A = 2`；(iii) `ker A = span{(2, −2, 1)}`。
+> - 来源：`bilal-2008` (12.4)(12.5)（L1）+ `polchinski-1998-v2` (12.2.11)–(12.2.14)（L1，独立第二源，系数逐项相同）
+> - 严格性：**两书都只断言，都不展示**（Bilal "Amazingly … not linearly independent"；Polchinski "the coefficients … conspire to produce zero"）
+> - Lean 化：`Matrix (Fin 3) (Fin 3) ℤ` 上的 `decide` / `norm_num` + `Matrix.rank`。**(i) 与 (iii) 是 `decide` 级，(ii) 需一行秩计算。**
+> - **价值**：把 Polchinski 亲口说的 "miraculous"/"accidental" 与 Bilal 的 "Amazingly" 变成一条**完全可判定**的整数矩阵事实，且**唯一性**是本项目新加的。
+
+### 11.5 对图的建议
+
+| 节点 | 建议动作 | 理由 |
+|---|---|---|
+| `consistency.iib-gravitational-anomaly-cancels` | **按 L1 处理，加 `bilal-2008` 作第二来源**，loc `§12.2, (12.4)–(12.5), p.97（v1）` | 派工单原按 L2；本轮已 L1 逐字。两书**归一化相同、系数逐项相同**（§11.3），是真正的**独立第二来源**（Bilal 引 [3] AGW，Polchinski 不给引文） |
+| 同上，`statement` 措辞 | **必须带前提「无规范群」** | Bilal §12.2 开头逐字 "We assume here that there is *no gauge group*"；Polchinski 的说法是"没有规范场所以只有三个纯引力项"。**两书前提一致，但图里不能省。** |
+| 同上，`status` | 仍 `physical-argument` | 反常多项式本身 `(12.1)`–`(12.3)` 来自 `(11.45)`–`(11.48)` 的指标定理路线，Bilal 未逐步推导到 `(11.45)` 的系数；Polchinski 明说 "we will not repeat it here but just quote the result" |
+| （新）`consistency.iib-anomaly-solution-unique` | 新建，`status: rigorous`（纯代数，须 reviewer 复核） | §11.4 的 (i)(ii)(iii)。**这是 `consistency` 区可以真正标 `rigorous` 的少数几条之一** |
+| `sources.bib` 的 `bilal-2008`（若已存在） | **订正 `v2` → `v1`；补页码映射「PDF 页 = 印刷页 + 3」；补 §12.4 起始页 p.99** | §11.0 |
+
+### 11.6 与 §9 的关系（合并提示）
+
+- §9 是 lead 直接核实 Bilal §12.4（`β̃`、`H` 的 CS 约定、四解分类）；**本节核实的是 §12.1–§12.2（IIB 纯引力部分），两节不重叠。**
+- **本节对 §9 的两处订正**：(a) 版本 v2 → **v1**；(b) §12.4 起始页 p.100 → **p.99**。
+  §9 引的实质内容（`β̃ = 1`、(12.23)–(12.29)、p.103 的四解 "one can actually scan" 逐字）**本轮复核位置与内容均无误**，不受订正影响。
+- §9 的 p.103 四解段落，本轮读到了它**前面**的一段（印刷 p.103 首段，L1 逐字）：
+  > "There are two more possibilities to achieve factorization of `Î₁₂^total` which we now briefly discuss. Clearly, we must keep `dim G = 496`. One possibility then is to take `G = E₈ × U(1)²⁴⁸`, the other being `G = U(1)⁴⁹⁶`. … Hence `Tr_{adj of U(1)²⁴⁸} F^k = 0, ∀k > 0`. As a result, we can use *all* formula previously established for `E₈ × E₈` and simply set `tr F₂^k = 0, ∀k > 0`, if the gauge group is `G = E₈ × U(1)²⁴⁸` or set `tr F₁^k = tr F₂^k = 0, ∀k > 0`, if the gauge group is `G = U(1)⁴⁹⁶`. In particular, `X₈` is still given by (12.33) with the appropriate replacements. **One can actually scan all 496-dimensional groups and show that there are no other possibilities to achieve factorization of `Î₁₂^total`.**"
+  紧接（逐字）："It turns out that for type I superstrings, the gauge group `SO(32)` is also singled out by other typically string-theoretic consistency conditions, while for the heterotic superstring, similar stringy consistency conditions single out `SO(32)` and `E₈ × E₈`. On the other hand, the somewhat more trivial solutions to the anomaly cancellation conditions, `E₈ × U(1)²⁴⁸` and `U(1)⁴⁹⁶`, **do not seem to correspond to any consistent superstring theory**."
+  ⇒ **Bilal 的措辞强度落在 Antonelli（"We prove"）与 Polchinski（"properties hold"）之间：他说 "show that there are no other possibilities"，但 `[无证明、无引用]`。**
+  ⇒ 这与 §10.2 的 ADT 结论**不冲突**：Bilal 讲的是**因子化**（"factorization of `Î₁₂^total`"），ADT 反驳的是**能否写下 GS 抵消项**。**两个不等价含义，Bilal 恰好用的是前者。** `gsw-1987-v2.md` §5.2 的卡 (A1)/(A2) 拆分因此得到第三条支持。
+
 

@@ -1,0 +1,50 @@
+id: math.even-unimodular-rank-16-classification--via-chenevier-lannes
+target: math.even-unimodular-rank-16-classification
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: chenevier-lannes-2014
+    loc: "arXiv:1409.7616, ch. II, §3, Corollaire 3.6 及其证明（p. 35）；所用前置 Proposition 3.2（p. 33）、Proposition-Définition 3.3（p. 34）；Venkov 策略说明见 p. 33"
+    note: |
+      L1（页图逐字；抽取记录 literature/extractions/math-sources.md §47.3）。
+      **证明在原文里是完整的**（不是 sketch），发表于数学专著（法文预印本 + Springer Ergebnisse 69 英译本）
+      ⇒ 按 docs/STATUS_LEVELS.md 第 4 级判据，status = rigorous。
+summary: |
+  Venkov 的策略（原书 p. 33 自陈 «Sa stratégie fonctionne également en dimension 8 et 16»：
+  Venkov 用「2 次调和系数的 θ 级数恒为零」处理 24 维，其关键只用到
+  «toute forme modulaire parabolique pour `SL_2(Z)` de poids `n/2 + 2` est … nulle»，
+  而这对 `n = 8, 16` 同样成立）。
+
+  **Corollaire 3.6 的证明逐字（p. 35）**：
+
+  > «*Démonstration.* Soit L un tel réseau. La série thêta de L est nécessairement égale à la série
+  > d'Eisenstein normalisée `𝔼_8 = 𝔼_4²`. On en déduit `|R(L)| = 480` et `h(L) = 30`. Cette dernière
+  > égalité force **par inspection** `R(L) ≃ D_16` ou `R(L) ≃ E_8 ⊔ E_8` … Dans le cas `R(L) ≃ E_8 ⊔ E_8`
+  > on conclut comme précédemment que l'on a `L ≃ E_8 ⊕ E_8`. Dans le cas `R(L) ≃ D_16`, `D_16` apparaît,
+  > à isomorphisme près, comme un sous-réseau de L ; on peut donc supposer que l'on a dans `Q ⊗_Z L`
+  > les inclusions `D_16 ⊂ L ⊂ D_16^♯`. Alors `L/D_16` est un lagrangien du qe-module `rés D_16`
+  > et l'on voit que l'on a `L ≃ D_16^+`.»
+
+  拆成步骤：
+  (1) `dim M_8(SL_2(Z)) = 1` ⇒ 16 维偶幺模格的 θ 级数必等于归一化 Eisenstein 级数 `𝔼_8 = 𝔼_4²`；
+  (2) 读出 `𝔼_8` 的 q 系数 ⇒ 根向量个数 `|R(L)| = 480`；再由 `Proposition-Définition 3.3` 的
+      `|R(L)| = n·h(L)`（n = 16）得 Coxeter 数 `h(L) = 30`；
+  (3) **有限枚举（原文写 «force par inspection»）**：秩 16、各不可约分支 Coxeter 数相同（équicoxeter）
+      且 `h = 30` 的 ADE 根系只有 `D_16` 与 `E_8 ⊔ E_8`；
+  (4) `R(L) ≃ E_8 ⊔ E_8` 情形收尾得 `L ≃ E_8 ⊕ E_8`；`R(L) ≃ D_16` 情形经
+      `D_16 ⊂ L ⊂ D_16^♯`、`L/D_16` 是判别型模 `rés D_16` 的 Lagrangian 子模，得 `L ≃ D_16^+`；
+  (5) 「两者不同构」由原文命题正文的括号直接给出（`E_8 ⊕ E_8` 可分解、`D_16^+` 不可分解）。
+gaps:
+  - "**第 (3) 步「par inspection」的有限枚举，本项目未复核**：原文不展开这一步（「秩 16、équicoxeter、h = 30 的 ADE 根系只有 D_16 与 E_8 ⊔ E_8」）。它是**有限可判定的检查**，在数学上不算缺口，但本图**没有**独立核过它，也没有 ADE 根系/Coxeter 数表的节点。若将来形式化，这一步是主要工作量（math-sources.md §47.6(c)）。"
+  - "**第 (5) 步「两者不同构」的理由是本图补的**：原文只在命题里用括号断言 «et ces deux réseaux ne sont pas isomorphes»，不给证明；summary 里「可分解 vs 不可分解」这句是本图的注解，不是原文逐字。"
+  - "**本图没有模形式侧的节点**：`dim M_8(SL_2(Z)) = 1`、Eisenstein 级数 `𝔼_4`/`𝔼_8`、θ 级数的模形式性质、`Proposition 3.2`（Venkov 恒等式）、`Proposition-Définition 3.3`（根系为秩 n 的 ADE + équicoxeter）都没有对应 statement，故 depends_on 为空。这是本图的覆盖缺口，不是原文的论证缺口。"
+  - "**版本悬案**：取到的 PDF 侧栏 stamp 为 `arXiv:1409.7616v1 [math.NT] 26 Sep 2014`，扉页日期却是 `30 juin 2022`；arXiv API 报存在 v2。`Corollaire 3.6` 这个号在 v1/v2 之间是否一致**未经人类核对**（math-sources.md Q47.3）。本条若成为 load-bearing 依赖，需人工复核版本。"
+  - "**英文出版版的编号未核实**：Springer Ergebnisse 69（2019）几乎肯定重排了编号，本图一律引 arXiv 版（Q47.4）。"
+notes: |
+  ⛔ 禁令（见目标卡 notes 与 math-sources.md §47.4/§47.6(d)）：
+  不得写「Witt (1941) 证明了 16 维恰有两个……」；不得写 Serre / Milnor–Husemöller / SPLAG / Ebeling 的定理号或表号。
+  Chenevier–Lannes 对「秩被 8 整除」只说 «Il est bien connu que …»（p. 1）不证不引，
+  故 **math.even-unimodular-rank-divisible-by-8 不得引本书**，那一条用 Zagier Prop 12(i)。
+author: curator
+created: "2026-09-11"

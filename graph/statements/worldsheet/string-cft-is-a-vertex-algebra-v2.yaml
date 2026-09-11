@@ -99,6 +99,9 @@ sources:
         （见 gui-2023-lectures Definition 7.2 那条来源）。
       → 对照材料：`polchinski-1998-v2.md` 记录 Vol.2 §11.5 有一个**原书自己承认 OPE 会出错**的实例，
         可作为本节点的反向证据，本图尚未建节点。
+        【2026-09-11 追记（curator-polchinski-v2-ch11-current）】该节点已建：**worldsheet.sugawara-central-charge**，
+        其 notes 逐字转录了原书 p. 69–71 的两段（'Naive application of the OPE would give the wrong normalization
+        for T^s and c^{g,k}'），并指回本节点、math.vertex-algebra-associativity 与 math.vertex-algebra-ope-analytic-convergence。
       见 literature/extractions/polchinski-1998-v1.md §12.4（Q3）与 §12.10 表 A 的 Q3。
 tags: [cft, vertex-algebra, ope, locality, gap, bottleneck, open]
 notes: |

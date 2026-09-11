@@ -1,0 +1,33 @@
+id: swampland.ov-conjecture-2-light-tower--via-string-examples
+target: swampland.ov-conjecture-2-light-tower
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+  - id: swampland.moduli-space-distance
+    inferred: false
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.1, Examples i)–v), p.6–p.10（公式无编号，除 (3.1)）"
+summary: |
+  §3.1 的逐例检验给出无穷远处的轻态塔与具体的指数系数：
+  - Example i) M 理论 on S¹：r → ∞ 给 KK 模，10 维 Einstein 框架下 ε(T) ~ exp(−(9/8)T)；
+    r → 0 给缠绕 S¹ 的膜（IIA 弦），ε(T) ~ exp(−(3/8)T)。原文由此明确指出
+    "the coefficient of the exponent is not universal (9/8 and 3/8 in this case) even for a
+    given dimension"。
+  - Example iii) IIB on S¹：ε(T) ~ exp(−(8/7)T) 或 exp(−(6/7)T)（KK 与缠绕）。
+  - Example ii) IIB dilaton-axion：τ → i∞ 处出现质量 ~ e^{−T/4} 的轻弦激发。
+  - Example iv) 16 超荷：无穷远点对偶于去紧化极限，故出现无穷 KK 塔。
+  - Example v)（CY 三折）：去紧化极限处无穷多 KK 模变轻。
+gaps:
+  - "α 只有 α > 0 的约束，且**不普适**（四个已知值：9/8、3/8、8/7、6/7）；本文未讨论 α 是否有下界（ooguri-vafa-2006#Q3）"
+  - "'starting with' 只约束塔的起点，不约束塔内间距（#Q4）"
+  - "所有例子都是弦论背景；对一般一致量子引力理论无检验"
+  - "4d N=1 一支只有否定式经验证据（#E20）"
+notes: |
+  from: ooguri-vafa-2006#E14、#E15、#E16、#E17。
+  **禁止**加与 ov-conjecture-1-unbounded-diameter 之间的任一方向的边（原文 §4.1 末明说独立）。
+author: curator
+created: "2026-09-11"

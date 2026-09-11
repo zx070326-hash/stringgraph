@@ -106,6 +106,20 @@ notes: |
     `[A^i_m, A^j_n]` are untouched.」。故本节点**不得**标 formalized。
     形式化的两条路线：(i) 围道路线需要顶点算子乘积与重排序；(ii) 顶点代数路线需要
     Mathlib 的 Mathlib/Algebra/Vertex/（Locality 仍在 TODO）加零模同态 (2.62)。
+    【⚠ 部分已消解 2026-09-12：VertexAdjoint.lean（fb006f5）；**只加本段 notes，
+    陈述文本未动**】上面路线 (i) 里的「重排序」要区分两种，它们的命运不同：
+      · **同一算符内部** E₊ 与 E₋ 的重排序（伴随那一步要的那种）——**这一步不存在**：
+        V(b)_K = E₋(b)E₊(b) 已是正规序，其伴随 E₊(b)†E₋(b)† = E₋(−b)E₊(−b) 仍是正规序，
+        不需要换序、不产生 c-数因子、不需要 k_0² = 0。见
+        `StringFormal.NoGhost.Fock.pairing_vertexOsc_left`（对任意 b）。
+        **但这一条与本卡无关**：本卡要的不是伴随。
+      · **两个不同插入点算符之积** V(b,z)V(b′,w) 的重排序（交叉缩并）——**仍未做**，
+        这才是本卡 (i) 路线真正缺的东西。VertexOperator.lean 文件头 "Mathematical gaps"
+        第 2 条「No operator products」**依然有效**。
+    ⇒ 本卡**不得**标 formalized 这一结论**不变**；只是上面写的障碍清单里有一项是虚构的。
+    相关进展：worldsheet.ddf-operators-adjoint-v2 与 worldsheet.vertex-operator-adjoint
+    已升为 formalized，但它们走的是伴随那条线，与本卡的对易关系**逻辑独立**
+    （伴随的论证不用任何两个 DDF 算子之间的 OPE，反之亦然）。
 
   【⚠ statement 里的 worldsheet.ddf-operators-v5 指针：合并 main 后已被 v6 取代（2026-09-11（五）晚，curator）】
   本卡的 statement 逐字照抄旧卡，因此写的是「worldsheet.ddf-operators-v5 定义的 DDF 算子」。

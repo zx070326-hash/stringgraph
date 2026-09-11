@@ -1,0 +1,34 @@
+id: branes.bps-bound-point-particle-d4--via-positivity-of-anticommutator
+target: branes.bps-bound-point-particle-d4
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.metric-mostly-plus
+    note: |
+      (B.2.1a)/(B.2.36a) 的负号来自号差：原书 p. 440 逐字「The minus sign is due to our metric signature (− + … +)」。
+      约定节点不参与状态传播；列出只为让读者看到符号来源。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, pp. 448–449：(B.2.36a,b) → 静止系 (B.2.37) → 标准形 (B.2.38) → 非负性 → (B.2.39)；短/超短表示计数同页"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21（L1）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, (B.2.4), p. 440：正定性论证的原型 0 = ⟨ψ|{Q, Q†}|ψ⟩ = ‖Q|ψ⟩‖² + ‖Q†|ψ⟩‖²（无质量表示）；有质量表示的振子构造 (B.2.9)–(B.2.12), p. 442"
+    note: 抽取记录 #E15/#E16（L1）。(iii) 的振子计数沿用这两处的构造。
+summary: |
+  (i) 写出 Lorentz 不变性允许的最一般形式 (B.2.36)：动量项之外只能加与 δ_{αβ} 成比例的守恒荷 Z^{AB}
+      （点粒子荷）；Majorana 性质 + C 反对称 ⇒ Z^{AB} 反对称。【原书断言，无证明】
+  (ii) 静止系 P_μ = (m, 0, 0, 0)，用 Q̄ = Q†Γ^0 改写为 {Q^A_α, Q^{B†}_β} = 2mδ^{AB}δ_{αβ} + 2iZ^{AB}Γ^0_{αβ}。
+      取 Z 的本征态，用 U(N) 旋转把反对称矩阵 Z 化为分块标准形 (B.2.38)，本征值 ±q_i。
+      左端是 (Aα, Bβ) 上的非负矩阵（⟨ψ|{Q, Q†}|ψ⟩ = ‖Q|ψ⟩‖² + ‖Q†|ψ⟩‖² ≥ 0），
+      故右端本征值 2(m ± q_i) ≥ 0 ⇒ m ≥ q_i。
+  (iii) m > 所有 q_i：2N 对振子全部非退化，2^{2N} 态；最大的 k 个 q_i = m：对应的 2k 对振子的反对易子为零，
+      它们必须湮灭态，剩 2(N−k) 对，2^{2(N−k)} 态（短表示）；全部 q_i = m：2^N 态（超短，N 偶）。
+gaps:
+  - "**「最一般代数」无证明**：原书逐字「The most general extended supersymmetry algebra allowed by Lorentz invariance is」，不证不引（Haag–Łopuszański–Sohnius 未被提及；抽取记录 appB §3.2 第 7 条、§3.1 第 4 条）。"
+  - "**点粒子限定**：含广延物体荷的代数原文推给 §11.6 与 ch.13（§3.1 第 9 条）；本推导对含膜荷的情形无效。"
+  - "**(B.2.38) 标准形的存在**（实反对称矩阵的 U(N) 分块对角化）原书一句带过；这是有限维线性代数，可形式化但本图未建 math 卡。"
+  - "**(iii) 的振子计数**依赖 (B.2.9)–(B.2.12) 的有质量表示构造，本图无 d = 4 超对称表示论节点。"
+  - "**Majorana 条件与 C 的反对称性**（(B.1.20)(B.1.24)–(B.1.27)）本图无节点；「Z 反对称」这一步在图上悬空。"
+  - "**正定性论证本身是完整的**（有限维厄米矩阵非负 ⇒ 本征值非负）；若 reviewer 复核 (ii) 并记 reviewer-verified，可按 STATUS_LEVELS 例外考虑把 (ii) 单独拆卡升 rigorous——但 (i) 的「最一般」断言不可升。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

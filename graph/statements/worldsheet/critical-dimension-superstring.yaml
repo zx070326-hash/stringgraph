@@ -1,0 +1,151 @@
+id: worldsheet.critical-dimension-superstring
+kind: proposition
+title: 超弦临界维数 D = 10：两条路线各自的前提与结论，外加一条模不变性的必要条件
+statement: |
+  【记号与约定】
+  中心荷一律写上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 撞号（同
+  worldsheet.critical-dimension-bosonic-v2 的记号规定）。扇区参数 ν ∈ {0, 1/2}
+  与 α = 1 − 2ν 见 worldsheet.superstring-sector-labels。
+  截距记号按 conv.intercept-sign-a；⚠ Vol.2 把正规序常数写在 L_0 **内部**（记作 a^m、a^g），
+  换算是 Vol.2 的 a = Vol.1 的 A = −（本图截距记号的 a），见
+  worldsheet.rns-super-virasoro-generators 的【常数的记账位置】。
+
+  本命题是下列 (I)–(IV) 四条的**合取**：它断言四条各自成立。
+  它**不**断言 (I)(II) 互相等价，**不**断言由任一条可推出另一条，
+  也**不**把它们当作互不相关的独立证据（见【"独立"的确切含义】）。
+
+  (I) BRST 路线（BRST 荷幂零）。
+      前提：λ = 2 的 bcβγ 超共形鬼场（c^g = −15，a^g 按扇区取 −1/2 / −5/8）与物质部门的
+      超共形约束 (T^m_B, T^m_F) 构成的 BRST 荷 Q_B（worldsheet.superstring-brst-charge），
+      作用在受限模上；β、γ 的周期性与 T_F 相同。
+      结论：**Q_B² = 0 ⟺ 总中心荷为零 ⟺ c^m = c̃^m = 15**，
+      且此时可把任意个平坦 X^μψ^μ SCFT 换成任何满足该中心荷条件的正范数 SCFT
+      （其超流须与 ψ^μ、β、γ 同周期）。
+      本路线**只**定出 c^m，**不**定出 D，也不定出任何截距。
+      ⚠ **本卷没有像 Vol.1 (4.3.10) 那样的 Q_B² 显式公式**：超弦的对应陈述是
+      §10.5 中 (10.5.23) 下方的**一段正文，无式号**，且论证被推给习题
+      （Vol.1 exercise 4.3 与 Vol.2 exercise 10.13(b)）。
+      （节点：worldsheet.critical-dimension-superstring-brst）
+
+  (II) 总中心荷为零路线（"反常"路线）。
+      前提：一个正范数物质 SCFT 加 λ = 2 的超共形鬼场；一致性要求 c^tot = c^m + c^g = 0。
+      结论：**c^m = 15**（同样只到 c^m，不定出 D 与截距）。
+      ⚠ **本路线与玻色弦的 Weyl 反常路线在逻辑地位上不同**：
+      玻色弦一侧「总中心荷为零」是 Weyl 反常抵消的**结论**（路径积分对 diff × Weyl 取商）；
+      Vol.2 §10.5 开头明说本书**不**走「超-diff × 超-Weyl 不变作用量 → 规范固定」这条路，
+      而是直接在规范固定形式里把超共形对称性**定义为约束**。故本路线的前提在本卷是
+      **被假定的一致性条件**，其唯一的独立支撑就是 (I)。
+      （节点：worldsheet.critical-dimension-superstring-anomaly）
+
+  【(I)(II) 的结论与「D = 10」的关系】
+      两条路线直接得到的都是关于**物质中心荷**的条件 c^m = 15，而不是 D = 10。关系是：
+        · 作为对理论的**约束**，c^m = 15 比 D = 10 **弱**：任何中心荷为 15 的正范数
+          超共形物质 SCFT 都满足它（紧化、非几何背景等），平坦的 10 维时空只是一个解；
+        · 作为**结论**，c^m = 15 比 D = 10 **强**：它对任意物质 SCFT 成立。
+      要由 c^m = 15 得到 D = 10，必须再加一步
+        **c^m = (3/2)D**  （D 个平坦 X^μψ^μ SCFT 的中心荷：每个标量 1、每个 Majorana 费米子 1/2；
+        worldsheet.rns-matter-central-charge），
+      该步是 (I)(II) 的**公共输入**，不是任一条路线自身的产物。在物质部门取 D 个平坦
+      X^μψ^μ SCFT 这一情形下，(I)(II) 各自给出
+        0 = (3/2)D − 15  ⟹  **D = 10**。
+
+  (III) 模不变性的一条必要条件（**不是**给出 D = 10 的第三条路线）。
+      前提：type II 的环面真空振幅取 Coleman–Weinberg 形式（原书自称是「猜」的），
+      费米部门的迹按扇区写成 Z^α_β = (1/η)ϑ[α/2, β/2](0, τ)，GSO 后取 (10.7.9) 的组合。
+      结论：要构造出模不变的组合，**横向费米子的个数必须是 8 的倍数**。
+      在「D 个平坦 X^μψ^μ、横向方向 D − 2 个」的设定下它给 D − 2 ≡ 0 (mod 8)，
+      即 D ∈ {2, 10, 18, …}；**只有配合 (I) 或 (II) 的中心荷条件才挑出 D = 10**。
+      同一段论证还固定了 (10.7.9) 中各项的相对符号（对应 R 扇区态的费米统计）。
+      （节点：worldsheet.modular-invariance-requires-eight-transverse-fermions）
+
+  (IV) 与玻色弦的对照：**本卷没有光锥规范洛伦兹不变性那条路线**。
+      玻色弦的 D = 26 在本图有四条路线（worldsheet.critical-dimension-bosonic-v2 的 (I)–(IV)），
+      其中光锥路线（[J^{i−}, J^{j−}] 的闭合）是唯一同时定出 D 与截距的一条。
+      **Vol.2 第 10 章没有对应的计算**：超弦的截距（NS 1/2、R 0）在本图只由
+      正规序常数相加得到（worldsheet.open-superstring-mass-shell），
+      不由任何洛伦兹代数闭合条件定出。
+      本条是一条**关于本图与本卷内容的否定性记账**，不是物理断言。
+
+  【"独立"的确切含义】
+      (I) 与 (II) **不是**两份互不相关的证据：
+        · 两条共享同一个输入 c^g = −15（worldsheet.superconformal-ghost-central-charge）
+          与同一个公共输入 c^m = (3/2)D，判据都是同一个数 c^m − 15 = 0；
+          差别只在把这些输入拼起来的机制——(I) 是 {Q_B, Q_B} 的模式计算，
+          (II) 是「反常必须消失」这条一致性要求。若 c^g 算错，两条同时失效。
+        · 更进一步，(II) 的前提在本卷**不被论证**，其唯一支撑就是 (I)。
+          因此严格地说，本卷对 D = 10 只有**一条**实质论证加一条重述。
+        · (III) 与 (I)(II) 的输入不同（用的是模变换而非中心荷），
+          在这个意义上它是独立的；但它只给模 8 的条件，不给 D = 10。
+      与玻色弦的对比：Vol.1 的 D = 26 有四条路线且其中光锥路线独立于中心荷计算，
+      Vol.2 的 D = 10 没有这样的一条。
+
+  【本命题不断言什么】
+      (1) 不断言 (I)(II) 互相蕴含或等价，也不断言它们与 (III) 的关系。
+      (2) 不断言 D ≠ 10 时会发生什么（本卷不做亚临界超弦）。
+      (3) 不断言任何截距值（NS 1/2、R 0 见 worldsheet.open-superstring-mass-shell）。
+      (4) 不断言 D = 10 是超弦一致性的**充分**条件：GSO 投影、模不变性、
+          type I 的 tadpole 抵消、时空反常抵消都在范围外。
+      (5) 不断言「十维一致超弦理论恰有三个」——那是
+          worldsheet.ten-dimensional-superstring-theories，且带条件。
+      (6) 不断言存在超-diff × 超-Weyl 不变的作用量形式：原书断言存在但不构造、不引文献
+          （抽取记录 Q5），本图不为它建节点。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（(II) 的结论：'The ghost central charge is then −26 + 11 = −15, and the condition that the total central charge vanish gives the critical dimension' 0 = (3/2)D − 15 ⟹ D = 10；**式号与内容均已 L1 核实**）"
+    note: |
+      本卡定位最强的一处，也是原书唯一把 D = 10 写成带式号公式的地方。
+      ⚠ 但它把 c^m = (3/2)D 与总中心荷条件合在一个式子里；本卡按项目记账原则拆开。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（(I) 的结论 c^m = c̃^m = 15 与其周期性附加条件；逐字见 worldsheet.critical-dimension-superstring-brst 的 sources）"
+    note: |
+      L1。★ **本卷没有把「Q_B² = 0 ⟺ c^m = 15」写成带式号的公式**，
+      抽取记录 E37 明确要求 loc 只能写「§10.5, p. 24, (10.5.23) 下方一段」，**不要编式号**。
+      这是本卡与玻色弦汇总卡的一处实质差别（那边 (III) 有 Vol.1 (4.3.10)）。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.14), p. 3（公共输入 c^m = (3/2)D：'Each scalar contributes 1 to the central charge and each fermion 1/2'）；(10.1.19), p. 4（鬼场 c^g = 9 − 12λ，λ = 2 给 −15）"
+    note: L1（E8、E11）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, pp. 32–35（(III)：Z^α_β 与 (10.7.9)、(10.7.14)；逐字 'It is necessary for the construction of this invariant that there be a multiple of eight transverse fermions.'）"
+    note: L1（E47）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 开头段, p. 20（(II) 的逻辑地位限定：本书不走超-diff × 超-Weyl 规范固定那条路，把超共形对称性定义为约束）"
+    note: |
+      L1（E33）。★ 抽取记录把这一条列为「对本项目极重要」：
+      它是超弦分支**没有** Weyl 反常路线的直接原因。
+  - ref: polchinski-1998-v2
+    loc: "§11.1, eq. (11.1.2a,b), p. 46–47（鬼场中心荷通式 c_h = (−1)^{2h+1}[3(2h−1)² − 1]，c_2 = −26、c_{3/2} = +11；式号与表达式均已 L1 核实）"
+    note: |
+      按抽取记录 Q11 的建议引入：这条通式把 c^g = −15 的两个来源统一成一条，
+      且比 Vol.1 (2.5.12)/(2.5.24) 的分立写法定位更强。
+      ⚠ 只引用这条**公式**，不引用 §11.1 的分类结论（那带作者自己的完备性警告）。
+tags: [superstring, critical-dimension, central-charge, brst, modular-invariance, summary]
+notes: |
+  【本卡的格式沿用 worldsheet.critical-dimension-bosonic-v2】按 lead 的要求，
+  路线**分列**，不压平：每条路线写清自己的前提、结论、以及**不**给出什么。
+  与玻色弦汇总卡的三处实质差别，读者必须知道：
+    (a) **路线更少**：玻色弦四条（光锥、旧协变、BRST、Weyl 反常），超弦只有两条，
+        且其中 (II) 在本卷不被论证；
+    (b) **没有光锥路线**：因此超弦的截距不由任何洛伦兹代数闭合条件定出（本卡的 (IV)）；
+    (c) **BRST 路线没有显式公式**：Vol.1 有 (4.3.10)，Vol.2 只有一段无式号正文加两道习题。
+  综合起来：**本图对 D = 10 的支撑明显弱于对 D = 26 的支撑**，
+  这不是记账问题，是文献本身的状况。
+
+  【引用建议】只需要其中某一条时请直接依赖对应的路线节点，不要依赖本汇总卡片：
+    (I)  worldsheet.critical-dimension-superstring-brst
+    (II) worldsheet.critical-dimension-superstring-anomaly
+    (III) worldsheet.modular-invariance-requires-eight-transverse-fermions
+    公共输入 worldsheet.rns-matter-central-charge、worldsheet.superconformal-ghost-central-charge
+
+  【与 ms.critical-dimension-superstring 的关系】docs/ROADMAP.md 记该里程碑
+  「待 §10–11 入图后起草」。本卡是它的候选指向节点。起草者应特别注意本 notes 的
+  (a)(b)(c) 三条差别与【"独立"的确切含义】一节的最后一句
+  （「本卷对 D = 10 只有一条实质论证加一条重述」）。
+author: curator
+created: "2026-09-11"

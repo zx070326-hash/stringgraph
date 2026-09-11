@@ -1,0 +1,275 @@
+id: worldsheet.no-ghost-theorem-superstring-cohomological--via-ohta-imnu
+target: worldsheet.no-ghost-theorem-superstring-cohomological
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给 Q_B。IMNU 一侧的对应物是**零模分解** (3.2)（NS）与 (3.4)（R）：
+        Q_B^NS = η₀ L^NS + η̄₀ M^NS + √(κ/π) Q̃_B^NS,
+        Q_B^R  = η₀ L^R + η̄₀ M^R + ζ₀ F + ζ̄₀ K + √(κ/π) Q̃_B^R − (1/√π) η̄₀ ζ₀²,
+      其中 η₀ ~ c₀、η̄₀ ~ b₀、ζ₀ ~ γ₀、ζ̄₀ ~ β₀，末项 η̄₀ζ₀² ~ b₀γ₀²。
+      与 lian-zuckerman-1989 **Proposition 1.7(x)(xi)** 逐项同型
+      （LZ 把该计算归给 ohta-1986：证明逐字 '(x) and (xi) Calculations are done in [13].'）。
+      ⚠ IMNU 的作用量与规范固定与 Polchinski 不同（IMNU (2.1) 是二维超引力耦合的标量超多重态，
+      规范 (2.7) e^a_m = η^a_m, ψ_m = 0），故本边是**同一算符的两种构造**的对接，不是逐字同一。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给相对复形。IMNU 一侧逐条对应且**有显式式号**：
+        NS：(3.22) L^NS|phys⟩ = 0、(3.23) Q̃_B^NS|phys⟩ = 0；
+        R： (3.24) F|phys⟩ = 0、(3.25) Q̃_B^R|phys⟩ = 0，并注 'the condition L^R|phys⟩ = 0 is
+            automatically satisfied under condition (3.24) because L^R = √π F².'
+        两扇区共同的限制 (3.26)：|Φ⟩^NS_− = |Φ⟩ × |−⟩、|Φ⟩^R_{−,0} = |Φ⟩ × |−⟩ × |0⟩_ζ，
+            即 b₀|phys⟩ = 0（两扇区）与 β₀|phys⟩ = 0（R）。
+      IMNU 紧随逐字：'These conditions are deduced from the usual physical state condition,
+      Q_B|phys⟩ = 0, when we restrict the Fock spaces as (3.26)'。
+      ⇒ **Polchinski (10.5.25)(10.5.26) 那两条只有"the logic being the same"的条件，
+      在 IMNU 这里有显式式号与推导句。** 这是本推导对目标卡的一处实质贡献。
+  - id: worldsheet.critical-dimension-superstring-brst
+    note: |
+      供给 Q_B² = 0（上同调有定义的前提）。
+      ★ IMNU (3.8)–(3.10) 给出**显式系数公式**（本图现有来源里唯一的一处）：
+        (Q_B^NS)² = (1/π)Σ_{n≥1}[((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n] η_n†η_n
+                  + (1/π)Σ_{r≥1/2}[((D−10)/2)r² + (16α₀^NS − D + 2)/8] ζ_r†ζ_r,
+        (Q_B^R)²  = (1/π)Σ_{n≥1}[((D−10)/8)n³ + 2α₀^R n] η_n†η_n
+                  + (1/π)Σ_{n≥1}[((D−10)/2)n² + 2α₀^R] ζ_n†ζ_n + (1/π)α₀^R ζ₀²,
+      (3.10) 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the
+      conformal anomaly, **demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and
+      α₀^R = 0 for the R model.**'，紧随 'These conditions are **necessary** to prove the
+      no-ghost theorem in the next section.'
+      ⚠ IMNU 自称的方向是 ⟹（"demands"）；但各系数独立为零使 ⟺ 从公式可读出。
+      注 R 扇区末项 α₀^R ζ₀² 含 βγ 零模——α₀^R = 0 同时消掉它。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式与基态。IMNU (2.17) 模展开、(2.20) {η₀, η̄₀} = 1 与
+      [ζ_k, ζ̄_l] = δ_{k,−l}；(2.21)(2.22) R 扇区 b₀^μ 的 Clifford 代数 b₀^μ = −(i/√2)Γ^μ。
+      ★ 本边同时承载目标卡断言 (2) 的**见证**：IMNU (3.14) 逐字
+      'Since ζ₀ and ζ̄₀ are bosonic variables, the representation with respect to them is
+      infinitely degenerate, {|0⟩_ζ, |1⟩_ζ (≡ ζ₀|0⟩), |2⟩_ζ (≡ ζ₀|1⟩), ⋯} with ζ̄₀|0⟩_ζ = 0'
+      ⇒ **ζ̄₀（β₀ 型）湮灭真空、ζ₀（γ₀ 型）生成**，即与
+      figueroa-ofarrill-kimura-1989 所称 "Henneaux 表示" C[γ₀] 同一选择
+      （换算为推断，见 gaps）。NS 侧 (3.12) 的 {|−⟩, |+⟩ ≡ η₀|−⟩}、η̄₀|−⟩ = 0
+      注明 'As discussed in Ref. 1)'（即 kato-ogawa-1983）。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给物质 L^m、G^m 的模式表达式（本图一侧）；IMNU 一侧是 (3.3)(3.5)。
+  - id: worldsheet.ddf-operators-v6
+    inferred: true
+    note: |
+      供给"横向（DDF 型）算子与 BRST 荷交换、张成正定横向子空间"这一输入——
+      IMNU 证明的最后一步（正半定性）完全靠它。
+      IMNU 一侧是 (A.7) 的横向算子 Ã^i_n†(β)、B̃^i_n†(β)（**引 Brower–Friedman [21]**，
+      即 Phys. Rev. D 7 (1973) 535），(A.10) [Q̃_B^R(β), Ã^i_n(β)] = 0，(A.9) 正定性。
+      **标 inferred 的两个理由**：
+      (1) 本图的 DDF 卡是**玻色**弦的（只有 A^i_n，无费米型 B^i_n），
+          IMNU 的横向算子含 RNS 的费米横向模，推广未上图；
+      (2) IMNU 把横向态空间的正定性引 [21]，**不在原地论证**（(4.21) 末句逐字
+          'where the last inequality follows from the positive definiteness of the transverse
+          state space.²¹⁾'），而 brower-friedman-1973 本项目 bib **未登记、正文未取得**。
+  - id: worldsheet.fock-indefinite-form
+    inferred: true
+    note: |
+      供给"Fock 形式不定"这一前提。**标 inferred**：IMNU 用的是**度规算符**
+      (3.18) G^NS = η₀、**(3.19) G^R = η₀ × δ(ζ₀)** 定义内积（(3.20)(3.21) 归一化，
+      逐字 'Then the states have usual norm of |Φ⟩'），与本卡的双线性型不是同一构造；
+      R 扇区的 δ(ζ₀) 型度规是处理 βγ 零模的第三种办法
+      （对照 lian-zuckerman-1989 Definition 2.11 的 √−1⟨u, v̂⟩）。二者关系本图未核实。
+sources:
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§4「No-ghost theorem」, pp.945–947 + Appendix。**Proposition I** (4.17) 逐字 'Any state |φ⟩ in V_F satisfying Q_I^R|φ⟩ = 0 can be written as |φ⟩ = P^(0)|φ⟩ + Q_I^R|ρ⟩'（P^(0) 见 (4.18)，横向模 A^i_n†、B^i_n† 生成子空间的投影）；**Proposition II** (4.19) 逐字 'Any state |φ(β)⟩ in V_F satisfying (4.14) can be written as |φ(β)⟩ = P(β)|φ(β)⟩ + Q̃_B^R(β)|J(β)⟩'（P(β) 见 (4.20)，横向算子 (A.7)）；**(4.21)** 逐字 'We put β = 1 in (4.19), then we see that the norm of the physical state |φ⟩ is positive semi-definite, ⟨φ|φ⟩ = ⟨φ|P|φ⟩ ≥ 0, where the last inequality follows from the positive definiteness of the transverse state space. This completes the proof.'；光锥参考系 (4.3)–(4.5)；β 重标度 (4.9)；Q̃_B^R(β) = Q_I^R + βQ_II^R + β²Q_III^R (4.10)–(4.11)；(4.13) 的代数关系；β 阶展开 (4.15)–(4.16)；证明在 Appendix：(A.1)–(A.6) Kugo–Ojima quartet（P^(n) = {Q_I^R, R^(n)} (A.3)），(A.13)–(A.19) 按 n 归纳"
+    note: |
+      L1（全文 19 页逐页读图，literature/extractions/ito-morozumi-nojiri-uehara-1986.md E6）。
+      ★★ **R 扇区无鬼定理的物理学一手来源。** p.945 逐字：'In this section we prove the positive
+      semi-definiteness of the physical subspace. The procedure is similar to that in Ref. 1) in
+      the bosonic string case. **We prove the no-ghost theorem for the R model.** The proof for the
+      NS model goes in a quite similar manner, and we will comment on it later.'
+      ⚠ **NS 扇区（p.947）只有一段评论、无显式证明**：逐字 'Conditions (4.1) and (4.2) should
+      respectively be replaced by (4.22) L^NS|phys⟩ = 0, (4.23) Q̃_B^NS|phys⟩ = 0. … We get the
+      similar propositions, and then we can complete the proof.'
+      ⚠ **隐含假设三条**：p⁺ ≠ 0（(4.3)–(4.5) 的光锥参考系）；|φ(β)⟩ 可按 β 展开（(4.16) 逐字
+      'we have assumed that |φ(β)⟩ can be expanded in β'）；横向态空间正定引 [21]
+      （Brower–Friedman）。
+      ⚠ **IMNU 证的是正半定（≥ 0，在物理态子空间上）**，目标卡断言的是**正定**
+      （在相对上同调上）；差一步取商，见 gaps 第一条。
+      ★ IMNU §4 与 Appendix 同时是反推 kato-ogawa-1983 证明结构的最可靠 L3
+      （五处自称 'similar to / the same method in Ref. 1)'），见
+      literature/extractions/kato-ogawa-1983.md §3。
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3：(3.2)(3.4) BRS 荷的零模分解；(3.8)–(3.10) 幂零条件的显式系数公式与 'demands D = 10 and α₀^NS = 1/2 … α₀^R = 0'；(3.11)–(3.15) Fock 空间与 R 扇区零模表示（(3.14) ζ̄₀|0⟩_ζ = 0、(3.15) |Φ⟩^R_{±,n}）；(3.16)–(3.21) 度规算符与内积（(3.18) G^NS = η₀、**(3.19) G^R = η₀ × δ(ζ₀)**）；(3.22)–(3.26) 物理态条件"
+    note: |
+      L1。这一组是本推导的**设定**（相对复形、零模表示、内积）。
+      ⚠ 抽取记录 §4 Q3 记下一条未决问题：**(3.19) 的 δ(ζ₀) 度规下 Q̃_B^R 是否厄米，
+      IMNU 未讨论**（FOK 对 Henneaux 表示的同一批评适用）。见 gaps。
+  - ref: ohta-1986
+    loc: "全文；摘要（L2）。摘要逐字：'A manifestly covariant quantization of the superstring is presented in the Neveu-Schwarz-Ramond formalism on the basis of the Becchi-Rouet-Stora (BRS) invariance principle. The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge. A modified form of the subsidiary condition of Kugo and Ojima Q_B‖phys〉=0 to define the physical subspace is sufficient to demonstrate the no-ghost theorem.'"
+    note: |
+      **正文未取得（L0）**（literature/extractions/ohta-1986.md §0.4：INSPIRE/OSTI/INIS/
+      Semantic Scholar 均 metadata-only，OSTI purl 404，KEK 扫描件主机 socket hang up）。
+      loc 只能写「全文；摘要（L2）」，**不得写页码或式号**。
+      元数据订正：真实标题是复数 'Covariant Quantization of **Superstrings** Based on BRS
+      Invariance'，PRD 33, 1681–**1691**（终页由 OSTI 'Pages: 1681-1691' 与 LZ 参考文献 [13]
+      两条独立给出），期号 6，1986-03-15，报告号 UTTG-30-85，preprint_date 1985-12。
+      ⚠⚠ **本条只覆盖 NS 扇区。** 决定性证词（L1，同时代竞争组）：IMNU p.952 **Note added**
+      逐字 'After completion of this work we received a preprint²³⁾ from Ohta, in which the same
+      subject is treated. However, the quantization method of the lagrangian is a little different
+      and **he did not present the proof of the no-ghost theorem in the Ramond sector**.'
+      其 [23] 逐字 'N. Ohta, Texas Preprint UTTG 30-85'，与本篇报告号一致。
+      发表版是否补上 R 扇区：**L0**（预印本 30 页 vs 发表版 11 页，增删无法判断）。
+      ⇒ **Ohta 与 IMNU 恰好互补**：Ohta 有 NS 无 R，IMNU 有 R、NS 只评论。本推导两篇同挂、
+      各标扇区，正是为此。
+      ★ 另两条 L3 佐证本篇的内容：
+      (a) Kohriki–Kunitomo–Murata 2010 §1 p.3 逐字（L1）'a similar no-ghost theorem was also
+          proved for the NSR superstring.³⁵⁾,³⁶⁾ In these papers, string states are constructed
+          on the oscillator ground state annihilated by negative frequency modes as usual.
+          The no-ghost theorem can be proved in a completely parallel way to the case of the
+          bosonic string.³³⁾'（35 = 本篇、36 = IMNU、33 = KO），其 (2.5a,b)
+          b₀|phys⟩₀ = 0、Q_B|phys⟩₀ = 0 标注 35),36) ⇒ Ohta 的 "modified" 条件 = **加 b₀ = 0**；
+      (b) LZ 1989 转引本篇的三处：Proposition 1.7(ii)（'(ii) is done in [13, 15]'）、
+          Proposition 1.7(x)(xi)（零模分解，'Calculations are done in [13]'）、
+          Proposition 2.1（'[13] {Q, b₀} = K, [Q, β₀] = D_R'）。
+      ⚠ LZ §0 对本篇的转述里**没有 "no-ghost theorem" 这几个字**（只提幂零与 GSO 推广）。
+  - ref: kato-ogawa-1983
+    loc: "全文；摘要（L2）"
+    note: |
+      本推导的**方法来源**。IMNU 五处逐字把方法归给本篇：§4 p.945 'The procedure is similar to
+      that in Ref. 1) in the bosonic string case.'；(4.9) 处的重标度标注 '¹⁾'；
+      Appendix p.950 'Now we can prove Proposition II by the same method in Ref. 1).'；
+      (3.12) 处 'As discussed in Ref. 1)'；§1 p.934 'They showed that a condition of nilpotency
+      of the BRS charge determines the values of the critical dimension and the leading
+      zero-intercept α₀ simultaneously.'
+      ⇒ **本推导 = KO 的玻色弦证明在 RNS 弦上的逐步搬运**，与
+      worldsheet.no-ghost-theorem-brst 的 kato-ogawa-1983 那条 source 是同一条谱系。
+      正文未取得（L0），loc 只能写「全文；摘要（L2）」。
+  - ref: dedushenko-2015
+    loc: "§1, p.2（对本路线适用范围的分类，逐字：'There exists an approach which directly generalizes the bosonic proof from the book [2] or from the paper [1] to the superstring case (see e.g. [12, 15, 20, 23]). This approach requires d ≥ 2 as it uses the existence of two free bosons X⁺ and X⁻ (the light-cone directions).'，其 [12] = ohta-1986、[15] = ito-morozumi-nojiri-uehara-1986、[1] = kato-ogawa-1983、[2] = polchinski-1998-v1）"
+    note: |
+      L1（arXiv v2 全文）。★ 这条把本推导与 --via-lian-zuckerman-1989 /
+      --via-figueroa-ofarrill-kimura-1989 的**适用范围差别**说成文：
+      本推导（KO/Ohta/IMNU 路线）需要 **d ≥ 2**（要两个自由玻色子 X^± 做光锥方向），
+      而 FGZ/LZ 路线不需要（可做 d = 1）。⇒ 三条推导不是同一定理的三个证明，
+      是**适用范围不同**的三条路线。与玻色弦一侧
+      worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的同名 gap 一致。
+summary: |
+  本推导是**物理学一手文献**对超弦无鬼定理的证明，两篇按扇区互补：
+    **NS 扇区** → ohta-1986（摘要 L2；'is sufficient to demonstrate the no-ghost theorem'）
+                  + ito-morozumi-nojiri-uehara-1986 p.947 的一段评论；
+    **R 扇区**  → ito-morozumi-nojiri-uehara-1986 §4 Proposition I/II + (4.21)（L1，有证明）。
+  两篇都是 kato-ogawa-1983 玻色弦证明的 RNS 搬运（IMNU 五处逐字自称 'the same method in Ref. 1)'）。
+
+  IMNU 的证明结构（式号皆 L1）：
+  1. **零模分离**：(3.4) Q_B^R = η₀L^R + η̄₀M^R + ζ₀F + ζ̄₀K + √(κ/π)Q̃_B^R − (1/√π)η̄₀ζ₀²；
+     限制到 (3.26) 的 |−⟩ × |0⟩_ζ 分量（即 b₀ = β₀ = 0）后，物理态条件化为
+     (3.24) F|phys⟩ = 0 与 (3.25) Q̃_B^R|phys⟩ = 0（L^R = √π F² 故 L₀ 条件自动满足）。
+  2. **内积**：引入度规算符 (3.19) G^R = η₀ × δ(ζ₀)，使态有"通常的模"。
+  3. **光锥参考系**：(4.3)–(4.5) 取 p^i = 0、p⁺ 固定非零、零矢 k 使 k·p = 1 ⇒ **要求 p⁺ ≠ 0**。
+  4. **形式参数 β 重标度**：(4.9)（标注 '¹⁾' = KO），使 (4.10) Q̃_B^R(β) = Q_I + βQ_II + β²Q_III，
+     其中 Q_I（(4.11)）'has the same quadratic form as the asymptotic form of BRS charges in
+     ordinary gauge theories'；(4.13) 给 (Q_I)² = (Q_III)² = 0 等。
+  5. **Proposition I（Kugo–Ojima quartet）**：(4.17) Q_I^R|φ⟩ = 0 ⇒ |φ⟩ = P^(0)|φ⟩ + Q_I^R|ρ⟩，
+     P^(0) 是到横向模 A^i_n†、B^i_n† 生成子空间的投影；证明用 (A.3) P^(n) = {Q_I^R, R^(n)} 递推。
+  6. **Proposition II（按 β 阶归纳）**：(4.19) |φ(β)⟩ = P(β)|φ(β)⟩ + Q̃_B^R(β)|J(β)⟩，
+     P(β) 是横向算子 Ã^i_n†(β)、B̃^i_n†(β)（(A.7)，引 Brower–Friedman）生成的横向扇区投影；
+     (A.10) [Q̃_B^R(β), Ã^i_n(β)] = 0；归纳 (A.13)–(A.19)。
+  7. **正半定**：置 β = 1，(4.21) ⟨φ|φ⟩ = ⟨φ|P|φ⟩ ≥ 0，末不等号引横向态空间的正定性。
+
+  ⇒ 目标卡断言 (2)（R 扇区，见证 IMNU (3.14) 的 C[γ₀] 型零模表示）由 IMNU 支撑；
+     断言 (1)（NS）由 ohta-1986 摘要（L2）+ IMNU p.947 评论支撑。
+
+  【status: physical-argument 的理由（四条，任一足以封顶）】
+  (1) **形式参数 β 展开**：(4.16) 逐字 'we have assumed that |φ(β)⟩ can be expanded in β'
+      ——这是一条**未证明的假设**，且 β 展开的收敛性/终止性未讨论；
+  (2) **正半定 ≠ 正定**：IMNU 证的是物理态子空间上 ≥ 0，目标卡要的是相对上同调上的正定，
+      差一步取商（见 gaps）；
+  (3) **NS 扇区没有显式证明**：IMNU 只有评论；Ohta 正文未取得（只有摘要 L2）；
+  (4) 横向态空间的正定性外包给 Brower–Friedman（本项目 bib 未登记、正文未取得）。
+  ⚠ 本推导**不因为"结论公认"而升级**（根 CLAUDE.md 原则 2）。要 rigorous 看
+  --via-lian-zuckerman-1989。
+gaps:
+  - |
+    ★ **正半定 vs 正定：差一步取商，IMNU 没写。** IMNU (4.21) 证的是
+    ⟨φ|φ⟩ = ⟨φ|P|φ⟩ ≥ 0（**正半定**，在满足 (3.24)(3.25) 的物理态子空间上）；
+    目标卡断言的是相对**上同调**（已商掉 Q̃_B-恰当态）上的内积**正定**。
+    由 (4.19) 的分解 |φ⟩ = P|φ⟩ + Q̃_B|J⟩ 取商即得正定（模掉 Im Q̃_B 后只剩 P|φ⟩），
+    **但 IMNU 既不写商空间也不用上同调语言**。Kohriki–Kunitomo–Murata 2010 对 KO 的转述
+    同样只说 'positive semidefinite norm'（§1 p.2 逐字）。
+    ⇒ 本步是 curator 的补充，不在来源里。
+  - |
+    ★ **NS 扇区的证据链最弱**：IMNU p.947 只有一段评论（'We get the similar propositions,
+    and then we can complete the proof.'）；ohta-1986 **正文未取得**，只有摘要（L2），
+    且摘要**不分扇区**。⇒ 目标卡断言 (1) 目前在本推导里的可追溯性是
+    「一段评论 + 一句摘要」。要补必须取得 ohta-1986 正文（UTTG-30-85，或 PRD 33 6 期），
+    或登记 Terao–Uehara, Phys. Lett. 168B (1986) 70（LZ [15]，本项目 bib 未登记）。
+  - |
+    ★ **Ohta 的 R 扇区证据缺失，有 L1 反证。** IMNU p.952 Note added 逐字 'he did not present
+    the proof of the no-ghost theorem in the Ramond sector'。故 ohta-1986 这条 source
+    **只能读作 NS 扇区**；发表版（PRD 33, 1681–1691）是否补上 R 扇区为 **L0**。
+    ⇒ 若日后取得 Ohta 正文并发现补上了，本推导的 gaps 应改写；
+    若发现没补，则 R 扇区的物理侧一手来源**只有** IMNU 一篇。
+  - |
+    **形式参数 β 展开是未证明的假设**：(4.16) 逐字 'we have assumed that |φ(β)⟩ can be
+    expanded in β'。β 是 (4.9) 引入的重标度参数（κ → κ/β²、p₀⁻ → β²p₀⁻、x₀⁺ → x₀⁺/β²），
+    展开的收敛性、以及 β = 1 处的合法性（(4.21) 直接置 β = 1）都未论证。
+    这与玻色弦一侧 worldsheet.no-ghost-theorem-brst--via-polchinski-4-4 的"下三角矩阵一般性质"
+    是同一类缺口（Polchinski 的 S^{−1} 级数 ↔ IMNU 的 β 幂级数）。
+  - |
+    **横向态空间的正定性外包，且被引文献本项目未登记**：(4.21) 末句逐字 'where the last
+    inequality follows from the positive definiteness of the transverse state space.²¹⁾'，
+    [21] = **Brower–Friedman, Phys. Rev. D 7 (1973) 535**；横向算子 (A.7) 也引 [21]。
+    该文 **literature/sources.bib 尚未登记、正文未取得**。
+    ⚠ 同一篇文献还是 figueroa-ofarrill-kimura-1989 与 lian-zuckerman-1989 之间那处
+    **真矛盾**的裁决对象（FOK 说它证明了完全可约性，LZ p.320 Remark 用 Kac 行列式说 V 一般
+    不是 Verma 模直和）。⇒ **登记并取得 Brower–Friedman 1973 是本区一条高优先级文献任务**，
+    已列入报告交 researcher/lead。
+  - |
+    **p⁺ ≠ 0（d ≥ 2）是结构性限制，且与目标卡的 (H2) p ≠ 0 不是同一条件。**
+    IMNU (4.3)–(4.5) 的光锥参考系要求 p⁺ 固定非零；Dedushenko 2015 §1 p.2 逐字把这条路线
+    标为 'requires d ≥ 2 as it uses the existence of two free bosons X⁺ and X⁻'。
+    在 D = 10 的闵氏空间里 p ≠ 0 ⇒ 存在洛伦兹系使 p⁺ ≠ 0（初等观察，不出自来源），
+    故两者在本卡设定下等价；但**该等价未在任何来源中成文**，与玻色弦一侧
+    worldsheet.no-ghost-theorem-brst--via-fgz 的同名 gap 是同一条。
+  - |
+    **δ(ζ₀) 型度规下 Q̃_B^R 是否厄米，IMNU 未讨论**（抽取记录 §4 Q3）。
+    这与 figueroa-ofarrill-kimura-1989 对 Henneaux 表示的批评是同一问题：p.116 逐字
+    'Changing the hermiticity properties of γ₀ and β₀ changes the hermiticity properties of
+    the BRST operator: it is no longer hermitian. This means that it is no longer guaranteed
+    that the cohomology space inherits a well-defined … inner product.'
+    ⇒ IMNU (3.19) 的 G^R = η₀ × δ(ζ₀) 是否给出上同调上良定义的内积，**本图未核实**。
+    （FOK 用 Schrödinger 表示补救；IMNU 与 Ohta 都不做这一步。）
+  - |
+    **零模表示的对应关系是推断，不是文献陈述**：IMNU (3.14)（ζ̄₀|0⟩_ζ = 0、ζ₀ 生成）
+    与 FOK 的 Henneaux 表示 C[γ₀] 是同一选择、并换算为 Dedushenko (5) 的 R 扇区 −½ picture
+    ——**这两步换算都是 researcher 的推断**（literature/extractions/
+    ito-morozumi-nojiri-uehara-1986.md E3 备注、henneaux-1987.md §3 第 1 条），
+    三篇之间**没有互引**（IMNU 不引 Henneaux/FGZ；FOK 不引 IMNU/Ohta/KO）。
+  - |
+    **IMNU 与 Polchinski 的量子化方案不同**：IMNU (2.1) 从二维超引力耦合的标量超多重态出发、
+    规范 (2.7)；Ohta 的方案据 IMNU Note added 逐字 'the quantization method of the lagrangian
+    is a little different'。Polchinski §10.5 则**不从规范不变作用量出发**
+    （worldsheet.ocq-superstring-physical-states 的方法论限定）。
+    ⇒ 三者的 Q_B 是否逐字同一个算符，本图未核实；本推导的 depends_on 边是"同一算符的不同构造"
+    的对接。
+  - |
+    **GSO 未覆盖**：IMNU §5 p.948 只有一句预告（逐字 'In that case we must restrict the ground
+    states of both the NS and the R sectors with the generalized G-parity and chirality
+    operators¹⁰⁾ according to Ref. 22).'，[10] = Terao–Uehara、[22] = GSO），无计算。
+    与目标卡"本命题不断言 (e)"一致。
+notes: |
+  【本推导在图上的角色】它是**物理学一手来源**这一层，与
+    --via-lian-zuckerman-1989（数学侧，rigorous）、
+    --via-figueroa-ofarrill-kimura-1989（数学侧，physical-argument，因一处真矛盾）
+  并列。三条推导彼此独立：
+    - IMNU/Ohta 不引 FGZ、不引 Henneaux（IMNU 参考文献 [1] KO、[19] Terao–Uehara、
+      [20] Kugo–Ojima、[21] Brower–Friedman、[22] GSO、[23] Ohta）；
+    - FOK 引 Henneaux、FGZ、Brower–Friedman，**不引** Ohta/KO/IMNU/LZ；
+    - LZ 引 KO [11]、Ohta [13]、Terao–Uehara [15]，**不引** Henneaux，与 FOK 独立。
+  ⇒ 抽取记录的一条观察值得记在图上：**两个数学组各只看到一半物理文献**
+  （literature/extractions/henneaux-1987.md §4 Q5）。
+
+  【为什么不把本推导挂到 worldsheet.no-ghost-theorem-superstring（Polchinski 卡）上】
+  那张卡的断言 (2)(3)(4) 用的是 Polchinski 的 H^⊥ 定义与 exp(πiF)；Ohta/IMNU 既不建立
+  与 OCQ 的同构（IMNU 的物理态条件本身就是协变条件，不另证等价），也不讨论 GSO 后的谱。
+  本推导能支撑的恰是**正定性**这一条，即本目标卡。
+
+  按 researcher 第七轮抽取记录 literature/extractions/ito-morozumi-nojiri-uehara-1986.md
+  （E1–E8）、ohta-1986.md（E1–E4、§3 表、§5）、henneaux-1987.md §5.1 表建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"

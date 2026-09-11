@@ -1,0 +1,81 @@
+id: math.cy3-elliptic-fibered-bounded
+kind: proposition
+title: 椭圆纤维化 Calabi–Yau 三折构成有界族（Filipazzi–Hacon–Svaldi）
+statement: |
+  断言：**椭圆 Calabi–Yau 三折构成一个有界族**（bounded family）。
+
+  Filipazzi–Hacon–Svaldi 摘要首句逐字（arXiv:2112.01352；发表于 J. Eur. Math. Soc. 27 (2025),
+  no. 9, 3583–3650）：
+
+    "We show that elliptic Calabi--Yau threefolds form a bounded family."
+
+  ⚠⚠ **本卡只断言这一句。** 同一摘要的**第二个**结论（"the same result holds for minimal
+  terminal threefolds of Kodaira …"）**带两个必需的额外假设**（原文逐字："upon fixing the rate
+  of growth of pluricanonical forms and the degree of a …"，并自陈 "Both of these hypotheses are
+  necessary to prove the boundedness of such a family."）——**本卡不包含那个结论**，
+  引用时也不得把它说成无条件的。
+
+  ⚠ **本卡不断言一般 Calabi–Yau 三折的任何有界性**。一般情形（拓扑类型数目是否有限）
+  **截至 2026-06 仍是开放问题**，见 math.cy3-cohomology-bounded。
+
+  ⚠ **"有界族 ⇒ 拓扑类型数目有限"这一步不在本卡内**。Anderson–Gray–Nally–Taylor §I 确实逐字断言
+  "the number of topological types of elliptic and genus one fibered Calabi-Yau threefolds is
+  finite [8, 9, 10, 11]"（其 [11] 即 Filipazzi–Hacon–Svaldi），但该蕴含的证明本项目未核实，
+  且那句还覆盖了本卡不涉及的**亏格一纤维化**情形。
+uses_conventions: []
+sources:
+  - ref: filipazzi-hacon-svaldi-2021
+    loc: "J. Eur. Math. Soc. 27 (2025), no. 9, 3583–3650 = arXiv:2112.01352v2，标题与摘要首句"
+    note: >-
+      L2（researcher 2026-09-11 由 arXiv API 逐字取得元数据与摘要；**正文未读，L0**）。
+      arXiv v2（2021-12-02 首发，2024-03-27 更新），comment 自陈 "Final version, to appear in
+      J. Eur. Math. Soc. (JEMS)"；DOI 10.4171/JEMS/1467；categories math.AG + hep-th。
+      ⚠ **摘要无定理编号**；loc 只能到"篇 + 摘要首句"这一层。**不得编定理号。**
+  - ref: anderson-gray-nally-taylor-2026
+    loc: "arXiv:2606.08427v1, §I（其 ref [11]）"
+    note: >-
+      L3 佐证（researcher 亲自读到 arXiv 原生 HTML）。逐字："the number of topological types of
+      elliptic and genus one fibered Calabi-Yau threefolds is finite [8, 9, 10, 11]"。
+      其列出的四条参考文献（由引用方转抄，L3）：
+        [8] A. Grassi, Math. Ann. **290**, 287 (1991) —— 本项目未核实；
+        [9] M. Gross, Duke Math. J. **74**, 271 (1994) —— ⚠ **引用方印的是 76，与 Crossref 冲突**；
+            Crossref `10.1215/S0012-7094-94-07414-0` 给 **volume 74**，**以 Crossref 为准**；页码 Crossref 未给；
+        [10] Y. Kawamata, arXiv:alg-geom/9701006 (1997) —— 本项目未核实；
+        [11] Filipazzi–Hacon–Svaldi（= 上一条，已 L2 核实）。
+      ⚠ 这四篇本项目均未登记进 sources.bib，故只能记在这里，不能建 source 条目。
+tags: [math, calabi-yau, elliptic-fibration, boundedness, algebraic-geometry]
+notes: |
+  from: literature/extractions/math-sources.md §46.1、§46.3、§46.4（researcher 2026-09-11 一手核实轮）。
+
+  【★ 本卡是 math.cy3-cohomology-bounded 三层拆分中的第 (b) 层】
+    (a) math.cy3-hypersurface-h11-max-kreuzer-skarke：Kreuzer–Skarke 超曲面的 h^{1,1} 最大值 491；
+    (b) 本卡：**椭圆纤维化** CY3 构成有界族（**已证明**）；
+    (c) math.cy3-cohomology-bounded：**一般** CY3 上同调是否一致有界（**截至 2026-06 仍开放**）。
+  **★★ 本卡与 (c) 之间故意不建边。** 理由：本卡只覆盖椭圆纤维化子类，若建边，工具会沿"取最强推导"
+  的规则把 (c) 的有效状态从 conjecture 抬到 rigorous——那是记账错误。子类的定理不能给全类升格。
+  （researcher §46.6(a) 也明确警告了这一点。）
+
+  【★ 另一条同子类的显式数值上界（本卡不承载，仅记账）】Grassi, *Spectrum bounds in geometry*,
+  arXiv:2304.07819v2, **Corollary 5.3** 逐字 "Then h^{1,1}(X) ≤ 491."（对**椭圆纤维化** CY3）；
+  同文 **Proposition 5.1**（归其 ref [29] = W. Taylor）与 **Corollary 5.2** 给 "CxDef(X) ≤ 491"。
+  ⚠ 由其 Definition 3.2 可推 CxDef(X) = h^{2,1}(X)，**但 Definition 3.2 的原文未逐字取到（L0）**，
+  故本图不写 h^{2,1} ≤ 491；要用必须标 inferred: true。
+  ⚠ 该文**全文没有提 Kreuzer–Skarke** ⇒ 它的 491 与 (a) 卡的 491 是**两个不同来源的同一个数字**，
+  是否同源本项目未查。
+  **若要把 Cor 5.3 建成节点，应是本卡的兄弟卡而不是本卡的改写**（那是数值上界，本卡是有界族）。
+
+  【★ status 为什么可以到 rigorous，而 math.narain-moduli-space-finite-volume-v2 只到
+  physical-argument】两者的差别不在"论文有多有名"，而在**本卡的陈述与被引论文的断言是否逐字同一**：
+    - 本卡：statement 就是 FHS **摘要首句的逐字翻译**，被引论文的标题也是同一句。
+      我们指向的位置（篇 + 摘要首句）是精确、可复核的；缺的只是正文与定理编号。
+    - Narain 那张卡：被引的 Borel–Harish-Chandra 是一篇含多条定理的长文，我们**不知道是哪一条**，
+      而且从该定理到 Narain 模空间还有两个**完全无来源**的翻译环节（(A) 整点子群是算术子群、
+      (D) 双陪集就是 Narain 模空间）。
+  ⇒ 这不是双重标准，是"陈述—来源距离"不同。**仍请 reviewer 复核这个判断**：若认为"正文未读"
+  一律不得 rigorous，本卡的推导应降为 physical-argument（本卡目前没有出边，降级不影响任何其他节点）。
+
+  【不得称作 Reid 猜想或 Yau 猜想】见 math.cy3-cohomology-bounded 的 notes：
+  Anderson–Gray–Nally–Taylor 明确把 "Reid's fantasy"（关于连通性的猜想，归其 [1] = M. Reid 1987）
+  与有限性问题区分开。
+author: curator
+created: "2026-09-11"

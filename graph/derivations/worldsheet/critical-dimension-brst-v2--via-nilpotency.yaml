@@ -43,7 +43,7 @@ sources:
       也未写出 ⟹ 方向所需的线性无关（忠实性）前提；原书另在 p.133 对**一般**约束代数的幂零性
       逐字写「We have neglected central charge terms; these need to be checked by hand」。
   - ref: kato-ogawa-1983
-    loc: "摘要；正文未获取，定理编号未核实"
+    loc: "全文；摘要（L2）"
     note: |
       「Q_B^2 = 0 ⟹ D = 26 且 a = 1」的原始来源。**INSPIRE 记录 177600 的摘要，逐字**
       （primary-sources-round2.md §6，L2，分段以符合引用长度限制，段间无删节）：
@@ -62,6 +62,31 @@ sources:
       正文未获取（ScienceDirect 403），定理编号未核实。
       报告号 KUNS 637（INSPIRE，L2；检索后端 L4 对该归属有异议，未裁决）可作为找扫描件的钥匙。
       见 literature/extractions/primary-sources-round2.md §6 与 brst-cohomology-sources.md §6。
+      ★★ **【2026-09-11 researcher 第七轮：三条本轮新增的 L3 与两条元数据订正】**
+      见 literature/extractions/kato-ogawa-1983.md（§0.3 元数据、§2 E1、§4 Q1/Q5）。
+      **(a) KUNS 637 归属的 L4 异议已关闭**：INSPIRE `raw_affiliation` 逐字
+      「Department of Physics, Kyoto University, Kyoto 606, Japan」（两位作者同），
+      INIS 单位字段同为「Kyoto Univ. (Japan). Dept. of Physics」⇒ KUNS（京都大学物理系
+      预印本系列）归属成立。上一段末「检索后端 L4 对该归属有异议，未裁决」作废。
+      另补 `preprint_date 1982-04`、`KEKSCAN 2000-33-955`、INIS issue 3 / 1983-02-28。
+      **(b) ⟹ 方向得到一条同学派 L1 佐证**：Itō–Morozumi–Nojiri–Uehara 1986（PTP 75, 934）
+      §1 p.934 逐字「They showed that a condition of nilpotency of the BRS charge **determines**
+      the values of the critical dimension and the leading zero-intercept α₀ **simultaneously**.」
+      **(c) ⟸ 方向仍然没有任何指向 KO 的 L1/L2 来源，且出现一条方向相反的现代转述**：
+      Dedushenko 2015 §1 p.2 逐字「BRST quantization of the bosonic string theory was introduced
+      in [1], where it was shown that **the string at the critical dimension (or when the total
+      central charge vanishes) admits a BRST charge Q_B satisfying Q_B² = 0.**」——
+      这是 ⟸ 方向的转述，但它是**二手**（[1] = KO），不能替 KO 正文作证。
+      ⇒ 本卡「当且仅当」的 ⟸ 半边的可追溯性**不变**：只有 Polchinski §4.3 的形式计算
+      （(4.3.10) 的 "when"）与更弱的独立节点 worldsheet.brst-nilpotent-at-c26。
+      **(d) 一条旁证（推测，不得当依据）**：KO 同学派对 NSR 弦的同型论文 IMNU
+      给出了 Q_B² 的**显式系数公式** (3.8)–(3.9)（L1），从其中各系数独立为零
+      「⟺」一眼可见；若 KO 对玻色弦也给出同型显式公式（**未核实**），则 ⟺ 在 KO 正文里
+      也是可见的，只是摘要没写。
+      ⚠ **(e) 不得把 lian-zuckerman-1989 Proposition 1.7(ii)「Q² = 0 iff D = 10」当本卡的 iff 来源**：
+      那是 **RNS 超弦**（super-Virasoro，c/8 归一化，ĉ = 10），且 LZ 自己**不证** (ii)
+      （证明逐字「(ii) is done in [13, 15]」，[13] = ohta-1986、[15] = Terao–Uehara PLB 168B）。
+      超弦一侧的对应节点是 worldsheet.critical-dimension-superstring-brst。
   - ref: fgz-1986
     loc: "Proposition 2.1(i)（鬼场表示中心荷 = -26；文中 c = 26 是假设而非结论）"
     note: |
@@ -105,6 +130,22 @@ gaps:
   - "kato-ogawa-1983 的定理编号仍未核实（正文未获取）；但**方向已核实为「⟹」**（primary-sources-round2.md §6，INSPIRE 逐字摘要）：原文写「the conditions D = 26 and α_0 = 1 for the space-time dimension D and the zero-intercept α_0 of leading trajectory are **required by** the nilpotency Q_B² = 0 of the BRS charge」，即 Q_B² = 0 ⟹ (D = 26 且 α_0 = 1)（必要性）。**反方向（c^m = 26 ⟹ Q_B² = 0）在该摘要中没有陈述**，目前只有 Polchinski §4.3 的形式计算支撑；而目标陈述写的是「当且仅当」。注：反方向本身另有一个更弱但独立的节点 worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2）。"
   - "本推导给出的是幂零条件，不涉及 BRST 上同调与旧协变物理态空间的同构；后者见 worldsheet.brst-cohomology-equals-ocq-physical。"
   - "本推导只定出 c^m = 26，**既不定出 D = 26，也不定出开弦截距 a = 1**。由 c^m = 26 到 D = 26 需要 c^m = D（worldsheet.free-boson-central-charge-d），该步自 2026-09-11 的换代起不再属于本推导的目标陈述，而由汇总卡片 worldsheet.critical-dimension-bosonic-v2 的推导 --via-four-routes 显式供边；a = 1 由 worldsheet.open-string-intercept-v2 独立给出。注意 Kato–Ogawa 摘要把 D = 26 与 a = 1 一并归给 BRS 幂零性，与本项目「一个节点一个命题」的拆分不一致。"
+  - "**「当且仅当」为什么不拆成两条推导（2026-09-11 curator 裁决，记账用）。**
+     researcher 第七轮的建议是：既然 kato-ogawa-1983 摘要只覆盖 ⟹（逐字 required by），而 ⟸
+     没有任何指向 KO 的 L1/L2 来源，就把本推导拆成 `Q²=0 ⟹ c^m=26`（挂 KO + Polchinski）与
+     `c^m=26 ⟹ Q²=0`（只挂 Polchinski）两条。**本轮不拆**，理由三条：
+     (1) 两个方向在来源里出自**同一个**形式计算（Polchinski §4.3 的 {Q_B,Q_B} 显式模式和：
+         (4.3.9) 给 only if，(4.3.10) 的单极点给 when），拆开会把一段计算记成两段；
+     (2) ⟸ 方向已另有一个更弱、来源更清楚的独立节点 worldsheet.brst-nilpotent-at-c26
+         （fgz-1986 Proposition 1.2），图上已能分别记账；
+     (3) 拆推导不改目标陈述的「当且仅当」，而真正的记账问题在陈述一侧——要分别记账须换代
+         v3 拆陈述，那需要 lead 排期（已列入报告）。
+     ⇒ **本条 gap 就是这个未拆的记录**：本推导对 ⟹ 的文献可追溯性（KO 摘要 L2 + IMNU 的
+     「determines … simultaneously」L3）严格强于对 ⟸ 的（仅 Polchinski 的形式计算）。
+     ⚠ 另记两条防误引：**lian-zuckerman-1989 Prop 1.7(ii) 的「iff D = 10」是 RNS 超弦，
+     不是玻色弦**，且 LZ 自己把 (ii) 的证明外包给 ohta-1986 与 Terao–Uehara PLB 168B；
+     **Dedushenko 2015 §1 p.2 对 KO 的转述是 ⟸ 方向**（「the string at the critical dimension …
+     admits a BRST charge Q_B satisfying Q_B² = 0」），是二手转述，不能替 KO 正文作证。"
 notes: |
   【2026-09-11 换代】本文件由 worldsheet.critical-dimension-brst--via-nilpotency 改挂到换代后的
   陈述 worldsheet.critical-dimension-brst-v2（旧卡末句把 c^m = D 这一步绑进 BRST 幂零性判据，

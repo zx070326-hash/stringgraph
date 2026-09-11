@@ -1,0 +1,139 @@
+id: worldsheet.critical-dimension-superstring-brst
+kind: proposition
+title: 超弦 BRST 荷幂零 Q_B² = 0 当且仅当物质中心荷 c^m = c̃^m = 15（陈述只到 c^m，不含 c^m = (3/2)D 那一步）
+statement: |
+  设 Q_B 如 worldsheet.superstring-brst-charge 所定义（λ = 2 的 bcβγ 鬼场，
+  鬼场中心荷 c^g = −15，鬼场正规序常数 a^g 按扇区取 −1/2 / −5/8），
+  作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、G^m_r、b_n、c_n、β_r、γ_r 零化，
+  以保证 Q_B 与 Q_B² 逐项有限）。则
+    **Q_B² = 0  ⟺  总中心荷为零  ⟺  c^m = c̃^m = 15**。
+  这里 c^m 是**任意**正范数物质 SCFT 的中心荷：可以把若干个平坦的 X^μψ^μ SCFT
+  换成任何满足该中心荷条件的正范数 SCFT，Q_B 的幂零性不变。
+  **附带的一条必要条件**：该 SCFT 的超流必须与 ψ^μ、β、γ 有相同的周期性（R 或 NS），
+  否则 BRST 流不周期、Q_B 无定义。
+
+  **本命题只定出 c^m，不定出**：
+    (1) 不定出 D。要得到 D = 10 必须再加一步 c^m = (3/2)D
+        （worldsheet.rns-matter-central-charge），那是**本路线与总中心荷路线的公共输入**，
+        不是本路线自身的产物。这与玻色弦一侧
+        worldsheet.critical-dimension-brst-v2 的记账方式完全平行。
+    (2) 不定出任何截距（超弦的 NS/R 截距见 worldsheet.open-superstring-mass-shell）。
+
+  ⚠ **来源定位的一条硬约束**：本卷**没有**像 Vol.1 (4.3.10) 那样把
+  「Q_B² = 0 ⟺ c = 26」写成带式号的公式。超弦的对应陈述是 §10.5 中 (10.5.23) 下方的
+  **一段正文，无式号**。任何引用本命题的地方，`loc` 只能写
+  「§10.5, p. 24, (10.5.23) 下方一段」，**不要编式号**。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字：'From these one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) whenever the total central charge vanishes. Thus, we can replace some of the spacelike X^μψ^μ SCFTs with any positive-norm SCFT such that the total matter central charge is c^m = c̃^m = 15. The BRST current must be periodic for the BRST charge to be well defined. The supercurrent of the SCFT must therefore have the same periodicity, R or NS, as the ψ^μ, β, and γ.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E37；逐字段落读到原书页图）。
+      ⚠ **无式号是原书的事实，不是抽取的缺陷**：抽取记录明确要求不要编式号。
+      ⚠ 原书的论证是 'one can verify nilpotence by the same steps as in the bosonic case
+      (exercise 4.3)'——**书中不证，推给 Vol.1 的习题 4.3**。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.13, p. 43（逐字：'(a) Verify the operator products (10.5.22). (b) Using the Jacobi identity as in exercise 4.3, verify nilpotence of Q_B.'）"
+    note: |
+      L1（E49）。这是 Q_B² = 0 在原书里的**唯一论证入口**，而它是一道习题。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.20), p. 4（0 = (3/2)D − 15 ⟹ D = 10；本卡不使用这一步，只记录总中心荷条件的数值形式）"
+    note: |
+      L1。列出以便读者看到「c^m = 15」与「(3/2)D = 15」是同一个条件的两种写法；
+      两者之间的一步由 worldsheet.rns-matter-central-charge 承担，见汇总卡
+      worldsheet.critical-dimension-superstring。
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3, pp.941–943：**(3.8)**（(Q_B^NS)² 的显式系数：((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n 与 ((D−10)/2)r² + (16α₀^NS − D + 2)/8）、**(3.9)**（(Q_B^R)²：((D−10)/8)n³ + 2α₀^R n、((D−10)/2)n² + 2α₀^R，**外加末项 (1/π)α₀^R ζ₀²**）、**(3.10)** 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the conformal anomaly, demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and α₀^R = 0 for the R model.'"
+    note: |
+      【2026-09-11 researcher 第七轮新增，L1 全文 19 页逐页读图；见
+      literature/extractions/ito-morozumi-nojiri-uehara-1986.md E2】
+      ★★ **这是本图现有来源里唯一写出超弦 Q_B² 显式系数的位置**，补上了本卡推导
+      --via-nilpotency 的 gaps 第 5 条（"超弦的系数在本图与来源中都没有显式形式"）。
+      新推导 worldsheet.critical-dimension-superstring-brst--via-explicit-nilpotency-coefficients
+      以本条为主来源。
+      ⚠ **三条使用限制**：
+      (1) **方向只有 ⟹**（(3.10) 逐字 'demands'，紧随 'These conditions are **necessary** to
+          prove the no-ghost theorem in the next section.'）；⟺ 是从系数形式读出的，
+          不是 IMNU 的陈述；
+      (2) IMNU 用的是 **D** 而不是中心荷 c^m，且只算**平坦 D 个 X^μψ^μ**——
+          本卡陈述允许换成任意正范数 SCFT，那个一般形式**本条不覆盖**；
+      (3) IMNU 的量子化方案与本卷不同（(2.1) 二维超引力耦合的标量超多重态，规范 (2.7)），
+          两者的 Q_B 是否逐字同一个算符本图未核实。
+      ★ 一处物理细节：R 扇区 (3.9) **末项 α₀^R ζ₀² 含 βγ 零模**——α₀^R = 0 同时消掉它，
+      这是 R 扇区截距为零与 β₀γ₀ 零模处理的交汇点。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 1.7(ii)**, p.307–308，逐字 'Q² = 0 iff D = 10.'；证明逐字 '(ii) is done in [13, 15].'（[13] = ohta-1986；[15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）"
+    note: |
+      【2026-09-11 researcher 第七轮新增，L1 全文 35 页逐页读图；见
+      literature/extractions/lian-zuckerman-1989.md E1、§4 Q3】
+      ★ **这是文献中唯一带「iff」的编号陈述**，即本卡"当且仅当"这个措辞的唯一编号来源。
+      ⚠⚠ **LZ 自己不证它**：证明外包给 ohta-1986（正文本项目未取得，L0；其摘要只写 ⟹）
+      与 Terao–Uehara PLB 168B（**本项目 bib 尚未登记**）。
+      ⇒ 「iff」的可追溯性止于 LZ 的陈述；其**证明**的可追溯性止于 IMNU (3.8)(3.9) 的显式公式。
+      ⚠ LZ 的中心荷归一化是 c/8 (m³ − 2κm)，其 D = 10 对应本卡的 c^m = 15；
+      LZ 的鬼表示 Proposition 1.2 给 ρ(c) = −10（= 本图 c^g = −15）。
+      ⚠ **编号陷阱**：LZ p.305 有 **Lemma** 1.4、p.306 又有 **Definition** 1.4，
+      引用必须带类型词；各章公式号重起，引用公式必须带章号。
+      ⚠ **反向禁令**：**不得**把本条当作玻色弦 c^m = 26 的 iff 来源——那是 RNS 超弦
+      （super-Virasoro，ĉ = 10）。玻色弦一侧见 worldsheet.critical-dimension-brst-v2
+      及其 notes（fgz-1986 与 lian-zuckerman-1991 都把 c = 26 当假设，无 iff 型编号陈述）。
+  - ref: ohta-1986
+    loc: "全文；摘要（L2）。摘要逐字：'The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge.'"
+    note: |
+      【2026-09-11 researcher 第七轮新增；**正文未取得（L0）**】
+      获取失败逐条留痕见 literature/extractions/ohta-1986.md §0.4（INSPIRE/OSTI/INIS/
+      Semantic Scholar 均 metadata-only，OSTI purl 404，KEK 扫描件主机四次 socket hang up）。
+      **loc 只能写「全文；摘要（L2）」，不得写页码或式号。**
+      元数据订正：真实标题是复数 'Covariant Quantization of **Superstrings** Based on BRS
+      Invariance'；PRD **33**, 1681–**1691**（终页由 OSTI 与 lian-zuckerman-1989 参考文献 [13]
+      两条独立给出），期号 6，1986-03-15；报告号 **UTTG-30-85**，preprint_date 1985-12。
+      ⚠ **方向只有 ⟹**（'are shown to follow from'）；摘要不给截距的数值
+      （IMNU 的同型结果是 α₀^NS = 1/2、α₀^R = 0）。
+      ⚠ 本条是 lian-zuckerman-1989 Proposition 1.7(ii) 证明外包的对象之一，
+      故本条与上一条是同一条证据链的两端。
+tags: [superstring, brst, critical-dimension, central-charge, nilpotency]
+notes: |
+  【本卡与玻色弦 BRST 路线卡的对照】worldsheet.critical-dimension-brst-v2 给
+  Q_B² = (1/2)Σ_m ((c^m − 26)/12)(m³ − m) c_{−m}c_m，即**有显式公式**（Vol.1 (4.3.10)）。
+  超弦一侧**本卷**没有这样的显式公式，只有一句「按同样的步骤可以验证」。
+  这是本图中超弦 BRST 路线比玻色弦弱的地方，必须记在账上。
+
+  ★★【2026-09-11 订正上一段：显式公式在**别的文献**里有】
+  researcher 第七轮取得 **ito-morozumi-nojiri-uehara-1986**（PTP 75, 934，L1 全文）：
+  其 **(3.8)(3.9)** 给出 (Q_B^NS)² 与 (Q_B^R)² 的**显式系数公式**（以 D 与正规序常数 α₀ 为参数），
+  (3.10) 由此得 D = 10 与 α₀^NS = 1/2、α₀^R = 0。
+  ⇒ 上一段「超弦一侧没有显式公式」的说法只对 **Polchinski 本卷**成立；
+  图上已新增推导 worldsheet.critical-dimension-superstring-brst--via-explicit-nilpotency-coefficients
+  承载它。**但本卡的有效状态不变**（两条推导都是 physical-argument），
+  因为 IMNU 也只做形式算子平方、且只算平坦 D 个 X^μψ^μ（不覆盖本卡陈述允许的任意正范数 SCFT）。
+
+  ★【「当且仅当」的证据结构（与玻色弦一侧的一处有趣不对称）】
+    超弦一侧：**有** iff 型编号陈述（lian-zuckerman-1989 **Proposition 1.7(ii)**
+      逐字 'Q² = 0 iff D = 10.'），但 **LZ 自己不证**（外包给 ohta-1986 与
+      Terao–Uehara PLB 168B，前者正文未取得、后者 bib 未登记）；
+      ⟹ 方向另有 ohta-1986 摘要（L2，'are shown to follow from'）与 IMNU (3.10)（L1，'demands'）。
+    玻色弦一侧：**连 iff 型编号陈述都没有**（fgz-1986 与 lian-zuckerman-1991 都把 c = 26
+      当作相对复形的定义条件；kato-ogawa-1983 摘要只给 ⟹）。
+  ⚠ **禁令**：不得把 lian-zuckerman-1989 Prop 1.7(ii) 当作玻色弦 c^m = 26 的 iff 来源。
+  本图**不**为此拆本卡的 iff（理由同 worldsheet.critical-dimension-brst-v2--via-nilpotency
+  的同名 gap：两个方向出自同一个形式计算）。
+
+  【顺带：本卡仍不断言截距，但来源里有】IMNU (3.10) 与 ohta-1986 摘要都把临界维数与截距
+  **一并**归给 Q_B² = 0（IMNU 的值：α₀^NS = 1/2、α₀^R = 0）。本卡按「一个节点一个命题」
+  只取中心荷那一半；截距见 worldsheet.open-superstring-mass-shell。
+  ⚠ IMNU 的 α₀ 记号（(3.3)(3.5) 末项 −α₀/√π）与本图 conv.intercept-sign-a、
+  以及 lian-zuckerman-1989 的第三种 L₀ 归一化（Definition 2.16 要求 L₀ 本征值 = κ）
+  之间的换算**本图未核实**，已列入报告。
+
+  【抽取记录 Q6 的建议已采纳】c^m = 15 与 D = 10 拆成两条陈述：
+  本卡只到 c^m = 15（更一般），D = 10 由汇总卡
+  worldsheet.critical-dimension-superstring 承担并显式挂 c^m = (3/2)D 那条公共输入。
+
+  【受限模的问题在超弦更严重】βγ 是对易场，占据数无上界，
+  故「Q_B 与 Q_B² 逐项有限」的模条件需要重新审视。原书完全不讨论。
+  本卡照玻色弦的写法声明受限模，但在推导的 gaps 里记明这是本图的补充而非原书内容。
+author: curator
+created: "2026-09-11"

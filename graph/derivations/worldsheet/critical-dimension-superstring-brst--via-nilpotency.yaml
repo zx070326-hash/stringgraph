@@ -1,0 +1,61 @@
+id: worldsheet.critical-dimension-superstring-brst--via-nilpotency
+target: worldsheet.critical-dimension-superstring-brst
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-brst-charge
+    note: 供给 Q_B 的模式表达式 (10.5.24) 与 {Q_B,b_n} = L_n、[Q_B,β_r] = G_r。
+  - id: worldsheet.superconformal-ghost-central-charge
+    note: |
+      供给 c^g = −15，即「总中心荷为零」化为 c^m = 15 的那一步。
+      **不标 inferred**：原书 (10.1.20) 逐字写 'The ghost central charge is then −26 + 11 = −15'，
+      且 §10.5 那段的 'whenever the total central charge vanishes' 与 c^m = 15 之间只差这个数。
+  - id: math.super-virasoro-algebra
+    note: 供给 L^m_n、G^m_r 满足的括号，即 Jacobi 恒等式计算的输入。
+  - id: worldsheet.brst-nilpotency-from-jacobi
+    inferred: true
+    note: |
+      供给「BRST 荷幂零 ⟺ 约束代数的 Jacobi 恒等式无反常」这一一般机制。
+      **标 inferred**：Vol.2 只说 'by the same steps as in the bosonic case (exercise 4.3)'，
+      不在原地论证；本图这张卡是玻色弦（纯 Virasoro）情形，超共形情形是本图的类比外推。
+  - id: worldsheet.superconformal-ghost-modes
+    note: 供给鬼场模式与 a^g（Q_B 末项 a^g c_0 要用）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, (10.5.23) 下方一段（无式号）；逐字见目标卡片 sources"
+    note: |
+      L1。⚠ **原书不给幂零性的计算**，推给 Vol.1 exercise 4.3 与本章 exercise 10.13(b)。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.13(b), p. 43（'Using the Jacobi identity as in exercise 4.3, verify nilpotence of Q_B.'）"
+    note: L1。这是原书里该论证的唯一入口，且是习题。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, exercise 4.3（玻色弦的幂零性验证；Vol.2 明写引用）"
+    note: |
+      Vol.2 明写 'by the same steps as in the bosonic case (exercise 4.3)'，
+      故这条来源是文献指定的；但**该习题本身在 v1 抽取记录里也没有解答**。
+summary: |
+  原书的论证只有一句：「由 (10.5.23) 的两条关系，按与玻色弦相同的步骤（习题 4.3）
+  可以验证幂零性，只要总中心荷为零。」把它展开：
+  (1) {Q_B, Q_B} = 2Q_B² 的计算按 Q_B 的鬼数分次逐项进行；
+      与玻色弦相同，非中心的项因约束代数的 Jacobi 恒等式（结构常数的相容性）逐项抵消；
+  (2) 剩下的是中心项，正比于总中心荷 c^tot = c^m + c^g = c^m − 15；
+  (3) 故 Q_B² = 0 ⟺ c^m = 15；反全纯部门同理给 c̃^m = 15。
+  (4) 「可以把平坦 X^μψ^μ 换成任意正范数 SCFT」的推广，理由是上面每一步只用到
+      约束代数的形式与中心荷的值，不用物质部门的具体实现。
+  (5) 周期性条件：j_B 里含 γT^m_F，故 SCFT 的超流必须与 β、γ 同周期，否则 j_B 不周期、
+      围道积分无定义。
+
+  【status 的理由（三条，都很硬）】
+  (1) **原书不给计算，两次推给习题**（Vol.1 exercise 4.3、Vol.2 exercise 10.13(b)）；
+  (2) 与玻色弦不同，本卷**没有** Q_B² 的显式公式可核对
+      （Vol.1 有 (4.3.10)，Vol.2 只有一段正文，无式号）；
+  (3) 「按同样的步骤」这句掩盖了超弦特有的结构（βγ 对易、R 扇区零模），
+      本图无法逐步复核。
+gaps:
+  - "**原书不给幂零性计算，且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证两次被推给习题（Vol.1 exercise 4.3、Vol.2 exercise 10.13(b)）。与玻色弦一侧的 Vol.1 (4.3.10)（有显式 Q_B² 公式、式号与内容均已核实）相比，这是本图中一处明显更弱的定位。"
+  - "**「按同样的步骤」的类比未被检验**：worldsheet.brst-nilpotency-from-jacobi 是纯 Virasoro（玻色）情形；超共形情形多出 {G, G} = 2L + 中心项 这一类反交换子，其 Jacobi 恒等式（含奇-奇-奇分量）在本图与来源中都没有验证。该依赖边已标 inferred。"
+  - "**反方向（c^m = 15 ⟹ Q_B² = 0）没有独立来源**：与玻色弦一侧的同一问题（worldsheet.critical-dimension-brst-v2 的 gaps：kato-ogawa-1983 摘要只给一个方向，FGZ 与 Lian–Zuckerman 把 c = 26 当作假设）。超弦一侧本图连那种级别的数学文献都没有登记。"
+  - "**受限模的定义在超弦情形未审视**：βγ 是对易场、占据数无上界（原书 §10.4 逐字），故保证 Q_B、Q_B² 逐项有限的模条件可能与玻色弦不同。目标卡片按玻色弦的写法声明受限模，那是本图的补充，不是原书内容。"
+  - "**中心项正比于 c^tot 这一步没有在图中算出**：summary 的第 (2) 步是按玻色弦的类比写的，超弦的系数（对应玻色弦的 ((c^m − 26)/12)(m³ − m)）在本图与来源中都没有显式形式。"
+author: curator
+created: "2026-09-11"

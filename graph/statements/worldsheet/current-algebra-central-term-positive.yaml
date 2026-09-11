@@ -1,0 +1,31 @@
+id: worldsheet.current-algebra-central-term-positive
+kind: proposition
+title: 幺正 CFT 中流代数的中心扩张 k̂ 非负：k̂ d^{aa} = ‖j^a_{−1}|1⟩‖² ≥ 0，且 k̂ = 0 当且仅当流恒为零
+statement: |
+  设幺正二维 CFT 含单李代数 g 的流代数（math.affine-lie-algebra-current-ope），
+  中心扩张 k̂ 由 k^{ab} = k̂ d^{ab}（(11.5.7)）定义，|1⟩ 为单位算子对应的态。则对每个固定的 a（不求和）
+    k̂ d^{aa} = ⟨1| [j_1^a, j_{−1}^a] |1⟩ = ‖ j_{−1}^a |1⟩ ‖²                （(11.5.9)）,
+  故 k̂ ≥ 0（d^{aa} > 0 因 d 正定），且 **k̂ = 0 当且仅当流 j^a 恒为零**。
+  原书逐字：'The *central extension* or *Schwinger term* k̂ must always be positive in a unitary theory.
+  … Thus k̂ = 0 only if the current vanishes identically.'
+
+  等价地，level k = 2k̂/ψ² ≥ 0，非平凡流时 k > 0。
+
+  **本命题不断言的内容**：不断言 k 的整数性（worldsheet.current-algebra-level-quantization）；
+  不断言非幺正理论中的任何事。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.9) 与其前后正文, p. 67（逐字：'The central extension or Schwinger term k̂ must always be positive in a unitary theory. … Thus k̂ = 0 only if the current vanishes identically.'）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E60）。
+      §11.1 (11.1.1) 处原书对同一事实的自评（逐字）：'with a coefficient that can be shown by a positivity
+      argument not to vanish'——即原书把这条当作「可以证明」的正性论证，(11.5.9) 就是那个论证。
+tags: [current-algebra, unitarity, level, positivity, cft]
+notes: |
+  「k̂ = 0 ⇒ 流恒为零」这一步用到态-算子对应：j^a_{−1}|1⟩ 正是算子 j^a 对应的态，
+  其范数为零（幺正 ⇒ 正定）即该态为零、即 j^a = 0。原书没有把这一步写出来，
+  推导卡 --via-norm-of-current-state 在 gaps 里记。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

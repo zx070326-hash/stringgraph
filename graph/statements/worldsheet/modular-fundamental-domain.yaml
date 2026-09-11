@@ -16,33 +16,35 @@ sources:
   - ref: polchinski-1998-v1
     loc: "§5.1, eq. (5.1.15), p.148（基本域 F₀：−½ ≤ Re τ ≤ ½ 且 |τ| ≥ 1）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E72。
-      **★ 2026-09-11 升级为 L1 原书页图**（抽取记录 §12.7 的 §5.1 式号表）：此前本条写
-      「L1（读到 schrans-2020 笔记 p.248）；**未核对 Polchinski 原书**」，现已逐字核到原书 p.148——
-      式号 **(5.1.15)** 与区域 −½ ≤ Re τ ≤ ½、|τ| ≥ 1 均确认，**并读到原书自己的措辞**
-      （见本卡 notes 的【作者自承缺口】一段）。
-      ⚠ 本卡唯一推导 worldsheet.modular-fundamental-domain--via-modular-reduction 的 gaps 末条
-      仍写着「(5.1.15) 只经 schrans-2020 核对（对原书 L3）」，**那条已过时**；
-      该文件本轮不在本 curator 的 claim 范围内，已在报告中交 lead。
-      ⚠ 抽取记录逐字转引了 [S] 对**原书论证完备性**的评价：
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E72（初建时 L1：读到 schrans-2020
+      笔记 p.248）。
+
+      【**原书核实 2026-09-11（curator-polchinski-ch7，经 researcher 的 ch.7 抽取 §0.1 步骤 6 / #E24 备注 2）**】
+      **式号、页码、内容三者全部经 Cambridge Books Online 原书页图（ch.5 PDF p.4 = 印刷 p.148）
+      L1 确认无误**，先前的「未核对 Polchinski 原书」限定**由此撤销**。
+
+      ⓘ **同时取得原书自身对论证完备性的措辞（比第三方评价更强的证据）**，p.148 逐字：
+        「Using the modular transformations (5.1.13), **it can be shown that** every τ is equivalent
+         to exactly one point in the region F₀ shown in figure 5.2 … except on the boundaries which
+         are identified as shown in the figure.」
+      ——**「it can be shown」，无证明**。故本卡 statement 里的「边界的认同在本书中未被严格处理」
+      现在有了**原书自身**的依据，不再只依赖 [S] 的第三方评价。
+      同页另一句有用：「Because of the identifications one should think of F₀ as being
+      **rolled up, and open only at Im τ → ∞**.」
+
+      ⚠ 保留原有的 [S] 评价记录（第三方，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」）：
       「we have argued that F₀ is the fundamental domain of the modular group,
       we have been quite cavalier about the boundaries of F₀. Those who are interested in
       a more detailed approach are referred to Zwiebach's book, section 26.6 of the second edition.」
-      这是第三方评价，**不是 Polchinski 自述**，转述时不得写成「Polchinski 承认……」。
 tags: [worldsheet, torus, modular-group, moduli, fundamental-domain]
 notes: |
-  【★ 作者自承缺口（2026-09-11 补记，reviewer-batch10 D；抽取记录
-  literature/extractions/polchinski-1998-v1.md §12.10 表 C 第 10 条 + §12.7 的 §5.1 表，
-  L1 原书页图逐字）】原书 p.148 在 (5.1.15) 处的措辞是
-  > 「Using the modular transformations (5.1.13), **it can be shown that** every `τ` is equivalent
-  >  to exactly one point in the region `F₀` … **except on the boundaries which are identified as
-  >  shown in the figure**」
-  ⇒ 三点：
-  (a) **原书对本命题只有 "it can be shown"，无证明、无引文**——这是**原书自己的**缺口，
-      不再需要借 [S] 的「cavalier about the boundaries」来说明本卡为什么是 physical-argument；
-  (b) 原书**确实**把边界认同写进了结论（"except on the boundaries which are identified"），
-      故本卡 statement 里那两条边界认同不比来源强（但来源同样不证明它们穷尽重复）；
-  (c) 唯一性（"exactly one point"）也在原书逐字里，故本卡陈述的强度与来源一致。
+  【作者自承缺口 C10（reviewer-batch10 D）已落地】原书 p.148 的「it can be shown」逐字已写在
+  本卡 sources 的 note 里（由 ch7 支于 2026-09-11 落地，L1 原书页图）。
+  curator-batch10-14-fix 复核后不重复登记，只补两句：
+  (a) 该缺口是**原书自己的**，本卡的 physical-argument 档位不再需要借 [S] 的第三方评价；
+  (b) ⚠ 本卡唯一推导 worldsheet.modular-fundamental-domain--via-modular-reduction 的 gaps 末条
+      仍写着「(5.1.15) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）」，**该行已过时**；
+      该文件不在本轮 claim 范围内，交 lead / 下一位持有者更正。
 
   数学上正确的陈述与证明按 [S] 的指路在 Zwiebach 2nd ed. §26.6；
   **该书本项目 literature/sources.bib 尚未登记，节号未核实**，故这里只写在 notes 里，
@@ -50,5 +52,20 @@ notes: |
 
   下游意义：S-矩阵主公式 worldsheet.string-s-matrix 里的模积分写作 ∫_F d^μ t，
   「在基本域上积分」正是靠这条命题才不会重复计数；环面（单圈）情形的 F 就是这里的 F₀。
+
+  **⚠ 原书内部的写法不一致（curator-polchinski-ch7, 2026-09-11，两处都 L1）**：
+  本卡用的是 §5.1 (5.1.15) 的**闭区域** −½ ≤ Re τ ≤ ½、|τ| ≥ 1（附边界认同）；
+  而 §7.3 (7.3.14)（p.219）用的是**开区域** |τ| > 1、|τ₁| < ½、τ₂ > 0。
+  两者差一层零测度边界，**原书没有说明为什么 §7.3 改用开区域**
+  （合理猜测是要一个「边界不重复计数」的代表元集合，但这是抽取者的推断，原书未写）。
+  对积分值无影响，对「基本域」的严格表述有影响。见
+  literature/extractions/polchinski-1998-v1-ch7.md 的 Q1，以及
+  spectrum.one-loop-uv-finiteness-from-modular-invariance（它引的是 (7.3.14) 的开区域版本）。
+
+  **下游新增（2026-09-11）**：spectrum.one-loop-torus-amplitude、
+  spectrum.one-loop-uv-finiteness-from-modular-invariance、
+  worldsheet.modular-truncation-breaks-brst-decoupling 三条都依赖本卡；
+  其中最后一条的内容正是「F₀ 的表观边界成对认同 ⇒ 面项抵消」，
+  故**本卡边界认同的不严格性直接传导到那条一致性论证**。
 author: curator-polchinski-ch5
 created: "2026-09-11"

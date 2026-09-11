@@ -148,6 +148,57 @@ sources:
       编号已核实。（原先此处引的 lian-zuckerman-1989 已删除：该文是
       *BRST cohomology of the super-Virasoro algebras*，处理 RNS 超弦（临界值 c = 15），
       与玻色弦无鬼定理无关，属误引。见 brst-cohomology-sources.md §2.1。）
+  - ref: kato-ogawa-1983
+    loc: "全文；摘要（L2）"
+    note: |
+      【2026-09-11 researcher 第七轮抽取落图；见 literature/extractions/kato-ogawa-1983.md】
+      **BRST 版无鬼定理的物理学原始出处。** 摘要逐字（INSPIRE recid 177600，L2）：
+      「Defining a physical state by a modified form of Kugo-Ojima's subsidiary condition
+       Q_B |phys⟩ = 0 ( Q_B = BRS charge), **we prove a no-ghost theorem in a simple manner.**」
+
+      ⚠⚠ **loc 只能写「全文；摘要（L2）」，不得写页码、式号或定理号。**
+      正文至今未取得（L0）：ScienceDirect 403；KEK 扫描件主机 lib-extopc.kek.jp 四次
+      socket hang up；京都大学 KURENAI 空结果；INSPIRE/INIS/Semantic Scholar 均 metadata-only
+      （抽取记录 §0.4 逐条留痕）。找扫描件的钥匙：报告号 **KUNS 637**、preprint_date 1982-04、
+      KEKSCAN 2000-33-955。
+
+      ★ **证明结构（由同学派同型论文反推，L3，不是 KO 正文）**：KO 的证明骨架经
+      Itō–Morozumi–Nojiri–Uehara 1986（PTP 75, 934，L1 全文；五处逐字自称
+      「similar to Ref. 1)」/「the same method in Ref. 1)」）反推为五步——
+        (1) **鬼零模分离** Q_B = c_0 L + b_0 M + Q̃_B（IMNU (3.2)；KKM 2010 (2.6a) 同型），
+            物理态限制到 b_0|phys⟩ = 0 分量后条件化为 L|phys⟩ = 0 与 Q̃_B|phys⟩ = 0；
+        (2) **光锥参考系**：取 p^i = 0、p⁺ 固定非零，零矢 k 使 k·p = 1（IMNU (4.3)–(4.5)）；
+        (3) **形式参数 β 的重标度** 使 Q̃_B(β) = Q_I + βQ_II + β²Q_III（IMNU (4.9)–(4.11)，
+            (4.9) 处逐字标注「¹⁾」= KO）；
+        (4) **Kugo–Ojima quartet 机制**：Q_I|φ⟩ = 0 ⇒ |φ⟩ = P^(0)|φ⟩ + Q_I|ρ⟩
+            （IMNU (4.17)–(4.18)、(A.3)–(A.6)）；
+        (5) **DDF 型横向投影**：按 β 阶归纳得 |φ(β)⟩ = P(β)|φ(β)⟩ + Q̃_B(β)|J(β)⟩
+            （IMNU (4.19)–(4.20)，横向算子 (A.7) 引 Brower–Friedman），置 β = 1 得
+            ⟨φ|φ⟩ = ⟨φ|P|φ⟩ ≥ 0（IMNU (4.21)）。
+      逐步的 IMNU 式号锚见 kato-ogawa-1983.md §3。**「KO 同型」是推断，不是 KO 的式号。**
+
+      ★ **两条独立 L3 对结论形态的转述**：
+        Kohriki–Kunitomo–Murata 2010 §1 p.2 逐字（L1）：「They proved that the physical Hilbert
+        space is isomorphic to the conventional one spanned by **DDF states** and, hence, has a
+        **positive semidefinite** norm. This norm of string states is, however, a little nontrivial
+        owing to the ghost zero-modes.」
+        Lian–Zuckerman 1989 p.332 逐字（L1）：KO 用的关键代数结构是 Dixon–Taylor 型
+        A² = C² = 0、B² = CA、**Ker A = Im A**，Lemma 5.3.1 证明末句「The reader can consult [11]
+        for details.」（[11] = KO）
+      ⚠ 注意 KKM 说的是 **positive semidefinite**（物理态空间），本卡断言的是**正定**
+      （相对上同调，已商掉恰当态）——两者不冲突但不是同一句话。
+
+      ⚠ **本条来源不把本卡的 status 抬离 physical-argument**：KO 的证明是形式参数 β 展开 +
+      Kugo–Ojima quartet + DDF 对易性，即物理学家式构造证明，且**没有**谱序列/消灭定理语言
+      （抽取记录 §3 末）。本卡要 rigorous 仍只能靠上面的 fgz-1986 Theorem 2.8 /
+      Theorem 2.7(i)（与 lian-zuckerman-1991 Theorem 3.5(i)，见
+      worldsheet.no-ghost-theorem-subcritical）。
+
+      ⚠ **归属关系**：Polchinski 书末 References p.350 自陈「our proof of the no-ghost theorem is
+      **loosely** patterned on the one in that paper」（见本卡上一条 source）。
+      「loosely」是原书用词，必须保留；且因 KO 正文未取得，**本图不在
+      --via-polchinski-4-4 的 sources 里加 kato-ogawa-1983**（加了会暗示可逐步核对）。
+      取得正文后应新建独立推导 --via-kato-ogawa。
 tags: [bosonic-string, unitarity, brst, cohomology, critical-dimension]
 notes: |
   本节点与 worldsheet.no-ghost-theorem-v2 是**两条不同的陈述**：前者关于 Q_B 的相对上同调，

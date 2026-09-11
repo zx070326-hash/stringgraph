@@ -1,0 +1,62 @@
+id: branes.orientifold-plane-rr-charge
+kind: proposition
+title: Orientifold 面是 R–R 荷的汇：type I 在 k 个方向上 T 对偶后有 2^k 张 O 面与 16 张 D 膜，每张 O 面的荷是同维 D 膜荷的 −2^{4−k} 倍
+statement: |
+  对 type I SO(32) 理论在 k 个紧化方向上作 T 对偶（k = 0, 1, …, 9）。按 Vol.1 第 8 章的同一套论证
+  （duality.t-duality-of-unoriented-theory 的超弦版），世界面宇称 Ω 在对偶坐标上变成
+  「Ω × 时空反射」，其固定点集是 **2^k 张 orientifold (9−k)-面**；开弦端点落在 **16 张 D(9−k) 膜**上
+  （原书计数，逐字「16 D8-branes between two orientifold hyperplanes」（k = 1）；计数单位见 notes）。
+  体内（远离 O 面与 D 膜处）的局域物理是有取向的 type II 弦。
+
+  **命题**：所有 D 膜的 R–R 荷同号（整套 D 膜是 type I 的 T 对偶像、仍是 BPS 态，BPS 态的总质量
+  与总荷线性），R–R 场线从每张 D 膜发出、正交于非紧方向，**必须终止于某处**；圆盘 tadpole 由无取向
+  cross-cap 相消，而 T 对偶时空中 cross-cap 必须局域在某张 orientifold 面附近（体内有取向）。
+  **因此 orientifold 面是 R–R 荷的汇，且每张 orientifold (9−k)-面的 R–R 荷是同维 D 膜荷的 −2^{4−k} 倍**：
+    **Q_{O(9−k)} = − 2^{4−k} · Q_{D(9−k)}**,   总荷  2^k · (−2^{4−k}) + 16 = 0.
+  原文逐字（pp. 142–143）：「Thus we deduce that the orientifold planes are sinks for R–R charge. If we
+  T-dualize on k dimensions there are 2^k orientifold planes but still 16 D-branes, so the charge of an
+  orientifold plane must be −2^{4−k} times that of a D-brane of the same dimension.」
+
+  **本命题不断言**：
+  (a) D 膜与 O 面之间的力。原书说它多一个因子 −2^{5−k}，与荷的 −2^{4−k} 差因子 2
+      （「the orientifold geometry squeezes the flux lines into half the solid angle」），但逐字
+      「The reader can carry out a similar calculation」——本章不算，本图不建卡。
+  (b) O 面的张力（NS–NS 荷）与其他性质。
+  (c) 「32 张 D 膜」的任何计数（见 notes，抽取记录 Q1）。
+  (d) O 面荷是由 §10.8 的 tadpole 相消**倒推**的，不是本章独立算出的（见 notes）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, pp. 142–143（无式号）：「The spacetime interpretation of the divergence in the T-dual picture with D-branes is again an inconsistency in the R–R field equations. One can picture field lines emerging from each D-brane, orthogonal to the noncompact dimensions, and these field lines must end somewhere. … We know that the disk tadpole is canceled by the unoriented cross-cap. In the T-dual spacetime the cross-cap must be localized near one of the orientifold planes, because the string theory in the bulk is oriented. Thus we deduce that the orientifold planes are sinks for R–R charge. If we T-dualize on k dimensions there are 2^k orientifold planes but still 16 D-branes, so the charge of an orientifold plane must be −2^{4−k} times that of a D-brane of the same dimension.」；16 张 D8 膜的计数 §13.2 开篇 p. 138"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E12、#E3，证据等级 L1（原书页图，p. 143 已单页重渲染核对）。
+      **抽取者复算**：2^k × (−2^{4−k}) + 16 = 0 ✅——§13.2 内部自洽，单位是「一张 D 膜 = 1」、D 膜数恒为 16。
+  - ref: polchinski-1998-v2
+    loc: "§13.3, p. 147（无式号）：「We deduced from the cancellation of divergences that the charge of the orientifold plane should have a factor of −(2^{4−k}); the extra factor of 2 in the force arises because the orientifold geometry squeezes the flux lines into half the solid angle.」"
+    note: |
+      抽取记录 #E18（L1）。「We deduced from the cancellation of divergences」——再次确认 O 面荷是从
+      §10.8 的 tadpole 相消倒推的；唯一可能的独立路线（膜–O 面的力）被推给读者。
+tags: [orientifold, d-brane, rr-charge, type-i, t-duality, tadpole, sink]
+notes: |
+  【★ 红线 1：数字是 16 与 −2^{4−k}，不是 32 与 −32】本章从不写「32 张 D9 膜」。同节 p. 141 另有一句
+  「it is natural to interpret each Chan–Paton degree of freedom in the fully Neumann theory as a
+  9-brane filling spacetime」（蕴含 32 张，type I 的 CP 指标有 32 个）；原书**从不调和**这两种计数
+  （常见解释「一张 D 膜连同其镜像 = 2 个 CP 指标」在 k = 0 时镜像与本体重合，不自动成立）。
+  **抽取记录 Q1 未裁决。** 本卡按原书写 16 与 −2^{4−k}，把两句都抄在这里。
+  若日后需要「32 张 D9」这一现代表述，须另找来源（首选 Polchinski, TASI Lectures on D-branes,
+  hep-th/9611050，本项目未登记），在此之前该表述在本项目里是 L0。
+
+  【★ 红线 2：依赖方向是 §10.8 → 本卡】三处逐字（p. 141「was deduced in section 10.8」、p. 142「arose from
+  the R–R 10-form field equation」、p. 147「We deduced from the cancellation of divergences」）方向一致。
+  本卡推导**必须** depends_on §10.8 的 tadpole 相消卡——**已建（2026-09-11）**：
+  worldsheet.type-i-tadpole-cancellation-so32，非 inferred，本卡有效状态因此不高于该卡。
+  **禁止**与 consistency.type-i-hexagon-so32-iff 建任何边（本章全章无 "anomaly"/"hexagon"，
+  抽取记录 §3.2 第 3 条；与 -sec10-8 既有裁决一致）。
+
+  【与 duality.t-duality-of-unoriented-theory 的关系】那张卡是玻色弦 Vol.1 §8.8 的（Ω 在对偶坐标上
+  = 宇称 × 反射），且抽取记录未能确认原书在该处是否用「orientifold」一词。本卡的「2^k 张 O 面」
+  是超弦版，原书外包给第 8 章。
+
+  【k = 0 的特例】即 branes.o9-d9-charge-cancellation-so32：一张 O9 面荷 −16、16 张 D9 膜，总荷零。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

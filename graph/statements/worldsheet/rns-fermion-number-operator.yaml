@@ -1,0 +1,91 @@
+id: worldsheet.rns-fermion-number-operator
+kind: definition
+status: physical-argument
+title: 世界面费米子数算符 exp(πiF)（GSO 投影的算符），含鬼场部分
+statement: |
+  RNS 弦上定义一个与全部 ψ^μ **反对易**的算符 exp(πiF)，其中 F 是 world-sheet fermion number，
+  **只 mod 2 有定义**。物质部门的构造：
+    Σ^{μλ} = −(i/2) Σ_{r ∈ Z+ν} [ψ^μ_r, ψ^λ_{−r}],
+    S_a = i^{δ_{a,0}} Σ^{2a, 2a+1}   （因子 i 使 S_0 厄米）,
+    F = Σ_{a=0}^{4} S_a          （十维，五个 Cartan 方向）。
+  作用在基态上：
+    exp(πiF) |0⟩_NS = − |0⟩_NS,
+    exp(πiF) |s⟩_R  = |s'⟩_R Γ_{s's}。
+  **鬼场部分**：F 被推广为对 β、γ 也取**奇**值。原书给的理由逐字：
+  'The ultimate reason is that it anticommutes with the supercurrent T_F and so we will need it
+  to commute with the BRST operator, which contains terms such as γT_F. The natural definition
+  for F is then that it be the charge associated with the current (10.4.9), which is l for e^{lφ}.'
+  在基态上鬼场贡献一个因子 **−1（NS 扇区）与 −i（R 扇区）**。
+
+  ⚠ **一处约定选择，必须显式记录**（原书逐字）：'Note that this definition is based on spin
+  rather than statistics, since the ghosts have the wrong spin-statistics relation; it would
+  therefore be more appropriate to call F the world-sheet spinor number.'
+
+  **两条关键性质**（下游 GSO 与无鬼定理都要用）：
+    (a) F 由 OPE 守恒，这是**时空 Lorentz 不变性**的推论（(10.2.22) 的定义使之显然）；
+    (b) exp(πiF) 与 BRST 算符 Q_B **交换**（这是上面把 F 推广到鬼场的目的）。
+
+  本卡是定义。它**不**断言 exp(πiF) 的本征值只有 ±1、不断言谱按其本征子空间分解的性质
+  （见 worldsheet.gso-projection），也**不**断言 R 扇区旋量表示的维数（那是附录 B.1）。
+uses:
+  - worldsheet.rns-mode-expansions
+  - worldsheet.rns-ramond-zero-modes-clifford
+  - worldsheet.superconformal-ghost-modes
+  - worldsheet.beta-gamma-bosonization
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.19)（exp(πiF)）、(10.2.20)（Σ^{μλ}）、(10.2.21)（S_a）、(10.2.22)（F = Σ_a S_a）、(10.2.24a)（exp(πiF)|0>_NS = −|0>_NS）、(10.2.24b)（exp(πiF)|s>_R = |s'>_R Γ_{s's}），pp. 8–9；'The ghost ground state contributes a factor −1 in the NS sector and −i in the R sector.' 同处"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E22；式号与公式内容逐页读到原书页图）。
+      性质 (a) 的逐字来源同处：'The definition (10.2.22) makes it obvious that F is conserved by
+      the OPE of the vertex operators, as a consequence of Lorentz invariance.'
+      脚注 1（逐字）：'Lorentz invariance of the OPE holds separately for the ψ and X CFTs …
+      because they are decoupled from one another. However, the world-sheet supercurrent is only
+      invariant under the overall Lorentz transformation.'
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.23)–(10.4.25) 之后一段, p. 19（F 的鬼场推广、与 Q_B 交换的理由、'based on spin rather than statistics' 的逐字自评）"
+    note: |
+      L1（E31）。★ 这段把 E22 里悬着的「鬼场对 F 的贡献」补齐，是 GSO 的完整前提。
+      ⚠ 鬼场部分的定义用的是 (10.4.9) 的电流（βγ ≅ ∂φ，即**玻色化**），
+      本图**没有**玻色化节点，故这一部分在本卡只按原文记录，见 notes。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 末, p. 25（逐字：'We have defined exp(πiF) to commute with Q_B.'）"
+    note: L1（E39）。性质 (b) 的来源。
+tags: [rns, superstring, gso, fermion-number, definition]
+notes: |
+  【status: physical-argument 的理由】物质部门的 F 是有限的模式双线性式（可写成纯代数），
+  但鬼场部门的 F 定义为 (10.4.9) 电流的荷、并用「对 e^{lφ} 取值 l」来刻画——
+  这经过 βγ 的玻色化（(10.4.9)/(10.4.13)/(10.4.19)），**本图没有玻色化节点**。
+  按「不确定选低一级」，整卡取 physical-argument。
+  → 待建（本轮未做）：worldsheet.beta-gamma-bosonization（β ≅ e^{−φ}∂ξ、γ ≅ e^{φ}η，
+  (10.4.8)–(10.4.22)）与 worldsheet.fermion-bosonization（ψ ≅ e^{iH}，(10.3.5)–(10.3.19)）。
+  建成后可把本卡拆成「物质 F（rigorous）」与「鬼场 F（physical-argument）」两张，
+  并新建 v2 而不是改本卡。
+
+  ★【2026-09-11 更新（curator-bosonization）：上面那条「待建」已完成】
+  玻色化组节点已建出：worldsheet.fermion-bosonization-two-dimensions（§10.3，E25）、
+  worldsheet.bc-ghost-bosonization（E27）、worldsheet.beta-gamma-bosonization（§10.4，E30）、
+  worldsheet.spin-field-vertex-operators（E26）、
+  worldsheet.ramond-ground-state-vertex-operator（E31）、
+  worldsheet.vertex-operator-cocycle（E32），归一化约定
+  conv.nonembedding-scalar-normalization。
+  本卡已补一条 `uses: worldsheet.beta-gamma-bosonization` 的边——即鬼场侧 F 的定义
+  （(10.4.9) 电流的荷、对 e^{lφ} 取值 l）现在在图上有了支撑。
+  **status 与 statement 文本均未改**（按项目规则不得改已提交节点的 statement）：
+  新建的玻色化卡自身是 physical-argument，故本卡的 physical-argument 依旧是实话。
+  上面「拆成物质 F / 鬼场 F 两张」的建议**仍未做**，现在做的前提已齐备。
+  → 建议 lead 安排一次独立任务：新建 worldsheet.rns-fermion-number-operator-matter
+    （只含 Σ^{μλ}、S_a、F = Σ_a S_a，可标 rigorous）与
+    worldsheet.rns-fermion-number-operator-ghost（含 e^{lφ} 的荷，physical-argument），
+    本卡写 superseded_by。
+
+  【为什么 F 只 mod 2 有定义】原书 (10.2.19) 处明写。故一切下游只用 exp(πiF) 这个组合，
+  不用 F 本身的整数值。§10.6 的扇区标号 (α, F) 里的 F 同样只 mod 2 有定义（(10.6.1)）。
+
+  【R 扇区的表示论内容不在本卡】(10.2.24b) 右端的 Γ_{s's} 与 |s>_R 的分解（16 + 16′ 等）
+  依赖附录 B.1（本轮未读，抽取记录 Q8），本卡只照抄公式形式。
+author: curator
+created: "2026-09-11"

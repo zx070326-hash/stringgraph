@@ -1,0 +1,77 @@
+id: worldsheet.beta-gamma-bosonization--via-current-ope-and-eta-xi-repair
+target: worldsheet.beta-gamma-bosonization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superconformal-ghost-modes
+    inferred: false
+    note: |
+      供给被玻色化的对象：对易的 (β, γ)、其权 (λ', 1−λ')、模式与 [γ_r, β_s] = δ_{r,−s}。
+      (10.4.8) 的电流 βγ 与 (10.4.13) 的字典都直接以这些场写出。
+  - id: worldsheet.bc-ghost-bosonization
+    inferred: false
+    note: |
+      供给两处：(i) 断言 (1) 里被对置的"bc 情形"——原书逐字 'For the bc system we would be
+      finished: this approach leads to the same bosonization as before'，指的就是 §10.3 末那一段；
+      (ii) 断言 (3) 里 ηξ 作为 **λ = 1 的 bc 型系统**的玻色化（(10.4.19a)：η ≅ e^{−χ}, ξ ≅ e^{χ}），
+      那正是 bc 玻色化在 λ = 1 的特例。
+  - id: worldsheet.beta-gamma-central-charge
+    inferred: false
+    note: |
+      供给断言 (4) 要核对的目标值 c^{βγ} = 3(2λ'−1)² − 1（λ' = 3/2 时 11）。
+      原书在 (10.4.18) 之后把 T_B^φ 的 3(2λ'−1)²+1 与 T_B^{ηξ} 的 −2 相加得到它。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    inferred: false
+    note: |
+      供给断言 (6) 里 δ(γ) 的定义（(10.4.7) 的两条 OPE 性质）。
+      (10.4.21) 断言的正是"满足那两条性质的算子在玻色侧是 e^{−φ}"。
+  - id: worldsheet.linear-dilaton-cft
+    inferred: true
+    note: |
+      **inferred**：断言 (4) 里 T_B^φ 贡献 3(2λ'−1)²+1，本图的读法是"φ 带背景荷
+      κ = −(λ'−1/2) 的线性 dilaton"（c = 1 + 12κ² = 1 + 3(2λ'−1)²，见 target 的算术核对）。
+      **原书在 §10.4 的抽取范围内没有写出 T_B^φ 的表达式，也没有说它是线性 dilaton**
+      （§10.3 的 (10.3.31) 处才有那句话，且那是 bc 情形的 H）。故此边标 inferred。
+    convention_map: |
+      上游 worldsheet.linear-dilaton-cft 用 conv.alpha-prime-regge（D 个标量、显式 α'）；
+      本卡用 conv.nonembedding-scalar-normalization（α' = 2、单个全纯标量 φ）。
+      ⚠ 另一处差别：这里的背景荷 κ = −(λ'−1/2) 是**实数**，而 §10.3 的 bc 情形是**纯虚**的
+      V = −i(λ−1/2)。这正是 target 断言 (1) 那句 'the sign … is changed' 的算术表现。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.8)–(10.4.14)、(10.4.17)、(10.4.18)、(10.4.19a,b)、(10.4.21)、(10.4.22) 与其间正文, pp. 17–18"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E30）。**这就是原书的全部论证**。
+      三句关键措辞逐字：'For the bc system we would be finished…'；
+      'the equivalence (10.4.13) will hold — all OPEs will be correct — if η and ξ satisfy…'；
+      'One can check that the total partition functions agree, in the appropriate sectors.'
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.6)、(10.4.7), pp. 16–17"
+    note: L1 一手（E29）。δ(γ) 的定义性性质，断言 (6) 的验证目标。
+summary: |
+  原书 §10.4 的论证（"先试、失败、修补、核对"四步）：
+    (1) **试**：βγ 电流的二点函数 βγ·βγ ∼ −1/z²（(10.4.8)）与 ∂φ 的相同，
+        故认出 βγ ≅ ∂φ（(10.4.9)），照 bc 的办法猜 β ≅ e^{−φ}、γ ≅ e^{φ}（(10.4.10)）。
+        ⚠ 原书**在这个式子上标了 `?`**，即它自己就是待检验的猜测。
+    (2) **失败**：该猜测给出的 OPE（(10.4.11)）与正确的 (10.4.12) 不符。
+        原书把原因归为"电流-电流 OPE 的符号（因而 φφ OPE 的符号）变了"。
+    (3) **修补**：引入一对新场 η, ξ，令 β ≅ e^{−φ}∂ξ、γ ≅ e^{φ}η（(10.4.13)）。
+        原书的论证方向是**充分性**：'the equivalence will hold — all OPEs will be correct — if
+        η and ξ satisfy (10.4.14)'。而 (10.4.14) 恰好说 ηξ 是 λ = 1 的 bc 型系统，
+        故它本身可以再玻色化成 χ（(10.4.19a)），给出最终字典 (10.4.19b)。
+    (4) **核对**：中心荷 13 + (−2) = 11 = c^{βγ}（λ' = 3/2）；
+        配分函数"One can check"相符（不做）；
+        弦论情形定出 δ(γ) ≅ e^{−φ}（h = 1/2）与顶点算子的费米部分（(10.4.22)）。
+  额外的启发式理由（断言 (7)）：对易场的模式可激发任意多次 ⇒ 态密度大于 bc ⇒
+  单个玻色子不够，需要额外自由度。
+  **本推导取 physical-argument 的理由**：第 (3) 步只证充分性、不证必要性也不证唯一性；
+  配分函数核对被推给读者；整段建立在 physical-argument 的玻色化之上。
+gaps:
+  - "**只有充分性，没有必要性/唯一性**：原书逐字 'will hold … if η and ξ satisfy'。为什么必须是这一对 η, ξ（而非别的额外自由度）、这个字典是否唯一，原书不问。"
+  - "**配分函数相等未验证**：逐字 'One can check that the total partition functions agree, in the appropriate sectors.'——'in the appropriate sectors' 这个限定原书也不展开（βγ 的 NS/R 扇区与 ηξ、χ 的扇区如何对应）。"
+  - "**T_B^φ 的显式表达式在抽取范围内缺失**：原书只给它的中心荷贡献 3(2λ'−1)²+1。本图在 target 的 notes 里重建了 T_B^φ = −(1/2)(∂φ)² − (λ'−1/2)∂²φ 并核对出全部权值与中心荷自洽，但**那是本图的算术，不是原书文字**。→ 待 researcher 核实（式号大约 (10.4.15)–(10.4.16)）。"
+  - "**背景荷是实的而 bc 情形是纯虚的**：这一符号差别是整段的关键，但原书只用一句 'the sign … is changed' 交代，不写两侧的能动张量作对比。本图给了一个自洽的读法（见 target 的 notes），该读法**未经原书核实**。"
+  - "**φ、χ、ηξ 与 βγ 的态空间关系不明**：βγ 的 Fock 空间与 e^{lφ} 的动量格之间的对应（尤其 worldsheet.superconformal-ghost-unit-operator-vacuum 记的「|1⟩ ≠ |0⟩_NS、|1⟩ 上的 Fock 空间里没有 |0⟩_NS」这一现象在玻色侧长什么样）原书不讨论。这正是现代文献里 picture number 的位置，原书全章不用这个词。"
+  - "**继承上游的核心 gap**：'等价' 无数学陈述、手征玻色子未定义（见 worldsheet.fermion-bosonization-two-dimensions 的 gaps）。"
+author: curator
+created: "2026-09-11"

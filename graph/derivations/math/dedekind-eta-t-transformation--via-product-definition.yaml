@@ -1,0 +1,45 @@
+id: math.dedekind-eta-t-transformation--via-product-definition
+target: math.dedekind-eta-t-transformation
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.dedekind-eta-function
+    note: |
+      提供 η 的乘积定义与**分支约定 q^{1/24} ≡ exp(πiτ/12)**。
+      ⚠ 没有分支约定，「e^{iπ/12}」这个相位无意义（q^{1/24} 作为多值符号时，
+      τ ↦ τ+1 可以给出任何 24 次单位根倍数）。本推导的全部前提都在这张定义卡里。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44a), p.216"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，L1（原书页图逐字）。
+      ⚠ 原书只给结果（「It has the modular transformations」+ 两式），**没有这两行验算**；
+      验算是本图补的，见 notes 的定级说明。
+summary: |
+  两步，全部在 math.dedekind-eta-function 的定义之内：
+
+  **(1) 乘积部分不变。** q(τ+1) = exp(2πi(τ+1)) = exp(2πiτ)·exp(2πi) = q(τ)。
+  故 ∏_{n≥1}(1 − q^n) 逐因子不变，且收敛性论证（定义卡里已给：|q| = e^{−2πτ₂} < 1，
+  在 H 的紧子集上绝对一致收敛）对 τ 与 τ+1 是同一个（Im(τ+1) = Im τ）。
+
+  **(2) 前因子出一个相位。** 按定义卡的分支约定 q^{1/24} ≡ exp(πiτ/12)，
+  q(τ+1)^{1/24} = exp(πi(τ+1)/12) = exp(iπ/12)·exp(πiτ/12) = exp(iπ/12)·q(τ)^{1/24}。
+
+  相乘得 η(τ+1) = exp(iπ/12) η(τ)。推论（|η| 不变、τ₂ 不变 ⇒ τ₂|η|⁴ 在 T 下不变）
+  是一行代入。
+notes: |
+  由 curator 于 2026-09-11 从 math.dedekind-eta-modular-transformation--via-textbook-assertion
+  的 summary 中 T 那一半提炼而来（拆卡见目标陈述的 notes）。
+
+  **定级依据（docs/STATUS_LEVELS.md 的 rigorous 例外条款，三条逐条核对）**：
+  (i) **前提已完整写出**——全部前提就是 math.dedekind-eta-function 一张定义卡，
+      且分支约定与收敛性都已写在那张卡里（那张卡自身是 rigorous 的定义卡）；
+  (ii) **有限步初等计算**——两行，只用 exp(2πi) = 1 与指数相加；
+  (iii) **reviewer 已独立复核**——`reviewer-verified: reviewer-ch7, 2026-09-11`
+      （reviewer-v1-ch7 复核了 q^{1/24} = e^{πiτ/12} ⇒ 相位 e^{iπ/12} 这一步，
+      并据此提出拆卡；lead 于同日裁定落地）。
+
+  ⚠ **本卡的 rigorous 不是「因为这是众所周知的数学事实」**（那样定级违反项目原则 2），
+  而是因为上面三条同时满足。S 半没有一条满足，故仍是 physical-argument。
+author: curator-v1-ch7
+created: "2026-09-11"

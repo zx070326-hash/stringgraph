@@ -1,0 +1,56 @@
+id: branes.o9-d9-charge-cancellation-so32
+kind: proposition
+title: type I SO(32) 在 D 膜语言中是「16 张 D9 膜 + 一张 orientifold 9-面」的态：O9 面荷 −16，总 R–R 荷为零；这是 §10.8 tadpole 相消的重新表述
+statement: |
+  取 branes.orientifold-plane-rr-charge 的 k = 0 情形（不作 T 对偶）：type I SO(32) 理论
+  是含 **16 张时空填满的 D9 膜与一张 orientifold 9-面** 的态。原文逐字（p. 144）：
+  「a third state that contains **16 D9-branes (and an orientifold 9-plane)** that looks like the type I theory」。
+  O9 面的 R–R 荷是一张 D9 膜荷的 −2^{4−0} = **−16** 倍，故
+    **Q_{O9} + 16 · Q_{D9} = 0**：总 R–R 10-形式荷为零。
+  这正是 §10.8「R–R tadpole（10-形式势 C_10 的源）只对 SO(32) 相消」在 D 膜/orientifold 语言中的
+  重新表述：D9 膜是 C_10 的源（branes.d-brane-rr-coupling），O9 面是其汇；对非 SO(32) 的规范群，
+  发散来自 R–R 10-形式场方程，且**不受环面紧化影响**（原文逐字：「This divergence is unaffected by
+  toroidal compactification and again cancels only for SO(32).」）。
+
+  **本命题不断言**（每条都有原文依据）：
+  (a) ★ 「SO(32) = 32 张 D9 膜」。本章从不写 32 张 D9；唯一给出 D9 数目的句子写的是 16。
+      p. 141「each Chan–Paton degree of freedom … as a 9-brane」蕴含 32，原书从不调和（抽取记录 Q1 未裁）。
+  (b) 本卡是 SO(32) 的**独立推导**——不是。它的输入是 §10.8 的 tadpole 相消（三处逐字，见 notes）。
+  (c) 与六边形反常抵消（consistency.type-i-hexagon-so32-iff）的任何关系：本章全章无 "anomaly"。
+  (d) 「纯闭弦无取向理论（n = 0）不一致」的论证：本章只给图像（场线无源可配），原书不单独讨论 n = 0
+      （抽取记录 Q4）。
+  (e) 环面紧化不改变相消这一点的**验证**：原书逐字「it is not hard to verify explicitly that this does not
+      happen」——本章不做。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2「New connections between string theories」, p. 144（无式号）：「In summary, we are now considering a single theory, which has a state that contains no D-branes and looks like the ordinary IIA theory, a second state (T-dual to the first) that contains no D-branes and looks like the ordinary IIB theory, and a third state that contains 16 D9-branes (and an orientifold 9-plane) that looks like the type I theory.」；O 面荷记账 pp. 142–143；p. 142「The divergence of the type I theory for groups other than SO(32) arose from the R–R 10-form field equation. This divergence is unaffected by toroidal compactification and again cancels only for SO(32).」；p. 141「The existence of the 10-form was deduced in section 10.8, from the study of type I divergences.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E11、#E12、#E13，证据等级 L1
+      （p. 144 已单页重渲染核对两次）。
+      ★ 本章唯一把 D9 数目写出来的地方就是 p. 144 这一句，数字是 16。
+tags: [type-i, so32, d9-brane, orientifold, o9-plane, rr-charge, tadpole]
+notes: |
+  【★ 红线 1】图里凡引用本章的 D9/O9 相消，一律写 16 与 −2^{4−k}（k = 0 时 −16）。
+  **严禁**写「Polchinski Vol.2 §13.2/§13.3 给出 SO(32) = 32 张 D9 膜」。两句原文并抄：
+  · p. 141：「it is natural to interpret each Chan–Paton degree of freedom in the fully Neumann theory
+    as a 9-brane filling spacetime」（type I 有 32 个 CP 指标 ⇒ 蕴含 32 张）；
+  · p. 144：「a third state that contains 16 D9-branes (and an orientifold 9-plane)」。
+  原书不调和。若确需「32 张 D9」的现代表述，须另找来源（Polchinski TASI hep-th/9611050 或 Johnson,
+  D-Branes），本项目尚未登记；在取到之前该表述是 L0。
+
+  【★ 红线 2：依赖方向与禁止的边】本卡的输入是 §10.8 的 tadpole 相消，三处逐字：
+  p. 141「was deduced in section 10.8」、p. 142「arose from the R–R 10-form field equation」、
+  p. 147「We deduced from the cancellation of divergences」。⇒ 推导**必须** depends_on
+  worldsheet.type-i-tadpole-cancellation-so32、**不 inferred**——**已建（2026-09-11）**，
+  本卡有效状态因此不高于该卡；那张卡的 notes 里有指回本卡的反向说明。
+  **绝不能**把本卡建成 SO(32) 的独立推导，也**不得**与 consistency.type-i-hexagon-so32-iff 建任何边。
+
+  【与 spectrum.chan-paton-gauge-group 的关系】「SO(32)」在本卡是 type I 的规范群名，其 Chan–Paton
+  来源（Ω 投影给 SO(n)）在那张玻色弦卡；超弦版在 ch10 分支（worldsheet.type-i-open-string-gauge-multiplet）。
+  本卡推导对它标 inferred（原书此处把「type I SO(32)」当作已知）。
+
+  【Q4：n = 0 的图像】本卡的场线图像可作「纯闭弦无取向 type I 不一致」的第二条 source（提供机制），
+  但原书不写那一步，故若建该节点仍须 inferred: true（抽取记录 Q4）。本图未建。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

@@ -65,6 +65,30 @@ sources:
       正定性的内积等式是 **(4.4.20)**。
       「⟨↓|c_0|↓⟩ = 1 未与 Polchinski 逐字核对」这条缺口**仍然成立**，且现在定位更准：
       原书那一侧根本不是 (4.3.18a)，而是 p.135 的约化内积。
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.2, eq. (A.2.18a,b), p.343**（L1 页图逐字）：两个可选内积 **(A) `⟨↑|↑⟩ = ⟨↓|↓⟩ = 1 , ⟨↑|↓⟩ = ⟨↓|↑⟩ = 0`**、**(B) `⟨↑|↓⟩ = ⟨↓|↑⟩ = 1 , ⟨↑|↑⟩ = ⟨↓|↓⟩ = 0`**，随后逐字「Inner product (A) is positive definite and gives `ψ̂† = χ̂`. It is the inner product for an ordinary physical oscillator. **Inner product (B) is not positive, and it makes `ψ̂` and `χ̂` Hermitean. It is the appropriate inner product for the Faddeev–Popov ghost system, as discussed in chapter 4.**」"
+    note: |
+      **【2026-09-11 新增第二个 L1 来源（curator-v1-sec15，researcher 第九轮 App. A 页图，印刷 p.343）】**
+      本节点零模部门的内容（`⟨↓|↓⟩ = ⟨↑|↑⟩ = 0`、`⟨↓|↑⟩ = 1`、`b`/`c` 取厄米）此前只挂在
+      **§4.3 (4.3.17)/(4.3.18)** 上；现在附录 A 给了第二个独立位置，且**把「非正定」与
+      「`ψ̂`、`χ̂` 厄米」明确绑成一句话**——这正是本卡 statement 里
+      「`b_n† = b_{−n}`、`c_n† = c_{−n}` ⇒ 基态自身内积为零」的结构性来源。
+      记号对应：**A.2 用的是一般费米振子 `ψ̂`、`χ̂` 与两态 `|↓⟩`、`|↑⟩ = χ̂|↓⟩`**，
+      本卡用 `b_0`、`c_0` 与 `|↑⟩ = c_0|↓⟩`；`{ψ̂, χ̂} = 1` (A.2.1c) ↔ `{b_0, c_0} = 1`。
+      ⚠ **A.2 通篇不出现字母 `b`、`c` 作为鬼场名，也不写 `bc` 系统的作用量**（抽取记录 §15.2(c) 第 3 条、
+      §15.2(g) 第 2 条）：它给的是**一般两态费米振子**加上一句「哪个内积属于 FP 鬼」，
+      `bc` 系统本身在 §3.3 / §4.3。故本源**只支撑零模内积的符号结构**，不支撑本卡任何 `n ≠ 0` 的内容。
+
+      ★★ **同段还有一句必须一起记的话（逐字，p.343，紧接 (A.2.18b) 的说明之后）**：
+        "**The derivation of the path integral was independent of the choice of inner product**,
+         but the relations (A.2.14) determine the expansion of `⟨ψ|` in basis states in terms of
+         the inner product."
+      ⇒ **禁令（本图规则，抽取记录 §15.2(c) 第 2 条）**：
+        **不得把「`bc` 鬼场路径积分」画成依赖「内积非正定」的边。**
+        原书明说路径积分的推导与内积选择无关；非正定内积只影响**态空间的解释**
+        （以及 `⟨ψ|` 在基态上的展开系数，见 (A.2.14)）。
+        任何这样的依赖边都与本条 L1 逐字冲突，reviewer 可据此直接判错。
+      见 literature/extractions/polchinski-1998-v1.md §15.2(c)。
   - ref: fgz-1986
     loc: "§2（Λ^∞_* 上的形式与 Theorem 2.8 中的 unitary isomorphism）"
     note: |

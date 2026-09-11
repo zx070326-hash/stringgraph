@@ -1,0 +1,52 @@
+id: swampland.wgc-electric-loose
+kind: proposition
+title: "AMNV 松版电荷不等式 m_el ≲ g_el M_Pl（eq. (1)）"
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §2.1 (p.4) 的 eq. (1)，逐字（含前置句）：
+
+    "Consider a 4-dimensional theory with gravity and a U(1) gauge field with gauge coupling g.
+     Naively, the effective theory breaks down near the scale M_Pl where gravity becomes
+     strongly coupled, and certainly nothing seems to prevent taking g as small as we wish; if
+     anything the effective theory seems to become even more weakly coupled and consistent.
+     Nonetheless, we claim that for small g there is a hidden new ultraviolet scale far beneath
+     the Planck scale. For instance, we claim that there must be a light charged particle with
+     a small mass
+       m_el ≲ g_el M_Pl .    (1)"
+
+  四条不得省略的限定：
+  (1) 关系符逐字是 **≲**（量级），不是 ≤ 也不是 <；
+  (2) 右边是**规范耦合** g_el，不是电荷 q。该文 §2.2 (p.6) 另有一句用电荷写的
+      "these particles should have m < qM_Pl"（严格小于），**原文没有给出 g 与 q 的换算**；
+  (3) 猜想是"**存在**某个态满足不等式"，不是"所有带电态都满足"。同文 §2.1 (p.5) 逐字：
+      "we are not conjecturing that for a given charge sector all the masses are less than the
+       charge, but that there exist *some* such state."；且 "the BPS case is a limiting case of
+       our bound, saturating it"，即 BPS 是饱和不是违反；
+  (4) 该文对本式的改写是 "gravity is the weakest force"（§2.1, p.4，加引号），并注明高超对称
+      系统里速度无关的力全部抵消"but as we will see, our constraints still apply"。
+
+  归一化见 conv.extremality-normalization（该文对"1"只给相对定义，且文内两套极端性归一化
+  不统一）。
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.1, eq. (1), p.4；§2.1, p.4–p.5（'gravity is the weakest force' 与 BPS 关系）；§2.2, p.6（m < qM_Pl 的另一写法）"
+tags: [swampland, conjecture, weak-gravity, gauge-coupling, amnv]
+notes: |
+  from: arkani-hamed-2006#E5、#E8、#E9（另见 #Q1、#Q2、#Q3）。
+
+  【"Weak Gravity Conjecture"这个名字不出自本文】21 页逐页确认全文没有该词组；原文只有标题
+  "Gravity as the Weakest Force"、正文加引号的 "gravity is the weakest force"、Figure 1 图题的
+  "the weakness of gravity"。本图的 id 前缀 `wgc-` 只是本项目的记号，**此名非原文措辞**
+  （抽取记录 #Q3、#U8）。
+
+  【禁止补系数】本文没有任何形如 m ≤ √2 g q M_Pl 或含 (d−2)/(d−3) 因子的形式；那些是后来文献
+  的内容（抽取记录 #Q1）。
+
+  【loose 与 sharp 必须分卡】原文自己分 §2（loose，用 ≲）与 §3（sharp，用 ≤ 且指定对哪个态）。
+  sharp 三版见 swampland.wgc-sharp-form-i / -ii / -iii。
+
+  【Λ ≲ gM_Pl 未建卡】§2.1 eqs. (3)–(4) 与 §2.2 eq. (5) 给出截断标度 Λ ≲ gM_Pl 的两条独立启发式
+  论证（单极子磁场能量线性发散；最小荷单极子不应已是黑洞）。本轮未建该节点，留给后续
+  （抽取记录 #E7、#E13：那是"一个节点多条推导"的好用例）。
+author: curator
+created: "2026-09-11"

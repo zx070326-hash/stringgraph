@@ -1,0 +1,86 @@
+id: spectrum.one-loop-torus-amplitude--via-gauge-fixed-path-integral
+target: spectrum.one-loop-torus-amplitude
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.string-s-matrix
+    note: |
+      提供 (5.3.9)：模积分 ∫_F d^μt、每个模一个 (1/4π)(b,∂_{t^k}ĝ) 插入、每个被固定的顶点算子
+      一个 c 插入。原书 §7.3 第一句逐字「We now apply to the torus the general result (5.3.9)」。
+  - id: worldsheet.torus-two-moduli-two-ckv
+    note: |
+      提供 μ = κ = 2：两个模（τ 的实部与虚部）⇒ 两个 b 插入；两个 CKV（平移）⇒ 原本要固定
+      一个顶点算子，而原书改用「CKG 体积有限、直接除掉」的办法（(7.3.3)）。
+  - id: worldsheet.modular-fundamental-domain
+    note: |
+      提供积分区域 F₀。原书逐字「The fundamental region F₀ and the factor of ½ from w → −w were
+      discussed in section 5.1」——即这一整块外包给 §5.1，本章不重述。
+      ⚠ 该卡用的是 (5.1.15) 的**闭区域**写法，而 §7.3 (7.3.14) 用**开区域**；两者差一层零测度边界，
+      原书未说明（抽取记录 Q1）。对本卡的积分值无影响。
+  - id: worldsheet.free-scalar-torus-partition-function
+    note: 提供 (2) 里的标量部分：Z_X^{26} = (4π²α'τ₂)^{−13}|η(τ)|^{−52}，以及整体因子 iV₂₆。
+  - id: worldsheet.bc-ghost-torus-partition-function
+    note: |
+      提供 ⟨b b̃ c̃ c⟩_{T²} = |η(τ)|⁴（(7.2.27)）以及它与插入位置无关这一事实——后者正是
+      (7.3.2) 把 b 插入的 ∫d²w 直接做成 2πi b_{ww}(0) 的依据。
+      |η|⁴ 与标量的 |η|^{−52} 相乘给 |η|^{−48}，即「鬼场抵消两套振子」。
+  - id: worldsheet.b-insertion-beltrami-form
+    inferred: true
+    note: |
+      提供 (1/4π)(b,∂_{t^k}ĝ) 这个插入的形式，(7.3.2) 就是把它在环面上算出来
+      （用 (7.2.13) δτ = −2iτ₂ε 给出的 ∂_τ g_{w̄w̄} = i/(2τ₂)）。
+      **inferred: true**（2026-09-11 按 reviewer-v1-ch7 补标）：原书在 (7.3.1)/(7.3.2) 处
+      **没有回引** (5.3.9)/(5.4.x) 的 b 插入一般式，而是直接写出环面上的结果；
+      「(7.3.2) = 一般式在环面上的特例」这一认定是本图做的比对，来源里没有这句话。
+      按项目原则 5，来源中找不到对应论证的边必须标 inferred。
+  - id: spectrum.covariant-external-legs-on-shell
+    inferred: true
+    note: |
+      **inferred: true**。(3) 里 Σ_{i∈H^⊥} q^{h_i−1}q̄^{h̃_i−1} 的 −1 是 (L₀,L̃₀) = (1,1) 的质量壳
+      移位（等价于 α'm² = 4(h−1)）。原书 (7.3.8) 直接写出 h_i − 1，不引式号；本图挂这条边
+      是为了让那个 −1 有出处。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eqs. (7.3.1)–(7.3.8), p.216–217"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E17–#E21，L1（原书页图逐字；
+      (7.3.6) 所在页单页重渲染复核）。
+summary: |
+  **(1) 落到环面。** (5.3.9) 在 μ = κ = 2 的环面上写成 (7.3.1)：½∫_{F₀}dτdτ̄ ⟨BB̃ c̃c V₁ ∏∫V_i⟩，
+  其中 B = (1/4π)(b,∂_τ g)。
+
+  **(2) 算 b 插入。** 用 (7.2.13) δτ = −2iτ₂ε 得 ∂_τ g_{w̄w̄} = i/(2τ₂)，故
+  B = (i/4πτ₂)∫d²w b_{ww}(w)；因鬼场期望值与位置无关（(7.2.27)），w 积分直接做掉，得 B → 2πi b_{ww}(0)。
+  （用到 d²w = 2dσ¹dσ² 与 g_{ww̄} = ½，原书在 (7.3.2) 下方专门提醒。）
+
+  **(3) 除掉 CKG。** 环面平移群体积有限（= 环面面积 (2π)²τ₂ 的相应因子），故不必固定顶点算子：
+  把固定的那个顶点算子也改成积分，同时除以 CKG 体积（(7.3.3)）。得 (7.3.4)，
+  「所有顶点算子地位相同」。原书逐字：「It is easy to do this by hand here.」
+
+  **(4) 去掉顶点算子。** (7.3.4) 在 n = 0 时仍然有意义，即 (7.3.5) = 陈述 (1)。
+  原书说 (7.3.4) 也可以「directly」导出而不必先固定一个顶点算子，**但没给那个直接导法**。
+
+  **(5) 代入 26 维平坦时空。** ⟨bb̃c̃c⟩_{T²} = |η|⁴，X 部门给 iV₂₆(4π²α'τ₂)^{−13}|η|^{−52}，
+  相乘得 (7.3.6)。一般 CFT 情形（d ≥ 2 个非紧平坦方向）鬼场仍抵消两套玻色振子，得 (7.3.8)。
+gaps:
+  - "**F₀ 与 ½ 整体外包给 §5.1**：本章一字不证。且 (5.1.15)（闭区域）与 (7.3.14)（开区域）
+     的写法不一致，原书未说明（抽取记录 Q1）。"
+  - "**τ₂ → ∞ 端发散**：(7.3.15) 给 iV₂₆∫^∞(dτ₂/2τ₂)(4π²α'τ₂)^{−13}[exp(4πτ₂) + 24² + …]，
+     首项（快子）发散。原书说这可以由正质量平方解析延拓来定义，**但延拓后的能量密度是复的**
+     （逐字：「there is still a pathology — the continued energy density is complex」）。
+     ⚠ 并注意 24² 是无质量态的简并度 24×24，不是 2⁴（抽取记录 #E25 的警告）。"
+  - "**「无快子时收敛」是断言**：原书 (7.3.16) 下逐字「in the absence of tachyons it will converge」，
+     **没有证明**。真正要比较的是态密度的增长（worldsheet.high-weight-density-from-central-charge，
+     ∼ exp[π(c+c̃)/(12ℓ)]）与压制因子 exp(−πα'm²τ₂)，原书对此**完全没有讨论**（抽取记录 Q2）。"
+  - "**路径积分测度未定义**（继承自 worldsheet.string-s-matrix）；k⁰ 转动给出的 i 是定义而非计算
+     （继承自 worldsheet.free-scalar-torus-partition-function）。"
+  - "**求和与模积分能否交换**在 (3) 的一般 CFT 形式里没有讨论（抽取记录 Q2）。"
+  - "**(7.3.4) 的「直接导法」缺失**：原书断言不必经过「先固定一个顶点算子」也能得到 (7.3.4)，
+     未给出该导法。本图的 (1) 因此只有一条路线。"
+notes: |
+  由 curator 于 2026-09-11 建立。
+  **2026-09-11 更正（reviewer-v1-ch7 建议）**：`worldsheet.b-insertion-beltrami-form` 那条边
+  补标 `inferred: true`（原书在本处不回引 b 插入的一般式，见该边的 note）。
+  故本推导现有**两条** inferred 边：b 插入的一般式，以及 (3) 中 h_i − 1 的质量壳移位出处。
+author: curator-polchinski-ch7
+created: "2026-09-11"

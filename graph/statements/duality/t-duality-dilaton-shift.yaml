@@ -10,7 +10,7 @@ statement: |
     **κ'_{26} = (√α' / R) · κ_{26}**;
   再由低能有效作用量中 κ^{−2}_{26} ∝ e^{−2Φ}（即 κ_{26} ∝ e^{Φ}）得
     **e^{Φ'} = (√α' / R) e^{Φ},   即  Φ' = Φ − ln(R / √α')**,
-  等价地 e^{−Φ} = (√α' / R) e^{−Φ'}，这正是原书 (8.3.31) 的写法。
+  等价地 e^{−Φ} = (√α' / R) e^{−Φ'}，这与原书 (8.3.31) 等价【订正 2026-09-12，reviewer-batch15：L1 页读记录 §12.6 记 (8.3.31) 为 e^{Φ'} = (α'^{1/2}/ρ)e^Φ；e^{−Φ} = √α'R^{−1}e^{−Φ'} 是 Schrans 转写 §8.7 的形式（E156），非原书写法】。
   即 T 对偶不是只把半径取倒：它同时移动 dilaton，使 26 维的 Newton 常数按上式变换。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius]
 sources:

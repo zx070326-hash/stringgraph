@@ -1,0 +1,58 @@
+id: worldsheet.bc-ghost-torus-partition-function--via-zero-mode-insertion
+target: worldsheet.bc-ghost-torus-partition-function
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.torus-partition-function-general-cft
+    note: 提供带 (−1)^F 的迹定义与 H = L₀+L̃₀−(c+c̃)/24。
+  - id: worldsheet.bc-ghost-central-charge
+    note: 提供 λ = 2 时 c = c̃ = −26，于是 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}。
+  - id: worldsheet.bc-ghost-cft
+    note: 提供 b、c 的模展开与四个鬼场基态（b₀、c₀ 的两维零模空间，左右各一份共四态）。
+  - id: worldsheet.bc-ghost-hermitian-conjugation
+    inferred: true
+    note: |
+      **inferred: true**。「c₀b₀c̃₀b̃₀ 把四个基态投影到唯一的 |↑↑⟩」这一步要用零模的内积归一化与
+      b₀|↑⟩ = |↓⟩、c₀|↓⟩ = |↑⟩ 型关系；原书 (7.2.26) 直接断言该投影，不引式号。
+  - id: worldsheet.torus-two-moduli-two-ckv
+    note: |
+      提供「环面上 μ = κ = 2、且 CKV 与全纯二次微分都是常数」，这正是原书用来说明
+      (7.2.27) 的结果**与四个鬼场插入位置无关**的理由（逐字：「because the CKV and quadratic
+      differentials on the torus are constants」），也是「零模个数 = 2 + 2」的来源。
+  - id: math.dedekind-eta-function
+    note: 把 (qq̄)^{1/12}∏|1−q^n|⁴ 收成 |η(τ)|⁴（(qq̄)^{1/12} = |q^{1/24}|⁴ 的实现）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eqs. (7.2.23)–(7.2.27), p.212–213"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E11，L1（原书页图逐字）。
+summary: |
+  **(1) 裸迹。** 每个 n ≥ 1 的 b、c 模是费米型二能级系统，给因子 (1+q^n)（左右各一份、b 与 c 各一份
+  共四次方）；零模给四个基态；前因子由 c = c̃ = −26 定为
+  q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}。得 (7.2.23)。
+
+  **(2) 周期性修正。** 反交换场的朴素迹 = 时间方向反周期；FP 行列式要求鬼场与坐标变换同周期，
+  故必须插 (−1)^F。带 (−1)^F 后四个基态两两相消（鬼数 mod 2 相反），Z(τ) = 0（(7.2.24)）。
+  路径积分侧的同一事实：模与 CKV 给出鬼场零模，行列式为零。
+
+  **(3) 饱和零模。** 插 c₀b₀c̃₀b̃₀ 把基态投影到 |↑↑⟩ 一个（(7.2.26)）；同时 (−1)^F 把每个
+  非零模因子的符号从 (1+q^n) 翻成 (1−q^n)。得 (7.2.27)：(qq̄)^{1/12}∏_{n≥1}|1−q^n|⁴ = |η(τ)|⁴。
+
+  **(4) 位置无关性。** 环面的 CKV 与全纯二次微分都是常数，故四个插入的位置不影响结果——
+  这一步是原书明写的，也是后面 (7.3.2) 把 b 插入的 w 积分直接做掉的依据。
+gaps:
+  - "**整体符号未算**（作者自承）：原书逐字「we do not try to keep track of the overall sign,
+     setting it to be positive」。故 (3) 的符号是约定，不是结论。"
+  - "**(−1)^F ↔ 周期性边条件的对应无论证**：原书用「Recall … for anticommuting fields the simple
+     trace corresponds to a path integral with antiperiodic boundary conditions」一句带过，
+     本图没有这条对应的独立来源。"
+  - "**「鬼场零模 ⇒ 行列式为零」是路径积分侧的启发性说法**，没有测度层面的论证
+     （测度本身在 worldsheet.string-s-matrix 一层就已无定义）。"
+notes: |
+  由 curator 于 2026-09-11 建立。唯一的 inferred 边是零模投影用到的鬼场厄米共轭/零模归一化，
+  原书在 (7.2.26) 处不引式号。
+
+  **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：bc-ghost-central-charge 那条边的 note 原写
+  「(qq̄)^{−(c+c̃)/24} = (qq̄)^{13/12}」，指数错一倍（c = c̃ = −26 ⇒ −(c+c̃)/24 = 13/6）。
+  已改为 q^{−c/24} q̄^{−c̃/24}；目标陈述 (1) 同步订正。
+author: curator-polchinski-ch7
+created: "2026-09-11"

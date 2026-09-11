@@ -1,0 +1,66 @@
+id: spectrum.one-loop-torus-amplitude
+kind: proposition
+title: "环面真空振幅：Z_{T²} = ∫_{F₀}(dτdτ̄/4τ₂)⟨bb̃c̃c⟩，26 维平坦时空给 iV₂₆∫_{F₀}(dτdτ̄/4τ₂)(4π²α'τ₂)^{−13}|η(τ)|^{−48}"
+statement: |
+  把 S-矩阵主公式（worldsheet.string-s-matrix，(5.3.9)）用到环面上。环面有两个模与两个 CKV
+  （worldsheet.torus-two-moduli-two-ckv）；CKG（环面平移）体积有限，故不必固定顶点算子，
+  可把它除掉（原书 (7.3.3) 的平均化因子 ∫dwdw̄/(2(2π)²τ₂)，分母是环面面积 = CKG 体积）。于是
+
+  (1)（**无顶点算子的形式**）
+        Z_{T²} = ∫_{F₀} (dτ dτ̄ / 4τ₂) ⟨ b(0) b̃(0) c̃(0) c(0) ⟩_{T²} ,
+      积分区域是模群的基本域 F₀（worldsheet.modular-fundamental-domain），
+      dτdτ̄ = 2dτ₁dτ₂，且已含 w → −w 带来的因子 ½（原书把 F₀ 与该 ½ 整体外包给 §5.1）。
+
+  (2)（**26 维平坦时空的取值**）取 26 个自由标量（worldsheet.free-scalar-torus-partition-function）
+      与 λ = 2 的 bc 鬼场（worldsheet.bc-ghost-torus-partition-function）：
+        Z_{T²} = i V₂₆ ∫_{F₀} (dτ dτ̄ / 4τ₂) (4π²α'τ₂)^{−13} |η(τ)|^{−48} 。
+      **指数账**：(4π²α'τ₂)^{−13} 的 −13 = −26/2（26 个 Z_X 各出一个 τ₂^{−1/2}）；
+      |η|^{−48} 中 48 = 24 × 2 —— **鬼场的 |η|⁴ 恰好抵消两套振子，只剩 26 − 2 = 24 个横向模
+      的左右两侧贡献**。
+
+  (3)（**一般 CFT 的推广**）只要有 d ≥ 2 个非紧平坦方向，鬼场仍抵消两套玻色振子，
+        Z_{T²} = i V_d ∫_{F₀}(dτdτ̄/4τ₂)(4π²α'τ₂)^{−d/2} Σ_{i∈H^⊥} q^{h_i−1} q̄^{h̃_i−1} ,
+      其中 H^⊥ 是闭弦 Hilbert 空间**去掉鬼场、去掉 μ = 0,1 的振子、去掉非紧动量**后的部分。
+
+  ⚠ **本卡不断言收敛性**。(2) 的积分在 F₀ 的 τ₂ → ∞ 端**发散**，发散来自闭弦快子
+  （被积函数 ∼ exp(4πτ₂)）；原书判定该发散是「有快子的理论的人为产物」，并说
+  「in the absence of tachyons it will converge」——**那是断言，无证明**（见本卡唯一一条推导的 gaps）。
+  τ₂ → 0 端不在 F₀ 内，这正是 spectrum.one-loop-uv-finiteness-from-modular-invariance 的内容。
+
+  **本卡不断言什么**：不断言模不变性（那是 spectrum.one-loop-torus-amplitude-modular-invariant）；
+  不给出带顶点算子的 n 点单圈振幅（原书说「包括顶点算子期望值 (7.2.4) 并对位置积分即可」，
+  本图未建）；不涉及真空能的时空解释。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eqs. (7.3.5)(7.3.6), p.217（(1) 与 (2)）；一般 CFT 的 (7.3.8a)(7.3.8b), p.217（(3)）；测度与 CKG 的处理见 (7.3.1)–(7.3.4), p.216–217；τ₂ → ∞ 的发散见 (7.3.15)(7.3.16), p.219"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E17–#E21、#E25，
+      等级 **L1（原书页图逐字；(7.3.6) 一页经单页重渲染复核）**。
+      原文对本式的自评逐字（p.217）：「This vacuum amplitude is quite interesting and **will be our
+      main focus**. Not only does it reveal the essential difference between the ultraviolet behaviors
+      of string theory and field theory, but it has an important physical interpretation of its own.」
+      原文关于指数的逐字：「Note the exponent −48, from the 24 left- and right-moving oscillators.
+      The contribution of the ghosts cancels two sets of oscillators, leaving only the contribution of
+      the transverse modes.」
+tags: [spectrum, one-loop, torus, vacuum-amplitude, dedekind-eta, moduli, ghosts]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E19/#E20/#E21 建立。
+  **本章的主角节点**，也是四张单圈曲面卡里唯一的闭、可定向面那张。
+
+  **四曲面各一卡，不合成一卡**（lead 指示 + 项目原则 1）：环面 (7.3.6)、圆柱 (7.4.1)、
+  Klein 瓶 (7.4.15)、Möbius 带 (7.4.22) 的依赖与下游用法都不同（环面靠模不变性截断，
+  另三个靠 Ω 投影与 cross-cap 几何，且它们的 t → 0 发散要靠开闭弦通道重解释）。
+  ⚠ **式号对应（lead 派工单里 Möbius 与 Klein 的式号写反了，此处按 L1 抽取纠正）**：
+  (7.4.15) 是 **Klein 瓶**，(7.4.22) 是 **Möbius 带**；见抽取记录 #E36/#E37。
+
+  **习题 7.12 的独立判据（本图未建卡）**：原书习题要求验证「环面真空振幅只在 D = 26、D' = 24 时
+  模不变」，并引 Shapiro (1972)。⚠ 那是**习题**，且 Shapiro (1972) 在 literature/sources.bib
+  **未登记**，故不作为 worldsheet.critical-dimension-* 的第五条路线建卡，只在此指路
+  （抽取记录 §5-B4）。
+author: curator-polchinski-ch7
+created: "2026-09-11"

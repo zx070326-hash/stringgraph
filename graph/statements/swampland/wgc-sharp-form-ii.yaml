@@ -1,0 +1,52 @@
+id: swampland.wgc-sharp-form-ii
+kind: proposition
+title: "AMNV sharp 版 (II)：最轻带电粒子满足 M_min/q_{M_min} ≤ 1"
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §3 (p.10) 的第二个 sharp 版本，逐字（M_Pl = 1 单位）：
+
+    "(II)  (M_min/q_{M_min}) ≤ 1,   for the lightest charged particle;"
+
+  其中"1"按 conv.extremality-normalization 取（大极端黑洞的 M/Q 比值）。
+
+  原文对本条的定位（§3, p.11，逐字）：
+
+    "Of course the *lightest* charged particle is exactly stable, as is the particle with
+     smallest (M/Q) (as follows trivially from the triangle inequality), so both (II) and (III)
+     are well-defined conjectures. Obviously (II) is the stronger of the two (and it clearly
+     implies (III)) and *forces* the effective theory to contain a light charged particle.
+     Conjecture (III) can in principle be satisfied by a heavy state with large Q which would
+     reduce the impact of the inequality on physics at low energies. Even though we have no
+     counterexamples for conjecture (II) most of our evidence only supports the weaker
+     conjecture (III)."
+
+  §6 (p.16–17) 给出的加限定版（**措辞与 §3 不同**），逐字："The strongest form is that for the
+  lightest charged particle along the direction of some basis vectors in charge space, the
+  (M/Q) ratio is smaller than for extremal black holes."
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §3, (II), p.10；§3, p.11（(II) 强于 (III) 与证据自陈）；§6, p.16–p.17（带'基方向'限定的措辞）"
+tags: [swampland, conjecture, weak-gravity, amnv]
+notes: |
+  from: arkani-hamed-2006#E18、#E20、#E25。
+
+  【"Weak Gravity Conjecture"这个名字不出自本文】21 页逐页确认全文没有该词组；id 前缀 wgc- 只是
+  本项目的记号（抽取记录 #Q3、#U8）。
+
+  【status 的原文依据】本条的证据只有"**无反例**"，正面证据（§4 的杂化弦格论、§4.1 的谱流）
+  原文自陈只支持较弱的 (III)：逐字 "Even though we have no counterexamples for conjecture (II)
+  most of our evidence only supports the weaker conjecture (III)."
+  => 本卡的唯一支持推导是 --via-no-counterexamples（conjecture-support / conjecture）。
+
+  【反例方向：原文明确邀请】§6 逐字："The specific forms of our conjecture are sharp, and if they
+  are wrong it should be possible to find simple counter-examples in string theory, though we
+  have not found any."（抽取记录 #E25）。本轮无反例，故不建 refutation 推导文件。
+
+  【与 (III) 的关系】原文说 (II) "clearly implies" (III)，本图把这条蕴含建成
+  swampland.wgc-sharp-form-iii--via-form-ii。注意方向：**(II) ⇒ (III)**，不是反向。
+
+  【暴胀推论的挂点】§6 说 strong form 与 weak form 对暴胀给出 "two very different pictures"，
+  且原文认为 weak form "as is more likely"。若后续建暴胀排除节点，必须挂在本卡（strong form）
+  上并写明这一点（抽取记录 #E26）。
+author: curator
+created: "2026-09-11"

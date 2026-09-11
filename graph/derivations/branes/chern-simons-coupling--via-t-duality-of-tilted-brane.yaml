@@ -1,0 +1,42 @@
+id: branes.chern-simons-coupling--via-t-duality-of-tilted-brane
+target: branes.chern-simons-coupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-rr-coupling
+    note: 供给出发点 ∫ C_2（(13.3.16) 的 1 膜耦合）与「T 对偶使 C 形式增减一个指标」的规则。
+  - id: branes.t-duality-changes-brane-dimension
+    note: |
+      供给「对 2 方向作 T 对偶，(1,2) 面内的倾斜 1 膜变成 2 膜」；原书 (13.3.16)→(13.3.17) 明写作 2 方向的
+      T 对偶。⚠ 玻色弦卡。
+  - id: branes.wilson-line-eigenvalues-are-brane-positions
+    inferred: true
+    note: |
+      供给「膜位置 X^2 ↔ 规范场 2πα'A_2」的对应，用来把倾斜 ∂_1X^2 换成 2πα'F_{12}。
+      **标 inferred**：原书 (13.3.16)→(13.3.17) 只写「作 2 方向的 T 对偶」并引用 (13.1.5) 的 C 变换，
+      没有在此处逐字引用位置–规范场对应；且那张卡是玻色弦 Vol.1 §8.6 的。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, pp. 149–150：(13.3.16) → 2 方向 T 对偶（用 (13.1.5) 的 C 变换）→ (13.3.17) → 推广到一般构型与多张膜 → (13.3.18)；「We are not keeping track of the normalization …」"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E21（L1）。
+  - ref: polchinski-1998-v2
+    loc: "§13.1, (13.1.5a,b,c)，p. 138（R–R 势在 T 对偶下增减 9 指标，「up to signs」）"
+    note: 抽取记录 #E2（L1）。
+summary: |
+  (1) 取 (1,2) 面内、以 X^2 = X^2(x^1) 倾斜的 1 膜，其 R–R 耦合
+      ∫C_2 = ∫dx^0(dx^1C_{01} + dx^2C_{02}) = ∫dx^0dx^1(C_{01} + ∂_1X^2 C_{02})（(13.3.16)）。
+  (2) 对 2 方向作 T 对偶：1 膜变 2 膜；膜位置 X^2 变为规范场 2πα'A_2，∂_1X^2 → 2πα'F_{12}；
+      C_{01} → C_{012}、C_{02} → C_0（(13.1.5)）。得
+      ∫dx^0dx^1dx^2(C_{012} + 2πα'F_{12}C_0)（(13.3.17)）：2 膜上的磁通携带 D0 荷。
+  (3) 推广到任意构型、任意 p、n 张膜，并把 B_2 与 2πα'F_2 按规范不变组合合并：
+      iμ_p∫Tr[exp(2πα'F_2 + B_2) ∧ Σ_q C_q]（(13.3.18)），积分只取世界体体积形式的项。
+  (4) 归一化不追踪；若追踪则得 μ_p = μ_{p−1}/2πα'^{1/2}，与 (13.3.7) 一致。
+gaps:
+  - "**归一化未追踪**：原书逐字「We are not keeping track of the normalization but one could」；(13.3.18) 中各项的相对系数（含因子 i）在本章无推导。"
+  - "**曲率修正未算**：原书逐字「these can be obtained from a string calculation」——本章不做、不引，本卡因此在标题与陈述里明写「无曲率项」。"
+  - "**从 (13.3.17) 到 (13.3.18) 的推广**（一般构型、B_2 的并入、指数形式）原书只以一句话给出。"
+  - "**R–R 势的 T 对偶 (13.1.5) 本图无节点**，且原书自陈「up to signs」。"
+  - "**位置–规范场对应在超弦语境下无节点**（边标 inferred）；上游两张 T 对偶卡均为玻色弦。"
+  - "**(13.6.23)/(13.6.35) 的两次荷一致性检验**（D0–D2、D0–D4）本图未建卡，故本卡在图上没有独立的下游验证。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

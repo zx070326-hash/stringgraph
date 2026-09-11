@@ -1,0 +1,50 @@
+id: swampland.moduli-space-volume
+kind: definition
+status: physical-argument
+title: 标量场空间体积 V_Φ（带 Λ 正规化的定义）
+statement: |
+  Vafa 2005 §2 (p.2–p.3) 的定义，逐字（**原文所有公式均无编号**）：
+
+    "Consider a quantum theory of gravity, coupled to massless scalar fields Φ^i with no
+     potential  V(Φ^i) = 0.  There could also be some other fields in the theory, but we
+     will concentrate on the massless fields. We have the low energy effective action
+       S = ∫ M_P^{d-2} R + g_{ij}(Φ) ∂Φ^i ∂Φ^j + ...
+     where ... represents higher derivative terms, as well as possibly other fields in the
+     theory. Consider the volume of the scalar field space
+       V_Φ = ∫ dΦ √(g(Φ))
+     Let us be a bit more precise: As we vary the value of Φ the effective field theory may
+     break down, due to the appearance of light states. Let us treat the effective field
+     theory as being valid for energy scales  E ≪ Λ  where Λ is some fixed scale. Let us
+     consider regions in Φ space where all the integrated out massive excitations have
+     masses m ≫ Λ. Let us call this region B^Λ. Consider the refined volume in the field
+     space
+       V_Φ^Λ = ∫_{B^Λ} dΦ √(g(Φ))
+     We define
+       V_Φ = V_Φ^Λ|_{Λ→0}
+     and view Λ as a regulator."
+
+  **本图一律取第二个（带正规化的）定义 V_Φ = V_Φ^Λ|_{Λ→0}**，不取朴素的 ∫dΦ√g；
+  否则与"允许 ~|logΛ| 发散"的精确化对不上。
+uses: []
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §2, p.2–p.3（本文无编号公式，loc 只到章节与页码）"
+tags: [swampland, definition, moduli-space, volume]
+notes: |
+  from: vafa-2005#E6（另见 #E7、#Q1、#U7）。
+
+  【status = physical-argument 的理由】(a) 定义体依赖"低能有效作用量"与"被积掉的重激发"，
+  都不是本图中的已定义对象；(b) **原文没有说 g_ij 是否含 M_P 的幂次**，即体积按什么单位量
+  在原文中欠定（抽取记录 vafa-2005#Q1、#U7）。本卡通过 conv.moduli-metric-planck-units
+  补齐单位，但那是本项目按 Ooguri–Vafa 2006 的补齐，不是 Vafa 2005 的内容——凡用到这一补齐
+  的边一律标 inferred: true。
+
+  【原文的两处松散记法】(1) √(g(Φ)) 里的 g 是 det g_ij，**原文没写 det**，逐字是 √(g(Φ))；
+  (2) B^Λ 的定义里有两个不同的量：EFT 有效于 E ≪ Λ，而 B^Λ 是"被积掉的重激发质量 m ≫ Λ"
+  的区域；原文未说 Λ 与 Ooguri–Vafa 的截断 ε 的关系。
+
+  【记号】原文 Planck 质量记号在同一篇里不统一：§2 作用量写 M_P^{d-2}（大写下标 P），
+  §2 后文写 M_p ≠ ∞（小写 p）。本卡照抄各处原样。
+author: curator
+created: "2026-09-11"

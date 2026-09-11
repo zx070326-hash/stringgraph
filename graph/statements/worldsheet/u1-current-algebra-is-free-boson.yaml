@@ -1,0 +1,55 @@
+id: worldsheet.u1-current-algebra-is-free-boson
+kind: proposition
+title: "每个 U(1) 流代数同构于一个自由玻色子 CFT：j^a j^b ∼ δ^{ab}/z² 的流可写成 j^a = i∂H^a（H 按 H(z)H(0) ∼ −ln z 归一），其 Sugawara 张量为 T^s = (1/2) :jj:"
+statement: |
+  设二维 CFT 含若干全纯 (1,0) 流 j^a，其 OPE 无 1/z 项、且双极点系数归一为
+    j^a(z) j^b(0) ∼ δ^{ab}/z²                                                （(11.5.14)）
+  （即 g 为 abel 的、结构常数为零的流代数，math.affine-lie-algebra-current-ope 的 (11.5.1) 在 c^{ab}{}_c = 0
+  且 k^{ab} = δ^{ab} 时）。则每个这样的 U(1) 流代数**同构于一个自由玻色子 CFT**：
+    j^a = i ∂H^a                                                              （(11.5.15)）,
+  H^a 为按 conv.nonembedding-scalar-normalization 归一（H(z)H(0) ∼ −ln z）的全纯标量。
+  原书逐字：'From this OPE and holomorphicity it follows that each U(1) current algebra is isomorphic to a
+  free boson CFT, j^a = i∂H^a (11.5.15). We will often use this equivalence.'
+
+  相应地，U(1) 流的 Sugawara 能动张量为
+    T^s_B = (1/2) :jj:                                                        （(11.5.27)）
+  （原书逐字：'as one sees by writing the current in terms of a free boson, j = i∂H'），
+  中心荷 c = 1（(11.5.25) 在 dim(g) = 1、h(g) = 0 时）。
+
+  **本命题不断言的内容**：
+    (1) 不断言「同构」的精确含义（是流生成的子代数的表示同构于 Fock 空间，还是整个 CFT 同构于自由玻色子
+        ——原书未说明；后者显然不成立，因为一般 CFT 还有别的场）；
+    (2) 不断言 (11.5.27) 有独立于自由玻色子的证明（抽取记录 E61 备注：'由自由玻色子反推，不是独立证明'）；
+    (3) 不断言 H^a 的零模 / 动量格结构（紧化半径、顶点算子 e^{iqH} 的谱），那是 compact.* 与玻色化各卡的内容。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.14)–(11.5.15), p. 68（U(1) 流的归一化 j^a j^b ∼ δ^{ab}/z²；'From this OPE and holomorphicity it follows that each U(1) current algebra is isomorphic to a free boson CFT, j^a = i∂H^a. We will often use this equivalence.'）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2.md E60；逐字读自原书页图 p. 68）。
+      抽取记录 E60 备注（逐字）：'注意 Polchinski 给这条的理由只有「From this OPE and holomorphicity it follows」——**没有证明**。'
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.27), p. 71（U(1) 情形 T^s_B = (1/2):jj:，'as one sees by writing the current in terms of a free boson, j = i∂H'）"
+    note: L1（抽取记录 E61）。
+tags: [current-algebra, u1, free-boson, bosonization, sugawara, cft]
+notes: |
+  【归一化核对】H(z)H(0) ∼ −ln z ⇒ ∂H(z)∂H(0) ∼ −1/z² ⇒ i∂H(z) i∂H(0) ∼ +1/z²，与 (11.5.14) 的 δ^{ab}/z² 一致 ✓。
+  这正是 conv.nonembedding-scalar-normalization（对嵌入坐标相当于 α' = 2）的系数；
+  若上游用 conv.alpha-prime-regge 的嵌入标量 X（∂X∂X ∼ −(α'/2)/z²），需 convention_map：j = i(2/α')^{1/2}∂X。
+
+  【与本图既有节点的接口】
+    · worldsheet.free-boson-central-charge-d（c = D）：本卡的 c = 1 是 D = 1 特例——**数值一致但不建边**，
+      因为 (11.5.27) 是由自由玻色子反推的（抽取记录 E61 备注 2）。
+    · worldsheet.fermion-bosonization-two-dimensions：复费米子的 U(1) 流 ψ̄ψ = i∂H 是本卡的一个实例（Vol.2 §10.3）。
+    · compact.self-dual-radius-su2-current-algebra：j³ ∝ ∂X_L 是本卡的 U(1) 子代数。
+    · formal/：virasoro-lean-2025 已形式化单分量 Heisenberg 代数的 Sugawara（c = 1，Lie 代数层面，无 OPE），
+      见 worldsheet.string-cft-is-a-vertex-algebra-v2 的来源限制；它形式化的是 (11.5.27) 的**模式版**，不含「同构于自由玻色子 CFT」。
+
+  【为什么 status 封顶 physical-argument】原书唯一的理由是 'From this OPE and holomorphicity it follows'。
+  数学上这条对应「Heisenberg 顶点代数由其生成场的 OPE 唯一决定」（重构定理的一个特例），
+  但那需要真空、分次等前提（见 worldsheet.string-cft-is-a-vertex-algebra-v2 notes 第 (1) 条），原书一概不提。
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

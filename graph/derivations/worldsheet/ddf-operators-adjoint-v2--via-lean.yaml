@@ -1,0 +1,173 @@
+id: worldsheet.ddf-operators-adjoint-v2--via-lean
+target: worldsheet.ddf-operators-adjoint-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.vertex-operator-adjoint
+    inferred: false
+    note: |
+      **本推导的实质输入**：顶点算子半的伴随 (V^{(n)}_K)† = V^{(−n)}_{−K}，
+      Lean 侧 `Fock.towerPairing_towerVertex_left`（该卡 2026-09-12 起的 formal.lean_decl）。
+      `towerPairing_ddfSummand_left` 逐字调用它。
+      ⚠ 该卡现为 **formalized**（推导 --via-lean，同一个 Lean 文件），故这条边不压低本推导状态。
+      注意被调用的版本**不需要**类光性，这是本目标 (2)(a) 的来源。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **被断言伴随关系的那个算子本身**：该卡的 formal.lean_decl `StringFormal.NoGhost.ddfOp`
+      就是本推导中的 A^ε_n，横向性 (T) ε·k_0 = 0 是它的定义参数（`hεb : dotVec η ε b = 0`），
+      模态和 A^ε_n = Σ_m (ε·α_m) V^{(n)}_m 是它的定义式。
+      本推导用到该卡的 `ddfOp_apply`（「任意够大的窗口都算得对」）把 A^ε_n 展成有限和。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+      ⚠ **量词对照**：该卡的【Lean 比本卡更一般的三处】(2) 逐字提醒「下游凡引用
+      『A^i_n（n ≠ 0）』的命题仍按各自陈述的 n ≠ 0 读，本卡的 n ∈ Z 不自动放宽它们」。
+      本目标 v2 **显式**把量词写成 n ∈ Z（含 0），正是为了对上 Lean，不是自动放宽。
+  - id: worldsheet.ddf-transversality-gives-local-finiteness-v2
+    inferred: false
+    note: |
+      **使 A^ε_n 的模态和是有限和**，从而「把伴随逐项搬过去」这件事有意义。
+      Lean 侧本推导用的是该卡的 formal.lean_decl
+      `StringFormal.NoGhost.ddfSummand_apply_eq_zero_of_notMem_window`：
+      证明里取窗口 s = `ddfWindow n v ∪ (ddfWindow (−n) w).image (−·)`，
+      两侧的项在 s 外逐向量为零，于是两个有限和可以逐项比对。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **承载断言的空间与型**。目标 (1) 的等式跨两层（A^ε_n：第 N 层 → 第 N+n 层），
+      只在塔上、且只在「层间正交」这条约定下有意义。该卡的 formal.lean_decl
+      `StringFormal.NoGhost.Fock.towerPairing` 就是目标里的 ⟨·,·⟩_T。
+      ⚠ 层间正交在 Lean 里是 `towerPairing` 的**定义**及其展开
+      `towerPairing_single_single_of_ne`，**不是**被证明的物理事实：见 gaps 第 1 条
+      与目标边界 (e)。该卡是 formalized 定义卡，不压低本推导状态。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      **偏振振子模那一半的伴随**：(α^μ_m)† = α^μ_{−m}（该卡 (1)(b)），
+      经 `Fock.pairing_mode_left` 延拓到**一切整数 m 含 m = 0**，
+      再由 `towerPairing_towerMode_left` 逐层提升到塔上，最后由
+      `Fock.towerPairing_towerModeVec_left` 对偏振指标求和得 (α^ε_p)† = α^ε_{−p}。
+      **不**使用该卡的 (4)（不定性）——那是类时方向的事。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexAdjoint.lean :: StringFormal.NoGhost.Fock.towerPairing_ddfOp_left（目标 (1)）；镜像 Fock.towerPairing_ddfOp_right；逐项 Fock.towerPairing_ddfSummand_left；偏振模 Fock.towerPairing_towerModeVec_left；顶点算子半 Fock.towerPairing_towerVertex_left；Fock 层 Fock.pairing_vertexOsc_left；定义与窗口 formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.{ddfOp, ddfOp_apply, ddfSummand, ddfWindow, ddfSummand_apply_eq_zero_of_notMem_window, towerModeVec, towerModeVec_mul_towerVertex_of_transverse}；塔上型 formal/StringFormal/NoGhost/TowerPairing.lean :: StringFormal.NoGhost.Fock.{towerPairing, towerPairing_towerMode_left, towerPairing_towerShift_left, towerPairing_single_single_of_ne}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；lead 以 **fb006f5** 合入 main
+      （formal 侧提交 8b4e706）。该文件 16 条声明，formalizer 自述公理只有
+      propext / Classical.choice / Quot.sound。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      这是本推导 `status: formalized` 的唯一依据。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **只承载语境，不承载论证**：教科书对本命题只写一句「A^i_n 是厄米的」，没有推导、没有编号；
+      核实等级章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3）。
+      本推导的严格性完全不依赖它。列在这里是为了让本推导与姊妹推导
+      --via-vertex-operator-adjoint 指向同一处文献语境。
+summary: |
+  机器检查的证明，三层，每层都短——实质内容已由被依赖的
+  worldsheet.vertex-operator-adjoint（顶点算子半）与 worldsheet.fock-indefinite-form（振子半）出完。
+
+  **第 1 层（偏振振子模）：`Fock.towerPairing_towerModeVec_left`，(α^ε_p)† = α^ε_{−p}。**
+  α^ε_p = Σ_μ η_μ ε^μ α^μ_p 是有限（D 项）线性组合，逐项用塔上的
+  `towerPairing_towerMode_left`（即 (α^μ_p)† = α^μ_{−p}，由 Fock 层的
+  `Fock.pairing_mode_left` 逐层提升）。证明是一句 `Finset.sum_congr`。
+  注意这里**不需要** `hη`：偏振是标量系数，塔上的 `towerMode` 不移动层。
+
+  **第 2 层（单项）：`Fock.towerPairing_ddfSummand_left`，(α^ε_j V^{(n)}_j)† = α^ε_{−j} V^{(−n)}_{−j}。**
+  两步：
+    · 先对乘积逐因子取伴随。伴随把两个因子**反序**，得到的是
+      V^{(−n)}_{−j} α^ε_{−j}（顶点算子在左）；
+    · 再用**横向性**把它换回 DDF 求和的书写顺序 α^ε_{−j} V^{(−n)}_{−j}：
+      Lean 侧是 `towerModeVec_mul_towerVertex_of_transverse η a b ε hη hεb (−n) (−j) (−j)`，
+      其内容是「ε·k_0 = 0 ⟹ α^ε 与 V 两个因子**严格对易**」（两者之间无缩并）。
+  ⇒ 这是横向性在本推导中的**唯一**作用（除了它本来就是 A^ε_n 有定义的前提）：
+  它管的是「把伴随排回书写顺序」，**不是**使伴随存在。
+
+  **第 3 层（求和）：`Fock.towerPairing_ddfOp_left`，(A^ε_n)† = A^ε_{−n}。**
+  取窗口 s := `ddfWindow n v ∪ (ddfWindow (−n) w).image (fun j => −j)`。
+  由 worldsheet.ddf-transversality-gives-local-finiteness-v2 的
+  `ddfSummand_apply_eq_zero_of_notMem_window`，左端的项在 s 外为零、
+  右端的项在 `s.image (−·)` 外为零，故两边都是**同一个有限指标集上的和**
+  （`ddfOp_apply` 允许任取够大的窗口）。沿 j ↦ −j 重标求和指标
+  （`Finset.sum_image`，单射性由 `omega`）后逐项调用第 2 层，完。
+
+  **本推导用到与不用到的假设，逐条核对**（这是目标 (2) 的依据）：
+    用到：`hη : ∀ μ, η μ * η μ = 1`（度规分量平方为 1，本开发处处如此）；
+          `hεb : dotVec η ε b = 0`（横向性，本来就是 `ddfOp` 的参数）。
+    **不**用到：`dotVec η b b = 0`（类光 k_0² = 0）；
+                `dotVec η b a = 1`（归一化 2α' k_0·p = 1）；
+                n ≠ 0；ε 属于正交归一横向标架；ε·p = 0；b ≠ 0；D 的任何取值。
+  VertexAdjoint.lean 对 `towerPairing_ddfOp_left` 的文档注释逐字写下了这一点：
+  "In particular neither `k_0² = 0` nor the normalisation `2α' k_0·p = 1` is needed —
+  those are what make `A^ε_n` commute with the Virasoro generators, not what makes it have
+  an adjoint."
+
+  **与姊妹推导 --via-vertex-operator-adjoint 的实质差别**：那条的第 2 步把
+  「(V^{(n)}_J)† = V^{(−n)}_{−J} 要靠同点 E₊E₋ 重排序、重排序因子 ∝ z^{2α' n² k_0²}
+  由类光条件为 1」当作论证的关键。**本推导表明那一步是虚构的**：
+  V(b)_K = E₋(b)E₊(b) 已是正规序，其伴随 E₊(b)†E₋(b)† = E₋(−b)E₊(−b) 仍是正规序，
+  产生因子自动在左，没有换序、没有 c-数因子、不需要 b·b = 0。
+  姊妹推导保留为文献叙述的历史记录，其 gaps 已相应标注【已消解 2026-09-12】。
+gaps:
+  - |
+    **层间正交是约定，不是结论。** 目标 (1) 的等式跨两层，其成立依赖
+    worldsheet.momentum-tower-fock-space (2) 规定的「N ≠ M 时跨层配对为零」。
+    Lean 侧这是 `towerPairing` 的**定义**（各层 `Fock.pairing` 的单位权求和）及其展开
+    `towerPairing_single_single_of_ne`，不是 ⟨p|p′⟩ ∝ δ^D(p−p′) 的推导；
+    本图没有节点承载连续动量本征态与 δ 归一化。形式化关闭的是「从这条约定出发的推理」。
+  - |
+    **R-双线性，不是 Hermitian 半双线性**（目标边界 (a)）。Lean 侧全程不做复共轭；
+    VertexAdjoint.lean 文件头 "Remaining gaps" 第 1 条逐字：
+    "Still `R`-bilinear, not Hermitian; no positivity, no completion, no zero modes beyond
+    the tower."  物理上的协变 Fock 空间是复空间，A^† 还含一次复共轭；两者在实极化下一致。
+    **这条对无鬼定理尤其要紧**：无鬼定理断言的是 Hermitian 形式的半正定性，
+    本推导只给双线性型的转置关系。
+  - |
+    **本推导不给任何正模性。** 同一文件头逐字：
+    "In particular *nothing here says the DDF states have positive norm*; the no-ghost
+    theorem needs `⟨A^{i_1}_{-n_1} ⋯ |0⟩, ⋯⟩` to be computed from `(A^ε_n)^† = A^ε_{-n}`
+    **together with** the DDF commutation relations … That assembly is not done here."
+    该装配在图上是 worldsheet.transverse-ddf-fock-gram-matrix（条件命题，status rigorous，
+    reviewer 复核待补），其前件 (H1) 是 worldsheet.ddf-transverse-oscillator-algebra-v2
+    （rigorous，**未形式化**）。⇒ **无鬼定理的 (1b) 步不因本推导而变成 formalized。**
+  - |
+    **围道积分写法与模态和写法的等价未形式化**（目标边界 (f)）。文献（GSW §2.3.3、GT 1972）
+    写的 A^i_n 是围道积分；本推导证的是模态和版本。该字典由
+    worldsheet.ddf-contour-equals-mode-sum 承载，status physical-argument，
+    是 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 在本轮之后**唯一**剩下的瓶颈。
+  - |
+    **「存在类光 k_0 使 k_0·p ≠ 0」的可满足性未证**（继承 worldsheet.ddf-operators-v6 的
+    【本卡明确不断言】(d)）：这是关于**实**洛伦兹二次型的存在性断言，在一般交换环 R 上为假。
+    本推导在一般 R 上工作，把 DDF 数据当作给定。
+  - |
+    **A^ε_n ≠ 0 未证。** 本推导对退化情形（例如 ε = 0，或 R 中 2 不可逆导致的塌缩）
+    同样成立，因为等式两侧都可能是零映射。伴随关系本身不含任何非平凡性信息。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **【本推导的所有依赖都是 formalized】**，这是目标 v2 能够真正落到 formalized 的原因：
+  worldsheet.vertex-operator-adjoint（2026-09-12 起 formalized）、
+  worldsheet.ddf-operators-v6、worldsheet.ddf-transversality-gives-local-finiteness-v2、
+  worldsheet.momentum-tower-fock-space、worldsheet.fock-indefinite-form。
+  没有一条 inferred 边。
+
+  **【为什么本推导不需要 worldsheet.radial-hermitian-conjugation】** 姊妹推导
+  --via-vertex-operator-adjoint 的第 1 步以「厄米共轭在径向量子化下作用为 z ↦ 1/z̄，
+  故权 h 主场的模满足 (J_m)† = J̄_{−m}」为前提，因而依赖那张 effective = physical-argument 的卡。
+  本推导**完全不走那条路**：它在代数 Fock 空间上逐因子算，不出现任何解析对象
+  （没有 z、没有围道、没有共形权）。这是两条路线机器不同的直接后果，
+  也是本推导能高于 physical-argument 的原因。
+
+  **【顺带被机器证明、但不属于本目标的一条】**
+  `Fock.towerPairing_ddfSummand_left` 是**逐项**的伴随关系
+  (α^ε_j V^{(n)}_j)† = α^ε_{−j} V^{(−n)}_{−j}，比目标 (1) 细一级。
+  图上没有节点承载它（它是 A^ε_n 求和号内部的记账）。若 reviewer 认为下游需要，
+  可单列成卡；curator 判断暂不需要。
+
+  **本推导 author 是 curator（接线），Lean 证明的作者是 formalizer**（见 sources 第一条的提交号）。
+author: curator
+created: "2026-09-12"

@@ -63,6 +63,7 @@ statement: |
       本节点新增的信息量只在 (1)，(2) 是把 (1) 与那两条已有节点合起来的记账。
   (e) **不**覆盖退化扇区 k_0·p = 0（含 p = 0）：那里 A^i_n 本身没有定义。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+superseded_by: worldsheet.ddf-operators-adjoint-v2
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -197,5 +198,35 @@ notes: |
   Lean 侧 A^i_n 的伴随仍不可用（缺 `vertexOsc` / `towerVertex` 的伴随，即
   worldsheet.vertex-operator-adjoint；TowerPairing.lean 文件头 Gaps 第 2 条），
   故上面【升级路径】(i) 的内容不变。
+
+  【2026-09-12：本卡已换代为 worldsheet.ddf-operators-adjoint-v2（curator，
+  分支 agent/curator/adjoint-wire；**本卡 statement 一字未动**，只加 superseded_by 与本段）】
+  换代的两条理由（详见 v2 的 notes【为什么新建 v2 而不是就地改旧卡】）：
+  (1) **拆卡收尾**。本卡的 (2)（Gram 矩阵推论）已于 2026-09-11 拆到
+      worldsheet.transverse-ddf-fock-gram-matrix，但本卡 statement 仍带着 (2) 的全文，
+      因而无法标 formalized——Lean 侧没有任何东西说 DDF 态有正模
+      （VertexAdjoint.lean 文件头 "Remaining gaps" 第 1 条逐字：
+      "nothing here says the DDF states have positive norm"）。v2 只含 (1)。
+  (2) **量词放宽**。本卡写 n ∈ Z \\ {0}、i 取正交归一横向标架、并把 k_0² = 0 与
+      2α' k_0·p = 1 写进前提；Lean 证的是 n ∈ Z（**含 0**）、ε 只需 ε·k_0 = 0、
+      且**不用**那两条。放宽量词等于改陈述，必须换代。
+
+  本卡 notes 里有两处现已**被机器证伪 / 证明为虚构**，原文保留不删，在此逐条标注：
+  · 【与 worldsheet.virasoro-generators-adjoint 的关系】一段写「A^i_n 含**顶点算子**，
+    取伴随要把 E_+E_- 重排序，这一步本图与 Lean 侧都未做。因此本节点**不能**沿用
+    virasoro-generators-adjoint 的 formalized 状态」——**【已消解 2026-09-12】那一步不存在**：
+    V(b)_K = E₋(b)E₊(b) 已是正规序，其伴随 E₊(b)†E₋(b)† = E₋(−b)E₊(−b) **仍是正规序**，
+    产生因子自动落在左边，不需要换序，也不产生任何 c-数自缩并因子。
+    机器验证：`StringFormal.NoGhost.Fock.pairing_vertexOsc_left`（对**任意** b）、
+    `Fock.towerPairing_towerVertex_left`、`Fock.towerPairing_ddfOp_left`（VertexAdjoint.lean，fb006f5）。
+  · 【为什么不是 rigorous】一段写「本命题第 (1) 条的标准论证依赖顶点算子的伴随
+    （E_+E_- 重排序），不是有限步初等线性代数」——同上，**已消解**；
+    v2 走 --via-lean 直接是 formalized。本卡的旧推导
+    （现更名为 worldsheet.ddf-operators-adjoint-v2--via-vertex-operator-adjoint）
+    仍保留为 physical-argument 的历史记录。
+  · 【升级路径】(i) 写「需先在 VertexOperator.lean 上证 V(b)_J† = V(−b)_{−J}（在 b·b = 0 下），
+    再组装 A^i_n」——**已走完**（做在新文件 VertexAdjoint.lean 上，且**不需要** b·b = 0）；
+    其中的「结构性障碍：只有 R-双线性型、无 sesquilinear 结构」**仍然成立**，
+    已原样搬进 v2 的边界 (a) 与 v2--via-lean 的 gaps 第 2 条。
 author: curator
 created: "2026-09-11"

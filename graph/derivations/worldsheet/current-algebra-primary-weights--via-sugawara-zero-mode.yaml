@@ -1,0 +1,35 @@
+id: worldsheet.current-algebra-primary-weights--via-sugawara-zero-mode
+target: worldsheet.current-algebra-primary-weights
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.sugawara-central-charge
+    note: |
+      供给 L_0^s 与 L_m^s 的模式表达式 (11.5.26a,b)：正模项 j^a_{−n} j^a_n（n ≥ 1）湮灭主场态，
+      L_n^s（n > 0）的每一项 j^a_{n−m} j^a_m 中至少一个因子是正模（经 (11.5.3) 换序后仍如此），故湮灭主场态。
+  - id: math.affine-lie-algebra-current-ope
+    note: 供给模代数 (11.5.3)（换序时用）与零模构成 g（(11.5.4)），使 (11.5.38) 有意义。
+  - id: math.compact-lie-algebra-index-and-casimir
+    note: 供给 Casimir Q_r = t_r^a t_r^b d_{ab}（(11.4.7)）：j_0^a j_0^a 在 |r,i⟩ 上的作用即 Q_r。
+  - id: worldsheet.verma-module-v2
+    inferred: true
+    note: |
+      **inferred 的理由**：原书说主场态 'is a highest weight state of the Virasoro algebra'，本图用
+      worldsheet.verma-module-v2 的最高权态语言承接；原书此处不引 Vol.2 §15.1 或任何定义。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5 'Primary fields', eq. (11.5.38)–(11.5.41), pp. 72–73"
+    note: L1（抽取记录 polchinski-1998-v2.md E62）。
+summary: |
+  (1) 主场态被 j^a_n（n > 0）湮灭；L_n^s（n > 0）按 (11.5.26b) 是 Σ_m j^a_{n−m} j^a_m，每项至少含一个正模因子，
+      故 L_n^s 湮灭主场态——它是 Virasoro 最高权态。
+  (2) L_0^s 按 (11.5.26a) 作用：Σ_{n≥1} j^a_{−n}j^a_n 项为零，剩 j_0^a j_0^a/((k+h(g))ψ²)；
+      由 (11.5.38) j_0^a j_0^a 在表示 r 上是 Casimir Q_r，得 (11.5.39)/(11.5.40)。
+      第二个表达式 Q_r/(2k̂ + Q_g) 由 (k + h(g))ψ² = 2k̂ + Q_g（k = 2k̂/ψ²、h(g)ψ² = Q_g）而来。
+  (3) SU(2)：Q_j = j(j+1)、(k + h)ψ² = k + 2 ⇒ (11.5.41)。
+gaps:
+  - "**(1) 里「每项至少含一个正模因子」在换序后仍成立**：j^a_{n−m} j^a_m 中若 m ≤ 0 则 n − m > 0，把正模因子移到右边时产生的对易子项 (n−m) k̂ d^{aa} δ_{n,0} + i f j_{n}（(11.5.3)）在 n > 0 时前者为零、后者 j_n 仍是正模——原书一句话带过，本图补写于此、未逐项核对 L_0^s 的 2Σ 系数。"
+  - "**(k + h(g))ψ² = 2k̂ + Q_g 是本图由 (11.5.40) 两式相等反推的**，h(g) 的原书定义（§11.4 中段）未核实。"
+  - "**(3) 的 SU(2) 数值依赖 t^a 与 d^{ab} 的归一化**（目标卡 notes 的核对取 f = ε、d = δ），原书 (11.4.14) 的归一化未核实。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

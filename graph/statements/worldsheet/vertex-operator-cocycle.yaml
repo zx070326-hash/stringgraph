@@ -1,0 +1,106 @@
+id: worldsheet.vertex-operator-cocycle
+kind: proposition
+title: "格点动量的自由场指数顶点算子需要 cocycle 因子：正确定义是 C_k(α_0) °exp(i k_L·H_L + i k_R·H_R)°，C_k(α_0) = exp(πi Σ_{α>β} n_α α_{0β} k_α ∘ k_β)；此后偶 k∘k 的算子与一切顶点算子交换、奇 k∘k 的算子互相反对易"
+statement: |
+  【设定】一组自由（手征）玻色场 H_L, H_R，按 conv.nonembedding-scalar-normalization 归一。
+  考虑指数算子
+        exp( i k_L · H_L + i k_R · H_R )                              （(10.4.26)）
+  其动量 (k_L, k_R) 取值于一个格 Γ。记 k ∘ k′ 为 Vol.1 §8.4 引入的那个双线性型
+  （见"未核实的记号"一段）。
+
+  【断言 (1)：朴素写法带错误相位】把 (10.4.26) 按字面当作算子相乘时，
+  交换两个算子的次序会带出一个相位 **z^{−k∘k′}**，即朴素定义下的算子既不交换也不反对易，
+  统计**不正确**。（这正是 §10.3 脚注 2 指出的漏洞：不同 a 的 H^a 相互独立，
+  故 exp[i s_a H^a] 型算子"commute rather than anticommute"，
+  见 worldsheet.spin-field-vertex-operators 的断言 (6)。）
+
+  【断言 (2)：正确定义带 cocycle 因子】正确定义的顶点算子是
+        C_k(α_0)  ° exp( i k_L · H_L + i k_R · H_R ) °                （(10.4.27)）
+  其中 `° °` 是创生-湮灭正规序（原书 p. 7 的记号），cocycle 因子为
+        C_k(α_0)  =  exp( π i  Σ_{α > β}  n_α  α_{0β}  k_α ∘ k_β )    （(10.4.28)）
+  它是**动量零模算子 α_0 的函数**（这是关键：cocycle 不是常数相位，而是作用在动量本征
+  子空间上取不同值的算子）。原书逐字："This generalizes the simple case **(8.2.22)**."
+
+  【断言 (3)：修正后的统计】"**The reader can check** that vertex operators with **even k ∘ k**
+  now **commute with all vertex operators**, and those with **odd k ∘ k anticommute among
+  themselves**."（原书逐字。）
+
+  【未核实的记号 —— 本卡必须显式声明的限制】(10.4.28) 里的三个记号
+  **本图无节点、且抽取记录未给其定义**：
+    - `k ∘ k′`：Vol.1 **§8.4** 引入的双线性型（原书明写引用该节）；
+    - 指标 `α`、`β` 与整数 `n_α`：按本图的读法是"把 k 按 Γ 的一组基展开 k = Σ_α n_α k_α"
+      里的基标号与展开系数——**这是本图的读法，不是抽取记录或原书页图的逐字内容**；
+    - `α_{0β}`：动量零模算子 α_0 沿第 β 个基方向的分量——**同样是本图的读法**。
+  故本卡的断言 (2) 只作为**公式的逐字转录**成立；把它当成可计算的定义使用前，
+  必须先核实 Vol.1 §8.4 的记号（本轮未核实，记为公开问题）。
+
+  【本命题不断言的内容】
+    (1) **不**断言断言 (3) 的证明（原书逐字 'The reader can check'，正文不做）。
+    (2) **不**断言 C_k 满足什么 cocycle 条件（结合律/双线性型的二次上同调类），
+        也不断言它在同调类内的唯一性——现代文献（格顶点代数）里这些都是定理，
+        原书完全不谈。见 notes。
+    (3) **不**断言 Vol.1 (8.2.22) 的内容（本图无节点，未核实）。
+    (4) **不**断言"偶/奇 k∘k"与时空统计（玻色/费米）的对应，也不断言它与
+        worldsheet.rns-fermion-number-operator 的 exp(πiF) 的关系
+        （原书在此处不作这个连接）。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4 末, eq. **(10.4.26)**（一般自由场指数算子）、**(10.4.27)**（带 cocycle 的正确定义）、**(10.4.28)**（C_k(α_0) = exp(πi Σ_{α>β} n_α α_{0β} k_α ∘ k_β）, pp. 19–20；逐字 'This generalizes the simple case (8.2.22).' 与 'The reader can check that vertex operators with even k ∘ k now commute with all vertex operators, and those with odd k ∘ k anticommute among themselves.'"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E32；抽取者逐页读了
+      原书 §10.4 末的页图，三条式号与公式内容均直接看到）。
+      ⚠ (10.4.28) 里的 n_α、α_{0β} 的**含义**在抽取记录中没有解释，
+      原书在此处引 Vol.1 §8.4。见 statement 的「未核实的记号」一段。
+  - ref: polchinski-1998-v2
+    loc: "§10.3, **脚注 2**, p. 14（逐字：'The precise operator definition has a subtlety when there are several species of fermion. The H^a for different a are independent and so the exponentials commute rather than anticommute. A cocycle is needed, as in eq. (8.2.22). A general expression will be given in the next section.'）"
+    note: |
+      L1 一手（E26 备注）。★ 这是**作者自己**指出漏洞并预告修补的地方，
+      即 (10.4.26)–(10.4.28) 是 §10.3 自旋场那处漏洞的修补。
+      本卡因此是 worldsheet.spin-field-vertex-operators 的一条必要依赖。
+  - ref: polchinski-1998-v1
+    loc: "**§8.4**（k ∘ k′ 的记号）、**(8.2.22)**（简单情形的 cocycle）"
+    note: |
+      式号与节号出自 Vol.2 §10.4 的**明写**引用（L1，E32「文献列出的依赖」栏）。
+      ⚠ **Vol.1 侧本图无节点、内容未核实**。这不是可有可无的补充：
+      (10.4.28) 的公式**无法脱离 §8.4 的记号被使用**。见 derivation 的 gaps 与本卡的公开问题。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. **(10.6.4)**（顶点算子互绕一圈的相位 exp πi(F_1α_2 − F_2α_1 − F̃_1α̃_2 + F̃_2α̃_1)）与 **(10.6.5)**（相互局域性条件）, pp. 25–26"
+    note: |
+      L1 一手（E40）。引在此处是为了记明**本卡是 (10.6.4) 那个相位的技术前提**：
+      worldsheet.superstring-sector-consistency-conditions 的 notes 此前写着
+      「(a) 的相位公式依赖自旋场的分支切割…与 §10.4 末的 cocycle…**本图没有这两块的节点**」。
+      ⚠ **本卡不推导 (10.6.4)**：那个相位是按 F（自旋场个数）与 α（扇区）写的，
+      与 (10.4.28) 按格点动量写的 cocycle 之间的换算，原书**不给**，本图亦未做。
+tags: [cft, bosonization, cocycle, vertex-operator, statistics, lattice, worldsheet]
+notes: |
+  ★【本卡填的是 ch10/ch11 curator 都点名的一处悬空】
+  worldsheet.superstring-sector-consistency-conditions 的 notes 逐字写着：
+  「(a) 的相位公式依赖自旋场的分支切割…与 §10.4 末的 cocycle（(10.4.26)–(10.4.28)）。
+    **本图没有这两块的节点**（玻色化、自旋场、cocycle 均未建），故 (10.6.4) 那个相位
+    在本图无支撑推导。」本轮把三块都建出来了。
+  但要说清**接到什么程度**：自旋场（worldsheet.spin-field-vertex-operators）现在依赖本卡，
+  而 (10.6.4) 那个相位公式本身**仍未被推导**——见上面 sources 最后一条的警告。
+
+  【严格性的实际位置：数学侧早已解决，Polchinski 侧只有一句 'The reader can check'】
+  cocycle（又称 Klein 因子/twisting 因子）在格顶点算子代数的数学处理里是标准内容：
+  由格 Γ 上的双线性型给出的 2-cocycle 决定一个中心扩张，扭曲后的顶点算子有正确的统计，
+  且该 cocycle 在同调意义下唯一（Frenkel–Lepowsky–Meurman、Frenkel–Ben-Zvi 等）。
+  → 建议后续任务：在 math 区建「格顶点代数的 cocycle 扭曲」节点（可用 flm-1988 /
+    frenkel-benzvi-2004 作来源，两者已在 sources.bib），给本卡加一条 rigorous 的
+    独立推导路线；那同时会给 worldsheet.fermion-bosonization-two-dimensions 提供
+    严格版本的接口。
+
+  【公开问题（本轮未解决，建议交给 researcher）】
+    (Q1) Vol.1 **§8.4** 里 `k ∘ k′` 的定义是什么？(10.4.28) 无法脱离它使用。
+    (Q2) Vol.1 **(8.2.22)** 的内容是什么？它被 §10.3 脚注 2 与 §10.4 两处引为"简单情形"。
+    (Q3) (10.4.28) 里 `n_α`、`α_{0β}` 的确切含义（本卡给了一个读法但明确标为未核实）。
+  这三条是把本卡从"公式转录"变成"可用定义"的前提。
+
+  【与 worldsheet.rns-fermion-number-operator 的关系（本卡不断言）】直觉上"奇 k∘k ⇒ 反对易"
+  应与 exp(πiF) 的奇偶对应，但原书在 §10.4 末不作这个连接，本卡不断言。
+author: curator
+created: "2026-09-11"

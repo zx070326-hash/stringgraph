@@ -1,0 +1,47 @@
+id: spectrum.point-particle-circle-path-sum
+kind: proposition
+title: "点粒子的圆拓扑路径和 Z_{S¹}(m²) = iV_d∫₀^∞(dl/2l)(2πl)^{−d/2}exp(−m²l/2)"
+statement: |
+  设 d 维时空（体积 V_d）中一个质量 m 的自由点粒子，对**圆拓扑的世界线**求和
+  （即单圈真空图）。规范固定点粒子路径积分后
+    Z_{S¹}(m²) = V_d ∫ d^dk/(2π)^d ∫₀^∞ (dl / 2l) exp[ −(k² + m²) l / 2 ]
+               = i V_d ∫₀^∞ (dl / 2l) (2πl)^{−d/2} exp(−m² l / 2) ,
+  其中
+    l 是圆的模（世界线的固有长度参数），
+    ½(k² + m²) 是世界线哈密顿量，
+    分母的 2l 除掉世界线坐标的**平移与反向**两种过参数化（2 来自反向，l 来自平移）。
+  第二个等号里的 i 与第一个等号里的动量积分一样，是把闵氏号差下发散的 k⁰ 积分作转动后定义的。
+
+  ⚠ **本式在 l → 0 端发散**（UV 端）：被积函数 ∼ l^{−1−d/2}，这正是场论的紫外发散；
+  m² < 0（快子）时在 l → ∞ 端也发散。**本卡只陈述表达式，不断言任何收敛性。**
+
+  **本卡不断言什么**：不给出点粒子路径积分的规范固定推导（原书把它留作 exercise 5.2）；
+  不涉及 (7.3.17)–(7.3.24) 的真空能/宇宙学常数讨论（本图未建，见 notes）。
+uses_conventions:
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.9), p.218；推导被原书外包给 exercise 5.2"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E22，等级 **L1（原书页图逐字）**。
+      原文逐字：「This can be derived by gauge-fixing the point-particle path integral, **which was
+      given as exercise 5.2**. The result is intuitive: l is the modulus for the circle, ½(k²+m²) is
+      the world-line Hamiltonian, and the 2l in the denominator removes the overcounting from
+      **translation and reversal** of the world-line coordinate.」
+      ⇒ **原书正文没有推导，只有「结果是直观的」这一段解释**。
+tags: [spectrum, one-loop, field-theory-comparison, point-particle, uv-divergence]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E22 建立。
+
+  **为什么在图里需要它**：它是第 7 章两处论证的公共输入——
+  (a) spectrum.field-theory-region-sum-over-string-spectrum：把它按弦谱求和，得到与弦振幅
+      **同一个被积函数但更大的积分区域 R**，这就是 UV 有限性论证的对照项；
+  (b) spectrum.one-loop-cylinder-amplitude：原书逐字说圆柱振幅可以「by guessing (correctly)
+      that we should again sum the point-particle result (7.3.9) over the open string spectrum」得到。
+
+  **未建的相邻内容**：(7.3.17)–(7.3.26) 的宇宙学常数讨论（真空能 ρ₀ = (i/V_d)Σ_i(−1)^{F_i}Z_{S¹}(m_i²)、
+  Coleman–Weinberg 形式、「52 orders of magnitude too large」）本批次不建卡：它属时空有效场论一侧，
+  且原书那段自陈「ignoring the tachyon divergence」——即在玻色弦里那个量本身发散。
+  列入报告的「未做条目」，抽取记录 #E28。
+author: curator-polchinski-ch7
+created: "2026-09-11"

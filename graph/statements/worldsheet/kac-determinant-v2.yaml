@@ -129,7 +129,8 @@ notes: |
   · 一个**正例但不足以推广**：worldsheet.kac-determinant-level-two 在 N = 2 处给出 α₂ = 32 > 0
     （由 Lean 的 `gram_level_two_det` 加 curator 手算配平得到），
     worldsheet.kac-determinant-level-three 在 N = 3 处给出 α₃ = 2304 > 0
-    （该卡的 Kac 比较在 Lean 内部）。两者都不能推出一般 N 的正性——但见下面的 (D)。
+    （该卡的 Kac 比较在 Lean 内部），worldsheet.kac-determinant-level-four 在 N = 4 处给出
+    α₄ = 37748736 > 0（同样在 Lean 内部）。三者都不能推出一般 N 的正性——但见下面的 (D)。
 
   **(B) 低阶独立核对已通过。** worldsheet.kac-determinant-level-two（formalized）给出
   ⟨L₋₂v, L₋₂v⟩⟨L₋₁²v, L₋₁²v⟩ − ⟨L₋₂v, L₋₁²v⟩² = 2h(16h² + 2h(c−5) + c)。
@@ -159,7 +160,8 @@ notes: |
   **⚠ 指数是 p(N − rs) − p(N − r(s+1))，不是 p(N − rs)。** 后者（某些教材/讲义里随手写的
   形式）给出 N = 2 → 64、N = 3 → 36864，与实际的 Gram 行列式**不符**。
 
-  **逐项数值核对**（N = 1, 2, 3 来自本图的 formalized 卡，N = 4 来自 CAS）：
+  **逐项数值核对**（N = 1, 2, 3, 4 全部来自本图的 formalized 卡；N = 4 原为 CAS，
+  2026-09-11 起由 Lean 承载）：
   · N = 1：唯一指标 (1,1)，底 (2^1·1!) = 2，指数 p(0) − p(−1) = 1 − 0 = 1 ⇒ **α₁ = 2**。
     与 worldsheet.kac-determinant-level-two (1) 的 ⟨L₋₁v,L₋₁v⟩ = 2h 吻合。
   · N = 2：(1,1) 底 2 指数 p(1) − p(0) = 0；(1,2) 底 (2²·2!) = 8 指数 1；(2,1) 底 4 指数 1
@@ -168,8 +170,15 @@ notes: |
     指数 1；(2,1) 底 4 指数 p(1) − p(−1) = 1；(3,1) 底 6 指数 1
     ⇒ **α₃ = 2·48·4·6 = 2304**。与 worldsheet.kac-determinant-level-three (3) 的
     2304 = 48·16·3 吻合（该条在 Lean 内部，见那张卡）。
-  · N = 4：**α₄ = 37748736**（= 2·8·384·4·32·6·8），由 5×5 Gram 的 CAS 行列式反读；
-    对应的 det₄ 记在 formal/TODO.md 的 `kac-determinant` 条目下，**本图暂未立卡**。
+  · N = 4：(1,1) 底 2 指数 p(3) − p(2) = 1；(1,2) 底 8 指数 p(2) − p(1) = 1；(1,3) 底 48
+    指数 p(1) − p(0) = 0；(1,4) 底 (2⁴·4!) = 384 指数 1；(2,1) 底 4 指数 p(2) − p(0) = 1；
+    (2,2) 底 (4²·2!) = 32 指数 1；(3,1) 底 6 指数 1；(4,1) 底 8 指数 1
+    ⇒ **α₄ = 2·8·384·4·32·6·8 = 37748736 = 2²²·3²**。与 worldsheet.kac-determinant-level-four (3)
+    的 37748736 = 384·8·16²·3·16 吻合（该条在 Lean 内部，`gram_level_four_det_eq_kac`，
+    ShapovalovLevelFour.lean，合并提交 54898c6）。
+    **这是本公式的第二个 formalized 数据点**（第一个是 N = 3；N = 1、2 的 Gram 元 formalized
+    但 Kac 比较是手算）。此前此处写「由 5×5 Gram 的 CAS 行列式反读；本图暂未立卡」，
+    2026-09-11 起作废。
   ⇒ curator 2026-09-11 独立重算了上面四个乘积与两个「错版」数值（64 / 36864），全部复现。
 
   **本登记对 statement 的影响：无，且说明 v2 的写法是对的而且更稳。**
