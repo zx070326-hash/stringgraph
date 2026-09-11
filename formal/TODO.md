@@ -62,10 +62,10 @@
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
-`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9），两个独立小岛（只 import Mathlib）。
+`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9）与 `StringFormal/Math/E8Roots.lean`（A11），三个独立小岛（只 import Mathlib）。
 A1/A2/A3 对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5；
 A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-ch12.md` §5.4。
-五项都已完成，无 sorry，公理只有标准三条。
+A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根系 + §44.7 手算）。六项都已完成，无 sorry，公理只有标准三条。
 
 - [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
   `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
@@ -164,6 +164,35 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
   这比 `consistency.gravitational-anomaly-polynomial-d10` notes 里记的"与 Bilal 括号内容之比
   都是 3/4"更强：那个比较对括号整体重标度，不检验 `n` 无关项与 `n` 相关项在同一整体归一下是否相容；
   这里一个常数 `−1/96` 就把五个系数全部对上。建议补进该卡 notes（Lean 候选 A5 由此闭合且加强）。
+
+### `StringFormal/Math/E8Roots.lean`（Humphreys *Reflection Groups* §2.10 的 E₈ 根系；A11）
+
+- [x] `e8-root-power-sums`（A11）：E₈ 根系的幂和 `Σ_α (α·x)^k`，**对任意 `x : Fin 8 → ℚ` 证到**。
+  根表按 Humphreys §2.10 显式列出（`e8Roots : List (Fin 8 → ℚ)`：112 条 `±ε_i ± ε_j` +
+  128 条 `½Σ±ε_i`（偶数个负号，实现为"前后两半宇称相同"的两块）；`e8Roots_length = 240`（`rfl`）、
+  `e8_dim_248 : 240 + 8 = 248`）。
+  `e8_power_sum_two/four/six`：`P₂ = 60 p₂`、`P₄ = 36 p₂²`、`P₆ = 30 p₂³`（`p₂ = Σ x_i²`）；
+  `e8_trace_four/six`、`e8_trace_identities`：`P₄ = P₂²/100`、`P₆ = P₂³/7200` = GS (12b′)(12c′) =
+  vRSV (176)(177)。与 `literature/extractions/math-sources.md` §44.7 的手算逐项一致，
+  两块分别为 `vec_k = 28p₂ / 16p₄+12p₂² / 60p₂p₄−32p₆`、`spin_k = 32p₂ / 24p₂²−16p₄ / 30p₂³−60p₂p₄+32p₆`。
+  **证明技术**：六次幂 240 项直接 `ring` 会爆（旋量块 128 × 1716 单项式）；改为把 128 条旋量根
+  写成 `{偶}×{偶} ∪ {奇}×{奇}`，内层对 8 个符号型先做二项展开（`inner_ev_six` 等，`ring` 只见
+  5 变量六次），外层再合并，`ring` 每次不超过 ~3000 单项式；全文件约 70 s。
+  **数据自检**（不参与幂和证明）：`e8Roots_normSq`（每条根 `Σα_i² = 2`，按成员结构证）、
+  `e8Roots_nodup`（240 条两两不同：kernel `decide` 不能算 ℚ，改让 `norm_num` 求出每条根的
+  四进制指纹 `key : ℕ`，再 `decide` 比较 240 个自然数）、`e8RootSet_card = 240`（`Finset`）、
+  `e8RootSet_power_sums`（`Finset` 形式的三条幂和）。
+  **未做 / 不在 Lean 内的数学前提**（docstring 已写明）：(i) `Tr_248 F^k = Σ_α (α·x)^k`，即
+  "伴随表示的 248 个权 = 240 条根 + 8 个零权，在 Cartan 元 `F = diag(x)` 上求值"；(ii) 要把
+  恒等式从 Cartan 子代数推广到整个 e₈ 需要 Chevalley 限制定理（math-sources §44.4，最弱一环）；
+  (iii) "这 240 个向量就是 E₈ 的根"在此是**定义**（Humphreys 的表），不是李代数定理；
+  (iv) 根表的**完备性**（"L 中所有长度² = 2 的向量都在表里"）未证，只证了 `⊆` 方向（normSq）。
+  建议图接线：**不要**把 `lean_decl` 直接挂到 `math.e8-adjoint-trace-identities`（该卡陈述的是
+  e₈ 上的伴随迹，比 Lean 证的宽）；应新建 `math.e8-root-system-power-sums`（formalized，
+  `lean_decl: StringFormal.Math.E8.e8_trace_identities`），再给 `math.e8-adjoint-trace-identities`
+  加一条 `--via-root-power-sums` 推导，依赖新卡 + "伴随权 = 根 ∪ 零权"（待建）+ Chevalley 限制
+  （待建）。这条推导比现有 `--via-casimir-structure`（physical-argument）强：系数来历有了。
+  Humphreys Table 1 的次数表 `2, 8, 12, 14, 18, 20, 24, 30` 在此路线中**不需要**。
 
 ## Virasoro
 
