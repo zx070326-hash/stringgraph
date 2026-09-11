@@ -1,0 +1,82 @@
+id: worldsheet.riemann-roch-kappa-minus-mu-nonorientable
+kind: proposition
+title: "Riemann–Roch（Polchinski 形式，不可定向支）：紧无边连通不可定向世界面上 κ − μ = 3χ"
+statement: |
+  设 M 是**紧、无边、连通、不可定向**的二维世界面（如 RP₂、Klein 瓶，即球面接上奇数/偶数个
+  交叉帽），χ 是它的 Euler 数（worldsheet.worldsheet-euler-number）。记
+    μ = 世界面**度规**的实模数目 = dim ker P₁^T（worldsheet.moduli-condition-traceless-transverse），
+    κ = 共形 Killing 向量的实数目 = dim ker P₁（worldsheet.conformal-killing-equation）。
+  则
+    κ − μ = 3 χ 。
+
+  ⚠ **本卡与 worldsheet.riemann-roch-kappa-minus-mu-v2 的唯一差别是定向性假设**：v2 限**可定向**，
+  本卡限**不可定向**。两卡的公式逐字相同，论证也是同一条（鬼数反常，本身不用定向性）；
+  分卡的理由是**数学路线（Riemann–Roch / 黎曼面）只对可定向面有效**，
+  故不可定向支的有效状态只能由物理论证承载，不应与 v2 的两条推导混在一张卡上。
+  v1（worldsheet.riemann-roch-kappa-minus-mu，已 superseded）的 statement 曾写「可定向或不可定向」，
+  本卡是那半句里**不可定向**的那一半的落点。
+
+  ⚠ **不含亏格公式。** 原书紧接 (5.2.9) 写的 −3χ = 6g − 6 逐字限定 "for a **closed oriented** surface"，
+  **不属于本卡**；不可定向面的 χ 由交叉帽计数给出（RP₂：χ = 1；Klein 瓶：χ = 0），
+  本卡只断言 κ − μ 与 χ 的关系，不断言 χ 的亏格表达式。
+
+  ⚠ **μ 只数度规的模，不含顶点算子的位置**（同 v2）；换算见 worldsheet.moduli-integration-parameter-count。
+
+  ⚠ **带边情形不在本卡范围内**（Möbius 带虽不可定向但有边界，故不在内）：带边曲面上的 κ 与 μ
+  必须配上边界条件，本图尚未为带边情形定义 μ。
+uses_conventions:
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.2, eq. (5.2.9), p.152（陈述；原书写作 μ − κ = −3χ，**未限定可定向**）；§5.2, eq. (5.2.11a), p.152（χ > 0 : κ = 3χ, μ = 0）；§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md #E75/#E76/#E82（三条均 **L1 原书页图**）。
+      **本卡为什么可以挂这两个式号（关键证据，逐字）**：
+      (a) p.152 的 (5.2.9) 上下文只说「The metric moduli correspond to the kernel (5.2.6) of P_1^T and
+          the CKVs to the kernel (5.2.7) of P_1 … The Riemann–Roch theorem relates … μ − κ = −3χ」——
+          **句中没有 oriented 字样**；定向性限定只出现在**紧接的下一句**
+          「**For a closed oriented surface** −3χ = 6g − 6」，即原书自己把限定加在**亏格公式**上，
+          而不是加在 (5.2.9) 上。故 (5.2.9) 覆盖不可定向面，(5.2.11a) 同理（其论证是
+          P₁^TP₁ = −½∇² − ¼R 的正定性 + 「Weyl 变换可使 R 为常数」，全是不用定向性的黎曼几何）。
+      (b) 原书 §5.2 脚注 1（p.153）逐字「an antiholomorphic transition function is also possible.
+          For the oriented string we forbid this by choosing a standard orientation; **for the unoriented
+          string it is allowed.** The term Riemann surface in the strict sense refers to an oriented
+          manifold without boundary.」⇒ 原书 §5.2 的框架**有意**同时覆盖无取向弦，
+          只是「黎曼面」这个词保留给可定向情形。
+      (c) 原书 §6.1「The projective plane」(pp. 168–169) 就在这套计数下处理 RP₂
+          （「There are no moduli. The CKG is … SO(3)」），即把 §5.2 的 μ/κ 计数直接用于不可定向面。
+      ⚠ 本条**不**承载任何不可定向面上的 κ、μ 数值：κ(RP₂) = 3 是本图代入得到的
+        （worldsheet.rp2-conformal-killing-group），原书不写这个数字。
+  - ref: schrans-2020
+    loc: "§5.22–§5.23（笔记 p.261–262），条目 [5.90]：「…which leads to the Riemann-Roch theorem (5.2.9)」"
+    note: |
+      伴读笔记，只用于**式号锚定**（正文级引用，本章最强的一条）。
+      ⚠ [S] 同样**不**区分可定向/不可定向，也不讨论不可定向面上的这条关系。
+tags: [worldsheet, moduli, ckv, riemann-roch, euler-number, counting, nonorientable]
+notes: |
+  **建卡理由（2026-09-11，curator-batch10-14-fix，依 reviewer-batch11 M1 / reviewer-batch12「高」）**：
+  worldsheet.rp2-conformal-killing-group--via-sphere-involution 原先把 κ − μ = 3χ 挂在
+  worldsheet.riemann-roch-kappa-minus-mu-v2 上，而 v2 的 statement **限可定向**，RP₂ **不可定向**——
+  这是一处**范围错位**（推导用了超出被引卡断言范围的结论）。reviewer 给的两种修法里，
+  lead 选 (a)「新建不可定向支的卡」而不是 (b)「把 RP₂ 那条边标 inferred」，理由：
+  原书对不可定向面确实用同一套计数（见 sources (a)(b)(c) 三条逐字证据），
+  标 inferred 会把「有来源但需要分卡」误记成「无来源」。
+
+  **v2 卡 notes 里那句「本轮不建，避免在没有来源的情况下先占 id」现已被本卡取代**，
+  同时 v2 notes 中「v1 的物理推导（鬼数反常）也是在可定向语境下做的」一句已删——
+  那句与 v2 自己的推导 notes（「Polchinski §5.3 的鬼数反常论证并未限定可定向」）矛盾，
+  且正是它导致本图误以为不可定向支无论证可挂。
+
+  **有效状态：physical-argument，且不可能更高。** 本卡只有一条推导（鬼数反常），
+  数学路线（math.quadratic-differentials-minus-holomorphic-vector-fields → v2--via-riemann-roch）
+  **对本卡无效**：Riemann–Roch 设在黎曼面（=可定向）上，不可定向情形要走定向双覆盖 +
+  对合不变子空间，本图无来源（math-sources.md Q34）。
+  ⇒ 这正是分卡的收益：v2 的瓶颈可以被数学路线抬高，本卡的瓶颈不会被错误地一起抬高。
+
+  **交叉检验（不是论证）**：χ(RP₂) = 1 配 μ(RP₂) = 0 给 κ = 3，与原书 §6.1 的「CKG = SO(3)」
+  （3 维实李群）相容。⚠ 这个检验**不独立**：本图里 κ(RP₂) = 3 就是这么代出来的，
+  而「球面旋转群 = SO(3)、实维 3」在本图**没有数学来源**
+  （见 worldsheet.rp2-conformal-killing-group--via-sphere-involution 的 gaps 第二条）。
+  Klein 瓶（χ = 0）本图无节点，故无第二个检验点。
+author: curator-batch10-14-fix
+created: "2026-09-11"

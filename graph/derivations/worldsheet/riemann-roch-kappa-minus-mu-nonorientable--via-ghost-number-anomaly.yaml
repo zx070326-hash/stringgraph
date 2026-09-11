@@ -1,0 +1,131 @@
+id: worldsheet.riemann-roch-kappa-minus-mu-nonorientable--via-ghost-number-anomaly
+target: worldsheet.riemann-roch-kappa-minus-mu-nonorientable
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ghost-number-current-weyl-anomaly
+    note: |
+      提供 ∇_a j^a = ((1−2λ)/4)R，λ = 2 时为 −(3/4)R。
+      ⚠ **该反常是局域的、且两端都是标量（j^a 的散度与 R）**，其推导（TJ 的 OPE）
+      不用世界面定向，故对不可定向面逐字照用。这是本推导可以搬到不可定向支的根据。
+  - id: worldsheet.genus-g-ghost-path-integral
+    note: |
+      提供「(5.3.9) 里 b 插入有 μ 个、c 插入有 κ 个」——鬼数流计的是 c 数减 b 数，
+      故路径积分的鬼数是 κ − μ。这是本推导的另一半输入。
+      ⚠ 该卡写在一般世界面上，未按定向性分情形。
+  - id: worldsheet.string-s-matrix
+    note: 鬼数不守恒的记账是在这个公式的插入上做的。
+  - id: worldsheet.worldsheet-euler-number
+    convention_map: |
+      跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
+      （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
+      按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}，
+      故 χ = (1/4π)∫d²σ g^{1/2}R + 边界项。继承该约定登记的缺口。
+    note: |
+      提供 χ = (1/4π)∫ g^{1/2} R，把 ∫√g ∇_a j^a 换算成 χ。
+      ⚠ **该积分在不可定向面上仍有定义**：g^{1/2}d²σ 是密度、R 是标量，不需要整体定向
+      （对比「∫ω 需要定向」的微分形式写法）。本图未见来源对这一点作说明，
+      但它不影响式子的意义，故不标 inferred；记录在 gaps 第二条。
+  - id: worldsheet.conformal-killing-equation
+    note: κ 的定义。⚠ 该方程 (P₁δσ)_{ab} = 0 是张量方程，不用定向性。
+  - id: worldsheet.moduli-condition-traceless-transverse
+    note: |
+      μ 的定义。⚠ 该定义写在紧无边曲面上，δ'g 是张量、不需要定向；
+      但**来源与本图都没有专门讨论「不可定向时这一定义是否需要修改」**，见 gaps 第三条。
+  - id: worldsheet.sphere-conformal-killing-group
+    note: |
+      **比例常数的标定输入**：提供 κ(S₂) = 6（(6.1.5a)/(6.1.5b) 的两片正则性直接构造）。
+      本推导（同 v2 的同名推导）只导出 κ − μ ∝ χ，系数 3 全靠球面这一个例子定出。
+      不标 inferred：来源 §5.3 就地用球面标定，且原书把标定的结果 (5.2.9) 写成**不限定向**的一般式
+      （见目标卡 sources (a)），故「用可定向的例子定出对两支通用的常数」是来源自己的做法。
+      ⚠ 但这一步在不可定向支上多了一层普适性假设，见 gaps 第一条。
+      ⚠ 该卡片明确声明不断言 μ(S₂) = 0，故标定所需的另一半（μ(S₂) = 0）**不由本条边承载**。
+  - id: worldsheet.bc-ghost-number-anomaly-sphere
+    inferred: true
+    note: |
+      **同一机制的 g = 0 特例，作为标定的独立佐证**：该节点用同一条鬼流非张量变换律
+      (2.5.17)|_{λ=2} 在球面两片上算围道积分之差，得每个手征部门 3、合计 6，
+      即 κ − μ = 6，与用 (κ, μ) = (6, 0) 标定出的 3χ = 6 一致。
+      标 inferred：原书 §5.3 在标定处不回指 §6.3，这条「特例 ⇒ 一般式的系数」的接法是本图补的；
+      且该节点带**勘误依赖**（[S] 称印刷版 (6.3.6) 有误、官方勘误表本项目未取得）。
+      ⚠ 球面可定向，故它对本卡（不可定向支）只是常数的佐证，不是本卡范围内的检验点。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出 (5.2.9)；该推导全程不使用世界面定向）；§5.2, eq. (5.2.9), p.152（被导出的一般式，原书未限定可定向）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E82（L1，经 schrans-2020 §5.22–§5.23
+      锚定式号，条目 [5.90] 逐字「…which leads to the Riemann-Roch theorem (5.2.9)」）。
+      **本条与 worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly 引的是同一段原书**：
+      那条推导的 notes 自己就写着「**本推导的覆盖面大于新目标**：Polchinski §5.3 的鬼数反常论证
+      并未限定可定向」。本推导就是把那句话落成图上的节点，使不可定向支不必去借 v2 的断言。
+  - ref: polchinski-1998-v1
+    loc: "§6.1, eq. (6.1.5a)/(6.1.5b)（标定所用的 κ(S₂) = 6）；§6.3, eq. (6.3.6)（同一反常在 S₂ 上给出的 3）"
+    note: |
+      只承载**比例常数标定这一步的两个输入**，不承载 §5.3 的反常计算本身。
+      抽取记录 #E89（κ(S₂) = 6，L1）与 #E96（S₂ 上必须三个 c 插入，L1，**带勘误依赖**）。
+summary: |
+  **与 worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly 逐步相同**，
+  只是目标是不可定向支；原书 §5.3 的论证一步也不用定向性，故整条照搬：
+
+  把鬼数反常当作**算子方程**，于是路径积分中的鬼数不守恒：
+    δ_{g#} ∫[dφ] e^{−S} ∝ ε ∫ d²σ ĝ^{1/2} ∇_a j^a = ε ∫ d²σ ĝ^{1/2} ((1−2λ)/4) R 。
+  代 λ = 2 与 χ = (1/4π)∫ d²σ ĝ^{1/2} R，右端 ∝ χ（比例常数在本路线不被算出）。
+  另一方面，(5.3.9) 中 b 插入有 μ 个、c 插入有 κ 个，鬼数流计的是 c 数减 b 数，
+  故同一个变分给出 iε(κ − μ) ∝ εχ。
+  **比例常数不是算出来的，而是用球面这一个例子标定的**：球面 χ = 2、μ = 0、κ = 6
+  给 6 = 3·2，于是常数定为 3，得 κ − μ = 3χ。
+
+  **为什么这条论证与定向性无关（本推导的净内容）**：逐项检查上式用到的每个对象——
+  ∇_a j^a 与 R 都是标量（反常是局域的、由 TJ 的 OPE 定出，不引入定向）；
+  测度 d²σ ĝ^{1/2} 是密度，不是需要定向的 2-形式；
+  (P₁δσ)_{ab} = 0 与 (P₁^Tδ'g)_a = 0 都是张量方程；
+  鬼数 = c 插入数 − b 插入数是纯计数。⇒ 不可定向面上每一步逐字成立，
+  **唯一跨定向性的步骤是「用球面标定出的常数 3 对两支通用」**（gaps 第一条）。
+gaps:
+  - |
+    **★ 常数 3 的标定例子是可定向的（本推导相对 v2 的**唯一**新缺口）**。
+    论证只给 κ − μ ∝ χ，系数 3 由球面 (χ, μ, κ) = (2, 0, 6) 定出，而球面可定向。
+    「同一个局域反常系数对不可定向面给同一个常数」这一步的理由是反常的**局域性**
+    （系数由 TJ 的 OPE 在任一点的邻域定出，与整体拓扑、定向无关），
+    原书把它体现在「(5.2.9) 不带 oriented 限定」这一写法上，但**没有逐字论证过这一步**。
+    ⇒ 若有人要求逐字来源，这一条是本卡最该被追问的地方。
+    ⚠ 本卡**没有任何不可定向的检验点**：RP₂ 的 κ = 3 在本图里就是用本关系代出来的（循环，
+    不能当检验），Klein 瓶本图无节点。对比 v2 有球面与环面两个检验点。
+  - |
+    **标定的另一半 μ(S₂) = 0 在图上仍是断言**（与 v2 同名推导逐字相同的缺口）：
+    worldsheet.sphere-conformal-killing-group 的 statement 明确声明不断言 μ(S₂) = 0，
+    本图目前没有任何节点断言 μ(S₂) = 0；最接近的 worldsheet.positive-euler-number-no-moduli
+    （χ > 0 ⇒ μ = 0）与 (5.2.9) 同处 §5.2，拿它来标定 (5.2.9) 有循环之嫌，故本图不建这条边。
+  - |
+    **不可定向曲面上 κ / μ 的定义未被本图审查**：worldsheet.conformal-killing-equation 与
+    worldsheet.moduli-condition-traceless-transverse 都写在一般二维 Riemann 流形上，
+    定义式是张量方程（实际无碍），但**来源与本图都没有讨论「不可定向时这两个定义是否需要修改」**
+    （例如 ker P₁^T 在不可定向面上与「全纯二次微分」的对应关系需经定向双覆盖重述）。
+    ⚠ 这一条与 worldsheet.rp2-conformal-killing-group--via-sphere-involution 的同名 gap 是同一件事。
+  - |
+    **「反常是算子方程」这一步没有论证**：从配分函数的 Weyl 变分到「∇_a j^a 作为算子方程
+    可以插进任意关联函数」需要论证反常的局域性与与插入的对易性，来源里只有断言。
+    ⚠ 本推导恰恰把「局域性」当作跨定向性的根据（gaps 第一条），故这条缺口在本卡上比在 v2 上更吃重。
+  - |
+    **上游 worldsheet.ghost-number-current-weyl-anomaly 携带一处勘误依赖**（习题 3.6 的符号错，
+    勘误表本项目未取得）与 OPE 收敛缺口。
+  - |
+    **路径积分层面的形式操作**：δ_{g#} 作用在 ∫[dφ]e^{−S} 上、测度的鬼数变换等，均无数学定义。
+  - |
+    **数学路线对本卡无效**：math.quadratic-differentials-minus-holomorphic-vector-fields
+    的 Riemann–Roch 计算设在黎曼面（=可定向）上，不能给本卡提供第二条推导
+    （要走定向双覆盖 + 对合不变子空间，本图无来源，math-sources.md Q34）。
+notes: |
+  **建立理由（2026-09-11，curator-batch10-14-fix）**：见目标卡 notes。
+  本推导是 worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly 的**平行副本**
+  （依赖集相同、summary 前半逐字相同），差别只有三处：
+  (1) 目标是不可定向支；
+  (2) summary 末段新增「为什么这条论证与定向性无关」的逐项检查；
+  (3) gaps 第一条把「常数 3 的标定例子可定向」列为本卡特有的缺口。
+  **两条推导并存不构成重复计数**：它们的目标卡不同（可定向支 / 不可定向支），
+  且 v2 那条另有数学路线可抬高，本条没有。
+
+  **不要**把本卡与 v2 合并回一张「可定向或不可定向」的卡（那正是 v1 被换代的原因）：
+  合并会让数学路线的 rigorous 上限被误加到不可定向支上。
+author: curator-batch10-14-fix
+created: "2026-09-11"

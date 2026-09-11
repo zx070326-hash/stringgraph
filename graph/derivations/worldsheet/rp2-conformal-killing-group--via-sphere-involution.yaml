@@ -13,12 +13,18 @@ depends_on:
       中与认同 z ∼ −1/z̄ 相容的那些。原书 §6.1 逐字就是这样说的
       （「the subgroup of PSL(2,C) that respects the identification (6.1.9)」），
       与 §6.1 的球面段落同章同节，故不标 inferred。
-  - id: worldsheet.riemann-roch-kappa-minus-mu-v2
+  - id: worldsheet.riemann-roch-kappa-minus-mu-nonorientable
     note: |
       提供 κ − μ = 3χ，配 χ(RP₂) = 1 与本条 (1) 的 μ = 0 得 **κ(RP₂) = 3**。
       原书**不写**这个数字，但它写了 (5.2.11a) κ = 3χ（该卡承载的就是 (5.2.9)/(5.2.11a) 这条关系），
-      故这条边不标 inferred，只是数字本身是本图代入得到的（见 gaps 第二条）。
-      ⚠ 该卡的适用范围是「紧、无边」——RP₂ 无边界，落在范围内。
+      故这条边不标 inferred，只是数字本身是本图代入得到的（见 gaps 第四条）。
+      ⚠ **2026-09-11 改指（reviewer-batch11 M1 / batch12「高」的范围错位）**：此前这条边指
+      worldsheet.riemann-roch-kappa-minus-mu-v2，而 **v2 的 statement 限可定向，RP₂ 不可定向**——
+      推导用了超出被引卡断言范围的结论。现改指同一天新建的不可定向支卡
+      worldsheet.riemann-roch-kappa-minus-mu-nonorientable（同一条鬼数反常论证，
+      原书 (5.2.9) 未限定可定向，§6.1 也确实把这套计数用在 RP₂ 上）。
+      仍不标 inferred，理由见该卡 sources 的三条逐字证据 (a)(b)(c)。
+      ⚠ 该卡的适用范围是「紧、无边、连通、不可定向」——RP₂ 逐条落在范围内。
   - id: worldsheet.conformal-killing-equation
     note: κ 的定义（被计数的对象）。
   - id: worldsheet.moduli-condition-traceless-transverse
@@ -84,7 +90,7 @@ summary: |
 
   **(1)** μ(RP₂) = 0：原书 §6.1 在同一段逐字写「There are no moduli.」
 
-  **(3)** κ(RP₂) = 3：由 worldsheet.riemann-roch-kappa-minus-mu 的 κ − μ = 3χ、χ(RP₂) = 1
+  **(3)** κ(RP₂) = 3：由 worldsheet.riemann-roch-kappa-minus-mu-nonorientable 的 κ − μ = 3χ、χ(RP₂) = 1
   与 (1) 得 κ = 3。这与 (2) 的 SO(3) 是 3 维实李群相容——**这一致性是本图的交叉检验，
   不是原书的论证**（原书从不写 κ(RP₂) = 3）。
 gaps:
@@ -122,9 +128,12 @@ gaps:
     抽取丢掉）、Corollary 3.2 的第二支是不是 G̃(z̄)。**公式字符以 caohuu-ghisa-2004 (L1) 为准。**
   - |
     **κ(RP₂) = 3 这个数字在原书里不存在**。它是本图把 (5.2.11a) 的 κ = 3χ 代 χ = 1 得到的。
-    而 (5.2.11a) 本身挂在 worldsheet.riemann-roch-kappa-minus-mu 上，
+    而 (5.2.11a) 本身挂在 worldsheet.riemann-roch-kappa-minus-mu-nonorientable 上
+    （2026-09-11 前是 v1，其后短暂指向限可定向的 v2，见 depends_on 的改指记录），
     那条推导（--via-ghost-number-anomaly）的比例常数 3 是**用球面一个例子标定**出来的，
-    并且它的标定还欠着 μ(S₂) = 0 这一半（见该推导 gaps 第一条的「残余」）。
+    并且它的标定还欠着 μ(S₂) = 0 这一半（见该推导 gaps 第二条）。
+    ⚠ 不可定向支还多一层：**标定用的球面本身可定向**，常数通用性靠反常的局域性
+    （见该推导 gaps 第一条）。
     **本条 κ = 3 因此继承那条链的全部弱点。**
     ⚠ 它也**不能**由 (2) 的「SO(3) 是 3 维」反推出来——那条路要先有上面的补步 (iii)，而那是无来源的。
   - |
