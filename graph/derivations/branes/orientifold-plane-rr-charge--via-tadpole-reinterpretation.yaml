@@ -9,11 +9,13 @@ depends_on:
     note: |
       供给「整套 D 膜仍是 BPS 态」；原书 p. 142「the full set of D-branes is still a BPS state,
       being T-dual to the type I theory」。
-  - id: branes.brane-charges-in-susy-algebra
+  - id: susy.brane-charges-in-susy-algebra
     note: |
       供给「BPS 态的总质量与总荷线性 ⇒ 所有 D 膜荷同号」：原书 p. 142「the total mass is linear in the total
       charge for a BPS state」。这是含膜荷的代数 (13.2.9) 的饱和态性质；App. B 的 (B.2.39) 只对点粒子荷，
       不能直接用于 D 膜（appB 抽取记录 Q3）。⚠ (13.2.9) 原书自承「still not complete」。
+      〔2026-09-11 去重：本边原指 `branes.brane-charges-in-susy-algebra`，该卡与本边现指的卡是并行重复建卡，
+      lead 裁决保留 susy 版，故改指；note 内容与 inferred 状态（非 inferred）未变。〕
   - id: duality.t-duality-of-unoriented-theory
     note: |
       供给「Ω 在对偶坐标上 = 宇称 × 时空反射」⇒ 固定面（orientifold 面）与「体内有取向」；

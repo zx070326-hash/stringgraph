@@ -17,7 +17,16 @@ sources:
     note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21（L1，原书页图）。
   - ref: polchinski-1998-v2
     loc: "App. B §B.2, (B.2.4) p.441（正定性论证的模板：`0 = ⟨ψ|{Q, Q^†}|ψ⟩ = ‖Q|ψ⟩‖² + ‖Q^†|ψ⟩‖²`，用于无质量多重态）；(B.2.9)–(B.2.12) p.442（有质量表示由费米振子构造，`2^{2N}` 计数的模板）"
-    note: 抽取记录 #E15、#E16（L1）。这两处给出「反对易子非负 ⇒ 态被湮灭 ⇒ 表示变短」的标准套路。
+    note: |
+      抽取记录 #E15、#E16（L1）。这两处给出「反对易子非负 ⇒ 态被湮灭 ⇒ 表示变短」的标准套路。
+      ⚠ 页码存疑：并行建卡 branes.bps-bound-point-particle-d4--via-positivity-of-anticommutator 把 (B.2.4) 记为 p. 440，
+      本卡记为 p.441；两版都标 L1，未复核原书。两者只差一页，取哪个都不影响论证，留待下次翻书时定。
+  - ref: polchinski-1998-v2
+    loc: "App. B p. 440 逐字：「The minus sign is due to our metric signature (− + … +)」（(B.2.1a)/(B.2.36a) 中 −2δ^{AB}P_μΓ^μ 的负号来源）"
+    note: |
+      〔2026-09-11 去重并入：本条是并行建卡 branes 版的独有证据，那边把它挂成一条指向 conv.metric-mostly-plus 的边。〕
+      本卡的号差由 statement 的 `uses_conventions: [conv.metric-mostly-plus]` 承担；约定节点不参与状态传播，
+      故此处只记来源，不再新建边。
 summary: |
   (1) 前提：取洛伦兹不变性允许、且**只含点粒子荷**的最一般 `d = 4` 扩展超对称代数 (B.2.36)。
       `Z^{AB}` 的反对称性由 Majorana 性质与 `C` 的反对称性得到。
@@ -34,14 +43,20 @@ summary: |
 gaps:
   - "**「最一般代数」是断言**：原书逐字「The most general extended supersymmetry algebra allowed by Lorentz invariance is (B.2.36)」——无证明、无引用；Haag–Łopuszański–Sohnius 全附录未提及（抽取记录 §3.2 第 7 条）。同类断言还有 p.440 的「The N = 1 supersymmetry algebra is **uniquely determined**」。"
   - "**★ 适用域只到点粒子荷**：p.448 逐字「this is the most general algebra if we include only charges that can be carried by point particles. Including charges that can be carried by *extended objects*, additional terms appear … The same caveat applies to the higher-dimensional algebras」。⇒ 本推导**不**支持任何关于膜 / 扩展物体 BPS 界的结论（抽取记录 Q3）。"
-  - "**`Z^{AB}` 的反对称性依赖习题 B.1**：`C` 与 `C^T` 的关系原书没证，是习题 B.1 的题目。"
-  - "**(B.2.38) 的标准化未写理由**：「Taking an eigenstate of the charges Z^{AB}, we can go to a basis in which …」——把反对称矩阵化到 skew 标准形所用的 R 对称性转动原书未说明（是标准线性代数，但原书未写，且 `q_i ≥ 0` 的取法也没解释）。"
-  - "**费米振子计数的细节外包**：短表示 `2^{2(N−k)}` 的构造原书只用一句「just as half the oscillators do for a massless representation」类比 (B.2.5)(B.2.6)，未重做。"
+  - "**`Z^{AB}` 的反对称性依赖习题 B.1**：`C` 与 `C^T` 的关系原书没证，是习题 B.1 的题目。〔并入 branes 版〕相关式号为 (B.1.20)、(B.1.24)–(B.1.27/28)，pp.434–435；⚠ 两版并行建卡对区间末端记法不一致（本卡原记 (B.1.24)–(B.1.28)，branes 版记 (B.1.24)–(B.1.27)），未复核原书。图上这一步由 math.clifford-majorana-weyl-mod-8 承接（branes 版当时判为「图上悬空」，因为那版没建这条边）。"
+  - "**(B.2.38) 的标准化未写理由**：「Taking an eigenstate of the charges Z^{AB}, we can go to a basis in which …」——把反对称矩阵化到 skew 标准形所用的 R 对称性转动原书未说明（是标准线性代数，但原书未写，且 `q_i ≥ 0` 的取法也没解释）。〔并入 branes 版〕这一步是有限维线性代数（实反对称矩阵的分块对角化），可形式化，但**本图未建对应 math 卡**。"
+  - "**费米振子计数的细节外包**：短表示 `2^{2(N−k)}` 的构造原书只用一句「just as half the oscillators do for a massless representation」类比 (B.2.5)(B.2.6)，未重做。〔并入 branes 版〕本图也**没有 `d = 4` 超对称表示论节点**，(B.2.9)–(B.2.12) 的振子构造在图上悬空。"
   - "**本附录零文献引用、无编号定理**（§3.2 第 7 条）。"
 notes: |
   第 (4) 步本身是完整的有限维线性代数（厄米非负矩阵的本征值非负）。按 docs/STATUS_LEVELS.md，
   若前提完整且经 reviewer 独立复核，这一步可到 rigorous；但本卡的**前提**（(B.2.36) 的唯一性、
   `C` 的反对称性）是断言，故整条推导只能 physical-argument。日后若把「非负矩阵 ⇒ 本征值非负 ⇒ m ≥ q」
   单独拆成一张纯线性代数卡（可形式化），本卡可改为依赖它。
+  〔并入 branes 版的同一判断〕若 reviewer 独立复核第 (4) 步并在本卡记 `reviewer-verified: <agent>, <date>`，
+  可按 docs/STATUS_LEVELS.md 的 rigorous 例外考虑把该步拆卡升级——但 (1) 的「最一般代数」断言**不可升**。
+
+  【去重记录（2026-09-11）】并行建卡 `branes.bps-bound-point-particle-d4--via-positivity-of-anticommutator`
+  论证同一命题，lead 裁决保留本卡；该版独有的证据与 gaps 已逐条并入本卡（标〔并入 branes 版〕），
+  旧推导按「旧推导的去留」保留不删。
 author: curator-v2-appB
 created: "2026-09-11"

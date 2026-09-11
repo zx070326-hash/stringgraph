@@ -50,12 +50,17 @@ notes: |
   ⚠ **本图缺的上游**（不是本卡的错，是图的现状）：
   1. type II 的时空超对称（32 个超荷、两个 gravitino）在 main 上无节点
      （ch10 分支有 worldsheet.type-ii-spacetime-supersymmetry，未合）；
-  2. Vol.2 App. B §B.2 的 BPS 界 (B.2.39) **现已抽（L1，2026-09-11）并建卡 branes.bps-bound-point-particle-d4**；
+  2. Vol.2 App. B §B.2 的 BPS 界 (B.2.39) **现已抽（L1，2026-09-11）并建卡 susy.bps-bound-point-particle-d4**；
      但它只对点粒子荷（p. 448 逐字「if we include only charges that can be carried by point particles」），
-     D 膜荷的代数是 (13.2.9)（branes.brane-charges-in-susy-algebra，原书自承「still not complete」）。
+     D 膜荷的代数是 (13.2.9)（susy.brane-charges-in-susy-algebra，原书自承「still not complete」）。
      「BPS ⇒ 质量与荷线性」对 D 膜因此只有 (13.2.9) 层面的支撑；
   3. Dp 膜的定义卡 branes.d-brane-from-t-duality 是**玻色弦**的；超弦版原书只说
      「by the same arguments as for the bosonic string in chapter 8, which the reader should review」（p. 138）。
   待这些补齐后本卡的推导应改边。
+
+  【去重（2026-09-11）】App. B 那张卡曾被两个并行 curator 各建一版；lead 裁决保留 `susy.*` 版，
+  `branes.bps-bound-point-particle-d4` / `branes.brane-charges-in-susy-algebra` 已标 `superseded_by`。
+  本卡的**依赖边**与本 notes 已改指 susy.*；⚠ 本卡 **statement 正文**里那两处字面 id 引用按
+  graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」**不就地改**（陈述文本不可变），留待本卡下次实质换代时同步。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"
