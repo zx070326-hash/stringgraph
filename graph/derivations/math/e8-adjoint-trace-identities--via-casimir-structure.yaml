@@ -22,6 +22,14 @@ sources:
     note: |
       重标度约定下的同一组关系；换算已复算（见目标节点 sources 第三条），
       但该文同样不给证明。
+  - ref: van-ritbergen-1998
+    loc: "App. A.5「Indices and trace identities for E₈」, eqs. (176)(177)，PDF p. 35"
+    note: |
+      **2026-09-11 补登（curator，抽取记录 math-sources §44.5）**：独立、免费、带编号的第二来源。
+      (176) Tr F⁴ = 36 (1/60 Tr F²)²，(177) Tr F⁶ = 30 (1/60 Tr F²)³，「in the representation (248)」；
+      化简 36/3600 = 1/100、30/216000 = 1/7200，**与 GS (12b′)(12c′) 逐位相等**，归一化相同（都是 248 维伴随迹）。
+      vRSV 的推导方法（§5.11 经 D₈ 子代数展开特征标，见 (86)）本推导没有复述，
+      所以这条来源在本推导里只作**数值确认**；系数的可核算推导见 --via-root-power-sums。
 summary: |
   **来源的论证形态：直接断言 + 一句群论理由。** 三条等式的内容等价于
   「e₈ 的不变量环在 4 阶与 6 阶没有独立生成元，故 Tr F⁴、Tr F⁶ 必须正比于 (Tr F²)²、(Tr F²)³」，
@@ -30,7 +38,9 @@ summary: |
 
   **本图能独立说的部分**：给定「Tr F⁴ = a (Tr F²)²、Tr F⁶ = b (Tr F²)³ 对某两个有理数 a, b 成立」
   这一结构性事实，两个系数各由一次取值确定（例如取 F 落在某个 su(2) 子代数里算指标），
-  但**这一步本图没有做，也没有来源做**。
+  但**这一步本推导没有做，本推导的来源也没有做**（2026-09-11 补注：现已由
+  math.e8-adjoint-trace-identities--via-root-power-sums 用根幂和做出，见 gaps 第 2 条；
+  本段保留为 2026-09-11 之前本图的论证状态记录）。
 
   **一致性检查（本图做的）**：本节点的 (1/100, 1/7200) 与 bilal-2008 在重标度
   tr_B F² = Tr F²/30 下的 (9, 75/20) 等价：
@@ -38,9 +48,9 @@ summary: |
     (75/20)(Tr F²/30)³ = (3.75/27000)(Tr F²)³ = (1/7200)(Tr F²)³。
   两个独立来源在换算后逐项一致。
 gaps:
-  - "「e₈ 无独立四阶、六阶 Casimir 不变量」这条结构性事实在本图的**所有**来源里都没有证明：GS 归给私人交流，Antonelli 转引 GSW Vol. 2（未核实），Bilal 不给。"
-  - "系数 1/100 与 1/7200 的来历在任何来源里都没有写出。"
-  - "升级路径：查 E₈ 的基本不变量次数表（通常给为 2, 8, 12, 14, 18, 20, 24, 30），由此可得 4 阶与 6 阶不变量必是 2 阶的幂；再定系数。本图尚未登记任何承载该表的文献。"
+  - "「e₈ 无独立四阶、六阶 Casimir 不变量」这条结构性事实在本推导的**所有**来源里都没有证明：GS 归给私人交流，Antonelli 转引 GSW Vol. 2（未核实），Bilal 不给，vRSV 只给结果。（2026-09-11 补注：承载该事实的次数表现已登记——humphreys-1990-reflection §3.7 Table 1, p. 59，E₈ → 2, 8, 12, 14, 18, 20, 24, 30，L1；但本推导没有用它，也暂无以它为来源的卡。）"
+  - "**系数 1/100 与 1/7200 的来历：本推导自身不给，已由 --via-root-power-sums 关闭。** 该推导对 Humphreys §2.10 的 240 根做幂和（math.e8-root-system-power-sums，Lean 已核 P₄ = P₂²/100、P₆ = P₂³/7200 对一切 x ∈ ℚ⁸），并有 vRSV (176)(177) 独立数值确认。本推导保留为 GS 原文论证形态的记录。"
+  - "升级路径（2026-09-11 更新）：本推导自身不会升级——它记录的是 GS「直接断言」的论证形态。目标卡的升级走 --via-root-power-sums：待 math.adjoint-weights-are-roots-and-zero 与 math.chevalley-restriction-theorem 两座桥的来源核实到 L1（researcher Q39 与 GTM 9 §8），那条推导可升 rigorous。"
 notes: |
   同 math.so-usp-adjoint-fundamental-trace-identities--via-adjoint-decomposition 的说明：
   physical-argument 记的是**本图掌握的论证强度**，不是对结论的怀疑。
