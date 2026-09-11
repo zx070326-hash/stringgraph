@@ -31,6 +31,7 @@ uses:
   - worldsheet.rns-mode-expansions
   - worldsheet.rns-ramond-zero-modes-clifford
   - worldsheet.superconformal-ghost-modes
+  - worldsheet.beta-gamma-bosonization
 uses_conventions:
   - conv.metric-mostly-plus
   - conv.worldsheet-complex-coords
@@ -63,6 +64,23 @@ notes: |
   (10.4.8)–(10.4.22)）与 worldsheet.fermion-bosonization（ψ ≅ e^{iH}，(10.3.5)–(10.3.19)）。
   建成后可把本卡拆成「物质 F（rigorous）」与「鬼场 F（physical-argument）」两张，
   并新建 v2 而不是改本卡。
+
+  ★【2026-09-11 更新（curator-bosonization）：上面那条「待建」已完成】
+  玻色化组节点已建出：worldsheet.fermion-bosonization-two-dimensions（§10.3，E25）、
+  worldsheet.bc-ghost-bosonization（E27）、worldsheet.beta-gamma-bosonization（§10.4，E30）、
+  worldsheet.spin-field-vertex-operators（E26）、
+  worldsheet.ramond-ground-state-vertex-operator（E31）、
+  worldsheet.vertex-operator-cocycle（E32），归一化约定
+  conv.nonembedding-scalar-normalization。
+  本卡已补一条 `uses: worldsheet.beta-gamma-bosonization` 的边——即鬼场侧 F 的定义
+  （(10.4.9) 电流的荷、对 e^{lφ} 取值 l）现在在图上有了支撑。
+  **status 与 statement 文本均未改**（按项目规则不得改已提交节点的 statement）：
+  新建的玻色化卡自身是 physical-argument，故本卡的 physical-argument 依旧是实话。
+  上面「拆成物质 F / 鬼场 F 两张」的建议**仍未做**，现在做的前提已齐备。
+  → 建议 lead 安排一次独立任务：新建 worldsheet.rns-fermion-number-operator-matter
+    （只含 Σ^{μλ}、S_a、F = Σ_a S_a，可标 rigorous）与
+    worldsheet.rns-fermion-number-operator-ghost（含 e^{lφ} 的荷，physical-argument），
+    本卡写 superseded_by。
 
   【为什么 F 只 mod 2 有定义】原书 (10.2.19) 处明写。故一切下游只用 exp(πiF) 这个组合，
   不用 F 本身的整数值。§10.6 的扇区标号 (α, F) 里的 F 同样只 mod 2 有定义（(10.6.1)）。

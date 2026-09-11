@@ -1,0 +1,72 @@
+id: worldsheet.ramond-ground-state-vertex-operator--via-half-integer-ope-conditions
+target: worldsheet.ramond-ground-state-vertex-operator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.beta-gamma-bosonization
+    inferred: false
+    note: |
+      供给断言 (1) 的玻色侧字典（β ≅ e^{−φ}∂ξ、γ ≅ e^{φ}η）与 e^{lφ} 的权，
+      以及被类比的 NS 情形 δ(γ) ≅ e^{−φ}（h = 1/2）。
+      (10.4.23)/(10.4.24) 紧接 (10.4.21)，同一段同一手法，故此边直接可见。
+  - id: worldsheet.spin-field-vertex-operators
+    inferred: false
+    note: |
+      供给断言 (2) 里的 Θ_s。原书 (10.4.25) **明写** Θ_s 是 (10.3.29) 的自旋场。
+  - id: worldsheet.superconformal-ghost-modes
+    inferred: false
+    note: |
+      供给断言 (1) 里的 β、γ 及其 R 扇区模式（(10.4.1a) 取 ν = 0），
+      即"与 β、γ 的 OPE 带 z^{±1/2} 分支切割"这个条件的对象。
+  - id: worldsheet.superconformal-ghost-normal-ordering-constants
+    inferred: false
+    note: |
+      供给断言 (3) 要核对的目标值 a^g = −5/8（R）、−1/2（NS）（(10.4.5)）。
+      原书逐字 'agree with the values (10.4.5)'，故此边在 p. 19 直接可见。
+  - id: worldsheet.bc-ghost-cft
+    inferred: true
+    note: |
+      **inferred**：断言 (3) 里的"bc 鬼场的贡献 −1"本图读作 h_c = 1 − λ = −1（λ = 2），
+      即 bc 基态对应算子 c 的权。**原书只说 'the contribution −1 of the bc ghosts'，
+      不点明是哪个算子**，故这条边在 p. 19 找不到对应论证。
+  - id: worldsheet.vertex-operator-cocycle
+    inferred: false
+    note: |
+      供给 Θ_s 的统计修补：按 §10.3 脚注 2，多种费米子并存时 exp[i Σ_a s_a H^a] 按字面写下
+      "commute rather than anticommute"，需 cocycle；修补的一般表达式在 (10.4.26)–(10.4.28)，
+      **就在本段之后同一节**（原书脚注明写 'A general expression will be given in the next
+      section'）。故 (10.4.25) 里的 Θ_s 必须理解为带 cocycle 的版本，此边不标 inferred。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.4, eq. (10.4.23)、(10.4.24)、(10.4.25) 与其后的核对句, p. 19"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E31）。**这三条式子加一句核对就是原书的全部论证**。
+      逐字：'Adding the contribution −1 of the bc ghosts, the weight of e^{−φ/2} and of e^{−φ}
+      agree with the values (10.4.5).'
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. (10.3.24)、(10.3.25), pp. 13–14（同一手法在物质侧的先例）"
+    note: |
+      L1 一手（E26）。原书在物质侧用的也是"OPE 的分支/极点阶数 determine 玻色等价物"，
+      措辞同样只有 'determine'。本推导的第 (1) 步与那一步是同一个未论证的手法。
+summary: |
+  原书 §10.4 p. 19 的论证（三步，与 §10.3 物质侧完全平行）：
+    (1) 写下 R 扇区鬼场基态算子应满足的 OPE 条件：与 β、γ 的乘积带 z^{∓1/2} 型分支切割
+        （(10.4.23)）——这是 R 扇区（β、γ 取整数模式、场在原点有分支切割）的特征。
+    (2) 在玻色侧找满足该条件的指数算子：e^{lφ} 与 β ≅ e^{−φ}∂ξ、γ ≅ e^{φ}η 的 OPE 阶数
+        由 l 决定，l = −1/2 给出所要的半整数幂，故 Σ = e^{−φ/2}，其权 h = 3/8（(10.4.24)）。
+        完整的 R 基态顶点算子是它与物质侧自旋场的乘积 V_s = e^{−φ/2}Θ_s（(10.4.25)）。
+    (3) **核对**：把 e^{−φ/2}（R）与 e^{−φ}（NS）的权各加上 bc 鬼场的 −1，
+        得 −5/8 与 −1/2，正是 (10.4.5) 的两个 a^g 值。
+  **本推导取 physical-argument 的理由**：第 (1)→(2) 步的"OPE 条件 determine 算子"是断言
+  （与 §10.3 的 (10.3.24)/(10.3.25) 同一手法，那里也只有 'determine'）；
+  第 (3) 步是必要条件式的核对；整段建立在 physical-argument 的 βγ 玻色化之上。
+gaps:
+  - "**「OPE 条件 determine 算子」是断言**：原书不证唯一性（为什么只有 e^{−φ/2}？为什么不能乘一个权为 0 的别的算子？）。与 §10.3 的 (10.3.25) 同一 gap。"
+  - "**权 h = 3/8 的来源未给**：原书直接写出。本图能用 worldsheet.beta-gamma-bosonization 的重建公式 h(e^{lφ}) = −l²/2 − l 核出 3/8，但**那条公式未在原书核实**。"
+  - "**核对 (3) 只是必要条件**：权相加等于 a^g 是一致性检查，不是 Σ = e^{−φ/2} 的证明。"
+  - "**「bc 鬼场的贡献 −1」未点明对象**：原书只给数。本图读作 h_c = −1（那条边标了 inferred）。"
+  - "**V_s 的统计仍依赖 cocycle**：Θ_s 按字面写下统计是错的（§10.3 脚注 2），而 worldsheet.vertex-operator-cocycle 本身只有 'The reader can check' 级论证，且其公式因 Vol.1 §8.4 记号未核实而当前不可计算。"
+  - "**未断言 V_s 是物理顶点算子**：BRST 闭性、质量壳条件、picture 的选择都不在本推导内。"
+  - "**继承上游的核心 gap**：'等价' 无数学陈述、手征玻色子未定义（见 worldsheet.fermion-bosonization-two-dimensions 的 gaps）。"
+author: curator
+created: "2026-09-11"
