@@ -137,4 +137,171 @@ theorem lie_towerModeVec_towerModeVec (η a b ε δ : Fin D → R) (hη : ∀ μ
 
 end TowerCCR
 
+/-! ### The composite of two DDF operators as an explicit double sum -/
+
+section Product
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **`A^ε_m A^δ_n` as a doubly finite sum** `Σ_{j,l} α^ε_j α^δ_l V^{(m)}_j V^{(n)}_l`.
+
+The index sets are arbitrary, subject only to the two local-finiteness hypotheses: `t` must
+exhaust the window of the inner operator on `x`, and `s` the windows of the outer operator on
+each of the finitely many vectors `α^δ_l V^{(n)}_l x`.  (Such an `s` always exists: take the
+`Finset.biUnion` of those windows, which is what `lie_ddfOp_ddfOp` does.)
+
+The reordering `V^{(m)}_j α^δ_l = α^δ_l V^{(m)}_j` is **transversality of the inner
+polarisation** `δ · k_0 = 0`. -/
+theorem ddfOp_mul_ddfOp_apply (η a b ε δ : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (hδb : dotVec η δ b = 0) (m n : ℤ) (x : TowerFock D R)
+    {s t : Finset ℤ} (ht : ∀ l ∉ t, ddfSummand η a b δ n l x = 0)
+    (hs : ∀ l ∈ t, ∀ j ∉ s, ddfSummand η a b ε m j (ddfSummand η a b δ n l x) = 0) :
+    ddfOp η a b ε hη hεb m (ddfOp η a b δ hη hδb n x)
+      = ∑ j ∈ s, ∑ l ∈ t, (towerModeVec η a b ε j * towerModeVec η a b δ l *
+          (towerVertex η b m j * towerVertex η b n l)) x := by
+  classical
+  have key : ∀ j l : ℤ, ddfSummand η a b ε m j (ddfSummand η a b δ n l x)
+      = (towerModeVec η a b ε j * towerModeVec η a b δ l *
+          (towerVertex η b m j * towerVertex η b n l)) x := by
+    intro j l
+    simp only [ddfSummand]
+    rw [← Module.End.mul_apply]
+    congr 1
+    have hc := towerModeVec_mul_towerVertex_of_transverse η a b δ hη hδb m j l
+    calc towerModeVec η a b ε j * towerVertex η b m j *
+          (towerModeVec η a b δ l * towerVertex η b n l)
+        = towerModeVec η a b ε j *
+            (towerVertex η b m j * towerModeVec η a b δ l * towerVertex η b n l) := by
+          noncomm_ring
+      _ = towerModeVec η a b ε j *
+            (towerModeVec η a b δ l * towerVertex η b m j * towerVertex η b n l) := by
+          rw [hc]
+      _ = towerModeVec η a b ε j * towerModeVec η a b δ l *
+            (towerVertex η b m j * towerVertex η b n l) := by noncomm_ring
+  rw [ddfOp_apply η a b δ hη hδb n x ht, map_sum, Finset.sum_comm (s := s) (t := t)]
+  refine Finset.sum_congr rfl fun l hl => ?_
+  rw [ddfOp_apply η a b ε hη hεb m _ (hs l hl)]
+  exact Finset.sum_congr rfl fun j _ => key j l
+
+end Product
+
+/-! ### The DDF transverse oscillator algebra -/
+
+section Algebra
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **The DDF transverse oscillator algebra**
+(`worldsheet.ddf-transverse-oscillator-algebra`):
+
+`⁅A^ε_m, A^δ_n⁆ = m (ε·δ) δ_{m+n,0}`
+
+on the momentum tower of a light-like reference vector `k_0` (`dotVec η b b = 0`) normalised
+by `2α' k_0 · p = 1` (`dotVec η b a = 1`), for transverse polarisations
+`ε · k_0 = δ · k_0 = 0`.
+
+The right-hand side is a *scalar*: the DDF operators generate a Heisenberg algebra with the
+same central term as the transverse oscillators `α^i_m`, which is what the Goddard–Thorn
+argument needs. -/
+theorem lie_ddfOp_ddfOp (η a b ε δ : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0)
+    (hδb : dotVec η δ b = 0) (m n : ℤ) :
+    ⁅ddfOp η a b ε hη hεb m, ddfOp η a b δ hη hδb n⁆
+      = (if m + n = 0 then (m : R) * dotVec η ε δ else 0)
+          • (LinearMap.id : Module.End R (TowerFock D R)) := by
+  classical
+  refine LinearMap.ext fun x => ?_
+  set N : ℤ := (towerLevelBound x : ℤ) with hN
+  set Mb : ℤ := (towerModeBound x : ℤ) with hMb
+  set t₁ : Finset ℤ := ddfWindow n x with ht₁def
+  set s₁ : Finset ℤ := t₁.biUnion fun l => ddfWindow m (ddfSummand η a b δ n l x) with hs₁def
+  set t₂ : Finset ℤ := ddfWindow m x with ht₂def
+  set s₂ : Finset ℤ := t₂.biUnion fun l => ddfWindow n (ddfSummand η a b ε m l x) with hs₂def
+  set V : Finset ℤ := s₁ ∪ t₁ ∪ s₂ ∪ t₂ ∪ Finset.Icc (m - N - Mb) (N - n) with hVdef
+  set U : Finset ℤ := V ∪ V.image fun j => -j with hUdef
+  have hVU : V ⊆ U := Finset.subset_union_left
+  have hmem : ∀ z : ℤ, z ∈ s₁ ∨ z ∈ t₁ ∨ z ∈ s₂ ∨ z ∈ t₂ ∨
+      (m - N - Mb ≤ z ∧ z ≤ N - n) → z ∈ U := by
+    intro z hz
+    refine hVU ?_
+    rw [hVdef]
+    simp only [Finset.mem_union, Finset.mem_Icc]
+    tauto
+  have hUsymm : ∀ j ∈ U, -j ∈ U := by
+    intro j hj
+    rw [hUdef, Finset.mem_union] at hj ⊢
+    rcases hj with h | h
+    · exact Or.inr (Finset.mem_image.mpr ⟨j, h, rfl⟩)
+    · obtain ⟨k, hk, rfl⟩ := Finset.mem_image.mp h
+      exact Or.inl (by simpa using hk)
+  have hA : ddfOp η a b ε hη hεb m (ddfOp η a b δ hη hδb n x)
+      = ∑ j ∈ U, ∑ l ∈ U, (towerModeVec η a b ε j * towerModeVec η a b δ l *
+          (towerVertex η b m j * towerVertex η b n l)) x := by
+    refine ddfOp_mul_ddfOp_apply η a b ε δ hη hεb hδb m n x (fun l hl => ?_)
+      (fun l _ j hj => ?_)
+    · exact ddfSummand_apply_eq_zero_of_notMem_window η a b δ hη hδb n x l
+        fun hc => hl (hmem l (Or.inr (Or.inl hc)))
+    · by_cases hl' : l ∈ t₁
+      · exact ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb m _ j
+          fun hc => hj (hmem j (Or.inl (Finset.mem_biUnion.mpr ⟨l, hl', hc⟩)))
+      · rw [ddfSummand_apply_eq_zero_of_notMem_window η a b δ hη hδb n x l hl', map_zero]
+  have hB : ddfOp η a b δ hη hδb n (ddfOp η a b ε hη hεb m x)
+      = ∑ j ∈ U, ∑ l ∈ U, (towerModeVec η a b δ j * towerModeVec η a b ε l *
+          (towerVertex η b n j * towerVertex η b m l)) x := by
+    refine ddfOp_mul_ddfOp_apply η a b δ ε hη hδb hεb n m x (fun l hl => ?_)
+      (fun l _ j hj => ?_)
+    · exact ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb m x l
+        fun hc => hl (hmem l (Or.inr (Or.inr (Or.inr (Or.inl hc)))))
+    · by_cases hl' : l ∈ t₂
+      · exact ddfSummand_apply_eq_zero_of_notMem_window η a b δ hη hδb n _ j
+          fun hc => hj (hmem j (Or.inr (Or.inr (Or.inl (Finset.mem_biUnion.mpr ⟨l, hl', hc⟩)))))
+      · rw [ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb m x l hl', map_zero]
+  have hterm : ∀ j l : ℤ,
+      (towerModeVec η a b ε j * towerModeVec η a b δ l *
+          (towerVertex η b m j * towerVertex η b n l)) x
+        - (towerModeVec η a b δ l * towerModeVec η a b ε j *
+          (towerVertex η b n l * towerVertex η b m j)) x
+      = if l = -j then ((j : R) * dotVec η ε δ) •
+          ((towerVertex η b m j * towerVertex η b n l) x) else 0 := by
+    intro j l
+    have hccr : towerModeVec η a b ε j * towerModeVec η a b δ l
+        - towerModeVec η a b δ l * towerModeVec η a b ε j
+        = (if j + l = 0 then (j : R) * dotVec η ε δ else 0)
+            • (LinearMap.id : Module.End R (TowerFock D R)) := by
+      have h := lie_towerModeVec_towerModeVec η a b ε δ hη j l
+      rwa [LieRing.of_associative_ring_bracket] at h
+    have hccry := congrArg (fun T : Module.End R (TowerFock D R) =>
+      T (towerVertex η b m j (towerVertex η b n l x))) hccr
+    simp only [LinearMap.sub_apply, Module.End.mul_apply, LinearMap.smul_apply,
+      LinearMap.id_apply] at hccry
+    rw [towerVertex_comm_of_isotropic η b hbb n m l j]
+    simp only [Module.End.mul_apply]
+    rw [hccry]
+    rcases eq_or_ne l (-j) with rfl | hl
+    · rw [if_pos (by omega : j + -j = 0), if_pos rfl]
+    · rw [if_neg fun h : j + l = 0 => hl (by omega), if_neg hl, zero_smul]
+  rw [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    Module.End.mul_apply, hA, hB, Finset.sum_comm (s := U) (t := U)
+      (f := fun j l => (towerModeVec η a b δ j * towerModeVec η a b ε l *
+        (towerVertex η b n j * towerVertex η b m l)) x),
+    LinearMap.smul_apply, LinearMap.id_apply, ← Finset.sum_sub_distrib]
+  have hinner : ∀ j ∈ U, (∑ l ∈ U, (towerModeVec η a b ε j * towerModeVec η a b δ l *
+        (towerVertex η b m j * towerVertex η b n l)) x
+      - ∑ l ∈ U, (towerModeVec η a b δ l * towerModeVec η a b ε j *
+        (towerVertex η b n l * towerVertex η b m j)) x)
+      = dotVec η ε δ • ((j : R) • ((towerVertex η b m j * towerVertex η b n (-j)) x)) := by
+    intro j hj
+    rw [← Finset.sum_sub_distrib, Finset.sum_congr rfl fun l _ => hterm j l,
+      Finset.sum_ite_eq' U (-j) fun l => ((j : R) * dotVec η ε δ) •
+        ((towerVertex η b m j * towerVertex η b n l) x),
+      if_pos (hUsymm j hj), mul_comm, mul_smul]
+  rw [Finset.sum_congr rfl hinner, ← Finset.smul_sum,
+    sum_weighted_towerVertex_towerVertex η a b hη hbb hba m n x
+      (s := U) fun j h1 h2 => hmem j (Or.inr (Or.inr (Or.inr (Or.inr ⟨h1, h2⟩))))]
+  rcases eq_or_ne (m + n) 0 with hmn | hmn
+  · rw [if_pos hmn, if_pos hmn, smul_smul, mul_comm]
+  · rw [if_neg hmn, if_neg hmn, zero_smul, smul_zero]
+
+end Algebra
+
 end StringFormal.NoGhost
