@@ -52,3 +52,4 @@ import StringFormal.NoGhost.TowerNull
 import StringFormal.NoGhost.HeisenbergGram
 import StringFormal.NoGhost.LightCone
 import StringFormal.NoGhost.WitnessInt
+import StringFormal.NoGhost.LevelTwoSpan
