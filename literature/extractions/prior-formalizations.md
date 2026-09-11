@@ -406,3 +406,7 @@ blueprint 的依赖图**已经是**「节点 = 陈述、边 = 依赖、节点带
 5. Carnahan `vertexAlg` 的 `VertexBasic/Affine.lean`、`Lattice.lean`、`Borcherds.lean` 本轮**没读内容**，
    只读了 `Defs.lean` 与 `Lie/PBW.lean`。若论文要和它精确划界，这三个文件应补读。
 
+## lead 本地复核（2026-09-12）
+
+- 矛盾点 1 已解：`ModularForm.eta_comp_eq_csqrt_I_inv` 在本地 Mathlib（formal/.lake/packages/mathlib）`Mathlib/NumberTheory/ModularForms/Discriminant.lean:136`，远程抓取是假否定。η 的 S 变换本身**不可宣称首次**（我们只补了 (√i)⁻¹√τ = (−iτ)^{1/2} 的桥）。
+- 不确定点 4：本地 grep `Mathlib/LinearAlgebra/RootSystem/` 含 "E8"/"E₈" 的文件：无。 ⇒ E₈ 根系显式 240 根与幂和恒等式在 Mathlib 无现成对象，`Math/E8Roots.lean` 的根幂和可列入 A 级（措辞：显式根集合上的幂和恒等式，不宣称根系分类）。
