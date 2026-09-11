@@ -196,5 +196,43 @@ notes: |
   不是型在 V₂ 上正定（后者还需两个特征值都正，本卡与那三条都没做）。
   ⚠ 与本卡【不断言】(f)（不断言一般 N 的 α_N 正性）同样不冲突：这里说的是 N = 2 的行列式
   在 (h, c) 的一个区域上为正，与常数 α_N 的正性是两件事。
+
+  【2026-09-12：level-2 质壳上「26 是唯一零点」——加强 worldsheet.kac-determinant-v2
+  notes (E) 的「零点」为「唯一零点」（curator，claim #490，依派活任务交付物 #2，
+  wiring formal/StringFormal/Virasoro/FockFreeLowLevel.lean）】
+  worldsheet.kac-determinant-v2 的 notes (E) 记录了 `kacDet2_massShell_26 : kacDet2 26 (1−2) = 0`
+  ——即代入 c = 26、h = a₀ − N = 1 − 2 = −1（经典开弦、a₀=1、无鬼定理关心的那条质壳线）后，
+  本卡 (3) 的多项式 2h(16h²+2h(c−5)+c) **在 c = 26 处取值 0**。那条记录只证明「26 是一个零点」，
+  未证明「26 是唯一零点」。formal/StringFormal/Virasoro/FockFreeLowLevel.lean 现在补上了后半句：
+
+      theorem kacDet2_massShell_two (c : R) : kacDet2 c (1−2) = 2*(c−26)
+      theorem kacDet2_massShell_two_eq_zero_iff {K} [Field K] [CharZero K] (c : K) :
+          kacDet2 c (1−2) = 0 ↔ c = 26
+
+  `kacDet2` 是本卡 (3) 的**同一个多项式**（`def kacDet2 c hw := 2*hw*(16*hw^2+2*hw*(c-5)+c)`，
+  与本卡 (3) 右端逐项一致，变量名 hw ↔ 本卡的 h）。`kacDet2_massShell_two` 对**任意交换环 R**
+  成立（把 h 固定在质壳值 −1 后，多项式在 c 里退化成一次式 2(c−26)，这本身就排除了
+  除 c=26 外任何其他根——一次式只有一个根），`_eq_zero_iff` 在特征零域上把这件事
+  写成 iff：**c = 26 是 c ↦ kacDet2 c (−1) 的唯一零点**。
+  这是图上首次把「D=26 在 level-2 质壳上是行列式的唯一零点」（而不只是「一个零点」）
+  钉成机器验证的等式——比 kac-determinant-v2 notes (E) 记录的 `kacDet2_massShell_26`
+  严格更强（后者只是前者在 c=26 处代入后自动为真的推论：kacDet2_massShell_two 在 c=26
+  处给出 2·(26−26)=0，逐字复现 kacDet2_massShell_26）。
+
+  ⚠ **这条加强对本卡 statement、status、sources 均无影响，纯 notes 记账**：本卡的 (3) 是
+  抽象 Verma 模上「设 B 是归一化逆变型」的条件命题，其 status 由配套推导
+  worldsheet.kac-determinant-level-two--via-lean 承载（formalized，只覆盖 (1)(2)(3)，
+  不覆盖 (4) 与本条新记的质壳唯一零点结论）；`kacDet2_massShell_two`/`_eq_zero_iff` 本身
+  是**另一个文件**（Virasoro/FockFreeLowLevel.lean，非 Shapovalov.lean）里对同一多项式的
+  质壳代入与符号分析，不改变、也不需要改变已有的 depends_on。
+
+  ⚠ **与 worldsheet.level-two-null-state-requires-d26 的关系（不合并、不加边）**：那张卡
+  在动量塔上直接算 L₂(2L₋₂+3L₋₁²)φ = (D−26)·φ（算子作用在向量上，系数是 D−26，
+  差本卡 kacDet2 的 2(D−26) 一个整体因子 2），并证明这是「物理 ⟺ D=26」的必要充分条件
+  （`descTwo_mem_towerPhysSubmodule_iff`，[NoZeroDivisors R] 版本，比这里的 `[CharZero K]`
+  版本条件更弱）。两条是**两条独立的 Lean 计算**（一个是 Gram 行列式的一次式退化，
+  一个是算子直接作用），数值上吻合（差一个因子 2），未证明存在把一个恒等式变换成
+  另一个的显式中间引理——那张卡自己的【不断言】(d) 已如此记录，这里重申以免有人
+  在两卡之间加一条未经检验的等价边。
 author: curator
 created: "2026-09-11"
