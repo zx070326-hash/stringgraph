@@ -62,7 +62,17 @@ sources:
       ⚠ 另注：FK 里 RR 出现两次（另一处是 IV.10「Riemann-Roch—An Alternate Approach」, p.237），
       引用时必须写清是哪一处。
 tags: [math, quadratic-differential, riemann-sphere, disk, moduli, canonical-bundle, riemann-roch]
+superseded_by: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2
 notes: |
+  **★ 已换代（2026-09-11，curator-batch10-14-fix，依 reviewer-batch13）：本卡的 (2) 字面为假。**
+  反例：φ ≡ 1 在上半平面 H 上全纯、在实轴上取实值，满足本卡 (2) 写出的全部假设，却非零；
+  它之所以不该算进来，是因为 φ̃(u) = φ(1/u)·u^{−4} = u^{−4} 在 ∞ 点（u = 0）有**四阶极点**。
+  换言之本卡 (2) **漏写了「在 ∞ 点也全纯」这条前提**（推导里用了、陈述里没写）。
+  继任卡 math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2 把该前提写成 (2a)。
+  **(1)（球面）不受影响**，逐字照抄进 v2。
+  本卡的推导已按 docs/STATUS_LEVELS.md「旧推导的去留」改名并改指 v2，故本卡现在没有推导。
+
+
   由 curator-ckg-followups 于 2026-09-11 新建。**建卡动机是一条点名的待办**：
   worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条逐字写着
 

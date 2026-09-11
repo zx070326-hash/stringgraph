@@ -1,5 +1,5 @@
-id: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk--via-negative-degree
-target: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk
+id: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2--via-negative-degree
+target: math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2
 kind: physical-argument
 status: physical-argument
 depends_on: []
@@ -37,12 +37,16 @@ summary: |
   ⚠ 这条「负次数 ⇒ 无截面」的引理在本图**无带编号来源**，见 gaps 第一条。
 
   **(C) 圆盘：Schwarz 反射把 (2) 归约到 (1)。**
-  设 φ dz² 是上半平面 H 上的全纯二次微分，且在 ∂H 上取实值。
-  令 φ*(z) := conj(φ(conj z))，它在下半平面全纯；由 φ 在实轴取实值，
-  Schwarz 反射原理给出 φ 与 φ* 沿实轴全纯拼接，得到 C 上的整函数 Φ
-  （Φ|_H = φ，Φ|_{下半平面} = φ*）。
-  H 的双重（double）作为紧黎曼面即 P¹，Φ dz² 在 ∞ 点（u = 1/z 片）上的正则性要求与 (A) 逐字相同。
+  设 φ dz² 满足目标 (2) 的**两条**前提：(2a) 在 H 上全纯**且在 ∞ 点的 u = 1/z 片上
+  φ̃(u) = φ(1/u)·u^{−4} 于 u = 0 全纯；(2b) 在 ∂H ∩ R 上取实值。
+  令 φ*(z) := conj(φ(conj z))，它在下半平面全纯；由 (2b) 与 Schwarz 反射原理，
+  φ 与 φ* 沿实轴全纯拼接，得到 C 上的整函数 Φ（Φ|_H = φ，Φ|_{下半平面} = φ*）。
+  由 (2a)，Φ dz² 在 ∞ 点（u = 1/z 片）也全纯——**这一步用的就是 (2a)，不能省**。
   于是回到 (A)：Φ 是整函数且 Φ(1/u)·u^{−4} 在 u = 0 正则 ⇒ Φ ≡ 0 ⇒ φ ≡ 0。
+  ⚠ **(2a) 为什么不可省（2026-09-11 补写，reviewer-batch13）**：只设「H 上全纯 + 边界取实值」
+  时结论**为假**——φ ≡ 1 满足这两条却非零（它违反的正是 (2a)：u^{−4} 在 u = 0 有四阶极点）。
+  旧目标卡（v1）的 (2) 漏写了 (2a)，本推导当时**实际上用了**它（上一段的 ∞ 片正则性要求），
+  故换代只需在陈述与本段补写前提，**论证一步未改**。
   ⚠ 「双重 = P¹ 且反射与二次微分的变换律相容」这一步只作了一句话交代，见 gaps 第四条。
 gaps:
   - |
@@ -52,11 +56,14 @@ gaps:
     FK §III.4 只有小节位置、正文未取得。
     ⇒ 路线 (B) **在本图里是无来源的断言**；真正承载本命题的是路线 (A) 的显式计算。
   - |
-    **(A) 是有限步初等计算，但无 reviewer 独立复核记录**，故按 docs/STATUS_LEVELS.md
-    的例外条款不能标 rigorous（「缺此记录…的一律 physical-argument」）。
-    **升级路径**：reviewer 复核 (A)（Laurent 幂次比较，三行）并在本文件 notes 写
-    `reviewer-verified: <agent>, <date>`；届时 status 与 kind 一起改成 rigorous / proof。
-    这与姊妹推导 worldsheet.sphere-conformal-killing-group--via-two-patch-regularity 的处境完全相同。
+    **(A) 已被独立复核，(C) 尚未——故本条整体仍是 physical-argument。**
+    reviewer-batch13（2026-09-11）复核了 (A) 的 Laurent 幂次比较（φ̃(u) = Σ_n c_n u^{−n−4}，
+    每项幂次 ≤ −4 < 0 ⇒ c_n = 0），判定正确（记录见 notes 首行）。
+    但本推导的目标卡同时断言 (1) 与 (2)，而 (C) 还有两条未复核的缺口（本 gaps 第三、四条），
+    按 min 规则本条只能取 physical-argument。
+    ⇒ **升级的正确做法不是再复核一次，而是拆卡**：把球面那半单独立卡（只挂 (A)(B)），
+    它可立刻按例外条款升 rigorous；圆盘那半单独立卡，保留现有缺口。见目标卡 notes 的拆卡建议。
+    ⚠ 姊妹推导 worldsheet.sphere-conformal-killing-group--via-two-patch-regularity 是同型处境。
   - |
     **(C) 的边界条件是本推导自己选的，不是从别处继承的。** 「φ 在 ∂H 上取实值」
     等价于「φ dz² 在反射下不变」，它是**使二次微分能下降到 D₂ = S₂/(z ∼ 1/z̄) 的自然条件**，
@@ -77,6 +84,17 @@ gaps:
     **不覆盖 g ≥ 1**。本推导对 (A) 用的是 P¹ 的两片图册，换成别的亏格完全失效；
     g ≥ 2 的 `dim H⁰(K²) = 3g − 3` 需要真正的 Riemann–Roch，另见正在建的 math.riemann-roch-theorem。
 notes: |
+  reviewer-verified: reviewer-batch13, 2026-09-11 —— **只覆盖 (A) 那半**（P¹ 两片正则性的
+  Laurent 幂次比较，复核为正确的有限步初等计算）。(C)（圆盘 / Schwarz 反射）**未**被复核，
+  故本推导整体 status 保持 physical-argument，见 gaps 第二条。
+
+  **★ 改指记录（2026-09-11，curator-batch10-14-fix）**：目标由
+  `math.no-holomorphic-quadratic-differentials-on-sphere-and-disk`（v1）改为 `…-v2`，
+  文件与 id 随之改名（校验器强制 derivation id 以 `<target>--via-` 开头）。
+  内容上只改了 (C) 的开头：把「在 ∞ 点也全纯」这条**本来就在用**的前提显式写出
+  （v1 的 (2) 漏写了它，导致 v1 的 (2) 字面为假，反例 φ ≡ 1；reviewer-batch13 指出）。
+  **论证一步未改。**
+
   由 curator-ckg-followups 于 2026-09-11 建立。
   `depends_on` 为空是有意的：路线 (A) 是自足的复分析计算，不用图内任何上游节点
   （用 Riemann–Roch 的 (B) 反而**需要**上游，但那条无来源、且本轮 RR 卡尚未进 main）。
