@@ -1,0 +1,36 @@
+id: worldsheet.u1-current-algebra-is-free-boson--via-ope-and-holomorphicity-assertion
+target: worldsheet.u1-current-algebra-is-free-boson
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.affine-lie-algebra-current-ope
+    note: 供给流代数的 OPE 形式 (11.5.1)；U(1) 情形即 c^{ab}{}_c = 0、k^{ab} = δ^{ab}（归一化 (11.5.14)）。
+  - id: worldsheet.operator-product-expansion
+    note: 原书的全部论证是 'From this OPE and holomorphicity it follows'——OPE 本身就是论证的一半。
+  - id: worldsheet.free-scalar-cft-action
+    inferred: true
+    note: |
+      **inferred 的理由**：「自由玻色子 CFT」在原书此处无定义、无引文；本图以 Vol.1 的自由标量 CFT 承接，
+      其 H 归一化按 conv.nonembedding-scalar-normalization 换算（convention_map 见下）。
+    convention_map: |
+      worldsheet.free-scalar-cft-action 用 conv.alpha-prime-regge（X X ∼ −(α'/2) ln|z|²）；
+      本卡的 H 用 conv.nonembedding-scalar-normalization（H H ∼ −ln z）：令 α' = 2、取单个标量、只取全纯一半，
+      则 i∂H = i(2/α')^{1/2} ∂X。
+  - id: worldsheet.sugawara-central-charge
+    note: |
+      供给 (11.5.27) 所处的框架：U(1) 时 dim(g) = 1、h(g) = 0、ψ² 无定义（无根），原书直接由 j = i∂H 写出
+      T^s = (1/2):jj:，并说明 c = 1。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5, eq. (11.5.14)–(11.5.15), p. 68；eq. (11.5.27), p. 71"
+    note: L1（抽取记录 polchinski-1998-v2.md E60、E61）。
+summary: |
+  原书：给定 (11.5.14) 的 OPE 与流的全纯性，'it follows that each U(1) current algebra is isomorphic to a free boson
+  CFT, j^a = i∂H^a'。逻辑骨架是：j 的 Laurent 模满足 [j_m, j_n] = m δ_{m,−n}（Heisenberg 代数），
+  与自由玻色子 α_m 的代数相同；把 j 积分得 H。(11.5.27) 则由 j = i∂H 代入自由玻色子的 T = −(1/2)∂H∂H 得出。
+gaps:
+  - "**无证明**：原书只有 'From this OPE and holomorphicity it follows'；「同构」的对象与含义未指明（目标卡「不断言」(1)）。"
+  - "**(11.5.27) 由自由玻色子反推**（抽取记录 E61 备注 2），不是从 (11.5.21) 的一般公式取极限（U(1) 无根、ψ² 无定义）。"
+  - "**Heisenberg 代数 ⇒ Fock 表示唯一（在真空存在的前提下）**：这是「同构于自由玻色子」在数学上真正需要的定理（Stone–von Neumann 型 / 顶点代数重构），原书不提；本图无节点。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"

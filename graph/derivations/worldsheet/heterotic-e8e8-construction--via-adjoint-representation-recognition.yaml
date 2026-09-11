@@ -24,6 +24,19 @@ depends_on:
       **inferred 的理由**：「16 个周期实费米子的零模给出 2^8 = 256 维旋量表示」用的是
       Clifford 代数表示这一事实，原书在 §11.2 **不重述**、不引 §10.2。
       本图连到 §10.2 的 R 扇区零模卡，是本图补的边。
+  - id: math.compact-lie-algebra-index-and-casimir
+    inferred: true
+    note: |
+      **inferred 的理由**：第 (3)/(4) 步用到「李代数、伴随表示、规范群由其李代数（局部）决定」这些概念，
+      原书在 §11.2 **不前引** §11.4；§11.4 前段 (11.4.1)–(11.4.7) 与脚注 1 是原书内最近的定义处。
+      ⚠ 该卡**不含** E₈ 的存在性、dim E₈ = 248、E₈ ⊃ SO(16)、248 = 120 + 128（在原书 pp. 61–65 跳读区，
+      (11.4.21) 一带），这些仍是缺口（见 gaps）。边由本图补（2026-09-11，curator-polchinski-v2-ch11-current）。
+  - id: worldsheet.free-fermion-so-n-current-algebra-level-one
+    inferred: true
+    note: |
+      **inferred 的理由**：(11.2.25) 里两份 120 是「两组 16 个 λ 的双线性按 SO(16) 伴随变换」，
+      其在原书内的支撑是 §11.5 (11.5.16)（iλ^Aλ^B 构成 SO(n) 的 level-1 流代数）——§11.5 回指杂化弦，
+      §11.2 不前引，故 inferred。128 的旋量流 (11.2.26) 把 SO(16) 扩大到 E₈ 这一步该卡**不**覆盖。
 sources:
   - ref: polchinski-1998-v2
     loc: "§11.2, eq. (11.2.19)–(11.2.28), pp. 53–55（逐字见目标卡 sources）"
@@ -39,7 +52,7 @@ summary: |
       子群下分解为 120 + 128 —— 故规范群是 E₈ × E₈（原书用词 'Evidently'）。
 gaps:
   - "**第 (4) 步是「认出」而不是推导**：原书用 'There is indeed a group … Evidently'。既不证明「无质量矢量必须在伴随表示」这条时空一致性要求，也不给 E₈ 的构造或 248 = 120 + 128 的分支规则。"
-  - "**李代数事实在本图完全没有节点**：dim E₈ = 248、E₈ ⊃ SO(16)、分支规则 248 = 120 + 128。§11.4「A little Lie algebra」（E59）本轮未入图，且原书 pp. 61–65 在抽取时被跳读（抽取记录 §3.2）。"
+  - "**E₈ 的李代数事实在本图仍无节点**：dim E₈ = 248、E₈ ⊃ SO(16)、分支规则 248 = 120 + 128。2026-09-11 起 §11.4 **前段**（(11.4.1)–(11.4.7)：李代数、不变内积、指标、Casimir）已入图为 math.compact-lie-algebra-index-and-casimir 并以 inferred 边接入；但 E₈ 根系 (11.4.21) 所在的 pp. 61–65 在抽取时被跳读（抽取记录 §3.2），上述三条事实仍无来源。"
   - "**'Again closure and locality of the OPE and modular invariance are easily verified.' 是全部验证**：原书不做。与 worldsheet.heterotic-so32-ope-local-and-closed 的缺口相同（本图无玻色化节点）。"
   - "**Clifford 零模那条边是 inferred**：原书在 §11.2 不重述「周期费米子零模给旋量表示」的论证。"
   - "**(11.2.28) 的完整无质量谱本卡只作指引，未逐条转录**：抽取记录只记了式号，未逐字列出各项。要用必须补读 p. 55 页图。"

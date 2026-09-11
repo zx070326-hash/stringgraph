@@ -1,0 +1,55 @@
+id: worldsheet.sugawara-central-charge--via-holomorphicity-argument
+target: worldsheet.sugawara-central-charge
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.affine-lie-algebra-current-ope
+    note: |
+      供给 jj OPE (11.5.1)（含 k^{ab} = k̂ d^{ab}）、模代数 (11.5.3) 与 [L_m, j_n^a] = −n j^a_{m+n}（(11.5.8)）；
+      (11.5.18) 减去的 c-数 k̂ dim(g)/z² 与 (11.5.22) 的比较都直接用它。
+  - id: math.compact-lie-algebra-index-and-casimir
+    note: |
+      供给 d^{ab}、f^{abc} 完全反对称（(11.5.19)–(11.5.20) 里 f^{ab}{}_c f^{cb}{}_d ∝ Q_g d^a{}_d 一类的缩并）
+      与伴随 Casimir Q_g。⚠ h(g) = Q_g/ψ² 的定义与 ψ² 的归一化不在该卡上（原书 pp. 61–65 未核实）。
+  - id: worldsheet.tt-ope-central-charge
+    note: 供给「TT OPE 的四阶极点系数 = c/2」这一中心荷定义，把 (11.5.24) 读成 c^{g,k}。
+  - id: worldsheet.operator-product-expansion
+    note: |
+      供给 OPE 及其**收敛域**（'valid only for two operators close compared to all others'）——
+      原书本段的全部论证都在讨论这个域的边界，见目标卡 notes 的逐字。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      供给「OPE 奇异项 ⟺ 模的对易关系」，用于 (3)：从 (11.5.24) 读出 L^s_m 满足 Virasoro 代数，
+      以及从 (11.5.22) 读出 [L^s_m, j^a_n] = −n j^a_{m+n}。原书对 (3) 只写 'satisfy a Virasoro algebra with this
+      central charge'，不重做围道。
+  - id: worldsheet.state-operator-isomorphism
+    inferred: true
+    note: |
+      **inferred 的理由**：「L_0^s 的正规序常数为零」原书说 'can be deduced by noting that holomorphicity requires
+      L_0^s and also j_n^a for n ≥ 0 to annihilate the state |1⟩'——|1⟩ 与「全纯算子的非负模湮灭 |1⟩」
+      是态-算子对应的内容，原书此处不引 Vol.1 §2.8。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§11.5 'The Sugawara construction', eq. (11.5.18)–(11.5.26), pp. 69–71；exercise 11.7（原书明写：'the same calculation is organized in a different way in exercise 11.7'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E61）。exercise 11.7 本身未读（原书 pp. 82–83 在抽取跳读区）。
+summary: |
+  (1) 定义 :jj: 为 (11.5.18)（减去 jj OPE 的 c-数双极点）。要算 :jj:(z_1) j^c(z_3) 的 OPE，
+      不能直接把 jj OPE 用在 z_1、z_2 上（'the two currents in :jj: are closer to each other than they are to
+      the third current'）；原书改为：先用 jj OPE 算 j^a(z_1) j^a(z_2) j^c(z_3) 在 z_2 → z_3 的奇异项，
+      再利用对 z_2 的全纯性把整个函数定出（(11.5.19)–(11.5.20)），取 z_2 → z_1 得
+      :jj:(z_1) j^c(z_3) ∼ (k + h(g))ψ² [ j^c(z_3)/z_{13}² + ∂j^c(z_3)/z_{13} ]
+      （⚠ 此式是本图按 (11.5.21)/(11.5.22) 反推的形式，原书 (11.5.20) 的具体写法抽取记录未转录），
+      与 T_B j^c 的 OPE 只差归一化，故 T^s := :jj:/((k+h(g))ψ²) 满足 (11.5.22)。
+  (2) 同样的策略算 :jj:(z_1) :jj:(z_3)：只在有效域内用 OPE，再用全纯性；得 (11.5.24) 且
+      四阶极点系数给 c^{g,k} = k dim(g)/(k + h(g))（(11.5.25)）。
+  (3) Laurent 展开 T^s 得 (11.5.26)；由 (11.5.24) 经围道字典得 Virasoro 代数；
+      L_0^s 的正规序常数由「L_0^s|1⟩ = 0 且 j^a_n|1⟩ = 0（n ≥ 0）」推出为零。
+gaps:
+  - "**核心步骤自称 'This takes a bit of effort'，细节推给 exercise 11.7**：(11.5.19)–(11.5.20) 的全纯性论证在抽取记录中只记式号，中间的缩并（f f ∝ Q_g、k̂ dim g 项的来源）本图未复算；exercise 11.7 未读。"
+  - "**全纯性论证本身依赖 OPE 的收敛与「函数由奇异部分 + 全纯性唯一决定」**：这正是 worldsheet.operator-product-expansion / worldsheet.ope-commutator-dictionary 那条瓶颈；原书明确指出朴素嵌套 OPE 会给出**错误**的 c^{g,k}（目标卡 notes 逐字），但替代论证同样没有解析估计。"
+  - "**(3) 的 Virasoro 代数原书只写 'satisfy a Virasoro algebra with this central charge'**，不重做围道；正规序常数为零的论证 'can be deduced'，一句话。"
+  - "**h(g) 与 ψ² 的定义未核实**（原书 pp. 61–65 跳读）：(11.5.21)/(11.5.26) 的显式系数 (k+h(g))ψ² 本图只能照抄，未核对它等于 2k̂ + Q_g（由 (11.5.40) 反推，本图推断）。"
+  - "**k + h(g) ≠ 0 的隐含前提**：幺正理论中 k ≥ 0、h(g) > 0 故自动成立；原书不提。数学侧（Kac）的 Sugawara 定理在非临界 level k ≠ −h^∨ 下成立，本推导只覆盖幺正情形。"
+author: curator-polchinski-v2-ch11-current
+created: "2026-09-11"
