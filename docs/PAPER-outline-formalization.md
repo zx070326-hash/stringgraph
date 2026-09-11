@@ -153,3 +153,67 @@ from being Lean-checked, while stringgraph's `status` tracks the epistemic stren
 *underlying physics argument itself* (rigorous proof vs. physical argument vs. conjecture),
 propagated by taking the minimum over the graph (`docs/STATUS_LEVELS.md`). We do not claim
 prior work in this space is "merely static documentation."
+
+## 4. Structure of the formalization
+
+The development lives under `formal/StringFormal/` (Lean 4.33.1, Mathlib pinned to the
+same tag) in three islands that do not import each other except where `Virasoro/` is a
+shared base for `NoGhost/`.
+
+**`Math/`.** Self-contained number-theory and root-system lemmas not specific to string
+representation theory: Euler's partition generating function (`EulerPartition.lean`), the
+Dedekind eta S/T transforms and their `SL(2,ℤ)`-invariance (`DedekindEtaS/T/Modular.lean`),
+the modular-group generators and `(ST)^3 = -1` (`ModularGroupGenerators.lean`), the torus
+measure's modular invariance (`TorusMeasure.lean`), Möbius three-point Jacobians and
+Mandelstam identities (`MobiusJacobian.lean`), GSO sector counts (`FiniteCounts.lean`),
+the Green–Schwarz factorization identity and IIB anomaly-matrix kernel
+(`GreenSchwarzAlgebraGen.lean`, `AnomalyPolynomial.lean`, `IIBAnomalyUnique.lean`), and
+the `E₈` root power sums (`E8Roots.lean`).
+
+**`Virasoro/`.** The Witt/Virasoro algebras (`Witt.lean`, `Basic.lean`, built on
+Mathlib's `LieAlgebra.ofTwoCocycle`), Verma modules and their ordered-word spanning set
+(`Verma.lean`, `VermaPBW.lean`; PBW linear independence itself is open), Witt/Virasoro
+perfectness (`WittPerfect.lean`), and the Shapovalov form with Kac-determinant instances
+at `N ≤ 4` (`Shapovalov.lean`, `ShapovalovLevel{Three,Four}.lean`,
+`GenericIndependence.lean`) — this is where C1–C2 from §2 live.
+
+**`NoGhost/`.** The bulk of the development: the `D`-component Lorentzian Fock space and
+Sugawara construction (`Fock.lean`, `FockSigned.lean`, `Sugawara.lean`, giving C4), the
+exponential vertex operator and its mode algebra (`VertexOperator.lean`,
+`VertexWeight*.lean`, `VertexProduct.lean`, `VertexAdjoint.lean`), the momentum-graded
+"tower" Fock space `TowerFock D R = ℤ →₀ Fock D R` on which the DDF operators and their
+full algebra are built (`DDF.lean`, `DDFOperator*.lean`, `DDFAlgebra.lean`, giving C3),
+the Goddard longitudinal `K` operators (`Longitudinal.lean`), the light-cone frame and
+`ddfSpan` (`LightCone.lean`), and the tower-level spurious/null-state quotient
+construction (`TowerNull.lean`, `QuotientForm.lean`). `NoGhost/Statement.lean` is
+deliberately left as a stub: the no-ghost theorem's full statement cannot be written down
+until the quotient form is in place (see §5).
+
+**What Mathlib provided directly**, reused rather than redefined: the two-cocycle
+central-extension construction for Lie algebras (`LieAlgebra.ofTwoCocycle`, underlying
+`Virasoro/Basic.lean`); `ModularForm.eta` and `ModularForm.eta_comp_eq_csqrt_I_inv`
+(underlying the eta-function transforms); `SpecialLinearGroup.SL2Z_generators`
+(underlying the modular-group generation result); `SMulInvariantMeasure (GL (Fin 2) ℝ) ℍ
+volume` (underlying the torus-measure invariance).
+
+**The `StringFormal.Bridge` rule.** Project policy (`formal/CLAUDE.md`) forbids
+redefining an object Mathlib already has. Where a graph card's wording needs to match a
+Mathlib theorem verbatim, `Math/MathlibBridges.lean` restates it inside
+`namespace StringFormal.Bridge` with a `rfl`/`simp`-level proof, and the card's
+`formal.lean_decl` points at the bridge declaration, not at Mathlib directly. Two
+instances exist today: `math.dedekind-eta-function` (expanding `ModularForm.eta` into
+the string-theory `q^{1/24}∏(1-q^n)` form with the `q = e^{2πiτ}` branch convention) and
+`worldsheet.modular-group-psl2z` (giving `Z(SL(2,ℤ)) = {±I}`, `center_eq_pm_one`, not
+previously in Mathlib or this project, and the descent of the Möbius action to
+`PSL(2,ℤ)`).
+
+**The `ℤ →₀ k` quotient-instance obstacle.** The tower-level null-state quotient
+construction needed to state the no-ghost theorem requires a `Submodule R (ℤ →₀ R)`
+quotient. `TowerNull.lean`'s header records that Lean's `HasQuotient` instance synthesis
+for this fails directly on `TowerFock`, because `ℤ →₀ k` simultaneously carries an
+`AddMonoidAlgebra` structure that confuses instance search; the fix taken is to build the
+quotient machinery abstractly first (for an arbitrary `R`-module `M`, bilinear form `B`,
+and submodule `P` — `radicalIn`, `QuotRadical`, `quotRadicalForm`) and instantiate it
+second, rather than working with the quotient instance directly on `TowerFock`. This is
+tracked as a reproducible Mathlib-level issue (TODO tag `noghost-c1`,
+`formal/MATHLIB-ISSUE-quotient-finsupp.md`).
