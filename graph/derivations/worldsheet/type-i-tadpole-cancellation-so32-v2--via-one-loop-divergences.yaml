@@ -60,6 +60,26 @@ depends_on:
       ⚠ 那张卡断言的 ± 是 **SO(n) 与辛群之间的相对号**；(10.8.19) 里 ∓ 的**整体号**
       原书自承不是算出来的（'This calculation does not determine the sign of the tadpole'），
       两者不要混（gaps 已分别登记）。
+  - id: worldsheet.superstring-total-fermionic-partition-function-vanishes
+    note: |
+      供给本推导**第 (4) 步把 NS–NS 侧翻到 R–R 侧**所需的两条相消关系：
+      **Z_{C₂,1} = −Z_{C₂,0}**（§10.8 p.38 逐字）与 **Z_{K₂,1} = −Z_{K₂,0}**（(10.8.11) 下方逐字），
+      以及它们共同的来源「总费米配分函数为零」（原书归因于超对称，§10.7）。
+      **非 inferred**：这两条式子都印在本推导所依据的同一节里（pp. 38 / 41），该卡逐字照录。
+      ★★★【2026-09-11 新增，small-backlog-13】本边关闭本推导 gaps 里 2026-09-11（klein-mobius 轮）
+      新增的那条缺口，其逐字待建项是：
+        「→ 待建：worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry
+          （§10.7 的总费米配分函数为零），届时本推导加一条非 inferred 边。」
+      （新卡 id 按 lead 派工单定为 …-total-fermionic-partition-function-vanishes，
+       更贴合原书 'the total fermionic partition function vanishes' 那句。）
+      ⚠ **该卡断言 (3) 把脚注 7 的限定带在身上**：逐拓扑相消是**真空振幅**里的事，
+      '**This is not sufficient**'——真正的条件是两类 tadpole 在拓扑求和后**各自**为零。
+      本推导第 (6) 步说的正是这一条，**用**这条限定（导出 SO(32)）仍在本推导，不在该卡。
+      ⚠ 该卡「不断言 (c)」：**Möbius 那一支不需要翻面**（原书直接算 R–R 侧），
+      故该卡不给 Z_{M₂,1} = −Z_{M₂,0}，本推导也不需要。
+      ⚠ 该卡的推导只有 physical-argument：原书给的是一句无指向的归因 'by supersymmetry'，
+      而 §10.7 写下的是 (10.7.16) 与 Z¹₁ = 0 两条 θ 函数事实，**本书从不把两者打通**；
+      且这两条事实在本图**都没有节点**。⇒ 本推导的 status 不受影响（本来就是 physical-argument）。
   - id: worldsheet.type-i-unoriented-closed-spectrum
     note: |
       供给无取向闭弦部门，以及「该理论单独不一致」的预告。
@@ -234,16 +254,27 @@ gaps:
          'with the usual extra sign for fermionic fields'，不给理由。
      (d) **仍开放的两条真缺口**：**Ω 在自旋场 V_s 上的作用**原书 §10.6 不写
      （闭弦卡「不断言 (a)」登记）；**worldsheet.open-superstring-doubling-trick** 仍待建。"
-  - "★【2026-09-11 新增，klein-mobius】**第 (4) 步用的两条『超对称相消』不在任何一张三面卡的断言里**：
+  - "★【2026-09-11 新增，klein-mobius；**2026-09-11 关闭，small-backlog-13**】
+     **第 (4) 步用的两条『超对称相消』不在任何一张三面卡的断言里**：
      求 R–R 侧的总和需要 **Z_{C₂,1} = −Z_{C₂,0}** 与 **Z_{K₂,1} = −Z_{K₂,0}**（Möbius 那一支
      原书直接给的就是 R–R 项，不需要翻面）。这两条相消原书归约到 §10.7 的超对称论证
      （总费米配分函数为零），而圆柱卡与 Klein 瓶卡**都明确把它排除在断言之外**
      （各自的「不断言 (a)」/「不断言 (b)」：算 NS–NS 侧本身不需要它）。
-     ⇒ **本推导第 (4) 步在这一处没有图内支撑**：接来的两张卡只给 NS–NS 侧，翻到 R–R 侧靠的是
-     本推导直接引原书。⚠ 这不是新引入的缺口（此前三支全在本推导内部时同样没有支撑），
-     但接线之后它变得**可见**了，故单列。
-     → 待建：worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry
-     （§10.7 的总费米配分函数为零），届时本推导加一条非 inferred 边。"
+     ⇒ 本推导第 (4) 步在这一处**曾**没有图内支撑：接来的两张卡只给 NS–NS 侧，
+     翻到 R–R 侧靠的是本推导直接引原书。
+     ★★★【本条关闭】旧版待建项逐字是「worldsheet.superstring-vacuum-amplitude-vanishes-by-
+     supersymmetry（§10.7 的总费米配分函数为零），届时本推导加一条非 inferred 边」——
+     **该卡已建**：**worldsheet.superstring-total-fermionic-partition-function-vanishes**
+     （id 按 lead 派工单定名；断言 Z_ψ^± = 0、Z_{C₂,1} = −Z_{C₂,0}、Z_{K₂,1} = −Z_{K₂,0}、
+     以及 p.42 那句『for each world-sheet topology the NS–NS divergence is the negative of the
+     R–R divergence』，并把脚注 7 的『This is not sufficient』限定写进断言 (3)）。
+     本推导已加一条**非 inferred** 边指向它。
+     ⚠ **新卡把缺口推到了更深的一层，那一层仍开放**：原书给的只是一句无指向的归因
+     'by supersymmetry'；§10.7 写下的是 **(10.7.16)**（Jacobi 'abstruse identity'）与
+     **Z¹₁ = 0** 两条 θ 函数事实，**本书从不把两者打通**，而这两条事实在本图**都没有节点**
+     （worldsheet.modular-invariance-requires-eight-transverse-fermions 的 notes 明文把它们
+     排除在外）。⇒ 待建：math.jacobi-abstruse-identity、Z¹₁ = 0 的卡、
+     以及「时空超对称 ⇒ 玻色/费米态逐级配平」的卡。详见新卡推导的 gaps。"
   - "**时空反常路线不在本推导范围**：第 12 章给出 SO(32) 唯一性的另一个独立理由，本轮未读。GS 1984 那条路线由本图 consistency 区另行承载。"
 notes: |
   ★★【2026-09-11 接线（curator，klein-mobius）】本轮的改动**全部在记账层面，论证与结论一字未动**：
