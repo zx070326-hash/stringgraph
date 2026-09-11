@@ -1,0 +1,193 @@
+id: worldsheet.fock-module-free-over-negative-virasoro-low-level
+kind: proposition
+title: 单一动量、层 N ≤ 4 处玻色弦 Fock 模在 Virasoro 负部下自由：Kac 行列式非零 ⇒ p(N) 个标准降算符向量在 Fock 空间中线性无关（FockFreeLowLevel.lean）
+statement: |
+  设 D ∈ N、R 是交换环、ℚ-代数且**无零因子**，η : Fin D → R 是对角度规分量、满足
+  η^μ η^μ = 1（∀μ；conv.metric-mostly-plus 的号差版满足之），a : Fin D → R 是零模参数
+  （a^μ = (2α')^{1/2} k^μ，conv.alpha-prime-regge，固定动量扇区）。设 F = F(D,R) 是 Fock 空间
+  （worldsheet.bosonic-fock-space），L_n（n ∈ Z）是其上的 Sugawara 型 Virasoro 算子
+  （worldsheet.fock-space-virasoro-representation，中心荷 c = D），|k⟩ := 1 ∈ F 是真空。
+  记 h := ½α₀² ∈ R 为真空的权（等于 conv.alpha-prime-regge 下的 α'k²）。
+
+  **标准降算符向量**（按 level 的分拆排序，共 p(N) 个）：
+
+      N = 1 (p = 1):  L₋₁|k⟩；
+      N = 2 (p = 2):  L₋₂|k⟩,  L₋₁²|k⟩；
+      N = 3 (p = 3):  L₋₃|k⟩,  L₋₂L₋₁|k⟩,  L₋₁³|k⟩；
+      N = 4 (p = 5):  L₋₄|k⟩,  L₋₃L₋₁|k⟩,  L₋₂²|k⟩,  L₋₂L₋₁²|k⟩,  L₋₁⁴|k⟩。
+
+  记 det_N(c,h)（N = 2,3,4）为 worldsheet.kac-determinant-level-{two,three,four} 算出的那族
+  Verma 侧 Kac 多项式，det₁(h) := 2h（N = 1 的情形，不依赖 c）。
+
+  **断言（N = 4，本卡标题所指；N = 1,2,3 是同一机制的姊妹陈述，见 notes）**：若
+  det₄(D, h) ≠ 0，则上列 N = 4 的五个标准降算符向量在 F 上 **R-线性无关**。
+
+  **姊妹陈述（N = 1, 2, 3，同一机制，Lean 中各自独立成立、互不蕴含）**：
+  det₁(h) ≠ 0 ⇒ L₋₁|k⟩ ≠ 0（单向量族线性无关）；
+  det₂(D,h) ≠ 0 ⇒ N = 2 的两个向量线性无关；
+  det₃(D,h) ≠ 0 ⇒ N = 3 的三个向量线性无关。
+
+  **机制**：|k⟩ 是 Sugawara 作用下权 (D,h) 的最高权向量；由 Verma 模的万有性质
+  （worldsheet.verma-module-v2），存在唯一的等变 R-线性映射
+  vermaToFock : V(D,h) → F 把 Verma 模的最高权向量送到 |k⟩；把 Fock 双线性型 ⟨·,·⟩
+  （worldsheet.fock-indefinite-form）沿 vermaToFock **拉回**，得到 V(D,h) 上一个
+  **归一化逆变**双线性型（逆变性用到 L_n 在 ⟨·,·⟩ 下互为伴随，即
+  worldsheet.virasoro-generators-adjoint 的 L_n^† = L_{−n}；归一化即拉回型在 Verma
+  最高权向量上取值 1）；Gram 矩阵沿 vermaToFock **严格相等**地搬运（不只是行列式相等），
+  故这 p(N) 个标准降算符向量在 F 上关于 ⟨·,·⟩ 的 Gram 行列式**就是** det_N(D,h)；
+  再用「Gram 行列式非零 ⇒ 线性无关」（math.gram-determinant-nonzero-implies-linear-independence）。
+
+  【本节点明确**不**断言】
+  (a) **N ≥ 5**：本卡只到 N = 4；一般 N 需要一般 (c,h) 处的 Kac 行列式公式
+      （worldsheet.kac-determinant-v2，rigorous、未形式化，瓶颈是 PBW），见蓝图 §B.2。
+      **本卡对无鬼定理的形式化瓶颈无任何影响**：那条链是
+      worldsheet.kac-determinant-v2 → math.verma-module-free-over-negative-part → PBW
+      （worldsheet.no-ghost-theorem-v4 的上游），本卡覆盖的判据仍只到 N = 4，
+      且走的是 Fock 侧的一个独立实例，不缩短、不绕过那条瓶颈。
+  (b) 判据的**必要性**：det_N = 0 处，F 中那 p(N) 个向量仍可能线性无关——本卡只证
+      vermaToFock **像**的线性无关，不断言 vermaToFock **单射**（vermaToFock 未必单射，
+      见 notes）。
+  (c) **多个动量的联合结论**或**跨 level 的联合线性无关**：本卡是**单一动量**
+      （a 是给定参数，不含零模算符 x^μ，继承自 Sugawara.lean 的范围限制）；
+      N = 1..4 的向量合在一起是否线性无关未在本卡陈述（可望由 L_0 本征值分层正交配合
+      得到，但 Lean 侧未组装这一步）。
+  (d) **D = 26、a₀ = 1 或任何质壳条件**：本卡对 D、h 无限制。D = 26、a₀ = 1（质壳
+      h = 1 − N）处的数值核对见本卡 notes：det₁ = det₂ = 0（判据在这两层空转），
+      det₃ = 2304，det₄ = 2649563136。
+  (e) **V(D,h) ≠ 0 本身**作为独立结论：本卡的构造副产品地蕴含它（拉回型的归一化本身
+      需要 Verma 最高权向量非零），但本卡陈述层面只断言 F 中的线性无关；把它当独立结论
+      单列见 math.verma-module-free-over-negative-part 的 notes 与本卡 notes 的分工说明。
+  (f) 文件所在目录（Virasoro/）与其 import（NoGhost/PhysicalStates.lean）不一致：
+      纯粹是任务分派时的路径遗留，不影响内容，见 notes。
+uses_conventions:
+  - conv.virasoro-standard
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.verma-module-notation
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.linearIndependent_fockDesc4
+  lean_file: StringFormal/Virasoro/FockFreeLowLevel.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/FockFreeLowLevel.lean :: StringFormal.NoGhost.Fock.{FockVir, vermaToFock, vermaToFock_hwv, vermaToFock_lie_lgen, hwv_ne_zero, fockForm, fockForm_apply, fockForm_isContravariant, fockForm_hwv_hwv, gramMatrix_vermaToFock, kacDet1, kacDet2, kacDet3, kacDet4, fockDesc1, fockDesc2, fockDesc3, fockDesc4, vermaDesc1, vermaToFock_descFamily2, vermaToFock_descFamily3, vermaToFock_descFamily4, vermaToFock_vermaDesc1, gram_det_fockDesc1, gram_det_fockDesc2, gram_det_fockDesc3, gram_det_fockDesc4, linearIndependent_fockDesc1, linearIndependent_fockDesc2, linearIndependent_fockDesc3, linearIndependent_fockDesc4}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry，公理仅 propext / Classical.choice / Quot.sound
+      （文件头 "## Status" 自述）。文件头 module docstring 逐字写「Graph nodes (low-level
+      *instance* of): `worldsheet.verma-module-free-over-negative-part`,
+      `math.kac-determinant-v2`」——**该行两个 id 都需要按本仓库现状订正**，见本卡 notes
+      的【文献/记账歧义】一节：前者实际路径是 `math.verma-module-free-over-negative-part`
+      （不在 `worldsheet` 区），后者实际 id 是 `worldsheet.kac-determinant-v2`（不在 `math` 区）。
+      curator 核实过 F(D,R)、Lop、pairing、gramMatrix、VermaModule、vermaLift、IsContravariant
+      的定义均来自各自既有文件（Fock.lean、Sugawara.lean、Verma.lean、Shapovalov.lean、
+      GenericIndependence.lean），本文件不重新定义它们，只在这些既有对象之间搭桥。
+      逐条对应见本卡推导 `--via-lean` 的 depends_on 与 summary。
+tags: [cft, representation-theory, fock-module, virasoro, verma-module, shapovalov, kac-determinant, formalized]
+notes: |
+  【siblings：N = 1, 2, 3 各自独立于 N = 4 成立，statement 只把 N = 4 当标题结论】
+  按任务分派与「formal.lean_decl 只填一个名字，取最强/最能代表本文件的那条」的约定，
+  本卡 formal.lean_decl 填 `linearIndependent_fockDesc4`（覆盖向量数最多、p(N) = 5）。
+  N = 1, 2, 3 的三条 `linearIndependent_fockDesc{1,2,3}` 是**同一机制的独立实例**，
+  已写入 statement 的「姊妹陈述」一段，不再单独立卡（按「一个节点一个命题」的精神，
+  这四条共享同一个证明骨架与同一组【不断言】，拆成四张卡只会让图上多出三份几乎相同的
+  样板而不增加信息；参照 worldsheet.verma-level-basis-generic-low-levels-v2 把 N = 2,3,4
+  合在一卡的先例）。
+
+  【与 worldsheet.kac-determinant-level-{two,three,four} 的分工——本卡在图中新增了什么】
+  那三张卡（连同旧的 kac-determinant-level-two 的 N=1 部分）算的是 **Verma 模**（抽象、
+  单一最高权向量 |c,h⟩）张成集的 Gram 行列式；worldsheet.verma-level-basis-generic-low-levels-v2
+  把「Gram 行列式非零 ⇒ 线性无关」这一步在 **Verma 模内部**接上。本卡把同一条结论**转移到
+  Fock 模**——一个具体、由振子构造出来的表示，其上的向量是真正的物理态候选，而不是抽象商模
+  里的陪集。这一步**不是**「Verma 模自由 ⇒ Fock 模自由」的一般定理（worldsheet.fock-module-
+  -free-over-negative-virasoro 的 notes 明确记录了 FGZ 1986 否认这条一般蕴含，见下一段）；
+  它是**同一 Kac 行列式判据在 Fock 模上的独立重新证明**，靠的是 vermaToFock 这个具体的
+  Verma→Fock 等变映射把 Gram 矩阵原样搬运，而不是抽象的「自由性传递」论证。
+
+  【与 worldsheet.fock-module-free-over-negative-virasoro 的关系——两张卡互不加强、互不依赖】
+  那张卡（FGZ 1986 Prop 2.6(i)，rigorous、未形式化）断言**任意号差 (D−1,1)、D ≥ 2、p ≠ 0** 的
+  Fock 模 V(E,p) 作为 U(ℒ⁻)-模**整体自由**（所有 level 一次说清）；本卡只到 N ≤ 4、且是
+  **条件**结论（Kac 行列式非零）、**单一动量**、对度规 η 不要求洛伦兹号差（任意满足
+  η^μη^μ=1 的对角度规都可以）。两者不能互相加强对方：
+  · 本卡**不能**升级那张卡到 formalized——那张卡覆盖一切 N，本卡只到 4；
+  · 那张卡**不能**让本卡的 Kac 判据变得多余——那张卡的证明未印出（FGZ 是 PNAS 公告），
+    本卡是完全不同的论证路线（Verma 万有性质 + Gram 行列式搬运，不是 FGZ 未公开的方法）。
+  ⇒ 两卡**互不依赖**，各自在图上独立存在，这与 worldsheet.fock-module-free-over-negative-virasoro
+  自己的 notes「本命题不断言 (a)：不断言 V(E,p) 是 Verma 模直和」一致——本卡也不走那条路，
+  本卡靠的是「像的线性无关」而非「同构」。
+
+  【D = 26、a₀ = 1 质壳处的数值核对（curator 逐条核对 Lean 的 `ring` 恒等式）】
+  Lean 侧 `kacDet{1,2,3,4}_massShell_26` 在 c = 26、h = 1 − N（N = 1,2,3,4）处给出：
+    kacDet₁((1:R)−1) = 0，kacDet₂(26,(1:R)−2) = 0，
+    kacDet₃(26,(1:R)−3) = **2304**，kacDet₄(26,(1:R)−4) = **2649563136**。
+  （curator 直接代入本卡 statement 里的 det_N 多项式手算复核，四个数值全部吻合，`ring` 证明
+  没有可疑之处。）⇒ 本卡的判据在 D = 26、a₀ = 1 的**开弦谱物理态**质壳上，**N = 1, 2**
+  两层完全空转（Kac 行列式恰好为零——这正是那两层**存在零模态**的层，Virasoro 判据在
+  这里判不出线性无关，符合预期而非漏洞），只在 N = 3, 4 判定有效
+  （`linearIndependent_fockDesc{3,4}_massShell_26`，额外要求 `[NoZeroDivisors R][CharZero R]`）。
+  ⚠ **两处容易混淆、必须分开读的「不同的数」**（另见 worldsheet.kac-determinant-v2 notes (D)
+  的对应记账）：
+    · 本卡这里的 det₃ = 2304、det₄ = 2649563136 是 Kac 行列式在 **D=26,h=1−N 这一个特定
+      质壳点**上的**取值**；
+    · worldsheet.kac-determinant-v2 notes (D) 的 α₃ = 2304、α₄ = 37748736 是**一般 (c,h)**
+      处 Kac 行列式因式分解 det_N(c,h) = α_N ∏(h−h_{r,s})^{p(N−rs)} 里的**首项系数**
+      （与 (c,h) 无关的常数）。
+    两族数在 N = 3 处**碰巧同为 2304**（因为 h_{r,s}(26) 在 N=3 相关的几对 (r,s) 处
+    取值恰使乘积因子在 h=1−3=−2 处约化为 1；curator 未逐项验证这个巧合的代数原因，
+    只确认了两处的**定义**本来就不同，不能互相替代或互相印证），在 N = 4 处**不相等**
+    （2649563136 ≠ 37748736），这正说明「质壳处的行列式值」与「一般公式的首项系数」
+    是两个不同的量，本卡与 kac-determinant-v2 各自独立核对，互不冲突。
+
+  【V(c,h) ≠ 0 的副产品：`hwv_ne_zero_of_two_le`——记账在 math.verma-module-free-over-negative-part】
+  本文件另证 `hwv_ne_zero_of_two_le [Nontrivial R] (hD : 2 ≤ D) (hw : R) : hwv R (D:R) hw ≠ 0`：
+  对**任意自然数 D ≥ 2**（经 `(D:R)` 嵌入）与**任意** h : R，取洛伦兹符号向量
+  η = diag(−1,1,…,1) 与零模 a = (h−½, h+½, 0,…)，可使真空权恰为 h（`vacuumWeight_weightZeroMode`）；
+  再用 `hwv_ne_zero`（真空作为最高权向量沿 vermaToFock 的原像非零，因为 vermaToFock 把它送到
+  Fock 真空 1 ≠ 0）。**η 的不定性是关键**：正定 η 只能触达 h = ½Σa_μ² 这一族非负值，
+  洛伦兹号差（一个负号）才能吃掉任意 h（正负都行）。
+  ⇒ 这**不是**本卡陈述的一部分（本卡陈述只讲线性无关），但它是同一文件的副产品，
+  对应的图侧记账已单独作为**推导层面的 note**写在 math.verma-module-free-over-negative-part
+  与 worldsheet.shapovalov-form-existence（见后者的 notes：`exists_isContravariant_iff_hwv_ne_zero`
+  现对 c = (D:K)（D ∈ N，D ≥ 2）与任意 h 有了无条件见证）。**本卡不重复登记该副产品的完整分析**，
+  只记它「从哪里来」；详细分析见那两张卡各自的 notes。
+
+  【为什么本卡不依赖 worldsheet.shapovalov-form-existence / -uniqueness】
+  乍看本卡的第 3 步「拉回得到归一化逆变型」与 Shapovalov 形式的存在性是同一件事，
+  但 Lean 侧的证明路线**完全不同**：Shapovalov.lean 走的是「Shapovalov 泛函 f 存在 ⟺
+  归一化逆变型存在」的抽象 iff（`exists_isContravariant_iff_hwv_ne_zero` 及其证明链），
+  本文件**直接构造** `fockForm := (pairing η).compl₁₂ (vermaToFock) (vermaToFock)`
+  并直接证 `fockForm_isContravariant`——不经过 `IsShapovalovFunctional`、
+  `hwvFunctional`、`existsUnique_isContravariant` 中的任何一条。两条路线的结论在特定
+  (c,h) = (D,h) 处重合（都给出「V(D,h) 上存在归一化逆变型」），但**证明路径不共享中间引理**，
+  故本卡的推导 `--via-lean` 不把 shapovalov-form-existence / -uniqueness 列为 depends_on
+  （按「每条边都要能在 sources.loc 指向的位置找到论证」的纪律，这里没有 Lean 层面的调用关系
+  可以指出）；两张卡之间只有**内容上的呼应**，记在这里而不是记成一条 inferred 边。
+
+  【文件放置位置的说明】文件头 module docstring 逐字："The file is in `Virasoro/` because
+  that is the path assigned to the task, but it imports `NoGhost/`; its natural home is
+  `NoGhost/`." Declarations 都在 `StringFormal.NoGhost.Fock` 命名空间下（不是
+  `StringFormal.Virasoro`），`formal.lean_file` 按实际路径填 `StringFormal/Virasoro/FockFreeLowLevel.lean`；
+  这是一处纯粹的组织学遗留，curator 未改动 formal/（不在本任务权限内），只在此登记以便
+  formalizer 未来搬迁文件时知道要同步改 `lean_file`。
+
+  【文献/记账歧义（写给 lead 与后续 curator）】
+  (1) 本文件 module docstring 第 12–13 行写「Graph nodes (low-level *instance* of):
+      `worldsheet.verma-module-free-over-negative-part`, `math.kac-determinant-v2`」。
+      两个 id **都对不上本仓库现状**：前者的真实 id 是 **`math.verma-module-free-over-negative-part`**
+      （area 是 `math` 不是 `worldsheet`——该卡文件确实存在于
+      `graph/statements/math/verma-module-free-over-negative-part.yaml`）；后者的真实 id 是
+      **`worldsheet.kac-determinant-v2`**（area 是 `worldsheet` 不是 `math`）。这与任务派发文本
+      本身给的路径（`graph/statements/worldsheet/verma-module-free-over-negative-part.yaml`）
+      是**同一个错误**，说明它源自任务派发时对该卡 area 的误记，而不是 Lean 侧独立犯错。
+      curator 未改动 formal/ 文件（不在本任务权限内），此处只记录以便 formalizer 下次touch
+      该文件时顺手订正 module docstring；graph 侧的 depends_on 已按**真实 id**接线（见推导）。
+  (2) 任务分派文本第 3 条提到的 D=26 质壳数值经核实**完全准确**（无歧义）；上面的
+      「两族数在 N=3 碰巧相等」是本 curator 主动发现并登记的，非任务分派文本所述内容。
+
+  【查重（curator，2026-09-11）】`uv run stringgraph search "fock free"`（无命中）、
+  `search kac`、`search shapovalov` 命中的都是既有的 Verma 侧、Shapovalov 侧卡片
+  （worldsheet.kac-determinant-level-{two,three,four}、worldsheet.verma-level-basis-generic-low-levels-v2、
+  worldsheet.shapovalov-form-{existence,uniqueness,unconditional-existence}、
+  math.gram-determinant-nonzero-implies-linear-independence）与
+  worldsheet.fock-module-free-over-negative-virasoro（FGZ 一般结论，见上）；
+  **没有节点承载「Fock 模在 N ≤ 4 处、由 Kac 行列式判据给出的线性无关性」**，本卡是净增量。
+author: curator
+created: "2026-09-11"
