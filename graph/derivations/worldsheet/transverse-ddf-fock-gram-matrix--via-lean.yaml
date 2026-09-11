@@ -129,7 +129,29 @@ summary: |
   不参与传播），指针仍在图里，状态不受影响。若 lead 要传播效果，见 commit 1152cbf 的原文，
   并须同步改那条测试断言（工具侧改动，单独提交，由 lead 裁决）。
 gaps:
-  - "**(3) 的末句已关闭（2026-09-11 追记，DDFGram rung 定位合入 main 后）**：原 gap 写「|{d}⟩ 落在塔的第 N(d) 层……没有对应声明」。现在有了：`ddfMonomial_mem_towerRungSubmodule` / `frameMonomial_mem_towerRungSubmodule` 给 |{d}⟩ ∈ towerRungSubmodule(−N(d))（即动量 k − N(d) k_0；塔的层指标取 +j·k_0，故是 **rung −N(d)**），`ddf_gram_of_level_ne_of_rung` 把「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」**改由层间正交**（`towerPairing_eq_zero_of_mem_towerRungSubmodule`）证出，逐字兑现目标 (3) 末句「也可由塔的层间正交直接读出」。`ddfSpan_eq_iSup_rung` 另给 ddfSpan = ⨆_N (ddfSpan ⊓ rung −N)，使 Gram 矩阵成为分块对角。**仍缺**：「rung 与振子能级的联动」——|{d}⟩ ∈ towerBigrade(−N(d), N(d))（即振子能级恰为 N(d)）**未做**；只有 rung 那一半，没有 level 那一半。"
+  - "**(3) 的末句已关闭（2026-09-11 追记，DDFGram rung 定位合入 main 后）**：原 gap 写「|{d}⟩ 落在塔的第 N(d) 层……没有对应声明」。现在有了：`ddfMonomial_mem_towerRungSubmodule` / `frameMonomial_mem_towerRungSubmodule` 给 |{d}⟩ ∈ towerRungSubmodule(−N(d))（即动量 k − N(d) k_0；塔的层指标取 +j·k_0，故是 **rung −N(d)**），`ddf_gram_of_level_ne_of_rung` 把「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」**改由层间正交**（`towerPairing_eq_zero_of_mem_towerRungSubmodule`）证出，逐字兑现目标 (3) 末句「也可由塔的层间正交直接读出」。`ddfSpan_eq_iSup_rung` 另给 ddfSpan = ⨆_N (ddfSpan ⊓ rung −N)，使 Gram 矩阵成为分块对角。**仍缺**：「rung 与振子能级的联动」——|{d}⟩ ∈ towerBigrade(−N(d), N(d))（即振子能级恰为 N(d)）**未做**；只有 rung 那一半，没有 level 那一半。
+    ⇒ **【2026-09-12 追记（curator）：这条『联动』缺口已在下游关闭，但不改本推导状态】** `formal/StringFormal/NoGhost/SliceDim.lean :: StringFormal.NoGhost.frameMonomial_mem_towerBigrade`
+    （蓝图 §B′ PR2；分支 agent/formalizer/general-n-pr012，提交 9328c03 合入 main）证出
+    `|{d}⟩ ∈ towerBigrade D R (−N(d)) N(d)`，即 rung 与 level 的联动。⚠ **论证形状不是
+    『算出 ddfOp 的振子能级』**：Lean 文件头逐字——'The proof does *not* compute the
+    oscillator level of `ddfOp`. Instead: `|d⟩` sits on rung `-N(d)` (已由本推导 (3) 关闭的
+    rung 那一半给出) and is physical (`ddfMonomial_mem_towerPhysSubmodule`); each of its
+    bigraded components is again physical (`Glue.towerBigradeProj_mem_towerPhysSubmodule`);
+    and a nonzero physical vector in the slice `(j, M)` must satisfy `α'k² + j + M = a₀`
+    (`massShell_of_mem_towerBigrade`), which at `j = -N(d)` forces `M = N(d)`'——即靠
+    **物理性 + 质壳条件**把双分次压到单一分量，不是直接验证 A^ε_n 的模数与振子数满足
+    N(d) = Σ n_i。类型类比本推导所在 section 更窄的一层：`frameMonomial_mem_towerBigrade`
+    所在的 `section Bigrade` 要 `[CommRing R] [Algebra ℚ R] [NoZeroDivisors R] [CharZero R]`
+    （`massShell_of_mem_towerBigrade` 把标量方程 `α'k²+j+M=a₀` 化成整数方程 `j+M=0` 需要
+    这两条），比本推导目标 (1)(2)(3) 本身的假设（(1) 只需 `[Algebra ℚ R]`；(2)(3) 见 summary
+    第四、五步）更强。**不建新 depends_on 边**：目标卡 `worldsheet.transverse-ddf-fock-gram-matrix`
+    的 effective 被 `tests/test_graph.py::test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split`
+    钉在 formalized，本文件历史上（2026-09-12，lightcone-frame 接口边一节）已有一次
+    「加边后 pytest 变红，随即撤回改为 statement 的 `uses`」的先例；`frameMonomial_mem_towerBigrade`
+    对本推导的用法是**下游**（`worldsheet.ddf-spanning-rank-inequality` 与
+    `worldsheet.ddf-spanning-hypothesis--via-rank-inequalities` 的边才真正消费它），
+    本推导自身的三条结论 (1)(2)(3) 不需要它。⇒ 本推导 `status: formalized`
+    **不变**，只在此追加一条 gap 说明「联动」缺口已被下游关闭，指向消费它的那两条新推导。"
   - "**目标 (1) 的『任意交换环』由母卡承载，不由本文件承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`（`ddfOp` 的构造需要 1/2 一类的有理数）。完全一般的条件命题是 `StringFormal.gram_of_heisenberg_family`（任意交换环，图上 math.heisenberg-family-gram-matrix）。见 notes (d)。"
   - "**(H1)–(H4) 在本卡里仍是假设**（目标卡边界 (a)）：Lean 把它们在 DDF 上证出来了，但那是 `ddfFamily_*` 四条定理的内容，不是本卡的断言；本卡的机检链之所以经过它们，只因 lean_decl 取的是 DDF 实例。两种读法的分界写在 notes 与两条 depends_on 的 note 里。"
   - "**无张成**（Lean 文件头 Mathematical notes 第 4 条 / Gaps 第 1 条）：没有任何声明说 DDF 态穷尽横向物理谱。`ddf_span_pos` + `ddfSpan_le_towerPhysSubmodule` 只给「DDF 扇区是物理子空间里的一个正定子空间」；整条无鬼定理还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（`ddf-spans`，蓝图 §B）。目标卡边界 (b) 同款。"
