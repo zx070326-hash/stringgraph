@@ -503,7 +503,19 @@
   pages   = {8442--8446},
   year    = {1986},
   doi     = {10.1073/pnas.83.22.8442},
-  note    = {全文已核实（PMC386946 扫描页五页逐页读毕）。无鬼定理 = Theorem 2.8 的第二个同构（作者自己指认）；消灭定理+维数公式 = Theorem 2.7；c=26 见 Proposition 2.1(i) 与 §2.1 的假设 pi(c)=26，文中无 "Q^2=0 iff c=26" 型编号陈述，D=26 是假设不是结论。见 extractions/brst-cohomology-sources.md §1。}
+  note    = {全文已核实（PMC386946 扫描页五页逐页读毕）。无鬼定理 = Theorem 2.8 的第二个同构（作者自己指认）；消灭定理+维数公式 = Theorem 2.7；c=26 见 Proposition 2.1(i) 与 §2.1 的假设 pi(c)=26，文中无 "Q^2=0 iff c=26" 型编号陈述，D=26 是假设不是结论。见 extractions/brst-cohomology-sources.md §1。
+             **★ 2026-09-11 researcher 追加（查重锚点，勿新建重复条目）：本条的 bib key 是 `fgz-1986`，
+             不是 `frenkel-garland-zuckerman-1986`。** 后者是本项目多处口头/派工单里使用的**别名**，
+             按 literature/CLAUDE.md 的 key 规范 `<firstauthor>-<year>` 本应作 `frenkel-1986`，
+             历史原因用了缩写。**本行写出 frenkel-garland-zuckerman-1986 这个字符串，就是为了让 grep 该别名的人命中这里。**
+             改 key 会破坏 graph/ 里全部已有引用，**不要改**；如需规范化，交 lead 走里程碑流程。
+             **★ 同日追加内容核实**：`Proposition 2.4`（p.8445 左栏）已逐字复核——它**不是** Thm 2.7 的重复，
+             而是其一般版：对**任意** Hermitian、`L^-`-free、属于 `O_0` 的模 `V` 成立，
+             `m != 0` 消灭、`m = 0` 的维数 = Eq. [2.3] 中 `1` 的系数（隐式）；**语句里不含 `p != 0`、不含 `D`、不含号差**。
+             Thm 2.7 是它在 Fock 模 `V(E,p)` 上的具体化（把那个系数算成 `p_(24)(1 - p.p/2)`）。
+             **且 `Prop 2.4` 自身 = `Thm 1.12` + `Prop 1.3`** ==> Thm 2.7 自列的四条依赖
+             （Thm 1.12 / Prop 1.3 / Prop 2.4 / Prop 2.6 第一部分）**逻辑上冗余，不是四个独立输入**。
+             逐字与量词对照表见 extractions/brst-cohomology-sources.md **§9.9**。}
 }
 
 @article{lian-zuckerman-1989,
@@ -4004,17 +4016,41 @@
   number  = {2},
   pages   = {253--290},
   year    = {1977},
-  note    = {登记等级 **L0（正文与元数据均未独立核实）**，2026-09-11 由 curator 按 lead 指示登记，
-             用途：作 GSO 投影的**原始提案**来源。
-             卷/期/页的唯一依据是 literature/extractions/lian-zuckerman-1989.md §7.7 里 researcher 给出的
-             ``Nucl. Phys. B122 (1977) 253--290''，**未经 Crossref / INSPIRE 二次核对**；标题同理未核实；
-             **DOI 故意留空**（本项目不填未核实的 DOI）。
-             使用纪律：
-             (1) `loc` **只能写「全文」**，不得写节号、式号或定理号——正文未获取；
+  doi     = {10.1016/0550-3213(77)90206-1},
+  note    = {**2026-09-11 researcher 已按上一轮交办把本条由 L0 升到 L2。**
+             元数据（标题/卷/期/页/年/DOI）经 **Crossref 与 INSPIRE 两个独立来源逐字核对，全部一致**；
+             **正文仍未获取，内容等级 L0；read_depth = abstract，不得升。**
+             核实结果：Nucl. Phys. B **122**(2) 253--290，**issued 1977-04**（Crossref），
+             DOI ``10.1016/0550-3213(77)90206-1''（Crossref 与 INSPIRE 同值，本轮新填）。
+             报告号 **CERN-TH-2253**（INSPIRE）；INSPIRE texkey ``Gliozzi:1976qd''；
+             单位：Gliozzi 与 Scherk 在 Ecole Normale Superieure，Olive 在 CERN / Bohr Institute（INSPIRE）。
+             重印（INSPIRE pubinfo_freetext 三条）：Schwarz, J.H. (ed.), *Superstrings, Vol. 1*, 300--337；
+             Ferrara, S. (ed.), *Supersymmetry, Vol. 2*, 1209--1246；Schellekens, A.N. (ed.),
+             *Superstring construction*, 33--70。
+             ==> 与 goddard-thorn-1972（同书 112--115）、schwarz-1972（同书 98--111）一样收在 Schwarz 编文集里；
+             该书 archive.org 五次检索全 0，**重印文集路线对本条同样先验不通**。
+             **标题大小写**：期刊/Crossref 版是句首大写 ``Supersymmetry, supergravity theories and the dual spinor
+             model''（本条采用），INSPIRE 记作标题式大写 ``Supersymmetry, Supergravity Theories and the Dual Spinor
+             Model''。两者是同一篇，勿当作两条。
+             **摘要逐字（L1，INSPIRE）**：``We study the connection between the dual spinor model and supersymmetry.
+             We show that in the low-energy region, the dual spinor model yields a supersymmetric Yang-Mills theory
+             with O(4) internal symmetry and a supergravity theory with O(4) internal symmetry.''
+             ⚠⚠ **摘要级 negative evidence（本轮最重要的限定）：摘要里没有 ``projection''、没有 ``truncation''、
+             没有 ``GSO''、没有 ``10''、没有 ``tachyon''、没有 ``chirality''/``Majorana''。**
+             摘要讲的是「低能极限给出 O(4) 内部对称性的超 Yang--Mills 与超引力」，
+             ==> **摘要本身不能支撑「本文提出了 GSO 投影」这条归属**；该归属仍然只靠 L1 转引（见下 (3)）。
+             **易混陷阱（本轮新发现）：同三位作者另有 Phys. Lett. B 65(3) (1976) 282--286,
+             ``Supergravity and the spinor dual model'', DOI 10.1016/0370-2693(76)90183-0**（Crossref 核实）
+             ——注意标题里 ``spinor dual'' 与本条的 ``dual spinor'' 词序相反。**引用前务必核对卷期，别把两篇当一篇。**
+             使用纪律（沿用上一轮，仅第 (4) 条为本轮新增）：
+             (1) `loc` **只能写「全文」或 ``pp. 253--290''**，不得写节号、式号或定理号——正文未获取；
              (2) 本条只用来承载「GSO 截断的原始提案归 Gliozzi--Scherk--Olive」这一**归属**，
                  不得用来支撑任何公式、维数或定理；
              (3) 归属这一件事有 L1 转引支持：LZ 1989 p.328 逐字
                  ``They were first proposed by Gliozzi, Scherk and Olive [8] (GSO) in the "old covariant"
-                 formalism.''（抽取记录 lian-zuckerman-1989.md §7.5）——但**元数据本身没有**任何核实。
-             下一个 researcher 轮次应做：Crossref / INSPIRE 核对卷期页与 DOI，并把本条升到 L2。}
+                 formalism.''（抽取记录 lian-zuckerman-1989.md §7.5）；
+             (4) **1977 vs 1976 的归属尚未裁决**：LZ 1989 的 [8] 指向哪一篇本项目没核过，
+                 而两篇都可能被称作 ``GSO''。若图里要把归属精确到某一篇，须先核 LZ 1989 参考文献表 [8] 的卷页。
+             下一轮可做：正文获取（Elsevier 403 是已知障碍；CERN-TH-2253 是找 CDS 扫描件的钥匙，
+             参照 goddard-thorn-1972 的 CM-P 路线）。}
 }
