@@ -1,3 +1,5 @@
+> ⚠ **草案，修订中（2026-09-12）**：reviewer-captain-packet 核出 9 处与源文件不符（回译轮次、Lean 覆盖、来源计数等），修订分支 `agent/lead/captain-packet-fix` 进行中。**末尾的 worktree 清理脚本在本版本会把有未提交改动的 worktree 误判为安全，且带 `--force`——修订前请勿运行。**
+
 # 船长审批包 — 2026-09-12
 
 三个里程碑（`ms.ddf-commute-with-virasoro`、`ms.critical-dimension-bosonic`、`ms.no-ghost-theorem`）均已完成回译审计，`audit.status: back-translated`。以下每节的"当前有效状态"一栏均为**本次现场重跑** `uv run stringgraph status/why` 的结果（2026-09-11），不是抄旧记录。
