@@ -145,6 +145,7 @@
 - **偶幺模格来源（2026-09-12，L1）**：秩 ≡ 0 mod 8 = Zagier 2008 §3.2 **Prop 12(i)**（有证明）；16 维恰两类 = Chenevier–Lannes arXiv:1409.7616 ch.II **Cor 3.6**（含"不同构"）。四本教科书定理号全 L0 禁写；"Witt 1941 证 16 维分类"查无实据（CL 归功不挂标签）。认识论要点：数学卡升 rigorous **不会**让杂化弦"恰有两个"变严格——瓶颈是 §11.6 "一致 CFT ⟺ 偶自对偶格"物理桥，且原书 "exactly two such lattices" 零出处。
 - **consistency 区 Lean 接线完成（2026-09-12）**：反常多项式重排 (12.2.27)≡(12.2.11)+(12.2.12)（formalized）、IIB 整数解（formalized；三式秩 2）、六边形 32（拆出 n=6 卡 formalized，一般 n 卡保持）、GS 三张 math 卡各挂 Lean（被迹恒等式压 physical-argument）；`h-field-strength-chern-simons` 与 `anomaly-twelve-form-d10` 各拆三卡。**consistency 区最大单条来源缺口**：升维字典（2n 维反常 ↔ 2n+2 维不变多项式）——四条来源全当已知。
 - **ch10/ch11 栈上待合**（等 ch10 审查）：ch11 杂化弦（17 卡）、bosonization（7 卡 + `conv.nonembedding-scalar-normalization`）、unimodular-cards、brst-noghost（LZ Thm 2.20 rigorous 推导）。
+- **待船长裁决（open ruling）**：AdS₅/CFT₄ 规范群 **U(N)（Maldacena 逐字）vs SU(N)（Witten §2.6 k=1 态不在 KK 谱，脚注 7 U(1) singleton）**——两卡并列（`ads5-cft4-duality-v2` / `gauge-group-su-n-from-kk-spectrum`）；钩子：Maldacena "(and possibly also some boundary degrees of freedom)" ↔ Witten fn7。若日后立 AdS/CFT 里程碑，canonical 须择一并注明。
 - 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。

@@ -30,6 +30,17 @@ depends_on:
 sources:
   - ref: polchinski-1998-v1
     loc: "§3.3, eq. (3.3.16)、(3.3.18)、(3.3.21)、(3.3.24)，p.88–89（式号经 schrans-2020 核实）；脚注 2（p.87）讨论 delta 函数的规范不变性"
+  - ref: polchinski-1998-v1
+    loc: "**Appendix A §A.2, eq. (A.2.24)–(A.2.27), pp.344–345**（L1 页图逐字）：本推导第 (4) 步「把行列式写成反对易场的高斯积分」所用的**一般** Grassmann 规则——**(A.2.26) `Define [dψ dχ] = ∏_i dψ_i dχ_i` ⇒ `⟨1⟩ = ∏_i λ_i = det Δ`**、(A.2.27) `∫[dψ]exp(∫ψΔψ) = (det Δ)^{1/2}`（`Δ` 反对称），逐字「These fermionic path integrals are just the **inverse** of the corresponding bosonic integrals」。⚠ **A.2 给的是一般费米场 `ψ`、`χ` 与一般算子 `Δ`，通篇不出现 `b`/`c` 作鬼场名、不写 `bc` 作用量**；`bc` 系统本身在 §3.3 / §4.3"
+    note: |
+      **【2026-09-11 新增（curator-v1-sec15，researcher 第九轮 App. A 页图，L1）】**
+      本推导 summary 第 (4) 步「用反对易场把行列式写成高斯积分」此前在图上没有任何来源位置，
+      本轮补上：规则本身是 **(A.2.24)–(A.2.27)**。
+
+      ⚠ **措辞纪律**：不得写「`bc` 鬼场路径积分（测度）来自 App. A.2」。正确写法是
+      **「所用的一般 Grassmann 测度与行列式规则见 A.2 (A.2.24)–(A.2.27)；`bc` 系统本身见 §3.3/§4.3」**
+      （抽取记录 §15.2(c) 第 3 条）。本轮新增的 gaps 第 7、8 条记的是这条规则自带的两个作者自承缺口。
+      见 literature/extractions/polchinski-1998-v1.md §15.2(e)(f)。
 summary: |
   标准 Faddeev–Popov 手续：
   (1) 在路径积分中插入 1 = Δ_FP(g) ∫ dζ δ(g - ĝ^ζ)，其中 dζ 是规范群上的（形式）Haar 测度；
@@ -59,6 +70,21 @@ gaps:
   - "本推导只覆盖**局部**规范固定；全局的模空间与共形 Killing 向量会使 (2) 中的
      ζ-积分不是单纯的整体因子（Gribov 型问题、模参数积分），这属第 5 章内容，本节点不涉及。"
   - "行列式写成鬼场高斯积分这一步（无穷维行列式的正规化）在书中不讨论；
-     所有中心荷计算实际上依赖这个正规化的具体选择。"
+     所有中心荷计算实际上依赖这个正规化的具体选择。
+     **【2026-09-11 更新】** 有限维那一层的规则现已定位到 **(A.2.24)–(A.2.27), pp.344–345**
+     （见新增 source），但**无穷维的正规化仍然不讨论**，这条缺口本身不变。"
+  - "**作者自承缺口 #18：行列式的整体符号是手工定的（p.345 逐字）**——\"Bosonic path integrals actually
+     give the absolute values of determinants, while fermionic path integrals give the determinant with a
+     sign that depends on the precise order of Grassmann factors in the measure. **We will fix the sign
+     by hand.**\" ⇒ 本推导第 (4) 步得到的鬼场高斯积分与 `Δ_FP` 之间**差一个原书未导出的符号**；
+     凡依赖该符号的下游结论（配分函数的相对符号、零模关联函数的整体常数）自身封顶
+     `physical-argument`，且**不可形式化为定理**。抽取记录 §15.2(f) #18。"
+  - "**作者自承缺口 #19：宇称不对称世界面上连路径积分的相位都未定义（p.345 脚注 4 逐字）**——
+     \"when the world-sheet theory is parity-asymmetric, **even the phase of the path integral is
+     ambiguous** … One must instead take the determinant of the Hermitian operator `Δ†Δ`, which
+     determines that of `Δ` **only up to a phase**. We will encounter this in **section 10.7**…\"
+     ⇒ 本推导处理的是玻色弦（宇称对称）情形，**本条对本推导不直接生效**；但任何把本手续搬到
+     手性/无取向世界面（杂化弦、Ω 投影）的节点必须带上它，原书把「检查相位有一致定义」推到
+     Vol.2 §10.7。抽取记录 §15.2(f) #19。"
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

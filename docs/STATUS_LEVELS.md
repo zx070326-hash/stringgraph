@@ -64,4 +64,5 @@ holography.black-hole-entropy-strominger-vafa
 - 新陈述必须有自己的推导（通常是旧推导的改名/改边版本，`git mv` 后 target 改指新 id）。
 - 旧推导不再更新 notes；若旧推导的某条 depends_on 也被换代，不追改（warning 保留作历史痕迹）。
 - 报告与 `why` 只沿新陈述走，旧推导不参与有效状态。
+- **细则（2026-09-12）**：纯换名式换代（陈述只改一词、论证不变）可 `git mv` 旧推导改指新目标（verma-followups 的做法）；内容性换代（陈述加前提/删断言）保留旧推导作历史（no-ghost v2/v3 的做法）。两者并存是有意的，按"论证是否原样适用于新陈述"选。
 
