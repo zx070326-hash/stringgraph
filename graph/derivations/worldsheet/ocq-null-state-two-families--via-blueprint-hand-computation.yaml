@@ -76,5 +76,10 @@ gaps:
     间接证据（25+1=26），非证明。"
   - "N=2 与 worldsheet.ddf-spanning-rank-inequality notes (i) 的'D+1 个生成元的 2×2
     Gram 子块'描述之间未做显式基变换核对，只是数值巧合。"
+notes: |
+  【2026-09-12 追记，不改变本推导 status】目标卡的 (2)（Type 2）在 N=2 现有独立的
+  formalized 旁证，见目标卡 notes 与新卡 worldsheet.level-two-null-state-requires-d26；
+  本推导覆盖的是**一般 N**（含 Type 1），仍是手算、未经 Lean/reviewer 复核，
+  status 仍是 physical-argument，不因此升档（项目原则 2）。
 author: curator
 created: "2026-09-12"

@@ -137,5 +137,39 @@ notes: |
   其 notes (iv) 记录的 N≥5 重叠问题**不受本卡影响**——本卡对 N≥5 未验证任何新内容，只是
   把 N=2 的具体计算抽象成一般 N 的映射定义（"像落在 H_null 内"这件事对一切 N≥2 成立，
   但"像是否张成/是否够大"这件事，恰是 (B-26) 本身，本卡刻意不碰，见【本卡明确不断言】(a)）。
+
+  【2026-09-12：Type 2 在 N=2 现已 Lean 化（worldsheet.level-two-null-state-requires-d26），
+  Type 1 的独立性与占据数计数仍未（curator，claim #490，依派活任务交付物 #3）】
+  formal/StringFormal/NoGhost/NullSeedsTwo.lean（合入 c4ace50）把本卡 (2)（Type 2 族）在
+  N=2 这一个特例做成了机检等式：`descTwo_*` 一族（`towerLop_one_apply_descTwo`、
+  `towerLop_two_apply_descTwo`、`descTwo_mem_towerPhysSubmodule_iff` 等）逐字对应本卡
+  N=2 处的 L_1χ₂(φ)=12(h+1)L_{-1}φ、L_2χ₂(φ)=(26h+c)φ 两条验证方程及其 h=−1（a₀=1）代入，
+  并且比本卡多给出一条：D=26 的**必要性**（本卡只写"当且仅当"，但从未把它单独做成一条
+  可引用的 iff）。图上承载见新卡 worldsheet.level-two-null-state-requires-d26
+  （status formalized，配套推导 --via-lean）——**两卡不 supersede、不合并**：那张卡只做
+  N=2 的 Type 2，本卡的范围是一般 N 的 Type 1 与 Type 2 两族；那张卡的 notes 里也记着
+  同一条分工。
+
+  **仍未 Lean 化、仍停留在 physical-argument 的部分**（本卡与其推导
+  --via-blueprint-hand-computation 的 status **不因此改变**，按项目原则 1/2 不得就地
+  升档）：
+  (i) **Type 1 族（(1)）完全没有 Lean 对应**——NullSeedsTwo.lean 的 `towerLop_neg_one_mem_
+      towerNullSubmodule` 只处理"L_0φ=0 的种子送到 H_null"这一半（不含 D，因
+      centralTerm 1 = 0），**不含**本卡 (1) 里"L_1χ₁(φ)=2h_{r,N−1}φ 在 a₀=1 处为零"
+      这条验证方程本身的显式 Lean 引理（虽然代数上是同一件事，但没有以本卡记号显式写出）；
+  (ii) **25 个 Type-1 种子的线性无关**未做——文件头 Gaps 逐字点名"25 Type-1 seeds and
+      their linear independence"未覆盖；
+  (iii) **占据数计数 p_{D−1}(2) − p_{D−2}(2) = D**（本卡【N=2 特例】段"dim Q_1 = D−1、
+      dim Q_0 = 1、合计 25+1=26"这条数值核对背后的一般公式）未做形式化。
+      formalizer 的诊断（NullSeedsTwo.lean 文件头 Gaps，逐字）：`B26 2` 这条秩不等式
+      需要同时求出两个 `finrank`，而 Lean 里对 `Osc D →₀ ℕ`（占据函数的类型）`decide`
+      无法展开——与 `formal/StringFormal/Math/PartitionCard.lean` 遇到的同一堵墙
+      （`Nat.Partition` 的基数在 Mathlib 里没有可 `decide` 的实例路径，需要桥引理把计数
+      搬到显式 `Finset (Multiset ℕ)` 字面量上）。⇒ 阻碍不是"独立性证不出"，而是**计数**
+      本身在当前 Lean 基础设施下算不出来；这与 worldsheet.ddf-spanning-rank-inequality
+      的新 notes（同一批交付物 #4）记录的诊断一致。
+  ⇒ 本卡（一般 N，(1)(2)(3) 全部）与其推导的 status 仍是 physical-argument，
+  不受这次 Lean 化影响；只有它的 N=2、Type-2 特例现在有了一个独立、更严格（formalized）
+  的旁证。
 author: curator
 created: "2026-09-12"
