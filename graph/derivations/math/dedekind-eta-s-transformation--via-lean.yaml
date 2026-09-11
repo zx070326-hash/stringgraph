@@ -129,6 +129,12 @@ notes: |
   不含 `DedekindEtaS.olean`**（也不含 `IIBAnomalyUnique.olean`），所以那里跑不了本次检查；
   lead 合并前按根 CLAUDE.md 重跑一次 `lake build` + `check-axioms` 即可覆盖。
 
+  **Q48.3（math-sources.md §48.7）在本推导这一侧已结清**：那条问题问的是「Siegel 原文不声明
+  平方根分支、不显式写 Im τ > 0，若 Lean 化这两条要自己补进陈述，补进去就不再是『Siegel 证的那条』」。
+  Lean 侧确实两条都显式写着（假设 `0 < z.im`；指数是 ℂ 的 cpow 主分支），
+  所以 `eta_neg_inv` 与目标卡 statement 逐字对应，而与 Siegel 原文的字面陈述之间隔着
+  §48.2 记的那两处补全——这正是本卡挂**两条独立推导**而不是一条的原因。
+
   **给 lead 的一条（记账，不是论证）**：目标卡 effective 之所以停在 rigorous，只因为
   math.dedekind-eta-function 这张**定义卡**是 rigorous。它的四条断言（乘积定义、q^{1/24} 分支、
   H 上全纯、无零点）在 Mathlib v4.33.1 里逐条都有（`ModularForm.eta`、

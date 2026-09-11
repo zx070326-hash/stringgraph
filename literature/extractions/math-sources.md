@@ -6917,6 +6917,19 @@ Mathlib 里根系已有（`RootSystem`），但 **ADE 分类与 Coxeter 数表�
 
 ### 48.4 ★★ Mathlib 现状：**有 `DedekindEta.lean`，但里面没有 S 变换**（L1，raw 源文件全读）
 
+> ⚠⚠ **限定（curator lean-wire-9，2026-09-11 追加）**：本节标题里的「raw 源文件全读」
+> **只指 `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 这一个文件**，不是把
+> `ModularForms/` 目录读全了。本节的否定结论因此**只对那一个文件成立**。
+> **事实是：η 的 S 变换在 Mathlib 里，在同目录的 `Discriminant.lean`**——
+> `ModularForm.eta_comp_eq_csqrt_I_inv : upperHalfPlaneSet.EqOn (eta ∘ (-1 / ·)) ((Complex.sqrt I)⁻¹ • (Complex.sqrt * eta))`
+> （v4.33.1；逐字形状由 formalizer 读源码转录，L1），即 η(−1/z) = (√i)⁻¹ · √z · η(z)。
+> 这正落在 §48.7 的 **Q48.2「Delta/Identities/JacobiTheta 侧未查」里；Q48.2 已于 2026-09-11 结清，见该处**。
+> ⇒ 下面那条「**对图的硬约束**：不得标 formalized、不得挂 lean_decl」**已作废**：
+> `math.dedekind-eta-s-transformation` 现挂 `lean_decl: StringFormal.DedekindEta.eta_neg_inv`
+> 并有 formalized 推导 `--via-lean`。本节其余内容（声明清单、module docstring、参考文献）仍然准确。
+> **方法论教训**：「Mathlib 没有 X」这类否定结论，读一个文件不足以支撑；要么读全目录，
+> 要么把结论写成「文件 F 里没有 X」而不是「Mathlib 里没有 X」。
+
 `https://api.github.com/repos/leanprover-community/mathlib4/contents/Mathlib/NumberTheory/ModularForms`（L1）
 列出 **`DedekindEta.lean`** 确实存在。读其 raw 源文件（`raw.githubusercontent.com/…/master/…/DedekindEta.lean`，L1）后：
 
@@ -6999,6 +7012,22 @@ sources:
   待查：`ModularForms/Delta.lean`、`ModularForms/Identities.lean`、`ModularForms/LevelOne/`、
   以及 `Mathlib/Analysis/SpecialFunctions/…/JacobiTheta`（θ 的 S 变换在 Mathlib 里**确定存在**，
   而 `η` 与 `θ` 之间有标准桥；若 θ 侧已形式化，本节点的 Lean 路线会比想象中短）。
+  - **[已结清]（formalizer，2026-09-11，逐文件读 Mathlib v4.33.1 源码，L1；curator lean-wire-9 落地）。**
+    答案：**在 `Mathlib/NumberTheory/ModularForms/Discriminant.lean`**（2026 新增文件）：
+    `ModularForm.eta_comp_eq_csqrt_I_inv`，即 η(−1/z) = (√i)⁻¹ √z η(z)，
+    `Complex.sqrt w = w ^ (2⁻¹ : ℂ)` 主分支（`Mathlib/Analysis/RCLike/Sqrt.lean`）；
+    同文件另有 `discriminant_S_invariant`、`discriminant_T_invariant`（Δ = η²⁴）。
+    连带查清：**E₂ 的拟模性也已在 Mathlib**，
+    `ModularForms/EisensteinSeries/E2/Transform.lean` 的 `G2_S_transform`、`G2_slash_action`、
+    `E2_slash_action`（对全 SL(2,ℤ)）、`G2_T_transform`。
+    **Mathlib 仍然没有的**：η 的 **T** 变换（`η(τ+1) = e^{iπ/12} η(τ)`）、
+    η 对一般 (a b; c d) ∈ SL(2,ℤ) 的乘子系统（Dedekind 和）、τ₂|η|⁴ 的模不变性。
+    ⚠ `discriminant_T_invariant` 是 Δ = η²⁴ 的不变性，**推不出 η 自身的相位**
+    （24 次根的分支信息在 Δ 里丢掉），故它不是 η 的 T 变换的替代品；T 那半由本项目自己证
+    （`formal/StringFormal/Math/DedekindEtaT.lean`，从乘积定义两行）。
+    落地：`math.dedekind-eta-s-transformation--via-lean` 与
+    `math.dedekind-eta-t-transformation--via-lean`（都 formalized），
+    Lean 文件 `formal/StringFormal/Math/DedekindEtaS.lean`、`DedekindEtaT.lean`。
 - **Q48.3** Siegel 原文不声明平方根分支与 `Im τ > 0`。若 Lean 化，这两条要自己补进 statement；
   补进去之后**就不再是"Siegel 证的那条"**，note 要写明。
 - **Q48.4** 本项目此前未登记过 Mathematika。`sources.bib` 新增 `siegel-1954-eta` 时注意：

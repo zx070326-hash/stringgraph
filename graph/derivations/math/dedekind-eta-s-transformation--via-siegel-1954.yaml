@@ -76,10 +76,17 @@ notes: |
   姊妹推导 math.dedekind-eta-s-transformation--via-textbook-assertion 记录的是「Polchinski
   只给断言」这一事实，按 lead 裁决保留不删；工具取两条中较强者，本条即目标卡的 best_derivation。
 
-  **不得标 formalized**（math-sources.md §48.4，L1 raw 源文件全读）：Mathlib
-  `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 只有 η 的定义、非零性、可微性与
-  `logDeriv_eta_eq_E2`（log η' = (πi/12)E₂），**没有任何关于 η(−1/τ) 的声明**。
-  故目标卡不得挂 lean_decl。同一事实也是最好的 Lean 选题情报：地基已铺（η 定义 + logDeriv = E₂），
-  只差 E₂ 的 S 变换那一步；Q48.2（Delta.lean / Identities.lean / JacobiTheta 侧是否另有）未查。
+  ⚠⚠ **本段原写「不得标 formalized」，2026-09-11（curator lean-wire-9）撤销。**
+  原文是：「Mathlib `DedekindEta.lean` 只有 η 的定义、非零性、可微性与 `logDeriv_eta_eq_E2`，
+  没有任何关于 η(−1/τ) 的声明，故目标卡不得挂 lean_decl」。**该结论对那一个文件成立，
+  但作为「Mathlib 没有 S 变换」的判断是错的**：S 变换在同目录的
+  `Mathlib/NumberTheory/ModularForms/Discriminant.lean` 里
+  （`ModularForm.eta_comp_eq_csqrt_I_inv`，v4.33.1），正是当时未查的 **Q48.2** 所覆盖的范围；
+  Q48.2 已于 2026-09-11 由 formalizer 结清。目标卡现已挂
+  `lean_decl: StringFormal.DedekindEta.eta_neg_inv` 并新增推导
+  math.dedekind-eta-s-transformation--via-lean（formalized）。
+  **本推导（Siegel 的留数证明）不受影响**：它是一条与 Lean 路线互不依赖的人类可读证明，
+  仍是 rigorous，且是目标卡唯一一条本图能逐步复核的论证。
+  （抽取记录 literature/extractions/math-sources.md §48.4 已就地加上同样的限定。）
 author: curator-small-backlog-4
 created: "2026-09-11"
