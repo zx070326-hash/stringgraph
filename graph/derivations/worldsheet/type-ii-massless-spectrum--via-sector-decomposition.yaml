@@ -1,0 +1,49 @@
+id: worldsheet.type-ii-massless-spectrum--via-sector-decomposition
+target: worldsheet.type-ii-massless-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.gso-projection
+    note: 供给 IIA / IIB 各自保留哪些扇区。
+  - id: worldsheet.superstring-sector-consistency-solutions
+    note: 供给被投影的扇区表本身（四个 type II 解）。
+  - id: worldsheet.closed-superstring-mass-shell
+    note: 供给「哪些态无质量」的判据（(α'/4)m² = N − ν = Ñ − ν̃ = 0）。
+  - id: worldsheet.open-superstring-low-level-spectrum
+    note: |
+      供给单侧最低能级的内容（NS 侧的 8_v 矢量、R 侧的 8 或 8′ 旋量），
+      闭弦无质量谱是左右两侧这些表示的张量积。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    note: |
+      供给 R 扇区基态是时空旋量这一事实（谱里 8/8′/56/56′ 的来源）。
+      ⚠ 具体的表示分解依赖附录 B.1，本图无节点。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.8a,b), pp. 27–28；Table 10.3, p. 23（闭弦无质量能级的表示乘积）；§10.2 (10.2.25) 与 Table 10.1, pp. 9–10（R–R 分解）"
+    note: |
+      L1。原书把表示乘积的计算推给附录 B.1（'The products of spinors are discussed in
+      section B.1.'）。
+summary: |
+  三步：
+  (1) 由 GSO 投影确定保留的扇区：IIA 保留 (NS+,NS+)、(R+,NS+)、(NS+,R−)、(R+,R−)；
+      IIB 保留 (NS+,NS+)、(R+,NS+)、(NS+,R+)、(R+,R+)。
+  (2) 每个扇区取无质量能级（N − ν = Ñ − ν̃ = 0）：
+      NS 侧给 8_v（矢量），R 侧给 8 或 8′（旋量，符号由该扇区的 GSO 投影决定）。
+  (3) 把左右两侧的表示做张量积并分解：
+      NS–NS：8_v × 8_v = [0] + [2] + (2)（dilaton、B 场、引力子）；
+      NS–R 与 R–NS：8_v × 8 = 8′ + 56（引力微子与 dilatino），符号按扇区；
+      R–R：8 × 8 或 8 × 8′，按 Table 10.1 分解为 [1]+[3]+[5]_+ 或 [0]+[2]+[4]。
+      IIA 因两侧旋量手征相反，R–R 给 [1] + [3]；IIB 因同手征，给 [0] + [2] + [4]_+。
+      合并即 (10.6.8a,b)。
+
+  ⚠ **第 (3) 步的表示论分解本图完全没有支撑**：它依赖附录 B.1（本轮未读）。
+  本推导只把原书的结果照录，并说明它是怎么组织起来的。
+
+  【status 的理由】上游全部 physical-argument；且核心的表示论步骤在图中无节点。
+gaps:
+  - "**表示论分解无节点**：8_v × 8_v、8_v × 8、8 × 8′ 等的分解与 [n]、(2)、56/56′ 的含义全部依赖附录 B.1（pp. 430–466，本轮未读，抽取记录 Q8）。这是本推导最大的缺口：第 (3) 步在图上完全悬空。"
+  - "**Table 10.1 与 (10.2.25) 未入图**：R–R 基态按 (exp(πiF), exp(πiF̃)) 四种符号的分解是 IIA/IIB 的 R–R 谱差别的来源，本图无节点。"
+  - "**上游 GSO 链的 gap 全部继承**（三条条件被强加、穷举不展示）。"
+  - "**「无质量」的判据用到 D = 10 的质量壳**，其正规序常数的 gap 继承。"
+author: curator
+created: "2026-09-11"

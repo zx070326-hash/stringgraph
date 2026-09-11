@@ -1,0 +1,43 @@
+id: worldsheet.open-superstring-mass-shell--via-zero-point-cancellation
+target: worldsheet.open-superstring-mass-shell
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ocq-superstring-physical-states
+    note: 供给质量壳条件的形式 L_0|ψ⟩ = H|ψ⟩ = 0（常数已吸进 L_0）。
+  - id: worldsheet.rns-matter-normal-ordering-constants
+    note: "供给 a^m（R 扇区 D/16 = 10/16；NS 扇区 0）。"
+  - id: worldsheet.superconformal-ghost-normal-ordering-constants
+    note: "供给 a^g（R 扇区 −5/8；NS 扇区 −1/2）。"
+  - id: worldsheet.rns-super-virasoro-generators
+    note: 供给 L_0 的显式模式表达式（其振子部分给 α'p^2 + N，用开弦零模归一化 α_0 = (2α')^{1/2}p）。
+  - id: worldsheet.open-superstring-two-sectors
+    note: 供给「开弦只有 R、NS 两个扇区」与开弦的模式结构（doubling trick 后与闭弦一侧同形）。
+  - id: worldsheet.critical-dimension-superstring
+    note: |
+      供给 D = 10 这个前提（本命题的两处 8 = D − 2 与 a^m = 10/16 都用它）。
+      **不标 inferred**：原书 (10.5.4) 的措辞逐字是 'in ten flat dimensions'，
+      即在原地声明了这个前提，而 D = 10 的论证在 §10.1 (10.1.20) 与 §10.5 (10.5.23) 下方。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.4)、(10.5.5), pp. 21–22"
+    note: L1。
+summary: |
+  两步相加：
+  (1) L_0 的振子部分。用开弦零模归一化 α^μ_0 = (2α')^{1/2}p^μ，(10.2.12a) 的第一项在 m = 0 给
+      (1/2)α_0·α_0 + （振子项）= α'p^2 + N_boson，第二项给 N_fermion；
+      故 L_0 = α'p^2 + N + (a^m + a^g)，其中 N = N_boson + N_fermion。
+  (2) 常数相加。NS：0 + (−1/2) = −1/2；R：10/16 + (−5/8) = 0。
+      得 (10.5.4)。
+  原书的等价记账（(10.5.5)）：纵向（X^{0,1}, ψ^{0,1}）与鬼场（b, c, β, γ）的零点常数逐扇区抵消，
+  只剩 8 个横向方向：NS 每个横向方向给 (−1/24 − 1/48) = −1/16，8 个给 −1/2；
+  R 每个给 (−1/24 + 1/24) = 0，8 个给 0。两种记账一致。
+
+  【status 的理由】两个常数各自的推导都是 physical-argument
+  （零点能助记法，且鬼场那一半在本图是反推得到的），故本推导封顶在 physical-argument。
+gaps:
+  - "**两个正规序常数的 gap 全部继承**：助记法无节点、βγ 的规则无成文来源、原书把计算列为习题（10.8/10.9）。"
+  - "**「纵向与鬼场的零点常数抵消」这一说法本身未在图中论证**：(10.5.5) 的记账是原书的读法（'as usual'），本图没有把它拆成可核对的步骤；两种记账给同一个数在本推导里是核对而非证明。"
+  - "**N 的定义未单独立卡**：本推导用「振子激发数的加权和（玻色与费米都计入）」这一直观定义；玻色弦一侧有 worldsheet.open-string-l0-level-form 承载，超弦的费米部分没有对应卡片。"
+author: curator
+created: "2026-09-11"

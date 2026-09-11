@@ -1,0 +1,87 @@
+id: worldsheet.ten-dimensional-superstring-theories--via-consistency-conditions
+target: worldsheet.ten-dimensional-superstring-theories
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-sector-consistency-solutions
+    note: |
+      供给闭弦一侧的四个 type II 极大解与两个 type 0 极大解
+      （后者有快子，被「无快子」条件排除）。
+  - id: worldsheet.type-ii-prime-reflection-equivalence
+    note: |
+      供给「四个 type II 解只代表两个物理理论 IIA、IIB」这一步（(10.6.7) 的时空反射）。
+      **该步已从穷举卡拆出**（reviewer-v2-ch10，2026-09-11），故本推导显式依赖它；
+      它是 physical-argument。
+  - id: worldsheet.gso-removes-tachyon
+    note: 供给「IIA/IIB 无快子、type 0 有快子」，即「无快子」这一筛选条件的内容。
+  - id: worldsheet.type-i-unoriented-closed-spectrum
+    note: 供给无取向闭弦理论 (10.6.18)（type I 的闭弦部门）及其「单独不一致」的预告。
+  - id: worldsheet.type-i-open-string-gauge-multiplet
+    note: 供给开弦部门的两种可能（I / Ĩ）与 Chan–Paton 规范群。
+  - id: worldsheet.type-i-tadpole-cancellation-so32
+    note: |
+      供给 (P4)：R–R 与 NS–NS tadpole 各自为零 ⟹ SO(32)。
+      这是本推导中「除 SO(32) 外都不一致」的**唯一**在图支撑，
+      也是原书自己认定的筛选器（§12.2 p. 102：type I 的规范群由 tadpole 抵消定）。
+  - id: worldsheet.type-ii-spacetime-supersymmetry
+    note: |
+      供给论证第 (a) 步用到的事实：取向闭超弦（IIA/IIB）有**两个**引力微子
+      （d = 10, N = 2 超对称），而开弦多重态只有 16 个态、是 N = 1 的表示。
+      ⚠ 那张卡自身带原书的赤裸断言（'(and they are)'），是 physical-argument。
+  - id: worldsheet.type-ii-massless-spectrum
+    note: 供给 IIA/IIB 的谱（其中的 56/56′ 即引力微子），第 (a)(b) 步的表示计数要用。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6 末, eq. (10.6.19) 与结论句, p. 31（逐字见目标卡片 sources）；脚注 5, p. 31（(a) 的世界面级理由）"
+    note: |
+      L1。⚠ 原文的限定是 'in this chapter'；(c) 的两条理由分别推给 §10.8 与第 12 章。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 101（逐字 'it is in principle not necessary to check the low energy anomaly, since this is guaranteed to vanish if the string consistency requirements have been satisfied'）；p. 102（逐字 'In the type I string it was determined by cancellation of tadpole divergences.'）"
+    note: |
+      L1（ch12 抽取记录 E21、E19）。★★ **本推导据此不把时空反常当作筛选前提**：
+      作者明说低能反常检查原则上不必做、且 type I 的规范群是由 tadpole 抵消定的。
+      旧版本里的 (P5) 前提据此删除，见 gaps 第一条。
+  - ref: polchinski-1998-v2
+    loc: "§12.2 末, pp. 102–103（弦论侧反常消失的条件式陈述：'formally' + 'if the theory is modular-invariant' + 'if this converges'）"
+    note: |
+      L1（ch12 抽取记录 E20）。这是「无反常」在本书里能拿到的最强论证，
+      它是条件式的且被作者标为 'formal'。本推导对该词只承载原书措辞，见 gaps 第二条。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（作者对分类完备性的警告：'one should be cautious in assuming that all string theories have been found'；'suggesting'；'seem to be'）"
+    note: |
+      L1（抽取记录 E53）。★★★ 本推导据此把结论记为条件式，并把 status 封在 physical-argument。
+summary: |
+  按原书 §10.6 末的论证链：
+  (1) 闭弦一侧：三条一致性条件加极大性的解给四个 type II 极大解与两个 type 0 极大解；
+      (10.6.7) 的时空反射把四个 type II 解并为两个理论 IIA、IIB
+      （worldsheet.type-ii-prime-reflection-equivalence）；
+      加「无快子」条件筛掉 type 0，剩 IIA、IIB。
+  (2) 加开弦：开弦无质量多重态有 16 个态，是 d = 10, N = 1 超对称的表示，不是 N = 2 的；
+      而 IIA/IIB 有两个引力微子（N = 2）。故开弦**不能**耦合到取向闭超弦，
+      只能耦合到无取向的 (10.6.18)；从而开弦本身也必须无取向。
+      （世界面级的理由见脚注 5：只有两个零引力微子顶点算子的一个线性组合退耦，
+       必须做世界面宇称投影消掉另一个。）
+  (3) 由 (10.6.18) 的手征性，开弦无质量态必须是 8_v + 8，得到 type I 的内容 (10.6.19)。
+  (4) 一致性筛选：**§10.8 的 tadpole 给 SO(32)（(P4)），这是本推导里唯一的筛选器。**
+      原书在结论句里另提第 12 章的时空反常「同样只留 SO(32)」——本推导把它当作
+      **附加证据而非独立前提**，理由是 §12.2 p. 101/102 明说低能反常检查原则上不必做、
+      且 type I 的规范群是由 tadpole 抵消定的（旧版本的 (P5) 前提据此删除）。
+  (5) 结论：在 (P1)–(P4) 下恰有三个——IIA、IIB、type I SO(32)。
+
+  【status 的理由（三条）】
+  (1) **作者自己对完备性给出警告**（§11.1 末，E53）：'one should be cautious in assuming that
+      all string theories have been found'，并对「已找全」只用 'suggesting' 与 'seem to be'；
+  (2) 结论句里的 'nonanomalous' 在本书里只有条件式的 'formal' 论证（§12.2 末，两个 'if'），
+      本推导不为它提供任何支撑；
+  (3) 上游全部 physical-argument，其中 tadpole 那一支的关键步骤（C_10）原书自称是「猜」。
+gaps:
+  - "**结论句里的 'nonanomalous' 在本推导里没有独立支撑，也不是筛选条件**。旧版本把「时空规范/坐标对称性在单圈无反常」列为前提 (P5) 并记「本图无节点」；reviewer-v2-ch10 依 §12.2 判定该前提多余：p. 101 逐字 'it is in principle not necessary to check the low energy anomaly, since this is guaranteed to vanish if the string consistency requirements have been satisfied'，p. 102 逐字 'In the type I string it was determined by cancellation of tadpole divergences.' ⇒ 反常抵消是一致性的推论与交叉检验，不是并列筛选器。(P5) 已删，第 (4) 步把第 12 章降为附加证据。"
+  - "**「无反常」本身在本书里只有条件式论证**：§12.2 末（pp. 102–103）'One can prove the decoupling of null states **formally** …'，并带两个显式的 'if'（模不变性；type I 闭弦交换的 IR 收敛）。第二个 'if' 与 §10.8 的 tadpole 抵消是同一件事，故那一条在图上由 (P4) 承载；第一个 'if'（模不变性）本图只建了 §10.7 的一条必要条件。"
+  - "**与 Green–Schwarz 1984 一支不接边（有意为之）**：本图 consistency 区的 GS 路线（含 consistency.type-i-hexagon-so32-iff）是时空反常路线的原始文献。按上一条，本推导**不**向它建依赖边，否则会把本卡读成「靠反常选出 SO(32)」。要表达两条路线一致应另立交叉检验卡，见目标卡片 notes。"
+  - "**作者本人对分类完备性的警告（§11.1 末）**：本推导的结论只在第 10 章的构造假设下成立。原书明确列出两个例外（Green–Schwarz 形式的超弦、拓扑弦），并对「已找全」只用 'suggesting'、'seem to be'。任何把本卡读成「十维弦论的完备分类」的用法都与来源不符。"
+  - "**「16 个态是 N = 1 而非 N = 2 的表示」这一步依赖十维超对称表示论**，本图无节点（依赖 worldsheet.type-ii-spacetime-supersymmetry，而那张卡自身带原书的赤裸断言）。脚注 5 给的世界面级理由（零引力微子顶点算子的边界项）本图也无节点。"
+  - "**tadpole 那一支的 gap 继承**：C_10 的引入是「猜」的、tadpole 符号未由计算定出、辛支「无解」这一读法来自 (n + 32)² 对 n ≥ 0 不为零、本图无 Vol.1 §7.4 的单圈振幅节点。"
+  - "**极大性前提 (P2) 的新增部分**：(P2) 现含「极大性」一条，它是原书未明说的第四条条件（见 worldsheet.superstring-sector-consistency-solutions 的前提 (d) 与其推导 gaps 第一条）。"
+  - "**杂化弦不在本卡范围**：第 11 章的两个杂化弦（SO(32) 与 E8×E8）同样是十维、无快子、无反常的，但不在第 10 章的构造内。本轮不入图（任务书明确排除 §11 的 E50–E63）。因此本卡的「三个」**不是**通常说的「五个超弦理论」。"
+author: curator
+created: "2026-09-11"

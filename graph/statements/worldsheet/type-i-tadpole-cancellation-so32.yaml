@@ -1,0 +1,139 @@
+id: worldsheet.type-i-tadpole-cancellation-so32
+kind: proposition
+title: type I 的单圈发散（R–R tadpole）只在规范群 SO(32) 时抵消：总发散 ∝ (n ∓ 32)²
+statement: |
+  把 type I 的单圈真空振幅按世界面拓扑分解为柱面 C₂、Klein 瓶 K₂、Möbius 带 M₂，
+  每个都分成闭弦 NS–NS 交换与 R–R 交换两部分。用模变换取长柱极限（s → ∞），
+  三个拓扑的 **R–R 交换发散之和**为
+    Z_1 = −i (n ∓ 32)² (V_10 / 8π(8π²α'²)^5) ∫_0^∞ ds [16 + O(exp(−2s))]，
+  其中上号对应 SO(n)、下号对应 Sp(n)。故
+    **R–R tadpole 为零当且仅当规范群是 SO(32)（n = 32 且取正交投影）**。
+  对每个拓扑，NS–NS 发散是 R–R 发散的相反数，故 SO(32) 时 dilaton–引力子 tadpole 也为零。
+
+  **这个发散为什么是「真正的不一致」而不是可以吸收的重整化**（原书的论证）：
+  发散来自一个无质量的 R–R tadpole，而唯一可能的源是一个 **10-形式势 C_10**
+  ——它的场强恒为零、没有动能项，故其传播子是 1/0，tadpole 的效应是发散 μ_10²/0。
+  由 C_10 变分得到的运动方程就是 **μ_10 = 0**；
+  原书逐字：'unlike the divergences encountered previously **this one cannot be removed by a
+  correction to the background fields. It represents an actual inconsistency.**'
+
+  ⚠ **一条容易漏的技术要点**（原书脚注 7，逐字）：
+  'In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each topology
+  separately because the trace vanishes by supersymmetry. **This is not sufficient**, because
+  they will no longer cancel when vertex operators are added near one end of each surface.
+  **The NS–NS and R–R tadpoles must vanish separately when summed over topologies.**'
+  即本命题的**逻辑形式**是：要求 NS–NS 与 R–R tadpole **各自**在拓扑求和后为零
+  ⟹ n = 32 且取正交投影。
+
+  **本命题不断言的内容**：
+    (1) 不断言时空规范/坐标反常的抵消——那在第 12 章（本轮未读），
+        是 SO(32) 唯一性的**另一个独立理由**；
+    (2) 不断言 tadpole 的整体符号：原书逐字 'This calculation does not determine the sign of
+        the tadpole, but it should be n ∓ 32'（理由是 cross-cap 数在切开曲面时只 mod 2 守恒，
+        故符号不由幺正性定出，而边界数则不然）；
+    (3) 不断言 C_10 的存在性有独立论证——原书逐字 'One can guess the resolution of this as
+        follows'，并说 'as indeed a more detailed analysis does show'（**不给该分析**）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. (10.8.19), p. 42（总 R–R 发散 ∝ (n ∓ 32)²）；其后收尾段逐字：'The R–R tadpole vanishes only for the gauge group SO(32).'、'For each world-sheet topology the NS–NS divergence is the negative of the R–R divergence, so the dilaton-graviton tadpole also vanishes for SO(32).'、'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32.'"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md#E72；
+      该条已**单页重渲染复核**，且抽取者对 (10.8.19) 的系数做过**独立算术交叉核验**
+      ——把 (10.8.2b)+(10.8.4) 的 −n²、(10.8.11) 的 −2¹⁰、(10.8.18) 的 ±2n·2⁵ 相加
+      得 (n ∓ 32)²，上号确与 SO(n) 对应，见该文件 §0.4a）。
+      ★ **这一条是本命题结论的唯一定位来源**：动词是 'vanishes only for'（不是 'we prove'
+      也不是 'one can show'），是陈述语气的硬结论。
+      ⚠ 同段作者自承一处缺口：整体符号 **'should be'**，不是算出来的。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. (10.8.1)–(10.8.2a,b)（柱面分解）、(10.8.4)（Z_{C₂,0} 的发散）、(10.8.5)（μ_10 ∫C_10）、(10.8.6)（μ_10²/0）、(10.8.7)–(10.8.11)（Klein 瓶）、(10.8.13)（Ωψ_r Ω^{−1}）、(10.8.14)（Ω² = exp(πiF)）、(10.8.15)（投影算符）、(10.8.16)–(10.8.18)（Möbius 带；'the upper sign is for SO(n)'）, pp. 37–42"
+    note: |
+      L1（polchinski-1998-v2.md E48 与 sec10-8.md#E64–E71）。这是通往 (10.8.19) 的计算链，
+      本卡只用它的结构，不在图内展开（见推导的 gaps）。
+      ⚠ 原书对 C_10 那一步的措辞是 'One can guess the resolution of this as follows'
+      与 'as indeed a more detailed analysis does show'——**猜 + 不给分析**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8 脚注 7, p. 39（逐字见 statement：NS–NS 与 R–R tadpole 必须**分别**在拓扑求和后为零）"
+    note: |
+      L1（sec10-8.md#E68）。这条决定本命题的逻辑形式，抽取记录标为
+      「转节点时必须把这个限定写进 statement，否则该卡是错的」。
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. (7.4.1)、(7.4.15)、(7.4.22)（玻色弦中同类的发散与抵消；Vol.2 明写 'The cancellation is very similar to what we have already seen in the bosonic theory in chapter 7.'，且 (10.8.18) 明写 'We have used (7.4.22) in D = 10.'）"
+    note: |
+      Vol.2 明写引用。⚠ 本图**没有** Vol.1 §7.4 的节点（单圈振幅、Klein 瓶、Möbius 带），
+      故这条来源在图上无对应依赖边，见推导的 gaps。
+      ⚠⚠ **不要把 Vol.1 (7.4.24) 的 SO(8192) 与本卡混用**：Vol.1 亲口判那个群
+      'probably has no special significance'，而 §10.8 对 SO(32) 无任何类似贬抑限定
+      （sec10-8.md#E72 备注 2）。
+tags: [superstring, type-i, tadpole, so32, consistency, one-loop, divergence]
+notes: |
+  【本卡是「三个十维理论」里 SO(32) 的第一个理由】第二个理由是第 12 章的时空反常抵消
+  （本轮未读）。worldsheet.ten-dimensional-superstring-theories 的条件式写法同时挂这两个。
+
+  【本图缺的上游】Vol.1 §7.4 的单圈振幅（柱面/Klein 瓶/Möbius 带的模变换与长柱极限）
+  在本图完全没有节点，Vol.2 §10.7 的环面振幅本图也只建了模不变性那一条必要条件。
+  故本卡的推导实质上无法在图内展开计算，只能记录结论与来源。
+  → 待建（Vol.1 §7.4 + Vol.2 §10.7–10.8）：spectrum.one-loop-vacuum-amplitudes 一族。
+
+  【与 Green–Schwarz 反常抵消的关系】GS 1984 的 SO(32) / E8×E8 结论走的是时空反常路线，
+  本图 consistency 区正在建（另一个 curator 的 claim）。**本卡是世界面 tadpole 路线**，
+  两者是不同的论证，不要合并。GS 那边也只给出 SO(32) 与 E8×E8 两个解，
+  而本卡的 tadpole 只在 type I 语境下且只给 SO(32)。
+
+  ★★【四条必须随本卡一起读的限定（reviewer-v2-ch10 复核后固定，2026-09-11）】
+
+  **(限定 1) tadpole 的整体符号不是算出来的。** 原书逐字
+  'This calculation does not determine the sign of the tadpole, but **it should be n ∓ 32**'
+  ——强度词是 'should be'。随后给的是一个定性的幺正性 + cross-cap 计数论证
+  （'changing from a symplectic to orthogonal projection changes the sign of RP₂, not of the
+  disk. … the number of cross-caps is conserved mod 2 when a surface is cut open, so the sign
+  is not determined by unitarity; this is not the case for the number of boundaries.'），
+  **不是计算**。本卡的 (n ∓ 32)² 里那个 ∓ 因此带着作者自承的缺口。
+  （另见 §10.8 脚注 8：Klein 瓶两个迹的整体符号也靠物理输入——引力子与 (10.6.17)——
+   而非计算，sec10-8.md#E69。）
+
+  **(限定 2) 真正的条件是「NS–NS 与 R–R tadpole 各自在拓扑求和后为零」，不是「真空振幅有限」。**
+  脚注 7 逐字：'In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for
+  each topology separately because the trace vanishes by supersymmetry. **This is not
+  sufficient**, because they will no longer cancel when vertex operators are added near one end
+  of each surface. **The NS–NS and R–R tadpoles must vanish separately when summed over
+  topologies.**'
+  ⇒ 每个拓扑内部的 NS–NS + R–R = 0 由超对称**自动**成立，什么也筛不出来；
+    起作用的是**逐类型、跨拓扑求和**为零。抽取记录（sec10-8.md#E68）明确警告：
+    「转节点时必须把这个限定写进 statement，否则该卡是错的」。本卡的 statement 已照办。
+
+  **(限定 3) 辛支根本不给解，而且原书不讨论 USp(32)。**
+  候选集是无取向 type I 的 Chan–Paton 群，即 SO(n) 与辛群（本书记号下 Sp(k) ↔ n = 2k；
+  U(n) 属取向理论，§10.6 已排除）。取下号得 (n + 32)²，**对任何 n ≥ 0 都不为零**
+  ⇒ 辛支无解，故结论只剩 n = 32 加正交投影。
+  ⚠ **§10.8 全节不出现 'USp(32)' 或 'Sp(32)'**；辛群只以 'a symplectic … projection' 的形式
+  在 p. 42 出现一次。文献中著名的 USp(32) type I′ 模型（Sugimoto 1999 型的破缺超对称构造）
+  **不在本书本节**，勿张冠李戴（sec10-8.md §3.1 第 3 条）。
+  ⚠ 「纯闭弦无取向理论（n = 0）也不一致」这一步原书**不单独讨论**，
+  只能由 (10.8.19) 代入 n = 0 读出 Z₁ ∝ −i·32² ≠ 0——**这一步是抽取者做的**（sec10-8.md#E75）。
+
+  **(限定 4) ★★★ 本卡不得与 consistency.type-i-hexagon-so32-iff 建边。**
+  两者是**不同的论证**，且原书自己把它们并列而非串联：
+    · §10.6 p. 31 逐字用 'There is a further inconsistency …'（指向 §10.8 的发散）
+      与 '**We will also see, in chapter 12**, that the spacetime gauge and coordinate
+      symmetries have an anomaly at one loop for all but the SO(32) theory.'
+      把两件事**分开叙述**（sec10-8.md#E75 备注 2）；
+    · **§10.8 全节一次都不出现 'anomaly' 一词**，与六边形反常没有原文级连接
+      （sec10-8.md#E75 与 §3.1 第 1 条）；
+    · §12.2 p. 102 逐字：'In the type I string it [the gauge group] was determined by
+      **cancellation of tadpole divergences**.'（ch12 抽取记录 E19）
+      ⇒ **Polchinski 本人明说 type I 的规范群是被 tadpole 相消定下来的，不是被反常定下来的。**
+  ⇒ 建一条 tadpole ← hexagon 或 hexagon ← tadpole 的依赖边会伪造一个来源里没有的推理。
+  要表达「两条路线给同一答案」，正确做法是**另立一张交叉检验卡**，由它同时依赖两支，
+  并把「为什么两者一致」记为 gap（§12.2 末 pp. 102–103 的两个 'if' 正是那条一致性的内容）。
+  同一条禁令也写在 worldsheet.ten-dimensional-superstring-theories 的 notes 里。
+
+  ★【§10.6 承诺的「superconformal anomaly」没有兑现】§10.6 p. 31 说
+  'there is a one-loop divergence **and superconformal anomaly**'，
+  但 §10.8 实际只交付了 one-loop divergence；'superconformal anomaly' 在 §10.8 里一次未出现
+  （sec10-8.md#E75）。故「type I 只有 SO(32)」这条链在本书里的真实证据**只有 tadpole 发散一支**。
+author: curator
+created: "2026-09-11"

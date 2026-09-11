@@ -1,0 +1,52 @@
+id: worldsheet.rns-ramond-zero-modes-clifford
+kind: proposition
+title: R 扇区的费米零模实现 Clifford（gamma 矩阵）代数，故 R 基态是时空旋量
+statement: |
+  在 R 扇区（ν = 0，worldsheet.rns-fermion-periodicity）费米模式含零模 ψ^μ_0，
+  由 worldsheet.rns-mode-expansions 的 {ψ^μ_r, ψ^ν_s} = η^{μν}δ_{r,−s} 取 r = s = 0 得
+    {ψ^μ_0, ψ^ν_0} = η^{μν}。
+  故令 Γ^μ := 2^{1/2} ψ^μ_0 即得 D 维 Clifford 代数
+    {Γ^μ, Γ^ν} = 2 η^{μν}。
+  R 扇区的基态（定义为被所有 r > 0 的模式湮灭者）因此不是唯一的：它们构成上述 Clifford 代数的
+  一个表示，可取时空 Lorentz 生成元的对角化基 |s_0, s_1, …⟩_R（s_a = ±1/2），
+  半整数的本征值表明这些态是**时空旋量**。
+  与此对照，NS 扇区没有 r = 0 的模式，基态被 Σ^{μν} 湮灭、是 Lorentz 单态，
+  其上所有态的时空自旋为整数。
+
+  **本卡明确不断言的内容**（这些是原书推给附录 B 的部分，本轮未抽取）：
+    (1) 不断言该表示在 D = 10 中的维数是 32；
+    (2) 不断言 Dirac 表示 32 可约为两个 Weyl 表示 16 + 16′，也不断言它们由 (B.1.11) 的 Γ
+        本征值区分；
+    (3) 不断言 R–R 基态的张量分解 32 × 32 = [0] + [1] + … + [10]（(10.2.25)）或 Table 10.1
+        的四种符号组合。
+  这三条的真实来源是原书 **附录 B.1**（pp. 430–466，本轮未读，抽取记录 Q8）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.2「NS and R spectra」, eq. (10.2.17)（Γ^μ ≅ 2^{1/2}ψ^μ_0 满足 (10.1.4) 的 gamma 矩阵代数）、(10.2.18)（基态基 |s_0,…,s_4⟩_R，s_a = ±1/2）、(10.2.16)（NS 基态），p. 8；'The half-integral values show that these are indeed spacetime spinors.'；'In the NS sector, the ground state is annihilated by S^{μν} and is a Lorentz singlet, and all other states then have integer spin.'"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E21；式号与逐字措辞逐页读到原书页图）。
+      ⚠ 原书紧接着写 'This representation is worked out in section B.1; in D = 10 it has
+      dimension 32.'——**维数与 16 + 16′ 的分解在附录 B.1，本轮未读**，故本卡不断言它们。
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.4), p. 2（{Γ^μ, Γ^ν} = 2η^{μν}，作为动机引入）；§10.2, eq. (10.2.9a), p. 6（{ψ_r, ψ_s} = ηδ）"
+tags: [rns, superstring, ramond-sector, spinor, clifford-algebra]
+notes: |
+  【为什么本卡可以在图上独立成立而不吃附录 B】{ψ_0, ψ_0} = η ⟹ {Γ, Γ} = 2η 这一步只用
+  (10.2.9a) 取 r = s = 0，是一行代数。「基态构成该代数的表示」也只用「基态被 r > 0 模式湮灭
+  且 ψ_0 与这些条件相容」。真正需要附录 B 的是**表示的维数与不可约分解**，
+  本卡把它们全部排除在断言之外。
+  → 待建（需先取附录 B.1 的页图）：`worldsheet.d10-dirac-representation-decomposition`
+  （32 = 16 + 16′ 等）。届时 worldsheet.type-ii-massless-spectrum 与
+  worldsheet.open-superstring-ramond-dirac-equation 里现在只写在 notes 的表标签
+  可以升级成断言。
+
+  【升级路径】本卡的核心一行（Clifford 关系）符合 docs/STATUS_LEVELS.md 的 rigorous 例外条件
+  （前提完整 + 有限步初等计算），缺 reviewer 复核记录。上游 worldsheet.rns-mode-expansions
+  的有效状态是 physical-argument（因为它经 rns-action 挂在路径积分上），
+  故即使复核通过，本卡的**有效**状态也不会超过 physical-argument，
+  除非日后建一张纯代数的超振子代数卡。
+author: curator
+created: "2026-09-11"

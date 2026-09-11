@@ -1,0 +1,55 @@
+id: worldsheet.superstring-sector-labels
+kind: definition
+status: physical-argument
+title: 超弦扇区的标号 (α, F)：α = 1 − 2ν 与 exp(πiF)，开弦四个、闭弦十六个
+statement: |
+  把 worldsheet.rns-fermion-periodicity 的周期性参数 ν 改写为
+    **α = 1 − 2ν**，  即 R 扇区 α = 1、NS 扇区 α = 0，
+  并配上世界面费米子数 F（worldsheet.rns-fermion-number-operator）。于是
+    **开弦**的扇区记作 (α, F)，共 **4** 个：NS+、NS−、R+、R−
+    （± 指 exp(πiF) = ±1）；
+    **闭弦**的扇区记作 (α, F, α̃, F̃)，共 **16** 个。
+  **α 与 F 都只 mod 2 有定义**（原书逐字：'Both α and F are defined only mod 2'）。
+
+  **十六个中有六个是空的**（原书逐字）：在 NS− 扇区，能级 L_0 − α'p²/4 是**半整数**，
+  而在 NS+、R+、R− 三个扇区是**整数**；故 NS− 与其余三者之一配对时无法满足能级匹配
+  L_0 = L̃_0。剩下 16 − 6 = 10 个非空扇区组合。
+
+  **本卡是标号约定加一条计数**。它**不**断言哪些扇区组合构成一致的理论
+  （那是 worldsheet.superstring-sector-consistency-conditions 与其解），
+  也**不**断言 exp(πiF) 的本征值只有 ±1（那由 F mod 2 与 (10.2.24) 给出，本卡照录）。
+uses:
+  - worldsheet.rns-fermion-periodicity
+  - worldsheet.rns-fermion-number-operator
+  - worldsheet.closed-superstring-mass-shell
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.1)（开弦扇区记作 (α, F)）、(10.6.2)（α = 1 − 2ν）、(10.6.3)（闭弦 16 个扇区 (α, F, α̃, F̃)），pp. 25–26；逐字 'Both α and F are defined only mod 2'"
+    note: L1（抽取记录 polchinski-1998-v2.md E40；式号与逐字措辞逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, (10.6.3) 下方, pp. 25–26（逐字：'Actually, six of these sectors are empty: in the NS− sector the level L_0 − α'p²/4 is half-integer, while in the sectors NS+, R+, and R− it is an integer. It is therefore impossible to satisfy the level-matching condition L_0 = L̃_0 if NS− is paired with one of the other three.'）"
+    note: |
+      L1（E40）。「六个」这个计数是逐字的：16 个组合里，NS− 与其余三者的配对
+      （左 NS−、右非 NS− 有 3 个；左非 NS−、右 NS− 有 3 个）共 6 个为空。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. (10.7.4), p. 32（模不变性一节同样用 α 标号：ψ(w+2π) = exp[πi(1−α)]ψ(w)）"
+    note: L1（E47）。说明 α 标号在全章通用。
+tags: [superstring, sectors, gso, notation, definition]
+notes: |
+  【两套标号的字典】ν ∈ {0, 1/2}（§10.2–§10.5）与 α ∈ {1, 0} mod 2（§10.6–§10.7）
+  由 α = 1 − 2ν 联系。本图的上游卡片（周期性、模式展开、质量壳）用 ν，
+  §10.6 起的卡片（一致性条件、GSO、谱）用 α。凡跨这两组的边都要经过本卡。
+
+  【「六个为空」的机制在哪张卡】奇偶性事实（NS− 半整数、其余三者整数）
+  与「NS− 不能与其余三者配对」这一推论在 worldsheet.closed-superstring-mass-shell
+  里已作为推论断言（本卡 uses 它）；本卡在此之上只加计数「六个」。
+  这样拆是因为奇偶性属于质量壳/能级匹配的内容，而计数依赖 §10.6 的 16 扇区标号。
+
+  【status: physical-argument 的理由】本卡 uses 的三张卡有效状态都是 physical-argument
+  （尤其 worldsheet.rns-fermion-number-operator 因鬼场 F 经玻色化而封顶）。
+  标号本身是纯记号，但计数用到了质量壳的数值内容。
+author: curator
+created: "2026-09-11"

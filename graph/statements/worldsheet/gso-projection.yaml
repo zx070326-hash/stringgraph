@@ -1,0 +1,54 @@
+id: worldsheet.gso-projection
+kind: proposition
+title: GSO 投影是一致性条件之解的重述：IIB 保留 exp(πiF) = exp(πiF̃) = +1，IIA 保留 exp(πiF) = +1、exp(πiF̃) = (−1)^{α̃}
+statement: |
+  worldsheet.superstring-sector-consistency-solutions 得到的扇区组合可以**等价地重述**为
+  对 exp(πiF) 与 exp(πiF̃) 的本征子空间的投影：
+    **IIB**：保留所有满足 exp(πiF) = exp(πiF̃) = **+1** 的扇区；
+    **IIA**：保留所有满足 exp(πiF) = **+1**、exp(πiF̃) = **(−1)^{α̃}** 的扇区。
+  这种「把完整谱投影到 exp(πiF) 与 exp(πiF̃) 的本征空间」的操作称为
+  **Gliozzi–Scherk–Olive (GSO) 投影**（原书逐字：'This projection of the full spectrum down to
+  eigenspaces of exp(πiF) and exp(πiF̃) is known as the Gliozzi–Scherk–Olive (GSO) projection.'）。
+
+  **手征性**：IIA 在 NS–R 与 R–NS 扇区取**相反**的 GSO 投影，故谱是**非手征**的
+  ——它在时空宇称下不变（时空宇称交换 8 ↔ 8′ 与 56 ↔ 56′；在世界面上这个对称性是
+  时空宇称与世界面宇称的乘积）。IIB 在每个扇区取**相同**的 GSO 投影，故谱是**手征**的。
+
+  **type 0 的对角 GSO**：例如 0B 由「保留所有满足 α = α̃、exp(πiF) = exp(πiF̃) 的扇区」定义。
+  原书逐字：'The projections that define the type II theories act separately on the left- and
+  right-moving spinors, while the projections that define the type 0 theory tie the two together.
+  The latter are sometimes called *diagonal GSO projections*.'
+
+  ★★ **本命题的要点在于逻辑方向**：GSO 投影在本书里**不是独立公设**，
+  而是三条一致性条件之解的**重述**。任何把 GSO 当作额外假设的读法都与本书不符。
+  本卡因此**依赖** worldsheet.superstring-sector-consistency-solutions，而不是相反。
+
+  本命题**不**断言 GSO 投影后谱的幺正性（那由 worldsheet.no-ghost-theorem-superstring
+  的第 (4) 条承担：无鬼定理在 exp(πiF) 的每个本征子空间上分别成立），
+  也**不**断言无质量谱的内容。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eq. (10.6.9)（IIB 的投影）、(10.6.10)（IIA 的投影）、(10.6.11)（0B 的对角投影），pp. 27–28；GSO 命名的逐字句与手征性讨论同处"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E42；式号与全部逐字措辞逐页读到原书页图）。
+      ★ 抽取记录明确要求：'GSO 投影在本书里是 E41 结论的重述，不是独立公设。
+      转节点时应准确反映：gso-projection 的推导依赖 (10.6.5)/(10.6.6)/(c) 三条一致性条件。'
+tags: [superstring, gso, type-ii, chirality, sectors]
+notes: |
+  【与教科书通行叙述的差别，务必保留】很多教材把 GSO 投影当作为消除快子而额外强加的公设。
+  Polchinski 不是：他先解三条一致性条件（相互局域性、OPE 闭合、模不变性的必要条件），
+  得到四个扇区组合，**然后**指出这些组合可以写成对 exp(πiF) 的投影。
+  本图的依赖方向严格按此。
+
+  【(−1)^{α̃} 的含义】α̃ = 1（R）时取 −1、α̃ = 0（NS）时取 +1，
+  即 IIA 在右移 R 扇区取与 IIB 相反的投影。这正是 IIA/IIB 手征性差别的来源。
+
+  【时空超对称与引力微子不在本卡】(10.6.12)–(10.6.15)（引力微子态、等价关系 u_{μs} ≅ u_{μs} + k_μζ_s
+  是局域时空超对称的标志）见 worldsheet.type-ii-spacetime-supersymmetry。
+  ⚠ 那张卡的 status 受原书一句赤裸断言影响（'if all requirements for a consistent string
+  theory are met (and they are)'）。
+author: curator
+created: "2026-09-11"

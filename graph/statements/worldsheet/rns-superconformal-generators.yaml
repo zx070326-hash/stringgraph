@@ -1,0 +1,44 @@
+id: worldsheet.rns-superconformal-generators
+kind: definition
+status: physical-argument
+title: Xψ SCFT 的能动张量与超流 (T_B, T_F)
+statement: |
+  在 worldsheet.rns-action 的 Xψ 理论中定义两个全纯流：
+    T_B(z) = −(1/α') ∂X^μ ∂X_μ − (1/2) ψ^μ ∂ψ_μ      （能动张量，权 (2,0)）
+    T_F(z) = i (2/α')^{1/2} ψ^μ(z) ∂X_μ(z)            （超流，权 (3/2,0)）
+  以及反全纯的一份 (T̃_B, T̃_F)（把 ∂ 换成 ∂̄、ψ 换成 ψ̃）。正规序按 Vol.2 体例隐含。
+
+  **记号约定（重要）**：Polchinski 把超流的**场**记作 T_F（不用常见的 G(z)），
+  而把它的**模式**记作 G_r：T_F(z) = Σ_{r∈Z+ν} G_r / z^{r+3/2}。
+  从写 G(z) 的文献接边过来时不要把 T_F 与 G_r 当作两个不同对象。
+
+  **本卡不断言的内容**：
+    (1) 不断言 (T_B, T_F) 满足超共形代数或任何 OPE——那是
+        worldsheet.rns-superconformal-ope 的内容。
+    (2) 不断言 T_F 生成 (10.1.10) 的超共形变换（原书把该论证推给习题 10.1）。
+    (3) 不断言中心荷的值（见 worldsheet.rns-matter-central-charge）。
+uses:
+  - worldsheet.rns-action
+  - worldsheet.energy-momentum-tensor-free-scalar
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, eq. (10.1.12), p. 3（T_B = −(1/α')∂X^μ∂X_μ − (1/2)ψ^μ∂ψ_μ）；eq. (10.1.8), p. 2（T_F = i(2/α')^{1/2}ψ^μ∂X_μ）；模式定义 eq. (10.2.10a,b), p. 7"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E4、E7、E18；式号与公式内容均逐页读到原书页图）。
+tags: [rns, superstring, energy-momentum-tensor, supercurrent, definition]
+notes: |
+  【status 的理由】与 worldsheet.rns-action 相同：这是路径积分/算子乘积层面的复合算符
+  （需要正规序，Vol.2 把 : : 隐含），本图无算子乘积的严格构造。
+  纯代数的模式版本（(10.2.12) 的 L_m、G_r）另有卡片
+  worldsheet.rns-super-virasoro-generators，那张卡只用振子代数，故可标得更高。
+
+  【线性 dilaton 的推广未建节点】(10.1.22a,b)/(10.1.23)：T_B、T_F 加 V_μ 项，c = (3/2)D + 6α'V^2
+  （E14）。原书 'The reader can verify'，本轮不建。与玻色弦的
+  worldsheet.linear-dilaton-central-charge 平行。
+author: curator
+created: "2026-09-11"

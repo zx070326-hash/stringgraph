@@ -1,0 +1,47 @@
+id: worldsheet.open-superstring-mass-shell
+kind: proposition
+title: 开超弦（D = 10）的质量壳：NS 扇区 H = α'p^2 + N − 1/2，R 扇区 H = α'p^2 + N
+statement: |
+  取 D = 10 个平坦维（十个 Xψ SCFT），开弦（α^μ_0 = (2α')^{1/2}p^μ）。则
+  worldsheet.ocq-superstring-physical-states 的质量壳条件 L_0|ψ⟩ = H|ψ⟩ = 0 中
+    **NS 扇区： H = α' p^2 + N − 1/2**，
+    **R 扇区 ： H = α' p^2 + N**，
+  其中 N 是能级算符（振子激发数的加权和，玻色与费米模式都计入）。
+  即物质加鬼场的正规序常数之和为
+    NS： a^m + a^g = 0 + (−1/2) = −1/2，   R： a^m + a^g = 10/16 + (−5/8) = 0。
+  按 conv.intercept-sign-a 的截距记号（a = −(a^m + a^g)）：**NS 截距 a = 1/2、R 截距 a = 0**。
+
+  **零点常数的抵消（原书的记账方式）**：纵向振子与鬼场的零点常数互相抵消，
+  只剩横向模式的贡献，即对 **8** 个横向方向求和：
+    NS： 8(−1/24 − 1/48) = −1/2，   R： 8(−1/24 + 1/24) = 0
+  （原书逐字：'The zero-point constants from the ghosts and longitudinal oscillators have
+  canceled as usual, leaving the contribution of the transverse modes'）。
+
+  本命题**只对 D = 10 的平坦背景**成立（两处：8 = D − 2 与 a^m = D/16 都用了 D = 10）。
+  它**不**断言 D = 10（那是 worldsheet.critical-dimension-superstring），
+  也**不**断言哪些能级实际出现在谱里（那要 GSO 投影）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, eq. (10.5.4)（H = α'p^2 + N − 1/2（NS）、H = α'p^2 + N（R），'in ten flat dimensions'）、(10.5.5)（横向零点能 8(−1/24 − 1/48) = −1/2 与 8(−1/24 + 1/24) = 0 及其逐字说明），pp. 21–22"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E34；式号与公式内容逐页读到原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. (10.2.13), p. 7（a^m）；§10.4, eq. (10.4.5), p. 16（a^g）"
+    note: L1。两个常数相加给 (10.5.4) 的两个值，是抽取记录 E19/E28 记下的三处式号自洽的一环。
+tags: [superstring, open-string, mass-shell, ns-sector, ramond-sector, intercept]
+notes: |
+  【与玻色弦的对应卡】worldsheet.open-string-l0-level-form（L_0 = α'p^2 + N）与
+  worldsheet.open-string-intercept-v2（a = 1）。超弦的截距在 NS 是 1/2、在 R 是 0，
+  **与玻色弦的 1 都不同**；这正是超弦最低 NS 态是 m^2 = −1/(2α') 的快子（而不是玻色弦的
+  −1/α'）、以及 R 扇区基态无质量的原因。
+
+  【闭弦的对应式】(10.5.18)：(α'/4)m^2 = N − ν = Ñ − ν̃，见
+  worldsheet.closed-superstring-mass-shell。⚠ 注意闭弦用 α'm^2/4，开弦用 α'm^2，
+  这是 α^μ_0 归一化的差别（(10.2.8)），不是新的约定。
+author: curator
+created: "2026-09-11"

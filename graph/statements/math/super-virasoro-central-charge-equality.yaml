@@ -1,0 +1,43 @@
+id: math.super-virasoro-central-charge-equality
+kind: proposition
+title: 超 Virasoro 代数的两个中心项系数被 Jacobi 恒等式绑定：c_B = c_F
+statement: |
+  在 math.super-virasoro-algebra 的括号中把两处中心项的系数**先当作两个独立常数**：
+    [L_m, L_n] = (m − n) L_{m+n} + (c_B/12)(m^3 − m) δ_{m,−n},
+    {G_r, G_s} = 2 L_{r+s} + (c_F/12)(4r^2 − 1) δ_{r,−s},
+    [L_m, G_r] = ((m − 2r)/2) G_{m+r}。
+  则（超）Jacobi 恒等式
+    0 = [L_m, {G_r, G_s}] + {G_r, [G_s, L_m]} − {G_s, [L_m, G_r]}
+  的中心部分给出
+    (1/6)(c_B − c_F)(m^3 − m) δ_{m+r+s,0} = 0，
+  故对所有 m ∈ Z 成立当且仅当
+    **c_B = c_F**。
+  等价的 OPE 说法：T_B T_B 的四阶极点系数（写作 c_B/2）与 T_F T_F 的三阶极点系数
+  （写作 2c_F/3）必须由同一个常数 c 给出。
+
+  本命题**不**断言超 Jacobi 恒等式对整个代数逐条成立（那是另一件事，见
+  math.super-virasoro-algebra 的【本卡不断言的内容】(1)）；它只断言：**若**要求上面那一条
+  Jacobi 恒等式成立，**则**两个中心荷相等。
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.1, (10.1.15) 下方一句, p. 4（逐字：'The Jacobi identity requires the same constant c in the T_BT_B and T_FT_F products (exercise 10.5).'）；习题题干见 §10 Exercises, exercise 10.5, p. 43"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E10 / E49）。
+      ⚠ **原书只给结论并把论证推给习题 10.5，正文没有任何计算。**
+      这是本命题只有一条 physical-argument 推导的直接原因。
+tags: [algebra, super-virasoro, central-charge, jacobi-identity]
+notes: |
+  【为什么本条单独成卡】math.super-virasoro-algebra 的括号里两处中心项写的是同一个 c，
+  这本身是一条被 Jacobi 恒等式强制的**命题**，不是记号选择。把它写进定义卡会让定义卡
+  夹带一条未论证的断言（根 CLAUDE.md 原则 1 / 待拆清单的老问题）。故单列。
+
+  【升级路径】按 docs/STATUS_LEVELS.md 的 rigorous 例外裁决（2026-09-10），本条完全符合
+  「前提已完整写出 + 有限步初等计算」两条：给定三条括号，上面那一个 Jacobi 恒等式的中心部分
+  是一次有限的系数比对。**缺的只有 reviewer 的独立复核记录**。
+  → 建议 reviewer 复核推导 math.super-virasoro-central-charge-equality--via-super-jacobi
+  中抄录的 Headrick 计算，若通过，可把该推导升为 rigorous 并在其 notes 写
+  `reviewer-verified: <agent>, <date>`。
+author: curator
+created: "2026-09-11"

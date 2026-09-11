@@ -1,0 +1,152 @@
+id: worldsheet.ten-dimensional-superstring-theories
+kind: proposition
+title: 第 10 章的结论（条件形式）：在该章所列的构造与一致性条件下，无快子且无反常的十维弦论恰有三个——IIA、IIB、type I SO(32)
+statement: |
+  **⚠ 本命题必须写成条件形式，理由见 notes 的【与作者自己的警告的张力】。**
+
+  **前提（本命题的适用范围）**：
+    (P1) 世界面构造限于第 10 章的 (1,1) 超共形约束代数（RNS 形式，worldsheet.rns-action），
+         物质部门取十个平坦 X^μψ^μ SCFT；
+    (P2) 扇区组合满足 worldsheet.superstring-sector-consistency-conditions 的三条条件
+         （相互局域性、OPE 闭合、至少一个左移与一个右移 R 扇区）、能级匹配，
+         以及极大性（worldsheet.superstring-sector-consistency-solutions 的前提 (d)）；
+    (P3) 开弦扇区与闭弦扇区的耦合满足 OPE 闭合
+         （worldsheet.type-i-open-string-gauge-multiplet）；
+    (P4) 要求单圈 NS–NS 与 R–R tadpole **各自**在拓扑求和后为零
+         （worldsheet.type-i-tadpole-cancellation-so32）。
+
+  **结论**：在 (P1)–(P4) 下，无快子且无反常的十维弦论恰有三个：
+    **type IIA、type IIB、type I SO(32)**，
+  其中 type I 的无质量内容为
+    [0] + [2] + (2) + 8′ + 56 + (8_v + 8)_{SO(n) 或 Sp(k)}，n = 32 且取正交投影。
+
+  ⚠⚠ **结论句里的 "nonanomalous" 是描述性的，不是本命题的一条筛选条件。**
+  原书的结论句逐字用了 "tachyon-free and nonanomalous"，本卡照录；但**时空反常
+  在本书里不充当独立筛选器**：§12.2 p. 101 逐字
+    "In constructing new string theories, **it is in principle not necessary to check the
+     low energy anomaly**, since this is guaranteed to vanish if the string consistency
+     requirements have been satisfied. In practice, it is very useful as a check on the
+     calculations and as a check that no subtle inconsistency has been overlooked."
+  同节 p. 102 还逐字说明规范群在弦论侧由什么定：
+    "In the heterotic string, the gauge group was determined by the requirement of **modular
+     invariance**. In the type I string it was determined by cancellation of **tadpole
+     divergences**."
+  ⇒ 起筛选作用的是 (P2) 与 (P4)；时空反常的抵消是**推论/交叉检验**，故不列为 (P5)。
+  （早先版本把它写成前提 (P5)；reviewer-v2-ch10 依上引两段判定该前提是多余的，已删。）
+
+  **通往该结论的三步**（原书的论证链）：
+    (a) 开弦的无质量多重态（16 个态）是 d = 10, N = 1 超对称的表示，**不是** N = 2 的表示，
+        故开超弦**不能**耦合到有两个引力微子的取向闭超弦（IIA/IIB）；
+        它只能耦合到无取向的闭弦理论 (10.6.18)，因此开弦本身也必须是无取向的。
+    (b) 由 (10.6.18) 的手征性，开弦无质量态必须是 8_v + 8。
+    (c) 除 SO(32) 外，其余规范群（以及纯闭弦无取向理论）都有**单圈发散与超共形反常**
+        （§10.8，即 (P4)）。原书在此之外另指第 12 章的**时空规范/坐标反常**
+        作为**附加证据**（逐字 "We will also see, in chapter 12, that the spacetime gauge and
+        coordinate symmetries have an anomaly at one loop for all but the SO(32) theory."）
+        ——按上面的 ⚠⚠，那是同一结论的第二条旁证，不是本命题的独立前提。
+
+  **本命题不断言的内容**：
+    (1) **不**断言这是「所有十维弦论」的完备分类——见 notes 的【与作者自己的警告的张力】；
+    (2) 不断言杂化弦不存在（杂化弦在第 11 章，本轮不入图；它们同样是十维、无快子、无反常的，
+        但不在第 10 章的构造范围内）；
+    (3) **不断言时空规范/坐标反常的抵消已被证明**。本书对它给出的最强论证（§12.2 末，
+        pp. 102–103）是**条件式且被作者自己标为 "formal"** 的：逐字
+        "One can prove the decoupling of null states **formally** in either field theory or
+        string theory; the issue is whether terms from the UV limit invalidate the formal
+        argument. … Surface terms from the boundary of the fundamental region cancel **if** the
+        theory is modular-invariant. … the anomaly then vanishes **if** this converges."
+        （两处 "if" 为原文强调。）故「无反常」这个词在本卡里只承载原书措辞，
+        不承载任何已证内容。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6 末, eq. (10.6.19), p. 31（type I 的无质量内容）；逐字结论句：'Thus we have found precisely three tachyon-free and nonanomalous string theories in this chapter: type IIA, type IIB, and type I SO(32).'；论证 (a)(b)(c) 的逐字见 statement 与 note"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E46；式号与逐字措辞逐页读到原书页图）。
+      ★ **原文的限定词是 'in this chapter'**——本命题的条件形式正是照此写的。
+      (a) 的逐字：'The open string multiplets, with 16 states, are representations of d = 10,
+      N = 1 supersymmetry but not of N = 2 supersymmetry. Thus the open superstring cannot
+      couple to the oriented closed superstring theories, which have two gravitinos.'
+      (c) 的逐字：'There is a further inconsistency in all but the SO(32) theory. We will see in
+      section 10.8 that for all other groups, as well as the purely closed unoriented theory,
+      there is a one-loop divergence and superconformal anomaly. We will also see, in chapter 12,
+      that the spacetime gauge and coordinate symmetries have an anomaly at one loop for all but
+      the SO(32) theory.'
+  - ref: polchinski-1998-v2
+    loc: "§12.2「Relation to string theory」, p. 101（逐字：'In constructing new string theories, it is in principle not necessary to check the low energy anomaly, since this is guaranteed to vanish if the string consistency requirements have been satisfied. In practice, it is very useful as a check on the calculations and as a check that no subtle inconsistency has been overlooked.'）；p. 102（逐字：'In the heterotic string, the gauge group was determined by the requirement of modular invariance. In the type I string it was determined by cancellation of tadpole divergences.'）"
+    note: |
+      L1（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E21 与 E19）。
+      ★★ **这两段是删掉旧 (P5) 前提的依据**：作者明说低能反常检查「原则上不必做」，
+      且规范群在 type I 里是由 tadpole 抵消定的、在杂化弦里是由模不变性定的，
+      **不是由反常定的**。故「无反常」在结论句里是描述性措辞，不是筛选条件。
+  - ref: polchinski-1998-v2
+    loc: "§12.2 末, pp. 102–103（弦论侧反常消失的条件式陈述，逐字见 statement 的【不断言 (3)】）"
+    note: |
+      L1（ch12 抽取记录 E20）。★★ 这是本书对「超弦无反常」给出的最强论证，
+      而它被作者自己标为 'formally' 并带两个显式的 'if'（模不变性；闭弦交换收敛）。
+      第二个 'if' 与 §10.8 的 tadpole 抵消是同一件事。
+  - ref: polchinski-1998-v2
+    loc: "§10.6 脚注 5, p. 31（逐字：'At the world-sheet level the problem is that the total derivative null gravitino vertex operators give rise to nonzero world-sheet boundary terms. Only one linear combination of the two null gravitinos decouples, so we must make the world-sheet parity projection in order to eliminate the other.'）"
+    note: |
+      L1（E46）。这是 (a) 的世界面级理由，本图无对应节点（涉及零引力微子顶点算子的边界项）。
+  - ref: polchinski-1998-v2
+    loc: "§11.1 末, pp. 48–49（作者对分类完备性的警告，逐字见 notes）"
+    note: |
+      L1（抽取记录 E53）。★★★ **这是全两卷里对「弦论分类完备」这条常见断言最直接的作者级限定**，
+      抽取记录要求：若图里有「十维一致弦论恰有 N 个」这类节点，**必须**引用本条，
+      且 status 只能是 conjecture 或 physical-argument。本卡据此写成条件形式并在 notes 记张力。
+tags: [superstring, type-i, type-ii, so32, classification, consistency]
+notes: |
+  ★★★【与作者自己的警告的张力（E46 vs E53），本卡存在的主要理由】
+  §10.6 末的结论句用了限定词 'in this chapter'：
+    'Thus we have found precisely three tachyon-free and nonanomalous string theories
+     **in this chapter**: type IIA, type IIB, and type I SO(32).'
+  而 §11.1 末（p. 48–49）作者对分类完备性给出明确警告（逐字）：
+    '**It should be emphasized that the analysis in this section had many explicit and implicit
+     assumptions, and one should be cautious in assuming that all string theories have been
+     found.** Indeed, there are some string theories that do not fall into this classification.
+     One is the Green–Schwarz form of the superstring, which has no simple covariant
+     gauge-fixing … Another exception is topological string theory, where in a covariant gauge
+     the constraints do not satisfy spin-statistics as we have assumed. …
+     In fact, we will find the same set of physical string theories from an entirely different
+     and nonperturbative point of view in chapter 14, **suggesting** that all have been found.
+     To be precise, there are other theories with stringlike excitations, but the theories found
+     in this and the previous chapter **seem to be** the only ones which have a limit where they
+     become weakly coupled, so that string perturbation theory exists.'
+  **本图的处理**：
+    · 本卡的 statement 写成 (P1)–(P4) 下的条件式，并显式声明「不断言这是完备分类」；
+    · 「三个」这个数只对第 10 章的构造成立；加上第 11 章的两个杂化弦才是通常说的「五个」，
+      而即便那样，作者用的词也是 'suggesting' 与 'seem to be'；
+    · 任何下游若要断言「十维一致超弦恰有五个」，**必须**同时引用 §11.1 末这段警告，
+      且 status 不得高于 physical-argument（抽取记录 E53 的要求）。
+
+  ★★【旧 (P5) 为什么被删（reviewer-v2-ch10 裁决，2026-09-11）】
+  早先版本把「时空规范与坐标对称性在单圈无反常」写成前提 (P5)，并在 gaps 里记
+  「(P5) 在本图无节点」。reviewer 依 §12.2 判定这条前提是**多余且与来源不符**的：
+    · p. 101（E21）：'it is in principle not necessary to check the low energy anomaly,
+      since this is **guaranteed to vanish if the string consistency requirements have been
+      satisfied**'——反常抵消是弦论一致性的**推论**，不是并列的筛选条件；
+    · p. 102（E19）：type I 的规范群由 **tadpole 抵消**定（= (P4)），杂化弦由**模不变性**定。
+  ⇒ (P5) 删除，'nonanomalous' 在结论句里保留为原书措辞并加描述性注记，
+    第 (c) 步把第 12 章降为「附加证据」。
+  **这不是把问题藏起来**：反常抵消本身在本书里同样只有条件式的 'formal' 论证
+  （§12.2 末，两个 'if'），这一点写在 statement 的【不断言 (3)】里。
+
+  ★【与 Green–Schwarz 反常抵消一支的接边（本卡当前的真实状态）】
+  本图 consistency 区已建 Green–Schwarz 1984 一支（反常多项式、因子化、GS 对消项、
+  consistency.type-i-hexagon-so32-iff 等），那是**时空反常路线的原始文献**。
+  接边规则：
+    · **本卡不向 GS 一支建依赖边**。理由：按上面两段，时空反常在本书的论证里不是筛选器；
+      建边会让本卡看起来「靠反常选出 SO(32)」，与 §12.2 p. 101/102 不符。
+    · 若将来要表达「两条路线给同一答案」，正确做法是**另立一张交叉检验卡**
+      （目标形如「tadpole 路线与反常路线在 type I 都给 SO(32)」），
+      由它同时依赖本卡与 GS 一支，并把「为什么两者一致」记为 gap
+      （§12.2 末的两个 'if' 正是那条一致性的内容）。
+    · 在那张卡建出来之前，**不要**把 statement 的【不断言 (3)】读成「已由 GS 一支支撑」。
+
+  【与 duality/M 理论的关系】§11.1 末提到第 14 章会从非微扰角度重新得到同一组理论。
+  本图 duality 区暂无对应节点。
+author: curator
+created: "2026-09-11"
