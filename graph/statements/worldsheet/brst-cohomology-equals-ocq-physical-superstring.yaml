@@ -55,8 +55,13 @@ sources:
       本图玻色弦一侧的对应卡是 worldsheet.brst-cohomology-equals-ocq-physical（第一个同构）
       与 worldsheet.no-ghost-theorem-brst（第二个同构 + 正定）。
       前提链（全文散布，引用必须集齐）：p ≠ 0（Theorem 2.4）；D = 10（p.308 逐字 'From now on,
-      we will take D = 10'）；p 在未来半光锥（p.305 Remark）；空间取 p.306 (8)，
-      **R 扇区用 T₀ ⊕ T₁**。
+      we will take D = 10'）；p 在半空间 R^{D−1,1}_+ = {p: p^D > 0}
+      （p.305 Remark，逐字 "For convenience, we will assume that p is always in the future half
+      R^{D−1,1}_+ of R^{D−1,1}, i.e. R^{D−1,1}_+ = {p ∈ R^{D−1,1}: p^D > 0}."）——
+      ⚠ **是半空间，不是"未来半光锥"**（它不限制 p·p 的符号），且它**只**用来定
+      R 扇区旋量因子 R(p,0) 上厄米型 ⟨,⟩_R 的**整体符号**，**非本质前提**
+      （auditor 2026-09-11 裁决，LZ 扫描件逐页复核；详见 worldsheet.no-ghost-theorem-superstring-cohomological 的 notes 裁决段）；
+      空间取 p.306 (8)，**R 扇区用 T₀ ⊕ T₁**。
       全文结论句逐字（p.335）：'We have shown that such a construction indeed leads to a theory
       equivalent to the **"old covariant" quantization method**.'
       ⚠ **编号陷阱**：p.305 **Lemma** 1.4 与 p.306 **Definition** 1.4 同号；各章公式号重起。
