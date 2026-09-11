@@ -160,10 +160,16 @@ notes: |
       **本轮未打开任何 Mathlib 文件核对**，不得据此标 formalized。若属实，本卡的 Lean 化路径
       与 math.dedekind-eta-function 同款：在 formal/ 下建桥层逐字重述，lean_decl **指桥层**，
       不得直指 Mathlib（formal/CLAUDE.md 桥层规则）。
-    · 数学侧一手来源（本项目 **sources.bib 尚未登记**，故本卡不得引）：
-      Whittaker–Watson "A Course of Modern Analysis" §21.3（ϑ 函数与三重乘积）、
-      Mumford "Tata Lectures on Theta I"。**交 researcher 登记**；登记后
-      math.jacobi-triple-product 可获得一条 rigorous 推导（见那张卡的 gaps）。
+    · 数学侧一手来源：★★ **whittaker-watson-1920 已于 2026-09-11 由 researcher-theta 登记**
+      （1920 年**第三版**，archive.org 公有领域页图 L1；抽取记录 math-sources.md **§56**）。
+      它带来两条 rigorous 推导：三重乘积 = **§21.3 + §21.42**（两节缺一不可，§21.3 只定到常数 G）、
+      abstruse identity = **§21.2 的 Corollary**（带完整证明）。
+      ⚠ W–W **全书无编号定理**（逐页确认）⇒ loc 只写节号；**不得引 1927 第四版的页码**
+      （本项目核实的是第三版，第四版节号是否相同为 **L0**，见 Q56.1 与 bib 条目的版本警告）。
+      ⚠ **W–W 的记号与本卡差两处**：q_W = exp(πiτ)（本卡 q = q_W²）、宗量 z_W = πv；
+      且 W–W 的 ϑ₂, ϑ₃, ϑ₄ = 本卡的 ϑ₁₀, ϑ₀₀, ϑ₀₁（对照表见 math-sources.md §56.2(e)）。
+      ⇒ **本卡的 ϑ_{ab} 记号与 W–W 不是同一套；引 W–W 的推导必须带 convention_map。**
+      ⚠ Mumford *Tata Lectures on Theta I* **仍未登记**（§56.3 逐字「本轮完全没查」，Q56.3）。
   ⚠ 这两条情报都**不是**本卡的 source，本卡的全部来源就是上面 sources 里的四条 Polchinski 条目。
 author: curator
 created: "2026-09-11"

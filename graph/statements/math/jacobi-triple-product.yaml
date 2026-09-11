@@ -64,25 +64,29 @@ notes: |
   ⇒ 那条 gap 因此**只关闭一半**；本轮不去改那条推导的 gaps（它在别人的 claim 范围内，
     且半关闭的 gap 改写容易失真）。**已列入交 lead 的报告。**
 
-  【升级路径（本卡是本图里「升级成本最低」的 physical-argument 节点之一）】
-  三重乘积是十九世纪的经典结果，有完整的初等证明；本卡停在 physical-argument **纯粹是因为
-  本项目的 sources.bib 里还没有一条数学来源**（项目规则：新文献必须先登记到
+  【升级路径（**2026-09-11 当天已走完第一步**）】
+  三重乘积是十九世纪的经典结果，有完整的初等证明；本卡建卡当时停在 physical-argument
+  **纯粹是因为本项目的 sources.bib 里还没有一条数学来源**（项目规则：新文献必须先登记到
   literature/sources.bib，ref 才能用）。
-    · **交 researcher 登记的候选**（本轮**未**登记，故本卡不得引，也未写进 sources）：
-      **Whittaker–Watson, "A Course of Modern Analysis", §21.3**（三重乘积，带证明）；
-      **Mumford, "Tata Lectures on Theta I"**（Ch. I，ϑ 的乘积公式）。
-      ⚠ 这两条是 curator 凭常识给出的**检索线索**，**本项目未核实过其中任何定理号或页码**；
-      researcher 登记时必须按 literature/CLAUDE.md 的口径核到页图再写 loc，
-      **不得**把上面这两个 § 号直接抄进 bib 或卡片（同 `serre-1973-arithmetic` 的红线先例）。
-    · 登记后的动作：新增一条 math.jacobi-triple-product--via-<source>（kind proof / status
-      **rigorous**），本卡的 --via-polchinski-assertion 按 lead 2026-09-11 的裁决**保留**
-      作为「来源只给断言」的记录，工具取高者（与 math.dedekind-eta-s-transformation 完全同款：
-      那张卡就是先只有 --via-textbook-assertion，登记 siegel-1954-eta 后补上 rigorous 推导的）。
-    · **形式化情报（未核实）**：Mathlib 是否有三重乘积**本轮未查**。已知 Mathlib 有
-      `Mathlib/NumberTheory/ModularForms/DedekindEta.lean`（η 的乘积式，已在本图桥层用上）与
-      疑似的 `JacobiTheta` 目录。⚠ 教训见 math.dedekind-eta-s-transformation 的 notes：
-      「『Mathlib 没有 X』这种否定结论，读一个文件是不够的」——反过来「Mathlib 有 X」
-      在没读源码前同样不得写进卡片。
+    · ★★ **同日结清（researcher-theta，2026-09-11）**：**whittaker-watson-1920 已登记**
+      （1920 年**第三版**，archive.org 公有领域页图 L1；抽取记录 math-sources.md **§56**）。
+      本卡随即新增推导 **math.jacobi-triple-product--via-whittaker-watson**
+      （kind proof / status **rigorous**），来源 **§21.3 + §21.42**。
+      ⚠⚠ **两节缺一不可**：§21.3 只把乘积表示定到一个与宗量无关的常数 G，
+      **G = ∏(1−q_W^{2n}) 要到 §21.42 才定出来**。引用时不得只写 §21.3。
+      ⚠ W–W **全书没有编号定理** ⇒ loc 只写节号；**不得引 1927 第四版的页码**
+      （本项目核实的是第三版，第四版节号是否相同为 L0，见 sources.bib 的版本警告与 Q56.1）。
+      ⚠ **记号差两处会咬人**：W–W 的 q_W = exp(πiτ)（本图 q = q_W²）、宗量 z_W = πv，
+      且 W–W 的 ϑ₃/ϑ₄ = 本图的 ϑ₀₀/ϑ₀₁。字典见那条推导的 convention_map 与 §56.2(e)。
+    · 旧推导 math.jacobi-triple-product--via-polchinski-assertion 按 lead 2026-09-11 的裁决
+      **保留**作为「来源只给断言」的记录，工具取高者
+      （与 math.dedekind-eta-s-transformation 完全同款：那张卡就是先只有 --via-textbook-assertion，
+      登记 siegel-1954-eta 后补上 rigorous 推导的）。
+    · **Mumford *Tata Lectures on Theta I* 仍未登记**（math-sources.md §56.3 逐字：「本轮完全没查」，
+      且 Springer 在本环境全封）；⚠ **不得凭印象把「Thm 1.x」写进图**（Q56.3）。
+    · **形式化情报**：Mathlib 是否有三重乘积**仍未查**（math-sources.md **Q56.2**）。
+      ⚠ 教训见 math.dedekind-eta-s-transformation 的 notes：「『Mathlib 没有 X』这种否定结论，
+      读一个文件是不够的」——反过来「Mathlib 有 X」在没读源码前同样不得写进卡片。
 
   【本卡与 math.dedekind-eta-function 的关系（别读成重复）】
   η 的乘积式 q^{1/24}∏(1−q^m) 只涉及本卡右端的**第一族因子**；本卡的内容是三族因子的乘积

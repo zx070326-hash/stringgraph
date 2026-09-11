@@ -57,13 +57,16 @@ gaps:
      抽取记录 #E15 的「文献列出的依赖」栏逐字是「**无（数学工具，无外部引用）**」。
      ⇒ 目标卡在图上的作用目前是**把一条从教科书导入的经典恒等式显式记账**，
      而不是提供论证。任何依赖它的下游都会被压到 physical-argument。"
-  - "**数学侧一手来源尚未登记，因而无法建 rigorous 推导**：按根 CLAUDE.md，
-     新文献必须先登记到 literature/sources.bib，`ref` 才能用。本轮**未**登记任何数学来源。
-     ⇒ **交 researcher 的待办**：登记三重乘积的一手数学来源（检索线索见目标卡 notes：
-     Whittaker–Watson §21.3、Mumford *Tata Lectures on Theta I*；⚠ 这两条**本项目未核实**，
-     登记时必须核到页图再写 loc，不得照抄本卡里的 § 号）。登记后新增
-     math.jacobi-triple-product--via-<source>（kind proof / status rigorous），
-     本推导按 lead 2026-09-11 裁决**保留**作历史记录，工具取高者。"
+  - "**数学侧一手来源当日已登记 ⇒ 本条已结清，保留作历史记录**：建卡时本项目的
+     literature/sources.bib 里没有任何三重乘积的数学来源，故本推导是目标卡当时唯一的推导。
+     **同日（2026-09-11）researcher-theta 登记了 whittaker-watson-1920**（1920 第三版，
+     archive.org 页图 L1，抽取记录 math-sources.md §56），目标卡随即新增
+     **math.jacobi-triple-product--via-whittaker-watson（kind proof / status rigorous，
+     来源 §21.3 + §21.42，两节缺一不可）**。
+     ⇒ 目标卡 own status 现由那条推导承载（工具取高者），**本推导按 lead 2026-09-11 的裁决保留**
+     作为「Polchinski 只给断言」这一事实的记录，不再更新。
+     ⚠ 仍未登记：Mumford *Tata Lectures on Theta I*（math-sources.md §56.3/Q56.3，本轮完全没查，
+     **不得凭印象把 Thm 1.x 写进图**）。"
   - "**本推导只覆盖 ϑ₀₀ 一个函数**：原书 (7.2.38a–d) 的四个乘积表示不在目标卡里
      （抽取记录未印出式子）。⇒ 需要 ϑ₀₁/ϑ₁₀/ϑ₁₁ 乘积形式的下游
      （典型是 spectrum.long-cylinder-lightest-state-count--via-q-expansion 的第 2、3 步）
