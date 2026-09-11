@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-12 上午）：main 589 statements / 485 derivations / 3 milestones / 21 conventions；effective formalized 71 / rigorous 106 / physical-argument 346 / conjecture 29；Lean 75 声明公理干净。FGZ Thm 2.7(ii) 与 LZ Cor 2.15(i) 维数卡已立（各 rigorous）。
+- 计数（2026-09-12 中午）：main 593 statements / 490 derivations / 3 milestones / 21 conventions；**effective formalized 73** / rigorous 105 / physical-argument 349 / conjecture 29；Lean 75+ 声明公理干净。K_n 纵向代数卡与 DDF 假设可满足性卡 formalized；Euler–Poincaré 原理立卡（待 reviewer 复核升 rigorous，届时 `bosonic-relative-cohomology-dimension` 回升）；(B-26) gap 已记进 no-ghost v4 推导。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
