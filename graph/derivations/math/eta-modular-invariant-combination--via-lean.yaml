@@ -18,7 +18,7 @@ depends_on:
       提供 T 生成元上的那一步：`DedekindEta.im_mul_norm_eta_pow_four_modular_T_smul`
       （`StringFormal/Math/DedekindEtaT.lean`），同样被 `mem` 分支在 `x = ModularGroup.T` 时逐字调用。
       字面依赖，非 inferred。
-  - id: worldsheet.modular-group-generated-by-s-and-t
+  - id: worldsheet.modular-group-generated-by-s-and-t-v2
     inferred: false
     note: |
       提供把两个生成元推到整群的那一步：Lean 里用的是
@@ -27,10 +27,22 @@ depends_on:
       它本身是 Mathlib `SpecialLinearGroup.SL2Z_generators` 的再导出）。
       本推导第一步就是 `rw [ModularGroupGen.sl_closure_S_T]; exact Subgroup.mem_top g`
       把「任意 g」变成「g ∈ closure {S,T}」，然后对该成员关系归纳。字面依赖，非 inferred。
-      ⚠ **用的是 SL 版而不是 PSL 版**：该卡正文说的是 PSL(2,Z) 由 S、T 生成，
-      Lean 这边用的是 `sl_closure_S_T`（SL 层）。两者由商映射满射互推
-      （同文件的 `psl_closure_S_T` 正是这样从 SL 版得到的），但本推导实际调用的是 SL 版。
-      目标卡的量词也写在 SL(2,Z) 上，两边一致。
+      ⚠ **用的是 SL 版而不是 PSL 版**：该卡正文的主句说的是 PSL(2,Z) 由 S、T 生成
+      （正文另有一句「等价地在 SL(2,Z) 层：⟨S, T⟩ = SL(2,Z)」，且该卡 sources 把
+      `sl_closure_S_T` 逐条登记），Lean 这边用的是 `sl_closure_S_T`（SL 层）。
+      本推导实际调用的是 SL 版；目标卡的量词也写在 SL(2,Z) 上，两边一致。
+      ⚠⚠ **「等价」不是自动的**（reviewer-batch21, PLAUSIBLE 2）：SL ⇒ PSL 方向只需把
+      `closure {S,T} = ⊤` 沿满同态 `psl` 推下去（`MonoidHom.map_closure`，Lean 里就是这么做的）；
+      **PSL ⇒ SL 方向还需要 `−1 ∈ closure {S, T}`**，而这一条正是由关系卡的
+      `sl_S_sq : S ^ 2 = (-1 : SL(2, ℤ))` 供给（S² 是 S 的字，故 −1 在 closure 里；
+      再配 `Subgroup.closure` 与商的对应定理才得 ⟨S,T⟩ = SL(2,ℤ)）。
+      ⇒ 若只把上游卡读成 PSL 层的主句，本推导用的 SL 版就不是「免费的」。
+      本图的处理是：上游卡 worldsheet.modular-group-generated-by-s-and-t-v2 的 statement
+      **两层都写**（PSL 主句 + SL 等价句），且 Lean 里 SL 版 `sl_closure_S_T` 是原始事实、
+      PSL 版由它导出 ⇒ 本推导取 SL 版不经过任何未机检的步骤。
+      需要 `−1 ∈ closure {S,T}` 那条纸上论证的读者，见 math.psl2z-s-t-relations 的 `sl_S_sq`。
+      ⚠⚠⚠ **2026-09-11 改指 v2**：上游卡已拆成「生成性」（v2，本边）与「两条关系」
+      （math.psl2z-s-t-relations）。本推导只用生成性，故改指 v2，**不加**关系卡的边。
   - id: worldsheet.modular-group-psl2z
     inferred: false
     note: |

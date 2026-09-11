@@ -5,10 +5,17 @@ status: physical-argument
 depends_on:
   - id: worldsheet.modular-group-psl2z
     note: 提供作用在 τ 上的群与 Im(γ·τ) = Im τ/|cτ+d|²。
-  - id: worldsheet.modular-group-generated-by-s-and-t
+  - id: worldsheet.modular-group-generated-by-s-and-t-v2
     note: |
       归约算法只用 S 与 T 两个生成元，故需要「S、T 生成 PSL(2,Z)」才能保证归约覆盖整个群轨道。
-      该节点自身只有 physical-argument 级论证。
+      ⚠ **2026-09-11 两次更新**：(i) 该上游节点现已 formalized
+      （Mathlib `SpecialLinearGroup.SL2Z_generators` 经
+      `StringFormal.ModularGroupGen.psl_closure_S_T`），**不再只有 physical-argument 级论证**
+      ——本条备注的原文「该节点自身只有 physical-argument 级论证」已过时；
+      (ii) 该卡同日拆成「生成性」与「两条关系」两张，本边改指生成性那一张（v2）。
+      本推导只用生成性（关系 S² = (ST)³ = 1 在归约算法里用不到），故不加关系卡的边。
+      ⚠ 本推导自身仍是 physical-argument：瓶颈不在这条边，而在 summary 的终止性论证
+      与边界认同（见 gaps）。
   - id: worldsheet.torus-modular-equivalence
     note: |
       提供「同一 PSL(2,Z) 轨道 ⇒ 同一环面」，使 F₀ 中的代表元确实代表一个环面等价类。
@@ -34,8 +41,13 @@ gaps:
     「Im τ 严格增大且过程有限步终止」这段是标准推理，**不是来源逐字**，其中
     「|cτ+d|² 取值离散」一步本身也未在本图中论证。
   - |
-    **依赖链拖低**：本推导用到 worldsheet.modular-group-generated-by-s-and-t，
-    而那条的生成性在本书中只是断言（见其 gaps）。
+    **依赖链拖低（2026-09-11 已解除，本条改为记账）**：原文「本推导用到
+    worldsheet.modular-group-generated-by-s-and-t，而那条的生成性在本书中只是断言」。
+    现状：生成性已形式化（`StringFormal.ModularGroupGen.psl_closure_S_T`，实质内容是 Mathlib 的
+    `SpecialLinearGroup.SL2Z_generators`），上游卡 effective = formalized，本边改指
+    worldsheet.modular-group-generated-by-s-and-t-v2。
+    ⇒ **本推导的瓶颈已不在这条边**，而在本节 gaps 第 1、2 条（边界认同、终止性论证是 curator 补的）。
+    ⚠ 「原书对生成性零证明」这件文献事实**没变**。
   - |
     **来源强度（2026-09-11 更新，本条原写「(5.1.15) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）」，已过时）**：
     式号、页码、内容三者现已经 Cambridge Books Online 原书页图

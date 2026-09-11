@@ -1,0 +1,74 @@
+id: math.psl2z-s-t-relations--via-lean
+target: math.psl2z-s-t-relations
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      提供群与 S、T 的矩阵：Lean 侧的 `ModularGroup.S`、`ModularGroup.T`（Mathlib）逐字就是
+      该定义卡写的 S = ((0,−1),(1,0))、T = ((1,1),(0,1))，`SL(2, ℤ)` 就是该卡的 SL(2,Z)，
+      PSL 就是该卡的 SL(2,Z)/{±I}（见 gaps 首条）。目标卡 statement 明写「PSL(2,Z) = SL(2,Z)/{±I}
+      （worldsheet.modular-group-psl2z）」，故这是 statement 的字面依赖，**非 inferred**。
+      ⚠ 该定义卡里「S : τ ↦ −1/τ、T : τ ↦ τ+1」这一层（H 上的作用）本推导**完全不用**：
+      `ModularGroupGenerators.lean` 的 docstring 逐字写 "Nothing here is about the action on `ℍ`"。
+      目标卡「不断言」(d) 已把它排除，两边一致。
+      ⚠ 该定义卡已于 2026-09-11 接桥层 `StringFormal.Bridge.psl2z_smul_eq` 升为 formalized，
+      故本推导 own=formalized 不被它按 min 规则压低。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_S_sq；同文件 sl_S_sq, sl_ST_cube, neg_one_mem_center, psl, psl_neg_one, psl_ST_cube"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/eta-modular`；Lean 4 + Mathlib **v4.33.1**。
+      本推导只用该文件的「关系」一半；同文件的 `sl_closure_S_T` / `psl_closure_S_T`（生成性）
+      属于另一张卡 worldsheet.modular-group-generated-by-s-and-t-v2，**不是本推导的输入**。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（物理侧转述）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70，L1。
+      本条**不承载本推导的任何步骤**；「(5.1.12) 是否含这两条关系」这一文献问题本推导不解决
+      （见 gaps 末条）。
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/ModularGroupGenerators.lean`。两步：
+
+  **(1) SL 层：两行矩阵乘法。** `sl_S_sq : S² = −1` 与 `sl_ST_cube : (S*T)³ = −1`，
+  两条都是 `ext i j <;> fin_cases i <;> fin_cases j <;> rfl`——即 2×2 整数矩阵的逐项定义相等。
+  （`-1 : SL(2,ℤ)` 的 `Neg` 实例由全局 `Fact (Even (Fintype.card (Fin 2)))` 提供。）
+
+  **(2) 过到 PSL。** `psl := QuotientGroup.mk' (Subgroup.center SL(2,ℤ))`；
+  `neg_one_mem_center` 由 `Subgroup.mem_center_iff` 一行（−1 与一切 g 交换），
+  `psl_neg_one : psl (−1) = 1` 由 `QuotientGroup.eq_one_iff`。于是
+  `psl_S_sq` 与 `psl_ST_cube` 各由 `← map_pow` / `← map_mul` 把 (1) 的等式推到商上，
+  右端的 −1 死掉，得 = 1。∎
+gaps:
+  - |
+    **（记账，不是缺口）Lean 的 PSL 取法**：Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup`
+    是 `SL(2,ℤ)/Z(SL(2,ℤ))`，本文件只证 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），
+    没有证 `Z(SL(2,ℤ)) = {±1}`。后者已由桥层
+    `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`
+    证明（提交 c15b0db；子群由承载集合决定，故商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群）。
+    ⚠ `center_eq_pm_one` 不在 `psl_S_sq` 的证明链上：两者的拼接是人读两条声明后作的比对，
+    不是一条机检蕴涵。
+  - |
+    **不含表现（presentation）**。目标卡「不断言」(b) 与 Lean 一致：`psl_S_sq`、`psl_ST_cube`
+    只说这两条关系成立，不说它们生成全部关系。那需要基本域上的乒乓引理，Mathlib v4.33.1 没有。
+  - |
+    **不含阶的下界**。目标卡「不断言」(c)：本推导没有证 π(S) ≠ 1 或 (π(S)π(T))^k ≠ 1 (k=1,2)，
+    故「S、T 的阶恰为 2、3」不在本推导内。
+  - |
+    **文献问题不因本推导关闭**：「S² = 1、(ST)³ = 1 是否写在 Polchinski (5.1.12) 里」
+    在抽取记录里仍标为未核实（#E70）。Lean 证的是数学事实，与「原书说了什么」无关。
+notes: |
+  由 curator（lean-wire-11）于 2026-09-11 建立，随 worldsheet.modular-group-generated-by-s-and-t
+  的拆卡产生。本推导的内容是原卡推导
+  worldsheet.modular-group-generated-by-s-and-t--via-lean 的 summary 第 (1)(2) 步
+  （「SL 层的两条关系」与「过到 PSL」），只是现在它是一张独立卡的完整论证；
+  拆卡后那条推导改指 worldsheet.modular-group-generated-by-s-and-t-v2 并只保留生成性那一步。
+
+  **check-axioms**：`ModularGroupGenerators.lean` 的 8 条公开声明已由 curator（lean-wire-10）
+  于 2026-09-11 在主工作树 D:\physics\string 跑过：**8 ok, 0 non-standard, 0 missing; 0 errors**，
+  公理集合一律 `propext Classical.choice Quot.sound`（含本卡用到的 `sl_S_sq`、`sl_ST_cube`、
+  `neg_one_mem_center`、`psl_neg_one`、`psl_S_sq`、`psl_ST_cube`）。
+  本分支未改动该 Lean 文件。按根 CLAUDE.md，lead 合并前仍应重跑一次。
+author: curator-lean-wire-11
+created: "2026-09-11"
