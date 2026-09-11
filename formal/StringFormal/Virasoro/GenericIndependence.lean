@@ -226,6 +226,145 @@ theorem IsContravariant.linearIndependent_descFamily4 [NoZeroDivisors R]
 
 end Level4
 
+/-! ### Dimensions of the level subspaces -/
+
+section Finrank
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+lemma descFamily2_mem_levelSpan (i : Fin 2) : descFamily2 R c h i ∈ levelSpan R c h 2 := by
+  fin_cases i
+  · exact desc2_mem_levelSpan R c h
+  · exact desc11_mem_levelSpan R c h
+
+lemma descFamily3_mem_levelSpan (i : Fin 3) : descFamily3 R c h i ∈ levelSpan R c h 3 := by
+  fin_cases i
+  · exact desc3_mem_levelSpan R c h
+  · exact desc21_mem_levelSpan R c h
+  · exact desc111_mem_levelSpan R c h
+
+lemma descFamily4_mem_levelSpan (i : Fin 5) : descFamily4 R c h i ∈ levelSpan R c h 4 := by
+  fin_cases i
+  · exact desc4_mem_levelSpan R c h
+  · exact desc31_mem_levelSpan R c h
+  · exact desc22_mem_levelSpan R c h
+  · exact desc211_mem_levelSpan R c h
+  · exact desc1111_mem_levelSpan R c h
+
+lemma span_descFamily2_le_levelSpan :
+    Submodule.span R (Set.range (descFamily2 R c h)) ≤ levelSpan R c h 2 := by
+  rw [Submodule.span_le]
+  rintro x ⟨i, rfl⟩
+  exact descFamily2_mem_levelSpan R c h i
+
+lemma span_descFamily3_le_levelSpan :
+    Submodule.span R (Set.range (descFamily3 R c h)) ≤ levelSpan R c h 3 := by
+  rw [Submodule.span_le]
+  rintro x ⟨i, rfl⟩
+  exact descFamily3_mem_levelSpan R c h i
+
+lemma span_descFamily4_le_levelSpan :
+    Submodule.span R (Set.range (descFamily4 R c h)) ≤ levelSpan R c h 4 := by
+  rw [Submodule.span_le]
+  rintro x ⟨i, rfl⟩
+  exact descFamily4_mem_levelSpan R c h i
+
+/-- A composition of `2` is `[2]` or `[1,1]`: the two level-2 descendants `desc2`, `desc11`
+exhaust the generators of `V₂`.  (At level `3` the analogous list contains `[1,2]`, i.e.
+`L₋₁L₋₂|c,h⟩`, which is *not* one of the three standard descendants and needs straightening;
+that is why the exact dimension below is proved only at level `2`.) -/
+lemma composition_two_blocks (cmp : Composition 2) : cmp.blocks = [2] ∨ cmp.blocks = [1, 1] := by
+  obtain ⟨l, hpos, hsum⟩ := cmp
+  match l with
+  | [] => simp at hsum
+  | [a] =>
+      left
+      have ha : a = 2 := by simpa using hsum
+      simp [ha]
+  | [a, b] =>
+      right
+      have ha := hpos (i := a) (by simp)
+      have hb := hpos (i := b) (by simp)
+      have hab : a + b = 2 := by simpa using hsum
+      have h1 : a = 1 := by omega
+      have h2 : b = 1 := by omega
+      simp [h1, h2]
+  | a :: b :: d :: t =>
+      exfalso
+      have ha := hpos (i := a) (by simp)
+      have hb := hpos (i := b) (by simp)
+      have hd := hpos (i := d) (by simp)
+      simp only [List.sum_cons] at hsum
+      omega
+
+/-- **`V₂` is spanned by the two standard level-2 descendants** (not just by the compositions of
+`2`): `V₂ = span {L₋₂|c,h⟩, L₋₁²|c,h⟩}`.  Unconditional; no PBW and no form needed. -/
+lemma levelSpan_two_eq_span_descFamily2 :
+    levelSpan R c h 2 = Submodule.span R (Set.range (descFamily2 R c h)) := by
+  refine le_antisymm ?_ (span_descFamily2_le_levelSpan R c h)
+  rw [levelSpan, Submodule.span_le]
+  rintro x ⟨cmp, rfl⟩
+  rcases composition_two_blocks cmp with hb | hb
+  · have hw : levelWord R c h 2 cmp = desc2 R c h := by rw [levelWord, hb]; rfl
+    rw [hw]
+    exact Submodule.subset_span ⟨0, rfl⟩
+  · have hw : levelWord R c h 2 cmp = desc11 R c h := by rw [levelWord, hb]; rfl
+    rw [hw]
+    exact Submodule.subset_span ⟨1, rfl⟩
+
+end Finrank
+
+section FinrankField
+
+variable {K : Type*} [Field K] [CharZero K] {c h : K}
+variable {B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K}
+
+lemma levelSpan_moduleFinite (N : ℕ) : Module.Finite K (levelSpan K c h N) :=
+  Module.Finite.iff_fg.mpr (levelSpan_fg K c h N)
+
+/-- **`dim V₂ = 2 = p(2)` at generic `(c,h)`.**  This is the `N = 2` case of the PBW statement
+`dim V_N = p(N)`: `VermaPBW.lean` gives `≤`, and the nonvanishing of the level-2 Kac polynomial
+gives `≥` through the Gram determinant.  Conditional on the existence of a normalised
+contravariant form, i.e. on `hwv ≠ 0` (`exists_isContravariant_iff_hwv_ne_zero`). -/
+theorem IsContravariant.finrank_levelSpan_two (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1)
+    (hdet : 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) ≠ 0) :
+    Module.finrank K (levelSpan K c h 2) = 2 := by
+  rw [levelSpan_two_eq_span_descFamily2]
+  simpa using finrank_span_eq_card (hB.linearIndependent_descFamily2 hB1 hdet)
+
+/-- **`dim V₃ ≥ 3 = p(3)` at generic `(c,h)`.**  Together with
+`finrank_levelSpan_le_card_partition` this pins `dim V₃ = p(3)` as soon as one knows
+`Fintype.card (Nat.Partition 3) = 3`, which Mathlib does not provide and which `decide` cannot
+compute (the `Fintype` instance on `Nat.Partition` goes through `Fintype.ofSurjective`). -/
+theorem IsContravariant.three_le_finrank_levelSpan_three (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1)
+    (hdet : 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+        * (3 * h ^ 2 + h * (c - 7) + c + 2) ≠ 0) :
+    3 ≤ Module.finrank K (levelSpan K c h 3) := by
+  have hfin := levelSpan_moduleFinite (K := K) (c := c) (h := h) 3
+  calc (3 : ℕ) = Fintype.card (Fin 3) := by simp
+    _ = Module.finrank K (Submodule.span K (Set.range (descFamily3 K c h))) :=
+        (finrank_span_eq_card (hB.linearIndependent_descFamily3 hB1 hdet)).symm
+    _ ≤ Module.finrank K (levelSpan K c h 3) :=
+        Submodule.finrank_mono (span_descFamily3_le_levelSpan K c h)
+
+/-- **`dim V₄ ≥ 5 = p(4)` at generic `(c,h)`.**  Same remark as at level 3. -/
+theorem IsContravariant.five_le_finrank_levelSpan_four (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1)
+    (hdet : 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
+        * (3 * h ^ 2 + h * (c - 7) + c + 2)
+        * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) ≠ 0) :
+    5 ≤ Module.finrank K (levelSpan K c h 4) := by
+  have hfin := levelSpan_moduleFinite (K := K) (c := c) (h := h) 4
+  calc (5 : ℕ) = Fintype.card (Fin 5) := by simp
+    _ = Module.finrank K (Submodule.span K (Set.range (descFamily4 K c h))) :=
+        (finrank_span_eq_card (hB.linearIndependent_descFamily4 hB1 hdet)).symm
+    _ ≤ Module.finrank K (levelSpan K c h 4) :=
+        Submodule.finrank_mono (span_descFamily4_le_levelSpan K c h)
+
+end FinrankField
+
 end Virasoro
 
 end StringFormal
