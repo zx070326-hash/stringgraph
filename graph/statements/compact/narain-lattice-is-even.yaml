@@ -16,8 +16,11 @@ sources:
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E138，证据等级 L1
       （Schrans §8.57–§8.63，笔记 p.472–475，[8.245]–[8.249] 逐式复现）。
-      ⚠ 本图尚无 (7.2.29)（「模不变性 ⟺ L_0 − L̄_0 ∈ Z」）的节点，
-      该步只能写在本条陈述里并在推导中记 gap。
+      ⚠ 本条陈述写于本图尚无 (7.2.29) 节点时，故把该步写进了陈述正文。
+      **2026-09-11 更新**：(7.2.29) 现有节点 worldsheet.modular-invariance-integer-spin
+      （Polchinski v1 第 7 章分支所建），推导已补上指向它的边；
+      本 note 原来的「该步只能写在本条陈述里并在推导中记 gap」已不再适用。
+      按项目原则 1 与 graph/CLAUDE.md 的 2026-09-12 裁定，**陈述正文不就地改**。
 tags: [compactification, torus, narain, lattice, modular-invariance, consistency]
 notes: |
   **逻辑方向值得记录**（抽取记录 #E138 明记）：本书是**先**由 τ → τ + 1 的模不变性

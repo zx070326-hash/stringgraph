@@ -1,0 +1,38 @@
+id: spectrum.cylinder-tadpole-divergence-is-infrared--via-closed-string-pole
+target: spectrum.cylinder-tadpole-divergence-is-infrared
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.cylinder-closed-channel-open-closed-duality
+    note: |
+      提供 (7.4.3)/(7.4.4)：把 t → 0 的行为写成闭弦通道的展开 exp(2s) + 24 + O(exp(−2s))，
+      两个危险项就是这里的前两项。
+  - id: spectrum.one-loop-cylinder-amplitude
+    note: 提供整体归一化与 n²（两条边界各一个 Chan–Paton 迹），即两个 tadpole 各挂一条边界。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.5)(7.4.6) 与 fig. 7.1(b)(c), p.224；UV/IR 的一般讨论与场论类比 (7.4.7)(7.4.8), p.225"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E31/#E32，L1（原书页图逐字）。
+summary: |
+  把长圆柱（s → ∞）的过程按中间态分解（图 7.1(b)）：一条边界圈 → 闭弦 → 另一条边界圈。
+  「边界圈 → 闭弦」这一半就是**圆盘上带一个闭弦顶点算子的振幅**（tadpole，§6.6 给出它非零），
+  中间是闭弦传播子。∫₀^∞ ds exp(βs) = −1/β 正是传播子 1/(k² + m²) 在
+  β = −(α'k²/2 + …) 的表示；对无质量态与零动量（动量守恒强制）它退化为 1/0。
+  由于传播子的极点对应长时空距离的传播，这个发散是 **IR** 的，不是 UV 的。
+  场论侧的同一结构（(7.4.7)/(7.4.8)）：作用量里有线性项 gΛφ ⇒ φ = 0 不是解 ⇒
+  必须绕真正的解展开，且该解必然依赖位置、破坏零阶解的部分 Poincaré 对称性。
+gaps:
+  - "**「圆盘 tadpole 非零」这一步整体外包给 §6.6，而本图没有该节点**（第 6 章那批卡未含它）。
+     因此本推导在图内是**悬空的一步**；抽取记录 #E31 指出 §6.6 已 L1 读过（pp.194–197），
+     这条边可以补，本卡先记为缺口而不伪造边。"
+  - "**∫₀^∞ ds exp(βs) ≡ −1/β 是定义（解析延拓），不是计算**；β = 0 时该定义失效，
+     这正是无质量项发散的技术表述。"
+  - "**发散如何消除没有做**：原书说要绕修正后的场方程解展开，并逐字承认
+     「The details are a bit intricate, and will be discussed somewhat further in chapter 9」；
+     场论侧「The resulting amplitudes are free of divergences」也是断言、无证明。"
+  - "**tadpole 系数 Λ 未定**：原书说可由弦与场论计算对比定出，但推迟到第 8 章。"
+  - "**继承开闭弦通道对偶的全部缺口**（η 的 S 变换无证明等）。"
+notes: |
+  由 curator 于 2026-09-11 建立。两条依赖边为实边；缺的那条（§6.6 圆盘 tadpole）明确记在 gaps。
+author: curator-polchinski-ch7
+created: "2026-09-11"

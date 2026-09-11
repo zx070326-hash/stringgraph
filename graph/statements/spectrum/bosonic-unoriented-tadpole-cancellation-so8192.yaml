@@ -1,0 +1,66 @@
+id: spectrum.bosonic-unoriented-tadpole-cancellation-so8192
+kind: proposition
+title: "无取向玻色弦的 tadpole 相消：总 tadpole ∝ (2¹³ ∓ n)，对 SO(2¹³) = SO(8192) 为零"
+statement: |
+  在**无取向玻色弦**（26 维平坦时空，n 个 Chan–Paton 自由度）中，把三个欧拉数为零的
+  非取向/带边曲面的**无质量** tadpole 发散相加——圆柱（带无取向理论的额外 ½）、
+  Klein 瓶、Möbius 带——得到
+    i · (24 V₂₆) / ( 4π (8π²α')¹³ ) · ( 2¹³ ∓ n )² ∫₀^∞ ds        (7.4.24)
+  其中 ∓ 的上号（−）对应 **SO(n)**、下号（+）对应 **Sp(k)**（原书记法，n = 2k）。
+  于是：
+    **总 tadpole 正比于 2¹³ ∓ n；对规范群 SO(2¹³) = SO(8192) 它为零**，
+    此时圆盘的 tadpole 与射影平面（RP₂）的 tadpole 相消。
+
+  ⚠⚠ **作者本人对这条结论的判词（逐字，必须原样保留）**：
+  「That is, the total tadpole is proportional to 2¹³ ∓ n. For the gauge group SO(2¹³) = SO(8192)
+  this vanishes, the tadpoles from the disk and projective plane canceling. **For the bosonic string
+  this probably has no special significance, but the analogous cancellation for SO(32) in superstring
+  theory does.**」
+  即：**玻色弦这一支被作者判为「probably 无特殊意义」**，强度词是 "probably"。
+
+  ⚠⚠⚠ **不得由本命题得出 type I / SO(32) 的任何结论**：
+  本章算的是**玻色弦**，临界值是 n = 2¹³ = 8192。
+  **`SO(32)` 在整个第 7 章只出现一次**，就是上面引文的最后半句，
+  **没有计算、没有式号、没有引用、没有 "we will show"**——是一句纯前向指路。
+  第 7 章也**没有出现** "type I"、"anomaly"、"hexagon"、"orientifold" 任何一个词
+  （抽取记录 §3.3 的否定结论清单）。
+
+  **本卡不断言什么**：不断言 tadpole 相消是「一致性要求」（原书没这么说；它只说相消发生在
+  n = 2¹³）；不断言 2¹³ 与超弦的 32 是同一机制的 2^{D/2}（那是抽取者的推断，**原书没有写**，
+  见抽取记录 Q4）；不断言 SO 与 Sp 之外的规范群情形；不涉及发散被消除后的背景修正。
+uses_conventions:
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4 最后一段, eq. (7.4.24), p.229（本页经单页重渲染复核，并做过独立算术交叉核验）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E38，
+      等级 **L1（原书页图逐字，整段一字不漏抄录）**。
+      ⓘ **抽取者对页图读数做过独立复算**（抽取记录 §0.4）：分子的 **24V₂₆** 里的 24 来自
+      (7.4.4) 的无质量项系数；把带 ½ 的圆柱 (7.4.3)、Klein 瓶 (7.4.19)、Möbius (7.4.23)
+      的无质量部分相加得 2²⁶ ∓ 2¹⁴n + n² = (2¹³ ∓ n)²，公共因子恰为
+      i·24·V₂₆/(4π(8π²α')¹³)。⇒ 读数 24V₂₆ 获得独立算术确认（不是 2⁴），
+      同时验证了三式系数彼此自洽。
+tags: [spectrum, one-loop, tadpole, unoriented, chan-paton, bosonic-string, cross-cap]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E38 建立。
+
+  **为什么这条节点有独立价值**：它是「tadpole 相消这件事不是超弦独有的数论巧合」的原文证据，
+  而且**作者本人否认玻色弦这一支有意义**——正是本项目想捕捉的那种「强度实话实说」的样本。
+
+  **与 SO(32) 相关节点的边界（lead 指示的红线，抽取记录 §5-B2）**：
+  本图**不**以第 7 章为来源建立 `spectrum.type-i-tadpole-cancellation-so32`。
+  若要建那个节点，其来源应在 Polchinski **Vol.2**（type I 那一节，须先核实是 §10.8 还是别处）、
+  `green-schwarz-1985-hexagon`（正文仍 L0），或 `gsw-1987-v2` ch.10
+  （本项目已 L1：p.143 逐字「the anomaly cancels **if and only if** the gauge group is SO(32)」
+  外加「**although the relevant calculations have not been performed**」）。
+  本图现有的相关节点是 consistency.type-i-hexagon-so32-iff（来源是 GSW，不是本章）——
+  **本卡与它之间没有边**，因为第 7 章与反常那条线没有原文级连接。
+
+  **32 与 8192 的两种来历不要混**：本章的 2¹³ 来自 2^{13}、13 = 26/2；
+  `gsw-1987-v2` §10.2 的 32 来自「六边形内线上奇数个扭转的分布方式数」（本图
+  math.hexagon-odd-twist-count），超弦侧是 2^{10/2} = 32。**「两者是 2^{D/2} 的同一机制」
+  是抽取者的推断，原书没有写**（Q4），不得当作原文陈述使用。
+author: curator-polchinski-ch7
+created: "2026-09-11"

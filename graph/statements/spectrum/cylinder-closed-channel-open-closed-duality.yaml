@@ -1,0 +1,54 @@
+id: spectrum.cylinder-closed-channel-open-closed-duality
+kind: proposition
+title: "圆柱的 t → 0 极限 = 长闭弦通道：Z_{C₂} = i(V₂₆n²)/(2π(8π²α')¹³)∫ds η(is/π)^{−24}，η^{−24} = e^{2s} + 24 + O(e^{−2s})"
+statement: |
+  在 spectrum.one-loop-cylinder-amplitude 的 t → 0 极限里**没有模群可以截断积分**，
+  故场论式的 UV 发散「看起来还在」。用 η 的模变换重写可以看出它其实是长距离效应：
+
+  (1)（**模变换**）η(it) = t^{−1/2} η(i/t)（即 (7.2.44b) 在纯虚参数上的形式）；
+  (2)（**换元 s = π/t**）
+        Z_{C₂} = i (V₂₆ n²) / ( 2π (8π²α')¹³ ) ∫₀^∞ ds  η(is/π)^{−24} ,
+      其中 s 是**把圆柱看成长闭弦世界线时的长度**；
+  (3)（**闭弦通道的展开**）
+        η(is/π)^{−24} = exp(2s) ∏_{n=1}^{∞} [ 1 − exp(−2ns) ]^{−24} = exp(2s) + 24 + O(exp(−2s)) ,
+      逐项对应**闭弦态**：exp(2s) 是闭弦快子，常数 24 是无质量闭弦态（左右各 24 个横向模在
+      对角上的 24 个组合），其余是重态。
+  (4)（**通道解释**）t → 0 时圆柱很长（图 7.1(a)）：把 σ² 当世界面时间、σ¹ 当空间，它是一个很短的
+      开弦圈；**把时空角色互换**，它就是一条很长的闭弦世界线，两端结束在两条边界圈上——
+      即「一个闭弦从真空中出现、传播一段距离、再消失回真空」。原书逐字：
+      「In the Euclidean path integral, either description can be used, and each is useful in a
+      different limit of moduli space.」
+
+  ⚠ **这是开闭弦通道对偶（open–closed duality）在本书的第一次出现，原书没有给它命名。**
+
+  **本卡不断言什么**：不断言发散的具体消除方式（那要靠绕修正后的背景展开，见
+  spectrum.cylinder-tadpole-divergence-is-infrared 与 spectrum.open-string-requires-closed-string）；
+  不断言边界态 |B⟩ 的表示（原书给了 (7.4.11)–(7.4.13) 但**归一化未定**，且把与 (7.4.3) 的
+  一致性留作习题 7.14）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, p.223 末段 + eqs. (7.4.2)(7.4.3)(7.4.4), p.223–224"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E30，等级 **L1（原书页图逐字）**。
+      核心段落逐字：「The t → 0 limit is rather interesting. **Unlike the case of the torus, there is
+      no modular group acting to cut off the range of integration, and so the UV divergence of field
+      theory still seems to be present. However, we will see that, as with all divergences in string
+      theory, this should actually be interpreted as a *long-distance* effect.**」
+      ⚠ (7.4.4) 里的常数是 **24**（开弦只有一侧的横向模），与环面 (7.3.15) 的 24²（左右各 24）
+      **是不同的数**（抽取记录 #E25 的警告）。
+tags: [spectrum, one-loop, cylinder, open-closed-duality, dedekind-eta, ir-divergence]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E30 建立。
+
+  **本卡是「弦论的发散都是长距离效应」这一说法在开弦一侧的落点**，而其机制与闭弦一侧
+  （模群截断，spectrum.one-loop-uv-finiteness-from-modular-invariance）**完全不同**——
+  原书自己指出这个差别（见 spectrum.no-uv-region-in-moduli-space-principle 的 ⚠(4)）。
+
+  **独立算术核验（抽取记录 §0.4）**：(7.4.4) 的常数项 24 是 (7.4.24) 里那个 24V₂₆ 的来源；
+  抽取者用它复算了三个曲面的无质量 tadpole 之和，与 (7.4.24) 的页图读数一致。
+author: curator-polchinski-ch7
+created: "2026-09-11"

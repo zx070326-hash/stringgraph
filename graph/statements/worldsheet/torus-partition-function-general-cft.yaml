@@ -1,0 +1,57 @@
+id: worldsheet.torus-partition-function-general-cft
+kind: definition
+status: physical-argument
+title: "环面配分函数 Z(τ) = Tr[(−1)^F e^{2πiτ₁P − 2πτ₂H}] = Σ_i q^{h_i−c/24} q̄^{h̃_i−c̃/24}(−1)^{F_i}"
+statement: |
+  设一个二维 CFT 定义在模参数为 τ = τ₁ + iτ₂ 的平坦环面 T²(τ)（worldsheet.torus-modulus）上，
+  记 q = exp(2πiτ)。用圆上的算符语言（σ¹ 是空间、σ² 是欧氏时间），取
+    P = L₀ − L̃₀            （σ¹ 平移的生成元），
+    H = L₀ + L̃₀ − (c + c̃)/24  （σ² 平移的生成元，见 worldsheet.cylinder-plane-l0-shift）。
+  **定义**该 CFT 的环面配分函数为
+    Z(τ) = Tr[ (−1)^F exp( 2πiτ₁ P − 2πτ₂ H ) ]
+         = Σ_i  q^{h_i − c/24}  q̄^{h̃_i − c̃/24}  (−1)^{F_i} ,
+  其中 i 跑遍该 CFT 的全部态，(h_i, h̃_i) 是其 (L₀, L̃₀) 本征值，F_i 是**世界面**费米数
+  （mod 2）；玻色 CFT 中 (−1)^F ≡ 1。
+
+  几何含义（原书的构造图像）：环面 = 圆上的场论沿欧氏时间演化 2πτ₂、再作 σ¹ 平移 2πτ₁、
+  最后把两端认同；「路径积分 = 迹」正是这个认同。
+  ⚠ 对反交换场，**朴素的迹对应时间方向的反周期边条件**；要得到 Faddeev–Popov 行列式所需的
+  周期鬼场，必须插入 (−1)^F——这正是上式里 (−1)^F 的来历，见
+  worldsheet.bc-ghost-torus-partition-function。
+
+  **本卡不断言什么**：不断言上式的收敛性（对一般 CFT 求和的收敛性原书完全不讨论）；
+  不断言 Z(τ) 的模不变性（那是对谱的额外要求，见 worldsheet.modular-invariance-integer-spin）；
+  不给出任何具体 CFT 的 Z（自由标量见 worldsheet.free-scalar-torus-partition-function，
+  bc 鬼场见 worldsheet.bc-ghost-torus-partition-function）。
+uses:
+  - worldsheet.torus-modulus
+  - worldsheet.cylinder-plane-l0-shift
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.28), p.213（一般 CFT：Z(τ) = Σ_i q^{h_i−c/24} q̄^{h̃_i−c̃/24}(−1)^{F_i}）；迹表示与 P、H 的定义见 eq. (7.2.5) 及其下方, p.209（原书在那里引 (2.6.10)）；(−1)^F 的必要性见 eq. (7.2.24), p.212"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E8、#E11、#E12，
+      等级 **L1（原书页图逐字，Cambridge Books Online 2005 平装本）**。
+      ⚠ 原书把「路径积分 = 迹」这一步只用一句「In operator language this gives a trace」带过，
+      **没有独立论证**（抽取记录 #E8 备注）。
+      ⓘ 副产品：本条同时给 worldsheet.cylinder-plane-l0-shift 里 H = L₀+L̃₀−(c+c̃)/24 的
+      式号 (2.6.10) 提供了一个 L1 的**二次引用**（第 7 章 p.209 逐字引它并写出该表达式），
+      但 (2.6.10) 本页仍未直读，那条卡的「未核实」标注不由本卡撤销。
+tags: [cft, torus, partition-function, modular-invariance, trace, ghosts]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E8/#E12 建立。
+
+  **status = physical-argument 的理由**（按 docs/STATUS_LEVELS.md 定义卡一档）：
+  (i)「环面路径积分 = 圆上算符迹」在来源里无论证；
+  (ii) 求和/迹的收敛性未定义（一般 CFT 的态数按 exp(√·) 或更快增长，
+       见 worldsheet.high-weight-density-from-central-charge）；
+  (iii) 上游的 CFT 本身（态空间、L₀ 谱离散性）在本图里没有公理化的定义卡。
+
+  下游：(7.2.29) 的谱约束（worldsheet.modular-invariance-integer-spin）、
+  (7.3.8) 的一般 CFT 环面真空振幅、§8.4 Narain 格论证 (8.4.21) 都以本式为模板。
+author: curator-polchinski-ch7
+created: "2026-09-11"

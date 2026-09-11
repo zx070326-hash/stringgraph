@@ -1,0 +1,47 @@
+id: spectrum.field-theory-region-sum-over-string-spectrum--via-spectrum-sum
+target: spectrum.field-theory-region-sum-over-string-spectrum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.point-particle-circle-path-sum
+    note: 提供被求和的对象 Z_{S¹}(m²)（(7.3.9)）。
+  - id: worldsheet.modular-invariance-integer-spin
+    note: |
+      提供 h − h̃ ∈ Z 这个**明写的前提**——没有它，(7.3.11) 的 δ_{h,h̃} = ∫dθ/2π e^{i(h−h̃)θ}
+      写不出来。原书在 (7.3.11) 下方逐字声明这个假设并回指上一节（即 (7.2.29)）。
+      **抽取记录 #E23 备注明确说：这条边是真实的边，不是 inferred。**
+  - id: worldsheet.no-ghost-theorem-v4
+    note: |
+      提供「物理谱与横向 Hilbert 空间一一对应」这一步。原书逐字「As shown in chapter 4, the
+      physical spectrum is in one-to-one correspondence with H^⊥」——本图第 4 章那条结论的
+      当前代表就是这张卡。
+      ⚠ 该卡是**开弦（单套 Virasoro）**的 Goddard–Thorn 形式；闭弦的左右两套是它的两份拷贝，
+      **原书在 §7.3 没有复述这个加倍**，本图也没有独立的闭弦版无鬼定理节点。
+  - id: spectrum.covariant-external-legs-on-shell
+    note: |
+      提供闭弦质量壳 α'm² = 4(h − 1)（等价于 m² = (2/α')(h + h̃ − 2) 配 h = h̃），
+      以及 q^{h−1} 里那个 −1 的出处。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eqs. (7.3.10)–(7.3.13), p.218"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E23，L1（原书页图逐字）。
+summary: |
+  对每个物理态用 (7.3.9)，质量按 m² = (2/α')(h+h̃−2) 代入；h = h̃ 的约束用
+  (7.3.11) 的 θ 积分表示（需要 h − h̃ ∈ Z）。
+  把 (l, θ) 换成复模 τ：θ + il/α' = 2πτ，则 exp(−m²l/2) 与 exp[i(h−h̃)θ] 合成 q^{h−1}q̄^{h̃−1}，
+  dl dθ 的雅可比与 (7.3.9) 的 1/2l、1/2π 合成 dτdτ̄/4τ₂。
+  θ ∈ (−π, π) 给出 |τ₁| < ½，l ∈ (0,∞) 给出 τ₂ > 0，即区域 R。
+gaps:
+  - "**求和与积分的交换、Σ_{i∈H^⊥} 的收敛性完全没有讨论**（抽取记录 Q2）。
+     τ₂ → 0 端本身就发散，故这个「等式」只在形式层面成立。"
+  - "**闭弦的 H^⊥ 对应关系外包给第 4 章**，而本图第 4 章那条卡是开弦（单套振子）版本；
+     左右两套的加倍在原书 §7.3 没有复述。"
+  - "**换元 θ + il/α' = 2πτ 的雅可比原书未写出**：(7.3.12) 直接给结果。本推导的复述
+     没有逐因子核对（(7.3.9) 的 dl/2l 与 (7.3.12) 的 dτdτ̄/4τ₂ 之间还差 dθ/2π 与 dτdτ̄ = 2dτ₁dτ₂
+     两个约定，本图未独立验算）。"
+  - "**继承 spectrum.point-particle-circle-path-sum 的全部缺口**（正文没做该推导、k⁰ 转动等）。"
+notes: |
+  由 curator 于 2026-09-11 建立。四条依赖边都是实边；其中到
+  worldsheet.modular-invariance-integer-spin 的那条按抽取记录 #E23 的明确判定不标 inferred。
+author: curator-polchinski-ch7
+created: "2026-09-11"

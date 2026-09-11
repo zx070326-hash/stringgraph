@@ -1,0 +1,64 @@
+id: spectrum.one-loop-uv-finiteness-from-modular-invariance
+kind: proposition
+title: "环面振幅里没有 UV 区：与场论同一被积函数，但区域是 F₀ 而不是 R，τ₂ 有下界"
+statement: |
+  比较两个量：
+    (a) 弦论的环面真空振幅 spectrum.one-loop-torus-amplitude (7.3.8)，区域 F₀；
+    (b) 场论侧把点粒子圆图按同一弦谱求和的结果
+        spectrum.field-theory-region-sum-over-string-spectrum (7.3.12)，区域
+        R : τ₂ > 0, |τ₁| < ½。
+  则（原书逐字）「**There is great similarity but also one remarkable difference. The integrands are
+  identical but the regions of integration are different**」：弦论的区域是基本域
+    F₀ :  |τ| > 1 ,  |τ₁| < ½ ,  τ₂ > 0        (7.3.14)
+  而场论的是更大的 R ⊋ F₀。**F₀ 里根本没有 τ₂ → 0 的区域**，即
+    「**In the string amplitude, the UV divergent region is simply *absent*.**」
+  等价的看法（原书给的第二个说法）：由 (7.3.8a) 的动量积分看，
+  「**Since τ₂ is bounded below, this integral (after contour rotation) is a convergent Gaussian.**」
+
+  ⚠ **本卡的强度必须实话实说**：原书给出的**全部**内容是三点——
+  (i) 两侧被积函数相同；(ii) F₀ ⊊ R；(iii) τ₂ 有下界故动量高斯积分收敛。
+  **没有**一致收敛性、求和与积分可交换性、Σ_{i∈H^⊥} 收敛性的任何讨论；
+  措辞是叙述性的（"simply absent"、"We can also see this"），**不是** "we prove" / "one can show"。
+
+  ⚠ **(7.3.14) 与 (5.1.15) 的写法不一致**：本卡引的 (7.3.14) 是**开区域**（严格不等号），
+  而 §5.1 的 (5.1.15) 是**闭区域** −½ ≤ Re τ ≤ ½、|τ| ≥ 1 并附「except on the boundaries which
+  are identified」。两者差一层零测度边界，**原书没有说明为什么 §7.3 改用开区域**
+  （抽取记录 Q1）。对积分值无影响，但对「F₀ 是不是基本域」的严格表述有影响。
+
+  ⚠ **本卡只关于 τ₂ → 0（UV）端**。τ₂ → ∞（IR）端在玻色弦里因快子而**发散**，
+  原书说无快子时「it will converge」——那是断言，见 spectrum.one-loop-torus-amplitude 的 gaps。
+
+  **本卡不断言什么**：不断言弦振幅有限（它在 IR 端发散）；不断言全亏格或带顶点算子的情形
+  （那是 spectrum.no-uv-region-in-moduli-space-principle，原书称之为 principle 并推迟到第 9 章）；
+  不断言开弦侧的同一结论（圆柱**没有模群**，t → 0 不被截断，见
+  spectrum.cylinder-closed-channel-open-closed-duality）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.14) 及其上下文, p.219（本页经单页重渲染复核）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E24，等级 **L1（原书页图逐字，
+      整段已抄录）**。抽取记录的判定逐字：「**这是一条「区域对比」论证，不是收敛性定理。**」
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.15), p.148（闭区域版本的 F₀，与 (7.3.14) 的开区域写法对照）"
+    note: |
+      抽取记录 #E24 备注 1/2：本轮**跨章核实**了 (5.1.15) 的式号、页码与内容
+      （ch.5 PDF p.4 = 印刷 p.148，L1），并逐字取得原书自身的强度措辞
+      「Using the modular transformations (5.1.13), **it can be shown that** every τ is equivalent
+      to exactly one point in the region F₀ shown in figure 5.2 … except on the boundaries which are
+      identified as shown in the figure」——「it can be shown」，无证明。
+tags: [spectrum, one-loop, torus, uv-finiteness, modular-invariance, moduli, fundamental-domain]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E24 建立。
+
+  **这是本章最重要的节点，也是最容易被夸大的节点。** 它说的是
+  「**弦论的模积分区域里没有 τ₂ → 0 的区域**」，不是「弦论有限」。
+  按抽取记录 Q2，原书把「无 UV 区」（τ₂ → 0）与「无快子时收敛」（τ₂ → ∞）写在相邻两段，
+  **两者的证据强度完全不同**（前者是区域对比，后者是断言）；本图分别承载：
+  前者是本卡，后者只作为 spectrum.one-loop-torus-amplitude 推导的 gap，**没有独立节点**
+  （是否要建 conjecture 级的「无快子时收敛」节点，留给 lead/auditor 按 Q2 裁决）。
+author: curator-polchinski-ch7
+created: "2026-09-11"

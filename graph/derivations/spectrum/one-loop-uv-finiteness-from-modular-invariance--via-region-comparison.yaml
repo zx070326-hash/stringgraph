@@ -1,0 +1,52 @@
+id: spectrum.one-loop-uv-finiteness-from-modular-invariance--via-region-comparison
+target: spectrum.one-loop-uv-finiteness-from-modular-invariance
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: spectrum.one-loop-torus-amplitude
+    note: 提供弦论侧的 (7.3.8)：被积函数与区域 F₀。
+  - id: spectrum.field-theory-region-sum-over-string-spectrum
+    note: 提供场论侧的 (7.3.12)：**同一个被积函数**与更大的区域 R。这条对比就是论证本身。
+  - id: worldsheet.modular-fundamental-domain
+    note: |
+      提供「F₀ 是基本域」，即弦论的模积分只该在 F₀ 上做。原书 §7.3 把这件事整体外包给 §5.1
+      （(7.3.1) 处逐字「The fundamental region F₀ … were discussed in section 5.1」）。
+      ⚠ 该卡用闭区域写法，(7.3.14) 用开区域写法，差一层零测度边界（抽取记录 Q1）。
+  - id: spectrum.one-loop-torus-amplitude-modular-invariant
+    note: |
+      提供「为什么可以只在 F₀ 上积分」的另一半：被积表达式模不变，故限制到基本域不丢信息。
+      没有这一条，「区域是 F₀」就只是一个选择而不是结论。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.14) 及其上下文, p.219"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E24，L1（原书页图逐字，单页重渲染复核）。
+summary: |
+  **(1)** 弦振幅 (7.3.8) 与场论求和 (7.3.12) 的被积函数逐字相同。
+  **(2)** 区域不同：弦论是 F₀（|τ| > 1、|τ₁| < ½、τ₂ > 0），场论是 R（τ₂ > 0、|τ₁| < ½）。
+  **(3)** F₀ ⊊ R，且 F₀ 中 τ₂ **> √3/2** > 0（由 |τ| > 1 与 |τ₁| < ½ 得；
+  ⚠ **不等号是严格的**，因为 (7.3.14) 的 F₀ 用的是**开**区域写法 |τ| > 1、|τ₁| < ½，
+  两条都严格 ⇒ τ₂² > 1 − ¼ = ¾。(5.1.15) 的闭区域写法才给 ≥，两种写法差一层零测度边界，
+  见下面 gaps 第 3 条），
+  即**场论 UV 发散所在的 τ₂ → 0 区域在弦论里不存在**。
+  **(4)** 从 (7.3.8a) 的动量积分看同一件事：τ₂ 有下界 ⇒ exp(−πτ₂α'k²) 的高斯积分（转动后）收敛。
+  ⓘ (3) 里的下界 √3/2 是 curator 补的算术（|τ|² = τ₁² + τ₂² > 1 与 |τ₁| < ½ ⇒ τ₂² > 3/4）；
+  **原书只说「τ₂ is bounded below」，没有给这个数**。
+gaps:
+  - "**这不是收敛性定理**：原书全部内容就是 summary 的 (1)–(4)。**没有**讨论
+     Σ_{i∈H^⊥} 与 ∫_{F₀} 能否交换、Σ_i 是否一致收敛（抽取记录 Q2）。"
+  - "**「UV 发散区不存在」不等于「振幅有限」**：τ₂ → ∞ 端在玻色弦里因快子而发散；
+     无快子时的收敛性原书只有一句断言（见 spectrum.one-loop-torus-amplitude 的 gaps）。"
+  - "**F₀ 的两种写法不一致**（(5.1.15) 闭 vs (7.3.14) 开），原书未说明（抽取记录 Q1）。"
+  - "**继承对照项的全部缺口**：场论侧 (7.3.12) 本身只是形式等式（其 τ₂ → 0 端发散），
+     弦论侧 (7.3.8) 依赖未定义的路径积分测度。"
+  - "**「场论的 UV 发散」在本卡里没有独立刻画**：原书用 (7.3.9) 在 l → 0 端的行为来代表它，
+     本图没有场论 UV 发散的一般节点。"
+notes: |
+  由 curator 于 2026-09-11 建立。四条依赖边全为实边。
+  **2026-09-11 订正（reviewer-v1-ch7）**：summary (3) 原写「τ₂ ≥ √3/2」，与本推导所用的
+  (7.3.14) 开区域写法不符（两条严格不等式只能给严格不等号），已改为 τ₂ > √3/2。
+  这不影响结论（论证只需要 τ₂ 有正下界），但 ≥ 与 > 的混用正是 gaps 第 3 条
+  （F₀ 的开/闭两种写法）在本推导里的具体表现，故一并写明。
+  ⚠ 引用本卡时请连带引用它的 statement 里的三条 ⚠：这张卡**不是**「弦论 UV 有限」的定理版。
+author: curator-polchinski-ch7
+created: "2026-09-11"

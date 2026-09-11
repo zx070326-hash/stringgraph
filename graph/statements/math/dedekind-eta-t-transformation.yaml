@@ -1,0 +1,39 @@
+id: math.dedekind-eta-t-transformation
+kind: proposition
+title: "Dedekind η 的 T 变换：η(τ + 1) = e^{iπ/12} η(τ)"
+statement: |
+  设 η 如 math.dedekind-eta-function 所定义：τ ∈ H，q ≡ exp(2πiτ)，
+  **q^{1/24} ≡ exp(πiτ/12)**（分支由 τ 单值取定，这一约定写在定义卡里，不可省），
+  η(τ) = q^{1/24} ∏_{n=1}^{∞} (1 − q^n) 。则对一切 τ ∈ H
+    η(τ + 1) = exp(iπ/12) · η(τ) 。
+
+  **推论**：|η(τ + 1)| = |η(τ)|，且 Im(τ+1) = Im τ，故 τ₂ |η(τ)|⁴ 在 T : τ ↦ τ + 1 下不变。
+
+  **本卡不断言什么**：不断言 S 变换 η(−1/τ) = (−iτ)^{1/2}η(τ)（那是
+  math.dedekind-eta-s-transformation，强度低两级）；不断言 τ₂|η|⁴ 的**完整**模不变性
+  （那还需要 S 那一半）；不断言 η 作为权 1/2 模形式的一般乘子系统（含 Dedekind 和）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44a), p.216（原文逐字只有一句「It has the modular transformations」，随后直接列出两式）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，等级 **L1（原书页图逐字）**。
+      ⚠ **原书对 (7.2.44a) 零证明、零引用**；本卡的 rigorous 定级**不来自原书**，
+      而来自 docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整 + 有限步初等计算 +
+      reviewer 独立复核），见本卡唯一一条推导的 notes。
+tags: [math, modular-forms, dedekind-eta, modular-invariance, formalization-candidate]
+notes: |
+  由 curator 于 2026-09-11 从 math.dedekind-eta-modular-transformation **拆分**而来
+  （lead 依 reviewer-v1-ch7 的裁定）。旧卡把 (7.2.44a) 与 (7.2.44b) 合在一张，
+  并按弱的那一半（S）定级为 physical-argument；结果 **T 这一半的实际强度被低估两级**，
+  并且把依赖它的下游（如 T 变换给出的整数自旋约束）无谓地压低。
+
+  **拆分后的分工**：本卡 = T 半（rigorous），math.dedekind-eta-s-transformation = S 半
+  （physical-argument，原书零证明）。旧卡 math.dedekind-eta-modular-transformation 标
+  `superseded_by: math.dedekind-eta-s-transformation`（指向承载真正缺口的那一半），
+  并在其 notes 里记明拆成了两张。
+
+  **形式化目标**：本卡是 Lean 岛的低垂果实（两行：q 不变 + 前因子出相位）。
+  S 半才是需要 Mathlib DedekindEta / Poisson 求和的部分。
+author: curator-v1-ch7
+created: "2026-09-11"

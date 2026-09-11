@@ -1,0 +1,49 @@
+id: math.dedekind-eta-s-transformation--via-textbook-assertion
+target: math.dedekind-eta-s-transformation
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.dedekind-eta-function
+    note: |
+      提供 η 的乘积定义与 q^{1/24} 的分支约定（后者与 (−iτ)^{1/2} 的主分支选取共同决定本式
+      两端的相位；换一个分支，等式右端要带 24 次单位根）。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44b), p.216"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，L1（原书页图逐字）。
+      原书全部内容就是一句「It has the modular transformations」+ 两式。
+summary: |
+  **本推导记录的是「来源只给了断言」这一事实本身，不是一条论证。**
+
+  原书在 §7.2 末把 (7.2.44b) 与 θ 函数的 (7.2.40d) 并列，即形式上可由 ϑ₁₁ 的 S 变换加
+  (7.2.43) 的 η–ϑ₁₁ 关系 η = [∂_v ϑ₁₁(0,τ)/(−2π)]^{1/3} 导出，**但 (7.2.40) 在原书同样无证明**
+  （抽取记录 #E15：θ 一节全部是断言），故这条归约不构成证明，本图也不据此建 θ 卡。
+
+  标准数学证明（Poisson 求和 / Siegel 的留数论证 / 用 E₂ 的准模性）在本图**没有来源**：
+  literature/sources.bib 里目前没有任何解析数论文献。
+
+  因此本卡只能是 physical-argument：不是因为论证带物理性，而是因为
+  **来源级别的论证不存在**，而 docs/STATUS_LEVELS.md 的 rigorous 要求「有发表的、
+  数学界接受的完整证明」作为来源；rigorous 的例外条款也不适用（例外要求本图给出
+  完整的有限步初等计算并经 reviewer 复核，而本式的证明**不是**有限步初等计算）。
+gaps:
+  - "**本式在来源中零证明零引用**（抽取记录 #E16 逐字判定）。这是第 7 章下游一切 S 变换论证的
+     公共缺口：(7.2.9)、(7.3.6)、(7.3.7)、(7.4.2)、(7.4.19)、(7.4.23) 以及 §8.4 的 (8.4.21)
+     全部经由本卡。"
+  - "**归约到 θ 函数不解决问题**：(7.2.40)（θ 的 τ → −1/τ 变换）与 (7.2.32) 的唯一性断言在原书
+     同样无证明，见抽取记录 #E15。"
+  - "**本图缺解析数论来源**：要把本卡升到 rigorous，需先在 literature/sources.bib 登记一本标准来源
+     （如 Apostol《Modular Functions and Dirichlet Series in Number Theory》，**未登记、
+     章节号未核实**），或直接做 Lean 证明。researcher/formalizer 待办。"
+  - "**主分支的选取在原书未说明**：(−iτ)^{1/2} 是双值的，原书不交代取哪支。
+     本卡的主分支写法是 curator 按 τ = i 处取 1 补的（那是使等式成立的唯一选择），
+     **不是原书逐字**。"
+notes: |
+  由 curator 于 2026-09-11 从 math.dedekind-eta-modular-transformation--via-textbook-assertion
+  拆出 S 那一半（拆卡见目标陈述的 notes）。原推导保留在旧卡上作历史记录，不再更新。
+
+  **不得**因为「η 的 S 变换是众所周知的数学事实」而把本卡标 rigorous：
+  按项目原则 2，status 写的是**本图所持论证**的强度，不是公认程度。
+author: curator-v1-ch7
+created: "2026-09-11"

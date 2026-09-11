@@ -1,0 +1,65 @@
+id: spectrum.cylinder-tadpole-divergence-is-infrared
+kind: proposition
+title: "圆柱 t → 0 的无质量发散 = 圆盘 tadpole × 零动量闭弦传播子 × 圆盘 tadpole，是 IR 发散"
+statement: |
+  在 spectrum.cylinder-closed-channel-open-closed-duality 的 (7.4.3)/(7.4.4) 里，
+  ∫₀^∞ ds [exp(2s) + 24 + O(exp(−2s))] 的两个危险项：
+
+  (1)（**快子项，不重要**）领头的 ∫ds exp(2s) 由解析延拓定义：原书取
+        ∫₀^∞ ds exp(βs) ≡ −1/β ,
+      并逐字判定「**The leading divergence in the vacuum amplitude is from the closed string tachyon.
+      This is uninteresting and can be defined by analytic continuation**」；
+
+  (2)（**无质量项，真正的内容**）常数项 24 给出的 ∫₀^∞ ds 是 **1/0 型发散**，
+      即使做了延拓也发散（β = 0）。其机制（图 7.1(b)(c)）：
+        圆盘上带一个闭弦顶点算子的振幅**非零**（§6.6）——这个量叫做 **tadpole**，
+        对应「一个闭弦从真空中出现或消失回真空」；
+        两个 tadpole 之间是**闭弦传播子**，无质量情形正比于 1/k²；
+        而**动量守恒要求这个闭弦以零动量从真空产生**，故传播子取 1/k²|_{k=0} = 1/0，发散。
+
+  (3)（**判定**）原书逐字：「**This is a long-distance (IR) divergence, because poles in propagators
+      are associated with propagation over long spacetime distances.**」
+
+  ⚠ **「tadpole」这个词在 Vol.1 的定义位置就在这里**（(7.4.5)–(7.4.6) 一带）。
+
+  **本卡不断言什么**：不断言发散如何被消除（要绕修正后的场方程解展开，原书说
+  「The details are a bit intricate, and will be discussed somewhat further in chapter 9」，
+  即本章与第 9 章都不完整）；不给出 tadpole 系数 Λ 的值（原书说由弦与场论计算对比可定出，
+  但**推迟到第 8 章**）；不断言圆盘 tadpole 非零本身（那是 §6.6 的内容，本图未建卡）。
+uses_conventions:
+  - conv.alpha-prime-regge
+  - conv.metric-mostly-plus
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.5)(7.4.6) 与 fig. 7.1(b)(c), p.224"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E31，等级 **L1（原书页图逐字）**。
+      核心逐字：「**The second term, from the massless closed string states, gives a divergence of the
+      form 1/0 even with the continuation.** … **As we have discussed in section 6.6, there is a
+      nonzero amplitude with one closed string vertex operator on the disk. This *tadpole* corresponds
+      to a closed string appearing from or disappearing into the vacuum. In between the two tadpoles is
+      the closed string propagator.** In momentum space the massless propagator is proportional to
+      1/k². Here, **momentum conservation requires that the closed string appear from the vacuum with
+      zero momentum, so the propagator diverges.**」
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. (7.4.7)(7.4.8)(7.4.9), p.225（场论类比：线性项 −(1/g²)∫(½∂φ∂φ + gΛφ) 的运动方程 ∂²φ = gΛ 不允许 φ = 0；弦论侧 (7.4.9) −Λ∫d²⁶x(−G)^{1/2}e^{−Φ̃} 是 dilaton 与度规的源）"
+    note: |
+      抽取记录 #E32、#E33，L1。原书对 UV/IR 的判词逐字：「**UV divergences usually signify a
+      breakdown of the theory, the need for new physics at some short distance. IR divergences
+      generally mean that we have asked the wrong question, or expanded in the wrong way. So it is
+      here.**」；并逐字承认修正背景后「The resulting amplitudes are free of divergences」是**断言**
+      （无证明），细节推迟到第 9 章（且第 9 章也只是 "somewhat further"）。
+tags: [spectrum, one-loop, cylinder, tadpole, ir-divergence, dilaton, disk]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E31/#E32/#E33 建立。
+
+  **§6.6 的圆盘 tadpole 非零这一步在本图没有节点**（第 6 章已由另一名 curator 抽取，
+  但那批卡里没有「圆盘上单闭弦顶点算子振幅非零」这一条）。本卡的推导把它记为 gap，
+  并**不**伪造一条边。抽取记录 #E31 备注指出 §6.6 已在 L1 下读过（pp.194–197），
+  故这是一条**可以补的**边，留给后续 curator。
+
+  **未建的相邻内容**：(7.4.11)–(7.4.13) 的边界态 |B⟩（归一化未定 + 与 (7.4.3) 的一致性留作
+  习题 7.14）、(7.4.9) 之后关于超对称背景「usually receives no loop corrections」的一句
+  （注意 "usually"）。
+author: curator-polchinski-ch7
+created: "2026-09-11"
