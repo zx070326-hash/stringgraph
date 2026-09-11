@@ -59,6 +59,10 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
 * `ddfSpan_le_towerPhysSubmodule`, `ddfSpan_le_towerKerK`, `ddfSpan_le_ddfCharacterization` —
   the easy inclusion of blueprint §B.0: every DDF state is physical and satisfies the
   Goddard–Thorn `K`-conditions.
+* `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` — **blueprint §B.6 at `N = 1`**: on the
+  bigraded piece (rung `-1`, level `1`) every physical state is a DDF state plus a spurious
+  state `L_{-1}|0; k-k_0⟩`.  `D = 26` does not enter (§B.5); two *extra* hypotheses do, see
+  the gaps.
 
 ## Scope and gaps
 
@@ -75,6 +79,16 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
 * `conjCoeff_eq_neg_dotVec` does **not** assume that `{b, b̃, ε_i}` is a basis: it extracts
   the `b̃`-coefficient of a *given* decomposition.  Completeness of the light-cone frame
   (every vector decomposes) is a further statement, not needed here and not proved.
+* **`TransverseFrame` does not imply completeness.**  The `N = 1` spanning theorem therefore
+  carries the explicit hypothesis `FrameSpansOrthogonal`, which says that the `D - 2`
+  transverse vectors together with `p_{-1}` span `p_{-1}^⊥`.  Discharging it for the explicit
+  witness of `NoGhost/Witness.lean` is left open (it is a concrete `Pi.single` computation).
+* `N = 2` of blueprint §B.6 is **not** done.  The two missing pieces are (a) the analogue of
+  `ddfOp_neg_one_apply_towerVacuum` at `n = 2` and for `A^ε_{-1}A^δ_{-1}` (window `{-2,…,0}`,
+  so the vertex operator's level-1 and level-2 coefficients `Φ_1`, `Φ_2` actually contribute)
+  and (b) the level-2 analogue of `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff`, i.e.
+  the *complete* solution of the `L_1`/`L_2` conditions at level 2 — `NoGhost/LevelTwo.lean`
+  only covers the `SO(D-1)`-scalar trial family, as its own docstring says.
 * The unitriangularity of the transition matrix (blueprint §B.4 step 3) is **not** proved.
 -/
 
@@ -577,5 +591,188 @@ theorem ddfSpan_le_ddfCharacterization (η a b : Fin D → R) (hη : ∀ μ, η 
     (ddfSpan_le_towerKerK η a b hη hbb Ε)
 
 end DDFSpan
+
+
+/-! ### The `N ≤ 1` increment of the spanning lemma (blueprint §B.6) -/
+
+section LevelOneSpan
+
+open MvPolynomial
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+namespace Fock
+
+@[simp]
+lemma polState_zero (η : Fin D → R) : polState η (0 : Fin D → R) = 0 := by
+  rw [polState]
+  exact Finset.sum_eq_zero fun μ _ => by
+    simp only [Pi.zero_apply, mul_zero, zero_smul]
+
+lemma polState_add (η e f : Fin D → R) :
+    polState η (e + f) = polState η e + polState η f := by
+  rw [polState, polState, polState, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [← add_smul]
+  congr 1
+  simp only [Pi.add_apply]
+  ring
+
+lemma polState_smul (η : Fin D → R) (c : R) (e : Fin D → R) :
+    polState η (c • e) = c • polState η e := by
+  rw [polState, polState, Finset.smul_sum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [smul_smul]
+  congr 1
+  simp only [Pi.smul_apply, smul_eq_mul]
+  ring
+
+lemma polState_sum {ι : Type*} (η : Fin D → R) (s : Finset ι) (f : ι → Fin D → R) :
+    polState η (∑ i ∈ s, f i) = ∑ i ∈ s, polState η (f i) := by
+  classical
+  rw [polState]
+  have h : ∀ μ : Fin D, (η μ * (∑ i ∈ s, f i) μ) • (X ((μ, 1) : Osc D) : Fock D R)
+      = ∑ i ∈ s, (η μ * f i μ) • (X ((μ, 1) : Osc D) : Fock D R) := fun μ => by
+    rw [Finset.sum_apply, Finset.mul_sum, Finset.sum_smul]
+  rw [Finset.sum_congr rfl fun μ _ => h μ, Finset.sum_comm]
+  exact Finset.sum_congr rfl fun i _ => rfl
+
+end Fock
+
+/-- `α^ε_{-1}` applied to a rung vacuum is the level-one state with polarisation `ε`. -/
+lemma towerModeVec_neg_one_apply_single_vacuum (η a b ε : Fin D → R) (j : ℤ) :
+    towerModeVec η a b ε (-1) (Finsupp.single j (Fock.vacuum D R))
+      = Finsupp.single j (Fock.polState η ε) := by
+  rw [towerModeVec, LinearMap.sum_apply,
+    Fock.polState_eq_sum_mode η (towerMomentum a b j) ε, Finsupp.single_finsetSum]
+  exact Finset.sum_congr rfl fun μ _ => by
+    rw [LinearMap.smul_apply, towerMode_single, Finsupp.smul_single, Fock.vacuum_def]
+
+lemma single_inj_iff (j : ℤ) (P Q : Fock D R) :
+    (Finsupp.single j P : TowerFock D R) = Finsupp.single j Q ↔ P = Q := by
+  constructor
+  · intro h
+    have := congrArg (fun x : TowerFock D R => x j) h
+    simpa only [Finsupp.single_eq_same] using this
+  · rintro rfl; rfl
+
+variable [Algebra ℚ R]
+
+/-- A rung vector is physical on the tower iff its component is physical for that rung's
+momentum.  (`towerLop` acts rung by rung, so this is purely bookkeeping.) -/
+lemma single_mem_towerPhysSubmodule_iff (η a b : Fin D → R) (a₀ : R) (j : ℤ) (P : Fock D R) :
+    (Finsupp.single j P : TowerFock D R) ∈ towerPhysSubmodule η a b a₀ ↔
+      P ∈ Fock.physSubmodule η (towerMomentum a b j) a₀ := by
+  rw [mem_towerPhysSubmodule, Fock.mem_physSubmodule]
+  constructor
+  · rintro ⟨h0, hpos⟩
+    refine ⟨?_, fun m hm => ?_⟩
+    · rw [towerLop_single, Finsupp.smul_single, single_inj_iff] at h0
+      exact h0
+    · have := hpos m hm
+      rw [towerLop_single, ← Finsupp.single_zero (a := j)] at this
+      exact (single_inj_iff j _ _).1 this
+  · rintro ⟨h0, hpos⟩
+    refine ⟨?_, fun m hm => ?_⟩
+    · rw [towerLop_single, h0, Finsupp.smul_single]
+    · rw [towerLop_single, hpos m hm, Finsupp.single_zero]
+
+/-- **`L_{-1}` on the rung-`(-1)` vacuum is the spurious level-one state with longitudinal
+polarisation `p_{-1}`.** -/
+lemma towerLop_neg_one_apply_single_vacuum_eq (η a b : Fin D → R) (j : ℤ) :
+    towerLop η a b (-1) (Finsupp.single j (Fock.vacuum D R))
+      = Finsupp.single j (Fock.polState η (towerMomentum a b j)) := by
+  rw [towerLop_single, Fock.vacuum_def, Fock.Lop_neg_one_apply_one_eq_polState]
+
+/-- **Completeness of the light-cone frame on `v^⊥`**: every polarisation orthogonal to `v`
+is a combination of the transverse frame vectors and `v` itself.
+
+This is a *hypothesis*, not a theorem: `TransverseFrame` only records orthonormality and
+transversality, and those do not imply that the `D - 2` vectors together with `v` span
+`v^⊥`.  For the explicit light-cone witness of `NoGhost/Witness.lean` it does hold, but the
+statement below is kept conditional so that the spanning theorem is honest about what it
+uses. -/
+def FrameSpansOrthogonal (η : Fin D → R) {b : Fin D → R} (Ε : TransverseFrame η b)
+    (v : Fin D → R) : Prop :=
+  ∀ e : Fin D → R, dotVec η e v = 0 →
+    ∃ (c : Fin (D - 2) → R) (c₀ : R), e = (∑ i, c i • Ε.vec i) + c₀ • v
+
+lemma ddfOp_towerVacuum_mem_ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (i : Fin (D - 2)) (n : ℕ+) :
+    ddfOp η a b (Ε.vec i) hη (Ε.transverse i) (-((n : ℕ) : ℤ)) (towerVacuum D R)
+      ∈ ddfSpan η a b hη Ε := by
+  have h := mem_ddfSpan_of_list η a b hη Ε [(i, n)]
+  simp only [List.foldr_cons, List.foldr_nil] at h
+  exact h
+
+/-- **The level-one DDF states are exactly `α^{ε_i}_{-1}|0; k - k_0⟩`.** -/
+theorem single_polState_vec_mem_ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (hεa : ∀ i, dotVec η (Ε.vec i) a = 0) (i : Fin (D - 2)) :
+    (Finsupp.single (-1) (Fock.polState η (Ε.vec i)) : TowerFock D R)
+      ∈ ddfSpan η a b hη Ε := by
+  have h := ddfOp_towerVacuum_mem_ddfSpan η a b hη Ε i 1
+  rw [show (-(((1 : ℕ+) : ℕ) : ℤ)) = -1 by norm_num,
+    ddfOp_neg_one_apply_towerVacuum η a b (Ε.vec i) hη (Ε.transverse i) (hεa i),
+    towerModeVec_neg_one_apply_single_vacuum] at h
+  exact h
+
+/-- **Blueprint §B.6, the `N = 1` increment of the spanning lemma `ddf-spans`.**
+
+At oscillator level `1` on rung `-1` — the first nontrivial slice of the tower, and the one
+carrying the photon — every physical state is a DDF state plus a spurious state:
+
+`H_phys ∩ (rung -1, level 1) ≤ span{A^{ε_i}_{-1}|0;k⟩} + span{L_{-1}|0; k - k_0⟩}`.
+
+The intercept is the ground-state one `a₀ = α' k²`; with the tachyonic normalisation
+`α' k² = 1` of `NoGhost/Witness.lean` this is `a₀ = 1`, and then `L_{-1}|0; k-k_0⟩` is the
+familiar *null* photon state (`Fock.Lop_neg_one_apply_one_mem_nullSubmodule`), so the
+right-hand side is "DDF span ⊕ null states" as in Goddard (6.4).
+
+Two hypotheses beyond the four standing DDF ones are needed, and both are genuine:
+
+* `hεa` — the transverse polarisations are orthogonal to the momentum `k`, without which
+  `A^ε_{-1}|0;k⟩ ≠ α^ε_{-1}|0;k-k_0⟩` (see `ddfOp_neg_one_apply_towerVacuum`);
+* `hspan` — the frame is *complete* on `p_{-1}^⊥`, which `TransverseFrame` does not record.
+
+The `D = 26` condition does **not** appear: at level `1` the counting `(D-1) = (D-2) + 1`
+works for every `D`, exactly as blueprint §B.5 predicts.  Neither do `hbb`/`hba`: the
+mass-shell bookkeeping they control is already contained in the hypothesis "`x` is
+physical", so the inclusion holds for the tower built on *any* `(a, b)`. -/
+theorem towerPhys_bigrade_one_le_ddfSpan_sup_spurious (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (hεa : ∀ i, dotVec η (Ε.vec i) a = 0)
+    (hspan : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))) :
+    towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) ⊓ towerBigrade D R (-1) 1
+      ≤ ddfSpan η a b hη Ε ⊔
+          Submodule.span R
+            {towerLop η a b (-1) (Finsupp.single (-1) (Fock.vacuum D R))} := by
+  classical
+  rintro x hx
+  obtain ⟨hphys, hbig⟩ := Submodule.mem_inf.1 hx
+  obtain ⟨hx1, hx2⟩ := mem_towerBigrade.1 hbig
+  set P : Fock D R := x (-1) with hP
+  rw [hx1] at hphys
+  rw [(single_mem_towerPhysSubmodule_iff η a b _ (-1) P)] at hphys
+  obtain ⟨e, hPe, -, htrans⟩ :=
+    (Fock.mem_physSubmodule_inf_levelSubmodule_one_iff η (towerMomentum a b (-1)) hη
+      (invTwo R * Fock.zeroModeSq η a)).1 (Submodule.mem_inf.2 ⟨hphys, hx2⟩)
+  obtain ⟨c, c₀, hc⟩ := hspan e htrans
+  have hpol : Fock.polState η e
+      = (∑ i : Fin (D - 2), c i • Fock.polState η (Ε.vec i))
+        + c₀ • Fock.polState η (towerMomentum a b (-1)) := by
+    rw [hc, Fock.polState_add, Fock.polState_smul, Fock.polState_sum]
+    exact congrArg (· + c₀ • Fock.polState η (towerMomentum a b (-1)))
+      (Finset.sum_congr rfl fun i _ => Fock.polState_smul η (c i) (Ε.vec i))
+  rw [hx1, hPe, hpol, Finsupp.single_add, Finsupp.single_finsetSum]
+  refine Submodule.add_mem _ (Submodule.sum_mem _ fun i _ => ?_) ?_
+  · rw [← Finsupp.smul_single]
+    exact Submodule.mem_sup_left
+      (Submodule.smul_mem _ _ (single_polState_vec_mem_ddfSpan η a b hη Ε hεa i))
+  · rw [← Finsupp.smul_single]
+    refine Submodule.mem_sup_right (Submodule.smul_mem _ _ ?_)
+    rw [← towerLop_neg_one_apply_single_vacuum_eq η a b (-1)]
+    exact Submodule.subset_span rfl
+
+end LevelOneSpan
 
 end StringFormal.NoGhost
