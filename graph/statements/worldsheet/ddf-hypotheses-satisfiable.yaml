@@ -59,6 +59,7 @@ sources:
       不承载论证：文献把可满足性视为显然，从不写出。本卡的价值恰在于把「显然」变成一条机检陈述。
 tags: [bosonic-string, spectrum-generating-algebra, no-ghost, formalized, satisfiability]
 notes: |
+  ⚠【更正（reviewer-batch26，lead 落地）】statement【不断言】(b) 的「故 ℤ 上无见证」**为假**：反例 η = diag(−1,1,1,…)、b = (1,1,0,…)、**a = (0,1,1,0,…)**、ε = e₂ 给 b·b = 0、b·a = 1、a·a = 2、ε·b = 0、ε·ε = 1，全在 ℤ 上（reviewer 已数值核）。「½ 被强制」只在 a 支撑于 {0,1} 的标架下成立。Lean 需要 [Algebra ℚ R] **只因** (M) 被写成 `invTwo R * zeroModeSq = 1`，不是数学必要。statement 按原则 1 不改；实质换代时删 (b) 那句。
   【为什么立卡（curator 2026-09-11，small-backlog-12 追加，lead 指示；依蓝图 §C.2）】
   条件命题的价值取决于前提集非空。DDF 岛的十余张 formalized 卡全带 `hη hbb hba hεb`，
   Witness.lean 之前仓库里没有一条声明证明它们能同时成立。本卡把这件事登记为图节点，

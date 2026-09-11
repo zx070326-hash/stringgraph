@@ -613,7 +613,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `(L_0-h)V`）。由它经万有性质得 `shapovalov`，逆变性由 `vermaLift_lie` 一行推出；
     `existsUnique_isContravariant` 给出存在唯一；`exists_isContravariant_iff` 说这条假设
     **不只是充分条件而是等价**（归一化逆变型 ↔ Shapovalov 泛函）。
-    这条假设**不可去**：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
+    这条假设**不可去**（⚠ 此句指 GenericIndependence 的逆变型假设；noghost-a 项里「ℤ 上无见证」的说法已被 reviewer-batch26 推翻：a = (0,1,1,0,…) 是整数见证，ℚ 只因 (M) 的 invTwo 写法而需要）：`hwv_ne_zero_of_isContravariant` 说归一化的逆变型蕴含 `V(c,h) ≠ 0`，
     而后者正是 `pbw-verma` (b) 的推论。故在 (b) 之前不可能有无条件构造。
   - **char-0 域上存在性已收紧为 iff**（2026-09-11）：`levelSpan_zero`（`V_0 = R·|c,h⟩`，任意
     `ℚ`-代数）+ `isCompl_levelSpan_zero`（`V = V_0 ⊕ ⨁_{N≥1} V_N`）+ level 平移

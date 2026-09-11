@@ -80,6 +80,7 @@ sources:
       （Prop 2.14(ii) 是复形层面的计算，不用消灭定理）。
 tags: [superstring, brst, cohomology, rns, ramond-sector, character, signature]
 notes: |
+  【reviewer-batch26，lead 落地】(H4)「非退化」一词无来源支撑（号差对退化型亦有定义）；statement 不改，实质换代时删该词。rigorous 维持（CMP 编号命题 + 五页印出证明），条件：researcher 取 pp.311–317 后若与 E5 转录不符则降级。
   【为什么立卡（curator 2026-09-11，small-backlog-12）】
   worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989 的 gaps 第一条逐字：
   「Proposition 2.14(ii) … 在本图没有卡 … **目标卡断言的整个右端落在一条未上图的命题上**，

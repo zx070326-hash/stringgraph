@@ -103,6 +103,7 @@ sources:
       【2026-09-11 同日更新】原「本卡当前不写 formal 字段」的说法已过时：formalizer-noghost-a 已合 main。
 tags: [bosonic-string, spectrum-generating-algebra, longitudinal, no-ghost, oscillator-algebra, formalized]
 notes: |
+  ⚠【更正（reviewer-batch26，lead 落地）】statement (2) 括注「也是 (N) 在本卡唯一进入之处」**与 (3)(5) 矛盾**：(3) K₀ = 1 用 (N)+(S)，(5) [K,A] = 0 用 (N)+(T)（Lean `kOp_zero_eq_id hbb hba`、`lie_kOp_ddfOp hη hbb hεb`）。Lean docstring 原话是「only use of hbb **in the K-algebra**」，指 (6.3) 的三式；卡把范围放大了。正确读法：(N) 在 (6.3) 代数关系里唯一进入之处是 (2)。statement 按原则 1 不改。
   【为什么立卡（curator 2026-09-11，small-backlog-12；依 formal/BLUEPRINT-noghost.md §A.0/§A.1/§D.3 第 1 条）】
   worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的张成步（「塔上任意物理态 = DDF 态 + 零模态」）
   在文献侧的真实输入是 Goddard 2008 (6.2)(6.3) 的 K_n 代数，而不是 A^i_n 的对易关系

@@ -41,7 +41,7 @@ summary: |
   4. 六元组打包成 `∃ η a b ε, … ∧ …` 即目标卡断言。
 
   **假设集的必要性**：½ 的出现不是方便——(S) 与 (M) 在此标架下联立强制 a = (½, 3/2, 0, …)
-  （目标卡 notes），故 `[Algebra ℚ R]` 不可去；D ≥ 3 用于 `frameTrans`（ε 需要 0、1 之外的方向）。
+  （目标卡 notes），故本文件需 `[Algebra ℚ R]`——**但仅因 (M) 的 invTwo 写法而需要**（reviewer-batch26 更正：ℤ 上有见证 a = (0,1,1,0,…)，见目标卡 notes）；D ≥ 3 用于 `frameTrans`（ε 需要 0、1 之外的方向）。
 gaps:
   - "**check-axioms 由 formalizer 登记，curator 未自行重跑**（formal/TODO.md 记 21 条声明全 ok）；lead 合并前跑 `uv run stringgraph check-axioms`。"
   - "**目标卡只覆盖 Witness.lean 三条可满足性陈述中的第一条**：`noghost_lightcone_frame_satisfiable`（加共轭类光 b̃）与 `noghost_transverse_gram_satisfiable`（D − 2 个横向偏振 Gram = δ_{ij}）未立卡，目标卡「不断言 (c)」。"

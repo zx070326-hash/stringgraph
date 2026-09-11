@@ -94,6 +94,7 @@ gaps:
   - "**未经 reviewer 复核**：五步都是有限步初等计算，可按 docs/STATUS_LEVELS.md 例外条款升 rigorous，但需 `reviewer-verified: <agent>, <date>`；当前没有。"
   - "**Lean 尚未落地**：formal/StringFormal/NoGhost/Longitudinal.lean（formalizer-noghost-a，claim #357）完成并合入 main 后应另挂 --via-lean 推导并在目标卡填 formal.lean_decl；本推导届时保留为文献侧记录。"
 notes: |
+  【reviewer-batch26，lead 落地】summary 第 2 步「(N) 唯一进入之处」应读为「在 (6.3) 三条代数关系里唯一进入之处」；(3)(5) 另用 (N)。
   【本推导与无鬼定理推导的关系】
   worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的张成步（文献侧 Goddard 2008 §6）逐字以
   K_n 为工具，该推导已加边指向目标卡（非 inferred）。**目标卡只供给代数**；

@@ -1,7 +1,7 @@
 id: math.euler-poincare-principle--via-rank-nullity
 target: math.euler-poincare-principle
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on: []
 sources:
   - ref: lian-zuckerman-1989
@@ -42,6 +42,7 @@ gaps:
   - "**教科书定位未核**：hatcher-2002 的定理号 2.44 凭记忆；任一同调代数教科书第一章均有此陈述，researcher 可顺手补一条 L1 定位。"
   - "**FGZ Prop 1.3 的陈述非逐字**：只有抽取记录 §1.4 表的一句话转述；FGZ 是否给证明未核。"
 notes: |
+  reviewer-verified: reviewer-batch26, 2026-09-11（复核：dim Cⁿ = dim Zⁿ + dim Bⁿ⁺¹（秩–零化度）、dim Hⁿ = dim Zⁿ − dim Bⁿ（d² = 0）、指标平移带负号、全有限和、(2) 逐权分解——完整无缺；陈述与 FGZ Prop 1.3、LZ p.317 一致；不断言号差版正确。走 STATUS_LEVELS 例外条款。lead 落地。）
   本推导没有依赖：命题只用向量空间的维数与线性映射的秩–零化度，本图对这些没有卡，也不该有
   （与 math.euler-beta-integral--via-gamma-product 等纯数学底层卡同一处理）。
   `validate` 对此报 "derivation has no dependencies" warning，是预期的。
