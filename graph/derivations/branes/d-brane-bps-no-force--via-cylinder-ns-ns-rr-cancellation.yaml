@@ -14,6 +14,21 @@ depends_on:
       没有它，𝒜_R–R 只是圆柱振幅的一个部门，无「排斥力」的读法。
   - id: branes.d-brane-from-t-duality
     note: 供给 Dp 膜对象与 Dirichlet 方向无动量积分的记账（(13.3.1) 由 (10.8.4) 修改的第一步）。⚠ 玻色弦定义卡。
+  - id: susy.brane-charges-in-susy-algebra
+    inferred: true
+    note: |
+      ⚠ **inferred，术语锚定边**。供给「同号 R–R 荷的 BPS 物体」这句话里**荷进入超代数**的那一半：
+      (13.2.9c) 的 `Σ_p (τ_p/p!) Q^R_{M_1…M_p}(β^{M_1}⋯β^{M_p})` 是 D 膜荷出现在超代数里的地方。
+      **但 §13.3 的论证没有用它**：(13.3.2) 的依据是原书逐字「Due to supersymmetric cancellation in
+      the trace」，即开弦谱的玻色–费米配对，不是代数中心荷的饱和。⇒ 本边不承重。
+      ⚠ 该卡原书自承「the algebra (13.2.9) is **still not complete**: the *magnetic NS–NS charge* is missing」。
+  - id: susy.bps-bound-point-particle-d4
+    inferred: true
+    note: |
+      ⚠ **inferred，术语锚定边**。供给「BPS 物体」一词的代数含义（中心荷饱和 ⇒ 短表示）。
+      ★ 但**必须**同时读它的适用域：App. B 的 BPS 界 (B.2.39) **只对点粒子可携带的荷成立**
+      （p.448 逐字 caveat），**不覆盖膜**。⇒ 本卡的"无力"结论**不是** App. B BPS 界的推论，
+      而是 §13.3 圆柱振幅中 NS–NS 与 R–R 相消的结果。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.3, p. 146：开篇段落 → (13.3.1)（NS–NS，由 (10.8.4) 修改）→ (13.3.2)（𝒜_R–R = −𝒜_NS–NS，「Due to supersymmetric cancellation in the trace」）→「and so the total force vanishes as expected」；(13.3.3) 场论对照"
@@ -39,5 +54,11 @@ gaps:
   - "**「超对称未破缺 ⇒ 圈振幅为零」有作者自承反例**（(13.4.23) 后，Q8）：原书只给现象（16 个相位只覆盖 8 个），不给机制。本卡因此不断言一般规则；若日后建「BPS ⇒ 无力」的一般卡，须先为该例外建卡。"
   - "**场论对照 (13.3.3) 引 Vol.1 (8.7.25)**，本图无该节点（二手源）。"
   - "**「体内物理局域有取向 ⇒ 无 ½、Chan–Paton 权重 2」**依赖 E4（T 对偶后体内是 type II），本图无节点。"
+  - "**★ BPS 界整体不得挂 App. B**（2026-09-11 新增）：App. B §B.2 的 (B.2.39) `m ≥ q_i` 只覆盖**点粒子可携带的荷**（p.448 逐字「if we include only charges that can be carried by point particles … The same caveat applies to the higher-dimensional algebras」）。膜荷进入超代数是 §13.2 (13.2.9)，而原书自承那条代数「still not complete」。⇒ 本推导对 susy.* 两卡的两条边都是**术语锚定**，不是承重步骤；本卡的无力结论完全由 §13.3 的圆柱振幅论证承担，而该论证的关键一步 (13.3.2) 本身只是断言（见第一条 gap）。"
+notes: |
+  【2026-09-11，curator-v2-appB 的 App. B 接线】新增两条 inferred 边（susy.bps-bound-point-particle-d4、
+  susy.brane-charges-in-susy-algebra）与一条 gap。记账要点与 branes.d-brane-bps-half-susy 的推导相同：
+  **BPS 界整体不得挂 App. B**——App. B 只给 `d = 4` 点粒子中心荷的模板与正定性论证，
+  膜荷版在 §13.2 (13.2.9) 且原书自承不完整。本卡的"无力"是圆柱振幅的结果，不是 BPS 界的推论。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"
