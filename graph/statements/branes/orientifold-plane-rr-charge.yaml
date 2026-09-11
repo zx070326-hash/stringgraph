@@ -48,8 +48,8 @@ notes: |
 
   【★ 红线 2：依赖方向是 §10.8 → 本卡】三处逐字（p. 141「was deduced in section 10.8」、p. 142「arose from
   the R–R 10-form field equation」、p. 147「We deduced from the cancellation of divergences」）方向一致。
-  本卡推导**必须** depends_on §10.8 的 tadpole 相消卡；该卡在 main 上不存在
-  （ch10 分支 worldsheet.type-i-tadpole-cancellation-so32，任务书写作 spectrum.*），推导里留 TODO。
+  本卡推导**必须** depends_on §10.8 的 tadpole 相消卡——**已建（2026-09-11）**：
+  worldsheet.type-i-tadpole-cancellation-so32，非 inferred，本卡有效状态因此不高于该卡。
   **禁止**与 consistency.type-i-hexagon-so32-iff 建任何边（本章全章无 "anomaly"/"hexagon"，
   抽取记录 §3.2 第 3 条；与 -sec10-8 既有裁决一致）。
 

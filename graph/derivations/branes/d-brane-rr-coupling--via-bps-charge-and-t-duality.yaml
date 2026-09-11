@@ -17,6 +17,15 @@ depends_on:
       供给「每对一个方向作 T 对偶，p 减 1」；原书 p. 141 逐字「each time we T-dualize in an additional
       direction the dimension of the p-branes goes down by one and the R–R form loses an index」。
       ⚠ 该卡是玻色弦的（Vol.1 §8.7）；超弦版原书外包给第 8 章（p. 138）。
+  - id: worldsheet.type-i-tadpole-cancellation-so32
+    note: |
+      供给 (2) 的锚点：10-形式势 C_10 与耦合 μ_10 ∫ C_10 的存在。原书 p. 141 逐字
+      「The existence of the 10-form was deduced in section 10.8, from the study of type I divergences.
+      Indeed, we argued there for the coupling (13.2.7) for the 10-form, where the integral runs over
+      all spacetime.」——依赖方向是 **§10.8 → 本章**：本章把 μ_10 ∫ C_10 重新解释为 D9 膜的 (13.2.7)，
+      **不重推 §10.8**。
+      ⚠ 该卡本身明写「不断言 C_10 的存在性有独立论证」（原书 §10.8 逐字 One can guess the resolution
+      of this as follows），故 (2) 这一步的强度不超过这一限定。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.2, p. 141（(13.2.7) 前后两段）：BPS ⇒ 守恒荷 ⇒ R–R 荷；10-形式由 §10.8 推出；其余由 T 对偶得到；(13.2.8a,b) 与脚注 2（电–磁对偶）"
@@ -35,8 +44,9 @@ summary: |
   (4) 电–磁对偶：F_{p+2} 与 ∗F_{p+2} = F_{8−p} 的场方程与 Bianchi 恒等式互换（(13.2.8)），
       Dp 膜是前者的电源、后者的磁源，故 Dp 与 D(6−p) 互为对偶。
 gaps:
-  - "**C_10 的存在由 §10.8 推出，而 §10.8 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合；任务书写作 spectrum.*）。⇒ TODO：合入后加 depends_on。在此之前，(2) 这一步在图上悬空。且 §10.8 那一步原书自称是「猜」（One can guess the resolution）。"
   - "**「BPS ⇒ 带守恒荷」只有点粒子版的支撑**：App. B §B.2 现已抽并建卡，但 (B.2.36)–(B.2.39) 明写只对点粒子荷；对 p ≥ 1 的膜这一步是原书的类比，其代数 (13.2.9) 在本卡之后且原书自承不完整。"
+  - "**C_10 的存在由 §10.8 推出**：已建非 inferred 边 worldsheet.type-i-tadpole-cancellation-so32（p. 141 逐字「The existence of the 10-form was deduced in section 10.8」；2026-09-11 随 ch10 分支接上）。⚠ 残留缺口：该卡自身不断言 C_10 存在性有独立论证（原书 §10.8 逐字「One can guess the resolution」，并说「as indeed a more detailed analysis does show」但**不给该分析**），故 (2) 这一步不比一句「猜」更强。"
+  - "**「BPS ⇒ 带守恒荷」引到 App. B.2，本项目未抽**（抽取记录 §3.3）。"
   - "**R–R 顶点算子的 T 对偶 (13.1.4)(13.1.5) 本图无节点**，且原书自陈只到「up to signs」。"
   - "**「具有正确 Lorentz 性质的自然候选」是选择而非推导**：原书没有排除其他可能的守恒荷。"
   - "**T 对偶改变膜维数的卡是玻色弦的**；超弦版被原书外包给第 8 章。"

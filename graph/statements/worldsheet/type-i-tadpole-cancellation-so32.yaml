@@ -135,5 +135,21 @@ notes: |
   'there is a one-loop divergence **and superconformal anomaly**'，
   但 §10.8 实际只交付了 one-loop divergence；'superconformal anomaly' 在 §10.8 里一次未出现
   （sec10-8.md#E75）。故「type I 只有 SO(32)」这条链在本书里的真实证据**只有 tadpole 发散一支**。
+  ★【下游：本卡在 D 膜语言里的重述（2026-09-11 接线）】Polchinski Vol.2 第 13 章把本卡的结论
+  翻译成 D 膜 / orientifold 语言，**不提供独立推导**（抽取记录 -ch13.md Q5：依赖方向是 §10.8 → ch.13）。
+  由此有五条 branes 推导 depends_on 本卡，**全部非 inferred**：
+  · branes.o9-d9-charge-cancellation-so32——**主要下游**：type I = 16 张 D9 膜 + 一张 O9 面（O9 荷 −16），
+    总 R–R 荷为零 ⇔ 本卡的 tadpole 相消。该卡是本卡的**重述**，不是 SO(32) 的第二条证据。
+  · branes.orientifold-plane-rr-charge——O 面荷 = −2^{4−k} × D 膜荷，由本卡的相消**倒推**
+    （p. 147 逐字 'We deduced from the cancellation of divergences'）。
+  · branes.d-brane-rr-coupling——C_10 的存在（p. 141 逐字 'The existence of the 10-form was deduced
+    in section 10.8'）。
+  · branes.d-brane-tension 与 branes.d-brane-bps-no-force——(13.3.1) 明写是 (10.8.4) 的修改版，
+    是**公式级**依赖（只用圆柱振幅，不用 (n ∓ 32)²）。
+  ⚠ 记账单位不同：本卡用 (n ∓ 32)²（n = Chan–Paton 维数，答案 32），第 13 章用「16 张 D 膜」；
+  同一节 p. 141 另有一句 'each Chan–Paton degree of freedom … as a 9-brane'（蕴含 32 张）——
+  **原书从不调和这两种计数**（-ch13.md Q1 未裁）。引用时按各自卡上的数字写。
+  ⚠ 第 13 章全章无 'anomaly' / 'hexagon'，故 (限定 4) 的禁令对那五张卡同样成立。
+
 author: curator
 created: "2026-09-11"
