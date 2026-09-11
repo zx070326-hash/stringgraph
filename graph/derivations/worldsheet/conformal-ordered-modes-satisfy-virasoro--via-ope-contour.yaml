@@ -1,0 +1,80 @@
+id: worldsheet.conformal-ordered-modes-satisfy-virasoro--via-ope-contour
+target: worldsheet.conformal-ordered-modes-satisfy-virasoro
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.tt-ope-central-charge
+    note: |
+      提供被变形的那条 OPE：T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)（原书 (2.4.25)）。
+      四阶极点给中心项、二阶与一阶极点给 (m−n)L_{m+n}。
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      提供「OPE 极点 ⟹ 模的对易关系」这一步，即原书 (2.6.14) + Fig. 2.3 的围道变形
+      （|z|>|w| 的围道减去 |z|<|w| 的围道 = 绕 w 的小围道，再取留数）。
+      ⚠ 这条边是本推导封顶在 physical-argument 的原因：该节点自己声明围道变形等价于
+      OPE 在环域内收敛，而收敛性在来源中不被证明。
+  - id: worldsheet.energy-momentum-laurent-modes
+    note: |
+      提供 L_m = ∮_{C_0}(dz/2πi) z^{m+1}T(z) 这个定义本身（原书 (2.6.7)/(2.6.8)），
+      即本命题的主语。该卡自己只定义模、明确不断言它们满足 Virasoro 代数——本推导补上那一步。
+  - id: worldsheet.conformal-normal-ordering-v2
+    note: |
+      在自由场实现里固定「哪一个 T」：满足 (2.4.25) 的是共形正规序 : : 的 T
+      （减去自缩并），不是产生-湮灭正规序 ° ° 的那个。本卡陈述里区分两组模、
+      并指出混同会使 a^X/a^g 的论证变循环，靠的就是这条边。
+      ⚠ 该节点的费米换序符号规则在本项目的文献核实中没有对应条目（见该卡第二条 source 的 note），
+      这是 bc 部门用例的已知弱点。
+  - id: worldsheet.virasoro-algebra-v2
+    note: |
+      提供结论所指的那个抽象李代数（本命题是「这组具体算子实现它」）。
+      ⚠ 那是一张**定义**卡，本条边只是让「满足 Virasoro 代数」这句话有所指，不提供论证。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, p.55–56：由 (2.6.14) 的围道字典把 (2.4.25) 的 TT OPE 转成 (2.6.19)；推论 (2.6.20)、(2.6.22) 同页"
+    note: |
+      【L1（原书页图逐字），researcher 第六轮】(2.6.19) 逐字
+        `[L_m, L_n] = (m − n)L_{m+n} + (c/12)(m³ − m)δ_{m,−n} .`
+      (2.6.22) 逐字给出 SL(2,R) 子代数并注明不含中心荷。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E40）。
+      围道字典与 Fig. 2.3 的位置（§2.6 (2.6.14), p.55）经 schrans-2020 目录核实
+      （`2.42 p 55: Fig 2.3`、`2.43 p 55: Eq. (2.6.14)`）。
+summary: |
+  把 [L_m, L_n] 写成两重围道积分
+    ∮_{C_0}(dw/2πi) w^{n+1} ∮_{C_w}(dz/2πi) z^{m+1} R{T(z)T(w)} ，
+  内层围道由「|z| > |w| 减 |z| < |w|」变形成绕 w 的小圈（(2.6.14) / Fig. 2.3）。
+  代入 TT OPE 的三个奇异项并逐项取留数：
+    (1/z_{12}) ∂T  项给 ∮ w^{m+n+1}∂T → 经分部积分并入下一项；
+    (2/z_{12}²) T 项给 (m − n) 的系数；
+    c/(2 z_{12}⁴) 项给 (c/12)(m³ − m)δ_{m+n,0}（四阶极点的三重导数产生 m(m²−1)/6 型因子）。
+  合起来即 (2.6.19)。取 m, n ∈ {0, ±1} 且注意中心项 ∝ (m³ − m) 在 m = ±1 处为零，
+  得推论 (a) 的 SL(2,R) 子代数 (2.6.22)；取 m = 0 得推论 (b) 的 (2.6.20)。
+  在自由场实现里，被展开的 T 自始至终是共形正规序 : : 的那个（原书 p.59 逐字：
+  「the Laurent coefficients of the `: :`-ordered energy-momentum tensor」）。
+gaps:
+  - "**围道变形的合法性 = OPE 在环域内收敛，来源不证明**（继承 worldsheet.ope-commutator-dictionary
+     与 worldsheet.operator-product-expansion）。这是本推导**封顶在 physical-argument 的主因**，
+     也是本图整个「由 OPE 推算子代数」家族的共同封顶。突破它需要一条独立的
+     OPE 收敛性命题或公理节点（部分材料见 math.vertex-algebra-ope-analytic-convergence
+     与 worldsheet.ope-pole-mode-commutator-dictionary，但那两条只覆盖玻色型形式分布版）。"
+  - "**留数的逐项系数本图未独立验算**：原书 §2.6 把三个极点到 (m−n)L_{m+n} + (c/12)(m³−m)δ
+     的组合写成结果，中间的分部积分与四阶极点的三重导数计算未逐步写出。
+     本推导的 summary 是对该计算的复述，不是独立验证（docs/STATUS_LEVELS.md「断言 + 骨架」档位）。"
+  - "**费米型自由场（bc/βγ）的两处不精确**：(a) worldsheet.ope-commutator-dictionary 写在
+     全纯（玻色）算子上；本用例里被变形的是 T 与 T，二者都是 Grassmann 偶（b、c 的双线性），
+     故这一步本身不涉及奇算子，但把 bc 的 TT OPE 算出来需要费米型 Wick 缩并，
+     其换序符号规则本图未单独核实。(b) 原书 p.61 限定「these are only Laurent expansions
+     if λ is an integer」，半整数 λ（βγ）在第 10 章另行处理；本推导对 bc 部门的适用范围随之受限。"
+  - "**不覆盖开弦**：开弦只有一套 Virasoro（(2.6.30) 与 (2.6.19) 同形，经 (2.6.28) 的 doubling trick），
+     那一格由 worldsheet.open-string-virasoro-modes-v2/v3 与 worldsheet.open-string-doubling-trick
+     各自承载，本推导不涉及。"
+notes: |
+  由 curator 于 2026-09-11 建立。本推导与本卡是 reviewer-batch10 A 指出的遗漏依赖的**正式承载**：
+  在此之前，worldsheet.normal-ordering-constant-ax--via-virasoro-algebra 与
+  worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra 各自把
+  tt-ope-central-charge + ope-commutator-dictionary 两条边直接挂在自己身上，
+  并在 gaps 里写明「二者没有被合成一条命题卡」。现在合成了，那两条推导改挂本卡一条边。
+
+  **为什么不是 rigorous**：gaps 第 1 条（围道变形 = OPE 收敛）在本图与来源中都未证明，
+  故 docs/STATUS_LEVELS.md 的 rigorous 例外条款第一条「前提已完整写出」不满足。
+author: curator-small-backlog-2
+created: "2026-09-11"

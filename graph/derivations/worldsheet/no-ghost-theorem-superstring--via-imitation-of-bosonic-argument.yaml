@@ -10,9 +10,12 @@ depends_on:
       供给相对复形的定义（b_0 = L_0 = 0，R 扇区另加 β_0 = G_0 = 0）。
       ⚠ R 扇区那一条在原书中只有 'the logic being the same as for (10.5.25)'，
       是抽取记录 Q4 列出的三个结构差异之一。
-  - id: worldsheet.critical-dimension-superstring-brst
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
     note: |
       供给 Q_B² = 0（上同调有定义的前提），即 c^m = c̃^m = 15。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.ocq-superstring-physical-states
     note: 供给陈述 (2) 中「OCQ 物理态空间」这一侧的对象。
   - id: worldsheet.rns-fermion-number-operator

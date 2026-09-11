@@ -1,5 +1,5 @@
-id: holography.dimension-mass-relation--via-gkp-bessel-asymptotics
-target: holography.dimension-mass-relation
+id: holography.dimension-mass-relation-ads5--via-gkp-bessel-asymptotics
+target: holography.dimension-mass-relation-ads5
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -16,8 +16,8 @@ sources:
       arXiv:hep-th/9802109v2, §3, p.10 式 (39)(40)(41)；p.11 式 (43)(44)(45)；
       (23) 与两点函数的算法在 §2.2–§2.3 p.6–7 式 (23)(24)(26)(27)。
     note: |
-      ⚠ **本推导只覆盖 d = 4**。GKP 正文 pp.1–14 **不出现** Δ(Δ−d) = m²，
-      也没有一般 d 的版本，只有 (45) Δ = 2 + √(4 + (mR)²)
+      本推导只覆盖 d = 4，目标卡也只陈述 d = 4（2026-09-11 起由一般 d 卡拆出）。
+      GKP 正文 pp.1–14 **不出现** Δ(Δ−d) = m²，也没有一般 d 的版本，只有 (45) Δ = 2 + √(4 + (mR)²)
       （抽取记录 gubser-klebanov-polyakov-1998.md E9，L1-neg 否定性核实）。
 summary: |
   GKP §3 的推导链（式号依 arXiv v2，AdS 半径 R 显式保留，d = 4 即 3-brane 情形）：
@@ -35,21 +35,17 @@ summary: |
 
          Δ = 2 + ν = 2 + √( 4 + (mR)² ) .                   (45)
 
-  在 R = 1 单位下这就是本图目标陈述 (2.44) 在 d = 4 的特例
-  （代数上等价于 Δ(Δ − 4) = (mR)²，但**这一改写是编者做的，不是 GKP 原文**）。
+  这就是目标卡的陈述 (45)（代数上等价于 Δ(Δ − 4) = (mR)²，但**这一改写是编者做的，
+  不是 GKP 原文**；在 R = 1 下它是一般 d 卡 holography.dimension-mass-relation 的 (2.44) 在 d = 4 的特例）。
 
   与 Witten 支的**方法差别**：GKP 是从两点函数领头非解析项的幂次读维数，
   Witten 是先解渐近指数 λ₊ 再由 (2.42) 的 |x−x'|^{−2(λ₊+d)} 读维数。
   GKP 全程在动量空间与有限截断边界上做，Witten 在位置空间与共形边界上做。
 gaps:
   - >-
-    **只覆盖 d = 4**（3-brane / AdS_5）。目标陈述是一般 d 的 Δ(Δ−d) = m²，
-    GKP 正文没有一般 d 的版本，也没有写出 Δ(Δ−d) = m² 这个形式。
-    因此本推导对目标陈述**只是部分支持**；一般 d 只能记 Witten (2.43)。
-    若 reviewer/auditor 认为这在图上不可接受，正确的修法是把 d = 4 的形式拆成独立卡
-    （例如 holography.dimension-mass-relation-ads5），而不是把 GKP 的来源记到一般 d 上。
-  - >-
     「(45) ⟺ Δ(Δ−4) = (mR)²」是编者的代数改写，原文没有写过后一个形式。
+    （2026-09-11 前本推导挂在一般 d 卡上，gaps 首条记「只覆盖 d = 4，只是部分支持」；
+    现已按 reviewer-gkpw-b / lead 裁定拆到 d = 4 专卡，覆盖面与目标一致，该条缺口撤销。）
   - >-
     边界取在**有限截断 z = R**，不是共形边界；两点函数里 R 既是 AdS 半径又是截断位置，
     (44) 中的 (kR)^{2ν} 因而混合了这两个角色。原文的处理是保留非解析部分、丢弃 k² 的解析部分。
@@ -68,15 +64,17 @@ gaps:
 notes: |
   from: gubser-klebanov-polyakov-1998#E9（另见 E5、E8、E10、E11、E12）。
 
-  【约定换算】GKP 显式写 (mR)²，本图目标陈述在 R = 1 单位下写 m²；
-  conv.ads-radius-unit 给出换算 m² ↦ (mR)²。目标卡与本推导声明的是同一条约定，
-  故不需要 convention_map；换算规则写在约定卡里。
+  【约定】目标卡与 GKP 一样显式保留 R、用洛伦兹号差 (−,+,+,+)，与依赖卡
+  holography.gkpw-dictionary-gkp 同一族约定（conv.metric-mostly-plus），不需要 convention_map。
+  与一般 d 卡（conv.ads-radius-unit，R = 1）的换算 m² ↦ (mR)² 写在约定卡里。
 
-  【为什么仍然挂成同一目标的第二条推导】两条推导在 d = 4 时给出同一个关系，
-  方法与假设集不同（动量空间 + 截断边界 vs 位置空间 + 共形边界；洛伦兹 vs 欧氏），
-  且两篇是独立工作（Witten p.4 逐字 "independent work [36]"）。
-  把 GKP 挂成第二条推导的价值在于：若 Witten 的渐近分析被质疑，d = 4 的结论仍有第二条来源。
-  代价是本推导覆盖面窄，已在 gaps 第一条写明。
+  【本推导的归属变更（2026-09-11）】原挂在一般 d 卡 holography.dimension-mass-relation 上，
+  作为 Witten 推导之外的第二条推导；reviewer-gkpw-b 指出它只证 d = 4 却被选为 best_derivation
+  （文件名字母序平局），lead 裁定拆出 d = 4 专卡。现在：一般 d 卡只留 Witten 推导，
+  本推导独占 -ads5 卡。两篇是独立工作（Witten p.4 逐字 "independent work [36]"），
+  方法与假设集不同（动量空间 + 截断边界 vs 位置空间 + 共形边界；洛伦兹 vs 欧氏）；
+  「若 Witten 的渐近分析被质疑，d = 4 仍有第二条来源」这一价值现在通过两张卡并列体现，
+  而不是通过同一卡的两条推导。
 
   【版本】loc 锚定 arXiv:hep-th/9802109v2 (27 Mar 1998)；PLB 428 发表版式号未核对。
 author: curator

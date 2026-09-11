@@ -1,0 +1,51 @@
+id: worldsheet.modular-invariance-integer-spin-v2--via-t-transformation-phase
+target: worldsheet.modular-invariance-integer-spin-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.torus-partition-function-general-cft
+    note: |
+      提供 Z(τ) = Σ_i q^{h_i−c/24}q̄^{h̃_i−c̃/24}(−1)^{F_i} 这个逐态展开——本推导完全在这个
+      展开式上做，不需要任何别的输入。原书 (7.2.29) 的上一式就是 (7.2.28)。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.29) 及其上方一段, p.213"
+    note: 抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E13，L1（原书页图逐字）。
+summary: |
+  在 τ ↦ τ + 1 下 q^{h−c/24}q̄^{h̃−c̃/24} = exp[2πiτ(h−c/24) − 2πiτ̄(h̃−c̃/24)] 逐项乘上相位
+    exp{ 2πi [ (h − h̃) − (c − c̃)/24 ] } 。
+  由前提 (P1)(P2) 把谱按 (h, h̃) 分层，层 (h, h̃) 在 Z 中的系数是净 (−1)^F 加权简并度 a_{(h,h̃)}；
+  由 (P3) 固定 τ₂ 后可把 Z 当作 τ₁ 的（绝对收敛的）展开 Σ_layers a_{(h,h̃)} e^{2πi(h−h̃)τ₁}·e^{−2πτ₂(h+h̃−(c+c̃)/24)}
+  逐层比较系数。要求 Z(τ+1) = Z(τ) 即得：对每个 a_{(h,h̃)} ≠ 0 的层（前提 (P4)），
+  相位 exp{2πi[(h−h̃) − (c−c̃)/24]} = 1，也就是陈述的 (1)。
+  取单位算子所在的层（h = h̃ = 0）得 (c − c̃)/24 ∈ Z，即 (2)；
+  回代进 (1) 得一般净简并非零层的 h − h̃ ∈ Z，即 (3)。
+gaps:
+  - "**「各项互不相消 ⇒ 逐项相位为 1」这一步原书未写**，本图靠 (P1)–(P4) 补。
+     原书一句 requires 带过。reviewer-ch7 于 2026-09-11 复核了分离性论证，结论：
+     **论证成立，前提是 (P1)–(P4)**——这四条现已全部写进目标陈述 v2，
+     故本条不再是「陈述与论证不匹配」，只是「论证不在原书里」。"
+  - "**假定单位算子在谱中、h = h̃ = 0 且该层净简并非零**：这是「CFT 有唯一真空且它是 SL(2) 不变的」
+     的标准假设，原书在此处不声明；v2 的 (2) 已把它写进括号。非酉/非紧的 CFT 里可能有权更低的算子
+     （见 worldsheet.high-weight-density-from-central-charge 的同页脚注）。"
+  - "**只用了 T 生成元**：本卡与 S : τ ↦ −1/τ 无关，故它**不是**「完整模不变性」的全部内容。
+     把本卡说成「模不变性的谱约束」时必须带上这个限定。"
+  - "**(P3) 对具体 CFT 是否成立本卡不管**：收敛性问题继承自
+     worldsheet.torus-partition-function-general-cft，在 v2 里被推为前提而非结论。"
+notes: |
+  由 curator 于 2026-09-11 从 worldsheet.modular-invariance-integer-spin--via-t-transformation-phase
+  复制而来，target 改指 v2，正文按 v2 的量词（层而非态）改写。旧推导按
+  docs/STATUS_LEVELS.md「旧推导的去留」保留不动，作为旧卡论证的历史记录。
+
+  **四条前提**（reviewer-v1-ch7, 2026-09-11 复核出，现已写进目标陈述 v2 的 statement）：
+    (P1) 谱离散；(P2) 每层简并有限；(P3) 和式在所用 τ 区域绝对收敛；
+    (P4) 该层的净 (−1)^F 加权简并非零。
+
+  **status = physical-argument（暂）**：四条前提下，本推导的内容是有限步代数
+  （两行相位计算 + 一次 Fourier 系数比较），符合 docs/STATUS_LEVELS.md 的 rigorous
+  例外条款的前两条（前提已完整写出、有限步初等计算）。**待 reviewer 复核 v2 的
+  陈述-论证匹配后升 rigorous**，届时须在本 notes 写 `reviewer-verified: <agent>, <date>`。
+  reviewer-v1-ch7 复核的是**旧卡**的论证，那次复核的结论之一正是「旧卡陈述过强」；
+  v2 是照该结论改写的，但改写本身尚未被独立复核，故本轮**不**自行升级。
+author: curator-small-backlog-2
+created: "2026-09-11"

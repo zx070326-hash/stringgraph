@@ -37,7 +37,18 @@ gaps:
     **依赖链拖低**：本推导用到 worldsheet.modular-group-generated-by-s-and-t，
     而那条的生成性在本书中只是断言（见其 gaps）。
   - |
-    **来源强度**：式号 (5.1.15) 只经 schrans-2020 伴读笔记核对（对笔记 L1，对原书 L3）。
+    **来源强度（2026-09-11 更新，本条原写「(5.1.15) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）」，已过时）**：
+    式号、页码、内容三者现已经 Cambridge Books Online 原书页图
+    （ch.5 PDF p.4 = 印刷 p.148）**L1 确认无误**
+    （literature/extractions/polchinski-1998-v1-ch7.md §0.1 步骤 6 / #E24 备注 2）。
+    ⇒ **来源强度不再是本推导的缺口**。真正的缺口是**原书自己不给证明**：p.148 逐字
+    「Using the modular transformations (5.1.13), **it can be shown that** every τ is equivalent
+    to exactly one point in the region F₀ … except on the boundaries which are identified as shown
+    in the figure.」——「it can be shown」，无证明、无引文。
+    本推导 summary 里的归约过程因此是**本图自己补的标准推理**，不是来源逐字（与 gaps 第一条同源）。
+    ⚠ 另注（不影响本推导，但引用时要当心）：原书 §7.3 (7.3.14)（p.219）用的是**开区域**
+    |τ| > 1、|τ₁| < ½、τ₂ > 0，与 (5.1.15) 的闭区域差一层零测度边界，原书未说明缘由
+    （两处都 L1；见目标陈述 notes 末段）。
 notes: |
   升级路径：登记 Zwiebach 2nd ed.（或 Serre, *A Course in Arithmetic*, Ch. VII, Thm 1）
   到 literature/sources.bib，另起一条 `--via-<数学来源>` 的 rigorous 推导。

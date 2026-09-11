@@ -90,6 +90,16 @@
   3. Thorn 1985 Santa Barbara 42 页报告（自述"improved version of the Goddard–Thorn proof"）：`https://inis.iaea.org/records/szqhd-hct30`，需免费注册——是否注册请船长决定
   下载后放 `literature/raw/`（gitignore）并告知，researcher 即可逐页抽取。
 
+## 待落地的 reviewer 必修项（2026-09-11，lead 记账；派工中）
+
+- **branes（reviewer-branes）**：(13.3.12) 因子写反（∫F = 2κ₁₀²μ_{6−p}，非 /2κ₁₀²）——换代 `branes.rr-charge-quantization` v2；抽取记录 ch13 第 417 行同错，**researcher 须核印刷页 148**。五条 TODO 边现可建实；tension 卡递推式位置漂移换代 v2；n=1 推导可升 rigorous（reviewer-verified）。建议：rr-coupling 卡四命题应拆；圆柱三推导可挂玻色弦圆柱卡为二级上游。
+- **batch15（ch8-fix）**：(8.6.11) 不存在；dual-coordinate 柱面字典误标平面约定；dilaton-shift「原书 (8.3.31) 写法」误归属（原书是 e^{Φ'} 形式，e^{−Φ} 形式是 Schrans）。
+- **batch16**：G–N 两条推导实质用共形向量 ω 与 L_(n)=ω_{n+1}，桥接卡 (N4) 明写不断言 ω——须建 `worldsheet.free-boson-vertex-algebra-conformal-vector`（physical-argument，G–N §2.2 Sugawara 页未读）并改指；`--via-zero-mode-bracket` 因此降 physical-argument，但 v2 卡 best 已是 `--via-lean`。ShapovalovLevelThree.lean:34 注释符号笔误。
+- **reviewer-v2-ch10b 残余**：tadpole 前缀 (8π²α')^5 换代；bosonic-v2→v3 边；(10.8.12)/(10.2.15) 来源。Q_B²=0 ⟺ c=15 已拆单向（9ff17d1）。
+- **gkpw**：d=4 拆卡已落地（gkpw-ads5）。
+- **去重事故**：`branes.bps-bound-point-particle-d4` / `branes.brane-charges-in-susy-algebra` 与 `susy.*` 同名命题并行建卡，保留 susy.*，branes.* superseded（派工中）。**教训：同一命题不得同时派给两个 curator。**
+- **researcher 五项**（派工中）：η S 变换数学来源（Apostol Thm 3.1 / Siegel 1954——ch7 子图最集中的单点缺口）；Polchinski v1 p.159 页图；LZ 1989 p.320 Remark 反例的 p；Gallier–Xu Lemma 6.1/Prop 6.1 逐字；Humphreys GTM 9 §23/§8 入口。
+
 ## 瓶颈分析（2026-09-10，`stringgraph why`）
 
 - **光锥路线**（critical-dimension-light-cone）：瓶颈是 ζ 正规化、振子对易关系的无穷模式重排、光锥规范可达性、Polyakov–Nambu–Goto 经典等价，四处 physical-argument。
@@ -138,7 +148,7 @@
 - **Witten 2012–13 超黎曼面系列（L1）**：PCO 被导出、伪奇点被指认，但**全系列无一处宣称微扰一致性已证**（摘要 "demonstration"，§8.3 归纳挂在未证 "if"）；Donagi–Witten 非投影性**不是**对 PCO 的否定（逐字 "does not depend on a projection"）。三卡结构（1998 缺口 open / Witten 框架 physical-argument / DW rigorous）建设中。
 - **type I SO(32) 来源已定（Polchinski v2 §10.8 L1）**：(10.8.19) (n ∓ 32)²，"The R–R tadpole vanishes only for the gauge group SO(32)"；全节零习题；但符号未算（"should be n ∓ 32"）、脚注 7 真条件是 NS–NS 与 R–R 各自拓扑求和为零。**与六边形反常无原文连接**（§10.6 p.31 并列为两件事；§12.2 E19 "determined by cancellation of tadpole divergences"）——两卡不建边。辛支 (n+32)² 无解，本书不出现 USp(32)。待建 ch10 分支 `type-i-tadpole-cancellation-so32` 修正（ch10 审查后）。
 - **两章矛盾待裁（ch11 curator 发现）**：ch10 `ten-dimensional-superstring-theories` (P5) 以"时空反常"筛选 vs §12.2 "in principle not necessary to check the low energy anomaly"——交 reviewer-v2-ch10。
-- **Vol.2 ch.13 已抽（L1，2026-09-12）**：原书 p.144 逐字 "**16 D9-branes** (and an orientifold 9-plane)"、O 面荷 −2^{4−k}——**不是 32**（p.141 "each CP degree of freedom as a 9-brane" 蕴含 32，原书不调和，Q1 未裁）；O9–D9 相消是 §10.8 的推论（三处 "deduced in section 10.8"），不独立；BPS 无力有作者亲口反例 (13.4.23)；τ_p (13.3.4)/(13.3.23)、Dirac n=1 精确。branes 区建设中。App. B（旋量）P0 未抽。
+- **Vol.2 ch.13 已抽（L1，2026-09-12）**：原书 p.144 逐字 "**16 D9-branes** (and an orientifold 9-plane)"、O 面荷 −2^{4−k}——**不是 32**（p.141 "each CP degree of freedom as a 9-brane" 蕴含 32，原书不调和，Q1 未裁）；O9–D9 相消是 §10.8 的推论（三处 "deduced in section 10.8"），不独立；BPS 无力有作者亲口反例 (13.4.23)；τ_p (13.3.4)/(13.3.23)、Dirac n=1 精确。branes 区建设中。App. B（旋量）已抽并建卡（2026-09-11：`math.clifford-majorana-weyl-mod-8`、`math.so-n-spinor-reality-mod-8`、`susy.bps-bound-point-particle-d4` 等，见 v2-appB 分支）。
 - 待建：玻色化节点（§10.3 (10.3.5) 起，本图最大结构性空白）；§11.4–11.5 李代数/流代数/Sugawara c^{g,k}（E59–E62 ★★★）。
 - **lead 裁决（2026-09-12）**：陈述正文内嵌的**节点 id 指针**过期（如 `veneziano-regge-behavior`、`open-string-hard-scattering-exponential-falloff` 正文写 `veneziano-amplitude-weak`；`cft/one-and-two-point-functions-mobius-fixed`、`radial-hermitian-conjugation` 写 `primary-field`）**不单独换代**——纯指针不改命题内容；依赖边已指新卡；等下次实质换代时一并同步。
 - **BRST 无鬼一手来源（2026-09-12）**：Kato–Ogawa/Ohta/Henneaux 正文均未取得（L2/L3）；意外取得 L1 全文：Lian–Zuckerman 1989 CMP 125 **Thm 2.20**（超弦相对上同调 ≅ 光锥谱，自命名 "No-ghost Theorem" Cor 2.15(ii)）、Figueroa-O'Farrill–Kimura 1989、IMNU 1986（R 扇区无鬼物理证明）、Dedushenko（picture 无关性）。**FOK vs LZ 真矛盾**（Fock 空间是否 Verma 模直和）待 Brower–Friedman 1973。超弦无鬼卡经 LZ Thm 2.20 可 rigorous——curator 接线中。

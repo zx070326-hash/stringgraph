@@ -48,6 +48,12 @@ sources:
   - ref: polchinski-1998-v2
     loc: "App. B §B.2, (B.2.35) p.447（不带中心荷的 N 重代数，原书逐字「This is not the most general algebra」）；(B.1.24)–(B.1.28) pp.434–435（荷共轭矩阵 C 的性质，Z^{AB} 反对称性的依据）"
     note: 抽取记录 #E20、#E11（L1）。
+  - ref: polchinski-1998-v2
+    loc: "App. B 导言 pp. 439–440 逐字：「The reader should be able to follow the derivation of the various representations (massless, standard massive, and BPS massive). However, the transformations and actions require detailed calculation, and so for these we simply cite for reference some of the key results.」"
+    note: |
+      抽取记录 #E15 备注（L1）。原书自陈：表示（无质量 / 标准有质量 / BPS 有质量）的推导读者可跟随，
+      而变换与作用量只引述结果。本卡只用到表示层，故这句话覆盖本卡 (iii) 的全部内容。
+      〔2026-09-11 去重并入：本条是并行建卡 branes.bps-bound-point-particle-d4 的独有证据。〕
 tags: [supersymmetry, bps, central-charge, d4, extended-supersymmetry, short-multiplet, polchinski-appendix-b]
 notes: |
   【★ 这张卡的边界是本轮抽取最重要的结论之一】App. B 的 BPS 界**只覆盖点粒子中心荷**。
@@ -61,9 +67,24 @@ notes: |
   一侧同样只有断言的 `C` 性质。按 docs/STATUS_LEVELS.md「断言 + 骨架」档位 ⇒ physical-argument，
   缺口逐条写进推导卡 gaps，不压成 conjecture。
 
-  【⚠ 与并行分支的重名风险】claim #275（分支 agent/curator/polchinski-v2-ch13，未合 main）计划以
-  `branes.bps-bound-point-particle-d4` 建同一命题。两支都未合并；合并时应二选一，不要两张都进 main。
-  已于 2026-09-11 在总线上广播（见 agora warning）。
+  【去重裁决（2026-09-11）】两个并行 curator 各建了一版同一命题（本卡与 `branes.bps-bound-point-particle-d4`，
+  两版都已进过 main）。lead 裁决**保留本卡**，branes 版标 `superseded_by: susy.bps-bound-point-particle-d4`。
+  branes 版独有的逐字证据、gaps 与「不断言」条目已并入本卡与本卡推导（逐条标〔并入〕）；
+  **statement 未改动**。branes 版的旧推导 `branes.bps-bound-point-particle-d4--via-positivity-of-anticommutator`
+  按 docs/STATUS_LEVELS.md「旧推导的去留」保留作历史记录（validate 会报 stale 警告，是预期的）。
+
+  【★ 本卡也不断言任何弦论内容】〔并入 branes 版「不断言 (d)」〕App. B 全篇不含 α'、不含弦振幅；
+  本卡是纯场论（`d = 4` 扩展超对称代数）的命题，任何弦论结论都不能只挂本卡。
+
+  【红线（appB 抽取记录 §3.2）】〔并入 branes 版〕App. B 中**无** "triality" 一词、**无** SO(8) 意义的 **56**
+  （p.448 出现的 56 是 `d = 4, N = 8` 的螺旋度 ∓½ 态数，与 SO(8) 无关）、**无**世界面 R 扇区零模 `ψ_0^μ`、
+  **无**膜荷代数。本卡不涉及这四项，引用本卡时也不得据此断言它们。
+
+  【本卡在 branes 区的角色 = 模板 + 正定性论证】〔并入 branes 版〕D 膜链上的引用点：
+  `branes.d-brane-bps-half-susy` 借用的是本卡给出的**概念**（「BPS 态 = 被一半超荷湮灭的短表示」），
+  原书背书是 ch.13 p. 141 逐字「BPS states, which are discussed in section B.2」（另见 p. 140 斜体
+  「*it is a BPS state*」）。链条为：本卡 → susy.brane-charges-in-susy-algebra（(13.2.9)）→ branes.d-brane-bps-no-force。
+  **不得**把 (B.2.39) 直接当作 D 膜张力–荷等式 `μ_p = e^{Φ₀}τ_p` 的依据（appB 抽取记录 Q3）。
 
   【下游】susy.brane-charges-in-susy-algebra（把 (B.2.36) 扩展到膜荷）、
   consistency.eleven-is-maximal-supersymmetric-dimension（用 `N = 8` ⇒ 32 超荷这一上界）。

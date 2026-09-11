@@ -21,22 +21,18 @@ depends_on:
       definition in terms of the Laurent coefficients of the `: :`-ordered energy-momentum tensor」）。
   - id: worldsheet.energy-momentum-tensor-free-scalar
     note: 两种正规序针对的是同一个 T(z) = −(1/α'):∂X^μ∂X_μ:。
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.conformal-ordered-modes-satisfy-virasoro
     note: |
-      **2026-09-11 补边（reviewer-batch10 A：遗漏依赖）**：本推导的关键一步是「**共形正规序的**
-      Laurent 模 L_m 满足 Virasoro 代数 (2.6.19)」——(2.7.8) 用的 (2.6.22)（SL(2,R) 子代数）
-      是 (2.6.19) 的推论。而 (2.6.19) 在原书 §2.6 是**从 TT OPE 经围道变形算出来的**，
-      本条边提供那个 TT OPE（(2.4.25)/(2.6.19) 的输入）。
+      **2026-09-11 改边**：本推导的关键一步是「**共形正规序的** Laurent 模 L_m 满足
+      Virasoro 代数 (2.6.19)」——(2.7.8) 用的 (2.6.22)（SL(2,R) 子代数）是 (2.6.19) 的推论，
+      而这张卡就断言这一步（并把 (2.6.22) 作为推论 (a) 写进陈述）。
+      原先这条依赖由 worldsheet.tt-ope-central-charge + worldsheet.ope-commutator-dictionary
+      两条边**近似**承载（2026-09-11 早些时候按 reviewer-batch10 A 补的）；那两条现已改挂在
+      新卡自己的推导 --via-ope-contour 上，本推导只留这一条。
       不标 inferred：(2.7.8) 处原书逐字说「The simplest uses **the Virasoro algebra**」，
       即明确回指 §2.6 的代数；§2.6 的代数又只有这一条来路。
-      ⚠ 本条**不**用到 c 的具体值（中心项在 m = 1 处为零），只用 TT OPE 的二阶/一阶极点结构。
-  - id: worldsheet.ope-commutator-dictionary
-    note: |
-      **2026-09-11 补边（同上）**：提供「OPE 极点 ⟹ 模的对易关系」这一步，即由 TT OPE 得到
-      (2.6.19) 所必需的围道变形字典（原书 (2.6.14) + Fig. 2.3）。
-      没有这两条边，图上就只有抽象的 worldsheet.virasoro-algebra-v2（一个**定义**：
-      李代数 Vir(R) 长什么样），而**没有任何边说明本推导操作的那些 L_m 确实满足它**。
-      ⚠ 这条边同时是本推导封顶在 physical-argument 的原因之一（该节点的 OPE 收敛性缺口）。
+      ⚠ 本条**不**用到 c 的具体值（中心项在 m = ±1 处为零）。
+      ⚠ 新卡封顶在 physical-argument（OPE 收敛性缺口），故本推导的封顶不变。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.7, p.59, eq. (2.7.7)–(2.7.9)；关键步骤是 (2.7.8) 2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0，用的子代数是 §2.6 eq. (2.6.22) [L_1, L_{−1}] = 2L_0"
@@ -81,15 +77,14 @@ gaps:
      （它由 a^X 是 c-数这一点保证，而后者又依赖上一条 gap 里的模展开）。本图无对应节点。"
   - "「两种正规序之差是一个 c-数」这一步（即 (2.7.7) 的成立本身）在本图与原书中都不是被证明的，
      而是由两种正规序都把 L_0 写成同一个双线性式加常数这一构造性事实给出。"
-  - "**★ 图上没有一条卡恰好断言「共形正规序的 Laurent 模满足 Virasoro 代数 (2.6.19)」**
-     （reviewer-batch10 A 指出的遗漏依赖，本轮只能部分关闭）。本轮补的两条边
-     （worldsheet.tt-ope-central-charge + worldsheet.ope-commutator-dictionary）是图上**最接近**的
-     承载：二者合起来就是原书 §2.6 从 TT OPE 推出 (2.6.19) 的那条路，但**它们没有被合成一条命题卡**。
+  - "**「共形正规序的 Laurent 模满足 Virasoro 代数 (2.6.19)」这条依赖已于 2026-09-11 立卡关闭**
+     （reviewer-batch10 A 指出的遗漏依赖）。新卡是
+     `worldsheet.conformal-ordered-modes-satisfy-virasoro`（由 tt-ope-central-charge +
+     ope-commutator-dictionary 推出，physical-argument），本推导现挂一条指向它的实边。
+     **剩余的是新卡自己的缺口**（围道变形合法性 = OPE 收敛性未证明），不再在此重复记账。
      ⚠ 与之对照，worldsheet.free-boson-central-charge-d（formalized）断言的是**产生-湮灭正规序**
      （Sugawara）那组 L_m 的代数，**不是**共形正规序那组——用它顶替会把本推导的论证弄成循环
-     （两组 L_0 相差的正是待定的 a^X）。
-     ⇒ 明确的可立卡缺口：`worldsheet.conformal-ordered-modes-satisfy-virasoro`
-     （由 tt-ope-central-charge + ope-commutator-dictionary 推出，physical-argument）。"
+     （两组 L_0 相差的正是待定的 a^X）。"
   - "**开弦那条边已于 2026-09-11 撤回**（reviewer-batch10 A）：此前本推导有一条
      `worldsheet.open-string-doubling-trick`（inferred），理由是「a^X 是开弦 L_0 的两种正规序之差」。
      但**目标卡 worldsheet.normal-ordering-constant-ax 的 statement 通篇没有开弦**——

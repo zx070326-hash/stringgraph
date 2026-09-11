@@ -34,7 +34,7 @@ depends_on:
       F^n = B^{n−κ} ∩ Ker K；C^n_rel = F^n（κ=½）/ F^n ∩ Ker D_R（κ=0）。
       ⇒ **Polchinski (10.5.25)(10.5.26) 那两条"原书只说 the logic being the same"的条件，
       在 LZ 这里是有定义、有定理的对象**。这是本推导对目标卡的一处实质贡献。
-  - id: worldsheet.critical-dimension-superstring-brst
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
     note: |
       供给 Q_B² = 0（上同调有定义的前提）。
       LZ 一侧的对应陈述是 **Proposition 1.7(ii)** 逐字 'Q² = 0 iff D = 10.'
@@ -42,6 +42,9 @@ depends_on:
       [15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）。故这条前提在 LZ 一侧也是外包的，
       与本图该卡的 physical-argument 状态相称；显式系数公式见
       ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10)。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.superconformal-ghost-central-charge
     note: |
       供给 c^g = −15，即"总中心荷为零 ⟺ c^m = 15"。LZ 一侧是 **Proposition 1.2**

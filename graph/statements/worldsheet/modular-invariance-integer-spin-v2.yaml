@@ -1,0 +1,84 @@
+id: worldsheet.modular-invariance-integer-spin-v2
+kind: proposition
+title: "T 变换下的模不变性 ⇒ 先 c − c̃ ∈ 24Z（单位算子），再一般层 h − h̃ ∈ Z（四条前提显式化，(1) 的量词改为净简并非零的层）"
+statement: |
+  设一个二维 CFT 的环面配分函数按 worldsheet.torus-partition-function-general-cft 写作
+    Z(τ) = Σ_i q^{h_i − c/24} q̄^{h̃_i − c̃/24} (−1)^{F_i} ,   q = e^{2πiτ} ,
+  并**假设**下列三条技术前提：
+
+    (P1) **谱离散**：权的取值集合 {(h_i, h̃_i)} 可数，从而谱可按 (h, h̃) 分「层」；
+    (P2) **每层简并有限**：每个层 (h, h̃) 只含有限多个态，从而该层在 Z 中的系数
+         a_{(h,h̃)} := Σ_{i ∈ 该层} (−1)^{F_i}（**带符号的净简并度**）有定义；
+    (P3) **绝对收敛**：上式在所用的 τ 区域（某条 τ₂ = const 的水平线的邻域）绝对收敛，
+         从而可固定 τ₂、把对 τ₁ 的依赖当作 Σ_layers a_{(h,h̃)} e^{2πi(h−h̃)τ₁}·（τ₂ 因子）
+         型的展开，逐层比较系数；
+
+  再**假设** Z 在 T : τ ↦ τ + 1 下不变。则
+
+  (1) 对每个满足
+        (P4) **该层的净 (−1)^F 加权简并非零**，即 a_{(h,h̃)} ≠ 0
+      的层 (h, h̃)，量 h − h̃ − (c − c̃)/24 必须是整数；
+  (2) 取单位算子所在的层（h = h̃ = 0；假设单位算子在谱中且该层净简并非零，
+      酉紧 CFT 中它的系数为 +1）⇒ **c − c̃ 必须是 24 的倍数**；
+  (3) **有了 (2) 之后**，(1) 对一般的净简并非零层化为自旋整数性
+        h − h̃ ∈ Z 。
+
+  ⚠ **(1) 只覆盖净简并非零的层**：净 (−1)^F 加权简并为零的层（有世界面费米子时完全可能：
+  玻色态与费米态数目相同的层）在 Z(τ) 中根本不出现，T 不变性对它**不施加任何约束**。
+  因此本卡**不**断言「对每个态 i 都有 h_i − h̃_i ∈ Z」。在无世界面费米子的 CFT
+  （(−1)^F ≡ +1，所有简并度为正）里 (P4) 对每个非空层自动成立，此时 (1) 退化为对每个态成立。
+
+  ⚠ **(3) 的前提是 (2)，顺序不可颠倒**：脱离 c − c̃ ∈ 24Z，(1) 只给出
+  h − h̃ ∈ (c−c̃)/24 + Z，即所有净简并非零层的自旋同余于一个公共的非整数值。
+  在 26 维平坦时空里 c = c̃ = 26，前提自动满足。
+
+  ⚠ **c − c̃ ∉ 24Z 的 CFT 并不被排除**：原书紧接一段逐字「CFTs for which c − c̃ is not a
+  multiple of 24 are certainly of interest. These cannot be separately modular-invariant,
+  but with appropriate projections can be combined into a modular-invariant theory.」
+  即本命题的结论是「**单独**模不变」的必要条件，不是「有物理意义」的必要条件。
+
+  **本卡不断言什么**：不涉及 S : τ ↦ −1/τ 给出的约束（那是另一类条件，
+  如 §8.4 的自对偶格；第 7 章对此不提供任何东西）；不断言模不变性本身
+  （模不变性在本卡里是**假设**，其地位见 notes）；不断言 (P1)–(P3) 对任何具体 CFT 成立
+  （它们是本命题的前提，不是结论）。
+uses_conventions:
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.29) 及其上方一段, p.213"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E13，等级 **L1（原书页图逐字）**。
+      原文逐字：「Invariance under τ → τ + 1 requires h_i − h̃_i − (1/24)(c − c̃) to be an integer.
+      Looking at the unit operator, this requires c − c̃ to be a multiple of 24. For general operators
+      one then has the requirement that the spin be an integer, h_i − h̃_i ∈ Z. (7.2.29)」
+      措辞是 "requires"，不是 "we guess"。
+      ⚠ **(P1)–(P4) 四条前提不在原书里**：它们是 reviewer-v1-ch7 于 2026-09-11 复核
+      「逐项比较相位」这一步时补出的，来源是本图的复核记录而非 Polchinski。
+      ⚠ **c − c̃ ∈ 24Z 这个前提不可省**：抽取记录 Q3 指出
+      literature/extractions/polchinski-1998-v1.md#E138 在引用 (7.2.29) 时把它丢了
+      （在 c = c̃ 的场景下结论不受影响，但对一般 CFT 是错的）。
+tags: [cft, torus, modular-invariance, spectrum, spin, central-charge]
+notes: |
+  由 curator 于 2026-09-11 建立，换代 worldsheet.modular-invariance-integer-spin。
+
+  **与旧卡的差别（两处，都是收紧）**：
+  (a) 把 reviewer-v1-ch7 复核出的三条技术前提 (P1)(P2)(P3) 写进 statement（旧卡只写在推导 notes 里）；
+  (b) (1) 的量词由「对每个态 i」改为「对每个净 (−1)^F 加权简并非零的层」，
+      并把 (P4) 显式列为该量词的限定。旧卡的 (1) 在有费米子的 CFT 里字面过强。
+  在 26 维平坦玻色弦（本卡的主要下游用例）两处差别都是空的，故下游结论不受影响。
+
+  **本卡的「模不变性」是假设，不是结论**：Polchinski 在这里把模不变性当作对 CFT 谱的**要求**
+  （因为环面振幅的模积分要在基本域上做才不重复计数，见 worldsheet.modular-fundamental-domain
+  与 spectrum.one-loop-torus-amplitude-modular-invariant）。因此本卡的正确读法是
+  「若要求单独模不变，则谱必须满足…」，而不是「谱满足…」。
+
+  **下游**：
+  (a) (7.3.11) 的 δ_{h,h̃} = ∫dθ/2π exp[i(h−h̃)θ] 需要 h − h̃ ∈ Z 才写得出来
+      （spectrum.field-theory-region-sum-over-string-spectrum，原书明写这个前提）；
+  (b) §8.4 Narain 格的**偶格**那一半 (8.4.19)「ℓ∘ℓ ∈ 2Z」直接引 (7.2.29)
+      （compact.narain-lattice-is-even--via-modular-t-invariance，方向：Narain 依赖本卡）。
+  两条边已于 2026-09-11 由旧卡改指本卡。
+  (c) 自对偶格（S 变换那一半）与本卡无关：第 7 章不提供，且 §8.4 的必要方向在原书只有
+      "a little thought shows"（#E139），抽取记录建议拆成三卡。
+author: curator-small-backlog-2
+created: "2026-09-11"

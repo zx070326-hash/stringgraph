@@ -1,7 +1,7 @@
 id: math.even-self-dual-euclidean-lattices-dimension-16-v2--via-coordinate-comparison
 target: math.even-self-dual-euclidean-lattices-dimension-16-v2
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: math.even-unimodular-rank-16-classification
     inferred: true
@@ -38,6 +38,7 @@ gaps:
   - "**两步算术未经第二人复核**：见上方 status 说明；无 `reviewer-verified` 记录。"
   - "**`E_8 ⊕ E_8` 侧的比对是平凡的正交直和**，本推导未单独论证 Polchinski 的 `Γ_8 × Γ_8`（直积写法）与数学侧 `E_8 ⊕ E_8`（正交直和）措辞一致；两者在本图视为同一对象（旧卡 notes 已记此记号差）。"
 notes: |
+  reviewer-verified: reviewer-batch17, 2026-09-11（两步坐标算术独立复核：k 偶 ⇒ 整向量且 Σ = 8k 偶 = (11.6.5a)；k = 2j+1 ⇒ n_i = x_i + j、Σn_i = Σx_i + 16j 偶 = (11.6.5b)；反向取 x = (n_i)、k = 1；8 分量同理。前提完整、有限步初等计算，走 STATUS_LEVELS 例外条款。statement (b) 的「E₈ 根格」须按 Chenevier–Lannes 记号 E₈ := D₈ ⊕ ℤe 理解，见 gaps）。lead 落地。
   ⚠ 本推导**不**证明分类定理，也**不**证明「秩被 8 整除」；它只是记号字典。
   上游的分类边标了 `inferred: true`，理由见该边 note。
   ⛔ 不得把 `Λ_16` 用于本卡涉及的任何格：该符号在 Chenevier–Lannes 附录 A 指 Barnes–Wall 格 `BW_16`

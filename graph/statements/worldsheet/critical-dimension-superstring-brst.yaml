@@ -94,8 +94,20 @@ sources:
       （IMNU 的同型结果是 α₀^NS = 1/2、α₀^R = 0）。
       ⚠ 本条是 lian-zuckerman-1989 Proposition 1.7(ii) 证明外包的对象之一，
       故本条与上一条是同一条证据链的两端。
+superseded_by: worldsheet.critical-dimension-superstring-brst-v2
 tags: [superstring, brst, critical-dimension, central-charge, nilpotency]
 notes: |
+  ★★【本卡已被换代（2026-09-11，reviewer-v2-ch10b 必修）——不要再引用本卡】
+  本卡把两个方向写成一条「Q_B² = 0 ⟺ c^m = c̃^m = 15」，并以 Polchinski §10.5 为主来源；
+  但 §10.5 (10.5.23) 下方那句逐字是 'one can verify nilpotence … **whenever** the total
+  central charge vanishes'，**只给 ⟸**。故拆开换代：
+    ⟸ → worldsheet.superstring-brst-nilpotent-at-c15（本卷有原句；推导 --via-nilpotency 已改指）
+    ⟹ → worldsheet.critical-dimension-superstring-brst-v2（本卷无来源，只有 IMNU 平坦特例 +
+        LZ Prop 1.7(ii) 的无证明 iff + Ohta 摘要；推导 --via-explicit-nilpotency-coefficients
+        已改指并降为 conjecture）
+  `superseded_by` 指向 ⟹ 卡（「由 BRST 定出临界维数」这层含义的继承者）；
+  只需要「Q_B² = 0」的下游一律改指 ⟸ 卡。
+
   【本卡与玻色弦 BRST 路线卡的对照】worldsheet.critical-dimension-brst-v2 给
   Q_B² = (1/2)Σ_m ((c^m − 26)/12)(m³ − m) c_{−m}c_m，即**有显式公式**（Vol.1 (4.3.10)）。
   超弦一侧**本卷**没有这样的显式公式，只有一句「按同样的步骤可以验证」。

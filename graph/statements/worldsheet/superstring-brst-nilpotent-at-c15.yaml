@@ -1,0 +1,78 @@
+id: worldsheet.superstring-brst-nilpotent-at-c15
+kind: proposition
+title: 物质中心荷 c^m = c̃^m = 15 时超弦 BRST 荷幂零（单向 ⟸）
+statement: |
+  设 Q_B 如 worldsheet.superstring-brst-charge 所定义（λ = 2 的 bcβγ 超共形鬼场，
+  鬼场中心荷 c^g = −15，鬼场正规序常数 a^g 按扇区取 −1/2 / −5/8），
+  作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、G^m_r、b_n、c_n、β_r、γ_r 零化，
+  以保证 Q_B 与 Q_B² 逐项有限）。
+  若物质 SCFT 的中心荷满足 c^m = c̃^m = 15（从而总中心荷 c^m + c^g = 0），则
+
+    **Q_B² = 0**。
+
+  这里的物质部门可以是**任意**正范数 SCFT：可以把若干个平坦的 X^μψ^μ SCFT
+  换成任何满足该中心荷条件的正范数 SCFT，本结论不变。
+
+  **附带的一条必要条件**：该 SCFT 的超流必须与 ψ^μ、β、γ 有相同的周期性（R 或 NS），
+  否则 BRST 流不周期、Q_B 无定义。
+
+  **本命题只断言 ⟸ 这一个方向**（c^m = 15 ⟹ Q_B² = 0）。
+  反方向（Q_B² = 0 ⟹ c^m = 15，即"BRST 幂零定出临界中心荷"）见
+  worldsheet.critical-dimension-superstring-brst-v2，那张卡在本卷**没有**来源，
+  状态也低于本卡。
+
+  **本命题不定出**：
+    (1) 不定出 D。要得到 D = 10 必须再加一步 c^m = (3/2)D
+        （worldsheet.rns-matter-central-charge），那是公共输入，不是本命题的产物。
+    (2) 不定出任何截距（超弦的 NS/R 截距见 worldsheet.open-superstring-mass-shell）。
+
+  ⚠ **来源定位的一条硬约束**：本卷**没有**像 Vol.1 (4.3.10) 那样把 Q_B² 写成带式号的公式。
+  超弦的对应陈述是 §10.5 中 (10.5.23) 下方的**一段正文，无式号**。
+  任何引用本命题的地方，`loc` 只能写「§10.5, p. 24, (10.5.23) 下方一段」，**不要编式号**。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字：'From these one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) whenever the total central charge vanishes. Thus, we can replace some of the spacelike X^μψ^μ SCFTs with any positive-norm SCFT such that the total matter central charge is c^m = c̃^m = 15. The BRST current must be periodic for the BRST charge to be well defined. The supercurrent of the SCFT must therefore have the same periodicity, R or NS, as the ψ^μ, β, and γ.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E37；逐字段落读到原书页图）。
+      ★ **这条原句给的正是本卡的方向**：'verify nilpotence … **whenever** the total central
+      charge vanishes'，即「总中心荷为零 ⟹ 幂零」。反方向不在这句话里
+      ——这正是 reviewer-v2-ch10b（2026-09-11）判定旧卡
+      worldsheet.critical-dimension-superstring-brst 的「⟺」超出来源的理由。
+      ⚠ **无式号是原书的事实，不是抽取的缺陷**：抽取记录明确要求不要编式号。
+      ⚠ 原书的论证是 'one can verify nilpotence by the same steps as in the bosonic case
+      (exercise 4.3)'——**书中不证，推给 Vol.1 的习题 4.3**。
+  - ref: polchinski-1998-v2
+    loc: "§10 Exercises, exercise 10.13, p. 43（逐字：'(a) Verify the operator products (10.5.22). (b) Using the Jacobi identity as in exercise 4.3, verify nilpotence of Q_B.'）"
+    note: |
+      L1（E49）。这是 Q_B² = 0 在原书里的**唯一论证入口**，而它是一道习题。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, exercise 4.3（玻色弦的幂零性验证；Vol.2 明写 'by the same steps as in the bosonic case (exercise 4.3)'）"
+    note: |
+      文献指定的论证出处；⚠ **该习题本身在 v1 抽取记录里也没有解答**。
+tags: [superstring, brst, nilpotency, central-charge]
+notes: |
+  【为什么单独建这个弱节点（与玻色弦侧 worldsheet.brst-nilpotent-at-c26 同型）】
+  上同调型的超弦无鬼定理与 BRST≅OCQ 等价那几条推导，只需要「c^m = 15 ⟹ Q_B² = 0」
+  这一个方向（它们要的是"复形微分平方为零，上同调有定义"）。
+  让它们依赖双向卡会把整条分支挂到一个本卷没有来源、且只有外部文献支撑的方向上。
+  玻色弦一侧 lead 已在 2026-09-10 做过同样的裁决（见 brst-nilpotent-at-c26 的 notes）。
+  本卡按 reviewer-v2-ch10b 的第二轮必修（2026-09-11）建立。
+
+  【本卡与玻色弦弱卡的一处差别】worldsheet.brst-nilpotent-at-c26 的自身 status
+  由 **fgz-1986 Proposition 1.2**（数学文献，d² = 0）承载，故可以高于 Polchinski 那一支；
+  **超弦一侧没有对应的数学来源**：
+    · figueroa-ofarrill-kimura-1989 把 D = 10 当**假设**（'in the critical dimension'），
+      但本图尚未为其幂零性单列编号陈述；
+    · lian-zuckerman-1989 Proposition 1.7(ii) 是 iff 且**自己不证**。
+  ⇒ 本卡目前只有 Polchinski §10.5 那一段（推给习题）支撑，有效状态 physical-argument。
+  若日后取得 Terao–Uehara PLB 168B 或 ohta-1986 正文，可为本卡新增推导。
+
+  【旧卡的去向】worldsheet.critical-dimension-superstring-brst（双向 ⟺）已被
+  worldsheet.critical-dimension-superstring-brst-v2（单向 ⟹）换代；
+  它的 ⟸ 那一半由本卡承载，推导 --via-nilpotency 已改指本卡。
+author: curator
+created: "2026-09-11"
