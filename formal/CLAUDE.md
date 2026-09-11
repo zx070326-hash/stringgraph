@@ -143,6 +143,17 @@ StringFormal/
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
   NoGhost/LevelTwo.lean      level-2 标量物理态闭式 (4a₀−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a₀²+(2D−74)a₀+84−3D]；a₀=1、D>26 有序域上存在负模物理态（exists_mem_physSubmodule_pairing_self_neg）
+  NoGhost/Witness.lean      **四条几何假设的可满足性见证**（蓝图 §C.2）：`D ≥ 3`、任意交换 ℚ-代数上的显式
+                            光锥标架 η=diag(−1,1,…)、b=(1,1,0,…)、a=(1/2,3/2,0,…)、b̃=(1/2,−1/2,0,…)、
+                            ε_i=Pi.single i 1 同时满足 hη∧hbb∧hba∧hεb（外加 b·b̃=−1、b̃·b̃=0、
+                            横向 Gram = δ_ij、快子壳 α'k²=1）。**b·a=1 与 a·a=2 一起强制 a=(1/2,3/2,…)**，
+                            所以 ℚ-代数不是偷懒。含可复用的 dotVec 双线性/Pi.single 收缩引理
+  NoGhost/Longitudinal.lean **纵向 GT 算子 K_m = k_0·α_m = towerModeVec η a b b m**（偏振取 b 自身；
+                            蓝图 §A.1/§A.2，Goddard 2008 (6.2)(6.3)）：⁅L_m,K_n⁆=−n K_{m+n}（只需 hη）、
+                            ⁅K_m,K_n⁆=0（hbb 消中心项）、**K_0 = 1**（逐层，靠 k_0·p 沿塔不变 + hba）、
+                            K_m†=K_{−m}、**⁅K_m,A^ε_n⁆=0（无望远镜求和，逐项对易，窗口取并集）**；
+                            towerKerK = ⋂_{n>0} ker K_n 与 ddfCharacterization = phys ⊓ towerKerK
+                            （**只是定义**，「= DDF 张成」是 ddf-spans，未做）。**不**做 Brower 的 A^L_n（§A.3）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
