@@ -1,0 +1,56 @@
+id: spectrum.torus-measure-modular-invariant--via-sl2z-action
+target: spectrum.torus-measure-modular-invariant
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    note: |
+      供给群、作用 τ' = (aτ+b)/(cτ+d)（ad − bc = 1）与该定义卡里已写出的
+      **Im(γ·τ) = Im τ / |cτ + d|²**——本推导第 (2) 步就是它。
+      ⚠ 该定义卡自己标明：Im 的变换式是 curator 补的自洽性说明，**不是来源逐字**
+      （抽取记录未记录它是否写在原书里）。故本推导的这一步的可追溯性止于该卡。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7), p.217，逐字「and **it is easy to check** that dτdτ̄/τ₂² (7.3.7) is modular-invariant as well.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20，L1（原书页图逐字）。
+      **原书在此处零论证**：这是一条纯断言，验算逐字留给读者（"it is easy to check"）。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eqs. (5.1.12)(5.1.13), p.148（模群及其在 H 上的分式线性作用）"
+    note: |
+      p.148 页图 L1（抽取记录 polchinski-1998-v1-ch7.md 的跨章定点核对一栏），但两式**未逐式抄录**。
+summary: |
+  设 τ' = (aτ + b)/(cτ + d)，a,b,c,d ∈ Z，ad − bc = 1，τ ∈ H。
+
+  (1) **全纯微分的变换**：dτ'/dτ = [a(cτ+d) − c(aτ+b)]/(cτ+d)² = (ad − bc)/(cτ+d)² = 1/(cτ+d)²，
+      故 dτ' = dτ/(cτ+d)²，取复共轭得 dτ̄' = dτ̄/(c̄τ̄+d̄)² = dτ̄/(cτ̄+d)²（a,b,c,d 为实整数）。
+      ⇒ dτ' dτ̄' = dτ dτ̄ / |cτ + d|⁴。
+
+  (2) **虚部的变换**：τ₂' = Im τ' = τ₂ / |cτ + d|²（worldsheet.modular-group-psl2z），
+      故 (τ₂')² = τ₂² / |cτ + d|⁴。
+
+  (3) **相除**：dτ' dτ̄' / (τ₂')² = [dτ dτ̄ / |cτ+d|⁴] · [|cτ+d|⁴ / τ₂²] = dτ dτ̄ / τ₂²。∎
+
+  三步都是有限步初等计算，且 |cτ + d| ≠ 0（τ ∈ H 而 (c,d) ≠ (0,0)，否则 ad − bc = 0）。
+  常数归一化（d²τ = 2dτ₁dτ₂ 还是 dτ₁dτ₂）在比值中相消，故结论与该约定无关。
+gaps:
+  - "**原书没有做这个验算**：逐字 'it is easy to check'（§7.3, p.217）。summary 的三步是本图补的。
+     按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这类有限步初等计算可以标 rigorous，但**必须**有
+     `reviewer-verified: <agent>, <date>` 记录；本推导**没有**该记录，故按规则标 physical-argument。
+     ⇒ 这条推导是本图目前少数几条「只差一次 reviewer 复核就能升 rigorous」的节点之一。"
+  - "**Im(γ·τ) = Im τ/|cτ+d|² 在图上的可追溯性止于定义卡**：worldsheet.modular-group-psl2z 自己写明
+     该式是 curator 补的自洽性说明，抽取记录未记录它是否写在原书里。这一步若要有一手来源，
+     须回 Polchinski §5.1 p.148 或任一模形式教科书补一条 loc。"
+  - "**未覆盖测度的取向/绝对值问题**：dτ dτ̄ 作为 2-形式带取向，(c) 中相除时本推导按 |cτ+d|⁴ 为正实数处理；
+     若把测度理解成 |dτ ∧ dτ̄| 或 dτ₁dτ₂，结论相同但需一句取向说明，原书与本推导都不写。"
+  - "**不变密度的唯一性未论证**：目标卡 (e) 已把它排除在断言之外。"
+notes: |
+  由 curator（small-backlog-6）于 2026-09-11 建立，随 spectrum.one-loop-torus-amplitude-modular-invariant
+  的换代把该卡第 (2) 条拆出。本推导的内容与旧推导
+  spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 summary 第 (2) 步
+  **相同**（那里写作两行验算），只是现在它是一张独立卡的完整论证而不是三合一卡的一个部件。
+
+  **为什么不是 rigorous**：见 gaps 第 1 条——差一个 reviewer 复核记录。若 reviewer 愿意留
+  `reviewer-verified`，本推导可直接升 rigorous（三步全部写在 summary 里，前提完整）。
+author: curator-small-backlog-6
+created: "2026-09-11"
