@@ -13,11 +13,16 @@ import StringFormal.NoGhost.SpuriousElimination
 import Mathlib.Data.Sym.Card
 
 /-!
-# Counting at level two: `p_{D−1}(2) = p_{D−2}(2) + D`
+# The level-two slice of Goddard–Thorn: `B26 2` at `D = 26`
 
-Graph node: `worldsheet.ddf-spanning-rank-inequality` (the `(B-26)` gap).  This is the
-*counting* half of blueprint §B″'s `PR5b` → `B26 2`; the *operator* half (the two families of
-null states and the equation `L_2 𝒟₂ φ = (D − 26) φ`) is `NoGhost/NullSeedsTwo.lean`.
+Graph nodes: `worldsheet.ddf-spanning-rank-inequality`, `worldsheet.ddf-spanning-hypothesis`
+(the `(B-26)` gap), `worldsheet.no-ghost-theorem-v4`.  This finishes blueprint §B″'s `PR5b` on
+the slice `N = 2`: together with `NoGhost/NullSeedsTwo.lean` (the operator half: the two
+families of null states and the equation `L_2 𝒟₂ φ = (D − 26) φ`) it closes `SliceRank.B26 2`
+and hence `DDFSpansOn` on `(rung -2, level 2)`.
+
+**This is the first slice on which `D = 26` is consumed by a machine-checked spanning result.**
+`N ≤ 1` was closed unconditionally in `D` (`Glue.ddfSpansOn_towerLevelLE_one`); `N = 2` is not.
 
 ## Why this file exists
 
@@ -33,8 +38,12 @@ PR4 bounds the left side by `p_{D−1}(N)` and PR2 computes the first right-hand
 evaluated* (blueprint §B′.8).  To close `B26 2` those two cardinalities must finally be
 compared.  `decide` is hopeless on `Osc D →₀ ℕ` (same wall as `Math/PartitionCard.lean`), so
 the comparison is done by an explicit classification of the level-two occupation functions.
+The remaining term `dim (H_null ⊓ V_2)` is bounded below by exhibiting `D` independent null
+states.
 
 ## Main results
+
+Counting (all `D`-independent):
 
 * `Finsupp.oscWeight_eq_two_cases` — **the classification**: an occupation function of level
   two is either `single (i, 2) 1` or `single (i, 1) 1 + single (j, 1) 1`.  Stated for an
@@ -46,26 +55,52 @@ the comparison is done by an explicit classification of the level-two occupation
   needed).
 * `levelTwo_count_identity` — the arithmetic identity
   `(D−1) + D.choose 2 = (D−2) + (D−1).choose 2 + D` for `2 ≤ D`; equivalently
-  `p_{D−1}(2) − p_{D−2}(2) = D`.  It is a **Pascal identity**, valid for every `D`: the
-  critical dimension does **not** enter the counting.
+  `p_{D−1}(2) − p_{D−2}(2) = D`.  It is a **Pascal identity**, valid for every `D`.
+* `finrank_towerPhys_inf_towerBigrade_two_le` — `dim (H_phys ⊓ V_2) ≤ dim (ddfSpan ⊓ V_2) + D`,
+  and `b26_two_of_finrank_towerNull` — hence `B26 2` follows from `dim (H_null ⊓ V_2) ≥ D`.
 
-## Where `D = 26` is (not)
+Null states:
 
-Nowhere in this file.  The identity `p_{D−1}(2) = p_{D−2}(2) + D` holds for every `D`; what
-`D = 26` buys is that the `D` extra dimensions are actually realised by *null* states, and
-that is `NoGhost/NullSeedsTwo.lean`'s `descTwo` (the `L_2 𝒟₂ φ = (D − 26) φ` equation).  So at
-`D ≠ 26` one has only `D − 1` null states at level two and `B26 2` fails by exactly one — see
-the note in `formal/TODO.md`.
+* `alphaTwoCoeff` and `coeff_single_two_*` — the `α^ν_{-2}` component of a level-two state;
+  products of two `α_{-1}`'s have none.
+* `typeOneTwo`, `typeOneTwo_mem_towerNullSubmodule` — **Type 1** of blueprint §B″.2.1 made
+  concrete on the slice: `L_{-1}((e·α_{-1})|0;p_{-2}⟩)` for `e · p_{-2} = 0`.
+* `nullFamilyTwo`, `linearIndependent_nullFamilyTwo` — the `D` null states
+  (`D - 2` transverse Type-1, one Type-1 along `a = b - b̃`, one Type-2) and their
+  independence.  **Independence does not use `D = 26`.**
+* `le_finrank_towerNullSubmodule_inf_towerBigrade_two` — `dim (H_null ⊓ V_2) ≥ D` at `D = 26`.
+* **`b26_two_of_D26`** and **`ddfSpans_bigrade_neg_two_two`** — the two headline results.
+
+By-products:
+
+* `descTwo_single_neg_two_ne_zero` — `𝒟₂|0;p_{-2}⟩ ≠ 0`, which blueprint §B″'s correction note
+  lists as open and explicitly out of reach of the Gram criterion.
+* `descTwo_single_mem_towerPhysSubmodule_iff` — that state is physical **iff** `(D : K) = 26`.
+
+## Where `D = 26` enters
+
+Only through `nullFamilyTwo_mem_towerNullSubmodule`'s `none` branch, i.e. through
+`NullSeedsTwo.descTwo_single_mem_towerNullSubmodule`, i.e. through
+`NullSeedsTwo.towerLop_two_apply_descTwo` — the single equation `L_2 𝒟₂ φ = (D − 26) φ` that
+blueprint §B″.8 predicted would be the unique consumer.  The counting identity
+`p_{D−1}(2) = p_{D−2}(2) + D` holds for every `D`, and so does the linear independence of the
+`D` candidate states; what fails at `D ≠ 26` is that the Type-2 candidate is not physical
+(`descTwo_single_mem_towerPhysSubmodule_iff`), leaving `D - 1` null states — one short.
+
+A *proof* of `¬ B26 2` at `D ≠ 26` is **not** given: it would need the two counting bounds as
+equalities plus an upper bound on `dim (H_null ⊓ V_2)`.  See `formal/TODO.md`, `noghost-pr5`.
 
 ## Conventions
 
-`Osc D = Fin D × ℕ+`; `Fock.level D = Finsupp.weight (oscLevel D)` and
-`DDFGram.ddfLevel` are the same function up to `mul_comm`, which is `ddfLevel_eq_oscWeight`
-below.  `conjIdx D hD = ⟨1, _⟩` is the `b̃` row of the light-cone direction table.
+Mostly-plus metric with `η μ * η μ = 1`, `b·b = 0`, `b·a = 1`; intercept `a₀ = 1`, which on the
+antidiagonal is forced by `η(a,a) = 2` (`DDFLightConeFrame.dotVec_self_eq_two`).
+`Osc D = Fin D × ℕ+`; `Fock.level D = Finsupp.weight (oscLevel D)` and `ddfLevel` are the same
+function up to `mul_comm` (`ddfLevel_eq_oscWeight`).  `conjIdx D hD = ⟨1, _⟩` is the `b̃` row of
+the light-cone direction table.  The ordered-field hypotheses enter only through `SliceRank`.
 
 ## Status
 
-See the module docstring of the sections below for what is and is not proved.
+Complete, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only.
 -/
 
 namespace StringFormal.NoGhost
