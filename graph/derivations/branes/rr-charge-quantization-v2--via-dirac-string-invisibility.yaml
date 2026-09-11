@@ -13,6 +13,32 @@ sources:
   - ref: polchinski-1998-v2
     loc: "§13.3「Dirac quantization condition」, pp. 147–149：(13.3.8)–(13.3.11)（四维复习）→ 推广到 p 膜与 (6−p) 膜 → (13.3.12) → (13.3.13)；fig. 13.3"
     note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E19（L1）。
+  - ref: polchinski-1995-dbranes
+    loc: "p.5（arXiv **v3** 页码；式号按 v3 写死）：**(12)** `S = (α_p/2)∫F*_{p+2}F_{p+2} + iμ_p∫_branes A_{p+1}`，其后逐字「For later convenience we have not chosen a normalization for `A_{p+1}`, so two constants `α_p` and `μ_p` appear.」；**(13)** `μ_p²/α_p = 2π(4π²α')^{3−p}`；**(14)** 前逐字「Integrate the field strength `*F_{p+2}` on an `(8−p)`-sphere surrounding a `p`-brane; **from the action (12) one finds total flux `Φ = μ_p/α_p`.**」；**(15)** `μ_pμ_{6−p}/α_p = 2πn`，其前逐字「In order that the Dirac string be invisible to a `(6−p)`-brane, we need `μ_{6−p}Φ = 2πn` for integer `n`.」；其后逐字「The charges (13) of the D-branes satisfy this with **minimum quantum `n = 1`**.」；脚注 7 逐字「It follows from `F_{p+2} = *F_{8−p}` that `α_p = α_{6−p}`.」"
+    note: |
+      L1（arXiv v3 页图 pp.4–8，抽取记录 literature/extractions/polchinski-1998-v2-ch13.md **§6.4**）。
+      ★★ **本条是本推导两处「重建」的书外独立证据**，2026-09-11 由转引改为直接 source
+      （`polchinski-1995-dbranes` 已在 literature/sources.bib 登记）。
+      **(a) 论证骨架逐字同型**：1995 论文的 Dirac 条件推法与本推导 summary (2) 完全一致——
+      先算围绕 p 膜的 (8−p)-球面通量 Φ = μ_p/α_p（(14)），再要求 Dirac 弦对 (6−p) 膜不可见
+      μ_{6−p}Φ = 2πn（(15)）。⇒ 本推导 summary (2) 里「Dp 膜世界体绕高维 Dirac 弦的相位」那一步
+      虽未从书页抄出，但其**论证形式**在这里有一手依据（gaps 第一条的缺口因此收窄，
+      但不消失：书上那两行的字面写法仍未核）。
+      **(b) 因子方向的独立判定**：取书的归一化 α_p = 1/(2κ₁₀²)，
+        · 代入 (13) 得 μ_p² = (π/κ₁₀²)(4π²α')^{3−p} = 书 (13.3.7) 逐字相同 ✓
+        · 代入 (15) 得 μ_pμ_{6−p} = πn/κ₁₀² = 书 (13.3.13) 逐字相同 ✓
+      故 1995 论文的 Φ = μ_p/α_p = **2κ₁₀²μ_p**，即**通量 = 荷乘 2κ₁₀²**（乘，不是除），
+      搬到书的记号即 ∫_{S_{p+2}}F_{p+2} = 2κ₁₀²μ_{6−p}——与本推导 summary (2) 写的形式一致，
+      与书 (13.3.12) 印的 μ_{6−p}/2κ₁₀² **相反**。⇒ 「(13.3.12) 是分数线倒置的排印错误」这一判定
+      现在有**两条互相独立的证据**：书内自洽性（(13.3.5)+(13.3.11)+(13.3.13)）与本条（书外）。
+      **(c) n = 1**：1995 论文逐字说 D 膜的荷「satisfy this with minimum quantum n = 1」；
+      目标卡片 v2 断言的 (13.3.13) 只写 μ_pμ_{6−p} = πn/κ₁₀²，**不**断言 n = 1，本条也不用来加强它。
+      ⚠ **引用本文的荷归一化时必须带上作者自承的未解矛盾**（p.6 逐字）：
+      「This is twice the value found in ref. [13] … **We have not succeeded in reconciling these
+      calculations**, but strongly expect that the RR charge is that required by string duality.」
+      ⇒ 本条来源自身的强度上限是 physical-argument，不抬高本推导的 status。
+      ⚠ 读的是 **arXiv v3**（PDF 内嵌链接自陈 hep-th/9510017v3）；期刊发表版（PRL 75, 4724–4727）
+      未核对，页码与 DOI 是 L2。pp.1–3 与 pp.9–11 未读。
 summary: |
   (1) 四维复习：磁荷 μ_m 由 ∫_{S_2}F_2 = μ_m 定义；电荷 μ_e 的粒子沿闭路 P 获得相位
       exp(iμ_e∮_P A_1) = exp(iμ_e∫_D F_2)，D 是以 P 为边界的曲面；把 P 收缩到 Dirac 弦附近，
@@ -30,8 +56,8 @@ summary: |
       α_p = 1/(2κ₁₀²)；抽取记录 -ch13.md §6.4）。目标卡片 v2 按 lead 裁决**不引 (13.3.12)**，
       本推导在 (2) 里写出的磁通式是本图按 (13.3.5)+(13.3.11)+(13.3.13) 自洽性重建的中间步骤。
 gaps:
-  - "**(13.3.12) → (13.3.13) 的中间步骤未从原书抄出**：抽取记录 #E19 只记结果；summary 第 (2) 步的相位写法是 curator 对四维论证的类推，须由人复核印刷页 148–149。"
-  - "**(13.3.12) 在原书误印，本推导的磁通式是重建的**：印刷 p. 148 印作 μ_{6−p}/2κ₁₀²（researcher 2026-09-11 核页图，转录无误）；本推导 (2) 写的 2κ₁₀²μ_{6−p} 由书内自洽性（(13.3.5)+(13.3.11)+(13.3.13)）与 hep-th/9510017 (12)–(15) 两条独立证据确定，**不是**书页上的字面读数。目标卡片因此不引 (13.3.12)。⚠ hep-th/9510017 尚未登记进 sources.bib，本推导只经抽取记录 §6.4 转引。"
+  - "**(13.3.12) → (13.3.13) 的中间步骤未从原书抄出**：抽取记录 #E19 只记结果；summary 第 (2) 步的相位写法是 curator 对四维论证的类推，须由人复核印刷页 148–149。〔2026-09-11 收窄〕同一论证在 polchinski-1995-dbranes p.5 (14)(15) 有逐字一手依据（先算通量 Φ = μ_p/α_p，再要求 μ_{6−p}Φ = 2πn），故**论证形式**不再是纯类推；但书页 148–149 那两行的**字面写法**仍未核，本条缺口不关闭。"
+  - "**(13.3.12) 在原书误印，本推导的磁通式是重建的**：印刷 p. 148 印作 μ_{6−p}/2κ₁₀²（researcher 2026-09-11 核页图，转录无误）；本推导 (2) 写的 2κ₁₀²μ_{6−p} 由书内自洽性（(13.3.5)+(13.3.11)+(13.3.13)）与 hep-th/9510017 (12)–(15) 两条独立证据确定，**不是**书页上的字面读数。目标卡片因此不引 (13.3.12)。〔2026-09-11 更新〕hep-th/9510017 已登记为 `polchinski-1995-dbranes` 并加为本推导的**直接 source**（loc: p.5 的 (12)–(15)，含逐字 'from the action (12) one finds total flux Φ = μ_p/α_p'），不再是转引；该条的换算校验 A/B 见那条 source 的 note。"
   - "**(13.3.5) 的动能项归一化 ⇒ ∫∗F = 2κ₁₀²μ 这一步原书不写**：本推导按标准场论记账补出（(13.3.6) 的传播子 2κ₁₀²i/k² 与之同源），图上无十维超引力场方程节点。"
   - "**Dirac 弦不可观测**这一原理在图上无节点（math/ 区无 Dirac 量子化条件的卡）；本推导按原书骨架记录。"
   - "**Poincaré 对偶与 (p+2)-球面环绕 (6−p)-膜**的拓扑论证原书只以 fig. 13.3 与一句话给出。"
