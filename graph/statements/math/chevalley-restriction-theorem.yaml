@@ -26,7 +26,7 @@ statement: |
 uses_conventions: []
 sources:
   - ref: humphreys-1972
-    loc: "§23「Invariant polynomial functions」（**只到小节级；不得写 §23.1、Theorem 23.x**）"
+    loc: "§23（Harish-Chandra 定理：Z(U(𝔤)) 是多项式代数；限制定理本身在该章作为工具，页级 L4）——**只到小节级；不得写 §23.1、Theorem 23.x，不得写小节标题**"
     note: |
       **本项目对该小节的内容零核实（L0）。** 证据只有两条，都不足以支撑编号：
       (i) **L1 的交叉引用**：humphreys-1990-reflection 书上 p.56（§3.5 末的 Remark）逐字
@@ -40,6 +40,14 @@ sources:
           "Invariant polynomial functions" → Page 126，与「§23 起于 p.126 附近」相容。
       ⇒ 抽取记录 literature/extractions/math-sources.md §44.4 明写这是「本轮最弱的一环」，
       并留为未解决问题 **Q39**（找一篇逐字引 [Hum, §23.1] 的文献，或另取来源）。
+      **★ 2026-09-11 订正 loc（curator-small-backlog-4，依 math-sources.md §50.3）**：此处原写
+      「§23『Invariant polynomial functions』」，把 §23 与 Chevalley 限制定理画了等号——
+      **在本项目全部证据下不成立**。L1 能支撑的只有「GTM 9 §23 里有一条 Harish-Chandra 的定理，
+      内容是 Z(U(𝔤)) 是多项式代数」（Humphreys 本人 Reflection Groups p.56 Remark）；该 Remark 措辞
+      「allows one to derive **from** Chevalley's Theorem」表明限制定理是**输入**、Z(U(𝔤)) 的描述是**输出**，
+      两者是不同的定理。「Invariant polynomial functions」→ p.126 与「Harish-Chandra」→ p.135 都只是
+      Google Books 单页命中（L4），相差 9 页、不能确定同属 §23（Q50.2），故**小节标题与页范围都不写**。
+      Chevalley 限制定理本身落在 GTM 9 哪一节仍是 L0（Q50.1）。
   - ref: humphreys-1990-reflection
     loc: "§3.5 末的 Remark，书上 p. 56"
     note: |
@@ -59,7 +67,14 @@ notes: |
 
   【status 与升级路径】本卡内容是标准不变量理论的教科书定理（数学上无疑问），但本项目
   **对唯一的来源小节内容零核实**，按「不确定选低一级」标 physical-argument，
-  直至 researcher 结清 Q39（拿到带编号的一手定位，或另取 L1 来源）。
+  直至 researcher 结清 Q39 / Q50.1（拿到带编号的一手定位，或另取 L1 来源）。
+
+  【形式化状态（2026-09-11，math-sources.md §50.4）】**Mathlib 没有 Chevalley 限制定理，也没有
+  Harish-Chandra 同态**：`Mathlib/Algebra/Lie/` 顶层 40 个文件 + 5 个子目录里没有任何以 Chevalley 限制、
+  Harish-Chandra 或 Z(U(𝔤)) 命名的文件（`Character.lean` 是一维表示，`UniversalEnveloping.lean` 只是
+  U(𝔤) 的构造）；等级 L2（目录级）。对比：**根空间分解 Mathlib 有**（`Algebra/Lie/Weights/Cartan.lean`
+  的 `cartan_sup_iSup_rootSpace_eq_top`，签名未读）。⇒ 本卡既无可引编号、也无形式化，
+  是 E₈ 迹恒等式一支里两样都缺的唯一一环；**建议按下段的 §44.7 路线绕开本卡**。
 
   【本图其实可以绕开本卡】按 literature/extractions/math-sources.md §44.7–§44.8，
   若把 math.e8-adjoint-trace-identities 的陈述限定为「对 Cartan 元 F = diag(x)」，

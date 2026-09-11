@@ -19,7 +19,7 @@ statement: |
   - **不**处理非紧曲面。
 sources:
   - ref: gallier-xu-2013
-    loc: "Ch. 6, Theorem 6.2, p. 97（三角化版：Theorem 6.1, p. 96）"
+    loc: "Ch. 6, Theorem 6.2, p. 97（arXiv 版 5.3.2；三角化版：Theorem 6.1, p. 96，arXiv 版 5.3.1；其组合核心 Lemma 6.1, pp. 92–95，arXiv 版 5.2.5；Proposition 6.1, p. 86，arXiv 版 5.2.2）"
     note: |
       L1 逐页核实，抽取记录 literature/extractions/math-sources.md §39.2.1（原文逐字：
       "Two compact surfaces or compact surfaces with boundary are homeomorphic iff they agree
@@ -30,6 +30,16 @@ sources:
           "far from trivial" 且放在 **Appendix E**（Thomassen 的证明），正文不证——见推导 gaps；
       (c) **版本陷阱**：出版版编号 6.2 与 arXiv 单作者版（gallier-2008-surfaces）的 5.3.2
           **不可互换**。
+      **2026-09-11 补（math-sources.md §49，L1 页图；PDF 页 = 书页 + 10）**：
+      (d) **Theorem 6.2 在书内无独立证明**——p. 97 逐字「For the record, we state the following theorem
+          putting all the pieces of the puzzle together」；其内容 = Theorem 6.1（p. 96，有证明）+
+          Appendix E 的可三角化性。
+      (e) Theorem 6.1 的证明（p. 96 逐字，完整）自己点名的依赖：**Lemma 6.1**（pp. 92–95，每个胞腔复形
+          等价于某个规范胞腔复形，六个 Step，步骤照 Ahlfors–Sario [1]）+ **Theorem 5.2**（同伦不变的
+          Euler 数）+「equivalence preserves orientability, the number of contours, and χ」（pp. 88/90 无编号段落）。
+      (f) **Proposition 6.2（p. 88）是隐含桥**：「orientability of the surface K_g as given by Definition 4.6
+          is equivalent to orientability of K as given by Definition 6.4」，无独立证明（回指 Prop 5.8）；
+          Theorem 6.1 的 "character of orientability" 从胞腔复形语言过到曲面语言靠它。arXiv 版编号 L0。
   - ref: massey-1967
     loc: "Ch. I §10「The classification of compact, connected 2-manifolds with boundary」, pp. 37–42；闭曲面版是 Theorem 5.1（§7 标题「Proof of Theorem 5.1」）"
     note: |

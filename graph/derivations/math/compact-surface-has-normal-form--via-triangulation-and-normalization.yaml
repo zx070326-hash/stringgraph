@@ -5,12 +5,15 @@ status: rigorous
 depends_on: []
 sources:
   - ref: gallier-xu-2013
-    loc: "Ch. 6：p. 96（Theorem 6.1 → 6.2 之间作者自陈「every surface and every surface with boundary can be triangulated … the proof is far from trivial … in Appendix E」，L1 逐字）；Appendix E（Thomassen 的 Radó 定理证明）；Proposition 6.1（胞腔复形可细分为三角化 2-复形）；Lemma 6.1（每个胞腔复形等价于某个规范胞腔复形）；Definition 6.5, pp. 88–89（规范形与参数范围，L1 逐字）"
+    loc: "Ch. 6：p. 96（Theorem 6.1 → 6.2 之间作者自陈「every surface and every surface with boundary can be triangulated … the proof is far from trivial … in Appendix E」，L1 逐字）；Appendix E（Thomassen 的 Radó 定理证明）；Proposition 6.1, p. 86（胞腔复形可细分为三角化 2-复形；arXiv 版 5.2.2）；Proposition 6.2, p. 88（胞腔复形可定向 ↔ 曲面可定向，隐含桥）；Lemma 6.1, pp. 92–95（每个胞腔复形等价于某个规范胞腔复形；arXiv 版 5.2.5）；Definition 6.5, pp. 88–89（规范形与参数范围）——以上除 Appendix E 外均 L1 逐字"
     note: |
       抽取记录 literature/extractions/math-sources.md §39.2.0（编号交叉表，L1）、§39.2.1（p.96 逐字）、
-      §39.2.2（Definition 6.5 逐字）。
-      ⚠ Lemma 6.1 / Proposition 6.1 **只核到编号与一行内容概述**，逐字文本与页码本图未取，
-      故本推导的 summary 对这两步只作功能性描述，不引原文措辞。见 gaps 第二条。
+      §39.2.2（Definition 6.5 逐字）、**§49（2026-09-11：Prop 6.1 / Prop 6.2 / Lemma 6.1 / Thm 6.1 逐字与页码，
+      L1 页图，PDF 页 = 书页 + 10）**。
+      ⚠ **两处证明外包给 Ahlfors–Sario [1]（L1 逐字）**：Proposition 6.1 的证明「assuming that vertices are
+      primitive objects」，把顶点系统替换为边序列的手续「is given in Ahlfors and Sario [1]」；
+      Lemma 6.1 的证明「We use the same steps as in the proof given in Ahlfors and Sario [1]」（六个 Step
+      在书内写出，pp. 92–95）。见 gaps 第二条。
   - ref: massey-1967
     loc: "Ch. I §5/§7（闭曲面版的规范形化归, pp. 10–29）、§10（带边版, pp. 37–42）——**仅目录 L1，正文未获取**"
     note: |
@@ -21,9 +24,13 @@ summary: |
 
   (1) **三角化存在性（Radó）**：每个紧曲面 / 紧带边曲面可三角化。原书 p.96 逐字承认
       「the proof is far from trivial」并把 Thomassen 的证明放在 **Appendix E**（正文不证）。
-  (2) **三角化 ⇒ 胞腔复形**：三角化的 2-复形本身就是胞腔复形；反向的细分由 **Proposition 6.1**
-      给出（每个胞腔复形可细分为三角化 2-复形），使「胞腔复形」与「三角化曲面」这两套语言等价。
-  (3) **化归到规范形（Lemma 6.1）**：每个胞腔复形经有限次剪切—粘合（cut-and-paste）等价于
+  (2) **三角化 ⇒ 胞腔复形**：三角化的 2-复形本身就是胞腔复形；反向的细分由 **Proposition 6.1**（p. 86）
+      给出（逐字「Every cell complex, K, can be refined to a triangulated 2-complex.」），
+      使「胞腔复形」与「三角化曲面」这两套语言等价。**Proposition 6.2**（p. 88）保证两套语言下的
+      可定向性一致（Def 6.4 ↔ Def 4.6；无独立证明，回指 Prop 5.8），这是 type (I)/(II) ↔
+      可定向/不可定向 这一对应的隐含桥。
+  (3) **化归到规范形（Lemma 6.1，p. 92，逐字「Every cell complex, K, is equivalent to some canonical
+      cell complex.」）**：每个胞腔复形经有限次剪切—粘合（cut-and-paste）等价于
       **Definition 6.5** 的某个规范胞腔复形，即 type (I) `a₁b₁a₁⁻¹b₁⁻¹ ⋯ c₁h₁c₁⁻¹ ⋯`（p ≥ 0, q ≥ 0）
       或 type (II) `a₁a₁ ⋯ c₁h₁c₁⁻¹ ⋯`（p ≥ 1, q ≥ 0），且序列 c_i h_i c_i⁻¹ 恰给出 q 个 contour。
 
@@ -42,16 +49,19 @@ gaps:
     ⚠ 与 math.classification-of-compact-surfaces--via-normal-forms 的同名 gap 是**同一件事**
     （同一本书的同一个附录），不是两处独立缺口。
   - |
-    **Lemma 6.1 与 Proposition 6.1 只核到编号 + 一行内容**：本图对这两条**没有逐字文本、没有页码**
-    （只有 math-sources.md §39.2.0 编号交叉表的一行内容概述，L1 读图）。
-    ⇒ 本推导 summary 第 (2)(3) 步的措辞是功能性描述，**不得**被当作原文引用；
-    若下游要引其原文，须先补取那两页的页图。
+    **Proposition 6.1 的证明在书内不完整、Lemma 6.1 的证明步骤照抄 Ahlfors–Sario**（2026-09-11 依
+    math-sources.md §49 改写；原 gap「只核到编号无逐字」已关闭）：Prop 6.1（p. 86）明说在「vertices are
+    primitive objects」的化简下证明，去掉该化简的手续逐字外包「It is given in Ahlfors and Sario [1]」；
+    Lemma 6.1（pp. 92–95）六个 Step 写在书内但逐字自陈「the same steps as in … Ahlfors and Sario [1]」。
+    ⇒ 本推导的 rigorous 定级仍成立（出版专著 + 完整证明链，外包对象是另一本出版专著），
+    但「证明链在本书内闭合」这一句只对 Lemma 6.1 成立，对 Prop 6.1 不成立；Ahlfors–Sario 本项目未登记、未读。
   - |
     **连通性未在来源侧核实**：Gallier–Xu 第 1 章对 "surface" 的定义（是否已含连通）本图未取到。
     本卡把连通性写成显式前提，故这条缺口不影响陈述的真伪，只影响「来源是否已经这么设」。
   - |
-    **cut-and-paste 化归的有限性**：Lemma 6.1 的证明要论证剪切—粘合过程终止（对边数作归纳）。
-    本图未读该证明，只依赖来源的完整性声明。
+    **cut-and-paste 化归的有限性**：Lemma 6.1 的证明分六个 Step（消 aa⁻¹、顶点归约、化为单面并引入
+    cross-cap、引入 handle、handle 化为 cross-cap（伪重写规则 aaXY ≃ bYbX⁻¹）、环分组），书 pp. 92–95
+    已 L1 读到 Step 标题与关键伪重写规则（§49.3），但每个 Step 的终止性论证本图未逐字核。
   - |
     **第二来源 Massey 正文未获取**，带边情形的定理编号是 L0，图里只能写章节页码。
 notes: |
@@ -67,5 +77,10 @@ notes: |
   math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration 的「穷尽性」
   有一条明确的、只断言它需要的那件事的边（此前是悬空依赖）。
   **这不是重复计数**：两条推导的目标卡不同，且都指向同一份已发表证明。
+
+  **2026-09-11 补（curator-small-backlog-4，依 math-sources.md §49）**：页码与逐字已补齐
+  （Prop 6.1 = p. 86、Prop 6.2 = p. 88、Lemma 6.1 = pp. 92–95、Thm 6.1 = p. 96；arXiv:0805.0562 v1
+  对应 5.2.2 / （无记录）/ 5.2.5 / 5.3.1）。Theorem 6.2（p. 97）在书内无独立证明（「For the record, we state」），
+  依赖 Appendix E 的可三角化性——本推导不经 Thm 6.2，只经 Lemma 6.1 + Prop 6.1 + Appendix E。
 author: curator-batch10-14-fix
 created: "2026-09-11"

@@ -47,9 +47,10 @@ gaps:
     在依赖上标 inferred，且本推导的状态不高于它所组合的两个输入。
   - |
     **上游 worldsheet.riemann-roch-kappa-minus-mu-v2 只到 physical-argument**
-    （原书用鬼数反常导出，比例常数用球面标定），故本条不可能更高。
+    （原书用鬼数反常导出，常数由 λ = 2 代入反常系数算出；2026-09-11 订正：此处原写「比例常数用球面标定」，
+    依 E82 复核撤销），故本条不可能更高。
     ⚠ **2026-09-11 更新**：v2 另有一条数学路线 `--via-riemann-roch`（Riemann–Roch，
-    常数是算出来的、不靠标定），但它要跨两座「物理量 ↔ 上同调维数」的桥
+    常数由指标计算算出、不经反常系数），但它要跨两座「物理量 ↔ 上同调维数」的桥
     （worldsheet.ckv-holomorphic-in-conformal-gauge、
     worldsheet.moduli-holomorphic-quadratic-differentials），两座桥当前都只到
     physical-argument，故 v2 的有效状态仍是 physical-argument，本条的天花板未变。

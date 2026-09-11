@@ -4,11 +4,15 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.ghost-number-current-weyl-anomaly
-    note: 提供 ∇_a j^a = ((1−2λ)/4)R，λ = 2 时为 −(3/4)R。
+    note: |
+      提供 (5.3.19) ∇_a j^a = ((1−2λ)/4)R，λ = 2 时为 −(3/4)R。
+      ★ **该系数是承重的**（2026-09-11 订正）：结论里的常数 3 就是把 λ = 2 代进
+      (5.3.20) 的 (2λ−1)/2 得到的 3/2 再乘以全纯/反全纯两部门，**不是**用球面标定出来的。
+      故上游对该系数的全部保留（习题 3.6 的勘误依赖、归一化未核）**原样传到本卡的结论系数上**。
   - id: worldsheet.genus-g-ghost-path-integral
     note: |
       提供「(5.3.9) 里 b 插入有 μ 个、c 插入有 κ 个」——鬼数流计的是 c 数减 b 数，
-      故路径积分的鬼数是 κ − μ。这是本推导的另一半输入。
+      故路径积分的鬼数是 κ − μ。这是 (5.3.21) 左端 ½(κ − μ) 的来源（½ 见 summary）。
   - id: worldsheet.string-s-matrix
     note: 鬼数不守恒的记账是在这个公式的插入上做的。
   - id: worldsheet.worldsheet-euler-number
@@ -17,110 +21,114 @@ depends_on:
       （conv.worldsheet-lorentzian），本推导在欧氏世界面（conv.worldsheet-euclidean）。
       按 conv.worldsheet-euclidean 的 Wick 旋转字典 (a)：(−γ)^{1/2} ↔ g^{1/2}，
       故 χ = (1/4π)∫d²σ g^{1/2}R + 边界项。继承该约定登记的缺口。
-    note: 提供 χ = (1/4π)∫ g^{1/2} R，把 ∫√g ∇_a j^a 换算成 χ。
+    note: 提供 χ = (1/4π)∫ g^{1/2} R，把 (5.3.20) 的 ∫√g ∇_a j^a 换算成 χ。
   - id: worldsheet.conformal-killing-equation
     note: κ 的定义。
   - id: worldsheet.moduli-condition-traceless-transverse
     note: μ 的定义。
-  - id: worldsheet.sphere-conformal-killing-group
-    inferred: true
-    note: |
-      **比例常数的标定输入**（2026-09-11 补边，ch.5/ch.6 两支合入 main 后）：
-      提供 κ(S₂) = 6（(6.1.5a)/(6.1.5b) 的两片正则性直接构造）。本推导只导出 κ − μ ∝ χ，
-      系数 3 全靠球面这一个例子定出，而球面的 κ = 6 就出自该节点。
-      **★ 2026-09-11 改标 inferred（reviewer-batch10 E）**：此前这条边写「不标 inferred：
-      来源在原地就用球面标定」，但**那个『原地』的证据来自伴读笔记 [S]**（§6.67 逐字
-      「zero moduli and six conformal Killing vectors … 3χ = κ − μ = 6 − 0 = 6」，
-      以及 [S] §5.22–§5.23 对 §5.3 标定步骤的转述），**不是原书 p.159 的页图**：
-      抽取记录 E82 的位置行虽记 (5.3.20)/(5.3.21) 已核实，但其备注与「留给下一轮」表
-      （§12.10 D 表第 6 项「§5.3（pp.154–159）逐字」）都表明**原书 p.159 的页图本项目尚未读**，
-      「原书在标定处是否就地引用 §6.1 的 κ(S₂) = 6」因此**无一手证据**。
-      ⇒ 按项目原则 5（找不到就标 inferred + note），改标 inferred。
-      **撤销条件**：读到原书 p.159 页图并确认 (5.3.20)/(5.3.21) 附近就地使用球面的 (κ, μ) = (6, 0)。
-      ⚠ **该卡片明确声明不断言 μ(S₂) = 0**，故标定所需的另一半（μ(S₂) = 0）**不由本条边承载**，
-      见 gaps 第一条的残余部分。
   - id: worldsheet.bc-ghost-number-anomaly-sphere
     inferred: true
     note: |
-      **同一机制的 g = 0 特例，作为标定的独立佐证**（2026-09-11 补边）：该节点用同一条鬼流
-      非张量变换律 (2.5.17)|_{λ=2} 在球面两片上算围道积分之差，得每个手征部门 3、合计 6，
-      即 κ − μ = 6，与本推导用 (κ, μ) = (6, 0) 标定出的 3χ = 6 一致。
-      标 inferred：原书 §5.3 在标定处**不回指** §6.3，这条「特例 ⇒ 一般式的系数」的接法是本图补的。
-      ⚠ 该节点带**勘误依赖**（[S] 称印刷版 (6.3.6) 有误、官方勘误表本项目未取得），
-      故本条边只作佐证，标定的主承载仍是上一条边的 κ(S₂) = 6。
+      **只作独立佐证，不是本推导的输入**（2026-09-11 改写，依 researcher E82 复核
+      polchinski-1998-v1.md §16）：该节点用同一条鬼流非张量变换律 (2.5.17)|_{λ=2}
+      在球面两片上算围道积分之差，得每个手征部门 3、合计 6，即 κ − μ = 6 = 3·χ(S₂)。
+      **常数 3 在本推导里由 λ = 2 代入 (5.3.20) 得出，球面只是 (5.3.22)（n = 1，χ = 2）
+      的一个实例**，不承担任何标定功能。
+      标 inferred：原书 §5.3 在 pp.158–159 不回指 §6.3（两页零引用），这条「特例 ⇔ 一般式」
+      的对照是本图补的。⚠ 该节点带勘误依赖（[S] 称印刷版 (6.3.6) 有误、官方勘误表未取得），
+      作为佐证时不影响本推导自身的强度。
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.3, eq. (5.3.20)–(5.3.21), p.159（由鬼数反常导出 (5.2.9)）"
+    loc: "§5.3「The Riemann–Roch theorem」, eq. (5.3.19), p.158 与 eq. (5.3.20)–(5.3.22), p.159（由鬼数反常导出 (5.2.9)）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E82，L1（读到 schrans-2020
-      §5.22–§5.23，笔记 p.261–262；条目 [5.90] 逐字「…which leads to the Riemann-Roch
-      theorem (5.2.9)」）。
+      抽取记录 literature/extractions/polchinski-1998-v1.md §16「E82 复核」（researcher 第十轮），
+      **L1：印刷 pp.158–159 原书页图逐字**（Cambridge Core ch.5 单章 PDF，PDF 页 = 印刷页 − 144）。
+      旧条目 §2 E82（经 schrans-2020 §5.22–§5.23 锚定，L3）的「用球面标定常数」说法**已被 §16 订正为不成立**，
+      见 notes。原书三步全部在这两页内：(5.3.19) 反常式（外包给 exercise 3.6）→ (5.3.20) 积分得
+      −iε(2λ−1)χ/2 → (5.3.21) 零模计数 ½(κ − μ) → 相等得 κ − μ = 3χ；(5.3.22) 给一般 n。
+      **pp.158–159 零引用、零球面、零 χ = 2、零 κ = 6**（§16.5 negative evidence）。
   - ref: polchinski-1998-v1
-    loc: "§6.1, eq. (6.1.5a)/(6.1.5b)（标定所用的 κ(S₂) = 6）；§6.3, eq. (6.3.6)（同一反常在 S₂ 上给出的 3）"
+    loc: "§6.3, eq. (6.3.6), p.176–177（同一反常在 S₂ 上给出的 3；只承载 depends_on 里的佐证边）"
     note: |
-      2026-09-11 补：本条只承载**比例常数标定这一步的两个输入**，不承载 §5.3 的反常计算本身。
-      抽取记录 #E89（κ(S₂) = 6，L1）与 #E96（S₂ 上必须三个 c 插入，L1，**带勘误依赖**）。
+      抽取记录 #E96（S₂ 上必须三个 c 插入，L1 经 schrans-2020，**带勘误依赖**）。
+      2026-09-11 起本条**不再承载「标定」**：原先并列的 §6.1 (6.1.5)（κ(S₂) = 6）已随
+      sphere-conformal-killing-group 边一起删除，因为原书的论证不经球面。
 summary: |
-  把鬼数反常当作**算子方程**，于是路径积分中的鬼数不守恒：
-    δ_{g#} ∫[dφ] e^{−S} ∝ ε ∫ d²σ ĝ^{1/2} ∇_a j^a = ε ∫ d²σ ĝ^{1/2} ((1−2λ)/4) R 。
-  代 λ = 2 与 χ = (1/4π)∫ d²σ ĝ^{1/2} R，右端 ∝ χ（比例常数在本路线不被算出）。
-  另一方面，(5.3.9) 中 b 插入有 μ 个、c 插入有 κ 个，鬼数流计的是 c 数减 b 数，
-  故同一个变分给出 iε(κ − μ) ∝ εχ。
-  **比例常数不是算出来的，而是用球面这一个例子标定的**：球面 χ = 2、μ = 0、κ = 6
-  给 6 = 3·2，于是常数定为 3，得 κ − μ = 3χ。
-  （伴读者明说环面 χ = 0 定不出常数，只有球面能用。）
+  原书 §5.3 末「The Riemann–Roch theorem」小节的三步（pp.158–159，L1 页图）：
+
+  (1) **(5.3.19)**：全纯 bc 系（不含 b̃, c̃）鬼流的守恒反常 ∇_a j^a = ((1−2λ)/4) R，
+      原文逐字「the current conservation anomaly **derived in exercise 3.6**」——系数外包给习题。
+
+  (2) **(5.3.20)**：Noether 定理把守恒流与不变性联系起来；对不守恒的流，「by the same argument」
+        δ([dφ]e^{−S}) / ([dφ]e^{−S}) = (iε/2π) ∫ d²σ g^{1/2} ∇_a j^a → −iε (2λ−1)/2 · χ ，
+      其中用了 χ = (1/4π)∫ g^{1/2} R。鬼数对称性 δb = −iεb、δc = iεc；路径积分非零时测度、作用量、
+      插入的变换必须相消，故「the number of c minus the number of b insertions is 3χ/2」——
+      **系数 3/2 = (2·2−1)/2 是把 λ = 2 代进反常系数算出来的**。
+
+  (3) **(5.3.21)**：同一差值由零模计数给出
+        ½(κ − μ) = ½(dim ker P₁ − dim ker P₁^T) ，
+      原文专门解释 ½：「The factor of ½ appears because we have taken the holomorphic theory only;
+      the antiholomorphic theory gives an equal contribution.」
+      令 (2) 与 (3) 相等：½(κ − μ) = 3χ/2 ⇒ **κ − μ = 3χ**，即 (5.2.9)。
+
+  原书随后给一般 bc 系的 **(5.3.22)** dim ker P_n − dim ker P_n^T = (2n+1)χ（「one finds in the same way」，
+  算子定义在 exercise 3.2）；本卡是其 n = 1（λ = 2）情形。
+
+  **整条论证不使用任何具体曲面**：没有球面、没有 χ = 2、没有 κ = 6，比例常数不是标定的。
 gaps:
   - |
-    **比例常数靠单个例子标定**。这是本推导最实质的弱点：论证只给出 κ − μ ∝ χ，
-    系数 3 由球面的 (χ, μ, κ) = (2, 0, 6) 定出。若球面的 κ = 6 有误，整条结论随之改变。
-    而**球面的 κ = 6、μ = 0 出自原书 §6.1 的 (6.1.5)**，属第 6 章。
-    **悬空的依赖边已于 2026-09-11 补上**（ch.5 与 ch.6 两支均已合入 main）：
-    κ(S₂) = 6 挂 worldsheet.sphere-conformal-killing-group，
-    同一反常在 S₂ 上的独立佐证挂 worldsheet.bc-ghost-number-anomaly-sphere（inferred）。
-    **残余（本 gap 未关闭的部分）**：标定还要用 **μ(S₂) = 0**，而
-    worldsheet.sphere-conformal-killing-group 的 statement **明确声明不断言 μ(S₂) = 0**，
-    本图目前**没有任何节点断言 μ(S₂) = 0**——最接近的
-    worldsheet.positive-euler-number-no-moduli（χ > 0 ⇒ μ = 0）在原书里是与 (5.2.9) 同处
-    §5.2 的对偶断言，拿它来标定 (5.2.9) 有**循环之嫌**，故本图**不建这条边**，
-    留给 auditor 裁决。在此之前，标定的 μ = 0 一半仍是断言。
+    **(a) 反常系数外包给 exercise 3.6**：(5.3.19) 的系数 (1−2λ)/4 在正文零推导（逐字 "derived in
+    exercise 3.6"），而 [S] 指出该习题在官方勘误表里有符号错、勘误表本项目未取得
+    （见 worldsheet.ghost-number-current-weyl-anomaly 的 source note）。
+    ⚠ 2026-09-11 起这条缺口**直接压在结论系数上**：常数 3 就是从这个系数算出来的。
   - |
-    **「反常是算子方程」这一步没有论证**：从配分函数的 Weyl 变分到「∇_a j^a 作为算子方程
-    可以插进任意关联函数」需要论证反常的局域性与与插入的对易性，来源里只有断言。
+    **(b) (5.3.20) 的「by the same argument」没有写出论证**：从 Noether 定理到「不守恒流的
+    散度积分给出测度的变分」这一步只有这五个字；把反常当作可插进任意关联函数的**算子方程**
+    需要论证反常的局域性与与插入的对易性，来源里只有断言。
   - |
-    **上游 worldsheet.ghost-number-current-weyl-anomaly 携带一处勘误依赖**（习题 3.6 的符号错，
-    勘误表本项目未取得）与 OPE 收敛缺口。
+    **(c) (5.3.22) 的一般 n 情形零推导**：原文只说「one finds in the same way」。本卡只用 n = 1，
+    故这条不压低本卡，但记录在案：若下游要 n ≠ 1 的情形，须自建推导。
   - |
-    **路径积分层面的形式操作**：δ_{g#} 作用在 ∫[dφ]e^{−S} 上、测度的鬼数变换等，
-    均无数学定义。
-  - |
-    **来源强度**：式号 (5.3.20)/(5.3.21)/(5.2.9) 只经 schrans-2020 核对
-    （(5.2.9) 是正文级引用，是本章最强的一条；对原书仍为 L3）。
+    **路径积分层面的形式操作**：δ_{g#} 作用在 ∫[dφ]e^{−S} 上、测度的鬼数变换等，均无数学定义。
 notes: |
   **本推导不是数学上的 Riemann–Roch 证明**，只是本书采用的物理路线。
-  升级路径：另起一条挂数学来源的推导（Riemann–Roch 或 P₁ 的椭圆指标定理），
-  那条可以到 rigorous，本条保留为「书内路线」的记账。
+  数学路线见姊妹推导 --via-riemann-roch（Riemann–Roch 或 P₁ 的椭圆指标定理），
+  本条保留为「书内路线」的记账。
+
+  **★ 2026-09-11 订正（curator-small-backlog-4，依 researcher polchinski-1998-v1.md §16「E82 复核」，
+  印刷 pp.158–159 页图 L1）**：
+  - **删边** worldsheet.sphere-conformal-killing-group（原 inferred，note 写「比例常数的标定输入」）：
+    原书 §5.3 的论证**不经球面**——pp.158–159 上没有 sphere、χ = 2、κ = 6、μ = 0 任一字样，
+    也没有任何「定常数」的动作；常数 3 是把 λ = 2 代进 (5.3.19)/(5.3.20) 的 (2λ−1)/2 算出的。
+    「用球面标定」是伴读笔记 [S] §5.22–§5.23/§6.67 的讲法，不是原书的讲法。
+    该边 2026-09-11 早些时候已因「原书 p.159 未读」改标 inferred，其撤销条件（读到页图并确认就地用球面）
+    现已核实为**不成立**，故整条边删除。
+  - **旧 gap「比例常数靠单个例子标定」与其残余「μ(S₂) = 0 无节点断言」一并撤销**：
+    标定不存在，就不需要 μ(S₂) = 0；留给 auditor 裁决的「positive-euler-number-no-moduli 循环之嫌」
+    问题随之消失（那张卡与本卡之间不再有任何边或标定关系）。
+  - summary 原文「比例常数不是算出来的，而是用球面这一个例子标定的」「伴读者明说环面 χ = 0 定不出常数」
+    已改写为原书三步；**(5.3.21) 左端的 ½ 此前在卡上丢失**（旧 summary 写 iε(κ − μ) ∝ εχ），已补回。
+  - physical-argument 的理由改为 gaps (a)(b)(c)。
+  - 姊妹卡 --via-riemann-roch、目标卡 v2 的 notes、worldsheet.ghost-number-current-weyl-anomaly 的 notes
+    里关于「球面标定」的散文已同步加订正注。
 
   另注：抽取记录 E82 给的「本条应拆成 statement + derivation」的建议已按此实现——
   陈述原在 worldsheet.riemann-roch-kappa-minus-mu，本文件曾是它的唯一推导。
 
-  **★ 改指记录（2026-09-11，curator-riemann-roch）**：目标已由
+  **改指记录（2026-09-11，curator-riemann-roch）**：目标已由
   `worldsheet.riemann-roch-kappa-minus-mu`（v1）改为
   `worldsheet.riemann-roch-kappa-minus-mu-v2`（限**可定向**），文件与 id 随之改名
   （校验器强制 derivation id 必须以 `<target>--via-` 开头，见 tools/stringgraph/validate.py）。
-  **推导内容一字未改。**
   - 换代理由见 v2 卡的 notes：v1 的 statement 写「可定向或不可定向」，而本图对不可定向情形
     没有来源（math-sources.md Q34）。
   - **本推导的覆盖面大于新目标**：Polchinski §5.3 的鬼数反常论证并未限定可定向，
-    收窄目标不会使本条失效，只是本条现在证的比 v2 断言的多。
+    收窄目标不会使本条失效，只是本条现在证的比 v2 断言的多。不可定向支见
+    worldsheet.riemann-roch-kappa-minus-mu-nonorientable--via-ghost-number-anomaly。
   - 图中另有若干卡片的 **notes/statement 散文**里还写着旧 id
     `worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly`
     （worldsheet.genus-g-ghost-path-integral、worldsheet.ghost-number-current-weyl-anomaly、
     ghost-number-current-weyl-anomaly--via-tj-ope、
     moduli-condition-traceless-transverse--via-orthogonal-complement）。
-    那些是散文引用、不是图边，**本轮不改**（statement 文本不可变，且改 notes 会与其他 agent 的
-    claim 冲突）；读到旧 id 请按本条对照。
-  - **本条的 gap 第 1 条（比例常数靠球面单例标定）在新增的
-    `--via-riemann-roch` 路线里根本不出现**，那条的常数 3 是算出来的。
-    两条推导并存、工具取高者，正是本项目「物理路线 + 数学路线」并列记账的用法。
+    那些是散文引用、不是图边；读到旧 id 请按本条对照。
 author: curator-polchinski-ch5
 created: "2026-09-11"

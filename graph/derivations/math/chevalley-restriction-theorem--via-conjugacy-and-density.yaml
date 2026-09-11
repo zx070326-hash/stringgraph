@@ -5,11 +5,14 @@ status: physical-argument
 depends_on: []
 sources:
   - ref: humphreys-1972
-    loc: "§23「Invariant polynomial functions」（章级定位；**内容 L0，编号禁写**）"
+    loc: "§23（Harish-Chandra 定理；限制定理本身在该章作为工具，页级 L4；**内容 L0，编号与小节标题禁写**）"
     note: |
       **本推导的名义主来源，本项目未取得印本。** 下面 summary 是 curator 按标准教材复述的论证骨架，
       **不是**从该书抽取的；该书里对应的 Theorem/Proposition 编号本轮零证据，一律不写。
       Q39（math-sources §44.4）结清前，本推导的核实等级是 L0。
+      2026-09-11 订正：loc 原写「§23『Invariant polynomial functions』」——§23 有 L1 背书的内容是
+      Harish-Chandra 关于 Z(U(𝔤)) 的定理（由限制定理推出，不是它本身），小节标题只是 Google Books
+      单页命中（L4），已按 math-sources.md §50.3 改写；与目标卡同步。
   - ref: humphreys-1990-reflection
     loc: "§3.5 末 Remark, p. 56（L1；只证明 GTM 9 §23 是「从 Chevalley 定理往李代数侧过桥」的那一节）"
     note: |

@@ -5,11 +5,18 @@ status: rigorous
 depends_on: []
 sources:
   - ref: gallier-xu-2013
-    loc: "Ch. 6：Theorem 6.2, p. 97（本条的陈述与证明）；Theorem 6.1, p. 96（三角化版）；Lemma 6.1（每个胞腔复形等价于某个规范胞腔复形）；Definition 6.5, pp. 88–89（规范形式）"
+    loc: "Ch. 6：Theorem 6.2, p. 97（本条的陈述；书内无独立证明，「For the record, we state」）；Theorem 6.1, p. 96（三角化版，证明完整）；Lemma 6.1, pp. 92–95（每个胞腔复形等价于某个规范胞腔复形；arXiv 版 5.2.5）；Proposition 6.1, p. 86（arXiv 版 5.2.2）；Proposition 6.2, p. 88（可定向性两定义等价，隐含桥）；Definition 6.5, pp. 88–89（规范形式）——均 L1 逐字"
     note: |
-      L1 逐页核实（math-sources.md §39.2.1）。证明路线：三角化 ⇒ 胞腔复形 ⇒ 化到
+      L1 逐页核实（math-sources.md §39.2.1；**页码与 Lemma 6.1 / Prop 6.1 / Prop 6.2 / Thm 6.1 逐字见 §49**，
+      2026-09-11，PDF 页 = 书页 + 10）。证明路线：三角化 ⇒ 胞腔复形 ⇒ 化到
       Definition 6.5 的规范形式（Lemma 6.1）⇒ 规范形式由 (可定向性, q, χ) 唯一确定
       ⇒ Theorem 6.1（三角化版）⇒ 配 Radó 的三角化存在性得 Theorem 6.2。
+      Theorem 6.1 的证明（p. 96，完整逐字）自己点名的输入：Lemma 6.1 + Theorem 5.2（同伦不变的 χ）+
+      「equivalence preserves orientability / number of contours / χ」（pp. 88/90 无编号段落）；
+      规范复形两两不等价是 p. 90 的**无编号**论证（"We claim that distinct canonical cell complexes … are inequivalent."）。
+      ⚠ Lemma 6.1 的证明六个 Step 写在书内但逐字「the same steps as in the proof given in Ahlfors and Sario [1]」；
+      Prop 6.1 的证明把顶点替换手续外包「It is given in Ahlfors and Sario [1]」（§49.1/§49.3）。
+      ⚠ Theorem 6.2 本身在书内**无独立证明**（p. 97 逐字「For the record, we state the following theorem」）。
   - ref: gallier-xu-2013
     loc: "Appendix E（Thomassen 的 Radó 定理证明）；p. 96 作者自陈「the proof is far from trivial」"
     note: |
@@ -29,10 +36,13 @@ summary: |
   (2) 每个（三角化的）胞腔复形经有限次剪切—粘合等价于 **Definition 6.5** 的
       **规范胞腔复形**：type (I) `a₁b₁a₁⁻¹b₁⁻¹ ⋯ a_p b_p a_p⁻¹ b_p⁻¹ c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹`
       （p ≥ 0, q ≥ 0，可定向）或 type (II) `a₁a₁ ⋯ a_p a_p c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹`
-      （p ≥ 1, q ≥ 0，不可定向）；序列 c_i h_i c_i⁻¹ 恰给出 q 个 contour（Lemma 6.1）；
-  (3) 规范形式由「type (I)/(II)」+ q + χ 唯一确定，两个规范复形同胚当且仅当这三项相同，
-      得三角化版 **Theorem 6.1**（p. 96）；
-  (4) 配 (1) 得紧曲面版 **Theorem 6.2**（p. 97），即本条陈述。
+      （p ≥ 1, q ≥ 0，不可定向）；序列 c_i h_i c_i⁻¹ 恰给出 q 个 contour（**Lemma 6.1**，p. 92，
+      逐字「Every cell complex, K, is equivalent to some canonical cell complex.」，证明 pp. 92–95 六个 Step）；
+      三角化 2-复形与胞腔复形两套语言的互换靠 **Proposition 6.1**（p. 86），可定向性的两种定义
+      （Def 4.6 曲面 / Def 6.4 胞腔复形）等价靠 **Proposition 6.2**（p. 88，无独立证明，回指 Prop 5.8）；
+  (3) 规范形式由「type (I)/(II)」+ q + χ 唯一确定（p. 90 无编号论证），两个规范复形同胚当且仅当这三项相同；
+      配 Theorem 5.2（同伦不变的 χ）与「等价保持可定向性、contour 数、χ」得三角化版 **Theorem 6.1**（p. 96，证明完整逐字）；
+  (4) 配 (1) 得紧曲面版 **Theorem 6.2**（p. 97），即本条陈述——书内对 6.2 本身不另证（「For the record, we state」）。
 
   **status = rigorous 的依据**（docs/STATUS_LEVELS.md 第 4 级）：来源是 Springer 出版的
   数学专著，给出完整证明，结论是代数拓扑的标准结果。所有已知缺口都在同一本书内闭合，
@@ -60,5 +70,11 @@ notes: |
   由 curator 于 2026-09-11 建立（math-sources.md §39.9(1)）。
   本推导无图内依赖（纯数学外部结果），validate 会给出「derivation has no dependencies」
   的 warning，与 math.pbw-theorem--via-humphreys 等同类节点一致，属预期行为。
+
+  **2026-09-11 补（curator-small-backlog-4，依 math-sources.md §49）**：页码与逐字已补齐
+  （Prop 6.1 = p. 86、Prop 6.2 = p. 88、Lemma 6.1 = pp. 92–95、Thm 6.1 = p. 96、Thm 6.2 = p. 97；
+  arXiv:0805.0562 v1 对应 5.2.2 / （无记录）/ 5.2.5 / 5.3.1 / 5.3.2）。
+  两处证明外包 Ahlfors–Sario [1]（Prop 6.1 的顶点替换手续；Lemma 6.1 的步骤来源）——该书本项目未登记、未读；
+  rigorous 定级仍走「出版专著 + 完整证明链」主判据，外包对象是另一本出版专著。
 author: curator-surface-class
 created: "2026-09-11"
