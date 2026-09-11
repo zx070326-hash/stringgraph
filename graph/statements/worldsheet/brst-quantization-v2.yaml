@@ -45,7 +45,7 @@ statement: |
   该定义只有在 Q_B^2 = 0 时才有意义；Q_B^2 = 0 的条件见 worldsheet.critical-dimension-brst
   （它以 c^g = -26 的形式出现，故那条推导须显式挂 worldsheet.bc-ghost-central-charge）。
 uses: [worldsheet.virasoro-algebra-v2]
-uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus]
+uses_conventions: [conv.virasoro-standard, conv.metric-mostly-plus, conv.ghost-normal-ordering-level]
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.5（bc CFT，约 eq. (2.5.11)–(2.5.12)：鬼场能动张量与一般 λ 的中心荷公式），p.51"
@@ -191,5 +191,19 @@ notes: |
       conv.intercept-sign-a，是常数符号约定不是算符排序约定）。
       conv. 卡草案见 docs/drafts/brst-normal-ordering-convention.md。
   在两者之一落地前，ms.critical-dimension-brst-nilpotency 的回译审计判 drift，不予 back-translated。
+  **【2026-09-12 physics-auditor：补声明 conv.ghost-normal-ordering-level；statement 正文一字未动】**
+  本卡的 `: :` 此前**没有定义**，而本卡的断言「L_n = L^m_n + L^g_n + a^g δ_{n,0} 在 (m³ − m) 形式下
+  中心荷为 c^m + c^g」与「a^g = −1」**只在能级序下成立**（若把 `: :` 读成 SL(2,C) 序，同一式子的
+  中心项会多出一个 m 线性项 +2m）。新建的 conv.ghost-normal-ordering-level
+  （family `ghost-normal-ordering`，canonical: true）把这套序的湮灭/产生清单写死，
+  并写明它与 a^g = −1 的**成对性**（能级序 ↔ a^g = −1，SL(2,C) 序 ↔ a^g = 0，给同一个 Q_B）。
+  本次只加 `uses_conventions` 的一项与本条 notes，**statement、id、uses、sources、status 全未动**，
+  故**不构成换代**。先例：swampland.heterotic-t6-substates-below-extremality 于 commit 5fdda19
+  以同样方式补声明 conv.amnv-2006-units（陈述文本未动、未换代）；graph/CLAUDE.md 的不可变性约束
+  落在 **statement 文本与 id** 上，不落在 uses_conventions。
+  来由：ms.critical-dimension-brst-nilpotency 回译审计 R1-3 + reviewer 复算
+  docs/reviews/brst-nilpotency-recompute-2026-09-12.md F2；lead 裁决见 docs/ROADMAP.md
+  「lead 裁决（2026-09-12，BRST 里程碑回译 R1 后）」第 (1) 条。
+  ⚠ 上面那条 curator 注记里「conventions 里**没有**对应 family」一句自本次起过期，保留作历史。
 author: curator
 created: "2026-09-11"
