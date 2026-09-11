@@ -154,6 +154,28 @@ sources:
       **随 p 变化时没有一致上界**（p·p → −∞ 时 1 − p·p/2 → +∞，而 p_{(24)}(n) 随 n 无界增长）。
 tags: [bosonic-string, brst, cohomology, dimension-formula, partition-function, semi-infinite-cohomology]
 notes: |
+  ★【2026-09-12 auditor 页图裁定：原刊 `ch_q T = q^{p·p/2}φ(q)^{D−2}` 漏了负号】
+  本卡 sources 里 Prop 2.6 的 loc（逐字引文）与其 note（「数值 24 在 Prop 2.6(ii) 里也出现」）
+  都写了 `φ(q)^{D−2}`。physics-auditor 于 2026-09-12 用 p.8445 页图 8× 放大复核后裁定
+  （`literature/extractions/page-check-rulings-2026-09-12.md` §2.3，摘要在
+  `brst-cohomology-sources.md` §9.12）：**`D` 前确无负号，这是原刊排印错误，
+  正确的是 `ch_q T = q^{p·p/2} φ(q)^{−(D−2)}`。** 三条彼此独立的内证：
+    (1) φ(q)^{D−2}（D ≥ 3）展开有负系数，不可能是分次向量空间的特征标；
+    (2) 由 [2.4] 直接算：不可约 Verma 模的 ℒ⁺-不变子空间是一维最高权向量，故
+        ch_q T = Σ_k p_{(D−2)}(k) q^{p·p/2+k} = q^{p·p/2} φ(q)^{−(D−2)}；
+    (3) **本卡自己就是第三条内证**：本卡断言的 dim H⁰ = p_{(24)}(1 − p·p/2)
+        按 (H5) 是 **φ(q)^{−24}** 的系数，而本卡推导算出的 Euler 特征标是
+        q^{−1}φ²(q)·q^{p·p/2}φ(q)^{−D} = q^{p·p/2−1}φ(q)^{−(D−2)}，D = 26 时正是 φ^{−24}。
+        ⇒ **两条路算出的 D − 2 = 24 只有在指数取 −(D−2) 时才一致。**
+  同页 `ch_q V(E,p) = q^{p·p/2}φ(q)^{−D}` 的负号清晰可见，故可排除「扫描丢字」。
+
+  **本卡的处理（lead 裁决 2026-09-12）：statement 与 sources.loc 的逐字引文都不改**
+  （逐字引文按引用纪律保留原刊形态），只在此登记裁定。
+  ⚠ **本卡的断言不受影响**：本卡的 24 从来不是从 Prop 2.6(ii) 抄来的，而是把 D = 26 代进
+  Eq. [2.3] 的 Euler 特征标算出来的（见上面 (3) 与 sources 里那条 note 的原文）。
+  裁定反而**加强**了本卡——它把「两处的 D − 2 相等」从巧合变成一致性检验。
+  ⚠ **下游纪律**：凡要把该特征标写进自己 statement 的新卡一律写 `φ(q)^{−(D−2)}`。
+
   ★★【本卡为什么新建（curator，2026-09-11）】
   worldsheet.bosonic-relative-cohomology-vanishing 的"本命题不断言 (a)"逐字写着：
   「不断言 H⁰ 的维数。… 是同一定理的 (ii)，与 (i) 同号不同条，本图未建卡
