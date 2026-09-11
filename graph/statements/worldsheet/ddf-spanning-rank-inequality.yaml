@@ -109,5 +109,33 @@ notes: |
   该卡 notes 的【分片版与拼装缺口】已记录「逐片 ⇒ 全体」的拼装引理（`Glue.lean`）已就位，
   故「本卡对一切 N 成立」与该卡的断言（对全塔成立）现在**逐字等价**（modulo `CharZero R`
   把片索引从 `(rung j, level N)` 压缩到反对角线 `j = −N` 这一步，`Glue.lean` 已处理）。
+
+  【2026-09-12 追记（curator，PR3/PR4 落地后）：本卡「dim H_N ≤ dim D_N + dim Z_N」的
+  上界一半——独立算出 dim H_N 的上界——现在是一条定理；本卡剩余的开放内容被精确压缩到
+  一处】新卡 **worldsheet.physical-slice-bounded-by-transverse-count**（formalized，
+  Lean `finrank_towerPhys_inf_towerBigrade_le`，蓝图 §B′.4 的 (P3)）证出
+
+      dim_K H_N  ≤  p_{D−1}(N) ，
+
+  对**任意** D（只需 hD : 2 ≤ D）、**不涉及 D = 26**。配合上面【D = 26 在哪里进入】一节
+  已经登记的、同样 formalized 的 dim D_N = p_{D−2}(N)
+  （worldsheet.transverse-ddf-fock-gram-matrix 一侧，`finrank_ddfSpan_inf_towerBigrade`），有
+
+      dim H_N  ≤  p_{D−1}(N)  =  dim D_N + (p_{D−1}(N) − p_{D−2}(N)) 。
+
+  故只要再有一条
+
+      dim Z_N  ≥  p_{D−1}(N) − p_{D−2}(N)
+
+  （**零态维数下界**，只在 D = 26 处期望成立，即上面【(B-26) 的三种等价写法】(iii) 的动手形式），
+  就立即推出本卡「dim H_N ≤ dim D_N + dim Z_N」。⇒ **本卡开放内容现在精确等于这一条零态维数
+  下界**，不再是「dim H_N 上界」与「dim Z_N 下界」两块都缺——上界那块已经关闭，
+  与 dim D_N 那块合起来构成 (B-26) 的全部 D-无关输入（与
+  formal/StringFormal/NoGhost/SpuriousElimination.lean 文件头 (7) 的措辞一致）。
+  ⚠ **本条不改变本卡的 effective 状态**：本卡依旧无推导（这是刻意的，见立卡理由）；
+  上面这条推理链需要把两张 formalized 卡与一条尚未证的下界拼接成一条新推导才能真正
+  「关闭」本卡，本次只在 notes 记账，不新建推导文件。N = 2 的义务（notes 上文已归约到单片
+  towerBigrade(−2,2)）现在同样只剩零态下界这一块：上界 dim H_2 ≤ p_{D−1}(2) 对 N=2
+  也已由新卡直接给出（新卡对一切 N 成立）。
 author: curator
 created: "2026-09-12"
