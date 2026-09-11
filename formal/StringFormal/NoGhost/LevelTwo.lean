@@ -46,6 +46,9 @@ and `conv.intercept-sign-a` (the intercept is `a₀`, Polchinski's `-A`).
 * `Fock.pairing_levelTwoScalar_physical` — **the closed form**
   `(4a₀ - 9)² ⟨ψ₂, ψ₂⟩ = 2 (D - 1) [16 a₀² + (2D - 74) a₀ + 84 - 3D]`; the bracket has
   discriminant `4 (D - 1)(D - 25)` in `a₀`.
+* `Fock.levelTwo_norm_discriminant` — that discriminant claim itself, as a `ring` identity over
+  an arbitrary commutative ring:
+  `64 [16 a₀² + (2D-74) a₀ + 84 - 3D] = (32 a₀ + 2D - 74)² - 4 (D - 1)(D - 25)`.
 * `Fock.exists_levelTwoScalar_mem_physSubmodule` — over a field with `4a₀ ≠ 9` and `k² ≠ 0`
   the solution exists, so the closed form is not vacuous.
 * `Fock.pairing_levelTwoScalar_intercept_one` — at `a₀ = 1`, `⟨ψ₂, ψ₂⟩ = -2(D-26)(D-1)/25`.
@@ -718,6 +721,33 @@ theorem exists_levelTwoScalar_mem_physSubmodule {K : Type*} [Field K] [Algebra �
   · exact pairing_levelTwoScalar_physical η a hη a₀ _ _ hmass hcond1 hcond2
 
 end ClosedForm
+
+section Discriminant
+
+/-- **The discriminant of the level-two norm** (clause (4) of the graph node
+`worldsheet.ocq-level-two-scalar-norm-closed-form`).  Completing the square in the bracket of
+`pairing_levelTwoScalar_physical`,
+
+`64 · [16 a₀² + (2D - 74) a₀ + 84 - 3D] = (32 a₀ + 2D - 74)² - 4 (D - 1) (D - 25)`,
+
+so the quadratic `16 a₀² + (2D - 74) a₀ + 84 - 3D` in `a₀` has discriminant
+`B² - 4AC = (2D - 74)² - 64 (84 - 3D) = 4 (D - 1) (D - 25)`.
+
+This is a polynomial identity over an arbitrary commutative ring: it is exactly the statement
+that the discriminant is `4 (D - 1)(D - 25)` with no division by `2` needed, and it is the
+form in which the fact is used.  Over an ordered field it says the bracket is a sum
+`(32 a₀ + 2D - 74)²/64 - (D-1)(D-25)/16`, hence is nonnegative for every `a₀` as soon as
+`(D - 1)(D - 25) ≤ 0`, i.e. `1 ≤ D ≤ 25`, and takes negative values for some `a₀` once
+`D > 25`.  That sign analysis is *not* proved here; only the algebraic identity is.
+
+Note the identity is about the closed form alone and needs no hypothesis on `a₀` or `D`:
+`D` is an arbitrary natural number cast into `R`. -/
+theorem levelTwo_norm_discriminant {R : Type*} [CommRing R] (D : ℕ) (a₀ : R) :
+    64 * (16 * a₀ ^ 2 + (2 * (D : R) - 74) * a₀ + 84 - 3 * (D : R))
+      = (32 * a₀ + 2 * (D : R) - 74) ^ 2 - 4 * ((D : R) - 1) * ((D : R) - 25) := by
+  ring
+
+end Discriminant
 
 /-! ### The ghost above `D = 26`
 
