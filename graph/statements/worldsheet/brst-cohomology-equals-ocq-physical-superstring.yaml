@@ -134,5 +134,18 @@ notes: |
 
   按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md
   （E7/E8、§4 Q4、§5）建立。curator，2026-09-11。
+
+  【★ 2026-09-11 更正（reviewer-batch17b）：设定段那句"完全相同"要打一个折扣】
+  本卡设定段逐字写的是「**设定**与 worldsheet.no-ghost-theorem-superstring-cohomological 的
+  (H1)–(H5) **完全相同**」。这句话在**本图两张卡之间**是准确的（两卡的 (H1)–(H5) 确实逐条相同），
+  **但两卡共同的 (H2) 都只写 `p ≠ 0`，而本卡与姊妹卡最强的来源 lian-zuckerman-1989 在
+  p.305 Remark 里另设了一条更强的全局假设**，逐字
+  "we will assume that `p` is always in the future half `R^{D−1,1}_+`"（**p 未来向**）。
+  ⇒ 「完全相同」指的是**两张图内卡片之间**相同，**不**意味着两卡的 (H2) 已覆盖 LZ 的全部动量假设。
+  ⚠ **本卡陈述文本不动**（陈述不可变）；此处只作更正说明。
+  ⚠ **「p 未来向是否是本质前提」待 lead 裁决**；若裁为本质，则本卡与
+  worldsheet.no-ghost-theorem-superstring-cohomological **两张都要换代**，
+  且必须同步（否则"设定完全相同"这句话会第二次失真）。
+  详见姊妹卡 notes 末尾的同名条目。
 author: curator
 created: "2026-09-11"

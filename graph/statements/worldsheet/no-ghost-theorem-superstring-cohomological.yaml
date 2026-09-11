@@ -177,5 +177,23 @@ notes: |
   这与玻色弦一侧 worldsheet.no-ghost-theorem-brst--via-fgz 的记账方式完全一致。
   要把 effective 抬上去，须先把超弦 BRST 设定的定义卡改写成数学上自足的版本
   （Lean 形式化岛的候选）。已列入报告。
+
+  【★ 2026-09-11 追加（reviewer-batch17b）：(H2) 与 LZ 的动量假设不是同一条件】
+  本卡的 **(H2) 只写 `p ≠ 0`**；而 lian-zuckerman-1989 在 **p.305 的 Remark** 里另设了一条
+  **全局**假设，逐字 "we will assume that `p` is always in the future half `R^{D−1,1}_+`"
+  ——即 **`p` 未来向（future-directed）**，这是比 `p ≠ 0` **更强**的条件。
+  ⇒ 本卡的断言若按字面（只设 `p ≠ 0`）理解，其**最强的那条推导
+  （--via-lian-zuckerman-1989）实际上是在更小的动量集合上证明的**。
+  ⚠ **本卡不就地改 (H2)**（陈述文本不可变）；此处只记录差异。
+  ⚠ **「p 未来向是否是本质前提」待 lead 裁决**，两种可能都未被排除：
+    (i) 若只是 LZ 为方便（如让 `p·p ≤ 0` 时能取洛伦兹标架）而加、结论对一切 `p ≠ 0` 成立，
+        则本卡 (H2) 正确，只需在推导的 convention/gaps 里记一笔；
+    (ii) 若结论在类空动量（`p·p > 0`）或过去向动量上确实不成立或未被覆盖，
+        则本卡应换代为把 (H2) 收紧到"p 未来向"的 v2，且**现有三条推导都要重新核范围**。
+  ⚠ 与此相关的一条新事实（同日核实，见 worldsheet.nsr-fock-space-verma-decomposition）：
+  **LZ 的 Verma 模反例条件是 `p·p < 0`**（在 mostly-plus 号差下即类时/未来向那一片），
+  说明 LZ 确实在意 `p·p` 的符号；这使 (i) 与 (ii) 的分辨更有必要，而不是更不必要。
+  ⇒ 裁决前提：读 LZ p.305 Remark 的上下文，确定该假设是"为方便"还是"为必要"。
+  **本轮未做**（researcher 已读 pp.319–321，未覆盖 p.305 的动机）。
 author: curator
 created: "2026-09-11"
