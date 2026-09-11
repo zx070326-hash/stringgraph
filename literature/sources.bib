@@ -4398,3 +4398,38 @@
             （https://www.anthropic.com/research/formalizing-fermats-last-theorem），
             与本条的 Imperial FLT 项目不是同一个东西，引用时不要混为一谈。}
 }
+
+@book{whittaker-watson-1920,
+  author    = {Whittaker, E. T. and Watson, G. N.},
+  title     = {A Course of Modern Analysis: An Introduction to the General Theory of Infinite
+               Processes and of Analytic Functions, with an Account of the Principal
+               Transcendental Functions},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {1920},
+  note      = {**L1：正文页图逐页读取（researcher，2026-09-11）。** 取自 archive.org 公有领域扫描件，
+               item `courseofmodernan00whit`（元数据 year = 1920，608 pp.），
+               页图端点 `archive.org/download/courseofmodernan00whit/page/n<leaf>.jpg`
+               （leaf = 书页 + 13，即书 p.470 = `n483`）。
+               **⚠ 版本警告：物理文献几乎一律引 1927 年第四版；本项目实际核实的是 1920 年第三版。**
+               1946 年第四版重印件（archive.org `courseofmodernan0000unse`）为借阅制，
+               `/fulltext/inside.php` 端点返回 HTTP 403，本轮无法取到 ⇒
+               **第四版的节号与页码在本项目为 L0，未核实。**
+               **本条只可按「节号」引用，不可按第四版页码引用。**
+               **⚠ 全书没有编号定理（无 "Theorem N.M"）**；可引的最小单位是
+               节号（例 `§21.3`）、节内的 `Corollary`、以及 `Example n`。
+               已核实的定位（**均为 1920 第三版页码**）：
+               `§21.2` The relations between the squares of the Theta-functions, **p. 466**；
+               其 **`Corollary`, p. 467** = Jacobi 的 abstruse identity `ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴`（带完整证明）；
+               `§21.21` 加法公式 p. 467；`§21.22` Jacobi's fundamental formulae pp. 467--469
+               （其 `Example 4`, p. 469 = 一般宗量版 `ϑ₁⁴(z)+ϑ₃⁴(z)=ϑ₂⁴(z)+ϑ₄⁴(z)`）；
+               **`§21.3` Jacobi's expressions for the Theta-functions as infinite products, pp. 469--470**
+               （= Jacobi 三重乘积，**但只定到常数 `G`**）；
+               `§21.3` 末的 `Example`（p. 470）= abstruse identity 的乘积形式，
+               带脚注「Jacobi describes this result (Fund. Nova, p. 90) as `aequatio identica satis abstrusa.'」；
+               `§21.4` 热方程 p. 470；`§21.41` `ϑ₁′(0)=ϑ₂(0)ϑ₃(0)ϑ₄(0)` pp. 470--472；
+               **`§21.42`：`G = ∏_{n≥1}(1−q^{2n})`，结论式在 p. 473**（⇒ 引三重乘积必须 `§21.3` + `§21.42` 并列）。
+               记号：W--W 的准周期是 `π, πτ`（Polchinski 是 `1, τ`），`ϑ₂,ϑ₃,ϑ₄` = Polchinski 的 `ϑ₁₀,ϑ₀₀,ϑ₀₁`。
+               见 extractions/math-sources.md §56。}
+}
