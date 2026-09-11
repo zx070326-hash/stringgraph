@@ -132,5 +132,19 @@ gaps:
      **【2026-09-11】** 原书自己把这条等价放在 (4.4.21) H_OCQ = H_BRST = H_light-cone 里一并证明
      （(4.4.22)–(4.4.27) 是 OCQ 侧的良定义性、单射、满射三步），
      即原书**不**把它当成独立定理。本图拆成两个节点是本项目的选择，与原书的组织方式不同。"
+  - "**KO 谱系的证明隐含 p⁺ ≠ 0，且这条限制比 OCQ 版更要紧。**
+     【2026-09-11 researcher 第七轮，见 literature/extractions/kato-ogawa-1983.md §3 第 2 步、§4 Q4】
+     本推导自陈「loosely patterned on」kato-ogawa-1983（原书 References p.350）。KO 证明结构经
+     IMNU 1986（L1 全文，五处自称「same method in Ref. 1)」）反推，第 2 步就是取光锥参考系
+     p^i = 0、p⁺ 固定非零、零矢 k 使 k·p = 1（IMNU (4.3)–(4.5)）⇒ **整条 KO/Polchinski 路线
+     都要求 p⁺ ≠ 0，零动量扇区被结构性排除**；KO 是否讨论 p = 0 为 L0，IMNU 也未讨论。
+     与此对照，**FGZ 路线不需要光锥方向**：Dedushenko 2015 §1 p.2 把两条路线分开逐字写明——
+     KO/Polchinski 型推广（其 [12, 15, 20, 23]）『**This approach requires d ≥ 2 as it uses the
+     existence of two free bosons X⁺ and X⁻ (the light-cone directions).**』而 FGZ 型（其 [17]）
+     不受此限（可做 d = 1）。
+     ⇒ 图上的记账后果：本推导（physical-argument）与 worldsheet.no-ghost-theorem-brst--via-fgz
+     （rigorous）**不是同一个定理的两个证明，而是适用范围不同的两条路线**；
+     若日后把目标陈述的 k⁺ ≠ 0 条件放宽，本推导不跟随，只有 --via-fgz 跟随。
+     ⚠ 本条 gap 不改变本推导的 status，也不改变目标陈述（陈述已写 k⁺ ≠ 0）。"
 author: curator
 created: "2026-09-10"

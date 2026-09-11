@@ -77,6 +77,30 @@ gaps:
   - "**动量条件在超弦一侧只字未提**：玻色弦的对应命题限 k^+ ≠ 0（light-cone number 分次需要它），原书在超弦一侧不提任何动量条件。目标卡片因此既不宣称覆盖全部动量，也不写 k^+ ≠ 0——这是照实记账，不是遗漏。"
   - "**原书唯一的正面证据是低能级手算**（'The reader can again work out the first few levels by hand'，exercise 10.14）。低能级一致不是定理证明。"
   - "**独立严格来源尚未取得**：候选 ohta-1986、henneaux-1987 等已登记 literature/reading-list.md（P1），但**均只到标题/摘要级，未抽取**。取得后应新建一条独立推导（可望达到 rigorous），而不是修改本推导。"
+  - "**【2026-09-11 更新，接在上一条之后】独立严格来源已取得，但没有挂到本推导，也没有挂到本推导的目标卡。**
+     researcher 第七轮取得 lian-zuckerman-1989（CMP 125, 301，全文 L1）与
+     figueroa-ofarrill-kimura-1989（CMP 124, 105，全文 L1）两篇数学论文，以及
+     ito-morozumi-nojiri-uehara-1986（PTP 75, 934，全文 L1）、ohta-1986 与 henneaux-1987
+     （后两篇正文仍 L0，只有摘要 L2）。
+     **curator 没有据此给本目标卡新增推导**，理由是这些来源**分别推导目标卡的不同断言**：
+     figueroa-ofarrill-kimura-1989 §6 只证正定性（断言 (1)）、**完全不建立任何同构**；
+     lian-zuckerman-1989 则把正定性（Corollary 2.15(ii)，用 Euler–Poincaré，自述不用横向空间）
+     与两个酉同构（Theorem 2.20）**分别证明**；ohta-1986 只覆盖 NS 扇区
+     （ito-morozumi-nojiri-uehara-1986 p.952 Note added 逐字 'he did not present the proof of
+     the no-ghost theorem in the Ramond sector'），ito-morozumi-nojiri-uehara-1986 §4 只显式证
+     R 扇区（NS 只有一段评论）。
+     ⇒ 按 graph/CLAUDE.md 的拆卡判据新建了两张卡，新推导挂在那里：
+       worldsheet.no-ghost-theorem-superstring-cohomological（断言 (1)：正定性；
+         --via-lian-zuckerman-1989 为 **rigorous**，另有 FOK 与 Ohta+IMNU 两条 physical-argument）、
+       worldsheet.brst-cohomology-equals-ocq-physical-superstring（断言 (2)(3)：两个酉同构；
+         --via-lian-zuckerman-1989 为 **rigorous**）。
+     **断言 (4)（exp(πiF) 每个本征子空间上分别成立）仍只有本卡与本推导承载**，
+     严格化的候选来源是 lian-zuckerman-1989 §4 Proposition 4.3，本图未建卡。
+     ⇒ **本推导的 status 不变（physical-argument），本条 gap 不是撤销上一条，而是给出去向。**
+     ⚠ 另记：本推导所继承的模板（Vol.1 §4.4）属 **KO/Polchinski 路线**，
+     Dedushenko 2015 §1 p.2 逐字指出该路线 'requires d ≥ 2 as it uses the existence of two free
+     bosons X⁺ and X⁻'，而 FGZ/LZ 路线不受此限 ⇒ 新旧推导**适用范围本就不同**，不是同一定理的
+     两个证明。"
 notes: |
   本推导按抽取记录 polchinski-1998-v2.md E39 与 Q4 建立。
   Q4 的原话：「Polchinski 完全没有讨论这三点是否影响论证。全章无脚注、无引文。」

@@ -1,0 +1,88 @@
+id: conv.superstring-ghost-number-zero
+family: ghost-number
+title: 超弦（super-Virasoro）BRST 复形的鬼数零点：canonical 取 Lian–Zuckerman 1989（相对上同调集中在鬼数 0）
+definition: |
+  超弦 BRST 上同调的**鬼数只能相对地写**：三篇已核实的一手文献用了三个互不相同的零点，
+  它们的差别是常数平移（外加 R 扇区零模表示的选择），不是结果的差别。
+  本约定把 canonical 定为 **Lian–Zuckerman 1989** 的零点，并给出三家的换算表。
+
+  **(A) canonical：Lian–Zuckerman 1989（CMP 125, 301–335）**
+    鬼数算符是 U，鬼数定义为 U + κ 的本征值（Definition 1.8 之前），取值在 Z + κ，
+    其中 κ = ½（NS）、κ = 0（R）。R 扇区取零模空间 T₀ ⊕ T₁（两个 Bose-sea charge 的直和，
+    p.306 (7)），**这个选择使 R 扇区的鬼数是整数**。于是：
+      **相对上同调集中在鬼数 0**：H^n_rel(p,κ) = 0 除 n = 0（Theorem 2.4）；
+      绝对上同调：NS 在 n = ±½（Theorem 5.1）；R 在 n = −1, 0, 1（Theorem 5.4，
+      三个非零次数是因为 T₀ ⊕ T₁ 的两个 Bose-sea 分量各贡献）。
+
+  **(B) Figueroa-O'Farrill–Kimura 1989（CMP 124, 105–132）**
+    NS 相对复形按**整数**分次；绝对复形「half-integrally graded」，绝对上同调落在 ±½
+    （(5.2)，R 扇区在 Henneaux 表示下同型 (5.3)）。
+    ⇒ 与 (A) 的换算：相对上同调的零点与 (A) 一致（都在 0）；绝对上同调在 NS 两家一致（±½）；
+    **R 扇区两家不一致**（FOK ±½ 对 LZ 的 −1, 0, 1），差别来自零模表示：
+    FOK 用 C[γ₀]（Henneaux 表示，一个 Bose-sea charge），LZ 用 T₀ ⊕ T₁（两个）。
+    ⚠ FOK 的 **Schrödinger 表示** 𝒦 = L²(R, dx) 下鬼数算符 ½((a†)² − a²) **没有本征值**，
+    该表示的上同调**没有鬼数分次**（FOK p.120）——在此表示下本约定无意义。
+
+  **(C) Dedushenko 2015（arXiv:1212.3592）**
+    按 picture number A 参数化：绝对上同调落在 (A + 1) ± ½（主结果 (39)）。
+    ⇒ 与 (A)(B) 的换算：取 A = −1（NS 的自然 picture）得 ±½，与 (B) 一致；
+    取 A = −½（R 的自然 picture，即 β₀ 湮灭真空）得 ½ ± ½，即 0 与 1。
+    **A 一变鬼数就整体平移**，故引用 Dedushenko 的鬼数必须带 picture 标号。
+
+  **使用规则（本图强制）**
+    1. 引用超弦 BRST 上同调的鬼数时，必须写明零点属 (A)(B)(C) 哪一家；
+       只写「鬼数 0」或「鬼数 ±½」而不说零点，一律视为记账缺陷。
+    2. 与 (A) 不同的零点，在依赖边上写 convention_map。
+    3. R 扇区的鬼数还依赖 βγ 零模表示的选择（见 (A)(B) 的对照），
+       表示不同不能只靠平移对上。
+canonical: true
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "p.306 (7)（R 扇区取 T₀ ⊕ T₁ 的理由：唯一使 deg 有上界）；Definition 1.8 之前（鬼数 = U + κ 的本征值，取值 Z + κ）；Theorem 2.4（相对上同调集中在 0）；Theorem 5.1（NS 绝对上同调在 ±½）；Theorem 5.4（R 绝对上同调在 −1, 0, 1）"
+    note: |
+      L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md）。
+      ⚠ **编号陷阱两处**（引用时必须带类型词与章号）：p.305 有 **Lemma 1.4**、p.306 又有
+      **Definition 1.4**；各章公式号重起（§1 的 (1)–(8)、§2 的 (1)–(42) …）。
+      ⚠ LZ 的中心荷归一化是 c/8 (m³ − 2κm)（不是 c/12），故 π(c) = D·Id、
+      ρ(c) = −10·Id、临界 D = 10；跨来源依赖边上须写 convention_map。
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "p.111、p.115（鬼中心荷 c ↦ −15；NS 相对复形整数分次、绝对复形 half-integrally graded）；(5.2)(5.3)（绝对上同调在 ±½）；p.120（Schrödinger 表示下鬼数算符无本征值 ⇒ 上同调无鬼数分次）"
+    note: |
+      L1（全文 28 页逐页读图，literature/extractions/figueroa-ofarrill-kimura-1989.md）。
+      ⚠ **本文没有编号定理**，一切结果按公式号定位。
+      FOK 的超 Virasoro 归一化是 c/12（与本图 math.super-virasoro-algebra 一致，与 LZ 不同）。
+  - ref: dedushenko-2015
+    loc: "主结果 (39)（任意 picture A、两扇区、非零动量：绝对上同调 ≅ 两份光锥谱，鬼数 (A+1) ± ½）；(5)（A-picture 真空的定义）"
+    note: |
+      L1（arXiv v2 全文 21 页）。(5) 逐字定义 A-picture 真空为 β_r|A⟩ = 0 (r ≥ −A−½)、
+      γ_r|A⟩ = 0 (r ≥ A+3/2)，并明写「The vacuum in the R sector annihilated by all the
+      positive-indexed modes and by β₀ corresponds to the picture A = −½.」
+  - ref: kato-ogawa-1983
+    loc: "全文；摘要（L2）"
+    note: |
+      摘要末句逐字（INSPIRE recid 177600，L2）：「In addition, **ghost number fractionization**
+      is observed in this system.」——**玻色弦**一侧分数鬼数的最早记录，与 bc 鬼零模二重真空
+      |±⟩（鬼数 ±½）直接相关。Dedushenko 2015 p.2 对它的现代转述逐字：「The space of physical
+      states is identified as the cohomology of this complex at the ghost number **−½**」。
+      本条只作历史归属登记，不参与本约定的换算表（本约定只管超弦一侧）。
+notes: |
+  【为什么 canonical 选 LZ 1989】三条：
+  (1) **相对上同调的零点落在 0**，与本图玻色弦一侧数学来源（fgz-1986 的 H⁰_∞、
+      lian-zuckerman-1991 的半无限次数 0）的零点一致，跨扇区记账最省换算；
+  (2) LZ 1989 是三家中**唯一**给出成套编号定理（Thm 2.4 / 2.20 / 5.1 / 5.4）且相对与绝对
+      两侧零点都写全的；FOK 无编号定理，Dedushenko 的零点随 picture 漂移；
+  (3) LZ 的 R 扇区选择 T₀ ⊕ T₁ 使鬼数**整数化**，避免 R 扇区出现半整数鬼数。
+
+  ⚠⚠ **已知的一处未统一，必须交 lead / auditor 裁决（本卡不擅自改动玻色弦一侧）**：
+  本图玻色弦一侧用的零点写在 worldsheet.no-ghost-theorem-brst 的陈述里——
+  「取 SL(2,C) 不变真空 |0⟩ 的鬼数为 0、gh(c_n) = +1、gh(b_n) = −1，于是 |↓⟩ = c_1|0⟩ 的鬼数为 1」，
+  故那张卡断言**相对上同调集中在鬼数 1**；而本约定（超弦一侧）把相对上同调放在鬼数 0。
+  两者相差常数平移 1。**这不是矛盾（零点是约定），但两张卡放在一张图上会让「鬼数」这个词
+  在不同区域含义不同**。本卡把 family 定为 ghost-number 正是为了让这处不一致在工具层可见：
+  日后若为玻色弦一侧单建约定卡，它必须作为同 family 的**非 canonical** 成员，并写出对本卡的平移。
+  （另记：Polchinski 玻色弦用对称归一化 gh(|↓⟩) = −½，与本图玻色弦卡相差 3/2；
+  那一条已写在 worldsheet.no-ghost-theorem-brst 的陈述里。）
+
+  由 curator 按 researcher 第七轮三份 L1 抽取记录建立（2026-09-11）：
+  literature/extractions/lian-zuckerman-1989.md §4 Q2、figueroa-ofarrill-kimura-1989.md §5、
+  henneaux-1987.md §5.2。

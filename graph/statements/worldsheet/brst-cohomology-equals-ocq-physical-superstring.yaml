@@ -1,0 +1,138 @@
+id: worldsheet.brst-cohomology-equals-ocq-physical-superstring
+kind: proposition
+title: 超弦的两个酉同构（Lian–Zuckerman 1989 Theorem 2.20）：T ∩ P ≅ P/rad P ≅ H⁰_rel（横向空间 ≅ OCQ 物理态模零态 ≅ 相对 BRST 上同调）
+statement: |
+  **设定**与 worldsheet.no-ghost-theorem-superstring-cohomological 的 (H1)–(H5) 完全相同：
+  RNS 弦，扇区标号 κ = ½（NS）/ 0（R）；D = 10（物质中心荷 c^m = 15、鬼 c^g = −15，
+  故 Q_B² = 0）；质心动量 **p ≠ 0**（并按 lian-zuckerman-1989 的假设取 p 在未来半光锥）；
+  相对复形 C_rel(p,κ) = 被 b₀、L₀ 零化（NS）/ 再被 β₀、G₀ 零化（R）的子复形；
+  R 扇区 βγ 零模表示为 lian-zuckerman-1989 p.306 (7) 的 T₀ ⊕ T₁；GSO 投影之前。
+  鬼数零点按 conv.superstring-ghost-number-zero 的 canonical（相对上同调集中在 0）。
+
+  **三个空间**：
+    **P(p,κ)**（OCQ 物理态空间）：物质 Fock 空间 V(p,κ) 中满足
+        L^m_n |v⟩ = δ_{n,0} κ |v⟩  (n ≥ 0),    G^m_{n+κ} |v⟩ = 0  (n ≥ 0)
+      的向量组成的子空间。注意 L₀ 本征值 = κ（NS 为 ½、R 为 0）——这就是**超弦的截距**，
+      在 lian-zuckerman-1989 的 L₀ 归一化下取此值（见 notes 的约定换算）。
+    **rad P(p,κ)**（零态空间）：P 中与 P 的一切向量正交的向量（即 P 上厄米形式的根基）。
+    **T(p,κ)**（横向空间）：V(p,κ)^{Vir_κ^+} 中一个满足
+        ch_q T(p,κ) = dim R(p,κ) · q^{p·p/2} · φ_κ(q)^{−8}
+      的子空间（8 个横向玻色 + 8 个横向费米振子的特征标）。
+    **H⁰_rel(p,κ)**：相对 BRST 上同调在鬼数 0 处的分量。
+
+  **断言**：
+    **(1)** 包含映射 λ : P → C⁰_rel，λ(v) = v ⊗ |q_F = 1⟩ ⊗ |q_B = 1 − κ⟩ 诱导一个
+        **酉同构** P / rad P ≅ H⁰_rel(p,κ)；
+    **(2)** 包含映射 T ∩ P ↪ P 诱导一个**酉同构** T ∩ P ≅ P / rad P。
+  即（原文逐字）'There are unitary isomorphisms T ∩ P ≅ P/rad P ≅ H⁰_rel.'
+  这里"酉"（unitary）指保各空间上诱导的厄米形式。
+
+  **本命题不断言**：
+    (a) 不断言正定性。正定性是独立的一条（作者自命名 "No-ghost Theorem"）：
+        worldsheet.no-ghost-theorem-superstring-cohomological。
+        ⚠ 逻辑上 (2) + T∩P 正定 ⟹ H⁰_rel 正定，但 lian-zuckerman-1989 的正定性证明
+        （Corollary 2.15(ii)）**不走这条路**，而是 Euler–Poincaré + 消灭定理；
+        Corollary 2.19(ii) 另外独立给出 T∩P 的正定性。故两卡不互为推论。
+    (b) 不断言 T 是唯一的，也不断言 T 与任何具体的 DDF 型构造逐字一致
+        （lian-zuckerman-1989 Proposition 2.18 只断言**存在**这样的 T，且 T(p,0) = T⁺ ⊕ T⁻）。
+    (c) 不断言 T 与 Polchinski 的 H^⊥（逐字"没有 X^{0,1}、ψ^{0,1}、b、c、β、γ 激发"）
+        是同一子空间——二者只作为分级内积空间同构，见 notes。
+    (d) 不断言 p = 0（lian-zuckerman-1989 Proposition 5.5 给出不同结果）。
+    (e) 不断言绝对复形的上同调（那是 Theorem 5.1 / 5.4 与
+        worldsheet.brst-cohomology-picture-independence）。
+    (f) 不断言 GSO 投影后的版本（lian-zuckerman-1989 §4 Proposition 4.3）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.superstring-ghost-number-zero
+  - conv.intercept-sign-a
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.20**, p.321，逐字 'There are unitary isomorphisms T ∩ P ≅ P/rad P ≅ H⁰_rel.'；证明用映射 λ: P → C⁰_rel, λ(v) = v ⊗ |q_F = 1⟩ ⊗ |q_B = 1 − κ⟩（**显式给出包含映射**），诱导等距 P/λ^{−1}B⁰_rel → H⁰_rel，再由 Corollary 2.19(ii)、Corollary 2.15(i)、Corollary 2.19(i) 的维数相等得同构"
+    note: |
+      L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md E8）。
+      ★★ 这是超弦版的 **fgz-1986 Theorem 2.8 / lian-zuckerman-1991 Theorem 3.5(i)**。
+      本图玻色弦一侧的对应卡是 worldsheet.brst-cohomology-equals-ocq-physical（第一个同构）
+      与 worldsheet.no-ghost-theorem-brst（第二个同构 + 正定）。
+      前提链（全文散布，引用必须集齐）：p ≠ 0（Theorem 2.4）；D = 10（p.308 逐字 'From now on,
+      we will take D = 10'）；p 在未来半光锥（p.305 Remark）；空间取 p.306 (8)，
+      **R 扇区用 T₀ ⊕ T₁**。
+      全文结论句逐字（p.335）：'We have shown that such a construction indeed leads to a theory
+      equivalent to the **"old covariant" quantization method**.'
+      ⚠ **编号陷阱**：p.305 **Lemma** 1.4 与 p.306 **Definition** 1.4 同号；各章公式号重起。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 2.16**, p.317，逐字 'Let P(p,κ) = {v ∈ V(p,κ): π(L_n)v = δ_n κv, π(G_{n+κ})v = 0, n ≥ 0}. It is called the space of physical states.'"
+    note: |
+      L1。本卡"P = OCQ 物理态空间"的定义来源。
+      ★ 注意 **L₀ 本征值 = κ**（NS 为 ½、R 为 0）就是超弦的截距，在 LZ 的 L₀ 归一化下如此取值；
+      与本图 worldsheet.ocq-superstring-physical-states 的条件
+      （L^m_n = 0 (n > 0)、G^m_r = 0 (r ≥ 0)、总 L₀ = 0）逐条对应。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.18**, pp.317–320（存在 T(p,κ) ⊂ V(p,κ)^{Vir_κ^+}，ch_q T = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}；T(p,½) 正定；T(p,0) = T⁺ ⊕ T⁻）与 **Corollary 2.19**, p.321（(i) dim T∩P = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2)；(ii) T∩P 正定；(iii) V(p,κ) 是自由 Vir_κ^- 模）"
+    note: |
+      L1。★ **Proposition 2.18 的证明策略是本条最要紧的信息**，逐字：
+      'Using the so-called **spectrum generating algebra**, physicists [1, 2] have constructed
+      these spaces. However, we will prove their existence **the way FGZ did** in the bosonic
+      case.' ⇒ LZ **不用** DDF/谱生成代数构造 T，而用 FGZ 的表示论办法
+      （超 Virasoro 的 Kac 行列式 [22] = Meurman–Rocha，与 M_κ(h', 9) 的幺正性 [7, 9, 10]）。
+      ⇒ 本卡断言 (2) 里的 T **不是**本图 worldsheet.ddf-operators-v6 构造的那个空间，
+      只是同特征标的一个子空间。
+      ⚠ p.320 Remark 逐字：'V(p,κ) is in general **not** a direct sum of Verma modules of Vir_κ
+      even though it is Vir_κ^- -free.'（用 Kac 行列式在 NS 扇区明证）——与
+      figueroa-ofarrill-kimura-1989 p.111 引 Brower–Friedman 的"完全可约性"**直接矛盾**，
+      见 worldsheet.no-ghost-theorem-superstring-cohomological--via-figueroa-ofarrill-kimura-1989
+      的 gaps 第一条。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15(i)**, p.317（'Quantization Condition'：dim H⁰_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2)）"
+    note: |
+      L1。Theorem 2.20 的证明靠"等距 + 维数相等 ⇒ 同构"，本条与 Corollary 2.19(i) 给的
+      正是那两个相等的维数（两式**逐字相同**）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5 末, p. 25, **无式号**（Polchinski 把本卡的两个同构与正定性写成同一句话：'The BRST cohomology has a positive definite inner product and is isomorphic to OCQ and to the transverse Hilbert space H^⊥, which is defined to have no X^{0,1}, ψ^{0,1}, b, c, β, or γ excitations. The proof is a direct imitation of the bosonic argument of chapter 4.'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E39）。
+      **本条只作对照，不支撑本卡的断言**：原书的全部论证是那句 'direct imitation'，
+      已登记在 worldsheet.no-ghost-theorem-superstring 及其推导
+      --via-imitation-of-bosonic-argument 上。
+      ⚠ 原书**不引用任何原始文献**（此处无脚注、无引文），故 Polchinski 一侧与
+      lian-zuckerman-1989 没有文献层面的连接。
+tags: [superstring, brst, cohomology, ocq, rns, unitarity, ramond-sector]
+notes: |
+  ★【本卡与 worldsheet.no-ghost-theorem-superstring-cohomological 为什么是两张卡】
+  lian-zuckerman-1989 把它们分别证明，且顺序是"先正定、后同构"：
+    Corollary 2.15(ii)（正定）的证明是 Euler–Poincaré 原理 + Theorem 2.4 + Proposition 2.14(ii)，
+      **不用**横向空间 T；
+    Theorem 2.20（两个同构）的证明才引入 λ 与 T，并用维数相等收尾。
+  而 figueroa-ofarrill-kimura-1989 **只证正定、完全不建立同构**。
+  ⇒ 两件事在文献里被分别推导，按 graph/CLAUDE.md 的判据必须拆成两卡。
+  这也解释了为什么本卡只有一条推导（LZ），而正定性那张卡有三条。
+
+  【与 worldsheet.no-ghost-theorem-superstring（Polchinski 卡）的关系】
+  本卡 = 那张卡的断言 (2)（≅ OCQ）与 (3)（≅ H^⊥）；那张卡的 (1) 在
+  worldsheet.no-ghost-theorem-superstring-cohomological；(4)（exp(πiF) 每个本征子空间上
+  分别成立）**本图目前只有 Polchinski 那张卡承载**，严格化的候选来源是
+  lian-zuckerman-1989 §4 Proposition 4.3（p.330 逐字 'Thus we have achieved the "covariant"
+  equivalent of the GSO projection.'），本图未建卡。
+  **两张卡都不给 Polchinski 卡加 superseded_by**：设定不同（本卡显式要求 p ≠ 0 与具体的
+  零模表示），且 Polchinski 卡还承载 (4)。是否换代留给 lead 裁决。
+
+  【横向空间的实现差别（与玻色弦一侧 --via-fgz 的 gap (c) 同型）】
+  本卡的 T 是 V(p,κ) 中被 Vir_κ^+ 湮灭、特征标为 dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8} 的子空间；
+  Polchinski 的 H^⊥ 是"没有 X^{0,1}、ψ^{0,1}、b、c、β、γ 激发"的态空间；
+  本图 worldsheet.ddf-operators-v6 给的是玻色弦的 DDF 算子生成的空间。
+  三者作为**分级内积空间**同构（都是 8 个横向玻色 + 8 个横向费米振子），
+  但**不是同一个子空间**。lian-zuckerman-1989 Proposition 2.18 明确说它不走谱生成代数
+  （DDF）那条路，而用 FGZ 的表示论办法。
+
+  【LZ 的 L₀ / 截距归一化（与本图 conv.intercept-sign-a 的关系）】
+  LZ Definition 2.16 要求 π(L₀)v = κv：NS 为 ½、R 为 0。LZ 的中心荷归一化是
+  c/8 (m³ − 2κm)，故 **R 扇区 (κ=0) 的 L₀ 比本图 math.super-virasoro-algebra 的 L₀ 低 c/24**
+  （LZ 的 {G₀,G₀} = 2L₀ 无中心项，本图是 2L₀ − c/12）。
+  换算逐条写在推导 --via-lian-zuckerman-1989 的 convention_map 上。
+  与本图 worldsheet.open-superstring-mass-shell 记的 NS/R 截距（Polchinski 归一化）
+  的换算**本图未核实**，已列入报告。
+
+  按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md
+  （E7/E8、§4 Q4、§5）建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
