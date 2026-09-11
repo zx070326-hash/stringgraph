@@ -5,13 +5,14 @@ Authors: stringgraph lean-formalizer
 -/
 import StringFormal.Math.DedekindEtaS
 import StringFormal.Math.DedekindEtaT
-import Mathlib.LinearAlgebra.Matrix.FixedDetMatrices
+import StringFormal.Math.ModularGroupGenerators
 
 /-!
 # Full `SL(2,ℤ)` invariance of `τ₂ |η(τ)|⁴`
 
 Graph nodes: `math.dedekind-eta-s-transformation`, `math.dedekind-eta-t-transformation`,
-`worldsheet.modular-group-generated-by-s-and-t` (this file is where the last one is *used*).
+`worldsheet.modular-group-generated-by-s-and-t` (this file is where the last one is *used*;
+it is proved in `StringFormal/Math/ModularGroupGenerators.lean`).
 
 `StringFormal/Math/DedekindEtaS.lean` and `StringFormal/Math/DedekindEtaT.lean` prove that
 `τ ↦ Im τ · ‖η(τ)‖⁴` is invariant under the two generators
@@ -31,13 +32,13 @@ SpecialLinearGroup.SL2Z_generators : Subgroup.closure {ModularGroup.S, ModularGr
 
 (`Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean`, Chris Birkbeck, proved by a Euclidean
 reduction `FixedDetMatrices.induction_on` on integral matrices of determinant `1`).  So the
-generation theorem is *not* reproved here; it is re-exported as `modular_group_generated_by_S_and_T`
-so that the graph node `worldsheet.modular-group-generated-by-s-and-t` has a declaration to point
-at.  The only work in this file is the induction over `Subgroup.closure`.
+generation theorem is *not* reproved here; `StringFormal/Math/ModularGroupGenerators.lean`
+re-exports it as `ModularGroupGen.sl_closure_S_T` (and pushes it, together with the relations
+`S² = (ST)³ = 1`, to `PSL(2,ℤ)`).  The only work in this file is the induction over
+`Subgroup.closure`.
 
 ## Main results
 
-* `modular_group_generated_by_S_and_T` : re-export of Mathlib's `SL2Z_generators`.
 * `im_mul_norm_eta_pow_four_modular_invariant` :
   `(g • τ).im * ‖η(g • τ)‖⁴ = τ.im * ‖η(τ)‖⁴` for every `g : SL(2,ℤ)`, `τ : ℍ`.
 * `norm_eta_pow_four_modular` : the solved form `‖η(g • τ)‖⁴ = (τ.im / (g • τ).im) · ‖η(τ)‖⁴`.
@@ -60,14 +61,6 @@ namespace StringFormal.DedekindEta
 open Complex
 open scoped Real MatrixGroups
 
-/-- **`S` and `T` generate `SL(2,ℤ)`** — graph node
-`worldsheet.modular-group-generated-by-s-and-t`.  This is a re-export of Mathlib's
-`SpecialLinearGroup.SL2Z_generators`; here `S = ![![0, -1], ![1, 0]]` and `T = ![![1, 1], ![0, 1]]`
-are `ModularGroup.S` and `ModularGroup.T`. -/
-theorem modular_group_generated_by_S_and_T :
-    Subgroup.closure ({ModularGroup.S, ModularGroup.T} : Set SL(2, ℤ)) = ⊤ :=
-  SpecialLinearGroup.SL2Z_generators
-
 /-- Invariance of `τ₂ |η(τ)|⁴` under all of `SL(2,ℤ)`, in the `∀ τ` form that the induction over
 `Subgroup.closure` needs (the `inv` step applies the inductive hypothesis at a *different* point
 `g⁻¹ • τ`, so the quantifier must be inside). -/
@@ -76,7 +69,7 @@ theorem im_mul_norm_eta_pow_four_modular_forall (g : SL(2, ℤ)) :
       (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
         = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 := by
   have hg : g ∈ Subgroup.closure ({ModularGroup.S, ModularGroup.T} : Set SL(2, ℤ)) := by
-    rw [modular_group_generated_by_S_and_T]
+    rw [ModularGroupGen.sl_closure_S_T]
     exact Subgroup.mem_top g
   induction hg using Subgroup.closure_induction with
   | mem x hx =>
@@ -99,7 +92,7 @@ Together with `Im(g · τ) = Im τ / |cτ + d|²` this is the statement that the
 `d²τ / τ₂² · (τ₂ |η|⁴)^{-…}` is modular invariant; the two generator cases are
 `DedekindEtaS.im_mul_norm_eta_pow_four_modular_S_smul` and
 `DedekindEtaT.im_mul_norm_eta_pow_four_modular_T_smul`, and the passage to all of `SL(2,ℤ)` uses
-`modular_group_generated_by_S_and_T`. -/
+`ModularGroupGen.sl_closure_S_T`. -/
 theorem im_mul_norm_eta_pow_four_modular_invariant (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
     (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
       = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 :=
