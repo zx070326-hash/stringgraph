@@ -857,6 +857,21 @@ hepnotes.com 首页（L1 直读）只挂三份 PDF：QFT notes (2025-08)、Joe's
 - 备注：★★ 脚注 7（p. 39，**逐字**）是一处容易漏的技术要点：
   「In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each topology separately because the trace vanishes by supersymmetry. **This is not sufficient**, because they will no longer cancel when vertex operators are added near one end of each surface. **The NS–NS and R–R tadpoles must vanish separately when summed over topologies.**」
   → 「`SO(32)`」这条结论的**逻辑形式**是：要求 NS–NS 与 R–R tadpole **各自**在拓扑求和后为零 ⇒ `n = 32` 且是正交投影。
+- **★ 2026-09-11 追加更正行（researcher；只追加，上面各行一字未改）**：
+  本条正文里四处把前缀写作 `8π(8π²α'²)⁵`（即 (10.8.4)、(10.8.11)、(10.8.18)、(10.8.19) 四式），
+  **那是页图读数，应更正为 `8π(8π²α')⁵`（`α'` 的一次方）**。三条依据：
+  (a) **量纲**——`V₁₀` 需要 `length¹⁰`，只有 `(α')⁵` 给得出；
+  (b) **两次独立变量代换复算**（`s = π/t` 圆柱、`s = π/2t` Klein 瓶）给出
+      `π⁴/(8(8π³α')⁵) = 1/(262144π¹¹α'⁵) = 1/(8π(8π²α')⁵)`；
+  (c) **跨卷控制组**——Vol.1 (7.4.3)/(7.4.24) 的**同一个字形**被量纲锁死为 `(8π²α')¹³`，
+      且「α'²」这个读数**只出现在分式分母（小字号）里**，全字号的 `(8π²α't)^{−5}` 从无争议。
+  **裁决：原书没有印错，这是页图渲染假象**（与 `(13.3.12)` 那处的真排印错误不同类，**不要类比援引**）。
+  完整证据链见 `polchinski-1998-v2-sec10-8.md` **§6「Q1 复核」**（并见该文件 §0.4(b)、§3.2 第 1 条）。
+  ⚠ 该前缀是三个面的**公因子**，**`(n ∓ 32)²` 与 `SO(32)` 结论完全不受影响**。
+  ⚠ 通用规则：**Polchinski 两卷中凡落在分式分母里的 `α'`，页图上都可能被读成 `α'²`；一律按量纲判，不要照抄页图。**
+- **★ 同日追加指路行**：**§10.8 的逐条抽取见 `polchinski-1998-v2-sec10-8.md`（E64–E75）**，
+  该文件把本条压缩的「要点」拆成 12 条陈述，并补上 (10.8.12)、(10.8.16)、(10.8.17)、脚注 8、
+  `s ↔ t` 的三个换算，以及三条「converted to `D = 10`」的跨卷明写引用。
 
 ### E49 第 10 章的习题清单（作为「哪些论证被推给读者」的清单）★
 - 位置：§10「Exercises」（p. 43–44）`[L1 原书]`
