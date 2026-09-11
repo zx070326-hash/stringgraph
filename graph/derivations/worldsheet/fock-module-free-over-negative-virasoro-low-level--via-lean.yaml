@@ -1,0 +1,122 @@
+id: worldsheet.fock-module-free-over-negative-virasoro-low-level--via-lean
+target: worldsheet.fock-module-free-over-negative-virasoro-low-level
+kind: proof
+status: formalized
+depends_on:
+  - id: math.gram-determinant-nonzero-implies-linear-independence
+    inferred: false
+    note: |
+      **本推导的引擎**。四条 `linearIndependent_fockDesc{1,2,3,4}` 全部以
+      `linearIndependent_of_gram_det_ne_zero (pairing η) _ (by rw [gram_det_fockDescN hη]; exact hdet)`
+      收尾——直接调用该卡的 lean_decl。该卡的「不要求对称、不要求正定、只要无零因子与指标集有限」
+      正是本卡陈述里 `[NoZeroDivisors R]` 与 N ≤ 5 有限族的来源。
+  - id: worldsheet.kac-determinant-level-two
+    inferred: false
+    note: |
+      供给 N = 1 的基线：`gram_det_fockDesc1` 的证明是
+      `(fockForm_isContravariant (hη:=hη)).gram_level_one fockForm_hwv_hwv`，
+      即直接调用该卡 lean_decl 家族里的 `IsContravariant.gram_level_one`
+      （该卡自身 (1) 的内容：⟨L₋₁v,L₋₁v⟩ = 2h）。det₁(h) := 2h 与该卡 (1) 逐字相同。
+      该卡的 N = 2 部分（(2)(3)(4)）本身**不**被本推导使用——N = 2 的 Gram=Kac 恒等式
+      走的是下一条依赖（`gram_det_descFamily2`），不是这张卡；这里只用它承载的 `gram_level_one`。
+  - id: worldsheet.verma-level-basis-generic-low-levels-v2
+    inferred: false
+    note: |
+      供给 N = 2, 3, 4：`gram_det_fockDesc{2,3,4}` 的证明分别是
+      `(fockForm_isContravariant (hη:=hη)).gram_det_descFamily{2,3,4} fockForm_hwv_hwv`，
+      直接调用该卡 lean_decl 家族里的 `IsContravariant.gram_det_descFamily{2,3,4}`
+      （该卡自身 (1) 的内容：Kac 多项式非零 ⇒ Verma 侧标准降算符向量线性无关，
+      且 Gram 行列式就是 det_N(c,h)）。N = 4 的矩阵形另经该卡的 `gramMatrix_descFamily4`。
+      本卡 statement 里的 det₂、det₃、det₄ 三个多项式逐项抄自该卡 statement 的同名公式。
+  - id: worldsheet.verma-module-v2
+    inferred: false
+    note: |
+      供给「Verma 模的万有性质」这一步：`vermaToFock : V(D,h) → F` 的构造直接调用该卡
+      lean_decl 家族里的 `vermaLift`（存在）/ `vermaLift_hwv` / `vermaLift_lie`，
+      唯一性用 `eq_of_lie_of_eq_hwv`（虽然本卡不需要唯一性，只需要存在与等变性）。
+      该卡明确**不**断言 V(c,h) ≠ 0（见其【不断言】(c)）；本卡不依赖那一条——
+      `vermaToFock` 的构造本身不要求 V(D,h) ≠ 0，V(D,h) ≠ 0 是本卡的**副产品**
+      （`hwv_ne_zero`），不是输入。
+  - id: worldsheet.fock-space-virasoro-representation
+    inferred: false
+    note: |
+      供给 Fock 空间上的 Sugawara 型 Virasoro 作用 `Lop`（`FockVir` 这个 `LieModule` 实例
+      正是把该卡的 `virRep` 包成 Verma 万有性质可用的形状）与中心荷 c = D
+      （`virRep_cgen`）——真空的权 (D, h) 里的 "D" 即来自这里。该卡 effective = formalized，
+      不压低本推导。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      供给底层对象 F(D,R) 本身（`Fock D R`）与真空 1 ∈ F。本卡陈述里的 F、|k⟩ 直接就是
+      这张卡定义的对象，没有中间构造。
+  - id: worldsheet.fock-indefinite-form
+    inferred: false
+    note: |
+      供给要拉回的 Fock 双线性型 `pairing η`。`fockForm := (pairing η).compl₁₂ vermaToFock vermaToFock`
+      逐字使用该卡的 lean_decl `pairing_unique` 所定义的那个对象；`fockForm_hwv_hwv`
+      （拉回型在 Verma 最高权向量上取值 1）用到该卡 (1) 的 ⟨|k⟩,|k⟩⟩ = 1。
+  - id: worldsheet.virasoro-generators-adjoint
+    inferred: false
+    note: |
+      供给 `fockForm_isContravariant` 的核心输入：拉回型的逆变性 B(L_n x,y) = B(x,L_{−n}y)
+      归结为 Fock 侧的 ⟨L_n v,w⟩ = ⟨v,L_{−n}w⟩，即该卡的 lean_decl `pairing_Lop_left` 本身
+      （对**任意**对角 η 成立，不需要 η²=1——该卡陈述里的「假设的弱性」一段与本卡对 η 的
+      一般性要求一致）。没有这一步，`fockForm` 不构成 `IsContravariant`，
+      也就无法把 Gram 矩阵与 Kac 多项式等同。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/FockFreeLowLevel.lean（全文；主声明 StringFormal.NoGhost.Fock.linearIndependent_fockDesc4，姊妹声明 linearIndependent_fockDesc{1,2,3}；桥接对象 FockVir / vermaToFock / vermaToFock_hwv / hwv_ne_zero / fockForm / fockForm_isContravariant / fockForm_hwv_hwv / gramMatrix_vermaToFock；多项式 kacDet{1,2,3,4}；向量族 fockDesc{1,2,3,4} / vermaDesc1；Gram=Kac 步骤 gram_det_fockDesc{1,2,3,4}；质壳数值 kacDet{1,2,3,4}_massShell_26、linearIndependent_fockDesc{3,4}_massShell_26；副产品 hwv_ne_zero_of_two_le / lorentzSign / weightZeroMode / vacuumWeight_weightZeroMode）；依赖 formal/StringFormal/Virasoro/{GenericIndependence.lean :: linearIndependent_of_gram_det_ne_zero, gramMatrix, IsContravariant.gram_det_descFamily{2,3,4}, IsContravariant.finrank_levelSpan_four; Verma.lean :: vermaLift, vermaLift_hwv, vermaLift_lie; Shapovalov.lean :: IsContravariant.gram_level_one} 与 formal/StringFormal/NoGhost/{Sugawara.lean :: Lop, virRep, virRep_cgen; Fock.lean :: pairing; PhysicalStates.lean :: pairing_Lop_left}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，全文无 `sorry`，公理仅 propext / Classical.choice /
+      Quot.sound（文件头 "## Status" 自述，curator 已逐段读取全文核对，未自行重跑
+      `lake build` / `check-axioms`；合并本分支前由 lead 跑两者）。逐条对应见上面 8 条
+      depends_on 的 note，此处不重复。文件头 module docstring 把本卡目标记为
+      「Graph nodes (low-level *instance* of): `worldsheet.verma-module-free-over-negative-part`,
+      `math.kac-determinant-v2`」——**两个 id 的 area 前缀都写反了**（真实 id 分别是
+      `math.verma-module-free-over-negative-part` 与 `worldsheet.kac-determinant-v2`），
+      详见目标卡 sources 与 notes 的【文献/记账歧义】一节；本推导的 depends_on 已按真实 id 接线，
+      且**均不包含这两张卡**——本推导走的是「Verma 万有性质 + Gram 行列式搬运」的具体实例，
+      不经过那两张卡的抽象内容（见 gaps 与目标卡 notes）。
+summary: |
+  本推导是**图侧接线**：目标陈述由 `FockFreeLowLevel.lean` 中具名、无 sorry 的 Lean 声明
+  承载，四步论证结构（对应目标卡 statement 的「机制」一段）：
+
+  **第一步：Fock 空间是 Verma 模万有性质意义下的目标。** `FockVir` 把 `worldsheet.fock-space-
+  -virasoro-representation` 的 `virRep`（Sugawara Lop，c = D）包装成 Verma 万有性质可用的
+  `LieModule` 实例；真空 `|k⟩ = 1 ∈ F`（`worldsheet.bosonic-fock-space`）在此作用下是权
+  (D, h) 的最高权向量（h = ½α₀²）。
+
+  **第二步：由万有性质得到 vermaToFock。** `worldsheet.verma-module-v2` 的 `vermaLift`
+  给出唯一的等变映射 vermaToFock : V(D,h) → F，把 Verma 最高权向量送到 |k⟩。
+  **注意**：这一步不需要、也不使用 V(D,h) ≠ 0——`vermaLift` 对零模也良定义（把一切送到 0 的
+  情形本身就是一个合法的等变映射）；V(D,h) ≠ 0 要到第三步的归一化才被用到（且是被**证明**
+  而非假设，见 `hwv_ne_zero`）。
+
+  **第三步：拉回 Fock 双线性型，得到归一化逆变型。** `fockForm := (pairing η).compl₁₂
+  vermaToFock vermaToFock`（`worldsheet.fock-indefinite-form` 的 pairing 沿 vermaToFock
+  拉回）；逆变性 `fockForm_isContravariant` 靠 `worldsheet.virasoro-generators-adjoint` 的
+  `pairing_Lop_left`（L_n 在 Fock 双线性型下的伴随是 L_{−n}）转移到 V(D,h) 上；归一化
+  `fockForm_hwv_hwv`（拉回型在 Verma 最高权向量上取值 1）由 `pairing_unique` 的
+  ⟨|k⟩,|k⟩⟩ = 1 给出，**副产品地**证明了 `hwv_ne_zero`（Verma 最高权向量非零，否则拉回型
+  不可能取值 1——但注意这是对**这一个特定 (c,h) = (D,h)** 的证明，不是一般 (c,h)）。
+
+  **第四步：Gram 矩阵严格搬运，接上既有的 Kac 判据。** `gramMatrix_vermaToFock` 证明
+  vermaToFock 下 Gram 矩阵原样相等（不只是行列式相等）；于是 N = 1 的基线来自
+  `worldsheet.kac-determinant-level-two` 的 `gram_level_one`，N = 2,3,4 来自
+  `worldsheet.verma-level-basis-generic-low-levels-v2` 的 `gram_det_descFamily{2,3,4}`，
+  两者拼起来给出 `gram_det_fockDesc{1,2,3,4}`；最后用
+  `math.gram-determinant-nonzero-implies-linear-independence` 的判据收尾，
+  给出目标卡的四条 `linearIndependent_fockDesc{1,2,3,4}`（本卡取 N = 4 的实例为
+  formal.lean_decl）。
+
+  质壳数值（D = 26、a₀ = 1、h = 1 − N）由文件末尾 `kacDet{1,2,3,4}_massShell_26`
+  与 `linearIndependent_fockDesc{3,4}_massShell_26` 给出，逐项核对见目标卡 notes。
+gaps:
+  - "**N ≥ 5 未覆盖**：本推导只到 N = 4；一般 N 需要一般 (c,h) 的 Kac 行列式公式（worldsheet.kac-determinant-v2，rigorous、未形式化，瓶颈是 PBW）。本推导不使用、也不缩短那条瓶颈——见目标卡【不断言】(a)。"
+  - "**判据只是充分条件**：Kac 行列式为零处，本推导对 F 中那 p(N) 个向量的线性（无）关性不给出任何信息；vermaToFock 未证单射，本推导证的是像的线性无关。"
+  - "**单一动量、无零模算符**：本推导继承自 Sugawara.lean 的范围限制，a 是给定参数而非算符 x^μ；不涉及多个动量的联合结论。"
+  - "**N = 1..4 未联合组装**：四条 linearIndependent_fockDesc{1,2,3,4} 各自独立，本推导不断言它们合在一起仍线性无关（可望由 L₀ 本征值分层正交得到，但 Lean 侧未组装这一步，见目标卡【不断言】(c)）。"
+  - "**未经过 worldsheet.shapovalov-form-existence / -uniqueness**：第三步的归一化逆变型是直接构造（compl₁₂ + pairing_Lop_left），不经过 Shapovalov.lean 的抽象 iff 机器（exists_isContravariant_iff_hwv_ne_zero）；两条路线的结论在 (c,h)=(D,h) 处重合但证明路径不共享中间引理，故未把那两张卡列为 depends_on，详见目标卡 notes。"
+  - "**curator 未自行重跑 `lake build` / `check-axioms`**：本分支只改 graph/，不含 Lean 改动；按项目纪律，含 formal/ 改动的分支合并前由 lead 跑两者。"
+author: curator
+created: "2026-09-11"

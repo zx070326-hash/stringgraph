@@ -156,5 +156,29 @@ notes: |
 
   【记号】本图记 V(c,h)、|c,h⟩（conv.verma-module-notation）。Lean 侧 `hwv R c h`。
   Kytölä 的 VirasoroProject **没有** Shapovalov 形式（math-sources.md §34.7）。
+
+  【2026-09-11 补，curator：(4) 的未决输入 V(c,h) ≠ 0 在 c = (D:K)、D ∈ N、D ≥ 2、任意 h 处
+  现有无条件见证——只是那个子族，不改变本卡陈述或一般情形的开放状态】
+  `formal/StringFormal/Virasoro/FockFreeLowLevel.lean` 的
+  `hwv_ne_zero_of_two_le [Nontrivial R] (hD : 2 ≤ D) (hw : R) : hwv R (D:R) hw ≠ 0`
+  对**任意自然数 D ≥ 2**（经典型：D 维自由玻色子的中心荷 c = D）嵌入到 K 与**任意** h : K，
+  给出 |c,h⟩ ≠ 0 的一个无条件证明——取洛伦兹符号向量 η = diag(−1,+1,…,+1) 与零模参数
+  a = (h−½, h+½, 0,…)，使一个具体表示（Fock 空间）里的真空恰有权 (D,h)，再用它经
+  vermaToFock 的原像非零。**这条见证依赖 η 取不定号差（至少一个负号）**：Lean 文件头逐字
+  「with a positive definite η only h of the form ½∑a_μ² would be reachable」——正定 η
+  只能触达非负的一族 h，触达不了本卡 (4) 需要的**任意** h。
+  ⇒ 结合本卡 (4) 已无条件证明的 ⇐ 半（`exists_isContravariant_iff_hwv_ne_zero` 的左推右，
+  即 level-0 坐标泛函构造，见 sources），**在 c = (D:K)（D ∈ N，D ≥ 2）、任意 h ∈ K 这一子族上，
+  「存在归一化逆变型 B」现在是无条件真命题**，不再需要引用
+  math.verma-module-free-over-negative-part 的 (4)（该节点仍只对这一子族之外的 c 未决，
+  详见其 2026-09-11 补的同名记账）。
+  ⚠ **不改变本卡的 formal.lean_decl、statement 或 status**：本卡 (4) 的陈述量词是
+  「设 K 是特征零的域，(c,h) ∈ K²」——**任意** c，而 `hwv_ne_zero_of_two_le` 只覆盖
+  c 落在自然数嵌入像里的那个可数子集，是本卡 (4) 的一个**特殊实例**，不是新的一般定理；
+  也不缩小本卡自身作为「条件命题」的性质——本卡的 formalized 状态本来就不依赖 V(c,h) ≠ 0
+  是否已证，因为陈述本身是 iff。此记录只是给后续 curator/formalizer 一个指针：
+  若下游需要「对 D 维自由玻色子的 Verma 模，Shapovalov 形式确实存在」这一**无条件**结论
+  （而非 iff），现在有了一条独立于 math.verma-module-free-over-negative-part 的路径可用，
+  见 worldsheet.fock-module-free-over-negative-virasoro-low-level 的 notes。
 author: curator
 created: "2026-09-11"

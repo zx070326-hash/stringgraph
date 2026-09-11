@@ -118,5 +118,26 @@ notes: |
   而那一半的唯一障碍是 Mathlib 没有 PBW 定理（见上一段与 math.pbw-theorem 的 notes）。
   唯一用到特征标的下游 worldsheet.no-ghost-theorem-subcritical--via-lian-zuckerman 相应地
   已新增一条非 inferred 的边指向 (β)，其「Euler 恒等式无节点无来源」的 gap 已关闭。
+
+  【2026-09-11 补，curator：(4) 非零性在自然数 c ≥ 2、任意 h 处现有第二条、与 PBW 无关的证明
+  ——不改变本节点距 formalized 的缺口，只是记一笔独立复核】
+  `formal/StringFormal/Virasoro/FockFreeLowLevel.lean` 证了
+  `hwv_ne_zero_of_two_le [Nontrivial R] (hD : 2 ≤ D) (hw : R) : hwv R (D:R) hw ≠ 0`：
+  对**任意自然数 D ≥ 2**（经 `(D:R)` 嵌入到交换 ℚ-代数 R）与**任意** h : R，取洛伦兹符号向量
+  η = diag(−1,+1,…,+1)（`lorentzSign`）与零模参数 a = (h−½, h+½, 0,…)（`weightZeroMode`），
+  使 Fock 真空的权恰为 h（`vacuumWeight_weightZeroMode`），再用 Fock 真空经 `vermaToFock`
+  的原像非零（`hwv_ne_zero`，因为 vermaToFock 把它送到 Fock 真空 1 ≠ 0）。**η 的不定性是
+  证明的关键**：Lean 文件头逐字注明「with a positive definite η only h of the form ½∑a_μ²
+  would be reachable」——只有洛伦兹号差（至少一个负号）才能让这个构造触达**任意** h（含负值）。
+  这是本节点 (4) 在**c 取自然数（经典型 c = D 维自由玻色子中心荷）、任意 h** 这一子集上的
+  **第二条独立证明**，走的是「在一个具体表示（Fock 空间）里造非零向量」而不是「PBW 下界」，
+  与本节点 (1)–(4) 的证明路线（三角分解 + PBW 基计数）完全不同。
+  ⚠ **这不缩小本节点距 formalized 的缺口**：(a) 只覆盖 c ∈ N（经嵌入），不是任意域元素 c ∈ F；
+  (b) 只证 (4)，不触及 (1)(2)(3)（自由性、PBW 基、dim V_N = p(N)）——非零性不蕴含自由性；
+  (c) 依赖一个具体的表示实现（Fock 空间）而非对任意抽象 Verma 模的论证。
+  图侧记账：该 Lean 引理与其在图上的落点详见
+  worldsheet.fock-module-free-over-negative-virasoro-low-level 与
+  worldsheet.shapovalov-form-existence 的 notes；本节点只记录「(4) 的一个特殊子情形现有第二条
+  独立证明」这一事实，不据此修改 statement 或 status。
 author: curator
 created: "2026-09-11"
