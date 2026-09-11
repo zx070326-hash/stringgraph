@@ -1,0 +1,167 @@
+id: worldsheet.tower-vertex-weighted-mode-sum--via-lean
+target: worldsheet.tower-vertex-weighted-mode-sum
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.exponential-vertex-operator-current-weight-identity
+    inferred: false
+    note: |
+      **本推导的原子输入，命题级依赖，且被用两次。**
+      第一次在动量 m k_0、指标 j 上（引入电流：j V^{(m)}_j ↦ m Σ_J (k_0·α_{−J}) V^{(m)}_{j−J}），
+      第二次在动量 (m+n) k_0、指标 K = 0 上（消掉电流，右端系数为 0，即"全导数"）。
+      Lean 侧本推导先把那张卡的单 Fock 形式 `Fock.vertexCurrent_eq` 逐层搬到塔上
+      （`towerCurrentVertex_eq`：m • towerCurrentVertex = K • towerVertex），
+      搬运时用 `Fock.dotMode_vertexMomentum`（电流对动量线性）与
+      `towerCurrent_zero_of_normalized`（归一化 (N) 唯一的用处），
+      再用它两次。所以本推导只有**一个**数学输入卡，另外两条是定义卡。
+      ⚠ 该卡是 formalized，故这条边不压低本推导的有效状态。
+  - id: worldsheet.isotropic-tower-vertex-operator-fusion
+    inferred: false
+    note: |
+      **证明中间那一步：融合两个指数**，命题级依赖。
+      在把电流提到 j-求和外面之后，剩下的 Σ_j V^{(m)}_{j−J} V^{(n)}_{−j} 正是那张卡的
+      有限和形式（Lean 逐字调用
+      `sum_towerVertex_towerVertex_of_isotropic η b hbb m n (0 - J) x …`，
+      指标经 `Finset.sum_image` 的 j ↦ −j 重标后对上），得 V^{(m+n)}_{−J}。
+      ⚠ **方向很重要**：那张卡是本推导的**一步**，本卡**不是**那张卡的推论——
+      目标【为什么这不是同点乘积 (5a) 的推论】一段与目标 notes 里"两位 formalizer 独立证伪"
+      的记录说的就是这件事。不要把这条边反向读。
+      ⚠ 该卡是 formalized，故这条边不压低本推导的有效状态。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      提供塔 T(p;k_0) = ⊕_{N∈Z} F(p + N k_0)（Lean `TowerFock D R = ℤ →₀ Fock D R`）、
+      层移位 e^{i n k_0·x}（`towerShift`）、逐层算子装配（`towerDiag`、`towerMode`）与
+      **逐层的零模** α^μ_0|_N = (2α')^{1/2}(p + N k_0)^μ（该卡陈述里那一行）。
+      最后一条是本推导 m + n = 0 分支的关键：`towerCurrent_zero_of_normalized` 要求
+      k_0·α_0 = 1 在**每一层**成立，而这由该卡的逐层零模加上
+      `dotVec_towerMomentum_right_of_isotropic`（k_0² = 0 ⟹ k_0·p 沿塔不变）保证。
+      逐层化归用 `Finsupp.lhom_ext` / `sum_single_eq`，即该卡"代数（外部）直和、
+      只有限多层非零"这一条；towerLevelBound / towerModeBound 的逐层比较用 `Finset.le_sup`。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+  - id: worldsheet.ddf-operators-v6
+    inferred: true
+    note: |
+      **inferred: true。** 本推导用到 `towerVertex` 这个**定义**（塔上顶点算子的 z^K 洛朗系数，
+      含把洛朗指标移 −n 的单值因子记账）。图上唯一写下这个定义的地方是该卡的
+      【顶点算子的模】一段，但该卡的 `formal.lean_decl` 指向 `ddfOp`，**不是** `towerVertex`。
+      ⇒ 这条边指向的是"该卡文本里的一段记号约定"，不是该卡 formal 声明的内容，故标 inferred。
+      ⚠ 正确的修法（提请 lead；这是第四次提请，前三次见
+      worldsheet.isotropic-tower-vertex-operators-commute--via-lean gaps (iv)、
+      worldsheet.vertex-operator-adjoint--via-lean、
+      worldsheet.isotropic-tower-vertex-operator-fusion--via-lean gaps (iii)）：
+      把 `towerVertex` 拆成一张 formalized 定义卡。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.sum_weighted_towerVertex_towerVertex（目标断言，亦即目标卡的 formal.lean_decl）；塔上权恒等式 StringFormal.NoGhost.{towerCurrent, towerCurrent_single, towerCurrent_zero_of_normalized, towerCurrent_apply_eq_zero_of_lt, towerCurrent_towerVertex_comm, towerCurrent_towerVertex_apply_eq_zero_of_notMem, towerCurrentVertex, towerCurrentVertex_apply, towerCurrentVertex_eq}；零动量退化 StringFormal.NoGhost.Fock.{expWeight_zero_momentum, creaExp_zero_momentum, vertexOsc_zero_momentum} 与 StringFormal.NoGhost.towerVertex_zero_momentum；一致局部有限性 StringFormal.NoGhost.towerVertex_towerVertex_apply_eq_zero_of_lt；除以 m+n 的引理 StringFormal.NoGhost.eq_zero_of_intCast_smul_eq_zero；动量算术 StringFormal.NoGhost.{dotVec_vertexMomentum_left, dotVec_vertexMomentum_right, dotVec_vertexMomentum}；调用的输入 StringFormal.NoGhost.Fock.vertexCurrent_eq（权恒等式）与 StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic（(5a) 塔版）；塔侧 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{towerVertex, towerVertex_single, towerVertex_apply_eq_zero_of_lt, towerLevelBound, towerModeBound, towerMomentum, dotVec_towerMomentum_right_of_isotropic, sum_single_eq}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；所在文件 799 行 / 35 条声明，
+      formalizer 自述 2026-09-11 用 `--import StringFormal.NoGhost.VertexWeightedSum --all`
+      复核公理只有标准三条。lead 以 **28bc556** 合入 main
+      （formal 侧提交链 e7909ad → 7c8024d）。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112"
+    note: |
+      **不承载本推导的任何一步**（论证全部是 Lean 的），只记录该步骤在文献里的位置：
+      教科书把它写成"m+n ≠ 0 时被积式是全导数、留数为零；m+n = 0 时指数退化、
+      留下 k_0·α_0 = 1"。式号与正文未核实（L0）。
+      ⚠ 本推导**不是**那条围道论证的形式化：它没有围道、没有解析延拓，
+      "全导数"在这里等于"权恒等式在 K = 0 处给出零系数"（见 summary 第三步）。
+summary: |
+  机器检查的证明，三步，是围道留数论证的**纯代数替代品**（不是它的形式化）。
+
+  **预备：把权恒等式搬到塔上（`towerCurrentVertex_eq`）。**
+  塔上的电流 `towerCurrent η a b J` 逐层是 `Fock.dotMode η b (towerMomentum a b (j+m)) J`。
+  逐层调用 worldsheet.exponential-vertex-operator-current-weight-identity 的
+  `Fock.vertexCurrent_eq`，动量取 `vertexMomentum b m = m·b`，
+  用 `dotMode_vertexMomentum`（(m k_0)·α = m (k_0·α)）与
+  `dotVec_vertexMomentum_right`（k_0·(m k_0) = m k_0² = 0）配平，得
+    (m) • Σ_J (k_0·α_{−J}) V^{(m)}_{K−J} = (K) • V^{(m)}_K 。
+  单 Fock 形式里的常数 b·a 在这里**被 `towerVertex` 内建的层移位吸收**，塔上没有额外常数。
+  ⚠ 归一化 (N)（`hba : dotVec η b a = 1`）在整份证明里**只在** `towerCurrent_zero_of_normalized`
+  用到：它使 k_0·α_0 = 1 在每一层都成立（与 (T) 自洽，
+  因为 `dotVec_towerMomentum_right_of_isotropic` 说 k_0² = 0 时 k_0·p 沿塔不变）。
+
+  **第一步（引入电流）。** 逐项把 j • V^{(m)}_j V^{(n)}_{−j} x 换成
+  (m) • Σ_{J ∈ T} K_J ( V^{(m)}_{j−J} ( V^{(n)}_{−j} x ) )，其中 K_J := towerCurrent。
+  中间二重和的窗口取 **T = Icc (−towerModeBound x) (2·towerLevelBound x − m − n)**，
+  被求和项在 T 外为零（`hvan`）：下端用"电流与两个顶点算子都对易"
+  （`towerCurrent_towerVertex_comm`）把 K_J 一路交换到 x 上，再用
+  `towerCurrent_apply_eq_zero_of_lt`；上端分两种情形，用
+  `towerVertex_towerVertex_apply_eq_zero_of_lt`（**对内层指标一致**）或
+  `towerVertex_apply_eq_zero_of_lt`。
+  ⚠ **这一步是目标卡【为什么窗口要多留余量】那一段的内容**：不把 K_J 交换到 x 上，
+  J-下端就依赖 V^{(n)}_{−j}x 的 mode 界，而后者随 j → −∞ 发散，窗口选取会循环。
+
+  **第二步（交换二重和 + 融合指数）。** `Finset.sum_comm` 换序后，对每个固定 J，
+  内层 Σ_j V^{(m)}_{j−J}( V^{(n)}_{−j} x ) 经 `Finset.sum_image`（j ↦ −j）重标，
+  正是 worldsheet.isotropic-tower-vertex-operator-fusion 的有限和形式，
+  以 L = 0 − J 调用，得 V^{(m+n)}_{0−J} x。于是整体化为
+  (m) • Σ_{J ∈ T} K_J ( V^{(m+n)}_{−J} x )。
+
+  **第三步（留数，两分支）。**
+  · **m + n ≠ 0**：上式右端正是 `towerCurrentVertex η a b (m+n) 0` 作用在 x 上
+    （窗口核对 `hvan0` 同第一步），而**第二次**用权恒等式（动量 m+n、指标 K = 0）给
+      (m+n) • Σ_J K_J V^{(m+n)}_{−J} x = (0) • V^{(m+n)}_0 x = 0 ，
+    再由 `eq_zero_of_intCast_smul_eq_zero`（**ℚ-代数里除掉 m+n**）得该和为零，
+    故整体为零。**这就是"全导数留数为零"的纯代数版本。**
+  · **m + n = 0**：`towerVertex_zero_momentum`（其先决原子是
+    `Fock.vertexOsc_zero_momentum`：V^{(0)}_K = δ_{K,0}，约 20 行）把指数退化成恒等，
+    Σ_{J ∈ T} 里只剩 J = 0 项（0 ∈ T 由窗口保证），
+    该项由 `towerCurrent_zero_of_normalized` 等于 x，乘上前缀 m 得 m • x。
+
+  **假设核对**：恰好 `hη : ∀ μ, η μ * η μ = 1`、`hbb`（目标 (T)）、`hba`（目标 (N)）三条，
+  加上对指标集的窗口假设 `hs`。m、n 无任何限制（目标【不断言】(f)）。
+gaps:
+  - |
+    (i) **(T) 或 (N) 不成立时的任何结论都未被证明**（目标【不断言】(a)）。
+    特别地"k_0² ≠ 0 时本式为假"在 Lean 与本图里都没有。
+    可核对的是**用在哪里**：(T) 在本文件进入三处（权恒等式本身、电流与顶点算子的对易、
+    以及由后者给出的局部有限窗口），(N) 只进入一处（`towerCurrent_zero_of_normalized`）。
+    这些计数是 formalizer 在文件头 "Mathematical remarks" 第 2、3 条的记账，
+    本推导照实转录，**不**断言它穷尽了 (T) 在整条 DDF 链上的作用。
+  - |
+    (ii) **本推导不是围道留数论证的形式化**，而是它的替代品。没有围道、没有 z、
+    没有解析延拓、没有"被积式是权 1 主场的导数"这一类论断（那是
+    worldsheet.ddf-transverse-oscillator-algebra-v2--via-conformal-weight 的 gaps 第 2 条
+    指出的未展开步骤，本推导**不**关闭它，只是绕开它）。
+    ⇒ 想把文献那条围道论证接到 Lean 上，仍需 worldsheet.ope-commutator-dictionary 一线。
+  - |
+    (iii) **[A^ε_m, A^δ_n] 仍未形式化**。本卡是 (5b)，是该对易关系最后一块**数学**输入；
+    剩下的是把 ⁅A^ε_m, A^δ_n⁆ 展成对 (j, l) 的二重和、用横向性
+    （`lie_towerModeVec_towerVertex`，ε·k_0 = 0 时为零）把 V 挪到右边、
+    用 CCR 把 ⁅α^ε_j, α^δ_l⁆ 化成 j(ε·δ)δ_{j+l,0}、最后套本卡（窗口假设是
+    `m − towerLevelBound x − towerModeBound x ≤ j ≤ towerLevelBound x − n`）。
+    formal/TODO.md「[A,A] 的整条链」段估 150–250 行，「主要工作量在窗口对齐，
+    不再有新的数学内容」；**formalizer-ddf-algebra 进行中**。
+    ⇒ worldsheet.ddf-transverse-oscillator-algebra-v2 仍**不得**标 formalized。
+  - |
+    (iv) **`towerVertex` 在图上没有自己的定义卡**，本推导对 worldsheet.ddf-operators-v6
+    的那条边因此标 inferred。已第四次提请 lead 补定义卡。
+  - |
+    (v) **零模只是层移位**，[x^μ, p^ν] 未形式化；塔建在**固定的** p 与 k_0 上，
+    没有余循环/Klein 因子（目标【不断言】(d)）。
+  - |
+    (vi) **ℚ-代数不可去**：第三步 m + n ≠ 0 分支要除以 m+n。
+    在 ℤ 上本推导只给出 (m+n)·Σ_j j V^{(m)}_j V^{(n)}_{−j} = 0。
+    另外相干态系数本身也需要 ℚ。无实结构、无幺正性、无解析结构。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【本推导的依赖结构值得记住：只有一个数学输入】
+  三步里的"融合指数"用 (5a) 塔版，"引入/消掉电流"两次都用同一条权恒等式，
+  其余全是窗口记账。换句话说：**(5b) = 权恒等式 × 2 + (5a) × 1 + 窗口对齐**。
+  纸上那句"留数计算"在图上因此是**两条独立命题的组合**，而不是一条引理。
+
+  【与文献推导的关系：两条独立路线，都保留】
+  worldsheet.ddf-transverse-oscillator-algebra-v2 已有两条推导
+  （--via-zero-mode-bracket：G–N 的物理态李括号 + 零模字典，rigorous；
+  --via-conformal-weight：GSW/GT 的 OPE + 围道形变，physical-argument）。
+  本推导所属的这条 Lean 链是**第三条路线**的组成部分，与前两条的论证不重叠：
+  它既不用顶点代数的零模同态，也不用径向排序与围道变形。
+author: curator
+created: "2026-09-11"

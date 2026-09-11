@@ -1,0 +1,172 @@
+id: worldsheet.exponential-vertex-operator-current-weight-identity
+kind: proposition
+title: "指数顶点算子的**电流权恒等式**：b·b = 0 ⟹ Σ_J (b·α_{−J}) V^{(b)}_{L−J} = (L + b·a) V^{(b)}_L（即 z∂_z :e^{ib·X}: = :(i b·z∂_z X) e^{ib·X}: 的代数形式）"
+statement: |
+  【设定：代数 Fock 空间上的模，无 OPE、无围道、无收敛性、无零模】
+  按 worldsheet.bosonic-fock-space 取 D 个自由玻色振子的**代数** Fock 空间 F = F(D, R)（无零模），
+  系数环 R 是交换 ℚ-代数，对角时空度规分量 η_μ **满足 η_μ² = 1**
+  （conv.metric-mostly-plus 下 η = diag(−1,+1,…,+1)）。
+  ⚠ **本卡需要 η_μ² = 1**，与 worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators
+  不同：本卡的电流是 Σ_μ η_μ b^μ α^μ_{−J}，把它写成常系数导子要用一次双重收缩。
+
+  取两个**常**向量 a, b ∈ R^D，按 conv.alpha-prime-regge 的重标度它们分别是
+    a^μ = (2α')^{1/2} p^μ  （零模参数，即 α^μ_0 = a^μ 在 F 上的标量值，
+                             见 worldsheet.virasoro-generators-free-boson），
+    b^μ = (2α')^{1/2} k^μ  （顶点算子携带的动量 k）。
+  记 x·y := Σ_μ η_μ x^μ y^μ；记 V^{(b)}_J 为 worldsheet.exponential-vertex-operator-modes
+  定义的 :e^{i k·X(z)}: 的**振子部分**的 z^J 洛朗系数（z^J-系数约定；Lean `Fock.vertexOsc η b J`）。
+
+  【被求和的对象：收缩电流的洛朗模】对每个 J ∈ Z 定义 F 上的 R-线性算子
+
+      (b·α_{−J}) := Σ_μ η_μ b^μ α^μ_{−J}      （Lean 侧 `Fock.dotMode η b a J`），
+
+  **指标约定与 V^{(b)}_J 对齐：它把振子能级抬高 J**（故 J < 0 时是湮灭算子，J = 0 时是标量）。
+  它是 b·(z ∂_z X)(z) 的 z^J 洛朗系数。两条基本值：
+    · J = 0：(b·α_0) = (b·a) · id（零模是标量，见上面 a 的说明）；
+    · J < −modeBound(P)：(b·α_{−J}) P = 0（湮灭截断）。
+
+  【断言】设
+
+      b·b = 0        （等价 k² = 0，"顶点动量类光"）。
+
+  则：
+
+  **(1) 局部有限性。** 对每个 L ∈ Z 与每个 P ∈ F，(b·α_{−J})( V^{(b)}_{L−J} P ) 在
+
+      J < −modeBound(P)   或   J > L + levelBound(P)
+
+  时为零；特别地对 J 的求和逐向量是有限和。
+  ⚠ **两端的来历不同**：上端只是 V^{(b)}_{L−J} 的能级界；**下端需要 b·b = 0**——
+  它来自"电流与顶点算子对易"（见下面【b·b = 0 用在哪三处】(ii)），
+  没有这条对易性就要把截断加在 V^{(b)}_{L−J} P 上，而那个界随 J 变动。
+
+  **(2) 权恒等式。** 作为 F 上的算子恒等式
+
+      **Σ_{J ∈ Z} (b·α_{−J}) ∘ V^{(b)}_{L−J}  =  ( L + b·a ) · V^{(b)}_L** ，   ∀ L ∈ Z。
+
+  有限和形式：任何包含窗口 −modeBound(P) ≤ J ≤ L + levelBound(P) 的有限指标集都算得对。
+
+  这正是 z ∂_z :e^{i b·X(z)}: = :( i b·(z ∂_z X)(z) ) e^{i b·X(z)}: 的**洛朗系数形式**：
+  左端是"电流乘顶点算子"（一个**乘积**，不是括号），右端是"顶点算子乘权"。
+
+  【常数为什么是 L + b·a 而不是 L——这一段是陈述的一部分】
+  b·a = 2α' b·k·(…) 的具体值是 **b·a = 2α' k·p**，即顶点算子在动量 p 的 Fock 空间上的
+  **单值指数**（z^{2α' k·p}）。它**不是共形权的一部分**：共形权是 ½ b·b = α'k²，
+  在本卡的假设 b·b = 0 下为零。
+  ⇒ 在动量塔上（worldsheet.momentum-tower-fock-space），这个 b·a 恰好就是
+  `towerVertex` 定义里**已经内建的层移位**（洛朗指标移 −n 的那一项），
+  所以塔上同一条恒等式读作 m Σ_J (k_0·α_{−J}) V^{(m)}_{K−J} = K V^{(m)}_K，没有额外常数。
+  本卡**只断言单个 Fock 空间上的形式**；塔上的形式见 notes 与
+  worldsheet.tower-vertex-weighted-mode-sum 的推导。
+
+  【b·b = 0 用在哪三处（记录为限制，本卡不断言否定结论）】
+  (i) **恒等式本身**：b·b ≠ 0 时 b·∂X 与 e^{i b·X} 有缩并 ∼ b²/z，恒等式多出反常项；
+  (ii) **电流与顶点算子的对易** (b·α_{−J}) V^{(b)}_K = V^{(b)}_K (b·α_{−J})，
+       它需要收缩向量与顶点动量正交（此处两者都是 b）；
+  (iii) **(1) 的下端截断**，它是 (ii) 的推论。
+  ⚠ 这三条里 (ii)(iii) 是可核对的（Lean 里 b·b = 0 确实只从这三处进入），
+  而"(i) 的反常项"是**机制说明**，见【不断言】(a)。
+
+  【本节点明确不断言】
+  (a) **b·b ≠ 0 时的任何定量结论**，包括那个反常项的形式，以及"恒等式为假"这一否定命题。
+      本图与 Lean 都没有。
+  (b) **本卡不是 [L_m, V_J] 恒等式的推论，也不蕴含它**。
+      worldsheet.exponential-vertex-operator-mode-weight-identity-v2 说的是**对易子**
+      L_m^{(a+b)} V_J − V_J L_m^{(a)} = (J − m + b·a + ½(m+1)b·b) V_{J−m}；
+      本卡左端是**乘积**（电流 × 顶点算子），不是括号，故那一系列的 ⁅·,·⁆ 引理全用不上。
+      特别地 m = 0 的情形 ⁅L_0, V_J⁆ = (J + b·a) V_J **看不到本卡的内容**：
+      L_0 对乘积按 Leibniz 作用，只见两个因子权的**和**；本卡把权放在**一个**因子上。
+      ⇒ 电流 b·∂X 必须作为**新对象**引入，这就是上面 (b·α_{−J}) 的作用。
+  (c) **加权和** Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（那是
+      worldsheet.tower-vertex-weighted-mode-sum，本卡是它的原子输入）。
+  (d) **任何 OPE 形式的陈述**、任何围道积分、任何"电流是权 1 主场"的论断。
+      本卡是模的代数恒等式。
+  (e) **收敛性、完化、解析结构、幺正性、号差**。F 是多项式代数，逐向量是有限和；
+      η_μ 只是 R 中一族满足 η_μ² = 1 的元素，没有实结构也没有正定性。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.vertexCurrent_eq
+  lean_file: StringFormal/NoGhost/VertexWeightedSum.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.Fock.vertexCurrent_eq（本卡 formal.lean_decl，断言 (2)）与有限和形式 StringFormal.NoGhost.Fock.sum_dotMode_vertexOsc；电流 StringFormal.NoGhost.Fock.{dotMode, dotMode_apply, dotMode_vertexMomentum, dotMode_zero, dotMode_apply_eq_zero_of_modeBound_lt, dotMode_X_mul}；对易性 StringFormal.NoGhost.Fock.{dotMode_vertexOsc_comm, lie_dotMode_vertexOsc_of_dotVec_zero}；断言 (1) 是 StringFormal.NoGhost.Fock.{currentIdx, dotMode_vertexOsc_apply_eq_zero_of_notMem}；组装 StringFormal.NoGhost.Fock.{vertexCurrent, vertexCurrent_apply, vertexCurrent_apply_one, vertexCurrent_X_mul}；塔上形式 StringFormal.NoGhost.{towerCurrent, towerCurrent_single, towerCurrent_zero_of_normalized, towerCurrentVertex, towerCurrentVertex_apply, towerCurrentVertex_eq}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。该文件 799 行 / 35 条声明，formalizer 自述
+      2026-09-11 用 `--import StringFormal.NoGhost.VertexWeightedSum --all` 复核公理只有标准三条；
+      lead 以 **28bc556**（"merge: weighted vertex-operator mode sum (DDF step 5b) via
+      current-weight identity (VertexWeightedSum.lean, 35 decls)"）合入 main
+      （formal 侧提交链 e7909ad → 7c8024d）。
+      `vertexCurrent_eq` 语句逐字（去掉隐式参数）：
+        `(η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (L : ℤ) :
+         vertexCurrent η a b hη hbb L = ((L : R) + dotVec η b a) • vertexOsc η b L`，
+      其中 `vertexCurrent η a b hη hbb L = lsumLocFin (fun J => dotMode η b a J ∘ₗ
+      vertexOsc η b (L - J)) (currentIdx L) …`，
+      `currentIdx L P = Finset.Icc (-(modeBound P : ℤ)) (L + (levelBound P : ℤ))` 即本卡的窗口，
+      `dotMode η c a J = ∑ μ, (η μ * c μ) • mode η a μ (-J)` 即本卡的 (b·α_{−J})。
+      **假设恰好是 `hη` 与 `hbb`**——本卡两条假设各自都出现，没有别的。与本卡断言 (1)(2) 逐字一致。
+      ★ 本卡【常数为什么是 L + b·a】那一段的逐字来源是该定理的 docstring：
+      「The prefactor `b·a = 2α' b·k` is the monodromy exponent of the vertex operator on a
+      Fock space of momentum `k`; on the DDF tower it is the rung shift already built into
+      `towerVertex`, so there the identity reads simply
+      `K V^{(m)}_K = m Σ_J (k_0·α_{-J}) V^{(m)}_{K-J}`.」
+      ★ 本卡【不断言】(b) 的逐字来源是同一 docstring 末段：
+      「Note that this is **not** a consequence of the conformal-weight identity
+      `⁅L_0, V_J⁆ = J V_J` together with the same-point product: `L_0` acts on a product by
+      Leibniz and only sees the *sum* of the two weights, whereas the weighted sum of (5b)
+      puts the weight on *one* factor.  The current `b·α` has to be introduced by hand.」
+      ⚠ 本卡【b·b = 0 用在哪三处】(i) 的"反常项"在 Lean 里只是文件头 "Mathematical remarks"
+      第 2 条的注记，逐字：「the weight identity itself (`Fock.vertexCurrent_eq` assumes
+      `b·b = 0`; otherwise the contraction of `b·∂X` with `e^{ib·X}` adds a `b²/z` term and the
+      identity acquires an anomalous piece)」——**不是定理**，见【不断言】(a)。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **不承载本卡的论证**（论证是 Lean 的），只作对照：教科书把
+      z∂_z :e^{ib·X}: = :(i b·z∂_z X) e^{ib·X}: 当作正规序指数的显然性质，
+      在 DDF 的围道推导里以"对 z 分部积分/全导数"的形式使用，
+      **不写洛朗系数形式，也不提局部有限性**。核实等级沿用 worldsheet.ddf-operators-v6：
+      章节页码 L4/L2，**式号与正文 L0**。GSW 用 mostly-minus（已按 conv.metric-mostly-plus 转写）、
+      取 α' = 1/2。
+tags: [cft, vertex-operator, bosonic-string, spectrum-generating-algebra, ddf, formalized]
+notes: |
+  【立卡理由：这是 (5b) 真正缺的那个原子事实】formal/TODO.md 的 `ddf-operators` (5b) 逐字：
+  「**真正缺的原子事实（本文件的核心，约 250 行）**是**权恒等式**
+  **`Fock.vertexCurrent_eq`**」。它在图上此前没有任何节点：
+  worldsheet.exponential-vertex-operator-mode-weight-identity(-v2) 讲的是**对易子**
+  [L_m, V]，与本卡逻辑独立（见【不断言】(b)）。
+  ⇒ 不立此卡，worldsheet.tower-vertex-weighted-mode-sum 的推导就会有一条无处可挂的边。
+
+  【"塔上没有额外常数"的记账，展开一句】
+  单 Fock 上顶点算子把动量 p 的扇区送到 p + k，恒等式的常数里因此出现 b·a = 2α' k·p；
+  塔上 `towerVertex η b n K` 的定义已经把这一项吸收进洛朗指标的 −n 移位
+  （worldsheet.ddf-operators-v6 的【顶点算子的模】一段），于是塔上的形式是
+    (m) · Σ_J (k_0·α_{−J}) V^{(m)}_{K−J} = K · V^{(m)}_K     （Lean `towerCurrentVertex_eq`），
+  左边的 m 来自电流对动量的线性（`dotMode_vertexMomentum`：(m k_0)·α = m (k_0·α)）。
+  ⚠ **塔上形式额外需要归一化 2α' k_0·p = 1**（Lean 的 `hba : dotVec η b a = 1`），
+  本卡的单 Fock 形式**不需要**它。这就是 formal/TODO.md (5b) 记的
+  「`2α' k_0·p = 1` 只在一处用到」的那一处（`towerCurrent_zero_of_normalized`）。
+  按"一个节点一个命题"，塔上形式**不写进本卡陈述**，它作为
+  worldsheet.tower-vertex-weighted-mode-sum--via-lean 的一个推导步骤出现。
+
+  【与 worldsheet.exponential-vertex-operator-mode-weight-identity-v2 的假设对照】
+  · 两卡都需要 η_μ² = 1（都有双重收缩）；
+  · 那张卡的量词是一切 m ∈ Z，本卡的量词是一切 L ∈ Z；
+  · 那张卡**不需要** b·b = 0（b·b 以系数 ½(m+1)(b·b) 出现在结论里），**本卡需要**；
+  · 结论的类型不同：一条是对易子，一条是乘积。
+  ⇒ 两卡互不蕴含。这一点值得记住：**"顶点算子是权 h 场"与"电流权恒等式"是两条独立事实**，
+  纸上推导常把它们混为"用 z∂_z 作用一下"。
+
+  【证明为什么必须走刚性（formalizer 记录）】左端是乘积不是括号，所以 `lie_*` 系列全用不上；
+  两边作为 ℤ → Module.End 的族满足**同一条**产生模态递推
+  （`vertexCurrent_X_mul` 比 `vertexOsc_X_mul` 多一项 k b^μ V_{L+k}，
+  来自 ⁅b·α_{−J}, α^μ_{−k}⁆ = k b^μ δ_{J,−k}；而右端前缀 L 求导也恰好多出**同一项**——
+  两者相消是整条证明的支点），真空值则由欧拉递推给出。转录自 formal/TODO.md (5b)。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search 权恒等式 / current / "vertex operator" / 留数`。
+  最接近的既有节点：worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+  （[L_m, V]，上面已说明逻辑独立）、worldsheet.exponential-vertex-operator-modes（V 的定义卡）、
+  worldsheet.ddf-contour-equals-mode-sum（围道 ↔ 模态和的桥）。
+  **没有**电流权恒等式的节点，本卡不重复。
+author: curator
+created: "2026-09-11"
