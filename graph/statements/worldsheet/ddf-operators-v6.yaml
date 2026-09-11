@@ -271,6 +271,23 @@ notes: |
     正确的落点是「横向标架」那一层，而那一层现在另有一张卡
     （worldsheet.transverse-frame-spans-orthogonal-complement）在承担。
   ⚠ **本卡 status: formalized 不受影响**：`ddfOp` 的定义不需要 (T′)，受影响的只是关于 A^ε_{−1} 的**定理**。
+  ✔ **(T′) 的正确落点现已存在：`worldsheet.ddf-light-cone-frame`**（definition，status rigorous，
+    curator 2026-09-11，分支 agent/curator/lightcone-frame）。那张卡把文献的光锥标架写成定义，
+    (T′) 是它的条件 (F6)，完备性是 (F8)，共轭类光方向 b̃ 是 (F4)。
+    本段上面【建议（本轮不执行）】写的两条理由仍然成立，故**本卡仍不换代、陈述文本不动**：
+    (T′) 不是 `ddfOp` 定义的参数，它属于标架那一层，而那一层现在有自己的卡了。
+
+  【2026-09-11：本卡陈述【横向标架的特例】一段的正确落点（curator，lightcone-frame；**陈述未动**）】
+  陈述里【横向标架的特例】一段只要求 e_i·k_0 = 0（(T)）与 e_i·e_j = δ^{ij}（(O)），
+  **比文献的光锥标架宽**：文献把 ε_i 取在 span{k_0, p}^⊥ 里，因而还自动有
+  (T′) ε_i·p = 0 与完备性。宽出来的正好是这两条，且它们在一般交换环上不可由 (T)(O) 推出
+  （上一段的机检反例 + worldsheet.transverse-frame-spans-orthogonal-complement 的手算反例）。
+  ⇒ **读本卡【横向标架的特例】一段时，应把它读成「A^{e_i}_n 这个记号的来历」，
+  而不是「文献的横向标架」**；文献那一层的完整条件表在 `worldsheet.ddf-light-cone-frame`
+  的 (F1)–(F8)。按 graph/CLAUDE.md「换代时陈述正文内嵌 id 的处理」（lead 裁决 2026-09-12），
+  正文不就地改字，指针留待本卡下次实质换代（若建 v7，该段应加 (T′) 作为该特例的显式条件）。
+  ⚠ 本卡的 `uses` **不**加新卡：新卡的 `uses` 含本卡（它引用本卡的 (T)(N)(S) 与重标度记法），
+  反向加边会成环。
 
 author: curator
 created: "2026-09-11"
