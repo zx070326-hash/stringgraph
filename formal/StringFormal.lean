@@ -64,3 +64,4 @@ import StringFormal.NoGhost.LevelTwoSpan
 import StringFormal.NoGhost.LevelTwoElim
 import StringFormal.NoGhost.NullDescend
 import StringFormal.NoGhost.SliceRank
+import StringFormal.NoGhost.SliceDim

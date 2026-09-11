@@ -307,6 +307,15 @@ StringFormal/
                             §B′ 订正：蓝图写的 `iff` 的「⟹」半边**不免费**（要 `ddfSpan` 与
                             `towerNullSubmodule` 对双分次齐次），故拆到 `SliceDim.lean`，
                             PR1→PR2 与 §B′.7 画的方向相反
+  NoGhost/SliceDim.lean     **蓝图 §B′ PR2**：算出 `B26` 右边第一项。**`frameMonomial_mem_towerBigrade`**
+                            关掉 `DDFGram.lean` 自报的「rung 与 level 联动未做」——**不算 `ddfOp` 的 level**，
+                            而是「|d⟩ 在 rung −N(d) 且物理」+ `Glue.towerBigradeProj_mem_towerPhysSubmodule`
+                            + `massShell_of_mem_towerBigrade` 逼出只有 level N(d) 的分量非零；
+                            `ddfSpan_inf_towerBigrade_eq_span`（片上 = level N 的 DDF 单项式张成）；
+                            **`ddfLevelFintype`**（level 固定的占据函数有限，编码进
+                            `ι × Fin N → Fin (N+1)`，`min` 只为避开依值证明）与
+                            `finrank_ddfSpan_inf_towerBigrade`（= 指标集基数 = `p_{D−2}(N)`，
+                            **永不求值**，与 §B′.8 一致）。`D = 26` 不出现
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
