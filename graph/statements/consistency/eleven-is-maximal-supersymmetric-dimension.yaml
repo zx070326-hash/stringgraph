@@ -1,0 +1,58 @@
+id: consistency.eleven-is-maximal-supersymmetric-dimension
+kind: proposition
+title: d = 11 是超对称可以存在的最大时空维数（Polchinski §B.5；论证依赖"helicity > 2 believed impossible"，并有 (10,2) 号差漏洞）
+statement: |
+  **命题（原书 p.453 逐字）**：
+  「In four dimensions the largest supersymmetry algebra, `N = 8`, contains 32 supercharges.
+  This same limit holds in higher dimensions, since we could reduce to four by compactifying on tori.
+  **Table B.1 then implies that `d = 11` is the maximum in which supersymmetry can exist,³
+  since the spinor representations are too large for `d ≥ 12`.** Although this exceeds by one the
+  critical dimension of superstring theory, we will start with this case.」
+
+  拆开来说，论证是三段：
+  (i) `d = 4` 的最大超对称代数是 `N = 8`，含 32 个超荷；
+  (ii) 高维超对称理论可在环面上约化到 `d = 4`，超荷数不变，故 32 是任意维的上界；
+  (iii) 由 Table B.1（math.clifford-majorana-weyl-mod-8）的 min. rep. 列，
+       `d = 12` 的最小旋量实分量数已是 64 > 32，且随 `d` 增大只会更大 ⇒ `d ≤ 11`。
+
+  **本命题的强度限定（是陈述的一部分，不是可选注记）**：
+  (a) 第 (i) 步的依据是「螺旋度大于 2 的无质量粒子不存在」，而原书对此的措辞是
+      **"believed to be impossible"**，不是定理。p.441 逐字：「Massless particles with helicities
+      greater than 2 **are believed to be impossible** to couple to gravity, and have not arisen in
+      string theory.」p.448 逐字：「Larger algebras would require helicities greater than 2, which
+      **is believed to be impossible** (there are some uninteresting exceptions, such as free field
+      theories). **String theory has several times turned up loopholes in such statements, but not yet here.**」
+  (b) **号差漏洞**：脚注 3（p.453）逐字：「With *two* timelike dimensions a Majorana–Weyl spinor with
+      32 components is allowed at `d = 12`, **but we will not try to figure out what this might mean**.」
+      ⇒ 本命题只对**一个类时方向**的号差 `(d−1, 1)` 成立。
+  (c) 第 (ii) 步的「环面约化不改变超荷数」在原书是一句话，无论证。
+
+  **本命题不断言**：`d = 11` 超引力的存在性与唯一性（那是原书紧接的另一句「With two or fewer
+  derivatives there is **a unique** supersymmetric action」，同样无证明、无引用，本图未建卡）。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.5 *d = 11 supergravity*, p.453（引文逐字，无式号）；脚注 3 同页；上界的来源 p.448（`N = 8` 多重态与「believed to be impossible」）与 p.441（helicity > 2 句）；Table B.1 p.434（`d = 12` 的 min. rep. = 64）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E24（主句与脚注 3）、#E20（`N = 8` 与 "believed"）、
+      #E9（Table B.1），证据等级 L1（原书页图）。
+      ⚠ 全附录零文献引用：Nahm 1978（超引力维数上界的通常出处）在本书附录中**未被提及**（§3.2 第 7 条）。
+tags: [supersymmetry, supergravity, maximal-dimension, d11, m-theory, polchinski-appendix-b]
+notes: |
+  【为什么放 consistency 而不是 susy】这是一条**排除性的一致性上界**（"超过 11 维不可能"），
+  与 consistency 区其他"某某不允许"的卡同类。它的上游 math.clifford-majorana-weyl-mod-8 与
+  susy.bps-bound-point-particle-d4 分别在 math 与 susy 区。
+
+  【这条卡为什么重要】它是 M 理论叙事（`d = 11` 的特殊地位）在图上的第一个落点，
+  而它的有效状态**只能是 physical-argument**，且缺口是"believed"级的。任何以
+  「11 维是极大的」为前提的下游论证都会继承这两条限定。这正是本项目要显式化的东西。
+
+  【未覆盖的更强来源】文献里通常把 32 超荷上界归给 Nahm 1978 的超代数分类；本项目**未取得该文献**
+  （L0，未登记 literature/sources.bib）。若日后取得，应新建一条 `--via-nahm-classification` 推导
+  （不改本卡陈述），届时本卡可能升到 rigorous。
+
+  【与脚注 3 的关系】脚注 3 不是可以忽略的技术性备注：它给出的是一个**明确的反例方向**
+  （(10,2) 号差下 `d = 12` 允许 32 分量 M–W 旋量），作者自己不处理。F 理论的 (10,2) 叙事与此相关，
+  本图未建卡。
+author: curator-v2-appB
+created: "2026-09-11"
