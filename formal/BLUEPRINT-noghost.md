@@ -750,3 +750,465 @@ B.1 塔真空/双分级/ddfSpan（中）                                 │
 7. **`worldsheet.ddf-operators-v6` 的 notes**：补记 `A^ε_n |0;k⟩ = 0`（`n > 0`）在本仓库里
    是窗口为空的平凡推论（`ddfWindow n (towerVacuum) = Icc n 0 = ∅`），
    而文献侧通常把它当作正规序的定义性质——这是一个「形式化比文献更廉价」的例子。
+
+---
+
+## B′. General N: induction plan (2026-09-12)
+
+本节是 §B 的**替代方案**，写于 `Glue.lean` / `Assembly.lean` / `DDFGram.lean` / `LevelTwoSpan.lean` /
+`LevelTwoElim.lean` / `Longitudinal.lean` / `LightConeFrame.lean` / `Virasoro/FockFreeLowLevel.lean`
+全部落地之后。它**取代** §B.3（计数收尾）与 §B.4（幺三角基变换）的路线设计，保留 §B.5 的结论
+（`D = 26` 只在 (B-26) 进入）并把 (B-26) 改写成一条**可以直接写进 Lean 的秩陈述**。
+§B.2（FGZ / Kac 路线判死）与 §B.6（逐片交付）不变。
+
+写这份计划时的四条新判断，先列结论，证据在下面各小节：
+
+1. **「GT 的 K_n 路线」与「§B.4 的光锥换基」在本仓库里是同一件事**：`kOp η a b (-n)` 就是光锥产生
+   算子 `α^b_{-n}`，而 `kOp η a b n`（`n > 0`）在光锥变量下就是 `-n ∂/∂(α^{b̃}_{-n})`。
+   所以不存在「选哪条」的问题，只有「用哪套记号陈述」的问题。**建议：机制用光锥变量做，
+   陈述尽量用 `Longitudinal.lean` 的 `kOp` / `towerKerK`**，这样 Goddard (6.2) 那张卡被真正消费。
+2. **§B.4 估的 400–700 行「`MvPolynomial` 上的 `AlgEquiv` 换基」不需要**（`LevelTwoElim.lean` 在
+   `N = 2` 上已经发现这一点，本节把它推广到一般 `N`）：一般 `N` 只需要**张成**语句
+   `levelSubmodule N = span {光锥单项式}`，由「`X_{(μ,n)}` 是标架向量的线性组合」逐项多重线性展开
+   得到，不需要环同构、不需要行列式、不需要线性无关。
+3. **`LevelTwoElim.lean` 里的 `hFullSpan`（「`{b, b̃, ε_i}` 是 `Fin D → R` 的基」）不是新假设，
+   是 `DDFLightConeFrame` 的定理**，而且系数有**显式公式**，不需要 `Classical.choose`：
+   `e = (-η(b̃,e))•b + (-η(b,e))•b̃ + Σ_i η(ε_i,e)•ε_i`。这一条把 `noghost-n2` 自报的
+   「繁琐但直接」的第 1 步整个删掉（见 B′.4 的 PR3）。
+4. **(B-26) 的最锋利形式是一条秩不等式**，它与 `DDFSpansOn` 在单片上**等价**（不是弱化），
+   且在减去两条与 `D` 无关的引理之后变成一条**构造性**命题：
+   「`D = 26` 时片 `(-N, N)` 上至少有 `p_{D−1}(N) − p_{D−2}(N)` 个线性无关的零态」。
+   这比现在图上「H_phys 中 H^⊥ 之外的方向恰为零模态」更适合动手。
+
+### B′.1 路线裁决：`K_n`（GT）vs 光锥换基（§B.4）
+
+设 `F : DDFLightConeFrame η a b`（`LightConeFrame.lean`），记 `b̃ = F.frame.conj`，`ε_i = F.trans.vec i`。
+在固定 rung `j` 的 Fock 空间里引入**光锥产生变量**（`n ≥ 1`）
+
+```
+u_n   := α^b_{-n}    = lcCrea η b n          -- 就是 kOp η a b (-n)，Longitudinal.lean
+ũ_n   := α^{b̃}_{-n}  = lcCrea η b̃ n
+x^i_n := α^{ε_i}_{-n} = lcCrea η (ε_i) n
+```
+
+其中 `lcCrea η w n := ∑ μ, (η μ * w μ) • X (μ, n)`（`polState` 是 `n = 1`、`secondState` 是 `n = 2`
+的特例）。三条基本事实：
+
+* **(K1)** `kOp η a b n`（`n > 0`）是导子，`kOp n (lcCrea η w n) = n • (b·w)`，故它**只湮灭 `ũ_n`**
+  （`b·b̃ = -1`），对 `u_m`、`x^i_m` 全为零（`b·b = 0`、`b·ε_i = 0`）。
+  ⇒ **`towerKerK`（Goddard (6.2) 的 K-条件）在光锥变量下就是「不含 `ũ`」**。
+* **(K2)** `kOp η a b (-n) = ` 乘以 `u_n`，是 `rfl` 级别的事实（`kOp_eq_towerModeVec` + `mode_neg_pnat`）。
+* **(K3)** `⁅K_m, A^ε_n⁆ = 0`（`lie_kOp_ddfOp`，已有）+ `ddfOp_mem_towerKerK`（已有）
+  ⇒ DDF 态不含 `ũ`，即 `ddfSpan ≤ towerKerK`（已有）。
+
+所以「GT 用 `K_n` 刻画 DDF 态」= 「DDF 态是 `ũ`-自由的」。两条路线**不是二选一**：
+消元这一步必须在光锥单项式上做（`K_n ψ = 0` 这个条件本身不告诉你怎么减伪态），
+而 `K` 记号让结果能接上 `Longitudinal.lean` 与图卡 `worldsheet.gt-longitudinal-k-algebra`。
+
+**成本比较**（增量，明细见 B′.10）：
+
+| | 光锥换基（本节） | 纯 `K_n` 记号 |
+|---|---|---|
+| 复用的既有声明 | `DDFLightConeFrame`、`FrameSpansOrthogonal`、`dotVec_polarization_conj_eq_zero`、`dotVec_self_eq_two`、`conjCoeff_eq_neg_dotVec`、`lcCrea` 的 `N ≤ 2` 特例（`polState` / `secondState` / `X_one_eq_polState_single`）、`Fock.pairing_eq_zero_of_level_ne` | 另加 `kOp`、`towerKerK`、`lie_kOp_ddfOp`、`ddfOp_mem_towerKerK`、`kOp_zero_eq_id` |
+| 新增行数 | ≈ 1290 | ≈ +80（桥引理 `towerKerK_inf_towerBigrade_eq_conjFree`） |
+| 副产品 | 无 | **Goddard (6.2) 的一半**：`ddfCharacterization` 从定义变成有内容的定理 |
+
+⇒ **裁决：做光锥换基，附带 80 行的 `K` 桥**。Brower 的 `A^L_n`（§A.3）仍然不做，理由不变，
+但见 B′.9 第 3 条：(B-26) 目前**唯一已知的两条机制都要它或要 Kac 行列式**。
+
+### B′.2 架构：把 `ddf-spans` 拆成三条秩陈述
+
+固定 `N : ℕ`，记（全部是 `Submodule K (TowerFock D K)`，`K` 是特征零域，
+`a₀ := invTwo K * Fock.zeroModeSq η a`）
+
+```
+V_N := towerBigrade D K (-(N : ℤ)) N          -- 反对角片，Module.Finite（towerBigrade_finite）
+H_N := towerPhysSubmodule η a b a₀ ⊓ V_N
+D_N := ddfSpan η a b hη Ε ⊓ V_N
+Z_N := towerNullSubmodule η a b a₀ ⊓ V_N
+```
+
+`Glue.lean` 的 `ddfSpans_of_forall_antidiagonal_slice_int` 已经把 `DDFSpans` 归约成
+「对每个 `N`，`DDFSpansOn … V_N`」。本节的三条支柱是：
+
+* **(P1) 秩判据（与 `D` 无关，便宜）**：`DDFSpansOn … V_N ↔ finrank H_N ≤ finrank D_N + finrank Z_N`。
+  「≥」方向恒成立（`D_N ⊔ Z_N ≤ H_N` 且 `D_N ⊓ Z_N = ⊥`），所以这是一条**等价改写**，
+  不丢信息；它把子模包含变成一个**有限维数字比较**。
+* **(P2) 右边第一项可算（与 `D` 无关，中等）**：
+  `finrank D_N = Fintype.card {d : (Fin (D−2) × ℕ+) →₀ ℕ // ddfLevel d = N} = p_{D−2}(N)`。
+  输入是 `linearIndependent_ddfMonomial`（已有）加一条新的**能级定位**引理
+  `frameMonomial_mem_towerBigrade`（`DDFGram.lean` 只做了 rung，自报「rung 与 level 联动未做」）。
+* **(P3) 左边可界（与 `D` 无关，贵）**：`finrank H_N ≤ p_{D−1}(N)`。走
+  「`V_N = (ũ-自由部分) + 伪态」+「物理态 = 伪态在片内的正交补」两步，见 B′.5。
+
+三条合起来把 `ddf-spans` 归约到
+
+> **(B-26)**：`D = 26`、`a₀ = 1` 时 `finrank Z_N ≥ p_{D−1}(N) − p_{D−2}(N)`。
+
+**关键：(P1)(P2)(P3) 里 `D = 26` 一次都不出现**，与 `Assembly.lean` / `Glue.lean` 的记账一致。
+
+### B′.3 (B-26) 的 Lean 陈述与它的消费者
+
+```lean
+/-- **(B-26)**：临界维数唯一进入之处，写成单片上的秩计数。
+图卡 `worldsheet.ddf-spanning-hypothesis` 与推导 gap (B-26) 的逐字 Lean 形式
+（「H_phys 上双线性型的秩恰为 p_{D−2}(N)」⟺ 本式取等号）。 -/
+def B26 {D : ℕ} {K : Type*} [Field K] [Algebra ℚ K]
+    (η a b : Fin D → K) (hη : ∀ μ, η μ * η μ = 1) (Ε : TransverseFrame η b) (N : ℕ) : Prop :=
+  Module.finrank K ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                       ⊓ towerBigrade D K (-(N : ℤ)) N)
+    ≤ Module.finrank K ↥(ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N : ℤ)) N)
+      + Module.finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                             ⊓ towerBigrade D K (-(N : ℤ)) N)
+
+/-- **(B-26) 的消费者**，也是唯一的消费者。 -/
+theorem ddfSpansOn_bigrade_iff_b26 … :
+    DDFSpansOn η a b hη Ε (towerBigrade D K (-(N : ℤ)) N) ↔ B26 η a b hη Ε N
+
+/-- 接 `Glue.ddfSpans_of_forall_antidiagonal_slice_int`。 -/
+theorem ddfSpans_of_forall_b26 … (h : ∀ N, B26 η a b hη Ε N) : DDFSpans η a b hη Ε
+```
+
+**(B-26) 的三种等价写法**（写进图卡 notes 时用第 (iii) 种，它是动手的形式）：
+
+(i) *包含式*（现卡面）：`H_phys ⊓ V_N ≤ ddfSpan ⊔ H_null`。
+
+(ii) *秩*（现 gap 措辞）：`H_phys ⊓ V_N` 上双线性型的秩 `= p_{D−2}(N)`。
+   等价于 (i)：该型在 `H_N` 上的根基恰是 `Z_N`（不同 rung 正交 + `Fock.pairing_eq_zero_of_level_ne`
+   ⇒ 片与片互相正交 ⇒ `H_N ⊓ H_N^⊥ = Z_N`），故 `rank = finrank H_N − finrank Z_N`。
+
+(iii) *构造式*（建议采用）：**`D = 26` 时片 `(-N, N)` 上存在 `p_{D−1}(N) − p_{D−2}(N)` 个线性无关的零态**。
+   由 (P2)(P3) 从 (iii) 推出 (B-26)。零态的自然产生机制见 B′.4 的 PR0：
+
+```
+p_{D−1}(N) − p_{D−2}(N) = Σ_{m=1}^{N} p_{D−2}(N−m) · p(m)          （φ^{-(D-2)}(φ^{-1} − 1) 的系数）
+```
+
+   右边正是「**DDF 单项式（level N−m）× 纵向种子（level m，按普通分拆 p(m) 计数）**」。
+   `Math/PartitionCard.lean` 的 `p(m)`（m ≤ 5）在这里**是有用的**——它数的是种子，
+   不是本节其他地方出现的 `D`-色分拆（后者在 Lean 里只以指标集的基数出现，永远不求值）。
+   `N = 2`、`D = 26` 的手算核对：`24·p(1) + 1·p(2) = 24 + 2 = 26 = p_{25}(2) − p_{24}(2)` ✓；
+   两个种子显式是 `L_{-1}((b−b̃)·α_{-1})|0;p_{-2}⟩` 与 `(2L_{-2} + 3L_{-1}²)|0;p_{-2}⟩`
+   （后者物理 ⟺ `L_1`、`L_2` 两个条件成比例 ⟺ `c = 26` 且 `h = ½p_{-2}² = −1`，手算见 B′.9 第 3 条）。
+
+### B′.4 引理清单（Lean 伪代码，按 PR 切）
+
+命名空间 `StringFormal.NoGhost`。所有签名都是草案（本文件通例：未编译）。
+
+#### PR0 `NoGhost/NullDescend.lean`（≈ 40 行，无阻塞，先做）
+
+```lean
+/-- **DDF 算子把零态送到零态**：`A^ε_n` 保持物理子空间（`ddfOp_mem_towerPhysSubmodule`），
+而 `(A^ε_n)† = A^ε_{-n}`（`Fock.towerPairing_ddfOp_left`）又保持物理子空间，
+所以零态的 DDF 后代仍与全部物理态正交。 -/
+theorem ddfOp_mem_towerNullSubmodule (hη hbb hba hεb) (n : ℤ) {x : TowerFock D R}
+    (hx : x ∈ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)) :
+    ddfOp η a b ε hη hεb n x ∈ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)
+```
+
+价值：这是 (B-26) 形式 (iii) 的**乘法结构**，把「造 `p_{D−1}(N) − p_{D−2}(N)` 个零态」
+降成「每个 `m` 造 `p(m)` 个纵向种子」。现在就能做，独立于后面一切。
+
+#### PR1 `NoGhost/SliceRank.lean`（≈ 150 行，只依赖已有的东西）
+
+```lean
+/-- DDF 扇区与零态只交于零：DDF 态模长严格正（`ddf_span_pos`），零态模长为零。 -/
+theorem ddfSpan_inf_towerNullSubmodule_eq_bot
+    [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K] … :
+    ddfSpan η a b hη Ε ⊓ towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a) = ⊥
+
+def B26 … (N : ℕ) : Prop := …                     -- 见 B′.3
+
+theorem ddfSpansOn_bigrade_iff_b26 … :
+    DDFSpansOn … (towerBigrade D K (-(N:ℤ)) N) ↔ B26 η a b hη Ε N
+theorem ddfSpans_of_forall_b26 … (h : ∀ N, B26 η a b hη Ε N) : DDFSpans η a b hη Ε
+```
+
+证明骨架（「⟸」；「⟹」由 `Submodule.finrank_mono` + `finrank_sup_add_finrank_inf_eq` 直接给）：
+`D_N ⊔ Z_N ≤ H_N`；`D_N ⊓ Z_N = ⊥`；
+`finrank (D_N ⊔ Z_N) = finrank D_N + finrank Z_N ≥ finrank H_N`；
+`Submodule.eq_of_le_of_finrank_le` ⇒ `H_N = D_N ⊔ Z_N ≤ ddfSpan ⊔ towerNullSubmodule`。
+有限维实例由 `towerBigrade_finite` 沿 `≤ V_N` 下传。
+**备注**：有序域只用在 `ddfSpan_inf_towerNullSubmodule_eq_bot`；特征零域上也能证
+（用 `ddf_gram_diagonal` 的对角非零直接抠系数），将来若要把主定理搬到非有序域，只改这一条。
+
+#### PR2 `NoGhost/SliceDim.lean`（≈ 250 行）
+
+```lean
+/-- **DDF 单项式的 level 定位**（`DDFGram.lean` 自报的缺口「rung 与 level 联动未做」）。
+证法不是直接算 `ddfOp` 的 level，而是：`|d⟩` 在 rung `-N(d)` 且是物理态，
+`Glue.towerBigradeProj_mem_towerPhysSubmodule` 说它的每个双分次分量仍物理，
+`massShell_of_mem_towerBigrade` 逼出非零分量只能落在 level `N(d)`，
+`Glue.sum_towerBigradeProj` 拼回去。需要 `NoZeroDivisors` 与 `CharZero`。 -/
+theorem frameMonomial_mem_towerBigrade (hη hbb hba) (Ε) (d) :
+    frameMonomial hη hbb hba Ε d ∈ towerBigrade D K (-(ddfLevel d : ℤ)) (ddfLevel d)
+
+/-- 齐次生成元的交：`ddfSpan ⊓ V_N` 就是 level `N` 的 DDF 单项式张成。 -/
+theorem ddfSpan_inf_towerBigrade_eq_span … :
+    ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N:ℤ)) N
+      = Submodule.span K (Set.range fun d : {d // ddfLevel d = N} => frameMonomial hη hbb hba Ε d)
+
+instance : Fintype {d : (Fin (D−2) × ℕ+) →₀ ℕ // ddfLevel d = N}   -- 有限：支撑里模数 ≤ N、占据数 ≤ N
+
+theorem finrank_ddfSpan_inf_towerBigrade … :
+    Module.finrank K ↥(ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N:ℤ)) N)
+      = Fintype.card {d : (Fin (D−2) × ℕ+) →₀ ℕ // ddfLevel d = N}
+```
+
+#### PR3 `NoGhost/LightConeResolution.lean`（≈ 350 行，纯线性代数，无阻塞）
+
+```lean
+/-- **`b̃ = b − a`**：由 (F4) 的张成半边 `b̃ = β•a + γ•b` 与 `b·b̃ = -1` 得 `β = -1`，
+再由 `b̃·b̃ = 0` 与 `a·a = 2`（`DDFLightConeFrame.dotVec_self_eq_two`，需 `[Field]`）得 `γ = 1`。 -/
+theorem DDFLightConeFrame.conj_eq_light_sub_momentum [Field K] (F : DDFLightConeFrame η a b)
+    (hD : 2 ≤ D) : F.frame.conj = b - a
+
+/-- **标架的单位分解**（`LevelTwoElim.lean` 的 `hFullSpan` 是定理，且系数显式）。
+证法：对任意 `e`，`e' := e − (η(e, a−b))•b` 满足 `η(e', a−b) = 0`（因 `η(b, a−b) = 1`），
+`F.hspan`（(F8)）给出 `e'` 的分解，再用 `conj_eq_light_sub_momentum` 换回 `b̃`；
+系数由与 `b`、`b̃`、`ε_j` 配对唯一确定（用到 (F9) `η(ε_i,b̃) = 0`，已有）。 -/
+theorem DDFLightConeFrame.resolution [Field K] (F : DDFLightConeFrame η a b) (hD : 2 ≤ D)
+    (e : Fin D → K) :
+    e = (-(dotVec η F.frame.conj e)) • b + (-(dotVec η b e)) • F.frame.conj
+        + ∑ i, dotVec η (F.trans.vec i) e • F.trans.vec i
+
+theorem DDFLightConeFrame.dotVec_conj_towerMomentum … (j : ℤ) :
+    dotVec η F.frame.conj (towerMomentum a b j) = -(1 : K) - j      -- rung -N 处为 N − 1
+theorem DDFLightConeFrame.dotVec_trans_towerMomentum … (i) (j : ℤ) :
+    dotVec η (F.trans.vec i) (towerMomentum a b j) = 0              -- (F5)+(F6)
+
+/-- 任意模数的偏振产生算子；`n = 1` 是 `polState`，`n = 2` 是 `secondState`。 -/
+noncomputable def lcCrea (η w : Fin D → K) (n : ℕ+) : Fock D K :=
+  ∑ μ, (η μ * w μ) • (X ((μ, n) : Osc D))
+
+theorem lcCrea_add / lcCrea_smul / lcCrea_sum                       -- 在 w 上线性
+theorem X_eq_lcCrea_single (hη) (μ) (n) :
+    (X ((μ,n) : Osc D) : Fock D K) = lcCrea η (Pi.single μ (η μ)) n -- `X_one_eq_polState_single` 的一般 n
+
+/-- **光锥单项式张成每个 level 片**。取代 §B.4 第 1 步：不需要 `AlgEquiv`，
+只要把每个 `X_{(μ,n)}` 按 `resolution` 展开，再对单项式做 `Finsupp` 归纳逐因子替换。 -/
+theorem levelSubmodule_eq_span_lcMonomial [Field K] (F : DDFLightConeFrame η a b) (N : ℕ) :
+    Fock.levelSubmodule D K N
+      = Submodule.span K (Set.range fun d : {d : (Fin D × ℕ+) →₀ ℕ // Fock.level D d = N} =>
+          lcMonomial F d)
+-- lcMonomial F d := ∏_{(t,n)} (lcCrea η (frameVec F t) n) ^ d (t,n)
+-- frameVec F : Fin D → (Fin D → K) 把 b、b̃、ε_1..ε_{D−2} 列成一张表（指标搬运照抄 `LightCone.transIdx`）
+```
+
+#### PR4 `NoGhost/SpuriousElimination.lean`（≈ 500 行，本节最贵的一块）
+
+```lean
+/-- **`L_{-n}` 的 `b̃`-次数升 1 部分**（Sugawara 在光锥分解下的展开）。
+`α_r·α_s = -α^b_r α^{b̃}_s - α^{b̃}_r α^b_s + Σ_i α^{ε_i}_r α^{ε_i}_s`（`resolution` 的双线性化），
+代进 `L_{-n} = ½Σ_m :α_{-n-m}·α_m:` 得
+`L_{-n} = -Σ_m :α^b_{-n-m} α^{b̃}_m: + ½ Σ_i Σ_m :α^{ε_i}_{-n-m} α^{ε_i}_m:`，
+其中 `b̃`-次数真正升 1 的只有 `m = -n`（零模，系数 `-(η(b,p_j)) = -1`）与 `-n < m < 0`。 -/
+theorem towerLop_neg_conjDegree_leading (F) (n : ℕ+) (j : ℤ) (y : Fock D K) :
+    towerLop η a b (-(n:ℤ)) (Finsupp.single j y)
+      = Finsupp.single j (-(lcCrea η F.frame.conj n * y)
+          - ∑ l ∈ Finset.Ico 1 (n:ℕ), lcCrea η b ⟨n-l,_⟩ * lcCrea η F.frame.conj ⟨l,_⟩ * y)
+        + (落在「`b̃`-次数 ≤ `b̃`-次数(y)」的子模里的项)
+
+/-- **β-消元**：每个反对角片模伪态落在「不含 `b̃` 的光锥单项式」张成 `conjFreeSlice` 里。
+`D = 26` 不出现；`a₀ = 1` 只通过 `conj_eq_light_sub_momentum` 出现。 -/
+theorem towerBigrade_le_conjFree_sup_spurious (F) (N : ℕ) :
+    towerBigrade D K (-(N:ℤ)) N ≤ conjFreeSlice F N ⊔ towerSpuriousSubmodule η a b
+
+/-- (P3) 的第二半：物理态 = 伪态在片内的正交补。
+「⊆」是 `towerSpuriousSubmodule_le_towerOrthComplement`；
+「⊇」用 `Fock.towerPairing_towerLop_left`（`L_{-n}† = L_n`）+ `L_m` 的双分次齐次性
+（`Glue.towerLop_mem_towerBigrade`）+ **片上型非退化**；
+`L_0` 条件在反对角片上自动（`massShell_of_mem_towerBigrade` 的算式取 `j = -N`）。 -/
+theorem towerPhys_inf_towerBigrade_eq_orthogonal … :
+    towerPhysSubmodule η a b a₀ ⊓ towerBigrade D K (-(N:ℤ)) N
+      = towerOrthComplement η (towerSpuriousSubmodule η a b) ⊓ towerBigrade D K (-(N:ℤ)) N
+
+theorem finrank_towerPhys_inf_towerBigrade_le (F) (N : ℕ) :
+    Module.finrank K ↥(towerPhysSubmodule η a b a₀ ⊓ towerBigrade D K (-(N:ℤ)) N)
+      ≤ Fintype.card {d : (Fin (D−1) × ℕ+) →₀ ℕ // level d = N}      -- p_{D−1}(N)
+
+/-- 桥到 Goddard (6.2)：K-条件 = 不含 `b̃`。⊇ 便宜，⊆ 需要光锥单项式线性无关（B′.9 第 2 条）。 -/
+theorem towerKerK_inf_towerBigrade_eq_conjFree (F) (N : ℕ) :
+    towerKerK η a b ⊓ towerBigrade D K (-(N:ℤ)) N = conjFreeSlice F N
+```
+
+片上型非退化是 PR4 的前置：`Fock.pairing_creationMonomial` 给对角 Gram，对角元
+`monomialNorm η d = ∏ (n η_μ)^{d} d!` 在特征零域上非零（`η μ` 可逆因 `hη`，`n ≥ 1`），
+单项式基取 Mathlib 的 `MvPolynomial.basisMonomials`；维数公式用
+`LinearMap.BilinForm.finrank_orthogonal`（需 `Nondegenerate`；`towerPairing_isRefl` 已有）。
+
+#### PR5 （B-26）：种子（**未解决**，见 B′.9 第 3 条）
+
+```lean
+/-- (B-26) 形式 (iii) 的目标：`D = 26` 时纵向种子够用。 -/
+theorem exists_null_seeds (hD : D = 26) (m : ℕ) (hm : 1 ≤ m) :
+    ∃ s : Nat.Partition m → TowerFock D K,
+      LinearIndependent K s ∧
+      ∀ lam, s lam ∈ towerNullSubmodule η a b a₀ ⊓ towerBigrade D K (-(m:ℤ)) m
+```
+
+配 PR0 的 `ddfOp_mem_towerNullSubmodule` 与 DDF 单项式的线性无关给出 (B-26)，
+**但「DDF 后代 × 种子」的线性无关本身还需要论证**（零态之间 Gram 恒为零，不能用配对分离）。
+
+### B′.5 归纳变量与不变量（β-消元的精确写法）
+
+这是 PR4 的核心，也是整条计划里唯一真正的归纳。
+
+* **对象**：光锥单项式 `lcMonomial F d`，`d : (Fin D × ℕ+) →₀ ℕ`，`level d = N`，放在 rung `-N`。
+* **两个次数**：`β d :=` `d` 在 `b̃` 那一行的总次数（`∑_n d (idx b̃, n)`）；
+  `ω d :=` `b̃` 行的**加权**次数（`∑_n n · d (idx b̃, n)`），`0 ≤ ω d ≤ N`。
+* **归纳变量**：单个自然数 `μ d := β d * (N + 1) + ω d`（`Nat.strong_induction_on`）。
+* **不变量**：`lcMonomial F d ∈ conjFreeSlice F N ⊔ towerSpuriousSubmodule η a b`。
+* **归纳步**：`β d = 0` 平凡。`β d ≥ 1` 时取一个 `b̃` 因子 `ũ_n`，写 `d = d' + single (idx b̃, n) 1`，
+  用 `towerLop_neg_conjDegree_leading` 把 `ũ_n · m(d')` 表成
+  ```
+  ũ_n · m(d') = -L_{-n}(m(d')) - Σ_{l=1}^{n-1} u_{n-l} ũ_l · m(d') + (β ≤ β d' 的项)
+  ```
+  三类右端项：`L_{-n}(m(d'))` **是伪态**（`towerLop_neg_mem_towerSpuriousSubmodule`）；
+  `u_{n-l} ũ_l · m(d')` 的 `β` 不变而 `ω` 严格变小（`l < n`）⇒ `μ` 严格变小；
+  末项 `β` 严格变小（= `β d'`）而 `ω ≤ N` ⇒ `μ` 严格变小。
+* **为什么这个测度是对的**：`L_{-n}` 在光锥变量下最多把 `b̃`-次数升 1，升 1 的部分是
+  乘以 `ũ_n + Σ_{l<n} u_{n-l} ũ_l`；这一族乘法算子对 `ω` 是幺三角的（领头项 `ũ_n`），
+  而 `ω` 在固定 level 下有界，所以三角化终止。**这正是 §B.4 第 3 步「幺三角」的正确位置**：
+  它不在「DDF/K/L 单项式 → 振子单项式」的转移矩阵上（那需要线性无关与行列式），
+  而在**单个乘法算子族**上（只需要张成）。
+
+### B′.6 类型类要求（逐条）
+
+| 需求 | 出现位置 | 理由 |
+|---|---|---|
+| `[CommRing R] [Algebra ℚ R]` | 全线程 | `ddfOp` 的定义 |
+| `[NoZeroDivisors]` | `massShell_of_mem_towerBigrade`、PR2 的 level 定位 | 由 `c • x = 0`、`x ≠ 0` 推 `c = 0` |
+| `[CharZero]` | `Glue.ddfSpans_of_forall_antidiagonal_slice_int`、PR2 | 把 `(N : K) = (M : K)` 降到 `ℕ` |
+| `[Field K]` | PR1–PR4 全部 | `finrank`、`Submodule.eq_of_le_of_finrank_le`、`BilinForm.finrank_orthogonal`；`dotVec_self_eq_two`（`b̃ = b − a`）也要域 |
+| `[LinearOrder K] [IsStrictOrderedRing K]` | **仅** `ddfSpan_inf_towerNullSubmodule_eq_bot` | `ddf_span_pos`；可用特征零版本替换（PR1 备注） |
+| `2 ≤ D` / `3 ≤ D` | `DDFLightConeFrame` 的见证、标架表的指标搬运 | `Fin (D−2)` ↔ `Fin D` 的对应 |
+
+**`D = 26` 不在任何类型类里**：它只作为 `B26` 这条 `Prop` 的（隐含）内容出现。
+
+### B′.7 依赖图
+
+```
+已有：Glue.ddfSpans_of_forall_antidiagonal_slice_int
+      DDFGram.{linearIndependent_ddfMonomial, ddf_span_pos, ddfSpan_eq_span_range_frameMonomial,
+               frameMonomial_mem_towerRungSubmodule}
+      TowerNull.{towerSpuriousSubmodule, towerNullSubmodule, towerSpurious_inf_towerPhys_le_towerNull,
+                 towerOrthComplement, towerPairing_isRefl, towerSpuriousSubmodule_le_towerOrthComplement}
+      LightCone.{towerBigrade, towerBigrade_finite, massShell_of_mem_towerBigrade,
+                 FrameSpansOrthogonal, conjCoeff_eq_neg_dotVec}
+      LightConeFrame.{DDFLightConeFrame, dotVec_polarization_conj_eq_zero, dotVec_self_eq_two}
+      Longitudinal.{kOp, towerKerK, lie_kOp_ddfOp, ddfOp_mem_towerKerK}
+      Fock.{pairing_creationMonomial, pairing_eq_zero_of_level_ne, towerPairing_towerLop_left}
+      LevelTwoElim.{X_one_eq_polState_single, towerLop_neg_one_apply_single_polState}
+
+PR0 NullDescend ──────────────────────────────────────┐
+                                                      │
+PR1 SliceRank ──┬─→ B26 ──(消费)──→ ddfSpansOn_bigrade_iff_b26 ──→ DDFSpans
+                │                       ↑                 ↑
+PR2 SliceDim ───┘   (finrank D_N)       │                 │
+                                        │                 │
+PR3 LightConeResolution ──→ PR4 SpuriousElimination ───────┘   (finrank H_N 上界)
+                                        │
+                                        └─→ bonus: towerKerK_inf_towerBigrade_eq_conjFree
+                                                   （Goddard (6.2) 的一半）
+
+PR5 种子（未解决）──(+PR0, PR2)──→ finrank Z_N 下界 ──→ B26
+```
+
+### B′.8 计数：需要的恒等式究竟是什么（订正）
+
+* §B.3 的特征标恒等式 **`φ(q)^{-D} = φ(q)^{-1} · φ(q)^{-1} · φ(q)^{-(D-2)}`** 是对的，
+  两个 `φ^{-1}` 分别是 **Virasoro 塔**与 **K 塔**。**不要**写成 `φ^{-(D-2)} = φ^{-D}(1−q)^2`：
+  那只对应 `n = 1` 模态，是错的。正确形式是 `φ^{-(D-2)} = φ^{-D} · φ · φ`，`φ = ∏_{n≥1}(1−q^n)`。
+* **这个恒等式对任意 `D` 成立，所以计数一步永远看不见 26**（§B.5 的结论不变）。
+  真正含 `D` 的量是 `p_{D−1}(N) − p_{D−2}(N)`（必须被零态吃掉的方向数），它对任意 `D`（`N ≥ 2`）都非零；
+  **26 决定的是零态够不够多**，不是这个差本身。
+* `N = 2` 的独立核算（`LevelTwoSpan.lean` 的 Gaps 记的那组数）在一般 `D` 下是：
+  `dim(H_phys ∩ 片) = p_{D−1}(2) = (D−1)(D+2)/2`（`D = 26` 时 350）；
+  `dim(DDF ∩ 片) = p_{D−2}(2) = (D−2)(D+1)/2`（324）；
+  伪态生成元 `D + 1` 个（27），其中零态 `D` 个（26）。`350 = 324 + 26` ✓。
+  **注意 `2p_{D−1}(2) − p_{D−2}(2) − p_D(2) = −1` 对一切 `D` 成立**，
+  所以任何「二阶差为正」式的不等式都不是 26 的来源。
+* **Lean 里不要求值任何分拆数**：(P2)(P3) 两边都是指标集的 `Fintype.card`，
+  两者之差由「`Fin (D−2) ↪ Fin (D−1)`，余集 = 含 `u` 的单项式」给出显式单射，
+  永远不需要 `p_c(N)` 的闭式。`Math/PartitionCard.lean` 只在 (B-26) 形式 (iii) 的**种子计数**
+  （普通分拆 `p(m)`）里用得上，而那正是它能算的（`m ≤ 5`）。
+  `Math/EulerPartition.lean` 的 `φ^{-1}` 生成函数在本路线上**用不到**（没有一步需要形式幂级数）。
+
+### B′.9 对本计划最不利的三条（自我攻击）
+
+1. **`towerLop_neg_conjDegree_leading` 会超预算，甚至形状不对。**
+   仓库里 `L_{-n}` 的显式作用只有两处：`towerLop_neg_{one,two}_apply_single_vacuum`（**只在层真空上**）
+   与 `Fock.Lop_neg_one_apply_polState`（**只在 level 1 上**）。一般 `n`、一般向量的 Sugawara 展开
+   **没有**现成引理，`LightCone.lean` 的 Gaps 自己写了「`n = 1, 2` 是唯一可用的层真空公式」。
+   三个风险点：(a) 正规序在 `m` 与 `-n-m` 都为负时的配对要手工做；
+   (b) 零模项的系数 `-(η(b̃, p_j))` **随 rung 变化**（= `N − 1`），写成常数会得到错的引理
+   ——**只有 `α^{b̃}` 前的系数 `-(η(b, p_j)) = -1` 才是 rung 无关的**（`conjCoeff_towerMomentum`）；
+   (c) 这条引理必须陈述成「模掉某个由光锥单项式张成的子模」，于是 PR3 必须先于 PR4。
+   **缓解**：先做 `n = 1, 2` 版验证形状（顺带把 `N ≤ 2` 全链打通），再推一般 `n`。
+
+2. **光锥单项式的线性无关没有免费午餐。**
+   本计划刻意只用**张成**（PR3）。但两处会想要线性无关：
+   `towerKerK_inf_towerBigrade_eq_conjFree` 的「⊆」半边，以及把 `finrank H_N ≤ p_{D−1}(N)` 改成等式。
+   从张成升到基要么数基数（两边 `p_D(N)` 相等 ⇒ 张成即基），要么证标架矩阵可逆——
+   前者把 `Math/PartitionCard.lean` 撞过的墙（`Nat.Partition` 无基数引理、`decide` 不归约）
+   搬到 `D`-色情形，后者要 `Fin D → K` 上的行列式与 `MvPolynomial` 的变量代换，
+   即 §B.4 原本那 400–700 行。**所以「K-条件 ⟺ 不含 b̃」只能作为 bonus，不能进关键路径。**
+
+3. **(B-26) 可能根本不落在本架构里。**
+   本计划把 `ddf-spans` 归约成「`D = 26` 时零态够多」，但**零态的两条已知产生机制都不在射程内**：
+   (a) Brower 的 `A^L_{-n}`（§A.3：模态和不局部有限，要围道 / 形式级数求逆）；
+   (b) Fock 模 `F(c=26, h=1−N)` 的 Feigin–Fuks / Kac 结构（§B.2 判死）。
+   而且有一条**反直觉的硬事实**：不要指望「每个 `N` 有一个奇异向量」——
+   `c = 26` 的 Kac 退化点是 `h_{1,s}(26) = −(s+4)(s−1)/6`，与质壳 `h = 1 − N` 只相交在
+   `N = 1, 2, 5, 7, …`（`s = 1, 2, 4, 5, …`），`N = 3, 4` 处 `V(26, 1−N)` 的行列式**不为零**
+   （与 `Virasoro/FockFreeLowLevel.lean` 的 `kacDet₃/₄_massShell_26 = 2304 / 2649563136 ≠ 0` 一致；
+   `kacDet₁/₂_massShell_26 = 0` 正对应 `N = 1, 2`）。
+   ⇒ 零态在一般 `N` 不是「层真空上的奇异向量」，而是**整片上的解空间**：`N = 2` 的 26 个零态里
+   只有 1 个来自层真空的奇异向量（`(2L_{-2}+3L_{-1}²)|0;p_{-2}⟩`，物理 ⟺ `L_1`、`L_2` 两条件成比例
+   `9α−6β = 3(3α−2β)`，用到 `c = 26`、`h = −1`），24 个是 DDF 后代，1 个是
+   `L_{-1}((b−b̃)·α_{-1})|0;p_{-2}⟩`。任何「对每个 `N` 找一个奇异向量」的计划都会撞墙。
+   **诚实结论**：本计划能把 `ddf-spans` 从「一条结构性猜想」压成「一条逐 `N` 的秩计数 + 一条构造任务」，
+   **但它不关闭 `ddf-spans`**。若最终仍需外部输入，代价至少是 §A.3 的 `A^L_n`（1–2 个月）。
+
+补充两条次级风险：`DDFLightConeFrame.hspan`（F8）只在 rung `-1` 的动量上陈述——
+本节的 `resolution` 只用这一处，所以够用（结论是关于**任意** `e` 的），但若将来有人把 (F8)
+改成别的形式，`resolution` 会断。以及 `conj_eq_light_sub_momentum` 依赖 `a·a = 2`，
+即无鬼定理的 `a₀ = 1`——**这不是可有可无的归一化**：`a·a ≠ 2` 时 `b̃` 与 `b − a` 差一个标量，
+B′.5 的领头项引理要重写。
+
+### B′.10 行数估计与交付顺序
+
+| PR | 文件 | 行数 | 阻塞者 | `D = 26`? |
+|---|---|---|---|---|
+| PR0 | `NoGhost/NullDescend.lean` | 40 | 无 | 否 |
+| PR1 | `NoGhost/SliceRank.lean` | 150 | 无 | 否 |
+| PR2 | `NoGhost/SliceDim.lean` | 250 | PR1 | 否 |
+| PR3 | `NoGhost/LightConeResolution.lean` | 350 | 无 | 否 |
+| PR4 | `NoGhost/SpuriousElimination.lean` | 500 | PR3 | 否 |
+| PR5 | (B-26) 种子 | **未知** | PR0 PR2 PR4 | **是** |
+| 合计（PR0–PR4） | | **≈ 1290** | | |
+
+**建议顺序**：PR1 → PR0 → PR3 → PR2 → PR4。理由：PR1 单独就把图上 (B-26) 的措辞
+（「秩恰为 `p_{D−2}(N)`」）变成 Lean 里的等价定理，是最便宜的可交付；PR0 四十行且是 PR5 的乘法结构；
+PR3 顺带删掉 `noghost-n2` 自报的 `hFullSpan` / `Classical.choose` 那一步，
+于是 `N = 2` 的直接消元（`LevelTwoElim.lean` 路线）也跟着变便宜，可与 PR4 并行推进。
+
+### B′.11 对图的建议（本节不碰 `graph/`）
+
+1. **`worldsheet.ddf-spanning-hypothesis` 的 notes**：加一段「(B-26) 的三种等价写法」，
+   指出形式 (iii)（「`D = 26` 时片上至少有 `p_{D−1}(N) − p_{D−2}(N)` 个线性无关零态」）
+   是建议的动手形式，配等式 `p_{D−1}(N) − p_{D−2}(N) = Σ_{m≥1} p_{D−2}(N−m)p(m)`
+   （零态 = DDF 后代 × 纵向种子；种子按普通分拆计数）。
+2. **同卡 gaps / `--via-goddard-thorn` 的 (B-26) 条**：补记 B′.9 第 3 条的硬事实——
+   `c = 26` 的 Kac 退化点 `h_{1,s} = −(s+4)(s−1)/6` 与质壳 `h = 1−N` 只在 `N = 1,2,5,7,…` 相交，
+   所以 (B-26) **不是**「每个 `N` 一个奇异向量」；`FockFreeLowLevel.lean` 的
+   `kacDet₃/₄_massShell_26 ≠ 0` 是同一件事的机检证据。这条判断能让后来者少走弯路。
+3. **`worldsheet.ddf-light-cone-frame`**：notes 记「(F1)–(F8) ⟹ `b̃ = b − a`（域上）与单位分解
+   `e = -(η(b̃,e))b - (η(b,e))b̃ + Σ_i η(ε_i,e)ε_i`」——即卡的条件表**已经**蕴含标架完备性，
+   `LevelTwoElim.lean` 猜的额外假设 `hFullSpan` 是多余的。（PR3 落地后可改为 `formalized` 引用。）
+4. **`worldsheet.gt-longitudinal-k-algebra`**：notes 记「K-条件在光锥变量下 = 不含 `α^{b̃}`」，
+   并注明这条等价的「⊆」半边需要光锥单项式线性无关（B′.9 第 2 条），目前只保证「⊇」。
+5. **`ddfOp` 把零态送到零态**（PR0）是一条独立的小命题，图里没有节点；
+   它是 (B-26) 构造式路线的乘法结构，建议新建卡或记入
+   `worldsheet.ddf-operators-preserve-physical-states` 的 notes。
