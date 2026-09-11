@@ -196,10 +196,17 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     worldsheet.ddf-contour-equals-mode-sum（围道写法 ↔ 模态和写法的字典）。
     附带的数学结论：伴随**不需要** k_0² = 0，也没有「同点 E₊E₋ 重排序」这一步
     ——E₋E₊ 的伴随 E₊(−b)†E₋(−b)† 本身就是正规序。
+
+    【2026-09-11 第七轮（分支 agent/auditor/noghost-contour，auditor 裁决）】
+    worldsheet.ddf-contour-equals-mode-sum 那条边被裁定为**溯源记账而非证明步骤**并撤出
+    --via-goddard-thorn 的 depends_on（summary 各步只用模态和算子的代数性质，图内所有
+    DDF 性质卡均以 v6 模态和为对象）；围道 ↔ 模态和的忠实性备注移到
+    ms.no-ghost-theorem 第七轮 R7-2。无鬼定理 v4 的 effective 因此回到 **rigorous**
+    （= 推导自报 status，无压低依赖）；该字典卡本身仍是 physical-argument。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
     # 顶点代数路线已把这一条接通到 rigorous
     # 2026-09-11（六，分支 agent/curator/ddf-all-wire）：DDFOperatorAll.lean 的
@@ -229,11 +236,14 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     #   · transverse-ddf-fock-gram-matrix 的前件 (H2) 因此不再被压低，升为 rigorous。
     # 于是 `why worldsheet.no-ghost-theorem-v4` 的瓶颈树由三支收缩为**一支**：
     # 围道写法 ↔ 模态和写法的字典。
+    # 2026-09-11 第七轮：那一支也撤了（不是证明步骤，见上方 docstring），字典卡本身仍 physical-argument。
     assert effs["worldsheet.ddf-operators-adjoint-v2"].name == "formalized"
     assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "rigorous"
     assert (
         effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
     )
+    gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
+    assert "worldsheet.ddf-contour-equals-mode-sum" not in {d.id for d in gt.depends_on}
     # 旧卡保留其历史推导（--via-vertex-operator-adjoint 已改名改指 v2），
     # 故旧卡自身不再有推导，effective 为 open——它有 superseded_by，不进 open_propositions 报告。
     assert (
@@ -1178,15 +1188,26 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     # transverse-ddf-fock-gram-matrix--via-oscillator-recursion, whose hypothesis (H2) was
     # cashed in by worldsheet.ddf-operators-adjoint (physical-argument). That card is now
     # superseded by -v2, which is formalized via VertexAdjoint.lean, so the Gram recursion
-    # reaches rigorous. The throttled example is now no-ghost-theorem-v4--via-goddard-thorn
-    # (own=rigorous; effective=physical-argument because of the contour/mode-sum dictionary
-    # worldsheet.ddf-contour-equals-mode-sum, now the single remaining bottleneck).
+    # reaches rigorous. Then the throttled example was no-ghost-theorem-v4--via-goddard-thorn
+    # (own=rigorous; effective=physical-argument via worldsheet.ddf-contour-equals-mode-sum).
+    # 2026-09-11 round 7 (branch agent/auditor/noghost-contour): that edge was ruled
+    # provenance-not-proof and removed, so no-ghost v4 is rigorous end to end. The throttled
+    # example is now math.mobius-three-point-fixing-jacobian--via-vandermonde (own=rigorous,
+    # effective=physical-argument), on a node whose best derivation (--via-lean) is formalized —
+    # which also re-checks "strongest derivation wins" with a throttled sibling present.
     rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
     d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
-    assert d2["effective"] == "physical-argument"
-    assert rep2["effective"] == "physical-argument"
+    assert d2["effective"] == "rigorous"
+    assert rep2["effective"] == "rigorous"
+
+    rep_mob = status_report(g, "math.mobius-three-point-fixing-jacobian")
+    ders_mob = {d["id"]: d for d in rep_mob["derivations"]}
+    d_mob = ders_mob["math.mobius-three-point-fixing-jacobian--via-vandermonde"]
+    assert d_mob["own"] == "rigorous"
+    assert d_mob["effective"] == "physical-argument"
+    assert rep_mob["effective"] == "formalized"
 
     # (b') the Gram recursion itself is no longer throttled
     rep3 = status_report(g, "worldsheet.transverse-ddf-fock-gram-matrix")
