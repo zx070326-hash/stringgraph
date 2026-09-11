@@ -22,7 +22,7 @@ statement: |
 uses:
   - worldsheet.operator-product-expansion
   - worldsheet.primary-field-v2
-  - worldsheet.tt-ope-central-charge
+  - worldsheet.tt-ope-central-charge-v2
   - worldsheet.conformal-normal-ordering-v2
 uses_conventions:
   - conv.worldsheet-complex-coords
@@ -54,5 +54,6 @@ notes: |
   （a）作用量 S = (1/2π)∫ b ∂̄ c 对任意 λ 共形不变；
   （b）鬼数流 j = -:bc: 不是主场（共形变换带反常项，(2.5.15)–(2.5.17)）。
   二者在来源中各自有推导，日后若被分别引用应拆成独立节点。
+  **2026-09-11 `uses` 换代改指（curator-small-backlog-3）**：worldsheet.tt-ope-central-charge（v1）→ worldsheet.tt-ope-central-charge-v2。v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance；本卡 `uses` 里用的是**定义半**（中心荷 c 的定义与归一化），故改指 v2。statement 正文里对 v1 id 的字面引用按 graph/CLAUDE.md 的裁决不就地改。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

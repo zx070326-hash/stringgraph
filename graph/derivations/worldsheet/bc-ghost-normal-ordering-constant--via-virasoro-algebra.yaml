@@ -91,6 +91,7 @@ gaps:
      (b) worldsheet.ope-commutator-dictionary 写在**全纯（玻色）**算子上，bc 是费米型、
      模满足反对易关系，围道变形在费米情形的符号规则本图**未单独核实**
      （与 worldsheet.conformal-normal-ordering-v2 的费米换序符号缺口同源）。
+     **费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。**
      ⚠ **不得**改用 worldsheet.bc-ghost-central-charge 顶替这条依赖：那条断言的是中心荷的**值**，
      不是「这组模满足代数」。"
 notes: |

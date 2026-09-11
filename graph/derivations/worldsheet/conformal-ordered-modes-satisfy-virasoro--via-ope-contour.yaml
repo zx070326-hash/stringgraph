@@ -3,8 +3,14 @@ target: worldsheet.conformal-ordered-modes-satisfy-virasoro
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.tt-ope-pole-structure-from-conformal-invariance
     note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。
+      本推导用的是**命题半**：围道变形要把 (2.4.25) 的**全部三个**奇异项（c/2z⁴、2/z²、1/z）逐个取留数，
+      即需要「TT OPE 恰是这个形状」这条断言，而不只是「四阶极点系数叫 c」这条定义；故改指命题卡。
+      定义半（c 的命名与归一化）经命题卡自己的推导 depends_on v2 间接进入，本推导不再重复挂边。
+      ⚠ 状态影响：命题卡的有效状态是 physical-argument（其推导走 Ward 恒等式 + 围道），
+      本推导原本就封顶在 physical-argument（gaps 第 1 条），故有效状态不变。
       提供被变形的那条 OPE：T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)（原书 (2.4.25)）。
       四阶极点给中心项、二阶与一阶极点给 (m−n)L_{m+n}。
   - id: worldsheet.ope-commutator-dictionary
@@ -62,7 +68,7 @@ gaps:
   - "**费米型自由场（bc/βγ）的两处不精确**：(a) worldsheet.ope-commutator-dictionary 写在
      全纯（玻色）算子上；本用例里被变形的是 T 与 T，二者都是 Grassmann 偶（b、c 的双线性），
      故这一步本身不涉及奇算子，但把 bc 的 TT OPE 算出来需要费米型 Wick 缩并，
-     其换序符号规则本图未单独核实。(b) 原书 p.61 限定「these are only Laurent expansions
+     其换序符号规则本图未单独核实。**费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。** (b) 原书 p.61 限定「these are only Laurent expansions
      if λ is an integer」，半整数 λ（βγ）在第 10 章另行处理；本推导对 bc 部门的适用范围随之受限。"
   - "**不覆盖开弦**：开弦只有一套 Virasoro（(2.6.30) 与 (2.6.19) 同形，经 (2.6.28) 的 doubling trick），
      那一格由 worldsheet.open-string-virasoro-modes-v2/v3 与 worldsheet.open-string-doubling-trick

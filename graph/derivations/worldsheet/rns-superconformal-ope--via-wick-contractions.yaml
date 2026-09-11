@@ -16,11 +16,19 @@ depends_on:
       供给「重合算符按减去自缩并做正规序」的规则，含费米型场的换序符号——
       本推导对 ψ^μ∂ψ_μ 与 ψ^μ∂X_μ 的缩并必须用到费米符号。
       ⚠ Vol.2 把 : : 隐含（原书 p. 2），故原文公式里看不到正规序记号，但计算是按它做的。
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.tt-ope-pole-structure-from-conformal-invariance
     note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。
+      原 note 逐字点名了**两半**：「二阶极点系数 = 2、一阶极点 = ∂T 这一由 T 是权 (2,0) 张量固定的结构」
+      是命题半，「四阶极点系数写作 c/2 的归一化」是定义半。故一条边拆成两条：本条指命题卡（承接前者），
+      紧接的一条指 v2（承接后者）。原 note 保留如下：
       供给 T_BT_B 的 OPE 中「二阶极点系数 = 2、一阶极点 = ∂T」这一由 T 是权 (2,0) 张量固定的
       结构，以及四阶极点系数写作 c/2 的归一化。本推导用它来把 3D/(4z^4) 读成 c = (3/2)D
       （那一步的结论卡是 worldsheet.rns-matter-central-charge）。
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      【2026-09-11 换代拆边（curator-small-backlog-3）】承接原 note 的定义半：四阶极点系数写作 c/2 的归一化，
+      以及与 conv.virasoro-standard 的相容性，把 3D/(4z⁴) 读成 c = (3/2)D 用的就是这条。
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.1, eq. (10.1.13a,b,c), p. 3（结果）；(10.1.6)、(10.1.7), p. 2（基本 OPE）；正规序体例 p. 2"

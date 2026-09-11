@@ -1,0 +1,76 @@
+id: worldsheet.tt-ope-pole-structure-from-conformal-invariance
+kind: proposition
+title: TT OPE 的极点结构由共形不变性完全确定：二阶极点系数 2、一阶极点 ∂T 由 T 的权 (2,0) 固定，三阶极点缺席，唯一自由参数是 c-数 c
+statement: |
+  设 T(z) 是二维共形场论的全纯能动张量（worldsheet.traceless-holomorphic-energy-momentum），
+  它是共形变换 δz = εv(z) 的 Noether 流（worldsheet.ward-identity），且其无穷小共形变换取
+  Polchinski (2.4.24) 的形式
+    ε^{-1} δT(z) = −(c/12) ∂³_z v − 2 ∂_z v  T − v ∂_z T ,
+  即：**除一个不含算子的 c-数反常项外**，T 按权 (2,0) 的张量变换，其中 c 是一个常数。
+  则 T(z)T(0) 的奇异部分**必然**是
+    T(z) T(0) ∼ c/(2 z^4) + (2/z^2) T(0) + (1/z) ∂T(0) ,
+  具体地：
+    (i)   二阶极点的系数是 2 = h_T，一阶极点是 ∂T——这两项由「T 是权 (2,0) 的算子」
+          经共形权的 OPE 定义（worldsheet.primary-field-v2 的 (h/z²)O + (1/z)∂O）**固定**，
+          与理论无关；
+    (ii)  **三阶极点缺席**：TT OPE 中 z^{-3} 项的系数被 T(z)T(0) 在 z ↔ 0 交换下的
+          玻色对称性与「四阶极点系数是常数」联合强制为零；
+    (iii) 四阶极点的系数是**不含算子的 c-数** c/2，对应 (2.4.24) 中的反常项 −(c/12)∂³v；
+    (iv)  没有高于四阶的极点。
+  换言之，在上述前提下，TT OPE 的**全部**奇异结构中只剩一个自由参数——数 c；
+  该数即 worldsheet.tt-ope-central-charge-v2 所定义的中心荷。
+
+  **本卡不断言什么**：不断言 c 的值（那是各具体理论的事）；不断言「(2.4.24) 是最一般的
+  变换律」这一前提本身（它在本卡是**假设**，其来源地位见推导的 gaps）；
+  不断言 OPE 的收敛性或围道变形的合法性（见推导的 gaps）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.24) → eq. (2.4.25), p.48（原书由 T 的一般变换律 (2.4.24) 写出一般 c 的 TT OPE (2.4.25)；自由标量的特例是 (2.4.23) → (2.4.22), p.47–48）"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）】
+        (2.4.24) `ε^{−1}δT(z) = −(c/12)∂³_z v − 2∂_z v T − v∂_z T`（一般 CFT，c 在此首次定义）
+        (2.4.25) `T(z)T(0) ∼ c/(2z⁴) + (2/z²)T(0) + (1/z)∂T(0)`
+      原书的顺序是**先**给变换律 (2.4.24)、**再**写 OPE (2.4.25)，中间不展示 Ward 恒等式的代入步骤；
+      (2.4.24) 的一般形式为何只含 ∂³v 一项反常，原书在此处的措辞抽取记录**未逐字转录**
+      （见 gaps）。见 literature/extractions/polchinski-1998-v1.md §12.1（E33）。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.11)–(2.4.12), p.45–46（T(z)𝒜(0,0) ∼ Σ_{n≥0} z^{−n−1}𝒜^{(n)}(0,0)；原书逐字「the operators 𝒜^{(n)} are determined by the conformal transformation of 𝒜」）；eq. (2.4.14), p.45（权 h 的 OPE 定义：… + (h/z²)𝒜 + (1/z)∂𝒜 + …）"
+    note: |
+      这是本命题的**机制**：T·𝒜 OPE 的每一个极点系数 𝒜^{(n)} 都由 𝒜 的共形变换律决定
+      （Ward 恒等式），取 𝒜 = T 即得本卡。(2.4.14) 给出「权 h ⇒ (h/z²) 与 (1/z)∂」这一对应，
+      是 (i) 的直接来源。式号与页码经抽取记录 §12.4(e) 表（L1）核实。
+  - ref: polchinski-1998-v1
+    loc: "§2.4, eq. (2.4.20) 下方, p.47（一般原理：两算符 OPE 的坐标依赖被共形对称性完全定出；原书逐字「they determine the OPEs of all fields in terms of those of the primary fields. We will develop this in chapter 15」）"
+    note: |
+      本卡是这条一般原理在 𝒜 = 𝓑 = T 时的特例。⚠ 原书在 §2.4 对该一般原理**只断言、推迟到第 15 章（Vol.2）**，
+      本处无证明（抽取记录 §12.4(e) 与 §12.10 表 B 第 21 项）。
+tags: [cft, ope, energy-momentum-tensor, central-charge, conformal-invariance, ward-identity]
+notes: |
+  由 curator-small-backlog-3 于 2026-09-11 从 worldsheet.tt-ope-central-charge（v1）拆出：
+  v1 是一张 definition 卡，却在 statement 里内嵌了本命题（「二阶与一阶极点的系数（2 与 1）
+  由 T 自身是权 (2,0) 算子这一事实固定；…三阶极点因 T 的对称性而缺席」），
+  reviewer-ch23 与 small-backlog-2 两次指出。定义半现为 worldsheet.tt-ope-central-charge-v2。
+
+  **与定义卡的分工**：v2 说「若 TT OPE 取 (2.4.25) 的形式，则四阶极点系数的两倍叫 c」；
+  本卡说「在共形不变性的前提下 TT OPE **只能**取这个形式」。
+  凡是「算出某个理论的 TT OPE 再与 c/(2z⁴) 比对读 c」的推导只需要 v2；
+  凡是「把 (2.4.25) 的全部极点结构当输入去推别的东西」（围道推 Virasoro 代数、推 Schwarzian
+  变换律、RNS 的 T_BT_B 结构）的推导需要本卡。
+
+  **(ii) 的论证是本图的复述，不是原书逐字**：把 T(z)T(w) ∼ Σ_n (z−w)^{−n} A_n(w) 与
+  玻色对称 T(z)T(w) = T(w)T(z) 比对，z^{−3} 阶给 2A_3 = ∂A_4；A_4 = c/2 是常数 ⇒ A_3 = 0。
+  这一步依赖「A_4 是 c-数常数」，即 (iii)；在本卡的前提（(2.4.24) 中 c 为常数）下成立。
+  原书 v1 卡的措辞「因 T 的对称性而缺席」指的就是这一玻色对称性论证。
+
+  **前提 (2.4.24) 的地位**：原书把它当作一般 CFT 中 T 的变换律给出，「c 是常数」有脚注 5 的
+  CFT 内部论证（∂_a c = 0，靠两个变换的对易子 + 「与位置无关的算子必为 c-数」）；
+  「反常项只有 ∂³v 一项」的一般性论证抽取记录未转录。本卡因此把 (2.4.24) 写成**前提**，
+  不把它当作被本卡证明的东西；若日后要把「(2.4.24) 是最一般形式」立卡，
+  标准论证是权计数（z^{−n} 项系数的权为 4 − n，n ≥ 5 需负权算子，幺正 CFT 中不存在；
+  n = 4 的系数权 0，在真空唯一的 CFT 中只能是恒等算子的倍数）——那需要额外的幺正性/真空唯一性前提，
+  本卡不引入。
+author: curator-small-backlog-3
+created: "2026-09-11"

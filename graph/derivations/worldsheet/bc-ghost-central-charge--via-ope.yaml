@@ -4,7 +4,10 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.bc-ghost-cft
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。本推导用的是**定义半**（c = TT OPE 四阶极点系数的两倍、及其与 conv.virasoro-standard 的归一化），故改指 v2；论证与有效状态不变。
+      本推导用 Wick 缩并算出 bc 的 TT OPE，再与 c/(2z⁴) 比对读出 c^{bc}——只用定义。
   - id: worldsheet.operator-product-expansion
 sources:
   - ref: polchinski-1998-v1
@@ -26,7 +29,9 @@ gaps:
      再与 worldsheet.tt-ope-central-charge 的定义式比对四阶极点系数，**不需围道变形**，
      故不依赖 worldsheet.ope-commutator-dictionary（该边已删）。
      但 worldsheet.operator-product-expansion 所刻画的展开其**收敛半径仍未被证明**，
-     这一缺口与自由玻色子的同类计算共享。"
+     这一缺口与自由玻色子的同类计算共享。
+     另：summary 里「b、c 反对易，缩并带符号」所用的费米型换序规则此前在本图无卡；
+     **费米版字典已立卡（worldsheet.ope-anticommutator-dictionary-fermionic，2026-09-11），本推导未改指，待 reviewer 判定是否承重。**"
   - "一般 λ 的公式 -3(2λ-1)^2 + 1 的具体形式未核实（核对源只给出 (2.5.12) 的标题）。
      只有 λ = 2 时的数值 -26 被抽取记录标为已核实，且有 fgz-1986 的独立支持。
      **若只需要 λ = 2，本节点的可信度高于其一般形式。**"

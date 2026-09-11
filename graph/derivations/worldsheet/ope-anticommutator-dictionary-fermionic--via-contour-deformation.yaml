@@ -1,0 +1,88 @@
+id: worldsheet.ope-anticommutator-dictionary-fermionic--via-contour-deformation
+target: worldsheet.ope-anticommutator-dictionary-fermionic
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ope-commutator-dictionary
+    note: |
+      提供围道变形本身（原书 (2.6.14) + Fig. 2.3：|z|>|w| 的围道减 |z|<|w| 的围道 = 绕 w 的小围道）
+      与「在小围道上代入 OPE、逐阶取留数」的手续。本推导对它**只加一个符号**，围道论证逐字沿用。
+      ⚠ 这条边是本推导封顶在 physical-argument 的原因之一：该卡自己声明围道变形等价于 OPE 在环域内收敛，
+      而收敛性在来源中不被证明。
+  - id: worldsheet.operator-product-expansion
+    note: 提供 OPE 框架与其收敛域假定（原书 §2.2）；留数逐项计算依赖它。
+  - id: worldsheet.conformal-normal-ordering-v2
+    inferred: true
+    note: |
+      提供「费米型场的乘积在换序时带 (−1)」这一 Grassmann 规则（该卡 statement 的「费米换序符号」段：
+      正规序积与场本身有相同的 Grassmann 宇称与交换规则），本推导用它写出带符号的径向排序
+      R{A(z)B(w)} = (−1)^{ε_A ε_B} B(w)A(z)（|z|<|w|）。
+      **标 inferred**：原书 §2.6 对奇算子的径向排序符号在抽取记录里没有逐字条目
+      （(2.6.14) 附近只写玻色型），本图未核实原书是否在该处明写；这条边的论证位置只能指到
+      该卡自己引用的 Wick 定理费米版。
+  - id: worldsheet.state-operator-isomorphism
+    inferred: true
+    note: |
+      与 worldsheet.ope-commutator-dictionary--via-contour-deformation 同样的理由：「R 排序的乘积定义算子在
+      Hilbert 空间上的作用」这一步在本图中只有该卡提供支撑，原书 §2.6 不显式引用。标 inferred。
+  - id: worldsheet.bc-ghost-cft
+    note: |
+      **只用于实例 (1) 的核对**：提供 b(z)c(0) ∼ 1/z、权 (λ, 1−λ) 与模展开
+      b(z) = Σ b_n z^{−n−λ}、c(z) = Σ c_n z^{−n−(1−λ)}（原书 (2.5.4)–(2.5.7)、(2.7.16)）。
+      本推导把字典代入它，验算得 {b_m, c_n} = δ_{m+n,0}，与原书 (2.7.17) 一致。
+      实例 (2)、(3) 由各自的卡（worldsheet.brst-nilpotent-at-c26、worldsheet.rns-modes-satisfy-super-virasoro）
+      承载，本推导不挂边。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.14) 与 Fig. 2.3，p.55（玻色型围道变形，原书逐字只写对易子；费米型推广原书未单列，本推导是本图的补白）"
+    note: |
+      【L1】(2.6.14) `[Q_1,Q_2]{C_2} = ∮_{C_2}(dz_2/2πi)Res_{z_1→z_2}j_1(z_1)j_2(z_2)`。
+      ⚠ **原书未单列费米版**：本推导的 summary 是对 (2.6.14) 围道论证加一个 Grassmann 符号的复述，
+      不是原书某处的转录。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.16)–(2.7.17), p.61（实例 (1) 的结果 {b_m, c_n} = δ_{m,−n}，原书直接给出）"
+    note: 式号经 schrans-2020 目录与 headrick-2008 Problem 2.13 交叉核实；表达式见抽取记录 E43。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.10), p.132–133（原书逐字「being careful about minus signs from anticommutation. The single pole implies that {Q_B,Q_B} = 0」——原书使用费米版字典的最明确一处）"
+    note: 【L1，抽取记录 §12.3 表】实例 (2) 的来源；原书在此点出了反对易符号，但仍不写一般规则。
+summary: |
+  设 A、B 为全纯、Grassmann 宇称 ε_A、ε_B 的算子。径向排序对奇算子带符号：
+    R{A(z)B(w)} = A(z)B(w)（|z|>|w|），  R{A(z)B(w)} = (−1)^{ε_A ε_B} B(w)A(z)（|z|<|w|）。
+  于是
+    A_m B_n = ∮_{|z|>|w|} (dw/2πi) w^{n+h_B−1} (dz/2πi) z^{m+h_A−1} R{A(z)B(w)} ，
+    B_n A_m = (−1)^{ε_A ε_B} ∮_{|z|<|w|} (同上) R{A(z)B(w)} 。
+  作分次括号
+    [A_m, B_n} = A_m B_n − (−1)^{ε_A ε_B} B_n A_m
+               = ∮_{|z|>|w|} R{AB} − (−1)^{ε_A ε_B}(−1)^{ε_A ε_B} ∮_{|z|<|w|} R{AB}
+               = ∮_{|z|>|w|} R{AB} − ∮_{|z|<|w|} R{AB} ，
+  两个 (−1)^{ε_A ε_B} 相乘为 +1，故两条围道之差仍是**同一个**全纯函数 R{A(z)B(w)} 的两条围道之差，
+  按 (2.6.14)/Fig. 2.3 变形成绕 w 的小围道 C_w，在其上代入 OPE 逐阶取留数。
+  这就把玻色型字典的每一步原样搬到费米型：**唯一的改动是左端从 [·,·] 变成 [·,·}**。
+  ε_A ε_B = 0 时 [·,·} = [·,·]，退化为 worldsheet.ope-commutator-dictionary。
+
+  **实例 (1) 的验算**（bc，权 (λ, 1−λ)，b_m = ∮ z^{m+λ−1} b、c_n = ∮ w^{n−λ} c）：
+    {b_m, c_n} = ∮_0 (dw/2πi) w^{n−λ} Res_{z→w} z^{m+λ−1} · (1/(z−w))
+               = ∮_0 (dw/2πi) w^{n−λ} w^{m+λ−1} = ∮_0 (dw/2πi) w^{m+n−1} = δ_{m+n,0} ，
+  与原书 (2.7.17) {b_m, c_n} = δ_{m,−n} 一致，且与 λ 无关（与原书 §2.7 通篇按一般 λ 书写相符）。
+gaps:
+  - "**原书未单列费米版**：Polchinski Vol.1 §2.6 只写玻色型 (2.6.14)；费米型版本在 (2.7.17)、(4.3.10) 与 Vol.2 §10.1
+     被直接使用而不被陈述。本推导的 summary 是本图对围道论证的推广复述，**没有逐字来源**
+     （docs/STATUS_LEVELS.md「断言 + 骨架」档位）。"
+  - "**奇算子的径向排序符号在原书 §2.6 是否明写，本图未核实**：本推导把它作为 Wick 定理费米版
+     （worldsheet.conformal-normal-ordering-v2）的推论使用，边标 inferred。若原书在 (2.6.12)–(2.6.14) 附近
+     有明写，researcher 核实后可把该边改为非 inferred 并补 loc。"
+  - "**OPE 级数收敛与围道变形的合法性在来源中未证明**（lead 裁决 1，2026-09-10）：与玻色型字典共享同一缺口，
+     这是本推导封顶在 physical-argument 的主因。"
+  - "**半整数权场的分支处理未展开**：statement 只说「指标取相应的半整数使被积函数单值」，R 扇区
+     （指标整数、被积函数带 z^{1/2} 分支）不在本卡范围内；见 worldsheet.rns-modes-satisfy-super-virasoro--via-contour 的 gaps。"
+  - "**严格路线缺席**：玻色型有 worldsheet.ope-pole-mode-commutator-dictionary（Schottenloher Thm 10.10 的形式分布版），
+     费米型需要该定理的超代数版，编号本轮未核实；若立卡应另建「费米型形式分布版」卡而不挂在本卡上。"
+notes: |
+  由 curator-small-backlog-3 于 2026-09-11 建立。本推导与玻色型的
+  worldsheet.ope-commutator-dictionary--via-contour-deformation 平行；那条的 gaps 三条在本条全部继承，
+  本条另加「原书未单列」与「R 排序符号未核实」两条。
+
+  **为什么不是 rigorous**：gaps 第 1–3 条；特别是围道变形 = OPE 收敛这一层在本图与来源中都未证明，
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款第一条「前提已完整写出」不满足。
+author: curator-small-backlog-3
+created: "2026-09-11"
