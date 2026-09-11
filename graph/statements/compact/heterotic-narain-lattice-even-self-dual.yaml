@@ -70,5 +70,14 @@ notes: |
   【为什么放在 compact 区】§11.6 的标题是 'The bosonic construction and toroidal
   compactification'，而 (11.6.2)–(11.6.4) 讲的是紧化动量格；d = 10 只是其 Γ 退化为欧氏的特例。
   本图 compact 区已有 Narain 一支（虽未合并），放这里可与之对齐。
+  ★【2026-09-11 记号与依赖更新】statement 第 (2) 条提到的
+  math.even-self-dual-euclidean-lattices-dimension-16 已于本日换代拆卡：
+  「维数必是 8 的倍数」→ math.even-unimodular-rank-divisible-by-8（Zagier Prop 12(i)，rigorous）；
+  「16 维恰有两个且不同构」→ math.even-unimodular-rank-16-classification（Chenevier–Lannes Cor 3.6，rigorous）；
+  Polchinski 记号 `Γ_16`/`Γ_8` 的等同 → math.even-self-dual-euclidean-lattices-dimension-16-v2。
+  （statement 文本按项目规矩不可改，此处仅作指路。）
+  ⚠ **本卡才是杂化弦「规范群恰有两个」整条链的真正瓶颈**：本卡断言的是「一致 CFT ⇒ 内部格偶自对偶」，
+  原书把论证推给 v1 §8.4，本图它是 physical-argument。数学侧两张卡升到 rigorous **不会**改变这一点。
+
 author: curator
 created: "2026-09-11"

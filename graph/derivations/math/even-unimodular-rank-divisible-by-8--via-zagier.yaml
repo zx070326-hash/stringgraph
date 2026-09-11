@@ -1,0 +1,41 @@
+id: math.even-unimodular-rank-divisible-by-8--via-zagier
+target: math.even-unimodular-rank-divisible-by-8
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: zagier-2008
+    loc: "§3.2 «Invariants of Even Unimodular Lattices», Proposition 12(i) 及其证明, pp. 33–34"
+    note: |
+      L1（页图逐字；抽取记录 literature/extractions/math-sources.md §47.2）。
+      证明是**发表的、数学界接受的完整证明**，且作者在 p. 34 明写此条另有纯代数证明
+      （«purely algebraic proofs are known»）⇒ 按 docs/STATUS_LEVELS.md 第 4 级判据，status = rigorous。
+summary: |
+  Zagier 的模形式证明，骨架（原文自述的依赖链，L1）：
+
+  (1) 由同页前面的 **«Theorem (Hecke, Schoenberg)»**（书上 p. 32，**原文只有人名、无编号**），
+      正定偶幺模型 Q 的 θ 级数 `Θ_Q` 是全模群 `Γ_1 = SL(2,Z)` 上权 `k = m/2` 的模形式。
+  (2) 由该文 §2 的结果，权 k 的模形式是 Eisenstein 级数 `G_k` 与一个尖点形式的线性组合；
+      再由 **Proposition 8** 得表示数的渐近式
+      `R_Q(n) = −(2k/B_k) σ_{k−1}(n) + O(n^{k/2})`  (38)。
+  (3) 归结到 `m ≡ 4 (mod 8)` 的排除。原文逐字：
+      «For the first part it is enough to show that m cannot be an odd multiple of 4, since if m is
+      either odd or twice an odd number then 4m or 2m is an odd multiple of 4 and we can apply this
+      special case to the quadratic form Q ⊕ Q ⊕ Q ⊕ Q or Q ⊕ Q, respectively.»
+  (4) `m ≡ 4 (mod 8)` 即 `k ≡ 2 (mod 4)`，此时 Bernoulli 数 `B_k > 0`，(38) 的主项系数 `−2k/B_k < 0`，
+      右边趋于 −∞，与 `R_Q(n) ≥ 0` 矛盾。
+
+  ⚠ 第 (4) 步的极限变量在本图不照抄原文：抽取者在页图上读成 `k → ∞`，按数学内容应为 `n → ∞`，
+  抽取记录明确标注「这一句不要照抄」（math-sources.md §47.2）。本 summary 只写数学上正确的版本，
+  不声称它是原文逐字。
+gaps:
+  - "**本图没有模形式侧的节点**：Hecke–Schoenberg 定理（Zagier p. 32，原文无编号）、`M_k(SL(2,Z))` 的结构、Eisenstein 级数、Proposition 8 的渐近估计，本图都**没有对应 statement**，故上面的骨架步骤在图里没有上游边。这不是论证缺口（Zagier 的证明是完整的），而是本图的覆盖缺口；depends_on 因此为空。"
+  - "**本项目未独立复核该证明的每一步**：本轮只做到逐字读到命题陈述与证明正文（L1 页图）。"
+  - "**没有第二条独立来源**：Chenevier–Lannes 对这一条只说 «Il est bien connu que …»（p. 1），不证不引，⇒ 不得引作来源。Serre / Milnor–Husemöller 本该是那条独立来源，但两书正文未取到（math-sources.md Q47.1、Q47.6）。"
+  - "**「even unimodular = even self-dual」的术语桥不在本推导内**：本推导证的是 Zagier 的二次型版本；物理侧措辞的换算见目标卡 notes，用到它的下游边须标 `inferred: true`。"
+notes: |
+  本推导只覆盖 Proposition 12 的第 **(i)** 条。第 (ii) 条（表示数渐近式 (38)）本图不需要，未入卡。
+  ⛔ 禁令（math-sources.md §47.6(d)）：不得写 Serre / Milnor–Husemöller / SPLAG / Ebeling 的任何定理号或表号，
+  四本书的正文本项目一本都没取到。
+author: curator
+created: "2026-09-11"
