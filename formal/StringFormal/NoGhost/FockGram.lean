@@ -25,17 +25,15 @@ unconditional theorem.
 ## Main definitions
 
 * `Fock.creationMonomial R d` -- the state `∏_{(μ,n)} (α^μ_{-n})^{d(μ,n)} |0⟩`.
-* `Fock.creationOp R d` -- the same product read as an operator, built with
-  `Finset.noncommProd`; the commutation proof is `Fock.creation_pairwise_commute`, which is
-  exactly hypothesis (H1).
 
 ## Main statements
 
 * `Fock.creationMonomial_add_single` -- the recursive characterisation: adjoining one more
   creation operator.  Together with `Fock.creationMonomial_zero` this says
   `creationMonomial` really is an iterated application of creation operators to `|0⟩`.
-* `Fock.creationOp_vacuum` -- the product of the creation operators, in any order, applied
-  to the vacuum, gives `creationMonomial R d`.
+* `Fock.commute_creation`, `Fock.foldr_creation_vacuum` -- hypothesis (H1) and its role:
+  applying the creation operators one at a time along *any* list enumerating the multiset
+  `d` gives `creationMonomial R d`, so the state depends only on `d`.
 * `Fock.creationMonomial_mem_levelSubmodule` -- the level of `creationMonomial R d` is
   `Σ n · d(μ,n)`.
 * `Fock.annihilation_creationMonomial` -- step (1) of the card's argument (Leibniz /
@@ -47,13 +45,14 @@ unconditional theorem.
   `⟨mono d, mono e⟩ = δ_{d,e} ∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} d(μ,n)!`.
 * `Fock.pairing_creationMonomial_of_hypotheses` -- the *conditional* form, matching the graph
   card: the same formula for an arbitrary bilinear form satisfying (H2)-(H4).
-* `Fock.monomialNorm_one` -- with `η = 1` (a positive-definite, e.g. purely transverse,
-  metric) the diagonal entry is literally `∏ n^{d(μ,n)} d(μ,n)!`.
+* `Fock.monomialNorm_one`, `Fock.pairing_creationMonomial_one` -- with `η = 1`
+  (a positive-definite, e.g. purely transverse, metric) the diagonal entry is literally
+  `∏ n^{d(μ,n)} d(μ,n)!`, which is the shape stated on the graph card.
 * `Fock.pairing_creationMonomial_self_pos`, `Fock.pairing_self_pos_of_ne_zero` -- positivity
   for `η > 0`, i.e. step (3).
 * `Fock.linearIndependent_creationMonomial` -- the creation monomials are linearly
-  independent (over any nontrivial ground ring; in particular over an ordered field, where
-  it also follows from positive definiteness).
+  independent (over any ground ring; in particular over an ordered field, where it also
+  follows from positive definiteness).
 
 ## Mathematical notes (for the dependency graph)
 
@@ -302,6 +301,68 @@ theorem pairing_self_pos_of_ne_zero {η : Fin D → R} (hη : ∀ μ, 0 < η μ)
     exact hP
 
 end PositiveDefinite
+
+/-! ### The creation monomial as an ordered product of operators
+
+Hypothesis (H1) of the graph card — the creation operators commute — is a theorem here
+(`Fock.creation_creation_comm`).  The lemma `foldr_creation_vacuum` below makes its role
+explicit: the state obtained by applying the creation operators one at a time does not
+depend on the order chosen, only on the multiset `d` of oscillators used.
+-/
+
+/-- (H1) as a `Commute` statement in `Module.End R (Fock D R)`. -/
+theorem commute_creation (u v : Osc D) :
+    Commute (creation R u.1 u.2 : Module.End R (Fock D R)) (creation R v.1 v.2) := by
+  show (creation R u.1 u.2 : Module.End R (Fock D R)) * creation R v.1 v.2
+      = creation R v.1 v.2 * creation R u.1 u.2
+  exact LinearMap.ext fun P => creation_creation_comm u.1 v.1 u.2 v.2 P
+
+/-- Applying the creation operators one at a time along **any** list `l` enumerating the
+multiset `d` produces the same state `creationMonomial R d`.  This is the precise sense in
+which `creationMonomial R d` is the operator product `∏_{(μ,n)} (α^μ_{-n})^{d(μ,n)}` applied
+to the vacuum `|0⟩`: the answer depends only on the multiset of oscillator labels, which is
+hypothesis (H1). -/
+theorem foldr_creation_vacuum (l : List (Osc D)) (d : Osc D →₀ ℕ)
+    (hl : ∀ v : Osc D, l.count v = d v) :
+    l.foldr (fun v P => creation R v.1 v.2 P) (vacuum D R) = creationMonomial R d := by
+  classical
+  induction l generalizing d with
+  | nil =>
+      have hd : d = 0 := by
+        ext v
+        have h := hl v
+        simp only [List.count_nil] at h
+        simp [← h]
+      simp [hd]
+  | cons a t ih =>
+      have hcount : ∀ v : Osc D, t.count v = (d - Finsupp.single a 1 : Osc D →₀ ℕ) v := by
+        intro v
+        have h := hl v
+        by_cases hv : v = a
+        · subst hv
+          simp only [List.count_cons_self] at h
+          rw [Finsupp.tsub_apply, Finsupp.single_eq_same]
+          omega
+        · rw [List.count_cons_of_ne (Ne.symm hv)] at h
+          rw [Finsupp.tsub_apply, Finsupp.single_eq_of_ne hv]
+          omega
+      have hpos : 1 ≤ d a := by
+        have h := hl a
+        simp only [List.count_cons_self] at h
+        omega
+      have hadd : (d - Finsupp.single a 1) + Finsupp.single a 1 = d := by
+        ext u
+        by_cases hu : u = a
+        · subst hu
+          rw [Finsupp.add_apply, Finsupp.tsub_apply, Finsupp.single_eq_same]
+          omega
+        · rw [Finsupp.add_apply, Finsupp.tsub_apply, Finsupp.single_eq_of_ne hu]
+          omega
+      have key : creationMonomial R d
+          = creation R a.1 a.2 (creationMonomial R (d - Finsupp.single a 1)) := by
+        conv_lhs => rw [← hadd]
+        rw [creationMonomial_add_single]
+      rw [List.foldr_cons, ih _ hcount, key]
 
 end Fock
 
