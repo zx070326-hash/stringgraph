@@ -27,7 +27,23 @@ statement: |
   (b) 不断言 (1) 的前提可以放宽到「每个 C^n 有限维但无限多个非零」——那时两端都可能发散。
   (c) 不断言任何关于具体复形（BRST 复形、半无限上同调复形）的事：把 (1)(2) 用到
       C_rel(p,κ) 或 V ⊗ Λ^∞ 上时，「该复形满足前提」由引用它的推导各自负责。
+formal:
+  lean_decl: StringFormal.EulerPoincare.euler_poincare
+  lean_file: StringFormal/Math/EulerPoincare.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/EulerPoincare.lean :: StringFormal.EulerPoincare.{euler_poincare, euler_poincare_finsum, finrank_cohomology_zero_eq, euler_poincare_graded}"
+    note: |
+      本仓库（形式化侧提交 `0f5db0a`），Lean 4 + Mathlib v4.33.1。逐条对应：
+      · 本卡 **(1)** = `euler_poincare`（求和在 `Finset.Ico a b`，前件
+        `Subsingleton (C (a-1))` 与 `Subsingleton (C b)`），以及它的全分次形式
+        `euler_poincare_finsum`（两端写成 `∑ᶠ n : ℤ`，前件是卡面的「只有有限多个 C^n ≠ 0」）；
+      · 本卡 (1) 的「**特别地**」一支 = `finrank_cohomology_zero_eq`；
+      · 本卡 **(2)** = `euler_poincare_graded`（特征标等式在 `Λ → ℤ` 里；
+        但 `H^n(C) = ⊕_λ H^n(C_λ)` 本身未形式化，见 --via-lean 推导的 gaps）；
+      · 本卡【明确不断言】(a) 号差版同样**不在** Lean 里。
+      ★ **Mathlib 没有这条定理**：`Mathlib/Algebra/Homology/EulerCharacteristic.lean`
+      只定义了 `eulerChar` / `homologyEulerChar`，并未证两者相等；故本卡走自证而非桥层。
   - ref: fgz-1986
     loc: "**Proposition 1.3**, p.8443（§1.1 'Definitions and Basic Results'）：Euler–Poincaré 原理，Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ_m (−1)^m ch_q H^m_∞(g, V)（本卡 (2) 在半无限上同调复形上的实例）；**p.8445 左栏**逐字 'To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. The formal Euler character is …'"
     note: |
