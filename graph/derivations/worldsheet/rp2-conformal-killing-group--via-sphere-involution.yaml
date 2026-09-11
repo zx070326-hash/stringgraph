@@ -24,7 +24,10 @@ depends_on:
       worldsheet.riemann-roch-kappa-minus-mu-nonorientable（同一条鬼数反常论证，
       原书 (5.2.9) 未限定可定向，§6.1 也确实把这套计数用在 RP₂ 上）。
       仍不标 inferred，理由见该卡 sources 的三条逐字证据 (a)(b)(c)。
-      ⚠ 该卡的适用范围是「紧、无边、连通、不可定向」——RP₂ 逐条落在范围内。
+      ⚠ **范围核对（reviewer-batch10-12 复审要求逐条确认，不再沿用 v1 时代的「紧、无边」说法）**：
+      被引卡限定**不可定向**且紧、无边、连通；RP₂ 四条逐条满足——
+      不可定向 ✓（S₂ 的无不动点反全纯对合的商）、紧 ✓、无边 ✓（该对合无不动点）、连通 ✓。
+      **关键的那一条是「不可定向」**：旧边指向的 -v2 卡限**可定向**，RP₂ 不满足，才有本次改指。
   - id: worldsheet.conformal-killing-equation
     note: κ 的定义（被计数的对象）。
   - id: worldsheet.moduli-condition-traceless-transverse
