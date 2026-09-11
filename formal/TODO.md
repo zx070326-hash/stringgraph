@@ -1978,6 +1978,30 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     §B′.9 第 2 条）。
   - **公理登记**：85 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `noghost-pr5`（蓝图 **§B″**，2026-09-12 planner-b26-seeds）：(B-26) 零态下界。顺序：前置 `lie_towerLop_towerLop`（塔上 Virasoro 关系，~15 行）→ **`kacDet2_massShell_two : Fock.kacDet2 c (1 - 2) = 2 * (c - 26)`（一行 `ring`，把「26 处为零」加强为「零点只有 26」）** → PR5b′ `N = 2` 特例（`LevelTwoSpan.lean`，~120 行，整条路线唯一便宜的证伪点；`D = 26` 唯一消费点 `towerLop_two_apply_descTwo`，方程 `L_2(2L_{−2}+3L_{−1}²)φ = (c−26)φ`，`a₀ = 1` 只进 `L_1(…)φ = 12(h+1)L_{−1}φ`）→ PR5b `NullSeeds.lean`（Type 1 / Type 2 两族，~250 行）→ PR5a `VirasoroPBWBasis.lean`（每片 Virasoro × 光锥 PBW 基，~700 行；独立价值：关掉 PR4 全部非-(B-26) 缺口）。**致命断点**：两族像在 `N ≥ 5` 的重叠恰为 Euler 五边形数（超出 1, 25, 351），要下界须给 `dim(U ⊓ W)` 上界 = Verma 模 BGG 嵌入结构；建议绕法是按含 `b̃` 占据函数逐指标造零态、用与 `C_N` 配对矩阵三角性证独立。§B″.5 证明 (B-26) **不可能**由任何维数记账推出（候选 (c) 否决）。
+  - **2026-09-12 formalizer：PR5b′（`N = 2` 证伪点）已落地，`§B″.2` 的手算逐字复核通过，无订正。**
+    三个提交（分支 `agent/formalizer/noghost-pr5-n2`）：
+    (1) `Fock.kacDet2_massShell_two : kacDet2 c (1−2) = 2*(c−26)` 与
+    `kacDet2_massShell_two_eq_zero_iff`（`Virasoro/FockFreeLowLevel.lean`）；
+    (2) `NoGhost/TowerVirasoro.lean`——`lie_towerLop_towerLop` 加三条使用形式
+    （`towerLop_apply_towerLop` / `_of_ne_zero` / `_neg`）；
+    (3) `NoGhost/NullSeedsTwo.lean`（26 条声明）——两族零态与两条方程：
+    `towerLop_one_apply_descTwo : L_1𝒟₂φ = 12(h+1)•L_{−1}φ`（**截距**，`c` 不出现）、
+    `towerLop_two_apply_descTwo : L_2𝒟₂φ = ((D:R)−26)•φ`（**临界维数**，全链唯一消费点，
+    系数与蓝图完全一致）、`towerLop_zero_apply_descTwo`、`towerLop_apply_descTwo_of_three_le`、
+    `descTwo_mem_towerPhysSubmodule` / `descTwo_mem_towerNullSubmodule`（`(D:R)=26`）。
+    **超出蓝图的加强**：`descTwo_mem_towerPhysSubmodule_iff` / `towerLop_two_apply_descTwo_eq_zero_iff`
+    ——整环上、种子非零时 `D = 26` 是**必要**条件，不只是充分。另有片上版本
+    （`k·k = 2` 求值截距）与具体态 `descTwo_single_mem_towerNullSubmodule`（`𝒟₂|0;p₋₂⟩`）。
+    全部 26 条 `check_axioms --all` 为 `ok`（只有标准三条）。
+  - **仍未做（`B26 2` 与 `ddfSpans_bigrade_neg_two_two` 未关闭）**，三条，都在计数一侧：
+    (a) 25 个 Type-1 种子 `(v·α_{−1})|0;p₋₂⟩`（`v·p₋₂ = 0`）与 26 个零态的线性无关；
+    (b) `𝒟₂y ≠ 0`。**Gram 判据在此处必然空转**：`kacDet2 26 (1−2) = 0`，
+    `Fock.linearIndependent_fockDesc2` 在该点无内容——**这个消失正是零态存在的原因**。
+    要走 `MvPolynomial` 系数：`𝒟₂|0;p⟩` 的 `X_{(μ,2)}` 系数是 `5η_μp^μ`，由 `p·p = −2 ≠ 0`
+    知某个 `μ` 非零（特征零）；
+    (c) `p_{D−1}(2) − p_{D−2}(2) = D`，即 `SpuriousElimination`/`SliceDim` 里那两个
+    「永不求值」的 `Fintype.card` 之差。这是真正的 `Finsupp` 计数，不是 `decide`。
+    ⇒ 下一步仍按蓝图：PR5b 全量（一般 `N` 的两族）与 PR5a（Virasoro × 光锥 PBW 基）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），唯一剩余是 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片

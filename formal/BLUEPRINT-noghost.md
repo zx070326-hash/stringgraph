@@ -2071,3 +2071,70 @@ N :                       2     3      4       5        6         7
 ⭐ 超出量 `0,0,0,1,25,351` 逐项等于 `p_{25}(N−5) + p_{25}(N−7) − ⋯`
 （`N=5: p25(0)=1`；`N=6: p25(1)=25`；`N=7: p25(2)+p25(0)=350+1=351`），
 即 `1 − φ = q + q² − q⁵ − q⁷ + ⋯` 的五边形数系数。**B″.11 第 1 条的断点因此是确证的，不是猜测。**
+
+### B″ 订正（2026-09-12，formalizer，分支 `agent/formalizer/noghost-pr5-n2`）
+
+**⭐ 结论先行：证伪测试跑过了，没有需要订正的数学。** §B″.2 / §B″.2.1 的三条手算方程
+在 Lean 里逐字成立，系数一模一样：
+
+```lean
+towerLop_one_apply_descTwo : L_1 (2L_{-2} + 3L_{-1}²) φ = (12 * (h + 1)) • L_{-1} φ
+towerLop_two_apply_descTwo_of_eigenvalue :
+    L_2 (2L_{-2} + 3L_{-1}²) φ = (26 * h + (D : R)) • φ
+towerLop_two_apply_descTwo :  L_2 (2L_{-2} + 3L_{-1}²) φ = ((D : R) - 26) • φ   -- h = -1
+Fock.kacDet2_massShell_two :  kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
+```
+
+`L_2` 那条的实际系数确实是 `(D : R) − 26`（一般 `h` 下是 `26h + c`），`L_1` 那条确实没有 `c`。
+文件 `NoGhost/NullSeedsTwo.lean`（26 条声明）、`NoGhost/TowerVirasoro.lean`（4 条）与
+`Virasoro/FockFreeLowLevel.lean` 新增 2 条，全部 `check_axioms` 为 `ok`。
+
+以下是与 §B″ 文本的**七点实现差异**，都是澄清而非订正：
+
+1. **`towerLop_apply_towerLop` 才是工作形式**。§B″.8 只要求 `lie_towerLop_towerLop`
+   （的确约 15 行，`Finsupp.lhom_ext` 照抄 `lie_towerLop_towerMode`）。但括号形式在计算里用不上，
+   真正被消费的是「把 `L_m` 移到 `L_n` 右边」的 `towerLop_apply_towerLop`
+   及其两个特例 `_of_ne_zero`（`m + n ≠ 0`）与 `_neg`（`n = −m`，中心项显式）。
+   把 `if m + n = 0` 提前拆开很重要：否则每条原子都要在 `rw` 中途 `by_cases`。
+2. **中心项的两个数值要单独立引理**：`centralTerm_one_eq_zero`（`⁅L_1,L_{−1}⁆` 无中心项，
+   这是 Type 1 `D`-无关的技术原因）与 `two_mul_centralTerm_two_eq_one`
+   （`2·centralTerm 2 = 1`，即 `⁅L_2,L_{−2}⁆ = 4L_0 + c/2` 里那个 `1/2`；
+   由 `Virasoro.twelve_mul_inv12` 得）。这两条 §B″ 没提，但没有它们 `ring` 关不掉。
+3. **§B″.2 的「Gram 六条目」在 Lean 里应当写成算子等式，不是内积**。本实现把
+   `towerLop_{zero,one,two}_apply_towerLop_neg_{one,two}` 六条做成以「种子 `φ`」为参数的
+   引理（`hpos : ∀ n > 0, L_n φ = 0` 与 `h0 : L_0 φ = h • φ`），三条 `descTwo` 方程各由其中
+   两三条拼成。物理性证明要的是算子等式，Gram 只是它的推论。
+4. **`match_scalars` 是这批证明的关键战术**。`smul_smul` / `add_smul` 的 `rw` 链在
+   `Module.End` 上极易卡住；`match_scalars` 把模等式压成标量等式后 `ring` 即可，
+   唯一需要 `linear_combination` 的是 `L_2` 那条（要用 `two_mul_centralTerm_two_eq_one`：
+   `linear_combination (D : R) * two_mul_centralTerm_two_eq_one R`）。
+5. **陷阱：`h0 : L_0 φ = −φ` 不能直接喂给参数形如 `L_0 φ = h • φ` 的引理**。
+   `?h • φ =?= -φ` 是高阶合一，实测直接 `maxHeartbeats` 超时（不是报错，是 200000 heartbeats
+   用光）。必须先 `have h0' : L_0 φ = (-1 : R) • φ := by rw [h0, neg_one_smul]`。
+6. **加强（蓝图没写）：`D = 26` 是必要条件**。`towerLop_two_apply_descTwo_eq_zero_iff` 与
+   `descTwo_mem_towerPhysSubmodule_iff`——整环上、种子非零时，Type-2 向量物理 **⟺** `(D:R) = 26`。
+   Kac 侧孪生 `Fock.kacDet2_massShell_two_eq_zero_iff`。这把 §B″.2 的「`B26 2` ⟺ `D = 26`」
+   在**算子层**做实了（维数层仍缺，见下）。
+7. **片上版本值得单独做**：`descTwo_mem_towerBigrade`（bidegree `(0,+2)`）+
+   `towerLop_zero_apply_of_mem_towerBigrade_of_zeroModeSq_eq_two`（`k·k = 2` 把截距求值成 1）
+   把抽象的 `hpos`/`h0` 换成「在片 `(j, N)` 上且 `j + N = −1`（Type 1）/ `= −2`（Type 2）」。
+   Type 2 在 level-0 片上 `hpos` **自动成立**（`towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt`），
+   于是 `descTwo_single_mem_towerNullSubmodule` 给出具体态 `𝒟₂|0;p₋₂⟩`。
+
+**`B26 2` 仍未关闭**，缺口全在计数一侧，三条：
+
+* (a) 25 个 Type-1 种子 `(v·α_{−1})|0;p₋₂⟩`（`v·p₋₂ = 0`）没造，26 个零态的线性无关没证。
+* (b) **`𝒟₂ y ≠ 0` 没证，而且 Gram 判据在此处必然空转**：`kacDet2 26 (1−2) = 0`，
+  所以 `Fock.linearIndependent_fockDesc2` 在该点毫无内容——**这个消失正是零态存在的原因**，
+  不是可以绕开的技术障碍。可行路线是 `MvPolynomial` 系数：
+  `𝒟₂|0;p⟩ = 5(p·α_{−2})|p⟩ + [Σ_μ η_μ(α^μ_{−1})² + 3(p·α_{−1})²]|p⟩`，
+  其 `X_{(μ,2)}` 系数是 `5 η_μ p^μ`，由 `p·p = −2 ≠ 0`（特征零）知某个 `μ` 非零。
+  ⇒ **给 §B″.7 的 PR5b 加一条 `descTwo_apply_ne_zero`，约 80–150 行，风险中等。**
+* (c) `p_{D−1}(2) − p_{D−2}(2) = D`，即 `SpuriousElimination.lean` 与 `SliceDim.lean` 里那两个
+  「永不求值」的 `Fintype.card` 之差。⚠ **这一条被 §B″ 低估了**：§B″.10 把 PR5b 估成 250 行
+  且信心「高」，但 250 行里不含任何计数；`B26 2` 这个 `Prop` 的左右两边都是 `finrank`，
+  必须把两个 `Fintype.card {d : Osc D →₀ ℕ // …}` 算出来才能比较，而 `decide` 在
+  `Osc D →₀ ℕ` 上化不开（同 `Math/PartitionCard.lean` 的教训）。
+  ⇒ **建议在 §B″.7 的 PR5b 与 PR5c 之间插一条独立的「level-2 占据函数计数」PR**
+  （`#{d | level d = 2} = m + m(m+1)/2` 形式的双射，`m` = 参与的振子方向数），
+  否则 `N = 2` 这一片也关不掉，而它是唯一有希望关掉的一片。
