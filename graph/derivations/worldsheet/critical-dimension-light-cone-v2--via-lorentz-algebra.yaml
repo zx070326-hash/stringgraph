@@ -4,28 +4,6 @@ kind: physical-argument
 status: physical-argument
 depends_on:
   - id: worldsheet.light-cone-quantization
-  - id: worldsheet.light-cone-normal-ordering-constant
-    note: |
-      **【2026-09-11 拆清，ms.critical-dimension-bosonic 第三轮裁定 3(a) 的「顺带」项】**
-      这条边**只服务于 summary 第二段**（Polchinski §1.3 正文的那条形状：先把 ζ 正规化值
-      a = (D−2)/24 代进去，则 Δ_n 退化为 n(26−D)/12，闭合 ⟺ D = 26，而 a = 1 成为随之而来的
-      推论）。**目标陈述与本推导的主论证不用它**：目标卡把正规序常数 a 当作 Δ_n 中的**待定参数**，
-      由 n 的正幂系数得 D = 26、由 n 的负幂系数得 a = 1，全程不需要 a 的任何正规化数值。
-      因此：
-        · 本边**不是**目标陈述的前提，删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容；
-        · 保留它是因为 summary 第二段确实断言了「ζ 值配 a = 1 同样给 D = 26」，那句话需要这条边；
-        · 下游**不得**据本边推断「(I) 路线共享 ζ 正规化处方」——ms.critical-dimension-bosonic 的
-          canonical_text 已按第三轮 F2 删去该说法。
-      **非 inferred**：该结果已单列节点（Polchinski §1.3，A 的定义式 **(1.3.31)**、ζ 正规化 (1.3.32)、
-      结果 **(1.3.35)** `A = (2−D)/24`，式号 2026-09-11 经原书核实落实），已列入本推导 sources 的
-      §1.3 条目，故这条边有来源支撑。
-    convention_map: |
-      被依赖节点按 Polchinski 记号给 A = -(D-2)/24 并声明 conv.intercept-sign-a
-      （a = -A）；本推导与目标陈述用的是 a，取 a = (D-2)/24。
-  - id: worldsheet.open-string-mass-shell
-    note: |
-      本推导的 summary 用 α'm^2 = N - a 把 Δ_n = 0 的解读成谱条件。该质量壳现已单列
-      节点，来源是已核实的 Polchinski **(1.3.36)**，已列入本推导 sources 的 §1.3 条目，非 inferred。
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式模式计算，给出 Δ_n）"
@@ -83,9 +61,6 @@ summary: |
   该族的第 n 个成员把 α^j_{-m}|0;k⟩ 送到 ∝ δ_{nm} α^i_{-n}|0;k⟩，故只有第 n 个成员在
   α^j_{-n}|0;k⟩ 上不为零。D = 3 时只有一个横向指标，整族恒为零，翻译失效（见 gaps）。
   这一步是有限步初等计算，但 GSW 的原文没有写出来，本推导按目标卡 v2 的陈述补出。
-
-  正规序常数 a 的取值 a = (D-2)/24 由横向零点能 (D-2)/2 · Σ_{n≥1} n 经 ζ 正规化
-  (Σ_{n≥1} n → ζ(-1) = -1/12) 得到；配合 a = 1 同样给出 D = 26，这是 Polchinski §1.3 正文走的路线。
 gaps:
   - "零点能 Σ_{n≥1} n = ζ(-1) = -1/12 用 ζ 函数正规化，未给出算子层面的严格定义；这是本推导只能记为 physical-argument 的主要原因。该正规化步骤现已单列为 worldsheet.zeta-regularized-sum-of-integers（physical-argument），其纯数学部分（收敛级数 Σ n e^{-un} 的 Laurent 常数项 = -1/12）单列为 worldsheet.regulated-sum-laurent-expansion（rigorous）。"
   - "[J^{i-}, J^{j-}] 的计算涉及无穷多模式求和的重排与正规序重整（J^{i-} 是三次式），文献中按形式操作处理，未给出收敛性论证。"
@@ -95,6 +70,8 @@ gaps:
   - "**【2026-09-12 auditor 裁定：本推导有两条非承载边，建议删】**（裁决全文见 docs/ROADMAP.md 「auditor 裁决（2026-09-12，critdim-routes）」R2，卡片草案见 docs/drafts/critdim-route-cards.md §D。本轮只记账，**边未动**，由 lead 派 curator 执行。）(1) `worldsheet.light-cone-normal-ordering-constant`：该边自己的 note 已逐字写明「本边**不是**目标陈述的前提，删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容」，它只服务于 summary 第二段的 Polchinski 形状。(2) `worldsheet.open-string-mass-shell`：该边的 note 写它用于把 Δ_n = 0「解读成谱条件」，而目标卡 worldsheet.critical-dimension-light-cone-v2 的 statement 里**没有任何质量公式**。两条边都属 2026-09-12「接口边」裁决后半句所禁（只提供语境而不承担论证），先例是 auditor 第七轮把 ddf-contour-equals-mode-sum 撤出 no-ghost-theorem-v4--via-goddard-thorn。**删边不改 effective**（仍 physical-argument），但把 (I) 在 `stringgraph why` 里的瓶颈树从 8 个物理节点压到 1 个（auditor 本地模拟已跑并回滚）。"
   - "**【2026-09-12 auditor：正则量子化那一步在哪里——删边前后都必须点名】** 本推导的另一条依赖 `worldsheet.light-cone-quantization` 是 **kind: definition、status rigorous**，它把横向振子对易关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0} 与质量壳 α'm² = N − a **直接写出**；该卡 notes 逐字说明为何不把它们加进 uses：「那会把纯代数的定义层拉低到 physical-argument」。这个立场站得住（定义可以规定一个代数系统），但它意味着**本推导断言的是「被定义的那个光锥代数系统」的性质，不是「物理弦」的性质**。「该系统就是 Nambu–Goto 弦的量子化」这一物理识别由 worldsheet.transverse-oscillator-commutators（physical-argument，--via-canonical-quantization）、worldsheet.light-cone-gauge-lagrangian（physical-argument）与 worldsheet.polyakov-nambu-goto-classical-equivalence（physical-argument）承载，**这三张卡不在本推导的链上**（删掉上一条 gap 所说的两条边之后，它们连间接地也不在）。任何把本条读成「关于物理弦的 D = 26」的下游用法，必须另外取得这三张卡。"
   - "**【2026-09-12 auditor：本推导能否升 rigorous】** 只有一条路——按 docs/STATUS_LEVELS.md 等级 4 的「初等可复核」例外条款，由 reviewer 独立复算 [J^{i−}, J^{j−}]（前提 D ≥ 4 与线性无关一步已写进目标卡 v2，符合该条款第一项）。代价远高于 BRST 路线的同类动作（三次式 + 无穷模式重排），且收益为零：ms.critical-dimension-bosonic 是五条的合取且其 --via-four-routes 自身封顶 physical-argument，(I) 单独升级抬不动里程碑（ROADMAP R0）。**本阶段 auditor 不建议做。** 上一条 gap 所说的「严格化路线：用 Virasoro 中心荷的代数计算重述」同样不解决问题：本图里通往 c^⊥ = D−2 的非 OPE 路线（free-boson-central-charge-d--via-mode-algebra / --via-lean）给的是**代数命题**，而把它接回光锥零点能仍要经 cylinder-plane-l0-shift（Schwarzian → OPE，physical-argument）。"
+  - "**本推导链上不出现正则量子化那一步，这是有意的，但必须点名。** 删去上述两条非承载边后，本推导的唯一依赖是 worldsheet.light-cone-quantization（kind: definition，status rigorous）。那张定义卡把横向振子对易关系 [α^i_m, α^j_n] = m δ^{ij} δ_{m+n,0} 与质量壳 α'm² = N − a **直接写出**，其 notes 逐字说明为何不把它们加进 uses：「那会把纯代数的定义层拉低到 physical-argument」。因此本推导断言的是**被定义的那个光锥代数系统**的性质；「该系统就是 Nambu–Goto 弦的量子化」这一物理识别由 worldsheet.transverse-oscillator-commutators（physical-argument，--via-canonical-quantization）、worldsheet.light-cone-gauge-lagrangian（physical-argument）与 worldsheet.polyakov-nambu-goto-classical-equivalence（physical-argument）承载，**它们不在本推导的链上**。任何把本条读成「关于物理弦的 D = 26」的下游用法，必须另外取得这三张卡。"
+  - "**【2026-09-12 curator 执行记录：auditor 那两条建议删的边已删】** 依 lead 派工与 docs/drafts/critdim-route-cards.md §D，本日删去 depends_on 里的 `worldsheet.light-cone-normal-ordering-constant` 与 `worldsheet.open-string-mass-shell`（即上面【auditor 裁定：本推导有两条非承载边，建议删】那条 gap 点名的两条；该 gap 里「本轮只记账，边未动」是 auditor 那一轮的记录，现已执行，文字保留不改），并把 summary 原第三段（把 ζ 值 a = (D−2)/24 代入的 Polchinski 形状）整段移入 notes、不再作断言——该段是那两条边唯一的用处。**status 不变（physical-argument）**；但要点名一处记账后果：本 gaps 第 1 条写「ζ 正规化……是本推导只能记为 physical-argument 的主要原因」，删边后**ζ 已不在本推导的链上**，该句应读作对已移入 notes 的那段旧 summary 的历史说明，现在的封顶原因是无穷模式和的形式操作、Polchinski 三处自降严格程度、以及 D ≥ 4 与线性无关一步属本图增补。被删边各自的 note 与 conv.intercept-sign-a 换算保存在本文件 notes 的【2026-09-12】一节与 git 历史里；两张被解链的卡本身**未动**，只是不再在本推导的链上。⚠ 紧邻上一条 gap 的点名文字是删边的**前提条件**（auditor 要求：缺它则删边等于把物理藏进定义层），不得单独删除。"
 notes: |
   **【2026-09-11 换代改名】**本文件原为
   worldsheet.critical-dimension-light-cone--via-lorentz-algebra，因目标陈述换代为
@@ -109,5 +86,25 @@ notes: |
     (3) 关于 D ≥ 4 的那条 gap 由「目标陈述未限定」改写为「已由换代解决，但该限定不在来源里」。
   status 维持 physical-argument：封顶原因（ζ 正规化无算子层面定义、无穷模式和的形式操作、
   Polchinski 三处自降严格程度）一条都没变。
+
+  **【2026-09-12 curator：删两条非承载边，并把 ζ 那一段从 summary 移到这里】**
+  依 lead 派工、docs/drafts/critdim-route-cards.md §D 与 docs/ROADMAP.md R2。
+  (a) 删去的两条 depends_on：
+      · `worldsheet.light-cone-normal-ordering-constant`（原 note 自述「本边**不是**目标陈述的前提，
+        删掉它不会削弱 summary 第一段的论证，也不改变目标陈述的内容」，只服务于下面 (b) 那段；
+        原先还带一条 convention_map：被依赖节点按 Polchinski 记号给 A = −(D−2)/24 并声明
+        conv.intercept-sign-a（a = −A），本推导与目标陈述用 a，取 a = (D−2)/24）；
+      · `worldsheet.open-string-mass-shell`（原 note 说它用来把 Δ_n = 0「解读成谱条件」，
+        而目标卡 worldsheet.critical-dimension-light-cone-v2 的 statement 里没有任何质量公式）。
+      两条都属 docs/STATUS_LEVELS.md 2026-09-12「接口边」裁决后半句所禁。
+  (b) **原 summary 第三段整段移到此处，不再作断言**（保留为历史说明，不是本推导的论证步骤）：
+        「正规序常数 a 的取值 a = (D−2)/24 由横向零点能 (D−2)/2 · Σ_{n≥1} n 经 ζ 正规化
+        (Σ_{n≥1} n → ζ(−1) = −1/12) 得到；配合 a = 1 同样给出 D = 26，
+        这是 Polchinski §1.3 正文走的路线。」
+      这条形状与本推导主论证（把 a 当待定参数、由 Δ_n 的正负幂系数分别得 D = 26 与 a = 1）
+      结论相容，但**不**是本推导所走的路；要引用它请直接取
+      worldsheet.light-cone-normal-ordering-constant 与 worldsheet.zeta-regularized-sum-of-integers。
+  (c) 目标陈述、status、sources、summary 前两段一概未动。gaps 新增两条：auditor 要求的
+      「正则量子化那一步在哪里」的点名（删边的前提条件），与本条执行记录。
 author: curator-critdim
 created: "2026-09-10"
