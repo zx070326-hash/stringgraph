@@ -34,6 +34,9 @@ sources:
     loc: "§13.3, eqs. (13.3.1)(13.3.2)，p. 146；逐字「There is no force between static BPS objects of like charge.」与「Due to supersymmetric cancellation in the trace, the R–R exchange amplitude is 𝒜_R–R = −𝒜_NS–NS and so the total force vanishes as expected.」；BPS 性与保留的超对称见 §13.2, (13.2.5), p. 140"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16，证据等级 L1（原书页图）。
+      ★ **以同文件 §7 为准**（researcher 2026-09-11 独立复核）：§7.1 订正 E16 逐字块漏抄的
+      "is independent of"（原句："its energy is determined only by its charge and **is independent of** the
+      separations"）；§7.3 定案 (13.3.1) 的完整前缀与被积测度 (π dt/t²)，抽取记录 Q3 关闭。
       ⚠ (13.3.1) 用「≈」；(13.3.2) 不是独立算出的，而是「Due to supersymmetric cancellation in the trace」
       直接断言——**超对称输入而非计算输出**。
       ⚠ (13.3.1) 明写是 (10.8.4) 的修改版（「The exchange of light NS–NS closed strings was isolated in
@@ -50,7 +53,11 @@ notes: |
   【BPS 链（lead 指示 2026-09-11，依 appB 抽取 §5-B / Q3）】
   susy.bps-bound-point-particle-d4（App. B (B.2.36)–(B.2.39)，**仅点粒子荷**）
   → susy.brane-charges-in-susy-algebra（§13.2 (13.2.9)，原书自承「still not complete」）
-  → 本卡（「energy is determined only by its charge and the separations」）。
+  → 本卡（「its energy is determined only by its charge and **is independent of** the separations」）。
+  ⚠ 上行的逐字句于 2026-09-11 订正：旧 notes（与抽取记录 E16 旧行）漏抄 "is independent of"，
+  语义恰好反转成「能量由荷**与间距**共同决定」。原句说的是能量**与间距无关**，
+  即无力性本身的同义说法（auditor 一手核 p.146 发现，researcher 独立复核，抽取记录 `-ch13.md` §7.1）。
+  这也是本卡推导里 susy.brane-charges-in-susy-algebra 一边维持 `inferred: true` 的理由（auditor rulings-3）。
   本卡**不**直接依赖 App. B：(B.2.39) 只对点粒子荷（p. 448 逐字），不得整体挂在 D 膜的 BPS 界上。
   branes.d-brane-bps-half-susy 是 (13.2.9) 的上游（原书顺序：(13.2.5) → (13.2.7) → (13.2.9)）。
 
@@ -60,6 +67,16 @@ notes: |
 
   【去重（2026-09-11）】上面 BPS 链里的两张卡曾被并行重复建卡；lead 裁决保留 `susy.*` 版，
   `branes.*` 两版已标 `superseded_by`，本 notes 与本卡推导的边均已改指 susy.*。
+
+  ★【(13.3.1) 的完整前缀：抽取记录 Q3 已关闭（curator，2026-09-11，依 researcher §7.3）】
+  完整式为
+    A_NS–NS ≈ [iV_{p+1}·4×16 / (8π(8π²α')⁵)] ∫_0^∞ (π dt/t²)(8π²α't)^{(9−p)/2} exp(−t y²/2πα')
+          = iV_{p+1}·2π(4π²α')^{3−p} G_{9−p}(y)                                     (13.3.1)
+  旧转录漏了**被积测度里的 π**，这正是 Q3「π 幂次差一次」的成因；补上后把第一行积出来与第二行逐位比对，
+  **2、π、α' 三者幂次同时闭合**；分母是 (8π²α')⁵（α' 一次方，页图直接读到）。
+  ⚠ 本卡陈述仍只用 (13.3.1) 的**末行**，完整前缀只进 notes 与推导 summary，故**不换代**。
+  ⚠ 陈述「本命题不断言 (4)」括号里的「页图读数与复算相差一个 π 的幂」**已过时**（那个 π 在测度里）；
+  按原则 1 不就地改陈述文本，该括号留待本卡下次实质换代时删去；不断言 (4) 本身仍然成立。
 
   【与 §10.8 的关系】(13.3.1) 是 (10.8.4) 的修改版。**已解决（2026-09-11）**：本卡推导已加非 inferred 边
   depends_on worldsheet.type-i-tadpole-cancellation-so32（抽取记录 Q5 末段把这条边交 curator 判断，
