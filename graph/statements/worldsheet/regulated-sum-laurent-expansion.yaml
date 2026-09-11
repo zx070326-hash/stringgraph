@@ -31,5 +31,16 @@ notes: |
   见 worldsheet.zeta-regularized-sum-of-integers（physical-argument）。
   本项目刻意把二者拆开，正是为了让「Σ n = -1/12」这条经常被含糊处理的步骤
   在图上显示出它究竟哪一半是严格的、哪一半不是。
+
+  **2026-09-11（curator zeta-wire）：Lean 接线，本卡未标 formalized。**
+  新并入 main 的 `formal/StringFormal/Math/RegulatedSum.lean`
+  （提交 1b95be8 等，经 9889711）机检了 `Σ_{n≥1} n e^{-un} − 1/u² → −1/12`（u → 0+），
+  但**没有**机检余项的 O(u²) 阶——本卡正文明确断言 `+ O(u²)`，比 Lean 证明的更强。
+  按 docs/STATUS_LEVELS.md 的拆卡处方，把 Lean 证明的那半拆成独立窄卡
+  worldsheet.regulated-sum-limit-minus-one-twelfth（formalized），本卡不加
+  `formal.lean_decl`，不标 formalized。新增一条推导
+  worldsheet.regulated-sum-laurent-expansion--via-lean（status: rigorous）依赖该窄卡，
+  并用纸面初等分析（同一因式分解的下一阶展开）补全 O(u²)；本卡原有的
+  --via-geometric-series 推导（纸面，含 O(u²)）保持不变，effective status 不变。
 author: curator-polchinski-ch1
 created: "2026-09-10"
