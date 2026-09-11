@@ -47,15 +47,25 @@ depends_on:
       ⚠ 本书记号下 **Sp(k) 对应 n = 2k**（抽取记录 §1 的记号表，经 Vol.1 (7.4.22) 继承）。
       ⚠ 本边只供 n 这个计数，**不**供 SO(n)/Sp(n) 两种投影的选择（那在 (10.8.18)–(10.8.19)，
       属 tadpole 卡）。
-  - id: worldsheet.gso-projection
-    inferred: true
+  - id: worldsheet.open-superstring-gso-projection
     note: |
-      【reviewer-batch23，lead 落地：改标 inferred】该卡是闭弦 IIA/IIB/type 0 的 GSO 投影，本推导用的是开弦迹里 exp(πiF) 投影算符贡献的 ½，对象不完全同一。
-      供给测度 dt/**8**t 里来自 **GSO 投影**的那个 ½（原书 p.38 逐字 'Note that the GSO and Ω
-      projection operators each contribute a factor of ½.'），以及"按 exp(πiF) 是否出现在迹里
-      分成两项"这个分法所用的算符 exp(πiF) 本身。
-      **非 inferred**：归一化那句话就在 (10.8.2) 下方。
-      ⚠ 该卡是 type II 的 GSO（IIA/IIB/对角三分），本卡只用"exp(πiF) 的本征投影贡献 ½"这一条。
+      供给测度 dt/**8**t 里来自 **GSO 投影**的那个 ½（该卡断言 (3)：投影算符
+      (1 + ε exp(πiF))/2 在迹里贡献一个因子 ½；原书 p.38 逐字 'Note that the GSO and Ω
+      projection operators each contribute a factor of ½.'），
+      以及「按 exp(πiF) 是否出现在迹里分成两项」这个分法所用的算符 exp(πiF) 本身。
+      **非 inferred**：本推导用的是**开弦**迹上的 GSO 投影，与该卡的对象逐字同一；
+      归一化那句话就在 (10.8.2) 下方，(10.8.2a,b) 的分项也正是按 exp(πiF) 的插入与否分的。
+      ★★【2026-09-11 改指并去 inferred，small-backlog-13】本边**原指
+      worldsheet.gso-projection（闭弦 IIA/IIB/type 0 的 GSO）并标 inferred**，
+      理由是 reviewer-batch23 的裁定（lead 落地）逐字：
+        「该卡是闭弦 IIA/IIB/type 0 的 GSO 投影，本推导用的是开弦迹里 exp(πiF) 投影算符
+          贡献的 ½，**对象不完全同一**。」
+      本轮新建了**开弦**的窄卡 worldsheet.open-superstring-gso-projection
+      （§10.6 p.30 的 I / Ĩ 两个选择 + §10.8 p.38 的 ½），对象自此同一 ⇒ 去掉 inferred。
+      ⚠ 该卡**只**给定义层面的内容；「开弦**必须**做 GSO」与「两个选择的谱」仍在
+      worldsheet.type-i-open-string-gauge-multiplet 上，本边**不**借那两件。
+      ⚠ 该卡「不断言 (c)」提醒：'The two possibilities' 带着「与闭超弦一致耦合」的前提，
+      **不是**「开超弦的 GSO 只有两种」；本推导也不需要那个枚举。
   - id: worldsheet.worldsheet-parity
     inferred: true
     note: |

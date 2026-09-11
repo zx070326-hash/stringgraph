@@ -48,19 +48,34 @@ depends_on:
       投影 (1+Ω)/2 两项）**不足以**支撑 Möbius 带这一支。
   - id: worldsheet.type-i-open-string-gauge-multiplet
     note: |
-      供给两件事：
-        (a) **候选集**：无取向开超弦的 Chan–Paton 群只有 **SO(n)** 与**辛群**
-            （§10.6 p.30 逐字 'Adding Chan–Paton factors, the gauge group will again be U(n)
-            in the oriented case and **SO(n) or Sp(n) in the unoriented case**'）——
-            (10.8.18) 的 ± 两号就是这两种投影，**U(n) 属取向理论、不在候选集**；
-        (b) **开弦的 GSO 投影**：测度 dt/8t 里来自 GSO 的那个 ½，以及 (10.8.15) 里
-            'exp(πiF) = 1 by the GSO projection' 所用的开弦 GSO。
-      **非 inferred**：两件事都在同一章 §10.6 p.30 逐字可读（本推导 sources 已定位）。
-      ⚠ 对照：worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling
-      把 GSO 的 ½ 挂在 **worldsheet.gso-projection** 上并被 reviewer-batch23 改标 inferred，
-      理由是那张卡是**闭弦** IIA/IIB 的 GSO、对象不完全同一。本推导改挂**开弦** GSO 的这张卡，
-      **不需要**标 inferred。
+      供给 **(10.8.18) 里 ± 两号的候选集**：无取向开超弦的 Chan–Paton 群只有 **SO(n)** 与**辛群**
+      （§10.6 p.30 逐字 'Adding Chan–Paton factors, the gauge group will again be U(n)
+      in the oriented case and **SO(n) or Sp(n) in the unoriented case**'）——
+      (10.8.18) 的 ± 两号就是这两种投影，**U(n) 属取向理论、不在候选集**。
+      **非 inferred**：这句在同一章 §10.6 p.30 逐字可读（本推导 sources 已定位）。
+      ★★【2026-09-11 拆边，small-backlog-13】本边**原先还供给第二件事**：
+      「开弦的 GSO 投影」——即测度 dt/8t 里来自 GSO 的那个 ½，以及 (10.8.15) 里
+      'exp(πiF) = 1 by the GSO projection' 所用的开弦 GSO。
+      那一件已**拆出并改指**本轮新建的窄卡 **worldsheet.open-superstring-gso-projection**
+      （见下一条边）。理由：本卡同时承载「必须做 GSO」「两个谱」「Chan–Paton 与规范群」
+      「规范微子在伴随表示」四件事，**一条边借一件、剩下三件搭便车**；
+      本推导 notes 早就写下正解逐字「⇒ 若日后为『开弦 GSO 投影』单建一张窄卡，
+      三条推导应一起改指它」。⇒ 本边此后**只**承担候选集这一条。
       ⚠ 本边**不**供给「哪一个 n」（那由 (10.8.19) 的 tadpole 条件定），也不供给伴随表示那一条。
+  - id: worldsheet.open-superstring-gso-projection
+    note: |
+      供给**开弦的 GSO 投影**这一件：
+        (a) 测度 dt/**8**t 里来自 GSO 的那个 ½（该卡断言 (3)，原书 §10.8 p.38 逐字
+            'Note that the GSO and Ω projection operators each contribute a factor of ½.'）；
+        (b) (10.8.15) 里 '**exp(πiF) = 1 by the GSO projection**' 所用的、**开弦扇区上**的
+            GSO 投影（该卡断言 (1)(2)：I 与 Ĩ 都保留 NS+）。
+      **非 inferred**：(a) 在 §10.8 p.38 逐字，(b) 在 §10.6 p.30 逐字，两处都是**开弦**语境。
+      ★★【2026-09-11 新增，small-backlog-13】本边是从上面那条
+      worldsheet.type-i-open-string-gauge-multiplet 边上**拆出来**的，
+      与圆柱推导那条原先指向**闭弦** worldsheet.gso-projection 的 inferred 边一起改指本卡
+      ——三条推导现在**口径一致**（本推导 notes 末段写的正解至此落实）。
+      ⚠ 本边**不**借该卡断言 (2) 的**枚举性**（'The two possibilities' 带着「与闭超弦一致耦合」
+      的前提，见该卡「不断言 (c)」）；本推导只需要「NS 扇区上做了一个 exp(πiF) 的本征投影」。
   - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
     note: |
       供给**费米迹的记号与对象**：Z^α_β(τ) 的定义（§10.7 (10.7.7)–(10.7.8)，
@@ -265,10 +280,20 @@ notes: |
   断言里**，属 §10.7 的超对称论证），Möbius 则直接用本卡。抽取记录 §0.4(a) 的交叉核验就是这么做的：
   −iK[n² + 2¹⁰ ∓ 2·32·n] = −iK(n ∓ 32)²，K 是三个面的公因子。
 
-  【本推导对 GSO 的记账比圆柱那张卡更贴切】圆柱推导把 GSO 的 ½ 挂在 worldsheet.gso-projection
+  【本推导对 GSO 的记账比圆柱那张卡更贴切】〔2026-09-11 更新，small-backlog-13：**已作废，
+  三条推导现在口径一致**〕旧版此处写：圆柱推导把 GSO 的 ½ 挂在 worldsheet.gso-projection
   （**闭弦** IIA/IIB 的 GSO）上并被 reviewer-batch23 改标 inferred；本推导挂的是
   worldsheet.type-i-open-string-gauge-multiplet（**开弦**的 GSO 投影，§10.6 p.30 逐字），
-  对象同一，故非 inferred。⇒ 若日后为「开弦 GSO 投影」单建一张窄卡，三条推导应一起改指它。
+  对象同一，故非 inferred。⇒ 并写下正解逐字：
+    「⇒ 若日后为『开弦 GSO 投影』单建一张窄卡，三条推导应一起改指它。」
+  ★★★【该正解已落实】本轮新建 **worldsheet.open-superstring-gso-projection**（definition：
+  GSO 投影是什么算符、I / Ĩ 两个选择的扇区标号、投影算符 (1 + ε exp(πiF))/2 在迹里给一个 ½），
+  并：
+    · 本推导从 type-i-open-string-gauge-multiplet 边上**拆出** GSO 那一件，新增一条指向新卡的
+      **非 inferred** 边；原边此后只承担 SO(n)/辛群的**候选集**；
+    · 圆柱推导那条指向**闭弦** worldsheet.gso-projection 的 **inferred** 边改指新卡并**去 inferred**。
+  ⚠ **Klein 瓶那一支不改**：它的 GSO 边指的是 (10.8.7) 的**闭弦**投影算符
+    [(1+exp(πiF))/2]·[(1+exp(πiF̃))/2]，对象本来就是闭弦 worldsheet.gso-projection，非 inferred。
 
   按抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E71**（(10.8.16)–(10.8.18)）、
   **#E70**（Ω 的作用与投影算符）、**#E65**（归一化）、**#E66**（(10.8.3) 与 naive 限定）、
