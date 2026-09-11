@@ -88,3 +88,38 @@ p.270 定义段逐字：
   1. 建 `worldsheet.super-virasoro-kac-determinant`（NS/R 两扇区一卡或两卡均可，但 p̂ 的两个定义要分开写）。
   2. `graph/derivations/worldsheet/rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989.yaml` gaps 第一条 (a) 的「(9) 式的 ± 与指标条件待 auditor 页图复核」**可关**；建卡后把 [22] 那条边接上。该 gap 的 (b)(c)(d) 不受本轮影响。
   3. `literature/extractions/math-sources.md` §55.3 的 `p̃`、`±(1/2)p̃(n)` 两处读数**作废**，以本文件 1.1 为准（复核段已追加到该文件末尾）。
+
+---
+
+## 2. FGZ 1986 PNAS p.8445：Prop 2.6 的 `D ≥ 2` vs 证明梗概的 `D > 2`；`ch_q T` 指数符号
+
+### 2.1 逐字读数（L1，同一张 816×1076 页图，右栏局部 5×–8× 放大，各读两遍）
+
+- **Prop 2.6 语句首行**：「PROPOSITION 2.6. *Let* E *have signature* (D − 1, 1), **D ≥ 2** *and* p ≠ 0. *Then* (i) V(E, p) *is a free* ℒ⁻*-module and* (ii) *there exists a positive definite subspace* T ⊂ V(E, p)^{ℒ⁺} [= *all* v ∈ V(E, p), *annihilated by* ℒ⁺], *such that* ch_q T = q^{p·p/2}φ(q)^{D−2}.」
+  — `≥` 清晰（下横线可辨），**不是** `>`。
+- **证明梗概**：「…Then by Kac's determinant formula (10, 11) we know that the Verma modules M(h, c) are irreducible and unitary for h > 0, c > 1 and are irreducible and nonunitary for h < 0, c = 1. This implies isomorphisms for **D > 2**」，随后两式 `V(E′, p′) ≅ ⊔_{k≥0} p_{(D−1)}(k) M(p′·p′/2 + k, D − 1)`、`V(E″, p″) ≅ M(p″·p″/2, 1)`，再「We conclude from the above that V(E, p), p ≠ 0, is a free ℒ₋-module (in fact for any r ≥ 2 or s ≥ 1).」
+  — `> 2` 清晰，无下横线。
+- **`ch_q T` 的指数**：8× 放大后读作 **`φ(q)^{D−2}`，`D` 前没有任何负号**（上标只有 `D−2` 三个字符）。同页右栏上方 `ch_q(V(E, p)) = q^{p·p/2}φ(q)^{−D}` 的 `−D` 清晰可见，两处排版对比可排除「扫描丢字」。
+
+### 2.2 裁定 A：`D ≥ 2` / `D > 2` **不是排印不一致，两处各自正确，指的是两个不同的东西**
+
+- `D > 2` 是梗概里**那两条同构式**的真实前提：`V(E′,p′)` 的 Verma 分解用的是「M(h,c) 对 h > 0, c > 1 不可约」，而 E′ 号差 (D−1, 0) 给 c = D − 1，`c > 1 ⟺ D > 2`。D = 2 时 c = 1，M(h, 1) 在 h = n²/4 处可约，梗概引用的那句 Kac 事实不覆盖它，`V(E′,p′)` 的 Verma 分解**对 D = 2 一般不成立**（auditor 推理，非原文）。
+- `D ≥ 2` 是命题本身的范围，且 **D = 2 由梗概末尾的括注覆盖**：「(in fact for any r ≥ 2 or s ≥ 1)」。号差 (1,1) 有 s = 1 ≥ 1；E″ = (0,1) 的因子 `V(E″,p″) ≅ M(p″·p″/2, 1)` 只用「h < 0, c = 1 不可约」，对任何 D ≥ 2 都成立。**由「一个张量因子是自由 U(ℒ⁻)-模」推出「张量积在对角作用下自由」**是标准的 Hopf 代数张量恒等式（H ⊗ M ≅ H ⊗ M_triv），FGZ 没印这一步——这正是图上 `--via-fgz-1986` gaps (a) 说的「中间的推理未印出」，本轮**不关**那条 gap，只把它说清楚：那一步不依赖 D > 2。
+- 因此 **(i) 对 D = 2 成立，梗概自己给出了路线（s ≥ 1 分支）**；(ii) 对 D = 2 也平凡成立（ch_q T = q^{p·p/2}，T = ℂ|p⟩，(p|p) = 1 > 0，ℒ⁺|p⟩ = 0）。**语句的 `D ≥ 2` 正确；梗概的 `D > 2` 是显式同构式的前提，不是命题的前提。两者都不是笔误，卡片不要改。**
+
+### 2.3 裁定 B：`ch_q T = q^{p·p/2}φ(q)^{D−2}` **原刊漏了负号，正确的是 `φ(q)^{−(D−2)}`**（§9.10.5 的怀疑成立）
+
+三条彼此独立的内证（前两条是原文自身的推论，第三条是本项目已核的下游）：
+1. **特征标非负性**：`φ(q) = ∏(1−q^n)` 展开有负系数，`φ(q)^{D−2}`（D ≥ 3）也有负系数，不可能是分次向量空间的特征标；`φ(q)^{−(D−2)}` 系数全非负。
+2. **[2.4] 直接算**：`T = ⊕_{k≥0} p_{(D−2)}(k) M(p′·p′/2 + k, D−1)^{ℒ⁺} ⊗ M(p″·p″/2, 1)^{ℒ⁺}`，不可约 Verma 模的 ℒ⁺-不变子空间是一维的最高权向量，故 `ch_q T = Σ_k p_{(D−2)}(k) q^{p·p/2 + k} = q^{p·p/2} φ(q)^{−(D−2)}`（按 FGZ 自己对 `p_{(D)}(n)` 的定义：`φ(q)^{−D}` 的 q^n 系数）。
+3. **Thm 2.7(ii) 的 `p_{(24)}`**：D = 26 时 D − 2 = 24，`dim H⁰ = p_{(24)}(1 − p·p/2)` 是 `φ^{−24}` 的系数，与 Euler 特征标 `q^{−1}φ² · q^{p·p/2}φ^{−D} = q^{p·p/2−1} φ^{−(D−2)}` 一致。
+⇒ **裁定：原刊排印错误（不是扫描失真）。凡引用 Prop 2.6(ii) 特征标的卡片，statement 写 `φ(q)^{−(D−2)}`，sources.loc 的逐字保留 `φ(q)^{D−2}` 并加注「原刊漏负号，auditor 2026-09-12 裁定，理由见 page-check-rulings §2.3」。**
+
+### 2.4 对图的指令
+
+| 卡 | 动作 |
+|---|---|
+| `graph/derivations/worldsheet/fock-module-free-over-negative-virasoro--via-fgz-1986.yaml` gaps 末条「D ≥ 2 / D > 2 两处不一致，本图未核实哪个是笔误」 | **可关**：改写为「两处各自正确：D > 2 是 V(E′,p′) Verma 分解的前提，D = 2 由括注 s ≥ 1 分支覆盖」。gaps (a)「中间推理未印出」**保留**（本轮只指出那一步是张量恒等式，未替 FGZ 补证）。 |
+| 同文件 sources 第三条的「转录疑点（§9.10.5）」 | **可关**：改为「原刊漏负号，裁定 −(D−2)」。 |
+| `graph/statements/worldsheet/fock-module-free-over-negative-virasoro.yaml` 第 33 行、`bosonic-relative-cohomology-dimension.yaml` 第 141/144 行、`bosonic-relative-cohomology-vanishing.yaml` 第 104 行、`bosonic-relative-cohomology-dimension--via-fgz-1986.yaml` 第 86 行 | 这些是 **sources.loc 里的逐字引文**，按规则保留 `φ(q)^{D−2}`；只在各自 note 加一句「原刊漏负号（page-check-rulings §2.3）」。若哪张卡把该式抄进了 `statement`（本轮 grep 未见），须按 statement 不可变原则换代。 |
+| 目标卡 (H1) 的 `D ≥ 2` | **不动**。 |
