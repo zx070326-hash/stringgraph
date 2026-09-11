@@ -44,9 +44,31 @@ notes: |
   【§11.6 未核】原书说膜荷"first in section 11.6"（杂化弦的 (11.6.32)）。本项目尚未抽 §11.6
   （ch13 抽取记录 §3.3 标"❓未核"）；本卡只覆盖 §13.2 的十维 type II 版本。
 
-  【⚠ 与并行分支的重名风险】claim #275（分支 agent/curator/polchinski-v2-ch13，未合 main）计划以
-  `branes.brane-charges-in-susy-algebra` 建同一命题。两支都未合并；合并时应二选一。
-  已于 2026-09-11 在总线上广播。
+  【去重裁决（2026-09-11）】两个并行 curator 各建了一版同一命题（本卡与 `branes.brane-charges-in-susy-algebra`，
+  两版都已进过 main）。lead 裁决**保留本卡**，branes 版标 `superseded_by: susy.brane-charges-in-susy-algebra`。
+  branes 版独有的逐字证据、gaps 与「不断言」条目已并入本卡与本卡推导（逐条标〔并入〕）；**statement 未改动**。
+  branes 版旧推导 `branes.brane-charges-in-susy-algebra--via-t-dual-supercharges-and-brane-charges`
+  按「旧推导的去留」保留作历史记录（预期 stale 警告）。
+
+  【★ statement 未覆盖、留待下次换代的两处符号释义】〔并入 branes 版 statement 的独有内容，**本卡 statement 不改**〕
+  · `Q^{NS}_M` 是 F 弦携带的、**与 `B_{MN}` 耦合**的荷；
+  · (13.2.9c) 里的 `τ_p` 就是 **Dp 膜张力**（`branes.d-brane-tension`），因为荷已按「每单位世界体归一为 1」重整。
+  ⇒ 建议（交 lead / 下次换代）：本卡推导应补一条指向 `branes.d-brane-tension` 的非 inferred 边
+  （branes 版推导有这条边，本卡推导没有）。本轮只记录，不擅自加边。
+
+  【依赖方向按原书顺序，反向会成环】〔并入 branes 版〕§13.2 的行文顺序是
+  (13.2.5)(13.2.6) 半 BPS（p. 140）→ (13.2.7) R–R 荷（p. 141）→ (13.2.9) 含膜荷的代数（pp. 144–145）。
+  故本卡**依赖** `branes.d-brane-bps-half-susy` 与 `branes.d-brane-rr-coupling`，不是反过来；
+  `susy.bps-bound-point-particle-d4` 是本卡与半 BPS 卡的共同上游。若按「bps-bound → brane-charges → 半 BPS」
+  的直觉建边会与 rr-coupling 卡成环。
+
+  【第 14 章缺口与 §13.6 的式号存疑】〔并入 branes 版〕磁 NS–NS 荷（NS5 膜）在第 14 章，本项目未抽。
+  由 (13.2.9) 导出的具体 BPS 界本图未建卡；⚠ 两版并行建卡记的式号不一致：本卡原记 §13.6 (13.6.1)(13.6.2)，
+  branes 版记 (13.6.3)（(p,q) 弦）与 (13.6.18)(13.6.19)（D0–Dp）。未复核原书，不在此裁定。
+
+  【荷归一化的换算未核】〔并入 branes 版「不断言 (d)」〕(13.2.9c) 用 `τ_p`，而 §13.3 的 R–R 荷用 `μ_p`
+  （branes 版记为 (13.3.5)，其 statement 另一处写 (13.3.7)，两处自相矛盾，未复核）；原书没有并排比较这两种归一化，
+  本卡也不断言二者的换算。
 
   【区划理由】放 `susy` 而非 `branes`：本卡陈述的是**超对称代数的结构**，膜只是荷的携带者；
   同一张卡是 IIA/IIB 全部 p 的膜荷加 F 弦荷，不专属某一种膜。
