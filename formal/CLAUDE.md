@@ -290,6 +290,11 @@ StringFormal/
                             **`kacDet{1,2,3,4}_massShell_26`**（`D=26, a₀=1` 下 `h = 1-N`：
                             `N=1,2` 行列式为零——判据在零模态所在层空转；`N=3,4` 为 `2304` / `2649563136`）。
                             一般 `N` 仍需 Kac 行列式（见蓝图 §B.2），对无鬼瓶颈无影响
+  NoGhost/NullDescend.lean  **蓝图 §B′ PR0**：`ddfOp_mem_towerNullSubmodule`——`A^ε_n` 把零态送到零态
+                            （`ddfOp_mem_towerPhysSubmodule` + `(A^ε_n)† = A^ε_{−n}`，两者都已有）。
+                            **对任意截距 `a₀` 成立**（蓝图只写了 `a₀ = α'k²`，是无成本的加强）。
+                            它是 (B-26) 构造式路线的乘法结构：把「片上造 `p_{D−1}(N)−p_{D−2}(N)` 个
+                            线性无关零态」降成「每个 `m` 造 `p(m)` 个纵向种子」
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
