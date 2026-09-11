@@ -1,0 +1,150 @@
+id: worldsheet.ddf-spans-physical-states-level-one--via-lean
+target: worldsheet.ddf-spans-physical-states-level-one
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **DDF 算子 A^ε_n 本身**（Lean `ddfOp η a b ε hη hεb n`，该卡的 formal.lean_decl），
+      以及由它张成的 `ddfSpan`。(T) 是 `ddfOp` 的定义参数 `hεb`，由 `TransverseFrame.transverse` 供给。
+      ⚠ 本推导用到的关键事实 `ddfOp_neg_one_apply_towerVacuum`（A^ε_{−1}|0;k⟩ = α^ε_{−1}|0;k−k_0⟩）
+      **比该定义卡多一条假设 (T′) η(ε, a) = 0**；该卡的 notes 已登记，本推导的目标陈述把 (T′) 写进前提。
+  - id: worldsheet.transverse-frame-spans-orthogonal-complement
+    inferred: false
+    note: |
+      **假设 (C) 的来源**：Lean `hspan : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))`。
+      它是本推导第 3 步（把 L_1 条件解出的偏振 e 拆成横向部分 + 动量部分）的唯一输入。
+      那张卡证的是显式见证上的兑现（`witness_frameSpansOrthogonal`），本推导把它当**假设**用；
+      两者在 `witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 里合成无条件结论。
+  - id: worldsheet.old-covariant-physical-states
+    inferred: false
+    note: |
+      **物理态两条件的来源**（(L_0 − a₀)ψ = 0 与 L_mψ = 0 ∀ m ≥ 1）。本推导实际用的是它们在
+      能级 1 上的**完整解** `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff`
+      （PhysicalStates.lean）：ψ = polState e、质壳标量条件、以及 **η(e, p_{−1}) = 0**。
+      ⚠ 三项里**只用后一项与 ψ 的形状**：质壳那一项在 Lean 证明里被丢弃
+      （`obtain ⟨e, hPe, -, htrans⟩` 的那个 `-`）。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      塔 T(p;k_0)、第 j 层动量 `towerMomentum a b j`、逐层作用的 L_m（`towerLop`）与
+      「支撑在第 j 层」这个分次（`towerRungSubmodule`）。层化引理
+      `single_mem_towerPhysSubmodule_iff` 把塔上的物理性还原为该层 Fock 空间上的物理性。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      每层的代数 Fock 空间、振子能级分次（`levelSubmodule`，本卡 T_{j,N} 的第二个指标）、
+      真空 `Fock.vacuum`，以及能级 1 的偏振态 `Fock.polState η e = Σ_μ η_μ e^μ α^μ_{−1}|0⟩`
+      与其线性性（`polState_add`、`polState_smul`、`polState_sum`）。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      伪态一侧的 L_{−1}（Sugawara `Fock.Lop`，逐层装在塔上）。本推导用到它在真空上的显式值
+      `Fock.Lop_neg_one_apply_one_eq_polState`（L_{−1}|0;p⟩ = polState(p)，即纵向偏振恰是该层动量），
+      这正是「伪态方向 = 动量方向」这句话的机检形式。
+      ⚠ 本推导**不**使用 Virasoro 括号或中心荷 c = D。
+  - id: worldsheet.gt-longitudinal-k-algebra
+    inferred: false
+    note: |
+      **接口边，非机检环节**：供给本卡在文献侧的识别——本卡是 Goddard 2008 §6 (6.4)
+      「physical = DDF + null」在 N = 1 的增量，而 (6.2)(6.3)(6.4) 所属的 K_n 框架由该卡承载
+      （该卡【不断言】(a) 逐字把 (6.2) 的刻画留给 (B-26)）。
+      桥层声明：`StringFormal.NoGhost.{kOp, towerKerK, ddfCharacterization, ddfSpan_le_ddfCharacterization}`
+      （Longitudinal.lean；LightCone.lean import 它）。
+      ⚠ `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 的机检证明链**不经过 K_n 的任何声明**：
+      它走的是 (6.4) 那条路（偏振分解），不是 (6.2) 那条路（K 条件配平）。
+      故本边只作识别，不承担论证步骤。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious（目标声明）；证明中调用 StringFormal.NoGhost.{mem_towerBigrade, single_mem_towerPhysSubmodule_iff, single_polState_vec_mem_ddfSpan, ddfOp_neg_one_apply_towerVacuum, towerModeVec_neg_one_apply_single_vacuum, towerLop_neg_one_apply_single_vacuum_eq, ddfOp_towerVacuum_mem_ddfSpan, mem_ddfSpan_of_list} 与 StringFormal.NoGhost.Fock.{mem_physSubmodule_inf_levelSubmodule_one_iff, polState_add, polState_smul, polState_sum, Lop_neg_one_apply_one_eq_polState}；见证版 StringFormal.NoGhost.witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious"
+    note: |
+      本仓库，formalizer-noghost-b（lead 以 4aded75 合入 main），Lean 4 + Mathlib v4.33.1，无 sorry。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, eq. (6.4)（arXiv:0802.3249v1）"
+    note: |
+      **不承载本推导的论证**（无证明）。文献侧的同一形式，但在 D = 26、一切能级上断言，
+      且断言 |n⟩ 为零模态；本推导只做 N = 1，见目标卡 sources 第二条的三处差别。
+summary: |
+  机器检查的证明，在 formal/StringFormal/NoGhost/LightCone.lean，
+  蓝图 formal/BLUEPRINT-noghost.md §B.6 的 N = 1 增量。论证是**四步**。
+
+  **第 1 步（下到单层）。** 设 x ∈ H_phys(a₀) ∩ T_{−1,1}。由 `mem_towerBigrade`，
+  x = Finsupp.single (−1) P（支撑在第 −1 层），且 P 的振子能级为 1。
+  层化引理 `single_mem_towerPhysSubmodule_iff` 把「x 在塔上物理」化为
+  「P 在动量 p_{−1} = a − b 的 Fock 空间上物理」（L_m 逐层作用，纯记账）。
+
+  **第 2 步（解能级 1 的物理态）。** `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff` 给出
+  **完整**解：存在偏振 e 使
+    P = polState η e := Σ_μ η_μ e^μ α^μ_{−1}|0; p_{−1}⟩，
+  并且 **η(e, p_{−1}) = 0**（这是 L_1 条件），外加一条质壳标量条件。
+  ⚠ 质壳那一条在证明里**被丢弃**（`obtain ⟨e, hPe, -, htrans⟩` 的 `-`），
+  这正是目标卡「不需要 (N)(S)」那一条的机检依据。
+
+  **第 3 步（拆偏振）。** 对 e 用假设 (C)（`hspan`，
+  worldsheet.transverse-frame-spans-orthogonal-complement 的谓词）：由 η(e, p_{−1}) = 0 得
+    e = Σ_{i=1}^{D−2} c_i ε_i + c_0 p_{−1} 。
+  再用 polState 的线性性（`polState_add`、`polState_smul`、`polState_sum`）把它抬到态上：
+    P = Σ_i c_i · polState(ε_i) + c_0 · polState(p_{−1}) 。
+
+  **第 4 步（认出两端）。**
+  · **横向项 = DDF 态**：`single_polState_vec_mem_ddfSpan` 给
+      single(−1)(polState η ε_i) = A^{ε_i}_{−1}|0; k⟩ ∈ D(Ε)，
+    这一步**恰是**领头项引理 `ddfOp_neg_one_apply_towerVacuum`
+    （A^ε_{−1}|0;k⟩ = α^ε_{−1}|0;k−k_0⟩，无修正项），**它需要 (T′) η(ε_i, a) = 0**。
+  · **纵向项 = 伪态**：`towerLop_neg_one_apply_single_vacuum_eq` 给
+      L_{−1}|0; k−k_0⟩ = single(−1)(polState η p_{−1})，
+    即纵向偏振方向恰是该层动量方向。
+  两项合起来 x ∈ D(Ε) ⊔ span{L_{−1}|0;k−k_0⟩}。∎
+
+  **见证版**：`witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 把 (T′) 与 (C) 分别用
+  `dotVec_witnessTransverseFrame_witnessMomentum` 与 `witness_frameSpansOrthogonal` 兑现，
+  故在显式光锥标架上本结论**无条件**成立（不是空条件命题）。
+gaps:
+  - |
+    **N = 2 未做，这是本支下一个真实障碍**。formal/TODO.md 的 `noghost-b` 逐字登记两块：
+    (a) 领头项在 n = 2 与 A^ε_{−1}A^δ_{−1} 上的类比——窗口变成 {−2,…,0}，
+    顶点算子的 1 级、2 级系数 Φ_1、Φ_2 真正开始贡献，需要 `creaExp` 的**层 2 分量**；
+    (b) `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff` 的能级 2 类比，
+    即 L_1/L_2 条件在能级 2 上的**完整**解——`NoGhost/LevelTwo.lean` 只覆盖 SO(D−1) 标量试探族
+    （其文件头自述）。两块都没有的情况下，N = 2 连陈述都写不出来。
+    ⚠ D = 26 正是从 N = 2 起才进入（蓝图 §B.5），故 N = 1 的完成**不**触及 (B-26)。
+  - |
+    **只给一个方向的包含**。反向（DDF 态与伪态确实物理）是另一支
+    （worldsheet.ddf-operators-preserve-physical-states，已 formalized；
+    Lean 侧另有 `ddfSpan_le_towerPhysSubmodule`），本推导不涉及，也不给出等式。
+  - |
+    **不涉及任何正定性**。「H^⊥ 上 Gram 正定」由
+    worldsheet.transverse-ddf-fock-gram-matrix 承载，与本推导无交集；
+    把本卡读成「无鬼定理的 N = 1 情形」是**误读**——无鬼定理要的是内积半正定，
+    本卡只给子空间包含。
+  - |
+    **伪态未证为零模态**。目标卡【不断言】(c)：a₀ = 1 时 L_{−1}|0;k−k_0⟩ 才是零模态
+    （Lean `Fock.Lop_neg_one_apply_one_mem_nullSubmodule`，本推导未调用），
+    一般 a₀ 下它只是伪态。因此本卡**不**支持「物理态模零模态 ≅ 横向空间」这种读法。
+  - |
+    **(T′) 与 (C) 在一般标架下不可去**，见各自卡的 notes（两个反例，其中 (T′) 的那个是机检存在性）。
+    本推导把它们写成前提是**诚实**而非保守：文献默认的光锥标架
+    （ε_i ∈ span{k_0,p}^⊥）同时给出这两条，但那步论证需要实二次型的非退化性，
+    在一般交换 Q-代数上不可用。
+  - |
+    **继承 DDF 定义卡的对象缺口**：本图/Lean 的 A^ε_n 是**模态和**，与文献的**围道积分** A^i_n
+    是同一个算子这件事只有 physical-argument 级承载
+    （worldsheet.ddf-contour-equals-mode-sum）。回译到 Goddard (6.4) 时必须引用它。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **七条依赖全部 formalized**，故目标卡 effective = formalized。
+  其中 worldsheet.gt-longitudinal-k-algebra 那条按 docs/STATUS_LEVELS.md 的
+  「接口边（2026-09-12 裁决）」标注：它供给文献侧的识别（本卡是 (6.4) 的 N = 1 增量），
+  但不在机检证明链上，note 已写明桥层声明。
+
+  **本推导对 worldsheet.no-ghost-theorem-v4 的影响：没有。**
+  那条卡的瓶颈是 (B-26)，而 (B-26) 从 N = 2 起才出现。本推导关闭的是
+  worldsheet.ddf-operators-preserve-physical-states--via-lean 的 gaps 第 1 条
+  （「完全不涉及张成」）在 **N = 1** 上的那一小块，仅此而已。
+author: curator
+created: "2026-09-11"
