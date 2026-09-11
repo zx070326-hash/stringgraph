@@ -24,12 +24,56 @@ depends_on:
             **不必再整卡地经过本卡**，因而不再经过本推导最弱的 C₁₀ 环
             （(10.8.5)–(10.8.6)，原书 'One can guess the resolution of this as follows'
             + 一个本书不给的 'more detailed analysis'，抽取记录 sec10-8.md #E67）。
-      ⚠ 本推导仍然**需要** Klein 瓶 (10.8.11) 与 Möbius 带 (10.8.18) 两支，那两支在图上
-      **没有**对应卡（见 gaps）；本边只合上圆柱这一支。
+      ★★【2026-09-11 更新，klein-mobius】上一版本边的 note 末尾写着「本推导仍然**需要**
+      Klein 瓶 (10.8.11) 与 Möbius 带 (10.8.18) 两支，那两支在图上**没有**对应卡」——
+      **这句话已过时**：两支各自的卡本轮已建（见下面两条新边），本边现在只承担圆柱这一支。
+  - id: worldsheet.superstring-klein-bottle-amplitude-closed-channel
+    note: |
+      供给本推导**第 (2) 步的全部内容**：Klein 瓶这一个拓扑的 NS–NS 项，从 (10.8.7)–(10.8.10a,b)
+      到闭弦通道的 **(10.8.11)**（含系数 **2¹⁰**、前缀 V₁₀/(8π(8π²α')⁵)、测度里 GSO 与 Ω 各一个 ½、
+      以及长柱展开 [16 + O(e^{−2s})]）。
+      **非 inferred**：(10.8.11) 就是本推导第 (2) 步所引的那一式，原书 §10.8 同节；
+      且 (10.8.19) 明写是三个面之和，Klein 瓶的 2¹⁰ = 32² 正是 (n ∓ 32)² 的常数项。
+      ★ **2026-09-11 新建该卡并接线（klein-mobius）**。收益有二：
+        (1) 本推导的 summary 第 (2) 步不必再自己重算（现在缩为引用）；
+        (2) 该卡把两条本推导此前只能含糊带过的限度落到结构上：
+            **(10.8.10a,b) 两个迹的整体符号靠物理输入**（脚注 8：+ 由引力子定、− 由 (10.6.17) 定），
+            以及 **(10.8.11) 第一行到第二行的模变换步骤原书不写**。
+      ⚠ 那张卡给的是 **NS–NS** 项 Z_{K₂,0}；本推导第 (4) 步用的是 R–R 侧
+      （Z_{K₂,1} = −Z_{K₂,0}），而**那条相消关系不在该卡的断言里**（它的「不断言 (b)」已声明，
+      属 §10.7 的超对称论证）。⇒ 见 gaps 里新增的那一条。
+  - id: worldsheet.superstring-mobius-strip-amplitude-closed-channel
+    note: |
+      供给本推导**第 (3) 步的全部内容**：Möbius 带这一个拓扑的 **R–R** 项，从 (10.8.16)(10.8.17)
+      到闭弦通道的 **(10.8.18)**（含系数 **±2n·2⁵**、**上号对应 SO(n)**、前缀 V₁₀/(8π(8π²α')⁵)、
+      以及长柱展开 [16 + O(e^{−2s})]）。
+      **非 inferred**：(10.8.18) 就是本推导第 (3) 步所引的那一式，原书 §10.8 同节；
+      (10.8.19) 明写是三个面之和，Möbius 的 ±2n·2⁵ 正是 (n ∓ 32)² 的交叉项 ∓2·32·n。
+      ★ **2026-09-11 新建该卡并接线（klein-mobius）**。收益：
+        (1) summary 第 (3) 步缩为引用；
+        (2) 该卡把 **Ω 在开超弦上的作用**（(10.8.12)–(10.8.15)）经新卡
+            worldsheet.superstring-worldsheet-parity-action 接成**非 inferred** 的链，
+            本推导下面那条 worldsheet.worldsheet-parity 的 inferred 边因此**只剩闭弦一侧**的缺口。
+      ⚠ 那张卡给的是 **R–R** 项（与圆柱、Klein 瓶两张卡给 NS–NS 项**不对称**，
+      原书逐字 'It is slightly easier to focus on the R–R exchange'）；
+      本推导第 (4) 步正是把它与另外两支的 R–R 侧相加。
+      ⚠ 那张卡断言的 ± 是 **SO(n) 与辛群之间的相对号**；(10.8.19) 里 ∓ 的**整体号**
+      原书自承不是算出来的（'This calculation does not determine the sign of the tadpole'），
+      两者不要混（gaps 已分别登记）。
   - id: worldsheet.type-i-unoriented-closed-spectrum
-    note: 供给无取向闭弦部门（Klein 瓶那一支），以及「该理论单独不一致」的预告。
+    note: |
+      供给无取向闭弦部门，以及「该理论单独不一致」的预告。
+      ⚠【2026-09-11，klein-mobius】Klein 瓶那一支的具体内容已**委托**给
+      worldsheet.superstring-klein-bottle-amplitude-closed-channel（它自己以**非 inferred** 边
+      指向本卡，理由是脚注 8 明写 R–R 迹的整体负号由 **(10.6.17)** 定）。
+      本边此后只承担「本推导的对象是无取向闭弦理论」与那句不一致预告，**不再承担 Klein 瓶的计算**。
   - id: worldsheet.type-i-open-string-gauge-multiplet
-    note: 供给开弦部门与 Chan–Paton 因子 n、以及 SO(n) / Sp(n) 的两种投影（(10.8.19) 的上下号）。
+    note: |
+      供给开弦部门与 Chan–Paton 因子 n、以及 SO(n) / Sp(n) 的两种投影（(10.8.19) 的上下号）。
+      ⚠【2026-09-11，klein-mobius】Möbius 那一支的具体内容已**委托**给
+      worldsheet.superstring-mobius-strip-amplitude-closed-channel（它自己以**非 inferred** 边
+      指向本卡，供给 ± 两号的候选集与开弦 GSO 的 ½）。
+      本边此后承担的是**结论层面**的候选集：(10.8.19) 的 n 与「正交 / 辛」二选一。
   - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
     note: |
       供给 (10.7.9) 的费米迹组合，(10.8.2a,b) 的两部分就是它按 R–R / NS–NS 的拆分。
@@ -39,9 +83,18 @@ depends_on:
   - id: worldsheet.worldsheet-parity
     inferred: true
     note: |
-      供给 Ω（Klein 瓶与 Möbius 带的来源）。**标 inferred**：本图那张卡是玻色弦语境的，
-      超弦的完整作用 (10.8.12)–(10.8.15)（Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、Ω² = exp(πiF)、
-      四项投影算符 (1+Ω+Ω²+Ω³)/4）本图无节点；见下面专门为 (10.8.12) 补的来源条目。
+      供给 Ω（Klein 瓶与 Möbius 带的来源）以及测度里 Ω 投影的那个 ½。
+      **仍标 inferred，但缺口自 2026-09-11 起只剩闭弦一侧**：
+      · **开弦一侧已合上**：超弦的 Ω 作用 (10.8.12)–(10.8.15)（Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、
+        Ω² = exp(πiF)、四项投影算符 (1+Ω+Ω²+Ω³)/4）本轮已建卡
+        **worldsheet.superstring-worldsheet-parity-action**，并由
+        worldsheet.superstring-mobius-strip-amplitude-closed-channel 以**非 inferred** 边接入
+        ⇒ Möbius 那一支现在经上面那条新边到达它，**不再经过本边**。
+      · **闭弦一侧仍空**：Ω 在闭超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件 (10.8.8a,b)
+        给出（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），**本图无节点**；
+        本图那张 worldsheet.worldsheet-parity 仍是**玻色弦**语境的。
+      ⇒ 故本边保持 inferred，理由改写为「闭弦超弦 Ω 无节点」，见 gaps 里相应那条的更新。
+      （下面专门为 (10.8.12) 补的来源条目保留不动，它现在同时是新卡的来源。）
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.8, eq. (10.8.19), p. 42（结论式；逐字 'The R–R tadpole vanishes only for the gauge group SO(32).' 与 'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32.'）"
@@ -77,10 +130,20 @@ summary: |
       模变换后 Z_{C₂,0} ∝ n² ∫ds[16 + …]，发散来自 s → ∞ 的无质量闭弦 tadpole；
       Z_{C₂,1} 有等值反号的发散。
       ★ **这一步自 2026-09-11 起由独立卡承担**：
-      worldsheet.superstring-cylinder-amplitude-closed-channel（(10.8.1)–(10.8.4) 全部，
+      worldsheet.superstring-cylinder-amplitude-closed-channel-v2（(10.8.1)–(10.8.4) 全部，
       含前缀与 [16 + O(e^{−2s})]）。本推导 depends_on 它（非 inferred），不再自己重算。
   (2) Klein 瓶 K₂：Z_{K₂,0} ∝ 2^10，Z_{K₂,1} = −Z_{K₂,0}。
+      ★ **这一步自 2026-09-11 起由独立卡承担**：
+      worldsheet.superstring-klein-bottle-amplitude-closed-channel（(10.8.7)–(10.8.11) 全部，
+      含系数 2¹⁰、前缀与 [16 + O(e^{−2s})]）。本推导 depends_on 它（非 inferred），不再自己重算。
+      ⚠ 那张卡只断言 **NS–NS** 侧 Z_{K₂,0}；这里用到的 Z_{K₂,1} = −Z_{K₂,0} 属 §10.7 的超对称
+      论证，**不在那张卡的断言里**（见 gaps）。
   (3) Möbius 带 M₂：Z_{M₂,1} ∝ ±2n·2^5（上号 SO(n)）。
+      ★ **这一步自 2026-09-11 起由独立卡承担**：
+      worldsheet.superstring-mobius-strip-amplitude-closed-channel（(10.8.16)–(10.8.18) 全部，
+      含 ±2n·2⁵、'the upper sign is for SO(n)' 与前缀）。本推导 depends_on 它（非 inferred），
+      不再自己重算。
+      ⚠ 那张卡直接给的就是 **R–R** 侧（原书在 Möbius 处只算 R–R），与 (1)(2) 两支不对称。
   (4) 相加 R–R 部分：n² ∓ 2·32·n + 32² = (n ∓ 32)²，即 (10.8.19)。
       三个拓扑的公因子是 V_10/(8π(8π²α')⁵)·∫ds[16 + O(e^{−2s})]（α' 的幂次见目标卡片
       notes 的【v2 改了什么】：页图上的 (8π²α'²)⁵ 是误读）。
@@ -94,7 +157,11 @@ summary: |
   【status 的理由（四条）】
   (1) C_10 那一步原书自称是「猜」，所谓的 'more detailed analysis' 不给；
   (2) tadpole 的整体符号未由计算定出（原书自承 'This calculation does not determine the sign'）；
-  (3) 本图没有 Vol.1 §7.4 的单圈振幅节点，计算链大部分在图上悬空；
+  (3) 三个面各自的计算虽已各有卡（2026-09-11 起），但**那三张卡自身都是 physical-argument**：
+      圆柱是「直接写下」的拼装、Klein 瓶两个迹的整体符号靠物理输入（脚注 8）、
+      三张卡的换通道步骤原书都不写（只有圆柱与 Klein 瓶的前缀被抽取者复算过）；
+      ⚠ 本条替换了旧版的「本图没有 Vol.1 §7.4 的单圈振幅节点，计算链大部分在图上悬空」
+      ——那句话已随三张卡的建立作废（见 gaps 里相应那条的更新）；
   (4) 整个计算是路径积分/模变换层面的形式操作。
 gaps:
   - "**(10.8.19) 前缀里 α' 的幂次不是直接读出来的**：页图上七处都看起来是 (8π²α'²)⁵，抽取者改为独立复算（两次变量代换 + 量纲分析），判定正确的是 (8π²α')⁵（sec10-8.md §0.4(b)）。目标卡片 v2 采用复算结果。**该前缀是三个拓扑的公因子，不影响 (n ∓ 32)² 与 SO(32)**，但它意味着本推导在这一处用的是抽取者的复算而不是原书页面上的字面读数。**〔2026-09-11 关闭〕researcher 第二轮已复核**（sec10-8.md §6）：单页重渲染 pp.38/41/42 + 跨卷控制组（Vol.1 ch.7），裁定页图上的 α'² 是 小字号（scriptstyle） 分式分母里 prime 的**渲染假象**，不是原书排印错误；**p.42 的 (10.8.19) 本身本轮读作单撇 (8π²α')⁵**，与本推导采用的复算结果一致。⇒ 本条的「待 researcher 定案」已完成，复算与页图读数现在**同向**。⚠ 不得援引 (13.3.12) 的书错先例（§6.4：那处读数可复现，本处不可复现，两处性质不同）。⚠⚠ **残余不确定性（§6.5 逐字，2026-09-11 补记；登记但不降级）**：两轮复核**仍只用了同一条成像管线**（Cambridge Core PDF → 页图渲染），没有第二条独立成像路径；官方勘误表取不到（KITP errata 页 404）。⇒ 本推导对该前缀的把握止于「复算闭合 + 量纲 + 跨卷一致性」三条**间接**证据，不是一手读数；**人在 PDF 阅读器里把 p.38 放大一次即可 100% 关闭**（10 秒）。在那之前本条保持开放。"
@@ -106,14 +173,67 @@ gaps:
   - "**本图没有 Vol.1 §7.4 的单圈振幅节点**〔2026-09-11 部分订正与部分结清〕：
      (a) **订正**：Vol.1 (7.4.1)/(7.4.3) 其实**有**节点 spectrum.one-loop-cylinder-amplitude
      （旧 gap 说「没有任何节点」是错的）；
-     (b) **圆柱这一支已结清**：新卡 worldsheet.superstring-cylinder-amplitude-closed-channel
+     (b) **圆柱这一支已结清**：新卡 worldsheet.superstring-cylinder-amplitude-closed-channel-v2
      （本推导已 depends_on）把 (10.8.1)–(10.8.4) 接到了那张玻色卡与
      worldsheet.modular-invariance-requires-eight-transverse-fermions 上；
-     (c) **残留**：**Klein 瓶 (10.8.7)–(10.8.11) 与 Möbius 带 (10.8.12)–(10.8.18) 两支仍无节点**，
-     Vol.2 §10.7 的完整环面振幅也无节点 ⇒ 那两支的模变换与长柱极限在图上仍悬空。
-     → 待建 spectrum.one-loop-klein-bottle / -mobius 的超弦版（玻色版已有
-     spectrum.one-loop-klein-bottle-amplitude、spectrum.one-loop-mobius-amplitude-v2）。"
-  - "**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**（依赖边已标 inferred）。"
+     (c) ★★【**2026-09-11 本条全部结清**，klein-mobius】旧版残留写的是「**Klein 瓶
+     (10.8.7)–(10.8.11) 与 Möbius 带 (10.8.12)–(10.8.18) 两支仍无节点** … 那两支的模变换与
+     长柱极限在图上仍悬空」。本轮已建两张卡并以**非 inferred** 边接入本推导：
+       · worldsheet.superstring-klein-bottle-amplitude-closed-channel
+         （玻色母式 spectrum.one-loop-klein-bottle-amplitude，原书逐字
+          'The bosonic part is (7.4.15) converted to D = 10.'）；
+       · worldsheet.superstring-mobius-strip-amplitude-closed-channel
+         （玻色母式 spectrum.one-loop-mobius-amplitude-v2，原书逐字
+          'We have used (7.4.22) in D = 10.'）。
+     ⇒ 三个面的计算链**都**已落到结构上，本条的『在图上悬空』**关闭**。
+     ⚠ **但换通道的步骤仍未展开**：三张卡里只有圆柱与 Klein 瓶的**前缀**被抽取者独立复算过
+     （§0.4(b)），Möbius 那一支只由 §0.4(a) 的系数相加间接验证；三张卡的
+     math.dedekind-eta-s-transformation 边中有两条标 inferred（Klein、Möbius），
+     因为原书在 (10.8.11)/(10.8.18) 处**直接写等号**。这是**新的、更窄的**遗留，
+     已分别记在那两张卡的推导 gaps 里。
+     ⚠ 另一条未结清：Vol.2 §10.7 的**完整环面振幅**本图仍只有模不变性那一条必要条件。"
+  - "**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**〔2026-09-11 部分结清，klein-mobius〕：
+     (a) **开弦一侧已结清**：新卡 **worldsheet.superstring-worldsheet-parity-action**
+     （definition，(10.8.12)–(10.8.15)：Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、
+     **Ω² = exp(πiF)**、联合投影算符 **(1+Ω+Ω²+Ω³)/4**）已建，并由
+     worldsheet.superstring-mobius-strip-amplitude-closed-channel 以**非 inferred** 边接入
+     ⇒ 本推导的 Möbius 支经那条新边到达它。
+     (b) **闭弦一侧仍空**：Ω 在**闭**超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件
+     (10.8.8a,b) 给出（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），本图无节点；
+     本推导的 worldsheet.worldsheet-parity 边因此**仍标 inferred**，理由改为『闭弦超弦 Ω 无节点』。
+     (c) **新卡自身的两条保留**（照实转记）：R 扇区的相位论证原书不给（只写了 NS 扇区那一句）；
+     (10.8.12) 所用的**超弦版 doubling trick (10.2.15)** 本图无节点
+     （worldsheet.open-string-doubling-trick 是玻色弦语境的）。
+     → 待建：worldsheet.open-superstring-doubling-trick，以及闭超弦上的 Ω 作用卡。"
+  - "★【2026-09-11 新增，klein-mobius】**第 (4) 步用的两条『超对称相消』不在任何一张三面卡的断言里**：
+     求 R–R 侧的总和需要 **Z_{C₂,1} = −Z_{C₂,0}** 与 **Z_{K₂,1} = −Z_{K₂,0}**（Möbius 那一支
+     原书直接给的就是 R–R 项，不需要翻面）。这两条相消原书归约到 §10.7 的超对称论证
+     （总费米配分函数为零），而圆柱卡与 Klein 瓶卡**都明确把它排除在断言之外**
+     （各自的「不断言 (a)」/「不断言 (b)」：算 NS–NS 侧本身不需要它）。
+     ⇒ **本推导第 (4) 步在这一处没有图内支撑**：接来的两张卡只给 NS–NS 侧，翻到 R–R 侧靠的是
+     本推导直接引原书。⚠ 这不是新引入的缺口（此前三支全在本推导内部时同样没有支撑），
+     但接线之后它变得**可见**了，故单列。
+     → 待建：worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry
+     （§10.7 的总费米配分函数为零），届时本推导加一条非 inferred 边。"
   - "**时空反常路线不在本推导范围**：第 12 章给出 SO(32) 唯一性的另一个独立理由，本轮未读。GS 1984 那条路线由本图 consistency 区另行承载。"
+notes: |
+  ★★【2026-09-11 接线（curator，klein-mobius）】本轮的改动**全部在记账层面，论证与结论一字未动**：
+  · 新增两条**非 inferred** 边，指向本轮新建的两张卡
+    worldsheet.superstring-klein-bottle-amplitude-closed-channel（(10.8.7)–(10.8.11)）与
+    worldsheet.superstring-mobius-strip-amplitude-closed-channel（(10.8.16)–(10.8.18)）；
+    依据是 (10.8.19) 明写为三个面之和，且两式各自在原书同节写出。
+  · summary 的第 (2)(3) 步由「自己重算」缩为「引用那两张卡」（第 (1) 步 2026-09-11 早些时候
+    已对圆柱做过同样的事）。
+  · gaps 里「Klein 瓶与 Möbius 带两支仍无节点」**关闭**，换成更窄的遗留
+    （换通道步骤未展开；Möbius 的前缀只由系数相加间接验证）。
+  · gaps 里「Ω 在超弦上的作用本图无节点」**部分关闭**：开弦一侧由新卡
+    worldsheet.superstring-worldsheet-parity-action 承担（Ω² = exp(πiF)、四项投影算符），
+    闭弦一侧仍空，故 worldsheet.worldsheet-parity 边保持 inferred，只改理由。
+  · 新增一条 gap：第 (4) 步翻到 R–R 侧所需的两条超对称相消不在任何一张三面卡的断言里
+    （此前也没有支撑，接线后变得可见）。
+  ⇒ **status 仍是 physical-argument**：三张三面卡自身都是 physical-argument，
+  且本推导最弱的两环（C₁₀ 的 'guess'、tadpole 整体符号的 'should be'）与本轮改动无关。
+  ⚠ **(限定 4) 的禁令不变**：三张新卡也一律不与 consistency.type-i-hexagon-so32-iff 建边
+  （各自 notes 已写明）。
 author: curator
 created: "2026-09-11"
