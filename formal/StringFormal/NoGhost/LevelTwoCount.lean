@@ -438,4 +438,52 @@ theorem levelTwo_count_identity (hD : 2 ≤ D) :
 
 end Cardinalities
 
+/-! ### The counting half of `B26 2`
+
+Combining (P3) `dim (H_phys ⊓ V_2) ≤ p_{D−1}(2)`, (P2) `dim (ddfSpan ⊓ V_2) = p_{D−2}(2)` and
+the Pascal identity `p_{D−1}(2) = p_{D−2}(2) + D` leaves exactly one thing to prove:
+`dim (H_null ⊓ V_2) ≥ D`.  That is where `D = 26` enters, and it is the content of
+`NoGhost/NullSeedsTwo.lean`'s two families. -/
+
+section B26Two
+
+variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+
+/-- **The physical slice at level two is at most `D` bigger than the DDF sector.**
+
+`dim (H_phys ⊓ V_2) ≤ dim (ddfSpan ⊓ V_2) + D`, for **every** `D ≥ 2` and every light-cone
+frame.  All three inputs are `D`-independent:
+
+* (P3) `SpuriousElimination.finrank_towerPhys_inf_towerBigrade_le` and `card_conjFree_two_le`;
+* (P2) `SliceDim.finrank_ddfSpan_inf_towerBigrade` and `card_ddfLevel_two_ge`;
+* the Pascal identity `levelTwo_count_identity`.
+
+So the whole of `B26 2` is reduced to producing `D` independent *null* states on the slice. -/
+theorem finrank_towerPhys_inf_towerBigrade_two_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    finrank K ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-((2 : ℕ) : ℤ)) 2)
+      ≤ finrank K ↥(ddfSpan η a b F.hη F.trans ⊓ towerBigrade D K (-((2 : ℕ) : ℤ)) 2) + D := by
+  have h1 := finrank_towerPhys_inf_towerBigrade_le (K := K) hD F 2
+  have h2 := card_conjFree_two_le (D := D) hD
+  have h3 := levelTwo_count_identity (D := D) hD
+  have h4 := card_ddfLevel_two_ge (Fin (D - 2))
+  rw [finrank_ddfSpan_inf_towerBigrade F.hη F.frame.isotropic F.hba F.trans 2]
+  rw [Fintype.card_fin] at h4
+  have h5 : (D - 2) + 1 = D - 1 := by omega
+  rw [h5] at h4
+  omega
+
+/-- **`B26 2` from a lower bound on the null states.**  Blueprint §B″.2: at level two the whole
+critical-dimension input is the statement that the null states on the antidiagonal slice have
+dimension at least `D`. -/
+theorem b26_two_of_finrank_towerNull (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hnull : D ≤ finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-((2 : ℕ) : ℤ)) 2)) :
+    B26 η a b F.hη F.trans 2 := by
+  have h := finrank_towerPhys_inf_towerBigrade_two_le hD F
+  exact le_trans h (by omega)
+
+end B26Two
+
 end StringFormal.NoGhost
