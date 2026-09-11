@@ -20,7 +20,11 @@ sources:
     loc: "§5.3, eq. (5.3.19), p.158；T j 的 OPE 见 §2.5 的 (2.5.15)；Weyl 反常的一般形式见 §3.4 的 (3.4.9)；系数的读出用到习题 3.6"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E81，L1（读到 schrans-2020 §5.21，
-      笔记 p.260–261；**未核对 Polchinski 原书**）。
+      笔记 p.260–261）。
+      **★ 2026-09-11 补：(5.3.19) 已核到原书印刷 p.158 页图（L1 逐字，抽取记录 §16.2）**：
+      「For the ghost current of a holomorphic bc system (without b̃, c̃), the current conservation
+      anomaly derived in exercise 3.6 is ∇_a j^a = (1 − 2λ)/4 · R. (5.3.19)」——
+      式子与本卡逐字一致；系数在正文零推导，逐字外包给 exercise 3.6（题面本项目未读，§16 Q16.1）。
       ⚠⚠ **勘误依赖（抽取记录 Q14 的第 2 条）**：伴读者逐字「Note there there is a sign error on
       exercise 3.6, as per Joe's errata page.」——即本式系数的读出所依据的习题 3.6
       在印刷版里有符号错。
@@ -31,8 +35,12 @@ notes: |
   **符号/归一化警告**：本式的系数依赖三件事——鬼数流的符号约定 j = −:bc:、
   T j OPE 三阶极点的归一化、以及 ⟨T^a_a⟩ 与 R 的归一化（conv.virasoro-standard 与
   worldsheet.weyl-anomaly-trace）。抽取记录只给出结论式，**没有核实任一处的中间归一化**。
-  下游只用到「∇_a j^a ∝ R，且 λ = 2 时比例常数非零」，对整体因子不敏感；
-  真正定死 Riemann–Roch 里比例常数的是球面标定，见
-  worldsheet.riemann-roch-kappa-minus-mu--via-ghost-number-anomaly。
+  ⚠ **2026-09-11 订正（curator-small-backlog-4）**：此处原写「下游只用到 ∇_a j^a ∝ R 且比例常数非零，
+  对整体因子不敏感；真正定死 Riemann–Roch 里比例常数的是球面标定」——**后半句不成立**
+  （researcher 读印刷 pp.158–159 页图，polchinski-1998-v1.md §16：原书 §5.3 不经球面，
+  κ − μ = 3χ 的常数 3 就是把 λ = 2 代进本式系数、经 (5.3.20) 的 (2λ−1)/2 算出的）。
+  ⇒ **本式的系数对下游是承重的**：worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly
+  与 -nonorientable--via-ghost-number-anomaly 的结论系数直接继承本卡系数的全部保留
+  （习题 3.6 勘误依赖、归一化未核）。
 author: curator-polchinski-ch5
 created: "2026-09-11"

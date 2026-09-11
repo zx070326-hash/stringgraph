@@ -83,12 +83,17 @@ notes: |
 
   **本卡有两条推导，各自的弱点正好互补**：
   (a) `--via-ghost-number-anomaly`（由 v1 原样改指本卡）：Polchinski 的书内路线，
-      只导出 κ − μ ∝ χ，**比例常数 3 靠球面这一个例子标定**；
-  (b) `--via-riemann-roch`（本轮新增）：数学路线，**比例常数是算出来的、不需要任何标定、
+      **常数 3 由 λ = 2 代入 (5.3.19)/(5.3.20) 的反常系数算出**，弱点是反常系数外包给
+      exercise 3.6（带勘误依赖）、(5.3.20)「by the same argument」无论证、路径积分形式操作；
+      ⚠ **2026-09-11 订正（curator-small-backlog-4）**：此处及上一段原写「比例常数 3 靠球面这一个
+      例子标定」「用球面标定常数这件事成立」——**不成立**。researcher 读印刷 pp.158–159 页图
+      （polchinski-1998-v1.md §16）确认原书 §5.3 全程没有球面、χ = 2、κ = 6，也没有任何定常数的动作；
+      「球面标定」是伴读笔记 [S] 的讲法。该推导对 sphere-conformal-killing-group 的边已删。
+  (b) `--via-riemann-roch`（本轮新增）：数学路线，**比例常数同样是算出来的、
       也不需要按 g 分情形**；代价是要跨两座「物理量 ↔ 上同调维数」的桥
       （κ = 2·dim H⁰(K^{−1})、μ = 2·dim H⁰(K²)），两座桥当前都只到 physical-argument。
-  ⇒ **本卡的有效状态仍是 physical-argument**，但瓶颈已从「比例常数靠单例标定」
-  转移到「两座桥 + 共形规范的全局性」。这个转移本身就是本轮的产出：
+  ⇒ **本卡的有效状态仍是 physical-argument**，瓶颈在 (a) 是反常系数与形式操作、在 (b) 是
+  「两座桥 + 共形规范的全局性」。这个定位本身就是产出：
   它精确地告诉下一轮该去找什么来源（math-sources.md Q33：(B1)(B2) 的带编号数学来源）。
 
   **形式化天花板 rigorous**：Mathlib 无 Riemann–Roch（证据见 math.riemann-roch-theorem 的 notes），
