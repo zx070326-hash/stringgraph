@@ -1930,7 +1930,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   - **未做（PR4）**：`towerLop_neg_conjDegree_leading`、`b̃`-次数/加权次数 `(β, ω)`、
     `conjFreeSlice`、`towerBigrade_le_conjFree_sup_spurious`、
     `finrank_towerPhys_inf_towerBigrade_le`。本文件完全不碰塔。
-  - **公理登记**：46 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
+  - **公理登记**：49 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
