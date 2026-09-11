@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-11 深夜 5）：main 570 statements / 471 derivations / 3 milestones / 21 conventions；Lean 68 声明公理干净（3501 jobs）。桥层 `StringFormal.Bridge`（MathlibBridges.lean：η 定义、PSL(2,ℤ) 作用、Z(SL(2,ℤ))={±I}）已合入，定义卡接线中。ch13 Q3（π 幂次）已解：漏的 π 在 (13.3.1) 测度 ∫π dt/t²。Riemann–Roch 系数链 (2.5.15) 已 L1 闭合。
+- 计数（2026-09-11 深夜 6）：main 570 statements / 471 derivations / 3 milestones / 21 conventions；**effective formalized 66** / rigorous 103 / physical-argument 340 / conjecture 29；Lean 70 声明公理干净。桥层接线后 η 定义卡、PSL(2,ℤ) 定义卡、η S/T 变换、S–T 生成、τ₂|η|⁴ 全模群不变六卡全部 effective formalized。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
