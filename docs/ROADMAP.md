@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数：main 345 statements / 266 derivations / 3 milestones / 44 formalized；Lean 39 声明公理干净。
+- 计数：main 354 statements / 275 derivations / 3 milestones / 47 formalized；Lean 43 声明公理干净（2156 jobs）。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
@@ -143,6 +143,8 @@
 - **BRST 无鬼一手来源（2026-09-12）**：Kato–Ogawa/Ohta/Henneaux 正文均未取得（L2/L3）；意外取得 L1 全文：Lian–Zuckerman 1989 CMP 125 **Thm 2.20**（超弦相对上同调 ≅ 光锥谱，自命名 "No-ghost Theorem" Cor 2.15(ii)）、Figueroa-O'Farrill–Kimura 1989、IMNU 1986（R 扇区无鬼物理证明）、Dedushenko（picture 无关性）。**FOK vs LZ 真矛盾**（Fock 空间是否 Verma 模直和）待 Brower–Friedman 1973。超弦无鬼卡经 LZ Thm 2.20 可 rigorous——curator 接线中。
 - **GGRT 1973 正文仍 L0**（CDS 394307 PUBLIC 但 Anubis 拦截；Wayback 快照存在——**船长点击清单 +1**：`https://cds.cern.ch/record/394307/files/CM-P00058492.pdf`）；Bering arXiv:1104.4446 (7.1) 是 [J^{−i},J^{−j}] 显式表达式的 L1 替代（"precisely vanishes for D = 26 and a = 1"，非 iff）；Bering 说 GGRT "sparse on details" vs Polchinski "careful treatment"——未裁。Polchinski (3.2.3b) p.82 Euler 数含边界项 L1（`worldsheet-euler-number` 可改挂）。
 - **偶幺模格来源（2026-09-12，L1）**：秩 ≡ 0 mod 8 = Zagier 2008 §3.2 **Prop 12(i)**（有证明）；16 维恰两类 = Chenevier–Lannes arXiv:1409.7616 ch.II **Cor 3.6**（含"不同构"）。四本教科书定理号全 L0 禁写；"Witt 1941 证 16 维分类"查无实据（CL 归功不挂标签）。认识论要点：数学卡升 rigorous **不会**让杂化弦"恰有两个"变严格——瓶颈是 §11.6 "一致 CFT ⟺ 偶自对偶格"物理桥，且原书 "exactly two such lattices" 零出处。
+- **consistency 区 Lean 接线完成（2026-09-12）**：反常多项式重排 (12.2.27)≡(12.2.11)+(12.2.12)（formalized）、IIB 整数解（formalized；三式秩 2）、六边形 32（拆出 n=6 卡 formalized，一般 n 卡保持）、GS 三张 math 卡各挂 Lean（被迹恒等式压 physical-argument）；`h-field-strength-chern-simons` 与 `anomaly-twelve-form-d10` 各拆三卡。**consistency 区最大单条来源缺口**：升维字典（2n 维反常 ↔ 2n+2 维不变多项式）——四条来源全当已知。
+- **ch10/ch11 栈上待合**（等 ch10 审查）：ch11 杂化弦（17 卡）、bosonization（7 卡 + `conv.nonembedding-scalar-normalization`）、unimodular-cards、brst-noghost（LZ Thm 2.20 rigorous 推导）。
 - 待拆：`consistency.h-field-strength-chern-simons`（H 定义 + δB 变换律两件事；补 δH = 0 命题卡）；`consistency.anomaly-twelve-form-d10` 定义卡内嵌两条命题（六边形唯一决定高点反常；WZ 条件 ⇒ 十二形式）（reviewer-gs1984）。
 - 待建（GS 迹恒等式升 rigorous 所需数学来源）：so(N) 伴随 ≅ Λ²V、usp(N) 伴随 ≅ Sym²V（Fulton–Harris 节号待核）；E₈ 根系（Bourbaki Lie VI Planche VII）+ Chevalley 限制定理（Humphreys §23.1）后建 `--via-so16-weights`。
 - **lead 裁决（2026-09-11）来源合规**：Appelquist 重印本扫描中的 GS 1984 单篇（4 页）按"单章扫描"处理，允许作 L1 载体；"非官方全本扫描不使用"针对整本教材，不针对重印文集里的单篇论文。
