@@ -408,6 +408,35 @@ lemma levelTwoGen_mem_levelSubmodule_two (v : Fin D → Fin D → R) (w : Fin D 
     (secondState_mem_levelSubmodule_two η w)
   exact (X_mem_levelSubmodule_one μ).mul (polState_mem_levelSubmodule_one (v μ))
 
+/-- **`L_{-1}` on a general level-one state** (the creation-direction complement of
+`Lop_neg_two_apply_one`, which only covers `L_{-2}` on the vacuum): `L_{-1}` applied to
+`ζ · α_{-1}|k⟩` produces `(ζ · α_{-2})|k⟩ + (ζ·α_{-1})(k·α_{-1})|k⟩`. This characterises the
+image of `L_{-1}` on the entire level-one fiber, needed for the `n = 1` piece of the spurious
+submodule at level two. -/
+lemma Lop_neg_one_apply_polState (hη : ∀ μ, η μ * η μ = 1) (e : Fin D → R) :
+    Lop η a (-1) (polState η e) = secondState η e + polState η e * polState η a := by
+  have hsq : ∀ (c : Fin D → R) (P : Fock D R),
+      ∑ μ : Fin D, (η μ * c μ) • ((X ((μ, 1) : Osc D) : Fock D R) * P) = polState η c * P := by
+    intro c P
+    rw [polState, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun μ _ => (smul_mul_assoc _ _ _).symm
+  have hL : Lop η a (-1) (1 : Fock D R) = polState η a := by
+    rw [Lop_neg_one_apply_one, polState_eq_sum_mode η a a]
+  have hterm : ∀ μ : Fin D,
+      Lop η a (-1) ((η μ * e μ) • mode η a μ (-1) (1 : Fock D R))
+        = (η μ * e μ) • ((X ((μ, 2) : Osc D) : Fock D R)
+            + (X ((μ, 1) : Osc D) : Fock D R) * polState η a) := by
+    intro μ
+    rw [map_smul, Lop_apply_mode η a hη (-1) μ (-1) 1,
+      show (-1 : ℤ) + -1 = -2 by ring, mode_neg_two_apply η a, mul_one, hL,
+      mode_neg_one_apply η a]
+    congr 2
+    norm_num
+  conv_lhs => rw [polState_eq_sum_mode η a e, map_sum, Finset.sum_congr rfl fun μ _ => hterm μ]
+  simp_rw [smul_add]
+  rw [Finset.sum_add_distrib, hsq e (polState η a)]
+  rfl
+
 /-- `L_1 (α^μ_{-1} (ζ·α_{-1})|k⟩) = k^μ (ζ·α_{-1})|k⟩ + (ζ·k) α^μ_{-1}|k⟩`. -/
 lemma Lop_one_apply_X_one_mul_polState (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) (e : Fin D → R) :
     Lop η a 1 ((X ((μ, 1) : Osc D) : Fock D R) * polState η e)
