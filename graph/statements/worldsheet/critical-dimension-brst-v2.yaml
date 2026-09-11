@@ -125,5 +125,28 @@ notes: |
   本节点目前的可追溯性只到 Kato–Ogawa 1983 摘要（方向 ⟹）与 Polchinski §4.3 的形式计算。
   反方向（c^m = 26 ⟹ Q_B² = 0）另有一个更弱、来源更清楚的节点
   worldsheet.brst-nilpotent-at-c26（FGZ Proposition 1.2），本节点的「当且仅当」不由它支撑。
+
+  ---
+  【2026-09-12 auditor 注记：第一轮回译审计留给 v3 的两条；statement 不可变，本条只入 notes】
+  （physics-auditor，ms.critical-dimension-brst-nilpotency 第一轮，verdict drift，
+  详见该里程碑 audit.back_translation.diff_notes。本卡陈述**没有**被判错，以下两条是可改进处。）
+
+  (1) **线性无关是被「断言」而不是被「假设」的**。本卡写「由于诸 c_{−m} c_m 在 V 上线性无关
+      （对忠实的 Fock 型受限模成立），Q_B² = 0 ⟺ c^m = 26」。按字面，这是在断言该线性无关
+      对本卡前提里的**任意**受限模 V 成立——而这为假：取 b、c 与 L^m 全零作用的平凡模（它平凡地
+      满足受限条件），则 c_{−m} c_m 全为零算子、不线性无关，且 Q_B² = 0 对任意 c^m 成立，⟹ 方向失效。
+      正确写法是把它列为**前提**（「并设诸 c_{−m} c_m 在 V 上线性无关」）。
+      记账：ms.critical-dimension-brst-nilpotency 的 canonical_text 已经这样写了（「且诸 … 线性无关」），
+      故里程碑一侧此处**比本卡更准确**；v3 时把本卡对齐到里程碑的写法即可。
+
+  (2) **`: :` 的规定应随 v3 写进正文**。本卡的 Q_B²公式经由 worldsheet.brst-quantization-v2 使用
+      `: :`，而该卡与 worldsheet.bc-ghost-central-charge-lambda-two 对 `: :` 的要求互斥
+      （能级序 vs SL(2,C) 序，逐字拼接会把 m 线性项算错 2m；见那两张卡的 auditor 注记与
+      docs/reviews/brst-nilpotency-recompute-2026-09-12.md 的 F2）。本卡正文的括号
+      「(m³ − m) 的形式来自把 a^g = −1 吸收进 L_0」是目前**唯一**能反推出序的线索，
+      它对本卡是够用的（本卡结论与复算均不受影响，是欠定不是假），但太隐晦：
+      复算文档 §4 表明 a^g 与序是**成对**的（能级序配 a^g = −1，SL(2,C) 序配 a^g = 0，两者给出同一个 Q_B），
+      所以只写 a^g = −1 而不写序等于只写了一半。v3 时把序写明，或引用待建的鬼场正规序 conv. 卡
+      （草案 docs/drafts/brst-normal-ordering-convention.md）。
 author: curator
 created: "2026-09-11"
