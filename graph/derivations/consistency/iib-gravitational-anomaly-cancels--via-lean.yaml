@@ -1,0 +1,94 @@
+id: consistency.iib-gravitational-anomaly-cancels--via-lean
+target: consistency.iib-gravitational-anomaly-cancels
+kind: proof
+status: formalized
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      本卡只用到该约定的**引力一路**：tr R^{2k} 里的 tr 是切空间 10 × 10 矩阵的迹，楔号省略。
+      （IIB 没有规范场，Tr/tr 的规范侧区分在此不出现。）
+      系数 495、225、63、992、448、128 与三个公分母 725760、552960、1327104 全部写死在
+      Lean 陈述里，故这条约定依赖必须留在图里。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/AnomalyPolynomial.lean :: StringFormal.Math.{iib_gravitational_anomaly_free_iff, iib_anomaly_polynomial_vanishes_iff, iib_gravitational_anomaly_solutions, iib_gravitational_anomaly_cancels, IhatIIB, IhatSD}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，`[Field K] [CharZero K]`，无 sorry。四条声明与目标的对应：
+        · `iib_gravitational_anomaly_free_iff (a b c : ℤ) :
+             (∀ trR2 trR4 trR6 : K, IhatIIB (a:K) (b:K) (c:K) trR2 trR4 trR6 = 0)
+               ↔ (a = 2 * c ∧ b = -2 * c)`
+          —— **就是目标的主命题**（`formal.lean_decl` 取这条）；
+        · `iib_anomaly_polynomial_vanishes_iff` —— 「多项式恒为零 ⟺ 三条系数方程」这一半，
+          正向靠在 (tr R₂², tr R₂⁴, tr R₂⁶) = (0,0,1)、(1,1,0)、(1,0,0) 三处取值 + `linear_combination`；
+        · `iib_gravitational_anomaly_solutions (a b c : ℤ)` —— 三条整数方程 ↔ (a = 2c ∧ b = −2c)，`omega` 一行；
+        · `iib_gravitational_anomaly_cancels (trR2 trR4 trR6 : K) : IhatIIB 2 (-2) 1 … = 0`
+          —— 目标里 IIB 的 (2, −2, 1) 那个实例，`unfold; ring`。
+      formal/TODO.md「Lean 岛 2 / AnomalyPolynomial」记 `iib-gravitational-anomaly`（A8）
+      「无 sorry，公理只有标准三条」。该文件只 import Mathlib。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 98, (12.2.11)(12.2.12)(12.2.13)(12.2.14)"
+    note: |
+      被机检的那三条系数的文献出处。**原书只写 "the coefficients of these conspire to produce
+      zero total anomaly"，不展示算术，也不给充要条件**（抽取记录 E10）。
+      抽取者已手工复核三条系数（E10 的 `[抽取者复算]` 三行），与 Lean 一致。
+summary: |
+  全部在 formal/StringFormal/Math/AnomalyPolynomial.lean 内完成，只 import Mathlib，两步：
+
+  **第一步（多项式 ⇒ 系数）**：Î ≡ 0 对一切 tr R₂², tr R₂⁴, tr R₂⁶ 成立
+  ⟺ 三个单项 tr R₂⁶、tr R₂⁴ tr R₂²、(tr R₂²)³ 的系数各自为零。
+  「⇒」在三点 (0,0,1)、(1,1,0)、(1,0,0) 处取值再作有理线性组合；「⇐」是直接代入。
+  这一步把「三个单项独立」这个假设变成显式的 `∀`-陈述，而不是默认。
+
+  **第二步（整数线性方程组）**：
+
+      −495a + b + 992c = 0,   225a + b − 448c = 0,   −63a + b + 128c = 0
+        ⟺  a = 2c ∧ b = −2c        （`omega` 一行）
+
+  最后 ℤ → K 的强制转换由 `exact_mod_cast` 搬运（K 特征零，故 ℤ ↪ K 单）。
+  IIB 的 (2, −2, 1) 是 c = 1 的实例，也另有一条 `unfold; ring` 的直接验算
+  （`iib_gravitational_anomaly_cancels`），与主定理互为交叉检查。
+
+  **本推导只证代数**：「这些多项式是引力反常」「IIB 谱确实是 two 8′s + two 56s + one [5]₊」
+  「十二形式 ↔ 十维反常」一概不在其中，见 gaps 与目标卡的「本卡不断言」。
+gaps:
+  - |
+    ★ **物理全部在外**：(12.2.11)–(12.2.13) 三个多项式本身来自 Alvarez-Gaumé–Witten 的指标定理，
+    Polchinski 逐字「we will not repeat it here but just quote the result」（抽取记录 E6），
+    本项目未取得 AGW 全文。因此「IIB 无引力反常」这句**物理**结论不由本推导支持；
+    本推导只说：若那三个多项式如所抄，且净含量是 (2, −2, 1)，则那个多项式为零。
+  - |
+    **n = Tr(1) = 1（中性场处在平凡表示）是 inferred 前提**：Î₈ 的引力部分取 n = 1 这一步
+    **原书没有明写**（抽取记录 E10 明确要求转卡时标 inferred）。它被 (12.2.11) 上方对 n 的
+    定义所迫，但那是本图的推论。⚠ 这个缺口在**卡片与原书之间**，不在卡片与 Lean 之间：
+    目标卡的 statement 已把该读法写明，Lean 与卡片逐字一致。
+  - |
+    **「三式秩 2 而非 3」「任取两条蕴含第三条」不是单独的 Lean 定理**。它们是
+    `iib_gravitational_anomaly_solutions` 解集形状（一维格 {(2c, −2c, c)}）的直接读出，
+    写在该声明的 docstring 与目标卡 notes 里。要把它做成定理，只需再加一条
+    「两条方程 ⟹ 第三条」的 `omega`，本轮 Lean 侧没做。
+  - |
+    **宇称共轭的净计数是转录约定**：把 8′ 记成 −1 个 8（"parity interchanges the two fields in
+    each pair so these make opposite contributions to the anomaly"）来自原书同页正文，
+    但「两个 8′ ⇒ n_{1/2} = −2」这一步的算术是本图写出的。
+  - |
+    **域 vs 反交换代数**：Lean 取 `[Field K] [CharZero K]` 并把三个迹单项当独立标量。
+    真实对象是微分形式的楔单项，在固定维数上未必逐点独立；本命题（与 Lean 陈述）
+    刻意在**形式**多项式层面工作，`iib_anomaly_polynomial_vanishes_iff` 的 docstring 明写这一点。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string 跑
+
+      uv run stringgraph check-axioms \
+        --decl StringFormal.Math.iib_gravitational_anomaly_free_iff \
+        --decl StringFormal.Math.iib_gravitational_anomaly_solutions \
+        --decl StringFormal.Math.iib_gravitational_anomaly_cancels
+
+  三条全部 `ok … axioms: propext Classical.choice Quot.sound`。本分支未改动 formal/ 下任何文件。
+
+  **为什么 depends_on 里只有一条约定**：目标卡的 statement 被刻意写成纯代数，不引用图内任何命题。
+  真正物理的那张卡（建议 id `consistency.iib-supergravity-is-anomaly-free`，
+  status 应为 physical-argument）本轮未建，理由与依赖清单见目标卡 notes 末段。
+author: curator
+created: "2026-09-11"

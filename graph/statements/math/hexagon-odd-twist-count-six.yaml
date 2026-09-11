@@ -1,0 +1,54 @@
+id: math.hexagon-odd-twist-count-six
+kind: proposition
+title: n = 6 的奇数项二项式和：Σ_{k ∈ {0,…,6}, k 奇} C(6,k) = 32
+statement: |
+  在自然数中，
+
+      Σ_{k ∈ {0, 1, …, 6}, k 奇} C(6, k)  =  C(6,1) + C(6,3) + C(6,5)  =  6 + 20 + 6  =  **32**。
+
+  这是一条**有限、可判定**的算术陈述：求和范围是 {0,…,6} 里的奇数，C(n,k) 是二项式系数
+  （`Nat.choose`），等号在 ℕ 中成立。
+
+  **本卡不断言**：
+  (a) 一般 n 的恒等式 Σ_{k 奇} C(n,k) = 2^{n−1}。那是 math.hexagon-odd-twist-count 的内容，
+      本卡只是它在 n = 6 处的一个**数值实例**，且**不蕴含**它。
+  (b) 这个和等于「六元集合中基数为奇数的子集个数」。子集计数与二项式和的等同
+      （Finset.card 一侧 ↔ Nat.choose 一侧）不在本卡范围内，也不在下面的 Lean 声明里。
+  (c) 「六边形图的内线数是 6」——物理侧的识别，见 math.hexagon-odd-twist-count 的 (a) 条。
+  (d) 任何关于反常的事。
+formal:
+  lean_decl: StringFormal.Math.hexagon_odd_twist_count
+  lean_file: StringFormal/Math/FiniteCounts.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/FiniteCounts.lean :: StringFormal.Math.hexagon_odd_twist_count"
+    note: |
+      本仓库。Lean 4 + Mathlib v4.33.1，`by decide`，无 sorry。
+      声明的字面形状是 `∑ k ∈ (range 7).filter Odd, Nat.choose 6 k = 32`，
+      与本卡 statement 逐句对应（求和范围 `range 7` = {0,…,6}，`Odd` 过滤，`Nat.choose 6 k`）。
+  - ref: gsw-1987-v2
+    loc: "§10.2.2, p. 165，逐字：「The number of such diagrams is equal to the number of ways in which an odd number of twists can be distributed on the internal legs of a hexagon diagram, which is 32.」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/gsw-1987-v2.md E6 备注 2）。
+      **只承载那个数字 32 的出处，不承载本卡的算术**（GSW 不写求和式，见 math.hexagon-odd-twist-count）。
+      列在这里是为了让本卡不脱离它被建出来的语境。
+tags: [algebra, arithmetic, combinatorics, binomial, anomaly, phase2, lean-island-2, formalized]
+notes: |
+  【为什么另立此卡而不是直接给 math.hexagon-odd-twist-count 挂 --via-lean】
+  Lean 声明 `hexagon_odd_twist_count` 证的是 **n = 6 的数值实例**（`decide`），
+  而 math.hexagon-odd-twist-count 的 statement 还断言了**一般 n** 的恒等式
+  Σ_{k 奇} C(n,k) = 2^{n−1}，以及「= 奇基数子集个数」这一组合解释。
+  按 docs/STATUS_LEVELS.md「Lean 证明用的对象若与卡片定义不逐句一致…正确做法是拆卡，
+  让 Lean 对应的那一半成为 formalized」，本卡就是被拆出来的那一半。
+  ⇒ **math.hexagon-odd-twist-count 保持 physical-argument，本卡 formalized**，两者不互相蕴含方向相反：
+  一般卡蕴含本卡，本卡不蕴含一般卡；图里不建这条蕴含边（它是平凡代入，且会让一般卡看起来像被机检过）。
+
+  【与 Lean 侧文档的一致性】FiniteCounts.lean 的 docstring 自己写明：「Only the arithmetic is
+  formalised; that this count is the combinatorial origin of the coefficient in (12c) is the content
+  of the graph node `math.hexagon-odd-twist-count` and is *not* proved here.」
+  本卡与该 docstring 的划界完全一致。
+
+  【查重】`uv run stringgraph search hexagon` 命中 math.hexagon-odd-twist-count（一般卡）与
+  consistency.type-i-hexagon-so32-iff（物理卡），无与本卡同内容者。
+author: curator
+created: "2026-09-11"

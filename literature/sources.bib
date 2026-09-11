@@ -28,14 +28,15 @@
   year      = {1998},
   note      = {抽取记录 extractions/polchinski-1998-v2.md（ch.10--11，E1--E63）、
                extractions/polchinski-1998-v2-sec10-8.md（**§10.8 单节深读，E64--E75，续 E63 编号**，
-               引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）与
-               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）。
+               引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）、
+               extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）与
+               extractions/polchinski-1998-v2-ch13.md（**ch.13 D-branes，E 编号独立从 E1 起**，引用须写 `-ch13#E<n>`）。
                **本项目实读的是 Cambridge Books Online 版**：© Cambridge University Press 2001, 2005，
                DOI 10.1017/CBO9780511618123，即 2005 平装本数字化，**已含 1999/2000 两次 "with corrections"**。
                引用式号时按此版；1998 初印本个别公式内容可能不同。书 hash `2D456468D20AA8A9CE10CEB08B95B9DC`。
-               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)。
-               **未读**：Notation (xviii--xx)、ch.13 及以后、Appendix B、References (467--487)。
-               ⚠ 四条使用限制：
+               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)、ch.13 (pp.136--177)。
+               **未读**：Notation (xviii--xx)、ch.14 及以后、Appendix B、References (467--487)。
+               ⚠ 六条使用限制：
                (1) **§12.2 p.101 脚注 1 提到 `E8 x U(1)^248` 与 `U(1)^496`，但只说两条 properties "hold"，
                    既无 "cancel"/"factorize" 的动词，也无任何唯一性/完备分类主张** ——
                    不得据此写「十维 N=1 反常自由规范群恰有四个」；
@@ -43,10 +44,19 @@
                    Core 版已含勘误却未改，引用时须在 notes 里写明；
                (3) **§12.2 的十维反常多项式 (12.2.11)--(12.2.13) 本书不推导**，原文
                    "we will not repeat it here but just quote the result"，且正文不给引文编号；
-               (4) **§10.8 的 (10.8.4)/(10.8.11)/(10.8.18)/(10.8.19) 前缀在页图上七处都读作
-                   `8*pi*(8*pi^2*alpha'^2)^5`，但两次独立变量代换与量纲都要求 `8*pi*(8*pi^2*alpha')^5`**
-                   （疑似渲染假象或系统性排印错误，见 -sec10-8#Q1）。**不影响 `(n -+ 32)^2` 与 SO(32) 结论**（公因子），
-                   但引用完整前缀前须由人复核 pp.38/41/42。}
+               (4) **§10.8 的 (10.8.4)/(10.8.11)/(10.8.18)/(10.8.19) 与 §13.3 的 (13.3.1) 前缀在页图上共八处都读作
+                   `8*pi*(8*pi^2*alpha'^2)^5`，但 §10.8 的两次变量代换 + 量纲、以及 §13.3 独立的 alpha' 幂次记账
+                   都要求 `8*pi*(8*pi^2*alpha')^5`**（见 -sec10-8#Q1 与 -ch13#Q3；两章两条不同推导得同一结论）。
+                   **不影响 `(n -+ 32)^2` 与 SO(32) 结论**（公因子），但引用完整前缀前须由人复核 pp.38/41/42/146；
+               (5) **★★ ch.13 从不写「32 张 D9 膜」**：全章唯一给出 D9 数目的句子是 p.144
+                   「a third state that contains **16 D9-branes** (and an orientifold 9-plane) that looks like the type I theory」，
+                   且 p.143 的记账是「`2^k` 张 orientifold 面、**仍是 16 张 D 膜**、每张 O 面荷 `-2^(4-k)` 倍」。
+                   同节 p.141 另有一句「each Chan--Paton degree of freedom ... as a 9-brane」（蕴含 32 张），
+                   **原书从不调和这两种计数**（见 -ch13#Q1）。
+                   ⇒ **不得把「SO(32) = 32 张 D9 膜」这句通行说法归给本书**；要用该表述须另找来源；
+               (6) **ch.13 与 §10.8 的依赖方向是 §10.8 -> ch.13**：ch.13 三处（pp.141/142/147）都把 tadpole 相消
+                   当已知输入，p.147 逐字「We deduced from the cancellation of divergences that ...」；
+                   唯一可能的独立路线（D 膜--O 面之间的力）被明写推给读者。**ch.13 不是 SO(32) 的独立推导**。}
 }
 
 @book{gsw-1987-v1,
@@ -2597,7 +2607,8 @@
              重印本把期刊页码换成书页码；本图 green-schwarz-1984 的 loc 一律写「PLB p.NNN（重印 MMM）」，
              其中「重印 608+k <-> PLB 117+k」这条映射是**推出来的**（§0.3），不是页面直证。}
 }
-% ============================================================% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
+% ============================================================
+% 紧曲面分类定理 + Klein 曲面自同构群（researcher, 2026-09-11）
 % 抽取记录：literature/extractions/math-sources.md §39
 % ============================================================
 @book{gallier-xu-2013,

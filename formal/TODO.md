@@ -62,10 +62,10 @@
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
-`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9），两个独立小岛（只 import Mathlib）。
+`StringFormal/Math/AnomalyPolynomial.lean`（A8/A9）与 `StringFormal/Math/E8Roots.lean`（A11），三个独立小岛（只 import Mathlib）。
 A1/A2/A3 对应 Green–Schwarz 1984 抽取记录 `literature/extractions/green-schwarz-1984.md` §5；
 A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-ch12.md` §5.4。
-五项都已完成，无 sorry，公理只有标准三条。
+A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根系 + §44.7 手算）。六项都已完成，无 sorry，公理只有标准三条。
 
 - [x] `gs-factorization`（A1）：十二形式因子化 `Ω₁₂ = (1/48) Ω₄ [Ω₈ − (1/300) Ω₄²]`。
   `gs_factorization_so32`：`SO(32)` 支，`Ω₄ = 30x`、`Ω₈ = 24y + 3x²`、`Ω₁₂ = 15xy`；
@@ -164,6 +164,35 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
   这比 `consistency.gravitational-anomaly-polynomial-d10` notes 里记的"与 Bilal 括号内容之比
   都是 3/4"更强：那个比较对括号整体重标度，不检验 `n` 无关项与 `n` 相关项在同一整体归一下是否相容；
   这里一个常数 `−1/96` 就把五个系数全部对上。建议补进该卡 notes（Lean 候选 A5 由此闭合且加强）。
+
+### `StringFormal/Math/E8Roots.lean`（Humphreys *Reflection Groups* §2.10 的 E₈ 根系；A11）
+
+- [x] `e8-root-power-sums`（A11）：E₈ 根系的幂和 `Σ_α (α·x)^k`，**对任意 `x : Fin 8 → ℚ` 证到**。
+  根表按 Humphreys §2.10 显式列出（`e8Roots : List (Fin 8 → ℚ)`：112 条 `±ε_i ± ε_j` +
+  128 条 `½Σ±ε_i`（偶数个负号，实现为"前后两半宇称相同"的两块）；`e8Roots_length = 240`（`rfl`）、
+  `e8_dim_248 : 240 + 8 = 248`）。
+  `e8_power_sum_two/four/six`：`P₂ = 60 p₂`、`P₄ = 36 p₂²`、`P₆ = 30 p₂³`（`p₂ = Σ x_i²`）；
+  `e8_trace_four/six`、`e8_trace_identities`：`P₄ = P₂²/100`、`P₆ = P₂³/7200` = GS (12b′)(12c′) =
+  vRSV (176)(177)。与 `literature/extractions/math-sources.md` §44.7 的手算逐项一致，
+  两块分别为 `vec_k = 28p₂ / 16p₄+12p₂² / 60p₂p₄−32p₆`、`spin_k = 32p₂ / 24p₂²−16p₄ / 30p₂³−60p₂p₄+32p₆`。
+  **证明技术**：六次幂 240 项直接 `ring` 会爆（旋量块 128 × 1716 单项式）；改为把 128 条旋量根
+  写成 `{偶}×{偶} ∪ {奇}×{奇}`，内层对 8 个符号型先做二项展开（`inner_ev_six` 等，`ring` 只见
+  5 变量六次），外层再合并，`ring` 每次不超过 ~3000 单项式；全文件约 70 s。
+  **数据自检**（不参与幂和证明）：`e8Roots_normSq`（每条根 `Σα_i² = 2`，按成员结构证）、
+  `e8Roots_nodup`（240 条两两不同：kernel `decide` 不能算 ℚ，改让 `norm_num` 求出每条根的
+  四进制指纹 `key : ℕ`，再 `decide` 比较 240 个自然数）、`e8RootSet_card = 240`（`Finset`）、
+  `e8RootSet_power_sums`（`Finset` 形式的三条幂和）。
+  **未做 / 不在 Lean 内的数学前提**（docstring 已写明）：(i) `Tr_248 F^k = Σ_α (α·x)^k`，即
+  "伴随表示的 248 个权 = 240 条根 + 8 个零权，在 Cartan 元 `F = diag(x)` 上求值"；(ii) 要把
+  恒等式从 Cartan 子代数推广到整个 e₈ 需要 Chevalley 限制定理（math-sources §44.4，最弱一环）；
+  (iii) "这 240 个向量就是 E₈ 的根"在此是**定义**（Humphreys 的表），不是李代数定理；
+  (iv) 根表的**完备性**（"L 中所有长度² = 2 的向量都在表里"）未证，只证了 `⊆` 方向（normSq）。
+  建议图接线：**不要**把 `lean_decl` 直接挂到 `math.e8-adjoint-trace-identities`（该卡陈述的是
+  e₈ 上的伴随迹，比 Lean 证的宽）；应新建 `math.e8-root-system-power-sums`（formalized，
+  `lean_decl: StringFormal.Math.E8.e8_trace_identities`），再给 `math.e8-adjoint-trace-identities`
+  加一条 `--via-root-power-sums` 推导，依赖新卡 + "伴随权 = 根 ∪ 零权"（待建）+ Chevalley 限制
+  （待建）。这条推导比现有 `--via-casimir-structure`（physical-argument）强：系数来历有了。
+  Humphreys Table 1 的次数表 `2, 8, 12, 14, 18, 20, 24, 30` 在此路线中**不需要**。
 
 ## Virasoro
 
@@ -295,7 +324,9 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     `gram_level_one_three` / `gram_level_two_three`。
     ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
     与「level-3 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`（均对具体向量，非基）。
+  - **level 4**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelFour.lean`）：
+    5×5 Gram 矩阵与 `N = 4` Kac 行列式，详见下面 `kac-determinant` 条的 **N = 4 已完成**。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`，`N = 4`（5×5，含与 Kac 乘积形的等同）已在 `ShapovalovLevelFour.lean`（均对具体向量，非基）。
   - **常数 α_N 的正确形状（2026-09-11，formalizer 用 CAS 独立核对，未形式化）**：
     `worldsheet.kac-determinant` 卡上悬而未决的 α_N，在本仓库这组 PBW 型基下满足
 
@@ -308,14 +339,41 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     用 p(N−rs) 当指数会给 N=2 → 64、N=3 → 36864，与实际行列式**不符**。
     ⇒ α_N > 0 在 N ≤ 4 上是**已核对的事实**（每个因子都是正整数），
     但一般 N 的正性仍只是这个乘积公式的推论，而该公式本身未形式化也未在已核实来源里逐字找到。
-  - **N = 4 的下一步目标**（CAS 已给出、尚未形式化）：基 {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}，
+  - **N = 4 已完成**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelFour.lean`，
+    无 sorry，60 条声明 `check_axioms` 全 `ok`）：基
+    {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}（p(4) = 5），15 个独立 Gram 元：
+
+        ⟨L₋₄v,L₋₄v⟩ = 8h+5c    ⟨L₋₄v,L₋₃L₋₁v⟩ = 14h    ⟨L₋₄v,L₋₂²v⟩ = 24h+3c
+        ⟨L₋₄v,L₋₂L₋₁²v⟩ = 36h    ⟨L₋₄v,L₋₁⁴v⟩ = 120h
+        ⟨L₋₃L₋₁v,L₋₃L₋₁v⟩ = 4ch+12h²+12h    ⟨L₋₃L₋₁v,L₋₂²v⟩ = 30h
+        ⟨L₋₃L₋₁v,L₋₂L₋₁²v⟩ = 40h²+20h    ⟨L₋₃L₋₁v,L₋₁⁴v⟩ = 192h²+48h
+        ⟨L₋₂²v,L₋₂²v⟩ = c²/2+8ch+4c+32h²+32h    ⟨L₋₂²v,L₋₂L₋₁²v⟩ = 6ch+48h²+48h
+        ⟨L₋₂²v,L₋₁⁴v⟩ = 216h²+144h    ⟨L₋₂L₋₁²v,L₋₂L₋₁²v⟩ = 4ch²+2ch+32h³+116h²+32h
+        ⟨L₋₂L₋₁²v,L₋₁⁴v⟩ = 288h³+336h²+96h    ⟨L₋₁⁴v,L₋₁⁴v⟩ = 384h⁴+1152h³+1056h²+288h
+
+    `gram_level_four_22_22` 是唯一带分数系数的元（1/2 写作 `centralTerm R 2`；
+    另有无分母形式 `two_mul_gram_level_four_22_22`）。5×5 行列式
+    `gram_level_four_det`（`Matrix.det !![…]`）：
 
         det₄ = 384 h³ (8h + c − 1) (16h² + 2h(c−5) + c)² (3h² + h(c−7) + c + 2)
                    (16h² + 10ch − 82h + 15c + 66),
 
-    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根），
+    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根，首次出现），
     末因子 = 16(h − h₁₄)(h − h₄₁)（h₁₄+h₄₁ = (41−5c)/8，h₁₄h₄₁ = (66+15c)/16）。
-    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合。
+    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合；
+    `gram_level_four_det_eq_kac` 把它写成
+
+        det₄ = 37748736 (h−h₁₁)³ ((h−h₁₂)(h−h₂₁))² (h−h₁₃)(h−h₃₁) (h−h₂₂) (h−h₁₄)(h−h₄₁),
+
+    Kac 根仍只经对称函数进入（新增假设：`8h₂₂ = 1−c`、`8(h₁₄+h₄₁) = 41−5c`、
+    `16h₁₄h₄₁ = 15c+66`），与 √((c−1)(c−25)) 的分支约定无关。
+    辅助引理 `kac_factor_rs_two_two` / `kac_factor_rs_four`；
+    `kac_level_four_at_c_one` 是 c = 1 处的退化核对：
+    det₄ = 9216 h⁴ (4h−1)⁴ (h−1)² (4h−9)²（h₂₂ 在 c=1 处并到 h₁₁ = 0，故 h 的重数升到 4）。
+    另有 `desc4/desc31/desc22/desc211/desc1111_mem_levelSpan` 与正交性实例
+    `gram_level_three_four`。
+    ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
+    与「level-4 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2/3。
 
 ## 无鬼定理岛
 
@@ -793,10 +851,52 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
   - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**前两步已做**（(5) 正交动量顶点算子对易、
     (5a) 同点乘积 `Fock.vertexProduct_eq_vertexOsc_add`），仍缺加权和 (5b)。
   - `A^ε_n` 的伴随未做（需 `vertexOsc` 的伴随，图节点 `worldsheet.vertex-operator-adjoint`）。
+  - `[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}`：**第一步已做**（正交动量顶点算子对易，见 (5)），
+    仍缺同点乘积 (5a) 与加权和 (5b)。
+  - ~~`A^ε_n` 的伴随未做~~：**已做**，见下一项 `vertex-adjoint`。
   - `x^μ` 只以 `towerShift`（即 `e^{i n k_0·x}`）的形式出现，Heisenberg 对易 `[x^μ,p^ν]` 未形式化；
     塔是建在**固定的** `a` 与 `b` 上，不是全动量空间。
   - 归一化 `2α' k_0·p = 1` 与 `k_0² = 0` 只作为显式假设 `dotVec η b a = 1` / `dotVec η b b = 0`
     出现；「存在类光 `k_0` 使 `k_0·p ≠ 0`」是关于实二次型的断言，在一般环上假，未（也不该）证。
+- [x] `vertex-adjoint`：顶点算子与 DDF 算子在 Fock/塔配对下的伴随 ——
+  `StringFormal/NoGhost/VertexAdjoint.lean`。对应图节点 `worldsheet.vertex-operator-adjoint`
+  与 `worldsheet.ddf-operators-adjoint`；补上 `VertexOperator.lean` 的缺口 (3) 与
+  `TowerPairing.lean` 的缺口 (2)。
+  - **两半各自的伴随**：`Fock.pairing_creaExp_left`（`Φ_j(b)^† = Ψ_j(-b)`）与
+    `Fock.pairing_vertexAnn_left`（`Ψ_L(b)^† = Φ_L(-b)`）。证明是两层归纳：
+    先对 `w` 归纳得真空矩阵元 `Fock.pairing_creaExp_one_left`
+    （`⟨Φ_j(b), w⟩ = coeff 0 (Ψ_j(-b) w)`，递推两边都来自
+    `annihilation_creaExp` 与 `vertexAnn_mul_X`，是**同一条**递推），
+    再对 `v` 归纳（这一层是平凡的，只用 `pairing_creation_left` 与
+    `annihilation_vertexAnn`）。
+  - **主定理** `Fock.pairing_vertexOsc_left`：`⟨V(b)_K v, w⟩ = ⟨v, V(-b)_{-K} w⟩`。
+  - **塔上** `Fock.towerPairing_towerVertex_left`：`(V^{(n)}_K)^† = V^{(-n)}_{-K}`
+    （零模半由 `towerPairing_towerShift_left` 承担，振子半由上一条；
+    `-(n b) = (-n) b` 把 Fock 层的动量反号吸收成 `n ↦ -n`）。
+  - **DDF 算子** `Fock.towerPairing_ddfOp_left`：`(A^ε_n)^† = A^ε_{-n}`。
+    用横向性 `dotVec η ε b = 0` 把伴随重新排回「模乘顶点算子」的次序
+    （`towerModeVec_mul_towerVertex_of_transverse`），再对局部有限和用
+    `ddfOp_apply` 取一个同时够大的窗口 `ddfWindow n v ∪ (ddfWindow (-n) w).image (-·)`。
+  - **两条数学结论（对图的建议，见报告）**：
+    1. **不需要 `b·b = 0`**。原以为把 `E_+E_-` 重排回 `E_-E_+` 会生成自缩并
+       `exp(Σ (b·b)/l ⋯)`。不会：正规序乘积 `E_-(b)E_+(b)` 的伴随是
+       `E_+(b)^†E_-(b)^† = E_-(-b)E_+(-b)`，**本来就是正规序的**。所以
+       `pairing_vertexOsc_left` 对任意 `b` 成立，图卡上的 `k_0² = 0` 假设可以去掉；
+       `pairing_vertexOsc_left_of_dotVec_zero` 只是它的平凡特例。
+       后果：`(A^ε_n)^† = A^ε_{-n}` **不依赖**类光条件。
+    2. **动量必须反号**。「双线性无共轭 ⟹ 系数不变 ⟹ 仍是同一个 `b`」是错的：
+       `E_-` 与 `E_+` 的指数**反号**（`creaExp` 用 `+η b`，`vertexSub` 用 `-b`），
+       所以 `α_m ↦ α_{-m}` 把 `E_-(b)` 送到 `E_+(-b)`。
+       审计引理 `Fock.add_self_eq_zero_of_pairing_vertexOsc_same_momentum`：
+       若同动量版本对某个 `b` 成立则 `2b = 0`（见证是 `K = 1`、`v = |0⟩`、
+       `w = α^μ_{-1}|0⟩`：左边 `b^μ`，右边 `-b^μ`）。
+       塔上看不见这一点，因为 `-(n k_0)` 就是 `(-n) k_0`。
+  - **公理登记**：上述 16 条声明（含辅助 `towerVertex_apply`、`Fock.vertexAnn_X`、
+    `Fock.pairing_one_left`）经
+    `lake env lean --run scripts/check_axioms.lean --import StringFormal.NoGhost.VertexAdjoint --all`
+    全部 `ok`，公理集只有 `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
+  - **仍缺**：形式仍是 `R`-双线性而非 Hermite，无正定性、无完备化；
+    伴随本身**不给** DDF 态的正模态——那还需要 `[A^i_m, A^j_n]`（(5a)(5b)，见上一项）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
