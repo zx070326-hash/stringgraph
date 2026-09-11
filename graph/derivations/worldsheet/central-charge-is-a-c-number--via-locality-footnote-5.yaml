@@ -1,0 +1,63 @@
+id: worldsheet.central-charge-is-a-c-number--via-locality-footnote-5
+target: worldsheet.central-charge-is-a-c-number
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.traceless-holomorphic-energy-momentum
+    note: |
+      提供 T 是全纯的、权 (2,0)（原书 (2.4.1)–(2.4.4)）；(2.4.24) 的前两项 −2∂vT − v∂T 就是权 2 张量的变换律，
+      𝒞 只出现在多出来的 ∂³v 项里。
+  - id: worldsheet.ward-identity
+    note: |
+      提供「共形变换 δ_v 由 T 的围道积分生成」（原书 (2.3.5)/(2.3.11)，§2.4 (2.4.11)–(2.4.12) 用于 T·𝒜）。
+      步骤 (a) 的「两次这种变换的对易子」就是用它把 [δ_{v₁}, δ_{v₂}] 作用在 T 上展开；原书只说 "one can show"。
+      ⚠ 该卡自己声明 i 因子约定未定；本推导只用「对易子里 ∂³v 项的系数与 𝒞 的导数成比例」这一结构。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, p.48，(2.4.24) 下方正文（无式号）：「Further, by considering the commutator of two such transformations one can show that ∂_a c = 0, and it is a general result in quantum field theory that an operator that is independent of position must be a c-number.⁵」；脚注 5（p.48）：「The argument is this. Suppose that 𝒜(σ) is independent of position, and consider its equal time commutator with any other local operator ℬ(σ′). These commute at spacelike separation, by locality. Since 𝒜(σ) is actually independent of position it also commutes at zero separation. Therefore 𝒜(σ) commutes with all local operators, and so must be a c-number.」"
+    note: |
+      【L1，researcher 第十一轮（2026-09-11），polchinski-1998-v1.md §17.1–§17.2，印刷 p.48 页图逐字】
+      正文句与脚注 5 全文均逐字转录。原书对步骤 (a) 只有 "one can show"，不展示对易子的计算；
+      步骤 (b) 是脚注 5 的四句话。pp.46–49 无引文、无 "unitary"、无 "vacuum"（§17.6）。
+summary: |
+  两步，都在平坦世界面的 CFT 内部完成，不涉及弯曲度规或 Weyl 反常。
+
+  (a) **∂_a 𝒞 = 0**：设 (2.4.24) 中的 𝒞 是某个局域算子。对两个共形变换 δ_{v₁}、δ_{v₂}，
+      用 Ward 恒等式把对易子 [δ_{v₁}, δ_{v₂}] 作用在 T 上展开：一方面它必须等于参数为
+      v₁∂v₂ − v₂∂v₁ 的单个共形变换（共形变换的李代数封闭），其反常项是 −(𝒞/12)∂³(v₁∂v₂ − v₂∂v₁)；
+      另一方面逐次作用得到的反常项里还会出现 𝒞 被 δ_v 变换而产生的 ∂𝒞 项。两者相等对任意 v₁, v₂ 成立，
+      迫使 ∂𝒞 = 0。原书只写 "by considering the commutator of two such transformations one can show that ∂_a c = 0"，
+      **不展示这一计算**；上面是本图对这句话的复述骨架。
+
+  (b) **与位置无关的局域算子是 c-数**（脚注 5，逐字见 sources）：设 𝒜(σ) 与位置无关。取任意局域算子 ℬ(σ′)，
+      考虑等时对易子：类空分离时两者对易（局域性）；𝒜 与位置无关，故零间隔时也对易；
+      于是 𝒜 与一切局域算子对易，因此是 c-数。
+
+  (a)+(b)：𝒞 = c · 1，c 是数。这就是目标卡。
+gaps:
+  - |
+    **步骤 (a) 原书只有 "one can show"**：对易子的计算不在书内；summary 给的是本图的复述骨架
+    （docs/STATUS_LEVELS.md「断言 + 骨架」档位），未经 reviewer 独立复核，且整体符号与 i 因子按
+    worldsheet.ward-identity 的未定约定处理。
+  - |
+    **步骤 (b) 是典型的物理学家论证**（researcher §17.2）：用了「等时对易子」「类空分离对易（局域性）」
+    「与一切局域算符对易 ⇒ c-数」，**不讨论算符定义域，也不讨论最后一步需要何种不可约性/完备性假设**
+    （数学上「与所有局域算子对易 ⇒ 正比于恒等」是 Schur 型引理，要求算子代数不可约或真空循环等前提，
+    原书一概不提）。这是本推导封顶在 physical-argument 的主因。
+  - |
+    **「局域性 = 类空分离处局域算子对易」在本图没有节点**：它是脚注 5 的输入，本图没有一张
+    「世界面 QFT 微观因果性」的卡可挂，故不挂边、记在此处。形式分布层面的对应物是
+    math.formal-distribution-locality（(z−w)^N[A(z),B(w)] = 0），但那是形式代数陈述，不是等时对易子的类空消失。
+  - |
+    **围道 + OPE 路线的既定缺口**（lead 2026-09-10 裁决）：步骤 (a) 经 Ward 恒等式与 OPE，
+    其收敛性与围道变形的合法性在来源中未被证明。
+notes: |
+  由 curator-small-backlog-5 于 2026-09-11 建立。
+  **本推导与 --via-schwinger-term-section-3-4 是两条独立论证**（researcher §12.1、§17.2 反复强调不要合并）：
+  本条在 §2.4 平坦世界面 CFT 内部完成；那条在 §3.4 用弯曲度规上的 Weyl 反常与 Wess–Zumino 相容性。
+  两条的结论对象经 (3.4.13)–(3.4.15) 认同。
+
+  **原书的措辞方向**：p.48 (2.4.24) 上方已写 "with c a constant known as the central charge"，
+  即先命名为常数、再在下方补论证；本推导把这段补论证立成推导。
+author: curator-small-backlog-5
+created: "2026-09-11"

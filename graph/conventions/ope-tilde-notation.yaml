@@ -41,6 +41,17 @@ sources:
       见 literature/extractions/polchinski-1998-v1.md §12.9 与 §12.10 表 B 第 5 项。
 notes: |
   由 curator 于 2026-09-11（curator-v1-locs）按 §12.10 表 B 第 5 项新建。
+
+  **★ 第二层约定（2026-09-11 补，curator-small-backlog-5，依 researcher polchinski-1998-v1.md §17.3 第 2 条，
+  印刷 p.48 脚注 4 页图 L1 逐字）**：Notation 页只说 `∼` 是「equal up to nonsingular terms」；
+  原书 §2.4 p.48 脚注 4 另给一条 Notation 页没写的默认：
+  「⁴ Unless otherwise stated OPEs hold only at *nonzero* separation, ignoring possible delta functions. For our
+  applications the latter will not matter. Occasionally it is useful to include the delta functions, but in general
+  these depend partly on definitions so one must be careful.」
+  即 **`∼` 还默认略去接触项 / delta 函数**，OPE 只在非零间隔成立。这对形式化直接有影响：
+  顶点代数文献的 OPE（math.locality-ope-equivalences-v2 的 delta 分解）恰恰把 δ 函数项当作主要对象，
+  而本书的 `∼` 把它们丢掉；两种写法的换算不只是「加正规序项」，还要补回接触项。
+  按原则 1 本卡 definition 文本不改，事实记于此；日后若建 canonical: false 的兄弟节点（见下），应把这一层写进去。
   建立动机：本图大量节点的陈述文本直接抄了原书带 `∼` 的 OPE
   （worldsheet.tt-ope-central-charge、worldsheet.primary-field-v2、
   worldsheet.brst-current-primary-iff-total-central-charge-zero 等），

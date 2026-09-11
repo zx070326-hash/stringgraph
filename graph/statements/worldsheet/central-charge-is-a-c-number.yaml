@@ -1,0 +1,70 @@
+id: worldsheet.central-charge-is-a-c-number
+kind: proposition
+title: 中心荷是 c-数：T 的变换律 (2.4.24) 里的反常系数 c 与位置无关，且与位置无关的局域算子必是 c-数
+statement: |
+  设 T(z) 是二维共形场论的全纯能动张量（worldsheet.traceless-holomorphic-energy-momentum），
+  它生成共形变换 δz = εv(z)（worldsheet.ward-identity），且其无穷小变换取 Polchinski (2.4.24) 的形式
+    ε^{-1} δT(z) = −(𝒞/12) ∂³_z v − 2 ∂_z v  T − v ∂_z T ,
+  其中反常系数 𝒞 **事先只假定是某个局域算子**（可能依赖世界面位置 σ、可能不是恒等算子的倍数）。
+  则：
+    (a) ∂_a 𝒞 = 0，即 𝒞 与世界面位置无关；
+    (b) 与位置无关的局域算子必是 c-数（恒等算子的数值倍）；
+  合起来：**𝒞 = c · 1，c 是一个数**。这个数即 worldsheet.tt-ope-central-charge-v2 所定义的中心荷 c。
+
+  **本卡不断言什么**：不断言 (2.4.24) 是 T 的最一般变换律（那是 worldsheet.tt-ope-pole-structure-from-conformal-invariance
+  的前提，原书 p.48 给出的理由是「线性于 v + 与 TT OPE 的对称性相容 + 三个下 z 指标（刚性标度与转动不变性）」，
+  见 notes）；不断言 c 的值；不断言 c = c̃（原书 p.48 (2.4.27) 下方明写一般 CFT 里 T̃ 可以带
+  「possibly with a different central charge c̃」）。
+uses_conventions:
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.4, p.48，(2.4.24) 下方正文（无式号）+ 脚注 5：「Further, by considering the commutator of two such transformations one can show that ∂_a c = 0, and it is a general result in quantum field theory that an operator that is independent of position must be a c-number.⁵」；脚注 5 逐字见 --via-locality-footnote-5"
+    note: |
+      【L1，researcher 第十一轮（2026-09-11），polchinski-1998-v1.md §17.1–§17.2，印刷 p.48 页图逐字】
+      原书把「c 是常数」分成两步：(a) 两次变换的对易子 ⇒ ∂_a c = 0（原书只说 "one can show"，不展示计算）；
+      (b) 脚注 5 的量子场论一般论证（等时对易子 + 类空分离对易 + 「因此与一切局域算符对易 ⇒ c-数」）。
+      同页 (2.4.24) 上方逐字「with c a constant known as the central charge」——即 (2.4.24) 写下时 c 已被称为常数，
+      p.48 这一段是事后补的论证。
+  - ref: polchinski-1998-v1
+    loc: "§3.4, eq. (3.4.31), p.96–97（ansatz T^a_a(σ) = −(𝒞(σ)/12)R(σ)，即「假设中心荷可以是局域算子」）与其后 p.97 散文（结论「𝒞(σ) 只能是数常数 c」，无式号）"
+    note: |
+      【L1 式号，polchinski-1998-v1.md §12.2 表「E51/E52 §3.4 全部式号落实」】
+      ⚠ 细化：(3.4.31) 是 ansatz 而不是结论；「𝒞 只能是常数」是紧随其后的散文。
+      这是同一命题的第二条独立论证（Weyl 反常的 Wess–Zumino 相容性），见 --via-schwinger-term-section-3-4。
+      §12.1 与 §17.2 都强调：**两条论证不要合并**。
+tags: [cft, central-charge, energy-momentum-tensor, locality, c-number, conformal-transformation]
+notes: |
+  由 curator-small-backlog-5 于 2026-09-11 新建（researcher §17.5 建议 2；tt-ope-central-charge-v2 与
+  weyl-anomaly-central-charge-constant 两卡的 sources note 都写着「§2.4 这条论证本图无节点，建议新建」）。
+
+  **两条独立推导挂同一张卡**：
+    · --via-locality-footnote-5：§2.4 p.48 的 CFT 内部论证（两次变换的对易子 + 脚注 5 的局域性论证），
+      不涉及弯曲世界面、不涉及 Weyl 反常；
+    · --via-schwinger-term-section-3-4：§3.4 (3.4.31) 的 Wess–Zumino 相容性论证，经 (3.4.13)–(3.4.15)
+      把 Weyl 反常系数与 (2.4.24) 的 𝒞 认同（原书 (3.4.13) 处明写 "we use first the conformal transformation (2.4.24)"）。
+  两条都是 physical-argument（前者用了「与一切局域算符对易 ⇒ c-数」而不谈算符定义域/不可约性，
+  后者施加在未定义的泛函 ln Z[g] 上），工具取最强者，结果仍是 physical-argument。
+
+  **原书为何认为反常项只能是 ∂³v（记在这里，供 tt-ope-pole-structure 那张卡引用）**：p.48 (2.4.24) 正下方逐字
+  「The transformation (2.4.24) is the most general form that is linear in v, is consistent with the symmetry of the
+  T T OPE, and has three lower z indices as required by rigid scale and rotation invariance. The scale, rotation, and
+  translation symmetries determine the coefficients of the second and third terms.」
+  ——即 (i) 线性于 v，(ii) 与 TT OPE 的对称性相容，(iii) 三个下 z 指标（δT 权 2、v 权 −1，差三个导数），
+  (iv) 第二、三项的系数由标度/转动/平移对称性定出。**原书这一段既不用幺正性/正定性，也不用真空唯一性**
+  （researcher §17.6 逐页 negative evidence：pp.46–49 无 "unitary"、无 "vacuum"、无 "positivity"）。
+  −c/12 这个系数本身在此处不被论证，只是把未定常数命名为 c。
+  ⚠ 「the most general form」在原书没有证明，只是断言 + 三条约束的罗列（§17.7 Q17.1）；
+  若要为它立 rigorous 卡，数学侧的对应物是 H²(Witt) = ℂ / Virasoro 是万有中心扩张
+  （math-sources.md §25 Feldvoss–Siciliano Lemma 2.6，本图 worldsheet.virasoro-unique-central-extension 一带）。
+
+  **c ≠ c̃ 是允许的**：p.48 (2.4.27) 下方逐字「The corresponding forms hold for T̃, possibly with a different central
+  charge c̃ in the general CFT.」——本卡只说 c 是数，不说 c = c̃；「c = c̃ 才无引力反常」是 §3.4 p.95 的另一条断言
+  （§12.2），本图另计。
+
+  **与 worldsheet.weyl-anomaly-central-charge-constant 的分工**：那张卡的 statement 是 Wess–Zumino 路线本身
+  （a₁…a₅ 参数化、2a₁ = a₄、∂^a C = 0），结论对象是 Weyl 反常系数 C(σ)；本卡的结论对象是 (2.4.24) 里的 𝒞，
+  两者经 (3.4.15) c = −12a₁ 认同。本卡的第二条推导就是把那张卡的结论搬到 (2.4.24) 上，故依赖它而不重复它。
+author: curator-small-backlog-5
+created: "2026-09-11"

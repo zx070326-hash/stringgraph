@@ -27,6 +27,12 @@ depends_on:
     note: |
       提供 OPE 本身（奇异项有限多、系数为局域算子）及其收敛域假定（原书 §2.2）。
       围道积分与 OPE 逐项交换的合法性归到这里（gaps 第 1 条）。
+  - id: worldsheet.central-charge-is-a-c-number
+    note: |
+      提供前提 (2.4.24) 里「c 是常数、且是 c-数（不含算子）」这一半：∂_a c = 0 由两次共形变换的对易子给出，
+      「与位置无关的局域算子必是 c-数」由 p.48 脚注 5 给出。本推导的 (iii)「四阶极点系数是 c-数」与
+      (ii) 的交叉核对（A_4 = c/2 为常数 ⇒ A_3 = 0）都用到它。
+      来源位置：原书 p.48 (2.4.24) 下方正文 + 脚注 5，与本推导 sources 第一条同页（2026-09-11 加边，非 inferred）。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.4, eq. (2.4.24) → (2.4.25), p.48（一般 CFT：由 T 的变换律写出 TT OPE）；同一论证在自由标量情形是 (2.4.22) ⇄ (2.4.23), p.47–48"
@@ -60,11 +66,17 @@ summary: |
   这就是 v1 卡「三阶极点因 T 的对称性而缺席」的含义：它是 (iii) + 玻色对称的推论，
   与「(2.4.24) 无 ∂²v 项」互相印证。
 gaps:
-  - "**前提 (2.4.24) 的一般性在来源中只是给出、未在此处论证**：原书 p.48 把它作为一般 CFT 中 T 的
-     变换律写下（c 为常数的论证在脚注 5：∂_a c = 0 + 「与位置无关的算子必为 c-数」），
-     但「反常项为何只有 ∂³v 一项、为何不含算子」的一般性论证抽取记录未转录。
-     本推导据此把 (2.4.24) 记为目标卡的**前提**而非结论。标准的补全论证是权计数 + 幺正性 +
-     真空唯一性（见目标卡 notes 末段），需要额外前提，本图未立卡。"
+  - "**前提 (2.4.24) 的一般性在来源中只是断言、未证明**（2026-09-11 依 researcher §17.1 改写，印刷 p.48 页图 L1）：
+     原书 p.48 (2.4.24) 正下方逐字「The transformation (2.4.24) is the most general form that is linear in v,
+     is consistent with the symmetry of the T T OPE, and has three lower z indices as required by rigid scale and
+     rotation invariance. The scale, rotation, and translation symmetries determine the coefficients of the second
+     and third terms.」——即反常项只能是 ∂³v 的理由是 (i) 线性于 v、(ii) 与 TT OPE 的对称性相容、
+     (iii) 三个下 z 指标（刚性标度+转动不变性；δT 权 2、v 权 −1 ⇒ 差三个导数）；(iv) 第二、三项系数由
+     标度/转动/平移对称性定出。**原书既不用幺正性/正定性，也不用真空唯一性**（pp.46–49 无 unitary / vacuum /
+     positivity，§17.6）。此前本条写「标准的补全论证是权计数 + 幺正性 + 真空唯一性」，那是别的教材（BPZ 路线）的
+     说法，不是 Polchinski 的，已撤。「the most general form」在原书仍只是断言 + 三条约束的罗列（§17.7 Q17.1），
+     故 (2.4.24) 在本推导仍是**前提**而非结论。「c 是常数且是 c-数」这一半现由
+     worldsheet.central-charge-is-a-c-number 承载（已加边）。"
   - "**围道积分与 OPE 逐项交换、Ward 恒等式的围道形式**：合法性依赖 OPE 在环域内收敛
      （worldsheet.operator-product-expansion 所断言但未被证明的有限收敛半径），
      以及 worldsheet.ward-identity 本身是路径积分论证（其有效状态为 physical-argument）。
