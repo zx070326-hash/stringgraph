@@ -250,15 +250,18 @@ gaps:
     本推导依赖的定义卡 worldsheet.ddf-operators-v6 的四条常设假设 (η)(N)(S)(T) **不蕴含**它：
     formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 整数见证
     η = diag(−1,+1,+1)、k_0 = (1,1,0)、k = (0,1,1)、ε = e_2 机检满足四条常设假设与 ε·ε = 1
-    （`noghost_hypotheses_satisfiable_int`），却有 ε·k = 1 ≠ 0；
+    （`noghost_hypotheses_satisfiable_int`），而 ε·k = 1 ≠ 0 是一行手算（无 Lean 声明；reviewer-batch30 复核）；
     此时 Lean 的 `ddfOp_neg_one_apply_towerVacuum` 逐字说 A^ε_{−1}|0;k⟩ 会多出 (ε·k)Φ_1|0;k−k_0⟩。
     **文献为什么看不出来**：GSW / Goddard 2008 默认把 ε_i 取在 span{k_0, p} 的正交补里
     （k_0² = 0 且 k_0·p ≠ 0 ⇒ 该二维平面非退化），于是 (T′) 自动成立；
     本推导（和 v6 的【横向标架的特例】一段）只写了正交归一 + 横向，比那个标架宽。
-    ⚠ **对本推导的实际影响**：第 (1b) 步「A^i_{−n} 生成的态的 Gram 矩阵就是 24 个横向振子的
-    Fock Gram」隐含地在用「DDF 态 = 横向振子态」，那正是领头项给的识别，故 (T′) 是
-    本推导的**未写出前提**。它不改变本推导的 status（仍是 rigorous，与文献论证同级），
-    但回译审计时必须把它读进「固定横向标架」那一句里。
+    ⚠ **对本推导的实际影响（2026-09-11 reviewer-batch30 #3 订正，lead 落地）**：(T′) **不是**本推导
+    第 (1b) 步的未写出前提。Lean 的 `ddf_gram_diagonal`（DDFGram.lean）前件里没有 ε·k = 0，
+    H^⊥ 的 Gram 正定不需要 (T′)；文献的特征标计数路线也不用它。(T′) 只是 Lean 的 N = 1
+    「领头项识别」路线（ddf-spans-physical-states-level-one）的前提。并且在 a² = 2
+    （无鬼定理 a₀ = 1）时 (T′) 可由 (C)+(N)(S) 消去（reviewer-batch30 手算：
+    e = Σc_i w_i + c₀v − (Σc_iλ_i)b，DDF 态物理 ⇒ Σc_iλ_i = c₀(a²−2) = 0；未形式化）。
+    本推导 status 不变（rigorous）；回译审计不必把 (T′) 读进「固定横向标架」那一句。
     完整记账见 worldsheet.ddf-operators-v6 的 notes【本卡缺一条假设的登记】段；
     把 (T′) 写进前提的卡是 worldsheet.ddf-spans-physical-states-level-one。
 notes: |

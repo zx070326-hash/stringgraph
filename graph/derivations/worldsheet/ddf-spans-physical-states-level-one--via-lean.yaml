@@ -44,17 +44,6 @@ depends_on:
       `Fock.Lop_neg_one_apply_one_eq_polState`（L_{−1}|0;p⟩ = polState(p)，即纵向偏振恰是该层动量），
       这正是「伪态方向 = 动量方向」这句话的机检形式。
       ⚠ 本推导**不**使用 Virasoro 括号或中心荷 c = D。
-  - id: worldsheet.gt-longitudinal-k-algebra
-    inferred: false
-    note: |
-      **接口边，非机检环节**：供给本卡在文献侧的识别——本卡是 Goddard 2008 §6 (6.4)
-      「physical = DDF + null」在 N = 1 的增量，而 (6.2)(6.3)(6.4) 所属的 K_n 框架由该卡承载
-      （该卡【不断言】(a) 逐字把 (6.2) 的刻画留给 (B-26)）。
-      桥层声明：`StringFormal.NoGhost.{kOp, towerKerK, ddfCharacterization, ddfSpan_le_ddfCharacterization}`
-      （Longitudinal.lean；LightCone.lean import 它）。
-      ⚠ `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 的机检证明链**不经过 K_n 的任何声明**：
-      它走的是 (6.4) 那条路（偏振分解），不是 (6.2) 那条路（K 条件配平）。
-      故本边只作识别，不承担论证步骤。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/LightCone.lean :: StringFormal.NoGhost.towerPhys_bigrade_one_le_ddfSpan_sup_spurious（目标声明）；证明中调用 StringFormal.NoGhost.{mem_towerBigrade, single_mem_towerPhysSubmodule_iff, single_polState_vec_mem_ddfSpan, ddfOp_neg_one_apply_towerVacuum, towerModeVec_neg_one_apply_single_vacuum, towerLop_neg_one_apply_single_vacuum_eq, ddfOp_towerVacuum_mem_ddfSpan, mem_ddfSpan_of_list} 与 StringFormal.NoGhost.Fock.{mem_physSubmodule_inf_levelSubmodule_one_iff, polState_add, polState_smul, polState_sum, Lop_neg_one_apply_one_eq_polState}；见证版 StringFormal.NoGhost.witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious"
@@ -137,10 +126,11 @@ notes: |
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
   合并前应由 lead 跑 `uv run stringgraph check-axioms`。
 
-  **七条依赖全部 formalized**，故目标卡 effective = formalized。
-  其中 worldsheet.gt-longitudinal-k-algebra 那条按 docs/STATUS_LEVELS.md 的
-  「接口边（2026-09-12 裁决）」标注：它供给文献侧的识别（本卡是 (6.4) 的 N = 1 增量），
-  但不在机检证明链上，note 已写明桥层声明。
+  **六条依赖全部 formalized**，故目标卡 effective = formalized。
+  （2026-09-11 reviewer-batch30 CONFIRMED #1，lead 落地：原第七条边 worldsheet.gt-longitudinal-k-algebra
+  已删——目标陈述不点名 K_n（K_n 只在【不断言】(e) 出现），机检链不经过 K_n 的任何声明，
+  该边只供给「原书语境」，按 docs/STATUS_LEVELS.md 接口边裁决不得存在；文献侧识别由
+  sources 里 goddard-2008 (6.4) 承担。）
 
   **本推导对 worldsheet.no-ghost-theorem-v4 的影响：没有。**
   那条卡的瓶颈是 (B-26)，而 (B-26) 从 N = 2 起才出现。本推导关闭的是
