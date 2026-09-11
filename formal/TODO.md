@@ -252,6 +252,11 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     （`linearIndependent_descFamily2_of_pos`）。**`c` 无上界限制**：`c > 25` 时 Kac 二次式确有实根，
     但两根之和 `(5-c)/8 < 0`、积 `c/16 > 0`，故两根皆负，与 `h > 0` 无关；闭区域 `h > 0, c ≥ 1`
     上唯一零点是 `c = 1, h = 1/4`（`kac_level_two_at_c_one`：行列式 `= 2h(4h-1)²`）。
+    该零点处的退化方向已给出：`desc2_sub_desc11_orthogonal_levelSpan_two`——`c = 1, h = 1/4` 时
+    level-2 Gram 矩阵三个元全等于 `3/2`，故 `(L₋₂ − L₋₁²)|c,h⟩` 与整个 `V₂` 正交
+    （即一般奇异向量 `(L₋₂ − 3/(2(2h+1)) L₋₁²)|c,h⟩` 在 `h = 1/4` 的系数恰为 1）。
+    **由此也说明 Gram 判据不可逆**：`det = 0` **不**蕴含向量线性相关（按 PBW 它们对所有 `(c,h)`
+    都独立），只说明形式在其张成上退化。
     **仍未做**：真正的 (b)。generic 版**不是** PBW：它假设存在归一化逆变型（等价于 `hwv ≠ 0`，
     见 `exists_isContravariant_iff_hwv_ne_zero`），而这正是 (b) 的推论；且在 Kac 零点处失效
     （那里向量可能仍独立，只是形式退化）。所以这是 `dim V_N = p(N)` 的**条件**、**一般点**版本。
