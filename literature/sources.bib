@@ -3737,3 +3737,218 @@
             ⚠ **Mathlib 的 `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 不含本变换**（§48.4，L1 源文件全读）
             ⇒ `math.dedekind-eta-s-transformation` **不得标 formalized**。}
 }
+
+@article{polchinski-1995-dbranes,
+  author        = {Polchinski, Joseph},
+  title         = {Dirichlet-Branes and {R}amond-{R}amond Charges},
+  journal       = {Physical Review Letters},
+  volume        = {75},
+  number        = {26},
+  pages         = {4724--4727},
+  year          = {1995},
+  doi           = {10.1103/PhysRevLett.75.4724},
+  eprint        = {hep-th/9510017},
+  archivePrefix = {arXiv},
+  note    = {由 researcher 于 2026-09-11 登记（应 lead 2026-09-11 的追加派工）。
+            **相关章节 L1 页图核实**：抽取记录 extractions/polchinski-1998-v2-ch13.md **§6.4**（读 pp.4-8，
+            即 (12)-(20) 全部到手）。获取：`https://arxiv.org/pdf/hep-th/9510017` → 落盘 136 KB / 11 页 →
+            `Read(pages=5-9)`。⚠ **读的是 v3**（PDF 内嵌链接自陈 `hep-th/9510017v3`）；**式号写死 v3**。
+            **未读**：pp.1-3、pp.9-11（含参考文献）。期刊发表版未核对，**页码 4724--4727 与 DOI 为 L2**。
+            **★★ 登记理由一（本项目实际用过的）：它是裁决 Polchinski 书 (13.3.12) 排印错误的**独立书外证据**。**
+            p.5 逐字（L1）：
+            `S = (alpha_p/2) int F*_{p+2}F_{p+2} + i mu_p int_branes A_{p+1}` **(12)**；
+            「For later convenience we have not chosen a normalization for `A_{p+1}`, so two constants
+            `alpha_p` and `mu_p` appear.」；`mu_p^2/alpha_p = 2 pi (4 pi^2 alpha')^{3-p}` **(13)**；
+            「Integrate the field strength `*F_{p+2}` on an `(8-p)`-sphere surrounding a `p`-brane;
+            **from the action (12) one finds total flux `Phi = mu_p/alpha_p`.**」**(14)**；
+            Dirac 量子化 `mu_p mu_{6-p}/alpha_p = 2 pi n` **(15)**；
+            「The charges (13) of the D-branes satisfy this with **minimum quantum `n = 1`**.」；
+            脚注 7 逐字：「It follows from `F_{p+2} = *F_{8-p}` that `alpha_p = alpha_{6-p}`.」
+            **桥接（抽取者的换算，两条独立校验均通过，见 ch13.md §6.4）**：书的归一化 = `alpha_p = 1/(2 kappa_10^2)`；
+            代入 (13) 复现书 **(13.3.7)**，代入 (15) 复现书 **(13.3.13)** ⇒ 通量 = 荷 **乘** `2 kappa_10^2`
+            ⇒ 书 (13.3.12) 印的 `mu_{6-p}/2 kappa_10^2` 是**分数线倒置的排印错误**
+            （Cambridge Core 2005 "with corrections" 版仍错；同型前例见 polchinski-1998-v1.md §14.3 的 (6.6.21)）。
+            **★ 登记理由二：它是「32 张 D9」这一现代表述的早期一手出处** ——
+            p.8 **(20)** `i(n-32) mu_9 int A_10` + 逐字「Thus, the equation of motion requires the group `SO(32)`」。
+            ⚠⚠ **但同篇 p.7 也写 "exactly 16 D-branes"** ⇒ **两种计数在 1995 年原文里就并存**，
+            与 polchinski-1998-v2 ch.13 的 16/32 张力（见 `-ch13.md#Q1`）同源，**本文不调和**。
+            ⇒ 引「32 张 D9」时必须同时写明 p.7 的 16。
+            ⚠⚠ **作者自承的未解矛盾（p.6 逐字，引用其荷归一化时必须带上）**：
+            「This is twice the value found in ref. [13] … **We have not succeeded in reconciling these
+            calculations**, but strongly expect that the RR charge is that required by string duality.」
+            ⇒ 本文的荷归一化 `status` 上限 `physical-argument`。}
+}
+
+@misc{kac-2017-lectures,
+  author        = {Kac, Victor G.},
+  title         = {Introduction to vertex algebras, {P}oisson vertex algebras, and integrable {H}amiltonian {PDE}},
+  year          = {2017},
+  eprint        = {1512.00821},
+  archivePrefix = {arXiv},
+  primaryClass  = {math-ph},
+  note    = {由 researcher 于 2026-09-11 登记，抽取记录 extractions/math-sources.md **§51.2**。
+            **相关章节 L1 全文读图**（读 pp. 1-4, 6-9, 18-20）。获取：`https://arxiv.org/pdf/1512.00821`
+            落盘 539.7 KB 后 `Read(pages=)`。**PDF 页 = 文章页**（无偏移）。
+            **版本必须写死 v2**：页边条纹逐字 `arXiv:1512.00821v2 [math-ph] 30 Jan 2017`。
+            来历（摘要 L1）：INdAM 集中研究期 "Perspectives in Lie Theory"，Centro De Giorgi, Pisa，
+            2014-12-09 -- 2015-02-28，Session 1 "Vertex algebras, W-algebras, and applications" 的 Lecture 1-6。
+            ⚠ **这是由学生记录、作者致谢并感谢修订的讲义，不是同行评议论文**
+            （记稿人：Vidas Regelskis (Lec. 1,6)、Tamas F. Gorbe (2)、Xiao He (3)、Biswajit Ransingh (4)、Laura Fedele (5,6)）。
+            **★★ 本条的唯一登记理由：它是本项目找到的唯一一个「超（费米）设定 + 带编号 + 免费可取 + 含证明」的
+            OPE-反对易子字典来源。**
+            **Remark 1.4「Super version」(1.16), p.6**：顶点超代数定义 + 逐字
+            `[a(z),b(w)] = a(z)b(w) - (-1)^{p(a)p(b)} b(w)a(z)` + Koszul-Quillen 规则 +
+            「It is a general convention to drop the adjective "super"」。
+            **⚠ 陷阱：Definition 1.1/1.3 正文里没有 parity（"Let V be a vector space"），(1.11) 的 locality 也不带符号；
+            超设定只在 Remark 1.4 里一次性声明，此后全文默认。引用本文的 `[,]` 必须同时引 Remark 1.4。**
+            **★ Remark 1.5, (1.32), p.7**：`[a_(m), b_(n)] = sum_{j>=0} C(m,j) (a_(j)b)_(m+n-j)`，
+            前提只有「`g` 是李（超）代数 + `a(z),b(z)` 局域」，**不需要顶点代数结构** ——
+            对 stringgraph 是门槛最低的一条路线。配 **(1.30)(1.31)** 与 **Theorem 1.2（Decomposition theorem）(1.25)(1.26)**。
+            **★ Corollary 3.2, (3.18)(3.19)(3.20), p.18**：`Lie_V ⊂ End V` 是 **Lie superalgebra** 的子代数，
+            (3.20) 即模式版对易子公式；`a,b` 同奇 ⇒ 左端是反对易子（Koszul-Quillen 代入，原文未写出该特例）。
+            **★ Proposition 3.1 (Borcherds identity), (3.21), p.18**：带显式 `(-1)^{p(a)p(b)}`，证明完整（四行）。
+            **⚠ 它是「两项 + delta 函数」形式，不是 borcherds-1986 Section 4 (v) / gebert-nicolai-1995 (2.36)
+            的三项纯模式（Jacobi）形式；等价但逐字不同，loc 不可互换。**
+            其余可用编号：**Example 1.3（自由玻色子）(1.33)-(1.36)**；
+            **Example 1.4（自由费米子）(1.37)-(1.41)**（`F = Λ[ξ₁,ξ₂,…]`，`p(ξ_i)=1̄`，
+            (1.39) `[φ_(m),φ_(n)] = δ_{m,-n-1}`，(1.40) `[φ(z),φ(w)] = δ(z,w)`，原文称 φ(z) 为 "the odd quantum field"
+            ⇒ 这两条括号是**反**对易子）；**Definition 1.3** 局域/顶点代数；
+            **Proposition 3.2 (Skewsymmetry) (3.24)** `a(z)b = (-1)^{p(a)p(b)} e^{zT}b(-z)a`；
+            **Proposition 3.3 (3.28)**；**Definition 3.2 (3.30)** 超设定下的 Virasoro `(m^3-m)c/12`；
+            **(3.32)(3.33)(3.34)**、**Proposition 3.5(c)** `Δ_{a_(n)b} = Δ_a + Δ_b - n - 1`；**λ-bracket (3.29)**；
+            **Theorem 2.1**（正则形式分布李（超）代数 ⇒ 泛顶点代数）。
+            **★ 归属线索（p.6，L1 逐字）**：「The Extension Theorem was proved in **[DSK06]**.
+            In **[Kac98]** a weaker version was given.」⇒ 作者本人把自己的书（kac-1998）定位为较弱版本。
+            **未读**：pp. 5, 10-17, 21-50（§2.2-§3.1 与 §4-§6）。特别是 **§2.3「Bakalov's formula and Dong's lemma」**
+            尚未与 schottenloher-2008 的 Lemma 10.11 对照。}
+}
+
+@book{ahlfors-sario-1960,
+  author    = {Ahlfors, Lars V. and Sario, Leo},
+  title     = {Riemann Surfaces},
+  publisher = {Princeton University Press},
+  address   = {Princeton, NJ},
+  series    = {Princeton Mathematical Series},
+  year      = {1960},
+  note    = {由 researcher 于 2026-09-11 登记，抽取记录 extractions/math-sources.md **§53**。
+            **正文完全未获取（内容等级 L0）。严禁写任何定理号/章节号。**
+            **书目数据的两条来源**：
+            (a) **gallier-xu-2013 的 References [1]（书 p.170，L1 逐字）**：
+                「Lars V. Ahlfors and Leo Sario. *Riemann Surfaces*. **Princeton Math. Series, No. 2**.
+                Princeton University Press, 1960.」
+            (b) OpenLibrary 检索（L2）：Lars Valerian Ahlfors / Leo Sario，*Riemann surfaces*，
+                Princeton University Press，first_publish_year **1960**，页数中位数 **398**；**series 字段为空**。
+            ⚠⚠ **丛书号存疑，本条刻意不写 `number`**：Gallier-Xu 印的是 "No. 2"，
+            但 Princeton Mathematical Series 第 2 卷不可能是 1960 年的书（该丛书 1960 年前后已到二十几号）。
+            **判为 Gallier-Xu 的排印错误的可能性高，但本项目没有第二来源可核**（OpenLibrary 不给 series）。
+            ⇒ **引用时只写 "Princeton Mathematical Series"，不写号；若必须写号，先取到书本身或 PUP 目录。**
+            **登记理由**：`gallier-xu-2013` 把紧曲面分类定理证明里的**两处关键步骤**外包给本书 ——
+            **Proposition 6.1（书 p.86）** 证明末逐字「The process of systematically replacing vertices by sequences
+            of edges is not hard but cumbersome. **It is given in Ahlfors and Sario [1].**」；
+            **Lemma 6.1（书 pp.92-95）** 证明首句逐字「**We use the same steps as in the proof given in
+            Ahlfors and Sario [1].**」（两条见 math-sources.md §49.1 / §49.3，L1 逐字）。
+            ⇒ **`math.classification-of-compact-surfaces` 一系节点若要走 `rigorous`，本书才是证明所在地，
+            Gallier-Xu 只是转述 + 简化。**
+            ⚠⚠ **本轮的关键否定结论（三处全查过）：Gallier-Xu 在 References [1]、Note F.9（书 p.169）
+            与上述两处证明引用中，**从不给本书的章号、节号或定理号**。**
+            它给的是本书自己的 **"Step 1"--"Step 6"** 标签（Note F.9 L1 逐字，见 math-sources.md §53.2），
+            以及对照组 Seifert-Threlfall 的 **Chapter VI, Section 38 / Section 40**。
+            ⇒ **图里 `loc` 目前只能写 "Steps 1-6 of the classification proof（Gallier-Xu [1] 转述，原书页码未知）"。**
+            ⚠ Note F.9 另给一条对归属有用的信息（L1）：Ahlfors-Sario 的证明**覆盖带边曲面**，
+            而 Seifert-Threlfall 先证无边、再在 Section 40 改造以处理带边。}
+}
+
+@article{gibbons-hull-1982,
+  author  = {Gibbons, G. W. and Hull, C. M.},
+  title   = {A {B}ogomolny Bound for General Relativity and Solitons in {$N=2$} Supergravity},
+  journal = {Physics Letters B},
+  volume  = {109},
+  number  = {3},
+  pages   = {190--194},
+  year    = {1982},
+  doi     = {10.1016/0370-2693(82)90751-1},
+  note    = {由 researcher 于 2026-09-11 登记，抽取记录 extractions/math-sources.md **§51**（登记段 §51.1）。
+            **正文未获取（内容等级 L0）；标题/卷/页/年/DOI/摘要 L1（INSPIRE 出版方记录）；
+            read_depth = abstract，不得升。**
+            ⚠⚠ **页码订正（本轮最实用的一条）**：sen-1995-bh-torus 的参考文献 [24] 把本文印作
+            「Phys. Lett. **B109 (1982) 109**」，**页码是错的**。真实页码 **190--194**。
+            证据：(a) INSPIRE `j Phys.Lett.B,109,190` 命中本文；(b) INSPIRE `j Phys.Lett.B,109,109`
+            **零命中**（2026-09-11 实测）。⇒ 图里引本文时**一律写 190--194**；若 note 要复述 Sen 的引用串，
+            必须注明「Sen 原文印作 109，系误印」。
+            报告号 `Print-82-0182 (CAMBRIDGE)`（INSPIRE），无 arXiv（1982 年）。
+            **摘要逐字（L1，INSPIRE）**：``We derive a lower bound for the mass of a space-time, in terms of
+            its electric and magnetic charges, which is the analogue of the Bogomolny bound for magnetic
+            monopoles. We give an almost complete characterization of space-times for which the bound is
+            attained, provide explicit multi-soliton solutions and describe how they fit into supermultiplets.''
+            **与图的关系**：sen-1995-bh-torus 把 BPS 界 `M^2 >= Q_R^2/2` **外包**给 [24,25]（本文 + Sen MPLA A8 (1993) 2023），
+            自己不证；arkani-hamed-2006 (AMNV) 的 (22)(23) 又转引 Sen。⇒ 本文是这条链**最上游的一手入口**。
+            ⚠ **摘要里没有 `M^2 >= Q_R^2/2` 这个具体形式**，只有「lower bound … in terms of its electric and
+            magnetic charges」；且背景是 **N=2 超引力**（不是杂化弦），**不含 `Q_L/Q_R` 的 22+6 划分**。
+            ⇒ 正文到手前**不得**把 `M^2 >= Q_R^2/2` 挂本 key；最多挂「存在 Bogomolny 型质量下界」。
+            ⚠ 摘要里的 "almost complete characterization" 是作者自陈的缺口，建卡时应保留。}
+}
+
+@article{terao-uehara-1986,
+  author  = {Terao, Haruhiko and Uehara, Shozo},
+  title   = {Covariant Second Quantization of Free Superstring},
+  journal = {Physics Letters B},
+  volume  = {168},
+  number  = {1--2},
+  pages   = {70--74},
+  year    = {1986},
+  doi     = {10.1016/0370-2693(86)91462-0},
+  note    = {由 researcher 于 2026-09-11 登记，抽取记录 extractions/math-sources.md **§51**（登记段 §51.1）。
+            **正文未获取（内容等级 L0）；标题/卷/页/年/DOI/摘要 L1（INSPIRE）；read_depth = abstract，不得升。**
+            报告号 `RRK-85-32`；作者单位 Kyoto U.（Terao）/ Hiroshima U. RITP（Uehara）。
+            **摘要逐字（L1，INSPIRE）**：``We give BRS charges of the Neveu-Schwarz-Ramond model. Nilpotency of
+            the BRS charges determines critical dimension and leading zero-intercepts simultaneously. Using the
+            BRS charges we present a covariantly second-quantized free open superstring action. The massless
+            sector is shown to be a supersymmetric Yang-Mills theory with covariant gauge-fixing term and the
+            corresponding Faddeev-Popov ghost term.''
+            **与图的关系**：lian-zuckerman-1989 的 `Prop 1.7(ii)`（「Q^2 = 0 iff D = 10」）把证明**外包**给其 [13,15]，
+            其中 **[15] = 本文**（[13] = ohta-1986）。⇒ 本文是超弦 `Q_B^2 = 0 => D = 10` 的物理侧一手入口之一。
+            ⚠⚠ **三条必须写进节点 note 的限定（全部来自摘要逐字，不是推断）：**
+            (1) **摘要里的方向是「Nilpotency … determines」，不是 "iff"。** 与 kato-ogawa-1983 的玻色版摘要
+                （「are **required by** the nilpotency」）同型 —— **反方向在摘要里都没有**。"iff" 是 LZ 的措辞。
+            (2) 摘要写的是 **critical dimension 与 leading zero-intercepts（复数）**，**没有出现数字 10，也没有 1/2 或 0**。
+                ⇒ **不得把「D = 10、alpha_0^{NS} = 1/2、alpha_0^R = 0」这三个具体值挂本 key**（可挂
+                ito-morozumi-nojiri-uehara-1986 的 (3.8)--(3.10)，那是 L1 全文）。
+            (3) 本文标题/摘要覆盖 **NS 与 R 两个扇区**（"Neveu-Schwarz-Ramond model"），与 ohta-1986 不同
+                （IMNU p.952 Note added：Ohta 预印本**不含 R 扇区无鬼定理证明**）；但**摘要谈的是 BRS 荷的幂零性，
+                不是无鬼定理**，两者不可互换。
+            ⚠ 作者 Uehara 与 ito-morozumi-nojiri-uehara-1986 是同一人（S. Uehara）⇒ **不是完全独立的两条 derivation**，
+            curator 标 `independent: true` 前须注意。}
+}
+
+@article{schwarz-1972,
+  author  = {Schwarz, John H.},
+  title   = {Physical States and Pomeron Poles in the Dual Pion Model},
+  journal = {Nuclear Physics B},
+  volume  = {46},
+  number  = {1},
+  pages   = {61--74},
+  year    = {1972},
+  doi     = {10.1016/0550-3213(72)90201-5},
+  note    = {由 researcher 于 2026-09-11 登记，抽取记录 extractions/math-sources.md **§51**（登记段 §51.1）。
+            **正文未获取（内容等级 L0）；标题/卷/页/年/DOI/摘要 L1（INSPIRE）；read_depth = abstract，不得升。**
+            单作者，Princeton U. (Joseph Henry Laboratories)。**INSPIRE 无报告号字段**（1972 年记录，同 goddard-thorn-1972）。
+            重印：INSPIRE `pubinfo_freetext` = ``In *Schwarz, J.H. (ed.): Superstrings, Vol. 1*, 98-111''
+            —— 与 goddard-thorn-1972 的重印（同书 112--115）**同一本书**；该书 archive.org 检索 0 命中
+            （见 brst-cohomology-sources.md 的重印文集路线记录）⇒ **这条取正文的路也走不通。**
+            **摘要逐字（L1，INSPIRE）**：``The methods recently developed by Brower for proving the no-ghost theorem
+            for the Veneziano model with $\alpha(0)=1$ are applied to the dual pion model. We construct operators that
+            generate all the physical states and prove that there are no ghosts for space-time dimensionality
+            $d \leqslant 10$. In the critical dimension $d = 10$ we find that the pomeron singularities arising from
+            nonplanar loops are simple poles. A new fully symmetrical model (a sort of `pionic' version of the
+            Shapiro-Virasoro model) is formulated and conjectured to correspond to the multi-pomeron amplitudes.''
+            **与图的关系**：这是 **NS（dual pion）模型无鬼定理的第二条来源**，与 brower-friedman-1973 平行。
+            ⚠⚠ **四条限定（全部来自摘要逐字）：**
+            (1) **本文自陈方法是 Brower 的**（``The methods recently developed by Brower''）⇒ 与 brower-1972 /
+                brower-friedman-1973 **不是方法独立**，只是**结果的独立确认**。curator 标 `independent` 时须写明。
+            (2) 摘要给的是 **`d <= 10`**（含等号），临界维 `d = 10`。**摘要不提本模型 intercept 的值**
+                （`alpha(0)=1` 是转述 Brower 的 Veneziano 模型结果）⇒ **不得把 NS 的 `alpha_0 = 1/2` 挂本 key**。
+            (3) 本文**同时**是 pomeron 极点（非平面圈图）与「全对称模型」（= 后来 type II 闭超弦的前身）的文献，
+                无鬼定理只是其中一部分 ⇒ `loc` 在正文到手前只能写 `pp. 61--74`，**严禁写节号或定理号**。
+            (4) **本项目对 1972 年前后 PLB/NPB 快报的经验：这类文章通常没有编号定理**（goddard-thorn-1972 已有四条
+                间接证据）。**正文到手前不得为本文写 "Theorem N"。**}
+}
