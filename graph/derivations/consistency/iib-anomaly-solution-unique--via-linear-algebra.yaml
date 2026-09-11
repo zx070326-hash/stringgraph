@@ -1,0 +1,122 @@
+id: consistency.iib-anomaly-solution-unique--via-linear-algebra
+target: consistency.iib-anomaly-solution-unique
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.iib-gravitational-anomaly-cancels
+    inferred: false
+    note: |
+      **供给两件事，都不是本推导重新论证的**：
+      (1) **三行整数系数本身**（该卡 statement 里逐字写出的三条线性条件
+          `−495 n_{3/2} + n_{1/2} + 992 n_A = 0` 等，即本卡的 r₁、r₂、r₃）；
+      (2) **本卡的 (iii)**：该卡的「Î ≡ 0 ⟺ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A」
+          就是 `ker A = span{(2, −2, 1)}` 的等价说法，且该卡已 **formalized**
+          （`iib_gravitational_anomaly_free_iff`，Lean 里用 `omega` 证）。
+      ⇒ 本推导只新增 **(i) 的显式线性关系**与 **(ii) 的秩**。
+sources:
+  - ref: bilal-2008
+    loc: "§12.2, (12.4)(12.5)，印刷 p.97 = PDF p.100（v1）。(12.4) 与 (12.5) 之间逐字：'The vanishing of this total anomaly polynomial constitutes a homogenous linear system of 3 equations in 3 variables. In general such a system has only the trivial solution n_{3/2} = n_{1/2} = n_A = 0. Amazingly, however, as first observed in [3], the 3 equations are **not linearly independent** and do admit non-trivial solutions. Moreover, these solutions are very simple, namely' → (12.5) `n_{3/2} = 2 n_A , n_{1/2} = −2 n_A`"
+    note: |
+      **L1**（researcher 2026-09-11 逐页读图）。**v1（本文只有 v1）；PDF 页 = 印刷页 + 3。**
+      ⚠ (12.4)(12.5) 在 **§12.2**（起于印刷 p.97），**不是 §12.4**（起于印刷 p.99）。
+      ★★ **本推导的来源缺口**：Bilal 说了"三式线性相关"，**但不给线性关系、不给解空间维数、
+      不说唯一**（他只说 "these solutions are very simple"）。⇒ (i)(ii) 是本项目补出的。
+      ★ **前提**：§12.2 开头逐字 "**We assume here that there is *no gauge group***, as is the
+      case for IIB supergravity."——本推导继承该前提（由 depends_on 的那张卡承载，
+      其 statement 以「三个规范迹为零」的形式写出）。
+      ★ **归属**：逐字 "as first observed in **[3]**"，[3] = Alvarez-Gaumé–Witten, NPB **B234**
+      (1984) 269。⚠ **不给式号**，AGW 本身不固定整体归一 ⇒ 只是"来源如此归属"。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 98：(12.2.11)(12.2.12)(12.2.13) 的分子系数与 (12.2.14)；p. 98 逐字 'There are three anomaly terms that must vanish and three free parameters … Barring a numerical coincidence the only solution would be that all these differences vanish, a nonchiral theory.'"
+    note: |
+      **L1**。★ **独立第二来源**：两书归一化相同、系数逐项相同（researcher 逐系数复算 10/10 全对）。
+      ⚠ Polchinski 同样**只断言不展示**（"the coefficients of these conspire to produce zero"），
+      且其 "three conditions / three parameters, barring a numerical coincidence" 的记账
+      **恰恰被本卡的 (ii) 修正**：条件只有两条独立的。
+summary: |
+  **本推导是一次有限步的整数线性代数复算**，三部分各自独立且都可机检：
+
+  **(i) 显式线性关系 `2 r₁ + 3 r₂ − 5 r₃ = 0`**，逐分量验：
+      第 1 分量：`2(−495) + 3(225) − 5(−63) = −990 + 675 + 315 = 0`
+      第 2 分量：`2(1) + 3(1) − 5(1) = 2 + 3 − 5 = 0`
+      第 3 分量：`2(992) + 3(−448) − 5(128) = 1984 − 1344 − 640 = 0`
+
+  **(ii) `rank_ℚ A = 2`**，两步：
+      **≤ 2**：由 (i)，三行线性相关（系数 `(2, 3, −5) ≠ 0`）⇒ `rank ≤ 2`，于是 `det A = 0`；
+      **≥ 2**：`r₂` 与 `r₃` 线性无关——`r₂ − r₃ = (288, 0, −576) ≠ 0`，
+        且二者不成比例（若 `r₂ = λ r₃`，由第 2 分量 `1 = λ·1` 得 `λ = 1`，
+        但第 1 分量 `225 ≠ −63`，矛盾）。
+
+  **(iii) `ker_ℚ A = span_ℚ{(2, −2, 1)}`，`ker_ℤ A = ℤ·(2, −2, 1)`**：
+      由 (ii)，`dim ker_ℚ = 3 − 2 = 1`；而 `(2, −2, 1)` 在核里，逐行验：
+        `r₁·(2,−2,1) = −990 − 2 + 992 = 0`
+        `r₂·(2,−2,1) =  450 − 2 − 448 = 0`
+        `r₃·(2,−2,1) = −126 − 2 + 128 = 0`
+      ⇒ 它张成核。又 `gcd(2, 2, 1) = 1` ⇒ `(2, −2, 1)` 本原 ⇒ 整数核恰是它的整数倍。
+      ⚠ **(iii) 本身由 depends_on 的 consistency.iib-gravitational-anomaly-cancels 供给**
+      （那条已 formalized）；这里写出验算只是为了让三部分在同一处可读，**不是重新论证**。
+
+  ⇒ **结论**：使三条纯引力反常条件同时成立的整数组恰为 `(2c, −2c, c)`，`c ∈ ℤ`。
+  `c = 1` 即 IIB 超引力的手征含量，且**没有别的解**。
+
+  【status 为什么先记 physical-argument】按 docs/STATUS_LEVELS.md 的 lead 裁决（2026-09-10）：
+  前提完整 + 有限步初等计算（此处是整数线性代数）**且 reviewer 已独立复核**的才可标 rigorous，
+  并须在本 notes 写 `reviewer-verified: <agent>, <date>`。**本条目前没有该记录**，故记
+  physical-argument。**复核所需的全部算式已逐项写在上面与 notes 里**，reviewer 可直接对账。
+gaps:
+  - |
+    ★ **待 reviewer 独立复核后升 rigorous。** 本推导是有限步整数线性代数，前提完整
+    （三行系数由 depends_on 的卡给定），按 docs/STATUS_LEVELS.md 的 rigorous 例外裁决，
+    **一旦 reviewer 独立复算并在本推导 notes 写下 `reviewer-verified: <agent>, <date>`，
+    即可把 kind 改为 proof、status 改为 rigorous**（届时 summary 与 notes 不必改）。
+    在此之前保持 physical-argument。
+  - |
+    ★ **(i) 与 (ii) 在两本一手来源里都不存在。**
+    Bilal 逐字只说 "the 3 equations are **not linearly independent**"，**不给线性关系、
+    不给解空间维数、不说唯一**；Polchinski 只说 "conspire to produce zero"，且其
+    "three conditions / three parameters" 的记账**把独立条件数说成了 3**。
+    ⇒ 本卡的 (i)(ii) **属本项目补出的内容**，不是文献转述。
+  - |
+    **本推导不触碰系数的物理来源。** 三行整数是"相应手征场的引力反常十二形式的系数"这件事，
+    两本书都只引用指标定理结果、不重做（Polchinski 逐字 "we will not repeat it here but just
+    quote the result"；Bilal 的 (12.1)–(12.3) 由其 (11.45)–(11.48) 特化而来，
+    而 (11.45)–(11.48) 的系数本身未逐步推导）。
+    ⇒ 本卡的严格性**只到"给定这三行整数"之后**。
+  - |
+    **「无规范群」是继承来的物理前提，不是本推导的内容。**
+    Bilal §12.2 开头逐字 "We assume here that there is *no gauge group*, as is the case for IIB
+    supergravity."；Polchinski 的等价说法是 "There are no gauge fields so only the three purely
+    gravitational terms enter"。本推导由 depends_on 的卡承载该前提
+    （那张卡以「(12.2.11) 取 n = 1、三个规范迹为零」的形式写进 statement）。
+  - |
+    **Smith 标准型 (1, 144, 0) 已复算但不在断言内**（见目标卡 notes）。它刻画 `A` 的**像**，
+    与本卡关心的核无关；若日后要断言"整数解集无整除障碍"之外的任何像侧性质，需另立命题。
+  - |
+    **归属只到"来源如此归属"**：Bilal 把"三式线性相关、存在非平凡解"这一观察归给
+    [3] = Alvarez-Gaumé–Witten 1984，但**不给式号**，且 AGW 本身不固定整体归一。
+    ⇒ **不得**把 alvarez-gaume-witten-1984 写成本卡系数的来源。
+notes: |
+  from: literature/extractions/green-schwarz-1984.md §11.2/§11.3/§11.4（researcher 第五轮 L1）
+  + polchinski-1998-v2-ch12.md E10/E11。
+
+  【★ curator 的逐系数独立复算（2026-09-11，与 researcher 的结果独立对上）】
+  用精确整数/有理数算术逐项验证，结果全部命中：
+    (i)  `2r₁ + 3r₂ − 5r₃` 三个分量分别为 `(−990, 675, 315)→0`、`(2, 3, −5)→0`、
+         `(1984, −1344, −640)→0`；
+    (ii) 行阶梯化后主元数 = 2（有理数消元），`det A = 0`；`r₂ − r₃ = (288, 0, −576) ≠ 0`
+         且 `r₂`、`r₃` 不成比例（第 2 分量强制 λ = 1，第 1 分量随即矛盾）；
+    (iii) `A·(2, −2, 1)ᵀ` 三行分别为 `(−990, −2, 992)→0`、`(450, −2, −448)→0`、
+         `(−126, −2, 128)→0`；`gcd(2, 2, 1) = 1` ⇒ 本原。
+    附带：Smith 不变因子 `(d₁, d₂/d₁, ·) = (1, 144, 0)`（`d₁ = 1`、`d₂ = 144`）。
+  **⇒ 待 reviewer 复核后升 rigorous**（复核通过请在本 notes 追加
+  `reviewer-verified: <agent>, <date>` 并把 kind 改 proof、status 改 rigorous）。
+
+  【★ 本推导与 A8 / A8′ 的关系】现有 Lean 声明 `iib_gravitational_anomaly_solutions`
+  （A8）只验证了三式 `↔ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A`，即本卡的 (iii)；
+  **(i) 的显式线性关系与 (ii) 的秩没有对应的 Lean 定理**
+  （`consistency.iib-gravitational-anomaly-cancels` 的 notes 逐字注明这两句"不是单独的 Lean 定理"）。
+  本卡 + 本推导就是为 **A8′** 准备的图侧接口，已写入 formal/TODO.md。
+  ⇒ 形式化后应把 `formal.lean_decl` 加到**目标卡**上，并把本推导改为 `--via-lean`
+  或新增一条 `--via-lean`（按本图惯例：Lean 推导单列，不覆盖纸上推导）。
+author: curator
+created: "2026-09-11"

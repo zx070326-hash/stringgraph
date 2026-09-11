@@ -1,0 +1,122 @@
+id: swampland.heterotic-t6-substates-below-extremality-v2
+kind: proposition
+title: "SO(32) 杂化弦 on T⁶：Q_L² > Q_R² 时谱中总有 M² = ½Q_L² − 1 的亚极端态（v2：补回 Sen 的 J = 0 与 m → 0 保 M 两个前提）"
+statement: |
+  设 SO(32) 杂化弦紧化在 T⁶ 上，模空间一般点处规范群为 U(1)^28；电荷是 28 维矢量
+  Q = (Q_L | Q_R)（Q_L 22 维、Q_R 6 维），落在偶自对偶格上，满足（Arkani-Hamed 等 2006
+  eq. (21)）
+
+    Q_L² − Q_R² ∈ 2Z 。
+
+  在 M_Pl = 1、α' = 4 的归一化下（原文 eqs. (22)–(24)）：
+    极端黑洞：Q_R² − Q_L² > 0 时 BPS，M² = ½Q_R²；Q_L² − Q_R² > 0 时非 BPS，M² = ½Q_L²；
+    微扰杂化弦谱：M² = ½Q_R² + N_R = ½Q_L² + N_L − 1，其中 N_{R,L} 是振子贡献。
+
+  **(v2 新增的前提——这一段是陈述的一部分，不是注释。)** 上面两条极端黑洞公式的一手出处是
+  Sen, hep-th/9411187 的 (2.60)（= AMNV (22)）与 (2.56)（= AMNV (23)），而 **Sen 那两式只在
+  下述两个前提下成立，AMNV 两个都没有写**：
+
+    (P1) **非转动**：黑洞的角动量 J = 0（Sen 取 Kerr 参数 a = 0）。
+         Sen p.11 逐字："This shows that the extremal black holes carrying **non-zero angular
+         momentum do not correspond to supersymmetric solutions.**"；且他同处指出 `J ≠ 0` 时
+         `M²` 恒**大于** `Q⃗_R²/2`，即便在极端极限 `a → m` 下亦然。
+    (P2) **极端极限按 Sen 对 a = 0 的取法**：`m → 0` 且保持 (2.38) 的物理质量 M 固定
+         （Sen 逐字："The extremal limit corresponds to the case when the horizon approaches the
+         singularity, i.e. `m → 0` keeping the physical mass `M` defined in eq.(2.38) fixed."）。
+
+  **本卡因此把与黑洞的比较限定在满足 (P1)(P2) 的非转动极端黑洞上。**
+
+  断言（原文 eq. (25) 与其前一句，逐字）：
+
+    "But the string spectrum also guarantees that, as we go down to smaller charges along a
+     basis of directions in charge space, we are guaranteed to find a state with a mass/charge
+     ratio smaller than for extremal BH's. The inequality is saturated for the BPS states which
+     have Q_R² > Q_L², but for Q_L² > Q_R² the extremal black holes have M² = ½Q_L² while there
+     is always a state with mass
+       M² = ½Q_R² = ½Q_L² − 1    (25)
+     since there is a charge vector with Q_L² − Q_R² = 2 on the charge lattice."
+
+  即：在该背景下，沿电荷空间的一组基方向总能找到质荷比小于（满足 (P1)(P2) 的）极端黑洞的态。
+
+  **本卡只断言该背景下的事实，不断言任何普遍性命题。**
+
+  **(v2 另外明确不断言的两件事：)**
+  (c) **本卡的 Q_L、Q_R 与 Sen (2.42) 的 Q⃗_L、Q⃗_R 是同一归一化下的同一批量**——
+      Sen **不声明** α'、G_N、M_Pl 中的任何一个，其 Q 是连续参数 (2.40)、从不与格点归一化挂钩；
+      AMNV 的 Q 受 (21) 的格条件约束。**这座桥在两篇原文中都不存在**（见推导 gaps）。
+  (d) **Q_L² = Q_R² 的情形**——AMNV 的 (22)(23) 用严格不等号划分，恰好把它排除在外；
+      该情形是 Sen 的 Case III (2.64) `M² = ½Q⃗_L² = ½Q⃗_R²`，**AMNV 从未引用**。
+uses_conventions: [conv.extremality-normalization, conv.amnv-2006-units]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4, eqs. (20)–(25), p.12–p.14；Figure 4 图题, p.13"
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2：**(2.60), p.11**（Case II，α < β ⟺ Q⃗_L² < Q⃗_R²）= AMNV (22)；**(2.56), p.10**（Case I，α > β ⟺ Q⃗_R² < Q⃗_L²）= AMNV (23)；另有 AMNV 未引的 **(2.64), p.11**（Case III，α = β）；两个前提出自 (2.52) 之前的公共设定（a = 0、m → 0 保 M 固定）与 p.11（J ≠ 0 不饱和界，无式号）"
+    note: |
+      ★★ **eqs. (22)(23) 的一手出处已由 L1 全文核实钉死**（researcher 2026-09-11 逐页读 arXiv
+      **v3**，21 页全覆盖；literature/extractions/sen-1995-bh-torus.md **E8**）。
+      **loc 写死 v3**；标题页正中的 "November 26, 2024" 是 arXiv 重编译的 \today，不是论文日期。
+      逐字对应：**AMNV (22) `M² = ½Q_R²`（BPS） = Sen (2.60)**；
+      **AMNV (23) `M² = ½Q_L²`（非 BPS） = Sen (2.56)**；
+      AMNV 的 `Q_R² − Q_L² > 0` ⟺ Sen 的 `α < β`，`Q_L² − Q_R² > 0` ⟺ `α > β`。
+      ⚠⚠ **AMNV 丢掉了 Sen 的两个前提**（a = 0 与 m → 0 保 M 固定）——这正是本卡换代为 v2 的理由。
+      ⚠⚠ **以下两项绝不得挂本条**（21 页逐页核实的否定结论，抽取记录 §1.1、E11）：
+      **弦谱 (24) `M² = ½Q_R² + N_R = ½Q_L² + N_L − 1`**（Sen 全文没有杂化弦质量公式，
+      §4 只给态密度 (4.4) `d_S ~ exp(4π√n)` 与 (4.5) `A_s ∝ ln d_S`，且自称全节是
+      "some amusing coincidences"）；**电荷格 (21) `Q_L² − Q_R² ∈ 2Z`**（Sen 只在 p.4 提了一句
+      「the 28 dimensional lattice Λ of electric charges」并引 Narain [7]，**无量子化条件、
+      无偶自对偶**）。
+  - ref: sen-1995-bh
+    loc: "arXiv:hep-th/9504147v2, p.6 与 References [7], p.15"
+    note: >-
+      ⚠⚠ **本条不是 (22)(23) 的出处**，登在这里只承载一件事：它 L1 地证实了上一条的归属
+      （p.6 逐字 "Most general electrically charged rotating black hole solutions in this theory
+      were constructed in ref.[7]"，其 [7] = hep-th/9411187）。三条红线：
+      (1) **9504147 ≠ 9411187**，两个 bib key 绝不可互换；
+      (2) 9504147 **没有任何弱引力猜想形式**，不得用它支撑本卡的任何断言；
+      (3) **归一化完全不同且原文不给换算**：9504147 是 α' = 16、G_N = 2、T = g²/32π
+          （conv.sen-1995-normalization），本卡用的是 AMNV 的 α' = 4、M_Pl = 1；
+          **9504147 的 (24)/(37) 系数不得搬到本卡的记号里**。
+tags: [swampland, weak-gravity, heterotic, charge-lattice, black-hole, amnv, sen-1995]
+notes: |
+  from: arkani-hamed-2006#E22（另见 #U3、#Q2）+ literature/extractions/sen-1995-bh-torus.md E8、E9、E11、§1.1–§1.3、Q2、Q3。
+
+  【★ 本卡相对 v1（swampland.heterotic-t6-substates-below-extremality）改了什么】
+  **只加前提、不改断言**：v1 的正文一字不动地保留在上面，新增的是 (P1)(P2) 两个前提段
+  与 (c)(d) 两条"不断言"。理由是 researcher 对 Sen hep-th/9411187 的 L1 全文抽取发现
+  **AMNV §4 只写 "The extremal black hole solutions in this theory were constructed by Sen [8]"，
+  把 Sen 的两个前提全丢了**，而其中 (P1) 是实质的：Sen 明说 `J ≠ 0` 的极端黑洞**从不**饱和
+  Bogomol'nyi 界。按根 CLAUDE.md 原则 1，陈述文本不可改 ⇒ 新建本卡，v1 标 superseded_by。
+
+  【两套归一化必须同时声明】M_Pl = 1（AMNV §3 起）与 **α' = 4**（AMNV §4，逐字 "where we chose
+  units with α' = 4"）。否则 (24) 与 (25) 里的 −1 无意义。⚠ α' = 4 **与本图 canonical 的
+  conv.alpha-prime-regge 不是同一归一化**，故声明 conv.amnv-2006-units（family alpha-prime，
+  canonical false）；凡把本卡接到用 conv.alpha-prime-regge 的节点上的边必须写 convention_map。
+
+  【★★ 第三套归一化：Sen 侧根本没有归一化可声明】
+  **Sen hep-th/9411187 全文不出现 α'、M_Pl、G_N、弦耦合 g，也没有电荷格的量子化条件**；
+  其作用量 (2.3) 的整体常数 C 作者自述 "arbitrary … can be absorbed into the dilaton"。
+  M 与 Q 只能按 `g^E_tt → −(1 − 2M/ρ)`（G_N = 1）与 `F^{(a)}_{ρt} → Q^{(a)}/ρ²` 从渐近行为读出，
+  **两条都是抽取者复算、原文没写**。⇒ **本图不给 Sen 侧的卡挂任何 α' 族约定**
+  （见 swampland.heterotic-t6-extremal-nonrotating-mass-formulas）；
+  记账位置在 conv.sen-1995-normalization 的 notes。
+
+  【★ 第四套：不要把 Sen hep-th/9504147 的系数搬进来】该文用 α' = 16、G_N = 2、T = g²/32π
+  （conv.sen-1995-normalization），其 (24)、(37)、(49) 的 C = 4 **都不得搬到本卡的记号里**；
+  误用 G_N = 1 会让 (37) 的系数差 2 倍。
+
+  【(24) 里 −1 的来源】AMNV 原文逐字 "The −1, coming from the tachyon in the left-moving bosonic
+  string, is crucial."
+
+  【⚠ AMNV 原文排印错误】Figure 4 图题首句逐字为 "The charge M of the heterotic string states of
+  charge Q approaches the M = Q line from below"，按内容应为 "The mass M"（抽取记录 #E22 备注 4）。
+
+  【抽取者复算（AMNV 原文未显式写出）】由 (24) 取 N_L = 0 与 Q_L² − Q_R² = 2 得 N_R = 0 且
+  M² = ½Q_R² = ½Q_L² − 1，比极端黑洞的 ½Q_L² 小 1，与 (25) 一致。**该复算原文没有写出**，
+  在推导中标 inferred: true。
+
+  【查重】`uv run stringgraph search 极端黑洞 / 杂化 / Bogomol` 命中 v1 本身、
+  swampland.heterotic-spectral-flow-substates（另一条独立证据，任意微扰杂化紧化）与本轮新建的
+  两张 Sen 卡，无同内容者。
+author: curator
+created: "2026-09-11"

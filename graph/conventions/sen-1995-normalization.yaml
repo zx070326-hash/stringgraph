@@ -26,6 +26,13 @@ sources:
       loc 写死 **v2**（页边条纹逐字 "arXiv:hep-th/9504147v2  6 May 1995"）。
       ⚠ 标题页印的 "November 26, 2024" 是 arXiv 重新编译源码的 \today，不是论文日期；
       论文日期在标题页页脚 "April, 1995"。
+  - ref: sen-1995-bh-torus
+    loc: "arXiv:hep-th/9411187v3, §2, (2.3)–(2.5), p.3（作用量整体常数 C）；(2.30) + (2.37)–(2.38), p.8；§3, (3.6)–(3.8)（§3 = pp.12–17，具体页未记）；p.11（归一化的唯一自述，无式号）"
+    note: >-
+      ⚠ **对照条目，不支撑本卡的 α' = 16 / G_N = 2 / T = g²/32π**。登在这里只承载一件事：
+      **另一篇 Sen 1995（hep-th/9411187）根本不属于本卡这套数**，详见 notes 末尾的
+      【★ 另一篇 Sen 1995（9411187）的归一化】。
+      L1（researcher 2026-09-11 逐页读 v3，21 页全覆盖，literature/extractions/sen-1995-bh-torus.md）。
 notes: |
   from: literature/extractions/sen-1995-bh.md §1.1、E7、U4、U7、§5.2(a)。
 
@@ -47,9 +54,46 @@ notes: |
   避免日后有人把 9504147 的 (24)/(37) 系数直接搬到 AMNV 的记号里。
 
   【⚠ 两篇 Sen 1995 极易撞车】`sen-1995-bh` = hep-th/9504147（本卡的来源，L1 全文已抽取）；
-  `sen-1995-bh-torus` = hep-th/9411187（T⁶ 极端黑洞解的**真正**出处，本项目未抽取，L0）。
+  `sen-1995-bh-torus` = hep-th/9411187（T⁶ 极端黑洞解的**真正**出处；
+  **2026-09-11 已 L1 全文抽取**，其归一化见下面最后一条）。
   同作者、同年、标题都以 "black hole" 开头。**两个 bib key 绝不可互换。**
 
   【本卡不覆盖的东西】9504147 的拉伸视界假设、熵匹配、C = 4（(49)，是拟合出来的）等都是**命题**，
   不是约定，本卡不承载；researcher 建议为它们单独建一个 BPS/黑洞对应小簇（见报告与
   literature/extractions/sen-1995-bh.md §5.2–§5.3），本轮未建。
+
+  【★ 另一篇 Sen 1995（hep-th/9411187 = `sen-1995-bh-torus`）的归一化：本卡这套数一条都不适用】
+  **该文 21 页逐页核实的否定结论**（literature/extractions/sen-1995-bh-torus.md §1.1，L1）：
+  **全文不出现 α'；不出现 M_Pl / "Planck mass" / "Planck scale"；不出现 Newton 常数 G / 16πG / κ²**
+  （κ 在该文是表面引力 (2.48)）；**不出现弦耦合 g**（g_L / g_R 是回磁比 (2.44)）；
+  **没有电荷格的量子化条件**（唯一一次提电荷格是 p.4、(2.7) 之后的「the 28 dimensional lattice Λ
+  of electric charges」，引 Narain [7]，无偶自对偶、无 Q_L² − Q_R² ∈ 2Z）。
+  其四维作用量 (2.3) 的整体常数 **C 作者自述「arbitrary … can be absorbed into the dilaton field Φ」**
+  （(2.5) 紧接句，逐字）——Einstein–Hilbert 项的系数正是 `C e^{−Φ}`，**⇒ 该文根本不定 G_N**。
+  该文关于归一化的**唯一自述**是 p.11 那句（逐字）：「In the normalization convention that we have
+  been using, the Bogomol'nyi bound that follows from the space-time supersymmetry of the theory,
+  is given by M² ≥ (Q⃗_R²/2)[24, 25].」
+
+  ⇒ 其 (2.38) 的 M 与 (2.40) 的 Q 只能从解的渐近行为读出，**两条读数规则都是 `[抽取者复算]`、
+  原文没有写，凡转成图上的边一律 `inferred: true`**：
+    (i) **M 按 `g^E_tt → −(1 − 2M/ρ)` 读出**（由 (2.30) 的 Δ 与 (2.37) 的 Einstein 度规
+        ds_E² = e^{−Φ}ds² 取 ρ → ∞，Δ^{1/2} → ρ²[1 + m(cosh α cosh β − 1)/ρ]）——
+        即 **G_N = 1 单位**，**不是**本卡的 G_N = 2；
+    (ii) **Q 按 `F^{(a)}_{ρt} → Q^{(a)}/ρ²` 读出**（§3 (3.6)–(3.8) 的渐近式与结果系数相同），
+        **无 1/4π、无场强动能项归一化因子**，因而与 (2.3) 的任意常数 C 无关。
+  号差由 (2.21) `(G_{μν})_{as} = η_{μν}` 与 (2.23) Kerr 解首项 `−[…]dt²` 读出为 **mostly-plus**
+  （同样是 `[抽取者复算]`，与 conv.metric-mostly-plus 一致，引用无需换算）。
+
+  ⇒ **三套归一化互不换算，且三处原文都不给换算**：
+  本卡（9504147：α' = 16、G_N = 2）／ 9411187（**不声明任何一个**，隐含 G_N = 1）／
+  conv.amnv-2006-units（AMNV：α' = 4、M_Pl = 1）。
+  **AMNV 的 M_Pl = 1 与 α' = 4 都不出自 9411187。** 即便把 M_Pl² := 1/G_N 从而让**质量侧**对上
+  （AMNV 自己也不声明 M_Pl 的定义，见 arkani-hamed-2006 的 note），**电荷侧仍无法闭合**：
+  9411187 的 Q 是连续参数 (2.40)，从不与任何格点归一化挂钩；AMNV 的 Q 受其 (21) 的偶自对偶格条件约束。
+  **⇒ 任何并置 Sen (2.56)/(2.60) 与 AMNV (24)/(25) 的边必须标 `inferred: true`，并在 gaps 写明
+  「Sen↔AMNV 的电荷归一化桥在两篇原文中均不存在」。**
+  ⚠ **不要给 9411187 挂任何 α' 约定卡**（该文不出现 α'，挂上去等于凭空造一个约定）。
+
+  【本轮改动】curator，2026-09-11：按 literature/extractions/sen-1995-bh-torus.md §1.1–§1.4、§5.3
+  补入上面一条，并把旧 notes 里「9411187 本项目未抽取，L0」订正为已 L1 全文抽取。
+  **本卡的 `definition` 字段未改**（仍只描述 9504147 那套数）。

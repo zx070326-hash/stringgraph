@@ -55,6 +55,20 @@ depends_on:
       although one of them does not admit a grading by ghost number.'
   - id: worldsheet.rns-super-virasoro-generators
     note: 供给物质部门 l_n、g_r 的显式模式表达式（本图一侧）。
+  - id: worldsheet.nsr-fock-space-verma-decomposition
+    inferred: false
+    note: |
+      ★★ **供给 FOK 逐 Verma 模计算上同调所需的那条前提**：p.111 逐字
+      'It was proven by Brower and Friedman [11] that this representation is **fully reducible**
+      … infinite direct sum of Verma modules'（R 扇区 p.115 降级为 'claim'）。
+      **非 inferred**：这条依赖是 FOK 明写的，且**证明确实需要它**——附录 A 的超李代数同调
+      消灭定理 (A.14) 只对 **Verma 模** M 陈述。
+      ⚠ 被依赖卡是一张**争议卡**（status 由其推导计算为 conjecture）：被 FOK 归属的文献
+      （brower-friedman-1973）其摘要不含 "reducible"/"Verma"，标题与摘要 NS-only；
+      而 lian-zuckerman-1989 p.320 Remark 用 Kac 行列式给出反方向的明证。
+      ⇒ **本推导的 effective status 因此被压到 conjecture**，这是如实记账，不是对结论的怀疑
+      （结论与 LZ 一致，且 LZ 独立地严格证明了它——见 --via-lian-zuckerman-1989，
+      那条推导**不依赖**本节点）。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -97,6 +111,25 @@ sources:
       (a) (B.1) 的正定性「left as an exercise」；
       (b) Henneaux 表示下**不存在**给出该伴随性质的自伴对合 𝒞——而 §6 的判据 (6.1) 正是用
           Tr 𝒞 写的。
+  - ref: brower-friedman-1973
+    loc: "abstract（正文本项目未取得，L0；read_depth 保持 abstract，不得升）"
+    note: |
+      ⚠⚠ **本条是 FOK 归属的对象，不支持 FOK 所需的那条前提。**
+      **摘要逐字全文**（L1，INSPIRE 出版方摘要）："The no-ghost theorem of Brower for the
+      conventional dual model (intercept `α₀=1`) is extended to the Neveu-Schwarz model, and its
+      spectrum-generating algebra is constructed. These conformally invariant generators
+      (`A_n`, `B_s`) are obtained by a systematic use of the gauges `G_r`. As a consequence it is
+      demonstrated that particular dual models having resonances with positive-definite norms and
+      masses are possible."
+      ⇒ **摘要只承载两件事：NS 扇区的无鬼定理 + 谱生成代数 (A_n, B_s)。**
+      **没有 "reducible"、没有 "Verma"、没有 "direct sum"、没有 "Fock space"、没有
+      "representation"；标题与摘要都是 NS-only，完全没有 Ramond。**
+      ⇒ (a) 图里**不得**把本条作为「完全可约性 / Verma 模直和」的来源；
+         (b) **FOK p.115 把一条 R 扇区的完全可约性归给本条，在本条的标题/摘要里没有任何支撑**；
+         (c) 「Verma 模直和」这个说法在整个引用网络（35 篇引用方）里**只有 Figueroa-O'Farrill
+             本人一个出处**，不是两条独立证言。
+      详见 worldsheet.nsr-fock-space-verma-decomposition 与
+      literature/extractions/brower-friedman-1973.md §2–§3。
   - ref: henneaux-1987
     loc: "全文；摘要（L2）。摘要逐字：'The infinite degeneracy due to the commuting ghost zero mode is shown to be spurious by extending to the BRST context an argument originally due to Corrigan and Goddard.'"
     note: |
@@ -144,7 +177,9 @@ summary: |
   两篇对同一事实的陈述**直接矛盾**；**LZ 不需要它**（用自由性 Corollary 2.19(iii) 即可），
   **FOK 需要它**（附录 A 的定理只对 Verma 模证）。
   ⇒ 按 docs/STATUS_LEVELS.md「不确定时选低的那级」，本推导记 **physical-argument**，
-  并把矛盾写进 gaps 待裁决（需读 Brower–Friedman, Phys. Rev. D 7 (1973) 535）。
+  并把矛盾建成独立节点 **worldsheet.nsr-fock-space-verma-decomposition**（争议卡，status
+  由其推导计算为 conjecture）作为本推导的一条非 inferred depends_on 边
+  ——⇒ **本推导的 effective 因此是 conjecture**，而 --via-lian-zuckerman-1989 不受影响。
   ⚠ 这**不是**说 FOK 的结论错：结论与 LZ 一致，且 LZ 独立地严格证明了它；
   只是**FOK 这条路线的可追溯性目前断在一处两篇互相矛盾的引用上**。
   另有三条作者自承缺口（附录 A 定理无已发表证明、(B.1) 正定性 left as an exercise、
@@ -159,8 +194,24 @@ gaps:
     而 lian-zuckerman-1989 p.320 Remark 逐字 'V(p,κ) is in general **not** a direct sum of
     Verma modules of Vir_κ even though it is Vir_κ^- -free.'（用 Kac 行列式在 NS 扇区明证）。
     **FOK 的证明需要完全可约性**（附录 A 的 (A.14) 只对 Verma 模 M 陈述），**LZ 不需要**。
-    ⇒ 裁决须读 **Brower–Friedman, Phys. Rev. D 7 (1973) 535**（本项目 bib **尚未登记该文**，
-    已列入报告交 researcher/lead）。在裁决前本推导不得升为 rigorous。
+    **2026-09-11 更新（reviewer-batch17b 指出原文字已过期）**：
+    **brower-friedman-1973 已登记到 literature/sources.bib，抽取记录 extractions/brower-friedman-1973.md
+    也已存在**（摘要 L1 逐字 + 元数据 L1；**正文仍未取得，L0，read_depth 保持 abstract**）。
+    核实结果对 FOK 不利：该文**摘要不含 "reducible"/"Verma"/"direct sum"**，
+    **标题与摘要都是 NS-only、完全没有 Ramond**，且「Verma 模直和」这一说法在 35 篇引用方中
+    **只有 Figueroa-O'Farrill 本人一个出处**（其 1989 年另一篇逐字重复同两句，**不是独立证言**）；
+    两条非 FOK 系的引用方只把它归到「NS 的 DDF/SGA 构造 + 无鬼定理」。
+    ⇒ 该矛盾**已建成独立节点 worldsheet.nsr-fock-space-verma-decomposition**（争议卡，
+    其推导 --via-fok-1989-attribution 记 conjecture），并已作为本推导的一条**非 inferred**
+    depends_on 边接入；**--via-lian-zuckerman-1989 不接这条边**（LZ 只用 `Vir_κ^-`-自由性）。
+    ⇒ 裁决前提 (ii) **已于同日核实**（researcher 读 LZ pp.319–321）：LZ 的反例**不取具体 p**，
+    条件是 **`p·p < 0`** 且 `p·p/2 + n` 命中使 `M(h, 10)` 可约的负半整数（`p ≠ 0` 由 LZ p.303 的
+    全局假设保证），位置 **§2, eqs. (35)-(38), p. 320**；⚠ 原文**不给 Kac 行列式层数**，是定性推论。
+    ⇒ **作用域差异因此明确：FOK 只声明 `p ≠ 0`、不限定 `p·p` 的符号，其适用范围真包含 LZ 的反例区**
+    ——"FOK 只用一般动量所以两者可并存"这条调和已被削弱。
+    ⇒ **剩下的裁决前提只有一条，仍未满足**：取得 Brower–Friedman 正文（5 页；剩余唯一路线是
+    WebSearch 找 .edu 扫描件或人工从 APS 下载）。
+    **在裁决前本推导不得升为 rigorous**；且若争议卡日后被裁为 refuted，本推导的前提即被反驳。
   - |
     **附录 A 的超李代数同调消灭定理没有已发表的证明**（作者自承）：p.106 逐字
     'We have never seen a published proof of this theorem, although Fuks [2] hints that it is a

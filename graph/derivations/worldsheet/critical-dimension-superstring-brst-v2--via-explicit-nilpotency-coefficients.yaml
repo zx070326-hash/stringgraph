@@ -169,14 +169,26 @@ gaps:
     （worldsheet.ocq-superstring-physical-states 的方法论限定）。
     ⇒ 两者的 Q_B 是否逐字同一个算符，本图未核实。
 notes: |
-  【本推导与 --via-nilpotency 的分工】
-    --via-nilpotency：来源是 Polchinski §10.5 (10.5.23) 下方那段正文（**无式号**）+
-      Vol.1 exercise 4.3 + Vol.2 exercise 10.13(b)，覆盖本卡陈述的**一般形式**
-      （任意正范数 SCFT），但论证全部推给习题；
-    **本推导**：来源是 IMNU (3.8)–(3.10) 的**显式系数公式**（L1）+ LZ Prop 1.7(ii) 的
-      iff 措辞 + Ohta 摘要，只覆盖平坦 D 维特例，但可逐系数核对。
-  两条都是 physical-argument，故本卡的有效状态不变；新增本推导的收益是**可核对性**与
-  **方向（⟹ / ⟸）的证据分离**，不是状态升级。
+  【本推导与 --via-nilpotency 的分工 —— 2026-09-11 订正（reviewer-batch17b 指出原文字已过期）】
+  ⚠ **原文字有两处已过期，此处一并订正**：
+  (a) **`--via-nilpotency` 已不再指向本卡。** 双向卡拆开换代后，该推导随 ⟸ 那一半
+      改指 **worldsheet.superstring-brst-nilpotent-at-c15**
+      （文件名也已 git mv 为 superstring-brst-nilpotent-at-c15--via-nilpotency.yaml）。
+      ⇒ **本推导现在是 worldsheet.critical-dimension-superstring-brst-v2 的唯一推导。**
+  (b) **"两条都是 physical-argument，故本卡的有效状态不变"已不成立。**
+      本推导按 lead 裁决已降为 **kind: conjecture-support / status: conjecture**
+      （理由见 summary 的【2026-09-11 改指与降级】：v2 的陈述是一般 SCFT 形式，
+      而 IMNU 只算平坦 D 个 X^μψ^μ，从特例到一般是本图的无来源外推）。
+      ⇒ **v2 卡的 own_status 与 effective 现在都是 conjecture**，由本推导唯一决定。
+
+  订正后的分工：
+    `worldsheet.superstring-brst-nilpotent-at-c15--via-nilpotency`（⟸ 方向，**另一张卡**）：
+      来源是 Polchinski §10.5 (10.5.23) 下方那段正文（**无式号**）+ Vol.1 exercise 4.3
+      + Vol.2 exercise 10.13(b)，覆盖**一般形式**（任意正范数 SCFT），但论证全部推给习题；
+    **本推导**（⟹ 方向，本卡）：来源是 IMNU (3.8)–(3.10) 的**显式系数公式**（L1）
+      + LZ Prop 1.7(ii) 的 iff 措辞 + Ohta 摘要，**只覆盖平坦 D 维特例**，但可逐系数核对。
+  ⇒ 本推导的价值是**可核对性**与**方向（⟹ / ⟸）的证据分离**，不是状态升级；
+  要把 v2 抬离 conjecture，必须有一般正范数 SCFT 的 Q_B² 系数来源（本图目前没有）。
 
   【与玻色弦一侧的对应】
     IMNU (3.8)(3.9)  ↔  Polchinski Vol.1 (4.3.9)/(4.3.10)（玻色弦的 Q_B² 显式形式）
