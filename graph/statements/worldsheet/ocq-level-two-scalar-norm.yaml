@@ -105,5 +105,29 @@ notes: |
   本卡多讲一维性与判别式分类。
   附带登记（formalizer）：第 (3a) 条的质量壳 α'k² = −1 在 ℚ 上**单分量无解**，
   需 D ≥ 2 取一个类时加一个类空分量（如 a^0 = 3/2、a^1 = 1/2）；详见推导 notes。
+
+  【2026-09-12 复核：仍**不**接线（curator，lean-wire-6）】
+  这是第二次有人按 `stringgraph report` 的 "formalization frontier" 名单来给本卡接 Lean，
+  故把逐条比对的结论写死在这里。对 formal/StringFormal/NoGhost/LevelTwo.lean 逐句核对：
+    - 第 (2) 条：`Fock.pairing_levelTwoScalar_physical` 覆盖，但只到**清分母形式**
+      (4a−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[…]。本卡写的「乘以**严格正**的因子 2/(4a−9)²」中的正性
+      Lean 未证（定理在任意交换 ℚ-代数上，无序结构，也不设 4a ≠ 9）。
+    - 第 (3a) 条：`Fock.pairing_levelTwoScalar_intercept_one` 覆盖。
+    - 第 (1) 条（物理态条件把三维子空间约化为一维）：Lean 只有显式试探态 `Fock.levelTwoScalar`
+      与域上的**存在性** `Fock.exists_levelTwoScalar_mem_physSubmodule`；唯一性/一维性未证。
+    - 第 (3b)(3c) 条：判别式 4(D−1)(D−25) 这句在 Lean 中**只出现在文档注释**
+      （LevelTwo.lean 第 679–680 行 `pairing_levelTwoScalar_physical` 的 docstring，及文件头第 48 行），
+      **没有对应定理**；D ≤ 24 / D = 25 / D ≥ 26 的三分与 D = 26 的 2(8a−3)(a−1) 完全未做。
+  故本卡不填 `formal.lean_decl`、不新增 `--via-lean` 推导：已机器验证的那部分早已由拆出的
+  worldsheet.ocq-level-two-scalar-norm-closed-form（formalized）承载，本卡的推导
+  --via-level-two-gram 已有一条指向它的边（reviewer-batch8 裁为 inferred）。
+  要让本卡升 formalized，须先在 Lean 中补第 (1) 条的一维性与第 (3b)(3c) 条的判别式分类
+  （后者需有序域）。frontier 名单只说明「所有依赖都已形式化」，不说明本卡该被形式化。
+
+  记号核对（同次）：Lean 的截距 `a₀` 与本卡的 a **同号同值**，无常数差——
+  `Fock.physSubmodule η a a₀` 定义为 ker(L₀ − a₀·id) ⊓ ⨅_{n>0} ker L_n
+  （formal/StringFormal/NoGhost/PhysicalStates.lean 第 382–384 行），正是本卡的
+  (L_0 − a)|ψ⟩ = 0 与 L_n|ψ⟩ = 0 (n > 0)，符合 conv.intercept-sign-a（Polchinski 的 A = −a）；
+  质量壳 `zeroModeSq η a = 2a₀ − 4` 即本卡的 α_0·α_0 = 2(a − 2)。
 author: curator
 created: "2026-09-11"
