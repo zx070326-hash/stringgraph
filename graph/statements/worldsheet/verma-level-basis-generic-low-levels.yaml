@@ -136,7 +136,20 @@ sources:
       同一立场）不预设它；(1) 正是把那一步从假设变成结论——但只在泛型 (c,h) 处，
       且以 B 的存在性为前提，见【不断言】(a)。
 tags: [cft, representation-theory, verma-module, shapovalov, kac-determinant, pbw, virasoro, formalized]
+superseded_by: worldsheet.verma-level-basis-generic-low-levels-v2
 notes: |
+  【★ 换代记录（2026-09-11，curator，分支 agent/curator/lean-wire-7；lead 指派）】
+  本卡 superseded_by **worldsheet.verma-level-basis-generic-low-levels-v2**。原因：formalizer 分支
+  agent/formalizer/pbw-n34（lead 以 **1b3a6e3** 合入 main）在 GenericIndependence.lean 新增
+  `ordWord_sum_three`、`ordWord_sum_four`、`levelSpan_three_eq_span_descFamily3`、
+  `levelSpan_four_eq_span_descFamily4`（无条件）与 `IsContravariant.finrank_levelSpan_three`（dim V₃ = 3）、
+  `IsContravariant.finrank_levelSpan_four`（dim V₄ = 5），使本卡 title 的「N = 3,4 只到 dim ≥ p(N)」、
+  条款 (5) 的「这两条没有升级为等式」以及【不断言】(d)(e) 所述的技术障碍**字面为假**
+  （障碍被绕开：上界不走 `Nat.Partition` 计数，而是经 `levelSpan_eq_ordSpan` 把张成集裁到有序词后
+  初等枚举）。按原则 1 本卡文本一字不改；v2 把 (5) 并入等式版的 (3)、删除 (d)(e)、
+  formal.lean_decl 改指 `finrank_levelSpan_four`。本卡的推导 `--via-lean` 已 `git mv` 改指 v2；
+  本卡无其他活推导依赖。以下 notes 是建卡时的原文，保留作历史。
+
   【查重（2026-09-11，curator，分支 agent/curator/lean-wire-5）】
   跑 `uv run stringgraph search 线性无关 / PBW / Verma / Gram / determinant`。命中并逐卡比对：
   · math.verma-module-free-over-negative-part（= 旧 worldsheet.verma-module-pbw-basis 的换代）——
