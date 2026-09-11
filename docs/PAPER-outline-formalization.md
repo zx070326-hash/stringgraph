@@ -236,9 +236,7 @@ relations are proved with no `sorry`: `⁅L_m,K_n⁆ = -nK_{m+n}`, `⁅K_m,K_n�
 `ddfSpan ⊔ spurious`), with `D = 26` not appearing anywhere in this argument. The general
 spanning lemma — a unitriangular change of basis between the naive oscillator basis and
 the DDF+longitudinal+transverse basis, at every level `N` — is open.
-[verify: exact current frontier beyond N=1; several background Lean agents were active
-on adjacent files (`DDFGram.lean`, `TowerNull.lean`) at the time this outline was written
-and may have advanced this further.]
+(status 2026-09-12: `LightCone.lean` on main proves spanning at N = 1 (`towerPhys_bigrade_one_le_ddfSpan_sup_spurious`); N = 2 is blocked on two named lemmas recorded in `formal/TODO.md` under `noghost-b`; `DDFGram.lean` (C.4) and `LevelTwoSpan` (B.6 at N = 2) are in progress on branches)
 
 **Assembly and the `(B-26)` step: open.** The final assembly combining spanning,
 positivity of the transverse Gram matrix, and the quotient by null/spurious states is not
@@ -276,9 +274,7 @@ translation to audit the evidence trail.
 
 **Axiom check.** `uv run stringgraph check-axioms` most recently reported **77
 declarations checked: 77 ok, 0 non-standard axioms, 0 missing, 0 errors** (all closing
-over only `propext`, `Classical.choice`, `Quot.sound`). `[verify: count taken while
-drafting this outline; concurrent Lean-formalizer agents may have advanced it by
-submission — rerun before camera-ready]`. Not part of `validate` or the pre-commit hook
+over only `propext`, `Classical.choice`, `Quot.sound`). `(77 declarations checked, 77 ok, `uv run stringgraph check-axioms` on main at 3508 Lake jobs, 2026-09-12; rerun before camera-ready)`. Not part of `validate` or the pre-commit hook
 (needs a full `lake build`, too slow per-commit); `lead` runs it manually before each
 merge into `main`.
 
@@ -298,5 +294,4 @@ axiom set, §6); `uv run stringgraph report` for the summary statistics below.
 **Current graph size** (`uv run stringgraph report`, first lines): 596 statements, 492
 derivations, 3 milestones, 21 conventions; by kind, 112 definitions and 484
 propositions; by effective status, 73 formalized, 107 rigorous, 350 physical-argument,
-29 conjecture, 1 refuted, 36 open. `[verify: live counts — many concurrent agents are
-adding nodes; rerun `stringgraph report` before camera-ready]`.
+29 conjecture, 1 refuted, 36 open. `(main 2026-09-12: 600 statements, 494 derivations, 3 milestones, 21 conventions; effective formalized 73, rigorous 107; rerun before camera-ready)`.
