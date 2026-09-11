@@ -6825,4 +6825,453 @@ Mathlib 里根系已有（`RootSystem`），但 **ADE 分类与 Coxeter 数表�
 - **Q47.7** Zagier p. 33 证明末句的极限变量（我读成 `k → ∞`，按内容应是 `n → ∞`）需重读一次页图确认；
   以及 p. 34 那句 rank-8 唯一性里被指代的格符号没读全。**两处都已在 §47.2 标注为"不要照抄"。**
 
+---
+
+# § Dedekind η 的 S 变换（供 `math.dedekind-eta-s-transformation`）
+
+## 48. `η(−1/τ) = (−iτ)^{1/2} η(τ)`：带编号的数学来源（researcher，2026-09-11）
+
+- 触发：图节点 `math.dedekind-eta-s-transformation` 目前**只有 Polchinski 的断言**（v1 (7.2.43)/(7.2.44)，
+  而 `polchinski-1998-v1-ch7.md` 已 L1 确认**原书对该变换零证明**）。本节找数学侧的一手来源。
+
+### 48.0 结论表（先看这张）
+
+| # | 候选 | 等级 | 可写进图的 `loc` | 判断 |
+|---|---|---|---|---|
+| (a) | **Siegel, *Mathematika* **1** (1954) 4** | **L1 全文（1 页页图，已逐字转录）** | `p. 4`（**全文无编号定理**，见 48.2） | ★★ **首选**：陈述形式与图里要的**完全一致**，且有完整证明 |
+| (b) | Apostol, GTM 41, **Ch. 3「The Dedekind eta function」pp. 47–73** | 章标题与页范围 **L1**（Crossref）；**「Theorem 3.1」这个号 L0** | 只能写 `Ch. 3, pp. 47–73` | 章级定位可写，**定理号不得写** |
+| (c) | **Mathlib `Mathlib/NumberTheory/ModularForms/DedekindEta.lean`** | **L1（raw 源文件全读）** | — | ★★ **干净的否定结论：该文件里没有 S 变换**（见 48.4）⇒ **本节点不得标 `formalized`** |
+
+### 48.1 文献标识（L1）
+
+- **Crossref `api.crossref.org/works?query.bibliographic=…`（L1）**：
+  `Carl Ludwig Siegel, "A simple proof of η(— 1/τ)= η(τ)√τ/i", Mathematika 1 (1954) 4–4, DOI 10.1112/S0025579300000462.`
+  （⚠ Crossref 的标题字段里带一个乱码连字符 `— 1/τ`，抄进 bib 时要按页图订正为 `−1/τ`。）
+- **取件路线（可复用，本轮一次命中）**：
+  1. `www.cambridge.org/core/product/identifier/S0025579300000462/type/journal_article` → 文章页给出 "Save PDF (0.05 mb)"；
+  2. PDF 真实 URL
+     `www.cambridge.org/core/services/aop-cambridge-core/content/view/EEB34D28F123950F584CE8B8DE8F6709/S0025579300000462a.pdf/a-simple-proof-of-h-1t-htti.pdf`
+     → WebFetch 落盘 → `Read(pages=1)` 读页图。
+  3. **⇒ 记忆里「Cambridge Core 机构订阅」这条路线对 *期刊文章* 同样有效，不只对书。**
+     **期刊文章的 item hash 与 `<DOI 去掉 10.1112/ 前缀>a.pdf` 一起构成文件名**，与书的 `c<N>_p<起>-<止>_CBO.pdf` 规则不同。
+- **页脚（版本锚定凭据，L1 逐字）**：
+  > `Downloaded from https://www.cambridge.org/core. Zhejiang University, on 11 Sep 2026 at 02:01:04, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1112/S0025579300000462`
+- 页脚另一行（L1 逐字）：`[MATHEMATIKA 1 (1954), 4]  (Received 3rd December, 1953.)`
+
+### 48.2 ★★ 硬性结论：Siegel 这篇**没有编号定理，陈述就是标题**
+
+全文 1 页，**零编号公式、零编号定理、零参考文献、零小节**。
+**要引用的那条陈述，字面上只出现在标题里**（L1 逐字，页图）：
+
+> **A SIMPLE PROOF OF `η(−1/τ) = η(τ) √(τ/i)`**
+> Carl Ludwig Siegel
+
+⇒ **`loc` 只能写 `p. 4 (title)` 或 `p. 4`，不得写 "Theorem 1"。**
+
+**⚠ 记号换算（这一步是抽取者的算术，不是原文）**：`τ/i = −iτ`，故 `√(τ/i) = (−iτ)^{1/2}`，
+即 Siegel 的标题式与图里的 `η(−1/τ) = (−iτ)^{1/2} η(τ)` **逐字同义**。
+**⚠ 原文不声明平方根的分支**，也**不显式写 `Im τ > 0`**（只以 `|q| < 1` 蕴含之，见下）。
+若图节点要求「主支 + 上半平面」，这两条前提**在本来源里是隐含的，不是明写的**，note 必须写明。
+
+### 48.3 正文逐字转录（L1，全部 1 页；`Read(pages=1)` 页图）
+
+开头（η 的定义 + 本文的定位）：
+
+> "This functional equation for Dedekind's
+> `η(τ) = q^{1/24} ∏_{l=1}^{∞} (1−q^l)`   `(q = e^{2πiτ}, |q| < 1)`
+> has been established in many different ways; however, it seems that the following proof,
+> **a straightforward application of the theorem of residues, has not been observed before**."
+
+**⇒ 文献自称的严格程度：这是一篇纯粹的数学证明（留数定理），作者自称的新颖点只在"证明方法"，不在结论。
+结论本身被明说是已被 "established in many different ways" 的既有事实。**
+
+证明骨架（逐字，行间式）：
+
+> `(1/12)πiτ − log η(τ) = − Σ_{l=1}^{∞} log(1−q^l) = Σ_{k,l=1}^{∞} (1/k) q^{kl} = Σ_{k=1}^{∞} (1/k)(q^{−k}−1)^{−1}`,
+>
+> "it suffices to prove that"
+> `πi (τ+τ^{−1})/12 + ½ log(τ/i) = Σ_{k=1}^{∞} (1/k) ( 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1) )`.
+>
+> "Put"  `f(z) = cot z · cot(z/τ)`,  `ν = (n+½)π`  `(n = 0, 1, …)`.
+>
+> "The meromorphic function `z^{−1}f(νz)` has simple poles at `z = ±πk/ν` and `z = ±πkτ/ν`
+> with the residues `(1/πk) cot(πk/τ)` and `(1/πk) cot(πkτ)` respectively, for `k = 1, 2, …`;
+> in addition there is a pole of the third order at `z = 0` with the residue `−⅓(τ+τ^{−1})`.
+> Let `C` denote the contour of the rhombus with vertices at `1, τ, −1, −τ` in the `z`-plane.
+> Then by the theorem of residues"
+> `πi (τ+τ^{−1})/12 + ∫_C f(νz) dz/(8z) = ½i Σ_{k=1}^{n} (1/k)(cot πkτ + cot πk/τ)`
+> `  = Σ_{k=1}^{n} (1/k)( 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1) )`.
+>
+> "On the other hand, as `n → ∞`, the function `f(νz)` is uniformly bounded on `C` and has on the four sides,
+> excluding the vertices, the limit values `1, −1, 1, −1`. Hence"
+> `lim_{n→∞} ∫_C f(νz) dz/z = ( ∫_1^τ − ∫_τ^{−1} + ∫_{−1}^{−τ} − ∫_{−τ}^{1} ) dz/z = 4 log(τ/i)`,
+> "which gives the desired result."
+
+**★ 自洽性复算（抽取者所做，两处，均通过——按本项目"反直觉系数先复算"的纪律）：**
+1. `z=0` 三阶极点：`2πi × (1/8) × (−⅓)(τ+τ^{−1}) = −πi(τ+τ^{−1})/12`，移项后正是左端的 `+πi(τ+τ^{−1})/12` ✓；
+   末式 `(1/8)×4 log(τ/i) = ½ log(τ/i)`，与"it suffices to prove"那一行的 `½ log(τ/i)` 严格吻合 ✓。
+   ⇒ **`dz/(8z)` 里的 `8` 读数正确，不是 `3` 或 `s`。**
+2. 单极点：`2πi×(1/8)×2×(1/πk)(cot πkτ + cot πk/τ) = (i/2)(1/k)(…)` ✓，与页图的 `½i Σ` 吻合；
+   且 `(i/2)(cot πkτ + cot πk/τ) = 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1)` 由 `cot θ = i(e^{2iθ}+1)/(e^{2iθ}−1)` 逐项验证成立
+   （两个 `±½` 恰好相消）✓。
+
+### 48.4 ★★ Mathlib 现状：**有 `DedekindEta.lean`，但里面没有 S 变换**（L1，raw 源文件全读）
+
+`https://api.github.com/repos/leanprover-community/mathlib4/contents/Mathlib/NumberTheory/ModularForms`（L1）
+列出 **`DedekindEta.lean`** 确实存在。读其 raw 源文件（`raw.githubusercontent.com/…/master/…/DedekindEta.lean`，L1）后：
+
+- **module docstring 自述覆盖范围**（L1 逐字节录）：用无穷乘积定义 η，证明它在上半平面
+  "non-vanishing and differentiable"，"Lastly, we compute its logarithmic derivative and show that it is a multiple of the Eisenstein series `E2`"。
+  引用的参考文献是 **Diamond & Shurman, *A First Course in Modular Forms*, §1.2**（不是 Apostol，也不是 Siegel）。
+- **全文声明清单**（L1）：`eta_q_eq_cexp` / `eta_q_eq_pow` / `one_sub_eta_q_ne_zero` / `multipliable_one_sub_pow` /
+  `multipliableLocallyUniformlyOn_one_sub_pow` / `differentiableOn_tprod_one_sub_pow` /
+  `differentiableOn_tprod_one_sub_pow_pow` / `summable_eta_q` / `multipliableLocallyUniformlyOn_eta` /
+  `eta_tprod_ne_zero` / `eta_ne_zero` / `logDeriv_one_sub_cexp` / `logDeriv_one_sub_mul_cexp_comp` /
+  `one_sub_eta_logDeriv_eq`(private) / `tsum_logDeriv_eta_q` / `differentiableAt_eta_tprod` /
+  `differentiableAt_eta_of_mem_upperHalfPlaneSet` / `logDeriv_qParam` / `summable_logDeriv_one_sub_eta_q` /
+  **`logDeriv_eta_eq_E2 (z : ℍ) : logDeriv eta z = (π * I / 12) * E2 z`**。
+- **⇒ 没有任何关于 `η(−1/τ)` 的声明。**
+
+**★ 对图的硬约束**：`math.dedekind-eta-s-transformation` **不得标 `formalized`**，也不得挂 `lean_decl`。
+**但这条否定结论同时是最好的 Lean 选题情报**：Mathlib 已经把 η 的定义、非零性、可微性、
+以及 `logDeriv η = (πi/12)E₂` 都备好了，而 `E₂` 的模变换（权 2 拟模形式的 S 变换）正是 S 变换的标准证明路线之一
+⇒ **这是一个"地基已铺、只差最后一步"的形式化岛**。
+⚠ **未检查**：`Delta.lean` / `Identities.lean` / `LevelOne/` 里是否另有 η 的 S 变换（本轮 WebFetch 预算优先给了第 6 项），见 Q48.2。
+
+### 48.5 Apostol：章级定位 L1，**定理号仍是 L0**
+
+- **Crossref 章级目录（L1）**：`Modular Functions and Dirichlet Series in Number Theory`，
+  **Chapter 3「The Dedekind eta function」= pp. 47–73**。
+  两个版次的分章与页码**完全相同**：1976 一版 DOI `10.1007/978-1-4684-9910-0_3`；
+  1990 二版（GTM 41）DOI `10.1007/978-1-4612-0999-7_3`。
+  ⇒ **引 Apostol 时页码不必区分版次，但 DOI 必须区分。**
+- **「Theorem 3.1」这个编号本轮零证据**：
+  - `link.springer.com/chapter/10.1007/978-1-4612-0999-7_3` → **303 跳 `idp.springer.com/authorize`（登录墙）**，未继续。
+  - INSPIRE 全文检索 `ft "Apostol, Theorem 3.1"` → **0 hits**（L1 否定）。
+  - INSPIRE 全文检索 `ft "Modular Functions and Dirichlet Series" and ft "Theorem 3.1"` → **14 hits**，
+    但这只说明"同一篇论文里同时出现这两个字串"，**不能推出它把 Theorem 3.1 归给 Apostol**（两个字串可能出自不同引用）。
+    本轮未逐篇核对（预算给了第 6 项）。候选最相关者：arXiv:1210.3066（Rademacher Sums and Rademacher Series）、
+    arXiv:1902.04180（Modular graph functions…）、arXiv:2008.02190（Discreteness and Integrality in CFT）。见 Q48.1。
+  - **⚠ WebSearch 在本任务开始前即已耗尽（200/200）**，"找课程页逐字引 [Apostol, Thm 3.1]"这条唯一现实路线**未能执行**。
+- ⇒ **硬性禁令：在 Q48.1 结清之前，图里与 `sources.bib` 里都不得出现 "Apostol, Theorem 3.1"。**
+  `sources.bib` 本轮**只登记 `siegel-1954-eta`**；Apostol 暂不登记（避免登记了就被顺手引成 Theorem 3.1）。
+
+### 48.6 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+```yaml
+# math.dedekind-eta-s-transformation
+sources:
+  - ref: siegel-1954-eta
+    loc: "p. 4 (title; the paper has no numbered theorem)"
+    note: >
+      原文写作 η(−1/τ) = η(τ)√(τ/i)；√(τ/i) = (−iτ)^{1/2}（换算是抽取者所做，原文未写）。
+      原文不声明平方根分支，也不显式写 Im τ > 0（只由 |q| < 1 蕴含）。
+      证明是留数定理（f(z)=cot z·cot(z/τ)，菱形围道 1, τ, −1, −τ），完整、自足、1 页。
+# derivation own status 可写 proven（这是一条完整的严格数学证明）
+# ⚠ 不得写 formalized：Mathlib 的 DedekindEta.lean 不含 S 变换（§48.4，L1）
+```
+
+同时建议：**把 Polchinski (7.2.43)/(7.2.44) 这条 source 保留但降级为"物理侧转述"**——
+`polchinski-1998-v1-ch7.md` 已 L1 确认原书对该变换**零证明**，
+所以图里 `math.*` 这条卡的 `proven` 状态应当由 Siegel 提供，而不是由 Polchinski 提供。
+
+### 48.7 访问日志与未解决问题（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| Siegel 1954 书目 | `api.crossref.org/works?query.bibliographic=Siegel+simple+proof+of+eta…` | ✅ DOI + 卷页年 |
+| Siegel 1954 文章页 | `cambridge.org/core/product/identifier/S0025579300000462/type/journal_article` | ✅ 给出 "Save PDF (0.05 mb)" 与真实 PDF URL |
+| **Siegel 1954 全文** | Core `/services/aop-cambridge-core/content/view/EEB34D28F123950F584CE8B8DE8F6709/S0025579300000462a.pdf/…` | **✅ 56 KB / 1 页，`Read(pages=1)` 读图成功** |
+| Apostol 章级目录 | `api.crossref.org/works?query.container-title=…&filter=type:book-chapter` | ✅ 八章标题 + 页码 + 两版 DOI |
+| Apostol 正文 | `link.springer.com/chapter/10.1007/978-1-4612-0999-7_3` | ❌ 303 → `idp.springer.com/authorize` 登录墙 |
+| Apostol 定理号 | INSPIRE `ft "Apostol, Theorem 3.1"` | ❌ **0 hits** |
+| Mathlib 目录 | `api.github.com/repos/leanprover-community/mathlib4/contents/Mathlib/NumberTheory/ModularForms` | ✅ 21 个文件 + 4 个子目录，含 `DedekindEta.lean` |
+| Mathlib 源文件 | `raw.githubusercontent.com/leanprover-community/mathlib4/master/Mathlib/NumberTheory/ModularForms/DedekindEta.lean` | ✅ 全读；**无 S 变换** |
+| WebSearch | — | ❌ **本会话额度在任务开始前即 200/200 用尽** |
+
+**未解决 / 留给下一轮**
+
+- **Q48.1 ★ Apostol「Theorem 3.1」到底是不是那条陈述？** 下一轮**有 WebSearch 时优先做**，
+  检索式：`"Apostol" "Theorem 3.1" "Dedekind eta"`、`site:edu "Apostol" "Theorem 3.1" eta`。
+  无 WebSearch 时的替代：逐篇读上面 14 条 INSPIRE 命中里最可能的 3 篇（1210.3066 / 1902.04180 / 2008.02190），
+  看有没有 `[Apostol, Theorem 3.1]` 形式的逐字引用。
+- **Q48.2 ★ Mathlib 里 η 的 S 变换是否在别的文件？** 本轮只读了 `DedekindEta.lean`。
+  待查：`ModularForms/Delta.lean`、`ModularForms/Identities.lean`、`ModularForms/LevelOne/`、
+  以及 `Mathlib/Analysis/SpecialFunctions/…/JacobiTheta`（θ 的 S 变换在 Mathlib 里**确定存在**，
+  而 `η` 与 `θ` 之间有标准桥；若 θ 侧已形式化，本节点的 Lean 路线会比想象中短）。
+- **Q48.3** Siegel 原文不声明平方根分支与 `Im τ > 0`。若 Lean 化，这两条要自己补进 statement；
+  补进去之后**就不再是"Siegel 证的那条"**，note 要写明。
+- **Q48.4** 本项目此前未登记过 Mathematika。`sources.bib` 新增 `siegel-1954-eta` 时注意：
+  Crossref 的标题字段含乱码连字符，**以页图为准**。
+
+---
+
+# § 紧曲面分类：Gallier–Xu 编号逐字复核（接 §39）
+
+## 49. Gallier–Xu 的 Lemma 6.1 / Prop 6.1 / Thm 6.1 逐字与页码（researcher，2026-09-11）
+
+- 触发：§39.2 只逐字转录了 **Theorem 6.1 / 6.2 / Definition 6.5**，而 **Lemma 6.1 与 Proposition 6.1
+  只在 §39.2.0 的交叉表里出现了一行内容概括，没有逐字**。本节补齐。
+- 取件：`https://www.cis.upenn.edu/~jean/surfclassif-root.pdf` → 落盘 3.5 MB → `Read(pages=94-101)` + `Read(pages=102-107)`。
+  **PDF 页 = 书页 + 10（本轮再次验证：PDF 94 ↔ 书 p.84，PDF 107 ↔ 书 p.97）。**
+- **两版编号对照沿用 §39.2.0 的交叉表**（出版版 Ch.6 ↔ arXiv:0805.0562 v1 Ch.5），本节每条都把两个号一起写。
+
+### 49.0 本节结论表
+
+| 出版版编号 | 书页 | arXiv v1 编号 | 是否带证明 |
+|---|---|---|---|
+| **Proposition 6.1** | **p. 86** | Proposition 5.2.2 | 有证明，但关键步骤**外包给 Ahlfors–Sario [1]** |
+| Proposition 6.2 | p. 88 | （交叉表未列，**本轮新增，arXiv 号 L0**） | **无证明**，只说"由 Prop 5.8 的证明细看可得" |
+| **Lemma 6.1** | **pp. 92–95** | Lemma 5.2.5 | 有证明，**6 个 Step**，且明说沿用 Ahlfors–Sario [1] 的步骤 |
+| **Theorem 6.1** | **p. 96** | Theorem 5.3.1 | 有证明（依赖 Lemma 6.1 + Theorem 5.2） |
+| Theorem 6.2 | p. 97 | Theorem 5.3.2 | **无证明**，"For the record, we state the following theorem"（见 §39.2.1） |
+
+### 49.1 ★★ **Proposition 6.1**（书上 **p. 86**，L1 逐字）
+
+> **Proposition 6.1.** *Every cell complex, `K`, can be refined to a triangulated 2-complex.*
+
+**证明的开头与外包句（L1 逐字，必须随引用一起写）**：
+
+> "*Proof.* The idea is to subdivide the cell complex by adding new edges. Informally, it is helpful to view the process
+> as adding new vertices and new edges, but since vertices are not primitive objects, this must be done via the
+> refinement operations (P1) and (P2). To carry this out is a bit tedious, and we describe the refinement method
+> assuming that vertices are primitive objects. **The process of systematically replacing vertices by sequences of
+> edges is not hard but cumbersome. It is given in Ahlfors and Sario [1].**"
+
+⇒ **这条命题的完整证明不在本书内**（"assuming that vertices are primitive objects" 是一个被明说绕开的化简）。
+⚠ 它位于 §6.2「Normal Form for Cell Complexes」（该节自 **书 p.84** 起），其上文是 **Definition 6.3**（初等细分 (P1)/(P2)，书 p.84）。
+
+### 49.2 **Proposition 6.2**（书上 **p. 88**，L1 逐字；§39 从未记录过）
+
+> **Proposition 6.2.** *For a triangulated 2-complex `K` viewed as a cell complex, orientability of the surface `K_g`
+> as given by Definition 4.6 is equivalent to orientability of `K` as given by Definition 6.4.*
+
+其上文（L1 逐字）：「Close examination of the proof of **Proposition 5.8** (especially the last part) shows that if `K` is a
+triangulated 2-complex representing a surface or a bordered surface `K_g`, then `K_g` is orientable iff every edge in `K`
+occurs at most once in the set of boundaries of the faces, which is exactly the condition of Definition 6.4.
+This important property is recorded in the following proposition.」
+⇒ **Proposition 6.2 无独立证明，靠回指 Proposition 5.8。**
+**它是把"胞腔复形的可定向性（Def 6.4）"与"曲面的可定向性（Def 4.6）"接起来的那块桥**，
+`positive-euler-number-no-moduli--via-surface-enumeration` 若要用 Thm 6.1/6.2 的"character of orientability"，
+这条桥是隐含依赖。
+
+### 49.3 ★★★ **Lemma 6.1**（书上 **p. 92**，L1 逐字）——分类定理的组合核心
+
+> **Lemma 6.1.** *Every cell complex, `K`, is equivalent to some canonical cell complex.*
+
+**证明结构（L1，书上 pp. 92–95，六个 Step，标题逐字）**：
+
+> "*Proof.* The proof proceeds by steps that bring the original cell complex closer to normal form.
+> **We use the same steps as in the proof given in Ahlfors and Sario [1].**"
+> - *Step* 1. **Elimination of strings `aa⁻¹` in boundaries.**
+> - *Step* 2. **Vertex Reduction.**
+> - *Step* 3. **Reduction to a single face and introduction of cross-caps.**
+> - *Step* 4. **Introduction of handles.**
+> - *Step* 5. **Transformation of handles into cross-caps.**
+> - *Step* 6. **Grouping loops together.**
+> "When all this is done, we have obtained a canonical form and the proof is complete. □"
+
+**Step 5 的关键伪重写（L1 逐字，书 p.95）**：「We now show that a handle and a cross-cap is equivalent to **three cross-caps**.
+For this, we apply the pseudo-rewrite rule `aaXY ≃ bYbX⁻¹`.」
+**Step 3/4/6 用到的两条伪重写规则（L1）**：`aXaY ≃ bbY⁻¹X`（或 `aaXY ≃ bYbX⁻¹`）与 `aUVa⁻¹X ≃ bVUb⁻¹X`。
+
+⚠ **本引理的引用纪律**：
+1. **它只讲胞腔复形的等价，不讲同胚**；「等价 ⇒ 几何实现同胚」是另一步（在 Theorem 6.1 的证明里用）。
+2. **证明步骤明说照抄 Ahlfors–Sario [1]**，与 Proposition 6.1 同一外包对象。
+3. 书 p.95 末逐字：「A comparison of this proof with other proofs can be found in **Note F.9**.
+   Readers interested in rewrite systems should read **Note F.10**.」——本书把与其它证明的比较放在附录 Note 里。
+
+### 49.4 **Theorem 6.1**（书上 **p. 96**，L1 逐字；§39.2.1 已有，此处补其证明与所在节）
+
+所在节：**§6.3「Proof of the Classification Theorem」**（自书 **p. 96** 起），节首逐字：
+「Having the key **Lemma 6.1** at hand, we can finally prove the fundamental theorem of the classification of
+triangulated compact surfaces and compact surfaces with boundary.」
+
+> **Theorem 6.1.** *Two (two-dimensional) compact polyhedra or compact polyhedra with boundary
+> (triangulated compact surfaces with or without boundary) are homeomorphic iff they agree in character of
+> orientability, number of contours, and Euler–Poincaré characteristic.*
+
+**证明逐字（书 p.96，完整，L1）**：
+
+> "*Proof.* If `M₁ = (K₁)_g` and `M₂ = (K₂)_g` are homeomorphic, we know that `M₁` is orientable iff `M₂` is orientable,
+> and the restriction of the homeomorphism between `M₁` and `M₂` to the boundaries, `∂M₁` and `∂M₂`, is a homeomorphism,
+> which implies that `∂M₁` and `∂M₂` have the same number of arcwise components, that is, the same number of contours.
+> Also, we have stated that homeomorphic spaces have isomorphic homology groups and, **by Theorem 5.2**, they have the
+> same Euler–Poincaré characteristic. Conversely, **by Lemma 6.1**, since any cell complex is equivalent to a canonical
+> cell complex, the triangulated 2-complexes `K₁` and `K₂`, viewed as cell complexes, are equivalent to canonical cell
+> complexes `C₁` and `C₂`. However, we know that equivalence preserves orientability, the number of contours, and the
+> Euler–Poincaré characteristic, which implies that `C₁` and `C₂` are identical. But then, `M₁ = (K₁)_g` and `M₂ = (K₂)_g`
+> are both homeomorphic to `|C₁| = |C₂|`. □"
+
+**⇒ Theorem 6.1 的完整依赖（原文自己点名的，不是推断）：Lemma 6.1 + Theorem 5.2（同伦不变的 Euler 数）
++ "equivalence preserves orientability / number of contours / χ"（书 p.88 与 p.90 的无编号段落）。**
+
+### 49.5 顺带 L1 核实的三条（对 §39 的补强）
+
+1. **χ 公式确实无编号**（书 p.89–90，L1 复核 §39.2 的警告）：
+   type (I) 「there are `q+1` vertices, `2p+2q` sides, and one face … `χ(K) = 2 − 2p − q`」；
+   type (II) 「`q+1` vertices, `p+2q` sides, and one face … `χ(K) = 2 − p − q`」。
+   **两式都是正文行间式，没有编号。**
+2. **规范复形的两两不等价性**在书 p.90 是一段无编号论证（"We claim that distinct canonical cell complexes
+   `K₁` and `K₂` are inequivalent."），**不是定理**。
+3. **Theorem 6.2 前的两句历史评注（书 p.97，L1 逐字，§39 未记）**：
+   「It is interesting to note that **3-manifolds can be triangulated (E. Moise, 1952)** but that **Markov showed that
+   deciding whether two triangulated 4-manifolds are homeomorphic is undecidable (1958)**. For the record, we state
+   the following theorem putting all the pieces of the puzzle together.」
+   ⇒ **"For the record, we state" 再次坐实 §39.2.1 的判断：Theorem 6.2 在本书里没有独立证明。**
+4. **连通和（§6.4，自书 p.97 起）**：**Definition 6.6** 给 `S₁♯S₂`；`χ(S₁♯S₂) = χ(S₁) + χ(S₂) − 2`
+   **是无编号行间式**（书 p.97），且前置措辞是「It can also be shown that」⇒ 无证明。
+
+### 49.6 给 curator 的 `loc` 写法（供直接抄）
+
+```
+# 出版版（Springer GTC 9, 2013）——首选
+Gallier & Xu, A Guide to the Classification Theorem for Compact Surfaces:
+  Proposition 6.1, p. 86     # 胞腔复形可细分为三角化 2-复形（证明部分外包 Ahlfors–Sario）
+  Proposition 6.2, p. 88     # 两种可定向性定义等价（无独立证明，回指 Prop 5.8）
+  Lemma 6.1, pp. 92-95       # 每个胞腔复形等价于某个规范胞腔复形（6 步，步骤照 Ahlfors–Sario）
+  Theorem 6.1, p. 96         # 三角化版分类定理（含带边）
+  Theorem 6.2, p. 97         # 紧曲面版分类定理（含带边）——无证明，依赖 Appendix E 的可三角化性
+# arXiv:0805.0562 v1（Ch.5）对应号：5.2.2 / （Prop 6.2 无对应记录）/ 5.2.5 / 5.3.1 / 5.3.2
+```
+⚠ **Proposition 6.2 的 arXiv 号本轮未核（L0）**，`sources.bib` 与图里都不要写它的 arXiv 号。
+
+---
+
+# § Chevalley 限制定理与根空间分解（接 §44，结算 Q39）
+
+## 50. Humphreys GTM 9 §23 与 §8 的入口核实（researcher，2026-09-11）
+
+- 触发：**§44.10 的 Q39**——「Chevalley 限制定理的带编号来源」。§44.4 只拿到
+  「Humphreys *Reflection Groups* p.56 的 Remark 指向 GTM 9 §23」这一条 L1 交叉引用，
+  **GTM 9 的内容一字未核（L0）**，且 `§23.1` 这一级零证据。
+- **本轮结论：Q39 仍未结案，但拿到两条新的 L1 与两条新的 L4，并且发现了一个比编号更要紧的问题（见 50.3）。**
+- ⚠ **本会话 `WebSearch` 额度在任务开始前即已耗尽（200/200）**，
+  §44.10 Q39 列的第一条路线（找一篇逐字引 `[Hum, §23.1]` 的论文）**无法执行**。
+
+### 50.0 结论表
+
+| 目标 | 本轮最强证据 | 等级 | 可写进图吗 |
+|---|---|---|---|
+| GTM 9 的**章级**结构与页码 | Crossref 章级目录（见 50.1） | **L1** | ✅ 可写 `Ch. II, pp. 15–41` / `Ch. VI, pp. 107–144` |
+| **§8 = 根空间分解**，且在 Ch. II 末 | Google Books 单页命中 p.35 + 章页范围 | **L4 + L1** | ⚠ 只能写 `§8 (Ch. II, pp. 15–41)`，**p.35 要标 L4** |
+| **§23 讲 Harish-Chandra 定理** | Humphreys 本人在 *Reflection Groups* p.56 的 Remark（§44.4 已 L1） | **L1** | ✅ 可写 `§23`，**不得写 `§23.x`** |
+| **§23 = Chevalley 限制定理** | **无任何来源背书**（见 50.3） | **L0，且有反向证据** | ❌ **禁止** |
+| §23 的小节标题与页范围 | 两条互相矛盾的 Google Books 单页命中 | **L4** | ❌ 不写 |
+| 形式化状态：根空间分解 | Mathlib `cartan_sup_iSup_rootSpace_eq_top` | **L1（文件在、声明名在）/ L0（确切陈述未读）** | ⚠ 见 50.4 |
+| 形式化状态：Chevalley 限制 / Harish-Chandra 同态 | Mathlib `Algebra/Lie/` 目录清单里没有 | **L2（目录级）** | ⚠ 见 50.4 |
+
+### 50.1 ★ L1：GTM 9 的章级目录与页码（Crossref，`query.container-title` + `filter=type:book-chapter`）
+
+`J. E. Humphreys, *Introduction to Lie Algebras and Representation Theory*, GTM 9, Springer, 1972`
+（DOI 前缀 `10.1007/978-1-4612-6398-2`，Crossref 全部返回 **1972**）：
+
+| 章 | 标题 | 页 | 章 DOI 后缀 |
+|---|---|---|---|
+| I | Basic Concepts | **1–14** | `_1` |
+| II | **Semisimple Lie Algebras** | **15–41** | `_2` |
+| III | Root Systems | **42–72** | `_3` |
+| IV | Isomorphism and Conjugacy Theorems | **73–88** | `_4` |
+| V | Existence Theorem | **89–106** | `_5` |
+| VI | **Representation Theory** | **107–144** | `_6` |
+| VII | Chevalley Algebras and Groups | **145–164** | `_7` |
+
+⚠ **Crossref 只给到章，给不到 `§N` 这一级**——GTM 9 的 `§1`–`§26` 是**跨章连续编号的小节**，
+Crossref 的 "chapter" 对应的是罗马数字大章。**所以「§8 在哪一页」Crossref 回答不了，只能靠章页范围夹逼。**
+⚠ **本轮对 Springer 的三条路线全部撞登录墙**：
+`link.springer.com/book/10.1007/978-1-4612-6398-2`、`link.springer.com/content/pdf/bfm:978-1-4612-6398-2/1.pdf`
+（前置内容 PDF）、以及 §48 里试过的章页 —— **三者一律 303 跳 `idp.springer.com/authorize`**。
+**⇒ 记一条方法论：Springer 的 `bfm:…/1.pdf`（front matter）在本环境同样不开放，不要再试。**
+
+### 50.2 (A) §8「根空间分解」
+
+- **位置**：在 **Ch. II「Semisimple Lie Algebras」pp. 15–41**（L1），是该章的**最后一节**
+  （§4–§8 五节；§9 起进入 Ch. III「Root Systems」，见上表 p.42）。
+- **起始页 p.35**：Google Books 卷 `mSD4DvUFa6QC` 查 `"Root Space Decomposition"` → **Page 35**（**L4**）。
+  该卷已在 §15.3 用无意义串做过控制实验并返回显式 "No results"，属「诚实卷」，故这个页码可信度高于一般 L4，
+  **但仍只是"某页含该字串"，不等于"§8 起于 p.35"**。
+  ⚠ Google Books **不回 snippet**（本轮两次查询均只回页号，无上下文），**无法据此写小节标题**。
+- **图里需要的那句陈述**（**这是抽取者按需求侧写的，不是 Humphreys 的原文措辞；原文措辞仍 L0**）：
+  设 `L` 半单、`H` 是极大环面子代数（Cartan 子代数），`Φ ⊂ H*` 是非零根集，则
+  `L = H ⊕ ⨁_{α ∈ Φ} L_α`，其中 `L_α = {x ∈ L : [h,x] = α(h)x ∀h ∈ H}`，且 `H = C_L(H) = L_0`。
+  ⚠ **不得把这段话加引号当成 Humphreys 的逐字。**
+- **可写的最强 `loc`**：`Humphreys, GTM 9 (1972), §8 (Ch. II, pp. 15–41)`；
+  note 里写「§8 起始页 p.35 来自 Google Books 单页命中（L4）；**小节标题与定理编号本项目未核实，不得写 `§8.x`**」。
+
+### 50.3 ★★★ (B) §23：本轮最重要的发现是**一个定名问题，不是一个页码问题**
+
+**已有的唯一 L1 证据（§44.4 已记，此处复述以便对照）**——Humphreys 本人，*Reflection Groups and Coxeter Groups*，
+书上 **p.56**，§3.5 末的 Remark（Cambridge Core 页图，L1 逐字）：
+
+> "*Remark.* When `W` is a Weyl group, **a theorem of Harish–Chandra (see Humphreys [1], §23)** allows one to derive
+> from Chevalley's Theorem a description of **the center of the universal enveloping algebra** of a semisimple Lie
+> algebra over `C`: it too is a polynomial algebra."
+
+**★ 由此可以确定的与不能确定的，必须分开写：**
+
+| 命题 | 状态 |
+|---|---|
+| 「GTM 9 §23 里有一条 Harish-Chandra 的定理，内容是 `Z(U(𝔤))` 是多项式代数」 | **L1 成立**（Humphreys 本人所述） |
+| 「GTM 9 §23 = Chevalley **限制**定理 `S(𝔤*)^𝔤 ≅ S(𝔥*)^W`」 | **无来源，且有反向证据** |
+
+**反向证据**：那条 Remark 的措辞是「**allows one to derive from** Chevalley's Theorem」——
+即 Chevalley 的定理（该书 §3.5 的那条，关于反射群不变量环是多项式环）是**输入**，
+`Z(U(𝔤))` 的描述是**输出**，**两者是两条不同的定理**。
+§44.4 已经点出过这一层，**本轮把它升级为对任务书用词的直接更正**：
+⇒ **任务书写的「§23（Chevalley 限制定理）」这个等式，在本项目现有全部证据下不成立。**
+**§23 有 L1 背书的内容是 Harish-Chandra 关于 `Z(U(𝔤))` 的定理**；
+**Chevalley 限制定理（`𝔤`-不变多项式由其在 `𝔥` 上的限制决定）落在哪一节，仍是 L0。**
+（**它很可能就在 §23 的某个小节或附录里**——这是 §44.4 由 Google Books `"Invariant polynomial functions" → p.126`
+推出的猜测，**但本项目从未核实过，不得写进图。**）
+
+**本轮新增的 L4 页码（两条互相不完全一致，一并留痕）**：
+
+| 查询（卷 `mSD4DvUFa6QC`） | 返回 | 轮次 |
+|---|---|---|
+| `"Invariant polynomial functions"` | **Page 126** | §44.4（上一轮） |
+| `"Harish-Chandra"` | **Page 135** | **本轮** |
+| `"Generalities on characters"` | **无结果返回**（页面未交付搜索结果区，**不是"无命中"，是"没拿到"**） | 本轮 |
+
+⚠ **p.126 与 p.135 相差 9 页，两者不可能同属一个小节。**
+可能性有二：(i) 两者都在 §23 内（§23 是个长节）；(ii) p.135 已落入 **§24**。
+**本轮无法分辨** ⇒ **§23 的页范围不得写进图或 `sources.bib`。**
+⚠ **§44.10 的禁令原样保留：不得写 `§23.1`，不得写 `Theorem 23.x`。**
+
+### 50.4 形式化状态（L1 目录 + L1 docstring，本轮顺手查，对 Q39 的决策有直接影响）
+
+- **★ 根空间分解 Mathlib 里有。** `Mathlib/Algebra/Lie/Weights/Cartan.lean`（raw 源文件 docstring 已读，L1）
+  module docstring 逐字节录：「In the particular case when we view `L` as a module over itself via the adjoint action,
+  **the weight spaces of `L` restricted to a nilpotent subalgebra are known as root spaces**.」
+  其"主结果"里包含 **`cartan_sup_iSup_rootSpace_eq_top`**，docstring 概括为
+  「the full root space decomposition: the Cartan subalgebra together with the supremum of nonzero root spaces
+  spans the whole Lie algebra」。
+  同目录另有 `Weights/RootSystem.lean`、`Weights/Chain.lean`、`Weights/Killing.lean`、`Weights/IsSimple.lean`。
+  ⚠ **该文件的 docstring 里没有 References 节**（⇒ **拿不到"Mathlib 引 Humphreys 第几节"这条线索**，
+  这是本轮试图用 Mathlib 反推 Humphreys 编号的路线**失败**的原因）。
+  ⚠ **`cartan_sup_iSup_rootSpace_eq_top` 的确切签名与假设本轮未读（L0）**：
+  它是 `⊔`/`⨆`（子模的上确界）形式，**不等同于"直和"**，且需要"分裂的幂零子代数"等前提。
+  **要把它当 `lean_decl` 用之前必须读签名。**
+- **Chevalley 限制定理 / Harish-Chandra 同态：Mathlib 里看不到。**
+  `Mathlib/Algebra/Lie/` 顶层 40 个文件 + 5 个子目录（`AdjointAction`/`Basis`/`Derivation`/`Semisimple`/`Weights`）里
+  **没有任何以 Chevalley 限制、Harish-Chandra、或 `Z(U(𝔤))` 命名的文件**
+  （`Character.lean` 是**李代数的特征标 = 一维表示**，不是 Weyl 特征标；`SerreConstruction.lean` 是 Serre 关系；
+  `UniversalEnveloping.lean` 只是 `U(𝔤)` 的构造）。**等级 L2（只看了目录，没读文件）。**
+- **⇒ 对 §44.4 那条判断的支持**：E₈ 卡若想走 `rigorous`，**绕开 Chevalley 限制定理**（§44.7 的"对 248 个权直接做幂和"）
+  仍然是明显更省的路线——因为限制定理这一侧**既没有可引编号，也没有形式化**，而根空间分解那一侧两样都有。
+
+### 50.5 未解决 / 留给下一轮（Q39 的后继）
+
+- **Q50.1 ★★（= Q39 的核心，未结案）** Chevalley **限制**定理 `S(𝔤*)^𝔤 ≅ S(𝔥*)^W` 的带编号来源。
+  **下一轮有 WebSearch 时第一枪**：`"Humphreys" "Invariant Polynomial Functions" "23."`、
+  `site:edu "Chevalley restriction theorem" "Humphreys" section 23`。
+  无 WebSearch 时的替代：(i) DNB `d-nb.info/<IDN>/04` 取 Springer 出版方目录扫描
+  （**IDN 本轮未找到；`services.dnb.de/sru/dnb` 端点本轮未试，见 §47.7 的既有记录：接口活着但命中率低**）；
+  (ii) Google Books 再跑几条**小节标题**短语（本轮 `"Generalities on characters"` 未交付结果，值得重试一次）。
+- **Q50.2** §23 与 §24 的分界页（p.135 到底属于哪一节）。这决定 §23 的页范围能不能写。
+- **Q50.3** GTM 9 §8 的小节结构（§8.1–§8.4？）与定理编号。**图里若只需要"根空间分解"这条陈述，
+  按 50.4 直接引 Mathlib + 一本有编号的书更划算**，Humphreys 的编号未必值得继续追。
+- **Q50.4** `cartan_sup_iSup_rootSpace_eq_top` 的完整签名、前提、以及它与"直和"的差距。
+  **这是唯一一条可能让相关节点标 `formalized` 的路，成本只有 1 次 raw 文件读。**
+
+
 

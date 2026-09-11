@@ -168,3 +168,120 @@ Semantic Scholar 引文上下文检索（`DOI:10.1103/PhysRevD.7.535/citations?f
    - notes：抄 §3.2 的四条证据 + §3.3 第 3 条的调和假设（标 `inferred`）
    - ⇒ **`figueroa-ofarrill-kimura-1989` 的 NS 无鬼定理推导应 `depends_on` 这个节点**，这样它的 effective status 会被如实压低；`lian-zuckerman-1989` 的推导**不**依赖它（这正是「两条独立 derivation 其实强度不同」的一个真实例子，是本项目方法论想展示的场景）。
 3. **`sources.bib` 里 `brower-1972` 与 `figueroa-ofarrill-kimura-1989` 两条 note 各加一句互指**（易混：`brower-1972` = PRD 6, 1655 单作者 dual model；本条 = PRD 7, 535 双作者 NS）。
+
+---
+
+## 6. §6 LZ Remark 复核（researcher，2026-09-11；结算 §4 的 Q3）
+
+> 目标（任务书）：**LZ 1989 CMP 125 p.320 Remark 的反例取在哪个动量 `p`、是否 `p ≠ 0`、用哪层 Kac 行列式。**
+> 取件：Project Euclid `https://projecteuclid.org/journalArticle/Download?urlId=cmp%2F1104179468`
+> → 落盘 2.5 MB 扫描件 → `Read(pages=19-21)` 与 `Read(pages=35)`。**PDF 页 = 期刊页 − 300。**
+> 本节**只加不改** §1–§5 的旧行。
+
+### 6.1 ★★ p.320 Remark 全文逐字（L1 页图）
+
+> **"*Remark.* `V(p,κ)` is in general not a direct sum of Verma modules of `Vir_κ` even though it is `Vir_κ^−`-free.
+> **This was also pointed out in [5] in the bosonic case.** To see a counter-example, we consider the Neveu–Schwarz case.
+> Suppose `V = V(p,½)` is a direct sum of Verma modules. Then computing `ch_q` gives**
+>
+> `V ≅ ⊕_n a_n M( p·p/2 + n , 10 )`   **(35)**
+>
+> **for some positive integers `a_n`, `n` ranges over `0, ½, 1, …`. We wish to derive a contradiction.
+> Recall that `V` is hermitian. Thus**
+>
+> `⊕ a_n M(p·p/2 + n, 10) ≅ ⊕ a_n M(p·p/2 + n, 10)*`   **(36)**
+>
+> **By Kac's determinant formula, `M(h,10)` is irreducible for `h > 0` and hence hermitian. Thus**
+>
+> `⊕_{0 ≤ n ≤ |p·p/2|} a_n M(p·p/2 + n, 10) ≅ ⊕_{0 ≤ n ≤ |p·p/2|} a_n M(p·p/2 + n, 10)*`   **(37)**
+>
+> **Since Verma modules are strongly indecomposable, (37) implies that (see [20], Sect. 3.4)**
+>
+> `M(p·p/2 + n, 10) ≅ M(p·p/2 + n, 10)*`  for `n ≤ |p·p/2|` .   **(38)**
+>
+> **But by Kac's determinant formula, there are some negative half integers `h` such that `M(h,10)` is reducible.
+> If `p·p/2 + n` is one such number, (38) contradicts reducibility.**"
+
+（紧接其后即是 **Corollary 2.19**，其 (iii) 的证明在 p.321 逐字：
+「Equations (24), (25) imply that `V(p,κ)` is a direct sum of tensor products of free modules over `Vir_κ^−`.
+One can easily check that each of the tensor products is also `Vir_κ^−`-free.」）
+
+### 6.2 ★★★ 对任务书三问的逐条回答
+
+**(1) 反例取在哪个动量 `p`？——原文不给任何具体的 `p`，给的是一个"存在性"条件。**
+反例的成立条件是：**`p·p/2 + n` 恰好落在"使 `M(h,10)` 可约的某个负半整数 `h`"上**（原文措辞是 **"If … is one such number"**）。
+⇒ **这是一族条件，不是一个点。** 由于 `n ∈ ½Z_{≥0}` 且要求 `h = p·p/2 + n < 0`，
+**必须 `p·p < 0`**（LZ 的号差是 `((D−1)+, 1−)`，见 §2 的抽取记录 §1，故 `p·p < 0` = 类时）。
+⚠ **"取在哪个 `p`"这个问法本身预设了一个具体反例点，而原文没有给。** 引用时不得写成"LZ 在 `p = …` 处给出反例"。
+
+**(2) 是否 `p ≠ 0`？——是，而且比 `p ≠ 0` 强得多。**
+- `p ≠ 0`：p.303 全局假设，逐字「`p` will always be assumed non-zero until Sect. 5」（已在 `lian-zuckerman-1989.md` §1 记录）；
+  p.305 Remark 另有「we will assume that `p` is always in the future half `R^{D−1,1}_+`」。**p.320 落在 §2，故两条都生效。**
+- **但反例还额外要求 `p·p < 0`**（见上）。**`p·p = 0`（类光）时 (37) 的求和范围 `0 ≤ n ≤ |p·p/2|` 退化为 `n = 0`，
+  `h = 0`，"负半整数"条件不满足，反例不成立**（这一句是抽取者的推断，不是原文）。
+
+**(3) 用哪层 Kac 行列式？——原文不指定层，且用的是 *超* Virasoro 的 Kac 行列式（`c = 10`），不是 Virasoro 的。**
+- 原文两次用到 Kac 行列式公式，**两次都只用它的定性推论、不写 `(r,s)` 或层数 `N`**：
+  (i) 「`M(h,10)` is irreducible for `h > 0`」；
+  (ii) 「there are some negative half integers `h` such that `M(h,10)` is reducible」。
+- `M(h, 10)` 是 **`Vir_κ`（κ = ½，即 NS 超 Virasoro）** 的 Verma 模，中心荷 `10`
+  （LZ 的归一化是 `c/8`，故 `D = 10` ⇒ `c = 10`，见 `lian-zuckerman-1989.md` §1）。
+  LZ 全文的超 Virasoro Kac 行列式出处是 **[22] = Meurman, A., Rocha, A.: Commun. Math. Phys. 107, 263–294 (1986)**
+  （L1，见 6.4 的参考文献表）。
+- ⇒ **图里/报告里不得写「用第 N 层 Kac 行列式」。可写的最强形式是「由（超 Virasoro，`c=10`）Kac 行列式公式，
+  存在负半整数 `h` 使 `M(h,10)` 可约」。**
+
+### 6.3 ★★ 对 §3.3 第 3 条「调和假设」的裁决：**部分支持，但被一个新事实推翻**
+
+§3.3(3) 的假设是：「若 FOK 实际只用**一般动量 `p`**（Kac 行列式不为零），则 FOK 与 LZ 可并存。」
+
+- **支持的一半（来自本轮逐字）**：LZ 的反例确实**不是对所有 `p` 成立**——它需要 `p·p/2 + n` 命中一个特定的
+  负半整数集合。对"一般"的 `p`（`p·p/2` 不是半整数）该论证**产生不出矛盾**。
+  ⇒ **"in general not" 的确切含义因此被钉死了：不是"对所有 p 都不是"，而是"存在 p 使之不是"。**
+- **★ 推翻它的新事实（⚠ 以下是抽取者的推断，不是任何来源的原文）**：
+  LZ 的物理态定义 `P(p,κ)` 要求 `π(L₀)v = κ v`（Definition 2.16）。在第 `N` 层上 `L₀` 本征值是 `p·p/2 + N`，
+  故**能承载物理态的动量必然满足 `p·p/2 = κ − N`，即 `p·p/2` 必是半整数**，且 `N ≥ 1` 时为负。
+  ⇒ **"一般 `p`"恰恰是没有物理态的那些 `p`；无鬼定理真正关心的 `p` 全部落在 LZ 反例的危险区。**
+  ⇒ **§3.3(3) 的调和不能救 FOK 的 NS 推导。** 仍**不要**把这条写进图节点（它是推断），
+  但它足以支持 §3.3 第 1 条的禁令：**图里不得把 `brower-friedman-1973` 当作"完全可约性"的 source。**
+
+### 6.4 ★★ 本轮顺带取得的三条硬事实（L1，p.335 参考文献表与结论页）
+
+1. **LZ 的 `[5]` = Frenkel, I., Garland, H., Zuckerman, G. J.: Proc. Natl. Acad. Sci. USA **83**, 8442 (1986) = 本项目的 `fgz-1986`。**
+   ⇒ **Remark 那句「This was also pointed out in [5] in the bosonic case」的意思是：
+   FGZ 本人早已指出玻色弦的 Fock 空间"一般也不是 Verma 模直和"。**
+   ⇒ **FOK 若想用"玻色情形的类比"来支撑 NS 的完全可约性，这条路也被 FGZ 自己堵死了。**
+   ⚠ 本项目 `brst-cohomology-sources.md` §1 对 FGZ 的抽取**未记录过这一条**，值得回头补核（Q6.2）。
+2. **LZ 的 `[1]` = Brower, R. C., Friedman, K. A.: Phys. Rev. **D7**, 535–539 (1973)** —— 卷、页、年**与本项目的 Crossref 元数据逐字一致**
+   （再次印证 §1 的判断：hep-th/9901116 的 "D3" 是抄错）。
+   **LZ 引用它的唯一场合是 Proposition 2.18 的证明**，措辞是「physicists **[1, 2]** have constructed these spaces」
+   （`[2]` = Corrigan, E. F., Goddard, P.: Nucl. Phys. **B68**, 189–202 (1974)），
+   **紧接着一句是「However, we will prove their existence the way FGZ did in the bosonic case.」**
+   ⇒ **LZ 把 BF 的功劳定位为"构造了横向空间 `T(p,κ)`"，与 §3.2(d) 的两条独立证言完全一致，
+   同样不归给它任何"完全可约性"。**
+3. **⚠ 订正一条既有记录**：`lian-zuckerman-1989.md` 与 `reading-list.md` 都写「LZ 1989 与 FOK 1989 **互不引用**」——
+   **参考文献表里确实没有 FOK，但 p.335 结论节之后有一条 "Note added in proof"（L1 逐字）**：
+   > 「After the completion of this work, we received preprints from **J. Figueroa-O'Farrill and T. Kimura**,
+   > whose work appears to be similar to ours.」
+   ⇒ **"互不引用"应收窄为"LZ 不在参考文献里列 FOK，但在校样附注里点名承认收到其预印本"。**
+   **LZ 自己对两者关系的措辞只到 "appears to be similar to ours"，既不确认一致、也不点出矛盾。**
+   （另：p.335 的 `Received February 21, 1989`，`Communicated by A. Jaffe`。）
+
+### 6.5 两条引用纪律（给 curator）
+
+- **`[20], Sect. 3.4` 不是关于 Verma 模的文献**：`[20] = Jacobson, N.: *Basic algebra*, Volume II (Freeman, 1980)`。
+  LZ 用它只是为了"强不可分解 ⇒ 直和分解唯一"（Krull–Schmidt 类结论）。
+  **不要把 "Verma modules are strongly indecomposable" 归给 Jacobson**——LZ 把这句话本身当作已知事实陈述，
+  只把"由此推出 (38)"的那一步指向 Jacobson §3.4。
+- **(35)–(38) 是 §2 的公式号**。`lian-zuckerman-1989.md` §0 已记「章内公式号每章重起」，
+  引用必须写成 **「LZ 1989, §2, eqs. (35)–(38), p. 320」**，不能只写 "(35)"。
+
+### 6.6 本节剩余问题
+
+- **Q6.1** LZ 从不写出一个**具体**的 `(p·p, n, h)` 三元组。若图里要一个可验证的反例实例，
+  必须自己用 Meurman–Rocha 的 NS Kac 行列式在 `c = 10` 上找一个可约的负半整数 `h`——**这是一次真正的计算，不是检索**。
+- **Q6.2 ★** 回头核 `fgz-1986` 正文里"玻色 Fock 空间一般不是 Verma 模直和"这句在哪（LZ 说在 [5] 里）。
+  `brst-cohomology-sources.md` §1 是 L1 全文抽取，**应当能一次定位**。这条若坐实，
+  FOK 的 NS 推导就同时被 LZ（超）与 FGZ（玻色）两侧否定。
+- **Q6.3** 本文 §4 的 Q1 至此可以改写为：**矛盾不是"谁对谁错"，而是"FOK 把一条 LZ 与 FGZ 都明确否认的性质
+  归给了 Brower–Friedman"**。但 **BF 正文（5 页）仍是 L0**，最终裁决仍需正文。
