@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-12 夜 3）：main 604 statements / 499 derivations / 3 milestones / 21 conventions；effective formalized 78 / rigorous 106；Lean 82+ 声明公理干净。**无鬼定理条件版已 Lean**（`NoGhost/Assembly.lean` `no_ghost_of_spans`：DDFSpans ⇒ H_phys/H_null 诱导形式正定，任意 D、任意有序域，文件中 D=26 不出现）；全部猜想负担集中于 `DDFSpans`（= (B-26)），已证片 (rung −1, level 1)，N=2 与「逐片 ⇒ 全体」引理派工中。
+- 计数（2026-09-12 夜 3）：main 604 statements / 499 derivations / 3 milestones / 21 conventions；effective formalized 78 / rigorous 106；Lean 82+ 声明公理干净。**无鬼定理条件版已 Lean**（`NoGhost/Assembly.lean` `no_ghost_of_spans`：DDFSpans ⇒ H_phys/H_null 诱导形式正定，任意 D、任意有序域，文件中 D=26 不出现）；全部猜想负担集中于 `DDFSpans`（= (B-26)），已证片 (rung −1, level 1)，N=2 与「逐片 ⇒ 全体」引理派工中。DDFGram 补：`|d⟩` 落在 rung −N(d) 已证（卡 (3) 后半句关闭）；`PartitionCard.lean` 给 p(2..5) = 2,3,5,7（Mathlib 无此引理；`toFinsuppAntidiag` 只单射非双射——用它计数会错），`dim V_N ≤ p(N)` 在 N≤5 可实例化。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。

@@ -192,7 +192,7 @@ StringFormal/
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
                             D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
-  NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family
+  NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family；rung 分次：`ddfOp` 移 rung +n（纯运动学，只需 hη/hεb），`|d⟩` 在 rung −N(d)（`frameMonomial_mem_towerRungSubmodule`），`ddfSpan_eq_iSup_rung`；rung 与 level 联动未做
                             实例化到 A^ε_n。补上两条小引理 **Fock.towerPairing_towerVacuum_self**（(H3)）与
                             **ddfOp_towerVacuum_of_pos**（(H4)，一行：ddfWindow n vac = Icc n 0 = ∅）；
                             ddfFamily 打包 + 四条前件 ddfFamily_ccr/_adj/_ann（ccr 由 lie_ddfOp_ddfOp
