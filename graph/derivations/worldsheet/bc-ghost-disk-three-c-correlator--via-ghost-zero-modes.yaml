@@ -46,6 +46,15 @@ gaps:
   - "**只有二手源**：抽取记录等级 L1 仅保证 schrans-2020 与 headrick-2008 这样写，
      Polchinski 原书未核对（抽取记录 §0）。不过本式是本章少数有**两个独立二手源**逐字给出
      完整表达式的条目之一。"
+  - "**归一化常数 C^g_{D₂} 的整体符号在原书里是手工定的（作者自承缺口 #18）**：Appendix A §A.2, p.345 逐字
+     \"Bosonic path integrals actually give the absolute values of determinants, while fermionic path integrals
+     give the determinant with a sign that depends on **the precise order of Grassmann factors in the measure**.
+     **We will fix the sign by hand.**\" ⇒ 本推导括号里那条「等价的直接做法：把 c 按三个零模展开做 Grassmann
+     积分得 Vandermonde 行列式」**给不出 C^g_{D₂} 的符号**（它依赖测度里 Grassmann 因子的书写顺序），
+     该符号在本书中是约定。测度与行列式规则本身见 (A.2.24)–(A.2.27), pp.344–345。
+     另：零模处理在附录里只有一条**非定理**的一般表述（p.345 逐字「If `Δ` has zero eigenvalues, the path
+     integral vanishes in the fermionic case … **there is always a good reason** … the integrals of interest
+     will have appropriate insertions to give a finite result」）。抽取记录 §15.2(e)(f)。"
 notes: |
   与 worldsheet.bc-ghost-sphere-cc-correlator 是同一手法的两个曲面版本，分开建卡的理由是
   两式在文献中分别给出（(6.3.2) 与 (6.3.4)）、且分别被开弦与闭弦振幅使用。
