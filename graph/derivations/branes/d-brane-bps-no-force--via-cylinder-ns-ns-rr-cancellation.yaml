@@ -40,6 +40,29 @@ depends_on:
       那句话确实出现在 §13.3 的正文里，但 (13.3.2) 这一步原书给的依据是「Due to supersymmetric cancellation
       in the trace」（开弦谱的玻色–费米配对），不是从 (13.2.9) 的中心荷饱和推出的。
       ⇒ 「能量只由荷与间距决定」在本推导里是**旁白/一致性检查**，不是被引用的引理。
+      【★ 2026-09-11 auditor 裁决（physics-auditor，分支 agent/auditor/rulings-3）：**维持 `inferred: true`**，
+      理由如下，取代上面"两种判断并存"的临时状态】
+      (1) 原文复核（Cambridge Core 原书 PDF p.146，逐页读图，非转述）：§13.3 开篇逐字
+          "There is no force between static BPS objects of like charge. The multi-object state is still
+          supersymmetric and so its energy is determined only by its charge and **is independent of** the
+          separations. For parallel Dp-branes, the unbroken supersymmetry (13.2.5) is the same as for a single
+          Dp-brane." ⚠ branes 版与本 note 上文引作 "determined only by its charge and the separations"，
+          **漏掉了 "is independent of"**；原句的意思恰是"能量与间距无关"，即无力性本身的另一种说法，
+          不是一条独立的"质量–荷关系"引理。抽取记录 E16 同款误引，已另行通知 researcher/lead。
+      (2) 承重判据是「删掉这条依赖，推导的哪一步会断」。本推导的结论是 (13.3.2) 𝒜_R–R = −𝒜_NS–NS；
+          原书给它的唯一依据是紧接其前的 "Due to supersymmetric cancellation in the trace"——圆柱振幅是
+          开弦单圈迹，两膜系统保留 (13.2.5) 的超对称 ⇒ 开弦谱玻色–费米配对 ⇒ 迹相消。这一步的输入是
+          **保留的超对称**（branes.d-brane-bps-half-susy 那条边供给），不是超代数里的中心荷项 (13.2.9c)。
+          原书 §13.3 从 (13.3.1) 到 (13.3.7) 没有一处引用 (13.2.9)。删掉本边，summary (1)–(5) 一步不断。
+      (3) 那句"energy … independent of the separations"是本命题**结论**的文字预告（同段首句 "There is no
+          force" 的同义反复），随后一句才开始论证（"The vanishing of the force comes about from …"）。把结论
+          的预告句当作承重前提，会把"BPS ⇒ 无力"这条一般规则偷运进来，而目标卡"不断言 (3)"已按 (13.4.23)
+          后的作者自承反例明确拒绝了这条一般规则。
+      (4) 该卡本身在图上的方向是 susy.brane-charges-in-susy-algebra **依赖** branes.d-brane-bps-half-susy
+          （(13.2.10) 用 β^⊥），它把"膜荷进入超代数"这一结构挂在本推导名下，恰当的读法是术语锚定：
+          本卡说的 "BPS objects of like charge" 里，"charge" 在代数中的位置由该卡给出。
+      ⇒ 裁定：本边**不承重**，`inferred: true` 维持；branes 版"承重"理由所依据的那句引文经原书复核
+         **不支持**其读法。若日后有人为「BPS 态能量只由荷决定（膜荷版）」单建卡，本推导也不应依赖它。
   - id: susy.bps-bound-point-particle-d4
     inferred: true
     note: |
