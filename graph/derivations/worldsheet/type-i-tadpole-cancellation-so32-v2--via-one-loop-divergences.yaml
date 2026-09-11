@@ -3,6 +3,21 @@ target: worldsheet.type-i-tadpole-cancellation-so32-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
+  - id: worldsheet.superstring-cylinder-amplitude-closed-channel
+    note: |
+      供给本推导**第 (1) 步的全部内容**：圆柱这一个拓扑的 NS–NS 项，从 (10.8.1)(10.8.2a,b)
+      到闭弦通道的 **(10.8.4)**（含前缀 V₁₀n²/(8π(8π²α')⁵)、测度里 GSO 与 Ω 各一个 ½、
+      以及长柱展开 [16 + O(e^{−2s})]）。
+      **非 inferred**：(10.8.4) 就是本推导第 (1) 步所引的那一式，原书 §10.8 同节。
+      ★ **2026-09-11 新建该卡并接线**。收益有二：
+        (1) 本推导的 summary 第 (1) 步不必再在这里重写一遍（三个拓扑的公因子
+            K = (V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})] 的来源现在有专门的节点）；
+        (2) 下游只需要圆柱振幅的推导（§13.3 的 (13.3.1) 一侧）可以直接指那张卡，
+            **不必再整卡地经过本卡**，因而不再经过本推导最弱的 C₁₀ 环
+            （(10.8.5)–(10.8.6)，原书 'One can guess the resolution of this as follows'
+            + 一个本书不给的 'more detailed analysis'，抽取记录 sec10-8.md #E67）。
+      ⚠ 本推导仍然**需要** Klein 瓶 (10.8.11) 与 Möbius 带 (10.8.18) 两支，那两支在图上
+      **没有**对应卡（见 gaps）；本边只合上圆柱这一支。
   - id: worldsheet.type-i-unoriented-closed-spectrum
     note: 供给无取向闭弦部门（Klein 瓶那一支），以及「该理论单独不一致」的预告。
   - id: worldsheet.type-i-open-string-gauge-multiplet
@@ -53,6 +68,9 @@ summary: |
   (1) 柱面 C₂：Z_{C₂} = Z_{C₂,0} + Z_{C₂,1}（NS–NS 与 R–R 交换）；
       模变换后 Z_{C₂,0} ∝ n² ∫ds[16 + …]，发散来自 s → ∞ 的无质量闭弦 tadpole；
       Z_{C₂,1} 有等值反号的发散。
+      ★ **这一步自 2026-09-11 起由独立卡承担**：
+      worldsheet.superstring-cylinder-amplitude-closed-channel（(10.8.1)–(10.8.4) 全部，
+      含前缀与 [16 + O(e^{−2s})]）。本推导 depends_on 它（非 inferred），不再自己重算。
   (2) Klein 瓶 K₂：Z_{K₂,0} ∝ 2^10，Z_{K₂,1} = −Z_{K₂,0}。
   (3) Möbius 带 M₂：Z_{M₂,1} ∝ ±2n·2^5（上号 SO(n)）。
   (4) 相加 R–R 部分：n² ∓ 2·32·n + 32² = (n ∓ 32)²，即 (10.8.19)。
@@ -77,7 +95,16 @@ gaps:
   - "**tadpole 的整体符号未定**：原书逐字 'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32'。理由（cross-cap 数只 mod 2 守恒，边界数则不然）是一条幺正性论证，本图无节点。"
   - "**辛支「无解」这一步是读出来的，不是原书论证的**：候选集只有 SO(n) 与辛群（Sp(k) ↔ n = 2k）；取 (10.8.19) 的下号得 (n + 32)²，对任何 n ≥ 0 都不为零 ⇒ 辛支不给解。原书只写 'changing from a symplectic to orthogonal projection changes the sign of RP₂'，**不明说辛支无解**；§10.8 全节也不出现 'USp(32)'。同理「纯闭弦无取向理论 n = 0 也不一致」是由 (10.8.19) 代入 n = 0 读出的（Z₁ ∝ −i·32² ≠ 0），原书不单独讨论（sec10-8.md#E75）。"
   - "**不得与 consistency.type-i-hexagon-so32-iff 建边**：§10.8 全节不出现 'anomaly'；§10.6 p. 31 用 'There is a further inconsistency …' 与 'We will also see, in chapter 12, …' 把发散与时空反常**并列**；§12.2 p. 102 逐字说 type I 的规范群由 tadpole 相消定。建边会伪造来源里没有的推理。详见目标卡片 notes 的（限定 4）。"
-  - "**本图没有 Vol.1 §7.4 的单圈振幅节点**，也没有 Vol.2 §10.7 的完整环面振幅节点：三个拓扑的模变换与长柱极限在图上无支撑。→ 待建 spectrum.one-loop-vacuum-amplitudes 一族。"
+  - "**本图没有 Vol.1 §7.4 的单圈振幅节点**〔2026-09-11 部分订正与部分结清〕：
+     (a) **订正**：Vol.1 (7.4.1)/(7.4.3) 其实**有**节点 spectrum.one-loop-cylinder-amplitude
+     （旧 gap 说「没有任何节点」是错的）；
+     (b) **圆柱这一支已结清**：新卡 worldsheet.superstring-cylinder-amplitude-closed-channel
+     （本推导已 depends_on）把 (10.8.1)–(10.8.4) 接到了那张玻色卡与
+     worldsheet.modular-invariance-requires-eight-transverse-fermions 上；
+     (c) **残留**：**Klein 瓶 (10.8.7)–(10.8.11) 与 Möbius 带 (10.8.12)–(10.8.18) 两支仍无节点**，
+     Vol.2 §10.7 的完整环面振幅也无节点 ⇒ 那两支的模变换与长柱极限在图上仍悬空。
+     → 待建 spectrum.one-loop-klein-bottle / -mobius 的超弦版（玻色版已有
+     spectrum.one-loop-klein-bottle-amplitude、spectrum.one-loop-mobius-amplitude-v2）。"
   - "**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**（依赖边已标 inferred）。"
   - "**时空反常路线不在本推导范围**：第 12 章给出 SO(32) 唯一性的另一个独立理由，本轮未读。GS 1984 那条路线由本图 consistency 区另行承载。"
 author: curator

@@ -17,15 +17,32 @@ depends_on:
       exp(−t y²/2πα')：张在两膜之间的开弦有经典质量 m = y/(2πα')，单圈迹里给出
       exp(−2πt α' m²) = exp(−t y²/2πα')。
       ⇒ 本边是 y 依赖（从而是 G_{9−p}(y) 的 y^{2−d} 长程行为）的唯一来源。
+  - id: worldsheet.superstring-cylinder-amplitude-closed-channel
+    note: |
+      供给本式的**母式 (10.8.4) 本身**（2026-09-11 新建卡）。
+      **非 inferred**：原书 p.146 逐字 'The exchange of light NS–NS closed strings was isolated
+      in **eq. (10.8.4)**. Modify this expression by …'——(10.8.4) 是被点名引用的那一式。
+      ★ **这条边取代了旧记账**：本推导原先只能把母式挂到整张
+      worldsheet.type-i-tadpole-cancellation-so32-v2 上（见下一条边），并在 gaps 里记
+      "图上无 (10.8.4) 的单独节点"。该缺口自本边起合上。
+      ⚠⚠ **四处修改必须一起带上**（新卡的"不断言 (d)"逐条列出）：(10.8.4) 是 **type I** 的
+      圆柱振幅，含 n²（两条边界的 Chan–Paton 指标）与一个来自 **Ω 投影**的 ½；
+      (13.3.1) 把它改成 (i) Chan–Paton 权重 **2**、(ii) **去掉** Ω 的 ½（原书逐字
+      'there is no factor of ½ from the orientation projection because the physics is locally
+      oriented'）、(iii) 去掉 Dirichlet 方向的动量积分、(iv) 加 exp(−t y²/2πα')。
+      ⇒ **(13.3.1) 不是 (10.8.4) 的特例，而是同一类计算换一套边界条件与投影**；
+      (iii)(iv) 由上面两条边承担，(i)(ii) 由本边的这段 note 记账。
+      ★ 附带收益：本边**不经过** §10.8 最弱的一环（C₁₀ 悖论那段 'One can guess the resolution
+      of this as follows' + 一个本书不给的 'more detailed analysis'，抽取记录 sec10-8.md #E67），
+      而挂整张 SO(32) 卡时是经过的。
   - id: worldsheet.type-i-tadpole-cancellation-so32-v2
     note: |
-      供给本式的**母式 (10.8.4)**：该卡的推导覆盖 §10.8 的圆柱 / Klein 瓶 / Möbius 带真空振幅
-      计算，其中 (10.8.4) 就是本卡 (13.3.1) 的出发点（原书 p. 146 明写 (13.3.1) 由 (10.8.4)
-      修改而得）。**技术性（公式级）**依赖，故不标 inferred（抽取记录 Q5 末段把这条边交 curator
-      判断，判为要建；与 branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 同款）。
+      **保留**作上下文边：该卡的推导覆盖 §10.8 的圆柱 / Klein 瓶 / Möbius 带真空振幅计算，
+      (10.8.4) 在原书里就长在那一节里。
+      ★ 2026-09-11 起 (10.8.4) 本身由 **worldsheet.superstring-cylinder-amplitude-closed-channel**
+      承担（见上一条边），本边退为"原书语境"的记账，**技术性内容已不再靠它**。
       ⚠ 只用该卡推导里的圆柱振幅这一件，**不用** (n ∓ 32)² / SO(32) 结论：本卡讲 type II 的两张
-      平行 D 膜，与 type I 的无取向投影无关——原书 p. 146 逐字「there is no factor of ½ from the
-      orientation projection because the physics is locally oriented」。
+      平行 D 膜，与 type I 的无取向投影无关。
       ⚠ 指 v2 而非 v1：v2 只订正了 (10.8.19) 前缀里 α' 的幂次，物理内容不变。
 sources:
   - ref: polchinski-1998-v2
@@ -43,13 +60,17 @@ sources:
       这是"母式无节点"这一缺口的现有记账方式（见 gaps）。
 summary: |
   (1) **母式**：§10.8 的 (10.8.4) 已把 type I 圆柱真空振幅里轻 NS–NS 闭弦交换的部分 isolate 出来
-      （长柱 t → 0 极限保留最轻的闭弦态，给出闭弦树级交换的形式）。
-  (2) **两步改写**（原书 p. 146 逐字给出，不是本图补的）：
+      （长柱 t → 0 / s → ∞ 极限保留最轻的闭弦态，给出闭弦树级交换的形式）。
+      ★ 2026-09-11 起该式在图上有独立卡
+      **worldsheet.superstring-cylinder-amplitude-closed-channel**，本推导 depends_on 它（非 inferred）。
+      ⚠ 它是 **type I** 的式子：含 n²（两条边界的 Chan–Paton 指标）与一个来自 **Ω 投影**的 ½。
+  (2) **四步改写**（前两步原书 p. 146 逐字给出，后两步是同页的两句限定）：
       (a) 去掉 Dirichlet 方向的动量积分因子——两膜的位置被钉住，横向 9−p 个方向没有连续动量，
           这把幂次改成 (8π²α't)^{(9−p)/2}；
       (b) 加入拉伸开弦的张力项 exp(−t y²/2πα')——张在相距 y 的两膜之间的开弦经典质量
-          m = y/(2πα')，单圈迹里给出这个 Boltzmann 因子（branes.stretched-open-string-mass）。
-      再取 Chan–Paton 权重 2（开弦两种取向），且**不**乘 ½（体内物理局域有取向），得
+          m = y/(2πα')，单圈迹里给出这个 Boltzmann 因子（branes.stretched-open-string-mass）；
+      (c) Chan–Paton 权重由 **n² 换成 2**（开弦的两种取向）；
+      (d) **去掉** Ω 投影的 ½（体内物理局域有取向），得
         𝒜_NS–NS ≈ [i V_{p+1}·4×16 / (8π(8π²α')⁵)] ∫₀^∞ (π dt/t²)(8π²α't)^{(9−p)/2} exp(−t y²/2πα').
   (3) **把积分做出来**：记 d = 9−p、a = y²/2πα'，
         ∫₀^∞ (π dt/t²)(8π²α't)^{d/2} e^{−at} = π(8π²α')^{d/2} Γ(d/2−1) a^{1−d/2}
@@ -71,10 +92,15 @@ summary: |
   但它只保证 (13.3.1) 两行之间自洽，不提升第 (1)(2) 步的强度。故整体 physical-argument。
 gaps:
   - |
-    **(10.8.4) 在图上没有独立陈述卡**：它只出现在 worldsheet.type-i-tadpole-cancellation-so32-v2
-    的推导里，故本推导的依赖边挂在那张卡上（只借圆柱振幅，不借 SO(32) 结论）。
-    ⇒ 「母式」这一步的可追溯性止于那张卡的推导 summary，不止于一个专门的节点。
-    这是旧卡 branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation 已记的残留缺口，本推导继承。
+    **〔2026-09-11 已结清〕(10.8.4) 在图上没有独立陈述卡**：现已单建
+    worldsheet.superstring-cylinder-amplitude-closed-channel（推导
+    --via-open-string-trace-doubling，physical-argument），本推导已加 depends_on 它（非 inferred，
+    原书 p.146 点名引用 eq. (10.8.4)）。
+    ⚠ **残留**：新卡自己的 gaps 继承下来两条——(10.8.3) 第二式的模变换在原书里带 **naive** 限定
+    （左移费米子路径积分的相位无 diff 不变定义，§10.7 (10.7.14)），以及 (10.8.4) 第二行的 **16**
+    的来源原书未点明（新卡把它挂到 type-ii-massless-spectrum 并标 inferred）。
+    ⚠ 指向 worldsheet.type-i-tadpole-cancellation-so32-v2 的那条边**保留**，但已退为"原书语境"，
+    技术内容不再靠它；这样本推导也就**不再经过** §10.8 最弱的 C₁₀ 环（#E67 的 'guess'）。
   - |
     **前缀的两个读数与旧轮页图判读冲突**（抽取记录 §7.3(c) 的原话）：被积测度里的 π 与分母
     (8π²α')⁵ 的 α' 幂次，都是同一张页图的视觉判读；下结论的真正根据是 §7.3(b) 的三重幂次
@@ -100,10 +126,11 @@ notes: |
   （(13.3.2) 的超对称断言）不再共用一个 status 记账。两者**都**是 physical-argument，
   但理由完全不同：本推导弱在母式与「≈」，v2 那条弱在"R–R 侧从未算出"。
 
-  【与 branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的重叠】
-  那条推导的 summary (1) 独立重写了同一条 (13.3.1)。本卡建立后，那条推导理应 depends_on
-  branes.d-brane-cylinder-long-distance-ns-ns 而不是自己重算；**本轮未改**（不在 claim 范围），
-  已列入报告交 lead。
+  【与 branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的重叠：已消除】
+  那条推导的 summary (1) 原先独立重写了同一条 (13.3.1)。**2026-09-11 已改**：它现在
+  depends_on 本推导的目标卡 branes.d-brane-cylinder-long-distance-ns-ns（非 inferred），
+  summary (1) 缩为引用，且它原先指 worldsheet.type-i-tadpole-cancellation-so32-v2 的那条边
+  已被本卡取代。⇒ (13.3.1) 在图上只算一次。
 
   按抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E16 与 §7.3 建立。curator，2026-09-11。
 author: curator
