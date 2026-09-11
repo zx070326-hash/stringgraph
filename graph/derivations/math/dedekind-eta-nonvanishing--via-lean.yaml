@@ -1,0 +1,76 @@
+id: math.dedekind-eta-nonvanishing--via-lean
+target: math.dedekind-eta-nonvanishing
+kind: proof
+status: formalized
+depends_on:
+  - id: math.dedekind-eta-function
+    inferred: false
+    note: |
+      **本推导的 η 就是这张定义卡的 η**：Lean 侧的对象是 Mathlib 的
+        `ModularForm.eta (z : ℂ) : ℂ := 𝕢 24 z * ∏' n, (1 - ModularForm.eta_q n z)`，
+      而定义卡的 `formal.lean_decl`（`StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod`）
+      与本推导的 `StringFormal.Bridge.dedekindEta_ne_zero` **在同一个桥层文件里指向同一个
+      `ModularForm.eta`**，没有约定转换，故不需要 convention_map。
+      定义卡供给的是「η 是哪个函数」以及 q、q^{1/24} 的分支约定；
+      本推导断言的「≠ 0」是关于这个函数的一条性质。字面依赖，非 inferred。
+      ⚠ 两张卡的 own status 都是 formalized，故这条边不压低任何东西。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.dedekindEta_ne_zero"
+    note: |
+      本仓库，桥层提交 **674946a**，分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。
+      声明全文（与目标卡 statement 逐字对应）：
+
+          theorem dedekindEta_ne_zero {z : ℂ} (hz : 0 < z.im) : ModularForm.eta z ≠ 0 :=
+            ModularForm.eta_ne_zero hz
+
+      **check-axioms 运行记录（借用，curator lean-wire-10, 2026-09-11）**：本声明属于
+      math.dedekind-eta-function 的 source 里逐条登记的那 7 条桥层声明之一
+      （清单的第 (d) 项），当时在主工作树 D:\physics\string 上（`.lake` 构建时间 13:54:53
+      晚于源文件 13:53:02）跑出 `7 ok, 0 non-standard, 0 missing; 0 errors`，公理集合
+      `propext Classical.choice Quot.sound`。
+      ⚠ **本轮（small-backlog-9）未重跑**：本分支只改 graph/，未动 formal/ 下任何文件；
+      桥层文件自 845b9b9 起未变动。lead 合并前按根 CLAUDE.md 重跑
+      `lake build` + `uv run stringgraph check-axioms` 即可覆盖。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring（\"Bridge layer: Mathlib objects restated verbatim in the graph's conventions\"）"
+    note: |
+      **诚实归属：数学内容 100% 是 Mathlib 的。** 桥层的证明体是一行
+      `ModularForm.eta_ne_zero hz`，即直接引用 Mathlib v4.33.1 的
+      `ModularForm.eta_ne_zero`（`Mathlib/NumberTheory/ModularForms/DedekindEta.lean`）。
+      本图**不**为该 Mathlib 声明建节点，也不审计其证明；证据标准由 stringformal-2026 条目
+      规定的 `lake build` + 无 sorry + 标准三公理承载（Mathlib 在同一次构建里被检查）。
+      ⚠ Mathlib 那边的论证与定义卡正文给的理由同构：|q| = e^{−2π Im τ} < 1 ⇒ 每个因子
+      1 − qⁿ ≠ 0，前因子 q^{1/24} = exp(πiτ/12) ≠ 0（exp 处处非零），
+      再加乘积的可乘性（`multipliableLocallyUniformlyOn_eta`）⇒ 乘积非零。
+      桥层不重述这条论证，只重述结论。
+summary: |
+  机器检查，一行：`dedekindEta_ne_zero {z} (hz : 0 < z.im) : ModularForm.eta z ≠ 0 :=
+  ModularForm.eta_ne_zero hz`。目标卡正文只有一句主句「对一切 τ ∈ H，η(τ) ≠ 0」，
+  与该声明逐字对应（`hz : 0 < z.im` = τ ∈ H；`ModularForm.eta z ≠ 0` = η(τ) ≠ 0），
+  **没有未覆盖的子句**——目标卡刻意不写「故 1/η 有定义」之类的推论，正是为了保持这种逐字对齐
+  （见目标卡「不断言」(d) 与 notes）。
+gaps:
+  - |
+    **只在 H 上，而且这条假设是本质的。** 本推导不断言 η 在 H 外的任何行为——在 H 外结论本身
+    不成立（Mathlib 的 `ModularForm.eta` 在 H 外按同一公式取值，|q| ≥ 1 时因子 1 − qⁿ 可以为零）。
+    这与 math.dedekind-eta-t-transformation--via-lean 的情形相反：那里 `0 < z.im` 是冗余假设。
+  - |
+    **Mathlib 的证明本图未审计。** 真正的内容（乘积可乘 ⇒ 非零）在
+    `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 的 `eta_ne_zero` 里；
+    我们承诺的只是「它在同一次 lake build 里通过、且目标声明的公理集合只有标准三条」。
+    本图对它既不建节点也不复核论证，这是 stringformal-2026 条目规定的证据标准。
+  - |
+    **本卡只有 Lean 一条推导，没有纸上推导。** 定义卡正文给的初等理由
+    （「因每个因子非零而 η 在 H 上无零点」）本可以写成一条 rigorous 的 --via-product-definition，
+    但它需要「绝对收敛的无穷乘积非零当且仅当每个因子非零」这条引理，本图没有承载它的节点，
+    且原书（Polchinski）零讨论。⇒ 本轮不补那条推导；若日后有人要，应先建那条乘积引理的卡。
+notes: |
+  由 curator（small-backlog-9）于 2026-09-11 建立，是拆卡 math.dedekind-eta-nonvanishing 的
+  唯一推导。桥层声明本身不是本轮新增的：它自桥层提交 674946a 起就存在，
+  此前只作为 math.dedekind-eta-function 的 source 清单里的第 (d) 项登记，
+  没有自己的目标卡，因此下游无法直接引用——本轮补上的正是那张卡与这条推导。
+
+  **本推导不改动 formal/**：`lean_decl` 指的声明已在 main 上，本分支只加图数据。
+author: curator-small-backlog-9
+created: "2026-09-11"

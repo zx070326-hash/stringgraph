@@ -20,24 +20,26 @@ formal:
   lean_file: StringFormal/Math/MathlibBridges.lean
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.1, eq. (5.1.13), p.148（一般模变换 τ' = (aτ+b)/(cτ+d)，ad − bc = 1，模群 = SL(2,Z)/Z₂ ≡ PSL(2,Z)）；S、T 的矩阵形式见 (5.1.12), p.148"
+    loc: "§5.1, eq. (5.1.13), p.148（一般模变换 τ' = (aτ+b)/(cτ+d)，ad − bc = 1）；§5.1, (5.1.14) 下方散文, p.148（**无式号**：「The group on the τ-plane is SL(2,Z)/Z₂ = PSL(2,Z), because τ′ is unchanged if all the signs of a, b, c, d are reversed」，以及「modular group」这个名字）；S、T 见 (5.1.12), p.148"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E70/#E71，L1（读到 schrans-2020
-      §5.2–§5.3 笔记 p.244–246；**未核对 Polchinski 原书**）。
-      T = ((1,1),(0,1))、S = ((0,−1),(1,0)) 的显式矩阵出自 schrans-2020 §5.3（核对源）。
-      ⚠ **Im(γ·τ) = Im τ/|cτ+d|² 的物理文献一手出处未核（2026-09-11 curator 复查后维持此判断）**：
-      本卡这一行**不**在本条来源的覆盖范围内。逐条说明：
-        · 抽取记录 literature/extractions/polchinski-1998-v1.md 里 §5.1 (5.1.12)/(5.1.13) 附近
-          （第 934–950 行、以及 §14 的逐式核对表第 3269–3272 行）**没有**这条恒等式；
-          能搜到的最接近的一条是第 950 行记的 schrans-2020 §5.4 显式验算出的度规变换
-          `ds² → (cτ+d)(cτ̄+d)[…]`（分母 |cτ+d|² 的来源，但不是 Im 的变换式本身），
-          且那是**核对源**（schrans-2020 笔记）而不是 Polchinski 原书。
-        · 与 (5.1.12)/(5.1.13) 相关的另一处已核事实是：原书 (5.1.12) **只有** T 与 S 两个变换，
-          `S² = 1`、`(ST)³ = 1` 是 schrans-2020 自补的（抽取记录 §14 第 3269 行、E70 已关闭）。
-          这说明本节的抽取已逐式核对过，**恒等式的缺席不是抽取漏记**。
-      ⇒ 这一行的数学依据改由下面新增的第二条 stringformal-2026 source（Mathlib 定理的桥层重述）承担；
-      **Polchinski 原书 §5.1 是否写出该式，仍未核**（要核须读印刷 p.148 原页，本轮未做）。
-      这是一条**记账缺口而非数学疑问**：该恒等式本身在 Lean 里已验证。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70/#E71（L1，读到 schrans-2020
+      §5.2–§5.3 笔记 p.244–246）**与 §20（2026-09-11，researcher 第十三轮，印刷 pp.145–151 页图 L1）**。
+      T = ((1,1),(0,1))、S = ((0,−1),(1,0)) 的显式矩阵出自 schrans-2020 §5.3（核对源）；
+      **原书 (5.1.12) 印的是作用而非矩阵**：`T : τ′ = τ + 1`、`S : τ′ = −1/τ`（§20.2 逐字）。
+
+      ★★ **【记账缺口关闭，结论是 negative】Im(γ·τ) = Im τ/|cτ+d|² 不在 Polchinski §5.1 里**
+      （2026-09-11，researcher 第十三轮，抽取记录 §20.1，**negative evidence, L1**）：
+      印刷 pp.145–151（§5.1 全节 + §5.2 头两页）逐页通读，**不出现** `Im(γτ)`、
+      `Im τ/|cτ+d|²`、`τ₂ → τ₂/|cτ+d|²`、`|cτ+d|` 中的任何一个；记号 `τ₂` 在 §5.1 里
+      **根本没有被引入**（首次使用在第 7 章 (7.2.9) 一带）；§5.1 里 `Im τ` 只出现两次，
+      都不是变换律（"so we can restrict attention to Im τ > 0"、"open only at Im τ → ∞"）。
+      ⇒ **不能把 §5.1 登记为该行的来源**，本条 loc 因此只写 (5.1.13) 与 (5.1.14) 下方散文两处
+      （researcher §20.5 的建议）。此前「未核」的判断（small-backlog-7 #4）到此关闭。
+      ⚠ negative evidence 的边界：§20 只覆盖印刷 pp.145–151 与第 7 章全章；pp.152–165 与第 9 章未读。
+      ⇒ 卡面那一行的数学依据由下面的 stringformal-2026 source 承担，且已拆成独立命题卡
+      **math.mobius-action-preserves-upper-half-plane**（见 notes）；它在本项目内**目前只有
+      Mathlib 一个来源**。researcher §20.5 列的一手候选（Serre ch. VII、Apostol ch. 2、
+      Diamond–Shurman ch. 1）**均未查**。
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/MathlibBridges.lean :: **StringFormal.Bridge.psl2z_im_smul_eq**（卡面 Im(γ·τ) = Im τ/|cτ+d|² 这一行的数学来源；桥层逐字重述 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq`）"
     note: |
@@ -126,16 +128,53 @@ notes: |
   若将来有人要用忠实性，正确做法是新建一张命题卡（它是真的，但需要证明），
   不要重读本卡的这句话。
 
-  **【记账缺口：Im(γ·τ) = Im τ/|cτ+d|² 的物理文献一手出处未核】（curator，2026-09-11，small-backlog-7 #4）**
-  卡面这一行此前只标「curator 补，不是来源逐字」，图上没有任何 source 对准它。本轮的处理：
+  **【记账缺口：Im(γ·τ) = Im τ/|cτ+d|² 的物理文献一手出处】（curator，2026-09-11，small-backlog-7 #4；
+  ★ 2026-09-11 由 researcher 第十三轮关闭，结论 negative）**
+  卡面这一行此前只标「curator 补，不是来源逐字」，图上没有任何 source 对准它。处理经过：
     (1) 复查抽取记录 literature/extractions/polchinski-1998-v1.md：§5.1 的 (5.1.12)/(5.1.13) 附近
-        **没有**该恒等式（详见第一条 source 的 note）；
+        **没有**该恒等式；
     (2) 因此给它单独加了一条 stringformal-2026 source，指桥层 `StringFormal.Bridge.psl2z_im_smul_eq`
         （Mathlib `ModularGroup.im_smul_eq_div_normSq` 的逐字重述）作为**数学**来源；
-    (3) **Polchinski 原书 §5.1 印刷 p.148 是否写出该式，仍未核**——这是一条留给 researcher 的
-        单页取件任务（读印刷 p.148 原页即可判定），本轮未做。
+    (3) ★ **原写「Polchinski §5.1 印刷 p.148 是否写出该式仍未核，留给 researcher」已完成**：
+        researcher 第十三轮读了印刷 pp.145–151 的 Cambridge Core 页图（抽取记录 §20，L1），
+        **答案是「没有」**——全节不印此式，连记号 τ₂ 都要到第 7 章才引入。
+        ⇒ 缺口的性质变了：不再是「未核」，而是「**原书确实不印，此行在本项目内只有 Mathlib 一个来源**」。
+        第一条 source 的 loc 已据 §20.5 的建议收紧到 (5.1.13) 与 (5.1.14) 下方散文两处。
   ⚠ 这条缺口**不**影响本卡的 status：定义卡的 formalized 由 lean_decl 与逐条对应清单承担，
-  而该恒等式在 Lean 侧已验证；缺的只是"物理书上写在哪一行"这条引文。
+  而该恒等式在 Lean 侧已验证；缺的只是"物理书上写在哪一行"这条引文（现已确认：哪一行都没有）。
   ⚠ 定义卡没有 `gaps` 字段（那是推导的字段），故本缺口记在本 notes 与 source note 里。
+
+  **【researcher 第十三轮的另两条发现，记账】（抽取记录 polchinski-1998-v1.md §20.3，L1 页图）**
+  (A) **原书把「modular group」这个名字挂在 (5.1.14) 上，不是挂在 τ 的分式线性作用 (5.1.13) 上。**
+      p.148 逐字：「The transformation [σ¹; σ²] = [[d, b],[c, a]] [σ′¹; σ′²]  (5.1.14) … These large
+      coordinate transformations form the group SL(2,Z) … The group of transformations **(5.1.14)**
+      is known as the *modular group*.」即书里的模群首先是**世界面上的大坐标变换（微分同胚）**；
+      τ-平面上的 PSL(2,Z) 是紧接一句里的另一个说法（"The group on the τ-plane is SL(2,Z)/Z₂ = PSL(2,Z)"）。
+      ⚠ 顺带：(5.1.14) 印的矩阵元排列是 **[[d, b],[c, a]]**，不是 [[a,b],[c,d]]。
+      ⇒ 本卡正文写「模群 = PSL(2,Z) 作用在上半平面上」是**通行说法**，但**不是原书那一句的逐字含义**。
+      按原则 1 与 graph/CLAUDE.md 不改正文，只在此记明；下次实质换代时可考虑把两个空间分开写。
+  (B) **「S、T 生成模群」在原书 §5.1 与 §7.2 两处都只断言、不证。** §5.1 (5.1.12) 上方逐字只说
+      "Repeated application of these two transformations … generates (5.1.13)"，无证明无引文；
+      §7.2 p.210 再次用而不证（ch7 抽取记录的 negative-evidence 第 6 条）。
+      ⇒ **同一个缺口在两章各出现一次**。本图对应的卡
+      worldsheet.modular-group-generated-by-s-and-t-v2 的论证全部来自 Lean/Mathlib，
+      其 sources 已同记此条；任何把生成性挂在 Polchinski §5.1 上并给较高 status 的节点都应降级
+      （researcher §20.5 的提醒；本图目前没有这样的节点）。
+  (C) 原书对「为什么恰好是这两个生成元」给出的**全部**依据是格点标号上的作用：
+      τ → τ+1 是 (m,n) → (m−n, n)，τ → −1/τ 是 (m,n) → (n,−m)（p.148 逐字）。
+
+  **【两条断言已拆成独立命题卡】（curator small-backlog-9, 2026-09-11，lead 派工第 3 项）**
+  本卡一张卡承担五件事——(i) 群 SL(2,Z)、(ii) Möbius 作用的公式、(iii) Im 变换式与「保持 H」、
+  (iv) γ 与 −γ 同一映射 ⇒ 取商到 PSL(2,Z)、(v) S、T 两个标准元素——而四条 `--via-lean` 推导
+  都只能整张挂它，谁用了哪一件在图上看不出来。本轮拆出两张命题卡：
+    · **math.mobius-action-preserves-upper-half-plane**（= (iii)，own=formalized，
+      `lean_decl: StringFormal.Bridge.psl2z_im_smul_eq`）；
+    · **math.sl2z-center-is-pm-one**（= (iv) 里那条**此前在图上完全没有节点**的关键事实
+      Z(SL(2,Z)) = {±I}，own=formalized，`lean_decl: StringFormal.Bridge.center_eq_pm_one`）。
+  **本卡 statement 一字未改，也不加 `superseded_by`**：拆出不是换代，本卡的断言集合不变。
+  下游按各自**实际用到的部件**加边指新卡，指向本卡的边一律保留（它仍供给群与作用的定义）。
+  ⇒ 上面「卡面有一处隐含依赖，在 Lean 侧被显式化了（记账）」一段讲的正是
+  math.sl2z-center-is-pm-one 那件事，现在它有自己的卡可以引了。
+  三张卡 own status 都是 formalized，故拆卡与改边**不改变任何下游的 effective**；收益是可追溯性。
 author: curator-polchinski-ch5
 created: "2026-09-11"

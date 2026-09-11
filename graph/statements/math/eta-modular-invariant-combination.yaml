@@ -83,13 +83,22 @@ notes: |
   就是本卡。这也符合「一个节点一个命题」：本卡的命题是「某个具体组合在整个群下不变」，
   与「某个生成元上 η 怎么变」不是同一条。
 
-  **有效状态**（2026-09-11）：own=formalized，但 effective 被上游两张 **rigorous 定义卡**
-  压到 rigorous —— math.dedekind-eta-function（η 的定义）与 worldsheet.modular-group-psl2z
-  （群与作用的定义）。这是 docs/STATUS_LEVELS.md 的既定行为，不是错误；
-  要解开需要让这两张定义卡自身成为 formalized（它们断言的对象在 Mathlib 里都有：
-  `ModularForm.eta` 与 `Matrix.SpecialLinearGroup`/`UpperHalfPlane` 的作用），
-  而本图现有 `lean_decl` 全部指向 `StringFormal.*`、`validate` 又要求 `lean_file` 在 `formal/` 下
-  ⇒ 需要 lead 裁定或 formalizer 加一层薄重述。已在 --via-lean 的 notes 里提给 lead。
+  **有效状态**（建卡时，2026-09-11 上午）：own=formalized，但 effective 被上游两张
+  **当时还是 rigorous 的定义卡**压到 rigorous —— math.dedekind-eta-function（η 的定义）
+  与 worldsheet.modular-group-psl2z（群与作用的定义）。
+  ★ **已解除（2026-09-11 下午，curator lean-wire-10；本段 2026-09-11 由 small-backlog-9 刷新）**：
+  本段提议的「加一层薄重述」正是 formalizer 建的桥层
+  `formal/StringFormal/Math/MathlibBridges.lean`（`namespace StringFormal.Bridge`）；
+  两张定义卡分别挂上 `dedekindEta_eq_exp_mul_tprod` 与 `psl2z_smul_eq` 并升为 formalized
+  ⇒ **本卡现在 own = effective = formalized**。`lean_decl` 仍不得直指 Mathlib（formal/CLAUDE.md 桥层规则）。
+
+  ⚠ **statement 正文「不断言什么」(a) 末尾的括注「（它是
+  spectrum.one-loop-torus-amplitude-modular-invariant 的第 (2) 条，至今未形式化）」已过时**：
+  测度 d²τ/τ₂² 的模不变性于 2026-09-11 由 `formal/StringFormal/Math/TorusMeasure.lean`
+  形式化（`TorusMeasure.measure_smul_eq`、`measure_density_modular_invariant`），
+  卡 spectrum.torus-measure-modular-invariant 已升为 formalized。
+  按原则 1 与 graph/CLAUDE.md 的裁决**不改正文**，只在此记明；
+  「本卡不断言测度」这一句本身仍然成立，未变的是断言范围，过时的只是那条括注的现状描述。
 
   **不要用 Mathlib 的 `discriminant_S_invariant` / `discriminant_T_invariant` 替代本卡**：
   那是判别式 Δ = η²⁴ 的不变性，丢掉了 η 的相位信息，且与 τ₂ 的幂无关。

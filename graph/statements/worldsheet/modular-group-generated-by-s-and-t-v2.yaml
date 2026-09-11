@@ -41,12 +41,38 @@ sources:
       ⚠ 本卡与关系卡 math.psl2z-s-t-relations 共用同一个 Lean 文件，但用的是**不相交**的两组声明；
       `psl_closure_S_T` 的证明链里没有 `sl_S_sq` / `sl_ST_cube`。
   - ref: polchinski-1998-v1
-    loc: "§5.1, eq. (5.1.12), p.148（生成变换 T : τ → τ+1 与 S : τ → −1/τ）；§7.2, p.210（用「模群由 S、T 生成」而不证）"
+    loc: "§5.1, eq. (5.1.12) 上方散文, p.148（逐字「Repeated application of these two transformations … generates (5.1.13)」）；§7.2, p.210（用「模群由 S、T 生成」而不证）"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E70（L1，读到 schrans-2020 §5.2，
-      笔记 p.244–245）与 polchinski-1998-v1-ch7.md#E9（L1，原书页图）。
-      ⚠ **原书对生成性零证明**：只称 S、T 为「生成变换」，§7.2 再次用而不证。
-      本卡的论证全部来自 Lean / Mathlib，本条只登记弦论教材在何处断言并使用它。
+      笔记 p.244–245）、**同文件 §20.3(2)（2026-09-11，researcher 第十三轮，印刷 p.148 页图 L1）**
+      与 polchinski-1998-v1-ch7.md#E9（L1，原书页图）。
+      ⚠ **原书对生成性零证明，两章各一次**（§20.3(2) 逐字判定）：
+        · §5.1 (5.1.12) 上方只说 "Repeated application of these two transformations … generates
+          (5.1.13)"，**无证明、无引文**；
+        · §7.2 p.210 再次用而不证（ch7 抽取记录的 negative-evidence 第 6 条）。
+      ⇒ **同一个缺口在两章各出现一次**，不是抽取漏记。
+      ⚠ 原书对「为什么恰好是这两个生成元」给出的**全部**依据是格点标号上的作用：
+      τ → τ+1 对应 (m,n) → (m−n, n)，τ → −1/τ 对应 (m,n) → (n,−m)（p.148 逐字，§20.3(4)）。
+      本卡的论证**全部来自 Lean / Mathlib**，本条只登记弦论教材在何处断言并使用它；
+      按 researcher §20.5 的提醒，任何把生成性挂在 Polchinski §5.1 上并给较高 status 的节点都应降级
+      ——本图没有这样的节点（本卡走 stringformal-2026）。
+  - ref: serre-1973-arithmetic
+    loc: "Ch. VII「Modular Forms」, pp. 77--111（章定位 L2；**定理号未核实，按 sources.bib 红线不写入 loc**）"
+    note: |
+      **纸上来源（L0：正文未获取），由 curator small-backlog-9 于 2026-09-11 登记为本卡的
+      标准数学出处。** 本卡原 notes 的告诫 (i) 写「标准纸上来源是 Serre, A Course in Arithmetic,
+      Ch. VII, Thm 2（**尚未登记到 literature/sources.bib**，编号未核实）」——**该 bib 条目
+      已由 researcher 于 2026-09-11 登记**（为格论线的 Ch. V 而登记，条目覆盖全书，
+      note 里列出 Ch. VII「Modular Forms」= pp. 77--111，章 DOI 10.1007/978-1-4684-9884-4）。
+      ⚠⚠ **定理号不写**：sources.bib 的 serre-1973-arithmetic 条目定了一条红线——
+      「本书任何定理号（例如常被转引的『Ch. V, Theorem 2』）本项目均未核实，**不得写入图**；
+      可写的最强形式是 loc = 『Ch. V, pp. 48--58（章定位 L2，定理号未核实）』」。
+      lead 派工写的 loc「Ch. VII, §1, Thm 2；编号未核」与该红线冲突，本卡按**红线**处理：
+      loc 只写章与页码。转引中常见的「§1, Thm 2」这一编号**本项目零证据**，
+      既未获取正文也未见二手逐字引用，故不进 loc。若 researcher 日后取到正文，再收紧。
+      ⚠ **本条不承载任何论证，也不新增推导**：正文未获取（L0），无法据它写一条 rigorous 的
+      `--via-serre`。本卡的 status 仍由 --via-lean（formalized）承载。
+      登记它的价值是：说明这条经典定理在数学文献里有标准出处，而不只是「Mathlib 里有一个证明」。
 tags: [worldsheet, torus, modular-group, psl2z, formalized]
 notes: |
   **v2 = 拆卡后的「生成性」那一半**（curator lean-wire-11, 2026-09-11）。
@@ -71,9 +97,13 @@ notes: |
       ⇒ v1 仍有推导、effective 不变为 open。
 
   ⚠ **原 v1 notes 里两条仍然有效的告诫**：
-  (i) 「PSL(2,Z) 由 S、T 生成」是经典数学定理但 **Polchinski 不证**；标准纸上来源是
-      Serre, *A Course in Arithmetic*, Ch. VII, Thm 2（**尚未登记到 literature/sources.bib**，
-      编号未核实）。形式化之后它已不是升级的必要条件。
+  (i) 「PSL(2,Z) 由 S、T 生成」是经典数学定理但 **Polchinski 不证**（2026-09-11 researcher
+      第十三轮把这一条加强为：§5.1 与 §7.2 **两处都只断言**，见 sources 第二条）。
+      ★ **「标准纸上来源 Serre 尚未登记到 literature/sources.bib」已过时**（curator
+      small-backlog-9, 2026-09-11）：`serre-1973-arithmetic` 已在 bib 中（researcher 为格论线登记，
+      条目覆盖全书并列出 Ch. VII = pp. 77--111），本卡 sources 已加一条指向它。
+      ⚠ 但**定理号仍未核实且按 bib 红线不得写入图**：原文这里写的「Ch. VII, Thm 2」
+      本项目零证据，新 source 的 loc 只写到章与页码。形式化之后它已不是升级的必要条件。
   (ii) Lean 侧的 PSL 是 Mathlib 的 `SL(2,ℤ)/Z(SL(2,ℤ))`；`Z(SL(2,ℤ)) = {±1}` 由桥层
       `StringFormal.Bridge.center_eq_pm_one` 证明，故与本卡正文的 SL(2,Z)/{±I} 是同一个群
       （v1 建卡时这还是一条 gap，2026-09-11 已关闭）。

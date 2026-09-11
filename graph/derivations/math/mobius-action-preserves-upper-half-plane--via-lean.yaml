@@ -1,0 +1,104 @@
+id: math.mobius-action-preserves-upper-half-plane--via-lean
+target: math.mobius-action-preserves-upper-half-plane
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      供给群与作用本身：目标卡正文明写「SL(2,Z) 按 γ·τ = (aτ+b)/(cτ+d) 作用在 H 上
+      （worldsheet.modular-group-psl2z）」，故这是 statement 的字面依赖。
+      Lean 侧两者是**同一个对象**：定义卡的 `lean_decl` 是同一桥层文件里的
+      `StringFormal.Bridge.psl2z_smul_eq`（`(g • τ) = (g₀₀τ + g₀₁)/(g₁₀τ + g₁₁)`），
+      本推导的 `psl2z_im_smul_eq` 说的是同一个 `•`（Mathlib 的 `MulAction SL(2,ℝ) ℍ`
+      限制到 `SL(2,ℤ)`）的虚部。无约定转换，不需要 convention_map。
+      ⚠ 两张卡 own status 都是 formalized，这条边不压低任何东西。
+      ⚠ **本卡是从该定义卡拆出的**（curator small-backlog-9），不是它的换代：
+      定义卡正文仍写着这一行，断言集合未改。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.psl2z_im_smul_eq"
+    note: |
+      本仓库，桥层提交 **c15b0db**，分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。
+      声明全文：
+
+          theorem psl2z_im_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
+              (g • τ).im = τ.im / ‖(g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)‖ ^ 2
+
+      **check-axioms 运行记录（借用，curator lean-wire-10, 2026-09-11）**：本声明属于
+      worldsheet.modular-group-psl2z 的 source 里逐条登记的那 12 条桥层声明之一
+      （对应清单的 (b) 项），当时在主工作树 D:\physics\string 上（`.lake` 构建时间 13:54:53
+      晚于源文件 13:53:02）跑出 `12 ok, 0 non-standard, 0 missing; 0 errors`，
+      公理集合一律 `propext Classical.choice Quot.sound`。
+      ⚠ **本轮（small-backlog-9）未重跑**：本分支只改 graph/，未动 formal/ 下任何文件；
+      桥层文件自 845b9b9 起未变动。lead 合并前按根 CLAUDE.md 重跑
+      `lake build` + `uv run stringgraph check-axioms` 即可覆盖。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring（\"Bridge layer: Mathlib objects restated verbatim in the graph's conventions\" 与 \"What is *not* claimed here\"）"
+    note: |
+      **诚实归属：数学内容 100% 是 Mathlib 的。** 桥层的证明体是
+      `rw [ModularGroup.im_smul_eq_div_normSq, Complex.normSq_eq_norm_sq]; simp
+      [ModularGroup.denom_apply]`，即把 Mathlib v4.33.1 的
+      `ModularGroup.im_smul_eq_div_normSq`（`Mathlib/Analysis/Complex/UpperHalfPlane/`）
+      的 `Complex.normSq (denom g τ)` 形状换成卡面的 `‖cτ + d‖²` 形状。
+      本图**不**为该 Mathlib 声明建节点，也不审计其证明；证据标准由 stringformal-2026 条目
+      规定的 `lake build` + 无 sorry + 标准三公理承载。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13), p.148（τ′ = (aτ+b)/(cτ+d)）；(5.1.14) 下方散文, p.148（PSL(2,Z) = SL(2,Z)/Z₂，无式号）"
+    note: |
+      **本条不承载本推导的任何步骤**，只登记弦论教材在何处使用模群在 H 上的作用。
+      ★ **原「一手出处未核」已核为 negative（2026-09-11，researcher 第十三轮）**：
+      抽取记录 literature/extractions/polchinski-1998-v1.md §20 逐页读印刷 pp.145–151，
+      **§5.1 全节不印 Im 的变换式**（连记号 τ₂ 都未引入）。详见目标卡同名 source 的 note。
+      本推导的 formalized 由 stringformal-2026 承载，与此无关。
+summary: |
+  机器检查的证明，两行（`formal/StringFormal/Math/MathlibBridges.lean`）：
+
+      theorem psl2z_im_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
+          (g • τ).im = τ.im / ‖(g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)‖ ^ 2 := by
+        rw [ModularGroup.im_smul_eq_div_normSq, Complex.normSq_eq_norm_sq]
+        simp [ModularGroup.denom_apply]
+
+  **(1) 目标卡的 (1)** = 该等式本身：Mathlib 的 `im_smul_eq_div_normSq` 给
+  `(g • τ).im = τ.im / Complex.normSq (denom g τ)`；`Complex.normSq_eq_norm_sq` 把 `normSq`
+  换成 `‖·‖²`；`ModularGroup.denom_apply` 把 `denom g τ` 展成 `(g 1 0) τ + (g 1 1)` = cτ + d。
+  ⇒ 与卡面 Im(γ·τ) = Im τ/|cτ+d|² 逐字相同。
+
+  **(2) 目标卡的 (2)（作用保持 H）由声明的类型承担**：`g • τ` 的类型是
+  `ℍ = UpperHalfPlane = {z : ℂ // 0 < z.im}`。这条定理能通过类型检查，就意味着
+  Lean 里存在 `MulAction SL(2,ℝ) ℍ` 实例、而该实例的构造已证正性；取出正性的一步是
+  `UpperHalfPlane.im_pos (g • τ)`。见 gaps 第一条。
+gaps:
+  - |
+    **目标卡 (2)「作用保持 H」没有独立的桥层重述定理。** 它在 Lean 里不是一条命名定理，
+    而是由 `psl2z_im_smul_eq` 中 `g • τ : ℍ` 这一**类型**承担（ℍ 是子类型 `{z : ℂ // 0 < z.im}`，
+    Mathlib 构造 `MulAction SL(2,ℝ) ℍ` 时已证正性；取出它的一步是 `UpperHalfPlane.im_pos`）。
+    这是机检内容（类型检查通不过就没有这条定理），但**不是一条可被 `check-axioms` 单独点名的声明**。
+    ⇒ 提请 reviewer 裁定：若认为「卡面子句必须逐条对应一条具名声明」，
+    正确修法是请 formalizer 在桥层补一行 `psl2z_im_pos (g) (τ) : 0 < (g • τ).im`，
+    而**不是**把本卡降级或改正文。本推导据现有口径标 formalized。
+  - |
+    **不含 cτ + d ≠ 0。** 目标卡「不断言」(a) 已排除；Lean 侧因 `x / 0 = 0` 而不需要它，
+    Mathlib 的 `UpperHalfPlane.denom_ne_zero`（及本仓库 `TorusMeasure.denom_ne_zero'`）
+    可供需要的下游直接引用，但不在本推导内。
+  - |
+    **Mathlib 的证明本图未审计。** 内容（`im_smul_eq_div_normSq` 与 ℍ 上作用的构造）在 Mathlib；
+    我们承诺的只是「它在同一次 lake build 里通过、且目标声明的公理集合只有标准三条」。
+  - |
+    ★ **（2026-09-11 已核，结论是 negative）物理文献一手出处**：原写「Polchinski §5.1 印刷 p.148
+    是否写出 Im 的变换式未核」，researcher 第十三轮读了印刷 pp.145–151 的页图（L1），
+    结论是**原书全节不印此式**（连记号 τ₂ 都要到第 7 章才引入），见
+    literature/extractions/polchinski-1998-v1.md §20 与目标卡 sources 第三条。
+    ⇒ 缺口的性质变了：不再是「未核」，而是**本卡的 (1) 在本项目内只有 Mathlib 一个来源**。
+    若要一条独立的人类可读来源，须去标准数论教材（researcher §20.5 列了三个候选，均未查）。
+    这不影响本推导的 formalized——数学正确性由 Lean 承担。
+notes: |
+  由 curator（small-backlog-9）于 2026-09-11 建立，是拆卡
+  math.mobius-action-preserves-upper-half-plane 的唯一推导。
+  桥层声明本身不是本轮新增的：`psl2z_im_smul_eq` 自桥层提交 c15b0db 起就存在，
+  此前只作为 worldsheet.modular-group-psl2z 的 source 清单里的 (b) 项登记，
+  没有自己的目标卡，下游无法直接引用——本轮补上的正是那张卡与这条推导。
+
+  **本推导不改动 formal/**：`lean_decl` 指的声明已在 main 上，本分支只加图数据。
+author: curator-small-backlog-9
+created: "2026-09-11"

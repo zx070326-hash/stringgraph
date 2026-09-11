@@ -1,0 +1,100 @@
+id: math.mobius-action-preserves-upper-half-plane
+kind: proposition
+title: "SL(2,Z) 的 Möbius 作用保持上半平面：Im(γ·τ) = Im τ / |cτ + d|²"
+statement: |
+  设 H = {τ ∈ C : Im τ > 0}，SL(2,Z) 为行列式 1 的 2×2 整数矩阵群，按
+    γ = ( (a, b), (c, d) ) ,  τ ↦ γ·τ = (a τ + b)/(c τ + d)
+  作用在 H 上（worldsheet.modular-group-psl2z）。则对一切 γ ∈ SL(2,Z) 与一切 τ ∈ H：
+
+  **(1) 虚部的变换式**：
+
+      Im(γ·τ) = Im τ / |c τ + d|² 。
+
+  **(2) 作用保持 H**：γ·τ ∈ H，即 Im(γ·τ) > 0。
+
+  **本卡不断言什么：**
+  (a) **不单独断言 cτ + d ≠ 0**（它是真的——τ ∉ R 而 (c,d) ≠ (0,0)——但本卡不把它列为断言；
+      它已隐含在「γ·τ 有定义」与 (1) 右端有意义之中，见 notes 的记账一段）；
+  (b) 不断言作用是群作用（结合律、单位元），也不断言它的忠实性；
+  (c) 不断言 −γ 与 γ 给出同一映射，不断言作用下降到 PSL(2,Z)（那在定义卡
+      worldsheet.modular-group-psl2z 里，中心那一半另见 math.sl2z-center-is-pm-one）；
+  (d) 不断言 S、T 的具体形式或它们生成模群（worldsheet.modular-group-generated-by-s-and-t-v2）；
+  (e) 不断言基本域的存在（worldsheet.modular-fundamental-domain），不断言任何测度或积分的性质
+      （spectrum.torus-measure-modular-invariant）；
+  (f) 不断言 SL(2,R) 或 GL⁺(2,R) 上的同一公式（它们同样成立，但本卡的量词写在 **SL(2,Z)** 上，
+      那是本图下游与 Mathlib 生成定理所在的群）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.psl2z_im_smul_eq
+  lean_file: StringFormal/Math/MathlibBridges.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.psl2z_im_smul_eq"
+    note: |
+      本仓库，桥层提交 **c15b0db**（"formal: bridge PSL(2,Z) card to Mathlib; prove
+      Z(SL(2,Z)) = {+-I} and the descent of the H-action"），分支合并提交 **845b9b9**；
+      Lean 4 + Mathlib **v4.33.1**。声明全文：
+
+          theorem psl2z_im_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
+              (g • τ).im = τ.im / ‖(g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)‖ ^ 2
+
+      **卡面两条与该声明的对应**：
+      (1) → 声明的等式本身，(c, d) = (g 1 0, g 1 1)，‖·‖ 是 ℂ 的模，故 ‖cτ+d‖² = |cτ+d|²；
+      (2) → **由声明的类型承担**：`g • τ` 的类型是 `ℍ = UpperHalfPlane = {z : ℂ // 0 < z.im}`，
+           即「作用落在 H 内」是这条定理能通过类型检查的前提（Mathlib 的
+           `MulAction SL(2,ℝ) ℍ` 实例在构造时就证了正性）；把它取出来的那一步是
+           `UpperHalfPlane.im_pos (g • τ)`。**桥层没有为 (2) 单独立一条重述定理**，见
+           --via-lean 的 gaps 第一条（记账，已提请 reviewer 裁定）。
+      桥层只做逐字重述，数学内容是 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq`
+      （证明体：`rw [ModularGroup.im_smul_eq_div_normSq, Complex.normSq_eq_norm_sq];
+      simp [ModularGroup.denom_apply]`，即把 Mathlib 的 `normSq` 形状换成 `‖·‖²` 形状）。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.13), p.148（τ′ = (aτ+b)/(cτ+d)，ad − bc = 1）；§5.1, (5.1.14) 下方散文, p.148（PSL(2,Z) = SL(2,Z)/Z₂ 与「modular group」命名，无式号）"
+    note: |
+      **物理侧转述，只登记作用本身的出处；本卡的 (1) 在原书里不存在。**
+      ★ **「一手出处待核」已核（2026-09-11，researcher 第十三轮，negative evidence L1）**：
+      抽取记录 literature/extractions/polchinski-1998-v1.md **§20**（该文件由
+      researcher-p148 分支合入 main，提交 bc46cf2 / 1feb676）逐页读了印刷 pp.145–151
+      （§5.1 全节 + §5.2 头两页，Cambridge Core 页图），结论逐字：
+        · 全节**不出现** `Im(γτ)`、`Im τ/|cτ+d|²`、`τ₂ → τ₂/|cτ+d|²`、`|cτ+d|` 中的任何一个；
+        · 记号 `τ₂` 在 §5.1 里**根本没有被引入**（首次使用在第 7 章，(7.2.9) 一带）；
+        · §5.1 里 `Im τ` 只出现两次，都不是变换律（"so we can restrict attention to Im τ > 0"、
+          "open only at Im τ → ∞"）。
+      ⇒ **Polchinski 不印此式**，不能把 §5.1 登记为本卡 (1) 的来源；本条 loc 因此只写
+      (5.1.13) 的 τ′ 定义与 (5.1.14) 下方散文的 PSL(2,Z) = SL(2,Z)/Z₂ 两处（researcher §20.5 的建议）。
+      ⚠ negative evidence 的边界：§20 只覆盖印刷 pp.145–151 与第 7 章全章；pp.152–165 与第 9 章未读。
+      ⚠ 第 7 章**用到**了 τ₂ 的变换律而同样不写出来：(7.3.7) 逐字把验证推给读者
+      （"it is easy to check"，见 spectrum.torus-measure-modular-invariant 的两条推导）。
+      ⇒ 本卡 (1) 在本项目内**目前只有 Mathlib 一个来源**（上面第一条 source）。
+      researcher §20.5 给的下一个最便宜的一手候选：Serre *A Course in Arithmetic* ch. VII、
+      Apostol *Modular Functions and Dirichlet Series* ch. 2、Diamond–Shurman ch. 1，**均未查**。
+tags: [math, modular-group, psl2z, moduli, formalized]
+notes: |
+  **由 curator（small-backlog-9）于 2026-09-11 从定义卡 worldsheet.modular-group-psl2z 拆出**
+  （lead 派工第 3 项）。建卡前查重：`uv run stringgraph search "上半平面"` / `"psl2z"` /
+  `"Möbius"`，图中没有同命题的卡（最近的 math.mobius-group-sharply-three-transitive 讲的是
+  PSL(2,C) 在黎曼球上的三点可迁性与 PSL(2,R) 的边界循环序，与本卡不是同一件事）。
+
+  **为什么要拆**：定义卡 worldsheet.modular-group-psl2z 一张卡承担了五件事——
+  (i) 群 SL(2,Z)、(ii) Möbius 作用的公式、(iii) 本卡的 Im 变换式与「保持 H」、
+  (iv) γ 与 −γ 同一映射 ⇒ 取商到 PSL(2,Z)、(v) S、T 两个标准元素的矩阵与作用。
+  四条 `--via-lean` 推导都只能整张挂它，谁用了哪一件在图上看不出来。
+  本卡把 (iii) 拆成可单独依赖的命题：它是 `spectrum.torus-measure-modular-invariant` 两条推导
+  各自第 (2) 步的**字面输入**，也是 `math.eta-modular-invariant-combination--via-lean` 里
+  `norm_eta_pow_four_modular` 做除法时用的 `(g • τ).im ≠ 0` 的来源。
+  另一半 (iv) 的中心那一条拆成 **math.sl2z-center-is-pm-one**。
+  **定义卡 statement 不动**（原则 1），也不加 `superseded_by`：拆出不是换代，
+  定义卡的断言集合一字未改，只在其 notes 记明两条被拆出、下游按实际用到的部件改指。
+
+  **记账：cτ + d ≠ 0**（「不断言」(a)）。它是真的：τ ∈ H ⇒ τ ∉ R；若 c = 0 则 d ≠ 0（否则
+  ad − bc = 0），若 c ≠ 0 则 cτ + d 的虚部 = c·Im τ ≠ 0。Lean 侧有现成声明
+  （Mathlib `UpperHalfPlane.denom_ne_zero`，本仓库另有 `StringFormal.TorusMeasure.denom_ne_zero'`
+  的重述），但**桥层没有把它重述在本卡的 lean_decl 旁**，且本卡正文不断言它，
+  故两边口径一致。要引用它的下游请直接引那两条 Lean 声明或另建卡。
+  ⚠ 附带后果：Lean 里 `x / 0 = 0`，故 `psl2z_im_smul_eq` 作为形式命题**不需要**分母非零；
+  卡面 (1) 按通常数学读法则预设分母非零。这一差别不改变任何结论（分母确实非零），记在此处备查。
+
+  **强度**：own = formalized，与拆出它的定义卡同级，故任何「改挂本卡」的下游 effective 不变；
+  拆卡的收益是**可追溯性**，不是状态提升。
+author: curator-small-backlog-9
+created: "2026-09-11"
