@@ -26,7 +26,37 @@ i.e. `a ᵥ* Gram = 0`, so `det Gram ≠ 0` gives `a = 0`.
 ## Main results
 
 * `StringFormal.gramMatrix`, `StringFormal.linearIndependent_of_gram_det_ne_zero`:
-  the general lemma (any bilinear form over a domain).
+  the general lemma (any bilinear form over any commutative domain; no symmetry, no
+  nondegeneracy on the ambient module, no finite-dimensionality).  Mathlib has the analogous
+  statement only for real/complex inner products
+  (`Matrix.linearIndependent_of_det_gram_ne_zero`).
+* `descFamily2`, `descFamily3`, `descFamily4`: the `p(N)` standard descendants at `N = 2, 3, 4`
+  packaged as `Fin p(N)`-families, and `IsContravariant.gram_det_descFamily{2,3,4}`: their Gram
+  determinants are the level-`N` Kac polynomials (restatements of the determinants proved in
+  `Shapovalov.lean`, `ShapovalovLevelThree.lean`, `ShapovalovLevelFour.lean`).
+* `IsContravariant.linearIndependent_descFamily{2,3,4}`: **generic PBW (b) for `N ≤ 4`** — the
+  standard descendants are linearly independent whenever the level-`N` Kac polynomial is
+  nonzero at `(c,h)`.
+* `levelSpan_two_eq_span_descFamily2`: unconditionally `V₂ = span {L₋₂|c,h⟩, L₋₁²|c,h⟩}`
+  (there are exactly two compositions of `2`, `composition_two_blocks`).
+* `IsContravariant.finrank_levelSpan_two`: `dim V₂ = 2 = p(2)` at generic `(c,h)` — the first
+  instance of the PBW equality `dim V_N = p(N)`, of which `VermaPBW.lean` had only `≤`.
+* `IsContravariant.three_le_finrank_levelSpan_three`,
+  `IsContravariant.five_le_finrank_levelSpan_four`: `dim V₃ ≥ 3`, `dim V₄ ≥ 5` at generic
+  `(c,h)`.  These are *not* upgraded to equalities: the matching upper bound
+  `finrank_levelSpan_le_card_partition` is stated with `Fintype.card (Nat.Partition N)`, and
+  `p(3) = 3`, `p(4) = 5` are not available in that form (Mathlib has no cardinality lemmas for
+  `Nat.Partition`, and `decide` does not reduce the `Fintype.ofSurjective` instance).  At
+  `N = 2` the equality is obtained instead through `levelSpan_two_eq_span_descFamily2`, which
+  needs no partition counting; at `N = 3, 4` that route additionally needs straightening
+  (`[1,2]` is a composition of `3` but `L₋₁L₋₂|c,h⟩` is not one of the three standard vectors).
+* `kac_level_two_pos`, `kac_level_two_nonneg`, `kac_level_two_at_c_one`: on `h > 0`, `c ≥ 1` the
+  level-2 Kac determinant is `≥ 0`, and `> 0` as soon as `c > 1`.  Note there is **no upper
+  restriction on `c`**: for `c > 25` the Kac quadratic does have two real roots, but both are
+  negative (sum `(5-c)/8 < 0`, product `c/16 > 0`).  The only zero in the closed region is
+  `c = 1, h = 1/4`, where the determinant is `2h(4h-1)²`.
+  Hence `IsContravariant.linearIndependent_descFamily2_of_pos` and
+  `IsContravariant.finrank_levelSpan_two_of_pos` need no determinant hypothesis.
 
 ## What this does and does not give
 

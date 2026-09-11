@@ -235,8 +235,29 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     （内层整理可能产生比原尾巴更长的词）。
   - [ ] (b) **线性无关**：即 `U(Vir_-)` 的 Poincaré–Birkhoff–Witt + 诱导模的自由性。
     Mathlib v4.33.1 **没有** PBW（`Algebra/Lie/Free.lean`、`SerreConstruction.lean` 都注明缺）。
+    **已有 generic `N ≤ 4` 替代（2026-09-11）**：见 `StringFormal/Virasoro/GenericIndependence.lean`
+    （无 sorry，公理只有标准三条）。`linearIndependent_of_gram_det_ne_zero`：任意交换整环上、
+    任意双线性型 `B`、`det [B(vᵢ,vⱼ)] ≠ 0` ⟹ `v` 线性无关（Mathlib 只有内积空间版
+    `Matrix.linearIndependent_of_det_gram_ne_zero`）。配上已算出的 Kac 行列式即得
+    `IsContravariant.linearIndependent_descFamily{2,3,4}`：**只要该层 Kac 多项式在 `(c,h)` 处不为零**
+    （即一般 `(c,h)`），`N = 2,3,4` 的 `p(N)` 个标准降算符向量线性无关。
+    `IsContravariant.finrank_levelSpan_two`：`dim V₂ = 2 = p(2)`（PBW 等式的第一个实例；
+    上界来自 (a)，下界来自 Gram 非零；`levelSpan_two_eq_span_descFamily2` 无条件给出
+    `V₂ = span{L₋₂|c,h⟩, L₋₁²|c,h⟩}`，绕开 `p(2)` 的计数）。
+    `N = 3,4` 只给到 `dim V₃ ≥ 3`、`dim V₄ ≥ 5`：升级为等式需要 `Fintype.card (Nat.Partition 3) = 3`、
+    `= 5`，Mathlib 没有 `Nat.Partition` 的基数引理且 `decide` 化不开（`Fintype.ofSurjective` 实例）；
+    另一条路（`levelSpan N = span (标准向量)`）在 `N ≥ 3` 需要整序（`[1,2]` 是 3 的组合，
+    但 `L₋₁L₋₂|c,h⟩` 不是三个标准向量之一）。
+    `kac_level_two_pos`：有序域上 `h > 0`、`c > 1` ⟹ 层 2 行列式 `> 0`，故该区无需行列式假设
+    （`linearIndependent_descFamily2_of_pos`）。**`c` 无上界限制**：`c > 25` 时 Kac 二次式确有实根，
+    但两根之和 `(5-c)/8 < 0`、积 `c/16 > 0`，故两根皆负，与 `h > 0` 无关；闭区域 `h > 0, c ≥ 1`
+    上唯一零点是 `c = 1, h = 1/4`（`kac_level_two_at_c_one`：行列式 `= 2h(4h-1)²`）。
+    **仍未做**：真正的 (b)。generic 版**不是** PBW：它假设存在归一化逆变型（等价于 `hwv ≠ 0`，
+    见 `exists_isContravariant_iff_hwv_ne_zero`），而这正是 (b) 的推论；且在 Kac 零点处失效
+    （那里向量可能仍独立，只是形式退化）。所以这是 `dim V_N = p(N)` 的**条件**、**一般点**版本。
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
-  `dim V_N = p(N)` 也只证到 `≤`。这一项是 `shapovalov-form` 与 `kac-determinant` 的前提。
+  `dim V_N = p(N)` 除 generic `N = 2` 外只证到 `≤`。这一项是 `shapovalov-form` 与
+  `kac-determinant` 的前提。
 - [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
   （无 sorry，公理只有标准三条）：
   - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
