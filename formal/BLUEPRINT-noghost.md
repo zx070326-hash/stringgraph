@@ -2207,3 +2207,15 @@ ddfSpans_bigrade_neg_two_two … : DDFSpansOn η a b F.hη F.trans (towerBigrade
    真正 `N = 2` 专用的只有两条：(i) `oscWeight_eq_two_cases` 是 level-2 的分类；
    (ii) 「`D−1` 个方向恰好张成 `p₋₂^⊥` 的像」在一般 `N` 上要换成 §B″.11 的重叠维数问题。
    所以 §B″.11 第 1 条的五边形数断点**仍然是断点**，本轮没有触及它。
+
+## §B‴ general-N null lower bound: triangularity route (2026-09-12)
+
+本节回答 §B″.11 第 1 条 (ii) 留下的那条「最值得先试的绕法」：能否**按指标逐个造零态、
+用配对矩阵的三角性证独立**，从而绕开两族像在 `N ≥ 5` 处的重叠（Euler 五边形数）。
+写于 `NoGhost/LevelTwoCount.lean` 关闭 `B26 2` 之后，是 §B″ 的续篇，不取代它。
+
+> **取证等级**：本节的代数式与计数全部是 ⟨手算⟩（2026-09-12，formalizer），未经 Lean 校验；
+> 凡引用既有 Lean 声明的地方标 `[Lean]`。`N = 3` 的账在 §B‴.4 逐条列出，
+> 任何据此动手的人第一步应当复算它。
+
+（以下小节在本次提交中逐条补齐。）
