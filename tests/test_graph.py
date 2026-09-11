@@ -529,6 +529,45 @@ def test_best_of_multiple_derivations(mini: Path) -> None:
     assert effs["duality.prop-d"].conjectures == set()
 
 
+def test_tie_break_prefers_strongest_dependency_floor(mini: Path) -> None:
+    # Two physical-argument derivations of the same target: one rests on a
+    # conjecture chain (deps floor = conjecture), the other on a formalized
+    # definition (deps floor = formalized). Both have effective
+    # physical-argument; the tool must pick the one whose deps are stronger,
+    # regardless of alphabetical order (the weak one sorts first here).
+    _write(
+        mini,
+        "graph/derivations/duality/prop-d--via-aaa-weak.yaml",
+        """
+        id: duality.prop-d--via-aaa-weak
+        target: duality.prop-d
+        kind: physical-argument
+        status: physical-argument
+        depends_on: [{id: duality.conj-c}]
+        sources: [{ref: ref-b, loc: "p.1"}]
+        summary: weak route through a conjecture
+        """,
+    )
+    _write(
+        mini,
+        "graph/derivations/duality/prop-d--via-zzz-strong.yaml",
+        """
+        id: duality.prop-d--via-zzz-strong
+        target: duality.prop-d
+        kind: physical-argument
+        status: physical-argument
+        depends_on: [{id: worldsheet.def-a}]
+        sources: [{ref: ref-b, loc: "p.2"}]
+        summary: strong route through a formalized definition
+        """,
+    )
+    g = load_graph(mini)
+    effs = compute_all(g)
+    assert effs["duality.prop-d"].name == "physical-argument"
+    assert effs["duality.prop-d"].best_derivation == "duality.prop-d--via-zzz-strong"
+    assert effs["duality.prop-d"].conjectures == set()
+
+
 def test_refutation_wins(mini: Path) -> None:
     _write(
         mini,

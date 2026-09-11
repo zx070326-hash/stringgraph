@@ -122,11 +122,19 @@ class Propagator:
         supports = [d for d in ders if d.kind != "refutation"]
         if not supports:
             return Effective(level=LEVEL["open"])
+        # Strongest derivation wins. Ties on effective level are broken by
+        # (1) the strongest dependency floor (a derivation whose deps are all
+        # formalized beats one capped by its own status), (2) fewest conjectures
+        # depended on, (3) derivation id, so the choice is deterministic and
+        # `why` shows the shortest honest bottleneck chain (ROADMAP F1, 2026-09-12).
         best: Effective | None = None
-        for d in supports:
+        best_key: tuple[int, int, int, str] | None = None
+        for d in sorted(supports, key=lambda x: x.id):
             e = self._derivation(d)
-            if best is None or e.level > best.level:
-                best = e
+            deps_floor = self._combine_deps([x.id for x in d.depends_on]).level
+            key = (e.level, deps_floor, -len(e.conjectures), d.id)
+            if best_key is None or key[:3] > best_key[:3]:
+                best, best_key = e, key
         assert best is not None
         return best
 
