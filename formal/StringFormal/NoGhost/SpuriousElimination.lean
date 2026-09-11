@@ -787,4 +787,100 @@ theorem towerLop_neg_conjDegree_leading (hD : 2 ≤ D) (F : DDFLightConeFrame η
 
 end Leading
 
+/-! ### The `β`-elimination -/
+
+section Elimination
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b : Fin D → R}
+
+/-- **Every light-cone monomial of level `N`, placed on rung `-N`, is `b̃`-free modulo
+spurious states** (blueprint §B′.5, the induction).
+
+Strong induction on the measure `μ(d) = β(d)·(N+1) + ω(d)`.  If `β(d) = 0` the monomial is
+already `b̃`-free.  Otherwise peel off one factor `α^{b̃}_{-n}`, write `d = d₀ + (b̃, n)` and
+apply the leading-term lemma: `m(d)` equals `-L_{-n} m(d₀)` — a spurious state — plus light-cone
+monomials of strictly smaller measure, which the induction hypothesis already handles. -/
+theorem single_lcMonomial_mem_conjFreeSlice_sup_towerSpurious (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1) (N : ℕ) (d : Osc D →₀ ℕ)
+    (hd : Fock.level D d = N) :
+    Finsupp.single (-(N : ℤ)) (lcMonomial F d)
+      ∈ conjFreeSlice hD F N ⊔ towerSpuriousSubmodule η a b := by
+  classical
+  suffices h : ∀ M : ℕ, ∀ e : Osc D →₀ ℕ, Fock.level D e = N → lcMeasure hD N e ≤ M →
+      Finsupp.single (-(N : ℤ)) (lcMonomial F e)
+        ∈ conjFreeSlice hD F N ⊔ towerSpuriousSubmodule η a b from
+    h (lcMeasure hD N d) d hd le_rfl
+  intro M
+  induction M with
+  | zero =>
+      intro e he hM
+      refine Submodule.mem_sup_left ⟨lcMonomial F e, lcMonomial_mem_conjFree hD F he ?_, rfl⟩
+      simp only [lcMeasure] at hM
+      have hz : conjDeg hD e * (N + 1) = 0 := by omega
+      rcases Nat.mul_eq_zero.mp hz with h' | h'
+      · exact h'
+      · omega
+  | succ M ih =>
+      intro e he hM
+      by_cases hc : conjDeg hD e = 0
+      · exact Submodule.mem_sup_left ⟨lcMonomial F e, lcMonomial_mem_conjFree hD F he hc, rfl⟩
+      obtain ⟨v, hvmem, hv1⟩ : ∃ v ∈ e.support, v.1 = conjIdx D hD := by
+        by_contra hcon
+        refine hc ?_
+        rw [conjDeg, Finsupp.weight_apply]
+        refine Finset.sum_eq_zero fun v hv => ?_
+        show (e v) • (if v.1 = conjIdx D hD then (1 : ℕ) else 0) = 0
+        rw [if_neg (fun h => hcon ⟨v, hv, h⟩), smul_zero]
+      obtain ⟨t, n⟩ := v
+      simp only at hv1
+      subst hv1
+      set e₀ := e - Finsupp.single ((conjIdx D hD, n) : Osc D) 1 with he₀
+      have hsplit : e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1 = e := by
+        rw [he₀, add_comm]
+        exact Fock.single_add_tsub_single (Finsupp.mem_support_iff.mp hvmem)
+      have hlev : Fock.level D e₀ + (n : ℕ) = N := by
+        rw [← he, ← hsplit, Fock.level_add, Fock.level_single, Fock.oscLevel, one_mul]
+      have hmeas : lcMeasure hD N e
+          = lcMeasure hD N e₀ + lcMeasure hD N (Finsupp.single ((conjIdx D hD, n) : Osc D) 1) := by
+        rw [← hsplit, lcMeasure_add]
+      have hZ : Submodule.map (Finsupp.lsingle (M := Fock D R) (R := R) (-(N : ℤ)))
+            (lcLow hD F N (lcMeasure hD N
+              (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)))
+          ≤ conjFreeSlice hD F N ⊔ towerSpuriousSubmodule η a b := by
+        rw [lcLow, Submodule.map_span, Submodule.span_le]
+        rintro _ ⟨_, ⟨f, ⟨h1, h2⟩, rfl⟩, rfl⟩
+        rw [hsplit] at h2
+        exact ih f h1 (by omega)
+      have hlead := towerLop_neg_conjDegree_leading hD F hη n (-(N : ℤ)) e₀ hlev
+      have hAB : Finsupp.single (-(N : ℤ)) (lcMonomial F e)
+          = (Finsupp.single (-(N : ℤ))
+                (lcMonomial F (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))
+              + towerLop η a b (-((n : ℕ) : ℤ))
+                  (Finsupp.single (-(N : ℤ)) (lcMonomial F e₀)))
+            - towerLop η a b (-((n : ℕ) : ℤ))
+                (Finsupp.single (-(N : ℤ)) (lcMonomial F e₀)) := by
+        rw [hsplit]
+        abel
+      rw [hAB]
+      exact Submodule.sub_mem _ (hZ hlead)
+        (Submodule.mem_sup_right
+          (towerLop_neg_mem_towerSpuriousSubmodule (by exact_mod_cast n.2) _))
+
+/-- **`β`-elimination on the antidiagonal slice** (blueprint §B′.4's
+`towerBigrade_le_conjFree_sup_spurious`): modulo spurious states, the whole bigraded piece
+`(rung -N, level N)` is spanned by `b̃`-free light-cone monomials.
+
+`D = 26` does not appear, and neither does the intercept: the only inputs are the frame
+`F`, `η_μ² = 1` and `2 ≤ D`. -/
+theorem towerBigrade_le_conjFreeSlice_sup_towerSpurious (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1) (N : ℕ) :
+    towerBigrade D R (-(N : ℤ)) N ≤ conjFreeSlice hD F N ⊔ towerSpuriousSubmodule η a b := by
+  classical
+  rw [towerBigrade, levelSubmodule_eq_lcSpan hD F hη N, lcSpan, Submodule.map_span,
+    Submodule.span_le]
+  rintro _ ⟨_, ⟨f, hf, rfl⟩, rfl⟩
+  exact single_lcMonomial_mem_conjFreeSlice_sup_towerSpurious hD F hη N f hf
+
+end Elimination
+
 end StringFormal.NoGhost
