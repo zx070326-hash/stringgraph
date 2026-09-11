@@ -1,0 +1,97 @@
+id: math.gram-determinant-nonzero-implies-linear-independence
+kind: proposition
+title: Gram 行列式非零 ⇒ 线性无关（任意交换整环上、任意双线性型；不要求对称、非退化、有限维或正定）
+statement: |
+  设 R 是交换环且**无零因子**（即整环，不必是域，不必有序），M 是 R-模，
+  ι 是**有限**指标集，v : ι → M 是一族向量，
+  B : M × M → R 是**任意** R-双线性型（B : M →ₗ M →ₗ R）。
+  定义 v 关于 B 的 **Gram 矩阵** Gram(B, v) ∈ Mat_{ι×ι}(R)，其 (i,j) 元为 B(v_i, v_j)。
+
+  **(1) 零组合被 Gram 矩阵零化（对任意交换环成立，不需要无零因子）。**
+  若 g : ι → R 满足 Σ_{i ∈ ι} g_i · v_i = 0，则行向量 g 满足
+
+      g ᵥ* Gram(B, v) = 0，   即   ∀ j ∈ ι:  Σ_{i ∈ ι} g_i · B(v_i, v_j) = 0。
+
+  （证明是一行：把 B(Σ_i g_i v_i, v_j) = B(0, v_j) = 0 按第一个变量展开。）
+
+  **(2) Gram 判据。** 若 det Gram(B, v) ≠ 0（R 中的不等式），则 v 在 R 上**线性无关**。
+  （由 (1)：任一零化关系 g 给出 g ᵥ* Gram = 0，而整环上行列式非零的矩阵左零化子为零，
+  故 g = 0。）
+
+  **本条明确不要求**：B 对称；B 在整个 M 上非退化；M 有限生成、自由或有限维；
+  R 是域；R 上有序结构；任何正定性、任何特征假设。
+  唯一的有限性要求是**指标集 ι 有限**（行列式要有意义）。
+
+  【本节点明确**不**断言】
+  (a) **逆命题——「det Gram(B,v) = 0 ⇒ v 线性相关」是假的。** 由 (2) 的逆否只能得到
+      「v 线性相关 ⇒ det Gram(B,v) = 0」；反方向不成立，因为 det = 0 可以仅仅表示
+      **B 限制在 v 的张成上退化**，而 v 仍线性无关。反例见 notes【不可逆的显式反例】。
+      ⇒ 本判据是**单向**的，只能用来证线性无关，**不能**用来证线性相关。
+  (b) 不给出「det Gram ≠ 0」的任何判据，也不断言 Gram 矩阵可计算。
+  (c) 不断言 v 张成任何东西，也不断言 v 是某个模的基：结论只是线性无关。
+  (d) 不涉及内积、Hilbert 空间、正定性或 Cauchy–Schwarz。R 上没有序，
+      B(v_i, v_i) 可以为负、为零，甚至 B 可以是反对称的。
+  (e) 不断言无零因子这一假设可去：R 有零因子时 (2) 会失效
+      （(1) 仍成立，但「行列式非零 ⇒ 左零化子为零」用到整环，
+      Lean 侧对应 `Matrix.eq_zero_of_vecMul_eq_zero` 的 `[NoZeroDivisors R]` 假设）。
+formal:
+  lean_decl: StringFormal.linearIndependent_of_gram_det_ne_zero
+  lean_file: StringFormal/Virasoro/GenericIndependence.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/GenericIndependence.lean :: StringFormal.{gramMatrix, gramMatrix_apply, vecMul_gramMatrix_eq_zero, linearIndependent_of_gram_det_ne_zero}"
+    note: |
+      本仓库，形式化侧分支 agent/formalizer/generic-pbw（该文件最后一个提交 **f4df390**），
+      由 lead 以 **ff1a7d6**（"Merge branch 'agent/formalizer/generic-pbw'"）合入 main；
+      Lean 4 + Mathlib v4.33.1，无 sorry。逐条对应：
+        · Gram 矩阵的定义 → `gramMatrix B v := Matrix.of fun i j => B (v i) (v j)`，
+          配套 `gramMatrix_apply`；
+        · (1) → `vecMul_gramMatrix_eq_zero`（假设 `∑ i, g i • v i = 0`，结论 `g ᵥ* gramMatrix B v = 0`；
+          `omit [DecidableEq ι]`，只要 `[Fintype ι]`）；
+        · (2) → **`linearIndependent_of_gram_det_ne_zero`**（本卡 formal.lean_decl），
+          经 `Fintype.linearIndependent_iff` 与 `Matrix.eq_zero_of_vecMul_eq_zero`。
+      类型类逐字为 `{R M ι} [CommRing R] [AddCommGroup M] [Module R M] [Fintype ι] [DecidableEq ι]`，
+      (2) 另加 `[NoZeroDivisors R]`——这正是陈述里「交换整环」与「ι 有限」的来源，
+      **没有** `[Field R]`、`[LinearOrder R]`、`[Module.Finite R M]`、也不假设 B 对称。
+      公理检查：该文件的声明在 formalizer 的检查中只用 propext / Classical.choice / Quot.sound
+      （formal/TODO.md 的 `pbw-verma` (b) 项，2026-09-11）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**；合并含 formal 改动的分支时由 lead 跑。
+tags: [linear-algebra, gram-matrix, bilinear-form, formalized]
+notes: |
+  【查重（2026-09-11，curator，分支 agent/curator/lean-wire-5）】
+  跑 `uv run stringgraph search Gram / determinant / 线性无关 / Gram 判据 / 行列式非零`。
+  命中的都是**具体** Gram 矩阵的计算卡（worldsheet.kac-determinant-level-{two,three,four}、
+  worldsheet.transverse-ddf-fock-gram-matrix、worldsheet.bosonic-fock-gram-matrix），
+  没有任何节点承载「Gram 行列式非零 ⇒ 线性无关」这条**纯线性代数引理**。
+  ⇒ 新建，并放在 math 而不是 worldsheet：它与 Virasoro、Fock 空间、弦论全都无关，
+  下游（worldsheet.verma-level-basis-generic-low-levels）只是它的一个应用。
+
+  【为什么值得单立一卡】这条引理是「已算出的 Kac 行列式」与「PBW 线性无关性」之间的
+  唯一桥梁。把它独立出来的好处是：下游任何「某族向量的 Gram 行列式非零」的计算
+  都能直接接上，而不必在每张卡里重证一遍；同时它的**边界**（(a) 不可逆、(e) 需整环）
+  只需在一处登记。
+
+  【不可逆的显式反例（对应【不断言】(a)）】在 Virasoro Verma 模 V(c,h) 上取
+  c = 1、h = 1/4、v = {L₋₂|c,h⟩, L₋₁²|c,h⟩}，归一化逆变型 B：
+  level-2 Gram 矩阵的四个元全等于 3/2，故 det = 0；但按 PBW 这两个向量对**一切** (c,h)
+  都线性无关，退化的是**型**而不是向量——(L₋₂ − L₋₁²)|c,h⟩ 与整个 V₂ 正交。
+  机器验证：`StringFormal.Virasoro.IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two`
+  （同一文件；数值见 worldsheet.kac-determinant-level-two 与
+  worldsheet.verma-level-basis-generic-low-levels）。
+  ⚠ 这条反例里「按 PBW 它们线性无关」用的是 math.verma-module-free-over-negative-part
+  （rigorous，未形式化）；**反例本身**（Gram 矩阵恒为 3/2、故 det = 0，且有非零向量与 V₂ 正交）
+  不依赖 PBW，已形式化。本卡的 (a) 只需要后者：它说明**Gram 判据不能反用**，
+  这一点即使不知道那两个向量是否独立也成立（det = 0 时判据单纯地不给信息）。
+
+  【与 Mathlib 的关系】GenericIndependence.lean 文件头自述：Mathlib v4.33.1 只有
+  实/复内积空间版本 `Matrix.linearIndependent_of_det_gram_ne_zero`，没有一般交换环 +
+  一般双线性型的版本，故此处从头证。⚠ **这条比较是 formalizer 在文件头的自述，
+  curator 未独立核对 Mathlib**（核对方式：在 formal/ 下 grep 该名字）。
+  若日后发现 Mathlib 已有等价声明，应把本卡的 source 改指 Mathlib 并在此登记，
+  但陈述不必改（它比内积空间版更一般）。
+
+  【本卡不声明 uses_conventions】陈述里没有任何物理量：无度规、无 α'、无截距。
+  Gram 矩阵的下标顺序 (i,j) ↦ B(v_i, v_j) 在 B 不对称时有意义，
+  但 (1)(2) 对 B 与 B 的转置同时成立（det 不变），故无需约定卡。
+author: curator
+created: "2026-09-11"
