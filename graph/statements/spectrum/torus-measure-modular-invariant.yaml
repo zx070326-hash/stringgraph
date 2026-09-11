@@ -24,7 +24,28 @@ statement: |
 uses_conventions:
   - conv.worldsheet-euclidean
   - conv.worldsheet-complex-coords
+formal:
+  lean_decl: StringFormal.TorusMeasure.measure_smul_eq
+  lean_file: StringFormal/Math/TorusMeasure.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/TorusMeasure.lean :: StringFormal.TorusMeasure.{measure_smul_eq, measure_density_modular_invariant, mobius_deriv, im_smul_mul_normSq, volume_eq_lintegral_inv_im_sq, lintegral_inv_im_sq_smul, coe_inv_nnnorm_sq}"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/torus-measure`；Lean 4 + Mathlib v4.33.1。
+      本卡 `formal.lean_decl` 取 **`measure_smul_eq (g : SL(2, ℤ)) (s : Set ℍ) :
+      (volume : Measure ℍ) (g • s) = volume s`**——对**任意**子集 s，**无可测性假设**
+      （由 `MeasureTheory.measure_smul`）。这里的 `volume : Measure ℍ` 就是 Mathlib
+      `Mathlib/Analysis/Complex/UpperHalfPlane/Measure.lean`（David Loeffler）给 `ℍ` 装的
+      `MeasureSpace` 实例，即 dτ₁dτ₂/τ₂²；该文件已证 `SMulInvariantMeasure (GL (Fin 2) ℝ) ℍ volume`
+      （经 Jacobi 变换变量公式），本项目把它沿 `ModularGroup.sl_moeb` 搬到 SL(2,ℤ)。
+      本卡 statement 的比值恒等式对应的**逐点/代数层**是
+      `measure_density_modular_invariant : ‖dτ'/dτ‖²/(τ₂')² = 1/τ₂²`，由
+      `mobius_deriv`（dτ'/dτ = 1/(cτ+d)²）与 `im_smul_mul_normSq`（τ₂'|cτ+d|² = τ₂）两步得出；
+      `volume_eq_lintegral_inv_im_sq` 把 Mathlib 的权重 `(1/‖y‖₊)²` 钉成本卡的 1/τ₂²
+      （否则「Mathlib 的 volume」与「本卡的 dτdτ̄/τ₂²」只是名字相同）；
+      `lintegral_inv_im_sq_smul` 是同一结论写成 ℂ 的子集上的积分形式。
+      ⚠ 文件 docstring 逐字写明：测度层证的是**正测度** dτ₁dτ₂/τ₂²（即 |dτ ∧ dτ̄|），
+      带取向的 2-形式 dτ ∧ dτ̄ 版本**未形式化**（SL(2,ℤ) 全纯故保定向，但该句未机检）。
   - ref: polchinski-1998-v1
     loc: "§7.3, eq. (7.3.7), p.217，逐字：「… and **it is easy to check** that dτdτ̄/τ₂² (7.3.7) is modular-invariant as well.」"
     note: |
@@ -37,7 +58,7 @@ sources:
       本卡所用的群作用即此式；抽取记录 polchinski-1998-v1-ch7.md 的跨章定点核对一栏记：p.148 页图
       本轮读到（L1），但 (5.1.12)/(5.1.13) **未逐式抄录**。图上的对应节点是
       worldsheet.modular-group-psl2z（定义卡，其 Im(γ·τ) = Im τ/|cτ+d|² 一式由 curator 补，非来源逐字）。
-tags: [spectrum, torus, moduli, modular-invariance, measure, modular-group]
+tags: [spectrum, torus, moduli, modular-invariance, measure, modular-group, formalized]
 notes: |
   【为什么从 spectrum.one-loop-torus-amplitude-modular-invariant 拆出（curator-small-backlog-6，2026-09-11）】
   旧卡把三件事写在一张上：(1) τ₂|η|⁴ 不变、(2) 测度 dτdτ̄/τ₂² 不变、(3) 故 (7.3.6) 的被积表达式整体不变、
@@ -56,5 +77,15 @@ notes: |
   且 Mathlib 已有 UpperHalfPlane 的 SL(2,Z) 作用与 UpperHalfPlane.im_smul_eq_div_normSq，
   是一个成本很低的形式化岛；它一旦 formalized，本图对「F₀ 上积分良定义」的两条输入就都不再
   只靠 "it is easy to check"。已列入报告交 lead。
+  【形式化已完成（curator lean-wire-11, 2026-09-11）】上面「形式化候选」一段的预测已兑现：
+  formalizer 分支 `agent/formalizer/torus-measure` 新增 `formal/StringFormal/Math/TorusMeasure.lean`，
+  本卡挂 `lean_decl = StringFormal.TorusMeasure.measure_smul_eq`，新增推导
+  spectrum.torus-measure-modular-invariant--via-lean（status **formalized**）。
+  纸上的 --via-sl2z-action（rigorous，reviewer-batch21 已签）按 lead 裁决保留，工具取高者。
+  ⚠ **Lean 比纸上推导多一层**：纸上证的是逐点的密度恒等式（= Lean 的
+  `measure_density_modular_invariant`），Lean 另外给了测度层的 vol(g·s) = vol(s)（对任意 s）；
+  后者的变换变量内容是 Mathlib 的。
+  ⚠ 本卡「不断言」(e)（不变密度的唯一性）与 Lean 无关：Lean 同样不涉及它，两边一致。
+  ⇒ 本卡唯一剩下的实质缺口是**取向 / 绝对值**（Lean 证的是正测度 |dτ ∧ dτ̄|），见 --via-lean 的 gaps。
 author: curator-small-backlog-6
 created: "2026-09-11"

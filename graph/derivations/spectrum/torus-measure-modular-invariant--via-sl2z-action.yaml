@@ -35,9 +35,13 @@ summary: |
   常数归一化（d²τ = 2dτ₁dτ₂ 还是 dτ₁dτ₂）在比值中相消，故结论与该约定无关。
 gaps:
   - "**原书没有做这个验算**：逐字 'it is easy to check'（§7.3, p.217）。summary 的三步是本图补的。
-     按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这类有限步初等计算可以标 rigorous，但**必须**有
-     `reviewer-verified: <agent>, <date>` 记录；本推导**没有**该记录，故按规则标 physical-argument。
-     ⇒ 这条推导是本图目前少数几条「只差一次 reviewer 复核就能升 rigorous」的节点之一。"
+     ★ **（2026-09-11 两次关闭，本条不再是缺口）** 本条原文写「本推导没有 `reviewer-verified` 记录，
+     故按规则标 physical-argument」，已过时：(i) reviewer-batch21 于 2026-09-11 独立复算三步并留了
+     `reviewer-verified` 记录（见 notes），本推导据 docs/STATUS_LEVELS.md 的 rigorous 例外条款升为 **rigorous**；
+     (ii) 同日 formalizer 把这三步逐条形式化（`mobius_deriv` / `im_smul_mul_normSq` /
+     `measure_density_modular_invariant`，`formal/StringFormal/Math/TorusMeasure.lean`），
+     目标卡另挂 spectrum.torus-measure-modular-invariant--via-lean（formalized）。
+     ⇒ 「原书零论证」这件事**没变**（仍是文献事实），但「本图对它只有未复核的手算」这件事已不成立。"
   - "**Im(γ·τ) = Im τ/|cτ+d|² 在图上的可追溯性止于定义卡**：worldsheet.modular-group-psl2z 自己写明
      该式是 curator 补的自洽性说明，抽取记录未记录它是否写在原书里。这一步若要有一手来源，
      须回 Polchinski §5.1 p.148 或任一模形式教科书补一条 loc。"
@@ -51,7 +55,17 @@ notes: |
   spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 summary 第 (2) 步
   **相同**（那里写作两行验算），只是现在它是一张独立卡的完整论证而不是三合一卡的一个部件。
 
-  **为什么不是 rigorous**：见 gaps 第 1 条——差一个 reviewer 复核记录。若 reviewer 愿意留
-  `reviewer-verified`，本推导可直接升 rigorous（三步全部写在 summary 里，前提完整）。
+  **为什么是 rigorous**：见 gaps 第 1 条——reviewer-batch21 已留 `reviewer-verified` 记录，
+  走 docs/STATUS_LEVELS.md 的 rigorous 例外条款（三步全部写在 summary 里，前提完整）。
+  （本段原写「为什么不是 rigorous……差一个 reviewer 复核记录」，2026-09-11 已过时，由
+  curator lean-wire-11 改写。）
+
+  **本推导不再是目标卡的最强推导**（curator lean-wire-11, 2026-09-11）：同卡新增
+  spectrum.torus-measure-modular-invariant--via-lean（status **formalized**，
+  `formal/StringFormal/Math/TorusMeasure.lean`），工具取高者。本推导按 lead 裁决保留，
+  它是纸上三步验算 + reviewer 复核这条独立证据链的记录。
+  顺带：本推导 gaps 第 2 条（Im(γ·τ) = Im τ/|cτ+d|² 的可追溯性止于定义卡）在 Lean 侧**不存在**
+  ——那里由 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq` 重证；但本推导自身的那条 gap 照旧。
+  gaps 第 3 条（取向/绝对值）**两条推导都没关**，是本卡目前唯一的实质缺口。
 author: curator-small-backlog-6
 created: "2026-09-11"
