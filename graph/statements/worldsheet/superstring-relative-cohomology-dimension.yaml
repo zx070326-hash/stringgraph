@@ -195,6 +195,7 @@ sources:
       那条边 2026-09-11 得以从 inferred 改指本卡的依据。
 tags: [superstring, brst, cohomology, dimension-formula, rns, ramond-sector, quantization-condition]
 notes: |
+  【reviewer-batch25，lead 落地】补「不断言」：本卡**不断言** LZ 记号 p^{(8)}_κ 的任何解析形式（其定义在本图 L0，只照抄记号）；断言等式因此是符号表达式，不可数值化（与「不断言 (e)」对 dim R(p,κ) 的处理同）。statement 按原则 1 不改。
   ★★【本卡为什么新建（curator，2026-09-11）】两条既有记账缺口逐字点名要它：
   (1) worldsheet.superstring-relative-cohomology-vanishing-v2 的"本命题不断言 (b)"：
       「不断言 H⁰_rel 的**维数**（LZ Corollary 2.15(i) 的 "Quantization Condition"）」；

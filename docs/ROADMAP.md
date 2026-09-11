@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-12 早）：main 586 statements / 483 derivations / 3 milestones / 21 conventions；effective formalized 71 / rigorous 105 / physical-argument 345 / conjecture 29；Lean 75 声明公理干净。超弦无鬼上同调卡与 BRST≅OCQ 卡均换代 v2（相对次数写法；删「未来半光锥」误译前提）；Fock 模在 Vir⁻ / super-Vir⁻ 下自由各立一卡（FGZ Prop 2.6(i) / LZ Cor 2.19(iii)）。
+- 计数（2026-09-12 上午）：main 589 statements / 485 derivations / 3 milestones / 21 conventions；effective formalized 71 / rigorous 106 / physical-argument 346 / conjecture 29；Lean 75 声明公理干净。FGZ Thm 2.7(ii) 与 LZ Cor 2.15(i) 维数卡已立（各 rigorous）。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
@@ -188,6 +188,7 @@
 
 - **现状**：DDF 构造全部 Lean 机检（[L_m,A]=0 ∀m、伴随、保持物理态、[A,A]=m(ε·δ)δ；任意交换 ℚ-代数、动量塔 Fock 空间）+ Kac N≤4 + Verma 层基 + Fock Gram；无鬼定理 v4 本身 effective rigorous 但**非 Lean 定理**，且 GT 1972 / Brower 1972 正文未取得；全部审查为 AI agent。
 - **三条路线**：(1) Lean 形式化论文（ITP/CPP/JAR）——差一个定理：在 Lean 里关无鬼定理（张成引理 ← Fock 模在 Vir⁻ 下自由 ← Kac 行列式非零；纵向算子 K_m；正定性组装）；(2) 方法论 + 工具 + 数据集（SciPost Codebases / JOSS / CICM）——接近可投，需英文化、schema 冻结、公开仓库、一次人类审计、先行工作对比；(3) 物理侧依赖审计综述（CMP/JHEP 类）——最远，需整块覆盖 + 人类专家复核。
+- **无鬼定理 Lean 蓝图（2026-09-12，`formal/BLUEPRINT-noghost.md`，748 行）**：(A) 纵向算子取 GT 的 K_n = k_0·α_n（非 Brower A^L），在本仓库就是 `towerModeVec` 取偏振 ε := b，四条关系是现有引理特例——几乎白送；(B) 张成引理：FGZ 路线（一般 N Kac 行列式）判死路，推荐光锥标架下「DDF/K/L 单项式 → 振子单项式」转移矩阵幺三角；**D = 26 只在 (B-26)「H^⊥ 之外的 p_{D−1}(N)−p_{D−2}(N) 个方向恰为零模态」一步进入**，DDF 代数/伴随/Gram 均与 D 无关——这是整条 GT 链的真正承重点，文献支撑只有 Goddard 2008 (6.4) 一句转引；(C) 正定性组装不依赖 B。**先做三条**：C.2 假设可满足性见证、A.1 K 算子、C.1 塔上零模态与商形式。**2026-09-12 上午：C.2 与 A.1/A.2 已合 main（Witness.lean、Longitudinal.lean；六条 K 关系全证，含 [K,A]=0；21 条声明公理干净）**；C.1/C.3 与 B.1/B.6（光锥标架、N≤2 张成）派工中。结构性限制：`Fock D R` 度规钉死对角 η，光锥基只能在算子层换。
 - **已启动**：先行工作检索（researcher-prior-work → `literature/extractions/prior-formalizations.md`）；无鬼定理 Lean 蓝图（formalizer-noghost-blueprint → `formal/BLUEPRINT-noghost.md`）。
 - **先行工作检索结论（2026-09-12，`literature/extractions/prior-formalizations.md`）**：Carnahan `vertexAlg`（最先进的 Lean 顶点代数项目）README TODO 逐字列「virasoro representations, no-ghost theorem, invariant inner products」为未来目标；Kytölä arXiv:2510.21741 §1.3 逐字「not aware of earlier formalizations in any proof assistants」；Mathlib/AFP/agda-unimath/Physlib 均无 Virasoro 表示/Verma/Kac/DDF。**A 级可宣称首次**：Virasoro Shapovalov 形式；Kac 行列式 N≤4 机器验证（措辞「实例」）；横向 DDF 算子及其代数；洛伦兹不定内积 D 分量 Fock 空间 + c=D Sugawara；GS 反常因子化代数层 + IIB 整数解唯一性；E₈ 显式根集幂和。**不可宣称**：无鬼定理本身（未做完）、Virasoro/Witt/Verma/中心扩张（Kytölä、Carnahan）、顶点代数/locality、PBW、η S 变换与模群生成（Mathlib 搬运）。方法论对照：leanblueprint 已是「节点=陈述、边=uses、带状态」的图，差异只在状态轴语义（离形式化多远 vs 底层论证严格度）——论文不得写「已有工作只有静态文档」。最大证据缺口：Lean Zulip 与 GitHub code search 未查（WebSearch 额度为 0）。
 - **需船长**：GT 1972 / Brower 1972 原文；至少一位人类审阅者核三个里程碑与 Lean 定理陈述。

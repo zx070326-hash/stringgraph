@@ -1314,6 +1314,44 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     全部 `ok`，公理集只有 `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
   - **仍缺**：形式仍是 `R`-双线性而非 Hermite，无正定性、无完备化；
     伴随本身**不给** DDF 态的正模态——那还需要 `[A^i_m, A^j_n]`（(5a)(5b)，见上一项）。
+- [x] `noghost-a`：**DDF 假设集的可满足性见证**（蓝图 §C.2）与**纵向 Goddard–Thorn 算子 `K_m`**
+  （蓝图 §A.1/§A.2）—— `StringFormal/NoGhost/Witness.lean`、`StringFormal/NoGhost/Longitudinal.lean`。
+  - **`Witness.lean`（§C.2）**：此前仓库里**没有任何一条**证明四条几何假设
+    `hη ∧ hbb ∧ hba ∧ hεb` 可以同时满足，整个 DDF 岛原则上可能是空条件命题。
+    现在给出 `D ≥ 3`、任意交换 ℚ-代数上的显式光锥标架
+    `η = diag(-1,1,…,1)`、`b = (1,1,0,…)`、`a = (1/2,3/2,0,…)`、`b̃ = (1/2,-1/2,0,…)`、
+    `ε_i = Pi.single i 1 (i ≥ 2)`：
+    `noghost_hypotheses_satisfiable`（四条假设 + `ε·ε = 1` + 快子壳 `α'k² = 1`，即 `a₀ = 1`）、
+    `noghost_lightcone_frame_satisfiable`（再加 `b·b̃ = -1`、`b̃·b̃ = 0`）、
+    `noghost_transverse_gram_satisfiable`（`D-2` 个横向方向，Gram = `δ_{ij}`）。
+    工具引理 `dotVec_add_left/right`、`dotVec_single_left`、`dotVec_single_single`、`dotVec_pair`
+    可复用。**数学结论**：`b·a = 1` 与 `a·a = 2` 一起**强制** `a = (1/2,3/2,0,…)`，
+    所以这套见证在 ℤ 上不存在，ℚ-代数假设不是偷懒而是必需。
+  - **`Longitudinal.lean`（§A.1/§A.2）**：`K_m = k_0·α_m` **就是** `towerModeVec η a b b m`
+    （偏振取 `b` 自身；类光条件 `b·b = 0` 就是「`b` 对自己横向」），于是 Goddard 2008 (6.3)
+    的整套代数是既有引理在 `ε := b` 处的特例：
+    `lie_towerLop_kOp`（`⁅L_m,K_n⁆ = -n K_{m+n}`，**只需 `hη`**）、
+    `lie_kOp_kOp`（`= 0`，中心项 `m(k_0·k_0)δ` 由 `hbb` 消去——`K`-代数里 `hbb` 的唯一用处）、
+    `kOp_zero_eq_id` / `kOp_zero_eq_one`（`K_0 = 1`，**逐层**成立，靠
+    `dotVec_towerMomentum_right_of_isotropic` + `hba`）、
+    `towerPairing_kOp_left`（`K_m† = K_{-m}`）、
+    `kOp_mul_towerVertex`（`K` 穿过顶点算子，用 `hbb`）、
+    **`lie_kOp_ddfOp`（`⁅K_m, A^ε_n⁆ = 0`，一切 `m,n`）**：与 `⁅L_m,A⁆` 不同，**没有**望远镜
+    求和与边界项——`K_m` 与每个单项 `α^ε_j V^{(n)}_j` 逐项对易，只需取对 `x` 与 `K_m x`
+    同时够大的窗口 `ddfWindow n x ∪ ddfWindow n (K_m x)`；两条几何输入各用一次
+    （`hbb` 过顶点算子，`hεb` 过 `α^ε_j`）。
+  - §A.2 侧：`kOp_apply_single_vacuum_of_pos`（`K_n|0;k+jk_0⟩ = 0`，`n > 0`，**每一层**）、
+    `towerKerK = ⋂_{n>0} ker K_n`（Goddard (6.2)）、`single_vacuum_mem_towerKerK`、
+    `ddfOp_mem_towerKerK`、`ddfCharacterization = towerPhysSubmodule ⊓ towerKerK` 与
+    `ddfOp_mem_ddfCharacterization`。
+  - **仍缺**：`ddfCharacterization` 只是**定义**，Goddard (6.2) 的「= DDF 态张成」是 `ddf-spans`
+    （蓝图 §B），未做；本项只给出「DDF 态满足 `K`-条件」那一侧所需的全部基础设施
+    （算子保持 + 真空满足），张成引理与其逆包含仍未形式化。
+  - **公理登记**：两文件 21 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+  - **图接线建议（本分支不碰 `graph/`）**：新建卡 `worldsheet.gt-longitudinal-k-algebra`
+    （Goddard 2008 §6 (6.2)(6.3)，来源 E7 已 L1 核实），`formal.lean_decl` 可指
+    `StringFormal.NoGhost.lie_towerLop_kOp` / `lie_kOp_kOp` / `kOp_zero_eq_one`；
+    可满足性见证可挂在 `worldsheet.ddf-operators-v6` 的 notes 或新建定义卡。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
 - [ ] `no_ghost_theorem`：组装。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
