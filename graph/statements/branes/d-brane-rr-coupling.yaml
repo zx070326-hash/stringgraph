@@ -50,9 +50,10 @@ notes: |
      （p. 141 逐字「was deduced in section 10.8」）。残留：那张卡自身不断言 C_10 存在性有独立论证。
   2. **R–R 场的 T 对偶 (13.1.4)(13.1.5)**：本图无 R–R 顶点算子节点，也无 type II 无质量谱节点
      （ch10 分支 worldsheet.type-ii-massless-spectrum 未合）。
-  3. **App. B.2「BPS ⇒ 带守恒荷」**：App. B 现已抽（L1）并建卡 branes.bps-bound-point-particle-d4——
+  3. **App. B.2「BPS ⇒ 带守恒荷」**：App. B 现已抽（L1）并建卡 susy.bps-bound-point-particle-d4——
      (B.2.36) 的中心项 Z^{AB} 正是「守恒荷」，短表示要求 m = q_i ≠ 0；但那只是点粒子版，
-     广延物体荷的代数是 (13.2.9)（branes.brane-charges-in-susy-algebra，在本卡之后）。
+     广延物体荷的代数是 (13.2.9)（susy.brane-charges-in-susy-algebra，在本卡之后）。
+     〔2026-09-11 去重：这两张卡的 branes 版是并行重复建卡，lead 裁决保留 susy 版，已标 superseded_by。〕
   4. **§12.1 有质量 IIA 超引力与 C_9**：抽取记录 -ch12 是否含该段未核（§3.3）。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"

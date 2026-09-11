@@ -43,7 +43,17 @@ sources:
     loc: "App. B 导言 pp. 439–440：「The reader should be able to follow the derivation of the various representations (massless, standard massive, and BPS massive). However, the transformations and actions require detailed calculation, and so for these we simply cite for reference some of the key results.」"
     note: 抽取记录 #E15 备注（L1）。表示的推导原书认为读者可跟随；本卡只用到表示层。
 tags: [supersymmetry, bps, central-charge, d4, extended-supersymmetry, short-multiplet]
+superseded_by: susy.bps-bound-point-particle-d4
 notes: |
+  【★ 已作废，见 `susy.bps-bound-point-particle-d4`】并行重复建卡：两个 curator 在 2026-09-11 各建了一版
+  同一命题（App. B (B.2.36)–(B.2.39) 的点粒子 BPS 界与短/超短表示计数），两版都进了 main。
+  **2026-09-11 lead 裁决保留 susy 版**，本卡标 `superseded_by`。本卡独有的逐字证据、gaps 与「不断言」条目
+  已并入 `susy.bps-bound-point-particle-d4` 及其推导（在那边标〔并入 branes 版〕）；
+  本卡的 `id` 与 `statement` 按项目原则未改动。指向本卡的活边已全部改指 susy 版；
+  本卡的推导 `branes.bps-bound-point-particle-d4--via-positivity-of-anticommutator` 按
+  docs/STATUS_LEVELS.md「旧推导的去留」保留不删（validate 的 stale 警告是预期的）。
+  ⚠ 下方原 notes 中「areas.yaml 没有 susy 区」的判断**已过时**：`graph/schema/areas.yaml` 现有 `susy` 区。
+
   【放在 branes/ 的理由】graph/schema/areas.yaml 没有 susy 区（areas 只有 worldsheet/cft/spectrum/consistency/
   duality/compact/branes/holography/swampland/sft/math/conv）；branes 区描述含「BPS 态」，且本卡在本图的
   唯一用途是给 D 膜 BPS 链提供模板。lead 指示（2026-09-11）「若 susy 区不在 areas.yaml 则放 consistency/ 或

@@ -38,7 +38,20 @@ sources:
     loc: "App. B §B.2, p. 448（「Including charges that can be carried by extended objects, additional terms appear. Rather than explain this here, we introduce it in its natural physical context: first in section 11.6, and then in more variety in chapter 13.」）；§B.5, p. 454（「additional central charges carried by extended objects are introduced in their physical context in section 13.2」）"
     note: 抽取记录 polchinski-1998-v2-appB.md#E21/#E25（L1）。这两句是本卡 depends_on App. B 模板卡的原文背书。
 tags: [supersymmetry, bps, central-charge, d-brane, f-string, type-ii, brane-charge]
+superseded_by: susy.brane-charges-in-susy-algebra
 notes: |
+  【★ 已作废，见 `susy.brane-charges-in-susy-algebra`】并行重复建卡：两个 curator 在 2026-09-11 各建了一版
+  同一命题（§13.2 (13.2.9) 含 F 弦 NS–NS 荷与 D 膜 R–R 荷的十维 type II 超代数），两版都进了 main。
+  **2026-09-11 lead 裁决保留 susy 版**，本卡标 `superseded_by`。本卡独有的逐字证据、gaps 与「不断言」条目
+  已并入 `susy.brane-charges-in-susy-algebra` 及其推导（在那边标〔并入 branes 版〕），
+  包括：`τ_p` = Dp 膜张力与 `Q^{NS}` 与 `B_{MN}` 耦合这两处符号释义、依赖方向（成环警告）、
+  §13.6 与 (13.3.5)/(13.3.7) 的式号存疑、第 14 章缺口。本卡 `id` 与 `statement` 未改动。
+  指向本卡的活边已全部改指 susy 版；本卡的推导
+  `branes.brane-charges-in-susy-algebra--via-t-dual-supercharges-and-brane-charges` 按
+  docs/STATUS_LEVELS.md「旧推导的去留」保留不删（它对已作废的 branes.bps-… 的那条 depends_on 也按该细则不追改，
+  validate 的两条警告都是预期的）。
+  ⚠ 下方原 notes 中「areas.yaml 无 susy 区」的判断**已过时**：`graph/schema/areas.yaml` 现有 `susy` 区。
+
   【放在 branes/ 的理由】同 branes.bps-bound-point-particle-d4：areas.yaml 无 susy 区，branes 区描述含「BPS 态」。
 
   【为什么 D 膜 BPS 链要经过本卡】抽取记录 appB Q3：App. B 的 BPS 界只覆盖点粒子中心荷；D 膜 BPS 性

@@ -5,11 +5,14 @@ status: physical-argument
 depends_on:
   - id: spectrum.point-particle-circle-path-sum
     note: 提供被求和的对象 Z_{S¹}(m²)（(7.3.9)）。
-  - id: worldsheet.modular-invariance-integer-spin
+  - id: worldsheet.modular-invariance-integer-spin-v2
     note: |
       提供 h − h̃ ∈ Z 这个**明写的前提**——没有它，(7.3.11) 的 δ_{h,h̃} = ∫dθ/2π e^{i(h−h̃)θ}
       写不出来。原书在 (7.3.11) 下方逐字声明这个假设并回指上一节（即 (7.2.29)）。
       **抽取记录 #E23 备注明确说：这条边是真实的边，不是 inferred。**
+      **2026-09-11 改指换代卡 -v2**（旧卡 worldsheet.modular-invariance-integer-spin 已 superseded_by）。
+      ⚠ v2 的 (1) 只覆盖净 (−1)^F 加权简并非零的层；本用例是 26 维平坦玻色闭弦
+      （无世界面费米子，(−1)^F ≡ +1），该限定为空，且 c = c̃ 使 (2) 的前提自动满足。
   - id: worldsheet.no-ghost-theorem-v4
     note: |
       提供「物理谱与横向 Hilbert 空间一一对应」这一步。原书逐字「As shown in chapter 4, the
@@ -42,6 +45,7 @@ gaps:
   - "**继承 spectrum.point-particle-circle-path-sum 的全部缺口**（正文没做该推导、k⁰ 转动等）。"
 notes: |
   由 curator 于 2026-09-11 建立。四条依赖边都是实边；其中到
-  worldsheet.modular-invariance-integer-spin 的那条按抽取记录 #E23 的明确判定不标 inferred。
+  worldsheet.modular-invariance-integer-spin-v2 的那条按抽取记录 #E23 的明确判定不标 inferred
+  （2026-09-11 同日由旧卡改指 v2）。
 author: curator-polchinski-ch7
 created: "2026-09-11"

@@ -99,7 +99,9 @@ gaps:
     **不覆盖 μ = 0。** 目标陈述明写不断言 S₂ 无模；本推导也不断言。
     Eynard Ch.5 Theorem 1.1 的 `ℳ_{0,0} = {(ℂP¹)}` 虽是旁证，但换算到本图的 μ 还要过桥 (B2)
     （μ = 2·dim H⁰(K²)，同样无来源）。μ(S₂) = 0 那一格见新卡
-    math.no-holomorphic-quadratic-differentials-on-sphere-and-disk。
+    math.no-holomorphic-quadratic-differentials-on-sphere
+    （2026-09-11 更新：原写 …-on-sphere-and-disk（v1），该卡经 v2 后已拆成球面/圆盘两张，
+    球面那张就是这里要的，status rigorous）。
 notes: |
   由 curator-ckg-followups 于 2026-09-11 新建，是 lead 在 surface-class 合并后派的「Miličić 路线」。
 

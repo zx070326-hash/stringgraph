@@ -933,3 +933,98 @@
   唯一的例外候选是 **(13.6.24) 的生成函数计数**与 **(13.3.34) 的 `det^{1/2}(1+M) = exp[½tr(…)]` 恒等式**——
   后者是纯线性代数恒等式，可作为极小的 Lean 练习，但对图的价值低。
 
+---
+
+## 6. E19 复核：(13.3.12) 的系数（researcher，2026-09-11；只加不改上面的旧行）
+
+> 触发：**reviewer-branes** 按量纲与 (13.3.13) 判定 §2 E19（本文件第 417 行）抄的
+> `∫_{S_{p+2}}F_{p+2} = μ_{6−p}/2κ₁₀²` 应为 `2κ₁₀² μ_{6−p}`。
+> 本节用 **Cambridge Core ch.13 单章 PDF 原书页图**（印刷 p.148 = PDF p.13）+ **一条独立的一手来源**核对。
+
+### 6.1 ★★ 结论（三句话）
+
+1. **原书印的就是 `μ_{6−p}/2κ₁₀²`。** E19 的转录**没有抄错**（L1 页图，见 6.2）。
+2. **但 reviewer-branes 在物理上是对的**：`2κ₁₀² μ_{6−p}` 才与同页的 (13.3.11) + 次页的 (13.3.13) 自洽（见 6.3），
+   且被 **Polchinski 本人 1995 年的原始论文独立证实**（见 6.4）。
+3. ⇒ **这是原书的一处排印错误**（与 `polchinski-1998-v1.md` 记过的 ch.6 (6.6.21) `4α'` 应为 `¼α'` 同型：
+   **分数线两侧被倒置**）。**注意 Core 版已是 2005「with corrections」本，说明官方勘误表也没收这一条。**
+
+### 6.2 原书 p.148 逐字（L1 页图，`Read(pages=13)`；页脚 `Cambridge Books Online © Cambridge University Press, 2010`，DOI 后缀 `.007`）
+
+> "A `p`-brane and `(6−p)`-brane are sources for `F_{p+2}` and `F_{8−p}` respectively. These two field strengths are
+> Poincaré dual to one another, so again there is a Dirac quantization condition that must be satisfied by the
+> product of their charges. Let us think about `F_{p+2}` as the field strength, so that the `p`-brane is an electric
+> source and the `(6−p)`-brane a magnetic source. In nine dimensions a `(6−p)`-dimensional object is surrounded
+> by a `(p+2)`-sphere, so by analogy to the magnetic flux (13.3.8),"
+>
+> `∫_{S_{p+2}} F_{p+2} = μ_{6−p}/2κ²_{10}` .  **(13.3.12)**
+
+同页上文的两条锚（同一页图，L1）：**(13.3.8)** `∫_{S_2} F_2 = μ_m`（**右端裸的 `μ_m`，没有 `κ`**）；
+**(13.3.11)** `μ_e μ_m = 2πn` "for some integer `n`"。
+次页 p.149（PDF p.14，L1）：**(13.3.13)** `μ_p μ_{6−p} = πn/κ²_{10}`，紧接逐字
+「Remarkably, the charges (13.3.7), arrived at in an entirely different way, satisfy this relation with the minimum quantum `n = 1`.」
+前页 p.147（PDF p.12，L1）：**(13.3.6)** 场论振幅 `−2κ²_{10} i μ_p² G_{9−p}(y)`，其上一句逐字
+「the propagator for any given component … is `2κ²_{10} i/k²`」；**(13.3.7)** `μ_p² = (π/κ²_{10})(4π²α')^{3−p} = e^{2Φ_0}τ_p² = T_p²`。
+
+### 6.3 内部不自洽的复算（抽取者做的，两步算术）
+
+把 (13.3.12) 当作 (13.3.11) 里的 `μ_m`、把 `μ_p` 当作 `μ_e`（这正是原文那一段的逻辑）：
+
+- **按印出来的 `μ_{6−p}/2κ₁₀²`**：`μ_p · μ_{6−p}/(2κ₁₀²) = 2πn` ⇒ `μ_p μ_{6−p} = 4π κ₁₀² n`。
+  **与 (13.3.13) 的 `πn/κ₁₀²` 相差 `4κ₁₀⁴`** ✗
+- **按 `2κ₁₀² μ_{6−p}`**：`μ_p · 2κ₁₀² μ_{6−p} = 2πn` ⇒ `μ_p μ_{6−p} = πn/κ₁₀²` **= (13.3.13) 逐字相同** ✓
+
+**独立旁证（同样是抽取者的算术）**：由 (13.3.7)，
+`μ_p μ_{6−p} = √[(π/κ₁₀²)(4π²α')^{3−p}] · √[(π/κ₁₀²)(4π²α')^{3−(6−p)}] = (π/κ₁₀²)(4π²α')^{0} = π/κ₁₀²`
+⇒ **(13.3.13) 在 `n = 1` 处精确成立**（这与 §0.3(b) 的旧复算一致），即 **(13.3.13) 是可信的一端**，
+所以不自洽的那一端只能是 (13.3.12)。
+
+### 6.4 ★★ 独立的一手来源：Polchinski, hep-th/9510017（PRL **75** (1995) 4724）p.5（L1 页图）
+
+> `S = (α_p/2) ∫ F*_{p+2}F_{p+2} + iμ_p ∫_branes A_{p+1}` .  **(12)**
+> "For later convenience we have not chosen a normalization for `A_{p+1}`, so two constants `α_p` and `μ_p` appear."
+> `μ_p²/α_p = 2π(4π²α')^{3−p}` .  **(13)**
+> "… Integrate the field strength `*F_{p+2}` on an `(8−p)`-sphere surrounding a `p`-brane;
+> **from the action (12) one finds total flux `Φ = μ_p/α_p`.**"
+> `Φ = ∫_{S_{8−p}} *F_{p+2} = ∫_{S_{7−p}} A_{7−p}` .  **(14)**
+> "In order that the Dirac string be invisible to a `(6−p)`-brane, we need `μ_{6−p}Φ = 2πn` for integer `n`. That is,
+> the Dirac quantization condition is"
+> `μ_p μ_{6−p}/α_p = 2πn` .  **(15)**
+> "The charges (13) of the D-branes satisfy this with minimum quantum `n = 1`."
+> 脚注 7 逐字：「It follows from `F_{p+2} = *F_{8−p}` that `α_p = α_{6−p}`.」
+
+**桥接（抽取者做的换算，两条独立校验都通过）**：书里的归一化对应 `α_p = 1/(2κ₁₀²)`。
+- 校验 A：代入 (13) ⇒ `μ_p² = 2π(4π²α')^{3−p}/(2κ₁₀²) = (π/κ₁₀²)(4π²α')^{3−p}` = **书 (13.3.7) 逐字相同** ✓
+- 校验 B：代入 (15) ⇒ `2κ₁₀² μ_p μ_{6−p} = 2πn` ⇒ `μ_p μ_{6−p} = πn/κ₁₀²` = **书 (13.3.13) 逐字相同** ✓
+- ⇒ 1995 年论文的 **`Φ = μ_p/α_p = 2κ₁₀² μ_p`**，即**通量 = 荷 × `2κ₁₀²`**（**乘**，不是除）。
+  搬到书的记号即 `∫_{S_{p+2}}F_{p+2} = 2κ₁₀² μ_{6−p}`。
+
+⇒ **两条独立证据（书内部的 (13.3.11)+(13.3.13)、书外的 1995 论文 (12)–(15)）方向一致。**
+
+### 6.5 给 curator / reviewer 的处理建议（researcher 不改 `graph/`）
+
+- **§2 E19 那一行不改**（本项目规则：抽取记录只加不改），本节即是订正记录。
+- **图里若要写这条式子，写 `∫_{S_{p+2}}F_{p+2} = 2κ₁₀² μ_{6−p}`，但 `loc` 仍写 `(13.3.12), p. 148`，
+  并在 `note` 里写明：「原书此处印作 `μ_{6−p}/2κ₁₀²`，与同节 (13.3.11)+(13.3.13) 不自洽；
+  按 Polchinski hep-th/9510017 eqs. (12)–(15) 订正。Cambridge Core 2005 corrected 版仍印错误形式。」**
+- **更稳妥的做法**：`branes.rr-charge-quantization` 这张卡**根本不引 (13.3.12)**，只引
+  **(13.3.11) + (13.3.13) + (13.3.7)**——这三条都已 L1 核实且互相自洽，(13.3.12) 只是中间步骤。
+- **建议把 `polchinski-1996-tasi` 之外再登记 `polchinski-1995-dbranes`（hep-th/9510017）**：
+  它是 D 膜 R–R 荷的**原始出处**，11 页、arXiv 可取、本轮已读 pp.4–8，
+  且它给出了书里**没有**的东西——`α_p` 这个显式的归一化常数，使量纲关系可以独立核查。
+  ⚠ 读的是 **v3**（PDF 内嵌链接自陈 `hep-th/9510017v3`）。
+  ⚠ 同篇 p.6 有一段作者自承的未解矛盾（逐字）：「This is twice the value found in ref. [13] …
+  **We have not succeeded in reconciling these calculations**, but strongly expect that the RR charge is that
+  required by string duality.」——引用本文的荷归一化时必须带上这句。
+  ⚠ 同篇 p.8 的 **(20)** `i(n−32)μ_9 ∫ A_10`，紧接「Thus, the equation of motion requires the group `SO(32)`」
+  ——**这是「32 张 D9」这一表述的真正早期出处**，比书 ch.13（只写 16）更接近现代说法，
+  与 `-ch13.md#Q1` 直接相关；p.7 同时逐字写「exactly **16** D-branes」⇒ **两种计数在 1995 年原文里就并存**。
+
+### 6.6 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 书 ch.13 PDF | Core `…/67EE13E32046F0D121B589DC02989698/9780511618123c4_p136-177_CBO.pdf/d-branes.pdf` | ✅ 587.8 KB / 42 页（文件名直接推出，一次命中） |
+| 印刷 p.147/148/149 | `Read(pages=12)`、`(pages=13)`、`(pages=14)` | ✅ 三页页图 |
+| hep-th/9510017 | `arxiv.org/pdf/hep-th/9510017` → 落盘 136 KB / 11 页 → `Read(pages=5-9)` | ✅ pp.4–8 读到，(12)–(20) 全部到手 |
+

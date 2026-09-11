@@ -26,12 +26,6 @@ depends_on:
       供给 (13.2.1) 的玻色部分（原书逐字「As in the bosonic theory, the bosonic states are a gauge field
       living on the D-brane and the collective coordinates for the D-brane」）；goldstino 论证是
       「集体坐标 ↔ 破缺的平移」这一对应向费米部门的类比推广（(13.2.3) ↔ (13.2.4)）。
-  - id: branes.bps-bound-point-particle-d4
-    note: |
-      供给「BPS 态」的概念：被一部分超荷湮灭的短表示（App. B §B.2 (B.2.39) 之后的短/超短表示计数）。
-      原文背书：ch.13 p. 141「BPS states, which are discussed in section B.2」，以及 p. 140 斜体「*it is a BPS state*」。
-      ⚠ App. B 只覆盖点粒子荷；本卡只借用其**概念**（半数超荷未破缺 ⇒ 短表示），
-      D 膜荷的代数 (13.2.9) 在本卡之后（branes.brane-charges-in-susy-algebra）。
   - id: susy.bps-bound-point-particle-d4
     inferred: true
     note: |
@@ -45,6 +39,12 @@ depends_on:
           **D 膜 BPS 性的代数依据不是它**，而是 §13.2 (13.2.9)（susy.brane-charges-in-susy-algebra，
           原书自承 "still not complete"）。本卡**不**加指向 (13.2.9) 那张卡的边：
           图上的方向是 (13.2.9) 依赖本卡（(13.2.10) 用本卡的 β^⊥），反向会成环。
+      〔2026-09-11 去重并入〕本条边原有两份：并行建卡把同一依赖写成 `branes.bps-bound-point-particle-d4`
+      且**标为非 inferred**，理由是：该边供给的是「BPS 态 = 被一部分超荷湮灭的短表示」这一概念
+      （(B.2.39) 之后的短/超短表示计数），而原书把这个词明确指回 §B.2——ch.13 **p. 141 逐字
+      「BPS states, which are discussed in section B.2」**（另见 p. 140 斜体「*it is a BPS state*」）。
+      按 lead 裁决（inferred 冲突取 `inferred: true`），本边保持 inferred 并同时保留两种理由：
+      「原书把词指回 §B.2」是**用词层面的背书**，而 (13.2.2)–(13.2.6) 的论证步骤里确实没有用到任何超对称代数。
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.2, pp. 139–140：(13.2.2) → 脚注 1 → (13.2.3)（集体坐标顶点算子 = 破缺平移的荷）→ (13.2.4)（goldstino 顶点算子 = 破缺超对称的荷）→ (13.2.5)(13.2.6)；逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」"
@@ -66,7 +66,6 @@ gaps:
   - "**类比而非计算**：原书逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」（抽取记录 §3.1 第 3 条）。「闭弦散射振幅只在这 16 个超对称下不变」没有在本章由振幅显式验证。"
   - "**符号未定**：(13.1.5)/(13.1.6) 的符号原书自陈「up to signs」，「should not distract attention from the main physical point」（§3.1 第 2 条）。β^⊥ 的整体符号因此在本卡中不作断言。"
   - "**「32 个超荷」这一分母已入图但自身不强**：2026-09-11 已加非 inferred 边 worldsheet.type-ii-spacetime-supersymmetry（原 gap「main 上没有节点」已闭合）。⚠ 残留缺口：该卡的论证是「等价关系 u ≅ u + kζ 是局域对称性的标志」加上原书那句不加论证的括号句，status 只到 physical-argument；且本章 §13.2 的论证本身不引用超对称代数（见 susy 边的 note）。"
-  - "**「BPS 态」的代数含义只有点粒子版**：App. B §B.2 现已抽并建卡（branes.bps-bound-point-particle-d4），但其 BPS 界 (B.2.39) 只对点粒子荷（p. 448 逐字）；D 膜荷版的代数 (13.2.9) 是本卡的下游且原书自承「still not complete」。本卡的「BPS」只借用「半数超荷未破缺 ⇒ 短表示」这一概念。"
   - "**「BPS 态」的代数含义现已入图，但只到点粒子模板**（2026-09-11 更新，原缺口「App. B §B.2 本项目未抽」已闭合）：susy.bps-bound-point-particle-d4 转了 (B.2.36)–(B.2.39)，而**原书明写该代数只含点粒子可携带的荷**（p.448 逐字「this is the most general algebra if we include only charges that can be carried by point particles … The same caveat applies to the higher-dimensional algebras」）。D 膜一侧的代数是 §13.2 (13.2.9)（susy.brane-charges-in-susy-algebra），原书自承「still not complete: the *magnetic NS–NS charge* is missing」。⇒ **本卡的 BPS 性不得被读成「由 App. B 的 BPS 界保证」**；本推导对「BPS」二字的使用仍只是原书的措辞。"
   - "**Dp 膜定义卡是玻色弦的**：超弦 D 膜的构造被原书外包给 Vol.1 第 8 章（p. 138）；超弦特有的部分（费米子边界条件、(13.1.2)）本图无节点。"
   - "**T 对偶的费米部分 (13.1.2)(13.1.3) 本图无节点**：只有玻色对偶坐标 duality.dual-coordinate；「由超共形不变性必须同时反射 ψ̃^9」这一步在图上悬空。"
@@ -81,5 +80,11 @@ notes: |
     susy.bps-bound-point-particle-d4（模板）
       → susy.brane-charges-in-susy-algebra（(13.2.9)，扩展）→ 依赖**本卡**（(13.2.10) 的 β^⊥）
   故本卡**不能**反向依赖 (13.2.9)，否则成环；本卡只锚定「BPS 态」一词的代数含义。
+
+  【去重（2026-09-11，lead 裁决保留 susy.* 版）】两个并行 curator 各建了一版 App. B 的 BPS 卡，
+  本推导一度同时挂着 `branes.bps-bound-point-particle-d4`（非 inferred）与 `susy.bps-bound-point-particle-d4`
+  （inferred）两条指向同一命题的边。已删去 branes 那条，理由并入保留下来的边的 note；
+  gaps 里同样重复的那条（branes 版写法）也并入了现存的「BPS 态的代数含义现已入图」一条。
+  被删边与被删 gap 的原文在 git 历史中（本次提交的父提交）。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"

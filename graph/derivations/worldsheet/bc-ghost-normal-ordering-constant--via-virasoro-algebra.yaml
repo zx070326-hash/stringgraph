@@ -24,22 +24,19 @@ depends_on:
       故实际影响很小，但边上的弱点照记。
   - id: worldsheet.energy-momentum-laurent-modes
     note: 把鬼场能动张量展成 Laurent 模 L^g_m，是 (2.7.19) 的前提。
-  - id: worldsheet.tt-ope-central-charge
+  - id: worldsheet.conformal-ordered-modes-satisfy-virasoro
     note: |
-      **2026-09-11 补边（reviewer-batch10 A：遗漏依赖）**：本推导的关键一步是「**共形正规序的**
-      Laurent 模 L^g_m 满足 Virasoro 代数 (2.6.19)」——(2.7.20) 用的 (2.6.22)（SL(2,R) 子代数）
-      是 (2.6.19) 的推论。而 (2.6.19) 在原书 §2.6 是**从 TT OPE 经围道变形算出来的**，
-      本条边提供那个 TT OPE（对 bc 系统即 (2.5.12) 所属的那条 TT OPE）。
+      **2026-09-11 改边**：本推导的关键一步是「**共形正规序的** Laurent 模 L^g_m 满足
+      Virasoro 代数 (2.6.19)」——(2.7.20) 用的 (2.6.22)（SL(2,R) 子代数）是 (2.6.19) 的推论，
+      而这张卡就断言这一步（并把 (2.6.22) 作为推论 (a) 写进陈述）。
+      原先这条依赖由 worldsheet.tt-ope-central-charge + worldsheet.ope-commutator-dictionary
+      两条边**近似**承载（2026-09-11 早些时候按 reviewer-batch10 A 补的）；那两条现已改挂在
+      新卡自己的推导 --via-ope-contour 上，本推导只留这一条。
       不标 inferred：原书 (2.7.20) 逐字说「The ordering constant can be determined **as in eq. (2.7.8)**」，
       而 (2.7.8) 处逐字说「The simplest uses **the Virasoro algebra**」，即经 a^X 那条回指 §2.6。
-      ⚠ 本条**不**用到 c^g = −26（中心项在 m = 1 处为零），只用 TT OPE 的极点结构。
-  - id: worldsheet.ope-commutator-dictionary
-    note: |
-      **2026-09-11 补边（同上）**：提供「OPE 极点 ⟹ 模的（反）对易关系」这一步，即由 TT OPE 得到
-      (2.6.19) 所必需的围道变形字典（原书 (2.6.14) + Fig. 2.3）。
-      没有这两条边，图上只有抽象的 worldsheet.virasoro-algebra-v2（一个**定义**），
-      **没有任何边说明本推导操作的那组 L^g_m 确实满足它**。
-      ⚠ 鬼场是费米型，围道变形字典在本图写在全纯算子上、未按统计分情形——见 gaps。
+      ⚠ 本条**不**用到 c^g = −26（中心项在 m = ±1 处为零），只用 (2.6.22)。
+      ⚠ 鬼场是费米型；新卡自己的 gaps 记了这一点（T 本身 Grassmann 偶，但 bc 的 TT OPE
+      要做费米型 Wick 缩并，换序符号本图未单独核实），本推导不再重复记账。
 sources:
   - ref: polchinski-1998-v1
     loc: "§2.7, p.61, eq. (2.7.19)–(2.7.21)；关键步骤是 (2.7.20) 2L_0|↓⟩ = (L_1L_{−1} − L_{−1}L_1)|↓⟩ = (λb_0c_1)[(1−λ)b_{−1}c_0]|↓⟩ = λ(1−λ)|↓⟩，标量结论 a^g = ½λ(1−λ) 在 (2.7.20) 与 (2.7.21) **之间的无式号正文**里；用的子代数是 §2.6 eq. (2.6.22)"
@@ -87,14 +84,12 @@ gaps:
   - "**λ 必须是整数**：原书 p.61 明确限定「these are only Laurent expansions if λ is an integer」。
      本推导的 a^g = ½λ(1−λ) 因此只对整数 λ 有效；半整数 λ（超弦的 βγ 系统）在原书第 10 章另行处理。
      目标节点取 λ = 2，落在有效范围内。"
-  - "**★ 图上没有一条卡恰好断言「bc 系统共形正规序的 Laurent 模满足 Virasoro 代数 (2.6.19)」**
-     （reviewer-batch10 A 指出的遗漏依赖，本轮只能部分关闭）。本轮补的两条边
-     （worldsheet.tt-ope-central-charge + worldsheet.ope-commutator-dictionary）是图上**最接近**的承载：
-     二者合起来是原书 §2.6 从 TT OPE 推出 (2.6.19) 的那条路。
-     ⚠ 两处不精确：(a) 二者没有被合成一条命题卡（与 X 部门那条推导的同名 gap 是同一件事，
-     可立卡 `worldsheet.conformal-ordered-modes-satisfy-virasoro`）；
-     (b) worldsheet.ope-commutator-dictionary 写在**全纯（玻色）**算子上，
-     bc 是费米型、模满足反对易关系，围道变形在费米情形的符号规则本图**未单独核实**
+  - "**「共形正规序的 Laurent 模满足 Virasoro 代数 (2.6.19)」这条依赖已于 2026-09-11 立卡关闭**
+     （reviewer-batch10 A 指出的遗漏依赖）。新卡是
+     `worldsheet.conformal-ordered-modes-satisfy-virasoro`，本推导现挂一条指向它的实边。
+     **剩余的两处不精确移交给新卡记账**：(a) 围道变形合法性 = OPE 收敛性未证明；
+     (b) worldsheet.ope-commutator-dictionary 写在**全纯（玻色）**算子上，bc 是费米型、
+     模满足反对易关系，围道变形在费米情形的符号规则本图**未单独核实**
      （与 worldsheet.conformal-normal-ordering-v2 的费米换序符号缺口同源）。
      ⚠ **不得**改用 worldsheet.bc-ghost-central-charge 顶替这条依赖：那条断言的是中心荷的**值**，
      不是「这组模满足代数」。"

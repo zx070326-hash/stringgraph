@@ -93,8 +93,11 @@ gaps:
      （见 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条），
      用 κ = 3χ + μ 反推 κ = 3 需要先有 μ = 0，否则只是把断言搬家。
      ⇒ **待办**：换代落地、且 μ(D₂) = 0 接上
-     math.no-holomorphic-quadratic-differentials-on-sphere-and-disk 之后，
-     由 lead 派单补一条 --via-riemann-roch 的独立推导。"
+     math.no-holomorphic-quadratic-differentials-on-disk 之后，
+     由 lead 派单补一条 --via-riemann-roch 的独立推导。
+     （2026-09-11 更新：原写 …-on-sphere-and-disk（v1），该卡经 v2 后已拆成球面/圆盘两张，
+     圆盘那张就是这里要的；⚠ 它是 physical-argument，且自带一条未关闭的缺口
+     ——它选的边界条件「φ|_∂ 取实值」与物理侧 μ(D₂) 用的边界条件是否一致，图上无节点。）"
   - "**「CKV 下降到商空间 ⟺ 切于边界」这一步未严格化**：本推导用的是『向量场与对合 z ↦ 1/z̄ 对易』
      的直观版本；严格处理需要在带边曲面上定义共形 Killing 方程的边界条件（第 5 章 E73/E74 的
      带边推广），本图与来源都没有。"
