@@ -295,7 +295,9 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     `gram_level_one_three` / `gram_level_two_three`。
     ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
     与「level-3 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2。
-- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶（N ≤ 3）的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`（均对具体向量，非基）。
+  - **level 4**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelFour.lean`）：
+    5×5 Gram 矩阵与 `N = 4` Kac 行列式，详见下面 `kac-determinant` 条的 **N = 4 已完成**。
+- [ ] `kac-determinant`：Kac 行列式公式。这是独立的、有价值的数学形式化目标；对应 `worldsheet.kac-determinant`。可能很长，允许先做低阶的显式版本。`N = 1, 2` 的显式 Gram 矩阵已在 `Shapovalov.lean`，`N = 3`（3×3，含与 Kac 乘积形的等同）已在 `ShapovalovLevelThree.lean`，`N = 4`（5×5，含与 Kac 乘积形的等同）已在 `ShapovalovLevelFour.lean`（均对具体向量，非基）。
   - **常数 α_N 的正确形状（2026-09-11，formalizer 用 CAS 独立核对，未形式化）**：
     `worldsheet.kac-determinant` 卡上悬而未决的 α_N，在本仓库这组 PBW 型基下满足
 
@@ -308,14 +310,41 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
     用 p(N−rs) 当指数会给 N=2 → 64、N=3 → 36864，与实际行列式**不符**。
     ⇒ α_N > 0 在 N ≤ 4 上是**已核对的事实**（每个因子都是正整数），
     但一般 N 的正性仍只是这个乘积公式的推论，而该公式本身未形式化也未在已核实来源里逐字找到。
-  - **N = 4 的下一步目标**（CAS 已给出、尚未形式化）：基 {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}，
+  - **N = 4 已完成**（2026-09-11，`StringFormal/Virasoro/ShapovalovLevelFour.lean`，
+    无 sorry，60 条声明 `check_axioms` 全 `ok`）：基
+    {L₋₄, L₋₃L₋₁, L₋₂², L₋₂L₋₁², L₋₁⁴}（p(4) = 5），15 个独立 Gram 元：
+
+        ⟨L₋₄v,L₋₄v⟩ = 8h+5c    ⟨L₋₄v,L₋₃L₋₁v⟩ = 14h    ⟨L₋₄v,L₋₂²v⟩ = 24h+3c
+        ⟨L₋₄v,L₋₂L₋₁²v⟩ = 36h    ⟨L₋₄v,L₋₁⁴v⟩ = 120h
+        ⟨L₋₃L₋₁v,L₋₃L₋₁v⟩ = 4ch+12h²+12h    ⟨L₋₃L₋₁v,L₋₂²v⟩ = 30h
+        ⟨L₋₃L₋₁v,L₋₂L₋₁²v⟩ = 40h²+20h    ⟨L₋₃L₋₁v,L₋₁⁴v⟩ = 192h²+48h
+        ⟨L₋₂²v,L₋₂²v⟩ = c²/2+8ch+4c+32h²+32h    ⟨L₋₂²v,L₋₂L₋₁²v⟩ = 6ch+48h²+48h
+        ⟨L₋₂²v,L₋₁⁴v⟩ = 216h²+144h    ⟨L₋₂L₋₁²v,L₋₂L₋₁²v⟩ = 4ch²+2ch+32h³+116h²+32h
+        ⟨L₋₂L₋₁²v,L₋₁⁴v⟩ = 288h³+336h²+96h    ⟨L₋₁⁴v,L₋₁⁴v⟩ = 384h⁴+1152h³+1056h²+288h
+
+    `gram_level_four_22_22` 是唯一带分数系数的元（1/2 写作 `centralTerm R 2`；
+    另有无分母形式 `two_mul_gram_level_four_22_22`）。5×5 行列式
+    `gram_level_four_det`（`Matrix.det !![…]`）：
 
         det₄ = 384 h³ (8h + c − 1) (16h² + 2h(c−5) + c)² (3h² + h(c−7) + c + 2)
                    (16h² + 10ch − 82h + 15c + 66),
 
-    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根），
+    其中 (8h + c − 1) = 8(h − h₂₂)（h₂₂ = (1−c)/8，rs = 4 的有理根，首次出现），
     末因子 = 16(h − h₁₄)(h − h₄₁)（h₁₄+h₄₁ = (41−5c)/8，h₁₄h₄₁ = (66+15c)/16）。
-    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合。
+    重数 3, 2, 1, 1 = p(3), p(2), p(1), p(0) 与 Kac 公式吻合；
+    `gram_level_four_det_eq_kac` 把它写成
+
+        det₄ = 37748736 (h−h₁₁)³ ((h−h₁₂)(h−h₂₁))² (h−h₁₃)(h−h₃₁) (h−h₂₂) (h−h₁₄)(h−h₄₁),
+
+    Kac 根仍只经对称函数进入（新增假设：`8h₂₂ = 1−c`、`8(h₁₄+h₄₁) = 41−5c`、
+    `16h₁₄h₄₁ = 15c+66`），与 √((c−1)(c−25)) 的分支约定无关。
+    辅助引理 `kac_factor_rs_two_two` / `kac_factor_rs_four`；
+    `kac_level_four_at_c_one` 是 c = 1 处的退化核对：
+    det₄ = 9216 h⁴ (4h−1)⁴ (h−1)² (4h−9)²（h₂₂ 在 c=1 处并到 h₁₁ = 0，故 h 的重数升到 4）。
+    另有 `desc4/desc31/desc22/desc211/desc1111_mem_levelSpan` 与正交性实例
+    `gram_level_three_four`。
+    ⚠ 线性无关（= PBW）同样仍缺，故这依旧是**张成集**的 Gram 行列式，
+    与「level-4 的 Kac 行列式」的等同差 `pbw-verma` (b)，同 level 2/3。
 
 ## 无鬼定理岛
 
