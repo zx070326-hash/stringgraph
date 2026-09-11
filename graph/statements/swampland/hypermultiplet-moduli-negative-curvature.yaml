@@ -79,7 +79,7 @@ notes: |
   【★ BW 摘要第二句是"引力解耦反例不构成反驳"这条记账红线的物理根据】BW 摘要第二句（L2 逐字层面）
   说：**全局 N=2 允许的某些自相互作用在超引力中被禁止，反之亦然**。这正好解释了为什么
   Ooguri–Vafa §3.1（耦合到超引力 ⇒ 曲率必负，本卡）与 §3.2 Example (b)（取 rigid limit 去掉引力
-  ⇒ 向量多重态 Ricci 反而正定，见 swampland.rigid-n2-vector-moduli-ricci-positive）**不矛盾**：
+  ⇒ 向量多重态 Ricci 反而半正定，见 swampland.rigid-n2-vector-moduli-ricci-positive-v2）**不矛盾**：
   解耦极限下曲率变号不是反常，而是**理论本身换了**（可容许的自相互作用集合变了）。
   ⇒ 这条记账红线（引力解耦反例不构成对沼泽地判据的反驳）挂在
   **swampland.finiteness-criteria-fail-without-gravity**；本卡与那张卡是同一物理事实的两侧。
@@ -90,7 +90,8 @@ notes: |
   swampland.ov-conjecture-3-scalar-curvature-negative 的边必须标 inferred: true 并写明此事。
 
   【与向量多重态的对照】同一例子里向量多重态的曲率"不必为负"，只有渐近行为为负；
-  而**去掉引力**（全局 N=2 的 rigid limit）时向量多重态的 Ricci 曲率反而正定，
-  见 swampland.rigid-n2-vector-moduli-ricci-positive。
+  而**去掉引力**（全局 N=2 的 rigid limit）时向量多重态的 Ricci 曲率反而半正定（原文断言
+  "positive definite"，经复核一般只得半正定；旧卡 v1 于 2026-09-11 换代），
+  见 swampland.rigid-n2-vector-moduli-ricci-positive-v2。
 author: curator
 created: "2026-09-11"

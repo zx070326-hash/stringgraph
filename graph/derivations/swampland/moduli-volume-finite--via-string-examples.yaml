@@ -14,6 +14,8 @@ depends_on:
       ⚠ 2026-09-11 换代为 v2：v2 的陈述限 **d ≥ 2**（半单性条件，见该卡），而 **Vafa 的 T^d
       例子没有排除 d = 1**。即本条边只覆盖 Vafa 例子的 d ≥ 2 部分；d = 1 那一支在本图中无来源。
   - id: conv.moduli-metric-planck-units
+    inferred: true
+    note: "★ 单位是本图按 Ooguri–Vafa 2006 补的：**Vafa 2005 全文没有指定模空间度规的单位**（既未写 M_Pl = 1，也未写 α' 归一化），而\"体积有限\"只在固定单位后才有意义（vafa-2005#Q1）。故此边为 inferred。"
 sources:
   - ref: vafa-2005
     loc: "arXiv:hep-th/0509212v2, §2, p.3–p.5（猜想句、IIB τ 空间、T^d Narain、K3、Calabi–Yau、AdS/CFT 重述；本文无编号公式）"

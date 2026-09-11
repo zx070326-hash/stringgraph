@@ -55,7 +55,8 @@ notes: |
   某些自相互作用在 N=2 超引力中被禁止，反之亦然**。
   ⇒ Ooguri–Vafa §3.1（耦合超引力 ⇒ 超多重态模空间曲率必负，
   swampland.hypermultiplet-moduli-negative-curvature）与 §3.2 Example (b)（rigid limit ⇒ 向量
-  多重态 Ricci 正定，swampland.rigid-n2-vector-moduli-ricci-positive）是**同一物理事实的两侧**，
+  多重态 Ricci 半正定，swampland.rigid-n2-vector-moduli-ricci-positive-v2；旧卡 v1 作"正定"，
+  2026-09-11 换代）是**同一物理事实的两侧**，
   不是矛盾：两边可容许的自相互作用集合本来就不同。
   ⚠ **本条只作记账说明，不建依赖边**：BW 正文本项目未获取（L0），且这一句是关于"自相互作用集合"
   的一般陈述，不直接蕴含本卡的任何具体违反例。详见 literature/extractions/bagger-witten-1983.md §5.2。

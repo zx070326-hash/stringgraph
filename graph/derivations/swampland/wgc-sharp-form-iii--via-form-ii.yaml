@@ -1,7 +1,7 @@
 id: swampland.wgc-sharp-form-iii--via-form-ii
 target: swampland.wgc-sharp-form-iii
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: swampland.wgc-sharp-form-ii
     inferred: false
@@ -11,23 +11,34 @@ sources:
   - ref: arkani-hamed-2006
     loc: "arXiv:hep-th/0601001v2, §3, p.11（'clearly implies'；原文未写出推导步骤）"
 summary: |
-  一行蕴含：设最轻带电粒子的质荷比为 (M_min/q_{M_min})，而 (M/q)_min 是全谱质荷比的最小值，
-  按定义 (M/q)_min ≤ (M_min/q_{M_min})。故 (II)（最轻带电粒子满足 ≤ 1）蕴含 (III)（最小质荷比
-  态满足 ≤ 1）。
+  一行蕴含。记带电谱为 S（非空），(M/q)_min := min_{s∈S} M_s/q_s 为全谱质荷比的最小值，
+  M_min 为最轻带电粒子的质量、q_{M_min} 为其电荷。最轻带电粒子本身是 S 的一个元素，故其
+  质荷比不小于全谱最小值：
+
+    (M/q)_min ≤ M_min / q_{M_min}.
+
+  于是 (II)（M_min/q_{M_min} ≤ 1）与上式链接即得 (III)（(M/q)_min ≤ 1）。前提：带电谱非空、
+  上述最小值可达（即存在实现 (M/q)_min 的态）。两个前提原文都明示：最轻带电粒子与最小 (M/Q)
+  的态"exactly stable ... so both (II) and (III) are well-defined conjectures"。
 
   原文只写 "clearly implies"，**没有写出这一步**；原文在同处给出的相关注记是"最小 (M/Q) 的态精确
   稳定，as follows trivially from the triangle inequality"（那是关于稳定性的，不是蕴含关系的证明）。
 gaps:
-  - "★ **rigorous 例外候选，但缺 reviewer 复核记录**：按 docs/STATUS_LEVELS.md 的 lead 裁决，前提完整 + 有限步初等推理 + reviewer 独立复核并在本 notes 留 `reviewer-verified` 记录方可标 rigorous；本轮无该记录，故取 physical-argument（kind 相应取 physical-argument）"
-  - "原文没有写出推导，只说 'clearly implies'"
-  - "两个量的定义要求相应的态存在且精确稳定；'最轻带电粒子'与'最小质荷比态'的存在性原文用一句话带过"
+  - "原文没有写出推导，只说 'clearly implies'；上面的一行链接是本图补的（初等，见 notes 的复核记录）"
+  - "推导本身严格，但**不改变 (III) 的有效状态**：依赖 (II)（conjecture），min 之后仍是 conjecture"
 notes: |
   from: arkani-hamed-2006#E20、#Q4。
 
-  **请 reviewer 复核**：若确认 (II) ⇒ (III) 的一行推理前提完整，本推导可升为
-  kind: proof / status: rigorous 并在此写 `reviewer-verified: <agent>, <date>`。
+  reviewer-verified: reviewer-swampland, 2026-09-11
 
-  注意：即使升为 rigorous，(III) 的**有效状态不变**——本推导依赖 (II)，而 (II) 是 conjecture，
-  min 之后仍是 conjecture。升级的意义只在于如实记录这一步本身的严格程度。
+  **复核记录**：reviewer 独立核验 (M/q)_min ≤ M_min/q_{M_min} ≤ 1 这一行，确认前提完整——
+  (a) 带电谱非空，(b) 最小值可达（存在实现 (M/q)_min 的态），(c) 两个态的 exact stability
+  由原文明示（"the *lightest* charged particle is exactly stable, as is the particle with
+  smallest (M/Q) ... so both (II) and (III) are well-defined conjectures"）。按
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整 + 有限步初等推理 + reviewer 独立复核
+  并留记录），本推导取 kind: proof / status: rigorous。
+
+  注意：(III) 的**有效状态不变**——本推导依赖 (II)，而 (II) 是 conjecture，min 之后仍是
+  conjecture。升级的意义只在于如实记录这一步本身的严格程度。
 author: curator
 created: "2026-09-11"

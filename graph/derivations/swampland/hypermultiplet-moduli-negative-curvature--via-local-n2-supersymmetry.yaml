@@ -53,7 +53,8 @@ notes: |
 
   【★ BW 摘要第二句 = OV §3.1 与 §3.2 的分界线】BW 摘要第二句说"全局 N=2 允许的某些自相互作用
   在超引力中被禁止，反之亦然"。这解释了为什么本卡（耦合引力 ⇒ 曲率必负）与
-  swampland.rigid-n2-vector-moduli-ricci-positive（去掉引力 ⇒ Ricci 正定）不矛盾：
+  swampland.rigid-n2-vector-moduli-ricci-positive-v2（去掉引力 ⇒ Ricci 半正定；旧卡 v1 作
+  "正定"，2026-09-11 换代）不矛盾：
   **解耦极限换的是理论本身**。相应的记账红线（引力解耦反例不构成反驳）挂在
   **swampland.finiteness-criteria-fail-without-gravity**。
 author: curator

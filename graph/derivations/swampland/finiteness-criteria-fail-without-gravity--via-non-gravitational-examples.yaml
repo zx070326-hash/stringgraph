@@ -3,7 +3,7 @@ target: swampland.finiteness-criteria-fail-without-gravity
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: swampland.rigid-n2-vector-moduli-ricci-positive
+  - id: swampland.rigid-n2-vector-moduli-ricci-positive-v2
     inferred: false
     note: "§3.2 Example b 就是这条命题的内容，原文用它说明 Conjecture 3（原文误植为 2）如何在 M_Pl → ∞ 时被违反。"
   - id: swampland.applicability-domain
@@ -22,8 +22,9 @@ summary: |
     gravity."
   - Example a) R^10 中平行 Dp 膜上的规范理论：沿一般方向可走到无穷远而不出现新的无质量粒子
     ⇒ **Conjecture 1 成立而 Conjecture 2 失效**（这同时证明两条猜想逻辑独立）。
-  - Example b) 全局 N=2 的 rigid limit：向量多重态模空间 Ricci 曲率正定 ⇒ 违反 Conjecture 3
-    （原文此处误植为 conjecture 2）。
+  - Example b) 全局 N=2 的 rigid limit：向量多重态模空间 Ricci 曲率**半正定**（原文断言"positive
+    definite"，经复核一般只得半正定，见 swampland.rigid-n2-vector-moduli-ricci-positive-v2）
+    ⇒ 违反 Conjecture 3（原文此处误植为 conjecture 2）。半正定已足以与"带引力时曲率为负"对立。
   - Example c) 非紧 Calabi–Yau 上缠绕膜：小 P² 上缠 2-cycle 的膜的模空间是一份 P²，
     "this space is compact (violating conjecture 1) and positively curved (violating conjecture 3)"。
   - Example d) T² 上的 D5 膜：4 维上的形变 N=4 SYM，模空间 R⁴ × T²，
@@ -38,6 +39,9 @@ gaps:
   - "G/H 例子的'紧全局对称群破缺给有限半径模空间'未写出度规"
   - "原文没有给出'凡引力解耦则判据必失效'的一般论证，只给四个例子加一个通例"
 notes: |
+  2026-09-11：Example b 的依赖由 swampland.rigid-n2-vector-moduli-ricci-positive 改指换代卡
+  ...-v2（结论由"正定"减弱为"半正定，非退化时严格正定"，依 reviewer-swampland 的独立复核）。
+
   from: ooguri-vafa-2006#E21、#E22、#E23、#E24、#E25、#E13、#E1。
 
   ★ **记账红线**：这些例子**不得**作为 Conjecture 0–4 的 kind: refutation 推导。

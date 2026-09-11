@@ -28,7 +28,13 @@ sources:
   - ref: ooguri-vafa-2006
     loc: "arXiv:hep-th/0605264v1, §3.2, Example b), p.11–p.12（本段公式无编号）"
 tags: [swampland, n2-supersymmetry, curvature, rigid-limit, gravity-decoupling]
+superseded_by: swampland.rigid-n2-vector-moduli-ricci-positive-v2
 notes: |
+  【已换代】本卡断言无条件"正定"且未写出前提 Im τ > 0。reviewer-swampland（2026-09-11）
+  独立重算确认恒等式，但指出缩并后一般只得**半正定**（τ 常数的自由理论给 R ≡ 0）。
+  现行卡为 swampland.rigid-n2-vector-moduli-ricci-positive-v2；纯数学部分拆为
+  math.holomorphic-prepotential-ricci-semi-positive（rigorous）。本卡与其推导保留不动。
+
   from: ooguri-vafa-2006#E23（另见 #U5、#Q2）。
 
   【status = physical-argument（rigorous 例外候选，待复核）】原文对这一段用的是

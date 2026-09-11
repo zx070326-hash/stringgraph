@@ -1,0 +1,46 @@
+id: math.holomorphic-prepotential-ricci-semi-positive--via-direct-computation
+target: math.holomorphic-prepotential-ricci-semi-positive
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.2, Example b), p.11–p.12（恒等式；原文无编号，且只写 'The essential step is to use the fact that g_{ij̄} is the imaginary part of τ_{ij}, which is holomorphic in z.'）"
+    note: "半正定的限定与严格正定的充要条件不在原文，由本推导补出并经 reviewer 独立复核。"
+summary: |
+  【(1) 恒等式】由 τ 全纯得 ∂̄_j τ_{km} = 0，故
+    ∂_i g_{km̄} = −(i/2) ∂_i τ_{km},   ∂̄_j g_{km̄} = (i/2) ∂̄_j τ̄_{km},   ∂_i ∂̄_j g_{km̄} = 0.
+  用 ∂̄_j log det g = g^{km̄} ∂̄_j g_{km̄} 与 ∂_i g^{km̄} = − g^{kn̄} g^{lm̄} ∂_i g_{ln̄}：
+    R_{ij̄} = −∂_i ∂̄_j log det g
+           = −(∂_i g^{km̄})(∂̄_j g_{km̄}) − g^{km̄} ∂_i∂̄_j g_{km̄}
+           = g^{kn̄} g^{lm̄} (∂_i g_{ln̄})(∂̄_j g_{km̄})
+           = (1/4) g^{km̄} g^{nl̄} (∂_i τ_{nm})(∂̄_j τ̄_{kl}),
+  最后一步代入上面两个一阶导并用 (−i/2)(i/2) = 1/4。第二项为零正是"g 是全纯量的虚部"这一步。
+
+  【(2) 半正定】记 A := A(v)，A_{nm} = v^i ∂_i τ_{nm}（对称）。缩并 v^i v̄^j 得
+    v^i v̄^j R_{ij̄} = (1/4) g^{km̄} g^{nl̄} A_{nm} Ā_{kl} = (1/4) tr( g^{−1} A g^{−1} A† ),
+  其中用了 A 对称 ⇒ Ā_{kl} = (A†)_{lk}。g 正定 Hermite，取正定平方根 g^{1/2}，则
+    tr(g^{−1}A g^{−1}A†) = tr( (g^{−1/2} A g^{−1/2}) (g^{−1/2} A g^{−1/2})† ) = ‖g^{−1/2} A g^{−1/2}‖²_F ≥ 0.
+
+  【(3) 等号条件】Frobenius 范数为零 ⟺ g^{−1/2} A g^{−1/2} = 0 ⟺ A = 0（g^{−1/2} 可逆）
+  ⟺ v^i ∂_i τ_{nm} = 0 对所有 n,m。故严格正定 ⟺ v ↦ v^i ∂_iτ_{··} 单射。
+
+  【(4) 反例】F 为二次多项式时 τ 常数，A ≡ 0，R ≡ 0：半正定不能无条件加强为正定。
+gaps:
+  - "前提 Im τ > 0 是本图补的（原文未写）；没有它 log det g 无定义、g^{−1/2} 不存在，(1)(2) 均失效"
+  - "本卡不含任何物理内容；'刚性 N=2 向量多重态模空间的度规就是 Im τ' 是物理输入，见 swampland.rigid-n2-vector-moduli-ricci-positive-v2（physical-argument）"
+notes: |
+  from: ooguri-vafa-2006#E23。
+
+  reviewer-verified: reviewer-swampland, 2026-09-11
+
+  **复核记录**：reviewer 独立重算得 R_{ij̄} = ¼ g^{km̄}g^{nl̄}(∂_iτ_{nm})(∂̄_jτ̄_{kl})，与本卡
+  (1) 一致；并独立指出 v^i v̄^j R_{ij̄} = ¼‖g^{−1/2}Ag^{−1/2}‖² 一般只给**半**正定（τ 常数即
+  自由理论给 R = 0），严格正定等价于 ∂_iτ_{nm} 对所有 v≠0 非退化，另需 Im τ > 0 才有度规。
+  本推导按此结论写成，前提完整、有限步复线性代数，按 docs/STATUS_LEVELS.md 的 rigorous
+  例外条款标 kind: proof / status: rigorous。
+
+  【★ 与原文的转录风险无关】本卡不涉及 OV 原文 F(z) = (i/8)M_Pl² + F(z) 那一段（花体/直体 F
+  的字体歧义，ooguri-vafa-2006#U5）；那段属于刚性极限的取法，留在物理卡的推导里。
+author: curator
+created: "2026-09-11"
