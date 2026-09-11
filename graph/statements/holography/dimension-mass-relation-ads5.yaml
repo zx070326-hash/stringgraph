@@ -1,0 +1,53 @@
+id: holography.dimension-mass-relation-ads5
+kind: proposition
+title: AdS_5 上的维数–质量关系 Δ = 2 + √(4 + (mR)²)（d = 4；GKP 式 (45)，AdS 半径 R 显式保留）
+statement: |
+  本卡只记 d = 4（AdS_5，N 根重合 D3 膜的近视界几何 AdS_5 × S^5）的情形，
+  AdS 半径 R 显式保留，号差取洛伦兹 (−,+,+,+)（见 conv.metric-mostly-plus）。
+  一般 d 的 Δ(Δ − d) = m² 是**另一张卡** holography.dimension-mass-relation（Witten，AdS 半径 = 1）。
+
+  设 AdS_5 上有一个质量为 m 的标量场，满足「最小线性方程」（GKP (39)，无高阶导数项），
+  与之对应的 N=4 SYM 算子的维数为 Δ。令
+
+      ν = √( 4 + (mR)² ) .                                                (41)
+
+  则
+
+      Δ = 2 + ν = 2 + √( 4 + (mR)² ) .                                    (45)
+
+  代数上 (45) 等价于 Δ(Δ − 4) = (mR)²，即一般 d 卡的 (2.43) 在 d = 4、m² ↦ (mR)² 下的形式；
+  但**这一改写是编者做的，GKP 原文不出现 Δ(Δ − 4) = (mR)² 这个形式**（见 sources.note）。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: gubser-klebanov-polyakov-1998
+    loc: "arXiv:hep-th/9802109v2, §3, p.10 式 (39)(41)；p.11 式 (45)"
+    note: |
+      逐字（p.10）："Analysis of the choice of wave function goes through as before, with ℓ + 2
+      replaced by ν, where" → (41)；（p.11）"This implies that the dimension of the corresponding
+      SYM operator is equal to" → (45)。
+      ⚠ **否定性核实**：GKP 正文 pp.1–14 **不出现** Δ(Δ − d) = m²，也没有一般 d 的版本；
+      只有 d = 4 的解出形式 (45)（extractions/gubser-klebanov-polyakov-1998.md E9，L1-neg）。
+      号差：GKP 全文用 (−,+,+,+)（式 (8)(10)(14) 均写 −dt² + dx⃗²；抽取记录 §1 与 Q4）。
+tags: [holography, ads-cft, operator-dimension, mass, two-point-function, ads5, n4sym]
+notes: |
+  from: gubser-klebanov-polyakov-1998#E9（另见 E8、E10、E11）。
+
+  【为什么单独立卡】2026-09-11 reviewer-gkpw-b 指出：GKP 的 Bessel 渐近推导只证 d = 4，
+  却挂在一般 d 的卡 holography.dimension-mass-relation 上并被选为 best_derivation
+  （文件名字母序的平局产物）。lead 裁定拆卡：本卡承接 GKP 推导
+  （holography.dimension-mass-relation-ads5--via-gkp-bessel-asymptotics），
+  一般 d 卡只留 Witten 推导。两卡在 d = 4、R = 1 下陈述同一个关系，但**来源、号差、
+  半径约定、推导方法都不同**，按「一个节点一个命题」各自独立。
+
+  【与一般 d 卡的关系】一般 d 卡 (2.44) 在 d = 4 下读作 Δ = 2 + √(4 + m²)（R = 1），
+  恢复 R 即本卡 (45)。本卡**不**挂「由一般 d 卡特化」的推导——那会把 Witten 的欧氏、
+  R = 1 的结果经 convention_map 搬到洛伦兹、R 显式的卡上，需要另立换算卡；
+  若日后需要，应新建 --via-specialization-of-general-d 推导并显式写 convention_map。
+
+  【为什么有效状态会是 conjecture】GKP 推导本身是 physical-argument，但它依赖字典卡
+  holography.gkpw-dictionary-gkp（读出「两点函数领头非解析项的幂次 = 算子维数」用的是 (23)），
+  该卡有效状态是 conjecture。
+
+  【版本】loc 锚定 arXiv:hep-th/9802109v2 (27 Mar 1998)；PLB 428 发表版式号未核对。
+author: curator
+created: "2026-09-11"

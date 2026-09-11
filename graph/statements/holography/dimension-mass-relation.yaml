@@ -43,6 +43,8 @@ sources:
       只有 d = 4 的解出形式 (45)。「(45) ⟺ Δ(Δ−4) = (mR)²」这一改写是抽取者/编者做的，
       不是原文（extractions/gubser-klebanov-polyakov-1998.md E9）。
       故本卡的一般 d 形式**只能**记 Witten，GKP 只支撑 d = 4 的特例。
+      2026-09-11 起 GKP 的推导挂在 d = 4 专卡 holography.dimension-mass-relation-ads5 上；
+      本 source 保留，仅作为陈述里「(GKP (45))」那一行的出处。
 tags: [holography, ads-cft, operator-dimension, mass, two-point-function]
 notes: |
   from: witten-1998-ads#E-W12（另见 E-W11、E-W17、QW6、QW7）；
@@ -72,10 +74,15 @@ notes: |
   写出来是为了防止后来者误以为 (2.43) 对任意自旋成立。按「一个节点一个命题」，
   若要用 (2.45) 应新建卡；本卡的两条推导都只论证标量情形。
 
-  【为什么有效状态会是 conjecture】两条推导本身都是 physical-argument（可复算的推导链），
-  但都依赖字典卡（读出「两点函数的幂次 = 边界算子维数」这一步用的就是字典）：
-  Witten 支依赖 holography.gkpw-dictionary-witten，GKP 支依赖 holography.gkpw-dictionary-gkp
-  （2026-09-11 原单卡 holography.gkpw-dictionary 拆成这两张）；两张字典卡的有效状态都是 conjecture。这正是本项目要暴露的结构：
+  【d = 4 实例见 -ads5】GKP 的 Bessel 渐近推导只证 d = 4（式 (45) Δ = 2 + √(4 + (mR)²)），
+  2026-09-11 按 reviewer-gkpw-b / lead 裁定拆到独立卡 holography.dimension-mass-relation-ads5
+  （洛伦兹号差、R 显式），本卡**只留 Witten 推导**。此前 GKP 推导挂在本卡上并因文件名字母序
+  被选为 best_derivation，是一条只证 d = 4 的推导给一般 d 卡背书的错配，已撤。
+
+  【为什么有效状态会是 conjecture】Witten 推导本身是 physical-argument（可复算的推导链），
+  但依赖字典卡 holography.gkpw-dictionary-witten（读出「两点函数的幂次 = 边界算子维数」
+  这一步用的就是字典；2026-09-11 原单卡 holography.gkpw-dictionary 拆成 Witten 卡与 GKP 卡），
+  该卡有效状态是 conjecture。这正是本项目要暴露的结构：
   「维数-质量关系」不比它所依赖的字典更强。
 
   【版本】Witten 的 loc 锚定 arXiv:hep-th/9802150v2；GKP 的 loc 锚定 arXiv:hep-th/9802109v2。

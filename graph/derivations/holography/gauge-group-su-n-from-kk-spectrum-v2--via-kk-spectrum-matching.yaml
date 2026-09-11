@@ -1,5 +1,5 @@
-id: holography.gauge-group-su-n-from-kk-spectrum--via-kk-spectrum-matching
-target: holography.gauge-group-su-n-from-kk-spectrum
+id: holography.gauge-group-su-n-from-kk-spectrum-v2--via-kk-spectrum-matching
+target: holography.gauge-group-su-n-from-kk-spectrum-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -9,6 +9,11 @@ depends_on:
       非 inferred：§2.6 p.26 逐字用它——"A field of dimension k in four-dimensional conformal field
       theory has λ₊ = k − 4 and corresponds to a scalar field in supergravity with a mass
       m² = λ₊(λ₊ + 4) = k(k − 4)."，这就是 (2.43)/(2.35) 在 d = 4 的形式。
+      （2026-09-11：这句原写在目标卡 v1 的**陈述正文**里；reviewer-gkpw-b 判它属推导，
+      故随 v2 换代移到本条依赖 note。目标卡 v2 的陈述只保留前提 m² = Δ(Δ−4) 与预期值 m² = k(k−4)。
+      注意所引的是**一般 d 卡** holography.dimension-mass-relation：Witten 用的就是自己的 (2.43)，
+      不是 GKP 的 (45)；d = 4 专卡 holography.dimension-mass-relation-ads5 是 GKP 的洛伦兹、
+      R 显式版本，不是本推导的来源。）
 sources:
   - ref: witten-1998-ads
     loc: |
@@ -32,9 +37,9 @@ summary: |
 
   1. 取手征算子族 T^{z_1…z_k} = Tr Φ^{z_1}…Φ^{z_k}（Φ 为 N=4 的六个标量，按 SO(6) 的
      第 k 阶无迹对称张量表示）。
-  2. 用维数–质量关系（d = 4）：维数 k 的场有 λ₊ = k − 4，对应体标量质量
-     m² = λ₊(λ₊ + 4) = k(k − 4)。于是预期 AdS_5×S^5 的 KK 谱中对每个 k 都有一个
-     m² = k(k − 4) 的标量。
+  2. 用维数–质量关系（Witten (2.43)/(2.35) 在 d = 4）：维数 k 的场有 λ₊ = k − 4，
+     对应体标量质量 m² = λ₊(λ₊ + 4) = k(k − 4)。于是预期 AdS_5×S^5 的 KK 谱中对每个 k
+     都有一个 m² = k(k − 4) 的标量。（这一步 2026-09-11 前写在目标卡陈述里，现归本推导。）
   3. 对照已发表的 KK 谱（Witten 转引 [30] 的 eqn (2.34)、Fig. 2、Table III）：
      谱中存在 k = 2, 3, … 的态，**不存在 k = 1 的态**。
   4. 由此判定体理论对偶的是 SU(N)（U(N) 会多出 k = 1 的 Tr Φ^z，即那个自由 U(1) 的成分）。
@@ -82,6 +87,9 @@ notes: |
   本推导**没有**依赖 ads5-cft4-duality-v2：Witten §2.6 的论证是在自己的字典框架内做的，
   用的是 KK 谱与 (2.43)，不是从 Maldacena 的猜想句推出来的；
   若把它挂上去，反而会造成「用 U(N) 的猜想推出 SU(N)」这种自相矛盾的边。
+
+  【目标换代】2026-09-11 目标由 holography.gauge-group-su-n-from-kk-spectrum 改为 -v2
+  （v1 陈述含推导句，见两卡 notes）；本推导内容除第 2 步的归属说明外未变。
 
   【版本】loc 锚定 arXiv:hep-th/9802150v2 (6 Apr 1998)。
 author: curator

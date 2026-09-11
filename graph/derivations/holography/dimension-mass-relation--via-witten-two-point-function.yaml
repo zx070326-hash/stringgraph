@@ -108,7 +108,8 @@ notes: |
   与原文的论证方向不符。同时把依赖改指拆分后的 holography.gkpw-dictionary-witten。
 
   【约定】AdS 半径 = 1（conv.ads-radius-unit）。恢复显式 R 后 (2.43) 读作 Δ(Δ−d) = (mR)²。
-  与 GKP (45) 在 d = 4 时代数等价（见姊妹推导 --via-gkp-bessel-asymptotics）。
+  与 GKP (45) 在 d = 4 时代数等价（GKP 推导 2026-09-11 起挂在 d = 4 专卡
+  holography.dimension-mass-relation-ads5 上，见 -ads5--via-gkp-bessel-asymptotics；本推导现为一般 d 卡唯一推导）。
 
   【为什么不把 conformal-boundary-so2d 的边标成 inferred】(2.36) 的 f 与 (2.2) 的 f
   是同一个对象，原文 §2.5 p.20 明写 "If we transform f → e^w f, the metric will transform by

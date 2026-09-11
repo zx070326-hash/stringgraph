@@ -30,6 +30,7 @@ statement: |
    theory with an explicit U(1) singleton field on the boundary."
   故本陈述**不**断言「U(N) 版本的对应不可能存在」，只断言「AdS_5 体理论本身编码的是 SU(N)」。
 uses_conventions: [conv.ads-radius-unit]
+superseded_by: holography.gauge-group-su-n-from-kk-spectrum-v2
 sources:
   - ref: witten-1998-ads
     loc: |
@@ -44,6 +45,11 @@ sources:
       E-W14、QW5）。
 tags: [holography, ads-cft, gauge-group, kaluza-klein, spectrum, n4sym]
 notes: |
+  【★ 本卡已换代 → holography.gauge-group-su-n-from-kk-spectrum-v2（2026-09-11）】
+  原因：陈述正文里含维数–质量关系的推导句（λ₊ = k − 4 ⇒ m² = k(k − 4)，即 (2.43) 在 d = 4），
+  reviewer-gkpw-b 指出该句属推导不属命题。v2 把它移到推导的 depends_on note，陈述本身不变。
+  本卡按原则 1 不改文本，只加本段与 superseded_by。推导已 git mv 到 v2。
+
   from: witten-1998-ads#E-W14（另见 E-W12、E-W15、QW5）。
 
   【★ 与 holography.ads5-cft4-duality-v2 的表述不兼容——已提交里程碑规范化，不得私下统一】
