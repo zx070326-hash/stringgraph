@@ -57,6 +57,10 @@ i.e. `a ᵥ* Gram = 0`, so `det Gram ≠ 0` gives `a = 0`.
   `c = 1, h = 1/4`, where the determinant is `2h(4h-1)²`.
   Hence `IsContravariant.linearIndependent_descFamily2_of_pos` and
   `IsContravariant.finrank_levelSpan_two_of_pos` need no determinant hypothesis.
+* `IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two`: at that one zero `c = 1`,
+  `h = 1/4` the whole level-2 Gram matrix is the constant `3/2`, and `(L₋₂ - L₋₁²)|c,h⟩` is
+  orthogonal to all of `V₂` — the degeneracy is real, and the Gram criterion is *not*
+  reversible (`det = 0` does not make the vectors dependent).
 
 ## What this does and does not give
 
@@ -428,7 +432,8 @@ lemma kac_level_two_pos (hh : 0 < h) (hc : 1 < c) :
 omit [LinearOrder K] [IsStrictOrderedRing K] in
 /-- At `c = 1` the level-2 Kac determinant degenerates to `2h(4h-1)²`: the two Kac weights
 `h₁₂, h₂₁` collide at `h = 1/4`, so the determinant vanishes there and is otherwise `> 0` for
-`h > 0`.  This is the `c = 1`, `h = 1/4` null vector `(L₋₁² - 2L₋₂)|c,h⟩`. -/
+`h > 0`.  The degenerate direction is exhibited in
+`IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two`. -/
 lemma kac_level_two_at_c_one (h : K) :
     2 * h * (16 * h ^ 2 + 2 * h * ((1 : K) - 5) + 1) = 2 * h * (4 * h - 1) ^ 2 := by ring
 
@@ -458,6 +463,51 @@ theorem IsContravariant.finrank_levelSpan_two_of_pos (hB : IsContravariant K c h
   hB.finrank_levelSpan_two hB1 (kac_level_two_pos hh hc).ne'
 
 end Positivity
+
+/-! ### The degenerate direction at `c = 1`, `h = 1/4` -/
+
+section NullVector
+
+variable {K : Type*} [Field K] [CharZero K] {c h : K}
+variable {B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K}
+
+/-- **The level-2 null direction at `c = 1`, `h = 1/4`.**  At the collision point
+`h₁₂ = h₂₁ = 1/4` of the two level-2 Kac weights at `c = 1`, the whole level-2 Gram matrix is
+the constant matrix `3/2`, so `(L₋₂ - L₋₁²)|c,h⟩` is orthogonal to all of `V₂`.
+
+This is the general level-2 singular vector `(L₋₂ - 3/(2(2h+1)) L₋₁²)|c,h⟩` at `h = 1/4`, where
+the coefficient `3/(2(2h+1))` equals `1`.  Two consequences worth recording:
+
+* the vanishing of the Kac determinant at a Kac zero is a genuine degeneracy of the form, not
+  an artefact of the unnormalised basis;
+* the Gram criterion `linearIndependent_of_gram_det_ne_zero` cannot be reversed: `det = 0` does
+  *not* say the vectors are dependent (by PBW they are independent for every `(c,h)`), only that
+  the form degenerates on their span. -/
+theorem IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1) (hc : c = 1) (hh : h = 1 / 4)
+    {x : VermaModule K c h} (hx : x ∈ levelSpan K c h 2) :
+    B (desc2 K c h - desc11 K c h) x = 0 := by
+  have hker : Submodule.span K (Set.range (descFamily2 K c h))
+      ≤ LinearMap.ker (B (desc2 K c h - desc11 K c h)) := by
+    rw [Submodule.span_le]
+    rintro y ⟨i, rfl⟩
+    have h2 : B (desc2 K c h - desc11 K c h) (desc2 K c h) = 0 := by
+      rw [map_sub, LinearMap.sub_apply, hB.gram_level_two_aa hB1,
+        hB.comm (desc11 K c h) (desc2 K c h), hB.gram_level_two_ab hB1]
+      subst hc
+      subst hh
+      linear_combination (1 / 2 : K) * two_mul_centralTerm_two K
+    have h11 : B (desc2 K c h - desc11 K c h) (desc11 K c h) = 0 := by
+      rw [map_sub, LinearMap.sub_apply, hB.gram_level_two_ab hB1,
+        hB.gram_level_two_bb hB1]
+      subst hh
+      norm_num
+    fin_cases i
+    · exact h2
+    · exact h11
+  exact hker (by rwa [← levelSpan_two_eq_span_descFamily2])
+
+end NullVector
 
 end Virasoro
 
