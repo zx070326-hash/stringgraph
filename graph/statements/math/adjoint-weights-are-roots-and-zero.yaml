@@ -1,0 +1,67 @@
+id: math.adjoint-weights-are-roots-and-zero
+kind: proposition
+title: 半单李代数伴随表示的权 = 根（各重数 1）∪ 零权（重数 = 秩）；故 Tr_𝔤 (ad H)^k = Σ_{α ∈ Φ} α(H)^k（k ≥ 1）
+statement: |
+  设 𝔤 是复数域上的有限维半单李代数，𝔥 ⊂ 𝔤 是一个 Cartan 子代数（极大环面子代数），
+  Φ ⊂ 𝔥* 是 𝔤 相对 𝔥 的根集合。
+
+  **(1) 根空间分解**：𝔤 = 𝔥 ⊕ ⨁_{α ∈ Φ} 𝔤_α，其中 𝔤_α = {X ∈ 𝔤 : [H, X] = α(H) X ∀ H ∈ 𝔥}，
+  每个根空间 **dim 𝔤_α = 1**，且零权空间 𝔤₀ = C_𝔤(𝔥) = 𝔥。
+
+  **(2) 伴随表示的权**：伴随表示 ad : 𝔤 → 𝔤𝔩(𝔤) 相对 𝔥 的权集合（计重数）是
+  Φ（每个根重数 1）∪ {0}（重数 dim 𝔥 = rank 𝔤）。特别地
+
+      dim 𝔤 = |Φ| + rank 𝔤。
+
+  **(3) 迹公式**：对任一 H ∈ 𝔥，ad H 在 (1) 的分解下是对角的，特征值为 α(H)（α ∈ Φ，各一次）
+  与 0（rank 𝔤 次）。因此对一切整数 k ≥ 1
+
+      Tr_𝔤 (ad H)^k = Σ_{α ∈ Φ} α(H)^k
+
+  （零权对 k ≥ 1 不贡献；k = 0 时左端是 dim 𝔤，本卡不用）。
+
+  **E₈ 实例**（(2)(3) 的代入，不是额外断言）：𝔤 = 𝔢₈ 时 |Φ| = 240、rank = 8，故 dim 𝔢₈ = 248，
+  且 248 维伴随表示上 Tr_248 (ad H)^k = Σ_{α ∈ Φ(E₈)} α(H)^k。
+
+  **本卡不断言**：
+  (a) 对 𝔥 之外的元素 X ∈ 𝔤 的任何迹公式（把 (3) 从 𝔥 推到整个 𝔤 需要 math.chevalley-restriction-theorem
+      或「半单元素共轭进 𝔥 + 稠密性」的论证，不在本卡）；
+  (b) Φ 是根系、Φ 的具体形状、E₈ 的根表（见 math.e8-root-system）；
+  (c) 任何关于紧实形式、规范场 F 或迹归一化的事（tr 与 Tr 的物理约定在 conv.gauge-trace-normalization，
+      本卡的 Tr_𝔤 就是 dim 𝔤 维向量空间上线性算子的迹，不含归一化选择）。
+uses_conventions: []
+sources:
+  - ref: humphreys-1972
+    loc: "§8「Root space decomposition」（小节号与标题来自通行目录；本项目未取得印本，内容 L0）"
+    note: |
+      **L0——只有目录级定位，内容未核实。** 按 sources.bib 该条的登记，本项目对 GTM 9 唯一核实过编号的
+      结果是 §17.3 的 PBW；§8 是标准教材里根空间分解所在的章（8.1 极大环面子代数与根、8.2 中心化子、
+      8.3 正交性、8.4 整性、8.5 有理性），**这些小节标题与编号本项目没有一手证据，故本卡 loc 只写 §8**，
+      不写 8.x，也不写 Proposition/Theorem 字母。(1) 中「dim 𝔤_α = 1」与「C_𝔤(𝔥) = 𝔥」在该章的具体
+      编号**禁写**。
+  - ref: fulton-harris-1991
+    loc: "Lecture 14（一般半单李代数的结构分析：Cartan 子代数、根空间分解；讲次号来自通行目录，L0）"
+    note: |
+      **L0——正文一页未取得**，按 sources.bib 该条的禁令只写到 Lecture 级、不写页码、不写任何编号。
+      列在这里是作为第二个标准出处备查，**不承载任何本卡的论证核实**。
+tags: [algebra, lie-algebra, root-system, adjoint, weights, trace-identity, phase2, math-input]
+notes: |
+  【为什么立卡】math.e8-root-system-power-sums（Lean）证的是根幂和 Σ_α (α·x)^k；
+  math.e8-adjoint-trace-identities 说的是伴随迹 Tr_248 F^k。本卡是两者之间的**第一座桥**：
+  在 Cartan 元 H 上，伴随迹就是根幂和。E8Roots.lean 的 docstring 把这一步明写为 Lean 之外的
+  「mathematical *hypothesis*」，本卡把它做成图节点，让 `why` 能指到它。
+
+  【status 说明】本卡内容是任何半单李代数教材的标准定理（数学上 rigorous），但本项目对 GTM 9 §8 与
+  FH Lecture 14 的**内容都未核实（L0）**；按「不确定选低一级」与任务书的裁定，推导标
+  physical-argument，**直到 researcher 拿到 L1 来源**（升级路径：核实 GTM 9 §8 相应命题的编号，
+  或改引本项目已 L1 读到的其它教材）。
+
+  【坐标的说明（供下游使用）】(3) 里的 α(H) 是线性泛函在 H 上的取值，**不涉及任何内积**。
+  把它写成 math.e8-root-system-power-sums 的 α·x 时，只需取 𝔥 的一组基使 𝔥* 的对偶基是 ε_i，
+  于是 H = Σ x_i (ε_i 的对偶)，α(H) = Σ α_i x_i。归一化（Killing 型 vs 标准内积）**不进入**
+  P₄ = P₂²/100 这类齐次比值。这一步的核对写在 math.e8-adjoint-trace-identities--via-root-power-sums 的 summary。
+
+  【查重】`uv run stringgraph search adjoint` 只命中世界面侧的伴随（†）卡；
+  `search cartan`、`search root space`、`search semisimple` 无李代数结构卡。
+author: curator
+created: "2026-09-11"

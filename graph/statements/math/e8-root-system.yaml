@@ -1,0 +1,85 @@
+id: math.e8-root-system
+kind: definition
+status: rigorous
+title: E₈ 根系：ℝ⁸ 中的 240 个向量 {±ε_i ± ε_j (i < j)} ∪ {½ Σ ±ε_i（偶数个负号）}
+statement: |
+  设 V = ℝ⁸，ε₁, …, ε₈ 为标准基，内积为标准欧氏内积（不涉及本图任何物理约定）。
+
+  **格**：令 L′ := {Σ_i c_i ε_i : c ∈ ℤ⁸, Σ_i c_i 为偶数}，L := L′ + ℤ·(½ Σ_{i=1}^{8} ε_i)。
+
+  **定义**：E₈ 根系 Φ = Φ(E₈) 是 L 中**长度平方为 2** 的全体向量。它恰由以下 **240** 个向量组成：
+
+  · **向量型**（112 个）：±ε_i ± ε_j，1 ≤ i < j ≤ 8，两个符号独立取（28 对 × 4）；
+  · **旋量型**（128 个）：½ Σ_{i=1}^{8} s_i ε_i，s_i ∈ {+1, −1}，且 **负号个数为偶数**（2⁷ = 128）。
+
+  **符号约定的等价性**（本卡随定义一并断言）：来源原文写的是「even number of + signs」；
+  由于 8 个符号里 + 号个数为偶 ⟺ − 号个数为偶（8 − 偶 = 偶），两种说法给出**同一个** 128 元集合。
+  本卡与 formal/StringFormal/Math/E8Roots.lean 统一采用「偶数个负号」的说法。
+
+  **附带数据**（来源同页给出，作为定义的一部分记录）：
+  · |Φ| = 240，秩 8，故 |Φ| + 秩 = 248；
+  · 单根系 Δ 可取 α₁ = ½(ε₁ − ε₂ − ε₃ − ε₄ − ε₅ − ε₆ − ε₇ + ε₈)，α₂ = ε₁ + ε₂，
+    α_i = ε_{i−1} − ε_{i−2}（3 ≤ i ≤ 8）；最高根 α̃ = ε₇ + ε₈；
+  · Weyl 群阶 |W| = 2¹⁴ · 3⁵ · 5² · 7。
+
+  **本卡不断言**：
+  (a) 「L 中长度平方为 2 的向量**恰好**是上面 240 个」这一完备性的证明——来源只是陈述它
+      （Humphreys 自陈是 Bourbaki Ch. VI 构造的概述），本卡照录；
+  (b) 任何关于李代数 𝔢₈ 的事：Φ 与「复单李代数 𝔢₈ 相对某个 Cartan 子代数的根集合」的同构
+      不在本卡内（那需要 Dynkin 图分类与同型根系唯一性，本图暂无节点；用到时在推导里写 gap）；
+  (c) Φ 的幂和 Σ_α (α·x)^k 的任何取值——见 math.e8-root-system-power-sums；
+  (d) 任何关于 16 维偶自对偶格、E₈ ⊕ E₈ 与 D₁₆⁺ 的事。
+uses: []
+uses_conventions: []
+sources:
+  - ref: humphreys-1990-reflection
+    loc: "§2.10 (Construction of root systems)，(E₈) 一条，书上 pp. 42–43；同章 Table 2, p. 44（|Φ| = 240、|W| = 2¹⁴3⁵5²7）"
+    note: |
+      **L1 逐字读图**（抽取记录 literature/extractions/math-sources.md §44.2；Cambridge Core 章级 PDF）。
+      原文（跨页）：「(E₈) Let V = R⁸. The choice of lattice is somewhat subtle. Start with the lattice L′
+      consisting of all Σ c_i ε_i with c ∈ Z and Σ c_i even. Then let L = L′ + Z(½ Σ ε_i). Define Φ to be
+      the set of all vectors of squared length 2 in L. So Φ consists of 240 roots: ±ε_i ± ε_j (i < j),
+      ½ Σ ±ε_i (even number of + signs).」随后给出 Δ 与 α̃（本卡「附带数据」逐字照录）。
+      §2.10 开场逐字：「We shall outline briefly the construction of (crystallographic) root systems of
+      all possible types, following Chapter VI of Bourbaki [1] (which should be consulted for further
+      details).」⇒ 完备性的证明细节在 Bourbaki，本项目未取得（见下一条与「本卡不断言 (a)」）。
+      ⚠ 原文是「even number of **+** signs」，本卡改写为「偶数个**负**号」，等价性见 statement。
+  - ref: bourbaki-lie-4-6
+    loc: "Ch. VI, Planche VII（E₈）"
+    note: |
+      **L3，本项目未取得 Bourbaki 原文。** 该定位来自 Humphreys §2.10 自陈「following Chapter VI of
+      Bourbaki [1]」（L1）；「Planche VII」这个编号本身在本项目没有一手证据，按 sources.bib 该条的禁令
+      只作转引登记。**不得**据此写任何 Bourbaki 的编号命题。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/E8Roots.lean :: StringFormal.Math.E8.{e8Roots, e8VectorRoots, e8SpinorRoots, e8Roots_length, e8Roots_nodup, e8RootSet, e8RootSet_card, e8Roots_normSq, e8_dim_248}"
+    note: |
+      本仓库（主分支合并提交 fb489ee，Lean 4 + Mathlib v4.33.1）把这 240 个向量作为**显式列表**
+      `e8Roots : List (Fin 8 → ℚ)` 写出（112 条 `vroot` + 128 条 `spinRoot`，后者按「前后两半宇称相同」
+      实现「偶数个负号」）。机器检查过的事实：`e8Roots_length = 240`（`rfl`）、`e8Roots_nodup`
+      （240 条两两不同）、`e8RootSet_card = 240`（作为 Finset 的基数）、`e8Roots_normSq`（每条 Σα_i² = 2）。
+      **Lean 只核了 ⊆ 方向**（列表里的每个向量长度平方为 2），**没有核完备性**
+      （L 中所有长度平方为 2 的向量都在表里）；Lean 文件的 docstring 自己写明「"these 240 vectors are
+      exactly the roots of E₈" is here a *definition* (the Humphreys list), not a theorem」。
+      因此本卡 **status 是 rigorous 而非 formalized**，也**不挂 formal.lean_decl**：Lean 对象
+      `e8Roots` 与本卡「L 中长度平方为 2 的全体向量」这句定义不逐句对应。
+tags: [algebra, lie-algebra, root-system, e8, lattice, phase2, math-input]
+notes: |
+  【为什么立卡】math.e8-adjoint-trace-identities 的系数 1/100、1/7200 的唯一「可算」来路是对根系做幂和
+  （math.e8-root-system-power-sums），而幂和的输入就是这 240 个向量。把根系列表单独立成定义卡，
+  使「这 240 个向量是 E₈ 的根」这一句在图里有一个可指的、带 L1 来源的定位点。
+
+  【与 Lean 列表的对应】E8Roots.lean 的 `e8Roots` 是本卡 240 元集合的一个**枚举**（有序列表），
+  本卡是**集合**。`e8Roots_nodup` + `e8RootSet_card = 240` 保证枚举无重复、恰 240 条；
+  `e8Roots_normSq` 保证都是长度平方 2。「都在格 L 里」在 Lean 中没有单独陈述（坐标是整数或全半整数，
+  整数型的坐标和为偶——按构造显然，但未写成定理）。
+
+  【status 的选择】rigorous：Humphreys §2.10 是 L1 逐字，Bourbaki 是数学界接受的完整处理；
+  完备性 (a) 是有限枚举可核的初等事实，但本项目没有独立复核，也没有 Lean 化，故不升 formalized。
+
+  【记号陷阱不在本卡】E₈ 格 Γ₈ 与 16 维格 Λ₁₆（Γ₈ ⊕ Γ₈ 还是 D₁₆⁺ 的两义）以及杂化弦文献中
+  「E₁₆」这类记号，本卡一概不涉及；需要时另立卡。
+
+  【查重】`uv run stringgraph search e8` 命中 math.e8-adjoint-trace-identities（迹恒等式卡）与若干
+  consistency 卡；`search root-system`、`search cartan`、`search semisimple` 均无根系/李代数结构卡。
+author: curator
+created: "2026-09-11"
