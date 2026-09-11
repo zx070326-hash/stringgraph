@@ -7719,6 +7719,64 @@ Harish-Chandra 定理」，两者是**输入**与**输出**的关系。
   A–S 1960 无 arXiv、无 DOI；archive.org 是否有开放扫描**本轮未查**（`WebSearch` 额度耗尽）。
 - **Q53.3** **Seifert–Threlfall *A Textbook of Topology*（Academic Press 1980，Ch. VI §38/§40）未登记**。
   它有节号、有英译本，**比 A–S 更可能取到**，建议下一轮优先。
+  → **已登记，见 §54（2026-09-11）。注意登记 ≠ 取到正文：内容仍是 L0。**
+
+---
+
+## 54. Seifert–Threlfall 的登记（researcher，2026-09-11）——结清 §53.4 的 Q53.3
+
+对应 `sources.bib` 新条目 **`seifert-threlfall-1934`**。**正文完全未获取（内容等级 L0），本节只记书目与「Gallier–Xu 引它的位置」**，
+不含任何来自该书本身的陈述。
+
+### 54.1 GX 引用位置（全部转引自本文件 §53.2 / §53.3 已记的 L1 页图，本节不重复取件）
+
+- **References [9]（GX 出版版书 p.170，L1 逐字）**：
+  「H. Seifert and W. Threlfall. *A Textbook of Topology*. Academic Press, first edition, **1980**.」
+- **Note F.9（GX 书 p.169，L1 逐字）**：「Seifert and Threlfall [9] (**Chapter VI**)」；
+  「Seifert and Threlfall first give a proof for surfaces without boundaries in **Section 38** and then they show how
+  to modify this proof to deal with boundaries in **Section 40**」；以及 A–S 的 Step 6「is achieved by Seifert and
+  Threlfall in **Section 40**」。
+- ⇒ **本项目可用的节号只有两个：§38（无边）、§40（带边）**，且它们**只对 GX 所引的英译本（Academic Press 1980）有旁证**。
+
+### 54.2 ★ 版本陷阱（bib note 里已写，这里是理由）
+
+GX 引的是**英译本**，而本条 bib 的著录年份是**德文原版 1934**（key 按 `<firstauthor>-<year>` 规范取原著年份）。
+**德文原版是否使用同样的 §38/§40 编号，本项目未核实（L0）。**
+⇒ 图里 `loc` 必须写成 `Ch. VI, Section 38 / Section 40, *A Textbook of Topology*, Academic Press 1980`，
+并在 `note` 注明「节号转引自 gallier-xu-2013 Note F.9，未见原书」。
+
+### 54.3 书目数据（L2，OpenLibrary search API，2026-09-11）
+
+| 版本 | 数据 |
+|---|---|
+| 英译本 | *Seifert and Threlfall, A Textbook of Topology*；Academic Press；1980；**ISBN 0-12-634850-2 / 978-0-12-634850-7**；约 **437** 页；contributors 列 **Joan S. Birman**、**Julian Eisner**；语言 eng |
+| 德文原版 | *Lehrbuch der Topologie*；first_publish_year **1934**；publisher 字段含 **B. G. Teubner** 与 **Chelsea**（Chelsea 为 1947 起的重印）；约 **353** 页 |
+
+**⚠ 两条常见著录本轮核不到，已刻意不写进 bib 字段**：
+(a) 译者 **Michael A. Goldman**——OpenLibrary 的 contributors 里**没有他**；
+(b) 丛书 **Pure and Applied Mathematics, vol. 89**——OpenLibrary 的 `series` 字段**为空**（与 §53.1 处理
+Ahlfors–Sario 丛书号的做法一致：没有第二来源就不写号）。
+(c) `address = {Leipzig}` 是按 Teubner 当时社址填的，**OpenLibrary 不给地址字段（L3）**。
+
+### 54.4 对图的影响（researcher 不改 `graph/`）
+
+- `seifert-threlfall-1934` 与 `ahlfors-sario-1960` 是**同一处 Note F.9 引出的一对**对照来源：
+  A–S 的证明本身覆盖带边；S–T 是「先无边(§38)、后改造(§40)」。
+- **两者都没有正文**⇒ **谁也不能单独把 `math.classification-of-compact-surfaces` 一系节点抬到 `rigorous`**；
+  目前该系节点唯一 L1 的证明转述仍是 `gallier-xu-2013`（Lemma 6.1 + Theorem 6.1，见 §49）。
+- S–T 相对 A–S 的**唯一优势**：**有节号**（§38/§40），因此 `loc` 比 A–S 的「Step 1–6，页码未知」可引。
+
+### 54.5 访问日志与遗留
+
+| 目标 | URL | 结果 |
+|---|---|---|
+| 英译本书目 | `openlibrary.org/search.json?q=Seifert+Threlfall+Textbook+of+Topology&fields=…` | ✅ L2，2 条记录 |
+| 德文原版书目 | `openlibrary.org/search.json?q=Lehrbuch+der+Topologie+Seifert&fields=…` | ✅ L2，6 条记录 |
+
+- **Q54.1** **S–T 正文（§38/§40）未取到**。德文原版 1934 已过版权期的可能性存在，
+  archive.org / GDZ（Göttinger Digitalisierungszentrum）**本轮未查**。取到即可把 §38/§40 从「转引」升到一手，
+  并顺带核实德文原版与英译本的节号是否一致（§54.2 的那个 L0）。
+- **Q54.2** 英译本的译者与丛书号（§54.3 的 (a)(b)）仍未核实；一次出版方目录页或书本身的版权页即可结清。
 
 
 

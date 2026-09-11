@@ -8,6 +8,8 @@ import StringFormal.Math.IIBAnomalyUnique
 import StringFormal.Math.E8Roots
 import StringFormal.Math.DedekindEtaS
 import StringFormal.Math.DedekindEtaT
+import StringFormal.Math.DedekindEtaModular
+import StringFormal.Math.ModularGroupGenerators
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
