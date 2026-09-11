@@ -176,7 +176,8 @@
   doi     = {10.1016/0370-2693(72)90420-0},
   note    = {卷/期/页/DOI 已核实（Crossref + INSPIRE 74899）。正文未获取（ScienceDirect 403、CERN CDS 反爬）：文中是否有 "Theorem 1" 未核实，间接证据指向无编号。摘要只给 d <= 26，不提 intercept；无 D>26 反例。见 extractions/brst-cohomology-sources.md §3。
              第二轮补充（2026-09-10）：INSPIRE 记录的 documents / urls / report_numbers **三个字段均不存在**，故 (a) INSPIRE 侧确无全文，(b)「CERN TH.1471 左右的报告号」这条线索**无证据支持，已作废**。另试 cds.cern.ch/api（Socket closed）、KEK KISS（域名被拦截）、archive.org 找 Schwarz 编 Superstrings 重印本（numFound 0），均失败。
-             正面收获：lian-zuckerman-1991 参考文献 [GT] 第二次独立佐证卷页（Phys. Lett. 40B, 235-238 (1972)），且 LZ 正文引用时同样**不给编号**——「本快报无编号定理」的间接证据现有四条（FGZ ref 8、Goddard 2008、LZ 1991、刊物体例）。见 extractions/primary-sources-round2.md §2。}
+             正面收获：lian-zuckerman-1991 参考文献 [GT] 第二次独立佐证卷页（Phys. Lett. 40B, 235-238 (1972)），且 LZ 正文引用时同样**不给编号**——「本快报无编号定理」的间接证据现有四条（FGZ ref 8、Goddard 2008、LZ 1991、刊物体例）。见 extractions/primary-sources-round2.md §2。
+             第五轮（researcher 2026-09-12，「最后一搏」任务）：正文仍未取得，无新路线。OpenAlex（is_oa:false）+ Google Scholar 全网检索（唯一结果 [PDF] cern.ch，即第四轮定位的同一 CDS 镜像，无第二个镜像）双重确认第四轮结论。⚠ 一条待验证线索：Google Scholar 摘要片段显示 "for d⩽ 26 (d⩽ 10 for Neveu-Schwartz)"，与现有「摘要只给 d<=26」的记录不完全一致，但只是 L4 搜索引擎片段，未据此改写。见 extractions/primary-pdf-hunt-2026-09-12.md §1。}
 }
 
 @article{brower-1972,
@@ -191,7 +192,8 @@
   note    = {卷/期/页/DOI 已核实（INSPIRE 74322 + ADS 1972PhRvD...6.1655B）。正文未获取（APS 403）。摘要把结果限定在 unit Regge intercept（a=1），不支持把 "(D<=25, a<=1) 或 (D=26, a=1)" 两分支表述归给本文。见 extractions/brst-cohomology-sources.md §4。
              第二轮补充（2026-09-10）：INSPIRE 的 report_numbers / documents / urls 均无，无 preprint 可循。摘要要点复核后结论不变——「D=26 之下无鬼」是在 a=1 前提下的 D<26，不能读成 a<=1。因此 ms.no-ghost-theorem 审计 B1 批注里把 (D<=25, a<=1) 归给「Brower 1972」**按现有证据不成立**；该区域的已核实出处是 lian-zuckerman-1991 Theorem 3.5(ii)。见 extractions/primary-sources-round2.md §3、§4。
              ⚠ **第三轮补充（researcher 2026-09-11）：勿与 brower-friedman-1973（Phys. Rev. D7, 535，双作者，Neveu-Schwarz 模型）混淆。**
-             后者摘要自陈是「本文（intercept alpha_0 = 1 的常规对偶模型无鬼定理）向 NS 模型的推广」。}
+             后者摘要自陈是「本文（intercept alpha_0 = 1 的常规对偶模型无鬼定理）向 NS 模型的推广」。
+             第五轮（researcher 2026-09-12）：Google Scholar 全网检索**唯一结果**，且**无任何 [PDF] 标签**（只有付费墙 journals.aps.org 的 [HTML]）——**正面确认本文在全网连一个可下载镜像都没有**（不同于 GT1972/GGRT1973/Brower-Thorn1971 三篇都有 CDS 镜像）。OpenAlex 同样 is_oa:false。见 extractions/primary-pdf-hunt-2026-09-12.md §2a。}
 }
 
 @article{brower-friedman-1973,
@@ -240,7 +242,9 @@
   pages   = {163--182},
   year    = {1971},
   doi     = {10.1016/0550-3213(71)90452-4},
-  note    = {Goddard 2008 综述把「D>26 时物理态中出现鬼」归给本文；但本文摘要只提 leading nine trajectories，未出现维数条件。矛盾未裁决，正文未读。}
+  note    = {Goddard 2008 综述把「D>26 时物理态中出现鬼」归给本文；但本文摘要只提 leading nine trajectories，未出现维数条件。矛盾未裁决，正文未读。
+             第四轮补充（researcher 2026-09-11，primary-sources-round2.md §12.6）：本文有 CERN 报告号 CERN-TH-1293，扫描件 CM-P00058794，CDS recid 352004，MARC 963 = PUBLIC（经 cds.cern.ch/oai2d OAI-PMH，未逐字复核）；是裁决上述矛盾的一手材料，人工浏览器可一次点击取得：https://cds.cern.ch/record/352004/files/CM-P00058794.pdf 。
+             第五轮（researcher 2026-09-12）：OpenAlex is_oa:false；Google Scholar 全网检索唯一结果仍是同一 CDS 镜像（[PDF] cern.ch），ScienceDirect 为付费墙。正文仍未取得。见 extractions/primary-pdf-hunt-2026-09-12.md §2b。}
 }
 
 @article{goddard-goldstone-rebbi-thorn-1973,
@@ -278,7 +282,9 @@
              (4) Bering 把「光锥洛伦兹协变 ⇒ D=26」这条路线**同时**归给本文与
              Goddard–Rebbi–Thorn, *Lorentz Covariance and the Physical States in Dual-Resonance Models*,
              Nuovo Cimento **12A** (1972) 425–441（本项目尚未登记，建议新增 key `goddard-rebbi-thorn-1972`；
-             ⚠ 与 goddard-thorn-1972 是不同论文，三作者 vs 两作者）。}
+             ⚠ 与 goddard-thorn-1972 是不同论文，三作者 vs 两作者）。
+             ---
+             **第五轮（researcher 2026-09-12）★⚠ 订正一条记忆错误**：本项目 researcher 的持久 memory 曾记载「本文 PDF 的 Wayback 快照 20220710054516 存在且 status 200」。本轮用 archive.org/wayback/available 三种查询写法（裸 URL / https 前缀 / 记录页 vs 文件）反复核实，**PDF 文件本身（.../files/CM-P00058492.pdf）在全部写法下均返回空 archived_snapshots**；只有裸记录页 URL（cds.cern.ch/record/394307，不含文件路径）确有一个 2023-05-23 的快照，但那只是记录 HTML 摘要页，不含正文。同一时段用同一方法查 GT1972 的文件级快照仍正常返回结果，排除 API 全局故障。**⇒ 此前记忆里的文件级快照记载应视为不可靠，已在 researcher memory 中订正。** OpenAlex is_oa:false；Google Scholar 全网检索仍只有同一 CDS 镜像。见 extractions/primary-pdf-hunt-2026-09-12.md §4（含完整查询表）。}
 }
 
 @article{brink-nielsen-1973,
@@ -354,7 +360,15 @@
                Thorn (1987)。⇒ **Polchinski 全书不提「用 Kac 行列式证无鬼定理」这条路线**，
                与「书末字母表无 Kac、无 Feigin--Fuchs 条目」相互印证。
                ⚠ 按 polchinski-1998-v1 的 p.347 免责声明，这条 negative evidence 只说明 Polchinski 没把它
-               当入口文献，**不构成对本文的任何评价**。见 extractions/polchinski-1998-v1.md §13.2(b)(c)。}
+               当入口文献，**不构成对本文的任何评价**。见 extractions/polchinski-1998-v1.md §13.2(b)(c)。
+               第四轮（researcher 2026-09-11，primary-sources-round2.md §12.5）：⚠ 勿与同年 Thorn 讲义
+               *Introduction to the theory of relativistic strings*（Santa Barbara Workshop 1985，42 页，
+               INIS szqhd-hct30，OSTI 5007660，报告号 DOE/ER/40008-77）混淆——那篇摘要自陈是
+               「improved version of the Goddard-Thorn proof」，比本条目（MSRI 论文集 7 页）篇幅更大更教学化，
+               但**这不是本条目**，且同样访问受限（NTIS 付费分发，OSTI purl 404，INIS 需登录）。
+               第五轮（researcher 2026-09-12）：重新验证 OSTI 5007660 purl 仍 404，INIS 文件级仍受限；
+               MSRI 论文集本身在本环境无 Springer/机构订阅可用途径（link.springer.com 全域 403）。
+               两个访问壁垒均为真实版权/分发限制，非反爬。见 extractions/primary-pdf-hunt-2026-09-12.md §3。}
 }
 
 @article{kac-1979,
