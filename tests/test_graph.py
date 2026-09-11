@@ -260,7 +260,15 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     # 围道写法 ↔ 模态和写法的字典。
     # 2026-09-11 第七轮：那一支也撤了（不是证明步骤，见上方 docstring），字典卡本身仍 physical-argument。
     assert effs["worldsheet.ddf-operators-adjoint-v2"].name == "formalized"
-    assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "rigorous"
+    # 2026-09-11 第九轮（分支 agent/curator/small-backlog-14，lead 追加项）：
+    # formal/StringFormal/NoGhost/DDFGram.lean（分支 agent/formalizer/noghost-c4）把抽象的
+    # StringFormal.gram_of_heisenberg_family（HeisenbergGram.lean，图上 math.heisenberg-family-gram-matrix）
+    # 实例化到 DDF 算子上：ddf_gram_diagonal / ddf_span_pos / linearIndependent_ddfMonomial /
+    # ddf_gram_of_level_ne，四条假设由 ddfFamily_ccr/_adj/_ann + Fock.towerPairing_towerVacuum_self 供给。
+    # 于是 transverse-ddf-fock-gram-matrix 由 rigorous 升为 **formalized**（新推导 --via-lean；
+    # 手写递推 --via-oscillator-recursion 保留并存）。本断言随之更新。
+    # 无鬼定理 v4 的 effective **不变**（仍 rigorous，由自身 status 与 kac-determinant 一支决定）。
+    assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "formalized"
     assert (
         effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
     )
