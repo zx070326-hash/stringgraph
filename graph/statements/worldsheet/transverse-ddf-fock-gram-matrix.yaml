@@ -82,17 +82,33 @@ sources:
       但不给证明、不给编号（brst-cohomology-sources.md §3.1 第 1 条）。
       只作为「本命题是文献中被默认使用的标准事实」的二手证据，不承载论证。
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing_monomial_monomial, pairing_eq_zero_of_level_ne, pairing_creation_left, pairing_creation_right}"
+    loc: "formal/StringFormal/NoGhost/FockGram.lean :: StringFormal.NoGhost.Fock.{pairing_creationMonomial_of_hypotheses, foldr_creation_vacuum, annihilation_creationMonomial, pairing_creationMonomial_add_single, pairing_creationMonomial_one, pairing_self_pos_of_ne_zero, linearIndependent_creationMonomial, pairing_creationMonomial_self_eq_zero_zmod_two}；底层的型与唯一性见 formal/StringFormal/NoGhost/Fock.lean :: Fock.{pairing_unique, pairing_monomial_monomial, pairing_eq_zero_of_level_ne, pairing_creation_left, pairing_creation_right}"
     note: |
-      **同型对照，不是本节点的形式化**。这四条是协变振子 α^μ_n 在单个 Fock 空间上的
-      同一段记账的机器验证版本（worldsheet.fock-indefinite-form 的 (1)(b)、(2)、(3)）：
-      `pairing_monomial_monomial` 逐字给出 ⟨X^d, X^e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} · d(μ,n)!，
-      把 η^{μμ} 取成横向的 +1 就是本节点 (1) 的右端。
-      **但它不是本节点的形式化**：Lean 侧的 X^d 是 α^μ_{−n} 的单项式，不是 A^i_{−n} 的单项式；
-      A^i_n 在 Lean 中尚未定义（DDF.lean 文件头 "What is NOT here" 第 1 条），
-      塔上也还没有双线性型（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。
+      **同型对照，不是本节点的形式化**。这是协变振子 α^μ_n 在单个 Fock 空间上的
+      同一段记账的机器验证版本；图侧已单立卡 **worldsheet.bosonic-fock-gram-matrix**
+      （formalized）承载它，本节点与那张卡的分工见该卡的【不断言】(d)。
+      【2026-09-11（三）更新，curator，分支 agent/curator/lean-wire-5】原 loc 只指
+      `Fock.pairing_monomial_monomial`。现改指 **FockGram.lean 的条件版定理**
+      `pairing_creationMonomial_of_hypotheses`，理由是它才与本节点的逻辑形状同型：
+      · `pairing_monomial_monomial` 说的是**那一个**型 `Fock.pairing` 的对角形，而
+        `Fock.pairing` 是按单项式基**对角地定义**的，故该命题几乎是定义展开
+        （formal/TODO.md 的 `fock-gram` 项逐字写「图侧推导应引这条〔条件版〕，不要引对角那条」）；
+      · `pairing_creationMonomial_of_hypotheses` 才是「**任意**满足真空归一化与产生/湮灭
+        互为伴随的双线性型都有这个 Gram 矩阵」，即本节点「(H2)(H3)(H4) ⟹ (1)」的同型；
+      · 另外三条新对照：`foldr_creation_vacuum` 是本节点「|{d}⟩ 与因子次序无关」（由 (H1)）的
+        机器版本；`annihilation_creationMonomial` 是本节点推导第 1 步的 Leibniz (★)；
+        `pairing_self_pos_of_ne_zero` 是本节点 (2) 的正定，且比 (2) 强
+        （对整个 Fock 空间、不只对单项式张成）；`pairing_creationMonomial_one` 给 η ≡ 1 时
+        字面的 ∏ n^{d} d!，即本节点 (1) 的右端；`linearIndependent_creationMonomial` 表明
+        线性无关其实来自 Fock 空间的**自由性**，不必经正定（见 notes【2026-09-11（三）】）。
+      **但它仍不是本节点的形式化**：Lean 侧的单项式是 α^μ_{−n} 的、在单个 Fock 空间上，
+      不是 A^i_{−n} 的、在动量塔上；塔上还没有双线性型
+      （A^i_n 已有定义 `StringFormal.NoGhost.ddfOp`，但塔上的型与 A^i_{−n} 单项式尚未同时具备）。
       故本节点**不填** formal.lean_decl、**不**标 formalized。
-      合并提交 2fcf86a（Fock.lean），无 sorry；curator 未自行重跑 `lake build`。
+      FockGram.lean 的提交 f3603a1（分支 agent/formalizer/fock-gram），由 lead 以 05afdea 合入 main；
+      Fock.lean 的合并提交 2fcf86a。均无 sorry；formalizer 已跑
+      `--import StringFormal.NoGhost.FockGram --all` 的公理检查（25 条 ok）；
+      curator 未自行重跑 `lake build`。
 tags: [bosonic-string, spectrum-generating-algebra, fock-space, gram-matrix, positive-definite, no-ghost]
 notes: |
   【本卡的来历：worldsheet.ddf-operators-adjoint 的拆卡（2026-09-11，curator，lead 裁决）】
@@ -133,8 +149,34 @@ notes: |
 
   【升级路径】本卡的推导已按 docs/STATUS_LEVELS.md 的 rigorous 例外条款标 rigorous
   （lead 允许先标、reviewer 复核待补，见推导 notes 的 `reviewer-verified: <pending>`）。
-  再往上走需要 Lean：先在塔上定义双线性型（现在没有），再定义 A^i_n（现在没有），
-  然后本卡的递推可以逐字照搬 Fock.lean 的 `pairing_monomial_monomial` 的证明。
-  三步都在 formal/TODO.md 的 `ddf-operators` 项之后。
+  再往上走需要 Lean：先在塔上定义双线性型（现在没有），再定义 A^i_n（**这一步已完成**，
+  见 worldsheet.ddf-operators-v6 的 `StringFormal.NoGhost.ddfOp`），
+  然后本卡的递推可以逐字照搬 **FockGram.lean 的 `pairing_creationMonomial_of_hypotheses`**
+  的证明（【2026-09-11（三）】更新：原文写「照搬 Fock.lean 的 `pairing_monomial_monomial`」，
+  那是不对的目标——那条是对角型的**定义展开**，照搬它会把「型不预设对角」这个本卡的核心
+  条件性丢掉。要照搬的是条件版：先证塔上的型由「真空归一化 + A^i_{±n} 互伴」唯一确定
+  （对应 `Fock.pairing_unique`），再把 Gram 矩阵作为结论推出。
+  同分支新建的 worldsheet.bosonic-fock-gram-matrix 就是这条路线在**协变振子**上的完整样板，
+  其推导 --via-lean 的 summary 逐步列出了五步，可作为 DDF 版的施工图。）
+  剩余两步仍在 formal/TODO.md 的 `ddf-operators` 之后。
+
+  【2026-09-11（三）：结论 (2) 的一条缺口——「正整数故非零」需特征零（curator，
+  分支 agent/curator/lean-wire-5；**只加 notes，陈述文本未动**）】
+  本卡结论 (2) 的第一句写「每个对角元 ∏ n^{d(i,n)} · d(i,n)! 是**正整数**（正整数的有限乘积），
+  特别地非零」。这一步在有序域上是对的，但它**默默用了特征零**：ZMod 2 上（η ≡ 1）
+  (α^1_{−1})²|0⟩ 是非零向量而其对角元为 2! = 0，型真退化。
+  这条反例已在 Lean 中机器验证：`Fock.pairing_creationMonomial_self_eq_zero_zmod_two`
+  （FockGram.lean；formalizer 在形式化过程中发现，formal/TODO.md `fock-gram` 项标「正特征退化（新发现）」）。
+  后果与订正读法（**都不改陈述**）：
+  · 结论 (1)（正交 + 对角元公式）确实对**任意交换环**成立，这一半不受影响；
+  · 结论 (2) 的「有序域」假设**承重**，且它承重的方式是**逼出特征零**（有序域必然特征零），
+    不只是提供比较符号。若日后有人想把 (2) 的假设弱化为「有序交换环」，会是**错的**；
+    可弱化的正确形式是「特征零 + 序」（Lean 侧 (3a) 只需偏序 + 严格有序环，
+    因为那里 η > 0 与 n ≥ 1 已经把对角元逼成正元素）。
+  · (2) 里由正定推出的「{|{d}⟩} 线性无关」在正特征下**仍然成立**，但理由不同：
+    它来自 Fock 空间作为 R-模的**自由性**（Lean 侧 `linearIndependent_creationMonomial`，
+    对任意基环成立），不来自型。本卡的推导第 3 步用正定推线性无关，
+    那条论证只在特征零下有效；更强更省的路子是自由性。
+  · 详细登记见新卡 worldsheet.bosonic-fock-gram-matrix 的【不断言】(f) 与 (4)。
 author: curator
 created: "2026-09-11"
