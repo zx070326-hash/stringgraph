@@ -328,13 +328,24 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `Matrix.linearIndependent_of_det_gram_ne_zero`）。配上已算出的 Kac 行列式即得
     `IsContravariant.linearIndependent_descFamily{2,3,4}`：**只要该层 Kac 多项式在 `(c,h)` 处不为零**
     （即一般 `(c,h)`），`N = 2,3,4` 的 `p(N)` 个标准降算符向量线性无关。
-    `IsContravariant.finrank_levelSpan_two`：`dim V₂ = 2 = p(2)`（PBW 等式的第一个实例；
-    上界来自 (a)，下界来自 Gram 非零；`levelSpan_two_eq_span_descFamily2` 无条件给出
-    `V₂ = span{L₋₂|c,h⟩, L₋₁²|c,h⟩}`，绕开 `p(2)` 的计数）。
-    `N = 3,4` 只给到 `dim V₃ ≥ 3`、`dim V₄ ≥ 5`：升级为等式需要 `Fintype.card (Nat.Partition 3) = 3`、
-    `= 5`，Mathlib 没有 `Nat.Partition` 的基数引理且 `decide` 化不开（`Fintype.ofSurjective` 实例）；
-    另一条路（`levelSpan N = span (标准向量)`）在 `N ≥ 3` 需要整序（`[1,2]` 是 3 的组合，
-    但 `L₋₁L₋₂|c,h⟩` 不是三个标准向量之一）。
+    `IsContravariant.finrank_levelSpan_{two,three,four}`：**`dim V_N = p(N)` 对 `N = 2,3,4`**
+    （分别 `2, 3, 5`；PBW 等式的前三个实例，(a) 只给到 `≤`）。
+    **上界不走 `finrank_levelSpan_le_card_partition`**：`p(3) = 3`、`p(4) = 5` 的计数从未用到。
+    `levelSpan_{two,three,four}_eq_span_descFamily{2,3,4}` 无条件地把张成集直接砍到 `p(N)` 个标准
+    向量（`V₂ = span{L₋₂|c,h⟩, L₋₁²|c,h⟩}` 等）。`N = 2` 靠枚举 `Composition 2`
+    （`composition_two_blocks`）；**`N = 3,4` 靠 (a) 的 `levelSpan_eq_ordSpan` 先做整序**，
+    再用纯算术枚举**有序词**：`ordWord_sum_three`（总模态 `-3` 的有序词恰是 `[-3]`、`[-2,-1]`、
+    `[-1,-1,-1]`）、`ordWord_sum_four`（`-4` 的恰是 `[-4]`、`[-3,-1]`、`[-2,-2]`、`[-2,-1,-1]`、
+    `[-1,-1,-1,-1]`）。证明只用「非负整数列非降且各项 ≤ -1、和给定」，`omega` 逐情形收尾，
+    **不碰 Virasoro 关系**（整序恒等式 `L₋₁L₋₂v = L₋₂L₋₁v + L₋₃v` 已被 (a) 的 `straighten` 吸收）。
+    `Composition 3` 有 4 个、`Composition 4` 有 8 个，多出的 `[1,2]` / `[1,3],[1,2,1],[1,1,2]`
+    正是被整序消掉的非标准词。`three_le_finrank_levelSpan_three`、`five_le_finrank_levelSpan_four`
+    保留为等式的 `≥` 半边推论。
+    原先记录的障碍（`Fintype.card (Nat.Partition 3) = 3`，Mathlib 没有基数引理且 `decide`
+    化不开 `Fintype.ofSurjective` 实例）**因此被绕过而非解决**：`Nat.Partition` 的计数仍然缺。
+    `N ≥ 5` 同法可做，但需要该层 Kac 行列式（`ShapovalovLevelFive.lean` 不存在）；
+    有序词枚举本身在 `N = 5` 是 7 个情形、长度 ≤ 5，`match` 分支数随 `N` 线性增长，
+    不是瓶颈——**瓶颈是 Gram 行列式**。
     `kac_level_two_pos`：有序域上 `h > 0`、`c > 1` ⟹ 层 2 行列式 `> 0`，故该区无需行列式假设
     （`linearIndependent_descFamily2_of_pos`）。**`c` 无上界限制**：`c > 25` 时 Kac 二次式确有实根，
     但两根之和 `(5-c)/8 < 0`、积 `c/16 > 0`，故两根皆负，与 `h > 0` 无关；闭区域 `h > 0, c ≥ 1`
@@ -348,7 +359,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     见 `exists_isContravariant_iff_hwv_ne_zero`），而这正是 (b) 的推论；且在 Kac 零点处失效
     （那里向量可能仍独立，只是形式退化）。所以这是 `dim V_N = p(N)` 的**条件**、**一般点**版本。
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
-  `dim V_N = p(N)` 除 generic `N = 2` 外只证到 `≤`。这一项是 `shapovalov-form` 与
+  `dim V_N = p(N)` 除 generic `N = 2,3,4` 外只证到 `≤`。这一项是 `shapovalov-form` 与
   `kac-determinant` 的前提。
 - [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
   （无 sorry，公理只有标准三条）：
