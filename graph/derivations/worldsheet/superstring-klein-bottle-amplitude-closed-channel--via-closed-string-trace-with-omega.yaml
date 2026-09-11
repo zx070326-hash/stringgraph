@@ -53,17 +53,32 @@ depends_on:
   - id: worldsheet.type-ii-massless-spectrum
     inferred: true
     note: |
-      供给两件事，**两件都没有式号级的原文支持，故整条边按低的一级标 inferred**：
-        (a) **(10.8.10a) 的整体正号**——脚注 8 逐字 'The overall sign in the NS–NS trace
-            (positive) can be determined from **the graviton**'。这句**有原文钩子**（明说靠引力子），
-            但原书**不给式号、不引 §10.6 的谱**；把「the graviton」落到本图的 (10.6.8b)
-            无质量谱卡上是本图补的一步。
-        (b) **(10.8.11) 第三行的 16**——原书在该处**完全不说** 16 是哪些态的计数
-            （口径与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的同名 inferred 边一致）。
-      ⚠ 本边**不影响**断言 (1)(2)(3) 的公式形式与 (4) 的前两行，只支撑两个整体符号中的一个
-      与第三行的常数。
-      ⇒ 正解：为「长柱极限里最轻态的计数」（(7.4.4) 的 24 / (10.8.4)(10.8.11) 的 16）单建一卡
-      （本图无），届时 (b) 改指它；(a) 则应在建了「无质量闭弦谱含引力子」的窄卡后改指。
+      供给 **(10.8.10a) 的整体正号**——脚注 8 逐字 'The overall sign in the NS–NS trace
+      (positive) can be determined from **the graviton**'。这句**有原文钩子**（明说靠引力子），
+      但原书**不给式号、不引 §10.6 的谱**；把「the graviton」落到本图的 (10.6.8b)
+      无质量谱卡上是本图补的一步 ⇒ **标 inferred**。
+      ★★【2026-09-11 改指后本边只剩这一件事，small-backlog-13】本边**原先还供给第二件事**：
+      (10.8.11) 第三行的 **16**。那一件已**拆出并改指**
+      **spectrum.long-cylinder-lightest-state-count**（见下一条边，**非 inferred**），
+      理由见那条边的 note 与本推导 gaps 里相应那条的更新。
+      ⇒ 本边此后**只**承担 NS–NS 迹的整体正号这一条。
+      ⚠ 本边不影响断言 (1)(2)(3) 的公式形式与 (4) 的前两行。
+      ⇒ 正解不变：建一张「无质量闭弦谱含引力子」的窄卡后，本边改指它。
+  - id: spectrum.long-cylinder-lightest-state-count
+    note: |
+      供给 **(10.8.11) 第三行方括号里的 [16 + O(exp(−2s))]**——即
+      η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴] 在 s → ∞ 下的展开常数项等于 **16**。
+      **非 inferred**：**16 是 (10.8.11) 第三行逐字印出的数**，不是本图补的识别；
+      且该方括号里的函数与圆柱 (10.8.4) **逐字相同**，那张卡的断言 (2) 一次覆盖两面。
+      ★★【2026-09-11 拆出并改指，small-backlog-13】此前这一条与上面那条正号一起挂在
+      worldsheet.type-ii-massless-spectrum 上并整条标 inferred；本推导 gaps 与旧边 note
+      各写过一句同样的正解，逐字：
+        「⇒ 正解：为『长柱极限里最轻态的计数』（(7.4.4) 的 24 / (10.8.4)(10.8.11) 的 16）
+          单建一卡（本图无），届时 (b) 改指它。」
+      **那张卡本轮已建**，且内容更弱：只断言常数项的**数值**，并用「不断言 (a)」把一切
+      计数释义挡在断言外。⇒ 改指后**去掉 inferred**。
+      ⚠ **本边不供给任何计数释义**（原书只说**那一项**来自无质量闭弦 tadpole，
+      没说**那个数**等于无质量态的个数），也不供给整体符号——那仍在上面那条 inferred 边上。
   - id: worldsheet.worldsheet-parity
     inferred: true
     note: |
@@ -189,10 +204,19 @@ gaps:
      transformations are naive is that there is no diff-invariant way to define the phase of the
      path integral for purely left-moving fermions'。**§10.8 直接使用而不重述**，本图照实继承
      （目标卡「不断言 (g)」）。⇒ 断言 (4) 的相位在严格意义上未被定下。"
-  - "**(10.8.11) 第三行的 16 的来源未被原书点明**：原书不在该处说 16 是哪些态的计数。
-     本图把它挂到 worldsheet.type-ii-massless-spectrum 上并标 **inferred**，
-     目标卡「不断言 (d)」把这句 gloss 挡在断言之外（识别在推导里，不在卡面上）。
-     正解不变：为「长柱极限里最轻态的计数」（(7.4.4) 的 24 / (10.8.4)(10.8.11) 的 16）单建一卡。"
+  - "**〔2026-09-11 关闭，small-backlog-13〕(10.8.11) 第三行的 16 的来源未被原书点明**：
+     原书不在该处说 16 是哪些态的计数。本图**曾**把它挂到 worldsheet.type-ii-massless-spectrum
+     上并标 **inferred**，目标卡「不断言 (d)」把这句 gloss 挡在断言之外。
+     ★★★【本条关闭】旧版此处写的正解逐字是「为『长柱极限里最轻态的计数』（(7.4.4) 的 24 /
+     (10.8.4)(10.8.11) 的 16）单建一卡」——**该卡已建**：
+     **spectrum.long-cylinder-lightest-state-count**，但它**只断言常数项的数值**，
+     并用「不断言 (a)」把一切计数释义挡在断言外（理由：原书四处只印数字；且读成态计数与本书
+     自己的记账冲突——D = 26 的无质量闭弦态是 24 × 24 = 576，D = 10 的 NS–NS 无质量态是
+     8 ⊗ 8 = 64，都不是 24 / 16）。
+     ⇒ 本推导已把这一件从 worldsheet.type-ii-massless-spectrum 边上**拆出**，
+     改指新卡并**去掉 inferred**（数值 16 在 (10.8.11) 第三行逐字印出）；
+     那条 inferred 边此后**只**承担脚注 8 的 NS–NS 整体正号。
+     ⚠ **仍开放的那半**：16 究竟是什么的计数，本图至今无节点断言（新卡把它留成显式开放问题）。"
   - "**本推导不碰 R–R 侧，也不碰三拓扑求和**：'Z_{K₂,1} = −Z_{K₂,0}'（由 §10.7 的超对称论证）
      不在本推导里（目标卡「不断言 (b)」已声明）；tadpole 的识别、C₁₀ 悖论
      （(10.8.5)–(10.8.6)，原书 'One can guess the resolution of this as follows' + 一个本书不给的

@@ -81,6 +81,22 @@ depends_on:
       this becomes' 那句是**圆柱**处的，#E66）。⇒「Möbius 用的就是这两条模变换」是本图补的识别。
       ⚠ **换算**：那张卡的形式是 η(−1/τ) = (−iτ)^{1/2}η(τ)（主分支）；本处取 τ = 2it
       并配合 s = π/4t，本图**未逐步展开**这条链。⇒ 见 gaps 第二条。
+  - id: spectrum.long-cylinder-lightest-state-count
+    note: |
+      供给 **(10.8.18) 第三行方括号里的 [16 + O(exp(−2s))]**——即
+      [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴] / [η(2is/π)⁸Z⁰₀(2is/π)⁴] 在 s → ∞ 下的展开常数项等于 **16**。
+      **非 inferred**：**16 是 (10.8.18) 第三行逐字印出的数**，不是本图补的识别。
+      ★★【2026-09-11 新增，small-backlog-13】本推导此前**没有**这条边：gaps 第七条逐字写着
+      「本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边（另外两张卡各有一条）
+      … ⇒ 正解仍是为『长柱极限里最轻态的计数』单建一卡，届时三张卡一起改指它。」
+      **那张卡本轮已建**（只断言常数项的**数值**，不断言它是任何东西的计数），
+      故三张卡**一起**接上：圆柱与 Klein 瓶的旧 inferred 边改指并去 inferred，本推导**新增**本边。
+      ⚠ **Möbius 这一支的函数与另外两面不同**（宗量是 **2is/π**，形式是四个 Z 的比值），
+      新卡的断言 (3) 专为它写；断言 (2) 覆盖的是圆柱与 Klein 瓶那一支。
+      ★ 新卡的推导 spectrum.long-cylinder-lightest-state-count--via-q-expansion **第 3 步**
+      正是本推导 gaps 第四条要求的那次复算（见该条的更新）。
+      ⚠ 本边**只**供给方括号里的常数，**不**供给前缀 ±2n·2⁵、± 与 SO(n)/Sp(k) 的对应，
+      也不供给任何计数释义。
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.8「The Möbius strip」, eqs. **(10.8.16)**、**(10.8.17)**、**(10.8.18)**, p. 42（逐字见目标卡 sources 第一条：'With R = Ω exp(πiβF) in the trace, the fields have the periodicities'、'It follows that in the R sector of the trace the fields are periodic in the σ²-direction, corresponding to the R–R exchange, while the NS sector of the trace gives the NS–NS exchange.'、'It is slightly easier to focus on the R–R exchange, where the traces with Ω and Ω exp(πiF) sum to'、'The full Möbius amplitude, rewriting the bosonic part slightly, is'、'where the upper sign is for SO(n). We have used (7.4.22) in D = 10.'）"
@@ -178,14 +194,23 @@ gaps:
      ϑ₀₀(0,2it)^{−12}η(2it)^{−12} 如何变成本卡分母里的 η(2it)⁸Z⁰₀(2it)⁴。
      抽取记录 #E71 逐字记了这条核对（8 个横向玻色子 ⇒ [ϑ₀₀η]^{−4}，而 Z⁰₀ = ϑ₀₀/η），
      并判「与『We have used (7.4.22) in D = 10』自洽」——**这是抽取者的核对**，本图照录但标明来源。"
-  - "**超弦 Möbius 的长柱展开系数本图未复算**：玻色卡 spectrum.one-loop-mobius-amplitude-v2 的
-     断言 (5)（ϑ₀₀^{−12}η^{−12} = e^{2s} **− 24** + O(e^{−2s})，与圆柱的 +24 反号）是本图对**玻色弦**
-     做的补算，专门用来解释 (7.4.22) 的 ± 与 (7.4.24) 的 ∓ 的表观矛盾。
-     ⚠ **超弦这一侧本图没有做对应的展开**：(10.8.18) 第三行的 [16 + O(e^{−2s})] 是照录原书。
-     好在超弦这里**不出现同款表观矛盾**（(10.8.18) 上号 + ↔ SO(n)，代入 §0.4(a) 的求和直接给出
-     (10.8.19) 上号 − ↔ SO(n)），但这条自洽性是**由系数相加读出的**，不是逐项验证的。
-     ⇒ 待做：复算 [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴]/[η(2is/π)⁸Z⁰₀(2is/π)⁴] 的 s → ∞ 展开，
-     验证常数项确为 16（含符号）。"
+  - "**超弦 Möbius 的长柱展开系数**〔2026-09-11 **部分关闭**，small-backlog-13〕：玻色卡
+     spectrum.one-loop-mobius-amplitude-v2 的断言 (5)（ϑ₀₀^{−12}η^{−12} = e^{2s} **− 24** +
+     O(e^{−2s})，与圆柱的 +24 反号）是本图对**玻色弦**做的补算，专门用来解释 (7.4.22) 的 ±
+     与 (7.4.24) 的 ∓ 的表观矛盾。
+     ⚠ 旧版此处写「**超弦这一侧本图没有做对应的展开**：(10.8.18) 第三行的 [16 + O(e^{−2s})]
+     是照录原书」，并留下待做项逐字：
+       「⇒ 待做：复算 [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴]/[η(2is/π)⁸Z⁰₀(2is/π)⁴] 的 s → ∞ 展开，
+         验证常数项确为 16（含符号）。」
+     ★★★【该待做项已完成】新推导 **spectrum.long-cylinder-lightest-state-count--via-q-expansion**
+     的**第 3 步**做了这次复算：取 τ = 2is/π（⇒ q = e^{−4s}），用 (10.7.6) 得
+     Z¹₀ = 2q^{1/12}∏(1+q^m)²（m = 1 的因子 1 + q⁰ = 2 即 R 扇区基态的二重简并），
+     于是 Z¹₀⁴ = **16** q^{1/3}[1 + O(q)]，而 Z⁰₁⁴/(η⁸Z⁰₀⁴) 的 q 幂次恰好抵消，
+     比值 = **16**[1 − 16q^{1/2} + O(q)] = **16 + O(exp(−2s))**——
+     **与原书印出的 +16 同值同号**。⇒ 本推导已加一条**非 inferred** 边指向那张卡。
+     ⚠ **仍开放的那半**：本条旧版还写着「(10.8.18) 上号 + ↔ SO(n) 代入求和直接给出 (10.8.19)
+     上号 − ↔ SO(n)，但这条自洽性是**由系数相加读出的**，不是逐项验证的」——
+     **那说的是 ± 与 ∓ 的关系，新推导不涉及**，故本条只关闭「常数项 = 16（含符号）」这一半。"
   - "**(10.8.3) 的第二式 Z^α_β(it) = Z^β_{−α}(i/t) 在原书里是 'naive' 的**：它是 §10.7 (10.7.14)
      的特例，而 (10.7.14) 原书明确限定（polchinski-1998-v2.md#E47 逐字）'The reason these modular
      transformations are naive is that there is no diff-invariant way to define the phase of the
@@ -198,11 +223,17 @@ gaps:
      解析延拓）。⇒ 待建 worldsheet.open-superstring-doubling-trick。
      ⚠ 同一条限度也出现在 worldsheet.superstring-worldsheet-parity-action 的 notes 里
      （该卡 status = rigorous 的两条保留之一）。"
-  - "**(10.8.18) 第三行的 16 的来源未被原书点明**：与圆柱、Klein 瓶两张同族卡同款。
-     ⚠ 本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边
+  - "**〔2026-09-11 关闭，small-backlog-13〕(10.8.18) 第三行的 16**：与圆柱、Klein 瓶两张同族卡同款。
+     ⚠ 旧版此处写「本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边
      （另外两张卡各有一条），理由：Möbius 这一支的整体符号不像 Klein 瓶那样需要引力子这个物理输入
      （脚注 8 只对 Klein 瓶说），而 16 本身是三个面的**公因子**、已在另外两张卡上记过账。
-     ⇒ 正解仍是为「长柱极限里最轻态的计数」单建一卡，届时三张卡一起改指它。"
+     ⇒ 正解仍是为『长柱极限里最轻态的计数』单建一卡，届时三张卡一起改指它。」
+     ★★★【本条关闭】那张卡已建：**spectrum.long-cylinder-lightest-state-count**，
+     且**不断言任何计数**（只断言常数项的数值），故本推导**新增**一条**非 inferred** 边指向它
+     ——数值 16 在 (10.8.18) 第三行逐字印出，且本图已独立复算（见上一条）。
+     ⚠ **三张卡的记账现在一致**：圆柱与 Klein 瓶的旧 inferred 边改指新卡并去 inferred，
+     本推导新增同样的边。旧版「16 是公因子、已在别处记过账，故本处不记」的做法作废——
+     公因子也该在每一面各记一次，否则本推导第 4 步的最后一行在图上没有支撑。"
   - "**± 号与 SO(n)/Sp(k) 的对应未逐一验证**：原书在 (10.8.18) 处只写一句
      'the upper sign is for SO(n)'，把计数推给 Vol.1 (7.4.22)；玻色卡
      spectrum.one-loop-mobius-amplitude-v2 的推导 gaps 也写明「原书只写出计数」。
