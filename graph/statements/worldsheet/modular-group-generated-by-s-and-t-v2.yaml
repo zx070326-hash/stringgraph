@@ -1,0 +1,85 @@
+id: worldsheet.modular-group-generated-by-s-and-t-v2
+kind: proposition
+title: "模群 PSL(2,Z) 由 S : τ ↦ −1/τ 与 T : τ ↦ τ + 1 生成（v2：两条关系拆到 math.psl2z-s-t-relations）"
+statement: |
+  设 SL(2,Z) 为行列式 1 的 2×2 整数矩阵群，PSL(2,Z) = SL(2,Z)/{±I}
+  （worldsheet.modular-group-psl2z），记
+    S = ( 0  −1 ;  1  0 )   （在 H 上作用为 τ ↦ −1/τ），
+    T = ( 1   1 ;  0  1 )   （在 H 上作用为 τ ↦ τ + 1）。
+  则
+
+  **S 与 T 生成 PSL(2,Z)**：包含 S、T 的像的最小子群就是整个 PSL(2,Z)，即
+    ⟨ π(S), π(T) ⟩ = PSL(2,Z) ，  π : SL(2,Z) → PSL(2,Z) 为商映射。
+
+  等价地在 SL(2,Z) 层：⟨ S, T ⟩ = SL(2,Z)。
+
+  **本卡不断言什么：**
+  (a) **不断言关系 S² = 1、(ST)³ = 1**——那是 math.psl2z-s-t-relations（v1 把两件事写在一张卡上，
+      见 notes）。生成性的证明**用不到**这两条关系。
+  (b) **不断言这是一个表现（presentation）**，即不断言 S² 与 (ST)³ 生成全部关系
+      （那等价于 PSL(2,Z) ≅ Z/2 ∗ Z/3）。
+  (c) 不断言基本域的存在（worldsheet.modular-fundamental-domain），也不断言把任一 τ 归约进
+      F₀ 的算法终止——生成性只说「每个元素是 S、T 的有限字」，不给字的长度界或归约策略。
+  (d) 不断言 S、T 是**极小**的生成集，也不断言生成集唯一。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.ModularGroupGen.psl_closure_S_T
+  lean_file: StringFormal/Math/ModularGroupGenerators.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_closure_S_T；SL 层 sl_closure_S_T（Mathlib SpecialLinearGroup.SL2Z_generators 的再导出）"
+    note: |
+      本仓库；Lean 4 + Mathlib v4.33.1。
+        · `psl_closure_S_T : Subgroup.closure ({psl S, psl T} : Set PSL(2, ℤ)) = ⊤`
+          —— 本卡 `formal.lean_decl`，对应正文的 PSL 层断言；
+        · `sl_closure_S_T : Subgroup.closure ({S, T} : Set SL(2, ℤ)) = ⊤`
+          —— 正文「等价地在 SL(2,Z) 层」那一句；它是 Mathlib
+          `SpecialLinearGroup.SL2Z_generators`（`Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean`，
+          Chris Birkbeck，对整数矩阵作辗转相除归纳 `FixedDetMatrices.induction_on`）的再导出。
+      ⚠ **生成性的实质内容是 Mathlib 的**：本项目加的只是 SL → PSL 的搬运
+      （`MonoidHom.map_closure` + `Set.image_pair` + 商映射满射）。
+      ⚠ 本卡与关系卡 math.psl2z-s-t-relations 共用同一个 Lean 文件，但用的是**不相交**的两组声明；
+      `psl_closure_S_T` 的证明链里没有 `sl_S_sq` / `sl_ST_cube`。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（生成变换 T : τ → τ+1 与 S : τ → −1/τ）；§7.2, p.210（用「模群由 S、T 生成」而不证）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70（L1，读到 schrans-2020 §5.2，
+      笔记 p.244–245）与 polchinski-1998-v1-ch7.md#E9（L1，原书页图）。
+      ⚠ **原书对生成性零证明**：只称 S、T 为「生成变换」，§7.2 再次用而不证。
+      本卡的论证全部来自 Lean / Mathlib，本条只登记弦论教材在何处断言并使用它。
+tags: [worldsheet, torus, modular-group, psl2z, formalized]
+notes: |
+  **v2 = 拆卡后的「生成性」那一半**（curator lean-wire-11, 2026-09-11）。
+  v1 卡 worldsheet.modular-group-generated-by-s-and-t 把两件事写在一张卡上：
+  (1) S、T 生成 PSL(2,Z)；(2) S² = 1、(ST)³ = 1。reviewer-batch21 与两位 curator 共三次建议拆
+  （v1 的 --via-lean notes 末段逐字：「这张卡日后**值得拆成两张**（生成性 / 关系），
+  届时两半各挂各的 lean_decl」）。拆的理由（graph/CLAUDE.md「一个节点一个命题」）：
+    · **来源与强度不同**：生成性的实质内容在 Mathlib（辗转相除归纳），
+      两条关系是本项目的两行 `rfl`；
+    · **`formal.lean_decl` 只能填一个**：v1 只能挂 `psl_closure_S_T`，
+      `psl_S_sq` / `psl_ST_cube` 只能塞进 sources 备注，下游无法直接引；
+    · 图上所有实际用到 v1 的推导（η 的全群模不变性、基本域归约）用的都是**生成性**，
+      没有一条用两条关系 ⇒ 合卡只是把一条用不上的断言挂在依赖链上。
+  另一半是 **math.psl2z-s-t-relations**（放在 `math`：纯群论，与世界面无关）。
+  v1 的 `superseded_by` 指向本卡（拆卡时只能填一个 id，按「下游实际使用的那一条」取生成性）。
+
+  **v1 的旧推导去留**（按 docs/STATUS_LEVELS.md「旧推导的去留」）：
+    · v1 的 --via-lean 随本次拆卡 `git mv` 改指本卡（它的论证原样适用于本卡的断言——
+      本卡断言就是它的第 (3) 步；关系那两步搬到 math.psl2z-s-t-relations--via-lean）；
+    · v1 的 --via-generator-relations（physical-argument）**保留在 v1 上**不动，
+      它是 v1「矩阵直接相乘 + 生成性只是断言」这条论证的不可变记录。
+      ⇒ v1 仍有推导、effective 不变为 open。
+
+  ⚠ **原 v1 notes 里两条仍然有效的告诫**：
+  (i) 「PSL(2,Z) 由 S、T 生成」是经典数学定理但 **Polchinski 不证**；标准纸上来源是
+      Serre, *A Course in Arithmetic*, Ch. VII, Thm 2（**尚未登记到 literature/sources.bib**，
+      编号未核实）。形式化之后它已不是升级的必要条件。
+  (ii) Lean 侧的 PSL 是 Mathlib 的 `SL(2,ℤ)/Z(SL(2,ℤ))`；`Z(SL(2,ℤ)) = {±1}` 由桥层
+      `StringFormal.Bridge.center_eq_pm_one` 证明，故与本卡正文的 SL(2,Z)/{±I} 是同一个群
+      （v1 建卡时这还是一条 gap，2026-09-11 已关闭）。
+
+  **下游**：math.eta-modular-invariant-combination（τ₂|η|⁴ 在全群不变）与
+  worldsheet.modular-fundamental-domain（归约算法覆盖整条轨道）都只用生成性，
+  2026-09-11 已改指本卡。
+author: curator-lean-wire-11
+created: "2026-09-11"

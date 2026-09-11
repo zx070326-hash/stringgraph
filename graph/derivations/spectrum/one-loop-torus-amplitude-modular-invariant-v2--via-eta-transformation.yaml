@@ -45,19 +45,40 @@ summary: |
   由此在任一基本域上积分给出同一个数，特别地 F₀ 上的积分良定义。
 gaps:
   - "**配平这一步原书完全不写**：原书只写两个因子各自不变，**没有**把 (7.3.6) 的被积表达式分解成
-     「常数 × dτdτ̄/τ₂² × [τ₂|η|⁴]^{−12}」。summary (3) 的分解与幂次核对是本图补的算术；
-     可机械核对，但**没有 reviewer 复核记录**，故按 docs/STATUS_LEVELS.md 不走 rigorous 例外条款。"
+     「常数 × dτdτ̄/τ₂² × [τ₂|η|⁴]^{−12}」。summary (3) 的分解与幂次核对是本图补的算术。
+     ★ 本条原文接着写「可机械核对，但**没有 reviewer 复核记录**，故不走 rigorous 例外条款」，
+     **已过时**：reviewer-batch21 于 2026-09-11 复核并签了配平步 (3)（见 notes 的 reviewer-verified）。
+     本推导 status 仍是 physical-argument，但**理由已换成**下面最后一条：
+     上游 spectrum.one-loop-torus-amplitude（(7.3.6) 本身，路径积分推导）封顶。
+     ⇒ 「原书不写配平」这件文献事实没变，「本图只有未复核的手算」这件事不再成立。"
   - "**「逐个因子不变 ⇒ 乘积不变」在测度层面需要一句话**：dτdτ̄ 是 2-形式而 [τ₂|η|⁴]^{−12} 是函数，
      两者在同一点取值后相乘，故乘积的变换就是两者变换的乘积。这一步平凡但原书与本推导都未逐字写出。"
   - "**只验证了不变性，没有验证「F₀ 上积分 = 模空间上积分」**：后者还需要 F₀ 确实是基本域
      （worldsheet.modular-fundamental-domain，其边界认同在原书未严格处理；抽取记录 Q1 另记
      (5.1.15) 闭区域与 (7.3.14) 开区域不一致）。"
   - "**带顶点算子的模协变性未验证**：原书把它留作习题 7.1（抽取记录 #E7）。"
-  - "**上游 spectrum.torus-measure-modular-invariant 仍是 physical-argument**（原书 'it is easy to check'，
-     且本图无 reviewer 复核记录）⇒ 本推导的有效状态被它与自身共同封在 physical-argument。
-     上游 math.eta-modular-invariant-combination 虽 own=formalized，但其 effective 被两张 rigorous
-     定义卡压到 rigorous，**不是**本链的瓶颈。"
+  - "★ **（2026-09-11 两次更新，本条整条重写）** 原文：「上游 spectrum.torus-measure-modular-invariant
+     仍是 physical-argument（原书 'it is easy to check'，且本图无 reviewer 复核记录）⇒ 本推导的
+     有效状态被它与自身共同封在 physical-argument；上游 math.eta-modular-invariant-combination
+     虽 own=formalized，但其 effective 被两张 rigorous 定义卡压到 rigorous。」
+     **两条都已过时**：(i) spectrum.torus-measure-modular-invariant 现为 **formalized**
+     （`StringFormal.TorusMeasure.measure_smul_eq`，--via-lean；纸上的 --via-sl2z-action 也已升 rigorous）；
+     (ii) math.eta-modular-invariant-combination 的两张定义卡已接桥层升为 formalized，
+     该卡 effective 现为 **formalized**。
+     ⇒ **本推导的两条数学上游都不再是瓶颈**。现在的瓶颈是 **spectrum.one-loop-torus-amplitude**
+     （(7.3.6) 本身，own=physical-argument，经规范固定路径积分得出）与本推导自身的 kind
+     （physical-argument）——`stringgraph why` 的链首两步即此。"
 notes: |
+  **η ≠ 0 这一隐含前提的出处（curator lean-wire-11, 2026-09-11，落实 reviewer-batch21 PLAUSIBLE 1）**：
+  summary (3) 把 (7.3.6) 的被积表达式写成 `(1/4)(4π²α')^{−13} · (dτdτ̄/τ₂²) · [τ₂|η(τ)|⁴]^{−12}`，
+  其中的**负幂**要求 `τ₂|η(τ)|⁴ ≠ 0`，即要求 **η 在 H 上无零点**。
+  该事实由定义卡 **math.dedekind-eta-function** 供给：其正文逐字写「因每个因子非零而 η 在 H 上无零点」，
+  且已由 Lean 机检（该卡 sources 登记的 `Mathlib` 声明 `dedekindEta_ne_zero {z} (hz : 0 < z.im)`）；
+  τ₂ > 0 则由 H 的定义直接给出。
+  ⚠ **本推导不为此新增依赖边**：η 的定义（含无零点）已经经由上游卡
+  math.eta-modular-invariant-combination → math.dedekind-eta-{s,t}-transformation →
+  math.dedekind-eta-function 进入本链，新增一条平行边只会重复计数，不改变 effective。
+  这里记下来是为了让「负幂是否良定义」这一步在卡面上可追溯，而不是留给读者默认。
   reviewer-verified: reviewer-batch21, 2026-09-11（**只签配平步 (3)**：(1/4τ₂)(4π²α'τ₂)^{−13}|η|^{−48} = (1/4)(4π²α')^{−13}τ₂^{−2}[τ₂|η|⁴]^{−12}，幂次 −14 = −2−12、−48 = 4·(−12)；隐含 η ≠ 0 由定义卡「H 上无零点」供给。status 不变：仍被 spectrum.one-loop-torus-amplitude（physical-argument）封顶。lead 落地。）
   由 curator（small-backlog-6）于 2026-09-11 建立，是
   spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 v2 版：

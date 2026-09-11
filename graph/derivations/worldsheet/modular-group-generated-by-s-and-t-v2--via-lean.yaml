@@ -1,0 +1,107 @@
+id: worldsheet.modular-group-generated-by-s-and-t-v2--via-lean
+target: worldsheet.modular-group-generated-by-s-and-t-v2
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      提供群本身与 S、T 的矩阵：Lean 侧的 `ModularGroup.S`、`ModularGroup.T`（Mathlib）就是
+      该定义卡写的 S = ((0,−1),(1,0))、T = ((1,1),(0,1))，`SL(2, ℤ)` 就是该卡的 SL(2,Z)。
+      ⚠ **「S : τ ↦ −1/τ、T : τ ↦ τ+1」这一识别本推导不覆盖**：`ModularGroupGenerators.lean`
+      全程只在群里算，不碰 ℍ 上的作用（文件 docstring 逐字："Nothing here is about the action
+      on `ℍ`"）。该识别在 Mathlib 里是 `UpperHalfPlane.modular_S_smul` / `modular_T_smul`，
+      并已由桥层 `StringFormal.Bridge.psl2z_S_smul` / `psl2z_T_smul` 机检，但那是**定义卡**
+      那一侧的声明，不在本卡 `lean_decl`（`psl_closure_S_T`）的证明链上。
+      故这条边同时承担「定义」与「未被本推导机检的那一步识别」。
+      ⚠ **PSL 的取法**：定义卡写 PSL(2,Z) = SL(2,Z)/{±I}，Lean 用 Mathlib 的
+      `Matrix.ProjectiveSpecialLinearGroup` = `SL(2,ℤ)/Z(SL(2,ℤ))`；
+      `Z(SL(2,ℤ)) = {±1}` 已由桥层 `StringFormal.Bridge.center_eq_pm_one` 证明（提交 c15b0db），
+      两者是同一个群，见 gaps 首条。
+      ⚠ 该定义卡已于 2026-09-11 接桥层（`lean_decl: StringFormal.Bridge.psl2z_smul_eq`）
+      升为 formalized，故本推导 own=formalized 不再被它按 min 规则压到 rigorous。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_closure_S_T；支撑链 sl_closure_S_T（Mathlib SpecialLinearGroup.SL2Z_generators 的再导出）→ psl_closure_S_T"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/eta-modular`；Lean 4 + Mathlib **v4.33.1**。
+      与目标卡逐条对应：
+        · PSL 层断言 → `psl_closure_S_T : Subgroup.closure ({psl S, psl T} : Set PSL(2, ℤ)) = ⊤`
+          —— 本卡 `formal.lean_decl`；
+        · 「等价地在 SL(2,Z) 层」 → `sl_closure_S_T : Subgroup.closure ({S, T} : Set SL(2, ℤ)) = ⊤`。
+      ⚠ **同文件的 `sl_S_sq` / `sl_ST_cube` / `psl_S_sq` / `psl_ST_cube`（两条关系）
+      不是本推导的输入**：它们属于 math.psl2z-s-t-relations（2026-09-11 拆卡）。
+      `psl_closure_S_T` 的证明链里没有它们——生成性的证明用不到关系。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（物理侧转述：原书只给 S、T 两个「生成变换」，零证明）；§7.2, p.210（再次用而不证）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70 与 polchinski-1998-v1-ch7.md#E9，
+      均 L1。本条**不承载本推导的任何步骤**，只登记弦论教材在何处用本命题。
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/ModularGroupGenerators.lean`，
+  只 import Mathlib 的 `FixedDetMatrices` 与 `ProjectiveSpecialLinearGroup`。两步：
+
+  **(1) 硬的一半是 Mathlib 的。** `SpecialLinearGroup.SL2Z_generators :
+  Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤`（`Mathlib/LinearAlgebra/Matrix/
+  FixedDetMatrices.lean`，Chris Birkbeck），证法是对行列式 1 的整数矩阵作辗转相除归纳
+  （`FixedDetMatrices.induction_on`）。本文件把它原样再导出为 `sl_closure_S_T`。
+  ⇒ **生成性本图不自证，也不审计 Mathlib 的那段归纳**，证据标准由 lake build + 公理集合承载。
+
+  **(2) 搬到 PSL。** `psl := QuotientGroup.mk' (Subgroup.center SL(2,ℤ))`；
+  `MonoidHom.map_closure` + `Set.image_pair` 把 `map psl (closure {S,T})` 化成
+  `closure {psl S, psl T}`，再用商映射满射（`MonoidHom.range_eq_top`）得 = ⊤。
+  样板抄自 Mathlib `NumberTheory/ModularForms/LevelOne/Basic.lean:60`。∎
+
+  **注意本推导不用任何关系**：`sl_S_sq`、`sl_ST_cube` 在同一个 Lean 文件里，但
+  `psl_closure_S_T` 的证明不调用它们。这正是 2026-09-11 把 v1 拆成
+  「生成性（本卡）」与「关系（math.psl2z-s-t-relations）」两张卡的技术理由。
+gaps:
+  - |
+    **（记账，不是缺口）Lean 的 PSL 取法**：Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup`
+    是 `SL(2,ℤ)/Z(SL(2,ℤ))`，本文件只证 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`）。
+    `Z(SL(2,ℤ)) = {±1}` 由桥层
+    `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`
+    证明（提交 c15b0db，合并 845b9b9；证法：Mathlib `Matrix.SpecialLinearGroup.mem_center_iff`
+    给出中心元是纯量阵 r·I 且 r² = 1，在 ℤ 上迫使 r = ±1）。子群由其承载集合决定，
+    故 Lean 的商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群。
+    ⚠ `center_eq_pm_one` 不在本卡 `lean_decl` 的证明链上；两者的拼接是人读两条声明后作的比对。
+  - |
+    **不含 ℍ 上的作用**。「S 是 τ ↦ −1/τ、T 是 τ ↦ τ+1」这一识别不在本文件内
+    （docstring 逐字 "Nothing here is about the action on `ℍ`"）。目标卡正文用 Möbius 映射
+    写 S、T，这一层翻译靠 depends_on 的定义卡承担（桥层已机检，但在定义卡那一侧）。
+  - |
+    **不含表现（presentation）、不含关系**。目标卡「不断言」(a)(b) 与 Lean 一致：
+    本推导既不证 S² = (ST)³ = 1（那是 math.psl2z-s-t-relations），
+    也不证 PSL(2,Z) ≅ ℤ/2 ∗ ℤ/3（需要基本域上的乒乓引理，Mathlib v4.33.1 没有）。
+  - |
+    **不含归约算法的终止性**。目标卡「不断言」(c)：`closure {S,T} = ⊤` 只说每个元素是
+    S、T 的有限字，不给字长界，也不给「把 τ 移进 F₀」的算法——
+    worldsheet.modular-fundamental-domain--via-modular-reduction 的终止性论证
+    **不因本推导变严格**。
+notes: |
+  **本文件由 curator（lean-wire-9）于 2026-09-11 建立为
+  `worldsheet.modular-group-generated-by-s-and-t--via-lean`，同日由 curator（lean-wire-11）
+  随拆卡 `git mv` 改指 v2**（按 docs/STATUS_LEVELS.md「旧推导的去留」细则：本推导的论证
+  原样适用于 v2 的断言——v2 的断言就是本推导 summary 的产物；关系那两步搬到
+  math.psl2z-s-t-relations--via-lean，两边不重不漏）。
+  v1 的另一条推导 --via-generator-relations（physical-argument）**保留在 v1 上不动**，
+  故 v1 仍有推导、effective 不变为 open。
+
+  **本推导关闭了 v1 纸上推导的 gap (1)**（「生成性没有证明」）。
+  v1 --via-generator-relations 的 gap (2)（「(5.1.12) 是否含 S²=1、(ST)³=1」这一文献问题）
+  与本卡无关：那两条关系已不在 v2 的断言里。
+
+  **check-axioms（curator lean-wire-10, 2026-09-11）**：主工作树 D:/physics/string 的
+  `formal/.lake` 于 13:54 重建（`ModularGroupGenerators.olean` 12:50:41，晚于源文件 12:49:54），
+  源文件与 main 逐字相同（sha256 5d8bfcb0…）。对该文件 8 条公开声明跑
+  `uv run stringgraph check-axioms`：**8 ok, 0 non-standard, 0 missing; 0 errors**
+  （`sl_S_sq`、`sl_ST_cube`、`sl_closure_S_T`、`neg_one_mem_center`、`psl_neg_one`、
+  `psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`），公理集合一律
+  `propext Classical.choice Quot.sound`；桥层的 `center_eq_pm_one` 同批 ok。
+  按根 CLAUDE.md，lead 合并前仍须重跑 `lake build` + `check-axioms`。
+  本分支未改动 `ModularGroupGenerators.lean`。
+
+  **拆卡建议已兑现**：本推导原 notes 末段写「本卡按 graph/CLAUDE.md 的『一个节点一个命题』
+  应当拆成 (1) 生成性 与 (2) 两条关系 两张卡……本轮不拆」。lean-wire-11 拆了。
+author: curator-lean-wire-9
+created: "2026-09-11"
