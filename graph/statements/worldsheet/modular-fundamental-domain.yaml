@@ -38,6 +38,14 @@ sources:
       a more detailed approach are referred to Zwiebach's book, section 26.6 of the second edition.」
 tags: [worldsheet, torus, modular-group, moduli, fundamental-domain]
 notes: |
+  【作者自承缺口 C10（reviewer-batch10 D）已落地】原书 p.148 的「it can be shown」逐字已写在
+  本卡 sources 的 note 里（由 ch7 支于 2026-09-11 落地，L1 原书页图）。
+  curator-batch10-14-fix 复核后不重复登记，只补两句：
+  (a) 该缺口是**原书自己的**，本卡的 physical-argument 档位不再需要借 [S] 的第三方评价；
+  (b) ⚠ 本卡唯一推导 worldsheet.modular-fundamental-domain--via-modular-reduction 的 gaps 末条
+      仍写着「(5.1.15) 只经 schrans-2020 核对（对笔记 L1，对原书 L3）」，**该行已过时**；
+      该文件不在本轮 claim 范围内，交 lead / 下一位持有者更正。
+
   数学上正确的陈述与证明按 [S] 的指路在 Zwiebach 2nd ed. §26.6；
   **该书本项目 literature/sources.bib 尚未登记，节号未核实**，故这里只写在 notes 里，
   不作为 sources 条目。这是 researcher 的一条现成待办。

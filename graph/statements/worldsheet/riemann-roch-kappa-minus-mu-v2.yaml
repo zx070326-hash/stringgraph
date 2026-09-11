@@ -64,15 +64,22 @@ notes: |
   换代的唯一理由是**陈述覆盖面大于论证覆盖面**：v1 的 statement 明写「可定向或不可定向」，
   而 researcher 在 literature/extractions/math-sources.md §42.10 第 4 点指出，
   数学侧的 Riemann–Roch 只在黎曼面（=可定向）上成立，不可定向世界面要走定向双覆盖 +
-  对合不变子空间，**本图没有任何来源覆盖这一步**（Q34）。v1 的物理推导（鬼数反常）也是在
-  可定向语境下做的、并用球面标定常数。按项目原则 1（陈述文本不可变），
+  对合不变子空间，**本图没有任何来源覆盖这一步**（Q34）。
+  ⚠ **2026-09-11 订正（curator-batch10-14-fix，依 reviewer-batch12）**：此处原有一句
+  「v1 的物理推导（鬼数反常）也是在可定向语境下做的、并用球面标定常数」——**前半句是错的**，
+  已删。Polchinski §5.3 的鬼数反常论证一步也不用定向性（本卡的 --via-ghost-number-anomaly
+  的 notes 自己就写着「本推导的覆盖面大于新目标」），原书也把 (5.2.9) 写成不带 oriented 限定的
+  一般式；**定向性限定只出现在紧接的亏格公式 −3χ = 6g − 6 上**。换代的真正理由只有
+  「数学路线（本卡新增的 --via-riemann-roch）限可定向」这一条。用球面标定常数这件事成立，
+  但它与定向性无关。按项目原则 1（陈述文本不可变），
   收窄范围只能靠新建节点，故有本卡；v1 已写 `superseded_by: worldsheet.riemann-roch-kappa-minus-mu-v2`。
 
-  **不可定向情形怎么办**：需要新建一张 `worldsheet.riemann-roch-kappa-minus-mu-nonorientable`
-  （Klein 瓶、RP₂、Möbius 带；χ = 2 − 2g − b − c 的交叉帽计数），
-  其唯一可用论证是 Polchinski §5.3 的鬼数反常（本身就是 physical-argument），
-  **数学路线对它无效**。本轮不建，避免在没有来源的情况下先占 id；
-  待 researcher 的 Q34 有结果、或 auditor 裁决「照抄 Polchinski 的范围也算有来源」后再建。
+  **不可定向情形已有卡（2026-09-11 建立）**：`worldsheet.riemann-roch-kappa-minus-mu-nonorientable`
+  （紧、无边、连通、不可定向；带边的 Möbius 带**不**在内，因为本图未为带边情形定义 μ）。
+  其唯一可用论证是 Polchinski §5.3 的鬼数反常（physical-argument），**数学路线对它无效**。
+  建卡的触发是 reviewer-batch11 M1 / batch12「高」：worldsheet.rp2-conformal-killing-group
+  --via-sphere-involution 原先引本卡（限可定向）去证 RP₂（不可定向），属范围错位；
+  现已改指那张新卡。⇒ 本卡此处原写的「本轮不建，避免先占 id」已作废。
 
   **本卡有两条推导，各自的弱点正好互补**：
   (a) `--via-ghost-number-anomaly`（由 v1 原样改指本卡）：Polchinski 的书内路线，

@@ -131,9 +131,13 @@ gaps:
     （FF 直接写「k 次齐次分量上的 PBW 基」），本仓库 Lean 侧对应的
     `isCompl_levelSpan_zero` / `hwvFunctional` 又带 `[Field K] [CharZero K]`
     （走的是 L_0 本征值分离，不是 (H) 的基）。
-    ⇒ 按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这一步需要 reviewer 独立复核；
-    **本推导尚无 `reviewer-verified` 记录**。目标 (2)（特征零域）不依赖这一步的一般 R 版本，
-    因为那里 ⊕ 分解另有 Lean 的 `isInternal_levelSpan` 可用；受影响的只有 (1) 的一般 R 版本。
+    ⇒ 按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，这一步需要 reviewer 独立复核。
+    **[复核已完成 2026-09-11]** reviewer-batch10 复核结论：在任意交换 ℚ-代数上这一步是初等的——
+    `levelSpan_eq_ordSpan`（任意 R）把 V_N 换成有序词张成，(H2) 的唯一展开 + (H3) 的基分块
+    直接给出 ⊕_N 与 f_0 的良定义。故这一步不再挡住 rigorous；**Lean 侧仍未覆盖**（一般 R 版本
+    待 `isCompl_levelSpan_zero` 去掉域假设），这部分缺口保留。
+    目标 (2)（特征零域）本来就不依赖这一步的一般 R 版本，因为那里 ⊕ 分解另有 Lean 的
+    `isInternal_levelSpan` 可用；受影响的只有 (1) 的一般 R 版本。
   - |
     (ii) **(H) 本身在一般交换 ℚ-代数 R 上没有节点**。目标 (2) 只到特征零的域，
     因为 math.verma-module-free-over-negative-part 就设在那里。
@@ -150,14 +154,14 @@ gaps:
     本推导的严格性由「PBW 卡（rigorous）+ Lean（formalized 的各步）+ gaps (i) 的分块读出」
     拼成，**不依赖**上述两条文献的证明细节。
 notes: |
+  reviewer-verified: reviewer-batch10, 2026-09-11（gaps (i) 的「(H) ⇒ ⊕_N V_N 且 f_0 良定义」在任意交换 ℚ-代数上初等：levelSpan_eq_ordSpan + (H2) 唯一展开 + (H3) 基分块）
+
   【本推导为什么标 rigorous 而不是更低】
   除 gaps (i) 外每一步要么是 formalized 的 Lean 声明（对任意交换 ℚ-代数成立），
   要么是 rigorous 的 PBW 卡；gaps (i) 是从「基」的定义直接分块，属 docs/STATUS_LEVELS.md
-  所说的「有限步初等（线性代数）」一类。**但该条款要求 reviewer 独立复核并在此写
-  `reviewer-verified: <agent>, <date>`，本推导目前没有这条记录。**
-  ⇒ 交 reviewer / lead 裁决：若认为 gaps (i) 不满足例外条款，正确处置是把本推导降为
-  physical-argument（而不是删边或改目标陈述）。届时目标 (2) 仍可由另立一条只走
-  特征零域的推导保住 rigorous。
+  所说的「有限步初等（线性代数）」一类，并已由上面那行记录满足该条款的复核要求。
+  ⇒ 档位封顶仍是 rigorous 而非 formalized：math.verma-module-free-over-negative-part
+  未形式化（Mathlib v4.33.1 无 PBW），且 gaps (i) 的一般 R 版本 Lean 侧仍缺。
 
   【与 worldsheet.shapovalov-form-existence--via-pbw 的分工，避免重复计数】
   两条推导的 depends_on 高度重叠，但它们**不是同一条论证的两份拷贝**：

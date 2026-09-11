@@ -33,11 +33,13 @@ summary: |
   16 ≠ 28，故无解。**这一步 GS 原文没有写**（见 gaps）。
 gaps:
   - "USp 一支（本推导 (2) 的后半）在 GS 原文中不存在：GS 给了 l = +1 却从不讨论 USp 的排除，这是抽取者的推论（抽取记录 Q4）。结论本身平凡，但归属必须记清。"
-  - "缺 reviewer 独立复核记录，故按 docs/STATUS_LEVELS.md 不取 rigorous；Lean 化后（`omega` 一行）可直接给 formalized 推导。"
+  - "**[已关闭 2026-09-11]** 原缺口是「缺 reviewer 独立复核记录，故不取 rigorous」。reviewer-gs1984 已复核（记录见 notes 首行），本条现为 `kind: proof` / `status: rigorous`。⚠ 仍待做的是**形式化**：Lean 里 `omega` 一行即可，做出后应新增一条 `--via-lean` 的 formalized 推导，而**不是**改本条。"
   - "「这两条方程确实是混合反常抵消的条件」不由本推导承载，且其相对归一化外包给未取得的 alvarez-gaume-witten-1984 eq. (63)；见 consistency.anomaly-cancellation-so32-effective-theory 的 gaps。"
 notes: |
   reviewer-verified: reviewer-gs1984, 2026-09-11（sympy 在 ℚ[x,y] 上符号验证恒等式差为 0；档位依据 docs/STATUS_LEVELS.md 初等可复核例外）
   本条的算术由 curator 于 2026-09-11 重算，与抽取记录 §5.2 一致；
-  curator 不算独立 reviewer，故不写 `reviewer-verified`。
+  curator 不算独立 reviewer，故档位所依据的是上面那行 reviewer-gs1984 的记录。
+  ⚠ 2026-09-11 清理（reviewer-batch14）：此处原写「故不写 `reviewer-verified`」，
+  与同日已补上的首行记录矛盾，故删。
 author: curator
 created: "2026-09-11"

@@ -104,11 +104,12 @@ notes: |
   （`hwvFunctional_lie_lgen_of_neg` ← `lie_lgen_mem_posLevelSpan` ← `lie_lgen_mem_levelSpan_of_neg`）
   所依赖的引理。此前它只以 source loc 的形式散落在那两张卡的 note 里，没有自己的节点。
 
-  【id 用词说明（提请 lead 注意）】本卡 id 里的 "lowering" 指**负模态**（mode number n = −k < 0，
-  即物理侧的「降指标 / 产生算符」），它在 **level 与 L_0 本征值上是升的**（N ↦ N + k）。
-  Lean 的 docstring 用的是相反的叫法（把 L_{−k} 称作 raising operator）。
-  id 由 lead 在任务书里指定，本卡沿用；**若 lead 认为易混，现在（本分支未合并前）是改名的最后时机**，
-  建议的替代是 worldsheet.verma-level-shift-by-negative-modes。标题与陈述已写死为
-  「L_{−k}（k ≥ 1）」以避免任何歧义。
+  【记号说明】本卡说的**负模态** L_{−k}（mode number n = −k < 0，即物理侧的「产生算符」）
+  在 **level 与 L_0 本征值上是升的**（N ↦ N + k）。Lean 的 docstring 把 L_{−k} 叫 raising operator，
+  与此一致；本卡的标题与陈述一律写死为「L_{−k}（k ≥ 1）」以避免歧义。
+  ⚠ 2026-09-11 清理（reviewer-batch14）：此处原有一段「id 里的 "lowering" 易混，建议改名为
+  worldsheet.verma-level-shift-by-negative-modes」的建议段——**该改名已经落实**
+  （本卡 id 就是 `worldsheet.verma-level-shift-by-negative-modes`，不含 "lowering"），
+  故那段已过时，删。
 author: curator
 created: "2026-09-11"

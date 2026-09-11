@@ -53,7 +53,7 @@ formal:
   lean_file: StringFormal/NoGhost/LevelTwo.lean
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg（第 (3) 条）；另有 Fock.exists_zeroModeSq_eq_neg_two（第 (1) 条）、Fock.levelTwoScalar_intercept_one_mem_physSubmodule 与 Fock.pairing_levelTwoScalar_intercept_one（第 (2) 条）；文件末尾另有 D = 27、K = ℚ 的具体 example"
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.exists_mem_physSubmodule_pairing_self_neg'（**带撇的那条**，第 (3) 条；它比不带撇的版本多输出 zeroModeSq = −2 与 b ≠ 0，正是 formal.lean_decl 指的那条）；不带撇的 Fock.exists_mem_physSubmodule_pairing_self_neg 是它的弱化版（不给动量量词）；另有 Fock.exists_zeroModeSq_eq_neg_two（第 (1) 条）、Fock.levelTwoScalar_intercept_one_mem_physSubmodule 与 Fock.pairing_levelTwoScalar_intercept_one（第 (2) 条）；文件末尾另有 D = 27、K = ℚ 的具体 example（它用的是**不带撇**的那条）"
     note: |
       本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 ea303c5，合并进 main 的提交 c32f026。
       全文 grep `sorry` 零命中。**curator 未自行重跑 `lake build`，也未跑
