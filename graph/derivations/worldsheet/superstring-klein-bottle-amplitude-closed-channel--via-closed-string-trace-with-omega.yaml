@@ -79,17 +79,37 @@ depends_on:
       计数释义挡在断言外。⇒ 改指后**去掉 inferred**。
       ⚠ **本边不供给任何计数释义**（原书只说**那一项**来自无质量闭弦 tadpole，
       没说**那个数**等于无质量态的个数），也不供给整体符号——那仍在上面那条 inferred 边上。
-  - id: worldsheet.worldsheet-parity
-    inferred: true
+  - id: worldsheet.closed-superstring-worldsheet-parity-action
     note: |
-      供给 Ω 本身：K₂ 的定义（圆柱两端经 Ω 缝合）、迹里的 Ω 插入、以及测度里 Ω 投影的那个 ½。
-      **标 inferred**：本图那张卡是**玻色弦**语境的 Ω（作用在 α_n^i / ᾱ_n^i 上，Ω² = 1）；
-      本推导需要的是 Ω 在**闭超弦世界面费米子**上的作用——原书只以 (10.8.8a,b) 的形式给出
-      （R = Ω exp(πiβF + πiβ̃F̃) 时 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），
-      **本图没有对应节点**。
-      ⚠ 注意本图新建的 worldsheet.superstring-worldsheet-parity-action **不能**替代这条边：
-      那张卡是 **开超弦** 上的 Ω（(10.8.12)–(10.8.15)，含 Ω² = exp(πiF)），
-      Klein 瓶是闭弦拓扑，用不到它。⇒ 见 gaps 第三条。
+      供给 Ω 在**闭超弦费米部门**上的作用，即本推导第 2 步的全部输入：
+      该卡断言 (1) 的 R ψ(w) R^{−1} = exp(πiβ)ψ̃(w̄)、R ψ̃(w̄) R^{−1} = exp(πiβ̃)ψ(w)
+      （R = Ω exp(πiβF + πiβ̃F̃)）；断言 (4) 的路径积分边界条件 **(10.8.8a,b)** 全式
+      （含 'with the usual extra sign for fermionic fields'）；断言 (3) 的迭代 **(10.8.9)**
+      ψ(w + 4πit) = exp[πi(β + β̃)]ψ(w)。
+      **非 inferred**：(10.8.8)/(10.8.9) 就印在本推导所依据的那一页上（§10.8 p.40），该卡逐字照录。
+      ★★【2026-09-11 拆边并去 inferred，small-backlog-13】本推导原先把这一件与玻色部门
+      一起挂在 worldsheet.worldsheet-parity 上并整条标 inferred，理由逐字是
+        「本推导需要的是 Ω 在**闭超弦世界面费米子**上的作用——原书只以 (10.8.8a,b) 的形式给出
+          （R = Ω exp(πiβF + πiβ̃F̃) 时 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），
+          **本图没有对应节点**。」
+      本推导 gaps 第三条同时写着「⇒ 待建：闭超弦上的 Ω 作用卡」。**那张卡本轮已建**
+      （只建到世界面费米子层面；(10.6.16)–(10.6.17) 那一层有意留在
+      worldsheet.type-i-unoriented-closed-spectrum 上，理由见新卡 notes：合并会成环）。
+      ⚠ 新卡「不断言 (c)」提醒：**闭弦上 Ω 的平方原书不写**，该卡只断言 Ω² 与 ψ、ψ̃ 对易；
+      本推导也不需要更多。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      供给 Ω 在**玻色部门**上的作用与无取向投影本身：K₂ 的定义（圆柱两端经 Ω 缝合）、
+      迹里的 Ω 插入、闭弦上 Ω α_n^i Ω^{−1} = ᾱ_n^i、以及测度 dt/8t 里
+      无取向投影 (1+Ω)/2 贡献的那个 ½。
+      ★★【2026-09-11 去掉 inferred，small-backlog-13】本边原标 inferred，理由是那张卡只覆盖
+      **玻色弦**语境而本推导还需要费米部门；**费米部门那一件已拆给上面那条新边**
+      （worldsheet.closed-superstring-worldsheet-parity-action，它自己 `uses` 玻色卡）。
+      本边此后**只**承担玻色部门与投影计数——那正是这张卡逐字断言的内容
+      ⇒ 对象同一，**去掉 inferred**。
+      ⚠ 本边**不**借该卡的 Ω² = 1（那是玻色弦语境；闭超弦上原书不写，见新卡「不断言 (c)」）。
+      ⚠ worldsheet.superstring-worldsheet-parity-action 仍然**不能**用在这一支：
+      那张卡是 **开超弦** 上的 Ω（(10.8.12)–(10.8.15)，含 Ω² = exp(πiF)），Klein 瓶是闭弦拓扑。
   - id: math.dedekind-eta-s-transformation
     inferred: true
     note: |
@@ -188,12 +208,22 @@ gaps:
      ★ 可做的正解：像圆柱那张卡的 α' 前缀复算一样，把 Klein 瓶的换元链逐步写出
      （抽取记录 §0.4(b) 只给了结论『Klein 瓶复算同样给出 2¹⁰/(8π(8π²α')⁵)』，没有逐步）。
      在那之前，第二行相对第一行是**照抄原书**。"
-  - "**Ω 在闭超弦世界面费米子上的作用本图无节点**：原书只以 (10.8.8a,b) 的形式给出
-     （R = Ω exp(πiβF+πiβ̃F̃) 时 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），
-     本图的 worldsheet.worldsheet-parity 是**玻色弦**语境的，故那条边标 inferred。
-     ⚠ 本轮新建的 worldsheet.superstring-worldsheet-parity-action **不覆盖**这一支：
-     那张卡是**开超弦**上的 Ω（(10.8.12)–(10.8.15)，Ω² = exp(πiF)），只服务于 Möbius 带。
-     ⇒ 待建：闭超弦上的 Ω 作用卡（(10.8.8) 与 §10.6 (10.6.16)–(10.6.17) 合起来才够）。"
+  - "**〔2026-09-11 大部分关闭，small-backlog-13〕Ω 在闭超弦世界面费米子上的作用本图无节点**：
+     原书只以 (10.8.8a,b) 的形式给出（R = Ω exp(πiβF+πiβ̃F̃) 时 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，
+     即 Ω 交换 ψ ↔ ψ̃），本图的 worldsheet.worldsheet-parity 是**玻色弦**语境的，
+     故那条边**曾**标 inferred；worldsheet.superstring-worldsheet-parity-action **不覆盖**这一支
+     （那是**开超弦**上的 Ω，(10.8.12)–(10.8.15)，Ω² = exp(πiF)，只服务于 Möbius 带）。
+     ★★★【本条关闭】旧版待建项逐字是「闭超弦上的 Ω 作用卡（(10.8.8) 与 §10.6 (10.6.16)–(10.6.17)
+     合起来才够）」——**该卡已建**：**worldsheet.closed-superstring-worldsheet-parity-action**
+     （断言 Ω ψ(w) Ω^{−1} = ψ̃(w̄)、Ωψ̃(w̄)Ω^{−1} = ψ(w)、一般 R 的相位版本、(10.8.9) 的迭代、
+     以及 (10.8.8) 边界条件全式）。本推导已**拆边**：费米部门改指新卡（非 inferred），
+     玻色部门与投影计数留在 worldsheet.worldsheet-parity 上并**去掉 inferred**（对象同一）。
+     ⚠ **新卡只建了『(10.8.8) 那一半』**：(10.6.16)–(10.6.17) 那一层**有意不在新卡里**，
+     因为它已在 worldsheet.type-i-unoriented-closed-spectrum 的断言中，且把它并进新卡会成环
+     （那张卡的推导正需要『Ω 在超弦上怎么作用』）。⇒ 本推导对 (10.6.17) 的那条边**不变**
+     （仍指 worldsheet.type-i-unoriented-closed-spectrum，非 inferred）。
+     ⚠ **仍开放的一条真缺口**：**Ω 在自旋场 V_s 上的作用**原书 §10.6 不写
+     （新卡「不断言 (a)」已登记）；它与 §10.4 末的 cocycle / §10.6 的自旋-统计讨论相连，本图未建。"
   - "**玻色端的母式在 Vol.1 正文里就没有推导**：(7.4.15) 被原书留作 **exercise 7.13**
      （spectrum.one-loop-klein-bottle-amplitude 的『不断言』逐字写明『正文没有从路径积分导出它』）。
      ⇒ 本推导第 1 步引的那一式，其自身的推导在图内外都是空的。

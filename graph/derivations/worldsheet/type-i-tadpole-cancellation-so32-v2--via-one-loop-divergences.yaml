@@ -80,21 +80,42 @@ depends_on:
       ⚠ 只供给迹的形式，不供给模不变性本身的完整论证。
   - id: worldsheet.gso-projection
     note: 供给「GSO 与 Ω 投影算符各贡献一个 1/2 因子」这一记账（原书 (10.8.2) 处明写）。
-  - id: worldsheet.worldsheet-parity
-    inferred: true
+  - id: worldsheet.closed-superstring-worldsheet-parity-action
     note: |
-      供给 Ω（Klein 瓶与 Möbius 带的来源）以及测度里 Ω 投影的那个 ½。
-      **仍标 inferred，但缺口自 2026-09-11 起只剩闭弦一侧**：
-      · **开弦一侧已合上**：超弦的 Ω 作用 (10.8.12)–(10.8.15)（Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、
-        Ω² = exp(πiF)、四项投影算符 (1+Ω+Ω²+Ω³)/4）本轮已建卡
+      供给 **Ω 在闭超弦费米部门上的作用**（Klein 瓶那一支真正需要的东西）：
+      Ω ψ(w) Ω^{−1} = ψ̃(w̄)、Ω ψ̃(w̄) Ω^{−1} = ψ(w)，一般插入
+      R = Ω exp(πiβF + πiβ̃F̃) 时带相位 exp(πiβ) / exp(πiβ̃)（(10.8.8a,b)），
+      以及迭代式 (10.8.9)。
+      **非 inferred**：(10.8.8)/(10.8.9) 印在本推导所依据的 §10.8 p.40 上，该卡逐字照录。
+      ★★★【2026-09-11 新增，small-backlog-13】本边是从下面那条
+      worldsheet.worldsheet-parity 的 **inferred** 边上**拆出来**的。那条边此前 inferred 的
+      **唯一剩余理由**逐字是：
+        「· **闭弦一侧仍空**：Ω 在闭超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件
+           (10.8.8a,b) 给出（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），**本图无节点**；
+           本图那张 worldsheet.worldsheet-parity 仍是**玻色弦**语境的。」
+      **那张卡本轮已建**（worldsheet.closed-superstring-worldsheet-parity-action），
+      ⇒ 该理由消失，下面那条边随之去掉 inferred。
+      ⚠ 新卡只覆盖**世界面费米子层面**；(10.6.16)–(10.6.17) 那一层仍在
+      worldsheet.type-i-unoriented-closed-spectrum 上（本推导已另有一条边指它），
+      且新卡有意不合并那一层（合并会成环，见新卡 notes）。
+      ⚠ 新卡「不断言 (a)」登记了一条**仍开放**的真缺口：**Ω 在自旋场 V_s 上的作用**原书不写。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      供给 Ω 在**玻色部门**上的作用与无取向投影本身（Klein 瓶与 Möbius 带的来源），
+      以及测度里 Ω 投影 (1+Ω)/2 的那个 ½。
+      ★★★【2026-09-11 去掉 inferred，small-backlog-13】本边此前 inferred 的两条理由现已**全部消失**：
+      · **开弦一侧**（2026-09-11 早些时候，klein-mobius）：超弦的 Ω 作用 (10.8.12)–(10.8.15)
+        （Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、Ω² = exp(πiF)、四项投影算符 (1+Ω+Ω²+Ω³)/4）已建卡
         **worldsheet.superstring-worldsheet-parity-action**，并由
         worldsheet.superstring-mobius-strip-amplitude-closed-channel 以**非 inferred** 边接入
-        ⇒ Möbius 那一支现在经上面那条新边到达它，**不再经过本边**。
-      · **闭弦一侧仍空**：Ω 在闭超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件 (10.8.8a,b)
-        给出（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），**本图无节点**；
-        本图那张 worldsheet.worldsheet-parity 仍是**玻色弦**语境的。
-      ⇒ 故本边保持 inferred，理由改写为「闭弦超弦 Ω 无节点」，见 gaps 里相应那条的更新。
-      （下面专门为 (10.8.12) 补的来源条目保留不动，它现在同时是新卡的来源。）
+        ⇒ Möbius 那一支经那条链到达它，不经过本边。
+      · **闭弦一侧**（本轮）：**worldsheet.closed-superstring-worldsheet-parity-action** 已建，
+        并由上面那条新边直接接入本推导 ⇒ 本边不再需要越俎代庖。
+      ⇒ 本边此后**只**承担玻色部门（Ω α_n^i Ω^{−1} = ᾱ_n^i）与无取向投影 (1+Ω)/2 的计数
+      ——那正是这张卡逐字断言的内容，对象同一，**去掉 inferred**。
+      ⚠ 本边**不**借该卡的 Ω² = 1：开超弦上 Ω² = exp(πiF)（(10.8.14)），
+      闭超弦上原书不写（新卡「不断言 (c)」只断言 Ω² 与 ψ、ψ̃ 对易）。
+      （下面专门为 (10.8.12) 补的来源条目保留不动，它现在同时是开弦那张新卡的来源。）
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.8, eq. (10.8.19), p. 42（结论式；逐字 'The R–R tadpole vanishes only for the gauge group SO(32).' 与 'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32.'）"
@@ -192,19 +213,27 @@ gaps:
      因为原书在 (10.8.11)/(10.8.18) 处**直接写等号**。这是**新的、更窄的**遗留，
      已分别记在那两张卡的推导 gaps 里。
      ⚠ 另一条未结清：Vol.2 §10.7 的**完整环面振幅**本图仍只有模不变性那一条必要条件。"
-  - "**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**〔2026-09-11 部分结清，klein-mobius〕：
-     (a) **开弦一侧已结清**：新卡 **worldsheet.superstring-worldsheet-parity-action**
+  - "**Ω 在超弦上的作用（(10.8.13)/(10.8.14)）本图无节点**〔2026-09-11 **本条全部关闭**〕：
+     (a) **开弦一侧已结清**（klein-mobius）：新卡 **worldsheet.superstring-worldsheet-parity-action**
      （definition，(10.8.12)–(10.8.15)：Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)、Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、
      **Ω² = exp(πiF)**、联合投影算符 **(1+Ω+Ω²+Ω³)/4**）已建，并由
      worldsheet.superstring-mobius-strip-amplitude-closed-channel 以**非 inferred** 边接入
      ⇒ 本推导的 Möbius 支经那条新边到达它。
-     (b) **闭弦一侧仍空**：Ω 在**闭**超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件
-     (10.8.8a,b) 给出（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，即 Ω 交换 ψ ↔ ψ̃），本图无节点；
-     本推导的 worldsheet.worldsheet-parity 边因此**仍标 inferred**，理由改为『闭弦超弦 Ω 无节点』。
-     (c) **新卡自身的两条保留**（照实转记）：R 扇区的相位论证原书不给（只写了 NS 扇区那一句）；
-     (10.8.12) 所用的**超弦版 doubling trick (10.2.15)** 本图无节点
-     （worldsheet.open-string-doubling-trick 是玻色弦语境的）。
-     → 待建：worldsheet.open-superstring-doubling-trick，以及闭超弦上的 Ω 作用卡。"
+     (b) ★★★【**2026-09-11 闭弦一侧也已结清**，small-backlog-13】旧版写的是
+     「**闭弦一侧仍空**：Ω 在**闭**超弦世界面费米子上的作用原书只以 Klein 瓶的边界条件
+     (10.8.8a,b) 给出 … 本图无节点；本推导的 worldsheet.worldsheet-parity 边因此**仍标 inferred**」。
+     **该卡本轮已建**：**worldsheet.closed-superstring-worldsheet-parity-action**
+     （Ωψ(w)Ω^{−1} = ψ̃(w̄)、Ωψ̃(w̄)Ω^{−1} = ψ(w)、一般 R 的相位版本、(10.8.9) 的迭代、
+     (10.8.8) 边界条件全式）。本推导已**拆边**：费米部门新增一条**非 inferred** 边指向它，
+     worldsheet.worldsheet-parity 边此后只承担玻色部门与 (1+Ω)/2 的计数并**去掉 inferred**。
+     (c) **两张新卡各自的保留**（照实转记）：
+       · 开弦卡：R 扇区的相位论证原书不给（只写了 NS 扇区那一句）；(10.8.12) 所用的
+         **超弦版 doubling trick (10.2.15)** 本图无节点。
+       · 闭弦卡：原书**不给模层面**的版本（对照开弦有 (10.8.13)）；**不写** Ω 在闭弦上的平方等于什么
+         （该卡只断言 Ω² 与 ψ、ψ̃ 对易）；(10.8.8) 最前面那个额外负号只有一句
+         'with the usual extra sign for fermionic fields'，不给理由。
+     (d) **仍开放的两条真缺口**：**Ω 在自旋场 V_s 上的作用**原书 §10.6 不写
+     （闭弦卡「不断言 (a)」登记）；**worldsheet.open-superstring-doubling-trick** 仍待建。"
   - "★【2026-09-11 新增，klein-mobius】**第 (4) 步用的两条『超对称相消』不在任何一张三面卡的断言里**：
      求 R–R 侧的总和需要 **Z_{C₂,1} = −Z_{C₂,0}** 与 **Z_{K₂,1} = −Z_{K₂,0}**（Möbius 那一支
      原书直接给的就是 R–R 项，不需要翻面）。这两条相消原书归约到 §10.7 的超对称论证
