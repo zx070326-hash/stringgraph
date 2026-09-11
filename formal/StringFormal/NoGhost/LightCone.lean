@@ -28,6 +28,8 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
   (`towerBigrade_finite`).
 * `LightConeFrame η b` — a light-cone pair `(b, b̃)` with `b·b = b̃·b̃ = 0`, `b·b̃ = -1`.
 * `TransverseFrame η b` — `D - 2` polarisations, `η`-orthonormal and transverse to `b`.
+* `ddfSpan η a b hη Ε` — the submodule spanned by the DDF states
+  `A^{ε_{i_1}}_{-n_1} ⋯ A^{ε_{i_r}}_{-n_r}|0; k⟩`.
 
 ## Main results
 
@@ -51,9 +53,20 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
   **leading-term expansions of `L_{-1}` and `L_{-2}` on a rung vacuum**, in the form
   `L_{-n}|0;p⟩ = α^p_{-n}|0;p⟩ + (≥ 2 oscillators)`; combined with
   `conjCoeff_towerMomentum` this is the `n ≤ 2` case of `L_{-n} = -α^{b̃}_{-n} + …`.
+* `ddfOp_neg_one_apply_towerVacuum` — **`A^ε_{-1}|0; k⟩ = α^ε_{-1}|0; k - k_0⟩` exactly**
+  (blueprint §B.4, second leading-term lemma, at `n = 1`), under the *extra* hypothesis
+  `ε·k = 0`; see the gaps below.
+* `ddfSpan_le_towerPhysSubmodule`, `ddfSpan_le_towerKerK`, `ddfSpan_le_ddfCharacterization` —
+  the easy inclusion of blueprint §B.0: every DDF state is physical and satisfies the
+  Goddard–Thorn `K`-conditions.
 
 ## Scope and gaps
 
+* **The leading term of `A^ε_{-1}` needs `ε·k = 0`, not just `ε·k_0 = 0`.**  The DDF island's
+  four standing hypotheses (`hη`, `hbb`, `hba`, `hεb`) do *not* imply it, and without it
+  `A^ε_{-1}|0;k⟩` acquires an extra term `(ε·k) Φ_1|0; k-k_0⟩`.  The light-cone witness of
+  `NoGhost/Witness.lean` does satisfy `ε·k = 0`; this should be recorded in the graph as part
+  of the DDF frame convention rather than left implicit.
 * The leading-term expansion of `L_{-n}` is proved only for `n = 1, 2`, because
   `Fock.Lop_neg_one_apply_one` and `Fock.Lop_neg_two_apply_one` are the only rung-vacuum
   formulas available; a general `n` needs the Sugawara sum on the vacuum for arbitrary `n`,
@@ -421,5 +434,148 @@ theorem towerLop_neg_two_apply_single_vacuum (η a b : Fin D → R) (j : ℤ) :
     Finsupp.smul_single, ← Finsupp.single_add]
 
 end Leading
+
+
+/-! ### The DDF span and the leading term of `A^ε_{-1}` -/
+
+section DDFSpan
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- `v · p_j = v·a + j (v·b)` for an arbitrary polarisation `v` (the `v = b` case is
+`dotVec_towerMomentum_right`). -/
+lemma dotVec_vec_towerMomentum (η a b v : Fin D → R) (j : ℤ) :
+    dotVec η v (towerMomentum a b j) = dotVec η v a + (j : R) * dotVec η v b := by
+  rw [dotVec, dotVec, dotVec, Finset.mul_sum, ← Finset.sum_add_distrib]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  simp only [towerMomentum_apply]
+  ring
+
+/-- The zero mode `α^ε_0` acts on rung `j` by the scalar `ε · p_j`. -/
+lemma towerModeVec_zero_apply_single (η a b ε : Fin D → R) (j : ℤ) (P : Fock D R) :
+    towerModeVec η a b ε 0 (Finsupp.single j P)
+      = dotVec η ε (towerMomentum a b j) • Finsupp.single j P := by
+  rw [towerModeVec, LinearMap.sum_apply, dotVec, Finset.sum_smul]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  simp only [LinearMap.smul_apply, towerMode_single, Fock.mode_zero_apply, Finsupp.smul_single,
+    smul_smul, mul_assoc]
+
+/-- A positive polarised mode annihilates every rung vacuum. -/
+lemma towerModeVec_apply_single_vacuum_of_pos (η a b ε : Fin D → R) {j : ℤ} (hj : 0 < j)
+    (i : ℤ) : towerModeVec η a b ε j (Finsupp.single i (Fock.vacuum D R)) = 0 := by
+  rw [towerModeVec, LinearMap.sum_apply]
+  refine Finset.sum_eq_zero fun μ _ => ?_
+  rw [LinearMap.smul_apply, towerMode_single, Fock.vacuum_def,
+    Fock.mode_apply_one_eq_zero η (towerMomentum a b i) hj μ, Finsupp.single_zero, smul_zero]
+
+variable [Algebra ℚ R]
+
+/-- On a rung vacuum the vertex operator reduces to the creation exponential. -/
+lemma towerVertex_apply_single_vacuum (η b : Fin D → R) (n K j : ℤ) :
+    towerVertex η b n K (Finsupp.single j (Fock.vacuum D R))
+      = Finsupp.single (j + n) (Fock.creaExp η (vertexMomentum b n) (K - n)) := by
+  rw [towerVertex_single, Fock.vacuum_def, Fock.vertexOsc_apply_one]
+
+/-- Below the window the vertex operator alone kills a rung vacuum. -/
+lemma ddfSummand_apply_single_vacuum_eq_zero_of_lt (η a b ε : Fin D → R) (n j i : ℤ)
+    (hj : j < n) : ddfSummand η a b ε n j (Finsupp.single i (Fock.vacuum D R)) = 0 := by
+  rw [ddfSummand, Module.End.mul_apply, towerVertex_apply_single_vacuum,
+    Fock.creaExp_of_neg _ _ (show j - n < 0 by omega), Finsupp.single_zero, map_zero]
+
+/-- Above the window transversality moves `α^ε_j` to the right, where it annihilates a rung
+vacuum. -/
+lemma ddfSummand_apply_single_vacuum_eq_zero_of_pos (η a b ε : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hεb : dotVec η ε b = 0) (n j i : ℤ) (hj : 0 < j) :
+    ddfSummand η a b ε n j (Finsupp.single i (Fock.vacuum D R)) = 0 := by
+  rw [ddfSummand, towerModeVec_mul_towerVertex_of_transverse η a b ε hη hεb n j j,
+    Module.End.mul_apply, towerModeVec_apply_single_vacuum_of_pos η a b ε hj i, map_zero]
+
+/-- **The leading term of `A^ε_{-1}` on the ground state**
+(blueprint §B.4, second leading-term lemma, at `n = 1`):
+
+`A^ε_{-1}|0; k⟩ = α^ε_{-1}|0; k - k_0⟩`, *exactly* — there is no correction term.
+
+The DDF sum on the ground state has only two terms in its window, `j = -1` and `j = 0`; the
+`j = 0` term is the scalar `ε·p_{-1}` times a level-one state, and it vanishes **only because
+of the extra hypothesis `hεa : ε·k = 0`**.  Transversality `ε·k_0 = 0` alone does *not*
+suffice: without `ε·k = 0` the DDF operator produces the additional state
+`(ε·k) Φ_1 |0; k - k_0⟩`.  This is a genuine extra condition on the light-cone frame — the
+witness of `NoGhost/Witness.lean` satisfies it (`ε_i = e_i` with `i ≥ 2` while `k` lies in
+the `0`–`1` plane), but the DDF island's four standing hypotheses do not imply it. -/
+theorem ddfOp_neg_one_apply_towerVacuum (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (hεa : dotVec η ε a = 0) :
+    ddfOp η a b ε hη hεb (-1) (towerVacuum D R)
+      = towerModeVec η a b ε (-1) (Finsupp.single (-1) (Fock.vacuum D R)) := by
+  classical
+  have hs : ∀ j ∉ ({-1, 0} : Finset ℤ), ddfSummand η a b ε (-1) j (towerVacuum D R) = 0 := by
+    intro j hj
+    simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hj
+    obtain ⟨h1, h2⟩ := hj
+    rcases lt_or_ge j 0 with h | h
+    · exact ddfSummand_apply_single_vacuum_eq_zero_of_lt η a b ε (-1) j 0 (by omega)
+    · exact ddfSummand_apply_single_vacuum_eq_zero_of_pos η a b ε hη hεb (-1) j 0 (by omega)
+  have hone : ddfSummand η a b ε (-1) (-1) (towerVacuum D R)
+      = towerModeVec η a b ε (-1) (Finsupp.single (-1) (Fock.vacuum D R)) := by
+    rw [ddfSummand, Module.End.mul_apply, towerVacuum, towerVertex_apply_single_vacuum,
+      show (0 : ℤ) + -1 = -1 by ring, show (-1 : ℤ) - -1 = 0 by ring, Fock.creaExp_zero]
+    rfl
+  have hzero : ddfSummand η a b ε (-1) 0 (towerVacuum D R) = 0 := by
+    rw [ddfSummand, Module.End.mul_apply, towerVacuum, towerVertex_apply_single_vacuum,
+      towerModeVec_zero_apply_single, dotVec_vec_towerMomentum, hεa, hεb, mul_zero, add_zero,
+      zero_smul]
+  rw [ddfOp_apply η a b ε hη hεb (-1) (towerVacuum D R) hs,
+    Finset.sum_pair (show (-1 : ℤ) ≠ 0 by decide), hone, hzero, add_zero]
+
+/-- **The submodule spanned by the DDF states**
+`A^{ε_{i_1}}_{-n_1} ⋯ A^{ε_{i_r}}_{-n_r}|0; k⟩` (blueprint §B.1).  Transversality is an
+argument of the *definition* of `ddfOp`, which is why `TransverseFrame` has to carry it. -/
+noncomputable def ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) : Submodule R (TowerFock D R) :=
+  Submodule.span R
+    {x | ∃ l : List (Fin (D - 2) × ℕ+),
+          x = l.foldr (fun q y => ddfOp η a b (Ε.vec q.1) hη (Ε.transverse q.1)
+                                   (-((q.2 : ℕ) : ℤ)) y) (towerVacuum D R)}
+
+lemma mem_ddfSpan_of_list (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (l : List (Fin (D - 2) × ℕ+)) :
+    l.foldr (fun q y => ddfOp η a b (Ε.vec q.1) hη (Ε.transverse q.1)
+      (-((q.2 : ℕ) : ℤ)) y) (towerVacuum D R) ∈ ddfSpan η a b hη Ε :=
+  Submodule.subset_span ⟨l, rfl⟩
+
+/-- **The DDF states are physical** (the easy inclusion of blueprint §B.0): induction on DDF
+monomials, using `ddfOp_mem_towerPhysSubmodule` and the fact that the ground state is
+physical.  The intercept is the ground-state one, `a₀ = α' k²`. -/
+theorem ddfSpan_le_towerPhysSubmodule (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (Ε : TransverseFrame η b) :
+    ddfSpan η a b hη Ε ≤ towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) := by
+  refine Submodule.span_le.2 ?_
+  rintro x ⟨l, rfl⟩
+  induction l with
+  | nil => exact towerVacuum_mem_towerPhysSubmodule η a b hη hbb hba
+  | cons q l ih =>
+      exact ddfOp_mem_towerPhysSubmodule η a b (Ε.vec q.1) hη hbb hba (Ε.transverse q.1) _ ih
+
+/-- **The DDF states satisfy the Goddard–Thorn `K`-conditions** `K_n Ψ = 0` (`n > 0`), by
+`⁅K_m, A^ε_n⁆ = 0` and `K_n|0;k⟩ = 0`.  Together with the previous theorem this gives
+`ddfSpan ≤ ddfCharacterization`; the converse is the spanning lemma and is **not** proved. -/
+theorem ddfSpan_le_towerKerK (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (Ε : TransverseFrame η b) :
+    ddfSpan η a b hη Ε ≤ towerKerK η a b := by
+  refine Submodule.span_le.2 ?_
+  rintro x ⟨l, rfl⟩
+  induction l with
+  | nil => exact single_vacuum_mem_towerKerK η a b 0
+  | cons q l ih =>
+      exact ddfOp_mem_towerKerK η a b (Ε.vec q.1) hη hbb (Ε.transverse q.1) _ ih
+
+/-- `ddfSpan ≤ ddfCharacterization` (Goddard 2008 (6.2), the inclusion that *is* provable
+without the spanning lemma). -/
+theorem ddfSpan_le_ddfCharacterization (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (Ε : TransverseFrame η b) :
+    ddfSpan η a b hη Ε ≤ ddfCharacterization η a b (invTwo R * Fock.zeroModeSq η a) :=
+  le_inf (ddfSpan_le_towerPhysSubmodule η a b hη hbb hba Ε)
+    (ddfSpan_le_towerKerK η a b hη hbb Ε)
+
+end DDFSpan
 
 end StringFormal.NoGhost
