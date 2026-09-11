@@ -1522,9 +1522,41 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     给出，但满射性**就是** `DDFSpans` 本身，所以这条等距同构不携带超出上述定理的信息，
     判断为不值得写。
   - **公理登记**：10 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+- [x] `noghost-glue`（蓝图 §B 的「逐片 ⇒ 全体」）：**双分次投影与分片拼接** ——
+  `StringFormal/NoGhost/Glue.lean`（22 条顶层声明）。分支 `agent/formalizer/noghost-glue`。
+  - **双分次投影 `towerBigradeProj D R j N`** `x ↦ single j ((x j)_N)`，由
+    `Fock.levelComponent`（Mathlib 的 `weightedHomogeneousComponent`）搭起来。刻意**不建**
+    `DirectSum.Decomposition` 实例：只证「投影落在片里」`towerBigradeProj_mem`、「投影在自己片上是
+    恒等」`_of_mem_self`、「杀掉别的片」`_of_mem_ne`、「求和还原」`sum_towerBigradeProj`
+    （指标集取 `x.support ×` 每根上出现的 level），直和性从头到尾**没有被断言**。
+  - **`L_m` 的双分次齐次性**：`towerLop_mem_towerBigrade`（`(j,N) ↦ (j, N−m)`，保 rung 因为
+    `towerLop` 是 `towerDiag`）、`towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt`
+    （level `< m` 被 `L_m` 杀死）、交换关系 `towerBigradeProj_towerLop`
+    （`Fock.levelComponent_Lop` 的塔版）。
+  - **`towerBigradeProj_mem_towerPhysSubmodule`**：物理态的每个双分次分量仍物理。`L_0` 条件靠
+    `L_0` 双度 `(0,0)`，`L_m`（`m ≥ 1`）条件分两种情形（`N < m` 直接被杀 / 否则由交换关系搬运）。
+    **对 `η, a, b` 无任何假设**。
+  - **`towerPhys_le_iSup_bigrade` / `towerPhysSubmodule_eq_iSup_inf_towerBigrade`**：
+    `H_phys(塔) = ⨆_{j,N} (towerBigrade j N ⊓ H_phys)`。
+  - **主引理 `ddfSpans_of_forall_slice`**：`∀ j N, DDFSpansOn … (towerBigrade D R j N)` ⇒
+    `DDFSpans`。注意这**不是**格论平凡：`DDFSpansOn … W` 左边是 `H_phys ⊓ W`，`⨆ W` 不对 `⊓`
+    分配，靠的正是上一条。
+  - **质壳压缩量词**：`ddfSpans_of_forall_antidiagonal_slice`（只需检查
+    `(j : R) + N = 0` 的片，其余片与 `H_phys` 交为 0，用 `massShell_of_mem_towerBigrade`，
+    继承 `NoZeroDivisors`）与 `ddfSpans_of_forall_antidiagonal_slice_int`
+    （`CharZero` 下就是单条反对角线 `j = −N`，`∀ N, DDFSpansOn … (towerBigrade (−N) N)` 即可）。
+  - **level 截断版**：`towerLevelLESubmodule D R Nmax = ⨆_{j} ⨆_{N ≤ Nmax} towerBigrade j N`、
+    `ddfSpansOn_towerLevelLE`、`ddfSpansOn_towerLevelLE_of_antidiagonal`
+    （只需 `Nmax+1` 片 `(−N, N)`，`N ≤ Nmax`）。这是 §B.6 部分归纳（现在到 `N = 1`，`N = 2`
+    在做）的**可陈述全局形式**：`Nmax = 1` 的前件由 `ddfSpans_bigrade_neg_one_one` 关闭。
+  - **数学判断（应写进图卡 notes）**：`D = 26` 在本文件同样一次不出现——它全部落在逐片前件里。
+    另外，`towerBigradeProj_mem_towerPhysSubmodule` 说明**物理态条件本身是双分次齐次的**，
+    所以 `ddf-spans` 这条缺口可以合法地按 `(rung, level)` 逐片攻，不会丢解。
+  - **公理登记**：22 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
-      **现在是唯一缺口**：条件版组装见 `noghost-c5`，`N = 1` 分片已由
-      `ddfSpans_bigrade_neg_one_one` 关闭。
+      **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
+      （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
+      `(−N, N)`」）；`N = 1` 分片已由 `ddfSpans_bigrade_neg_one_one` 关闭。
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。

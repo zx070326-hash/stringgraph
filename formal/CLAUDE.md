@@ -207,6 +207,18 @@ StringFormal/
                             **`ddfSpans_bigrade_neg_one_one`** 在光子片 `(rung −1, level 1)` 上
                             **无条件于 `D`** 关闭 `DDFSpansOn`。**`D = 26` 在本文件一次都不出现**——
                             它全部被吸收进 `DDFSpans`（蓝图 §B.5）
+  NoGhost/Glue.lean         **蓝图 §B 的「逐片 ⇒ 全体」**：双分次投影 `towerBigradeProj j N`
+                            （`x ↦ single j ((x j)_N)`，基于 `Fock.levelComponent`；**刻意不建
+                            `DirectSum.Decomposition`**，直和性从未被断言）；`L_m` 的双分次齐次性
+                            （`(j,N) ↦ (j,N−m)`，level `< m` 被杀）与交换关系
+                            `towerBigradeProj_towerLop`；**`towerBigradeProj_mem_towerPhysSubmodule`**
+                            （物理态的每个双分次分量仍物理，对 η,a,b 无假设）⇒
+                            **`towerPhys_le_iSup_bigrade`**；主引理 **`ddfSpans_of_forall_slice`**
+                            （每片 `DDFSpansOn` ⇒ `DDFSpans`；非格论平凡，因为 `⨆` 不对 `⊓` 分配）、
+                            质壳压缩量词的 `ddfSpans_of_forall_antidiagonal_slice(_int)`
+                            （`CharZero` 下只剩单条反对角线 `j = −N`）与 level 截断版
+                            `towerLevelLESubmodule` / `ddfSpansOn_towerLevelLE(_of_antidiagonal)`
+                            （§B.6 部分归纳的可陈述全局形式）。**`D = 26` 同样一次不出现**
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
