@@ -1,0 +1,123 @@
+id: worldsheet.nsr-fock-space-verma-decomposition
+kind: proposition
+title: "（争议卡）NSR 物质 Fock 空间作为 super-Virasoro 模完全可约、是 Verma 模的无穷直和"
+statement: |
+  **设定（这一段是陈述的一部分，不是注释）。**
+  取 RNS 弦的**物质**部门 Fock 空间 H(p)：D 个自由玻色场 X^μ 与自由费米场 ψ^μ 的振子 Fock 空间，
+  中心动量 p ≠ 0；按扇区取 NS（半整数模，记 κ = ½）或 R（整数模，记 κ = 0）。
+  H(p) 是 super-Virasoro 代数（生成元 l_n、g_r 与中心元）的模。
+  Verma 模记号按 conv.verma-module-notation。
+
+  **命题（即 Figueroa-O'Farrill–Kimura 1989 所主张、并把证明归属给 Brower–Friedman 1973 的那一条）：**
+
+    H(p) 作为 super-Virasoro 模是**完全可约**的，即同构于 super-Virasoro **Verma 模的无穷直和**。
+
+  **★ 本卡是一张争议卡：图中并列两方，本图未裁决。**
+
+  **主张成立的一方**——Figueroa-O'Farrill–Kimura 1989：
+    NS 扇区 p.111 逐字："**It was proven** by Brower and Friedman [11] that this representation is
+    **fully reducible** … infinite direct sum of Verma modules"；
+    R 扇区 p.115 措辞更弱，逐字："Brower and Friedman **claim** to have proven full reducibility of
+    this representation, although they **do not write down the explicit spectrum generating
+    algebra**"。
+
+  **主张一般不成立的一方**——Lian–Zuckerman 1989, p.320 Remark 逐字：
+    "`V(p,κ)` is **in general not a direct sum of Verma modules** of `Vir_κ` even though it is
+    `Vir_κ^-`-free."（在 NS 扇区用超 Virasoro 的 **Kac 行列式**给出论证）。
+
+  **本卡不断言：**
+  (a) 哪一方正确——两方的措辞不同（"in general not" vs 无限定的 "fully reducible"），
+      **调和的可能性尚未排除**，但裁决所需的事实（LZ 的反例取在哪个动量 p）本项目尚未核对；
+  (b) Brower–Friedman 1973 正文里有没有这条陈述——**该文正文本项目未取得（L0）**，
+      其**摘要不含 "reducible"/"Verma"/"direct sum"/"Fock space"/"representation" 任何一词**；
+  (c) `Vir_κ^-`-自由性（LZ Corollary 2.19(iii) 用的那条较弱性质）——**那一条两方都同意**，
+      本卡说的是比它强的完全可约性。
+uses_conventions:
+  - conv.verma-module-notation
+sources:
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "p.111（NS 扇区，逐字 'It was proven by Brower and Friedman [11] that this representation is fully reducible … infinite direct sum of Verma modules'）；p.115（R 扇区，逐字 'Brower and Friedman claim to have proven full reducibility of this representation, although they do not write down the explicit spectrum generating algebra'）"
+    note: |
+      **L1**（全文 28 页逐页读图，literature/extractions/figueroa-ofarrill-kimura-1989.md）。
+      ★ **这是本命题在文献中的唯一正面出处。** FOK **需要**它：附录 A 的超李代数同调消灭定理
+      (A.14) 只对 **Verma 模** M 陈述，FOK 据此逐 Verma 模计算 BRST 上同调。
+      ⚠ 同一作者 1989 年的另一篇（"BRST Cohomology and its Applications to Two-Dimensional
+      Conformal Field Theory"）出现**逐字相同**的两句（Semantic Scholar 引文上下文检索，L3）
+      ⇒ **两者不是两条独立证言，是同一条**。
+  - ref: brower-friedman-1973
+    loc: "abstract（正文本项目未取得，L0）"
+    note: |
+      ⚠⚠ **本条是「被归属的文献」，不是本命题的来源。** 按 literature/CLAUDE.md 的取证纪律，
+      `read_depth` 保持 **abstract，不得升**（正文 L0；已尝试入口见 sources.bib 的 note，
+      剩余唯一路线是 WebSearch 找 .edu 扫描件或人工从 APS 下载）。
+      **摘要逐字全文**："The no-ghost theorem of Brower for the conventional dual model
+      (intercept `α₀=1`) is extended to the Neveu-Schwarz model, and its spectrum-generating
+      algebra is constructed. These conformally invariant generators (`A_n`, `B_s`) are obtained
+      by a systematic use of the gauges `G_r`. As a consequence it is demonstrated that particular
+      dual models having resonances with positive-definite norms and masses are possible."
+      ⇒ **摘要只承载两件事：NS 扇区的无鬼定理 + 谱生成代数 (A_n, B_s)。**
+      **摘要里没有 "reducible"、没有 "Verma"、没有 "direct sum"、没有 "Fock space"、
+      没有 "representation"。** 且**标题与摘要都是 NS-only，完全没有 Ramond**。
+  - ref: lian-zuckerman-1989
+    loc: "p.320 Remark，逐字 'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'（论证用超 Virasoro 的 Kac 行列式，在 NS 扇区）"
+    note: |
+      **L1**（全文 35 页逐页读毕，literature/extractions/lian-zuckerman-1989.md）。
+      ★ **反方向的明证。** 关键在措辞是 "**in general** not"——它**没有**说对每个 p 都不成立。
+      ⚠ **LZ 不需要完全可约性**：其证明只用 `Vir_κ^-`-自由性（Corollary 2.19(iii)），
+      所以这条 Remark 对 LZ 自己的推导毫无影响，**只影响 FOK 那条路线**。
+      ⚠ 两篇**互不引用**（LZ p.335 Note added in proof 称收到 FOK 预印本、工作独立）。
+tags: [worldsheet, superstring, super-virasoro, verma-module, brst, disputed, open-question]
+notes: |
+  from: literature/extractions/brower-friedman-1973.md §2–§3（本轮裁决记录）、
+  figueroa-ofarrill-kimura-1989.md §3 第 1 条 / §4 Q1、lian-zuckerman-1989.md Q1。
+
+  【★ 为什么把一条"文献争议"建成节点】这是本项目方法论想展示的场景之一：
+  worldsheet.no-ghost-theorem-superstring-cohomological 有三条并列推导，其中
+  **FOK 那条需要本命题，LZ 那条不需要**。把本命题建成节点并只让 FOK 的推导依赖它，
+  工具就会自动把「两条 derivation 其实强度不同」如实算出来（FOK 那条的 effective 被压到
+  conjecture，LZ 那条不受影响），而不是靠人在 notes 里口头说明。
+
+  【★★ 2026-09-11 的四条新证据（researcher 抽 brower-friedman-1973，全部指向"归属可疑"）】
+  (a) **`[L1]` 被归属文献的摘要不含任何可约性/Verma 主张**（见上面 brower-friedman-1973 的 note）。
+      该文自称的成果是「无鬼定理推广到 NS + 谱生成代数 (A_n, B_s) + 正定范数共振态存在」。
+  (b) **`[L1]` 该文的标题与摘要都是 NS-only，完全没有 Ramond。**
+      ⇒ **FOK p.115 把一条关于 R 扇区表示的完全可约性归给它，在标题/摘要里找不到任何支撑。**
+      FOK 自己那句括注「they do not write down the explicit spectrum generating algebra」
+      恰与「该文根本没有处理 R 扇区」相容。（⚠ **这一步是抽取者的推断，不是原文陈述**，
+      但它是现有证据下唯一自洽的读法。）
+  (c) **`[L3]` 「Verma 模直和」这个说法在整个引用网络里只有一个出处。**
+      Semantic Scholar 对该文 35 篇引用方的上下文检索中，**只有 Figueroa-O'Farrill 本人**
+      1989 年的另一篇出现该措辞，且两句与 FOK p.111 / p.115 逐字相同。
+      ⇒ **FOK 1989 与它不是两条独立证言。整个文献里没有第二个人说过这件事。**
+  (d) **`[L3]` 两条非 FOK 系的引用方只把该文归到「NS 的 DDF/SGA 构造 + 无鬼定理」，不到可约性。**
+      Hasiewicz–Jaskólski–Ostrowski, hep-th/9901116 逐字「The DDF construction [27] for the
+      Neveu-Schwarz model was developed long time ago by Schwarz [28], **and by Brower and
+      Friedman [29]**」——**该文自己大量使用 super-Virasoro Verma 模，却把 Verma 模的度规结构
+      外包给 Meurman–Rocha 一系，不外包给 Brower–Friedman**；
+      Schwarz, hep-th/0011078 逐字「The no-ghost theorem for the dual pion model was also
+      established using Brower's methods … **as well as by Brower and Friedman**」。
+
+  【★ 一条尚未排除的调和可能（抽取者假设，非原文）】
+  LZ 的措辞是 "**in general** not a direct sum"。若 FOK 实际使用的是**一般动量 p**
+  （超 Virasoro Kac 行列式不为零的情形），则两者可以并存：
+    一般 p：Verma 模不可约 ⇒ `Vir^-`-自由 + 最高权向量生成 ⇒ 确实是 Verma 模直和；
+    特殊 p（Kac 行列式为零）：LZ 的反例。
+  **但 FOK 全文只声明 p ≠ 0（脚注 3/6/9），没有声明 p 的一般性。**
+  ⇒ **裁决路径是可检验的，但前提是核对 LZ p.320 Remark 的反例究竟取在哪个 p**
+  （Project Euclid `cmp%2F1104179468`，本轮未做）。
+  ⚠ **在验证之前，不要把这条调和写进任何推导的 summary 当作已知事实。**
+
+  【★ 若日后裁决为"不成立"该怎么做】若核实 LZ 的反例落在一般（`p ≠ 0` 的典型）动量上，
+  则本卡应新增一条 `kind: refutation` 的推导（来源 lian-zuckerman-1989 p.320）使其降为 refuted，
+  并把 FOK 那条无鬼推导的 gaps 第一条升级为"其前提已被反驳"。**本轮不做**，裁决前提未满足。
+
+  【★ 与 brower-friedman-1973 的使用红线】图里**不得**把 brower-friedman-1973 作为
+  「完全可约性 / Verma 模直和」的 source（它只能承载摘要那两件事，loc 只能写 `abstract`）。
+  该文**可以**作为 NS 扇区无鬼定理与横向谱生成代数的一条 physical-argument 级来源
+  （见 worldsheet.no-ghost-theorem-superstring-cohomological--via-ohta-imnu 与
+  --via-figueroa-ofarrill-kimura-1989 里的对应 source）。
+
+  【查重】`uv run stringgraph search Brower / Verma` 命中的是玻色弦 DDF/Kac 行列式一系与
+  Shapovalov 形式卡，无同内容者。
+author: curator
+created: "2026-09-11"

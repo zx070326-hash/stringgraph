@@ -1,0 +1,101 @@
+id: worldsheet.nsr-fock-space-verma-decomposition--via-fok-1989-attribution
+target: worldsheet.nsr-fock-space-verma-decomposition
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: math.super-virasoro-algebra
+    note: >-
+      供给 super-Virasoro 括号（本命题是关于该代数的模的陈述）。FOK (3.1)–(3.3) 用 c/12 归一化，
+      与本图一致；LZ 用 c/8，两篇的 Remark 与主张在这一点上不受影响（中心项归一化不改变
+      "是否 Verma 模直和"）。
+sources:
+  - ref: figueroa-ofarrill-kimura-1989
+    loc: "p.111（NS）逐字 'It was proven by Brower and Friedman [11] that this representation is fully reducible … infinite direct sum of Verma modules'；p.115（R）逐字 'Brower and Friedman claim to have proven full reducibility of this representation, although they do not write down the explicit spectrum generating algebra'"
+    note: |
+      **L1**（全文 28 页逐页读图）。★ **本推导的全部内容就是这两句归属**——
+      FOK **不给证明**，只引 [11] = Brower–Friedman, Phys. Rev. D **7** (1973) 535。
+      ⚠ 注意 FOK 自己在 R 扇区把措辞从 "It was proven" 降为 "**claim** to have proven"。
+  - ref: brower-friedman-1973
+    loc: "abstract（正文本项目未取得，L0；read_depth 保持 abstract，不得升）"
+    note: |
+      ⚠⚠ **本条是被归属的文献，它不支持本命题。** 摘要（L1 逐字，INSPIRE 出版方摘要）**只承载**
+      「Brower 的（`α₀=1` 常规对偶模型）无鬼定理被推广到 Neveu–Schwarz 模型」与
+      「构造了谱生成代数 `(A_n, B_s)`，方法是 systematic use of the gauges `G_r`」两件事，
+      结论措辞最强只到 "particular dual models having resonances with positive-definite norms
+      and masses are possible"。
+      **摘要里没有 "reducible"、"Verma"、"direct sum"、"Fock space"、"representation" 任何一词；
+      标题与摘要都是 NS-only，完全没有 Ramond。**
+      ⇒ 本条列在这里**只为让「FOK 归属给谁」这件事在图上可追**，
+      **不得**被读成本命题的来源。
+  - ref: lian-zuckerman-1989
+    loc: "p.320 Remark（反方向明证）：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ even though it is Vir_κ^- -free.'"
+    note: >-
+      **L1**。列在本推导里是为了让 status 的理由（存在反方向的明证）在同一处可见，
+      **它不支持本命题**。⚠ LZ 自己**不需要**完全可约性，只用 `Vir_κ^-`-自由性
+      （Corollary 2.19(iii)），故这条 Remark 对 LZ 的无鬼定理推导毫无影响。
+summary: |
+  **本推导没有论证，只有一条归属，而且这条归属经核实是可疑的。** 完整内容是：
+
+  1. FOK 1989 在 NS 扇区（p.111）断言「It was proven by Brower and Friedman [11] that this
+     representation is fully reducible … infinite direct sum of Verma modules」，并据此逐 Verma
+     模计算 BRST 上同调（其附录 A 的消灭定理 (A.14) 只对 Verma 模 M 陈述）。
+  2. FOK 在 R 扇区（p.115）把同一归属降级为「Brower and Friedman **claim** to have proven …
+     although they **do not write down the explicit spectrum generating algebra**」。
+  3. **被归属的文献本身不支持它**（2026-09-11 researcher 核实）：
+     Brower–Friedman 1973 的**摘要不含 "reducible"/"Verma"/"direct sum"**，
+     且**标题与摘要都是 NS-only，完全没有 Ramond**；该文自称的成果是
+     「NS 无鬼定理 + 谱生成代数 (A_n, B_s) + 正定范数共振态存在」。
+  4. **这条主张在整个引用网络里只有一个出处**：35 篇引用方中只有 Figueroa-O'Farrill 本人
+     1989 年的另一篇出现该措辞（逐字相同），**不是两条独立证言**；两条非 FOK 系的引用方
+     （hep-th/9901116、hep-th/0011078）只把 Brower–Friedman 归到「NS 的 DDF/SGA 构造 + 无鬼定理」。
+  5. **有反方向的明证**：LZ 1989 p.320 Remark 用超 Virasoro 的 Kac 行列式说
+     `V(p,κ)` "**in general** not a direct sum of Verma modules"。
+
+  ⇒ **status: conjecture。** 理由不是"论证不完整"（那种情形按 docs/STATUS_LEVELS.md 的 lead 裁决
+  应记 physical-argument + gaps），而是**结论真伪在文献中未定**：同一命题有一方明确主张成立、
+  另一方用 Kac 行列式给出反方向的明证，且本项目**无法核对**被归属文献的正文。
+  这正是 STATUS_LEVELS 里 conjecture 一栏「结论真伪在文献中未定」的情形。
+gaps:
+  - |
+    ★★ **裁决的前提本轮未满足：LZ p.320 Remark 的反例究竟取在哪个动量 p，本项目尚未核对。**
+    LZ 的措辞是 "**in general** not"，**没有**说对每个 p 都不成立。存在一条尚未排除的调和路径
+    （抽取者假设，非原文）：若 FOK 实际使用的是**一般动量 p**（超 Virasoro Kac 行列式不为零），
+    则「一般 p ⇒ Verma 模不可约 ⇒ `Vir^-`-自由 + 最高权向量生成 ⇒ 确实是 Verma 模直和」，
+    与 LZ 在**特殊 p**（Kac 行列式为零）处的反例并存。
+    **但 FOK 全文只声明 p ≠ 0（脚注 3/6/9），没有声明 p 的一般性。**
+    ⇒ **裁决任务**：读 lian-zuckerman-1989 p.320 Remark 的反例构造（Project Euclid
+    `cmp%2F1104179468`），确定其 p 的取法。**在验证之前不得把这条调和当作事实使用。**
+  - |
+    ★★ **被归属文献的正文本项目未取得（L0）。** Brower–Friedman 1973 共 5 页（PRD 7, 535–539）。
+    已尝试入口逐条留痕在 literature/sources.bib 的 note 里（Crossref ✅、INSPIRE 摘要 ✅、
+    INSPIRE 的 report_numbers/documents/urls **三字段全 ABSENT** ⇒ CDS-OAI 与 KEK 路线在入口处
+    即被排除、OSTI purl **404**、Semantic Scholar openAccessPdf **CLOSED**、APS 全域 403）。
+    **剩余唯一现实路线：WebSearch 找 .edu 课程页扫描件，或人工从 APS 下载。**
+    ⇒ 在取得正文前，本卡无法脱离 conjecture。
+  - |
+    ★ **至少在 R 扇区，FOK 的归属大概率是误归。** 依据：被归属文献的**标题与摘要 NS-only**，
+    且 FOK 自己在 R 扇区把措辞降为 "claim"。最简单的自洽解释是**该文根本没有处理 R 扇区**
+    （⚠ 这一步是抽取者的推断，不是原文陈述）。
+    ⇒ 本卡的 R 扇区部分比 NS 扇区部分更弱。
+  - |
+    **「完全可约」与「Verma 模的无穷直和」在 FOK 那里是被当作同一句话说出来的**，
+    但严格讲后者强于前者（还要求每个不可约成分同构于一个 Verma 模）。
+    FOK 不区分这两者，本卡照录其措辞；若日后取得 Brower–Friedman 正文，这一处需要重新分辨。
+  - |
+    **本推导不涉及 `Vir_κ^-`-自由性**：那是较弱的性质，**两方都同意**
+    （LZ Corollary 2.19(iii)，LZ 的无鬼定理只用它）。本卡说的是比它强的完全可约性。
+notes: |
+  from: literature/extractions/brower-friedman-1973.md §2–§3（裁决记录）、
+  figueroa-ofarrill-kimura-1989.md §3 第 1 条 / §4 Q1、lian-zuckerman-1989.md Q1。
+
+  【★ 这条推导在图上的作用】它是 worldsheet.no-ghost-theorem-superstring-cohomological 的
+  **FOK 那条推导的一个显式依赖**（非 inferred：FOK 附录 A 的消灭定理 (A.14) 只对 Verma 模陈述，
+  FOK 的证明**确实需要**它）。而 **LZ 那条推导不依赖它**。
+  ⇒ 工具会把两条并列推导的强度差**算出来**，而不是靠 notes 口头说明：
+  FOK 那条的 effective 被压到 conjecture，LZ 那条不受影响。
+
+  【★ 为什么不建 refutation 推导】LZ 的 "in general not" 若成立于一般动量，确实反驳本命题；
+  但「in general」的确切含义与反例的 p 取法本项目未核对（见 gaps 第一条）。
+  按根 CLAUDE.md 原则 2「不确定时选低的那级」，本轮只记 conjecture，不记 refuted。
+author: curator
+created: "2026-09-11"
