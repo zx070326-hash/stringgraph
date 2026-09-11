@@ -417,7 +417,42 @@ StringFormal/
                             （Gram 判据在此处**必然**空转——`kacDet2 26 (−1) = 0` 正是零态存在的原因，
                             要走 `MvPolynomial` 系数：`X_{(μ,2)}` 系数是 `5η_μp^μ`）；
                             `p_{D−1}(2) − p_{D−2}(2) = D` 的计数。故 **`B26 2` 与
-                            `ddfSpans_bigrade_neg_two_two` 仍未关闭**
+                            `ddfSpans_bigrade_neg_two_two` 仍未关闭**（**已于
+                            `NoGhost/LevelTwoCount.lean` 关闭**）
+  NoGhost/LevelTwoCount.lean **蓝图 §B″ PR5b 在 `N = 2` 上收尾——`B26 2` 与
+                            `ddfSpans_bigrade_neg_two_two` 关闭**，是全链**第一处**被机检的
+                            张成结论真正消费 `D = 26` 的地方（`N ≤ 1` 无条件于 `D`）。三块：
+                            (1) **计数**（全部 `D`-无关）：`Finsupp.oscWeight_eq_two_cases`
+                            （level-2 占据函数只有 `single (i,2) 1` 与
+                            `single (i,1)1 + single (j,1)1` 两形，对任意指标类型 `ι`，
+                            同时服务 `p_{D−1}` 与 `p_{D−2}` 两侧）、`card_ddfLevel_two_ge`
+                            （`ι ⊕ Sym2 ι ↪ {d | N(d)=2}`，只要下界）、`card_conjFree_two_le`
+                            （`κ ⊕ Sym2 κ ↠ {d | level=2 ∧ β=0}`，`κ = {μ | μ ≠ b̃}`，只要上界；
+                            **两侧各只需单向，故不必造双射**）与 **`levelTwo_count_identity`**
+                            （`(D−1)+C(D,2) = (D−2)+C(D−1,2)+D`，**纯 Pascal 恒等式，对一切 `D`**
+                            ——这坐实了蓝图 §B′.8「计数一步永远看不见 26」）；合成
+                            `finrank_towerPhys_inf_towerBigrade_two_le`
+                            （`dim(H_phys⊓V_2) ≤ dim(ddfSpan⊓V_2) + D`）与
+                            `b26_two_of_finrank_towerNull`（`B26 2` ⟸ `dim(H_null⊓V_2) ≥ D`）。
+                            **`decide` 在 `Osc D →₀ ℕ` 上化不开**（同 `Math/PartitionCard.lean`），
+                            全部走显式分类。
+                            (2) **零态**：`alphaTwoCoeff`（`α^ν_{−2}` 分量的线性泛函）+
+                            `coeff_single_two_mul_of_mem_levelSubmodule_one`（两个 `α_{−1}` 之积
+                            没有 `α_{−2}` 分量，**只需左因子齐次**）；`typeOneTwo` /
+                            `typeOneTwo_mem_towerNullSubmodule`（Type 1 落到片上）；
+                            **`nullFamilyTwo`**——`D` 个零态 = `D−2` 个横向 Type-1 +
+                            **1 个沿 `a = b − b̃` 的 Type-1** + 1 个 Type-2；
+                            **`linearIndependent_nullFamilyTwo`（独立性不需要 `D = 26`）**，
+                            证法是三角性：先用 `α_{−2}` 分量把关系压成向量方程，再与 `p_{−2}` 配对
+                            （`p·p = −2 ≠ 0`）杀掉 Type-2 系数，最后与 `b`/`ε_j` 配对杀掉 Type-1；
+                            `le_finrank_towerNullSubmodule_inf_towerBigrade_two`。
+                            (3) **主定理** `b26_two_of_D26` 与 `ddfSpans_bigrade_neg_two_two`。
+                            **附赠**：`descTwo_single_neg_two_ne_zero`（`𝒟₂|0;p₋₂⟩ ≠ 0`，蓝图
+                            §B″ 订正列为未决且明说 Gram 判据无能为力——`α_{−2}` 分量是 `5p`，
+                            由 `p·p = −2` 逼出某分量非零）与
+                            `descTwo_single_mem_towerPhysSubmodule_iff`（该具体态物理 ⟺ `(D:K)=26`）。
+                            **未做**：`¬ B26 2`（`D ≠ 26`）的维数版——要把两个计数界升成等式并给
+                            `dim(H_null⊓V_2)` 上界；一般 `N`
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
