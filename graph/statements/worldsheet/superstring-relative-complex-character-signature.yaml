@@ -65,6 +65,10 @@ sources:
       （§9.2 读数 4）；auditor 2026-09-11 转录过 p.313–314 的 (4)(5)(6) 与 'Case 1（p·p = 0）
       sign C_rel(p,0) = 16'（见维数卡 notes），证实那几页是分情形计算，但本图没有逐字。
       ⇒ 本卡推导 status 的限制见推导 gaps。
+      ★ **【2026-09-11 更新，上面两条 ⚠ 已过时】**：researcher 第四轮页图（§10.3）已逐字核 p.312 的
+      Proposition 2.14，**与 E5 转录一致、无更正**；证明 pp.312–317 的结构（引用清单与分步骤）见 §10.4，
+      已写进本卡推导的 summary。剩余缺口只是 Lemma 2.14.1–2.14.5 各自证明的逐行细节（见推导 gaps）。
+      ⚠ 排印差：p.312 印作 p^{(8)}_κ(κ − (p·p/2))，p.317 印作 p^{(8)}_κ(κ − p·p/2)；见本卡 notes 第三段。
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.15 的证明**, p.317，逐字：'Proof. (i) We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ). Thus by Theorem 2.4, the left-hand side gives dim H⁰_rel(p,κ) while the right-hand side is char C_rel(p,κ). Hence (i) follows from Proposition 2.14 (ii). (ii) Similarly, the Euler–Poincaré Principle for signature states that Σ_{n∈Z} sign H^n_rel(p,κ) = Σ_{n∈Z} sign C^n_rel(p,κ). Again Theorem 2.4 implies that the left-hand side = sign H⁰_rel(p,κ), while the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
     note: |
@@ -78,9 +82,36 @@ sources:
     note: |
       L1（E3/E7/§9.3）。本条只供给 (H1)–(H6) 的记号语境，**不是本卡的论证输入**
       （Prop 2.14(ii) 是复形层面的计算，不用消灭定理）。
+  - ref: lian-zuckerman-1989
+    loc: "**§2, p.311，Definition 2.11 正上方的过渡句**，逐字：'Now using Theorem 2.7 and Proposition 2.10, we have the following well-defined non-degenerate hermitian form on C_rel(p,κ).'；承载者 **Proposition 2.10**, p.311，逐字：'(i) ⟨·, c₀χ₀·⟩_C restricted to ℱ(p,0) is non-degenerate. (ii) D_R|*_ℱ = −D_R|_ℱ … (iii) ⟨·, c₀χ_{1/2}·⟩_C restricted to C_rel(p,½) = ℱ(p,½) is non-degenerate.'；**Definition 2.12(i)**, pp.311–312（char/sign 的定义，及其三条前提：⟨,⟩_T 非退化、dim T^n < +∞ for all n、T^n = 0 for all large enough positive n）"
+    note: |
+      L1 逐字。literature/extractions/lian-zuckerman-1989.md **§10.1 / §10.2**（researcher 第四轮页图，期刊 pp.311–317 七页一次取全）。
+      ★ **本条关闭 (H4)「非退化」此前的无来源状态**（见本卡 notes 第一段）：原文确实印有 "non-degenerate" 一词，
+      但它在 **Definition 2.11 正上方的过渡句**里，**不在 Proposition 2.14 的陈述里**（§10.3 negative evidence：
+      Prop 2.14 的陈述与证明里没有 "positive definite"/"unitary"，"non-degenerate" 只以散文形式用在 (i) 的证明中）。
+      ★ **承载者是 Proposition 2.10(i)(iii)**，κ=0 支另经 **Theorem 2.7** 的收缩同伦 ε 转到 C_rel(p,0)。
+      引用时**不要**把非退化性记在 Prop 2.14 名下。
+      ★ **Prop 2.14(i) 的证明逐字用到它**：'By non-degeneracy we have Q* = Q'（§10.4）。
+      ⚠ **Prop 2.10(ii) 证明句有扫描件疑点**（原文印作 'D_R|*_ℱ = K acts like zero'，按上下文应为 D_R²|_ℱ = K，
+      平方上标在 1989 CMP 扫描件上极易丢失，§10.1）；本卡不引用该句，只引 (i)(iii) 与过渡句。
 tags: [superstring, brst, cohomology, rns, ramond-sector, character, signature]
 notes: |
-  【reviewer-batch26，lead 落地】(H4)「非退化」一词无来源支撑（号差对退化型亦有定义）；statement 不改，实质换代时删该词。rigorous 维持（CMP 编号命题 + 五页印出证明），条件：researcher 取 pp.311–317 后若与 E5 转录不符则降级。
+  【reviewer-batch26 的「(H4) 无来源」已解（curator 2026-09-11，small-backlog-14）】
+  researcher 第四轮页图（期刊 pp.311–317，L1 逐字，extraction §10.1）取得 Definition 2.11 正上方的过渡句
+  「Now using **Theorem 2.7** and **Proposition 2.10**, we have the following well-defined **non-degenerate**
+  hermitian form on C_rel(p,κ)」。⇒ 原文确有 "non-degenerate" 一词，承载者是 **Proposition 2.10(i)(iii)**（p.311），
+  **不在 Proposition 2.14 里**。故 (H4) 不再是无来源的附加词，statement 不改，也**不必**在实质换代时删。
+  batch26 的判断基于当时图上无来源，现作废；其附带论点「号差对退化型亦有定义」本身仍对，但与 LZ 无关——
+  LZ 的 **Definition 2.12(i)** 恰恰把「非退化」写进了 sign 有定义的前提（连同「每层有限维」「次数上有界」两条，
+  见本卡推导 gaps）。⚠ 记账修正：**非退化性不要记在 Prop 2.14 名下**，canonical loc 见 sources 第四条。
+
+  【rigorous 维持的条件已满足】batch26 记的降级条件是「researcher 取 pp.311–317 后若与 E5 转录不符则降级」。
+  §10.3 的逐字复核结论：**E5 的转录与 p.312 原文一致，无更正**（½(2κ+1)、dim R(p,κ)、下标 κ 的 p^{(8)}_κ、
+  自变量 κ − p·p/2、以及 char = … = sign 是一条双等式）。⇒ 条件满足，维持 rigorous。
+
+  【一处排印差，照抄勿统一】p.312 的 Prop 2.14(ii) 印作 p^{(8)}_κ(κ − (p·p/2))（自变量里 p·p/2 **带一层括号**），
+  p.317 的 Corollary 2.15(i) 印作 p^{(8)}_κ(κ − p·p/2)（**无内层括号**）。本卡 statement 用的是无内层括号那种
+  （与 Cor 2.15、与维数卡一致）。两者是同一表达式的两种排版，不是两个不同的量。（extraction §10.3）
   【为什么立卡（curator 2026-09-11，small-backlog-12）】
   worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989 的 gaps 第一条逐字：
   「Proposition 2.14(ii) … 在本图没有卡 … **目标卡断言的整个右端落在一条未上图的命题上**，
