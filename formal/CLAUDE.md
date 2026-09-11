@@ -227,8 +227,9 @@ StringFormal/
                             witnessConjugate_eq_neg_witnessMomentum_add_witnessLight（该标架上 b̃=b−a）；
                             **(F9) bonus**：dotVec_polarization_conj_eq_zero（纯双线性，η(ε,b̃)=0）+
                             DDFLightConeFrame.lie_conjOp_transOp（**从标架数据直接消去 lie_conjOp_transOp
-                            原本松散的 hεconj 假设**）。**未做**：卡 notes 里 (F6)(F7)(F8)⟹η(a,a)=2 的域上
-                            秩零化度论证（需要 v^⊥ 余维一 + {ε_i} 张成维数界，比本文件的打包重得多）
+                            原本松散的 hεconj 假设**）。**bonus (ii)**：DDFLightConeFrame.dotVec_self_eq_two
+                            （`[Field R]`）证出卡 notes 里 (F6)(F7)(F8)⟹η(a,a)=2，走秩零化度
+                            （v^⊥ 余维一 + {ε_i} 张成维数 ≤ D−2 的界）；不改卡的条件表，(F8) 仍是假设
   NoGhost/WitnessInt.lean   **整数见证**（reviewer-batch26）：η=diag(−1,1,…)、b=(1,1,0,…)、a=(0,1,1,0,…)、
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
