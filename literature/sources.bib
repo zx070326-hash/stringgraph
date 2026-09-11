@@ -4281,3 +4281,109 @@
              下一轮可做：正文获取（Elsevier 403 是已知障碍；CERN-TH-2253 是找 CDS 扫描件的钥匙，
              参照 goddard-thorn-1972 的 CM-P 路线）。}
 }
+
+% ---------------------------------------------------------------------------
+% 先行形式化工作（论文「先行工作」节）—— researcher 2026-09-11 登记
+% 抽取记录：literature/extractions/prior-formalizations.md
+% ---------------------------------------------------------------------------
+
+@misc{jin-2026-subregular-lean,
+  title  = {A Lean 4 Verification Report for Subregular Affine Cells and the Level $-1$ Vertex Algebra of Type $D$},
+  author = {Jin, Sihai},
+  year   = {2026},
+  eprint = {2608.20793},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.QA},
+  note   = {**L2：元数据经 arXiv API 逐字核实（2026-09-11），read_depth = abstract，正文未取。**
+            v1，提交 2026-08-21，14 页。comments 字段含「Ancillary Lean 4 source and frozen
+            Lean/Mathlib environment included」，代码 release
+            https://github.com/jshemail12345-debug/SubregularAffineCells-Lean/releases/tag/v1.0.0 。
+            伴随数学论文 arXiv:2608.11997（本项目未核）。
+            **用途：它是「顶点代数语境下的 Lean 验证报告」这一体裁的同期例子，
+            但作者在摘要里明确否认自己形式化了顶点代数。** 摘要末句逐字（L1，arXiv API）：
+            ``Thus the precise claim is a kernel-checked internal deduction from explicit
+            representation-theoretic boundary inputs, not a from-scratch formalization of vertex
+            algebras, BRST reduction, finite W-algebras, or affine Hecke theory inside Mathlib.''
+            前一句逐字：``Higher representation-theoretic results whose foundational infrastructure
+            is not presently constructed in the file are isolated as explicit semantic interfaces
+            rather than introduced as Lean axioms.''
+            ==> **不得用它支撑「顶点代数/BRST 已被形式化」**；可用它做方法论对照：
+            它用「semantic interface」承接未形式化前提，本项目用「认识论状态 + 禁止 sorry」，是两种不同解法。}
+}
+
+@misc{carnahan-vertexalg-2026,
+  title  = {vertexAlg: a Lean 4 repository for vertex algebras},
+  author = {Carnahan, Scott},
+  year   = {2026},
+  howpublished = {\url{https://github.com/ScottCarnahan/vertexAlg}},
+  note   = {**L2：GitHub API 元数据 + README/源文件逐字读取（2026-09-11）。这是软件仓库，不是论文。**
+            仓库描述字段 ``Vertex Algebras''；主语言 Lean；创建 2026-05-15，最后 push 2026-08-31。
+            同作者另一仓库 ScottCarnahan/vertexStuff（2023-07-18 建，2025-10-30 最后 push）只有三个
+            文本文件（Roadmap.txt / MonsterRoadmap / BinomialNotes.txt），**无 Lean 代码**。
+            Kytola 的 virasoro-lean-2025 §1.3 以 [Car25] 引用 Carnahan 的 VOA 形式化工作。
+            **README ``Done so far'' 逐字四条**：``Definition of vertex algebra''；
+            ``some formal power series manipulations''；``loop algebras''；
+            ``Lie algebra extensions and 2-cocycles''。
+            **★ README ``TODO'' 段逐字（本项目最关键的一条否定证据）**：
+            ``Lie algebras: Positive energy representations, vertex operators attached to Lie algebra
+            elements, generalized Kac-Moody Lie algebras, twisted denominator formula, virasoro
+            representations, no-ghost theorem''；同段另有
+            ``Vertex algebras: Dong's lemma, Jacobi identity for local fields, Vacuum representations,
+            invariant inner products, Lattice vertex algebras, ...''。
+            ==> **无鬼定理、Virasoro 表示、不变内积在目前最先进的 Lean 顶点代数项目里仍是未来目标。**
+            主目标（README ``Main Goals''）：构造 Monster VOA、证 Borcherds 1992 月光定理。
+            VertexAlg/VertexBasic/Defs.lean 有真正的 VertexAlgebra class（stateField + associativity
+            + locality + Borcherds 恒等式分片），**sorry 计数 0**；其 docstring 把 Conformal
+            （内部 Virasoro 作用）列在 To do。
+            VertexAlg/Lie/PBW.lean 的 docstring 首行逐字 ``Attempt at PBW''，只有辅助定义，
+            3 处 sorry **全在被注释掉的代码块内** ==> **PBW 定理本身没有**。
+            ⚠ 使用限制：仓库随时可能推进，任何「尚未做」的断言必须写明读取日期 2026-09-11 与
+            最后 push 2026-08-31。}
+}
+
+@misc{prove2me-2026,
+  title  = {Prove2Me: An Open Collaborative Platform for Scaling Math Formalization},
+  author = {Chen, Shuze and Marwaha, Kunal and Lu, Xiaoyang and Yuen, Henry and Peng, Tianyi},
+  year   = {2026},
+  eprint = {2608.28433},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.AI},
+  note   = {**L2：元数据经 arXiv API 逐字核实（2026-09-11）：v2，提交 2026-08-28，primaryClass 是 cs.AI
+            （不是 cs.LO）**，comments 给项目站点 https://prove2.me 。正文未取，read_depth = abstract。
+            本项目的方法论来源之一，见 docs/METHODOLOGY.md（陈述/证明分离、审计面固定在核心、
+            回译审计、里程碑规范化、只编译局部）。docs/METHODOLOGY.md 已按此 id 引用，本条只补登记。}
+}
+
+@misc{massot-leanblueprint,
+  title  = {leanblueprint: a plasTeX plugin for writing blueprints of Lean 4 projects},
+  author = {Massot, Patrick},
+  howpublished = {\url{https://github.com/PatrickMassot/leanblueprint}},
+  note   = {**L2：README 逐字读取（2026-09-11）。无出版年，按 literature/CLAUDE.md 的
+            <firstauthor>-<slug> 规则命名。**
+            2020 年为 Sphere Eversion Project 所建，现被 PFR、FLT、Carleson 等项目采用。
+            **对本项目最重要的一点：blueprint 的依赖图与 stringgraph 的图是不同的东西。**
+            blueprint 的节点 = LaTeX 环境（默认 definition/lemma/proposition/theorem/corollary），
+            边 = \uses 宏声明的「用到」关系，节点颜色 = **形式化流水线的进度**。
+            README 的 \graphcolor 默认色表逐字为配置键：``stated''、``can\_state''、``not\_ready''、
+            ``proved''、``can\_prove''、``defined''、``fully\_proved''、``mathlib''；
+            配套宏 \leanok（``the surrounding environment is fully formalized''）、\notready、
+            \mathlibok（``marks nodes that were already merged into mathlib''）、\lean（挂 Lean 声明名）。
+            ==> **blueprint 的状态刻画的是「离形式化还有多远」，不是「底层论证本身有多严格」。**
+            它没有 physical-argument / conjecture / refuted 这样的等级，也没有沿图传播的有效状态。
+            论文写差异时应精确到这一句，不要笼统地说「已有工作只有静态文档」。}
+}
+
+@misc{flt-project,
+  title  = {The Fermat's Last Theorem Project},
+  author = {Buzzard, Kevin and others},
+  howpublished = {\url{https://imperialcollegelondon.github.io/FLT/}},
+  note   = {**L2：项目主页逐字读取（2026-09-11）。无出版年，按 <firstauthor>-<slug> 规则命名。**
+            自述逐字：``An ongoing multi-author open source project to formalise a proof of
+            Fermat's Last Theorem''。Kevin Buzzard 主持，Imperial College London，EPSRC 资助；
+            使用 Lean + blueprint（见 massot-leanblueprint），另有 GitHub 仓库与文档站。
+            本项目在 docs/METHODOLOGY.md 里把它与 Anthropic 2026-09-04 的
+            ``Formalizing Fermat's Last Theorem'' 报告一起作为「DAG 当 agent 外部记忆」的来源。
+            ⚠ 注意区分：Anthropic 那篇是**博客/报告**
+            （https://www.anthropic.com/research/formalizing-fermats-last-theorem），
+            与本条的 Imperial FLT 项目不是同一个东西，引用时不要混为一谈。}
+}
