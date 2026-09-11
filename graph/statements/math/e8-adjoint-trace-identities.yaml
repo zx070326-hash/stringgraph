@@ -38,6 +38,13 @@ sources:
       L1。**归一化不同，须换算**（换算见 conv.gauge-trace-normalization 的 sources 第二条，已复算）：
       代入 tr_Bilal F² = Tr F²/30 得 Tr F⁴ = (1/100)(Tr F²)²、Tr F⁶ = (1/7200)(Tr F²)³，
       与本节点一致。因为本节点与该来源的记号 tr F² **不指同一个量**，此条只作交叉核验。
+  - ref: van-ritbergen-1998
+    loc: "App. A.5「Indices and trace identities for E₈」, eqs. (176)(177)，PDF p. 35：Tr F⁴ = 36 (1/60 Tr F²)²、Tr F⁶ = 30 (1/60 Tr F²)³，「in the representation (248)」"
+    note: |
+      **2026-09-11 补登（curator，抽取记录 literature/extractions/math-sources.md §44.5）**。L1 逐字。
+      化简 36/60² = 1/100、30/60³ = 1/7200，**与本节点逐位相等**；两者的 Tr 都是 248 维伴随迹，无需换算。
+      这是本节点**独立于 GS 谱系**（GS → GSW → Antonelli；Bilal 为重标度版）的第二来源，且带编号、可公开获取。
+      ⚠ 该 PDF 首页印的「26 November 2024」是 arXiv 重编译时间戳，不是论文日期（1998/1999）。
 tags: [algebra, lie-algebra, trace-identity, e8, casimir, anomaly, phase2, lean-candidate]
 notes: |
   【为什么放在 math】同 math.so-usp-adjoint-fundamental-trace-identities：纯表示论恒等式，无物理输入。
@@ -52,5 +59,16 @@ notes: |
   【Lean 化】比 so/usp 一支更简单：只需在 ℚ-代数上把 Ω₄, Ω₈, Ω₁₂ 定义成 x, x²/100, x³/7200，
   因子化恒等式随即是一行 `field_simp; ring`。但同样注意：**「这些多项式确实是 e₈ 的伴随迹」
   不在 Lean 岛范围内**（Mathlib 没有 E₈ 的不变量理论，连 dim E₈ = 248 都没有）。
+
+  【★ 2026-09-11：系数的来路已接线（curator-e8-wire）】main 合入 formal/StringFormal/Math/E8Roots.lean
+  （合并提交 fb489ee）：对 Humphreys §2.10 的 240 根、任意 x ∈ ℚ⁸ 证得 Σ_α (α·x)⁴ = (1/100)(Σ_α (α·x)²)²、
+  Σ_α (α·x)⁶ = (1/7200)(Σ_α (α·x)²)³。图里接线为：
+  · math.e8-root-system（definition，rigorous）：240 根的显式列表；
+  · math.e8-root-system-power-sums（**formalized**，lean_decl StringFormal.Math.E8.e8_trace_identities）：根幂和；
+  · math.adjoint-weights-are-roots-and-zero 与 math.chevalley-restriction-theorem（两座桥，来源 L0，physical-argument）；
+  · 新推导 math.e8-adjoint-trace-identities--via-root-power-sums 把四者接到本卡，有效状态被两座桥压在 physical-argument。
+  **本卡不挂 lean_decl**（reviewer 已裁）：Lean 声明说的是根幂和，本卡说的是 𝔢₈ 取值二形式的伴随迹，
+  中间四步李理论/多项式恒等式不在 Lean 内。上一段「连 dim E₈ = 248 都没有」现在部分过时：
+  E8Roots.lean 有 `e8_dim_248 : 240 + 8 = 248`，但那只是算术，「dim 𝔢₈ = |Φ| + rank」仍是 Lean 外的李理论。
 author: curator
 created: "2026-09-11"
