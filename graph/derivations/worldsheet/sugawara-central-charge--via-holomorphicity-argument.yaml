@@ -11,8 +11,10 @@ depends_on:
     note: |
       供给 d^{ab}、f^{abc} 完全反对称（(11.5.19)–(11.5.20) 里 f^{ab}{}_c f^{cb}{}_d ∝ Q_g d^a{}_d 一类的缩并）
       与伴随 Casimir Q_g。⚠ h(g) = Q_g/ψ² 的定义与 ψ² 的归一化不在该卡上（原书 pp. 61–65 未核实）。
-  - id: worldsheet.tt-ope-central-charge
-    note: 供给「TT OPE 的四阶极点系数 = c/2」这一中心荷定义，把 (11.5.24) 读成 c^{g,k}。
+  - id: worldsheet.tt-ope-central-charge-v2
+    note: |
+      【2026-09-11 换代改指（curator-small-backlog-3）】原指 worldsheet.tt-ope-central-charge（v1），该卡已 superseded_by v2：v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance。本推导用的是**定义半**（c = TT OPE 四阶极点系数的两倍、及其与 conv.virasoro-standard 的归一化），故改指 v2；论证与有效状态不变。
+      供给「TT OPE 的四阶极点系数 = c/2」这一中心荷定义，把 (11.5.24) 读成 c^{g,k}。
   - id: worldsheet.operator-product-expansion
     note: |
       供给 OPE 及其**收敛域**（'valid only for two operators close compared to all others'）——
