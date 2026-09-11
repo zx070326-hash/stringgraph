@@ -112,6 +112,11 @@ gaps:
     **Lean 证的是 ℚ⁸，用在 ℂ⁸/ℝ²⁴⁸ 上**：(3) 末与 (6) 的域扩张论证是多项式恒等式的标准事实，
     未形式化；E8Roots.lean 的 docstring 未提这一点。
 notes: |
+  reviewer-verified: reviewer-batch18, 2026-09-11 —— **只签 (3) 末（ℚ⁸ → ℂ⁸ 的域扩张）、(4)（合并）、
+  (5)（Chevalley 限制的单性）、(6)（多项式恒等式到 𝔤 取值偶次形式）四步；(2)（𝔢₈ 根集合 = Humphreys
+  列表的根系识别，本图无卡）**不签**。按 lead 指示 own status **保持 physical-argument**、kind 不改：
+  (2) 那条隐含依赖没有节点，rigorous 例外条款的「前提已完整写出」在这里不满足。**
+
   【为什么目标卡不挂 lean_decl】reviewer 已裁：Lean 声明 e8_trace_identities 说的是根幂和，
   目标卡说的是 𝔢₈ 取值二形式的伴随迹，中间隔着 (1)(2)(5)(6) 四步非 Lean 的内容。
   Lean 逐句对应的那一半是 math.e8-root-system-power-sums（formalized），本推导把它接到目标卡上。

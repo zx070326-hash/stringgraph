@@ -87,6 +87,10 @@ notes: |
   reviewer-verified: reviewer-batch13, 2026-09-11 —— **只覆盖 (A) 那半**（P¹ 两片正则性的
   Laurent 幂次比较，复核为正确的有限步初等计算）。(C)（圆盘 / Schwarz 反射）**未**被复核，
   故本推导整体 status 保持 physical-argument，见 gaps 第二条。
+  reviewer-verified: reviewer-batch18, 2026-09-11 —— **只签 (2a) 的反例**（φ ≡ 1 在 H 上全纯且边界取实值
+  却非零，u^{−4} 在 u = 0 有四阶极点，故 (2a) 不可省）；status 不因此改变。
+  ⚠ 另一 curator（small-backlog-2）正在把本卡拆成球面 / 圆盘两半；本签名只写在本 v2 推导的 notes，
+  拆分后的两条推导若要继承此签名由拆分者自行决定。
 
   **★ 改指记录（2026-09-11，curator-batch10-14-fix）**：目标由
   `math.no-holomorphic-quadratic-differentials-on-sphere-and-disk`（v1）改为 `…-v2`，
