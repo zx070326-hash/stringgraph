@@ -1,0 +1,49 @@
+id: susy.brane-charges-in-susy-algebra--via-extension-of-point-particle-algebra
+target: susy.brane-charges-in-susy-algebra
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: susy.bps-bound-point-particle-d4
+    note: |
+      供给被扩展的模板：(B.2.36) 的点粒子中心荷代数与「中心荷进入 `{Q, Q̄}` 反对易子」这一结构。
+      **原书自己指定了这条转承**（App. B p.448 逐字「Rather than explain this here, we introduce it
+      in its natural physical context: first in section 11.6, and then in more variety in chapter 13.」；
+      §B.5 p.454 逐字「additional central charges carried by extended objects are introduced in their
+      physical context in section 13.2.」）。⇒ 非 inferred。
+      ⚠ 方向是「点粒子版是模板、膜版是扩展」，**不是**「膜版由点粒子版推出」；
+      (13.2.9) 的具体形式（哪些 p、系数 τ_p/p!、β^{M_1}…β^{M_p}）原书没有从 (B.2.36) 导出。
+  - id: branes.d-brane-bps-half-susy
+    note: |
+      供给 (13.2.9c) 里出现的 `β^⊥`：(13.2.10) 逐字 `β^{μ_1}⋯β^{μ_p} = β^⊥Γ^0`（up to an overall sign），
+      而 `β^⊥ = ∏_{m ⊥ 膜} β^m` 正是该卡中未破缺超对称组合 `Q + β^⊥Q̃` 的那个矩阵（(13.2.5)(13.2.6)）。
+      即：代数里膜荷项的旋量结构与"Dp 膜保留哪 16 个超对称"是同一件事的两种写法。
+  - id: branes.d-brane-rr-coupling
+    note: |
+      供给 (13.2.9c) 中 `Q^R_{M_1…M_p}` 的物理含义（Dp 膜带 R–R (p+1)-形式荷，IIA 偶 p / IIB 奇 p）。
+      没有它，(13.2.9c) 右端只是一组无解释的守恒荷。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, pp. 144–145：(13.2.9a)(13.2.9b)(13.2.9c) 与归一化改动句 → (13.2.10) → 自承缺口句「the algebra (13.2.9) is still not complete: the magnetic NS–NS charge is missing」"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E14（L1）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2 p.448（点粒子限定 + 「we introduce it … in chapter 13」）、§B.5 p.454（「additional central charges carried by extended objects are introduced … in section 13.2」）"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21、#E25（L1）。
+summary: |
+  (1) App. B (B.2.36) 给出的是「只含点粒子可携带的荷」时最一般的超对称代数；原书明说扩展物体的荷
+      会带来附加项，并把它推到 §11.6 与 ch.13 的物理语境里讲。
+  (2) §13.2 在十维 type II 中写出这些附加项：F 弦荷 `Q^{NS}_M` 以 `±(2πα')^{−1}Q^{NS}_M` 的形式
+      与动量 `P_M` 并列进入 `{Q, Q̄}` 与 `{Q̃, Q̃̄}`（(13.2.9a,b)，左右动符号相反）；
+      D 膜荷 `Q^R_{M_1…M_p}` 进入混合反对易子 `{Q, Q̃̄}`，系数 `τ_p/p!`，旋量结构 `β^{M_1}⋯β^{M_p}`
+      （(13.2.9c)），IIA 取偶 p、IIB 取奇 p。
+  (3) 由 (13.2.10) `β^{μ_1}⋯β^{μ_p} = β^⊥Γ^0`，(13.2.9c) 的旋量结构与 §13.2 前半得到的
+      「Dp 膜保留 `Q + β^⊥Q̃`」完全对应：膜荷项与它保留的那 16 个超对称是同一结构。
+  (4) 荷的归一化被改为「每单位世界体一个」，故弦张力 `(2πα')^{−1}` 与膜张力 `τ_p` 显式出现。
+gaps:
+  - "**★ 原书自承代数不完整**：p.145 逐字「Incidentally, the algebra (13.2.9) is **still not complete**: the *magnetic NS–NS charge* is missing. This is not carried by D-branes or F-strings. We discuss this further in the next chapter.」⇒ 任何以 (13.2.9) 为依据的 BPS 论证都带着这个缺口。"
+  - "**(13.2.9) 没有被推导**：原书直接写出这三式，没有从代数一致性、从世界体作用量、或从振幅计算把系数 `(2πα')^{−1}`、`τ_p/p!` 定出来。本推导只复述结构与来源，不复述一个不存在的论证。"
+  - "**没有新的最一般性主张**：App. B 的「most general algebra」限定在点粒子；ch.13 补上膜荷后**没有**声明 (13.2.9) 加上磁 NS–NS 荷就是最一般的。即图上现在没有任何节点断言十维 type II 超代数的完备形式。"
+  - "**(13.2.10) 的整体符号未定**：原书逐字「up to an overall sign」（与 §13.1 (13.1.6) 的 `up to signs` 同源）。"
+  - "**§11.6 未核**：原书说膜荷「first in section 11.6」（杂化弦 (11.6.32)），本项目尚未抽该节（ch13 抽取记录 §3.3）。"
+  - "**归一化改动的影响未追踪**：'all charges normalized to one per unit world-volume' 与图上其他卡（如 branes.d-brane-rr-charge-value 的 μ_p）的荷归一化是否一致，原书没有给出换算，本图也没有核。"
+author: curator-v2-appB
+created: "2026-09-11"
