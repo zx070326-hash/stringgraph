@@ -44,7 +44,17 @@ sources:
       v2 仍有此印刷错误，本卡按上下文写 d^{d+1}y，**不照抄 d⁵y**
       （extractions/witten-1998-ads.md E-W2）。
 tags: [holography, ads-cft, boundary-value-problem, laplace]
+superseded_by: holography.ads-laplace-dirichlet-unique-v2
 notes: |
+  【★ 本卡已换代为 holography.ads-laplace-dirichlet-unique-v2（lead 裁决 2026-09-11，
+  依 reviewer-gkpw 审查）】本卡陈述文本有三处问题，v2 逐条订正：
+  (1) 把式号 **(2.8)** 贴在 D_i D^i φ = 0 上——错：原文里那条方程**无编号**，
+      (2.8) 是 (2.5) 表示下含 L²/sinh²y 项的方程（印刷页 p.6）；
+  (2) 存在性论证漏掉原文的枢纽步「某个线性组合在 y = 0 附近光滑、且该解在无穷远有非零常数项」；
+  (3) 唯一性那一步用到的「两个同边界值解之差平方可积」是**编者推断**，原文没有，
+      且与存在性那一步用同一事实有逻辑循环风险。
+  以下原始 notes 保留不动作为历史记录。
+
   from: witten-1998-ads#E-W2（另见 E-W3、E-W4）。
 
   【为什么单独立卡】这是 Witten 全文里**唯一自称给出证明**的部分，也是 (2.11) 那条 ansatz

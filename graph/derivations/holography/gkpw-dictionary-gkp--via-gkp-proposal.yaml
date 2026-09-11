@@ -1,5 +1,5 @@
-id: holography.gkpw-dictionary--via-gkp-proposal
-target: holography.gkpw-dictionary
+id: holography.gkpw-dictionary-gkp--via-gkp-proposal
+target: holography.gkpw-dictionary-gkp
 kind: conjecture-support
 status: conjecture
 depends_on: []
@@ -44,7 +44,8 @@ summary: |
      原文对这一步的自评逐字是 "the evaluation of this one component is a sufficient test"——
      即自认这是**检验**而不是推导。
 
-  **全文没有任何推导把 (12)/(23) 从更基本的东西导出**；(12)(23) 始终是输入而非输出。
+  **全文没有任何推导把 (12)/(23) 从更基本的东西导出**；(12)(23) 始终是输入而非输出
+  （上面第 1、5 步的近视界几何与世界体耦合是**动机性材料**，不是导出 (12)(23) 的论证链）。
   自称最强处是 "we propose an identification" / "the claim that"，
   故 kind: conjecture-support、status: conjecture 是原文措辞的直译，不是编者判断。
 gaps:
@@ -75,7 +76,7 @@ gaps:
   - >-
     存在唯一性只有一句话的理由（"the equation of motion is just the laplace equation on the curved
     space"），没有引任何定理，也没有指定函数空间。相比之下 Witten §2.2 给了显式论证
-    （本图 holography.ads-laplace-dirichlet-unique）。
+    （本图 holography.ads-laplace-dirichlet-unique-v2）。
   - >-
     有质量弦态的处理有原文自列的隐患：最小线性方程 (39) 可能只对特定场定义成立，
     因而 (44) 里的算子 O 与规范理论算子之间可能有**能量依赖的 leg factors**；
@@ -90,16 +91,27 @@ gaps:
 notes: |
   from: gubser-klebanov-polyakov-1998#E1–E6、E11、E12、E13；抽取记录 §5 建议节点 A。
 
-  【与 Witten 支的关系】两条推导的假设集不同、不可互相替代：
-  截断边界 z = R vs 共形边界 S^d；洛伦兹 (−,+,+,+) vs 欧氏；
-  "W = S_on-shell" vs "⟨e^{∫φ_0 O}⟩ = Z_S"。Witten p.4 亲口称 GKP 为
-  "independent work [36] in which a very similar understanding … is developed"，
-  这是把两者作为同一陈述的两条独立推导的**原文层面**背书。
+  【本推导的归属变更】2026-09-11 按 lead 裁决（依 reviewer-gkpw 审查）把原先的单卡
+  holography.gkpw-dictionary 拆成 Witten 卡与 GKP 卡，本推导随之改指
+  holography.gkpw-dictionary-gkp（文件同步改名，id 前缀随 target）。
+  拆卡理由是「一个节点一个命题」：两篇的等式两边对象不同
+  （"W = S_on-shell 极小值" vs "⟨e^{∫φ_0 O}⟩ = Z_S"）、边界不同（截断 z = R vs 共形边界 S^d）、
+  号差不同（洛伦兹 (−,+,+,+) vs 欧氏），约定声明也必须分开。
+
+  【与 Witten 卡的关系】Witten 印刷页 p.4 亲口称 GKP 为 "independent work [36] in which a very
+  similar understanding … is developed"。这说明两篇是独立提出的**同一类**想法，
+  因此两篇的一致性**不是**对任一条的独立检验；
+  但正因为假设集不同、不可互相替代，它们在图里是两条**陈述**而不是一条陈述的两条推导。
 
   【为什么不标 physical-argument】docs/STATUS_LEVELS.md 的「断言 + 骨架」裁决把
   physical-argument 留给「来源给出论证骨架但关键步骤只有断言」的情形。
-  GKP 这里不是论证不完整，而是**根本没有论证**：(12)(23) 是直接提出的 identification，
-  原文自称 propose / claim，事后用两点函数与吸收截面做 "a sufficient test"。
+  GKP 这里不是论证不完整，而是**没有推导，只有事后检验**：(12)(23) 是直接提出的 identification
+  （原文自称 propose / claim），随后用膨胀子两点函数与中心荷 c = N²/4 做原文自称的
+  "a sufficient test"。
+  ⚠ 措辞尺度（2026-09-11 订正，reviewer-gkpw 指出）：本条原先写「根本没有论证」，**过头了**——
+  原文确实给了**动机性材料**（近视界几何 (8)–(11)、D3 世界体耦合 (5)(6)(22)(31)、
+  视界正则性定解、大 N 与 α' 修正的压低论证）。准确的说法是：这些材料没有被组织成
+  从更基本假设推出 (12)(23) 的推导，(12)(23) 始终是输入而非输出。
   若日后有人认为「由 D3 世界体耦合 (5)(6)(22)(31) 提供了启发式推导」而要改成 physical-argument，
   抽取记录 §5 要求必须在此注明那是编者判断，因为原文没有这样自我描述。
 

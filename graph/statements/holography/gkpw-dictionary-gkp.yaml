@@ -1,0 +1,81 @@
+id: holography.gkpw-dictionary-gkp
+kind: proposition
+title: GKP 的字典：规范理论连通生成泛函 = 超引力作用量在截断边界 z = R 上的极小值（式 (12)(23)）
+statement: |
+  本卡只记 Gubser–Klebanov–Polyakov hep-th/9802109v2 §2 的两条等式。Witten 的版本
+  （式 (2.11)(2.12)(2.13)，欧氏号差、边界是共形边界 S^d）是**另一张卡**
+  holography.gkpw-dictionary-witten。本卡也**不**写教科书通式
+  Z_CFT[φ_0] = Z_string[φ|_∂ = φ_0]——GKP 全文没有任何配分函数（Z）陈述（见 notes）。
+
+  号差是洛伦兹 (−,+,+,+)；背景是 N 根重合 D3 膜的近视界几何 AdS_5 × S^5，
+  坐标 z = R²/r，视界在 z → ∞；**边界取在有限截断 z = R**，不是共形边界 z → 0。
+
+  ─────────────────────────────────────────────────────────────────────
+  记 W 为规范理论连通格林函数的生成泛函，S 为 AdS 空间上的超引力作用量，
+  K 为 S 在给定边界条件下的极小值。则
+
+      W[g_{μν}(x^λ)] = K[g_{μν}(x^λ)] = S[g_{μν}(x^λ, z)] ,               (12)
+      W[φ(x^λ)]      = K[φ(x^λ)]      = S[φ(x^λ, z)] .                    (23)
+
+  (12) 的边界条件是
+
+      ds² = (R²/z²)( g_{μν} dx^μ dx^ν + dz² ) + O(1)   当 z → R ,          (13)
+
+  且全部涨落在 z → ∞ 处为零。(23) 对应世界体耦合
+
+      S_int = ∫ d⁴x φ(x^λ) O(x^λ) ,                                       (22)
+
+  其中 φ(x^λ, z) 是运动方程的唯一解，满足 φ(x^λ, z) → φ(x^λ) 当 z → R；
+  GKP **不用记号 φ_0**，边界值就写作少一个宗量的 φ(x^λ)。
+
+  ─────────────────────────────────────────────────────────────────────
+  等式左右两边的对象是「连通生成泛函」与「on-shell 作用量极小值」，
+  **没有**负号（现代教科书常写 W = −S_on-shell），
+  且 GKP 是对 K 直接求二阶导得 ⟨OO⟩（(26)）而不是 −∂²W。
+uses_conventions: [conv.metric-mostly-plus]
+sources:
+  - ref: gubser-klebanov-polyakov-1998
+    loc: |
+      arXiv:hep-th/9802109v2, §2 开头 p.4，式 (12)(13)；§2.2 p.6，式 (22)(23)；
+      主张句在 p.3 §1 末。
+    note: |
+      逐字前导句：(12) 前 "The basic idea is to identify the generating functional of connected
+      Green's functions in the gauge theory with the minimum of the supergravity action, subject to
+      some boundary conditions at z = R and z = ∞"；(23) 前 "Then the analogue of (12) is the claim
+      that"。**全文（正文 pp.1–14）不出现 "conjecture" 一词，也没有任何配分函数（Z）陈述**
+      （extractions/gubser-klebanov-polyakov-1998.md §1、E1、E4、Q3）。
+tags: [holography, ads-cft, dictionary, generating-functional, conjecture]
+notes: |
+  from: gubser-klebanov-polyakov-1998#E1、E2、E3、E4（另见 E5、Q1–Q4、Q6）。
+
+  【本卡的来历】由 holography.gkpw-dictionary 拆分而来（lead 裁决 2026-09-11，依 reviewer-gkpw
+  的审查）。原卡把 GKP 的 (12)(23) 与 Witten 的 (2.11)(2.12)(2.13) 写在**同一个 statement** 里，
+  违反「一个节点一个命题」：等式两边的对象不同、边界不同（有限截断 z = R vs 共形边界 S^d）、
+  号差不同（洛伦兹 (−,+,+,+) vs 欧氏），且在文献里是被分别提出的。
+  拆分后约定声明也分开：本卡只用 conv.metric-mostly-plus（GKP 的号差），
+  不再声明 conv.ads-radius-unit（GKP 显式保留 R，不取 R = 1）。
+  姊妹卡：holography.gkpw-dictionary-witten。
+
+  【为什么没有配分函数版本】GKP 全文正文 pp.1–14 没有任何 Z 陈述，最强自称是
+  "we propose an identification"（p.3）与 "the claim that"（p.6），摘要里更弱：
+  "We suggest a means of obtaining certain Green's functions"。把 Z = Z 形式写进本卡
+  等于给原文没写的东西背书。
+
+  【与 Witten 卡的独立性】Witten p.4 逐字 "After this work was substantially completed, I learned
+  of independent work [36] in which a very similar understanding of the the [sic] CFT/AdS
+  correspondence to what we describe in section 2 is developed"（[36] = GKP hep-th/9802109）。
+  互引是**单向**的：Witten 引 GKP，GKP v2 的 25 条参考文献里没有 hep-th/9802150。
+  两篇的一致性因此**不是**对任一条的独立检验，只说明同一想法被独立提出。
+
+  【本卡不依赖 Maldacena 的对偶猜想】GKP 只说 [14]（Maldacena）"synthesized" 了非临界弦与
+  D 膜两条路线，**没有**把 (12) 建立在 [14] 之上，也没有复述对偶陈述。详见本卡推导的 gaps。
+
+  【记号差别】GKP 不用 φ_0；GKP 写 O(2,4)（不是 SO(2,4)）；在 D3 世界体处写 U(N)（p.2）、
+  在引 't Hooft 处写 SU(N)（p.1），同一篇内部就不一致
+  （见 holography.gauge-group-su-n-from-kk-spectrum）。
+
+  【版本】loc 锚定 arXiv:hep-th/9802109v2 (27 Mar 1998)；
+  v1 未读，arXiv comments 自陈 v2 为 "minor revisions, 1 reference added"；
+  PLB 428 (1998) 105–114 发表版式号未与 v2 核对。
+author: curator
+created: "2026-09-11"

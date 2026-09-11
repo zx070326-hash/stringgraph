@@ -73,8 +73,9 @@ notes: |
   若要用 (2.45) 应新建卡；本卡的两条推导都只论证标量情形。
 
   【为什么有效状态会是 conjecture】两条推导本身都是 physical-argument（可复算的推导链），
-  但都依赖 holography.gkpw-dictionary（读出「两点函数的幂次 = 边界算子维数」这一步用的就是字典），
-  而字典的有效状态是 conjecture。这正是本项目要暴露的结构：
+  但都依赖字典卡（读出「两点函数的幂次 = 边界算子维数」这一步用的就是字典）：
+  Witten 支依赖 holography.gkpw-dictionary-witten，GKP 支依赖 holography.gkpw-dictionary-gkp
+  （2026-09-11 原单卡 holography.gkpw-dictionary 拆成这两张）；两张字典卡的有效状态都是 conjecture。这正是本项目要暴露的结构：
   「维数-质量关系」不比它所依赖的字典更强。
 
   【版本】Witten 的 loc 锚定 arXiv:hep-th/9802150v2；GKP 的 loc 锚定 arXiv:hep-th/9802109v2。

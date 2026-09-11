@@ -67,7 +67,8 @@ notes: |
   论证不完整属于 gaps 轴（docs/STATUS_LEVELS.md「断言 + 骨架」裁决）。
 
   【有效状态会被压到 conjecture】本卡依赖 holography.dimension-mass-relation，
-  后者依赖 holography.gkpw-dictionary（conjecture）。即：
+  后者依赖 holography.gkpw-dictionary-witten（conjecture；2026-09-11 原单卡
+  holography.gkpw-dictionary 已拆成 Witten 卡与 GKP 卡）。即：
   「对偶的规范群是 SU(N)」这一结论建立在 GKPW 字典这条猜想之上，
   它不是一条独立于字典的场论事实。
 

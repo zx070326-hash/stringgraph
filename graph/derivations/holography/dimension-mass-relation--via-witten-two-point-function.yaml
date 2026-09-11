@@ -3,10 +3,11 @@ target: holography.dimension-mass-relation
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: holography.gkpw-dictionary
+  - id: holography.gkpw-dictionary-witten
     inferred: false
     note: >-
-      非 inferred：读出维数的那一步用的就是字典。原文把 I(φ) 算成 (2.42)
+      非 inferred：读出维数的那一步用的就是字典（原 holography.gkpw-dictionary 已拆成
+      Witten 卡与 GKP 卡，本推导走 Witten 卡）。原文把 I(φ) 算成 (2.42)
       I(φ) = (c'(d+λ₊)/2) ∫ dx dx' φ_0(x)φ_0(x')/|x−x'|^{2(λ₊+d)}，
       然后逐字说 "This is the expected two point function of a conformal field O of dimension
       λ₊ + d."——即把 exp(−I) 当作 ⟨exp∫φ_0 O⟩ 的鞍点，正是 (2.10)+(2.11)。
@@ -19,9 +20,12 @@ depends_on:
 sources:
   - ref: witten-1998-ads
     loc: |
-      arXiv:hep-th/9802150v2：§2.5 "The Massive Case" p.19–20，式 (2.33)(2.34)(2.35)(2.36)；
-      §2.5 "Computation Of Two Point Function" p.21，式 (2.37)(2.38)(2.41)(2.42)(2.43)(2.44)；
+      arXiv:hep-th/9802150v2：§2.5 "The Massive Case" 印刷页 p.19–20，
+      式 (2.33)(2.34)(2.35)(2.36) 与 φ_0 是质量维数 −λ₊ 共形密度的论证（p.20）；
+      §2.5 小标题 "Computation Of Two Point Function" 自印刷页 p.20 末起，
+      式 (2.37) 在 p.20、(2.38)(2.41)(2.42)(2.43)(2.44) 在 p.21；
       §2.6 p.25 式 (2.48) 重复结论；p-形式版 (2.45) 在 p.22；BF 界 (2.47) 在 p.24。
+      （页码是**原文印刷页码**，PDF 页 = 印刷页 + 1；p.20–21 本轮由 curator 按 arXiv v2 页图复核。）
 summary: |
   Witten §2.5 的推导链（式号依 arXiv v2，AdS 半径 = 1）：
 
@@ -37,21 +41,38 @@ summary: |
   3. 因此**找不到**在无穷远趋于常数的解，φ_0 必须重新定义：取在边界有单零点的正函数 f，
      解取成 φ ∼ f^{−λ₊} φ_0（(2.36)）；由 f → e^w f 得 φ_0 → e^{wλ₊}φ_0，
      故 φ_0 是长度维数 λ₊（质量维数 −λ₊）的**共形密度**，不是函数。
-  4. 上半空间坐标下解体–边界传播子：(−x_0^{d+1}(d/dx_0)x_0^{−d+1}(d/dx_0) + m²)K = 0（(2.37)），
+  4. **共形权论证（这才是原文给出 Δ 的那一步，印刷页 p.20）**：由第 3 步，
+     f → e^w f 时 ds̃² → e^{2w} ds̃² 而 φ_0 → e^{wλ₊} φ_0，故 φ_0 是长度维数 λ₊、
+     **质量维数 −λ₊** 的共形密度。原文紧接着逐字写："If, therefore, in a conformal field theory
+     on the boundary of AdS_{d+1}, there is a coupling ∫ φ_0 O for some operator O, then O must have
+     conformal dimension d + λ₊. **Let us verify this** by computing the two point function of the
+     field O."
+     即：耦合 ∫_{S^d} φ_0 O 要共形不变，而 φ_0 的质量维数是 −λ₊、积分测度贡献 −d，
+     于是 O 的维数必须是 d + λ₊。**结论是从 φ_0 的共形权重读出的，两点函数只是"验证"。**
+     （对照无质量情形：那里 φ_0 的共形权重为零，同一个论证给出 Δ = d，见 E-W4。）
+
+  5. 上半空间坐标下解体–边界传播子：(−x_0^{d+1}(d/dx_0)x_0^{−d+1}(d/dx_0) + m²)K = 0（(2.37)），
      在 x_0 = 0 处消失的解是 K(x_0) = x_0^{d+λ₊}；平移+反演得
      K = x_0^{d+λ₊}/(x_0² + |x|²)^{d+λ₊}（(2.38)），于是
      φ(x) = c' ∫dx' [x_0^{d+λ₊}/(x_0²+|x−x'|²)^{d+λ₊}] φ_0(x')（(2.41)）。
-  5. 代回作用量得
+  6. 代回作用量得
 
          I(φ) = (c'(d+λ₊)/2) ∫ dx dx' φ_0(x)φ_0(x') / |x−x'|^{2(λ₊+d)}      (2.42)
 
      原文逐字："This is the expected two point function of a conformal field O of dimension λ₊ + d."
-  6. 结论（(2.43)(2.44)）：Δ = d + λ₊，是 Δ(Δ − d) = m² 的**较大根**，
+     注意措辞是 "the **expected**"——这一步是核对第 4 步的预期，不是独立地导出维数。
+  7. 结论（(2.43)(2.44)）：Δ = d + λ₊，是 Δ(Δ − d) = m² 的**较大根**，
      即 Δ = ½(d + √(d² + 4m²))。§2.6 (2.48) 重复。
 
-  整条链是可复算的物理推导（渐近分析 + 积分变换 + 代回作用量），
-  但其**物理含义**依赖 (2.11) 的 ansatz：把 exp(−I) 读成生成泛函、把 (2.42) 的幂次读成算子维数，
-  两步都由字典给出。故 status: physical-argument，而有效状态会被字典压到 conjecture。
+  **论证结构**：结论 Δ = d + λ₊ 由第 4 步的共形权论证给出（原文 "If, therefore, … then O must
+  have conformal dimension d + λ₊"），第 5–6 步的两点函数计算是原文自称的**验证**
+  （"Let us verify this"、"the expected two point function"）。本图把两者收在同一条推导里，
+  因为原文把它们写成一条连续的论证；若日后要拆，共形权论证那一半更短也更接近可严格化。
+
+  整条链是可复算的物理推导（渐近分析 + 共形权计数 + 积分变换 + 代回作用量），
+  但其**物理含义**依赖 (2.11) 的 ansatz：把 exp(−I) 读成生成泛函、把 φ_0 认作算子 O 的源、
+  把 (2.42) 的幂次读成算子维数，这些都由字典给出。
+  故 status: physical-argument，而有效状态会被字典压到 conjecture。
 gaps:
   - >-
     (2.42) 的推导跳过了正规化：把 (2.41) 代回 (2.33) 时体积分在边界附近发散，
@@ -79,6 +100,12 @@ gaps:
     p-形式与非标量情形 (2.45) 出自同一节，但本推导只论证标量情形。
 notes: |
   from: witten-1998-ads#E-W11、E-W12（另见 E-W17、QW2、QW6、QW7）。
+
+  【2026-09-11 补充】按 lead 裁决（依 reviewer-gkpw 建议）补上印刷页 p.20 的**共形权论证**作为
+  第 4 步：原文是先由 φ_0 → e^{wλ₊}φ_0 断定 φ_0 是质量维数 −λ₊ 的共形密度，
+  再由耦合 ∫φ_0 O 的共形不变性得 Δ = d + λ₊，然后才说 "Let us verify this by computing the two
+  point function"。补这一步之前，本推导看起来像是「维数只能从两点函数的幂次读出」，
+  与原文的论证方向不符。同时把依赖改指拆分后的 holography.gkpw-dictionary-witten。
 
   【约定】AdS 半径 = 1（conv.ads-radius-unit）。恢复显式 R 后 (2.43) 读作 Δ(Δ−d) = (mR)²。
   与 GKP (45) 在 d = 4 时代数等价（见姊妹推导 --via-gkp-bessel-asymptotics）。

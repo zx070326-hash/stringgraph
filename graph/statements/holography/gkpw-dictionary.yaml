@@ -88,7 +88,19 @@ sources:
       that"。**全文（正文 pp.1–14）不出现 "conjecture" 一词，也没有任何配分函数（Z）陈述**
       （extractions/gubser-klebanov-polyakov-1998.md §1、E1、E4、Q3）。
 tags: [holography, ads-cft, dictionary, generating-functional, conjecture]
+superseded_by: holography.gkpw-dictionary-witten
 notes: |
+  【★ 本卡已换代，拆成两张卡（lead 裁决 2026-09-11，依 reviewer-gkpw 审查）】
+  本卡的 statement 把 Witten 的 (2.11)(2.12)(2.13) 与 GKP 的 (12)(23) 写在一起，
+  违反「一个节点一个命题」：两篇的等式两边对象不同、边界不同（共形边界 S^d vs 有限截断 z = R）、
+  号差不同（欧氏 vs 洛伦兹 (−,+,+,+)），在文献里也是被分别提出与论证的；
+  写在一张卡上还迫使 uses_conventions 同时声明两套互不适用的约定。替代卡是**两张**：
+    - holography.gkpw-dictionary-witten —— (2.11)(2.12)(2.13)，欧氏、共形边界、conv.ads-radius-unit；
+    - holography.gkpw-dictionary-gkp    —— (12)(23)，洛伦兹、截断 z = R、conv.metric-mostly-plus。
+  schema 的 superseded_by 是单值字段，填的是 Witten 卡；**真正的替代是上面两张卡一起**。
+  原挂在本卡上的两条推导已分别改名改指到两张新卡（git mv + target 改指），本卡现无推导。
+  本卡以下的原始 notes 保留不动作为历史记录，其中关于「一条陈述挂两条推导」的论证已不再适用。
+
   from: witten-1998-ads#E-W4、E-W5、E-W6（另见 E-W13、E-W18、QW1–QW4）；
   gubser-klebanov-polyakov-1998#E1、E2、E3、E4（另见 E5、Q1–Q4、Q6）。
 
@@ -109,9 +121,10 @@ notes: |
   【有效状态应为 conjecture，且两条推导对 Maldacena 对偶的依赖是非对称的】
   Witten 支**依赖** holography.ads5-cft4-duality-v2（原文自我定位就是「把 [13] 的猜想精确化」），
   GKP 支**不依赖**（原文只说 [14] "synthesized" 了两条路线，没有把 (12) 建立在 [14] 之上）。
-  这个非对称结构是有意保留的：即使 Maldacena 对偶被推翻，GKP 那条推导仍独立地把
-  「超引力 on-shell 作用量 ↔ 规范理论关联函数」立为一条可单独证伪的假设。
-  两份抽取记录的 §5 都明确建议保留这个结构。
+  这个非对称结构在拆卡后由两张卡各自承载（Witten 卡依赖对偶卡，GKP 卡不依赖）。
+  ⚠ 原文此处曾写「即使 Maldacena 对偶被推翻，GKP 那条推导仍独立地立着」——
+  该措辞已删：工具对同级推导的取舍是按 derivations_for 的返回顺序（文件名字母序）平局裁决的，
+  当时显示的「GKP 支胜出」只是 `gkp` 排在 `witten` 前面，不是图给出的结论。
 
   【φ_0 在 Witten 篇里有两个不同含义】无质量时 φ_0 = φ|_∂（(2.11) 用的就是这个）；
   有质量时 (2.34) 没有趋于常数的解，φ_0 由 φ ∼ f^{−λ₊} φ_0（(2.36)）定义，

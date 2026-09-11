@@ -1,5 +1,5 @@
-id: holography.gkpw-dictionary--via-witten-ansatz
-target: holography.gkpw-dictionary
+id: holography.gkpw-dictionary-witten--via-witten-ansatz
+target: holography.gkpw-dictionary-witten
 kind: conjecture-support
 status: conjecture
 depends_on:
@@ -13,26 +13,44 @@ depends_on:
       supergravity on AdS_{d+1} was not given in [13]; obtaining one will be the goal of the present
       paper."。另有三处把设定挂在 [13] 上："in any one of the examples in [13]"（p.8）、
       "in the scenario of [13]"（p.10）、"under precisely the conditions proposed in [13]"（p.2）。
-      即 Witten 支明确以 Maldacena 的对偶猜想为背景并自称是其精确化。
+      即本推导明确以 Maldacena 的对偶猜想为背景并自称是其精确化。
+      ⚠ **代理关系**：Witten 的 (2.11)(2.12)(2.13) 是对**一般 d** 讲的，而 [13] 的设定被他
+      逐字称为 "in any one of the examples in [13]"（复数）。本图目前只有 D3/AdS_5×S^5 那一张
+      对偶卡（holography.ads5-cft4-duality-v2 是 Maldacena 1997 的 D3 情形），
+      故这条边是**用 D3 卡充当「[13] 的那一族例子」这一 general-d 主张的代理**；
+      其余例子（M2、M5 等）本图尚无节点。补齐后应把本边改指更一般的卡或补若干条平行边。
   - id: holography.conformal-boundary-so2d
+    convention_map: >-
+      本推导（及目标卡）只用到依赖卡的 (iv)：**欧氏**单位球 B_{d+1} 与 S^d 上的共形结构，
+      AdS 半径 = 1（conv.ads-radius-unit）。依赖卡另外声明的 conv.metric-mostly-plus
+      只管它的 (i)–(iii)（洛伦兹二次曲面模型，η_{ij} 号差 −+…+），本推导不使用那一半，
+      故两侧的 metric family 声明不同不构成冲突。换算就是 Witten §2.1 自己的欧氏化声明
+      "the identification of the boundary of AdS_{d+1} with d-dimensional Minkowski space holds
+      also with Euclidean signature"（印刷页 p.4）。
     inferred: false
     note: >-
       非 inferred：(2.11)(2.12)(2.13) 里的 "S^d"、"边界条件"、"共形结构 h" 的含义由同文 §2.1
       的 (2.1)–(2.6) 给出（欧氏 AdS = 单位球 B_{d+1}，边界 S^d 只带共形结构）；
       (2.12) 的 Z_S(h) 定义直接用到 (2.2) 的 f 与共形结构的等价类。
-  - id: holography.ads-laplace-dirichlet-unique
+  - id: holography.ads-laplace-dirichlet-unique-v2
     inferred: false
     note: >-
-      非 inferred：§2.3 p.8 逐字把它列为前提——"Suppose that … one has a massless scalar field φ
+      非 inferred：§2.3 印刷页 p.8 逐字把它列为前提——"Suppose that … one has a massless scalar field φ
       on AdS_{d+1} obeying the simple Laplace equation D_i D^i φ = 0, with no mass term or curvature
       coupling, or some other equation with the same basic property: the existence of a unique
-      solution on B̄_{d+1} with any given boundary values."（该性质由 §2.2 的 (2.7)–(2.9) 建立）。
+      solution on B̄_{d+1} with any given boundary values."（该性质由**同文 §2.2**、印刷页 p.6 的
+      (2.7)(2.8)(2.9) 与其正文建立；那是 Witten 自己的论证，**不是** Graham–Lee 或
+      Fefferman–Graham 的定理——后两篇讲的是引力侧「给定边界共形结构反解体 Einstein 度规」）。
+      依赖改指 v2 卡：v1 卡 holography.ads-laplace-dirichlet-unique 已换代
+      （式号 (2.8) 错配等三处，见 v2 卡 notes）。
 sources:
   - ref: witten-1998-ads
     loc: |
-      arXiv:hep-th/9802150v2：§2.3 "Ansatz For The Effective Action", p.8–10，
-      式 (2.10)(2.11)(2.12)(2.13)；前提在 §2.2 p.6–7 与 §2.1 p.5–6；
+      arXiv:hep-th/9802150v2：§2.3 "Ansatz For The Effective Action"，印刷页 p.8–10
+      （φ_0 与耦合 ∫φ_0 O 的定义在 p.8，式 (2.10)(2.11) 在 p.9，式 (2.12)(2.13) 在 p.10）；
+      前提在 §2.2 印刷页 p.6–7 与 §2.1 印刷页 p.4–5；
       自我定位在 p.2 与 p.8；对 GKP 的定性在 p.4。
+      （页码一律是**原文印刷页码**，PDF 页 = 印刷页 + 1；本轮由 curator 按 arXiv v2 页图复核。）
     note: |
       §2.3 小节标题逐字就是 "Ansatz For The Effective Action"。
 summary: |
@@ -78,7 +96,9 @@ gaps:
   - >-
     源必须足够小：引力侧的适定性靠 Graham–Lee（只对**接近标准共形结构**的边界共形结构成立，
     且 p.8 逐字说这个限制 "is probably also necessary for most values of d"）；
-    本项目未一手核实 Graham–Lee（sources.bib 里 graham-lee-1991 是 L0 登记）。
+    本项目**未取得 Graham–Lee 正文**，已确认无开放获取全文（sources.bib 里 graham-lee-1991 仍是
+    L0，书目 L2，见 literature/extractions/math-sources.md §41.3–§41.4），
+    因此引用它时**不得写任何定理号**，只能挂 Witten p.7 的逐字转述。
   - >-
     规范场版本的适定性**已知在大场下失败**：Witten 只说 "One expects an analog of the
     Graham-Lee theorem …"、"hopefully similar"，且脚注 4 用 Chern class 给出显式反证：
@@ -103,13 +123,21 @@ gaps:
 notes: |
   from: witten-1998-ads#E-W1–E-W6、E-W13、E-W18；抽取记录 §5 建议节点 A。
 
-  【为什么 depends_on 里有 ads5-cft4-duality-v2 而 GKP 支没有】这是两篇原文措辞的差别，
+  【本推导的归属变更】2026-09-11 按 lead 裁决（依 reviewer-gkpw 审查）把原先的单卡
+  holography.gkpw-dictionary 拆成 Witten 卡与 GKP 卡，本推导随之改指
+  holography.gkpw-dictionary-witten（文件同步改名，id 前缀随 target）。
+  拆卡前两条推导挂在同一个 statement 上，这在有效状态报告里会产生一个**假象**：
+  工具对同级推导的取舍按 `derivations_for` 的返回顺序（文件名字母序）平局裁决，
+  于是「GKP 支在 Maldacena 卡之外独立立着」这件事看起来像图给出的结论，
+  实际上只是 `gkp` 排在 `witten` 前面。拆卡后两条陈述各自独立承载自己的依赖集，
+  这个假象消失，**不需要也不应该**再用「即使对偶被推翻，另一支仍立着」之类的措辞去描述它。
+
+  【为什么本推导依赖 ads5-cft4-duality-v2 而 GKP 那张卡不依赖】这是两篇原文措辞的差别，
   不是编者的组织选择。Witten 明确自称「把 [13] 的猜想精确化」（见上面第一条依赖的 note）；
   GKP 只说 [14] "synthesized" 了两条路线，没有把 (12) 建立在 [14] 之上，
-  全文也不含 "conjecture" 一词。保留这个非对称结构，stringgraph why 才能显示
-  「即使 Maldacena 对偶被推翻，GKP 那条推导仍独立地立着」。
+  全文也不含 "conjecture" 一词（见 holography.gkpw-dictionary-gkp--via-gkp-proposal 的 gaps）。
 
-  【互引关系】Witten p.4 逐字 "After this work was substantially completed, I learned of
+  【互引关系】Witten 印刷页 p.4 逐字 "After this work was substantially completed, I learned of
   independent work [36]"（[36] = GKP hep-th/9802109）；GKP v2 的 25 条参考文献里
   **没有** hep-th/9802150。互引是单向的。
 

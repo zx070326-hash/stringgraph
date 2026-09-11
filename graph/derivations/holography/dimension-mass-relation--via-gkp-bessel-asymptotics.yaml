@@ -3,10 +3,11 @@ target: holography.dimension-mass-relation
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: holography.gkpw-dictionary
+  - id: holography.gkpw-dictionary-gkp
     inferred: false
     note: >-
-      非 inferred：GKP 读出维数的那一步用的是 (23) W[φ] = K[φ] = S[φ]——
+      非 inferred：GKP 读出维数的那一步用的是 (23) W[φ] = K[φ] = S[φ]
+      （原 holography.gkpw-dictionary 已拆成 Witten 卡与 GKP 卡，本推导走 GKP 卡）——
       先由 K 的二阶变分得到两点函数（同 (26) 的做法），再从两点函数领头非解析项
       ∼ (kR)^{2ν} R^{−4} 的幂次读出 Δ。没有 (23) 就没有「幂次 = 维数」这一步。
 sources:
