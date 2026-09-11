@@ -1,5 +1,5 @@
-id: worldsheet.superstring-relative-cohomology-vanishing--via-lian-zuckerman-1989
-target: worldsheet.superstring-relative-cohomology-vanishing
+id: worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989
+target: worldsheet.superstring-relative-cohomology-vanishing-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -15,8 +15,8 @@ depends_on:
             2L₀ − c/12 ⇒ **L₀^LZ = L₀^本图 − c/24**。这与 LZ Definition 2.16 要求
             π(L₀)v = κv（NS 取 ½、R 取 0）的截距记法一致。
             NS 扇区 (κ = ½) 两侧的 [L,L] 中心项同 ∝ (m³ − m)，无额外平移。
-      ⚠ 本定理的断言（哪些鬼数上上同调为零）**不受这两条换算影响**：它们只改 c 与 L₀ 的
-      标定，不改复形的鬼数分次。但 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 这一步必须经过 (1)。
+      ⚠ 本定理的断言（哪些次数上上同调为零）**不受这两条换算影响**：它们只改 c 与 L₀ 的
+      标定，不改复形的分次。但 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 这一步必须经过 (1)。
   - id: worldsheet.superstring-brst-charge
     note: |
       供给本图一侧的 Q_B 与两条定义性关系 {Q_B, b_n} = L_n、[Q_B, β_r] = G_r，
@@ -119,11 +119,13 @@ summary: |
   （Theorem 2.4，证明为 §3 的 Corollary 3.4）的证明是"**有限过滤 + 长正合列 + Poincaré
   对偶**"三步：
 
-  1. **复形与分次**：复形是 p.306 (8) 的 C(p,κ) = R(p,κ) ⊗ U(κ) ⊗ Λ_∞ ⊗ T，鬼数为 U + κ
-     的本征值；零模空间 T 按 p.306 (7) 选为使能量分次 **deg 有上界**的那一个
+  1. **复形与分次**：复形是 p.306 (8) 的 C(p,κ) = R(p,κ) ⊗ U(κ) ⊗ Λ_∞ ⊗ T，**鬼数**为 U + κ
+     的本征值（取值在 Z + κ）；零模空间 T 按 p.306 (7) 选为使能量分次 **deg 有上界**的那一个
      （κ=½ 取 T_{1/2}、κ=0 取 T₀ ⊕ T₁）。相对复形按 Definition 2.2 取 Ker b₀ ∩ Ker K
-     （NS）、再交 Ker β₀ ∩ Ker D_R（R）；由 Proposition 2.1 的 {Q, b₀} = K、[Q, β₀] = D_R
-     知 Q 保持之。
+     （NS）、再交 Ker β₀ ∩ Ker D_R（R），其上标 n 是 **F^n = B^{n−κ} ∩ Ker K 的"相对次数"
+     （= 鬼数 + κ ∈ Z，两扇区都整数）**——目标卡 v2 的 (H4) 订正的正是这一点，
+     本推导第 2–4 步里的 m、n 一律按相对次数读。
+     由 Proposition 2.1 的 {Q, b₀} = K、[Q, β₀] = D_R 知 Q 保持之。
   2. **Poincaré 对偶（Lemma 3.1）**：H^m_rel ≅ (H^{−m}_rel)*。⇒ 只需证 **m < 0 时消灭**，
      正次数由对偶自动跟上。这是"集中在**一个**次数"而非"集中在非负次数"的来源。
   3. **有限过滤（Proposition 3.2）+ 伴随分次（Proposition 3.3）**：deg 有上界使相对复形上
@@ -175,7 +177,7 @@ gaps:
      Bose-sea charge，FOK 称 'Henneaux 表示'）。**LZ 的 T₀ ⊕ T₁ 与 C[γ₀] 给出的相对上同调
      是否同构，本图未核实**：FOK (5.1) 只证了它自己的两种表示（Schrödinger 与 Henneaux）
      同构，且逐字限定 'the isomorphism is only an isomorphism of **ungraded** vector spaces'
-     ——而本卡断言的恰是**分次**信息（哪些鬼数上为零），故那条同构即便成立也不能直接搬运。
+     ——而本卡断言的恰是**分次**信息（哪些相对次数上为零），故那条同构即便成立也不能直接搬运。
      ⇒ 若日后要把断言 (2) 从存在量词升为「对一切可接受表示」，本推导不够。"
   - "**FOK 1989 是本定理的第二条（独立）候选来源，本轮未建推导。**
      figueroa-ofarrill-kimura-1989 的标题逐字就含 'vanishing … theorems'，两个消灭定理是
@@ -199,22 +201,33 @@ gaps:
      可追溯性止于 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10) 的显式系数公式
      （L1，但那是物理侧的形式计算）。"
 notes: |
+  ★★【本推导为何改指 v2（curator，2026-09-11，依 reviewer-batch22 + lead 裁决）】
+  目标卡由 worldsheet.superstring-relative-cohomology-vanishing 换代到 -v2，唯一实质改动是
+  (H4)：旧卡写「n 是鬼数」，而 LZ 的鬼数取值在 Z + κ（NS 半整数），Theorem 2.4 的
+  "unless n = 0" 用的是 Definition 2.2 的**相对次数** n = 鬼数 + κ ∈ Z。
+  这是**纯换名式换代**（陈述只改分次的名目、证明链一字未动），按 graph/CLAUDE.md 2026-09-12
+  细则，本推导 `git mv` 后改指新目标，旧卡不再留推导（也无活推导依赖旧卡）。
+  本推导相应改动只有两处措辞（summary 第 1 步说明相对次数、若干处「鬼数」改「相对次数」），
+  **依赖边、来源、gaps 全部未动**。
+
   【本推导与两条下游推导的关系】
-  本卡是下列两条推导的**共同上游**，它们自 2026-09-11 起显式 depends_on 目标卡
-  （**非 inferred**：LZ 在两处证明里都明确引用 Theorem 2.4）：
+  本卡是下列两条推导的**共同上游**，它们自 2026-09-11 起显式 depends_on 目标卡：
     - worldsheet.no-ghost-theorem-superstring-cohomological--via-lian-zuckerman-1989
-      （Corollary 2.15(ii) = 本定理 + Euler–Poincaré + Proposition 2.14(ii) 的 char = sign）；
+      （Corollary 2.15(ii) = 本定理 + Euler–Poincaré + Proposition 2.14(ii) 的 char = sign；
+      **非 inferred**，Corollary 2.15 的证明直接引 Theorem 2.4）；
     - worldsheet.brst-cohomology-equals-ocq-physical-superstring--via-lian-zuckerman-1989
-      （Theorem 2.20 用本定理使 H⁰_rel 是唯一非零者、λ 的等距性质有意义，再用
-      Corollary 2.15(i) 与 Corollary 2.19(i) 的维数相等收尾）。
+      （Theorem 2.20 **经 Corollary 2.15(i) 间接**用到本定理，再用 Corollary 2.19(i) 的
+      维数相等收尾；**非 inferred**，但引用是间接的——2026-09-11 依 reviewer-batch22 PLAUSIBLE
+      订正了那条边原先「Thm 2.20 证明明确引用 Thm 2.4」的措辞）。
   ⚠ **不构成循环**：本定理的证明（§3）不用 Corollary 2.15、不用 Theorem 2.20、
   不用任何厄米形式；方向是 Theorem 2.4 → Corollary 2.15 → Theorem 2.20，与图上的边同向。
 
   【与玻色弦一侧的对应】
   LZ 1989 Theorem 2.4 ↔ FGZ 1986 Theorem 2.7(i)。LZ 逐字自述 'This is the analogue of the
   vanishing theorem proven by FGZ.'（Theorem 2.4 紧随句）。
-  ⚠ 玻色弦一侧的消灭定理在本图**也没有独立卡**（只在
-  worldsheet.no-ghost-theorem-brst--via-fgz 的 sources 里），是同型的记账缺口，已列入报告。
+  ★ **2026-09-11：玻色弦一侧已建卡 worldsheet.bosonic-relative-cohomology-vanishing**，
+  旧 notes 记的"同型记账缺口"至此关闭。⚠ 两条论证**不是同一条的两个实例**：FGZ 的路线经
+  Theorem 1.12，其假设含"V 带非退化厄米形式"；本推导的路线完全不用厄米形式。
 
   按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md E3（含 §4 Q1、
   §5 第一条对 curator 的建议「建议单建 worldsheet.superstring-relative-cohomology-vanishing」）
