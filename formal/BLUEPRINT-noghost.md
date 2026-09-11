@@ -1402,3 +1402,672 @@ PR4 落在 `NoGhost/SpuriousElimination.lean`（85 条声明，约 1300 行，`c
     第 3 条（(B-26) 可能不落在本架构里）**未被触及**：本轮把 `ddf-spans` 压到只剩 (B-26)，
     但没有对 (B-26) 本身做任何工作，§B′.9 关于「零态不是逐 `N` 的奇异向量」的硬事实依然是
     下一步唯一的路标。
+
+## §B″ (B-26)：零态产生计划（2026-09-12）
+
+本节只处理 (B-26)：`ddf-spans` 在 PR0–PR4 落地后**唯一**剩下的缺口，也是整条无鬼定理链上
+`D = 26` **唯一**进入的地方。目标是给出一条 Lean 可写的路线，而不是证明。
+
+
+
+写这份计划时做了三件 §B′ 没做的事：(1) 把 `N = 2` 的 26 个零态**从头手算一遍**，
+定位出 `D = 26` 唯一进入的那个方程；(2) 对候选路线 (a)(b)(c) 逐条做对抗性检查，
+其中两条广为流传的说法被**证伪**（见 B″.3、B″.5）；(3) 找到一条把 (B-26) 之外的
+**全部**剩余缺口（`§B′.9` 第 2 条的线性无关、`conjFreeSlice ⊓ spurious = ⊥`、
+`towerKerK ⊓ V_N = conjFreeSlice` 的 `⊆` 半边）一次关掉的 `D`-无关引理。
+
+> **取证等级**：本节所有数值与代数式都是**手算**（2026-09-12，formalizer），**未经 Lean 校验**，
+> 除了两处例外：`kacDet2` 的定义逐字取自 `Virasoro/FockFreeLowLevel.lean:292`，
+> `Fock.pairing_levelTwoScalar_physical` 的判别式取自 `formal/TODO.md` 的
+> `negative-norm-above-26` 条目。凡是手算，下文一律标 ⟨手算⟩。
+> 任何据此动手的人，**第一步应当是把 B″.2 的 `N = 2` 账在 Lean 里复算一遍**（PR5b 的 `N = 2` 特例，
+> 见 B″.7），那是整条路线最便宜的证伪点。
+
+### B″.0 结论先行
+
+1. **推荐路线是 (b) 的一个加强版**，记作 **(b′)**：先证一条 `D`-无关的
+   **「Virasoro × 光锥」PBW 基定理**（每个 level 片的基是 `{L_{−λ} · (b̃-free 光锥单项式)}`），
+   再在其上做零态构造。理由：这条基定理**同时**给出 `dim S_N`、`dim H_N` 的**精确值**
+   （而不只是 PR4 的不等式）、关掉 §B′.9 第 2 条、并且是 Fock 模在 `Vir⁻` 下自由
+   （FGZ Prop 2.6(i) / LZ Cor 2.19(iii)）的一个**不经 Kac 行列式**的证明。
+   §B.2 判死的是「走 FGZ 的路证自由性」，不是「自由性本身没用」——本节主张自由性**极其有用**，
+   而且 PR3/PR4 已经把它的全部机器造好了。
+2. **`D = 26` 唯一进入的方程是**（⟨手算⟩，见 B″.2）：
+
+   ```
+   L_2 (2 L_{-2} + 3 L_{-1}^2) φ = (c - 26) · φ        对满足 L_0 φ = -φ、L_1 φ = L_2 φ = 0 的 φ
+   ```
+
+   等价地，就是本仓库已有的 `kacDet2` 在质壳 `h = 1 − 2` 上的值：
+
+   ```lean
+   theorem kacDet2_massShell_two (c : R) : kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
+   -- 证明：rw [kacDet2]; ring        （`kacDet2 c h = 2h(16h² + 2h(c−5) + c)`）
+   ```
+
+   这比现有的 `kacDet2_massShell_26 : kacDet2 (26:R) ((1:R) - 2) = 0` **强**：
+   它把「在 26 处为零」升级成「零点**只有** 26」，是整条链上唯一一处能写下 `D − 26 = 0` 的地方。
+   **建议无论走哪条路线都先把这一行提交**——它是 (B-26) 的临界性的最小机检见证。
+3. **候选 (c)（特征标 / 分拆恒等式）不是一条路线，应当否决。** §B′.8 已证「计数一步永远看不见 26」，
+   本节给出更强的版本：**(B-26) 不可能由任何维数记账推出**，因为所有维数恒等式在
+   `dim Z_N` 这一项上是循环的（B″.5 的两行证明）。分拆恒等式在本路线里只以
+   **`Finsupp` 按行拆分的双射**出现（把 `d` 拆成「`b̃` 行」+「其余」），
+   `Math/PartitionCard.lean` 的 `p(m)` 数值**一次都不需要**。
+4. **本计划不关闭 (B-26)。** 它把 (B-26) 归约到一条 B″.11 写明的、单一的、可精确陈述的障碍
+   （两族零态在 `N ≥ 5` 处的重叠维数恰好是 Euler 五边形数的系数），
+   并顺带关掉 PR4 遗留的全部非-(B-26) 缺口。
+
+### B″.1 目标、已有输入、以及一条重要的记号约定
+
+固定 `D`、域 `K`（特征零）、`η`、`a`、`b`、横向标架 `Ε`、光锥标架 `F : DDFLightConeFrame η a b`。
+沿用 §B′.2 的记号 `V_N`、`H_N`、`D_N`、`Z_N`，并补两个：
+
+```
+C_N  := conjFreeSlice hD F N          -- b̃-free 光锥单项式张成（PR4 已有）
+S_N  := towerSpuriousSubmodule η a b ⊓ V_N
+```
+
+**(B-26) 的目标**（§B′.3 形式 (iii)）：`D = 26` 时 `finrank Z_N ≥ p_{D−1}(N) − p_{D−2}(N)`。
+
+已有的三条输入（全部 `D`-无关、全部在 Lean 里）：
+
+* **(I1)** `towerBigrade_le_conjFreeSlice_sup_towerSpurious`：`V_N ≤ C_N ⊔ S_N`（PR4 的 β-消元）。
+* **(I2)** `towerPhys_inf_towerBigrade_eq_towerOrthComplement`：`H_N = spurious^⊥ ⊓ V_N`；
+  加 `eq_zero_of_mem_towerBigrade_of_orthogonal`（片上型无根基）。
+* **(I3)** `Fock.eq_zero_of_towerPairing_left_eq_zero`（整塔上型非退化）+
+  `finrank_towerPhys_inf_towerBigrade_le`：`dim H_N ≤ p_{D−1}(N)`。
+
+**记号约定（本节反复用到，先说清楚）**：`towerLop` 是 `towerDiag`（逐纤维），
+纤维 `j` 上用该纤维自己的动量 `p_j = towerMomentum a b j`。因此本节所有陈述
+**本质上都是单个 `Fock D K` 上的陈述**，只是动量取成 `p_j`；
+唯一需要的关于 `p_j` 的事实是 `dotVec η b (towerMomentum a b j) = 1`
+（`dotVec_towerMomentum_right_of_isotropic`，对一切 `j` 成立）。
+⇒ **本节的引理应当在 `Fock` 层以「动量 `p`，附带 `b·p = 1`」的形式陈述，塔版是推论。**
+这一条是把 PR4 从反对角线推广到任意 rung 的正确做法（PR4 的 `conjFreeSlice`
+把 rung 写死成 `-(N:ℤ)`，见 B″.11 第 3 条的成本）。
+
+### B″.2 手算基准：`N = 2` 的完整账，与 `D = 26` 唯一进入的那个方程
+
+⟨手算⟩ 这一小节是本节其余部分的地基。全部用抽象 Virasoro 关系
+（`conv.virasoro-standard`，`[L_m,L_n] = (m−n)L_{m+n} + (c/12)m(m²−1)δ`，`c = D`）
+加 `L_{−n}† = L_n`（`Fock.towerPairing_towerLop_left`，已有），**不用光锥标架**。
+
+设 `p := p_{−2} = a − 2b`。由 `a·a = 2`（`dotVec_self_eq_two`）与 `b·a = 1`、`b·b = 0`：
+
+```
+p·p = a·a − 4 a·b + 4 b·b = 2 − 4 + 0 = −2 ,      h := ½ p·p = −1 = a₀ − 2  （a₀ = 1）
+```
+
+片 `V_2` 的伪态由 **`D + 1` 个生成元**张成（`towerSpuriousSubmodule` 的 `n = 1, 2` 两段；
+`n ≥ 3` 因为落不进 level 2 而不贡献）：
+
+```
+χ_v := L_{-1} (v·α_{-1}) |p⟩ = (v·α_{-2})|p⟩ + (v·α_{-1})(p·α_{-1})|p⟩ ,   v ∈ K^D
+χ_0 := L_{-2} |p⟩          = (p·α_{-2})|p⟩ + ½ Σ_μ η_μ (α^μ_{-1})² |p⟩
+```
+
+（第一式就是已有的 `Fock.Lop_neg_one_apply_polState`；第二式是 `Fock.Lop_neg_two_apply_one`。
+两者都已在 Lean 里，这是本小节能被廉价复算的原因。）这 `D + 1` 个向量线性无关：
+`χ_v` 的 `α_{-2}` 分量对 `v` 单射，而 `χ_0` 的 `η`-迹项 `Σ_μ η_μ (α^μ_{-1})²`
+不在 `{(v·α_{-1})(p·α_{-1})}` 的张成里（`D ≥ 2`）。
+
+**伪态上的 Gram**（三条，逐条只用一次对易子）：
+
+```
+⟨χ_v, χ_u⟩ = ⟨(v·α_{-1})|p⟩ , L_1 L_{-1}(u·α_{-1})|p⟩⟩
+           = ⟨v·α_{-1} , 2L_0 (u·α_{-1})|p⟩ + L_{-1}(u·p)|p⟩⟩
+           = (u·p)(v·p)                                   （2L_0 那一项的本征值 h+1 = 0）
+⟨χ_v, χ_0⟩ = ⟨v·α_{-1} , 3 L_{-1}|p⟩⟩ = 3 (v·p)          （[L_1, L_{-2}] = 3L_{-1}）
+⟨χ_0, χ_0⟩ = 4h + c/2 = c/2 − 4                           （[L_2, L_{-2}] = 4L_0 + c/2）
+```
+
+于是在坐标 `(v, t) ↦ χ_v + t χ_0` 下
+
+```
+G((v,t),(u,s)) = (v·p)(u·p) + 3t(u·p) + 3s(v·p) + (c/2 − 4) t s
+```
+
+**这是一个秩 ≤ 2 的型**（它只通过两个线性泛函 `v ↦ v·p` 与 `(v,t) ↦ t` 看参数）。
+把它限制在二维子空间 `span{(p,0), (0,1)}` 上：
+
+```
+        ⎡ (p·p)²   3(p·p) ⎤   ⎡  4   −6 ⎤
+  G₂ =  ⎣ 3(p·p)   c/2−4  ⎦ = ⎣ −6  c/2−4 ⎦ ,      det G₂ = 4(c/2 − 4) − 36 = 2(c − 26)
+```
+
+⭐ **`(p, 0)` 就是 `L_{−1}²|p⟩`，`(0,1)` 就是 `L_{−2}|p⟩`，所以 `G₂` 逐字是
+`span{L_{−2}|p⟩, L_{−1}²|p⟩}` 上的 Kac/Shapovalov 二阶 Gram**，
+而 `det G₂ = 2(c − 26)` 与本仓库已有的 `kacDet2` 完全一致：
+
+```
+kacDet2 c h = 2h(16h² + 2h(c−5) + c)        （Virasoro/FockFreeLowLevel.lean:292）
+kacDet2 c (1 − 2) = 2(c − 26)               ⟨手算，`ring` 一行可验⟩
+```
+
+**结论（`N = 2`）**：`rank G = 2` 当 `c ≠ 26`，`rank G = 1` 当 `c = 26`
+（后者因为 `c/2 − 4 = 9 = 3·3` 使 `G` 分解成 `(v·p + 3t)(u·p + 3s)`）。故
+
+```
+r_2 := dim(S_2 ⊓ H_2) = (D + 1) − rank G = D   当 D = 26 ；= D − 1   当 D ≠ 26
+p_{D−1}(2) − p_{D−2}(2) = D                    （对一切 D）
+```
+
+⇒ ⭐ **`B26 2` 与 `D = 26` 等价**。这是整条链上第一处、也是唯一一处
+能把「`D = 26`」写成一个**方程**而不是一个假设的地方。`D = 26` 时 `350 = 324 + 26` ✓
+（`350 = p_{25}(2)`、`324 = p_{24}(2)`），与 §B′.8 的独立核算一致。
+
+⚠ **这条等价的成立前提逐条列清楚**（免得被引用时放大）：`a₀ = 1`（即 `dotVec η a a = 2`）；
+`hbb`/`hba`（`b·b = 0`、`b·a = 1`）；`D ≥ 2`；`dim D_2 = p_{D−2}(2)`
+（`SliceDim.lean` 的 (P2)，需要有序域经 `ddf_span_pos`）；以及
+`dim Z_2 = r_2`，即片上型非退化 + `H_2^⊥ ⊓ V_2 = S_2`（PR4 的 (I2)(I3)）。
+推演逐字是：`dim H_2 = p_D(2) − (D+1) = p_{D−1}(2)`，
+`B26 2 ⟺ p_{D−1}(2) ≤ p_{D−2}(2) + r_2 ⟺ D ≤ r_2`，而 `r_2 = D` ⟺ `rank G = 1` ⟺ `c = 26`。
+
+**对照 `N = 1`（为什么那里不需要 26）**：rung `−1`，`p_{−1} = a − b`，`p·p = 2 − 2 = 0`，`h = 0`。
+伪态只有一个生成元 `L_{-1}|p⟩`，`⟨L_{-1}p, L_{-1}p⟩ = 2h = 0`，故 `rank = 0`、`r_1 = 1`
+**对一切 `D`**，而 `p_{D−1}(1) − p_{D−2}(1) = 1`。⇒ `N = 1` 自动成立的真正原因是
+**`h(p_{−1}) = 0` 使一阶 Gram 恒为零**，比「`(D−1) = (D−2)+1` 的计数自动平衡」这个既有说法更锋利。
+
+#### B″.2.1 把 26 个零态写出来：两类构造（这就是 (b′) 的种子）
+
+⟨手算⟩ `N = 2` 的 26 维零态空间 `= ker G = {(v,t) : v·p + 3t = 0}` 有两族显式生成元，
+而且**这两族在一般 `N` 上都有定义**：
+
+* **Type 1**：`L_{-1} φ`，其中 `φ` 满足 `L_n φ = 0 (n ≥ 1)` 且 `L_0 φ = 0`。
+  验证：`L_1 L_{-1}φ = 2L_0 φ = 0`；`L_n L_{-1}φ = (n+1)L_{n-1}φ = 0 (n ≥ 2)`；
+  `L_0 L_{-1}φ = L_{-1}φ`。⇒ `L_{-1}φ` 物理且伪 ⇒ 零态（`towerSpurious_inf_towerPhys_le_towerNull`）。
+  `N = 2` 上：`φ = (v·α_{-1})|p⟩`，`L_1φ = (v·p)|p⟩ = 0` ⇒ `v·p = 0`，得 **`D − 1 = 25` 个**。
+* **Type 2**：`(2L_{-2} + 3L_{-1}²) φ`，其中 `φ` 满足 `L_n φ = 0 (n ≥ 1)` 且 `L_0 φ = −φ`。
+  验证（⟨手算⟩，两条独立方程）：
+
+  ```
+  L_1 (2L_{-2} + 3L_{-1}²) φ = [2·3 + 3(4h + 2)] L_{-1}φ = 12(h + 1) L_{-1}φ
+  L_2 (2L_{-2} + 3L_{-1}²) φ = [2(4h + c/2) + 3·6h] φ     = (c − 26) φ        （h = −1 代入）
+  L_n (2L_{-2} + 3L_{-1}²) φ = 0                           对 n ≥ 3（分级自动）
+  ```
+
+  ⭐ **上面两行就是本蓝图找了很久的那两个方程**：`12(h+1) = 0` 给出**截距 `a₀ = 1`**，
+  `c − 26 = 0` 给出**临界维数**。两者在同一条引理里、互不干扰，且不需要光锥标架。
+  `N = 2` 上：`φ = |p⟩`（level 0），得 **`1` 个**：`(2L_{-2} + 3L_{-1}²)|p_{-2}⟩`。
+
+`25 + 1 = 26` ✓，且两族独立（Type 2 的 `t = 2 ≠ 0`）。
+
+**三处与既有记录的交叉核对**（全部通过）：
+
+1. §B′.9 第 3 条说 `N = 2` 的零态之一是 `L_{-1}((b−b̃)·α_{-1})|0;p_{-2}⟩`。
+   `b − b̃ = a`（`conj_eq_light_sub_momentum`），而 `a·p_{-2} = a·a − 2a·b = 2 − 2 = 0` ✓
+   ——它正是一个 Type 1 零态。
+2. §B′.9 第 3 条的另一个是 `(2L_{-2} + 3L_{-1}²)|0;p_{-2}⟩`，逐字是 Type 2 ✓，
+   且那里说的「物理 ⟺ `L_1`、`L_2` 两条件成比例」被上面两行**替换成更强的形式**：
+   不是「成比例」，而是 `L_1`-条件给截距、`L_2`-条件给维数，是两个**独立**的方程。
+3. §B′.9 与图卡 `ddf-spanning-rank-inequality` 的另一种记账是
+   「24 个 DDF 后代 + 1 个纵向 + 1 个奇异向量」。两种记账张成**同一个 26 维空间**，
+   不矛盾：Type 1 的 25 维里含那 24 个 DDF 后代再加一维。
+   **建议动手时用 Type 1/Type 2 这一组**，因为它 (i) 不需要 DDF 算子、
+   (ii) 不需要光锥标架、(iii) 在一般 `N` 上原样成立（只有计数需要额外工作）。
+
+#### B″.2.2 与 `LevelTwoSpan.lean` 的显式 level-2 态对接
+
+`Fock.levelTwoGen η v w = Σ_μ α^μ_{-1}(v_μ·α_{-1})|k⟩ + (w·α_{-2})|k⟩` 是 level 2 的一般态
+（`Fock.exists_levelTwoGen_of_mem_levelSubmodule_two`）。上面 27 个伪态生成元在这个参数化下是
+
+```
+χ_v = levelTwoGen η (μ ↦ ½(v_μ p + p_μ v))      w = v        -- 二次部分是对称积 v ⊙ p
+χ_0 = levelTwoGen η (μ ↦ ½ η_μ · e_μ)           w = p        -- 二次部分是 η-迹
+```
+
+而 `Fock.levelTwoL1` / `Fock.levelTwoL2`（`LevelTwoSpan.lean` 已有）给出 `L_1`、`L_2`
+在 `(v, w)` 上的显式线性形。⇒ **`N = 2` 的整条账可以完全在 `LevelTwoSpan.lean` 的语言里复算**，
+不需要本节其余任何基础设施。这是 PR5b 的 `N = 2` 特例（B″.7），也是本节最便宜的证伪点。
+
+### B″.3 候选 (a)：GT 自己的路线（Goddard 2008 §6 重建）—— **裁决：不走，但取走两件东西**
+
+**(a1) GT 的「零态」逐字就是 `spurious ∩ physical`，这一点被文献确认。**
+`literature/extractions/gsw-1987-v1.md` 的 E7（Goddard 2008 §6 p.15，标 `[L1] 已核实`）逐字：
+
+> 「We also define the space of *null physical states* to be the states satisfying (4.1) that are
+> linear combinations of states of the form `L_{−n}|φ⟩`, `n > 0`. Such states are obviously
+> orthogonal to all physical states.」
+
+⇒ **本节 B″.2.1 的 Type 1 / Type 2 构造就是 GT 自己的零态概念**，不是替代品；
+Lean 侧的桥 `towerSpurious_inf_towerPhys_le_towerNull`（`TowerNull.lean`）已经在。
+**这回答了任务书的第一问：是的，GT 的零态字面上就是 `L_{−1}`、`L_{−2}` 生成的伪态 ∩ 物理态。**
+⚠ 但同一条 E7 也说明：Goddard 2008 对 (6.4) **只给结论不给证明**（"we were able to prove …"，
+转引 GT 1972 [45]，正文本项目未获取）。⇒ **「重建 GT 的证明」在文献侧没有可转写的对象。**
+
+**(a2) Brower 的 `A^L_n` 路线：§A.3 的判死不变，并且新增一条更硬的反对理由。**
+E6/E8 给出 `A^L_n = Ã_n + F_n`、`F_n = (n/4πi)∮ (k·P'(z))/(k·P(z)) V(nk,z) dz`、
+`[A^L_m, A^L_n] = (m−n)A^L_{m+n} + 2m³δ_{m,−n}`、`[L_m, A^L_n] = 0`。
+除 §A.3 的两道硬墙外，⟨手算⟩ 还有第三道：
+
+> **广为流传的「含至少一个 `A^L` 的态都是零态」是错的（或至少与 (6.5) 的归一化不相容）。**
+> 由 (6.5)，平移 `𝓛_m := A^L_m + δ_{m,0}` 得中心荷 `c' = 24`（§A.3 第 3 条已算）。
+> 在快子上 `A^L_0 = b̃·a = b·a − a·a = 1 − 2 = −1`，故 `𝓛_0 = 0`，即纵向扇区形式上是
+> `V(c'=24, h'=0)`。于是
+> ```
+> ⟨A^L_{-1}|k⟩ , A^L_{-1}|k⟩⟩ = 2A^L_0 + 2 = 0          （零态 ✓，与 N = 1 的唯一零态吻合）
+> ⟨A^L_{-2}|k⟩ , A^L_{-2}|k⟩⟩ = 4A^L_0 + 2·2³ = 12 = c'/2 ≠ 0    （**不是**零态）
+> ```
+> 按这个记账，`N = 2` 的零态只有 `24 + 1 = 25` 个（24 个 `A^L_{-1}A^i_{-1}`，
+> 加纵向 Verma `V(24,0)` 在 level 2 的根基 `span{(A^L_{-1})²}` 一维），
+> 与 B″.2 独立手算出的 **26** 差一。B″.2 的算法只用抽象 Virasoro 关系、与任何 `A^L` 归一化无关，
+> 且复现了文献公认的 `350 = 324 + 26`，所以差错在 `A^L` 这一侧。
+> **正确的说法是：`A^L` 单项式张成 `H_phys` 中 DDF 张成的一个补，它们只在 `mod DDF` 的意义下是零态**
+> （`A^L_{-2}|k⟩` 的 DDF 分量模长正是 12）。
+> ⇒ **任何把「种子」取成 `A^L` 单项式的计划都会数错**，§B′.4 的 PR5 草案
+> （`exists_null_seeds : ∃ s : Nat.Partition m → …`）**按字面是不可实现的**：
+> 那 `p(m)` 个种子不是 `A^L_{−λ}|k⟩`，而是它们的某些依赖 `D = 26` 的组合。
+
+**取走的两件东西**：(i) 零态 = 伪态 ∩ 物理态（(a1)，已在 Lean）；
+(ii) `K_n` 的角色**不是**造零态，而是刻画 `C_N`（`towerKerK ⊓ V_N = conjFreeSlice`，
+PR4 已给 `⊇`，PR5a 有望给 `⊆`，见 B″.6）。
+**裁决：(a) 作为路线否决；其内容被 (b′) 完全吸收。**
+
+### B″.4 候选 (b)：直接维数计数 —— **裁决：采用，并加强为 (b′)**
+
+任务书问「`D − 26 = 0` 究竟落在哪个方程里，是不是 `span{L_{−2}|k⟩, L_{−1}²|k⟩}` 上 `h = −1` 的
+二阶 Kac 行列式」。**答案：是，逐字是。** 见 B″.2：`det G₂ = 2(c − 26) = kacDet2 c (1 − 2)`。
+
+**一般 `N` 的对账**（⟨手算⟩，回应 §B′.9 第 3 条）：
+
+```
+kacDet2 c (1 − N) = 2(1 − N)[16(1−N)² + 2(1−N)(c−5) + c]
+kacDet2 26 (1 − N) = 4(1 − N)(21 − 8N)(2 − N)        ⇒ 只在 N = 1, 2 处为零
+```
+
+与 `Fock.kacDet₁/₂_massShell_26 = 0`、`kacDet₃/₄_massShell_26 = 2304 / 2649563136 ≠ 0` 一致。
+⭐ **但这不意味着 `D = 26` 只在 `N = 2` 起作用。** §B′.9 第 3 条由此推出
+「零态在一般 `N` 不是层真空上的奇异向量」——这条**结论正确，但推论被误导**。
+正确的图景是：
+
+> **`D = 26` 只提供一个算子 `𝒟₂ := 2L_{-2} + 3L_{-1}²`，它在每个 `N` 上作用在一个
+> `(N−2)`-level 的准物理态族上。** 每层不需要新的奇异向量；需要的是同一个二阶算子
+> 加上一族随 `N` 增长的输入。这解释了为什么 `kacDet3/4 ≠ 0` 与 (B-26) 对一切 `N` 成立
+> 并不矛盾：`N ≥ 3` 时确实没有新的层真空奇异向量，但 `𝒟₂` 照样把 level `N−2` 的准物理态
+> 送进零态。
+
+于是 (b) 的剩余全部内容是**计数**：
+
+```
+dim Z_N  ≥  dim( L_{-1}(Q_{N-1})  +  𝒟₂(Q_{N-2}) )       ≥?  p_{D−1}(N) − p_{D−2}(N)
+Q_M := { φ ∈ towerBigrade(−N, M) : L_n φ = 0 ∀ n ≥ 1 }     （L_0 条件由质壳自动，见下）
+```
+
+`L_0` 自动：`massShell_of_mem_towerBigrade` 在双分次 `(j, M)` 上给 `L_0 = a₀ + j + M`，
+取 `j = −N` 得 `a₀ − 1`（`M = N−1`）与 `a₀ − 2`（`M = N−2`）；
+配 `a₀ = 1` 正好是 Type 1 要的 `0` 与 Type 2 要的 `−1`。
+⭐ **这是 `a₀ = 1`（即 `dotVec η a a = 2`）在整条链上唯一真正被用到的地方**
+——PR4 的订正第 11 条说消元不需要它，是对的；需要它的是这里。
+
+#### B″.4.1 关键发现：`dim Q_M` 可以精确算出来，而且工具已经全在
+
+原以为 `dim Q_M` 需要「Fock 模在 `Vir⁻` 下自由」（FGZ Prop 2.6(i) / LZ Cor 2.19(iii)），
+而 §B.2 已判死那条路（前置是一般 `N` 的 Kac 行列式 + PBW）。
+**判死的是「用 FGZ 的方法证自由性」，不是「自由性本身」。** ⟨手算⟩ 以下四步用 PR3/PR4
+已有的机器**直接**给出自由性的计数版本，完全不碰 Kac 行列式：
+
+* **(F-1) 伪态的精确张成集**：对固定纤维、固定 level `M`，
+  ```
+  S(M) = span { L_{-λ} · lcMonomial(c) : λ 非空分拆, c 是 b̃-free 占据函数, |λ| + level c = M }
+  ```
+  证法：对 `M` 归纳。`S(M) = Σ_{n≥1} L_{-n}(V_{M-n})`（`towerLop` 双分次齐次，`Glue.towerLop_mem_towerBigrade`）；
+  归纳假设加 **PR4 的消元 (I1)** 给 `V_{M-n} = span{L_{-μ}c : 任意 μ}`；
+  再用 `[L_{-n}, L_{-m}] = (m−n)L_{-n-m}` 把 `L_{-n}L_{-μ}` 排序成 `L_{-λ}` 的组合
+  （长度/权递减的双重归纳，**不需要抽象 PBW**）。
+* **(F-2) 指标集的基数恰是 `p_D(M)`**：把占据函数 `d : Osc D →₀ ℕ` 按 **`b̃` 那一行**拆开，
+  `d ↦ (d|_{b̃ 行}, d|_{其余})`，前者是 `ℕ+ →₀ ℕ` 即一个普通分拆 `λ`，后者是 `b̃`-free 占据函数 `c`。
+  这是一个 `Finsupp` 的**双射**，`|λ| + level c = level d`。⇒ 指标集与 `{d : level d = M}` 等势。
+  ⚠ **全程不求值任何分拆数**（§B′.8 成立）；`Math/PartitionCard.lean` 在这里也用不上。
+* **(F-3) 张成 + 基数 = 维数 ⇒ 基**：`V(M)` 的维数就是 `#{d : level d = M}`
+  （`MvPolynomial.basisMonomials`，PR4 的 `finrank_conjFree_le` 已经在用），
+  而 (F-1)+(F-2) 给出一族基数相同的张成集 ⇒ 用
+  `linearIndependent_of_top_le_span_of_card_eq_finrank` ⇒ **它是一组基**。
+* **(F-4) 一堆免费推论**：
+  ```
+  dim S(M) = p_D(M) − p_{D−1}(M)        （λ ≠ ∅ 的那一半指标）
+  dim Q_M  = p_{D−1}(M)                 （Q = S^⊥ ∩ 片，用 (I2)(I3) 的非退化）
+  b̃-free 光锥单项式线性无关            （λ = ∅ 的那一半是基的子族）
+  conjFree ⊓ towerSpurious = ⊥          （基按 λ 分块）
+  ```
+
+⭐ 第三条**正是 §B′.9 第 2 条说「没有免费午餐」的那件事**：它确实没有免费午餐，
+但它的午餐钱**不是**在 `MvPolynomial` 上造 `AlgEquiv`（§B.4 估的 400–700 行），
+而是「张成集的基数恰好等于维数」——而张成已经由 PR4 免费给了。
+**这是本节在 Lean 工作量上最大的一条发现。**
+
+数值核对 ⟨手算⟩：`D = 26` 时 `Σ_{m≥0} p(m) p_{25}(M−m) = p_{26}(M)`：
+`M = 2`：`350 + 25 + 2·1 = 377` ✓；`M = 3`：`3575 + 350 + 2·25 + 3·1 = 3978` ✓。
+
+### B″.5 候选 (c)：特征标 / 分拆恒等式路线 —— **裁决：否决，并给出否决的证明**
+
+§B′.8 说「计数一步永远看不见 26」。这里给出更强的版本，值得写进图：
+
+> ⭐ **(B-26) 不可能由任何维数记账推出。** 在有限维片 `V_N` 上（型非退化，PR4 已证），
+> `H_N = S_N^⊥`，故 `dim H_N + dim S_N = dim V_N` **恒成立**；又 `Z_N = H_N ⊓ S_N`
+> （零态 = 物理 ∩ 物理^⊥，而 `H_N^⊥ ⊓ V_N = S_N`），故
+> ```
+> dim Z_N = dim H_N + dim S_N − dim(H_N + S_N) = dim V_N − dim(H_N + S_N) .
+> ```
+> 右端的 `dim(H_N + S_N)` 与 `dim Z_N` 是同一个未知量的两种写法。
+> ⇒ **任何只用 `dim V_N`、`dim H_N`、`dim S_N`、`dim D_N` 的恒等式都是循环的**，
+> 无论怎么组合都得不到 `D = 26`。**必须真的造出零态**（或等价地，真的算一个秩）。
+
+因此 (c) 不是一条路线。它在 (b′) 里保留的唯一角色是 B″.4.1 的 **(F-2)**：
+一个 `Finsupp` 按行拆分的双射。Lean 成本估计：
+
+| 件 | 内容 | 行数 |
+|---|---|---|
+| (c1) | `Finsupp` 按 `conjIdx` 行拆分的 `Equiv`（`d ↦ (d.comapDomain 到 b̃ 行, d.filter 非 b̃ 行)`） | 80–120 |
+| (c2) | 拆分保 level：`level d = weight(λ) + level c` | 30 |
+| (c3) | `Fintype` 与 `card` 的搬运（`Fintype.card_congr`） | 20 |
+
+⇒ **约 150 行，且不含任何分拆数的求值**。`Math/PartitionCard.lean`（`p(m)`，`m ≤ 5`）
+与 `Math/EulerPartition.lean`（`φ^{-1}` 生成函数）在本路线上**都用不到**
+——这与 §B′.8 的判断一致，本节把它从「暂时用不到」加强为「结构上用不到」。
+
+### B″.6 推荐路线 (b′)：三个 PR
+
+```
+PR5a  VirasoroPBWBasis.lean   D-无关     ≈ 700 行  —— 每片的「Virasoro × 光锥」PBW 基
+PR5b  NullSeeds.lean          **D = 26** ≈ 250 行  —— Type 1 / Type 2 两族零态
+PR5c  (B-26) 的收尾            **未解决**          —— 两族的张成维数下界
+```
+
+**依赖**：PR5a 与 PR5b **互不依赖**，可并行；PR5c 需要两者。
+**交付顺序建议**：PR5b 的 `N = 2` 特例（只用 `LevelTwoSpan.lean`，约 120 行）→ PR5b 全量 →
+PR5a → PR5c。理由：PR5b 的 `N = 2` 特例是整条路线唯一便宜的**证伪点**（B″.2.2），
+而且它单独就把 `kacDet2 c (1−2) = 2(c−26)` 送进图，是 `D = 26` 临界性的最小机检见证。
+
+**PR5a 单独的价值（即使 PR5c 永远做不完）**：它关掉 PR4 遗留的**全部**非-(B-26) 缺口
+（`formal/TODO.md` 的 `general-n-pr4` 条目「仍未做」里除 (B-26) 外的两条），
+并给出 Fock 模在 `Vir⁻` 下自由的**计数版本**的一个不经 Kac 行列式的证明
+——后者是图节点 `worldsheet.fock-module-free-over-negative-virasoro`（FGZ Prop 2.6(i)）
+的一条**独立推导**，而 §B.2 判死的只是「沿 FGZ 的路走」。
+
+### B″.7 引理清单（Lean 伪代码，草案，未编译）
+
+命名空间 `StringFormal.NoGhost`。记 `hD : 2 ≤ D`，`F : DDFLightConeFrame η a b`，
+`conjDeg`/`conjIdx`/`lcMonomial`/`conjFree` 取 `SpuriousElimination.lean` 与
+`LightConeResolutionGen.lean` 的既有定义。
+
+#### PR5a `NoGhost/VirasoroPBWBasis.lean`
+
+```lean
+/-- 降序 Virasoro 下降单项式 `L_{-λ} = L_{-n₁} ⋯ L_{-n_r}`（`n₁ ≥ … ≥ n_r ≥ 1`），
+指标是 `ℕ+ →₀ ℕ`（第 `n` 位的值 = `L_{-n}` 的重数），与普通分拆同指标。 -/
+noncomputable def lopDesc (η p : Fin D → R) (lam : ℕ+ →₀ ℕ) : Module.End R (Fock D R)
+
+/-- `|λ| := Σ n · λ n`，即 `lopDesc` 抬高的 level。 -/
+noncomputable def lopWeight (lam : ℕ+ →₀ ℕ) : ℕ := Finsupp.weight (fun n : ℕ+ => (n : ℕ)) lam
+
+theorem lopDesc_mem_levelSubmodule (hη) (lam) {M : ℕ} {x : Fock D R}
+    (hx : x ∈ Fock.levelSubmodule D R M) :
+    lopDesc η p lam x ∈ Fock.levelSubmodule D R (M + lopWeight lam)
+
+/-- **排序引理**（PR5a 的技术核心）：`L_{-n}` 左乘有序单项式仍落在有序单项式的张成里。
+`[L_{-n}, L_{-m}] = (m − n) L_{-(n+m)}` 在**固定权、长度递减**的意义下是下降的，
+所以按 `lam.sum` 归纳即可；不需要抽象 PBW，也不需要 Verma 模。 -/
+theorem Lop_neg_mul_lopDesc_mem_span (hη) {n : ℕ+} (lam) (x : Fock D R) :
+    Fock.Lop η p (-(n : ℤ)) (lopDesc η p lam x)
+      ∈ Submodule.span R {y | ∃ mu : ℕ+ →₀ ℕ, lopWeight mu = lopWeight lam + n ∧
+                               y = lopDesc η p mu x}
+
+/-- (F-1) **伪态的精确张成集**。对 `M` 归纳，归纳步用 PR4 的消元 `V = C ⊔ S`。 -/
+theorem spurious_inf_levelSubmodule_eq_span (hD) (F) (hη) (hbp : dotVec η b p = 1) (M : ℕ) :
+    Fock.spuriousSubmodule η p ⊓ Fock.levelSubmodule D R M
+      = Submodule.span R { y | ∃ lam c, lam ≠ 0 ∧ conjDeg hD c = 0 ∧
+          lopWeight lam + Fock.level D c = M ∧ y = lopDesc η p lam (lcMonomial F c) }
+
+/-- (F-2) **占据函数按 `b̃` 行拆分**。纯 `Finsupp`，无物理内容。 -/
+def oscSplitConj (hD : 2 ≤ D) :
+    (Osc D →₀ ℕ) ≃ (ℕ+ →₀ ℕ) × {c : Osc D →₀ ℕ // conjDeg hD c = 0}
+theorem level_oscSplitConj (hD) (d) :
+    Fock.level D d = lopWeight (oscSplitConj hD d).1 + Fock.level D (oscSplitConj hD d).2
+
+/-- (F-3) **主定理：每个 level 片的 PBW × 光锥基**。 -/
+theorem levelSubmodule_eq_span_lopDesc_lcMonomial (hD) (F) (hη) (hbp) (M : ℕ) :
+    Fock.levelSubmodule D K M
+      = Submodule.span K { y | ∃ lam c, conjDeg hD c = 0 ∧
+          lopWeight lam + Fock.level D c = M ∧ y = lopDesc η p lam (lcMonomial F c) }
+noncomputable def pbwBasis (hD) (F) (hη) (hbp) (M : ℕ) :
+    Basis {x : (ℕ+ →₀ ℕ) × (Osc D →₀ ℕ) //
+             conjDeg hD x.2 = 0 ∧ lopWeight x.1 + Fock.level D x.2 = M}
+      K ↥(Fock.levelSubmodule D K M)
+  -- 由 `linearIndependent_of_top_le_span_of_card_eq_finrank` + (F-2) 的基数搬运
+
+/-- (F-4) 四条推论。 -/
+theorem linearIndependent_lcMonomial_conjFree (hD) (F) (hη) (hbp) (M : ℕ) :
+    LinearIndependent K fun c : {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0} =>
+      lcMonomial F (c : Osc D →₀ ℕ)
+theorem conjFree_inf_spurious_eq_bot …
+theorem finrank_spurious_inf_levelSubmodule … :
+    Module.finrank K ↥(Fock.spuriousSubmodule η p ⊓ Fock.levelSubmodule D K M)
+      = Fintype.card {d // Fock.level D d = M}
+        - Fintype.card {c // Fock.level D c = M ∧ conjDeg hD c = 0}
+theorem finrank_towerPositiveMode_inf_towerBigrade (hD) (F) (hη) (hbb) (hba) (j : ℤ) (M : ℕ) :
+    Module.finrank K ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M)
+      = Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0}   -- = p_{D−1}(M)
+```
+
+⚠ **只有下界那一半是 PR5c 真正需要的**，而下界**不需要 (F-3) 的基**：
+`Q = spurious^⊥ ⊓ 片 = ker(片 → S^*)`，秩-零化度直接给
+`dim Q ≥ dim 片 − dim S ≥ p_D(M) − (p_D(M) − p_{D−1}(M))`，只用 (F-1)+(F-2) 的
+`finrank_span_le_card`，**不需要非退化、不需要 `BilinForm.finrank_orthogonal`**
+（回避 PR4 订正第 14/16 条踩过的两个坑）。(F-3)(F-4) 是附赠品，可放在 PR5a 的第二半、
+甚至单独一个 PR。
+
+#### PR5b `NoGhost/NullSeeds.lean`（**`D = 26` 与 `a₀ = 1` 唯一进入之处**）
+
+```lean
+/-- **Type 1**：`L_{-1}` 把「`L_0` 本征值 0 的准物理态」送成零态。`D` 不出现。 -/
+theorem towerLop_neg_one_mem_towerNullSubmodule (hη) {φ : TowerFock D R}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0)
+    (hzero : towerLop η a b 0 φ = 0) :
+    towerLop η a b (-1) φ ∈ towerNullSubmodule η a b (1 : R)
+-- 三行：L₁L₋₁φ = 2L₀φ = 0；L_nL₋₁φ = (n+1)L_{n-1}φ = 0 (n ≥ 2)；L₀L₋₁φ = L₋₁φ。
+-- 截距被 `L₀(L₋₁φ) = L₋₁φ` 钉成 1，所以这里必须写死 a₀ = 1，不能像 PR0/PR1 那样放宽。
+
+/-- **Type 2 的算子** `𝒟₂ = 2L_{-2} + 3L_{-1}²`。 -/
+noncomputable def descTwo (η a b : Fin D → R) : Module.End R (TowerFock D R) :=
+  (2 : R) • towerLop η a b (-2) + (3 : R) • (towerLop η a b (-1) * towerLop η a b (-1))
+
+/-- ⭐ **截距方程**：`L_1 𝒟₂ φ = 12(h + 1) L_{-1} φ`。`h + 1 = 0` ⟺ `a₀ = 1`。 -/
+theorem towerLop_one_apply_descTwo (hη) {h : R} {φ}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0) (h0 : towerLop η a b 0 φ = h • φ) :
+    towerLop η a b 1 (descTwo η a b φ) = (12 * (h + 1)) • towerLop η a b (-1) φ
+
+/-- ⭐⭐ **临界维数方程**：`L_2 𝒟₂ φ = (D − 26) φ`（在 `L_0 φ = −φ` 上）。
+**这是整条无鬼定理链上唯一写得下 `D − 26 = 0` 的等式。** -/
+theorem towerLop_two_apply_descTwo (hη) {φ}
+    (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0) (h0 : towerLop η a b 0 φ = -φ) :
+    towerLop η a b 2 (descTwo η a b φ) = ((D : R) - 26) • φ
+
+theorem towerLop_apply_descTwo_of_three_le (hη) {n : ℤ} (hn : 3 ≤ n) {φ} (hpos) :
+    towerLop η a b n (descTwo η a b φ) = 0
+
+/-- Type 2 的零态。 -/
+theorem descTwo_mem_towerNullSubmodule (hη) (hD26 : (D : R) = 26) {φ}
+    (hpos) (h0 : towerLop η a b 0 φ = -φ) :
+    descTwo η a b φ ∈ towerNullSubmodule η a b (1 : R)
+
+/-- 与已有 Kac 行列式的对接（`Virasoro/FockFreeLowLevel.lean`），一行 `ring`。
+比现有的 `kacDet2_massShell_26`（只说「在 26 处为 0」）强：零点只有 26。 -/
+theorem kacDet2_massShell_two (c : R) : Fock.kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
+theorem kacDet2_massShell_two_eq_zero_iff [Field K] [CharZero K] (c : K) :
+    Fock.kacDet2 c ((1 : K) - 2) = 0 ↔ c = 26
+```
+
+#### PR5c （B-26）的收尾：**未解决**，目标陈述如下
+
+```lean
+theorem finrank_towerNull_inf_towerBigrade_ge (hD26 : (D : K) = 26)
+    (haa : dotVec η a a = 2) (N : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = N ∧ conjDeg hD c = 0}
+      ≤ Fintype.card {c // Fock.level D c = N ∧ conjDeg hD c = 0 ∧ lightDeg hD c = 0}
+        + Module.finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                              ⊓ towerBigrade D K (-(N : ℤ)) N)
+-- 左边 p_{D−1}(N)，右边第一项 p_{D−2}(N)（`lightDeg` 是 `b` 行的次数，与 `conjDeg` 同型）。
+-- 配 PR4 的 (P3) 与 SliceDim 的 (P2) 即得 `B26 N`。
+```
+
+### B″.8 `D = 26` 被消费的**唯一**引理
+
+`towerLop_two_apply_descTwo`（PR5b）。整条路线里 `(D : R)` 只在它的证明里被当成中心荷用到
+（经 `Fock.lie_Lop_Lop` 的 `(D : R) * Virasoro.centralTerm R m`），其余每一条引理都对任意 `D` 成立。
+`a₀ = 1`（即 `dotVec η a a = 2`）只在两处出现：`towerLop_one_apply_descTwo` 的 `h + 1 = 0`，
+以及把 `Q_{N−1}`/`Q_{N−2}` 的 `L_0` 本征值算成 `0`/`−1` 的那一步
+（`massShell_of_mem_towerBigrade`，`L_0 = a₀ + j + M`）。**其余全部 `D`-无关、截距无关。**
+
+**前置缺件**：仓库里**没有** `lie_towerLop_towerLop`（塔上的 Virasoro 关系）。
+`towerLop` 是 `towerDiag`，所以它是 `Fock.lie_Lop_Lop` 的逐纤维提升，照抄
+`lie_towerLop_towerMode`（`DDF.lean:226`）的 `Finsupp.lhom_ext` 套路即可，约 15 行。
+**这一条应当第一个提交**（它是 PR5b 全部三条方程的共同输入）。
+
+### B″.9 归纳结构
+
+只有两处归纳，都在 PR5a：
+
+* **外层：对 level `M` 的强归纳**（(F-1)）。归纳步把 `V_{M−n}` 换成 `span{L_{-μ}c}`，
+  用 PR4 的消元 + 归纳假设；`M = 0` 时 `V_0 = span{层真空} = C_0` 平凡。
+* **内层：对 Virasoro 词长度的归纳**（排序引理）。`lopWeight` 在排序中**守恒**，
+  所以只需对因子个数 `lam.sum` 归纳：`[L_{-n}, L_{-m}] = (m−n)L_{-(n+m)}` 把长度 `r` 换成 `r − 1`。
+  ⚠ 与 §B′.5 的复合测度 `μ = β(N+1) + ω` 不同，这里**不需要**复合测度。
+
+PR5b、PR5c 无归纳（PR5b 是三条直接计算；PR5c 的困难是线性代数，不是归纳）。
+
+### B″.10 行数估计
+
+| PR | 文件 | 行数 | `D = 26`? | 信心 |
+|---|---|---|---|---|
+| 前置 | `lie_towerLop_towerLop`（放进 `Glue.lean` 或 `TowerPhysical.lean`） | 15 | 否 | 高 |
+| PR5b′ | `N = 2` 特例（只用 `LevelTwoSpan.lean`） | 120 | **是** | 高 |
+| PR5b | `NoGhost/NullSeeds.lean` | 250 | **是** | 高 |
+| PR5a-i | (F-1)(F-2) + `dim Q ≥ p_{D−1}(M)` | 450 | 否 | 中 |
+| PR5a-ii | (F-3)(F-4) 基与四条推论 | 250 | 否 | 中 |
+| 前置′ | PR4 消元从反对角推广到任意 rung（B″.11 第 2 条） | 150–400 | 否 | **低** |
+| PR5c | (B-26) 收尾 | **未知** | 是 | **无** |
+
+⇒ **PR5a + PR5b + 两个前置约 1200–1500 行**，全部可交付且不含 `sorry`；
+PR5c 不在这个估计里。对比：PR0–PR4 实际约 2700 行（§B′ 订正第 19 条）。
+
+### B″.11 三个最可能的断点
+
+1. ⭐ **（最致命）两族零态在 `N ≥ 5` 处的重叠，恰好是 Euler 五边形数。**
+   ⟨手算⟩ 记 `U := L_{-1}(Q_{N-1})`、`W := 𝒟₂(Q_{N-2})`。由 B″.4.1，
+   `dim U ≤ p_{D−1}(N−1)`、`dim W ≤ p_{D−1}(N−2)`，而目标是
+
+   ```
+   p_{D−1}(N) − p_{D−2}(N) = [q^N] φ^{-(D-1)}(1 − φ) ,   1 − φ = q + q² − q⁵ − q⁷ + q¹² + q¹⁵ − ⋯
+   dim U + dim W           = [q^N] φ^{-(D-1)}(q + q²)
+   ```
+
+   两者在 `N ≤ 4` **恰好相等**（`D = 26` 数值核对：`N=2: 25+1 = 26`；`N=3: 350+25 = 375`；
+   `N=4: 3575+350 = 3925 = 29575 − 25650` ✓），从 **`N = 5`** 起 `dim U + dim W` 比目标
+   **多出** `p_{D−1}(N−5) + p_{D−1}(N−7) − p_{D−1}(N−12) − ⋯`（`N = 5` 时多出 `1`）。
+   ⇒ **要得到 `dim(U + W) ≥ 目标`，必须给 `dim(U ⊓ W)` 一个上界，而那个上界恰是五边形数修正。**
+   这等价于 `⋯ → Q_{N-5} ⊕ ⋯ → Q_{N-1} ⊕ Q_{N-2} → Z_N → 0` 正合，
+   即 `c = 26`、`h = 1−N` 处 Verma 模的 BGG / Feigin–Fuks 嵌入结构。
+   **这是一个独立的大项目，不是 PR5c 的技术细节。**
+   两条绕法（都未验证）：
+   (i) 不算维数，直接证**张成** `H_N ≤ D_N ⊔ U ⊔ W`——但这几乎就是 (B-26) 本身换了个写法；
+   (ii) ⭐ **换一族按指标构造的种子**：`p_{D−1}(N) − p_{D−2}(N)` 既数「含至少一个 `b` 因子的
+       `b̃`-free 占据函数」，也数「不含 `b`、含至少一个 `b̃` 的占据函数」；
+       而 PR4 的领头项引理 `α^{b̃}_{-n} m(d′) = −L_{-n} m(d′) + (更小测度)`
+       正是把后者与伪态联系起来的三角关系。若能对每个「含 `b̃`」指标造出一个零态、
+       并用**与 `C_N` 的配对矩阵的三角性**证独立（而不是用维数相减），
+       重叠问题就不出现。**这是本节认为最值得先试的绕法**，且它与 PR5a 的基结构相容。
+2. **把 PR4 的消元从反对角线推广到任意 rung，可能比想象贵。**
+   `conjFreeSlice hD F N` 把 rung 写死成 `Finsupp.lsingle (-(N:ℤ))`
+   （`SpuriousElimination.lean:264`），`towerBigrade_le_conjFreeSlice_sup_towerSpurious`
+   也只在 `(-N, N)` 上陈述。PR4 订正第 11 条说机制与 rung 无关（`b̃` 分量恒为 `−1`），
+   所以数学上没有障碍；但那是一个 **85 条声明、1300 行**的文件，重参数化要动很多条。
+   **缓解**：按 B″.1 的记号约定，把这些引理改写在 `Fock` 层（动量 `p`，假设 `dotVec η b p = 1`），
+   塔版作为推论。若成本超过 400 行，退而只推广 `Q_{N−1}`、`Q_{N−2}` 需要的那两条。
+3. **排序引理在 `Finsupp` 指标上的实现。**
+   `lopDesc η p lam` 要写成按 `ℕ+` 降序的乘积，而 `Module.End` 不交换：
+   Mathlib 的 `Finsupp.prod` 与 `Finset.noncommProd` 都用不上
+   （后者要求元素两两交换，`L_{-n}` 之间**不**交换）。可能要自己写 `List` 版
+   （`Multiset.sort` + `List.prod`）再搬到 `Finsupp`。估计 150–250 行纯脚手架，
+   是 PR5a 里最容易失控的一块。**缓解**：先做 `lam` 只有一项（`L_{-n}^k`）与两项的情形，
+   验证 API 形状，再上一般情形。
+
+**次级风险两条**：(α) `Fock.spuriousSubmodule` 与 `towerSpuriousSubmodule` 的关系
+（前者在 `PhysicalStates.lean`，后者在 `TowerNull.lean`）——(F-1) 在 `Fock` 层陈述，
+用到塔上时要一条搬运引理，注意 `towerSpuriousSubmodule` 是**整塔**的 `iSup`，
+与片的交等于逐纤维的 `spuriousSubmodule ⊓ levelSubmodule`，这一步要 `Glue.lean`
+的双分次齐次性。(β) `lightDeg`（`b` 行的次数，`conjDeg` 的孪生）在 PR4 里**没有**定义，
+PR5c 的陈述需要它；仿 `conjDeg` 写三行即可，但要注意 `lightIdx`/`conjIdx` 的下标约定
+（`SpuriousElimination.lean:145` 起）。
+
+### B″.12 对图的建议（本节不碰 `graph/`）
+
+1. **`worldsheet.ddf-spanning-rank-inequality` 与 `--via-goddard-thorn` 的 (B-26) gap**：
+   补记 B″.2 的结论——**`B26 2` 与 `D = 26` 等价**（前提列表见 B″.2 那条 ⚠），方程逐字是
+   `det Gram(L_{-2}|p⟩, L_{-1}²|p⟩)|_{h=-1} = 2(c − 26) = kacDet2 c (1−2)`。
+   这是本图第一次能把 `D = 26` 写成一个**方程**而不是一个假设。⟨手算，标 `inferred: true`⟩
+2. **同处**：订正一条既有措辞。那里写「零态不是逐 `N` 的奇异向量，`N = 3,4` 的 Kac 行列式不为零」
+   ——结论对，但**不足以推出「没有通用机制」**。正确的表述是：
+   **`D = 26` 只提供一个二阶算子 `𝒟₂ = 2L_{-2} + 3L_{-1}²`，它在每个 `N` 上作用于 level `N−2`
+   的准物理态族；每层不需要新的奇异向量。** 不加这句，后来者会以为 (B-26) 在 `N ≥ 3`
+   需要全新机制（§B′.9 第 3 条读起来正是这个意思）。
+3. **`worldsheet.ddf-spanning-hypothesis` 的 notes**：加一条「(B-26) 不可能由维数记账推出」的
+   两行论证（B″.5），并注明 §B′.11 第 1 条建议记的种子恒等式
+   `p_{D−1}(N) − p_{D−2}(N) = Σ_m p_{D−2}(N−m)p(m)` **不是**可动手的分解
+   ——按它构造种子（`A^L_{−λ}|k⟩`）在 `N = 2` 就少数一个（B″.3 (a2)）。
+4. **新卡建议 `worldsheet.ocq-null-state-two-families`**（或并入
+   `worldsheet.ocq-spurious-states` 的 notes）：
+   「截距 `a₀ = 1` 时 `L_{-1}φ`（`L_0φ = 0`）与 `(2L_{-2}+3L_{-1}²)φ`（`L_0φ = −φ`、`c = 26`）
+   都是零态」。这是 OCQ 的教科书内容（来源可取 `polchinski-1998-v1-ch7` 一类，需 curator 核页码），
+   **且它是本项目第一条把「截距 1」与「维数 26」写成两个独立方程的陈述**
+   （`12(h+1) = 0` 与 `c − 26 = 0`）。PR5b 落地后可直接标 formalized。
+5. **`worldsheet.gt-longitudinal-k-algebra` 的 notes**：补记 B″.3 (a2)
+   ——在 Goddard (6.5) 的归一化下 `A^L` 单项式**不是**零态
+   （`⟨A^L_{-2}k, A^L_{-2}k⟩ = 4A^L_0 + 16 = 12 ≠ 0`），只在 mod DDF 的意义下是；
+   按「种子 = `A^L_{−λ}|k⟩`」记账，`N = 2` 会数出 25 而不是 26。
+   ⚠ **必须标 `inferred: true`**：这是本节的手算，不是任何来源的原话，而且
+   它与 (6.5) 的 `2m³` / `A^L_0` 归一化之间的张力**尚未裁决**——也可能是 Goddard 的单位制
+   与本项目的 `conv.alpha-prime-regge` 不同。**要么裁决，要么照此措辞登记为一条 open question。**
+6. **`worldsheet.fock-module-free-over-negative-virasoro`**：若 PR5a 落地，
+   它会获得一条**不经 Kac 行列式**的推导（计数版本，来源 `stringformal-2026`），
+   与 FGZ/LZ 的路线独立。§B.2 判死的是「沿 FGZ 走」，这一点应写进该卡的 notes，
+   以免被误读成「这条命题不该做」。
+
+### B″.13 一句话总结
+
+**(B-26) 的 `D = 26` 落在 `L_2(2L_{-2} + 3L_{-1}²)φ = (c − 26)φ` 这一个方程里，
+造零态的两族算子是 `L_{-1}` 与 `2L_{-2} + 3L_{-1}²`，配套的计数基础设施
+（每片的 Virasoro × 光锥 PBW 基）用 PR3/PR4 已有的机器就能造出来；
+剩下的、也是本计划关不掉的，是这两族的像在 `N ≥ 5` 处重叠多少
+——那个数恰是 Euler 五边形数的系数。**
+
+### B″.14 数值核对（Python，2026-09-12）
+
+本节的三条算术断言用一段一次性 Python 脚本（整系数幂级数，无 CAS）核对过，**输出如下**。
+脚本没有入库（它不属于 `formal/` 的任何构建目标）；要复核，照下面的定义重跑即可：
+`p_c(n) := [q^n] ∏_{m≥1}(1−q^m)^{−c}`，`p(n) := p_1(n)`。
+
+```
+kacDet2 c h = 2h(16h² + 2h(c−5) + c)
+  kacDet2 (25) (1−2) = −2      kacDet2 (26) (1−2) = 0      kacDet2 (27) (1−2) = 2
+  ⇒ kacDet2 c (1−2) = 2(c − 26)                                                  ✓
+  kacDet2 (26) (1−N) = 4(1−N)(21−8N)(2−N)：N=1,2 → 0；N=3 → −24；N=4 → −264；N=5 → −912  ✓
+     （N=3,4 与 `Fock.kacDet3/4_massShell_26 ≠ 0` 是**不同**的行列式，不要混：
+       前者是二阶行列式在不同质壳上取值，后者是三阶/四阶行列式在各自质壳上取值。）
+
+n :      0     1      2       3        4         5
+p24 :    1    24    324    3200    25650    176256
+p25 :    1    25    350    3575    29575    209405
+p26 :    1    26    377    3978    33930    247312
+p   :    1     1      2       3        5         7
+
+Σ_{m≤N} p(m)·p25(N−m) = p26(N)：  1, 26, 377, 3978, 33930                        ✓
+
+N :                       2     3      4       5        6         7
+目标 p25(N)−p24(N) :     26   375   3925   33149   238955   1521729
+两族上界 p25(N−1)+p25(N−2):26  375   3925   33150   238980   1522080
+超出量 :                  0     0      0       1       25        351
+```
+
+⭐ 超出量 `0,0,0,1,25,351` 逐项等于 `p_{25}(N−5) + p_{25}(N−7) − ⋯`
+（`N=5: p25(0)=1`；`N=6: p25(1)=25`；`N=7: p25(2)+p25(0)=350+1=351`），
+即 `1 − φ = q + q² − q⁵ − q⁷ + ⋯` 的五边形数系数。**B″.11 第 1 条的断点因此是确证的，不是猜测。**
