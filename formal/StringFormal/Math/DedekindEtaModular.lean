@@ -54,6 +54,10 @@ re-exports it as `ModularGroupGen.sl_closure_S_T` (and pushes it, together with 
   (Dedekind sums, a 24-th root of unity times `(cτ+d)^{1/2}`) is still not formalised.  Only the
   modulus `‖η‖`, in the specific combination `τ₂|η|⁴`, is controlled here — which is exactly what
   one-loop modular invariance of the bosonic partition function needs.
+* This file is η-only and says nothing about the *measure* `d²τ / τ₂²`.  That half of one-loop
+  modular invariance is now formalised separately in `StringFormal/Math/TorusMeasure.lean`
+  (`TorusMeasure.measure_density_modular_invariant` pointwise, `TorusMeasure.measure_smul_eq` at
+  the level of measures); graph card `spectrum.torus-measure-modular-invariant`.
 -/
 
 namespace StringFormal.DedekindEta
@@ -138,7 +142,9 @@ theorem im_pow_mul_norm_eta_pow_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) (
 
 Caveat about what this does *and does not* say: the full statement of one-loop modular invariance
 also requires invariance of the measure `d²τ / τ₂²`, which is a fact about the `SL(2,ℤ)`-action on
-`ℍ` and is **not** formalised here; and `D = 26` enters only through the exponent `12 = (D − 2)/2`,
+`ℍ` and is **not** proved here — it is formalised in `StringFormal/Math/TorusMeasure.lean`
+(`TorusMeasure.measure_smul_eq`, `TorusMeasure.measure_density_modular_invariant`), which this file
+does not import; and `D = 26` enters only through the exponent `12 = (D − 2)/2`,
 which is an input, not an output, of this lemma. -/
 theorem im_pow_twelve_mul_norm_eta_pow_48_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
     (g • τ).im ^ 12 * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 48

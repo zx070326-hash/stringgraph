@@ -126,3 +126,124 @@
   - 凡在图节点里复述该前提，写「`p` 落在半空间 `R^{D−1,1}_+ = {p^D > 0}`」，**不得**写成「未来半光锥」「未来类时」「on/inside the forward light cone」。
   - 本节**不判定**该假设在 Theorem 2.4 / Theorem 2.20 的证明中是否可去——原文只说 "for convenience" 并只给了 `⟨,⟩_R` 号差这一个理由，是否还有别处依赖它，属 curator 的 `inferred` 判断，抽取阶段不做。E8「前提链」那一行仍应保留该条，但措辞按上一点改写。
 - 证据等级：**L1**（auditor 页图逐字）。原记录（researcher 2026-09-11 首轮，同为 L1 页图）在此处转述失真，属**转述错误**而非取件错误。
+
+---
+
+## 7. ★ §4「GSO 投影」逐字复核（2026-09-11，researcher 第二轮页图）——Proposition 4.3、p.329 Remark 的 G-parity、p.330 收尾句
+
+> 只追加，不改上文 §2 E9 任何一行。触发：图里要把「GSO 投影的协变/上同调版本」挂 LZ 1989，需要 Prop 4.3 与 G-parity 定义的逐字。
+> 取件：Project Euclid `https://projecteuclid.org/download/pdf_1/euclid.cmp/1104179468`（2.5 MB 扫描件，免登录，**与 §0 同一文件**）→ `Read(pages=28-33)`。**PDF 页 = 期刊页 − 300**（p.328 = PDF 28）。
+
+### 7.1 ★★ 两个都叫 `Ḡ_κ` 的算子（p.328）——**引用前必须先消歧**
+
+本节最重要的发现：**p.328 上一页之内 `Ḡ_κ` 被定义了两次，作用空间不同**，上文 E9 只记了第二个。
+
+**(a) 物质 Fock 空间上的 G-parity（p.328，正文，无编号）逐字：**
+
+> 「GSO defined the *G*-parity on the Fock space `V(p,κ)` by
+> `Ḡ_κ = Γ_κ(−1)^{Σ_{n≥1} d_{−n+κ}·d_{n−κ}}` ,
+> where `Γ_{1/2} = −1` and `Γ₀` is the chirality operator on `R(p,0)` with `Γ₀² = 1`, `{Γ₀, d₀} = 0`. Note that `Ḡ_κ` is essentially the **Z₂**-gradation defined on `V(p,κ)`. Thus a natural extension to `C_rel(p,κ)` would be」
+
+**(b) 相对复形上的延拓 = Definition 4.1（p.328）逐字：**
+
+> 「**Definition 4.1.** *Let* `Ḡ_κ = Γ_κ(−1)^{Σ_{n≥1}(d_{−n+κ}d_{n−κ} + b_{−n}c_n + c_{−n}b_n)}`. *Then one has*
+> `Q : ½(1 ± Ḡ_κ)C^n_rel(p,κ) → ½(1 ∓ Ḡ_κ)C^{n+1}_rel(p,κ)`.  (1)
+> *Let*
+> `P̄_± = ½(1 ± (−1)^{U+κ}Ḡ_κ)`.  (2)
+> It follows that `(P̄_± C*_rel(p,κ), Q)` are two subcomplexes of `(C*_rel(p,κ), Q)`. We will denote their cohomology groups by `H*(P̄_± C_rel)` and call `(P̄_± C*_rel, Q)` the **GSO subcomplex**.」
+
+⚠ **引用纪律**：(a) 只含物质振子 `d`，(b) 多了 `bc` 鬼场项。两者同名同记号。凡在节点里写 `Ḡ_κ`，**必须写明是 Definition 4.1 的版本还是 p.328 正文那个**。
+⚠ **(1) 的箭头是 `± → ∓`**：`Q` **反转** `Ḡ_κ` 的本征值，所以真正与 `Q` 对易的投影是 (2) 里带 `(−1)^{U+κ}` 的那个组合，不是 `½(1±Ḡ_κ)` 本身。上文 E9 把 (1) 略掉了，而这一步正是 `P̄_±` 为什么要乘 `(−1)^{U+κ}` 的全部理由。
+
+### 7.2 ★★ p.329 Remark 逐字——「the right-hand side」指的是 `(−1)^{U+κ}Ḡ_κ`，不是 `Ḡ_κ`
+
+> 「**Remark.** We note that each of the factors
+> `(−1)^{Σ_{n≥1} b_{−n}c_n}` , `(−1)^{Σ_{n≥1} c_{−n}b_n}` ,
+> `(−1)^{Σ_{n≥1} β_{−n+κ}γ_{n−κ}}` , `(−1)^{Σ_{n≥1} γ_{−n+κ}β_{n−κ}}`
+> in `(−1)^{U+κ}` is an involution. Thus we can write
+> `(−1)^{U+κ}Ḡ_κ = Γ_κ(−1)^{Σ_{n≥1}(d_{−n+κ}d_{n−κ} + β_{−n+κ}γ_{n−κ} − γ_{−n+κ}β_{n−κ})}` .
+> The right-hand side is precisely the **"G-parity"** proposed by Terao, Uehara [15], and Ohta [13], as a generalization of the GSO projection.」
+
+**三条使用说明：**
+
+1. **上文 E9 引的那句「The right-hand side is precisely the "G-parity"…」，其「right-hand side」是上面这个 `(−1)^{U+κ}Ḡ_κ` 的重写式**，**不是** Definition 4.1 的 `Ḡ_κ`。E9 只抄了结论句、没抄被指代的式子，容易被读成「Definition 4.1 = Terao–Uehara/Ohta 的 G-parity」——**那是错的**。
+2. 结构上：`(−1)^{U+κ}` 提供四个鬼场对合因子，与 Definition 4.1 里的 `bc` 项相乘后 **`bc` 项在最终表达式里消失**，只剩 `dd` 与 `βγ` 项。这解释了为什么重写式比 Definition 4.1 「更短又更对称」。
+3. ⚠ **转录可信度分层（1989 年 CMP 扫描件，下标字号极小）**：
+   - **高可信**：四个对合因子的**类型**（两个 `bc`、两个 `βγ`）、`(−1)^{U+κ}Ḡ_κ` 这个左端、`Γ_κ` 前因子、`dd` 项、结论句逐字。
+   - **需复核**：重写式指数里 `β γ` 与 `γ β` 两项之间的**相对符号**（我读到的是 `+ … −`），以及各下标 `−n+κ / n−κ` 的精确配对。**凡把这条式子写进图节点的 `statement`，先请 auditor 用同一页图复核一次符号**；只引「`(−1)^{U+κ}Ḡ_κ` = Terao–Uehara/Ohta 的 G-parity」这个**指认**则无此风险。
+
+### 7.3 ★ Proposition 4.2 与 Proposition 4.3 逐字（p.329 下半 – p.330）
+
+> 「**Proposition 4.2.** `char P̄_+C_rel(p,k) = 8p₀^{(8)}(−p·p/2)`.」
+
+⚠ **原刊排印疑点**：参数写作 **`(p, k)`**，而全文其余各处一律用 `κ`（kappa）。按上下文（`Proof. Let κ = ½. Then …`，随后又做 `κ = 0`）**应为 `(p, κ)`**。属**原刊排印错误**的可能性大于扫描误读（同页其他 `κ` 渲染正常）。引用时写 `κ`。
+
+> 「**Proposition 4.3.** *For* `κ = 0, ½`,
+> (i) *there is an isometry*
+> `H*_rel ≅ H*(P̄_+C_rel) ⊕ H*(P̄_−C_rel)`
+> *such that the right-hand side is an orthogonal decomposition*;
+> (ii) *the cohomology of the GSO subcomplex has*
+> `dim H^n(P̄_+C_rel) = 8p₀^{(8)}(−p·p/2)`  *for* `n = 0`
+> `= 0`  *otherwise*.」
+
+**证明逐字（p.330）：**
+
+> 「*Proof.*
+> (i) It is easy to check that `P̄_±` are orthogonal projectors with respect to `⟨,⟩_rel` i.e.
+> `P̄²_± = P̄_±` , `P̄_±* = P̄_±` ,
+> `P̄_+P̄_− = P̄_−P̄_+ = 0` , `P̄_+ + P̄_− = 1` .
+> Furthermore, `[Q, P̄_±] = 0`. These equations imply that the map
+> `H*_rel → H*(P̄_+C_rel) + H*(P̄_−C_rel)` ,
+> `[ω] ↦ [P̄_+ω] + [P̄_−ω]`
+> is an isometry.
+> (ii) Combining (i) and **Theorem 2.4**, we have `H^n(P̄_+C_rel) = 0` unless `n = 0`. By the **Euler–Poincaré Principle**, we have
+> `Σ_{n∈Z}(−1)^n dim P̄_+C_rel = dim H^0(P̄_+C_rel)` .
+> The left-hand side is `char P̄_+C_rel` which is given by **Proposition 4.2**. □」
+
+**对建卡的四点（全部出自上面逐字，非推断）：**
+
+1. **等距映射是显式给出的**：`[ω] ↦ [P̄_+ω] + [P̄_−ω]`（与 Thm 2.20 的 `λ` 一样，LZ 习惯把映射写出来）。
+2. **Prop 4.3 的依赖是原文明写的**：`Theorem 2.4`（消灭定理）+ Euler–Poincaré + `Proposition 4.2`。⇒ **Prop 4.3 继承 Thm 2.4 的全部前提**，其中最要紧的是 **`p ≠ 0`**（Thm 2.4 逐字「Suppose p ≠ 0」），以及 §1 的 `D = 10`、`p` 在半空间 `{p^D > 0}`（见 §6 复核-1）。**Prop 4.3 自身的陈述里一个量词都没有**，`κ = 0, ½` 是唯一显式的。
+3. **(ii) 只对 `P̄_+` 成立**——原文没有给 `P̄_−` 的维数公式。写节点时不要对称化。
+4. **强度**：Proposition，证明完整（"It is easy to check" 只用在投影子的四条代数恒等式上，那几条确实是一行演算）。
+
+### 7.4 ★ p.330 收尾句逐字——引号只加在 "covariant" 一个词上
+
+> 「We note that the cohomology of the GSO subcomplexes `H^0(P̄_+C_rel(p,κ))`, `κ = 0, ½` no longer have the two undesirable features—i.e. `H^0(P̄_+C_rel(p,½))` has no tachyonic states and `dim H^0(P̄_+C_rel(p,½)) = dim H^0(P̄_+C_rel(p,0))`. Thus we have achieved the **"covariant"** equivalent of the GSO projection.」
+
+⚠ **两处易错**：
+- 原文是 `the "covariant" equivalent of the GSO projection`，**引号只包住 `covariant`**，不是 `the "covariant equivalent of the GSO projection"`。任务书与常见转述都写成后者。
+- 动词是 **"we have achieved"**，不是 "we have proved/constructed"；作者把它当作**对已有物理提案的协变重述**，而不是新定理。**节点的 statement 不宜写成「LZ 证明了 GSO 投影」。**
+
+### 7.5 「两个不良特征」的出处（p.328 开头，逐字）——Prop 4.3 的动机
+
+> 「… sector (`κ = 0`) fermions. However, **Corollary 2.15 (i)** implies that `dim H^0_rel(p,0) ≠ dim H^0_rel(p,½)`. Thus one of the basic requirements of a supersymmetric theory — # bosons = # fermions at each mass level — is violated. It turns out that these two undesirable features can be removed by certain natural truncations on the spectrum. They were first proposed by **Gliozzi, Scherk and Olive [8]** (GSO) in the **"old covariant"** formalism. It turns out that if one projects out the **Z₂**-odd states of `P(p,κ)` in both sectors, the above two features will be eliminated. We will discuss these truncations below.」
+
+⇒ (a) 两个不良特征 = **NS 扇区有快子** + **玻色/费米态数不等**（后者由 `Corollary 2.15(i)` 的维数公式直接读出）；
+(b) **GSO 的原始提案归 [8] = Gliozzi–Scherk–Olive，且 LZ 明说那是在「old covariant」形式下提的**——本文自己只做协变化；
+(c) 顺带：**LZ 1989 全文出现 "old covariant" 字样**（此处 + p.335 结论句）。这与 `lian-zuckerman-1991` 记录里「全文无 old covariant 字样」**不矛盾**，那是另一篇。
+
+### 7.6 本轮 negative evidence（通读期刊 pp.328–333 六页）
+
+- §4 **不出现 "spacetime supersymmetry" 的证明**，只出现「#bosons = #fermions at each mass level」这条必要条件（p.328）。**不要把 Prop 4.3 当作时空超对称的来源。**
+- §4 **不出现 `E₈×E₈` / `SO(32)` / 模不变性 / 配分函数**——GSO 在本文是**纯代数截断**，没有一圈模不变性的论证。
+- §4 **不引 Henneaux、不引 FGZ**；GSO 相关只引 [8]（GSO）、[13]（Ohta）、[15]（Terao–Uehara）、[19]（GSW，用于 Jacobi 公式：p.328 逐字「using Jacobi formula (see [19], Chap. 4)」）。
+
+### 7.7 对图的建议（researcher 不改 `graph/`，仅列；替换 §5 里 GSO 那一行的粒度）
+
+| 建议节点 | kind / status | statement 要点 | loc | 依赖 |
+|---|---|---|---|---|
+| `gso-subcomplex-definition` | definition | `P̄_± = ½(1 ± (−1)^{U+κ}Ḡ_κ)`；`(P̄_±C*_rel, Q)` 是子复形 | `Definition 4.1, p.328` | `Ḡ_κ`（Def 4.1 版）、`U`、`C_rel` |
+| `gso-orthogonal-decomposition` | proposition / rigorous | Prop 4.3(i)：`H*_rel ≅ H*(P̄_+C_rel) ⊕ H*(P̄_−C_rel)` 为正交分解，等距由 `[ω] ↦ [P̄_+ω]+[P̄_−ω]` 给出 | `Proposition 4.3(i), pp.329–330` | Def 4.1 |
+| `gso-projected-cohomology-dimension` | proposition / rigorous | Prop 4.3(ii)：`dim H^n(P̄_+C_rel) = 8p₀^{(8)}(−p·p/2)`（`n=0`），否则 0 | `Proposition 4.3(ii), p.329` | **`no-ghost-superstring` 的 Thm 2.4**（含 `p≠0`、`D=10`、半空间动量）、`Prop 4.2` |
+| `gso-covariant-equivalence` | proposition / **physical-argument 或 definition-level** | NS 无快子且两扇区维数相等 ⇒ 作者称「achieved the "covariant" equivalent of the GSO projection」 | `p.330` | 上一条、`Corollary 2.15(i)` |
+
+- **G-parity 的物理归属**：按 p.329 Remark，`(−1)^{U+κ}Ḡ_κ` = Terao–Uehara [15] / Ohta [13] 提出的 G-parity；**原始 GSO 截断归 [8] Gliozzi–Scherk–Olive**（`sources.bib` 目前**没有** GSO 条目，是干净的新增目标：Nucl. Phys. B122 (1977) 253–290）。
+- ⚠ 上文 **E9 的表述需收紧**：E9 写「Definition 4.1：…；p.329 Remark 逐字：「The right-hand side is precisely…」」，中间缺了被指代的式子，按 7.2(1) 会被误读。E9 原文按规则不改，**以本节为准**。
+
+### 7.8 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| LZ 1989 全文 PDF | `projecteuclid.org/download/pdf_1/euclid.cmp/1104179468` | ✅ 2.5 MB 落盘（此前只记了 `journalArticle/Download?urlId=` 端点，**`/download/pdf_1/` 这条同样有效且更短**） |
+| 期刊 pp.328–333 | `Read(pages=28-33)` | ✅ 六页页图；`PDF 页 = 期刊页 − 300` |

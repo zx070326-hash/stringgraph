@@ -208,9 +208,12 @@
      `sl_ST_cube : (S*T)^3 = -1`（本文件也有，且更强）。
   2. 若图里有「`τ₂|η|⁴` 模不变」这条卡（一般挂在单圈配分函数链上），可挂
      `im_mul_norm_eta_pow_four_modular_invariant`。
-  3. **仍缺**（不要误标）：η 本身对一般 `g` 的乘子系统（Dedekind 和、24 次单位根），
-     以及测度 `d²τ/τ₂²` 的模不变性。本文件只控制 `‖η‖` 在 `τ₂|η|⁴` 这一特定组合里的行为；
-     `12 = (D−2)/2` 是输入不是输出。
+  3. **仍缺**（不要误标）：η 本身对一般 `g` 的乘子系统（Dedekind 和、24 次单位根）。
+     本文件只控制 `‖η‖` 在 `τ₂|η|⁴` 这一特定组合里的行为；`12 = (D−2)/2` 是输入不是输出。
+     ✔ **测度 `d²τ/τ₂²` 的模不变性已不在此列**（2026-09-11）：它在
+     `StringFormal/Math/TorusMeasure.lean`（`measure_smul_eq` / `measure_density_modular_invariant`），
+     图卡 `spectrum.torus-measure-modular-invariant` 已挂 `lean_decl` 并新增
+     `--via-lean`（formalized）。本文件仍然 η-free 且不涉及测度，两边分工不变。
 
 - [x] `psl-generators`：`StringFormal/Math/ModularGroupGenerators.lean`（无 sorry，8 个声明
   `check_axioms --all` 全 `ok`）。只 import Mathlib，是独立小岛，被 `DedekindEtaModular` 复用。

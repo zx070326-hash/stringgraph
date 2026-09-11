@@ -90,6 +90,7 @@ gaps:
     **场论对照 (13.3.3) 与 G_d(y) 的出处引 Vol.1 (8.7.25)**，本图无该节点（二手源）。
     本卡只用 G_d 的显式表达式，不断言 (13.3.3)。
 notes: |
+  reviewer-verified: reviewer-batch22, 2026-09-11（**只签前缀复算**：两行同给 iV·2^{2d−13}π^{3d/2−11}α'^{d−6}Γ(d/2−1)y^{2−d}，3−p = d−6，exp(−2πtα'm²) 与 m = y/2πα' 给 ty²/2πα'；2、π、α' 闭合；与 ch13.md §7.3 逐字一致。status 不变（原书 "combining the bosonic result" 无推导）。lead 落地。）
   【本推导是从哪条推导里拆出来的】
   branes.d-brane-bps-no-force--via-cylinder-ns-ns-rr-cancellation 的 summary 第 (2) 步
   （即 (13.3.1) 的计算）整段移到本推导，并按抽取记录 §7.3(b) 补全了积分与幂次比对；

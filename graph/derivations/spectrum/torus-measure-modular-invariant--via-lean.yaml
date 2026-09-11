@@ -1,0 +1,119 @@
+id: spectrum.torus-measure-modular-invariant--via-lean
+target: spectrum.torus-measure-modular-invariant
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      提供群、S/T 的矩阵与作用本身：Lean 侧 `SL(2, ℤ)` 在 `UpperHalfPlane` 上的 `•`
+      （Mathlib `UpperHalfPlane.instSMul`，即 τ ↦ (aτ+b)/(cτ+d)）与该定义卡写的作用逐字相同，
+      `ad − bc = 1` 由 `SpecialLinearGroup` 的 `det_coe` 供给（本文件的 `det_eq_one_complex`）。
+      目标卡 statement 明写「SL(2,Z) 按 τ ↦ (aτ+b)/(cτ+d) 作用在 H 上
+      （worldsheet.modular-group-psl2z）」，故这是 statement 的字面依赖，**非 inferred**。
+      ⚠ 该定义卡里写的 **Im(γ·τ) = Im τ/|cτ+d|²** 这一步，在 Lean 里不再靠该卡的文字：
+      它被 `im_smul_mul_normSq` 从 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq` 重证
+      （清分母形式 τ₂'|cτ+d|² = τ₂）。⇒ --via-sl2z-action 的 gaps 第 2 条
+      「该式的可追溯性止于定义卡」在本推导里**不再是缺口**。
+      ⚠ 该定义卡已于 2026-09-11 接桥层 `StringFormal.Bridge.psl2z_smul_eq` 升为 formalized，
+      故本推导 own=formalized 不被它按 min 规则压低。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/TorusMeasure.lean :: StringFormal.TorusMeasure.measure_smul_eq；支撑链 denom_ne_zero' → det_eq_one_complex → mobius_deriv、im_smul_mul_normSq → measure_density_modular_invariant（逐点层），coe_inv_nnnorm_sq → volume_eq_lintegral_inv_im_sq → (instance) SMulInvariantMeasure SL(2,ℤ) ℍ volume → measure_smul_eq → lintegral_inv_im_sq_smul（测度层）"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/torus-measure`（新文件，提交 6fb41a8，
+      合并 26447bb）；Lean 4 + Mathlib **v4.33.1**。目标声明全文：
+
+          theorem measure_smul_eq (g : SL(2, ℤ)) (s : Set ℍ) :
+              (volume : Measure ℍ) (g • s) = volume s
+
+      逐点层的核心声明全文：
+
+          theorem measure_density_modular_invariant (g : SL(2, ℤ)) (τ : ℍ) :
+              ‖(1 : ℂ) / ((g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)) ^ 2‖ ^ 2 / (g • τ).im ^ 2
+                = 1 / τ.im ^ 2
+
+      文件 docstring 逐字登记了本卡「不断言」的三条：无基本域、无任何积分的收敛性、
+      **无不变密度的唯一性**（"no uniqueness of the invariant density (the card explicitly
+      excludes all three)"），以及取向那一条（见 gaps）。
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7), p.217（物理侧转述：逐字「it is easy to check that dτdτ̄/τ₂² is modular-invariant as well」，零证明）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20，L1（原书页图逐字）。
+      本条**不承载本推导的任何步骤**，只登记弦论教材在何处断言并使用本命题；
+      原书对它零论证，正是本形式化要补的那一步。
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/TorusMeasure.lean`（无 `sorry`）。两层：
+
+  **A. 逐点 / 代数层（本文件从头证，与纸上推导 --via-sl2z-action 的三步逐条对应）**
+    · `denom_ne_zero'`：cτ + d ≠ 0（Mathlib `UpperHalfPlane.denom_ne_zero`）；
+    · `det_eq_one_complex`：ad − bc = 1 推到 ℂ（`Matrix.det_fin_two` + `g.det_coe`）；
+    · `mobius_deriv`：`HasDerivAt (z ↦ (az+b)/(cz+d)) (1/(cτ+d)²) τ`——分子
+      a(cτ+d) − c(aτ+b) 由 `linear_combination det_eq_one_complex` 化成 1，
+      **这正是纸上推导第 (1) 步**，且它把「dτ' = dτ/(cτ+d)²」从形式微分升级成了真的复导数；
+    · `im_smul_mul_normSq`：τ₂' · |cτ+d|² = τ₂（清分母形式，**纸上推导第 (2) 步**）；
+    · `measure_density_modular_invariant`：‖1/(cτ+d)²‖²/(τ₂')² = 1/τ₂²
+      （`field_simp`，**纸上推导第 (3) 步**：两个 |cτ+d|^{±4} 相消）。
+
+  **B. 测度层（纸上推导没有的一层）**
+    · `coe_inv_nnnorm_sq`：Mathlib 的权重 `((1/‖y‖₊)² : ℝ≥0∞)` = `ENNReal.ofReal (1/y²)`；
+    · `volume_eq_lintegral_inv_im_sq`：`vol(s) = ∫⁻_{s ⊆ ℂ} 1/τ₂² dτ₁dτ₂`
+      ——把 Mathlib 的 `MeasureSpace ℍ` 实例**钉成本卡写的那个测度**；
+    · `instance : SMulInvariantMeasure SL(2,ℤ) ℍ volume`：沿 `ModularGroup.sl_moeb`
+      （`g • z = (g : GL (Fin 2) ℝ) • z`）从 Mathlib 的 GL(2,ℝ) 不变性搬下来；
+    · `measure_smul_eq`（本卡 lean_decl）：vol(g·s) = vol(s)，**对任意 s，无可测性假设**
+      （`MeasureTheory.measure_smul`）；
+    · `lintegral_inv_im_sq_smul`：同一结论的积分写法。
+
+  **分工**：B 的变换变量内容（Jacobi 公式
+  `lintegral_image_eq_lintegral_abs_det_fderiv_mul`）**是 Mathlib 的**，本项目不审计；
+  A 与「Mathlib 的 volume = 本卡的 dτdτ̄/τ₂²」这一识别是本项目补的。
+gaps:
+  - |
+    **取向 / 绝对值仍未覆盖**（本卡自建卡起就有的那条 gap，Lean 未关闭）。
+    测度层证的是**正测度** dτ₁dτ₂/τ₂²，即 |dτ ∧ dτ̄| 的那一读法；目标卡 statement 把测度
+    写成 dτ dτ̄ / τ₂²，若按**带取向的 2-形式** dτ ∧ dτ̄ 读，还需要一句「SL(2,ℤ) 的作用全纯
+    ⇒ 保定向 ⇒ 符号不变」。文件 docstring 逐字承认这一点：
+    "`SL(2,ℤ)` acts holomorphically hence orientation-preservingly, so the signed statement
+    follows, but **it is not formalised**."
+    ⚠ 逐点层的 `measure_density_modular_invariant` 里 ‖·‖² 同样取了模长，故这条 gap
+    对 A、B 两层都在。这是本卡目前**唯一**的实质缺口。
+  - |
+    **（不是缺口，记账）不变密度的唯一性**：目标卡「不断言」(e) 已把它排除在断言之外，
+    Lean 同样不涉及（docstring 逐字 "no uniqueness of the invariant density"）。
+    卡与 Lean 在这一点上一致，⇒ --via-sl2z-action 的 gaps 末条在本推导里同样只是记账。
+  - |
+    **不含 τ₂|η(τ)|⁴**。本文件 η-free（docstring 逐字 "this file is η-free"）；
+    τ₂|η|⁴ 的模不变性是 math.eta-modular-invariant-combination
+    （`StringFormal/Math/DedekindEtaModular.lean`）。两条合起来才给出
+    spectrum.one-loop-torus-amplitude-modular-invariant-v2 需要的两个因子。
+  - |
+    **不含基本域、不含收敛性**。vol(g·s) = vol(s) 对任意 s 成立，但**没有**说 F₀ 是基本域
+    （worldsheet.modular-fundamental-domain），也**没有**说任何积分收敛——
+    目标卡「不断言」(c)(d) 已排除，Lean 一致。
+notes: |
+  reviewer-verified: reviewer-batch22, 2026-09-11（check-axioms 于 `measure_smul_eq` 1 ok（curator 当时未能重跑）；取向 gap 保留。lead 落地。）
+  由 curator（lean-wire-11）于 2026-09-11 建立，接的是 formalizer 分支
+  `agent/formalizer/torus-measure`（新文件 `StringFormal/Math/TorusMeasure.lean`，
+  提交 6fb41a8，合并 26447bb）。本分支未改动该 Lean 文件（只改了
+  `DedekindEtaModular.lean` 的文件头注释与 `formal/TODO.md` 的指针）。
+
+  **depends_on 只有一条**，因为本文件的 import 只有三个 Mathlib 文件
+  （`Analysis.Calculus.Deriv.Inv`、`UpperHalfPlane.MoebiusAction`、`UpperHalfPlane.Measure`），
+  **没有 import 本项目的任何文件**——全部数学输入要么是 Mathlib 的、要么在本文件里从头证。
+  图上唯一对应的上游是「群与作用」的定义卡 worldsheet.modular-group-psl2z。
+  特别注意：本推导**不**依赖 worldsheet.modular-group-generated-by-s-and-t-v2
+  （S、T 生成性）：证明对**任意** g ∈ SL(2,ℤ) 直接算，不走生成元归纳。
+  这与 math.eta-modular-invariant-combination--via-lean 不同（那条必须用生成性）。
+
+  **--via-sl2z-action 的去留**：保留。它是纸上三行验算的记录、且已有
+  `reviewer-verified: reviewer-batch21, 2026-09-11`（rigorous）。工具取两条中高者
+  ⇒ 目标卡 own 提到 formalized。
+
+  **check-axioms**：本接线 worktree 无 `.lake`。`TorusMeasure.lean` 是 2026-09-11 刚合入 main
+  的新文件，本轮 curator 未在本 worktree 重跑 `check-axioms`；formalized 的依据是
+  formalizer 的构建自述（docstring 逐字 "Status: complete, no `sorry`"）+ sources.bib 的
+  stringformal-2026 证据标准。按根 CLAUDE.md，**lead 合并前必须跑 `lake build` +
+  `uv run stringgraph check-axioms`**。
+author: curator-lean-wire-11
+created: "2026-09-11"

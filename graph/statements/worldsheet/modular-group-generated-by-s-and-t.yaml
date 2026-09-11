@@ -12,6 +12,7 @@ statement: |
   即不断言「S² 与 (ST)³ 生成全部关系」（那等价于 PSL(2,Z) ≅ Z/2 ∗ Z/3）。
   抽取记录没有任何证据表明原书作了那个更强的断言。
 uses_conventions: []
+superseded_by: worldsheet.modular-group-generated-by-s-and-t-v2
 formal:
   lean_decl: StringFormal.ModularGroupGen.psl_closure_S_T
   lean_file: StringFormal/Math/ModularGroupGenerators.lean
@@ -52,5 +53,22 @@ notes: |
 
   **形式化后本卡的下游用途**：它是「τ₂|η|⁴ 在整个模群下不变」的最后一块拼图，
   已被 math.eta-modular-invariant-combination（2026-09-11 新建，formalized）用掉。
+  **【2026-09-11 拆卡换代（curator lean-wire-11）】本卡已 superseded。**
+  本卡把两件事写在同一张卡上：(1) S、T 生成 PSL(2,Z)；(2) S² = 1、(ST)³ = 1。
+  reviewer-batch21 与两位 curator 共三次建议拆（本卡 --via-lean 的 notes 末段逐字写着
+  「这张卡日后**值得拆成两张**（生成性 / 关系），届时两半各挂各的 lean_decl」）。现已拆为：
+    · **worldsheet.modular-group-generated-by-s-and-t-v2** —— 只留 (1) 生成性
+      （`lean_decl: psl_closure_S_T`）。`superseded_by` 指向它：图上所有实际用到本卡的推导
+      用的都是生成性。
+    · **math.psl2z-s-t-relations** —— 只留 (2) 两条关系
+      （`lean_decl: psl_S_sq`，`psl_ST_cube` 与 SL 层的 `sl_S_sq`/`sl_ST_cube` 在其 sources 里）。
+      放在 `math` 是因为它是纯群论。
+  拆的理由：来源与强度不同（生成性的实质内容在 Mathlib 的辗转相除归纳，关系是两行 `rfl`），
+  且 `formal.lean_decl` 只能填一个名字，合卡时 `psl_S_sq`/`psl_ST_cube` 下游引不到。
+  **本卡的推导去留**：--via-lean 已 `git mv` 改指 v2；--via-generator-relations
+  （physical-argument）按 docs/STATUS_LEVELS.md 保留在本卡上，作为「矩阵直接相乘 +
+  生成性只是断言」这条论证的不可变记录 ⇒ 本卡仍有推导、effective 不变为 open。
+  ⚠ 本卡的 `formal.lean_decl`（psl_closure_S_T）保留不动（它确实证了本卡的 (1)），
+  但**新的接线一律指 v2 或关系卡**。
 author: curator-polchinski-ch5
 created: "2026-09-11"

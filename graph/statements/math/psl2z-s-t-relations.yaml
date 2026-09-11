@@ -1,0 +1,74 @@
+id: math.psl2z-s-t-relations
+kind: proposition
+title: "S 与 T 在 PSL(2,Z) 中满足 S² = 1 与 (ST)³ = 1（两条关系，不是表现）"
+statement: |
+  设 SL(2,Z) 为行列式 1 的 2×2 整数矩阵群，
+    S = ( 0  −1 ;  1  0 ) ,     T = ( 1  1 ;  0  1 ) ,
+  PSL(2,Z) = SL(2,Z)/{±I}（worldsheet.modular-group-psl2z），π : SL(2,Z) → PSL(2,Z) 为商映射。则
+
+  **(1)** 在 SL(2,Z) 中 S² = −I 且 (ST)³ = −I；
+
+  **(2)** 因此在 PSL(2,Z) 中
+      π(S)² = 1 ,        (π(S) π(T))³ = 1 。
+
+  **本卡不断言什么：**
+  (a) **不断言 S、T 生成 PSL(2,Z)**——那是 worldsheet.modular-group-generated-by-s-and-t-v2，
+      与本卡是两条独立的命题（本卡是两行矩阵乘法，生成性是一个辗转相除归纳）。
+  (b) **不断言 (1)(2) 是 PSL(2,Z) 的一个表现（presentation）**，即不断言 S² 与 (ST)³
+      生成全部关系（那等价于 PSL(2,Z) ≅ Z/2 ∗ Z/3）。
+  (c) 不断言 S、T 的阶恰为 2 与 3（本卡只给「≤」的那半：关系成立；π(S) ≠ 1、(π(S)π(T))^k ≠ 1
+      对 k = 1,2 未在本卡内）。
+  (d) 不涉及 S、T 在上半平面 H 上的作用（S : τ ↦ −1/τ、T : τ ↦ τ+1）：本卡纯群论，
+      那一层识别在定义卡 worldsheet.modular-group-psl2z 里。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.ModularGroupGen.psl_S_sq
+  lean_file: StringFormal/Math/ModularGroupGenerators.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.{psl_S_sq, psl_ST_cube, sl_S_sq, sl_ST_cube, neg_one_mem_center, psl_neg_one}"
+    note: |
+      本仓库；Lean 4 + Mathlib v4.33.1。逐条对应：
+        · **(2) 第一式** → `psl_S_sq : (psl S) ^ 2 = 1` —— 本卡 `formal.lean_decl`；
+        · **(2) 第二式** → `psl_ST_cube : (psl S * psl T) ^ 3 = 1`；
+        · **(1)** → `sl_S_sq : S ^ 2 = (-1 : SL(2, ℤ))` 与
+          `sl_ST_cube : (S * T) ^ 3 = (-1 : SL(2, ℤ))`（两条都是
+          `ext i j <;> fin_cases i <;> fin_cases j <;> rfl`）；
+        · SL → PSL 的桥是 `neg_one_mem_center`（−1 中心）与 `psl_neg_one`（−1 在商里平凡）。
+      ⚠ `formal.lean_decl` 只能填一个名字，故取 (2) 的第一式；另外三条在本 sources 里逐条登记，
+      下游要引哪一条就引哪一条（`psl_ST_cube` 与 `sl_S_sq` / `sl_ST_cube` 与 `psl_S_sq` 同等地位）。
+      ⚠ Lean 里的 PSL 是 Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup` = `SL(2,ℤ)/Z(SL(2,ℤ))`；
+      `Z(SL(2,ℤ)) = {±I}` 由桥层 `StringFormal.Bridge.center_eq_pm_one` 证明，故它与本卡正文的
+      `SL(2,Z)/{±I}` 是同一个群（见 --via-lean 的 gaps 首条）。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（生成变换 T : τ → τ+1 与 S : τ → −1/τ 的矩阵形式）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70，L1（读到 schrans-2020 §5.2，
+      笔记 p.244–245）。
+      ⚠ **抽取记录明确记为未核实的一点**：「S² = 1、(ST)³ = 1 这两条关系是否写在 Polchinski 的
+      (5.1.12) 里，还是 [S] 自己补的，未核实」（E70 备注，并见抽取记录 §7 的清单）。
+      ⇒ 本条只登记「两条关系在物理文献里出现在哪里」，**本卡的论证不靠它**（论证是 Lean 的）。
+tags: [math, modular-group, psl2z, group-theory, formalized]
+notes: |
+  由 curator（lean-wire-11）于 2026-09-11 新建，是 worldsheet.modular-group-generated-by-s-and-t
+  **拆卡**的一半：原卡把「(1) S、T 生成 PSL(2,Z)」与「(2) S² = (ST)³ = 1」写在同一张卡上，
+  reviewer-batch21 与两位 curator 共三次建议拆（原卡 --via-lean 的 notes 末段逐字写着
+  「这张卡日后**值得拆成两张**（生成性 / 关系），届时两半各挂各的 lean_decl」）。拆的理由：
+    · **来源不同**：生成性的实质内容在 Mathlib（`SpecialLinearGroup.SL2Z_generators`，
+      对 |c| 作辗转相除归纳）；两条关系是本项目的两行 `rfl`。
+    · **强度不同**：前者是一条真正的定理，后者是有限次 2×2 整数矩阵乘法。
+    · **`formal.lean_decl` 只能填一个**：合卡时只能挂 `psl_closure_S_T`，
+      `psl_S_sq` / `psl_ST_cube` 只能塞进 sources 的备注里，下游无法直接引。
+  另一半是 worldsheet.modular-group-generated-by-s-and-t-v2（只留生成性），
+  原卡 superseded_by 指向那一张（拆卡时 `superseded_by` 只能填一个 id，按「主命题」取生成性；
+  本卡由原卡 notes 与 --via-lean 的 sources 交叉指认，不是孤立新建）。
+
+  **为什么放在 `math` 而不是 `worldsheet`**：本卡是纯群论（2×2 整数矩阵的两个等式），
+  与世界面理论无关，与 math.eta-modular-invariant-combination 同一层。
+  生成性那半留在 `worldsheet`（id 不可改，且它已被多条世界面推导引用）。
+
+  **本卡目前没有下游**：图中用到 S、T 的推导（η 的模不变性、基本域的归约算法）用的都是
+  **生成性**，不是这两条关系。本卡是为「关系」这条命题留的挂钩，以及让生成性那张卡
+  只说一件事。若日后要做 PSL(2,Z) ≅ Z/2 ∗ Z/3（表现）或基本域的乒乓引理，本卡是输入之一。
+author: curator-lean-wire-11
+created: "2026-09-11"

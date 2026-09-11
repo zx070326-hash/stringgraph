@@ -65,14 +65,22 @@ StringFormal/
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
   Math/DedekindEtaModular.lean  `τ₂|η(τ)|⁴` 在**整个 SL(2,ℤ)** 下不变（对 `Subgroup.closure` 归纳，
                             谓词必须取 `∀ τ` 形，因为 inv 分支在 `g⁻¹•τ` 用归纳假设）；
-                            `τ₂ⁿ|η|⁴ⁿ` 与 `τ₂¹²|η|⁴⁸`（玻色单圈被积函数的倒数）。乘子系统与
-                            测度 `d²τ/τ₂²` 的不变性仍缺
+                            `τ₂ⁿ|η|⁴ⁿ` 与 `τ₂¹²|η|⁴⁸`（玻色单圈被积函数的倒数）。**乘子系统仍缺**；
+                            测度 `d²τ/τ₂²` 的不变性已移到 `Math/TorusMeasure.lean`（本文件 η-only）
   Math/ModularGroupGenerators.lean  S、T 生成 `PSL(2,ℤ)` 且 `S² = (ST)³ = 1`（图卡
                             `worldsheet.modular-group-generated-by-s-and-t`）。`SL(2,ℤ)` 层的生成定理
                             是 Mathlib 的 `SpecialLinearGroup.SL2Z_generators`（本项目只再导出），
                             新做的是 `(ST)³ = −1` 与到 `SL/Z` 的搬运。**不**证 presentation
                             （`PSL ≅ ℤ/2 ∗ ℤ/3`）；`Z(SL(2,ℤ)) = {±1}` 在
                             `Math/MathlibBridges.lean` 的 `center_eq_pm_one`
+  Math/TorusMeasure.lean    测度 `dτ dτ̄/τ₂²` 的 `SL(2,ℤ)` 不变性（图卡
+                            `spectrum.torus-measure-modular-invariant`）。两层：逐点层从头证
+                            `mobius_deriv`（dτ'/dτ = 1/(cτ+d)²）、`im_smul_mul_normSq`（τ₂'|cτ+d|² = τ₂）
+                            → `measure_density_modular_invariant`；测度层把 Mathlib 的
+                            `SMulInvariantMeasure (GL (Fin 2) ℝ) ℍ volume` 搬到 `SL(2,ℤ)` 得
+                            `measure_smul_eq`（任意子集，无可测性假设），并用
+                            `volume_eq_lintegral_inv_im_sq` 把 Mathlib 权重 `(1/‖y‖₊)²` 钉成 `1/τ₂²`。
+                            η-free；**取向版（带符号的 2-形式 dτ ∧ dτ̄）未形式化**
   Math/MathlibBridges.lean  **桥层**（`namespace StringFormal.Bridge`）：`math.dedekind-eta-function`
                             与 `worldsheet.modular-group-psl2z` 两张定义卡。η 侧把 Mathlib 的
                             `ModularForm.eta` 逐字展开成 `q^{1/24}∏(1−q^n)` 并接上分支约定
