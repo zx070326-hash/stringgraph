@@ -1,0 +1,89 @@
+id: math.no-holomorphic-quadratic-differentials-on-sphere
+kind: proposition
+title: "球面上没有非零全纯二次微分：H⁰(P¹, K²) = 0"
+statement: |
+  **约定**：黎曼面 Σ 上的**全纯二次微分**是给每个全纯坐标片 (U, z) 指定一个全纯函数 φ(z)，
+  在换片 z ↦ w 时按
+    φ̃(w) = φ(z) · (dz/dw)²
+  相容变换的对象；它就是典范线丛的平方 K² = K^{⊗2} 的全纯截面。记其全局截面空间为 H⁰(Σ, K²)。
+
+  在 P¹ = C ∪ {∞}（= 紧、连通、亏格 0 的黎曼面）上
+    **H⁰(P¹, K²) = 0** ，
+  即除 φ ≡ 0 外没有全局全纯二次微分。
+  次数记账（同一件事的线丛说法）：deg K = 2g − 2 = −2，故 deg K² = −4 < 0，
+  而**负次数线丛没有非零全纯截面**。
+
+  **本命题不断言什么**（逐条，重要）：
+  - **不断言圆盘 D₂ 的情形**。那是姊妹卡 math.no-holomorphic-quadratic-differentials-on-disk，
+    它需要额外的边界条件与 ∞ 点前提，且严格程度更低。
+  - **不断言 μ(S₂) = 0**。从 H⁰(K²) = 0 到「模数 μ = 0」还要过桥
+    worldsheet.moduli-holomorphic-quadratic-differentials（μ = 全纯二次微分空间的实维数）。
+    本卡只给数学侧那一格。
+  - **不断言 RP₂ 的情形**。RP₂ 不可定向，二次微分要用 dianalytic / Klein 面的语言，
+    本项目在这方面只有 caohuu-ghisa-2004 与 barza-ghisa-2009 两条（且证明外包），
+    **不足以照搬**。RP₂ 的 μ = 0 另有出处（Polchinski §6.1 对 RP₂ 的独立正文陈述，
+    已由 worldsheet.rp2-conformal-killing-group 承载）。
+  - **不断言亏格 ≥ 1 的计数**（g ≥ 2 时 dim H⁰(K²) = 3g − 3、g = 1 时 = 1）。
+    那需要完整的 Riemann–Roch 加 deg K = 2g − 2，本图另有节点在建。
+  - **不涉及带极点或带标记点的二次微分**。⚠ 这是最容易引错的一格：
+    Eynard 讲义 Ch. 5 Theorem 4.1 的 `Ω_𝒮` 是「在标记点有**二阶极点**」的二次微分构成的**仿射**空间，
+    **不是** H⁰(K²)（math-sources.md §39.7(c) 的明确警告）。
+  - 不涉及任何世界面/物理内容（Weyl 因子、路径积分测度、鬼场）。
+uses_conventions: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；配套定义 (1-5)(1-6), p.71"
+    note: |
+      **L1 全文到手**（math-sources.md §39.7 与 §42）。原文：
+      「**Theorem 1.2 (Riemann-Roch)** For every divisor D we have r(−D) = deg D + 1 − 𝔤 + i(D).」
+      配套 (1-5)(1-6)：`ℒ(D) = {f ∈ 𝔐⁰(Σ) | (f) ≥ D}`、`r(D) = dim ℒ(D)`；
+      `Ω(D) = {ω ∈ 𝔐¹(Σ) | (ω) ≥ D}`、`i(D) = dim Ω(D)`。
+      与 Hartshorne 形式的字典：`r(−D) = l(D)`、`i(D) = l(K − D)`。
+      ⚠⚠ **本条是框架来源，不是本命题的直接来源**。researcher 已明写
+      （math-sources.md §42「三条值得 curator 注意的后果」第 3 条）：
+      「负次数线丛无非零全纯截面」这条引理（`deg D < 0 ⇒ l(D) = 0`）
+      **在教材里是 RR 之前的独立命题，不含在 RR 里**，且本项目**未核到它的编号**。
+      ⇒ 本卡陈述末尾的 `deg K² = −4 < 0` 记账用得上 Eynard 的 RR 语言与 deg 约定，
+      但那条关键引理**没有带编号的来源**——故本卡的推导实际走的是两片正则性的初等计算。
+      ⚠ 该讲义**每章内部重新计数**，loc 必须写「Ch. 4, Theorem 1.2」；只写「Theorem 1.2」
+      会与 Ch. 5 的同号定理混淆。
+  - ref: farkas-kra-1992
+    loc: "§III.4「Divisors and the Riemann–Roch Theorem」, pp. 69–78, 2nd ed."
+    note: |
+      **只有小节位置是 L1**（出版方目录扫描，DNB 路线；math-sources.md §42.3）；正文未取得。
+      ⚠⚠ **禁止写「Theorem III.4.8」**：该定理号在本项目只有 L4 证据（检索后端转述），
+      sources.bib 的 note 里已下过同样的禁令。
+      ⚠ 本条登记的用途：`deg D < 0 ⇒ l(D) = 0` 这条引理在标准教材里通常就位于 RR 一节的前面，
+      **FK §III.4 是最可能的落点**，供 researcher 下一轮定位。**本项目尚未核实它在这一节里，
+      也未核实它的编号。** 在核实前，本条**不承载本卡的任何一步**。
+      ⚠ 另注：FK 里 RR 出现两次（另一处是 IV.10「Riemann-Roch—An Alternate Approach」, p.237），
+      引用时必须写清是哪一处。
+tags: [math, quadratic-differential, riemann-sphere, moduli, canonical-bundle, riemann-roch]
+notes: |
+  **★ 拆卡记录（2026-09-11，curator-small-backlog-2）**：本卡是
+  math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2 的 **(1)（球面）那一半**。
+  v2 把球面与圆盘写在一张卡上，而两半在文献中被分别推导、严格程度也不同：
+  球面那半是 P¹ 两片正则性的初等 Laurent 计算（已由 reviewer-batch13 复核），
+  圆盘那半是 Schwarz 反射 + 双重，还有两条未复核的缺口。合在一张卡上，
+  球面那半被圆盘那半按 min 规则压住、升不到 rigorous。
+  拆卡的建议逐字写在 v2 卡自己的 notes 里（「建议（给 lead / 下一轮 curator）：本卡还应拆成两张」），
+  本轮执行。v2 已写 `superseded_by` 指向本卡，圆盘那半见
+  math.no-holomorphic-quadratic-differentials-on-disk。
+  v2 的推导 math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2--via-negative-degree
+  按 docs/STATUS_LEVELS.md「旧推导的去留」**保留不动**（它同时承载 (A)(B)(C) 三条路线，
+  是拆卡前论证的历史记录）；本卡与圆盘卡各有自己的新推导。
+
+  **与 Polchinski 的关系**：原书 §6.1 对 S₂（p.167）有一句「there are no moduli」的**断言**，
+  不给论证；书内的一般理由是 §5.2 的 (5.2.11a)，而那正是
+  worldsheet.positive-euler-number-no-moduli 的目标本身（拿来关闭就是循环）。
+  本卡走的是**独立的数学路线**，故不把 Polchinski 列为 source。
+
+  **与 riemann-roch-* 诸卡的关系**：本卡**有意不依赖** math.riemann-roch-theorem /
+  math.canonical-divisor-degree（本卡有一条不需要 RR 的初等证明）。
+  它们落地后可考虑给本卡补一条 --via-riemann-roch 的推导：
+  由 `l(2K) − l(−K) = 3g − 3` 在 g = 0 给 `dim H⁰(K²) − dim H⁰(K^{−1}) = −3`，
+  配 `dim H⁰(K^{−1}) = 3`（球面全纯向量场，见 worldsheet.sphere-conformal-killing-group）
+  即得 `dim H⁰(K²) = 0`。⚠ 那条路线**反过来依赖** κ(S₂) = 6，与本卡现有推导相互独立，
+  不要把两者接成环。
+author: curator-small-backlog-2
+created: "2026-09-11"

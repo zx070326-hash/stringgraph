@@ -1,0 +1,81 @@
+id: math.no-holomorphic-quadratic-differentials-on-disk--via-schwarz-reflection
+target: math.no-holomorphic-quadratic-differentials-on-disk
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.no-holomorphic-quadratic-differentials-on-sphere
+    note: |
+      本推导把圆盘情形**归约到球面情形**：Schwarz 反射把 φ 拼成 C 上的整函数 Φ，
+      再由 (2a) 得 Φ 在 ∞ 片上也正则，于是 Φ dz² 是 P¹ 上的全局全纯二次微分，
+      按姊妹卡即恒为零。这是本推导唯一的图内依赖，且是实边（不 inferred）：
+      被拆前二者写在同一条推导里（(C) 的最后一句逐字「于是回到 (A)」）。
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；定义 (1-5)(1-6), p.71"
+    note: |
+      **框架来源，L1**（math-sources.md §39.7、§42）：提供次数记账语言，经姊妹卡间接用到。
+      ⚠ 本推导的实际论证是 Schwarz 反射 + 归约，不直接用 Riemann–Roch。
+  - ref: farkas-kra-1992
+    loc: "§III.4, pp. 69–78, 2nd ed."
+    note: |
+      **位置 L1、内容未取得**；⚠ **禁止写 Theorem III.4.8**。本条**不承载本推导的任何一步**。
+summary: |
+  **(C) 圆盘：Schwarz 反射把目标归约到球面卡。**
+  设 φ dz² 满足目标的**两条**前提：(2a) 在 H 上全纯**且在 ∞ 点的 u = 1/z 片上
+  φ̃(u) = φ(1/u)·u^{−4} 于 u = 0 全纯；(2b) 在 ∂H ∩ R 上取实值。
+  令 φ*(z) := conj(φ(conj z))，它在下半平面全纯；由 (2b) 与 Schwarz 反射原理，
+  φ 与 φ* 沿实轴全纯拼接，得到 C 上的整函数 Φ（Φ|_H = φ，Φ|_{下半平面} = φ*）。
+  由 (2a)，Φ dz² 在 ∞ 点（u = 1/z 片）也全纯——**这一步用的就是 (2a)，不能省**。
+  于是 Φ dz² 是 P¹ 上的全局全纯二次微分，按
+  math.no-holomorphic-quadratic-differentials-on-sphere 得 Φ ≡ 0 ⇒ φ ≡ 0。
+  ⚠ **(2a) 为什么不可省**：只设「H 上全纯 + 边界取实值」时结论**为假**——
+  φ ≡ 1 满足这两条却非零（它违反的正是 (2a)：u^{−4} 在 u = 0 有四阶极点）。
+  被拆前的旧卡 v1 的 (2) 漏写了 (2a)，推导当时**实际上用了**它，
+  故 v1→v2 的换代只在陈述与本段补写前提，**论证一步未改**（reviewer-batch13, 2026-09-11）。
+  ⚠ 「双重 = P¹ 且反射与二次微分的变换律相容」这一步只作了一句话交代，见 gaps 第一条。
+gaps:
+  - |
+    **★ 未复核缺口之一：∞ 点处理写得简略。** 上半平面的双重（double）作为紧曲面是 P¹，
+    但「H ∪ ∂H ∪ H* 补上 ∞ 后恰是 P¹，且反射与二次微分的变换律相容」这一步
+    本推导只作了一句话交代，没有逐点检验 u = 1/z 片上的相容性。
+    这一步与姊妹卡的 (A) 同型且初等，但**尚未被 reviewer 复核**。
+    ⇒ 这是本推导封顶在 physical-argument 的第一条理由。
+  - |
+    **★ 未复核缺口之二：边界条件是本推导自己选的，不是从别处继承的。**
+    「φ 在 ∂H 上取实值」等价于「φ dz² 在反射下不变」，它是**使二次微分能下降到
+    D₂ = S₂/(z ∼ 1/z̄) 的自然条件**，但本图**没有节点**说物理侧的 μ(D₂)
+    （ker P̂₁^T 在带边曲面上的维数）用的就是这个边界条件。
+    ⚠ 换个边界条件（例如只要求 φ 有界、或要求 Im φ|_∂ = 0 的另一种实结构）结论可能不同。
+    ⇒ **接到 worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 时必须把这条写进 note**，
+    否则会出现「数学卡关掉了一个与物理定义未必相同的问题」。
+    ⇒ 这是本推导封顶在 physical-argument 的第二条理由。
+  - |
+    **本图的 μ 定义写在紧无边曲面上。** worldsheet.moduli-condition-traceless-transverse
+    是无边版本，带边时 ker P̂₁^T 需要边界条件，本图与来源都没有给
+    （worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 最后一条已记）。
+    本推导关不掉这条，只能在目标陈述里声明「不断言 (2b) 就是物理侧那个边界条件」。
+  - |
+    **不覆盖 RP₂**（不可定向，需 dianalytic 语言）；**不覆盖 g ≥ 1**。见姊妹卡推导的同条。
+notes: |
+  **★ 拆卡记录（2026-09-11，curator-small-backlog-2）**：本推导是被拆的
+  math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2--via-negative-degree
+  里的 **(C) 那一段**，逐字搬来并把末句「于是回到 (A)」改成一条指向球面卡的实边。
+  (A)(B) 两段去了姊妹推导 --via-two-patch-regularity（status rigorous）。
+  v2 的旧推导按 docs/STATUS_LEVELS.md「旧推导的去留」保留不动，作为拆卡前的历史记录。
+
+  **为什么仍是 physical-argument（而姊妹卡是 rigorous）**：
+  reviewer-batch13 于 2026-09-11 **只复核了 (A)**（球面那半），(C) **未被复核**；
+  且 (C) 自带两条未关闭的缺口（gaps 前两条）。按 docs/STATUS_LEVELS.md 的 rigorous
+  例外条款，「reviewer 已独立复核」这一条不满足。
+  ⇒ 升级路径：请 reviewer 复核 gaps 第一条（双重 = P¹ 的逐点相容），
+  并就 gaps 第二条给出裁定（边界条件是否需要一张独立的桥卡）。
+  复核通过后在本 notes 写 `reviewer-verified: <agent>, <date>` 并升 rigorous。
+  ⚠ 即使升到 rigorous，本推导的有效状态也受依赖的球面卡限制（后者现为 rigorous，不构成瓶颈）。
+
+  **kind 为什么不是 proof**：论证形式确实是数学证明（Schwarz 反射 + 归约），
+  但校验器强制 `kind: proof ⇒ status ∈ {formalized, rigorous}`，而本推导缺 reviewer 复核、
+  且有两条未关闭的缺口，status 只能是 physical-argument，故 kind 随之取 physical-argument。
+  ⇒ **升级时两个字段一起改**（kind: proof + status: rigorous），别只改一个。
+  被拆前的 v2 推导 --via-negative-degree 也是 `kind: physical-argument`，同一理由。
+author: curator-small-backlog-2
+created: "2026-09-11"

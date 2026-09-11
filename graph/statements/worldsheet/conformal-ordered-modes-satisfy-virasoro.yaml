@@ -1,0 +1,84 @@
+id: worldsheet.conformal-ordered-modes-satisfy-virasoro
+kind: proposition
+title: "共形正规序能动张量的 Laurent 模满足 Virasoro 代数 (2.6.19)（含无中心荷的 SL(2,R) 子代数 (2.6.22)）"
+statement: |
+  设 T(z) 是二维共形场论的全纯能动张量，其与自身的算子乘积展开取
+  worldsheet.tt-ope-central-charge 的形式
+    T(z) T(0) ∼ c/(2 z⁴) + (2/z²) T(0) + (1/z) ∂T(0) ，
+  并按 worldsheet.energy-momentum-laurent-modes 定义其 Laurent 模
+    L_m = ∮_{C_0} (dz/2πi) z^{m+1} T(z) 。
+  则**这组** L_m 满足 Virasoro 代数
+    [L_m, L_n] = (m − n) L_{m+n} + (c/12)(m³ − m) δ_{m+n,0} ，   (2.6.19)
+  其中的中心荷就是 TT OPE 四阶极点里的那个 c。
+
+  作为直接推论（下游实际用到的正是这两条，故写进本卡）：
+    (a) **无中心荷的 SL(2,R) 子代数** (2.6.22)：
+          [L_0, L_1] = −L_1 ,  [L_0, L_{−1}] = L_{−1} ,  [L_1, L_{−1}] = 2 L_0 ，
+        中心项在 m = ±1 处恒为零（(c/12)(1³ − 1) = 0），故这三条关系**与 c 的值无关**；
+    (b) [L_0, L_n] = −n L_n  （(2.6.20)）。
+
+  **「共形正规序」四个字的含义与要紧之处**：在自由场实现里满足上述 TT OPE 的是
+  **共形正规序** : : 的那个 T（worldsheet.conformal-normal-ordering-v2：减去自缩并），
+  即 D 个自由玻色子的 T = −(1/α') :∂X^μ ∂X_μ:，或 bc 系统的 T = :(∂b)c: − λ ∂(:bc:)。
+  本卡断言的是**这个 T 的模**。**产生-湮灭正规序** ° ° 给出的另一组模与本组在 m ≠ 0 处
+  逐字相同、在 m = 0 处相差一个 c-数（X 部门的 a^X、bc 部门的 a^g），
+  见 worldsheet.normal-ordering-modes-agree。
+  ⚠ 把两组模混同会让「用 (2.6.22) 的 [L_1, L_{−1}] = 2L_0 定正规序常数」这个论证**变成循环**：
+  两组 L_0 之差恰是待定的那个常数。
+
+  **本卡不断言什么**：不断言 c 的具体值（那是 worldsheet.free-boson-central-charge-d、
+  worldsheet.bc-ghost-central-charge、worldsheet.beta-gamma-central-charge 各自的事）；
+  不断言 TT OPE 本身的收敛性或围道变形的合法性（见推导的 gaps，这是本卡封顶在
+  physical-argument 的原因）；不断言抽象 Virasoro 代数的结构或唯一性
+  （那是 worldsheet.virasoro-algebra-v2 这张**定义**卡，本卡说的是「这组具体算子实现它」）。
+uses_conventions:
+  - conv.virasoro-standard
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.19), p.56（由 §2.4 eq. (2.4.25) 的 TT OPE 经 §2.6 eq. (2.6.14) 的围道字典得到）；推论 (a) 是 eq. (2.6.22)，推论 (b) 是 eq. (2.6.20)，同页"
+    note: |
+      【原书核实 2026-09-11（researcher 第六轮，L1 页图逐字）】原书 p.56 逐字：
+        `[L_m, L_n] = (m − n)L_{m+n} + (c/12)(m³ − m)δ_{m,−n} .`  **(2.6.19)**
+      同页配套（同批次 L1 核实）：
+        (2.6.20) `[L_0, L_n] = −nL_n`
+        (2.6.22) `[L_0,L_1] = −L_1`、`[L_0,L_{−1}] = L_{−1}`、`[L_1,L_{−1}] = 2L_0`，
+                 原书注明该 SL(2,R) 子代数**不含中心荷**
+        (2.6.30) 开弦的 Virasoro 代数与 (2.6.19) 同形
+      ⚠ **写法差异**：原书写 `(c/12)(m³ − m)`，conv.virasoro-standard 写 `(c/12)m(m²−1)`；
+      二者恒等，本卡正文照原书写 `(m³ − m)`。原书把 δ 写成 `δ_{m,−n}`，与 `δ_{m+n,0}` 恒等。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E40）。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, p.59 eq. (2.7.8) 与 p.61 eq. (2.7.20) 的回指"
+    note: |
+      这两处是本卡**被下游实际使用**的一手证据，也是「被使用的那组 L_m 是共形正规序那组」的依据：
+      p.59 逐字「There are several ways to determine it. **The simplest uses the Virasoro algebra,**
+        2L_0|0;0⟩ = (L_1L_{−1} − L_{−1}L_1)|0;0⟩ = 0 . (2.7.8)」——"the Virasoro algebra" 即回指 §2.6；
+      p.61 逐字「The ordering constant can be determined **as in eq. (2.7.8)**, which gives … (2.7.20)」。
+      而 (2.7.7)/(2.7.19) 把 L_0 写成「°…° 双线性 + 常数」，其左端的 L_0 正是 p.59 逐字所说
+      「the Laurent coefficients of the `: :`-ordered energy-momentum tensor」，即共形正规序那组。
+      见 literature/extractions/polchinski-1998-v1.md §12.1（E42/E43/Q11）与 §12.10 表 B 第 14 项。
+tags: [cft, virasoro, ope, normal-ordering, energy-momentum-tensor, contour-deformation]
+notes: |
+  由 curator 于 2026-09-11 新建，关闭 reviewer-batch10 A 指出的遗漏依赖：
+  worldsheet.normal-ordering-constant-ax--via-virasoro-algebra 与
+  worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra 的 gaps 里
+  各有一条「★ 图上没有一条卡恰好断言『共形正规序的 Laurent 模满足 (2.6.19)』」，
+  并都点名了本卡的 id。两条推导原先各挂 tt-ope-central-charge + ope-commutator-dictionary
+  两条边作为「最接近的承载」，现已改为各挂一条指向本卡的边（非 inferred），
+  由本卡自己的推导去承接那两条。
+
+  **为什么必须与 worldsheet.free-boson-central-charge-d 区分开**：那张（formalized）卡断言的是
+  **产生-湮灭正规序**（Sugawara 型显式模式）那组 L_m 的代数，不是共形正规序这组。
+  用它顶替本卡会把 a^X / a^g 的论证弄成循环（见 statement 里的 ⚠）。
+
+  **为什么必须与 worldsheet.virasoro-algebra-v2 区分开**：那是一张**定义**卡（抽象李代数
+  Vir(R) 长什么样），本卡是一条**命题**（这组由围道积分定义的具体算子满足那个定义）。
+  图上此前只有前者，导致「本推导操作的 L_m 确实满足 Virasoro 代数」这一步无边可挂。
+
+  **适用范围**：本卡按 (2.6.19) 的一般 CFT 形式写，覆盖 X 部门与 bc 部门两个用例。
+  ⚠ bc 部门有一处已知的不精确：T 本身是 Grassmann 偶（b、c 的双线性），故 TT 的围道变形
+  只涉及偶算子；但把 bc 的 TT OPE 算出来要做费米型 Wick 缩并，其换序符号规则在本图未单独核实
+  （与 worldsheet.conformal-normal-ordering-v2 的同名缺口同源）。逐条见推导的 gaps。
+author: curator-small-backlog-2
+created: "2026-09-11"

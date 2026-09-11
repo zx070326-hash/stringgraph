@@ -1,0 +1,83 @@
+id: math.no-holomorphic-quadratic-differentials-on-sphere--via-two-patch-regularity
+target: math.no-holomorphic-quadratic-differentials-on-sphere
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: eynard-2018-lectures
+    loc: "Ch. 4, §1, Theorem 1.2 (Riemann–Roch), p.72, eq. (1-10)；定义 (1-5)(1-6), p.71"
+    note: |
+      **框架来源，L1**（math-sources.md §39.7、§42）：提供除子/线丛的次数记账语言与 `l(D)` 的定义，
+      即路线 (B) 的说法。
+      ⚠ **不提供路线 (B) 的关键引理**：`deg D < 0 ⇒ l(D) = 0` 在教材里是 RR **之前**的独立命题，
+      researcher 已明写它「不含在 RR 里」，且**本项目未核到任何编号**（math-sources.md §42 后果第 3 条）。
+      ⇒ 本推导实际完成的论证是路线 (A)，它自足、不用 RR。
+  - ref: farkas-kra-1992
+    loc: "§III.4, pp. 69–78, 2nd ed."
+    note: |
+      **位置 L1、内容未取得**。登记为「负次数无非零截面」这条引理的**候选落点**，供下一轮定位。
+      ⚠ **禁止写 Theorem III.4.8**（本项目只有 L4 证据）。本条**不承载本推导的任何一步**。
+summary: |
+  **(A) 两片正则性的初等计算（自足，不用 Riemann–Roch）——本推导实际完成的论证。**
+  设 φ dz² 是 P¹ 上的全局全纯二次微分。在 z 片上 φ 是整函数（C 上处处全纯）。
+  换到 u = 1/z 片：由 z = 1/u 得 dz = −u^{−2} du，故
+    φ̃(u) = φ(1/u) · (dz/du)² = φ(1/u) · u^{−4} 。
+  要求 φ̃ 在 u = 0（即 z = ∞）处全纯，即 φ(1/u) 在 u → 0 时以**至少 4 阶**为零。
+  写 φ 的 Taylor 展开 φ(z) = Σ_{n ≥ 0} c_n z^n，则 φ̃(u) = Σ_n c_n u^{−n−4}，
+  其中每一项的幂次 −n − 4 ≤ −4 < 0；正则性要求所有项消失，即 **c_n = 0 对一切 n ≥ 0**，
+  故 φ ≡ 0。⇒ H⁰(P¹, K²) = 0。
+  （与 worldsheet.sphere-conformal-killing-group--via-two-patch-regularity 逐行对偶：
+  向量场是权 −1，(dz/du)^{−1} 给 u^{+2}，留下 3 个非负幂 ⇒ 3 个复参数；
+  二次微分是权 +2，(dz/du)^{+2} 给 u^{−4}，一个非负幂都不剩 ⇒ 0。
+  两者幂次之差 3 正是 κ − μ = 3χ 里那个 3 的来源。）
+
+  **(B) 次数记账（同一件事的线丛说法，非本推导的承重路线）。**
+  deg K_{P¹} = 2g − 2 = −2，故 deg K² = −4 < 0；负次数线丛没有非零全纯截面，
+  即 l(2K) = dim H⁰(K²) = 0。
+  ⚠ 这条「负次数 ⇒ 无截面」的引理在本图**无带编号来源**，见 gaps 第一条。
+gaps:
+  - |
+    **(B) 的关键引理无带编号来源。** `deg D < 0 ⇒ l(D) = 0` 是标准教材命题，
+    但 researcher 本轮**没有找到编号**（math-sources.md §42：「它在教材里是 RR 之前的独立命题，
+    **不含在 RR 里**」）。本图登记的两条数学来源里，Eynard 只给 RR 本体，
+    FK §III.4 只有小节位置、正文未取得。
+    ⇒ 路线 (B) **在本图里是无来源的断言**；真正承载本命题的是路线 (A) 的显式计算，
+    而 (A) 不需要这条引理。本条 gap **不影响** status：(A) 已被独立复核（见 notes）。
+  - |
+    **不覆盖圆盘 / 带边情形。** 那是姊妹卡 math.no-holomorphic-quadratic-differentials-on-disk
+    与它的推导 --via-schwarz-reflection（physical-argument，两条未复核缺口）。
+  - |
+    **不覆盖 RP₂**。不可定向情形要用 dianalytic 语言，本项目的两条 Klein 面来源
+    （caohuu-ghisa-2004、barza-ghisa-2009）都把证明外包给未取得的文献，**不足以支撑**。
+    RP₂ 的 μ = 0 走 Polchinski §6.1 的独立正文陈述，见 worldsheet.rp2-conformal-killing-group。
+  - |
+    **不覆盖 g ≥ 1**。本推导用的是 P¹ 的两片图册，换成别的亏格完全失效；
+    g ≥ 2 的 `dim H⁰(K²) = 3g − 3` 需要真正的 Riemann–Roch，另见 math.riemann-roch-theorem。
+notes: |
+  reviewer-verified: reviewer-batch13, 2026-09-11
+
+  **复核范围（逐字搬自被拆的 v2 推导
+  math.no-holomorphic-quadratic-differentials-on-sphere-and-disk-v2--via-negative-degree 的记录）**：
+  reviewer-batch13 于 2026-09-11 复核了路线 (A) 的 Laurent 幂次比较
+  （φ̃(u) = Σ_n c_n u^{−n−4}，每项幂次 ≤ −4 < 0 ⇒ c_n = 0），**判定正确**。
+  v2 推导当时写道：「**升级的正确做法不是再复核一次，而是拆卡**：把球面那半单独立卡
+  （只挂 (A)(B)），它可立刻按例外条款升 rigorous；圆盘那半单独立卡，保留现有缺口。」
+  ⇒ 本轮（curator-small-backlog-2, 2026-09-11）执行了那次拆卡，本推导就是「只挂 (A)(B)」的那条。
+
+  **为什么可以是 rigorous**：按 docs/STATUS_LEVELS.md 的 rigorous 例外条款三条——
+  (i) 前提已完整写出（目标陈述给了二次微分的换片变换律与 P¹ 的两片图册，无遗漏）；
+  (ii) 证明是有限步初等计算（一次坐标换片 + 一次 Taylor/Laurent 幂次比较）；
+  (iii) reviewer 已独立复核（见首行 `reviewer-verified:`）。
+  ⚠ 之所以拆卡之前不能标 rigorous，是因为 v2 的目标陈述同时含圆盘那半，
+  而圆盘那半有两条未复核缺口，按 min 规则把整条推导压在 physical-argument。
+
+  `depends_on` 为空是有意的：路线 (A) 是自足的复分析计算，不用图内任何上游节点
+  （用 Riemann–Roch 的 (B) 反而**需要**上游，但那条无来源）。
+  validate 会对此报 warning（「derivation has no dependencies」），与
+  math.pbw-theorem--via-lakos、math.classification-of-compact-surfaces--via-normal-forms 同型。
+
+  **不要把本推导与 riemann-roch 路线接成环**：日后若给本卡补 --via-riemann-roch，
+  那条路线要用 `dim H⁰(K^{−1}) = 3`（即 κ(S₂) = 6），而 κ(S₂) = 6 的推导之一
+  又与本推导的 (A) 同型。两条路线必须保持独立。
+author: curator-small-backlog-2
+created: "2026-09-11"

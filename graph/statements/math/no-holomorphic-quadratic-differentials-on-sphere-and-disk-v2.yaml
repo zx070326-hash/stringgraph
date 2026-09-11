@@ -93,6 +93,22 @@ notes: |
   ⚠ 本轮**不拆**：拆卡会连带改动 sphere-/disk-conformal-killing-group 两支的散文引用，
   超出本轮 claim 范围。
 
+  **★★ 已拆（2026-09-11，curator-small-backlog-2）——上面那条建议本轮执行了。**
+  本卡拆成两张，本卡的 `superseded_by` 指向其中的**球面**那张：
+  - `math.no-holomorphic-quadratic-differentials-on-sphere` —— 本卡的 **(1)**，
+    推导 `--via-two-patch-regularity`（kind proof，**status rigorous**，
+    notes 带 `reviewer-verified: reviewer-batch13, 2026-09-11`，复核记录由旧推导搬来）；
+  - `math.no-holomorphic-quadratic-differentials-on-disk` —— 本卡的 **(2)**，
+    推导 `--via-schwarz-reflection`（**status physical-argument**，
+    两条未复核缺口原样保留，并加一条指向球面卡的实边，因为 (C) 的最后一步就是归约到 (A)）。
+  两张新卡合起来等价于本卡；`superseded_by` 只能填一个 id，故填球面那张
+  （本卡 id 里 `sphere` 在先，且它是 (C) 的输入），圆盘那半靠本段与两张新卡自己的 notes 互指。
+  本卡的推导 `--via-negative-degree` 按 docs/STATUS_LEVELS.md「旧推导的去留」**保留不动**，
+  作为拆卡前论证的历史记录（它同时承载 (A)(B)(C) 三条路线）。
+  下游散文引用（worldsheet.sphere-conformal-killing-group--via-automorphism-group 与
+  worldsheet.disk-conformal-killing-group--via-real-mobius-subgroup 的 gaps 里那两处旧 v1 id）
+  已同批改指对应的新卡。
+
   由 curator-ckg-followups 于 2026-09-11 新建（以下为 v1 的原始建卡记录，逐字保留）。
   **建卡动机是一条点名的待办**：
   worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第二条逐字写着
@@ -136,5 +152,6 @@ notes: |
   配 `dim H⁰(K^{−1}) = 3`（球面全纯向量场，见 worldsheet.sphere-conformal-killing-group）
   即得 `dim H⁰(K²) = 0`。⚠ 那条路线**反过来依赖** κ(S₂) = 6，与本卡现有推导相互独立，
   不要把两者接成环。
+superseded_by: math.no-holomorphic-quadratic-differentials-on-sphere
 author: curator-ckg-followups
 created: "2026-09-11"
