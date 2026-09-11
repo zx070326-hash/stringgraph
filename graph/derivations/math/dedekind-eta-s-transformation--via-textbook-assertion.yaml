@@ -45,5 +45,9 @@ notes: |
 
   **不得**因为「η 的 S 变换是众所周知的数学事实」而把本卡标 rigorous：
   按项目原则 2，status 写的是**本图所持论证**的强度，不是公认程度。
+
+  **2026-09-11（curator-small-backlog-4）**：gaps 第三条「本图缺解析数论来源」已由
+  math.dedekind-eta-s-transformation--via-siegel-1954（siegel-1954-eta，L1，rigorous）关闭；
+  本条按 lead「旧推导保留」裁决原样留作「Polchinski 只给断言」的记录，不再更新其 gaps。
 author: curator-v1-ch7
 created: "2026-09-11"

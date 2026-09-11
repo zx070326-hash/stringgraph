@@ -17,16 +17,29 @@ statement: |
   不断言本式的任何证明（Polchinski 对它是纯断言，见本卡唯一一条推导的 gaps）。
 uses_conventions: []
 sources:
+  - ref: siegel-1954-eta
+    loc: "p. 4 (title; no numbered theorem)"
+    note: |
+      **数学侧主来源**（2026-09-11 补，curator-small-backlog-4）。抽取记录
+      literature/extractions/math-sources.md §48，等级 **L1（Cambridge Core 页图，全文 1 页逐字转录）**。
+      原文标题即陈述：「A simple proof of η(−1/τ) = η(τ)√(τ/i)」；√(τ/i) = (−iτ)^{1/2}
+      （τ/i = −iτ）——**这一步换算是抽取者所做，原文未写**。
+      ⚠ 全文无编号定理/公式/小节/参考文献，**不得写 "Theorem 1"**。
+      ⚠ 原文不声明平方根分支、不显式写 Im τ > 0（只由 |q| < 1 蕴含）；本卡 statement 的
+      「主分支」「τ ∈ H」是本图补的前提，见 --via-siegel-1954 的 gaps 第一条。
+      证明是留数定理（f(z) = cot z·cot(z/τ)，菱形围道 1, τ, −1, −τ），完整自足，
+      落地为推导 math.dedekind-eta-s-transformation--via-siegel-1954（rigorous）。
   - ref: polchinski-1998-v1
-    loc: "§7.2, eq. (7.2.44b), p.216（原文逐字只有一句「It has the modular transformations」，随后直接列出两式）"
+    loc: "§7.2, eq. (7.2.44b), p.216（**物理侧转述**：原文逐字只有一句「It has the modular transformations」，随后直接列出两式，零证明）"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，等级 **L1（原书页图逐字）**。
-      ⚠ **原书对本式零证明、零引用**（抽取记录逐字判定：「逐字只有『It has the modular
-      transformations』——纯断言，无证明、无引用」）。
+      **2026-09-11 起本条降为物理侧转述来源**：它只登记弦论教材在何处**使用**本式，
+      不承载本卡的任何论证（原书对本式零证明、零引用——抽取记录逐字判定：「逐字只有『It has the
+      modular transformations』——纯断言，无证明、无引用」）。本卡的 rigorous 由 siegel-1954-eta 提供。
       ⚠ **本式是全书模不变性的承重墙**：(7.2.8)/(7.2.9)（E9）、(7.3.6)（E20）、
       (7.4.2)（E30）、(7.4.19)、(7.4.23)、(8.4.21) 全部直接用它。
   - ref: polchinski-1998-v1
-    loc: "§7.2, eq. (7.2.39d)/(7.2.40d) 与 (7.2.43), p.215–216（原书把 (7.2.44) 归到 ϑ₁₁ 的模变换加上 η = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）"
+    loc: "§7.2, eq. (7.2.39d)/(7.2.40d) 与 (7.2.43), p.215–216（物理侧转述；原书把 (7.2.44) 归到 ϑ₁₁ 的模变换加上 η = [∂_vϑ₁₁(0,τ)/(−2π)]^{1/3}）"
     note: |
       抽取记录 #E16「文献列出的依赖」栏。⚠ **这条归约把问题推给 θ 函数的模变换 (7.2.40)，
       而 (7.2.40) 在原书同样零证明**（#E15：θ 一节「全部无证明」）。因此本图**没有**把 θ 卡
@@ -38,10 +51,19 @@ notes: |
   导致 T 半的强度被低估两级；拆分后 T 半是 math.dedekind-eta-t-transformation（rigorous），
   本卡承载真正的缺口。旧卡的 `superseded_by` 指向本卡。
 
-  **升级路径（两条，都还没走）**：
-  (a) 在 literature/sources.bib 登记标准解析数论来源（如 Apostol《Modular Functions and
-      Dirichlet Series in Number Theory》——**章节/定理号未核实**），再建一条 --via-<来源> 推导；
-  (b) Lean 形式化（抽取记录 §5-C 的首选岛；Mathlib 是否已有 DedekindEta 未核实，留给 formalizer）。
-  在此之前**不得**因为「这是众所周知的数学事实」而升级（项目原则 2）。
+  **升级路径（两条）**：
+  (a) **已走（2026-09-11，curator-small-backlog-4）**：researcher 在 literature/sources.bib 登记了
+      siegel-1954-eta（math-sources.md §48，L1 全文逐字），本卡新增推导
+      math.dedekind-eta-s-transformation--via-siegel-1954（kind proof / status rigorous，
+      走 STATUS_LEVELS 第 4 级主判据）。旧推导 --via-textbook-assertion 按 lead 裁决保留作
+      「来源只给断言」的记录，工具取高者。
+      ⚠ Apostol GTM 41 的「Theorem 3.1」在本项目零证据（§48.5, Q48.1），**未登记、不得引**。
+  (b) Lean 形式化：**Mathlib `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 无 S 变换**
+      （§48.4，L1 raw 源文件全读：只有定义、非零性、可微性与 `logDeriv_eta_eq_E2`），
+      故本卡**不得标 formalized、不得挂 lean_decl**。地基已铺（logDeriv η = (πi/12)E₂），
+      只差 E₂ 的 S 变换那一步；Q48.2（Delta/Identities/JacobiTheta 侧）未查，留给 formalizer。
+
+  ⚠ **statement 正文里「见本卡唯一一条推导的 gaps」一句已过时**（现有两条推导），
+  按原则 1 不改正文；读者请看 --via-siegel-1954。
 author: curator-v1-ch7
 created: "2026-09-11"

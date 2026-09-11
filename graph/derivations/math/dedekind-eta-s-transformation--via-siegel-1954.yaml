@@ -1,0 +1,85 @@
+id: math.dedekind-eta-s-transformation--via-siegel-1954
+target: math.dedekind-eta-s-transformation
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.dedekind-eta-function
+    note: |
+      提供 η 的乘积定义 η(τ) = q^{1/24}∏_{l≥1}(1−q^l)，q = e^{2πiτ}，及 q^{1/24} = e^{πiτ/12}
+      的单值分支。Siegel 原文第一行逐字用同一乘积式（"Dedekind's η(τ) = q^{1/24}∏(1−q^l),
+      q = e^{2πiτ}, |q| < 1"），且其证明第一步 (1/12)πiτ − log η(τ) = −Σ log(1−q^l)
+      逐字坐实 q^{1/24} = e^{πiτ/12}，与本图定义卡一致。
+sources:
+  - ref: siegel-1954-eta
+    loc: "p. 4 (title; no numbered theorem)"
+    note: |
+      抽取记录 literature/extractions/math-sources.md §48（§48.3 全文 1 页逐字转录），
+      等级 **L1（Cambridge Core 页图逐字）**。
+      ⚠ **全文无编号定理、无编号公式、无小节、无参考文献**：要引的陈述字面上只在标题里
+      （"A simple proof of η(−1/τ) = η(τ)√(τ/i)"），故 loc 只能写 p. 4 / 标题，
+      **不得写 "Theorem 1"**。
+      ⚠ **记号换算是抽取者所做**：原文写 √(τ/i)，τ/i = −iτ，故 √(τ/i) = (−iτ)^{1/2}；原文未写这一步。
+      ⚠ 原文**不声明平方根分支**，也**不显式写 Im τ > 0**（只由 |q| < 1 蕴含），见 gaps。
+      文献自称强度（L1 逐字）：结论「has been established in many different ways」，本文新颖处
+      只是证明方法「a straightforward application of the theorem of residues, has not been observed
+      before」⇒ 本文是一条完整的严格证明，但"首证"的功劳不属于它。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44b), p.216（物理侧转述：原书对本式零证明、零引用，只作断言）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，L1。
+      本条**不承载本推导的任何步骤**，只登记「弦论教材在何处使用本式」——
+      原书全部内容是一句「It has the modular transformations」+ 两式。
+      本推导的 rigorous 状态**全部由 Siegel 提供**。
+summary: |
+  **Siegel 1954 的留数定理证明**（原文 1 页，本图按 math-sources.md §48.3 的逐字转录复述）。
+
+  (1) 取对数：由乘积定义，
+        (1/12)πiτ − log η(τ) = −Σ_{l≥1} log(1−q^l) = Σ_{k,l≥1} (1/k) q^{kl} = Σ_{k≥1} (1/k)(q^{−k}−1)^{−1} 。
+      于是 η(−1/τ) = η(τ)√(τ/i) 等价于（原文 "it suffices to prove that"）
+        πi(τ+τ^{−1})/12 + ½ log(τ/i) = Σ_{k≥1} (1/k)( 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1) ) 。
+
+  (2) 围道积分：令 f(z) = cot z · cot(z/τ)，ν = (n+½)π（n = 0, 1, …）。
+      亚纯函数 z^{−1} f(νz) 在 z = ±πk/ν 与 z = ±πkτ/ν（k ≥ 1）有单极点，留数分别为
+      (1/πk)cot(πk/τ) 与 (1/πk)cot(πkτ)；在 z = 0 有三阶极点，留数 −⅓(τ+τ^{−1})。
+      取顶点 1, τ, −1, −τ 的菱形围道 C，留数定理给
+        πi(τ+τ^{−1})/12 + ∫_C f(νz) dz/(8z) = ½ i Σ_{k=1}^{n} (1/k)(cot πkτ + cot πk/τ)
+          = Σ_{k=1}^{n} (1/k)( 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1) ) 。
+
+  (3) 取极限 n → ∞：f(νz) 在 C 上一致有界，且在四条边上（除顶点外）的极限值为 1, −1, 1, −1，故
+        lim_{n→∞} ∫_C f(νz) dz/z = ( ∫_1^τ − ∫_τ^{−1} + ∫_{−1}^{−τ} − ∫_{−τ}^{1} ) dz/z = 4 log(τ/i) ，
+      乘 1/8 得 ½ log(τ/i)，与 (1) 的待证式吻合，证毕。
+
+  **抽取者的两处系数复算**（math-sources.md §48.3，均通过）：z = 0 三阶极点贡献
+  2πi·(1/8)·(−⅓)(τ+τ^{−1}) = −πi(τ+τ^{−1})/12，坐实 dz/(8z) 里的 8；单极点贡献
+  2πi·(1/8)·2·(1/πk)(cot πkτ + cot πk/τ) = (i/2)(1/k)(…)，且 (i/2)(cot πkτ + cot πk/τ)
+  = 1/(e^{−2πikτ}−1) − 1/(e^{2πik/τ}−1) 由 cot θ = i(e^{2iθ}+1)/(e^{2iθ}−1) 逐项成立。
+
+  **status = rigorous 的依据**（docs/STATUS_LEVELS.md 第 4 级**主判据**）：来源是发表在数学期刊
+  （Mathematika）上的完整数学证明，结论是数学界接受的标准事实（原文自陈 "established in many
+  different ways"）。**不引用**「有限步初等计算 + reviewer 复核」的例外条款。
+gaps:
+  - |
+    **平方根分支与 Im τ > 0 在来源里是隐含的、不是明写的**（math-sources.md §48.2 / Q48.3）：
+    目标卡 statement 写「(−iτ)^{1/2} 取主分支」「τ ∈ H」，而 Siegel 原文只写 √(τ/i)、只以
+    |q| < 1 蕴含 Im τ > 0。按 curator 读法，(3) 里 log(τ/i) 由沿直线段的 ∫dz/z 定出，
+    Re(τ/i) = Im τ > 0 时即主值对数，故分支实际被证明本身定死为主分支——
+    **这是 curator 的解读，不是原文措辞**。若 Lean 化，这两条前提要自己补进陈述。
+  - |
+    **收敛与交换次序未逐字论证**：(1) 中 Σ log(1−q^l) 的二重级数重排、(3) 中「一致有界 +
+    边上极限值」推出积分极限交换（有界收敛）在原文各只有一句话。这些是标准分析事实，
+    不影响 rigorous 定级，但若形式化须逐条补齐。
+  - |
+    **本图未核 Apostol GTM 41 的定理号**（math-sources.md §48.5, Q48.1）：
+    「Apostol, Theorem 3.1」在本项目零证据，**不得写进任何卡**；第二数学来源待 researcher 结清。
+notes: |
+  由 curator（small-backlog-4）于 2026-09-11 依 researcher math-sources.md §48 建立。
+  姊妹推导 math.dedekind-eta-s-transformation--via-textbook-assertion 记录的是「Polchinski
+  只给断言」这一事实，按 lead 裁决保留不删；工具取两条中较强者，本条即目标卡的 best_derivation。
+
+  **不得标 formalized**（math-sources.md §48.4，L1 raw 源文件全读）：Mathlib
+  `Mathlib/NumberTheory/ModularForms/DedekindEta.lean` 只有 η 的定义、非零性、可微性与
+  `logDeriv_eta_eq_E2`（log η' = (πi/12)E₂），**没有任何关于 η(−1/τ) 的声明**。
+  故目标卡不得挂 lean_decl。同一事实也是最好的 Lean 选题情报：地基已铺（η 定义 + logDeriv = E₂），
+  只差 E₂ 的 S 变换那一步；Q48.2（Delta.lean / Identities.lean / JacobiTheta 侧是否另有）未查。
+author: curator-small-backlog-4
+created: "2026-09-11"
