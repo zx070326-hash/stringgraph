@@ -157,6 +157,83 @@ theorem annihilation_creationMonomial_of_apply_eq_zero (η : Fin D → R) (v : O
   rw [annihilation_creationMonomial, h]
   simp
 
+/-! ### The Gram matrix -/
+
+/-- **Step (2)** of the argument: the recursion for the form.  Move one creation operator
+from the left slot to the right slot using adjointness ((H2)/(H3)) and then commute it
+through the string of creators with step (1). -/
+theorem pairing_creationMonomial_add_single (η : Fin D → R) (v : Osc D) (d e : Osc D →₀ ℕ) :
+    pairing η (creationMonomial R (d + Finsupp.single v 1)) (creationMonomial R e)
+      = (oscWeight η v * (e v : R)) *
+          pairing η (creationMonomial R d) (creationMonomial R (e - Finsupp.single v 1)) := by
+  rw [creationMonomial_add_single, pairing_creation_left, annihilation_creationMonomial,
+    map_smul, smul_eq_mul]
+
+/-- **The Gram matrix of creation monomials on the Fock space.**  The monomials
+`∏_{(μ,n)} (α^μ_{-n})^{d(μ,n)} |0⟩` are pairwise orthogonal, and the diagonal entry is
+`∏_{(μ,n)} (n η^{μμ})^{d(μ,n)} · d(μ,n)!`.
+
+This is the Fock-space instance of `worldsheet.transverse-ddf-fock-gram-matrix`. -/
+theorem pairing_creationMonomial (η : Fin D → R) (d e : Osc D →₀ ℕ) :
+    pairing η (creationMonomial R d) (creationMonomial R e)
+      = if d = e then monomialNorm η d else 0 := by
+  classical
+  rw [creationMonomial_eq_monomial, creationMonomial_eq_monomial, pairing_monomial_monomial,
+    one_mul, one_mul]
+
+/-- Orthogonality of distinct creation monomials. -/
+theorem pairing_creationMonomial_of_ne (η : Fin D → R) {d e : Osc D →₀ ℕ} (h : d ≠ e) :
+    pairing η (creationMonomial R d) (creationMonomial R e) = 0 := by
+  classical
+  rw [pairing_creationMonomial, if_neg h]
+
+/-- The diagonal entries. -/
+@[simp]
+theorem pairing_creationMonomial_self (η : Fin D → R) (d : Osc D →₀ ℕ) :
+    pairing η (creationMonomial R d) (creationMonomial R d) = monomialNorm η d := by
+  classical
+  rw [pairing_creationMonomial, if_pos rfl]
+
+/-- The **conditional** form of the card.  Any bilinear form `B` on the Fock space with
+vacuum norm `1` ((H4)) for which the creation and annihilation operators are mutually
+adjoint ((H2), (H3)) has the stated Gram matrix.  Hypothesis (H1) (the creation operators
+commute) and the commutator normalisation `[α^μ_n, α^ν_{-m}] = n η^{μν} δ_{nm}` are theorems
+about `Fock.creation`/`Fock.annihilation` (`Fock.creation_creation_comm`,
+`Fock.lie_annihilation_creation`), so they need not be assumed.
+
+This, rather than `pairing_creationMonomial`, is the faithful Lean rendering of the graph
+card: the form is not assumed diagonal, only adjointness and the vacuum normalisation. -/
+theorem pairing_creationMonomial_of_hypotheses (η : Fin D → R)
+    (B : Fock D R →ₗ[R] Fock D R →ₗ[R] R)
+    (hvac : B (vacuum D R) (vacuum D R) = 1)
+    (hleft : ∀ (μ : Fin D) (n : ℕ+) (P Q : Fock D R),
+      B (creation R μ n P) Q = B P (annihilation η μ n Q))
+    (hright : ∀ (μ : Fin D) (n : ℕ+) (P Q : Fock D R),
+      B P (creation R μ n Q) = B (annihilation η μ n P) Q)
+    (d e : Osc D →₀ ℕ) :
+    B (creationMonomial R d) (creationMonomial R e)
+      = if d = e then monomialNorm η d else 0 := by
+  classical
+  rw [pairing_unique η B hvac hleft hright, pairing_creationMonomial]
+
+/-- With `η = 1` — a positive-definite metric, e.g. the restriction to the transverse
+directions — the diagonal entry is literally `∏_{(μ,n)} n^{d(μ,n)} · d(μ,n)!`, the form
+stated on the graph card. -/
+theorem monomialNorm_one (d : Osc D →₀ ℕ) :
+    monomialNorm (1 : Fin D → R) d
+      = d.prod fun v k => ((v.2 : ℕ) : R) ^ k * (k.factorial : R) := by
+  refine Finsupp.prod_congr fun v _ => ?_
+  rw [oscWeight]
+  simp
+
+/-- The Gram matrix for a positive-definite (all `+1`) metric, in the form stated on the
+graph card. -/
+theorem pairing_creationMonomial_one (d e : Osc D →₀ ℕ) :
+    pairing (1 : Fin D → R) (creationMonomial R d) (creationMonomial R e)
+      = if d = e then (d.prod fun v k => ((v.2 : ℕ) : R) ^ k * (k.factorial : R)) else 0 := by
+  classical
+  rw [pairing_creationMonomial, monomialNorm_one]
+
 end Fock
 
 end StringFormal.NoGhost
