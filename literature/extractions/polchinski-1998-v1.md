@@ -5322,6 +5322,85 @@ Cambridge Core ch.3 = `9780511816079c3_p77-120_CBO.pdf`，item hash `606E849133B
 
 ---
 
+## 20. ★ §5.1 p.148 复核（2026-09-11，researcher 第十三轮）——**`Im(γτ) = Im τ/|cτ+d|²` 在本书 §5.1 里不存在（negative evidence, L1）**
+
+> 本节只追加，不改上文任何一行。触发：图卡 `worldsheet.modular-group-psl2z` 中「`Im(γτ) = Im τ/|cτ+d|²`」一行目前**只有 Mathlib 来源**，需确认 Polchinski 是否可作第二来源。
+
+### 20.0 获取与版本锚定
+
+- ch.5 PDF = `…/core/services/aop-cambridge-core/content/view/2619B77DD4AE2BE4D53B5EED5D3BE3C1/9780511816079c5_p145-165_CBO.pdf/the_string_s_matrix.pdf`，**243.3 KB / 21 页**，文件名按 §12.0 规则直接推出，一次命中。
+- **PDF 页 = 印刷页 − 144**。本轮读 PDF pp.1–7 = **印刷 pp.145–151**（§5.1 全节 + §5.2 头两页）。
+- 页脚逐字：`Downloaded from https://www.cambridge.org/core. Zhejiang University, on 11 Sep 2026 at 06:46:10 … https://doi.org/10.1017/CBO9780511816079.008`。⇒ **ch.5 的 DOI 后缀是 `.008`**（再次印证「别用 DOI 后缀推章号」）。版本同 §12.0：Cambridge Books Online 2005「with corrections」。
+
+### 20.1 ★★ 直接回答：**没有**
+
+**印刷 pp.145–151 逐页通读，全节不出现**
+`Im(γτ)`、`Im τ/|cτ+d|²`、`τ₂ → τ₂/|cτ+d|²`、`|cτ+d|` **中的任何一个**。
+`τ₂` 这个**记号在 §5.1 里根本没有被引入**（它首次使用在第 7 章，(7.2.9) 一带）；
+§5.1 里 `Im τ` 只出现两次，且都不是变换律：
+
+- p.148 逐字：「…so we can restrict attention to `Im τ > 0`.」
+- p.148 逐字：「…one should think of `F₀` as being rolled up, and open only at `Im τ → ∞`.」
+
+⇒ **不能把 Polchinski §5.1 登记为该行的来源。** 该行在本书里**没有**对应印刷式子。
+
+### 20.2 印刷 p.148 逐字（L1 页图，(5.1.12)–(5.1.14) 全段）
+
+> conjugation of `τ` and degenerate for `τ` real, so we can restrict attention to `Im τ > 0`. As in the case (5.1.5) of the circle, we can put these parameters either in the metric (5.1.9) or the periodicity (5.1.11). The parameter `τ` is known as a *Teichmüller parameter* or more commonly a *modulus*. A difference from the point-particle case is that there is no simple invariant expression for `τ` analogous to the invariant length of the circle.
+>
+> There is some additional redundancy, which does not have an analog in the point-particle case. The value `τ + 1` generates the same set of identifications (5.1.11) as `τ`, replacing `(m, n) → (m − n, n)`. So also does `−1/τ`, defining `w′ = τw` and replacing `(m, n) → (n, −m)`. Repeated application of these two transformations,
+>
+> `T :  τ′ = τ + 1 ,   S :  τ′ = −1/τ ,`   (5.1.12)
+>
+> generates
+>
+> `τ′ = (aτ + b)/(cτ + d)`   (5.1.13)
+>
+> for all integer `a, b, c, d` such that `ad − bc = 1`.
+
+紧接 (5.1.14)（坐标侧的矩阵形式，**注意矩阵元排列印的是 `[[d, b],[c, a]]`，不是 `[[a,b],[c,d]]`**）：
+
+> We can also think about this as follows. The transformation
+>
+> `[σ¹; σ²] = [[d, b],[c, a]] [σ′¹; σ′²]`   (5.1.14)
+>
+> takes the metric (5.1.9) for `σ` into a metric of the same form in `σ′` but with the modulus `τ′`. This is a diffeomorphism of the torus. It is one-to-one as a consequence of `ad − bc = 1` and it preserves the periodicity (5.1.8). However, it cannot be obtained from the identity by successive infinitesimal transformations — it is a so-called *large coordinate transformation*. The curve `A` in the coordinate `σ` maps to a curve in the `σ′` coordinate that runs `a` times in the `A′` direction and `−c` times in the `B′` direction. These large coordinate transformations form the group `SL(2,Z)`, integer-valued 2 × 2 matrices with unit determinant. The group on the `τ`-plane is `SL(2,Z)/Z₂ = PSL(2,Z)`, because `τ′` is unchanged if all the signs of `a, b, c, d` are reversed. The group of transformations (5.1.14) is known as the *modular group*.
+
+（(5.1.15) 及其「it can be shown … except on the boundaries which are identified as shown in the figure」措辞已在 `polchinski-1998-v1-ch7.md` §Q1 / §5-B1 逐字记录，本轮页图复核**完全一致**，此处不重复。）
+
+### 20.3 本轮顺带取得、此前记录没有的四条（全 L1，都与 `modular-group-psl2z` 卡直接相关）
+
+1. **`PSL(2,Z) = SL(2,Z)/Z₂` 的定义与「modular group」这个名字的书内出处 = 印刷 p.148，(5.1.14) 下方散文**（无独立式号）。理由逐字是「because `τ′` is unchanged if all the signs of `a, b, c, d` are reversed」。
+   ⇒ 卡片若要给 Polchinski 的 loc，**只能写到这一句**，写不到「`Im` 的变换律」。
+2. **`S`、`T` 生成整个模群这件事，原书是「断言」不是「证明」**：(5.1.12) 上方只说 "Repeated application of these two transformations … generates (5.1.13)"，**没有证明、没有引文**。这与 ch.7 抽取记录 §negative-evidence 第 6 条「本章没有给出模群由 `S`、`T` 生成的证明」是**同一个缺口在两章各出现一次**。
+3. **原书把模群同时放在两个空间上**：`τ`-平面上是 (5.1.13)，世界面坐标上是 (5.1.14)（**大坐标变换 / 微分同胚**），并明写「The group of transformations **(5.1.14)** is known as the modular group」——**书里「模群」这个名字挂在坐标变换 (5.1.14) 上，不是挂在 `τ` 的分式线性作用 (5.1.13) 上**。建卡时若写「模群作用在上半平面」，是通行说法但**不是原书这一句的逐字含义**。
+4. **`τ → τ+1` 与 `τ → −1/τ` 在格点标号上的作用逐字是 `(m,n) → (m−n, n)` 与 `(m,n) → (n,−m)`**（p.148）。这是原书对「为什么恰好是这两个生成元」给出的**全部**依据。
+
+### 20.4 全书范围内的补充判断（L1 + L1 交叉，非推断）
+
+- 第 7 章（`polchinski-1998-v1-ch7.md`，上一轮 L1 全章）里与此最接近的是 **(7.3.7)**：原书逐字「The product `τ₂|η(τ)|⁴` is invariant by eq. (7.2.44), and **it is easy to check** that `dτdτ̄/τ₂²` is modular-invariant as well.」
+  ⇒ 第 7 章**用到**了 `τ₂` 的变换律，但**同样不把它写出来**，而且把验证推给读者（"easy to check"）。
+- ⚠ negative evidence 的边界：本条只覆盖**印刷 pp.145–151 + 第 7 章全章**。印刷 pp.152–165（§5.2 后半–§5.4）与第 9 章本轮未读；就本命题而言先验不相关（§5.2 起转入一般亏格与 Faddeev–Popov），但**没有读就是没有读**。
+
+### 20.5 对图的建议（researcher 不改 `graph/`，仅列）
+
+- `worldsheet.modular-group-psl2z`：**不要**为 `Im(γτ) = Im τ/|cτ+d|²` 添加 Polchinski 来源。可添加的 Polchinski 来源只有两条：
+  - `§5.1, eq. (5.1.13), p.148` —— `τ′ = (aτ+b)/(cτ+d)`，`ad−bc=1`（L1）；
+  - `§5.1, (5.1.14) 下方散文, p.148` —— `PSL(2,Z) = SL(2,Z)/Z₂` 与 "modular group" 命名（L1，**无式号**）。
+- 若卡片确实需要 `Im` 的变换律，**它在本项目内目前仍只有 Mathlib 一个来源**。下一个最便宜的一手候选是标准数论教材（Serre *A Course in Arithmetic* ch.VII、Apostol *Modular Functions and Dirichlet Series* ch.2、Diamond–Shurman ch.1），**本轮未查**。
+- 顺带可收紧的：若有节点把「模群由 `S,T` 生成」挂在 Polchinski §5.1 上并给较高 status，按 20.3(2) 应降级——原书两处都不证。
+
+### 20.6 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 书 ch.5 PDF | Core `…/2619B77DD4AE2BE4D53B5EED5D3BE3C1/9780511816079c5_p145-165_CBO.pdf/the_string_s_matrix.pdf` | ✅ 243.3 KB / 21 页，一次命中 |
+| 印刷 pp.147–149 | `Read(pages=3-5)` | ✅ 三页页图（含 (5.1.9)–(5.1.16)） |
+| 印刷 pp.145–146 | `Read(pages=1-2)` | ✅ 两页页图（§5.1 开头，(5.1.1)–(5.1.8)） |
+| 印刷 pp.150–151 | `Read(pages=6-7)` | ✅ 两页页图（§5.1 收尾 + "A note to the reader" + §5.2 开头，确认 §5.1 止于 p.150 上半） |
+
+---
+
 
 
 
