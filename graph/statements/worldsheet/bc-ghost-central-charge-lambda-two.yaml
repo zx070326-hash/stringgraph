@@ -17,7 +17,7 @@ statement: |
   **不**断言这组模式就是 Polyakov 路径积分的 Faddeev–Popov 鬼场
   （那一步由 worldsheet.faddeev-popov-ghost-action 承载，physical-argument），
   也**不**断言任何关于物质中心荷或 D 的事。
-uses_conventions: [conv.virasoro-standard, conv.worldsheet-complex-coords]
+uses_conventions: [conv.virasoro-standard, conv.worldsheet-complex-coords, conv.ghost-normal-ordering-sl2c]
 sources:
   - ref: fgz-1986
     loc: "Proposition 2.1, p.8444 右栏：(i) `ρ(c) = −26 Id_{Λ^∞_*}`；(ii) `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`"
@@ -88,5 +88,20 @@ notes: |
   而不是抄陈述卡 worldsheet.critical-dimension-brst-v2 的单边写法，构成该里程碑第一轮审计的 R1-1（drift）。
   **修法**：本卡换代时把括号改成单边写法。在此之前，引用本卡的人请以
   worldsheet.brst-quantization-v2 / worldsheet.critical-dimension-brst-v2 的写法为准。
+  **【2026-09-12 physics-auditor：补声明 conv.ghost-normal-ordering-sl2c；statement 正文一字未动】**
+  本卡断言 [L^g_m, L^g_n] 的中心项是**纯** (−26/12) m(m² − 1)（无 m 线性项）。在相差 L_0 常数平移的
+  诸正规序中，使中心项无 m 线性项的序**唯一**（平移 α 给 −2mα），即 **SL(2,C) 序**
+  （湮灭算符 b_n (n ≥ −1)、c_n (n ≥ 2)）。故本卡声明 conv.ghost-normal-ordering-sl2c
+  （family `ghost-normal-ordering`，**canonical: false**；该 family 的 canonical 成员是能级序卡，
+  因为图里 BRST 一侧的卡都用能级序——lead 裁决 2026-09-12）。
+  本次只加 `uses_conventions` 的一项与本条 notes，**statement、id、status、sources 全未动**，不构成换代
+  （先例：commit 5fdda19 对 swampland.heterotic-t6-substates-below-extremality 的同型处理）。
+  · **非 canonical 对本卡没有实质后果**：validate 只在「里程碑指向的陈述」上禁用非 canonical 约定，
+    而本卡不是任何里程碑的 statement_id；本卡的 status 与下游 effective 都不受影响。
+  · **跨 family 的边**：worldsheet.critical-dimension-brst-v2 的两条推导依赖本卡，它们的目标声明
+    能级序；两条边已各写 `convention_map`，写明搬运的只有 **(m³ − m) 的系数（= c^g/12）**，
+    它与序无关（两套序之差只改中心项中 m 的一次项，不改 m³ 的系数）。
+  · ⚠ FGZ Prop 2.1(ii) 本身**没有**给出 `: :` 的湮灭/产生清单；「FGZ 用的就是 SL(2,C) 序」是
+    本项目的推断（理由即上面那条唯一性），已记在 conv.ghost-normal-ordering-sl2c 的 sources[0].note。
 author: curator
 created: "2026-09-12"
