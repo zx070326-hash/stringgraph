@@ -143,10 +143,13 @@ notes: |
       与这里的判断一致。
 
     **新卡对本卡命题主张（(A)(B) 本身）没有加强或减弱**：(A)(B) 的真值完全由 v4 支撑，
-    v4 的 effective status（physical-argument，瓶颈见 `stringgraph why
-    worldsheet.no-ghost-theorem-v4`）不因新卡出现而改变——新卡不在 v4 的
-    `depends_on` 闭包内，对 v4 的 effective 无影响，因而对本卡（--via-no-ghost 唯一依赖 v4）
-    的 effective 同样无影响。
+    v4 的 effective status 现为 **rigorous**（`uv run stringgraph status
+    worldsheet.no-ghost-theorem-v4` 核实于 2026-09-12；`--via-no-ghost` 自身 notes 里
+    2026-09-11 记的"瓶颈仍是 physical-argument"已过期——DDF 支链此后进一步被形式化/收紧，
+    此处不改那条旧推导文件的 notes，只在本卡这里记下当前实测值，避免以讹传讹）
+    不因新卡出现而改变——新卡不在 v4 的 `depends_on` 闭包内，对 v4 的 effective 无影响，
+    因而对本卡（--via-no-ghost 唯一依赖 v4）的 effective 同样无影响
+    （本卡自身 `stringgraph status` 同样实测为 rigorous）。
 
     **新卡将来可能的用处（本卡不认领，只记路标）**：若日后
     worldsheet.ddf-spanning-hypothesis--via-rank-inequalities 这条独立路线被走通
