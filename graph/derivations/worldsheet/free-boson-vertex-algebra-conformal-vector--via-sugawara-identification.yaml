@@ -1,0 +1,71 @@
+id: worldsheet.free-boson-vertex-algebra-conformal-vector--via-sugawara-identification
+target: worldsheet.free-boson-vertex-algebra-conformal-vector
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    note: |
+      供给顶点代数 V = ℂ[Z k] ⊗ M(1) 本身（该卡 (2)）与 V-模 T(p; k_0) = ⊕_j F(p + j k_0) 的逐层识别
+      e^{jk} ⊗ M(1, p̃) ↔ F(p + j k_0)（该卡 (3)(iii)）。本推导第 (1)(3) 步在这两条上工作。
+      该卡 (N4) 明写不断言 ω 的存在——本推导正是补那一条。
+  - id: math.vertex-algebra-borcherds-identity
+    note: |
+      供给模式约定 𝒴(ψ, z) = Σ ψ_n z^{−n−1}（G–N (2.31)）、平移算子 T 与真空 𝟙，
+      以及 G–N 公理表里共形向量条 (2.26)–(2.29) 的**形式**（L_(n) = ω_{n+1}、Virasoro、L_(−1) = T、L_(0) 分次）。
+      该卡自己**不**断言任何顶点代数有共形向量（其「不断言」(c)），本推导只用它固定记号与要验证的公理形式。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      被识别的对象：Fock 空间上直接定义的 L_n = ½ Σ_m :α_{n−m}·α_m:（产生–湮灭正规序，α_0 = (2α')^{1/2} p）。
+      本推导第 (3) 步断言模作用 𝒴_W(ω, z) 的模式逐层等于它。**非 inferred**：目标陈述 (2) 逐字比对的就是这张卡的定义式。
+  - id: worldsheet.momentum-tower-fock-space
+    note: 供给塔的逐层零模装法 α^μ_0 = (2α')^{1/2}(p + j k_0)^μ · id（该卡 (1)），第 (3) 步的零模项用它。
+  - id: worldsheet.bosonic-fock-space
+    note: 供给振子代数 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0} 与 Fock 空间 F(D, ℂ)，即 M(1) 的物理写法；第 (2) 步的对易子计算在它上面做。
+sources:
+  - ref: li-wang-2008
+    loc: "p. 10：M(1) = V_ĥ(1,0) 的共形向量 ω = ½ Σ_r h^{(r)}(−1)h^{(r)}(−1)𝟙（orthonormal basis）、c = dim 𝔥；同页：restricted level-1 ĥ-模上唯一的 V_ĥ(1,0)-模结构 Y_W(h,x) = h(x)"
+    note: L1（math-sources.md §36.3(h)）。第 (1)(3) 步的出发点；作者措辞 'It is well known now (cf. [LL])'，不给 [LL] 定理号。
+  - ref: gebert-nicolai-1995
+    loc: "§2.1, 刊 pp. 578–579 公理 (2.26)–(2.29)（共形向量）；§2.2, 刊 p. 583（四元组 (ℱ, 𝒱, 1, ω) 含 ω，无编号）；刊 p. 584–586, (2.68)、(2.74)、(2.90)"
+    note: |
+      L1（math-sources.md §36.5、§37.3(a)）。供给要验证的公理形式与 (2.68) 的振子代数。
+      ⚠ **ω 的显式 Sugawara 表达式所在页（约刊 p. 587）未读（L0）**，见 gaps 第 1 条。
+  - ref: bakalov-kac-2004
+    loc: "Theorem 4.1, (4.16)（对偶基写法的共形向量）"
+    note: 旁证，见目标卡片 sources；不承载论证。
+summary: |
+  (1) **M(1) 上的共形向量（来源给的那一半）。** 由 Li–Wang p. 10，对非退化 𝔥（在 ℂ 上取正交归一基，
+      或等价地取对偶基 {a^μ}, {b_μ}），ω_M := ½ Σ_μ a^μ(−1) b_μ(−1) 𝟙 是 M(1) = V_ĥ(1,0) 的共形向量，
+      c = dim 𝔥 = D。用 worldsheet.bosonic-fock-space 的记号（h(n) ↔ α_n、η 作为 ⟨·,·⟩ 的矩阵）
+      即 ω_M = ½ η_{μν} α^μ_{−1} α^ν_{−1} 𝟙。
+  (2) **模式形式（标准 Sugawara 计算，本项目按公理记账）。** 由 𝒴(h, z) = h(z) = Σ_n h(n) z^{−n−1} 与
+      𝒴(a(−1)b(−1)𝟙, z) = :a(z) b(z):（Heisenberg 顶点代数的正规序乘积，即 (−1)-乘积的顶点算子），
+      得 𝒴(ω_M, z) = ½ Σ_μ :a^μ(z) b_μ(z): = ½ η_{μν} :∂X^μ ∂X^ν:(z)，展开成 z^{−n−2} 的系数即
+        L_(n) = ω_{n+1} = ½ Σ_{m∈Z} : α_{n−m} · α_m :
+      （产生–湮灭正规序）。Virasoro 关系与 c = D 由振子代数直接算出——这一半在本图已形式化
+      （worldsheet.virasoro-generators-free-boson 的 formal 字段，Sugawara.lean）。
+      L_(−1) = T：T 由 [T, h(m)] = −m h(m−1) 与 T𝟙 = 0 刻画，而 [L_(−1), α_m] = −m α_{m−1} 是同一条关系。
+  (3) **从 M(1) 到 V = ℂ[Zk] ⊗ M(1)，再到模 T(p; k_0)。** 令 ω := e^0 ⊗ ω_M ∈ V。
+      在 e^{jk} ⊗ M(1) 上，Heisenberg 部分的作用不变，零模 h(0) 作用为 ⟨h, jk⟩；
+      L_(0) 的本征值为振子层 N + ½⟨jk, jk⟩ = N（L 迷向）；L_(−1) 在 e^{jk} 上给 (jk)(−1) e^{jk}，
+      与 T e^{α} = α(−1) e^{α} 一致。于是 ω 是 V 的共形向量（目标 (1)）。
+      在 V-模 T(p; k_0) 上，由 Li–Wang「restricted level-1 ĥ-模上的 V_ĥ(1,0)-模结构由 Y_W(h,x) = h(x) 唯一确定」，
+      𝒴_W(ω, z) 的模式仍是 ½ Σ_m :α_{n−m}·α_m:，只是第 j 层的零模按
+      worldsheet.momentum-tower-fock-space 取 α_0 = (2α')^{1/2}(p + j k_0)。
+      这逐层就是 worldsheet.virasoro-generators-free-boson 定义的 L_n（目标 (2)）。
+  (4) **推论（目标 (2) 末句）。** G–N 的 ℛ_(1) = {ψ : (L_(n) − δ_{n0})ψ = 0, n ≥ 0} 在塔上即
+      L_0ψ = ψ、L_mψ = 0 (m > 0)，与 worldsheet.old-covariant-physical-states 在 a = 1 时的条件逐字相同。
+
+  【为什么是 physical-argument 而不是 rigorous】每一步都是标准的，但 (1) 的来源只说 'well known'，
+  (2) 的顶点算子正规序乘积公式与 (3) 的「e^0 ⊗ ω_M 是 ℂ[L] ⊗ M(1) 的共形向量」在本图现有来源里都没有带编号的出处，
+  且 (3) 的模作用与本图零模装法的对接依赖 (2α')^{1/2} 字典（本项目推断）。按 STATUS_LEVELS 的
+  「断言 + 骨架」档位标 physical-argument。
+gaps:
+  - "**G–N §2.2 的 Sugawara 页未读（L0）**：G–N 刊 p. 583 的四元组带 ω，但 ω / L_(n) 的显式表达式（(2.98) 之后，约刊 p. 587）researcher 两轮都没读到。→ 下一轮 researcher 重开该 PDF 时请读 pp. 586–588，若 G–N 逐字写出 L_(n) = ½ Σ :α_{n−m}·α_m:，本推导可升 proof/rigorous（前提完整、有限步代数）。"
+  - "**Li–Wang p. 10 的三句全是 'well known (cf. [LL])'**：对 Lepowsky–Li 2004 是 L0（该书未登记、未取得）。M(1) 的共形向量与 c = dim 𝔥 在本图没有带编号定理的来源。"
+  - "**第 (2) 步的顶点算子正规序公式 𝒴(a(−1)b(−1)𝟙, z) = :a(z)b(z): 本图无卡**：它是 Heisenberg 顶点代数里 (−1)-乘积的标准结果（Kac VAB §3.5 / FLM），本图 math 区没有登记；本推导按标准记账使用。"
+  - "**第 (3) 步「e^0 ⊗ ω_M 是 ℂ[L] ⊗ M(1) 的共形向量」无逐字来源**：对正定/非退化格这是 Borcherds/FLM 的结果（G–N p. 583 转述，无编号），对迷向秩 1 的 L = Zk 本推导按同一构造记账（L_(0) 在 e^{jk} 上本征值 0、L_(−1) 与 T 一致）。Borcherds §5 的「i ≥ −1」限制在此不适用（M(1) 建在整个非退化 𝔥 上），该辨析见 math.lattice-vertex-algebra 的 notes，同样是本项目核对。"
+  - "**(2α')^{1/2} 字典与零模装法是本项目推断**：G–N 的 h(0) = r·α_0 与本图 α_0 = (2α')^{1/2} p 的对应写在 worldsheet.ddf-operators-v6 那条边的 convention_map 里，无逐字来源。本推导对它的敏感性：只影响 L_(0) 的零模项 ½ α_0²，不影响 n ≠ 0 的算子形状。"
+  - "**Lean 侧只覆盖 Sugawara 一族**：Sugawara.lean 定义 Lop 并证 Virasoro（c = D），不含任何顶点代数结构，故「两族相同」这句话本身没有形式化对应；本推导不得标 formalized。"
+author: curator
+created: "2026-09-11"

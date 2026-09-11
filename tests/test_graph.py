@@ -1175,7 +1175,13 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     assert "worldsheet.ddf-commute-with-virasoro--via-conformal-weight" in ders
     d = ders["worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary"]
     assert d["own"] == "rigorous"
-    assert d["effective"] == "rigorous"
+    # 2026-09-11 (branch agent/curator/fixes-batch-c, reviewer-batch16): the Sugawara
+    # identification (G-N's L_(n) = omega_{n+1} == the graph's Sugawara L_n) used to hide in an
+    # inferred edge to worldsheet.virasoro-generators-free-boson; it is now an honest
+    # physical-argument card worldsheet.free-boson-vertex-algebra-conformal-vector, so this
+    # derivation is throttled to physical-argument while its own status stays rigorous --
+    # exactly the own > effective exposure this test exists to check.
+    assert d["effective"] == "physical-argument"
     assert ders["worldsheet.ddf-commute-with-virasoro--via-conformal-weight"][
         "effective"
     ] == "physical-argument"
@@ -1191,7 +1197,9 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     ders_v2 = {d["id"]: d for d in rep_v2["derivations"]}
     dz = ders_v2["worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket"]
     assert dz["own"] == "rigorous"
-    assert dz["effective"] == "rigorous"
+    # 2026-09-11 (fixes-batch-c): same conformal-vector edge as above (the R_(1) <-> OCQ
+    # identification was previously carried by no edge at all); throttled to physical-argument.
+    assert dz["effective"] == "physical-argument"
     assert ders_v2[
         "worldsheet.ddf-transverse-oscillator-algebra-v2--via-conformal-weight"
     ]["effective"] == "physical-argument"

@@ -1,0 +1,104 @@
+id: worldsheet.free-boson-vertex-algebra-conformal-vector
+kind: proposition
+title: V_(𝔥, Z k_0) 有共形向量 ω = ½ η_{μν} α^μ_{−1}α^ν_{−1} 𝟙（c = D），且 L_(n) := ω_{n+1} 在动量塔上与本图 Sugawara 型 L_n（worldsheet.virasoro-generators-free-boson）是同一族算子
+statement: |
+  **设定**同 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower：𝔥 = ℂ^D 带由
+  η = diag(−1, +1, …, +1) 复线性延拓的非退化对称双线性型 ⟨·,·⟩（conv.metric-mostly-plus），
+  k_0 ∈ R^D 类光、k := (2α')^{1/2} k_0、L := Z k，
+    V := V_(𝔥, Z k) = ℂ[Z k] ⊗ M(1)
+  是顶点代数（该卡 (2)），动量塔 T(p; k_0) = ⊕_{j∈Z} F(p + j k_0) 是它的 V-模（该卡 (3)）。
+  顶点算子按 𝒴(ψ, z) = Σ_{n∈Z} ψ_n z^{−n−1} 展开（math.vertex-algebra-borcherds-identity 的模式约定）。
+
+  **(1) 共形向量。** 取 𝔥 的一组对偶基 {a^μ}, {b_μ}（⟨a^μ, b_ν⟩ = δ^μ_ν；存在性由非退化保证——
+  在 ℂ 上不需要正交归一基，η 的号差不进入），令
+    **ω := ½ Σ_μ a^μ(−1) b_μ(−1) 𝟙 = ½ η_{μν} α^μ_{−1} α^ν_{−1} 𝟙 ∈ e^0 ⊗ M(1) ⊂ V**
+  （第二个写法用 worldsheet.bosonic-fock-space 的振子记号，α^μ_{−1} ↔ h^μ(−1)）。则
+    𝒴(ω, z) = Σ_{n∈Z} L_(n) z^{−n−2},   即 L_(n) = ω_{n+1}，
+  满足：(a) [L_(m), L_(n)] = (m − n) L_(m+n) + (D/12)(m³ − m) δ_{m+n,0}，**中心荷 c = D = dim 𝔥**；
+  (b) L_(−1) = T（顶点代数的平移算子）；
+  (c) L_(0) 在 V 上可对角化，在 e^{jk} ⊗ (M(1) 的振子层 N) 上本征值为 N + ½⟨jk, jk⟩ = N
+  （L 迷向，⟨jk, jk⟩ = 0），谱为 ℕ。
+  ⚠ 这**不**使 V 成为顶点算子代数：每个 L_(0) 本征空间含全部 j ∈ Z，无限维
+  （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 的 (N3)(b)）。
+
+  **(2) 与 Sugawara 生成元同族。** 在 V-模 T(p; k_0) 上，模作用 𝒴_W(ω, z) = Σ_n L_(n) z^{−n−2} 给出的
+  L_(n) 在第 j 层 F(p + j k_0) 上等于
+    L_(n) = ½ Σ_{m∈Z} : α_{n−m} · α_m :,   α^μ_0 = (2α')^{1/2} (p + j k_0)^μ · id
+  （产生–湮灭正规序），即**逐层等于** worldsheet.virasoro-generators-free-boson 定义的 L_n
+  ——那张定义卡的 L_n 恰是在同一 Fock 空间、同一振子代数 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}、
+  同一零模装法下直接写下的同一个和式。故「顶点代数公理给出的 L_(n) = ω_{n+1}」与
+  「本图 Sugawara 型 L_n」在动量塔上是**同一族算子**；特别地，G–N 记号里的 ℛ_(1)
+  （(2.55) 中 Δ = 1 的 primary 条件 L_(n)ψ = δ_{n0}ψ, n ≥ 0）与本图旧协变物理态条件
+  L_0ψ = ψ、L_mψ = 0 (m > 0)（a = 1）是同一组条件。
+
+  **本命题不断言**：
+  (N1) V 是顶点算子代数（否，见 (1)(c) 后的 ⚠）；
+  (N2) 塔上任何双线性型、伴随关系 L_(n)^† = L_(−n) 或正定性
+       （worldsheet.virasoro-generators-adjoint、worldsheet.fock-indefinite-form）；
+  (N3) 𝒴(e^{jk}, z) 与物理写法 :e^{i j k_0·X(z)}: 的对应（那是 ddf-operators-v6 那条边的 convention_map）；
+  (N4) 任何关于 c = 26 或临界维数的事；
+  (N5) G–N 刊 §2.2 写出的 ω / L_(n) 显式表达式与本卡 (1) 逐字相同——那一页 researcher 未读（见 sources）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+sources:
+  - ref: li-wang-2008
+    loc: "p. 10（§3 开头）：'for every nonzero ℓ, V_ĥ(ℓ,0) is a vertex operator algebra of central charge d = dim 𝔥 with conformal vector ω = (1/2ℓ) Σ_{r=1}^d h^{(r)}(−1)h^{(r)}(−1)𝟙, where {h^{(1)},…,h^{(d)}} is any orthonormal basis of 𝔥'；同页：level-ℓ restricted ĥ-模上有唯一的 V_ĥ(ℓ,0)-模结构 Y_W(h,x) = h(x)"
+    note: |
+      L1（researcher 2026-09-11 读 arxiv.org/pdf/0802.0173；逐字见 literature/extractions/math-sources.md §36.3(h)）。
+      **承载 (1) 的 M(1) 那一半**：共形向量的形式、c = dim 𝔥、以及模上的作用由 h(x) 唯一确定。
+      ⚠ Li–Wang 对这三句全部写 'It is well known now (cf. [LL])'，**不给 [LL]（Lepowsky–Li 2004）的定理号**
+      ⇒ 对 LL 是 L0。⚠ 'orthonormal basis' 在 ℂ 上存在 ⟺ 非退化，与号差无关；本卡改写成对偶基是等价的。
+      ⚠ Li–Wang 只对 M(1) 写共形向量，**没有**写 V_(𝔥,L) = ℂ[L] ⊗ M(1) 上 e^0 ⊗ ω 是共形向量这句话
+      ——那一步（e^{jk} 上的 L_(0) 本征值 ⟨jk,jk⟩/2 = 0、L_(−1) = T 在 ℂ[L] 因子上的作用）本卡按标准格点顶点代数记账补出，见推导。
+  - ref: gebert-nicolai-1995
+    loc: "§2.2, 刊 p. 583（无编号：'Associated with each nondegenerate even lattice Λ is a vertex algebra (ℱ, 𝒱, 1, ω)'，四元组里**带 ω**）；刊 pp. 584–586, eq. (2.68) [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}、(2.74) d 重 Heisenberg 代数、(2.90) ℱ = S(ĥ^−) ⊗ R{Λ}；§2.1, 刊 p. 578–579 公理 (2.26)–(2.29)（共形向量 𝒱(ω,z) = Σ L_(n) z^{−n−2}）与 p. 582 (2.55)（ℛ_(Δ) 的定义）"
+    note: |
+      L1（researcher 2026-09-11 逐页读期刊 PDF；math-sources.md §36.5、§37.3(a)）。
+      承载：(i) 格点顶点代数的四元组**含 ω**（p. 583，转述 Borcherds/FLM，无编号）；
+      (ii) (2.68) 是本图振子代数的逐字对应（不定 η 写成实矩阵的唯一来源）；
+      (iii) 公理 (2.26) 的记号 L_(n) = ω_{n+1} 与 (2.55) 的 ℛ_(Δ)，即本卡 (2) 末句所比对的对象。
+      ⚠⚠ **G–N §2.2 给出 ω / L_(n) 显式 Sugawara 表达式的那一页（(2.98) 之后，约刊 p. 587）researcher 未读**
+      （两轮读的是 pp. 571–586, 593–600, 620–622）。故「G–N 的 ω 就是 ½ η_{μν} α_{−1}α_{−1}𝟙」在本图**无逐字来源**，
+      本卡 (1) 的 ω 取自 Li–Wang，(N5) 据此保留。
+  - ref: bakalov-kac-2004
+    loc: "Theorem 4.1, p. 9, eq. (4.16)：conformal vector ν = ½ Σ_{i=1}^{l} (a^i t^{−1})(b^i t^{−1}), '{a^i}, {b^i} are dual bases of 𝔥'"
+    note: |
+      L1（math-sources.md §37.4(b)(c)）。**只作旁证**：它给出共形向量的**对偶基**写法（本卡 (1) 采用），
+      但其设定 𝔥 = ℂ ⊗_Z Q 与本卡的 𝔥 ⊋ ℂ k 不同（Q = Z k 迷向时其 𝔥 退化），故**不承载**本卡的任何断言。
+      ⚠ 该定理后半句 'conformal of rank l' 与该文 Definition 2.2(iii) 在 Q 不定时打架（math.lattice-vertex-algebra
+      的 Q34）；本卡的 L 迷向、L_(0) 谱为 ℕ，**不**触发那条冲突。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.Lop（L_n 的定义）与该文件中 c = D 的 Virasoro 关系"
+    note: |
+      承载 (2) 的 **Sugawara 一侧**：本图的 L_n 是在 Fock 空间上直接定义的和式，其 Virasoro 关系（c = D）已形式化
+      （worldsheet.virasoro-generators-free-boson 的 formal 字段）。本卡断言的是「两族算子相同」，
+      Lean 侧只覆盖其中一族。
+tags: [bosonic-string, vertex-algebra, conformal-vector, sugawara, virasoro, momentum-tower, no-ghost]
+notes: |
+  【为什么需要这张卡（curator，2026-09-11，依 reviewer-batch16）】两条 G–N 路线的推导
+  （worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary、
+  worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket）都在顶点代数的 L_(n) = ω_{n+1}
+  上工作，而目标陈述里的 L_m 是本图的 Sugawara 型 worldsheet.virasoro-generators-free-boson。
+  「两族是同一族」此前是前者的一条 **inferred** 边（指向 Sugawara 定义卡）；后者则把 G–N 的 ℛ_(1)
+  与本图物理态条件的等同写在 old-covariant-physical-states 那条边的 note 里、没有任何边承载。
+  worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 的 (N4) 也明写它不断言这件事。
+  本卡把这条识别单独立成命题，两条推导改指本卡（非 inferred），原 inferred 边撤销。
+
+  【status 为什么是 physical-argument】
+  (a) 识别本身是标准事实（M(1) 的 Sugawara 共形向量与 Fock 空间上的 Sugawara 算子是同一个东西），
+      但**本图现有来源里没有一处把它写成带编号的定理**：Li–Wang 说 'well known (cf. [LL])' 不给号，
+      G–N 的显式页未读，Bakalov–Kac 的设定不匹配；
+  (b) 从 M(1) 的 ω 到 ℂ[L] ⊗ M(1) 的 e^0 ⊗ ω、再到模 T(p; k_0) 上「逐层零模 α_0 = (2α')^{1/2}(p + jk_0)」
+      的记账，是本项目按格点顶点代数的标准构造补出的（见推导 summary），无逐字来源；
+  (c) 那条把 G–N 的 h(n) 与本图 α^μ_n 对上的字典（含 (2α')^{1/2} 因子）是本项目推断
+      （worldsheet.ddf-operators-v6 那条边的 convention_map 同一条）。
+  按 docs/STATUS_LEVELS.md「断言 + 骨架」档位：来源给骨架、关键步骤只有 'well known'，标 physical-argument，
+  缺口逐条写在推导 gaps。**升级路径**：researcher 读 G–N 刊 §2.2 的 Sugawara 页（或 Lepowsky–Li §6.3 的
+  带编号定理）后，可另挂一条 proof/rigorous 推导。
+
+  【对有效状态的影响（2026-09-11 接线时核实）】
+  · worldsheet.ddf-commute-with-virasoro：best 是 --via-lean（formalized），不受影响；
+    --via-vertex-algebra-primary 自身由 rigorous 的有效状态降到 physical-argument（实话：那条识别此前藏在 inferred 边里）。
+  · worldsheet.ddf-transverse-oscillator-algebra-v2：best 是 --via-lean（formalized），不受影响；
+    --via-zero-mode-bracket 的有效状态降到 physical-argument。
+author: curator
+created: "2026-09-11"
