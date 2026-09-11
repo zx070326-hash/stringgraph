@@ -1,0 +1,34 @@
+id: math.so-n-spinor-reality-mod-8--via-analogy-with-minkowski-analysis
+target: math.so-n-spinor-reality-mod-8
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.clifford-majorana-weyl-mod-8
+    note: |
+      供给被平移的那套分析（(B.1.16)–(B.1.21) 的 `B` 矩阵与 `B*B` 符号规则、Weyl 表示的自/互共轭）。
+      原书 p.437 逐字：「For SO(N) the analysis is **quite parallel**. … The reality properties can be
+      analyzed as in the Minkowski case. Essentially one ignores `μ = 0, 1`, so `SO(N)` is **analogous to**
+      `SO(N+1, 1)`, with the results shown in table B.2.」——即 Table B.2 是 Table B.1 的平移结果，
+      不是独立推导。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.1 *Spinors of SO(N)*, p.437 正文（「quite parallel」「analogous to SO(N+1,1)」两句逐字）+ Table B.2, p.437；real/pseudoreal 的定义句同页；(B.1.39)–(B.1.41), pp.437–438"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E13（L1，原书页图）。
+summary: |
+  (1) `N = 2l` 时 Γ 矩阵有 `2^l` 维表示，约化为两个 `2^{l−1}` 维 `SO(2l)` 旋量表示；
+      `N = 2l+1` 时是单一的 `2^l` 维表示（p.437）。
+  (2) 实性分析「as in the Minkowski case」：去掉 `μ = 0, 1` 两个方向后，`SO(N)` 的结构与
+      `SO(N+1, 1)` 相同，于是 math.clifford-majorana-weyl-mod-8 的 `B` 矩阵判据可直接搬过来，
+      得到 Table B.2 的三列。
+  (3) 术语细分：Minkowski 情形只区分「可加 Majorana / 不可加」，欧氏情形把「不可加但自共轭」
+      单独命名为 *pseudoreal*（`N ≡ 3, 4, 5 mod 8`）。
+  (4) 两个 pseudoreal 表示的乘积是实的（(B.1.39)）；`SO(2l)` 的 Weyl 乘积分解与 (B.1.38) 同形，
+      `k + 1 → l`（(B.1.41a–c)）。
+gaps:
+  - "**整节没有重做推导**：原书逐字只说「quite parallel」「The reality properties can be analyzed as in the Minkowski case」「Essentially one ignores μ = 0, 1」——「essentially」这一步（去掉两个方向为什么恰好把 `SO(N+1,1)` 的判据搬成 `SO(N)` 的）原书没有写出。"
+  - "**继承 math.clifford-majorana-weyl-mod-8 的全部缺口**：不可约表示唯一性只有一句断言；`B`、`C` 的基无关性外包给习题 B.1。"
+  - "**pseudoreal 的刻画是描述性的**：p.437 只说「the representation is conjugate to itself but cannot be written in terms of imaginary matrices」，没有给出等价的代数判据或证明它恰好发生在 `N ≡ 3,4,5 (mod 8)`。"
+  - "**「two wrongs make a right」只给一行显式条件 (B.1.39)**，无证明。"
+  - "**多类时方向的推广无证明**（p.438，与 Table B.1 同源的缺口）。"
+author: curator-v2-appB
+created: "2026-09-11"

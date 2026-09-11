@@ -1,0 +1,47 @@
+id: susy.bps-bound-point-particle-d4--via-positivity-of-anticommutator
+target: susy.bps-bound-point-particle-d4
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.clifford-majorana-weyl-mod-8
+    note: |
+      供给两件事：(1) `d = 4` 允许 Majorana 条件（Table B.1 的 `d = 4` 行 "Majorana yes"），
+      这是把 `Q^A_α` 取成 Majorana 旋量的前提；(2) 荷共轭矩阵 `C` 的存在与性质（(B.1.24)–(B.1.28)），
+      原书据此断言 `Z^{AB}` 必须在 `AB` 上反对称（p.448 逐字「It must be antisymmetric in AB due to
+      the Majorana property and the antisymmetry of the charge conjugation matrix C」）。
+      ⚠ `C` 的反对称性本身在原书是习题 B.1 的内容（「Determine the relations between B and B^T and
+      between C and C^T」），本卡因此继承那个缺口。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, pp.448–449：(B.2.36a,b)（含中心荷的代数 + 点粒子限定的逐字段落）→ (B.2.37)（静止系）→ (B.2.38)（Z 的 skew 标准基）→「The left-hand side of the algebra (B.2.37) is nonnegative as a matrix in (Aα, Bβ). The eigenvalues 2(m ± q_i) on the right-hand side must therefore also be nonnegative, implying the *Bogomolnyi–Prasad–Sommerfield (BPS) bound*」→ (B.2.39)；短/超短表示计数段"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E21（L1，原书页图）。
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.2, (B.2.4) p.441（正定性论证的模板：`0 = ⟨ψ|{Q, Q^†}|ψ⟩ = ‖Q|ψ⟩‖² + ‖Q^†|ψ⟩‖²`，用于无质量多重态）；(B.2.9)–(B.2.12) p.442（有质量表示由费米振子构造，`2^{2N}` 计数的模板）"
+    note: 抽取记录 #E15、#E16（L1）。这两处给出「反对易子非负 ⇒ 态被湮灭 ⇒ 表示变短」的标准套路。
+summary: |
+  (1) 前提：取洛伦兹不变性允许、且**只含点粒子荷**的最一般 `d = 4` 扩展超对称代数 (B.2.36)。
+      `Z^{AB}` 的反对称性由 Majorana 性质与 `C` 的反对称性得到。
+  (2) 转到静止系 `P^μ = (m, 0, 0, 0)`，代数化为 (B.2.37)
+      `{Q^A_α, Q^{B†}_β} = 2mδ^{AB}δ_{αβ} + 2iZ^{AB}Γ^0_{αβ}`。
+  (3) 取 `Z^{AB}` 的本征态，用 `U(N)` 的 R 转动把反对称实矩阵 `Z` 化到 2×2 分块 skew 标准形 (B.2.38)，
+      块的参数 `q_i ≥ 0`。
+  (4) 左端 `{Q, Q^†}` 作为 `(Aα, Bβ)` 指标上的矩阵是非负的（对任意态 `⟨ψ|{Q, Q^†}|ψ⟩ = ‖Q|ψ⟩‖² + ‖Q^†|ψ⟩‖² ≥ 0`，
+      同 (B.2.4) 的模板）。右端在标准基下的本征值是 `2(m ± q_i)`，故 `m ± q_i ≥ 0`，即 **`m ≥ q_i`**（(B.2.39)）。
+      无质量态 `m = 0` ⇒ 所有 `q_i = 0`，即必须中性。
+  (5) 饱和时的计数：`m > q_i` 全部严格 ⇒ `2N` 对费米振子全部活跃，`2^{2N}` 个态；
+      有 `k` 个 `q_i = m` ⇒ 对应的 `2k` 对振子湮灭态（与无质量情形一半振子湮灭同理），
+      短表示 `2^{2(N−k)}`；全部饱和 ⇒ 超短表示 `2^N`。
+gaps:
+  - "**「最一般代数」是断言**：原书逐字「The most general extended supersymmetry algebra allowed by Lorentz invariance is (B.2.36)」——无证明、无引用；Haag–Łopuszański–Sohnius 全附录未提及（抽取记录 §3.2 第 7 条）。同类断言还有 p.440 的「The N = 1 supersymmetry algebra is **uniquely determined**」。"
+  - "**★ 适用域只到点粒子荷**：p.448 逐字「this is the most general algebra if we include only charges that can be carried by point particles. Including charges that can be carried by *extended objects*, additional terms appear … The same caveat applies to the higher-dimensional algebras」。⇒ 本推导**不**支持任何关于膜 / 扩展物体 BPS 界的结论（抽取记录 Q3）。"
+  - "**`Z^{AB}` 的反对称性依赖习题 B.1**：`C` 与 `C^T` 的关系原书没证，是习题 B.1 的题目。"
+  - "**(B.2.38) 的标准化未写理由**：「Taking an eigenstate of the charges Z^{AB}, we can go to a basis in which …」——把反对称矩阵化到 skew 标准形所用的 R 对称性转动原书未说明（是标准线性代数，但原书未写，且 `q_i ≥ 0` 的取法也没解释）。"
+  - "**费米振子计数的细节外包**：短表示 `2^{2(N−k)}` 的构造原书只用一句「just as half the oscillators do for a massless representation」类比 (B.2.5)(B.2.6)，未重做。"
+  - "**本附录零文献引用、无编号定理**（§3.2 第 7 条）。"
+notes: |
+  第 (4) 步本身是完整的有限维线性代数（厄米非负矩阵的本征值非负）。按 docs/STATUS_LEVELS.md，
+  若前提完整且经 reviewer 独立复核，这一步可到 rigorous；但本卡的**前提**（(B.2.36) 的唯一性、
+  `C` 的反对称性）是断言，故整条推导只能 physical-argument。日后若把「非负矩阵 ⇒ 本征值非负 ⇒ m ≥ q」
+  单独拆成一张纯线性代数卡（可形式化），本卡可改为依赖它。
+author: curator-v2-appB
+created: "2026-09-11"

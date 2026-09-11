@@ -1,0 +1,59 @@
+id: math.so-n-spinor-reality-mod-8
+kind: proposition
+title: SO(N) 旋量的实性 / Weyl / 实且 Weyl 条件按 N mod 8 的分类（Polchinski Table B.2），含 pseudoreal
+statement: |
+  设 `SO(N)`（紧致、欧氏号差）的 Γ 矩阵表示。`N = 2l` 时有 `2^l` 维表示，约化为两个 `2^{l−1}` 维
+  Weyl 旋量表示；`N = 2l+1` 时有单一的 `2^l` 维表示。术语按原书 p.437 逐字：
+  「Here *real* means the algebra can be written in terms of purely imaginary matrices. The term
+  *pseudoreal* is often used for `N = 3, 4, 5 mod 8`, where the representation is conjugate to itself
+  but cannot be written in terms of imaginary matrices.」
+
+  **命题**：允许的实性 / Weyl 条件只依赖 `N` mod 8，按下表分布。
+
+  **Table B.2（p.437，表题与表体逐字转录）**
+
+  表题：「*Dimensions in which various conditions are allowed for `SO(N)` spinors.*」
+
+  | `N` mod 8 | real | Weyl | real and Weyl |
+  |---|---|---|---|
+  | 0 | yes | self | yes |
+  | 1 | yes | - | - |
+  | 2 | yes | complex | - |
+  | 3 | pseudo | - | - |
+  | 4 | pseudo | self | - |
+  | 5 | pseudo | - | - |
+  | 6 | yes | complex | - |
+  | 7 | yes | - | - |
+
+  附带两条（原书同页）：
+  (a) 两个 pseudoreal 表示的乘积是实的（p.437 逐字「two wrongs make a right — the product of two
+      pseudoreal representations is real」），显式条件 `u*_{ij} = ε_{ii′}ε_{jj′}u_{i′j′}`（(B.1.39)）；
+  (b) `SO(2l)` 的 Weyl 旋量乘积分解与 Minkowski 情形 (B.1.38) 形式相同，只把 `k+1` 换成 `l`（(B.1.41a–c)）。
+
+  **本命题不断言**：
+  (1) SO(8) 的**三重性**（triality）。原书 Table B.2 的 `N ≡ 0 (mod 8)` 行只说两个 Weyl 表示
+      都是 real 且 self-conjugate，**全附录没有 "triality" 一词、没有 `8_s`/`8_c` 记号**
+      （抽取记录 §3.2 第 1 条）。
+  (2) `SO(8)` 上 `8 × 8`、`8 × 8′`、`8_v × 8_v` 的具体不可约分解数字（`1 + 28 + 35`、`8 + 56` 之类）。
+      (B.1.41) 只给一般 `l` 的规则，**原书没有对 `l = 4` 写出这些数字**（§3.2 第 2 条）。
+  (3) 多于一个类时方向的推广（p.438：只说依赖类空与类时维数之**差**，无证明）。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v2
+    loc: "App. B §B.1 *Spinors of SO(N)*, Table B.2, p.437（表题与表体逐字）；正文 p.437 逐字「For SO(N) the analysis is quite parallel. … Essentially one ignores μ = 0, 1, so SO(N) is analogous to SO(N+1, 1), with the results shown in table B.2.」；real/pseudoreal 定义句同页；(B.1.39)（pseudoreal 乘积的实条件）、(B.1.40)（SO(2,1) 的实基）、(B.1.41a–c)（SO(2l) Weyl 乘积分解），pp.437–438"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-appB.md#E13，证据等级 L1（原书页图）。
+      ⚠ **原书自陈这一节没有重做推导**，只是把 Minkowski 的分析平移：「quite parallel」「analogous」。
+tags: [clifford-algebra, spinor, so-n, reality, pseudoreal, representation-theory, mod-8, polchinski-appendix-b]
+notes: |
+  【与 math.clifford-majorana-weyl-mod-8 的关系】原书的论证方式是「`SO(N)` 类比于 `SO(N+1,1)`，
+  只需忽略 `μ = 0, 1`」。因此本卡的推导**依赖**那张卡，而不是独立重做；这也是本卡状态不高于它的原因。
+
+  【SO(8) 那一行能与不能支持什么】`N ≡ 0 (mod 8)` 行是「`8` 与 `8′` 都实、都自共轭」的来源，
+  可以用；**不能**用来支持三重性或任何 `8_v ↔ 8 ↔ 8′` 的外自同构轮换主张（App. B 不含，§3.2 第 1 条）。
+  若日后建 worldsheet.so8-triality，来源须另找（候选：Vol.2 §10.2–10.6，本轮未核；或 GSW / 数学来源）。
+
+  【升级路径】同 math.clifford-majorana-weyl-mod-8：需 ABS 1964 或 Lawson–Michelsohn 一类数学来源，
+  两者本项目均未取得（L0），**未登记到 literature/sources.bib**。
+author: curator-v2-appB
+created: "2026-09-11"
