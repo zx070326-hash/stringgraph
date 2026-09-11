@@ -47,6 +47,9 @@ card's `lean_decl` point at that restatement.
   `StringFormal/Math/ModularGroupGenerators.lean`, which deliberately only used `−I ∈ Z`.)
 * `psl2z_smul_eq` : `γ · τ = (aτ + b)/(cτ + d)` with the matrix entries written out.
 * `psl2z_im_smul_eq` : `Im(γ·τ) = Im τ / |cτ + d|²`, the card's reason the action preserves `H`.
+* `psl2z_im_pos` : `Im(γ·τ) > 0`, i.e. the action really lands in `H`
+  (`math.mobius-action-preserves-upper-half-plane` item (2), which otherwise lives only in the
+  *type* of `psl2z_im_smul_eq`).
 * `psl2z_T_smul`, `psl2z_S_smul` : `T : τ ↦ τ + 1` and `S : τ ↦ −1/τ`.
 * `neg_smul_eq`, `neg_one_smul_eq` : `γ` and `−γ` induce the same map, `−I` acts trivially.
 * `smul_eq_of_pslMk_eq` and the `MulAction PSL2Z ℍ` instance (`pslMk_smul`) : the action
@@ -151,6 +154,15 @@ theorem psl2z_im_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
     (g • τ).im = τ.im / ‖(g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)‖ ^ 2 := by
   rw [ModularGroup.im_smul_eq_div_normSq, Complex.normSq_eq_norm_sq]
   simp [ModularGroup.denom_apply]
+
+/-- **The action preserves `H`**, qualitatively: `Im(γ·τ) > 0` — item (2) of the card
+`math.mobius-action-preserves-upper-half-plane`.  In Mathlib this is carried by the *type* of
+`g • τ` (`ℍ = {z : ℂ // 0 < z.im}`, and the `MulAction SL(2,ℝ) ℍ` instance proves positivity
+when it is built); this restatement extracts it as a named proposition so that the card's
+item (2) has its own declaration instead of living only in the type of `psl2z_im_smul_eq`.
+Mathlib: `UpperHalfPlane.im_pos`. -/
+theorem psl2z_im_pos (g : SL(2, ℤ)) (τ : ℍ) : 0 < (g • τ).im :=
+  (g • τ).im_pos
 
 /-- `T = ((1,1),(0,1))` acts as `τ ↦ τ + 1` — the card's first standard element.
 Mathlib: `UpperHalfPlane.modular_T_smul`. -/
