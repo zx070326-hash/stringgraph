@@ -143,6 +143,17 @@ notes: |
   ⇒ 即使 N = 2, 3, … 逐片做完，也**还差这一步**才能得到本卡。
   请任何接手 N ≥ 2 的 formalizer 先把这条引理列进 TODO（`ddf-spans` 项下）。
 
+  ⇒ **【2026-09-11 更新（lead）：上面这条拼装缺口已关闭。】** 同日合入的
+  formal/StringFormal/NoGhost/Glue.lean（formalizer-noghost-glue）证得
+  `towerPhysSubmodule_eq_iSup_inf_towerBigrade`（物理子模 = 其双分次齐次分量之上确界，
+  关键是 `towerBigradeProj_mem_towerPhysSubmodule`：L₀ 双度 (0,0)、L_m 双度 (0,−m)，
+  故物理态条件本身双分次齐次）、主引理 `ddfSpans_of_forall_slice`（逐片 ⇒ 本卡）、
+  反对角版 `ddfSpans_of_forall_antidiagonal_slice_int`（`CharZero R` 下只剩 ∀ N，
+  `DDFSpansOn … (towerBigrade (−N) N)`），以及 `ddfSpansOn_towerLevelLE_one`
+  （能级 ≤ 1 整块、所有 rung 一起、无条件于 D）。26 条声明公理干净。
+  于是本卡现在**恰好等价于**「对每个 N ≥ 2，单片 (−N, N) 上的张成」；N = 2 的义务已由
+  `ddfSpansOn_towerLevelLE_of_antidiagonal` 归约到单片 `towerBigrade (−2) 2`。
+
   【与「等距同构」读法的关系】
   worldsheet.no-ghost-theorem-v4 的 (1b) 把结论写成等距同构 H^⊥(k) ≅ H_phys/H_0。
   Assembly.lean 的 Gaps 第 2 条逐字说明为什么 Lean 侧不构造这个同构：
