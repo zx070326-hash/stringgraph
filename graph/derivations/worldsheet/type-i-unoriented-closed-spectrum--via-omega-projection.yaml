@@ -7,13 +7,26 @@ depends_on:
     note: 供给被投影的对象（IIB 的无质量谱）。
   - id: worldsheet.gso-projection
     note: 供给 IIB 的定义（两侧同一 GSO 投影），Ω 作用在其上。
-  - id: worldsheet.worldsheet-parity
+  - id: worldsheet.closed-superstring-worldsheet-parity-action
     note: |
-      供给世界面宇称 Ω 及其作为可规范对称性的地位。
-      ⚠ 该卡是玻色弦语境的；超弦情形 Ω 还作用在 ψ、ψ̃ 与鬼场上
-      （§10.8 (10.8.13) 给 Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、(10.8.14) 给 Ω² = exp(πiF)），
-      本图无该扩充的节点，见 gaps。
-    inferred: true
+      供给**闭超弦上的世界面宇称 Ω 及其在世界面费米子上的作用**：
+      Ω ψ(w) Ω^{−1} = ψ̃(w̄)、Ω ψ̃(w̄) Ω^{−1} = ψ(w)（即 **Ω 交换左移与右移**），
+      一般插入 R = Ω exp(πiβF + πiβ̃F̃) 时带相位 exp(πiβ) / exp(πiβ̃)（(10.8.8a,b) 的中间项），
+      以及 Ω² 与 ψ、ψ̃ 对易（(10.8.9) 的代数内容）；
+      玻色部门上的 Ω（闭弦 σ ↦ −σ、Ω α_n Ω^{−1} = ᾱ_n、无取向投影 (1+Ω)/2）由该卡
+      `uses: worldsheet.worldsheet-parity` 一并带入。
+      **非 inferred（2026-09-11 由 inferred 改正，curator theta-cards）**：该卡的断言 (1)(2) 逐字取自
+      原书 **§10.8 (10.8.8a,b)** 的算符等式 Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)，
+      即「Ω 在闭超弦上如何作用」在原书里是写出来的，本图现在也有了节点。
+      ⚠⚠ **本边只供给「Ω 交换左右」这一条，不供给它在自旋场 V_s 上的作用**：
+      该卡的「不断言 (a)」逐字声明「**Ω 把 V_sṼ_{s'} 送到 Ṽ_{s'}V_s**」这句在原书 §10.6
+      **没有逐字出处**，是本图的读法。本推导 summary 第 (2) 步正是这样用的
+      ⇒ **那一层仍是缺口**，见 gaps 第二条（已按此改写）。
+      ⚠ **方向别搞反、也别成环**：该卡**不** `uses` worldsheet.type-i-unoriented-closed-spectrum
+      （它的 notes 逐字写明这是硬约束，理由就是避免与本边成环）；已核对本边不引入环
+      （该卡的 uses 只有 worldsheet-parity / rns-fermion-periodicity / rns-fermion-number-operator）。
+      ⚠ 该卡 own status = rigorous，但其 effective 被 uses 里的 RNS 两张卡压到 physical-argument，
+      与本推导同级，故本边不改变目标卡的有效状态。
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.6, eq. (10.6.16)–(10.6.18), pp. 29–30"
@@ -38,8 +51,41 @@ summary: |
   第 (2) 步的符号（R 顶点算子的费米性质）在原书里只有一个从句，本图无节点。
 gaps:
   - "**「R 顶点算子的费米性质给出额外负号」这一步在本图无节点**：原书只有一个从句（'where the final sign comes from the fermionic nature of the R vertex operators'）。它实质上依赖 §10.4 末的 cocycle 与 §10.6 的自旋-统计讨论（E44），本图都没有建。"
-  - "**Ω 在超弦上的作用未在图中定义**：worldsheet.worldsheet-parity 是玻色弦语境的（该依赖边已标 inferred）。超弦的完整作用（(10.8.13)、(10.8.14)：Ω² = exp(πiF)）在 §10.8 才给出，本图无节点。"
+  - "**【2026-09-11 已关闭（curator theta-cards）】Ω 在超弦上的作用未在图中定义**：
+     本条此前逐字写着「worldsheet.worldsheet-parity 是玻色弦语境的（该依赖边已标 inferred）。
+     超弦的完整作用（(10.8.13)、(10.8.14)：Ω² = exp(πiF)）在 §10.8 才给出，本图无节点。」
+     ⇒ **闭弦一侧已建卡**：**worldsheet.closed-superstring-worldsheet-parity-action**
+     （(10.8.8a,b)/(10.8.9)：Ωψ(w)Ω^{−1} = ψ̃(w̄)，Ω² 与 ψ、ψ̃ 对易），本推导的那条边**已改指它并去掉 inferred**。
+     ⚠ **残余（必须一起读）**：该卡覆盖的是**闭**超弦；本条原文提到的 (10.8.13)/(10.8.14)
+     （Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ、**Ω² = exp(πiF)**）是**开**超弦一侧，在另一张卡
+     worldsheet.superstring-worldsheet-parity-action 上，**本推导用不到**
+     （本推导处理的是闭弦谱的 Ω 投影）。两张卡不得互相替代。
+     ⚠ 该卡对**超共形鬼场 β、γ 上的 Ω 作用**同样不断言（原书本处不提）。"
+  - "**「Ω 把 V_sṼ_{s'} 送到 Ṽ_{s'}V_s」这一步在原书没有逐字出处（本推导现在最实质的缺口）**：
+     summary 第 (2) 步把「Ω 交换左右」搬到**自旋场** V_s 上。新接的
+     worldsheet.closed-superstring-worldsheet-parity-action **只给 Ω 在 ψ、ψ̃ 上的作用**，
+     其「不断言 (a)」逐字声明：『**Ω 把 V_s Ṽ_{s'} 送到 Ṽ_{s'} V_s**」这句本身 …
+     **在原书 §10.6 没有逐字出处**（抽取记录 #E45 是**转述**）… V_s 是**自旋场**（R 扇区基态算子），
+     不是 ψ 的多项式，断言 (2) 的「Ω 交换 ψ ↔ ψ̃」**不自动**给出它在 V_s 上的作用。』
+     ⇒ **这一步是本图的读法**，与上一条 gap（R 顶点算子的费米性质给出额外负号）同源，
+     都指向 §10.4 末的 cocycle 与 §10.6 的自旋-统计讨论（抽取记录 #E44），本图都没有建。"
   - "**表示论分解无支撑**：8 × 8 = [0] + [2] + [4]_+ 与「哪些部分对称/反对称」依赖附录 B.1（未读）。"
   - "**「规范掉一个离散对称性」这一操作本身在本图无形式化**：它是世界面上对无取向曲面求和（Klein 瓶、Möbius 带），玻色弦一侧本图也只有 worldsheet.worldsheet-parity 这一张卡。"
+notes: |
+  ★★【2026-09-11（curator theta-cards）：本推导的 Ω 边已改指闭超弦卡】
+  此前本推导对 worldsheet.worldsheet-parity 的边标 **inferred**，理由是「该卡是玻色弦语境的」。
+  worldsheet.closed-superstring-worldsheet-parity-action（2026-09-11 由 curator small-backlog-13 建立）
+  的 notes 里逐字留了这条待办：
+    「⇒ **交 lead 的建议（本轮未做，因该文件不在本轮 claim 内）**：把
+      worldsheet.type-i-unoriented-closed-spectrum--via-omega-projection 的
+      worldsheet.worldsheet-parity **inferred** 边**改指本卡并去 inferred**，
+      同时关闭它 gaps 里「Ω 在超弦上的作用未在图中定义」那一条。**改完不会成环。**」
+  **本批次执行了这条建议**：边已改指、inferred 已去、对应的 gap 已改写为「已关闭 + 残余」。
+  **无环已复核**：该卡的 uses 只有 worldsheet.worldsheet-parity、worldsheet.rns-fermion-periodicity、
+  worldsheet.rns-fermion-number-operator，三者都不经任何路径回到本推导的目标卡；
+  `uv run stringgraph validate`（含无环检查）0 errors。
+  ⚠ **有效状态不变**：新卡 own = rigorous 但 effective 被 RNS 两张卡压到 physical-argument，
+  与本推导同级 ⇒ 目标卡仍是 physical-argument。**本次改动的价值是可追溯性，不是强度。**
+  ⚠ **本推导对 worldsheet.worldsheet-parity 的直接边已不存在**（玻色卡现在只经新卡的 `uses` 间接进入）。
 author: curator
 created: "2026-09-11"
