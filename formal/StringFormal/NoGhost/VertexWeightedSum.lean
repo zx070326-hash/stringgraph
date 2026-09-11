@@ -14,9 +14,71 @@ import StringFormal.NoGhost.DDFOperatorAll
 Graph node: `worldsheet.ddf-transverse-oscillator-algebra`; `formal/TODO.md` item
 `ddf-operators`, sub-item (5b).
 
-Target: `Σ_j j • V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}` on the DDF momentum tower.
+**`Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`** on the DDF momentum tower of a light-like
+reference vector (`k_0² = 0`) normalised by `2α' k_0·p = 1`
+(`sum_weighted_towerVertex_towerVertex`).  Together with the transversality step (4) and the
+same-point product (5a, `StringFormal/NoGhost/VertexProduct.lean`) this is the analytic heart
+of the DDF bracket `[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}`.
 
-Work in progress; the file header will be filled in when the chain is complete.
+## Conventions
+
+`conv.metric-mostly-plus`, `conv.alpha-prime-regge`, as in `StringFormal/NoGhost/DDF.lean`;
+`dotVec η x y = Σ_μ η_μ x^μ y^μ` and `b^μ = (2α')^{1/2} k_0^μ`.
+
+## The algebraic route (this file replaces the contour-integral argument)
+
+The physics statement is a residue computation: `:(k_0·∂X) e^{i(m+n)k_0·X}:` is a total
+derivative for `m + n ≠ 0` and degenerates to `k_0·∂X` for `m + n = 0`, whose residue is
+`k_0·α_0 = 2α' k_0·p = 1`.  Purely algebraically the same content is:
+
+1. **`Fock.vertexOsc_zero_momentum`** — `V^{(0)}_K = δ_{K,0}`: the zero-momentum vertex
+   operator is the identity (this is the degeneration at `m + n = 0`).
+2. **`Fock.dotMode`** — the contracted current `c·α_{-J} = Σ_μ η_μ c^μ α^μ_{-J}`, indexed so
+   that it raises the oscillator level by `J`, matching the `Fock.vertexOsc` convention.
+   For `c·b = 0` it **commutes** with `V^{(b)}_K` (`Fock.dotMode_vertexOsc_comm`).
+3. **`Fock.vertexCurrent_eq`** — the **weight identity**
+   `Σ_J (b·α_{-J}) V^{(b)}_{L-J} = (L + b·a) V^{(b)}_L` for `b·b = 0`.  This is the algebraic
+   form of `z ∂_z :e^{i b·X}: = :(i b· z∂_z X) e^{i b·X}:` and is the missing atom of (5b).
+   The proof is the rigidity argument: the two sides satisfy the *same* creation-mode
+   recursion (`Fock.vertexCurrent_X_mul`, whose extra commutator term `k b^μ V_{L+k}` is
+   exactly the derivative of the prefactor `L`) and agree on the vacuum, where the current
+   sum is the Euler recursion `Fock.sum_mode_creaExp_eq_smul` for the coherent state.
+4. **`towerCurrentVertex_eq`** — the tower form `m Σ_J (k_0·α_{-J}) V^{(m)}_{K-J} = K V^{(m)}_K`.
+   The constant `b·a = m` of the single-Fock statement is precisely the rung shift already
+   built into `towerVertex`, so on the tower the eigenvalue is just `K`.
+5. **`sum_weighted_towerVertex_towerVertex`** — step (5b).  Expand `j V^{(m)}_j`, pull the
+   current out of the `j`-sum (it commutes with both vertex operators), fuse the exponentials
+   with (5a), and apply the weight identity a second time at momentum `m+n` and index `0`:
+   `(m+n) Σ_J (k_0·α_{-J}) V^{(m+n)}_{-J} = 0 · V^{(m+n)}_0 = 0`.  Over a `ℚ`-algebra this
+   kills the sum unless `m + n = 0`, and that is the total-derivative statement.
+
+## Mathematical remarks (for the dependency graph)
+
+1. **(5b) is not a corollary of (5a).**  The obvious attempt — apply `⁅L_0, V_K⁆ = K V_K` to
+   the same-point product — gives `T_L + U_L = L S_L` with two unknowns, and degenerates to
+   `0 = 0` at `L = 0`: `L_0` acts on a product by Leibniz and only sees the *sum* of the two
+   weights, while (5b) puts the weight on one factor.  The current `k_0·∂X` must be
+   introduced as a new object; that is what `Fock.dotMode` is for.  (Independently
+   re-derived here; it confirms the note left in `formal/TODO.md`.)
+2. **Where `k_0² = 0` is used in this file.**  Three times, all essential: the weight identity
+   itself (`Fock.vertexCurrent_eq` assumes `b·b = 0`; otherwise the contraction of `b·∂X`
+   with `e^{ib·X}` adds a `b²/z` term and the identity acquires an anomalous piece), the
+   commutation of the current with the vertex operators, and — through the latter — the
+   locally finite window of the current-vertex product.
+3. **Where `2α' k_0·p = 1` is used.**  Only once, in `towerCurrent_zero_of_normalized`: it
+   makes `k_0·α_0 = 1` on *every* rung of the tower, which is consistent precisely because
+   `k_0² = 0` (`dotVec_towerMomentum_right_of_isotropic`).  This is the single place where
+   the `m` on the right-hand side of `[A^ε_m, A^δ_n] = m (ε·δ) δ_{m+n,0}` comes from.
+4. **`ℚ`-algebra is needed**, not just for the coherent-state coefficients, but for the final
+   division by `m + n` (`eq_zero_of_intCast_smul_eq_zero`).  Over `ℤ` one gets only
+   `(m+n) · Σ_j j V^{(m)}_j V^{(n)}_{-j} = 0`.
+
+## Status
+
+Complete as stated, no `sorry`; axioms are `propext`, `Classical.choice`, `Quot.sound` only.
+Still missing for the full DDF bracket: the Leibniz assembly of
+`[A^ε_m, A^δ_n] = Σ_{j,l} ⁅α^ε_j, α^δ_l⁆ V^{(m)}_j V^{(n)}_l` out of the doubly locally finite
+sums (see `formal/TODO.md`).
 -/
 
 namespace StringFormal.NoGhost
@@ -243,14 +305,14 @@ noncomputable def currentIdx (L : ℤ) (P : Fock D R) : Finset ℤ :=
 /-- Outside the window the summand vanishes.  The *upper* end is the level bound on
 `V^{(b)}_{L-J}P`; the *lower* end needs the commutation `Fock.dotMode_vertexOsc_comm`, i.e.
 `b² = 0`. -/
-theorem dotMode_vertexOsc_apply_eq_zero_of_notMem (η a b : Fin D → R)
-    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (L : ℤ) (P : Fock D R) {J : ℤ}
+theorem dotMode_vertexOsc_apply_eq_zero_of_notMem (η a c b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hcb : dotVec η c b = 0) (L : ℤ) (P : Fock D R) {J : ℤ}
     (hJ : J ∉ currentIdx L P) :
-    dotMode η b a J (vertexOsc η b (L - J) P) = 0 := by
+    dotMode η c a J (vertexOsc η b (L - J) P) = 0 := by
   rw [currentIdx, Finset.mem_Icc, not_and_or] at hJ
   rcases hJ with h | h
-  · rw [dotMode_vertexOsc_comm η b a b hη hbb,
-      dotMode_apply_eq_zero_of_modeBound_lt η b a (by omega : (modeBound P : ℤ) < -J),
+  · rw [dotMode_vertexOsc_comm η c a b hη hcb,
+      dotMode_apply_eq_zero_of_modeBound_lt η c a (by omega : (modeBound P : ℤ) < -J),
       map_zero]
   · rw [vertexOsc_apply_eq_zero_of_levelBound_lt η b
       (by omega : (levelBound P : ℤ) + (L - J) < 0), map_zero]
@@ -262,7 +324,7 @@ noncomputable def vertexCurrent (η a b : Fin D → R) (hη : ∀ μ, η μ * η
   lsumLocFin (fun J => dotMode η b a J ∘ₗ vertexOsc η b (L - J)) (currentIdx L)
     (fun P J hJ => by
       rw [LinearMap.comp_apply]
-      exact dotMode_vertexOsc_apply_eq_zero_of_notMem η a b hη hbb L P hJ)
+      exact dotMode_vertexOsc_apply_eq_zero_of_notMem η a b b hη hbb L P hJ)
 
 /-- `vertexCurrent` is computed by any index set containing the window. -/
 theorem vertexCurrent_apply (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
@@ -272,7 +334,7 @@ theorem vertexCurrent_apply (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ 
       = ∑ J ∈ s, dotMode η b a J (vertexOsc η b (L - J) P) := by
   rw [vertexCurrent, lsumLocFin_apply _ _ _ P (fun J hJ => by
     rw [LinearMap.comp_apply]
-    refine dotMode_vertexOsc_apply_eq_zero_of_notMem η a b hη hbb L P (fun hmem => hJ ?_)
+    refine dotMode_vertexOsc_apply_eq_zero_of_notMem η a b b hη hbb L P (fun hmem => hJ ?_)
     rw [currentIdx, Finset.mem_Icc] at hmem
     exact hs J hmem.1 hmem.2)]
   exact Finset.sum_congr rfl fun J _ => rfl
@@ -396,5 +458,342 @@ theorem sum_dotMode_vertexOsc (η a b : Fin D → R) (hη : ∀ μ, η μ * η �
 end Current
 
 end Fock
+
+/-! ### The current on the DDF momentum tower
+
+`towerCurrent η a b J` is `k_0·α_{-J}` acting rung by rung, each rung carrying its own
+zero-mode momentum `a + j k_0`.  Under the DDF hypotheses (`k_0² = 0`, `2α' k_0·p = 1`) the
+zero mode `J = 0` is the *same* scalar `1` on every rung
+(`dotVec_towerMomentum_right_of_isotropic`), which is where the normalisation finally enters
+the calculation. -/
+
+section TowerCurrent
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+omit [Algebra ℚ R] in
+lemma dotVec_vertexMomentum_left (η b y : Fin D → R) (n : ℤ) :
+    dotVec η (vertexMomentum b n) y = (n : R) * dotVec η b y := by
+  rw [dotVec, dotVec, Finset.mul_sum]
+  exact Finset.sum_congr rfl fun μ _ => by simp only [vertexMomentum_apply]; ring
+
+omit [Algebra ℚ R] in
+lemma dotVec_vertexMomentum_right (η b y : Fin D → R) (n : ℤ) :
+    dotVec η y (vertexMomentum b n) = (n : R) * dotVec η y b := by
+  rw [dotVec_comm, dotVec_vertexMomentum_left, dotVec_comm]
+
+/-- The contracted current `k_0·α_{-J}` on the momentum tower. -/
+noncomputable def towerCurrent (η a b : Fin D → R) (J : ℤ) :
+    Module.End R (TowerFock D R) :=
+  towerDiag fun j => Fock.dotMode η b (towerMomentum a b j) J
+
+omit [Algebra ℚ R] in
+@[simp]
+lemma towerCurrent_single (η a b : Fin D → R) (J j : ℤ) (P : Fock D R) :
+    towerCurrent η a b J (Finsupp.single j P)
+      = Finsupp.single j (Fock.dotMode η b (towerMomentum a b j) J P) :=
+  towerDiag_single _ _ _
+
+omit [Algebra ℚ R] in
+/-- **The DDF normalisation makes the zero mode of the current the identity.**
+`k_0·α_0 = 2α' k_0·(k + j k_0) = 2α' k_0·k = 1` on *every* rung, because `k_0² = 0`. -/
+theorem towerCurrent_zero_of_normalized (η a b : Fin D → R) (hbb : dotVec η b b = 0)
+    (hba : dotVec η b a = 1) :
+    towerCurrent η a b 0 = (LinearMap.id : Module.End R (TowerFock D R)) := by
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [towerCurrent_single, Fock.dotMode_zero, LinearMap.smul_apply, LinearMap.id_coe, id_eq,
+    dotVec_towerMomentum_right_of_isotropic η a b hbb, hba, one_smul, LinearMap.id_apply]
+
+omit [Algebra ℚ R] in
+/-- The current kills a tower vector once the annihilation index exceeds the mode bound. -/
+theorem towerCurrent_apply_eq_zero_of_lt (η a b : Fin D → R) (J : ℤ) (x : TowerFock D R)
+    (h : (towerModeBound x : ℤ) < -J) : towerCurrent η a b J x = 0 := by
+  classical
+  conv_lhs => rw [← sum_single_eq x]
+  rw [map_sum]
+  refine Finset.sum_eq_zero fun j hj => ?_
+  have hle : (Fock.modeBound (x j) : ℤ) ≤ (towerModeBound x : ℤ) := by
+    exact_mod_cast Finset.le_sup (f := fun j => Fock.modeBound (x j)) hj
+  rw [towerCurrent_single,
+    Fock.dotMode_apply_eq_zero_of_modeBound_lt η b (towerMomentum a b j) (by omega),
+    Finsupp.single_zero]
+
+/-- **The current commutes with every tower vertex operator** when `k_0² = 0`.
+
+Two separate facts conspire: for `J ≠ 0` the mode `α^μ_{-J}` does not see the rung shift and
+the bracket is `(k_0 · n k_0) V = n k_0² V = 0`; for `J = 0` the current is the scalar
+`k_0·(a + j k_0) = k_0·a`, which is the *same* on the rung before and after the shift, again
+because `k_0² = 0`.  This is what gives the `J`-sum of the weighted product a cut-off that
+does not depend on the other summation index. -/
+theorem towerCurrent_towerVertex_comm (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (J n K : ℤ) :
+    towerCurrent η a b J * towerVertex η b n K
+      = towerVertex η b n K * towerCurrent η a b J := by
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [Module.End.mul_apply, Module.End.mul_apply, towerVertex_single, towerCurrent_single,
+    towerCurrent_single, towerVertex_single]
+  congr 1
+  have hpar : Fock.dotMode η b (towerMomentum a b (j + n)) J
+      = Fock.dotMode η b (towerMomentum a b j) J := by
+    rcases eq_or_ne J 0 with rfl | hJ
+    · rw [Fock.dotMode_zero, Fock.dotMode_zero,
+        dotVec_towerMomentum_right_of_isotropic η a b hbb,
+        dotVec_towerMomentum_right_of_isotropic η a b hbb]
+    · rw [Fock.dotMode, Fock.dotMode]
+      refine Finset.sum_congr rfl fun μ _ => ?_
+      congr 1
+      rcases (by omega : -J < 0 ∨ 0 < -J) with h | h
+      · rw [Fock.mode_of_neg _ _ h, Fock.mode_of_neg _ _ h]
+      · rw [Fock.mode_of_pos _ _ h, Fock.mode_of_pos _ _ h]
+  rw [hpar]
+  exact Fock.dotMode_vertexOsc_comm η b (towerMomentum a b j) (vertexMomentum b n) hη
+    (by rw [dotVec_vertexMomentum_right, hbb, mul_zero]) J (K - n) P
+
+/-- The two-sided window of the current-vertex product on the tower.  The lower end does not
+depend on the vertex index because the current commutes through
+(`towerCurrent_towerVertex_comm`). -/
+noncomputable def towerCurrentIdx (m K : ℤ) (x : TowerFock D R) : Finset ℤ :=
+  Finset.Icc (-(towerModeBound x : ℤ)) ((K - m) + (towerLevelBound x : ℤ))
+
+theorem towerCurrent_towerVertex_apply_eq_zero_of_notMem (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (m K : ℤ) (x : TowerFock D R) {J : ℤ}
+    (hJ : J ∉ towerCurrentIdx m K x) :
+    towerCurrent η a b J (towerVertex η b m (K - J) x) = 0 := by
+  rw [towerCurrentIdx, Finset.mem_Icc, not_and_or] at hJ
+  rcases hJ with h | h
+  · rw [← Module.End.mul_apply, towerCurrent_towerVertex_comm η a b hη hbb,
+      Module.End.mul_apply, towerCurrent_apply_eq_zero_of_lt η a b J x (by omega), map_zero]
+  · rw [towerVertex_apply_eq_zero_of_lt η b m (K - J) x (by omega), map_zero]
+
+/-- **The current-vertex product on the tower**, `Σ_J (k_0·α_{-J}) V^{(m)}_{K-J}`. -/
+noncomputable def towerCurrentVertex (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (m K : ℤ) : Module.End R (TowerFock D R) :=
+  lsumLocFin (fun J => towerCurrent η a b J ∘ₗ towerVertex η b m (K - J))
+    (towerCurrentIdx m K)
+    (fun x J hJ => by
+      rw [LinearMap.comp_apply]
+      exact towerCurrent_towerVertex_apply_eq_zero_of_notMem η a b hη hbb m K x hJ)
+
+theorem towerCurrentVertex_apply (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (m K : ℤ) (x : TowerFock D R) {s : Finset ℤ}
+    (hs : ∀ J ∉ s, towerCurrent η a b J (towerVertex η b m (K - J) x) = 0) :
+    towerCurrentVertex η a b hη hbb m K x
+      = ∑ J ∈ s, towerCurrent η a b J (towerVertex η b m (K - J) x) := by
+  rw [towerCurrentVertex, lsumLocFin_apply _ _ _ x (fun J hJ => by
+    rw [LinearMap.comp_apply]
+    exact hs J hJ)]
+  exact Finset.sum_congr rfl fun J _ => rfl
+
+/-- **The weight identity on the DDF tower.**
+`m Σ_J (k_0·α_{-J}) V^{(m)}_{K-J} = K V^{(m)}_K`.
+
+This is `Fock.vertexCurrent_eq` transported rung by rung.  The monodromy shift `b·a = m` of
+the single-Fock statement is exactly the rung shift already built into `towerVertex`, so the
+tower form has no extra constant: the eigenvalue of `z ∂_z` on `V^{(m)}_K` is `K`, in
+agreement with the conformal-weight identity `⁅L_0, V^{(m)}_K⁆ = K V^{(m)}_K` of
+`lie_towerLop_towerVertex`.  Here the normalisation `2α' k_0·p = 1` is used for the first
+time. -/
+theorem towerCurrentVertex_eq (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (m K : ℤ) :
+    (m : R) • towerCurrentVertex η a b hη hbb m K = (K : R) • towerVertex η b m K := by
+  classical
+  have hcb : dotVec η b (vertexMomentum b m) = 0 := by
+    rw [dotVec_vertexMomentum_right, hbb, mul_zero]
+  have hb'b' : dotVec η (vertexMomentum b m) (vertexMomentum b m) = 0 := by
+    rw [dotVec_vertexMomentum, hbb, mul_zero]
+  refine Finsupp.lhom_ext fun j P => ?_
+  have hvan : ∀ J ∉ Fock.currentIdx (K - m) P,
+      towerCurrent η a b J (towerVertex η b m (K - J) (Finsupp.single j P)) = 0 := by
+    intro J hJ
+    rw [towerVertex_single, towerCurrent_single, show K - J - m = K - m - J from by ring,
+      Fock.dotMode_vertexOsc_apply_eq_zero_of_notMem η (towerMomentum a b (j + m)) b
+        (vertexMomentum b m) hη hcb (K - m) P hJ, Finsupp.single_zero]
+  have hterm : ∀ J : ℤ,
+      towerCurrent η a b J (towerVertex η b m (K - J) (Finsupp.single j P))
+        = Finsupp.single (j + m) (Fock.dotMode η b (towerMomentum a b (j + m)) J
+            (Fock.vertexOsc η (vertexMomentum b m) (K - m - J) P)) := by
+    intro J
+    rw [towerVertex_single, towerCurrent_single, show K - J - m = K - m - J from by ring]
+  rw [LinearMap.smul_apply, LinearMap.smul_apply,
+    towerCurrentVertex_apply η a b hη hbb m K _ hvan,
+    Finset.sum_congr rfl fun J _ => hterm J, ← Finsupp.single_finsetSum, Finsupp.smul_single,
+    towerVertex_single, Finsupp.smul_single]
+  congr 1
+  rw [Finset.smul_sum]
+  have hres : ∀ J : ℤ, (m : R) • Fock.dotMode η b (towerMomentum a b (j + m)) J
+        (Fock.vertexOsc η (vertexMomentum b m) (K - m - J) P)
+      = Fock.dotMode η (vertexMomentum b m) (towerMomentum a b (j + m)) J
+          (Fock.vertexOsc η (vertexMomentum b m) (K - m - J) P) := by
+    intro J
+    rw [Fock.dotMode_vertexMomentum, LinearMap.smul_apply]
+  rw [Finset.sum_congr rfl fun J _ => hres J,
+    Fock.sum_dotMode_vertexOsc η (towerMomentum a b (j + m)) (vertexMomentum b m) hη hb'b'
+      (K - m) P (fun J h1 h2 => by rw [Fock.currentIdx, Finset.mem_Icc]; exact ⟨h1, h2⟩),
+    dotVec_vertexMomentum_left, dotVec_towerMomentum_right_of_isotropic η a b hbb, hba,
+    mul_one]
+  congr 1
+  push_cast
+  ring
+
+/-- **The zero-momentum tower vertex operator is the identity**, `V^{(0)}_K = δ_{K,0}`. -/
+theorem towerVertex_zero_momentum (η b : Fin D → R) (K : ℤ) :
+    towerVertex η b 0 K = if K = 0 then 1 else 0 := by
+  have h0 : vertexMomentum b (0 : ℤ) = (0 : Fin D → R) := by
+    funext μ
+    rw [vertexMomentum_apply, Int.cast_zero, zero_mul, Pi.zero_apply]
+  refine Finsupp.lhom_ext fun j P => ?_
+  rw [towerVertex_single, add_zero, sub_zero, h0, Fock.vertexOsc_zero_momentum]
+  rcases eq_or_ne K 0 with rfl | hK
+  · rw [if_pos rfl, if_pos rfl, Module.End.one_apply, Module.End.one_apply]
+  · rw [if_neg hK, if_neg hK, LinearMap.zero_apply, LinearMap.zero_apply, Finsupp.single_zero]
+
+/-- In a `ℚ`-algebra a nonzero integer scalar may be cancelled. -/
+lemma eq_zero_of_intCast_smul_eq_zero {M : Type*} [AddCommGroup M] [Module R M] {k : ℤ}
+    (hk : k ≠ 0) {y : M} (h : (k : R) • y = 0) : y = 0 := by
+  have hq : (algebraMap ℚ R ((k : ℚ)⁻¹)) * (k : R) = 1 := by
+    rw [show ((k : ℤ) : R) = algebraMap ℚ R ((k : ℤ) : ℚ) from (map_intCast _ k).symm,
+      ← map_mul, inv_mul_cancel₀ (by exact_mod_cast hk : ((k : ℚ)) ≠ 0), map_one]
+  calc y = (1 : R) • y := (one_smul R y).symm
+    _ = ((algebraMap ℚ R ((k : ℚ)⁻¹)) * (k : R)) • y := by rw [hq]
+    _ = (algebraMap ℚ R ((k : ℚ)⁻¹)) • ((k : R) • y) := mul_smul _ _ _
+    _ = 0 := by rw [h, smul_zero]
+
+end TowerCurrent
+
+/-! ### Step (5b): the index-weighted sum of two tower vertex operators
+
+`Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`.
+
+The proof is the algebraic form of the residue argument.  Writing `j V^{(m)}_j` as
+`m Σ_J (k_0·α_{-J}) V^{(m)}_{j-J}` (the weight identity `towerCurrentVertex_eq`), pulling the
+current out of the `j`-sum (it commutes with everything, `towerCurrent_towerVertex_comm`) and
+fusing the two exponentials with the same-point product (5a,
+`sum_towerVertex_towerVertex_of_isotropic`) turns the whole expression into
+`m Σ_J (k_0·α_{-J}) V^{(m+n)}_{-J}`.  Applying the weight identity *again*, now at momentum
+`m+n` and index `K = 0`, gives `(m+n) Σ_J (k_0·α_{-J}) V^{(m+n)}_{-J} = 0`: this is the
+"total derivative has no residue" step, and over a `ℚ`-algebra it forces the sum to vanish
+whenever `m + n ≠ 0`.  For `m + n = 0` the exponential degenerates to the identity
+(`towerVertex_zero_momentum`) and only the zero mode `k_0·α_0 = 2α' k_0·p = 1` survives,
+leaving `m`. -/
+
+section WeightedSum
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- The composite of two tower vertex operators vanishes as soon as the *outer* Laurent index
+is low enough, **uniformly in the inner index**.  This is the tower form of
+`Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt` and it needs `k_0² = 0`. -/
+theorem towerVertex_towerVertex_apply_eq_zero_of_lt (η b : Fin D → R)
+    (hbb : dotVec η b b = 0) (m n A B : ℤ) (x : TowerFock D R)
+    (hA : A < m - (towerLevelBound x : ℤ)) :
+    towerVertex η b m A (towerVertex η b n B x) = 0 := by
+  classical
+  have hdot : dotVec η (vertexMomentum b n) (vertexMomentum b m) = 0 := by
+    rw [dotVec_vertexMomentum, hbb, mul_zero]
+  conv_lhs => rw [← sum_single_eq x]
+  rw [map_sum, map_sum]
+  refine Finset.sum_eq_zero fun j hj => ?_
+  have hle : (Fock.levelBound (x j) : ℤ) ≤ (towerLevelBound x : ℤ) := by
+    exact_mod_cast Finset.le_sup (f := fun j => Fock.levelBound (x j)) hj
+  rw [towerVertex_single, towerVertex_single,
+    Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt η (vertexMomentum b m) (vertexMomentum b n)
+      hdot (B - n) (by omega : (Fock.levelBound (x j) : ℤ) + (A - m) < 0),
+    Finsupp.single_zero]
+
+/-- **Step (5b) of the DDF transverse algebra.**  On the momentum tower of a light-like
+reference vector normalised by `2α' k_0·p = 1`,
+`Σ_j j V^{(m)}_j V^{(n)}_{-j} = m δ_{m+n,0}`.
+
+The index set `s` may be any finite set containing the window
+`m - levelBound - modeBound ≤ j ≤ levelBound - n`.  (The summand itself already vanishes for
+`j < m - levelBound`; the extra `modeBound` of slack is what the intermediate double sum
+needs, and costs the caller nothing.) -/
+theorem sum_weighted_towerVertex_towerVertex (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (m n : ℤ) (x : TowerFock D R)
+    {s : Finset ℤ}
+    (hs : ∀ j : ℤ, m - (towerLevelBound x : ℤ) - (towerModeBound x : ℤ) ≤ j →
+      j ≤ (towerLevelBound x : ℤ) - n → j ∈ s) :
+    ∑ j ∈ s, (j : R) • (towerVertex η b m j * towerVertex η b n (-j)) x
+      = (if m + n = 0 then (m : R) else 0) • x := by
+  classical
+  set N : ℤ := (towerLevelBound x : ℤ) with hN
+  set M : ℤ := (towerModeBound x : ℤ) with hM
+  set T : Finset ℤ := Finset.Icc (-M) (2 * N - m - n) with hT
+  have hcomm : ∀ (J p K : ℤ) (y : TowerFock D R),
+      towerCurrent η a b J (towerVertex η b p K y)
+        = towerVertex η b p K (towerCurrent η a b J y) := by
+    intro J p K y
+    have h := congrArg (fun (E : Module.End R (TowerFock D R)) => E y)
+      (towerCurrent_towerVertex_comm η a b hη hbb J p K)
+    simpa only [Module.End.mul_apply] using h
+  -- the summand of the intermediate double sum vanishes outside `T`, uniformly in `j`
+  have hvan : ∀ j : ℤ, ∀ J ∉ T,
+      towerCurrent η a b J (towerVertex η b m (j - J) (towerVertex η b n (-j) x)) = 0 := by
+    intro j J hJ
+    rw [hT, Finset.mem_Icc, not_and_or] at hJ
+    rcases hJ with h | h
+    · rw [hcomm, hcomm, towerCurrent_apply_eq_zero_of_lt η a b J x (by omega), map_zero,
+        map_zero]
+    · rcases le_or_gt j (N - n) with hj | hj
+      · rw [towerVertex_towerVertex_apply_eq_zero_of_lt η b hbb m n (j - J) (-j) x
+          (by omega), map_zero]
+      · rw [towerVertex_apply_eq_zero_of_lt η b n (-j) x (by omega), map_zero, map_zero]
+  -- (1) replace `j V^{(m)}_j` by `m Σ_J (k_0·α_{-J}) V^{(m)}_{j-J}`
+  have hstep1 : ∀ j ∈ s, (j : R) • (towerVertex η b m j * towerVertex η b n (-j)) x
+      = (m : R) • ∑ J ∈ T, towerCurrent η a b J
+          (towerVertex η b m (j - J) (towerVertex η b n (-j) x)) := by
+    intro j _
+    rw [Module.End.mul_apply, ← LinearMap.smul_apply,
+      ← towerCurrentVertex_eq η a b hη hbb hba m j, LinearMap.smul_apply,
+      towerCurrentVertex_apply η a b hη hbb m j _ (hvan j)]
+  -- (2) exchange the two sums and fuse the exponentials with (5a)
+  have hstep2 : ∀ J ∈ T, ∑ j ∈ s, towerCurrent η a b J
+        (towerVertex η b m (j - J) (towerVertex η b n (-j) x))
+      = towerCurrent η a b J (towerVertex η b (m + n) (0 - J) x) := by
+    intro J hJ
+    rw [hT, Finset.mem_Icc] at hJ
+    rw [← map_sum]
+    congr 1
+    have himg : ∑ K ∈ s.image (fun j => -j),
+          (towerVertex η b m ((0 - J) - K) * towerVertex η b n K) x
+        = ∑ j ∈ s, towerVertex η b m (j - J) (towerVertex η b n (-j) x) := by
+      rw [Finset.sum_image (fun p _ q _ h => by omega)]
+      refine Finset.sum_congr rfl fun j _ => ?_
+      rw [Module.End.mul_apply, show (0 - J) - -j = j - J from by ring]
+    rw [← himg]
+    refine sum_towerVertex_towerVertex_of_isotropic η b hbb m n (0 - J) x
+      (fun K h1 h2 => ?_)
+    rw [Finset.mem_image]
+    exact ⟨-K, hs (-K) (by omega) (by omega), by omega⟩
+  rw [Finset.sum_congr rfl hstep1, ← Finset.smul_sum, Finset.sum_comm,
+    Finset.sum_congr rfl hstep2]
+  -- (3) the residue: total derivative for `m + n ≠ 0`, zero mode for `m + n = 0`
+  rcases eq_or_ne (m + n) 0 with hmn | hmn
+  · have h0T : (0 : ℤ) ∈ T := by rw [hT, Finset.mem_Icc]; omega
+    have hz : ∀ J ∈ T, towerCurrent η a b J (towerVertex η b (m + n) (0 - J) x)
+        = if J = 0 then x else 0 := by
+      intro J _
+      rw [hmn, towerVertex_zero_momentum]
+      rcases eq_or_ne J 0 with rfl | hJ
+      · rw [sub_zero, if_pos rfl, Module.End.one_apply,
+          towerCurrent_zero_of_normalized η a b hbb hba, LinearMap.id_apply, if_pos rfl]
+      · rw [if_neg (by omega : ¬ (0 - J = 0)), if_neg hJ, LinearMap.zero_apply, map_zero]
+    rw [if_pos hmn, Finset.sum_congr rfl hz]
+    congr 1
+    simp [h0T]
+  · have hvan0 : ∀ J ∉ T, towerCurrent η a b J (towerVertex η b (m + n) (0 - J) x) = 0 := by
+      intro J hJ
+      rw [hT, Finset.mem_Icc, not_and_or] at hJ
+      rcases hJ with h | h
+      · rw [hcomm, towerCurrent_apply_eq_zero_of_lt η a b J x (by omega), map_zero]
+      · rw [towerVertex_apply_eq_zero_of_lt η b (m + n) (0 - J) x (by omega), map_zero]
+    rw [if_neg hmn, zero_smul,
+      ← towerCurrentVertex_apply η a b hη hbb (m + n) 0 x hvan0]
+    have hkey := congrArg (fun (E : Module.End R (TowerFock D R)) => E x)
+      (towerCurrentVertex_eq η a b hη hbb hba (m + n) 0)
+    simp only [LinearMap.smul_apply, Int.cast_zero, zero_smul] at hkey
+    rw [eq_zero_of_intCast_smul_eq_zero hmn hkey, smul_zero]
+
+end WeightedSum
 
 end StringFormal.NoGhost
