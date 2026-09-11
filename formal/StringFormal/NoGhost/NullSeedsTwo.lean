@@ -60,6 +60,9 @@ the `L_2` equation is `26 h + c`, hence `c - 26` at `h = -1`, and the `L_1` equa
   conditions, both unconditional in `D`.
 * `descTwo_mem_towerSpuriousSubmodule`, `descTwo_mem_towerPhysSubmodule`,
   `descTwo_mem_towerNullSubmodule` — **Type 2**, the last two under `(D : R) = 26`.
+* `towerLop_two_apply_descTwo_eq_zero_iff`, `descTwo_mem_towerPhysSubmodule_iff` — over a domain
+  and for a nonzero seed, `D = 26` is **necessary** as well as sufficient: the Type-2 vector is
+  physical *iff* `(D : R) = 26`.  (Kac-side twin: `Fock.kacDet2_massShell_two_eq_zero_iff`.)
 * `descTwo_mem_towerBigrade` — `𝒟₂` has bidegree `(0, +2)` on the tower.
 * `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`,
   `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade_neg_two`,
@@ -391,6 +394,32 @@ theorem descTwo_mem_towerNullSubmodule (hD26 : (D : R) = 26)
   towerSpurious_inf_towerPhys_le_towerNull η a b (1 : R)
     (Submodule.mem_inf.2 ⟨descTwo_mem_towerSpuriousSubmodule η a b φ,
       descTwo_mem_towerPhysSubmodule η a b hη hpos hD26 h0⟩)
+
+include hη hpos in
+/-- ⭐⭐ **`D = 26` is *necessary*, not merely sufficient.**  Over a domain, for a nonzero seed on
+the `N = 2` shell, `L_2 𝒟₂ φ = 0` **iff** `(D : R) = 26`.
+
+This is the sharp form of blueprint §B″.2's claim that `B26 2` is *equivalent* to `D = 26`, at
+the operator level: the Kac side of the same statement is
+`Fock.kacDet2_massShell_two_eq_zero_iff`. -/
+theorem towerLop_two_apply_descTwo_eq_zero_iff [NoZeroDivisors R]
+    (h0 : towerLop η a b 0 φ = -φ) (hφ : φ ≠ 0) :
+    towerLop η a b 2 (descTwo η a b φ) = 0 ↔ (D : R) = 26 := by
+  rw [towerLop_two_apply_descTwo η a b hη hpos h0, smul_eq_zero, sub_eq_zero]
+  exact or_iff_left hφ
+
+include hη hpos in
+/-- ⭐⭐ **The Type-2 vector is physical exactly in the critical dimension.**
+
+Over a domain and for a nonzero `N = 2` seed, `(2 L_{-2} + 3 L_{-1}²) φ ∈ H_phys` **iff**
+`(D : R) = 26`.  The `L_0`, `L_1` and `L_{n ≥ 3}` conditions hold for every `D`; only `L_2` sees
+the dimension.  Blueprint §B″.8. -/
+theorem descTwo_mem_towerPhysSubmodule_iff [NoZeroDivisors R]
+    (h0 : towerLop η a b 0 φ = -φ) (hφ : φ ≠ 0) :
+    descTwo η a b φ ∈ towerPhysSubmodule η a b (1 : R) ↔ (D : R) = 26 := by
+  refine ⟨fun hmem => ?_, fun hD26 => descTwo_mem_towerPhysSubmodule η a b hη hpos hD26 h0⟩
+  exact (towerLop_two_apply_descTwo_eq_zero_iff η a b hη hpos h0 hφ).1
+    ((mem_towerPhysSubmodule.1 hmem).2 2 (by decide))
 
 end TypeTwo
 
