@@ -1,0 +1,83 @@
+id: spectrum.one-loop-torus-amplitude-modular-invariant-v2
+kind: proposition
+title: "环面真空振幅 (7.3.6) 的被积表达式（含测度）模不变，故 F₀ 上的积分良定义（v2：测度那一半拆到 spectrum.torus-measure-modular-invariant）"
+statement: |
+  在 spectrum.one-loop-torus-amplitude 的 (7.3.6) 中，把被积表达式（含测度）拆成
+    (dτ dτ̄ / 4τ₂)(4π²α'τ₂)^{−13}|η(τ)|^{−48}
+      = (1/4)(4π²α')^{−13} · ( dτ dτ̄ / τ₂² ) · [ τ₂ |η(τ)|⁴ ]^{−12} ,
+  即「常数」×「测度 dτ dτ̄ / τ₂²」×「标量 τ₂|η(τ)|⁴ 的 −12 次幂」
+  （τ₂ 的幂次核对：τ₂^{−2}·τ₂^{−12} = τ₂^{−14} = τ₂^{−1}·τ₂^{−13} ✓）。则
+
+  (1) **τ₂ |η(τ)|⁴ 在模群下不变**——这一条在本图由上游卡
+      **math.eta-modular-invariant-combination** 承担（那里对一切 g ∈ SL(2,Z) 给出
+      Im(g·τ)|η(g·τ)|⁴ = Im τ|η(τ)|⁴，并含本式所需的 n = 12 幂版本），
+      本卡只是引用它、不另行论证；
+
+  (3) 于是 (7.3.6) 的整个被积表达式（含测度）在模群下不变，
+      故「在基本域 F₀ 上积分」这件事是良定义的：换一个基本域不改变结果。
+
+  **本卡与 v1 的差别（唯一的实质改动）**：v1 把「(2) 测度 dτ dτ̄ / τ₂² 模不变」也写进断言；
+  本卡**不再断言它**，该命题已拆成独立卡 **spectrum.torus-measure-modular-invariant**
+  并作为本卡的依赖。公式、幂次与结论一字未改。
+
+  **本卡不断言什么**：
+  (a) 不断言测度 dτ dτ̄ / τ₂² 的模不变性（spectrum.torus-measure-modular-invariant）；
+  (b) 不断言积分收敛（模不变性与收敛性无关）；
+  (c) 不断言「模不变性 ⇒ D = 26」（原书把该方向留作习题 7.12 并引 Shapiro (1972)，本图未建卡）；
+  (d) 不涉及带顶点算子时的模协变性（原书 §7.2 说「the expectation value with vertex operators is
+      modular-covariant, taking into account the Weyl transformations of the operators」，
+      并把验证留作习题 7.1）；
+  (e) 不断言 F₀ 本身是基本域（worldsheet.modular-fundamental-domain；其边界认同在原书未严格处理）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.alpha-prime-regge
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7) 及其上下文, p.217"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20，等级 **L1（原书页图逐字）**。
+      原文逐字：「The amplitude has the important property of **modular invariance**. The product
+      τ₂|η(τ)|⁴ is invariant by eq. (7.2.44), and **it is easy to check** that dτdτ̄/τ₂² (7.3.7)
+      is modular-invariant as well.」
+      ⇒ **两半分别是「归约到一条未证断言」与「留给读者」**；本卡只承担前一半（并已改由
+      math.eta-modular-invariant-combination 供给）与合并那一步，后一半见
+      spectrum.torus-measure-modular-invariant。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, p.210（τ → τ+1 的不变性「obviously」，τ → −1/τ 归约到 (7.2.44)，并称由此「generating the full modular group」）"
+    note: |
+      抽取记录 #E9。原书在这里用到「模群由 S 与 T 生成」这一结论而不证；本图有
+      worldsheet.modular-group-generated-by-s-and-t，且上游卡
+      math.eta-modular-invariant-combination 已把「由两个生成元推到整群」这一步在 Lean 里做完。
+tags: [spectrum, one-loop, torus, modular-invariance, dedekind-eta, measure]
+notes: |
+  【v2 改了什么（curator-small-backlog-6，2026-09-11）】
+  **只做了一件事：把 v1 的断言 (2)「测度 dτdτ̄/τ₂² 模不变」移出本卡**，改由新卡
+  spectrum.torus-measure-modular-invariant 承担，并作为本卡推导的一条依赖。
+  公式、幂次配平、结论 (3) 与全部「不断言」条目一字未改（(2) 相应地进了「不断言」清单）。
+  拆分理由（graph/CLAUDE.md「一个节点一个命题」）：v1 的三条在文献里是分别成立、分别论证的
+  ——(1) 原书归约到 (7.2.44)（零证明），(2) 原书只写 "it is easy to check"（未做）——
+  而现在两者的**形式化前景完全不同**：(1) 已有 formalized 的上游
+  math.eta-modular-invariant-combination，(2) 至今没有任何形式化（该 Lean 文件 docstring
+  逐字写明测度的不变性 "is not formalised here"）。三合一会让 `why` 与 `report` 分不清瓶颈在哪一半。
+
+  【本卡 (1) 的上游边已改指（v1 的 notes 留的那条待办，本轮兑现）】
+  v1 的推导把 (1) 分成 T 半与 S 半、分别挂 math.dedekind-eta-t-transformation 与
+  math.dedekind-eta-s-transformation 两条边；本卡推导改挂**一条** math.eta-modular-invariant-combination
+  的边（非 inferred：该卡的断言逐字就是本卡的 (1)，且已 Lean 验证）。
+  好处：原书在 §7.2 p.210 用而不证的「S、T 生成模群」这一步，在新上游卡里是做完了的
+  （Lean 对 Subgroup.closure 归纳 + Mathlib 的 SL2Z_generators）。
+
+  **statement 里的配平是 curator 补的算术**（v1 起即如此）：原书只写「τ₂|η|⁴ is invariant」与
+  「dτdτ̄/τ₂² is modular-invariant」两句，**没有写出这两个不变式如何配成 (7.3.6) 的被积函数**。
+  幂次是 **−12**（= −48/4），配平可机械核对。
+
+  **下游**：spectrum.one-loop-uv-finiteness-from-modular-invariance 与
+  worldsheet.modular-truncation-breaks-brst-decoupling 都以「F₀ 是正确的积分区域」为前提，
+  而这个前提由本卡 + worldsheet.modular-fundamental-domain 共同承担。
+
+  ⚠ **本卡的有效状态不会因为上游有 formalized 卡而升格**：本卡自身的推导是
+  physical-argument（合并那一步 + 测度那一半的来源都是断言），且 (3) 同时依赖
+  spectrum.torus-measure-modular-invariant（physical-argument）。
+author: curator-small-backlog-6
+created: "2026-09-11"
