@@ -142,6 +142,13 @@ gaps:
     在这两张卡建好之前，本推导的 depends_on **不完整**：图上看不出 (A)(B) 这两步。
     它们不会压低有效状态（两条在 Lean 里都无 sorry、公理标准），但会让
     `stringgraph why` 给出的瓶颈树漏掉两条真实的承重链。
+    **⚠ 合并提示（2026-09-11）**：总线上 claim #281（curator-lean-wire-4，分支
+    agent/curator/lean-wire-4）正在建的正是这两张卡
+    （worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators /
+    isotropic-tower-vertex-operator-fusion / exponential-vertex-operator-current-weight-identity /
+    tower-vertex-weighted-mode-sum）。两支并行、互不知情：那支声明「本卡只改 gaps/notes」，
+    本支加了 formal 块与本推导。**lead 合并时请把 (A)(B) 两条边补进本推导的 depends_on**
+    （均非 inferred：Lean 证明逐字调用它们），并核对两支对本卡 notes 的改动是否重叠。
   - |
     **Lean 陈述比本目标卡更一般的三处，不自动放宽本卡的量词。**
       (1) 偏振：Lean 只要求 ε·k_0 = 0、δ·k_0 = 0，**不**要求 ε·δ = δ^{ij}，
