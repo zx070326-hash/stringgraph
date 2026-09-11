@@ -50,10 +50,17 @@ summary: |
 gaps:
   - |
     **不含商群的改写。** 目标卡「不断言」(e) 已排除：「Z = {±I} ⇒ SL(2,Z)/Z = SL(2,Z)/{±I}」
-    这一步用的是「子群由其承载集合决定」（`Subgroup.ext` / `SetLike` 外延性），
-    桥层没有为它单独立声明。需要它的下游（典型是
-    worldsheet.modular-group-generated-by-s-and-t-v2--via-lean 与
-    math.psl2z-s-t-relations--via-lean 的首条 gap）自己做这一行外延性。
+    这一步用的是「子群由其承载集合决定」（`Subgroup.ext` / `SetLike` 外延性）。
+    ★ **2026-09-11（curator lean-wire-12）更新**：写这条时「桥层没有为它单独立声明」，
+    现在有了——`StringFormal.Bridge.psl2z_eq_quotient_pm_one : Subgroup.center SL(2, ℤ) =
+    Subgroup.closure {(-1 : SL(2, ℤ))}`（同义写法 `center_eq_zpowers_neg_one`）把本推导的
+    集合等式提到子群等式，`StringFormal.Bridge.pslMk_eq_iff` 直接给商的外延性
+    （提交 3a36c36，合并 930b265）。
+    **但那两条不是本推导的产物**：本推导只证 `center_eq_pm_one`，它们是以它为输入的下游声明，
+    对应的卡面断言不在目标卡正文里（「不断言」(e)）。⇒ 本条 gap 的内容不变：
+    商群改写不在本推导内；需要它的下游（worldsheet.modular-group-generated-by-s-and-t-v2--via-lean
+    与 math.psl2z-s-t-relations--via-lean 的首条 gap）现在可直接引那两条 Lean 声明，
+    而不必再自己做一行外延性。
   - |
     **`mem_center_iff` 的证明本图未审计。** 「中心元必是纯量阵」这一非平凡输入在 Mathlib
     （`Matrix.SpecialLinearGroup.mem_center_iff`）；我们承诺的只是「它在同一次 lake build 里

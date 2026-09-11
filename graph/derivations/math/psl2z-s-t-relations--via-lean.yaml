@@ -18,17 +18,22 @@ depends_on:
   - id: math.sl2z-center-is-pm-one
     inferred: false
     note: |
-      **供给「Lean 的 PSL = 卡面的 SL(2,Z)/{±I}」这一步**，即 gaps 首条点名的那条声明
-      `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`。
-      没有它，Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup = SL(2,ℤ) ⧸ Z(SL(2,ℤ))`
+      **供给「Lean 的 PSL = 卡面的 SL(2,Z)/{±I}」这一步**，即 gaps 首条点名的那组桥层声明：
+      `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`
+      （集合层，c15b0db），以及 2026-09-11 新增的子群层与外延性两条
+      `StringFormal.Bridge.psl2z_eq_quotient_pm_one : Subgroup.center SL(2, ℤ) = Subgroup.closure {(-1 : SL(2, ℤ))}`
+      与 `StringFormal.Bridge.pslMk_eq_iff (g h) : pslMk g = pslMk h ↔ g = h ∨ g = -h`（930b265）。
+      没有它们，Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup = SL(2,ℤ) ⧸ Z(SL(2,ℤ))`
       未必等于目标卡正文写的那个商；本文件自己只证了 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），
       那**不够**。
-      **非 inferred**：这一步在本推导 gaps 首条里逐字点名了该 Lean 声明，
+      **非 inferred**：这一步在本推导 gaps 首条里逐字点名了这些 Lean 声明，
       并在 sources 指向的桥层文件里可以直接读到；它是可指认的、而非诠释出来的依赖。
-      ⚠⚠ **但它不在 `psl_S_sq` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one` 不在
-      `psl_S_sq` 的证明链上：两者的拼接是人读两条声明后作的比对，不是一条机检蕴涵」）。
-      本边供给的是**陈述层面的群识别**，不是证明步骤——这一点没有因为它有了自己的卡而改变，
-      只是现在这条识别在图上可指认，而不是只写在 gaps 里。
+      ⚠⚠ **但它不在 `psl_S_sq` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one`（及其
+      子群形式）不在 `psl_S_sq` 的证明链上——`psl_S_sq` 里的 `PSL(2, ℤ)` 从一开始就是
+      Mathlib 的那个对象」）。本边供给的是**陈述层面的群识别**，不是证明步骤——这一点
+      既没有因为它有了自己的卡而改变，也没有因为 2026-09-11 补上了
+      `psl2z_eq_quotient_pm_one` / `pslMk_eq_iff` 而改变：新声明使「两个商相等」本身成为机检事实，
+      但它仍然不出现在 `psl_S_sq` 的证明里。
       ⚠ 2026-09-11（curator small-backlog-9）新增：该事实此前在图上**没有节点**，
       本轮从 worldsheet.modular-group-psl2z 拆出；指向定义卡的那条边保留。
 sources:
@@ -59,16 +64,28 @@ summary: |
 gaps:
   - |
     **（记账，不是缺口）Lean 的 PSL 取法**：Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup`
-    是 `SL(2,ℤ)/Z(SL(2,ℤ))`，本文件只证 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），
-    没有证 `Z(SL(2,ℤ)) = {±1}`。后者已由桥层
-    `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`
-    证明（提交 c15b0db；子群由承载集合决定，故商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群）。
-    ⚠ `center_eq_pm_one` 不在 `psl_S_sq` 的证明链上：两者的拼接是人读两条声明后作的比对，
-    不是一条机检蕴涵。
-    ★ **2026-09-11（curator small-backlog-9）：该事实已立卡** math.sl2z-center-is-pm-one
-    （own=formalized），本推导已加一条 depends_on 边指它 ⇒ 这条拼接在图上可指认了。
-    **但本条 gap 的实质内容未变**：它仍然不是一条机检蕴涵，仍需人读两条声明作比对；
-    要真正关闭，须由 formalizer 在 Lean 里把「商群相等」那一行外延性写出来。
+    是 `SL(2,ℤ) ⧸ Z(SL(2,ℤ))`，本文件（`ModularGroupGenerators.lean`）自己只证
+    `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），没有证 `Z(SL(2,ℤ)) = {±1}`。
+    ★ **2026-09-11（curator lean-wire-12）改写：「群的识别 SL/Z(SL) = SL/{±I}」已经机检。**
+    桥层现有三级：
+      · 集合层 `StringFormal.Bridge.center_eq_pm_one :
+        (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`（提交 c15b0db，合并 845b9b9）；
+      · **子群层** `StringFormal.Bridge.psl2z_eq_quotient_pm_one :
+        Subgroup.center SL(2, ℤ) = Subgroup.closure {(-1 : SL(2, ℤ))}` 及其 zpowers 写法
+        `StringFormal.Bridge.center_eq_zpowers_neg_one`——即**被商掉的那个子群**本身相等
+        （提交 3a36c36，合并 930b265）；
+      · **商的外延性** `StringFormal.Bridge.pslMk_eq_iff (g h : SL(2, ℤ)) :
+        pslMk g = pslMk h ↔ g = h ∨ g = -h`——Mathlib 的商恰好把 {g, −g} 粘起来，
+        陈述里一个字都不提中心。
+    这正是本 gap 旧版要求的「由 formalizer 把商群相等那一行外延性写出来」，已兑现
+    ⇒ **不再需要人读两条声明作比对**。
+    **余下的不是证明步骤，而是陈述搬运**：`center_eq_pm_one`（及其子群形式）**不在
+    `psl_S_sq` 的证明链上**——`psl_S_sq` 里的 `PSL(2, ℤ)` 从一开始就是 Mathlib 的那个对象，
+    它的证明（`← map_pow` 把 SL 层的 S² = −1 推到商上）用不到中心长什么样。
+    桥层那三条的用途是让本图确认「卡面文字 `SL(2,Z)/{±I}` 指的就是这个 Lean 对象」；
+    这种文字↔对象的对应由 sources 与 depends_on 承担，按其性质不会变成一条机检蕴涵，
+    故本条永久保留为**记账**，不再作为待办。
+    该事实的卡是 math.sl2z-center-is-pm-one（own=formalized），本推导有一条 depends_on 边指它。
   - |
     **不含表现（presentation）**。目标卡「不断言」(b) 与 Lean 一致：`psl_S_sq`、`psl_ST_cube`
     只说这两条关系成立，不说它们生成全部关系。那需要基本域上的乒乓引理，Mathlib v4.33.1 没有。

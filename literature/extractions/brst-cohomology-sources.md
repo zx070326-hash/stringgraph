@@ -485,3 +485,87 @@ Thm 2.7 的陈述本身**只带一个量词 `p ≠ 0`**，其余四个前提都�
 |---|---|---|
 | FGZ p.8445 | `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0018.png` | 301 → cdn 域（WebFetch 不自动跟随，需第二次调用） |
 | FGZ p.8445 | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png` | ✅ 137.5 KB PNG 落盘，`Read` 读图，整页两栏可辨 |
+
+### 9.9 ★ `Proposition 2.4` 复核（2026-09-11 第二轮，researcher）——逐字 + 与 Thm 2.7 的真正区别
+
+> 触发（lead）：§1.4 的表格里 `Prop 2.4` 只有一句转述，而该转述与 `Thm 2.7` 的结论几乎重复，
+> 怀疑原文对 `V` 另有假设。**核实结果：怀疑成立——Prop 2.4 对 `V` 另有三条假设，全部写在定理语句里。**
+> 取件：与 §9.8 同一张页图（先 fetch `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0018.png`
+> → 301 → `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`，137.5 KB，
+> 期刊 **p.8445 = 扫描页 `-0018`**），本轮重新取件并重读。**`Prop 2.4` 在 p.8445 左栏下部，`Thm 2.5` 正上方。**
+> 本节只追加，不改 §1.4 与 §9.1–§9.8 任何一行。
+
+#### 9.9.1 ★★ Proposition 2.4 逐字（L1 页图）
+
+> **PROPOSITION 2.4.** `dim H^m_∞(ℒ, ℒ₀; V) = 0` *for* `m ≠ 0`, *and for* `m = 0` *is equal to the coefficient of*
+> `1` *in Eq.* **2.3**, *when* `V` *is a Hermitian* `ℒ⁻`*-free* `ℒ`*-module in* `𝒪₀`.
+
+⚠ **两条转录注记（引用前必读）**：
+1. **`ℒ⁻-free` 的上标减号在扫描件上极小**，单看这一行容易读成 `ℒ-free`。**按上下文锁定为 `ℒ⁻`**：
+   紧邻上一段逐字就是「Let us consider a general `ℒ⁻`-free, Hermitian `ℒ`-module `V`」，
+   且 `Theorem 1.12` 的假设本身就是 `ℒ⁻`-free（§1.4）。
+   （**同型陷阱**：`lian-zuckerman-1991` 的 `Thm 2.25` 假设行同样把 `𝒢₋-free` 渲染成 `𝒢-free`，见 `primary-sources-round2.md` §1。）
+2. FGZ 正文引用公式写作「**Eq. 2.3**」，而显示式的标号印作 **`[2.3]`**。两种写法都能对上原文，
+   但**不要写成 "equation (2.3)"**（本文不用圆括号式号）。
+3. `𝒪₀` 的下标在扫描件上可辨，但 **`𝒪₀` 这个范畴的定义在 §1，本轮未回查**（L0）。
+
+#### 9.9.2 ★★★ 与 `Theorem 2.7` 的区别：不是重复，是「一般命题」vs「它在 Fock 模上的具体化」
+
+| | `Proposition 2.4` | `Theorem 2.7` |
+|---|---|---|
+| `V` 的范围 | **任意**满足三条件的 `V`：(a) **Hermitian**、(b) **`ℒ⁻`-free**、(c) **属于 `𝒪₀`** | **具体的 Fock 模 `V(E, p)`**（§2.2 定义） |
+| 量词 | **不含 `p ≠ 0`、不含号差 `(D−1,1)`、不含 `D ≥ 2`** | `p ≠ 0`（语句内）；号差 `(D−1,1)`、`D = 26`、`D ≥ 2`（正文，见 §9.2） |
+| `m ≠ 0` 的消灭 | `dim H^m_∞(ℒ, ℒ₀; V) = 0` | `H^i_∞(ℒ, ℒ₀, V(E,p)) = 0, i ≠ 0`（**实质同一句**） |
+| `m = 0` 的维数 | **隐式**：「the coefficient of `1` in Eq. 2.3」，即形式 Euler 特征标 `q^{−1}φ²(q)ch_q V` 里 `q⁰` 项的系数 | **显式**：`p_{(24)}(1 − p·p/2)`，外加「`1 − p·p/2` 为非负整数否则为 `0`」的分段 |
+| 是否用到 `D = 26` | 只通过 §2.1 的常设假设 `π(c) = 26·Id_V`（相对复形与 `d² = 0` 的前提）；**语句里不出现 `D`** | 紧邻上一句逐字「so that `D = 26`」 |
+
+⇒ **§1.4 表格那句转述在内容上没错，但漏掉了 Prop 2.4 对 `V` 的三条假设**，因此看上去像 Thm 2.7 的重复。
+补上这三条后分工就清楚了：**Prop 2.4 负责「一般 `ℒ⁻`-free Hermitian 模上消灭 + 维数 = Euler 特征标的常数项」，
+Thm 2.7 负责「把它用到 `V(E,p)` 上，并把那个常数项算成 `p_{(24)}(1 − p·p/2)`」。**
+⚠ 由此还得到一条：**「`i ≠ 0` 消灭」这条结论并不需要 `p ≠ 0`**——`p ≠ 0` 只在**验证 `V(E,p)` 确为 `ℒ⁻`-free**（Prop 2.6(i)）时才被用到。
+凡建「相对上同调消灭」的卡，量词应挂在 `ℒ⁻`-freeness 上，`p ≠ 0` 是它在 Fock 模情形的**充分条件**，不是消灭定理本身的假设。
+
+#### 9.9.3 Prop 2.4 自身的依赖（原文明写，逐字在其紧邻上文）
+
+> 「To solve the problem of the equivalence of the gauge-invariant and the light-cone formulations of string theory,
+> one has to find the cohomology groups `H^m(ℒ, ℒ₀; V)`, where `V` is the Fock module defined in **Section 2.2**.
+> Let us consider a general `ℒ⁻`-free, Hermitian `ℒ`-module `V`. **Then by *Theorem 1.12* all nonzero degree cohomology
+> groups vanish. To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle.**
+> The formal Euler character is
+>
+> `ch_q V · Σ_{m∈Z} (−1)^m ch_q Λ^m_∞ = q^{−1} φ²(q) ch_q V`   **[2.3]**
+>
+> where `φ(q) = Π_{n≥1}(1 − q^n)`. We denote by `p_{(D)}(n)` the coefficient of `q^n` in `φ(q)^{−D}`,
+> so that `p_{(1)}(n)` is the classical partition function. **This implies the following.**」
+
+⇒ **`Prop 2.4` = `Theorem 1.12`（消灭）+ `Proposition 1.3`（Euler–Poincaré），别无其他输入**；
+强度措辞是「**This implies the following**」，**Prop 2.4 自身不另给证明**。
+⇒ 这一段还**给出了 `p_{(D)}(n)` 的定义**（`φ(q)^{−D}` 中 `q^n` 的系数）。
+**图里若建 Thm 2.7(ii) 的维数公式卡，`p_{(24)}` 的定义出处是这里（p.8445 左栏），不是 Thm 2.7 处。**
+注意 `p_{(1)}` 才是通常的分拆函数，`p_{(24)}` 是 24 个横向振子的多重分拆。
+
+#### 9.9.4 ★ 对 §9.3「Thm 2.7 的四条依赖」的修正：这四条**不是互相独立的**
+
+§9.3 逐字记下 FGZ 自列的依赖是「**Theorem 1.12**, **Proposition 1.3**, **Proposition 2.4**, and the first part of
+**Proposition 2.6**」。本轮核实 Prop 2.4 后可见：**`Prop 2.4` 本身就是由 `Thm 1.12` + `Prop 1.3` 推出的**（9.9.3）。
+⇒ 这份依赖清单**在逻辑上冗余**：前两条既直接进入 Thm 2.7，又经 Prop 2.4 间接进入。
+
+对 curator 的两条后果：
+1. 按 §9.3 建的四条**实边仍然正确**（原文明写，不必标 `inferred`），
+   但**不得解读成「Thm 2.7 用了四个互相独立的输入」**；`Thm 2.7 → Thm 1.12` 与 `Thm 2.7 → Prop 2.4 → Thm 1.12`
+   是**同一条论证的两次记账**。
+2. 若工具要算「最小依赖集」或做猜想计数，**`Thm 1.12` 与 `Prop 1.3` 不应被计两次**。
+   （这正是本项目「每条边都要有来源」与「状态沿图传播」之间的一个典型张力：原文写了什么边 ≠ 最小边集。）
+
+#### 9.9.5 本轮顺带复核、结论未变的两条（同页）
+
+- **`Prop 2.6` 与其后的 Remark**（「**not in general a direct sum of Verma modules** … As a counterexample one can
+  choose the case in which `p·p` is a nonpositive even integer.」）——与 §9.6 第二条逐字一致，**复核无误**。
+- **`Theorem 2.5`**（`H^m_∞(ℒ, 𝖟; V) ≅ H⁰(ℒ, ℒ₀; V)` for `m = ±1/2`，其余为零）——与 §9.4 一致，**复核无误**。
+
+#### 9.9.6 negative evidence（仅覆盖 p.8445）
+
+- **`Prop 2.4` 的语句里不出现 `p`、不出现 `D`、不出现号差、不出现 "ghost"**。
+- **`Prop 2.4` 不带独立证明**：它的证明就是上方那两句（`Thm 1.12` + Euler–Poincaré），原文用「This implies」一笔带过。
+- 同页**没有**把 `Prop 2.4` 与 `Kato–Ogawa` 或任何物理文献联系起来；p.8445 左栏末的物理归属句
+  （refs 8/9 = Goddard–Thorn / Brower）是挂在**号差 `(D−1,1)` 那句**上的，不是挂在 Prop 2.4 上。

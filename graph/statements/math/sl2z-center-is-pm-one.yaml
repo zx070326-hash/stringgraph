@@ -28,7 +28,7 @@ formal:
   lean_file: StringFormal/Math/MathlibBridges.lean
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one；同文件 neg_one_mem_center"
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one；同文件 neg_one_mem_center、psl2z_eq_quotient_pm_one、center_eq_zpowers_neg_one"
     note: |
       本仓库，桥层提交 **c15b0db**（"formal: bridge PSL(2,Z) card to Mathlib; prove
       Z(SL(2,Z)) = {+-I} and the descent of the H-action"），分支合并提交 **845b9b9**；
@@ -45,6 +45,23 @@ sources:
       一节逐字：本项目自己新证的只有 `center_eq_pm_one` 及其两个推论）。
       辅助声明 `neg_one_mem_center`（−I 中心）由 `Subgroup.mem_center_iff` 一行，
       是「⊇」那一支的内容。
+      ★ **2026-09-11（curator lean-wire-12）并列登记同一事实的两条子群层写法**（formalizer
+      bridge-2，桥层提交 **3a36c36**，合并 **930b265**，同一文件，均以本卡的
+      `center_eq_pm_one` 为唯一输入）：
+
+          theorem psl2z_eq_quotient_pm_one :
+              Subgroup.center SL(2, ℤ) = Subgroup.closure {(-1 : SL(2, ℤ))}
+
+          theorem center_eq_zpowers_neg_one :
+              Subgroup.center SL(2, ℤ) = Subgroup.zpowers (-1 : SL(2, ℤ))
+
+      两者把本卡的**集合**等式提到**子群**等式（`Subgroup.closure {−I}` 与
+      `Subgroup.zpowers (−I)` 都是 {I, −I}，后者由 `Subgroup.zpowers_eq_closure` 从前者得到）。
+      **本卡 `lean_decl` 不动，仍是 `center_eq_pm_one`**：卡面正文写的是集合相等
+      （「作为集合恰等于 {I, −I}」），与它逐字对齐；子群版多出「被商掉的子群」这层读法，
+      属于卡面「不断言」(e) 明确排除的商群改写那一侧，故只在此登记、不改 lean_decl 也不改正文。
+      ⇒ 下游要用「Mathlib 的 SL/Z(SL) 就是卡面的 SL/{±I}」时，可以直接引
+      `psl2z_eq_quotient_pm_one`（或商的外延性 `pslMk_eq_iff`），不必再自行补那一行外延性。
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one 的证明体（`Matrix.SpecialLinearGroup.mem_center_iff`）"
     note: |
@@ -72,9 +89,13 @@ notes: |
 
   **为什么正文不写商群那一句**（「不断言」(e)）：为了让卡面与 `center_eq_pm_one` **逐字**相等。
   「Z = {±I} ⇒ SL/Z = SL/{±I}」用到的是「子群由其承载集合决定」（Lean 里是
-  `Subgroup.ext` / `SetLike` 的外延性），桥层没有为这一步单独立声明；
-  若把它写进正文，卡面就含了未逐字重述的子句，按 docs/STATUS_LEVELS.md 的口径本卡就不该标
-  formalized。需要那一步的下游自己做（它是一行外延性，不是新数学）。
+  `Subgroup.ext` / `SetLike` 的外延性）；若把它写进正文，卡面就含了未逐字重述的子句，
+  按 docs/STATUS_LEVELS.md 的口径本卡就不该标 formalized。
+  ★ **2026-09-11 更新**：写这段时「桥层没有为这一步单独立声明」，现在有了——
+  `psl2z_eq_quotient_pm_one`（子群等式）与 `pslMk_eq_iff`（商的外延性），见 sources 第一条。
+  **但本卡正文与 `lean_decl` 都不改**（原则 1：改正文等于新建节点；而 (e) 排除商群改写这一点
+  本身没错）。需要那一步的下游现在可以直接引那两条 Lean 声明，不必再自己补外延性；
+  若将来有人真需要一张「SL(2,Z)/Z = SL(2,Z)/{±I}」的卡，应新建，而不是改本卡。
 
   **定义卡 statement 不动**（原则 1），也不加 `superseded_by`：本卡是拆出，不是换代。
   定义卡 worldsheet.modular-group-psl2z 的 notes 里原本就有一段「卡面有一处隐含依赖，

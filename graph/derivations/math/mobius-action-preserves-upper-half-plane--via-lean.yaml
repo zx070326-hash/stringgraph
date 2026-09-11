@@ -17,13 +17,22 @@ depends_on:
       定义卡正文仍写着这一行，断言集合未改。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.psl2z_im_smul_eq"
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.psl2z_im_smul_eq（目标卡 (1)）与 StringFormal.Bridge.psl2z_im_pos（目标卡 (2)）"
     note: |
       本仓库，桥层提交 **c15b0db**，分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。
       声明全文：
 
           theorem psl2z_im_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
               (g • τ).im = τ.im / ‖(g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ)‖ ^ 2
+
+      ★ **目标卡 (2) 自 2026-09-11 起也有自己的具名声明**（formalizer bridge-2，桥层提交
+      **3a36c36**，合并 **930b265**，同一文件）：
+
+          theorem psl2z_im_pos (g : SL(2, ℤ)) (τ : ℍ) : 0 < (g • τ).im :=
+            (g • τ).im_pos
+
+      故本推导的两条断言各自对应一条可点名的定理；`lean_decl` 保持 `psl2z_im_smul_eq`
+      （主断言 (1)），(2) 由 `psl2z_im_pos` 承担。证明体是 Mathlib 的 `UpperHalfPlane.im_pos`。
 
       **check-axioms 运行记录（借用，curator lean-wire-10, 2026-09-11）**：本声明属于
       worldsheet.modular-group-psl2z 的 source 里逐条登记的那 12 条桥层声明之一
@@ -33,6 +42,9 @@ sources:
       ⚠ **本轮（small-backlog-9）未重跑**：本分支只改 graph/，未动 formal/ 下任何文件；
       桥层文件自 845b9b9 起未变动。lead 合并前按根 CLAUDE.md 重跑
       `lake build` + `uv run stringgraph check-axioms` 即可覆盖。
+      ⚠ **`psl2z_im_pos` 不在那 12 条的记录里**（它 2026-09-11 才由 930b265 加入），
+      curator lean-wire-12 同样只改 graph/、未跑 Lean；它的公理检查由 lead 合并前的
+      统一重跑覆盖。
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring（\"Bridge layer: Mathlib objects restated verbatim in the graph's conventions\" 与 \"What is *not* claimed here\"）"
     note: |
@@ -64,19 +76,22 @@ summary: |
   换成 `‖·‖²`；`ModularGroup.denom_apply` 把 `denom g τ` 展成 `(g 1 0) τ + (g 1 1)` = cτ + d。
   ⇒ 与卡面 Im(γ·τ) = Im τ/|cτ+d|² 逐字相同。
 
-  **(2) 目标卡的 (2)（作用保持 H）由声明的类型承担**：`g • τ` 的类型是
-  `ℍ = UpperHalfPlane = {z : ℂ // 0 < z.im}`。这条定理能通过类型检查，就意味着
-  Lean 里存在 `MulAction SL(2,ℝ) ℍ` 实例、而该实例的构造已证正性；取出正性的一步是
-  `UpperHalfPlane.im_pos (g • τ)`。见 gaps 第一条。
+  **(2) 目标卡的 (2)（作用保持 H）= 桥层第二条声明** `psl2z_im_pos (g) (τ) : 0 < (g • τ).im`
+  （证明体 `(g • τ).im_pos`）。它形式化的正是「γ·τ ∈ H」：`g • τ` 的类型是
+  `ℍ = UpperHalfPlane = {z : ℂ // 0 < z.im}`，`MulAction SL(2,ℝ) ℍ` 实例在构造时已证正性，
+  `UpperHalfPlane.im_pos` 把它取出来。见 gaps 第一条（该缺口已闭合）。
 gaps:
   - |
-    **目标卡 (2)「作用保持 H」没有独立的桥层重述定理。** 它在 Lean 里不是一条命名定理，
-    而是由 `psl2z_im_smul_eq` 中 `g • τ : ℍ` 这一**类型**承担（ℍ 是子类型 `{z : ℂ // 0 < z.im}`，
-    Mathlib 构造 `MulAction SL(2,ℝ) ℍ` 时已证正性；取出它的一步是 `UpperHalfPlane.im_pos`）。
-    这是机检内容（类型检查通不过就没有这条定理），但**不是一条可被 `check-axioms` 单独点名的声明**。
-    ⇒ 提请 reviewer 裁定：若认为「卡面子句必须逐条对应一条具名声明」，
-    正确修法是请 formalizer 在桥层补一行 `psl2z_im_pos (g) (τ) : 0 < (g • τ).im`，
-    而**不是**把本卡降级或改正文。本推导据现有口径标 formalized。
+    ★ **（2026-09-11 已闭合，记账留存）目标卡 (2)「作用保持 H」曾没有独立的桥层重述定理。**
+    原缺口：(2) 在 Lean 里不是命名定理，只由 `psl2z_im_smul_eq` 中 `g • τ : ℍ` 这一**类型**承担
+    （ℍ 是子类型 `{z : ℂ // 0 < z.im}`，Mathlib 构造 `MulAction SL(2,ℝ) ℍ` 时已证正性），
+    是机检内容但**不是可被 `check-axioms` 单独点名的声明**；原文提请 reviewer 裁定，并写明
+    「正确修法是请 formalizer 在桥层补一行 `psl2z_im_pos (g) (τ) : 0 < (g • τ).im`，
+    而不是把本卡降级或改正文」。
+    ⇒ formalizer（bridge-2，桥层提交 **3a36c36**，合并 **930b265**）**已照此修法补上**，
+    声明与预写的类型逐字相同。本缺口不再存在；卡面两条断言现各对应一条具名定理
+    （(1) `psl2z_im_smul_eq`，(2) `psl2z_im_pos`），见 sources 第一条。
+    本推导的 formalized 判级在缺口闭合前后都成立（当时的口径是类型承担已属机检）。
   - |
     **不含 cτ + d ≠ 0。** 目标卡「不断言」(a) 已排除；Lean 侧因 `x / 0 = 0` 而不需要它，
     Mathlib 的 `UpperHalfPlane.denom_ne_zero`（及本仓库 `TorusMeasure.denom_ne_zero'`）
