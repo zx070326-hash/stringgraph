@@ -1,0 +1,202 @@
+id: spectrum.type-i-long-cylinder-constant-term
+kind: proposition
+title: type I 超弦长柱（闭弦通道）极限 s → ∞ 下被积函数的展开常数项：(10.8.4)/(10.8.11)/(10.8.18) 三处都是 16（**不**断言该数是无质量态的计数）
+statement: |
+  **设定（是陈述的一部分）**：考虑 type I 超弦（D = 10，Vol.2 §10.8）单圈真空振幅在
+  **闭弦通道**变量 s 下的被积函数（s → ∞ 即「长柱极限」，对应开弦模 t → 0；三个无取向拓扑的
+  s ↔ t 换算是 s = π/t（圆柱）、π/4t（Möbius 带）、π/2t（Klein 瓶），原书 §10.8 p.40 逐字）。
+  η 按 math.dedekind-eta-function；费米迹记号 Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 按
+  worldsheet.modular-invariance-requires-eight-transverse-fermions
+  （§10.7 (10.7.7)–(10.7.8)，**这些迹是「对一对维数」取的**，故下面出现四次幂）。
+  **本卡只谈方括号里那个函数的展开，不谈它前面的任何前缀、测度或积分。**
+
+  **断言**：
+    **(1) 圆柱 (10.8.4) 与 Klein 瓶 (10.8.11)**：两式第二行方括号里的函数同为
+          η(is/π)^{−8}[ Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴ ]，原书第三行把它写成
+          **16** + O(exp(−2s))。
+        即：**没有 exp(2s) 项，首项就是常数项，其值等于 16**。
+    **(2) Möbius 带 (10.8.18)**：方括号里的函数是
+          [ Z⁰₁(2is/π)⁴ Z¹₀(2is/π)⁴ ] / [ η(2is/π)⁸ Z⁰₀(2is/π)⁴ ]，
+        原书把它写成 **16** + O(exp(−2s))。
+        ⇒ 与 (1) 合起来：**三个面在长柱极限下共有同一个因子 [16 + O(exp(−2s))]**
+          （抽取记录 §0.4(a) 把 K ≡ (V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(exp(−2s))]
+           称作三者的「公因子」）。
+    **(3) 这个数是原书印出的数**：16 印在 Vol.2 (10.8.4)、(10.8.11)、(10.8.18)（三处），
+        全部 L1 页图逐字。
+
+  **本命题不断言**（字母编号沿用换代前的旧卡 spectrum.long-cylinder-lightest-state-count，
+  以保持三条振幅推导 note 里「新卡的『不断言 (a)』」等指针有效）：
+    (a) ⚠⚠ **不断言 16 是无质量态的计数**（这是本卡存在的**首要理由**）。
+        原书在上述三处**只印出数字**，不说它是什么的计数。原书说过的是关于**那一项**
+        （不是关于那个数）的物理归属，(10.8.4) 之后逐字：'The divergence as s → ∞ is due to a
+        **massless closed string tadpole**, which as noted must be an NS–NS state.'
+        「**该项来自无质量闭弦态**」与「**该数等于无质量态的个数**」是两句不同的话，
+        原书只说了前一句。本卡断言的是数值；前一句的内容属 tadpole 一侧
+        （spectrum.cylinder-tadpole-divergence-is-infrared /
+         worldsheet.type-i-tadpole-cancellation-so32-v2），不在本卡。
+        ⚠ 后一句在**朴素读法下与本图别处的计数对不上**，这是把它挡在断言外的实质理由：
+        D = 10 的 NS–NS 无质量态是 8 ⊗ 8 = **64**，**不是 16**；玻色弦一侧同样对不上
+        （D = 26 的无质量闭弦态是 24 × 24 = **576**，而 (7.4.4) 的常数项是 24——抽取记录
+         polchinski-1998-v1-ch7.md 已就环面 (7.3.15) 的 24² 与 (7.4.4) 的 24 发过
+         「**是不同的数，别混**」的告警）。
+        ⇒ 若日后要断言任何计数解释，必须先说清「在闭弦通道里被边界态/cross-cap 态挑出的
+        那个子集」是什么——那是一条新的、独立的命题。
+    (b) **不断言这个 16 与玻色弦 (7.4.4) 的 24 之间有任何普适公式**。原书从不把这两个数并列，
+        也从不写成 D 的函数；抽取记录 sec10-8.md **#E74** 的对照表是**抽取者**做的，其裁决 (ii)
+        逐字写明「Polchinski 从不写符号形式 2^{D/2}，也从不把两个数并列比较」。
+        ⚠ **玻色弦的 24 本身也不在本卡**（它是
+        spectrum.cylinder-closed-channel-open-closed-duality 断言 (3) 的逐字内容；
+        换代前的旧卡把两者写在一起，正是 reviewer-batch28 判为「一卡两命题」的那一点）。
+    (c) **不断言这个 16 与本图别处出现的 16 同源或相等**。别处的 16 至少有两个：
+        worldsheet.superstring-relative-cohomology-dimension 的 notes 里由 ½·dim R(p,0) 得到的 16；
+        §10.6 (10.6.19) 上方原书逐字 'The open string multiplets, **with 16 states**'
+        （type I 开弦无质量多重态 8_v + 8）。**本图未建立任何等同。**
+        ⚠ 连本卡断言 (1) 与 (2) 里的两个 16 **本卡也不断言同源**：它们的组合来路不同
+        （2 × 8 对 2⁴，见 notes 的开放问题 (O1)），本卡只断言两处的**数值**都是 16。
+    (d) **不断言任何前缀、测度、发散或 tadpole**。V₁₀/(8π(8π²α')⁵)、2¹⁰、±2n·2⁵、(n ∓ 32)²、
+        C₁₀ 悖论全部不在本卡（见 worldsheet.superstring-*-amplitude-closed-channel 三张卡与
+        worldsheet.type-i-tadpole-cancellation-so32-v2）。
+    (e) ⚠ 断言 (1)(2) 里「超弦一侧没有 exp(2s) 项」是**照读原书印出的式子**，
+        **不**断言它与 GSO 投影去掉快子之间的因果（那是 worldsheet.gso-removes-tachyon）。
+        ⚠ 玻色弦那一侧确有 exp(2s) 项、原书用解析延拓 ∫₀^∞ ds exp(βs) ≡ −1/β 定义它
+        （(7.4.5)），**那整件事不在本卡**（本卡只谈超弦）。
+    (f) **不断言展开的高阶项**。原书三处都只写到 O(exp(−2s))，本卡照录；各面高阶项的具体系数
+        不在本卡。
+        ⚠ 一处容易读错的技术细节（本卡照录、不另作断言）：Möbius 那一支的宗量是 **2is/π**，
+        故它的展开参数是 q = exp(−4s) 而不是 exp(−2s)；**它的修正出现在相对阶 q^{1/2}**，
+        因而仍然是 O(exp(−2s))，与另外两面写法一致。
+uses_conventions:
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. **(10.8.4)** 第二、三行, p. 38（圆柱）：'= i (V₁₀n²/(8π(8π²α')⁵)) ∫₀^∞ ds η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴] = i (V₁₀n²/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]'；随后逐字 'The divergence as s → ∞ is due to a massless closed string tadpole, which as noted must be an NS–NS state.'"
+    note: |
+      L1 原书页图，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**。
+      ⚠⚠ 该条里「16 是十维无质量态计数（对照 Vol.1 (7.4.4) 的 24）」一句写在**「备注」栏**，
+      是抽取者的转述（gloss），**不在「原文逐字」栏**。本卡据此把它排除在断言之外
+      （「不断言 (a)」）。
+      ⚠ 前缀 α' 的幂次不属本卡（「不断言 (d)」）；那一处的裁决见
+      worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的 sources 第三条。
+      ★ 本条同时是「不断言 (a)」引用的那句 tadpole 原文的定位。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. **(10.8.11)** 第二、三行, p. 41（Klein 瓶）：'= i (2¹⁰V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴] = i (2¹⁰V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]'"
+    note: |
+      L1，抽取记录 sec10-8.md **#E69**（该条已单页重渲染复核）。
+      ★ 方括号里的函数与圆柱 (10.8.4) **逐字相同**，这是本卡把断言 (1) 写成一条的依据。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. **(10.8.18)** 第二、三行, p. 42（Möbius 带）：'= ±2in (2⁵V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴] / [η(2is/π)⁸ Z⁰₀(2is/π)⁴] = ±2in (2⁵V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]'"
+    note: |
+      L1，抽取记录 sec10-8.md **#E71**。
+      ⚠ 注意 Möbius 的宗量是 **2is/π**（不是 is/π），函数形式也与另外两面不同；
+      **只有展开的常数项 16 相同**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 40（s ↔ t 的三拓扑换算逐字：'s is related to the usual modulus t for these surfaces by s = π/t, π/4t, and π/2t for the cylinder, Möbius strip, and Klein bottle respectively'）"
+    note: |
+      L1，抽取记录 sec10-8.md **#E68**；本卡「设定」段的来源。
+      三面公因子 K ≡ (V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(exp(−2s))] 的写法见该记录 **§0.4(a)**，
+      本卡断言 (2) 末句引用的就是它。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eqs. (10.7.7)–(10.7.8), pp. 32–33（Z^α_β 的定义与四个迹；逐字 'We should emphasize that these traces are for a pair of dimensions.'）"
+    note: |
+      本图对应节点 **worldsheet.modular-invariance-requires-eight-transverse-fermions**
+      （其 statement 就含这套记号）。本卡只借**记号**，**不**借那张卡的结论。
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eqs. **(7.4.4)**、**(7.4.5)**–**(7.4.6)**, p. 224（玻色弦一侧：η(is/π)^{−24} = exp(2s) + 24 + O(exp(−2s))；'The leading divergence … is from the closed string tachyon … The second term, from the massless closed string states, gives a divergence of the form 1/0 even with the continuation.'）"
+    note: |
+      L1，抽取记录 polchinski-1998-v1-ch7.md **#E30**/**#E31**。
+      ⚠⚠ **本卡不据此断言任何东西**：玻色弦的 24 在
+      spectrum.cylinder-closed-channel-open-closed-duality 断言 (3)（见「不断言 (b)」），
+      解析延拓在「不断言 (e)」。本条只为「不断言 (a)(b)(e)」里引用的那几句原文定位。
+tags: [spectrum, one-loop, closed-channel, long-cylinder, dedekind-eta, q-expansion, superstring, type-i]
+notes: |
+  ★★★【本卡为什么存在（curator，2026-09-11，batch28-supersede）】
+  本卡是 **spectrum.long-cylinder-lightest-state-count 的换代卡**，执行 reviewer-batch28 记录在
+  旧卡 notes 里的请求（逐字）：
+    「reviewer 给出的正解：**换代**为只含超弦 (2)(3) 的 **spectrum.type-i-long-cylinder-constant-term**，
+      三条振幅推导的边改指新卡，--via-q-expansion 用 `git mv` 改指并**删掉**对 duality 卡的边
+      （其第 1 步只需 math.dedekind-eta-function），本卡写 superseded_by。」
+  reviewer 判旧卡的两处问题（旧卡 notes 逐字）：
+    (i) **一卡两命题**——玻色弦的 24（旧卡断言 (1)）已经是
+        spectrum.cylinder-closed-channel-open-closed-duality 断言 (3) 的逐字内容，
+        --via-q-expansion 对那张卡的边是**重复供给而非论证步**；
+    (ii) **id 里的 "count" 名不副实**。
+  旧卡当轮未执行的唯一原因是三条振幅推导在 **claim #399（batch27-fix）**名下；该分支已并入 main，
+  本轮落地。
+
+  【编号对照（读旧卡 / 旧 note 的指针时必看）】
+    · 本卡断言 **(1)** = 旧卡断言 **(2)**（圆柱 (10.8.4) + Klein 瓶 (10.8.11)）；
+    · 本卡断言 **(2)** = 旧卡断言 **(3)**（Möbius (10.8.18)，含三面公因子那一句）；
+    · 本卡断言 **(3)** = 旧卡断言 **(4)** 限于超弦三处（旧卡还含玻色弦 (7.4.4) 的一处 24）；
+    · 旧卡断言 **(1)**（玻色弦 η^{−24} = exp(2s) + 24 + O(exp(−2s))）**本卡没有**，
+      它在 spectrum.cylinder-closed-channel-open-closed-duality 断言 (3)。
+    · 「不断言」的**字母 (a)–(f) 未改**，三条振幅推导 note 里写的「新卡的『不断言 (a)』」仍然有效。
+
+  ⚠⚠【关于旧卡 id 里的 "lightest-state-count"（历史记录，必须一起读）】
+  旧卡 id 由 lead 在派工单里指定，沿用的是三条振幅推导 gap 的措辞，而**旧卡的断言里也没有任何
+  「计数」**；旧卡 notes 已就此留过记录，逐字：「id 中的这个词是**历史命名**，与卡面内容不符的那一半
+  已由『不断言 (a)』显式排除。按 graph/CLAUDE.md「id 一旦提交不得更改」，本卡不改 id，此处留记录。
+  ⇒ 建议 lead：引用本卡时按 title 读，不要按 id 读。」
+  **本卡的 id 就是那条建议的落地**：`type-i-long-cylinder-constant-term` 逐字说出本卡断言的东西
+  （type I、长柱极限、展开的常数项），不含任何「计数」字样。
+  ⇒ 引用本卡时 id 与 title 一致，不再需要那条警告；旧 id 只应出现在历史记录里。
+
+  【与 spectrum.cylinder-closed-channel-open-closed-duality 的分工（**别读成重复卡**）】
+  那张卡的断言 (3) 含**玻色弦**的展开式 η(is/π)^{−24} = exp(2s) + 24 + O(exp(−2s))，
+  并在括注里写了「常数 24 是无质量闭弦态（左右各 24 个横向模在对角上的 24 个组合）」。
+  换代后的分工**没有重叠**：
+    · 那张卡 = 玻色圆柱的**通道对偶**（模变换 + 换元 + 通道解释），24 是其中一步的读数；
+    · 本卡 = **只**把超弦三处的常数项 16 做成一个可被上游引用的对象，
+      并把「该数 = 态计数」这层释义**显式排除**。
+  ⇒ 玻色弦的 24 在本图只有**一个**断言点（那张卡），这正是本次换代消除的重复。
+  ⚠ 那张卡括注里的计数说法（「**对角上的** 24 个组合」，比「无质量态的个数」窄）本卡不表态；
+  若 reviewer 认为那个括注也该移出断言，那是**那张卡的换代**，不由本卡承担。
+
+  【超弦一侧的 16 是怎么来的（**不进断言**，属推导层面的观察）】
+  见推导 spectrum.type-i-long-cylinder-constant-term--via-q-expansion 的 summary：
+  圆柱/Klein 那一支 **16 = 2 × 8** 来自 ∏(1 + q^{m−1/2})⁸ 与 ∏(1 − q^{m−1/2})⁸ 在 q^{1/2}
+  阶上的差（±8q^{1/2}），其中 8 是**横向世界面费米子的个数**；Möbius 那一支 **16 = 2⁴** 来自
+  R 扇区基态二重简并的四次幂。
+  ⚠ 这些是**组合来源**，不是「无质量态的个数」；把它当成后者正是「不断言 (a)」禁止的那一步。
+
+  【本卡不覆盖的相邻事实】玻色 Möbius 带的闭弦通道常数项是 **−24**（与玻色圆柱的 +24 反号），
+  已在 spectrum.one-loop-mobius-amplitude-v2 的断言 (5) 里（那是本图对**玻色弦**做的补算，
+  专门用来解释 (7.4.22) 的 ± 与 (7.4.24) 的 ∓ 的表观矛盾）。**本卡不重复它，也不与它合并。**
+  ⚠ 对照：超弦 Möbius (10.8.18) 印出的是 **+16**（符号 ± 在前缀里，不在方括号里），
+  与玻色弦那一支的记账方式不同，**不要互相套用**。
+
+  ★★★【开放问题登记（curator theta-cards，2026-09-11；**只记在 notes，statement 不动**；
+  本卡自旧卡逐条承接，内容未改）】
+  以下三条是 curator-13 在做 --via-q-expansion 的复算时发现的，本卡**不把任何一条写进断言**；
+  同一条目已写入 docs/ROADMAP.md 的「待船长裁决」（那里引的是旧卡 id）。
+
+  **(O1) 同一个 16，两条互不相干的组合路径，原书不评论。**
+    · **圆柱 (10.8.4) 与 Klein 瓶 (10.8.11)**：16 = **2 × 8**——
+      η^{−8}[Z⁰₀⁴ − Z⁰₁⁴] 的常数项来自 ∏_{m≥1}(1 + q^{m−1/2})⁸ 与 ∏_{m≥1}(1 − q^{m−1/2})⁸
+      在 q^{1/2} 阶上的系数 **+8 与 −8 相减**（x² 项的 28 逐项相消），其中 **8 = 横向世界面费米子的个数**。
+    · **Möbius 带 (10.8.18)**：16 = **2⁴**——Z¹₀ = 2q^{1/12}∏(1+q^m)²（因子 2 是
+      **R 扇区基态的二重简并**，来自 (10.7.6) 取 α = 1 时 m = 1 的因子 1 + q⁰ = 2），
+      故 Z¹₀⁴ 带出 2⁴ = 16；四次幂来自「迹对**一对维数**取」。
+    ⇒ **一个是「8 个费米子的一阶系数相减」，一个是「二重简并的四次幂」**，
+      两条路径在组合上毫无关系，却给出同一个数。**原书对此不作任何评论，也从不说这两个 16 为什么相等。**
+    ⚠ 本卡「不断言 (c)」（不断言本图各处的 16 同源，**包括本卡自己的两处**）正是为这一点留的余地；
+      推导 --via-q-expansion 的 summary 与 notes 有逐步复算。
+
+  **(O2) 抽取记录里那句「16 = 十维无质量态计数」的 gloss，朴素读法与本图别处的计数对不上。**
+    该 gloss 在 polchinski-1998-v2-sec10-8.md **#E66 的「备注」栏**（抽取者转述，**不在「原文逐字」栏**）。
+    朴素计数：D = 10 的 **NS–NS 无质量态是 8 ⊗ 8 = 64**，不是 16；
+    玻色弦一侧同样对不上（D = 26 的无质量闭弦态是 24 × 24 = **576**，而 (7.4.4) 的常数项是 24）。
+    ⇒ 本卡「不断言 (a)」据此把一切计数释义挡在断言之外。
+    ⚠ **这不等于说该 gloss 是错的**：闭弦通道里真正被边界态 / cross-cap 态挑出的是**一个子集**，
+      要断言任何计数解释，必须先精确写出那个子集是什么——那是一条**新的、独立的命题**，本图没有。
+
+  **(O3) 这与 #E74 的 Q5「三个 2⁵ = 32」是同一类现象。**
+    sec10-8.md **#E74 §Q5** 记的是：(10.8.4)/(10.8.11)/(10.8.18) 三处各自独立出处的 **2⁵ = 32**
+    （前缀里的数），**原书从不解释它们为什么相等**。
+    ⇒ (O1) 与它的结构相同（不同来路的数字巧合地相等，原书沉默），
+      建议船长把两条**一并**裁决：是（a）承认这是本书的记账风格、图上只记不问，
+      还是（b）立项去找一条统一的来源（典型候选：边界态 / cross-cap 态的归一化），
+      找到后为「为什么三处的 16（与三处的 2⁵）相等」单建一张命题卡。
+author: curator
+created: "2026-09-11"

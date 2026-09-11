@@ -220,5 +220,32 @@ notes: |
     若只换代不改那三条边，旧卡会变成「被活推导依赖且无推导」——
     docs/STATUS_LEVELS.md 的硬规则规定这是 **validate error**（2026-09-11 的 ch10-residuals 事故）。
   **已 agora_send 通报 lead，请在 batch27 落地后单独派工。**
+
+  ⚠⚠【2026-09-11 上面那条换代请求**已执行**（curator，batch28-supersede）——本卡已被取代，
+  见 superseded_by】batch27-fix 已并入 main，三条振幅推导不再被 claim 锁住，本轮按 reviewer-batch28
+  的正解逐条落地：
+    (1) 新卡 **spectrum.type-i-long-cylinder-constant-term** 只含本卡的**超弦**断言
+        （本卡 (2)(3)(4) 的超弦部分 → 新卡 (1)(2)(3)），「不断言」的字母 (a)–(f) 原样承接
+        （(e) 里玻色弦解析延拓那半句改为「整件事不在本卡」），notes 的开放问题 (O1)–(O3) 与
+        本卡上面那段 id 命名记录也一并承接。
+    (2) 本卡断言 **(1)**（玻色弦 η^{−24} = exp(2s) + 24 + O(exp(−2s))）**不进新卡**：它已经是
+        spectrum.cylinder-closed-channel-open-closed-duality 断言 (3) 的逐字内容，
+        这正是 reviewer 判「一卡两命题」的那一点。⇒ 玻色弦的 24 此后在本图只有**一个**断言点。
+    (3) 三条振幅推导
+        （worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling、
+         worldsheet.superstring-klein-bottle-amplitude-closed-channel--via-closed-string-trace-with-omega、
+         worldsheet.superstring-mobius-strip-amplitude-closed-channel-**v2**--via-open-string-trace-with-omega
+         ——Möbius 那条已由 batch27-fix 改名为 -v2）的 depends_on **已全部改指新卡**，
+        各边的 note 加了一段改指记录，**供给的内容一字未变、仍为非 inferred**。
+    (4) 本卡唯一的推导已 `git mv` 为
+        **spectrum.type-i-long-cylinder-constant-term--via-q-expansion** 并改指新卡，
+        同时**删掉了对 spectrum.cylinder-closed-channel-open-closed-duality 的边**
+        （那条边供给的是本卡断言 (1) 本身，属重复供给而非论证步）。
+    ⇒ 本卡此后**不留推导**（与旧版 worldsheet.brst-cohomology-equals-ocq-physical-superstring
+      同款做法），**且全图已无任何活推导依赖本卡**（已 grep 核对：除散文提及外只剩
+      docs/ROADMAP.md 与三张 ϑ 卡 notes 里的历史指针），故不触发 docs/STATUS_LEVELS.md
+      「被活推导依赖且无推导」的那条 validate error。
+  **本卡的 id 与 statement 一字未动**（原则 1）。
+superseded_by: spectrum.type-i-long-cylinder-constant-term
 author: curator
 created: "2026-09-11"
