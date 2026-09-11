@@ -1,6 +1,6 @@
 id: worldsheet.modular-group-psl2z
 kind: definition
-status: rigorous
+status: formalized
 title: 模群 PSL(2,Z) 及其在上半平面上的作用
 statement: |
   设 SL(2,Z) 是行列式为 1 的 2×2 整数矩阵群。矩阵
@@ -15,6 +15,9 @@ statement: |
     T = ( (1, 1), (0, 1) ) : τ ↦ τ + 1,      S = ( (0, −1), (1, 0) ) : τ ↦ −1/τ 。
 uses: []
 uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.psl2z_smul_eq
+  lean_file: StringFormal/Math/MathlibBridges.lean
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.1, eq. (5.1.13), p.148（一般模变换 τ' = (aτ+b)/(cτ+d)，ad − bc = 1，模群 = SL(2,Z)/Z₂ ≡ PSL(2,Z)）；S、T 的矩阵形式见 (5.1.12), p.148"
@@ -24,11 +27,79 @@ sources:
       T = ((1,1),(0,1))、S = ((0,−1),(1,0)) 的显式矩阵出自 schrans-2020 §5.3（核对源）。
       Im(γ·τ) = Im τ/|cτ+d|² 是标准恒等式，抽取记录未记录它是否写在原书里，
       本卡把它作为定义的自洽性说明列出（curator 补，不是来源逐字）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.psl2z_smul_eq（本卡 formal.lean_decl）；同文件 psl2z_im_smul_eq、psl2z_T_smul、psl2z_S_smul、neg_smul_eq、neg_one_smul_eq、neg_one_mem_center、center_eq_pm_one、center_le_ker_toPermHom、smul_eq_of_pslMk_eq、pslPermHom、pslMk_smul、PSL2Z、pslMk"
+    note: |
+      本仓库，桥层提交 **c15b0db**（"formal: bridge PSL(2,Z) card to Mathlib; prove
+      Z(SL(2,Z)) = {+-I} and the descent of the H-action"），分支合并提交 **845b9b9**；
+      Lean 4 + Mathlib **v4.33.1**。`formal.lean_decl` 所指声明全文：
+
+          theorem psl2z_smul_eq (g : SL(2, ℤ)) (τ : ℍ) :
+              ((g • τ : ℍ) : ℂ) =
+                ((g 0 0 : ℂ) * (τ : ℂ) + (g 0 1 : ℂ)) / ((g 1 0 : ℂ) * (τ : ℂ) + (g 1 1 : ℂ))
+
+      即卡面 γ·τ = (aτ + b)/(cτ + d)，(a, b; c, d) = (g 0 0, g 0 1; g 1 0, g 1 1)。
+
+      **卡面五项与桥层声明的逐条对应**（每条都是逐字重述，证明是 `rfl` / `simp` / 引用 Mathlib）：
+      (a) 群与作用 γ·τ = (aτ+b)/(cτ+d) → `psl2z_smul_eq`（= lean_decl）；
+          载体是 Mathlib 的 `SL(2, ℤ)`（`Matrix.SpecialLinearGroup (Fin 2) ℤ`，det = 1 的整数矩阵）
+          与它在 `ℍ` 上的 `MulAction`。
+      (b) 作用保持 H，且 Im(γ·τ) = Im τ/|cτ + d|² → `psl2z_im_smul_eq`
+          （`(g • τ).im = τ.im / ‖(g 1 0) * τ + (g 1 1)‖ ^ 2`，Mathlib
+          `ModularGroup.im_smul_eq_div_normSq`）；「保持 H」在 Lean 侧还内建于作用的类型
+          （作用的靶就是 `ℍ`）。
+      (c) γ 与 −γ 给出同一分式线性映射 → `neg_smul_eq`、`neg_one_smul_eq`；
+          有效作用的群是 PSL(2,Z) = SL(2,Z)/{±I} → `PSL2Z`（= Mathlib 的 `PSL(2, ℤ)`
+          `= SL(2,ℤ) ⧸ Z(SL(2,ℤ))`）+ **`center_eq_pm_one`**（`Z(SL(2,ℤ)) = {1, −1}` 作为集合，
+          这条 Mathlib 没有，是本项目自己证的）+ `center_le_ker_toPermHom`、
+          `smul_eq_of_pslMk_eq`、`pslPermHom` 与 `MulAction PSL2Z ℍ` 实例（`pslMk_smul`）。
+      (d) T = ((1,1),(0,1)) : τ ↦ τ + 1 → `psl2z_T_smul`；
+          S = ((0,−1),(1,0)) : τ ↦ −1/τ → `psl2z_S_smul`。
+          两个矩阵与卡面逐字一致：Mathlib `ModularGroup.coe_T = !![1, 1; 0, 1]`、
+          `ModularGroup.coe_S = !![0, -1; 1, 0]`（v4.33.1，
+          `Mathlib/LinearAlgebra/Matrix/SpecialLinearGroup.lean` L825–L840，curator 读源码 L1 核对）。
+      ⇒ 卡面断言无一遗漏，故本卡 status 由 rigorous 升为 **formalized**。
+      **check-axioms 运行记录（curator lean-wire-10, 2026-09-11，在主工作树 D:\physics\string 上，
+      其 `.lake` 构建时间 13:54:53 晚于源文件 13:53:02）**：上列 12 条有证明内容的声明
+      `12 ok, 0 non-standard, 0 missing; 0 errors`，公理集合一律
+      `propext Classical.choice Quot.sound`。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring 的 \"What is *not* claimed here\" 一节"
+    note: |
+      **诚实归属**：(a)(b)(d) 的数学内容全部是 Mathlib 的
+      （`UpperHalfPlane.coe_specialLinearGroup_apply`、`ModularGroup.im_smul_eq_div_normSq`、
+      `UpperHalfPlane.modular_T_smul`、`UpperHalfPlane.modular_S_smul`、`ModularGroup.SL_neg_smul`），
+      桥层只做逐字重述。本项目自己新证的只有 (c) 里的 `center_eq_pm_one`
+      （经 `Matrix.SpecialLinearGroup.mem_center_iff`：中心元是纯量阵 r·I 且 r² = 1，在 ℤ 上迫使 r = ±1）
+      及其两个推论 `center_le_ker_toPermHom`、`smul_eq_of_pslMk_eq`。
+      桥层文件头逐字声明**不**断言的内容，与本卡 notes 里列的三条「本卡不断言」一致：
+      不证 PSL(2,Z)-作用的**忠实性**、不证由 S、T 生成
+      （那是 worldsheet.modular-group-generated-by-s-and-t）、不给基本域、不断言它是环面的模等价。
 tags: [worldsheet, torus, modular-group, psl2z, moduli]
 notes: |
   本卡只是群及其作用的定义，status = rigorous 指定义本身精确，**不**断言
   (i) 它就是环面的等价关系（worldsheet.torus-modular-equivalence），
   (ii) 它由 S、T 生成（worldsheet.modular-group-generated-by-s-and-t），
   (iii) 它有基本域 F₀（worldsheet.modular-fundamental-domain）。三条都是命题，状态各自计算。
+
+  **2026-09-11（curator lean-wire-10）：status rigorous → formalized。** 依据是 formalizer 新建的
+  桥层 `formal/StringFormal/Math/MathlibBridges.lean`（`namespace StringFormal.Bridge`），见上面
+  第二、三条 source。`lean_decl` **不得直指 Mathlib**（`Matrix.ProjectiveSpecialLinearGroup` 等），
+  必须指桥层的逐字重述——formal/CLAUDE.md 的「桥层规则」。
+
+  **卡面有一处隐含依赖，在 Lean 侧被显式化了（记账）**：卡面从「γ 与 −γ 给出同一映射」
+  直接跳到「有效作用的群是 SL(2,Z)/{±I}」。这一步实际用的不只是 −I ∈ Z(SL(2,Z))，
+  而是**中心恰等于 {±I}**——否则 Mathlib 的 `PSL(2,ℤ) = SL(2,ℤ) ⧸ Z(SL(2,ℤ))`
+  未必等于卡面写的那个商 SL(2,Z)/{±I}。桥层的 `center_eq_pm_one` 正是补上这一步
+  （Mathlib 没有这条；`StringFormal/Math/ModularGroupGenerators.lean` 此前刻意只用了 −I ∈ Z）。
+  ⇒ 本卡在 Lean 侧比在卡面上更明确，但**断言集合相同**，不构成换代理由。
+
+  **「有效作用」的读法（口径，2026-09-11）**：本卡的「有效作用的群是 PSL(2,Z)」按
+  「作用下降到的商群」读，即 Z(SL(2,Z)) 落在作用核里、作用良定义地降到 PSL(2,Z)
+  （Lean: `center_le_ker_toPermHom` + `smul_eq_of_pslMk_eq` + `MulAction PSL2Z ℍ` 实例）。
+  它**不**按「忠实作用」读：核恰等于中心（即 PSL(2,Z) → Perm ℍ 单）本卡不断言，
+  Lean 侧也没证，两边口径一致，故不影响 formalized。
+  若将来有人要用忠实性，正确做法是新建一张命题卡（它是真的，但需要证明），
+  不要重读本卡的这句话。
 author: curator-polchinski-ch5
 created: "2026-09-11"
