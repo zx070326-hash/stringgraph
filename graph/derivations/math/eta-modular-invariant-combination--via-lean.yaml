@@ -1,0 +1,123 @@
+id: math.eta-modular-invariant-combination--via-lean
+target: math.eta-modular-invariant-combination
+kind: proof
+status: formalized
+depends_on:
+  - id: math.dedekind-eta-s-transformation
+    inferred: false
+    note: |
+      提供 S 生成元上的那一步：Lean 里 `DedekindEta.im_mul_norm_eta_pow_four_modular_S_smul`
+      （`(S • τ).im * ‖η(S • τ)‖⁴ = τ.im * ‖η(τ)‖⁴`，`StringFormal/Math/DedekindEtaS.lean`，
+      即该卡 --via-lean 登记的推论之一）。本推导的 `Subgroup.closure_induction` 的 `mem` 分支
+      在 `x = ModularGroup.S` 时**逐字**调用它。字面依赖，非 inferred。
+      ⚠ 目标卡用的是**模长的组合** τ₂|η|⁴，不是 η 本身；S 卡的主句 η(−1/τ) = (−iτ)^{1/2}η(τ)
+      经由 `norm_eta_neg_inv_pow_four` + Im(−1/τ) = τ₂/|τ|² 才变成这个形状，两步都在 S 卡侧。
+  - id: math.dedekind-eta-t-transformation
+    inferred: false
+    note: |
+      提供 T 生成元上的那一步：`DedekindEta.im_mul_norm_eta_pow_four_modular_T_smul`
+      （`StringFormal/Math/DedekindEtaT.lean`），同样被 `mem` 分支在 `x = ModularGroup.T` 时逐字调用。
+      字面依赖，非 inferred。
+  - id: worldsheet.modular-group-generated-by-s-and-t
+    inferred: false
+    note: |
+      提供把两个生成元推到整群的那一步：Lean 里用的是
+      `ModularGroupGen.sl_closure_S_T : Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤`
+      （`StringFormal/Math/ModularGroupGenerators.lean`，该卡 --via-lean 的 sources 已登记；
+      它本身是 Mathlib `SpecialLinearGroup.SL2Z_generators` 的再导出）。
+      本推导第一步就是 `rw [ModularGroupGen.sl_closure_S_T]; exact Subgroup.mem_top g`
+      把「任意 g」变成「g ∈ closure {S,T}」，然后对该成员关系归纳。字面依赖，非 inferred。
+      ⚠ **用的是 SL 版而不是 PSL 版**：该卡正文说的是 PSL(2,Z) 由 S、T 生成，
+      Lean 这边用的是 `sl_closure_S_T`（SL 层）。两者由商映射满射互推
+      （同文件的 `psl_closure_S_T` 正是这样从 SL 版得到的），但本推导实际调用的是 SL 版。
+      目标卡的量词也写在 SL(2,Z) 上，两边一致。
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      提供群与作用本身：Lean 里 `SL(2, ℤ)` 在 `UpperHalfPlane` 上的 `•`（Mathlib 的
+      `UpperHalfPlane.instSMul`，即 τ ↦ (aτ+b)/(cτ+d)），以及 `ModularGroup.S`、`ModularGroup.T`
+      与该定义卡写的两个矩阵逐字相同。目标卡 statement 明写「SL(2,Z) 按 g·τ = (aτ+b)/(cτ+d)
+      作用在 H 上（worldsheet.modular-group-psl2z）」，故这条边是 statement 的字面依赖。
+      ⚠⚠ 该卡与 math.dedekind-eta-function 都是 **rigorous 的定义卡**，
+      按 min 规则把本推导从 own=formalized 压到 effective=rigorous，见 gaps 末条。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/DedekindEtaModular.lean :: StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant；支撑链 im_mul_norm_eta_pow_four_modular_forall → {im_mul_norm_eta_pow_four_modular_invariant, im_mul_norm_eta_pow_four_isInvariant}，推论链 im_mul_norm_eta_pow_four_pow_modular → im_pow_mul_norm_eta_pow_modular → im_pow_twelve_mul_norm_eta_pow_48_modular，另有 norm_eta_pow_four_modular"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/eta-modular`（新文件，与
+      `ModularGroupGenerators.lean` 同批合入 main）；Lean 4 + Mathlib **v4.33.1**。
+      本文件 import 的只有本项目的三个文件（`DedekindEtaS`、`DedekindEtaT`、
+      `ModularGroupGenerators`），没有新的 Mathlib 输入——**全部数学输入都经由这三个上游节点**，
+      这也是本推导 depends_on 恰好是那三张卡（外加定义卡）的原因。
+      目标声明全文：
+
+          theorem im_mul_norm_eta_pow_four_modular_invariant (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
+              (g • τ).im * ‖ModularForm.eta ((g • τ : UpperHalfPlane) : ℂ)‖ ^ 4
+                = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/DedekindEtaModular.lean`。
+  全部内容是一次对 `Subgroup.closure` 的归纳，四个分支：
+
+  **(0) 把「任意 g」变成「g 属于 S、T 生成的子群」**：
+  `rw [ModularGroupGen.sl_closure_S_T]; exact Subgroup.mem_top g`（生成定理，见 depends_on）。
+
+  **(1) 量词位置**：归纳要对 `∀ τ, …` 这个**带全称量词的命题**做（`..._modular_forall`），
+  因为 `inv` 分支要在**另一个点** `g⁻¹ • τ` 上用归纳假设。这是本文件唯一的技术要点。
+
+  **(2) 四个分支**：
+    · `mem`：`x = S` 时用 `im_mul_norm_eta_pow_four_modular_S_smul`，
+      `x = T` 时用 `im_mul_norm_eta_pow_four_modular_T_smul`（`Set.mem_insert_iff` 拆开二元集）；
+    · `one`：`one_smul`；
+    · `mul`：`mul_smul` 后接连用两次归纳假设（`ihx (y • τ)` 与 `ihy τ`）；
+    · `inv`：在 `x⁻¹ • τ` 处用归纳假设，`smul_inv_smul` 消掉，再取 `.symm`。
+
+  **(3) 推论**：`norm_eta_pow_four_modular` 由 `field_simp` + `linarith`（用 `(g•τ).im ≠ 0`）；
+  `im_mul_norm_eta_pow_four_pow_modular` 是两边同取 n 次幂（`rw` 一步）；
+  `im_pow_mul_norm_eta_pow_modular` 把 `(a·b)^n` 展成 `a^n · b^{4n}`（`mul_pow` + `pow_mul`）；
+  `im_pow_twelve_mul_norm_eta_pow_48_modular` 是 n = 12 的特化。
+gaps:
+  - |
+    **测度不变性不在本推导内。** 目标卡「不断言」(a) 已写明：d²τ/τ₂² 的模不变性
+    是关于 SL(2,Z) 在 H 上作用的另一条事实，Lean 文件 docstring 逐字说它
+    "is **not** formalised here"。⇒ spectrum.one-loop-torus-amplitude-modular-invariant
+    的第 (2) 条**仍然没有任何形式化**，它那张卡的 (3) 也因此不能靠本卡升级。
+  - |
+    **一般 g 下 η 本身的变换（乘子系统）不在本推导内**，Mathlib 也没有。
+    本推导只控制模长的特定组合 τ₂|η|⁴；任何需要 η 的相位（例如 c − c̃ ∈ 24Z 这类论证）
+    的下游都**不能**引本卡。
+  - |
+    **n = 12 是输入。** (3) 对一切 n ∈ N 成立，n = 12 只是特化；
+    「12 = (D−2)/2」「D = 26」不在本推导也不在目标卡内。
+  - |
+    **有效状态被两张 rigorous 定义卡压住**：math.dedekind-eta-function（经 S、T 两卡传入）
+    与 worldsheet.modular-group-psl2z。故本推导 own=formalized 而 effective=rigorous，
+    目标卡 effective 同。这是记账缺口，不是论证缺口，见目标卡 notes。
+notes: |
+  由 curator（lean-wire-9，lead 追加的第 8 项）于 2026-09-11 建立。
+
+  **三条 depends_on 都不是 inferred**：Lean 证明体逐字调用三个上游声明
+  （`im_mul_norm_eta_pow_four_modular_S_smul`、`..._T_smul`、`sl_closure_S_T`），
+  在源码里可以逐行指认，这是本图能给出的最硬的一种边。
+
+  **check-axioms**：本接线 worktree 无 `.lake`；本文件是刚合入 main 的新文件，主仓库
+  D:\physics\string 的 `formal/.lake`（2026-09-11 11:45 构建）不含其 olean
+  ⇒ **curator 本轮未能重跑 check-axioms**（同批的 `ModularGroupGenerators.lean` 同此情形；
+  而 `DedekindEtaS/T.lean` 因 formalizer 构建树上有新鲜 olean，curator 已逐条跑过，共 20 条全 ok）。
+  本条 formalized 的依据是 formalizer 的构建自述 + stringformal-2026 的证据标准；
+  **lead 合并前必须跑 `lake build` + `uv run stringgraph check-axioms`**（根 CLAUDE.md 的硬要求）。
+  本分支未改动 formal/ 下任何文件。
+
+  **这条链现在是完整的**：η 的定义（Mathlib）→ S 变换（Mathlib `Discriminant.lean` + 本项目归一化）
+  → T 变换（本项目，从定义两行）→ S、T 生成 SL(2,Z)（Mathlib `SL2Z_generators`）
+  → τ₂|η|⁴ 在全群不变（本卡）。**四步里有三步的实质内容是 Mathlib 的**，
+  本项目补的是归一化、T 变换、SL→PSL 过渡与最后这次归纳。
+
+  **下游（本轮不接边，留给 reviewer/lead 裁定）**：
+  spectrum.one-loop-torus-amplitude-modular-invariant 的第 (1) 条
+  「τ₂|η(τ)|⁴ 在模群下不变」与本卡的 (1) 是同一命题，本卡可作它的上游。
+  但那张卡现有的推导 --via-eta-transformation 已分别挂着 S 卡与 T 卡的边，
+  改成挂本卡是**改边**（会去掉两条边、加一条），不属于接线任务；
+  且那张卡 own=physical-argument（它还含测度与 F₀ 良定义两条），改边不会改变其 effective。
+  已在那张卡的 notes 里留了指针。
+author: curator-lean-wire-9
+created: "2026-09-11"

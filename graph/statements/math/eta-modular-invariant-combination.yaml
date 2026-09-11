@@ -1,0 +1,97 @@
+id: math.eta-modular-invariant-combination
+kind: proposition
+title: "τ₂|η(τ)|⁴ 在整个 SL(2,Z) 下不变（以及它的幂：τ₂¹²|η(τ)|⁴⁸）"
+statement: |
+  设 η 如 math.dedekind-eta-function 所定义（τ ∈ H，q = exp(2πiτ)，q^{1/24} = exp(πiτ/12)），
+  H = {τ ∈ C : Im τ > 0}，SL(2,Z) 按 g·τ = (aτ+b)/(cτ+d) 作用在 H 上
+  （worldsheet.modular-group-psl2z）。记 τ₂ = Im τ。则
+
+  **(1) 对一切 g ∈ SL(2,Z) 与一切 τ ∈ H：**
+
+      Im(g·τ) · |η(g·τ)|⁴ = Im τ · |η(τ)|⁴ ,
+
+  即函数 τ ↦ τ₂|η(τ)|⁴ 在 SL(2,Z) 的每条轨道上是常数。
+
+  **(2) 解出的形式**：|η(g·τ)|⁴ = ( Im τ / Im(g·τ) ) · |η(τ)|⁴。
+
+  **(3) 任意次幂同样不变**：对一切 n ∈ N，
+
+      Im(g·τ)^n · |η(g·τ)|^{4n} = (Im τ)^n · |η(τ)|^{4n} 。
+
+  特别地 **n = 12**：τ₂¹² |η(τ)|⁴⁸ 在 SL(2,Z) 下不变（等价地它的倒数
+  τ₂^{−12}|η(τ)|^{−48} 不变）——这正是玻色弦单圈真空振幅被积函数中依赖 τ 的那一块，
+  见 spectrum.one-loop-torus-amplitude-modular-invariant 的 (1)。
+
+  **本卡不断言什么：**
+  (a) **不断言测度 dτdτ̄/τ₂²（= d²τ/τ₂²）的模不变性**——那是关于 SL(2,Z) 在 H 上作用的
+      另一条事实，本卡完全不涉及（它是 spectrum.one-loop-torus-amplitude-modular-invariant
+      的第 (2) 条，至今未形式化）。
+  (b) **不断言 η 本身在一般 g 下的变换**：一般 (a b; c d) 的乘子系统（24 次单位根 × (cτ+d)^{1/2}，
+      含 Dedekind 和）**不在本卡内**，本卡只控制模长的这一个特定组合 τ₂|η|⁴。
+  (c) **不断言 12 = (D−2)/2 与临界维数的任何关系**：(3) 里的 n = 12 是**输入**，
+      不是本卡推出的；「D = 26」不在本卡中。
+  (d) 不断言积分收敛、不断言基本域的存在或唯一（worldsheet.modular-fundamental-domain）。
+  (e) 量词写在 **SL(2,Z)** 上而不是 PSL(2,Z)：−I 在 H 上作用平凡，故不变性自动降到
+      PSL(2,Z)，但本卡的陈述与其 Lean 声明都按 SL(2,Z) 写（那是 Mathlib 的作用与生成定理
+      所在的群）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant
+  lean_file: StringFormal/Math/DedekindEtaModular.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/DedekindEtaModular.lean :: StringFormal.DedekindEta.{im_mul_norm_eta_pow_four_modular_forall, im_mul_norm_eta_pow_four_modular_invariant, norm_eta_pow_four_modular, im_mul_norm_eta_pow_four_isInvariant, im_mul_norm_eta_pow_four_pow_modular, im_pow_mul_norm_eta_pow_modular, im_pow_twelve_mul_norm_eta_pow_48_modular}"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/eta-modular`；Lean 4 + Mathlib v4.33.1。逐条对应：
+        (1) → `im_mul_norm_eta_pow_four_modular_invariant (g : SL(2, ℤ)) (τ : ℍ) :
+              (g • τ).im * ‖ModularForm.eta ((g • τ : ℍ) : ℂ)‖ ^ 4 = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4`
+              （本卡 formal.lean_decl；`..._forall` 是把 ∀τ 放进归纳所需的等价形状，
+              `..._isInvariant` 是同一事实的函数相等形状）；
+        (2) → `norm_eta_pow_four_modular`；
+        (3) → `im_pow_mul_norm_eta_pow_modular (g) (τ) (n : ℕ)`，
+              n = 12 的特化 → `im_pow_twelve_mul_norm_eta_pow_48_modular`
+              （`im_mul_norm_eta_pow_four_pow_modular` 是 (τ₂|η|⁴)ⁿ 的未展开形状）。
+      文件 docstring 逐字记下了本卡「不断言」(a)(c) 的两条：测度 `d²τ/τ₂²` 的不变性
+      "is **not** formalised here"；"`D = 26` enters only through the exponent `12 = (D − 2)/2`,
+      which is an input, not an output"。
+  - ref: polchinski-1998-v1
+    loc: "§7.3, eq. (7.3.7) 上下文, p.217（物理侧转述：逐字「The product τ₂|η(τ)|⁴ is invariant by eq. (7.2.44)」，零证明）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E20，**L1（原书页图逐字）**。
+      本条只登记「弦论教材在何处断言并使用本命题」，**不承载本卡的任何论证**：
+      原书把它归约到 (7.2.44)（η 的 S、T 变换），而 (7.2.44) 在原书零证明。
+      ⚠ 原书还在 §7.2 p.210（抽取记录 #E9）顺带用到「模群由 S、T 生成」而不证。
+      ⇒ **本卡相对原书的新内容**：把「归约到两个生成元」这一步真正做完（Lean 里对
+      `Subgroup.closure` 归纳），且生成性本身有来源（Mathlib 的 `SL2Z_generators`）。
+tags: [math, modular-forms, dedekind-eta, modular-invariance, torus, formalized]
+notes: |
+  由 curator（lean-wire-9，lead 追加的第 8 项）于 2026-09-11 新建，落地 formalizer 分支
+  `agent/formalizer/eta-modular` 的 `StringFormal/Math/DedekindEtaModular.lean`。
+  建卡前已查重：`uv run stringgraph search "modular"` / `"eta-modular-invariant"`，
+  图中**没有**同命题的卡。最接近的三张各自不同：
+    · math.dedekind-eta-s-transformation / -t-transformation：只管一个生成元上的 η 变换；
+      两卡 statement 里都写着「τ₂|η|⁴ 的**完整**模不变性还需要另一半 + 生成定理」
+      ——本卡就是把那句话兑现的卡。
+    · spectrum.one-loop-torus-amplitude-modular-invariant：物理卡，断言 **(1) τ₂|η|⁴ 不变 +
+      (2) 测度不变 + (3) 故 F₀ 上积分良定义**，三件事合在一张；本卡只承担它的 (1)，
+      且把量词、群、作用全部写死。**本卡不是它的换代**，是它 (1) 那一半的上游数学卡。
+    · worldsheet.modular-group-generated-by-s-and-t：纯群论，本卡的输入之一。
+
+  **为什么单独立卡而不是把 (1) 直接写进 S/T 卡**：按原则 1，S 卡与 T 卡的 statement 已提交、
+  不可改；两卡正文都只把「完整模不变性」写成**尚待补齐的推论**（并明写还缺生成定理）。
+  生成定理 2026-09-11 形式化后，需要一张**新卡**来承载「所有 g」这个更强的断言——
+  就是本卡。这也符合「一个节点一个命题」：本卡的命题是「某个具体组合在整个群下不变」，
+  与「某个生成元上 η 怎么变」不是同一条。
+
+  **有效状态**（2026-09-11）：own=formalized，但 effective 被上游两张 **rigorous 定义卡**
+  压到 rigorous —— math.dedekind-eta-function（η 的定义）与 worldsheet.modular-group-psl2z
+  （群与作用的定义）。这是 docs/STATUS_LEVELS.md 的既定行为，不是错误；
+  要解开需要让这两张定义卡自身成为 formalized（它们断言的对象在 Mathlib 里都有：
+  `ModularForm.eta` 与 `Matrix.SpecialLinearGroup`/`UpperHalfPlane` 的作用），
+  而本图现有 `lean_decl` 全部指向 `StringFormal.*`、`validate` 又要求 `lean_file` 在 `formal/` 下
+  ⇒ 需要 lead 裁定或 formalizer 加一层薄重述。已在 --via-lean 的 notes 里提给 lead。
+
+  **不要用 Mathlib 的 `discriminant_S_invariant` / `discriminant_T_invariant` 替代本卡**：
+  那是判别式 Δ = η²⁴ 的不变性，丢掉了 η 的相位信息，且与 τ₂ 的幂无关。
+author: curator-lean-wire-9
+created: "2026-09-11"

@@ -52,5 +52,21 @@ notes: |
   **下游**：spectrum.one-loop-uv-finiteness-from-modular-invariance 与
   worldsheet.modular-truncation-breaks-brst-decoupling 都以「F₀ 是正确的积分区域」为前提，
   而这个前提由本卡 + worldsheet.modular-fundamental-domain 共同承担。
+
+  【本卡第 (1) 条现在有一张 formalized 的数学上游（2026-09-11，curator lean-wire-9；**本轮不改边**）】
+  新卡 **math.eta-modular-invariant-combination**（own_status: formalized，
+  `lean_decl: StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant`）
+  断言的正是本卡 (1)：对一切 g ∈ SL(2,Z)、τ ∈ H，Im(g·τ)|η(g·τ)|⁴ = Im τ|η(τ)|⁴，
+  并给出 n 次幂版本（n = 12 即 τ₂¹²|η|⁴⁸，正是本卡配平里那个 [τ₂|η|⁴]^{−12}）。
+  ⇒ 本卡现有推导 --via-eta-transformation 分别挂在 S 卡与 T 卡上的两条边，
+  **可以改挂到这张新卡上**（一条边代两条，且新卡已把「由两个生成元推到整群」这一步做完
+  ——原书在 §7.2 p.210 用到「S、T 生成模群」而不证，见上面第二条 source）。
+  **本轮刻意不改**：改边不属于接线任务，且对本卡的 effective 没有影响
+  （本卡 own = physical-argument，瓶颈在自身而非上游；(2) 测度不变仍是「it is easy to check」，
+  (3) 依赖 (1)(2) 两者）。留给 reviewer / lead 裁定。
+
+  ⚠ **不要误以为本卡整条可以升级**：新卡只覆盖 (1)。**(2) 测度 dτdτ̄/τ₂² 的模不变性
+  至今没有任何形式化**（新卡的 Lean 文件 docstring 逐字写明它"is not formalised here"），
+  (3) 依赖 (1) 与 (2)，故也不能升。
 author: curator-polchinski-ch7
 created: "2026-09-11"
