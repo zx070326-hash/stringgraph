@@ -162,4 +162,26 @@ theorem gs_factorization_so32_field_of_alg {K : Type*} [Field K] [CharZero K] (x
     15 * x * y = 48⁻¹ * (30 * x) * ((24 * y + 3 * x ^ 2) - 300⁻¹ * (30 * x) ^ 2) := by
   simpa using gs_factorization_so32_alg (R := K) x y
 
+/-! ### The two mixed-anomaly conditions give `N = 32` *separately*
+
+Graph node `math.mixed-anomaly-trace-conditions-n32`. `mixed_anomaly_trace_conditions_n32`
+solves the system `N + 8l = 24 ∧ N + 2l = 30` and gets `(N, l) = (32, -1)`. But the
+rhetorical force of GS (1984) p.120 is stronger than "the system happens to be
+consistent": once the `so` branch `l = -1` is fixed (by `tr_f6_coefficient_vanishing`, or
+by the classification of the trace identities), *each* equation on its own already forces
+`N = 32`. That is the "two independent confirmations" reading, and it is what the
+following lemma states literally — two separate iffs, not one solved system.
+
+The reviewer flagged that the existing file asserts this only in a docstring.
+-/
+
+/-- On the `so(N)` branch (`l = -1`) each mixed-anomaly trace condition *separately* is
+equivalent to `N = 32`: `N + 8(-1) = 24 ↔ N = 32` and `N + 2(-1) = 30 ↔ N = 32`.
+
+Both directions are recorded. GS use only `←` for the second equation (they check that
+`so(32)` satisfies it); `→` is the sharper statement that nothing else does. -/
+theorem mixed_anomaly_so_each_gives_32 (N : ℤ) :
+    (N + 8 * (-1) = 24 ↔ N = 32) ∧ (N + 2 * (-1) = 30 ↔ N = 32) := by
+  omega
+
 end StringFormal.Math
