@@ -1,5 +1,5 @@
-id: worldsheet.bc-ghost-torus-partition-function--via-zero-mode-insertion
-target: worldsheet.bc-ghost-torus-partition-function
+id: worldsheet.bc-ghost-torus-partition-function-v2--via-zero-mode-insertion
+target: worldsheet.bc-ghost-torus-partition-function-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -54,5 +54,9 @@ notes: |
   **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：bc-ghost-central-charge 那条边的 note 原写
   「(qq̄)^{−(c+c̃)/24} = (qq̄)^{13/12}」，指数错一倍（c = c̃ = −26 ⇒ −(c+c̃)/24 = 13/6）。
   已改为 q^{−c/24} q̄^{−c̃/24}；目标陈述 (1) 同步订正。
+  【换代记录，2026-09-11（curator，fixes-batch-c，依 lead 裁决）】那次「目标陈述同步订正」是就地改
+  statement（main 2249859），违反原则 1；现旧卡恢复原文（其 (1) 的 (qq̄)^{−(c+c̃)/24} 是错的）并
+  superseded_by，本推导改名改指 worldsheet.bc-ghost-torus-partition-function-v2（纯换名式换代）。
+  reviewer-verified: reviewer-batch18, 2026-09-11（前因子关系 q^{−c/24}q̄^{−c̃/24} = (qq̄)^{13/12}，c = c̃ = −26）
 author: curator-polchinski-ch7
 created: "2026-09-11"

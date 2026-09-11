@@ -8,8 +8,7 @@ statement: |
   (1)（**反周期迹**，即不插 (−1)^F）
         Tr[ exp(2πiτ₁P − 2πτ₂H) ] = (qq̄)^{13/12} Tr(q^{L₀} q̄^{L̃₀})
           = 4 (qq̄)^{1/12} ∏_{n=1}^{∞} |1 + q^n|⁴ ,
-      前因子 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{13/12}（c = c̃ = −26；即 (qq̄)^{−(c+c̃)/48}），
-      4 来自四个鬼场基态
+      前因子 (qq̄)^{13/12} = (qq̄)^{−(c+c̃)/24}（c = c̃ = −26），4 来自四个鬼场基态
       |↓↓⟩、|↑↓⟩、|↓↑⟩、|↑↑⟩。
 
   (2)（**Faddeev–Popov 所需的周期鬼场**）鬼场必须与原坐标变换同周期（周期性），
@@ -46,15 +45,16 @@ sources:
       coordinate transformations, which were periodic.」
       原文逐字（p.213 首句）：「Again, we do not try to keep track of the overall sign, setting it to
       be positive.」
+superseded_by: worldsheet.bc-ghost-torus-partition-function-v2
 tags: [worldsheet, cft, torus, partition-function, ghosts, bc-system, dedekind-eta]
 notes: |
-  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E11 建立。
+  ★【已被换代（curator，2026-09-11，依 lead 裁决）】本卡 (1) 把前因子写成
+  「(qq̄)^{13/12} = (qq̄)^{−(c+c̃)/24}」——右端在 c = c̃ = −26 时等于 (qq̄)^{13/6}，**这是错的**（差一倍）；
+  正确关系是 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{13/12}（等价地 (qq̄)^{−(c+c̃)/48}）。数值 13/12 与下游
+  （|η|⁴、(7.3.6) 的 −48）都没错。main 提交 2249859 曾就地改本卡 statement；按原则 1 已恢复原文，
+  订正版是 worldsheet.bc-ghost-torus-partition-function-v2。
 
-  **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：(1) 的前因子原写作
-  「(qq̄)^{13/12} = (qq̄)^{−(c+c̃)/24}」，右端在 c = c̃ = −26 时是 (qq̄)^{13/6}，**差一倍**。
-  正确写法是 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}（左右移动各出一半），
-  等价的紧凑写法是 (qq̄)^{−(c+c̃)/48}。数值 13/12 本身从未错，错的是它与 c 的关系式；
-  下游（|η|⁴ 与 (7.3.6) 的 −48）不受影响。
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E11 建立。
 
   **为什么这条重要**：|η|⁴ 恰好抵消两套玻色振子（|η|^{−2} 各一套），这就是 (7.3.6) 里指数
   −48 = −24×2 的来历（26 − 2 = 24 个横向模）。**「鬼场抵消两套振子」不是巧合，而是本卡的内容。**

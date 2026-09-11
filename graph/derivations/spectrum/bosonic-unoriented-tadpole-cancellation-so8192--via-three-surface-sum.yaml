@@ -12,7 +12,7 @@ depends_on:
       贡献 ∝ n²（两条边界各一个 Chan–Paton 迹）。
   - id: spectrum.one-loop-klein-bottle-amplitude
     note: 提供 Klein 瓶的无质量 tadpole，(7.4.19) 给贡献 ∝ 2²⁶。
-  - id: spectrum.one-loop-mobius-amplitude
+  - id: spectrum.one-loop-mobius-amplitude-v2
     note: |
       提供 Möbius 带的无质量 tadpole。⚠ **这条边要同时用那张卡的 (3) 与 (5)，缺一不可**：
       (3) 给 Chan–Paton 净贡献 **±n，上号 + 对应 SO(n)**；(5) 给闭弦通道展开的无质量系数

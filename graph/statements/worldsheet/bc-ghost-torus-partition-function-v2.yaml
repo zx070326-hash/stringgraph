@@ -1,0 +1,71 @@
+id: worldsheet.bc-ghost-torus-partition-function-v2
+kind: proposition
+title: "bc 鬼场的环面配分函数：带 (−1)^F 的裸迹为零，插入四个零模后给 |η(τ)|⁴（v2：前因子写作 q^{−c/24}q̄^{−c̃/24} = (qq̄)^{13/12}）"
+statement: |
+  设 λ = 2 的 bc 鬼场 CFT（worldsheet.bc-ghost-cft，c = c̃ = −26）定义在 T²(τ) 上，
+  按 worldsheet.torus-partition-function-general-cft 取迹（世界面费米数 F 即鬼数 mod 2）。则
+
+  (1)（**反周期迹**，即不插 (−1)^F）
+        Tr[ exp(2πiτ₁P − 2πτ₂H) ] = (qq̄)^{13/12} Tr(q^{L₀} q̄^{L̃₀})
+          = 4 (qq̄)^{1/12} ∏_{n=1}^{∞} |1 + q^n|⁴ ,
+      前因子 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{13/12}（c = c̃ = −26；即 (qq̄)^{−(c+c̃)/48}），
+      4 来自四个鬼场基态
+      |↓↓⟩、|↑↓⟩、|↓↑⟩、|↑↑⟩。
+
+  (2)（**Faddeev–Popov 所需的周期鬼场**）鬼场必须与原坐标变换同周期（周期性），
+      而反交换场的朴素迹对应时间方向的**反**周期边条件，故正确的配分函数带 (−1)^F，而它**为零**：
+        Z(τ) = Tr[ (−1)^F exp(2πiτ₁P − 2πτ₂H) ] = 0 。
+      两种看法：算符侧——|↓↓⟩、|↑↑⟩ 与 |↑↓⟩、|↓↑⟩ 的鬼数 mod 2 相反，四项两两相消；
+      路径积分侧——**模与 CKV 带来的鬼场零模**使配分函数为零。
+
+  (3)（**插入零模后的非零结果**）零模必须用插入饱和；环面上最简单的非零振幅
+      ⟨c(w₁) b(w₂) c̃(w̄₃) b̃(w̄₄)⟩ 相当于在迹里插 c₀b₀c̃₀b̃₀（它把四个基态投影到唯一的 |↑↑⟩），
+      结果为
+        Tr[ (−1)^F c₀ b₀ c̃₀ b̃₀ exp(2πiτ₁P − 2πτ₂H) ]
+          = (qq̄)^{1/12} ∏_{n=1}^{∞} |1 − q^n|⁴ = |η(τ)|⁴ 。
+      ⚠ 注意无穷乘积里的**符号由 (1) 的 (1+q^n) 变成 (1−q^n)**，这来自迹里的 (−1)^F。
+      该结果**与四个鬼场的插入位置无关**，因为环面上的 CKV 与全纯二次微分都是常数。
+
+  ⚠ **整体符号是人为设定的**：原书逐字「Again, we do not try to keep track of the overall sign,
+  setting it to be positive.」故 (3) 右端的符号不是算出来的。
+
+  **本卡不断言什么**：不断言插入位置无关性以外的位置依赖细节；不断言 |η|⁴ 与
+  自由标量振子的相消关系（那在 spectrum.one-loop-torus-amplitude 的推导里用）。
+uses_conventions:
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+  - conv.virasoro-standard
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2「The bc CFT」, eqs. (7.2.23)(7.2.24)(7.2.25)(7.2.26)(7.2.27), p.212；整体符号的自陈在 p.213 首句"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E11，等级 **L1（原书页图逐字）**。
+      原文逐字（p.212）：「Recall, however, that for anticommuting fields the simple trace corresponds
+      to a path integral with **antiperiodic** boundary conditions in the time direction. In order to
+      calculate the Faddeev–Popov determinant, the ghosts must have the same periodicity as the original
+      coordinate transformations, which were periodic.」
+      原文逐字（p.213 首句）：「Again, we do not try to keep track of the overall sign, setting it to
+      be positive.」
+tags: [worldsheet, cft, torus, partition-function, ghosts, bc-system, dedekind-eta]
+notes: |
+  由 curator 于 2026-09-11 从抽取记录 polchinski-1998-v1-ch7.md#E11 建立。
+
+  ★【v2 改了什么（curator，2026-09-11，依 lead 裁决：原则 1 无例外）】
+  main 提交 2249859 曾把下面这条订正**就地写进**旧卡 worldsheet.bc-ghost-torus-partition-function 的
+  statement，违反「陈述不可变」。本卡是那次改动的换代版：statement = 旧卡原文，只把 (1) 的前因子关系式
+  改为 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{13/12}；旧卡已恢复为 2249859 之前的原文（其 (1) 写的
+  (qq̄)^{−(c+c̃)/24} = (qq̄)^{13/6} 是**错的**）并写 superseded_by 指向本卡。
+
+  **2026-09-11 订正（reviewer-v1-ch7 CONFIRMED）**：(1) 的前因子在旧卡写作
+  「(qq̄)^{13/12} = (qq̄)^{−(c+c̃)/24}」，右端在 c = c̃ = −26 时是 (qq̄)^{13/6}，**差一倍**。
+  正确写法是 q^{−c/24} q̄^{−c̃/24} = (qq̄)^{26/24} = (qq̄)^{13/12}（左右移动各出一半），
+  等价的紧凑写法是 (qq̄)^{−(c+c̃)/48}。数值 13/12 本身从未错，错的是它与 c 的关系式；
+  下游（|η|⁴ 与 (7.3.6) 的 −48）不受影响。
+
+  **为什么这条重要**：|η|⁴ 恰好抵消两套玻色振子（|η|^{−2} 各一套），这就是 (7.3.6) 里指数
+  −48 = −24×2 的来历（26 − 2 = 24 个横向模）。**「鬼场抵消两套振子」不是巧合，而是本卡的内容。**
+
+  **本卡记录了本章第三处「作者自承的缺口」**（另两处：(7.2.22) 的整体数值系数、
+  (7.2.24) 讨论里未追踪的符号），见抽取记录 Q6。
+author: curator-polchinski-ch7
+created: "2026-09-11"
