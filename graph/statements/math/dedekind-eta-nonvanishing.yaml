@@ -1,0 +1,84 @@
+id: math.dedekind-eta-nonvanishing
+kind: proposition
+title: "Dedekind η 在上半平面上无零点：η(τ) ≠ 0 对一切 τ ∈ H"
+statement: |
+  设 η 如 math.dedekind-eta-function 所定义（H = {τ ∈ C : Im τ > 0}，q ≡ exp(2πiτ)，
+  q^{1/24} ≡ exp(πiτ/12) 为按 τ 取定的单值分支，η(τ) = q^{1/24} ∏_{n=1}^{∞}(1 − q^n)）。则
+
+    对一切 τ ∈ H： η(τ) ≠ 0 。
+
+  **本卡不断言什么：**
+  (a) 不断言 η 在 H 上全纯（那是 math.dedekind-eta-function 的另一条断言，本卡只取「无零点」这一条）；
+  (b) 不断言 η 在 H 的边界（实轴上的有理点、尖点 i∞）附近的任何行为，也不断言 η 的零点在任何
+      延拓意义下的分类；在 H 之外结论本身不成立，见 notes；
+  (c) 不断言 η 的任何模变换（math.dedekind-eta-s-transformation、math.dedekind-eta-t-transformation、
+      math.eta-modular-invariant-combination）；
+  (d) **不断言由本卡得到的任何除法或负幂表达式的良定义**——例如 1/η、|η|^{s}（s < 0）、
+      [τ₂|η(τ)|⁴]^{−12}。那些是本卡主句配上 τ₂ = Im τ > 0（H 的定义）在域中的初等改写，
+      由使用它们的下游自行完成；本卡只断言 η(τ) ≠ 0 本身，以便与 Lean 声明逐字对齐；
+  (e) 不断言 1/η 的 Fourier 展开、增长估计或它作为配分函数生成函数的意义
+      （那与 math.euler-partition-generating-function 是另一条线）；
+  (f) 不断言无穷乘积的收敛性本身（那是定义卡里作为「无零点」与「全纯」之理由写出的那一句）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.dedekindEta_ne_zero
+  lean_file: StringFormal/Math/MathlibBridges.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.dedekindEta_ne_zero"
+    note: |
+      本仓库，桥层提交 **674946a**（"formal: add Mathlib bridge layer for the Dedekind eta
+      definition card"），分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。声明全文：
+
+          theorem dedekindEta_ne_zero {z : ℂ} (hz : 0 < z.im) : ModularForm.eta z ≠ 0 :=
+            ModularForm.eta_ne_zero hz
+
+      与本卡正文逐字对应：假设 `0 < z.im` = τ ∈ H，结论 `ModularForm.eta z ≠ 0` = η(τ) ≠ 0。
+      **本卡正文只有这一个断言，故 Lean 声明与卡面是一一对应，没有未形式化的子句。**
+      桥层只做逐字重述，数学内容是 Mathlib 的 `ModularForm.eta_ne_zero`
+      （`Mathlib/NumberTheory/ModularForms/DedekindEta.lean`）。
+      ⚠ Mathlib 的 `ModularForm.eta` 在**全 ℂ** 上有定义（H 外是按同一公式取的值）；假设 `hz`
+      把讨论限回 H，与本卡定义域一致——**这条假设是本质的**（与 T 变换那张卡的冗余假设不同）。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.10), p.210 附近（**物理侧转述**：原书只给 η 的乘积定义，**不讨论零点**）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E9，L1（原书页图逐字）。
+      **本条不承载本卡的任何论证**：原书对 η 的收敛性与零点都不置一词
+      （见 math.dedekind-eta-function 第一条 source 的 note：「原书**没有**给出收敛性讨论，
+      也没有点明 q^{1/24} 的分支选取」）。登记它只是为了说明：弦论侧在把
+      (7.3.6) 的被积函数写成 |η|^{−48} 时**默认**了本卡的结论而从不明说。
+tags: [math, modular-forms, dedekind-eta, formalized]
+notes: |
+  **由 curator（small-backlog-9）于 2026-09-11 从定义卡 math.dedekind-eta-function 拆出**
+  （lead 派工第 2 项）。建卡前查重：`uv run stringgraph search "nonvanishing"`（无命中）、
+  `search "无零点"`（只命中定义卡本身），图中没有同命题的卡。
+
+  **为什么要拆**：定义卡的正文把四件事写在一起（乘积定义与分支约定、H 紧子集上一致收敛、
+  H 上全纯、H 上无零点）。下游真正用到的往往只是**无零点**这一条——典型是
+  spectrum.one-loop-torus-amplitude-modular-invariant-v2--via-eta-transformation 的配平步，
+  它把被积函数写成 `[τ₂|η(τ)|⁴]^{−12}`，**负幂要求 η ≠ 0**。此前那条推导只能挂整张定义卡，
+  或者（按 lean-wire-11 的处理）在 notes 里口头说明而不接边。拆出本卡后，
+  「用到无零点」这件事在图上成为一条可指认的边。
+  这正是 graph/CLAUDE.md「一个节点一个命题」与 docs/STATUS_LEVELS.md「正确做法是拆卡，
+  让 Lean 对应的那一半成为 formalized」所说的做法。
+
+  **为什么正文只留一句**：不写「故 1/η 有定义」之类的推论（见「不断言」(d)），
+  是为了让卡面与 `dedekindEta_ne_zero` **逐字**相等。若把推论写进正文，
+  卡面就含了桥层没有重述的子句，按 STATUS_LEVELS 的口径本卡就不该标 formalized。
+  下游需要负幂良定义时，自己用本卡 + τ₂ > 0 完成那一步除法即可（那是域运算，不是新数学）。
+
+  **在 H 之外结论不成立**：Mathlib 的 `ModularForm.eta` 在全 ℂ 上按同一公式取值，
+  但 Im τ ≤ 0 时 |q| ≥ 1，乘积的因子 1 − qⁿ 可以为零（例如 q 是单位根），
+  故假设 `0 < z.im` 是**本质的**。这与 math.dedekind-eta-t-transformation 那张卡形成对照：
+  那里 Lean 侧的 `eta_add_one_eq` 对一切 z ∈ ℂ 成立，`hz` 是为对齐卡面而保留的冗余假设。
+
+  **定义卡 statement 不动**（原则 1）：math.dedekind-eta-function 的正文仍写着
+  「因每个因子非零而 η 在 H 上无零点」，本卡不是它的换代，也不移除它的任何断言；
+  定义卡 notes 里已记明本条被拆出、下游可改指本卡。两处并存是有意的：
+  定义卡说明「这个对象是良定义且性质良好的」，本卡是可被单独依赖的命题。
+
+  **本卡与定义卡的强度关系**：两者都 formalized（定义卡挂 `dedekindEta_eq_exp_mul_tprod`，
+  本卡挂 `dedekindEta_ne_zero`，同一桥层文件 `MathlibBridges.lean`），
+  故改挂本卡不会改变任何下游的 effective；拆卡的收益是**可追溯性**，不是状态提升。
+author: curator-small-backlog-9
+created: "2026-09-11"

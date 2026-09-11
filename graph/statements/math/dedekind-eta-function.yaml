@@ -92,6 +92,19 @@ notes: |
   **`lean_decl` 不得直指 Mathlib**（`ModularForm.eta`），必须指桥层的重述——这是 formal/CLAUDE.md
   的「桥层规则」，本卡是它的第一个用例。
 
+  **「无零点」这一条已拆出为独立命题卡（curator small-backlog-9, 2026-09-11）**：
+  新卡 **math.dedekind-eta-nonvanishing**（proposition，own=formalized，
+  `lean_decl: StringFormal.Bridge.dedekindEta_ne_zero`，同一桥层文件），
+  唯一推导 math.dedekind-eta-nonvanishing--via-lean。
+  **本卡 statement 不动**（原则 1）：正文仍写着「因每个因子非零而 η 在 H 上无零点」，
+  拆出不是换代，本卡不加 `superseded_by`，断言集合不变。
+  拆的理由：下游常常**只**用到无零点这一条（典型是
+  spectrum.one-loop-torus-amplitude-modular-invariant-v2--via-eta-transformation 把被积函数写成
+  `[τ₂|η|⁴]^{−12}`，负幂要求 η ≠ 0），此前只能挂整张定义卡或在 notes 里口头说明；
+  拆出后那条依赖在图上成为一条可指认的边。
+  ⇒ **只需要「η ≠ 0」的下游请改指新卡**；需要「η 是哪个函数」（乘积公式与分支约定）的仍指本卡。
+  两张卡 own status 都是 formalized，改指不改变任何 effective。
+
   **唯一没有逐字重述的子句（记账，不是缺口）**：卡面 (c) 之前那句「无穷乘积在 H 的紧子集上
   绝对且一致收敛」在桥层里没有单独的重述定理。它在 Mathlib 里是
   `ModularForm.multipliable_one_sub_pow`、`ModularForm.multipliableLocallyUniformlyOn_eta`、

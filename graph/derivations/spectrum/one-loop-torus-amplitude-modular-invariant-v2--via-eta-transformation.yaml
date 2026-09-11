@@ -21,6 +21,21 @@ depends_on:
     note: 供给被积函数与测度的具体形式 (7.3.6)（本卡断言的是它的不变性）。
   - id: worldsheet.modular-group-psl2z
     note: 供给模群及其在 H 上的作用；本推导的「不变」一词按该作用理解。
+  - id: math.dedekind-eta-nonvanishing
+    inferred: false
+    note: |
+      **供给 summary (3) 配平步里负幂的良定义前提**：把 (7.3.6) 的被积表达式写成
+      `(1/4)(4π²α')^{−13} · (dτdτ̄/τ₂²) · [τ₂|η(τ)|⁴]^{−12}` 时，出现的是 τ₂|η(τ)|⁴ 的
+      **−12 次幂**，这要求 τ₂|η(τ)|⁴ ≠ 0，即要求 **η 在 H 上无零点**（τ₂ = Im τ > 0 由 H 的定义给出）。
+      **非 inferred**：负幂在 summary (3) 的等式里逐字出现，缺了本卡那一步就不是恒等式而是
+      未定义的表达式；这不是诠释，是式子本身的字面前提。
+      ⚠ **2026-09-11（curator small-backlog-9）新增此边，并撤销此前的相反处理**：
+      本推导 notes 的「η ≠ 0 这一隐含前提的出处」一段原写「本推导不为此新增依赖边」
+      （lean-wire-11 的判断：该事实已经经由 math.eta-modular-invariant-combination →
+      math.dedekind-eta-{s,t}-transformation → math.dedekind-eta-function 的链隐含进入）。
+      lead 于本轮裁定改为显式接边：η 的定义卡进入本链靠的是「η 是哪个函数」，
+      而这里用的是它的**另一条断言**（无零点）；那条断言现已拆成独立命题卡，
+      接边才使「负幂是否良定义」在图上可指认。两张卡 own 均 formalized，effective 不变。
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.3, eq. (7.3.7) 及其上下文, p.217；§7.2, p.210"
@@ -69,16 +84,17 @@ gaps:
      （(7.3.6) 本身，own=physical-argument，经规范固定路径积分得出）与本推导自身的 kind
      （physical-argument）——`stringgraph why` 的链首两步即此。"
 notes: |
-  **η ≠ 0 这一隐含前提的出处（curator lean-wire-11, 2026-09-11，落实 reviewer-batch21 PLAUSIBLE 1）**：
+  **η ≠ 0 这一隐含前提的出处（curator lean-wire-11, 2026-09-11，落实 reviewer-batch21 PLAUSIBLE 1；
+  2026-09-11 由 small-backlog-9 更新为一条真边）**：
   summary (3) 把 (7.3.6) 的被积表达式写成 `(1/4)(4π²α')^{−13} · (dτdτ̄/τ₂²) · [τ₂|η(τ)|⁴]^{−12}`，
-  其中的**负幂**要求 `τ₂|η(τ)|⁴ ≠ 0`，即要求 **η 在 H 上无零点**。
-  该事实由定义卡 **math.dedekind-eta-function** 供给：其正文逐字写「因每个因子非零而 η 在 H 上无零点」，
-  且已由 Lean 机检（该卡 sources 登记的 `Mathlib` 声明 `dedekindEta_ne_zero {z} (hz : 0 < z.im)`）；
-  τ₂ > 0 则由 H 的定义直接给出。
-  ⚠ **本推导不为此新增依赖边**：η 的定义（含无零点）已经经由上游卡
-  math.eta-modular-invariant-combination → math.dedekind-eta-{s,t}-transformation →
-  math.dedekind-eta-function 进入本链，新增一条平行边只会重复计数，不改变 effective。
-  这里记下来是为了让「负幂是否良定义」这一步在卡面上可追溯，而不是留给读者默认。
+  其中的**负幂**要求 `τ₂|η(τ)|⁴ ≠ 0`，即要求 **η 在 H 上无零点**；τ₂ > 0 由 H 的定义直接给出。
+  ★ **原文写「本推导不为此新增依赖边」（理由：该事实经 η 的定义卡已隐含进入本链），
+  已按 lead 本轮裁定撤销。** 现在有一条显式边指向新卡 **math.dedekind-eta-nonvanishing**
+  （own=formalized，`StringFormal.Bridge.dedekindEta_ne_zero`），见 depends_on 的最后一条。
+  改法的理由：定义卡进入本链靠的是「η 是哪个函数」这条断言，而配平步用的是它的**另一条断言**；
+  拆卡之后后者有了自己的节点，接边才让「负幂是否良定义」在图上可指认，而不是只写在 notes 里。
+  ⚠ 这条边**不改变** effective（新卡 own=formalized，本推导的瓶颈仍是
+  spectrum.one-loop-torus-amplitude）。
   reviewer-verified: reviewer-batch21, 2026-09-11（**只签配平步 (3)**：(1/4τ₂)(4π²α'τ₂)^{−13}|η|^{−48} = (1/4)(4π²α')^{−13}τ₂^{−2}[τ₂|η|⁴]^{−12}，幂次 −14 = −2−12、−48 = 4·(−12)；隐含 η ≠ 0 由定义卡「H 上无零点」供给。status 不变：仍被 spectrum.one-loop-torus-amplitude（physical-argument）封顶。lead 落地。）
   由 curator（small-backlog-6）于 2026-09-11 建立，是
   spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 v2 版：
