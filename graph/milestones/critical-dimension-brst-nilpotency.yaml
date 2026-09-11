@@ -33,4 +33,149 @@ canonical_source:
     · fgz-1986，Proposition 2.1(i), p.8444。
 audit:
   status: draft
+  back_translation:
+    by: physics-auditor
+    text: |
+      【回译，第一轮，physics-auditor，2026-09-12，分支 agent/auditor/brst-milestone-r1。
+      仅依据以下字段写成：worldsheet.critical-dimension-brst-v2 的 statement 与 uses_conventions；
+      其两条推导 --via-mode-computation / --via-nilpotency 的 depends_on 与 summary；
+      依赖卡 worldsheet.brst-quantization-v2、worldsheet.bc-ghost-central-charge-lambda-two、
+      worldsheet.virasoro-algebra-v2 的 statement 字段。写此文时未读本文件的 canonical_text 与
+      canonical_source，未读各卡的 notes/sources，未读文献原文。该陈述卡无 formal 块，
+      formal/ 中无对应 Lean 声明，故本轮无 Lean 侧回译。】
+
+      【对象】
+      Virasoro 归一化取 conv.virasoro-standard：中心项为 ((m³ − m)/12) δ_{m+n,0} · C，
+      一个表示上的中心荷即 C 在该表示上的标量值。
+      物质部门：算子族 L^m_n (n ∈ Z)，满足该归一化下的 Virasoro 关系，中心荷取值 c^m（保持为符号）。
+      鬼场部门：权 λ = 2 的 bc 系统的模式代数，b_n、c_n (n ∈ Z)，
+        {b_m, c_n} = δ_{m+n,0},  {b_m, b_n} = {c_m, c_n} = 0,
+      鬼场 Virasoro 模 L^g_n = Σ_m (2n − m) : b_m c_{n−m} :，
+      c^g 定义为 [L^g_m, L^g_n] = (m − n) L^g_{m+n} + (c^g/12)(m³ − m) δ_{m+n,0} 中的那个常数。
+      BRST 荷
+        Q_B = Σ_n c_n L^m_{−n} + Σ_{m,n} ((m − n)/2) : c_m c_n b_{−m−n} : + a^g c_0,
+      其中鬼场正规序常数**取定为** a^g = −1。
+
+      【前提】
+      V 是上述模式的受限模：对每个 v ∈ V 存在依赖于 v 的整数 N = N(v)，使
+        L^m_n v = b_n v = c_n v = 0  对一切 n > N。
+      （这是单边条件，只要求足够大的**正**指标零化 v，对负指标不作要求。它保证 Q_B 与 Q_B² 的
+      模式和作用在每个向量上只有有限多项非零，从而两者都是 V 上处处有定义的算子，且模式和的重排合法。
+      物质与鬼场的最高权型 Fock 模满足此条件。）
+
+      【命题】在 V 上作为算子恒等式，
+        Q_B² = (1/2){Q_B, Q_B} = (1/2) Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m
+      （整体常数因子依赖模归一化；(m³ − m) 这个形式是把 a^g = −1 吸收进 L_0 之后的结果）。
+      式中的 26 就是 −c^g：它**不是**本命题算出来的，而是作为输入取自 λ = 2 的 bc 系统中心荷 c^g = −26。
+      若进一步诸算子 c_{−m} c_m (m ∈ Z) 在 V 上线性无关（忠实的 Fock 型受限模是这种情形），则
+        Q_B² = 0  ⟺  c^m = 26  ⟺  c^m + c^g = c^m − 26 = 0。
+      （⟸：c^m = 26 时和式逐项为零。⟹：线性无关迫使每个系数 ((c^m − 26)/12)(m³ − m) 为零；
+      m³ − m 在 |m| ≥ 2 处非零，取 m = 2 即得 c^m = 26。m ∈ {−1, 0, 1} 的项恒为零，对 ⟹ 不提供信息。）
+
+      【本命题不断言】
+      · 不断言 D = 26。由 c^m = 26 到 D = 26 尚需一步 c^m = D（D 个平坦自由玻色子的中心荷），
+        那一步不属本命题，也不在本命题的陈述里。
+      · 不断言开弦截距 a 的取值；本命题完全不涉及 a。
+      · 不断言 BRST 上同调与旧协变物理态空间的关系。
+      · 不断言这组 b、c 模式就是 Polyakov 路径积分的 Faddeev–Popov 鬼场。
+      · 不断言 c^g = −26 本身（那是取自别处的输入）；也不断言一般 λ 的鬼场中心荷公式。
+    verdict: drift
+    diff_notes: |
+      【第一轮回译审计，2026-09-12】physics-auditor，分支 agent/auditor/brst-milestone-r1。
+      **verdict: drift**（同一条命题，但 canonical_text 的条件写法与陈述卡有实质出入）。
+      **audit.status 保持 draft，本轮不置 back-translated**：R1-1 与 R1-3 是必须先修的条件缺陷。
+      修好后须再跑一轮（第二轮只需比对被改动的段落，回译文本可沿用本轮）。
+      下列 R1-1..R1-4 是缺陷，R1-5/R1-6 是建议，末尾一段是**本轮核过但没有问题**的项，记下以免下轮重复。
+
+      R1-1〔缺陷·条件被写错，且强到不可满足〕**受限模的定义**。
+      陈述卡：「对每个 v ∈ V 存在 N = N(v) 使 L^m_n v = b_n v = c_n v = 0 对所有 n > N」——
+      **单边**条件，只管足够大的正指标。
+      canonical_text：「每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化」——按字面，这说
+      「不零化 v 的模式只有有限多个」。任何 Fock 模都**不**满足它：b_{−n} v、c_{−n} v 对一切 n > 0
+      非零（它们是产生算符），故不零化 v 的模式有无穷多个。于是 canonical_text 的前提按字面只被
+      平凡模满足，命题变空；而它紧接着又写「忠实的 Fock 型受限模满足」，两句自相矛盾。
+      这句 gloss 与 worldsheet.bc-ghost-central-charge-lambda-two 陈述里的写法逐字同源
+      （那张卡也写「每个 v ∈ V 被除有限多个模式外的 b_n、c_n 零化」），应是从那里搬来的，
+      而不是从本里程碑所指的陈述卡搬来的。**修法**：canonical_text 改用陈述卡的单边写法。
+      （lambda-two 卡的同一处也松，但 statement 不可变，已在该卡 notes 记下。）
+
+      R1-2〔缺陷·前提未出现在断言块〕**c^g = −26 被降级成来源标注**。
+      陈述卡写「⟺ 总中心荷 c^m + c^g = c^m − 26 = 0」，中间那个「= c^m − 26」把 c^g = −26
+      明写在断言里。canonical_text 删成「⟺ c^m + c^g = 0」，而 c^g 在 canonical_text 中
+      **从未被定义**、其取值也**从未被断言**——−26 只在【严格性的确切位置】块里作为来源出现。
+      后果：脱离图单读 canonical_text 时，「c^m = 26 ⟺ c^m + c^g = 0」无法核验（它恰恰只在
+      c^g = −26 时成立）。**修法**：在断言块里给出 c^g 的定义（[L^g_m, L^g_n] 的中心项）并写明
+      「c^g = −26 是本里程碑的**输入**（worldsheet.bc-ghost-central-charge-lambda-two），不是结论」。
+
+      R1-3〔缺陷·必须先修，派工项 (c)〕**正规序的二义性确实触及本里程碑的陈述**。
+      本条先独立推导再与 reviewer F2 对照，两者一致。独立推导：若 L′_n = L_n + α δ_{n,0}，则
+      [L′_m, L′_{−m}] = 2m L′_0 + C(m) − 2mα，即把 L_0 平移 α 会给中心项加一个 m 线性项 −2mα；
+      α = ±1 给 ∓2m，与 F2 的「相差 2m」相同。两张前提卡把 L^g_m 写成**同一个字符串**
+      （brst-quantization-v2 的 Σ_m (2n − m) : b_m c_{n−m} : 在换指标 m = n + j 后与 lambda-two 的
+      Σ_n (m − n) : b_{m+n} c_{−n} : 逐字相同），但两卡对 `: :` 的要求互斥：
+        · brst-quantization-v2 断言「L_n = L^m_n + L^g_n + a^g δ_{n,0} 在 (m³ − m) 形式下中心荷为
+          c^m + c^g」⇒ 其 `: :` 必须是**能级序**（相对 |↓⟩ = c_1|0⟩）；
+        · bc-ghost-central-charge-lambda-two 断言「[L^g_m, L^g_n] = (m − n) L^g_{m+n} +
+          (−26/12) m(m² − 1) δ」（纯 (m³ − m) 形式，无 m 线性项）⇒ 其 `: :` 必须是 **SL(2,C) 序**。
+      两卡都没有定义 `: :`。
+      **为什么这咬到里程碑而不只是咬到前提卡**：复算文档 §4 证明 Q_B 本身与正规序无关，代价是
+      **a^g 与序成对取值**——能级序配 a^g = −1，SL(2,C) 序配 a^g = 0（该文 Q_B = A + B_S + (1 + a^g) c_0）。
+      即 a^g = −1 不是一条独立的物理前提，而是「选了能级序」的另一种说法。canonical_text 写出了
+      这一对里的 a^g = −1 而**没有**写序；同时它删掉了陈述卡的那句「(m³ − m) 的形式来自把 a^g = −1
+      吸收进 L_0」——那是陈述卡里唯一能把序反推出来的线索。于是脱离图单读 canonical_text，
+      按它自己在【严格性的确切位置】里援引的 fgz-1986 Prop 2.1(i)（S 序）去理解 L^g，再配上它写的
+      a^g = −1，得到的 Q_B² 会多出一个 m 线性项（reviewer (7.1) 的 −2(1 + a^g) m 在 a^g = 0 处的值），
+      公式与 ⟺ 都不成立。按派工规则「若触及里程碑陈述则不得判 faithful」，本条生效。
+      ⚠ 记清楚**结论本身没错**：在陈述卡的意图（能级序 + a^g = −1）下公式与 ⟺ 都成立，−26 作为
+      (m³ − m) 的系数在两套序下相同，故经依赖边搬运的那个 −26 是对的。缺陷是**欠定**，不是假。
+      **修法二选一**：(i) canonical_text 明写 `: :` 取能级序（湮灭算符为 b_n (n ≥ 0)、c_n (n ≥ 1)）
+      并恢复「a^g = −1 吸收进 L_0」那句；(ii) 等 conv. 卡落地后由 canonical_text 引用之。
+      conv. 卡草案已写入 docs/drafts/brst-normal-ordering-convention.md（含 family 与 canonical 归属的
+      两个方案及取舍，交 curator/lead）。两张前提卡按「陈述不可变」只加 notes，本轮已加。
+
+      R1-4〔缺陷·来源只覆盖 ⟺ 的一半〕**canonical_source 漏 (4.3.10)**。
+      canonical_text 断言的是 ⟺，canonical_source 只写 polchinski-1998-v1 §4.3 eq. (4.3.9)，
+      而 (4.3.9) 逐字是「{Q_B, Q_B} = 0 **only if** c^m = 26」，只给 ⟹。⟸ 半边在原书是 (4.3.10)
+      （j_B j_B 的 OPE，原书逐字「The single pole implies that {Q_B,Q_B} = 0 **when** c^m = 26」）。
+      陈述卡的 sources 两条都列了，canonical_source 漏了后者。并列在同一 loc 里的另两条同样只给别的半边：
+      kato-ogawa-1983 摘要是 ⟹（「are **required by** the nilpotency」），fgz-1986 Prop 2.1(i) 只给 c^g = −26。
+      ⇒ 现行 canonical_source **没有任何一条**支撑 ⟸。**修法**：loc 里补 (4.3.10) 并注明它承担 ⟸。
+      （⟸ 另有图内的更弱独立节点 worldsheet.brst-nilpotent-at-c26，【严格性】块已提及，但那是图内节点，
+      不能充当 canonical_source。）
+
+      R1-5〔建议·非忠实性缺陷〕**canonical_text 里嵌了会过期的图状态断言**。
+      【严格性的确切位置】块写「worldsheet.free-boson-central-charge-d，**effective = formalized**」
+      与「worldsheet.brst-cohomology-equals-ocq-physical，已 rigorous」。本轮已用 `stringgraph status`
+      逐条核过，**当前属实**（分别为 effective: formalized 与 effective: rigorous）。但按
+      docs/STATUS_LEVELS.md（2026-09-11 lead 裁决）approved 断言的是**陈述忠实性**、不断言任何有效
+      状态等级；把状态写进船长要批准的正文，既让批准看起来覆盖了状态，又会随图变化而过期。
+      milestone.schema.json 的 additionalProperties 为 false 且无 `notes` 字段，故建议二选一：
+      删去这些状态形容词只留节点 id；或由 lead 先给 schema 加 `notes` 字段再把整块移过去。
+
+      R1-6〔建议〕**canonical_text 未声明所用约定**。陈述卡 uses_conventions 是
+      [conv.virasoro-standard, conv.metric-mostly-plus]。「c^m = 26」的含义依赖 Virasoro 归一化，
+      canonical_text 只靠 ((c^m − 26)/12)(m³ − m) 隐含地定住；建议按 ms.ddf-commute-with-virasoro
+      的做法明写 conv.virasoro-standard（canonical: true）。另记两点：
+      (a) conv.metric-mostly-plus 对本卡实际用不着（陈述里没有任何时空指标，D 已被明确排除），
+          canonical_text 不提它是对的；要动的是陈述卡的 uses_conventions，属下次换代的事，本轮不改。
+      (b) 鬼场正规序在 graph/conventions/ 里目前**没有**对应 family——family `normal-ordering-constant`
+          装的是截距符号 conv.intercept-sign-a，是常数符号约定，不是算符排序约定。这正是 R1-3 需要新卡的原因。
+
+      【本轮核过且没有问题的项（记下以免下轮重复）】
+      · **方向**：陈述卡与 canonical_text 都写 ⟺，一致；两者都未把 ⟸ 误标成有 KO 来源。
+        （来源覆盖的问题在 R1-4，不是陈述方向的问题。）
+      · **a^g = −1 是前提不是静默假设**：陈述卡「（bc 系统权 λ = 2，鬼场正规序常数 a^g = −1，物质
+        中心荷 c^m）」、canonical_text「鬼场正规序常数 a^g = −1」，两处都写在前提位置。派工项 (d) 通过。
+        （但它与正规序的成对性没写出来，见 R1-3。）
+      · **D = 26 没有被超额断言**：canonical_text【不断言】(1) 与陈述卡【本命题到此为止】一致，
+        且 canonical_text 多写一句「紧化背景与非几何背景是 c^m = 26 而 D ≠ 26 的解」——这是对的，
+        比陈述卡更清楚，属改进不属漂移。派工项 (e) 通过。
+      · **物质部门的量词**（派工项 (a)）：陈述卡不限定物质部门是自由玻色子，只要求它给出
+        conv.virasoro-standard 归一化下中心荷为 c^m 的 L^m_n，并与鬼场模式一起作用在受限模 V 上；
+        canonical_text 同。reviewer 复算只用模式代数（物质侧只用 Virasoro 关系与中心项），
+        其适用范围**不窄于**陈述卡所述范围，故复算与陈述的量词相容，无漂移。
+      · **线性无关前提的逻辑地位**：陈述卡写成「由于诸 c_{−m} c_m 在 V 上线性无关（对忠实的 Fock 型
+        受限模成立）」——是**断言**它在 V 上成立；canonical_text 写成「且诸 c_{−m} c_m 在 V 上线性无关」
+        ——是**假设**它成立。canonical_text 的处理更正确（陈述卡的写法对一般受限模为假：取 b、c 全零
+        作用的平凡模，Q_B² = 0 而 c^m 任意）。这是**向正确方向的**差异，不阻塞；记此供陈述卡换代 v3 时修。
 phase: 1
