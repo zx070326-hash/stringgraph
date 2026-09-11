@@ -1,0 +1,117 @@
+id: worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+kind: proposition
+title: 无鬼定理的条件版（Goddard–Thorn 的机检骨架）：若 DDF 张成假设成立，则动量塔上 H_phys/H_null 的诱导型正定——**对任意 D、任意有序域**，D = 26 不出现
+statement: |
+  【设定】记号逐字沿用 worldsheet.ddf-spanning-hypothesis（它又沿用
+  worldsheet.momentum-tower-fock-space、worldsheet.ddf-operators-v6、
+  worldsheet.ddf-operators-preserve-physical-states、worldsheet.tower-physical-quotient-form）：
+  D ∈ N；系数域 K 是**带线性序的有序域**（LinearOrder + IsStrictOrderedRing）且是 Q-代数
+  ——例如 K = ℝ 或 K = ℚ；对角度规分量 η_μ² = 1（conv.metric-mostly-plus）；
+  基点动量 k 与参考向量 k_0，重标度 a := (2α')^{1/2} k、b := (2α')^{1/2} k_0
+  （conv.alpha-prime-regge），满足
+    (N) η(b, b) = 0（k_0 类光）；   (S) η(b, a) = 1（归一化 2α' k_0·k = 1）；
+  动量塔 T(k; k_0) 与其层间正交的 K-双线性型 ⟨·,·⟩_T；横向标架 Ε = (ε_1..ε_{D−2}) 满足
+  η(ε_i, b) = 0 与 η(ε_i, ε_j) = δ_{ij}。
+  截距逐字取基态值 a₀ := α' k² = ½ η(a, a)（conv.intercept-sign-a）。
+
+  H_phys := { Ψ ∈ T(k;k_0) : (L_0 − a₀)Ψ = 0 且 L_mΨ = 0 ∀ m ≥ 1 }，
+  H_null := H_phys ∩ H_phys^⊥，
+  D(Ε) := DDF 张成（worldsheet.ddf-spanning-hypothesis 的记号），
+  ⟨·,·⟩_quot := ⟨·,·⟩_T 在商 H_phys/H_null 上诱导的对称双线性型
+  （worldsheet.tower-physical-quotient-form 的 (4)：⟨[Ψ],[Φ]⟩_quot = ⟨Ψ,Φ⟩_T）。
+
+  【前件】**DDF 张成假设**（worldsheet.ddf-spanning-hypothesis）：
+      H_phys ⊆ D(Ε) + H_null 。
+
+  【断言】在上述设定与前件之下，⟨·,·⟩_quot 在 H_phys/H_null 上**正定**：
+    (1a) 对一切 Ψ ∈ H_phys，⟨Ψ, Ψ⟩_T ≥ 0；
+    (1b) 对一切 Ψ ∈ H_phys，⟨Ψ, Ψ⟩_T = 0 ⟺ Ψ ∈ H_null；
+    (2)  等价地，对商中每个类 x ∈ H_phys/H_null：⟨x, x⟩_quot ≥ 0，且 ⟨x, x⟩_quot = 0 ⟹ x = 0。
+
+  【本卡明确不断言】
+  (a) **不断言前件成立**。前件是 worldsheet.ddf-spanning-hypothesis，那张卡刻意无推导；
+      本卡的有效状态因此由前件决定（notes）。
+  (b) **不含 D = 26，也不含 a₀ = 1**。断言对每个 D ∈ N 成立，截距是被基态钉死的 α'k²
+      而不是 1（快子壳 α'k² = 1 是一个特例）。**D = 26 与 a = 1 的全部内容都在前件里**。
+  (c) **不断言 H_phys/H_null ≅ D(Ε)（等距同构）**。单射 D(Ε) → H_phys/H_null 由
+      (1b) 与「DDF 扇区正定」立即得到，满射逐字就是前件；故「同构」不比「(2) + 前件」多给任何东西
+      （Assembly.lean Gaps 第 2 条），本图不为它另立节点。
+  (d) **不断言零动量或 k_0·k = 0 的扇区**：(S) 把 k_0·k ≠ 0 写进了设定。
+  (e) **不断言 H_phys ≠ 0 或商非零**。
+  (f) 与 worldsheet.no-ghost-theorem-v4 的关系：那张卡是 D = 26、a = 1 的无条件断言（含等距同构与
+      D > 26 的反例）；本卡是它 (1a)(1b) 那一半的**条件化**版本，把 26 剥离到前件里。
+      本卡**不**取代 v4，也不是 v4 的推导——两者是不同命题。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+  - conv.intercept-sign-a
+formal:
+  lean_decl: StringFormal.NoGhost.no_ghost_of_spans
+  lean_file: StringFormal/NoGhost/Assembly.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.no_ghost_of_spans（本卡 formal.lean_decl，= 断言 (2)）；(1a) = StringFormal.NoGhost.towerPairing_self_nonneg_of_mem_towerPhys_of_spans；(1b) = StringFormal.NoGhost.towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans；范数计算引理 towerPairing_self_eq_of_spans（⟨Ψ,Ψ⟩ = ⟨d,d⟩，Ψ = d + χ）；前件 = StringFormal.NoGhost.DDFSpans"
+    note: |
+      本仓库，formalizer 分支 agent/formalizer/noghost-c5（lead 以 34b67ef 合入 main），
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build` 与 `check-axioms`**；
+      按项目纪律，含 formal/ 改动的分支合并前由 lead 跑两者，本分支只改 graph/。
+      这是本卡 status formalized 的依据。
+      **逐句字典**：K 的序 ⇒ `[Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]`；
+      (N)(S) ⇒ `hbb : dotVec η b b = 0`、`hba : dotVec η b a = 1`；
+      Ε ⇒ `Ε : TransverseFrame η b`；a₀ ⇒ `invTwo K * Fock.zeroModeSq η a`；
+      H_phys ⇒ `towerPhysSubmodule η a b a₀`；H_null ⇒ `towerNullSubmodule η a b a₀`；
+      前件 ⇒ `hspan : DDFSpans η a b hη Ε`；商 ⇒ `TowerPhysQuot η a b a₀`；
+      ⟨·,·⟩_quot ⇒ `towerQuotientPairing η a b a₀`；
+      (2) 逐字 ⇒ `∀ x, 0 ≤ towerQuotientPairing … x x ∧ (towerQuotientPairing … x x = 0 → x = 0)`。
+      **D = 26 在该文件中一次不出现**（`grep 26 Assembly.lean` 只命中文档注释）；文件头逐字：
+      'The whole content of `D = 26` sits inside `DDFSpans`: the critical dimension never appears in
+      the statements or proofs of this file.'
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, (6.4)–(6.5) 附近（arXiv:0802.3249v1）：从 |ψ⟩ = |f⟩ + |n⟩ 到 ⟨ψ|ψ⟩ = ⟨f|f⟩ ≥ 0 的那一步"
+    note: |
+      文献侧对应处。**不承载本卡的论证**（本卡的论证是 Lean 机器证明）；该文对这一步也只有一句话。
+      文献把「张成」与「正定」写在同一个定理里；本图把它们拆开：张成是
+      worldsheet.ddf-spanning-hypothesis（open），正定-给定-张成是本卡（formalized）。
+      这正是 graph/CLAUDE.md「一个节点一个命题」在无鬼定理上的实施。
+tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, formalized, conditional]
+notes: |
+  【为什么立卡（curator 2026-09-11，noghost-conditional）】
+  Assembly.lean 把 Goddard–Thorn 无鬼定理拆成「张成」+「张成 ⇒ 正定」两半，后者机检完成。
+  本图此前没有一张卡承载后者：worldsheet.no-ghost-theorem-v4 是无条件断言（含 26），
+  其唯一推导 --via-goddard-thorn 是 rigorous 且带 (B-26) gap。本卡让「已机检的那一半」
+  成为图上一个可被引用、可被 `status` 查询的节点，从而使猜想负担的记账精确到一条卡：
+  **无鬼定理 = 本卡（formalized）+ worldsheet.ddf-spanning-hypothesis（open）**。
+
+  【有效状态 = open，这是实话，不是缺陷】
+  本卡的推导 --via-lean 自身 status 为 formalized，但 `depends_on` 含前件
+  worldsheet.ddf-spanning-hypothesis（open，无推导），按 docs/STATUS_LEVELS.md 的
+  effective = min(...) 规则，本卡 effective = open。
+  这是**正确的记账**：条件命题的有效状态就该由前件决定——「若 X 则 Y」在 X 未建立时对 Y 不提供任何
+  已建立的东西。`uv run stringgraph why worldsheet.no-ghost-theorem-conditional-on-ddf-spanning`
+  会把瓶颈指到前件那一张卡，这正是本轮想让工具说出来的话。
+  ⚠ 不要为了让本卡「显示为 formalized」而给前件挂一条 physical-argument 推导，
+  也不要把前件从 depends_on 里拿掉（那会把一条条件命题冒充成无条件命题）。
+
+  【条件命题的前件作为 depends_on 边】
+  前件那条边**不是** inferred：它是 Lean 声明里显式的 `hspan` 参数，来源可在 Assembly.lean
+  逐字读到。它也**不是**「接口边」（docs/STATUS_LEVELS.md 2026-09-12 裁决）——接口边不在机检链上，
+  而 `hspan` 在每一条定理的证明体里都被使用（`Submodule.mem_sup.1 (hspan hv)`）。
+  它是第三种：**条件命题的前件**。推导的 note 里写明了这一点。
+
+  【与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (B-26) gap 的关系】
+  那条 gap 是「D = 26 唯一进入之处」的记账。本卡把这句话变成一个可检验的事实：
+  Lean 文件里 26 一次不出现，而定理成立——所以 26 只能在前件里。
+  那条推导的 gaps 末已追记：条件版已 Lean，其剩余非机检内容 = 前件一条。
+
+  【noGhostEquiv 为什么不写（Assembly.lean Gaps 第 2 条）】
+  蓝图 §C.5 原计划构造等距同构 ddfSpan ≃ₗ H_phys ⧸ H_null。单射由 `ddf_span_pos` 得，
+  满射逐字 = `DDFSpans`。故同构不比 `no_ghost_of_spans` + 前件多任何信息，不值得写；
+  本图也不为它立卡（边界 (c)）。
+
+  【与 v4 的分工】
+  v4 的 (1b) 断言等距同构、(2) 断言 D > 26 有负模态（后者由
+  worldsheet.negative-norm-physical-state-above-26 承载）；本卡只做 (1a)(1b) 的条件化。
+  v4 **不**因本卡改 status；v4 的 notes 已追记本卡的存在。
+author: curator
+created: "2026-09-11"

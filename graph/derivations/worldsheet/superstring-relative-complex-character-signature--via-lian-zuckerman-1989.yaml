@@ -40,6 +40,31 @@ depends_on:
       供给物质部门的费米模 d^μ_{−n+κ} 与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)
       （U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩，R(p,½) = C，R(p,0) 是 Spin(D−1,1) 旋量表示，LZ p.303）。
       公式里的 dim R(p,κ) 因子与 p^{(8)}_κ（8 = D − 2 个横向方向的玻色+费米计数）都住在这里。
+  - id: worldsheet.superstring-ramond-zero-mode-cohomology-trivial
+    note: |
+      **原文两处点名引用，非 inferred**（extraction §10.4 的步骤表，L1）：
+      (1) p.313，κ=0 支的 char 计算逐字「**Theorem 2.7** implies that dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)」（式 (6)）；
+      (2) p.315，**Lemma 2.14.3** 的证明逐字「By **Theorem 2.7** …」与
+          「But **Theorem 2.7** implies that 2 dim C_rel(p,0) = dim ℱ(p,0) = 32(N(s)+M(s))」。
+      ⇒ 本边**只在 κ = 0 支承重**：它把 ℱ(p,0) 上的计数（那里有典范基）转到 C_rel(p,0) 上，
+      因子 2 与 (17) 里的公因子 32 = 2 × 16 都由它来。NS 支 ℱ(p,½) = C_rel(p,½)，不用它。
+      ★ 本边关闭本推导 gaps 首条（reviewer-batch29 记的「Thm 2.7 无卡、无边」）。
+      ⚠ 编号陷阱：**LZ 1989 Theorem 2.7 ≠ FGZ 1986 Theorem 2.7**（后者是玻色弦消灭定理 + 维数公式，
+      已立卡 worldsheet.bosonic-relative-cohomology-vanishing / -dimension）。
+  - id: worldsheet.superstring-relative-complex-nondegenerate-form
+    note: |
+      供给目标卡的 **(H4)**「⟨,⟩_rel 在每个 C^n_rel 上是非退化厄米型，故号差 sign C^n_rel 有定义」。
+      **不标 inferred**，依据是目标卡 sources 第四条指向的那一页：p.311 Definition 2.11 正上方的过渡句
+      逐字 'Now using Theorem 2.7 and Proposition 2.10, we have the following well-defined
+      **non-degenerate** hermitian form on C_rel(p,κ)'，承载者 **Proposition 2.10(i)(iii)**（同页，有证明）。
+      非退化是 **Definition 2.12(i)** 里 sign 有定义的三条前提之首（逐字 'with a non-degenerate
+      hermitian form ⟨,⟩_T, then we call T hermitian'），而 Prop 2.14(ii) 的断言里写的正是 sign C_rel(p,κ)。
+      ⚠ **两种读法的差别，请 reviewer 注意**：extraction §10.1 读数 3 提醒，若把本边读成
+      **Prop 2.14(ii) 证明体内的一步**，则原文没有把它写成一句点名引用（它是经 Definition 2.12 的
+      良定义性进入的），那样应标 `inferred: true`；本边取的是另一种读法——**陈述接口边**，
+      供给目标卡 statement 里自己写出的 (H4)，其来源是目标卡与本推导 sources 都指向的 p.311。
+      （对照：**Prop 2.14(i)** 的证明逐字 'By non-degeneracy we have Q* = Q'，那条边**无争议地**非 inferred，
+      但本图未为 2.14(i) 立卡。）
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -79,6 +104,13 @@ sources:
     loc: "**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)；p ≠ 0 全局假设）；**p.306 (7)(8)**（零模表示 T_{1/2} / T₀ ⊕ T₁）；**p.308**（D = 10）；**Definition 2.2**（相对次数）；**p.310**（'⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'）；**Proposition 2.18**, p.318（φ_κ(q)^{−8}，p^{(8)}_κ 的旁证）"
     note: |
       L1（E3/E5/E7/§9.3）。设定 (H1)–(H6) 的记号语境。
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.7**, p.310（'Assume p ≠ 0: the above complex has zero cohomology. Thus C_rel(p,0) = D_R F(p,0).'）及其在本证明里的两处点名使用：p.313 式 (6)「Theorem 2.7 implies that dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)」、p.315 Lemma 2.14.3「By Theorem 2.7 …」「But Theorem 2.7 implies that 2 dim C_rel(p,0) = dim ℱ(p,0) = 32(N(s)+M(s))」；**§2, p.311，Definition 2.11 正上方的过渡句**（'Now using Theorem 2.7 and Proposition 2.10, we have the following well-defined non-degenerate hermitian form on C_rel(p,κ).'）与承载者 **Proposition 2.10(i)(iii)**, p.311；**Definition 2.12(i)**, pp.311–312（非退化是 sign 有定义的前提）"
+    note: |
+      L1 逐字（extraction §10.1 / §10.2 / §10.4）。★ **本条是本轮新加两条边的来源**（curator 2026-09-11，lz-thm27）：
+      worldsheet.superstring-ramond-zero-mode-cohomology-trivial（= Theorem 2.7，κ=0 支的计数）与
+      worldsheet.superstring-relative-complex-nondegenerate-form（= 过渡句 + Prop 2.10，供给目标卡 (H4)）。
+      两条边的 inferred 判断与其保留意见写在各自的 depends_on note 里。
 summary: |
   **LZ 的论证（本图未逐字转录，按 E5/§9.2/auditor 转录的骨架记）**：
 
@@ -143,13 +175,14 @@ summary: |
   按 min 规则封顶。**这不是 LZ 的论证有缺口**，而是本图把「LZ 的对象 = Polchinski 的对象」
   经那些卡记账的后果，与消灭卡、维数卡同口径。
 gaps:
+  - "**（2026-09-11 已关闭）LZ Theorem 2.7 无卡、无边**（reviewer-batch29 原文）：Prop 2.14 的证明两次显式引用它（§10.4）。**已建卡 worldsheet.superstring-ramond-zero-mode-cohomology-trivial（推导 --via-lian-zuckerman-1989，own status rigorous，证明两句逐字、显式收缩同伦 ε = d¹₀/p¹），本推导已加一条非 inferred 边。** 剩余的（已转到新卡的 gaps，不在此重复记账）：LZ 未印出 {D_R|_ℱ, d¹₀/p¹} = 1 的计算、未写 ε 把 ℱ 映到 ℱ、以及 p 的空间分量全为零时 'say p¹ ≠ 0' 的写法要改取 d^D₀/p^D。"
   - "**（2026-09-11 已关闭大半）陈述与证明的逐字状态**：researcher 第四轮页图（extraction §10.3/§10.4，期刊 pp.311–317 七页）已逐字核 Prop 2.14 的陈述（**与 E5 转录一致，无更正**）并转录证明的引用清单与分步骤（见 summary）。**仍未转录的**：Lemma 2.14.1–2.14.5 各自证明的逐行细节、(5)(8)(19) 三个迹计算的中间步骤、Case 2 里 Ψ^i_± 本征基的构造式（§10.5 标为「需复核」：p.315 的 Ψ^i_± = (1/√2)(m^{−1}Ψ^i_+ ± √−1 Ψ^i_−) 一行里 1/m 的位置与 δ_{ij} 前的符号）。"
-  - "**sign / char 有定义所需的前提，Prop 2.14(ii) 的语句里一条都没印**：LZ 把它们全放在 **Definition 2.12(i), pp.311–312**（逐字：'with a non-degenerate hermitian form ⟨,⟩_T … Suppose dim T^n < +∞ for all n and T^n = 0 for all large enough positive n'）。三条之中 (a) 非退化性现有来源（p.311 过渡句 + Prop 2.10(i)(iii)，见目标卡 sources 第四条）；**(b)「每层有限维」与 (c)「次数上方有界」在本图只作为目标卡 (H3) 的断言存在**（「固定 p 下每个 C^n_rel 有限维、只有有限多个 n 非零」），LZ 没有为 C_rel(p,κ) 逐条验证，本图也未补证。⇒ 本卡等式右端有定义这件事，依赖一条未被任一方证明的有限性。"
+  - "**sign / char 有定义所需的前提，Prop 2.14(ii) 的语句里一条都没印**：LZ 把它们全放在 **Definition 2.12(i), pp.311–312**（逐字：'with a non-degenerate hermitian form ⟨,⟩_T … Suppose dim T^n < +∞ for all n and T^n = 0 for all large enough positive n'）。三条之中 **(a) 非退化性（2026-09-11 已关闭）**：已建卡 worldsheet.superstring-relative-complex-nondegenerate-form（来源 p.311 过渡句 + Prop 2.10(i)(iii)，own status rigorous），本推导已加一条非 inferred 边供给目标卡 (H4)；**仍未关闭的是 (b)「每层有限维」与 (c)「次数上方有界」**——在本图只作为目标卡 (H3) 的断言存在（「固定 p 下每个 C^n_rel 有限维、只有有限多个 n 非零」），LZ 没有为 C_rel(p,κ) 逐条验证，本图也未补证。⇒ 本卡等式右端有定义这件事，仍依赖一条未被任一方证明的有限性。"
   - "**char 与 ch_q 是两种对象，Definition 2.12 同段并列**：(i) 的 ch_q T = Σ dim T^{−n} q^n 是母函数（不带符号），(ii) 的 char C = Σ_k (−1)^k dim C^k 是**交错和**。Prop 2.14(ii) 用的是交错和那个。本图目标卡 (H6) 写对了，但 Prop 2.18 的 ch_q（旁证 p^{(8)}_κ）是另一种，两者不可互推——**p^{(8)}_κ 与 φ_κ 的关系由 Definition 2.13（p.312，引 [10] = Kac–Wakimoto）给出，本图仍未把 Def 2.13 立卡或写进任何陈述**（§10.2 提醒：φ_{1/2}(q) = φ(q^{1/2})φ(q²)φ(q)^{−1} 的三个自变量字号极小，写进 statement 前须 auditor 复核）。"
   - "**p^{(8)}_κ 的定义本图未取得（L0）**：右端是符号表达式，不可数值化；旁证只有 Prop 2.18 的 φ_κ(q)^{−8}。与维数卡 gaps 第三条同一缺口。"
   - "**dim R(p,0) 的数值未核**：D = 10 时读成 32（Dirac 旋量）使 ½·32 = 16 与 auditor 转录的 'Case 1 sign C_rel(p,0) = 16' 一致，但这是本图算术，不是 LZ 的字。"
   - "**「char = sign」的机制只有骨架**：它等价于「负惯性指数的交错和为零」。2026-09-11 已取得机制的**形状**——两边都被化成同一个迹 const term Tr⟨q^K(A)⟩（char 侧带 (−1)^{U+κ}，sign 侧不带），靠的是 Lemma 2.14.1 的「典范配对性质」使 sign 可写成迹（见 summary (d)(e)）；**但两个迹为何相等的逐行计算本图仍无转录**。目标卡「不断言 (f)」维持。"
-  - "**⟨,⟩_rel 的 RNS 版本在本图无卡**：本推导对 worldsheet.fock-indefinite-form 拉的是 inferred 边（玻色卡），LZ 的 Definition 1.3（含 d 模与旋量因子上由 p·d₀ 定义的型）与 Definition 2.11 都没有本图对应卡。号差那一半的对象接口因此比特征标那一半弱。"
+  - "**（2026-09-11 部分关闭）⟨,⟩_rel 的 RNS 版本**：**Definition 2.11 的 ⟨,⟩_rel 现已有卡** worldsheet.superstring-relative-complex-nondegenerate-form（良定义 + 非退化，本推导已加非 inferred 边）。**仍未关闭的是它下面一层**：LZ 的 **Definition 1.3**（全复形上的 ⟨,⟩_C，含 d 模与旋量因子 R(p,0) 上由 p·d₀ 定义的型）在本图**仍无卡**，本推导与新卡的推导都只能对 worldsheet.fock-indefinite-form（**玻色**弦的 Fock 型）拉 inferred 边。⇒ 号差那一半的对象接口仍比特征标那一半弱。"
   - "**Proposition 2.14(i)（Q* = Q）未立卡**：它是「sign H^n 有定义」的背景条件，但不进本卡；Cor 2.15 的证明也一字未引它。"
   - "**R 扇区零模表示的依赖未检验**：公式绑定在 T₀ ⊕ T₁ 上，换成 FOK / Henneaux 的 C[γ₀] 后右端是否不变本图未核（目标卡「不断言 (d)」）。"
 notes: |
@@ -167,11 +200,17 @@ notes: |
   的边（已核，depends_on 里没有这条），方向是 **Cor 2.15 = Thm 2.4 + Prop 2.14(ii)**，两者在图上互相独立。
   若将来有人据「LZ 同一节」把消灭卡挂进本推导，那是错的。
 
-  【未建的两条边，及其理由】(1) **Theorem 2.7**（R 扇区 D_R 上同调平凡 / 收缩同伦 ε）被证明明写引用两次，
-  但**本图没有对应卡**（search「Theorem 2.7」只命中 FGZ 玻色侧的 bosonic-relative-cohomology-* 两卡，
-  那是 FGZ 的 Thm 2.7，与 LZ 的同号不同物）。⇒ 记在 summary 与本注，不建边；立卡是后续工作。
-  (2) **Prop 1.7(v)（{Q, D_R} = 0）** 在 Prop 2.14(i) 的证明里以 'Qv = −D_R Q v̂' 的形式被用，
-  **原文此处没有点名 1.7(v)**；若将来建边须标 `inferred: true`（§10.4 明记）。本卡不断言 (i)，故本轮不建。
+  【★ 2026-09-11 更新（curator, lz-thm27）：原「未建的两条边」之 (1) 已建】
+  **Theorem 2.7**（R 扇区 D_R 上同调平凡 / 收缩同伦 ε）被本证明明写引用两次（p.313 式 (6)、
+  p.315 Lemma 2.14.3），此前因本图无卡而只记在 summary/notes；现已立卡
+  **worldsheet.superstring-ramond-zero-mode-cohomology-trivial**，本推导已加**非 inferred** 边。
+  同批新增的还有 **worldsheet.superstring-relative-complex-nondegenerate-form**（p.311 过渡句 +
+  Prop 2.10(i)(iii)），供给目标卡 (H4)，同样非 inferred（两种读法的差别见该边的 note）。
+  ⚠ 查重提醒仍然有效：search「Theorem 2.7」会命中 FGZ 玻色侧的 bosonic-relative-cohomology-* 两卡，
+  那是 **FGZ 1986 的 Thm 2.7**，与 LZ 1989 的同号不同物，不得互引。
+  **仍未建的那条**：(2) **Prop 1.7(v)（{Q, D_R} = 0）** 在 Prop 2.14(i) 的证明里以 'Qv = −D_R Q v̂'
+  的形式被用，**原文此处没有点名 1.7(v)**；若将来建边须标 `inferred: true`（§10.4 明记）。
+  本卡不断言 (i)，故仍不建。
 
   【为什么不挂 worldsheet.superstring-brst-charge】Q 只在 2.14(**i**)（Q* = Q）出现；
   (ii) 的 char 与 sign 都是复形上的量，与 Q 无关。R 扇区 ⟨,⟩_rel 定义里的 D_R = 总 G₀

@@ -56,6 +56,48 @@ depends_on:
       「from one side of the type II string」的迹。**三者的关系原书在 §10.8 不厘清**。
       ⇒ 正解：建一张「时空超对称 ⇒ 每个质量级上玻色态数 = 费米态数 ⇒ 带 (−1)^F 的迹为零」的卡，
       届时本边改指它。
+      ★★【2026-09-11 更新（curator theta-cards，依 researcher-theta 新取的 §10.7 p.35 页图）】
+      **上面理由 (i) 只对了一半，必须更正**：原书在 **§10.7 p.35** 是写了这条推理的第一段的，逐字：
+      '**The type II theories have spacetime supersymmetry. This implies equal numbers of bosons and
+      fermions at each mass level, and so `Z_{T₂}` should *vanish* in these theories by cancellation
+      between bosons and fermions. Indeed it does, as a consequence of `Z^1_1 = 0` and the
+      "abstruse identity" of Jacobi,** (10.7.16)'。
+      ⇒ 「超对称 ⇒ 每级玻色数 = 费米数 ⇒ 迹相消」这一串**原书写出来了**（只是没有论证，
+        且对象是 **Z_{T₂}**，不是本卡的三个无取向拓扑）。
+      ⇒ **本边仍标 inferred**，但理由收窄为**只剩 (ii) 的对象错配**：
+        本图的 worldsheet.type-ii-spacetime-supersymmetry 讲的是引力微子与局域时空超对称，
+        **不断言**「每个质量级上玻色态数 = 费米态数」这一条——那正是原书用到的那一句。
+      ⇒ 待建卡的内容因此比原先写的更精确：**「type II 的时空超对称 ⇒ 每个质量级上玻色态数 =
+        费米态数」**（原书 p.35 逐字有，零论证），建成后本边改指它并可去 inferred。
+  - id: math.jacobi-abstruse-identity
+    inferred: true
+    note: |
+      供给**本推导第 1 步的第一条输入**：Jacobi 的 "abstruse identity"。
+      原书 §10.7 p.35 逐字把它列为 Z_{T₂} 消没的两条理由之一（见上一条 note 引的整句），
+      并在 (10.7.16) 印出 **Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0**。
+      ⚠⚠ **标 inferred，理由是记号形式不同，且换算原书不写**（researcher 的硬裁定，
+      literature/extractions/polchinski-1998-v2.md **§5.4 要点 3** 逐字）：
+        『(10.7.16) 与 Vol.1 (7.2.41) 是同一条恒等式的两种写法，**但不是同一个式子**：
+          (10.7.16) 的 `Z^α_β` 按 (10.7.7c) 等于 `ϑ[α/2;β/2]/η`，所以
+          (10.7.16) = `η^{−4}×`[(7.2.41) 的三项]。**这一步换算原书没写** ⇒ 边要标 `inferred`。』
+      而目标依赖卡 math.jacobi-abstruse-identity 断言的是 **ϑ 记号形式 (7.2.41)**
+      （它的「不断言 (a)」明确把迹记号形式排除在外）。
+      ⇒ 换算还需 η ≠ 0（math.dedekind-eta-nonvanishing，formalized）与 (10.7.7c) 的识别
+        （挂在 worldsheet.modular-invariance-requires-eight-transverse-fermions 上，physical-argument）。
+      ⇒ **去 inferred 的正解**：建 worldsheet.jacobi-abstruse-identity-trace-form（(10.7.16)），
+        见 math.jacobi-abstruse-identity 的 notes「待建的相邻卡」。
+      ★ 该依赖卡 own = effective = **rigorous**（Whittaker–Watson §21.2 Corollary，带完整证明），
+        故它**不**压低本推导；本推导的 physical-argument 完全来自物理侧的三条理由（见 summary）。
+  - id: worldsheet.ramond-trace-with-fermion-number-vanishes
+    note: |
+      供给**本推导第 1 步的第二条输入**：**Z¹₁ = 0**。
+      **非 inferred**：原书 §10.7 **p.35** 逐字把它与 abstruse identity 并列为 Z_{T₂} 消没的理由
+      （'as a consequence of `Z^1_1 = 0` and the "abstruse identity" of Jacobi'），
+      而该依赖卡断言的就是 Z¹₁(τ) = 0 本身，记号与 (10.7.8d) 逐字同一。
+      ⚠ **必须连带读走该卡 statement 里那条限定**：即便 Z¹₁ = 0，原书仍**故意**为它保留一条
+      形式模变换律，因为插入顶点算子后 α = β = 1 的路径积分不再为零（p.34/p.35 逐字）。
+      ⇒ 这与本推导 summary 已有的「反方向告诫」是同一件事的两面。
+      ★ 该依赖卡 own = effective = physical-argument（原书给理由但不展开），与本推导同级，不额外降级。
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.8, p. 38，逐字：'**We know from the previous section that the total fermionic partition function vanishes by supersymmetry, so that Z_{C₂,1} = −Z_{C₂,0};** we concentrate then on Z_{C₂,0}.'"
@@ -81,10 +123,40 @@ sources:
     loc: "§10.7, eq. **(10.7.16)**（Jacobi 的 'abstruse identity'：Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0）与 (10.7.8d)（Z¹₁ = Tr_R[exp(πiF)q^H]），pp. 34–35"
     note: |
       L1，抽取记录 literature/extractions/polchinski-1998-v2.md **#E47**。
-      ★★ **这是本推导第 1 步真正用到的两条事实**，而**本图对两者都没有节点**（gaps 第一条）。
-      ⚠ 原书把 (10.7.16) 称作 Jacobi 的 'abstruse identity'，**不给证明也不给文献**。
-      ⚠ **Z¹₁ = 0 的理由原书在此处也不写**（标准理由是 R 扇区带 (−1)^F 的迹上有费米零模，
-      本图无节点）。
+      ★★ **这是本推导第 1 步真正用到的两条事实**；建卡时**本图对两者都没有节点**（gaps 第一条）。
+      ★★★【2026-09-11 更新（curator theta-cards）：两条都已建卡，本条随之更正】
+      · (10.7.16) ⇒ **math.jacobi-abstruse-identity**（ϑ 记号形式 (7.2.41)，own = **rigorous**，
+        来源 Whittaker–Watson §21.2 Corollary，带完整证明）。本推导已加 depends_on 边（标 inferred，
+        理由见该边 note：ϑ ↔ Z 两种记号的换算原书不写）。
+      · Z¹₁ = 0 ⇒ **worldsheet.ramond-trace-with-fermion-number-vanishes**（own = physical-argument）。
+        本推导已加 depends_on 边（**非 inferred**）。
+      ⚠⚠ **本条此前写的「Z¹₁ = 0 的理由原书在此处也不写（标准理由是 R 扇区带 (−1)^F 的迹上有
+      费米零模，本图无节点）」只对了一半，2026-09-11 更正**：researcher-theta 取到 §10.7 **p.34**
+      页图，原书**写了**理由，逐字：'Note that `Z^1_1` actually vanishes **due to cancellation
+      between the two R sector ground states**, but we have assigned a formal transformation law
+      for a reason to be explained below.'（**无式号**，在 (10.7.14) 下方）。
+      即：原书给的理由是**两个 R 扇区基态相消**，**既不是**「(−1)^F 的迹上有费米零模」这个常见说法，
+      **更不是** Vol.1 (7.2.42) 的 ϑ₁₁(0,τ) = 0（§10.7 全节不把两者联系起来）。
+      ⚠ 原书**不展开**该理由（不给 ± 配平的计数、不引文献）⇒ 新卡封顶 physical-argument。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, **p. 35**（(10.7.16) 所在段），逐字：'**The type II theories have spacetime supersymmetry. This implies equal numbers of bosons and fermions at each mass level, and so `Z_{T₂}` should *vanish* in these theories by cancellation between bosons and fermions. Indeed it does, as a consequence of `Z^1_1 = 0` and the ‘abstruse identity’ of Jacobi,**' 随后即 (10.7.16)；该段末逐字 '**The same cancellation occurs in the open and unoriented theories.**'"
+    note: |
+      **L1 页图逐字**，抽取记录 literature/extractions/polchinski-1998-v2.md **§5.4**
+      （researcher-theta，2026-09-11；Cambridge Books Online ch.10 PDF，PDF 页 = 书页）。
+      ★★★ **本条是本批次新增的、对本推导最重要的一条来源**，它有三个作用：
+      (1) **它把本推导两条新边的「非语境性」坐实**：原书自己把 **Z¹₁ = 0** 与 **abstruse identity**
+          并列为消没的**理由**（researcher §5.4 要点 1 逐字：「**原书的逻辑方向是「超对称 ⇒ 应当消没；
+          确实消没，因为 `Z^1_1 = 0` 与 (10.7.16)」**——(10.7.16) 与 `Z^1_1=0` 是**理由**，
+          `Z_{T₂} = 0` 是**结论**。建卡时别反过来。」）。
+      (2) **它写出了「超对称 ⇒ 每级玻色数 = 费米数 ⇒ 相消」这一串**——即本推导此前登记为
+          「原书不写、本图无节点」的那一步，原书**是写了的**（只是零论证）。
+          ⇒ 指向 worldsheet.type-ii-spacetime-supersymmetry 的那条边的 inferred 理由已收窄，
+            见该边 note 的 2026-09-11 更新。
+      (3) 末句 'The same cancellation occurs in the **open and unoriented** theories.' 是原书把同一条
+          结论推广到本卡对象（三个无取向拓扑）的**唯一一句**——⚠ 它同样**不给论证**。
+      ⚠⚠ **但对象仍然不是本卡的对象**：p.35 这一整段讲的是 **Z_{T₂}（环面）**，
+      本卡讲的是三个无取向拓扑上的 Z_{C₂,1} = −Z_{C₂,0} 等（目标卡「不断言 (d)」把 Z_{T₂} 排除在外）。
+      桥只有末句那一句概括。⇒ 见 gaps 第四条。
 summary: |
   **原书实际做的事（两句话，都可逐字核对）**
 
@@ -109,28 +181,62 @@ summary: |
   (1) ★ **原书给的理由是一句无指向的归因**：'by supersymmetry'，无式号、无论证
       （目标卡「不断言 (a)」）。而 §10.7 实际写下的是两条 θ 函数事实——
       **本书从不把这两种说法打通**。
-  (2) ★ **那两条 θ 函数事实在本图都没有节点**：(10.7.16) 被原书称作 'abstruse identity'
-      而不给证明不给文献；Z¹₁ = 0 的理由原书在此处也不写。⇒ 见 gaps 第一条。
+  (2) ★ **那两条 θ 函数事实此前在本图都没有节点**：(10.7.16) 被原书称作 'abstruse identity'
+      而不给证明不给文献；Z¹₁ = 0 的理由原书在 p.34 只给一句不展开。⇒ 见 gaps 第一条。
+      **【2026-09-11 更新】两张卡已建出并已接边**（math.jacobi-abstruse-identity，own = **rigorous**，
+      Whittaker–Watson §21.2 Corollary 带完整证明；worldsheet.ramond-trace-with-fermion-number-vanishes，
+      own = physical-argument）。⇒ 本条作为「压低本推导的理由」**已失效**，
+      但本推导的 status **不变**——因为 (1)(3)(4) 三条都还在，这正是下面那句预言的情形。
   (3) **「总和为零 ⇒ 逐项反号」这一步原书跳过**（见上），且三个面的扇区判据互不相同。
   (4) 整个对象是单圈路径积分 / 迹的形式计算，上游三张振幅卡与 §10.7 那张卡
       **全部是 physical-argument**（§10.7 那张卡的封顶理由是原书逐字的
       'We make the guess, correctly it will turn out'）。
   ⇒ 即使把 (10.7.16) 建成一张 rigorous 的数学卡，(1)(3)(4) 仍在，本推导不会自动升级。
 gaps:
-  - "**本推导真正用到的两条事实在本图都没有节点（主缺口）**：
-     · **(10.7.16)** Jacobi 的 'abstruse identity' Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0
-       ——原书给出式子与名字，**不给证明、不给文献引用**（§10.8/§10.7 全章体例如此）；
-     · **Z¹₁ = 0** ——原书在 §10.7 用到它（抽取记录 #E47 备注第 3 点逐字：
-       『type II 的 Z_{T₂} = 0 依赖 Jacobi 恒等式 (10.7.16) **与 Z¹₁ = 0**』），
-       但**不写理由**（标准理由是 R 扇区带 (−1)^F 的迹上有费米零模）。
-     本图的 worldsheet.modular-invariance-requires-eight-transverse-fermions 在 notes 里
-     **明文把两者排除在外**，逐字：『(10.7.15) 的 type 0 对角模不变量、**(10.7.16) 的 Jacobi
-     「abstruse identity」**Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0、以及 type II 的 Z_{T₂} = 0，本轮不建节点。』
-     ⇒ **待建（两条都是纯数学/自由场论，可做成较硬的卡）**：
-       · math.jacobi-abstruse-identity（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0，θ 函数的经典恒等式；
-         注意本图连 θ 函数卡都还没有，见 math.dedekind-eta-function 的『不断言』）；
-       · worldsheet.ramond-trace-with-fermion-number-vanishes（Z¹₁ = 0）。
-     在那之前，本推导第 1 步的两个输入都是**从原书导入的**。"
+  - "**【2026-09-11 已关闭，保留作历史与残余记账（curator theta-cards）】本推导第 1 步用到的两条事实
+     此前在本图都没有节点**：(10.7.16) 的 Jacobi 'abstruse identity' 与 Z¹₁ = 0。
+     本轮两张卡都已建出，本推导也都加了 depends_on 边：
+       · **math.jacobi-abstruse-identity**（ϑ 记号形式 (7.2.41)，own = effective = **rigorous**，
+         唯一推导 --via-whittaker-watson，来源 **Whittaker–Watson (1920, 3rd ed.) §21.2 Corollary**，
+         **带完整证明**；bib key `whittaker-watson-1920`，researcher-theta 2026-09-11 登记，
+         抽取记录 math-sources.md §56）；
+       · **worldsheet.ramond-trace-with-fermion-number-vanishes**（Z¹₁ = 0，own = physical-argument，
+         来源是 §10.7 **p.34 的无式号句**，原书给理由『两个 R 扇区基态相消』但不展开）。
+     ⚠ **残余（这是本条现在真正的内容）**：指向 abstruse identity 的那条边**仍标 inferred**，
+     因为本图那张卡断言的是 **ϑ 记号形式**，而本推导用的是 **(10.7.16) 的迹记号形式**，
+     两者相差 η^{−4} 且**这一步换算原书从不写**（researcher 的硬裁定，polchinski-1998-v2.md §5.4 要点 3）。
+     ⇒ **去 inferred 的正解**：建 **worldsheet.jacobi-abstruse-identity-trace-form**
+     （= 本图 ϑ 卡 ÷ η⁴，输入还需 math.dedekind-eta-nonvanishing 与 (10.7.7c) 的识别；
+      ⚠ 那张卡**不会是 rigorous**，因为 (10.7.7c) 是自由场迹的形式计算）。
+     ⚠ 另一处残余：**math.jacobi-theta-functions 里没有 (7.2.42) ϑ₁₁(0,τ) = 0 的节点**
+     （该卡「不断言 (c)」明写排除，notes 建议补建 `math.theta-11-vanishes-at-origin`）；
+     它只影响 Z¹₁ = 0 的**第二条**（非原书的）路线，不影响本推导。
+     ⚠⚠ **注意：把这两条从「无节点」变成「有节点」并不提升本推导的状态**——本推导 summary
+     早就写明『即使把 (10.7.16) 建成一张 rigorous 的数学卡，(1)(3)(4) 仍在，本推导不会自动升级』。
+     现在 (10.7.16) 侧确实已是 rigorous，而本推导仍是 physical-argument，**正如所料**。"
+  - "**⚠⚠ 目标卡断言 (1) 的等式 `Z_ψ^±(τ) = 0` 在原书里从来没有被写出来（2026-09-11 新登记）**：
+     researcher-theta 复核 §10.7 全节后的裁定逐字（polchinski-1998-v2.md **§5.2(b)**）：
+       『**任务书里问的「(10.7.9)：`Z_ψ^± = 0`？」在原书里不成立。** (10.7.9) 是 `Z_ψ^±` 的**定义式**
+         （`∓` 号把 IIB/IIA 两种情形写在一条里）。**§10.7 全节没有把 `Z_ψ^± = 0` 写成一条显示等式**；
+         原书说的是 `Z_{T₂}` 应当消没 … ⇒ 若图上要建「总费米配分函数消没」这条陈述，
+         **它是抽取者/curator 由 (10.7.9) + (10.7.16) + `Z^1_1 = 0` 合成的推论**，不是原书的显式陈述，
+         `sources[].loc` 只能写「(10.7.9) 与 (10.7.16) 与 p.34 的无式号句」，
+         并在 note 里写明「**原书未写出该等式**」。』
+     ⚠ **目标卡的 statement 本身没有把等式归给 (10.7.9)**（它在「设定」段正确地把 (10.7.9) 用作
+     Z_ψ^± 的**定义**，把等式归给 §10.8 p.38 的逐字句 'the total fermionic partition function
+     vanishes by supersymmetry'），故**不构成换代理由**；但「由那句英文到等式 Z_ψ^± = 0」
+     这一步识别（把 'the total fermionic partition function' 认作 Z_ψ^±，并把 IIB/IIA 的 ± 合并）
+     **是本图做的**，原书不写。⇒ 本条把它登记为缺口。
+     ⚠ 同批 **reviewer-batch28** 另指出目标卡 **title** 过强（「每个世界面拓扑上 R–R 项 = −NS–NS 项」；
+     原书 p.42 的每拓扑句只谈**发散**，全项等式只对 C₂、K₂ 成立，Möbius 的 Z_{M₂,0} 原书从不写
+     ——目标卡 statement 断言 (2) 与「不断言 (c)」已正确处理，**只有 title 过强**）。
+     ⇒ **两条合起来构成一次 v2 换代的理由**（新 title 按 reviewer 的措辞：
+       「C₂、K₂ 上 R–R 项 = −NS–NS 项；每个拓扑上 NS–NS 与 R–R 发散反号」，
+       并在 statement 增一条「不断言 `Z_ψ^± = 0` 是原书写出的等式」）。
+     ⚠⚠ **本轮未做换代**：换代必须同时把
+     worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的边改指新卡，
+     而该文件在 **claim #399（batch27-fix）**名下，且本轮任务书明令不得触碰该批文件。
+     **已 agora_send 通报 lead，请在 batch27 落地后单独派工。**"
   - "**『由超对称』这条归因在图上没有落点**：depends_on 里那条指向
      worldsheet.type-ii-spacetime-supersymmetry 的边**标 inferred**，因为那张卡讲的是
      引力微子与局域时空超对称，**不是**配分函数为零；由前者到后者需要
@@ -176,13 +282,33 @@ notes: |
   建立论证方向上的依赖（本推导对那张卡的边**只取记号**，note 已写明）。
 
   【升级路径（给 lead 与后续 researcher）】本推导有两条互相独立的可做项，做完能实质提高强度：
-    1. **建 math.jacobi-abstruse-identity**（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0）与 **Z¹₁ = 0** 两张卡
-       ——前者是经典 θ 函数恒等式，Mathlib 方向上也许有望；注意本图目前**连 θ 函数卡都没有**
-       （math.dedekind-eta-function 的「不断言」逐字：「本图未建 θ 函数卡」）。
+    1. ~~**建 math.jacobi-abstruse-identity**（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0）与 **Z¹₁ = 0** 两张卡~~
+       **——2026-09-11 已做（curator theta-cards）**。同批还建了 **math.jacobi-theta-functions**
+       （θ 函数的级数定义，rigorous）与 **math.jacobi-triple-product**（rigorous）。
+       ⚠ 此前那句「注意本图目前**连 θ 函数卡都没有**」**已作废**。
+       ★ abstruse identity 侧现在是 **rigorous**（Whittaker–Watson (1920, 3rd ed.) **§21.2 Corollary**，
+         **带完整证明**；bib `whittaker-watson-1920`，researcher-theta 2026-09-11 登记，
+         抽取记录 math-sources.md §56）。
+       **剩余动作**：建 worldsheet.jacobi-abstruse-identity-trace-form（(10.7.16) 的迹记号形式），
+       本推导对它的边才能去 inferred（见 gaps 第一条）。
     2. **建「时空超对称 ⇒ 玻色/费米态逐级配平 ⇒ 带 (−1)^F 的迹为零」的卡**，
        把那条 inferred 的归因边落实。
-  ⚠ 两条都做完，本推导仍受 gaps 第四条（「总和为零 ⇒ 逐项反号」原书跳过）与上游三张
+       ★★ **2026-09-11 更新：这一条现在有了逐字来源**——原书 **§10.7 p.35** 写着
+       'The type II theories have spacetime supersymmetry. **This implies equal numbers of bosons
+       and fermions at each mass level**, and so `Z_{T₂}` should vanish …'（**零论证**）。
+       ⇒ 新卡的陈述就按这一句写，own 只能到 physical-argument。
+  ⚠ 两条都做完，本推导仍受 gaps「总和为零 ⇒ 逐项反号原书跳过」与上游三张
   physical-argument 振幅卡的限制，**不会自动升到 rigorous**。
+  ★ **第 1 条做完后的实测**：本推导 status 果然**没有**变化，与这句预言一致。
+
+  ⚠⚠【2026-09-11 新登记的两条关于**目标卡本身**的问题（不由本推导承担，交 lead）】
+    · **目标卡断言 (1) 的等式 Z_ψ^± = 0 原书从不写出**（researcher-theta，polchinski-1998-v2.md §5.2(b)）；
+    · **目标卡 title 过强**（reviewer-batch28：原书 p.42 的每拓扑句只谈**发散**，
+      全项等式只对 C₂、K₂ 成立；statement 本身正确，只有 title 越界）。
+  两条合起来构成一次 **v2 换代**的理由；**本轮未做**，因为换代要改
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的边，
+  而该文件在 **claim #399（batch27-fix）**名下、且本轮任务书明令不得触碰该批文件。
+  详见 gaps 第二条；已 agora_send 通报 lead。
 
   按抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**（p.38 那句逐字）、
   **#E68**（脚注 7）、**#E69**（Klein 瓶那句）、**#E72**（p.42 收尾段）、

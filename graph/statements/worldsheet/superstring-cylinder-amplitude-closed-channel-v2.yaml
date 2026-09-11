@@ -173,6 +173,19 @@ sources:
       ⚠ 只借迹的**形式**，不借那张卡的"8 的倍数"结论。
 tags: [superstring, type-i, cylinder-amplitude, one-loop, ns-ns, closed-channel]
 notes: |
+  ⚠⚠【三个面的扇区判据各不相同，不得互相套用（curator，2026-09-11，batch27-fix；
+  reviewer-batch27 指出本卡缺这句，另外两张同族卡都有）】
+  · **圆柱（本卡，断言 (2)）**：按**迹里是否出现 exp(πiF)** 分——不出现 ⇒ ψ^μ 在 σ² 方向
+    反周期 ⇒ **NS–NS** 交换（Z_{C₂,0}）；出现 ⇒ 周期 ⇒ **R–R** 交换（Z_{C₂,1}）。
+  · **Klein 瓶**（worldsheet.superstring-klein-bottle-amplitude-closed-channel）：按
+    **在 σ² → σ² + 4πt 下是否反周期**分——反周期 ⇒ NS–NS（权重 Ω exp(πiF) 或 Ω exp(πiF̃)
+    的两项，且两者相等）。
+  · **Möbius 带**（worldsheet.superstring-mobius-strip-amplitude-closed-channel-v2，断言 (1)）：
+    按**迹的 R 扇区 / NS 扇区**分——**R 扇区 ⇒ R–R 交换**，NS 扇区 ⇒ NS–NS。
+  ⚠⚠ 抽取记录在 #E71 特别标注「**注意这与圆柱相反**」：圆柱上「迹里有 exp(πiF)」对应 R–R，
+  Möbius 上是「迹的 R 扇区」对应 R–R。**三条判据是三件不同的事，任何一条都不得搬到别的面上。**
+  （本条只是 notes 里的交叉警示，**不改本卡的 statement**——断言 (2) 的内容本来就正确。）
+
   ★★★【v2 换代的两处实质改动（curator，2026-09-11，small-backlog-11；依 reviewer-batch23 与
   researcher 第二轮 polchinski-1998-v2-sec10-8.md §6.4）】
   旧卡 worldsheet.superstring-cylinder-amplitude-closed-channel 有两处陈述级问题，

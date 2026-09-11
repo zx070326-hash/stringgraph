@@ -83,6 +83,13 @@ sources:
       ⚠ 本推导只用 Prop 2.6 的**第一部分**；第二部分（横向空间 T）FGZ 逐字派给了
       "explicitly construct representatives of the cohomology classes"（§9.5），
       并经 Kac 行列式（FGZ refs 10, 11）——那条链本图没有，但**本推导不需要它**。
+      ★ **〔2026-09-12 auditor 裁定〕上面 loc 里逐字保留的 `ch_q T = q^{p·p/2}φ(q)^{D−2}`
+      是原刊的排印错误，正确的是 `φ(q)^{−(D−2)}`**（page-check-rulings-2026-09-12.md §2.3，
+      摘要在 brst-cohomology-sources.md §9.12；三条内证见那里）。
+      **本推导不受影响**（只用 (i)）；loc 的逐字引文按引用纪律保留原刊形态。
+      ★ **同一轮的第二条裁定**：Prop 2.6 语句的 `D ≥ 2` 与证明梗概的 `D > 2` **不是排印不一致**，
+      两处各指其物（`D > 2` 是 V(E',p') Verma 分解的前提，`D = 2` 由括注 "or s ≥ 1" 分支覆盖）。
+      ⇒ 引用时 **D ≥ 2 照写**。
   - ref: fgz-1986
     loc: "**Theorem 2.5**, p.8445（绝对复形：H^m_∞(ℒ, 𝖟; V) ≅ H⁰(ℒ, ℒ₀; V) 对 m = ±½，其余为零）；p.8445 全页**不出现 'ghost' 字样**（negative evidence，仅覆盖该页）"
     note: |

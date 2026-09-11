@@ -94,6 +94,18 @@ gaps:
   - |
     **一般交换 Q-代数，无实结构**。(N)(S) 只作为给定数据，其可满足性未证；
     k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内。
+  - |
+    【2026-09-11（lean-wire-13）新增，curator】**本推导本身不需要 (T′) ε·k = 0，
+    但任何把它的结论读成「DDF 态 = 横向振子态」的下游都需要**。
+    formal/StringFormal/NoGhost/LightCone.lean 的 `ddfOp_neg_one_apply_towerVacuum` 逐字表明：
+    A^ε_{−1}|0;k⟩ = α^ε_{−1}|0;k−k_0⟩ 要在 **(T′) ε·k = 0**（偏振与**基点动量**正交）之下才成立，
+    否则右端多出 (ε·k)Φ_1|0;k−k_0⟩；而 worldsheet.ddf-operators-v6 的四条常设假设
+    (η)(N)(S)(T) **不蕴含** (T′)（WitnessInt.lean 的 D = 3 整数标架机检满足四条，
+    `noghost_hypotheses_satisfiable_int`；ε·k = 1 ≠ 0 为一行手算，无 Lean 声明，reviewer-batch30 复核）。
+    本推导的结论只是「A^ε_n 把正模条件保持」，与 (T′) 无关；登记在这里，是因为上面第 2 条 gap
+    （「只断言映入，不断言映满」）的下一步——**识别像空间**——恰恰是 (T′) 进入的地方。
+    完整记账见 worldsheet.ddf-operators-v6 的 notes【本卡缺一条假设的登记】段；
+    把 (T′) 写进前提并做完 N = 1 的卡是 worldsheet.ddf-spans-physical-states-level-one。
 notes: |
   status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
   （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。

@@ -1,0 +1,177 @@
+id: worldsheet.transverse-ddf-fock-gram-matrix--via-lean
+target: worldsheet.transverse-ddf-fock-gram-matrix
+kind: proof
+status: formalized
+depends_on:
+  - id: math.heisenberg-family-gram-matrix
+    inferred: false
+    note: |
+      **本推导的引擎**。那张卡（formalized，lean_decl `StringFormal.gram_of_heisenberg_family`）
+      就是目标卡「(H1)–(H4) ⟹ (1)」的抽象版本：载体任意 R-模、任意交换环。
+      DDFGram.lean 的 `ddf_gram_diagonal` 的**全部内容**就是把它在 DDF 族上实例化
+      （证明体是一行：`gram_of_heisenberg_family (ddfFamily_ccr …) (ddfFamily_adj …)
+      (Fock.towerPairing_towerVacuum_self η) (ddfFamily_ann …) _ d e`）。
+      目标 (2) 的 `linearIndependent_ddfMonomial` 同样是那张卡的 `linearIndependent_heisMonomial`
+      的实例；`ddf_gram_pos` 用它的 `heisNorm_pos`。
+      ★ **目标 (1) 的「任意交换环」那一半只能由这张卡承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`
+      （见 notes (d)）。两张卡合起来才覆盖目标卡面。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **承载塔 T(k;k_0)、塔上的双线性型 ⟨·,·⟩（`Fock.towerPairing`）与层间正交**。
+      目标卡设定里的一切配对都是这个型；`Fock.towerPairing_towerVacuum_self`（⟨0;k|0;k⟩ = 1，
+      即 (H4)）的证明就是把它在第 0 层展开（`towerPairing_single_single` + `pairing_vacuum_vacuum`）。
+      ⚠ 该卡「层间正交是约定不是定理」这条风险原样传到本推导：目标 (3) 末句「也可由塔的层间正交
+      直接读出」即依赖它（而且那句本身未形式化，见 gaps）。
+      ⚠ 该卡是 status: formalized 的定义卡，不压低本推导状态。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **承载 A^ε_n 这个对象**（Lean 侧 `StringFormal.NoGhost.ddfOp`，DDFGram.lean 的 `ddfFamily`
+      逐字是 `fun i n => ddfOp η a b (ε i) hη (hεb i) n`）。目标卡设定里的
+      「{A^i_n} 是塔上的一族 R-线性算子」在本推导的机检链上被取为 DDF 算子。
+      ⚠ 该卡的横向性参数 ε·k_0 = 0 是 `ddfOp` 定义的一部分（它保证模式和局部有限），
+      **但正交归一 ε^i·ε^j = δ^{ij} 不是**，见 notes (b)。
+      ⚠ 该卡是 status: formalized 的定义卡，不压低本推导状态。
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
+    inferred: false
+    note: |
+      **在机检链上供给 (H1)**：`ddfFamily_ccr` 的证明第一步就是 rewrite 该卡的 lean_decl
+      `StringFormal.NoGhost.lie_ddfOp_ddfOp`，它给出 ⁅A^ε_m, A^δ_n⁆ = m (ε·δ) δ_{m+n,0}；
+      第二步才用正交归一 `horth` 把 (ε_i·ε_j) 变成 δ_{ij}。
+      ⚠ **方向说明**：目标卡是条件命题，(H1) 是它的**假设**，本来不需要这条边；
+      之所以建边，是因为本卡的 `formal.lean_decl` 取的是 DDF **实例** `ddf_gram_diagonal`，
+      该实例在机检时确实消耗了这条定理。若将来把 lean_decl 改指抽象版，这条边应删。
+      （目标卡边界 (a) 逐字写着「不断言 (H1)(H2)(H3) 在 DDF 设定下成立」——本边不改变那句话，
+      它记的是 Lean 实例的实际依赖，不是卡面断言。）
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.ddf-operators-adjoint-v2
+    inferred: false
+    note: |
+      **在机检链上供给 (H2)**：`ddfFamily_adj` 逐字等于该卡的 lean_decl
+      `StringFormal.NoGhost.Fock.towerPairing_ddfOp_left`（⟨A^ε_n x, y⟩_T = ⟨x, A^ε_{−n} y⟩_T）。
+      ⚠ 与上一条同样的方向说明：这是实例的机检依赖，不是卡面断言（目标卡边界 (a)）。
+      ★ 记一笔：**(H2) 这条在 DDF 上现在是 formalized 的定理**（v2 卡走 VertexAdjoint.lean），
+      不再是旧 worldsheet.ddf-operators-adjoint 的 physical-argument——这正是本卡能整体升到
+      formalized 的原因之一。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFGram.lean（全文；主声明 StringFormal.NoGhost.ddf_gram_diagonal；rung 定位 §RungGrading/§DDFRung/§FrameRung :: ddfOp_mem_towerRungSubmodule / ddfMonomial_mem_towerRungSubmodule / frameMonomial_mem_towerRungSubmodule / ddf_gram_of_level_ne_of_rung / ddfSpan_eq_iSup_rung）；抽象母定理 formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family；依赖 formal/StringFormal/NoGhost/{DDFAlgebra.lean :: lie_ddfOp_ddfOp, VertexAdjoint.lean :: Fock.towerPairing_ddfOp_left, DDFOperatorAll.lean :: ddfOp_mem_towerPhysSubmodule, LightCone.lean :: TransverseFrame / towerVacuum / ddfSpan / towerVacuum_mem_towerPhysSubmodule / ddfSpan_le_towerPhysSubmodule, Witness.lean :: noghost_transverse_gram_satisfiable}"
+    note: |
+      本仓库，分支 agent/formalizer/noghost-c4（reviewer 在总线消息 1086 通报该分支已并入
+      agent/formalizer/noghost-b 的 7 个提交，是其超集），由 lead 合入 main。
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。
+      **curator 未自行重跑 `lake build` 与 `check-axioms`**：本分支只改 graph/，不含 Lean 改动；
+      按项目纪律，含 formal/ 改动的分支合并前由 lead 跑两者。
+      目标卡逐条对应哪条 Lean 声明，列在目标卡新增的 stringformal-2026 source（不在此重复）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献对应处。**不承载本推导**：教科书不写 Gram 矩阵、不做递推，把它当自由振子的标准事实直接用
+      （目标卡的同名 source 已如此登记，核实等级 L4/L2，式号 L0）。本推导的论证是 Lean 侧的机器证明。
+summary: |
+  本推导是**图侧接线**：目标陈述的三条结论各由 formal/StringFormal/NoGhost/DDFGram.lean 中
+  具名、无 sorry 的 Lean 声明承载（对应表见目标卡的 DDFGram source）。论证结构：
+
+  **第一步：把 A^ε_n 打包成 Heisenberg 族。** `ddfFamily η a b ε hη hεb i n := ddfOp η a b (ε i) … n`，
+  形状正是抽象母定理 `StringFormal.gram_of_heisenberg_family` 需要的 `ι → ℤ → End R M`，
+  载体 M := `TowerFock D R`（= 目标卡的塔 T(k;k_0)）。
+
+  **第二步：四条假设在 DDF 上被逐条证出（而不是假设）。**
+    · (H1) `ddfFamily_ccr` = `lie_ddfOp_ddfOp`（给 m (ε_i·ε_j) δ_{m+n,0}）**＋ 正交归一 `horth`**；
+    · (H2) `ddfFamily_adj` = `Fock.towerPairing_ddfOp_left`；
+    · (H3) `ddfFamily_ann` = `ddfOp_towerVacuum_of_pos`（证明是蓝图预言的一行：
+           n > 0 时 `ddfWindow n towerVacuum = Finset.Icc n 0 = ∅`）；
+    · (H4) `Fock.towerPairing_towerVacuum_self`（⟨0;k|0;k⟩ = 1，把整个 Gram 矩阵的总标度钉死）。
+  「产生算子两两对易」不是第五条假设：`commute_heisCreation_ddfFamily` 由 (H1) 得出，
+  它使 `ddfMonomial d := ∏ (A^{ε_i}_{−n})^{d(i,n)} |0;k⟩` 与因子次序无关（目标卡【被断言的对象】那段）。
+
+  **第三步：目标 (1)。** `ddf_gram_diagonal d e = if d = e then heisNorm R d else 0`，
+  一行实例化母定理；两半 `ddf_gram_of_ne` / `ddf_gram_self`；bundled 版（ι = Fin (D−2)，
+  取 `TransverseFrame`）是 `towerPairing_frameMonomial`。`heisNorm R d = ∏ n^{d(i,n)} d(i,n)!`
+  逐字是目标 (1) 的右端。
+
+  **第四步：目标 (2)。** 三条：
+    · `linearIndependent_ddfMonomial`（[Field K] [CharZero K]）——线性无关；
+    · `ddf_gram_pos`（[PartialOrder] [IsStrictOrderedRing]）——每个 |{d}⟩ 的范数 > 0；
+    · **`ddf_span_pos`**（[Field] [LinearOrder] [IsStrictOrderedRing]）——
+      0 ≠ v ∈ `ddfSpan` ⇒ ⟨v,v⟩ > 0，即目标 (2) 末句那条不等式本身；
+      它经 `towerPairing_linearCombination_frameMonomial`（⟨Σ c_d|d⟩, Σ c_d|d⟩⟩ = Σ c_d² ‖d‖，
+      即目标 (2) 里写出的那个求和式）与 `Finset.sum_pos'` 完成。
+  ★ 「H^⊥(k) 是什么」由 **`ddfSpan_eq_span_range_frameMonomial`** 钉住：LightCone.lean 里按
+  产生算子列表定义的 `ddfSpan` 与按占据函数 d 定义的单项式张成**是同一个子模**。
+  没有这条，(2) 的「⟨·,·⟩ 限制到 H^⊥(k) 上正定」在 Lean 侧读不出来。
+
+  **第五步：目标 (3)。** `ddfLevel d := Σ n·d(i,n)`，`ddf_gram_of_level_ne`：N(d) ≠ N(e) ⇒ 配对为零
+  （由 (1) 加 N(d) ≠ N(e) ⇒ d ≠ e）。**2026-09-11 追记**：末句的层归属现已形式化——
+  `frameMonomial_mem_towerRungSubmodule`（|{d}⟩ ∈ rung −N(d)）与 `ddf_gram_of_level_ne_of_rung`
+  （同一正交性改由层间正交证出，前件更弱，见 notes (e)）；只剩 rung ↔ 振子能级的联动未做（见 gaps）。
+
+  【为什么标 formalized】目标 (1)(2) 与 (3) 的主断言各有具名无 sorry 的 Lean 声明；
+  五条依赖卡 effective 全为 formalized。`--via-oscillator-recursion`（手写递推，rigorous）
+  保留并存，工具取高者。
+gaps:
+  - "**(3) 的末句已关闭（2026-09-11 追记，DDFGram rung 定位合入 main 后）**：原 gap 写「|{d}⟩ 落在塔的第 N(d) 层……没有对应声明」。现在有了：`ddfMonomial_mem_towerRungSubmodule` / `frameMonomial_mem_towerRungSubmodule` 给 |{d}⟩ ∈ towerRungSubmodule(−N(d))（即动量 k − N(d) k_0；塔的层指标取 +j·k_0，故是 **rung −N(d)**），`ddf_gram_of_level_ne_of_rung` 把「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」**改由层间正交**（`towerPairing_eq_zero_of_mem_towerRungSubmodule`）证出，逐字兑现目标 (3) 末句「也可由塔的层间正交直接读出」。`ddfSpan_eq_iSup_rung` 另给 ddfSpan = ⨆_N (ddfSpan ⊓ rung −N)，使 Gram 矩阵成为分块对角。**仍缺**：「rung 与振子能级的联动」——|{d}⟩ ∈ towerBigrade(−N(d), N(d))（即振子能级恰为 N(d)）**未做**；只有 rung 那一半，没有 level 那一半。"
+  - "**目标 (1) 的『任意交换环』由母卡承载，不由本文件承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`（`ddfOp` 的构造需要 1/2 一类的有理数）。完全一般的条件命题是 `StringFormal.gram_of_heisenberg_family`（任意交换环，图上 math.heisenberg-family-gram-matrix）。见 notes (d)。"
+  - "**(H1)–(H4) 在本卡里仍是假设**（目标卡边界 (a)）：Lean 把它们在 DDF 上证出来了，但那是 `ddfFamily_*` 四条定理的内容，不是本卡的断言；本卡的机检链之所以经过它们，只因 lean_decl 取的是 DDF 实例。两种读法的分界写在 notes 与两条 depends_on 的 note 里。"
+  - "**无张成**（Lean 文件头 Mathematical notes 第 4 条 / Gaps 第 1 条）：没有任何声明说 DDF 态穷尽横向物理谱。`ddf_span_pos` + `ddfSpan_le_towerPhysSubmodule` 只给「DDF 扇区是物理子空间里的一个正定子空间」；整条无鬼定理还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（`ddf-spans`，蓝图 §B）。目标卡边界 (b) 同款。"
+  - "**横向标架是输入不是构造**（Lean 文件头 Gaps 第 2 条）：`TransverseFrame η b` 在 ℚ-代数 + D ≥ 3 上由 Witness.lean 的 `witnessTransverseFrame` 造出，但**没有**「每个类光 b 都容许正交归一标架」这条定理；一般环上为假。⇒ 目标卡设定里的 ε^i·ε^j = δ^{ij} 在 Lean 里是 hypothesis + 一个见证，不是定理。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是 noghost-c4 由 lead 合入 main。本分支不含 Lean 改动。"
+notes: |
+  【四条前件收紧 —— 引用本推导前必读（curator，2026-09-11，small-backlog-14 追加项）】
+
+  (a) **抽象母定理的 CCR 与伴随量化到全部 ℤ（含 0），比目标卡的 m, n ∈ Z \ {0} 强。**
+      `gram_of_heisenberg_family` 的 `hccr` / `hadj` 写的是 `∀ (m n : ℤ)`，目标卡 (H1)(H2) 写的是
+      `m, n ∈ Z \ {0}`。DDF 侧不受影响（`lie_ddfOp_ddfOp` 与 `towerPairing_ddfOp_left` 本来就对全部
+      整数模式成立，`ddfFamily_ccr` / `ddfFamily_adj` 照抄），但记账上要诚实：
+      **Lean 的前件比卡更强**。查证结论：**证明体里从未在 n = 0 处使用这两条假设**
+      （产生标号跑 `ι × ℕ+`，湮灭那步的 Leibniz 只用 n > 0），
+      ⇒ 假设**可以放宽到 n ≠ 0 而未放宽**。这不是缺口，是一条未收紧的裕度；
+      若将来有人要把本卡用在「A^i_0 不存在或不满足 CCR」的设定上，需要先做这次放宽。
+
+  (b) **正交归一 ε_i·ε_j = δ_{ij} 是一条真前件，不是横向性的推论。**
+      `lie_ddfOp_ddfOp` 对**任意**一对横向偏振只给 ⁅A^ε_m, A^δ_n⁆ = m (ε·δ) δ_{m+n,0}；
+      把它变成 m δ_{ij} δ_{m+n,0} 的是 `horth`（Lean 文件头逐字："Orthonormality is a real extra
+      hypothesis: without it the DDF Gram matrix is the (constant) transverse Gram matrix tensored
+      with the Heisenberg one, and is diagonal only after diagonalising ε_i · ε_j."）。
+      目标卡把它写在**设定**里（「横向偏振……满足 ε^i·k_0 = 0 **且 ε^i·ε^j = δ^{ij}**」）而不是
+      写进 (H1)–(H4)，两处都对，但读卡时容易滑过去。⇒ **不要**把本卡读成「横向性 ⟹ 对角 Gram」。
+      存在性见 Witness.lean 的 `noghost_transverse_gram_satisfiable`（ℝ 上 D ≥ 3），
+      「D − 2 个横向方向」这件事在此进入；**此处不需要 D = 26**（文件头 Mathematical notes 第 1 条）。
+
+  (c) **「DDF 态是物理态」用质量壳，且截距不自由。**
+      `ddfMonomial_mem_towerPhysSubmodule` 成立的截距是 **a₀ = ½ α_0² = α' k²**（由真空读出，
+      不是独立参数；Witness.lean 的快子归一化 α' k² = 1 才使它等于 1）。
+      ⇒ 目标卡边界 (d)「不使用质量壳条件」**仍然成立**：(1)(2)(3) 确实与 k² 无关，
+      `ddf_gram_diagonal` 的语句里没有 a₀。但**一旦要说「H^⊥(k) 落在物理态空间里」**
+      （目标卡边界 (d) 明说那是下游的事），就必须带上 a₀ = α' k² 这个取值。
+      本推导不断言那件事；记在这里是因为 DDFGram.lean 顺手证了它，容易被下游误当作本卡的一部分。
+
+  (d) **`[Algebra ℚ R]` 只是 `ddfOp` 构造的代价，不是命题的需要。**
+      目标 (1) 说「任意交换环」，而 `ddf_gram_diagonal` 带 `[Algebra ℚ R]`。
+      抽象命题 `gram_of_heisenberg_family` 对**任意交换环**成立（math.heisenberg-family-gram-matrix），
+      ℚ-代数是构造 DDF 算子（顶点算子的指数、1/2 一类系数）才需要的。
+      ⇒ 记账读法：目标卡 (1) 的一般性由**母卡**承载，本文件承载的是「DDF 族确实满足 (H1)–(H4)」
+      这一实例化。两条边（math.heisenberg-family-gram-matrix 与本文件）合起来才覆盖卡面。
+
+  (e) **(3) 的层间正交证明前件比 (1)(2) 弱（2026-09-11 追记）。**
+      `ddf_gram_of_level_ne_of_rung` 的证明**只用动量守恒**：`ddfOp_mem_towerRungSubmodule`
+      （A^ε_n 把 rung j 送到 j + n）逐因子归纳给 |{d}⟩ ∈ rung −N(d)，再用不同 rung 本来正交。
+      它**不用**正交归一 `horth`、不用 Heisenberg 递推、不用 (H2)(H4)（DDFGram.lean docstring 逐字：
+      'it needs neither the orthonormality of the frame nor the Heisenberg recursion, only momentum
+      conservation'）。⚠ 但 Lean 语句里 `horth` 仍出现：`ddfMonomial` 这个**对象**的定义用
+      `commute_heisCreation_ddfFamily hη hbb hba hεb horth` 保证因子次序无关，故签名带着它；
+      是对象带前件，不是证明用前件。
+      更底层的 `ddfOp_mem_towerRungSubmodule` 是**纯运动学**：只需 `hη`、`hεb`（定义 A^ε_n 本身所需的
+      那两条），**不需要** `hbb`/`hba`/正交归一——这是 worldsheet.ddf-operators-v6 那个对象的一条独立性质
+      （「A^ε_n 把动量 k + j k_0 移到 k + (j+n) k_0」），该卡目前未登记；那张卡在另一 claim 下，已报告 lead。
+
+  【与 --via-oscillator-recursion 并存】那条是本图自补的手写递推（rigorous，走
+  docs/STATUS_LEVELS.md 的例外条款），**保留不删**：它是 Lean 版的前身与独立复核物，
+  按「一个陈述可挂多条推导、工具取最强者」的规则两条并存。
+
+  curator，2026-09-11，small-backlog-14（lead 追加第 6 项）。
+author: curator
+created: "2026-09-11"

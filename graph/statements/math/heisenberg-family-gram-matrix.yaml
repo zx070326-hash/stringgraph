@@ -127,15 +127,23 @@ notes: |
   ⇒ **正交归一正是横向方向的情形**：取横向标架 ε^i·ε^j = δ^{ij} 时 DDF 算子满足的就是
   [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，这也是"DDF 扇区正定"的代数根源。
 
-  【与 DDF 的距离：还差什么（blueprint §C.4）】
-  把本卡实例化到动量塔上的 DDF 算子 A^ε_n，还缺三件（Lean 文件头 Gaps 第 1 条逐字）：
-    (i)   真空归一化 `Fock.towerPairing η towerVacuum towerVacuum = 1`（= 本卡 (H4)）；
-    (ii)  真空湮灭 `A^ε_n towerVacuum = 0`（n > 0）（= 本卡 (H3)）；
-    (iii) 一个**横向正交归一标架**，把 `lie_ddfOp_ddfOp` 现有的 m (ε·δ) δ_{m+n,0}
-          变成 m δ_{ij}（= 本卡 (H1)）。
-  (H2)（互伴）在塔上对应 worldsheet.ddf-operators-adjoint 的 (1)，图上仍是 physical-argument。
-  ⇒ 在这三件补齐之前，**worldsheet.transverse-ddf-fock-gram-matrix 不能标 formalized**；
-  那张卡的 notes 已按本卡改写升级路径。
+  【与 DDF 的距离：**已补齐**（2026-09-11 当日更新）】
+  本段原文（写于同日稍早）说「把本卡实例化到动量塔上的 DDF 算子 A^ε_n 还缺三件」——
+  **三件已由 formal/StringFormal/NoGhost/DDFGram.lean 一次补齐**（分支 agent/formalizer/noghost-c4，
+  无 sorry，已合入 main；蓝图 §C.4）：
+    (i)   真空归一化 ⇒ `StringFormal.NoGhost.Fock.towerPairing_towerVacuum_self`（= 本卡 (H4)）；
+    (ii)  真空湮灭 ⇒ `StringFormal.NoGhost.ddfOp_towerVacuum_of_pos`（n > 0）（= 本卡 (H3)）；
+    (iii) 横向正交归一标架 ⇒ `TransverseFrame`（LightCone.lean）+ `ddfFamily_ccr`，
+          把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij}（= 本卡 (H1)）。
+  (H2) 互伴 ⇒ `ddfFamily_adj` = `Fock.towerPairing_ddfOp_left`（图上 worldsheet.ddf-operators-adjoint-v2，
+  **已 formalized**；原文写的「仍是 physical-argument」指的是旧卡 worldsheet.ddf-operators-adjoint，已过时）。
+  ⇒ **本卡的主定理经 `StringFormal.NoGhost.ddfFamily` 实例化出 `ddf_gram_diagonal`**，
+  于是 **worldsheet.transverse-ddf-fock-gram-matrix 已于同日升 formalized**
+  （新推导 worldsheet.transverse-ddf-fock-gram-matrix--via-lean）。本卡是那条推导的第一条依赖。
+  ⚠ 实例化带来的两处收紧，记在那条推导的 notes（引用前必读）：
+    · 本卡 (H1)(H2) 量化到**全部** ℤ（含 0），比那张卡的 m,n ≠ 0 强；证明未在 0 处用，**可放宽未放宽**；
+    · `ddf_gram_diagonal` 需 `[Algebra ℚ R]`（`ddfOp` 构造的代价），
+      而**本卡对任意交换环成立**——那张卡 (1) 的「任意交换环」那一半由**本卡**承载，不由 DDFGram.lean 承载。
 
   【特征零的角色】(2b) 与 (3) 需要特征零：ZMod 2 上 2! = 0 使型退化
   （worldsheet.transverse-ddf-fock-gram-matrix 的 notes【2026-09-11（三）】记的同一条反例，

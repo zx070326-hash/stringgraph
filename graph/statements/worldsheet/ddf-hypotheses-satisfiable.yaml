@@ -60,6 +60,26 @@ sources:
 tags: [bosonic-string, spectrum-generating-algebra, no-ghost, formalized, satisfiability]
 notes: |
   ⚠【更正（reviewer-batch26，lead 落地）】statement【不断言】(b) 的「故 ℤ 上无见证」**为假**：反例 η = diag(−1,1,1,…)、b = (1,1,0,…)、**a = (0,1,1,0,…)**、ε = e₂ 给 b·b = 0、b·a = 1、a·a = 2、ε·b = 0、ε·ε = 1，全在 ℤ 上（reviewer 已数值核）。「½ 被强制」只在 a 支撑于 {0,1} 的标架下成立。Lean 需要 [Algebra ℚ R] **只因** (M) 被写成 `invTwo R * zeroModeSq = 1`，不是数学必要。statement 按原则 1 不改；实质换代时删 (b) 那句。
+  **【2026-09-11（lean-wire-13）追加，curator：该更正现已有机检落地】**
+  reviewer-batch26 手算的那个反例现在是 Lean 定理：
+  formal/StringFormal/NoGhost/WitnessInt.lean :: `StringFormal.NoGhost.noghost_hypotheses_satisfiable_int`
+  对**任意交换环** R 与 D ≥ 3 给出 η = diag(−1,+1,…)、b = (1,1,0,…)、**a = (0,1,1,0,…)**、ε = e_2，
+  逐条验证 (η)(N)(S)(T)(U) 与质壳；`noghost_hypotheses_satisfiable_int_ℤ` 是它在 R = ℤ 上的逐字特例。
+  关键在于**质壳的写法**：那里把 (M) 写成**无分母**的
+    `Fock.zeroModeSq η a = 2`（即 α' p² = 1 清掉 α' = ½ 归一化之后的形状），
+  而不是本卡 formal.lean_decl 用的 `invTwo R * zeroModeSq η a = 1`；
+  两者在 Q-代数上等价（`invTwo_mul_zeroModeSq_of_eq_two`），但前者是关于 **2** 的陈述，
+  后者是关于 **½** 的陈述——`[Algebra ℚ R]` 是被**写法**逼出来的，不是数学必需。
+  ⚠ **但这不等于「DDF 岛可以在 ℤ 上跑」**：WitnessInt.lean 的 Scope 段逐字说明，
+  **DDF 算子本身仍需 `[Algebra ℚ R]`**——Sugawara 生成元带显式 ½，顶点算子的展开系数带 1/(m^k k!)。
+  整数化的只有**假设集**（本卡的对象），不是 `Fock.Lop`、`ddfOp` 这些算子。
+  ⇒ 本卡陈述里的「交换 Q-代数」仍然是对的量词；下面【Z 上无见证】那一段的结论**是错的**
+  （已由本段与首段更正取代），但它给出的计算本身没错：它证的是
+  「在 a 支撑于 {0,1} 的标架下 ½ 被强制」，那是对**该标架**的正确论断。
+  ⚠ D = 3 的那个整数见证**不满足** (T′) ε·p = 0（ε·a = 1 ≠ 0），因此它同时是
+  worldsheet.ddf-operators-v6 notes 里「(T) 不蕴含 (T′)」的反例（四条假设机检，ε·a = 1 手算，无 Lean 声明）；
+  D ≥ 4 时取 ε = e_3 可同时满足两者（`noghost_hypotheses_satisfiable_int_transverse_momentum`）。
+
   【为什么立卡（curator 2026-09-11，small-backlog-12 追加，lead 指示；依蓝图 §C.2）】
   条件命题的价值取决于前提集非空。DDF 岛的十余张 formalized 卡全带 `hη hbb hba hεb`，
   Witness.lean 之前仓库里没有一条声明证明它们能同时成立。本卡把这件事登记为图节点，

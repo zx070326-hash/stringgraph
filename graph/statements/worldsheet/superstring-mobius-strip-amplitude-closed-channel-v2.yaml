@@ -1,0 +1,256 @@
+id: worldsheet.superstring-mobius-strip-amplitude-closed-channel-v2
+kind: proposition
+title: type I Möbius 带真空振幅中 R–R 交换那一项的闭弦通道形式 (10.8.18)：Z_{M₂,1} = ±2in(2⁵V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]，上号对应 SO(n)（v2：(10.8.17) 的转录整条移出断言——原书印出的那一式左右两端**恒定反号**，是排印错误）
+statement: |
+  **设定（是陈述的一部分）**：type I 弦——十维平坦时空、**无取向**（Ω 投影）的开 + 闭超弦，
+  开弦带 n 个 Chan–Paton 自由度（spectrum.chan-paton-factors；**本书记号下 Sp(k) 对应 n = 2k**）。
+  考虑 **Möbius 带** M₂ 的单圈真空振幅：0 ≤ Re w ≤ π、w ≅ −w̄ + π + 2πit
+  （spectrum.one-loop-mobius-amplitude-v2 的几何），唯一的模记作 t ∈ (0, ∞)，**无模群**；
+  M₂ 有**一条边界**（故只挂一个 Chan–Paton 迹）与**一个 cross-cap**。
+  费米迹记号 Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 按
+  worldsheet.modular-invariance-requires-eight-transverse-fermions（原书 §10.7 (10.7.7)–(10.7.9)，
+  **这些迹是「对一对维数」取的**，故下面出现四次幂）。
+  **归一化（必须带上）**：原书 p.38 逐字 'Note that the GSO and Ω projection operators each
+  contribute a factor of ½.'——这正是下式测度 dt/8t 的来源（对照玻色版 (7.4.22) 的 dt/4t）。
+  **闭弦通道的长度**取 **s = π/4t**（原书 p.40 逐字给出三拓扑的换算：圆柱 π/t、Möbius π/4t、
+  Klein 瓶 π/2t）。
+  ⚠⚠ **本卡给的是 R–R 交换那一项 Z_{M₂,1}**（原书逐字：'It is slightly easier to focus on the
+  R–R exchange'），与圆柱、Klein 瓶两张同族卡给 **NS–NS** 项（Z_{C₂,0}、Z_{K₂,0}）**不同**。
+
+  **⚠⚠ 与 v1 的编号对照（换代时必看）**：
+    · 本卡断言 **(1)** = v1 的断言 (1)（周期性与扇区识别，(10.8.16)）；
+    · 本卡断言 **(2)** = v1 的断言 **(3)**（完整振幅与闭弦通道形式，(10.8.18)）；
+    · **v1 的断言 (2)（对 (10.8.17) 的转录）整条被移出断言**，只在 notes 里登记，
+      理由见「本命题不断言 (a)」与 notes 的排印错误裁定。
+
+  **断言**：
+    **(1) 周期性与扇区识别**：在迹里插入 R = Ω exp(πiβF)，则场的周期性是
+          ψ^μ(w + 4πit) = −exp(πiβ) ψ^μ(w + 2πit − π) = ψ^μ(w − 2π)               (10.8.16)
+        由此（原书逐字）：'It follows that **in the R sector of the trace the fields are periodic
+        in the σ²-direction, corresponding to the R–R exchange, while the NS sector of the trace
+        gives the NS–NS exchange.**'
+        ⚠⚠ **这条判据与圆柱相反**：圆柱上是「**迹里是否出现 exp(πiF)**」分 NS–NS / R–R
+        （worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的断言 (2)），
+        这里是「**迹的 R 扇区 / NS 扇区**」分。Klein 瓶又是第三条判据
+        （σ² → σ² + 4πt 下的周期性）。**三条判据各不相同，不得互相套用。**
+    **(2) 完整的 Möbius 振幅与闭弦通道形式**（原书逐字：'The full Möbius amplitude,
+        **rewriting the bosonic part slightly**, is'）：
+          Z_{M₂,1} = ±inV₁₀ ∫₀^∞ (dt/8t)(8π²α't)^{−5} · [Z⁰₁(2it)⁴ Z¹₀(2it)⁴] / [η(2it)⁸ Z⁰₀(2it)⁴]
+                   = ±2in (2⁵V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [Z⁰₁(2is/π)⁴ Z¹₀(2is/π)⁴] / [η(2is/π)⁸ Z⁰₀(2is/π)⁴]
+                   = **±2in (2⁵V₁₀/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]**      (10.8.18)
+        **其中上号对应 SO(n)**（原书逐字：'where **the upper sign is for SO(n)**. **We have used
+        (7.4.22) in D = 10.**'）。
+        ⚠ 第三行方括号里的 **16** 在本断言里只是**原书印出的那个数**；它「是什么的计数」
+        不属本断言，见「本命题不断言 (d)」。
+        ★ 注意：**本断言里的分子 Z⁰₁(2it)⁴Z¹₀(2it)⁴ 直接取自 (10.8.18) 第一行本身**
+        （它在那里以全字号印出），**不经过 (10.8.17)**。这是本卡能在删去 (10.8.17) 后
+        仍然完整的原因。
+
+  **本命题不断言**：
+    (a) ⚠⚠ **不断言 (10.8.17)**。原书在 (10.8.16) 与 (10.8.18) 之间印出
+        （'the traces with Ω and Ω exp(πiF) sum to'）：
+          −16 q^{1/3}∏[1+(−1)^m q^m]⁸ − (1−1)⁴ q^{1/3}∏[1−(−1)^m q^m]⁸ = Z⁰₁(2it)⁴Z¹₀(2it)⁴。
+        **该式左右两端恒定反号**（左端恒负、右端恒正），故作为等式为假——
+        本图判为**原书排印错误**，且**错在哪一端不可判定**（详见 notes 的裁定）。
+        ⇒ 本卡**既不照录它作为断言，也不改写它**；它只在 notes 里作为**页图事实**登记。
+        ⚠ **(10.8.18) 的结果不依赖它**：分子在 (10.8.18) 第一行独立印出（见断言 (2) 末尾的 ★）。
+        ★ 这正是 v2 相对 v1 的**唯一实质改动**（reviewer-batch27 F1）。
+    (b) **不断言 NS–NS 侧的值，也不断言相消**。原书在此只写 R–R 一侧；
+        'Z_{M₂,0} = −Z_{M₂,1}' 型的超对称相消（§10.7）**不在本卡的断言里**，
+        理由与 worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的「不断言 (a)」相同。
+    (c) **不断言三个拓扑的 tadpole 相加、(n ∓ 32)² 与 SO(32)**。那是
+        worldsheet.type-i-tadpole-cancellation-so32-v2。
+        ⚠ 特别地，**本卡不断言 (10.8.19) 里那个 ∓ 的整体符号是算出来的**——原书自承
+        'This calculation does not determine the sign of the tadpole, but it should be n ∓ 32'。
+        本卡只断言 (10.8.18) 内部「上号 ↔ SO(n)」这一条对应。
+    (d) **不断言 (10.8.18) 第三行方括号里的 16「是什么的计数」**。本卡只断言原书印出的那个数
+        （口径与圆柱、Klein 瓶两张同族卡一致）。
+    (e) ⚠⚠ **不断言 2⁵ 是「2^{D/2} 的普适计数」**。原书**从不写符号形式 2^{D/2}**，
+        也从不把 Vol.1 (7.4.23) 的 2¹³ 与本处的 2⁵ 并列比较（抽取记录 #E74 的分层裁决 (ii)）。
+        ⚠ 尤其**不得**把本卡的 2⁵ 与 GSW 六边形的 2⁵
+        （math.hexagon-odd-twist-count、consistency.type-i-hexagon-so32-iff）说成同源：
+        **没有任何文献解释这三个 32 为什么相等**（抽取记录 Q5）。
+    (f) **不断言由 (10.8.18) 第一行到第二行的模变换步骤**。原书在此**直接写等号**，
+        既不重述 (10.8.3) 的两条模变换，也不写 s = π/4t 的换元过程。本图未展开这一步
+        （见推导的 gaps）。
+    (g) **不断言 (10.8.3) 第二式的模变换是无限定的**。Z^α_β(it) = Z^β_{−α}(i/t) 是 §10.7
+        (10.7.14) 的特例，而 (10.7.14) 在原书里**明确带 'naive' 的限定**（逐字：'The reason
+        these modular transformations are naive is that there is no diff-invariant way to define
+        the phase of the path integral for purely left-moving fermions'）。
+        **§10.8 直接使用而不重述这个限定**；本卡照实记下，故断言 (2) 继承该限定。
+    (h) **不断言前缀里 α' 的幂次取自页图读数**。本卡采纳 **(8π²α')⁵**（单撇），根据是
+        **复算 + 量纲 + 跨卷控制组**三重复核，**不是**像素判读：
+          (i) 复算闭合（抽取记录 §0.4(b)：圆柱与 Klein 瓶两条独立换元都闭合到
+              1/(262144 π¹¹ α'⁵) = 1/(8π(8π²α')⁵)，该前缀是三个面的**公因子**）；
+          (ii) 量纲：V₁₀ 需要 length¹⁰，(8π²α')⁵ 正好给 length¹⁰；
+          (iii) 跨卷一致性：Vol.1 对应式 (7.4.23) 用 (8π²α')¹³。
+        ⚠ **页图上的小字号读数不可复现**：读出 α'² 的位置与「落在被降为 \scriptstyle 的分式分母里」
+        **完全相关**；本式**首行**以全字号出现的 (8π²α't)^{−5} 读数干净，第二轮单页重渲染
+        p.42 的 (10.8.18) **读作单撇**。⇒ 判为**渲染假象**，**不判为原书排印错误**；
+        **不得援引 (13.3.12) 的「书错」先例**（那处读数可复现，本处不可复现）。
+        ⚠⚠ **注意与「不断言 (a)」的裁定区分**：α' 幂次判**渲染假象**（读数不可复现），
+        (10.8.17) 判**排印错误**（读数可复现，全字号首行，且逐项复算证明两端反号）。
+        ⚠ **残余不确定性（照实登记，不因此降级）**：两轮复核仍只用了**同一条成像管线**
+        （Cambridge Core PDF → 页图渲染）；官方勘误表取不到（KITP errata 页 404）。
+    (i) **不断言 ± 号与 SO(n)/Sp(k) 的对应被逐一验证**。原书在 (10.8.18) 处只写一句
+        'the upper sign is for SO(n)'，把计数推给 Vol.1 (7.4.22)；而玻色卡
+        spectrum.one-loop-mobius-amplitude-v2 自己的推导 gaps 也写明「原书只写出计数」。
+        ⇒ 本卡继承那一处的限度。
+    (j) **不断言 cross-cap 态 |C⟩ 的形式**（玻色版原书留作习题 7.15，玻色卡已写明）。
+    (k) **不断言带顶点算子的 Möbius 振幅**（原书此处只算真空振幅；脚注 7 指出加顶点算子后
+        NS–NS 与 R–R 的逐拓扑相消不再成立，那是 tadpole 卡的内容）。
+uses:
+  - spectrum.one-loop-mobius-amplitude-v2
+  - spectrum.chan-paton-factors
+  - worldsheet.open-superstring-omega-squared-is-fermion-parity
+  - worldsheet.type-i-open-string-gauge-multiplet
+  - worldsheet.modular-invariance-requires-eight-transverse-fermions
+  - math.dedekind-eta-s-transformation
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eqs. **(10.8.16)**、**(10.8.18)**, p. 42；逐字：'With R = Ω exp(πiβF) in the trace, the fields have the periodicities'（→ (10.8.16)）、'It follows that in the R sector of the trace the fields are periodic in the σ²-direction, corresponding to the R–R exchange, while the NS sector of the trace gives the NS–NS exchange.'、'The full Möbius amplitude, rewriting the bosonic part slightly, is'（→ (10.8.18)）、'where the upper sign is for SO(n). We have used (7.4.22) in D = 10.'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E71**。
+      ★ 原书**明写**的两条依赖：**Vol.1 (7.4.22)**（玻色部分与 Chan–Paton 的 ±n 计数）与
+      **#E70**（(10.8.12)–(10.8.15) 的投影算符），本卡对应的两条边因此**非 inferred**。
+      ⚠ 抽取记录判本条的强度是「计算；'rewriting the bosonic part slightly' 是记号整理」。
+      ⚠⚠ **扇区识别与圆柱相反**，抽取记录特别标注：「注意这与圆柱（#E65）相反：
+      圆柱上是『迹里有 exp(πiF)』对应 R–R，这里是『迹的 R 扇区』对应 R–R」。
+      ⚠⚠ **本条 loc 有意不含 (10.8.17)**（v1 含）：见「不断言 (a)」与 notes 的排印错误裁定。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eq. **(10.8.17)**, p. 42（**本卡不断言这一式**；页图逐字读数与排印错误裁定见 notes：左端 '−16 q^{1/3}∏[1+(−1)^m q^m]⁸ − (1−1)⁴ q^{1/3}∏[1−(−1)^m q^m]⁸'、右端 'Z⁰₁(2it)⁴Z¹₀(2it)⁴'）"
+    note: |
+      L1 页图，抽取记录 **#E71**、**Q3** 与 **§7**（researcher 第三轮单页重读 p.42）。
+      ⚠⚠ **本条只是为 notes 里的裁定定位来源**，不支撑任何断言。
+      ★ researcher §7 的三条结论（见 notes）：(i) 原书确印 **−16**，全字号首行、非分母
+      \scriptstyle 假象，**转录无误**；(ii) 按 (10.7.7b) 独立复算右端 = **+16**(…)，
+      与左端**指数与奇偶结构逐项吻合、只差整体符号**；(iii) 副产品 **(1−1)⁴ = Z¹₁(2it)⁴**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38 归一化逐字 'Note that the GSO and Ω projection operators each contribute a factor of ½.'；p. 40 逐字（s ↔ t 的三拓扑换算）'s is related to the usual modulus t for these surfaces by s = π/t, π/4t, and π/2t for the cylinder, Möbius strip, and Klein bottle respectively.'；eq. **(10.8.3)**, p. 38（两条模变换，原书只在圆柱处写出并使用）"
+    note: |
+      L1，抽取记录 **#E65**（归一化）、**#E68**（几何与 s ↔ t）、**#E66**（模变换）。
+      ⚠ 本卡取 **s = π/4t**。
+      ⚠⚠ **原书没有为 Möbius 带写出换通道的步骤**：(10.8.18) 第一行到第二行是直接等号。
+      本卡「不断言 (f)」照实登记；对应的 math.dedekind-eta-s-transformation 边标 **inferred**。
+      ⚠ (10.8.3) 第二式带 **naive** 限定（见「不断言 (g)」与 polchinski-1998-v2.md#E47 逐字）。
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eqs. **(10.8.14)**–**(10.8.15)**, pp. 41–42（Ω² = exp(πiF)、联合投影算符 (1+Ω+Ω²+Ω³)/4）；**(10.8.12)**–**(10.8.13)**（Ω 在开超弦费米模上的作用）"
+    note: |
+      L1，抽取记录 **#E70**。本图对应节点是
+      **worldsheet.open-superstring-omega-squared-is-fermion-parity**（proposition，2026-09-11
+      batch27-fix 从 worldsheet.superstring-worldsheet-parity-action 拆出），
+      它自己 uses **worldsheet.superstring-worldsheet-parity-action-v2**（definition，
+      (10.8.12)(10.8.13)）。故本卡这条边**非 inferred**。
+      ★ 本卡断言 (1) 里的 R = Ω exp(πiβF) 与断言 (2) 的测度都用到它：
+      迹里插入的投影算符是 (10.8.15) 的四项形式，**不是**玻色弦的 (1+Ω)/2。
+      ⚠⚠ **那张命题卡带着一条限定**：(10.8.14) 只在 NS 扇区是精确的算符恒等式，
+      R 扇区里只在 GSO 投影后的谱上成立（reviewer-batch27 F2）。本卡用到的恰是投影后的谱，
+      故断言不受影响；限定登记在推导的 gaps 里。
+  - ref: polchinski-1998-v1
+    loc: "§7.4「The Möbius strip」, eq. **(7.4.22)**（玻色弦 Möbius 带真空振幅；Vol.2 §10.8 逐字 'We have used (7.4.22) in D = 10.'）；**(7.4.21)**（ϑ₀₀η 的组合）；**(7.4.23)**（26 维闭弦通道形式 ±2n·2¹³V₂₆/(4π(8π²α')¹³)，与 (10.8.18) 的 ±2n·2⁵V₁₀/(8π(8π²α')⁵) 逐项对照）；Chan–Paton 计数逐字见 (7.4.22) 上方 'For the SO(n) theory the ½n(n+1) symmetric states have Ω = +1 while the ½n(n−1) antisymmetric states have Ω = −1 for a net contribution of n. For the Sp(k) theory these degeneracies are reversed, giving −n (recall that in our notation Sp(k) corresponds to n = 2k Chan–Paton states).'"
+    note: |
+      本图对应节点是 **spectrum.one-loop-mobius-amplitude-v2**（其断言 (1)(2)(3) 正是
+      (7.4.20)–(7.4.22)、(4) 正是 (7.4.23)），故本卡的这条边**非 inferred**。
+      ⚠ **三处必须换算**：
+        (i) 维数 26 → 10：(8π²α't)^{−13} → (8π²α't)^{−5}、V₂₆ → V₁₀；
+        (ii) 测度 dt/**4**t → dt/**8**t（多出的 ½ 来自 GSO 投影）；
+        (iii) 玻色因子 ϑ₀₀(0,2it)^{−12}η(2it)^{−12} → **η(2it)^{−8}Z⁰₀(2it)^{−4}**
+              （8 个横向玻色子 ⇒ [ϑ₀₀η]^{−4}，而 Z⁰₀ = ϑ₀₀/η）——抽取记录 #E71 逐字核对过
+              「分母 η(2it)⁸Z⁰₀(2it)⁴ 正是 Vol.1 (7.4.21) 的 ϑ₀₀η 组合在 D = 10 下的形式，
+              与『We have used (7.4.22) in D = 10』自洽」。**这一步核对是抽取者做的，原书不写。**
+      ⚠ **记号换算**：原书写 **Sp(k)**（n = 2k）；本图 spectrum.chan-paton-gauge-group 写 **USp(n)**，
+      两者的关系是 USp(n) = Sp(n/2)。
+      （抽取记录 **#E74** 给出 (7.4.23) ↔ (10.8.18) 的逐式对照表。）
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, p. 30（逐字：'Adding Chan–Paton factors, the gauge group will again be U(n) in the oriented case and SO(n) or Sp(n) in the unoriented case.'）"
+    note: |
+      本图对应节点是 **worldsheet.type-i-open-string-gauge-multiplet**（其断言 (2)）。
+      供给 (10.8.18) 里 ± 两号所对应的**候选集**：无取向开超弦的 Chan–Paton 群只有 SO(n) 与辛群，
+      **U(n) 属取向理论、不在候选集**。⇒ 这条边非 inferred（来源是同章 §10.6 的逐字句）。
+      ⚠ 本边**不**供给「哪一个 n」——那由 (10.8.19) 的 tadpole 条件定，属
+      worldsheet.type-i-tadpole-cancellation-so32-v2。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.9)**（费米迹的组合）；(10.7.7)–(10.7.8)（Z^α_β 的定义，'these traces are for a pair of dimensions'）"
+    note: |
+      本图对应节点是 **worldsheet.modular-invariance-requires-eight-transverse-fermions**。
+      (10.8.18) 第一行的分子 Z⁰₁(2it)⁴Z¹₀(2it)⁴ 与分母里的 Z⁰₀(2it)⁴ 全用这套记号。
+      ⚠ 只借迹的**记号与形式**，**不借**那张卡的结论（横向费米子个数是 8 的倍数）。
+tags: [superstring, type-i, mobius-strip, one-loop, rr, closed-channel, cross-cap, chan-paton]
+notes: |
+  ★★★【v2 的换代理由：(10.8.17) 判为原书排印错误（curator，2026-09-11，batch27-fix）】
+  v1 = worldsheet.superstring-mobius-strip-amplitude-closed-channel 的断言 (2) 照录了
+  (10.8.17)：
+    −16 q^{1/3}∏[1+(−1)^m q^m]⁸ − (1−1)⁴ q^{1/3}∏[1−(−1)^m q^m]⁸ = Z⁰₁(2it)⁴Z¹₀(2it)⁴。
+  **reviewer-batch27 F1（CONFIRMED）**：按原书 (10.7.8) 的定义
+  Z⁰₁(τ) = q^{−1/24}∏(1−q^{m−1/2})²、Z¹₀(τ) = 2q^{1/12}∏(1+q^m)²，取 τ = 2it（q_τ = q²，
+  q = e^{−2πt}）解析计算并在 t = 0.3 / 0.7 / 1.5 三点数值核对到 1e−6：
+    **Z⁰₁(2it)⁴ Z¹₀(2it)⁴ = +16 q^{1/3} ∏[1 + (−1)^m q^m]⁸**（**正号**）。
+  而印出的左端第一项带 **−16**、第二项 (1−1)⁴ = 0 ⇒ **LHS = −RHS ≠ RHS**，
+  该式作为等式**恒为假**（左端恒负、右端恒正，不存在使两端相等的 t）。
+  旁证（reviewer）：Klein 瓶 (10.8.10b) '−16 q^{2/3}∏(1+q^{2m})⁸ = −Z¹₀(2it)⁴' 两侧都带负号、
+  数值核对相符；(10.8.18) 的积分核在 s → ∞ 数值趋于 **+16**（s = 8 时 15.99997），与右端为正一致。
+
+  ★★★【researcher 第三轮单页重读 p.42 的裁定（sec10-8.md §7，2026-09-11）——三条】
+  (1) **转录无误**：原书**确印 −16**。该处是 (10.8.17) 的**全字号首行**，
+      **不是**「被降为 \scriptstyle 的分式分母」——故**不适用** α' 幂次那一处的「渲染假象」裁定
+      （见「不断言 (h)」末的 ⚠⚠）。⇒ 排除「researcher 读错号」这一支。
+  (2) **独立复算**：按 (10.7.7b) 算右端得 **+16**(…)，与印出的左端**指数与奇偶结构逐项吻合，
+      只差一个整体符号**；且印刷右端恒正、左端恒负。
+      ⇒ 裁定为**原书排印错误**，**但错在哪一端不可判定**：把左端的 −16 改成 +16、
+      或把右端改成 −Z⁰₁(2it)⁴Z¹₀(2it)⁴，**两种修法同样经济**；
+      原书自己在 (10.8.19) 处自承 'This calculation does not determine the sign of the tadpole'，
+      也提示该节的整体符号本就不是靠这一式定的。
+  (3) **副产品：(1 − 1)⁴ = Z¹₁(2it)⁴**（R 扇区零模因子的四次方；Z¹₁ 的 R 零模因子是 1 − 1 = 0）。
+      ⇒ **推翻旧 Q3 的「8 个横向费米子分成 4 对、两个迹逐对相消」解读**——
+      那个 (1−1)⁴ 不是「4 对」的 4 次方，而是**四次幂记号本身**（迹对一对维数取，8 个横向
+      费米子 ⇒ 四次幂），与另外三个 Z 的四次幂同源。v1 的「不断言 (a)」把旧解读记为
+      「抽取者的解读」，该解读现已作废。
+
+  ★★【本卡的处理：(10.8.17) 不进断言（裁定维持）】
+  reviewer 的裁语逐字：「**Q3「不进任何节点」是合规做法**；curator「照录不断言解释」的理由
+  （右端是 (10.8.18) 分子，删了来历断掉）不成立——(10.8.18) 本身是原书独立印出的式子，
+  来历可留在 notes。」⇒ 本卡照办：
+    · **断言里不出现 (10.8.17)**；
+    · 它的页图读数、复算与排印错误裁定全部留在本 notes 与 sources 第二条；
+    · (10.8.18) 第一行的分子在原书那一行**独立印出**，本卡断言 (2) 直接取用，**不经过 (10.8.17)**。
+  ⚠ **矛盾被隔离在 (10.8.17) 这一式之内**：本卡断言 (1)(2)、Klein/圆柱两张同族卡、
+  以及 worldsheet.type-i-tadpole-cancellation-so32-v2 的 (n ∓ 32)² 与 SO(32) 主结论
+  **都不经过 (10.8.17)**，故不受该排印错误影响。
+  ⚠ 本图**不**为 (10.8.17) 建 `kind: refutation` 的推导：被反驳的是**原书的一处排版**，
+  不是任何本图节点的命题。lead 的同格式裁定见 docs/ROADMAP.md。
+
+  【与另外两张同族卡的分工，以及一处**必须注意的不对称**】
+  · 圆柱：worldsheet.superstring-cylinder-amplitude-closed-channel-v2，(10.8.1)–(10.8.4)，
+    给的是 **NS–NS** 项 Z_{C₂,0} ∝ n²；
+  · Klein 瓶：worldsheet.superstring-klein-bottle-amplitude-closed-channel，(10.8.7)–(10.8.11)，
+    给的是 **NS–NS** 项 Z_{K₂,0} ∝ 2¹⁰；
+  · Möbius 带：**本卡**，(10.8.16)+(10.8.18)，给的是 **R–R** 项 Z_{M₂,1} ∝ ±2n·2⁵
+    （原书逐字 'It is slightly easier to focus on the R–R exchange'）。
+  ⚠⚠ **三张卡不是同一侧**：做 (10.8.19) 的 R–R 求和时，圆柱与 Klein 瓶要各自用
+  Z_{C₂,1} = −Z_{C₂,0}、Z_{K₂,1} = −Z_{K₂,0}（**两条都不在那两张卡的断言里**，见各自的「不断言」），
+  Möbius 则直接用本卡。抽取记录 §0.4(a) 的交叉核验就是这么做的：
+  −iK[n² + 2¹⁰ ∓ 2·32·n] = −iK(n ∓ 32)²，其中 K ≡ (V₁₀/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]。
+  **本卡的 ±2n·2⁵ 是那次核验的三个输入之一**，且其上号（SO(n)）与 (10.8.19) 的 ∓ 上号自洽。
+
+  【± 号在超弦这里**没有**玻色弦那处的表观矛盾】玻色卡 spectrum.one-loop-mobius-amplitude-v2
+  的断言 (5) 专门处理「(7.4.22) 的 ± 上号是 +（SO(n)）而 (7.4.24) 写 (2¹³ ∓ n)²」这个表观矛盾，
+  来源是闭弦通道展开的无质量系数 **−24**（本图补算）。
+  ⚠ **超弦这一侧不出现同款问题**：(10.8.18) 的上号 + 对应 SO(n)，直接代入 §0.4(a) 的求和
+  就给出 (10.8.19) 的上号 −（即 (n − 32)²）对应 SO(n)，两处自洽。
+  但**本图未复算**超弦 Möbius 的长柱展开系数（对照玻色的 −24），故这条自洽性是**由系数相加读出的**，
+  不是逐项验证的。见推导的 gaps。
+
+  【16 的物理释义（**不进断言**，见「不断言 (d)」）】
+  把 s → ∞ 极限下方括号里的常数读作「十维无质量闭弦态的计数」（对照玻色弦 Vol.1 (7.4.4) 的 24）
+  是标准的物理读法。⚠ **这是本图/抽取者的释义，不是原书在 (10.8.18) 处的断言**。
+
+  【本卡不与 consistency.type-i-hexagon-so32-iff 建边】理由同
+  worldsheet.type-i-tadpole-cancellation-so32-v2 的（限定 4）：§10.8 全节不出现 'anomaly'，
+  §10.6 p.31 把发散与时空反常并列而非串联，§12.2 p.102 逐字说 type I 的规范群由 tadpole 相消定。
+author: curator
+created: "2026-09-11"

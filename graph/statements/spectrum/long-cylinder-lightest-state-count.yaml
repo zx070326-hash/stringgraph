@@ -168,5 +168,57 @@ notes: |
   那一条是带符号的、依附在那张玻色卡上的补算；本卡断言的是原书印出的数。
   ⚠ 对照：超弦 Möbius (10.8.18) 印出的是 **+16**（符号 ± 在前缀里，不在方括号里），
   与玻色弦那一支的记账方式不同，**不要互相套用**。
+
+  ★★★【开放问题登记（curator theta-cards，2026-09-11；**只记在 notes，statement 不动**）】
+  以下三条是 curator-13 在做 --via-q-expansion 的复算时发现的，本卡**不把任何一条写进断言**；
+  同一条目已写入 docs/ROADMAP.md 的「待船长裁决」。
+
+  **(O1) 同一个 16，两条互不相干的组合路径，原书不评论。**
+    · **圆柱 (10.8.4) 与 Klein 瓶 (10.8.11)**：16 = **2 × 8**——
+      η^{−8}[Z⁰₀⁴ − Z⁰₁⁴] 的常数项来自 ∏_{m≥1}(1 + q^{m−1/2})⁸ 与 ∏_{m≥1}(1 − q^{m−1/2})⁸
+      在 q^{1/2} 阶上的系数 **+8 与 −8 相减**（x² 项的 28 逐项相消），其中 **8 = 横向世界面费米子的个数**。
+    · **Möbius 带 (10.8.18)**：16 = **2⁴**——Z¹₀ = 2q^{1/12}∏(1+q^m)²（因子 2 是
+      **R 扇区基态的二重简并**，来自 (10.7.6) 取 α = 1 时 m = 1 的因子 1 + q⁰ = 2），
+      故 Z¹₀⁴ 带出 2⁴ = 16；四次幂来自「迹对**一对维数**取」。
+    ⇒ **一个是「8 个费米子的一阶系数相减」，一个是「二重简并的四次幂」**，
+      两条路径在组合上毫无关系，却给出同一个数。**原书对此不作任何评论，也从不说这两个 16 为什么相等。**
+    ⚠ 本卡「不断言 (c)」（不断言本图各处的 16 同源）正是为这一点留的余地；
+      推导 spectrum.long-cylinder-lightest-state-count--via-q-expansion 的 summary 第 2、3 步与 notes
+      有逐步复算。
+
+  **(O2) 抽取记录里那句「16 = 十维无质量态计数」的 gloss，朴素读法与本图别处的计数对不上。**
+    该 gloss 在 polchinski-1998-v2-sec10-8.md **#E66 的「备注」栏**（抽取者转述，**不在「原文逐字」栏**）。
+    朴素计数：D = 10 的 **NS–NS 无质量态是 8 ⊗ 8 = 64**，不是 16；
+    玻色弦一侧同样对不上（D = 26 的无质量闭弦态是 24 × 24 = **576**，而 (7.4.4) 的常数项是 24）。
+    ⇒ 本卡「不断言 (a)」据此把一切计数释义挡在断言之外。
+    ⚠ **这不等于说该 gloss 是错的**：闭弦通道里真正被边界态 / cross-cap 态挑出的是**一个子集**，
+      要断言任何计数解释，必须先精确写出那个子集是什么——那是一条**新的、独立的命题**，本图没有。
+
+  **(O3) 这与 #E74 的 Q5「三个 2⁵ = 32」是同一类现象。**
+    sec10-8.md **#E74 §Q5** 记的是：(10.8.4)/(10.8.11)/(10.8.18) 三处各自独立出处的 **2⁵ = 32**
+    （前缀里的数），**原书从不解释它们为什么相等**。
+    ⇒ (O1) 与它的结构相同（不同来路的数字巧合地相等，原书沉默），
+      建议船长把两条**一并**裁决：是（a）承认这是本书的记账风格、图上只记不问，
+      还是（b）立项去找一条统一的来源（典型候选：边界态 / cross-cap 态的归一化），
+      找到后为「为什么三处的 16（与三处的 2⁵）相等」单建一张命题卡。
+
+  ⚠⚠【2026-09-11 收到但**未执行**的换代请求（reviewer-batch28，记录在此以免丢失）】
+  reviewer 指出本卡有两处问题：
+    (i) **一卡两命题**——玻色弦的 24（断言 (1)）已经是
+        spectrum.cylinder-closed-channel-open-closed-duality 断言 (3) 的逐字内容，
+        --via-q-expansion 对那张卡的边是**重复供给而非论证步**；
+    (ii) **id 里的 "count" 名不副实**（本卡 notes 上面已就此留过记录）。
+  reviewer 给出的正解：**换代**为只含超弦 (2)(3) 的 **spectrum.type-i-long-cylinder-constant-term**，
+  三条振幅推导的边改指新卡，--via-q-expansion 用 `git mv` 改指并**删掉**对 duality 卡的边
+  （其第 1 步只需 math.dedekind-eta-function），本卡写 superseded_by。
+  ⇒ **本轮未做**：换代必须同时改
+    worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling、
+    worldsheet.superstring-klein-bottle-amplitude-closed-channel--via-closed-string-trace-with-omega、
+    worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
+    三条推导的 depends_on，而它们在 **claim #399（batch27-fix）**名下，
+    且本轮任务书明令不得触碰 klein-/mobius-/cylinder- 一批文件。
+    若只换代不改那三条边，旧卡会变成「被活推导依赖且无推导」——
+    docs/STATUS_LEVELS.md 的硬规则规定这是 **validate error**（2026-09-11 的 ch10-residuals 事故）。
+  **已 agora_send 通报 lead，请在 batch27 落地后单独派工。**
 author: curator
 created: "2026-09-11"

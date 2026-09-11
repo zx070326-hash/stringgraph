@@ -1,0 +1,103 @@
+id: worldsheet.superstring-ramond-zero-mode-cohomology-trivial
+kind: proposition
+title: R 扇区零模复形的上同调平凡（Lian–Zuckerman 1989 Theorem 2.7）：p ≠ 0 时 (ℱ(p,0), D_R|_ℱ) 上同调为零，故 C_rel(p,0) = D_R ℱ(p,0)
+statement: |
+  **设定**（数学侧表述，照 lian-zuckerman-1989 的记号；与
+  worldsheet.superstring-relative-complex-character-signature 的 (H1)(H2)(H5) 同口径，
+  故意重写以使本卡自足）。取 N = 1 超 Virasoro 代数（math.super-virasoro-algebra），
+  本卡只讲 **Ramond 扇区 κ = 0**。
+    (H1) **临界维数**：物质部门 D = 10 个自由 X^μψ^μ（LZ p.308 逐字 "From now on, we will take D = 10"），
+         鬼部门 λ = 2 的 bcβγ 一阶 SCFT。
+    (H2) **动量**：固定 p，**p ≠ 0**（LZ p.303 逐字 "p will always be assumed non-zero until Sect. 5"）。
+    (H3) **算符**（LZ Definition 1.6）：K := π(L₀) + ρ(L₀)（物质 + 鬼场的总 L₀），
+         D_R := π(G₀) + ρ(G₀)（物质 + 鬼场的总 G₀）。两者都是**奇**算符/偶算符之别按超代数分次。
+    (H4) **两个空间**（LZ Definition 2.2）：
+           ℱ(p,0) := Ker b₀ ∩ Ker β₀ ∩ Ker K   （鬼零模条件 + 质量壳条件，**不**含 D_R 条件）；
+           C_rel(p,0) := ℱ(p,0) ∩ Ker D_R      （再加 G₀ 条件，即相对复形本身）。
+    (H5) **R 扇区 βγ 零模表示**取 LZ p.306 (7)(8) 的 T₀ ⊕ T₁。本卡的对象是这个选择下的空间。
+    (H6) **(ℱ(p,0), D_R|_ℱ) 是复形**：由 LZ Proposition 1.7(ix) 的 D_R² = K 与 ℱ(p,0) ⊂ Ker K 得
+         (D_R|_ℱ)² = 0；本卡把这一条当作设定的一部分（它是 LZ 说 "the above complex" 的根据）。
+    (H7) **物质费米零模**：D_R 含 p·d₀ 项，其中 d^μ₀ 是 R 扇区物质费米零模，
+         {d^μ₀, d^ν₀} = g^{μν}（LZ p.302 的 Lorentz 度规，号差 ((D−1)+, 1−)）。
+
+  **断言**（Theorem 2.7，p.310，逐字 "Assume p ≠ 0: the above complex has zero cohomology.
+  Thus C_rel(p,0) = D_R ℱ(p,0)."）：在 (H1)–(H7) 之下，
+
+      **复形 (ℱ(p,0), D_R|_ℱ) 的上同调为零**，即 Ker D_R|_ℱ = Im D_R|_ℱ；
+      **等价地 C_rel(p,0) = D_R ℱ(p,0)**（相对复形恰是 D_R 在 ℱ(p,0) 上的像）。
+
+  **等价的收缩同伦形式**（LZ 在 Definition 2.11 之后的 Remark 里就是这样引用 Theorem 2.7 的，
+  p.311 逐字 "Recall that (Theorem 2.7) there is a contracting homotopy ε : ℱ → ℱ such that
+  {D_R, ε} = 1"）：**存在 ε : ℱ(p,0) → ℱ(p,0) 使 {D_R|_ℱ, ε} = 1**；LZ 的证明给出显式取法
+  ε = d^1₀ / p^1（任一使 p^1 ≠ 0 的坐标方向）。
+
+  **本命题不断言**：
+    (a) 不断言任何 **Q_B**（BRST 微分）上同调的性质——本卡的微分是 **D_R**（总 G₀），不是 Q_B；
+        Q_B 上同调的消灭定理是 Theorem 2.4（worldsheet.superstring-relative-cohomology-vanishing-v2），
+        与本卡是两条独立的结果。
+    (b) 不断言 NS 扇区（κ = ½）的任何事：NS 没有 β₀、γ₀ 零模，ℱ(p,½) = C_rel(p,½)，本卡的命题为空。
+    (c) 不断言分次形式的结论：LZ 在 p.313 由本定理推出 dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)（式 (6)），
+        那一步另需「D_R 保持相对次数」，本图未逐字取得该断言，故不写进本卡。
+    (d) 不断言 ε 的唯一性（LZ Remark 末句逐字 "It is remarkable that the right-hand side of this
+        equation is independent of the choice ε." 说的是 ⟨u, εv⟩_ℬ 与 ε 的选择无关，不是 ε 唯一）。
+    (e) 不断言 p = 0 的情形（LZ Proposition 5.5：p = 0 时消灭定理不成立；本卡对 p = 0 无内容）。
+    (f) 不断言 D_R² = K 或 Proposition 1.7 的任何一条——那些写进 (H6)(H3) 作为设定，本图未单独立卡。
+    (g) 不断言公式对其他 R 扇区零模表示（FOK / Henneaux 的 C[γ₀] 等）成立。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.superstring-ghost-number-zero
+  - conv.intercept-sign-a
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.7**, p.310，逐字：'Assume p ≠ 0: the above complex has zero cohomology. Thus C_rel(p,0) = D_R F(p,0).'；证明同页逐字：'For p ≠ 0, say p¹ ≠ 0, we have {D_R|_F, d¹₀/p¹} = 1. Applying this formula on Ω ∈ Ker D_R|_F, one sees that Ω ∈ Im D_R|_F.'（'the above complex' = (ℱ, D_R|_ℱ)，ℱ = Ker b₀ ∩ Ker β₀ ∩ Ker K）"
+    note: |
+      literature/extractions/lian-zuckerman-1989.md **E4**（第一轮，全文 35 页逐页读图，L1；陈述与证明**都标了逐字**）。
+      ★ 证明是**印出的**且**显式构造**收缩同伦（ε = d¹₀/p¹），不是「一点思考就知道」式的断言；
+      这是本卡推导标 rigorous 的直接依据。
+      ★ E4 备注逐字：「这是 Corrigan–Goddard / Henneaux『零模 supercharge 上同调平凡』的数学版；
+      Definition 2.11 的 Remark 称之为 contracting homotopy ε，{D_R, ε} = 1。」
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 2.11 之后的 Remark**, p.311，逐字：'Recall that (Theorem 2.7) there is a contracting homotopy ε : ℱ → ℱ such that {D_R, ε} = 1. Then one finds that ⟨u, εv⟩_ℬ = ⟨u, εD_R v̂⟩_ℬ = ⟨u, v̂⟩_ℬ.'"
+    note: |
+      L1 逐字（extraction §10.2，researcher 第四轮页图，期刊 pp.311–317 七页一次取全）。
+      ★ **本条是「收缩同伦形式」写进本卡断言的依据**：把 Theorem 2.7 读成「存在 ε 使 {D_R, ε} = 1」
+      是**原作者自己的引用方式**（"Recall that (Theorem 2.7) there is a contracting homotopy ε"），
+      不是本图的推断。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 1.6**（Q, K, D_R, U 的显式模式和；K = π(L₀) + ρ(L₀)，D_R = π(G₀) + ρ(G₀)）与 **Proposition 1.7**, pp.307–308，逐字含 '(ix) D_R² = K'；**Definition 2.2**, pp.308–309（ℬ、ℱ、C_rel 的定义：κ=0 时 ℬ = Ker b₀ ∩ Ker β₀，ℱ^n = ℬ^{n−κ} ∩ Ker K，C^n_rel = ℱ^n ∩ Ker D_R）；**p.302**（超 Virasoro 关系、g^{μν} 号差 ((D−1)+, 1−)）；**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)，U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩；'p will always be assumed non-zero until Sect. 5'）；**p.306 (7)(8)**（零模表示 T₀ ⊕ T₁）；**p.308**（'From now on, we will take D = 10'）"
+    note: |
+      L1（extraction §1 / E1 / E2）。本条供给 (H1)–(H7) 的记号语境与 D_R² = K。
+      ⚠ **Proposition 1.7 的证明大半外包给 [13] = Ohta、[15] = Terao–Uehara**（E1 逐字：
+      '(iv) to (viii) are obtained by straightforward computations, some of which are done in [13, 15, 19]'）；
+      (ix) 属于该批之列。本卡把 D_R² = K 写成设定 (H6) 而非断言，即因此。
+tags: [superstring, brst, rns, ramond-sector, cohomology, contracting-homotopy, lian-zuckerman]
+notes: |
+  【为什么立卡（curator 2026-09-11，lz-thm27）】
+  worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989 的 gaps 首条
+  （reviewer-batch29）逐字：「**LZ Theorem 2.7（R 扇区 D_R 上同调平凡 / 收缩同伦）无卡、无边**：
+  Prop 2.14 的证明两次显式引用它（§10.4），本推导只在 summary/notes 提及；建卡后应加非 inferred 边。」
+  本卡关闭该 gap。它同时是
+  worldsheet.superstring-relative-complex-nondegenerate-form（(H4) 非退化性那张卡）的两条来源之一
+  （p.311 过渡句逐字 'Now using **Theorem 2.7** and **Proposition 2.10** …'）。
+
+  【编号陷阱：与 FGZ 的 Theorem 2.7 同号不同物】
+  本图已有 worldsheet.bosonic-relative-cohomology-vanishing / -dimension 两卡，出处是
+  **FGZ 1986 Theorem 2.7(i)(ii)**（玻色弦，Q_B 上同调的消灭定理与维数公式）。
+  **LZ 1989 的 Theorem 2.7 是完全不同的命题**（超弦 R 扇区，微分是 D_R 不是 Q_B，
+  结论是「零模复形上同调平凡」而不是「消灭定理」）。引用时必须写全「LZ 1989 Theorem 2.7」。
+  LZ 一侧与 FGZ Theorem 2.7 对应的是 **Theorem 2.4**（消灭定理），已立卡
+  worldsheet.superstring-relative-cohomology-vanishing-v2。
+
+  【为什么「零上同调」与「收缩同伦」写在一张卡】
+  两者由同一条两行论证（同一个公式 {D_R|_ℱ, d¹₀/p¹} = 1）同时给出，LZ 自己也在 p.311 的 Remark 里
+  把后者直接称作 "Theorem 2.7"。按「一个节点一个命题」的判据（文献把两件事写在一个定理里
+  **而它们被分别推导**时才拆），此处不拆。下游引用时在 depends_on note 写明用的是哪一面：
+  Prop 2.14 的证明用「C_rel(p,0) = D_R ℱ(p,0)」（κ=0 支与 Lemma 2.14.3 的基计数），
+  Definition 2.11 的 Remark 用「ε」。
+
+  【与物理文献的对应】E4 备注：这是 Corrigan–Goddard / Henneaux「零模 supercharge 上同调平凡」的
+  数学版。本图没有那两篇的卡，也没有登记到 sources.bib，故本卡不建那条边（LZ 正文亦**不引 Henneaux**，
+  见 extraction §3 逐字）。
+author: curator
+created: "2026-09-11"

@@ -151,5 +151,39 @@ notes: |
   **(6.2) 读成等式（= DDF 态张成）即 `ddf-spans`，未做**，本卡「不断言 (a)」不变，
   按 lead 指示**不**为 `ddfCharacterization` 另立「DDF 态刻画定理」卡。
   推导：--via-lean（formalized，best）；--via-mode-algebra（physical-argument）保留为文献侧记录。
+  【2026-09-11（lean-wire-13）：**光锥标架代数**记在这里，不另立卡（curator）】
+  formalizer-noghost-b 的 formal/StringFormal/NoGhost/LightCone.lean 把本卡的 K_m 放进完整的
+  **光锥标架**里，并证出该标架上振子的全部对易表。**不为它们另立卡**的理由：
+  它们与本卡 (1)(2) 一样，全部是同一条一般引理 `lie_towerModeVec_towerModeVec`
+  在特殊偏振上的取值（本卡【定义】已写明 K_n 就是 `towerModeVec` 在 ε := b 处的值），
+  另立卡会复制本卡整段设定却只换一个偏振向量，违反「一个节点一个命题」的精神。
+  **对象**：`LightConeFrame η b` 是一对类光方向 (b, b̃)，逐字条件
+    η(b,b) = 0、η(b̃,b̃) = 0、**η(b, b̃) = −1**（Lean 字段 `isotropic`/`conj_isotropic`/`pairing`）；
+  `TransverseFrame η b` 是 D − 2 个偏振 ε_i，条件 η(ε_i, b) = 0 与 η(ε_i, ε_j) = δ_{ij}。
+  记 K_m = α^b_m（本卡的纵向算子）、α^{b̃}_m、α^{ε_i}_m。
+  **对易表**（m, n ∈ Z，全部在塔 T(p;k_0) 上，只需 (η) η_μ² = 1）：
+    · [α^{b̃}_m, α^{b̃}_n] = 0                                   `lie_conjOp_conjOp`（用 b̃² = 0）；
+    · **[K_m, α^{b̃}_n] = −m δ_{m+n,0}**                          `lie_kOp_conjOp`（−1 就是 η(b,b̃)）；
+    · [α^{ε_i}_m, α^{ε_j}_n] = m δ_{ij} δ_{m+n,0}                `lie_transOp_transOp`（**正**中心项）；
+    · [K_m, α^{ε_i}_n] = 0                                       `lie_kOp_transOp`（用横向性 (T)）。
+  这四条**无额外假设**。第五条有：
+    · [α^{b̃}_m, α^{ε_i}_n] = 0                                   `lie_conjOp_transOp`，
+      **需要额外的 η(b̃, ε_i) = 0**——`TransverseFrame` 只要求 ε_i ⊥ b，**不**要求 ε_i ⊥ b̃。
+      显式见证满足它，但一般标架下这是独立条件（与
+      worldsheet.transverse-frame-spans-orthogonal-complement 记的完备性是同一类缺口）。
+  **与本卡断言的关系**：本卡 (2) [K_m, K_n] = 0 就是上表缺的那一格（`lie_kOp_kOp`，需 (N)）；
+  上表新增的是 b̃ 与 ε 两个方向。本卡 (1)(3)(4)(5) 不受影响。
+  **两条配套读数**（同文件，本卡不断言，登记备查）：
+    · `conjCoeff_eq_neg_dotVec`：向量 v 的 **b̃-分量是 −η(b, v)**；
+    · `conjCoeff_towerMomentum`：由 (S) η(b,a) = 1，塔上**每一层**的动量的 b̃-分量都是 **−1**
+      （用 (N) 沿塔不变）。这正是蓝图 §B.4 里「L_{−n} = −α^{b̃}_{−n} + …」的领头系数来源。
+  ⚠ `conjCoeff_eq_neg_dotVec` **不假设** {b, b̃, ε_i} 是基：它只从**给定的**分解里取系数。
+  「每个向量都能分解」是另一件事（完备性），见上引卡。
+  ⚠ b̃ 的**存在性**不在本卡也不在 worldsheet.ddf-hypotheses-satisfiable 的断言里
+  （该卡【不断言】(c)）：见证是 Witness.lean 的 `noghost_lightcone_frame_satisfiable`，
+  Lean 侧由 `witnessLightConeFrame` 打包成 `LightConeFrame` 实例，故上表非空。
+  **用途**：这张表是蓝图 §B.4「幺三角基变换」的代数输入，而那一步**仍未证**
+  （LightCone.lean 文件头 Scope 段末条逐字：the unitriangularity … is **not** proved）。
+
 author: curator
 created: "2026-09-11"
