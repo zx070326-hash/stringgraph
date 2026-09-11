@@ -5,6 +5,7 @@ Authors: stringgraph lean-formalizer
 -/
 import Mathlib.Analysis.SpecificLimits.Normed
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.DerivHyp
+import Mathlib.RingTheory.PowerSeries.WellKnown
 
 /-!
 # The exponentially regulated sum `Σ_{n ≥ 1} n e^{-un}` and its Laurent constant `-1/12`
@@ -25,10 +26,16 @@ i.e. the divergence is `1/u²`, there is **no** `1/u` term, and the constant ter
   `sinh` form `= 1/(4 sinh²(u/2))`.
 * `abs_sinh_sub_taylor_le` : `|sinh x - (x + x³/6)| ≤ |x|⁵/100` for `|x| ≤ 1` (from Mathlib's
   `Real.exp_bound` at `n = 5`; the even Taylor terms cancel in `sinh`).
-* `tendsto_regulatedSum_sub_inv_sq` : **the card's constant term**,
+* `tendsto_shiftedSinh`, `tendsto_twoSinh_div`, `tendsto_invSinhSq_sub_invSq` : the three
+  factors of the exact factorisation
+  `1/(4s²) - 1/u² = [(u - 2s)/u³]·[1 + 2s/u]·[(2s/u)⁻¹]²` (`s = sinh(u/2)`) and their limits
+  `-1/24`, `2`, `1`.
+* `tendsto_regulatedSum_sub_invSq` : **the card's constant term**,
   `Σ_{n≥1} n e^{-un} - 1/u² → -1/12` as `u → 0⁺`.
   Since the limit of `f(u) - 1/u²` exists and is finite, this simultaneously says there is no
   `1/u` term and pins the constant.
+* `powerSeries_nat_mul_one_sub_sq` : the algebraic shadow `(Σ_{n≥0} n Xⁿ)·(1-X)² = X` in
+  `R⟦X⟧` for any commutative ring `R` (no convergence, no `u`).
 
 ## Conventions / indexing
 
@@ -38,9 +45,13 @@ This file uses no physics convention; it is a pure analysis lemma (see the card'
 
 ## What is *not* here
 
-* The `O(u²)` refinement of the remainder (`tendsto_regulatedSum_sub_inv_sq` gives only the
+* The `O(u²)` refinement of the remainder (`tendsto_regulatedSum_sub_invSq` gives only the
   limit, which is what "the constant term is `-1/12` and there is no `1/u` term" means).
   Upgrading to `Asymptotics.IsBigO` needs the next order of the `sinh` expansion; not done.
+* A **Laurent-series** treatment in `u`.  `powerSeries_nat_mul_one_sub_sq` lives in `R⟦X⟧` with
+  `X = e^{-u}` a formal variable, where `u → 0⁺` (i.e. `X → 1`) is meaningless; the pole at
+  `X = 1` is exactly what the analytic statements above see.  Formalising "the Laurent expansion
+  in `u`" would need `LaurentSeries` plus the substitution `X = e^{-u}`; not done.
 * The `θ`-generalisation `Σ_{n≥1}(n-θ)e^{-(n-θ)u}` of Headrick's exercise 1.5.
 * **Anything physical.**  Discarding the `1/u²` term and declaring the remaining `-1/12` to be
   the zero-point energy is the separate card `worldsheet.zeta-regularized-sum-of-integers`
@@ -229,5 +240,39 @@ theorem tendsto_regulatedSum_sub_invSq :
   refine Tendsto.congr' ?_ tendsto_invSinhSq_sub_invSq
   filter_upwards [self_mem_nhdsWithin] with u hu
   rw [tsum_nat_mul_exp_neg_mul_eq_inv_sinh_sq (Set.mem_Ioi.mp hu)]
+
+/-! ### The formal power series avatar -/
+
+open PowerSeries in
+/-- **`Σ_{n≥0} n Xⁿ = X/(1-X)²` as formal power series**, in the inverse-free form
+`(Σ n Xⁿ)·(1-X)² = X`, over **any** commutative ring.
+
+This is the algebraic shadow of `hasSum_nat_mul_exp_neg_mul` (put `X = e^{-u}`): the same rational
+function, with no convergence hypothesis.  Mathlib supplies the hard half,
+`PowerSeries.mk_add_choose_mul_one_sub_pow_eq_one` at `d = 1`
+(`Σ (n+1) Xⁿ · (1-X)² = 1`); what is added here is the shift `Σ n Xⁿ = X · Σ (n+1) Xⁿ`.
+
+**Scope**: the analytic Laurent expansion around `u = 0` is *not* visible at this level — a
+formal power series in `X` has no notion of `X → 1`.  Extracting `1/u² - 1/12` from the
+`X = e^{-u}` substitution is genuinely an analytic statement (`tendsto_regulatedSum_sub_invSq`);
+a formal treatment would need `LaurentSeries` in `u` plus the composition `X = e^{-u}`, which is
+not formalised here. -/
+theorem powerSeries_nat_mul_one_sub_sq (R : Type*) [CommRing R] :
+    (PowerSeries.mk fun n => (n : R)) * (1 - PowerSeries.X) ^ 2 = (PowerSeries.X : R⟦X⟧) := by
+  have hB : (PowerSeries.mk fun n => ((n : R) + 1)) * (1 - PowerSeries.X) ^ 2 = 1 := by
+    have h := PowerSeries.mk_add_choose_mul_one_sub_pow_eq_one (S := R) (d := 1)
+    have he : (PowerSeries.mk fun n => ((Nat.choose (1 + n) 1 : ℕ) : R))
+        = (PowerSeries.mk fun n => ((n : R) + 1)) := by
+      ext n
+      simp [Nat.choose_one_right, add_comm]
+    rw [he] at h
+    simpa using h
+  have hA : (PowerSeries.mk fun n => (n : R))
+      = PowerSeries.X * (PowerSeries.mk fun n => ((n : R) + 1)) := by
+    ext n
+    cases n with
+    | zero => simp
+    | succ m => simp [PowerSeries.coeff_succ_X_mul]
+  rw [hA, mul_assoc, hB, mul_one]
 
 end StringFormal.RegulatedSum
