@@ -67,6 +67,8 @@ StringFormal/
   Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
   Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
   Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
+  Virasoro/ShapovalovLevelThree.lean  N=3 Gram（3×3，det₃ = 48h²(…)(…)）**与 Kac 形式相等在 Lean 内**（清分母对称函数，与 √ 分支无关）
+  Virasoro/ShapovalovLevelFour.lean   N=4 Gram（5×5，60 声明；det₄ = 384h³(8h+c−1)(…)²(…)(…)；⟨L₋₂²v,L₋₂²v⟩ 含 c²/2 是 N≤4 唯一非整系数项；c=1 退化非完全平方）
   Virasoro/ShapovalovLevelThree.lean   level-3 Gram（9 个内积）与 det₃ = 48h²(16h²+2h(c−5)+c)(3h²+h(c−7)+c+2)，及其与 Kac 公式 N=3 乘积形 2304(h−h₁₁)²(h−h₁₂)(h−h₂₁)(h−h₁₃)(h−h₃₁) 的等同
   Virasoro/ATTRIBUTION.md   本目录派生自何处（Kytölä `VirasoroProject`、Carnahan 的 Mathlib 文件）
   Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
