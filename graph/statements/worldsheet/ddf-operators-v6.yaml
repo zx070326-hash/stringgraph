@@ -290,5 +290,31 @@ notes: |
   ⚠ 本卡的 `uses` **不**加新卡：新卡的 `uses` 含本卡（它引用本卡的 (T)(N)(S) 与重标度记法），
   反向加边会成环。
 
+  【2026-09-11（lightcone-frame 收尾，curator）：两项来自 formalizer 的移交记录，登记本卡 notes】
+
+  (a) **`ddfOp_mem_towerRungSubmodule`（DDFGram.lean）是纯运动学**：A^ε_n 把塔的第 j 层
+  （rung j）送到第 j + n 层（动量 k + j k_0 ↦ k + (j+n) k_0），证明只用 `hη`、`hεb`——
+  即定义 A^ε_n 本身所需的那两条（(T) 横向性），**不需要** `hbb`（(N) 类光性）、`hba`（(S) 归一化）
+  或标架的正交归一。这是本卡对象 A^ε_n 的一条独立性质，此前未在本卡登记
+  （worldsheet.transverse-ddf-fock-gram-matrix--via-lean 的 notes (e) 段已指出这条缺口，
+  见该文件 2026-09-11 追记）。
+
+  (b) **N = 2 起 (T′) 再次被需要，且 DDF 态 ≠ 横向振子态（有伪态混入）**。
+  formal/StringFormal/NoGhost/LevelTwoSpan.lean 给出 A^ε_{−2}|0;k⟩ 与 A^ε_{−1}A^δ_{−1}|0;k⟩ 在
+  真空上的精确展开：
+    `ddfOp_neg_two_apply_towerVacuum`（假设 hη、hεb、**hεa**）：
+      A^ε_{−2}|0;k⟩ = [ε·α_{−2} − 2(ε·α_{−1})(k_0·α_{−1})]|0;k−2k_0⟩；
+    `ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum`（假设 hη、hεb、hδb、**hεa**、**hδa**）：
+      A^ε_{−1}A^δ_{−1}|0;k⟩ = [(ε·α_{−1})(δ·α_{−1}) + ½(ε·δ)((k_0·α_{−1})² − k_0·α_{−2})]|0;k−2k_0⟩。
+  两条定理都需要 **(T′) ε·k = 0、δ·k = 0**（本卡【本卡缺一条假设的登记】段的 hεa/hδa），
+  与 N = 1 的领头项引理（`ddfOp_neg_one_apply_towerVacuum`）用到 (T′) 的方式相同——
+  故「本卡四条常设假设 (η)(N)(S)(T) 不蕴含 (T′)」这条限制在 N = 2 依旧成立，不是 N = 1 的特例。
+  ⚠ **A^ε_{−1}A^δ_{−1}|0;k⟩ 的展开式里 ½(ε·δ)((k_0·α_{−1})² − k_0·α_{−2}) 那一项不是横向振子态**：
+  它正比于纵向/伪态方向（k_0·α 系数），只在 ε⊥δ 时消失。⇒ **从 N = 2 起，"DDF 态 = 横向振子态"
+  这句话不再成立，必须读成"模伪态"**（即 DDF 张成落在横向子空间加伪态子空间的和里，
+  而不是恰等于横向子空间）；N = 1 的领头项引理没有这个修正项，是 N = 2 起才出现的现象。
+  两条定理是 worldsheet.ddf-spans-physical-states-level-one 的 N = 2 增量（formal/TODO.md
+  `noghost-b` 的 blocker (a)）尚未拼装出陈述前先落地的构件；本卡陈述文本未动。
+
 author: curator
 created: "2026-09-11"
