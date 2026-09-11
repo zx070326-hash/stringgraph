@@ -386,6 +386,10 @@ StringFormal/
                             `conjFreeSlice_le_towerKerK_inf_towerBigrade`：不含 `b̃` ⟹ 满足 K-条件
                             （`K_n` 与 `α^w_{−r}` 对易当 `b·w = 0`）。**反向包含未做**（要线性无关，
                             §B′.9 第 2 条）。
+                            (9) **任意片 `(j, M)` 版**（PR6′ 前置）：`conjFreeSliceAt`、
+                            `towerBigrade_le_conjFreeSliceAt_sup_towerSpurious`、
+                            `towerPositiveMode_inf_towerBigrade_eq_towerOrthComplement`（`Q_{j,M} = S^⊥ ⊓ V_{j,M}`，
+                            无 `L_0` 条件）、`finrank_towerPositiveMode_inf_towerBigrade_le`（`dim Q_{j,M} ≤ p_{D−1}(M)`）。
                             未做：(B-26)（PR5，`D = 26` 唯一入口）、`conjFreeSlice ⊓ spurious = ⊥`
   NoGhost/TowerVirasoro.lean **塔上的 Virasoro 关系**（蓝图 §B″.8 点名的唯一前置缺件）：
                             `lie_towerLop_towerLop`（`⁅L_m,L_n⁆ = (m−n)L_{m+n} + D·centralTerm(m)·δ`，
@@ -453,6 +457,29 @@ StringFormal/
                             `descTwo_single_mem_towerPhysSubmodule_iff`（该具体态物理 ⟺ `(D:K)=26`）。
                             **未做**：`¬ B26 2`（`D ≠ 26`）的维数版——要把两个计数界升成等式并给
                             `dim(H_null⊓V_2)` 上界；一般 `N`
+  NoGhost/TypeOneFamily.lean **蓝图 §B‴ PR6′：`D`-无关的零态下界 `dim(H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)`
+                            对一切 `N`**（`le_finrank_towerNull_inf_towerBigrade_succ`；`N−1` 写法在 `1 ≤ N` 下）。
+                            **`D = 26` 一次不出现**；截距 `a₀ = 1`（`k·k = 2`）只在最后一步（Type-1 零态）进入。
+                            四块：(a) **`towerLop_neg_one_injective`**——`L_{−1}` 在每个双分次片 `(j, M)` 上单射，
+                            只用 `K` 代数 `⁅L_{−1},K_1⁆ = −K_0 = −1` ⇒ `L_{−1}K_1^{k+1}x = −(k+1)K_1^k x` 与
+                            `K_1^{M+1} = 0`，**不需要 `CharZero`**（ℚ-代数里 `k•y=0 ⇒ y=0`，
+                            `eq_zero_of_natCast_smul_eq_zero`）；(b) **通用 straightening**
+                            `straighten` / `apply_mem_ordSpanOn_of_mem`——对任意满足负模 Witt 关系的族
+                            `L : ℤ → Module.End R W`（`IsNegWitt`）作用在任意向量上，把
+                            `VermaPBW.straighten` 从 Verma 模最高权向量解放出来（结构逐字，≈110 行；
+                            `isNegWitt_towerLop` 实例化）；(c) **(F-1) 张成半**
+                            `towerBigrade_le_ordSeedSpan`——每个片由 `L_{−λ} m(c)`（`λ` 有序分拆、`c` 不含 `b̃`）张成，
+                            外层对 level 强归纳 + 内层 PR4 的测度归纳（伪态项不再丢弃）；**(F-2) 单射半**
+                            `seedIndexPosEmbed_injective`（`(λ,c) ↦ c + wordOcc λ`，有序表由重数唯一确定：
+                            `List.Perm.eq_of_pairwise'`），故 `dim(非空词族) ≤ p_D(M) − p_{D−1}(M)`；
+                            `finrank_towerBigrade : dim V_{j,M} = #{level = M}`（Mathlib `basisRestrictSupport`）；
+                            (d) **`towerSeed` / `le_finrank_towerSeed`**：`Q_{j,M} = 正模核 ⊓ 片` 有
+                            `dim ≥ p_{D−1}(M)`，秩–零化度（`V_{j,M} → (非空词族)^*` 的核落在 `Q_{j,M}`），
+                            **不用片上非退化**；与 `SpuriousElimination.finrank_towerPositiveMode_inf_towerBigrade_le`
+                            合成 **`dim Q_{j,M} = p_{D−1}(M)` 精确**（§B″.4.1 (F-4) 第二行，无需基）。
+                            **订正**：蓝图 §B‴.9 的 `N−1` 陈述在 `N = 0` 为假（真空物理非零）。
+                            **未做**：(B-26) 本身——缺的 `p_{D−1}(N+1) − p_{D−2}(N+1) − p_{D−1}(N)` 个零态是
+                            Type-2 族（`N+1 ≥ 12` 起还要新奇异向量族），全是 `D = 26` 依赖；词族线性无关 (F-3)
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

@@ -2631,3 +2631,48 @@ p25(N−2)−p25(N−5)−p25(N−7):0     1     25     350     3574     29550  
 `{s ≤ 80 : 24s+1 为平方} = {1,2,5,7,12,15,22,26,35,40,51,57,70,77}` 与五边形数集合**逐项相同**，
 `(3p−2q)² = 1` 的解给出产生子层 `{1,2,12,15,35,40,70,77}`，`s = 5,7,12,15,22,26` 的奇异向量层
 分别是 `{3,4} {5,6} {5,7,12} {8,10,15} {7,10,20,21} {11,14,24,25}` —— 与 §B‴.7 的表一致。
+
+### B‴ 订正（2026-09-12，formalizer，分支 `agent/formalizer/noghost-pr6-typeone`）
+
+PR6′ 全部落地：`NoGhost/TypeOneFamily.lean`（≈ 1000 行）与 `SpuriousElimination.lean` 末尾的
+`(j, M)` 节。`D = 26` 在两处都不出现。以下是与 §B‴.9 草案的差异，按重要性排序。
+
+1. ⭐ **`le_finrank_towerNull_inf_towerBigrade` 的草案陈述在 `N = 0` 为假。** 草案写
+   `p_{D−1}(N−1) ≤ dim(H_null ⊓ V_N)`，自然数减法使 `N = 0` 时左边是 `p_{D−1}(0) = 1`，而
+   `|0;0⟩` 物理且非零模（`⟨0|0⟩ = 1`），右边为 0。已改成对一切 `N` 的
+   `le_finrank_towerNull_inf_towerBigrade_succ : p_{D−1}(N) ≤ dim(H_null ⊓ V_{N+1})`，
+   `N − 1` 写法只在 `1 ≤ N` 下给出（`le_finrank_towerNull_inf_towerBigrade`）。
+2. **`towerLop_neg_one_injective` 不需要 `CharZero`。** 下降归纳每步要从 `(k+1)•y = 0` 推 `y = 0`；
+   在 ℚ-代数里 `k` 是单位（`eq_zero_of_natCast_smul_eq_zero`），所以整条链在
+   `[CommRing R] [Algebra ℚ R]` 上成立。草案的「需 `CharZero`」多余。
+3. **(F-1)(F-2) 的下界半边不需要 `S_M = S ⊓ V_M`，也不需要把伪态投影到片上。** 对偶映射直接取
+   `V_{j,M} → (非空有序词族 ordSeedSpanPos)^*`；其核落在 `Q_{j,M}` 是因为
+   `⟨L_n x, y⟩ = ⟨x, L_{−n} y_{(j,M−n)}⟩` 而 `L_{−n} V_{j,M−n} ⊆ ordSeedSpanPos`（(F-1) + straightening）。
+   §B″.4.1 设想的 `towerBigradeProj_mem_towerSpuriousSubmodule` 一次未用。秩–零化度
+   （`LinearMap.finrank_range_add_finrank_ker`）+ `Subspace.dual_finrank_eq`，**片上非退化确实不用**
+   （§B‴.9 的注记成立）。
+4. **Straightening 必须重做一遍。** `VermaPBW.straighten` 只对 `V(c,h)` 的最高权向量陈述，而 (F-1) 要
+   `L_{−n}` 作用在塔上的 `m(c)`。没有搬运的办法，改为对任意满足负模 Witt 关系的族
+   `L : ℤ → Module.End R W`（`IsNegWitt`）重跑同一归纳（≈ 110 行，结构逐字）。§B″.4.1 说 (F-1)
+   「不需要抽象 PBW」是对的，但它需要 PBW 的**张成半**，而那就是 `straighten`；估计的
+   「≈ 150 行前置」低估了这一块。
+5. **(F-2) 只做单射方向**（`seedIndexPosEmbed_injective`），不造 §B″.5 (c1) 的 `Equiv`。
+   下界只要 `Nat.card(非空指标) ≤ #{d | level d = M, β(d) ≥ 1}`。有序表由重数唯一确定用
+   `List.Perm.eq_of_pairwise'` + `List.perm_iff_count`，比造 `Finsupp` 按行拆分的双射便宜。
+6. **附赠：`dim Q_{j,M} = p_{D−1}(M)` 精确成立**，对**每个** rung `j` 与 level `M`：上界是 PR4 的
+   (P3) 去掉 `L_0` 条件后的版本（`finrank_towerPositiveMode_inf_towerBigrade_le`），下界是
+   `le_finrank_towerSeed`。这是 §B″.4.1 (F-4) 的第二行，**不经过基**。
+   `dim V_{j,M} = #{d | level d = M}` 由 Mathlib `basisRestrictSupport` 直接给出
+   （`finrank_towerBigrade`），§B′.8「永不求值分拆数」仍成立。
+7. **Lean 工程细节**（给下一个人）：`le_trans (finrank_range_toDualHom_le …) (finrank_ordSeedSpanPos_le …)`
+   与 `Submodule.finiteDimensional_of_le inf_le_right` 在具体的 `ordSeedSpanPos` / `towerSeed` 上会
+   `whnf` 超时——统一元变量时把 `span (Set.range …)` 展开了。解法：显式给 `(K := K) (V := …) (M := …)`
+   或 `(S₁ := …) (S₂ := …)`，或把两条不等式分别 `have` 再交给 `omega`。
+   `Module.Dual` 的有限维实例在 `Submodule` 的具体子类型上也找不到（走到了半单模的实例分支），
+   与 PR4 一样要在抽象 `W : Submodule K M` 上陈述引理再实例化（`finrank_range_toDualHom_le`）。
+8. **行数** ≈ 1000（草案估 700–850）。超出在指标类型 `SeedIndex` / `SeedIndexPos` 的簿记与两条维数引理。
+
+**裁决不变**：这条下界正是 `D ≠ 26` 的真实维数（§B‴.8 第 1 条），`B26 N` 对 `N ≥ 3` 仍开，
+缺的 `p_{D−1}(N+1) − p_{D−2}(N+1) − p_{D−1}(N)` 个零态全部是 `𝒟₂` 族及 `N+1 ≥ 12` 起的新奇异向量族。
+`N = 1`：`p_{D−1}(0) = 1 = p_{D−1}(1) − p_{D−2}(1)` ✓ 与 `Assembly.ddfSpans_bigrade_neg_one_one` 一致；
+`N = 2`：得 `D − 1 = 25`，`LevelTwoCount.nullFamilyTwo` 的第 26 个正是 `𝒟₂|0;p₋₂⟩`。
