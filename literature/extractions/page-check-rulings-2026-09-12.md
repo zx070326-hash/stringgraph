@@ -123,3 +123,40 @@ p.270 定义段逐字：
 | 同文件 sources 第三条的「转录疑点（§9.10.5）」 | **可关**：改为「原刊漏负号，裁定 −(D−2)」。 |
 | `graph/statements/worldsheet/fock-module-free-over-negative-virasoro.yaml` 第 33 行、`bosonic-relative-cohomology-dimension.yaml` 第 141/144 行、`bosonic-relative-cohomology-vanishing.yaml` 第 104 行、`bosonic-relative-cohomology-dimension--via-fgz-1986.yaml` 第 86 行 | 这些是 **sources.loc 里的逐字引文**，按规则保留 `φ(q)^{D−2}`；只在各自 note 加一句「原刊漏负号（page-check-rulings §2.3）」。若哪张卡把该式抄进了 `statement`（本轮 grep 未见），须按 statement 不可变原则换代。 |
 | 目标卡 (H1) 的 `D ≥ 2` | **不动**。 |
+
+---
+
+## 3. LZ 1989 p.312 vs p.317：`p_κ^{(8)}(κ − (p·p/2))` 的括号
+
+### 3.1 逐字读数（L1，PDF 4× 渲染裁切）
+
+- **p.312, Proposition 2.14(ii)**（行内排）：`char C_rel(p, κ) = ½(2κ + 1) dim R(p, κ) p_κ^{(8)}(κ − (p·p/2)) = sign C_rel(p, κ).`——自变量 `p·p/2` 用斜杠分数、外加一层圆括号。
+- **p.317, Corollary 2.15(i)**（显示排）：`dim H⁰_rel(p, κ) = ½(2κ + 1) dim R(p, κ) p_κ^{(8)}( κ − (p·p)/2 )`——`p·p` 在分子、`2` 在分母的**叠排分数**，无内层括号。
+
+### 3.2 裁定：**无实质差异**
+
+同一个数 `κ − p·p/2`；p.312 因行内排版用 `/` 而加括号消歧，p.317 用叠排分数无需括号。两处都不是 `(κ − p·p)/2`。`extractions/lian-zuckerman-1989.md` §10.3 记的「照抄勿统一」仍然正确（逐字引文各随其页），但**它不是转录风险，不构成 gap**；本图任何一张卡的 statement 写 `κ − p·p/2` 即可，不必注明括号。
+
+### 3.3 对图的指令
+
+- 无 gap 需关（本轮 grep `graph/` 未见任何卡把这条括号差记为 gap）。`superstring-relative-complex-character-signature.yaml` 与 `superstring-relative-cohomology-dimension.yaml` 的 sources.loc 逐字引文按各自页面保留即可。
+
+---
+
+## 4. 本轮结论表
+
+| 项 | 裁定 | 图上动作 |
+|---|---|---|
+| 1. MRC (7)–(9) | **可建卡**。(9) 指数 `½p̂(n)` 无 ±；指标条件 NS `r−s∈ℤ` / R `r−s∈½+ℤ`；`p̂`（尖帽）由 Prop 3.6 (1)(2) 定义、依扇区不同；证明 Prop 4.10 + 4.13 + pp.286–287 | 建 `worldsheet.super-virasoro-kac-determinant`；关 `rns-fock-module-free-…--via-lian-zuckerman-1989` gaps (a) 的「待 auditor 复核」；接 [22] 边 |
+| 2a. FGZ D ≥ 2 vs D > 2 | **非排印错误**，两处各指其物；D = 2 由括注 s ≥ 1 覆盖 | 关 `fock-module-free-…--via-fgz-1986` gaps 末条；(H1) 不动 |
+| 2b. FGZ `φ(q)^{D−2}` | **原刊漏负号**，正确 `φ(q)^{−(D−2)}`（三条内证） | 关同文件 sources 的 §9.10.5 疑点；各卡 loc 逐字保留 + note |
+| 3. LZ 括号 | **无实质差异**（行内 `/` vs 叠排分数） | 无 |
+
+### 访问日志
+
+| 目标 | 手法 | 结果 |
+|---|---|---|
+| MRC 1986 PDF | `curl -A "Mozilla/5.0 … Chrome/128" -H "Accept: application/pdf,*/*" -H "Referer: https://projecteuclid.org/" https://projecteuclid.org/download/pdf_1/euclid.cmp/1104116024` | ✅ 3.35 MB / 32 页（裸 curl 与 `curl/8.0` UA 均返回 Incapsula 拦截页） |
+| LZ 1989 PDF | 同上头部，`journalArticle/Download?urlId=cmp%2F1104179468`，首次被拦（"Pardon Our Interruption"），隔 4–8 s 重试成功 | ✅ 2.66 MB / 36 页 |
+| FGZ p.8445 | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png` 直连 | ✅ 137.5 KB |
+| 放大 | PyMuPDF `Matrix(4,4)` 渲染 + PIL 裁切 2×–8× | 落盘于 `.claude/worktrees/pagecheck-tmp/`（已 gitignore，不入库） |
