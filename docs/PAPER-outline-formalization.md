@@ -32,13 +32,15 @@ operators `Kₙ`; (iv) a `D`-component Fock space carrying a Lorentzian (indefin
 arbitrary `D`; (v) the Green–Schwarz twelve-form factorization identity over an arbitrary
 commutative `ℚ`-algebra, and the uniqueness of the integer solution to the type IIB
 anomaly-cancellation conditions over an arbitrary field of characteristic `0`; and
-(vi) explicit power-sum identities for the 240 roots of `E₈`. The 82 declarations linked
+(vi) explicit power-sum identities for the 240 roots of `E₈`. The 86 declarations linked
 from the dependency graph (§7) compile without `sorry`, depending only on `propext`,
 `Classical.choice`, `Quot.sound` (`uv run stringgraph check-axioms`, main, 2026-09-11);
 not every declaration in `formal/StringFormal/` is covered, only graph-linked ones.
 
-We explicitly do **not** claim: the no-ghost theorem itself (the spanning/assembly step
-is open, see §5); the Virasoro algebra as a central extension of the Witt algebra or its
+We explicitly do **not** claim: the no-ghost theorem itself (the assembly step is now a
+proved conditional theorem, but the spanning hypothesis `DDFSpans` it is conditioned on
+remains open beyond level `N = 1`; see §5); the Virasoro algebra as a central extension of
+the Witt algebra or its
 representation theory in general (Kytölä, arXiv:2510.21741); the Poincaré–Birkhoff–Witt
 theorem (open in Mathlib and in every prior Lean vertex-algebra project we are aware of);
 the S-transformation property of the Dedekind eta function (Mathlib's
@@ -77,6 +79,16 @@ formalization: yes, worded as "instances", not the general theorem** —
 prior-formalizations.md A2: no repository-level GitHub hit for a Kac-determinant object
 (code-content search unavailable this round; only repo-name/README search ran); Kytölä
 §14 defers the general Feigin–Fuks result.
+**Byproduct (`formal/StringFormal/Virasoro/FockFreeLowLevel.lean`):** transporting the Gram
+determinant along the Verma-to-Fock map `Fock.vermaToFock` (built from the Fock vacuum being
+a highest-weight vector of weight `(c,h) = (D, ½α₀²)`) shows the `p(N)` standard descendants
+`L₋₁|k⟩, …` of the `D`-boson Fock space are linearly independent whenever the Kac
+determinant at `(D, ½α₀²)` is nonzero, for `N ≤ 4`
+(`Fock.linearIndependent_fockDesc{1,2,3,4}`) — i.e. the Fock module is free over `U(Vir⁻)`
+in degrees `≤ 4`, for every `D` and every momentum. A further byproduct,
+`Fock.hwv_ne_zero_of_two_le`, gives `V(c,h) ≠ 0` for every natural `c ≥ 2` and **every** `h`
+(via the Lorentzian Fock realization), strengthening C1's existence-conditional-on-`hwv ≠ 0`
+result to an unconditional one on this weight family.
 
 **(C3) Transverse DDF operator algebra on the momentum-tower Fock space.**
 `lie_ddfOp_ddfOp` (`⁅Aᵉₘ,Aᵟₙ⁆ = m(ε·δ)δ_{m+n,0}·id`, `NoGhost/DDFAlgebra.lean`),
@@ -192,7 +204,14 @@ measure's modular invariance (`TorusMeasure.lean`), Möbius three-point Jacobian
 Mandelstam identities (`MobiusJacobian.lean`), GSO sector counts (`FiniteCounts.lean`),
 the Green–Schwarz factorization identity and IIB anomaly-matrix kernel
 (`GreenSchwarzAlgebraGen.lean`, `AnomalyPolynomial.lean`, `IIBAnomalyUnique.lean`), and
-the `E₈` root power sums (`E8Roots.lean`).
+the `E₈` root power sums (`E8Roots.lean`). Two general-purpose additions not tied to a
+specific C1–C6 component: the graded Euler–Poincaré principle for cochain complexes
+(`EulerPoincare.lean`, `finrank`-additivity of a complex's Euler characteristic across
+cohomology and coboundaries) and the zeta-regularized value of the divergent oscillator
+sum `Σ_n n e^{-un} - 1/u² → -1/12` as `u → 0⁺` (`RegulatedSum.lean`), bridged to Mathlib's
+`riemannZeta (-1) = -1/12` (`Bridge.riemannZeta_neg_one`, `Math/MathlibBridges.lean`) —
+support lemmas for the light-cone zero-point-energy computation elsewhere in the graph, not
+part of C1–C6 themselves.
 
 **`Virasoro/`.** The Witt/Virasoro algebras (`Witt.lean`, `Basic.lean`, built on
 Mathlib's `LieAlgebra.ofTwoCocycle`), Verma modules and their ordered-word spanning set
@@ -248,8 +267,10 @@ filing is the captain's call).
 
 ## 5. What remains for the no-ghost theorem
 
-The blueprint (`formal/BLUEPRINT-noghost.md`) splits the remaining work into a
-longitudinal-operator track, a spanning/light-cone track, and an assembly step.
+The blueprint (`formal/BLUEPRINT-noghost.md`) splits the work into a longitudinal-operator
+track, a spanning/light-cone track, and an assembly step. The assembly step is now done, as
+a conditional theorem; what remains open is entirely inside the spanning hypothesis it is
+conditioned on.
 
 **Longitudinal operators: done.** The project uses Goddard–Thorn's `K_m = k_0·α_m`
 (Goddard 2008 lecture-notes self-report; primary 1972 text not obtained, §6) rather than
@@ -262,30 +283,51 @@ proved with no `sorry`: `⁅L_m,K_n⁆ = -nK_{m+n}` (`lie_towerLop_kOp`), `⁅K_
 specialization — `⁅K_m,A^ε_n⁆ = 0` (`lie_kOp_ddfOp`, `NoGhost/Longitudinal.lean`).
 (`kOp_apply_single_vacuum_of_pos` is a further proved fact, not counted among these six.)
 
-**Spanning: partial.** `NoGhost/LightCone.lean` defines the DDF-span submodule
-`ddfSpan` and proves the `N = 1` case of the spanning statement,
-`towerPhys_bigrade_one_le_ddfSpan_sup_spurious`, under the hypotheses
-`Ε : TransverseFrame η b` (a chosen transverse frame), `hεa : ∀ i, dotVec η (Ε.vec i) a =
-0`, and `hspan : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))` (physical states at
-bigrade 1 lie in `ddfSpan ⊔ spurious`), with `D = 26` not appearing anywhere in this
-argument. `hspan` is discharged only for one explicit witness frame
-(`witness_frameSpansOrthogonal`, requiring `[Algebra ℚ R]` and `hD : 3 ≤ D`). The general
-spanning lemma — a unitriangular change of basis between the naive oscillator basis and
-the DDF+longitudinal+transverse basis, at every level `N` — is open; `N = 2` is blocked
-on two named lemmas recorded in `formal/TODO.md` under `noghost-b`.
+**Assembly: done, conditional on the spanning hypothesis `DDFSpans`.**
+`NoGhost/Assembly.lean`'s `no_ghost_of_spans` proves that *if* `DDFSpans`
+(`H_phys ≤ ddfSpan ⊔ H_null` at the ground-state intercept `a₀ = α'k²`) holds, then the
+bilinear form induced on `H_phys ⧸ H_null` of the momentum tower is positive definite:
+every class has non-negative norm, and only the zero class has norm zero. This combines
+spanning, positivity of the transverse Gram matrix, and the null-state quotient into a
+single theorem, for every `D` and over any ordered field — `D = 26` does not appear in the
+statement or proof, because it is entirely absorbed into `DDFSpans` itself (blueprint
+§B.5: the DDF states have transverse character `φ(q)^{-(D-2)}`, the physical-mod-null
+states have the covariant one, and the two agree only at `D = 26`, `a₀ = 1`).
+`NoGhost/Statement.lean` remains the deliberately-empty stub described in §4 — the
+conditional theorem lives in `Assembly.lean`, not yet wired to that stub. No isometry
+`ddfSpan ≃ₗ H_phys ⧸ H_null` is constructed either; injectivity follows from
+`ddf_span_pos`, but surjectivity is `DDFSpans` again, so such an equivalence would carry
+no further information.
 
-**Assembly and the `(B-26)` step: open.** The final assembly combining spanning,
-positivity of the transverse Gram matrix, and the quotient by null/spurious states is not
-yet written; `NoGhost/Statement.lean` remains a stub for exactly this reason. Critically,
-`D = 26` enters the no-ghost argument at exactly one step — the blueprint's `(B-26)` —
-where, outside the transverse subspace, the `p_{D-1}(N) - p_{D-2}(N)` extra directions
-are shown to be exactly the null states. This step is sourced only to Goddard 2008
-(6.4)'s one-line, unproven citation of Goddard–Thorn 1972 and Brower 1972 (primary texts
-not obtained, see §6); formalizing it requires committing to one of the two original
-mechanisms (Brower's, needing `A^L_n`, or GT's, needing a K-condition balancing argument)
-neither of which the current codebase implements. `D = 26` does **not** appear in
-character/dimension counting, the DDF algebra, DDF adjoints, or transverse-Gram
-positivity — only at this one step.
+**Spanning (`DDFSpans`): reduced to a slice-by-slice induction; `N = 1` closed, `N = 2`
+open.** `NoGhost/LightCone.lean` defines the DDF-span submodule `ddfSpan` and proves the
+`N = 1` case of the spanning statement, `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`,
+under the hypotheses `Ε : TransverseFrame η b` (a chosen transverse frame),
+`hεa : ∀ i, dotVec η (Ε.vec i) a = 0`, and `hspan : FrameSpansOrthogonal η Ε
+(towerMomentum a b (-1))`; `hspan` is discharged only for one explicit witness frame
+(`witness_frameSpansOrthogonal`, requiring `[Algebra ℚ R]` and `hD : 3 ≤ D`).
+`NoGhost/Assembly.lean`'s `ddfSpans_bigrade_neg_one_one` packages this into the `(-1,1)`
+bigraded slice of `DDFSpans` unconditionally in `D`. `NoGhost/Glue.lean`'s
+`ddfSpans_of_forall_slice` proves the general reduction: if `DDFSpansOn` holds on *every*
+bigraded slice `towerBigrade D R j N`, then `DDFSpans` holds — because `H_phys` is itself
+spanned by its bigraded pieces (`towerPhys_le_iSup_bigrade`, from `L_0`/`L_m` being
+homogeneous for the bigrading). This turns "prove `DDFSpans`" into a level-by-level
+induction. `NoGhost/LevelTwoSpan.lean` (54 top-level declarations, no `sorry`) resolves the
+two named blockers previously recorded for the `N = 2` step: the explicit level-one and
+level-two Laurent coefficients of the creation exponential, and the *complete* (not just
+`SO(D-1)`-scalar) solution of `L_1ψ = L_2ψ = 0` on the level-two slice, both for a single
+Fock space and on the tower. The `N = 2` slice of `DDFSpans` itself
+(`towerPhys_bigrade_two_le_ddfSpan_sup_spurious`) is not yet proved — this is now
+unblocked rather than obstructed, but still open, and the general-`N` case remains a fully
+open unitriangular change-of-basis argument. `D = 26` continues to enter the no-ghost
+argument at exactly one place — proving `DDFSpans` at every slice, the blueprint's
+`(B-26)` — sourced only to Goddard 2008 (6.4)'s one-line, unproven citation of
+Goddard–Thorn 1972 and Brower 1972 (primary texts not obtained, see §6); formalizing the
+general case requires committing to one of the two original mechanisms (Brower's, needing
+`A^L_n`, or GT's, needing a K-condition balancing argument), neither of which the current
+codebase implements. `D = 26` does **not** appear in character/dimension counting, the DDF
+algebra, DDF adjoints, or transverse-Gram positivity, nor in the assembly theorem above —
+only in this one remaining step.
 
 ## 6. Threats to validity
 
@@ -308,13 +350,20 @@ including `prior-formalizations.md`, the source for every first-formalization cl
 translation to audit the evidence trail.
 
 **Axiom check.** `uv run stringgraph check-axioms` most recently reported (main,
-2026-09-11) **82 declarations checked: 82 ok, 0 non-standard axioms, 0 missing, 0
-errors** for the graph-linked declarations, all closing over only `propext`,
-`Classical.choice`, `Quot.sound`. This count covers only the declarations referenced from
-a graph card's `formal.lean_decl` field, not every declaration in
+2026-09-11 daytime, before the Lean-island-1 merge landed) **82 declarations checked: 82
+ok, 0 non-standard axioms, 0 missing, 0 errors** for the graph-linked declarations, all
+closing over only `propext`, `Classical.choice`, `Quot.sound`. After merging the
+no-ghost-conditional/level-two-span/Fock-free-low-level/Euler–Poincaré/regulated-sum work
+into `main` (2026-09-11), the graph now references **86** unique `formal.lean_decl`
+values (`collect_decls` over the merged graph, counted directly rather than re-running the
+Lean checker — this pass does not run `lake build`); the individual islands that
+contributed the new 4 declarations each passed `check_axioms --all` on their own branch
+before merge (`formal/TODO.md` per-island axiom log), but an aggregate rerun over all 86
+has not been performed since the merge. This count covers only the declarations
+referenced from a graph card's `formal.lean_decl` field, not every declaration in
 `formal/StringFormal/`. Not part of `validate` or the pre-commit hook (needs a full
 `lake build`, too slow per-commit); `lead` runs it manually before each merge into
-`main`; rerun before camera-ready.
+`main`; rerun the aggregate check before camera-ready.
 
 ## 7. Artifact
 
@@ -329,11 +378,12 @@ acyclicity, convention consistency); `cd formal && lake exe cache get && lake bu
 `uv run stringgraph check-axioms` (cross-checks every `formal.lean_decl` against a clean
 axiom set, §6); `uv run stringgraph report` for the summary statistics below.
 
-**Current graph size** (`uv run stringgraph report`, main, 2026-09-11): 611 statements,
-504 derivations, 3 milestones, 21 conventions; by kind, 116 definitions and 495
-propositions; by effective status, 78 formalized, 110 rigorous, 356 physical-argument,
-29 conjecture, 1 refuted, 37 open. The graph is under continuous concurrent edit by
-parallel agents, so these are a snapshot, not a fixed count; rerun before camera-ready.
+**Current graph size** (`uv run stringgraph report`, main, 2026-09-11 after the
+Lean-island-1 merge): 617 statements, 510 derivations, 3 milestones, 22 conventions; by
+kind, 116 definitions and 501 propositions; by effective status, 80 formalized, 110
+rigorous, 358 physical-argument, 29 conjecture, 1 refuted, 39 open. The graph is under
+continuous concurrent edit by parallel agents, so these are a snapshot, not a fixed
+count; rerun before camera-ready.
 
 ## Revision log
 
@@ -357,7 +407,7 @@ Response to `reviewer-paper-outline-1` (2026-09-11). C = confirmed, P = plausibl
 | C14 | Stale/contradictory counts | §6, §7: fresh 2026-09-11 numbers |
 | C15 | Meta-sentence re: "static documentation" | §3: deleted |
 | P1 | C1 existence "unconditional in hwv" | Abstract: existence iff hwv `≠ 0` |
-| P2 | Axiom claim over "all declarations" | Abstract: scoped to 82 graph-linked decls |
+| P2 | Axiom claim over "all declarations" | Abstract: scoped to graph-linked decls (82 at review time, 86 after the 2026-09-11 merge, §6) |
 | P3 | C6 omitted `E₈` Cartan matrix | §2 C6: `CartanMatrix.E₈` caveat added |
 | P4 | leanblueprint colours listed as 4 | §3: full 8-key list |
 | P5 | GT `K_m` self-report qualifier missing | §5: added |
@@ -365,3 +415,21 @@ Response to `reviewer-paper-outline-1` (2026-09-11). C = confirmed, P = plausibl
 | P7 | "their full algebra" overclaim | §4: softened |
 | P8 | Duplicated axiom text, irrelevant detail | §6: merged, cleaned |
 | P9 | Quotient-obstacle wording imprecise | §4: `P⧸Q` for `P:Submodule R(ℤ→₀R)`, `Q:Submodule R P` |
+
+### Post-merge update (2026-09-11, recovery after API outage)
+
+The branch was recovered mid-edit after an API outage killed the agent applying the
+`reviewer-paper-outline-1` fixes above; all 15 confirmed + 9 plausible items were already
+applied to the working tree and are committed as-is. This pass additionally merged `main`
+(bringing in the no-ghost-conditional/level-two-span/Fock-free-low-level/Euler–Poincaré/
+regulated-sum Lean work landed since the review), refreshed every count against the
+merged graph, and updated the no-ghost-theorem narrative in §5 and the abstract to
+reflect that the assembly step is now a proved conditional theorem.
+
+| # | Change | Where |
+|---|---|---|
+| M1 | Graph/Lean counts stale after merge (611/504/21/82 → 617/510/22/86) | Abstract, §6, §7: `uv run stringgraph report` rerun on the merged graph; unique `formal.lean_decl` count rerun via `collect_decls`, not a fresh `check-axioms`/`lake build` (none run this pass) |
+| M2 | Assembly step said "open" but is now a proved conditional theorem (`no_ghost_of_spans`) | Abstract, §5: rewritten — assembly done conditional on `DDFSpans`; only the spanning hypothesis itself (open beyond `N=1`) remains |
+| M3 | Spanning section didn't mention the slice-to-total glue lemma or `N=2` progress | §5: added `Glue.lean`'s `ddfSpans_of_forall_slice` and `LevelTwoSpan.lean`'s resolution of the two named `N=2` blockers (the `N=2` spanning proof itself remains open) |
+| M4 | C2 (Kac determinant) didn't mention the Fock-freeness byproduct | §2 C2: added `FockFreeLowLevel.lean` (`N≤4` Fock-module freeness; `hwv_ne_zero_of_two_le` strengthens C1's existence result) |
+| M5 | §4 `Math/` file list omitted two newly merged general-purpose lemma files | §4: added `EulerPoincare.lean`, `RegulatedSum.lean`, and the `Bridge.riemannZeta_neg_one` bridge, flagged as not part of C1–C6 |
