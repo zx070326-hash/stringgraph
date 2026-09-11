@@ -7,6 +7,9 @@ import Mathlib.Data.Fin.VecNotation
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Data.Rat.Defs
 import Mathlib.Tactic.Ring
+import Mathlib.Tactic.NormNum
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
 
 /-!
 # The `E₈` root system and its power sums `∑_α (α ⬝ x)^k` for `k = 2, 4, 6`
@@ -354,5 +357,100 @@ theorem e8_trace_identities (x : Fin 8 → ℚ) :
     e8PowerSum 4 x = (1 / 100) * (e8PowerSum 2 x) ^ 2 ∧
       e8PowerSum 6 x = (1 / 7200) * (e8PowerSum 2 x) ^ 3 :=
   ⟨e8_trace_four x, e8_trace_six x⟩
+
+
+/-! ## Sanity checks on the list: norms, distinctness, the Finset of roots
+
+`e8Roots` is a *definition*; the two facts below are what one would check by hand against
+Humphreys §2.10: every listed vector has squared length `2`, and the 240 entries are
+pairwise distinct (so `|Φ| = 240` is a genuine count, not a list length). Neither fact is
+used in the power-sum proofs above. -/
+
+theorem pairs28_ne : ∀ p ∈ pairs28, p.1 ≠ p.2 := by decide
+
+theorem ev4_sq : ∀ s ∈ ev4, ∀ i, s i * s i = 1 := by
+  intro s hs
+  simp only [ev4, List.mem_cons, List.mem_nil_iff, or_false] at hs
+  rcases hs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;>
+    (intro i; fin_cases i <;> norm_num)
+
+theorem od4_sq : ∀ s ∈ od4, ∀ i, s i * s i = 1 := by
+  intro s hs
+  simp only [od4, List.mem_cons, List.mem_nil_iff, or_false] at hs
+  rcases hs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl <;>
+    (intro i; fin_cases i <;> norm_num)
+
+theorem vroot_normSq (i j : Fin 8) (h : i ≠ j) (a b : ℚ) (ha : a * a = 1) (hb : b * b = 1) :
+    (∑ k, vroot i j a b k * vroot i j a b k) = 2 := by
+  rw [vroot_dot]
+  simp only [vroot, if_true, h, h.symm, if_false, add_zero, zero_add]
+  rw [ha, hb]; norm_num
+
+theorem spinRoot_normSq (s t : Fin 4 → ℚ) (hs : ∀ i, s i * s i = 1)
+    (ht : ∀ i, t i * t i = 1) :
+    (∑ k, spinRoot s t k * spinRoot s t k) = 2 := by
+  simp only [spinRoot, Fin.sum_univ_eight, Matrix.cons_val]
+  linear_combination (1 / 4 : ℚ) * (hs 0 + hs 1 + hs 2 + hs 3 + ht 0 + ht 1 + ht 2 + ht 3)
+
+/-- Every listed root has squared length `2` ("`Φ` consists of all vectors of squared
+length 2 in `L`", Humphreys §2.10 — only the inclusion `⊆` is checked here). -/
+theorem e8Roots_normSq : ∀ α ∈ e8Roots, (∑ i, α i * α i) = 2 := by
+  intro α hα
+  simp only [e8Roots, e8VectorRoots, e8SpinorRoots, List.mem_append, List.mem_flatMap,
+    List.mem_map] at hα
+  rcases hα with ⟨p, hp, hmem⟩ | ⟨s, hs, t, ht, rfl⟩ | ⟨s, hs, t, ht, rfl⟩
+  · have hne := pairs28_ne p hp
+    simp only [List.mem_cons, List.mem_nil_iff, or_false] at hmem
+    rcases hmem with rfl | rfl | rfl | rfl <;>
+      exact vroot_normSq _ _ hne _ _ (by norm_num) (by norm_num)
+  · exact spinRoot_normSq s t (ev4_sq s hs) (ev4_sq t ht)
+  · exact spinRoot_normSq s t (od4_sq s hs) (od4_sq t ht)
+
+/-- A base-4 fingerprint of a vector, injective on the root list: each coordinate is coded
+`1 ↦ 1`, `-1 ↦ 2`, `1/2 ↦ 3`, anything else (`0`, `-1/2`) `↦ 0`. Vector-type roots have
+exactly two non-zero digits in `{1, 2}`; spinor-type roots have digits in `{0, 3}` and are
+determined by where the `3`s sit. (Kernel `decide` cannot evaluate `ℚ` arithmetic, so
+distinctness is proved by having `norm_num` evaluate the fingerprints and `decide` compare
+the resulting 240 natural numbers.) -/
+def code (q : ℚ) : ℕ := if q = 1 then 1 else if q = -1 then 2 else if q = 1 / 2 then 3 else 0
+
+/-- See `code`. -/
+def key (α : Fin 8 → ℚ) : ℕ :=
+  code (α 0) + 4 * code (α 1) + 16 * code (α 2) + 64 * code (α 3) + 256 * code (α 4)
+    + 1024 * code (α 5) + 4096 * code (α 6) + 16384 * code (α 7)
+
+set_option maxHeartbeats 1000000 in
+set_option maxRecDepth 100000 in
+/-- The 240 listed roots are pairwise distinct. -/
+theorem e8Roots_nodup : e8Roots.Nodup := by
+  refine List.Nodup.of_map key ?_
+  simp only [e8Roots, e8VectorRoots, e8SpinorRoots, pairs28, ev4, od4, List.flatMap_cons,
+    List.flatMap_nil, List.map_cons, List.map_nil, List.append_nil, List.cons_append,
+    List.nil_append]
+  simp (config := { maxSteps := 100000000 }) only [key, code, vroot, spinRoot,
+    Matrix.cons_val, Fin.isValue, Fin.reduceEq, if_true, if_false, add_zero, zero_add]
+  norm_num only
+  decide
+
+/-- The root system of `E₈` as a `Finset`. -/
+def e8RootSet : Finset (Fin 8 → ℚ) := e8Roots.toFinset
+
+/-- `|Φ(E₈)| = 240`, as a cardinality. -/
+theorem e8RootSet_card : e8RootSet.card = 240 := by
+  rw [e8RootSet, List.toFinset_card_of_nodup e8Roots_nodup, e8Roots_length]
+
+/-- The power sums as `Finset` sums over `e8RootSet`. -/
+theorem e8PowerSum_eq_sum (k : ℕ) (x : Fin 8 → ℚ) :
+    e8PowerSum k x = ∑ α ∈ e8RootSet, (∑ i, α i * x i) ^ k := by
+  rw [e8RootSet, List.sum_toFinset _ e8Roots_nodup]; rfl
+
+/-- `e8_power_sum_two/four/six` in `Finset` form. -/
+theorem e8RootSet_power_sums (x : Fin 8 → ℚ) :
+    (∑ α ∈ e8RootSet, (∑ i, α i * x i) ^ 2) = 60 * (∑ i, x i ^ 2) ∧
+    (∑ α ∈ e8RootSet, (∑ i, α i * x i) ^ 4) = 36 * (∑ i, x i ^ 2) ^ 2 ∧
+    (∑ α ∈ e8RootSet, (∑ i, α i * x i) ^ 6) = 30 * (∑ i, x i ^ 2) ^ 3 :=
+  ⟨by rw [← e8PowerSum_eq_sum, e8_power_sum_two],
+   by rw [← e8PowerSum_eq_sum, e8_power_sum_four],
+   by rw [← e8PowerSum_eq_sum, e8_power_sum_six]⟩
 
 end StringFormal.Math.E8
