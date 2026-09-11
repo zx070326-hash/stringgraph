@@ -883,4 +883,66 @@ theorem ddfSpans_bigrade_neg_two_two (hD : 2 ≤ D) (F : DDFLightConeFrame η a 
 
 end Closing
 
+/-! ### Two by-products: `𝒟₂|0;p⟩ ≠ 0`, and the sharpness of `D = 26` for that state -/
+
+section ByProducts
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- **`𝒟₂|0;p_{-2}⟩ ≠ 0`.**  Blueprint §B″'s correction note records this as open, and notes
+that the Gram criterion *cannot* supply it: `kacDet2 26 (1-2) = 0` is precisely why the state is
+null.  The `α_{-2}` component does supply it — that component is `5 p_{-2}`, and
+`p_{-2}·p_{-2} = -2 ≠ 0` forces some component of `p_{-2}` to be nonzero. -/
+theorem descTwo_single_neg_two_ne_zero (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    descTwo η a b (Finsupp.single (-2) (1 : Fock D K)) ≠ 0 := by
+  intro hzero
+  have hp : ∀ ν : Fin D, towerMomentum a b (-2) ν = 0 := by
+    intro ν
+    have h := alphaTwoCoeff_descTwo_single (η := η) (a := a) (b := b) F.hη ν
+    rw [hzero, map_zero] at h
+    have h5 : (5 : K) ≠ 0 := by norm_num
+    have hprod : η ν * towerMomentum a b (-2) ν = 0 :=
+      (mul_eq_zero.1 h.symm).resolve_left h5
+    have hη0 : η ν ≠ 0 := by
+      intro hc
+      have h1 := F.hη ν
+      rw [hc, mul_zero] at h1
+      exact one_ne_zero h1.symm
+    exact (mul_eq_zero.1 hprod).resolve_left hη0
+  have hzz : dotVec η (towerMomentum a b (-2)) (towerMomentum a b (-2)) = 0 := by
+    rw [dotVec]
+    exact Finset.sum_eq_zero fun ν _ => by rw [hp ν, mul_zero]
+  rw [dotVec_momentum_neg_two_self hD F] at hzz
+  norm_num at hzz
+
+/-- **The concrete `N = 2` Type-2 state is physical exactly at `D = 26`.**
+
+The slice form of `NullSeedsTwo.descTwo_mem_towerPhysSubmodule_iff`, with all its hypotheses
+discharged by the light-cone frame (`descTwo_single_neg_two_ne_zero` supplies the nonvanishing).
+So at `(D : K) ≠ 26` the one Type-2 null state of blueprint §B″.2.1 does not exist and the
+level-two slice carries only the `D - 1` Type-1 null states — one short of the `D` that
+`finrank_towerPhys_inf_towerBigrade_two_le` needs.
+
+This is *not* a proof of `¬ B26 2` at `D ≠ 26`: that would additionally require the two
+counting bounds to be equalities and an upper bound on `dim (H_null ⊓ V_2)`, neither of which is
+available (see `formal/TODO.md`, `noghost-pr5`). -/
+theorem descTwo_single_mem_towerPhysSubmodule_iff (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    descTwo η a b (Finsupp.single (-2) (1 : Fock D K))
+        ∈ towerPhysSubmodule η a b (1 : K) ↔ (D : K) = 26 := by
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD
+  have hy : (Finsupp.single (-2) (1 : Fock D K)) ∈ towerBigrade D K (-2) 0 :=
+    single_mem_towerBigrade (Fock.one_mem_levelSubmodule D K)
+  have hpos : ∀ n : ℤ, 0 < n → towerLop η a b n (Finsupp.single (-2) (1 : Fock D K)) = 0 :=
+    fun n hn => towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt η a b hy (by exact_mod_cast hn)
+  have h0 : towerLop η a b 0 (Finsupp.single (-2) (1 : Fock D K))
+      = -(Finsupp.single (-2) (1 : Fock D K)) := by
+    rw [towerLop_zero_apply_of_mem_towerBigrade_of_zeroModeSq_eq_two η a b F.hη
+      F.frame.isotropic F.hba haa hy]
+    push_cast
+    module
+  exact descTwo_mem_towerPhysSubmodule_iff η a b F.hη hpos h0
+    (fun hc => descTwo_single_neg_two_ne_zero hD F (by rw [hc, map_zero]))
+
+end ByProducts
+
 end StringFormal.NoGhost
