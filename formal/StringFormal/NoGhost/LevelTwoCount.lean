@@ -6,6 +6,8 @@ Authors: stringgraph lean-formalizer
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
 import StringFormal.NoGhost.NullSeedsTwo
+import StringFormal.NoGhost.LevelTwoElim
+import StringFormal.NoGhost.LightConeResolution
 import StringFormal.NoGhost.SliceDim
 import StringFormal.NoGhost.SpuriousElimination
 import Mathlib.Data.Sym.Card
@@ -485,5 +487,84 @@ theorem b26_two_of_finrank_towerNull (hD : 2 ≤ D) (F : DDFLightConeFrame η a 
   exact le_trans h (by omega)
 
 end B26Two
+
+/-! ### Reading off the `α_{-2}` component
+
+The `D` null states of the level-two slice are distinguished by their `α^ν_{-2}` components:
+the Type-1 state `L_{-1}(v·α_{-1})|0;p⟩` has component `v`, and the Type-2 state
+`𝒟₂|0;p⟩` has component `5p`.  Everything else at level two is a product of two `α_{-1}`'s and
+contributes nothing, which is the following lemma. -/
+
+section AlphaTwoCoeff
+
+open MvPolynomial
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- **Products of two level-one states have no `α_{-2}` component.**  In the `coeff_mul` sum
+over `d + e = single (ν,2) 1` the first index `d` is supported on `(ν,2)` alone, so its level is
+`0` or `2`, never `1`.  (Only the left factor needs to be homogeneous of level one.) -/
+lemma coeff_single_two_mul_of_mem_levelSubmodule_one {P : Fock D R}
+    (hP : P ∈ Fock.levelSubmodule D R 1) (Q : Fock D R) (ν : Fin D) :
+    coeff (Finsupp.single ((ν, 2) : Osc D) 1) (P * Q) = 0 := by
+  classical
+  rw [coeff_mul]
+  refine Finset.sum_eq_zero fun x hx => ?_
+  rw [Finset.mem_antidiagonal] at hx
+  by_cases hd : coeff x.1 P = 0
+  · rw [hd, zero_mul]
+  · exfalso
+    have hlvl : Fock.level D x.1 = 1 := hP hd
+    have hzero : ∀ u : Osc D, u ≠ (ν, 2) → x.1 u = 0 := by
+      intro u hu
+      have h := congrArg (fun f : Osc D →₀ ℕ => f u) hx
+      simp only [Finsupp.add_apply] at h
+      rw [Finsupp.single_eq_of_ne hu] at h
+      omega
+    have hsingle : x.1 = Finsupp.single ((ν, 2) : Osc D) (x.1 (ν, 2)) := by
+      refine Finsupp.ext fun u => ?_
+      by_cases hu : u = (ν, 2)
+      · rw [hu, Finsupp.single_eq_same]
+      · rw [hzero u hu, Finsupp.single_eq_of_ne hu]
+    have h2 : (((2 : ℕ+)) : ℕ) = 2 := rfl
+    rw [hsingle, Fock.level_single, Fock.oscLevel_apply, h2] at hlvl
+    omega
+
+/-- The `α^ν_{-2}` component of `(e·α_{-2})|k⟩` is `η_ν e^ν`. -/
+lemma coeff_single_two_secondState (η e : Fin D → R) (ν : Fin D) :
+    coeff (Finsupp.single ((ν, 2) : Osc D) 1) (Fock.secondState η e) = η ν * e ν := by
+  classical
+  rw [Fock.secondState, coeff_sum, Finset.sum_eq_single ν]
+  · rw [coeff_smul, coeff_X, if_pos rfl, smul_eq_mul, mul_one]
+  · intro μ _ hμ
+    have hne : ¬ (Finsupp.single ((μ, 2) : Osc D) 1 = Finsupp.single ((ν, 2) : Osc D) 1) :=
+      fun hc => hμ (congrArg Prod.fst (Finsupp.single_left_injective one_ne_zero hc))
+    rw [coeff_smul, coeff_X, if_neg hne, smul_zero]
+  · intro h
+    exact absurd (Finset.mem_univ ν) h
+
+/-- `α_{-1}·α_{-1}|k⟩` has no `α_{-2}` component. -/
+lemma coeff_single_two_traceState (η : Fin D → R) (ν : Fin D) :
+    coeff (Finsupp.single ((ν, 2) : Osc D) 1) (Fock.traceState η) = 0 := by
+  classical
+  rw [Fock.traceState, coeff_sum]
+  refine Finset.sum_eq_zero fun μ _ => ?_
+  rw [coeff_smul, coeff_single_two_mul_of_mem_levelSubmodule_one
+    (Fock.X_mem_levelSubmodule_one μ) _ ν, smul_zero]
+
+/-- The linear functional "`α^ν_{-2}` component on rung `-2`", used to separate the `D` null
+states of the level-two slice. -/
+noncomputable def alphaTwoCoeff (D : ℕ) (R : Type*) [CommRing R] (ν : Fin D) :
+    TowerFock D R →ₗ[R] R :=
+  (MvPolynomial.lcoeff (R := R) (Finsupp.single ((ν, 2) : Osc D) 1)).comp
+    (Finsupp.lapply (-2 : ℤ))
+
+@[simp]
+lemma alphaTwoCoeff_single (ν : Fin D) (P : Fock D R) :
+    alphaTwoCoeff D R ν (Finsupp.single (-2 : ℤ) P)
+      = coeff (Finsupp.single ((ν, 2) : Osc D) 1) P := by
+  simp [alphaTwoCoeff]
+
+end AlphaTwoCoeff
 
 end StringFormal.NoGhost
