@@ -54,7 +54,17 @@ gaps:
     primitive objects」的化简下证明，去掉该化简的手续逐字外包「It is given in Ahlfors and Sario [1]」；
     Lemma 6.1（pp. 92–95）六个 Step 写在书内但逐字自陈「the same steps as in … Ahlfors and Sario [1]」。
     ⇒ 本推导的 rigorous 定级仍成立（出版专著 + 完整证明链，外包对象是另一本出版专著），
-    但「证明链在本书内闭合」这一句只对 Lemma 6.1 成立，对 Prop 6.1 不成立；Ahlfors–Sario 本项目未登记、未读。
+    但「证明链在本书内闭合」这一句只对 Lemma 6.1 成立，对 Prop 6.1 不成立。
+    **2026-09-11 补（curator-small-backlog-5，依 researcher math-sources.md §53）**：Ahlfors–Sario, *Riemann Surfaces*
+    (PUP 1960) 已登记为 `ahlfors-sario-1960`，**正文仍未取得（L0）**。Gallier–Xu 在 References [1]、Prop 6.1 证明末、
+    Lemma 6.1 证明首句与 Note F.9（书 p.169）**四处都不给 A–S 的章号、节号或定理号**，只给 A–S 自己的
+    **"Step 1"–"Step 6"** 标签（Note F.9 逐字：Step 1 消 aa⁻¹、Step 2 归约到单顶点（含边界顶点）、Step 3 化为单胞腔并引入
+    cross-cap、Step 4 引入 handle、Step 5 handle 化为 cross-cap、Step 6 环分组）——GX Lemma 6.1 的六个 Step 就是 A–S 的
+    Step 1–6 逐一对应。故 A–S 的 loc **目前只能写 "Steps 1–6 of the classification proof（Gallier–Xu [1] 转述，原书页码未知）"**，
+    不得编造节号。**带节号的替代来源**：Seifert–Threlfall, *A Textbook of Topology* (Academic Press 1980)，
+    **Chapter VI, Section 38（无边）+ Section 40（带边改造）**（Note F.9 逐字；GX References [9]）——
+    ⚠ 该书**尚未登记进 sources.bib**（§53.4 Q53.3 建议下一轮优先），登记前不得作 `ref`。
+    另 Note F.9 逐字：A–S 的证明覆盖带边曲面，S–T 先证无边再在 §40 改造；这正是本卡「含带边」一支的真正出处。
   - |
     **连通性未在来源侧核实**：Gallier–Xu 第 1 章对 "surface" 的定义（是否已含连通）本图未取到。
     本卡把连通性写成显式前提，故这条缺口不影响陈述的真伪，只影响「来源是否已经这么设」。
