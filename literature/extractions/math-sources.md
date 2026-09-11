@@ -7778,6 +7778,223 @@ Ahlfors–Sario 丛书号的做法一致：没有第二来源就不写号）。
   并顺带核实德文原版与英译本的节号是否一致（§54.2 的那个 L0）。
 - **Q54.2** 英译本的译者与丛书号（§54.3 的 (a)(b)）仍未核实；一次出版方目录页或书本身的版权页即可结清。
 
+---
+
+# § NS/R 扇区的 Kac 行列式公式（Meurman–Rocha-Caridi 1986）
+
+## 55. NS/R Kac 行列式：**没有定理号**，是 §3 末尾的无编号公式 (7)–(9)（researcher，2026-09-11）
+
+> 触发（lead 派工单第 1 项）：`lian-zuckerman-1989` 的 **[22]** 是 LZ `Cor 2.19(iii)`（`V(p,κ)` 的 `Vir_κ⁻`-freeness）
+> 与 p.320 Remark 反例的最上游；`fgz-1986` 的 `Prop 2.6(i)` 也走「自由性 ⇐ 不可约分解 ⇐ Kac 行列式」这条同型链。
+> 因此需要一个**可逐字定位的编号**。**本节的结论是：这个编号不存在。**
+> 本节新增 `sources.bib` 条目 `meurman-rocha-caridi-1986`。
+
+### 55.0 结论表（先看这张）
+
+| 问题 | 答案 | 等级 |
+|---|---|---|
+| NS/R Kac 行列式公式在 MRC 1986 里的编号 | **没有编号**。是 **Sect. 3 末尾、期刊 p. 274 的四个显示公式 `(7)`、`(7')`、`(8)`、`(9)`** | **L1**（全文页图） |
+| 图里该怎么写 `loc` | `Sect. 3, eqs. (7)--(9), p. 274`（**禁写 "Theorem N"**） | — |
+| 证明在哪 | **Sect. 4**；作者自陈 = **Proposition 4.10**（degree computation）+ **Proposition 4.13**（在不可约因子的簇上取零） | **L1** |
+| NS 公式是谁猜的 | **Kac，MRC 的 [14] = LNP 94 (1979) = `kac-1979`**（"stated (without proof)"） | **L1** |
+| R 公式是谁猜的 | **Friedan–Qiu–Shenker，MRC 的 [7]（private communication）+ [8] = PLB 151B, 37 (1985)** | **L1** |
+| 玻色（Virasoro）公式的首发 | MRC 说 **[13] 与 [14] 两篇都有**（[13] = ICM Helsinki = `kac-1980-icm`，[14] = LNP 94 = `kac-1979`） | **L1** |
+| 还有没有别人证过 NS/R 行列式 | 有：**Curtright 与 Thorn**（p.264 脚注 2），以及 **[27] = `thorn-1984`** | **L1**（MRC 自述） |
+
+### 55.1 取件与页映射
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 卷期目录（找 euclid id） | `projecteuclid.org/journals/communications-in-mathematical-physics/volume-107/issue-2` | ✅ 10 篇全列；MRC = **`cmp/1104116024`**，pp. 263–294 |
+| 全文 PDF | `projecteuclid.org/download/pdf_1/euclid.cmp/1104116024` | ✅ **3.2 MB，32 页**，落盘后 `Read(pages=)` 全可辨 |
+| 元数据 | `api.crossref.org/works?query.bibliographic=…` | ✅ DOI **10.1007/BF01209395**，CMP **107(2) 263–294**，issued **1986-06** |
+| 摘要逐字 | `inspirehep.net/api/literature?q=j Commun.Math.Phys.,107,263&fields=abstracts` | ✅ recid **237833**，但**只收了摘要的第一段** |
+
+- **页映射：PDF 页 = 期刊页 − 262**（p.263 = PDF 1；p.274 = PDF 12；参考表 p.294 = PDF 32）。
+- 本轮实读页：PDF 1–6（p.263–268）、9–14（p.271–276）、31–32（p.293–294）。**Sect. 4 中段与 Sect. 5 未逐页读**。
+- 扫描件由 **ABBYY FineReader（2004 年前后）** 制作，正文与公式渲染清楚，**唯下标/上标字号极小**。
+
+### 55.2 ★★ 核心结论：行列式公式在本文里是**无编号显示公式**
+
+p.264 的章节导览逐字：
+
+> 「In Sect. 3 we present some basic results on the Neveu-Schwarz and Ramond algebras and their highest weight
+> representations. **The determinant formulas are stated at the end of this section.** In Sect. 4 we construct the
+> representations ℋ^{ξ,w} (**Theorem 4.2**) and prove that they are intertwined by a vertex operator (**Theorem 4.4**).
+> We then use the latter to obtain maximal weight vectors in ℋ^{ξ,w} (**Corollary 4.8**). We conclude this section with
+> the proof of the determinant formulas which consists of two parts: the degree computation (**Proposition 4.10**) and
+> the proof of the vanishing of the determinant on the variety of its irreducible factors (**Proposition 4.13**).
+> In Sect. 5 we construct Jantzen type filtrations following the general lines of [23], and then use them to obtain
+> character sum formulas (**Proposition 5.2**). The latter imply **Theorem 5.1** …」
+
+⇒ **§3 与 §4 之间的这段导览本身就是「公式无号、只有证明的两个 Proposition 有号」的作者自证。**
+⇒ 凡图里写「Meurman–Rocha-Caridi, Theorem X（超 Virasoro Kac 行列式）」的，**一律是编造的号**。
+
+同页另一句逐字（对 `Theorem 5.1` 的定位，别把它错当行列式公式）：
+
+> 「In the present paper we prove the determinant formulas for both the Neveu-Schwarz and Ramond algebras (Sect. 4).
+> We then use the determinant formulas to prove that the highest weights of a Verma module and that of an irreducible
+> subquotient are "linked" (**Theorem 5.1**). For the Neveu-Schwarz algebra this result was first stated by Kac [14].」
+
+### 55.3 逐字转录（期刊 p. 274）+ **可信度分层**
+
+**引出句（高可信，逐字）：**
+
+> 「We now state the formulas for the determinant of ( , )_{h,c,n,γ} (we omit the subscript γ if 𝔤 = n̂s).
+> The formula for the Neveu-Schwarz algebra was conjectured by Kac **[14]**, and the one for the Ramond algebra was
+> conjectured by D. Friedan, Z. Qiu, and S. H. Shenker **[7, 8]**. Let `r, s ∈ ½ℕ, r ≤ s`. Set, for 𝔤 = n̂s」
+
+**公式（转录，含分层）：**
+
+```
+h^±_{r,s}(c) = −(1/8)[ (r²+s²)(5−c) ± √(c²−10c+9) (r²−s²) − 8rs − 1/2 + (1/2)c ]              (7)      [𝔤 = n̂s]
+
+h^±_{r,s}(c) = −(1/8)[ (r²+s²)(5−c) ± √(c²−10c+9) (r²−s²) − 8rs − 1/2 + (1/2)c ] − 1/16        (7')     [𝔤 = r̂]
+
+ψ_{r,s}(h,c) = (h − h^+_{r,s}(c))(h − h^−_{r,s}(c))        for r ≠ s
+ψ_{r,r}(h,c) = h + (1/16)(1−c)(4r²−1)                      for 𝔤 = n̂s
+
+det( , )_{h,c,n}   = ∏_{2rs ≤ n, r−s ∈ ℤ}      ψ_{r,s}(h,c)^{p̃(n−2rs)}                    [14]   (8)   [𝔤 = n̂s]
+
+det( , )_{h,c,n,γ} = (h + c/16)^{±(1/2)p̃(n)} ∏_{2rs ≤ n, r−s ∈ ℤ+½} ψ_{r,s}(h,c)^{p̃(n−2rs)}      (9)   [𝔤 = r̂]
+
+    if n ≥ 0, and  det( , )_{h,c,0,0̄} = 1,  det( , )_{h,c,0,1̄} = h + c/16    [7,8]
+```
+
+**紧随其后的 Note（高可信，逐字）：**
+
+> 「**Note.** The nonzero constant depending on the choice of a basis of M(V(λ)) has been omitted in (8), (9).」
+
+⇒ **和 Feigin–Fuchs 的 Теорема 3.1 一样，常数项被丢掉**（FF 那边是「C 非零」，这边是「已省略」）。
+**凡节点 statement 写成 `det = α_N ∏ …` 形式的，MRC 不能支撑那个 `α_N`。**
+
+**可信度分层（务必遵守）：**
+
+- **高可信**：公式的**位置**（p.274、§3 末、编号 (7)(7')(8)(9)）；(8) 与 (9) 的**结构**
+  （NS 是单个 ∏ ψ^{p̃(n−2rs)}；R 多一个 `(h + c/16)` 的因子）；式尾的文献标记 **(8) 标 [14]、(9) 标 [7,8]**；
+  `r ≤ s`、`r,s ∈ ½ℕ`；`ψ_{r,r}` 只对 NS 定义；判别式里的 **`c²−10c+9`**；Note 的省略常数。
+- **需 auditor 复核（下标/上标字号极小）**：
+  (a) **(9) 里 `(h + c/16)` 指数上的 `±` 号**（γ = 0̄/1̄ 两支，我读到的是 `±(1/2)p̃(n)`；若无 `±` 则与 `det(,)_{h,c,0,0̄}=1` 的收尾句张力很大）；
+  (b) 两个乘积的指标条件 **`r−s ∈ ℤ`（NS）vs `r−s ∈ ℤ+½`（R）**；
+  (c) (7) 方括号内 `− 1/2 + (1/2)c` 两项的符号与是否有别的分组；
+  (d) `p̃` 的头上是波浪号（`p̃(i)`，"Let p̃(i) be as in **Proposition 3.6**"），**不是** 普通分拆函数 `p(i)`。
+- **未核实（L0）**：`Proposition 3.6` 对 `p̃` 的确切定义（本轮读到 p.271 的 Prop 3.6 证明段，但没有把定义句逐字抄下）。
+
+**参数定义（p.274 上半，高可信，逐字）**：「Let `λ ∈ 𝔥*` and set `h = λ(e₀⁺)`, `c = λ(e₀')`.」
+⇒ **`c` 是中心元 `e₀'` 的本征值、`h` 是 `e₀⁺` 的本征值**；`( , )_{h,c,n,γ}` 是 contravariant form 在
+`M(V(λ))^{λ−nδ}_γ`（权 `λ−nδ` 的 ℤ₂-齐次分量）上的限制，`n ∈ ½ℤ₊`、`γ ∈ ℤ₂`。
+
+### 55.4 contravariant form 本身也有编号（比行列式好引）
+
+p.273 的 **Proposition 3.14** 是**有编号的**，逐字（高可信）：
+
+> 「**Proposition 3.14.** (a) ( , )_λ *defines a symmetric, bilinear form on* M(V(λ)) *such that*
+> `(Xv, w)_λ = (v, σ(X)w)_λ` *for all* `X ∈ U(𝔤), v, w ∈ M(V(λ))`;
+> (b) `(M(V(λ))^{μ₁}_{γ₁}, M(V(λ))^{μ₂}_{γ₂}) = 0` *if* `μ₁ ≠ μ₂` *or* `γ₁ ≠ γ₂`, `μ₁, μ₂ ∈ 𝔥*`, `γ₁, γ₂ ∈ ℤ₂`;
+> (c) *The radical of* ( , )_λ, Rad( , )_λ, *is the maximal proper submodule of* M(V(λ));
+> (d) ( , )_λ *is the unique symmetric bilinear form on* M(V(λ)) *such that*
+> `(M(V(λ))_0̄, M(V(λ))_1̄) = 0`, `(v_λ, v_λ)_λ = 1` *and such that* (6) *is satisfied.*」
+
+⇒ **(c) 正是「Verma 模的极大真子模 = 形式的根」这条，超版有编号可引**（玻色版对应 Shapovalov）。
+另有 **Proposition 3.8**（p.271，「M has a unique maximal proper submodule」）、**Definition 3.9**（`L(V(λ))`）、
+**Proposition 3.10**（`λ(e₀⁺) = −λ(e₀')/16 ⇒ L(R(λ)) ≅ L(S(λ))`）、**Proposition 3.12**（三条 character 公式）、
+**Proposition 3.13**（`M(V(λ)) → M(V(μ))` 的同态非零则单）。**这些都是有编号的，行列式偏偏没有。**
+
+### 55.5 ★ 参考表逐字（期刊 p. 294，L1 页图）——结算「Kac 行列式首发权」悬案的直接材料
+
+本轮抄下与本项目相关的条目（编号为 MRC 自己的）：
+
+> 「 2. Feigin, B.L., Fuchs, D.B.: Funkts. Anal. Prilozh. **16**, 47–63 (1982)」
+> 「 7. Friedan, D.: Private communication to A. Rocha-Caridi」
+> 「 8. Friedan, D., Qiu, Z., Shenker, S.H.: Superconformal invariance in two dimensions and the tricritical Ising model.
+>    Phys. Lett. **151B**, 37 (1985)」
+> 「13. Kac, V.G.: Proceedings of the International Congress of Mathematicians, Helsinki (1978)」
+> 「14. Kac, V.G.: Group theoretical methods in physics. In: Lecture Notes in Physics. Beiglböck, W., Böhm, A.,
+>    Takasugi, E. (eds.), Vol. **94**, p. **441**. Berlin, Heidelberg, New York: Springer **1979**」
+> 「19. Neveu, P., Schwarz, J.H.: Factorizable dual model of pions. Nucl. Phys. **B 31**, 86–112 (1971)」
+> 「20. Ramond, P.: Dual theory for free fermions. Phys. Rev. **D 3**, 2415–2418 (1971)」
+> 「26. Shapovalov, N.N.: Funct. Anal. Appl. **6**, 307–312 (1972)」
+> 「27. Thorn, C.B.: Computing the Kac determinant using dual model techniques and more about the no-ghost theorem.
+>    Nucl. Phys. **B 248**, 551 (1984)」
+
+**四条读数：**
+
+1. ★★ **MRC 的 [13] = ICM Helsinki（本项目的 `kac-1980-icm`），[14] = LNP 94 p.441（本项目的 `kac-1979`）**，
+   且 p.264 逐字说「**In [13, 14]** Kac gave a formula for the determinant of the Shapovalov form for
+   (a central extension of) Vect(S¹)」。
+   ⇒ **对 §34.1 留下的「Virasoro 行列式首发在 LNP 94 还是 ICM」这个悬案，MRC 的证词是「两篇都给了」**，
+   它**不在两者之间做区分**。这是第三方（且是 1985 年就写完的同代人）的 L1 证词，
+   与 Feigin–Fuchs 只引 LNP 94、Schottenloher 只引 ICM 的两条单边证词并列。**悬案性质因此改变**：
+   不是「两说必有一错」，而是**两篇可能都含该公式**；下一轮应把目标从「裁决」改成「取两篇正文各自核对」。
+2. ★ **NS 行列式公式的猜测权独归 [14] = LNP 94**（p.264「In **[14]** Kac also gave a brief introduction to the highest
+   weight theory of the Neveu-Schwarz algebra, and **stated (without proof)** a formula for its Shapovalov determinant.」
+   + p.274「conjectured by Kac [14]」+ 式 (8) 行末标 [14]）。⇒ **`kac-1979` 是 NS 行列式的一手猜测出处，不是 ICM。**
+3. ★ **[2] = Feigin–Fuchs 1982，MRC 逐字说「Kac's formula was later proved by Feigin and Fuchs ([2])」**
+   —— 这是本项目第二条「FF 1982 = 玻色 Kac 行列式的证明」的 L1 外部证词
+   （第一条是 FF 自称「новое доказательство теоремы Каца」，见 §34.2）。⚠ 两者措辞不同：
+   **MRC 说 FF「proved」，FF 自称给的是「新证明」且说可约性问题 1979 年已由 Kac 解决。**
+   本文件 §34.2 记的「『FF 给出第一个完整证明』是二手说法」仍然成立——**MRC 正是那个二手说法的一个来源**。
+4. ★★ **[27] = `thorn-1984`（Nucl. Phys. B248, 551）**，且 p.264 的**脚注 1**（挂在「proved by Feigin and Fuchs ([2])」上）
+   逐字「After this work was completed we received reference [27]」；**脚注 2**（挂在「we prove the determinant formulas
+   for both the Neveu-Schwarz and Ramond algebras」上）逐字
+   「After this work was completed, D. Friedan informed us that **Curtright and Thorn** had also succeeded to prove these formulas.」
+   ⇒ **NS/R 行列式至少有两条独立证明线：MRC 的顶点算子路线，与 Curtright–Thorn 的对偶模型路线。**
+   ⇒ 顺带：`thorn-1984` 在本 bib 里此前只被当作「a<1 分支的物理侧候选」，
+   **现在它多了一个明确身份：用对偶模型技术计算 Kac 行列式**（标题即此）。这对
+   「无鬼定理 ⇐ Kac 行列式」那条链的**物理侧独立推导**是个新线索。
+
+### 55.6 约定对照（p.263 逐字）+ **抽取者观察（非原文，留给 curator/auditor）**
+
+**原文逐字（p.263，Introduction 首段）**：
+
+> 「The Neveu-Schwarz algebra has basis `{L'_0, L_i, G_j}` (`i ∈ ℤ, j ∈ ½ + ℤ`), where `L'_0` is central, and the bracket
+> of two noncentral generators is given by the relations
+> `[L_i, L_j] = (j−i)L_{i+j} + δ_{i,−j}((i³−i)/8)L'_0`,
+> `[G_i, G_j] = −2L_{i+j} + δ_{i,−j}(1/2)(i²−¼)L'_0`,
+> `[L_i, G_j] = (j − ½i)G_{i+j}`.
+> The Ramond algebra has the same relations, but the `G_j` are indexed by `ℤ`.」
+
+**（非原文）抽取者观察**：与 `lian-zuckerman-1989` p.302 的 `[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³−2κm)δ`、
+`{G_{m+κ},G_{n−κ}} = 2L_{m+n} + (c/2)(m²+2κm)δ` 相比：
+
+- **中心项的 /8 归一化两篇一致**（`L'_0` 扮演 LZ 的 `c`），这在 Virasoro 文献里不是主流（主流是 c/12）——
+  **超 Virasoro 这一支（MRC / LZ）用的是 c/8**，图里的 convention 节点要能容纳这一点。
+- **`[L_i,L_j]` 的整体符号相反**（MRC `(j−i)`、LZ `(m−n)`），且 **`[G,G]` 也相反**（MRC `−2L`、LZ `+2L`）。
+  两套记号看起来可由 `L^{MRC} = −L^{LZ}`、`G^{MRC} = G^{LZ}`、`L'_0 ↔ c` 对上（κ = ½ 时 `i²−¼ = m²+m` 与
+  LZ 的 `m²+2κm` 相符），**但这是抽取者的验算，不是任何一篇的陈述**。
+  ⇒ **curator 若要在两篇之间建边，必须标 `inferred: true`，并把这条符号字典写进 note。**
+
+### 55.7 对图的建议（researcher 不改 `graph/`）
+
+| 事项 | 建议 |
+|---|---|
+| 超 Virasoro Kac 行列式节点的 `loc` | `Sect. 3, eqs. (7)--(9), p. 274`，ref `meurman-rocha-caridi-1986`。**禁写 Theorem/Proposition 号。** |
+| 该节点的 `status` | 可 `rigorous`（本文 §4 给完整证明，Prop 4.10 + Prop 4.13），**但 statement 不得含「常数 α_N」**（Note 明说已省略） |
+| `lian-zuckerman-1989` 的 `Cor 2.19(iii)` 一路上游 | `Cor 2.19(iii)` → `§2 eqs. (24)(25), p.319`（inferred，见 extractions/lian-zuckerman-1989.md §9.4）→ **本条 (8)(9)** + 幺正性 [7,9,10] |
+| `fgz-1986` 的 `Prop 2.6(i)` 一路上游 | → 玻色 Kac 行列式（`kac-1979` / `kac-1980-icm` / `feigin-fuchs-1982`），**与超版不是同一条公式，别复用同一个节点** |
+| 若要给「超 Virasoro 的 contravariant form 的根 = 极大真子模」建卡 | 用 **`Proposition 3.14(c)`, p. 273**（有编号，比行列式好引） |
+| `thorn-1984` 的 note | 可补一条：MRC 1986 [27] 即本条，且 MRC 脚注 2 指认 Curtright–Thorn 独立证出 NS/R 行列式 |
+
+### 55.8 访问日志与遗留问题
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 卷期目录 | `projecteuclid.org/journals/communications-in-mathematical-physics/volume-107/issue-2` | ✅ euclid id `cmp/1104116024` |
+| 全文 | `projecteuclid.org/download/pdf_1/euclid.cmp/1104116024` → `Read(pages=1-6, 9-14, 31-32)` | ✅ L1 |
+| DOI/卷期页 | Crossref `works?query.bibliographic=` | ✅ 10.1007/BF01209395 |
+| 摘要 | INSPIRE `?fields=abstracts` | ✅ 但只有第一段 |
+
+- **Q55.1** **(9) 式指数上的 `±` 与两个乘积的指标条件未复核**（§55.3 分层里的 (a)(b)）。一次 auditor 页图即可结清。
+- **Q55.2** `Proposition 3.6` 对 `p̃(i)` 的定义未逐字抄（PDF 第 9 页有 Prop 3.6 的证明，定义句在更前面）。
+  **没有它，(8)(9) 的指数无法独立解读** ⇒ 建卡前必须补。
+- **Q55.3** **Sect. 4 的 `Proposition 4.10` / `Proposition 4.13` 逐字未取**（本轮只读了 §4 前三页 p.274–276）。
+  若要把「证明完整」写成 derivation 的依据，应补这两条的逐字。
+- **Q55.4** `Theorem 5.1`（linkage）与 `Proposition 5.2`（character sum）的逐字未取。
+- **Q55.5** ★ **Curtright–Thorn 的那条独立证明线未登记**：MRC 只给了 [27] = `thorn-1984`，
+  而脚注 2 说的是「Curtright **and** Thorn」，可能另有一篇 Curtright–Thorn 合作文章（本项目未查）。
+- **Q55.6** 本条把 §34.1 的悬案**改写而非结清**：现在需要的是 `kac-1979`（LNP 94, p.441）与 `kac-1980-icm`
+  （ICM Helsinki, 299–304）**两篇的正文**，去看各自到底印了什么公式。两条取件死路见那两个 bib 条目的 note。
+
 
 
 
