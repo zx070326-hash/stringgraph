@@ -33,12 +33,15 @@ depends_on:
       供给 (II) 的逻辑地位限定（§10.5 开头的方法论声明：本书把超共形对称性定义为约束，
       不走超-diff × 超-Weyl 规范固定）。没有这条边，本卡 (II) 里那段「与玻色弦不同」的
       断言在图上无依据。
-  - id: worldsheet.critical-dimension-bosonic-v2
+  - id: worldsheet.critical-dimension-bosonic-v3
     note: |
       供给 (IV) 的对照内容（玻色弦四条路线，其中光锥路线唯一同时定出 D 与截距）。
       本卡 (IV) 是一条**关于本图内容的否定性记账**（超弦没有光锥路线），
       它需要引用玻色弦汇总卡才能说清「没有的是什么」。
       ⚠ 这条边不供给任何超弦的物理内容。
+      （2026-09-11：原指 worldsheet.critical-dimension-bosonic-v2，该卡已被
+      worldsheet.critical-dimension-bosonic-v3 换代，本边按「依赖边必须改指新 id」的规则改指 v3；
+      v3 的 (I) 同样写明光锥路线是四条中唯一同时定出 D 与 a 的一条，对照内容不变。）
 sources:
   - ref: polchinski-1998-v2
     loc: "§10.1, eq. (10.1.20), p. 4（(II) 与合并写法 0 = (3/2)D − 15）；§10.5, p. 24, (10.5.23) 下方一段（(I)，无式号）；§10.7, pp. 32–35（(III)）；§10.5 开头段, p. 20（(II) 的逻辑地位）"
@@ -58,7 +61,7 @@ summary: |
     (II)  worldsheet.critical-dimension-superstring-anomaly   c^m + c^g = 0 ⟺ c^m = 15（前提被假定）
     (III) worldsheet.modular-invariance-requires-eight-transverse-fermions
                                                              横向费米子数 ≡ 0 mod 8（必要条件，非路线）
-    (IV)  否定性记账：本卷无光锥路线（对照 worldsheet.critical-dimension-bosonic-v2）
+    (IV)  否定性记账：本卷无光锥路线（对照 worldsheet.critical-dimension-bosonic-v3）
   外加 (I)(II) 的两个公共输入：
     c^m = (3/2)D  worldsheet.rns-matter-central-charge（由 c^m = 15 得到 D = 10 的那一步）
     c^g = −15     worldsheet.superconformal-ghost-central-charge（两条路线里的同一个 15）
@@ -72,7 +75,7 @@ summary: |
       (II) 的前提被假定，(III) 的振幅形式是「猜」的且模变换被原书自称 naive。
   故有效状态为 physical-argument。
 
-  【与玻色弦汇总卡的记账对称性】worldsheet.critical-dimension-bosonic-v2--via-four-routes
+  【与玻色弦汇总卡的记账对称性】worldsheet.critical-dimension-bosonic-v3--via-four-routes
   的 depends_on 结构与本推导逐条对应（路线卡 + 公共输入 c^m = D / c^g = −26）。
   差别是本推导多一条对照边（玻色弦汇总卡），少两条路线边（无光锥、无旧协变/无鬼路线
   ——后者在超弦一侧存在但只是一句「direct imitation」，见 worldsheet.no-ghost-theorem-superstring，
