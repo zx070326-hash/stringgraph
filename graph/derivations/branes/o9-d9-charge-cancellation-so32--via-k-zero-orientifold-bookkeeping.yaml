@@ -7,12 +7,16 @@ depends_on:
     note: 取 k = 0：一张 O9 面，荷 −2^{4−0} = −16；16 张 D9 膜。总荷 −16 + 16 = 0。
   - id: branes.d-brane-rr-coupling
     note: 供给「D9 膜是 10-形式势 C_10 的源、耦合 (13.2.7) 积分跑遍全时空」——把 §10.8 的 μ_10 ∫ C_10 读成 D9 膜。
-  - id: spectrum.chan-paton-gauge-group
-    inferred: true
+  - id: worldsheet.type-i-open-string-gauge-multiplet
     note: |
-      供给「type I 的规范群 SO(32) 是 Ω 投影下的 Chan–Paton 群」。原书此处把「type I SO(32) theory」当作
-      已知名词使用，不在本节论证 SO(32) 的 CP 来源；且那张卡是玻色弦 Vol.1 §6.5 的
-      （超弦版 worldsheet.type-i-open-string-gauge-multiplet 在 ch10 分支，未合）。故标 inferred。
+      供给「type I 的规范群是 Ω 投影下的 Chan–Paton 群 SO(n)/Sp(n)（无取向情形），
+      规范微子在伴随表示」——即本推导所用的「type I SO(32) theory」这个名词的谱学内容。
+      **不标 inferred**：该卡就是超弦（Vol.2 §10.6）版本的 Chan–Paton 陈述，
+      与本章 §13.2 使用该名词时的语境一致。
+      （2026-09-11 由 spectrum.chan-paton-gauge-group（玻色弦 Vol.1 §6.5 版、当时标 inferred）
+      改指本卡；原 note 里「超弦版在 ch10 分支未合」的说法已过时——该卡已在 main 上。）
+      ⚠ 本边只供给名词的谱学内容，**不**供给「n = 32」——那由
+      worldsheet.type-i-tadpole-cancellation-so32-v2 那条边供给。
   - id: worldsheet.type-i-tadpole-cancellation-so32-v2
     note: |
       供给 (1) 的全部内容：type I 的 R–R tadpole 是 10-形式势 C_10 的源 μ_10 ∫ C_10，且只对 SO(32) 相消。

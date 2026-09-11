@@ -8,6 +8,15 @@ depends_on:
       供给 Dp 膜这一对象（开弦端点被钉住的超平面）。⚠ 该卡是玻色弦的定义；
       原书 p. 138 逐字把超弦版外包：「leads to D-branes and orientifold planes by the same arguments
       as for the bosonic string in chapter 8, which the reader should review」。
+  - id: worldsheet.type-ii-spacetime-supersymmetry
+    note: |
+      供给本推导 (1)(3) 里那「32 个超荷 Q、Q̃」——即 IIA/IIB 在 d = 10 有 N = 2 时空超对称
+      （两个引力微子，NS–R 与 R–NS 各一）。没有这条边，「破缺 32 个中的 16 个」这句话在图上没有分母。
+      **不标 inferred**：§13.2 的整段论证就是在 type I / type II 的 32 个超荷这一背景下写的
+      （p. 139「type I 只有总荷 Q_α + Q̃_α 守恒」正是对 type IIB 的 32 个超荷做 Ω 投影的结果）。
+      ⚠ 该卡自身带一条原书的赤裸断言（括号里那句 (and they are) 不加论证），
+      status 为 physical-argument，故本边不抬高本推导的等级。
+      （2026-09-11 新增：原 gaps 里「main 上没有节点（ch10 分支未合）」的说法已过时。）
   - id: duality.dual-coordinate
     note: |
       供给 (13.1.1) X'^9_R = −X^9_R 这一步（T 对偶 = 只反射右动部分），
@@ -56,7 +65,7 @@ summary: |
 gaps:
   - "**类比而非计算**：原书逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」（抽取记录 §3.1 第 3 条）。「闭弦散射振幅只在这 16 个超对称下不变」没有在本章由振幅显式验证。"
   - "**符号未定**：(13.1.5)/(13.1.6) 的符号原书自陈「up to signs」，「should not distract attention from the main physical point」（§3.1 第 2 条）。β^⊥ 的整体符号因此在本卡中不作断言。"
-  - "**本图无 type II 时空超对称节点**：「32 个超荷 Q、Q̃」在 main 上没有节点（ch10 分支 worldsheet.type-ii-spacetime-supersymmetry 未合）；待合入后应加边。"
+  - "**「32 个超荷」这一分母已入图但自身不强**：2026-09-11 已加非 inferred 边 worldsheet.type-ii-spacetime-supersymmetry（原 gap「main 上没有节点」已闭合）。⚠ 残留缺口：该卡的论证是「等价关系 u ≅ u + kζ 是局域对称性的标志」加上原书那句不加论证的括号句，status 只到 physical-argument；且本章 §13.2 的论证本身不引用超对称代数（见 susy 边的 note）。"
   - "**「BPS 态」的代数含义只有点粒子版**：App. B §B.2 现已抽并建卡（branes.bps-bound-point-particle-d4），但其 BPS 界 (B.2.39) 只对点粒子荷（p. 448 逐字）；D 膜荷版的代数 (13.2.9) 是本卡的下游且原书自承「still not complete」。本卡的「BPS」只借用「半数超荷未破缺 ⇒ 短表示」这一概念。"
   - "**「BPS 态」的代数含义现已入图，但只到点粒子模板**（2026-09-11 更新，原缺口「App. B §B.2 本项目未抽」已闭合）：susy.bps-bound-point-particle-d4 转了 (B.2.36)–(B.2.39)，而**原书明写该代数只含点粒子可携带的荷**（p.448 逐字「this is the most general algebra if we include only charges that can be carried by point particles … The same caveat applies to the higher-dimensional algebras」）。D 膜一侧的代数是 §13.2 (13.2.9)（susy.brane-charges-in-susy-algebra），原书自承「still not complete: the *magnetic NS–NS charge* is missing」。⇒ **本卡的 BPS 性不得被读成「由 App. B 的 BPS 界保证」**；本推导对「BPS」二字的使用仍只是原书的措辞。"
   - "**Dp 膜定义卡是玻色弦的**：超弦 D 膜的构造被原书外包给 Vol.1 第 8 章（p. 138）；超弦特有的部分（费米子边界条件、(13.1.2)）本图无节点。"
