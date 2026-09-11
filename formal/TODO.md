@@ -1690,12 +1690,12 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     那种在**整个 `MvPolynomial` 生成元集合**上做 `AlgEquiv` 换基（该节估计 400–700 行，
     是全蓝图最贵的一节）。实际上 (c) 只需要在**系数空间 `Fin D → R`** 上对这个双线性配对
     换基到光锥标架 `{b, b̃, ε_i}`，这是纯线性代数，不需要环自同构。
+  - **`hFullSpan`（第 1 点）已闭合，见下方 `noghost-n2-finish` 条目**：对
+    `DDFLightConeFrame` 而言 `FrameSpansFull`（重命名后的 `hFullSpan`）不再是额外假设，
+    是从 (F1)–(F8) 证出的定理（`DDFLightConeFrame.resolution` +
+    `DDFLightConeFrame.frameSpansFull`，`StringFormal/NoGhost/LightConeResolution.lean` +
+    `LevelTwoElim.lean`）。下面第 2、3、4 点仍未做。
   - **仍未做（(c) 真正的卡点，改在数值代数，不是基变换本身）**：
-    1. 需要一条比 `FrameSpansOrthogonal`（只断言某向量的正交补被张成）更强的假设——
-       `{b, b̃, ε_1,…,ε_{D-2}}` 是 `Fin D → R` 的一组基（暂名 `hFullSpan`，未命名/未写入代码）——
-       并从中对**每一行** `v_μ`（`μ` 取遍 `Fin D`）取系数，重新打包成系数**函数**
-       `c c' : Fin D → R`、`c_i : Fin (D−2) → Fin D → R`（需要逐点 `Classical.choose` 再
-       重新装成函数，繁琐但直接）。
     2. 把双线性配对通过这个分解推出去，落到 6 个显式配对
        `(b,b) (b,b̃) (b,ε_i) (b̃,b̃) (b̃,ε_i) (ε_i,ε_j)` 上（`Finset.sum` 重指标 +
        `polState_add`/`polState_smul`/`polState_sum`）。
