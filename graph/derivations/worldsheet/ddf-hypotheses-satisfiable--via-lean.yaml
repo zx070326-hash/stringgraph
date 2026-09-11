@@ -1,0 +1,55 @@
+id: worldsheet.ddf-hypotheses-satisfiable--via-lean
+target: worldsheet.ddf-hypotheses-satisfiable
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **对象接口边**：目标卡里的四条假设 (η)(N)(S)(T) 与重标度向量 a、b 的记法，以及
+      `dotVec`（η(x,y) = Σ_μ η_μ x^μ y^μ）都是该定义卡的（Lean 侧 `dotVec` 在
+      formal/StringFormal/NoGhost/DDF.lean，该卡 sources 已列）。目标卡断言的是**该卡的假设集非空**，
+      故它是本推导唯一有意义的依赖；该卡 notes【Lean 未覆盖的三处】(iii) 把可满足性列为独立待办，
+      本推导即关闭它。该卡 formalized，不压低本推导。
+      **非 inferred**：Witness.lean 文件头逐字 'Graph nodes: `worldsheet.ddf-operators-v6`,
+      `worldsheet.no-ghost-theorem-v4`'，且 Lean 定理的六个合取项逐字是该卡字典里的
+      `hη`/`hbb`/`hba`/`hεb` 加 `dotVec η ε ε = 1` 与 `invTwo R * zeroModeSq η a = 1`。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Witness.lean :: StringFormal.NoGhost.noghost_hypotheses_satisfiable（目标卡 formal.lean_decl）；见证 StringFormal.NoGhost.{witnessLight, witnessMomentum, witnessPolarization}（标架指标 frameTime = 0、frameSpace = 1、frameTrans = 2）；六个合取项的证明 StringFormal.NoGhost.{minkowski_sq, dotVec_witnessLight_self, dotVec_witnessLight_witnessMomentum, dotVec_witnessPolarization_witnessLight, dotVec_witnessPolarization_witnessPolarization, invTwo_mul_zeroModeSq_witnessMomentum}；工具引理 dotVec_add_left/right、dotVec_single_left、dotVec_single_single、dotVec_pair、dotVec_single_pair_of_ne"
+    note: |
+      本仓库，formalizer-noghost-a，formal 侧提交 **687f17b**（Witness.lean），lead 以 **6ed1638** 合入 main；
+      Lean 4 + Mathlib v4.33.1，无 sorry。formal/TODO.md `noghost-a` 项逐字登记「两文件 21 条声明经
+      `check_axioms --all` 全 `ok`（2026-09-11）」，公理只有 propext / Classical.choice / Quot.sound。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      这是本推导 status formalized 的唯一依据。
+summary: |
+  机器检查的证明：显式写出见证并逐条核验。
+
+  1. **标架**：D ≥ 3 时取三个互异指标 0（frameTime）、1（frameSpace）、2（frameTrans）；
+     η := `Fock.minkowski D R` = diag(−1, +1, …, +1)，`minkowski_sq` 给 (η)。
+  2. **见证**：b := e_0 + e_1（`witnessLight`）；a := ½ e_0 + (3/2) e_1（`witnessMomentum`）；
+     ε := e_2（`witnessPolarization (frameTrans)`）。
+  3. **逐条核验**（每条是 `dotVec` 在两个 `Pi.single` 之和上的展开，工具引理 `dotVec_pair` /
+     `dotVec_single_pair_of_ne` / `dotVec_single_single` 把它化成两三项的环等式，`ring` 或
+     `linear_combination two_mul_invTwo` 收尾）：
+       (N) η(b,b) = −1 + 1 = 0                       `dotVec_witnessLight_self`
+       (S) η(b,a) = −½ + 3/2 = 1                     `dotVec_witnessLight_witnessMomentum`
+       (T) η(ε,b) = 0（指标 2 ∉ {0,1}）               `dotVec_witnessPolarization_witnessLight`
+       (U) η(ε,ε) = η_2 = +1                         `dotVec_witnessPolarization_witnessPolarization`（i = j）
+       (M) ½ η(a,a) = ½(−¼ + 9/4) = 1                `invTwo_mul_zeroModeSq_witnessMomentum`
+  4. 六元组打包成 `∃ η a b ε, … ∧ …` 即目标卡断言。
+
+  **假设集的必要性**：½ 的出现不是方便——(S) 与 (M) 在此标架下联立强制 a = (½, 3/2, 0, …)
+  （目标卡 notes），故 `[Algebra ℚ R]` 不可去；D ≥ 3 用于 `frameTrans`（ε 需要 0、1 之外的方向）。
+gaps:
+  - "**check-axioms 由 formalizer 登记，curator 未自行重跑**（formal/TODO.md 记 21 条声明全 ok）；lead 合并前跑 `uv run stringgraph check-axioms`。"
+  - "**目标卡只覆盖 Witness.lean 三条可满足性陈述中的第一条**：`noghost_lightcone_frame_satisfiable`（加共轭类光 b̃）与 `noghost_transverse_gram_satisfiable`（D − 2 个横向偏振 Gram = δ_{ij}）未立卡，目标卡「不断言 (c)」。"
+notes: |
+  【2026-09-11，curator，small-backlog-12 追加（lead 指示，formalizer-noghost-a 已合 main）】
+  这张卡与 DDF 岛的其它卡不同：它不是「某个算子满足某关系」，而是「那些关系的前提集非空」。
+  按蓝图 §C.2 的说法，没有它「every theorem of the DDF island is a conditional whose hypothesis
+  set is not known to be non-empty」。它没有文献对应物（文献把可满足性视为显然），
+  故 sources 只有本仓库 + 一条语境引用。
+author: curator
+created: "2026-09-11"

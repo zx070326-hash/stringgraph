@@ -1,0 +1,86 @@
+id: worldsheet.ddf-hypotheses-satisfiable
+kind: proposition
+title: DDF 假设集可同时满足（条件命题的非空性）：对一切 D ≥ 3 与交换 Q-代数 R，存在 η、a、b、ε 使 η_μ² = 1、k_0² = 0、2α' k_0·p = 1、ε·k_0 = 0、ε·ε = 1 且 α' p² = 1（截距 a₀ = 1 的快子壳）同时成立
+statement: |
+  【背景】本图 DDF 岛的每一条命题（worldsheet.ddf-operators-v6 起的全部 formalized 卡，直到
+  worldsheet.gt-longitudinal-k-algebra）都是**条件命题**，带着四条几何假设
+    (η) 对角度规 η_μ² = 1                         （Lean `hη : ∀ μ, η μ * η μ = 1`），
+    (N) 类光性  k_0² = 0，即 η(b, b) = 0            （`hbb`），
+    (S) 归一化  2α' k_0·p = 1，即 η(b, a) = 1       （`hba`），
+    (T) 横向性  ε·k_0 = 0，即 η(ε, b) = 0           （`hεb`），
+  其中 a^μ = (2α')^{1/2} p^μ、b^μ = (2α')^{1/2} k_0^μ（worldsheet.ddf-operators-v6 的重标度记法，
+  conv.alpha-prime-regge），η(x, y) = Σ_μ η_μ x^μ y^μ。此前本图**没有任何一条**陈述说这四条可以
+  同时成立；在一般交换环上它们确实可能不可满足（见 notes），故整座岛原则上可能是空条件命题。
+
+  【断言】设 D ≥ 3，R 是任意交换 Q-代数。则存在 η, a, b, ε : {0,…,D−1} → R 使下列六条同时成立：
+    (η) η_μ² = 1（对一切 μ）；
+    (N) η(b, b) = 0；
+    (S) η(b, a) = 1；
+    (T) η(ε, b) = 0；
+    (U) η(ε, ε) = 1（单位偏振）；
+    (M) ½ η(a, a) = 1，即 α' p² = 1——按 conv.intercept-sign-a 与 worldsheet.open-string-l0-level-form，
+        这是 L_0 = α' p² + N 在 N = 0、截距 a₀ = 1 时的质量壳（快子壳；mostly-plus 下 p² > 0，
+        m² = −p² = −1/α'），即 worldsheet.no-ghost-theorem-v4 (1b) 的塔基态 |0; k⟩ 所在的壳。
+
+  【显式见证】（证明即写出它）取 conv.metric-mostly-plus 的 η = diag(−1, +1, …, +1) 与
+    b = (1, 1, 0, …, 0)，   a = (1/2, 3/2, 0, …, 0)，   ε = e_2（第 2 个坐标向量）。
+  逐条：η(b,b) = −1 + 1 = 0；η(b,a) = −½ + 3/2 = 1；η(ε,b) = 0（ε 落在 0、1 之外的方向）；
+  η(ε,ε) = +1；η(a,a) = −¼ + 9/4 = 2。D ≥ 3 只用于保证存在第三个方向放 ε。
+
+  【本卡明确不断言】
+  (a) 不断言见证唯一，也不断言对**一切**满足 (η) 的 η 都有见证；本卡只给存在性。
+  (b) 不断言 R 可以取一般交换环：见证用到 ½（`invTwo R`），且 (S)+(M) 在该标架下**强制**
+      a = (1/2, 3/2, 0, …)，故 Z 上无见证（notes）。这是「Q-代数」假设的实质，不是偷懒。
+  (c) 不断言共轭类光方向 b̃（b·b̃ = −1、b̃² = 0）的存在与 D − 2 个横向偏振的 Gram = δ_{ij}
+      ——Lean 同文件另有 `noghost_lightcone_frame_satisfiable`、`noghost_transverse_gram_satisfiable`
+      两条，内容更多，本卡不覆盖（一个节点一个命题）。
+  (d) 不断言任何 D ≤ 2 的事。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.noghost_hypotheses_satisfiable
+  lean_file: StringFormal/NoGhost/Witness.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Witness.lean :: StringFormal.NoGhost.noghost_hypotheses_satisfiable（本卡 formal.lean_decl）；见证 StringFormal.NoGhost.{witnessLight, witnessMomentum, witnessPolarization, frameTime, frameSpace, frameTrans}；逐条核验 StringFormal.NoGhost.{minkowski_sq, dotVec_witnessLight_self, dotVec_witnessLight_witnessMomentum, dotVec_witnessPolarization_witnessLight, dotVec_witnessPolarization_witnessPolarization, invTwo_mul_zeroModeSq_witnessMomentum}；同文件另有 noghost_lightcone_frame_satisfiable、noghost_transverse_gram_satisfiable（本卡不覆盖）"
+    note: |
+      本仓库，formalizer-noghost-a（formal 侧提交 687f17b，lead 以 6ed1638 合入 main），
+      Lean 4 + Mathlib v4.33.1，无 sorry；formal/TODO.md `noghost-a` 项登记「两文件 21 条声明经
+      `check_axioms --all` 全 `ok`（2026-09-11）」。**curator 未自行重跑 `lake build`**。
+      这是本卡 status formalized 的依据。蓝图 formal/BLUEPRINT-noghost.md §C.2 把本条列为
+      「最便宜、也最该先做的一条」。
+      **逐句字典**：(η) ⇒ `∀ μ, η μ * η μ = 1`（见证 `Fock.minkowski D R`，`minkowski_sq`）；
+      (N) ⇒ `dotVec η b b = 0`；(S) ⇒ `dotVec η b a = 1`；(T) ⇒ `dotVec η ε b = 0`；
+      (U) ⇒ `dotVec η ε ε = 1`；(M) ⇒ `invTwo R * Fock.zeroModeSq η a = 1`
+      （`zeroModeSq η a = η(a,a)`，`invTwo R = ½`）；D ≥ 3 ⇒ `hD : 3 ≤ D`；R ⇒ `[CommRing R] [Algebra ℚ R]`。
+  - ref: goddard-2008
+    loc: "§5, p.11（DDF 算子的适用条件逐字 'states of momentum p, such that k·p = 1'）与 (5.1) 后正文（偏振 'ε^i·ε^j = δ^{ij}, k·ε^i = 0'）"
+    note: |
+      只承载「这四条假设是文献的标准设定」这一语境（L1 逐字，extractions/gsw-1987-v1.md E1/E3），
+      不承载论证：文献把可满足性视为显然，从不写出。本卡的价值恰在于把「显然」变成一条机检陈述。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, formalized, satisfiability]
+notes: |
+  【为什么立卡（curator 2026-09-11，small-backlog-12 追加，lead 指示；依蓝图 §C.2）】
+  条件命题的价值取决于前提集非空。DDF 岛的十余张 formalized 卡全带 `hη hbb hba hεb`，
+  Witness.lean 之前仓库里没有一条声明证明它们能同时成立。本卡把这件事登记为图节点，
+  使 ms.no-ghost-theorem 的回译审计有地方核对「Lean 的 DDF 定理不是空真」。
+
+  【Z 上无见证——「Q-代数」假设的实质（formal/TODO.md `noghost-a` 项的数学结论）】
+  在标架 η = diag(−1, 1, …)、b = (1, 1, 0, …) 下，(S) η(b,a) = −a_0 + a_1 = 1 与
+  (M) η(a,a) = −a_0² + a_1² = 2 联立：(a_1 − a_0)(a_1 + a_0) = 2 且 a_1 − a_0 = 1，
+  故 a_1 + a_0 = 2，a_0 = ½、a_1 = 3/2。**½ 是被强制的**，不是构造上的方便；
+  因此见证在 Z 上不存在，Lean 的 `[Algebra ℚ R]` 是必需假设。
+  ⚠ 这只说明「该标架下无整数见证」；本卡 (b) 不断言「一切标架下 Z 上都无见证」。
+
+  【与 worldsheet.ddf-operators-v6 的关系】
+  该卡【本卡明确不断言】(d) 逐字：「『存在类光 k_0 使 k_0·p ≠ 0』——这是关于**实**洛伦兹二次型的
+  存在性断言，在一般交换环 R 上为假，本卡把 (N)(S) 作为给定数据而不证其可满足性」；
+  其 notes【Lean 未覆盖的三处】(iii) 把可满足性列为「独立待办」。**本卡关闭该待办**——
+  且比那里预想的更弱的假设就够了：不需要 R = R 与洛伦兹号差的实分析，任意交换 Q-代数即可。
+  推导 --via-lean 以该定义卡为依赖（对象接口：a、b、η 与 (N)(S)(T) 的记法）。
+
+  【Lean 另有而本卡不断言的两条】`noghost_lightcone_frame_satisfiable`（再加 b̃ = (½, −½, 0, …)，
+  b·b̃ = −1、b̃² = 0，即 Brower 纵向算子与蓝图 §B.4 幺三角基变换用的光锥对）与
+  `noghost_transverse_gram_satisfiable`（D − 2 个横向偏振 e_i（i ≥ 2）全横向且 Gram = δ_{ij}，
+  有序域上即横向 Gram 正定）。需要时各自立卡。
+author: curator
+created: "2026-09-11"
