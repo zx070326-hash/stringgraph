@@ -15,8 +15,29 @@ depends_on:
       它被 `im_smul_mul_normSq` 从 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq` 重证
       （清分母形式 τ₂'|cτ+d|² = τ₂）。⇒ --via-sl2z-action 的 gaps 第 2 条
       「该式的可追溯性止于定义卡」在本推导里**不再是缺口**。
+      ⚠ **2026-09-11（curator small-backlog-9）**：该恒等式已从本定义卡拆成独立命题卡
+      math.mobius-action-preserves-upper-half-plane，本推导另加一条边指它（见下一条）；
+      本边保留，它供给的是群与 Möbius 作用本身。
       ⚠ 该定义卡已于 2026-09-11 接桥层 `StringFormal.Bridge.psl2z_smul_eq` 升为 formalized，
       故本推导 own=formalized 不被它按 min 规则压低。
+  - id: math.mobius-action-preserves-upper-half-plane
+    inferred: false
+    note: |
+      **供给 summary A 第四步所重述的那条恒等式**：`im_smul_mul_normSq (g) (τ) :
+      (g • τ).im * Complex.normSq ((g 1 0) * τ + (g 1 1)) = τ.im`，即清分母形式的
+      Im(γ·τ) = Im τ/|cτ+d|²；A 的第五步 `measure_density_modular_invariant` 同样以
+      `rw [ModularGroup.im_smul_eq_div_normSq, …]` 开头。
+      **非 inferred**：这一步在 Lean 证明体里可逐行指认，用的正是本卡桥层声明
+      `StringFormal.Bridge.psl2z_im_smul_eq` 所重述的那条 Mathlib 定理
+      （`ModularGroup.im_smul_eq_div_normSq`）。
+      ⚠ **两处是同一条数学事实的两个重述，不是同一条 Lean 声明**：`TorusMeasure.lean`
+      **不 import** 本仓库任何文件（见 notes），它直接从 Mathlib 重证清分母形式；
+      本卡的桥层声明是同一条 Mathlib 定理的另一个重述（除法形式）。
+      故这条边供给的是**陈述层面的输入**（「这一步用到了 Im 的变换律」），
+      不是一条机检的证明链环节。
+      ⚠ 2026-09-11（curator small-backlog-9）新增：该恒等式此前只写在定义卡
+      worldsheet.modular-group-psl2z 的正文里，本轮拆成独立命题卡；
+      指向定义卡的那条边**保留**，它供给群与 Möbius 作用本身。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/TorusMeasure.lean :: StringFormal.TorusMeasure.measure_smul_eq；支撑链 denom_ne_zero' → det_eq_one_complex → mobius_deriv、im_smul_mul_normSq → measure_density_modular_invariant（逐点层），coe_inv_nnnorm_sq → volume_eq_lintegral_inv_im_sq → (instance) SMulInvariantMeasure SL(2,ℤ) ℍ volume → measure_smul_eq → lintegral_inv_im_sq_smul（测度层）"

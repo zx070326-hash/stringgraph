@@ -5,10 +5,24 @@ status: rigorous
 depends_on:
   - id: worldsheet.modular-group-psl2z
     note: |
-      供给群、作用 τ' = (aτ+b)/(cτ+d)（ad − bc = 1）与该定义卡里已写出的
-      **Im(γ·τ) = Im τ / |cτ + d|²**——本推导第 (2) 步就是它。
-      ⚠ 该定义卡自己标明：Im 的变换式是 curator 补的自洽性说明，**不是来源逐字**
-      （抽取记录未记录它是否写在原书里）。故本推导的这一步的可追溯性止于该卡。
+      供给群与作用 τ' = (aτ+b)/(cτ+d)（ad − bc = 1）。
+      ⚠ **2026-09-11（curator small-backlog-9）**：本推导第 (2) 步用的
+      **Im(γ·τ) = Im τ/|cτ+d|²** 此前也从这张定义卡取，现已拆成独立命题卡
+      math.mobius-action-preserves-upper-half-plane，本推导另加一条边指它（见下一条）；
+      本边保留，只供给群与作用本身。
+  - id: math.mobius-action-preserves-upper-half-plane
+    inferred: false
+    note: |
+      **供给 summary 的第 (2) 步**：τ₂' = Im τ' = τ₂/|cτ+d|²，故 (τ₂')² = τ₂²/|cτ+d|⁴。
+      **非 inferred**：summary (2) 逐字就是该卡的 (1)，是本推导三步里独立的一步。
+      ⚠ **可追溯性说明（随卡搬来并已更新）**：本边此前写「该定义卡自己标明 Im 的变换式是
+      curator 补的自洽性说明、不是来源逐字，故这一步的可追溯性止于该卡」。
+      2026-09-11 researcher 第十三轮把这件事查清了（抽取记录 polchinski-1998-v1.md §20，
+      印刷 pp.145–151 页图，negative evidence L1）：**Polchinski §5.1 根本不印此式**。
+      ⇒ 「止于定义卡」的说法作废，取而代之的是：这一步在本项目内的证据是新卡的
+      Lean 声明 `StringFormal.Bridge.psl2z_im_smul_eq`（own=formalized），
+      **纸上一手来源仍缺**（researcher §20.5 列了 Serre ch. VII / Apostol ch. 2 /
+      Diamond–Shurman ch. 1 三个候选，均未查）。见本推导 gaps 第 2 条。
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.3, eq. (7.3.7), p.217，逐字「and **it is easy to check** that dτdτ̄/τ₂² (7.3.7) is modular-invariant as well.」"
@@ -42,9 +56,16 @@ gaps:
      `measure_density_modular_invariant`，`formal/StringFormal/Math/TorusMeasure.lean`），
      目标卡另挂 spectrum.torus-measure-modular-invariant--via-lean（formalized）。
      ⇒ 「原书零论证」这件事**没变**（仍是文献事实），但「本图对它只有未复核的手算」这件事已不成立。"
-  - "**Im(γ·τ) = Im τ/|cτ+d|² 在图上的可追溯性止于定义卡**：worldsheet.modular-group-psl2z 自己写明
-     该式是 curator 补的自洽性说明，抽取记录未记录它是否写在原书里。这一步若要有一手来源，
-     须回 Polchinski §5.1 p.148 或任一模形式教科书补一条 loc。"
+  - "★ **（2026-09-11 两次更新）Im(γ·τ) = Im τ/|cτ+d|² 的来源**。原文：「在图上的可追溯性止于定义卡
+     worldsheet.modular-group-psl2z……这一步若要有一手来源，须回 Polchinski §5.1 p.148 或任一模形式
+     教科书补一条 loc。」两处都已变：
+     (i) **该式已拆成独立命题卡** math.mobius-action-preserves-upper-half-plane（own=formalized，
+     `StringFormal.Bridge.psl2z_im_smul_eq`），本推导已改为直接挂它 ⇒ 不再「止于定义卡」；
+     (ii) **「回 Polchinski §5.1 p.148 取件」这条路已走且是死路**：researcher 第十三轮读了印刷
+     pp.145–151 的页图（抽取记录 polchinski-1998-v1.md §20，negative evidence L1），
+     **原书全节不印此式**，连记号 τ₂ 都要到第 7 章才引入。
+     ⇒ **仍然成立的缺口**：这一步在本项目内只有 Mathlib/Lean 一个来源，**纸上一手来源仍缺**；
+     下一个候选是标准数论教材（Serre ch. VII、Apostol ch. 2、Diamond–Shurman ch. 1，均未查）。"
   - "**未覆盖测度的取向/绝对值问题**：dτ dτ̄ 作为 2-形式带取向，(c) 中相除时本推导按 |cτ+d|⁴ 为正实数处理；
      若把测度理解成 |dτ ∧ dτ̄| 或 dτ₁dτ₂，结论相同但需一句取向说明，原书与本推导都不写。"
   - "**不变密度的唯一性未论证**：目标卡 (e) 已把它排除在断言之外。"
@@ -64,8 +85,10 @@ notes: |
   spectrum.torus-measure-modular-invariant--via-lean（status **formalized**，
   `formal/StringFormal/Math/TorusMeasure.lean`），工具取高者。本推导按 lead 裁决保留，
   它是纸上三步验算 + reviewer 复核这条独立证据链的记录。
-  顺带：本推导 gaps 第 2 条（Im(γ·τ) = Im τ/|cτ+d|² 的可追溯性止于定义卡）在 Lean 侧**不存在**
-  ——那里由 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq` 重证；但本推导自身的那条 gap 照旧。
+  顺带：本推导 gaps 第 2 条（Im(γ·τ) = Im τ/|cτ+d|² 的来源）在 Lean 侧**不存在**
+  ——那里由 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq` 重证；
+  2026-09-11（curator small-backlog-9）该条已按新卡与 researcher §20 的结论重写，
+  剩下的部分（纸上一手来源仍缺）照旧。
   gaps 第 3 条（取向/绝对值）**两条推导都没关**，是本卡目前唯一的实质缺口。
 author: curator-small-backlog-6
 created: "2026-09-11"

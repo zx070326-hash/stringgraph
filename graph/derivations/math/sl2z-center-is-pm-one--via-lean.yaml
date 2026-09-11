@@ -1,0 +1,74 @@
+id: math.sl2z-center-is-pm-one--via-lean
+target: math.sl2z-center-is-pm-one
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      供给群 SL(2,Z) 本身（目标卡正文第一句「设 SL(2,Z) 为行列式 1 的 2×2 整数矩阵群」
+      即该定义卡的第一句）。Lean 侧两者是同一个对象：`SL(2, ℤ)` =
+      `Matrix.SpecialLinearGroup (Fin 2) ℤ`，定义卡的 `lean_decl`
+      （`StringFormal.Bridge.psl2z_smul_eq`）与本推导的 `center_eq_pm_one` 在同一桥层文件里
+      对同一个 `SL(2, ℤ)` 发言。无约定转换，不需要 convention_map。
+      ⚠ **本推导完全不用该定义卡的作用那一层**（Möbius 公式、Im 变换式、S/T 的作用）：
+      `center_eq_pm_one` 全程在群里算，不碰 ℍ。目标卡「不断言」(b)(c) 与此一致。
+      ⚠ 两张卡 own status 都是 formalized，这条边不压低任何东西。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one；辅助 neg_one_mem_center"
+    note: |
+      本仓库，桥层提交 **c15b0db**，分支合并提交 **845b9b9**；Lean 4 + Mathlib **v4.33.1**。
+      声明全文（与目标卡 statement 逐字对应）：
+
+          theorem center_eq_pm_one :
+              (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}
+
+      **check-axioms 运行记录（借用，curator lean-wire-10, 2026-09-11）**：本声明属于
+      worldsheet.modular-group-psl2z 的 source 里逐条登记的那 12 条桥层声明之一
+      （对应清单的 (c) 项），当时在主工作树 D:\physics\string 上（`.lake` 构建时间 13:54:53
+      晚于源文件 13:53:02）跑出 `12 ok, 0 non-standard, 0 missing; 0 errors`，
+      公理集合一律 `propext Classical.choice Quot.sound`；
+      worldsheet.modular-group-generated-by-s-and-t-v2--via-lean 的 notes 也记了
+      「桥层的 `center_eq_pm_one` 同批 ok」。
+      ⚠ **本轮（small-backlog-9）未重跑**：本分支只改 graph/，未动 formal/ 下任何文件；
+      桥层文件自 845b9b9 起未变动。lead 合并前按根 CLAUDE.md 重跑
+      `lake build` + `uv run stringgraph check-axioms` 即可覆盖。
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/MathlibBridges.lean`，两支：
+
+  **(⊆)** 设 A ∈ Z(SL(2,ℤ))。Mathlib 的 `Matrix.SpecialLinearGroup.mem_center_iff` 给出
+  存在 r 使 A = r • I 且 r^(Fintype.card (Fin 2)) = 1，即 r² = 1；
+  `Fintype.card_fin` 把指数化成 2，`Int.eq_one_or_neg_one_of_mul_eq_one` 在 **ℤ** 上
+  从 r·r = 1 得 r = 1 或 r = −1，分别给 A = I、A = −I（`Subtype.ext` + `simp` 收尾）。
+
+  **(⊇)** A = I 时由 `Subgroup.one_mem`；A = −I 时由 `neg_one_mem_center`，后者是
+  `Subgroup.mem_center_iff` 加一行 `mul_neg, neg_mul, mul_one, one_mul`
+  （−I 与一切 g 交换）。∎
+
+  ⇒ 两个包含关系都在证明体里，`ext A` 之后逐支给出，与目标卡正文的括注一致。
+gaps:
+  - |
+    **不含商群的改写。** 目标卡「不断言」(e) 已排除：「Z = {±I} ⇒ SL(2,Z)/Z = SL(2,Z)/{±I}」
+    这一步用的是「子群由其承载集合决定」（`Subgroup.ext` / `SetLike` 外延性），
+    桥层没有为它单独立声明。需要它的下游（典型是
+    worldsheet.modular-group-generated-by-s-and-t-v2--via-lean 与
+    math.psl2z-s-t-relations--via-lean 的首条 gap）自己做这一行外延性。
+  - |
+    **`mem_center_iff` 的证明本图未审计。** 「中心元必是纯量阵」这一非平凡输入在 Mathlib
+    （`Matrix.SpecialLinearGroup.mem_center_iff`）；我们承诺的只是「它在同一次 lake build 里
+    通过、且目标声明的公理集合只有标准三条」。本项目补的是 ℤ 上 r² = 1 ⇒ r = ±1 与两支的拼装。
+  - |
+    **没有纸上来源。** 本卡是经典的、任何模形式教科书都会顺带提到的事实，
+    但本图**没有**为它登记任何纸面文献（Polchinski 只写 PSL(2,Z) = SL(2,Z)/Z₂ 而不讨论中心，
+    见 worldsheet.modular-group-psl2z 的第一条 source）。⇒ 本卡目前只有 Lean 一条证据链。
+    这不影响 formalized，但若日后要一条独立的人类可读证据，需要 researcher 补一条 loc。
+notes: |
+  由 curator（small-backlog-9）于 2026-09-11 建立，是拆卡 math.sl2z-center-is-pm-one 的
+  唯一推导。桥层声明本身不是本轮新增的：`center_eq_pm_one` 自桥层提交 c15b0db 起就存在，
+  此前只作为 worldsheet.modular-group-psl2z 的 source 清单里的 (c) 项、
+  以及另外两条推导 gaps 里点名的一条声明出现，没有自己的目标卡。
+
+  **本推导不改动 formal/**：`lean_decl` 指的声明已在 main 上，本分支只加图数据。
+author: curator-small-backlog-9
+created: "2026-09-11"

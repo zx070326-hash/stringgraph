@@ -15,6 +15,22 @@ depends_on:
       目标卡「不断言」(d) 已把它排除，两边一致。
       ⚠ 该定义卡已于 2026-09-11 接桥层 `StringFormal.Bridge.psl2z_smul_eq` 升为 formalized，
       故本推导 own=formalized 不被它按 min 规则压低。
+  - id: math.sl2z-center-is-pm-one
+    inferred: false
+    note: |
+      **供给「Lean 的 PSL = 卡面的 SL(2,Z)/{±I}」这一步**，即 gaps 首条点名的那条声明
+      `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`。
+      没有它，Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup = SL(2,ℤ) ⧸ Z(SL(2,ℤ))`
+      未必等于目标卡正文写的那个商；本文件自己只证了 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），
+      那**不够**。
+      **非 inferred**：这一步在本推导 gaps 首条里逐字点名了该 Lean 声明，
+      并在 sources 指向的桥层文件里可以直接读到；它是可指认的、而非诠释出来的依赖。
+      ⚠⚠ **但它不在 `psl_S_sq` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one` 不在
+      `psl_S_sq` 的证明链上：两者的拼接是人读两条声明后作的比对，不是一条机检蕴涵」）。
+      本边供给的是**陈述层面的群识别**，不是证明步骤——这一点没有因为它有了自己的卡而改变，
+      只是现在这条识别在图上可指认，而不是只写在 gaps 里。
+      ⚠ 2026-09-11（curator small-backlog-9）新增：该事实此前在图上**没有节点**，
+      本轮从 worldsheet.modular-group-psl2z 拆出；指向定义卡的那条边保留。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_S_sq；同文件 sl_S_sq, sl_ST_cube, neg_one_mem_center, psl, psl_neg_one, psl_ST_cube"
@@ -49,6 +65,10 @@ gaps:
     证明（提交 c15b0db；子群由承载集合决定，故商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群）。
     ⚠ `center_eq_pm_one` 不在 `psl_S_sq` 的证明链上：两者的拼接是人读两条声明后作的比对，
     不是一条机检蕴涵。
+    ★ **2026-09-11（curator small-backlog-9）：该事实已立卡** math.sl2z-center-is-pm-one
+    （own=formalized），本推导已加一条 depends_on 边指它 ⇒ 这条拼接在图上可指认了。
+    **但本条 gap 的实质内容未变**：它仍然不是一条机检蕴涵，仍需人读两条声明作比对；
+    要真正关闭，须由 formalizer 在 Lean 里把「商群相等」那一行外延性写出来。
   - |
     **不含表现（presentation）**。目标卡「不断言」(b) 与 Lean 一致：`psl_S_sq`、`psl_ST_cube`
     只说这两条关系成立，不说它们生成全部关系。那需要基本域上的乒乓引理，Mathlib v4.33.1 没有。

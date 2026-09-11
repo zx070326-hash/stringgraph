@@ -1,0 +1,86 @@
+id: math.sl2z-center-is-pm-one
+kind: proposition
+title: "SL(2,Z) 的中心恰为 {±I}"
+statement: |
+  设 SL(2,Z) 为行列式 1 的 2×2 整数矩阵群，I 为单位阵。则它的中心
+
+    Z(SL(2,Z)) = { g ∈ SL(2,Z) : g h = h g 对一切 h ∈ SL(2,Z) }
+
+  作为集合恰等于
+
+    { I, −I } 。
+
+  （两个包含关系都断言：−I 与 I 确实中心；反之任何中心元只能是 ±I。）
+
+  **本卡不断言什么：**
+  (a) 不断言 SL(2,Z) 的任何其它子群结构（换位子群、同余子群、生成元与关系）；
+  (b) 不断言 −I 在 H 上作用平凡，也不断言 γ 与 −γ 给出同一分式线性映射
+      （那两条在定义卡 worldsheet.modular-group-psl2z 里）；
+  (c) 不断言 PSL(2,Z) 的任何性质（作用的忠实性、由 S、T 生成、表现）；
+  (d) 不断言 SL(2,R)、SL(2,C) 或 SL(n,Z) (n ≠ 2) 的中心（前两者的中心同样是 {±I}，
+      但本卡的量词写在 **SL(2,Z)** 上）；
+  (e) **不断言「因此 SL(2,Z)/Z(SL(2,Z)) = SL(2,Z)/{±I}」这句商群的改写**——
+      它是本卡加上「子群由其承载集合决定」的直接推论，由需要它的下游自行完成；
+      本卡只断言集合相等，以便与 Lean 声明逐字对齐（见 notes）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.center_eq_pm_one
+  lean_file: StringFormal/Math/MathlibBridges.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one；同文件 neg_one_mem_center"
+    note: |
+      本仓库，桥层提交 **c15b0db**（"formal: bridge PSL(2,Z) card to Mathlib; prove
+      Z(SL(2,Z)) = {+-I} and the descent of the H-action"），分支合并提交 **845b9b9**；
+      Lean 4 + Mathlib **v4.33.1**。声明全文：
+
+          theorem center_eq_pm_one :
+              (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}
+
+      与卡面逐字对应：`Subgroup.center SL(2, ℤ)` 强制转成 `Set SL(2, ℤ)` 即卡面的 Z(SL(2,Z))
+      作为集合，`{1, -1}` 即 {I, −I}（`1 : SL(2,ℤ)` 是单位阵；`-1` 的 `Neg` 实例由
+      `Fact (Even (Fintype.card (Fin 2)))` 提供）。两个包含关系都在证明体里
+      （`ext A; constructor` 之后两支）。
+      ⚠ **这条是本项目自己证的，Mathlib 没有**（桥层文件头 "What is *not* claimed here"
+      一节逐字：本项目自己新证的只有 `center_eq_pm_one` 及其两个推论）。
+      辅助声明 `neg_one_mem_center`（−I 中心）由 `Subgroup.mem_center_iff` 一行，
+      是「⊇」那一支的内容。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.center_eq_pm_one 的证明体（`Matrix.SpecialLinearGroup.mem_center_iff`）"
+    note: |
+      **论证的唯一非平凡输入是 Mathlib 的 `Matrix.SpecialLinearGroup.mem_center_iff`**：
+      中心元必是纯量阵 r·I 且 r^(card (Fin 2)) = r² = 1。在 ℤ 上 r² = 1 迫使 r = ±1
+      （`Int.eq_one_or_neg_one_of_mul_eq_one`）。⇒ 本项目补的是 ℤ 上那一步与两支的拼装。
+      本图不为 `mem_center_iff` 建节点也不审计其证明；证据标准由 stringformal-2026 条目
+      规定的 `lake build` + 无 sorry + 标准三公理承载。
+tags: [math, modular-group, psl2z, group-theory, formalized]
+notes: |
+  **由 curator（small-backlog-9）于 2026-09-11 从定义卡 worldsheet.modular-group-psl2z 拆出**
+  （lead 派工第 3 项）。建卡前查重：`uv run stringgraph search "center"` /
+  `"psl2z"`，图中没有同命题的卡（`worldsheet.modular-group-psl2z` 与
+  `worldsheet.modular-group-generated-by-s-and-t-v2` 只在 sources/gaps 里提到该 Lean 声明，
+  没有把它作为断言）。
+
+  **为什么要拆**：这条事实在图上此前**没有节点**，只以「gap 里点名的一条 Lean 声明」的形式
+  出现在三处（定义卡 notes、math.psl2z-s-t-relations--via-lean 的 gaps 首条、
+  worldsheet.modular-group-generated-by-s-and-t-v2--via-lean 的 gaps 首条），
+  三处都写着同一句话：Mathlib 的 `PSL(2,ℤ) = SL(2,ℤ)/Z(SL(2,ℤ))` 要等于卡面写的
+  `SL(2,Z)/{±I}`，**必须**知道中心恰是 {±I}（只知道 −I ∈ Z 不够）。
+  把它立成卡之后，那三处的「人读两条声明后作的比对」变成图上一条可指认的边。
+  ⚠ 但要注意：本卡**仍然不在**那两条推导 `lean_decl` 的机检证明链上——它补的是
+  **陈述层面**的群识别，不是证明步骤。两条推导新加的边各自在 note 里写明了这一点。
+
+  **为什么正文不写商群那一句**（「不断言」(e)）：为了让卡面与 `center_eq_pm_one` **逐字**相等。
+  「Z = {±I} ⇒ SL/Z = SL/{±I}」用到的是「子群由其承载集合决定」（Lean 里是
+  `Subgroup.ext` / `SetLike` 的外延性），桥层没有为这一步单独立声明；
+  若把它写进正文，卡面就含了未逐字重述的子句，按 docs/STATUS_LEVELS.md 的口径本卡就不该标
+  formalized。需要那一步的下游自己做（它是一行外延性，不是新数学）。
+
+  **定义卡 statement 不动**（原则 1），也不加 `superseded_by`：本卡是拆出，不是换代。
+  定义卡 worldsheet.modular-group-psl2z 的 notes 里原本就有一段「卡面有一处隐含依赖，
+  在 Lean 侧被显式化了（记账）」讲的正是这件事，本轮在那里补了指向本卡的指针。
+
+  **强度**：own = formalized，与定义卡同级，故任何「改挂本卡」的下游 effective 不变；
+  拆卡的收益是**可追溯性**，不是状态提升。
+author: curator-small-backlog-9
+created: "2026-09-11"

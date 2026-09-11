@@ -20,6 +20,22 @@ depends_on:
       两者是同一个群，见 gaps 首条。
       ⚠ 该定义卡已于 2026-09-11 接桥层（`lean_decl: StringFormal.Bridge.psl2z_smul_eq`）
       升为 formalized，故本推导 own=formalized 不再被它按 min 规则压到 rigorous。
+  - id: math.sl2z-center-is-pm-one
+    inferred: false
+    note: |
+      **供给「Lean 的 PSL = 卡面的 SL(2,Z)/{±I}」这一步**，即 gaps 首条点名的那条声明
+      `StringFormal.Bridge.center_eq_pm_one : (Subgroup.center SL(2, ℤ) : Set SL(2, ℤ)) = {1, -1}`。
+      本卡 `lean_decl` 是 `psl_closure_S_T : Subgroup.closure {psl S, psl T} = ⊤`，其中的
+      `PSL(2, ℤ)` 是 Mathlib 的 `SL(2,ℤ) ⧸ Z(SL(2,ℤ))`；要说它就是目标卡正文写的
+      `SL(2,Z)/{±I}`，**必须**知道中心恰是 {±I}——`ModularGroupGenerators.lean` 自己只证了
+      `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），那不够。
+      **非 inferred**：这一步在本推导 gaps 首条里逐字点名了该 Lean 声明及其提交 sha
+      （c15b0db，合并 845b9b9），在桥层文件里可以直接读到。
+      ⚠⚠ **但它不在本卡 `lean_decl` 的机检证明链上**（gaps 首条逐字：「两者的拼接是人读
+      两条声明后作的比对」）。本边供给的是**陈述层面的群识别**，不是证明步骤。
+      ⚠ 2026-09-11（curator small-backlog-9）新增：该事实此前在图上**没有节点**，
+      本轮从 worldsheet.modular-group-psl2z 拆出；指向定义卡的那条边保留
+      （它供给群、S/T 的矩阵，以及「S、T 是 H 上那两个 Möbius 映射」这一未被本推导机检的识别）。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_closure_S_T；支撑链 sl_closure_S_T（Mathlib SpecialLinearGroup.SL2Z_generators 的再导出）→ psl_closure_S_T"
@@ -65,6 +81,10 @@ gaps:
     给出中心元是纯量阵 r·I 且 r² = 1，在 ℤ 上迫使 r = ±1）。子群由其承载集合决定，
     故 Lean 的商群与目标卡正文的 SL(2,Z)/{±I} 是同一个群。
     ⚠ `center_eq_pm_one` 不在本卡 `lean_decl` 的证明链上；两者的拼接是人读两条声明后作的比对。
+    ★ **2026-09-11（curator small-backlog-9）：该事实已立卡** math.sl2z-center-is-pm-one
+    （own=formalized），本推导已加一条 depends_on 边指它 ⇒ 这条拼接在图上可指认了。
+    **但本条 gap 的实质内容未变**：它仍不是一条机检蕴涵；要真正关闭，须由 formalizer
+    在 Lean 里把「Z = {±I} ⇒ SL/Z = SL/{±I}」那一行外延性写出来。
   - |
     **不含 ℍ 上的作用**。「S 是 τ ↦ −1/τ、T 是 τ ↦ τ+1」这一识别不在本文件内
     （docstring 逐字 "Nothing here is about the action on `ℍ`"）。目标卡正文用 Möbius 映射

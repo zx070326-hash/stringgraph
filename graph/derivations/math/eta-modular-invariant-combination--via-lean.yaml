@@ -56,6 +56,26 @@ depends_on:
       `formal/StringFormal/Math/MathlibBridges.lean`（`StringFormal.Bridge.psl2z_smul_eq`、
       `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod`）并升为 formalized，
       本推导 effective 因此升到 formalized。
+  - id: math.mobius-action-preserves-upper-half-plane
+    inferred: false
+    note: |
+      **供给目标卡 (2)「解出的形式」那一步所需的 Im(g·τ) ≠ 0**，即新卡正文的第 (2) 条
+      「作用保持 H：Im(γ·τ) > 0」。Lean 里可逐行指认：`DedekindEtaModular.lean` 的
+
+          theorem norm_eta_pow_four_modular (g : SL(2, ℤ)) (τ : UpperHalfPlane) :
+              ‖η(g • τ)‖ ^ 4 = τ.im / (g • τ).im * ‖η τ‖ ^ 4 := by
+            have hpos : (g • τ).im ≠ 0 := ne_of_gt (g • τ).im_pos
+            …（field_simp / linarith）
+
+      第一行 `(g • τ).im_pos` 就是本卡 (2) 的取出形式（ℍ = {z : ℂ // 0 < z.im}）。
+      **非 inferred**：除以 Im(g·τ) 这一步在证明体里逐字出现，缺了正性就不成立。
+      ⚠ **本推导不用新卡的 (1)**（Im(γ·τ) = Im τ/|cτ+d|² 这条等式）：全群的不变性走的是
+      `Subgroup.closure_induction`，两个生成元上的等式由 S 卡、T 卡供给，
+      中间不出现 |cτ+d|。⇒ 本边只承担 (2)，不承担 (1)。
+      ⚠ 2026-09-11（curator small-backlog-9）新增：该事实此前只写在定义卡
+      worldsheet.modular-group-psl2z 正文的「该作用保持 H」一句里，本轮拆成独立命题卡；
+      指向定义卡的那条边**保留**，它供给群与 Möbius 作用本身、以及 `ModularGroup.S`/`T`
+      与卡面两个矩阵的逐字相同。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/DedekindEtaModular.lean :: StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant；支撑链 im_mul_norm_eta_pow_four_modular_forall → {im_mul_norm_eta_pow_four_modular_invariant, im_mul_norm_eta_pow_four_isInvariant}，推论链 im_mul_norm_eta_pow_four_pow_modular → im_pow_mul_norm_eta_pow_modular → im_pow_twelve_mul_norm_eta_pow_48_modular，另有 norm_eta_pow_four_modular"
