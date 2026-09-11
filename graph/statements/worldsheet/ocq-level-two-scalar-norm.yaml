@@ -67,7 +67,7 @@ sources:
     note: |
       GSW 用 mostly-minus 与 α' = 1/2，已转写。GSW 给的是零态存在条件（a = 1, D = 26）
       而非一般 (D, a) 的模的闭式；本节点的闭式仍属本项目自行核算。
-tags: [bosonic-string, quantization, old-covariant, critical-dimension, intercept, spectrum]
+tags: [bosonic-string, quantization, old-covariant, critical-dimension, intercept, spectrum, formalization-ruled-out]
 notes: |
   **来源实情（必读）**：这条命题的**显式闭式**不是从 Polchinski 或 GSW 逐字抄来的，
   而是本项目内部的两次独立精确计算：
