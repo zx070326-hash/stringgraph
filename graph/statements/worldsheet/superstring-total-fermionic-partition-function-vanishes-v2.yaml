@@ -1,0 +1,216 @@
+id: worldsheet.superstring-total-fermionic-partition-function-vanishes-v2
+kind: proposition
+title: C₂、K₂ 上 R–R 项 = −NS–NS 项；每个拓扑上 NS–NS 与 R–R 发散反号（原书归因于「总费米配分函数由超对称为零」；v2：旧卡 title 把**全项**等式推广到每个拓扑，过强）
+statement: |
+  **设定（是陈述的一部分）**：十维 RNS 超弦。费米迹记号 Z^α_β(τ) = Tr_α[q^H exp(πiβQ)]
+  与 GSO 投影后的费米配分函数
+    **Z_ψ^±(τ) = ½ [ Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ ∓ Z¹₁(τ)⁴ ]**                    (10.7.9)
+  按 worldsheet.modular-invariance-requires-eight-transverse-fermions
+  （§10.7 (10.7.7)–(10.7.9)；**这些迹是「对一对维数」取的**，故四次幂 = 8 个横向费米子）。
+  三个无取向单圈拓扑（圆柱 C₂、Klein 瓶 K₂、Möbius 带 M₂）的真空振幅按闭弦交换的扇区
+  分成两项，下标 **0 = NS–NS 交换**、**1 = R–R 交换**，记号按
+  worldsheet.superstring-cylinder-amplitude-closed-channel-v2（(10.8.1)–(10.8.2a,b)）与
+  worldsheet.superstring-klein-bottle-amplitude-closed-channel。
+
+  **断言**：
+    **(1) 总费米配分函数为零**：**Z_ψ^±(τ) = 0**。
+        原书在 §10.8 对这一条的表述逐字是：'**We know from the previous section that the total
+        fermionic partition function vanishes by supersymmetry**, so that Z_{C₂,1} = −Z_{C₂,0};'
+        ——即它把这条**归因于时空超对称**，并把出处指回 §10.7。
+        §10.7 里对应的两条技术事实是 Jacobi 的 "**abstruse identity**"
+          **Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0**                                     (10.7.16)
+        与 **Z¹₁ = 0**；两者合起来使 (10.7.9) 的方括号逐项为零。
+        ⚠⚠ **「Z_ψ^± = 0」这个等式本身是本图由上面三件东西合成的写法，原书从不写出它**
+        ——见「不断言 (h)」。
+    **(2) 逐拓扑的后果（每条都是原书逐字）**：
+        · 圆柱（§10.8 p. 38，紧接上面那句）：  **Z_{C₂,1} = −Z_{C₂,0}** ；
+        · Klein 瓶（(10.8.11) 之后，p. 41）：   '**and Z_{K₂,1} = −Z_{K₂,0}.**' ；
+        · 一般地（§10.8 p. 42，(10.8.19) 之后的收尾段）：'**For each world-sheet topology the
+          NS–NS divergence is the negative of the R–R divergence**, so the dilaton–graviton
+          tadpole also vanishes for SO(32).'
+        ⚠⚠ **注意前两条与第三条的强度不同**（这是 v2 换代的主要理由）：前两条是**全项等式**
+        （整个 Z_{C₂,1}、Z_{K₂,1} 与对应的 0 项互为相反数），只对 **C₂ 与 K₂** 写出；
+        第三条是**关于发散的**陈述（'the NS–NS **divergence** is the negative of the R–R
+        **divergence**'），它对**每个**拓扑成立。**本卡不把第三条升级成全项等式**，
+        特别是**不**断言任何 Z_{M₂,1} = −Z_{M₂,0}（原书从不写 Z_{M₂,0}，见「不断言 (c)」）。
+    **(3) ⚠ 一条必须与 (2) 一起记的限定（§10.8 脚注 7，p. 39，逐字）**：
+        '**In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each
+        topology separately because the trace vanishes by supersymmetry. This is not sufficient**,
+        because they will no longer cancel when vertex operators are added near one end of each
+        surface. **The NS–NS and R–R tadpoles must vanish separately when summed over topologies.**'
+        即：本卡断言的**逐拓扑相消**是**真空振幅**里的事，它**不**足以给出一致性条件；
+        真正的条件是两类 tadpole 在**拓扑求和后各自为零**。
+        ⚠ 把这条限定用出去（即导出 SO(32)）**不在本卡**，见「本命题不断言 (b)」。
+
+  **本命题不断言**：
+    (a) ⚠⚠ **不断言 Z_ψ^± = 0 与「时空超对称」之间的推理**。原书只写 'vanishes **by
+        supersymmetry**'，**不给式号、不给论证**；§10.7 给出的是两条 θ 函数层面的事实
+        ((10.7.16) 与 Z¹₁ = 0）。本卡把**两种说法都照录**，但**不断言**其中任何一个蕴含另一个。
+        ⚠ 原书在 §10.7 还专门强调过一条**反方向**的告诫（逐字）：一般振幅要求真空是模不变的
+        '*without* using the vanishing of Z¹₁ or the abstruse identity (10.7.16) — as we have
+        required'。⇒ **不得**把本卡当作模不变性的依据，也不得反过来用模不变性论证本卡。
+    (b) **不断言任何 tadpole 结论**。(n ∓ 32)²、SO(32)、R–R 发散是「真正的不一致」、
+        C₁₀ 悖论——全部在 worldsheet.type-i-tadpole-cancellation-so32-v2。
+        本卡只提供那条推导第 (4) 步「把 NS–NS 侧翻到 R–R 侧」所需的两条相消关系。
+    (c) **不断言 Möbius 带的翻面关系**。原书在 Möbius 处**直接算的就是 R–R 一侧**
+        （逐字 'It is slightly easier to focus on the R–R exchange'），
+        故那一支不需要翻面；断言 (2) 的第三条虽然是「for each world-sheet topology」的一般说法，
+        但本卡**不**把它具体化为某个 Z_{M₂,1} = −Z_{M₂,0}（原书从不写这个式子，
+        连 **Z_{M₂,0} 本身**原书都不写）。
+    (d) **不断言环面振幅 Z_{T₂} = 0**。那是 type II 闭弦一侧的陈述，本图未建节点；
+        原书对它的依据同样是 (10.7.16) 与 Z¹₁ = 0，但**对象不同**（环面 vs 三个无取向拓扑）。
+        ⚠ 原书 §10.7 p.35 那一整段讲的正是 Z_{T₂}，它与本卡对象之间的桥只有该段末一句
+        'The same cancellation occurs in the open and unoriented theories.'（**零论证**）。
+    (e) **不断言 (10.7.16) 或 Z¹₁ = 0 本身的证明**。Jacobi 恒等式的 ϑ 记号形式在
+        math.jacobi-abstruse-identity（rigorous），Z¹₁ = 0 在
+        worldsheet.ramond-trace-with-fermion-number-vanishes（physical-argument）；
+        **(10.7.16) 的迹记号形式本图仍无节点**（两种记号相差 η^{−4}，换算原书不写，见推导 gaps）。
+    (f) **不断言 Z_{C₂,0}、Z_{K₂,0} 的值**。那在三张振幅卡上；本卡只断言两侧的**比值关系**。
+    (g) **不断言无取向理论里的超对称是哪一个**。原书此处只说 'supersymmetry'；
+        type I 是 d = 10, N = 1（§10.6 (10.6.19) 一带），type II 是 N = 2，
+        而 (10.7.9) 的 Z_ψ^± 是**在 type II 弦的一侧**定义的迹
+        （圆柱卡逐字：'with the fermionic trace (10.7.9) **from one side of the type II string**'）。
+        **本卡不厘清这三者的关系**，原书在 §10.8 也不厘清。
+    (h) ⚠⚠ **不断言 `Z_ψ^± = 0` 是原书写出的等式**（v2 新增）。原书 §10.7 **全节没有把
+        Z_ψ^± = 0 写成一条显示等式**：(10.7.9) 在原书里是 **Z_ψ^± 的定义式**（∓ 号把 IIB/IIA
+        两种情形写在一条里），而消没的陈述是关于 **Z_{T₂}** 说的（p.35）；§10.8 p.38 给的是
+        英文句 'the total fermionic partition function vanishes by supersymmetry'。
+        ⇒ 断言 (1) 里那个等式是**本图**把「那句英文」认作 Z_ψ^±、并把 IIB/IIA 的 ± 合并后
+        写下的**合成写法**（researcher-theta 的裁定，literature/extractions/polchinski-1998-v2.md
+        **§5.2(b)**：「**它是抽取者/curator 由 (10.7.9) + (10.7.16) + Z^1_1 = 0 合成的推论，
+        不是原书的显式陈述**」）。**本卡断言该等式为真，但不断言它在原书里出现过。**
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38（紧接 (10.8.2) 之后、(10.8.3) 之前），逐字：'**We know from the previous section that the total fermionic partition function vanishes by supersymmetry, so that Z_{C₂,1} = −Z_{C₂,0};** we concentrate then on Z_{C₂,0}.'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**。
+      ★★ 该条对本句强度的判词逐字：「Z_{C₂,1} = −Z_{C₂,0} **归约到 §10.7 的超对称论证**」。
+      ⇒ **原书在 §10.8 不重证，只引用**；这是本卡推导只能是 physical-argument 的直接理由之一。
+      ⚠⚠ **本条是那句英文的出处，不是等式 Z_ψ^± = 0 的出处**（「不断言 (h)」）：
+      原书这里写的是 'the total fermionic partition function vanishes'，**没有写出 Z_ψ^± = 0**。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.11) 之后, p. 41，逐字：'**and Z_{K₂,1} = −Z_{K₂,0}.** The bosonic part is (7.4.15) converted to D = 10.'"
+    note: L1，抽取记录 sec10-8.md **#E69**（已单页重渲染复核）。断言 (2) 第二条的来源。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.19) 之后的收尾段, p. 42，逐字：'**For each world-sheet topology the NS–NS divergence is the negative of the R–R divergence, so the dilaton–graviton tadpole also vanishes for SO(32).**'"
+    note: |
+      L1，抽取记录 sec10-8.md **#E72**（该条已单页重渲染复核 + 独立算术交叉核验）。
+      断言 (2) 第三条的来源。⚠ 同一句的后半（SO(32)）**不在本卡**（「不断言 (b)」）。
+      ⚠⚠ **这句话的主语是 divergence，不是整项**——v2 的 title 与断言 (2) 的 ⚠⚠ 就是据此改写的：
+      旧卡 title 把「R–R 项 = −NS–NS 项」说成对**每个**拓扑成立，而原书在 Möbius 上
+      既不写 Z_{M₂,0}、也不写全项等式，只写这一句关于发散的话。
+  - ref: polchinski-1998-v2
+    loc: "§10.8 脚注 7, p. 39，逐字：'In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each topology separately because the trace vanishes by supersymmetry. **This is not sufficient**, because they will no longer cancel when vertex operators are added near one end of each surface. **The NS–NS and R–R tadpoles must vanish separately when summed over topologies.**'"
+    note: |
+      L1，抽取记录 sec10-8.md **#E68**。断言 (3) 的来源。
+      ★★ 抽取记录对这条脚注的判词逐字：「**这条决定了 SO(32) 结论的逻辑形式**：
+      条件不是『真空振幅有限』（那由超对称对每个拓扑自动成立），
+      而是『**NS–NS tadpole 与 R–R tadpole 分别在拓扑求和后为零**』。」
+      ⇒ 本卡断言 (3) 把这个限定带在身上，正是为了防止下游把 (2) 误读成一致性条件。
+      ★ 注意这条脚注说的也是 **divergences**（与 p.42 收尾段同口径），与断言 (2) 前两条的
+      全项等式不是同一强度。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eqs. **(10.7.9)**（Z_ψ^± 的**定义**，∓ 对应 IIB/IIA）、**(10.7.16)**（Jacobi 的 'abstruse identity' Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0）、(10.7.8d) 与 p.34 的无式号句（Z¹₁ = 0），pp. 33–35"
+    note: |
+      L1，抽取记录 literature/extractions/polchinski-1998-v2.md **#E47** 与 **§5.2(b)**、**§5.4**。
+      ★ #E47 备注第 3 点逐字：「type II 的 Z_{T₂} = 0 **依赖 Jacobi 恒等式 (10.7.16) 与 Z¹₁ = 0**；
+      但 Polchinski 强调一般振幅要求真空是模不变的『*without* using the vanishing of Z¹₁ or the
+      abstruse identity (10.7.16) — as we have required』」。
+      ⇒ 本卡「不断言 (a)」的第二段就是照录这条告诫。
+      ⚠⚠ **§5.2(b) 的裁定是「不断言 (h)」的来源**（逐字）：「**§10.7 全节没有把 Z_ψ^± = 0 写成
+      一条显示等式**；(10.7.9) 是 Z_ψ^± 的**定义式** … 若图上要建『总费米配分函数消没』这条陈述，
+      **它是抽取者/curator 由 (10.7.9) + (10.7.16) + Z^1_1 = 0 合成的推论**，不是原书的显式陈述，
+      `sources[].loc` 只能写「(10.7.9) 与 (10.7.16) 与 p.34 的无式号句」，并在 note 里写明
+      「**原书未写出该等式**」。」⇒ 本条 loc 就是按这条裁定写的，**本条不是 Z_ψ^± = 0 的出处**。
+      ⚠ **(10.7.16) 的迹记号形式本图无节点**；本图有的是 ϑ 记号形式
+      （math.jacobi-abstruse-identity，rigorous），两者相差 η^{−4}、换算原书不写（推导 gaps 第一条）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, **p. 35**（(10.7.16) 所在段），逐字：'**The type II theories have spacetime supersymmetry. This implies equal numbers of bosons and fermions at each mass level, and so `Z_{T₂}` should *vanish* in these theories by cancellation between bosons and fermions. Indeed it does, as a consequence of `Z^1_1 = 0` and the \"abstruse identity\" of Jacobi,**' 随后即 (10.7.16)；该段末逐字 '**The same cancellation occurs in the open and unoriented theories.**'"
+    note: |
+      **L1 页图逐字**，抽取记录 polchinski-1998-v2.md **§5.4**（researcher-theta，2026-09-11）。
+      ★ 这是原书写出「超对称 ⇒ 每级玻色数 = 费米数 ⇒ 相消」这一串的**唯一**地方（**零论证**），
+      也是把结论推广到本卡对象（无取向拓扑）的**唯一一句**（段末那句，同样零论证）。
+      ⚠⚠ **但这一段的对象是 Z_{T₂}（环面），不是本卡的三个无取向拓扑**（「不断言 (d)」）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eqs. (10.7.7)–(10.7.9), pp. 32–33（Z^α_β 的定义、四个迹、Z_ψ^± 的组合；逐字 'We should emphasize that these traces are for a pair of dimensions.'）"
+    note: |
+      本图对应节点 **worldsheet.modular-invariance-requires-eight-transverse-fermions**
+      （其 statement 逐字含 (10.7.9) 的组合）。本卡的设定段取自它。
+tags: [superstring, type-i, one-loop, supersymmetry, ns-ns, rr, jacobi-abstruse-identity]
+notes: |
+  ★★★【v2 换代的两条理由（curator，2026-09-11，batch28-supersede）】
+  本卡取代 **worldsheet.superstring-total-fermionic-partition-function-vanishes**。两条理由都是
+  旧卡自己的推导登记在案、并明写「本轮未做换代」的（旧推导 gaps 第二条与 notes 末尾那段）：
+    **(i) 旧 title 过强（reviewer-batch28）**：旧 title 写「**故每个世界面拓扑上 R–R 交换项 =
+        −（NS–NS 交换项）**」，而原书 p.42 的「每个拓扑」那句只谈**发散**
+        （'the NS–NS **divergence** is the negative of the R–R **divergence**'）；
+        **全项等式只对 C₂ 与 K₂ 写出**，Möbius 的 **Z_{M₂,0} 原书从不写**（p.42 只谈发散）。
+        旧卡的 statement 断言 (2) 与「不断言 (c)」其实已经正确处理了这一点——**越界的只有 title**。
+        ⇒ v2 的 title 按 reviewer 的措辞重写，并在断言 (2) 末尾加一段 ⚠⚠ 把两种强度的差别写进卡面。
+    **(ii) 等式 Z_ψ^± = 0 原书从不写出（researcher-theta，polchinski-1998-v2.md §5.2(b)）**：
+        (10.7.9) 在原书里是 Z_ψ^± 的**定义式**；消没是对 **Z_{T₂}** 说的（p.35）；
+        §10.8 p.38 只给英文句。⇒ v2 新增「**不断言 (h)**」，把「该等式是本图的合成写法」写进卡面，
+        并把 §10.7 那条 source 的 loc 改按 §5.2(b) 要求的写法（「(10.7.9) 与 (10.7.16) 与
+        p.34 的无式号句」）+ note 写明「原书未写出该等式」。
+  旧卡当轮未换代的唯一原因是
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 在 **claim #399
+  （batch27-fix）**名下；该分支已并入 main，本轮落地。
+
+  【v2 与旧卡的逐条差异（除此以外 statement **逐字未动**）】
+    1. **title** 重写（见上）；
+    2. 断言 (1) 末尾加一行 ⚠⚠ 指向「不断言 (h)」；
+    3. 断言 (2) 末尾加一段 ⚠⚠ 说明「前两条是全项等式、只对 C₂/K₂；第三条是关于**发散**的、对每个拓扑」；
+    4. **新增「不断言 (h)」**（Z_ψ^± = 0 不是原书写出的等式）；
+       ⚠ **(a)–(g) 的字母与内容未改**，别处 note 里写的「目标卡『不断言 (c)』」「『不断言 (g)』」等指针仍有效；
+    5. 「不断言 (c)」补一句「连 Z_{M₂,0} 本身原书都不写」；
+       「不断言 (d)」补一句 p.35 那段的对象是 Z_{T₂}、桥只有段末一句；
+       「不断言 (e)」改为反映现状（ϑ 形式的卡已建且 rigorous，**迹形式仍无节点**）——
+       旧卡写的是「**本图没有节点**」，那句在 2026-09-11 theta-cards 之后已经过时。
+    6. sources 增一条 §10.7 p.35 的逐字段（旧卡只在推导里引过它），并把 §10.7 那条的 loc/note
+       改按 §5.2(b) 的裁定写。
+  **断言 (1)(2)(3) 的命题内容没有变弱也没有变强**（title 与卡面注释的越界被修掉）。
+
+  ★★★【本卡为什么存在（承自旧卡，curator，2026-09-11，small-backlog-13）】
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的 gaps 里有一条
+  2026-09-11（klein-mobius 轮）新增的缺口，逐字：
+    「★【新增】**第 (4) 步用的两条『超对称相消』不在任何一张三面卡的断言里**：
+      求 R–R 侧的总和需要 **Z_{C₂,1} = −Z_{C₂,0}** 与 **Z_{K₂,1} = −Z_{K₂,0}**（Möbius 那一支
+      原书直接给的就是 R–R 项，不需要翻面）。这两条相消原书归约到 §10.7 的超对称论证
+      （总费米配分函数为零），而圆柱卡与 Klein 瓶卡**都明确把它排除在断言之外** …
+      ⇒ **本推导第 (4) 步在这一处没有图内支撑** … → 待建：
+      worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry，
+      届时本推导加一条非 inferred 边。」
+  本卡（经旧卡一代）就是那张卡；tadpole 推导的那条**非 inferred** 边已随本次换代改指本卡。
+
+  ⚠⚠【本卡刻意把「超对称」与「Jacobi 恒等式」并列而不打通（**最重要的一条记账**）】
+  原书在 §10.8 说的是 'vanishes **by supersymmetry**'（一句归因，无式号、无论证）；
+  §10.7 实际写下的是 **(10.7.16)** 与 **Z¹₁ = 0** 两条 θ 函数事实。
+  两者在文献里当然被认为是同一回事（abstruse identity ↔ 时空超对称的玻色/费米态计数配平），
+  **但本书不把这层关系写出来**（p.35 只有一句零论证的 'This implies equal numbers of bosons and
+  fermions at each mass level'，且对象是 Z_{T₂}）。⇒ 本卡断言 (1) 同时照录两种说法，
+  并用「不断言 (a)」明说**不断言其中任何一个蕴含另一个**。
+  ⚠ 更要紧的是 §10.7 那条**反方向**的告诫（逐字）：模不变性的要求必须在
+  '*without* using the vanishing of Z¹₁ or the abstruse identity (10.7.16)' 的意义下成立
+  ——所以**不能**把本卡与 worldsheet.modular-invariance-requires-eight-transverse-fermions
+  互相当作依据。本卡对那张卡的依赖**只取记号**。
+
+  【本卡与三张振幅卡的分工】
+    · 三张振幅卡：各给**一个面的一侧**（圆柱与 Klein 瓶给 NS–NS 侧，Möbius 给 R–R 侧），
+      并各自在「不断言」里**明确排除**了这里的相消关系；
+    · 本卡：只给**两侧之间的关系**，不给任何一侧的值。
+  ⇒ 合起来，worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的第 (4) 步
+    （把三个面的 R–R 侧相加）在图上有完整支撑。
+
+  【断言 (3) 为什么必须留在本卡里】脚注 7 说的正是「本卡断言的东西**不够**」。
+  如果把它剥掉，本卡就成了一张容易被误引为「所以真空振幅有限、所以理论一致」的卡。
+  抽取记录 #E68 的判词逐字：「**转节点时必须把这个限定写进 statement，否则该卡是错的**」
+  ——那句话是对 tadpole 卡说的，本卡照同样的口径办。
+  ⚠ 但**用**这条限定（即导出「必须分别为零」这个一致性条件、进而 SO(32)）仍在 tadpole 卡，
+  本卡「不断言 (b)」已划界。
+author: curator
+created: "2026-09-11"

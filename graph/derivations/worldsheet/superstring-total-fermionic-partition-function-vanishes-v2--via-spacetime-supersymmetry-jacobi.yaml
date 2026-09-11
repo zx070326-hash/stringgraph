@@ -1,5 +1,5 @@
-id: worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
-target: worldsheet.superstring-total-fermionic-partition-function-vanishes
+id: worldsheet.superstring-total-fermionic-partition-function-vanishes-v2--via-spacetime-supersymmetry-jacobi
+target: worldsheet.superstring-total-fermionic-partition-function-vanishes-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -309,6 +309,23 @@ notes: |
   worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的边，
   而该文件在 **claim #399（batch27-fix）**名下、且本轮任务书明令不得触碰该批文件。
   详见 gaps 第二条；已 agora_send 通报 lead。
+
+  ★★★【2026-09-11 batch28-supersede：本推导已随目标卡换代（curator）】
+  原 id 是 `worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-
+  supersymmetry-jacobi`，target 指旧卡 worldsheet.superstring-total-fermionic-partition-function-
+  vanishes。batch27-fix 已并入 main，claim #399 不再锁住
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences，本轮按上面两条理由
+  执行 v2 换代：
+    (i) id / target 改指新卡 **worldsheet.superstring-total-fermionic-partition-function-
+        vanishes-v2**；
+    (ii) 新卡的断言 (1)(2)(3) 与「不断言」(a)–(g) 逐字承接旧卡（见新卡 notes 的编号对照），
+         新增「不断言 (h)」（不断言 `Z_ψ^± = 0` 是原书写出的等式）；title 按 reviewer 的措辞重写；
+    (iii) 下游 worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的
+          depends_on 边已改指新卡（本边供给的内容——Z_{C₂,1} = −Z_{C₂,0} 与
+          Z_{K₂,1} = −Z_{K₂,0}——在新卡断言 (1) 里逐字未变，故改边不改论证）。
+  **本推导五条 depends_on、summary、gaps 的数学内容一字未改**：新旧卡的断言 (1)(2)(3) 与
+  「不断言 (a)–(g)」逐字相同，只是 title 与「不断言 (h)」的新增不影响本推导用到的任何一步。
+  gaps 第二条（记录换代请求本身）保留作历史，不再需要执行——**已在此完成**。
 
   按抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E66**（p.38 那句逐字）、
   **#E68**（脚注 7）、**#E69**（Klein 瓶那句）、**#E72**（p.42 收尾段）、

@@ -67,12 +67,18 @@ depends_on:
       ⚠ 那张卡断言的 ± 是 **SO(n) 与辛群之间的相对号**；(10.8.19) 里 ∓ 的**整体号**
       原书自承不是算出来的（'This calculation does not determine the sign of the tadpole'），
       两者不要混（gaps 已分别登记）。
-  - id: worldsheet.superstring-total-fermionic-partition-function-vanishes
+  - id: worldsheet.superstring-total-fermionic-partition-function-vanishes-v2
     note: |
       供给本推导**第 (4) 步把 NS–NS 侧翻到 R–R 侧**所需的两条相消关系：
       **Z_{C₂,1} = −Z_{C₂,0}**（§10.8 p.38 逐字）与 **Z_{K₂,1} = −Z_{K₂,0}**（(10.8.11) 下方逐字），
       以及它们共同的来源「总费米配分函数为零」（原书归因于超对称，§10.7）。
       **非 inferred**：这两条式子都印在本推导所依据的同一节里（pp. 38 / 41），该卡逐字照录。
+      ★★【2026-09-11 改指 v2，batch28-supersede】本边原先指向
+      worldsheet.superstring-total-fermionic-partition-function-vanishes（v1）。
+      reviewer-batch28 判 v1 的 title 过强（把「每拓扑发散反号」误写成「每拓扑全项反号」）
+      且断言 (1) 的等式 Z_ψ^± = 0 原书从不写出，v1 换代为 -v2（title 重写、新增「不断言 (h)」）。
+      ⚠ **本推导第 (4) 步取用的是新卡断言 (1)（C₂/K₂ 两条全项等式），供给内容逐字未变**，
+      改指后论证不变。
       ★★★【2026-09-11 新增，small-backlog-13】本边关闭本推导 gaps 里 2026-09-11（klein-mobius 轮）
       新增的那条缺口，其逐字待建项是：
         「→ 待建：worldsheet.superstring-vacuum-amplitude-vanishes-by-supersymmetry

@@ -144,5 +144,41 @@ notes: |
   ——那句话是对 tadpole 卡说的，本卡照同样的口径办。
   ⚠ 但**用**这条限定（即导出「必须分别为零」这个一致性条件、进而 SO(32)）仍在 tadpole 卡，
   本卡「不断言 (b)」已划界。
+
+  ⚠⚠【2026-09-11 收到但**未执行**的换代请求（reviewer-batch28，记录在此以免丢失）】
+  reviewer 指出本卡有两处问题：
+    (i) **title 过强**——旧 title 写「故每个世界面拓扑上 R–R 交换项 = −（NS–NS 交换项）」，
+        而原书 p.42 的「每个拓扑」那句只谈**发散**（'the NS–NS **divergence** is the negative
+        of the R–R **divergence**'）；全项等式只对 **C₂ 与 K₂** 写出，Möbius 的 Z_{M₂,0}
+        原书从不写。本卡 statement 断言 (2) 与「不断言 (c)」已正确处理这一点，**只有 title 越界**；
+    (ii) **等式 Z_ψ^± = 0 原书从不写出**（researcher-theta，literature/extractions/
+        polchinski-1998-v2.md §5.2(b)）：(10.7.9) 在原书里是 Z_ψ^± 的**定义式**，
+        消没是对 Z_{T₂}（环面）说的；§10.8 p.38 只给英文句 'the total fermionic partition
+        function vanishes by supersymmetry'。本卡断言 (1) 的等式是**本图**把那句英文认作
+        Z_ψ^± 并合并 IIB/IIA 的 ± 后的**合成写法**，不是原书显式陈述。
+  reviewer 给出的正解：**换代**为
+  worldsheet.superstring-total-fermionic-partition-function-vanishes-v2，
+  title 按 reviewer 措辞重写为「C₂、K₂ 上 R–R 项 = −NS–NS 项；每个拓扑上 NS–NS 与 R–R 发散反号」，
+  新增「不断言 (h)」（不断言 Z_ψ^± = 0 是原书写出的等式），本卡写 superseded_by。
+  ⇒ **本轮未做**：换代必须同时改
+  worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的 depends_on，
+  而它在 **claim #399（batch27-fix）**名下，且本轮任务书明令不得触碰该批文件。
+  **已 agora_send 通报 lead，请在 batch27 落地后单独派工。**
+
+  ⚠⚠【2026-09-11 上面那条换代请求**已执行**（curator，batch28-supersede）——本卡已被取代，
+  见 superseded_by】batch27-fix 已并入 main，worldsheet.type-i-tadpole-cancellation-so32-v2--
+  via-one-loop-divergences 不再被 claim #399 锁住，本轮按 reviewer-batch28 的正解落地：
+    (1) 新卡 **worldsheet.superstring-total-fermionic-partition-function-vanishes-v2** 逐字承接
+        本卡断言 (1)(2)(3) 与「不断言」(a)–(g)，新增「不断言 (h)」，title 重写；
+    (2) 本卡唯一的推导已 `git mv` 为
+        **worldsheet.superstring-total-fermionic-partition-function-vanishes-v2--
+        via-spacetime-supersymmetry-jacobi** 并改指新卡（供给的两条相消关系
+        Z_{C₂,1} = −Z_{C₂,0}、Z_{K₂,1} = −Z_{K₂,0} 在新卡断言 (1) 里逐字未变，
+        论证内容未动）；
+    (3) worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的
+        depends_on 边已改指新卡，供给内容不变；
+    (4) 已 grep 全图核对：除本卡自身与散文提及外，无其他活推导依赖本卡。
+  **本卡的 id 与 statement 一字未动**（原则 1）。
+superseded_by: worldsheet.superstring-total-fermionic-partition-function-vanishes-v2
 author: curator
 created: "2026-09-11"
