@@ -1,0 +1,38 @@
+id: branes.d-brane-rr-charge-value
+kind: proposition
+title: Dp 膜的 R–R 荷：μ_p² = (π/κ₁₀²)(4π²α')^{3−p} = e^{2Φ₀} τ_p²
+statement: |
+  type II 超弦中 Dp 膜的 R–R 荷 μ_p 按低能作用量
+    **S = −(1/4κ₁₀²) ∫ d^{10}x (−G)^{1/2} |F_{p+2}|² + μ_p ∫ C_{p+1}**       (13.3.5)
+  归一化（F_{p+2} = dC_{p+1}；κ₁₀² = ½(2π)^7 α'^4 是 §12.1 低能作用量里的常数，
+  conv.string-coupling-tension-ratio）。则
+    **μ_p² = (π / κ₁₀²) (4π²α')^{3−p} = e^{2Φ₀} τ_p² ≡ T_p²**,              (13.3.7)
+  其中 τ_p 是张力（branes.d-brane-tension，用物理测得的 κ = e^{Φ₀}κ₁₀ 表示）、Φ₀ 是 dilaton 背景值、
+  T_p 是与 Φ₀ 无关的量。即 **μ_p = e^{Φ₀} τ_p**：D 膜的 R–R 荷与张力相等（在 T_p 的意义下）。
+  R–R 荷满足与张力相同的 T 对偶递推 μ_p = μ_{p−1}/(2π α'^{1/2})。
+
+  **本命题不断言**：(a) μ_p 与 μ_{6−p} 的 Dirac 量子化关系（branes.rr-charge-quantization）；
+  (b) (13.3.18) 中高阶项的归一化；(c) 单张 D 膜之外的构型（束缚态的荷见 §13.6，本图未建卡）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.string-coupling-tension-ratio]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, eqs. (13.3.5)（R–R 低能作用量与 μ_p 的归一化）、(13.3.6)（场论 R–R 交换振幅 −2κ₁₀²iμ_p²G_{9−p}(y)）、(13.3.7)（μ_p² = (π/κ₁₀²)(4π²α')^{3−p} = e^{2Φ₀}τ_p² = T_p²），pp. 146–147"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E17 与 §1.4，证据等级 L1（原书页图）。
+      逐字（(13.3.5) 之后）：动能项正则归一 ⇒ 传播子 2κ₁₀²i/k²。
+      ⚠ κ 与 κ₁₀ 不是同一个数（§1.3：「this differs from the physically measured κ because the latter
+      depends on the dilaton background」）——本卡的 μ_p 用 κ₁₀、τ_p 用 κ，二者相差 e^{Φ₀}。
+tags: [d-brane, rr-charge, ramond-ramond, tension, type-ii, bps]
+notes: |
+  【为什么从 branes.d-brane-tension 拆出】τ_p 由 NS–NS 交换 (13.3.1) 与 (13.3.3) 对照定出，
+  μ_p 由 R–R 交换（(13.3.2)，超对称输入）与 (13.3.6) 对照定出——两次不同的对照，
+  且 μ_p 的推导多依赖一条（branes.d-brane-bps-no-force 的 (13.3.2)）。按「一个节点一个命题」分开。
+
+  【μ_p 与 τ_p 在 DBI 作用量里的混用，抽取记录 Q6】(13.3.14) 的整体系数写 μ_p 而 Vol.1 (8.7.2) 写 τ_p；
+  由本卡 μ_p = e^{Φ₀}τ_p，两者只在 Φ = Φ₀ 处等价。原书不解释这个切换。见 branes.dbi-action-d-brane。
+
+  【递推的归一化，抽取记录 Q7/E21】μ_p = μ_{p−1}/(2πα'^{1/2}) 是 (13.3.17) 之后的原文
+  「with the result μ_p = μ_{p−1}/2πα'^{1/2} in agreement with the explicit calculation」，
+  与 τ_p 的 (4π²α')^{−1/2} 相同（(4π²α')^{1/2} = 2πα'^{1/2}）。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

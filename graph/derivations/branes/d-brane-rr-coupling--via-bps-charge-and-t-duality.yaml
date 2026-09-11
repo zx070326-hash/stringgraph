@@ -1,0 +1,39 @@
+id: branes.d-brane-rr-coupling--via-bps-charge-and-t-duality
+target: branes.d-brane-rr-coupling
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-bps-half-susy
+    note: |
+      供给「Dp 膜是 BPS 态」；原书由此推「BPS states … must carry conserved charges」（p. 141），
+      ⚠ 但「BPS ⇒ 带守恒荷」本身被引到 App. B.2，本图未抽，故这一步在图上只有一半支撑。
+  - id: branes.t-duality-changes-brane-dimension
+    note: |
+      供给「每对一个方向作 T 对偶，p 减 1」；原书 p. 141 逐字「each time we T-dualize in an additional
+      direction the dimension of the p-branes goes down by one and the R–R form loses an index」。
+      ⚠ 该卡是玻色弦的（Vol.1 §8.7）；超弦版原书外包给第 8 章（p. 138）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, p. 141（(13.2.7) 前后两段）：BPS ⇒ 守恒荷 ⇒ R–R 荷；10-形式由 §10.8 推出；其余由 T 对偶得到；(13.2.8a,b) 与脚注 2（电–磁对偶）"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E8/#E9（L1）。
+  - ref: polchinski-1998-v2
+    loc: "§13.1, (13.1.4)(13.1.5)，pp. 137–138（R–R 顶点算子在 T 对偶下加/减一个 9 指标）"
+    note: 抽取记录 #E2（L1，「up to signs」）。
+summary: |
+  (1) Dp 膜是 BPS 态 ⇒（App. B.2）必须携带守恒荷；具有正确 Lorentz 性质的自然候选是反对称的 R–R 荷，
+      耦合形式为世界体上的 ∫ C_{p+1}（(13.2.7)）。
+  (2) 锚点：p = 9。§10.8 由 type I 发散推出 10-形式势 C_10 与耦合 μ_10 ∫ C_10（积分跑遍全时空）；
+      本章把它解释为 D9 膜的 (13.2.7)。
+  (3) 对一个方向作 T 对偶：D 膜维数减 1（上游卡），同时 R–R 顶点算子右乘 Γ^9 Γ 使 C 形式丢掉/获得
+      一个 9 指标（(13.1.4)(13.1.5)）⇒ 所有 p 的 (13.2.7) 都由 p = 9 的情形经 T 对偶得到；
+      IIA/IIB 各需的 R–R 势表随之而来。C_9（无传播态）由 D8 膜的存在要求。
+  (4) 电–磁对偶：F_{p+2} 与 ∗F_{p+2} = F_{8−p} 的场方程与 Bianchi 恒等式互换（(13.2.8)），
+      Dp 膜是前者的电源、后者的磁源，故 Dp 与 D(6−p) 互为对偶。
+gaps:
+  - "**C_10 的存在由 §10.8 推出，而 §10.8 的卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32 未合；任务书写作 spectrum.*）。⇒ TODO：合入后加 depends_on。在此之前，(2) 这一步在图上悬空。且 §10.8 那一步原书自称是「猜」（One can guess the resolution）。"
+  - "**「BPS ⇒ 带守恒荷」引到 App. B.2，本项目未抽**（抽取记录 §3.3）。"
+  - "**R–R 顶点算子的 T 对偶 (13.1.4)(13.1.5) 本图无节点**，且原书自陈只到「up to signs」。"
+  - "**「具有正确 Lorentz 性质的自然候选」是选择而非推导**：原书没有排除其他可能的守恒荷。"
+  - "**T 对偶改变膜维数的卡是玻色弦的**；超弦版被原书外包给第 8 章。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"
