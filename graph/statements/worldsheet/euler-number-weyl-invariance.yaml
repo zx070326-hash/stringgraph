@@ -33,8 +33,29 @@ sources:
          ⇒ 本节点 statement 里 `k′ = e^{−ω}(k + n^a∂_aω)` 那一行、以及「边界项恰好相消」
          那半句，**在 Polchinski §1.2 正文中没有对应内容**，是 curator 为使相消论证完整
          而补的标准微分几何公式（这一点旧 note 已诚实写出，本轮进一步确认原书连边界项
-         都没写）。这半句的正文来源应转向 §3.2 (3.2.3b)（**本项目尚未取页图**）。
+         都没写）。这半句里**边界项本身**的正文来源应转向 §3.2 (3.2.3b)
+         （~~本项目尚未取页图~~ —— **2026-09-11 已取得，见下方新增 source**）。
       见 literature/extractions/polchinski-1998-v1.md §13.3(d) 与 §13.9 A#4。
+  - ref: polchinski-1998-v1
+    loc: "**§3.2, eq. (3.2.3b), p.82**（L1 页图逐字 `χ = (1/4π) ∫_M d²σ g^{1/2} R + (1/2π) ∫_{∂M} ds k`）——**只支撑本节点 statement 里被 Weyl 变换的那个带边界项的 χ 的表达式本身**，不支撑 `k′` 的变换律，也不支撑「两处贡献恰好相消」那一步"
+    note: |
+      **【2026-09-11 新增（curator-v1-sec15，researcher 第九轮 ch.3 页图，印刷 p.82）】**
+      本节点 statement 里出现的带边界项 χ，其**原书正文出处**现已确定并取得页图：
+      **§3.2 (3.2.3b), p.82，等级 L1**（此前只有 exercise 1.3 指路 + Headrick 习题解答）。
+      三条必须一起搬的限定：
+
+      1. **(3.2.3b) 是欧氏世界面上的式子**（p.82 §3.2 开篇逐字「the Minkowskian world-sheet
+         metric `γ_ab` is replaced with a Euclidean world-sheet metric `g_ab(σ¹,σ²)`, of
+         signature `(+,+)`」），写作 `g^{1/2}`；**本节点 statement 与 uses_conventions 用的是
+         闵氏 `(−γ)^{1/2}` + conv.worldsheet-lorentzian**。差异按 conv.worldsheet-euclidean
+         的字典对应，此处记账；抽取记录 §15.1(b) 明确警告「不要把 (3.2.3b) 挂到闵氏号差的卡片上」，
+         故本 source 的 loc 已写死它只支撑「表达式本身」。
+      2. **原书的积分顺序是 `∫_{∂M} ds k`**（先 `ds` 后 `k`），系数体项 1/4π、边界项 1/2π。
+      3. ★ **`k` 的定义原书正文没有**：(3.2.3b) 下方逐字「The geodesic curvature `k` was defined
+         **in exercise 1.3**; note that the boundary is now always spacelike.」
+      ⇒ **本节点真正缺来源的那一半没有变**：`k′ = e^{−ω}(k + n^a∂_aω)` 与 `ds′ = e^{ω}ds`
+      仍然只有 headrick-2008 problem 1.3 solution（第三方习题解答）支撑，Polchinski 侧为零。
+      见 literature/extractions/polchinski-1998-v1.md §15.1(a)(b)。
 tags: [bosonic-string, geometry, topology, weyl, euler-number]
 notes: |
   「χ 是拓扑不变量」本身是 Gauss–Bonnet 的内容；本节点只主张比它弱的
