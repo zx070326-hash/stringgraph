@@ -123,6 +123,24 @@ theorem gs_factorization_nested_eq_expanded_alg (Ω₄ Ω₈ : R) :
     rw [← map_mul]; norm_num
   rw [h]; ring
 
+/-- **The Green–Schwarz factorisation, both branches at once**, over any commutative
+`ℚ`-algebra. This is the single declaration the graph node
+`math.anomaly-twelve-form-factorization` can point at: GS (1984) eq. (19) asserts one
+identity, instantiated on the two gauge algebras that survive the trace conditions, so
+one `lean_decl` carrying the conjunction is a closer match to the node's text than either
+branch alone.
+
+Note what the conjunction does **not** say: it does not say these are the only solutions.
+"Only `SO(32)` and `E₈ × E₈` factorise" is not a GS 1984 result and is not formalised
+anywhere in this island. -/
+theorem gs_factorization_alg :
+    (∀ x y : R, 15 * x * y = algebraMap ℚ R (1 / 48) * (30 * x) *
+        ((24 * y + 3 * x ^ 2) - algebraMap ℚ R (1 / 300) * (30 * x) ^ 2))
+      ∧ (∀ x : R, algebraMap ℚ R (1 / 7200) * x ^ 3
+        = algebraMap ℚ R (1 / 48) * x *
+            (algebraMap ℚ R (1 / 100) * x ^ 2 - algebraMap ℚ R (1 / 300) * x ^ 2)) :=
+  ⟨gs_factorization_so32_alg, gs_factorization_e8_alg⟩
+
 end FactorizationAlg
 
 end StringFormal.Math
