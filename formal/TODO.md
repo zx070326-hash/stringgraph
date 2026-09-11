@@ -1116,6 +1116,11 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   - 闭式（图节点 `worldsheet.ocq-level-two-scalar-norm`）：`Fock.pairing_levelTwoScalar_physical`，
     `(4a₀-9)² ⟨ψ₂,ψ₂⟩ = 2(D-1)[16a₀² + (2D-74)a₀ + 84 - 3D]`（分母已清；括号内判别式 `4(D-1)(D-25)`）。
     非空性：`Fock.exists_levelTwoScalar_mem_physSubmodule`（域上，`4a₀ ≠ 9` 且 `k² ≠ 0`）。
+  - 判别式（`worldsheet.ocq-level-two-scalar-norm-closed-form` 第 (4) 条，2026-09-11 补）：
+    `Fock.levelTwo_norm_discriminant`，任意交换环上 `64[16a₀²+(2D-74)a₀+84-3D] =
+    (32a₀+2D-74)² - 4(D-1)(D-25)`（配方形式，`ring` 一行；`ok`，标准三公理）。
+    从此判别式 `4(D-1)(D-25)` 是定理而非 docstring。**注意**：由它推出「`1 ≤ D ≤ 25` 时括号恒非负、
+    `D > 25` 时取负值」需要有序域上的符号分析，Lean 里没做，只有代数恒等式。
   - `a₀ = 1`：`Fock.pairing_levelTwoScalar_intercept_one`，`⟨ψ₂,ψ₂⟩ = -2(D-26)(D-1)/25`，
     系数 `c₂ = (D-1)/5`、`c₃ = (D+4)/10`。
   - **鬼**（no-ghost-theorem-v4 第 (2) 条）：`Fock.exists_mem_physSubmodule_pairing_self_neg`，
