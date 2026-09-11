@@ -236,5 +236,62 @@ notes: |
   N ≤ 4 的质壳数值不缩短、不绕过这条链（本卡仍需要一般 N 的 dim V_N = p(N) 才能升级）。
   图侧承载「这四个数值蕴含了什么线性无关结论」见
   worldsheet.fock-module-free-over-negative-virasoro-low-level 的 notes；本卡只记录数值本身。
+
+  ---
+  **【(F) c = 26 处权公式 h_{p,q}(26) 的显式退化结构：新卡
+  worldsheet.c26-degenerate-weights-pentagonal（curator，分支 agent/curator/b3-findings，
+  依派活任务交付物 #5；只加 notes，不改 statement，本卡 status/effective 不变，仍
+  rigorous）】**
+
+  本卡 statement 只写「h_{r,s}(c) 由 Kac 公式给出」，未写出显式公式；显式公式只在本卡
+  sources 的 schottenloher-2008 条目 note 里（见上方，Theorem 6.12 逐字给出
+  h_{p,q}(c) = (1/48)[(13−c)(p²+q²) + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c]）。
+  formal/BLUEPRINT-noghost.md §B‴.7（formalizer，2026-09-12，⟨手算⟩）把 c = 26 代入
+  该式，给出单参数化简 h_{1,s}(26) = −(s+4)(s−1)/6，并证明退化点判据
+  **「V(26,1−s) 在层 s 有奇异向量 ⟺ 24s+1 是完全平方 ⟺ s 是广义五边形数」**——
+  即本卡（(C) 段已登记 rigorous 上限、未形式化的 h_{r,s}(c) 结构）在 c = 26、
+  与开弦无鬼定理关心的质壳线 h = 1−N（本卡上方 (E) 段的同一条质壳线）相交时的
+  一条精确算术结果。**图上承载这条新数学内容的是独立卡
+  worldsheet.c26-degenerate-weights-pentagonal（kind: proposition，status 由其推导
+  --via-blueprint-hand-computation 给出 physical-argument，因为全部是⟨手算⟩，
+  未经 Lean/reviewer 复核）**，不在本卡展开——按项目原则「一个节点一个命题」，
+  h_{p,q}(c) 的一般公式（本卡）与它在 c=26 处的五边形数退化结构（新卡）是两条
+  不同的命题，本卡只在此留一个指针。该新卡对本卡的依赖边标 `inferred: true`
+  （理由与本条同：公式在本卡 sources note 里，不在 statement 正文）。
+
+  **⚠ 与上方 (E) 段的关系，不要混淆**：(E) 段代入的是**行列式的取值**
+  det M_N(26, 1−N)（N=1,2,3,4 的具体数），本条与新卡代入的是**权公式本身**
+  h_{p,q}(26)（哪些 (p,q) 使行列式的某个因子 (h−h_{p,q}(26)) 为零），两者是
+  Kac 公式的不同部分：(E) 关心行列式整体在特定质壳点的数值，本条关心行列式
+  因式分解里每个零点因子的位置随 s = N−M（层差）如何分布。(E) 段已经记录了
+  「N=1,2 处 det=0」这一事实（对应 s=1,2，恰是新卡断言 (3) 里 k 奇的最小两个
+  五边形数），但 (E) 没有把这个"为什么恰好是 N=1,2"归纳成一般判据——新卡
+  的贡献正是把这个"为什么"提升为对一切 s 的算术判据（24s+1 是完全平方）。
+
+  **本条对本卡 statement、status 或 sources 均无影响，纯记账**：本卡仍是
+  rigorous、未形式化（瓶颈见上面 (C)）；c=26 特化与五边形数结构是本卡一般公式
+  的一个下游推论，不改变本卡自身的论证严格度。
+
+  ---
+  **【(G) p ↔ q 索引顺序：本卡 sources 的 schottenloher-2008 公式与
+  formal/BLUEPRINT-noghost.md §B‴.7 记号左右相反，curator 独立核实（登记于
+  2026-09-12，与 (F) 同批）】**
+
+  curator 在撰写新卡 worldsheet.c26-degenerate-weights-pentagonal 时，把本卡
+  上方 schottenloher-2008 source note 里的 h_{p,q}(c) 公式代入 c=26 并与
+  blueprint §B‴.7 的 h_{p,q}(26) = [25−(3p+2q)²]/24 逐项核对，发现**两者对
+  同一对参数标签 (p,q) 给出不同的数值**——具体地，取 (p,q)=(1,2)：本卡这里
+  schottenloher 的公式给 [25−4·1−9·4−12·2]/24 = −13/8，blueprint 的公式给
+  [25−(3+4)²]/24 = −1；而把 schottenloher 公式的 (p,q) 对调成 (2,1) 才给出
+  与 blueprint (1,2) 一致的 −1。**已核实这不是代数错误，而是两条来源对
+  「(p,q)」哪个标签对应哪个指标的约定不同**（Kac 权公式在文献里常见
+  h_{r,s} 与 h_{s,r} 两种排法，两者作为集合 {h_{p,q}(c) : p,q≥1} 相同，只是
+  标签顺序相反）——完整核对过程见新卡 worldsheet.c26-degenerate-weights-pentagonal
+  的 sources 中 schottenloher-2008 条目的 note，此处只留指针，不重复推导。
+  ⚠ **本卡自身的 statement 与 sources 均不改**：这一差异只在「本卡的
+  schottenloher-2008 source note」与「blueprint 的记号」之间，不是本卡
+  statement 正文与任何来源之间的冲突——本卡 statement 本身不写出显式公式
+  （只说"由 Kac 公式给出"），故不受此记号差异影响。此差异供 reviewer 核查，
+  未提交里程碑规范化流程（本卡非里程碑节点）。
 author: curator
 created: "2026-09-11"
