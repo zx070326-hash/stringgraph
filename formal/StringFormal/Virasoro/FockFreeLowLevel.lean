@@ -119,6 +119,12 @@ def ofFock : Fock D R →ₗ[R] FockVir D R η a hη := LinearMap.id
 
 @[simp] lemma ofFock_toFock (v : FockVir D R η a hη) : ofFock (toFock v) = v := rfl
 
+lemma toFock_injective :
+    Function.Injective (toFock : FockVir D R η a hη →ₗ[R] Fock D R) := fun _ _ h => h
+
+lemma ofFock_injective :
+    Function.Injective (ofFock : Fock D R →ₗ[R] FockVir D R η a hη) := fun _ _ h => h
+
 /-- The Sugawara action of the Virasoro algebra on the Fock space. -/
 instance instLieRingModule : LieRingModule (VirasoroAlgebra R) (FockVir D R η a hη) where
   bracket X v := ofFock (Fock.virRep η a X (toFock v))
@@ -169,5 +175,65 @@ end
 end FockVir
 
 end FockVir
+
+/-! ### The Fock vacuum as a highest weight vector -/
+
+namespace Fock
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] (η a : Fin D → R)
+
+/-- The Virasoro weight of the Fock vacuum: `h = ½ α₀² = α'k²`.  There is no normal-ordering
+constant in this convention (`Fock.Lop_zero_apply_one`). -/
+noncomputable def vacuumWeight : R := invTwo R * zeroModeSq η a
+
+lemma vacuumWeight_def : vacuumWeight η a = invTwo R * zeroModeSq η a := rfl
+
+variable {η a}
+
+/-- **The Fock vacuum `|k⟩` is a highest weight vector of weight `(c, h) = (D, α'k²)`.**
+This packages `Fock.virRep_cgen` (central charge `D`), `Fock.Lop_zero_apply_one`
+(`L₀|k⟩ = α'k²|k⟩`) and `Fock.Lop_apply_one_of_pos` (`L_n|k⟩ = 0` for `n > 0`). -/
+theorem isHighestWeightVector_one (hη : ∀ μ, η μ * η μ = 1) :
+    IsHighestWeightVector R (D : R) (vacuumWeight η a) (FockVir D R η a hη)
+      (FockVir.ofFock (1 : Fock D R)) where
+  lie_cgen := FockVir.toFock_injective (by
+    rw [FockVir.toFock_lie_cgen, map_smul, FockVir.toFock_ofFock])
+  lie_lgen_zero := FockVir.toFock_injective (by
+    rw [FockVir.toFock_lie_lgen, FockVir.toFock_ofFock, map_smul, FockVir.toFock_ofFock,
+      Lop_zero_apply_one, vacuumWeight_def])
+  lie_lgen_pos n hn := FockVir.toFock_injective (by
+    rw [FockVir.toFock_lie_lgen, FockVir.toFock_ofFock, Lop_apply_one_of_pos η a hn, map_zero])
+
+/-- The Virasoro-equivariant map `V(D, α'k²) → Fock D R` sending `|c,h⟩` to the vacuum `|k⟩`,
+from the universal property of the Verma module (`StringFormal.Virasoro.vermaLift`). -/
+noncomputable def vermaToFock (hη : ∀ μ, η μ * η μ = 1) :
+    VermaModule R (D : R) (vacuumWeight η a) →ₗ[R] Fock D R :=
+  (FockVir.toFock (η := η) (a := a) (hη := hη)).comp
+    (vermaLift R (D : R) (vacuumWeight η a) (FockVir D R η a hη) (isHighestWeightVector_one hη))
+
+variable {hη : ∀ μ, η μ * η μ = 1}
+
+@[simp] lemma vermaToFock_hwv :
+    vermaToFock hη (hwv R (D : R) (vacuumWeight η a)) = (1 : Fock D R) := by
+  rw [vermaToFock, LinearMap.comp_apply, vermaLift_hwv, FockVir.toFock_ofFock]
+
+/-- Equivariance in the form actually used: `L_n` on the Verma side becomes the Sugawara `L_n`
+on the Fock side. -/
+@[simp] lemma vermaToFock_lie_lgen (n : ℤ) (w : VermaModule R (D : R) (vacuumWeight η a)) :
+    vermaToFock hη ⁅VirasoroAlgebra.lgen R n, w⁆ = Lop η a n (vermaToFock hη w) := by
+  rw [vermaToFock, LinearMap.comp_apply, LinearMap.comp_apply, vermaLift_lie,
+    FockVir.toFock_lie_lgen]
+
+/-- **`V(D, α'k²) ≠ 0` for every `D` and every momentum**, because the Fock realisation sends
+`|c,h⟩` to the vacuum, which is nonzero.  This is one of the open items of the `pbw-verma`
+TODO, settled here at these particular weights (and only there). -/
+theorem hwv_ne_zero [Nontrivial R] (hη : ∀ μ, η μ * η μ = 1) :
+    hwv R (D : R) (vacuumWeight η a) ≠ 0 := by
+  intro hz
+  have h1 : (1 : Fock D R) = 0 := by
+    rw [← vermaToFock_hwv (hη := hη), hz, map_zero]
+  exact one_ne_zero h1
+
+end Fock
 
 end StringFormal.NoGhost
