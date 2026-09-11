@@ -1,0 +1,131 @@
+id: worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989
+target: worldsheet.superstring-relative-complex-character-signature
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.super-virasoro-algebra
+    convention_map: |
+      本图的中心荷归一化是 c/12：[L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ、
+      {G_r,G_s} = 2L_{r+s} + (c/12)(4r²−1)δ。
+      **LZ 用 c/8 与 c/2**（p.302 逐字）：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ_{m+n}、
+      {G_{m+κ}, G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ_{m+n}。换算两条：
+        (1) **中心荷**：c_本图 = (3/2)·c_LZ ⇒ LZ 的 c_LZ = D = 10 ↔ 本图 c^m = 15。
+        (2) **R 扇区 (κ = 0) 的 L₀ 零点**：LZ 的 {G₀,G₀} = 2L₀（无中心项），本图是
+            2L₀ − c/12 ⇒ **L₀^LZ = L₀^本图 − c/24**。
+      ⚠ 本命题是复形层面的特征标/号差计算，只用相对复形的分次（相对次数）与 ⟨,⟩_rel；
+      两条换算不改分次，只影响「LZ 的 D = 10 ⟺ 本图 c^m = 15」与 R 扇区 L₀ = 0 条件的读法（(H1)(H3)）。
+    note: |
+      对象接口边：LZ 的 Vir_κ（N = 1 超 Virasoro 代数，κ = ½ / 0 两扇区）就是本图这张卡的对象。
+      与 worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989 的同名边同款。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给相对复形 (H3) 的定义（NS：b₀ = L₀ = 0；R：另加 β₀ = G₀ = 0），与 LZ **Definition 2.2**
+      逐条对应；**Definition 2.11 的 R 扇区 ⟨,⟩_rel 用到的 D_R = π(G₀) + ρ(G₀) 也是这张卡的总 G₀**。
+      本命题断言的对象 C_rel(p,κ) 就是这个复形，本边是最核心的对象对接边。
+      ⚠ 该定义卡自身 physical-argument（上游 OPE / 路径积分链），是本推导 effective 被封顶的原因之一；
+      **不降低本推导自身的 rigorous**（LZ 在自己的框架里把复形定义为良定义对象）。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式、（反）对易关系与 Bose-sea charge（LZ p.303 (1)–(4)），
+      以及 **(H5) 的表示选择** T_{1/2}（κ=½）/ **T₀ ⊕ T₁**（κ=0）（LZ p.306 (7)）。
+      特征标与号差的分情形计算是在这个鬼 Fock 空间 ⊗ 物质 Fock 空间上做的，
+      公式右端的 ½(2κ+1) 前因子正是两扇区鬼零模结构差异的表现。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    note: |
+      供给 (H5) 的背景：βγ 的真空选择不唯一且不等价（LZ p.304 逐字 'Representations corresponding to
+      distinct charges are inequivalent.'）。本命题的公式绑定在 T₀ ⊕ T₁ 上（目标卡「不断言 (d)」）；
+      Definition 2.11 之所以要经 D_R 原像定义 R 扇区的型，正因为 ⟨T₁, T₁⟩_T = 0（p.310）。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: |
+      供给物质部门的费米模 d^μ_{−n+κ} 与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)
+      （U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩，R(p,½) = C，R(p,0) 是 Spin(D−1,1) 旋量表示，LZ p.303）。
+      公式里的 dim R(p,κ) 因子与 p^{(8)}_κ（8 = D − 2 个横向方向的玻色+费米计数）都住在这里。
+  - id: worldsheet.fock-indefinite-form
+    inferred: true
+    note: |
+      供给「物质 Fock 空间上的型因 η^{00} = −1 而不定」这一背景——号差 sign C^n_rel 之所以非平凡
+      （不等于 dim），根源就在这里。
+      **标 inferred，理由与 worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989
+      的同名边同**：该卡是**玻色**弦的 Fock 型（只有 α^μ_n），LZ 的 V(p,κ) 还含 d^μ_{−n+κ} 与 R 扇区
+      旋量因子 R(p,0)（其上的型由 p·d₀ 定义，LZ Definition 1.3(ii)）；玻色版到 RNS 版的推广在本图与
+      LZ 都没有作为一条独立陈述写出。⚠ 与消灭卡不同，**本推导实质使用厄米型**（sign 那一半），
+      故本边在这里比在消灭卡那里更承重；它仍是 inferred，因为 LZ 一侧承载它的是 Definition 1.3 而非
+      本图这张玻色卡。
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.14(ii)**, pp.311–312（陈述）；证明 **pp.312–317**（特征标与号差的分情形计算；auditor 2026-09-11 转录过 p.313–314 的 (4)(5)(6) 与 'Case 1（p·p = 0）sign C_rel(p,0) = 16'）；**Definition 2.11**, p.311（⟨,⟩_rel）"
+    note: |
+      literature/extractions/lian-zuckerman-1989.md **E5**（第一轮 L1 逐页读图；**公式为转录，未标逐字**）。
+      ★ **证明是印出的**：§9.2 读数 4 逐字「真正的工作量在 Theorem 2.4（消灭定理，§3 全章）与
+      Proposition 2.14(ii)（特征标/号差计算，pp.312–317）」；auditor 的 p.313–314 转录证实那几页是
+      分情形计算。**但本图没有逐字转录这五页**，见 gaps 第一条。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15 的证明**, p.317，逐字（见目标卡 sources 第二条）：'… the right-hand side is char C_rel(p,κ). Hence (i) follows from Proposition 2.14 (ii). (ii) Similarly, … the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
+    note: |
+      L1 逐字（§9.2）。本条给出 (H6) 里 char / sign 两个记号的读法，并证实 2.14(ii) 是被两条推论
+      **各取一半**使用的同一条命题。
+  - ref: lian-zuckerman-1989
+    loc: "**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)；p ≠ 0 全局假设）；**p.306 (7)(8)**（零模表示 T_{1/2} / T₀ ⊕ T₁）；**p.308**（D = 10）；**Definition 2.2**（相对次数）；**p.310**（'⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'）；**Proposition 2.18**, p.318（φ_κ(q)^{−8}，p^{(8)}_κ 的旁证）"
+    note: |
+      L1（E3/E5/E7/§9.3）。设定 (H1)–(H6) 的记号语境。
+summary: |
+  **LZ 的论证（本图未逐字转录，按 E5/§9.2/auditor 转录的骨架记）**：
+
+  1. **对象**：固定 p ≠ 0、扇区 κ，相对复形 C_rel(p,κ)（Definition 2.2）在固定 p 下是有限维的分次空间
+     （L₀ = 0 固定振子能级 N = κ − p·p/2 附近，相对次数只取有限多个值）；
+     其上有 Definition 2.11 的厄米型 ⟨,⟩_rel（R 扇区经 D_R 原像定义，因为 ⟨T₁,T₁⟩_T = 0）。
+  2. **特征标**：char C_rel(p,κ) = Σ_n (−1)^n dim C^n_rel 由鬼 Fock 空间 ⊗ 物质 Fock 空间的
+     分次计数得出：鬼部门（bc 与 βγ，含零模表示 T_{1/2} / T₀ ⊕ T₁）的贡献与物质部门
+     （α^μ_{−n}、d^μ_{−n+κ}、旋量因子 R(p,κ)）的贡献相乘，取相对次数分次的交错和；
+     结果是 ½(2κ+1) · dim R(p,κ) · p^{(8)}_κ(κ − p·p/2)。
+     （p^{(8)}_κ 的定义本图未取得；旁证 Prop 2.18 的 φ_κ(q)^{−8} 表明它是 8 个横向方向的
+     玻色+费米计数系数。）
+  3. **号差**：sign C_rel(p,κ) = Σ_n sign C^n_rel 按 p·p 的情形（auditor 转录的 'Case 1（p·p = 0）'
+     等）逐一计算 ⟨,⟩_rel 在每个 C^n_rel 上的惯性指数，得到与 2 相同的表达式。
+     ⇒ char = sign，即负惯性指数的交错和为零。
+  4. **结论**：三项等式 char C_rel = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel。
+
+  **这一步不做**：上同调层面的任何事——把 char 变成 dim H⁰_rel、把 sign 变成 sign H⁰_rel
+  要经 Euler–Poincaré 原理（特征标版 math.euler-poincare-principle；号差版本图无卡）与
+  Theorem 2.4，那是 Corollary 2.15(i)(ii) 两张卡的事。
+
+  【为什么标 rigorous】按 lead 指示「rigorous 若有印出证明，否则 physical-argument」：
+  (1) 结论是**带编号的命题**（Proposition 2.14(ii)），期刊是 Communications in Mathematical Physics；
+  (2) **证明是印出的**（pp.312–317，五页分情形计算；auditor 转录过其中的 (4)(5)(6) 与 Case 1），
+      不是「一点思考就知道」式的断言；
+  (3) 论证全在有限维分次向量空间与其上的厄米型里（维数计数、惯性指数），不涉路径积分、不涉收敛性。
+  ⚠ **限制（与 GT 推导同型的可追溯性弱点）**：本图对陈述只有转录（E5 未标逐字）、对证明只有骨架
+  与 auditor 的两处转录；rigorous 是按「数学期刊上带编号、带印出证明的命题」给的，
+  不是按逐行复核给的。若 researcher 取 pp.312–317 页图后发现陈述或证明与 E5 转录不符，本推导降级。
+
+  【有效状态为什么被封顶】接口卡 worldsheet.superstring-brst-additional-conditions、
+  worldsheet.superconformal-ghost-modes 等自身 physical-argument（上游 OPE / 路径积分链），
+  按 min 规则封顶。**这不是 LZ 的论证有缺口**，而是本图把「LZ 的对象 = Polchinski 的对象」
+  经那些卡记账的后果，与消灭卡、维数卡同口径。
+gaps:
+  - "**陈述与证明均未逐字转录**：E5 对 2.14(ii) 的公式是转录（未标「逐字」），第三轮页图复核只重读 pp.316–321，**pp.311–316 未第二次核**；证明 pp.312–317 本图只有骨架与 auditor 的两处转录（(4)(5)(6)、Case 1 的 16）。关闭方式：researcher 取 pp.311–317 页图，逐字核陈述并转录分情形计算的结构（各 Case 的条件与结果）。"
+  - "**p^{(8)}_κ 的定义本图未取得（L0）**：右端是符号表达式，不可数值化；旁证只有 Prop 2.18 的 φ_κ(q)^{−8}。与维数卡 gaps 第三条同一缺口。"
+  - "**dim R(p,0) 的数值未核**：D = 10 时读成 32（Dirac 旋量）使 ½·32 = 16 与 auditor 转录的 'Case 1 sign C_rel(p,0) = 16' 一致，但这是本图算术，不是 LZ 的字。"
+  - "**「char = sign」的机制未记录**：它等价于「负惯性指数的交错和为零」；LZ 如何在每个 Case 里得到它，本图无转录。目标卡「不断言 (f)」。"
+  - "**⟨,⟩_rel 的 RNS 版本在本图无卡**：本推导对 worldsheet.fock-indefinite-form 拉的是 inferred 边（玻色卡），LZ 的 Definition 1.3（含 d 模与旋量因子上由 p·d₀ 定义的型）与 Definition 2.11 都没有本图对应卡。号差那一半的对象接口因此比特征标那一半弱。"
+  - "**Proposition 2.14(i)（Q* = Q）未立卡**：它是「sign H^n 有定义」的背景条件，但不进本卡；Cor 2.15 的证明也一字未引它。"
+  - "**R 扇区零模表示的依赖未检验**：公式绑定在 T₀ ⊕ T₁ 上，换成 FOK / Henneaux 的 C[γ₀] 后右端是否不变本图未核（目标卡「不断言 (d)」）。"
+notes: |
+  【本推导与两条下游推导的分工（curator 2026-09-11，small-backlog-12）】
+  worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989 用本卡的 **char** 半
+  + math.euler-poincare-principle + Theorem 2.4 ⇒ Cor 2.15(i)；本轮已加边（非 inferred）。
+  worldsheet.no-ghost-theorem-superstring-cohomological-v2--via-lian-zuckerman-1989 用 **sign** 半
+  + 号差版 Euler–Poincaré（本图无卡）+ Theorem 2.4 ⇒ Cor 2.15(ii)；该推导在 reviewer claim #349 内，
+  本轮未动，建议之后补边。
+
+  【为什么不挂 Theorem 2.4 / 消灭卡】Prop 2.14(ii) 是复形层面的计算，不用消灭定理；
+  LZ 的顺序是 2.11 → 2.14 → 2.15，消灭定理只在 2.15 进入。挂了会把上同调层面的前提提前搬进本卡。
+
+  【为什么不挂 worldsheet.superstring-brst-charge】Q 只在 2.14(**i**)（Q* = Q）出现；
+  (ii) 的 char 与 sign 都是复形上的量，与 Q 无关。R 扇区 ⟨,⟩_rel 定义里的 D_R = 总 G₀
+  由 worldsheet.superstring-brst-additional-conditions 供给。
+
+  按 literature/extractions/lian-zuckerman-1989.md E5/§9.2 与 auditor 2026-09-11 的 p.313–314 转录
+  （记于维数卡 notes）建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"

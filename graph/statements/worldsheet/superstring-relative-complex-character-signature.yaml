@@ -1,0 +1,102 @@
+id: worldsheet.superstring-relative-complex-character-signature
+kind: proposition
+title: RNS 相对 BRST 复形的特征标与号差（Lian–Zuckerman 1989 Proposition 2.14(ii)）：char C_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel(p,κ)
+statement: |
+  **设定**（数学侧表述，照 lian-zuckerman-1989 的记号；与
+  worldsheet.superstring-relative-cohomology-dimension 的 (H1)–(H7) 逐条相同，故意重写以使本卡自足）。
+  取 N = 1 超 Virasoro 代数（math.super-virasoro-algebra），扇区标号 κ = ½（Neveu–Schwarz）
+  与 κ = 0（Ramond）。
+    (H1) **临界维数**：物质部门 D = 10 个自由 X^μψ^μ（LZ p.308 逐字 "From now on, we will take D = 10"），
+         鬼部门 λ = 2 的 bcβγ 一阶 SCFT；总中心荷为零，Q_B² = 0
+         （worldsheet.superstring-brst-nilpotent-at-c15）。
+    (H2) **动量**：固定 p，**p ≠ 0**（LZ p.303 逐字 "p will always be assumed non-zero until Sect. 5"）。
+    (H3) **相对复形** C_rel(p,κ)：被 b₀、L₀（NS）或 b₀、β₀、L₀、G₀（R）零化的子复形，
+         按相对次数 n（LZ Definition 2.2，n = 鬼数 + κ ∈ Z）分次：C_rel(p,κ) = ⊕_n C^n_rel(p,κ)。
+         **在固定 p 下每个 C^n_rel(p,κ) 有限维，且只有有限多个 n 非零**（L₀ = 0 固定了振子能级）。
+    (H4) **相对复形上的厄米型 ⟨,⟩_rel**（LZ Definition 2.11）：κ = ½ 取 ⟨u,v⟩_rel = ⟨u,v⟩_B；
+         κ = 0 取 √−1 ⟨u, v̂⟩_B，其中 v = D_R v̂（R 扇区 β₀ 零模使朴素型在 C_rel(p,0) 上恒零，
+         须经 D_R 原像定义）。⟨,⟩_rel 保持相对次数分次的正交性，故在每个 C^n_rel 上诱导一个
+         有限维非退化厄米型，其**号差** sign C^n_rel := (正惯性指数) − (负惯性指数) 有定义。
+    (H5) **R 扇区 βγ 零模表示**取 LZ p.306 (7) 的 T₀ ⊕ T₁（NS 取 T_{1/2}）。本卡的公式在这个选择下成立。
+    (H6) **记号**：
+         · char C_rel(p,κ) := Σ_n (−1)^n dim C^n_rel(p,κ)（LZ 的「characteristic」，即 Euler 特征标；
+           由 LZ Corollary 2.15 的证明逐字 'the right-hand side is char C_rel(p,κ)' 对着
+           Σ_n (−1)^n dim C^n_rel 读出）；
+         · sign C_rel(p,κ) := Σ_n sign C^n_rel(p,κ)（同一证明逐字 'the right-hand side is sign C_rel(p,κ)'
+           对着 Σ_n sign C^n_rel 读出）；
+         · ½(2κ+1)：κ = ½ 时 1，κ = 0 时 ½；
+         · dim R(p,κ)：物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ) 的旋量因子维数（R(p,½) = C；
+           R(p,0) 是 Spin(D−1,1) 的旋量表示，LZ p.303），本卡**不给出** dim R(p,0) 的数值；
+         · p^{(8)}_κ(·)：LZ 的计数记号，**本图未逐字取得其定义**（L0），本卡只照抄记号，
+           不代入任何读法（旁证：Prop 2.18 的 ch_q T(p,κ) = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}）。
+
+  **断言**（Proposition 2.14(ii)）：在 (H1)–(H5) 之下，对 κ = ½ 与 κ = 0，
+
+      **char C_rel(p,κ)  =  ½(2κ+1) · dim R(p,κ) · p^{(8)}_κ(κ − p·p/2)  =  sign C_rel(p,κ)**。
+
+  即：相对复形的 Euler 特征标与它在 ⟨,⟩_rel 下的总号差**相等**，且都等于中间那个显式表达式。
+
+  **本命题不断言**：
+    (a) 不断言任何上同调的维数或正定性——那是 Corollary 2.15(i)（worldsheet.superstring-relative-cohomology-dimension）
+        与 2.15(ii)（worldsheet.no-ghost-theorem-superstring-cohomological-v2），二者各取本卡等式的一半
+        （char 那一半给维数，sign 那一半给正定性），再经 Euler–Poincaré 原理与消灭定理 Theorem 2.4。
+        **本卡是复形层面的陈述，不涉及 Q_B 的上同调。**
+    (b) 不断言 Proposition 2.14(**i**)（Q* = Q w.r.t. ⟨,⟩_rel）：那是同一命题的另一条，
+        是「sign H^n 有定义」的背景条件，但 Corollary 2.15 的证明一字未引它；本图未立卡。
+    (c) 不断言 p^{(8)}_κ 的任何解析形式，也不断言 dim R(p,0) 的数值——等式右端是**符号表达式**，
+        不可数值化（与维数卡的「不断言 (e)」及 reviewer-batch25 的补注同口径）。
+    (d) 不断言公式对一切 R 扇区零模表示成立（只在 (H5) 的 T₀ ⊕ T₁ 下）。
+    (e) 不断言 p = 0。
+    (f) 不断言 char = sign 这个等式的**机制**（它意味着负惯性指数的交错和为零；LZ 的证明是 pp.312–317
+        的分情形计算，本图未转录）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.superstring-ghost-number-zero
+  - conv.intercept-sign-a
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.14(ii)**, pp.311–312：'char C_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel(p,κ)'；**Proposition 2.14(i)**：Q* = Q w.r.t. ⟨,⟩_rel；**Definition 2.11**, p.311（⟨,⟩_rel：κ=½ 取 ⟨u,v⟩_B，κ=0 取 √−1⟨u, v̂⟩_B，v = D_R v̂；动机 p.310 逐字 '⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'）；证明 pp.312–317（特征标/号差的分情形计算）"
+    note: |
+      literature/extractions/lian-zuckerman-1989.md **E5**（第一轮，全文 35 页逐页读图，L1）。
+      ⚠ **E5 对 2.14(ii) 的公式是抽取者的转录，未标「逐字」**；第三轮页图复核（§9）只重读了 pp.316–321，
+      **pp.312–316 未第二次核**。故本卡断言的公式可追溯性是 L1 页级 + 转录，**不是逐字复核**。
+      ⚠ **证明未转录**：E5/§9 只记「真正的工作量在 Proposition 2.14(ii)（特征标/号差计算，pp.312–317）」
+      （§9.2 读数 4）；auditor 2026-09-11 转录过 p.313–314 的 (4)(5)(6) 与 'Case 1（p·p = 0）
+      sign C_rel(p,0) = 16'（见维数卡 notes），证实那几页是分情形计算，但本图没有逐字。
+      ⇒ 本卡推导 status 的限制见推导 gaps。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15 的证明**, p.317，逐字：'Proof. (i) We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ). Thus by Theorem 2.4, the left-hand side gives dim H⁰_rel(p,κ) while the right-hand side is char C_rel(p,κ). Hence (i) follows from Proposition 2.14 (ii). (ii) Similarly, the Euler–Poincaré Principle for signature states that Σ_{n∈Z} sign H^n_rel(p,κ) = Σ_{n∈Z} sign C^n_rel(p,κ). Again Theorem 2.4 implies that the left-hand side = sign H⁰_rel(p,κ), while the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
+    note: |
+      L1 逐字（§9.2）。★ **本条是 (H6) 里 char / sign 两个记号读法的唯一逐字依据**：
+      'the right-hand side is char C_rel(p,κ)' 对着 Σ_n (−1)^n dim C^n_rel，
+      'the right-hand side is sign C_rel(p,κ)' 对着 Σ_n sign C^n_rel。
+      ★ 同时是本卡**被使用的方式**：Cor 2.15(i) 用 char 那一半，(ii) 用 sign 那一半（句末 'also'）。
+      ★ negative evidence（§9.2 读数 2）：Prop 2.14(**i**) 在该证明里一字未引，本卡「不断言 (b)」照此。
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.4**, p.309（'Suppose p ≠ 0: then H^n_rel(p,κ) = 0 unless n = 0.'）；**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)；R(p,½) = C；R(p,0) 旋量表示；'p will always be assumed non-zero until Sect. 5'）；**p.306 (7)(8)**（零模表示 T_{1/2} / T₀ ⊕ T₁）；**p.308**（'From now on, we will take D = 10'）；**Definition 2.2**（相对次数）；**Proposition 2.18**, p.318（ch_q T(p,κ) = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}，p^{(8)}_κ 的旁证）"
+    note: |
+      L1（E3/E7/§9.3）。本条只供给 (H1)–(H6) 的记号语境，**不是本卡的论证输入**
+      （Prop 2.14(ii) 是复形层面的计算，不用消灭定理）。
+tags: [superstring, brst, cohomology, rns, ramond-sector, character, signature]
+notes: |
+  【为什么立卡（curator 2026-09-11，small-backlog-12）】
+  worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989 的 gaps 第一条逐字：
+  「Proposition 2.14(ii) … 在本图没有卡 … **目标卡断言的整个右端落在一条未上图的命题上**，
+  这是本推导最实质的记账缺口。关闭方式：取 pp.312–317 的页图，为 Prop 2.14(ii) 单建卡。」
+  本卡关闭「无卡」这一半，该推导同批加边（非 inferred，Cor 2.15 证明逐字 'follows from Proposition 2.14 (ii)'）；
+  「pp.312–317 页图未取、证明未转录」这一半**未关闭**，记在本卡推导的 gaps。
+
+  【为什么 char 与 sign 写在一张卡】LZ 把 2.14(ii) 写成一条三项等式 char = 表达式 = sign；
+  下游两条推论各取一半。按「一个节点一个命题」本可拆成两卡，但 (a) LZ 的证明是同一个分情形计算
+  同时给出两者（sign 的计算蕴含 char 的计算），(b) 两卡拆开后「char = sign」这个等式本身无处安放。
+  故保持 LZ 的原状；下游引用时在 depends_on note 写明用的是哪一半。
+
+  【与 worldsheet.no-ghost-theorem-superstring-cohomological-v2 的推导】
+  那条推导（reviewer claim #349 内，本轮未动）用本卡的 sign 半 + 号差版 Euler–Poincaré（本图无卡，
+  math.euler-poincare-principle「不断言 (a)」）+ Theorem 2.4。建议 reviewer 释放后由 curator 补两条边。
+
+  【与维数卡记号的一致性】(H6) 的 dim R(p,κ)、p^{(8)}_κ 与维数卡 (H6) 同口径；
+  维数卡 2026-09-11 reviewer-batch25 补注「不断言 p^{(8)}_κ 的任何解析形式」，本卡「不断言 (c)」同款。
+author: curator
+created: "2026-09-11"

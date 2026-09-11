@@ -25,6 +25,19 @@ depends_on:
       ⚠ **LZ 与本图的中心荷/L₀ 归一化换算也随本边继承**（c_本图 = (3/2)c_LZ；R 扇区
       L₀^LZ = L₀^本图 − c/24），逐条写在那条推导的 convention_map 里。本推导需要它是因为
       目标卡 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 与 (H7) 的 "a = κ" 都经过该换算。
+  - id: worldsheet.superstring-relative-complex-character-signature
+    inferred: false
+    note: |
+      【2026-09-11 新增，small-backlog-12】供给 summary 第 3 步的**唯一输入**：Proposition 2.14(ii) 的
+      char C_rel(p,κ) = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2)（本推导只用该卡三项等式的 **char 半**，
+      不用 sign 半）。
+      **非 inferred**：Corollary 2.15 的证明逐字 'Hence (i) follows from **Proposition 2.14 (ii)**.'
+      （sources 第二条，§9.2）。
+      ⚠ 该卡推导 --via-lian-zuckerman-1989 标 rigorous（CMP 带编号命题、pp.312–317 有印出证明），
+      但其 gaps 第一条自报陈述与证明均未逐字转录；本推导的 effective 本已由接口卡封在
+      physical-argument，本边不改变它。
+      ⇒ 本推导 gaps 第一条「整个右端落在一条未上图的命题上」的**无卡**一半关闭；
+      「pp.312–317 未逐字核实」一半转记到该卡的 gaps。
   - id: math.euler-poincare-principle
     inferred: false
     note: |
@@ -136,12 +149,13 @@ summary: |
   **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经那些卡记账的后果。
 gaps:
   - "**p ≠ 0 的落点**（reviewer-batch25，lead 落地）：Cor 2.15(i) 证明只引 Thm 2.4 / Euler–Poincaré / Prop 2.14(ii)；自由性（Cor 2.19(iii)）经 Thm 2.4 的 §3 证明进入，已由消灭卡 v2 的推导以实边承载。原挂的记账边已按 STATUS_LEVELS 接口边裁决删除（只给语境不担论证的边不得存在），与玻色侧 dimension 推导口径一致。"
-  - "**Proposition 2.14(ii)（char C_rel = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel）
+  - "**〔2026-09-11 关闭（无卡一半），small-backlog-12〕Proposition 2.14(ii)（char C_rel = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2) = sign C_rel）
      在本图没有卡**，其证明（pp.312–317，含分情形计算与 Lemma 2.14.5）本图也**未逐字核实**。
      ⇒ **目标卡断言的整个右端落在一条未上图的命题上**，这是本推导最实质的记账缺口。
      与超弦侧另一处同型：worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989
      的 gaps 第二条（Proposition 4.2 无卡，dim H⁰ 的数值全落在它上面）。
-     关闭方式：取 pp.312–317 的页图，为 Prop 2.14(ii) 单建卡。"
+     关闭方式：取 pp.312–317 的页图，为 Prop 2.14(ii) 单建卡。
+     **已建卡 worldsheet.superstring-relative-complex-character-signature（推导 --via-lian-zuckerman-1989，rigorous），本推导已加边（非 inferred）。** 残留（转记到该卡 gaps 第一条）：pp.311–317 页图未第二次核，陈述是转录、证明未转录。"
   - "**〔2026-09-11 关闭，small-backlog-12〕Euler–Poincaré 原理在本图无节点**（reviewer-batch23 已在别处记过同一条）：
      本推导第 1 步逐字 'We recall the Euler–Poincaré Principle for characteristics'，
      `search` 无命中。**玻色侧 worldsheet.bosonic-relative-cohomology-dimension--via-fgz-1986
