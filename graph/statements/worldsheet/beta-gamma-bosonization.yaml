@@ -100,6 +100,11 @@ notes: |
   逐字写着：「鬼场部门的 F 定义为 (10.4.9) 电流的荷、并用「对 e^{lφ} 取值 l」来刻画——
   这经过 βγ 的玻色化（(10.4.9)/(10.4.13)/(10.4.19)），**本图没有玻色化节点**。
   → 待建（本轮未做）：worldsheet.beta-gamma-bosonization…」本卡即是。
+  ⚠ 该引文里「本图没有玻色化节点」一句**已过期**（2026-09-11，curator-bosonization 分支合入 main 后）：
+  玻色化组现有四张卡——worldsheet.fermion-bosonization-two-dimensions、
+  worldsheet.bc-ghost-bosonization、本卡、worldsheet.u1-current-algebra-is-free-boson。
+  上面保留原文只为记录本卡的来历；那张卡自己的 notes 已在同日补了「待建已完成」的更新块，
+  其 statement 与 status（physical-argument）**未随之重评**，要改须另立 v2。
   本轮已给那张卡补上指向本卡的 uses 边。
 
   ★【"sign is changed" 这句到底改了什么：本图的读法（非原书文字）】
