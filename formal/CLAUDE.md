@@ -71,7 +71,15 @@ StringFormal/
                             `worldsheet.modular-group-generated-by-s-and-t`）。`SL(2,ℤ)` 层的生成定理
                             是 Mathlib 的 `SpecialLinearGroup.SL2Z_generators`（本项目只再导出），
                             新做的是 `(ST)³ = −1` 与到 `SL/Z` 的搬运。**不**证 presentation
-                            （`PSL ≅ ℤ/2 ∗ ℤ/3`），也**不**证 `Z(SL(2,ℤ)) = {±1}`
+                            （`PSL ≅ ℤ/2 ∗ ℤ/3`）；`Z(SL(2,ℤ)) = {±1}` 在
+                            `Math/MathlibBridges.lean` 的 `center_eq_pm_one`
+  Math/MathlibBridges.lean  **桥层**（`namespace StringFormal.Bridge`）：`math.dedekind-eta-function`
+                            与 `worldsheet.modular-group-psl2z` 两张定义卡。η 侧把 Mathlib 的
+                            `ModularForm.eta` 逐字展开成 `q^{1/24}∏(1−q^n)` 并接上分支约定
+                            `q = e^{2πiτ}`、`q^{1/24} = e^{πiτ/12}`；PSL 侧给出 `(aτ+b)/(cτ+d)`、
+                            `Im(γτ) = Imτ/|cτ+d|²`、S/T 的作用、**`Z(SL(2,ℤ)) = {±I}`**
+                            （`center_eq_pm_one`，Mathlib 与本项目此前都没有）与作用降到
+                            `PSL(2,ℤ)`（`MulAction PSL2Z ℍ`）
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
@@ -140,6 +148,12 @@ scripts/
 
 - `autoImplicit` 已关闭。所有变量显式声明。
 - 优先复用 Mathlib，其次 Physlib；引入 Physlib 依赖需要单独提交并说明版本。
+- **桥层规则**：Mathlib 已有的定义/定理，**不要在本项目里重新定义**（重定义等于凭空多一份未经
+  验证的副本，还要自己证两者相等）。做法是在 `StringFormal/Math/MathlibBridges.lean` 的
+  `namespace StringFormal.Bridge` 下写一条**逐字重述定理**——陈述完全照图卡的公式，证明是
+  `rfl` / `simp [定义]` / 直接引用 Mathlib 引理——卡的 `formal.lean_decl` 指桥层那条。
+  这样 `lean_file` 落在 `formal/` 下（工具要求），而数学内容仍然 100% 是 Mathlib 的。
+  桥层定理的 docstring 必须点名它对应哪张卡、引用的是哪条 Mathlib 声明。
 - 一个岛一个子目录，岛之间不互相 import（Virasoro 是共享基础，例外）。
 - 文件头写：对应图节点 id、使用的约定、当前状态。
 - 命名遵循 Mathlib 风格：类型 `UpperCamel`，定理 `snake_case`。
