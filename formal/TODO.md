@@ -59,8 +59,19 @@
   **未做**：`s`、`t`、`u` 与散射道的关系（需要 in/out 态与解析延拓，不是代数），
   Veneziano 振幅本身，以及 `α_c` 是"领头轨迹"这一物理陈述。
 
-- [ ] `eta-s`：Dedekind η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2} η(τ)`（主分支，Im τ > 0），
+- [x] `eta-s`：Dedekind η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2} η(τ)`（主分支，Im τ > 0），
   对应图节点 `math.dedekind-eta-s-transformation`。
+  见 `StringFormal/Math/DedekindEtaS.lean`（无 sorry，7 个声明公理检查全 `ok`，只有标准三条）。
+
+  **结论先行**：`math.dedekind-eta-s-transformation` **可以标 formalized**，
+  `lean_decl` 取 `StringFormal.DedekindEta.eta_neg_inv`
+  （`{z : ℂ} (hz : 0 < z.im) : ModularForm.eta (-z⁻¹) = (-I * z) ^ ((1 : ℂ)/2) * ModularForm.eta z`，
+  指数确是 `ℂ` 的 cpow 主分支，`pp.numericTypes` 复核过），`lean_file` 取上面的路径。
+  本卡 statement 里的「推论」也已形式化：
+  `norm_eta_neg_inv_pow_four`（`|η(−1/τ)|⁴ = |τ|²|η(τ)|⁴`）与
+  `im_mul_norm_eta_pow_four_S_invariant`（`Im(−1/τ)·|η(−1/τ)|⁴ = Im τ·|η(τ)|⁴`，
+  即 `τ₂|η|⁴` 的 **S** 不变性；全模群不变性还缺 T 半与「S,T 生成模群」）。
+  其余声明：`csqrt_neg_I`、`csqrt_neg_I_mul`、`eta_S`（`τ : ℍ` 版）、`norm_eta_neg_inv_sq`。
 
   **Mathlib v4.33.1 现状清单**（2026-09-11 formalizer 逐文件读源码，L1）。
   ⚠ **图卡 `math.dedekind-eta-s-transformation` 的 notes 说「Mathlib 无 S 变换」是错的**：
@@ -104,6 +115,9 @@
   **本项目要补的只有归一化那一步**：把 Mathlib 的 `(√i)⁻¹ √z` 形状换成弦论文献的 `(−iτ)^{1/2}`。
   两者在 ℍ 上逐点相等：`arg(−iz) = arg z − π/2 ∈ (−π/2, π/2)`，故
   `log(−iz) = log(−i) + log z`，取 `exp(·/2)` 即得。见 `StringFormal/Math/DedekindEtaS.lean`。
+  实际做下来只需 `Complex.log_mul` + `arg_nonneg_iff` + `arg_le_pi`（**不需要 `arg z > 0` 的严格性**：
+  `log_mul` 要的是 `arg(−i) + arg z ∈ Ioc (−π, π]`，下端由 `arg z ≥ 0` 就够）。
+  全文件 90 行，其中真正的新数学是 `csqrt_neg_I_mul` 一条。
 
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
