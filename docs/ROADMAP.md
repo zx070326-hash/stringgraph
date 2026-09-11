@@ -183,3 +183,10 @@
 - **`worldsheet.virasoro-algebra` 拆卡**（formalizer）：定义部分已形式化，"唯一非平凡中心扩张"未形式化。拆成定义卡（可标 formalized）+ 唯一性命题卡。
 - **a<1 分支的文献出处**：GT 1972 / Brower 1972 只覆盖 a=1。候选 Thorn 1987（已登记 `thorn-1987`）。
 - **原书核对**：Polchinski v1 抽取全部依赖二手源；E34（c=D 锚点）、E53、E58 三条主线陈述需持原书者核对。GT 1972 与 Brower 1972 正文在付费墙后。
+
+## 发表路线（2026-09-12，lead 评估，船长确认前为草案）
+
+- **现状**：DDF 构造全部 Lean 机检（[L_m,A]=0 ∀m、伴随、保持物理态、[A,A]=m(ε·δ)δ；任意交换 ℚ-代数、动量塔 Fock 空间）+ Kac N≤4 + Verma 层基 + Fock Gram；无鬼定理 v4 本身 effective rigorous 但**非 Lean 定理**，且 GT 1972 / Brower 1972 正文未取得；全部审查为 AI agent。
+- **三条路线**：(1) Lean 形式化论文（ITP/CPP/JAR）——差一个定理：在 Lean 里关无鬼定理（张成引理 ← Fock 模在 Vir⁻ 下自由 ← Kac 行列式非零；纵向算子 K_m；正定性组装）；(2) 方法论 + 工具 + 数据集（SciPost Codebases / JOSS / CICM）——接近可投，需英文化、schema 冻结、公开仓库、一次人类审计、先行工作对比；(3) 物理侧依赖审计综述（CMP/JHEP 类）——最远，需整块覆盖 + 人类专家复核。
+- **已启动**：先行工作检索（researcher-prior-work → `literature/extractions/prior-formalizations.md`）；无鬼定理 Lean 蓝图（formalizer-noghost-blueprint → `formal/BLUEPRINT-noghost.md`）。
+- **需船长**：GT 1972 / Brower 1972 原文；至少一位人类审阅者核三个里程碑与 Lean 定理陈述。
