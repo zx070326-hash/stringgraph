@@ -1,0 +1,212 @@
+id: worldsheet.bosonic-relative-cohomology-dimension
+kind: proposition
+title: 玻色弦相对 BRST 上同调的维数公式：dim H⁰_∞(ℒ, ℒ₀, V(E,p)) = p_{(24)}(1 − p·p/2)，1 − p·p/2 非非负整数时为 0（FGZ 1986 Theorem 2.7(ii)）
+statement: |
+  **设定**（数学侧表述，照 FGZ 1986 的记号；与本图物理侧对象的对照见 notes）。
+  记 ℒ 为 Virasoro 代数（worldsheet.virasoro-algebra-v2 的 Vir），ℒ₀ ⊂ ℒ 为含 L₀ 的子代数，
+  ℒ^± 为正/负模部分，𝖟 ⊂ ℒ 为中心，Λ^∞_* 为鬼场（半无限形式）模，
+  H^•_∞(ℒ, ℒ₀; V) 为系数在 ℒ-模 V 中的**相对**半无限上同调（FGZ §1.2 的 relative subcomplex）。
+    (H1) **号差 (D−1, 1)**：FGZ p.8445 左栏逐字 "Now we will restrict our attention to the case
+         of signature (D − 1, 1), which is the most interesting from both the mathematical and the
+         physical points of view."（本图的 conv.metric-mostly-plus）。
+    (H2) **物质模是 Fock 模 V(E, p)**：E 是上述号差的 D 维空间，p 是固定的质心动量，
+         V(E,p) 带分次 deg(α^{μ₁}_{m₁} … |p⟩) = (Σ m_i) − p·p/2，形式特征标
+         ch_q V(E,p) = q^{p·p/2} φ(q)^{−D}（p.8445 左栏逐字；FGZ 称之为 **Fock module**）。
+         其上有厄米形式使 π(L_m)* = π(L_{−m})，故 V(E,p) 是**厄米 ℒ-模**（同页逐字
+         "We have π(L_m)* = π(L_{−m}), so that V(E, p) is a Hermitian ℒ-module."）。
+    (H3) **D = 26，等价地 π(c) = 26·Id_V**：FGZ p.8445 右栏（Theorem 2.7 正上方）逐字
+         "Now we will consider the relative cohomology groups with coefficients in V(E, p),
+         so that D = 26."；同页左栏给出接口逐字
+         "[π(L_m), π(L_n)] = (m − n)π(L_{m+n}) + (D/12)(m³ − m)δ_{m+n}·Id. Thus π(c) = D·Id by Eq. 2.1."
+         ⇒ **"D = 26" 与 "π(c) = 26·Id" 在 FGZ 里是同一个假设的两种写法，不是两条独立条件。**
+         ⚠ **这是 FGZ 的假设，不是结论**，见"本命题不断言 (c)"。
+    (H4) **D ≥ 2**：经 Proposition 2.6 进入（该命题逐字以 "Let E have signature (D − 1, 1),
+         D ≥ 2 and p ≠ 0." 开头，而 Theorem 2.7 的证明用它的第一部分）。
+         在 (H3) 下 D = 26 已蕴含之；单独列出是因为 FGZ 的前提链上确有这一条。
+    (H5) **计数记号 p_{(D)}(n) 的定义**（FGZ p.8445 **左栏**，Proposition 2.4 紧邻上文，逐字）：
+         "The formal Euler character is
+            ch_q V · Σ_{m∈Z} (−1)^m ch_q Λ^m_∞ = q^{−1} φ²(q) ch_q V   **[2.3]**
+          where φ(q) = Π_{n≥1}(1 − q^n). We denote by **p_{(D)}(n) the coefficient of q^n in
+          φ(q)^{−D}**, so that p_{(1)}(n) is the classical partition function."
+         ⇒ 本卡里的 **p_{(24)}(n) := [q^n] φ(q)^{−24}**，其中 φ(q) = Π_{n≥1}(1 − q^n)。
+         ⚠ **定义出处是 p.8445 左栏，不是 Theorem 2.7 处**（Theorem 2.7 在右栏，只用这个记号）。
+         ⚠ **p_{(1)} 才是通常的分拆函数**，p_{(24)} 不是。把 p_{(24)} 读成"24 个横向振子的
+         多重分拆"是**物理侧的释义**，FGZ 不写这句，故不进本断言（见 notes）。
+    (H6) **次数 0 是相对复形的整数次数，不是"鬼数"**。FGZ p.8445 全页不出现 "ghost" 字样
+         （researcher 2026-09-11 的 negative evidence，仅覆盖该页）；零点由"相对 ℒ₀ 的子复形"
+         这个约定固定，不是另外声明的。
+         ⚠ 换成**绝对**复形（只相对于中心 𝖟）时非零次数是 **±½**（Theorem 2.5），
+         故引用本定理必须写明是**相对**复形。
+    (H7) **归一化提醒（本图补，非 FGZ 语句）**：(H2) 的分次里 p·p 按 FGZ 自己的单位取，
+         与本图 conv.alpha-prime-regge 的换算是 **α' = 1/2**——在 (H1) 的号差下 p·p = −m²，
+         故 "1 − p·p/2 = N" 即 α'm² = N − 1（α' = 1/2）。**本卡不断言这条换算**，
+         它只是提醒：把 p_{(24)}(1 − p·p/2) 的自变量当成"能级"时必须先固定 α'。
+
+  **断言**（Theorem 2.7(ii)，p.8445 右栏逐字：**"THEOREM 2.7. Suppose p ≠ 0. Then (i)
+  H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0, and (ii) dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2),
+  if 1 − p·p/2 is a nonnegative integer and 0 otherwise."**）：
+
+    在 (H1)–(H5) 之下，若 **p ≠ 0**，则相对 BRST 上同调的零次项是**有限维**的，且
+
+      **dim H⁰_∞(ℒ, ℒ₀, V(E,p)) = p_{(24)}(1 − p·p/2)**，  当 1 − p·p/2 是**非负整数**时；
+      **dim H⁰_∞(ℒ, ℒ₀, V(E,p)) = 0**，                     其余情形（分段的第二支）。
+
+    ⚠ **分段的第二支是断言的一部分**，不是排版附注：1 − p·p/2 若不是整数、或是负整数，
+    维数**为零**，即该动量上没有相对上同调类。
+
+  **本命题不断言**：
+    (a) 不断言 **i ≠ 0 时的消灭**。那是同一定理的 **(i)**，已单独立卡
+        （worldsheet.bosonic-relative-cohomology-vanishing）。两条同号不同条，按
+        graph/CLAUDE.md「一个节点一个命题」分开；本卡把 (i) 作为**依赖**而非结论。
+    (b) 不断言 H⁰ 上的任何**正定性**，也不断言它与横向空间 T ∩ P 或旧协变物理态 P/rad P 的同构。
+        那是 FGZ **Theorem 2.8**（= worldsheet.no-ghost-theorem-brst 的断言 (2)(3) 与
+        worldsheet.brst-cohomology-equals-ocq-physical）。本卡是纯维数陈述：它只给一个**数**。
+    (c) 不断言 **D = 26 这个数**。FGZ **不推导** D = 26 而是假设它（(H3)）；
+        抽取记录 literature/extractions/brst-cohomology-sources.md §1.2 的裁定逐字：
+        "FGZ 不推导 D = 26，而是假设它"。
+        ⚠ 但 **24 这个下标随 (H3) 走**：p_{(24)} 里的 24 = D − 2 是把 D = 26 代进
+        Proposition 2.4 的 Euler 特征标 q^{−1}φ²(q)·q^{p·p/2}φ(q)^{−D} = q^{p·p/2−1}φ(q)^{2−D}
+        之后的结果。⇒ 本卡的公式**不能**在 D ≠ 26 时照搬。
+    (d) 不断言 **p = 0**。FGZ Proposition 2.8 / 2.9 与其推论把 p = 0 列为例外情形
+        （Theorem 1.12 不适用）。本图**未逐字核实** p = 0 时相对上同调的维数。
+    (e) 不断言**绝对**（只相对于中心 𝖟）复形上同调的维数。那要经 FGZ **Theorem 2.5**
+        （H^m_∞(ℒ, 𝖟; V) ≅ H⁰(ℒ, ℒ₀; V) 对 m = ±½，其余为零）另行推。
+    (f) 不断言本卡的 (ℒ, ℒ₀) 相对复形与本图 {b₀Ψ = 0, L₀Ψ = 0}（
+        worldsheet.brst-preserves-relative-complex）**逐字**同一。两者在文献里公认是同一对象的
+        两种写法，但 FGZ 未写出这个字典（见 notes 与推导 gaps）。
+    (g) 不断言 **p_{(24)}(1 − p·p/2) = 横向 Fock 空间在该能级的维数**。这个等号在物理上是
+        无鬼定理的内容（Theorem 2.8 / worldsheet.no-ghost-theorem-brst），在本卡里
+        p_{(24)} 只是 (H5) 定义的**生成函数系数**。
+    (h) 不断言**上同调类的显式代表元**。那要用 Proposition 2.6 的**第二部分**（横向空间 T），
+        FGZ 逐字把它派给 "we can explicitly construct representatives of the cohomology classes"；
+        本卡（与 (i) 一样）只用它的**第一部分**（自由性）。
+    (i) 不断言 H⁰ 在**正定号差**下的形态。FGZ 在 Theorem 2.7 之后逐字说
+        "the cohomology groups are trivial except for a one-dimensional H⁰_∞ in the
+        positive-definite case, but H⁰_∞ can be arbitrarily large in the indefinite case"
+        ——本卡的 (H1) 是**不定**号差那一支。
+uses:
+  - worldsheet.virasoro-algebra-v2
+  - worldsheet.brst-quantization-v2
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+sources:
+  - ref: fgz-1986
+    loc: "**Theorem 2.7**, p.8445 右栏，逐字：'THEOREM 2.7. Suppose p ≠ 0. Then (i) H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0, and (ii) dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2), if 1 − p·p/2 is a nonnegative integer and 0 otherwise.'（本卡只取 (ii)）"
+    note: |
+      **L1（页图逐字）**：researcher 2026-09-11 第二轮，
+      literature/extractions/brst-cohomology-sources.md §9.1。取件路线：
+      `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`
+      （期刊页 8445 = 扫描页 -0018）。
+      ⚠ **定理陈述本身只带一个量词 p ≠ 0**；其余四条前提（D = 26 / π(c) = 26、号差 (D−1,1)、
+      D ≥ 2）都写在正文里，逐字位置见 §9.2 的表，本卡 (H1)–(H4) 已逐条集齐。
+      ⚠ **编号陷阱**：p.8446 同时有 **Proposition 2.8** 与 **Theorem 2.8**，两者不同，
+      引用必须带类型词（§1.4 末尾）。
+      ⚠ **本卡只取 (ii)**；(i) 是消灭定理，已立卡
+      worldsheet.bosonic-relative-cohomology-vanishing，按「一个节点一个命题」分开。
+  - ref: fgz-1986
+    loc: "**p.8445 左栏**，Proposition 2.4 紧邻上文，逐字：'The formal Euler character is  ch_q V · Σ_{m∈Z} (−1)^m ch_q Λ^m_∞ = q^{−1} φ²(q) ch_q V   [2.3]  where φ(q) = Π_{n≥1}(1 − q^n). We denote by p_{(D)}(n) the coefficient of q^n in φ(q)^{−D}, so that p_{(1)}(n) is the classical partition function.'"
+    note: |
+      L1，literature/extractions/brst-cohomology-sources.md **§9.9.3**（researcher 第二轮）。
+      ★★ **这是 (H5) 即 p_{(24)} 定义的唯一来源**，抽取记录逐字提醒：
+      「图里若建 Thm 2.7(ii) 的维数公式卡，p_{(D)}(n) 的定义出处是这里（p.8445 左栏），
+      不是 Thm 2.7 处。注意 p_{(1)} 才是通常的分拆函数，p_{(24)} 是 24 个横向振子的多重分拆。」
+      ⚠ **后半句（"24 个横向振子"）是抽取者的释义，不是 FGZ 的字**——本卡按
+      reviewer-batch23 对 gloss 的处理办法，把它留在 notes，不进 (H5) 与断言。
+      ⚠ **排印**：FGZ 正文引用写作 "Eq. 2.3"，显示式的标号印作 **[2.3]**；
+      **不要写成 "equation (2.3)"**（本文不用圆括号式号）。
+  - ref: fgz-1986
+    loc: "**Proposition 2.4**, p.8445 左栏下部（Theorem 2.5 正上方），逐字：'PROPOSITION 2.4. dim H^m_∞(ℒ, ℒ₀; V) = 0 for m ≠ 0, and for m = 0 is equal to the coefficient of 1 in Eq. 2.3, when V is a Hermitian ℒ⁻-free ℒ-module in 𝒪₀.'；其紧邻上文逐字：'Let us consider a general ℒ⁻-free, Hermitian ℒ-module V. Then by Theorem 1.12 all nonzero degree cohomology groups vanish. To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. … This implies the following.'"
+    note: |
+      L1，§9.9.1 与 §9.9.3（researcher 2026-09-11 第二轮页图复核）。
+      ★★ **这是本卡维数那一步的真正上游**：Prop 2.4 把 dim H⁰ 定成 Eq. [2.3] 中常数项的系数，
+      Theorem 2.7(ii) 只是把 V = V(E,p)、D = 26 代进去算出 p_{(24)}(1 − p·p/2)。
+      ⚠ **两条转录注记（引用前必读）**：
+      (1) **"ℒ⁻-free" 的上标减号在扫描件上极小**，单看 Prop 2.4 那一行容易读成 "ℒ-free"；
+          按紧邻上文（"a general ℒ⁻-free, Hermitian ℒ-module V"）与 Theorem 1.12 的假设锁定为 **ℒ⁻**。
+          同型陷阱见 `primary-sources-round2.md` §1（LZ 1991 Thm 2.25 的 𝒢₋-free 也被渲染成 𝒢-free）。
+      (2) **𝒪₀ 这个范畴的定义在 FGZ §1，本图未回查**（L0）。本卡不据 𝒪₀ 断言任何事：
+          V(E,p) 属不属于 𝒪₀ 由 FGZ 在套用时自己负责。
+      ★ **强度措辞是 "This implies the following"**，即 **Prop 2.4 = Theorem 1.12 + Proposition 1.3**，
+      自身不另给证明；由此 §9.3 那份四条依赖清单在逻辑上冗余，见推导 gaps。
+  - ref: fgz-1986
+    loc: "**Theorem 2.7 正上方一句**（p.8445 右栏）逐字：'In this case the vanishing theorem (**Theorem 1.12**), the Euler–Poincaré principle (**Proposition 1.3**), **Proposition 2.4**, and **the first part of Proposition 2.6** imply the following.'"
+    note: |
+      L1，§9.3。★★ **这是本卡依赖边不标 inferred 的依据**：四条依赖是 FGZ **原文明写**的，
+      不是抽取者推断。
+      ★ **强度措辞是 "imply the following"**——FGZ 把 Theorem 2.7（含本卡的 (ii)）当作前四条的
+      **直接推论**，本身不另给证明。本卡推导的 rigorous 正是按这个口径给的（见推导 summary 与 gaps），
+      与 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 **同一口径**。
+  - ref: fgz-1986
+    loc: "**Proposition 2.6**, p.8445，逐字：'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} [= all v ∈ V(E, p), annihilated by ℒ^+], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'；**Proposition 1.3**, p.8443（Euler–Poincaré）；**Theorem 1.12**, p.8444（V 是 n_--free 且带非退化厄米形式 ⇒ H^m_∞(g, g₀; V) = 0, m ≠ 0）"
+    note: |
+      L1（Prop 2.6 逐字见 §9.2 表第 5 行；Thm 1.12 / Prop 1.3 的内容见 §1.4 编号表）。
+      ★ **数值 24 在 Prop 2.6(ii) 的 ch_q T = q^{p·p/2}φ(q)^{D−2} 里也出现**（D − 2 = 24），
+      但**本卡不走这条路**：本卡的 24 来自把 D = 26 代进 Eq. [2.3]
+      （q^{−1}φ²(q)·q^{p·p/2}φ(q)^{−D} = q^{p·p/2−1}φ(q)^{2−D}）。两处的 D − 2 相等是
+      Theorem 2.8（无鬼定理）之所以成立的算术内容，**本卡不断言那件事**（见"不断言 (b)(g)"）。
+  - ref: fgz-1986
+    loc: "**Theorem 2.7 之后两句**（p.8445）逐字：'Theorem 2.7 implies that the cohomology groups are trivial except for a one-dimensional H^0_∞ in the positive-definite case, but H^0_∞ can be arbitrarily large in the indefinite case. It turns out that in the case of signature (25, 1) we can explicitly construct representatives of the cohomology classes using the second part of Proposition 2.6. And this is the case of the most interest in physics.'；**Theorem 2.5**, p.8445（H^m_∞(ℒ, 𝖟; V) ≅ H⁰(ℒ, ℒ₀; V) 对 m = ±½，其余为零）；**Proposition 2.8 / 2.9 + 推论**, p.8446（p = 0 例外情形）"
+    note: |
+      L1（§1.4、§9.5）。本条是"不断言 (d)(e)(h)(i)"的来源。
+      ★ 那句 "H⁰_∞ can be arbitrarily large in the indefinite case" 与本卡断言**不冲突**：
+      对**固定的 p**，维数由 p_{(24)}(1 − p·p/2) 给出、有限；"arbitrarily large" 说的是
+      **随 p 变化时没有一致上界**（p·p → −∞ 时 1 − p·p/2 → +∞，而 p_{(24)}(n) 随 n 无界增长）。
+tags: [bosonic-string, brst, cohomology, dimension-formula, partition-function, semi-infinite-cohomology]
+notes: |
+  ★★【本卡为什么新建（curator，2026-09-11）】
+  worldsheet.bosonic-relative-cohomology-vanishing 的"本命题不断言 (a)"逐字写着：
+  「不断言 H⁰ 的维数。… 是同一定理的 (ii)，与 (i) 同号不同条，本图未建卡
+  （researcher 建议单建一卡，已列入报告）。」本卡关闭这个记账缺口。
+  与超弦侧 worldsheet.superstring-relative-cohomology-dimension（LZ Corollary 2.15(i)）
+  是同一批、同一结构的两张卡。
+
+  【为什么"消灭"与"维数"必须分两张卡】三条：
+  (1) **前提不同**：按 researcher §9.9.2 的逐字复核，"i ≠ 0 消灭"这条结论**本身不需要 p ≠ 0**
+      （Prop 2.4 的假设只有"V 是 𝒪₀ 里的厄米 ℒ⁻-自由模"，p ≠ 0 只用于验证 V(E,p) 的自由性）；
+      而维数公式里的 p 是**自变量**，分段判据 "1 − p·p/2 是非负整数" 直接是关于 p 的条件。
+  (2) **论证不同**：消灭走 Theorem 1.12；维数走 Euler–Poincaré（Proposition 1.3）+ 特征标计算。
+      前者是同调代数，后者是形式幂级数的系数比较。
+  (3) **下游不同**：无鬼定理 Theorem 2.8 的"三个空间维数都是 p_{(24)}(1 − p·p/2)"这句话只用本卡；
+      GSO / picture 那类结果只用消灭卡。
+
+  【p_{(24)} 的物理释义（**不进断言**）】
+  φ(q)^{−24} = Π_{n≥1}(1 − q^n)^{−24} 是 24 个横向玻色振子塔的配分函数，故 p_{(24)}(N) 读作
+  "24 个横向振子在能级 N 上的态数"；由 (H7) 的换算，1 − p·p/2 = N 就是 α'm² = N − 1（α' = 1/2）。
+  ⚠ **这是本图的读法，FGZ 的正文只把 p_{(D)}(n) 定义成 φ(q)^{−D} 里 q^n 的系数**（(H5) 逐字），
+  "24 个横向振子"这句出自抽取者的按语。按 reviewer-batch23 对 gloss 的处理（同款处理见
+  worldsheet.superstring-cylinder-amplitude-closed-channel-v2 的断言 (3)），释义留在 notes。
+  ⇒ "这个数等于横向 Fock 空间的维数"作为**命题**是 Theorem 2.8 的内容，本卡"不断言 (g)"。
+
+  【★ FGZ 的「物理空间」定义里含截距 a = 1（2026-09-11，researcher 第三轮 §9.10.4）】
+  紧接 Theorem 2.7 之后（p.8445 右栏末）逐字：
+  「We let P = P(R^{25,1}, p) = {v ∈ V(R^{25,1}, p) : **π(L_n)v = δ_{0,n}v**, n ≥ 0}.
+   P is called the **physical space**.」
+  ⇒ **π(L₀)v = v，即 L₀ 本征值 = 1 = 玻色弦截距 a = 1，是 FGZ 写在物理空间定义式里的**
+  （用 δ_{0,n} 表达），**不是**某处额外声明的假设。
+  ⚠ **本卡不涉及 P**（P 是 Theorem 2.8 那一侧的对象），故这条不进本卡的设定；
+  记在此处是因为它解释了 (H7)：本卡公式里 "1 − p·p/2" 的那个 **1** 与 FGZ 物理空间定义里的
+  那个 **1** 是同一个截距，两处都藏在别处而不在 Theorem 2.7 的语句里。
+  ⚠ 对照：lian-zuckerman-1989 的 Definition 2.16 写 π(L_n)v = δ_n **κ**v，即超弦截距 = κ
+  （NS 为 ½、R 为 0）——这正是超弦维数卡 worldsheet.superstring-relative-cohomology-dimension
+  的公式里 p^{(8)}_κ(**κ** − p·p/2) 那个 κ。**两篇的截距都藏在物理空间的定义式里。**
+  ⚠ **negative evidence（§9.10.6，仅覆盖 p.8445）**：Theorem 2.7 的陈述里**不出现**
+  "a = 1"、不出现 "intercept"、不出现 "no-ghost"、不出现 "ghost number"。
+
+  【(ℒ, ℒ₀) 与 {b₀ = L₀ = 0} 的字典】
+  与消灭卡同款：FGZ 的相对复形是"相对于子代数 ℒ₀"，本图的相对复形是
+  worldsheet.brst-preserves-relative-complex 的 {b₀Ψ = 0, L₀Ψ = 0}。物理文献与数学文献公认
+  这是同一对象的两种写法，但 **FGZ 本文没有写出这个字典**，故本卡不断言逐字同一（"不断言 (f)"），
+  推导里也记了这条 gap。
+
+  【与超弦侧 worldsheet.superstring-relative-cohomology-dimension 的对应与差别】
+  对应：FGZ Theorem 2.7(ii) ↔ LZ 1989 Corollary 2.15(i)（LZ 自命名 "Quantization Condition"）。
+  三处差别：
+    (a) **公式形状**：本卡是 p_{(24)}(1 − p·p/2)（单个分拆型系数 + 分段）；LZ 是
+        ½(2κ+1)·dim R(p,κ)·p^{(8)}_κ(κ − p·p/2)，带扇区参数 κ 与旋量表示维数因子。
+    (b) **分段**：FGZ 显式写出"1 − p·p/2 非非负整数时为 0"；LZ 的 Corollary 2.15(i) 语句里
+        **没有**这一支（本图超弦卡照实记，不补）。
+    (c) **上游**：本卡经 Proposition 2.4（Thm 1.12 + Euler–Poincaré）；LZ 经
+        Proposition 2.14(ii)（char = sign）+ Theorem 2.4 + Euler–Poincaré。
+author: curator
+created: "2026-09-11"

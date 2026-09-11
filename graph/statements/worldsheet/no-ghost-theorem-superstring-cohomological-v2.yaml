@@ -167,6 +167,16 @@ notes: |
   worldsheet.superstring-brst-nilpotent-at-c15）。本卡三条推导的 depends_on 早已改指弱卡，
   **只有正文这个字面指针未同步**：本次换代的授权范围只到 (H3)（"其余逐字不动"），
   故留待下一次实质换代时一并同步；已在交付报告里向 lead 明示。
+  〔2026-09-11 small-backlog-11 复核：本条仍准确，正文指针未动，三条推导的边仍指弱卡。〕
+
+  ★【2026-09-11，small-backlog-11：指向本卡的 GSO 边已变窄】
+  worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989 原先有**一条**
+  inferred 边指本卡，同时承载两件事：(a) ⟨,⟩_rel 这个对象、(b) p.328 对 **Corollary 2.15(i)**
+  （维数公式）的引用。本轮为 2.15(i) 单建了卡
+  （worldsheet.superstring-relative-cohomology-dimension），(b) 已拆出去另挂**非 inferred** 的实边；
+  指向本卡的那条边**保留 inferred**，但承担的内容只剩 (a)。
+  ⇒ 记账更准了：本卡的 statement 是 **Corollary 2.15(ii)**（正定性），它从来就不该替
+  2.15(i) 背书。
 
   ★★★【本卡为什么新建，而不是给 worldsheet.no-ghost-theorem-superstring 加推导】
   那张卡是 **Polchinski §10.5 末一句话**的忠实登记，把四件事绑成一条命题：

@@ -32,12 +32,48 @@ depends_on:
       rigorous。**这正是本图把两侧拆成两卡的理由之一**（见两张目标卡的 notes）。
 sources:
   - ref: lian-zuckerman-1989
-    loc: "**Corollary 2.19(iii)**, p.321：'(iii) V(p,κ) is a free Vir_κ^- module.'；证明经 **Proposition 2.18**, pp.317–320（逐字 'we will prove their existence the way FGZ did in the bosonic case'，用超 Virasoro 的 Kac 行列式 [22] = Meurman–Rocha 与 M_κ(h', 9) 的幺正性 [7, 9, 10]）"
+    loc: "**Corollary 2.19(iii)**, p.320（researcher 第三轮页图定为 p.320，E7 旧记的 p.321 是相邻页），逐字：'(iii) V(p,κ) is a free Vir_κ^--module.'；其证明**全文只有两句**，逐字：'(iii) Equations **(24), (25)** imply that V(p,κ) is a direct sum of tensor products of free modules over Vir_κ^-. One can easily check that each of the tensor products is also Vir_κ^--free.'"
     note: |
-      L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md E7）。
-      **本推导的全部内容就是这一条编号推论**，它在 CMP 上有印出的证明链（不同于玻色侧的 FGZ
-      公告体裁）。⚠ 但那条证明链的两个输入（超 Virasoro Kac 行列式、M_κ(h', 9) 的幺正性）
-      在本图**都没有卡**，见 gaps。
+      L1（E7 第一轮 + **§9.4** 第三轮页图逐字复核）。
+      ★★★【2026-09-11 订正，researcher §9.4】**Corollary 2.19(iii) 的证明不经 Proposition 2.18
+      的「陈述」**，只经其**证明体内**的两条显式方程 (24)(25)。原文对比（§9.4 的表）：
+        - (i)  引 **Proposition 2.18（陈述）** + (39)(40)；
+        - (ii) 引 **Definition 2.17** + **Proposition 2.18（陈述）** + (27)(28)(31)；
+        - **(iii) 只引 (24)、(25)** —— 'Proposition 2.18' 这四个字在 (iii) 里**不出现**。
+      ⇒ 本推导旧版写「证明经 Proposition 2.18」**措辞不准**，已改为「经 Prop 2.18 证明中的
+      (24)(25)，非其陈述」。
+      ⚠ **(24)(25) 的位置**：印在期刊 **p.319 顶端**，位于 Prop 2.18 证明体内（该证明起于 p.318
+      'Proof. Using the so-called spectrum generating algebra…'，止于 p.319 末 (34) 之后的 □）；
+      引出它们的句子逐字是 'Thus (i) to (iv) imply that we can express these spaces in terms of
+      irreducible modules:'，其中 (i)–(iv) 是**该证明内部的编号步骤**，不是 Prop 2.18 陈述的分条。
+      ⇒ 若日后为 Prop 2.18 建卡（只承载其陈述），**本卡到那张卡的边在原文里不存在**；
+      正确的上游是「V(p,κ) 的不可约分解 (24)(25)」，若无独立节点，引用须写
+      `loc: §2, eqs. (24)–(25), p. 319（在 Prop 2.18 的证明内）` 并标 `inferred: true`。
+      ⚠ **本推导不把 (24)(25) 写进任何断言**：researcher 把 ⊔ 的指标集（(1/2)Z₊ vs Z₊）与
+      p'·p'/2 / p''·p''/2 的**撇号归属**列为「需复核」（1989 CMP 扫描件下标字号极小）。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.18**, p.318（陈述）与其证明首段，逐字：'Proof. Using the so-called spectrum generating algebra, physicists [1, 2] have constructed these spaces. However, we will prove their existence the way FGZ did in the bosonic case. It has been shown [7, 9, 10] that the Verma module of M_κ(h,c) over Vir_κ is non-unitary for h < 0, c = 1 and unitary for h > 0, c = 9. By Kac's determinant [22] formula, for h'' < 0 and h' > 0, M_κ(h'',1), M_κ(h',9) have no (non-zero) proper Z₂-graded submodule. …'；**(24)(25)**, p.319（在该证明体内）"
+    note: |
+      L1，**§9.3/§9.4**（researcher 第三轮页图）。本条定位本卡的**真正上游**：
+      (24)(25) 由该段的两组文献输入给出——
+      **[7, 9, 10]**（幺正性：Friedan–Qiu–Shenker / Kac LNP 94 / Kac–Wakimoto）与
+      **[22] = meurman-rocha-caridi-1986**（**超 Virasoro（NS/R）的 Kac 行列式**）。
+      ⇒ **V(p,κ) 的 Vir_κ⁻-自由性最终建立在超 Virasoro 的 Kac 行列式之上**，不是一条组合恒等式。
+      ⚠ **本推导不对 meurman-rocha-caridi-1986 拉图上的边**：本图**没有**超 Virasoro Kac 行列式
+      的卡，且本轮**故意不建**（见 gaps 第一条）。
+      ⚠ **编号陷阱**：LZ 的 [9]/[10] = Kac LNP 94 / Kac–Wakimoto，而 **FGZ 的 refs 10/11**
+      = Kac ICM Helsinki 1978 / Feigin–Fuks 1982 —— **两篇的编号完全不同**
+      （brst-cohomology-sources.md §10.1 专门警告）。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**Sect. 3, eqs. (7)–(9), p. 274**（NS / R 两族最高权模的 Kac 行列式公式，**原文无定理号**）；证明见 **Proposition 4.10** 与 **Proposition 4.13**"
+    note: |
+      L1（researcher 2026-09-11 登记；元数据三源一致：Crossref DOI 10.1007/BF01209395、
+      Project Euclid `cmp/1104116024`、INSPIRE recid 237833）。
+      ★ 这是 **lian-zuckerman-1989 的 [22]**，即本推导上游的超 Virasoro Kac 行列式。
+      ⚠⚠ **引用纪律（本条只能这样写）**：该公式在 MRC 原文里**没有定理号**，
+      只能按 `Sect. 3, eqs. (7)–(9), p. 274` 定位，证明在 Prop 4.10 / Prop 4.13。
+      ⚠⚠ **(9) 式的 ± 与指标条件待 auditor 页图复核**，故本图**不把公式写进任何 statement**，
+      也**不为它建卡**（见 gaps 第一条）。本条只承载「上游文献已登记、定位已确定」这件事。
   - ref: lian-zuckerman-1989
     loc: "**p.320 Remark**，逐字：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ **even though it is Vir_κ^- -free**.'"
     note: |
@@ -55,9 +91,21 @@ summary: |
   三条量词（D = 10、p ≠ 0、两个扇区 κ = ½/0）分别由 p.308、p.303 与推论本身给出。
   本推导做的只有对象对接与归一化换算两件事（见 depends_on 两条边）。
 
-  **LZ 一侧的证明链**（本图只转录，不复核）：Corollary 2.19 由 **Proposition 2.18**（pp.317–320）
-  推出；Prop 2.18 自述**不走谱生成代数（DDF）那条路**，而"照 FGZ 在玻色情形的做法"用表示论证明，
-  工具是**超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性（[7, 9, 10]）。
+  **LZ 一侧的证明链**（本图只转录，不复核；**2026-09-11 按 researcher 第三轮 §9.4 订正措辞**）：
+  Corollary 2.19(iii) 的证明**全文只有两句**，逐字 'Equations **(24), (25)** imply that V(p,κ)
+  is a direct sum of tensor products of free modules over Vir_κ^-. One can easily check that each
+  of the tensor products is also Vir_κ^--free.'
+  ⇒ **它经的是 Proposition 2.18 证明中的 (24)(25)（印在 p.319，在证明体内），不是 Prop 2.18 的陈述**
+  ——'Proposition 2.18' 这四个字在 (iii) 的证明里不出现（而同一推论的 (i)(ii) 都明写引它）。
+  再往上，(24)(25) 由 Prop 2.18 证明首段的两组文献输入给出：**[7, 9, 10]** 的幺正性与
+  **[22] = meurman-rocha-caridi-1986** 的**超 Virasoro（NS/R）Kac 行列式**。
+  Prop 2.18 自述**不走谱生成代数（DDF）那条路**，而「照 FGZ 在玻色情形的做法」用表示论证明。
+  ⇒ **本卡的自由性最终建立在超 Virasoro 的 Kac 行列式之上**，与玻色侧
+  worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986（经**玻色** Kac 行列式）
+  **结构同源**；差别是玻色侧本图有卡可接线，超弦侧没有（见 gaps）。
+  ⚠ 'One can easily check that each of the tensor products is also Vir_κ^--free' 这句是
+  **一行代数的断言**（自由模的张量积在子代数上仍自由），按 docs/STATUS_LEVELS.md 的裁决属
+  「有限步初等计算」，不触发降级；但本图**未独立复核**，记在 gaps。
 
   【为什么标 rigorous】四条：
   (1) 结论是**带编号的推论**（Corollary 2.19(iii)），陈述已逐字核实（L1 页图）；
@@ -73,12 +121,24 @@ summary: |
   规则封顶。**这不是 LZ 的论证有缺口**，而是本图把"LZ 的 V(p,κ) = 本图的 RNS 物质 Fock 空间"
   这一步经由那张定义卡记账的后果。
 gaps:
-  - "**Proposition 2.18 的证明未逐行复核，且其两个输入在本图都没有卡**：
-     (a) **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）——本图只有玻色版
-         worldsheet.kac-determinant-v2，**没有超版**，连 bib 都未登记 Meurman–Rocha；
-     (b) **M_κ(h', 9) 的幺正性**（LZ [7, 9, 10]）——本图无对应卡。
-     ⇒ 本推导的 rigorous 是按『已核实的编号推论 + 其原文印出的证明链梗概』给的，
-     不是按逐行复核给的。关闭方式：登记 Meurman–Rocha 并逐行复核 pp.317–320。"
+  - |
+    **上游的超 Virasoro Kac 行列式已登记文献但图上无卡（本轮故意不建）**：
+     (a) **[22] = meurman-rocha-caridi-1986**（CMP 107 (1986) 263–294, 'Highest weight
+         representations of the Neveu-Schwarz and Ramond algebras'）——
+         **〔2026-09-11 更新〕bib 已登记（L1，元数据三源一致）**，旧 gap 写的「连 bib 都未登记」
+         已过期。**但图上仍没有超 Virasoro Kac 行列式的卡，且本轮不建**：该公式在 MRC 原文里
+         **没有定理号**（只能定位到 `Sect. 3, eqs. (7)–(9), p. 274`，证明在 Prop 4.10 / 4.13），
+         且 **(9) 式的 ± 与指标条件待 auditor 页图复核**，写进 statement 会立刻踩转录风险。
+         ⇒ **状态：待建**（先请 auditor 复核 (9) 式，再建卡并把本推导接上去）。
+         ⚠ 本图现有的 worldsheet.kac-determinant-v2 是**玻色** Virasoro 版，**不得**用来顶替。
+     (b) **M_κ(h', 9) / M_κ(h'', 1) 的幺正性**（LZ [7, 9, 10] = Friedan–Qiu–Shenker /
+         Kac LNP 94 / Kac–Wakimoto）——本图无对应卡。
+     (c) **(24)(25) 本身未复核**：researcher 把 ⊔ 的指标集（(1/2)Z₊ vs Z₊）与 p'/p'' 的**撇号归属**
+         列为需复核；本推导与目标卡都**不抄这两条公式**。
+     (d) **收尾那句 'One can easily check…'（自由模的张量积仍自由）本图未独立复核。**
+     ⇒ 本推导的 rigorous 是按「已核实的编号推论 + 其原文印出的两句证明 + 可定位的上游文献」给的，
+     不是按逐行复核给的。关闭方式：auditor 复核 MRC (9) 式 → 建超 Virasoro Kac 行列式卡 →
+     本推导接线；并逐行复核 LZ pp.318–320。
   - "**扇区的对称性未复核**：Corollary 2.19(iii) 一句话同时覆盖 κ = ½ 与 κ = 0，
      但 R 扇区（κ = 0）的 V(p,0) 多一个旋量因子 R(p,0)，其上的结构与 NS 不同。
      LZ 是否对两个扇区分别论证、还是一笔带过，**本图未核实**（抽取记录 E7 只转录了结论）。"
@@ -91,7 +151,21 @@ notes: |
   **一条实输入**：LZ 的消灭定理证明（§3：Prop 3.2 有限过滤 → Prop 3.3 伴随分次 → Thm 3.3.1
   正合序列 + **Corollary 2.19(iii)** → Cor 3.4）显式用到本卡。
   本卡建立后，那条推导已挂一条**非 inferred** 的边指向本卡，其 gaps 第一条 (a)
-  （"Corollary 2.19(iii) 未上图"）随之只剩"超 Virasoro Kac 行列式未上图"这一半。
+  （「Corollary 2.19(iii) 未上图」）随之只剩「超 Virasoro Kac 行列式未上图」这一半。
+  ★【2026-09-11 追加，reviewer-batch24】同一条边已补挂到另外两条推导上：
+  worldsheet.no-ghost-theorem-superstring-cohomological-v2--via-lian-zuckerman-1989 与
+  worldsheet.brst-cohomology-equals-ocq-physical-superstring-v2--via-lian-zuckerman-1989
+  （它们的 gaps 原先都写「Corollary 2.19(iii) 本图没有卡」，属记账过期）。
+
+  【与玻色侧的结构对照（2026-09-11 新认识）】
+  worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986（FGZ Prop 2.6(i)）与本推导
+  **不是「有证明 vs 无证明」的对比**——researcher 第三轮页图显示 FGZ 也印了证明梗概，
+  且**两侧的核心工具同为 Kac 行列式**（玻色版 FGZ refs 10/11 = Kac ICM 1978 + Feigin–Fuks 1982；
+  超版 LZ [22] = meurman-rocha-caridi-1986）。真正的差别有两条：
+  (1) **图上的可接线性**：玻色版有 worldsheet.kac-determinant-v2 可接（已接，非 inferred），
+      超版没有卡（本轮不建，见 gaps 第一条）；
+  (2) **证明的详尽度**：LZ 把不可约分解写成显式的 (24)(25)，FGZ 只写两条同构式。
+  ⇒ 两卡仍**互不依赖**（两篇互不引用），但「Kac 行列式是共同上游」这句可以跨卡说。
 
   【不构成循环】
   本推导的依赖只有超 Virasoro 代数与 RNS 物质部门两张对象卡，

@@ -1,0 +1,258 @@
+id: worldsheet.superstring-cylinder-amplitude-closed-channel-v2
+kind: proposition
+title: type I 圆柱真空振幅中 NS–NS 交换那一项的闭弦通道形式 (10.8.4)：Z_{C₂,0} = i(V₁₀n²/(8π(8π²α')⁵))∫₀^∞ ds[16 + O(e^{−2s})]（v2：α' 幂次的保留改按 §6 裁决重写；16 的物理释义移出断言）
+statement: |
+  **设定（是陈述的一部分）**：type I 弦——十维平坦时空、**无取向**（Ω 投影）的开 + 闭超弦，
+  开弦带 n 个 Chan–Paton 自由度（spectrum.chan-paton-factors；本书记号下 Sp(k) 对应 n = 2k）。
+  考虑**圆柱**（annulus）C₂ 的单圈真空振幅，其唯一的模记作 t ∈ (0, ∞)（圆柱无模群）。
+  费米迹记号 Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 按
+  worldsheet.modular-invariance-requires-eight-transverse-fermions（原书 §10.7 (10.7.7)–(10.7.9)，
+  **这些迹是"对一对维数"取的**，故下面出现四次幂）。
+  **归一化（必须带上）**：原书 p.38 逐字 'Note that the GSO and Ω projection operators each
+  contribute a factor of ½.'——这正是下式的 dt/8t 相对玻色弦 (7.4.1) 的 dt/2t 多出的两个 ½。
+
+  **断言**：
+    **(1) 开弦通道（t 积分）形式**：按 exp(πiF) 是否出现在迹里把振幅分成两项
+          Z_{C₂} = Z_{C₂,0} + Z_{C₂,1}                                        (10.8.1)
+          Z_{C₂,0} = iV₁₀n² ∫₀^∞ (dt/8t)(8π²α't)^{−5} η(it)^{−8} [ Z⁰₀(it)⁴ − Z¹₀(it)⁴ ]   (10.8.2a)
+          Z_{C₂,1} = iV₁₀n² ∫₀^∞ (dt/8t)(8π²α't)^{−5} η(it)^{−8} [ −Z⁰₁(it)⁴ − Z¹₁(it)⁴ ]  (10.8.2b)
+    **(2) 扇区识别**：exp(πiF) 不出现在 Z_{C₂,0} 里，故 ψ^μ 在 σ² 方向**反周期**；
+        它出现在 Z_{C₂,1} 里，故 ψ^μ **周期**。把圆柱读作闭弦从真空出现又回到真空，则
+        **Z_{C₂,0} 来自 NS–NS 闭弦，Z_{C₂,1} 来自 R–R 闭弦**（原书逐字：'The periodicities of
+        the ψ^μ mean that in terms of the closed string exchange, the part Z_{C₂,0} comes from
+        NS–NS strings and the part Z_{C₂,1} from R–R strings.'）。
+    **(3) 闭弦通道（s 积分）形式**：用模变换
+          η(it) = t^{−1/2}η(i/t)，  Z^α_β(it) = Z^β_{−α}(i/t)                   (10.8.3)
+        并定义 **s = π/t**，得
+          **Z_{C₂,0} = i (V₁₀n²/(8π(8π²α')⁵)) ∫₀^∞ ds η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴]
+                     = i (V₁₀n²/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]**      (10.8.4)
+        ⚠ 第二行方括号里的 **16** 在本断言里只是**原书印出的那个数**；它"是什么的计数"
+        不属本断言，见"本命题不断言 (h)"。
+
+  **本命题不断言**：
+    (a) **不断言 R–R 侧的值，也不断言相消**。'Z_{C₂,1} = −Z_{C₂,0}'（原书由 §10.7 的
+        超对称论证得到，逐字 'We know from the previous section that the total fermionic partition
+        function vanishes by supersymmetry'）**不在本卡**；本卡只给 Z_{C₂,0}。
+    (b) **不断言 s → ∞ 发散的物理解释**。'The divergence as s → ∞ is due to a massless closed
+        string tadpole, which as noted must be an NS–NS state … dilaton plus graviton interaction'
+        属 tadpole 一侧；C₁₀ 悖论与其"猜出来的"解决（(10.8.5)–(10.8.6)，原书逐字
+        'One can guess the resolution of this as follows' + 'as indeed a more detailed analysis
+        does show'，而那个分析本书不给）**更不在本卡**。
+    (c) **不断言 Klein 瓶、Möbius 带、(n ∓ 32)² 与 SO(32)**。那是
+        worldsheet.type-i-tadpole-cancellation-so32-v2。
+    (d) ⚠⚠ **本式不是"与 type I 无关"的**。n² 来自圆柱两条边界上的 Chan–Paton 指标，
+        8 分母里有一个 ½ 来自**Ω 投影**——两者都是 type I 的特征。Vol.2 §13.3 的 (13.3.1)
+        （两张平行 D 膜，branes.d-brane-cylinder-long-distance-ns-ns）在本式上做了**四处**修改：
+          (i) Chan–Paton 权重 n² → **2**（开弦的两种取向）；
+          (ii) **去掉** Ω 投影的 ½（原书逐字 'there is no factor of ½ from the orientation
+               projection because the physics is locally oriented'）；
+          (iii) 去掉 Dirichlet 方向的动量积分因子（幂次 (8π²α't)^{−5} → (8π²α't)^{(9−p)/2}）；
+          (iv) 加入拉伸开弦的张力项 exp(−t y²/2πα')。
+        ⇒ 本卡是那条式子的**母式**，不是它的特例。
+    (e) **不断言前缀里 α' 的幂次取自页图读数**（v2 重写的正是这一条）。本卡采纳
+        **(8π²α')⁵**（单撇），根据是**三重复核**，**不是**像素判读：
+          (i) **独立复算闭合**：由 (10.8.2a) 经 s = π/t 变量代换重算前缀，得
+              π⁴/(8(8π³α')⁵) = 1/(262144 π¹¹ α'⁵) = 1/(8π(8π²α')⁵)；Klein 瓶（s = π/2t）同样闭合；
+          (ii) **量纲**：V₁₀ 需要 length¹⁰，(8π²α')⁵ 正好给 length¹⁰；取 (8π²α'²)⁵ 量纲不对；
+          (iii) **跨卷一致性**：Vol.1 对应式 (7.4.3)/(7.4.19)/(7.4.23) 用 (8π²α')¹³。
+        ⚠ **页图上的小字号读数不可复现，因而不能当作"原书如此"的证据**：读出 α'² 的位置与
+        "落在被降为 \scriptstyle 的分式分母里"**完全相关**；同一批公式中以全字号出现的 α'
+        （(10.8.2a,b)、(10.8.11) 首行、(10.8.18) 首行的 (8π²α't)^{−5}）读数干净。
+        第二轮单页重渲染 p.41 的 (10.8.11) 与 p.42 的 (10.8.18)/(10.8.19)（含本节主结论本身）
+        **读作单撇**，只有 p.38 仍偏向"多一个小记号"；跨卷控制组（Vol.1 ch.7，被量纲钉死为单撇）
+        里同一字形也出现同样的分歧。⇒ 判为 **\scriptstyle 分母中 prime 的渲染假象**，
+        **不判为原书排印错误**。
+        ⚠ **不得援引 (13.3.12) 的"书错"先例**：那一处读数**可复现**且有三条独立旁证，
+        本处读数在两个 agent、两轮渲染之间**不可复现**——两处性质不同，不要类比援引。
+        ⚠ **残余不确定性（照实登记，不因此降级）**：两轮复核仍只用了**同一条成像管线**
+        （Cambridge Core PDF → 页图渲染），没有引入第二条独立成像路径；官方勘误表取不到
+        （KITP errata 页 404）。**要 100% 关闭，人在 PDF 阅读器里把 p.38 放大一次即可**。
+        ⚠⚠ **v1 的这一条写的是"页图上七处（…）分母看起来都是 8π(8π²α'²)⁵"，那句事实陈述
+        已被第二轮重渲染推翻**（p.41/p.42 读作单撇，"七处一致"不成立）；v1 的**结论**
+        （采纳 (8π²α')⁵、根据是复算）不受影响。v2 换代订正的就是这句描述。
+    (f) **不断言 (10.8.3) 第二式的模变换是无限定的**。Z^α_β(it) = Z^β_{−α}(i/t) 是 §10.7
+        (10.7.14) 的特例，而 (10.7.14) 在原书里**明确带 "naive" 的限定**（逐字：'The reason
+        these modular transformations are naive is that there is no diff-invariant way to define
+        the phase of the path integral for purely left-moving fermions'）。
+        **§10.8 直接使用而不重述这个限定**；本卡照实记下，故断言 (3) 继承该限定。
+    (g) **不断言带顶点算子的圆柱振幅**（原书此处只算真空振幅；脚注 7 指出加了顶点算子后
+        NS–NS 与 R–R 的逐拓扑相消不再成立，那是 tadpole 卡的内容）。
+    (h) **不断言 (10.8.4) 第二行方括号里的 16 "是什么的计数"**（v2 新增的这一条）。
+        本卡只断言原书印出的那个数。"16 是十维无质量态的计数（对照玻色弦 Vol.1 (7.4.4)
+        的 24）"是**抽取记录的转述（gloss）**，**原书在 (10.8.4) 处不说 16 是什么**
+        （v1 的推导 gaps 第 3 条已自承这一点）。该释义移到 notes，见那里。
+        ⚠ 同样**不断言**这个 16 与本图任何别处出现的 16 相等或同源——例如
+        worldsheet.superstring-relative-cohomology-dimension 的 notes 里由
+        ½·dim R(p,0) 得到的 16、以及 LZ p.314 的 sign C_rel(p,0) = 16。
+        那些是**另一套计算**里的数，本图未建立任何等同。
+uses:
+  - spectrum.one-loop-cylinder-amplitude
+  - spectrum.chan-paton-factors
+  - worldsheet.modular-invariance-requires-eight-transverse-fermions
+  - math.dedekind-eta-s-transformation
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The cylinder」, eqs. **(10.8.1)**、**(10.8.2a,b)**, pp. 37–38；构造方式逐字：'One can immediately write down the amplitude by combining the bosonic result (7.4.1), converted to ten dimensions, with the fermionic trace (10.7.9) from one side of the type II string. We write it as a sum of two terms,'；归一化逐字（p.38）：'Note that the GSO and Ω projection operators each contribute a factor of ½.'；扇区识别逐字：'We have separated the terms according to whether exp(πiF) appears in the trace. In Z_{C₂,0} it does not, and so the ψ^μ are antiperiodic in the σ² direction. In Z_{C₂,1} it does appear and the ψ^μ are periodic. … The periodicities of the ψ^μ mean that in terms of the closed string exchange, the part Z_{C₂,0} comes from NS–NS strings and the part Z_{C₂,1} from R–R strings.'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E65**。
+      ★ **文献自称的强度是 'One can immediately write down'——不推导，直接拼装**
+      （玻色结果 (7.4.1) 换到十维 + (10.7.9) 的费米迹取一侧）。这是本卡的推导只能是
+      physical-argument 的首要理由。
+      ★ 原书**明写**的两条依赖：**Vol.1 (7.4.1)** 与 **(10.7.9)**；本卡的两条对应边因此非 inferred。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, eqs. **(10.8.3)**、**(10.8.4)**, p. 38；逐字：'Using the modular transformations η(it) = t^{−1/2}η(i/t), Z^α_β(it) = Z^β_{−α}(i/t) (10.8.3) and defining s = π/t this becomes' → (10.8.4) 两行，第二行 '= i (V₁₀n²/(8π(8π²α')⁵)) ∫₀^∞ ds [16 + O(exp(−2s))]'"
+    note: |
+      **L1 原书页图**，抽取记录 #E66。
+      ★ `[16 + O(exp(−2s))]` 的 **16** 是十维无质量态计数（抽取记录 #E66 备注：对照
+      Vol.1 (7.4.4) 的 24）。
+      ⚠⚠ **(10.8.3) 第二式的 "naive" 限定**：它是 §10.7 (10.7.14) 的特例，而 (10.7.14) 原书
+      明确限定为 naive（polchinski-1998-v2.md#E47 逐字：'The reason these modular transformations
+      are naive is that there is no diff-invariant way to define the phase of the path integral
+      for purely left-moving fermions'）；**§10.8 直接用而不重述**。本卡"不断言 (f)"照此写。
+      ⚠ `s = π/t` 的定义在 p.40 有逐字的三拓扑对照（圆柱 π/t、Möbius π/4t、Klein 瓶 π/2t）。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, (10.8.4) 前缀的 α' 幂次：页图上**七处**（(10.8.4) 两行、(10.8.11) 两行、(10.8.18) 两行、(10.8.19)）分母都**看起来**是 8π(8π²α'²)⁵，而同一批公式的 t 形式（(10.8.2a,b) 等）清楚是 (8π²α't)^{−5}（只有一撇）"
+    note: |
+      **L1 页图 + 独立复算**，抽取记录 **§0.4(b)** 与 **Q1**。
+      ★ 抽取者未改读数而改为复算（s = π/t）：
+        ∫₀^∞ dt/(8t) → ∫₀^∞ ds/(8s)；(8π²α't)^{−5} = s⁵/(8π³α')⁵；
+        η(it)^{−8} = η(iπ/s)^{−8} = (π/s)⁴η(is/π)^{−8}（用 (10.8.3)）；
+        合并 (1/8s)·s⁵/(8π³α')⁵·π⁴/s⁴ = π⁴/(8(8π³α')⁵) = 1/(262144 π¹¹ α'⁵)，s 恰好抵消；
+        而 1/(8π(8π²α')⁵) = 1/(8π·32768π¹⁰α'⁵) = 1/(262144 π¹¹ α'⁵) —— **完全相等**。
+        取 (8π²α'²)⁵ 则差一个 α'⁵ 且**量纲不对**（V₁₀ 需要 length¹⁰，(8π²α')⁵ 正好给 length¹⁰）。
+        Klein 瓶（s = π/2t）复算同样闭合。
+      ⇒ **正确的量是 (8π²α')⁵**；页图多出的上标是 prime 的渲染假象或原书排印错误
+      （Vol.1 对应式 (7.4.3)/(7.4.19)/(7.4.23) 用 (8π²α')¹³，与此一致）。
+      ⚠ polchinski-1998-v2.md **E48 沿用页图读数写成 (8π²α'²)⁵，应按本条订正**。
+      ⚠ 抽取记录 Q1 的原话是「**curator 若要把完整前缀写进节点，先由人复核 pp.38/41/42 一次**」
+      ——本卡把前缀写进了陈述，依据是上面的复算闭合 + 量纲 + Vol.1 一致性三条，
+      **不是**页图复核；这条保留已写进"不断言 (e)"。
+      ★★★【2026-09-11 裁决落地（researcher 第二轮，polchinski-1998-v2-sec10-8.md §6）：
+      **判为页图渲染假象，不判原书排印错误**】上一行"渲染假象**或**原书排印错误"的两可，
+      本轮已定为前者，三条依据都在 §6：
+      (a) **§6.3「假象位置 ↔ 分式分母」100% 相关**：凡读出 α'² 的读数**无一例外**落在
+          `\frac{…}{8π(8π²α')⁵}` 这种被降为 `\scriptstyle` 的分母里；凡以全字号出现的 α'
+          （(10.8.2a,b)、(10.8.11) 首行、(10.8.18) 首行的 (8π²α't)^{−5}）**无一例外**读得干净。
+          机制：小字号下 prime 只剩一两个像素宽，栅格化后形似上标 2。
+      (b) **§6.2 跨卷控制组**：Vol.1 (7.4.3)/(7.4.24) 是同一套排版宏、同样落在分式分母里，
+          其 α' 幂次被量纲钉死在 (8π²α')¹³；本轮抽取者重渲染 Vol.1 那两页时**同样觉得多一个小记号**，
+          而 Vol.1 的读图者（另一 agent、另一轮）读作单撇。⇒ 字形无可分辨差别，差别全在读图者。
+      (c) **§6.1 单页重渲染**：p.41 的 (10.8.11) 与 p.42 的 (10.8.18)/(10.8.19)——含本节主结论
+          (10.8.19) 本身——本轮**读作单撇 (8π²α')⁵**（只有 p.38 仍偏向"多一个小记号"）。
+      ⇒ 抽取记录 Q1 要求的"由人复核 pp.38/41/42 一次"这条保留**已关闭**：复核做了，
+        结论与本卡采纳的 (8π²α')⁵ 一致。
+      ⚠ **不得援引 (13.3.12) 的"书错"先例**（§6.4 逐字：两处性质不同，不要类比援引）：
+        那一处读数**可复现**且有三条独立旁证；本处读数在两个 agent、两轮渲染之间**不可复现**。
+      ⚠⚠ **由此产生的那处陈述内事实漂移，v2 已修**：v1 的"不断言 (e)"正文写
+        「页图上七处…分母**看起来**都是 8π(8π²α'²)⁵」，而 §6.4 明确推翻了"七处一致"这一事实陈述
+        （p.41/p.42 本轮读作单撇）。v1 的 (e) **结论**（采纳 (8π²α')⁵、根据是复算而非像素判读）
+        **本来就正确**，漂移只在那句描述读数的括注上；
+        **本卡（v2）的 (e) 已按 §6.3–§6.5 重写**，不再声称"七处一致"。
+      ⚠ **残余不确定性（§6.5 逐字，登记但不降级）**：两轮复核仍只用了**同一条成像管线**
+        （Cambridge Core PDF → 页图渲染），无第二条独立成像路径；官方勘误表取不到
+        （KITP errata 页 404）。**人在 PDF 阅读器里把 p.38 放大一次即可 100% 关闭。**
+  - ref: polchinski-1998-v1
+    loc: "§7.4, eq. **(7.4.1)**（玻色弦圆柱真空振幅的算符形式；Vol.2 §10.8 逐字引用并'converted to ten dimensions'）；(7.4.3)（26 维显式形式 V₂₆n²/(2π(8π²α')¹³)，与 (10.8.4) 的 V₁₀n²/(8π(8π²α')⁵) 逐项对照）；(7.4.4)（玻色弦的 24）"
+    note: |
+      本图对应节点是 **spectrum.one-loop-cylinder-amplitude**（其断言 (1)(3) 正是 (7.4.1) 与
+      (7.4.3)），故本卡的这条边**非 inferred**。
+      ⚠ 注意那张卡的表达式是**取向**理论的（它自己的 ⚠ 已写明"无取向理论里各多一个因子 ½"），
+      而本卡是无取向的 ⇒ 本卡的 dt/8t = 那张卡的 dt/2t 再乘 GSO 与 Ω 各一个 ½。
+      （抽取记录 #E74 给出 (7.4.3) ↔ (10.8.4) 的逐式对照表。）
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.9)**（费米迹 Z_ψ^±(τ) = ½[Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ ∓ Z¹₁⁴]，8 个横向费米子 = 4 对 ⇒ 幂次 4）；(10.7.7)–(10.7.8)（Z^α_β 的定义，'these traces are for a pair of dimensions'）"
+    note: |
+      本图对应节点是 **worldsheet.modular-invariance-requires-eight-transverse-fermions**
+      （其 statement 就含 (10.7.7)–(10.7.9) 的记号与组合）。Vol.2 §10.8 **明写**用 (10.7.9)
+      'from one side of the type II string'，故本卡的这条边非 inferred。
+      ⚠ 只借迹的**形式**，不借那张卡的"8 的倍数"结论。
+tags: [superstring, type-i, cylinder-amplitude, one-loop, ns-ns, closed-channel]
+notes: |
+  ★★★【v2 换代的两处实质改动（curator，2026-09-11，small-backlog-11；依 reviewer-batch23 与
+  researcher 第二轮 polchinski-1998-v2-sec10-8.md §6.4）】
+  旧卡 worldsheet.superstring-cylinder-amplitude-closed-channel 有两处陈述级问题，
+  各自都只能靠换代修（原则 1：陈述文本不可就地改），故**一次换代同时修两处**：
+
+  **(A)「不断言 (e)」里的一句事实陈述被推翻。** 旧卡写
+  「页图上七处（本式两行、(10.8.11) 两行、(10.8.18) 两行、(10.8.19)）分母**看起来**都是
+  8π(8π²α'²)⁵」。researcher 第二轮的单页重渲染**不支持"七处一致"**：p.41 的 (10.8.11) 与
+  p.42 的 (10.8.18)/(10.8.19)（含本节主结论本身）本轮**读作单撇**。
+  ⇒ v2 把 (e) 改写为「复算 + 量纲 + 跨卷控制组三重复核定单撇；**页图小字号读数不可复现**，
+  因而不能当"原书如此"的证据；判为 \scriptstyle 分母中 prime 的渲染假象，不判原书排印错误」，
+  并保留"不得援引 (13.3.12) 书错先例"与**残余不确定性**（只用了同一条成像管线）两条限定。
+  ⚠ **旧卡的结论本来就对**（采纳 (8π²α')⁵、根据是复算不是像素）；换代修的是**理由的表述**。
+
+  **(B) 断言 (3) 里"16 是十维无质量态的计数"是 gloss。** reviewer-batch23 认定（lead 落地）：
+  这句是抽取记录 #E66 的转述，**原书在 (10.8.4) 处不说 16 是什么**，而旧卡把它写进了**断言**。
+  ⇒ v2 把它移出断言（新增「不断言 (h)」），释义移到下面的 notes 段。
+  旧卡 notes 里那条「statement 按原则 1 不改；下次实质换代时把该句移出断言」的待办至此关闭。
+
+  **除 (A)(B) 外，v2 与旧卡逐字相同**：设定段、断言 (1)(2) 与 (3) 的公式、
+  「不断言 (a)–(d)(f)(g)」、uses、uses_conventions、sources 全部未动。
+  ⇒ 这是**论证不变的换代**（改的是保留条款的措辞与一句释义的归属），按 graph/CLAUDE.md
+  2026-09-12 细则，旧推导 `git mv` 改指 v2，旧卡不再留推导；两条活边
+  （worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 与
+  branes.d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace）已改指 v2。
+
+  【16 的物理释义（**不进断言**，见"不断言 (h)"）】
+  把 s → ∞ 极限下方括号里的常数读作"十维无质量闭弦态的计数"，对照玻色弦 Vol.1 (7.4.4) 的 24
+  （26 维横向数），是标准的物理读法：这里 16 = 8 × 2 对应十维 NS–NS 无质量态的自由度计数。
+  ⚠ **这是本图/抽取者的释义，不是原书在 (10.8.4) 处的断言**；原书只印出这个数。
+  ⚠ 与 worldsheet.superstring-relative-cohomology-dimension 的 notes 里那个 16
+  （½·dim R(p,0)，LZ 的 R 扇区）**看起来同源但本图未建立等同**，不得互相搬运。
+
+  ★★【本卡为什么存在（承自 v1，curator，2026-09-11）】
+  (10.8.4) 在本图此前**没有独立节点**：它只出现在
+  worldsheet.type-i-tadpole-cancellation-so32-v2 的推导步骤里。这个缺口被两条下游推导各记了一次：
+    - branes.d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace 的 gaps 第一条
+      （逐字"(10.8.4) 在图上没有独立陈述卡 … 「母式」这一步的可追溯性止于那张卡的推导 summary，
+      不止于一个专门的节点"）；
+    - branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的 gaps（同款）。
+  两条都只能把边挂到整张 SO(32) tadpole 卡上，于是"只借圆柱振幅、不借 (n∓32)² 结论"这句话
+  只能写在 note 里而不能落在图的结构上。**本卡把它落到结构上。**
+
+  ⚠⚠ **一条必须纠正的常见读法：(10.8.4) 不是"type I 无关"的。**
+  它含 n²（两条边界上的 Chan–Paton 指标）与一个来自 **Ω 投影**的 ½（原书 p.38 逐字
+  'the GSO and Ω projection operators each contribute a factor of ½'）。
+  §13.3 的 (13.3.1) 是把**这四处**都改掉以后的结果（见"本命题不断言 (d)"）：
+  n² → 2、去掉 Ω 的 ½、去掉 Dirichlet 动量积分、加拉伸弦张力项。
+  ⇒ 图上的正确关系是 **本卡是 (13.3.1) 的母式**；(13.3.1) 不是本卡的特例，
+  而是"同一类计算换一套边界条件与投影"的结果。这比旧记账（把边挂到 SO(32) 卡上）精确。
+
+  【与 worldsheet.type-i-tadpole-cancellation-so32-v2 的分工】
+  本卡 = 圆柱这一个拓扑的 NS–NS 项，到 (10.8.4) 为止；
+  那张卡 = 三个拓扑的发散相加 + 脚注 7 的"NS–NS 与 R–R 必须**分别**在拓扑求和后为零" +
+  (n ∓ 32)² + SO(32)。两者的强度差别很实在：本卡是一串机械的模变换与拼装（弱在"直接写下"
+  与 (10.8.3) 的 naive 限定），那张卡额外背着 C₁₀ 悖论那个 **'One can guess the resolution'**
+  加一个本书不给的 'more detailed analysis'（抽取记录 #E67 判为该节最弱的一环）。
+  ⇒ 拆出本卡后，(13.3.1) 一侧不再经过那个最弱环。
+
+  【为什么断言里不含 Z_{C₂,1} = −Z_{C₂,0}】
+  原书在 (10.8.4) 之前用它来说明"我们只盯 Z_{C₂,0}"，但**算 Z_{C₂,0} 本身不需要它**
+  （(10.8.2a) → (10.8.4) 只用模变换与 s = π/t）。按"一个节点一个命题"，
+  超对称相消那一条留给 R–R 一侧（它在 §10.7，且是 tadpole 论证的前提）。
+
+  【α' 幂次：本卡采纳复算而非页图】见"不断言 (e)"与 sources 第三条。
+  ★★【2026-09-11 已定案】researcher 第二轮（polchinski-1998-v2-sec10-8.md §6）单页重渲染
+  pp.38/41/42 并加做**跨卷控制组**（Vol.1 ch.7），裁定页图上的"α'²"是 **\scriptstyle 分母里
+  prime 的渲染假象**，不是原书排印错误；p.41/p.42（含 (10.8.19) 本身）本轮读作**单撇**。
+  ⇒ 本卡采纳的 (8π²α')⁵ 与页图复核结论一致，sources 第三条的"待人复核"保留已关闭。
+  ⚠ **不得援引 (13.3.12) 的书错先例**（那处读数可复现且有三条旁证，本处不可复现）。
+  ⚠ **残余不确定性（§6.5 逐字，诚实登记、不因此降级）**：两轮复核**仍只用了同一条成像管线**
+  （Cambridge Core PDF → 页图渲染），没有引入第二条独立的成像路径；官方勘误表取不到
+  （KITP errata 页 404）。**要 100% 关闭，唯一彻底的办法是人在 PDF 阅读器里把 p.38 放大一次**
+  ——10 秒的事。⇒ 在那之前，本卡的 α' 幂次靠的是复算 + 量纲 + 跨卷一致性，不是一手读数。
+  ⚠ **v2 已把 (e) 里被推翻的那句事实陈述改写掉**（v1 写"页图七处一致看起来是 α'²"，
+  §6.4 推翻了"一致"）；(e) 的结论在 v1 就是对的，换代改的是理由的表述。
+  ★ **副产品规则（§6.6，可复用）**：Polchinski 两卷电子书里，凡落在**分式分母**中的 α'，
+  页图上都可能被读成 α'²；**一律按量纲判定，不要照抄页图读数**；全字号出现的 α' 读数可信。
+  这条裁决与 branes.d-brane-cylinder-long-distance-ns-ns 对 (13.3.1) 前缀的同款裁决
+  （ch13 抽取记录 §7.3(b)(c)：根据是复算闭合不是像素）**口径一致**，
+  也与 worldsheet.type-i-tadpole-cancellation-so32-v2 的 v2 换代理由一致（v2 正是订正这个幂次）。
+author: curator
+created: "2026-09-11"

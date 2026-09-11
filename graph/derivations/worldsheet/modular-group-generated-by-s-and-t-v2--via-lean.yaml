@@ -36,7 +36,11 @@ depends_on:
       `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），那不够。
       **非 inferred**：这一步在本推导 gaps 首条里逐字点名了这些 Lean 声明及其提交 sha，
       在桥层文件里可以直接读到。
-      ⚠⚠ **但它不在本卡 `lean_decl` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one`
+      **【接口边，非机检环节】**（docs/STATUS_LEVELS.md「接口边」节，2026-09-12 裁决；
+      字面标签便于 grep）：本边供给目标 statement 里点名的**群识别**（Z(SL(2,ℤ)) = {±I}），
+      对应的桥层声明是 `StringFormal.Bridge.center_eq_pm_one` /
+      `psl2z_eq_quotient_pm_one` / `pslMk_eq_iff`。
+      ⚠⚠ **它不在本卡 `lean_decl` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one`
       （及其子群形式）不在 `psl_closure_S_T` 的证明链上——那条定理的对象本就是 Mathlib 的
       PSL」）。本边供给的是**陈述层面的群识别**，不是证明步骤；2026-09-11 补上
       `psl2z_eq_quotient_pm_one` / `pslMk_eq_iff` 使「两个商相等」本身成为机检事实，

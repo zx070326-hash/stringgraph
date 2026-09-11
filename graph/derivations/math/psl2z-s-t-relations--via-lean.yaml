@@ -28,7 +28,11 @@ depends_on:
       那**不够**。
       **非 inferred**：这一步在本推导 gaps 首条里逐字点名了这些 Lean 声明，
       并在 sources 指向的桥层文件里可以直接读到；它是可指认的、而非诠释出来的依赖。
-      ⚠⚠ **但它不在 `psl_S_sq` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one`（及其
+      **【接口边，非机检环节】**（docs/STATUS_LEVELS.md「接口边」节，2026-09-12 裁决；
+      字面标签便于 grep）：本边供给目标 statement 里点名的**群识别**（Z(SL(2,ℤ)) = {±I}，
+      使 Mathlib 的 PSL 能被读成卡面写的 SL(2,ℤ)/{±I}），对应的桥层声明是
+      `StringFormal.Bridge.center_eq_pm_one` / `psl2z_eq_quotient_pm_one` / `pslMk_eq_iff`。
+      ⚠⚠ **它不在 `psl_S_sq` 的机检证明链上**（gaps 首条逐字：「`center_eq_pm_one`（及其
       子群形式）不在 `psl_S_sq` 的证明链上——`psl_S_sq` 里的 `PSL(2, ℤ)` 从一开始就是
       Mathlib 的那个对象」）。本边供给的是**陈述层面的群识别**，不是证明步骤——这一点
       既没有因为它有了自己的卡而改变，也没有因为 2026-09-11 补上了

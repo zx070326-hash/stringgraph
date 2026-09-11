@@ -12,24 +12,45 @@ depends_on:
       （只写 κ = 0, ½），**p ≠ 0、D = 10、复形取 p.306 (8)（R 扇区 T₀ ⊕ T₁）都是经本边继承的**。
       ⇒ 这条边不只是"用了一条引理"，它是本推导前提链的**唯一入口**。
       ★ 指 v2：相对次数 vs 鬼数的订正（见那张卡的 notes）；目标卡 (H2) 与 v2 的 (H4) 同款。
+  - id: worldsheet.superstring-relative-cohomology-dimension
+    note: |
+      供给 Prop 4.3 动机一侧**明写引用**的那一条：**Corollary 2.15(i)**（维数公式，
+      LZ 自命名 "Quantization Condition"）。p.328 逐字
+      'However, **Corollary 2.15 (i)** implies that dim H⁰_rel(p,0) ≠ dim H⁰_rel(p,½).'
+      ——这正是 §4 开头列的两条「不良特征」之一，即 GSO 截断要修的那一条，
+      也是目标卡断言 (3)「GSO 之后两扇区维数相等」之所以是一条结论的理由。
+      **非 inferred**：这是 LZ 在 §4 正文里对 Corollary 2.15(i) 的**逐字直接引用**，
+      不是本图补的推断。
+      ★★【2026-09-11 改指，small-backlog-11】本边**原先指
+      worldsheet.no-ghost-theorem-superstring-cohomological-v2 且标 inferred**，
+      理由是那张卡的 statement 是 **Corollary 2.15(ii)**（正定性），而 LZ 在这里引的是
+      **2.15(i)**（维数），本图当时没有 2.15(i) 的卡。旧 note 与本推导 gaps 都写着
+      「**正解是为 2.15(i) 单建卡后本边改指它并去掉 inferred**」。
+      **本轮该卡已建**（worldsheet.superstring-relative-cohomology-dimension，
+      推导 --via-lian-zuckerman-1989，源即 Corollary 2.15(i) 逐字 + p.317 的三行证明），
+      本边据此改指并去掉 inferred。
+      ⚠ **原先那条边所承载的另一半（⟨,⟩_rel 这个对象）已另挂**，见下一条 depends_on：
+      Prop 4.3(i) 说 P̄_± 是"关于 ⟨,⟩_rel 的正交投影子"、结论是"等距"，都以该形式为前提，
+      而那个形式的记账入口仍是正定性那张卡（Definition 2.11 + Proposition 2.14）。
+      ⇒ **一条 inferred 边被拆成两条：一条实边（维数）+ 一条仍 inferred 的边（形式对象）。**
   - id: worldsheet.no-ghost-theorem-superstring-cohomological-v2
     inferred: true
     note: |
-      供给两件事：
-      (a) **相对复形上的厄米形式 ⟨,⟩_rel 这个对象**——Prop 4.3(i) 说的 P̄_± 是"关于 ⟨,⟩_rel 的
-          正交投影子"、结论是"等距"，都以该形式为前提；
-      (b) 目标卡断言 (3) 的**动机侧**：p.328 逐字 'However, **Corollary 2.15 (i)** implies that
-          dim H⁰_rel(p,0) ≠ dim H⁰_rel(p,½).'，即 GSO 截断要修的那条不良特征。
-      **标 inferred，理由**：LZ 在这两处引的是 **Corollary 2.15(i)**（维数公式，
-      LZ 自称 'Quantization Condition'），而该卡的 statement 是 **Corollary 2.15(ii)**（正定性）；
-      本图**没有**为 2.15(i) 建卡（那张卡的"本命题不断言 (b)"已声明不断言维数）。
-      ⇒ 本边承担的是"同一张卡覆盖的设定 + 2.15 这一族结果"的整卡记账，
-      **不是**对 2.15(i) 的逐条引用。正解：为 Corollary 2.15(i) 单建卡后本边改指它并去掉 inferred。
-      ⚠ 本推导**不需要正定性**：Prop 4.3(i)(ii) 的证明只用到 ⟨,⟩_rel 的存在与 P̄_± 的自伴性，
+      供给 **相对复形上的厄米形式 ⟨,⟩_rel 这个对象**——Prop 4.3(i) 说的 P̄_± 是"关于 ⟨,⟩_rel 的
+      正交投影子"、结论是"等距"，都以该形式为前提。
+      **标 inferred，理由**：LZ 一侧承载这个对象的是 **Definition 2.11**（形式的定义）与
+      **Proposition 2.14(i)**（Q* = Q）；本图**没有**为这两条单建卡，只有正定性这张卡
+      （statement 是 **Corollary 2.15(ii)**）整卡地覆盖了"相对复形 + 其上的厄米形式 + 正定"这一族设定。
+      ⇒ 本边承担的是**整卡记账**，不是对某条编号结果的逐条引用。
+      正解：为 Definition 2.11 / Proposition 2.14 单建卡后本边改指它并去掉 inferred。
+      ⚠ **本推导不需要正定性**：Prop 4.3(i)(ii) 的证明只用到 ⟨,⟩_rel 的存在与 P̄_± 的自伴性，
       不用 H⁰_rel 上形式的正定。故本边在本推导里比在 Theorem 2.20 一侧的同名边弱。
+      ★★【2026-09-11，small-backlog-11】本边**原先还兼管维数那一半**（p.328 对
+      Corollary 2.15(i) 的引用），那一半已拆出去另挂实边（见上一条 depends_on）。
+      本边保留 inferred，但承担的内容变窄了：只剩 ⟨,⟩_rel 这个对象。
       ★ **指 v2**：目标侧那张卡 2026-09-11 换代为 -v2（(H3)「次数是鬼数」改为相对次数
       n = 鬼数 + κ ∈ Z），与本推导目标卡 (H2) 及 worldsheet.superstring-relative-cohomology-vanishing-v2
-      的 (H4) 同款订正。本边的内容与 inferred 判断均不变。
+      的 (H4) 同款订正。
   - id: worldsheet.superstring-brst-charge
     note: |
       供给 Q（本图一侧），以及 Prop 4.3 证明里 **[Q, P̄_±] = 0** 这一步所说的"哪个算符与投影子
@@ -103,7 +124,13 @@ sources:
       'GSO'/'tachyon'/'chirality' 任何一词，⇒ **归属只靠 LZ p.328 的 [8] 转引**。
       ⚠ **易混**：同三位作者另有 Phys. Lett. B **65**(3) (1976) 282–286,
       'Supergravity and the **spinor dual** model'（DOI 10.1016/0370-2693(76)90183-0），
-      与本条的 'dual spinor' **词序相反**；**LZ 的 [8] 指哪一篇本图未裁决**（LZ 的文献表未逐条取得）。
+      与本条的 'dual spinor' **词序相反**。
+      ★★★【2026-09-11 裁决，researcher 第三轮页图，lian-zuckerman-1989.md §8.1】
+      **LZ 的 [8] = 本条这一篇**：LZ 期刊 p.335 参考文献表第 8 条逐字
+      '8. Gliozzi, F., Scherk, J., Olive, D.: Nucl. Phys. **B122**, 253–290 (1977)'，
+      起止页与 Crossref 逐位一致。⇒ 旧记录「LZ 的 [8] 指哪一篇本图未裁决」**作废**。
+      ⚠⚠ **但归属本身仍未证实**：NPB 122 摘要无 'projection'/'GSO'/'tachyon'/'chirality'，
+      正文未取得，「GSO 投影首发于该篇」仍只靠 LZ p.328 的 L1 转引。
       详见目标卡同一条 source 的 note。
 summary: |
   **LZ 的论证（四步，全部逐字可核，见 sources 第一条）**：
@@ -177,9 +204,13 @@ gaps:
      世界面费米数 exp(πiF)，不含鬼场；LZ 的 P̄_± 含鬼场贡献（四个对合因子）。
      本推导**不建**那条边（lead 指示本轮不改 no-ghost-theorem-superstring 的边），
      目标卡「不断言 (g)」照此写。要接线须先核字典。"
-  - "**Corollary 2.15(i)（维数公式 / 'Quantization Condition'）本图没有卡**：
-     depends_on worldsheet.no-ghost-theorem-superstring-cohomological 因此标 inferred
-     （那张卡的 statement 是 2.15(ii) 正定性）。正解是为 2.15(i) 单建卡。"
+  - "**〔2026-09-11 关闭，small-backlog-11〕Corollary 2.15(i)（维数公式 / 'Quantization
+     Condition'）在本图已建卡**：worldsheet.superstring-relative-cohomology-dimension
+     （推导 --via-lian-zuckerman-1989，源即 p.317 的逐字陈述与三行证明）。
+     本推导原先因无此卡而把 p.328 对 2.15(i) 的引用挂在正定性卡上并标 inferred，
+     **本轮已改指新卡并去掉 inferred**。
+     ⚠ **仍 inferred 的另一半**：⟨,⟩_rel 这个对象（LZ 的 Definition 2.11 + Proposition 2.14(i)）
+     在本图仍无卡，那条边继续指正定性卡并保留 inferred，承担的内容已变窄。"
   - "**本推导不给时空超对称、不给模不变性**：researcher 通读 §4 六页的 negative evidence——
      §4 只出现「#bosons = #fermions at each mass level」这条**必要条件**，没有时空超对称的证明；
      也不出现 E₈×E₈ / SO(32) / 模不变性 / 配分函数。⇒ 本卡不得被当作那些结论的来源。"

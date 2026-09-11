@@ -28,24 +28,34 @@ depends_on:
       （见 gaps 第三条与新卡的 (H5)）。
       ★ 2026-09-11 新建该卡并接线，本推导 sources 里的 Theorem 2.7 一条**保留**
       （推导可以同时引来源与指上游卡），但"消灭定理无独立节点"这一缺口至此关闭。
-  - id: math.verma-module-free-over-negative-part
-    inferred: true
+  - id: worldsheet.fock-module-free-over-negative-virasoro
     note: |
-      核实后（全文逐页读毕）可以定位到具体位置：FGZ Proposition 2.6 断言 p ≠ 0 时 V(E, p) 是
-      **free ℒ^--module**，这正是 Theorem 1.12（消灭定理）要求的假设，也是本推导需要的表示论输入。
-      仍标 inferred 的理由：FGZ 说的是"物质 Fock 模在负模下自由"，不是本项目 Verma 模节点定义的
-      V(c,h)；由"自由 U(ℒ^-)-模"到"Verma 模"的识别需要额外一步（Fock 模一般不等于 Verma 模），
-      FGZ 未写这一步。若日后为"Fock 模在负模下自由"单建节点，本边应改指向它并去掉 inferred。
-      **2026-09-11 拆卡换代（第一次）**：本边原指旧卡 worldsheet.verma-module，改指
-      worldsheet.verma-module-pbw-basis。理由：本边承载的表示论输入正是「在负模态下自由」，
-      即归入 PBW 基那一半（其陈述 (1) 的等价形式就是 U(Vir_-)-自由、秩 1），
-      而不是 worldsheet.verma-module-v2 的构造与分级。inferred 的理由未变。
-      **2026-09-11 合并换代（第二次）**：worldsheet.verma-module-pbw-basis 已 superseded_by
-      **math.verma-module-free-over-negative-part**（两卡内容逐条重叠，后者来源更好：virasoro-lean-2025
-      §12 p.11 的 L1 逐字转录 vs. 前者三条未核实到命题级的 sources），其推导已删除，本边随之改指。
-      两卡的 (1)(2)(3) ↔ (1)(2)(3)(4) 一一对应；唯一的记法差别是基元下标的标号顺序
-      （前者 n_1 ≥ … ≥ n_k，后者 1 ≤ n_1 ≤ … ≤ n_m），**同一组基元**，见新目标推导的 notes。
-      新目标的 **(1)「V(c,h) 作为 U(vir₋)-模自由、秩 1」正是本边要的那句**，比旧卡更直接。
+      供给本推导的核心表示论输入：**Proposition 2.6(i)** 逐字 'V(E, p) is a free ℒ^--module'
+      （p.8445，前提 号差 (D−1,1)、D ≥ 2、**p ≠ 0**），这正是 **Theorem 1.12**（消灭定理）
+      要求的假设，也是 Theorem 2.8 经 Theorem 2.7 用到的那一条。
+      **本边非 inferred**：FGZ 在 Theorem 2.7 正上方逐字把 "**the first part of Proposition 2.6**"
+      列为 Theorem 2.7 的输入（brst-cohomology-sources.md §9.3），而本推导的目标
+      Theorem 2.8 建立在 Theorem 2.7 之上（FGZ 在 2.8 里断言三个空间的维数都是
+      p_{(24)}(1 − p·p/2)，那正是 2.7(ii)）。⇒ 引用是**论文内部显式的证明链**（2.6(i) → 1.12 →
+      2.7 → 2.8），不是本图补的推断。
+      ★★【2026-09-11 改指，reviewer-batch24】本边**原先指 math.verma-module-free-over-negative-part
+      且标 inferred**，历史如下（三次换代，保留作记录）：
+        (1) 原指旧卡 worldsheet.verma-module；
+        (2) 改指 worldsheet.verma-module-pbw-basis（本边承载的正是"在负模下自由"那一半）；
+        (3) 后者 superseded_by math.verma-module-free-over-negative-part，本边随之改指。
+      三次的 inferred 理由始终是同一条：**FGZ 说的是"物质 Fock 模在 ℒ⁻ 下自由"，不是本图 Verma 模
+      节点定义的 V(c,h)**；由"自由 U(ℒ⁻)-模"到"Verma 模"的识别需要额外一步，而 FGZ 在
+      Proposition 2.6 之后的 Remark 里**明确否认**这一步逐字：
+      'although V(E, p) in the above proposition is free over ℒ_-, it is **not in general a direct
+      sum of Verma modules** … As a counterexample one can choose the case in which p·p is a
+      nonpositive even integer.' 旧 note 逐字写着「若日后为『Fock 模在负模下自由』单建节点，
+      本边应改指向它并去掉 inferred」。
+      **该卡已于 2026-09-11（small-backlog-10）建成**
+      （worldsheet.fock-module-free-over-negative-virasoro，推导 --via-fgz-1986，
+      源即 Prop 2.6(i) 逐字），本边据此改指并去掉 inferred。
+      ⚠ FGZ 的那条 Remark **随本边保留**：它既是旧边必须标 inferred 的理由，
+      也是新卡不能被 Verma 卡顶替的理由（新卡的"本命题不断言 (a)"逐字收录了它）。
+      ⚠ 同款改指已在 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 做过。
 sources:
   - ref: fgz-1986
     loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"

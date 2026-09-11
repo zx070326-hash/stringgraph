@@ -1,0 +1,208 @@
+id: worldsheet.bosonic-relative-cohomology-dimension--via-fgz-1986
+target: worldsheet.bosonic-relative-cohomology-dimension
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.bosonic-relative-cohomology-vanishing
+    note: |
+      供给 Euler–Poincaré 那一步**必须**的前提：H^i_∞ = 0 对 i ≠ 0（Theorem 2.7(i)）。
+      没有它，形式 Euler 特征标 Σ_i (−1)^i dim H^i 只给一个交错和，**不等于** dim H⁰。
+      **非 inferred，两条理由**：
+      (1) FGZ 在 Theorem 2.7 正上方逐字把 "**the vanishing theorem (Theorem 1.12)**" 列为输入，
+          而 (i) 就是 Thm 1.12 特化到 V(E,p) 的结果（同一段的 Proposition 2.4 也把"消灭"
+          与"维数"写在**同一条**命题里，逐字见 sources）；
+      (2) 目标卡与本边所指的卡是**同一个编号定理的两条**（2.7(ii) 与 2.7(i)），
+          FGZ 自己在定理后一句用 "Theorem 2.7 implies that the cohomology groups are trivial
+          except for a one-dimensional H⁰_∞ …" 把两条一起读。
+      ⚠ **本边把目标卡的 (H1)–(H4) 与 p ≠ 0 一并继承**：本推导不重复论证那些前提，
+      只在目标卡里把它们逐条写出。
+      ★ **不构成循环**：(i) 的证明（Prop 2.6(i) → Thm 1.12）**不用**维数公式；
+      方向是 2.6 → 1.12 → 2.7(i) → 2.7(ii)，与图上的边同向。
+      ★ 本边同时把目标卡需要的**对象接口**（ℒ = Virasoro、相对半无限上同调、本图 BRST 侧的
+      对接）经消灭卡继承下来——那张卡的推导已挂 worldsheet.virasoro-algebra-v2、
+      worldsheet.brst-quantization-v2、worldsheet.brst-nilpotent-at-c26 三条接口边，
+      本推导**不重复挂**，以免同一条论证被记两次（与 researcher §9.9.4 对 FGZ 四条输入
+      逻辑冗余的订正同一精神）。
+  - id: worldsheet.fock-module-free-over-negative-virasoro
+    note: |
+      供给 **Proposition 2.4** 的核心假设："V 是 𝒪₀ 里的**厄米 ℒ⁻-自由** ℒ-模"——
+      Prop 2.4 正是把 dim H⁰ 定成 Eq. [2.3] 中常数项系数的那条命题，而它对 V 的三条假设里
+      **ℒ⁻-自由性**是唯一需要对 V(E,p) 另行验证的一条，验证它的就是 **Proposition 2.6(i)**
+      （逐字 'V(E, p) is a free ℒ^--module'，前提 号差 (D−1,1)、D ≥ 2、**p ≠ 0**）。
+      **本边非 inferred**：FGZ 在 Theorem 2.7 正上方逐字把 "**the first part of Proposition 2.6**"
+      列为输入（brst-cohomology-sources.md §9.3），是原文明写的依赖。
+      ★ **p ≠ 0 的真正落点就是本边指向的这张卡**（researcher §9.9.2 的逐字订正）：
+      Prop 2.4 的语句里不出现 p、不出现 D、不出现号差；p ≠ 0 只用于验证 V(E,p) 的 ℒ⁻-自由性。
+      目标卡把 "p ≠ 0" 写进断言是照 Theorem 2.7 的语句（"Suppose p ≠ 0"）。
+      ⚠ **本边与上一条边在 p ≠ 0 上是同一个来源的两条通路**（消灭卡也经这张自由性卡）：
+      这是 FGZ 自列依赖清单冗余的图上投影，见 gaps。
+      ⚠ Prop 2.4 的另外两条假设（**厄米**、属于 **𝒪₀**）本图**没有**对应的卡：
+      厄米性由 FGZ 同页逐字 'π(L_m)* = π(L_{−m}), so that V(E, p) is a Hermitian ℒ-module' 给出
+      （目标卡 (H2) 已收），𝒪₀ 的定义在 FGZ §1 本图未回查（L0）。见 gaps。
+sources:
+  - ref: fgz-1986
+    loc: "**Theorem 2.7**, p.8445 右栏，逐字 'THEOREM 2.7. Suppose p ≠ 0. Then (i) H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0, and (ii) dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2), if 1 − p·p/2 is a nonnegative integer and 0 otherwise.'（本推导只证 (ii)）"
+    note: |
+      L1 页图逐字，literature/extractions/brst-cohomology-sources.md **§9.1**
+      （researcher 2026-09-11；期刊页 8445 = PMC 扫描页 pnas00326-0018）。
+  - ref: fgz-1986
+    loc: "**Theorem 2.7 正上方一句**（p.8445 右栏）逐字：'In this case the vanishing theorem (**Theorem 1.12**), the Euler–Poincaré principle (**Proposition 1.3**), **Proposition 2.4**, and **the first part of Proposition 2.6** imply the following.'"
+    note: |
+      L1，§9.3。★★ FGZ **原文明写**的四条输入使本推导的证明链可追溯，也是本推导两条边
+      **不标 inferred** 的依据。
+      ★ 同时是本推导 status 的关键证据与关键限制：措辞是 **"imply the following"**，
+      即 FGZ 把 Theorem 2.7（含 (ii)）当作前四条的**直接推论**，**本身不另给证明**。
+      ⚠ **四条输入在逻辑上冗余**（researcher 第二轮 §9.9.4）：Prop 2.4 = Thm 1.12 + Prop 1.3，
+      故 "Thm 2.7 → Thm 1.12" 与 "Thm 2.7 → Prop 2.4 → Thm 1.12" 是同一条论证的两次记账。
+      见 gaps。
+  - ref: fgz-1986
+    loc: "**Proposition 2.4**, p.8445 左栏下部，逐字 'PROPOSITION 2.4. dim H^m_∞(ℒ, ℒ₀; V) = 0 for m ≠ 0, and for m = 0 is equal to the coefficient of 1 in Eq. 2.3, when V is a Hermitian ℒ⁻-free ℒ-module in 𝒪₀.'；其紧邻上文（含 p_{(D)}(n) 的定义）逐字 'Let us consider a general ℒ⁻-free, Hermitian ℒ-module V. Then by Theorem 1.12 all nonzero degree cohomology groups vanish. To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. The formal Euler character is  ch_q V · Σ_{m∈Z} (−1)^m ch_q Λ^m_∞ = q^{−1} φ²(q) ch_q V  [2.3]  where φ(q) = Π_{n≥1}(1 − q^n). We denote by p_{(D)}(n) the coefficient of q^n in φ(q)^{−D}, so that p_{(1)}(n) is the classical partition function. This implies the following.'"
+    note: |
+      L1，§9.9.1 与 §9.9.3（researcher 2026-09-11 第二轮页图复核；**这一轮之前本图对 Prop 2.4
+      只有一句转述，且被消灭卡记为未决歧义**）。
+      ★★ **本条是本推导的核心来源**：它同时给出
+      (a) 维数那一步的一般命题（Prop 2.4），
+      (b) Eq. [2.3] 的形式 Euler 特征标 q^{−1}φ²(q)·ch_q V，
+      (c) **p_{(D)}(n) 的定义**（φ(q)^{−D} 中 q^n 的系数）。
+      ⚠ 两条转录注记：(1) "ℒ⁻-free" 的上标减号在扫描件上极小，按上下文与 Thm 1.12 的假设锁定；
+      (2) 𝒪₀ 的定义在 §1，本图未回查（L0）。
+      ★ 强度措辞 "This implies the following" ⇒ **Prop 2.4 自身不另给证明**。
+  - ref: fgz-1986
+    loc: "**Proposition 1.3**, p.8443（Euler–Poincaré 原理）；**Theorem 1.12**, p.8444（V 是 n_--free 且带非退化厄米形式 ⇒ H^m_∞(g, g₀; V) = 0, m ≠ 0）；**Proposition 2.6**, p.8445 逐字 'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} […], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'"
+    note: |
+      L1（Prop 2.6 逐字见 §9.2 表第 5 行；Thm 1.12 / Prop 1.3 的内容见 §1.4 编号表）。
+      ⚠ **本图没有 Prop 1.3 / Thm 1.12 / Prop 2.4 的卡**（见 gaps）：本推导对这三条的
+      可追溯性止于"数学期刊上署名的编号结果"。
+      ⚠ 本推导只用 Prop 2.6 的**第一部分**；第二部分（横向空间 T，经 Kac 行列式 refs 10, 11）
+      FGZ 派给了显式代表元的构造，目标卡"不断言 (h)"。
+  - ref: fgz-1986
+    loc: "**p.8445 左栏**（V(E,p) 的分次与形式特征标）逐字：'The module V(E, p) is also a graded ℒ-module under the following definition of grading: deg α^{μ₁}_{m₁} … |p⟩ = (Σ^N_{i=1} m_i) − (p·p/2). The formal character of V(E, p) is given by ch_q(V(E, p)) = q^{p·p/2}φ(q)^{−D}.'；**Theorem 2.7 之后一句** 'Theorem 2.7 implies that the cohomology groups are trivial except for a one-dimensional H^0_∞ in the positive-definite case, but H^0_∞ can be arbitrarily large in the indefinite case.'"
+    note: |
+      L1（§9.6、§9.5）。ch_q V(E,p) 的这条逐字是本推导第 3 步（把 ch_q V 代进 Eq. [2.3]）的
+      **唯一输入**；没有它，24 这个下标算不出来。
+summary: |
+  **FGZ 的论证（四步，前三步是 FGZ 明写的推论链，第 3 步的代数是本图补的一行）**：
+
+  1. **一般命题**：对**任意**属于 𝒪₀ 的厄米 ℒ⁻-自由 ℒ-模 V，Proposition 2.4 给出
+     dim H^m_∞(ℒ, ℒ₀; V) = 0 (m ≠ 0)，且 **dim H⁰ = Eq. [2.3] 中常数项（"the coefficient of 1"）
+     的系数**。Prop 2.4 自身 = Theorem 1.12（消灭）+ Proposition 1.3（Euler–Poincaré），
+     原文逐字 "This implies the following"，不另给证明。
+     ⇒ 消灭那一半正是本推导第一条依赖边所指的卡（Theorem 2.7(i)）。
+
+  2. **验证假设**：V = V(E,p) 的 ℒ⁻-自由性由 **Proposition 2.6(i)** 给出（前提 号差 (D−1,1)、
+     D ≥ 2、**p ≠ 0**），厄米性由同页 π(L_m)* = π(L_{−m}) 给出。
+     ⇒ **p ≠ 0 只在这一步进入**（researcher §9.9.2）。
+
+  3. **算 Eq. [2.3] 的常数项**（这一行 FGZ 不印，是把上面两条逐字相乘的直接代数）：
+       Eq. [2.3] 左端 = q^{−1} φ²(q) · ch_q V(E,p)
+                      = q^{−1} φ²(q) · q^{p·p/2} φ(q)^{−D}
+                      = q^{p·p/2 − 1} φ(q)^{2−D}.
+     代 (H3) 的 **D = 26** 得 q^{p·p/2 − 1} φ(q)^{−24}。取 q⁰ 项的系数即取
+     φ(q)^{−24} 中 q^{1 − p·p/2} 的系数，按 (H5) 的定义就是 **p_{(24)}(1 − p·p/2)**。
+     ⇒ **24 = D − 2 这个下标完全由 D = 26 决定**（目标卡"不断言 (c)"的补注）。
+     ⇒ **分段的第二支也在这一步出来**：若 1 − p·p/2 不是非负整数，则 q^{1−p·p/2} 这一项
+     根本不在形式幂级数 φ(q)^{−24} = Σ_{n≥0} p_{(24)}(n) q^n 的支撑集里，系数为 **0**。
+
+  4. **结论**：dim H⁰_∞(ℒ, ℒ₀, V(E,p)) = p_{(24)}(1 − p·p/2)（1 − p·p/2 为非负整数时），
+     否则为 0，即 Theorem 2.7(ii)。
+
+  **这一步不做**：正定性与"H⁰ ≅ 横向空间"是 **Theorem 2.8**；显式代表元的构造用
+  Proposition 2.6 的**第二部分**（经 Kac 行列式）。两者都不在本推导里（目标卡"不断言 (b)(g)(h)"）。
+
+  ⚠⚠ **【FGZ 自列的四条输入不是四条互相独立的输入】**（researcher 第二轮 §9.9.4）
+  Prop 2.4 = Thm 1.12 + Prop 1.3，故 "Thm 2.7 → Thm 1.12" 与 "Thm 2.7 → Prop 2.4 → Thm 1.12"
+  是**同一条论证的两次记账**。本推导按此**只挂两条边**（消灭卡 + 自由性卡），
+  而不把 Thm 1.12 / Prop 1.3 / Prop 2.4 分别当成三条独立输入——它们在本图都没有卡，
+  且其中两条已经由消灭卡承载。
+
+  【为什么标 rigorous】四条，与
+  worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 **同一口径**：
+  (1) 结论是**带编号的定理**（Theorem 2.7(ii)），陈述已逐字核实（L1 页图）；
+  (2) **证明链是 FGZ 自己列出的**（"the vanishing theorem (Theorem 1.12), the Euler–Poincaré
+      principle (Proposition 1.3), Proposition 2.4, and the first part of Proposition 2.6
+      imply the following"），每一环都有编号，无"一点思考就知道"式的断言；
+  (3) 论证全在有定义的对象里（形式幂级数的系数比较、分次模的特征标、半无限上同调），
+      **不涉及路径积分、不涉及收敛性问题**——φ(q)^{−D} 一律作形式幂级数处理；
+  (4) 期刊是 PNAS（Communicated by I. M. Singer），作者三人是数学家，这是数学文献。
+  ⚠ **限制**：FGZ 的措辞是 "imply the following"，即本文**不给 Theorem 2.7 的独立证明**，
+  rigorous 是按"已核实的编号定理 + 该文明写的输入"给的，不是按逐行复核给的（见 gaps）。
+  ⚠ 第 3 步的那行代数是**本图补的**，但它是两条逐字公式的直接相乘 + 取系数，
+  属 docs/STATUS_LEVELS.md 说的"有限步初等计算"，不构成降级理由；且它不改变结论，
+  只解释 24 从哪来。
+gaps:
+  - "**fgz-1986 是 PNAS 公告体裁（5 页），Theorem 2.7 没有独立证明**：原文措辞是前四条
+     「imply the following」。本推导的 rigorous 依据的是 (a) 逐字核实的定理陈述、(b) 该文明写的
+     四条输入、(c) 每条输入本身都是该文的编号命题。**未做**的是：逐行复核 Theorem 1.12 的证明
+     （p.8444，用 Kähler 恒等式 Theorem 1.9 与谱序列滤过 Prop 1.10/1.11）与 Proposition 1.3
+     （Euler–Poincaré）。researcher 未能定位 FGZ 的后续长文。"
+  - "**本图没有 Proposition 1.3（Euler–Poincaré 原理）的卡**：本推导第 1 步靠它把上同调维数
+     换成复形的分次维数交错和。同一缺口在超弦侧也有——
+     worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989 的 gaps 第一条
+     （reviewer-batch23）已记 'Euler–Poincaré 原理在本图无节点'，
+     `search` 无命中。⇒ 这是**跨卡的同一条缺口**，值得单建一张数学卡后一并接线。"
+  - "**本图没有 Proposition 2.4 与 Theorem 1.12 的卡**：本推导把 Prop 2.4 的两半分开记账——
+     消灭那一半经 worldsheet.bosonic-relative-cohomology-vanishing 上图，维数那一半
+     （'coefficient of 1 in Eq. 2.3'）**只在本推导的 summary 与 sources 里以逐字形式存在**，
+     图上没有对应节点。⇒ 后果：若日后有人要独立引用「厄米 ℒ⁻-自由模上 dim H⁰ = Euler 特征标
+     常数项」这条一般命题，须新建卡；届时**必须同时处理 §9.9.4 的重复计数**
+     （Thm 1.12 与 Prop 1.3 既直接进入 Thm 2.7 又经 Prop 2.4 间接进入）。"
+  - "**Proposition 2.4 的另外两条假设本图未上图**：(a) **厄米性**——FGZ 只写到
+     'π(L_m)* = π(L_{−m}), so that V(E, p) is a Hermitian ℒ-module'，本图的
+     worldsheet.fock-indefinite-form 断言的是**双线性型**的不定性与对角形，
+     两者的同一性 FGZ 未写成陈述（消灭卡的同名边因此标 inferred）；本推导**不挂那条边**，
+     因为维数那一步（Euler–Poincaré + 系数比较）**不用**形式的非退化性，只用分次维数。
+     (b) **范畴 𝒪₀**——定义在 FGZ §1，本图未回查（L0）；V(E,p) 属不属于 𝒪₀ 由 FGZ 自己负责。
+     关闭方式：取 FGZ §1 的页图。"
+  - "**第 3 步的代数（Eq. [2.3] 常数项 = p_{(24)}(1 − p·p/2)）在 FGZ 原文里不印**：
+     原文直接从 Prop 2.4 跳到 Theorem 2.7(ii) 的显式公式。本推导的 summary 补出了这一行
+     （q^{−1}φ²(q)·q^{p·p/2}φ(q)^{−D} = q^{p·p/2−1}φ(q)^{2−D}，D = 26 ⇒ φ(q)^{−24}）。
+     它是两条逐字公式的直接相乘，但**未经 reviewer 独立复核**；
+     若要按 docs/STATUS_LEVELS.md 的 rigorous 例外条款记账，需补 `reviewer-verified`。
+     ⚠ 该行**不影响结论**（结论是 FGZ 逐字印出的），只影响'为什么是 24'这句解释的可追溯性。"
+  - "**(ℒ, ℒ₀) 相对复形与本图 {b₀Ψ = 0, L₀Ψ = 0} 的字典，FGZ 未写出**。目标卡
+     「本命题不断言 (f)」已声明不断言逐字同一。超弦侧有 LZ Definition 2.2 把两者显式对上
+     （B^r = Ker b₀、F^n = B^{n−κ} ∩ Ker K），玻色侧没有同级别的逐字对应。
+     ⇒ 本卡给出的**数**要被读成「本图相对复形上同调的维数」，须先补这条字典。"
+  - "**p = 0 时的维数本图未核**：FGZ Proposition 2.8 / 2.9 与其推论把 p = 0 列为例外情形
+     （Theorem 1.12 不适用），但本图只核到这一层，没有 p = 0 时 dim H⁰ 的逐字陈述。
+     ⇒ 目标卡「不断言 (d)」。超弦侧有 LZ Proposition 5.5 的逐字失效机制，玻色侧没有。"
+  - "**分段第二支（1 − p·p/2 非非负整数 ⇒ 维数 0）的读法未经二次核实**：本推导按
+     'φ(q)^{−24} 的支撑集是非负整数次幂' 解释它。这与 FGZ 的语句一致，
+     但 FGZ 没有把这句解释印出来；若 1 − p·p/2 为**负整数**时另有别的机制（如 Prop 2.4
+     的 𝒪₀ 条件失效），本图无从分辨。⇒ 需要时请 auditor 用同一页图复核 𝒪₀ 的定义。"
+notes: |
+  【本推导与消灭卡推导的分工】
+  worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 的 summary 第 4 步逐字写着
+  「**（不属本卡）**维数由 Proposition 1.3（Euler–Poincaré）与 Proposition 2.4 定出，
+  得 Theorem 2.7(ii) 的 p_{(24)}(1 − p·p/2)。本推导**不走这一步**。」
+  ⇒ **本推导就是那一步**。两条推导合起来覆盖 Theorem 2.7 的 (i)(ii)，不重叠。
+  那条推导的 gaps 第二条（"Proposition 2.4 的前提本图未核实 … 若日后要把 (ii) 建卡，
+  必须先核它"）**已由 researcher 第二轮 §9.9 关闭**（Prop 2.4 的三条假设：厄米、ℒ⁻-自由、
+  属 𝒪₀），本推导据此建立。
+  ⚠ 那张消灭卡的 statement 与 notes 里仍有"Prop 2.4 的歧义留给 reviewer / 下一轮 researcher"
+  的旧文字。按 graph/CLAUDE.md 的换代纪律，**不就地改**已提交卡的正文；本条记在此处，
+  待那张卡下次实质换代时同步。
+
+  【为什么只有两条依赖边】
+  FGZ 自列四条输入（Thm 1.12、Prop 1.3、Prop 2.4、Prop 2.6 的第一部分），但
+  (a) Prop 2.4 = Thm 1.12 + Prop 1.3（§9.9.4），三者在图上都没有卡；
+  (b) Thm 1.12 那一半已由消灭卡承载，本推导经第一条边继承；
+  (c) Prop 2.6(i) 有卡，即第二条边。
+  ⇒ 两条边，不重复记账。对象接口边（Virasoro 代数、BRST 量子化、幂零性）同样经消灭卡继承，
+  本推导不重挂——这与 docs/STATUS_LEVELS.md「接口边」那节的精神一致：
+  接口边应当挂在**第一次需要那个对象**的推导上，而不是每张下游卡各挂一份。
+
+  【有效状态（2026-09-11 实测）】
+  两条依赖当日的 effective 都是 rigorous，故本卡 effective = rigorous，
+  与消灭卡 worldsheet.bosonic-relative-cohomology-vanishing 同级。
+  ⚠ 本卡的 effective **完全跟随消灭卡**：接口边（Virasoro、BRST 量子化、幂零性）都挂在
+  消灭卡的推导上，若日后那些定义卡被拆分或降级，本卡会随消灭卡一起被压低。
+  **那种降级不会是 FGZ 的论证有缺口**，而是本图把"FGZ 的对象 = 本图的对象"这一步
+  经那些卡记账的后果。
+
+  按 researcher 2026-09-11 第二轮抽取记录
+  literature/extractions/brst-cohomology-sources.md **§9.9**（§9.9.1 Prop 2.4 逐字、
+  §9.9.2 与 Thm 2.7 的分工表、§9.9.3 Prop 2.4 的依赖与 p_{(D)}(n) 的定义、
+  §9.9.4 四条输入的冗余）与 **§9.1/§9.2/§9.5/§9.6** 建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
