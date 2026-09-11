@@ -41,7 +41,7 @@ depends_on:
       该节点的假设 hη : ∀ μ, η μ * η μ = 1 由此传入本命题。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{traceState, secondState, polSqState, levelTwoScalar, levelTwoScalar_mem_levelSubmodule_two, mode_one_apply_traceState, mode_one_apply_secondState, mode_one_apply_polSqState, mode_two_apply_traceState, mode_two_apply_secondState, mode_two_apply_polSqState, pairing_traceState_traceState, pairing_traceState_secondState, pairing_traceState_polSqState, pairing_secondState_secondState, pairing_secondState_polSqState, pairing_polSqState_polSqState, pairing_levelTwoScalar_self, Lop_one_apply_levelTwoScalar, Lop_two_apply_levelTwoScalar, Lop_apply_levelTwoScalar_of_three_le, levelTwoScalar_mem_physSubmodule, four_mul_sub_nine_mul_coeff_two, four_mul_sub_nine_mul_coeff_three, pairing_levelTwoScalar_physical, exists_levelTwoScalar_mem_physSubmodule, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule}"
+    loc: "formal/StringFormal/NoGhost/LevelTwo.lean :: StringFormal.NoGhost.Fock.{traceState, secondState, polSqState, levelTwoScalar, levelTwoScalar_mem_levelSubmodule_two, mode_one_apply_traceState, mode_one_apply_secondState, mode_one_apply_polSqState, mode_two_apply_traceState, mode_two_apply_secondState, mode_two_apply_polSqState, pairing_traceState_traceState, pairing_traceState_secondState, pairing_traceState_polSqState, pairing_secondState_secondState, pairing_secondState_polSqState, pairing_polSqState_polSqState, pairing_levelTwoScalar_self, Lop_one_apply_levelTwoScalar, Lop_two_apply_levelTwoScalar, Lop_apply_levelTwoScalar_of_three_le, levelTwoScalar_mem_physSubmodule, four_mul_sub_nine_mul_coeff_two, four_mul_sub_nine_mul_coeff_three, pairing_levelTwoScalar_physical, exists_levelTwoScalar_mem_physSubmodule, pairing_levelTwoScalar_intercept_one, levelTwoScalar_intercept_one_mem_physSubmodule, levelTwo_norm_discriminant}"
     note: |
       本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 0f1143a、fad4944、eba9cab、f94bdc9、
       3963281、ea303c5，合并进 main 的提交 c32f026。全文 grep `sorry` 零命中。
@@ -103,10 +103,19 @@ gaps:
     第 (1) 条）。formal/TODO.md 的 `negative-norm-above-26` 条目对此有同样的登记。
     对下游的「鬼」用途这一条无关紧要（一个负模态就够），但对「level 2 标量模」这个读法要紧。
   - |
-    (ii) **判别式的分类讨论未形式化**。第 (4) 条只说判别式是 4(D−1)(D−25)（这句本身在 Lean 里
-    也只出现在文档注释中，不是定理）；D ≤ 24 / D = 25 / D ≥ 26 的三分与 D = 26 时
-    2(8a−3)(a−1) 在 3/8 < a < 1 上为负，都在原卡 --via-level-two-gram 那一侧（rigorous），
-    本推导不覆盖。
+    (ii) **判别式的分类讨论未形式化**（**2026-09-11 缩小**）。
+    ~~第 (4) 条只说判别式是 4(D−1)(D−25)，这句本身在 Lean 里也只出现在文档注释中，不是定理~~
+    ——**已关闭**：formalizer（small-2，合并提交 6853ad8）在同一文件补了
+    `Fock.levelTwo_norm_discriminant {R} [CommRing R] (D : ℕ) (a₀ : R) :
+    64*(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D−74)² − 4(D−1)(D−25)`，
+    `ring` 一行，**任意交换环**（不需要 ℚ-代数，对 a₀、D 无假设）。⇒ 第 (4) 条末句逐字有定理。
+    **仍未形式化的是符号分析与分类**：
+      · 「1 ≤ D ≤ 25 ⇒ 方括号对一切 a₀ 非负；D > 25 ⇒ 存在 a₀ 使其为负」需要**有序域**上的判断
+        （配方后 = (32a₀+2D−74)²/64 − (D−1)(D−25)/16），LevelTwo.lean 的 docstring 逐字写
+        "That sign analysis is *not* proved here; only the algebraic identity is."；
+      · D ≤ 24 / D = 25 / D ≥ 26 的三分，以及 D = 26 时 2(8a−3)(a−1) 在 3/8 < a < 1 上为负，
+        都在原卡 --via-level-two-gram 那一侧（rigorous），本推导不覆盖。
+    ⚠ 注意这两条不是同一件事：恒等式是代数（已机检），符号分析是序（未机检）。
   - |
     (iii) **第 (5) 条只证存在、不证唯一**。`exists_levelTwoScalar_mem_physSubmodule` 把解代回去
     验证；由第 (3) 条两式作除法得唯一性这一步在 Lean 中未单列（一行域上除法）。
@@ -140,9 +149,11 @@ notes: |
     因为分母已清；原卡写成 ⟨ψ₂,ψ₂⟩ = (D−1)[…]·2/(4a−9)² 时必须先设 4a ≠ 9。
   - 更弱：第 (1)(2) 条要求 η^{μμ}η_{μμ} = 1（`hη`），mostly-plus 满足；原卡的手算同样默认这一点。
 
-  【gaps (ii) 的最小补法（2026-09-11，curator，lean-wire-7）】目标 (4) 末句「判别式为 4(D−1)(D−25)」
-  要成为定理，只需 LevelTwo.lean 补一行环上恒等式
-  64·(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D − 74)² − 4(D−1)(D−25)（`ring` 可闭），
-  已在目标卡 notes 登记、提请 formalizer。补上前 gaps (ii) 照旧。
+  【gaps (ii) 的最小补法（2026-09-11，curator，lean-wire-7）→ **已落地**】当时提请 formalizer
+  在 LevelTwo.lean 补一行环上恒等式 64·(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D−74)² − 4(D−1)(D−25)；
+  formalizer（small-2，合并提交 6853ad8）已补为 `Fock.levelTwo_norm_discriminant`，
+  且比提议的更一般（任意交换环，而非 ℚ-代数）。gaps (ii) 已相应改写：代数那半关闭，
+  有序域上的符号分析那半保留。**本条记录保留**，因为它是「图侧提出的最小 Lean 缺口
+  被 formalizer 当日补上」的一次完整往返，对校准「图-形式化」接口有用。
 author: curator
 created: "2026-09-11"

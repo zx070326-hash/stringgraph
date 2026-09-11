@@ -137,13 +137,22 @@ notes: |
   `invTwo R * zeroModeSq η a + 2 = a₀`（第 (2) 条的形式）或
   `zeroModeSq η a = 2 * a₀ - 4`（第 (3)(4) 条的形式），两者在 ℚ-代数上等价。
 
-  【(4) 末句「判别式为 4(D−1)(D−25)」在 Lean 里只是 docstring（2026-09-11，curator，lean-wire-7）】
-  推导 --via-lean 的 gaps (ii) 已登记：这句话在 LevelTwo.lean 中只出现在文档注释，不是定理。
-  待 formalizer 补一行环上恒等式
-      64·(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D − 74)² − 4(D−1)(D−25)
-  （`linear_combination`/`ring` 一行；curator 手展两边都是 1024a₀² + (128D − 4736)a₀ − 192D + 5376），
-  它是「配方 + 判别式」的清分母形式，在任意交换 ℚ-代数上成立，补上后 (4) 整条即逐字 formalized。
-  在此之前 (4) 的 formalized 只覆盖闭式本身，判别式那句按 gaps (ii) 读。
+  【(4) 末句「判别式为 4(D−1)(D−25)」— **已是定理**（2026-09-11 补齐；原登记见下）】
+  lean-wire-7 当日登记的是「这句话在 LevelTwo.lean 中只出现在文档注释，不是定理」，
+  并提请 formalizer 补一行环上恒等式。**formalizer（small-2，合并提交 6853ad8）已补**：
+
+      StringFormal.NoGhost.Fock.levelTwo_norm_discriminant
+        {R : Type*} [CommRing R] (D : ℕ) (a₀ : R) :
+        64 * (16*a₀^2 + (2*D - 74)*a₀ + 84 - 3*D)
+          = (32*a₀ + 2*D - 74)^2 - 4*(D - 1)*(D - 25)
+
+  （`ring` 一行，**任意交换环**，比预想的 ℚ-代数还弱；`D` 是任意自然数的像，对 a₀ 无假设。
+  curator 手展两边都是 1024a₀² + (128D − 4736)a₀ − 192D + 5376，与之吻合。）
+  ⇒ (4) 末句现在逐字有定理，--via-lean 的 gaps (ii) 相应缩小。
+  ⚠ **仍不在 Lean 的是符号分析**：「1 ≤ D ≤ 25 时方括号对一切 a₀ 非负、D > 25 时存在 a₀ 使其为负」
+  需要有序域上的判断，LevelTwo.lean 的 docstring 逐字写着 "That sign analysis is *not* proved
+  here; only the algebraic identity is."；(b) 的三分（D ≤ 24 / D = 25 / D ≥ 26）同样未形式化。
+  这两条按 --via-lean 的 gaps (ii) 读，且本卡正文的「不断言」(b) 本来就把三分排除在外。
 
   【Polchinski loc 订正（2026-09-11，curator，lean-wire-7；依 researcher 原书核实）】
   旧 source loc「(4.1.19)–(4.1.28) 区间，p.124；式号未核实」已改；详见该 source 的 note。
