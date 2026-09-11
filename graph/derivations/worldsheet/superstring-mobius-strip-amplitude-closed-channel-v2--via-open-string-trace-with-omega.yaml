@@ -87,15 +87,26 @@ depends_on:
       ⚠ 本边**不**借该卡断言 (2) 的**枚举性**（'The two possibilities' 带着「与闭超弦一致耦合」
       的前提，见该卡「不断言 (c)」）；本推导只需要「NS 扇区上做了一个 exp(πiF) 的本征投影」。
   - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    inferred: true
     note: |
-      供给**费米迹的记号与对象**：Z^α_β(τ) 的定义（§10.7 (10.7.7)–(10.7.8)，
-      'these traces are for a pair of dimensions' ⇒ 8 个横向费米子给四次幂）与 (10.7.9) 的组合。
-      (10.8.18) **第一行的分子** Z⁰₁(2it)⁴Z¹₀(2it)⁴ 与分母里的 Z⁰₀(2it)⁴ 全用这套记号。
-      **非 inferred**：§10.8 通篇使用 §10.7 的 Z^α_β 记号，圆柱处（#E65）逐字写明
-      'with the fermionic trace (10.7.9) from one side of the type II string'。
+      供给**两件事**，其中第二件是本图补的识别，故整条边按下面的记账标 **inferred**：
+        **(i) 费米迹的记号与对象**：Z^α_β(τ) 的定义（§10.7 (10.7.7)–(10.7.8)，
+             'these traces are for a pair of dimensions' ⇒ 8 个横向费米子给四次幂）与 (10.7.9)
+             的组合。(10.8.18) **第一行的分子** Z⁰₁(2it)⁴Z¹₀(2it)⁴ 与分母里的 Z⁰₀(2it)⁴
+             全用这套记号。
+             **这一件本身是非 inferred 的**：§10.8 通篇使用 §10.7 的 Z^α_β 记号，圆柱处（#E65）
+             逐字写明 'with the fermionic trace (10.7.9) from one side of the type II string'。
+        **(ii) (10.8.3) 第二式 Z^α_β(it) = Z^β_{−α}(i/t) 在 Möbius 这一支的使用**：
+             **原书在 (10.8.18) 处直接写等号**，既不重述 (10.8.3) 也不写 s = π/4t 的换元
+             （那句是**圆柱**处的，#E66）。⇒ 这是本图补的识别。
+      ★★【2026-09-11 改标 inferred，batch27-fix / reviewer-batch27 P1】旧版把本边整条标为
+      **非 inferred**，却同时声称它「供给 (10.8.3) 第二式」——而**同一个未写出步骤**的另一条边
+      （math.dedekind-eta-s-transformation，供 (10.8.3) 第一式）标的是 **inferred**：
+      **同一步两种记账**。lead 裁定统一为**两条都 inferred**；Klein 瓶那张同款边同时改。
+      ⚠ **记账口径**：一条边只要它供给的**任一件**在 sources 的 loc 处找不到论证，
+      整条边就标 inferred，并在 note 里逐件写明哪件有来源、哪件是本图补的。
       ⚠ 只借迹的**形式与记号**，**不借**那张卡的结论（横向费米子个数是 8 的倍数）。
-      ⚠ 同时供给 (10.8.3) 第二式 Z^α_β(it) = Z^β_{−α}(i/t) 的对象——它带 **naive** 限定
-      （见 gaps 第五条）。
+      ⚠ (10.8.3) 第二式带 **naive** 限定（见 gaps 里 (10.8.3) 那一条）。
   - id: math.dedekind-eta-s-transformation
     inferred: true
     note: |
