@@ -883,4 +883,106 @@ theorem towerBigrade_le_conjFreeSlice_sup_towerSpurious (hD : 2 ≤ D)
 
 end Elimination
 
+/-! ### Nondegeneracy of the Fock and tower forms -/
+
+section Nondegenerate
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- **The diagonal entries of the Fock Gram matrix are nonzero** over a characteristic-zero
+ring without zero divisors: `monomialNorm η d = ∏ (n η_μ)^{d} d!`, and each factor is a
+nonzero natural times a unit (`η_μ² = 1`).
+
+`NoGhost/FockGram.lean` only has the *ordered* version `monomialNorm_pos` (which needs
+`0 < η μ`, i.e. a Euclidean metric) and the characteristic-`2` counterexample; the
+characteristic-zero statement for an indefinite `η` is what the nondegeneracy argument
+needs. -/
+theorem Fock.monomialNorm_ne_zero [NoZeroDivisors R] [CharZero R] {η : Fin D → R}
+    (hη : ∀ μ, η μ * η μ = 1) (d : Osc D →₀ ℕ) : Fock.monomialNorm η d ≠ 0 := by
+  classical
+  rw [Fock.monomialNorm, Finsupp.prod]
+  refine Finset.prod_ne_zero_iff.mpr fun v _ => ?_
+  refine mul_ne_zero (pow_ne_zero _ ?_) (Nat.cast_ne_zero.mpr (Nat.factorial_ne_zero _))
+  show ((v.2 : ℕ) : R) * η v.1 ≠ 0
+  refine mul_ne_zero (Nat.cast_ne_zero.mpr v.2.ne_zero) fun hz => ?_
+  have h := hη v.1
+  rw [hz, mul_zero] at h
+  exact one_ne_zero h.symm
+
+/-- **The Fock form is nondegenerate** over a characteristic-zero ring without zero divisors
+(graph node `worldsheet.covariant-fock-space-form`; `NoGhost/TowerNull.lean`'s gap list item 2
+records the absence of this statement).  Pairing against the monomial `x^d` reads off the
+coefficient of `x^d` up to the nonzero factor `monomialNorm η d`. -/
+theorem Fock.eq_zero_of_pairing_left_eq_zero [NoZeroDivisors R] [CharZero R] {η : Fin D → R}
+    (hη : ∀ μ, η μ * η μ = 1) {P : Fock D R}
+    (h : ∀ Q : Fock D R, Fock.pairing η P Q = 0) : P = 0 := by
+  classical
+  refine MvPolynomial.ext _ _ fun d => ?_
+  rw [MvPolynomial.coeff_zero]
+  have h1 := h (MvPolynomial.monomial d 1)
+  rw [Fock.pairing_comm, Fock.pairing_monomial_left, one_mul] at h1
+  exact (mul_eq_zero.mp h1).resolve_left (Fock.monomialNorm_ne_zero hη d)
+
+/-- **The tower form is nondegenerate**: rung by rung, by `Fock.eq_zero_of_pairing_left_eq_zero`
+(the rungs are mutually orthogonal, so testing against a single-rung vector isolates one
+component).  This closes gap item 2 of `NoGhost/TowerNull.lean`. -/
+theorem Fock.eq_zero_of_towerPairing_left_eq_zero [NoZeroDivisors R] [CharZero R]
+    {η : Fin D → R} (hη : ∀ μ, η μ * η μ = 1) {X : TowerFock D R}
+    (h : ∀ Y : TowerFock D R, Fock.towerPairing η X Y = 0) : X = 0 := by
+  refine Finsupp.ext fun j => ?_
+  show X j = 0
+  refine Fock.eq_zero_of_pairing_left_eq_zero hη fun Q => ?_
+  have hj := h (Finsupp.single j Q)
+  rw [Fock.towerPairing_comm, Fock.towerPairing_single_left] at hj
+  rw [Fock.pairing_comm]
+  exact hj
+
+end Nondegenerate
+
+/-! ### Physical states on the antidiagonal slice are exactly the spurious-orthogonal ones -/
+
+section PhysOrthogonal
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **(P3), first half** (blueprint §B′.4's `towerPhys_inf_towerBigrade_eq_orthogonal`): on the
+antidiagonal slice `(rung -N, level N)`, being physical is the *same* as being orthogonal to
+every spurious state.
+
+The `⊆` half is `towerSpuriousSubmodule_le_towerOrthComplement` plus symmetry of the form.
+The `⊇` half uses `L_m† = L_{-m}` and the nondegeneracy of the tower form to turn
+"`⟨Ψ, L_m x⟩ = 0` for all `Ψ`" into `L_m x = 0`; the `L_0` condition is automatic on the
+antidiagonal, because `towerLop_zero_apply_of_mem_towerBigrade` gives the eigenvalue
+`α'k² + j + N` and `j = -N`.
+
+`D = 26` does not appear, and no light-cone frame is needed. -/
+theorem towerPhys_inf_towerBigrade_eq_towerOrthComplement [NoZeroDivisors R] [CharZero R]
+    (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0)
+    (hba : dotVec η b a = 1) (N : ℕ) :
+    towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) ⊓ towerBigrade D R (-(N : ℤ)) N
+      = towerOrthComplement η (towerSpuriousSubmodule η a b)
+          ⊓ towerBigrade D R (-(N : ℤ)) N := by
+  refine le_antisymm (fun x hx => ?_) (fun x hx => ?_)
+  · obtain ⟨hphys, hbig⟩ := Submodule.mem_inf.mp hx
+    refine Submodule.mem_inf.2 ⟨?_, hbig⟩
+    rw [mem_towerOrthComplement]
+    intro Ψ hΨ
+    have h := towerSpuriousSubmodule_le_towerOrthComplement η a b
+      (invTwo R * Fock.zeroModeSq η a) hΨ
+    rw [mem_towerOrthComplement] at h
+    rw [Fock.towerPairing_comm]
+    exact h x hphys
+  · obtain ⟨horth, hbig⟩ := Submodule.mem_inf.mp hx
+    rw [mem_towerOrthComplement] at horth
+    refine Submodule.mem_inf.2 ⟨mem_towerPhysSubmodule.2 ⟨?_, fun m hm => ?_⟩, hbig⟩
+    · rw [towerLop_zero_apply_of_mem_towerBigrade η a b hη hbb hba hbig]
+      congr 1
+      push_cast
+      ring
+    · refine Fock.eq_zero_of_towerPairing_left_eq_zero hη fun Y => ?_
+      rw [Fock.towerPairing_towerLop_left η a b m x Y]
+      exact horth _ (towerLop_neg_mem_towerSpuriousSubmodule hm Y)
+
+end PhysOrthogonal
+
 end StringFormal.NoGhost
