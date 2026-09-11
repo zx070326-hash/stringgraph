@@ -262,6 +262,67 @@
     不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
     余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
 
+- [x] `euler-poincare`：Euler–Poincaré 原理（图卡 `math.euler-poincare-principle` (1) 特征标版
+  与 (2) 逐权分次版）。见 `StringFormal/Math/EulerPoincare.lean`（无 sorry，公理只有标准三条）。
+
+  **Mathlib 现状（2026-09-11 实查 v4.33.1）**：`Mathlib/Algebra/Homology/EulerCharacteristic.lean`
+  （全文件 176 行）只有**定义**与「finsum = 有限 Finset 和」的搬运：
+  `ComplexShape.EulerCharSigns`（符号 `c.χ : ι → ℤˣ`）、`GradedObject.eulerChar`、
+  `HomologicalComplex.eulerChar`、`HomologicalComplex.homologyEulerChar`、以及三条
+  `*_eq_sum_finSet_of_finrankSupport_subset`。**没有** `eulerChar = homologyEulerChar`
+  这条定理——即 Euler–Poincaré 原理本身在 Mathlib 里缺失（`grep -rl eulerChar Mathlib/` 只命中
+  该文件与 `Combinatorics/Enumerative/IncidenceAlgebra.lean`，后者是组合学的另一个同名概念）。
+  ⇒ 本项目要自己证，不能走桥层。
+
+  可复用的原子（都在 Mathlib）：
+  - `LinearMap.finrank_range_add_finrank_ker`（`LinearAlgebra/FiniteDimensional/Lemmas.lean:173`）：
+    `finrank K (range f) + finrank K (ker f) = finrank K V`，域上、`[FiniteDimensional K V]`；
+  - `Submodule.finrank_quotient_add_finrank`（`LinearAlgebra/Dimension/RankNullity.lean:248`）：
+    `finrank R (M ⧸ N) + finrank R N = finrank R M`；
+  - `Submodule.finrank_map_subtype_eq` + `Submodule.map_comap_subtype`
+    （`Algebra/Module/Submodule/Map.lean:459`，`map p.subtype (comap p.subtype p') = p ⊓ p'`）：
+    把 `finrank ((B n).comap (Z n).subtype)` 换回 `finrank (B n)`。
+
+  **索引设计**（踩过的坑）：不能写 `d n : C n →ₗ[K] C (n+1)` 再取 `range (d (n-1))`——
+  那是 `Submodule K (C (n-1+1))`，`n-1+1 = n` 在 ℤ 上不是 defeq，而且转运发生在**依赖位置**，
+  `rw` 连类型正确的 motive 都造不出来。照 Mathlib `HomologicalComplex` 的办法用**双索引**
+  `d : ∀ m n, C m →ₗ[K] C n`（`m + 1 ≠ n` 时为 0），则 `cocycles n := ker (d n (n+1))` 与
+  `coboundaries n := range (d (n-1) n)` **同为** `Submodule K (C n)`，全程无 cast。
+  另两个经验：
+  - `IsComplex.comp_eq_zero` 写成**对任意三元组** `l m n` 的 `(d m n).comp (d l m) = 0`
+    （非相邻时由 shape 自动成立），在 `(n-1, n, n+1)` 处用它不需任何指标运算；
+  - `coboundaries (n+1) = range (d n (n+1))` 这一步，`simp only [h]` / `rw [h]` 都**会失败**，
+    正确写法是 `congrArg (fun m : ℤ => LinearMap.range (d m (n+1))) h`：该函数的值域
+    `Submodule K (C (n+1))` **不依赖 m**，所以根本不是 dependent rewrite。
+  符号用 Mathlib 的 `Int.negOnePow`（`ComplexShape.EulerCharSigns` 用的同一件东西），
+  求和在 `Finset.Ico a b`（`LocallyFiniteOrder ℤ` 实例在 `Mathlib.Data.Int.Interval`，
+  **不是** `Mathlib.Order.Interval.Finset.Int`——后者在 v4.33.1 不存在）。
+
+  完成的声明（全部 `check_axioms` 为 `ok`）：
+  - `euler_poincare`（卡面 (1)）：`∑ n ∈ Finset.Ico a b, (n.negOnePow) * finrank K (C n)
+    = ∑ n ∈ Finset.Ico a b, (n.negOnePow) * finrank K (cohomology d n)`，
+    前件 `a ≤ b`、`Subsingleton (C (a-1))`、`Subsingleton (C b)`（这两条是**锐的**：
+    它们恰好是使电报和两端项消失的条件）；
+  - `euler_poincare_finsum`：同一恒等式的 `∑ᶠ n : ℤ` 全分次形式，前件是卡面的
+    「只有有限多个 `C^n ≠ 0`」（写作 `∀ n ∉ Ico a b, Subsingleton (C n)`）；
+  - `finrank_cohomology_zero_eq`（卡面「特别地」一支：Hⁿ = 0 (n ≠ 0) ⇒ dim H⁰ = Σ(−1)ⁿ dim Cⁿ）；
+  - `euler_poincare_graded`（卡面 (2)，特征标等式在 `Λ → ℤ` 里）；
+  - 中间层：`coboundaries_add_one`、`coboundaries_le_cocycles`、
+    `finrank_coboundaries_add_finrank_cocycles`（秩–零化度）、
+    `finrank_cohomology_add_finrank_coboundaries`（dim H = dim Z − dim B）、
+    `finrank_cohomology_eq_zero_of_subsingleton`、`finrank_coboundaries_eq_zero_of_subsingleton`。
+
+  **未做（已写进卡的 gaps）**：
+  1. 卡面 (2) 里的 `H^n(C) = ⊕_λ H^n(C_λ)` 未形式化：本文件的分次版直接以「按权索引的复形族」
+     为输入，把它认同为单一分次复形的权分量是另一步（纯记账，但没做）。
+  2. 与 Mathlib `HomologicalComplex` 的桥未做：`cohomology d n` 与
+     `HomologicalComplex.homology` 未建联系，`euler_poincare` 也没有重述成
+     `eulerChar = homologyEulerChar`。这是一条值得往 Mathlib 上游提的结果。
+  3. 号差版（卡面 (a) 自己排除，LZ Cor 2.15(ii) 用的那条）未做，建议另立
+     `math.euler-poincare-principle-signature` 后再形式化。
+  4. 未给非平凡的具体复形实例（不平凡性见证）；前件集显然相容（`d = 0`），
+     但「结论右端可以非零」没有机检例子。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与

@@ -1,0 +1,128 @@
+id: math.euler-poincare-principle--via-lean
+target: math.euler-poincare-principle
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/EulerPoincare.lean :: StringFormal.EulerPoincare.euler_poincare"
+    note: |
+      本仓库，形式化侧提交 `0f5db0a`（"formal: switch Euler-Poincare to genuine Z-grading
+      (Int.negOnePow, Finset.Ico telescope)"）；Lean 4 + Mathlib v4.33.1。
+      本推导链条上的全部声明（全在 `namespace StringFormal.EulerPoincare`）：
+      `IsComplex`、`cocycles`、`coboundaries`、`cohomology`、`coboundaries_add_one`、
+      `coboundaries_le_cocycles`、`finrank_coboundaries_add_finrank_cocycles`、
+      `finrank_cohomology_add_finrank_coboundaries`、
+      `finrank_cohomology_eq_zero_of_subsingleton`、
+      `finrank_coboundaries_eq_zero_of_subsingleton`、`euler_poincare`、
+      `euler_poincare_finsum`、`finrank_cohomology_zero_eq`、`euler_poincare_graded`。
+      该文件是 `StringFormal/Math/` 的孤岛，**不 import** `Virasoro/` 或 `NoGhost/`，
+      只 import Mathlib（`LinearAlgebra.Dimension.RankNullity`、
+      `LinearAlgebra.FiniteDimensional.Lemmas`、`Algebra.BigOperators.Intervals`、
+      `Algebra.Ring.NegOnePow`、`Data.Int.Interval`）。
+summary: |
+  机器检查的证明，全部在 `formal/StringFormal/Math/EulerPoincare.lean` 内完成。
+  设定与目标卡逐点对应：域 `K`，`ℤ`-分次的向量空间族 `C : ℤ → Type*`（每个 `C n`
+  有限维），微分写成**双索引** `d : ∀ m n : ℤ, C m →ₗ[K] C n`，前件 `IsComplex d` 为
+    · `shape : ∀ m n, m + 1 ≠ n → d m n = 0`（微分只连相邻次数），
+    · `comp_eq_zero : ∀ l m n, (d m n).comp (d l m) = 0`（d² = 0；非相邻三元组由 shape 自动成立）。
+  定义 `cocycles d n = ker (d n (n+1))`、`coboundaries d n = range (d (n-1) n)`、
+  `cohomology d n = cocycles d n ⧸ (coboundaries d n).comap (cocycles d n).subtype`，
+  与卡面的 Z^n、B^n、H^n 逐字对应。
+
+  **(1) 的 Lean 形状**（`euler_poincare`）：
+    `hd : IsComplex d`，`hab : a ≤ b`，`[Subsingleton (C (a-1))]`，`[Subsingleton (C b)]` ⊢
+    `∑ n ∈ Finset.Ico a b, (n.negOnePow : ℤ) * finrank K (C n)
+       = ∑ n ∈ Finset.Ico a b, (n.negOnePow : ℤ) * finrank K (cohomology d n)`，
+  其中 `Int.negOnePow n : ℤˣ` 就是 `(−1)^n`（Mathlib 的 `ComplexShape.EulerCharSigns`
+  用的同一件东西）。证明就是卡面 summary 里那条：
+
+    · 秩–零化度（Mathlib `LinearMap.finrank_range_add_finrank_ker` 用在 `d n (n+1)` 上）给
+      `dim B^{n+1} + dim Z^n = dim C^n`（`finrank_coboundaries_add_finrank_cocycles`）；
+    · `B^n ≤ Z^n`（`coboundaries_le_cocycles`，由 `comp_eq_zero (n-1) n (n+1)`）配上
+      Mathlib 的 `Submodule.finrank_quotient_add_finrank` 与
+      `Submodule.map_comap_subtype` / `Submodule.finrank_map_subtype_eq` 给
+      `dim H^n + dim B^n = dim Z^n`（`finrank_cohomology_add_finrank_coboundaries`）；
+    · 两者相减得逐项恒等式 `(−1)^n(dim C^n − dim H^n) = F n − F (n+1)`，其中
+      `F n = (−1)^n dim B^n`（`term_eq_telescope`）；
+    · 在 `Finset.Ico a b` 上望远镜求和（对上端作 `Int.leInduction`）得 `F a − F b`；
+      `Subsingleton (C (a-1))` 使 `F a = 0`（`B^a = im(d^{a-1})` 的源为零），
+      `Subsingleton (C b)` 使 `F b = 0`（`B^b ⊆ C^b`）。
+
+  **卡面「特别地」一支**：`finrank_cohomology_zero_eq`——若 `H^n = 0` 对一切 `n ≠ 0`
+  且 `0 ∈ Ico a b`，则 `dim H^0 = ∑ n ∈ Ico a b, (−1)^n dim C^n`。
+
+  **卡面「只有有限多个 C^n ≠ 0」的字面形状**：`euler_poincare_finsum`——前件
+  `∀ n ∉ Finset.Ico a b, Subsingleton (C n)`，结论是两端都写成 `∑ᶠ n : ℤ`（Mathlib 的
+  `finsum`，与 `HomologicalComplex.eulerChar` 的写法一致），即对**全体 n ∈ ℤ** 求和。
+
+  **(2) 的 Lean 形状**（`euler_poincare_graded`）：输入是按权 `Λ` 索引的复形族
+  `dg : ∀ l : Λ, ∀ m n : ℤ, Cg l m →ₗ[K] Cg l n`，结论是形式特征标的等式，
+  在函数空间 `Λ → ℤ` 里：
+    `∑ n ∈ Ico a b, (fun l ↦ (−1)^n dim (Cg l n)) = ∑ n ∈ Ico a b, (fun l ↦ (−1)^n dim H^n(Cg l))`。
+  证明就是 `funext` 后逐权引用 (1)——与卡面「(2) 是 (1) 逐权应用，不是独立断言」一致。
+
+  【为什么不是桥层】Mathlib v4.33.1 的 `Mathlib/Algebra/Homology/EulerCharacteristic.lean`
+  **只有定义**（`ComplexShape.EulerCharSigns`、`GradedObject.eulerChar`、
+  `HomologicalComplex.eulerChar`、`HomologicalComplex.homologyEulerChar`）与
+  「finsum = 有限 Finset 和」的三条搬运，**没有** `eulerChar = homologyEulerChar`，
+  即 Euler–Poincaré 原理本身在 Mathlib 里缺失（`grep -rl eulerChar Mathlib/` 只命中该文件与
+  `Combinatorics/Enumerative/IncidenceAlgebra.lean`，后者是同名的另一个组合学概念）。
+  所以本推导是自证，不是 `StringFormal.Bridge` 下的逐字重述。
+gaps:
+  - |
+    **卡面 (2) 里的 `H^n(C) = ⊕_λ H^n(C_λ)` 未形式化**。`euler_poincare_graded` 直接以
+    「按权索引的复形族」为输入，并未证明「单一分次复形的上同调按权分解」。把一个带
+    `d`-保持分次的复形拆成权分量、并把它的上同调认同为各权上同调的直和，是纯记账的一步，
+    但**没有**在 Lean 里做。引用本推导覆盖 (2) 时，这一步由引用者负责。
+  - |
+    **与 Mathlib `HomologicalComplex` 无桥**。本文件自建 `cocycles` / `coboundaries` /
+    `cohomology`，未证明它们与 `HomologicalComplex.homology` 一致，也未把 `euler_poincare`
+    重述成 `HomologicalComplex.eulerChar C = HomologicalComplex.homologyEulerChar C`。
+    ⇒ 「本卡的 H^n 就是标准同调代数的 H^n」是**人读定义**得出的，不是机检的。
+    （定义本身是教科书逐字形状，风险低；但记账上应说明。）
+  - |
+    **前件的非平凡可满足性没有机检见证**。前件集合显然相容（`d = 0`、`C n` 全取零空间即可），
+    但图里没有一个「两端为零、中间非零、结论右端非零」的具体 Lean 实例来证明定理不是空洞的。
+    对照 `NoGhost/Witness.lean` 为无鬼定理四条几何假设做的见证，这里缺同类的东西。
+  - |
+    **不覆盖号差版**（目标卡自己在【本卡明确不断言】(a) 里排除）：LZ 1989 p.317 的
+    `Σ_n sign H^n = Σ_n sign C^n` 需要复形上的非退化厄米型与 `d` 的自伴性，未形式化，
+    建议另立 `math.euler-poincare-principle-signature`。
+notes: |
+  status: formalized 的依据是 `literature/sources.bib` 中 `stringformal-2026` 条目规定的证据标准
+  （`lake build` 通过、目标声明无 sorry、公理集合仅 propext / Classical.choice / Quot.sound）。
+
+  **check_axioms 运行记录（formalizer, 2026-09-11）**：在 worktree
+  `.claude/worktrees/agent-a510feecc2aa982ee/formal`（package-overrides 指向主仓库的
+  Mathlib，Lean 4 + Mathlib v4.33.1）跑
+
+      lake build            # Build completed successfully (3512 jobs)
+      lake env lean --run scripts/check_axioms.lean --all < names.txt
+
+  names.txt 含本文件 10 条公开声明（`euler_poincare`、`euler_poincare_finsum`、
+  `euler_poincare_graded`、`finrank_cohomology_zero_eq`、
+  `finrank_cohomology_eq_zero_of_subsingleton`、`finrank_coboundaries_eq_zero_of_subsingleton`、
+  `finrank_cohomology_add_finrank_coboundaries`、`finrank_coboundaries_add_finrank_cocycles`、
+  `coboundaries_le_cocycles`、`coboundaries_add_one`），输出
+  `# summary: ok=10 bad=0 missing=0`，每行公理集合都是 `propext Classical.choice Quot.sound`。
+
+  **depends_on 为空是有意的**：本推导的输入只有 Mathlib 的线性代数（秩–零化度、商模维数）
+  与 `Int.negOnePow` / `Finset.Ico`，本图不为 Mathlib 的基础库建节点。与
+  `math.euler-poincare-principle--via-rank-nullity`（同一目标的纸面推导，也是空依赖）同型；
+  `validate` 对空 depends_on 的 warning 是预期的。
+
+  **与 --via-rank-nullity 的关系**：那条是纸面证明（rigorous，reviewer-batch26 签名），
+  本条是同一论证的机器检查版本。两条并列而不是替换——纸面那条承载文献归属
+  （FGZ Prop 1.3 / LZ p.317 / Hatcher Thm 2.44）与「两条文献来源都不印证明」这一记账事实，
+  本条承载机检证据。目标卡的有效状态由工具在两条之间取最高者。
+
+  **索引设计的坑（给后来者）**：不能写 `d n : C n →ₗ[K] C (n+1)` 再取 `range (d (n-1))`——
+  那是 `Submodule K (C (n-1+1))`，`n-1+1 = n` 在 ℤ 上不是 defeq，且转运发生在依赖位置，
+  `rw` 连类型正确的 motive 都造不出来。双索引 `d m n` 使 `cocycles`/`coboundaries` 同为
+  `Submodule K (C n)`，全程无 cast。`coboundaries (n+1) = range (d n (n+1))` 那一步
+  `simp only [h]` / `rw [h]` 都会失败，正确写法是
+  `congrArg (fun m : ℤ => LinearMap.range (d m (n+1))) h`（该函数值域不依赖 m）。
+  详见 `formal/TODO.md` 的 `euler-poincare` 条与文件头。
+author: formalizer
+created: "2026-09-11"

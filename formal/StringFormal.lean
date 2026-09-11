@@ -1,3 +1,4 @@
+import StringFormal.Math.EulerPoincare
 import StringFormal.Math.EulerPartition
 import StringFormal.Math.PartitionCard
 import StringFormal.Math.MobiusJacobian

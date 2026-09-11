@@ -66,6 +66,23 @@ StringFormal/
                             良基递归）。桥引理 `card_partition_eq_card` 把计数搬到显式
                             `Finset (Multiset ℕ)` 字面量上（那里 `decide` 可用），穷尽性靠剥一个
                             部分 + 对总和递归。使 `finrank_levelSpan_le_card_partition` 可在 N ≤ 5 取数值
+  Math/EulerPoincare.lean   **Euler–Poincaré 原理** Σ(−1)ⁿ dim Cⁿ = Σ(−1)ⁿ dim Hⁿ（图卡 `math.euler-poincare-principle`）。
+                            **Mathlib 只有定义没有定理**：`Algebra/Homology/EulerCharacteristic.lean` 给了
+                            `eulerChar` / `homologyEulerChar` 与它们的 finsum↔Finset 搬运，**没有**
+                            `eulerChar = homologyEulerChar`，所以不走桥层。索引照 `HomologicalComplex`
+                            用**双索引** `d m n : C m →ₗ C n`（`n ≠ m+1` 时为 0），使
+                            `cocycles = ker (d n (n+1))` 与 `coboundaries = range (d (n-1) n)` 同为
+                            `Submodule K (C n)`，**全程无 cast**；`IsComplex.comp_eq_zero` 故意对**任意三元组**
+                            `l m n` 陈述（非相邻时由 shape 自动成立），这样在 `(n-1,n,n+1)` 处用它不需任何指标运算。
+                            **分次是真的 ℤ**：符号用 Mathlib 的 `Int.negOnePow`，求和在 `Finset.Ico a b`，
+                            电报项 `F n = (−1)ⁿ dim Bⁿ`。`n+1-1 = n` 这一步用
+                            `congrArg (fun m => range (d m (n+1)))`（该函数的值域 `Submodule K (C (n+1))`
+                            不依赖 m，故无需 dependent rewrite；`simp only [h]` 在此处会失败）。
+                            声明：`euler_poincare`（卡面 (1)，前件 `Subsingleton (C (a-1))` 与 `Subsingleton (C b)`）、
+                            `euler_poincare_finsum`（全分次 `∑ᶠ`，前件是卡面的「只有有限多个 Cⁿ ≠ 0」）、
+                            `finrank_cohomology_zero_eq`（卡面「特别地」）、`euler_poincare_graded`
+                            （卡面 (2)，特征标等式在 `Λ → ℤ` 里）。**不做**号差版（卡面 (a) 自己排除）、
+                            `Hⁿ(C) = ⊕_λ Hⁿ(C_λ)` 的分解、与 Mathlib `HomologicalComplex.homology` 的桥
   Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
   Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
