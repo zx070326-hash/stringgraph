@@ -17,11 +17,17 @@ sources:
       ★★ **这是本推导的全部内容：一句引用。** Sen **不给任何推导**，不写超对称代数、不写中心荷、
       不写 Nester 型论证，只说「follows from the space-time supersymmetry of the theory」并挂
       `[24, 25]`。
-      `[24]` = G. Gibbons and C. Hull, Phys. Lett. **B109** (1982) 109；J. Harvey and J. Liu,
-      Phys. Lett. **B268** (1991) 40；R. Kallosh, A. Linde, T. Ortin, A. Peet and A. Van Proeyen,
+      `[24]` = G. Gibbons and C. Hull, Phys. Lett. **B109** (1982) 109（**Sen 原文如此印，页码是误印**，见下）；
+      J. Harvey and J. Liu, Phys. Lett. **B268** (1991) 40；R. Kallosh, A. Linde, T. Ortin, A. Peet and A. Van Proeyen,
       Phys. Rev. **D46** (1992) 5278 [hep-th/9205027]。
       `[25]` = A. Sen, Mod. Phys. Lett. **A8** (1993) 2023 [hep-th/9303057]。
-      ⚠ 这四篇**本项目一篇都没有登记、没有核实**（抽取记录 U3）。
+      **★ 2026-09-11 页码订正（curator-small-backlog-5，依 researcher math-sources.md §51.1，INSPIRE L1）**：
+      Gibbons–Hull 的真实页码是 **Phys. Lett. B 109(3) (1982) 190–194**，DOI 10.1016/0370-2693(82)90751-1，
+      已登记为 `gibbons-hull-1982`（read_depth = abstract，正文 L0）。判据：INSPIRE `j Phys.Lett.B,109,190` 命中该文，
+      `j Phys.Lett.B,109,109` 零命中。图里一律写 190–194；复述 Sen 的引用串时注明「Sen 原文印作 109」。
+      ⚠ 摘要（L1）**不含 M² ≥ Q_R²/2 的具体形式**，语境是 N=2 超引力、无 Q_L/Q_R 划分，故正文到手前
+      不得把本卡的界挂给该 key；本条 note 只订正书目。
+      其余三篇本项目仍**未登记、未核实**（抽取记录 U3）。
   - ref: sen-1995-bh-torus
     loc: "arXiv:hep-th/9411187v3, §1, pp.2–3（摘要与引言里对同一事实的复述）：逐字「For non-rotating black holes, **some of** the extremal black holes saturate the Bogomol'nyi bound and hence have unbroken supersymmetry. But black holes carrying non-zero angular momentum never saturate Bogomol'nyi bound, and hence have no unbroken supersymmetry.」"
     note: >-
@@ -45,11 +51,13 @@ summary: |
 gaps:
   - |
     ★★ **本推导不含任何论证。** Sen 把界整体外包给 `[24, 25]`：
-    Gibbons–Hull PLB **109** (1982) 109；Harvey–Liu PLB **268** (1991) 40；
-    Kallosh–Linde–Ortín–Peet–Van Proeyen PRD **46** (1992) 5278；Sen MPLA **A8** (1993) 2023。
-    **这四篇本项目 bib 一篇都未登记、正文一篇都未取得**（抽取记录 U3）。
-    ⇒ 要让本卡有真正的推导，必须先抽取 Gibbons–Hull（最直接的一篇），
-    **这是本区一条可立即派发的 researcher 任务**。
+    Gibbons–Hull PLB **109** (1982) **190–194**（Sen 原文印作 109，系误印；2026-09-11 依 INSPIRE 订正）；
+    Harvey–Liu PLB **268** (1991) 40；Kallosh–Linde–Ortín–Peet–Van Proeyen PRD **46** (1992) 5278；
+    Sen MPLA **A8** (1993) 2023。
+    **Gibbons–Hull 已登记（`gibbons-hull-1982`，仅摘要 L1、正文未取得）；其余三篇 bib 未登记、正文未取得**（抽取记录 U3）。
+    ⇒ 要让本卡有真正的推导，必须先抽取 Gibbons–Hull 正文（最直接的一篇），
+    **这是本区一条可立即派发的 researcher 任务**；且其摘要自陈的是 N=2 超引力里的 Bogomolny 型下界，
+    「almost complete characterization」是作者自己留的缺口。
   - |
     ★ **界所依赖的归一化在原文中没有定义。** Sen 自己加的限定语
     「In the normalization convention that we have been using」是全文唯一一处归一化自述；
