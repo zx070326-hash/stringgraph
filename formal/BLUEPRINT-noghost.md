@@ -1212,3 +1212,49 @@ PR3 顺带删掉 `noghost-n2` 自报的 `hFullSpan` / `Classical.choose` 那一�
 5. **`ddfOp` 把零态送到零态**（PR0）是一条独立的小命题，图里没有节点；
    它是 (B-26) 构造式路线的乘法结构，建议新建卡或记入
    `worldsheet.ddf-operators-preserve-physical-states` 的 notes。
+
+### B′ 订正（PR0/PR1/PR2 落地后，2026-09-12）
+
+本节记录 §B′ 计划与实际 Lean 代码的偏差。写在这里而不是改上面的正文，是因为 §B′ 是
+*计划*，保留原文才看得出计划错在哪里。
+
+1. **PR1 与 PR2 的依赖方向反了**（§B′.7 的依赖图与 §B′.10 的交付顺序）。
+   `ddfSpansOn_bigrade_iff_b26` 的「⟸」（`B26 ⇒ DDFSpansOn`）确实只需要
+   `ddfSpan_inf_towerNullSubmodule_eq_bot` + `Submodule.eq_of_le_of_finrank_le`，如计划所写；
+   但「⟹」**不免费**。`DDFSpansOn` 给出的是整塔上的分解 `x = d + z`
+   （`d ∈ ddfSpan`，`z ∈ H_null`），要得到 `H_N ≤ D_N ⊔ Z_N` 必须把它**投回片上**，
+   这需要 `ddfSpan` 与 `towerNullSubmodule` 都对双分次齐次：
+   * `ddfSpan` 的齐次性 = `frameMonomial_mem_towerBigrade`，正是 PR2 的主定理；
+   * `towerNullSubmodule` 的齐次性需要**片间正交**，在 Lean 里最省事的形式不是
+     「不同片互相正交」，而是 `towerPairing η (proj x) y = towerPairing η (proj x) (proj y)`
+     （`towerPairing_towerBigradeProj_left`），它的原子是新引理
+     `Fock.pairing_levelComponent_right`（Mathlib 与本仓库此前都没有）。
+
+   结果：`SliceRank.lean`（PR1）只放 `ddfSpansOn_bigrade_of_b26`，
+   `SliceDim.lean`（PR2）`import SliceRank` 并在末尾装配 `ddfSpansOn_bigrade_iff_b26`。
+   实际交付顺序 PR0 → PR1 → PR2 仍然成立，只是文件 `import` 方向是 PR1 → PR2。
+
+2. **「`≥` 方向恒成立」这句话要小心**（§B′.2 (P1)）。它对的，但**不是格论平凡**：
+   一般模格里 `(A ⊔ B) ⊓ V ≥ (A ⊓ V) ⊔ (B ⊓ V)` 是严格不等，模律给不出反向。
+   `B26 ⇒ DDFSpansOn` 用的是维数（`eq_sup_of_finrank_le`），
+   `DDFSpansOn ⇒ B26` 用的是齐次性。两个方向用的是**不同的**输入。
+
+3. **PR0 与 PR1 的截距可以放宽**。`ddfOp_mem_towerNullSubmodule` 与
+   `ddfSpan_inf_towerNullSubmodule_eq_bot` 都对**任意** `a₀ : R` 成立
+   （`ddfOp_mem_towerPhysSubmodule` 与 `ddf_span_pos` 都不提截距），代码里就按任意 `a₀` 陈述。
+   只有 `B26` 本身钉在 `a₀ = α'k²`，因为它要和 `DDFSpansOn` 对齐。
+
+4. **`B26` 的类型类比 §B′.3 的草案窄**：实际签名只有 `[Field K] [Algebra ℚ K]`——
+   序、`CharZero`、`NoZeroDivisors` 都**不**进 `B26` 的陈述。序只出现在
+   `ddfSpansOn_bigrade_of_b26` 的证明（经 `ddf_span_pos`），`CharZero`/`NoZeroDivisors`
+   只出现在 PR2（经 `massShell_of_mem_towerBigrade`）。这与 §B′.6 的表基本一致，
+   但表里没写「`B26` 自己是干净的」这一点，而它恰是把 (B-26) 交给别人去证时最该知道的事。
+
+5. **PR2 的 `Fintype` 实例**按 §B′.4 的括注（「支撑里模数 ≤ N、占据数 ≤ N」）实现，
+   编码进 `ι × Fin N → Fin (N+1)`；为了避开函数体里的依值证明，编码取
+   `min (d v) N` 而不是 `d v`（在子类型上两者相等）。三条初等界
+   `mul_apply_le_ddfLevel` / `apply_le_ddfLevel` / `apply_eq_zero_of_ddfLevel_lt`
+   是这一步的全部内容，`Nat.Partition` 完全没有被牽扈进来——这印证了 §B′.8
+   「Lean 里不要求值任何分拆数」。
+
+PR3/PR4/PR5 未动，§B′ 对它们的判断（含 §B′.9 的三条自我攻击）未被本轮工作证实或证伪。
