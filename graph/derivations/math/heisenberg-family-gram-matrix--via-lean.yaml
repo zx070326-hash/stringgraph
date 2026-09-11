@@ -1,0 +1,71 @@
+id: math.heisenberg-family-gram-matrix--via-lean
+target: math.heisenberg-family-gram-matrix
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family（本推导的目标 (1)）；两半 gram_of_heisenberg_family_of_ne / gram_of_heisenberg_family_self；递推的三步 StringFormal.{finsupp_addSingle_induction, commute_heisCreation, heisAnnihilation_heisMonomial}；对象 StringFormal.{heisCreation, heisMonomialOp, heisMonomial, heisNorm} 与其计算规则 heisMonomial_zero / heisMonomial_add_single / heisNorm_zero / heisNorm_add_single；(2a)(2b)(3) StringFormal.{heisNorm_pos, heisNorm_ne_zero, linearIndependent_heisMonomial}"
+    note: |
+      本仓库，formalizer 提交 **5b35c04**（分支 agent/formalizer/noghost-c），lead 以 **43d7d54**
+      合入 main。Lean 4 + Mathlib v4.33.1，**无 sorry**。
+      该文件只 import Mathlib 四个模块（`Algebra.Lie.OfAssociative`、`Data.Finset.NoncommProd`、
+      `Data.Finsupp.Multiset`、`LinearAlgebra.BilinearForm.Orthogonal`），
+      **不 import 本项目的任何其他文件**——这与本推导 depends_on 为空是同一件事（见 notes）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**：本分支只改 graph/，不含 Lean 改动；
+      按项目纪律，含 formal/ 改动的分支合并前由 lead 跑，该文件随 43d7d54 已走过一次。
+summary: |
+  本推导是**图侧接线**：目标陈述的每一条都由 formal/StringFormal/NoGhost/HeisenbergGram.lean 中
+  一条无 sorry 的 Lean 声明逐字承载（对应表见目标卡 sources 第一条）。Lean 侧的论证结构：
+
+  **第 0 步（对象良定义）**：`heisCreation A (i,n) := A i (−n)`；产生单项式
+  `heisMonomial A Ω hcomm d` 用 `Multiset.noncommProd` 定义为**有序乘积**，其与次序无关的
+  理由是 `hcomm`，而 `hcomm` 由 **`commute_heisCreation hccr`** 供给——即目标【不断言】(a)：
+  「产生算子对易」是 (H1) 的推论（两个产生模式之和 ≤ −2 ≠ 0 ⇒ if 条件假 ⇒ 中心项为零），
+  不是独立假设。配套的重写规则是 `heis_apply_apply`（把 CCR 变成向量上的搬运规则）。
+
+  **第 1 步（归纳原理）**：`finsupp_addSingle_induction` —— 对 `α →₀ ℕ` **一次只加一个生成元**
+  的归纳。Mathlib 现成的 `Finsupp.induction` 一次加整个 `single a b`，与产生算子的递推不合；
+  Lean 侧经 `Multiset.toFinsupp` 转运证出。这是本证明唯一的"基础设施"引理。
+
+  **第 2 步（Leibniz 规则）**：`heisAnnihilation_heisMonomial` ——
+  对 n > 0，A^i_n ∏(A_{−m})^d Ω = n · d(i,n) · ∏(A_{−m})^{d − δ_{(i,n)}} Ω。
+  即把湮灭算子从左往右穿过整个单项式：每穿过一个同标号的产生算子掉出一个中心项 n，
+  共 d(i,n) 个；穿到底后用 (H3) 把 A^i_n Ω 杀掉。
+
+  **第 3 步（主递推）**：对 d 用第 1 步归纳。
+    · 基例 d = 0：若 e = 0 用 (H4) 得 1 = ‖0‖；若 e ≠ 0 取 e 的一个非零标号 w，
+      把 e 写成 (e − δ_w) + δ_w，用 (H2) 把最外层的产生算子 A^w_{−n} 挪到左边变成 A^w_{n}，
+      再用 (H3) 得零。
+    · 归纳步 d ↦ d + δ_v：用 (H2) 把新加的 A^v_{−n} 挪到右边变成湮灭算子，
+      用第 2 步的 Leibniz 规则降一次 e，再用归纳假设；两侧的 δ 与 ‖·‖ 经
+      `heisNorm_add_single`（‖d + δ_{(i,n)}‖ = ‖d‖ · n · (d(i,n)+1)）对上。
+  得目标 (1)：B(|{d}⟩,|{e}⟩) = if d = e then ‖d‖ else 0。
+
+  **第 4 步（符号与线性无关）**：`heisNorm_pos`（严格有序环上 ‖d‖ > 0，因每个因子 n ≥ 1、
+  d! ≥ 1）给目标 (2a)；`heisNorm_ne_zero`（特征零域）给 (2b)；
+  `linearIndependent_heisMonomial` 经 Mathlib 的 `BilinForm.linearIndependent_of_iIsOrtho`
+  给 (3)（正交族 + 对角元非零 ⇒ 线性无关）。
+
+  【为什么标 formalized】目标每一条都有具名、无 sorry 的 Lean 声明逐字对应，
+  且本推导没有图内依赖（见 notes），故不被任何上游封顶。
+gaps:
+  - "**载体上没有完备性**：Lean 不说 { |{d}⟩ } 张成 M，也不说 M 自由。完备性是无鬼定理里困难的『DDF 张成』那一半（formal/TODO.md 的 `ddf-spans`），本文件一字未涉。目标卡【不断言】(b)。"
+  - "**DDF 实例化未做**（Lean 文件头 Gaps 第 1 条）：要把本卡用到塔上的 A^ε_n，还缺 (i) `Fock.towerPairing η towerVacuum towerVacuum = 1`、(ii) `A^ε_n towerVacuum = 0` (n > 0) 两条小引理，以及 (iii) 一个横向正交归一标架把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij}。这是 blueprint §C.4。⇒ worldsheet.transverse-ddf-fock-gram-matrix 目前**仍不能**标 formalized。"
+  - "**没有 canonical 的 `heisMonomial` API**（文件头 Gaps 第 3 条）：对易性证明 `hcomm` 是定义的显式参数，故每条语句都拖着它；把 (A, Ω, B) 连同假设打包成 structure 会更整洁，未做。这只影响可用性，不影响正确性。"
+  - "**不定号差的情形不在覆盖内**：(H1) 的中心项是 m δ_{ij}，世界面协变振子的 m η^{μν} δ_{m+n,0} 不是本卡实例；那一侧由 FockGram.lean / worldsheet.bosonic-fock-gram-matrix 承载，且走的是另一条路（`pairing_unique`，实质用到多项式环的基）。两者互不蕴含（文件头 Mathematical notes 第 1 条）。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是该文件随合并提交 43d7d54 进入 main。本分支不含 Lean 改动。"
+notes: |
+  【为什么 depends_on 为空】目标是一条纯代数的条件命题：四条假设 (H1)–(H4) 全部写在陈述里，
+  载体是任意 R-模，论证只用 R-模、线性算子与有限支撑函数的初等性质。
+  Lean 侧对应地**不 import 本项目的任何其他文件**（只 import 四个 Mathlib 模块），
+  所以图上没有任何节点是它的论证输入。与 math.euler-partition-generating-function--via-lean、
+  math.gram-determinant-nonzero-implies-linear-independence--via-lean 同一处理。
+  `validate` 因此报 "derivation has no dependencies" warning，是预期的。
+  ⚠ 特别地**不挂** worldsheet.ddf-transverse-oscillator-algebra-v2（[A^i_m,A^j_n] = m δ^{ij} δ_{m+n,0}）
+  的边：那张卡是塔上 DDF 算子**满足** (H1) 的断言，属于本卡的**实例化**方向，
+  挂上去会把条件命题写成无条件命题，方向反了。实例化还缺三件，见 gaps 第二条。
+
+  curator，2026-09-11，small-backlog-14。
+author: curator
+created: "2026-09-11"
