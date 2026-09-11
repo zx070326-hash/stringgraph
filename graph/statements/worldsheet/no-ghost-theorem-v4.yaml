@@ -155,6 +155,20 @@ sources:
       表 B 第 9、22 项。
 tags: [bosonic-string, unitarity, critical-dimension, old-covariant]
 notes: |
+  【2026-09-11（八）补注：D = 26 在本节点论证里唯一进入之处是 (B-26)（curator，small-backlog-12；
+  **只加本段 notes**，statement 文本、kind、tags、sources 一字未动；依 formal/BLUEPRINT-noghost.md §B.5）】
+  本节点第 (1) 条的推导 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 现把它的承重步骤单独登记为
+  gap **(B-26)**：DDF 代数、伴随、横向 Gram 正定、K_n 代数（新卡 worldsheet.gt-longitudinal-k-algebra）
+  与特征标计数（ch H_phys = φ^{−(D−1)}、ch H^⊥ = φ^{−(D−2)}）**全部与 D 无关**；
+  **唯一含 26 的断言**是「H_phys 中 H^⊥ 之外的那 p_{D−1}(N) − p_{D−2}(N) 个方向在 D = 26 时恰为零模态」
+  （等价：H_phys 上双线性型的秩恰为 p_{D−2}(N)）。文献支撑只有 Goddard 2008 §6 (6.4) 一句无证明结论
+  （转引 GT 1972，正文未获取）；两条已知机制（GT 的 K 条件配平、Brower 的 A^L_n）都还没有可形式化的证明。
+  ⇒ 读本节点 (1b) 时应知道：**它比 (1a) 半正定强得多，而多出来的那部分（等距同构，即秩恰为 p_{24}(N)）
+  正是 (B-26)**。这也是本节点与 worldsheet.no-ghost-theorem-subcritical 的差别所在：
+  D ≤ 25 时秩更大但仍半正定，D > 26 时多出的方向有负模（第 (2) 条的 Lean 见证）。
+  **有效状态**：本次接线后本节点 effective 由 rigorous 降为 physical-argument，
+  瓶颈是新卡 worldsheet.gt-longitudinal-k-algebra（文献无证明、Lean 未落地）；细节见推导 notes【（八）】。
+
   【2026-09-11（四）补注：第 (2) 条已有机器验证的独立见证节点；第 (1) 条仍待 DDF】
   （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）
   本节点第 (2) 条（D > 26、a = 1 时存在 p ≠ 0 与 |ψ⟩ ∈ H_phys(p) 使 ⟨ψ|ψ⟩ < 0）现有一条

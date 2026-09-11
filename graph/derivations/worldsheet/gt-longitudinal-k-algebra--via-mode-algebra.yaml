@@ -1,0 +1,116 @@
+id: worldsheet.gt-longitudinal-k-algebra--via-mode-algebra
+target: worldsheet.gt-longitudinal-k-algebra
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    note: |
+      供给 (i) 偏振收缩模 α^ε_m := Σ_μ η_μ ε^μ α^μ_m 的记法——目标卡的 K_n 就是它在 ε := b 处的取值；
+      (ii) 顶点算子模 V^{(n)}_K 的记法与层移/能级记账；(iii) DDF 算子 A^ε_n = Σ_m α^ε_m V^{(n)}_m
+      及其逐向量有限窗口（目标卡 (5) 把 K_m 移进求和时用到）；(iv) 条件 (N)(S)(T) 的记法。
+      **非 inferred**：Goddard 2008 §5 (5.1)–(5.3) 与 §6 (6.2)(6.3) 用同一套 a^μ_n、k、A^i_n 记号，
+      K_m = k·a_m 与 A^i_n 都是那套数据上的对象（E6/E7 逐字）。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      供给 (i) 塔 T(p;k_0) 与第 N 层零模 α^μ_0|_N = (2α')^{1/2}(p + N k_0)^μ——目标卡 (3) 的
+      「K_0 在每一层都等于 1」是对这个逐层标量的直接计算；(ii) 塔上层间正交的双线性型 ⟨·,·⟩_T
+      与 (α^μ_n)† = α^μ_{−n}——目标卡 (4) 的对象；(iii) 「逐层作用的算子不移动层指标」。
+      **非 inferred**：Goddard 2008 §5 p.11 的适用条件 'states of momentum p, such that k·p = 1'
+      正是本卡 (S) 在塔上逐层成立这件事（该卡 notes 里 `dotVec_towerMomentum_right_of_isotropic`
+      对应 worldsheet.ddf-operators-v5 说明 (b)）。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      供给 L_m = ½ Σ_n :α_{m−n}·α_n: 的定义、振子代数 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}
+      与 (α^μ_n)† = α^μ_{−n}——目标卡 (1)(2)(4) 的全部输入。
+      **非 inferred**：Goddard 2008 §1 (1.1) 逐字给出 [a^μ_m, a^ν_n] = m g^{μν} δ_{m,−n} 与
+      a^{μ+}_n = a^μ_{−n}（E5），(6.3) 的 L_n 就是这些振子的 Virasoro 生成元。
+sources:
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.3)（[L_m, K_n] = −n K_{m+n}、[K_m, K_n] = 0，逐字见目标卡 sources）；§5, p.11（适用条件 k·p = 1）与 p.12 (5.7) 后正文（K_m = k·a_m 的定义）；§1, p.1, (1.1)（[a^μ_m, a^ν_n] = m g^{μν} δ_{m,−n}、a^{μ+}_n = a^μ_{−n}）"
+    note: |
+      L1 逐字（literature/extractions/gsw-1987-v1.md E5/E6/E7）。
+      **(6.3) 在该文中无证明**（历史综述，一句带过）；(3)(4)(5) 在该文中**没有显示公式**。
+      故本推导的论证是本图按模代数补出的**标准计算**，文献只提供结论 (1)(2) 与输入 (1.1)。
+      这是 status 取 physical-argument 的主要理由之一（见 summary 末段）。
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §A.1 表 A1.1–A1.6（本推导五步与 Lean 既有引理的逐条对应）；formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.{lie_towerLop_towerModeVec, lie_towerModeVec_towerVertex}；formal/StringFormal/NoGhost/DDFAlgebra.lean :: StringFormal.NoGhost.lie_towerModeVec_towerModeVec；formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.dotVec_towerMomentum_right_of_isotropic；formal/StringFormal/NoGhost/VertexAdjoint.lean :: StringFormal.NoGhost.Fock.towerPairing_towerModeVec_left"
+    note: |
+      main 上（f36a958 合并蓝图；引理本身更早，见各卡 sources 的 sha）无 sorry 的既有声明，
+      本推导第 1、2、4 步的计算与它们**在 ε := b 处逐字相同**，第 3 步用
+      `dotVec_towerMomentum_right_of_isotropic` + `hba`，第 5 步的两个对易子分别是
+      `lie_towerModeVec_towerVertex`（取 hbb）与 `lie_towerModeVec_towerModeVec`（取 hεb）。
+      ⚠ **这些声明不是目标卡的 lean_decl**：`towerK` 与 A1.1–A1.6 尚未落地
+      （formalizer-noghost-a 进行中）。本条只用来说明「本推导的每一步都有一个已机检的一般版本」，
+      **不据此把 status 写成 formalized 或 rigorous**——按项目纪律，Lean 声明只有在与目标卡
+      逐句对应并由 formalizer 登记后才能承载状态。
+summary: |
+  全程是振子模代数的直接计算，对象都在代数动量塔上，逐向量有限，不涉及围道、OPE 或收敛性。
+  记 K_n = α^b_n = Σ_μ η_μ b^μ α^μ_n（目标卡【定义】）。
+
+  1. **[L_m, K_n] = −n K_{m+n}**（目标卡 (1)）。
+     由 L_m 的 Sugawara 定义与振子代数得 [L_m, α^μ_n] = −n α^μ_{m+n}（对每个 μ，用到 η_μ² = 1
+     把缩并的 η_{μν} 与对易子的 η^{μν} 对上；这是 worldsheet.virasoro-generators-free-boson 的
+     标准推论，Lean 侧 `lie_towerLop_towerMode`）。对 μ 作线性组合即得。
+     **不用 (N)(S)**。
+
+  2. **[K_m, K_n] = 0**（目标卡 (2)）。
+     [α^b_m, α^b_n] = Σ_{μ,ν} η_μ η_ν b^μ b^ν · m η^{μν} δ_{m+n,0} = m η(b,b) δ_{m+n,0}·id
+     （再次用 η_μ² = 1 收缩）。由 (N) η(b,b) = 0 得零。**这是 (N) 在本推导唯一进入之处。**
+
+  3. **K_0 = id**（目标卡 (3)）。
+     K_0 逐层是标量 η(b, α_0|_N/(2α')^{1/2}) = η(b, a + N b) = η(b,a) + N η(b,b)。
+     由 (S) η(b,a) = 1 与 (N) η(b,b) = 0，每层都是 1，故 K_0 = id。
+     ⇒ 归一化 (S) 一次取定即对整条塔成立，这正是 worldsheet.ddf-operators-v6 把 (N)(S) 作为
+     DDF 数据的理由；Goddard 2008 §5 p.11 的 'k·p = 1' 在 α' = 1/2 下就是它。
+
+  4. **K_m† = K_{−m}**（目标卡 (4)）。
+     ⟨α^b_m v, w⟩_T = Σ_μ η_μ b^μ ⟨α^μ_m v, w⟩_T = Σ_μ η_μ b^μ ⟨v, α^μ_{−m} w⟩_T = ⟨v, α^b_{−m} w⟩_T，
+     用到逐层 (α^μ_n)† = α^μ_{−n}（含 n = 0 的标量情形）与层间正交
+     （K_m 不移动层）。**不用任何条件**。
+
+  5. **[K_m, A^ε_n] = 0**（目标卡 (5)）。
+     A^ε_n = Σ_j α^ε_j V^{(n)}_j 逐向量是有限和；对固定 x 取一个对 x 与 K_m x 都够大的公共窗口，
+     把 K_m 移进求和，逐项
+       [K_m, α^ε_j V^{(n)}_j] = [K_m, α^ε_j] V^{(n)}_j + α^ε_j [K_m, V^{(n)}_j]。
+     第一项：[α^b_m, α^ε_j] = m η(b,ε) δ_{m+j,0} = 0，由横向性 (T)。
+     第二项：[α^μ_m, V^{(n)}_j] = n b^μ V^{(n)}_{j−m}（α 与指数顶点算子的标准对易子，
+     来自 α(z) 与 :e^{i n k_0·X(w)}: 的单极），线性组合得 [α^b_m, V^{(n)}_j] = n η(b,b) V^{(n)}_{j−m} = 0，
+     由 (N)。两项皆零，故 [K_m, A^ε_n] = 0。
+
+  【为什么是 physical-argument 而不是 rigorous】三条：
+  (a) 文献侧只有结论没有证明：Goddard 2008 (6.3) 一句带过，GT 1972 正文未获取；
+      (3)(4)(5) 在文献中连显示公式都没有，是本图补的。
+  (b) 第 5 步用到的 [α^μ_m, V^{(n)}_j] = n b^μ V^{(n)}_{j−m} **在本图没有承载节点**
+      （worldsheet.exponential-vertex-operator-modes 的「不断言 (b)」明写它只在 Lean 侧有）；
+      第 1 步的 [L_m, α^μ_n] = −n α^μ_{m+n} 同样没有单独的卡。
+  (c) 按 docs/STATUS_LEVELS.md 的例外条款，有限步初等计算可标 rigorous，但须 reviewer 复核并写
+      `reviewer-verified`；本推导尚无。
+  ⇒ 升级路径：**最便宜的是等 Lean 的 `towerK` 落地后另挂 --via-lean（formalized）**，
+  届时本推导退为文献侧记录；其次是 reviewer 复核本 summary 五步并登记 `reviewer-verified`。
+gaps:
+  - "**文献无证明**：Goddard 2008 (6.3) 是历史综述里的显示公式，无推导；GT 1972（Goddard 2008 的 [45]）正文未获取。目标卡 (3)(4)(5) 在文献中没有显示公式，是本图由模代数补出。"
+  - "**第 5 步的两个输入在本图无节点**：[α^μ_m, V^{(n)}_j] = n b^μ V^{(n)}_{j−m}（worldsheet.exponential-vertex-operator-modes「不断言 (b)」）与「把 K_m 移进 DDF 求和」的公共窗口论证（Lean 侧 `towerPairing_ddfOp_left` / `lie_towerLop_ddfOp_of_pos` 各有一份套路，蓝图 A1.5 指出这是本节唯一的实现风险）。本推导按标准计算处理，未拆卡。"
+  - "**第 1 步的 [L_m, α^μ_n] = −n α^μ_{m+n} 在本图无单独的卡**（它是 worldsheet.virasoro-generators-free-boson 的直接推论，Lean 侧 `lie_towerLop_towerMode`）。本推导把它当作那张定义卡的标准推论使用。"
+  - "**未经 reviewer 复核**：五步都是有限步初等计算，可按 docs/STATUS_LEVELS.md 例外条款升 rigorous，但需 `reviewer-verified: <agent>, <date>`；当前没有。"
+  - "**Lean 尚未落地**：formal/StringFormal/NoGhost/Longitudinal.lean（formalizer-noghost-a，claim #357）完成并合入 main 后应另挂 --via-lean 推导并在目标卡填 formal.lean_decl；本推导届时保留为文献侧记录。"
+notes: |
+  【本推导与无鬼定理推导的关系】
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的张成步（文献侧 Goddard 2008 §6）逐字以
+  K_n 为工具，该推导已加边指向目标卡（非 inferred）。**目标卡只供给代数**；
+  张成步真正的承重点是 (B-26)（「H_phys 中 H^⊥ 之外的方向在 D = 26 恰为零模态」），
+  那一条**不**在目标卡里，仍登记在无鬼定理推导的 gaps。
+
+  【与 Lean 既有引理的逐条对应（蓝图 §A.1 表）】
+    | 本推导步骤 | 蓝图编号 | 既有声明（ε := b 特化） |
+    |---|---|---|
+    | 1 | A1.1 | `lie_towerLop_towerModeVec` |
+    | 2 | A1.2 | `lie_towerModeVec_towerModeVec` + `hbb` |
+    | 3 | A1.3 | `Fock.mode_zero`、`dotVec_towerMomentum_right_of_isotropic`、`hba` |
+    | 5（穿过 V） | A1.4 | `lie_towerModeVec_towerVertex` + `hbb` |
+    | 5（整体） | A1.5 | A1.4 + `lie_towerModeVec_towerModeVec` + 窗口 |
+    | 4 | A1.6 | `Fock.towerPairing_towerModeVec_left` |
+  蓝图对 A1.1–A1.4、A1.6 的难度估计都是「小」，A1.5「中」。
+
+  curator，2026-09-11，small-backlog-12。
+author: curator
+created: "2026-09-11"

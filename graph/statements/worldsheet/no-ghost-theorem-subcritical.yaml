@@ -238,5 +238,19 @@ notes: |
   **math.verma-module-free-over-negative-part**（内容逐条重叠、后者来源更好），其推导 --via-pbw 已删除；
   上述 depends_on 已再次就地改指该 math 卡。**注意新卡不含形式特征标**
   Σ_N p(N)q^{h+N} = q^h ∏(1−q^n)^{-1}（LZ 用 ch_q 那一步需要它），该缺口已登记在推导的 gaps 末尾。
+  【2026-09-11 补注：与 worldsheet.no-ghost-theorem-v4 (1b) 的差别恰是 (B-26)（curator，small-backlog-12；
+  **只加本段 notes**；依 formal/BLUEPRINT-noghost.md §B.5）】
+  本节点断言的是 D ≤ 25、a ≤ 1 时 H_phys/H_0 **半正定**（对每个动量正定），而
+  worldsheet.no-ghost-theorem-v4 (1b) 断言的是 D = 26、a = 1 时 H_phys/H_0 与 24 个横向 DDF 振子的
+  Fock 空间 **等距同构**。**这是强度不同的两件事，不是同一结论的两个区间**：
+  特征标计数 ch H_phys = φ^{−(D−1)}、ch H^⊥ = φ^{−(D−2)} 对任意 D 成立，
+  两者之差 p_{D−1}(N) − p_{D−2}(N) 个方向在 D = 26 时恰为零模态（这就是 (B-26)，D = 26 唯一进入之处），
+  在 D ≤ 25 时**不是**零模态——秩严格大于 p_{D−2}(N)，但型仍半正定。
+  上面【与本项目已有数值核对的一致性】第 8 条的数字正是这件事的实例：D = 25 时正特征值个数
+  23 / 300 / 2876 严格大于 p_{23}(N) = 23 / 299 / 2852，多出的 0 / 1 / 24 维就是补充模
+  L(1,0) 的贡献；D = 26 时 L(0,0) 平凡，差为零。
+  ⇒ 引用时不得把本节点当作 v4 (1b) 在 D ≤ 25 的「延拓」，也不得用本节点补 v4 的 (B-26)。
+  (B-26) 的登记处：worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps 末条。
+
 author: curator
 created: "2026-09-10"
