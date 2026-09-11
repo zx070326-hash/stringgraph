@@ -120,6 +120,16 @@ notes: |
   **lead 合并前必须跑 `lake build` + `uv run stringgraph check-axioms`**。
   本分支未改动 formal/ 下任何文件。
 
+  **check-axioms 已补跑（curator lean-wire-10, 2026-09-11）**：主工作树 D:\physics\string 的
+  `formal/.lake` 已在 13:54 重建（`ModularGroupGenerators.olean` 时间戳 12:50:41，晚于源文件
+  12:49:54），且该源文件与本分支（= main）的逐字相同（sha256 5d8bfcb0…）。在那里对本文件的
+  8 条公开声明跑 `uv run stringgraph check-axioms`：**8 ok, 0 non-standard, 0 missing; 0 errors**
+  （`sl_S_sq`、`sl_ST_cube`、`sl_closure_S_T`、`neg_one_mem_center`、`psl_neg_one`、
+  `psl_S_sq`、`psl_ST_cube`、`psl_closure_S_T`），公理集合一律
+  `propext Classical.choice Quot.sound`。另外，本轮补上 gaps 首条的
+  `StringFormal.Bridge.center_eq_pm_one` 同批检查通过（桥层 12 条全 ok）。
+  ⇒ 上一段「本轮未能重跑」的记录**已补齐**。
+
   **本推导关闭了原推导的 gap (1)**（「生成性没有证明」）。原推导
   --via-generator-relations 按 lead「旧推导保留」的裁决不动、不更新其 gaps；
   读者以本条为准。其 gap (2)（文献出处）与 gap「关系的矩阵验算无 reviewer 记录」
