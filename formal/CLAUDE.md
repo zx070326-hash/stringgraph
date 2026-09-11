@@ -107,6 +107,12 @@ StringFormal/
   Math/E8Roots.lean       E₈ 240 根显式列表；幂和 Σ(α·x)^k = 60Σx² / 36(Σx²)² / 30(Σx²)³ 对**任意 x ∈ ℚ⁸**（分块 + 符号二项展开，避免 240 项 ring）；⇒ (12b′)(12c′)。**Tr₂₄₈ = 根幂和 + Chevalley 限制**是 docstring 假设不在 Lean 内
   Math/GreenSchwarzAlgebraGen.lean  GS 因子化在**任意交换 ℚ-代数**上（scope 修正：Ω 形式活在带幂零元的环，非域；技巧：`h48 : 48 * algebraMap ℚ R (1/48) = 1` 由 `map_ofNat`+`norm_num`，再 `linear_combination`）；`mixed_anomaly_so_each_gives_32`、`tr_f6_usp_ge_33`
   NoGhost/FockGram.lean            创生单项式 Gram 矩阵对角、`∏ n^d d!`；条件版 `pairing_creationMonomial_of_hypotheses`（任意双线性型 + (H2)(H3)(H4)）；`ZMod 2` 退化反例（需特征零）
+  NoGhost/HeisenbergGram.lean      **抽象** Heisenberg 族的 Gram（任意 R-模 M）：`gram_of_heisenberg_family`
+                            `⟨mono d, mono e⟩ = δ_{d,e} ∏ n^d d!`，只用 CCR/伴随/真空归一/真空湮灭；
+                            (H1) 由 CCR 推出（`commute_heisCreation`）；单项式用 `Multiset.noncommProd`；
+                            附 `finsupp_addSingle_induction`（Mathlib 缺）、`heisNorm_pos/_ne_zero`、
+                            `linearIndependent_heisMonomial`。**中心项归一成 `m δ_{ij}`（正交归一/横向）**，
+                            故 `FockGram.lean`（不定 η）**不是**它的实例，两者互补
   Virasoro/GenericIndependence.lean  `linearIndependent_of_gram_det_ne_zero`（任意交换整环、任意双线性型）；N≤4 Kac 行列式非零 ⇒ p(N) 个标准子态线性无关；**`finrank_levelSpan_{two,three,four}` = 2/3/5**（上界靠 `ordWord_sum_{three,four}` 枚举有序词，**不需要 `Nat.Partition` 计数**）；c=1,h=1/4 零向量 (L₋₂−L₋₁²)v
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
@@ -141,6 +147,14 @@ StringFormal/
                             m ≤ 0、[A,A] 振子代数、保物理子空间均未做（见文件头 gaps）
   NoGhost/QuotientForm.lean   H_phys/H_null 上诱导形式：pairing_add_null、nullInPhys、PhysQuot、
                             quotientPairing（两次 liftQ）与 quotientPairing_mk（见文件头 gaps）
+  NoGhost/TowerNull.lean    塔上伪态/零模态/商形式（蓝图 §C.1）。**通用层**（任意 R-模 M、双线性型 B、
+                            子模 P）：radicalIn / QuotRadical / quotRadicalForm（只需 `IsRefl B`）；
+                            塔层：towerOrthComplement（= Mathlib `BilinForm.orthogonal`）、
+                            towerSpuriousSubmodule、towerNullSubmodule、伪态⊥物理态、
+                            spurious ∩ phys ⊆ null、TowerPhysQuot / towerQuotientPairing。
+                            **必须先抽象再实例化**：`ℤ →₀ k` 同时是 AddMonoidAlgebra，
+                            `HasQuotient ↥P (Submodule R ↥P)` 实例合成在 TowerFock 上直接失败
+                            （纯 Mathlib 可复现，见 TODO `noghost-c1`）
   NoGhost/SpuriousShell.lean  带壳伪态 spuriousShell = S ⊓ ker(L_0 − a₀)、零态 nullStates、nullStates_eq、nullStates ≤ nullSubmodule
   NoGhost/LevelTwo.lean      level-2 标量物理态闭式 (4a₀−9)²⟨ψ₂,ψ₂⟩ = 2(D−1)[16a₀²+(2D−74)a₀+84−3D]；a₀=1、D>26 有序域上存在负模物理态（exists_mem_physSubmodule_pairing_self_neg）
   NoGhost/Witness.lean      **四条几何假设的可满足性见证**（蓝图 §C.2）：`D ≥ 3`、任意交换 ℚ-代数上的显式
