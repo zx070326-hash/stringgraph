@@ -67,3 +67,4 @@ import StringFormal.NoGhost.SliceRank
 import StringFormal.NoGhost.SliceDim
 import StringFormal.NoGhost.LightConeResolutionGen
 import StringFormal.NoGhost.SpuriousElimination
+import StringFormal.NoGhost.TowerVirasoro
