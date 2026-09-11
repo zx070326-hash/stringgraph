@@ -8,7 +8,7 @@ depends_on:
   - id: branes.rr-charge-quantization-v2
     note: |
       供给条件 μ_pμ_{6−p} = πn/κ₁₀²（(13.3.13)），被代入后读出 n。
-      （2026-09-11 由 branes.rr-charge-quantization 改指 v2；v2 只订正了 (13.3.12) 的系数，
+      （2026-09-11 由 branes.rr-charge-quantization 改指 v2；v2 只是不再引原书误印的 (13.3.12)，
       (13.3.13) 本身一字未改，故本推导的代入完全不受影响。）
 sources:
   - ref: polchinski-1998-v2

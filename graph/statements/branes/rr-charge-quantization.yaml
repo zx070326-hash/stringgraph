@@ -24,11 +24,12 @@ sources:
 superseded_by: branes.rr-charge-quantization-v2
 tags: [d-brane, rr-charge, dirac-quantization, electric-magnetic-duality, type-ii]
 notes: |
-  ★【已被换代（curator，2026-09-11，依 reviewer-branes）】本卡 statement 里 (13.3.12) 写作
-  ∫_{S_{p+2}}F_{p+2} = μ_{6−p}/2κ₁₀²，与同卡的 (13.3.13) 及 (13.3.5) 的动能项归一化不自洽；
-  正确的是 ∫_{S_{p+2}}F_{p+2} = 2κ₁₀² μ_{6−p}（复算见 branes.rr-charge-quantization-v2 的 notes）。
-  已新建 branes.rr-charge-quantization-v2 承载订正后的陈述，本卡文本按规则不改。
-  ⚠ (13.3.13) 与下游的「n = 1 最小量子」不受影响。
+  ★【已被换代（curator，2026-09-11，依 reviewer-branes；researcher 已核印刷页 148）】本卡 statement 里
+  (13.3.12) 写作 ∫_{S_{p+2}}F_{p+2} = μ_{6−p}/2κ₁₀²——这正是原书 p. 148 印出来的形式（转录无误），
+  但**原书此处误印**：它与同节 (13.3.11)+(13.3.13) 不自洽，正确形式 2κ₁₀² μ_{6−p} 由书内自洽性与
+  Polchinski hep-th/9510017 (12)–(15) 两条独立证据确认（抽取记录 -ch13.md §6）。
+  branes.rr-charge-quantization-v2 按 lead 裁决**不再引 (13.3.12)**，只引 (13.3.11)+(13.3.13)+(13.3.7)。
+  本卡文本按规则不改。⚠ (13.3.13) 与下游的「n = 1 最小量子」不受影响。
 
   本卡只承载**条件**本身。「(13.3.7) 的荷恰好以最小量子 n = 1 满足它」是另一条命题
   branes.d-brane-charge-minimal-dirac-quantum（原书「Remarkably」句），分开建卡是因为
