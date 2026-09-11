@@ -1,0 +1,127 @@
+id: math.jacobi-abstruse-identity--via-whittaker-watson
+target: math.jacobi-abstruse-identity
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.jacobi-theta-functions
+    note: |
+      供给**恒等式里的三个对象** ϑ₀₀(0,τ)、ϑ₀₁(0,τ)、ϑ₁₀(0,τ)（该卡断言 (2) 的级数定义）
+      与上半平面的设定。
+      **非 inferred**：W–W §21.2 的证明对象 ϑ₂², ϑ₃², ϑ₄² 就是本卡定义的 ϑ₁₀², ϑ₀₀², ϑ₀₁²
+      （对照由 Polchinski (7.2.37a–d) 逐字给出），且 W–W 的 ϑ₃(0) = 1 + 2Σ_{n≥1}exp(πin²τ)
+      **逐项等于**该定义卡的 ϑ₀₀(0,τ) = Σ_{n∈Z} exp(πin²τ)。
+      ⚠ 该定义卡自身 status = rigorous 且无依赖，故不压低本推导。
+    convention_map: |
+      **Whittaker–Watson（1920 第三版）↔ 本图的字典**：
+        · **四个函数**：W–W 的 ϑ₁, ϑ₂, ϑ₃, ϑ₄ ↔ 本图的 −ϑ₁₁, ϑ₁₀, ϑ₀₀, ϑ₀₁
+          （对照式 = Polchinski (7.2.37a–d)，L1 逐字）。
+          ⇒ W–W 的 **ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴** 即本图的 **ϑ₁₀⁴ + ϑ₀₁⁴ = ϑ₀₀⁴**，移项就是目标卡断言。
+        · **零宗量省略**：W–W 写不带宗量的 ϑ₂, ϑ₃, ϑ₄ 表示 ϑ₂(0), ϑ₃(0), ϑ₄(0)
+          （W–W 书 p.464 逐字：「`ϑ₂(0), ϑ₃(0), ϑ₄(0)` will be replaced by `ϑ₂, ϑ₃, ϑ₄`」）。
+        · **宗量**：W–W 用 z_W，准周期 π, πτ；本图用 v，准周期 1, τ ⇒ z_W = πv。
+          ⚠ **本推导只用到 z_W = 0 ⇔ v = 0，故这一行在本推导里是平凡的。**
+        · **展开参数**：W–W 的 q_W = exp(πiτ)，本图的 q = exp(2πiτ) = q_W²。
+          ⚠ **这一行在本推导里不咬人**：目标卡是零宗量恒等式，两端是同一个 τ 的函数，
+          且 math.jacobi-theta-functions 的级数写成 exp(πin²τ) 而非 q 的幂。
+          （researcher 的警告 math-sources.md §56.2(e) 逐字：「**q 的定义差一次方这件事，
+           在零宗量恒等式里不影响等式成立**（两边同一个 q），但**在抄乘积公式时会咬人**」
+           ——后半句针对 math.jacobi-triple-product，不针对本推导。）
+      **字典来源**：literature/extractions/math-sources.md **§56.2(e)** 的对照表（L1 页图）。
+sources:
+  - ref: whittaker-watson-1920
+    loc: "§21.2 (The relations between the squares of the Theta-functions) 及其末尾的 Corollary"
+    note: |
+      **L1（archive.org 公有领域页图逐字，1920 年第三版）**，抽取记录
+      literature/extractions/math-sources.md **§56.2(a)**（researcher，2026-09-11）。
+      ★★★ **本推导的全部严格性来自这一条，且 W–W 给了完整证明**（论证骨架见 summary）。
+      Corollary 逐字：「Writing `z = 0` in the last relation, we have `ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴`, …」
+      ⚠ **W–W 全书无编号定理** ⇒ 这一条的标签就是 `Corollary`，**不得写成 "Theorem 21.2"**。
+      ⚠ **不得引 1927 第四版的页码**（本项目核实的是第三版；第四版节号是否相同为 L0，Q56.1）
+      ⇒ loc **只写节号**。
+      ★ **方向别搞反**（researcher 特意记下的一条）：W–W 书 p.468（§21.22 证明中）逐字
+      「`Aϑ₃⁴ = ϑ₂⁴ + ϑ₃⁴ + ϑ₄⁴`; and so, **by § 21·2 corollary**, we see that `A = 2`.」
+      ⇒ **§21.22 依赖 §21.2 Corollary，不是反过来**；本推导引的是被依赖的那一端，无循环。
+  - ref: whittaker-watson-1920
+    loc: "§20.12 与 §20.13（无零点无极点 / 至多一个单极点的双周期函数是常数）"
+    note: |
+      **本条是 §21.2 证明内部引用的定理**，W–W 逐字「**By § 20·13, such a function is merely a
+      constant**」（math-sources.md §56.2(a) 的逐字节录）。列在这里是为了让「证明完整」可核；
+      ⚠ **本项目未逐行复核 §20.12/§20.13 的证明**（见 gaps 第二条）。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. **(7.2.37a–d)**, p. 215（ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄、ϑ₁₀ = ϑ₂、ϑ₁₁ = −ϑ₁）"
+    note: |
+      L1（抽取记录 polchinski-1998-v1-ch7.md #E15）。**本条只支撑 convention_map 的第一行**
+      （W–W 的 ϑ₂/ϑ₃/ϑ₄ ↔ 本图的 ϑ₁₀/ϑ₀₀/ϑ₀₁），不支撑恒等式本身。
+      ★ 这一行是原书**逐字印出**的对照式，故字典这一半不是本图的外推。
+summary: |
+  **W–W §21.2 给的是一条完整的、自足的证明**（这正是本推导可以标 rigorous 的理由）。骨架：
+
+  **第 1 步（Liouville 型论证）**。W–W 逐字：
+  「Each of the four functions `ϑ₁²(z), ϑ₂²(z), ϑ₃²(z), ϑ₄²(z)` is analytic for all values of `z` and has
+   periodicity factors `1, q^{−2}e^{−4iz}` associated with the periods `π, πτ`; and each has a double zero
+   (and no other zeros) in any cell. … is a *doubly-periodic function* (with periods `π, πτ`) having at most
+   only a *simple* pole in each cell. **By § 20·13, such a function is merely a constant**; …」
+  ⇒ 四个平方之间的适当线性组合是常数，定出**四条平方关系**（W–W 书 p.466 末，无编号）：
+    ϑ₂²(z)ϑ₄² = ϑ₄²(z)ϑ₂² − ϑ₁²(z)ϑ₃² ,   ϑ₃²(z)ϑ₄² = ϑ₄²(z)ϑ₃² − ϑ₁²(z)ϑ₂² ,
+  以及（把 z 换成 z + ½π 得到的）
+    ϑ₁²(z)ϑ₄² = ϑ₃²(z)ϑ₂² − ϑ₂²(z)ϑ₃² ,   **ϑ₄²(z)ϑ₄² = ϑ₃²(z)ϑ₃² − ϑ₂²(z)ϑ₂²** 。
+
+  **第 2 步（Corollary：令 z = 0）**。把最后一条取 z = 0，W–W 逐字：
+  「***Corollary.*** Writing `z = 0` in the last relation, we have **`ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴`**」。
+
+  **第 3 步（本推导做的唯一一件事：换记号）**。按 convention_map 的第一、二行把 W–W 的
+  ϑ₂, ϑ₃, ϑ₄ 换成本图的 ϑ₁₀(0,τ), ϑ₀₀(0,τ), ϑ₀₁(0,τ)：
+    ϑ₁₀(0,τ)⁴ + ϑ₀₁(0,τ)⁴ = ϑ₀₀(0,τ)⁴ ，
+  移项即 **ϑ₀₀(0,τ)⁴ − ϑ₀₁(0,τ)⁴ − ϑ₁₀(0,τ)⁴ = 0** = 目标卡断言（也逐字 = Polchinski (7.2.41)）。✓
+
+  **为什么是 rigorous（按 docs/STATUS_LEVELS.md 第 4 级主判据）**
+  「有发表的、数学界接受的完整证明；来源必须是数学文献或数学物理文献」——
+  W–W 是数学文献；§21.2 的证明完整（Liouville 型定理 §20.13 + 四条平方关系 + 代入 z = 0），
+  本推导只在第 3 步做了一次**有限步的记号翻译**（一个三项等式的移项 + 一张逐字对照表）。
+  ⚠ **不得标 formalized**：Mathlib 是否有 ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴ **本项目未核实**
+  （math-sources.md **Q56.2** 明列为未查）。
+  ⚠ **不得把 Polchinski 当严格来源**：两卷对这条恒等式都是**零证明零引文**
+  （v1 #E15「全部无证明」；v2 §5.4 要点 2「只有引号里的名字」）。
+
+  **本推导不覆盖的**：一般宗量版（W–W §21.22 Example 4，习题不证）、乘积形式版
+  （W–W §21.3 末 Example，习题不证）、以及迹记号形式 (10.7.16)（目标卡「不断言 (a)」）。
+gaps:
+  - "**迹记号形式 (10.7.16) 不在本推导的覆盖范围内（对物理侧下游最要紧的一条）**：
+     Polchinski Vol.2 用的是 Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0，它 = 本卡断言 ÷ η(τ)⁴
+     （由 (10.7.7c) Z^α_β = ϑ[α/2;β/2](0,τ)/η(τ)，并需 η ≠ 0）。
+     **原书从不写这一步换算** ⇒ researcher 的硬裁定（polchinski-1998-v2.md §5.4 要点 3 逐字）：
+     『**这一步换算原书没写** ⇒ 边要标 `inferred`』。
+     ⇒ 一切用到 (10.7.16) 的下游推导对目标卡的边**必须标 inferred: true**，
+     直到建出 **worldsheet.jacobi-abstruse-identity-trace-form**（见目标卡 notes 的待建项）。
+     ⚠ 那张待建卡**不会是 rigorous**：(10.7.7c) 是自由场迹的形式计算。"
+  - "**W–W 证明内部引用的定理本项目未逐行复核**：§21.2 的论证引 **§20.13**
+     （至多一个单极点的双周期函数是常数）与椭圆函数的零点计数；researcher 本轮逐页读到的是
+     §21.2–§21.42 的**正文**，未追 §20.12/§20.13 的证明。
+     ⇒ 这不影响 rigorous 的判定（STATUS_LEVELS 第 4 级要的是『有发表的、数学界接受的完整证明』，
+     不是『本项目逐行复核过』），但**若要形式化，这两条是前置件**。"
+  - "**版本缺口**：本项目核实的是 **1920 年第三版**；物理文献几乎一律引 **1927 年第四版**，
+     第四版的节号是否与第三版相同**本项目为 L0**（math-sources.md **Q56.1**；1946 重印件是
+     借阅制 item，`fulltext/inside.php` 返回 HTTP 403）。⇒ 本推导 loc **只写节号不写页码**。"
+  - "**记号翻译步未经 reviewer 独立复核**：summary 第 3 步用的对照 ϑ₃ = ϑ₀₀、ϑ₄ = ϑ₀₁、ϑ₂ = ϑ₁₀
+     虽然是 Polchinski (7.2.37a–d) 的逐字内容，但『W–W 的 ϑ_k 与 Polchinski 的 ϑ_k 是同一个函数』
+     这一句**两书都不写**（Polchinski 不引 W–W，W–W 早于 Polchinski 七十年）。
+     本推导据两书各自的级数定义核对过（见 depends_on 的 note：W–W 的 ϑ₃(0) 逐项等于本图的 ϑ₀₀(0,τ)），
+     **但没有 reviewer-verified 记录**。⇒ 正解是给本图加一张『W–W θ 记号 ↔ 本图 θ 记号』的
+     约定卡（graph/conventions/ 目前没有 θ 记号的约定节点）。**已列入交 lead 的报告。**"
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立。
+
+  ★【本推导是本图里少见的「物理链上的纯数学硬点」】它把
+  worldsheet.superstring-total-fermionic-partition-function-vanishes 那条链上的一件输入
+  由「从原书导入的断言」变成了**有完整数学证明的 rigorous 节点**。
+  ⚠ **但这不会提升那条物理链的有效状态**：那条推导自身封在 physical-argument
+  （理由是原书的归因『by supersymmetry』无式号、『总和为零 ⇒ 逐项反号』那一步原书跳过、
+  上游三张振幅卡全是 physical-argument）——那条推导的 summary 里已逐字写明
+  「即使把 (10.7.16) 建成一张 rigorous 的数学卡，(1)(3)(4) 仍在，本推导不会自动升级」。
+  **本推导正是那句话说的那张卡；它的价值在于把缺口从『两条事实无节点』缩小到『物理侧那三条』。**
+
+  ⚠【别把本推导读成「Polchinski 证了 abstruse identity」】Polchinski 两卷对它都是零证明零引文；
+  本推导的严格性 100% 来自 Whittaker–Watson。Polchinski 在本推导里只出现在 sources 第三条，
+  且**只用于记号对照**。
+author: curator
+created: "2026-09-11"

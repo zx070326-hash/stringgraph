@@ -96,7 +96,29 @@ sources:
       ⚠ 本图另有 worldsheet.gso-projection，但那张卡是**闭弦** IIA/IIB/type 0 的 GSO；
       (10.8.15) 说的是**开弦**扇区的 GSO，故本卡取前者。
 tags: [superstring, type-i, worldsheet-parity, orientifold-projection, gso, definition]
+superseded_by: worldsheet.superstring-worldsheet-parity-action-v2
 notes: |
+  ★★★【2026-09-11 已换代并拆为两张卡（curator，batch27-fix）】
+  · **definition**：worldsheet.superstring-worldsheet-parity-action-v2
+    ——只含本卡断言 (1)(2)，即 (10.8.12)(10.8.13)，仍取 `status: rigorous`；
+  · **proposition**：worldsheet.open-superstring-omega-squared-is-fermion-parity
+    ——本卡断言 (3)(4)，即 (10.8.14)(10.8.15)，推导 physical-argument。
+  换代理由（reviewer-batch27 F2，CONFIRMED）：
+    (i) (10.8.14)(10.8.15) 是**由 (10.8.13) 推出的命题**，不是定义，本卡把它们塞进定义卡；
+    (ii) 更要紧：本卡断言 (3) 写成**无限定**的算符等式 Ω² = exp(πiF)，而由本卡自己的断言 (2)
+         在 **R 扇区（r ∈ Z）**得 Ω²ψ_rΩ^{−2} = **+**ψ_r（Ω² 与 ψ_r 对易），
+         exp(πiF) 却与全部 ψ^μ 反对易 ⇒ **断言 (3) 与断言 (2) 在 R 扇区矛盾**；
+         它只在 exp(πiF) = 1 的 GSO 投影谱上才是原书那句 'physically the same'。
+    (iii) 本卡「不断言 (a)」已承认 R 扇区无论证，却仍把 (3) 写成无限定断言并标 rigorous；
+         而 notes 里「有限步初等计算 ⇒ rigorous」的理由**只覆盖 NS 扇区**，
+         且 STATUS_LEVELS 的 rigorous 例外还要求推导 notes 有 `reviewer-verified` 记录
+         （定义卡无推导，无处写）。
+  ⚠ 本卡的 uses 里 worldsheet.type-i-open-string-gauge-multiplet 是为断言 (4) 的
+  「exp(πiF) = 1 by the GSO projection」加的，随 (10.8.15) 一起移到命题卡
+  （命题卡改指更贴切的窄卡 worldsheet.open-superstring-gso-projection）。
+  ⚠ 按原则 1，本卡的 id 与 statement 正文**不改**；正文里对其他卡的字面引用同样不追改
+  （graph/CLAUDE.md 2026-09-12 裁决）。
+
   ★★【本卡为什么存在（curator，2026-09-11，klein-mobius）】
   在此之前，本图里凡需要「Ω 在超弦上的作用」的推导都只能把边挂到**玻色弦**的
   worldsheet.worldsheet-parity 上并标 **inferred**，并各自在 gaps 里记一句同样的话：

@@ -19,17 +19,30 @@ depends_on:
       ⚠ 那张卡的 2²⁶ ↔ 本卡的 2¹⁰ 是同一组公式在不同 D 下取值（抽取记录 #E74 的对照表），
       但「2^D 是普适计数」这个说法**原书没有**，见目标卡「不断言 (e)」。
   - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    inferred: true
     note: |
-      供给**费米迹的记号与对象**：Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 的定义（§10.7 (10.7.7)–(10.7.8)，
-      'these traces are for a pair of dimensions' ⇒ 8 个横向费米子给四次幂）与 (10.7.9) 的组合。
-      (10.8.10a,b) 右端的 Z⁰₀(2it)⁴ 与 −Z¹₀(2it)⁴、(10.8.11) 方括号里的
-      [Z⁰₀(2it)⁴ − Z¹₀(2it)⁴] 全部用这套记号。
-      **非 inferred**：§10.8 通篇使用 §10.7 的 Z^α_β 记号，且圆柱处（#E65）逐字写明
-      'with the fermionic trace (10.7.9) from one side of the type II string'；
-      Klein 瓶处虽不重复这句引用，用的仍是同一套迹。
+      供给**两件事**，其中第二件是本图补的识别，故整条边按下面的记账标 **inferred**：
+        **(i) 费米迹的记号与对象**：Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 的定义（§10.7 (10.7.7)–(10.7.8)，
+             'these traces are for a pair of dimensions' ⇒ 8 个横向费米子给四次幂）与 (10.7.9)
+             的组合。(10.8.10a,b) 右端的 Z⁰₀(2it)⁴ 与 −Z¹₀(2it)⁴、(10.8.11) 方括号里的
+             [Z⁰₀(2it)⁴ − Z¹₀(2it)⁴] 全部用这套记号。
+             **这一件本身是非 inferred 的**：§10.8 通篇使用 §10.7 的 Z^α_β 记号，且圆柱处（#E65）
+             逐字写明 'with the fermionic trace (10.7.9) from one side of the type II string'。
+        **(ii) (10.8.3) 第二式 Z^α_β(it) = Z^β_{−α}(i/t) 在 Klein 瓶这一支的使用**：
+             **原书在 (10.8.11) 处直接写等号**，既不重述 (10.8.3) 也不写换元步骤
+             （(10.8.3) 与 'Using the modular transformations … and defining s = π/t' 那句是
+             **圆柱**处的，#E66）。⇒「Klein 瓶用的就是这两条模变换」是本图补的识别。
+      ★★【2026-09-11 改标 inferred，batch27-fix / reviewer-batch27 P1】旧版把本边整条标为
+      **非 inferred**，却同时声称它「供给 (10.8.3) 第二式」——而**同一个未写出步骤**的另一条边
+      （math.dedekind-eta-s-transformation，供 (10.8.3) 第一式）标的是 **inferred**：
+      **同一步两种记账**。lead 裁定统一为**两条都 inferred**。
+      ⚠ **记账口径（本图此后照此办）**：一条边只要它供给的**任一件**在 sources 的 loc 处
+      找不到论证，整条边就标 inferred，并在 note 里逐件写明哪件有来源、哪件是本图补的
+      （原则 5 要求的是「找不到就标 inferred 并留 note」，不是「按比例折中」）。
+      ⇒ 本边的 (i) 有逐字来源、(ii) 没有，故整条 inferred，记账写在上面。
       ⚠ 只借迹的**形式与记号**，**不借**那张卡的结论（横向费米子个数是 8 的倍数）。
-      ⚠ 同时供给 (10.8.3) 第二式 Z^α_β(it) = Z^β_{−α}(i/t) 的对象——它是 §10.7 (10.7.14)
-      的特例，而 (10.7.14) 原书明确带 **naive** 限定（见 gaps 第一条）。
+      ⚠ (10.8.3) 第二式是 §10.7 (10.7.14) 的特例，而 (10.7.14) 原书明确带 **naive** 限定
+      （见 gaps 第一条）。
   - id: worldsheet.gso-projection
     note: |
       供给 **(10.8.7)** 的 GSO 投影算符 [(1+exp(πiF))/2]·[(1+exp(πiF̃))/2]，
