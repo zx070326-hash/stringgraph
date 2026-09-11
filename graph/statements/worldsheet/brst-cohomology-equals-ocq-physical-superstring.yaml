@@ -147,5 +147,20 @@ notes: |
   worldsheet.no-ghost-theorem-superstring-cohomological **两张都要换代**，
   且必须同步（否则"设定完全相同"这句话会第二次失真）。
   详见姊妹卡 notes 末尾的同名条目。
+
+  【★ 2026-09-11 裁决（physics-auditor，分支 agent/auditor/rulings-3）：「p 未来向」**不是本质前提**，
+  本卡**不换代**；与姊妹卡 worldsheet.no-ghost-theorem-superstring-cohomological 同日同裁决，
+  逐页依据写在那张卡的同名段，此处只记本卡特有的三点】
+  (1) LZ 的假设是 p.305 Remark 逐字 "R^{D−1,1}_+ = {p ∈ R^{D−1,1}: p^D > 0}"——**半空间**，且 LZ 自述
+      其用途只是 "For if we allow p^D < 0, "time reversal" will reverse the signature of ⟨,⟩_R"，即
+      R(p,0) 上厄米形式（Definition 1.3(ii)）的整体符号取向。消灭定理、Theorem 2.7、维数公式
+      Corollary 2.15(i)/2.19(i) 只用 p ≠ 0。
+  (2) 对本卡的两个**酉同构**，这个符号更无关紧要：⟨,⟩ 的等距映射也是 −⟨,⟩ 的等距映射；Theorem 2.20
+      的证明（p.321）只用 λ 的等距性、Corollary 2.19(ii) 的定号性与两条维数相等。p^D < 0 时 T∩P 与
+      H⁰_rel(p,0) 一同变负定，rad P、λ、两个同构一字不变。
+  (3) ⚠ 本卡 **statement 设定段**逐字写有「（并按 lian-zuckerman-1989 的假设取 p 在未来半光锥）」：
+      "半光锥"是对 LZ 半空间的误译，且作为附加假设它**强于** LZ 实际所设。方向安全（本卡因此断言得
+      比 LZ 少，不多），且按本裁决该假设本身只是符号约定，故不构成 drift、不换代；**陈述不可变**，
+      这个括注留待下次实质换代时删去。设定段「与姊妹卡 (H1)–(H5) 完全相同」一句在图内两卡之间仍准确。
 author: curator
 created: "2026-09-11"
