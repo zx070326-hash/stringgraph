@@ -492,6 +492,60 @@ theorem mem_physSubmodule_inf_levelSubmodule_two_iff (hη : ∀ μ, η μ * η �
 
 end LevelTwoPhys
 
+
+/-! ### The vertex operator on a level-one state -/
+
+section VertexOnPolState
+
+variable (η c e : Fin D → R)
+
+/-- `V_K` on a single oscillator: `V_K α^μ_{-1}|k⟩ = α^μ_{-1} Φ_K - c^μ Φ_{K+1}`. -/
+lemma vertexOsc_apply_X_one (K : ℤ) (μ : Fin D) :
+    vertexOsc η c K (X ((μ, 1) : Osc D) : Fock D R)
+      = (X ((μ, 1) : Osc D) : Fock D R) * creaExp η c K - c μ • creaExp η c (K + 1) := by
+  have h := vertexOsc_X_mul η c ((μ, 1) : Osc D) K 1
+  rw [mul_one, vertexOsc_apply_one] at h
+  rw [h, vertexOsc_apply_one]
+  norm_num
+
+/-- **`V_K` on a level-one state**:
+`V_K (ζ·α_{-1})|k⟩ = (ζ·α_{-1}) Φ_K - (ζ·c) Φ_{K+1}`. -/
+lemma vertexOsc_apply_polState (K : ℤ) :
+    vertexOsc η c K (polState η e)
+      = polState η e * creaExp η c K - dotVec η e c • creaExp η c (K + 1) := by
+  have hmul : polState η e * creaExp η c K
+      = ∑ μ : Fin D, (η μ * e μ) • ((X ((μ, 1) : Osc D) : Fock D R) * creaExp η c K) := by
+    rw [polState, Finset.sum_mul]
+    exact Finset.sum_congr rfl fun μ _ => smul_mul_assoc _ _ _
+  have hdot : dotVec η e c • creaExp η c (K + 1)
+      = ∑ μ : Fin D, (η μ * e μ * c μ) • creaExp η c (K + 1) := by
+    rw [dotVec, Finset.sum_smul]
+  have hterm : ∀ μ : Fin D,
+      vertexOsc η c K ((η μ * e μ) • (X ((μ, 1) : Osc D) : Fock D R))
+        = (η μ * e μ) • ((X ((μ, 1) : Osc D) : Fock D R) * creaExp η c K)
+          - (η μ * e μ * c μ) • creaExp η c (K + 1) := fun μ => by
+    rw [map_smul, vertexOsc_apply_X_one η c K μ, smul_sub, smul_smul]
+  conv_lhs => rw [polState]
+  rw [map_sum, Finset.sum_congr rfl fun μ _ => hterm μ, Finset.sum_sub_distrib, ← hmul, ← hdot]
+
+variable {η}
+
+/-- `α^μ_1` on a product of a level-one state and a creation exponential (Leibniz). -/
+lemma mode_one_apply_polState_mul_creaExp (p : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (μ : Fin D) (K : ℤ) :
+    mode η p μ 1 (polState η e * creaExp η c K)
+      = e μ • creaExp η c K + c μ • (polState η e * creaExp η c (K - 1)) := by
+  have hm : mode η p μ (1 : ℤ) = annihilation η μ 1 := by
+    simpa using mode_pnat η p (1 : ℕ+) μ
+  have hpol : annihilation η μ 1 (polState η e) = e μ • (1 : Fock D R) := by
+    rw [← hm]
+    exact mode_one_apply_polState η p hη e μ
+  have hcre : annihilation η μ 1 (creaExp η c K) = c μ • creaExp η c (K - 1) := by
+    simpa using annihilation_creaExp η c hη μ 1 K
+  rw [hm, annihilation_mul, hpol, hcre, smul_mul_assoc, one_mul, mul_smul_comm]
+
+end VertexOnPolState
+
 end Fock
 
 /-! ### The exact expansion of `A^ε_{-2}` on the ground state -/
@@ -570,6 +624,155 @@ theorem ddfOp_neg_two_apply_towerVacuum (η a b ε : Fin D → R) (hη : ∀ μ,
   module
 
 end DDFLevelTwo
+
+/-! ### `A^ε_{-1} A^δ_{-1}` on the ground state -/
+
+section DDFProduct
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- A polarised mode on a rung vector, written out. -/
+lemma towerModeVec_apply_single (η a b ε : Fin D → R) (p i : ℤ) (Q : Fock D R) :
+    towerModeVec η a b ε p (Finsupp.single i Q)
+      = Finsupp.single i
+          (∑ μ : Fin D, (η μ * ε μ) • Fock.mode η (towerMomentum a b i) μ p Q) := by
+  rw [towerModeVec, LinearMap.sum_apply, Finsupp.single_finsetSum]
+  exact Finset.sum_congr rfl fun μ _ => by
+    rw [LinearMap.smul_apply, towerMode_single, Finsupp.smul_single]
+
+lemma towerLevelBound_single_le (j : ℤ) (P : Fock D R) :
+    towerLevelBound (Finsupp.single j P) ≤ Fock.levelBound P := by
+  classical
+  refine Finset.sup_le fun i hi => ?_
+  have hij : i = j := by simpa using Finsupp.support_single_subset hi
+  subst hij
+  rw [Finsupp.single_eq_same]
+
+lemma towerModeBound_single_le (j : ℤ) (P : Fock D R) :
+    towerModeBound (Finsupp.single j P) ≤ Fock.modeBound P := by
+  classical
+  refine Finset.sup_le fun i hi => ?_
+  have hij : i = j := by simpa using Finsupp.support_single_subset hi
+  subst hij
+  rw [Finsupp.single_eq_same]
+
+lemma levelBound_le_of_mem_levelSubmodule {N : ℕ} {P : Fock D R}
+    (hP : P ∈ Fock.levelSubmodule D R N) : Fock.levelBound P ≤ N := by
+  classical
+  exact Finset.sup_le fun d hd => le_of_eq (hP (MvPolynomial.mem_support_iff.mp hd))
+
+variable [Algebra ℚ R]
+
+/-- The DDF vertex operator on a level-one rung vector, using transversality of `δ`. -/
+lemma towerVertex_apply_single_polState (η b δ : Fin D → R) (hδb : dotVec η δ b = 0)
+    (n K j : ℤ) :
+    towerVertex η b n K (Finsupp.single j (Fock.polState η δ))
+      = Finsupp.single (j + n)
+          (Fock.polState η δ * Fock.creaExp η (vertexMomentum b n) (K - n)) := by
+  rw [towerVertex_single, Fock.vertexOsc_apply_polState, dotVec_vertexMomentum_right, hδb,
+    mul_zero, zero_smul, sub_zero]
+
+/-- `α^ε_1` on `(δ·α_{-1}) Φ_K`, when `ε` is orthogonal to the vertex momentum. -/
+lemma towerModeVec_one_apply_single_polState_mul_creaExp (η a b ε δ c : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hεc : dotVec η ε c = 0) (i K : ℤ) :
+    towerModeVec η a b ε 1
+        (Finsupp.single i (Fock.polState η δ * Fock.creaExp η c K))
+      = Finsupp.single i (dotVec η ε δ • Fock.creaExp η c K) := by
+  rw [towerModeVec_apply_single]
+  congr 1
+  have hterm : ∀ μ : Fin D,
+      (η μ * ε μ) • Fock.mode η (towerMomentum a b i) μ 1
+          (Fock.polState η δ * Fock.creaExp η c K)
+        = (η μ * ε μ * δ μ) • Fock.creaExp η c K
+          + (η μ * ε μ * c μ) • (Fock.polState η δ * Fock.creaExp η c (K - 1)) := fun μ => by
+    rw [Fock.mode_one_apply_polState_mul_creaExp (c := c) (e := δ)
+      (p := towerMomentum a b i) hη μ K, smul_add, smul_smul, smul_smul]
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ, Finset.sum_add_distrib, ← Finset.sum_smul,
+    ← Finset.sum_smul, ← dotVec, ← dotVec, hεc, zero_smul, add_zero]
+
+/-- **`A^ε_{-1}` on a transverse level-one rung vector.**  The window is `{-2,-1,0,1}`; only
+`j = -1` and `j = 1` survive, and the `j = 1` term is the new feature compared with the
+ground state: it is the central term `(ε·δ) Φ_2` of the DDF algebra. -/
+theorem ddfOp_neg_one_apply_single_polState (η a b ε δ : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hεb : dotVec η ε b = 0) (hδb : dotVec η δ b = 0)
+    (hεa : dotVec η ε a = 0) :
+    ddfOp η a b ε hη hεb (-1) (Finsupp.single (-1) (Fock.polState η δ))
+      = Finsupp.single (-2) (Fock.polState η ε * Fock.polState η δ
+          + dotVec η ε δ • Fock.creaExp η (vertexMomentum b (-1)) 2) := by
+  classical
+  set x : TowerFock D R := Finsupp.single (-1) (Fock.polState η δ) with hx
+  have hεc : dotVec η ε (vertexMomentum b (-1)) = 0 := by
+    rw [dotVec_vertexMomentum_right, hεb, mul_zero]
+  have hlb : towerLevelBound x ≤ 1 :=
+    le_trans (towerLevelBound_single_le _ _)
+      (levelBound_le_of_mem_levelSubmodule (Fock.polState_mem_levelSubmodule_one δ))
+  have hmb : towerModeBound x ≤ 1 :=
+    le_trans (towerModeBound_single_le _ _)
+      (Fock.modeBound_le_of_mem_levelSubmodule (Fock.polState_mem_levelSubmodule_one δ))
+  have hs : ∀ j ∉ ({-2, -1, 0, 1} : Finset ℤ), ddfSummand η a b ε (-1) j x = 0 := by
+    intro j hj
+    simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hj
+    obtain ⟨h1, h2, h3, h4⟩ := hj
+    refine ddfSummand_apply_eq_zero_of_notMem_window η a b ε hη hεb (-1) x j ?_
+    rw [ddfWindow, Finset.mem_Icc, not_and_or]
+    rcases lt_or_ge j 0 with h | h
+    · exact Or.inl (by omega)
+    · exact Or.inr (by omega)
+  have hterm : ∀ j : ℤ, ddfSummand η a b ε (-1) j x
+      = towerModeVec η a b ε j (Finsupp.single (-2)
+          (Fock.polState η δ * Fock.creaExp η (vertexMomentum b (-1)) (j + 1))) := by
+    intro j
+    rw [ddfSummand, Module.End.mul_apply, hx,
+      towerVertex_apply_single_polState η b δ hδb (-1) j (-1),
+      show (-1 : ℤ) + -1 = -2 by ring, show j - (-1) = j + 1 by ring]
+  have hm2 : ddfSummand η a b ε (-1) (-2) x = 0 := by
+    rw [hterm, Fock.creaExp_of_neg _ _ (show (-2 : ℤ) + 1 < 0 by norm_num), mul_zero,
+      Finsupp.single_zero, map_zero]
+  have hm1 : ddfSummand η a b ε (-1) (-1) x
+      = Finsupp.single (-2) (Fock.polState η ε * Fock.polState η δ) := by
+    rw [hterm, show (-1 : ℤ) + 1 = 0 by ring, Fock.creaExp_zero, mul_one,
+      towerModeVec_neg_one_apply_single]
+  have hz : ddfSummand η a b ε (-1) 0 x = 0 := by
+    rw [hterm, towerModeVec_zero_apply_single, dotVec_vec_towerMomentum, hεa, hεb, mul_zero,
+      add_zero, zero_smul]
+  have hp1 : ddfSummand η a b ε (-1) 1 x
+      = Finsupp.single (-2) (dotVec η ε δ • Fock.creaExp η (vertexMomentum b (-1)) 2) := by
+    rw [hterm, show (1 : ℤ) + 1 = 2 by ring,
+      towerModeVec_one_apply_single_polState_mul_creaExp η a b ε δ _ hη hεc (-2) 2]
+  rw [ddfOp_apply η a b ε hη hεb (-1) x hs,
+    Finset.sum_insert (by decide), Finset.sum_insert (by decide), Finset.sum_insert (by decide),
+    Finset.sum_singleton, hm2, hm1, hz, hp1, zero_add, zero_add, ← Finsupp.single_add]
+
+/-- `Φ_2` at vertex momentum `-k_0`:
+`Φ_2 = ½[(k_0·α_{-1})² - (k_0·α_{-2})]`. -/
+lemma creaExp_two_vertexMomentum_neg_one (η b : Fin D → R) :
+    Fock.creaExp η (vertexMomentum b (-1)) 2
+      = invTwo R • (Fock.polState η b * Fock.polState η b - Fock.secondState η b) := by
+  have h1 : (((-1 : ℤ)) : R) = -1 := by norm_num
+  rw [Fock.creaExp_two, Fock.polState_vertexMomentum, Fock.secondState_vertexMomentum, h1,
+    neg_one_smul, neg_one_smul, neg_mul_neg, ← sub_eq_add_neg]
+
+/-- **`A^ε_{-1} A^δ_{-1}` on the ground state** (`formal/TODO.md` item `noghost-b`,
+blocker (a), second half):
+
+`A^ε_{-1} A^δ_{-1}|0;k⟩ = [(ε·α_{-1})(δ·α_{-1})
+    + ½ (ε·δ) ((k_0·α_{-1})² - (k_0·α_{-2}))] |0; k - 2k_0⟩`.
+
+The correction is manifestly symmetric under `ε ↔ δ`, as it must be:
+`⁅A^ε_{-1}, A^δ_{-1}⁆ = -(ε·δ) δ_{-2,0} = 0` (`lie_ddfOp_ddfOp`). -/
+theorem ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum (η a b ε δ : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (hεb : dotVec η ε b = 0) (hδb : dotVec η δ b = 0)
+    (hεa : dotVec η ε a = 0) (hδa : dotVec η δ a = 0) :
+    ddfOp η a b ε hη hεb (-1) (ddfOp η a b δ hη hδb (-1) (towerVacuum D R))
+      = Finsupp.single (-2) (Fock.polState η ε * Fock.polState η δ
+          + dotVec η ε δ • (invTwo R • (Fock.polState η b * Fock.polState η b
+              - Fock.secondState η b))) := by
+  rw [ddfOp_neg_one_apply_towerVacuum η a b δ hη hδb hδa,
+    towerModeVec_neg_one_apply_single_vacuum,
+    ddfOp_neg_one_apply_single_polState η a b ε δ hη hεb hδb hεa,
+    creaExp_two_vertexMomentum_neg_one]
+
+end DDFProduct
 
 /-! ### The complete level-two slice of the tower physical subspace -/
 
