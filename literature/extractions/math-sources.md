@@ -4190,6 +4190,20 @@ Ana da Silva Rodrigues, *Classification of Surfaces*, 2023（`people.math.ethz.c
 带边曲面一个字都没提。他只证了「标准曲面两两不同伦等价」这半边（唯一性），不证存在性/穷尽性。**
 任务书里「Hatcher §1.2 末（无编号？核实）」——**核实结果是比「无编号」更强的否定：那条定理不在那里**。
 
+> **2026-09-11 追加（researcher，另一次派工）：Hatcher 在本项目里另有一条*肯定*用途。**
+> 全书 PDF `pi.math.cornell.edu/~hatcher/AT/AT.pdf`（7.7 MB，**有文本层**，**PDF 页 = 书页 + 9**，
+> 与 `ATch1.pdf` 的 −20 偏移不同，别混）。
+> **Euler 示性数 = 同调秩的交错和 = `Theorem 2.44`，`Ch. 2, §2.2`，小标题「Euler Characteristic」，书上 p. 146**，
+> 证明跨 pp. 146–147。逐字：「**Theorem 2.44.** `χ(X) = Σ_n (−1)^n rank H_n(X)`.」
+> 量词「`X` 是 **finite** CW complex」写在定理**正上方的定义句**里，不在定理语句内：
+> 「For a finite CW complex `X`, the **Euler characteristic** `χ(X)` is defined to be the alternating sum
+> `Σ_n(−1)^n c_n` where `c_n` is the number of `n`-cells of `X` …」。
+> 定理正下方给 `rank` 的定义，并把「`0→A→B→C→0` 正合 ⇒ `rank B = rank A + rank C`」**留作习题**
+> （逐字「whose proof we leave as an exercise」）——这是该证明**唯一**的外包步骤。
+> 证明标题印作 **`Proof of 2.44`**（不是 `Proof.`），末句「Applying this with `C_n = H_n(X^n, X^{n−1})` then gives the theorem.」
+> ⇒ **可作 FGZ `Proposition 1.3`（Euler–Poincaré principle，FGZ 只陈述不证明）的数学侧第二来源**，
+> 见 `brst-cohomology-sources.md` §9.11。
+
 ---
 
 ### 39.6 ★★★ (B) 本轮最重要的发现：**Polchinski 原书自己给了全部四条**（L1 原书页图）

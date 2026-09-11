@@ -485,3 +485,231 @@ p.320 的 `Remark`（「`V(p,κ)` is in general **not** a direct sum of Verma mo
 | 期刊 pp.316–318 | `Read(pages=16-18)` | ✅ Cor 2.15 全文 + Def 2.16/2.17 + Prop 2.18 陈述与证明首段 |
 | 期刊 pp.319–321 | `Read(pages=19-21)` | ✅ (24)(25) + p.320 Remark + Cor 2.19 全文 + Thm 2.20 全文 + Lemma 3.1 |
 | 期刊 p.317 单页重读 | `Read(pages=17)` | ✅ 专为确认 Cor 2.15 证明里两处都是 `Proposition 2.14(ii)`（"also" 为内部佐证） |
+
+---
+
+## 10. ★★ `Proposition 2.14` 复核（2026-09-11，researcher 第四轮页图，期刊 pp.311–317 全七页）
+
+> 只追加，不改上文 §2 E5 任何一行。触发（lead）：图节点
+> `worldsheet.superstring-relative-complex-character-signature` 现在只有本记录 §2 **E5 的转录**（E5 只有一行转述，
+> 没有逐字、没有证明结构），且其前提 **(H4)「⟨,⟩_rel 非退化」在图上无来源**。
+> 取件：与 §7.8/§8.4/§9.7 同一文件（`projecteuclid.org/download/pdf_1/euclid.cmp/1104179468`，2.5 MB 扫描件）
+> → `Read(pages=11-17)` 一次取全（期刊 pp.311–317），另对 p.312、p.314 各做一次单页重读。
+> **PDF 页 = 期刊页 − 300**。证据等级 **L1**（页图逐字）。
+
+### 10.1 ★★★ (H4)「非退化」有来源了——在 `Definition 2.11` **正上方那一句**，不在 Prop 2.14 里
+
+**期刊 p.311，`Definition 2.11` 之前的过渡句，逐字：**
+
+> 「Now using **Theorem 2.7** and **Proposition 2.10**, we have the following well-defined **non-degenerate** hermitian form on `C_rel(p,κ)`.」
+
+⇒ **原文确实出现 "non-degenerate" 一词**，但它是**关于 `⟨,⟩_rel` 本身的断言**，印在 `Definition 2.11` 之前，
+**不是** `Proposition 2.14` 的一部分，也**不是**一条带编号的陈述。它的两条依据也由这句话本身点名：`Theorem 2.7` + `Proposition 2.10`。
+
+**同页 `Proposition 2.10` 逐字（p.311，非退化性的真正承载者）：**
+
+> 「**Proposition 2.10.**
+> (i) `⟨·, c₀χ₀·⟩_C` *restricted to* `ℱ(p,0)` *is non-degenerate*.
+> (ii) `D_R|*_ℱ = −D_R|_ℱ`. *Thus* `⟨·, c₀χ₀·⟩_C = 0` *when restricted to* `C_rel(p,0) = ℱ(p,0) ∩ Ker D_R`.
+> (iii) `⟨·, c₀χ_{1/2}·⟩_C` *restricted to* `C_rel(p,½) = ℱ(p,½)` *is non-degenerate*.」
+
+其证明（同页）逐字要点：(i) 用 `ℬ(p,0) = 𝔅(p,0) ∩ Ker K`（原文 `ℱ(p,0) = ℬ(p,0) ∩ Ker K`）+「Since `Ku = 0` and `K* = K`
+with respect to `⟨,⟩_C`, we can choose `v ∈ Ker K`」；(ii)「this follows from **Proposition 2.9** and that `c₀χ₀` commutes with
+all the generators (except `b₀, c₀, β₀, γ₀`). Now `D_R|*_ℱ = K` acts like zero in `ℱ(p,0)`. Using **Theorem 2.7** and
+`D_R|*_ℱ = −D_R|_ℱ`, we have the result.」；(iii)「Since `ℱ(p,½) = ℬ(p,½) ∩ Ker K`, the argument for (i) applies here.」
+
+⚠ **注意 (ii) 的字面古怪处**：同一句里既写 `D_R|*_ℱ = −D_R|_ℱ`（陈述）又写「`D_R|*_ℱ = K` acts like zero」——
+后者按上下文应为 `D_R²|_ℱ = K`（Prop 1.7(ix) `D_R² = K`），扫描件上上标平方极易丢。**引用 Prop 2.10(ii) 的证明句前请 auditor 复核。**
+
+**建图用的三条读数（全部出自上面逐字，非推断）：**
+
+1. **(H4) 的 canonical 来源应写成**：`loc: §2, p. 311，Definition 2.11 正上方一句（"well-defined non-degenerate hermitian form"）`，
+   **依赖 `Theorem 2.7` 与 `Proposition 2.10`**。**不要**把非退化性挂在 `Proposition 2.14` 上——Prop 2.14 的陈述里没有这个词。
+2. **非退化性在 Prop 2.14 的证明里是被*用*的**：`Prop 2.14(i)` 证明里逐字「**By non-degeneracy** we have `Q* = Q`」
+   （见 §10.3）。⇒ `Prop 2.14(i) → 非退化性` 这条边**原文明写，不必标 inferred**。
+3. **非退化性还被 `Definition 2.12` 需要**（sign 的定义前提，见 §10.2）：`sign C_rel(p,κ)` 这个符号要有意义，
+   `C_rel(p,κ)` 必须先是 Def 2.12 意义下的 "hermitian" 分次空间。⇒ **`Prop 2.14(ii)` 同样依赖非退化性**，
+   但这条是**经 Def 2.12 的良定义性**进入的，原文没有明写成一句引用，curator 若建边须标 `inferred: true`。
+
+### 10.2 `Definition 2.11`、`Definition 2.12`、`Definition 2.13` 逐字（pp.311–312）
+
+**`Definition 2.11`（p.311）逐字：**
+
+> 「**Definition 2.11.** *Define the hermitian form* `⟨,⟩_rel` *on* `C_rel(p,κ)` *as follows: for* `u, v ∈ C_rel(p,κ)`, *let*
+> `⟨u,v⟩_rel = ⟨u,v⟩_ℬ`   *if* `κ = ½`
+>       `= √−1 ⟨u, v̂⟩_ℬ`  *if* `κ = 0`  *where* `v = D_R v̂`.」
+
+**紧随其后的 `Remark`（p.311）逐字：**
+
+> 「*Remark.* In the case `κ = 0`, although the way `⟨ ⟩_rel` is defined seems rather peculiar, given any `u, v ∈ C_rel(p,κ)`
+> one can in principle compute `⟨u,v⟩_rel`. Note first that
+> `⟨u,v⟩_rel = √−1 ⟨u, v̂⟩_ℬ`,  `v = D_R v̂`
+> is independent of the choice of `v̂`. For if `v = D_R v̂ = D_R ṽ`, then
+> `⟨u, v̂ − ṽ⟩_ℬ = −⟨û, D_R(v̂ − ṽ)⟩_ℬ = 0`.
+> Recall that (**Theorem 2.7**) there is a contracting homotopy `ε : ℱ → ℱ` such that `{D_R, ε} = 1`. Then one finds that
+> `⟨u, εv⟩_ℬ = ⟨u, εD_R v̂⟩_ℬ = ⟨u, v̂⟩_ℬ`.
+> Thus
+> `⟨u,v⟩_rel = √−1 ⟨u, εv⟩_ℬ`.
+> It is remarkable that the right-hand side of this equation is independent of the choice `ε`.」
+
+**三条使用说明：**
+
+- **`κ = 0` 支的良定义性（`v̂` 的选择无关）是 `Remark` 证的，不是 `Definition 2.11` 本身证的**；用到 `D_R* = −D_R`（= Prop 2.10(ii)）
+  与 `Theorem 2.7`（`ℱ` 上 `D_R` 上同调平凡 ⇒ 存在收缩同伦 `ε`）。⇒ **`⟨,⟩_rel` 这张卡的依赖是 `Thm 2.7` + `Prop 2.10`，两条都在原文明写。**
+- **`⟨,⟩_ℬ` 的身份在本段没有展开，但在 p.312/p.314 被写死为 `⟨·, c₀χ_κ·⟩_C`**：p.312 (1) 逐字
+  `⟨Qu,v⟩_rel = ⟨Qu, c₀χ_{1/2}v⟩_C`（κ=½），p.314 Lemma 2.14.2 证明逐字 `⟨Ω,Ω'⟩_ℬ ≡ ⟨Ω, c₀χ_{1/2}Ω'⟩_C`。
+  ⇒ **建卡时 `⟨,⟩_ℬ` 必须写成「`⟨·, c₀χ_κ·⟩_C` 在 `ℬ(p,κ)` 上的限制」，不能当作未定义记号。**
+- ⚠ **转录可信度**：hat/tilde（`v̂` vs `ṽ`、`û`）在 1989 CMP 扫描件上极小。**高可信**：两支的形式（κ=½ 直接用 `⟨,⟩_ℬ`；
+  κ=0 乘 `√−1` 并取 `D_R` 原像）、`√−1` 因子、`{D_R, ε} = 1`、结论式 `⟨u,v⟩_rel = √−1⟨u, εv⟩_ℬ`、末句 "It is remarkable…"。
+  **需复核**：`⟨u, v̂ − ṽ⟩_ℬ = −⟨û, D_R(v̂ − ṽ)⟩_ℬ` 这一行里 `u` 何时带 hat。
+
+**`Definition 2.12`（p.311–312）逐字——`char` 与 `sign` 的定义，以及 "hermitian" 一词的本文含义：**
+
+> 「**Definition 2.12.**
+> (i) *If* `T` *is a* `½Z`-*graded vector space*, `T = ⊔_{n∈½Z} T^n`, *with a non-degenerate hermitian form* `⟨,⟩_T`,
+> *then we call* `T` **hermitian**. *Suppose* `dim T^n < +∞` *for all* `n` *and* `T^n = 0` *for all large enough positive* `n`.
+> *Then the character and signature of* `T` *are respectively*
+> `ch_q T = Σ_{n∈½Z} dim T^{−n} q^n`,
+> `sign_q T = Σ_{n∈½Z} sign T^{−n} q^n`,  *where*
+> `sign T^n = #{+ signs of ⟨,⟩_T restricted to T^n in its diagonal form} − #{− signs of ⟨,⟩_T restricted to T^n in its diagonal form}`.
+> (ii) *If* `(C*,Q)` *is a complex with finite support and* `Z`-*gradation, then we write* `char C = Σ_{k∈Z}(−1)^k dim C^k`.」
+
+⇒ ★ **三条量词是 Prop 2.14(ii) 「sign 有定义」的隐藏前提**：`⟨,⟩_T` **非退化**、每层**有限维**、**上方有界**（`T^n = 0` for large positive `n`）。
+**`Prop 2.14(ii)` 的陈述里一个都没写**，全在 `Definition 2.12` 里。⇒ 图上 (H4) 之外还应补「每层有限维 + 次数上有界」两条，
+出处同为 `Definition 2.12(i), p. 311`。
+⚠ **(ii) 的 `char C` 是交错和（带 `(−1)^k`），(i) 的 `ch_q T` 是母函数（不带符号）——同一个词根两种对象，别混。**
+`Prop 2.14(ii)` 里写的是 `char C_rel(p,κ)`，即**交错和**那个。
+
+**`Definition 2.13`（p.312）逐字——`φ_κ` 与 `p_κ^{(N)}` 的定义位置：**
+
+> 「**Definition 2.13.** [10] *Let* `φ(q) = Π_{n>0}(1 − q^n)`, `φ₀(q) = φ(q)²φ(q²)^{−1}`,
+> `φ_{1/2}(q) = φ(q^{1/2})φ(q²)φ(q)^{−1}`, *and* `p_κ^{(N)}(n)`, `n ∈ (1−κ)Z`, *be the coefficient of* `q^n` *in* `φ_κ(q)^{−N}`.」
+
+⇒ ★ **`p_κ^{(8)}` 的定义在 `Definition 2.13`（p.312），不在 Prop 2.14 处**（与 FGZ 把 `p_{(D)}(n)` 定义在 Prop 2.4 上方同型，
+见 `brst-cohomology-sources.md` §9.10）。**且 Def 2.13 带外部引用 `[10]`** —— 按 §8.3 全表，**[10] = Kac–Wakimoto**
+（Proceedings of the Symposium on Conformal Groups and Structures, LNP, 1985；**卷号原刊未印**）。
+⇒ **`char/sign` 公式里的分拆函数记号不是 LZ 原创，是引自 [10]。**
+⚠ 转录需复核：`φ_{1/2}(q) = φ(q^{1/2})φ(q²)φ(q)^{−1}` 的三个自变量（`q^{1/2}` / `q²` / `q`）字号极小；
+`n ∈ (1−κ)Z` 的 `(1−κ)` 也可能是 `(1−κ)Z` 之外的写法。**凡把 Def 2.13 写进 `statement` 的先请 auditor 复核。**
+
+### 10.3 ★★ `Proposition 2.14` 逐字（期刊 **p.312**）——**E5 的转录已核，且发现 E5 漏了一处括号**
+
+> 「**Proposition 2.14.**
+> (i) `Q* = Q` *with respect to* `⟨,⟩_rel`.
+> (ii) `char C_rel(p,κ) = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − (p·p/2)) = sign C_rel(p,κ)`.」
+
+- **与 §2 E5 的转录一致**（`½(2κ+1)`、`dim R(p,κ)`、下标 `κ` 的 `p_κ^{(8)}`、自变量 `κ − p·p/2`、以及
+  **`char = … = sign` 是一条双等式**）。**E5 无需更正。**
+- ⚠ **一处排版差异**：p.312 原刊印作 `p_κ^{(8)}(κ − (p·p/2))`（自变量里 `p·p/2` **带一层括号**），
+  而 p.317 的 `Corollary 2.15(i)` 印作 `p_κ^{(8)}(κ − p·p/2)`（**无内层括号**，见 §9.1）。**同一表达式两处排版不同，照抄勿统一。**
+- ★ **`Prop 2.14` 自身的陈述里没有任何量词**——没有 `p ≠ 0`、没有 `D = 10`、没有 `κ ∈ {0,½}`。
+  `κ` 与 `p` 是 §1 的全局设定（`p ≠ 0` 见 p.303、`D = 10` 见 p.308、半空间 `{p^D>0}` 见 §6 复核-1）。
+  ⚠ **但请注意：与 `Theorem 2.4` / `Cor 2.15` 不同，`Prop 2.14` 是纯粹的复形层面的计算，
+  证明里没有任何一步引用 `Theorem 2.4`**（消灭定理）——即 **Prop 2.14 不依赖消灭定理，方向是反的**（Cor 2.15 = Thm 2.4 + Prop 2.14(ii)）。
+
+### 10.4 ★★ 证明结构（pp.312–317，六页）——原文明写引用的编号结果清单
+
+**(i) 的证明逐字（p.312）：**
+
+> 「*Proof.* (i) Recall that `ℬ(p,κ) = b₀C(p,κ)`. Similarly, `ℱ(p,κ) = b₀(C(p,κ) ∩ Ker K)`. For `κ = ½`,
+> `C_rel(p,½) = ℱ(p,½)`. Let `u, v ∈ C_rel(p,½)`. Then
+> `⟨Qu,v⟩_rel = ⟨Qu, c₀χ_{1/2}v⟩_C = ⟨u, c₀χ_{1/2}Qv⟩_C + ⟨u, {Q,c₀}χ_{1/2}v⟩_C`.  (1)
+> But `u = b₀û, v = b₀v̂` for some `û, v̂ ∈ C(p,κ) ∩ Ker K` and `[b₀, {Q,c₀}] = 0`. Thus, the second term of (1) vanishes
+> because `b₀* = b₀` and `b₀² = 0`. Thus the Right-hand side of (1) is `⟨u, Qv⟩_rel`. **By non-degeneracy** we have `Q* = Q`.
+> For `κ = 0`, let `u, v ∈ C_rel(p,0)`. **By Theorem 2.7**,
+> `u = D_R û`,  `v = D_R v̂`  for some `û, v̂ ∈ ℱ(p,0)`.
+> By definition,
+> `⟨Qu,v⟩_rel = √−1 ⟨QD_R û, v̂⟩_ℬ = √−1 ⟨QD_R û, c₀χ₀ v̂⟩_C`.  (2)
+> As in the case of `κ = ½`, the right-hand side is `−√−1 ⟨D_R û, c₀χ₀ Q v̂⟩_C = −√−1⟨D_R û, Q v̂⟩_ℬ = ⟨u, Qv⟩_rel`
+> since `Qv = −D_R Q v̂`. Thus `Q* = Q`.」
+
+**(i) 用到的编号结果**：`Definition 2.2`（`ℬ`/`ℱ`/`C_rel` 的定义，见 §2 E2）、**`Theorem 2.7`**（κ=0 支：`C_rel(p,0) = D_R ℱ(p,0)`）、
+`Definition 2.11`、**非退化性**（p.311 那句）。**另用到未编号的算子恒等式**：`b₀* = b₀`、`b₀² = 0`、`[b₀,{Q,c₀}] = 0`、
+`Qv = −D_R Q v̂`（即 `{Q, D_R} = 0`，= `Prop 1.7(v)`，原文此处**没有**点名 1.7(v)）。
+⇒ **`Prop 2.14(i) → Prop 1.7(v)` 这条边若要建，须标 `inferred: true`。**
+
+**(ii) 的证明逐字骨架（pp.312–317，原文顺序）：**
+
+| 步骤 | 位置 | 原文明写引用 / 关键式 |
+|---|---|---|
+| 写出 `ℬ(p,κ)` 的**典范基** `Ω`（式 (3)，含 `N_Ω` 归一化常数） | p.312 | `Definition 2.2`（「Recall also that `ℱ(p,κ) = ℬ(p,κ) ∩ Ker K` (**Definition 2.2**)」） |
+| `Σ_n(−1)^n dim ℱ^n(p,κ) = const term Tr⟨(−1)^{U+κ}q^K(A)⟩_trivial`  (4) | p.312 | 无外引；`ℱ^n` 是 `U+κ` 的第 n 本征空间 |
+| `Tr⟨(−1)^{U+κ}q^K(A)⟩_trivial = q^{(p·p/2)−κ} φ_κ(q)^{−8} dim R(p,κ)`  (5) | p.313 | 「using the explicit expression for the ghost number operator `U` and the kinetic operator `K`」+ **Definition 2.13** |
+| κ=½ 直接由 (4)(5) 得 `char` | p.313 | — |
+| κ=0 需 **`dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)`**  (6) | p.313 | **「Theorem 2.7 implies that …」** |
+| **`Lemma 2.14.1`**：`A` 有 canonical pairing property ⇒ `sign W = Tr⟨1(A)⟩_W` | p.313 | 自证（块对角化 `±[[0,1],[1,0]]`）；**带 `Remark` + `Counter Example`**（`W = R²`，`Tr⟨1(A)⟩_W = 1` 但 `sign W = 0`）⇒ **「任意基不行」是原文明说的** |
+| **`Lemma 2.14.2`**：`ℬ^{is}(p,½)` 的基 `A_s`（配 `N_Ω`）有 canonical pairing property | p.314 | 自证；证明里出现 `⟨Ω,Ω'⟩_ℬ ≡ ⟨Ω, c₀χ_{1/2}Ω'⟩_C` |
+| `sign C_rel(p,½) = const term Tr⟨q^K(A)⟩_ℬ`  (7)，`Tr⟨q^K(A)⟩_ℬ = q^{(p·p/2)−(1/2)}φ_{1/2}(q)^{−8}`  (8) | p.314 | 「by the above two lemmas」+「the commutation relations in **Sect. 1**」 |
+| κ=0：`Case 1. p·p = 0` | p.314 | **「One can easily check that (Definition 1.3)」**；`C_rel(p,0) = Span{Ψ^i_± ⊗ |p⟩⊗|q_F=1⟩⊗|q_B=1⟩, i = 1,…,16}`；**「Using Definition 1.3, 2.11, we have `sign C_rel(p,0) = Σ_{i=1,…,16} √−1(Ψ^i_+, Ψ^i_−)_R = 16`」** |
+| κ=0：`Case 2. p·p/2` 是负整数 —— (9) `ℬ(p,0) = R(p,0) ⊗ …`，记后三因子为 `𝒮`，`ℬ(p,0) = R(p,0) ⊗ 𝒮` | p.315 | 脚注 4「See footnote on notation in Sect. 1」 |
+| 造 `p·d₀` 的本征基 `Ψ^i_±`，**「(cf. **Definition 1.3**)」**，`m = √(−p·p/2)`，`⟨Ψ^i_±, Ψ^j_±⟩_R = 0`（同号配对为零） | p.315 | **Definition 1.3** |
+| `Lemma 2.14.3`：`D_R A^0_s, D_R A^1_s` 是 `C_rel(p,0)` 的两组基（`s = −p·p/2`） | p.315 | **「By Theorem 2.7 …」**，**「But Theorem 2.7 implies that `2 dim C_rel(p,0) = dim ℱ(p,0) = 32(N(s)+M(s))`」** |
+| `𝒮` 上的非退化厄米型 (12)、**`( , )_ℬ = ( , )_R ⊗ ( , )_𝒮`**  (13)、(14) | p.316 | — |
+| `Lemma 2.14.4`（`𝒮^{is}` 的基有 canonical pairing property）、`Lemma 2.14.5`（`D_R A^0_s, D_R A^1_s` 对 `⟨,⟩_rel` 有 canonical pairing property） | p.316 | Lemma 2.14.5 证明用 (13)(14)，并再次用 `D_R = p·d₀ + D̃` |
+| `2 sign C_rel(p,0) = Tr⟨1(D_R A^0_s)⟩_rel + Tr⟨1(D_R A^1_s)⟩_rel = 32Σ… + 32Σ…`  (17) | p.316 | **「By Lemma 2.14.1, 2.14.5」** |
+| `sign C_rel(p,0) = 16 const term Tr⟨q^K(A)⟩_𝒮`  (18)，`Tr⟨q^K(A)⟩_𝒮 = q^{p·p/2}φ₀(q)^{−8}`  (19) | p.317 | 「direct calculations … using (12) and the canonical basis `A` of `𝒮`」 |
+
+⇒ **`Prop 2.14` 的证明是本文第二长的证明（六页），但它只引用了三条编号结果：`Definition 1.3`、`Definition 2.2`、`Theorem 2.7`**
+（外加自造的 `Lemma 2.14.1`–`2.14.5` 与 `Definition 2.11`/`2.12`/`2.13`）。**不引 `Theorem 2.4`、不引 `Prop 2.10` 的编号**
+（非退化性以散文形式用在 (i) 里）、**不引任何外部文献**（`Definition 2.13` 的 `[10]` 是定义处的引用，不在证明体内）。
+
+★ **编号体例**：`Lemma 2.14.1`–`2.14.5` 是**印在 `Proposition 2.14` 的证明体内**的五条带编号引理（与 §2 E3 的 `Theorem 3.3.1` 同一体例）。
+引用时必须写「Lemma 2.14.k（在 Prop 2.14 的证明内，p. 313–316）」。
+
+### 10.5 ★ 任务问题「`Definition 1.3` 的厄米型如何进入 sign」——直接回答
+
+**`Definition 1.3` 的 `⟨,⟩_R`（Ramond 扇区旋量空间 `R(p,0)` 上的厄米型）在两处、以两种方式进入 `sign C_rel(p,0)`：**
+
+1. **`p·p = 0` 时（Case 1，p.314）：直接给出全部答案。** 原文逐字「Using **Definition 1.3, 2.11**, we have
+   `sign C_rel(p,0) = Σ_{i=1,…,16} √−1(Ψ^i_+ ⊗ |p⟩⊗|q_F=1⟩⊗|q_B=1⟩, Ψ^i_− ⊗ |p⟩⊗|q_F=1⟩⊗|q_B=1⟩)_ℬ
+   = Σ_{i=1,…,16} √−1(Ψ^i_+, Ψ^i_−)_R = **16**`」。
+   ⇒ **数字 16（= `dim R(p,0)`）是从 `Definition 1.3` 的 `⟨,⟩_R` 上直接读出来的**，且 `Definition 2.11` 的 `√−1` 正是把
+   `⟨,⟩_R` 的**纯虚配对**变成实数 `+1` 的那个因子。**若去掉 `√−1`，sign 就不是 16 而是纯虚数** ⇒
+   **`Def 2.11` 的 `√−1` 不是装饰，是 `sign` 有实值的前提。**
+2. **`p·p/2` 为负整数时（Case 2，pp.315–316）：经「典范配对性质」间接进入。**
+   - p.315 用 `Definition 1.3` 造 `p·d₀` 的本征基 `Ψ^i_±`（逐字「(cf. **Definition 1.3**)」），使 `⟨,⟩_R` 在该基下
+     **同号向量配对为零、异号向量配对为 `±δ_{ij}`** —— 这正是 `Lemma 2.14.1` 所要求的 **canonical pairing property**。
+   - p.316 (13) 逐字 **`( , )_ℬ = ( , )_R ⊗ ( , )_𝒮`**：`ℬ(p,0)` 上的厄米型**张量分解**为
+     「`Definition 1.3` 的 `⟨,⟩_R`」⊗「振子/鬼场因子 `𝒮` 上的 (12)」。
+   - 于是 `Lemma 2.14.5` 把 `sign` 化成迹，(17) 里的**公因子 `32`** 与 (18) 里的**公因子 `16`** 都来自 `R(p,0)` 这一侧
+     （`32 = 2 × 16`，`2` 来自 `D_R A^0_s` 与 `D_R A^1_s` 两组基）。
+   ⇒ **`Definition 1.3` 的厄米型贡献的是 `sign C_rel(p,0)` 的「旋量重数因子」，`𝒮` 侧贡献的是 `q^{p·p/2}φ₀(q)^{−8}`。**
+   两者相乘即 `Prop 2.14(ii)` 中 κ=0 的 `½ · dim R(p,0) · p₀^{(8)}(−p·p/2)`（`½(2·0+1) = ½`）。
+
+⚠ **转录可信度分层（p.314–315，下标字号最小）**：
+- **高可信**：`(Definition 1.3)` 与 `Using Definition 1.3, 2.11` 这两处**点名引用**、数字 `16`、求和范围 `i = 1,…,16`、
+  `√−1` 因子、`( , )_ℬ = ( , )_R ⊗ ( , )_𝒮` (13)、`m = √(−p·p/2)`、(17) 的 `32`、(18) 的 `16`。
+- **需复核**：p.314 sign 式里两个 `Ψ^i` 的 `±` 下标**究竟哪个在左哪个在右**（我读作 `(Ψ^i_+, Ψ^i_−)_R`，
+  与 p.315「同号配对为零」自洽，但扫描件上 `+/−` 与箭头形符号难分）；p.315 的
+  `Ψ^i_± = (1/√2)(m^{−1}Ψ^i_+ ± √−1 Ψ^i_−)` 一行里 `1/m` 的位置与 `δ_{ij}` 前的符号。
+  **凡把这两行写进 `statement` 的，先请 auditor 用同一页图复核。**
+
+### 10.6 negative evidence（通读期刊 pp.311–317 七页）
+
+- **`Prop 2.14` 的陈述与证明里没有出现 "non-degenerate"** 以外的任何关于 `⟨,⟩_rel` 的性质断言
+  （没有 "positive definite"、没有 "unitary"）；正定性是 `Cor 2.15(ii)` 才出现的、且是关于 `H⁰_rel` 不是关于 `C_rel`。
+- **没有 "no-ghost" 字样**（那在 p.317 `Cor 2.15(ii)` 的括注里）。
+- **`Prop 2.14` 不引 `Theorem 2.4`**（见 §10.3 末条）；**也不引 `Prop 2.18` / `Cor 2.19` / 任何 §3 的内容**。
+- **不引任何外部文献**（`[1]`–`[23]` 在 pp.312–317 的证明体内一次都没出现；`Definition 2.13` 的 `[10]` 在证明之外）。
+- pp.313–316 **没有出现 `D = 10` 这个数字**；出现的是 `−8`（`φ_κ(q)^{−8}`）与 `16`/`32`（`dim R(p,0)` 侧），
+  即**临界维数在本证明里只以「横向维数 8」和「旋量维数 16」的形式露面**。
+
+### 10.7 对图的建议（researcher 不改 `graph/`，仅列）
+
+| 建议 | 内容 |
+|---|---|
+| `worldsheet.superstring-relative-complex-character-signature` 的 `sources[].loc` | 由「E5 转录」升级为 **`Proposition 2.14(ii), p. 312`**（逐字见 §10.3），read_depth 可标 L1 |
+| **(H4)「`⟨,⟩_rel` 非退化」的来源** | **`§2, p. 311，Definition 2.11 正上方一句`**（"well-defined non-degenerate hermitian form"），依赖 `Theorem 2.7` + `Proposition 2.10`。**新建一卡 `superstring-relative-form-nondegenerate` 更干净**，因为它同时被 `Prop 2.14(i)` 的证明与 `Definition 2.12` 的良定义性使用 |
+| 应补的两条隐藏前提 | `dim C^n_rel < +∞`、`C^n_rel = 0` for large positive `n` —— 出处同为 **`Definition 2.12(i), p. 311`**；`sign` 无这两条即无定义 |
+| `Prop 2.14(i)`（`Q* = Q`）的依赖边 | `Definition 2.2`、`Theorem 2.7`、`Definition 2.11`、非退化性（**四条全部原文明写，不标 inferred**）；`{Q,D_R} = 0`（= `Prop 1.7(v)`）**须标 `inferred: true`** |
+| `Prop 2.14(ii)` 的依赖边 | `Definition 1.3`、`Definition 2.2`、`Theorem 2.7`、`Definition 2.11`、`Definition 2.12`、`Definition 2.13`（其中 Def 2.13 引 `[10] = Kac–Wakimoto`）+ 内部 `Lemma 2.14.1–2.14.5`。**不要**建到 `Theorem 2.4` 的边 |
+| ⚠ 方向提醒 | 图上若已有 `Prop 2.14 → Thm 2.4` 的边，**方向是错的**：`Cor 2.15 = Thm 2.4 + Prop 2.14(ii)`，Prop 2.14 在 Thm 2.4 的下游之外（两者独立） |
+
+### 10.8 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| LZ 1989 全文 PDF | `projecteuclid.org/download/pdf_1/euclid.cmp/1104179468` | ✅ 2.5 MB 落盘（第四次确认该端点可用） |
+| 期刊 pp.311–317 | `Read(pages=11-17)` | ✅ 七页页图一次取全：Prop 2.10 / Def 2.11+Remark / Def 2.12 / Def 2.13 / Prop 2.14 / 证明全六页 / Cor 2.15 |
+| 期刊 p.312 单页重读 | `Read(pages=12)` | ✅ 专为确认 (2) 式里 `√−1` 的位置与 `⟨,⟩_ℬ = ⟨·,c₀χ_κ·⟩_C` 的身份 |
+| 期刊 p.314 单页重读 | `Read(pages=14)` | ✅ 专为确认 Case 1 里「Using Definition 1.3, 2.11」与数字 16 |
