@@ -60,6 +60,16 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
 StringFormal/
   Math/EulerPartition.lean  Euler 分拆生成函数 Σ p(N) X^N = ∏_{n≥1}(1-X^n)^{-1}（`PowerSeries`，
                             无逆元形式对任意交换环成立；域上给 `⁻¹` 形式）。独立小岛，不 import 其他子目录
+  Math/EulerPoincare.lean   **Euler–Poincaré 原理** Σ(−1)ⁿ dim Cⁿ = Σ(−1)ⁿ dim Hⁿ（图卡 `math.euler-poincare-principle`）。
+                            **Mathlib 只有定义没有定理**：`Algebra/Homology/EulerCharacteristic.lean` 给了
+                            `eulerChar` / `homologyEulerChar`，**没有** `eulerChar = homologyEulerChar`，所以不走桥层。
+                            索引照 `HomologicalComplex` 用**双索引** `d m n : C m →ₗ C n`（`n ≠ m+1` 时为 0），
+                            使 `cocycles = ker (d n (n+1))` 与 `coboundaries = range (d (n-1) n)` 同为
+                            `Submodule K (C n)`，**全程无 cast**；分次用 ℕ（截断减法使 `B⁰ = ⊥` 自动成立，
+                            `n+1-1 = n` 是 defeq）。`euler_poincare`（`Finset.range N`）、`euler_poincare_finsum`
+                            （全分次 `∑ᶠ`）、`finrank_cohomology_zero_eq`（卡面「特别地」）、`euler_poincare_graded`
+                            （卡面 (2)，特征标等式在 `Λ → ℤ` 里）。**不做**号差版（卡面 (a) 自己排除）、
+                            `Hⁿ(C) = ⊕_λ Hⁿ(C_λ)` 的分解、以及 ℤ-分次到 ℕ-分次的重标指标定理（见文件头）
   Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
   Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元

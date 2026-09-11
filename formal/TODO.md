@@ -262,8 +262,8 @@
     不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
     余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
 
-- [ ] `euler-poincare`：Euler–Poincaré 原理（图卡 `math.euler-poincare-principle` (1) 特征标版
-  与 (2) 逐权分次版）。目标文件 `StringFormal/Math/EulerPoincare.lean`，只 import Mathlib。
+- [x] `euler-poincare`：Euler–Poincaré 原理（图卡 `math.euler-poincare-principle` (1) 特征标版
+  与 (2) 逐权分次版）。见 `StringFormal/Math/EulerPoincare.lean`（无 sorry，公理只有标准三条）。
 
   **Mathlib 现状（2026-09-11 实查 v4.33.1）**：`Mathlib/Algebra/Homology/EulerCharacteristic.lean`
   （全文件 176 行）只有**定义**与「finsum = 有限 Finset 和」的搬运：
@@ -290,8 +290,23 @@
   **同为** `Submodule K (V n)`，全程无 cast。ℕ 索引更省事：`n + 1 - 1 = n` 在 ℕ 上是 defeq，
   且 `Z 0 = ker (d 0 (0-1)) = ker (d 0 0) = ⊤` 由截断减法自动给出。
 
-  范围：先做域上、ℕ 分次、在 `> N` 处消失的上链复形（等价于卡面 (1) 重标指标后的形式），
-  再套到每个权上得 (2)。**不做**卡面明确排除的号差版 (a)。
+  完成的声明：`euler_poincare`（卡面 (1)，求和在 `Finset.range N`，前件 `Subsingleton (C N)`）、
+  `euler_poincare_finsum`（同一恒等式的 `∑ᶠ n` 全分次形式，前件是卡面的「只有有限多个 `C^n ≠ 0`」）、
+  `finrank_cohomology_zero_eq`（卡面「特别地」一支：Hⁿ = 0 (n ≠ 0) ⇒ dim H⁰ = Σ(−1)ⁿ dim Cⁿ）、
+  `euler_poincare_graded`（卡面 (2)，特征标等式在 `Λ → ℤ` 里），加上中间层
+  `coboundaries_le_cocycles` / `finrank_coboundaries_succ_add_finrank_cocycles`（秩–零化度）/
+  `finrank_cohomology_add_finrank_coboundaries`（dim H = dim Z − dim B）。
+
+  **未做（对图的建议写在报告里，本轮不改 `graph/`）**：
+  1. 分次用 ℕ 不用 ℤ。卡面 (1) 写的是 `n ∈ Z`；有界复形的 ℤ 版与 ℕ 版只差一次重标指标
+     （总符号 `(-1)^c`），但**那个重标指标本身没有写成 Lean 定理**。若要补，用 `Int.negOnePow`
+     与 `Finset.Ico a b`，结构与本文件一样（电报项 `F n = (-1)^n dim B^n`）。
+  2. 卡面 (2) 里的 `H^n(C) = ⊕_λ H^n(C_λ)` 未形式化：本文件的分次版直接以「按权索引的复形族」
+     为输入，把它认同为单一分次复形的权分量是另一步。
+  3. 号差版（卡面 (a) 自己排除，LZ Cor 2.15(ii) 用的那条）未做，建议另立
+     `math.euler-poincare-principle-signature` 后再形式化。
+
+## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
 `StringFormal/Math/AnomalyPolynomial.lean`（A8/A9）与 `StringFormal/Math/E8Roots.lean`（A11），三个独立小岛（只 import Mathlib）。
