@@ -57,7 +57,20 @@ statement: |
   (f) **不**覆盖退化扇区 k_0·p = 0（含 p = 0）：那里 (★) 无法满足，单值性指数不是整数，
       本命题的 J ∈ Z 这个量词失去意义。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.Fock.towerPairing_towerVertex_left
+  lean_file: StringFormal/NoGhost/VertexAdjoint.lean
 sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexAdjoint.lean :: StringFormal.NoGhost.Fock.towerPairing_towerVertex_left（本卡 formal.lean_decl，即 (1)）；Fock 层 StringFormal.NoGhost.Fock.pairing_vertexOsc_left（⟨V(b)_K v, w⟩ = ⟨v, V(−b)_{−K} w⟩，**对任意 b**）；两半 Fock.pairing_creaExp_left / Fock.pairing_vertexAnn_left；b·b = 0 的平凡特例 Fock.pairing_vertexOsc_left_of_dotVec_zero；审计引理 Fock.add_self_eq_zero_of_pairing_vertexOsc_same_momentum；(2)(b) 的 S_n† = S_{−n} 在 formal/StringFormal/NoGhost/TowerPairing.lean :: StringFormal.NoGhost.Fock.towerPairing_towerShift_left"
+    note: |
+      【2026-09-12 新增】本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；lead 以 **fb006f5** 合入 main
+      （formal 侧提交 8b4e706）。该文件 16 条声明，formalizer 自述公理只有
+      propext / Classical.choice / Quot.sound（文件末 "## Status" 一段）。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      推导见 worldsheet.vertex-operator-adjoint--via-lean。
+      ⚠ **Lean 证的比本卡 (1) 强**：不需要 k_0² = 0，也不需要 2α' k_0·p = 1；
+      详见该推导的 notes【本推导证明的比目标卡多三处】与 gaps 第 1 条。
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
     note: |
@@ -124,16 +137,37 @@ notes: |
   前两条已机器验证，是因为它们在**单层** Fock 空间上是振子的有限（双）线性和，
   逐项配对 + 指标反射即可。本命题不同：它跨层（V^{(n)}_J 移动动量），
   且要处理正规序指数两半的重排序。因此本命题**不能**沿用那两条的 formalized 状态。
+  【⚠ 已消解 2026-09-12：VertexAdjoint.lean】上面这段的末两行**已过时**，逐条订正：
+    · 「**未形式化**」→ 已形式化（`Fock.towerPairing_towerVertex_left`，见 formal 字段与
+      推导 --via-lean）。三个实例现在全部机器验证。
+    · 「要处理正规序指数两半的重排序」→ **这一步不存在**：V(b)_K = E₋(b)E₊(b) 是正规序，
+      其伴随 E₊(b)†E₋(b)† = E₋(−b)E₊(−b) **本身就是正规序**，产生因子自动在左，
+      不需要把 E₊ 换到 E₋ 右边，也不产生任何 c-数自缩并因子。
+    · 「跨层」这条**成立且确实是难点所在**，但它已由 worldsheet.momentum-tower-fock-space 的
+      `Fock.towerPairing`（层间正交，formalized）解决；本命题的塔层部分只是
+      「层标签移位 + 层间正交挑出唯一非零配置」。
 
-  【为什么不是 rigorous】按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，需要
-  「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。本命题的论证有两处不满足：
+  【为什么不是 rigorous】——**本段只适用于推导 --via-radial-conjugation；
+  2026-09-12 起本卡另有一条 formalized 推导 --via-lean，本卡的有效状态由后者决定。**
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外条款，需要
+  「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。该推导的论证有两处不满足：
   (i) 「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则本图**没有节点**
-      （最接近的 worldsheet.ope-commutator-dictionary 讲的是围道形变，不是伴随）；
-  (ii) 正规序指数两半的重排序在**代数** Fock 空间上是一步形式操作，
+      【2026-09-11（四）更新：已有节点 worldsheet.radial-hermitian-conjugation，
+      但该卡 effective 仍是 physical-argument，故此条只是搬家】；
+  (ii) 【**已消解 2026-09-12：VertexAdjoint.lean**；原文保留如下，不删】
+      原文：「正规序指数两半的重排序在**代数** Fock 空间上是一步形式操作，
       文献侧最近的可引用式（Polchinski (6.6.24)）讲的是两个不同插入点算符之积的 OPE，
-      且依赖 OPE 收敛性。故 physical-argument。**无 reviewer-verified 记录。**
+      且依赖 OPE 收敛性。」
+      **订正：此步不存在。** VertexAdjoint.lean 证明的是：伴随把正规序的 E₋(b)E₊(b)
+      送成 E₊(b)†E₋(b)† = E₋(−b)E₊(−b)，**本身就是正规序**（产生因子自动落在左边），
+      因此根本不需要把 E₊ 换到 E₋ 的右边，也就没有任何「同点重排序」要付的 c-数代价。
+      这同时解释了为什么 `Fock.pairing_vertexOsc_left` 对**任意** b 成立而不需要 b·b = 0。
+      ⇒ 此前把这一步登记为「本推导唯一的非初等步骤 / 唯一无节点的缺口」的所有地方
+      （本卡、--via-radial-conjugation 的 gaps 第 4 条、ddf-operators-adjoint 一族）
+      都应读作**该步骤是虚构的**，不是「尚未完成」。
+  故 --via-radial-conjugation 仍是 physical-argument。**无 reviewer-verified 记录。**
 
-  【升级路径】
+  【升级路径】——**(i) 已于 2026-09-12 走完，见本 notes 末段；(ii) 仍开放。**
   (i) 走 Lean（最短）：VertexOperator.lean 已有正规序指数的两半
       （`Fock.creaExp` = E_-，即乘以一个显式 Fock 元素；`Fock.vertexSub` = E_+，即变量平移）
       与模 `Fock.vertexOsc`，DDF.lean 已有塔与 `towerVertex`。缺两件：
@@ -194,5 +228,44 @@ notes: |
   正是本卡 (2)(b) 的 S_n^† = S_{−n}）；现只缺第二件，即本命题本身——TowerPairing.lean
   文件头 Gaps 第 2 条逐字把它记为未做（"The vertex operator is not yet self-adjoint …
   graph node `worldsheet.vertex-operator-adjoint`"），因而 A^i_n 的伴随在 Lean 侧仍不可用。
+  【⚠ 已消解 2026-09-12】上面这一整段的末句已过时：第二件（本命题本身）已由
+  formal/StringFormal/NoGhost/VertexAdjoint.lean 做完（fb006f5），A^ε_n 的伴随随之可用
+  （worldsheet.ddf-operators-adjoint-v2）。TowerPairing.lean 文件头 Gaps 第 2 条也随之过期。
+
+  【2026-09-12：Lean 接线（curator，分支 agent/curator/adjoint-wire；
+  **statement 文本一字未动**，只加 formal 字段、一条 stringformal-2026 来源与本 notes）】
+  新增推导 worldsheet.vertex-operator-adjoint--via-lean（status **formalized**，
+  lean_decl `StringFormal.NoGhost.Fock.towerPairing_towerVertex_left`）。
+  原推导 --via-radial-conjugation 保留为 physical-argument 的历史记录，两条并存、工具取高者。
+  Lean 侧给出**两个数学结论**，都与本卡此前的记账有出入，逐条记下：
+
+  **(i) 本卡写的 (V^{(n)}_J)† = V^{(−n)}_{−J} 是对的，而且是被机器验证为「必须如此」的。**
+  在 Fock 层，伴随把顶点动量 b 送成 −b：
+  `Fock.pairing_vertexOsc_left` : ⟨V(b)_K v, w⟩ = ⟨v, V(−b)_{−K} w⟩。
+  同动量的写法 ⟨V(b)_K v, w⟩ = ⟨v, V(b)_{−K} w⟩ 被
+  `Fock.add_self_eq_zero_of_pairing_vertexOsc_same_momentum` **证伪**：它若对某一个 b 成立则 2b = 0
+  （见证是最低阶矩阵元 v = |0⟩、w = α^μ_{−1}|0⟩、K = 1，左端 b^μ、右端 −b^μ）。
+  理由是 E₋(z) = exp(+Σ_{m>0}(b·α_{−m}/m)z^m) 与 E₊(z) = exp(−Σ_{l>0}(b·α_l/l)z^{−l})
+  的指数**带相反的整体符号**，故 α^μ_m ↦ α^μ_{−m} 把 E₋(b) 送到 E₊(−b) 而不是 E₊(b)。
+  在**塔上**这个翻号看不见，因为 −(n b) = (−n) b：Fock 层的 b ↦ −b 恰好就是
+  零模移位 e^{i n k_0·x} 的 n ↦ −n，本卡 (1) 的形状原样保留。
+
+  **(ii) 伴随完全不需要 k_0² = 0，也没有「同点 E₊E₋ 重排序」这一步。**
+  `pairing_vertexOsc_left` 与 `towerPairing_towerVertex_left` 的**唯一**假设是
+  `hη : ∀ μ, η μ * η μ = 1`（度规分量平方为 1，本开发处处如此）：
+  没有 `dotVec η b b = 0`（类光），没有 `dotVec η b a = 1`（归一化 (★)）。
+  原因见上面【为什么不是 rigorous】(ii) 的订正：E₋E₊ 的伴随 E₊(−b)†E₋(−b)† 本身正规序。
+  **k_0² = 0 与 (★) 在本卡里剩下的唯一角色**因此要改写为：
+    它们只保证**洛朗指标的记账**——单值性指数 2α' n k_0·(p + N k_0) = n 与层指标 N 无关，
+    故 V^{(n)}_K 的指标位移 K ↦ K − n 是一个与层无关的整数位移，
+    「J 跑遍 Z」「反射 J ↦ −J」这两句话才有指称。
+    而这一点在 Lean 里已经**烘进 `towerVertex` 的定义**（位移写死为 −n），
+    不是 `towerPairing_towerVertex_left` 的假设。
+  ⇒ 本卡 statement 里「设 k_0² = 0」是一条**未被使用的前提**，本卡是 Lean 结论的特例，
+  故 formalized 成立。**但本卡边界 (e)（「k_0² ≠ 0 时……伴随关系不再是纯粹的指标反射」）
+  现在与已验证的结论表面冲突**：那一步重排序并不发生。
+  按项目原则 1 不得就地改陈述文本，已在推导 --via-lean 的 gaps 第 1 条完整登记，
+  并在本轮报告中提请 lead/auditor 裁决是否新建 -v2（把 (1) 放宽到任意 b、把 (e) 改写为
+  「k_0² ≠ 0 时失效的是洛朗指标的整数性，不是伴随关系」）。
 author: curator
 created: "2026-09-11"
