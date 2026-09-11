@@ -567,4 +567,86 @@ lemma alphaTwoCoeff_single (ν : Fin D) (P : Fock D R) :
 
 end AlphaTwoCoeff
 
+/-! ### The two families of level-two null states, explicitly
+
+Blueprint §B″.2.1.  On the antidiagonal slice `(rung -2, level 2)` the seeds of
+`NoGhost/NullSeedsTwo.lean` become concrete vectors, and their `α_{-2}` components are
+`e` (Type 1) and `5 p` (Type 2). -/
+
+section States
+
+open MvPolynomial
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b : Fin D → R}
+
+/-- **The Type-1 level-two state** `L_{-1}((e·α_{-1})|0;p_{-2}⟩)`, on rung `-2`. -/
+noncomputable def typeOneTwo (η a b e : Fin D → R) : TowerFock D R :=
+  towerLop η a b (-1) (Finsupp.single (-2) (Fock.polState η e))
+
+/-- The explicit form: `(e·α_{-2}) + (e·α_{-1})(p·α_{-1})` on the vacuum of rung `-2`. -/
+lemma typeOneTwo_eq (hη : ∀ μ, η μ * η μ = 1) (e : Fin D → R) :
+    typeOneTwo η a b e = Finsupp.single (-2) (Fock.secondState η e
+      + Fock.polState η e * Fock.polState η (towerMomentum a b (-2))) :=
+  towerLop_neg_one_apply_single_polState η a b hη (-2) e
+
+/-- **The `α_{-2}` component of the Type-1 state is `e` itself.** -/
+lemma alphaTwoCoeff_typeOneTwo (hη : ∀ μ, η μ * η μ = 1) (e : Fin D → R) (ν : Fin D) :
+    alphaTwoCoeff D R ν (typeOneTwo η a b e) = η ν * e ν := by
+  rw [typeOneTwo_eq hη, alphaTwoCoeff_single, coeff_add, coeff_single_two_secondState,
+    coeff_single_two_mul_of_mem_levelSubmodule_one (Fock.polState_mem_levelSubmodule_one e) _ ν,
+    add_zero]
+
+/-- `L_{-2}|0;p⟩ = (p·α_{-2})|0;p⟩ + ½ (α_{-1}·α_{-1})|0;p⟩`, in the `traceState`/`secondState`
+notation of `NoGhost/LevelTwo.lean`. -/
+lemma Lop_neg_two_apply_one_eq (η p : Fin D → R) :
+    Fock.Lop η p (-2) (1 : Fock D R)
+      = Fock.secondState η p + invTwo R • Fock.traceState η := by
+  rw [Fock.Lop_neg_two_apply_one, Fock.secondState_eq_sum_mode η p]
+  congr 1
+  rw [Fock.traceState]
+  refine congrArg _ (Finset.sum_congr rfl fun μ _ => ?_)
+  rw [Fock.mode_neg_one_apply η p, Fock.mode_neg_one_apply_one η p]
+
+/-- **The Type-2 level-two state, explicitly**:
+`𝒟₂|0;p⟩ = 5(p·α_{-2}) + (α_{-1}·α_{-1}) + 3(p·α_{-1})²` on the vacuum of rung `-2`.
+Blueprint §B″'s correction note (b). -/
+lemma descTwo_single_neg_two_eq (hη : ∀ μ, η μ * η μ = 1) :
+    descTwo η a b (Finsupp.single (-2) (1 : Fock D R))
+      = Finsupp.single (-2) ((5 : R) • Fock.secondState η (towerMomentum a b (-2))
+          + Fock.traceState η
+          + (3 : R) • (Fock.polState η (towerMomentum a b (-2))
+              * Fock.polState η (towerMomentum a b (-2)))) := by
+  have h1 : towerLop η a b (-2) (Finsupp.single (-2) (1 : Fock D R))
+      = Finsupp.single (-2) (Fock.secondState η (towerMomentum a b (-2))
+          + invTwo R • Fock.traceState η) := by
+    rw [towerLop_single, Lop_neg_two_apply_one_eq]
+  have h2 : towerLop η a b (-1) (Finsupp.single (-2) (1 : Fock D R))
+      = Finsupp.single (-2) (Fock.polState η (towerMomentum a b (-2))) := by
+    rw [towerLop_single, Fock.Lop_neg_one_apply_one_eq_polState]
+  have h3 : towerLop η a b (-1) (Finsupp.single (-2)
+        (Fock.polState η (towerMomentum a b (-2))))
+      = Finsupp.single (-2) (Fock.secondState η (towerMomentum a b (-2))
+          + Fock.polState η (towerMomentum a b (-2))
+            * Fock.polState η (towerMomentum a b (-2))) := by
+    rw [towerLop_single, Fock.Lop_neg_one_apply_polState η _ hη]
+  rw [descTwo_apply, h1, h2, h3, Finsupp.smul_single, Finsupp.smul_single,
+    ← Finsupp.single_add]
+  congr 1
+  rw [smul_add, smul_add, smul_smul, two_mul_invTwo, one_smul]
+  module
+
+/-- **The `α_{-2}` component of the Type-2 state is `5p`.**  It is nonzero for some `ν`
+precisely because `p · p = -2 ≠ 0`, which is how `descTwo_single` is shown to be independent of
+the Type-1 family. -/
+lemma alphaTwoCoeff_descTwo_single (hη : ∀ μ, η μ * η μ = 1) (ν : Fin D) :
+    alphaTwoCoeff D R ν (descTwo η a b (Finsupp.single (-2) (1 : Fock D R)))
+      = 5 * (η ν * towerMomentum a b (-2) ν) := by
+  rw [descTwo_single_neg_two_eq hη, alphaTwoCoeff_single, coeff_add, coeff_add, coeff_smul,
+    coeff_smul, coeff_single_two_secondState, coeff_single_two_traceState,
+    coeff_single_two_mul_of_mem_levelSubmodule_one
+      (Fock.polState_mem_levelSubmodule_one (towerMomentum a b (-2))) _ ν]
+  simp
+
+end States
+
 end StringFormal.NoGhost
