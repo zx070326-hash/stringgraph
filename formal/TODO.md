@@ -149,6 +149,32 @@
   **全模群不变性仍缺** `worldsheet.modular-group-generated-by-s-and-t`（未形式化）。
   同样仍缺：η 对一般 `SL(2,ℤ)` 元素的乘子系统（Dedekind 和）。
 
+- [ ] `eta-modular`：`τ₂|η(τ)|⁴` 在**整个 `SL(2,ℤ)`** 下不变。
+  `StringFormal/Math/DedekindEtaModular.lean`（进行中）。
+
+  **调研结论（先记下来，省得后人重查）**：Mathlib v4.33.1 **有**「S、T 生成 `SL(2,ℤ)`」：
+
+  ```
+  SpecialLinearGroup.SL2Z_generators : Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤
+  ```
+
+  在 `Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean:274`（`section SL2Z_generators`，
+  `open ModularGroup Subgroup`，作者 Chris Birkbeck，Lean 3 原型来自 kbb 仓库）。它由同文件的
+  `FixedDetMatrices.induction_on`（对 `FixedDetMatrix (Fin 2) ℤ 1` 的欧几里得型归约，cases
+  `h0`/`hS`/`hT`）证出。用法样板见
+  `Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Transform.lean:200`
+  （`G2_slash_action`：`have : γ ∈ Subgroup.closure {S, T} := by simp [SpecialLinearGroup.SL2Z_generators]`
+  然后 `induction this using Subgroup.closure_induction with | one | mem | mul | inv`）。
+  另一处用法：`Mathlib/NumberTheory/ModularForms/LevelOne/Basic.lean:60`。
+
+  ⇒ 因此 **不需要**自己证生成定理，也**不必**退化成条件版
+  `… (hg : g ∈ Subgroup.closure {S, T})`。图节点
+  `worldsheet.modular-group-generated-by-s-and-t` 的数学内容**在 Mathlib 里已形式化**，
+  可以用 `lean_decl = SpecialLinearGroup.SL2Z_generators` 标 `formalized`
+  （前提是图卡陈述与「`closure {S,T} = ⊤` 在 `SL(2,ℤ)` 上」逐字对得上；注意这是 `SL(2,ℤ)` 版，
+  不是 `PSL(2,ℤ)` 版，且 `S` `T` 取 Mathlib 的 `ModularGroup.S = ![![0,-1],![1,0]]`、
+  `ModularGroup.T = ![![1,1],![0,1]]`）。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
