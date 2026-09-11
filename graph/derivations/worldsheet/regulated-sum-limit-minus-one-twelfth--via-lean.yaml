@@ -1,0 +1,42 @@
+id: worldsheet.regulated-sum-limit-minus-one-twelfth--via-lean
+target: worldsheet.regulated-sum-limit-minus-one-twelfth
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/RegulatedSum.lean :: StringFormal.RegulatedSum.tendsto_regulatedSum_sub_invSq"
+    note: |
+      同一提交（1b95be8，并入 main 经 9889711）。声明依赖同文件内的
+      `tsum_nat_mul_exp_neg_mul_eq_inv_sinh_sq`（f(u) = 1/(4 sinh²(u/2))，来自
+      `hasSum_nat_mul_exp_neg_mul` 即 Mathlib 的 `hasSum_coe_mul_geometric_of_norm_lt_one` 在
+      r = e^{-u} 处的特化，加上纯代数恒等式 e^{-u}/(1-e^{-u})² = 1/(4 sinh²(u/2))）与
+      `tendsto_invSinhSq_sub_invSq`（1/(4 sinh²(u/2)) − 1/u² → −1/12，由精确因式分解
+      1/(4s²) − 1/u² = [(u−2s)/u³]·[1+2s/u]·[(2s/u)⁻¹]²，s = sinh(u/2)，三因子极限分别为
+      −1/24、2、1，一次 squeeze 即得——squeeze 用的界是 `abs_shiftedSinh_add_le`，来自
+      `abs_sinh_sub_taylor_le`（Mathlib `Real.exp_bound` n=5 给出
+      |sinh x − (x+x³/6)| ≤ |x|⁵/100，|x|≤1）。
+summary: |
+  机器检查。目标卡的极限陈述就是 Lean 声明
+  `tendsto_regulatedSum_sub_invSq : Tendsto (fun u => (∑' n, n·e^{-un}) − 1/u²) (𝓝[>] 0) (𝓝 (−1/12))`
+  的逐字翻译：`∑' n : ℕ, (n:ℝ)·exp(-(u*n))` 即 f(u)（n=0 项为 0，级数从 n=1 起，
+  与卡面 Σ_{n≥1} 一致），`Tendsto ... (𝓝[>] 0) (𝓝 (−1/12))` 即卡面的极限存在且等于 −1/12。
+  证明链（模块内）：几何级数求和的闭式给出 f(u) = e^{-u}/(1-e^{-u})²，代数恒等式把它改写
+  成 1/(4 sinh²(u/2))，再用 sinh 的三阶 Taylor 界（源自 Mathlib `Real.exp_bound`）做一次
+  squeeze 得到极限。全程无 sorry，公理集合应为标准三条（propext、Classical.choice、
+  Quot.sound）。
+gaps:
+  - |
+    **本轮未独立重跑 `lake build` / `check-axioms`**：本 worktree 没有 `.lake/` 构建产物
+    （见 formal/CLAUDE.md worktree 说明），复制主仓库构建产物超出本任务范围；
+    声明来自已合并到 main 的提交（9889711），依 CLAUDE.md 的合并纪律，lead 合并含
+    formal/ 改动的分支前必跑 check-axioms，本次未重复。
+  - |
+    **只给出极限，不给出收敛速度**：Lean 未把这条极限升级成 `Asymptotics.IsBigO`
+    形式的 O(u²) 陈述；这正是本卡与母卡 worldsheet.regulated-sum-laurent-expansion 的
+    区别所在，也是为什么本卡要单独存在（见母卡笔记）。
+notes: |
+  由 curator（zeta-wire）于 2026-09-11 建立，是新拆卡
+  worldsheet.regulated-sum-limit-minus-one-twelfth 的唯一推导。
+author: curator-zeta-wire
+created: "2026-09-11"
