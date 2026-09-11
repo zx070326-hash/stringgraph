@@ -12,6 +12,9 @@ statement: |
   即不断言「S² 与 (ST)³ 生成全部关系」（那等价于 PSL(2,Z) ≅ Z/2 ∗ Z/3）。
   抽取记录没有任何证据表明原书作了那个更强的断言。
 uses_conventions: []
+formal:
+  lean_decl: StringFormal.ModularGroupGen.psl_closure_S_T
+  lean_file: StringFormal/Math/ModularGroupGenerators.lean
 sources:
   - ref: polchinski-1998-v1
     loc: "§5.1, eq. (5.1.12), p.148（生成变换 T : τ → τ+1 与 S : τ → −1/τ）"
@@ -22,10 +25,32 @@ sources:
       (5.1.12) 里，还是 [S] 自己补的，未核实」（E70 备注，并见抽取记录 §7 的清单）。
       [S] 的路线是先引入 X : τ → τ/(1+τ)，再由 T^{-1} X T^{-1} τ = −1/τ 换成 S，
       然后给出这两条关系（[5.11]–[5.12]）。
-tags: [worldsheet, torus, modular-group, psl2z]
+tags: [worldsheet, torus, modular-group, psl2z, formalized]
 notes: |
   「PSL(2,Z) 由 S、T 生成」是一条真的（且经典的）数学定理，但**本书没有证它**，
   本图也还没有挂任何数学来源。若日后要升级，标准来源是 Serre,
   *A Course in Arithmetic*, Ch. VII, Thm 2（尚未登记到 literature/sources.bib，编号未核实）。
+
+  **升级路径（b) 已走：Lean（2026-09-11，formalizer 分支 `eta-modular`，curator lean-wire-9 接线）**。
+  本卡挂 `formal.lean_decl = StringFormal.ModularGroupGen.psl_closure_S_T`
+  （`formal/StringFormal/Math/ModularGroupGenerators.lean`），新增推导
+  worldsheet.modular-group-generated-by-s-and-t--via-lean（status **formalized**）；
+  纸上的 --via-generator-relations（physical-argument）按 lead 裁决保留，工具取高者。
+  逐条对应：(1) → `psl_closure_S_T`；(2) → `psl_S_sq`（S² = 1）与 `psl_ST_cube`（(ST)³ = 1）。
+  **生成性这一"硬的一半"来自 Mathlib**（`SpecialLinearGroup.SL2Z_generators`，
+  `Mathlib/LinearAlgebra/Matrix/FixedDetMatrices.lean`，Chris Birkbeck，走整数矩阵的辗转相除归纳）；
+  本项目加的是 SL → PSL 的过渡与 (ST)³ = −1。⇒ 原推导 gap (1)「生成性没有证明」**已关闭**；
+  上面提到的 Serre 来源**仍未登记**，但已不是升级的必要条件。
+  ⚠ 原推导 gap (2)「两条关系是否写在 Polchinski (5.1.12) 里未核实」**依然有效**：
+  Lean 证的是数学事实，不能替代「原书说了什么」的文献问题。
+
+  ⚠ **Lean 侧的 PSL 是 `SL(2,ℤ)/Z(SL(2,ℤ))`**（Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup`），
+  而本卡正文写的是 `SL(2,Z)/{±I}`。Lean 文件只证了 `−1 ∈ Z(SL(2,ℤ))`，**没有**证
+  `Z(SL(2,ℤ)) = {±1}`（此事为真但未用到）。⇒ `psl_S_sq`、`psl_ST_cube` 严格说是
+  「关系在**模中心**的意义下成立」，比「模 ±I」弱一点点。本卡正文「即在相差 ±I 的意义下」
+  这句话因此**尚未逐字被 Lean 覆盖**；见 --via-lean 的 gaps 首条。
+
+  **形式化后本卡的下游用途**：它是「τ₂|η|⁴ 在整个模群下不变」的最后一块拼图，
+  已被 math.eta-modular-invariant-combination（2026-09-11 新建，formalized）用掉。
 author: curator-polchinski-ch5
 created: "2026-09-11"

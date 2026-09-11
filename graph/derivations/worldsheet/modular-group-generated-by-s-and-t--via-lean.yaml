@@ -1,0 +1,109 @@
+id: worldsheet.modular-group-generated-by-s-and-t--via-lean
+target: worldsheet.modular-group-generated-by-s-and-t
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.modular-group-psl2z
+    inferred: false
+    note: |
+      提供群本身与 S、T 的矩阵：Lean 侧的 `ModularGroup.S`、`ModularGroup.T`（Mathlib）就是
+      该定义卡写的 S = ((0,−1),(1,0))、T = ((1,1),(0,1))，`SL(2, ℤ)` 就是该卡的 SL(2,Z)。
+      ⚠ **PSL 的取法有一处细微差别**：定义卡写 PSL(2,Z) = SL(2,Z)/{±I}，
+      Lean 用 Mathlib 的 `Matrix.ProjectiveSpecialLinearGroup` = `SL(2,ℤ)/Z(SL(2,ℤ))`。
+      两者事实上相等（`Z(SL(2,ℤ)) = {±1}`），但**本推导没有证这一点**，见 gaps 首条。
+      ⚠ **「S : τ ↦ −1/τ、T : τ ↦ τ+1」这一识别本推导不覆盖**：`ModularGroupGenerators.lean`
+      全程只在群里算，不碰 ℍ 上的作用（文件 docstring 逐字："Nothing here is about the action
+      on `ℍ`"）。该识别在 Mathlib 里是 `UpperHalfPlane.modular_S_smul` /
+      `modular_T_smul`，并在 `StringFormal/Math/DedekindEtaModular.lean` 里被实际用到，
+      但没有写进本卡的 lean_decl 链条。故这条边同时承担「定义」与「未被机检的那一步识别」。
+      ⚠⚠ 该定义卡 own status 是 rigorous，故按 min 规则本推导 own=formalized 而
+      effective=rigorous。诚实记账；与 math.dedekind-eta-s-transformation--via-lean 同型。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/ModularGroupGenerators.lean :: StringFormal.ModularGroupGen.psl_closure_S_T；同文件 sl_S_sq, sl_ST_cube, sl_closure_S_T, neg_one_mem_center, psl, psl_neg_one, psl_S_sq, psl_ST_cube"
+    note: |
+      本仓库，formalizer 分支 `agent/formalizer/eta-modular`；Lean 4 + Mathlib **v4.33.1**。
+      与目标卡逐条对应：
+        · **(1)** `psl_closure_S_T : Subgroup.closure ({psl S, psl T} : Set PSL(2, ℤ)) = ⊤`
+          —— 本卡 `formal.lean_decl` 取这条；
+        · **(2)** `psl_S_sq : (psl S) ^ 2 = 1` 与 `psl_ST_cube : (psl S * psl T) ^ 3 = 1`；
+        · SL 层的两条关系 `sl_S_sq : S ^ 2 = (-1 : SL(2, ℤ))`、
+          `sl_ST_cube : (S * T) ^ 3 = (-1 : SL(2, ℤ))`（都由 `ext` + `fin_cases` + `rfl`，
+          即目标卡正文里「作为 PSL 元素、相差 ±I」那句的 SL 侧原形）；
+        · `neg_one_mem_center`（−1 中心）与 `psl_neg_one`（−1 在商里平凡）是 SL → PSL 的桥；
+        · `sl_closure_S_T` 是 Mathlib `SpecialLinearGroup.SL2Z_generators` 的再导出。
+      ⚠ **一卡两命题**：目标卡把 (1)(2) 写在一张卡上（建卡早于本次形式化），
+      `formal.lean_decl` 只能填一个名字，故取 (1)；(2) 的两条声明在本 sources 里逐条登记，
+      下游要引哪一条就引哪一条。按 graph/CLAUDE.md「一个节点一个命题」，
+      这张卡日后**值得拆成两张**（生成性 / 关系），届时两半各挂各的 lean_decl。
+  - ref: polchinski-1998-v1
+    loc: "§5.1, eq. (5.1.12), p.148（物理侧转述：原书只给 S、T 两个「生成变换」，零证明）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E70，L1（读到 schrans-2020 笔记）。
+      本条**不承载本推导的任何步骤**，只登记弦论教材在何处用本命题。
+      ⚠ 原推导 --via-generator-relations 的 gap (2)「(5.1.12) 是否含 S²=1、(ST)³=1 未核实」
+      **本推导不解决**：那是文献问题，Lean 证明与它无关。
+summary: |
+  机器检查的证明，`formal/StringFormal/Math/ModularGroupGenerators.lean`（约 60 行代码），
+  只 import Mathlib 的 `FixedDetMatrices` 与 `ProjectiveSpecialLinearGroup`。三步：
+
+  **(0) 硬的一半是 Mathlib 的。** `SpecialLinearGroup.SL2Z_generators :
+  Subgroup.closure {ModularGroup.S, ModularGroup.T} = ⊤`（`Mathlib/LinearAlgebra/Matrix/
+  FixedDetMatrices.lean`，Chris Birkbeck），证法是对行列式 1 的整数矩阵作辗转相除归纳
+  （`FixedDetMatrices.induction_on`）。本文件把它原样再导出为 `sl_closure_S_T`。
+  ⇒ **生成性本图不自证，也不审计 Mathlib 的那段归纳**，证据标准由 lake build + 公理集合承载。
+
+  **(1) SL 层的两条关系。** `sl_S_sq : S² = −1` 与 `sl_ST_cube : (ST)³ = −1`，
+  都是 `ext i j <;> fin_cases i <;> fin_cases j <;> rfl`（2×2 整数矩阵的逐项定义相等）。
+
+  **(2) 过到 PSL。** `psl := QuotientGroup.mk' (Subgroup.center SL(2,ℤ))`；
+  `neg_one_mem_center` 由 `Subgroup.mem_center_iff` 一行（−1 与一切 g 交换）；
+  `psl_neg_one : psl (−1) = 1` 由 `QuotientGroup.eq_one_iff`。于是
+  `psl_S_sq`、`psl_ST_cube` 各由 `← map_pow` / `← map_mul` 把关系推到商上，−1 死掉，得 = 1。
+  生成性的过渡是 `MonoidHom.map_closure` + `Set.image_pair` 把
+  `map psl (closure {S,T})` 化成 `closure {psl S, psl T}`，再用商映射满射得 = ⊤。
+gaps:
+  - |
+    ★ **「相差 ±I」被 Lean 换成了「相差中心」。** Lean 的 PSL 是 `SL(2,ℤ)/Z(SL(2,ℤ))`；
+    文件只证 `−1 ∈ Z(SL(2,ℤ))`（`neg_one_mem_center`），**没有**证 `Z(SL(2,ℤ)) = {±1}`
+    （此事为真，文件 docstring 也这么说，但"true, but unused"）。
+    ⇒ `psl_S_sq` / `psl_ST_cube` 严格说是「关系模中心成立」，比目标卡正文的
+    「在相差 ±I 的意义下」**弱一点点**；同理 `psl_closure_S_T` 断言的是模中心的商被两个像生成。
+    要逐字覆盖卡面，需再证中心恰是 {±1}（Mathlib v4.33.1 里 formalizer 未找到现成声明）。
+  - |
+    **不含表现（presentation）**。目标卡正文已明确不断言 PSL(2,Z) ≅ ℤ/2 ∗ ℤ/3，
+    Lean 同样不断言：`psl_S_sq`、`psl_ST_cube` 只说这两条关系成立，不说它们生成全部关系。
+    那需要基本域上的乒乓引理，**Mathlib v4.33.1 也没有**。卡与 Lean 在这一点上一致。
+  - |
+    **不含 ℍ 上的作用**。「S 是 τ ↦ −1/τ、T 是 τ ↦ τ+1」这一识别不在本文件内
+    （docstring 逐字 "Nothing here is about the action on `ℍ`"）；Mathlib 有
+    `UpperHalfPlane.modular_S_smul` / `modular_T_smul`，它们在
+    `StringFormal/Math/DedekindEtaModular.lean` 里被用到，但不在本卡的 lean_decl 链条上。
+    ⇒ 目标卡正文用 Möbius 映射写 S、T，这一层翻译**靠 depends_on 的定义卡承担，未被机检**。
+  - |
+    **有效状态被定义卡卡住**：worldsheet.modular-group-psl2z 是 rigorous 的定义卡，
+    故 own=formalized 而 effective=rigorous。记账缺口，不是论证缺口。
+notes: |
+  由 curator（lean-wire-9，lead 追加的第 8 项）于 2026-09-11 建立，接的是 formalizer 分支
+  `agent/formalizer/eta-modular`（新文件 `StringFormal/Math/ModularGroupGenerators.lean`）。
+
+  **check-axioms**：本接线 worktree 无 `.lake`，且本文件是本轮刚合入 main 的新文件，
+  主仓库 D:\physics\string 的 `formal/.lake`（2026-09-11 11:45 构建）也不含它的 olean
+  ⇒ **curator 本轮未能对本文件重跑 check-axioms**（与同批的 DedekindEtaS/T 不同：
+  那两个文件在 formalizer 的构建树 `.claude/worktrees/agent-adab9fd4d76756731` 上有新鲜 olean，
+  curator 已在那里逐条跑过）。本条的 formalized 依据是 formalizer 的构建自述 +
+  literature/sources.bib 的 stringformal-2026 证据标准；按根 CLAUDE.md，
+  **lead 合并前必须跑 `lake build` + `uv run stringgraph check-axioms`**。
+  本分支未改动 formal/ 下任何文件。
+
+  **本推导关闭了原推导的 gap (1)**（「生成性没有证明」）。原推导
+  --via-generator-relations 按 lead「旧推导保留」的裁决不动、不更新其 gaps；
+  读者以本条为准。其 gap (2)（文献出处）与 gap「关系的矩阵验算无 reviewer 记录」
+  **不因本条关闭**——后者现在由机器检查取代了 reviewer 的角色，但那是另一条证据链。
+
+  **建议（给 lead / reviewer）**：本卡按 graph/CLAUDE.md 的「一个节点一个命题」应当拆成
+  (1) 生成性 与 (2) 两条关系 两张卡：它们的来源、强度与 Lean 声明都不同
+  （(1) 的实质内容在 Mathlib，(2) 是本项目的两行 `rfl`），合在一张卡上只能挂一个 lean_decl。
+  本轮不拆——拆卡要新建 id 并处理 superseded_by，超出接线任务范围。
+author: curator-lean-wire-9
+created: "2026-09-11"
