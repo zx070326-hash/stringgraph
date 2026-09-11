@@ -1,40 +1,97 @@
 id: ms.critical-dimension-brst-nilpotency
 statement_id: worldsheet.critical-dimension-brst-v2
 canonical_text: |
-  【本里程碑断言什么】
-  设 Q_B 是权 λ = 2 的 bc 鬼场系统、鬼场正规序常数 a^g = −1、物质中心荷 c^m 的 BRST 荷，
-  作用在受限模 V 上（每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化），
-  且诸 c_{−m} c_m 在 V 上线性无关（忠实的 Fock 型受限模满足）。则
-    Q_B² = (1/2) Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m,
-  故 Q_B² = 0 ⟺ c^m = 26 ⟺ c^m + c^g = 0。
+  【记号与约定】
+  Virasoro 括号取 **conv.virasoro-standard** 归一化：
+    [L_m, L_n] = (m − n) L_{m+n} + (c/12) m(m² − 1) δ_{m+n,0},
+  一个表示的「中心荷」即其中的 c 在该表示上的取值。中心荷写作上标 c^m（物质）、c^g（鬼场），
+  以免与鬼场模式 c_n 撞号。
+
+  物质部门：算子族 L^m_n (n ∈ Z)，满足上述归一化下的 Virasoro 关系，中心荷为 c^m（保持为符号）。
+
+  鬼场部门：权 λ = 2 的 bc 系统的模式代数
+    {b_m, c_n} = δ_{m+n,0},  {b_m, b_n} = {c_m, c_n} = 0   (m, n ∈ Z),
+  其 Virasoro 模写作
+    L^g_n = Σ_m (2n − m) : b_m c_{n−m} :,
+  其中记号 `: :` 取 **conv.ghost-normal-ordering-level**（能级序：湮灭算符为 b_n (n ≥ 0)、c_n (n ≥ 1)，
+  即零化鬼场基态 |↓⟩ = c_1|0⟩ 的那些模式）。在该序下，**满足上述纯 (m³ − m) 形式 Virasoro 关系的
+  不是 L^g_n 本身，而是移位后的生成元**
+    L̂^g_n := L^g_n + a^g δ_{n,0}   （a^g = −1），
+  即 [L̂^g_m, L̂^g_n] = (m − n) L̂^g_{m+n} + (c^g/12) m(m² − 1) δ_{m+n,0} 唯一确定 c^g
+  （这就是「(m³ − m) 的形式来自把 a^g = −1 吸收进 L_0」的精确内容）。
+  **本里程碑取 c^g = −26 作为输入**（λ = 2 的 bc 系统的中心荷；来源见下），**不**把它算作结论。
+
+  BRST 荷
+    Q_B = Σ_n c_n L^m_{−n} + Σ_{m,n} ((m − n)/2) : c_m c_n b_{−m−n} : + a^g c_0,
+  其中 `: :` 同取能级序，鬼场正规序常数取定为 a^g = −1。
+  **a^g = −1 与能级序是成对的**：若把 `: :` 改取 SL(2,C) 序（conv.ghost-normal-ordering-sl2c，
+  湮灭算符 b_n (n ≥ −1)、c_n (n ≥ 2)），则须同时改配 a^g = 0，两种写法给出**同一个算子 Q_B**；
+  把序与 a^g 拆开混搭（例如 SL(2,C) 序配 a^g = −1）得到的是**另一个**算子，它对任何 c^m 都不幂零。
+
+  【前提】
+  V 是上述模式的**受限模**：对每个 v ∈ V 存在依赖 v 的整数 N = N(v)，使
+    L^m_n v = b_n v = c_n v = 0   对所有 n > N。
+  （这是**单边**条件：只要求足够大的**正**指标零化 v，对负指标不作要求。它保证 Q_B 与 Q_B² 的
+  模式和作用在每个向量上只有有限多项非零，从而两者都是 V 上处处有定义的算子、模式和的重排合法。
+  物质与鬼场的最高权型 Fock 模满足此条件。）
+  进一步假设：诸算子 c_{−m} c_m (m ∈ Z) 在 V 上**线性无关**（忠实的 Fock 型受限模是这种情形）。
+
+  【断言】
+  在 V 上作为算子恒等式，
+    Q_B² = (1/2) {Q_B, Q_B} = (1/2) Σ_{m∈Z} ((c^m − 26)/12)(m³ − m) c_{−m} c_m
+  （整体常数因子依赖模归一化）；式中的 26 就是 −c^g，是**输入**不是结论。
+  由线性无关前提，
+    Q_B² = 0  ⟺  c^m = 26  ⟺  c^m + c^g = c^m − 26 = 0。
+  （⟸：c^m = 26 时和式逐项为零。⟹：线性无关迫使每个系数 ((c^m − 26)/12)(m³ − m) 为零；
+  m³ − m 在 |m| ≥ 2 处非零，取 m = 2 即得 c^m = 26。m ∈ {−1, 0, 1} 的项恒为零，对 ⟹ 不提供信息。）
 
   【本里程碑不断言什么】
-  (1) **不**断言 D = 26。由 c^m = 26 到 D = 26 需要一步 c^m = D
-      （worldsheet.free-boson-central-charge-d，**effective = formalized**），
+  (1) **不**断言 D = 26。由 c^m = 26 到 D = 26 需要一步 c^m = D（worldsheet.free-boson-central-charge-d），
       该步只在物质部门取 D 个平坦自由玻色子时成立；紧化背景与非几何背景是 c^m = 26 而 D ≠ 26 的解。
   (2) **不**断言截距 a = 1。本路线完全不涉及 a。
   (3) **不**断言 BRST 上同调与旧协变物理态空间的同构
-      （那是 worldsheet.brst-cohomology-equals-ocq-physical，已 rigorous，本里程碑不使用）。
-  (4) **不**断言这组鬼场模式就是 Polyakov 路径积分的 FP 鬼场。
+      （那是 worldsheet.brst-cohomology-equals-ocq-physical，本里程碑不使用它）。
+  (4) **不**断言这组 b、c 模式就是 Polyakov 路径积分的 Faddeev–Popov 鬼场
+      （本里程碑用到的只有上面写出的模式代数）。
+  (5) **不**断言 c^g = −26 本身，也**不**断言一般 λ 的鬼场中心荷公式；c^g = −26 是取自别处的输入。
 
-  【严格性的确切位置】
-  · c^g = −26：fgz-1986 Proposition 2.1(i)（L1 逐字，PNAS 公告体裁，无印出证明）；
-  · Virasoro 关系与归一化：worldsheet.virasoro-algebra-v2（formalized）；
-  · {Q_B, Q_B} 的模式恒等式：无任何文献印出证明，靠 reviewer 独立复算
-    （docs/STATUS_LEVELS.md 等级 4 的例外条款）；
-  · ⟸ 半边另有独立的 rigorous 节点 worldsheet.brst-nilpotent-at-c26（fgz-1986 Prop 1.2）。
+  【论证落在哪里】
+  · c^g = −26（输入）：worldsheet.bc-ghost-central-charge-lambda-two，来源 fgz-1986 Proposition 2.1(i)
+    （PNAS 公告体裁，该命题没有印出证明）。
+  · Virasoro 关系与归一化：worldsheet.virasoro-algebra-v2。
+  · {Q_B, Q_B} 的模式恒等式：**没有任何文献印出它的证明**（Polchinski §4.3 是教科书式形式计算，
+    未声明受限模、未论证无穷模式和重排的合法性、未写出 ⟹ 方向所需的线性无关前提；
+    Kato–Ogawa 1983 正文本项目未获取）。本图据以采信的是逐步独立复算记录
+    docs/reviews/brst-nilpotency-recompute-2026-09-12.md。
+  · ⟸ 半边另有一个独立节点 worldsheet.brst-nilpotent-at-c26（fgz-1986 Proposition 1.2）。
+
+  【与所指陈述卡措辞的一处差异（船长请注意这一条）】
+  worldsheet.critical-dimension-brst-v2 把线性无关写成**断言**（「由于诸 c_{−m} c_m 在 V 上线性无关
+  （对忠实的 Fock 型受限模成立）」），本文把它写成**前提**。理由：对一般受限模该断言为假
+  （取 b、c 全零作用的平凡模，Q_B² = 0 而 c^m 任意），故只有作为前提时 ⟺ 才成立。
+  除此之外，本文与陈述卡逐句对应。
 canonical_source:
   ref: polchinski-1998-v1
   loc: |
-    §4.3, eq. (4.3.9), p.131–132（**全书唯一逐字写出 `c^m = 26` 而非 D = 26 的位置**）
-    ——另两条来源（milestone schema 只容一条 canonical_source，故并列于此，内容取自
-    docs/drafts/critdim-route-cards.md §E 的三条原文，未增删）：
-    · kato-ogawa-1983，全文；摘要（L2）。正文未获取，定理编号未核实。
-    · fgz-1986，Proposition 2.1(i), p.8444。
+    §4.3。**两个方向分别落在两处，缺一不可**：
+    · ⟹ ：**eq. (4.3.9)**，逐字「{Q_B, Q_B} = 0 **only if** c^m = 26」（原书另注最短推导用 Jacobi 恒等式，
+      习题 4.3）。
+    · ⟸ ：**eq. (4.3.10), p.132**（j_B j_B 的 OPE），其后正文逐字「This requires a bit of calculation,
+      being careful about minus signs from anticommutation. **The single pole implies that
+      {Q_B,Q_B} = 0 when c^m = 26.**」
+    · 与 Q_B 写法配套的 a^g = −1 见 (4.3.7)（末项 `+ a^B(c_0 + c̃_0)`，紧接一句「The ordering constant is
+      a^B = a^g = −1」）与 (4.3.8)（{Q_B, b_0} = L^m_0 + L^g_0）。
+    §4.3 是全书唯一以 c^m（而非 D）写出临界条件的地方。逐字与式号见
+    literature/extractions/polchinski-1998-v1.md §12.10 表 B（L1 原书页图核实）；⚠ (4.3.9) 的页码本项目
+    未单独核实（同节 (4.3.6)–(4.3.11) 经目录核实落在 p.132）。
+    ——milestone schema 只容一条 canonical_source，故另两条并列于此，内容取自陈述卡 sources，未增删：
+    · kato-ogawa-1983，全文；摘要（L2）逐字为 **⟹ 方向**（「are required by the nilpotency」）。
+      正文未获取，定理编号未核实。
+    · fgz-1986, Proposition 2.1(i), p.8444（ρ(c) = −26 Id）：只给 c^g = −26 这一**输入**，不给本文的 ⟺。
 audit:
-  status: draft
+  status: back-translated
   back_translation:
-    by: physics-auditor
+    by: physics-auditor（第一轮 text 与 R1 diff_notes；第二轮 R2 diff_notes 同一 agent，独立性限制见 R2-0）
     text: |
       【回译，第一轮，physics-auditor，2026-09-12，分支 agent/auditor/brst-milestone-r1。
       仅依据以下字段写成：worldsheet.critical-dimension-brst-v2 的 statement 与 uses_conventions；
@@ -79,13 +136,15 @@ audit:
       · 不断言 BRST 上同调与旧协变物理态空间的关系。
       · 不断言这组 b、c 模式就是 Polyakov 路径积分的 Faddeev–Popov 鬼场。
       · 不断言 c^g = −26 本身（那是取自别处的输入）；也不断言一般 λ 的鬼场中心荷公式。
-    verdict: drift
+    verdict: faithful
     diff_notes: |
       【第一轮回译审计，2026-09-12】physics-auditor，分支 agent/auditor/brst-milestone-r1。
-      **verdict: drift**（同一条命题，但 canonical_text 的条件写法与陈述卡有实质出入）。
-      **audit.status 保持 draft，本轮不置 back-translated**：R1-1 与 R1-3 是必须先修的条件缺陷。
+      **第一轮 verdict: drift**（同一条命题，但 canonical_text 的条件写法与陈述卡有实质出入）。
+      **第一轮 audit.status 保持 draft**：R1-1 与 R1-3 是必须先修的条件缺陷。
       修好后须再跑一轮（第二轮只需比对被改动的段落，回译文本可沿用本轮）。
       下列 R1-1..R1-4 是缺陷，R1-5/R1-6 是建议，末尾一段是**本轮核过但没有问题**的项，记下以免下轮重复。
+      ⚠ 本节保留第一轮原文不删（含当时的 verdict/status 判断）；第二轮的裁定见文末【第二轮】各节，
+      本 back_translation 的 `verdict` 字段现取第二轮的值。
 
       R1-1〔缺陷·条件被写错，且强到不可满足〕**受限模的定义**。
       陈述卡：「对每个 v ∈ V 存在 N = N(v) 使 L^m_n v = b_n v = c_n v = 0 对所有 n > N」——
@@ -161,7 +220,7 @@ audit:
       (b) 鬼场正规序在 graph/conventions/ 里目前**没有**对应 family——family `normal-ordering-constant`
           装的是截距符号 conv.intercept-sign-a，是常数符号约定，不是算符排序约定。这正是 R1-3 需要新卡的原因。
 
-      【本轮核过且没有问题的项（记下以免下轮重复）】
+      【第一轮核过且没有问题的项（记下以免下轮重复）】
       · **方向**：陈述卡与 canonical_text 都写 ⟺，一致；两者都未把 ⟸ 误标成有 KO 来源。
         （来源覆盖的问题在 R1-4，不是陈述方向的问题。）
       · **a^g = −1 是前提不是静默假设**：陈述卡「（bc 系统权 λ = 2，鬼场正规序常数 a^g = −1，物质
@@ -178,4 +237,106 @@ audit:
         受限模成立）」——是**断言**它在 V 上成立；canonical_text 写成「且诸 c_{−m} c_m 在 V 上线性无关」
         ——是**假设**它成立。canonical_text 的处理更正确（陈述卡的写法对一般受限模为假：取 b、c 全零
         作用的平凡模，Q_B² = 0 而 c^m 任意）。这是**向正确方向的**差异，不阻塞；记此供陈述卡换代 v3 时修。
+
+      ================================================================
+      【第二轮回译审计 R2，2026-09-12】physics-auditor，分支 agent/auditor/brst-milestone-r2。
+      **R2 verdict: faithful**；据此置 audit.status: back-translated。
+      （approved 仍只能由船长置；本 agent 不置 approved。）
+
+      R2-0〔必须先说的独立性限制〕**本轮的回译与本轮的 canonical_text 修订出自同一个 agent、同一次会话。**
+      lead 派工把「按 R1-1..R1-6 改 canonical_text」与「跑第二轮回译」交给同一人，故 R2 **不是**
+      ms.ddf-commute-with-virasoro 那种「第二位独立审计员」式的复核。本轮采取的补偿措施有三条，
+      船长可据此判断可信度：
+      (a) 上面 `text` 字段的回译原文（第一轮，写于读 canonical_text 之前）**一字未改**，它仍是本文件里
+          唯一「先翻译后比对」的独立产物；R2 的比对是拿**修订后的 canonical_text** 与它以及与陈述卡
+          逐句对照，不重写它。
+      (b) 本轮修订 canonical_text 时，凡涉及陈述内容的句子**只从 worldsheet.critical-dimension-brst-v2
+          与 worldsheet.brst-quantization-v2 的 statement 字段抄写或改写**，不引入任何两卡以外的新内容
+          （唯一的新增是约定卡引用与 R2-1 的那句括号，见下）。
+      (c) R2 新发现的一处漂移（R2-1）**是在本轮比对中发现并当场修掉的**，不是修订时就知道的；
+          记录在此以示本轮比对确实执行了，而不是走过场。
+      建议：若船长要一次真正独立的复核，可在 approved 之前派第二位 auditor 只做 R2 复核（不给写权限）。
+
+      R2-1〔R2 新发现的漂移·本轮已修〕**「整体常数因子依赖模归一化」这条限定在第一轮 canonical_text 中丢失。**
+      陈述卡逐字写「Q_B^2 = … = (1/2) Σ …（**整体常数因子依赖模归一化**；(m^3 - m) 的形式来自把
+      a^g = -1 吸收进 L_0）」。旧 canonical_text 把这句括号整段删掉，于是它断言的是一个**无条件的精确等式**，
+      **强于**陈述卡（陈述卡在整体常数上留了余地）。第一轮没抓到这一条（第一轮的 `text` 回译里写了它，
+      比对时漏了）。**已修**：修订后的【断言】块恢复「（整体常数因子依赖模归一化）」。
+      ⚠ 附带记账：这句限定在陈述卡里本身就语焉不详（「模归一化」指哪一组归一化没写死）。
+      它不影响 ⟺ 的真值（整体非零常数因子不改零点），故不构成 drift 以外的问题；
+      建议陈述卡换代 v3 时把它写清楚或删去。本轮按「只翻 YAML 里写了的」原则原样保留。
+
+      R2-2〔R1-1 已关闭〕受限模定义现逐字取自陈述卡的**单边**写法（「存在 N = N(v) 使 … 对所有 n > N」），
+      并补一句说明它是单边条件、对负指标不作要求。与陈述卡一致，与第一轮 `text` 回译一致。
+      旧的「被除有限多个模式外零化」写法已删净（全文 grep 无残留）。
+
+      R2-3〔R1-2 已关闭〕c^g 现在**在断言块内被定义**：canonical_text 给出 L̂^g_n := L^g_n + a^g δ_{n,0}
+      并以 [L̂^g_m, L̂^g_n] 的中心项定义 c^g，随后写明「本里程碑取 c^g = −26 作为输入，不把它算作结论」，
+      且【断言】块保留陈述卡的「⟺ c^m + c^g = c^m − 26 = 0」全串。
+      ⇒ 脱离图单读 canonical_text，「c^m = 26 ⟺ c^m + c^g = 0」现在可核验。
+      ⚠ 这里有一处**比陈述卡更精确**的改写，明示如下：陈述卡（经 brst-quantization-v2）把 c^g 定义成
+      [L^g_m, L^g_n] 的中心项系数，而在能级序下该式**带一个 −2m**，故那个定义严格说来无良定义的解；
+      canonical_text 改成用移位后的 L̂^g 定义 c^g，这正是 R1-3 所说「a^g = −1 吸收进 L_0」的内容。
+      改写方向是「把陈述卡想说的说对」，不扩大也不缩小本里程碑的断言范围（c^g 的取值仍是 −26，
+      (m³ − m) 的系数与序无关）。**按审计规则这属于须向船长明示的偏离，故单列在此，而不是默默改掉。**
+
+      R2-4〔R1-3 已关闭〕canonical_text 现在（i）明写 `: :` 取 conv.ghost-normal-ordering-level
+      并给出湮灭算符清单 b_n (n ≥ 0)、c_n (n ≥ 1)；（ii）写出与 a^g = −1 的成对性，并写明改取
+      conv.ghost-normal-ordering-sl2c 须同时改配 a^g = 0、两者给同一个 Q_B、混搭得到的算子对任何 c^m
+      都不幂零。两张约定卡本轮已建（graph/conventions/ghost-normal-ordering-level.yaml 与
+      -sl2c.yaml），能级序为该 family 的 canonical 成员（lead 裁决），故 canonical_text 只引用
+      canonical 约定，满足「里程碑陈述只用 canonical 约定」的守则。
+      ⚠ 仍存的**欠定残留**（不阻塞，登记）：零模 (b_0, c_0) 的产生/湮灭归属在陈述卡里没有规定；
+      约定卡按 reviewer 复算 §4 末段取 b_0 湮灭、c_0 产生，并证明本里程碑用到的三件事
+      （L^g_n、中心项、Q_B）都与该选择无关。故该残留对本里程碑无后果。
+
+      R2-5〔R1-4 已关闭〕canonical_source 现按方向分列：(4.3.9) 承担 ⟹（逐字 only if），
+      (4.3.10) + 其后正文承担 ⟸（逐字 「The single pole implies that {Q_B,Q_B} = 0 when c^m = 26.」），
+      并保留 (4.3.7)/(4.3.8) 作为 a^g = −1 的来源。逐字措辞已与
+      literature/extractions/polchinski-1998-v1.md §12.10 表 B 逐字核对（本轮实读，L1 页图核实记录）。
+      两处措辞订正：(a) 旧 loc 写「p.131–132」，而本项目只核实过 (4.3.6)–(4.3.11) 落在 **p.132**、
+      且 (4.3.9) 的页码**未单独核实**——新 loc 照实写明；(b) 旧 loc 的「全书唯一逐字写出 c^m = 26 的位置」
+      改挂在**节**上（「§4.3 是全书唯一以 c^m 而非 D 写出临界条件的地方」），因为同节的 (4.3.10)/(4.3.11)
+      也含 c^m − 26，「唯一的**式子**」这一说法过强。
+      ⚠ 留给下游：kato-ogawa-1983 正文仍未获取（ScienceDirect 403），其定理编号未核实；
+      本里程碑的 ⟺ 在文献里**没有**一处同时给出两个方向。
+
+      R2-6〔R1-5 已关闭〕canonical_text 中所有图状态形容词已删净：本轮 grep 确认正文不再出现
+      「effective」「formalized」「rigorous」「physical-argument」「猜想」等级词。原【严格性的确切位置】
+      块改写为【论证落在哪里】，只留**节点 id、文献位置与文献体裁事实**（如「PNAS 公告体裁，该命题
+      没有印出证明」——这是关于文献的事实陈述，不是图状态），并删去对 docs/STATUS_LEVELS.md 等级条款的援引。
+      「⟸ 半边另有独立节点 brst-nilpotent-at-c26」保留但去掉「已 rigorous」。
+
+      R2-7〔R1-6 已关闭〕canonical_text 开头明写 conv.virasoro-standard（并写出括号式），
+      正规序处明写 conv.ghost-normal-ordering-level（并给出清单），两者都是各自 family 的 canonical 成员。
+      conv.metric-mostly-plus 仍不提（R1-6(a)：本陈述无时空指标，用不着）。
+      ⚠ 记账：陈述卡 worldsheet.critical-dimension-brst-v2 的 uses_conventions 本轮已加
+      conv.ghost-normal-ordering-level（只加该字段与 notes，statement 正文一字未动，不构成换代；
+      先例 commit 5fdda19）。conv.metric-mostly-plus 是否该从该卡撤下，留给该卡下次换代。
+
+      R2-8〔逐句比对结论〕把修订后的 canonical_text 与（a）陈述卡 statement、（b）第一轮 `text` 回译
+      逐句对照，除 R2-1/R2-3 两处已明示的改动外，对象、前提、断言、方向、非断言五块逐句对应：
+      · 对象：Virasoro 归一化 ✓；物质 L^m_n 与 c^m 保持为符号 ✓；bc 反对易关系 ✓；L^g_n 的表达式逐字一致 ✓；
+        Q_B 三项 + a^g c_0 逐字一致 ✓；a^g = −1 写在前提位置 ✓。
+      · 前提：受限模单边条件 ✓（R2-2）；线性无关作为前提（与陈述卡的「断言」措辞的差异已在
+        canonical_text 末尾**向船长明示**，见该处【与所指陈述卡措辞的一处差异】段，且方向是更弱、更安全）。
+      · 断言：Q_B² 公式逐字一致（含 R2-1 恢复的括号）✓；⟺ 双向及其两个方向的初等理由 ✓；
+        26 = −c^g 且是输入 ✓。
+      · 非断言：D = 26、截距 a、BRST 上同调同构、FP 鬼场、c^g 本身共五条，均不超出陈述卡
+        （前四条与陈述卡【本命题到此为止】及其依赖卡的同类声明一致，第五条是 R1-2 的产物）✓。
+        ⚠ 一处需船长知情：worldsheet.brst-quantization-v2 的正文**称**这组 bc 模式为
+        「Faddeev–Popov 鬼场部门」，但它给出的只有模式代数；本里程碑的非断言 (4) 说的是
+        「不断言它们就是 Polyakov 路径积分的 FP 鬼场」——两者不冲突（前者是命名，后者是拒绝认同），
+        但读者若只看 brst-quantization-v2 的标题会以为已经做了那一步认同。
+      · 量词：物质部门不被限定为自由玻色子（R1 已核，本轮复核未变）✓；m 的范围 m ∈ Z ✓；
+        受限模的 N 依赖 v ✓。
+      ⇒ **R2 verdict: faithful**，置 audit.status: back-translated，等船长逐条确认后由船长置 approved。
+
+      【本轮未做、留给后续的事（不阻塞 back-translated）】
+      (1) 陈述卡 worldsheet.critical-dimension-brst-v2 的 v3 换代（线性无关改为前提、正规序写进正文、
+          「整体常数因子依赖模归一化」写清楚或删去）：lead 2026-09-12 裁决「暂不做，先看 R2」。
+          R2 判 faithful，故这三项现在是**可选的文本改进**，不是里程碑的阻塞项。
+      (2) worldsheet.bc-ghost-central-charge-lambda-two 陈述里同款的「被除有限多个模式外零化」写法
+          仍未修（statement 不可变，已在该卡 notes 记）；它不进本里程碑正文。
+      (3) kato-ogawa-1983 正文获取。
 phase: 1
