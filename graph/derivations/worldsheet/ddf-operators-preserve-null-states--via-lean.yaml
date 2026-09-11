@@ -1,0 +1,82 @@
+id: worldsheet.ddf-operators-preserve-null-states--via-lean
+target: worldsheet.ddf-operators-preserve-null-states
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **第一块输入**：A^ε_n(H_phys(a₀)) ⊆ H_phys(a₀)，对同一 a₀，Lean
+      `ddfOp_mem_towerPhysSubmodule`（DDFOperatorAll.lean）。本推导对它**调用两次**：
+      一次取 n（给出 A^ε_n Χ 物理），一次取 −n（给出 A^ε_{−n}Ψ 物理，供第二块输入使用）。
+  - id: worldsheet.ddf-operators-adjoint-v2
+    inferred: false
+    note: |
+      **第二块输入**：(A^ε_n)† = A^ε_{−n} 关于塔上双线性型 ⟨·,·⟩_T，Lean
+      `Fock.towerPairing_ddfOp_left`（VertexAdjoint.lean）。把 ⟨A^ε_n Χ, Ψ⟩_T 改写成
+      ⟨Χ, A^ε_{−n}Ψ⟩_T，正是本推导把「保持物理」升级为「保持零态」的唯一实质步骤。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      **零态的定义本身**：H_null(a₀) = H_phys(a₀) ∩ H_phys(a₀)^⊥，Lean
+      `mem_towerNullSubmodule`（TowerNull.lean，本卡展开/重组两次，⊢ 方向与 hΧ 方向各一次）；
+      正交半用到该卡记录的 `towerNullSubmodule_le_towerPhysSubmodule`
+      风格的展开（`rw [mem_towerNullSubmodule] at hΧ ⊢`）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/NullDescend.lean :: StringFormal.NoGhost.ddfOp_mem_towerNullSubmodule（目标声明）。消耗 formal/StringFormal/NoGhost/DDFOperatorAll.lean :: StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule 与 formal/StringFormal/NoGhost/VertexAdjoint.lean :: StringFormal.NoGhost.Fock.towerPairing_ddfOp_left，以及 formal/StringFormal/NoGhost/TowerNull.lean :: StringFormal.NoGhost.mem_towerNullSubmodule"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（分支 agent/formalizer/general-n-pr012，
+      经提交 9328c03 合入 main）。证明逐字（去掉 `TowerFock`/隐式参数的类型标注）：
+        ```
+        rw [mem_towerNullSubmodule] at hΧ ⊢
+        refine ⟨ddfOp_mem_towerPhysSubmodule η a b ε hη hbb hba hεb n hΧ.1, fun Ψ hΨ => ?_⟩
+        rw [Fock.towerPairing_ddfOp_left]
+        exact hΧ.2 _ (ddfOp_mem_towerPhysSubmodule η a b ε hη hbb hba hεb (-n) hΨ)
+        ```
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；无逐字定理陈述本推导（见 formal/BLUEPRINT-noghost.md §B′.11 第 5 条：图侧内部构造步骤，建议新建卡或记入 ddf-operators-preserve-physical-states 的 notes——本次选择新建独立卡+推导，理由见目标卡 notes 的立卡理由）"
+    note: |
+      **不承载论证**。文献未把此步骤单独列出。
+summary: |
+  机器检查的证明，五行，全部在 formal/StringFormal/NoGhost/NullDescend.lean。
+
+  **展开零态定义。** `Χ ∈ towerNullSubmodule η a b a₀` 展开为一对
+  `⟨hΧ.1 : Χ ∈ towerPhysSubmodule …, hΧ.2 : ∀ Ψ ∈ towerPhysSubmodule …, ⟨Χ,Ψ⟩_T = 0⟩`。
+  目标 `A^ε_n Χ ∈ towerNullSubmodule …` 同样展开成一对，逐一构造：
+
+  **物理性半：** 直接调用 `ddfOp_mem_towerPhysSubmodule … n hΧ.1`
+  （worldsheet.ddf-operators-preserve-physical-states 的 Lean 内容，取 n）。
+
+  **正交性半：** 给定任意物理态 Ψ，先用伴随关系
+  `Fock.towerPairing_ddfOp_left : ⟨A^ε_n Χ, Ψ⟩_T = ⟨Χ, A^ε_{−n} Ψ⟩_T`
+  （worldsheet.ddf-operators-adjoint-v2 的 Lean 内容）把目标改写；
+  再次调用 `ddfOp_mem_towerPhysSubmodule … (−n) hΨ` 得到 A^ε_{−n}Ψ 物理
+  （同一条 --preserve-physical-states 卡，这次取 −n）；
+  最后用 `hΧ.2` （Χ 与一切物理态正交）把 ⟨Χ, A^ε_{−n}Ψ⟩_T 打成 0。
+
+  三条依赖恰好对应上面三步：定义展开用 tower-physical-quotient-form，
+  物理性半（两次）用 ddf-operators-preserve-physical-states，
+  正交性半的改写用 ddf-operators-adjoint-v2。
+gaps:
+  - |
+    **不断言零态非零、DDF 后代非零**。目标是子模包含，允许退化到零向量。
+  - |
+    **不涉及计数或张成**。「零态够不够多」是 worldsheet.ddf-spanning-hypothesis /
+    worldsheet.ddf-spanning-rank-inequality 的内容；本推导只提供两者可能用到的乘法结构
+    （反复作用 DDF 算子仍留在零态子模内），不产生任何具体零态。
+  - |
+    **本推导继承其两条主要依赖各自的缺口**：模态和 vs 围道积分（同一物理算子的机检承载止于
+    physical-argument，见 worldsheet.ddf-operators-preserve-physical-states--via-lean 的
+    gaps 第 3 条）；一般交换 Q-代数，无实结构、无正定性。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  三条依赖全部 effective = formalized，故本推导与目标卡的 effective = formalized。
+  这是一条"纯粘合"推导：不引入新的物理假设，只把已 formalized 的两条性质
+  （保持物理态 + 伴随关系）在零态的定义上拼起来。
+author: curator
+created: "2026-09-12"

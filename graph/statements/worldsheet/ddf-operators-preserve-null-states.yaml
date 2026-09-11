@@ -1,0 +1,98 @@
+id: worldsheet.ddf-operators-preserve-null-states
+kind: proposition
+title: DDF 算子把塔上的零态映为零态：A^ε_n(H_null(a₀)) ⊆ H_null(a₀)，对任意截距 a₀
+statement: |
+  记号逐字沿用 worldsheet.ddf-operators-preserve-physical-states 与
+  worldsheet.tower-physical-quotient-form：动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)
+  （代数直和，第 j 层动量 p + j k_0），A^ε_n = Σ_{m ∈ Z} α^ε_m V^{(n)}_m 是塔上的 DDF 算子
+  （worldsheet.ddf-operators-v6，把第 j 层送到第 j+n 层）。
+
+  【定义：塔上的物理子空间与零态，截距 a₀ 是一个统一常数】
+  给定 a₀ ∈ R，令
+    H_phys(a₀) := { Ψ ∈ T(p;k_0) : (L_0 − a₀)Ψ = 0  且  L_mΨ = 0 对一切 m ≥ 1 }
+  （worldsheet.ddf-operators-preserve-physical-states 的 H_phys(p;k_0;a₀)），以及
+    H_null(a₀) := H_phys(a₀) ∩ H_phys(a₀)^⊥
+  （worldsheet.tower-physical-quotient-form 的零态子模，⊥ 取塔上层间正交的双线性型 ⟨·,·⟩_T）。
+
+  【前提】
+    (T) 横向性  ε·k_0 = 0        （v6 的定义参数）
+    (N) 类光性  k_0² = 0
+    (S) 归一化  2α' k_0·p = 1
+
+  【断言】在 (T)(N)(S) 之下，对一切 n ∈ Z 与**一切** a₀ ∈ R：
+
+    A^ε_n ( H_null(a₀) ) ⊆ H_null(a₀) 。
+
+  即：若 Χ ∈ H_phys(a₀) 且 ⟨Χ, Ψ⟩_T = 0 对一切 Ψ ∈ H_phys(a₀)，则 A^ε_n Χ 同样满足这两条。
+
+  【一句话论证的形状（供读卡）】
+  A^ε_n Χ 是物理态，因为 A^ε_n 保持 H_phys(a₀)（worldsheet.ddf-operators-preserve-physical-states，
+  对**同一个** a₀ 成立）；它与任意物理态 Ψ 正交，因为 A^ε_n 关于 ⟨·,·⟩_T 的伴随是 A^ε_{−n}
+  （worldsheet.ddf-operators-adjoint-v2），故 ⟨A^ε_n Χ, Ψ⟩_T = ⟨Χ, A^ε_{−n}Ψ⟩_T = 0——
+  最后一步是因为 A^ε_{−n}Ψ 同样物理（再用一次保持性，这次在 −n 处）而 Χ 与一切物理态正交。
+
+  【本节点明确不断言】
+  (a) **不断言 DDF 算子在零态上的具体作用值**，只断言子模包含。
+  (b) **不断言 H_null(a₀) 非零**，也不断言 A^ε_n Χ ≠ 0。
+  (c) **不断言这给出 D(Ε) 与 H_null 的任何张成或直和关系**；那是
+      worldsheet.ddf-spanning-hypothesis 与 worldsheet.ddf-spanning-rank-inequality 的内容，
+      本卡是它们可能用到的一条乘法结构性质，不是它们本身。
+  (d) **不断言 a₀ 的取值**；本卡对每个 a₀ 都成立（比 worldsheet.ddf-spanning-hypothesis
+      固定 a₀ = α'k² 更一般）。
+  (e) **不断言 R 的任何序结构或特征**；R 是交换 Q-代数（DDF 算子构造所需）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfOp_mem_towerNullSubmodule
+  lean_file: StringFormal/NoGhost/NullDescend.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/NullDescend.lean :: StringFormal.NoGhost.ddfOp_mem_towerNullSubmodule（本卡 formal.lean_decl）；消耗 StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule（DDFOperatorAll.lean，两次调用，分别取 n 与 −n）与 StringFormal.NoGhost.Fock.towerPairing_ddfOp_left（VertexAdjoint.lean，伴随关系）；零态的定义展开 StringFormal.NoGhost.mem_towerNullSubmodule（TowerNull.lean）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（分支 agent/formalizer/general-n-pr012，
+      经提交 9328c03 合入 main）。语句逐字（去掉隐式参数）：
+        `theorem ddfOp_mem_towerNullSubmodule (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+           (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) (hεb : dotVec η ε b = 0) {a₀ : R}
+           (n : ℤ) {Χ : TowerFock D R} (hΧ : Χ ∈ towerNullSubmodule η a b a₀) :
+           ddfOp η a b ε hη hεb n Χ ∈ towerNullSubmodule η a b a₀`
+      与本卡陈述逐字一致：`hbb` = (N)，`hba` = (S)，`hεb` = (T)，n 与 a₀ 均无限制。
+      文件头逐字："Stated for an arbitrary intercept `a₀`; the blueprint's `a₀ = α' k²` is the
+      special case `a₀ = invTwo R * Fock.zeroModeSq η a`."，以及本文件是
+      "**blueprint §B′.4, PR0**"，其存在理由是 "it is the *multiplicative structure* behind
+      form (iii) of the critical-dimension gap (B-26): it reduces 'produce
+      `p_{D−1}(N) − p_{D−2}(N)` independent null states in the slice `(-N, N)`' to
+      'produce `p(m)` longitudinal seeds for each `m ≤ N`'."
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15，(6.4) 及其上下文；无逐字定理陈述本卡（正文按 formal/BLUEPRINT-noghost.md §B′.11 建议本卡为图侧内部构造步骤）"
+    note: |
+      **不承载论证**。文献侧没有把「DDF 算子把零态送到零态」单独陈述为一条引理——
+      它隐含在「物理态 = DDF 态 + 零模态」这个张成结论的证明策略里（formal/BLUEPRINT-noghost.md
+      §B′.4 把它列为 PR0，是对 Goddard 2008 §6 机制的重构，不是逐字转录）。登记此条只为给本卡
+      一个文献方位，不作为来源承载论证。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, formalized]
+notes: |
+  【立卡理由】formal/StringFormal/NoGhost/NullDescend.lean（蓝图 §B′ PR0）把「DDF 算子保持
+  零态」整条证出，且**对任意截距 a₀ 成立**（蓝图原计划只在 a₀ = α'k² 处证明，Lean 侧无成本地
+  加强到任意 a₀，因为证明只用到 worldsheet.ddf-operators-preserve-physical-states 与
+  worldsheet.ddf-operators-adjoint-v2 两条本来就对任意 a₀/n 成立的事实）。此前这条性质
+  在图里没有独立节点，无法被 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities
+  一类下游单独引用。
+
+  查重：`uv run stringgraph search null` 命中 worldsheet.tower-physical-quotient-form（零态的
+  定义卡）、worldsheet.ddf-spanning-hypothesis 及其已证片，均不断言本卡的「DDF 算子保持零态」
+  这一点，无重复。
+
+  【与 worldsheet.ddf-operators-preserve-physical-states 的关系】本卡不是那张卡的推论式改写，
+  而是**额外**用了一条那张卡没有的输入——伴随关系 A^ε_n† = A^ε_{−n}
+  （worldsheet.ddf-operators-adjoint-v2）——把「保持物理态」升级成「保持物理态**且**保持
+  与物理态正交」。两条边（见 --via-lean 推导）合起来才给出本卡。
+
+  【本卡在 (B-26) 构造式路线中的位置，供追溯】
+  NullDescend.lean 文件头点明它是「(B-26) 构造式路线（iii）」的乘法结构：若能在片 (−N, N) 上
+  造出 p(m)（m ≤ N）个「纵向种子」零态，本卡保证对它们反复作用 DDF 算子得到的态仍是零态，
+  从而把种子的数目通过 DDF 后代放大到 p_{D−1}(N) − p_{D−2}(N) 个
+  （见 worldsheet.ddf-spanning-hypothesis notes 的 seed-count 恒等式
+  p_{D−1}(N) − p_{D−2}(N) = Σ_{m≥1} p_{D−2}(N−m)·p(m)）。
+  **本卡本身不涉及计数**，只保证 DDF 后代仍落在零态子模里；计数与「种子如何造」均不在本卡内。
+author: curator
+created: "2026-09-12"
