@@ -1,0 +1,70 @@
+id: worldsheet.bc-ghost-bosonization--via-energy-momentum-shift-and-central-charge-check
+target: worldsheet.bc-ghost-bosonization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.fermion-bosonization-two-dimensions
+    inferred: false
+    note: |
+      供给 λ = 1/2 情形的字典 ψ ≅ e^{iH}、ψ̄ ≅ e^{−iH}（(10.3.10)）。
+      原书 §10.3 末**明写**本段是把前面的玻色化推广到一般 λ
+      （(10.3.30) 的写法就是"由 λ = 1/2 理论改能动张量得到"），故此边不标 inferred。
+  - id: worldsheet.bc-ghost-cft
+    inferred: false
+    note: |
+      供给被玻色化的对象：权 (λ, 1−λ) 的反对易一阶 bc 系统。
+      (10.3.30) 直接以它的场 b、c 与 T_B 写出。
+  - id: worldsheet.bc-ghost-central-charge
+    inferred: false
+    note: |
+      供给断言 (4) 左侧的 c = 1 − 3(2λ−1)²。
+      (10.3.33) 把这个表达式逐字写出（L1），并与右侧的 1 + 12V² 相等作为核对。
+  - id: worldsheet.linear-dilaton-cft
+    inferred: false
+    note: |
+      供给断言 (2) 的对照对象：原书逐字 'This is the same as the linear dilaton CFT,
+      with V = −i(λ−1/2)'，故这条边在 (10.3.31) 处直接可见。
+    convention_map: |
+      上游 worldsheet.linear-dilaton-cft 用 conv.alpha-prime-regge，
+      T(z) = −(1/α') :∂X^μ ∂X_μ: + V_μ ∂²X^μ，D 个标量。
+      本卡用 conv.nonembedding-scalar-normalization：α' = 2、D = 1、只取全纯一半，
+      标量记作 H，背景荷记作标量 V = −i(λ−1/2)。
+      ⚠ **V 是纯虚的**，故这是线性 dilaton CFT 的一个"复背景荷"取值；
+      worldsheet.linear-dilaton-cft 的定义只说 V_μ 是"一个固定的常向量"，未限定为实。
+      本推导按原书照用，gap 里记明。
+  - id: worldsheet.linear-dilaton-central-charge
+    inferred: false
+    note: |
+      供给断言 (4) 右侧的 1 + 12V²：即 c = D + 6α'V² 在 D = 1、α' = 2 下的值。
+      原书 (10.3.33) 把 1 + 12V² 逐字写出并宣布两侧相等，故此边可见。
+    convention_map: |
+      c = D + 6α'V²（conv.alpha-prime-regge）在 D = 1、α' = 2 下给 c = 1 + 12V² ✓。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3 末, eq. (10.3.30)–(10.3.34), p. 15"
+    note: |
+      L1 一手（抽取记录 polchinski-1998-v2.md E27）。**这五条式子就是原书的全部论证**：
+      改能动张量 → 认出线性 dilaton → 核对中心荷与场的维数 → 处理厄米性。
+      逐字：'As a check, the central charges agree'；'So do the dimensions of the fields'。
+summary: |
+  原书 §10.3 末的论证（四步，全部是核对而非证明）：
+    (1) **一般 λ 的 bc 理论 = λ = 1/2 的理论 + 改能动张量**：T_B^{(λ)} = T_B^{(1/2)} − (λ−1/2)∂(bc)
+        （(10.3.30)）。场与 OPE 都不变，故 λ = 1/2 的玻色化字典可以照搬。
+    (2) 把 ∂(bc) 用玻色侧的电流表出（bc ↔ i∂H 型，见
+        worldsheet.fermion-bosonization-two-dimensions 的 (10.3.13)），得
+        T_B^{(λ)} ≅ T_B^H − i(λ−1/2)∂²H（(10.3.31)）——**这正是背景荷 V = −i(λ−1/2) 的
+        线性 dilaton 能动张量**。
+    (3) 两处核对：中心荷 1 − 3(2λ−1)² = 1 + 12V²（(10.3.33)）；场的维数也相符
+        （原书只说 'So do the dimensions of the fields'，不写数；本图的算术核对在 target 的 notes）。
+    (4) 厄米性：b、c 厄米 ⇒ H 反厄米，改用厄米场 ρ（H → iρ），得 c ≅ e^{ρ}、b ≅ e^{−ρ}（(10.3.34)）。
+  **本推导取 physical-argument 的理由**：整段是"核对两侧的两三个不变量相符 ⇒ 等价"，
+  没有独立的等价性证明；并且它整体建立在 worldsheet.fermion-bosonization-two-dimensions
+  这条 physical-argument 之上。
+gaps:
+  - "**「核对相符 ⇒ 等价」是断言**：原书自己的措辞就是 'As a check'。中心荷与场的维数相符是必要条件，不是充分条件。"
+  - "**继承上游的核心 gap**：'等价' 无数学陈述、手征玻色子未定义（见 worldsheet.fermion-bosonization-two-dimensions 的 gaps）。"
+  - "**背景荷是纯虚的**：V = −i(λ−1/2)。worldsheet.linear-dilaton-cft 与 worldsheet.linear-dilaton-central-charge 的陈述里 V_μ 是「固定的常向量」，未限定实/复，也未讨论纯虚 V 时理论的酉性/厄米性。原书在 (10.3.34) 处只处理场的厄米性，不处理这一点。"
+  - "**场的维数核对原书不给数**：'So do the dimensions of the fields' 后无算式。本图在 target 的 notes 里做了 h(e^{iqH}) = q²/2 + iVq 的核对（q = ±1 给 2 与 −1），但该权公式本身在本图**没有节点**（worldsheet.exponential-vertex-operator-weight-v2 只覆盖无背景荷情形）。→ 待建。"
+  - "**鬼数荷 ↔ H 动量的字典未建**：玻色化本应把 bc 的鬼数异常（worldsheet.bc-ghost-number-anomaly-sphere）变成 H 的荷守恒，原书 §10.3 不做，本图亦无。"
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,93 @@
+id: worldsheet.bc-ghost-bosonization
+kind: proposition
+title: "bc 系统的玻色化：b ≅ e^{iH}、c ≅ e^{−iH}，一般权 λ 对应背景荷 V = −i(λ−1/2) 的线性 dilaton；厄米改写 H → iρ 给 c ≅ e^{ρ}、b ≅ e^{−ρ}"
+statement: |
+  【设定】worldsheet.bc-ghost-cft 定义的权 (λ, 1−λ) 反对易一阶 bc 系统；
+  玻色侧是一个全纯标量 H(z)，按 conv.nonembedding-scalar-normalization 归一（H H ∼ −ln z）。
+  `≅` 的语义按 conv.ope-tilde-notation（equivalent to）。
+
+  【断言 (1)：一般 λ 由 λ = 1/2 改能动张量得到】
+        T_B^{(λ)}  =  T_B^{(1/2)}  −  (λ − 1/2) ∂(bc)                （(10.3.30)）
+  即不同 λ 的 bc 理论有**相同的场与相同的 OPE**，只有能动张量不同。
+
+  【断言 (2)：玻色侧的能动张量是线性 dilaton】
+        T_B^{(λ)}  ≅  T_B^H  −  i (λ − 1/2) ∂²H                      （(10.3.31)）
+  原书逐字："This is the same as the linear dilaton CFT, with **V = −i(λ − 1/2)**."
+
+  【断言 (3)：算子字典】
+        b  ≅  e^{i H},        c  ≅  e^{− i H}                        （(10.3.32)）
+  （即 λ = 1/2 的 bc 系统就是 worldsheet.fermion-bosonization-two-dimensions 的
+   ψ ≅ e^{iH}、ψ̄ ≅ e^{−iH}；一般 λ 只改能动张量，不改这个字典。）
+
+  【断言 (4)：中心荷的一致性核对】
+        c  =  1 − 3(2λ − 1)²  =  1 + 12 V²                           （(10.3.33)）
+  左式是 bc 系统的中心荷（worldsheet.bc-ghost-central-charge），
+  右式是背景荷 V 的线性 dilaton 在本约定下的中心荷。原书对这两条核对的措辞逐字：
+  "**As a check**, the central charges agree"；"**So do** the dimensions of the fields"。
+
+  【断言 (5)：厄米性与厄米改写】由于 b、c 必须是**厄米**的，玻色场 H 必须是**反厄米**的；
+  通常改写为厄米场 ρ，令 H → iρ，于是
+        c  ≅  e^{ρ},        b  ≅  e^{−ρ}                             （(10.3.34)）
+  （⚠ 这解释了为什么 βγ 的玻色化里出现的是**实**指数 e^{lφ} 而不是虚指数——
+   见 worldsheet.beta-gamma-bosonization。）
+
+  【本命题不断言的内容】
+    (1) **不**断言"等价"的精确数学含义（继承自 worldsheet.fermion-bosonization-two-dimensions
+        的同一未定处）。
+    (2) **不**断言 bc 系统与自由标量的态空间同构，也不断言 bc 的鬼数荷与 H 的动量的对应
+        （原书 §10.3 在此处不写）。
+    (3) **不**断言 λ = 2（弦论的 Faddeev–Popov 鬼场）情形的 c = −26 是新结果——那是
+        worldsheet.bc-ghost-central-charge 的内容，本卡只是核对它与玻色侧相符。
+    (4) **不**断言 βγ 系统可以同样处理——**恰恰不能**，因为电流-电流 OPE 变号；
+        见 worldsheet.beta-gamma-bosonization。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.virasoro-standard
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3 末, eq. **(10.3.30)**（T_B^{(λ)} = T_B^{(1/2)} − (λ−1/2)∂(bc)）、**(10.3.31)**（≅ T_B^H − i(λ−1/2)∂²H，及逐字 'This is the same as the linear dilaton CFT, with V = −i(λ−1/2)'）、**(10.3.32)**（b ≅ e^{iH}, c ≅ e^{−iH}）、**(10.3.33)**（c = 1 − 3(2λ−1)² = 1 + 12V²）、**(10.3.34)**（H → iρ；c ≅ e^{ρ}, b ≅ e^{−ρ}）, p. 15"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E27；抽取者逐页读了
+      原书 §10.3 末的页图，五条式号与公式内容均直接看到）。
+      「文献自称的严格程度」栏逐字：'As a check, the central charges agree'；'So do the dimensions of the fields'。
+  - ref: polchinski-1998-v1
+    loc: "§2.5, eq. **(2.5.12)**, p. 51（一般 λ 的 bc 中心荷 c = −3(2λ−1)² + 1）；§2.5, eq. **(2.5.2)**, p. 49（线性 dilaton 中心荷 c = D + 6α'V²）"
+    note: |
+      两条式号经 schrans-2020 目录核实（见 worldsheet.bc-ghost-central-charge 与
+      worldsheet.linear-dilaton-central-charge 的 sources）；
+      **表达式本身在 Vol.1 侧未核实**，但 (10.3.33) 把 c = 1 − 3(2λ−1)² 逐字写出（L1），
+      故本卡的断言 (4) 以 Vol.2 为一手来源，Vol.1 只经上游节点间接进入。
+tags: [cft, bosonization, bc-ghost, linear-dilaton, central-charge, worldsheet]
+notes: |
+  【数值核对（本图内部算术，两侧都已 L1）】
+    - 1 + 12V² 与 c = D + 6α'V²（worldsheet.linear-dilaton-central-charge）在
+      D = 1、α' = 2（conv.nonembedding-scalar-normalization）下相符：1 + 12V² ✓。
+    - 12V² = 12·(−i)²(λ−1/2)² = −12(λ−1/2)² = −3(2λ−1)²，故 (10.3.33) 的两个表达式恒等 ✓。
+    - λ = 2：V = −3i/2，c = 1 + 12·(−9/4) = 1 − 27 = −26 ✓（= worldsheet.bc-ghost-central-charge
+      的 λ = 2 值）。
+    - 权：h(e^{iqH}) 在背景荷 V 下 = q²/2 + iVq（α' = 2、单标量、全纯一半）。
+      q = 1（b）：1/2 + i(−3i/2) = 1/2 + 3/2 = 2 = λ ✓；
+      q = −1（c）：1/2 − 3/2 = −1 = 1 − λ ✓。
+      **这两条算术是本图做的，原书只说 'So do the dimensions of the fields'（不写数）**，
+      故只记在 notes，不进 statement。
+
+  ★【断言 (5) 的重要性：为什么 βγ 那边是实指数】b、c 厄米 ⇒ H 反厄米 ⇒ 实际用的是
+  厄米场 ρ，指数变实（e^{±ρ}）。这条不是形式上的小事：它正是 §10.4 里 φ 的指数是
+  e^{lφ}（l 实）而不是 e^{iqφ} 的根源，也是"权公式差一个符号"的根源
+  （见 conv.nonembedding-scalar-normalization 的 notes 与 worldsheet.beta-gamma-bosonization）。
+
+  【与 worldsheet.fermion-bosonization-two-dimensions 的关系】λ = 1/2 的 bc 系统就是一对
+  自由（复化）费米子，故断言 (3) 与那张卡的 (10.3.10) 是同一个字典；
+  本卡的新内容是"一般 λ = 改能动张量 = 加背景荷"这一步（(10.3.30)/(10.3.31)）。
+  两卡因此不是重复：那张卡讲**场的等价**，本卡讲**能动张量的一族**。
+
+  【本卡尚未接的下游】worldsheet.bc-ghost-hermitian-conjugation、
+  worldsheet.bc-ghost-sphere-cc-correlator 等都可以从玻色化侧独立重算
+  （鬼数异常 = H 的荷守恒），原书 §10.3 不做，本图亦未做。
+  → 建议后续任务：把 worldsheet.bc-ghost-number-anomaly-sphere 与本卡接一条
+    "--via-bosonization" 的第二条推导路线（若能找到给出该计算的一手来源）。
+author: curator
+created: "2026-09-11"

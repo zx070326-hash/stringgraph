@@ -1,0 +1,120 @@
+id: worldsheet.spin-field-vertex-operators
+kind: proposition
+title: "自旋场与 R 扇区顶点算子：一般周期 ν 的费米子基态算子 A_ν ≅ e^{i(1/2 − ν)H}（权 h = (ν−1/2)²/2），R 扇区 (ν = 0) 的两个基态 |s⟩ ≅ e^{isH} (s = ±1/2, h = 1/8)，十维的自旋场 Θ_s ≅ exp[i Σ_{a=0}^{4} s_a H^a]"
+statement: |
+  【设定】一对复化的全纯 Majorana–Weyl 费米子 ψ, ψ̄（worldsheet.fermion-bosonization-two-dimensions
+  的 (10.3.8)）与其玻色等价物 H（conv.nonembedding-scalar-normalization）。
+  取**一般**（不必是 0 或 1/2 的）周期性
+        ψ(w + 2π)  =  exp(2πi ν) ψ(w)                                （(10.3.20)）
+  （w 是柱面坐标，w ≅ w + 2π；ν = 0 是 R 扇区、ν = 1/2 是 NS 扇区，
+   见 worldsheet.rns-fermion-periodicity）。
+
+  【断言 (1)：参考态由湮灭条件唯一确定】态 |0⟩_ν 由
+        ψ_{n+ν} |0⟩_ν  =  ψ̄_{n+1−ν} |0⟩_ν  =  0,      n = 0, 1, 2, …   （(10.3.23)）
+  确定。原书逐字："The conditions (10.3.23) **uniquely identify** the state |0⟩_ν, and so the
+  corresponding OPEs (10.3.24) **determine** the bosonic equivalent"。
+
+  【断言 (2)：玻色等价物与权】与 |0⟩_ν 对应的算子 A_ν 满足
+        A_ν  ≅  exp[ i (−ν + 1/2) H ]                                （(10.3.25)）
+  其共形权为
+        h  =  (1/2) (ν − 1/2)²。
+  原书对这条的措辞逐字："**One can check** the identification (10.3.25) by verifying that the
+  weight is h = (1/2)(ν−1/2)²"。
+
+  【断言 (3)：谱流】
+        |0⟩_{ν+1}  =  ψ̄_{−ν} |0⟩_ν                                   （(10.3.26)）
+  原书逐字："This is known as *spectral flow*."（把 ν 移动整数单位与作用一个费米子模式等价。）
+
+  【断言 (4)：R 扇区的两个简并基态】ν = 0 时有**两个**简并基态，玻色等价物为
+        |s⟩  ≅  e^{i s H},        s = ± 1/2                          （(10.3.27)）
+  其权为 h = (1/2)(0 − 1/2)² = **1/8**（断言 (2) 在 ν = 0 的特例）。
+  ⚠ 这两个算子带 z^{±1/2} 型**分支切割**：原书 (10.2.7) 下方逐字
+  "Notice that in the NS sector the branch cut in z^{−1/2} offsets the original antiperiodicity,
+   while in the R sector it introduces a branch cut."
+
+  【断言 (5)：十维的自旋场】十个 ψ^μ 两两复化需要**五个**玻色子
+        H^a,     a = 0, 1, 2, 3, 4                                   （(10.3.28a,b)）
+  R 扇区态 |s⟩（s = (s_0, …, s_4)，各 s_a = ±1/2）的顶点算子是
+        Θ_s  ≅  exp[ i Σ_{a=0}^{4} s_a H^a ]                         （(10.3.29)）
+  原书逐字：这个算子 "sometimes called a *spin field*"。
+
+  【断言 (6)：一处被作者明确指出、并延后修补的技术漏洞】原书 §10.3 脚注 2（p. 14）逐字：
+  "The precise operator definition has a subtlety when there are several species of fermion.
+   The H^a for different a are independent and so the exponentials **commute rather than
+   anticommute**. A cocycle is needed, as in eq. (8.2.22). A general expression will be given
+   in the next section."
+  故 (10.3.29) **按字面写下时统计是错的**；修补是 (10.4.26)–(10.4.28) 的 cocycle 因子，
+  见 worldsheet.vertex-operator-cocycle。**本卡把这条漏洞记入陈述本身**，
+  即断言 (5) 只在"配上 cocycle 之后"才是正确的算子定义。
+
+  【本命题不断言的内容】
+    (1) **不**断言权公式 h = (ν−1/2)²/2 的证明。原书说 'One can check'，
+        并把它推给 **exercise 10.8**（三种算法：(2.7.8) 的对易子、§2.9 的助记法、(2.7.11)）。
+    (2) **不**断言 R 扇区基态的**时空**旋量表示内容（16、16′ 的分解等）——那是附录 B.1，
+        见 worldsheet.rns-ramond-zero-modes-clifford 与 worldsheet.rns-fermion-number-operator。
+    (3) **不**断言 Θ_s 的权值（原书在 (10.3.29) 处不写；本图的算术核对见 notes）。
+    (4) **不**断言含鬼场的完整 R 扇区顶点算子——那要乘上 e^{−φ/2}，
+        见 worldsheet.ramond-ground-state-vertex-operator。
+    (5) **不**断言一般实 ν 的扇区在弦论中出现（§10.3 是把 ν 当连续参数以便谈谱流；
+        RNS 弦只用 ν ∈ {0, 1/2}，见 worldsheet.rns-periodicity-exhaustion）。
+uses_conventions:
+  - conv.nonembedding-scalar-normalization
+  - conv.worldsheet-complex-coords
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-coordinate-length
+  - conv.ope-tilde-notation
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.3, eq. **(10.3.20)**（一般周期 ψ(w+2π) = exp(2πiν)ψ(w)）、**(10.3.23)**（|0⟩_ν 的湮灭条件）、**(10.3.24)**（对应的 OPE）、**(10.3.25)**（A_ν ≅ exp[i(−ν+1/2)H] 与 h = (1/2)(ν−1/2)²）、**(10.3.26)**（谱流）、**(10.3.27)**（R 的两个基态 |s⟩ ≅ e^{isH}, s = ±1/2）、**(10.3.28a,b)**（十维五个 H^a）、**(10.3.29)**（Θ_s ≅ exp[i Σ_a s_a H^a]，'sometimes called a spin field'）, pp. 13–15"
+    note: |
+      L1 一手（抽取记录 literature/extractions/polchinski-1998-v2.md E26；抽取者逐页读了
+      原书 §10.3 的页图，八条式号与公式内容均直接看到）。
+      statement 里的三处英文引号（'uniquely identify … determine'、'One can check'、
+      'This is known as spectral flow'、'sometimes called a spin field'）均为该记录
+      「文献自称的严格程度」栏与「原文陈述」栏的逐字转录。
+  - ref: polchinski-1998-v2
+    loc: "§10.3, **脚注 2**, p. 14（cocycle 的必要性，逐字见 statement 断言 (6)）"
+    note: |
+      L1 一手（E26 备注，逐字转录）。★ 抽取记录对此的评语：
+      「**这是一处真实的技术漏洞被延后修补**，转节点时不要漏。」
+      本卡按此把它写进 statement 而不是只写在 notes。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, (10.2.7) 下方一句, p. 6（R 扇区引入分支切割的逐字句）"
+    note: |
+      L1 一手（E17）。同一句也被 worldsheet.rns-fermion-periodicity 引用。
+      这条是 §10.6 (10.6.4)/(10.6.5)「相互局域性」条件的物理起点
+      （worldsheet.superstring-sector-consistency-conditions）。
+  - ref: polchinski-1998-v2
+    loc: "§10「Exercises」, **exercise 10.8**, pp. 43–44（逐字：'Verify the weight of the fermionic ground state A_ν for general real ν: (a) from the commutator (2.7.8); (b) from the mnemonic of section 2.9.'）"
+    note: |
+      L1 一手（E49）。★ 这是「断言 (2) 的权公式在原书正文无证明」的直接证据。
+tags: [cft, bosonization, spin-field, ramond-sector, spectral-flow, superstring, vertex-operator]
+notes: |
+  【数值核对（本图内部算术，非原书文字）】
+    - ν = 1/2（NS）：A_{1/2} ≅ exp[0] = 1，h = 0 ✓——即 NS 基态对应单位算子
+      （与 worldsheet.rns-mode-expansions 侧的 (10.3.1)/(10.3.2) 一致）。
+    - ν = 0（R）：h = 1/8，与 e^{iH/2} 按 conv.nonembedding-scalar-normalization 的
+      h = q²/2（q = 1/2）相符 ✓。
+    - 十维自旋场 Θ_s 的权：Σ_{a=0}^{4} s_a²/2 = 5 × (1/8) = **5/8**，
+      恰等于 R 扇区物质正规序常数 a^m = D/16 = 10/16 = 5/8
+      （worldsheet.rns-matter-normal-ordering-constants，(10.2.13)）。
+      **原书在 (10.3.29) 处不写这个数**，本图记为算术核对。
+    - ν = 1（谱流一整步）：h = (1/2)(1/2)² = 1/8 = ν = 0 的值，与 (10.3.26) 说的
+      「移动一整步等于作用一个费米子模式」相容（ψ̄_{−ν} 在 ν = 0 时是 ψ̄_0，权变化为 0）✓。
+
+  ★【断言 (6) 是本卡最该被下游注意的内容】原书自己承认 (10.3.29) 按字面写下时
+  「exponentials commute rather than anticommute」，即**统计是错的**。
+  修补（cocycle）在下一节给出。故任何用到 Θ_s 的下游节点（GSO、(10.6.4) 的相位、
+  R–R 顶点算子）都必须同时依赖 worldsheet.vertex-operator-cocycle。
+  本轮已把 worldsheet.superstring-sector-consistency-conditions 里记为「本图无节点」的
+  那两块（自旋场、cocycle）建出来。
+
+  【与 worldsheet.rns-ramond-zero-modes-clifford 的分工】那张卡讲 ψ_0^μ 的 Clifford 代数与
+  R 扇区基态的简并**在态空间侧**；本卡讲同一件事**在算子侧**（e^{isH} 型自旋场）。
+  两者不是重复：一个是模式代数，一个是顶点算子；玻色化是连接它们的字典。
+
+  【一般实 ν 为什么值得写下来】谱流（断言 (3)）只有把 ν 当连续参数才有意义，
+  且它是「R 与 NS 扇区由同一族联系」这一结构性事实的来源。
+  Polchinski 用它来"定出"玻色等价物（断言 (1)(2)）。
+author: curator
+created: "2026-09-11"
