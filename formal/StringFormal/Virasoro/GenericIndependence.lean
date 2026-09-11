@@ -163,6 +163,69 @@ theorem IsContravariant.linearIndependent_descFamily3 [NoZeroDivisors R]
 
 end Level3
 
+/-! ### Level 4 -/
+
+section Level4
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The five standard level-4 descendants `L₋₄|c,h⟩`, `L₋₃L₋₁|c,h⟩`, `L₋₂²|c,h⟩`,
+`L₋₂L₋₁²|c,h⟩`, `L₋₁⁴|c,h⟩`. -/
+noncomputable def descFamily4 : Fin 5 → VermaModule R c h :=
+  ![desc4 R c h, desc31 R c h, desc22 R c h, desc211 R c h, desc1111 R c h]
+
+variable {R c h}
+variable {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+
+/-- The Gram matrix of `descFamily4` is the explicit `5 × 5` matrix of inner products used in
+`IsContravariant.gram_level_four_det`. -/
+theorem gramMatrix_descFamily4 (B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R) :
+    gramMatrix B (descFamily4 R c h) =
+      !![B (desc4 R c h) (desc4 R c h), B (desc4 R c h) (desc31 R c h),
+             B (desc4 R c h) (desc22 R c h), B (desc4 R c h) (desc211 R c h),
+             B (desc4 R c h) (desc1111 R c h);
+           B (desc31 R c h) (desc4 R c h), B (desc31 R c h) (desc31 R c h),
+             B (desc31 R c h) (desc22 R c h), B (desc31 R c h) (desc211 R c h),
+             B (desc31 R c h) (desc1111 R c h);
+           B (desc22 R c h) (desc4 R c h), B (desc22 R c h) (desc31 R c h),
+             B (desc22 R c h) (desc22 R c h), B (desc22 R c h) (desc211 R c h),
+             B (desc22 R c h) (desc1111 R c h);
+           B (desc211 R c h) (desc4 R c h), B (desc211 R c h) (desc31 R c h),
+             B (desc211 R c h) (desc22 R c h), B (desc211 R c h) (desc211 R c h),
+             B (desc211 R c h) (desc1111 R c h);
+           B (desc1111 R c h) (desc4 R c h), B (desc1111 R c h) (desc31 R c h),
+             B (desc1111 R c h) (desc22 R c h), B (desc1111 R c h) (desc211 R c h),
+             B (desc1111 R c h) (desc1111 R c h)] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;> simp [gramMatrix, descFamily4]
+
+/-- The `5 × 5` Gram determinant of `descFamily4` is the level-4 Kac polynomial
+`384h³(8h + c - 1)(16h² + 2h(c-5) + c)²(3h² + h(c-7) + c + 2)(16h² + 10ch - 82h + 15c + 66)`.
+Restatement of `IsContravariant.gram_level_four_det` with the matrix packaged as
+`gramMatrix`. -/
+theorem IsContravariant.gram_det_descFamily4 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    (gramMatrix B (descFamily4 R c h)).det
+      = 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
+          * (3 * h ^ 2 + h * (c - 7) + c + 2)
+          * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) := by
+  rw [gramMatrix_descFamily4]
+  exact hB.gram_level_four_det hB1
+
+/-- **Generic PBW at level 4.**  If the level-4 Kac polynomial is nonzero then the five standard
+level-4 descendants are linearly independent, so `dim V₄ = 5 = p(4)`.
+Same caveats as `IsContravariant.linearIndependent_descFamily2`. -/
+theorem IsContravariant.linearIndependent_descFamily4 [NoZeroDivisors R]
+    (hB : IsContravariant R c h B) (hB1 : B (hwv R c h) (hwv R c h) = 1)
+    (hdet : 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
+        * (3 * h ^ 2 + h * (c - 7) + c + 2)
+        * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) ≠ 0) :
+    LinearIndependent R (descFamily4 R c h) :=
+  linearIndependent_of_gram_det_ne_zero B _ (by
+    rw [hB.gram_det_descFamily4 hB1]; exact hdet)
+
+end Level4
+
 end Virasoro
 
 end StringFormal
