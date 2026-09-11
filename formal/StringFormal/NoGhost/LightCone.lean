@@ -67,6 +67,9 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
   `NoGhost/Witness.lean` instantiates **both** structures, so none of the frame-conditional
   results above is vacuous; `dotVec_witnessTransverseFrame_witnessMomentum` also discharges
   the extra `ε·k = 0` hypothesis for it.
+* `witness_frameSpansOrthogonal`, `witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious` —
+  **all** hypotheses of the `N = 1` spanning theorem are discharged for that frame, so on it
+  blueprint §B.6 at `N = 1` holds outright.
 
 ## Scope and gaps
 
@@ -83,13 +86,12 @@ the *light-cone oscillator algebra* in which the unitriangular change of basis o
 * `conjCoeff_eq_neg_dotVec` does **not** assume that `{b, b̃, ε_i}` is a basis: it extracts
   the `b̃`-coefficient of a *given* decomposition.  Completeness of the light-cone frame
   (every vector decomposes) is a further statement, not needed here and not proved.
-* **`TransverseFrame` does not imply completeness.**  The `N = 1` spanning theorem therefore
-  carries the explicit hypothesis `FrameSpansOrthogonal`, which says that the `D - 2`
-  transverse vectors together with `p_{-1}` span `p_{-1}^⊥`.  It is the **only** hypothesis of
-  that theorem still undischarged for the explicit witness (`witnessTransverseFrame` and
-  `dotVec_witnessTransverseFrame_witnessMomentum` handle the others).  Discharging it is a
-  concrete `Pi.single` computation: for the witness, `e ⊥ p_{-1}` reads `e_0 + e_1 = 0` and
-  then `e = (-2 e_0) • p_{-1} + Σ_{i} e_{i+2} • ε_i`.
+* **`TransverseFrame` does not imply completeness.**  The general `N = 1` spanning theorem
+  therefore carries the explicit hypothesis `FrameSpansOrthogonal`, which says that the
+  `D - 2` transverse vectors together with `p_{-1}` span `p_{-1}^⊥`.  It *is* discharged for
+  the explicit witness (`witness_frameSpansOrthogonal`: there `e ⊥ p_{-1}` reads
+  `e_0 + e_1 = 0` and then `e = (-2 e_0) • p_{-1} + Σ_i e_{i+2} • ε_i`), but it does **not**
+  follow from orthonormality plus transversality in general.
 * `N = 2` of blueprint §B.6 is **not** done.  The two missing pieces are (a) the analogue of
   `ddfOp_neg_one_apply_towerVacuum` at `n = 2` and for `A^ε_{-1}A^δ_{-1}` (window `{-2,…,0}`,
   so the vertex operator's level-1 and level-2 coefficients `Φ_1`, `Φ_2` actually contribute)
@@ -852,5 +854,190 @@ theorem dotVec_witnessTransverseFrame_witnessMomentum [Algebra ℚ R] (hD : 3 �
   dotVec_witnessPolarization_witnessMomentum hD (two_le_transIdx hD i)
 
 end FrameWitness
+
+
+/-! ### Frame completeness for the explicit witness
+
+This discharges the last hypothesis of `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` for the
+light-cone frame of `NoGhost/Witness.lean`, making the `N = 1` case of blueprint §B.6
+unconditional there. -/
+
+section WitnessSpans
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+@[simp]
+lemma witnessLight_frameTime (hD : 3 ≤ D) :
+    witnessLight D R hD (frameTime D hD) = 1 := by
+  rw [witnessLight, Pi.add_apply, Pi.single_eq_same,
+    Pi.single_eq_of_ne (frameTime_ne_frameSpace hD), add_zero]
+
+@[simp]
+lemma witnessLight_frameSpace (hD : 3 ≤ D) :
+    witnessLight D R hD (frameSpace D hD) = 1 := by
+  rw [witnessLight, Pi.add_apply, Pi.single_eq_of_ne (Ne.symm (frameTime_ne_frameSpace hD)),
+    Pi.single_eq_same, zero_add]
+
+lemma witnessLight_apply_of_ne (hD : 3 ≤ D) {μ : Fin D} (h1 : μ ≠ frameTime D hD)
+    (h2 : μ ≠ frameSpace D hD) : witnessLight D R hD μ = 0 := by
+  rw [witnessLight, Pi.add_apply, Pi.single_eq_of_ne h1, Pi.single_eq_of_ne h2, add_zero]
+
+@[simp]
+lemma witnessMomentum_frameTime [Algebra ℚ R] (hD : 3 ≤ D) :
+    witnessMomentum D R hD (frameTime D hD) = invTwo R := by
+  rw [witnessMomentum, Pi.add_apply, Pi.single_eq_same,
+    Pi.single_eq_of_ne (frameTime_ne_frameSpace hD), add_zero]
+
+@[simp]
+lemma witnessMomentum_frameSpace [Algebra ℚ R] (hD : 3 ≤ D) :
+    witnessMomentum D R hD (frameSpace D hD) = 3 * invTwo R := by
+  rw [witnessMomentum, Pi.add_apply,
+    Pi.single_eq_of_ne (Ne.symm (frameTime_ne_frameSpace hD)), Pi.single_eq_same, zero_add]
+
+lemma witnessMomentum_apply_of_ne [Algebra ℚ R] (hD : 3 ≤ D) {μ : Fin D}
+    (h1 : μ ≠ frameTime D hD) (h2 : μ ≠ frameSpace D hD) :
+    witnessMomentum D R hD μ = 0 := by
+  rw [witnessMomentum, Pi.add_apply, Pi.single_eq_of_ne h1, Pi.single_eq_of_ne h2, add_zero]
+
+/-- Contraction of an arbitrary vector with a vector supported on the light-cone plane. -/
+lemma dotVec_pair_right (η : Fin D → R) (i j : Fin D) (c d : R) (e : Fin D → R) :
+    dotVec η e (Pi.single i c + Pi.single j d) = η i * c * e i + η j * d * e j := by
+  rw [dotVec_comm, dotVec_add_left, dotVec_single_left, dotVec_single_left]
+
+lemma dotVec_witnessLight_right (hD : 3 ≤ D) (e : Fin D → R) :
+    dotVec (Fock.minkowski D R) e (witnessLight D R hD)
+      = -e (frameTime D hD) + e (frameSpace D hD) := by
+  rw [witnessLight, dotVec_pair_right, minkowski_frameTime, minkowski_frameSpace]
+  ring
+
+lemma dotVec_witnessMomentum_right [Algebra ℚ R] (hD : 3 ≤ D) (e : Fin D → R) :
+    dotVec (Fock.minkowski D R) e (witnessMomentum D R hD)
+      = -(invTwo R * e (frameTime D hD)) + 3 * invTwo R * e (frameSpace D hD) := by
+  rw [witnessMomentum, dotVec_pair_right, minkowski_frameTime, minkowski_frameSpace]
+  ring
+
+/-- On the rung `-1` momentum `p_{-1} = k - k_0` the contraction is
+`α'·(e_0 + e_1)`: the orthogonality condition of the level-one physical states is
+`e_0 + e_1 = 0`. -/
+lemma dotVec_towerMomentum_witness_neg_one [Algebra ℚ R] (hD : 3 ≤ D) (e : Fin D → R) :
+    dotVec (Fock.minkowski D R) e
+        (towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1))
+      = invTwo R * (e (frameTime D hD) + e (frameSpace D hD)) := by
+  rw [dotVec_vec_towerMomentum, dotVec_witnessMomentum_right hD,
+    dotVec_witnessLight_right hD]
+  push_cast
+  linear_combination (e (frameSpace D hD) - e (frameTime D hD)) * two_mul_invTwo R
+
+/-! Components of `p_{-1} = k - k_0`. -/
+
+lemma towerMomentum_witness_frameTime [Algebra ℚ R] (hD : 3 ≤ D) :
+    towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1) (frameTime D hD)
+      = -invTwo R := by
+  rw [towerMomentum_apply, witnessMomentum_frameTime, witnessLight_frameTime]
+  push_cast
+  linear_combination two_mul_invTwo R
+
+lemma towerMomentum_witness_frameSpace [Algebra ℚ R] (hD : 3 ≤ D) :
+    towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1) (frameSpace D hD)
+      = invTwo R := by
+  rw [towerMomentum_apply, witnessMomentum_frameSpace, witnessLight_frameSpace]
+  push_cast
+  linear_combination two_mul_invTwo R
+
+lemma towerMomentum_witness_apply_of_ne [Algebra ℚ R] (hD : 3 ≤ D) {μ : Fin D}
+    (h1 : μ ≠ frameTime D hD) (h2 : μ ≠ frameSpace D hD) :
+    towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1) μ = 0 := by
+  rw [towerMomentum_apply, witnessMomentum_apply_of_ne hD h1 h2,
+    witnessLight_apply_of_ne hD h1 h2, mul_zero, add_zero]
+
+/-! Evaluating a transverse combination. -/
+
+@[simp]
+lemma witnessTransverseFrame_vec (hD : 3 ≤ D) (i : Fin (D - 2)) :
+    (witnessTransverseFrame D R hD).vec i = witnessPolarization D R (transIdx D hD i) := rfl
+
+lemma sum_transverse_apply_of_lt (hD : 3 ≤ D) (f : Fin D → R) {μ : Fin D}
+    (hμ : (μ : ℕ) < 2) :
+    (∑ i : Fin (D - 2), f (transIdx D hD i) •
+        witnessPolarization D R (transIdx D hD i)) μ = 0 := by
+  rw [Finset.sum_apply]
+  refine Finset.sum_eq_zero fun i _ => ?_
+  have hne : μ ≠ transIdx D hD i := by
+    simp only [ne_eq, Fin.ext_iff, transIdx]; omega
+  rw [Pi.smul_apply, witnessPolarization, Pi.single_eq_of_ne hne, smul_zero]
+
+lemma sum_transverse_apply_of_two_le (hD : 3 ≤ D) (f : Fin D → R) {μ : Fin D}
+    (hμ : 2 ≤ (μ : ℕ)) :
+    (∑ i : Fin (D - 2), f (transIdx D hD i) •
+        witnessPolarization D R (transIdx D hD i)) μ = f μ := by
+  classical
+  have hbd := μ.isLt
+  have hlt : (μ : ℕ) - 2 < D - 2 := by omega
+  have hid : transIdx D hD (⟨(μ : ℕ) - 2, hlt⟩ : Fin (D - 2)) = μ := by
+    refine Fin.ext ?_
+    simp only [transIdx]
+    omega
+  rw [Finset.sum_apply, Finset.sum_eq_single (⟨(μ : ℕ) - 2, hlt⟩ : Fin (D - 2))]
+  · rw [hid, Pi.smul_apply, witnessPolarization, Pi.single_eq_same, smul_eq_mul, mul_one]
+  · intro j _ hj
+    have hjv : (j : ℕ) ≠ (μ : ℕ) - 2 := fun hc => hj (Fin.ext hc)
+    have hne : μ ≠ transIdx D hD j := by
+      simp only [ne_eq, Fin.ext_iff, transIdx]; omega
+    rw [Pi.smul_apply, witnessPolarization, Pi.single_eq_of_ne hne, smul_zero]
+  · intro h
+    exact absurd (Finset.mem_univ (⟨(μ : ℕ) - 2, hlt⟩ : Fin (D - 2))) h
+
+/-- **The light-cone witness frame is complete on `p_{-1}^⊥`.**
+
+Concretely: if `e · (k - k_0) = 0`, i.e. `e_0 + e_1 = 0`, then
+`e = (-2 e_0) · (k - k_0) + Σ_{i} e_{i+2} · ε_i`.  This is the last hypothesis of
+`towerPhys_bigrade_one_le_ddfSpan_sup_spurious`, so on the explicit frame the `N = 1` case of
+blueprint §B.6 holds outright (see `witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious`). -/
+theorem witness_frameSpansOrthogonal [Algebra ℚ R] (hD : 3 ≤ D) :
+    FrameSpansOrthogonal (Fock.minkowski D R) (witnessTransverseFrame D R hD)
+      (towerMomentum (witnessMomentum D R hD) (witnessLight D R hD) (-1)) := by
+  intro e he
+  rw [dotVec_towerMomentum_witness_neg_one hD] at he
+  have hsum : e (frameTime D hD) + e (frameSpace D hD) = 0 := by
+    have h2 := congrArg (fun t : R => (2 : R) * t) he
+    simp only [mul_zero, ← mul_assoc] at h2
+    rw [two_mul_invTwo, one_mul] at h2
+    exact h2
+  refine ⟨fun i => e (transIdx D hD i), -(2 : R) * e (frameTime D hD), ?_⟩
+  funext μ
+  rw [Pi.add_apply, Pi.smul_apply, smul_eq_mul]
+  simp only [witnessTransverseFrame_vec]
+  rcases lt_or_ge ((μ : ℕ)) 2 with hμ | hμ
+  · rw [sum_transverse_apply_of_lt hD e hμ, zero_add]
+    by_cases hT : (μ : ℕ) = 0
+    · have hμT : μ = frameTime D hD := Fin.ext (by simp only [frameTime]; omega)
+      rw [hμT, towerMomentum_witness_frameTime hD]
+      linear_combination (-e (frameTime D hD)) * two_mul_invTwo R
+    · have hμS : μ = frameSpace D hD := Fin.ext (by simp only [frameSpace]; omega)
+      rw [hμS, towerMomentum_witness_frameSpace hD]
+      linear_combination (e (frameTime D hD)) * two_mul_invTwo R + hsum
+  · have h1 : μ ≠ frameTime D hD := by simp only [ne_eq, Fin.ext_iff, frameTime]; omega
+    have h2 : μ ≠ frameSpace D hD := by simp only [ne_eq, Fin.ext_iff, frameSpace]; omega
+    rw [sum_transverse_apply_of_two_le hD e hμ, towerMomentum_witness_apply_of_ne hD h1 h2,
+      mul_zero, add_zero]
+
+/-- **Blueprint §B.6 at `N = 1`, unconditionally, on the explicit light-cone frame of
+`NoGhost/Witness.lean`.**  Every hypothesis of
+`towerPhys_bigrade_one_le_ddfSpan_sup_spurious` has been discharged for that frame. -/
+theorem witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious [Algebra ℚ R] (hD : 3 ≤ D) :
+    towerPhysSubmodule (Fock.minkowski D R) (witnessMomentum D R hD) (witnessLight D R hD)
+        (invTwo R * Fock.zeroModeSq (Fock.minkowski D R) (witnessMomentum D R hD))
+      ⊓ towerBigrade D R (-1) 1
+      ≤ ddfSpan (Fock.minkowski D R) (witnessMomentum D R hD) (witnessLight D R hD)
+            (minkowski_sq D R) (witnessTransverseFrame D R hD)
+        ⊔ Submodule.span R
+            {towerLop (Fock.minkowski D R) (witnessMomentum D R hD) (witnessLight D R hD) (-1)
+              (Finsupp.single (-1) (Fock.vacuum D R))} :=
+  towerPhys_bigrade_one_le_ddfSpan_sup_spurious _ _ _ (minkowski_sq D R)
+    (witnessTransverseFrame D R hD)
+    (fun i => dotVec_witnessTransverseFrame_witnessMomentum hD i)
+    (witness_frameSpansOrthogonal hD)
+
+end WitnessSpans
 
 end StringFormal.NoGhost
