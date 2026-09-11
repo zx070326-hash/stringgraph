@@ -53,6 +53,7 @@ The tower vacuum `towerVacuum D R` itself is defined in
   `heisNorm R d = ∏_{(i,n)} n^{d(i,n)} d(i,n)!`.
 * `ddf_gram_pos` — over an ordered ring the diagonal entries are positive, so the DDF sector
   of the momentum tower is positive definite on each state.
+* `ddf_gram_of_level_ne` — DDF states of different level `N(d) = Σ n d(i,n)` are orthogonal.
 * `linearIndependent_ddfMonomial` — over a field of characteristic zero the DDF states are
   linearly independent.  This is the input to `ch H^⊥ = φ(q)^{-(D-2)}` in §B.3 of the blueprint.
 * `ddfMonomial_mem_towerPhysSubmodule` — every DDF state is an old covariant physical state of
@@ -292,6 +293,24 @@ theorem ddf_gram_self (d : (ι × ℕ+) →₀ ℕ) :
     Fock.towerPairing η (ddfMonomial hη hbb hba hεb horth d)
       (ddfMonomial hη hbb hba hεb horth d) = heisNorm R d := by
   rw [ddf_gram_diagonal hη hbb hba hεb horth, if_pos rfl]
+
+/-- **The DDF level** `N(d) = Σ_{(i,n)} n · d(i,n)` of an occupation function: the total
+oscillator number carried by the DDF state.  In the index convention of
+`StringFormal/NoGhost/DDF.lean` the state `ddfMonomial d` sits on rung `j = -N(d)` of the
+momentum tower (momentum `k - N(d) k_0`); that placement is *not* proved here. -/
+noncomputable def ddfLevel (d : (ι × ℕ+) →₀ ℕ) : ℕ := d.sum fun v k => (v.2 : ℕ) * k
+
+omit [DecidableEq ι] in
+@[simp]
+theorem ddfLevel_zero : ddfLevel (0 : (ι × ℕ+) →₀ ℕ) = 0 := Finsupp.sum_zero_index
+
+/-- **DDF states of different level are orthogonal.**  Immediate from `ddf_gram_of_ne`, since
+`N(d) ≠ N(e)` forces `d ≠ e`.  This is the grading statement of
+`worldsheet.transverse-ddf-fock-gram-matrix` (3). -/
+theorem ddf_gram_of_level_ne {d e : (ι × ℕ+) →₀ ℕ} (hde : ddfLevel d ≠ ddfLevel e) :
+    Fock.towerPairing η (ddfMonomial hη hbb hba hεb horth d)
+      (ddfMonomial hη hbb hba hεb horth e) = 0 :=
+  ddf_gram_of_ne hη hbb hba hεb horth fun h => hde (by rw [h])
 
 end Gram
 
