@@ -289,6 +289,9 @@ StringFormal/
                             （`V(c,h) ≠ 0` 对任意自然数 `c ≥ 2` 与任意 `h`，洛伦兹见证）与
                             **`kacDet{1,2,3,4}_massShell_26`**（`D=26, a₀=1` 下 `h = 1-N`：
                             `N=1,2` 行列式为零——判据在零模态所在层空转；`N=3,4` 为 `2304` / `2649563136`）。
+                            **`kacDet2_massShell_two`（蓝图 §B″.0(2)）**：`kacDet2 c (1−2) = 2(c−26)`
+                            对**任意** `c`——把「在 26 处为零」加强为「零点只有 26」，是 `D = 26`
+                            临界性的最小机检见证；`kacDet2_massShell_two_eq_zero_iff`（特征零域）。
                             一般 `N` 仍需 Kac 行列式（见蓝图 §B.2），对无鬼瓶颈无影响
   NoGhost/NullDescend.lean  **蓝图 §B′ PR0**：`ddfOp_mem_towerNullSubmodule`——`A^ε_n` 把零态送到零态
                             （`ddfOp_mem_towerPhysSubmodule` + `(A^ε_n)† = A^ε_{−n}`，两者都已有）。
@@ -384,6 +387,37 @@ StringFormal/
                             （`K_n` 与 `α^w_{−r}` 对易当 `b·w = 0`）。**反向包含未做**（要线性无关，
                             §B′.9 第 2 条）。
                             未做：(B-26)（PR5，`D = 26` 唯一入口）、`conjFreeSlice ⊓ spurious = ⊥`
+  NoGhost/TowerVirasoro.lean **塔上的 Virasoro 关系**（蓝图 §B″.8 点名的唯一前置缺件）：
+                            `lie_towerLop_towerLop`（`⁅L_m,L_n⁆ = (m−n)L_{m+n} + D·centralTerm(m)·δ`，
+                            `Fock.lie_Lop_Lop` 的逐纤维提升，`Finsupp.lhom_ext`；**中心荷与 rung 无关**，
+                            `p_j` 只进 `L_0` 的本征值）与三条使用形式
+                            `towerLop_apply_towerLop`（把 `L_m` 移到 `L_n` 右边）/
+                            `_of_ne_zero`（无中心项）/ `_neg`（`n = −m`，中心项显式）。
+                            此前仓库只有 `lie_towerLop_towerMode`（塔上 L 对 α），塔上 L 对 L 没有
+  NoGhost/NullSeedsTwo.lean **蓝图 §B″ PR5b′：`(B-26)` 路线的证伪点，也是全链 `D = 26` 的唯一入口**。
+                            两族零态（都只用 `L_{−1}`、`L_{−2}`，不需要 DDF 算子和光锥标架）：
+                            **Type 1** `towerLop_neg_one_mem_towerNullSubmodule`（`L_0φ=0` 的种子，
+                            `D` 不出现，因为 `centralTerm 1 = 0`；截距被 `L_0(L_{−1}φ)=L_{−1}φ` 钉成 1，
+                            **不能**像 PR0/PR1 那样放宽）；**Type 2** `descTwo = 2L_{−2}+3L_{−1}²`。
+                            ⭐ 两条方程（手算 §B″.2 **逐字复核通过，无订正**）：
+                            `towerLop_one_apply_descTwo : L_1𝒟₂φ = 12(h+1)•L_{−1}φ`（**截距**，无 `c`）
+                            与 `towerLop_two_apply_descTwo_of_eigenvalue : L_2𝒟₂φ = (26h+D)•φ`
+                            ⇒ `towerLop_two_apply_descTwo : = (D−26)•φ`（`h = −1`）。
+                            **`D = 26` 还被证明是必要的**：`towerLop_two_apply_descTwo_eq_zero_iff` /
+                            `descTwo_mem_towerPhysSubmodule_iff`（整环 + 种子非零 ⟹ 物理 ⟺ `(D:R)=26`），
+                            Kac 侧孪生是 `Fock.kacDet2_massShell_two_eq_zero_iff`。
+                            另有六条原子 `towerLop_{zero,one,two}_apply_towerLop_neg_{one,two}`
+                            （= §B″.2 那张 Gram 的六个条目，但是算子等式）、`centralTerm_one_eq_zero`、
+                            `two_mul_centralTerm_two_eq_one`、分次记账 `descTwo_mem_towerBigrade`
+                            （bidegree `(0,+2)`）与片上版本（`k·k = 2` 把截距求值成 1）：
+                            `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`
+                            （`j+N = −1` 的片）、`descTwo_mem_towerNullSubmodule_of_mem_towerBigrade_neg_two`、
+                            `descTwo_single_mem_towerNullSubmodule`（`𝒟₂|0;p₋₂⟩` 具体态）。
+                            **未做**（见文件头）：25 个 Type-1 种子及其线性无关；`𝒟₂y ≠ 0`
+                            （Gram 判据在此处**必然**空转——`kacDet2 26 (−1) = 0` 正是零态存在的原因，
+                            要走 `MvPolynomial` 系数：`X_{(μ,2)}` 系数是 `5η_μp^μ`）；
+                            `p_{D−1}(2) − p_{D−2}(2) = D` 的计数。故 **`B26 2` 与
+                            `ddfSpans_bigrade_neg_two_two` 仍未关闭**
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
