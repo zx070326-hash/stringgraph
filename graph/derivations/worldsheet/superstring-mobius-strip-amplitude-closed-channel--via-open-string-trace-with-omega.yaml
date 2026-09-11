@@ -35,16 +35,26 @@ depends_on:
       ⚠ 本书记号下 **Sp(k) 对应 n = 2k**（抽取记录 §1 的记号表）。
       ⚠ 本边只供 n 这个计数，**不**供 SO(n)/Sp(k) 两种投影的候选集（那是下一条边），
       也**不**供「n = 32」（那是 tadpole 卡）。
-  - id: worldsheet.superstring-worldsheet-parity-action
+  - id: worldsheet.open-superstring-omega-squared-is-fermion-parity
     note: |
-      供给**迹里插入的算符**：Ω 在开超弦费米子上的作用 (10.8.12)–(10.8.13)、
-      Ω² = exp(πiF) (10.8.14)、以及无取向 + GSO 的**四项**联合投影算符
-      (1+Ω+Ω²+Ω³)/4 (10.8.15)。本推导第 1 步写下的 R = Ω exp(πiβF) 与 (10.8.17) 里
+      供给**迹里插入的算符**：**Ω² = exp(πiF)** (10.8.14) 与无取向 + GSO 的**四项**联合投影算符
+      **(1+Ω+Ω²+Ω³)/4** (10.8.15)。本推导第 1 步写下的 R = Ω exp(πiβF) 与 (10.8.17) 里
       「含 Ω 与含 Ω exp(πiF) 的两个迹」正是这个投影算符展开出来的两项。
       **非 inferred**：抽取记录 **#E71 把 #E70 列为原书明写的依赖**（'文献列出的依赖：
       Vol.1 (7.4.22)（明写）；E70（投影算符）'），且 (10.8.12)–(10.8.15) 就印在 (10.8.16) 的
       正上方同一小节里。
-      ★ **这条边是本轮新建那张卡的唯一下游**，也是它存在的理由：玻色弦的 Ω（Ω² = 1、
+      ★★【2026-09-11 改指，batch27-fix】本边**原先指向 worldsheet.superstring-worldsheet-parity-action**
+      （v1，一张同时装着定义 (10.8.12)(10.8.13) 与命题 (10.8.14)(10.8.15) 的 `rigorous` 定义卡）。
+      reviewer-batch27 F2 判定该卡必须拆分，本边按 lead 的判据（「看 summary 用的是哪一式」）
+      改指**命题卡**：本推导 summary 第 1 步明写用的是 **(10.8.15) 的四项形式**与 (10.8.14)。
+      ⚠ (10.8.12)(10.8.13)（Ω 在费米模上的作用本身）经命题卡的 `uses` 链到达本推导
+      （命题卡 uses **worldsheet.superstring-worldsheet-parity-action-v2**），
+      本推导**不再**单独建一条指向定义卡的边。
+      ⚠⚠ **命题卡带着一条限定，本推导继承**：(10.8.14) 只在 NS 扇区是精确的算符恒等式；
+      **R 扇区里 Ω² 与 ψ_r 对易而 exp(πiF) 与之反对易**，二者只在 GSO 投影后的谱上作用相同。
+      (10.8.15) 的用处（无取向 + GSO 的联合投影）恰好只发生在投影后的谱上，
+      故本推导第 1 步不受影响；见 gaps 新增的那一条。
+      ★ **这条边是那张命题卡的唯一下游**，也是它存在的理由：玻色弦的 Ω（Ω² = 1、
       投影 (1+Ω)/2 两项）**不足以**支撑 Möbius 带这一支。
   - id: worldsheet.type-i-open-string-gauge-multiplet
     note: |
@@ -232,12 +242,20 @@ gaps:
      path integral for purely left-moving fermions'。**§10.8 直接使用而不重述**，本图照实继承
      （目标卡「不断言 (g)」）。"
   - "**(10.8.12) 依赖的超弦版 doubling trick (10.2.15) 本图无节点**：本推导经
-     worldsheet.superstring-worldsheet-parity-action 用到 (10.8.12)，而那张卡明写
+     worldsheet.open-superstring-omega-squared-is-fermion-parity → 其 uses 的定义卡
+     worldsheet.superstring-worldsheet-parity-action-v2 用到 (10.8.12)，而那张定义卡明写
      '不断言 (b)：不断言超弦版 doubling trick (10.2.15) 本身'——本图的
      worldsheet.open-string-doubling-trick 是**玻色弦**语境的（Neumann 条件 ⇒ T̄ 是 T 的镜像
-     解析延拓）。⇒ 待建 worldsheet.open-superstring-doubling-trick。
-     ⚠ 同一条限度也出现在 worldsheet.superstring-worldsheet-parity-action 的 notes 里
-     （该卡 status = rigorous 的两条保留之一）。"
+     解析延拓）。⇒ 待建 worldsheet.open-superstring-doubling-trick。"
+  - "**⚠⚠ (10.8.14) 的适用范围（2026-09-11 新增，batch27-fix）**：本推导第 1 步用的
+     Ω² = exp(πiF) 与四项投影 (1+Ω+Ω²+Ω³)/4 来自
+     worldsheet.open-superstring-omega-squared-is-fermion-parity，该卡断言 (2) 登记了一条
+     **原书不写的限定**：(10.8.14) 只在 **NS 扇区**是精确的算符恒等式；在 **R 扇区**
+     Ω² 与 ψ_{r∈Z} **对易**而 exp(πiF) 与全部 ψ^μ **反对易**，二者只在 **GSO 投影后的谱上**
+     作用相同（原书那句 'physically the same as squaring to the identity'）。
+     ⇒ 本推导第 1 步写下的投影算符只作用在 GSO 投影后的谱上，**结论不受影响**；
+     但「Ω 在开超弦上生成的是不是真正的 Z₄」这一点在本图**未定**（那张命题卡的 gaps 第三条）。
+     ⚠ 本条**不**降低本推导的 status（本来就是 physical-argument），登记以备审计。"
   - "**〔2026-09-11 关闭，small-backlog-13〕(10.8.18) 第三行的 16**：与圆柱、Klein 瓶两张同族卡同款。
      ⚠ 旧版此处写「本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边
      （另外两张卡各有一条），理由：Möbius 这一支的整体符号不像 Klein 瓶那样需要引力子这个物理输入

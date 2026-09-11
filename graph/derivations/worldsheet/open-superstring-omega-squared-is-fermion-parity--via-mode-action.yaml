@@ -1,0 +1,131 @@
+id: worldsheet.open-superstring-omega-squared-is-fermion-parity--via-mode-action
+target: worldsheet.open-superstring-omega-squared-is-fermion-parity
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.superstring-worldsheet-parity-action-v2
+    note: |
+      供给**唯一的出发点** (10.8.13)：Ω ψ_r^μ Ω^{−1} = exp(−πir) ψ_r^μ，
+      连同它对两个扇区的 r 取值范围（NS：r ∈ Z + ½；R：r ∈ Z）。
+      **非 inferred**：(10.8.13) 就印在 (10.8.14) 的正上方同一句里
+      （'In terms of the modes this is … . The phase is imaginary in the NS sector and squares
+      to −1. Thus Ω² = exp(πiF).'），原书正是由它得出 (10.8.14)。
+      ⚠ 本边**不**借那张卡的 (10.8.12)（场的层面）——本推导只用模的层面。
+  - id: worldsheet.rns-fermion-number-operator
+    note: |
+      供给 exp(πiF) 的**定义性质**：它与全部 ψ^μ **反对易**（该卡正文逐字：'RNS 弦上定义一个与
+      全部 ψ^μ 反对易的算符 exp(πiF)'），且 F 只 mod 2 有定义。
+      **非 inferred**：这是本图那张定义卡逐字断言的内容，与扇区无关。
+      ★★ **断言 (2) 的反证全靠这一条**：反对易性不依赖 r 的取值范围，而 Ω² 的共轭作用
+      （exp(−2πir)）依赖——两者在 R 扇区因此必然冲突。
+      ⚠ 该卡 status = physical-argument（含鬼场部分的构造），本推导的 status 与之相容。
+  - id: worldsheet.open-superstring-gso-projection
+    note: |
+      供给断言 (2) 的**弱化版所需**与断言 (3) 的 GSO 一半：
+        (a) GSO 投影在**开弦**扇区上把 exp(πiF) 投到一个固定本征值，物理谱上 exp(πiF) = 1
+            （原书 §10.8 逐字 'Since **exp(πiF) = 1 by the GSO projection**'）；
+        (b) 投影算符 (1 + ε exp(πiF))/2 在迹里贡献一个 ½（该卡断言 (3)，
+            §10.8 p.38 逐字 'Note that the GSO and Ω projection operators each contribute
+            a factor of ½.'）。
+      **非 inferred**：(a) 的那句就印在 (10.8.14) 与 (10.8.15) 之间，(b) 在同节 p.38 逐字。
+      ⚠ 本边**不**借该卡断言 (2) 的**枚举性**（'The two possibilities' 带着「与闭超弦一致耦合」
+      的前提，见该卡「不断言 (c)」）；本推导只需要「做了一个 exp(πiF) 的本征投影」。
+  - id: worldsheet.worldsheet-parity
+    note: |
+      供给 **Ω 在玻色部门上的作用** Ω α_n^i Ω^{−1} = (−1)^n α_n^i ⇒ Ω² 与全部 α_n^i **对易**
+      （断言 (1) 里「Ω² 与 exp(πiF) 有相同共轭作用」与断言 (2) 里「Ω² 在不可约扇区上是常数」
+      都用到这一半），以及断言 (3) 末尾与玻色弦 (1+Ω)/2 的对照（该卡明写 Ω² = 1）。
+      **非 inferred**：Vol.1 §1.4 逐字，本图该卡逐条照录。
+      ⚠ 本边**不**借它的 **Ω² = 1**——那正是本命题要推翻的开超弦类比（见断言 (1)(2)）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Möbius strip」, eqs. **(10.8.13)**–**(10.8.15)**, pp. 41–42；逐字：'In terms of the modes this is  Ω ψ_r^μ Ω^{−1} = exp(−πir) ψ_r^μ.  **The phase is imaginary in the NS sector and squares to −1.** Thus  Ω² = exp(πiF).  Since exp(πiF) = 1 by the GSO projection, this is **physically the same as squaring to the identity**, but the combined Ω and GSO projections require a single projection operator  (1 + Ω + Ω² + Ω³)/4.'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E70**
+      （已单页重渲染复核）。
+      ★ **原书给出的全部论证就是上面这几句**：一句 NS 扇区的相位观察 + 'Thus'。
+      ⚠⚠ **R 扇区原书一字未提**；断言 (2) 是本图按同一条 (10.8.13) 补出的，见 gaps 第一条。
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, p. 30（开弦必须做 GSO 投影）；§10.8, p. 38（'Note that the GSO and Ω projection operators each contribute a factor of ½.'）"
+    note: |
+      本图对应节点 **worldsheet.open-superstring-gso-projection**，供给「物理谱上 exp(πiF) = 1」
+      与 (10.8.15) 里的 GSO 一半。
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.19) 附近（Ω α_n^i Ω^{−1} = (−1)^n α_n^i、Ω² = 1、无取向投影 (1+Ω)/2）"
+    note: |
+      本图对应节点 **worldsheet.worldsheet-parity**。供给玻色部门那一半与玻色弦的对照。
+summary: |
+  **本推导只有有限步算符代数，全部出发点是 (10.8.13)。**
+
+  **第 1 步（两个扇区一起算）**：由 (10.8.13) 共轭两次，
+    Ω² ψ_r^μ Ω^{−2} = exp(−2πir) ψ_r^μ。
+  又由玻色部门 Ω α_n^i Ω^{−1} = (−1)^n α_n^i 得 Ω² α_n^i Ω^{−2} = α_n^i（**两个扇区都成立**）。
+
+  **第 2 步（NS，断言 (1)）**：r ∈ Z + ½ ⇒ exp(−2πir) = **−1** ⇒ Ω² 与全部 ψ_r^μ **反对易**、
+  与全部 α_n^i 对易——这恰是 exp(πiF) 的共轭作用（worldsheet.rns-fermion-number-operator 的
+  定义性质）。原书据此写 'The phase is imaginary in the NS sector and squares to −1. Thus
+  Ω² = exp(πiF).'（10.8.14）。
+  ⚠ 严格说，「共轭作用相同」只给出 Ω² exp(−πiF) 与全部模对易，即两者相差一个常数相位；
+  原书把这个常数取为 1（等价于对 Ω 在 NS 基态上的相位取定一个约定）。**这一步原书不写**，
+  见 gaps 第二条。
+
+  **第 3 步（R，断言 (2)）**：r ∈ Z ⇒ exp(−2πir) = **+1** ⇒ Ω² 与全部 ψ_r^μ **对易**。
+  而 exp(πiF) 与全部 ψ^μ 反对易（与扇区无关）。⇒ **两者的共轭作用不同**，
+  (10.8.14) 在 R 扇区**不是**算符恒等式。
+  能说的只有：Ω² 与全部 ψ_r^μ、α_n^i 对易 ⇒ 在每个不可约扇区上是常数；而 GSO 投影令
+  exp(πiF) = 1。⇒ **在 GSO 投影后的谱上二者作用相同**——原书那句
+  'physically the same as squaring to the identity' 正是这个意思，且是 R 扇区上唯一站得住的读法。
+
+  **第 4 步（断言 (3)）**：无取向投影与 GSO 投影合成一个算符，原书写作 (1+Ω+Ω²+Ω³)/4
+  （10.8.15）。因物理谱上 Ω² 塌回恒等，这个 Z₄ 结构在物理谱上等价于 Z₂；
+  **与玻色弦的两项 (1+Ω)/2 不同**。
+
+  **为什么标 physical-argument（三条）**：
+  (1) **原书对 (10.8.14) 给出的理由只覆盖 NS 扇区**，式子却写成无限定的；本推导第 3 步指出
+      无限定读法在 R 扇区为假，并把它替换成「GSO 投影谱上成立」——**这条限定原书不写**
+      （gaps 第一条）。
+  (2) **常数相位那一步原书不写**（gaps 第二条）：由「共轭作用相同」到「算符相等」差一个相位，
+      需要对 Ω 在扇区基态上的作用取定约定，而原书在 §10.8 完全不讨论这件事。
+  (3) **(10.8.15) 的幂等性与 Z₄ 结构的含义原书不验证**（gaps 第三条）：只有一句
+      'require a single projection operator'。
+  ⇒ 三条都是「断言 + 骨架」型的缺口（STATUS_LEVELS 2026-09-11 裁决），**不**降到 conjecture：
+  结论本身在 GSO 投影谱上无争议，原书的用法也只发生在那里。
+gaps:
+  - "**⚠⚠ R 扇区：(10.8.14) 的无限定读法为假，原书不登记这个限定**。原书给的理由逐字只有
+     'The phase is imaginary **in the NS sector** and squares to −1'，即**只覆盖 NS 扇区**，
+     却把 Ω² = exp(πiF) 写成无限定的算符等式。由同一条 (10.8.13) 在 R 扇区（r ∈ Z）得
+     Ω²ψ_r^μΩ^{−2} = **+**ψ_r^μ（Ω² 与 ψ_r^μ **对易**），而 exp(πiF) 按定义与全部 ψ^μ
+     **反对易** ⇒ 两者在 R 扇区 Fock 空间上不相等。
+     ⇒ 本命题断言 (2) 把适用范围限定为「NS 精确 / R 只在 GSO 投影谱上」，
+     **这条限定是本图补的**（reviewer-batch27 F2 的独立复核，2026-09-11）。
+     ⚠ 这**不**构成对原书的反驳：(10.8.15) 只作用在 GSO 投影后的谱上，原书的用法不受影响；
+     故本图**不**为此建 `kind: refutation` 的推导。
+     ★ 可做的正解：查超弦 orientifold 的专门文献（Ω 在 R 扇区零模 Clifford 模上的作用与
+     Ω² 的取值约定），若有一手来源就可把断言 (2) 升级为有来源的精确陈述。"
+  - "**由「共轭作用相同」到「算符相等」差一个常数相位，原书不写**。第 2 步只证出
+     Ω² exp(−πiF) 与全部 α_n^i、ψ_r^μ 对易，故在不可约扇区上是常数 c；(10.8.14) 等价于 c = 1，
+     这需要对 Ω 在 NS 基态上的相位取定约定。**原书在 §10.8 不讨论 Ω 在基态上的作用**。
+     ⚠ 同一个缺口使断言 (2) 里「Ω² 在 R 扇区上的常数值」也无法定出（目标卡「不断言 (a)」）。"
+  - "**(10.8.15) 的幂等性与 Z₄ 结构原书不验证**。原书只有一句 'the combined Ω and GSO
+     projections require a single projection operator'，**不验证**
+     [(1+Ω+Ω²+Ω³)/4]² = (1+Ω+Ω²+Ω³)/4，也不说明在断言 (2) 的限定下（R 扇区里
+     Ω² ≠ exp(πiF)）Ω 生成的是不是真正的 Z₄。本图**未展开**这一步。"
+  - "**(10.8.12) 所用的超弦版 doubling trick (10.2.15) 本图无节点**（继承定义卡
+     worldsheet.superstring-worldsheet-parity-action-v2 的「不断言 (b)」）。本推导本身不用
+     (10.8.12)（只用模的层面 (10.8.13)），故这条缺口**不**进本推导的论证链，
+     但它仍在定义卡与 Möbius 那一支上（⇒ 待建 worldsheet.open-superstring-doubling-trick）。"
+notes: |
+  ★★【本推导为什么存在（curator，2026-09-11，batch27-fix）】
+  本推导是 worldsheet.superstring-worldsheet-parity-action（v1，definition，rigorous）拆卡后
+  **新建的那一半的论证**。v1 的 notes 曾用「有限步初等计算 ⇒ rigorous」为 (10.8.14) 辩护，
+  reviewer-batch27 F2 指出两点：(i) 那条理由**只覆盖 NS 扇区**；
+  (ii) STATUS_LEVELS 的 rigorous 例外还要求推导 notes 里有 `reviewer-verified` 记录，
+  而定义卡没有推导、无处写。⇒ 现在有了推导节点，但**本推导不申请 rigorous 例外**：
+  第 3 步发现的 R 扇区不相容本身就说明「无限定的 (10.8.14)」不是一条可以标 rigorous 的命题。
+
+  ★【本推导与 reviewer 的复核的关系】断言 (2) 的算符代数由 reviewer（graph-reviewer，
+  2026-09-11，review-batch27 F2）独立做出，curator 在本推导第 1–3 步逐步复算并同意。
+  **但本推导 status 仍取 physical-argument**，理由见 summary 末与 gaps 第二条
+  （常数相位那一步原书不写、本图也定不出）。
+author: curator
+created: "2026-09-11"
