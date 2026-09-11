@@ -53,7 +53,8 @@ Also proved here, because `DDF.lean` only has the action on rung-supported vecto
 1. **No positivity, no Hilbert space.**  `towerPairing` is a bilinear form over a commutative
    ring; there is no topology, no completion, and no claim that it is nondegenerate.  The
    no-ghost theorem needs positivity on the DDF subspace, which is not here.
-2. **The vertex operator is not yet self-adjoint.**  `towerVertex` is `towerShift n` composed
+2. **(Resolved in `VertexAdjoint.lean`: `towerPairing_towerVertex_left`, `towerPairing_ddfOp_left`.)** Original text:
+   **The vertex operator is not yet self-adjoint.**  `towerVertex` is `towerShift n` composed
    with an oscillator part, and its adjoint involves the oscillator adjoint of `vertexOsc`,
    which is not proved (graph node `worldsheet.vertex-operator-adjoint`).  Consequently the
    adjointness of the DDF operators `A^i_n` themselves is **not** available: only the three

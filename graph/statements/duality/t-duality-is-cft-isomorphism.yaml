@@ -1,0 +1,65 @@
+id: duality.t-duality-is-cft-isomorphism
+kind: proposition
+title: T 对偶保持谱、T/T̄ 与 OPE：半径 R 与半径 α'/R 的紧化自由玻色子
+statement: |
+  设玻色闭弦的一个坐标 X = X_L + X_R 紧化在半径 R（conv.compactification-radius），
+  其余坐标不动。定义**对偶坐标**
+    **X' ≡ X_L − X_R**,
+  等价地在右行部分作替换 ᾱ_m ⟼ −ᾱ_m（m ≠ 0）、x_R ⟼ −x_R、p_R ⟼ −p_R。则：
+  (1) 该替换保持右行振子的对易关系 [ᾱ_m, ᾱ_n] = m δ_{m+n,0}，即它是振子代数的一个自同构；
+      它在零模上的唯一效果是把 p_R（即 k_R）反号；
+  (2) 由 duality.t-duality-spectrum-equivalence，k_R 反号也可以由 n ↔ w、R ⟼ α'/R 实现；
+  (3) 因此**半径 R、坐标 X 的紧化自由玻色子**与**半径 α'/R、坐标 X' 的紧化自由玻色子**
+      在下述两个层面逐条对应：
+      (3a) **谱**：态一一对应（n ↔ w，振子不动），质量与 level matching 逐条相同；
+      (3b) **世界面算子**：能动张量 T = −(1/α') ∂X ∂X、T̄ = −(1/α') ∂̄X ∂̄X 在替换下不变，
+           对应顶点算子由同一组 X_L、X_R 构成，故其 OPE 逐项相同。
+  **本陈述的边界**：它只覆盖**单个紧化自由玻色子**（平坦背景、常 dilaton）的情形，
+  不是「T 对偶在任意背景、任意 α' 阶下成立」的陈述。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length, conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.28)（X' = X_L − X_R 的**定义**），p.247–248；「the same theory」与「same OPEs and energy momentum tensor」在 p.248 正文（无式号）；用到 (8.2.16)（X_L、X_R 的模式展开）与 (8.3.27)"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E133，**证据等级 L1（原书直读）**。
+      **Q20 已于 2026-09-11 按原书核实关闭（抽取记录 §12.10 表 A）**：
+      (8.3.28) 是**定义式** X' = X_L − X_R；「the same theory」的陈述与
+      「same OPEs and energy momentum tensor」这个理由**都在原书**；
+      「非微扰 / 精确成立」的断言也在原书（p.248，无式号，靠 SU(2)×SU(2) 规范对称性论证）。
+      ⚠ **原书同时给出两条限定**：
+      (a) 两组场的关系在**世界面上是非局域的**（p.248）；
+      (b) p.248 逐字「We do not have a nonperturbative understanding of string theory,
+          but we do know a great deal about low energy field theory …」
+          ——即「精确成立」那一步是**时空有效场论论证**，不是世界面论证
+          （抽取记录 §12.10 表 C 第 15 条）。
+      本卡的 statement 仍只承载谱与世界面算子两层，不承载「同一个 CFT」与「非微扰」。
+tags: [t-duality, compactification, cft, closed-string, worldsheet, phase2]
+notes: |
+  **更强措辞已核实在原书（Q20 关闭，2026-09-11）**：原书 p.248 确实陈述两个理论是
+  「the same theory」，理由是「same OPEs and energy momentum tensor」，
+  并断言这是**精确 / 非微扰**的。Schrans 的复述（「exactly the same CFTs … also at a
+  non-perturbative level」）因此是忠实的。
+  **本卡的 statement 仍不含这两句**，理由有三：
+  (1) 原书同时写明两组场的关系在**世界面上非局域**；
+  (2) 「非微扰」那一步靠的是 SU(2)×SU(2) 规范对称性 + **时空有效场论**论证
+      （p.248 自承「We do not have a nonperturbative understanding of string theory」），
+      证据层次与本卡承载的世界面论证不同，应当另建节点；
+  (3) 本卡已提交到本分支，按 graph/CLAUDE.md 不得就地改写 statement 文本。
+  **→ 给 lead 的建议**：新建 `duality.t-duality-is-exact-nonperturbatively`
+  （kind proposition，推导 kind physical-argument、status physical-argument，
+  依赖本卡 + 时空 EFT 论证），而不是把本卡升格；本卡不标 superseded_by。
+
+  上面的 (3b) 是把原书给出的理由（「相同的 OPE 与能动张量」）写成可检查的形式；
+  它给出的是**世界面层面的谱与算子对应**，而不是
+  「弦论作为时空理论在非微扰层面等价」——后者还需要弦耦合展开之外的输入，
+  原书在 p.248 用的是 SU(2)×SU(2) 规范对称性加低能有效场论的论证。
+
+  独立的第二条路线（**不作为本卡的 source**）：Headrick 习题解答 Problem 8.3
+  把 X^{25} 的平移对称性规范化（引入世界面规范场 A_a 与 Lagrange 乘子 φ），
+  积掉 A_a 得到 **Buscher 变换规则**（G'_{25,25} = G^{−1}_{25,25}，B_{25μ} ↔ G_{25μ}）。
+  按 lead 裁决（2026-09-10），个人笔记/习题解答不得作为推导 sources[] 承载论证；
+  且它是**习题级**、是路径积分层面的规范化论证而非 CFT 同构的证明，
+  并且 Headrick 明说**没有**计算 dilaton 的移动，细节指向 Roček–Verlinde (1992)。
+  抽取记录 Q20 建议把 rocek-verlinde-1992 登记为独立一手来源候选——本轮未登记。
+author: curator-polchinski-ch8
+created: "2026-09-11"

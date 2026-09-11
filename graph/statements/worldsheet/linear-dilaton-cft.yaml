@@ -26,6 +26,23 @@ sources:
     note: |
       两个公式号经 schrans-2020 目录核实（`2.27`、`2.28`, p.49）。
       **T 的具体表达式（V_μ ∂^2 X^μ 项的系数）未核实**；见 polchinski-1998-v1.md E35。
+
+      ★ **【原书核实 2026-09-11（L1 页图逐字，p.49）——(2.5.3) 的内容与它下面那一句】**
+        「`δX^μ = −εv∂X^μ − εv*∂̄X^μ − (ε/2)α'V^μ[∂v + (∂v)*]` .   (2.5.3)
+         **This is a *different* conformal symmetry of the same action. The field `X^μ` no longer
+         transforms as a tensor, its variation now having an inhomogeneous piece.** Incidentally,
+         the free massless scalar in two dimensions has a remarkably large amount of symmetry —
+         much more than we will have occasion to mention.」
+      同页并写：「so different values of `V^μ` are to be regarded as **different CFTs**」。
+
+      ⇒ 两条对全图有用的结论：
+      (1) **这里、而且只有这里，才是原书说「X^μ 不是 tensor」的地方。** 在普通自由标量 CFT
+          （T = (2.4.4)）里 X^μ **是**权 (0,0) 的主场（p.47「All transform as tensors except ∂²X^μ」）。
+          本图此前多处把这两句混为一谈，已由 worldsheet.primary-field → primary-field-v2 的
+          换代纠正；本卡是「另一个 CFT」这一侧的锚点。
+      (2) **不同的 V^μ 是不同的 CFT**，不是同一理论的不同写法——这与本卡 notes 末段
+          「限定 free-boson-central-charge-d 的适用范围」是同一件事的原书原话。
+      见 literature/extractions/polchinski-1998-v1.md §13.4(c)。
 tags: [cft, linear-dilaton, energy-momentum-tensor, definition]
 notes: |
   【正规序卡换代（curator 2026-09-11）】uses 已从 worldsheet.conformal-normal-ordering（v1）

@@ -1,0 +1,33 @@
+id: compact.open-string-no-winding--via-neumann-endpoints
+target: compact.open-string-no-winding
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.open-string-neumann-boundary-condition
+    convention_map: |
+      上游节点用洛伦兹世界面（conv.worldsheet-lorentzian）陈述边界条件
+      ∂^σX^μ(τ,0) = ∂^σX^μ(τ,ℓ) = 0；本节点在欧氏世界面上讨论紧化谱，
+      但只用到「端点处法向导数为零、端点在时空中自由移动」这一条，
+      它在两种号差下形式相同（Wick 旋转只改 σ² 的实/虚性，不改 σ¹ 方向的边界条件）。
+  - id: worldsheet.open-string-mass-shell
+    inferred: true
+    note: |
+      提供 α'm² = N − a 与 a = 1 的开弦质量壳；紧化方向的动量项 n²/R² 是本推导补上的。
+      原书在此处直接写出紧化后的谱，没有回引质量壳的出处，故标 inferred。
+  - id: compact.circle-momentum-quantization
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6（p.265 附近），无式号"
+    note: |
+      抽取记录 polchinski-1998-v1#E150（内容 L1、式号 L0；Schrans §8.105 是他自补的小节）。
+summary: |
+  Neumann 条件让端点在紧化方向自由移动，故任何绕圈的位形都可连续解绕，
+  绕数不是守恒的拓扑量子数——开弦的位形空间在紧化方向是可缩的。
+  于是紧化只把动量离散化（p = n/R），质谱为 m² = n²/R² + (N−1)/α'。
+  R → 0 时 n ≠ 0 的态无限重，剩下 25 维的谱。
+gaps:
+  - "「端点自由 ⇒ 无绕数」是拓扑论断，来源没有把它写成命题（Schrans 这一小节不带式号，是他自补的）；本图也没有承载「开弦位形空间在紧化方向可缩」的节点。"
+  - "「只有端点降维、弦的内部仍在 26 维振动」是原书的一句话（经 Schrans 转述），没有对应的式子或论证。"
+  - "上游的开弦截距 a = 1 本身是 physical-argument。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -3,10 +3,17 @@ target: consistency.gravitational-anomaly-polynomial-d10
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: consistency.anomaly-twelve-form-d10
+  - id: consistency.anomaly-twelve-form-d10-v2
     note: |
-      提供「反常 ↔ 形式十二形式」的框架与下降方程记号；GS 逐字把引力一路说成
+      提供下降方程与十二形式的**记号**；GS 逐字把引力一路说成
       「As described above for the Yang–Mills case」，即明确沿用规范一路的同一套编码。
+      【2026-09-11】原依赖 consistency.anomaly-twelve-form-d10 已拆卡换代。
+  - id: consistency.anomaly-descent-to-twelve-form
+    note: |
+      【2026-09-11 拆卡后新增的显式边】「反常 ↔ 形式十二形式」这条**字典**本身，
+      原先埋在旧卡 statement 里。本推导 gaps 第一条记的正是它无已核实来源；
+      拆卡后那条缺口成为可追踪的瓶颈节点。
+      ⚠ 引力一路更弱：zumino-1983-les-houches 全文没有自旋联络与 tr R²（L1 通读确认）。
   - id: conv.gauge-trace-normalization
     note: 固定 tr R^{2k} 里的 tr 是 10 × 10 切空间矩阵的迹。
 sources:
@@ -41,7 +48,7 @@ summary: |
 gaps:
   - "★ 三个系数完全外包给 alvarez-gaume-witten-1984，本项目**未取得该文全文**（L0）。整条 consistency.* 反常链的数值系数层因此不可追溯。"
   - "GS 未复算，也未说明费米子含量如何代入；spin-3/2 与 spin-1/2 的相对贡献系数在本图无任何来源。"
-  - "「形式上的十二维表达式」与十维反常之间的对应本身只在 zumino-wu-zee-1984（未取得）里，见 consistency.anomaly-twelve-form-d10。"
+  - "「形式上的十二维表达式」与十维反常之间的对应本身只在 zumino-wu-zee-1984 里，见 consistency.anomaly-twelve-form-d10。**状态更正（2026-09-11）**：ZWZ **正文仍未取得**（L2，仅 INSPIRE 逐字摘要；本项目已穷尽当前可用路线，抽取记录 §0.4）。同作者同期的伴随讲义 zumino-1983-les-houches **全文已取得（L1）**，但它只提供**下降链**那一半，**没有升维到 2n+2 维不变多项式**这套写法。⇒ 这条「反常 ↔ 十二形式」的字典在本图里**仍无任何已核实来源**。"
   - "升级路径：抽取 Alvarez-Gaumé–Witten 1984（尤其 eq. (63) 与引力反常表），这是本区最高优先级的 researcher 任务。"
 notes: |
   与 bilal-2008 的 3/4 因子核对由 researcher 在抽取时完成、curator 复看，**未由 reviewer 独立复核**。

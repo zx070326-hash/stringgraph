@@ -16,8 +16,13 @@ depends_on:
       as before」，即把 SO(32) 一路的论证换上 E₈ 的迹恒等式重跑一遍。
   - id: consistency.gs-counterterms-1984
     note: (18′)(21)(23′) 三段反项（S₂ 与 SO(32) 共用）。
-  - id: consistency.h-field-strength-chern-simons
-    note: (4′) 的 H（两个 E₈ 因子各带 1/30）与 (9c′) 的 δB。
+  - id: consistency.h-field-strength-definition
+    note: |
+      (4′) 的 H（两个 E₈ 因子各带 1/30）。
+      【2026-09-11】原依赖 consistency.h-field-strength-chern-simons 已拆卡换代；
+      该卡第 (2) 段的 (9c′) 现由下一条边承载。
+  - id: consistency.b-field-gauge-lorentz-transformation
+    note: (9c′) 的 δB（两个 E₈ 因子各带 1/30，与 (4′) 配套）。
   - id: consistency.gravitational-anomaly-requires-496-fermions
     note: |
       n = 496；E₈ × E₈ 的伴随维数 2 × 248 = 496。GS 的**早期版本**恰恰只注意到这一条
@@ -52,7 +57,9 @@ summary: |
 gaps:
   - "★ **(C) 完全没有独立验算**：GS 只说「follows from eq. (19)」，中间步骤（混合反常如何只通过 Ω₄, Ω₈, Ω₁₂ 的那一个组合进入）**原文没有写出**，本图也没有补。这是本节点比 SO(32) 节点更弱的地方。"
   - "本推导 summary 里 (C) 的「论证骨架」两句是 curator 的重构，不是原文措辞；原文只有那一句话。若 reviewer 认为重构不当，应删到只剩引文。"
-  - "继承 consistency.anomaly-cancellation-so32-effective-theory 的全部 gaps（尤其数值系数外包给未取得的 alvarez-gaume-witten-1984）。"
+  - "继承 consistency.anomaly-cancellation-so32-effective-theory 的全部 gaps。**其中数值系数那条已在 2026-09-11 重述**：alvarez-gaume-witten-1984 全文已取得（L1）而**它并不含常数 c**（(114) 逐字「apart from a factor common to the three cases」，只给相对归一）；zumino-1983-les-houches §5 给的是 2n−2 维通式 (5.13)、不含引力侧、原文手写「(up to a sign)」；ZWZ 正文未取得（L2）。⇒ **c 是 GS 自己合成的一步，三篇原始文献里都不以一个数出现，GS 未给中间步骤，本图未复算。**"
+  - "★ **同样继承 SO(32) 一支新增的三条 Zumino 侧缺口（2026-09-11）**：(a) **局部性**——下降方程的唯一已核实来源（zumino-1983-les-houches, p.16 末）逐字限定它们「really valid only locally, in some finite neighborhood in x-space」，而 S′₁、S₂、S′₃ 是整个十维时空上的积分；(b) **相容条件之解的唯一性无支撑**——同一来源 p.29 逐字「The problem of finding the most general solution of the consistency condition will not be discussed here.」，唯一性属 manes-stora-zumino-1985 一线，本项目未取得；(c) **k² = 0 未证**（同一来源逐字「We leave the proof as an exercise to the reader.」，对本推导不构成实际依赖）。"
+  - "★ **洛伦兹一路的 ω⁰_{7L}、ω¹_{10L} 是本图的推断**：(23′) 显式含 ω⁰_{7L}，但 GS 原文只显式定义 n = 1 的洛伦兹侧 (7)(8)，一般 n 的 A → ω, F → R 代换原文未陈述，且 Zumino 一侧全文不含引力。见 consistency.descent-forms-gs-notation statement (2) 的证据分层。"
   - "E₈ 迹恒等式本身在所有来源里都没有证明（见 math.e8-adjoint-trace-identities--via-casimir-structure 的 gaps）。"
   - "(18′) 的 108000 与 (23′) 的 7200 这些数字，GS 未说明来历。"
 notes: |

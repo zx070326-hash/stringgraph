@@ -14,22 +14,65 @@ uses_conventions:
   - conv.worldsheet-euclidean
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.2, eq. (5.2.10) 附近, p.152"
+    loc: "§5.2, eq. (5.2.10)（正定性积分恒等式）与 eq. (5.2.11a)（结论「χ > 0 : κ = 3χ, μ = 0」）, p. 152"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E76，L1（读到 schrans-2020 笔记 p.252）。
-      ⚠ 抽取记录逐字转引伴读者的自述：
+      **2026-09-11 订正（researcher 取到原书 ch.5 页图，L1 逐字；math-sources.md §39.6(a)）**：
+      本条 note 原先写「**Polchinski 原书是否给了直接论证，本项目未核实**」——
+      **已核实：原书给了。** 原书 p.152 逐字：
+      「Further, κ vanishes for χ < 0 and μ vanishes for χ > 0. To show this, we first cite the fact
+      that it is always possible by a Weyl transformation to find a metric for which the scalar
+      curvature R is constant. The sign of R is then the same as that of χ. Now, P₁^T P₁ = −½∇² − ¼R,
+      so ⟨(5.2.10)⟩. For negative χ the right-hand side is strictly positive, so P₁δσ cannot vanish.
+      **A similar argument shows that P₁^T δ′g cannot vanish for positive χ.** Combining these results
+      we have χ > 0 : κ = 3χ, μ = 0, (5.2.11a); χ < 0 : κ = 0, μ = −3χ, (5.2.11b).」
+      即：**(5.2.10) 是那条正定性恒等式本身，(5.2.11a)/(5.2.11b) 才是结论对**；
+      原书对 χ < 0 写出完整论证，对本条（χ > 0）只声明「A similar argument shows」。
+      该路线现由 worldsheet.positive-euler-number-no-moduli--via-positivity 承载，
+      三条原书自陈的缺口逐条记在那里。
+  - ref: polchinski-1998-v1
+    loc: "§6.1, pp. 166–169（三个 χ > 0 曲面各自的「no moduli」逐字断言：p.167 球面、p.168 圆盘、pp.168–169 射影平面）；**均无式号**"
+    note: |
+      L1 原书页图（math-sources.md §39.6(b)(c)(d)(e)）。枚举路线
+      worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 用的就是这三句。
+      ⚠ 三句都是断言，原书不给论证。
+  - ref: schrans-2020
+    loc: "笔记 p.252（抽取记录 #E76 的读取来源；**节号本图未核实，不填**）"
+    note: |
+      **历史记录，不承载论证**。抽取记录 literature/extractions/polchinski-1998-v1.md#E76
+      逐字转引伴读者的自述：
       「I have not been able to show in a satisfying way that for positive Euler numbers,
       the number of moduli is zero. I have tried two ways… But neither way has lead to
       anything useful. There is, however, an indirect way. We know that for closed oriented
       surfaces, the Euler number is χ = 2 − 2g … The only close oriented surface with χ > 0
       therefore has g = 0, i.e. is the sphere, the disk or the projective plane,
       for which there are no moduli.」
-      这是**第三方对自己复现能力的陈述**，不是 Polchinski 的自述；
-      **Polchinski 原书是否给了直接论证，本项目未核实**。
+      这是**第三方对自己复现能力的陈述**，不是 Polchinski 的自述。
+      ⚠ **2026-09-11 追记**：这段话本身**自相矛盾**——「closed oriented surface」与
+      「the disk or the projective plane」不相容（圆盘有边、RP₂ 不可定向），
+      且 χ = 2 − 2g 只对闭可定向曲面成立。故本图已把枚举路线的书内锚点
+      **从这段 [S] 引文改挂到 Polchinski 原书 §6.1 首句 p.166**
+      （「There are three Riemann surfaces of positive Euler number: the sphere, the disk,
+      and the projective plane.」）。本条只保留为「本图当初为何走枚举路线」的历史记录。
 tags: [worldsheet, moduli, euler-number, counting]
 notes: |
   拆卡理由见 worldsheet.negative-euler-number-no-ckv 的 notes：原书把两半写成一条对偶陈述，
   但两半的论证强度不同，按「一个节点一个命题 + status 实话实说」必须分开记账
   （抽取记录「本轮对图的建议」第 3 条也明确要求）。
+
+  **2026-09-11 订正记录（curator-surface-class，依 math-sources.md §39.8(A)）**：
+  - **statement 文本里「详见本节点唯一一条推导的 gaps」现已过时**：本节点自 2026-09-11 起有
+    **两条并列推导**——
+      worldsheet.positive-euler-number-no-moduli--via-positivity（**原书自己的路线**，
+        (5.2.10) + (5.2.11a) 的正定性论证）与
+      worldsheet.positive-euler-number-no-moduli--via-surface-enumeration（**本图补写的枚举路线**）。
+    按「不改已提交节点的 statement 文本」的纪律，**不改陈述、也不换代**：
+    这处只是指路语过时，命题的数学内容未变（一个 v2 只会为了一句指路语而分裂引用）。
+    若 auditor 认为必须换代，请另建 v2 并给本卡写 superseded_by。
+  - **statement 文本里「原书把它作为 (5.2.10) 的『对偶』断言」在订正后仍成立**，
+    但含义需精确化：(5.2.10) 是正定性恒等式，原书对 χ < 0 写出论证、对 χ > 0 只写
+    「A similar argument shows」，即确实是以「对偶/同型」的方式断言的。**原书并非完全不给论证**
+    ——这一点原来的 sources note 说反了，已在上面改正。
+  - **statement 文本里「伴读者明确记录自己无法复现直接论证」是关于 [S] 的事实陈述，仍成立**；
+    但 [S] 给的替代枚举句本身有毛病，见 sources 第三条的追记。
 author: curator-polchinski-ch5
 created: "2026-09-11"

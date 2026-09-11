@@ -1,0 +1,270 @@
+id: worldsheet.ddf-transverse-oscillator-algebra-v2--via-zero-mode-bracket
+target: worldsheet.ddf-transverse-oscillator-algebra-v2
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.formal-distribution-locality
+    note: |
+      形式级数框架：模式展开 𝒴(ψ, z) = Σ_n ψ_n z^{-n-1} 与 Res。**本推导不用两个顶点算子的 OPE、
+      不用径向排序、不用围道形变**，这正是它区别于 --via-conformal-weight 的地方：
+      那里要先算 O^i_m(z) O^j_n(w) 的 OPE 再取留数，这里只用零模之间的李括号字典。
+  - id: math.vertex-algebra-commutator-formula
+    note: |
+      本推导的第二环是 G–N (2.62) `[ψ_0, φ_0] = ([ψ, φ])_0`（零模映射是李代数同态）。
+      它是本卡断言的 commutator formula (2.38) `[ψ_m, φ_n] = Σ_{i≥0} C(m,i)(ψ_i φ)_{m+n-i}`
+      在 **m = n = 0** 的特例（C(0,i) = δ_{i0}，故右端只剩 (ψ_0 φ)_0）。
+      **这条边不是 inferred**：本卡逐字承载的就是 G–N 自己的 (2.38)，与 (2.62) 同出一篇同一节，
+      从 (2.38) 取 m = n = 0 是一步初等代入。
+      【改挂记录，2026-09-11（curator，分支 agent/curator/lattice-va）】此前本条边指向
+      math.locality-ope-equivalences-v2（Schottenloher Thm 10.10 第 5 条，形式分布版）并标 inferred，
+      理由是「(2.38) 就是那张卡的第 5 条」这一识别属本项目推断。新卡建立后该识别不再需要。
+  - id: math.vertex-algebra-borcherds-identity
+    note: |
+      (2.62)/(2.38) 的公理出处：Jacobi / Borcherds 恒等式 (2.36)（模式版）与 (2.30)（形式变量版）。
+      本卡的陈述同时列出本推导另外要用的两条公理性结构：**平移算子 T**
+      （G–N 写作 L_(−1)，(3.1) 里 k(−1)e^{nk} = (1/n)L_(−1)e^{nk} 用的就是它）与**真空**。
+      **这条边不是 inferred**：本卡逐字登记的就是 G–N (2.36)/(2.30)。
+      【改挂记录，2026-09-11（同上）】此前指向 math.vertex-algebra-associativity
+      （Frenkel–Ben-Zvi Thm 3.2.1，是 (2.36) 在 m = 0 的特例，**严格弱于**本推导用到的那条）并标 inferred，
+      缺卡登记在原 gaps 第 3 条；新卡已补上该缺卡。
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    note: |
+      **桥接边（本轮接好的那一条）。** 与
+      worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 的同名边理由完全相同：
+      G–N 工作在**格点顶点代数** V_Λ（偶格、洛伦兹号差、带双乘性上闭链 ε）里，**不含 bc 鬼场**。
+      本卡正是所需的那张：「D 个自由玻色子（洛伦兹 η、含类光 k_0）的 Heisenberg 顶点代数与格 Z k_0
+      给出顶点代数 V_(𝔥, Z k_0)，动量塔 ⊕_j F(p + j k_0) 是它的（不可约）模」，
+      来源 Li–Wang Theorem 3.6 + Theorem 3.10 + (3.17)。**非 inferred。**
+      ⚠ **上闭链那一点在本推导里是实质的**：G–N (3.1) 逐字用到 ε(mk, nk) = 1；
+      本卡 (1) 论证了在秩 1 类光格上 ε ≡ 1 满足 (3.6)–(3.8)，与之相容
+      （但「扭群代数在此退化为普通群代数」仍是本项目推断，见本卡推导的 gaps 第 1 条）。
+      【改挂记录，2026-09-11（同上）】此前 inferred 到 worldsheet.string-cft-is-a-vertex-algebra-v2
+      （effective = open），那是原 gaps 第 1 条登记的缺卡。
+  - id: worldsheet.ddf-operators-v6
+    convention_map: |
+      G–N ↔ 本图的字典（**本项目推断**，见 gaps 第 4 条；**本推导对它比对易关系那条推导更敏感，
+      因为这里右端不是 0 而是 m δ^{ij}**）：
+      格点向量 ↔ α_0-归一化的动量（r ↔ (2α')^{1/2} p，k ↔ (2α')^{1/2} k_0），
+      故 G–N 的常设假设 r·k = 1 ↔ 本图 (★) 2α' k_0·p = 1，
+      而 (3.4) 右端的算子 **k(0) = k·α_0 ↔ 2α' k_0·p = 1**（这正是「右端为什么不带 α' 或 k_0·p 的残余因子」
+      的确切记账位置）。偏振 ξ 不是动量，其归一化由 ξ·η = δ^{ij} 单独固定，与 α' 无关。
+      𝒴(e^{mk}, z) ↔ :e^{i m k_0·X(z)}:，ξ(z) ↔ 归一化后的 ∂X^i(z)，Res_z ↔ ∮dz/2πi。
+    note: |
+      被断言的对象。G–N (3.2) 把 A^ξ_m 定义为**零模** (ξ(−1)e^{mk})_0；类光条件 k_0² = 0（G–N: k·k = 0）
+      与横向条件 ε·k_0 = 0（G–N: ξ·k = η·k = 0）正是 (3.1) 逐字用到的三条内积条件
+      （「since ξ·k = η·k = k·k = 0」）。
+  - id: worldsheet.momentum-tower-fock-space
+    note: |
+      目标陈述的量词定义域（扇区 {p : k_0·p ≠ 0} 的动量塔）。本推导里塔还有第二个作用：
+      (3.4) 右端的 **k(0) 是算子**，只有在塔的每一层上取值 1 时才退化为纯 c-数 m δ^{ij}；
+      而 k_0·(p + N k_0) = k_0·p（k_0² = 0）保证 (★) 沿整条塔成立
+      （worldsheet.ddf-operators-v5 说明 (b)），故 k(0) 在整条塔上恒为 1。
+      这条边不是 inferred：塔是目标陈述的定义域。
+  - id: worldsheet.old-covariant-physical-states
+    note: |
+      G–N (3.1) 是**物理态之间的李括号**：ξ(−1)e^{mk} 与 η(−1)e^{nk} 都取自 G–N 的物理态空间
+      ℛ_(1)（(2.55) 中 Δ = 1，即 L_(n)ψ = δ_{n0}ψ ∀n ≥ 0），这与本卡的旧协变条件
+      (L_0 − a)|ψ⟩ = 0 ∧ L_m|ψ⟩ = 0 (m > 0) 在 **a = 1** 时逐字相同。
+      本推导用到「被取零模的那两个态是权 1 的物理态」这一前提。
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', p. 593, eq. (3.1)（物理态的李括号，含 k(−1)e^{nk} = (1/n)L_(−1)e^{nk} ≡ 0 (n ≠ 0) 与双乘性上闭链 ε(mk,nk) = 1）与 eq. (3.2)–(3.3)（A^ξ_m := (ξ(−1)e^{mk})_0）; p. 594, eq. (3.4) 与同页正文的归一化 k·r = 1; §2.1, p. 582, eq. (2.62)（零模字典 [ψ_0, φ_0] = ([ψ,φ])_0）; p. 580, eq. (2.36)/(2.38); §3.2, p. 599（d − 2 个 orthonormal ξ_i）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF；途径 pure.mpg.de/rest/items/item_153125_1/component/file_153124/content）。
+      逐字文本见 literature/extractions/gsw-1987-v1.md §4（E15、E17）与 sources.bib。**
+      (3.4) 逐字 `[A^ξ_m, A^η_n] = m(ξ·η) δ_{m+n,0} (k(−1))_0 = m(ξ·η) δ_{m+n,0} k(0)`，
+      引出句逐字「**According to (2.62)** the above commutator then translates into」。
+      **★ 本条是本图目前唯一逐字说明「右端为什么恰好是 m δ^{ij} 而不带 α' 或 k·p 的残余因子」的来源**：
+      G–N **把算子 k(0) = k·α_0 显式留在右端**，并在同页逐字说明
+      「for given momentum r, one has to find a lightlike vector k = k(r) such that **k·r = 1**.
+      In this case the transversal DDF operators A^ξ_m(k) realize precisely the algebra of d − 2 transversal
+      oscillators on the ground state e^r」。这直接回应了
+      worldsheet.ddf-transverse-oscillator-algebra--via-conformal-weight 的 gaps 第 1 条。
+      偏振正交归一见 §3.2, p. 599 逐字「we can always find d − 2 **orthonormal** vectors ξ_i ∈ Λ_ℝ,
+      1 ≤ i ≤ d − 2, **orthogonal to both r and k**」（多出的 ξ·r = 0 见 gaps 第 5 条）。
+      **未核实（L0）**：(3.1) 的母式 **(2.120)** 所在页 researcher 本轮未读（读的是 pp. 571–572, 579–583, 593–600），
+      见 gaps 第 2 条。
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p. 11, eq. (5.5)；偏振条件见同页 (5.1) 之后的正文"
+    note: |
+      **旁证，不承载论证。** 逐字 `[A^i_m, A^j_n] = m δ^{ij} δ_{m,−n},   1 ≤ i, j ≤ D − 2.`
+      引出句逐字「…noting that they really did behave like annihilation and creation operators,
+      satisfying the appropriate commutation relations [43, 44],」——**是陈述，无证明**。
+      **★ 归属信息（本条 note 的要点）**：Goddard 本人把 (5.5) 归给
+      **[43] R. C. Brower and P. Goddard, *Physical States in the Dual Resonance Model*,
+      Proc. Int. School of Physics "Enrico Fermi" Course LIV (Academic Press, 1973) 98–110** 与
+      **[44] R. C. Brower and P. Goddard, *Collinear Algebra for the Dual Model*, Nucl. Phys. **B40** (1972) 437–444**
+      （两者已登记为 brower-goddard-1973 / brower-goddard-1972，**正文均未获取，内容 L0，不得承载论证**），
+      **不归给 goddard-thorn-1972**——GT 1972 是其 [45]，对应的是**无鬼定理本身**（§6, p.15, (6.4)，无编号）。
+      **偏振正交归一 ε^i·ε^j = δ^{ij} 与 k·ε^i = 0 在 (5.1) 之后的正文里逐字同时给出**
+      （「orthonormal polarization vectors for a photon of momentum k, i.e. ε^i · ε^j = δ^{ij}, k · ε^i = 0」），
+      这正是目标陈述 notes 里说「v4 没写出的隐含前提」，**现已有逐字来源**。
+      号差 (−,+,+,+)，与 conv.metric-mostly-plus 一致，**无需换算**；归一化逐字 k·p = 1。
+summary: |
+  **零模李括号路线：不用两个顶点算子的 OPE、不用围道形变，全程形式级数。**
+  这是对 --via-conformal-weight 的一条独立替代（那条走「O^i_m(z) O^j_n(w) 的 OPE 单极点留数 + 围道形变」，
+  上限是 worldsheet.ope-commutator-dictionary）。论证逐字取自 Gebert–Nicolai (CMP 172 (1995) 571–622) §3.1。
+
+  第 1 步（零模字典）。顶点代数的 commutator formula (2.38)
+  `[ψ_m, φ_n] = Σ_{i≥0} C(m,i)(ψ_i φ)_{m+n−i}`（Jacobi 公理 (2.36) 在 l = 0 的特例）
+  取 m = n = 0：C(0, i) = δ_{i0}，右端只剩一项，得 **(2.62)**
+    [ψ_0, φ_0] = ( [ψ, φ] )_0,    其中 [ψ, φ] := ψ_0 φ 是物理态空间上的李括号。
+  即：**取零模是李代数同态**。这一步把「算子的对易子」化归为「态的李括号」，是本路线的全部技术内容。
+
+  第 2 步（两个横向物理态的李括号 (3.1)）。取 ψ = ξ(−1)e^{mk}、φ = η(−1)e^{nk}（权 1 物理态），G–N 得
+    (3.1)  [ξ(−1)e^{mk}, η(−1)e^{nk}] = ε(mk, nk) (ξ·η) m k(−1) e^{(m+n)k} = m (ξ·η) δ_{m+n,0} k(−1),
+  用到的输入逐字只有三条内积条件 **ξ·k = η·k = k·k = 0**，加上两条结构性事实：
+    · 上闭链 ε 取为**双乘性**，故 ε(mk, nk) = (−1)^{½ m n k²} = 1（k² = 0）；
+    · **k(−1)e^{nk} = (1/n) L_(−1)(e^{nk}) ≡ 0 对 n ≠ 0**（L_(−1) 是顶点代数的平移算子），
+      这就是右端出现 δ_{m+n,0} 的原因——m + n ≠ 0 的项整个消失，
+      **不是**像围道路线那样靠「全导数的围道积分为零」。
+
+  第 3 步（第 1 步作用于第 2 步）。A^ξ_m := (ξ(−1)e^{mk})_0（(3.2)，零模），于是由 (2.62)
+    (3.4)  [A^ξ_m, A^η_n] = m (ξ·η) δ_{m+n,0} (k(−1))_0 = m (ξ·η) δ_{m+n,0} **k(0)**,
+  其中 k(0) = k·α_0 **仍是算子**，G–N 刻意把它保留在右端。
+
+  第 4 步（归一化与偏振，右端化为 m δ^{ij}）。
+    · **k(0)**：在动量 r 的态上 k(0) = k·r；G–N 逐字要求为给定 r 选类光 k = k(r) 使 **k·r = 1**，
+      此时 A^ξ_m「realize **precisely** the algebra of d − 2 transversal oscillators」。
+      按 convention_map，k·r = 1 就是本图的 (★) 2α' k_0·p = 1；由 k_0² = 0，(★) 沿整条动量塔不变
+      （worldsheet.ddf-operators-v5 说明 (b)），故 **k(0) ≡ 1 在整条塔上**，右端才成为纯 c-数。
+    · **ξ·η**：取 §3.2 (p. 599) 的 d − 2 个正交归一 ξ_i，记 A^i_m := A^{ξ_i}_m，则 ξ_i·ξ_j = δ^{ij}
+      （与 goddard-2008 (5.1) 后逐字的 ε^i·ε^j = δ^{ij} 一致）。
+  合起来即目标陈述
+    [A^i_m, A^j_n] = m δ^{ij} δ_{m+n, 0},   i, j = 2..D−1,  m, n ∈ Z \ {0}。
+  【2026-09-11（五）改名换代后】旧目标末句「与 worldsheet.transverse-oscillator-commutators 逐字同型」
+  **不再属于本推导的目标**：它已拆出为 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+  （推导 --via-commutation-relations，physical-argument），相应的依赖边已从本推导撤销。
+  本推导到上式为止，不再断言任何与光锥横向振子 α^i_n 的比较。
+
+  **本路线与围道路线的分工对照**（同一结论，两套完全不同的机制）：
+    · 右端为何无 α'/k_0·p 残余：围道路线靠第 2、3 步的幂次记账（该推导 gaps 第 1 条自陈未与原文核对）；
+      本路线靠 (3.4) 显式保留的 k(0) 与归一化 k·r = 1，**有逐字来源**。
+    · δ_{m+n,0} 从何而来：围道路线靠「m + n ≠ 0 时留数是全导数」；本路线靠 L_(−1)e^{nk} 项在李代数中消失。
+    · 良定义性：围道路线不出现该问题，代数路线由**正规性公理 (2.32)** 保证（G–N §2.1, p. 579）。
+gaps:
+  - |
+    **【已解决，2026-09-11（curator，分支 agent/curator/lattice-va）】**
+    原文：「图中缺『D 个自由玻色子（洛伦兹不定号差、含类光方向）的 Heisenberg 顶点代数
+    ⊗ C[Z k_0]（含双乘性上闭链 ε），动量塔为其模』这张卡……故本推导有效状态为 open。」
+    **该卡已建**：worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    （--via-li-wang-isotropic，rigorous），上游 math.lattice-vertex-algebra（Li–Wang Thm 3.6）。
+    桥接边已改指该卡并撤销 inferred，与
+    worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 是同一次改动。
+    ⚠ **本推导比那条多用的那条结构（上闭链 ε 的双乘性、(3.1) 里 ε(mk,nk) = 1）也已覆盖**：
+    新卡 (1) 论证秩 1 类光格上 ε ≡ 1 满足 Li–Wang (3.6)–(3.8)。
+    **但「此特例下扭群代数退化为普通群代数」仍是本项目推断**（新卡推导的 gaps 第 1 条），
+    该推断即使有误也不改变结论（Li–Wang 只要求**存在**这样的 ε，而 ε ≡ 1 的验证是三行代数）。
+    ⇒ 本推导的有效状态不再被这条边压到 open；**剩下的唯一上限（末句比较）也已在 2026-09-11（五）解除，见下面第 6 条**。
+  - |
+    **(3.1) 的母式 (2.120) 未核实（L0）。** G–N 在 (3.1) 前逐字写「Using (2.120) we can immediately write down
+    the commutator of physical states…」，而 researcher 本轮读的是 pp. 571–572, 579–583, 593–600，
+    **(2.120) 所在页未读**。本推导引用的 (3.1) 本身是逐字转录（L1），但它在 G–N 内部的推导链有一环我们没看过。
+    这不改变「CMP 论文里有完整证明」这一事实（故 status 仍 rigorous），但**可追溯性上留一个洞**：
+    下一轮 researcher 若重开该 PDF，请顺手读 §2.4/§2.5 一带把 (2.120) 逐字补上。
+  - |
+    **【已解决，2026-09-11（同上）】图中没有「顶点代数 Jacobi / Borcherds 恒等式」卡。**
+    **已建** math.vertex-algebra-borcherds-identity（definition，rigorous）与
+    math.vertex-algebra-commutator-formula（proposition，rigorous，--via-jacobi-l-zero），
+    两条 G–N 推导的相应边已一并改挂并撤销 inferred。
+    遗留（登记在新卡内）：(2.30) ⟺ (2.36) 的逐步换算、场版 (2.21) ⟺ 模式版的换算，来源均留白。
+  - |
+    **G–N ↔ 本图的归一化字典是本项目的推断，无逐字来源，且本推导对它敏感。**
+    与对易关系那条推导不同，这里右端是 m δ^{ij}（不是 0），字典写错会直接改变结论：
+    格点向量 ↔ (2α')^{1/2}×动量、k(0) = k·α_0 ↔ 2α' k_0·p、r·k = 1 ↔ (★)、
+    ξ(z) ↔ 归一化后的 ∂X^i(z)、Res_z ↔ ∮dz/2πi。
+    三家来源都在 α' = 1/2 或格点单位下工作，**一般 α' 的形式仍无文献来源**
+    （与 worldsheet.ddf-operators-v5 notes 的自我登记一致）。
+    ⚠ 特别是「本图的 A^i_n = ∮(dz/2πi) ∂X^i e^{i n k_0·X} 与 G–N 的 A^ξ_m 之间没有额外的归一化常数」
+    这一点**是推断而非核实**：若本图的 ∂X^i 归一化与 ξ(z) 相差常数 c，右端会变成 c² m δ^{ij}。
+  - |
+    **ε·p = 0（偏振与态动量正交）：核查结论是「不是本命题的缺口」，但推理是本项目的。**
+    G–N §3.2 (p. 599) 逐字要求 ξ_i「orthogonal to **both r and k**」，比本图的 ε·k_0 = 0 多一条
+    （literature/extractions/gsw-1987-v1.md Q5 未裁决）。核查：
+    (3.1) 的推导逐字只用 **ξ·k = η·k = k·k = 0**，r 不出现；ξ·r = 0 出现在 §3.2 是为**无鬼定理**
+    挑一组张成 span{r,k} 正交补的标架。又 G–N (3.1) 逐字把横向空间写成**商**
+    {ξ : ξ·k = 0, ξ ≡ ξ mod ℝk}（维数 d − 2），而 k(−1)e^{mk} ∝ L_(−1)e^{mk} 的零模为零
+    （Res_z 𝒴(L_(−1)χ, z) = Res_z ∂_z 𝒴(χ, z) = 0），故 **A^{ξ+ck}_m = A^ξ_m（m ≠ 0）**：
+    总可以把代表元换成 ξ' = ξ − ((ξ·r)/(k·r)) k，它满足 ξ'·r = 0，且 ξ'·η' = ξ·η（因 ξ·k = η·k = 0），
+    **δ^{ij} 不受影响**。⇒ ε·p = 0 是代表元的选取，不是额外前提。
+    「WLOG」这句话 G–N 没写，本条推理是本项目的，故登记在 gaps 而不写进 summary。
+  - |
+    **【已解决，2026-09-11（五）（curator，分支 agent/curator/ddf-algebra-split）】**
+    原文：「**第二个上限：目标陈述末句的「与横向振子代数逐字同型」把本推导拉到
+    worldsheet.transverse-oscillator-commutators（physical-argument）之下。**
+    主对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} 本身不需要那张卡。
+    若日后把比较句拆成独立节点（如 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators），
+    本推导即可去掉该边，届时只剩桥接边一个上限。」
+    **拆卡已做**（lead 派发）：目标换代为 worldsheet.ddf-transverse-oscillator-algebra-v2
+    （陈述逐字去掉末句），末句由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+    （--via-commutation-relations，physical-argument）承载，本推导对
+    worldsheet.transverse-oscillator-commutators 的 inferred 边**已撤销**。
+    ⇒ 本推导的 effective 由 physical-argument 升为 **rigorous**（= 自身 status），
+    目标 v2 的 effective 同为 rigorous。**论证一字未改**，变的只是记账。
+    ⚠ 仍然成立的限制：上面第 2、4、5 条（(2.120) 未读、归一化字典是本项目推断、ε·p = 0 的推理是本项目的）
+    以及第 7 条（Lean 未起步）都没有关闭；rigorous 指的是「CMP 论文 §3.1 内有完整的形式级数证明」，
+    不是「本图已逐步复核该证明」。
+  - |
+    **Lean 侧完全未起步，且本路线与围道路线要的 Lean 基建不同。**
+    VertexOperator.lean 文件头 "Mathematical gaps" 第 2 条逐字「**No operator products.** `V(b, z) V(b', w)`
+    and hence `[A^i_m, A^j_n]` are untouched.」——那是**围道路线**需要的算子乘积。
+    本路线需要的是顶点代数公理与零模同态 (2.62)，Mathlib 的 Mathlib/Algebra/Vertex/ 目前只有骨架、
+    Locality 仍在 TODO 段。**本推导不得标 formalized。**
+  - |
+    本推导**不覆盖** (A^i_n)† = A^i_{−n}（图中已另立 worldsheet.ddf-operators-adjoint 一线，由他人维护），
+    也不覆盖 A^i_n 的良定义性（worldsheet.ddf-transversality-gives-local-finiteness；
+    在顶点代数框架里它由正规性公理 (2.32) 直接给出，见 notes）。
+    k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内。
+notes: |
+  【本推导的来历，2026-09-11（四），curator】按 literature/extractions/gsw-1987-v1.md §9(3) 的建议登记。
+  researcher 的核心发现：G–N 对这条对易关系走的**不是**图里 --via-conformal-weight 写的
+  「两个顶点算子 OPE + 围道形变」，而是「物理态的李括号 (3.1) + 零模字典 (2.62)」——
+  **这是第三条独立路线**（第一条 GSW/GT 的围道，第二条 tomassini-2008 Theorem 2.4 的修改版 DDF）。
+  两条推导并存，工具自动取有效状态高者（docs/STATUS_LEVELS.md）。
+
+  **status 定级理由（status = 自身论证的严格程度）**：论证是 CMP 论文 §3.1 内的形式级数推导，
+  每一环都有编号且 (3.1)/(3.2)/(3.4)/(2.62) 已 L1 逐字核实，没有任何解析操作，故 **rigorous**。
+  **有效状态（2026-09-11 更新，curator，分支 agent/curator/lattice-va）**：
+  本节点建立时是 **open**（桥接边缺自由玻色子顶点代数卡）。该卡已建
+  （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower，rigorous），三条边改挂并撤销 inferred，
+  于是 open 这个上限消失。**但目标陈述末句的比较仍把本推导压到 physical-argument**
+  （worldsheet.transverse-oscillator-commutators，见 gaps 第 6 条）——
+  这是本推导现在**唯一**的上限，也是拆卡建议 (1) 要解决的东西。
+  **status 与 effective 分离是本图的设计意图**：自身论证的严格程度从未变过。
+
+  **【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】上一段的末句已过时。**
+  拆卡建议 (1) 已由 lead 派发并落实：本推导的 target 由
+  worldsheet.ddf-transverse-oscillator-algebra（旧卡，已 superseded）改为
+  worldsheet.ddf-transverse-oscillator-algebra-v2（陈述逐字去掉末句比较），文件名一并改名（git mv）；
+  对 worldsheet.transverse-oscillator-commutators 的 inferred 边**已撤销**（它只承载被拆掉的末句）。
+  **⇒ 本推导的 effective 由 physical-argument 升为 rigorous，目标 v2 的 effective 同为 rigorous，
+  best_derivation 是本推导。** 末句比较现由 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+  承载，那张卡的 effective 仍是 physical-argument（本质上限：它断言的就是与光锥横向振子代数的关系）。
+  **论证一字未改**；本推导的 status 自建立以来一直是 rigorous。
+
+  **★ 本推导对回译审计的价值**：目标陈述里那句「注意右端**没有**中心项以外的贡献，
+  也没有 k_0 或 p 的残余依赖：这正是归一化 2α' k_0·p = 1 与类光条件 k_0² = 0 的作用」
+  ——在本推导里有了**确切的对应位置**：G–N (3.4) 右端的算子 k(0) = k·α_0 就是那个「残余依赖」，
+  它只在 k·r = 1（即 (★)）时才等于 1。此前 --via-conformal-weight 的 gaps 第 1 条逐字承认
+  这一记账「未与任何原文核对」，现在核对上了。
+
+  **建议（交 lead / auditor，本节点不动手）**：
+  (1) **【已落实，2026-09-11（五）】** 原文：「目标陈述末句「与 worldsheet.transverse-oscillator-commutators
+      逐字同型」是**第二个命题**，与主对易关系捆在一张卡上，使任何推导都被那张 physical-argument 的卡压住。
+      建议按「一个节点一个命题」拆出 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators。」
+      lead 已派发，拆卡完成（见上面的换代段落与 gaps 第 6 条）。
+  (2) worldsheet.ddf-transversality-gives-local-finiteness 的 notes 里
+      「文献……于是『和是否有限』这个问题根本不出现」一句，对 GSW/GT 成立，
+      **对顶点代数文献不成立**：G–N 摘要逐字「to admit **non-summable operators**」，
+      §3.1 p. 595 讨论级数在 ℱ 上不可代数加和。但**失效机制不同**（G–N 讲的是纵向 log 级数、
+      机制是动量条件 s·k = r·k；该节点讲的是横向 ε·k_0 ≠ 0），**不可互引为来源**。
+      建议由持有该节点的人按 extractions/gsw-1987-v1.md §9(4) 改 notes。本节点不碰它。
+
+  **不碰的东西**：不改 worldsheet.ddf-operators-v5、不改 worldsheet.ddf-operators-adjoint 一线、
+  不改 worldsheet.transverse-oscillator-commutators 及其推导、不碰 graph/milestones/。
+  （2026-09-11（五）换代那一轮由同一个 curator 任务同时改了 --via-conformal-weight
+  ——只改 target、撤销那条同名 inferred 边并记账，论证与 status 未动；
+  以及 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 等三条下游推导的 depends_on 换代。
+  上一轮写「不改 --via-conformal-weight（另一 agent 持有）」是那一轮的范围，不再适用。）
+author: curator
+created: "2026-09-11"

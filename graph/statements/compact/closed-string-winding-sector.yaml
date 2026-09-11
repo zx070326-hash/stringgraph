@@ -1,0 +1,33 @@
+id: compact.closed-string-winding-sector
+kind: definition
+status: rigorous
+title: 闭弦的绕数扇区 X(σ¹ + 2π) = X(σ¹) + 2πRw
+statement: |
+  设紧化坐标 X ≡ X^{25} 满足 X ≅ X + 2πR（conv.compactification-radius）。
+  闭弦的世界面空间坐标是周期的（σ¹ ≅ σ¹ + 2π，即 conv.worldsheet-coordinate-length
+  取 ℓ = 2π）。因为 X 只需在时空的圆上单值，闭弦的场位形不必逐点周期，
+  只需**在时空的等价关系意义下**周期：
+    **X(σ¹ + 2π, σ²) = X(σ¹, σ²) + 2πR w,   w ∈ Z**.
+  整数 w 称为该位形的**绕数**（winding number）：弦绕紧化圆 w 圈。
+  w ≠ 0 的位形与 w = 0 的位形不能连续形变到彼此，故 Hilbert 空间按 w 分解为
+  互不连通的扇区，每个 w 是一个超选量子数。未紧化时只有 w = 0。
+uses: [worldsheet.closed-string-mode-expansion]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.2, eq. (8.2.3)（绕数边界条件），p.236"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E120，证据等级 L1
+      （Schrans §8.11，笔记 p.436–437）。
+      ⚠ **(8.2.3) 的式号只有 Schrans §8.49/§8.73 正文的交叉引用锚定，其目录无独立条目**
+      （抽取记录 §10）。
+tags: [compactification, closed-string, winding, torus, definition]
+notes: |
+  「绕数扇区之间不连通、w 是超选量子数」这句话是本图的表述；抽取记录里没有
+  对应的原文位置，来源只给了边界条件本身。若日后需要，可拆出一条独立命题
+  «紧化闭弦的位形空间的连通分支由 π_1(S^1) = Z 标号» 并另找数学来源。
+
+  绕数与零模的关系（2πRw = 2π(α'/2)^{1/2}(α_0 − ᾱ_0)）不在本定义卡内，
+  它是 compact.left-right-momenta 的推导内容。
+author: curator-polchinski-ch8
+created: "2026-09-11"

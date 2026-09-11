@@ -1,0 +1,120 @@
+id: worldsheet.sphere-conformal-killing-group--via-automorphism-group
+target: worldsheet.sphere-conformal-killing-group
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: math.automorphisms-of-riemann-sphere-are-mobius
+    note: |
+      提供本路线的数学内核：Aut(P¹) ≅ PSL(2,C)（Miličić Thm 1.5.2，rigorous）。
+      它一次性给出目标陈述的 (3)（整体群是 PSL(2,C)，且**不多不少**），
+      并给出李代数的维数（复 3 维 ⇒ 实 6 维 = κ）。
+  - id: worldsheet.ckv-holomorphic-in-conformal-gauge
+    note: |
+      提供桥 (B1) 的前半：共形规范复坐标下，CKV 方程 ⟺ ∂̄δz = 0，
+      即 **CKV = 世界面上处处正则的全纯向量场**。没有这条，Aut(P¹) 与 κ 之间没有通路。
+      ⚠ 该节点只有 physical-argument 级推导（局部改写、无 reviewer 复核），
+      本推导的有效状态因此被压到 physical-argument。
+      literature/extractions/math-sources.md §39.8 把这条桥记为 (B1) 并明写「本轮无来源」。
+  - id: worldsheet.conformal-killing-equation
+    note: 提供 CKV 的定义与方程 (P₁δσ)_ab = 0（Polchinski §5.2, (5.2.7)），即被改写的对象。
+  - id: worldsheet.tree-level-worldsheet-topologies
+    note: |
+      提供「S₂ 作为复流形就是 P¹ = C ∪ {∞}，用 z 与 u = 1/z 两片覆盖」这一识别。
+      没有它，Aut(P¹) 的数学结论接不到世界面上的 S₂。
+      ⚠ 该识别里「S₂ 上的共形结构唯一（单值化）」这一层本图无节点，见 gaps。
+sources:
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.5.2, p.6"
+    note: |
+      **L1 逐字**（math-sources.md §39.7.1）：「The homomorphism γ ⟼ φ_γ of PSL(2,C) into the group
+      of all holomorphic automorphisms Aut(P¹) of the Riemann sphere is an isomorphism.」
+      本推导只**使用**该结论；其承载节点是 math.automorphisms-of-riemann-sphere-are-mobius。
+  - ref: eynard-2018-lectures
+    loc: "Ch. 5, Theorem 1.1, eq. (1-1), p.77"
+    note: |
+      **独立第二来源，L1 逐字**（math-sources.md §39.7(d)）：`ℳ_{0,0} = {(ℂP¹)}`，`Aut = PSL(2,ℂ)`。
+      ⚠ **编号必须写「Ch. 5, Theorem 1.1」**：该讲义每章内部重新计数，只写「Theorem 1.1」会与
+      Ch. 4 的 Theorem 1.1 撞号（sources.bib 的 note 里已钉死这条陷阱）。
+      ⚠ 本条同时是 μ(S₂) = 0 的旁证（`ℳ_{0,0}` 是单点），但**本推导不用它**——
+      目标陈述明写不断言 μ = 0。
+  - ref: polchinski-1998-v1
+    loc: "§6.1, p.168：PSL(2,C) 的定义（(6.1.6) 上方，无式号）与 S₂ 的 CKG"
+    note: |
+      **L1 原书页图**（math-sources.md §39.6(c)）：原书在 p.168 由 αδ − βγ = 1 与整体反号认同
+      定义 PSL(2,C)。本条只用来说明「物理侧要的那个群」与数学侧的 Aut(P¹) 是同一个记号。
+summary: |
+  与 --via-two-patch-regularity 独立的第二条路线：不做 Laurent 展开，直接引数学侧的自同构群分类。
+
+  **(1) 识别曲面。** S₂ 带上共形结构后作为复流形即黎曼球 P¹ = C ∪ {∞}
+  （worldsheet.tree-level-worldsheet-topologies 的两片坐标 z、u = 1/z 正是 P¹ 的标准图册）。
+
+  **(2) 群这一侧（目标 (3)）。** 共形规范下保持共形结构的保定向变换即全纯自同构，
+  故 S₂ 的共形 Killing **群**就是 Aut(P¹)。由 math.automorphisms-of-riemann-sphere-are-mobius
+  （Miličić Thm 1.5.2），Aut(P¹) ≅ PSL(2,C)。
+  ⇒ 目标陈述 (3) 得到，且这次是**双向的**：Möbius 变换不仅都在里面，而且**没有别的**
+  ——这正是 --via-two-patch-regularity 的「指数化」那一步做不到的。
+
+  **(3) 向量场这一侧（目标 (1)(2)）。** 由 worldsheet.ckv-holomorphic-in-conformal-gauge，
+  CKV = P¹ 上处处正则的全纯向量场。这样的向量场 v 在紧流形上其流完备（标准 ODE 事实），
+  且逐时映射 φ_t 全纯、可逆，故 φ_t ∈ Aut(P¹) = PSL(2,C)；
+  t ↦ φ_t 是单参子群，在 t = 0 求导给出 sl(2,C) 的元素。
+  sl(2,C) 的标准基 e、h、f 在 P¹ 上诱导的向量场是 ∂_z、z∂_z、z²∂_z，故
+    δz = a₀ + a₁ z + a₂ z² ,  (a₀, a₁, a₂) ∈ C³ ,
+  即目标 (1)；实维数 dim_R sl(2,C) = 6 = κ(S₂)，即目标 (2)。
+
+  **(4) 交叉检验。** Eynard, Ch. 5, Theorem 1.1 (1-1) 独立给出 `ℳ_{0,0} = {(ℂP¹)}`、`Aut = PSL(2,ℂ)`。
+gaps:
+  - |
+    **核心缺口：第 (3) 步的「向量场 ⇒ 单参子群」方向没有文献来源。**
+    「紧复流形上全局全纯向量场的流完备且逐时全纯，因而 Lie(Aut(X)) = H⁰(X, TX)」
+    是 Bochner–Montgomery 一线的标准定理，**本图与本项目登记的文献里都没有它**
+    （math-sources.md §39.8 把它记作桥 (B1) 的后半，明写「本轮无来源」；
+    Eynard 给的是自同构**群**，不是 CKV 方程的解空间）。
+    ⇒ 本推导对目标 (1)(2) 只做到「标准论证的复述」，**没有关掉**它们。
+    目标 (1)(2) 的真正论证仍在 --via-two-patch-regularity（两片 Laurent 计算）。
+  - |
+    **`status: physical-argument` 的理由（明写，供 reviewer 复核）。**
+    本推导每一步都是标准严格数学（紧流形上向量场的完备性、全纯依赖初值、Miličić Thm 1.5.2），
+    按 docs/STATUS_LEVELS.md 的「初等可复核」例外**有资格升到 rigorous**，条件是两件事同时具备：
+    (a) reviewer 独立复核第 (3) 步并在本文件 notes 写 `reviewer-verified: <agent>, <date>`；
+    (b) 上一条 gap 的 Bochner–Montgomery 型事实取得来源（或被 reviewer 认定为例外可覆盖）。
+    在此之前按「不确定选低一级」取 physical-argument。
+    （`kind` 也随之写 physical-argument：校验器要求 `kind: proof` 必须配 rigorous/formalized。
+    升级时两处一起改。）
+    ⚠ 无论怎样，本推导的**有效**状态还被 worldsheet.ckv-holomorphic-in-conformal-gauge
+    （physical-argument）压着，升级本条 status 不会立刻改变下游读数。
+  - |
+    **「共形 = 全纯」这一步隐含了定向假设。** 第 (2) 步把「共形 Killing 群」等同于 Aut(P¹) 时，
+    用的是「二维保定向共形变换 = 全纯变换」。P¹ 的全体保共形结构（含反定向）变换是 PSL(2,C) ⋊ Z₂，
+    Miličić Thm 1.5.2 与本图的目标陈述都只管全纯那一半。
+    本图没有承载「共形 ⇔ 全纯（保定向）」的节点。
+    ⚠ 这条对不可定向世界面尤其要紧：RP₂ 与 D₂ 的 CKG 不能照搬本路线。
+  - |
+    **「S₂ 上共形结构唯一」（单值化定理）无节点。** 第 (1) 步把拓扑球面识别为 P¹，
+    严格说需要单值化；本图无节点、无来源（同一缺口也出现在
+    worldsheet.positive-euler-number-no-moduli--via-surface-enumeration 的 gaps 第三条）。
+    ⚠ Miličić 讲义里有 **Theorem 1.11.1（单值化）**（math-sources.md §39.7.1 登记了编号但未转录内容），
+    这是**日后补这一格最省事的入口**，本轮未取内容故不建卡。
+  - |
+    **不覆盖 μ = 0。** 目标陈述明写不断言 S₂ 无模；本推导也不断言。
+    Eynard Ch.5 Theorem 1.1 的 `ℳ_{0,0} = {(ℂP¹)}` 虽是旁证，但换算到本图的 μ 还要过桥 (B2)
+    （μ = 2·dim H⁰(K²)，同样无来源）。μ(S₂) = 0 那一格见新卡
+    math.no-holomorphic-quadratic-differentials-on-sphere-and-disk。
+notes: |
+  由 curator-ckg-followups 于 2026-09-11 新建，是 lead 在 surface-class 合并后派的「Miličić 路线」。
+
+  **为什么这条路线值得单列而不是并进 --via-two-patch-regularity**：两条路线的**逻辑方向相反**，
+  强弱互补——
+  - --via-two-patch-regularity：从 CKV 方程出发，用两片正则性**算出**向量场空间（关掉 (1)(2)），
+    但「指数化到整体群 PSL(2,C)」只能断言（(3) 是缺口）。
+  - 本推导：从数学侧的群分类出发，**关掉 (3)**（且是双向的：没有别的自同构），
+    但「群 ⇒ 向量场空间」这一步缺来源（(1)(2) 是缺口）。
+  按项目纪律，两条推导并存、工具取最强者；但要注意**没有任何一条单独关掉整条陈述**，
+  这一点在两边的 gaps 里都写死了。
+
+  **给 reviewer 的具体请求**：若认定第 (3) 步（紧流形上流的完备性 + 全纯性 ⇒ φ_t ∈ Aut）
+  属「有限步初等 + 可复核」，请在本文件写 `reviewer-verified: <agent>, <date>` 并把 status 升到 rigorous；
+  若认为需要 Bochner–Montgomery 的正式来源，请转 researcher 检索
+  （Kobayashi《Transformation Groups in Differential Geometry》Ch. III 是最可能的入口，本项目未核实）。
+author: curator-ckg-followups
+created: "2026-09-11"

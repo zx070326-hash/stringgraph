@@ -18,7 +18,7 @@ statement: |
     即 Ω₄ = Tr F²、Ω₈ = Tr F⁴、Ω₁₂ = Tr F⁶，其中 Tr 是**伴随**表示的迹
     （conv.gauge-trace-normalization；关于原文 (11) 印作小写 tr 的读图存疑见 notes 第 1 条）。
     「十二形式」指 Ω₁₂ 这一层——它是 D = 10 中六边形反常对应的那一层。
-  · 由十二形式回到十维的反常，走 consistency.descent-forms-chern-simons 的下降方程：
+  · 由十二形式回到十维的反常，走 consistency.descent-forms-gs-notation 的下降方程：
     Ω_{12} ⇝ ω⁰_{11} ⇝ ω¹_{10}，反常写成 ∫ω¹_{10}。
 
   **本卡不含**：
@@ -29,8 +29,9 @@ statement: |
   (d) 「Ω_{4n} 用基本迹的表达式」——那是纯代数命题
       math.so-usp-adjoint-fundamental-trace-identities 与 math.e8-adjoint-trace-identities，
       与本卡的物理内容分开记账。
+superseded_by: consistency.anomaly-twelve-form-d10-v2
 uses:
-  - consistency.descent-forms-chern-simons
+  - consistency.descent-forms-gs-notation
 uses_conventions:
   - conv.gauge-trace-normalization
 sources:
@@ -44,10 +45,37 @@ sources:
     loc: "全文（GS ref. [8]，Wess–Zumino 相容条件）"
     note: 本项目未取得全文（L0）。GS 只引不复述。
   - ref: zumino-wu-zee-1984
-    loc: "全文（GS ref. [9]，把反常联系到十二形式的分析）"
-    note: 本项目未取得全文（L0）。这是「反常 ↔ 十二形式」这套字典的**唯一**来源。
+    loc: "摘要级（INSPIRE 逐字摘要，L2）；**正文本项目一字未取到，无任何可引式号**（GS ref. [9]，把反常联系到十二形式的分析）"
+    note: |
+      **L2（原记为 L0，2026-09-11 更正为「摘要已取得、正文未取得」）**。
+      这是「反常 ↔ **十二形式**」这套字典的**唯一**来源，本图对它一字未核实。
+      摘要能佐证的只有更弱的一条：所作构造「automatically satisfies the Wess-Zumino consistency
+      condition」——那条已由 consistency.descent-omega1-is-consistent-anomaly 承载（在同作者同期的
+      zumino-1983-les-houches 上 L1 核实）。**「2n 维反常 ↔ 2n+2 维不变多项式」这条升维字典
+      本身仍无任何已核实来源。**
+      ⚠ **红线**：图里不得出现「ZWZ eq. (X)」。抽取记录 literature/extractions/zumino-wu-zee-1984.md §0.2/§3.1。
+  - ref: zumino-1983-les-houches
+    loc: "(3.1)(3.31)(3.32)（下降链本身）；p.29 逐字「The problem of finding the most general solution of the consistency condition will not be discussed here.」"
+    note: |
+      **L1 全文（46 印刷页逐页读图）**；= green-schwarz-1984 的 ref. [10] 第一项，与 ref. [9] 同作者同期互引。
+      ★ **只承载「下降链」这一半，不承载「十二形式」那一半**：该文**没有升维到 2n+2 的不变多项式**这套写法。
+      ★ 且它**明确不提供唯一性**（上引逐字）⇒ **本卡 statement 里「外线多于六条的反常由六边形图唯一决定」
+      那一句在 Zumino 一侧没有支撑**，见 notes 第 5 条。
 tags: [anomaly, hexagon, twelve-form, d10, supergravity, super-yang-mills, green-schwarz]
 notes: |
+  【0. ★ 本卡已换代（2026-09-11）：拆成三张】
+  本卡是一张 `definition`，却在 statement 里内嵌了**两条命题**：
+  (i) 「外线多于六条的反常由六边形图唯一决定，其形式可由 Wess–Zumino 相容条件定出」；
+  (ii) 「按 Zumino–Wu–Zee 的分析，反常与一个形式上的十二维规范不变十二形式相联系」（升维字典）。
+  按「一个节点一个命题」拆成：
+  · **consistency.anomaly-twelve-form-d10-v2** ← 记号部分（`superseded_by` 指向它）；
+  · **consistency.higher-point-anomalies-fixed-by-hexagon** ← (i)；
+  · **consistency.anomaly-descent-to-twelve-form** ← (ii)。
+  ⇒ 拆分的实际收益：本卡 notes 第 5、6 条记的两条来源缺口（唯一性无支撑、升维字典无来源）
+  原本只是散文，现在成了图里可被 `stringgraph why` 追踪的**瓶颈节点**。
+  按 CLAUDE.md 原则 1，本卡的 `statement` 文本**不动**；依赖本卡的 `depends_on` 已按各自
+  用到的是哪一部分改指新卡。
+
   【1. 原文 (11) 的 tr/Tr】GS 的 (11) 在影印件上印作小写 `Ω_{4n} = tr F^{2n}`，
   但语义上必须是**伴随**迹（否则紧接的 (12a) 就是废话）。本图统一按语义写 **Tr**，
   这一判读登记在 conv.gauge-trace-normalization 的 notes 第 1 条与抽取记录 §3.1。
@@ -61,7 +89,31 @@ notes: |
   **GS 1984 既没有 I₁₂ 也没有 X₈ 这两个记号**，只有 Ω_{4n} 与三段分开的 S₁ + S₂ + S₃。
   本卡的标题保留 GS 记号，是为了让「后世打包写法」与「原文写法」在图里可分辨。
 
+  【5. ★ 「唯一决定」这一句在 Zumino 一侧没有支撑（2026-09-11 新增）】本卡 statement 第一段照抄了
+  GS (11) 上一段的逐字断言「The anomalies corresponding to diagrams with more than six external lines are
+  **uniquely determined** by the hexagon diagrams. Their form can be deduced by implementing the
+  Wess–Zumino consistency conditions [8]」。
+  本轮取得 GS ref. [10] 第一项（zumino-1983-les-houches）全文后可以确认：
+  **Zumino 一侧明确把「相容条件的最一般解」排除在讨论之外**（p.29 逐字）。
+  ⇒ 该唯一性在本图里**没有任何来源承载**；真正的唯一性（相容反常的上同调分类）属
+  manes-stora-zumino-1985 (CMP 102 (1985) 157) 一线，本项目正文一字未取到。
+  这条已写进 consistency.descent-omega1-is-consistent-anomaly--via-brs-descent 与
+  consistency.anomaly-cancellation-*-effective-theory--via-* 的 gaps。
+  **本卡的 statement 文本不改**（项目原则 1）：它照实转录了 GS 的断言，缺口记在这里。
+
   【4. n 的角色】n 只通过规范群维数进入反常多项式，这一点在
   consistency.gravitational-anomaly-polynomial-d10 里才真正用到（那里 n − 496 出现在系数里）。
+
+  【6. ★ 升维字典的来源缺口：两个新的 L1 来源同样不证（2026-09-11 补记）】
+  上面 sources 里 zumino-wu-zee-1984 那条已记：「2n 维反常 ↔ 2n+2 维不变多项式」这条**升维字典本身
+  仍无任何已核实来源**。本轮两条新读到的 L1 文献**不改变这一点，反而加强它**：
+  · **adams-dewolfe-taylor-2010**（arXiv:1006.1352v2 第二节）：直接写下十二形式 Î₁₂ 与下降关系
+    Î₁₂ = dÎ₁₁、δÎ₁₁ = dÎ₁₀、δ log Z ~ ∫Î₁₀（其 (5)(6)），**不加论证、不给这条字典的引用**；
+  · **polchinski-1998-v2 §12.2**：同样用十二形式 + 下降方程，且**明说本书不做这个计算**
+    （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md **E6** 逐字
+     「we will not repeat it here but just quote the result」）。
+  ⇒ 至此，本图读过的**四条** L1 来源（GS 1984、ADT 2010、Polchinski v2 ch.12，以及只到 L2 的 ZWZ）
+  **全部把这条字典当作已知**。任何以本卡为依赖的推导都应把这一条写进 gaps。
+  ⚠ 本卡的 status（physical-argument）与 statement **不因此改动**。
 author: curator
 created: "2026-09-11"

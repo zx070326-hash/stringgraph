@@ -1,0 +1,69 @@
+id: math.mixed-anomaly-trace-conditions-n32--via-lean
+target: math.mixed-anomaly-trace-conditions-n32
+kind: proof
+status: formalized
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    inferred: false
+    note: |
+      只为陈述第 (2) 部分提供记号（把 l = −1 读成 so(N)、l = +1 读成 usp(N)，
+      以及 N、l 出现在 (12) 里这件事）。**第 (1) 部分是纯 ℤ 上的算术，不依赖任何图内节点**，
+      Lean 侧也确实只对整数 N、l 陈述。
+      沿用 --via-integer-linear-solve 中 reviewer-gs1984 2026-09-11 的裁定：
+      边本身在原文 "in eq. (12)" 处可查，故 inferred: false；USp 归属的缺口留在 gaps。
+      ⇒ 本推导的**有效**状态被这条边压到 physical-argument，own status 才是 formalized。
+  - id: conv.gauge-trace-normalization
+    note: N 与 l 的含义（基本表示维数、so/usp 的符号）由该约定与迹恒等式节点共同固定。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/GreenSchwarzAlgebra.lean :: StringFormal.Math.{mixed_anomaly_trace_conditions_n32, mixed_anomaly_no_solution_l_one}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，两条 `omega` 一行的声明，无 sorry。
+      与目标陈述的逐条对应：
+        · (1) 与 (2) 的 SO 支：
+          `mixed_anomaly_trace_conditions_n32 (N l : ℤ) (h₁ : N + 8 * l = 24)
+             (h₂ : N + 2 * l = 30) : N = 32 ∧ l = -1`
+          —— 结论即「解唯一且等于 (32, −1)」；`formal.lean_decl` 取这条。
+        · (2) 的 USp 支（l = +1）：
+          `mixed_anomaly_no_solution_l_one : ¬ ∃ N : ℤ, N + 8 = 24 ∧ N + 2 = 30`
+          —— 即「两条件互相矛盾，无解」。
+      formal/TODO.md「Lean 岛 2」记 `gs-trace-conditions`（A2）「无 sorry，公理只有标准三条」。
+  - ref: green-schwarz-1984
+    loc: "PLB p.120（重印 611）：「The cancellation requires that `N + 8l = 24` and `N + 2l = 30` in eq. (12).」"
+    note: |
+      被机检的那两条方程的文献出处。GS 给出方程后直接跳到「two independent confirmations
+      of … SO(32)」，**不写解方程这一步**（抽取记录 E15）。
+summary: |
+  两条 `omega`，全部在 formal/StringFormal/Math/GreenSchwarzAlgebra.lean 内完成，只 import Mathlib。
+
+  · **(1)**：`N + 8l = 24 ∧ N + 2l = 30 → N = 32 ∧ l = −1`。内核走的是线性整数算术
+    （纸上版本：两式相减得 6l = −6，回代得 N = 32）。结论本身就是存在性与唯一性。
+  · **(2) USp 支**：l = +1 时两条件成为 `N + 8 = 24` 与 `N + 2 = 30`，即 N = 16 与 N = 28，
+    矛盾；Lean 里写成 `¬ ∃ N, …`。
+
+  与 `--via-integer-linear-solve` 的分工：那条是纸上论证（reviewer 已复核，rigorous），
+  本条把同样的算术交给内核。两条 depends_on 相同，**有效状态也相同**。
+gaps:
+  - |
+    **(2) SO 支的「各自单独都给出 N = 32」不在 Lean 内**：
+    `mixed_anomaly_trace_conditions_n32` 同时使用两条假设，没有「只用 N − 8 = 24」或
+    「只用 N − 2 = 30」的单条件版本。而 GS 那句 "two independent confirmations" 的算术内容
+    恰恰是**每条单独就够**。补上只需两行 `omega`，本轮 Lean 侧没有做。
+  - |
+    **「l = −1 ⇔ so(N)、l = +1 ⇔ usp(N)」这条字典不在 Lean 内**，由
+    math.so-usp-adjoint-fundamental-trace-identities（physical-argument）承载；
+    它是本推导有效状态的瓶颈。
+  - |
+    **「这两条方程为什么是混合反常抵消的条件」完全不在本推导内**（目标卡自己也这么写）。
+    GS 逐字把相对归一化外包给 alvarez-gaume-witten-1984 eq. (63)，本项目未取得该文。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string 跑
+  `uv run stringgraph check-axioms --decl StringFormal.Math.mixed_anomaly_trace_conditions_n32
+  --decl StringFormal.Math.mixed_anomaly_no_solution_l_one`，两条均 ok；
+  前者 `propext Classical.choice Quot.sound`，后者只用 `propext Quot.sound`。
+  本分支未改动 formal/ 下任何文件。
+author: curator
+created: "2026-09-11"

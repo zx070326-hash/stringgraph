@@ -3,8 +3,13 @@ target: worldsheet.moduli-integration-parameter-count
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.riemann-roch-kappa-minus-mu
-    note: 提供 κ − μ = 3χ。
+  - id: worldsheet.riemann-roch-kappa-minus-mu-v2
+    note: |
+      提供 κ − μ = 3χ。
+      **2026-09-11 改指 v2（curator-riemann-roch）**：原边指 v1，v1 已 superseded_by v2。
+      v2 与 v1 的唯一差别是把陈述从「可定向或不可定向」收窄到**可定向**——
+      而本节点本来就限定「闭、**可定向**、亏格 g」（见本推导 gaps 第 3 条），
+      故收窄不影响本条，反而使依赖范围与本节点的限定**恰好吻合**。
   - id: worldsheet.worldsheet-euler-number
     convention_map: |
       跨 family `worldsheet-signature`：worldsheet-euler-number 写在洛伦兹世界面
@@ -41,8 +46,13 @@ gaps:
     **换算式本身是本图的产物，不是文献陈述**（抽取记录 Q12 明确标注）。本条边因此
     在依赖上标 inferred，且本推导的状态不高于它所组合的两个输入。
   - |
-    **上游 worldsheet.riemann-roch-kappa-minus-mu 只到 physical-argument**
+    **上游 worldsheet.riemann-roch-kappa-minus-mu-v2 只到 physical-argument**
     （原书用鬼数反常导出，比例常数用球面标定），故本条不可能更高。
+    ⚠ **2026-09-11 更新**：v2 另有一条数学路线 `--via-riemann-roch`（Riemann–Roch，
+    常数是算出来的、不靠标定），但它要跨两座「物理量 ↔ 上同调维数」的桥
+    （worldsheet.ckv-holomorphic-in-conformal-gauge、
+    worldsheet.moduli-holomorphic-quadratic-differentials），两座桥当前都只到
+    physical-argument，故 v2 的有效状态仍是 physical-argument，本条的天花板未变。
   - |
     **限定条件「闭、可定向、无边」是本卡自己加的**：χ = 2 − 2g 只对这类曲面成立。
     带边或不可定向情形（圆盘、Klein 瓶、RP₂）需要 χ = 2 − 2g − b 或交叉帽计数，

@@ -1,0 +1,105 @@
+id: consistency.d10-anomaly-conditions-completeness-claim
+kind: proposition
+title: 完备性主张：除 SO(32)、E₈ × E₈、E₈ × U(1)²⁴⁸、U(1)⁴⁹⁶ 外没有别的 496 维规范群满足反常条件（文献断言，无已核实证明）
+statement: |
+  沿用 consistency.d10-four-groups-satisfy-anomaly-conditions 的两条条件：
+
+    (i)  Tr F⁶ = (1/48) · Tr F⁴ · Tr F² − (Tr F²)³/14400   （伴随迹）
+    (ii) n := dim 𝔤 = 496
+
+  **命题（文献断言，本图记为猜想）**：满足 (i)(ii) 的十维 N = 1 规范代数**只有**那四个，
+  即不存在满足 (i)(ii) 的第五个 496 维李代数。
+
+  **本卡的实际认识论内容**（这一段是陈述的一部分，不是注释）：
+  本图**不**把上面这句当作已确立的定理，而是把它当作一条**在可读文献中被反复陈述、但无已核实证明、
+  且各家覆盖范围互相冲突**的主张。四家表述如下：
+
+  · **gsw-1987-v2 §13.5.3**（pp. 353–358，标题「Allowed gauge groups for N = 1 superstring theories」）：
+    据两条独立二手证据，四解表的**原始陈述**在这一节。**该节正文本项目未取得（L0）**，
+    因此「GSW 到底断言了多强的话」未知；两位转述者的读法明显不同。
+  · **bilal-2008 §12.4.2**（pp. 102–103，L1）：列四个解并写
+    「One can actually scan all 496-dimensional groups and show that there are no other possibilities」
+    ——**无证明、无引用**。
+  · **antonelli-2015**（L1）：§1.1 逐字承认在该文之前
+    「Hints for this statement can be traced back in the literature, mostly following the original statement
+    found in chapter 13 of [3], **but no proof has explicitly been carried out**」；
+    该文自称补上（摘要「We prove…」，p.33「are the only groups where the anomaly is cancelled」），
+    但**是单作者预印本，本项目未核实到期刊发表记录，也未复核其证明**。
+  · **polchinski-1998-v2 §12.2 p. 101 脚注 1**（L1）：只说这两个阿贝尔群「also **hold**」（指两条 properties），
+    **全书没有任何唯一性主张**——即最可靠的一手教科书来源在这一点上**保持沉默**。
+  另有一条**冲突**表述：**schwarz-2012-history p.10**（L1，作者本人回忆）说 E₈ × E₈ 是
+  「a second (and **the only other**) gauge group」，与四解表不相容（最可能的调和是他只算非阿贝尔/半单解，
+  但他没这么限定）。**本图不裁决。**
+
+  **本节点不断言**：
+  (a) ★★ 这四个群「反常抵消」或「是一致理论」。两个阿贝尔解的 GS 抵消项写不下来
+      （consistency.abelian-factorization-is-not-cancellation，ADT 2010，L1）。
+  (b) 496 维李代数的完整分类。antonelli-2015 §2.1 逐字：「the set of Lie groups with 496 dimensions
+      contains **many more** groups.」
+  (c) 「这四个满足条件」——那是 consistency.d10-four-groups-satisfy-anomaly-conditions（可机检，本卡不重复）。
+  (d) 条件 (i)(ii) 之外的反常条件对候选集的进一步限制。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: bilal-2008
+    loc: "§12.4.2, pp. 102–103：四解列表 +「One can actually scan all 496-dimensional groups and show that there are no other possibilities」"
+    note: |
+      L1（researcher 2026-09-11 读 §12 全节 pp. 96–103）。
+      **本项目可读来源中「没有别的」这一断言的唯一正面表述，且它本身只是一句「可以扫描」，无证明无引用。**
+  - ref: antonelli-2015
+    loc: "§1.1, p.3（「no proof has explicitly been carried out」+ 出处指认）；§2.1, p.7（「It is often said that four groups cancel the anomaly」+ 496 维群还有很多）；摘要与 p.33（自称已证）"
+    note: |
+      L1。**唯一自称给出证明的来源**，但是单作者预印本，本项目未核实发表记录、未复核证明
+      （只读了 pp. 1–8 与 pp. 33–36）。且该文对「anomaly cancelled」用的是**因子化**义，
+      与 adams-dewolfe-taylor-2010 的「抵消」不是同一件事（见 bib note 的三条使用限制）。
+  - ref: gsw-1987-v2
+    loc: "§13.5.3「Allowed gauge groups for N = 1 superstring theories」，pp. 353–358"
+    note: |
+      ★★ **内容 L0：正文未取到**（位置是目录级 L1，抽取记录 literature/extractions/gsw-1987-v2.md E12）。
+      取不到的原因：Cambridge Core 章级 PDF 12 MB，超工具 10 MB 上限，需人类在浏览器点一次
+      （URL 见该记录 §0.4）。
+      两条独立二手证据把四解表的出处指向这一节（antonelli-2015 §1.1；adams-dewolfe-taylor-2010 第一节），
+      **但两者对 GSW 说了多强的话理解不一致**。
+      ⚠ **红线**：本图任何节点不得声称 GSW 第 13 章的式号或措辞（同记录 §3.1/§5.5）。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 101 与脚注 1"
+    note: |
+      L1 原书。**列在这里是作为「最可靠的一手来源在完备性上保持沉默」的证据**：
+      Polchinski 只说四个群的两条 properties 「hold」，**没有** "the only" / "no other" / "classification"
+      （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E14 的动词裁定与 §5.5 红线）。
+  - ref: schwarz-2012-history
+    loc: "p.10：「E₈ × E₈ is a second (and the only other) gauge group for which the anomalies could cancel」"
+    note: L1。**与四解表冲突的表述**，登记为矛盾，本图不裁决。
+tags: [anomaly, classification, d10, so32, e8, abelian, unresolved-conflict, open-problem]
+notes: |
+  【1. ★ 为什么 status 是 conjecture 而不是 physical-argument】
+  按 docs/STATUS_LEVELS.md 的「断言 + 骨架」裁决（lead 2026-09-11），来源给骨架而关键步骤只有断言的，
+  标 physical-argument。**本卡不适用那一档**，理由是该裁决同时写明：
+  `conjecture` 保留给「来源本身把它当猜想提出、或**结论真伪在文献中未定**的命题」。这里两条都命中：
+  · antonelli-2015 逐字说这在该文之前是**未证**的（「no proof has explicitly been carried out」），
+    即该文献线自己把它当作待证命题；
+  · **各家覆盖范围互相冲突**（Schwarz「只有另一个」vs 四解表），且最可靠的一手来源（Polchinski）
+    在这一点上不表态。⇒ 命题的**真值范围**在文献中未定，不只是「论证不完整」。
+  ⚠ 若日后取得 GSW §13.5.3 正文并确认其中有分类论证，或复核了 antonelli-2015 的证明，
+  应新建推导并相应上调；**不得**在没有新推导的情况下手改 status（docs/STATUS_LEVELS.md）。
+
+  【2. ★★ 措辞红线（lead 2026-09-11 依 polchinski-1998-v2-ch12 抽取）】
+  图中**不得**在别处写「（十维 N=1 反常自由/因子化的规范群）恰有四个」。要引用完备性，
+  必须引用本卡并连同其 conjecture 状态一起引。可以无条件引用的是
+  consistency.d10-four-groups-satisfy-anomaly-conditions（「这四个满足条件」）。
+
+  【3. ★★ 与「抵消」的红线（docs/ROADMAP.md 2026-09-11）】
+  即使完备性成立，也只能说「只有这四个使十二形式因子化」，**不能说「只有这四个反常抵消」**：
+  两个阿贝尔解连 GS 抵消项都写不下来（consistency.abelian-factorization-is-not-cancellation）。
+
+  【4. 本卡取代的旧卡】本分支早些时候（2026-09-11）建过
+  consistency.twelve-form-factorization-solutions，把「四个群满足条件」与「恰是四个」写在同一条陈述里。
+  经 lead 依 polchinski-1998-v2-ch12 抽取裁决后拆成本卡 +
+  consistency.d10-four-groups-satisfy-anomaly-conditions，旧卡已标 superseded_by 指向本卡。
+
+  【5. 闭合路径】① 人类在浏览器取 GSW §13.5.3 正文（6 页）；
+  ② 复核 antonelli-2015 §2–§3 的分类论证（36 页，本项目只读了 pp. 1–8、33–36）；
+  ③ 若两者都指向「只是断言」，则本卡可长期停在 conjecture，并把 Schwarz 的冲突表述按
+  「他只算非阿贝尔半单解」裁决。
+author: curator
+created: "2026-09-11"

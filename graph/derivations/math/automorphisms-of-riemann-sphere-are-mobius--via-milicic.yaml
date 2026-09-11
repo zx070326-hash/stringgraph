@@ -1,0 +1,54 @@
+id: math.automorphisms-of-riemann-sphere-are-mobius--via-milicic
+target: math.automorphisms-of-riemann-sphere-are-mobius
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: milicic-riemann-surfaces
+    loc: "Theorem 1.5.2, p.6（证明在同节 §1.5，前置引理 §1.4）"
+    note: |
+      **L1 逐字**（math-sources.md §39.7.1）。本推导**不是** curator 自撰的论证，
+      而是把该讲义中已完成的证明登记进图；summary 只复述其骨架，供 reviewer 定位。
+summary: |
+  来源（Miličić, *Notes on Riemann Surfaces*, Theorem 1.5.2）给出的是完整证明，骨架如下。
+
+  **(1) 良定义与同态。** 对 γ ∈ SL(2,C)，φ_γ(z) = (az+b)/(cz+d) 在 P¹ 上处处全纯
+  （在 z = −d/c 与 z = ∞ 处用局部坐标 u = 1/z 检验），且 φ_γ ∘ φ_{γ'} = φ_{γγ'}，
+  故 γ ↦ φ_γ 是 SL(2,C) → Aut(P¹) 的群同态，φ_{γ^{-1}} 给出逆映射。
+
+  **(2) 核。** φ_γ = id 迫使 (az+b) = z(cz+d) 对一切 z 成立，即 c = b = 0、a = d，
+  配 ad − bc = 1 得 a = d = ±1，故核 = {±I}，同态降到 PSL(2,C) 上是单射。
+
+  **(3) 满射（实质内容）。** 设 f ∈ Aut(P¹)。用一个 Möbius 变换把 f^{-1}(∞) 移到 ∞，
+  可设 f(∞) = ∞；于是 f 限制成 C → C 的双全纯自映射。C 的全纯自同构是仿射映射
+  z ↦ az + b（该讲义的 Lemma 1.6.1 / Theorem 1.6.2 一线；本质上是：在 ∞ 处的奇点因单射性
+  只能是极点，故 f 是多项式，单射迫使次数为 1），仿射映射本身即 Möbius 变换，
+  故 f 是两个 Möbius 变换的复合，仍是 Möbius 变换。
+gaps:
+  - |
+    **本项目逐字读到的是定理陈述，不是证明的每一步。** researcher 的记录（math-sources.md §39.7.1）
+    转录了 Theorem 1.5.2 与 Theorem 1.7.3 的原文，并登记了同文可用的编号
+    （1.6.1 Lemma「Aut(C) 是仿射」、1.6.2 Theorem、1.8.1、1.11.1 等），
+    但**没有逐条转录证明步骤**。上面 summary 第 (3) 步里「C 的全纯自同构是仿射」这一环
+    在该讲义中的**准确编号与它是否被用在 1.5.2 的证明里，本项目未核实**
+    （1.6.x 编号在 1.5.2 **之后**，所以 1.5.2 的原证多半走的是别的顺序）。
+    ⇒ **图里不得把 summary 的第 (3) 步当成「Miličić 的证明就是这样写的」**；
+    它是标准教科书论证的复述，来源承载的是**结论**。
+  - |
+    **`status: rigorous` 的依据是「有数学文献来源」这一主条款，不是「初等可复核」例外**：
+    Miličić 是数学系研究生课程讲义（University of Utah, Math 6220），
+    该结论是复分析/黎曼面理论的经典结果。⚠ 但讲义**未印年份、未经同行评议**，
+    若 reviewer 认为讲义不足以支撑 rigorous，正确处置是给本卡再挂一条走
+    Ahlfors / Forster / Farkas–Kra 的推导，而**不是**下调本条。
+  - |
+    **不覆盖反全纯自同构**：目标陈述只谈全纯自同构。P¹ 的全体保共形结构（含反定向）变换
+    是 PSL(2,C) ⋊ Z₂，本推导与来源都没有陈述它。
+    下游若要用「共形 = 全纯」（如把物理侧的共形 Killing 群等同于 Aut(P¹)），
+    必须另外承载定向假设，见 worldsheet.sphere-conformal-killing-group--via-automorphism-group。
+notes: |
+  由 curator-ckg-followups 于 2026-09-11 建立。
+  depends_on 为空是有意的：这是一条**纯外部来源**的推导（结论由来源本身证完），
+  本图内没有它所依赖的更基础节点。validate 会对此报 warning（「derivation has no dependencies」），
+  与 math.pbw-theorem--via-humphreys、math.laplace-fundamental-solution-2d--via-lieb-loss 同型。
+author: curator-ckg-followups
+created: "2026-09-11"

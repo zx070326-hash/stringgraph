@@ -1,0 +1,148 @@
+id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+kind: proposition
+title: D 个自由玻色子（洛伦兹不定 η）的 Heisenberg 顶点代数与类光 k_0 的格 Z k_0：V_(𝔥, Z k_0) 是顶点代数，动量塔 ⊕_{j ∈ Z} F(p + j k_0) 是它的（不可约）模
+statement: |
+  **设定。** 固定 D ∈ N、α'（conv.alpha-prime-regge）与时空度规 η = diag(−1, +1, …, +1)
+  （conv.metric-mostly-plus）。
+
+  取 𝔥 := ℂ^D，带由 η 复线性延拓而得的对称双线性型
+    ⟨u, v⟩ := η_{μν} u^μ v^ν,
+  它在 ℂ 上**非退化**——这是本命题用到的关于 η 的**唯一**性质（见边界 (N1)）。
+
+  **α'-无量纲化字典**（本卡内部的记号约定，用于把物理动量装进 𝔥）：对 q ∈ R^D ⊂ 𝔥 记
+    q̃ := (2α')^{1/2} q,    于是 ⟨q̃_1, q̃_2⟩ = 2α' (q_1 · q_2)。
+  （这与 worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 里
+  worldsheet.ddf-operators-v5 那条边的 convention_map 是同一个字典：格点向量 ↔ (2α')^{1/2} × 动量。）
+
+  设 k_0 ∈ R^D 非零且**类光**：k_0² = η_{μν}k_0^μ k_0^ν = 0。令
+    k := k̃_0 = (2α')^{1/2} k_0 ∈ 𝔥,   **L := Z k ⊂ 𝔥**（秩 1 加法子群）。
+
+  记 ĥ 为 𝔥 上的 Heisenberg 李代数、M(1) 为其 level-1 Fock 空间
+  （等价地：worldsheet.bosonic-fock-space 的 F(D, R = ℂ)，振子满足
+  [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，零模不在其中）。
+
+  **(1) 格的假设成立，且 L 完全退化（迷向）。**
+  对 α = j k、β = j' k ∈ L 有
+    ⟨α, β⟩ = j j' ⟨k, k⟩ = j j' · 2α' k_0² = 0,
+  故 (i) (3.5) ⟨α,α⟩ = 0 ∈ 2Z 成立；(ii) 更强地 ⟨·,·⟩|_L ≡ 0，
+  这正是 Li–Wang §4 标题里的条件「⟨·,·⟩|_L = 0」。
+  于是常值函数 ε ≡ 1 满足 (3.6)–(3.8)（(3.8) 的右端 (−1)^{⟨α,β⟩} = (−1)^0 = 1），
+  可取 ℂ_ε[L] = ℂ[L] = ℂ[Z k]。
+
+  **(2) 顶点代数。** 按 math.lattice-vertex-algebra 应用于这一组 (𝔥, L, ε ≡ 1)：
+    V := V_(𝔥, Z k) = ℂ[Z k] ⊗ M(1)
+  是一个**顶点代数**（**不是**顶点算子代数，见 (N3)）。
+
+  **(3) 动量塔是它的不可约模。**
+  设 p ∈ R^D 满足**整性条件**
+    (I)  ⟨k, p̃⟩ = 2α' (k_0 · p) ∈ Z
+  （worldsheet.ddf-operators-v5 的说明 (c) 逐字给出同一条件 2α' k_0·p ∈ Z，
+  并把该整数取为 1，即归一化 (★) 2α' k_0·p = 1；本命题只要求 (I)，(★) 是其特例）。
+  令 U := M(1, p̃) 为 level-1 的 ĥ-模，其上 h(0) 作用为标量 ⟨h, p̃⟩（h ∈ 𝔥）、
+  h(n)（n ≥ 1）为通常的湮灭算子。则
+    (i)  U 满足 Li–Wang 的 **Condition C_L**（Definition 3.5）：U 是 level-1 restricted 模；
+         对每个 α = j k ∈ L，α(0) 是标量 j⟨k, p̃⟩ ∈ Z（半单、整本征值）；α(n)（n ≥ 1）局部幂零；
+    (ii) 由 Theorem 3.6 的后半句，
+           V_(𝔥,L)(U) = ℂ[L] ⊗ U = ⊕_{j ∈ Z} ( e^{j k} ⊗ M(1, p̃) )
+         是 **V-模**；由 Proposition 3.9（U 不可约）与 Theorem 3.6 末句，该 V-模**不可约**；
+    (iii) 逐层识别：e^{j k} ⊗ M(1, p̃) ↔ F(p + j k_0)，其中 F(q) 与零模
+           α^μ_0 = (2α')^{1/2} q^μ · id 的装法按 worldsheet.momentum-tower-fock-space。
+         于是 V_(𝔥,L)(U) 与该卡的动量塔
+           T(p; k_0) = ⊕_{j ∈ Z} F(p + j k_0)
+         是**同一个向量空间上的同一组逐层算子**，且移位 j ↦ j + n 由 𝒴(e^{n k}, z) 的零模给出
+         （即该卡 (1) 的 S_n = e^{i n k_0·x}）。
+    (iv) 反向的分类与重数（Li–Wang (3.17)、Theorem 3.10、Proposition 3.11）：
+           L° = { λ ∈ 𝔥 : ⟨α, λ⟩ ∈ Z ∀ α ∈ L } = { λ ∈ 𝔥 : ⟨k, λ⟩ ∈ Z },
+         使 𝔲(0) 半单作用的不可约 V-模全部同构于某个 V_(𝔥,L)(λ, U_1)（λ ∈ L°），
+         且 V_(𝔥,L)(λ_1, U_1) ≅ V_(𝔥,L)(λ_2, U_2) ⟺ λ_1 + L = λ_2 + L 且 U_1 ≅ U_2。
+         **特别地：L° 对 λ 只要求 ⟨k, λ⟩ ∈ Z，不要求 λ 落在格 L 里**，
+         所以 p 的其余分量（横向与纵向）可以**连续**取值。
+
+  **本命题不断言的六条边界：**
+  (N1) **不断言任何关于号差的事。** 在 ℂ 上非退化对称双线性型的号差不是不变量，
+       洛伦兹号差在顶点代数结构层面根本不出现（math.lattice-vertex-algebra 的「不断言」第 4 条）。
+       本卡声明 conv.metric-mostly-plus **只为**固定两件事的写法：k_0² = 0 与 k_0·p 的符号；
+       在 conv.metric-mostly-minus 下 (I) 与 (★) 的符号要翻转。η 的不定性本身**不是**本命题的假设
+       （任何非退化 η 加任何非零迷向 k_0 都一样成立）。
+  (N2) **不断言塔上的双线性型、伴随、正定性或鬼态。** 那些由
+       worldsheet.momentum-tower-fock-space (2)(4) 与 worldsheet.fock-indefinite-form 承载，
+       而 Li–Wang 对任何型不置一词。
+       ⚠ **未解决问题 Q36**：「带不定 Hermitian 内积的顶点代数」在 2026-09-11 的文献检索里
+       **没有任何带编号定理**（literature/extractions/math-sources.md §38.5、Q36）。
+       **无鬼定理的真瓶颈在那一层，刻意不在本卡内。**
+  (N3) **不是顶点算子代数。**
+       (a)（有来源）Gebert–Nicolai 刊 p. 583：VOA 需要格**正定**。
+       (b)（本项目观察，登记在推导 gaps）此处 L_0 在 e^{jk} 上的本征值 = ⟨jk, jk⟩/2 = 0，
+           谱确实下有界，但每个 L_0 本征空间含全部 j ∈ Z，故**无限维**，
+           违反 VOA 的第二条附加条件（G–N 刊 p. 579）。
+  (N4) **不断言共形向量 ω、中心荷 c = D，或 Virasoro 生成元 L_n = ω_{n+1} 的存在。**
+       本图的 L_m 由 worldsheet.virasoro-generators-free-boson（Sugawara 型）承载；
+       「那两族算子是同一族」目前仍是一条 inferred 边（见
+       worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary）。
+  (N5) **不建立不同塔之间的关系。** p 固定，塔是可数离散的代数直和；
+       与 worldsheet.momentum-tower-fock-space 的边界 (a) 同一条。
+  (N6) **不断言顶点算子 𝒴(e^{j k}, z) 与物理写法 :e^{i j k_0·X(z)}: c_{jk} 的逐字对应，
+       也不断言 DDF 算子的任何性质。** 前者的字典在
+       worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary 的 convention_map 里
+       （已登记为本项目推断），后者是 worldsheet.ddf-operators-v5 及其下游。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: li-wang-2008
+    loc: "Theorem 3.6, p. 13（模结构那一半）；Definition 3.5（Condition C_L）, p. 13；Proposition 3.9, p. 16–17；(3.17)（L° 的定义）, p. 16；Theorem 3.10, p. 17；Proposition 3.11, p. 19；**§4 标题**「A characterization of vertex algebras V_{(𝔥,L)} with ⟨·,·⟩|_L = 0」, p. 20（arXiv:0802.0173v1）"
+    note: |
+      **L1（researcher 2026-09-11 读 arxiv.org/pdf/0802.0173，PDF 页 = 文章页；
+      逐字文本见 literature/extractions/math-sources.md §36.3(b)(c)(d)）。**
+      §4 的设定逐字：「Let 𝔥 be a finite-dimensional vector space equipped with a **nondegenerate
+      symmetric bilinear form** ⟨·,·⟩ and let L ⊂ 𝔥 a free abelian group with **⟨α,β⟩ = 0 for α, β ∈ L**」
+      ——取 L = Z k、k 类光即**逐字命中**本卡 (1)(ii)。
+      Theorem 3.6 后半逐字：「(V_{(𝔥,L)}(U), Y_W) **carries the structure of a V_{(𝔥,L)}-module**.
+      Furthermore, if U is irreducible, so is V_{(𝔥,L)}(U).」
+      (3.17) 逐字：`L° = { λ ∈ 𝔥 | ⟨α,λ⟩ ∈ Z for all α ∈ L }`。
+  - ref: gebert-nicolai-1995
+    loc: "§2.2, 刊 p. 583（非退化偶 ⇒ vertex algebra；再正定 ⇒ vertex operator algebra）；刊 p. 579（VOA 的两条附加条件：L_0 谱下有界、本征空间有限维）；刊 p. 584–586, eq. (2.68) `[α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}`、(2.74)（d 重 Heisenberg 代数）、**(2.90) `ℱ := S(ĥ^−) ⊗ R{Λ}`**；刊 p. 585（必须用扭群代数 R{Λ}，逐字）"
+    note: |
+      **L1（researcher 2026-09-11 逐页读期刊排版 PDF，pure.mpg.de/rest/items/item_153125_1/component/file_153124/content，
+      PDF 页 = 刊页 − 570；math-sources.md §36.5）。**
+      本条是**唯一把不定 η 写成实矩阵**的来源（G–N 在 Λ_R 上工作），故本卡的物理侧设定（(2.68) 的振子代数、
+      (2.90) 的 Fock 空间形状）与它逐字对应；承载边界 (N3)(a) 与推导 gaps 第 1 条（扭群代数）。
+  - ref: borcherds-1986
+    loc: "Section 5 'The Virasoro Algebra'（**奇异（退化）格**的情形：逐字「if R is a (possibly singular) lattice contained in a nonsingular lattice S … the operator L_i can be defined on the vertex algebra V of R even when R is singular」，**但只对 i ≥ −1**）；Section 5 末（II_{17,1} 洛伦兹格的例子与「Frenkel used the no-ghost theorem …」）"
+    note: |
+      **佐证，不承载论证。L1（researcher 2026-09-11 读 math.berkeley.edu/~reb/papers/va/va.pdf；
+      math-sources.md §36.2(c)(d)）。** 用途有二：
+      (i) 独立确认「格含类光方向（= 奇异/退化）时顶点代数结构照样存在」；
+      (ii) Borcherds 本人把「26 维洛伦兹格 + 无鬼定理」写在纸面上，是本轮找到的唯一一处把本卡与
+      无鬼定理直接连起来的原始文献。
+      ⚠ **原文无编号定理、无编号公式，loc 只写节号**（重排本页码与 PNAS 3068–3071 不对应，Q33）。
+      ⚠ 其「i ≥ −1」限制在本卡的设定下**不适用**（本卡的 M(1) 建在整个非退化 𝔥 上），
+      该辨析登记在 math.lattice-vertex-algebra 的 notes，**本卡不据此断言任何关于 L_n 的事**（见 (N4)）。
+tags: [bosonic-string, vertex-algebra, lattice, momentum-tower, lightlike, fock-space, no-ghost]
+notes: |
+  【为什么需要这张卡】两条 G–N 推导
+  （worldsheet.ddf-commute-with-virasoro--via-vertex-algebra-primary、
+  worldsheet.ddf-transverse-oscillator-algebra--via-zero-mode-bracket）的 gaps 第 1 条逐字写：
+  「图中缺一张『D 个自由玻色子（洛伦兹不定号差、含类光方向 k_0）的 Heisenberg 顶点代数 ⊗ ℂ[Z k_0]，
+  连同顶点算子 e^{i n k_0·X}，构成顶点代数，而动量塔 ⊕_N F(p + N k_0) 是其模』的卡」，
+  并说补上它「是把本条升到 rigorous 的唯一待办」。**本卡就是那张卡**，
+  在它之前那两条推导只能把桥接边 inferred 到 worldsheet.string-cft-is-a-vertex-algebra-v2（effective = open）。
+  ⚠ 本卡**刻意不**断言那段描述里的「连同顶点算子 e^{i n k_0·X}」——顶点算子 𝒴(e^{jk}, z) 在 Li–Wang 的
+  构造里当然在，但「它等于物理写法 :e^{i j k_0·X}: c_{jk}」是另一件事（边界 (N6)）。
+
+  【本卡相对 G–N 的两条实质增量】
+  (1) **连续动量**：那两条推导的 gaps 第 2 条登记「G–N 的 ℱ 只含格点动量 e^r (r ∈ Λ)，
+      而本图的塔里 p 连续取值，这条接缝是本项目的推断」。**Li–Wang (3.17) 正面解决了它**：
+      L° 只要求 ⟨k, λ⟩ ∈ Z，λ 不必落在 L 里，也不必使 ⟨λ,λ⟩ 为偶整数。
+      于是「p 连续、只有 2α' k_0·p 被整性约束」在文献里**有带编号出处**，不再是推断。
+  (2) **退化格**：G–N §2.2 的那句（刊 p. 583）要求 Λ **非退化**偶格，
+      而含类光方向的 Z k_0 是**退化**的。Li–Wang Theorem 3.6 的假设 (3.5)–(3.8) 不要求非退化，
+      §4 更以 ⟨·,·⟩|_L = 0 为标题，**这一层只有 Li–Wang（与 Borcherds Section 5 的那一句）覆盖**。
+
+  【与 worldsheet.string-cft-is-a-vertex-algebra-v2 的关系】那张卡含 bc 鬼场、只断言局域性、
+  且其场集合 E 逐字排除 e^{ik·X}，目前无推导（effective = open）。本卡不含鬼场、不走路径积分，
+  与它**互不依赖**；两条 G–N 推导的桥接边从那张卡改挂到本卡，正是本轮的主要目的。
+
+  【引用禁令（literature/extractions/math-sources.md §38.2）】本卡**不得**改写成引用
+  `FLM, Theorem 8.x`、`Lepowsky–Li, Theorem 6.5.x`、`Kac, Theorem 5.5`、`Kac, (4.8.3)`
+  ——这四个编号在 2026-09-11 的检索里全部零证据或被证伪。
+author: curator
+created: "2026-09-11"

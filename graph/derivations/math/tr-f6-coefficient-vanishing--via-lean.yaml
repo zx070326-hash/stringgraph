@@ -1,0 +1,75 @@
+id: math.tr-f6-coefficient-vanishing--via-lean
+target: math.tr-f6-coefficient-vanishing
+kind: proof
+status: formalized
+depends_on:
+  - id: math.so-usp-adjoint-fundamental-trace-identities
+    inferred: false
+    note: |
+      本卡 statement 的第一句「Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴ 中 tr F⁶ 的系数是 N + 32l」
+      就是该节点（= GS (12c)）的内容，**不在 Lean 声明里**：Lean 只对整数 N 证
+      `N + 32*(-1) = 0 ↔ N = 32` 与 `1 ≤ N → 0 < N + 32`，把「N + 32l 是那个系数」当作已给。
+      ⇒ 本推导的**有效**状态被这条边压到 physical-argument，与
+      `--via-coefficient-inspection` 相同；own status 才是 formalized。
+      这正是 docs/STATUS_LEVELS.md 想要的记账：算术已机检，瓶颈在迹恒等式。
+      边本身在原文 "in eq. (12)" 处可查，故 inferred: false（沿用
+      --via-coefficient-inspection 中 reviewer-gs1984 2026-09-11 的裁定）。
+  - id: conv.gauge-trace-normalization
+    note: |
+      系数 N + 32l 的形状绑在 GS 原版归一化上（Tr = 伴随迹、tr = 基本迹、无重标度）。
+      Lean 侧把 32 与 l ∈ {−1, +1} 写死成数字，故这条约定依赖必须留在图里。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/GreenSchwarzAlgebra.lean :: StringFormal.Math.{tr_f6_coefficient_vanishing, tr_f6_usp_positive}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，两条 `omega` 一行的声明，无 sorry。
+      与目标陈述的逐条对应：
+        · SO(N) 分支（l = −1）：
+          `tr_f6_coefficient_vanishing (N : ℤ) : N + 32 * (-1) = 0 ↔ N = 32`
+          —— **两个方向都在**，即 GS 只给的「N = 32 ⇒ 该项 absent」与本图补的逆向；
+          `formal.lean_decl` 取这条。
+        · USp(N) 分支（l = +1）：
+          `tr_f6_usp_positive (N : ℤ) (hN : 1 ≤ N) : 0 < N + 32`
+          —— 即「对一切 N ≥ 1 恒不为零」。
+      formal/TODO.md「Lean 岛 2」记 `gs-tr-f6`（A3）「无 sorry，公理只有标准三条」。
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(12c) 与 (13a)(13b)；(12c) 下方逐字「…However, it is absent if the gauge group is chosen to be SO(32).」"
+    note: |
+      被机检的那两条算术的文献语境。**GS 只说充分方向，且从未写出 USp 分支**
+      （抽取记录 literature/extractions/green-schwarz-1984.md E7/E9、Q4）。
+summary: |
+  两条 `omega`，全部在 formal/StringFormal/Math/GreenSchwarzAlgebra.lean 内完成，
+  只 import Mathlib。
+
+  · **SO 分支**：`N + 32·(−1) = 0 ↔ N = 32`，即 N − 32 = 0 ↔ N = 32。
+    GS 只断言「N = 32 时该项 absent」（⇐）；「⇒」是线性系数的平凡读出，Lean 里两向都在。
+  · **USp 分支**：`1 ≤ N → 0 < N + 32`。GS 从未写出这个结论（抽取记录 Q4），
+    本图补出并机检。
+
+  与 `--via-coefficient-inspection` 的分工：那条是纸上论证（reviewer 已复核，rigorous），
+  本条把同样两步交给内核。两条的 depends_on 相同，故**有效状态也相同**
+  （被 math.so-usp-adjoint-fundamental-trace-identities 压到 physical-argument）。
+gaps:
+  - |
+    **「tr F⁶ 的系数是 N + 32l」不在 Lean 内**。Lean 从 `N + 32 * (-1)` 这个整数表达式开始，
+    「它是 Ω₁₂ 里 tr F⁶ 的系数」是从 GS (12c) 读出的记号事实，由
+    math.so-usp-adjoint-fundamental-trace-identities 承载（physical-argument，GS 不证，
+    Polchinski 把 SO(n) 支留作 Exercise 12.1）。这条就是本推导有效状态的瓶颈。
+  - |
+    **USp 分支的物理归属仍是本图的推论**：GS 给了 l = +1 却从未写「所以 USp 被排除」
+    （抽取记录 Q4）。Lean 只证不等式，不证归属。
+  - |
+    **l ∈ {−1, +1} 的取值对应 so / usp 这一字典不在 Lean 内**：两条声明各自把 l 代成了数字，
+    「l = −1 是 so、l = +1 是 usp」由 math.so-usp-adjoint-fundamental-trace-identities 承载。
+notes: |
+  status: formalized 的依据是 literature/sources.bib 中 stringformal-2026 条目规定的证据标准
+  （lake build 通过、目标声明无 sorry、公理集合仅三条标准公理）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：在主仓库工作树 D:\physics\string 跑
+  `uv run stringgraph check-axioms --decl StringFormal.Math.tr_f6_coefficient_vanishing
+  --decl StringFormal.Math.tr_f6_usp_positive`，两条均 ok；
+  `tr_f6_coefficient_vanishing` 用 `propext Classical.choice Quot.sound`，
+  `tr_f6_usp_positive` 只用 `propext Quot.sound`（更少，仍是标准子集）。
+  本分支未改动 formal/ 下任何文件。
+author: curator
+created: "2026-09-11"

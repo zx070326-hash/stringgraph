@@ -1,0 +1,321 @@
+id: ms.ddf-commute-with-virasoro
+statement_id: worldsheet.ddf-commute-with-virasoro
+canonical_text: |
+  【对象】D 维自由玻色开弦的振子 Fock 空间，靶空间度规 conv.metric-mostly-plus，α' 按 conv.alpha-prime-regge，
+  Virasoro 生成元 L_m 取 worldsheet.virasoro-generators-free-boson 的 Sugawara 型
+  L_m = ½ Σ_j :α_{m−j}·α_j:（产生–湮灭正规序；conv.virasoro-standard；截距记号按 conv.intercept-sign-a）。
+  给定基点动量 p、参考向量 k_0、偏振向量 ε，满足三个条件：
+    (T) 横向性  ε·k_0 = 0；
+    (N) 类光性  k_0² = 0；
+    (S) 归一化  2α' k_0·p = 1（从而 k_0·p ≠ 0；由 (N)，k_0·(p + N k_0) = k_0·p 对一切 N，故 (S) 沿整条塔不变）。
+  在动量塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)（代数直和，第 N 层零模 α^μ_0 = (2α')^{1/2}(p + N k_0)^μ，
+  见 worldsheet.momentum-tower-fock-space）上，L_m 逐层作用、逐层用该层动量，不移动层指标。
+  DDF 算子按 worldsheet.ddf-operators-v6 的**模态和**定义：
+    A^ε_n := Σ_{j ∈ Z} (ε·α_j) V^{(n)}_j ，
+  其中 V^{(n)}_K 是正规序指数 :e^{i n k_0·X(z)}: 在塔上的 z^K 洛朗系数（把第 N 层送到第 N+n 层，振子能级升 K−n；
+  在 (N)+(S) 下单值因子 z^{2α' n k_0·p} = z^n，故指标记账是整数移位）。在 (T) 下该和对塔中每个向量都是有限和，
+  A^ε_n 是 T(p; k_0) 上处处有定义的线性算子，把第 N 层送到第 N+n 层。文献记号 A^i_n（i = 2..D−1）
+  是取 ε = e_i 为一组与 k_0 正交的正交归一横向标架时的特例。
+
+  【命题】在 (T)(N)(S) 之下，作为 T(p; k_0) 上的算子恒等式，
+
+      [L_m, A^ε_n] = 0    对**每一个** m ∈ Z（含 m = 0）与每一个 n ∈ Z \ {0}。
+
+  这是算子等式（对塔中一切向量成立，不只对物理态；不是"模掉零模态"），左端是塔上两族算子的对易子
+  （L_m 不动层、A^ε_n 移 n 层，二者是同一空间上的算子，对易子按此理解）。
+
+  【直接推论，属本陈述】若 Ψ ∈ T(p; k_0) 是旧协变物理态（(L_0 − a)Ψ = 0 且 L_m Ψ = 0 ∀ m > 0，
+  截距 a 是塔上统一的一个常数，见 worldsheet.old-covariant-physical-states 逐层装到塔上），
+  则 A^ε_n Ψ 也是：m > 0 的条件由对易直接搬运；L_0 条件由 m = 0 的对易直接搬运，截距不变。
+  记账上：A^ε_n 把层指标升 n、把该层的**振子能级**降 n，两者在 L_0 本征值 α'(p + N k_0)² + (振子能级)
+  中相消（由 (N)(S)，α'(p + n k_0)² = α' p² + n）。陈述卡里"A^i_n 把能级移动 −n"指的就是振子能级这一分量，
+  不是 L_0 本征值，更不是 [L_0, A^ε_n] 的值（那个是 0）。
+
+  【本里程碑不断言】A^ε_n ≠ 0；横向振子代数 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}
+  （worldsheet.ddf-transverse-oscillator-algebra-v2）；DDF 态张成横向物理谱；k_0·p = 0 的扇区（含 p = 0）；
+  n = 0 的情形（陈述卡排除它；Lean 与两个来源都不排除，见 diff_notes）；
+  文献的围道积分写法 ∮ (dz/2πi) ε·∂X(z) e^{i n k_0·X(z)} 与上面模态和是同一算子——那是定义层面的字典
+  （worldsheet.ddf-contour-equals-mode-sum，curator 分支，physical-argument），不属本命题；
+  在实数域上"存在类光 k_0 使 k_0·p ≠ 0"的可满足性；D = 26 或任何对 D 的限制（本命题对一切 D 成立）。
+canonical_source:
+  ref: gebert-nicolai-1995
+  loc: "§3.1 'DDF vertex operators', p. 594, eq. (3.5) `[L_(n), A^ξ_m] = 0 ∀ n, m ∈ ℤ`；证明链 §2.1 p. 582 (2.55)–(2.57)（(2.36) Jacobi 公理 ⇒ (2.38)/(2.41) ⇒ (2.57)，取 Δ = 1、模指标 0）；A^ξ_m 作为零模 (ξ(−1)e^{mk})_0 = Res_z[ξ(z)𝒴(e^{mk},z)] 的定义 p. 593 (3.2)–(3.3)。第二来源（仅陈述、无证明、无鬼定理语境）：goddard-2008 §5 'Spectrum Generating Algebra', p. 11, eq. (5.4) `[L_m, A^i_n] = 0`，定义 (5.1)–(5.3)，适用条件 k·p = 1。两者均 L1 逐字，见 literature/extractions/gsw-1987-v1.md §2 E1–E4、§4 E14–E16。"
+audit:
+  status: back-translated
+  back_translation:
+    by: physics-auditor（第一轮 text）+ physics-auditor 第二位独立回译（diff_notes【第二轮回译】【第二轮比对与裁定】）
+    text: |
+      【回译，第一轮，physics-auditor，2026-09-11。写于读文献抽取、卡片 notes/sources 与 canonical_text 之前。
+      依据：worldsheet.ddf-commute-with-virasoro 的 statement/uses_conventions；worldsheet.ddf-operators-v6 的
+      statement/uses/formal；uses 链上 momentum-tower-fock-space / virasoro-generators-free-boson /
+      old-covariant-physical-states 的 statement；Lean formal/StringFormal/NoGhost/DDFOperatorAll.lean 的
+      lie_towerLop_ddfOp 及 DDF.lean / DDFOperator.lean / VertexOperator.lean 中 towerLop / towerVertex /
+      ddfOp / vertexOsc 的定义。坦白：为定位 lean_decl 我先读了 curator 分支 agent/curator/ddf-all-wire 上的
+      --via-lean 推导（含其 sources.note 与 gaps），这超出"只读 statement"的范围；下面的回译仍只翻 YAML 陈述
+      与 Lean 声明，不用该推导的解读。原稿留在 graph/build/ms3-round1-backtranslation.txt（gitignore）。】
+
+      对象。固定维数 D、交换环 R（出现 L_m 与顶点算子处要求 R 是 Q-代数）、对角度规 η（η_μ² = 1；
+      mostly-plus 只是约定卡的具体选择，Lean 不要求洛伦兹号差，也不要求 D = 26）、α'。
+      给定三个向量：基点动量 p、参考向量 k_0、偏振 ε。动量塔 T(p;k_0) = ⊕_{N∈Z} F(p+Nk_0) 是
+      代数直和（有限支撑族），第 N 层零模 α_0 = √(2α')(p+Nk_0)。
+      三个条件：(T) ε·k_0 = 0，(N) k_0² = 0，(S) 2α'k_0·p = 1。(T) 是 A^ε_n 存在的前提
+      （Lean：ddfOp 的显式参数 hεb）；(N)(S) 只是本命题的假设（Lean：hbb、hba）。
+      V^{(n)}_K 是 :e^{ink_0·X(z)}: 在塔上的 z^K 洛朗系数，把第 N 层送到第 N+n 层，振子能级升 K−n
+      （Lean：towerVertex η b n K = towerShift n ∘ 逐层 vertexOsc η (n b) (K−n)；注意"z^K 系数"这个读法
+      本身预设 (S)——Lean 的 ddfOp 不取 hba，故不设 (S) 时 ddfOp 仍是良定义算子，只是失去洛朗系数的解释）。
+      A^ε_n := Σ_{m∈Z} (ε·α_m) V^{(n)}_m，逐向量有限和（Lean：lsumLocFin 组装，窗口由
+      towerLevelBound/towerModeBound 给出）。L_m 是逐层用该层动量的 Sugawara 算子（Lean：towerLop）。
+
+      命题。在上述条件 (T)(N)(S) 下，对每个 m ∈ Z 与每个 n ∈ Z\{0}（卡的量词；Lean 对 n ∈ Z 全部成立），
+      塔上的算子等式 [L_m, A^ε_n] = 0 成立，即 L_m A^ε_n x = A^ε_n L_m x 对塔中每个向量 x。
+      这是**等式**（不是"在物理态上为零"、不是"模掉零模态"），且是**算子恒等式**（对塔中一切向量，
+      不只物理态）。卡把 ε 写成横向标架 e_i（i = 2..D−1）；v6 与 Lean 对任意满足 (T) 的 ε 成立，
+      包括 ε ∝ k_0（k_0² = 0 使它自动满足 (T)），故"横向"在这里只是"与 k_0 正交"，不排除 k_0 方向本身。
+
+      推论（卡说是本卡直接内容）。若 Ψ ∈ T(p;k_0) 满足 (L_0 − a)Ψ = 0 与 L_mΨ = 0 (m>0)，则 A^ε_nΨ 亦然，
+      截距 a 逐字不变（Lean：ddfOp_mem_towerPhysSubmodule，统一 a₀）。卡里"A^i_n 把能级移动 −n"我读成
+      振子能级 N 降 n、层数升 n，两者在 α'p_N² + N 中相消，故 L_0 本征值不变；这与"[L_0, A^ε_n] = 0"一致。
+      （若把"能级"读成 L_0 本征值，那句话与本命题 m = 0 矛盾，所以只能是振子能级。）
+
+      没有断言的：A^ε_n ≠ 0；[A^i_m, A^j_n] 的值；DDF 态张成物理谱；k_0·p = 0 扇区（含 p = 0）；
+      围道积分定义的 A^i_n 与模态和的 A^ε_n 是同一算子；实数上"存在类光 k_0 使 k_0·p ≠ 0"的可满足性；
+      Virasoro 括号 [L_m, L_n] 与 c = D 都没有用到（Lean 证明不引它们）。
+    verdict: faithful
+    diff_notes: |
+      【第二轮回译】2026-09-11，physics-auditor（第二位审计员，独立于第一轮）。写本段时只读了
+      statement 卡 worldsheet.ddf-commute-with-virasoro 的 statement / uses_conventions / formal，
+      ddf-operators-v6 与 -v5 的 statement，四条约定的 definition，以及 Lean 的
+      lie_towerLop_ddfOp / ddfOp / ddfSummand / ddfWindow / towerLop / towerVertex / towerMomentum /
+      towerModeVec / Fock.Lop / ddfOp_mem_towerPhysSubmodule 的签名与定义体；**未读** canonical_text、
+      canonical_source、第一轮 text 与 diff_notes、statement 卡的 sources/notes、文献抽取。
+
+      回译文本：
+
+      设定。D 维自由玻色开弦，度规 mostly-plus，α' 为 Regge 斜率。取动量 p 与一个类光向量 k_0
+      （k_0² = 0），要求 k_0·p ≠ 0，并把 k_0 的标度取成 2α' k_0·p = 1；由 k_0² = 0 这个值沿整条塔不变，
+      故一次取定即对整条塔成立。动量塔 T = ⊕_{N∈Z} F(p + N k_0)，第 N 层零模
+      α_0 = (2α')^{1/2}(p + N k_0)。取偏振 ε 满足 ε·k_0 = 0；横向标架下 ε = e_i，i = 2..D−1。
+
+      算子。A^i_n（n ≠ 0）在 statement 卡里指向 v5 的围道积分 ∮ dz/2πi ∂X^i e^{i n k_0·X}；
+      v5 已被 v6 换代，v6 把同一个算子写成模态和 Σ_{m∈Z} (ε·α_m) V^{(n)}_m，其中 V^{(n)}_m 是
+      :e^{i n k_0·X(z)}: 的 z^m 系数，把第 N 层送到第 N+n 层；ε·k_0 = 0 使该和对每个向量只有有限项非零，
+      所以不需要任何收敛或完化。L_m 是 Sugawara 形式 ½ Σ_j :α_{m−j}·α_j:，在塔上逐层用该层自己的零模；
+      c = D，但本命题的结论里不出现中心项。
+
+      断言。在该塔上，对**所有**整数 m 与所有**非零**整数 n，
+        [L_m, A^i_n] = 0
+      作为 T 上线性算子的恒等式成立。
+
+      推论（卡内，不另立节点）。若 (L_0 − a)ψ = 0 且 L_m ψ = 0（∀ m ≥ 1），则 A^i_n ψ 也满足这两条：
+      m ≥ 1 一条直接由对易得；L_0 一条也直接由 m = 0 的对易得——在塔的写法里 L_0 逐层用该层动量，
+      所以 [L_0, A] = 0 已经包含了"第 N+n 层的 α'p² 比第 N 层多 n、振子能级相应少 n"这笔账
+      （α'(p + n k_0)² = α'p² + n，由 k_0² = 0 与 2α' k_0·p = 1）。因此 A^i_n 把旧协变物理态映为
+      旧协变物理态。这里 a 是截距记号（(L_0 − a)ψ = 0，conv.intercept-sign-a），推论对任意 a 成立，
+      不要求 a = 1，也不要求 D = 26。
+
+      Lean 覆盖（逐项对照签名）：
+      - lie_towerLop_ddfOp (η a b ε) (hη : ∀μ, η_μ² = 1) (hbb : b·b = 0) (hba : b·a = 1)
+        (hεb : ε·b = 0) (m n : ℤ) : ⁅towerLop η a b m, ddfOp η a b ε hη hεb n⁆ = 0。
+        · 字典：a = (2α')^{1/2} p，b = (2α')^{1/2} k_0；hbb ⇔ k_0² = 0，hba ⇔ 2α' k_0·p = 1，
+          hεb ⇔ ε·k_0 = 0。hη 是对角 ±1 度规，mostly-plus 是其特例（Lean 不固定号差）。
+        · m 取遍全部 ℤ（含 0）：与卡的"∀ m ∈ Z"一致。
+        · **n 也取遍全部 ℤ，含 n = 0**——比卡宽。n = 0 时 V^{(0)}_m 是 :e^0: 的模，A^ε_0 = ε·α_0
+          是逐层常数，与任何 L_m 对易平凡成立；卡把 n = 0 排除是"更窄"，无矛盾。
+        · ε 是任意满足 ε·b = 0 的向量：不要求 ε 在横向标架里、不要求 ε² = 1、不要求实。比卡宽。
+        · R 是任意含 ℚ 的交换环，D 任意自然数；无 D = 26、无 a = 1。卡也没要求，一致。
+        · 塔 TowerFock = ℤ →₀ Fock，层指标有限支撑的代数直和；对易子是 Module.End 的李括号。
+          与卡"对易子按这一族算子理解"一致。
+        · towerLop m 在第 j 层用 Fock.Lop η (a + j·b) m，即逐层用该层动量；towerVertex n K
+          把第 j 层送到 j + n。与卡一致（卡的 N 对应 Lean 的 j）。
+        · ddfOp 的定义参数只有 hη、hεb；hbb、hba 是定理假设。与 v6 卡"(T) 是定义参数，
+          (N)(S) 是定理假设"逐句一致。
+      - ddfOp_mem_towerPhysSubmodule：同样四条假设下，对任意 a₀ : R 与 n : ℤ，A^ε_n 保持
+        towerL0Submodule ⊓ towerPositiveModeSubmodule = {(L_0 − a₀)Ψ = 0} ∩ {L_m Ψ = 0, m ≥ 1}。
+        这是卡内推论的形式化；a₀ 任意。
+      - Lean 不含（卡也不断言）：A^ε_n ≠ 0；DDF 态张成横向谱；[A^i_m, A^j_n] 代数。
+
+      指针备注：statement 卡文本写"ddf-operators-v5 定义的 DDF 算子"，而 v5 已 superseded_by v6
+      （围道 → 模态和）；formal.lean_decl 对应的是 v6 的 ddfOp。是否算漂移见下面【第二轮比对】R3。
+
+      【第二轮比对与裁定】2026-09-11，physics-auditor（第二位）。上面回译提交（ad5b292）之后才读
+      canonical_text、canonical_source、第一轮 text/diff_notes、statement 卡 sources/notes、
+      literature/extractions/gsw-1987-v1.md §2 E1–E4 与 §4 E14–E17、§5–§6，以及
+      ddf-commute-with-virasoro--via-lean 的 depends_on/gaps。
+
+      R1. 量词 m。回译 ∀ m ∈ Z 含 0；canonical_text 同；卡"对所有 m ∈ Z"；G–N (3.5) 逐字
+          `∀ n, m ∈ ℤ`（其 n 是 Virasoro 指标）；Goddard (5.4) 无限制；Lean `(m n : ℤ)`。**一致。**
+      R2. 量词 n，"n = 0 排除是否只是更窄"——**是，且只是更窄。** 检查了三件事：
+          (a) 逻辑：∀ n ∈ Z 的结论蕴含 ∀ n ≠ 0 的结论，前提、空间、等式类型无一改变，故卡是来源与 Lean
+              的**真子命题**，不是另一命题；
+          (b) n = 0 不是被"排除掉一个反例"：G–N 里 A^ξ_0 = (ξ(−1)e^0)_0 = ξ·α_0 = ξ(0)，是逐扇区常数，
+              与 L_(n) 平凡对易；Lean 对 n = 0 的 `lie_towerLop_ddfOp` 是同一定理的实例。
+              也就是说 n = 0 时命题**为真**而非无定义，所以排除它只是收窄，不是修正；
+          (c) canonical_text 在【本里程碑不断言】里逐字登记了这一点，且没有反过来把 n = 0 写进命题。
+          结论：faithful 意义下的收窄。不建议为此换代（与第一轮 A2 同）。
+      R3. (S) 2α' k_0·p = 1 与 G–N 的 k·r ∈ Z——**收窄，且是本图定义所必需的收窄，不是漂移。**
+          G–N (3.5) 对格点顶点代数 ℱ 成立，k·r 只需是整数（格点自动保证）；k·r = 1 在 G–N 只在 (3.4)
+          把 k(0) 化成 1 时用到（E17 逐字「one has to find a lightlike vector k = k(r) such that k·r = 1」）。
+          但 G–N 的 A^ξ_m 是**抽象零模** (ξ(−1)e^{mk})_0，其模指标配对随扇区的 k·r 自动调整；
+          本图 v6 / Lean 的 towerVertex η b n K = shift ∘ vertexOsc (K − n) 把"单值移位 = n"
+          **写死**在定义里（这正是 (S) 取整数 1 的后果），k·r = c ≠ 1 时 Lean 的 ddfOp 就不再是
+          G–N 的零模，`lie_towerLop_towerVertex` 的系数 K − m − n + n(k_0·p) 也不再化为 K − m。
+          所以在本图的定义下 (S) 不可去；Goddard 也逐字要求 k·p = 1（α' = 1/2）。
+          canonical_text 把 (S) 作前提、卡把 (S) 作 k_0 标度的取定，两者相同。**一致。**
+          附：(S) 取"整数 1"而非"任意整数"这一步在 v5 说明 (c) 有理由（单值性），Goddard 不给理由，
+          G–N 给的是 (3.4) 的理由；这是**定义卡**的来源问题，不是本命题的。
+      R4. "围道 ⟹ 模态和 是定义换代而非漂移"——**站得住，但要说清它站在哪里。**
+          (a) 卡的 statement 文本对 A^i_n 的描述（类光 k_0、ε·k_0 = 0、2α'k_0·p = 1、扇区）**本身不含
+              围道也不含模态和**，只以指针委托给 v5；v5 → v6 是 superseded_by 换代，卡的 uses 与
+              全部活推导的 depends_on 都已指 v6。按 lead 2026-09-12 裁决（docs/ROADMAP.md，正文内嵌
+              id 指针过期不单独换代），卡的语义解析到 v6。canonical_text 按 v6 写模态和，
+              与解析后的卡一致。
+          (b) 但**这次指针换代不是无害重命名**（--via-lean 的 depends_on note 与 gaps 第 1 条自己也这么写）：
+              "围道算子 = 模态和算子"在图中由 worldsheet.ddf-contour-equals-mode-sum（已在 main，
+              physical-argument）承载，且 --via-lean 刻意不把它列为依赖。这意味着：
+              船长批准的是**模态和版本**的命题；"文献围道定义的 A^i_n 与 Virasoro 对易"多隔一张
+              physical-argument 卡。canonical_text 的【本里程碑不断言】已逐字写明。
+          (c) 对 canonical_source G–N 而言这条缝**不存在**：我独立核了 (3.3) 的形式留数：
+              (2.31) 型模态下 ξ(z) = Σ ξ_n z^{−n−1}、𝒴(e^{mk},z) = Σ (e^{mk})_l z^{−l−1}，
+              Res_z 取总 z^{−1} 系数得 l = −n−1，即 A^ξ_m = Σ_n ξ_n (e^{mk})_{−n−1}；
+              而 (e^{mk})_{−n−1} 是 z^n 的系数 = 本图的 V^{(m)}_n。故 G–N (3.3) 逐字就是 v6 的
+              Σ_n (ξ·α_n) V^{(m)}_n，且"normal ordering unnecessary due to ξ·k = 0"说明 ξ_n 与 V 的
+              先后无关。**相对 G–N 只剩记号字典，无围道步骤**；相对 Goddard (5.1) 的真围道那一步仍在。
+          裁定：不是本里程碑的 drift。
+      R5. ε 的范围——**canonical_text 比卡的 statement 文本宽，这是本轮唯一一处"canonical > 卡"。**
+          卡写 A^i_n，i = 2..D−1（横向标架）；canonical_text 与 v6 对**任意** ε 满足 ε·k_0 = 0 陈述，
+          A^i_n 只是特例。ε·k_0 = 0 的向量空间是 span(k_0, e_2..e_{D−1})，比标架多一个 ε ∝ k_0 方向；
+          由卡的内容推不出 [L_m, A^{k_0}_n] = 0（Goddard (5.6) 前正文说 k·A_n = k·p δ_{n,0}，即那一分量
+          n ≠ 0 时本就是 0，但那是另一条断言）。所以严格说 canonical_text 是卡的**真加强**，
+          不是逐字等价。我仍裁 faithful，理由：(i) 卡解析到的定义卡 v6 正是以一般 ε 定义并把 A^i_n
+          作特例；(ii) 两个来源都以一般偏振陈述（G–N：任意 ξ 满足 ξ·k = 0；Goddard 的 ε^i 只是选定标架）；
+          (iii) Lean `lie_towerLop_ddfOp` 对任意 hεb : ε·b = 0 成立，多出的那一点已被机器证明。
+          船长须知：批准的是一般 ε 版本。若船长要求 canonical_text 与卡逐字同范围，修法是把【命题】
+          里的 A^ε_n 改为 A^{e_i}_n（i = 2..D−1）并把一般 ε 移到备注——**可选，不是本轮要求**。
+      R6. 空间、等式类型、L_m 身份、推论段：与回译逐条一致（塔 = 代数直和、逐层动量、算子恒等式非
+          "在物理态上"、Sugawara、推论的 L_0 半由 m = 0 直接得且"能级 −n"读作振子能级）。
+          Lean `towerL0Submodule` 用 `towerLop η a b 0`（逐层动量）与统一 a₀，核实。**一致。**
+      R7. 约定：四条 uses_conventions 均 canonical: true（validate 通过）；Goddard 号差 (−,+,+,+) 无需换算；
+          结论右端为 0，对 α' 归一化不敏感。**一致。**
+
+      R8. Lean 覆盖清单 C1/C2（第一轮）逐项对照签名核实：
+          C1 各项——TowerFock = ℤ →₀ Fock ✓；towerLop = towerDiag (Fock.Lop η (a + j·b) m) ✓；
+          ddfOp = lsumLocFin (ddfSummand n j) (ddfWindow n)，参数只有 hη、hεb ✓；
+          m n : ℤ 无限制 ✓；hbb / hba 是定理假设 ✓；section variable `[CommRing R] [Algebra ℚ R]` ✓；
+          ddfOp_mem_towerL0Submodule / ddfOp_mem_towerPhysSubmodule 的 {a₀ : R} 任意 ✓。
+          **C1 准确。** 一处补充：C1 写"任意 ε 满足 ε·b = 0"，应与 R5 连读——这正是 canonical_text
+          比卡宽的那一点的机器依据。
+          C2 各项——(i)(ii) 围道字典：Lean 无形式留数对象 ✓；(iii) (S) 只作假设 ✓（hba）；
+          (iv) 一般 R 上无存在性 ✓；(v) 塔物理子模 = 逐层交 无卡 ✓（卡 notes 亦如此登记）；
+          (vi) A ≠ 0 ✓；(vii) Sugawara 识别被绕过 ✓。**C2 准确。**
+          本轮同样**未跑 lake build / check-axioms**；只 grep 了 DDFOperatorAll / DDFOperator / DDF /
+          VertexWeight / Sugawara 五个文件，无 `sorry` 战术（仅文档字符串里的 "no sorry"）；
+          main 工作树 formal/.lake 下存在 DDFOperatorAll.olean，说明曾成功构建，但我没有重新构建验证。
+
+      R9. 与第一轮的差异（供 lead）：
+          · 裁定相同：faithful。
+          · 第一轮 D1"formalized 待 curator 分支合并"**已过时**：本分支 `stringgraph status` 给
+            own = formalized、effective = formalized、best = --via-lean（main 已合 0f319c1）。
+          · 第一轮 E2（ms.critical-dimension-bosonic 路线 (II) gaps 写本卡 physical-argument）仍待 lead 处理。
+          · 第一轮 A4 把 ε 一般化记为"推广，不是漂移"；本轮 R5 更尖锐地指出它**不是逐字等价**，
+            是被 Lean 覆盖的真加强，并给出可选修法。这是两轮唯一的措辞分歧，不改裁定。
+          · 本轮独立核了 G–N (3.3) 形式留数到 v6 模态和的换算（R4(c)），与第一轮 B2 结论一致。
+          · 第一轮坦白先读了 curator 分支的 --via-lean 推导；本轮在写回译前只读了 Lean 源码与
+            statement/convention 卡，未读任何推导。
+
+      R10. 裁定：**faithful**。audit.status → back-translated。船长批准前须知三点：
+           R4(b)（批准的是模态和版本，围道字典是 physical-argument）、R5（批准的是一般 ε 版本，
+           比卡宽一点、已被 Lean 覆盖）、R2（n = 0 卡排除而来源与 Lean 覆盖）。
+
+      以下为第一轮内容（未改动）。
+
+      【第一轮，2026-09-11，physics-auditor。回译写完后才读：canonical_text（本人起草）、卡片 sources/notes、
+      两条既有推导（--via-conformal-weight、--via-vertex-algebra-primary）、curator 分支上的 --via-lean 推导与
+      worldsheet.ddf-contour-equals-mode-sum、literature/extractions/gsw-1987-v1.md §2 E1–E5、§4 E14–E16、§5、§6、
+      literature/sources.bib 的 gebert-nicolai-1995 / goddard-2008 条目。Lean 未重跑 lake build。】
+
+      A. 逐条比对（回译 vs G–N (3.5) / Goddard (5.4) / canonical_text）
+
+      A1. 量词 m（Virasoro 指标）。回译：∀ m ∈ Z 含 0。G–N (3.5) 逐字 `∀ n, m ∈ ℤ`（其 n 是 Virasoro 指标），
+          由 (2.57) 取 Δ = 1、模指标 0 得系数 {(1−1)(n+1) − 0} = 0，对 L_(0) 不设例外。Goddard (5.4) 逐字
+          `[L_m, A^i_n] = 0.` 无限制。Lean `lie_towerLop_ddfOp (m n : ℤ)` 无限制。三方一致。**一致。**
+          tomassini-2008 (2.38) 的 m ≠ 0 版本是固定纤维上的修改版算子，与本图对象不同，本里程碑不引它。
+      A2. 量词 n（DDF 指标 / 动量指标）。陈述卡与 canonical_text：n ∈ Z\{0}。G–N (3.5)：∀ m ∈ Z（其 m 是动量指标），
+          含 0。Goddard (5.1)：「n is an integer」，含 0。Lean：n : ℤ 无限制。**陈述卡比两个来源与 Lean 都窄**，
+          是它们的特例，不是错误（n = 0 时 A^ε_0 不移层、代数上退化，文献习惯排除）。里程碑随卡取 n ≠ 0；
+          若船长要把量词放宽到 n ∈ Z，须新建陈述卡（陈述文本不可变），本轮不建议为此换代。
+      A3. 前提 (N) k_0² = 0。三方一致（G–N：k lightlike；Goddard：「light-like vector k」；Lean：hbb）。
+          Lean 侧 (N) 是必需的（不设 (N) 时 [L_m, V^{(n)}_K] 的系数含层指标）。**一致。**
+      A4. 前提 (T) ε·k_0 = 0。三方一致（G–N：ξ·k = 0；Goddard：k·ε^i = 0；Lean：hεb，且是 ddfOp 的参数）。
+          差别只在**附加条件**：Goddard 另要 ε^i·ε^j = δ^{ij}（1 ≤ i ≤ D−2）；G–N §3.2 另要 ξ·r = 0（对无鬼定理选标架用）。
+          这两条对 (3.5)/(5.4) 的成立**都不需要**（(3.5) 的证明只用 ξ·k = 0 与 k·k = 0；Lean 对任意 ε·b = 0 成立）。
+          本里程碑按 v6 对任意满足 (T) 的 ε 陈述，标架只作特例。这是**推广**，由 Lean 覆盖，不是漂移。
+      A5. 前提 (S) 2α' k_0·p = 1。Goddard：「well-defined on states of momentum p, such that k·p = 1」（α' = 1/2）。
+          G–N：(3.5) 本身**不需要** k·r = 1，只需要 k·r ∈ Z（格点顶点代数天然保证）；k·r = 1 在 G–N 只在 (3.4) 处
+          用来把 [A^ξ_m, A^η_n] 的右端 k(0) 化成 1。Lean：hba : b·a = 1 是 lie_towerLop_ddfOp 的显式假设，
+          且 towerVertex 的指标记账 K ↦ K − n 预设了它。**里程碑取 (S) 作前提，比 G–N (3.5) 窄（G–N 对任意整数
+          k·r 成立），与 Goddard 和 Lean 逐字一致。收窄允许，登记于此。**
+      A6. 空间。回译与 canonical_text：动量塔 ⊕_N F(p + N k_0)，L_m 逐层。G–N：顶点代数 ℱ 含全部格点动量 e^{r+mk}，
+          天然是塔（这也是 ∀ Virasoro 指标含 0 的原因）。Goddard：「states of momentum p」，未说是否固定 p，
+          但 (5.4) 对 m = 0 成立只能在塔上读。**一致；Goddard 处是本项目的读法。**
+      A7. 等式类型。回译：算子恒等式，对塔中一切向量。G–N (3.5)：ℱ 上的算子等式（顶点代数模）。Goddard：算子等式。
+          Lean：`⁅towerLop, ddfOp⁆ = 0` 是 Module.End 的等式。**一致。** 不是"在物理态上"、不是"模零模态"。
+      A8. L_m 的身份。canonical_text 与卡：Sugawara 型（virasoro-generators-free-boson）；Lean：Fock.Lop 逐层，
+          正是 Sugawara。G–N：L_(n) = ω_{n+1} 由共形向量给出，与 Sugawara 的等同是 --via-vertex-algebra-primary 的
+          inferred 边（researcher 未读到 G–N 写 Sugawara 显式式子的页）。这是**那条推导**的接缝，不是陈述的漂移：
+          陈述明说 Sugawara，Lean 证的也是 Sugawara。
+      A9. 推论段。canonical_text 含"DDF 算子把物理态映为物理态"（卡说属本卡）。Goddard 逐字「they can be used to
+          generate physical states because they commute with the Virasoro algebra」——同一推论、同一理由。G–N 不单列。
+          Lean：ddfOp_mem_towerPhysSubmodule（统一截距 a₀）。**一致。** 卡里"能级移动 −n"按振子能级读
+          （卡 notes 2026-09-11（六）段与 formalizer 的更正一致），canonical_text 已把这句话钉死为振子能级。
+      A10. 约定。uses_conventions 四条全部 canonical: true。Goddard 号差 (−,+,+,+) 无需换算；G–N 用格点双线性型；
+          α' 三家都取 1/2 或格点单位，一般 α' 形式仍无逐字来源（结论右端为 0，对归一化不敏感）。
+
+      B. "围道 ⟹ 模态和"——定义换代，不是命题漂移
+      B1. 陈述卡的文本引 worldsheet.ddf-operators-v5（围道积分定义）；本里程碑与 Lean 按 v6（模态和）读。
+          两张定义卡对同一符号 A^i_n 给出两种写法，其等价（形式洛朗展开取总 z^{−1} 系数，两行核对）在本图中由
+          worldsheet.ddf-contour-equals-mode-sum 承载（curator 分支，physical-argument，尚未合 main）。
+          **判定：这是 v5 → v6 的定义换代（supersession），命题的公式 [L_m, A_n] = 0 一字未动；
+          故不构成本里程碑的 drift。** 但它意味着：**Lean 证明的是模态和版本；"文献的围道算子与 Virasoro 对易"
+          这句话在本图中还隔着一张 physical-argument 的字典卡。** 船长批准时应知道这一点。
+      B2. 选 G–N 为 canonical_source 使这条缝**变窄**：G–N (3.3) 把 A^ξ_m 写成 Res_z[ξ(z)𝒴(e^{mk},z)]，
+          Res_z 在顶点代数里就是形式留数 = 总 z^{−1} 系数 = 模态和，**没有解析围道**。故相对 G–N，
+          剩下的只是记号字典 ξ(z) ↔ (2α')^{1/2}-归一化的 ε·∂X(z)、𝒴(e^{mk},z) ↔ :e^{i m k_0·X}:
+          （--via-vertex-algebra-primary 的 gaps 第 4 条，本项目推断），不再有"围道 ⟹ 模态和"这一步。
+          相对 Goddard (5.1)（真围道 (1/2πi)∮ dz）那一步仍在。
+      B3. 模态约定核对：G–N (2.57) 用 (2.31) 型模态 𝒴(ψ,z) = Σ ψ_n z^{−n−1}；对权 1 的 ψ，(2.48) 的换算
+          ψ_n ≡ ψ_(n+1−Δ) 在 Δ = 1 时是恒等，故"零模"在两套约定下是同一个算子，无移位歧义。
+
+      C. 【非严格步骤：Lean 覆盖范围】（据 DDFOperatorAll.lean 声明逐字；本轮未重跑 lake build，
+         无 sorry 与公理清单依 curator 分支登记与 lead 合并前的 check-axioms）
+      C1. 已覆盖：塔 T(p;k_0)（TowerFock = ℤ →₀ Fock）；L_m 逐层 Sugawara（towerLop）；A^ε_n 为模态和（ddfOp，
+          局部有限）；任意 ε 满足 ε·b = 0（不要求标架、不要求 ε·p = 0）；m ∈ Z 全部含 0；n ∈ Z 全部含 0；
+          假设 hbb（N）、hba（S）、hη（η_μ² = 1）；一般交换 Q-代数 R、一般 D、无洛伦兹号差要求；
+          推论段 ddfOp_mem_towerL0Submodule / ddfOp_mem_towerPhysSubmodule（统一截距）。
+      C2. 未覆盖：(i) 围道积分定义 ⟺ 模态和（Lean 无形式留数对象；图内 ddf-contour-equals-mode-sum 为
+          physical-argument）；(ii) "本图的 A^ε_n 与文献的 A^i_n 是同一算子"——同 (i)；(iii) (S) 的单值性来由
+          （Lean 只把 (S) 当假设）；(iv) 实数域上类光 k_0 且 k_0·p ≠ 0 的存在性；(v) 塔上的物理子模 = 逐层
+          Fock.physSubmodule 之交（无卡，仅 TowerPhysical.lean 文件头说明）；(vi) A^ε_n ≠ 0；
+          (vii) G–N 路线的"共形向量模 = Sugawara L_m"识别（Lean 直接用 Sugawara，绕过了它）。
+
+      D. 状态记账（供船长与 lead）
+      D1. 本分支（自 main 9518fd3 起）上 `stringgraph status` 给 own = rigorous、effective = rigorous、
+          best_derivation = --via-vertex-algebra-primary（G–N 链 + Li–Wang 格点顶点代数卡）。formalized 的
+          --via-lean 推导与 formal.lean_decl 在 curator 分支 agent/curator/ddf-all-wire（提交 098d917），
+          **尚未合 main**；合并后 effective 应升为 formalized。里程碑 report 行的 effective 以合并后为准。
+      D2. Lean 文件 DDFOperatorAll.lean / TowerPhysical.lean / VertexWeightZero.lean 已在 main 的 formal/ 目录中。
+      D3. 陈述卡 sources 里 goddard-thorn-1972 一条已被 curator 标为"归属削弱"（Goddard 本人把对易关系归给
+          Brower–Goddard [43]/[44]）；本里程碑不以 GT 1972 为来源。
+
+      E. 与既有里程碑的关系
+      E1. ms.no-ghost-theorem：v4 (1b) 的横向 DDF Fock 空间与推导 no-ghost-theorem-v4--via-goddard-thorn 的
+          depends_on 直接引本卡；本卡是无鬼定理"DDF 半"的两条中的一条（另一条是
+          ddf-transverse-oscillator-algebra-v2）。本卡升 formalized 后，无鬼定理的瓶颈链不再经过它。
+      E2. ms.critical-dimension-bosonic：路线 (II) 的 gaps 逐字写本卡是 physical-argument——**已过时**
+          （本分支 rigorous；合并后 formalized），建议 lead 在那条推导的 gaps 加更新注。
+
+      F. 裁定
+      canonical_text 与陈述卡语义等价（量词、三个前提、塔、算子等式类型、推论），且与 G–N (3.5)、Goddard (5.4)
+      在 A1–A9 各条一致或为其允许的收窄（A2 的 n ≠ 0、A5 的 (S)）。唯一实质接缝 B1 是定义换代，
+      不是命题漂移。**faithful。** 船长批准前需知：B1（Lean 证的是模态和版本）、A2（n = 0 被卡排除而 Lean 覆盖）、
+      D1（formalized 待 curator 分支合并）。
+phase: 1

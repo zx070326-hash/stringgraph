@@ -1,0 +1,77 @@
+id: consistency.anomaly-descent-to-twelve-form--via-zumino-wu-zee
+target: consistency.anomaly-descent-to-twelve-form
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.descent-forms-gs-notation
+    note: 提供下降链本身（GS (15)(16)）与 ω⁰、ω¹ 的记号；这一半在 zumino-1983-les-houches 上 L1 已核实。
+  - id: consistency.descent-omega1-is-consistent-anomaly
+    inferred: true
+    note: |
+      提供「ω¹_{2n} 满足 Wess–Zumino 相容条件」这一**较弱**的结论（L1，zumino-1983-les-houches）。
+      ⚠ 标 inferred: true：目标卡断言的是更强的**认同**——ω¹_{2n} 就是那个反常。
+      从「是相容条件的一个解」到「是那个反常」还差解的唯一性与归一化的定值，
+      **这条边支撑不了那一步**（见 gaps 第一条）。
+  - id: conv.gauge-trace-normalization
+    note: 记号（迹的表示、楔号省略）。本推导不涉及任何数值系数。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 上一段：「The analysis of ref. [9] relates the anomalies to a formal expression in twelve dimensions, namely the gauge-invariant twelve-form Ω₁₂」"
+    note: L1（抽取记录 literature/extractions/green-schwarz-1984.md E6）。**GS 只转述，一步不做**。
+  - ref: zumino-wu-zee-1984
+    loc: "摘要级（L2）；正文未取得，无可引式号"
+    note: |
+      被点名的原始来源，本图**一字未核实**。摘要只支持「所作构造自动满足 WZ 相容条件」，
+      即上面那条已标 inferred 的较弱结论，**不支持升维字典本身**。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352v2, §2, eqs. (5)(6)"
+    note: L1。直接写下 Î₁₂ = dÎ₁₁、δÎ₁₁ = dÎ₁₀、δ log Z ~ ∫Î₁₀，**不加论证、不给引用**。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.8)–(12.2.10)；逐字「we will not repeat it here but just quote the result」"
+    note: L1。同样把字典当已知，并明说本书不做这个计算（抽取记录 E6/E8）。
+summary: |
+  **本推导没有论证，只有四条来源的一致转述。** 论证骨架（文献里公认的那条，本图未核实）是：
+
+  1. 2n 维手征费米子圈的规范变分给出反常 G[A]；
+  2. 反常必须满足 Wess–Zumino 相容条件（由有效作用量的存在性推出，
+     这一步本图**有** L1 来源：consistency.descent-omega1-is-consistent-anomaly 的 (1)）；
+  3. 取 2n+2 维的规范不变多项式 Ω_{2n+2}（如 Tr F^{n+1}），沿下降链
+     Ω = dω⁰、δω⁰ = −dω¹ 得到 ω¹_{2n}，它自动满足相容条件
+     （这一步本图**有** L1 来源：同一张卡的 (2)）；
+  4. **认同**：G[A] = （常数）× ∫ω¹_{2n}。
+     ⇒ **第 4 步是缺口**：它需要相容条件解的唯一性（本图无来源）与归一化的定值（外包给 AGW）。
+
+  本推导的作用是把这条被四本文献共同当作已知的字典登记成图内节点，
+  并把第 4 步的缺口显式化，使 `stringgraph why` 能沿着它找到瓶颈。
+gaps:
+  - |
+    ★★ **第 4 步（认同）无任何已核实来源**：本图读过的四条来源全部把这条字典当已知——
+    GS 外包给 ref. [9]；ADT 直接写 (5)(6) 不加引用；Polchinski 明说不做这个计算；
+    zumino-wu-zee-1984 **正文未取得**（L2，仅 INSPIRE 摘要）。
+    这是本图 consistency 区最大的单条来源缺口。
+  - |
+    **唯一性缺口**：从「ω¹ 是相容条件的一个解」到「ω¹ 就是那个反常」需要解的唯一性。
+    zumino-1983-les-houches p.29 逐字把最一般解排除在讨论之外；
+    manes-stora-zumino-1985（上同调分类）本项目正文一字未取到。
+    这条与 consistency.higher-point-anomalies-fixed-by-hexagon 的 gap 是同一个。
+  - |
+    **归一化缺口**：目标卡里的「（常数）×」始终未定。GS 逐字外包给 refs. [3,9]，
+    Polchinski 用 (12.2.10) 的 −i/(2π)⁵ 而不说来历，两者是否同一个量**未裁决**
+    （抽取记录 literature/extractions/polchinski-1998-v2-ch12.md Q4）。
+  - |
+    **引力一路更弱**：把 (A, F) 换成 (ω, R) 的那一支在 zumino-1983-les-houches 全文里
+    根本不存在（该文只做内部对称群，L1 通读确认），故洛伦兹侧的字典连「下降链」那一半
+    都只有 GS 的用法作依据。见 consistency.descent-forms-gs-notation statement (2) 的证据分层。
+  - |
+    **局部 vs 全局**：下降等式的唯一已核实数学来源逐字声明它们「really valid only locally」，
+    而本卡在整个十维时空上用它们。
+notes: |
+  【为什么不标 conjecture】按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位裁决（lead 2026-09-11）：
+  来源给出骨架但关键步骤只有断言的，标 physical-argument 并把断言处逐条写进 gaps。
+  这条字典在文献中**无人怀疑其真伪**，缺的是本图手里的证明链。
+
+  【本推导刻意不合并到 consistency.descent-omega1-is-consistent-anomaly】那张卡的
+  `--via-brs-descent` 是 L1 有来源的**存在性**论证；把无来源的「认同」塞进它会污染那条链的记账。
+  两张卡分开，`why` 才能指出瓶颈落在哪一条。
+author: curator
+created: "2026-09-11"

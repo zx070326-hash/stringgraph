@@ -1,0 +1,38 @@
+id: compact.wilson-line-background
+kind: definition
+status: rigorous
+title: 紧化方向的 Wilson 线背景 A = −θ/(2πR) 与 Wilson 圈
+statement: |
+  设一个空间方向紧化在半径 R 的圆上（conv.compactification-radius），
+  在该方向取**常**背景 U(1) 规范场
+    **A_d = − θ / (2πR)**   （其余分量为零）。
+  它的场强为零（F_{MN} = 0），故**局域上是纯规范**（可由规范函数
+  Ω = (θ/2πR) x^d + const 规范掉）；但因为紧化方向是圆，规范不变的 **Wilson 圈**
+    **W_q = exp( i q ∮ dx^M A_M ) = e^{−i q θ}**
+  一般不等于 1，故该背景在物理上不可去，θ 是一个真实的（周期为 2π/q 的）参数。
+
+  带 U(n) Chan–Paton 因子时，紧化方向的背景是一个 n × n 厄米矩阵，可对角化为
+    **A_d = − (1/2πR) diag(θ_1, θ_2, …, θ_n)**,
+  它落在 U(n) 的极大环面 U(1)^n 中。
+uses_conventions: [conv.metric-mostly-plus, conv.compactification-radius]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.6, eq. (8.6.1)（U(1) 常背景）、(8.6.2)（Wilson 线），p.263；(8.6.8)（对角化的 Chan–Paton 背景），p.264"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E147/#E149，证据等级 L1
+      （Schrans §8.96–§8.97、§8.102，笔记 p.516–517、p.519–520）。
+      Schrans 验证了 W_q 的规范不变性（[8.457]）。
+      ⚠ Schrans 对 (8.6.1) 下方原书关于规范参数 Λ 周期性的一句评论明说看不懂
+      （「I must admit that I am a bit lost about the subtlety of that remark」）。
+tags: [compactification, wilson-line, gauge-field, open-string, chan-paton, definition]
+notes: |
+  这是本图中 Wilson 线的定义卡。它的物理后果（把开弦的动量量子化整体平移、
+  把 U(n) 破缺到 U(1)^n）是命题 compact.wilson-line-shifts-open-string-momenta；
+  它在 T 对偶后的几何意义（θ_i = 第 i 张 D 膜的位置）是
+  branes.wilson-line-eigenvalues-are-brane-positions。
+
+  Chan–Paton 因子本身在本图中尚无节点（第 6 章的 spectrum/cft 区由另一位 curator
+  同期转换中）；本卡把 U(n) 背景写进陈述，待 Chan–Paton 卡就位后由后续 curator
+  补一条 uses 边或新建 v2。
+author: curator-polchinski-ch8
+created: "2026-09-11"

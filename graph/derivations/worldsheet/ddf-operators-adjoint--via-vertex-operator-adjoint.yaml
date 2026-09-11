@@ -33,7 +33,7 @@ depends_on:
       故它只在塔上、且只在那条约定下有意义；单层的 worldsheet.fock-indefinite-form
       对跨层配对不置一词。gaps 第 5 条已相应改写（约定仍是约定，只是有了承载它的节点）。
       这条边**不是 inferred**：塔与塔上的型是目标陈述量词的定义域。
-  - id: worldsheet.ddf-operators-v5
+  - id: worldsheet.ddf-operators-v6
     note: |
       被断言的对象。本推导用到定义卡的全部三条结构性输入：类光条件 k_0² = 0（使两个指数算符之间
       没有分支因子，伴随运算不产生额外相位）、横向条件 ε^i·k_0 = 0（使 ∂X^i 与 e^{i n k_0·X}
@@ -59,13 +59,23 @@ depends_on:
           只覆盖 n ≥ 1；把它延拓到全部整数的正是该节点 Lean 侧的 `Fock.pairing_mode_left`
           （见该节点 notes【顺带被证明、但不属于本命题的两条】第一条）。
           注意这条延拓**不在**该节点的 statement 文本里，故此边标 inferred 而非 inferred: false。
-  - id: worldsheet.ddf-transverse-oscillator-algebra
+  - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       目标第 (2) 条的假设 (a)。Gram 矩阵的递推把 A^i_{+n} 逐个对易穿过 A^j_{−m} 时，
       每次产生的 c-数就是 m δ^{ij} δ_{m+n,0}；没有这条对易关系，(1) 的伴随关系
       单独算不出任何配对值。**目标第 (1) 条不依赖它**（伴随关系的论证只用顶点算子的重排序，
-      不用两个 DDF 算子之间的 OPE）。这条边是本推导 status 的直接上限之一
-      （该节点自身 effective = physical-argument）。
+      不用两个 DDF 算子之间的 OPE）。
+      【2026-09-11（五）换代，curator，分支 agent/curator/ddf-algebra-split】原指
+      worldsheet.ddf-transverse-oscillator-algebra（已 superseded）。该卡把对易关系与
+      「与光锥横向振子代数逐字同型」捆在一起，现拆为本依赖（只含对易关系）与
+      worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators（同构识别）。
+      本推导要的是**对易关系本身**（递推里每步产生的 c-数），与光锥振子的比较无关，
+      故只改指 v2，**不**加同构卡的边。
+      ⚠ 原 note 末句「这条边是本推导 status 的直接上限之一（该节点自身 effective = physical-argument）」
+      **已过时**：v2 的 effective 是 rigorous（走 --via-zero-mode-bracket 的 G–N 顶点代数路线）。
+      本推导的 effective 仍是 physical-argument，但上限换成了顶点算子伴随那一线
+      （worldsheet.vertex-operator-adjoint / worldsheet.radial-hermitian-conjugation），
+      不再有 DDF 对易关系这一条。
   - id: worldsheet.ddf-commute-with-virasoro
     inferred: true
     note: |
@@ -181,7 +191,7 @@ summary: |
 gaps:
   - "【reviewer-batch6】summary 第 2 步用到『围道积分 ⟹ 模态和 A^i_n = Σ_m α^i_m V^{(n)}_m』字典；该字典图中无节点（ROADMAP 待裁决），与 ddf-transversality-gives-local-finiteness--via-mode-sum 的同一 gap 相同。"
   - "**文献只有一句断言，没有推导；summary 三步没有逐字来源。** GSW §2.3.3 的定位强度是章节页码 L4/L2、式号与正文 L0（brst-cohomology-sources.md §5.2–5.3），GT 1972 正文未获取。教科书对伴随关系只写「A^i_n 是厄米的」一类的一句话。第 1、2 步的模反射规则与逐因子取伴随是本项目按标准径向量子化规则重建的，**未与任何原文核对**。"
-  - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，status physical-argument），本条已加为依赖，本推导 summary 第 2 步不再是裸断言。**但缺口本身没有关闭，只是搬了家**：那条命题的论证仍依赖指数算符两半的重排序（E_+E_- ↔ E_-E_+）与「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则。【2026-09-11（四）更新】后两条里**第二条现在有节点了**：worldsheet.radial-hermitian-conjugation（definition，own rigorous / effective physical-argument），本条已把它加为本推导的非 inferred 依赖（第 1 步也用它）；同理「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」现由 worldsheet.exponential-vertex-operator-weight 承载。**剩下真正无节点的只有一条：同一个算符内部 E_+ 与 E_- 的重排序**（文献侧只有分离插入点的 Polchinski (6.6.24)）。三条缺口的现址仍是 worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条（前两条已改写为「已有承载节点 + 缺口搬家」）。本推导 status 仍无法高于 physical-argument：两张新卡自身的 effective 就是 physical-argument，且本推导另被 worldsheet.ddf-transverse-oscillator-algebra 封顶。"
+  - "**第 2 步的顶点算子伴随 (V^{(n)}_J)† = V^{(−n)}_{−J} 是本推导唯一的非初等步骤。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.vertex-operator-adjoint（推导 --via-radial-conjugation，status physical-argument），本条已加为依赖，本推导 summary 第 2 步不再是裸断言。**但缺口本身没有关闭，只是搬了家**：那条命题的论证仍依赖指数算符两半的重排序（E_+E_- ↔ E_-E_+）与「厄米共轭在径向量子化下作用为 z ↦ 1/z̄」这条规则。【2026-09-11（四）更新】后两条里**第二条现在有节点了**：worldsheet.radial-hermitian-conjugation（definition，own rigorous / effective physical-argument），本条已把它加为本推导的非 inferred 依赖（第 1 步也用它）；同理「:e^{i n k_0·X}: 在 k_0² = 0 时权为 0」现由 worldsheet.exponential-vertex-operator-weight 承载。**剩下真正无节点的只有一条：同一个算符内部 E_+ 与 E_- 的重排序**（文献侧只有分离插入点的 Polchinski (6.6.24)）。三条缺口的现址仍是 worldsheet.vertex-operator-adjoint--via-radial-conjugation 的 gaps 第 2、3、4 条（前两条已改写为「已有承载节点 + 缺口搬家」）。本推导 status 仍无法高于 physical-argument：两张新卡自身的 effective 就是 physical-argument，且本推导此前另被 worldsheet.ddf-transverse-oscillator-algebra 封顶（【2026-09-12 过期】该卡已拆为 -v2，v2 已 rigorous；现在本推导是无鬼定理 v4 的唯一实质上限）。"
   - "**Lean 侧未起步：V(b)_J† = V(−b)_{−J} 未证。** `formal/StringFormal/NoGhost/VertexOperator.lean` 已有正规序指数的两半（`Fock.creaExp`、`Fock.vertexSub`）与模 `Fock.vertexOsc`，也有 b·b = 0（`dotVec η b b = 0`）作为显式假设，但**没有任何关于伴随的定理**——worldsheet.ddf-operators-v5 的 notes (4) 逐字登记「顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做（需 E_+E_- 重排序）」。另有结构性障碍：Lean 侧只有 R-双线性型 `Fock.pairing`，**无 sesquilinear 结构**，故即使做完也只覆盖目标边界 (a) 说的实极化情形，不覆盖复 Hermitian 形式。"
   - "**「†」是双线性型的转置，不是 Hermitian 共轭**（继承 worldsheet.fock-indefinite-form 与 worldsheet.virasoro-generators-adjoint 的同一条 gap）。物理上的协变 Fock 空间是复空间，A^† 还含一次复共轭；本推导第 2 步里「X^μ 厄米」这句话在双线性型版本中要读成「转置下不变」。两者在实极化下一致，**复情形未证**。这条对本节点尤其要紧，因为无鬼定理断言的是 Hermitian 形式的半正定性。"
   - "**塔上的双线性型是约定式引入的，不是被证明的。** 【2026-09-11（三）更新】它**已有承载节点**：worldsheet.momentum-tower-fock-space，其 (2) 把塔上的型定义为各层 worldsheet.fock-indefinite-form 之型的直和并**显式声明「层间正交是本定义规定的，不是被证明的」**；本条已加为依赖。**缺口本身没有关闭**：worldsheet.fock-indefinite-form 是**逐固定动量扇区**陈述的（其 Lean 侧 `Fock.pairing` 也是），不同动量层之间的正交性在本图中仍是输入而非结论（物理上它是动量本征态的正交性 ⟨p|p'⟩ ∝ δ^D(p−p')，而本图**没有节点**承载连续动量本征态与 δ 归一化）。目标 (1) 的等式跨两个不同层，因此实质使用这条约定。Lean 侧另缺塔上的型本身（DDF.lean 全文 grep `pairing` 零命中，2026-09-11 curator 核）。"

@@ -24,5 +24,16 @@ notes: |
   写进前提，而该前提在来源中未被证明（worldsheet.operator-product-expansion）。
   这是共形 bootstrap 这一整套现代技术在本图中的入口；
   后续若要建立 bootstrap 的数值结果（Ising 等），其依赖链会从这里出发。
+
+  ★ **【2026-09-11，curator-v1-sec13，L1】另一条相关的原书断言及其出处**：
+  「主场的 OPE 决定**一切**场的 OPE」这条 CFT 基本命题，Polchinski Vol.1 只在
+  **§2.4, (2.4.20) 下方, p.47** 断言，逐字：
+  「they determine the OPEs of *all* fields in terms of those of the primary fields.
+  **We will develop this in chapter 15**」。
+  第 15 章在 **Vol.2**，⇒ **Vol.1 此处无证明**。本图目前**没有**承载这条命题的节点；
+  若日后新建，loc 必须写成上面这个位置并注明「本处只断言」，来源应另找 Vol.2 §15 或 BPZ 1984
+  （Polchinski 第 2 章注记 p.349 逐字把 CFT 的经典参考给的是 Belavin, Polyakov & Zamolodchikov
+  (1984), Nucl. Phys. B241, 333，并说它 "directed at the advanced topics to be treated in chapter 15"）。
+  见 literature/extractions/polchinski-1998-v1.md §13.4(e) 与 §13.2(e)。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"

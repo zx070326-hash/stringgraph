@@ -11,10 +11,40 @@ depends_on:
       本推导要相消的就是这一类项。
   - id: worldsheet.free-scalar-propagator
     note: 提供 G' 的普适部分 −(α'/2)ln|z|²；非普适部分 f 是它在弯曲度规上的补充项。
+  - id: spectrum.covariant-external-legs-on-shell
+    note: |
+      **【2026-09-11 新增】**提供本推导两个不可缺前提中的**第二个**：**所有外线满足同一个
+      质量壳条件**（tachyon：α'k_i² = 常数；闭弦 α'k² = 4，开弦 α'k² = 1）。
+      用在 summary 的 (b) 一步：单指标项 ∝ k_i² ω(z_i) 之所以能把系数提出来、再被 Σ_i k_i = 0
+      消掉，靠的正是**所有 i 的 k_i² 取同一个值**；若外线不上壳，(b) 不相消，期望值依赖
+      共形因子 ω。目标陈述 spectrum.tachyon-expectation-conformal-factor-cancellation 的
+      (1) 与 (2) 都逐字写出了这个前提（「所有外线满足同一个质量壳条件」「on-shell 条件 +
+      动量守恒」），此前它在图上**没有对应的依赖边**，本次补上。
+      **不标 inferred**：本推导 sources 新增 headrick-2008 Problem 6.1 一条，那里对**同一批**
+      闭弦 tachyon 顶点算子期望值逐字写「Since this is an expectation value of closed-string
+      tachyon vertex operators, **α'k_i² = 4**」（抽取记录 E94，L1），即 §6 在使用这些期望值时
+      确实把外线当作上壳的；被依赖节点正是承载「协变振幅外线的 on-shell 条件 = 光锥质量壳」
+      这一步的桥卡。
+      ⚠ **两处需要读者注意的限度**（不改变本边的方向与非 inferred 判定）：
+        (1) 被依赖卡的**论证**在 Polchinski §4.1（权 1 / (1,1) 主场的 L_0 一半 ⟺ 光锥质量壳），
+            不在 §6.2；§6.2 只是**使用**该条件。这正是建那张桥卡的原因（§6 与 §1/§4 互不引用）。
+        (2) 被依赖卡明写它**不**承载「权 (1,1) ⟹ 积分后顶点算子 Weyl 不变 ⟹ 振幅良定义」
+            那一步（其【不断言】(b)）。本推导的目标陈述 (2) 恰是关于 Weyl 不变性的读法，
+            那一半仍无节点支撑，见 gaps。
 sources:
   - ref: polchinski-1998-v1
     loc: "§6.2, eq. (6.2.17) 及其推导，p.171"
     note: 抽取记录 #E93，L1（schrans-2020 §6.12，笔记 p.286，n = 3 的显式验算 [6.44]–[6.45]）。
+  - ref: headrick-2008
+    loc: "Problem 6.1（PDF p.40）：对 S₂ 上闭弦 tachyon 顶点算子期望值逐字「Since this is an expectation value of closed-string tachyon vertex operators, **α'k_i² = 4** and the expectation value is **smooth at u_i = 0**」"
+    note: |
+      **【2026-09-11 新增】**这是 depends_on 中 spectrum.covariant-external-legs-on-shell
+      那条边**不**标 inferred 的依据位置：它证明 §6.2 在使用这一批期望值时确实把外线当作
+      上壳的（α'k_i² = 4），故「本推导用到质量壳」这件事在来源侧有落点。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E94，等级 **L1**（逐字引文）。
+      ⚠ 它给的是 (6.2.31)（无穷远点行为的 SL(2,C) 检验）而不是 (6.2.17) 本身，
+      且只**断言**质量壳值、不论证它——论证在 §4.1，由被依赖的桥卡承载。
+      按 lead 关于 headrick-2008 的既有裁决，习题解答可作为成文来源使用，须在此注明。
 summary: |
   Gauss 积分后指数里的项按对 i 的依赖分三类：
 
@@ -35,14 +65,20 @@ gaps:
   - "**f 的显式表达式本图没有**：(6.2.9)（S₂ 上的 Green 函数）只到 L2（抽取者只读到目录条目），
      故「f 只以上述组合出现」这一关键结构在本图中**没有表达式级的核实**。
      这是本推导最实质的缺口。"
-  - "**路径积分测度未定义**（本批次共有的限制）；且『顶点算子 on-shell 时是权 (1,1) 主场』
-     这一 CFT 事实在本图中没有节点（顶点算子的共形权只在 formal/ 的 Lean 侧有部分工作）。"
-  - "**「Weyl 不变性 ⟸ on-shell + 动量守恒」的措辞未核实**：原书是否把这一点单独说出来未知；
-     (2) 是 curator 依 [S] 的验算写成的读法。"
+  - "**路径积分测度未定义**（本批次共有的限制）。关于『顶点算子 on-shell 时是权 (1,1) 主场』：**2026-09-11 更新**——该等价的**L_0 一半**现已有节点 spectrum.covariant-external-legs-on-shell（「权 1 / (1,1) 主场的 L_0 条件 ⟺ 光锥质量壳 α'm² = N − 1 / 4(N−1)」，来源 Polchinski §4.1），本推导已挂边；但**另一半**——『主场性 + 权 (1,1) ⟹ 积分后的顶点算子 Weyl 不变 ⟹ 振幅良定义』（原书 §3.6 的条件）——在本图中**仍没有节点**，那张桥卡的【不断言】(b) 也明确声明不承载它。顶点算子共形权本身只在 formal/ 的 Lean 侧有部分工作。"
+  - "**「Weyl 不变性 ⟸ on-shell + 动量守恒」的措辞未核实**：原书是否把这一点单独说出来未知；目标陈述的 (2) 是 curator 依 [S] 的验算写成的读法。**2026-09-11 补记**：本次新挂的 spectrum.covariant-external-legs-on-shell 只补上了『所有外线同壳』这一**前提**在图上的依赖边（并由 headrick-2008 Problem 6.1 给出 §6 侧的落点），**没有**补上『⟹ Weyl 不变』那一步的来源——那一步仍是本推导最实质的未核实之处，与 gaps 第 2 条（f 的显式表达式只到 L2）并列。"
 notes: |
   本条与 worldsheet.polyakov-weyl-invariance、worldsheet.weyl-anomaly-trace 是不同层面的陈述：
   那两条讲**作用量/测度**的 Weyl 性质，本条讲**带插入的期望值**的 Weyl 性质，
-  后者额外要求插入满足质量壳条件。日后若建「顶点算子 on-shell ⟺ 权 (1,1) 主场」节点，
-  应把本推导改成对它的显式依赖。
+  后者额外要求插入满足质量壳条件。
+
+  **【2026-09-11 落实上面这句】**原文写「日后若建『顶点算子 on-shell ⟺ 权 (1,1) 主场』节点，
+  应把本推导改成对它的显式依赖」。该节点的**一半**已由 curator 建成：
+  spectrum.covariant-external-legs-on-shell（承载「权 1 / (1,1) 主场的 L_0 条件 ⟺ 光锥质量壳」，
+  外加 (26, 1) 处 H_OCQ ≅ H_light-cone），本推导已据此新增一条依赖边（非 inferred，
+  依据位置是新增的 headrick-2008 Problem 6.1）。
+  **另一半**（主场性/权 (1,1) ⟹ 积分后顶点算子 Weyl 不变）该卡明写不承载，本图仍无节点，
+  已留在 gaps 第 3、4 条。本次只加边、加 source、改 gaps 与本 notes，
+  **未动** target / kind / status / summary / 目标陈述。
 author: curator-polchinski-ch6
 created: "2026-09-11"

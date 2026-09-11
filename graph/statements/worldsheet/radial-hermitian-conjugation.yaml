@@ -80,7 +80,7 @@ statement: |
       与 Polchinski (4.3.18) 的内容）：本卡只讲模反射规则本身。
 uses:
   - worldsheet.state-operator-isomorphism
-  - worldsheet.primary-field
+  - worldsheet.primary-field-v2
 uses_conventions: [conv.worldsheet-complex-coords, conv.virasoro-standard]
 sources:
   - ref: polchinski-1998-v1

@@ -1,0 +1,23 @@
+id: compact.even-lattice-gives-mutual-locality--via-polarization-identity
+target: compact.even-lattice-gives-mutual-locality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.narain-lattice-is-even
+  - id: worldsheet.operator-product-expansion
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.16)–(8.4.17)、(8.4.20)，p.250–251"
+    note: 抽取记录 polchinski-1998-v1#E138（L1，Schrans [8.245]–[8.249]）。
+summary: |
+  自由场的指数顶点算子相乘给出因子 z^{ℓ_L·ℓ'_L} z̄^{ℓ_R·ℓ'_R}；绕行一圈的相位是
+  e^{2πi(ℓ_L·ℓ'_L − ℓ_R·ℓ'_R)} = e^{2πi ℓ∘ℓ'}，单值 ⟺ ℓ∘ℓ' ∈ Z。
+  再由极化恒等式 2ℓ∘ℓ' = (ℓ+ℓ')∘(ℓ+ℓ') − ℓ∘ℓ − ℓ'∘ℓ'：偶格使右边三项均属 2Z，
+  故 ℓ∘ℓ' ∈ Z。
+gaps:
+  - "「OPE 的绕行相位是 e^{2πiℓ∘ℓ'}」依赖自由场 OPE 的显式形式与围道绕行；OPE 收敛与围道变形的合法性未证明（lead 裁决 2026-09-10）。"
+  - "cocycle 因子（(8.2.22)/(8.2.23)，抽取记录 #E124）在 nw' + n'w 为奇数时是必要的，本推导未处理它；Γ 为偶格时该问题正好不出现，但来源没有把这一点说破。"
+  - "极化恒等式那一步是三行代数、前提完整，但缺 reviewer 复核记录，按 docs/STATUS_LEVELS.md 不单独走 rigorous 例外。"
+author: curator-polchinski-ch8
+created: "2026-09-11"

@@ -28,6 +28,9 @@ statement: |
      Green–Schwarz 1984，见 notes）。
 uses_conventions:
   - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.gs_factorization_so32
+  lean_file: StringFormal/Math/GreenSchwarzAlgebra.lean
 sources:
   - ref: green-schwarz-1984
     loc: "PLB p.120（重印 611），(19)；引导句（跨页）「It is important in comparing the analysis of the mixed anomalies for SO(32) and E₈ × E₈ that for both these gauge groups」"
@@ -38,17 +41,29 @@ sources:
       「Tr F⁶ = (1/48) Tr F⁴ Tr F² − (1/14400)(Tr F²)³」是二手转述（L4），数值一致但不是原文式样。
 tags: [algebra, polynomial-identity, anomaly, factorization, so32, e8, phase2, lean-target]
 notes: |
+  【★ 2026-09-11：Lean 声明已就位（岛 2）】formal/StringFormal/Math/GreenSchwarzAlgebra.lean
+  的 Factorization 节给出三条声明，合起来覆盖本卡 statement 的全部三个部分：
+  · `gs_factorization_so32`  —— 情形 (a)（`formal.lean_decl` 取这条）；
+  · `gs_factorization_e8`    —— 情形 (b)；
+  · `gs_factorization_nested_eq_expanded` —— 「等价的展开形式」那一句。
+  ⚠ **环境不完全一致**：本卡写「R 是 ℚ-代数」，Lean 写 `[Field K] [CharZero K]`。
+  特征零域是 ℚ-代数的真子类（ℚ[x, y] 本身不是域），故 Lean 严格来说证的是本卡的一个**特例**；
+  由 ℚ[x, y] ↪ ℚ(x, y) 立刻补回一般情形，但那一步不在 Lean 里。记在
+  math.anomaly-twelve-form-factorization--via-lean 的 gaps。
+  Lean 侧刻意**不**引入迹恒等式（与本卡 statement 第 2 条一致），
+  见该文件 Factorization 节 docstring 的 "Read the scope carefully" 段。
+
   【这是 Phase 2 Lean 岛的首选目标】docs/ROADMAP.md Phase 2 列「Lean 岛 2：Green–Schwarz 反常多项式的
   因子化（代数部分）」，抽取记录 §5.1 把本条列为 A1「首选目标 / 难度极低 / 理想的第一块砖」。
   形式化形态（抽取记录 §5.1 逐条）：在 ℚ-代数（或直接在 ℚ[x, y]）上按 (a)(b) 定义三个多项式，
-  两个 `field_simp` / `ring` 即可结案。**目标卡的 formal.lean_decl 待 formalizer 填**，
-  填好后本节点可加一条 status: formalized 的 `--via-lean` 推导（不要改本卡的 statement 文本）。
+  两个 `field_simp` / `ring` 即可结案。**已完成**（见上一条），实际写法正是 `field_simp; ring`。
 
-  【为什么现在是 physical-argument 而不是 rigorous】按 docs/STATUS_LEVELS.md 的 rigorous 例外，
+  【为什么 --via-direct-expansion 仍是 physical-argument】按 docs/STATUS_LEVELS.md 的 rigorous 例外，
   「前提完整 + 有限步初等计算 + reviewer 独立复核并在推导 notes 留 reviewer-verified 记录」三条齐备才可标 rigorous。
-  这里前两条成立（前提就是 (a)(b) 两组表达式，计算是两行多项式展开），**第三条尚缺**：
-  目前只有抽取者（researcher）的手工复算，没有 reviewer 的独立复核记录，也没有 Lean 声明。
-  故取低一级。升级只需 reviewer 复核一次或 formalizer 做出 Lean 声明。
+  那条纸上推导的三条已齐（reviewer-verified: reviewer-gs1984, 2026-09-11），
+  但它的 depends_on 里带着两条 physical-argument 的迹恒等式，故其有效状态仍被压低；
+  **本卡的有效状态改由 --via-lean 承载**（那条推导刻意不引入迹恒等式，与 statement 第 2 条一致）。
+  两条推导并存是有意的：一条记账「这两组多项式确实是那两个李代数的伴随迹」，一条只证代数恒等式。
 
   【唯一性冲突，未裁决（抽取记录 E20 / Q1）】"因子化 ⟺ 规范群是 SO(32) 或 E₈ × E₈" 这条**没有**
   在本图建节点，理由有三：

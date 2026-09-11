@@ -34,21 +34,55 @@ sources:
       笔记 p.300–307，逐页读到并逐步复现）。
       ⚠ 抽取记录**没有抄出 (6.4.5) 的被积函数**；本卡片写出的幂次
       y^{−α's−2}(1−y)^{−α't−2} 是 curator 由 [S] [6.143] 的 Beta 参数 (−α's−1, −α't−1)
-      反推的（B(a,b) 的 Euler 积分表示 ⇒ 幂次 a−1 = −α's−2）。**未核对原书。**
+      反推的（B(a,b) 的 Euler 积分表示 ⇒ 幂次 a−1 = −α's−2）。
+      **部分核实（2026-09-11，§12.8）**：原书 (6.4.19)/(6.4.20) 已逐字到手（见下一条 source），
+      **上述反推得到印证**；B 的参数 −α_o(s) = −α's−1 确为原书写法。
+      ⚠ **但 (6.4.5) 自身的排版（四点振幅的普遍形式与前因子）本轮仍未核对**，
+      §12.8 只读了 p.181–183。
   - ref: polchinski-1998-v1
-    loc: "§6.4, eq. (6.4.20)–(6.4.22)（Beta 函数表示）"
-    note: 抽取记录 #E99，L1（[S] §6.39–§6.41，笔记 p.308–309）。
+    loc: "§6.4, p.183：eq. (6.4.19)（B(a,b) = ∫₀¹ dy y^{a−1}(1−y)^{b−1}）、(6.4.20)（I(s,t) = B(−α_o(s), −α_o(t))，α_o(x) = 1 + α'x）、(6.4.24)（Beta 的 Γ 商形式）"
+    note: |
+      抽取记录 #E99 + **§12.8（原书核实，2026-09-11），等级 L1（原书 p.183 逐字）**。
+      原书逐字：
+        B(a,b) = ∫_0^1 dy y^{a−1}(1−y)^{b−1}，                                   (6.4.19)
+        I(s,t) = B(−α_o(s), −α_o(t))，  α_o(x) = 1 + α'x。                    (6.4.20)
+        B(−α_o(x),−α_o(y)) = Γ(−α'x−1)Γ(−α'y−1)/Γ(−α'x−α'y−2)。  (6.4.24)
+      → **本卡片 statement 里的 I(s,t) = ∫₀¹ dy y^{−α's−2}(1−y)^{−α't−2} = B(−α(s), −α(t))
+      与 α(x) ≡ 1 + α'x 得到原书两头的印证**：幂次由 (6.4.19) 的 a−1 = −α_o(s)−1 = −α's−2 得出，
+      α_o(x) = 1 + α'x 与 (6.4.20) 逐字一致。
+      ⚠ 但这**只能印证 I(s,t) 这一行，不能印证 (6.4.5) 本身的排版**；(6.4.5) 仍未核对，见上一条 source。
+      ⚠ 旧 loc 写的「(6.4.20)–(6.4.22)（Beta 函数表示）」已改写：原书里的 Beta 定义是 **(6.4.19)**，
+      Γ 商形式是 **(6.4.24)**；**(6.4.21)/(6.4.22) 本图未核实**，不再引用。
 tags: [spectrum, tree-level, disk, open-string, tachyon, four-point, beta-function]
 notes: |
   由 curator 于 2026-09-11 从抽取记录 E98 建立。
 
   **⚠ 上游 ch5 节点尚未进入 main**（主公式 (5.3.9)、FP 手续），处理同本批次其它节点。
 
-  **发散的处理方式值得记录**（任务书「正规化」在本章的第三个落点）：抽取记录 E98 逐字引 [S] §6.34：
-  「In order to avoid any divergences, we first **replace the upper integration boundary 1 by r**,
-  work in the region where the integrand is convergent and then **take the limit of r → 1**」
-  ——即**解析延拓**，不是任何别的正规化方案。积分只在 Re(−α's−1) > 0 等条件下收敛，
+  **发散的处理方式值得记录**（任务书「正规化」在本章的第三个落点）。
+  抽取记录 E98 逐字引 [S] §6.34：「In order to avoid any divergences, we first
+  **replace the upper integration boundary 1 by r**, work in the region where the integrand is
+  convergent and then **take the limit of r → 1**」。
+
+  **⚠⚠ 订正（2026-09-11，抽取记录 §12.8 读原书 p.181–182，L1）：上面那个 r → 1 的手续
+  是 [S] 自己的装置，不是原书的做法。** 原书的做法是：
+  (i) 指出 I(s,t) 只在 α's < −1 且 α't < −1 时收敛；
+  (ii) 在 y = 0 的**邻域**上把被积函数近似成 ∫₀^r dy y^{−α's−2}，其余项在 α's = −1 处解析（**(6.4.11)**）；
+  (iii) 得 −1/(α's+1) + 解析项，**然后对 Mandelstam 变量 s 做解析延拓**。
+  原书逐字：「The divergence of the amplitude *at* the pole is an essential physical feature of the
+  amplitude, a resonance… The divergence of the integral *past* the pole is not; it is just an
+  artifact of this particular integral representation.」
+  配套的 Minkowski iε 处方是 **(6.4.12)**：1/(α's+1) ≡ 1/(α's+1+iε) ≡ P[1/(α's+1)] − iπδ(α's+1)；
+  幺正性定出极点系数的条件是 **(6.4.13)**；极点位置是 **(6.4.18)** α's = −1, 0, 1, 2, …。
+
+  → **两种手续的终点相同（都是解析延拓），但延拓的对象不同**：
+  [S] 延拓的是积分上限 r，原书延拓的是 Mandelstam 变量 s。
+  本卡片不把任一手续写进陈述；积分只在 Re(−α's−1) > 0 等条件下收敛，
   其余参数值由 Beta 函数的亚纯延拓定义（math.euler-beta-integral），
   端点发散则被解读为中间态极点（spectrum.four-tachyon-factorization-disk-normalization）。
+
+  **⚠ 给 lead 的提醒**：本卡片的推导节点（via-boundary-integral）的 (3) 仍写着
+  「[S] §6.34 的做法是把上限 1 换成 r」而未区分原书，建议同步订正；
+  本轮（curator-ch6-locs）按任务书**不动 derivations**。
 author: curator-polchinski-ch6
 created: "2026-09-11"

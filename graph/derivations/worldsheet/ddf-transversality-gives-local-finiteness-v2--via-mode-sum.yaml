@@ -1,0 +1,106 @@
+id: worldsheet.ddf-transversality-gives-local-finiteness-v2--via-mode-sum
+target: worldsheet.ddf-transversality-gives-local-finiteness-v2
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    note: |
+      被断言的对象。ε·k_0 = 0 是该定义卡的条件 (T)（Lean 里是 `ddfOp` 的显式参数）；
+      k_0² = 0 与 2α' k_0·p = 1 是它的 (N)(S)。
+      **2026-09-11（五）换代记账**：本边原指 worldsheet.ddf-operators-v5（围道积分定义），
+      故本推导原有一个「第 0 步：把围道积分展成模态和」的非初等前置转换。
+      v6 直接以模态和为定义，**第 0 步随之消失**，summary 与 gaps 已相应改写。
+  - id: worldsheet.bosonic-fock-space
+    note: |
+      「代数 Fock 空间」（`MvPolynomial (Osc D) R`，无完化）与 level 分级的形式化定义。
+      「局部有限」这个概念只有在这个代数空间上才有意义，也只有在这里 A^i_n 才需要被证明是算子。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: |
+      振子模 α^i_m 及其局部有限和的处理方式（该节点自身就用同一套「逐向量只有有限多项非零」
+      的论证给 L_m 的良定义性，Lean 侧共用 `lsumLocFin`）。本推导是同一模式在 A^i_n 上的重复。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.lie_towerMode_towerVertex_of_eq_zero；formal/StringFormal/NoGhost/VertexOperator.lean :: StringFormal.NoGhost.Fock.vertexOsc_apply_eq_zero_of_level、StringFormal.NoGhost.Fock.vertexOsc_mem_levelSubmodule"
+    note: |
+      本仓库，合并提交 9691057（formal 侧提交 4c12d36），Lean 4 + Mathlib v4.33.1。
+      三条引理均无 sorry，公理仅 propext / Classical.choice / Quot.sound；
+      **curator 未自行重跑 `lake build`**，以 formalizer 在 formal/TODO.md 的登记为准。
+      它们分别给出本推导的上界截断（横向性 ⟹ α^i_m 与顶点算子对易）与下界截断
+      （V_K 恰好升高能级 K，能级为负时为零）。
+      **【2026-09-11（五）更新】此处原逐字引用 DDF.lean 文件头「组装未做」的自述，
+      该自述已被 formal 侧提交 03c4304 作废**：`StringFormal/NoGhost/DDFOperator.lean`
+      现有 `ddfOp`（`lsumLocFin` 组装）与 `ddfSummand_apply_eq_zero_of_notMem_window`
+      （局部有限性本身）。机器检查的版本是姊妹推导
+      worldsheet.ddf-transversality-gives-local-finiteness-v2--via-lean（formalized）。
+      **本推导仍不标 formalized**：它是手写论证的独立记录，不是对 Lean 证明的转述；
+      它止步于 physical-argument 的理由只剩「无 reviewer 复核记录」一条（见 gaps）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      被断言对象 A^i_n 与条件 ε·k_0 = 0 的文献出处。**GSW 不作本断言**：
+      文献只把 ε·k_0 = 0 当作使被积量成为权 1 主场 / 避免奇异 OPE 的条件，
+      不讨论模态和的局部有限性。本条只定位对象，不承载论证。
+summary: |
+  两步有限步计算。**横向性 ε·k_0 = 0 只用在第 2 步（上截断）；第 1 步（下截断）完全不用它。**
+
+  第 0 步（**2026-09-11（五）起已消失**）。本推导原先要先把 worldsheet.ddf-operators-v5 的
+  围道积分 ∮ (dz/2πi) ∂X^i e^{i n k_0·X} 展成模态和 A^i_n = Σ_m α^i_m V^{(n)}_m，
+  那是一步非初等的前置转换（形式洛朗展开 + 取 z^{-1} 系数），本图无严格节点覆盖。
+  lead 2026-09-11 裁决把定义卡换代为 worldsheet.ddf-operators-v6，**模态和就是定义**，
+  故这一步不再属于本推导。围道写法与模态和相同这件事退为 v6 notes 里的 open 缺口，
+  由需要回译到文献的下游承担，见 gaps 第 1 条。
+  （记账保留：由 k_0² = 0 与 2α' k_0·p = 1，单值因子 z^{2α' n k_0·p} = z^n 在整条塔上是
+  同一个整数幂，Lean 侧 `dotVec_towerMomentum_right_of_isotropic`；这一点现在写在 v6 里。）
+
+  第 1 步（下界截断，不需要横向性）。V^{(n)}_m 把振子能级升高 m − n
+  （`Fock.vertexOsc_mem_levelSubmodule`；塔上的 towerShift n 吸收了指标位移 K ↦ K − n）。
+  设 |ψ⟩ 处在能级 N。则 V^{(n)}_m |ψ⟩ 的能级是 N + m − n，能级为负的向量为零
+  （`Fock.vertexOsc_apply_eq_zero_of_level`），故 m < n − N 的项全为零。
+
+  第 2 步（上界截断，**这里才用横向性**）。ε·k_0 = 0 意味着重标度后的顶点动量满足 b^i = 0，
+  于是 [α^i_m, V^{(n)}_K] = 0 对**所有** m（含 m = 0；Lean 侧 `lie_towerMode_towerVertex_of_eq_zero`，
+  塔上版本，单个 Fock 空间上的 m = 0 情形要靠 towerShift 才对）。因此可以把 α^i_m 移到右边：
+    α^i_m V^{(n)}_m |ψ⟩ = V^{(n)}_m α^i_m |ψ⟩ ，
+  而 α^i_m 对 m > N 湮灭能级 N 的态，故 m > N 的项全为零。
+
+  合起来：只有 n − N ≤ m ≤ N 的有限多项可能非零，A^i_n |ψ⟩ 是有限和，
+  A^i_n 是代数 Fock 塔上处处有定义的线性算子，全程不用收敛性假设。
+
+  【必要性方向不在本推导的断言范围内】若 ε·k_0 ≠ 0，则 b^i ≠ 0 且
+  [α^i_m, V^{(n)}_m] = b^i V^{(n)}_0（`Fock.lie_mode_vertexOsc`），
+  于是 α^i_m V^{(n)}_m |ψ⟩ = V^{(n)}_m α^i_m|ψ⟩ + n b^i V^{(n)}_0|ψ⟩，
+  第二项与 m 无关且非零，对一切充分大的 m 重复出现，和在代数 Fock 空间上不是局部有限的。
+  本推导**不**断言这一条（见目标节点 notes）。
+gaps:
+  - "**第 0 步（围道积分 ⟹ 模态和）已不在本推导内，但字典本身仍是 open 缺口**。lead 2026-09-11 裁决把定义卡换代为 worldsheet.ddf-operators-v6（模态和即定义），故本推导不再执行这一步。代价是「本图的 A^ε_n 与文献 GSW §2.3.3 / GT 1972 / goddard-2008 (5.1) 的围道积分 A^i_n 是同一个算子」这句话在图中**没有节点承载**：最接近的 worldsheet.ope-pole-mode-commutator-dictionary 是形式分布版且 effective 为 open，worldsheet.ope-commutator-dictionary 是围道 ⟹ 对易子而非围道 ⟹ 模态和。**凡要把本命题回译成文献陈述的下游（首当其冲 ms.no-ghost-theorem 的回译审计）必须显式引用这条缺口。**建议补 worldsheet.ddf-contour-equals-mode-sum 卡。"
+  - "**无 reviewer 复核记录**，故按 docs/STATUS_LEVELS.md 的 rigorous 例外条款（「缺此记录……的一律 physical-argument」）不能标 rigorous。**这现在是本推导止步于 physical-argument 的唯一理由**（第 0 步已消失，Lean 组装已完成）。第 1、2 步是有限步初等计算，且已被机器验证（姊妹推导 --via-lean），所以 reviewer 一旦复核并在本 notes 补 `reviewer-verified: <agent>, <date>`，本推导即可升到 rigorous。"
+  - "**本推导不标 formalized，但理由已变**。原理由「A^i_n 与模态和在 Lean 里都还没有定义，组装未做」**已作废**：formal 侧提交 03c4304 加入 `StringFormal.NoGhost.ddfOp`（`lsumLocFin` 组装）、`ddfOp_apply` 与 `ddfSummand_apply_eq_zero_of_notMem_window`。现在的理由是**分工**：本推导是手写论证的独立记录，机器检查那条是 worldsheet.ddf-transversality-gives-local-finiteness-v2--via-lean（status: formalized）。工具取两条中较高者，故目标卡的 best_derivation 是 --via-lean。"
+  - "本推导只谈**代数**动量塔（无完化）。文献里的 A^i_n 作用在有完化/解析结构的空间上时，局部有限性不是必要条件（收敛即可），故本命题在文献框架下**不是**一条被讨论的命题。这是「Lean 侧发现、文献未明写」的典型例子。"
+  - "**窗口的「能级齐次」限制已解除**。本推导 summary 给出的窗口 n − N ≤ m ≤ N 是对能级齐次的 |ψ⟩ 写的；目标卡 v2 的陈述改用两个不同的界（下侧能级界 L(x)、上侧指标界 M(x)），对**任意**塔向量成立，Lean 侧即 `towerLevelBound` / `towerModeBound`（对支撑取 sup）。恒有 M(x) ≤ L(x)，故 v2 的窗口更窄，本推导的窗口是它在能级齐次向量上的推论。⚠ 「M ≤ L」这一行观察在 Lean 里没有具名引理。"
+  - "k_0·p = 0 的扇区（含 p = 0）不在覆盖范围内：那里 worldsheet.ddf-operators-v6 的归一化 (S) 不可满足。⚠ 但本推导的两条截断**都不用** (S)，故这是定义卡适用范围的限制，不是论证的限制。"
+notes: |
+  【本节点的来历】worldsheet.ddf-operators-v4 的 notes 第 (2) 条把这件事登记为
+  「本项目 Lean 侧的新发现，文献未明写」，但当时它藏在一张定义卡的 notes 里、
+  没有独立状态、也没有推导。2026-09-11 拆卡时按 docs/ROADMAP.md 待拆清单
+  （lead 已同意）独立立卡并配本推导。
+
+  **status 定级是 curator 的判断，理由写在 gaps 第 2 条**：不是「论证有漏洞」，
+  而是 docs/STATUS_LEVELS.md 明文要求 reviewer 复核记录才可用 rigorous 例外条款。
+  按「不确定选低一级」的项目原则取低。
+  （原先还有第二条理由「第 0 步的字典本图无依据」，2026-09-11（五）随定义卡换代到
+  worldsheet.ddf-operators-v6 而消失——那条字典不再进入本推导，只留在 v6 的 notes 里。）
+
+  【2026-09-11（五）改挂与改名】本推导原 id
+  `worldsheet.ddf-transversality-gives-local-finiteness--via-mode-sum`、
+  原 target 为 v1。目标卡换代为
+  worldsheet.ddf-transversality-gives-local-finiteness-v2 后，按 graph/CLAUDE.md 的
+  「derivation id 写成 `<statement-id>--via-<method>`」，id 与 target 同步改为 v2 版。
+  **kind、status、两步论证的内容都没有变**；变的只是不再需要第 0 步，
+  以及 gaps 第 3、5 条按 Lean 的新进展关闭。
+
+  **请 reviewer 注意**：本推导现在离升级只差一步——
+  两条截断都已被机器验证（姊妹推导 --via-lean，formalized），
+  reviewer 只需独立复核 summary 第 1、2 步的算术并在此补
+  `reviewer-verified: <agent>, <date>`，即可升 rigorous。
+author: curator
+created: "2026-09-11"

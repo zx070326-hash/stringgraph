@@ -3,8 +3,11 @@ target: spectrum.veneziano-regge-behavior
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: spectrum.veneziano-amplitude-weak
-    note: 提供三项 Beta 结构（弱形式足够：Regge 幂次不依赖整体前因子）。
+  - id: spectrum.veneziano-amplitude
+    note: |
+      提供三项 Beta 结构。**2026-09-11：由 spectrum.veneziano-amplitude-weak 改指换代后的完整卡**
+      （weak 卡已 superseded_by 本卡）；Regge 幂次不依赖整体前因子，
+      故本推导只用到完整卡里与弱卡相同的那一层结构。
   - id: math.gamma-ratio-asymptotics
     note: |
       提供 B(a,b) ∼ Γ(b)a^{−b} 的单参数渐近，本推导的核心。
@@ -50,12 +53,14 @@ gaps:
   - "**𝔅₂ 不能在实 s 轴上被忽略**：reviewer-ch6 复算表明 𝔅₂ 与 𝔅₁ 同幂次，只在 Im s ≠ 0 时
      被 1/sin(πα(s)) 指数压低。因此 (3) 的合计 ∝ s^{α(t)}Γ(−α(t)) 依赖「s 带小虚部」这一物理默认，
      与第一条 gap（arg a = π 射线上的极点塔）同源；[S] 的 s^{−5} 本图不采。"
-  - "**弱形式的代价**：由于 spectrum.veneziano-amplitude-weak 不含前因子，
-     本推导只能给出「∝」而不能给出比例常数。"
+  - "**只给「∝」不给比例常数**：目标陈述 spectrum.veneziano-regge-behavior 本身写成正比式。
+     ⚠ 2026-09-11 起上游 spectrum.veneziano-amplitude **已含前因子 2i g_o²/α' × (2π)²⁶δ²⁶(Σk_i)**，
+     所以「前因子未知」不再是本推导只能给正比式的理由；真正的理由是**目标陈述的文本就是正比式**，
+     以及 Γ 商渐近本身丢掉的常数（math.gamma-ratio-asymptotics）。要给出比例常数须新建节点。"
   - "**勘误依赖（Q14 第 6 条）**：Stirling 公式的印刷版被 [S] 指为有 typo，
      且他转引的更正形式本身与标准公式不符；**勘误表未取得**。
      本推导绕开这一点（只用 Γ 商渐近），但**若有人要复现 [S] 的逐步计算，会撞上这个分歧**。"
-  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude-weak 继承）。"
+  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude 继承）。"
 notes: |
   本推导与 spectrum.virasoro-shapiro-regge-behavior 是同一手法的开/闭弦两个版本。
   两者的幂次差因子 2，但按抽取记录 Q15，**原书是否显式对比未核实**，故本图不建对比节点。

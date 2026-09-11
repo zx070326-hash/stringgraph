@@ -96,9 +96,39 @@ sources:
       【原书核实 2026-09-11，L1】Q7(a)（原书用什么动词）与 Q7(b)（是否引 Goddard–Thorn）关闭：
       (a) **不是 "it can be shown"，是 §4.4 的 "we prove"** 加 §4.1 的 "as will be shown in section 4.4"。
       (b) **§4.1–§4.4 与习题 4.1–4.6 的正文中没有任何文献引用标记**（pp.121–144 逐页看过）。
-          Polchinski 的体例是把参考文献集中在书末 References（pp.347–358），**该部分本项目未取页**。
-          → 本节点（以及 worldsheet.no-ghost-theorem-v4）**不得声称「Polchinski 把无鬼定理
-            归功于 Goddard–Thorn」**——正文里没有这句。归属证据只有 goddard-2008 与 fgz-1986。
+          Polchinski 的体例是把参考文献集中在书末 References（pp.347–358）。
+
+      ★★ **【2026-09-11 第七轮：书末 References 已取页，Q7(b) 关闭。第 4 章注记 p.350 逐字全文】**
+        「**Chapter 4**
+         **Classic proofs of the OCQ no-ghost theorem are Brower (1972) and Goddard & Thorn (1972).**
+         The basic reference on quantization with constraints is Dirac (1950); a review is
+         Henneaux (1985). The BRST symmetry in gauge theory is discussed in modern field theory texts.
+         The structure of its cohomology is discussed in Kugo & Ojima (1979). **The BRST operator for
+         field theory is derived in Kato & Ogawa (1983); our proof of the no-ghost theorem is loosely
+         patterned on the one in that paper.** Other proofs in the BRST context are Freeman & Olive
+         (1986), Frenkel, Garland, & Zuckerman (1986), and Thorn (1987).」
+
+      对本节点的四条可执行结论：
+      1. **「§4 正文零引文」的结论不变，但不得再据此说「Polchinski 不承认 Goddard–Thorn」。**
+         那是全书体例（p.9 逐字「Annotated reference lists appear at the end of each volume.」），
+         **书末注记明确把 Brower (1972) 与 Goddard & Thorn (1972) 列为 "classic proofs"**。
+      2. ★ **归属关系的硬结论：Polchinski §4.4 的 BRST 证明，作者本人自陈 "loosely patterned on"
+         Kato & Ogawa (1983)（`kato-ogawa-1983`），不是 patterned on Goddard–Thorn。**
+         GT/Brower 被归类为 **OCQ** 的经典证明，与 §4.4 的 BRST 证明**分属两条路线**；
+         GT/Brower 对应的是 §4.1 的 OCQ 陈述 ((4.1.20))，不是本节点。
+         ⚠ **"loosely" 是原书用词，不是 "follows" 也不是 "reproduces"，搬进图里必须保留这个限定词。**
+      3. **`worldsheet.kac-determinant` / `kac-determinant-v2` 不挂 Polchinski 的决定得到第二重
+         独立确认**：书末字母表 pp.353–358 **无 Kac 条目、无 Feigin–Fuchs 条目**（L1 negative
+         evidence），且 `thorn-1985`（用 Kac 行列式证无鬼定理）**也不在参考文献里**
+         ⇒ **Polchinski 全书不提这条路线**。
+      4. 第 4 章注记里另外三条 BRST 侧证明是本项目可直接登记的一手候选：
+         Freeman & Olive (1986) Phys.Lett. **B175**, 151；
+         Frenkel, Garland & Zuckerman (1986) PNAS **83**, 8442（= 本节点已挂的 `fgz-1986`）；
+         Thorn (1987) Nucl.Phys. **B286**, 61（= `thorn-1987`）。
+      ⚠ 按 p.347 的免责声明（「To represent accurately the contributions of all who have worked in
+      these many areas is an undertaking beyond the scope of this book.」），
+      **上述 negative evidence 只说明 Polchinski 没把某文献当入口，不构成对该文献的任何评价。**
+      见 literature/extractions/polchinski-1998-v1.md §13.2(a)(b)(c)(g)。
   - ref: fgz-1986
     loc: "Theorem 2.8（第二个同构 T ∩ P ≅ P/rad P 即无鬼定理，FGZ 自述；第一个同构 P/rad P ≅ H^0_∞ 是上同调识别）"
     note: |

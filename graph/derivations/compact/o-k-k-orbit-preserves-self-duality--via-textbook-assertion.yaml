@@ -1,0 +1,38 @@
+id: compact.o-k-k-orbit-preserves-self-duality--via-textbook-assertion
+target: compact.o-k-k-orbit-preserves-self-duality
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: compact.narain-lattice
+  - id: compact.o-k-k-orbit-preserves-evenness
+    note: 同一式 (8.4.25) 的另一半；列这条边表示两半出自同一断言，不表示前者蕴含后者。
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.25)，p.252"
+    note: |
+      抽取记录 polchinski-1998-v1#E140/Q22，**L1（原书直读，§12.10 表 A，2026-09-11 关闭）**：
+      原书给了论证——(8.4.19)/(8.4.24) 只通过 ∘ 积依赖 ℓ，而 ∘ 积在 O(k,k;R) 下不变。
+      ⚠ 伴读者明说他自己证不出（「Any help is welcome」）；那是**他的**缺口。
+summary: |
+  **2026-09-11 按原书改写**（原先写「本推导没有可复述的论证」，那是基于二手源的误判）。
+  原书 (8.4.25) 附近给出的论证骨架是：
+  自对偶性 Γ* = Γ 完全由双线性型 ℓ ∘ ℓ' 定义（Γ* = {ℓ' : ℓ ∘ ℓ' ∈ Z, ∀ℓ ∈ Γ}），
+  而 (8.4.19)/(8.4.24) 里格向量只通过 ∘ 积进入；
+  Λ ∈ O(k,k;R) 的定义 Λ^T η Λ = η 正是「Λ 保持 ∘ 积」，
+  故 (Λℓ) ∘ (Λℓ') = ℓ ∘ ℓ'，自对偶性随之被保持，即 (ΛΓ)* = ΛΓ。
+  伴读者（Schrans）只复现出「偶」那一半，对「自对偶」明说不会做
+  ——**那是他的缺口，不是原书的缺口**（抽取记录 §12.10 表 A 的 Q22）。
+gaps:
+  - "原书只给骨架（「ℓ 只通过 ∘ 积进入、∘ 在 O(k,k;R) 下不变」），没有逐步写出 (ΛΓ)* = ΛΓ 的推演；本推导把它补成 summary 里的四行，而那四行没有来源逐字支撑。按 lead 2026-09-11 的「断言 + 骨架」裁决，这样的条目标 physical-argument。"
+  - "「ΛΓ 仍是秩 2k 的离散格」原书未明说（Λ 可逆故成立），与 compact.o-k-k-orbit-preserves-evenness 的同名缺口相同。"
+  - "O(k,k;R) 在偶自对偶格集合上的作用是**传递**的（不只是保持），这一步才是 compact.narain-moduli-space 真正需要的；原书是否独立论证传递性本轮未核实，本卡只承载「保持」。"
+  - "⚠ **旧 gap 已撤销**：原先写「没有任何来源给出这一半的论证」与「status 待 reviewer-ch5 裁定」，两者都基于未取得原书正文时的判断，2026-09-11 核实后作废。"
+notes: |
+  **给 lead 的两条建议（本轮按指示未执行）**：
+  1. 本推导 id 带 `--via-textbook-assertion`，在 Q22 关闭后已是误名（原书不是「断言」而是
+     给了骨架）。id 不得更改；若要正名应新建 `--via-inner-product-invariance`。
+  2. ∘ 积不变性这一步是一行线性代数、前提完整，若 reviewer 独立复核并留
+     `reviewer-verified` 记录，可按 docs/STATUS_LEVELS.md 的 rigorous 例外升
+     proof / rigorous。本轮 lead 明确指示「档位不动」，故维持 physical-argument。
+author: curator-polchinski-ch8
+created: "2026-09-11"

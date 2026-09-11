@@ -1,0 +1,193 @@
+id: worldsheet.kac-determinant-v2
+kind: proposition
+title: Kac 行列式公式（v2：α_N 只断言非零，不断言正）
+statement: |
+  Verma 模 V(c,h) 第 N 级上 Shapovalov 形式（由 L_n^† = L_{-n} 与 ⟨h|h⟩=1 定义）的
+  Gram 行列式为
+  det M_N(c,h) = α_N ∏_{r s ≤ N, r,s ≥ 1} (h - h_{r,s}(c))^{p(N - rs)}，
+  其中 α_N 是与 (c,h) 无关的非零常数，h_{r,s}(c) 由 Kac 公式给出。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+sources:
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（LNP 759, pp. 91-102）；Gram 矩阵定义 Definition 6.11, p. 97；Hermite 形式的存在唯一性 Theorem 6.8, p. 96"
+    note: |
+      **2026-09-11 新增为主来源**（researcher L1 逐页读图核实，literature/extractions/math-sources.md §34.3；
+      取件路径：作者 LMU 主页按章挂的 PDF，PDF 页 = 书页 − 86）。这是本卡目前**唯一可公开获取、
+      可逐字引用、带编号**的来源。Theorem 6.12 逐字：
+      「det A^N(c,h) = K_N ∏_{p,q ∈ ℕ, pq ≤ N} (h − h_{p,q}(c))^{P(N−pq)}, where K_N ≥ 0 is a
+      constant which does not depend on (c,h)」，h_{p,q}(c) = (1/48)((13−c)(p²+q²)
+      + √((c−1)(c−25))(p²−q²) − 24pq − 2 + 2c)。
+      **三点限制必须与本条一起读**：
+      (a) **实数限制**：Theorem 6.8 起整段假设 **c, h ∈ ℝ**，A^N 是 **Hermite** 形式的 Gram 矩阵，
+          不是复 (c,h) 上的双线性 Shapovalov 形式（后者见 feigin-fuchs-1982）；
+      (b) **常数**：书上写 **K_N ≥ 0**，**没有**写 > 0——本卡 statement 写的「正常数」
+          在本条里无据（见 notes 的登记）；
+      (c) **归属与证明**：该书把定理归给 **[Kac80] = ICM Helsinki 那篇**（本 bib 的 kac-1980-icm），
+          并把证明**外包**给 [KR87] / [CdG94]，**全章不引 Feigin–Fuchs**。
+          故「Kac 陈述 + FF 证明」这条历史线不是 Schottenloher 的说法。
+      章内结构：§6.1 p.91、§6.2 Verma Modules p.92、§6.3 The Kac Determinant p.95、
+      §6.4 p.99、§6.5 p.100、References p.102；章首第一句「Most of the results in this chapter
+      can be found in [Kac80]」。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ и его прил. 16:2 (1982), 第 58 页）"
+    note: |
+      **2026-09-11 loc 由「完整证明」改为可核实定位**（researcher L1 逐页读图，math-sources.md §34.2(b)；
+      取件路径 Math-Net.Ru getFT.phtml?jrnid=faa&paperid=1619，PDF 页 = 刊页 − 46）。
+      原文形式与本卡 statement **有四处差别，读本卡时必须知道**：
+      (a) 原文是 **det²**（行列式的平方）：det² M_{h,c}(k) = C ∏_{i=1}^{k} ∏_{j|i} Φ_{j,i/j}(h,c)^{p(k−i)}；
+      (b) 不出现 h_{r,s}，而用**无根号的成对多项式** Φ_{α,β}(h,c)
+          = (h + (1/24)(α²−1)(c−13) + (1/2)(αβ−1))(h + (1/24)(β²−1)(c−13) + (1/2)(αβ−1)) + (α²−β²)²/16；
+          Φ_{α,β} 合并了 (α,β) 与 (β,α) 一对，故平方后与本卡写法一致
+          （researcher 的三次一致性验算见 math-sources.md §34.8，那一小节是**推断不是原文**）；
+      (c) 常数 **C 只被断言「非零」（ненулевая）**，没有断言正——见 notes 的登记；
+      (d) **h, c 取任意复数**（p. 57 逐字 «Пусть h и c — два комплексных числа»），
+          比 schottenloher-2008 的实 Hermite 版本更贴合本卡。
+      前置定义（同页）：M_{h,c}(k) 是 V_{h,c} 的 k 次齐次分量上、由 PBW 基
+      e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用于真空所得基的 Gram 矩阵，
+      正文逐字称其二次型为 «форма Шаповалова»。
+      ⚠ **英译本（Funct. Anal. Appl. 16 (1982) 114–126）的编号与页码未核实**（math-sources.md Q25）。
+      ⚠ 下标 Φ_{j, i/j} 的第一个下标在扫描件上字形不易分辨，判读依据是求积变量与 p. 62 的重复出现
+      （**字形 L2 + 数学强制**，不是纯 L1）。
+  - ref: kac-1979
+    loc: "pp. 441-445（内部编号未核实，**不得写 Theorem 1**）"
+    note: |
+      **2026-09-11 订正：原 loc「Theorem 1」是编造的，已删**（math-sources.md §34.1 第 4 点：
+      LNP 94 正文未获取，内部编号 L0；Springer 认证墙 + archive.org 无 Austin 1978 那卷）。
+      保留本条的理由：feigin-fuchs-1982 的参考文献 [2] **逐字**就是本条，且其 Теорема 3.1
+      标注 «(см. [2])»；lian-zuckerman-1991 的 [K1] 亦然。该文标题即
+      「Contravariant form for infinite-dimensional Lie algebras and superalgebras」。
+      **身份已结案**：本条（LNP 94）与 ICM Helsinki 那篇（kac-1980-icm）是**两篇不同的论文**，
+      依据是 Kac 本人出版目录的第 30 / 32 条（math-sources.md §34.1）。
+  - ref: kac-1980-icm
+    loc: "pp. 299-304（正文未获取，内容与内部编号均 L0）"
+    note: |
+      **2026-09-11 新增**。schottenloher-2008 Theorem 6.12 把 Kac 行列式归给本条（[Kac80]），
+      fgz-1986 的参考文献 10 也指本条。**本条正文是否真的含 Virasoro 的行列式公式未知**
+      （math-sources.md §34.10 Q24：IMU 官方扫描 30 MB 超 WebFetch 上限，
+      archive.org 两个副本均为借阅限制卷）。
+      ⇒ 「行列式公式首发在 LNP 94 还是 ICM」**本项目未裁决**；本卡同时列出两条，
+      **不表示对首发权做出判断**。
+  - ref: polchinski-1998-v1
+    loc: "**negative evidence（不是内容来源）**：§2.9 不含本公式；书末 References pp.353–358 的字母表**无 Kac 条目、无 Feigin–Fuchs 条目**；第 4 章注记 p.350 列的无鬼定理证明里**没有「用 Kac 行列式」这条路线**"
+    note: |
+      抽取记录 polchinski-1998-v1 Q5：§2.9 是否含此公式此前记为「未核实」，主来源为
+      schottenloher-2008 / feigin-fuchs-1982。
+
+      **【2026-09-11 两重独立确认，本条降级为纯 negative evidence】**
+      (1) 第六轮 L1 页图（§12.4）：**§2.9 确实不讲 Verma 模，也不讲 Kac 行列式**，
+          Q5 的 negative evidence 升级为 L1 确认。
+      (2) 第七轮 L1 页图（§13.2(b)(c)）：**书末字母表 pp.353–358**
+          — p.353–354 Faddeev → Fradkin → Freeman → Frenkel → Friedan 之间**无 Feigin/Fuchs 条目**；
+          — p.355 Kato → Kawai → Kazakov → Kiritsis → Klebanov → Kugo 之间**无 Kac 条目**；
+          — p.358 Thorn 名下只有 Thorn (1987) 与 Thorn (1989)，**`thorn-1985`
+            (A Proof of the No-Ghost Theorem Using the Kac Determinant) 不在**；
+          — p.350 第 4 章注记列的证明是 Brower/GT（OCQ）与 Kato–Ogawa/Freeman–Olive/FGZ/Thorn(1987)（BRST），
+            **完全不提「用 Kac 行列式证无鬼定理」**。
+      ⇒ **本卡（以及 worldsheet.kac-determinant）不得挂任何 polchinski-1998-v1 的 loc 作为内容来源。**
+      本条 source 仅作为「Polchinski Vol.1 在正文与参考文献两个层面都不接触这条线」的记录保留。
+      ⚠ 按 p.347 的免责声明（「To represent accurately the contributions of all who have worked in
+      these many areas is an undertaking beyond the scope of this book.」），
+      **这条 negative evidence 不构成对 Kac / Feigin–Fuchs / Thorn 1985 的任何评价**，
+      只说明 Polchinski 没把它们当本书的入口文献。
+tags: [cft, representation-theory]
+notes: |
+  【本卡的来历：worldsheet.kac-determinant 的换代（2026-09-11，curator-verma-followups）】
+  旧卡 worldsheet.kac-determinant 的陈述写「α_N 是与 (c,h) 无关的**正**常数」，
+  而它自己的 notes (A) 已登记：该「正」字在两条已核实来源里**都无据**
+  （feigin-fuchs-1982 只写「非零」且是 det² 版本，schottenloher-2008 只写 K_N ≥ 0）。
+  按根 CLAUDE.md 原则 1（改陈述文本 = 新建节点 + superseded_by）与原则 2（状态只能实话实说），
+  本卡把该词改为「**非零**常数」，**statement 其余部分与旧卡逐字相同**，sources 逐条照抄。
+  旧卡已写 `superseded_by: worldsheet.kac-determinant-v2`，其 statement 文本一字未动。
+  旧卡的推导 worldsheet.kac-determinant--via-feigin-fuchs 已改指本卡并按 id 规则改名为
+  worldsheet.kac-determinant-v2--via-feigin-fuchs（推导不是不可变卡，旧文件删除）；
+  图上原先指向旧卡的四条 depends_on（no-ghost-theorem-v2 / v3 / v4--via-goddard-thorn、
+  no-ghost-theorem-subcritical--via-lian-zuckerman）也已改指本卡。
+  ⚠ **本次换代不涉及任何新的数学内容**：零点集、重数 p(N − rs)、h_{r,s} 的表达式、
+  来源与其限制（实 vs 复、Hermite vs 双线性、归属之争）全部与旧卡相同。
+
+  【记号约定（curator 2026-09-11 补）】本卡 statement 用 V(c,h) 记 Verma 模、用 ⟨h|h⟩ = 1
+  归一化 Shapovalov 形式；这套记号现由 conv.verma-module-notation 统一定义并给出对照表
+  （Kytölä 𝒱_{c,h} / Lian–Zuckerman M(c,h) / Humphreys Z(λ)）。
+  ⚠ **该约定不规定 Shapovalov 形式的归一化**，那一句仍只写在本卡 statement 里。
+  ⚠ 特别相关：lian-zuckerman-1991 Theorem 3.5 的 D < 26 分支归结为 **M(26−D, 1−h) 的半正定性**
+  （primary-sources-round2.md §1.6，L1），即本卡的判据；两处的 M / V 是同一对象。
+
+  ---
+  **【2026-09-11 来源核实的三条登记（curator，落地 researcher 的 math-sources.md §34.9）】**
+
+  **(A) α_N 只断言「非零」，不断言「正」——这正是本卡相对 worldsheet.kac-determinant 的唯一改动。**
+  两条已核实来源里没有一条支持「正」：
+  · feigin-fuchs-1982 Теорема 3.1 写 «C — **ненулевая** константа»（**非零**常数），
+    且那里的等式是 det**²** = C ∏…；
+  · schottenloher-2008 Theorem 6.12 写 **K_N ≥ 0**（**没有**写 > 0），且限 c, h ∈ ℝ 的 Hermite 情形。
+  ⚠ **「非零」这一条本身也带一步换算**：FF 的 C 属于 det² 版本，与本卡的 α_N 差一次平方
+  （若 ∏_{α,β} Φ = ∏(h − h_{r,s})²，则 α_N² = C，于是 α_N ≠ 0 ⟺ C ≠ 0）。
+  这一步用到 researcher 在 math-sources.md §34.8 做的三参数化对照，**那一小节是推断不是原文**；
+  故本卡推导对 feigin-fuchs-1982 的引用在 note 里显式登记了这一层。
+  ⚠ 仍然成立的下游告诫：任何把「α_N > 0」当前提的步骤（例如从 det 的符号推正定性）
+  **在本图里没有来源背书**；本卡不提供它。
+  · 一个**正例但不足以推广**：worldsheet.kac-determinant-level-two 在 N = 2 处给出 α₂ = 32 > 0
+    （由 Lean 的 `gram_level_two_det` 加 curator 手算配平得到），
+    worldsheet.kac-determinant-level-three 在 N = 3 处给出 α₃ = 2304 > 0
+    （该卡的 Kac 比较在 Lean 内部）。两者都不能推出一般 N 的正性——但见下面的 (D)。
+
+  **(B) 低阶独立核对已通过。** worldsheet.kac-determinant-level-two（formalized）给出
+  ⟨L₋₂v, L₋₂v⟩⟨L₋₁²v, L₋₁²v⟩ − ⟨L₋₂v, L₋₁²v⟩² = 2h(16h² + 2h(c−5) + c)。
+  与本卡在 N = 2 的形状逐项核对（详见那张卡的 notes）：rs ≤ 2 的指标恰为 (1,1)、(1,2)、(2,1)；
+  指数 p(1) = p(0) = 1；**h_{1,1}(c) = 0**（Schottenloher 公式代入 p = q = 1 得 0）；
+  两根之和 (5−c)/8、之积 c/16 与 16h² + 2h(c−5) + c 的系数吻合；α₂ = 32。**全部通过。**
+  ⚠ 那张卡是**张成集**的 Gram 行列式，与本卡的 Kac 行列式相差
+  「{L₋₂v, L₋₁²v} 线性无关」这一步（= dim V_2 = p(2)，属 math.verma-module-free-over-negative-part）。
+  故它是本卡的**独立低阶核对**，**不是**本卡的证明或特例。
+
+  **(C) 形式化状态：本卡上限 rigorous，`formalized` 现在不可能。**
+  researcher 2026-09-11 三条独立证据（math-sources.md §34.7）：Kytölä 的 VirasoroProject
+  21 个 .lean 文件里**没有** ShapovalovForm.lean / KacDeterminant.lean / SingularVector.lean；
+  arXiv:2510.21741 的 Table 1（7 行）无逆变形式与行列式；其 §14 展望逐字说
+  Feigin–Fuks 结构定理的形式化「starting from the **missing** Poincaré–Birkhoff–Witt theorem」。
+  本仓库侧同理：formal/TODO.md 的 `kac-determinant` 未勾选，`pbw-verma` (b) 是硬瓶颈。
+
+  ---
+  **【(D) 常数 α_N 的显式乘积公式——本项目 formalizer 的 CAS 核对，非文献（登记于 2026-09-11）】**
+
+  本卡 statement 只说 α_N 是「与 (c,h) 无关的非零常数」，不给它的值。formalizer 在做
+  level-3 形式化（worldsheet.kac-determinant-level-three）时用 CAS 独立反读出：
+  **在本仓库这组 PBW 型基（L₋₁^{a₁}L₋₂^{a₂}… 作用于真空，按 FF 的排序）下**
+
+      α_N = ∏_{r, s ≥ 1,  r s ≤ N}  ( (2r)^s · s! )^{ p(N − r s) − p(N − r(s+1)) } 。
+
+  **⚠ 指数是 p(N − rs) − p(N − r(s+1))，不是 p(N − rs)。** 后者（某些教材/讲义里随手写的
+  形式）给出 N = 2 → 64、N = 3 → 36864，与实际的 Gram 行列式**不符**。
+
+  **逐项数值核对**（N = 1, 2, 3 来自本图的 formalized 卡，N = 4 来自 CAS）：
+  · N = 1：唯一指标 (1,1)，底 (2^1·1!) = 2，指数 p(0) − p(−1) = 1 − 0 = 1 ⇒ **α₁ = 2**。
+    与 worldsheet.kac-determinant-level-two (1) 的 ⟨L₋₁v,L₋₁v⟩ = 2h 吻合。
+  · N = 2：(1,1) 底 2 指数 p(1) − p(0) = 0；(1,2) 底 (2²·2!) = 8 指数 1；(2,1) 底 4 指数 1
+    ⇒ **α₂ = 8·4 = 32**。与 worldsheet.kac-determinant-level-two (4) 的 α₂ = 32 吻合。
+  · N = 3：(1,1) 底 2 指数 p(2) − p(1) = 1；(1,2) 指数 p(1) − p(0) = 0；(1,3) 底 (2³·3!) = 48
+    指数 1；(2,1) 底 4 指数 p(1) − p(−1) = 1；(3,1) 底 6 指数 1
+    ⇒ **α₃ = 2·48·4·6 = 2304**。与 worldsheet.kac-determinant-level-three (3) 的
+    2304 = 48·16·3 吻合（该条在 Lean 内部，见那张卡）。
+  · N = 4：**α₄ = 37748736**（= 2·8·384·4·32·6·8），由 5×5 Gram 的 CAS 行列式反读；
+    对应的 det₄ 记在 formal/TODO.md 的 `kac-determinant` 条目下，**本图暂未立卡**。
+  ⇒ curator 2026-09-11 独立重算了上面四个乘积与两个「错版」数值（64 / 36864），全部复现。
+
+  **本登记对 statement 的影响：无，且说明 v2 的写法是对的而且更稳。**
+  上式的每个因子 (2r)^s · s! 都是**正整数**，指数是整数，故只要该公式成立，
+  **「α_N > 0」就是它的推论**，而不需要任何文献支持「正」字。
+  但这恰恰说明本卡把旧卡的「正常数」改成「**非零**常数」是正确的取舍：
+  · 「非零」有两条已核实来源背书（FF 的 «ненулевая»、Schottenloher 的 K_N ≥ 0 配非退化）；
+  · 「正」只能由上面这条**未形式化、非文献**的公式得到，且该公式**依赖基的选取**
+    （换一组基，Gram 行列式要乘上过渡矩阵行列式的平方，α_N 会变；正性在 ℝ 上不变，
+    在一般交换环上连「正」都没有意义）。
+  ⇒ 本卡 statement **不改**（项目原则 1）；要断言 α_N 的值或正性，应另立节点并把
+  「哪组基」写进陈述。
+
+  **来源等级**：本项目内部计算，**不是文献**。
+  记录位置 formal/TODO.md 的 `kac-determinant` 条目（formalizer 2026-09-11 写入，
+  自述「用 CAS 独立核对，未形式化」）；curator 在落地本条时重算了 N = 1…4 的乘积。
+  **该公式本身未形式化**，也未在任何已核实来源里逐字找到。
+  ⚠ 下游仍然成立的告诫（与 (A) 同）：任何把「α_N > 0」当前提的步骤在本图里**没有来源背书**；
+  本卡不提供它，(D) 也不提供它（(D) 只是本项目的一条待核验计算）。
+author: curator
+created: "2026-09-11"

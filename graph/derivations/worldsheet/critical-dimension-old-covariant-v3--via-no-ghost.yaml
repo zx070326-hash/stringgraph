@@ -1,0 +1,67 @@
+id: worldsheet.critical-dimension-old-covariant-v3--via-no-ghost
+target: worldsheet.critical-dimension-old-covariant-v3
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.no-ghost-theorem-v4
+sources:
+  - ref: goddard-thorn-1972
+    loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
+    note: |
+      原先写的 "Theorem 1 的等号情形" 已撤下：2026-09-10 核实
+      （literature/extractions/brst-cohomology-sources.md §3.1）表明该编号无任何来源支持，
+      三条间接证据一致指向文中无编号定理。摘要不提 intercept，本条只覆盖 a = 1。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112"
+    note: |
+      GSW 用 mostly-minus 号差，已按 conv.metric-mostly-plus 转写。
+      旧推导写的 "§2.3.2–2.3.3" 已按核实（brst-cohomology-sources.md §5.1/§5.3）收窄到 §2.3.3：
+      §2.3.2 是 'Construction of transverse physical states'（p.100–101）。式号未核实。
+summary: |
+  无鬼定理（worldsheet.no-ghost-theorem-v4）第 (1) 条在 D = 26、a = 1 时断言：逐动量塔上
+  Fock 内积在 H_phys 上半正定（(1a)），H_phys/H_0 上诱导内积正定（(1b-i)），且
+  H^⊥(k) → H_phys(k;k_0)/H_0(k;k_0) 是保能级分级的等距同构（(1b-ii)(1b-iii)）——
+  这正是目标陈述的 (A1)(A2)(A3)。第 (2) 条（D > 26、a = 1 时存在 p ≠ 0 上的负模物理态）
+  给出目标陈述的 (B)。
+  本推导只是把无鬼定理的等号情形改写为「临界维数判据」的形式，不含新的物理输入。
+  依赖节点的全局动量限定（p ≠ 0；固定 k_0 时 k_0·p ≠ 0）与 (2) 的 p ≠ 0 量词，
+  在目标陈述中已被逐字写出，故本推导不再需要为它们挂账（这是相对旧推导的实质改进）。
+gaps:
+  - "**旧推导（worldsheet.critical-dimension-old-covariant--via-no-ghost）的前三条 gap 已由本次换代解决，此处保留其历史句以便追溯：**（1）『D < 26 的表述需按 no-ghost-theorem-v2 的措辞规范化（ms.no-ghost-theorem 审计 B2/B3）：旧陈述末句写\"H_0 的维数不足以把 H_phys 约化到横向 Fock 空间\"、结论句写\"零模态完全退耦，物理谱在洛伦兹协变的意义下幺正\"，其中\"退耦\"无可操作定义，\"维数不足\"不精确』——**已由 v2 解决**：目标陈述删去该末句并一律改用「等距同构」「存在负模物理态」。（2）『旧陈述末句关于 D < 26 的断言不由依赖节点支撑：no-ghost-theorem-v4 只覆盖 (D = 26, a = 1) 与 (D > 26, a = 1)』——**已由 v2 解决**：目标陈述显式声明 D ≤ 25 不作断言。（3）『旧陈述倒数第二句 \"D > 26 时 (a) 失效\" 未写 a 的取值，本推导按 a = 1 理解』——**已由 v2 解决**：目标陈述 (B) 显式写 a = 1 与 p ≠ 0。"
+  - "D < 26 的来源归属（仍然有效，但目标陈述已不涉及）：goddard-thorn-1972 与 brower-1972 按可得的摘要证据**都只覆盖 a = 1**——GT 摘要完全不提 intercept，Brower 摘要把结果限定在 unit Regge intercept。D < 26 的无鬼性并非它们的独立结果，而是由**嵌入 D = 26 的情形**得到：Goddard 2008 综述（goddard-2008）逐字「The No-Ghost Theorem follows for D < 26 by embedding in the D = 26 case.」若日后要为 D < 26 单建节点，其推导应写成「嵌入 D = 26」，来源引 goddard-2008，且只覆盖 a = 1。本推导与目标陈述都不再引 goddard-2008。"
+  - "a < 1 ⇒ D ≤ 25 这一支的成文来源是 lian-zuckerman-1991 Theorem 3.5(ii)，Commun. Math. Phys. 135 (1991) 570（L1 逐字：「D = 26, h = 1 or 26 > D ≥ 2, h ≤ 1」，h 即本项目截距 a），已建节点 **worldsheet.no-ghost-theorem-subcritical**。三条限定必须一并引用，否则是过度断言：(1) LZ 的证明经过一个中心荷 c = 26 − D 的补充不可约 Vir 模 L(26−D, 1−h)，与本推导所依赖的 no-ghost-theorem-v4 的纯 D 玻色子 DDF 论证是**两条独立路线**；(2) LZ 另加下界 D ≥ 2 与对动量的三条假设；(3) LZ 的断言是「对每个 p 正定」的全称等价。**本推导不引用该节点**：它只把 v4 的等号情形改写为临界维数判据，不跨路线论证；目标陈述对 D ≤ 25 不作断言，故也不需要它。"
+  - "本陈述是 worldsheet.critical-dimension-bosonic-v2 路线 (II)（OCQ）的独立表述，与路线 (III)（BRST 幂零）之间的严格等价现已建节点：worldsheet.brst-cohomology-equals-ocq-physical（BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）。本推导不依赖它。"
+  - "历史换代记录（论证始终不变，只跟随依赖节点与目标节点的版本）：lead 2026-09-10 把 depends_on 由 no-ghost-theorem-v2 就地换到 v3、再由 v3 换到 v4（v4 相对 v3 只改两处表述：动量限定提到全局前言、第 (2) 条显式写 p ≠ 0，并把 DDF 参数化由射线改为去心直线；见 ms.no-ghost-theorem 第三轮审计 B1/A1）。curator 2026-09-11 把 target 由 worldsheet.critical-dimension-old-covariant 换到 -v2，同日再由 -v2 换到 **-v3**（本文件；v3 相对 v2 只删去 statement 里 H_0 的括注「（伪态）」，命题内容不变，见目标卡 notes 与 ms.critical-dimension-bosonic 第二轮 D5/T4、第三轮 §6），depends_on 始终不变。"
+notes: |
+  【2026-09-11 第二次换代：目标由 -v2 改指 -v3】v3 相对 v2 的唯一差别是 statement 中
+  H_0 的括注「（伪态）」被删去：H_0 按定义式是 **Fock 内积在 H_phys 上的根**，而「伪态」
+  是 L_{−n} 的后代，二者相等在 (D, a) = (26, 1) 是无鬼定理的内容而非定义
+  （ms.critical-dimension-bosonic 第二轮回译审计 D5/T4，第三轮 §6 点名本链最后一处）。
+  因 derivation id 必须写成 `<statement-id>--via-<method>`（graph/CLAUDE.md 的 id 规则），
+  本文件由 worldsheet.critical-dimension-old-covariant-v2--via-no-ghost `git mv` 而来并改 id/target。
+  **除 id 与 target 外，本次只改了 gaps 末条的换代记录一行**：depends_on
+  （仍是 worldsheet.no-ghost-theorem-v4 一条）、sources、summary、kind/status（proof / rigorous）、
+  以及其余 gaps 一概未动。目标陈述的命题内容未变，故论证一字不用改。
+
+  ────────────────────────────────────────────────────────────────────────
+  以下为上一次换代（v1 → v2）时写下的 notes，逐字保留：
+
+  【2026-09-11 换代】本文件由 worldsheet.critical-dimension-old-covariant--via-no-ghost
+  改挂到换代后的陈述 worldsheet.critical-dimension-old-covariant-v2（旧卡末句关于 D < 26 的
+  说法不被 no-ghost-theorem-v4 支撑，且用了「退耦」「不幺正」等无定义措辞；见 docs/ROADMAP.md
+  待拆清单、ms.no-ghost-theorem 审计 B2/B3 与目标卡片的 notes）。因 derivation id 必须写成
+  `<statement-id>--via-<method>`（graph/CLAUDE.md 的 id 规则），无法就地改 id，
+  故新建本文件并删除旧文件（`git mv`）。
+
+  **depends_on 未变**（仍是 worldsheet.no-ghost-theorem-v4 一条），论证未变，
+  kind/status 未变（proof / rigorous；有效状态由 v4 支链决定，2026-09-11 起为 physical-argument，
+  因 DDF 支链拆卡后由两张 physical-argument 卡承载）。
+  实质变化只有两处：
+    (1) summary 删去末句「本陈述未写这些限制」——目标陈述现在写了；
+    (2) gaps 清理：已不适用的三条（措辞规范化、D < 26 无支撑、(B) 未写 a）合并为一条历史条目
+        并标「已由 v2 解决」，仍然有效的三条（D < 26 的来源归属、亚临界分支、与 BRST 路线的等价）
+        逐字保留，换代记录合并为末条。
+    另外 sources 删去 goddard-2008（它只服务于旧陈述末句的 D < 26），并把 gsw-1987-v1 的 loc
+    由 "§2.3.2–2.3.3" 收窄到已核实的 §2.3.3, p.102–112。
+author: "curator-critdim；curator 2026-09-11 先后换代到 v2、v3 目标并清理 gaps"
+created: "2026-09-10"

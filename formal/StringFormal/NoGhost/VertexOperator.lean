@@ -81,7 +81,8 @@ translate contribute.  No convergence hypothesis is used anywhere.
    coefficients `creaExp`; that computation is not done.  In particular the statement
    "`e^{i k_0·X}` has conformal weight `0` when `k_0² = 0`" is **not** formalised.
 2. **No operator products.**  `V(b, z) V(b', w)` and hence `[A^i_m, A^j_n]` are untouched.
-3. **`R`-bilinear, not sesquilinear**; no adjointness of `V_K` for `Fock.pairing` is proved
+3. **`R`-bilinear, not sesquilinear**. (Adjointness of `V_K` for `Fock.pairing` is now proved in
+   `VertexAdjoint.lean`: `pairing_vertexOsc_left`, for arbitrary momentum.)
    (the expected `V(b)_J^† = V(-b)_{-J}` for `b·b = 0` would need the reordering `E_+ E_-`).
 4. **`hη : η^{μμ} η_{μμ} = 1` is assumed** wherever the metric contracts spacetime indices,
    exactly as in `Sugawara.lean`.

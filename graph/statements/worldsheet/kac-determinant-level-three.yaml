@@ -1,0 +1,168 @@
+id: worldsheet.kac-determinant-level-three
+kind: proposition
+title: Verma 模 level-3 的六个 Gram 元与 3×3 行列式 det₃ = 48h²(16h²+2h(c−5)+c)(3h²+h(c−7)+c+2)，**且在 Lean 内部**等于 Kac 乘积形 2304(h−h₁₁)²(h−h₁₂)(h−h₂₁)(h−h₁₃)(h−h₃₁)（张成集的 Gram，非基的 Gram）
+statement: |
+  设 R 是交换环且是 ℚ-代数（物理情形取 R = C），(c, h) ∈ R²，V(c,h) 是 Virasoro Verma 模
+  （worldsheet.verma-module-v2），v := |c,h⟩ 是最高权向量，约定 conv.virasoro-standard。
+  设 B 是 V(c,h) 上的**归一化逆变双线性型**，即 B 逆变（B(L_n x, y) = B(x, L_{−n} y)，
+  见 worldsheet.shapovalov-form-uniqueness）且 B(v, v) = 1。记 ⟨x, y⟩ := B(x, y)。
+
+  记 level-3 的三个显式降算符态
+
+      u₃ := L₋₃ v,     u₂₁ := L₋₂ L₋₁ v,     u₁₁₁ := L₋₁³ v = L₋₁(L₋₁(L₋₁ v))。
+
+  则：
+
+  **(1) 六个独立 Gram 元**（非对角的另一半由 worldsheet.shapovalov-form-uniqueness (2)
+  的对称性给出，不是额外假设）：
+
+      ⟨u₃, u₃⟩     = 6h + 2c
+      ⟨u₃, u₂₁⟩    = 10h
+      ⟨u₃, u₁₁₁⟩   = 24h
+      ⟨u₂₁, u₂₁⟩   = 8h² + ch + 8h
+      ⟨u₂₁, u₁₁₁⟩  = 36h² + 12h
+      ⟨u₁₁₁, u₁₁₁⟩ = 48h³ + 72h² + 24h
+
+  **(2) 3×3 行列式**（按第一行展开，九个元全部代入）：
+
+      det₃ := det [ ⟨u_i, u_j⟩ ]_{i,j ∈ {3, 21, 111}}
+            = 48 h² ( 16h² + 2h(c−5) + c ) ( 3h² + h(c−7) + c + 2 )。
+
+      中间因子 16h² + 2h(c−5) + c 正是 worldsheet.kac-determinant-level-two (3) 的
+      level-2 行列式除以 2h。
+
+  **(3) 与 Kac 乘积形的相等——本条是一条 R-多项式恒等式，不含平方根**：
+  设 h₁₁, h₁₂, h₂₁, h₁₃, h₃₁ ∈ R 满足（全部是**清过分母**的对称函数条件）
+
+      h₁₁ = 0,
+      8(h₁₂ + h₂₁) = 5 − c,      16 h₁₂ h₂₁ = c,
+      3(h₁₃ + h₃₁) = 7 − c,      3 h₁₃ h₃₁ = c + 2,
+
+  则
+
+      det₃ = 2304 · (h − h₁₁)² · (h − h₁₂)(h − h₂₁) · (h − h₁₃)(h − h₃₁)。
+
+  指数 2, 1, 1, 1, 1 恰为 p(3 − 1·1) = p(2) = 2、p(3 − 1·2) = p(3 − 2·1) = p(1) = 1、
+  p(3 − 1·3) = p(3 − 3·1) = p(0) = 1，与 worldsheet.kac-determinant-v2 在 N = 3 的
+  重数结构逐项吻合；常数是 **α₃ = 48 · 16 · 3 = 2304 > 0**。
+
+  **(4) c = 1 处的退化核对**：代 c = 1，Kac 权退化为 h_{r,s} = (r−s)²/4，即
+  h₁₁ = 0、h₁₂ = h₂₁ = 1/4、h₁₃ = h₃₁ = 1，而 (2) 的右端变成
+
+      48h²(16h² − 8h + 1)(3h² − 6h + 3) = 144 h² (4h − 1)² (h − 1)²，
+
+  是完全平方——与重根必须成对出现相符。
+
+  【本节点明确**不**断言】
+  (a) **(2) 是「level-3 的 Kac 行列式」**。Kac 行列式是 Gram 矩阵在 V_3 的一组**基**上的
+      行列式；{u₃, u₂₁, u₁₁₁} 只被证明**落在** V_3 里。它们张成 V_3，但这一步比 level 2
+      更弱：3 的合成有**四个**（[3]、[2,1]、[1,2]、[1,1,1]），第四个给出的向量 L₋₁L₋₂v
+      要用括号关系 [L₋₁, L₋₂] = L₋₃ 才能化到上面三个的线性组合，而**这条化简在 Lean 里
+      没有具名引理**（见推导 gaps (i)）。**线性无关**更是完全没有证——那正是 PBW
+      （math.verma-module-free-over-negative-part 的 (2)(3)：dim V_3 = p(3) = 3）。
+      ⇒ (2)(3) 是**张成集的 Gram 行列式**与它的一条多项式因式分解。
+  (b) **B 的存在性**。本卡的一切都以「设 B 是归一化逆变型」为前提；
+      存在性见 worldsheet.shapovalov-form-existence，无条件版本要 V(c,h) ≠ 0。
+  (c) **h_{r,s}(c) 的显式表达式**。(3) 只用五个根的**对称函数**（和与积），
+      **不引入** √((c−1)(c−25))，因此也**不断言**这些 h_{r,s} 在 R 中存在
+      （(3) 是「若 R 中存在满足那四条关系的元素，则……」的条件命题）。在 R = C 上
+      worldsheet.kac-determinant-v2 的 h_{r,s}(c) 满足那四条关系——这一步核对见 notes。
+  (d) **一般 N 的行列式公式与常数 α_N**。见 worldsheet.kac-determinant-v2（rigorous，未形式化）
+      与该卡 notes 里登记的 α_N 乘积公式（未形式化、非文献）。本卡只做 N = 3。
+  (e) **零点的表示论含义**（奇异向量、可约性、不可约商）不在本卡内。
+  (f) 任何正定性/酉性；B 是 R-双线性型，R 上无序结构。
+uses_conventions: [conv.virasoro-standard, conv.verma-module-notation]
+formal:
+  lean_decl: StringFormal.Virasoro.IsContravariant.gram_level_three_det
+  lean_file: StringFormal/Virasoro/ShapovalovLevelThree.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/ShapovalovLevelThree.lean :: StringFormal.Virasoro.{desc3, desc21, desc111, centralTerm_three, lie_lgen_three_neg_three, lie_lgen_three_neg_two, lie_lgen_three_neg_one, lie_lgen_three_desc1, lie_lgen_three_desc11, lie_lgen_zero_desc11, lie_lgen_three_desc3, lie_lgen_three_desc21, lie_lgen_three_desc111, lie_lgen_two_desc21, lie_lgen_two_desc111, lie_lgen_one_desc111, desc3_mem_levelSpan, desc21_mem_levelSpan, desc111_mem_levelSpan, IsContravariant.gram_level_three_33, IsContravariant.gram_level_three_3_21, IsContravariant.gram_level_three_3_111, IsContravariant.gram_level_three_21_21, IsContravariant.gram_level_three_21_111, IsContravariant.gram_level_three_111_111, IsContravariant.gram_level_three_entries, IsContravariant.gram_level_three_det, kac_factor_rs_two, kac_factor_rs_three, IsContravariant.gram_level_three_det_eq_kac, kac_level_three_at_c_one, IsContravariant.gram_level_one_three, IsContravariant.gram_level_two_three}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。该文件由 formalizer 于 2026-09-11 完成，
+      由 lead 以 **fa8fafd**（"merge: Shapovalov level-3 Gram determinant matches Kac formula
+      (ShapovalovLevelThree.lean)"）合入 main。
+      逐句对应：(1) → `gram_level_three_33 / _3_21 / _3_111 / _21_21 / _21_111 / _111_111`，
+      九元合并形式 `gram_level_three_entries`（非对角另一半经 `IsContravariant.comm`）；
+      (2) → `gram_level_three_det`（本卡 formal.lean_decl）；
+      **(3) → `gram_level_three_det_eq_kac`（在 Lean 内部，不是 curator 手算）**，
+      辅助 `kac_factor_rs_two` / `kac_factor_rs_three`（清分母后的二次因式分解）；
+      (4) → `kac_level_three_at_c_one`。
+      另有 `gram_level_one_three` / `gram_level_two_three`（level 1、2 与 3 正交，
+      worldsheet.shapovalov-form-uniqueness (3) 的实例，不进本卡陈述）。
+      文件头 Status 段自述「No `sorry`; axioms are propext, Classical.choice, Quot.sound only」，
+      同段 Caveat 逐字记下「linear independence of the three vectors is PBW and is not
+      available here, so this is the determinant of an explicit `3 × 3` matrix of inner
+      products, not yet formally "the Kac determinant of `V₃`"」。
+      ⚠ 同一 Caveat 段写「`L₋₁L₋₂|c,h⟩ = desc21 - desc3`」，按 conv.virasoro-standard
+      应为 **desc21 + desc3**（[L₋₁, L₋₂] = (−1−(−2))L₋₃ = +L₋₃）。这是注释里的符号笔误，
+      **不涉及任何定理**（张成性在两种符号下都成立）；已在本轮报告中提请 formalizer 订正。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: schottenloher-2008
+    loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（h_{p,q}(c) 的显式公式与重数 P(N−pq)）；Gram 矩阵定义 Definition 6.11, p. 97（LNP 759, pp. 91-102）"
+    note: |
+      **只用于本卡 notes 里「R = C 上 h_{r,s}(c) 满足 (3) 的四条对称函数关系」那一步核对，
+      不承载 (1)(2)(3)(4) 的论证**（那四条全部是 Lean 的）。L1 逐页核实
+      （literature/extractions/math-sources.md §34.3）。⚠ 该处限 c, h ∈ ℝ 且 A^N 是 **Hermite**
+      形式的 Gram 矩阵，且取 V_N 的**一组基**（Definition 6.11）——正是本卡【不断言】(a) 缺的那步。
+      书上写 K_N ≥ 0（不是 > 0）。
+  - ref: feigin-fuchs-1982
+    loc: "§3.2 «Теорема Каца», Теорема 3.1（俄文原刊 Функц. анализ 16:2 (1982) 第 58 页）"
+    note: |
+      **只用于重数/根结构的对照**。FF 的 M_{h,c}(k) 显式定义为 PBW 基
+      e_{−1}^k, e_{−1}^{k−2}e_{−2}, …, e_{−k} 作用于真空所得基的 Gram 矩阵
+      （L1，math-sources.md §34.2(b)）；k = 3 时那组基正是本卡的
+      {u₁₁₁, u₂₁, u₃} = {L₋₁³v, L₋₂L₋₁v, L₋₃v}，**但 FF 已假定它是基**。
+      FF 的形式是 det² 而非 det，其常数 C 只被断言**非零**。
+tags: [cft, representation-theory, verma-module, shapovalov, kac-determinant, virasoro, formalized]
+notes: |
+  【本卡比 worldsheet.kac-determinant-level-two 强在哪里——最要紧的一条】
+  level-two 卡的 (4)（「把行列式写成 Kac 乘积形」）**不在 Lean 里**，是 curator 在那张卡
+  notes 里做的手算，那张卡的推导 gaps (ii) 因此写明「(4) 的严格程度是 curator 手算 +
+  researcher 数值核对，不是 formalized」。
+  **本卡的 (3) 在 Lean 内部**：`IsContravariant.gram_level_three_det_eq_kac` 是一条定理，
+  假设只有五个根的四条**清过分母的对称函数等式**（h₁₁ = 0、8(h₁₂+h₂₁) = 5−c、16h₁₂h₂₁ = c、
+  3(h₁₃+h₃₁) = 7−c、3h₁₃h₃₁ = c+2），结论是乘积形。
+  ⇒ 「Gram 行列式 = Kac 乘积」这一步在 level 3 是机器检查的，在 level 2 不是。
+  **代价**：Lean 的陈述因此不含 h_{r,s}(c) 的显式公式，只含它们的对称函数
+  （见【不断言】(c)）——而这恰好也是**优点**：
+
+  【为什么「不依赖 √((c−1)(c−25)) 分支」是实质改进】
+  Schottenloher Theorem 6.12 的 h_{p,q}(c) 含 √((c−1)(c−25))，故单个 h₁₂ 与 h₂₁ 的**标号**
+  依赖平方根的分支选择（level-two 卡 notes 已就此留了告诫）。
+  本卡 (3) 只用到每一对的**和与积**，而和与积在两支交换下不变，
+  所以 (3) 既不需要 R 中存在平方根，也不需要选分支，更不需要 R 是域或有序。
+  这就是 Lean 能把这条比较做进定理的技术原因。
+
+  【(3) 的四条关系与 Schottenloher 的 h_{p,q}(c) 相容——curator 手算核对，2026-09-11】
+  取 h_{p,q}(c) = (1/48)[(13−c)(p²+q²) + √Δ·(p²−q²) − 24pq − 2 + 2c]（Theorem 6.12），
+  记 Δ := (c−1)(c−25)：
+  · **h₁₁ = 0**：p = q = 1 ⇒ (1/48)[2(13−c) − 24 − 2 + 2c] = (1/48)[26 − 2c − 26 + 2c] = 0。✓
+  · **(1,2) 与 (2,1)**：p²+q² = 5、pq = 2、p²−q² = ∓3 ⇒ 记 S := 5(13−c) − 48 − 2 + 2c = 15 − 3c，
+    h₁₂ + h₂₁ = 2S/48 = (15 − 3c)/24 = (5 − c)/8；
+    h₁₂ · h₂₁ = (S² − 9Δ)/48² = [225 − 90c + 9c² − 9(c² − 26c + 25)]/2304 = 144c/2304 = c/16。✓
+    即 Lean 的假设 e2s : 8(h₁₂+h₂₁) = 5 − c 与 e2p : 16h₁₂h₂₁ = c。
+  · **(1,3) 与 (3,1)**：p²+q² = 10、pq = 3、p²−q² = ∓8 ⇒ 记 T := 10(13−c) − 72 − 2 + 2c = 56 − 8c，
+    h₁₃ + h₃₁ = 2T/48 = (56 − 8c)/24 = (7 − c)/3；
+    h₁₃ · h₃₁ = (T² − 64Δ)/48² = [3136 − 896c + 64c² − 64(c² − 26c + 25)]/2304
+              = (768c + 1536)/2304 = (c + 2)/3。✓
+    即 Lean 的假设 e3s : 3(h₁₃+h₃₁) = 7 − c 与 e3p : 3h₁₃h₃₁ = c + 2。
+  ⚠ **这一段是 curator 的手算，不在 Lean 里、也不是任何来源的逐字内容**。
+  它支持的只是「Lean 的 (3) 所假设的那四条关系，在 R = C 与 Schottenloher 的 h_{p,q}(c) 下
+  确实成立」；**(3) 本身的证明不依赖它**（(3) 是条件命题），故本卡的 formalized
+  不被这段手算拖低——与 level-two 卡 (4) 的情形不同，那里手算出现在**结论**里。
+
+  【α₃ = 2304 与 α_N 的乘积公式】
+  本卡给出 α₃ = 48·16·3 = 2304 > 0。连同 level-two 的 α₂ = 32 与 level-1 的 α₁ = 2，
+  三个值与 worldsheet.kac-determinant-v2 notes (D) 登记的乘积公式
+  α_N = ∏_{rs ≤ N} ((2r)^s · s!)^{p(N−rs) − p(N−r(s+1))} 在 N = 1, 2, 3 处逐项吻合
+  （N = 3 的因子是 2^1 · 8^0 · 48^1 · 4^1 · 6^1 = 2304）。
+  ⚠ 该公式本身**未形式化、也不是文献逐字**，见那张卡的登记。本卡只承载 N = 3 的数字。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search kac`：既有节点是
+  worldsheet.kac-determinant（已 superseded）、worldsheet.kac-determinant-v2（一般 N，rigorous）、
+  worldsheet.kac-determinant-level-two（N ≤ 2，formalized）。本卡是 level-two 的**同构姊妹卡**
+  （同一前提、同一不断言清单、升一级），**不重复**：level-two 不含 level-3 的任何 Gram 元，
+  也不含 Lean 内的 Kac 比较。
+author: curator
+created: "2026-09-11"

@@ -67,7 +67,21 @@ sources:
       **适用限制**：G–N 的前提是格点顶点代数（偶格、洛伦兹号差、双乘性上闭链 ε），
       本图尚无对应的卡，故该推导的有效状态仍被压在 open。
 tags: [bosonic-string, spectrum-generating-algebra, oscillator-algebra]
+superseded_by: worldsheet.ddf-transverse-oscillator-algebra-v2
 notes: |
+  ⚠ **【已换代，2026-09-11（五），curator，分支 agent/curator/ddf-algebra-split】本节点不再是活节点。**
+  本卡把两个命题捆在一张卡上：对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，
+  以及末句「即 {A^i_n} 生成一份 D-2 维横向自由玻色振子代数（Heisenberg 代数），
+  与世界面横向振子 α^i_n 的代数逐字同型」。末句把本卡的**每一条**推导都拉到
+  worldsheet.transverse-oscillator-commutators（physical-argument）之下，是
+  --via-zero-mode-bracket（own rigorous）唯一剩下的上限。按「一个节点一个命题」拆为
+    · worldsheet.ddf-transverse-oscillator-algebra-v2（只含对易关系，本卡文本逐字去掉末句）；
+    · worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators（末句的同构识别）。
+  本卡的两条推导已 git mv 改名并改指 v2（docs/STATUS_LEVELS.md「旧推导的去留」裁决：
+  新陈述必须有自己的推导，通常就是旧推导的改名版），故本卡**没有推导**、有效状态为 open；
+  因有 superseded_by，`stringgraph report` 不把它列进 open_propositions。
+  下面的内容全部是换代前的记录，**不再更新**；引用请指向 v2。
+
   【拆卡来源，2026-09-11】本节点是 worldsheet.ddf-operators-v4 的拆分产物之一，
   理由与 worldsheet.ddf-commute-with-virasoro 相同（v4 是定义卡却断言了两条命题）。
   docs/ROADMAP.md 待拆清单的 `ddf-operators-v4` 项，lead 已同意。

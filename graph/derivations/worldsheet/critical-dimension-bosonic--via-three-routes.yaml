@@ -3,9 +3,29 @@ target: worldsheet.critical-dimension-bosonic
 kind: proof
 status: rigorous
 depends_on:
-  - id: worldsheet.critical-dimension-light-cone
-  - id: worldsheet.critical-dimension-old-covariant-v2
+  - id: worldsheet.critical-dimension-light-cone-v2
     note: |
+      【2026-09-11 就地换代】原先指向 worldsheet.critical-dimension-light-cone，该卡已
+      superseded_by worldsheet.critical-dimension-light-cone-v2（v2 补上前提 **D ≥ 4** 并写出
+      「[J,J] = 0 ⟺ 对所有 n ≥ 1 有 Δ_n = 0」所需的线性无关一步；旧卡的 iff 在 D = 3 有反例：
+      单横向指标处 α^i_{−n}α^j_n − α^j_{−n}α^i_n 恒为零，对易子对任意 (D, a) 都消失）。
+      改指的依据是 ms.critical-dimension-bosonic 第三轮回译审计裁定 3(a)，与本文件里
+      old-covariant / brst / open-string-intercept 三处「就地换代」同款处理。
+      ⚠ **换代带来一处方向不安全的记账缺口，属本推导目标卡的已知过度断言、不在此修**：
+      本推导的目标是**已被换代的**旧汇总卡，其路线 (I) 没有 D ≥ 4 的限定，而换代后的输入
+      路线卡有；故严格说本推导的 (I) 在 D ≤ 3 处无输入支撑。该缺口由
+      worldsheet.critical-dimension-bosonic-v3（(I) 已带 D ≥ 4）修正，本条只作记账。
+  - id: worldsheet.critical-dimension-old-covariant-v3
+    note: |
+      【2026-09-11 就地换代之二】本边当日稍后再由 -v2 改指 **-v3**：-v2 已 superseded_by -v3，
+      后者**只**删去 statement 中 H_0 的括注「（伪态）」（H_0 按定义式是 Fock 内积在 H_phys 上的根；
+      「伪态」是 L_{−n} 的后代，二者相等在 (26,1) 是无鬼定理的内容而非定义），
+      其余逐字照抄 -v2。见 ms.critical-dimension-bosonic 第二轮 D5/T4 与第三轮 §6。
+      **本推导的论证与状态不受影响**：命题内容未变，删的只是一个与定义式冲突的同位语。
+      按 docs/STATUS_LEVELS.md「旧推导的去留」，指向已换代陈述的历史推导本可不追改；
+      此处仍就地改指，是因为本边的 -v2 本身就是当日「就地换代」加上去的（见下方原记载），
+      与 (I) 边改指 light-cone-v2 那次同款处理。以下为改指 -v2 时的原记载，逐字保留：
+
       【2026-09-11 就地换代】原先指向 worldsheet.critical-dimension-old-covariant，该卡已
       superseded_by worldsheet.critical-dimension-old-covariant-v2（v2 删去旧卡末句关于
       D < 26 的说法、改用「等距同构」「存在负模物理态」的措辞、并写进 v4 的动量限定）。
@@ -53,8 +73,9 @@ sources:
 summary: |
   worldsheet.critical-dimension-bosonic 现在是汇总命题：它的陈述 (i)(ii)(iii) 是
   三个独立节点的合取，外加截距 a = 1——
-    (i)   worldsheet.critical-dimension-light-cone（光锥洛伦兹代数闭合 ⇒ D=26 且 a=1）
-    (ii)  worldsheet.critical-dimension-old-covariant-v2（(26,1) 处 H_phys/H_0 ≅ 横向 Fock；
+    (i)   worldsheet.critical-dimension-light-cone-v2（光锥洛伦兹代数闭合 ⇒ D=26 且 a=1；
+          2026-09-11 前为 worldsheet.critical-dimension-light-cone，v2 补上前提 D ≥ 4）
+    (ii)  worldsheet.critical-dimension-old-covariant-v3（(26,1) 处 H_phys/H_0 ≅ 横向 Fock；
           D > 26、a = 1 时有负模物理态；2026-09-11 前为 worldsheet.critical-dimension-old-covariant）
     (iii) worldsheet.critical-dimension-brst-v2（Q_B^2 = 0 ⟺ c^m = 26；**只给 c^m，不给 D 也不给 a**；
           2026-09-11 前为 worldsheet.critical-dimension-brst，其陈述末句含 c^m = D 那一步）

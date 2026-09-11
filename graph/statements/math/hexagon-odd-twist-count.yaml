@@ -1,0 +1,63 @@
+id: math.hexagon-odd-twist-count
+kind: proposition
+title: 六条内线上「扭转数为奇数」的分配方式数 Σ_{k 奇} C(6,k) = 2⁵ = 32（一般地 2^{n−1}）
+statement: |
+  设 n ≥ 1，S 是 n 元集合。把「给 S 的每个元素标上扭转 / 不扭转」的一种选择等同于 S 的一个子集
+  （被扭转的那些元素）。则**基数为奇数的子集个数**是
+
+      Σ_{k 奇, 0 ≤ k ≤ n} C(n, k) = 2^{n−1}。
+
+  特别地，**n = 6** 时
+
+      C(6,1) + C(6,3) + C(6,5) = 6 + 20 + 6 = **32 = 2⁵**。
+
+  **本节点不断言**：
+  (a) 「六边形图的内线数是 6」。这是**物理侧的识别**：GSW 原文只说「the internal legs of a hexagon
+      diagram」，没有写出 6，也没有写出上面的求和式（抽取记录
+      literature/extractions/gsw-1987-v2.md §5.4 的候选 A7 明记这一步是抽取者从图形读出的）。
+      本卡是纯组合陈述，n 是自由参数，n = 6 只是一个代入。
+  (b) 这个 32 与 GSW (10.2.36) 中来自变量替换 √z_r → z_r 的那个 32 相等的**原因**。
+      两者都是 2⁵，但 GSW 不解释；见 consistency.type-i-hexagon-so32-iff 的 notes 第 1 条。
+  (c) 任何关于反常的事。本卡是纯算术，物理含义由 consistency.type-i-hexagon-so32-iff 一侧承载。
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.2.2, p. 165，逐字：「The number of such diagrams is equal to the number of ways in which an odd number of twists can be distributed on the internal legs of a hexagon diagram, which is 32.」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/gsw-1987-v2.md E6 备注 2）。
+      **GSW 只给结果「which is 32」，不给算式、不给求和、不写出内线数**。
+      上面那条二项式恒等式是本图补出的（推导里给了两行证明）。
+      ★ 这是**目前找到的唯一一条把 Green–Schwarz 1984 (12c) 里那个凭空出现的整数 32
+      落到可验证组合事实上的链条**（抽取记录 §5.4 候选 A7）。
+tags: [algebra, arithmetic, combinatorics, binomial, anomaly, phase2, lean-candidate]
+notes: |
+  【为什么值得单独建卡】GS 1984 的 (12c) Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴ 里的整数 **32**
+  在 GS 原文中没有任何来历（math.tr-f6-coefficient-vanishing 的 notes 已记：它是「为什么偏偏是 32」
+  在纯规范一路上的唯一代数入口，但入口本身是给定的）。
+  GSW Vol. 2 p. 165 给了它一个**世界面来历**：不可定向图的数目 = 六边形内线上分配奇数个扭转的方式数。
+  本卡把那句话里可机检的那一半（纯组合计数）单独立出来。
+
+  【Lean 岛 2 候选 A7】抽取记录 literature/extractions/gsw-1987-v2.md §5.4 列为候选 **A7**：
+  形式化形态是 Mathlib 上 `Finset` 的初等恒等式——对固定的 n = 6 直接 `decide`；
+  一般 n 可用 `Finset.sum_range_choose_halfway` 一类引理或对 (1+x)^n 在 x = ±1 求值。
+  价值：与候选 A1（math.anomaly-twelve-form-factorization）、A3（math.tr-f6-coefficient-vanishing）、
+  A6（迹恒等式的 l ∈ {−1,0,+1} 统一版）同属 Green–Schwarz 反常代数的可形式化碎片，
+  且是其中**唯一一条组合学的**。**目标卡的 formal.lean_decl 待 formalizer 填。**
+
+  【★ 2026-09-11 更新：Lean 声明已就位，但只覆盖 n = 6，故另立卡】
+  formalizer 已在 formal/StringFormal/Math/FiniteCounts.lean 做出
+  `StringFormal.Math.hexagon_odd_twist_count`，其字面陈述是
+  `∑ k ∈ (range 7).filter Odd, Nat.choose 6 k = 32`——**只是 n = 6 的数值实例**，
+  既不含本卡的一般 n 恒等式，也不含「= 奇基数子集个数」这一组合解释。
+  按 docs/STATUS_LEVELS.md「Lean 证明用的对象若与卡片定义不逐句一致…正确做法是拆卡」，
+  本卡**不挂** `formal.lean_decl`、**不加** `--via-lean`；与该声明逐句对应的那一半
+  另立为 **math.hexagon-odd-twist-count-six**（formalized）。
+  ⇒ 本卡维持 physical-argument，等 reviewer 复核两行二项式论证后再按上一条升 rigorous。
+
+  【与 math.mixed-anomaly-trace-conditions-n32 / math.tr-f6-coefficient-vanishing 并列】
+  三者都是「为什么是 32」的算术入口，但来路不同：
+  · math.tr-f6-coefficient-vanishing：纯规范反常的迹恒等式系数 N + 32l = 0；
+  · math.mixed-anomaly-trace-conditions-n32：混合反常给的两条线性方程；
+  · 本卡：不可定向世界面图的计数。
+  前两条的 32 是**给定的**，本卡的 32 是**算出来的**。
+author: curator
+created: "2026-09-11"

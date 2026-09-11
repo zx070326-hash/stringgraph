@@ -1,0 +1,76 @@
+id: consistency.d10-anomaly-conditions-completeness-claim--via-unproven-literature-assertion
+target: consistency.d10-anomaly-conditions-completeness-claim
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: consistency.d10-four-groups-satisfy-anomaly-conditions
+    inferred: false
+    note: |
+      完备性主张的「正面一半」（这四个确实满足条件）由该卡承载并已逐一验算。
+      本推导只补「没有第五个」这一半——**而那一半在本项目可读来源里没有证明**。
+  - id: math.tr-f6-coefficient-vanishing
+    inferred: true
+    note: |
+      **inferred 的理由**：该卡给出的是**在 SO(N)/USp(N) 族内**的完备性
+      （系数 N + 32l = 0 ⟺ l = −1 且 N = 32；USp 恒不为零），
+      即目标命题在**一个子族**上的严格版本。把它当作全局完备性的**部分证据**是本图的判断，
+      来源没有这样组织论证：bilal-2008 说「scan all 496-dimensional groups」但不写扫描，
+      antonelli-2015 的分类论证本项目未复核。
+  - id: conv.gauge-trace-normalization
+    note: 固定条件 (i) 中迹的语义。
+sources:
+  - ref: bilal-2008
+    loc: "§12.4.2, pp. 102–103：「One can actually scan all 496-dimensional groups and show that there are no other possibilities」"
+    note: L1。**无证明、无引用**——「can be done」不是「has been done」。
+  - ref: antonelli-2015
+    loc: "§1.1, p.3；§2.1, p.7；摘要与 p.33"
+    note: |
+      L1（只读 pp. 1–8 与 33–36）。**唯一自称给出证明的来源**，也是唯一逐字承认此前无证明的来源。
+      单作者预印本，本项目未核实发表记录、未复核证明。
+  - ref: gsw-1987-v2
+    loc: "§13.5.3, pp. 353–358"
+    note: ★ **正文未取到（L0）**；只登记为两条独立二手证据共同指认的原始出处，不引用其措辞或式号。
+  - ref: schwarz-2012-history
+    loc: "p.10"
+    note: L1。冲突表述（「the only other」），登记为矛盾。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 101 与脚注 1"
+    note: L1。**反面证据**：最可靠的一手教科书来源对完备性**保持沉默**，动词只是 "hold"。
+summary: |
+  本推导**不是**完备性的证明，而是把「为什么这条主张在本图只能是猜想」的证据结构记清楚。
+
+  **已有的正面材料：**
+  1. 四个群确实满足 (i)(ii)（consistency.d10-four-groups-satisfy-anomaly-conditions，逐一验算，代数严格）；
+  2. 在 SO(N)/USp(N) 族内，条件 (i) 的解**确实唯一**（math.tr-f6-coefficient-vanishing：
+     系数 N + 32l 为零 ⟺ l = −1 且 N = 32；USp 一支恒不为零）。GSW (10.1.14) 另给出 U(n) 支系数为 n，
+     对任意 n ≥ 1 不为零（已补记在 math.so-usp-adjoint-fundamental-trace-identities 的 notes）；
+  3. 阿贝尔方向上条件 (i) 平凡成立，所以「任意含足量 U(1) 因子的 496 维代数」这一支也被覆盖
+     （ADT p.3 逐字）。
+
+  **缺的那一步：** 从「三族及其乘积」推广到**全部** 496 维李代数。这需要
+  (a) 496 维李代数的分类或有效枚举，(b) 对每个候选验证条件 (i)。
+  · bilal-2008 说「one can actually scan」——**是「可以做」，不是「做过」**，无证明无引用；
+  · antonelli-2015 逐字说在该文之前「no proof has explicitly been carried out」，自称补上，
+    **本项目未复核**（单作者预印本）；
+  · gsw-1987-v2 §13.5.3 据说是原始陈述处，**正文未取到（L0）**；
+  · polchinski-1998-v2 p.101 脚注只说四个群的两条 properties "hold"，**不主张唯一性**；
+  · schwarz-2012-history p.10 反而说 E₈ × E₈ 是「the only other」，与四解表冲突。
+
+  **⇒ 档位**：来源本身把它当作待证命题（Antonelli 逐字），且覆盖范围在文献中未定（Schwarz 冲突、
+  Polchinski 沉默）。按 docs/STATUS_LEVELS.md 取 **conjecture**，kind 取 conjecture-support。
+gaps:
+  - "★★ 完备性本身**没有任何已核实的证明**。本推导给出的只是子族内的结果（SO/USp 族由 math.tr-f6-coefficient-vanishing 给出，U(n) 族由 GSW (10.1.14) 给出，纯阿贝尔方向平凡），**不覆盖全部 496 维李代数**。"
+  - "★ GSW §13.5.3 正文未取到（L0，Cambridge Core 12 MB > 工具 10 MB 上限），故『原始陈述有多强』未知；Antonelli 与 ADT 两位转述者的读法不一致。"
+  - "antonelli-2015 自称的证明本项目未复核（只读了 pp. 1–8 与 33–36 共 12 页 / 全文 36 页），且该文是单作者预印本，未核实期刊发表记录。"
+  - "schwarz-2012-history p.10 的『the only other』与四解表冲突，未裁决。"
+  - "『三族及其乘积』这个候选集限定本身**没有来源**：没有任何已核实来源说明为什么可以只在 so(N)、usp(N)、u(N)、e₈ 及其直和里找。"
+  - "即使完备性成立，也只是『因子化解的完备性』：两个阿贝尔解并没有反常抵消（consistency.abelian-factorization-is-not-cancellation）。"
+notes: |
+  【为什么值得建这张 conjecture 卡而不是干脆不建】这正是本项目的用途：
+  「四个群」这句话在教科书、综述与预印本里被反复复述，读者极易当成定理。
+  建成 conjecture 节点后，`stringgraph report` 的 conjectures-depended-on 会把任何引用它的结论
+  自动标记出来，而可机检的那一半（四个群满足条件）留在 rigorous 的卡上不被拖低。
+
+  【本推导不写 reviewer-verified】本推导没有可复核的计算——它记录的是证据的缺失。
+author: curator
+created: "2026-09-11"

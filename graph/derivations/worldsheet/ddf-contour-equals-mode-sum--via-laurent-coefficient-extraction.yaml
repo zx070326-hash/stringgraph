@@ -1,0 +1,135 @@
+id: worldsheet.ddf-contour-equals-mode-sum--via-laurent-coefficient-extraction
+target: worldsheet.ddf-contour-equals-mode-sum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      等式**右端**的对象：模态和 A^ε_n = Σ_m α^ε_m V^{(n)}_m（Lean `ddfOp`），
+      以及 (T)(N)(S) 三个条件与 z^K-系数约定。
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      右端出现的 V^{(n)}_K 的振子部分（Lean `Fock.vertexOsc`）；
+      本推导第 2 步「:e^{i n k_0·X(z)}: = Σ_K V^{(n)}_K z^K」这句话的左端在文献里是形式级数，
+      右端的每个系数由这张卡定义。**两者相等正是本推导要断言的那一半**（见 gaps 第 1 条）。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      塔与零模移位 e^{i n k_0·x}：文献的 V(n k_0, z) 含零模因子
+      e^{i n k_0·q} z^{2α' n k_0·p}，前者是塔上的移位算子，后者在 (N)(S) 下等于 z^n。
+      **没有塔就写不出 V^{(n)}_K 的整数指标**，本推导的幂次记账全在塔上做。
+sources:
+  - ref: goddard-2008
+    loc: "§5 'Spectrum Generating Algebra', p.11, eq. (5.1)–(5.3)（arXiv:0802.3249v1）"
+    note: |
+      **只提供等式左端的逐字定义**（A^μ_n = (1/2πi)∮P^μ(z)V(nk,z)dz，V(α,z) = :exp{iα·Q(z)}:，
+      Q^μ 与 P^μ = i dQ^μ/dz 的模展开，a^μ_0 = p^μ）。
+      **不承载本推导的论证**：该文不写模态和，也不讨论两种写法的等价。
+      L1 逐字（literature/extractions/gsw-1987-v1.md §2 E1）。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3, p.102–112（式号未核实）"
+    note: |
+      **不承载论证**。教科书同样只给围道写法。式号 L0。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFOperator.lean :: StringFormal.NoGhost.ddfOp / ddfSummand；formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.towerVertex / towerModeVec"
+    note: |
+      **只提供等式右端的形式化对象**。左端在 Lean 中没有对应物，
+      故本推导**不是** --via-lean，也不可能是 formalized。
+summary: |
+  两行的洛朗系数记账，外加一处未论证的重排步骤（见 gaps 第 1 条）。
+
+  **第 1 步：把 P 展开成模。**
+  由 goddard-2008 (5.3) 逐字 Q^μ(z) = q^μ − i p^μ log z + i Σ_{n≠0} (1/n) a^μ_n z^{−n}、
+  P^μ(z) = i dQ^μ/dz、a^μ_0 = p^μ，直接微分得
+    P^μ(z) = Σ_{m ∈ Z} α^μ_m z^{−m−1} ，
+  即 ∂X^μ 的标准模展开（零模项 p^μ z^{−1} 由 log z 那一项给出，正是 m = 0 的项）。
+  与偏振收缩：ε·P(z) = Σ_m α^ε_m z^{−m−1}，其中 α^ε_m = ε·α_m。
+
+  **第 2 步：把顶点算子展开成模。**
+  V(n k_0, z) = :e^{i n k_0·X(z)}: = Σ_{K ∈ Z} V^{(n)}_K z^K（z^K-系数约定，同 v6）。
+  指标是**整数**这件事用到 (N)(S)：零模贡献的单值因子是 z^{2α' n k_0·(p + N k_0)}，
+  由 k_0² = 0 它与层数 N 无关、等于 z^{2α' n k_0·p}，再由 2α' k_0·p = 1 等于 z^n。
+
+  **第 3 步：取 z^{−1} 系数。**
+  把围道读作形式留数（(1/2πi)∮ … dz = [z^{−1}]），逐项相乘：
+    [z^{−1}] ( Σ_m α^ε_m z^{−m−1} · Σ_K V^{(n)}_K z^K )
+      = Σ_{(−m−1) + K = −1} α^ε_m V^{(n)}_K
+      = Σ_{m ∈ Z} α^ε_m V^{(n)}_m ，
+  因为幂次条件 (−m−1) + K = −1 恰好给 **K = m**。右端就是 v6 的 A^ε_n。
+
+  **横向性在这里的作用（本项目的解读，文献未逐字说）。**
+  第 3 步的逐项相乘要求被积量 ε·P(z)·V(n k_0, z) 作为**同一点上的两个算子之积**有意义。
+  ε·P 与 :e^{i n k_0·X}: 之间的缩并正比于 ε·k_0；横向性 ε·k_0 = 0 使缩并为零，
+  两个因子在同点相乘不需要额外的正规序处方。这与 v6 里横向性保证模态和局部有限
+  是同一个条件的两副面孔，但**不是同一条论证**。
+gaps:
+  - |
+    **第 3 步的重排在算子层面没有论证。** 「两个形式级数逐项相乘并按 z 的幂次重排」
+    在数值级数上要收敛性、在形式级数上要乘积良定义（每个幂次只有有限项贡献）。
+    右端的局部有限性本图有（worldsheet.ddf-transversality-gives-local-finiteness-v2，
+    formalized），**但那是对结论的验证，不是对重排本身的论证**：
+    局部有限性说的是「Σ_m α^ε_m V^{(n)}_m 逐向量有限」，
+    没有说「它等于围道积分」。这条缺口最接近的近亲是
+    worldsheet.ope-pole-mode-commutator-dictionary（形式分布版，effective = open，无推导），
+    但那是不同的对象，故**不**作为本推导的依赖边，只在此登记（理由见 notes）。
+    **这是本推导最大的问题。**
+  - |
+    **围道积分的语义未固定。** 本推导把 (1/2πi)∮ … dz 读作形式留数 [z^{−1}]。
+    若文献意在复平面上的真实积分（径向量子化里通常如此，且 GT 的论证要用围道形变），
+    则需要算子值函数的解析性与收敛性，本图与 Lean 均无此结构。
+    ⚠ 两种读法在**本卡**的结论上给出同一个公式，但在别处不等价：
+    worldsheet.ddf-commute-with-virasoro--via-conformal-weight 用的是**形变**围道，
+    那一步在形式留数读法下没有意义。故本卡**不**为那条推导提供任何支持。
+  - |
+    **第 2 步的等式 :e^{i n k_0·X(z)}: = Σ_K V^{(n)}_K z^K 本身是记号约定，不是被证明的。**
+    左端是文献里的形式级数（由 (5.2) 定义），右端的每个 V^{(n)}_K 是本图/Lean 的对象
+    （worldsheet.exponential-vertex-operator-modes 的 E₋E₊ 拆分）。
+    「正规序 :·: 的展开恰好给出 E₋E₊ 拆分」这一步在本图中同样没有节点；
+    它在文献里是正规序的定义，在 Lean 里是 `Fock.vertexOsc` 的定义，**两者未被对接**。
+    本推导把它算作记号对齐而非数学内容，但 auditor 回译时应当把它一并计入缺口。
+  - |
+    **横向性使两因子无缩并**这一段是本项目的解读，**文献未逐字如此说**
+    （goddard-2008 给出 (5.1) 后不讨论同点乘积的合法性）。
+    本图也没有节点承载「ε·∂X 与 :e^{i k·X}: 的缩并正比于 ε·k」。
+  - |
+    **文献侧只有一处 L1 锚点**（goddard-2008 (5.1)–(5.3)）。GSW §2.3.3 与 GT 1972 的
+    围道写法**式号与正文均未核实（L0）**，故「文献一律用围道」这句话的证据强度
+    在 GSW / GT 上是弱的（只有目录页码与一次 Google Books 命中）。
+  - |
+    **不覆盖 k_0·p = 0 的扇区**（含 p = 0）：那里 (S) 无法满足，第 2 步的整数指标失去意义，
+    文献侧的 A^i_n 与本图的 A^ε_n 都没有定义。
+notes: |
+  本推导 status: physical-argument 的档位依据见 docs/STATUS_LEVELS.md
+  【「断言 + 骨架」的档位】（lead 2026-09-11 裁决）：骨架清楚、关键步骤只有断言的，
+  标 physical-argument 并把断言处逐条写进 gaps，**不**标 conjecture
+  （结论的真伪在文献中并无争议，缺的是论证）。
+
+  【本推导为什么不是 rigorous】
+  rigorous 的例外条款要求「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。
+  本推导的前提里含一个**未定义的对象**（围道积分的算子值被积量），
+  故前提不完整，例外条款不适用。
+
+  【为什么把缺口写进 gaps 而不是连一条 open 依赖边（lead 2026-09-11 指定）】
+  本推导第 3 步的重排缺口指向 worldsheet.ope-pole-mode-commutator-dictionary
+  （effective = open，无推导）。**该卡不列入 depends_on，只写在 gaps 第 1 条。**
+  理由：那张卡处理的是**形式分布**的模态字典，与本推导需要的对象（塔上的洛朗系数）
+  不是同一个东西——它是「最接近的近亲」，不是本推导实际引用的前提。
+  连一条 inferred 边过去会把本卡与整条下游（含 worldsheet.no-ghost-theorem-v4）
+  一次性压到 open，而那个 open 表达的其实是「本图还没建那张卡」，不是
+  「本推导依赖一条无据的命题」。按项目原则 5，**不引用就不连边**，缺口写在 gaps 里。
+  ⚠ 若日后建成「塔上洛朗系数乘积的重排」那张卡，应把它加为本推导的**正式**依赖
+  并相应改写 gaps 第 1 条。
+  ⚠ **本卡不被任何 formalized 的 DDF 卡列为依赖**
+  （worldsheet.ddf-commute-with-virasoro--via-lean 的 gaps 第 1 条逐字说明了理由）：
+  本图的定义链是 v5 到 v6 的换代，Lean 证的确实是模态和版本；
+  本卡承担的是**回译到文献**时的那一步，故它出现在
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn（走文献围道路线）的依赖里。
+
+  【本推导的形式化对象一侧全是 formalized，另一侧完全没有】
+  右端（模态和）在 Lean 中逐字存在；左端（围道积分）在 Lean 中一无所有。
+  故本卡的 physical-argument **不会**随 Lean 侧进展自动上升——
+  升它需要在 Lean 里引入形式留数，见目标卡 notes 的路线 (ii)。
+author: curator
+created: "2026-09-11"

@@ -19,6 +19,9 @@ statement: |
   consistency.anomaly-cancellation-so32-effective-theory 承载；本节点只把它们当作给定的方程。
 uses_conventions:
   - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.mixed_anomaly_trace_conditions_n32
+  lean_file: StringFormal/Math/GreenSchwarzAlgebra.lean
 sources:
   - ref: green-schwarz-1984
     loc: "PLB p.120（重印 611），(22)(23) 之后的逐字句：「The cancellation requires that `N + 8l = 24` and `N + 2l = 30` in eq. (12). Thus the cancellation of mixed anomalies gives two independent confirmations of the consistency of choosing the gauge group SO(32).」；方程里的 N、l 由 (12)(13) 定义"
@@ -35,9 +38,20 @@ notes: |
   也是「为什么是 32」的算术入口之一（另一个入口是 math.tr-f6-coefficient-vanishing）。
   抽取记录 §5.2 列为 Lean 候选 A2：ℤ 上两条线性方程，`omega` 一行。
 
-  【status 说明】与 math.anomaly-twelve-form-factorization 同理，按 docs/STATUS_LEVELS.md 的
-  rigorous 例外需要 reviewer 独立复核记录，目前没有，故取 physical-argument。
-  这是**记账保守**，不是对算术的怀疑。
+  【★ 2026-09-11：Lean 声明已就位（岛 2）】formal/StringFormal/Math/GreenSchwarzAlgebra.lean
+  用**两条独立声明**分别覆盖本卡的两个分支（本卡 (2) 的 SO 支与 USp 支是两条独立命题）：
+  · (1) + (2) 的 SO 支 → `mixed_anomaly_trace_conditions_n32 (N l : ℤ)
+    (h₁ : N + 8 * l = 24) (h₂ : N + 2 * l = 30) : N = 32 ∧ l = -1`
+    （`formal.lean_decl` 取这条；「解唯一」即此结论本身）；
+  · (2) 的 USp 支 → `mixed_anomaly_no_solution_l_one : ¬ ∃ N : ℤ, N + 8 = 24 ∧ N + 2 = 30`。
+  两条都是 `omega` 一行。**未被 Lean 覆盖的一句**：(2) 的 SO 支里「两条件**各自单独**都给出
+  N = 32」——`mixed_anomaly_trace_conditions_n32` 同时用了两条假设，没有单条件版本；
+  记在 math.mixed-anomaly-trace-conditions-n32--via-lean 的 gaps。
+
+  【status 说明】原纸上推导经 reviewer 复核后已是 rigorous；本卡 own status 现由 --via-lean
+  升到 formalized，但**有效状态仍是 physical-argument**——瓶颈是
+  math.so-usp-adjoint-fundamental-trace-identities（l ↔ so/usp 的字典与 (12) 本身），
+  它在本图里 GS 与 Polchinski 都不给证明（后者留作 Exercise 12.1）。
 
   【USp 一支的归属】GS 从未写「所以 USp 被排除」，(2) 的 USp 结论是抽取者由 (12)(13) 推出的
   （抽取记录 Q4）。相应的边在推导里标了 inferred。

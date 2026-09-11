@@ -1,0 +1,105 @@
+id: worldsheet.critical-dimension-light-cone-v2
+kind: proposition
+title: 光锥洛伦兹代数闭合要求 D = 26 且 a = 1（v2：补上前提 D ≥ 4）
+statement: |
+  **【前提】D ≥ 4**（即至少存在两个不同的横向指标 i ≠ j）。这是 v2 相对
+  worldsheet.critical-dimension-light-cone 唯一新增的内容；其余部分与旧卡逐字相同。
+
+  在开弦光锥量子化（worldsheet.light-cone-quantization）中，洛伦兹生成元 J^{μν} 由横向振子
+  表示，其中 J^{i-} 因代入 α^-_n = L^⊥_n/((2α')^{1/2} p^+) 而成为横向模式的三次式
+  （横向指标 i = 2..D-1）。
+  经典上 [J^{i-}, J^{j-}] = 0；量子化后该对易子取值
+    [J^{i-}, J^{j-}] = -(1/(2α' (p^+)^2)) Σ_{n≥1} Δ_n (α^i_{-n} α^j_n - α^j_{-n} α^i_n)，
+    Δ_n = n (26 - D)/12 + (1/n) [ (D - 26)/12 + 2(1 - a) ]，
+  （整体归一化依赖 α' 与 p^+ 的约定，Δ_n 的形式不依赖）。
+  在 D ≥ 4 时，固定一对 i ≠ j，算子族 {α^i_{-n} α^j_n - α^j_{-n} α^i_n}_{n≥1} 在 H_lc 上
+  线性无关（第 n 个成员是该族中唯一在 α^j_{-n}|0;k⟩ 上不为零的成员），故
+    [J^{i-}, J^{j-}] = 0  ⟺  对所有 n ≥ 1 有 Δ_n = 0。
+  因此洛伦兹代数在 H_lc 上闭合（即 [J^{i-}, J^{j-}] = 0，对所有 n ≥ 1 有 Δ_n = 0）
+  当且仅当 D = 26 且 a = 1。
+
+  **【本命题不断言什么】** 对 D ≤ 3 不作任何断言。理由（即前提 D ≥ 4 不可省的原因）：
+  D = 3 时只有一个横向指标，反对称组合 α^i_{-n} α^j_n - α^j_{-n} α^i_n 恒为零，
+  于是 [J^{i-}, J^{j-}] = 0 对**任意** (D, a) 成立而 Δ_n 一般不为零，
+  「当且仅当」的**仅当**方向在那里有反例；D = 2 无横向振子，J^{i-} 不存在，命题空真。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+sources:
+  - ref: gsw-1987-v1
+    loc: "§2.3.1, eq. (2.3.32)（[J^{i-}, J^{j-}] 的显式计算与 Δ_n）"
+    note: |
+      GSW 用 mostly-minus 号差；Δ_n 的表达式与号差无关，此处按 conv.metric-mostly-plus 转写。
+      ⚠ **GSW 原文同样没有写前提 D ≥ 4**，也没有写出「[J,J] = 0 ⟺ ∀n Δ_n = 0」所需的
+      线性无关一步——那里默认在 D = 26 附近讨论。本卡新增的 D ≥ 4 与线性无关一步是
+      curator 按 ms.critical-dimension-bosonic 第二轮审计 N2 / 第三轮裁定 3(a) 补出的
+      **初等**限定（见 notes），不是 GSW 的文字。
+  - ref: polchinski-1998-v1
+    loc: "§1.3，结论式 **(1.3.40)**, p.23（逐字 `A = −1 , D = 26`；式号与内容已核实，抽取记录 polchinski-1998-v1.md §12.5 / E18 / Q2）；正规序常数 A 的 ζ 正规化在 (1.3.31)–(1.3.35)，质量壳 (1.3.36)"
+    note: |
+      Polchinski 正文给出的是表示论版本（第一激发级只有 D−2 个态 α^i_{−1}|0;k⟩，必须填满
+      SO(D-2) 的无质量矢量表示，故 A = −1；再由零点能 A = (2−D)/24 得 D = 26）。
+      **【2026-09-11 原书核实（沿用旧卡）】**旧卡此前写「显式的 [J^{i-}, J^{j-}] 计算见习题 1.3」——
+      **该说法不成立**：抽取记录 §12.5 的结论是原书既没有做这个计算、也没有把它留成习题，
+      只在 p.21 描述它并推给共形规范路线。故**本节点陈述的 Δ_n 显式版本只由 GSW §2.3.1 (2.3.32)
+      支撑**，Polchinski 只支撑同一结论（D = 26 且 a = 1）的表示论形状。
+      作者三处自降严格程度（逐字，L1）：p.21「We do not wish to spend this much time on light-cone
+      quantization, so we will try to show that the result is **plausible without a complete
+      treatment**」；p.24「We will show this **indirectly** in the coming chapters」；
+      §3.4 开头 p.90「as we briefly and rather **heuristically** explained in section 1.3」。
+      这三句是本节点的推导封顶在 physical-argument 的直接文献依据。
+      另：原书 p.22 给的丢弃发散项的理由是「Weyl invariance **requires** that it be canceled」，
+      不是任意的正规化选择。已按 conv.intercept-sign-a 做 a = −A 换算。
+
+      ★★ **【2026-09-11 第七轮：作者把 careful treatment 外包给了谁——书末第 1 章注记 p.349 逐字】**
+        「**Chapter 1**
+         …**The classical motion of the string and light-cone quantization are discussed in
+         Goddard, Goldstone, Rebbi, & Thorn (1973) and in the reviews by Rebbi (1974) and
+         Scherk (1975). The first two of these include a careful treatment of Lorentz invariance.
+         The heuristic argument that we have given is based on Brink & Nielsen (1973).**
+         Weinberg (1964) discusses the couplings of massless vector and tensor particles.」
+
+      这一段直接闭合本节点上方记的那个缺口（p.21「plausible **without a complete treatment**」）：
+      1. **Polchinski 自陈本书给的是 "the heuristic argument … based on Brink & Nielsen (1973)"**
+         （= `brink-nielsen-1973`，Phys. Lett. B45, 332）。这是本节点 Polchinski 侧封顶
+         `physical-argument` 的**第四条**、也是最直接的一条文献依据
+         （前三条是 p.21 / p.24 / §3.4 p.90 的三处自降）。
+      2. **「careful treatment of Lorentz invariance」被外包给 GGRT 1973**
+         （= `goddard-goldstone-rebbi-thorn-1973`，Nucl. Phys. B56, 109）**与 Rebbi (1974) 综述**
+         （Phys. Rep. 12, 1）。⇒ 若本节点日后要一条**不封顶在 physical-argument** 的推导，
+         正确的下一步是取得 **GGRT 1973 正文**并新建 `--via-ggrt` 推导，
+         **不是**去加固 Polchinski 这条。
+      ⚠⚠ **本轮不新增该推导，理由是诚实**：`goddard-goldstone-rebbi-thorn-1973` 已登记进
+      literature/sources.bib，但**其正文本项目完全未获取（内容等级 L0）**，
+      我们对它的了解只有 Polchinski 的一句转述。**在读到正文之前，不得据此新增任何推导、
+      也不得升级本节点的任何状态。** 已列入报告交 lead 排 researcher 取文。
+      ⚠ 另注意 **Brink & Nielsen (1973) 是 Brink, L. & Nielsen, H. B.**，与 §1.2 p.12 里
+      Polyakov 作用量的发现者 "Brink, Di Vecchia, and Howe" **不是同一篇**
+      （Polchinski 书末字母表 Brink 名下只有 Brink & Nielsen 一条）。
+      见 literature/extractions/polchinski-1998-v1.md §13.2(d) 与 §13.9 B#10/#11。
+tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance]
+notes: |
+  **【换代理由（2026-09-11）】**本卡换代自 worldsheet.critical-dimension-light-cone。
+  旧卡的陈述写「闭合 ⟺ D = 26 且 a = 1」而**未限定 D ≥ 4**，作为命题在 D = 3 有反例
+  （单横向指标处反对称组合恒零，对易子对任意 (D, a) 都消失，「仅当」方向为假）。
+  ms.critical-dimension-bosonic 第二轮回译审计 N2 发现该缺口，第三轮裁定 3(a)
+  **要求换代**（按项目原则 1，陈述卡不可变，不能靠下游推导的 gaps 与 sources 的 note 挂账；
+  「GSW 原文没写该限定」不是陈述可以为假的理由）。旧卡 statement 文本一字未动，
+  只加 superseded_by 指向本卡。
+
+  **【新增的两句各自是什么】**
+  (1) 前提 D ≥ 4：即存在两个不同的横向指标。这是命题为真所必需的最弱限定。
+  (2) 线性无关一步：固定 i ≠ j，α^i_{-n} α^j_n - α^j_{-n} α^i_n 把 α^j_{-m}|0;k⟩ 送到
+      ∝ δ_{nm} α^i_{-n}|0;k⟩，故不同 n 的成员在 H_lc 上线性无关，于是
+      「对易子为零」与「逐个 Δ_n 为零」等价。这一步是有限步初等计算，但**不在** GSW 的文字里，
+      故本卡的推导仍封顶在 physical-argument（封顶的真正原因是 ζ 正规化与无穷模式和的形式操作，
+      见 worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra 的 gaps）。
+
+  **【上游/下游】**推导 worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra
+  由旧卡的同名推导改名改指而来（除 id/target 与 D ≥ 4 相关的记账外内容未改）。
+  下游 worldsheet.critical-dimension-bosonic-v3--via-four-routes 的 (I) 边已改指本卡；
+  指向旧卡的两条历史推导（--via-three-routes 对 v1、--via-four-routes 对 v2）保持不动，
+  它们的目标本身也已被换代。
+
+  **【与汇总卡 v3 的关系】**worldsheet.critical-dimension-bosonic-v3 的 (I) 早已带 D ≥ 4，
+  此前它比路线卡**弱**（多一条前提），方向安全；本次换代后两侧前提一致，该记账差异消失。
+author: curator
+created: "2026-09-11"

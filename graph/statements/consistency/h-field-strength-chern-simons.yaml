@@ -11,7 +11,7 @@ statement: |
       H = dB + ω⁰_{3Y} − ω⁰_{3L}                                      （SO(N) 或 USp(N)）      (4)
       H = dB + (1/30) ω⁰_{3Y₁} + (1/30) ω⁰_{3Y₂} − ω⁰_{3L}            （E₈ × E₈）             (4′)
 
-  其中（consistency.descent-forms-chern-simons 的 n = 1 情形）
+  其中（consistency.descent-forms-gs-notation 的 n = 1 情形）
 
       ω⁰_{3Y} = tr(A F − ⅓ A³),   d ω⁰_{3Y} = tr F²
       ω⁰_{3L} = tr(ω R − ⅓ ω³),   d ω⁰_{3L} = tr R²
@@ -38,14 +38,29 @@ statement: |
 
   **本卡不断言**：δH = 0（GS 由 (10) 断言，本图未建该命题节点，见 notes 第 3 条）；
   也不断言这套场内容构成一个自洽的量子理论——本卡只定义微分形式与变换律。
+superseded_by: consistency.h-field-strength-definition
 uses:
-  - consistency.descent-forms-chern-simons
+  - consistency.descent-forms-gs-notation
 uses_conventions:
   - conv.gauge-trace-normalization
 sources:
   - ref: green-schwarz-1984
     loc: "PLB p.118（重印 609），(4)(4′)(5)(6)(7)(8) 与其后正文；PLB p.118–119（重印 609–610），(9a,b)(9c)(9c′)(10a,b,c) 与「It is crucial that the potential B transforms…」"
-    note: L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E5。
+    note: |
+      L1 逐页读图，抽取记录 literature/extractions/green-schwarz-1984.md E4/E5。
+      ★ **本卡里 H 的两个 Chern–Simons 项的符号，其唯一来源就是本条的 (4) 与 (9c)。**
+      **不得**把它溯源到 zumino-1983-les-houches 或 zumino-wu-zee-1984：
+      Zumino 一侧**没有 B 场、没有 H、没有引力侧**（Les Houches 讲义 L1 全文 46 页通读确认），
+      下降方程只约束 ω₃ 自身的定义与 δω₃ 的符号，**完全不约束 H = dB ± ω₃ 里的那个 ±**。
+      那个 ± 由三样东西联合固定：(i) (9c) 的 δB 约定，(ii) 要求 δH = 0（(10c)），
+      (iii) B 的整体符号约定（可自由重定义）。抽取记录 literature/extractions/zumino-wu-zee-1984.md Q-Z1/Q-Z2。
+  - ref: bilal-2008
+    loc: "§12.4, (12.14) `H = dB − Q₃(A,F) + β̃ Q₃(ω,R) ≡ dB − Q₃^{YM} + β̃ Q₃^{L}`（逐字「with β̃ to be fixed below」）；(12.15) `(δ^gauge + δ^L)B = Q₂¹(v,A,F) − β̃ Q₂¹(v̂,ω,R)`；p.102 逐字「it is then enough to choose **β̃ = 1** in (12.14) and (12.15)」；(12.26)（X₈ 与基本表示迹的选取）；(12.33) 上方 E₈×E₈ 情形「again with β̃ = 1」"
+    note: |
+      **L1（lead 于 2026-09-11 逐页核实 arXiv:0802.0634 v2 §12.4 pp.100–103，
+      记录在 literature/extractions/green-schwarz-1984.md §9）。**
+      列为**第二来源（对照用，不是本卡采用的写法）**：本卡按 GS 原文写 H = dB + ω⁰_{3Y} − ω⁰_{3L}。
+      两家的换算关系见 notes 第 2 条（已闭合）。
   - ref: bergshoeff-1982
     loc: "全文（GS ref. [7]，被修正的极小 SUGRA + SYM 拉氏量）"
     note: |
@@ -53,18 +68,51 @@ sources:
       而这条本身也是**GS 说的**，不是本图核对的。GS 在同处并列 Chapline–Manton, Phys. Lett. 120B (1983) 105。
 tags: [anomaly, chern-simons, kalb-ramond, supergravity, green-schwarz, d10]
 notes: |
+  【0. ★ 本卡已换代（2026-09-11）：拆成三张】
+  本卡把**两件事**写在一张定义卡里——H 的定义 (4)(4′)（第 (1) 段与第 (3) 段）与
+  B、A、ω 的变换律 (9a,b,c)(9c′)（第 (2) 段）——违反「一个节点一个命题」。本轮拆分：
+  · **consistency.h-field-strength-definition** ← 本卡 (1) + (3)（`superseded_by` 指向它）；
+  · **consistency.b-field-gauge-lorentz-transformation** ← 本卡 (2)；
+  · **consistency.h-field-gauge-lorentz-invariant** ← 本卡 notes 第 3 条点名要补的 δH = 0 命题卡
+    （已建，附 `--via-descent-identity` 推导）。
+  按 CLAUDE.md 原则 1，本卡的 `statement` 文本**不动**；依赖本卡的 `uses` / `depends_on`
+  已按各自用到的是哪一半改指上面两张定义卡。
+  ⚠ 本卡的三张继承卡各自补了 polchinski-1998-v2 §12.2 的一手来源（(12.2.22)/(12.2.24)/(12.2.25)），
+  那是本卡没有的：Polchinski 用两个待定常数 c、c′ 写 H̃₃，是第三种（最中立的）写法。
+
   【1. status = rigorous 的含义与边界】本卡只做一件事：在给定场（B, A, ω）上写下一个三形式和一组
   变换律。这是精确的微分几何陈述，故 rigorous。它**不**承载「十维 N = 1 超引力 + 超 YM 作为量子
   理论存在且自洽」——那件事在本图里没有节点，也不该由定义卡偷偷带进来。
   下游的物理结论（反常抵消）由 consistency.anomaly-cancellation-* 承载，那里是 physical-argument。
-  注意本卡 `uses` 了只定到恰当形式的 descent 卡（physical-argument），故其**有效**状态会被压到
-  physical-argument；这是有意的记账：n = 1 的 ω⁰_3 虽然显式给出，但本卡与 descent 卡共用同一套记号。
+  注意本卡 `uses` 了只定到恰当形式的 descent 卡（consistency.descent-forms-gs-notation，
+  physical-argument），故其**有效**状态会被压到 physical-argument；这是有意的记账：
+  n = 1 的 ω⁰_3 虽然显式给出，但本卡与 descent 卡共用同一套记号。
+  ⚠ 另一条被继承的限定（2026-09-11 新增）：descent 卡的数学内容
+  （math.chern-simons-descent-equations）的唯一已核实来源**只在有限坐标邻域上**声明这些等式成立，
+  而本卡把 (4) 写在整个十维时空上。这条**局部 vs 全局**的缺口在 GS 原文里没有对应表述。
 
-  【2. ★ Chern–Simons 项的符号，与现代文献相反】GS (4) 是 **H = dB + ω⁰_{3Y} − ω⁰_{3L}**；
-  bilal-2008 (12.14) 写 **H = dB − Q₃(A,F) + β̃ Q₃(ω,R)**，**两个 CS 项整体反号**。
-  凡从现代文献（或从"常识"）抄 δB、抄反项符号进入本图的，必须先做这一步换算，
-  否则 consistency.gs-counterterms-1984 里所有依赖 δB 的符号都会错。抽取记录 Q6。
+  【2. ★ Chern–Simons 项的符号：与 Bilal 2008 的关系已闭合（2026-09-11）】
+  GS (4) 是 **H = dB + ω⁰_{3Y} − ω⁰_{3L}**；bilal-2008 (12.14) 是 **H = dB − Q₃^{YM} + β̃ Q₃^{L}**，
+  **两个 CS 项整体反号**。**β̃ = 1 已由 lead 逐页核实**（Bilal p.102 逐字「it is then enough to choose
+  β̃ = 1 in (12.14) and (12.15)」；E₈ × E₈ 情形 (12.33) 上方「again with β̃ = 1」）。
+  ⇒ **两家由场重定义 (B, H) ↦ (−B, −H) 相联**：把该重定义作用在 GS (4) 上逐项得
+  H = dB − ω⁰_{3Y} + ω⁰_{3L}，正是 β̃ = 1 时的 Bilal (12.14)。
+  ⇒ **「谁对」是伪问题，两家一致**；**物理不变量是两个 CS 项的相对符号**（YM 与 L 相反）。
+  ⚠ 但**混用两套写法仍会出错**：δB 的符号（(9c)）与 consistency.gs-counterterms-1984 里 B 的系数
+  是绑在一起的，凡从现代文献（或从"常识"）抄 δB、抄反项符号进入本图的，必须先做整体符号换算。
+  ★ **本卡采用 GS 原文的写法**，Bilal 只作对照来源。
+  ★ **这条符号的来源是 GS (4) + (9c)，不是 Zumino**：Zumino 一侧没有 B 场、没有 H、没有引力侧
+  （见本卡 sources 第一条的 note 与抽取记录 Q-Z1/Q-Z2）。
   另：本卡 (4) 首项下标的读图确认过程见抽取记录 §3.3（判定为 ω⁰_{3Y}，依据是紧随其后的正文）。
+
+  【2b. ★ 洛伦兹 Chern–Simons 项 −ω⁰_{3L} 的归属（本轮定案）】那个负号
+  **不在 Zumino**（Les Houches 讲义全文只做内部对称群，L1 通读确认）、
+  **不在 alvarez-gaume-witten-1984**（AGW 全文没有下降方程）、
+  **不在 GS ref. [7]**（GS 逐字：「The last term in eq. (4) is a higher-derivative term arising in the
+  low-energy expansion of the superstring and therefore does not appear in ref. [7].」）
+  ⇒ **它是 green-schwarz-1984 自己的约定选择**，与 (9c) 的 +tr(ω dΘ) 联合固定，
+  而 GS 对其自洽性只给了一句「It follows from eq. (10) that the terms in eq. (1) are invariant」，**无计算**。
+  抽取记录 literature/extractions/zumino-wu-zee-1984.md Q-Z2。
 
   【3. 未建的命题节点：δH = 0】GS 由 (10a,b,c) 断言 H 在两类变换下不变、从而 (1) 的各项不变，
   逐字只有「It follows from eq. (10) that the terms in eq. (1) are invariant」，**没有计算**。

@@ -3,8 +3,11 @@ target: spectrum.open-string-hard-scattering-exponential-falloff
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: spectrum.veneziano-amplitude-weak
-    note: 提供三项 Beta 结构；硬散射的指数因子不依赖整体前因子，故弱形式足够。
+  - id: spectrum.veneziano-amplitude
+    note: |
+      提供三项 Beta 结构。**2026-09-11：由 spectrum.veneziano-amplitude-weak 改指换代后的完整卡**
+      （weak 卡已 superseded_by 本卡）；硬散射的指数因子不依赖整体前因子，
+      故本推导实际只用到完整卡里与弱卡相同的那一层结构。
   - id: math.gamma-ratio-asymptotics
     note: |
       提供 Stirling 型渐近。⚠ 硬散射极限下 Beta 的**两个参数同时**趋于无穷，
@@ -42,7 +45,7 @@ gaps:
   - "**(2) 中「ln s 项相消」这一步依赖 s + t + u 有限**，本推导用了 spectrum.mandelstam-invariants-sum-rule；
      该步骤在来源里没有逐项写出。"
   - "**弱形式的代价**：只给「∝」，不给比例常数。"
-  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude-weak 继承）。"
+  - "**上游的路径积分缺口**（经 spectrum.veneziano-amplitude 继承）。"
   - "⚠ **不覆盖**「幂律衰减是幺正性的必要条件」：抽取记录 E101 逐字记录 [S] 找不到该说法的依据，
      本图不建该节点（见目标陈述的 ⚠）。"
 notes: |

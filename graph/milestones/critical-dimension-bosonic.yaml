@@ -39,7 +39,7 @@ canonical_text: |
       **不是**「幺正 ⟹ D = 26」的等价式：D ≤ 25 一侧本里程碑不作断言（该分支在图中另有节点
       worldsheet.no-ghost-theorem-subcritical，走的是补充模 + BRST 相对上同调的另一条路线，且附带 D ≥ 2
       与三条动量假设）。此路线的一切断言只在非退化动量扇区上成立（DDF 构造所需），细则见 ms.no-ghost-theorem。
-      （节点：worldsheet.critical-dimension-old-covariant-v2 → worldsheet.no-ghost-theorem-v4）
+      （节点：worldsheet.critical-dimension-old-covariant-v3 → worldsheet.no-ghost-theorem-v4）
 
   (III) BRST 路线（BRST 荷幂零）。前提：bc 系统权 λ = 2、鬼场正规序常数 a^g = −1、物质中心荷 c^m 的 BRST 荷 Q_B，
       作用在**受限模**上（每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化，以保证 Q_B 与 Q_B² 逐项有限）。
@@ -75,7 +75,10 @@ canonical_text: |
       维数计数与限制都排除不掉），故 (c) 在图内实际只覆盖 D = 4 与 D ≥ 6，D = 5 待补
       （该漏洞已记入上述推导的 gaps，待 reviewer 复核）。
       a = 1 出现在路线 (I) 与 (II) 的前提/结论里；路线 (III) 与 (IV) 完全不涉及 a。
-      本里程碑**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，本图未建节点。
+      本里程碑**不**对闭弦作任何断言：闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，
+      见 worldsheet.closed-string-intercept，本里程碑不使用它。
+      （2026-09-11 第三轮审计 F1：此处原写「本图未建节点」，该记账已过期——该节点存在且含推导
+      --via-light-cone-representation，v3 statement 也已引用它。改此一行不影响命题：两侧仍都不对闭弦作断言。）
       （节点：worldsheet.open-string-intercept-v2）
 
   【各路线的非严格步骤】本里程碑的四条路线中只有 (II) 在图中是 rigorous（2026-09-11 拆
@@ -134,7 +137,12 @@ canonical_text: |
         路线卡 worldsheet.critical-dimension-weyl-anomaly-v2 的 notes 仍把 Q6 记为开放疑问，
         换代时应改挂 §4.3 (4.3.9) 并删去该疑问（已记入 v3 推导的 gaps）。
     (V) 两条推导都是 physical-argument：光锥路线的输入是「谱须组织成洛伦兹小群表示」，
-        OCQ 路线的输入是「伪态必须解耦」，都是一致性要求而非定理；且光锥路线同样经过 ζ 正规化。
+        OCQ 路线的输入是「伪态必须解耦」，都是一致性要求而非定理。
+        （2026-09-11 第三轮审计 F2：此处原有末句「且光锥路线同样经过 ζ 正规化」，**已删**——
+        (V) 的光锥推导 worldsheet.open-string-intercept-v2--via-light-cone-representation 的
+        depends_on 是 light-cone-quantization、open-string-mass-shell、transverse-oscillator-commutators，
+        **不含** worldsheet.light-cone-normal-ordering-constant，其 gaps 逐字写「那条另外用了 ζ 正规化，
+        本条不用」。该记账在图上无边支撑。）
         a = 1 的**充分**方向（a = 1 时纵向态在 k² = 0 处退耦）已形式化，**排他性**方向未形式化。
 
   【独立性的限定】「四条独立论证」指**论证方式**独立，不指输入独立：
@@ -145,7 +153,15 @@ canonical_text: |
       （BRST 相对上同调 ≅ H_phys/H_0，FGZ 1986 Theorem 2.8 第一个同构）；本里程碑不使用它，
       也不因此断言两条路线等价。
     - (I) 与 (II)(III)(IV) 之间的等价在本图中**无节点**。
-    - (I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、ζ 正规化的正规序常数）。
+    - (I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳 α'm² = N − a，其中 a 作为参数）。
+      （2026-09-11 第三轮审计 F2：原第三项「ζ 正规化的正规序常数」**已删**。两条理由：一，(V) 的光锥
+      推导在图上根本不挂 worldsheet.light-cone-normal-ordering-constant 这条边；二，本 canonical 的 (I)
+      已明说 ζ 值**不是** (I) 的前提（(I) 把 a 当待定参数），再说 (I)(V) 共享 ζ 处方与之自相矛盾。
+      ⚠ **statement 侧未同步**：worldsheet.critical-dimension-bosonic-v3 的【"独立"的确切含义】末条仍写
+      「(I) 与 (V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、正规序常数的正规化处方）」。
+      陈述卡不可变，本次**不动 v3**。该差异**无害**：这是一句关于图内输入的元断言，且方向是
+      v3 多说了一项共享输入——「多说的共享输入」只会让读者低估路线间的独立性，不会让任何命题变强，
+      故不影响 v3 与本 canonical 的命题内容，也不影响第三轮的 faithful 裁定。下次换代 v4 时同步删去。）
 
   【本里程碑不断言什么】
   (1) 不断言四条路线互相蕴含或等价（见上一节）。
@@ -247,66 +263,230 @@ canonical_source:
     另外两个公共输入的位置：c^X = D 见 §2.4 eq. **(2.4.22)** 与 p.48 正文（Q4/E34 已关闭，
     此前记为「无锚点」）；c^g = −26 见 §2.5 eq. (2.5.12), p.51（且原书在 (3.4.23) 处显式引用它）。
 audit:
-  status: draft
+  status: back-translated
   back_translation:
     by: physics-auditor
     text: |
-      回译（第二轮，physics-auditor，2026-09-11；写于读 canonical_text 与第一轮记录之前）
+      回译（第三轮，physics-auditor，2026-09-11；只读 v3 卡的 statement / uses_conventions 与四张路线卡的 statement，
+      写于读 canonical_text、canonical_source、第一二轮 diff_notes 与原文之前）
 
       约定：时空度规 (−,+,…,+)；Virasoro 归一化 [L_m,L_n]=(m−n)L_{m+n}+(c/12)m(m²−1)δ，自由玻色子 c=1；
-      弦尺度用 Regge 斜率 α'，开弦 α'm²=N−a，a 的取值不属约定；截距记号 a 使物理态条件为
-      (L_0−a)|ψ⟩=0，Polchinski 的 A 换算为 a=−A。中心荷写 c^m（物质）、c^g（鬼）。
+      弦尺度用 Regge 斜率 α'，开弦 α'm²=N−a，a 的取值不属约定；截距记号 a 使开弦物理态条件为
+      (L_0−a)|ψ⟩=0，Polchinski 的 (L_0+A)|ψ⟩=0、A=−1 换算为 a=−A=1。中心荷写 c^m（物质）、c^g（鬼）。
 
-      命题是五条 (I)–(V) 的合取，仅此。它不说 (I)–(IV) 彼此等价、不说任一条推出另一条，
+      命题是五条 (I)–(V) 的合取，仅此：它说五条各自成立。它不说 (I)–(IV) 彼此等价、不说任一条推出另一条，
       也不说它们是四份输入互不相关的证据。
 
-      (I) 光锥。设 D 维开弦按光锥规范量子化，J^{i−}（i=2..D−1）因代入 α^−_n=L^⊥_n/(√(2α')p^+)
-      成为横向模式三次式；并取 a 为横向零点能的 ζ 正规化值 a=(D−2)/24。则
+      (I) 光锥。前提：D 维开弦按光锥规范量子化；J^{i−}（i=2..D−1）因代入 α^−_n=L^⊥_n/(√(2α')p^+)
+      成为横向模式三次式；正规序常数 a 作为待定参数进入 Δ_n，不预先代入任何正规化值；并设 D≥4
+      （即至少有两个不同横向指标）。结论：
       [J^{i−},J^{j−}] = −(1/(2α'(p^+)²)) Σ_{n≥1} Δ_n (α^i_{−n}α^j_n − α^j_{−n}α^i_n)，
       Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]（总归一化随 α'、p^+ 约定，Δ_n 形状不随）；
-      于是「对所有 n≥1 Δ_n=0」（洛伦兹代数在 H_lc 闭合）当且仅当 D=26 且 a=1。
-      这是四条中唯一同时给出 D 与 a、也是唯一以「当且仅当」给出 D 的路线。
+      于是「对所有 n≥1 有 Δ_n=0」（洛伦兹代数在 H_lc 上闭合）当且仅当 D=26 且 a=1。
+      这是四条中唯一同时定出 D 与 a 的路线。D≥4 不可省：D=3 只有一个横向指标，反对称组合恒为零，
+      对易子对任意 a、D 都消失，「仅当」方向有反例；D=2 无横向振子，空真。
+      ζ 正规化值 a=(D−2)/24 不是本条前提；若先代入它，Δ_n 退化为 n(26−D)/12，「闭合⟺D=26」而 a=1 变成推论，
+      那是 Polchinski §1.3 的另一种论证形状；两种形状结论相容，本条取 a 待定的形状。
 
-      (II) 旧协变。H_phys 为旧协变物理态空间（(L_0−a)ψ=0，L_{n>0}ψ=0），H_0⊂H_phys 为内积的零模态
-      （卡片称之为伪态）子空间；全部断言限于非退化（非零）动量扇区（DDF 所需）。
-      若 D=26 且 a=1，则 (a) Fock 内积在 H_phys 上半正定，(b) H_phys/H_0 上诱导内积正定，
-      (c) H_phys/H_0 与 24 个横向振子的 Fock 空间等距同构。
-      并且：若 D>26、a=1，则（非零动量处）存在负模物理态。
-      逻辑形状是「(26,1) 处幺正、D>26 处不幺正」，不是「幺正⟹D=26」；D≤25 一侧不作任何断言
-      （亚临界另有节点，走补充模+BRST 相对上同调，附 D≥2 与三条动量假设）。
+      (II) 旧协变。前提：H_phys 为旧协变物理态空间（(L_0−a)ψ=0，L_{n>0}ψ=0），H_0⊂H_phys 为 Fock 内积
+      在 H_phys 上的零模态子空间（与整个 H_phys 正交的向量）；全部断言限于非退化（非零）动量扇区（DDF 所需）。
+      结论：若 D=26 且 a=1，则 (a) Fock 内积在 H_phys 上半正定，(b) H_phys/H_0 上诱导内积正定，
+      (c) H_phys/H_0 与 24 个横向振子的 Fock 空间等距同构。并且：D>26（a=1、非零动量）存在负模物理态。
+      逻辑形状是「(26,1) 处幺正、D>26 处不幺正」，不是「幺正⟹D=26」；D≤25 一侧不作断言
+      （亚临界另有节点 no-ghost-theorem-subcritical，走补充模+BRST 相对上同调，附 D≥2 与三条动量假设）。
 
-      (III) BRST。Q_B 为 λ=2 bc 系统、a^g=−1、物质中心荷 c^m 的 BRST 荷，作用在受限模上
-      （每个向量被除有限多个外的 L^m_n、b_n、c_n 零化）。则
-      Q_B² = (1/2)Σ_{m∈Z}((c^m−26)/12)(m³−m)c_{−m}c_m，故 Q_B²=0 ⟺ c^m=26 ⟺ c^m+c^g=0。
+      (III) BRST。前提：Q_B 为 λ=2 bc 系统、a^g=−1、物质中心荷 c^m 的 BRST 荷，作用在受限模 V 上
+      （每个向量被除有限多个模式外的 L^m_n、b_n、c_n 零化，保证 Q_B、Q_B² 逐项有限）；且诸 c_{−m}c_m 在 V 上
+      线性无关（忠实的 Fock 型受限模满足）。结论：Q_B² = (1/2)Σ_{m∈Z}((c^m−26)/12)(m³−m)c_{−m}c_m，
+      故 Q_B²=0 ⟺ c^m=26 ⟺ c^m+c^g=0。线性无关只用于 ⟹ 方向（缺它时平凡模上 Q_B² 恒零而 c^m 任意）。
       只定 c^m，不定 a。
 
-      (IV) Weyl 反常。Polyakov 路径积分对 diff×Weyl 取商，Weyl 是规范冗余并被用于定规范；
-      量子 Weyl 反常正比于中心荷且该中心荷为常数；FP 鬼是 λ=2 bc 系统，c^g=−26。
-      则反常抵消 ⟺ c^m+c^g=c^m−26=0 ⟺ c^m=26。只定 c^m，不定 a。
+      (IV) Weyl 反常。前提：Polyakov 路径积分对 diff×Weyl 取商，Weyl 是规范冗余并被用于定规范；
+      量子 Weyl 反常正比于中心荷且该中心荷为常数；FP 鬼是 λ=2 bc 系统，贡献 c^g=−26。
+      结论：反常抵消要求 c^{tot}=c^m+c^g=c^m−26=0，即 c^m=26。只定 c^m，不定 a。
 
-      (III)(IV) 与 D=26 的关系：两条得到的是 c^m=26 而非 D=26。作为约束 c^m=26 弱于 D=26
-      （任何 c=26 的物质 CFT 都行，平坦 26 维只是一个解）；作为结论则强于 D=26（对任意物质 CFT 成立）。
-      从 c^m=26 到 D=26 需再加一步 c^m=D（D 个平坦自由玻色子），这一步是 (III)(IV) 的公共输入，
-      不是任一路线的产物；在物质部门取 D 个平坦自由玻色子时，(III)(IV) 各自给出 D=26。
+      (III)(IV) 与 D=26 的关系：两条直接得到的是 c^m=26 而非 D=26。作为约束 c^m=26 弱于 D=26
+      （任何 c=26 的物质 CFT 都满足，平坦 26 维只是一个解）；作为结论则强于 D=26（对任意物质 CFT 成立）。
+      由 c^m=26 到 D=26 需再加一步 c^m=D（D 个平坦自由玻色子），这一步是 (III)(IV) 的公共输入，
+      不是任一路线的产物；物质部门取 D 个平坦自由玻色子时，(III)(IV) 各自给出 D=26。
 
-      (V) 开弦截距 a=1，只对开弦，且与 D 无关地成立。对任意 D≥4，下面三条各自等价于 a=1：
-      (a) level 1 的态无质量；(b) 第一级伪态 L_{−1}|0;k⟩∝k·α_{−1}|0;k⟩ 自身满足物理态条件
-      （因而是零模态），从而 e^μ→e^μ+λk^μ 是规范自由度；(c) level 1 独立态构成无质量小群 SO(D−2)
-      的矢量表示，而非有质量小群 SO(D−1) 的某个表示。
-      a=1 出现在 (I) 的结论与 (II) 的前提；(III)(IV) 不涉及 a。对闭弦不作断言（闭弦 (a,ã)=(1,1)，
-      α'm²/4=N−a，本图无节点）。
+      (V) 开弦截距。一致性要求 a=1，只对开弦，且与 D 无关。「一致性」指下列三条中任一条，每条单独等价于 a=1：
+      (a) level 1 的态无质量；(b) 第一级伪态 L_{−1}|0;k⟩∝k·α_{−1}|0;k⟩ 自身满足物理态条件（因而是零模态），
+      从而 e^μ→e^μ+λk^μ 是规范自由度；(c) level 1 独立态构成无质量小群 SO(D−2) 的矢量表示，
+      而非有质量小群 SO(D−1) 的某个表示。
+      三条在图内有支撑的维数范围不同：(a)(b) 由 --via-null-state-decoupling 支撑，D≥2 成立（只需 k≠0 且 k²=0）；
+      (c) 由 --via-light-cone-representation 支撑，该推导自陈只覆盖 D≥5，且其「SO(D−1) 最小非平凡表示是 D−1 维矢量」
+      一步在 D=5 为假（SO(4) 有 3 维自对偶 2-形式表示，D−2=3 个态装得进、限制到 SO(3) 恰为矢量），
+      故 (c) 图内实际只覆盖 D=4 与 D≥6，D=5 待补。这是图内支撑范围，不是真值范围：(c) 已内含「无质量小群」，
+      故 (c)⟺a=1 本身在 D≥3 都平凡为真，缺的是图内论证。
+      a=1 出现在 (I) 的结论与 (II) 的前提；(III)(IV) 不涉及 a。对闭弦不作断言（闭弦 (a,ã)=(1,1)，α'm²/4=N−a，
+      节点 closed-string-intercept）。
 
-      「独立」只指论证方式独立，不指输入独立：(III)(IV) 共享 c^g=−26 与 c^m=D，判据都是 c^m−26=0，
+      「独立」只指论证方式独立，不指输入独立：(III)(IV) 共享 c^g=−26 与 c^m=D 两个输入，判据都是 c^m−26=0，
       只在机制上不同（模式代数中 {Q_B,Q_B} vs 路径积分测度的 Weyl 变分）；若 c^g 或 c^m 算错，两条同时失效，
-      不得当作两份独立证据。(II)(III) 之间图中有等价节点 brst-cohomology-equals-ocq-physical，
-      本命题不用它、也不据此断言两路线等价。(I) 与 (II)(III)(IV) 的等价在图中无节点。
-      (I) 与 (V) 共享光锥一侧输入（横向对易关系、开弦质量壳、ζ 正规序常数）。
+      不得当作两份独立证据。(II)(III) 之间图中有等价节点 brst-cohomology-equals-ocq-physical，本命题不用它、
+      也不据此断言两路线等价。(I) 与 (II)(III)(IV) 的等价在图中无节点。(I) 与 (V) 共享光锥一侧输入
+      （横向对易关系、开弦质量壳、正规序常数的正规化处方）。
 
-      不断言：(1) (I)–(IV) 互相蕴含/等价；(2) D≤25 时的任何事（任意 a）；(3) 闭弦截距/质量壳、
-      紧化背景（c^m=26 而 D≠26）；(4) D=26 是一致性的充分条件（相互作用、模不变性、快子在外）；
-      (5) a=1 与 D=26 之间有蕴含（(V) 对任意 D≥4 等价于 a=1；(III)(IV) 不给 a）。
-    verdict: drift
+      不断言：(1) (I)–(IV) 互相蕴含/等价；(2) D≤25 时的任何事（任意 a），且 (I) 另外不覆盖 D≤3；
+      (3) 闭弦截距/质量壳、紧化背景（c^m=26 而 D≠26）；(4) D=26 是一致性的充分条件（相互作用、模不变性、快子在外）；
+      (5) a=1 与 D=26 之间有蕴含（(V) 三条刻画各自等价于 a=1、与 D 无关，图内支撑范围见 (V)；(III)(IV) 不给 a）；
+      (6) (I) 是「唯一以当且仅当形式给出 D」的路线——v2 那半句与 (III)（Q_B²=0⟺c^m=26，经 c^m=D 给 ⟺D=26）抵触，
+      (IV) 的判据实质也双向；v3 删去它，对 (I) 只保留「唯一同时定出 D 与 a」。
+
+      【回译时对四张路线卡的独立观察，留待比对阶段裁定】
+      · 路线卡 critical-dimension-light-cone 的 statement 无 D≥4 限定、a 的地位（待定 vs 代入）未明说；
+        v3 (I) 比路线卡多了 D≥4 与「a 待定」两条前提。
+      · 路线卡 open-string-intercept-v2 (i) 写「(a)(b)(c) 对任意 D≥4 都成立且都等价于 a=1」；
+        v3 (V) 改为分刻画列图内支撑范围（(a)(b) D≥2；(c) D=4 与 D≥6）。两者对 D=4 一致，
+        对 D=2,3（(a)(b)）与 D=5（(c)）不一致。
+      · 路线卡 brst-v2 / weyl-anomaly-v2 的「公共输入记在汇总卡片 …-bosonic-v2」仍指向 v2，未随换代更新。
+    verdict: faithful
     diff_notes: |
+      【第三轮修订记，2026-09-11，lead 授权、curator 执行；**纯记账，不改命题，无需第四轮回译**】
+      auditor 第三轮裁定 **faithful** 并置 audit.status: back-translated，同时在 §2 与 §6 点名两处
+      「canonical 的图状态记账」交 curator 在船长批准前顺手改掉（逐字：「批准前建议 curator 改 F1（一行）
+      与 F2（两处删 ζ），两者都只动 canonical_text 的图状态记账，不动命题」）。本次执行如下，
+      **audit.status 维持 back-translated**（auditor 已明说不阻塞、第四轮只需复核这两行）：
+
+      F1（canonical (V) 末句）已改。原文「闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，
+        **本图未建节点**」→「…，见 worldsheet.closed-string-intercept，本里程碑不使用它」，并附一行
+        说明该记账为何过期。该节点确实存在（含推导 --via-light-cone-representation），v3 statement
+        也已引用它。两侧仍都不对闭弦作断言，命题不变。
+
+      F2（两处删 ζ）已改，且**只改 canonical、不动 v3**：
+        (i) 【独立性的限定】末条：「(I)(V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、
+            **ζ 正规化的正规序常数**）」→ 删去第三项，改为「（横向振子对易关系、开弦质量壳
+            α'm² = N − a，其中 a 作为参数）」。
+        (ii) 【各路线的非严格步骤】(V) 末句「且光锥路线同样经过 ζ 正规化」→ **整句删去**。
+        依据（auditor 第三轮 F2 已核，本次复核一致）：(V) 的光锥推导
+        worldsheet.open-string-intercept-v2--via-light-cone-representation 的 depends_on 只有
+        light-cone-quantization / open-string-mass-shell / transverse-oscillator-commutators，
+        **不含** worldsheet.light-cone-normal-ordering-constant，其 gaps 逐字「那条另外用了 ζ 正规化，
+        本条不用」；而 (I) 的 --via-lorentz-algebra 含该 ζ 边。故「(I)(V) 共享 ζ 处方」在图上无边支撑。
+        ⚠ **v3 statement 含同款一句、本次不动**（任务书裁定）：v3 的【"独立"的确切含义】末条写
+        「(I) 与 (V) 共享光锥一侧的输入（横向振子对易关系、开弦质量壳、正规序常数的正规化处方）」。
+        陈述卡不可变（原则 1），只能等下次换代。**该差异无害**，理由记录在此以备第四轮复核：
+        这是一句关于**图内输入**的元断言而非物理断言；差异方向是 v3 **多**列了一项共享输入，
+        而「多说的共享输入」只会让读者**低估**路线之间的独立性，不会使 v3 断言的任何命题变强，
+        故 v3 与本 canonical 的命题内容仍逐条等价，第三轮的 faithful 裁定不受影响。
+        v4 换代时同步删去该项。
+
+      同批落实的**路线卡侧**两项（auditor 第三轮 §3(a)(b)，不在本文件内，此处只登记）：
+        · 3(a) worldsheet.critical-dimension-light-cone 已换代为 -v2：新卡补上前提 **D ≥ 4**，
+          并写出「[J,J] = 0 ⟺ 对所有 n ≥ 1 有 Δ_n = 0」所需的线性无关一步；旧卡 statement 一字未动、
+          加 superseded_by。推导 --via-lorentz-algebra 已 git mv 为
+          worldsheet.critical-dimension-light-cone-v2--via-lorentz-algebra 并改 id/target。
+          **本 canonical 与 v3 的 (I) 不受影响**：两者早已带 D ≥ 4，换代后两侧前提一致，
+          此前登记的「v3 与 canonical 均弱于该路线卡、方向安全」这条记账随之消失
+          （canonical (I) 与 v3 (I) 里那句括注留待 v4 同步，属同类无害记账）。
+          顺带项（3(a) 末段）亦已落实：--via-lorentz-algebra 里 light-cone-normal-ordering-constant
+          那条边的 note 已拆清「ζ 只服务于 summary 第二段的 Polchinski 形状，主论证把 a 当自由参数」，
+          边保留、不改 inferred（该节点有来源支撑）。三条依赖边指向本路线卡的历史推导
+          （--via-three-routes、v2 的 --via-four-routes、v3 的 --via-four-routes）已一并就地改指 -v2。
+        · 3(b) worldsheet.open-string-intercept-v2--via-light-cone-representation：gaps 第 2 条
+          「D ≤ 4 的低维情形不在论证范围内」已改为 **D ≤ 3**（gaps 第 3 条已证 D = 4 被覆盖）；
+          summary 已补入「限制到 SO(D−2) 必须是矢量」这一步以排除 D−2 个单态（原先只在 gaps 第 3 条
+          对 D = 4 写出）。**canonical (V) 的维数范围（(a)(b) 对 D ≥ 2、(c) 图内覆盖 D = 4 与 D ≥ 6、
+          D = 5 待补）不变**，这两处修改只是把该范围的论证补全，未改变覆盖范围。
+
+      本文件本次**未动**：statement_id、canonical_source、audit.status、audit.back_translation 的
+      by/text/verdict，以及第三轮及以前的全部审计文本（下方原文逐字保留）。
+
+      ────────────────────────────────────────────────────────────────────────
+
+      【第三轮审计，physics-auditor，2026-09-11。比对对象：v3 statement（含 uses_conventions 四张约定卡）↔ 本 canonical_text /
+      canonical_source ↔ 四张路线卡 + open-string-intercept-v2 + old-covariant-v2 的 statement ↔ 推导 --via-four-routes(v3)、
+      --via-lorentz-algebra、--via-light-cone-representation、--via-null-state-decoupling ↔ 抽取记录 §12.2 / §12.3 / §12.5 /
+      §12.10 表 A(Q2,Q4,Q6,Q7,Q8) 与表 B(#6,#7,#8,#11,#12,#15)、E18 ↔ 节点存在性核对（closed-string-intercept、no-ghost-theorem-subcritical、
+      brst-cohomology-equals-ocq-physical、brst-nilpotent-at-c26、light-cone-normal-ordering-constant 均存在）。
+      裁定 **faithful**：v3 statement 与 canonical_text 在 (I)–(V) 的量词、前提、等号/当且仅当的方向、D 与 a 的取值、动量限定、
+      维数范围、【独立】与【不断言】(1)–(6) 上逐条语义等价；第二轮的 D1–D5 与 N2/N3 全部消解。余下差异只有两处 canonical 的
+      **图状态记账**（F1、F2）与三处两侧同款的措辞不精确（T1–T3），均不改变命题内容，不阻止 approved；但 F1 建议 curator 在船长
+      批准前顺手改掉（一行）。audit.status 置 back-translated。】
+
+      0. 第二轮裁定的落地核查（v3 ↔ canonical 逐条）
+        D1/C1 (I) 前提：两侧均写「a 作为待定参数进入 Δ_n，不预先代入任何正规化值」，ζ 值降为说明段且两侧措辞一致
+              （「先代入则 Δ_n = n(26−D)/12，闭合 ⟺ D = 26，a = 1 成为推论」）。数值复核（本轮重算）：(26,1) n=1..4 全零；
+              (27,1) = 0, −1/8, −2/9, −5/16；(25,1) 反号；(26,0) = 2, 1, 2/3, 1/2；(4,1) = 0, 11/4, 44/9, 55/8。已消解。
+        N2   (I) D ≥ 4：两侧均作为前提写入，且都写明 D = 3 反例（单横向指标、反对称组合恒零）与 D = 2 空真。已消解。
+        D2/A1 (I) 末句：v3 已删「唯一以当且仅当形式给出 D」，两侧【不断言】(6) 是同一句话，(I) 的唯一性只剩「唯一同时定出 D 与 a」。已消解。
+        D5/T4 (II)：v3 写「Fock 内积在 H_phys 上的零模态子空间（即与整个 H_phys 正交的向量所成子空间）」，canonical 写
+              「零模态子空间」，与 old-covariant-v2 的 H_0 = {χ : ⟨χ|ψ⟩ = 0 ∀ψ ∈ H_phys} 一致；括注已删。已消解。
+        D3/C2 (III)：两侧都有忠实性前提（v3 写在前提并注明只有 ⟹ 用到；canonical 写成「⟹ 方向另需一条前提」）。同一内容。已消解。
+        D4/C3 (V) 范围：两侧均按刻画分列 (a)(b) D ≥ 2、(c) 图内 D = 4 与 D ≥ 6、D = 5 待补，并都用「图内」限定。已消解。
+        N3   (V) 首句：两侧均为「一致性要求 a = 1，只对开弦，且与 D 无关」，「一致性」显式定义为 (a)/(b)/(c) 之一。已消解。
+        N1/A3/B3（canonical 记账）：核对 canonical 现文——【非严格步骤】(II) 与【不断言】(6) 的 old-covariant 免责已改为历史记载；
+              (III)「（即 D）」括注已删；首段改为「各自挑出 D = 26（(III)(IV) 直接挑出 c^m = 26，要经 c^m = D 才到 D = 26）」。已落地。
+
+      1. 两处超出第二轮点名范围的 canonical 同步——**均认可，不要求回退**
+        N2 同步（canonical (I) 加 D ≥ 4）：认可。理由：canonical_text 是船长确认的权威陈述，它与 statement 必须是同一命题；
+              若 statement 有该前提而 canonical 没有，canonical 就强于 statement 且在 D = 3 处为假，第三轮只能裁 drift。
+              「canonical 不替陈述卡加前提」的顾虑不适用——这里不是替**路线卡**加前提，而是与被审计的 v3 卡对齐。
+        N3 同步（canonical (V) 首句改「一致性要求 a = 1」）：认可。它与 v3 与路线卡 open-string-intercept-v2 三方一致，
+              且「一致性」在同一段被显式定义为三条刻画之一，比原来的平铺断言「a = 1 …成立」更精确，不更模糊。
+
+      2. 本轮仍存在的差异（不构成 drift）
+        F1【canonical 记账过期，须改】canonical (V) 末句「闭弦的对应量是 (a, ã) = (1, 1) 与质量壳 α'm²/4 = N − a，**本图未建节点**」——
+              节点 worldsheet.closed-string-intercept **已存在**（本 worktree 核对，含推导 --via-light-cone-representation），
+              v3 statement 也已引用它。修法：canonical 该句改为「见 worldsheet.closed-string-intercept，本里程碑不使用它」。
+              不影响命题（两侧都不对闭弦作断言）。
+        F2【canonical 与 v3 同款的记账不精确，建议 canonical 先改、v4 时再同步】【独立】末条「(I)(V) 共享光锥一侧的输入
+              （横向振子对易关系、开弦质量壳、ζ 正规化的正规序常数）」（v3 写「正规序常数的正规化处方」）。核对推导：
+              (V) 的光锥推导 --via-light-cone-representation 的 depends_on 是 light-cone-quantization、open-string-mass-shell、
+              transverse-oscillator-commutators，**不含** light-cone-normal-ordering-constant，其 gaps 逐字「那条另外用了 ζ 正规化，
+              本条不用」；(I) 的 --via-lorentz-algebra 含该 ζ 节点。故第三项「共享 ζ 处方」无边支撑；且 v3 (I) 已明说 ζ 值不是 (I)
+              的前提，再说 (I)(V) 共享 ζ 处方自相矛盾。同一问题也出现在 canonical【非严格步骤】(V) 的「且光锥路线同样经过 ζ 正规化」。
+              修法：改为「共享横向振子对易关系与开弦质量壳 α'm² = N − a（a 作为参数）」，删去 ζ 一项。这是关于图内输入的元断言，
+              不是物理断言，故不影响 faithful。
+        T1【两侧同款，措辞】(V)(b)「第一级伪态 L_{−1}|0;k⟩ 同时满足物理态条件」隐含了「对某个 k ≠ 0、k² = 0」的存在量词
+              （推导：L_1 条件强迫 k² = 0，L_0 条件给 a = 1）；两侧都未写量词。不改变等价性（a ≠ 1 时无任何 k 使之成立）。留给 v4。
+        T2【两侧同款，措辞】canonical (III) 把「物质取 D 个平坦自由玻色子时 c^m = D，于是 D = 26」写进 (III) 的结论句，
+              v3 把它放在单独一节并强调「不是路线自身的产物」。canonical 用了条件句「物质取…时」且【独立性】一节明写它是公共输入，
+              语义相同；但为避免读者把 c^m = D 当作 (III) 的产物，canonical 可在该句加「（公共输入，见【独立性的限定】）」。
+        T3【v3 多出的说明句】v3 (V)「(c) ⟺ a = 1 本身在 D ≥ 3 都平凡为真，缺的是图内的论证」在 canonical 无对应句。
+              这是对「图内支撑范围 ≠ 真值范围」的解释，canonical 已用「图内成立的维数范围」表达同一区分，不构成差异。
+
+      3. 任务书另裁两项
+        (a)【路线卡 critical-dimension-light-cone 的 iff 在 D ≤ 3 不成立而陈述未限定】裁定：**要求换代**为
+              worldsheet.critical-dimension-light-cone-v2，前提补「D ≥ 4」，并把「闭合（即 [J,J] = 0，对所有 n ≥ 1 有 Δ_n = 0）」
+              中「[J,J] = 0 ⟺ ∀n Δ_n = 0」这一步显式限定在 D ≥ 4（D = 3 时前者恒真、后者假）。理由：陈述作为命题在 D = 3 有反例，
+              按原则 1 只能换代，不能靠三条下游推导的 gaps 与 sources 的 note 挂账；GSW (2.3.32) 原文没写该限定不是陈述可以为假的理由。
+              **不阻止本里程碑 approved**：v3 与 canonical 已带 D ≥ 4，弱于路线卡、方向安全；换代后 --via-four-routes(v3) 的
+              depends_on 改指 v2 即可，v3 statement 文本中的「（节点：…light-cone）」是散文引用，不必动。
+              顺带（curator 换代时一并处理）：--via-lorentz-algebra 的 depends_on 含 light-cone-normal-ordering-constant，
+              但路线卡把 a 当自由参数、summary 的主论证不用 ζ；该边只服务于 summary 第二段的 Polchinski 形状，应在 note 里说明或拆开。
+        (b)【v3 (V)(c)「D = 4 与 D ≥ 6」的图内覆盖表述是否忠实】裁定：**忠实**，但推导内部有一处自相矛盾须由 curator 修：
+              --via-light-cone-representation 的 gaps 第 2 条（原文）写「D ≤ 4 的低维情形不在论证范围内」，第 3 条（第一轮审计加）
+              写 D = 4 被覆盖（2 个态装不进 SO(3) 非平凡表示；两个单态限制到 SO(2) 不是矢量）。第 3 条的论证成立（本轮复核：
+              SO(3) 的 2 维表示只能是 1⊕1，限制到 SO(2) 荷为 0，不含 SO(2) 矢量的荷 ±1），故 gaps 第 2 条应改为「D ≤ 3」。
+              另一处推导自身的洞（不影响本裁定）：summary 的计数只排除 SO(D−1) 的**非平凡**表示，未排除「D−2 个单态」；
+              排除单态要用「限制到 SO(D−2) 必须是矢量」这一步，目前只在 gaps 第 3 条对 D = 4 写出，应提升到 summary 对所有 D 成立。
+              D ≥ 6 复核：SO(n), n ≥ 5 的最小非平凡真表示是 n 维矢量（SO(5): 5；SO(6): 6，SU(4) 的 4 是旋量不是 SO(6) 真表示），
+              D − 2 = n − 1 < n 装不下，加上单态排除后覆盖成立。D = 5 的 SO(4) (1,0) 反例复核成立。
+
+      4. 按原书核实改写的四处 Polchinski 定位——与抽取记录 §12.10 逐条相符
+        · §1.3 (1.3.40) p.23，A = −1 与 D = 26 同式：§12.5 逐字引文与表 B #8 相符；「习题 1.3」撤销：§12.5「书里根本没有做，也没有留成习题」相符；
+          三处自降（p.21 / p.24 / p.90）：§12.5 逐字相符；p.22「Weyl invariance requires that it be canceled」：表 B #15 相符。
+        · §4.1：(4.1.16)–(4.1.18) level 1；(4.1.19) 规范等价；§4.1 末式 (4.1.23)、(4.1.24)–(4.1.28) 不存在、level 2 = p.124 + 习题 4.1：
+          §12.3 与表 B #12 相符；§4.2 起于 p.126，canonical_source 写 §4.1 p.121–125 相容。
+        · §4.3 (4.3.9) 陈述式、(4.3.10) 为 OPE、习题 4.3 Jacobi：表 B #11 相符。
+        · §3.4 (3.4.23) p.94 写 D = 26、p.95/p.96 两处 iff 散文、(3.4.15) c = −12a₁、(3.4.23) 处显式引 (2.5.12)：§12.2 与表 A Q6 相符。
+        · 公共输入 c^X = D = (2.4.22) + p.48：表 A Q4 / 表 B #6 相符。
+        canonical_source 的取舍理由（§4.1 为 honest、§1.3 为 heuristic）：p.21「We assure the reader that we will obtain the values
+        of A and D honestly in the conformal gauge approach」逐字在 §12.5，相符。
+
+      5. 有效状态（uv run stringgraph status，本轮）：critical-dimension-bosonic-v3 own/effective = physical-argument
+        （best --via-four-routes）；old-covariant-v2 own rigorous / effective physical-argument；light-cone、open-string-intercept-v2
+        均 physical-argument。与 canonical【非严格步骤】首段一致。按 docs/STATUS_LEVELS.md，effective = physical-argument 不阻止 approved。
+
+      6. 结论
+        verdict: faithful。置 back-translated；approved 留给船长。批准前建议 curator 改 F1（一行）与 F2（两处删 ζ），
+        两者都只动 canonical_text 的图状态记账，不动命题；若船长选择先批准再改，第四轮只需复核这两行。
+        路线卡两项（3(a) light-cone 换代补 D ≥ 4；3(b) --via-light-cone-representation gaps 第 2 条改 D ≤ 3 并把单态排除提升到 summary）
+        以及 old-covariant-v2 陈述里仍带的「零模态（伪态）」括注（第二轮 D5 同款问题，v3 与 canonical 已不带，路线卡待换代时一并删）
+        交 lead 排期，不阻止本里程碑。
+
       【第二轮修订记，2026-09-11，lead 授权、curator 执行；**v3 换代 + canonical 记账修正，待第三轮回译**】
       按下方第二轮审计 §6 的建议 (i)–(iv) 与本轮新发现 N1/N2/N3、以及第一轮遗留的 A3/B3 执行。
       A. 换代（陈述卡不可变，故 D1/D2/D4/D5 只能这样修）

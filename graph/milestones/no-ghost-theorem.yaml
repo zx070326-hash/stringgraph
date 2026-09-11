@@ -78,6 +78,54 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第六轮记账】2026-09-11，physics-auditor。history 条目：round 6，kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；statement_id 与 canonical_text 均未动，**不重做回译**。
+      说明：里程碑 schema（graph/schema/milestone.schema.json）对根与 audit 均设 additionalProperties: false，
+      不存在独立的 history 字段（实测加顶层 `history:` 报 schema 错），故与前五轮一致，把本轮条目记在 diff_notes 顶部。
+
+      R6-1. 〔有效状态瓶颈链更新，`uv run stringgraph why worldsheet.no-ghost-theorem-v4`，main 4d3b4b5 之后〕
+            own status rigorous，effective 仍 **physical-argument**，best_derivation 仍 --via-goddard-thorn（自身 rigorous），
+            但压低它的依赖已从 R5-2 的两条对易关系换成**两条内积/伴随层节点**（why 输出：limited by 2 dep(s)）：
+            (a) worldsheet.ddf-operators-adjoint（(A^i_n)† = A^i_{−n}）：own physical-argument，推导 --via-vertex-operator-adjoint，
+                ← worldsheet.vertex-operator-adjoint（physical-argument，--via-radial-conjugation）
+                ← worldsheet.radial-hermitian-conjugation（definition，own rigorous / effective physical-argument）
+                  与 worldsheet.state-operator-isomorphism（physical-argument，--via-radial-quantization），
+                根部汇到 operator-product-expansion / operator-equation-of-motion / ward-identity。
+            (b) worldsheet.transverse-ddf-fock-gram-matrix：own rigorous（--via-oscillator-recursion），effective physical-argument，
+                limited by 1 dep = 上面的 (a)，即被前者封顶，不是独立瓶颈。
+            R5-2 列的两条旧瓶颈现状：
+            - worldsheet.ddf-transverse-oscillator-algebra 已换代为 -v2（只含对易关系 [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}），
+              -v2 own/effective **rigorous**，best_derivation --via-zero-mode-bracket（G–N 顶点代数：math.vertex-algebra-commutator-formula /
+              math.vertex-algebra-borcherds-identity / math.formal-distribution-locality +
+              worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower）；旧卡 superseded_by 指向 -v2。
+              R5-2(b) 写的链「… ← transverse-oscillator-commutators ← light-cone-gauge-lagrangian ← …」只属于旧的
+              --via-conformal-weight 路线，不再是瓶颈。同构断言另拆为 worldsheet.ddf-algebra-isomorphic-to-transverse-oscillators
+              （physical-argument）；GT 推导的 depends_on 指 -v2 而非同构卡。
+            - worldsheet.ddf-commute-with-virasoro：own/effective **rigorous**，best_derivation --via-vertex-algebra-primary；
+              Lean 侧 formal/StringFormal/NoGhost/DDFOperatorAll.lean 对每个 m ∈ Z 证得 [L_m, A^i_n] = 0（图内接线在 curator 分支进行中）。
+            连带：R5-2 提到的 worldsheet.critical-dimension-old-covariant 已换代至 -v3（own rigorous / effective physical-argument，
+              同被 (a) 封顶）。
+            **剩余缺口性质**：全在内积/伴随层——顶点算子伴随 V(b)_J† = V(−b)_{−J} 需同一算符内 E_+E_- 重排序（文献侧只有分离插入点的
+            Polchinski (6.6.24)）；「†」在 Lean 侧是 R-双线性型转置，无 sesquilinear 结构；数学文献侧 Q36（math-sources.md §38.5）：
+            不定 Hermitian 内积下的顶点代数无任何带编号定理。改这两条推导的 status 字段不能提升 effective；须新增不经 OPE 机器的推导。
+            **陈述忠实性不受影响：第四轮 faithful 裁定维持。**
+
+      R6-2. 〔canonical_text 引用核对〕grep 第 3–27 行：**不含** `ddf-transverse-oscillator-algebra`、`transverse-oscillator-commutators`、
+            `ddf-operators-v5`、`ddf-operators-v6` 任何字面，也不含任何 DDF 节点 id（只写「按 DDF 归一化 2α' k_0·p = 1」与
+            「24 个横向 DDF 算子 A^i_{-n}」）。故 v5 → v6 换代与拆卡换代都**无需改 canonical_text**，本轮对 canonical_text 零改动。
+            本 audit 块内的 `ddf-operators-v4`（第四轮材料清单等五处）、`ddf-operators-v5`（R5-4 附带观察）、
+            `ddf-transverse-oscillator-algebra`（R5-2(b)、R5-4 标题）字样是「当时读的是哪个节点」的历史记录，按 R5-1 同一理由原样保留。
+            statement worldsheet.no-ghost-theorem-v4 的文本按根 CLAUDE.md 原则 1 不可变，其对 v4 的引用由节点 notes 补注处理。
+
+      R6-3. 〔船长审批说明〕docs/ROADMAP.md「待船长裁决」中「其推导链目前含两处 physical-argument」一句应更新为
+            「两处，均在伴随层（ddf-operators-adjoint 与被其封顶的 transverse-ddf-fock-gram-matrix）」；两条对易关系已 rigorous。
+            docs/STATUS_LEVELS.md 已裁定 approved 只断言忠实性，effective = physical-argument 不阻止批准。本轮不置 approved。
+            附带观察（不属本文件，不阻止）：validate 警告 vertex-operator-adjoint--via-radial-conjugation 仍依赖已换代的
+            worldsheet.primary-field（curator-primary-v2-retarget 已 claim）；ddf-operators-adjoint--via-vertex-operator-adjoint 的 gaps
+            第 3 条末句「另被 worldsheet.ddf-transverse-oscillator-algebra 封顶」已过时。
+
+      R6-4. 本轮未改 canonical_text、canonical_source、statement_id、verdict、back_translation.text、audit.status；只加本块。
+
       【第五轮（维护性），2026-09-11，physics-auditor。statement_id 与 canonical_text 均未变，故不重做回译；
       第四轮回译文本与 faithful 裁定维持。本轮是拆卡后的记账核对，按任务要求先读了 canonical_text。】
 

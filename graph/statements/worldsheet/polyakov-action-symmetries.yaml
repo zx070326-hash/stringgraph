@@ -12,11 +12,16 @@ statement: |
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "§1.2，约 eq. (1.2.19)–(1.2.20) 附近"
+    loc: "§1.2, p.13：时空 Poincaré 不变性（`X′^μ = Λ^μ_νX^ν + a^μ`, `γ′_ab = γ_ab`）是 **(1.2.19)**；世界面 diff 不变性是 **(1.2.20)**。（另 p.12 的 **(1.2.11)/(1.2.12)** 是同两条变换只作用在 `X^μ` 上的版本，用于 Nambu–Goto 一侧。）"
     note: |
-      抽取记录 literature/extractions/polchinski-1998-v1.md#E7，证据等级
-      [页码已核实/式号未核实]；公式号未核对原书，硬约束是落在
-      已核实的 (1.2.15)（p.12）与 (1.2.28)（p.19 之前）之间。
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E7。
+      **【核实/订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字）】**
+      本节点断言的两条对称性 (i)(ii) 分别是 **(1.2.19)** 与 **(1.2.20)**，页码 **p.13**，
+      「约」「附近」「式号未核对原书」三个限定同时撤销，证据等级升到 **L1**。
+      ⚠ **旧 loc 把 (1.2.19)–(1.2.20) 当成「对称性列表」是不准的**：原书那里是三条**并列**的
+      带式号的变换，其中 **Weyl 不变性单独是 (1.2.21)**，不在本节点范围
+      （见 worldsheet.polyakov-weyl-invariance，其 loc 本轮同步订正为 (1.2.21)）。
+      见 literature/extractions/polchinski-1998-v1.md §13.3(b) 的 §1.2 式号全表。
 tags: [bosonic-string, symmetry, classical, polyakov, diffeomorphism, poincare]
 notes: |
   Weyl 不变性是 S_P 的第三个对称性，性质不同（只在世界面维数为 2 时成立，

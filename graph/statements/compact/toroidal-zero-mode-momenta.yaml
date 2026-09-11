@@ -1,0 +1,36 @@
+id: compact.toroidal-zero-mode-momenta
+kind: proposition
+title: k 维环面紧化的零模：正则动量、量子化与 v_m = α'n_m/R − B_{mn}w^n R
+statement: |
+  设 D = 26 的玻色闭弦有 k 个方向紧化成环面，紧化坐标 X^m（m = 1..k）带**常数**背景
+  度规 G_{mn} 与常数反对称张量 B_{mn}（conv.compactification-radius）。
+  绕数扇区的零模位形为
+    X^m(σ¹, σ²) = x^m(σ²) + w^m R σ¹,   w^m ∈ Z,
+  它自动满足绕数边界条件。把它代入非线性 σ 模型作用量并取平坦世界面度规，
+  记 v^m ≡ i ẋ^m，则该方向的正则动量为
+    **p_m = (1/α') ( G_{mn} v^n + B_{mn} w^n R )**,
+  紧化方向的动量量子化 p_m = n_m / R（n_m ∈ Z）给出
+    **v_m = α' n_m / R − B_{mn} w^n R**,
+  零模对哈密顿量的贡献为 H = (1/2α') G_{mn}( v^m v^n + w^m w^n R² )。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.compactification-radius, conv.worldsheet-coordinate-length, conv.worldsheet-euclidean]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.4, eq. (8.4.4)（零模）、(8.4.5)（零模作用量）、(8.4.6)（正则动量）、(8.4.7)（量子化）、(8.4.8)（哈密顿量），p.249–250"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E136，证据等级 L1
+      （Schrans §8.48–§8.53，笔记 p.465–467）。
+      ⚠ **勘误依赖**：(8.4.5) 的最后一项符号——Schrans 逐字「We have interchanged the
+      dummy indices m and n in the last term to obtain a minus sign. **This is in line with
+      the correction on Joe's errata page.**」他并对该式的 1/2π 因子存疑。
+      ⚠ (8.4.8) 的整体符号 Schrans 复现不出：「There seems to be an overall minus sign
+      that I can't trace, but this form is positive definite, so it must be correct.」
+tags: [compactification, torus, narain, winding, zero-modes, b-field]
+notes: |
+  **B_{mn} 的物理效应**：v^m_{L,R} = α'(n_m/R ± w^m R/α') − B_{mn} w^n R，
+  即时空标量 B_{mn} 把带非零绕数的态的动量整体平移，从而移动它们的质量。
+  这是一维紧化（compact.left-right-momenta）没有的新结构。
+
+  Polchinski 官方勘误表本项目尚未取得（三条 URL 2026-09-11 复核仍 404，抽取记录 Q24），
+  故上面标出的两处符号问题**无法核对**，只能逐条记录。
+author: curator-polchinski-ch8
+created: "2026-09-11"

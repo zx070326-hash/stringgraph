@@ -1,0 +1,64 @@
+id: math.classification-of-compact-surfaces--via-normal-forms
+target: math.classification-of-compact-surfaces
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: gallier-xu-2013
+    loc: "Ch. 6：Theorem 6.2, p. 97（本条的陈述与证明）；Theorem 6.1, p. 96（三角化版）；Lemma 6.1（每个胞腔复形等价于某个规范胞腔复形）；Definition 6.5, pp. 88–89（规范形式）"
+    note: |
+      L1 逐页核实（math-sources.md §39.2.1）。证明路线：三角化 ⇒ 胞腔复形 ⇒ 化到
+      Definition 6.5 的规范形式（Lemma 6.1）⇒ 规范形式由 (可定向性, q, χ) 唯一确定
+      ⇒ Theorem 6.1（三角化版）⇒ 配 Radó 的三角化存在性得 Theorem 6.2。
+  - ref: gallier-xu-2013
+    loc: "Appendix E（Thomassen 的 Radó 定理证明）；p. 96 作者自陈「the proof is far from trivial」"
+    note: |
+      Theorem 6.1 → 6.2 那一步所需的「每个曲面 / 带边曲面可三角化」的证明位置。
+      **在同一本书内**，故不构成外部缺口，但不在正文——见 gaps 第一条。
+  - ref: massey-1967
+    loc: "Ch. I §5/§7（闭曲面版 Theorem 5.1 及其证明, pp. 10–29）、§10（带边版, pp. 37–42）、§11（带边曲面的 Euler 数, pp. 42–43）"
+    note: |
+      **独立的第二证明来源，但仅目录 L1、正文未获取**（math-sources.md §39.3）。
+      **严禁写「Theorem 10.1」**（编号 L0）。本条只登记「存在第二条独立证明路线」这一事实，
+      不承载本推导的任何具体步骤。
+summary: |
+  来源的证明路线（Gallier–Xu Ch. 6）：
+
+  (1) 每个紧曲面（含带边）可三角化（Radó；本书 Appendix E 给 Thomassen 的证明），
+      于是化为紧二维多面体的问题；
+  (2) 每个（三角化的）胞腔复形经有限次剪切—粘合等价于 **Definition 6.5** 的
+      **规范胞腔复形**：type (I) `a₁b₁a₁⁻¹b₁⁻¹ ⋯ a_p b_p a_p⁻¹ b_p⁻¹ c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹`
+      （p ≥ 0, q ≥ 0，可定向）或 type (II) `a₁a₁ ⋯ a_p a_p c₁h₁c₁⁻¹ ⋯ c_q h_q c_q⁻¹`
+      （p ≥ 1, q ≥ 0，不可定向）；序列 c_i h_i c_i⁻¹ 恰给出 q 个 contour（Lemma 6.1）；
+  (3) 规范形式由「type (I)/(II)」+ q + χ 唯一确定，两个规范复形同胚当且仅当这三项相同，
+      得三角化版 **Theorem 6.1**（p. 96）；
+  (4) 配 (1) 得紧曲面版 **Theorem 6.2**（p. 97），即本条陈述。
+
+  **status = rigorous 的依据**（docs/STATUS_LEVELS.md 第 4 级）：来源是 Springer 出版的
+  数学专著，给出完整证明，结论是代数拓扑的标准结果。所有已知缺口都在同一本书内闭合，
+  见 gaps。
+gaps:
+  - |
+    **三角化存在性（Radó）不在正文**：Theorem 6.1 → Theorem 6.2 这一步用到「每个曲面 /
+    带边曲面可三角化」，原书 p.96 逐字自陈「this is indeed true, but the proof is far from
+    trivial. … We will present Carsten Thomassen's proof … in **Appendix E**」。
+    **该证明在同一本书内**，故不是外部缺口；但本图**未读 Appendix E**，
+    因此「Theorem 6.2 的证明链是否完整」在本项目内只到「作者声明完整 + 指明位置」这一级。
+  - |
+    **连通性未核实**：Theorem 6.2 的逐字文本不含 "connected"，来源第 1 章对 "surface"
+    的定义（是否已含连通）**本图未取到**。若定义不含连通性，本条陈述在字面上会出错
+    （两个不连通曲面可以有相同的 (可定向性, contour 数, χ) 而不同胚，例如两个不交球面
+    与一个 χ = 4 的连通曲面——后者不存在，但更一般的反例容易构造）。
+    下游使用时一律限定在**连通**曲面上（Massey §10 的标题就写了 connected）。
+  - |
+    **第二来源 Massey 的正文未获取**，带边分类定理的编号是 L0。图里只能写章节页码。
+  - |
+    **不含 χ 的计算公式**。χ = 2 − 2p − q（type I）/ χ = 2 − p − q（type II）在原书
+    p.89–90 是**无编号行间式**，本推导不承载它；用到它的是
+    math.positive-euler-surfaces-are-sphere-disk-rp2--via-normal-form-enumeration。
+notes: |
+  由 curator 于 2026-09-11 建立（math-sources.md §39.9(1)）。
+  本推导无图内依赖（纯数学外部结果），validate 会给出「derivation has no dependencies」
+  的 warning，与 math.pbw-theorem--via-humphreys 等同类节点一致，属预期行为。
+author: curator-surface-class
+created: "2026-09-11"

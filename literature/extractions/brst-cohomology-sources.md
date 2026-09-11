@@ -166,6 +166,11 @@ INSPIRE 摘要（片段逐字）：
 
 **结论：不能给出该文里 Q_B 幂零条件或无鬼定理的定理编号。图里凡引它的定理号都应标 `loc_unverified: true`。**
 
+> **★ 本节已作废（2026-09-11）**：全文已由 **Project Euclid 下载端点** `journalArticle/Download?urlId=cmp%2F1104179468` 取得并逐页读毕（35 页，L1）。
+> 幂零 = **Proposition 1.7(ii)**「Q² = 0 iff D = 10」（证明外包给 Ohta [13]、Terao–Uehara [15]）；
+> 无鬼 = **Corollary 2.15(ii)**（作者自命名）与 **Theorem 2.20**。完整编号清单与前提链见 `extractions/lian-zuckerman-1989.md`。
+> 上面「付费墙」的判断只对 `.full` 页与 Springer 成立，对下载端点不成立——与 `lian-zuckerman-1991` 是同一教训。
+
 ### 2.3 与另外两篇 Lian–Zuckerman 的区分（L2）
 
 - `New perspectives on the BRST-algebraic structure of string theory` = *Commun. Math. Phys.* **154** (1993), issue 3, 613–646，DOI `10.1007/BF02102111`（Crossref）。**是另一篇**，1993 年，不是 1989 的这篇。
@@ -347,6 +352,12 @@ Google Books 只回页码不回 snippet。先做了两个对照实验验证「�
   `Ker Q_B / Im Q_B ≅ OCQ 物理态` 的同构陈述。**我没拿到正文（ScienceDirect 403），此点 L0。**
 - **建议登记措辞**：「BRST 物理态条件 `Q_B|ψ⟩ = 0` 的引入，及由 `Q_B² = 0` 导出 D = 26、a = 1；
   该文自称给出无鬼定理的证明。是否已给出上同调同构的形式，未核实。」
+
+> **2026-09-11 追加**：正文仍 L0，但**证明结构已由三条 L1 二手来源三角定位**（同学派同型证明 IMNU 1986 §4 五处「same method in Ref. 1)」；LZ 1989 p.332 Dixon–Taylor 结构 + Lemma 5.3.1「consult [11] for details」；KKM 2010 (2.1)/(2.5)/§2.2）：
+> 鬼零模分离 → 光锥参考系（p⁺ ≠ 0）→ 形式参数 β 展开 → Kugo–Ojima quartet（Prop I 型）→ DDF 横向投影 + β 阶归纳（Prop II 型）→ `⟨φ|φ⟩ = ⟨φ|P|φ⟩ ≥ 0`。
+> 「上同调 ≅ 旧协变物理态」的**上同调语言**按 LZ 1989 §0 与 Dedushenko 2015 §1 都归 FGZ；KO 内容上有 Prop II 型的 `Ker = 横向 ⊕ Im` 陈述（推断）。
+> **KUNS 637 归属的 L4 异议已关闭**（INSPIRE raw_affiliation / INIS 均为京都大学物理系）。
+> 详见 `extractions/kato-ogawa-1983.md`。
 
 ---
 
