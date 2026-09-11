@@ -59,6 +59,52 @@
   **未做**：`s`、`t`、`u` 与散射道的关系（需要 in/out 态与解析延拓，不是代数），
   Veneziano 振幅本身，以及 `α_c` 是"领头轨迹"这一物理陈述。
 
+- [ ] `eta-s`：Dedekind η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2} η(τ)`（主分支，Im τ > 0），
+  对应图节点 `math.dedekind-eta-s-transformation`。
+
+  **Mathlib v4.33.1 现状清单**（2026-09-11 formalizer 逐文件读源码，L1）。
+  ⚠ **图卡 `math.dedekind-eta-s-transformation` 的 notes 说「Mathlib 无 S 变换」是错的**：
+  结论对 `DedekindEta.lean` 成立，但 S 变换在**另一个文件** `Discriminant.lean` 里
+  （该图卡的 Q48.2「Delta/Identities/JacobiTheta 侧未查」正是漏掉的地方）。
+
+  (1) η 的定义 —— `Mathlib/NumberTheory/ModularForms/DedekindEta.lean`：
+      `ModularForm.eta (z : ℂ) : ℂ := 𝕢 24 z * ∏' n, (1 - eta_q n z)`，
+      `𝕢 h z = Periodic.qParam h z = cexp (2πi z / h)`，`eta_q n z = (𝕢 1 z) ^ (n + 1)`。
+      即 `η(z) = e^{πiz/12} ∏_{n≥1}(1 − q^n)`，**与图卡 `math.dedekind-eta-function` 的约定逐字一致**。
+      定义域是全 ℂ（ℍ 外是垃圾值），实质内容都带假设 `z ∈ ℍₒ := {z : ℂ | 0 < z.im}`。
+      配套：`eta_ne_zero (hz : z ∈ ℍₒ)`、`differentiableAt_eta_of_mem_upperHalfPlaneSet`、
+      `multipliableLocallyUniformlyOn_eta`。
+  (2) `ModularForm.logDeriv_eta_eq_E2 (z : ℍ) : logDeriv eta ↑z = (π * I / 12) * E2 ↑z`
+      （同文件末尾）。
+  (3) E₂ —— `Mathlib/NumberTheory/ModularForms/EisensteinSeries/E2/Defs.lean`：
+      `G2 : ℍ → ℂ := fun z ↦ ∑'[symmetricIcc ℤ] m, e2Summand m z`（Eisenstein 求和的对称截断），
+      `E2 : ℍ → ℂ := (1 / (2 * riemannZeta 2)) • G2`。
+  (4) **E₂ 的拟模性（S 变换）已在 Mathlib** —— `EisensteinSeries/E2/Transform.lean`：
+      - `G2_S_transform (z : ℍ) : G2 z = ((z : ℂ) ^ 2)⁻¹ * G2 (S • z) - -2 * π * I / z`
+        （等价于 `G2(−1/z) = z² G2(z) − 2πi z`）；
+      - `D2 (γ : SL(2,ℤ)) : ℍ → ℂ := fun z ↦ 2πi·γ₁₀ / denom γ z`，`D2_S z = 2πI/z`、`D2_T = 0`；
+      - `G2_slash_action (γ) : G2 ∣[(2:ℤ)] γ = G2 − D2 γ`（**对全 SL(2,ℤ)**）；
+      - `E2_slash_action (γ) : E2 ∣[(2:ℤ)] γ = E2 − (1/(2ζ(2))) • D2 γ`；
+      - `G2_T_transform : G2 ∣[(2:ℤ)] T = G2`。
+      所以任务书里「若 E₂ 的 S 变换不在 Mathlib 就退化成带假设的定理」这一分支**用不上**。
+  (5) **η 的 S 变换本身已在 Mathlib** —— `Mathlib/NumberTheory/ModularForms/Discriminant.lean`
+      （v4.33.1 新文件，2026，Birkbeck）：
+      `ModularForm.eta_comp_eq_csqrt_I_inv : upperHalfPlaneSet.EqOn (η ∘ (-1 / ·)) ((sqrt I)⁻¹ • (sqrt * η))`，
+      即 `η(−1/z) = (√i)⁻¹ √z · η(z)`，其中 `Complex.sqrt a = a ^ (2⁻¹ : ℂ)`（主分支 cpow，
+      `Mathlib/Analysis/RCLike/Sqrt.lean`）。证明路线就是任务书设想的那条：
+      `logDeriv_eta_comp_div_eq` → `logDeriv_eta_comp_eq_logDeriv_csqrt_eta`（用 `E2_slash_action S`）
+      → `logDeriv_eqOn_iff` 给出常数 c → 在 `z = I` 定 `c = (√i)⁻¹`。
+      同文件另有 `discriminant_S_invariant`、`discriminant_T_invariant`（Δ = η²⁴）。
+  (6) **Mathlib 里没有**：η 的 T 变换（`η(τ+1) = e^{iπ/12}η(τ)`，图卡
+      `math.dedekind-eta-t-transformation`）、η 对一般 `(a b; c d) ∈ SL(2,ℤ)` 的乘子系统
+      （Dedekind 和）、`τ₂|η|⁴` 的模不变性（图卡 statement 里的「推论」）。
+      T 变换从乘积定义直接可得（`eta_q` 关于 z 是 1-周期，`𝕢 24 (z+1) = e^{2πi/24}·𝕢 24 z`），
+      是下一个低成本目标。
+
+  **本项目要补的只有归一化那一步**：把 Mathlib 的 `(√i)⁻¹ √z` 形状换成弦论文献的 `(−iτ)^{1/2}`。
+  两者在 ℍ 上逐点相等：`arg(−iz) = arg z − π/2 ∈ (−π/2, π/2)`，故
+  `log(−iz) = log(−i) + log z`，取 `exp(·/2)` 即得。见 `StringFormal/Math/DedekindEtaS.lean`。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
