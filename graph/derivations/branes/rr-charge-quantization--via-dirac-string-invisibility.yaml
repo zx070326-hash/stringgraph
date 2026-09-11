@@ -1,0 +1,31 @@
+id: branes.rr-charge-quantization--via-dirac-string-invisibility
+target: branes.rr-charge-quantization
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-rr-coupling
+    note: |
+      供给「Dp 膜是 F_{p+2} 的电源、D(6−p) 膜是其磁源（(13.2.8)），磁源处 Bianchi 恒等式失效、须引入 Dirac 弦」
+      ——(13.3.12) 的设定。原书 p. 148 逐字「the p-brane and (6−p)-brane are sources for F_{p+2} and F_{8−p} respectively」。
+  - id: branes.d-brane-rr-charge-value
+    note: 供给 μ_p 按 (13.3.5) 的归一化（动能项 −(1/4κ₁₀²)∫|F|²），这决定了 (13.3.12) 中的 1/2κ₁₀² 与 (13.3.13) 中的 π/κ₁₀²。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「Dirac quantization condition」, pp. 147–149：(13.3.8)–(13.3.11)（四维复习）→ 推广到 p 膜与 (6−p) 膜 → (13.3.12) → (13.3.13)；fig. 13.3"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E19（L1）。
+summary: |
+  (1) 四维复习：磁荷 μ_m 由 ∫_{S_2}F_2 = μ_m 定义；电荷 μ_e 的粒子沿闭路 P 获得相位
+      exp(iμ_e∮_P A_1) = exp(iμ_e∫_D F_2)，D 是以 P 为边界的曲面；把 P 收缩到 Dirac 弦附近，
+      exp(iμ_e∫_{S_2}F_2) = exp(iμ_eμ_m)；Dirac 弦不可观测 ⇒ μ_eμ_m = 2πn（(13.3.11)）。
+  (2) 推广：Dp 膜与 D(6−p) 膜分别是 F_{p+2} 与 F_{8−p} 的源，它们的世界体在十维中 Poincaré 对偶：
+      围绕 D(6−p) 膜的 (p+2)-球面上 ∫_{S_{p+2}}F_{p+2} = μ_{6−p}/2κ₁₀²（(13.3.12)，因子 1/2κ₁₀²
+      来自 (13.3.5) 的动能项归一化）。Dp 膜世界体绕 D(6−p) 膜的 Dirac (8−p)-膜一周的相位为
+      exp(iμ_p∫_{S_{p+2}}F_{p+2}) = exp(iμ_pμ_{6−p}/2κ₁₀²)，要求为 1 ⇒ μ_pμ_{6−p} = πn/κ₁₀²（(13.3.13)）。
+gaps:
+  - "**Dirac 弦不可观测**这一原理在图上无节点（math/ 区无 Dirac 量子化条件的卡）；本推导按原书骨架记录。"
+  - "**Poincaré 对偶与 (p+2)-球面环绕 (6−p)-膜**的拓扑论证原书只以 fig. 13.3 与一句话给出。"
+  - "**(13.3.12) 的因子 1/2κ₁₀²**由 (13.3.5) 的动能项归一化决定，原书未逐步展开；本图按原文引用。"
+  - "**p = 3（自对偶）情形**原书未单独讨论；(13.3.13) 在 p = 3 时读作 μ_3² = πn/κ₁₀²，是否需要额外的自对偶修正本推导不断言。"
+  - "**继承 branes.d-brane-rr-coupling 的缺口**：Dp 与 D(6−p) 互为电–磁对偶依赖 (13.2.8)，而 R–R 场方程本身在图上无十维超引力节点。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

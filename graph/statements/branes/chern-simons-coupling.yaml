@@ -1,0 +1,43 @@
+id: branes.chern-simons-coupling
+kind: proposition
+title: Dp 膜的 Chern–Simons 型 R–R 耦合：i μ_p ∫ Tr[exp(2πα'F_2 + B_2) ∧ Σ_q C_q]（无曲率项）
+statement: |
+  type II 超弦中 Dp 膜与 R–R 势的完整（不含曲率修正的）拓扑耦合是
+    **i μ_p ∫_{p+1} Tr[ exp(2πα' F_2 + B_2) ∧ Σ_q C_q ]**,                     (13.3.18)
+  其中积分只取与 p 膜世界体体积形式成比例的项（原文：「the integral picks out precisely the terms
+  that are proportional to the volume form of the p-brane world-volume」），F_2 是膜上规范场强、
+  B_2 是 NS–NS 二形式的拉回、C_q 跑遍该理论的全部 R–R 势，Tr 在 n 张重合膜的 Chan–Paton 空间取。
+  展开的最低项是 μ_p ∫ C_{p+1}（branes.d-brane-rr-coupling）；下一项 μ_p ∫ (2πα'F_2 + B_2) ∧ C_{p−1}
+  表明膜上的规范场通量携带 D(p−2) 膜的 R–R 荷。
+  归一化的 T 对偶递推是 μ_p = μ_{p−1}/(2π α'^{1/2})，与显式计算 (13.3.7) 一致。
+
+  **本命题不断言**（每条都有原文依据）：
+  (a) 与时空曲率的类似耦合——原书逐字「There are similar couplings with the spacetime curvature in
+      addition to the field strength; these can be obtained from a string calculation」（本章不做、不引）；
+  (b) (13.3.18) 的归一化推导——原书逐字「We are not keeping track of the normalization but one could,
+      with the result μ_p = μ_{p−1}/2πα'^{1/2} in agreement with the explicit calculation」；
+  (c) 因子 i 的来源（Lorentzian 作用量 vs 路径积分权重 e^{iS}）与 C_q 的符号/取向约定——原书未说明，
+      本卡按页图原样抄录；
+  (d) 非阿贝尔情形下 Tr 内 F 与 X 的对称化排序（原书未给）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, eqs. (13.3.16)（倾斜 1 膜的 ∫C_2 = ∫dx^0dx^1(C_{01} + ∂_1X^2C_{02})）、(13.3.17)（2 方向 T 对偶后 ∫dx^0dx^1dx^2(C_{012} + 2πα'F_{12}C_0)）、(13.3.18)（一般形式），pp. 149–150；逐字「We are not keeping track of the normalization but one could, with the result μ_p = μ_{p−1}/2πα'^{1/2} in agreement with the explicit calculation.」与「There are similar couplings with the spacetime curvature in addition to the field strength; these can be obtained from a string calculation.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E21，证据等级 L1（原书页图）。
+      (13.3.18) 后来在 §13.6 被用来验证 D0 荷：(13.6.23) μ_0 = 4π²α'μ_2、(13.6.35)(13.6.36)
+      (4π²α')²μ_4 = μ_0「exactly the charge of the D0-brane」（抽取记录 #E31，本图未建卡）。
+tags: [d-brane, chern-simons, rr-charge, wess-zumino, t-duality, type-ii]
+notes: |
+  【与 consistency 区 Chern–Simons 卡的区别】consistency.descent-forms-chern-simons 等是十维反常
+  下降链里的 Chern–Simons 形式 ω⁰_{2n+1}；本卡是 D 膜世界体上的 Wess–Zumino/Chern–Simons 型 R–R 耦合，
+  两者只是同名，不建边。
+
+  【曲率修正】原书明说未算。现代文献的 Â-亏格因子 √(Â(R_T)/Â(R_N)) 不在本卡，
+  且本项目未登记其一手来源（Green–Harvey–Moore 1996 / Cheung–Yin 1997），在取到之前是 L0。
+
+  【本图缺的上游】R–R 势在 T 对偶下的变换 (13.1.5)（C_9 → C，C_μ → C_{μ9} 等）在图上无节点；
+  「膜位置 X^2 ↔ 规范场 2πα'A_2」的对应在超弦语境下也无节点（玻色弦版是
+  branes.wilson-line-eigenvalues-are-brane-positions）。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"
