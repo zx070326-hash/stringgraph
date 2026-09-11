@@ -1026,3 +1026,86 @@
 | 印刷 p.147/148/149 | `Read(pages=12)`、`(pages=13)`、`(pages=14)` | ✅ 三页页图 |
 | hep-th/9510017 | `arxiv.org/pdf/hep-th/9510017` → 落盘 136 KB / 11 页 → `Read(pages=5-9)` | ✅ pp.4–8 读到，(12)–(20) 全部到手 |
 
+---
+
+## 7. E16 复核：p.146 漏抄 "is independent of"（researcher，2026-09-11；只加不改上面的旧行）
+
+> 触发：**auditor** 一手核 p.146，指出 §2 E16（本文件第 356–357 行）的逐字块漏了三个词。
+> 本节由 researcher 用 **Cambridge Core ch.13 单章 PDF 原书页图独立复核**（印刷 p.146 = PDF p.11），结论与 auditor 一致。
+
+### 7.1 ★★ 结论
+
+- **旧行抄作**：「its energy is determined only by its charge and **the separations**」
+- **原书实际印的是**：「its energy is determined only by its charge and **is independent of** the separations」
+- ⇒ 漏掉 `is independent of` 后，句子语义**恰好反转**：原句说能量**与间距无关**（这正是 BPS 无力的全部内容），
+  旧抄法读起来却像「能量由荷**和间距**共同决定」。**这是本文件里语义后果最严重的一处转录失误**，
+  因为 E16 正是 `branes.bps-no-force` 的一手落点。
+- 旧行按规则保留不改；**凡引用 E16 该句，以本节为准**。
+
+### 7.2 原书 p.146 逐字（researcher 独立 L1 页图，`Read(pages=11)`；页脚 `Cambridge Books Online © Cambridge University Press, 2010`，DOI 后缀 `.007`）
+
+小节标题：**13.3 The D-brane charge and action**（起于 p.146，E16 记的「§13.3 开篇」位置正确）。
+
+> "There is no force between static BPS objects of like charge. The multi-object state is still supersymmetric and so
+> its energy is determined only by its charge and **is independent of** the separations. For parallel D`p`-branes, the
+> unbroken supersymmetry (13.2.5) is the same as for a single D`p`-brane.
+> The vanishing of the force comes about from a cancellation between attraction due to the graviton and dilaton and
+> repulsion due to the R–R tensor. We can calculate these forces explicitly from the usual cylinder vacuum amplitude.
+> The exchange of light NS–NS closed strings was isolated in eq. (10.8.4). Modify this expression by removing the
+> factors for the momentum integrations in the Dirichlet directions and introducing a term for the tension of a string
+> stretched over a separation `y^μ`:"
+
+E16 该段其余部分（含「(10.8.4) 的修改版」这一技术依赖、(13.3.2) 的 "Due to supersymmetric cancellation in the trace"）
+**本轮逐字比对无误**，不需更正。
+
+### 7.3 附带发现：(13.3.1) 的被积测度带 `π`，且 §0.3(c)/Q3 的 `⟨?⟩` 可判为 `α'`
+
+**(a) 本轮页图读作（L1）**：
+
+`𝒜_NS–NS ≈ [iV_{p+1}·4×16 / (8π(8π²α')⁵)] ∫₀^∞ (π dt/t²)(8π²α't)^{(9−p)/2} exp(−ty²/2πα') = iV_{p+1}·2π(4π²α')^{3−p}G_{9−p}(y)`
+
+与第 366 行旧转录有**两处**差异：(i) 旧转录写 `∫₀^∞ (dt/t²)`，**页图上分子有 `π`**；
+(ii) 旧转录在 `(8π²α'⟨?⟩)⁵` 处存疑（§0.3(c) 与 **Q3**：「页图读作 `α'²`，复算要求 `α'`」），**本轮页图渲染读作 `α'`**。
+
+**(b) 抽取者的复算（把 (13.3.1) 的第一行积出来，与第二行比对）**——记 `d = 9−p`，`a = y²/2πα'`：
+
+```
+∫₀^∞ (π dt/t²)(8π²α't)^{d/2}e^{−at} = π(8π²α')^{d/2}Γ(d/2−1)a^{1−d/2}
+                                     = π(8π²α')^{d/2}(2πα')^{d/2−1}Γ(d/2−1)y^{2−d}
+乘上前因子 8/(π(8π²α')⁵)·iV_{p+1}（= 4×16/8π）：
+  = iV_{p+1}·2^{2d−13}π^{3d/2−11}α'^{d−6}·Γ(d/2−1)y^{2−d}
+第二行 iV_{p+1}·2π(4π²α')^{d−6}·G_d(y)，代 G_d = 2^{−2}π^{−d/2}Γ(d/2−1)y^{2−d}：
+  = iV_{p+1}·2^{2d−13}π^{3d/2−11}α'^{d−6}·Γ(d/2−1)y^{2−d}
+```
+
+**两行逐项相同——2 的幂、π 的幂、α' 的幂三者同时对上，无残留因子。** ✅
+
+**(c) 由此可判（抽取者的推断，不是原文陈述）**：这两处在复算下是**唯一确定**的——
+- 去掉被积测度里的 `π`，两行差一个 `1/π`（对任意 `p` 都不为 1）⇒ **`π` 必须在**；
+- 把 `⟨?⟩` 取作 `α'²`，α' 的幂变成 `3d/2−11`，要等于 `d−6` 需 `d = 10`（即 `p = −1`）⇒ **对一般 `p` 不成立**，故 `⟨?⟩ = α'`。
+- ⇒ **§4 的 Q3 两半都可关闭**：
+  - **Q3 的「已定部分」（`α'` 幂次 = 1）本轮页图直接读到**：原书印的就是 `(8π²α')⁵`；
+    旧记录「页图读作 `α'²`」很可能是嵌套上标的读图失真，而旧记录「复算要求 `α'`」的判断是对的。
+    **顺带：`-sec10-8.md#Q1` 那条「`α'²` 是系统性假象」的裁定，本轮得到第三条证据（这次是直接读数，不是记账）。**
+  - **★ Q3 的「未定部分」（`π` 幂次差一次）原因找到了：漏的那个 `π` 在被积测度里，不在前缀。**
+    Q3 列的三个候选解释 **(a) 前缀分母少一个 `π`／(b) `4×16` 读错／(c) 指数读错 —— 全都不对**；
+    正确答案是第四种：**原书的积分写作 `∫₀^∞ (π dt/t²)(…)`**。
+    补上这个 `π` 后，上面 7.3(b) 的复算里 `2`、`π`、`α'` 三者同时闭合（旧轮已算出 `2` 与 `α'` 逐位吻合、只差 `π^1`，
+    与本结论**精确一致**）。⇒ **(13.3.1) 的完整前缀现在可以进节点了**（Q3 的「不进任何节点」限制可以解除）。
+- ⚠ 谨慎起见：(a) 的两处都是**同一张页图的视觉判读**，与旧轮判读冲突；真正让我敢下结论的是 (b) 的三重幂次同时闭合，
+  而不是像素。若将来有人拿到更高分辨率页图或官方勘误表，以那个为准。
+
+### 7.4 给 curator 的处理建议（researcher 不改 `graph/`）
+
+- `branes.bps-no-force` 卡的陈述文本必须体现「能量**只**依赖荷、**与间距无关**」，`loc` 写 `§13.3 opening, p. 146`。
+- 若图上要写 (13.3.1)，按 7.3(a) 的形式写（含被积测度的 `π`、`(8π²α')⁵`），并在 `note` 里注明
+  「原书写作 `≈`；R–R 侧 (13.3.2) 是超对称输入而非独立计算」（后半句是 E16 旧记录已记的、本轮确认无误的内容）。
+- 本节**不触动** §6（E19/(13.3.12)）的任何结论，两者相互独立。
+
+### 7.5 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| 书 ch.13 PDF | Core `…/67EE13E32046F0D121B589DC02989698/9780511618123c4_p136-177_CBO.pdf/dbranes.pdf` | ✅ 588.1 KB / 42 页（文件名直接推出，一次命中；尾部标题 slug 用 `dbranes` 亦可，与 §6.6 的 `d-branes` 同样有效） |
+| 印刷 p.146 | `Read(pages=11)` | ✅ 单页页图，E16 全段 + (13.3.1)–(13.3.5) 均在此页 |
+
