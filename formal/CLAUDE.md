@@ -218,7 +218,10 @@ StringFormal/
                             质壳压缩量词的 `ddfSpans_of_forall_antidiagonal_slice(_int)`
                             （`CharZero` 下只剩单条反对角线 `j = −N`）与 level 截断版
                             `towerLevelLESubmodule` / `ddfSpansOn_towerLevelLE(_of_antidiagonal)`
-                            （§B.6 部分归纳的可陈述全局形式）。**`D = 26` 同样一次不出现**
+                            （§B.6 部分归纳的可陈述全局形式）；**`ddfSpansOn_towerLevelLE_one`**
+                            ——level `≤ 1` 整块（所有 rung）上张成引理**无条件于 `D`** 成立
+                            （`(0,0)` 片由新引理 `Fock.eq_C_of_mem_levelSubmodule_zero`
+                            「level-0 = 常数」给出）。**`D = 26` 同样一次不出现**
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

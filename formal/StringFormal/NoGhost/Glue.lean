@@ -57,12 +57,13 @@ makes it work is that `H_phys` is itself spanned by its bigraded pieces
 * `towerLevelLESubmodule D R Nmax`, `ddfSpansOn_towerLevelLE`,
   `ddfSpansOn_towerLevelLE_of_antidiagonal` — the **level-truncated** form, which is what a
   partial §B.6 induction (currently `N = 1`, with `N = 2` in progress) actually proves.
+* `ddfSpans_bigrade_zero_zero`, **`ddfSpansOn_towerLevelLE_one`** — the payoff: the spanning
+  lemma on the whole level-`≤ 1` part of the tower (all rungs at once), for **every** `D`.
 
 ## Gaps
 
-* Nothing here proves `DDFSpansOn` on any slice other than the ones already available
-  (`(-1,1)` from `Assembly.ddfSpans_bigrade_neg_one_one`).  `D = 26` still does not appear
-  anywhere; it is inside the per-slice hypotheses.
+* Nothing here proves `DDFSpansOn` on any slice of level `≥ 2`; `ddfSpansOn_towerLevelLE_one`
+  is the current reach.  `D = 26` still does not appear anywhere.
 * The bigrading is handled by explicit projections, **not** by a `DirectSum.Decomposition`
   instance on `TowerFock D R`.  Directness is never asserted; only the (weaker, and all that
   is needed) statements "the projections reproduce the vector" and "the projections land in
@@ -380,5 +381,85 @@ theorem ddfSpansOn_towerLevelLE_of_antidiagonal [NoZeroDivisors R] [CharZero R] 
     exact h N hN hx
 
 end Truncation
+
+/-! ### The level-`≤ 1` truncation is unconditionally closed
+
+The two slices the mass shell leaves below level `2` are `(0, 0)` and `(-1, 1)`.  The second
+is `Assembly.ddfSpans_bigrade_neg_one_one`; the first is the observation that the level-zero
+part of a Fock space is the constants, so the `(0,0)` slice of the tower is `R · |0;k⟩`, which
+is the empty DDF word.  Combining them with `ddfSpansOn_towerLevelLE_of_antidiagonal` gives a
+*global* (not per-slice) statement, still for **every** `D`. -/
+
+section LevelLEOne
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- Only the zero multidegree has level zero: every oscillator raises the level by at least
+one (`Fock.oscLevel_ne_zero`). -/
+theorem Fock.eq_zero_of_level_eq_zero {d : Osc D →₀ ℕ} (hd : Fock.level D d = 0) : d = 0 := by
+  by_contra hne
+  obtain ⟨v, hv⟩ := Finsupp.ne_iff.1 hne
+  rw [Finsupp.coe_zero, Pi.zero_apply] at hv
+  have hmem : v ∈ d.support := Finsupp.mem_support_iff.2 hv
+  rw [Fock.level_apply, Finsupp.sum] at hd
+  have hle := Finset.single_le_sum
+    (f := fun w : Osc D => d w * Fock.oscLevel D w) (fun w _ => Nat.zero_le _) hmem
+  rw [hd, Nat.le_zero] at hle
+  exact Nat.mul_ne_zero hv (Fock.oscLevel_ne_zero D v) hle
+
+/-- **The level-zero part of the Fock space is the constants.** -/
+theorem Fock.eq_C_of_mem_levelSubmodule_zero {P : Fock D R}
+    (hP : P ∈ Fock.levelSubmodule D R 0) :
+    P = MvPolynomial.C (MvPolynomial.coeff 0 P) := by
+  refine MvPolynomial.ext _ _ fun d => ?_
+  rcases eq_or_ne d 0 with rfl | hd
+  · rw [MvPolynomial.coeff_C, if_pos rfl]
+  · rw [MvPolynomial.coeff_C, if_neg (Ne.symm hd)]
+    by_contra hc
+    exact hd (Fock.eq_zero_of_level_eq_zero ((Fock.mem_levelSubmodule D R 0 P).1 hP hc))
+
+variable [Algebra ℚ R]
+variable {η a b : Fin D → R} {hη : ∀ μ, η μ * η μ = 1} {Ε : TransverseFrame η b}
+
+/-- **`DDFSpansOn` at rung `0`, oscillator level `0`** — the ground-state slice.
+
+The level-zero part of `Fock D R` is the constants, so this slice is `R · |0;k⟩`, and
+`|0;k⟩` is the DDF state of the empty word.  Nothing is used beyond that: neither the physical
+state conditions, nor `hbb`/`hba`, nor any constraint on `D`. -/
+theorem ddfSpans_bigrade_zero_zero : DDFSpansOn η a b hη Ε (towerBigrade D R 0 0) := by
+  intro x hx
+  obtain ⟨-, hbig⟩ := Submodule.mem_inf.1 hx
+  obtain ⟨hx1, hx2⟩ := mem_towerBigrade.1 hbig
+  set c : R := MvPolynomial.coeff 0 (x 0) with hcdef
+  have hc : x 0 = MvPolynomial.C c := Fock.eq_C_of_mem_levelSubmodule_zero hx2
+  have hsm : (c • towerVacuum D R : TowerFock D R) = Finsupp.single 0 (MvPolynomial.C c) := by
+    rw [towerVacuum_def, Finsupp.smul_single, MvPolynomial.smul_eq_C_mul, mul_one]
+  have hxc : x = c • towerVacuum D R := by rw [hsm, ← hc, ← hx1]
+  refine Submodule.mem_sup_left ?_
+  rw [hxc]
+  exact Submodule.smul_mem _ _ (mem_ddfSpan_of_list η a b hη Ε [])
+
+/-- **The spanning lemma holds on the whole level-`≤ 1` part of the tower**, for every `D`.
+
+This is the first statement of this development that is global in the rung (it covers all
+infinitely many rungs at once) rather than confined to one bigraded slice, and it is still
+unconditional in the dimension.  It is exactly the reach of blueprint §B.6 as of now:
+the `N = 0` slice is `ddfSpans_bigrade_zero_zero`, the `N = 1` slice is
+`ddfSpans_bigrade_neg_one_one`, and `ddfSpansOn_towerLevelLE_of_antidiagonal` supplies the
+fact that no other slice of level `≤ 1` meets the mass shell.
+
+The two extra hypotheses `hεa` and `hframe` are inherited verbatim from the `N = 1` slice. -/
+theorem ddfSpansOn_towerLevelLE_one [NoZeroDivisors R] [CharZero R]
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (hεa : ∀ i, dotVec η (Ε.vec i) a = 0)
+    (hframe : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))) :
+    DDFSpansOn η a b hη Ε (towerLevelLESubmodule D R 1) := by
+  refine ddfSpansOn_towerLevelLE_of_antidiagonal 1 hbb hba fun N hN => ?_
+  interval_cases N
+  · simpa only [Nat.cast_zero, neg_zero] using
+      (ddfSpans_bigrade_zero_zero (η := η) (a := a) (b := b) (hη := hη) (Ε := Ε))
+  · simpa only [Nat.cast_one] using ddfSpans_bigrade_neg_one_one hη hbb hba Ε hεa hframe
+
+end LevelLEOne
 
 end StringFormal.NoGhost
