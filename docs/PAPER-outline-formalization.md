@@ -116,3 +116,40 @@ likely yes, unverified beyond a local check** — lead's local `grep` of
 `Mathlib/LinearAlgebra/RootSystem/` found no file mentioning `E8`/`E₈`
 (prior-formalizations.md, "lead 本地复核" note). `[verify: no dedicated E8-root-system
 search of non-Mathlib Lean repositories was performed]`.
+
+## 3. Related work
+
+**Kytölä, *VirasoroProject* (arXiv:2510.21741).** A Lean 4 development of the Witt
+algebra, its universal central extension (Virasoro), the Heisenberg algebra, Verma
+modules, and a single-component (`c = 1`) Sugawara construction. This is the primary
+prior work for the representation-theoretic layer we build on: our `Virasoro/` files
+import his Witt/Verma objects rather than redefining them (`formal/StringFormal/
+Virasoro/ATTRIBUTION.md`), and our abstract in §1 explicitly attributes the Virasoro
+algebra itself to this project. Kytölä's own §1.3 and his 2025-06-14 Zulip announcement
+state he is not aware of prior formalizations in this area and list the Shapovalov form,
+Kac determinant, Lorentzian/indefinite signature, and DDF/no-ghost material as outside
+his project's scope — the basis for our A-list claims in §2.
+
+**Carnahan, `vertexAlg` (Mathlib PR #20206, merged; PR #25822, open WIP "testbed").**
+A complete, zero-`sorry` `VertexAlgebra` class merged into Mathlib, plus an open PR
+extending it. Its README TODO list names "invariant inner products", "vertex operators
+attached to Lie algebra elements", and "no-ghost theorem" as future goals — we build
+toward exactly these, from the DDF/Shapovalov side rather than the general
+vertex-algebra-axiomatic side. Our `NoGhost/VertexOperator.lean` (the concrete
+`:e^{ic·X}:` exponential operator) is a different, more concrete object than Carnahan's
+abstract vertex algebra and is not claimed to instantiate it.
+
+**Mathlib `Algebra/Vertex/`.** Contains `HVertexOperator.lean` and `VertexOperator.lean`
+with the locality and residue-product API still marked TODO upstream; we do not depend
+on this directory.
+
+**Methodology.** Our statement/derivation/status separation and audit-surface discipline
+follow the leanblueprint ecosystem (as used by the Flat Torus, FLT, and Prove2Me
+projects; see `docs/METHODOLOGY.md`). We note honestly that leanblueprint is *already* a
+status-bearing dependency DAG — node = LaTeX environment, edge = `\uses`, colour = the
+formalization-pipeline stage (`stated`/`can_state`/`proved`/`mathlibok`, etc.). The actual
+difference is in the semantics of the status axis: leanblueprint's colour tracks distance
+from being Lean-checked, while stringgraph's `status` tracks the epistemic strength of the
+*underlying physics argument itself* (rigorous proof vs. physical argument vs. conjecture),
+propagated by taking the minimum over the graph (`docs/STATUS_LEVELS.md`). We do not claim
+prior work in this space is "merely static documentation."
