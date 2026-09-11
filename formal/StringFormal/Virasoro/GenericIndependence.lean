@@ -411,6 +411,79 @@ lemma levelSpan_three_eq_span_descFamily3 :
   · exact Submodule.subset_span ⟨1, rfl⟩
   · exact Submodule.subset_span ⟨2, rfl⟩
 
+/-- The ordered words of total mode `-4` are exactly `[-4]`, `[-3,-1]`, `[-2,-2]`, `[-2,-1,-1]`,
+`[-1,-1,-1,-1]`, i.e. the five standard level-4 descendants `L₋₄|c,h⟩`, `L₋₃L₋₁|c,h⟩`,
+`L₋₂²|c,h⟩`, `L₋₂L₋₁²|c,h⟩`, `L₋₁⁴|c,h⟩`.  (`Composition 4` has eight blocks; the three
+unordered ones `[1,3]`, `[1,2,1]`, `[1,1,2]` are removed by straightening.) -/
+lemma ordWord_sum_four {l : List ℤ} (hl : IsOrdWord l) (hs : l.sum = -4) :
+    l = [-4] ∨ l = [-3, -1] ∨ l = [-2, -2] ∨ l = [-2, -1, -1] ∨ l = [-1, -1, -1, -1] := by
+  match l with
+  | [] => simp at hs
+  | [a] =>
+      left
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      simp [hs]
+  | [a, b] =>
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hab : a ≤ b := (List.pairwise_cons.mp hl.sorted).1 b (by simp)
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      have hcase : (a = -3 ∧ b = -1) ∨ (a = -2 ∧ b = -2) := by omega
+      rcases hcase with ⟨h1, h2⟩ | ⟨h1, h2⟩
+      · exact Or.inr (Or.inl (by simp [h1, h2]))
+      · exact Or.inr (Or.inr (Or.inl (by simp [h1, h2])))
+  | [a, b, d] =>
+      refine Or.inr (Or.inr (Or.inr (Or.inl ?_)))
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hd := hl.neg d (by simp)
+      have hab : a ≤ b := (List.pairwise_cons.mp hl.sorted).1 b (by simp)
+      have had : a ≤ d := (List.pairwise_cons.mp hl.sorted).1 d (by simp)
+      have hbd : b ≤ d := (List.pairwise_cons.mp hl.tail.sorted).1 d (by simp)
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      have h1 : a = -2 := by omega
+      have h2 : b = -1 := by omega
+      have h3 : d = -1 := by omega
+      simp [h1, h2, h3]
+  | [a, b, d, e] =>
+      refine Or.inr (Or.inr (Or.inr (Or.inr ?_)))
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hd := hl.neg d (by simp)
+      have he := hl.neg e (by simp)
+      simp only [List.sum_cons, List.sum_nil, add_zero] at hs
+      have h1 : a = -1 := by omega
+      have h2 : b = -1 := by omega
+      have h3 : d = -1 := by omega
+      have h4 : e = -1 := by omega
+      simp [h1, h2, h3, h4]
+  | a :: b :: d :: e :: f :: t =>
+      exfalso
+      have ha := hl.neg a (by simp)
+      have hb := hl.neg b (by simp)
+      have hd := hl.neg d (by simp)
+      have he := hl.neg e (by simp)
+      have hf := hl.neg f (by simp)
+      have hts : t.sum ≤ 0 := sum_nonpos_of_neg fun n hn => hl.neg n (by simp [hn])
+      simp only [List.sum_cons] at hs
+      omega
+
+/-- **`V₄` is spanned by the five standard level-4 descendants**:
+`V₄ = span {L₋₄|c,h⟩, L₋₃L₋₁|c,h⟩, L₋₂²|c,h⟩, L₋₂L₋₁²|c,h⟩, L₋₁⁴|c,h⟩}`.  Unconditional; no PBW
+and no form needed. -/
+lemma levelSpan_four_eq_span_descFamily4 :
+    levelSpan R c h 4 = Submodule.span R (Set.range (descFamily4 R c h)) := by
+  refine le_antisymm ?_ (span_descFamily4_le_levelSpan R c h)
+  rw [levelSpan_eq_ordSpan, ordSpan_eq_span, Submodule.span_le]
+  rintro x ⟨l, hl, hsum, rfl⟩
+  have hs : l.sum = -4 := by simpa using hsum
+  rcases ordWord_sum_four hl hs with rfl | rfl | rfl | rfl | rfl
+  · exact Submodule.subset_span ⟨0, rfl⟩
+  · exact Submodule.subset_span ⟨1, rfl⟩
+  · exact Submodule.subset_span ⟨2, rfl⟩
+  · exact Submodule.subset_span ⟨3, rfl⟩
+  · exact Submodule.subset_span ⟨4, rfl⟩
+
 end Finrank
 
 section FinrankField
@@ -432,35 +505,51 @@ theorem IsContravariant.finrank_levelSpan_two (hB : IsContravariant K c h B)
   rw [levelSpan_two_eq_span_descFamily2]
   simpa using finrank_span_eq_card (hB.linearIndependent_descFamily2 hB1 hdet)
 
-/-- **`dim V₃ ≥ 3 = p(3)` at generic `(c,h)`.**  Together with
-`finrank_levelSpan_le_card_partition` this pins `dim V₃ = p(3)` as soon as one knows
-`Fintype.card (Nat.Partition 3) = 3`, which Mathlib does not provide and which `decide` cannot
-compute (the `Fintype` instance on `Nat.Partition` goes through `Fintype.ofSurjective`). -/
+/-- **`dim V₃ = 3 = p(3)` at generic `(c,h)`.**  Same shape as
+`IsContravariant.finrank_levelSpan_two`: the upper bound comes from
+`levelSpan_three_eq_span_descFamily3` (straightening, unconditional), the lower bound from the
+nonvanishing of the level-3 Kac polynomial through the Gram determinant.  Conditional on the
+existence of a normalised contravariant form, i.e. on `hwv ≠ 0`
+(`exists_isContravariant_iff_hwv_ne_zero`).
+
+Note the partition count `p(3) = 3` is never needed: the spanning set is cut down directly to
+the three ordered words by `ordWord_sum_three`. -/
+theorem IsContravariant.finrank_levelSpan_three (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1)
+    (hdet : 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+        * (3 * h ^ 2 + h * (c - 7) + c + 2) ≠ 0) :
+    Module.finrank K (levelSpan K c h 3) = 3 := by
+  rw [levelSpan_three_eq_span_descFamily3]
+  simpa using finrank_span_eq_card (hB.linearIndependent_descFamily3 hB1 hdet)
+
+/-- `dim V₃ ≥ 3 = p(3)` at generic `(c,h)`; the half of
+`IsContravariant.finrank_levelSpan_three` that comes from the Gram determinant. -/
 theorem IsContravariant.three_le_finrank_levelSpan_three (hB : IsContravariant K c h B)
     (hB1 : B (hwv K c h) (hwv K c h) = 1)
     (hdet : 48 * h ^ 2 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
         * (3 * h ^ 2 + h * (c - 7) + c + 2) ≠ 0) :
-    3 ≤ Module.finrank K (levelSpan K c h 3) := by
-  have hfin := levelSpan_moduleFinite (K := K) (c := c) (h := h) 3
-  calc (3 : ℕ) = Fintype.card (Fin 3) := by simp
-    _ = Module.finrank K (Submodule.span K (Set.range (descFamily3 K c h))) :=
-        (finrank_span_eq_card (hB.linearIndependent_descFamily3 hB1 hdet)).symm
-    _ ≤ Module.finrank K (levelSpan K c h 3) :=
-        Submodule.finrank_mono (span_descFamily3_le_levelSpan K c h)
+    3 ≤ Module.finrank K (levelSpan K c h 3) :=
+  (hB.finrank_levelSpan_three hB1 hdet).ge
 
-/-- **`dim V₄ ≥ 5 = p(4)` at generic `(c,h)`.**  Same remark as at level 3. -/
+/-- **`dim V₄ = 5 = p(4)` at generic `(c,h)`.**  Same remark as at level 3; `p(4) = 5` is not
+needed, `ordWord_sum_four` lists the five ordered words directly. -/
+theorem IsContravariant.finrank_levelSpan_four (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1)
+    (hdet : 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
+        * (3 * h ^ 2 + h * (c - 7) + c + 2)
+        * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) ≠ 0) :
+    Module.finrank K (levelSpan K c h 4) = 5 := by
+  rw [levelSpan_four_eq_span_descFamily4]
+  simpa using finrank_span_eq_card (hB.linearIndependent_descFamily4 hB1 hdet)
+
+/-- `dim V₄ ≥ 5 = p(4)` at generic `(c,h)`. -/
 theorem IsContravariant.five_le_finrank_levelSpan_four (hB : IsContravariant K c h B)
     (hB1 : B (hwv K c h) (hwv K c h) = 1)
     (hdet : 384 * h ^ 3 * (8 * h + c - 1) * (16 * h ^ 2 + 2 * h * (c - 5) + c) ^ 2
         * (3 * h ^ 2 + h * (c - 7) + c + 2)
         * (16 * h ^ 2 + 10 * c * h - 82 * h + 15 * c + 66) ≠ 0) :
-    5 ≤ Module.finrank K (levelSpan K c h 4) := by
-  have hfin := levelSpan_moduleFinite (K := K) (c := c) (h := h) 4
-  calc (5 : ℕ) = Fintype.card (Fin 5) := by simp
-    _ = Module.finrank K (Submodule.span K (Set.range (descFamily4 K c h))) :=
-        (finrank_span_eq_card (hB.linearIndependent_descFamily4 hB1 hdet)).symm
-    _ ≤ Module.finrank K (levelSpan K c h 4) :=
-        Submodule.finrank_mono (span_descFamily4_le_levelSpan K c h)
+    5 ≤ Module.finrank K (levelSpan K c h 4) :=
+  (hB.finrank_levelSpan_four hB1 hdet).ge
 
 end FinrankField
 
