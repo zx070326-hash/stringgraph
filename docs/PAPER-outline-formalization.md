@@ -17,9 +17,9 @@ declaration in `formal/StringFormal/`; unverified claims are marked `[verify: ..
 **Abstract**
 
 We report a Lean 4 / Mathlib development of six representation-theoretic components
-used in the Goddard–Thorn no-ghost theorem of bosonic string theory, together with an
-independent island formalizing the algebraic core of Green–Schwarz anomaly
-factorization. Concretely, we formalize: (i) the Shapovalov (contravariant) form on
+used in the Goddard–Thorn no-ghost theorem of bosonic string theory, plus an independent
+island formalizing Green–Schwarz anomaly factorization's algebraic core.
+Concretely, we formalize: (i) the Shapovalov (contravariant) form on
 Virasoro Verma modules — existence, uniqueness, and level orthogonality, unconditional
 in the highest-weight vector; (ii) the Kac determinant formula verified as instances at
 levels `N ≤ 4`, matching Kac's factored product form; (iii) the algebra of transverse
@@ -144,15 +144,15 @@ with the locality and residue-product API still marked TODO upstream; we do not 
 on this directory.
 
 **Methodology.** Our statement/derivation/status separation and audit-surface discipline
-follow the leanblueprint ecosystem (as used by the Flat Torus, FLT, and Prove2Me
-projects; see `docs/METHODOLOGY.md`). We note honestly that leanblueprint is *already* a
-status-bearing dependency DAG — node = LaTeX environment, edge = `\uses`, colour = the
-formalization-pipeline stage (`stated`/`can_state`/`proved`/`mathlibok`, etc.). The actual
-difference is in the semantics of the status axis: leanblueprint's colour tracks distance
-from being Lean-checked, while stringgraph's `status` tracks the epistemic strength of the
-*underlying physics argument itself* (rigorous proof vs. physical argument vs. conjecture),
-propagated by taking the minimum over the graph (`docs/STATUS_LEVELS.md`). We do not claim
-prior work in this space is "merely static documentation."
+follow the leanblueprint ecosystem (as used by the FLT and Prove2Me projects; see
+`docs/METHODOLOGY.md`). We note honestly that leanblueprint is *already* a status-bearing
+dependency DAG — node = LaTeX environment, edge = `\uses`, colour = formalization-pipeline
+stage (`stated`/`can_state`/`proved`/`mathlibok`). The real difference is in the status
+axis's semantics: leanblueprint's colour tracks distance from being Lean-checked, while
+stringgraph's `status` tracks the epistemic strength of the *underlying physics argument*
+(rigorous proof vs. physical argument vs. conjecture), propagated by minimum over the graph
+(`docs/STATUS_LEVELS.md`). We do not claim prior work here is "merely static
+documentation."
 
 ## 4. Structure of the formalization
 
@@ -252,3 +252,51 @@ mechanisms (Brower's, needing `A^L_n`, or GT's, needing a K-condition balancing 
 neither of which the current codebase implements. `D = 26` does **not** appear in
 character/dimension counting, the DDF algebra, DDF adjoints, or transverse-Gram
 positivity — only at this one step.
+
+## 6. Threats to validity
+
+**All review is by AI agents.** Every Lean declaration, graph-card wording check, and
+back-translation audit in this project to date has been performed by Claude-based agents
+(`physics-auditor`, `graph-reviewer` roles); no human mathematician or string theorist has
+yet checked the milestone statements or the Lean theorem signatures against the physics
+literature (`docs/ROADMAP.md`, "发表路线" section, "待船长" item). This is the single
+largest threat to validity: agent-only review can catch internal inconsistency and
+misquotation but cannot independently confirm that a formalized statement is the
+*mathematically correct* rendering of a physical claim.
+
+**Primary sources not obtained.** Goddard–Thorn (1972) and Brower (1972), the two
+original no-ghost-theorem papers, have not been obtained by any agent in this project;
+all sourcing for the `(B-26)` step (§5) currently routes through a secondary,
+unproven one-line citation in Goddard's 2008 lecture notes.
+
+**Extraction records are in Chinese.** All files under `literature/extractions/` —
+including `prior-formalizations.md`, the source for every first-formalization claim in
+§2 — are written in Chinese. An external reviewer without Chinese will need machine
+translation to audit the evidence trail.
+
+**Axiom check.** `uv run stringgraph check-axioms` most recently reported **77
+declarations checked: 77 ok, 0 non-standard axioms, 0 missing, 0 errors** (all closing
+over only `propext`, `Classical.choice`, `Quot.sound`). `[verify: count taken while
+drafting this outline; concurrent Lean-formalizer agents may have advanced it by
+submission — rerun before camera-ready]`. Not part of `validate` or the pre-commit hook
+(needs a full `lake build`, too slow per-commit); `lead` runs it manually before each
+merge into `main`.
+
+## 7. Artifact
+
+**Layout.** `graph/` (YAML statements/derivations/milestones/conventions), `tools/
+stringgraph/` (validator, status propagation, reports), `formal/StringFormal/` (this
+paper's Lean content), `literature/` (source registry and extraction records), `docs/`
+(vision, methodology, status semantics, roadmap), `tests/` (pytest for the tools).
+`pyproject.toml` names the package `stringgraph`.
+
+**Reproducing.** `uv sync`; `uv run stringgraph validate` (schema, id resolution,
+acyclicity, convention consistency); `cd formal && lake exe cache get && lake build`;
+`uv run stringgraph check-axioms` (cross-checks every `formal.lean_decl` against a clean
+axiom set, §6); `uv run stringgraph report` for the summary statistics below.
+
+**Current graph size** (`uv run stringgraph report`, first lines): 596 statements, 492
+derivations, 3 milestones, 21 conventions; by kind, 112 definitions and 484
+propositions; by effective status, 73 formalized, 107 rigorous, 350 physical-argument,
+29 conjecture, 1 refuted, 36 open. `[verify: live counts — many concurrent agents are
+adding nodes; rerun `stringgraph report` before camera-ready]`.
