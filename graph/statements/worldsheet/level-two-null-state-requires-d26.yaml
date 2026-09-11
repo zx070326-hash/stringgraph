@@ -1,0 +1,133 @@
+id: worldsheet.level-two-null-state-requires-d26
+kind: proposition
+title: 动量塔上截距 a₀=1 的 level-2 伪态 𝒟₂φ := (2L₋₂+3L₋₁²)φ 物理（从而零态）当且仅当 D = 26
+statement: |
+  【设定】记号沿用 worldsheet.momentum-tower-fock-space（动量塔 T(a;b) = ⊕_{j∈Z} F(a+jb)，
+  代数直和）与 worldsheet.free-boson-central-charge-d（L_m 逐层用该层动量的 Sugawara 生成元，
+  中心荷 c = D）：D ∈ N；系数环 R 是交换环且是 ℚ-代数；对角度规分量 η_μ 满足 η_μ² = 1
+  （conv.metric-mostly-plus）；a, b : Fin D → R 是重标度动量参数（conv.alpha-prime-regge）。
+  记 𝒟₂ := 2L₋₂ + 3L₋₁²（作用在塔上的算子）。
+
+  设 φ ∈ T(a;b) 是一个"截距 1 的种子"：L_nφ = 0 对一切 n ≥ 1，且 L_0φ = −φ
+  （即 φ 在 h = a₀ − N = 1 − 2 = −1 处，对应 conv.intercept-sign-a 的临界截距 a₀ = 1
+  在 N = 2 反对角片上的取值——这一步换算属 worldsheet.tower-physical-quotient-form 与
+  worldsheet.ocq-null-state-two-families 已用过的同一字典，本卡把它当作对 φ 的一个直接假设，
+  不重新从 zeroModeSq 推导）。
+
+  【断言】
+
+  (1) **两条验证方程**：L₁𝒟₂φ = 0（无条件于 D，只用 h = −1 使 12(h+1) = 0）；
+      L₂𝒟₂φ = (D − 26)·φ。
+
+  (2) **D = 26 是充分条件**：若 D = 26，则 𝒟₂φ ∈ H_phys(a₀=1)（四条物理态条件全满足：
+      L₀𝒟₂φ = 𝒟₂φ 无条件成立，L₁𝒟₂φ = 0 由 (1)，L₂𝒟₂φ = 0 由 (1) 与 D=26，
+      L_n𝒟₂φ = 0（n ≥ 3）由分级无条件成立）；从而由 worldsheet.tower-physical-quotient-form
+      断言 (2)（H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，易方向）与 𝒟₂φ 自动落在 H_spur 里，
+      得 𝒟₂φ ∈ H_null(a₀=1)。
+
+  (3) **D = 26 也是必要条件**：设 R 是整环（[NoZeroDivisors R]）且 φ ≠ 0。则
+        𝒟₂φ ∈ H_phys(a₀=1)  ⟺  D = 26。
+      （⟸ 是 (2)；⟹ 由 L₂𝒟₂φ = (D−26)·φ = 0、φ ≠ 0、R 无零因子直接得 D = 26。）
+
+  【本卡明确不断言】
+  (a) **不断言 φ 存在或非零**：本卡对任意满足假设的 φ 成立，不构造具体的 φ，
+      也不证明满足假设的 φ ≠ 0 的存在性（那需要 worldsheet.momentum-tower-fock-space
+      的层真空或 worldsheet.ocq-null-state-two-families 的 Q_{N−2} 子空间的非零元）。
+  (b) **不断言一般 N 的类比**：本卡只做 N = 2（即 𝒟₂ 恰好两个降算符的情形）。一般 N 的
+      类似机制是 worldsheet.ocq-null-state-two-families 的内容（该卡的 Type 2 族，physical-argument）。
+  (c) **不断言 D=26 的这个 level-2 论证单独蕴含无鬼定理**：本卡只关闭"D=26 对 level-2
+      单个伪态是物理的必要充分条件"这一步，不断言 level-2 null 态的完整计数
+      （p_{D−1}(2) − p_{D−2}(2) = D 这条计数，或 25 个 Type-1 种子的独立性），
+      那是 worldsheet.ddf-spanning-rank-inequality 仍未关闭的 (B-26) 论证的一部分。
+  (d) **不断言 Kac 行列式与本卡算子等式之间的显式桥接引理**：两者在数值上吻合
+      （L₂𝒟₂φ 的系数 D−26 与 kacDet2 的 2(c−26) 相差整体因子 2；
+      两条计算独立进行，未证明存在一个把一个恒等式变换成另一个的显式中间引理）。
+      具体数值核对见 notes。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.descTwo_mem_towerPhysSubmodule_iff
+  lean_file: StringFormal/NoGhost/NullSeedsTwo.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/NullSeedsTwo.lean :: StringFormal.NoGhost.{descTwo, descTwo_apply, towerLop_one_apply_descTwo, towerLop_two_apply_descTwo_of_eigenvalue, towerLop_two_apply_descTwo, towerLop_zero_apply_descTwo, towerLop_apply_descTwo_of_three_le, descTwo_mem_towerPhysSubmodule, descTwo_mem_towerNullSubmodule, towerLop_two_apply_descTwo_eq_zero_iff, descTwo_mem_towerPhysSubmodule_iff}（本卡 formal.lean_decl 是最后一条）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；分支 agent/formalizer/noghost-pr5-n2，
+      经 c4ace50（"Merge branch 'agent/formalizer/noghost-pr5-n2'"）合入 main。
+      文件头自述这是**蓝图 §B″ PR5b′：(B-26) 路线的证伪点，也是全链 D = 26 的唯一入口**。
+
+      逐条对照：
+        (1) L₁𝒟₂φ = 0 ← `towerLop_one_apply_descTwo`（一般 h 版本：
+            `towerLop η a b 1 (descTwo η a b φ) = (12*(h+1)) • towerLop η a b (-1) φ`；
+            本卡把 h = −1 代入使系数为零，右端本身也在 h=−1 处退化，
+            Lean 侧未把"= 0"单独写成一条引理，是本卡对上述等式在 h=−1 处的直接读出）；
+            L₂𝒟₂φ = (D−26)•φ ← `towerLop_two_apply_descTwo`（h0 : L₀φ = −φ 版本，
+            `towerLop η a b 2 (descTwo η a b φ) = ((D:R) - 26) • φ`），
+            一般 h 版本 `towerLop_two_apply_descTwo_of_eigenvalue` 给出
+            `= (26*h + (D:R)) • φ`，h=−1 时退化为 (D−26)•φ。
+        (2) 充分性 ← `descTwo_mem_towerPhysSubmodule`（`hD26 : (D:R)=26` 与 `h0` 为前提，
+            结论 `descTwo η a b φ ∈ towerPhysSubmodule η a b (1:R)`，证明体逐条核对
+            L₀/L₁/L₂/L_{n≥3} 四款，分别调用 `towerLop_zero_apply_descTwo`、
+            `towerLop_one_apply_descTwo`、`towerLop_two_apply_descTwo`、
+            `towerLop_apply_descTwo_of_three_le`）；落在 H_null 的那半 ←
+            `descTwo_mem_towerNullSubmodule`（对 `descTwo_mem_towerSpuriousSubmodule`
+            与刚才那条用 `towerSpurious_inf_towerPhys_le_towerNull` 取交）。
+        (3) 必要充分性 ← `descTwo_mem_towerPhysSubmodule_iff`（前提
+            `[NoZeroDivisors R] (h0 : towerLop η a b 0 φ = -φ) (hφ : φ ≠ 0)`，
+            结论 `descTwo η a b φ ∈ towerPhysSubmodule η a b (1:R) ↔ (D:R) = 26`；
+            ⟸ 直接调用 `descTwo_mem_towerPhysSubmodule`，⟹ 通过
+            `towerLop_two_apply_descTwo_eq_zero_iff`（`L₂𝒟₂φ = 0 ↔ (D:R)=26`，
+            由 `smul_eq_zero` 与 `sub_eq_zero` 及 hφ 排除 φ=0 分支）与
+            `mem_towerPhysSubmodule` 展开取出 L₂ 那一条得到）。
+      **curator 未自行重跑 `lake build`**；按项目纪律，含 formal 改动的分支由 lead
+      在合并前跑 `uv run stringgraph check-axioms`。
+uses:
+  - worldsheet.momentum-tower-fock-space
+  - worldsheet.free-boson-central-charge-d
+  - worldsheet.tower-physical-quotient-form
+  - worldsheet.ddf-operators-preserve-physical-states
+tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, null-state, momentum-tower, kac-determinant, lean, formalized]
+notes: |
+  【为什么立卡（curator，claim #490，依派活任务交付物 #1）】
+  formal/StringFormal/NoGhost/NullSeedsTwo.lean 与 TowerVirasoro.lean（分支
+  agent/formalizer/noghost-pr5-n2，合入 c4ace50）把"D=26 是 level-2 伪态物理的必要充分条件"
+  第一次做成机器验证的等式；此前图上唯一承载这个机制的卡是
+  worldsheet.ocq-null-state-two-families，其推导 status 只能是 physical-argument
+  （手算，未经 Lean/reviewer 复核）。本卡把该卡 (2) 的 N=2 特例部分抽出，
+  单独立卡承载已 Lean 化的这部分内容，是图上**第一张 D=26 作为机检对象上推出的方程**的卡。
+
+  查重：2026-09-12 跑 `uv run stringgraph search level-two`、`search "null state"`、
+  `search descTwo` 均无同内容命中（kac-determinant-level-two 系列是 Verma 模/Gram 矩阵的卡，
+  对象不同；ocq-null-state-two-families 是一般 N 的手算版本，见下段分工）。
+
+  【与 worldsheet.ocq-null-state-two-families 的分工，不是同一张卡】
+  那张卡的 (2)（Type 2 族）对一般 N ≥ 2 断言 L₁χ₂(φ)、L₂χ₂(φ) 的公式，status 是
+  physical-argument（该卡 sources note 逐字：「全部⟨手算⟩，未经 Lean 校验、未经 reviewer
+  复核……status 只能是 physical-argument，不得更高」）。本卡只做 N=2 这一个特例，
+  但**完全用 Lean 机检**，是该卡断言 (2) 在 N=2 处的一个独立、更严格的论证——
+  两卡不 supersede，一个是一般 N 的手算骨架，一个是 N=2 的机检实例。
+  本卡也补上了那张卡**没有**的一条：D=26 的必要性（该卡只证"L₂χ₂(φ)=0 当且仅当 c=26"，
+  但从未把"必要性"包进一条单独可引用的 Lean 等价式；本卡 (3) = `descTwo_mem_towerPhysSubmodule_iff`
+  把它做成了 iff）。
+
+  【uses 列出的是记法/对象依赖，不是论证依赖】
+  本卡的 `uses` 只列出**提供对象/记法**、供读者理解陈述里的符号的四张卡
+  （塔、中心荷、H_null 定义、H_phys 定义）。它们各自是否被本卡的**机检证明链**实质消费，
+  逐条记在配套推导 worldsheet.level-two-null-state-requires-d26--via-lean 的
+  `depends_on` 里（该推导是 status: formalized 的承载处，遵循本图
+  proposition 状态必须由推导计算、不得在 statement 上填写的规则）。
+
+  【L₁𝒟₂φ=0 这一步的 Lean 精确对应，供审计】
+  `towerLop_one_apply_descTwo` 只给出一般 h 的等式 `12*(h+1) • L₋₁φ`；本卡陈述 (1)
+  把 h=−1（即 h0 : L₀φ=−φ）代入后读出"= 0"。这是把一般 h 版本在特定取值处求值，
+  是纯代数化简（12·0=0），不需要额外引理，Lean 侧也不需要一条独立命名的定理，
+  但为免误读，curator 把这一步的推理链在此写明：φ 满足 h0（h=−1）
+  ⟹ `towerLop_one_apply_descTwo` 给出系数 12(−1+1)=0 ⟹ 右端 = 0 • L₋₁φ = 0。
+
+  【与 Kac 侧孪生等式的关系，见 worldsheet.kac-determinant-level-two 的新 notes】
+  `Fock.kacDet2_massShell_two : kacDet2 c (1-2) = 2*(c-26)`（对任意 c）与本卡的
+  `L₂𝒟₂φ = (D-26)•φ` 是**两条独立计算**：前者是 Gram 矩阵行列式（2×2 矩阵的多项式展开），
+  后者是算子直接作用在向量上的等式，两者数值上差一个整体因子 2（(D-26) vs 2(D-26)），
+  这个因子差是 notes 里两条来源各自记账方式不同所致（本卡不做归一化统一，也不断言
+  这是同一条恒等式的两种写法——见【不断言】(d)）。
+author: curator
+created: "2026-09-12"

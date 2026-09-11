@@ -1,0 +1,131 @@
+id: worldsheet.level-two-null-state-requires-d26--via-lean
+target: worldsheet.level-two-null-state-requires-d26
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      承载对象：塔 `TowerFock D R`（代数直和）、逐层作用的 `towerLop`（本卡陈述里的 L_m）。
+      NullSeedsTwo.lean 与 TowerVirasoro.lean 的一切声明都在这些对象上写出（`import`
+      链：`NullSeedsTwo.lean` → `TowerVirasoro.lean` → `NoGhost.SliceRank` → … →
+      `NoGhost.DDF`，塔本身定义在 DDF.lean）。
+  - id: worldsheet.free-boson-central-charge-d
+    inferred: false
+    note: |
+      **本卡陈述 (1) 中 L₂𝒟₂φ 系数里的 `D`（即中心荷 c = D）的唯一来源。**
+      TowerVirasoro.lean 的 `lie_towerLop_towerLop`（塔上 Virasoro 括号，本推导 (1) 的
+      代数骨架）在证明体第 61 行直接调用 `Fock.lie_Lop_Lop η (towerMomentum a b j) hη m n`
+      ——即本卡的依赖 `worldsheet.free-boson-central-charge-d` 的 `formal.lean_decl`，
+      经 `Finsupp.lhom_ext` 逐纤维提升到塔上（文件头逐字：「lifts the single-fibre Virasoro
+      relations `⁅L_m,L_n⁆`… (`Fock.lie_Lop_Lop`) … fibrewise … by `Finsupp.lhom_ext`」）。
+      `towerLop_two_apply_descTwo_of_eigenvalue` 的证明里 `linear_combination (D:R) *
+      two_mul_centralTerm_two_eq_one R` 这一步用到的中心项系数，其存在性正是
+      `lie_towerLop_towerLop` 里 `(D:R) * Virasoro.centralTerm R m` 那一项，
+      逐链追溯到 `Fock.lie_Lop_Lop`。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      承载对象：`towerSpuriousSubmodule`、`towerNullSubmodule`，以及该卡断言 (2)
+      （H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，"易方向"，Lean
+      `towerSpurious_inf_towerPhys_le_towerNull`）。本推导陈述 (2) 的"落在 H_null"那半
+      直接调用它：`NullSeedsTwo.lean` 的 `descTwo_mem_towerNullSubmodule` 逐字是
+      `towerSpurious_inf_towerPhys_le_towerNull η a b (1:R) (Submodule.mem_inf.2
+      ⟨descTwo_mem_towerSpuriousSubmodule …, descTwo_mem_towerPhysSubmodule …⟩)`。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **接口边，非机检环节**：本图里唯一在 sources 中登记「塔上物理子模 `towerPhysSubmodule`
+      与展开引理 `mem_towerPhysSubmodule` 定义于 TowerPhysical.lean」这一事实的卡
+      （该卡自己的命题内容是"DDF 算子保持物理态"，与本推导无关；这里只借用它文档化的对象来源）。
+      本推导的四条 Lean 定理（`descTwo_mem_towerPhysSubmodule`、
+      `descTwo_mem_towerPhysSubmodule_iff` 等）里出现的 `towerPhysSubmodule η a b (1:R)`
+      与 `mem_towerPhysSubmodule` 均取自 TowerPhysical.lean，**不经过**该卡自己的定理
+      `ddfOp_mem_towerPhysSubmodule`（本推导完全不涉及 DDF 算子）。按
+      docs/STATUS_LEVELS.md 的接口边裁决记此边为 `inferred: false`（对象确实被使用），
+      但显式标注它不参与机检证明链本身。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/NullSeedsTwo.lean :: StringFormal.NoGhost.{descTwo, descTwo_apply, towerLop_one_apply_descTwo, towerLop_two_apply_descTwo_of_eigenvalue, towerLop_two_apply_descTwo, towerLop_zero_apply_descTwo, towerLop_apply_descTwo_of_three_le, descTwo_mem_towerSpuriousSubmodule, descTwo_mem_towerPhysSubmodule, descTwo_mem_towerNullSubmodule, towerLop_two_apply_descTwo_eq_zero_iff, descTwo_mem_towerPhysSubmodule_iff}（目标声明是最后一条）；formal/StringFormal/NoGhost/TowerVirasoro.lean :: StringFormal.NoGhost.{lie_towerLop_towerLop, towerLop_apply_towerLop, towerLop_apply_towerLop_of_ne_zero, towerLop_apply_towerLop_neg}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；分支 agent/formalizer/noghost-pr5-n2，
+      经合并提交 c4ace50（"Merge branch 'agent/formalizer/noghost-pr5-n2'"）合入 main。
+      两个文件都在 formal/StringFormal/NoGhost/ 下，`NullSeedsTwo.lean` 依赖
+      `TowerVirasoro.lean`（import 语句）。
+      **curator 未自行重跑 `lake build`**；按项目纪律，含 formal 改动的分支由 lead 在合并前
+      跑 `uv run stringgraph check-axioms`。
+summary: |
+  **第 1 步（TowerVirasoro.lean）**：把单 Fock 空间上的 Virasoro 括号关系 `Fock.lie_Lop_Lop`
+  （`worldsheet.free-boson-central-charge-d` 的 formal.lean_decl，中心荷 c = D）经
+  `Finsupp.lhom_ext` 逐纤维提升到塔 `TowerFock D R = ℤ →₀ Fock D R` 上，得
+  `lie_towerLop_towerLop`：⁅L_m,L_n⁆ = (m−n)L_{m+n} + D·centralTerm(m)·δ_{m+n,0}·id，
+  中心荷与 rung 无关（动量只进 L_0 的本征值）。
+
+  **第 2 步（NullSeedsTwo.lean，六个"原子"引理）**：把 `lie_towerLop_towerLop`
+  在 φ 满足 hpos（正模湮灭）与 h0（L_0 本征值）的假设下逐个具体 (m,n) 求值，得
+  `towerLop_{zero,one,two}_apply_towerLop_neg_{one,two}` 六条算子等式（本卡陈述 (1)
+  的代数骨架，对应 §B″.2 那张 2×2 Gram 表的六个条目，但写成算子等式而非内积）。
+
+  **第 3 步（陈述 (1) 的两条验证方程）**：把这六条原子组合，先证一般 h 版本
+  `towerLop_one_apply_descTwo`（系数 12(h+1)）与
+  `towerLop_two_apply_descTwo_of_eigenvalue`（系数 26h+D，用到
+  `two_mul_centralTerm_two_eq_one : 2·centralTerm R 2 = 1`），
+  再代入 h = −1（`towerLop_two_apply_descTwo`，系数退化为 D−26；
+  `towerLop_one_apply_descTwo` 在 h=−1 处系数为 12·0=0，是本卡陈述 (1) 第一句的直接读出）。
+
+  **第 4 步（陈述 (2)，充分性）**：`descTwo_mem_towerPhysSubmodule`
+  在 `hD26 : (D:R)=26` 与 `h0` 下逐条核对 L₀/L₁/L₂/L_{n≥3} 四款物理态条件
+  （L₀ ← `towerLop_zero_apply_descTwo`，无条件；L₁ ← 第 3 步，h=−1 使之为零；
+  L₂ ← 第 3 步 + hD26 使 D−26=0；L_{n≥3} ← `towerLop_apply_descTwo_of_three_le`，
+  由分级无条件成立），得 `descTwo η a b φ ∈ towerPhysSubmodule η a b (1:R)`。
+  再用 `descTwo_mem_towerSpuriousSubmodule`（𝒟₂φ 按构造属于 H_spur，
+  无条件于 D）与 `worldsheet.tower-physical-quotient-form` 断言 (2)
+  （`towerSpurious_inf_towerPhys_le_towerNull`）取交，得
+  `descTwo_mem_towerNullSubmodule : descTwo η a b φ ∈ towerNullSubmodule η a b (1:R)`。
+
+  **第 5 步（陈述 (3)，必要性）**：在 `[NoZeroDivisors R]` 与 `hφ : φ ≠ 0` 下，
+  `towerLop_two_apply_descTwo_eq_zero_iff` 把第 3 步的等式 `L₂𝒟₂φ = (D−26)•φ`
+  改写成 `L₂𝒟₂φ = 0 ↔ (D:R) = 26`（`smul_eq_zero` 排除 φ=0 分支）；
+  `descTwo_mem_towerPhysSubmodule_iff`（本卡陈述 statement 的 `formal.lean_decl`）
+  把它与 `mem_towerPhysSubmodule` 的 L₂ 分量拼接成
+  `descTwo η a b φ ∈ towerPhysSubmodule η a b (1:R) ↔ (D:R) = 26`。
+gaps:
+  - |
+    **不构造 φ 的存在性或非零性**。本推导的一切结论都是「若存在满足假设的 φ」的条件式；
+    满足假设且非零的具体 φ（例如层真空 `Finsupp.single (-2) (1 : Fock D R)`）由
+    NullSeedsTwo.lean 的 `Slices` 节给出对象层面的实例
+    （`descTwo_single_mem_towerNullSubmodule`），但「该向量非零」**未在 Lean 内证明**
+    ——文件头 Gap 2 逐字：Gram 判据在 c=26,h=−1 处恰好空转（`kacDet2 26 (−1)=0`），
+    需要 `MvPolynomial` 系数论证（`X_{(μ,2)}` 系数是 `5η_μp^μ`），未做。
+    本推导（乃至目标卡）都不依赖这一步，但下游若要用本卡论证"确实存在非平凡零态"
+    则必须显式引用这条缺口。
+  - |
+    **不覆盖 N ≠ 2**。目标卡陈述只做 𝒟₂ = 2L₋₂+3L₋₁²（level-2）这一个算子；
+    一般 N 的类似机制（Type 2 族）是 worldsheet.ocq-null-state-two-families
+    的内容，status physical-argument（手算），本推导与之互相独立，不构成加强关系
+    （该卡仍需单独的形式化才能升级）。
+  - |
+    **接口边 worldsheet.ddf-operators-preserve-physical-states 只提供对象，不提供论证**
+    （见上面该边的 note）。若该卡未来被换代或删除，读者应改为直接指向
+    `formal/StringFormal/NoGhost/TowerPhysical.lean` 的 `towerPhysSubmodule` 定义，
+    而不是该卡自己的命题内容。
+  - |
+    **一般交换 ℚ-代数，无实结构**。本推导全程不涉及内积正定性、幺正性；
+    `R` 上无序，"负模态"等物理直觉不适用于本推导本身。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry，公理仅 propext / Classical.choice / Quot.sound，
+  待 lead 用 `uv run stringgraph check-axioms` 复核）。
+
+  【本推导的四条依赖里，只有一条是"接口边"，其余三条都在机检证明链上真实出现】
+  与 worldsheet.ddf-operators-preserve-physical-states--via-lean（该推导 6 条依赖，
+  同样只有部分是核心论证输入）相比，本推导的依赖集合更紧：momentum-tower-fock-space
+  给对象，free-boson-central-charge-d 给中心荷（唯一让 `D` 进入方程的地方），
+  tower-physical-quotient-form 给"伪态∩物理态⊆零态"的易方向，
+  ddf-operators-preserve-physical-states 只给 towerPhysSubmodule 这个类型/定义
+  （接口边）。四条边覆盖了 NullSeedsTwo.lean 与 TowerVirasoro.lean 引用的全部外部对象；
+  再往上追（bosonic-fock-space、virasoro-generators-free-boson 等）不在本推导的
+  `depends_on` 里，因为它们不是本推导直接消费的节点，而是被上述四张卡各自消费——
+  按图的惯例，`depends_on` 只记直接依赖，不做传递闭包。
+author: curator
+created: "2026-09-12"
