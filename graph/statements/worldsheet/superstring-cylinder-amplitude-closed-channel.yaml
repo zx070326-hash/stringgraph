@@ -143,8 +143,24 @@ sources:
       'from one side of the type II string'，故本卡的这条边非 inferred。
       ⚠ 只借迹的**形式**，不借那张卡的"8 的倍数"结论。
 tags: [superstring, type-i, cylinder-amplitude, one-loop, ns-ns, closed-channel]
+superseded_by: worldsheet.superstring-cylinder-amplitude-closed-channel-v2
 notes: |
-  ⚠【reviewer-batch23，lead 落地】断言 (3)「第二行的 16 是十维无质量态的计数」是抽取记录的转述（gloss），**不是原书 (10.8.4) 处的断言**（推导 gaps 第 3 条自承原书不说 16 是什么）。statement 按原则 1 不改；下次实质换代时把该句移出断言。
+  ★★★【2026-09-11 已换代为 worldsheet.superstring-cylinder-amplitude-closed-channel-v2
+  （curator，small-backlog-11）】两处陈述级问题各自都只能靠换代修，故一次换代同时修：
+  (A)「不断言 (e)」里「页图上七处…分母看起来都是 8π(8π²α'²)⁵」这句**事实陈述**被
+      researcher 第二轮的单页重渲染推翻（polchinski-1998-v2-sec10-8.md §6.4：p.41 的 (10.8.11)
+      与 p.42 的 (10.8.18)/(10.8.19) 读作**单撇**，"七处一致"不成立）；
+      v2 的 (e) 改写为「复算 + 量纲 + 跨卷控制组三重复核定单撇；页图小字号读数**不可复现**」。
+      ⚠ 本卡 (e) 的**结论**（采纳 (8π²α')⁵）本来就对，换代修的是理由的表述。
+  (B) 断言 (3) 里「第二行的 16 是十维无质量态的计数」是抽取记录的**转述（gloss）**
+      （reviewer-batch23，lead 落地），原书在 (10.8.4) 处不说 16 是什么；
+      v2 把它移出断言（新增「不断言 (h)」），释义移入 notes。
+  ⇒ 本卡的推导 --via-open-string-trace-doubling 已 `git mv` 改指 v2（论证一字未动）；
+  两条活边（worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences、
+  branes.d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace）已改指 v2。
+  **新接线一律指 v2，不要再指本 id。**
+
+  ⚠【reviewer-batch23，lead 落地】断言 (3)「第二行的 16 是十维无质量态的计数」是抽取记录的转述（gloss），**不是原书 (10.8.4) 处的断言**（推导 gaps 第 3 条自承原书不说 16 是什么）。statement 按原则 1 不改；下次实质换代时把该句移出断言。〔已由 v2 落实〕
   ★★【本卡为什么新建（curator，2026-09-11）】
   (10.8.4) 在本图此前**没有独立节点**：它只出现在
   worldsheet.type-i-tadpole-cancellation-so32-v2 的推导步骤里。这个缺口被两条下游推导各记了一次：

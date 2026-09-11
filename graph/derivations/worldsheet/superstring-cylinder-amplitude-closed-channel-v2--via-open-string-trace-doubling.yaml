@@ -1,5 +1,5 @@
-id: worldsheet.superstring-cylinder-amplitude-closed-channel--via-open-string-trace-doubling
-target: worldsheet.superstring-cylinder-amplitude-closed-channel
+id: worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling
+target: worldsheet.superstring-cylinder-amplitude-closed-channel-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -157,11 +157,21 @@ gaps:
      ⚠ **不得援引 (13.3.12) 的「书错」先例**（§6.4 逐字：那处读数可复现且有三条旁证，
      本处读数在两个 agent、两轮渲染之间不可复现，两处性质不同）。
      ⚠ 仍未处理的一条：polchinski-1998-v2.md **E48 沿用了页图读数**，与本卡不一致，
-     应按 §0.4(b)/§6 订正（curator 不写 literature/ 的旧条目，留给 researcher）。"
+     应按 §0.4(b)/§6 订正（curator 不写 literature/ 的旧条目，留给 researcher）。
+     ⚠⚠ **残余不确定性（§6.5 逐字，2026-09-11 补记；登记但不降级）**：两轮复核**仍只用了
+     同一条成像管线**（Cambridge Core PDF → `Read` 页图渲染），**没有引入第二条独立的成像路径**；
+     官方勘误表仍取不到（polchinski-1998-v2.md §3.3 记 KITP errata 页 404）。
+     ⇒ 本推导对 α' 幂次的把握止于「复算闭合 + 量纲 + 跨卷一致性」三条**间接**证据，
+     **不是**一手读数。**要 100% 关闭，唯一彻底的办法是人在 PDF 阅读器里把 p.38 放大一次**
+     ——10 秒的事。在那之前本条保持开放。"
   - "**(10.8.4) 第二行的 16 的来源未被原书点明**：原书不在该处说 16 是哪些态的计数
      （只在随后诊断发散时说「无质量闭弦 tadpole，必为 NS–NS 态」）。本图把它挂到
      worldsheet.type-ii-massless-spectrum 上并标 **inferred**。
-     正解：为「长柱极限里最轻态的计数」（(7.4.4) 的 24 / (10.8.4) 的 16）单建一卡。"
+     ★★【2026-09-11 更新，small-backlog-11】目标卡已换代为 -v2，**v2 把「16 是十维无质量态的
+     计数」这句 gloss 移出了断言**（新增「不断言 (h)」，释义留在 notes）。
+     ⇒ 本条 gap 与那条 inferred 边**都保留**：本推导的 summary 第 4 步仍在做这个识别，
+     只是目标卡不再把它当断言。**关系变清楚了：识别在推导里，不在卡面上。**
+     正解不变：为「长柱极限里最轻态的计数」（(7.4.4) 的 24 / (10.8.4) 的 16）单建一卡。"
   - "**超弦的 Ω 在费米子上的作用本图无节点**：(10.8.12)–(10.8.15)（Ωψ^μ(w)Ω^{−1} = ψ^μ(w − π)
      由 doubling trick (10.2.15) 得到、Ω² = exp(πiF)、投影算符 (1+Ω+Ω²+Ω³)/4）。
      本推导**只需要** Ω 贡献一个 ½ 的计数，故该边标 inferred 但影响轻；
@@ -173,6 +183,19 @@ gaps:
      一个本书不给的 'more detailed analysis'）都在 worldsheet.type-i-tadpole-cancellation-so32-v2。
      ⇒ 本卡**不经过**该节最弱的那一环（抽取记录 #E67 的判断）。"
 notes: |
+  ★★★【2026-09-11 改指 v2（curator，small-backlog-11）】
+  本推导原 id/target 为 worldsheet.superstring-cylinder-amplitude-closed-channel(--via-…)，
+  目标卡换代为 -v2 后 `git mv` 改指新目标。换代的两处改动是
+  (A) 「不断言 (e)」里「页图七处一致看起来是 α'²」这句**事实陈述**被 researcher 第二轮
+      单页重渲染推翻（sec10-8.md §6.4），v2 改写为「复算 + 量纲 + 跨卷控制组三重复核定单撇，
+      页图小字号读数**不可复现**」并补上残余不确定性；
+  (B) 断言 (3) 里「16 是十维无质量态的计数」是 gloss（reviewer-batch23，lead 落地），v2 移出断言。
+  ⇒ **两处都不触及公式，本推导的论证一字未动**（属 graph/CLAUDE.md 2026-09-12 细则里的
+  「纯换名式换代」：论证原样适用于新陈述），故 `git mv` 而非保留旧推导作历史；
+  旧卡不再留推导，两条活边（type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences、
+  d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace）已一并改指 v2。
+  本推导只改了三处措辞：本段、gaps 里 α' 那条的残余不确定性、gaps 里 16 那条的现状说明。
+
   【本推导把两处"母式无节点"的缺口合上】
   在此之前 (10.8.4) 只活在 worldsheet.type-i-tadpole-cancellation-so32-v2 的推导步骤里，
   两条下游推导（branes.d-brane-cylinder-long-distance-ns-ns--via-cylinder-open-string-trace 与

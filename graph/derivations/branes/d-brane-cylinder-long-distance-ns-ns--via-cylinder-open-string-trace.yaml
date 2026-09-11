@@ -17,11 +17,16 @@ depends_on:
       exp(−t y²/2πα')：张在两膜之间的开弦有经典质量 m = y/(2πα')，单圈迹里给出
       exp(−2πt α' m²) = exp(−t y²/2πα')。
       ⇒ 本边是 y 依赖（从而是 G_{9−p}(y) 的 y^{2−d} 长程行为）的唯一来源。
-  - id: worldsheet.superstring-cylinder-amplitude-closed-channel
+  - id: worldsheet.superstring-cylinder-amplitude-closed-channel-v2
     note: |
       供给本式的**母式 (10.8.4) 本身**（2026-09-11 新建卡）。
       **非 inferred**：原书 p.146 逐字 'The exchange of light NS–NS closed strings was isolated
       in **eq. (10.8.4)**. Modify this expression by …'——(10.8.4) 是被点名引用的那一式。
+      ★★【2026-09-11 改指 v2，small-backlog-11】本边原指
+      worldsheet.superstring-cylinder-amplitude-closed-channel，该卡已换代为 -v2，两处改动是
+      (A) α' 幂次保留条款按 §6.4 重写（"页图七处一致"那句事实陈述被推翻；结论仍是 (8π²α')⁵）、
+      (B) 断言里"16 是十维无质量态的计数"这句 gloss 移出断言。
+      ⚠ **公式本身一字未变**，本推导用到的母式内容不受影响；本边只改 id。
       ★ **这条边取代了旧记账**：本推导原先只能把母式挂到整张
       worldsheet.type-i-tadpole-cancellation-so32-v2 上（见下一条边），并在 gaps 里记
       "图上无 (10.8.4) 的单独节点"。该缺口自本边起合上。
