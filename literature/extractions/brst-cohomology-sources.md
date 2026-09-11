@@ -419,3 +419,69 @@ Project Euclid 卷期目录页、Google Books `books.google.com/books?id=<ID>&q=
 未改动：`polchinski-1998-v1/v2`、`gsw-1987-v1`、`blt-2013`、`kac-1979`、`feigin-fuchs-1982`、
 `green-schwarz-1984`、`maldacena-1997`、`virasoro-lean-2025`。
 （`kac-1979` 与 FGZ ref 10 所指的 ICM 1978 论文疑似不是同一篇，**未处理**，见 §1.5。）
+
+---
+
+## 9. ★ FGZ 1986 `Theorem 2.7` 复核（2026-09-11，researcher）——**逐字 + 量词链 + 页码**
+
+> 只追加，不改上文 §1 任何一行。触发：§1.4 的表格里 Thm 2.7 只有**一句话转述**，图中若要把它当「相对上同调消灭定理」的 canonical source，需要逐字与完整量词。
+> 取件路线沿用 §7 访问日志里那条成功路线：`cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`（**先 fetch `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0018.png`，它 301 到 cdn 域**），WebFetch 落盘 PNG（137.5 KB）→ `Read` 读图。**期刊页 8445 = 扫描页 `-0018`。**
+
+### 9.1 ★★ Theorem 2.7 逐字（L1 页图，p.8445 右栏）
+
+> **THEOREM 2.7.** *Suppose* `p ≠ 0`. *Then* (i) `H^i_∞(ℒ, ℒ₀, V(E, p)) = 0, i ≠ 0`, *and* (ii) `dim H^0_∞(ℒ, ℒ₀, V(E, p)) = p_{(24)}(1 − p·p/2)`, *if* `1 − p·p/2` *is a nonnegative integer and* `0` *otherwise*.
+
+⇒ 与 §1.4 表格里的转述**内容一致，无需更正**；本节新增的是量词链、周边依赖与强度措辞。
+
+### 9.2 量词链（全部逐字，散布在 Thm 2.7 之前，引用时必须集齐）
+
+Thm 2.7 的陈述本身**只带一个量词 `p ≠ 0`**，其余四个前提都写在正文里，位置如下（均 p.8445，除注明外）：
+
+| # | 前提 | 逐字出处 |
+|---|---|---|
+| 1 | **`p ≠ 0`** | 定理内 |
+| 2 | **`D = 26`** | 紧邻上一段逐字：「Now we will consider the relative cohomology groups with coefficients in `V(E, p)`, **so that `D = 26`**.」（右栏，Thm 2.7 正上方） |
+| 3 | **号差 `(D−1, 1)`** | 左栏末逐字：「Now we will restrict our attention to the case of signature `(D − 1, 1)`, which is the most interesting from both the mathematical and the physical points of view. The following fact has been known to physicists (see refs. **8** and **9** and refs. cited therein).」（refs 8/9 = Goddard–Thorn 1972 / Brower 1972，见 §1.5） |
+| 4 | **`π(c) = 26 Id_V`**（相对中心的子复形约定） | §2.1 的常设假设，逐字见本文件 §1.2；p.8445 左栏给出它与 `D` 的接口：「`[π(L_m), π(L_n)] = (m − n)π(L_{m+n}) + (D/12)(m³ − m)δ_{m+n}·Id`. **Thus `π(c) = D·Id`** by Eq. 2.1. We have `π(L_m)* = π(L_{−m})`, so that `V(E, p)` is a Hermitian ℒ-module.」⇒ **`D = 26` 与 `π(c) = 26` 在 FGZ 里是同一个假设的两种写法，不是两条独立条件** |
+| 5 | **`D ≥ 2`** | 经 Prop 2.6：「**PROPOSITION 2.6.** *Let* `E` *have signature* `(D − 1, 1)`, `D ≥ 2` *and* `p ≠ 0`. *Then* (i) `V(E, p)` *is a free* `ℒ^-`-*module and* (ii) *there exists a positive definite subspace* `T ⊂ V(E, p)^{ℒ^+}` [`= all v ∈ V(E, p)`, *annihilated by* `ℒ^+`], *such that* `ch_q T = q^{p·p/2}φ(q)^{D−2}`.」（**Thm 2.7 的证明用到 Prop 2.6 的第一部分**，见 9.3） |
+
+### 9.3 FGZ **自己列出**的依赖（逐字，就在 Thm 2.7 正上方一句）
+
+> 「In this case the vanishing theorem (**Theorem 1.12**), the Euler–Poincaré principle (**Proposition 1.3**), **Proposition 2.4**, and **the first part of Proposition 2.6** imply the following.」
+
+⇒ 四条依赖是**原文明写**的，不是抽取者推断，建边时**不必标 `inferred`**：
+`Thm 1.12`（消灭定理，需 `ℒ^-`-free + 非退化厄米形式）、`Prop 1.3`（Euler–Poincaré）、`Prop 2.4`（Fock 模上 `dim H^m = 0, m ≠ 0` 且 `m = 0` 的维数 = Eq. [2.3] 中 `1` 的系数）、`Prop 2.6(i)`（`V(E,p)` 是自由 `ℒ^-` 模 ← 这正是喂给 Thm 1.12 的假设）。
+**强度措辞是 "imply the following"，即 FGZ 把 Thm 2.7 当作前四条的直接推论，本身不另给证明。**
+
+### 9.4 「鬼数」的量词：FGZ **不用**这个词，只用 degree `i`（L1，限 p.8445）
+
+- Thm 2.7 的指标是 `H^i_∞(ℒ, ℒ₀, ·)`，即**相对复形的整数次数 `i`**，消灭在 `i ≠ 0`。
+- **p.8445 全页不出现 "ghost" / "ghost number" 字样**（negative evidence，仅覆盖本页）。物理学家的「鬼数」在 FGZ 里就是这个 `i`，而**零点由「相对 ℒ₀ 的子复形」这个约定固定**，不是另外声明的。
+- ⚠ **绝对 vs 相对的次数偏移在 FGZ 里是 ±1/2**：`Theorem 2.5`（p.8445）逐字给的是 `H^m_∞(ℒ, 𝖟; V) ≅ H^0(ℒ, ℒ₀; V)` for `m = ±1/2`（其余为零）。
+  ⇒ **凡引用 Thm 2.7 的「`i ≠ 0` 消灭」，必须同时写明这是相对复形**；换成绝对复形（相对中心 `𝖟`）时非零次数是 `±1/2` 而不是 `0`。这与 [[lit-brst-noghost-source-numbering]] 里记的「鬼数零点三家不同（LZ −1,0,1 / FOK ±½ / Dedushenko (A+1)±½）」是同一类陷阱。
+
+### 9.5 Thm 2.7 之后紧跟的两句（对建卡有用，此前未转录）
+
+> 「*Theorem 2.7* implies that the cohomology groups are trivial except for a one-dimensional `H^0_∞` in the positive-definite case, but `H^0_∞` can be arbitrarily large in the indefinite case. It turns out that in the case of signature `(25, 1)` we can explicitly construct representatives of the cohomology classes using **the second part of Proposition 2.6**. And this is the case of the most interest in physics.」
+
+⇒ (a) 正定号差下 `H^0_∞` 一维、不定号差下可任意大；(b) **显式代表元的构造用的是 Prop 2.6 的第二部分（横向空间 `T`）**，与 Thm 2.7 用的第一部分（自由性）是**同一个命题的两半、承担不同任务**。
+
+### 9.6 顺带逐字取得的两条（同页，与 `V(E,p)` 卡直接相关）
+
+- **分次与形式特征标**（p.8445 左栏）：「The module `V(E, p)` is also a graded ℒ-module under the following definition of grading: `deg α^{μ₁}_{m₁} … |p⟩ = (Σ^N_{i=1} m_i) − (p·p/2)`. The formal character of `V(E, p)` is given by `ch_q(V(E, p)) = q^{p·p/2}φ(q)^{−D}`. The graded ℒ-module `V(E, p)` will be called a **Fock module**.」
+- **Prop 2.6 之后的 Remark（关键的反例声明，与 LZ 1991/1989 的同型陈述呼应）**：「*Remark*: We note that, although `V(E, p)` in the above proposition is free over `ℒ_-`, it is **not in general a direct sum of Verma modules** or even generated as an ℒ-module by `V(E, p)^{ℒ^+}`. As a counterexample one can choose the case in which `p·p` is a nonpositive even integer.」
+  ⇒ **FGZ 与 LZ（1989 p.320 Remark、1991）在「不是 Verma 模直和」这一点上一致**；与 FOK 1989 p.111/115 转述 Brower–Friedman 的「fully reducible ⇒ Verma 模无穷直和」构成**第二条独立反证**。见 `figueroa-ofarrill-kimura-1989.md` 与 `brower-friedman-1973.md` 的裁决任务。
+
+### 9.7 对图的建议（researcher 不改 `graph/`，仅列）
+
+- 「相对上同调消灭定理（玻色弦）」的 canonical source 用 **`fgz-1986, Theorem 2.7(i), p.8445`**，`statement` 必须带 9.2 的五个量词（至少 `p ≠ 0`、`D = 26`、号差 `(D−1,1)`、相对 `ℒ₀`）。
+- 维数公式 **Thm 2.7(ii)** 建议**单独一卡**（`dim H^0 = p_{(24)}(1 − p·p/2)`，含「`1 − p·p/2` 为非负整数否则为 0」的分段），因为下游（无鬼定理 Thm 2.8 的维数计数）只用到它。
+- 依赖边按 9.3 建**实边不标 `inferred`**：→ `Thm 1.12`、`Prop 1.3`、`Prop 2.4`、`Prop 2.6(i)`。
+- `status`：FGZ 是数学论文、有完整证明链，可给 `rigorous`；**但 `Prop 2.6(ii)` 的横向空间构造在 FGZ 里引用 Kac 行列式（refs 10, 11）**，若图里那条链未建，需在 note 里写明。
+
+### 9.8 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| FGZ p.8445 | `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0018.png` | 301 → cdn 域（WebFetch 不自动跟随，需第二次调用） |
+| FGZ p.8445 | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png` | ✅ 137.5 KB PNG 落盘，`Read` 读图，整页两栏可辨 |
