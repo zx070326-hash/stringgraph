@@ -529,4 +529,170 @@ theorem towerLop_neg_mem_ordSeedSpanPos_of_mem_towerBigrade (hD : 2 ≤ D)
 
 end SeedFamily
 
+/-! ### Counting the non-empty seed family (blueprint §B″.4.1 (F-2), the injective half) -/
+
+section SeedCount
+
+open StringFormal.Virasoro
+
+variable {D : ℕ}
+
+/-- The `b̃`-row occupation function of a word: `L_{-λ}` contributes `α^{b̃}_{-λ_i}` for each
+part.  (F-2)'s map `(λ, c) ↦ d` is `c + wordOcc λ`. -/
+noncomputable def wordOcc (hD : 2 ≤ D) (l : List ℤ) : Osc D →₀ ℕ :=
+  (l.map fun n => Finsupp.single ((conjIdx D hD, negPNat n) : Osc D) 1).sum
+
+@[simp] lemma wordOcc_nil (hD : 2 ≤ D) : wordOcc hD ([] : List ℤ) = 0 := rfl
+
+@[simp] lemma wordOcc_cons (hD : 2 ≤ D) (n : ℤ) (t : List ℤ) :
+    wordOcc hD (n :: t) = Finsupp.single ((conjIdx D hD, negPNat n) : Osc D) 1 + wordOcc hD t :=
+  by simp [wordOcc]
+
+lemma level_wordOcc (hD : 2 ≤ D) {l : List ℤ} (hl : ∀ n ∈ l, n < 0) :
+    (Fock.level D (wordOcc hD l) : ℤ) = -l.sum := by
+  induction l with
+  | nil => simp
+  | cons n t ih =>
+    have hn : n < 0 := hl n (List.mem_cons_self ..)
+    have ht := ih fun m hm => hl m (List.mem_cons_of_mem n hm)
+    rw [wordOcc_cons, Fock.level_add, Fock.level_single, Fock.oscLevel, one_mul, List.sum_cons]
+    push_cast
+    rw [ht, negPNat_coe_of_neg hn]
+    omega
+
+lemma conjDeg_wordOcc (hD : 2 ≤ D) (l : List ℤ) : conjDeg hD (wordOcc hD l) = l.length := by
+  induction l with
+  | nil => simp
+  | cons n t ih => rw [wordOcc_cons, conjDeg_add, conjDeg_single_conj, ih, List.length_cons]; ring
+
+lemma wordOcc_apply_of_ne (hD : 2 ≤ D) (l : List ℤ) {t : Fin D} (ht : t ≠ conjIdx D hD)
+    (m : ℕ+) : wordOcc hD l (t, m) = 0 := by
+  induction l with
+  | nil => simp
+  | cons n s ih =>
+    rw [wordOcc_cons, Finsupp.add_apply, ih, Finsupp.single_apply, if_neg, zero_add]
+    intro h
+    exact ht (congrArg Prod.fst h).symm
+
+lemma negPNat_eq_iff {n : ℤ} (hn : n < 0) (m : ℕ+) : negPNat n = m ↔ n = -((m : ℕ) : ℤ) := by
+  constructor
+  · intro h
+    have := congrArg (fun k : ℕ+ => (k : ℕ)) h
+    simp only [negPNat_coe_of_neg hn] at this
+    omega
+  · intro h
+    subst h
+    exact negPNat_neg_coe m
+
+/-- The `b̃`-row of `wordOcc l` records the multiplicities of the word. -/
+lemma wordOcc_apply_conj (hD : 2 ≤ D) {l : List ℤ} (hl : ∀ n ∈ l, n < 0) (m : ℕ+) :
+    wordOcc hD l (conjIdx D hD, m) = l.count (-((m : ℕ) : ℤ)) := by
+  induction l with
+  | nil => simp
+  | cons n t ih =>
+    have hn : n < 0 := hl n (List.mem_cons_self ..)
+    have ht := ih fun k hk => hl k (List.mem_cons_of_mem n hk)
+    rw [wordOcc_cons, Finsupp.add_apply, ht, Finsupp.single_apply, List.count_cons]
+    by_cases h : n = -((m : ℕ) : ℤ)
+    · rw [if_pos (by rw [(negPNat_eq_iff hn m).2 h]), if_pos (by simp [h]), add_comm]
+    · rw [if_neg (fun h' => h ((negPNat_eq_iff hn m).1 (congrArg Prod.snd h'))),
+        if_neg (by simpa using h), add_zero, zero_add]
+
+/-- A `b̃`-free occupation function vanishes on the whole `b̃` row. -/
+lemma apply_conj_eq_zero_of_conjDeg_eq_zero (hD : 2 ≤ D) {c : Osc D →₀ ℕ}
+    (hc : conjDeg hD c = 0) (m : ℕ+) : c (conjIdx D hD, m) = 0 := by
+  by_contra hne
+  have hmem : ((conjIdx D hD, m) : Osc D) ∈ c.support := Finsupp.mem_support_iff.2 hne
+  rw [conjDeg, Finsupp.weight_apply] at hc
+  have := (Finset.sum_eq_zero_iff.1 hc) _ hmem
+  exact hne (by simpa using this)
+
+end SeedCount
+
+section SeedCountInj
+
+open StringFormal.Virasoro
+
+variable {D : ℕ}
+
+/-- **(F-2), the injective half**: `(λ, c) ↦ c + wordOcc λ` sends the non-empty seed indices
+of level `M` into the level-`M` occupation functions with at least one `b̃` factor. -/
+noncomputable def seedIndexPosEmbed (hD : 2 ≤ D) (M : ℕ) (p : SeedIndexPos hD M) :
+    {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} :=
+  ⟨p.1.2 + wordOcc hD p.1.1, by
+    obtain ⟨⟨l, c⟩, hl, hne, hc, hlev⟩ := p
+    simp only at hl hne hc hlev ⊢
+    refine ⟨?_, ?_⟩
+    · have h1 := level_wordOcc hD hl.neg
+      rw [Fock.level_add]
+      have : (Fock.level D c : ℤ) + (Fock.level D (wordOcc hD l) : ℤ) = M := by rw [h1]; omega
+      exact_mod_cast this
+    · rw [conjDeg_add, hc, conjDeg_wordOcc, zero_add]
+      exact List.length_pos_of_ne_nil hne⟩
+
+/-- Injectivity of (F-2): `c` is read off outside the `b̃` row (where `wordOcc λ` vanishes and
+`c` is arbitrary), and `λ` from the `b̃` row (where `c` vanishes and `wordOcc λ` records the
+multiplicities of `λ`; a sorted list is determined by its multiplicities). -/
+theorem seedIndexPosEmbed_injective (hD : 2 ≤ D) (M : ℕ) :
+    Function.Injective (seedIndexPosEmbed hD M) := by
+  rintro ⟨⟨l, c⟩, hl, hne, hc, hlev⟩ ⟨⟨l', c'⟩, hl', hne', hc', hlev'⟩ h
+  have h := congrArg (fun x : {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} =>
+    (x : Osc D →₀ ℕ)) h
+  simp only [seedIndexPosEmbed] at h
+  have hcc : c = c' := by
+    ext ⟨t, m⟩
+    by_cases ht : t = conjIdx D hD
+    · subst ht
+      rw [apply_conj_eq_zero_of_conjDeg_eq_zero hD hc,
+        apply_conj_eq_zero_of_conjDeg_eq_zero hD hc']
+    · have := congrArg (fun f : Osc D →₀ ℕ => f (t, m)) h
+      simpa only [Finsupp.add_apply, wordOcc_apply_of_ne hD _ ht, add_zero] using this
+  subst hcc
+  have hll : l = l' := by
+    have hcount : ∀ z : ℤ, l.count z = l'.count z := by
+      intro z
+      by_cases hz : z < 0
+      · have hm := congrArg (fun f : Osc D →₀ ℕ => f (conjIdx D hD, negPNat z)) h
+        simp only [Finsupp.add_apply, wordOcc_apply_conj hD hl.neg, wordOcc_apply_conj hD hl'.neg,
+          apply_conj_eq_zero_of_conjDeg_eq_zero hD hc, zero_add] at hm
+        rwa [negPNat_coe_of_neg hz, show -(((-z).toNat : ℕ) : ℤ) = z by omega] at hm
+      · rw [List.count_eq_zero_of_not_mem fun hmem => hz (hl.neg z hmem),
+          List.count_eq_zero_of_not_mem fun hmem => hz (hl'.neg z hmem)]
+    exact List.Perm.eq_of_pairwise' hl.sorted hl'.sorted (List.perm_iff_count.2 hcount)
+  subst hll
+  rfl
+
+instance finite_seedIndexPos (hD : 2 ≤ D) (M : ℕ) : Finite (SeedIndexPos hD M) := by
+  have : Finite {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} :=
+    ((Fock.finite_setOf_level_eq D M).subset fun _ hd => hd.1).to_subtype
+  exact Finite.of_injective _ (seedIndexPosEmbed_injective hD M)
+
+instance finite_conjPosIndex (hD : 2 ≤ D) (M : ℕ) :
+    Finite {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} :=
+  ((Fock.finite_setOf_level_eq D M).subset fun _ hd => hd.1).to_subtype
+
+theorem nat_card_seedIndexPos_le (hD : 2 ≤ D) (M : ℕ) :
+    Nat.card (SeedIndexPos hD M)
+      ≤ Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} :=
+  Nat.card_le_card_of_injective _ (seedIndexPosEmbed_injective hD M)
+
+variable {K : Type*} [Field K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- **`dim (non-empty seed family) ≤ p_D(M) − p_{D−1}(M)`**, the right-hand side being the
+number of level-`M` occupation functions with at least one `b̃` factor. -/
+theorem finrank_ordSeedSpanPos_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Module.finrank K ↥(ordSeedSpanPos hD F j M)
+      ≤ Nat.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ 1 ≤ conjDeg hD d} := by
+  classical
+  have := Fintype.ofFinite (SeedIndexPos hD M)
+  refine le_trans (finrank_range_le_card (seedWordPos hD F j M)) ?_
+  rw [← Nat.card_eq_fintype_card]
+  exact nat_card_seedIndexPos_le hD M
+
+instance ordSeedSpanPos_finiteDimensional (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    (M : ℕ) : FiniteDimensional K ↥(ordSeedSpanPos hD F j M) :=
+  FiniteDimensional.span_of_finite K (Set.finite_range _)
+
+end SeedCountInj
+
 end StringFormal.NoGhost
