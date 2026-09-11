@@ -1,0 +1,105 @@
+id: math.level-two-partition-difference
+kind: proposition
+title: 二能级"不含一个方向"光锥占据数计数差 p_{D−1}(2) − p_{D−2}(2) = D，是一条 Pascal 恒等式，对一切 D 成立——「计数本身看不见 26」这句话的精确定理版
+statement: |
+  这是一条**纯组合恒等式**，不涉及弦论的任何算子、度规或质壳条件；D 只是一个自然数参数。
+
+  【记号】对 m ∈ N，令 p_m(2) := 「把振子能级 2 分配给 m 个可数无穷模态槽（每槽标 1..∞ 重数，
+  即一个自由玻色场的 m 个横向/纵向方向）」的占据数个数，等价于**无穷维光锥单项式指标**
+  d : {1,…,m} × ℕ_{>0} → N（支撑有限）中满足 Σ_{(i,n)} n·d(i,n) = 2 的 d 的个数。
+
+  【断言：占据数的显式计数与差】设 D ≥ 2。则
+
+    p_{D−1}(2) = (D − 1) + C(D, 2) ，
+    p_{D−2}(2) = (D − 2) + C(D − 1, 2) ，
+
+  （「单模态占据 2」贡献 m 个 d，「两个不同模态各占据 1」贡献 C(m,2) 个 d，m 取 D−1 或 D−2；
+  这是 Finsupp.oscWeight 在能级 2 的完整分类，两种情形穷尽且不相交）。故
+
+    **p_{D−1}(2) − p_{D−2}(2) = D** ，
+
+  等价地（Pascal 恒等式的展开形式，对一切 D ≥ 2 成立，不需要 D 是任何特定值）：
+
+    (D − 1) + C(D, 2)  =  ((D − 2) + C(D − 1, 2)) + D 。
+
+  【本节点明确不断言】
+  (a) **不断言这与任何弦论对象的联系**：p_{D−1}(2)、p_{D−2}(2) 在本节点里只是两个显式计数
+      公式的值，"它们分别是 dim(H_phys ∩ V_2) 的上界 / dim(D(Ε) ∩ V_2)"是弦论侧节点
+      （worldsheet.physical-slice-bounded-by-transverse-count、
+      worldsheet.transverse-ddf-fock-gram-matrix）各自独立证明的事，本节点不重复、不引用它们。
+  (b) **不断言这条差恒等式对任何其他能级 N ≠ 2 的类比**：一般 N 的差
+      p_{D−1}(N) − p_{D−2}(N) 需要一般的配分函数生成函数论证（Euler 恒等式一类），
+      本节点只做 N = 2 这一个特例的初等展开，不断言、不暗示一般 N 版本的证明方法与本节点相同。
+  (c) **不断言 D ≤ 1 的情形**：C(D,2)、D−1、D−2 的自然数减法需要 D ≥ 2 才良定义
+      （D = 0, 1 时"D − 1 个方向"本身不是一个自然的量），本节点只在 D ≥ 2 下陈述。
+  (d) **不是一个新的组合学结果**：这是二项式系数 Pascal 递推 C(m+2,2) = C(m+1,1) + C(m+1,2)
+      的一个直接代入实例（m := D − 2），本节点立卡的价值在于把它显式写成弦论计数需要的形状，
+      不在于恒等式本身的新颖性。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.NoGhost.levelTwo_count_identity
+  lean_file: StringFormal/NoGhost/LevelTwoCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelTwoCount.lean :: StringFormal.NoGhost.levelTwo_count_identity
+      （本卡 formal.lean_decl，section Cardinalities，约第 465 行起）；
+      铺垫两条单侧计数 card_ddfLevel_two_ge（约第 369 行，下界 p_m(2) ≥ m + C(m+1,2)，
+      本卡只用其等号形状的特例）与 card_conjFree_two_le（约第 424 行，上界
+      p_{D−1}(2) ≤ (D−1) + C(D,2)）；分类引理 Finsupp.oscWeight_eq_two_cases（文件头
+      "the classification"，将能级 2 的任意占据函数唯一分成 single(i,2) 或
+      single(i,1)+single(j,1) 两类）是两条单侧计数共同的底层依据。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（分支 agent/formalizer/…，工作文件
+      formal/StringFormal/NoGhost/LevelTwoCount.lean；合并提交号本轮 curator 未在
+      git log 中逐条核对，按 formal/CLAUDE.md 的登记惯例由 lead 在合并前统一核实）。
+      **curator 未自行运行 `lake build` / `check-axioms`**（本 worktree 无构建缓存）；
+      结论基于直接读源码，未跑编译器验证；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+      **逐字核对**：`levelTwo_count_identity (hD : 2 ≤ D) : (D - 1) + Nat.choose D 2 =
+      ((D - 2) + Nat.choose (D - 1) 2) + D`——与本卡【断言】的等式逐字一致（`Nat.choose D 2`
+      = C(D,2)）。证明体本身只是 `Nat.choose_succ_succ` 代入 D = m + 2 后的 `omega` 收尾，
+      **不用任何弦论对象**，与本卡"纯组合恒等式"的定位一致。
+      两条单侧计数公式 p_{D−1}(2) = (D−1)+C(D,2)、p_{D−2}(2) = (D−2)+C(D−1,2) 本身**未**各自
+      被单独证成等式：Lean 侧的 `card_ddfLevel_two_ge`/`card_conjFree_two_le` 分别只给
+      **下界**（用单射 ι ⊕ Sym2 ι ↪ {…}）与**上界**（用满射 κ ⊕ Sym2 κ ↠ {…}），
+      两者数值上确实是同一个式子（本卡断言的等号），但 Lean 未把"下界=上界"这一步单独
+      包成一条 `card = ...` 的等式引理——`levelTwo_count_identity` 直接在自然数算术层面
+      证出了两个等式的**差**，不经过分别证出两个等式本身。本卡【断言】里的两条显式等式
+      （p_{D−1}(2) = (D−1)+C(D,2) 等）因此是本卡为陈述可读性引入的**记法**，
+      其真值可由 `card_conjFree_two_le`（上界）与 `card_ddfLevel_two_ge`（下界，取
+      ι = {1,…,D−1} 或 {1,…,D−2}）的两条不等式夹逼得到，但 Lean 侧没有一条独立声明的
+      定理逐字断言"p_{D−1}(2) 恰等于 (D−1)+C(D,2)"——`levelTwo_count_identity` 是唯一被
+      直接证明的等式，它的形状已经是"差恒等式"本身，不经过分别取等这一步。
+tags: [combinatorics, number-theory, binomial-coefficients, partitions, formalized, math-input]
+notes: |
+  【为什么立卡（curator，分支 agent/curator/b26-two-wire，依派活任务交付物 #2）】
+  formal/StringFormal/NoGhost/LevelTwoCount.lean 的文件头与
+  worldsheet.ddf-spanning-rank-inequality 的既有 notes 都把"占据数计数在 level 2 永远
+  看不见 D=26，只有零态的物理性看得见"这句话当作**观察**记账；`levelTwo_count_identity`
+  把这句观察的**计数那一半**第一次变成一条与弦论对象完全脱钩、可独立验证的组合定理。
+  本卡把它单独立卡，供 worldsheet.ddf-spans-physical-states-level-two--via-lean（新，
+  依派活任务交付物 #1）与任何日后想引用这条纯计数结果的人直接引用，而不必经过
+  弦论侧一整套记号。
+
+  【查重】2026-09-12 跑 `uv run stringgraph search "partition difference"`、
+  `search pascal`、`search level-two-partition` 均无命中；`search euler-partition`
+  命中的是 math.euler-partition-generating-function（生成函数恒等式，对象不同——那张卡
+  断言的是形式幂级数恒等式 Σp(n)q^n · ∏(1−q^k) = 1，本卡是一个初等的二项式系数差恒等式，
+  两者不重叠、不可合并）。
+
+  【与 worldsheet 侧三张卡的分工，本卡不建那三条边】
+  本卡是纯数学输入（tag `math-input`），**不** `depends_on` 或 `uses` 任何 worldsheet 节点，
+  也不被本卡自身要求引用弦论对象——按【本节点明确不断言】(a) 的边界。它被
+  worldsheet.ddf-spans-physical-states-level-two--via-lean 的 `depends_on` 引用（该推导
+  的 `finrank_towerPhys_inf_towerBigrade_two_le` 直接调用 `levelTwo_count_identity`），
+  那条边记在那份推导文件里，不在本卡记账。
+
+  【两条单侧计数公式为何只在 notes 里核实，不写进【断言】的机检状态】
+  本卡【断言】为可读性写出了 p_{D−1}(2)、p_{D−2}(2) 的两条显式公式，但如 sources note
+  所记，Lean 侧对它们的支持只到"上界"与"下界"两条不等式，不是各自独立的等式定理；
+  真正被直接证明的是**差**（`levelTwo_count_identity`）。这不影响本卡的 formalized 状态
+  （本卡的核心断言就是那条差恒等式，两条单侧公式是给出差恒等式之前的记法铺垫，
+  其真值由上下界夹逼保证，是纯粹的自然数算术，不依赖任何未证声明），但审计时应
+  注意这一层区别，不要误以为 Lean 里存在两条独立命名的"p_m(2) = …"定理。
+author: curator
+created: "2026-09-12"
