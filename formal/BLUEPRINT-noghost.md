@@ -1408,4 +1408,80 @@ PR4 落在 `NoGhost/SpuriousElimination.lean`（85 条声明，约 1300 行，`c
 本节只处理 (B-26)：`ddf-spans` 在 PR0–PR4 落地后**唯一**剩下的缺口，也是整条无鬼定理链上
 `D = 26` **唯一**进入的地方。目标是给出一条 Lean 可写的路线，而不是证明。
 
-（撰写中。）
+
+
+写这份计划时做了三件 §B′ 没做的事：(1) 把 `N = 2` 的 26 个零态**从头手算一遍**，
+定位出 `D = 26` 唯一进入的那个方程；(2) 对候选路线 (a)(b)(c) 逐条做对抗性检查，
+其中两条广为流传的说法被**证伪**（见 B″.3、B″.5）；(3) 找到一条把 (B-26) 之外的
+**全部**剩余缺口（`§B′.9` 第 2 条的线性无关、`conjFreeSlice ⊓ spurious = ⊥`、
+`towerKerK ⊓ V_N = conjFreeSlice` 的 `⊆` 半边）一次关掉的 `D`-无关引理。
+
+> **取证等级**：本节所有数值与代数式都是**手算**（2026-09-12，formalizer），**未经 Lean 校验**，
+> 除了两处例外：`kacDet2` 的定义逐字取自 `Virasoro/FockFreeLowLevel.lean:292`，
+> `Fock.pairing_levelTwoScalar_physical` 的判别式取自 `formal/TODO.md` 的
+> `negative-norm-above-26` 条目。凡是手算，下文一律标 ⟨手算⟩。
+> 任何据此动手的人，**第一步应当是把 B″.2 的 `N = 2` 账在 Lean 里复算一遍**（PR5b 的 `N = 2` 特例，
+> 见 B″.7），那是整条路线最便宜的证伪点。
+
+### B″.0 结论先行
+
+1. **推荐路线是 (b) 的一个加强版**，记作 **(b′)**：先证一条 `D`-无关的
+   **「Virasoro × 光锥」PBW 基定理**（每个 level 片的基是 `{L_{−λ} · (b̃-free 光锥单项式)}`），
+   再在其上做零态构造。理由：这条基定理**同时**给出 `dim S_N`、`dim H_N` 的**精确值**
+   （而不只是 PR4 的不等式）、关掉 §B′.9 第 2 条、并且是 Fock 模在 `Vir⁻` 下自由
+   （FGZ Prop 2.6(i) / LZ Cor 2.19(iii)）的一个**不经 Kac 行列式**的证明。
+   §B.2 判死的是「走 FGZ 的路证自由性」，不是「自由性本身没用」——本节主张自由性**极其有用**，
+   而且 PR3/PR4 已经把它的全部机器造好了。
+2. **`D = 26` 唯一进入的方程是**（⟨手算⟩，见 B″.2）：
+
+   ```
+   L_2 (2 L_{-2} + 3 L_{-1}^2) φ = (c - 26) · φ        对满足 L_0 φ = -φ、L_1 φ = L_2 φ = 0 的 φ
+   ```
+
+   等价地，就是本仓库已有的 `kacDet2` 在质壳 `h = 1 − 2` 上的值：
+
+   ```lean
+   theorem kacDet2_massShell_two (c : R) : kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
+   -- 证明：rw [kacDet2]; ring        （`kacDet2 c h = 2h(16h² + 2h(c−5) + c)`）
+   ```
+
+   这比现有的 `kacDet2_massShell_26 : kacDet2 (26:R) ((1:R) - 2) = 0` **强**：
+   它把「在 26 处为零」升级成「零点**只有** 26」，是整条链上唯一一处能写下 `D − 26 = 0` 的地方。
+   **建议无论走哪条路线都先把这一行提交**——它是 (B-26) 的临界性的最小机检见证。
+3. **候选 (c)（特征标 / 分拆恒等式）不是一条路线，应当否决。** §B′.8 已证「计数一步永远看不见 26」，
+   本节给出更强的版本：**(B-26) 不可能由任何维数记账推出**，因为所有维数恒等式在
+   `dim Z_N` 这一项上是循环的（B″.5 的两行证明）。分拆恒等式在本路线里只以
+   **`Finsupp` 按行拆分的双射**出现（把 `d` 拆成「`b̃` 行」+「其余」），
+   `Math/PartitionCard.lean` 的 `p(m)` 数值**一次都不需要**。
+4. **本计划不关闭 (B-26)。** 它把 (B-26) 归约到一条 B″.11 写明的、单一的、可精确陈述的障碍
+   （两族零态在 `N ≥ 5` 处的重叠维数恰好是 Euler 五边形数的系数），
+   并顺带关掉 PR4 遗留的全部非-(B-26) 缺口。
+
+### B″.1 目标、已有输入、以及一条重要的记号约定
+
+固定 `D`、域 `K`（特征零）、`η`、`a`、`b`、横向标架 `Ε`、光锥标架 `F : DDFLightConeFrame η a b`。
+沿用 §B′.2 的记号 `V_N`、`H_N`、`D_N`、`Z_N`，并补两个：
+
+```
+C_N  := conjFreeSlice hD F N          -- b̃-free 光锥单项式张成（PR4 已有）
+S_N  := towerSpuriousSubmodule η a b ⊓ V_N
+```
+
+**(B-26) 的目标**（§B′.3 形式 (iii)）：`D = 26` 时 `finrank Z_N ≥ p_{D−1}(N) − p_{D−2}(N)`。
+
+已有的三条输入（全部 `D`-无关、全部在 Lean 里）：
+
+* **(I1)** `towerBigrade_le_conjFreeSlice_sup_towerSpurious`：`V_N ≤ C_N ⊔ S_N`（PR4 的 β-消元）。
+* **(I2)** `towerPhys_inf_towerBigrade_eq_towerOrthComplement`：`H_N = spurious^⊥ ⊓ V_N`；
+  加 `eq_zero_of_mem_towerBigrade_of_orthogonal`（片上型无根基）。
+* **(I3)** `Fock.eq_zero_of_towerPairing_left_eq_zero`（整塔上型非退化）+
+  `finrank_towerPhys_inf_towerBigrade_le`：`dim H_N ≤ p_{D−1}(N)`。
+
+**记号约定（本节反复用到，先说清楚）**：`towerLop` 是 `towerDiag`（逐纤维），
+纤维 `j` 上用该纤维自己的动量 `p_j = towerMomentum a b j`。因此本节所有陈述
+**本质上都是单个 `Fock D K` 上的陈述**，只是动量取成 `p_j`；
+唯一需要的关于 `p_j` 的事实是 `dotVec η b (towerMomentum a b j) = 1`
+（`dotVec_towerMomentum_right_of_isotropic`，对一切 `j` 成立）。
+⇒ **本节的引理应当在 `Fock` 层以「动量 `p`，附带 `b·p = 1`」的形式陈述，塔版是推论。**
+这一条是把 PR4 从反对角线推广到任意 rung 的正确做法（PR4 的 `conjFreeSlice`
+把 rung 写死成 `-(N:ℤ)`，见 B″.11 第 3 条的成本）。
