@@ -196,4 +196,114 @@ lemma conjFree_le_lcBound (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ
 
 end Spans
 
+/-! ### The completeness relation on contracted pairs of creation operators -/
+
+section Completeness
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- `α^{(1 at μ)}_{-n} = η_μ α^μ_{-n}`; the companion of `X_eq_lcCrea_single`, with the
+polarisation normalised to `1` instead of `η_μ` so that the two slots of a contracted pair
+can be resolved independently. -/
+lemma lcCrea_single_one (η : Fin D → R) (μ : Fin D) (n : ℕ+) :
+    lcCrea η (Pi.single μ (1 : R)) n = η μ • (X ((μ, n) : Osc D) : Fock D R) := by
+  classical
+  rw [lcCrea_def, Finset.sum_eq_single μ]
+  · rw [Pi.single_eq_same, mul_one]
+  · intro ν _ hν
+    rw [Pi.single_eq_of_ne hν, mul_zero, zero_smul]
+  · intro h
+    exact absurd (Finset.mem_univ μ) h
+
+/-- **The completeness relation in the form used below**: `∑_μ (η_μ w^μ) e_μ^{(η)} = w`, where
+`e_μ^{(η)} = Pi.single μ η_μ` is the polarisation for which `α^{e}_{-n} = α^μ_{-n}`.  Uses only
+`η_μ² = 1`. -/
+lemma sum_smul_single_eta (η : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (w : Fin D → R) :
+    ∑ μ : Fin D, (η μ * w μ) • (Pi.single μ (η μ) : Fin D → R) = w := by
+  classical
+  funext ν
+  rw [Finset.sum_apply, Finset.sum_eq_single ν]
+  · simp only [Pi.smul_apply, Pi.single_eq_same, smul_eq_mul]
+    rw [mul_comm (η ν) (w ν), mul_assoc, hη ν, mul_one]
+  · intro μ _ hμ
+    simp [Pi.single_eq_of_ne (Ne.symm hμ)]
+  · intro h
+    exact absurd (Finset.mem_univ ν) h
+
+/-- Pulling a scalar family through the (linear) polarisation slot of `lcCrea`. -/
+lemma sum_smul_lcCrea_single (η : Fin D → R) (n : ℕ+) (f : Fin D → R) :
+    ∑ μ : Fin D, f μ • lcCrea η (Pi.single μ (η μ)) n
+      = lcCrea η (∑ μ : Fin D, f μ • (Pi.single μ (η μ) : Fin D → R)) n := by
+  rw [lcCrea_sum]
+  exact Finset.sum_congr rfl fun μ _ => (lcCrea_smul η (f μ) _ n).symm
+
+/-- **The resolution of identity on a coordinate direction.**  `Pi.single μ 1` decomposed
+along `{b, b̃, ε_i}`; the coefficients come from `DDFLightConeFrame.frame_decomp_coeff`, so
+this needs no field and no dimension hypothesis. -/
+theorem DDFLightConeFrame.single_resolution (F : DDFLightConeFrame η a b) (μ : Fin D) :
+    (Pi.single μ (1 : R) : Fin D → R)
+      = (-(η μ * F.frame.conj μ)) • b + (-(η μ * b μ)) • F.frame.conj
+        + ∑ i, (η μ * F.trans.vec i μ) • F.trans.vec i := by
+  obtain ⟨lam, mu, c, hdec⟩ := F.exists_frame_decomp (Pi.single μ (1 : R))
+  obtain ⟨h1, h2, h3⟩ := F.frame_decomp_coeff hdec
+  have e1 : lam = -(η μ * F.frame.conj μ) := by
+    rw [h1, dotVec_comm, dotVec_single_left, mul_one, mul_comm (η μ)]
+  have e2 : mu = -(η μ * b μ) := by
+    rw [h2, dotVec_comm, dotVec_single_left, mul_one, mul_comm (η μ)]
+  have e3 : ∀ j, c j = η μ * F.trans.vec j μ := by
+    intro j
+    rw [h3 j, dotVec_comm, dotVec_single_left, mul_one]
+  rw [← e1, ← e2]
+  rw [hdec]
+  congr 1
+  exact Finset.sum_congr rfl fun j _ => by rw [e3 j]
+
+/-- **The light-cone form of a contracted pair of creation operators**
+`∑_μ η_μ α^μ_{-r} α^μ_{-s} = -α^b_{-r}α^{b̃}_{-s} - α^{b̃}_{-r}α^b_{-s} + ∑_i α^{ε_i}_{-r}α^{ε_i}_{-s}`
+(blueprint §B′.4's "bilinearisation of `resolution`", at the level of creation operators).
+
+This is the only place where the metric contraction is traded for the frame; everything
+downstream is bookkeeping on the resulting monomials.  No field, no `2 ≤ D`, no `D = 26`. -/
+theorem oscPair_eq_lightCone (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1)
+    (r s : ℕ+) :
+    (∑ μ : Fin D, η μ • ((X ((μ, r) : Osc D) : Fock D R) * X ((μ, s) : Osc D)))
+      = -(lcCrea η b r * lcCrea η F.frame.conj s)
+        - (lcCrea η F.frame.conj r * lcCrea η b s)
+        + ∑ i, lcCrea η (F.trans.vec i) r * lcCrea η (F.trans.vec i) s := by
+  classical
+  have hterm : ∀ μ : Fin D, η μ • ((X ((μ, r) : Osc D) : Fock D R) * X ((μ, s) : Osc D))
+      = lcCrea η (Pi.single μ (1 : R)) r * lcCrea η (Pi.single μ (η μ)) s := by
+    intro μ
+    rw [lcCrea_single_one, ← X_eq_lcCrea_single η hη μ s, smul_mul_assoc]
+  rw [Finset.sum_congr rfl fun μ _ => hterm μ]
+  have hres : ∀ μ : Fin D, lcCrea η (Pi.single μ (1 : R)) r
+      = (-(η μ * F.frame.conj μ)) • lcCrea η b r + (-(η μ * b μ)) • lcCrea η F.frame.conj r
+        + ∑ i, (η μ * F.trans.vec i μ) • lcCrea η (F.trans.vec i) r := by
+    intro μ
+    conv_lhs => rw [F.single_resolution μ]
+    rw [lcCrea_add, lcCrea_add, lcCrea_smul, lcCrea_smul, lcCrea_sum]
+    congr 1
+    exact Finset.sum_congr rfl fun i _ => lcCrea_smul η _ _ r
+  rw [Finset.sum_congr rfl fun μ _ => by rw [hres μ]]
+  have key : ∀ w : Fin D → R,
+      ∑ μ : Fin D, (η μ * w μ) • lcCrea η (Pi.single μ (η μ)) s = lcCrea η w s := by
+    intro w
+    rw [sum_smul_lcCrea_single, sum_smul_single_eta η hη w]
+  have pull : ∀ (A : Fock D R) (c : Fin D → R) (Y : Fin D → Fock D R),
+      (∑ μ : Fin D, c μ • (A * Y μ)) = A * ∑ μ : Fin D, c μ • Y μ := by
+    intro A c Y
+    rw [Finset.mul_sum]
+    exact Finset.sum_congr rfl fun μ _ => (mul_smul_comm _ _ _).symm
+  have hneg : ∀ w : Fin D → R,
+      ∑ μ : Fin D, (-(η μ * w μ)) • lcCrea η (Pi.single μ (η μ)) s = -lcCrea η w s := by
+    intro w
+    rw [← key w, ← Finset.sum_neg_distrib]
+    exact Finset.sum_congr rfl fun μ _ => by rw [neg_smul]
+  simp only [add_mul, Finset.sum_add_distrib, smul_mul_assoc, Finset.sum_mul]
+  rw [pull, pull, hneg, hneg, Finset.sum_comm,
+    Finset.sum_congr rfl fun i (_ : i ∈ Finset.univ) => by rw [pull, key (F.trans.vec i)]]
+  ring
+
+end Completeness
+
 end StringFormal.NoGhost
