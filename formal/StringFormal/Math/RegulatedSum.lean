@@ -105,4 +105,31 @@ theorem tsum_nat_mul_exp_neg_mul_eq_inv_sinh_sq {u : ℝ} (hu : 0 < u) :
     ∑' n : ℕ, (n : ℝ) * exp (-(u * n)) = 1 / (4 * sinh (u / 2) ^ 2) := by
   rw [tsum_nat_mul_exp_neg_mul hu, exp_neg_div_one_sub_sq_eq_inv_sinh_sq hu.ne']
 
+/-! ### A third-order Taylor bound for `sinh` -/
+
+/-- **`|sinh x - (x + x³/6)| ≤ |x|⁵/100` for `|x| ≤ 1`.**
+
+Mathlib's `Real.exp_bound` at `n = 5` bounds `exp y` against its degree-`4` Taylor polynomial by
+`|y|⁵·(6/(5!·5)) = |y|⁵/100`.  Applying it at `y = x` and `y = -x` and halving the difference,
+the *even* Taylor terms cancel and the degree-`4` polynomial contributes exactly `x + x³/6`, so
+the same constant `1/100` bounds the `sinh` error. -/
+theorem abs_sinh_sub_taylor_le {x : ℝ} (hx : |x| ≤ 1) :
+    |sinh x - (x + x ^ 3 / 6)| ≤ |x| ^ 5 / 100 := by
+  have hsum : ∀ y : ℝ, ∑ m ∈ Finset.range 5, y ^ m / (Nat.factorial m : ℝ)
+      = 1 + y + y ^ 2 / 2 + y ^ 3 / 6 + y ^ 4 / 24 := by
+    intro y
+    simp [Finset.sum_range_succ, Nat.factorial]
+  have h1 := Real.exp_bound hx (n := 5) (by norm_num)
+  have h2 := Real.exp_bound (x := -x) (by rwa [abs_neg]) (n := 5) (by norm_num)
+  rw [hsum] at h1
+  rw [hsum, abs_neg] at h2
+  have hneg : (1 : ℝ) + (-x) + (-x) ^ 2 / 2 + (-x) ^ 3 / 6 + (-x) ^ 4 / 24
+      = 1 - x + x ^ 2 / 2 - x ^ 3 / 6 + x ^ 4 / 24 := by ring
+  rw [hneg] at h2
+  norm_num [Nat.factorial] at h1 h2
+  obtain ⟨h1l, h1r⟩ := abs_le.mp h1
+  obtain ⟨h2l, h2r⟩ := abs_le.mp h2
+  rw [Real.sinh_eq, abs_le]
+  constructor <;> linarith
+
 end StringFormal.RegulatedSum
