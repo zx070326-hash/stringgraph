@@ -33,11 +33,12 @@ step in this file.
 
 * `csqrt_neg_I_mul` : `√(−i z) = (√i)⁻¹ √z` for `0 < z.im` (principal branch).
 * `eta_neg_inv` : `η(−z⁻¹) = (−i z)^{1/2} · η(z)` for `0 < z.im` — the graph statement verbatim.
-* `eta_S` : the same for `τ : ℍ`.
+* `eta_S` : the same for `τ : ℍ`; `eta_modular_S_smul` : the same for the action of
+  `ModularGroup.S` on `ℍ`.
 * `norm_eta_neg_inv_sq`, `norm_eta_neg_inv_pow_four` : `|η(−1/τ)|⁴ = |τ|² |η(τ)|⁴`.
 * `im_mul_norm_eta_pow_four_S_invariant` : `Im(−1/τ) · |η(−1/τ)|⁴ = Im τ · |η(τ)|⁴`, i.e. the
   `S`-invariance of `τ₂ |η(τ)|⁴` — the form in which the transformation is used downstream
-  (one-loop modular invariance).
+  (one-loop modular invariance); `im_mul_norm_eta_pow_four_modular_S_smul` is the `ℍ` version.
 
 ## What is *not* here
 
@@ -95,6 +96,14 @@ theorem eta_S (τ : UpperHalfPlane) :
     ModularForm.eta (-(τ : ℂ)⁻¹) = (-I * (τ : ℂ)) ^ ((1 : ℂ) / 2) * ModularForm.eta (τ : ℂ) :=
   eta_neg_inv τ.im_pos
 
+/-- The same, phrased with the modular group acting on `ℍ`: `η(S · τ) = (−iτ)^{1/2} η(τ)`.
+This is the form that plugs into `worldsheet.modular-group-generated-by-s-and-t`. -/
+theorem eta_modular_S_smul (τ : UpperHalfPlane) :
+    ModularForm.eta ((ModularGroup.S • τ : UpperHalfPlane) : ℂ)
+      = (-I * (τ : ℂ)) ^ ((1 : ℂ) / 2) * ModularForm.eta (τ : ℂ) := by
+  rw [UpperHalfPlane.modular_S_smul]
+  simpa [inv_neg] using eta_S τ
+
 /-- The square of the principal square root. -/
 private lemma csqrt_sq {w : ℂ} (hw : w ≠ 0) : Complex.sqrt w ^ 2 = w := by
   rw [sqrt_eq_exp hw, ← Complex.exp_nsmul]
@@ -136,5 +145,13 @@ theorem im_mul_norm_eta_pow_four_S_invariant {z : ℂ} (hz : 0 < z.im) :
   have hnorm : ‖z‖ ≠ 0 := norm_ne_zero_iff.mpr hz0
   rw [him, norm_eta_neg_inv_pow_four hz]
   field_simp
+
+/-- `S`-invariance of `τ₂ |η(τ)|⁴`, phrased with the modular group acting on `ℍ`. -/
+theorem im_mul_norm_eta_pow_four_modular_S_smul (τ : UpperHalfPlane) :
+    (ModularGroup.S • τ).im * ‖ModularForm.eta ((ModularGroup.S • τ : UpperHalfPlane) : ℂ)‖ ^ 4
+      = τ.im * ‖ModularForm.eta (τ : ℂ)‖ ^ 4 := by
+  rw [UpperHalfPlane.modular_S_smul]
+  simp only [UpperHalfPlane.mk_im, inv_neg]
+  exact im_mul_norm_eta_pow_four_S_invariant τ.im_pos
 
 end StringFormal.DedekindEta
