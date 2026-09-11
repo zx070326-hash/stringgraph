@@ -12,6 +12,7 @@ import StringFormal.Virasoro.DescendantGrading
 import StringFormal.Virasoro.Shapovalov
 import StringFormal.Virasoro.ShapovalovLevelThree
 import StringFormal.Virasoro.ShapovalovLevelFour
+import StringFormal.Virasoro.GenericIndependence
 import StringFormal.NoGhost.Statement
 import StringFormal.NoGhost.Fock
 import StringFormal.NoGhost.Sugawara
