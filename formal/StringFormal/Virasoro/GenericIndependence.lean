@@ -80,4 +80,50 @@ theorem linearIndependent_of_gram_det_ne_zero [NoZeroDivisors R] (B : M →ₗ[R
 
 end GramIndependence
 
+namespace Virasoro
+
+/-! ### Level 2 -/
+
+section Level2
+
+variable (R : Type*) [CommRing R] [Algebra ℚ R] (c h : R)
+
+/-- The two standard level-2 descendants `L₋₂|c,h⟩`, `L₋₁²|c,h⟩` as a family indexed by
+`Fin 2`, one entry per composition (equivalently, per partition) of `2`. -/
+noncomputable def descFamily2 : Fin 2 → VermaModule R c h :=
+  ![desc2 R c h, desc11 R c h]
+
+variable {R c h}
+variable {B : VermaModule R c h →ₗ[R] VermaModule R c h →ₗ[R] R}
+
+/-- The `2 × 2` Gram determinant of `descFamily2` is the level-2 Kac polynomial
+`2h(16h² + 2h(c-5) + c)`.  Restatement of `IsContravariant.gram_level_two_det` with the
+matrix packaged as `gramMatrix`. -/
+theorem IsContravariant.gram_det_descFamily2 (hB : IsContravariant R c h B)
+    (hB1 : B (hwv R c h) (hwv R c h) = 1) :
+    (gramMatrix B (descFamily2 R c h)).det
+      = 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) := by
+  rw [Matrix.det_fin_two]
+  simp only [gramMatrix_apply, descFamily2, Matrix.cons_val_zero, Matrix.cons_val_one]
+  exact hB.gram_level_two_det hB1
+
+/-- **Generic PBW at level 2.**  If the level-2 Kac polynomial `2h(16h² + 2h(c-5) + c)` is
+nonzero, then `L₋₂|c,h⟩` and `L₋₁²|c,h⟩` are linearly independent, so `dim V₂ = 2 = p(2)`.
+
+The hypothesis is a nonvanishing *polynomial* in `(c,h)`, hence holds at generic `(c,h)`; it
+fails exactly on the level-2 Kac locus (`h = 0` or `h = h₁₂, h₂₁`), where these two vectors may
+still be independent but the Shapovalov form degenerates.  This is a *substitute* for the
+linear-independence half of PBW, not a proof of it: it assumes a normalised contravariant form
+exists, which is equivalent to `hwv ≠ 0` (`exists_isContravariant_iff_hwv_ne_zero`). -/
+theorem IsContravariant.linearIndependent_descFamily2 [NoZeroDivisors R]
+    (hB : IsContravariant R c h B) (hB1 : B (hwv R c h) (hwv R c h) = 1)
+    (hdet : 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) ≠ 0) :
+    LinearIndependent R (descFamily2 R c h) :=
+  linearIndependent_of_gram_det_ne_zero B _ (by
+    rw [hB.gram_det_descFamily2 hB1]; exact hdet)
+
+end Level2
+
+end Virasoro
+
 end StringFormal
