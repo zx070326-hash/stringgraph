@@ -1,0 +1,32 @@
+id: math.riemann-zeta-at-minus-one--via-lean
+target: math.riemann-zeta-at-minus-one
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.riemannZeta_neg_one"
+    note: |
+      本仓库，提交 62721f1，并入 main 经 9889711；Lean 4 + Mathlib v4.33.1。机检，公理集合
+      应为标准三条（propext、Classical.choice、Quot.sound）。本轮未独立重跑 check-axioms
+      （worktree 无 .lake 构建），lead 合并前按根 CLAUDE.md 重跑覆盖。
+summary: |
+  机器检查。目标卡的整条陈述就是 Lean 声明 `riemannZeta_neg_one : riemannZeta (-1) = -1/12`
+  的逐字翻译（ζ 即 Mathlib 的 `riemannZeta : ℂ → ℂ`，其在 Re s>1 上是 Σ n^{-s}、经亚纯延拓
+  到 ℂ\{1} 的标准定义——Mathlib 侧这条定义本身未被本图复述，只承诺其在同一次 lake build
+  里通过审计）。证明是 Mathlib 通式 `riemannZeta_neg_nat_eq_bernoulli` 在 k=1 处的特化 +
+  `bernoulli_two` 数值代入，全程无 sorry。
+gaps:
+  - |
+    **本轮未独立重跑 `lake build` / `check-axioms`**：worktree 无 `.lake/` 构建产物，
+    复制主仓库产物超出本任务范围；声明已在合并到 main 的提交（9889711）里，依 CLAUDE.md
+    的合并纪律，lead 合并含 formal/ 改动的分支前必跑 check-axioms。
+  - |
+    **Mathlib 对 riemannZeta 的定义与其亚纯延拓的证明本图未复核**：本卡与本推导只承诺
+    「在同一次 lake build 里，本声明无 sorry、公理集合是标准三条」，不为 Mathlib 的
+    ζ 函数理论本身建节点或审计证明，按 stringformal-2026 条目的证据标准。
+notes: |
+  由 curator（zeta-wire）于 2026-09-11 建立，是新卡 math.riemann-zeta-at-minus-one
+  的唯一推导。
+author: curator-zeta-wire
+created: "2026-09-11"

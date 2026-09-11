@@ -1,0 +1,67 @@
+id: math.riemann-zeta-at-minus-one
+kind: proposition
+title: 黎曼 ζ 函数在 s = -1 处的值：ζ(-1) = -1/12
+statement: |
+  设 ζ : C \ {1} → C 为黎曼 ζ 函数：在 Re s > 1 上由 ζ(s) = Σ_{n≥1} n^{-s} 定义，
+  经亚纯延拓到 C \ {1}（s = 1 处单极点，留数 1）。则
+    ζ(-1) = -1/12.
+
+  这是**解析延拓**意义下的一个具体数值。它**不是**发散级数 Σ_{n≥1} n 按通常求和意义
+  赋予的值（该级数本身发散，"Σ n" 只是记号）；把 ζ(-1) 的这一数值等同于某个物理量
+  （如弦论中横向振子零点能的正规化处方），是另一个命题的内容，
+  见 worldsheet.zeta-regularized-sum-of-integers。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Bridge.riemannZeta_neg_one
+  lean_file: StringFormal/Math/MathlibBridges.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean :: StringFormal.Bridge.riemannZeta_neg_one"
+    note: |
+      本仓库，提交 62721f1（"formal: bridge riemannZeta(-1) = -1/12 and A = ((D-2)/2) zeta(-1)
+      = -(D-2)/24"），并入 main 经 9889711（"Merge branch 'agent/formalizer/zeta-bridge'"）；
+      Lean 4 + Mathlib v4.33.1。声明全文：
+
+          theorem riemannZeta_neg_one : riemannZeta (-1) = -1 / 12 := by
+            have h := riemannZeta_neg_nat_eq_bernoulli 1
+            rw [Nat.cast_one] at h
+            rw [h]
+            norm_num [bernoulli_two]
+
+      桥层对 Mathlib 通式 `riemannZeta_neg_nat_eq_bernoulli` 在 k=1 处的特化：
+      ζ(-1) = (-1)^1 · B₂ / 2 = -(1/6)/2 = -1/12（B₂ = bernoulli 2 = 1/6）。
+      与本卡正文逐字对应：`riemannZeta (-1) = -1 / 12`。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/MathlibBridges.lean 文件头 docstring \"### ζ(−1) = −1/12\"（RiemannZeta 节）"
+    note: |
+      **诚实归属**：数学内容 100% 是 Mathlib 的。Mathlib（v4.33.1，
+      `Mathlib/NumberTheory/LSeries/HurwitzZetaValues.lean`）给出一般公式
+      `riemannZeta_neg_nat_eq_bernoulli`，但**没有具名的 ζ(−1)**（该文件只具名
+      `riemannZeta_zero` 与平凡零点 `riemannZeta_neg_two_mul_nat_add_one`）；
+      本卡对应的桥层定理就是把通式在 k=1 处的特化钉成一条可引用的具名声明，按
+      formal/CLAUDE.md「桥层规则」，数学内容仍 100% 是 Mathlib 的。
+      ⚠ **本卡不触及**「Σ n = ζ(-1)」这一物理正规化处方本身（那是
+      worldsheet.zeta-regularized-sum-of-integers 的内容），也不触及
+      worldsheet.regulated-sum-laurent-expansion（指数截断和的 Laurent 常数项，
+      是**另一条**关于**不同对象**的定理，二者只是数值恰好相同，见该卡笔记）。
+tags: [math, zeta-function, analytic-continuation, formalized]
+notes: |
+  由 curator（zeta-wire）于 2026-09-11 从 formalizer 分支 agent/formalizer/zeta-bridge
+  （已并入 main，9889711）的 `formal/StringFormal/Math/MathlibBridges.lean` RiemannZeta 节新建。
+  建卡前查重：`uv run stringgraph search zeta` 与 `search riemann`，图中此前没有任何
+  黎曼 ζ 函数的节点（只有 worldsheet.zeta-regularized-sum-of-integers 提到 ζ 函数
+  作为正规化处方的等价表述，但没有 ζ(-1) 本身的数学卡）。
+
+  **与相邻两卡的关系（三者都在 -1/12 附近，但是三个不同的命题）**：
+  1. 本卡：ζ(-1) = -1/12，解析延拓的值。纯数学，formalized。
+  2. worldsheet.regulated-sum-laurent-expansion（及其窄化
+     worldsheet.regulated-sum-limit-minus-one-twelfth）：收敛级数
+     Σ_{n≥1} n e^{-un} 的 Laurent/极限常数项是 -1/12。纯数学，是**另一个**定理
+     （不同的对象——一个是解析延拓，一个是收敛级数的渐近展开），只是数值巧合相同。
+  3. worldsheet.zeta-regularized-sum-of-integers：物理正规化处方，把发散和
+     "Σ_{n≥1} n" **赋值**为 -1/12（可用本卡或第 2 条的任一个作为「赋值依据」），
+     physical-argument，因为「这个有限部分就是物理零点能」这一步没有证明。
+
+  本卡与第 2 条互不依赖（各自独立证明，互不引用），是图上刻意保持分离的两个数学事实。
+author: curator-zeta-wire
+created: "2026-09-11"

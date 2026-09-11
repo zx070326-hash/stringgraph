@@ -1,0 +1,55 @@
+id: worldsheet.regulated-sum-laurent-expansion--via-lean
+target: worldsheet.regulated-sum-laurent-expansion
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.regulated-sum-limit-minus-one-twelfth
+    inferred: false
+    note: |
+      供给本推导「无 1/u 项、常数项恰为 −1/12」这半的机检来源（Lean 声明
+      `tendsto_regulatedSum_sub_invSq`）。本推导在此基础上补一步初等分析，把该极限升级
+      为 O(u²) 阶的渐近展开（见 summary），这一步本身未被机检，故本推导 own status
+      封顶在 rigorous，不是 formalized。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/RegulatedSum.lean :: StringFormal.RegulatedSum.abs_shiftedSinh_add_le, tendsto_invSinhSq_sub_invSq"
+    note: |
+      本仓库，提交 1b95be8 / 4a7d5d5，并入 main 经 9889711。`abs_shiftedSinh_add_le` 给出
+      量化界 |(u − 2 sinh(u/2))/u³ + 1/24| ≤ u²/1600（对 0 < |u| ≤ 2），这正是把 sinh 的
+      三阶 Taylor 展开的下一阶余项量化到 O(u²) 所需的估计；`tendsto_invSinhSq_sub_invSq`
+      把它组装成 1/(4 sinh²(u/2)) − 1/u² → −1/12 的极限。**注意**：这两条给出的是一条
+      量化逐点界与一个极限，Lean 文件**没有**把它们组装成一条 `Asymptotics.IsBigO`
+      形式的「f(u) − 1/u² − (−1/12) = O(u²)」陈述（模块文档字符串 "What is *not* here"
+      明说 "Upgrading to Asymptotics.IsBigO needs the next order of the sinh expansion;
+      not done"）。本推导把这一步补全，但补全的部分是纸面而非机检。
+  - ref: polchinski-1998-v1
+    loc: "§1.3, eq. (1.3.32)（p.22，原书对同一展开的出处；不承载本推导的论证，语境同 --via-geometric-series 的同一条 source）"
+summary: |
+  由 worldsheet.regulated-sum-limit-minus-one-twelfth（机检）得 f(u) − 1/u² → −1/12，
+  即发散部分恰为 1/u²、常数项恰为 −1/12。用 Lean 文件里已机检的量化界
+  `abs_shiftedSinh_add_le`（|(u − 2 sinh(u/2))/u³ + 1/24| ≤ u²/1600）沿同一条因式分解
+  1/(4s²) − 1/u² = [(u−2s)/u³]·[1+2s/u]·[(2s/u)⁻¹]²（s = sinh(u/2)）逐因子展开到下一阶——
+  [1+2s/u] 与 [(2s/u)⁻¹]² 两个因子在 u=0 处光滑且其一阶导数为零（都是 u 的偶函数），
+  Taylor 展开到二阶贡献的都是 u² 量级——得 f(u) − 1/u² − (−1/12) = O(u²)。这一步是初等
+  实分析（把已给的逐点量化界代入光滑因子的展开），在纸面上可逐步核验，但**未在 Lean
+  里组装**。
+gaps:
+  - |
+    **O(u²) 的组装本身不是机检的。** Lean 文件明确留白（"Upgrading to Asymptotics.IsBigO
+    needs the next order of the sinh expansion; not done"）；本推导给出的组装是纸面初等
+    分析，不是把本卡升为 formalized 的依据——这正是本推导 own status 停在 rigorous
+    而不是 formalized 的原因。
+  - |
+    **与 --via-geometric-series 的关系**：那条推导独立地、完全用纸面方法（几何级数求导 +
+    sinh Taylor 展开）证明了包括 O(u²) 在内的全部结论，不依赖本推导或 Lean。本推导是
+    第二条独立路线，价值在于把「无 1/u 项、常数 −1/12」这一半换成机检来源；两条推导的
+    own status 都是 rigorous，故本卡的 effective status 不因新增本推导而改变
+    （docs/STATUS_LEVELS.md：一个节点取最强的那条推导）。
+notes: |
+  由 curator（zeta-wire）于 2026-09-11 新增，用以把新并入的
+  `formal/StringFormal/Math/RegulatedSum.lean` 接入本卡。**没有把本卡或本推导标
+  formalized**：母卡正文断言 `+ O(u²)`，Lean 只证明了极限（见依赖卡
+  worldsheet.regulated-sum-limit-minus-one-twelfth 的笔记），把 O(u²) 的组装记成
+  formalized 会违反「状态只能实话实说」。
+author: curator-zeta-wire
+created: "2026-09-11"
