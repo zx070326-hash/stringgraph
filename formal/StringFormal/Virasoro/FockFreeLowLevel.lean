@@ -234,6 +234,37 @@ theorem hwv_ne_zero [Nontrivial R] (hη : ∀ μ, η μ * η μ = 1) :
     rw [← vermaToFock_hwv (hη := hη), hz, map_zero]
   exact one_ne_zero h1
 
+/-! ### The Fock form as the Shapovalov form -/
+
+/-- The Fock bilinear form pulled back to `V(D, α'k²)` along `vermaToFock`. -/
+noncomputable def fockForm (hη : ∀ μ, η μ * η μ = 1) :
+    VermaModule R (D : R) (vacuumWeight η a) →ₗ[R]
+      VermaModule R (D : R) (vacuumWeight η a) →ₗ[R] R :=
+  (pairing η).compl₁₂ (vermaToFock hη) (vermaToFock hη)
+
+@[simp] lemma fockForm_apply (x y : VermaModule R (D : R) (vacuumWeight η a)) :
+    fockForm hη x y = pairing η (vermaToFock hη x) (vermaToFock hη y) := rfl
+
+/-- **The pullback of the Fock form is contravariant**, because `L_m† = L_{-m}` on the Fock
+space (`Fock.pairing_Lop_left`) and `vermaToFock` is Virasoro-equivariant. -/
+theorem fockForm_isContravariant :
+    IsContravariant R (D : R) (vacuumWeight η a) (fockForm hη) := by
+  intro n x y
+  rw [fockForm_apply, fockForm_apply, vermaToFock_lie_lgen, vermaToFock_lie_lgen,
+    pairing_Lop_left]
+
+/-- The pullback form is normalised: `⟨|c,h⟩, |c,h⟩⟩ = ⟨|k⟩, |k⟩⟩ = 1`.  Together with
+`fockForm_isContravariant` this says the Fock form *is* the Shapovalov form of
+`V(D, α'k²)` (`StringFormal.Virasoro.eq_of_isContravariant`). -/
+@[simp] theorem fockForm_hwv_hwv :
+    fockForm hη (hwv R (D : R) (vacuumWeight η a)) (hwv R (D : R) (vacuumWeight η a)) = 1 := by
+  rw [fockForm_apply, vermaToFock_hwv, pairing_one_one]
+
+/-- Gram matrices transport along `vermaToFock` on the nose. -/
+lemma gramMatrix_vermaToFock {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (v : ι → VermaModule R (D : R) (vacuumWeight η a)) :
+    gramMatrix (pairing η) (fun i => vermaToFock hη (v i)) = gramMatrix (fockForm hη) v := rfl
+
 end Fock
 
 end StringFormal.NoGhost
