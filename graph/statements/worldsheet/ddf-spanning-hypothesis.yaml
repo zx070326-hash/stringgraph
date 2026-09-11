@@ -219,5 +219,24 @@ notes: |
   下界问题，只是 N 越大种子分拆越多。
   ⚠ **本条不改变本卡的 effective 状态**（本卡依旧无推导，链条现状不变），只精确记录
   剩余义务的形状。
+
+  【2026-09-12（后续）：N ≤ 2 现已关闭；N ≥ 3 仍完全开放（curator，分支
+  agent/curator/b26-two-wire，依派活任务交付物 #4 part 2；只加 notes，本卡 status/
+  effective 不变，本卡仍无推导）】
+  上面【已证片】一节记录 N ≤ 1 已由 `ddfSpansOn_towerLevelLE_one`（对一切 D）关闭。
+  formal/StringFormal/NoGhost/LevelTwoCount.lean 现把 N = 2 也关闭了：
+  `ddfSpans_bigrade_neg_two_two` 给出 D = 26 时 `DDFSpansOn` 在 `towerBigrade(−2,2)` 上
+  成立（图上 worldsheet.ddf-spans-physical-states-level-two，formalized，配套
+  worldsheet.ddf-spanning-rank-inequality 的同日新 notes 记录了这一步的细节）。
+  结合 `ddfSpansOn_towerLevelLE_of_antidiagonal`（把"能级 ≤ N 整块"归约到反对角单片的
+  拼装引理，已 formalized，见上面【2026-09-11 更新】一节）：
+  **N ≤ 2 整块（一切 rung，D = 26）现已由已 formalized 的结果闭合**。
+  ⚠ **N ≥ 3 完全未动**：本卡等价于"对每个 N ≥ 2，单片 (−N,N) 上的张成"
+  （见上面【2026-09-11 更新】一节），N = 2 只是其中一个实例；
+  worldsheet.ddf-spanning-rank-inequality 的新 notes 记录的"N≥5 起两族零态重叠"
+  的 Euler 五边形数障碍完全不受 N=2 的关闭影响。**本卡 effective 依旧 open**：
+  本卡仍无推导，链条现状（【链条现状】一节列出的三个 ⟹）不变，唯一未证环节
+  worldsheet.ddf-spanning-rank-inequality 依旧对**一般 N**开放，只是 N=2 这一个
+  具体实例现在有了独立的机检证据。
 author: curator
 created: "2026-09-11"

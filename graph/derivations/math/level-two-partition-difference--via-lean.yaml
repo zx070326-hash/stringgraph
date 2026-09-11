@@ -1,0 +1,57 @@
+id: math.level-two-partition-difference--via-lean
+target: math.level-two-partition-difference
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelTwoCount.lean :: StringFormal.NoGhost.levelTwo_count_identity
+      （section Cardinalities，约第 465 行起）
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。**curator 未自行重跑 `lake build` 与
+      `check-axioms`**；本分支只改 graph/，合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。这是本推导 status: formalized 的依据。
+summary: |
+  **纯自然数算术证明，不依赖任何图上其它节点**（`depends_on` 为空数组是刻意的，不是遗漏——
+  本卡 statement 的【明确不断言】(d) 已声明这是 Pascal 递推的直接实例，证明不需要任何
+  外部引理）。
+
+  **第 1 步**：把 D 写成 D = m + 2（hD : 2 ≤ D 保证 m := D − 2 : N 良定义）。
+
+  **第 2 步**：Pascal 恒等式 `Nat.choose_succ_succ (m+1) 1 : C(m+2,2) = C(m+1,1) + C(m+1,2)`
+  （Mathlib 内置），代入 `Nat.choose_one_right : C(m+1,1) = m+1` 化简右端第一项。
+
+  **第 3 步**：用 D = m+2 把 D−1 = m+1、D−2 = m 代回目标等式两边，`omega` 收尾整理三个
+  自然数减法与加法。
+
+  证明体（逐字）：
+  ```
+  obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+  have hpascal : Nat.choose (m + 2) 2 = Nat.choose (m + 1) 1 + Nat.choose (m + 1) 2 :=
+    Nat.choose_succ_succ (m + 1) 1
+  rw [Nat.choose_one_right] at hpascal
+  have h1 : m + 2 - 1 = m + 1 := by omega
+  have h2 : m + 2 - 2 = m := by omega
+  rw [h1, h2, hpascal]
+  omega
+  ```
+
+  **结论**：目标卡的核心断言（差恒等式）与本推导 lean_decl 逐字一致，且证明**不引用任何
+  弦论对象或本图其它节点**，故 `depends_on` 为空，目标卡 effective = formalized
+  （own status 即为 formalized，无依赖可压低）。
+gaps:
+  - "**两条单侧计数公式未被独立证明为等式**：目标卡【断言】写出的
+    `p_{D−1}(2) = (D−1)+C(D,2)` 与 `p_{D−2}(2) = (D−2)+C(D−1,2)` 本身，Lean 侧只有
+    `card_conjFree_two_le`（上界）与 `card_ddfLevel_two_ge`（下界）两条不等式，未各自
+    包装成一条 `= ` 等式定理；`levelTwo_count_identity` 直接证明的是两者的**差**，
+    不经过分别证明两个等式。本推导只承载\"差恒等式\"这一条，不承载\"两条单侧公式各自成立\"
+    这件事本身（后者留在目标卡 sources note 里说明其真值来自上下界夹逼）。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：本 worktree 无构建缓存
+    （见 formal/CLAUDE.md「在 worktree 里构建」一节）；结论基于直接读源码，未跑编译器验证。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  curator，2026-09-12，b26-two-wire。
+author: curator
+created: "2026-09-12"

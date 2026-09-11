@@ -235,5 +235,29 @@ notes: |
   （id `a95e434cd6c263ae9`，"Lean: level-2 occupation counting (B26 2)"，工作文件
   `formal/StringFormal/NoGhost/LevelTwoCount.lean`）已在做这件事；本条 notes 写于
   2026-09-12，只描述现状（`B26 2` 仍未关闭），不重复其工作、不代其宣称已解决。
+
+  【2026-09-12（后续）：`B26 2` 现已关闭；一般 N 的 `B26 N` 仍 open（curator，分支
+  agent/curator/b26-two-wire，依派活任务交付物 #4 part 1；只加 notes，本卡 status/
+  effective 不变，本卡仍无推导）】
+  formal/StringFormal/NoGhost/LevelTwoCount.lean（合入 main，无 sorry）把上一段登记的
+  "建议插入的 level-2 occupation counting PR"做完，并额外一步到底，直接关闭了 `B26 2`：
+  **`StringFormal.NoGhost.b26_two_of_D26`** 证出 `(D:K)=26 ⟹ B26 2`（`dim(H_null ⊓ V_2) ≥ D`
+  由 D 个线性无关零态给出，`linearIndependent_nullFamilyTwo`，**独立性本身不用 D=26**；
+  `D=26` 只通过其中 1 个零态——Type-2 后代 `𝒟₂|0;p_{−2}⟩`——的物理性这一步进入，即
+  worldsheet.level-two-null-state-requires-d26 的 `descTwo_single_mem_towerNullSubmodule`）。
+  等价形式 `ddfSpans_bigrade_neg_two_two` 给出对应片上的 `DDFSpansOn`。图上新卡
+  **worldsheet.ddf-spans-physical-states-level-two**（formalized）承载这一结果。
+
+  ⚠ **这不关闭本卡（`∀N, B26 N`）**：本卡断言对**一切** N 成立，N=2 只是其中一个实例。
+  **尖锐性**（`¬B26 2` at `D ≠ 26`）**尚未证明，登记为未来工作 PR5b″**（估计 300–500 行
+  Lean，需要 (i) 证明两条内部占据数计数 `card_conjFree_two_le`/`card_ddfLevel_two_ge`
+  实际取等而非只有上下界，(ii) 一条新的 `conjFreeSlice` 独立性引理，(iii) 一个"spurious
+  Gram 矩阵秩"的计算，三者目前均不存在，此项只记账，不代表任何 agent 已认领）。
+  **一般 N（N≥3，尤其 N≥5 的重叠障碍）完全未动**：上文 (iv) 段记录的"两族零态像在
+  N≥5 处的重叠恰是 Euler 五边形数"这一问题，`B26 2` 的关闭对它没有任何推进——N=2 从不
+  落在那个问题里（N≤4 时两族零态像"恰好相等"，(iv) 段数值核对），关闭 `B26 2` 只是
+  把已知在 N≤4 成立的部分之一（N=2）从"手算 + 数值核对"升级为"机检证明"，不缩小
+  N≥5 起那个仍是零证据的一般性开放问题的范围。
+  ⇒ **本条不改变本卡的 effective 状态**：本卡依旧无推导，`∀N, B26 N` 仍是完全开放的猜想。
 author: curator
 created: "2026-09-12"

@@ -1,0 +1,108 @@
+id: worldsheet.ddf-spans-physical-states-level-two--via-lean
+target: worldsheet.ddf-spans-physical-states-level-two
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      标架对象 `F : DDFLightConeFrame η a b` 是本卡全部三条主定理
+      （`finrank_towerPhys_inf_towerBigrade_two_le`、`b26_two_of_D26`、
+      `ddfSpans_bigrade_neg_two_two`）的共同参数；证明体逐处使用其字段
+      `F.hη`、`F.trans`、`F.hba`、`F.frame.isotropic`、`F.hεa`、
+      `F.dotVec_trans_towerMomentum`，以及**关键的** `F.dotVec_self_eq_two hD`
+      （该卡【curator 手算】(ii) 的机检版本，给出 a₀ = 1，本推导第 1 步用它把
+      `invTwo K * Fock.zeroModeSq η a` 化到 `1`）。
+  - id: worldsheet.physical-slice-bounded-by-transverse-count
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`finrank_towerPhys_inf_towerBigrade_le`
+      在 `finrank_towerPhys_inf_towerBigrade_two_le` 第一行被直接调用（`h1 := …`），
+      给出 dim(H_phys ⊓ V_2) ≤ p_{D−1}(2)，与 N 无关，D-无关（该卡断言对一切 D、一切 N）。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl，是同一"侧"的维数版本**：本推导调用的是
+      `finrank_ddfSpan_inf_towerBigrade`（`SliceDim.lean`），不是该卡 formal.lean_decl
+      `ddf_gram_diagonal`（`DDFGram.lean`）。这与该卡 notes 已登记的先例一致（该卡本身
+      的 sources 已把 `finrank_ddfSpan_inf_towerBigrade` 视为"属于该卡一侧但非其
+      headline decl"，见该卡 notes【D = 26 在哪里进入】一节对 dim D_N = p_{D−2}(N)
+      的引用方式）：`finrank_ddfSpan_inf_towerBigrade` 是 Gram 矩阵对角正定这件事
+      （该卡 (1)(2)）在"张成子模的 finrank 等于占据数计数"这一步的直接推论，逻辑内容
+      与该卡不可分割，故仍挂在该卡下，只在此注明精确 decl 的差别。
+  - id: worldsheet.level-two-null-state-requires-d26
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl**：该卡 formal.lean_decl 是
+      `descTwo_mem_towerPhysSubmodule_iff`（完整的 iff）；本推导实际调用的是
+      `NullSeedsTwo.lean` 同一批引理里的 `descTwo_single_mem_towerNullSubmodule`
+      （"落在 H_null"那半，该卡 sources 已列出这是同一族 `descTwo_*` 引理之一）。
+      **这是本卡（Deliverable #1）证明链里唯一使用 `(D:K)=26` 的一步**——
+      `nullFamilyTwo_mem_towerNullSubmodule` 的 `none`（Type-2）分支正是这一调用；
+      两个 Type-1 分支不经过此依赖。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelTwoCount.lean（section B26Two 第 485-524 行，section
+      Closing 第 841-919 行）：
+      StringFormal.NoGhost.{finrank_towerPhys_inf_towerBigrade_two_le,
+      b26_two_of_finrank_towerNull, nullFamilyTwo_mem_towerNullSubmodule,
+      le_finrank_towerNullSubmodule_inf_towerBigrade_two, b26_two_of_D26,
+      ddfSpans_bigrade_neg_two_two}（目标卡 formal.lean_decl 是最后一条）；
+      内部纯计数引理 card_conjFree_two_le、card_ddfLevel_two_ge
+      （section Cardinalities，第 354-476 行，与 math.level-two-partition-difference
+      共享同一文件但不是该卡 lean_decl）；D-独立的零态族 typeOneTwo_mem_towerNullSubmodule、
+      linearIndependent_nullFamilyTwo（section Independence）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。**curator 未自行重跑 `lake build` 与
+      `check-axioms`**；本分支只改 graph/，合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。这是本推导 status: formalized 的依据。
+
+      **类型类核实**：section B26Two 与 section Closing 均声明
+      `variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
+      [Algebra ℚ K]` 与 `variable {η a b : Fin D → K}`——与目标卡【设定】的 K 逐字一致
+      （有序域），与 worldsheet.ddf-spanning-rank-inequality 记号相同的类型类环境。
+      section Cardinalities（纯计数部分）只需 `{D : ℕ}`，不涉及 K，与目标卡的域无关，
+      是本推导消费的、但不建独立 depends_on 边的两条内部引理（见下 gaps）。
+summary: |
+  三步证明，逐层对应 LevelTwoCount.lean 的 section B26Two → section Closing：
+
+  **第 1 步（D-无关的维数不等式，`finrank_towerPhys_inf_towerBigrade_two_le`）。**
+  把 worldsheet.physical-slice-bounded-by-transverse-count 的 dim H_2 ≤ p_{D−1}(2)、
+  worldsheet.transverse-ddf-fock-gram-matrix 一侧的 dim D_2 = p_{D−2}(2)
+  （`finrank_ddfSpan_inf_towerBigrade`）、math.level-two-partition-difference 的
+  p_{D−1}(2) = p_{D−2}(2) + D（`levelTwo_count_identity`）与两条内部占据数计数
+  `card_conjFree_two_le`/`card_ddfLevel_two_ge` 用 `omega` 拼成
+    dim(H_phys ⊓ V_2) ≤ dim(ddfSpan ⊓ V_2) + D 。
+  这一步对一切 D ≥ 2 成立，不用 D = 26。
+
+  **第 2 步（唯一用到 D=26 的一步，`nullFamilyTwo_mem_towerNullSubmodule` →
+  `le_finrank_towerNullSubmodule_inf_towerBigrade_two` → `b26_two_of_D26`）。**
+  在标架 F 与 `hD26 : (D:K)=26` 下，构造 D 个候选（索引
+  `Option (Option (Fin (D−2)))`）：D−2 个横向 Type-1、1 个沿 a−b̃ 的 Type-1、1 个 Type-2
+  （`𝒟₂|0;p_{−2}⟩`）。三支模式匹配核对每个候选落在 H_null ⊓ V_2 里：两支 Type-1 分支
+  调用 `typeOneTwo_mem_towerNullSubmodule`（D-无关），唯一的 `none`（Type-2）分支调用
+  worldsheet.level-two-null-state-requires-d26 的 `descTwo_single_mem_towerNullSubmodule`
+  （**本步是全链唯一消费 `(D:K)=26` 的地方**）。`linearIndependent_nullFamilyTwo`
+  （D-无关）给出这 D 个候选线性无关，`finrank_span_eq_card` + `Submodule.finrank_mono`
+  得 dim(H_null ⊓ V_2) ≥ D。与第 1 步的不等式相加得 `B26 2`（`b26_two_of_D26`）。
+
+  **第 3 步（翻译成分片张成，`ddfSpans_bigrade_neg_two_two`）。**
+  `ddfSpansOn_bigrade_of_b26`（`SliceRank.lean`，D-无关、N-无关的纯逻辑翻译引理，
+  把 `B26 N` 翻译成 `DDFSpansOn (towerBigrade (-N) N)`，不对应图上任何节点的论证内容，
+  不建 depends_on 边）应用到 `b26_two_of_D26` 的结果上，得
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-2) 2) ，
+  即目标卡断言。∎
+
+  **四条依赖全部 formalized**（含目标卡本身消费的精确 decl，非各自的 headline decl 两处，
+  已在 depends_on 逐条注明），故目标卡 effective = formalized。
+gaps:
+  - "**内部两条占据数计数引理不建 depends_on 边**：`card_conjFree_two_le`（上界 p_{D−1}(2) ≤ (D−1)+C(D,2)）与 `card_ddfLevel_two_ge`（下界 p_{D−2}(2) ≥ (D−2)+C(D−1,2) 的特化）是 LevelTwoCount.lean 本文件内部的纯计数引理，不对应图上任何既有节点（math.level-two-partition-difference 只承载两者的差 `levelTwo_count_identity`，不承载这两条单侧不等式本身，见该卡 sources note）；本推导把它们当作自身证明内容的一部分，不建独立边。"
+  - "**尖锐性未证，登记为未来工作 PR5b″**：本推导只证 D=26 ⟹ B26 2 ⟹ DDFSpansOn(V_2)，不证反方向（D≠26 时 ¬B26 2）。若要证尖锐性，估计需要：(i) 证明 conjFreeSlice 的占据数计数（`card_conjFree_two_le`/`card_ddfLevel_two_ge`）实际取等（不只是上下界），(ii) 证明 D≠26 时 26 个候选零态之外不存在额外零态方向（即 spurious 子模的 Gram 矩阵在 V_2 上的秩恰为 D 而非更多，需要显式算出 `dim(H_spur ⊓ V_2)` 并核实 `dim(H_null ⊓ V_2) = dim(H_spur ⊓ V_2 ⊓ H_phys⊥ 的余核)` 一类的秩配对论证）。估计规模 300–500 行 Lean，需要新的 `conjFreeSlice` 独立性引理与一个'spurious Gram 秩'计算，两者目前都不存在。此项只记账，不代表任何 agent 已认领。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是文件所在分支由 lead 合入 main（见 sources note）。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  curator，2026-09-12，b26-two-wire。
+author: curator
+created: "2026-09-12"
