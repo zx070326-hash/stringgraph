@@ -262,6 +262,36 @@
     不需要这个识别；识别是为了**读者把 Lean 陈述读成卡面陈述**。改 gaps 时应说「群的识别已机检，
     余下的仅是陈述搬运」，而不是说 gaps 消失。图侧改动由 curator/lead 做，本轮不碰 `graph/`。
 
+- [ ] `zeta-bridge`：「Σ_{n≥1} n → −1/12」的两半。图里这一步**已经被拆成两张卡**，
+  形式化必须尊重这个拆分：
+  - `worldsheet.regulated-sum-laurent-expansion`（rigorous，纯数学）：
+    `Σ_{n≥1} n e^{−un} = e^{−u}/(1−e^{−u})² = 1/(4 sinh²(u/2)) = 1/u² − 1/12 + O(u²)`。
+  - `worldsheet.zeta-regularized-sum-of-integers`（physical-argument）：丢掉 `1/u²`、
+    把剩下的 `−1/12` 当成物理零点能。**这一半永远不会被形式化**，Lean 里没有对应物。
+  - `worldsheet.light-cone-normal-ordering-constant`：`A = −(D−2)/24`，等于
+    `((D−2)/2) · (−1/12)` 的算术；数值部分可形式化，「为什么是 −1/12」不可。
+
+  Mathlib 侧已有的（先搜再写）：
+  - `riemannZeta_neg_nat_eq_bernoulli (k : ℕ) : ζ(−k) = (−1)^k · bernoulli (k+1) / (k+1)`
+    与 `riemannZeta_neg_nat_eq_bernoulli' (k) : ζ(−k) = −bernoulli' (k+1) / (k+1)`
+    （`Mathlib/NumberTheory/LSeries/HurwitzZetaValues.lean`）。`ζ(−1)` 是 `k = 1` 特化；
+    Mathlib **没有** `riemannZeta_neg_one` 这条具名声明（`riemannZeta_neg_two_mul_nat_add_one`
+    只给平凡零点 `ζ(−2n) = 0`）。
+  - `tsum_coe_mul_geometric_of_norm_lt_one : Σ' n, n·r^n = r/(1−r)²`
+    （`Mathlib/Analysis/SpecificLimits/Normed.lean`），正是指数截断和的闭式。
+  - `PowerSeries.mk` / `PowerSeries.invOneSubPow`：形式幂级数版 `Σ n X^n = X/(1−X)²`。
+
+  本项目要写的：
+  - `StringFormal/Math/MathlibBridges.lean` 的 `RiemannZeta` 节：`riemannZeta_neg_one`
+    与「卡 A 的算术部分」`((D−2)/2)·ζ(−1) = −(D−2)/24`。
+  - `StringFormal/Math/RegulatedSum.lean`：截断和的闭式、`1/(4 sinh²(u/2))` 形式、
+    Laurent 常数项，以及形式幂级数版。
+
+  **口径警告（写图卡时必读）**：ζ(−1) = −1/12 与 `Σ n e^{−un}` 的 Laurent 常数项 = −1/12
+  是**两条不同的定理**（解析延拓 vs. 收敛级数的渐近展开），图卡 notes 已点明。
+  形式化其中任何一条都**不能**把 `zeta-regularized-sum-of-integers` 从 physical-argument
+  升档：那张卡多主张的是「这个有限部分就是物理零点能」，Lean 里无法陈述，更无法证明。
+
 ## Lean 岛 2：Green–Schwarz 反常抵消的代数部分
 
 `StringFormal/Math/GreenSchwarzAlgebra.lean`（A1/A2/A3）与
