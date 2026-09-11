@@ -9,7 +9,7 @@ import StringFormal.Virasoro.ShapovalovLevelFour
 /-!
 # Linear independence of the low-level descendants at generic `(c,h)`
 
-Graph node: `worldsheet.verma-module-pbw-basis` (the linear-independence half, (b)),
+Graph node: `worldsheet.verma-level-basis-generic-low-levels` (formerly `worldsheet.verma-module-pbw-basis`, superseded) (the linear-independence half, (b)),
 `worldsheet.kac-determinant`.
 Convention: `conv.virasoro-standard`
   `[L_m, L_n] = (m - n) L_{m+n} + (c/12) m (m² - 1) δ_{m+n,0}`
