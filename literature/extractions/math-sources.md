@@ -7273,5 +7273,424 @@ Crossref 的 "chapter" 对应的是罗马数字大章。**所以「§8 在哪一
 - **Q50.4** `cartan_sup_iSup_rootSpace_eq_top` 的完整签名、前提、以及它与"直和"的差距。
   **这是唯一一条可能让相关节点标 `formalized` 的路，成本只有 1 次 raw 文件读。**
 
+---
+
+## 51. 三篇一手入口的登记 + ★★ 费米型 OPE–反对易子字典的严格对应物（researcher，2026-09-11）
+
+本节两件事：**§51.1** 是 `gibbons-hull-1982` / `terao-uehara-1986` / `schwarz-1972` 三条新 bib 条目的抽取记录；
+**§51.2–§51.5** 回答「费米型 OPE ↔ 反对易子字典在数学上对应哪条带编号定理」。
+
+### 51.0 结论表（先看这张）
+
+| 问题 | 结论 | 最佳来源与编号 | 等级 |
+|---|---|---|---|
+| Gibbons–Hull 的书目与摘要 | ✅ | INSPIRE；**页码 190–194，Sen 印的 "109" 是误印** | **L1**（书目+摘要）/ L0（正文） |
+| Terao–Uehara 的书目与摘要 | ✅ | INSPIRE；PLB **168** (1986) 70–74；RRK-85-32 | **L1** / L0 |
+| Schwarz 1972 的书目与摘要 | ✅ | INSPIRE；NPB **46** (1972) 61–74 | **L1** / L0 |
+| **超（费米）情形的 Borcherds 恒等式，带编号** | ✅ **有，且是 Kac 本人的免费讲义** | **Kac, arXiv:1512.00821v2, Proposition 3.1, eq. (3.21)** | **L1 全文读图** |
+| **超情形的模式版对易子/反对易子公式** | ✅ **有两条** | **同上 Corollary 3.2, eq. (3.20)**；以及更一般的 **Remark 1.5, eq. (1.32)** | **L1** |
+| 「super」在该讲义里何处被定义 | ✅ | 同上 **Remark 1.4（"Super version"）, eq. (1.16)**，p.6 | **L1** |
+| **Schottenloher Thm 10.10 有没有超版** | ❌ **没有，且作者自己说出了这一点** | 同书 **p.212 末段**（Ch.10 最后一段） | **L1 逐字** |
+| Bakalov–Kac `math/0402315` 能不能当超版来源 | ❌ **不能**（§2 全非超） | 见 §51.4 | **L1** |
+| Li–Wang `0802.0173` 的超情形 | ❌ 该文是**偶格**情形，非超 | 见 `sources.bib` 的 note | L1 |
+
+### 51.1 三篇的登记记录（对应 `sources.bib` 的三条新条目）
+
+**获取方法（三篇同一条，可复用）**：INSPIRE API
+`https://inspirehep.net/api/literature?q=j%20<Journal>,<Vol>,<起页>&fields=titles,abstracts,publication_info,dois,authors,report_numbers&size=3`。
+⚠ **摘要要逐字，必须在 prompt 里明写「拆成 ≤90 字符的编号片段、逐字复原、不要概括」** ——
+否则中介概括器会因 125 字符引用上限而改写（本轮在 Gibbons–Hull 上先踩了一次，第二次用分片法一次成功）。
+
+| bib key | 卷/页/年/DOI | 摘要 | 正文 |
+|---|---|---|---|
+| `gibbons-hull-1982` | Phys. Lett. B **109**(3) **190–194** (1982)，`10.1016/0370-2693(82)90751-1` | L1 逐字（见 bib note） | **L0** |
+| `terao-uehara-1986` | Phys. Lett. B **168**(1–2) **70–74** (1986)，`10.1016/0370-2693(86)91462-0` | L1 逐字 | **L0** |
+| `schwarz-1972` | Nucl. Phys. B **46**(1) **61–74** (1972)，`10.1016/0550-3213(72)90201-5` | L1 逐字 | **L0** |
+
+**★★ 本轮最实用的一条**：`sen-1995-bh-torus.md` E-（BPS 界那条）里抄录的 Sen 参考文献
+`[24] = G. Gibbons and C. Hull, Phys. Lett. **B109 (1982) 109**` —— **页码是 Sen 原文的误印**。
+判据两条：(a) INSPIRE `j Phys.Lett.B,109,190` 命中该文；(b) INSPIRE `j Phys.Lett.B,109,109` **零命中**。
+⇒ **图里一律写 190–194**；转述 Sen 的引用串时须注明「Sen 原文印作 109」。
+
+**三条节点级限制（每条都直接来自摘要逐字，不是推断）**，详见各自 bib note：
+1. **Gibbons–Hull 摘要不含 `M² ≥ Q_R²/2`**，语境是 N=2 超引力，无 `Q_L/Q_R` 划分 ⇒ 正文到手前只能挂「存在 Bogomolny 型下界」。
+2. **Terao–Uehara 摘要的方向是 "Nilpotency … determines"，不是 iff；且不出现数字 10 / 1/2 / 0。**
+   LZ 1989 `Prop 1.7(ii)` 写成 "iff" 是 LZ 的措辞，**不能回挂到本文**。
+3. **Schwarz 1972 自陈方法来自 Brower** ⇒ 与 `brower-1972`/`brower-friedman-1973` **不是方法独立**；
+   结论是 `d ⩽ 10`；**不得写 "Theorem N"**（1972 快报体例）。
+
+### 51.2 ★★★ 费米情形：**Kac, arXiv:1512.00821v2**（L1 全文读图）——本轮的核心收获
+
+| 项 | 值 | 等级 |
+|---|---|---|
+| 作者/标题 | Victor Kac, *Introduction to vertex algebras, Poisson vertex algebras, and integrable Hamiltonian PDE* | L1（标题页） |
+| 版本 | **arXiv:1512.00821v2 [math-ph] 30 Jan 2017**（页边条纹逐字） | L1 |
+| 来历 | INdAM 集中研究期 "Perspectives in Lie Theory"，Centro De Giorgi, Pisa，2014-12-09 – 2015-02-28 的 Lecture 1–6 | L1（摘要） |
+| 获取 | `https://arxiv.org/pdf/1512.00821` → 落盘 539.7 KB → `Read(pages=)`；**PDF 页 = 文章页** | L1 |
+| 记讲稿者 | Vidas Regelskis (Lec. 1,6)、Tamás F. Görbe (2)、Xiao He (3)、Biswajit Ransingh (4)、Laura Fedele (5,6) | L1 |
+
+**⚠ 这是"由学生记录、作者致谢并致谢修订"的讲义**，不是同行评议论文；引用时必须写明版本 v2。
+
+#### (a) **Remark 1.4「Super version」**（书/文章 **p. 6**，L1 逐字）——超设定的**唯一**声明处
+
+> "*Remark 1.4* (Super version). A vertex superalgebra `V` is a local unital `z`-superalgebra `V`, cf. Definition 1.3.
+> Namely `V` is a vector superspace
+>
+> `V = V_0̄ ⊕ V_1̄,  {0̄, 1̄} = ℤ/2ℤ`  **(1.16)**
+>
+> `a(z)b ∈ V_{α+β}((z))` if `a ∈ V_α, b ∈ V_β`, and `TV_α ⊂ V_α`, `α, β ∈ ℤ/2ℤ`. An element `a ∈ V` has
+> *parity* `p(a) = α` if `a ∈ V_α`. Finally, the locality axiom **(1.11)** is written as `(z−w)^{N_ab}[a(z),b(w)] = 0`,
+> where the commutator is understood in the "super" sense, i.e.
+>
+> `[a(z), b(w)] = a(z)b(w) − (−1)^{p(a)p(b)} b(w)a(z).`
+>
+> All the identities in the "super" case are obtained from the respective identities in the purely even case by the
+> Koszul–Quillen rule: there is a sign change if the order of two odd elements is reversed; no change otherwise.
+> **It is a general convention to drop the adjective "super" in the case of vertex superalgebras.**"
+
+**★ 这段解决了一个真实的阅读陷阱**：该讲义 **Definition 1.1/1.3 的正文里没有任何 parity**
+（"Let `V` be a vector space"，(1.11) 的 locality 也不带符号），
+**但从 §1.3 起（自由费米子 Example 1.4）到 §3 全部默认超设定**，`[·,·]` 一律是超括号。
+⇒ **凡引用该讲义的 `[·,·]`，note 里必须带上 Remark 1.4**，否则回译审计会判成"漏了符号"。
+
+#### (b) ★★★ **Corollary 3.2 的 (3.20)**（p. 18，L1 逐字）——**卡「费米型 OPE ↔ 反对易子」要的那一条**
+
+> "**Corollary 3.2** (of the proof). `Lie_V := span{a_{(n)} | a ∈ V, n ∈ ℤ} ⊂ End V` *is a subalgebra of the
+> **Lie superalgebra** `End V` with the commutator formula*
+>
+> `[a(z), b(w)] = Σ_{j≥0} (a(w)_{(j)}b)(w) ∂_w^j δ(z,w)/j!,`  **(3.18)**
+>
+> *which is equivalent to each of the following two expressions*
+>
+> `[a_{(m)}, b(z)] = Σ_{j≥0} C(m,j) (a_{(j)}b)(z) z^{m−j},`  **(3.19)**
+>
+> `[a_{(m)}, b_{(n)}] = Σ_{j≥0} C(m,j) (a_{(j)}b)_{(m+n−j)}.`  **(3.20)**
+>
+> *Moreover, `Lie_V` is a regular formal distribution Lie algebra with the data `(Lie_V, ℱ = {a(z)}_{a∈V}, ad T)`.*"
+
+（原文写 `\binom{m}{j}`，此处记作 `C(m,j)`。）
+
+**★ 为什么这就是"费米版"**：语句里明写 `End V` 是**Lie superalgebra**，
+配 Remark 1.4 的 `[a,b] = ab − (−1)^{p(a)p(b)}ba`，且 `p(a_{(m)}) = p(a)`。
+⇒ **当 `a, b` 都是奇元时，(3.20) 左端就是反对易子**：
+`{a_{(m)}, b_{(n)}} = Σ_{j≥0} C(m,j) (a_{(j)}b)_{(m+n−j)}`。
+**这一步（"两个奇元 ⇒ 反对易子"）是 Koszul–Quillen 规则的直接代入，Remark 1.4 明写了规则本身，
+但 (3.20) 下面没有把反对易子写出来** ⇒ 建卡时可标为「来源直接蕴含」，不必标 `inferred`，但要在 note 里写明这一步。
+
+#### (c) **Proposition 3.1（Borcherds identity）的 (3.21)**（p. 18，L1 逐字）——**带显式 `(−1)^{p(a)p(b)}`**
+
+> "**Proposition 3.1** (Borcherds identity). *For `n ∈ ℤ`, `a, b ∈ V`, where `V` is a vertex algebra, we have*
+>
+> `a(z)b(w) i_{z,w}(z−w)^n − (−1)^{p(a)p(b)} b(w)a(z) i_{w,z}(z−w)^n = Σ_{j∈ℤ₊} (a_{(n+j)}b)(w) ∂_w^j δ(z,w)/j!.`
+> &nbsp;&nbsp;**(3.21)**"
+
+证明只有四行（Decomposition theorem **Theorem 1.2** + `n`-th product 定义），**完整、自足**。
+⚠ **形态提醒**：(3.21) 是 Borcherds 恒等式的**两项 + δ 函数（"生成函数"）形式**，
+**不是** Gebert–Nicolai (2.36) / Borcherds 1986 (v) 那种**三项纯模式（Jacobi）形式**。
+两者等价但**逐字不同**，`loc` 不可互换。
+
+#### (d) 更上游的一条：**Remark 1.5 的 (1.32)**（p. 7，L1 逐字）——不依赖顶点代数
+
+> "*Remark 1.5.* If we have a local pair `a(z), b(z) ∈ 𝔤[[z, z^{−1}]]`, where `𝔤` is a **Lie (super)algebra**
+> (i.e. `[a(z), b(w)]` is a local formal distribution in `z` and `w`), then, by the Decomposition theorem, we have:
+> `[a(z), b(w)] = Σ_{j≥0} (a(w)_{(j)}b(w)) ∂_w^j δ(z,w)/j!,`  **(1.30)** where the sum over `j` is finite, and
+> `𝔤[[w,w^{−1}]] ∋ a(w)_{(j)}b(w) := Res (z−w)^j[a(z),b(w)]dz  (= c^j(w)).`  **(1.31)**
+> Using **(1.24)** and comparing the coefficients of `z^m w^n` on both sides of (1.30), we find
+>
+> `[a_{(m)}, b_{(n)}] = Σ_{j≥0} C(m,j) (a_{(j)}b)_{(m+n−j)},  ∀m, n ∈ ℤ.`  **(1.32)**"
+
+**⇒ (1.32) 与 (3.20) 是同一个公式在两个层次上的陈述**：
+(1.32) 只需要「`𝔤` 是李超代数 + 一对局域形式分布」，**不需要顶点代数结构**；
+(3.20) 是把它用在 `𝔤 = End V`、`ℱ = {Y(a,z)}` 上。
+**对 stringgraph 极有用**：世界面上的 `b(z), c(z)` 鬼场、`ψ^μ(z)` 费米场只要「两两局域」就落入 (1.32) 的假设，
+**不必先证明整个 `bc`/`ψ` 系统构成顶点（超）代数** —— 这比走 (3.20) 的门槛低得多。
+
+#### (e) 同一讲义里顺带取到、对本项目有用的编号（全 L1）
+
+- **Theorem 1.2（Decomposition theorem）** + (1.25)(1.26)：局域形式分布唯一分解为 δ 的导数之和。
+  = Schottenloher `Proposition 10.6` 的对应物（Schottenloher 正文明写 "due to Kac"）。
+- **Definition 1.3(a)** (1.11) 局域性；**(b)** "A *vertex algebra* is a local unital `z`-algebra."
+- **Example 1.4（Free fermion）**：`F = Λ[ξ₁, ξ₂, …]` Grassmann 超代数，`p(ξ_i) = 1̄`；
+  **(1.39) `[φ_{(m)}, φ_{(n)}] = δ_{m,−n−1}`**、**(1.40) `[φ(z), φ(w)] = δ(z,w)`**
+  （原文称 `φ(z)` 为 "**The odd quantum field**"，故这两条括号都是**反**对易子）。
+  ⇒ **这是"自由费米子世界面场"的完整数学模型，且带编号**，可直接用作图上 `bc`/`ψ` 卡的数学对应物。
+  对照 **Example 1.3（Free boson）**：(1.33)(1.34) `[a_{(m)}, a_{(n)}] = mδ_{m,−n}`、(1.35)(1.36) 局域。
+- **Proposition 3.2（Skewsymmetry）(3.24)**：`a(z)b = (−1)^{p(a)p(b)} e^{zT} b(−z)a` —— **超版斜对称**。
+- **Proposition 3.3 (3.28)**：`T` 是所有 `n`-th product 的导子。
+- **Definition 3.2（conformal vector）(3.30)**：`[L_m, L_n] = (m−n)L_{m+n} + δ_{m,−n}(m³−m)c·I_V/12`
+  —— **超设定下的 Virasoro 代数，逐字用 `(m³−m)/12`**（与 Polchinski (2.6.19) 同形，见
+  `polchinski-1998-v1.md` §12.1）。
+- **(3.32)** `[L_{(m)}, a_{(n)}] = Σ_j C(m,j)(L_{j−1}a)_{(m+n−j)}`；**(3.33)/(3.34)** 共形权与 Hamiltonian 算子；
+  **Proposition 3.5(c)** `Δ_{a_{(n)}b} = Δ_a + Δ_b − n − 1`。
+- **λ-bracket (3.29)**；§4.1「Quasicommutativity, quasiassociativity and the noncommutative Wick's formula」。
+- 作者自陈的归属（p. 6，L1）：「The Extension Theorem was proved in **[DSK06]**. In **[Kac98]** a weaker version was given.」
+  ⇒ **Kac 的书（`kac-1998`）在这份讲义里被作者本人定位为"较弱版本"**，这对选 canonical 来源有直接意义。
+
+### 51.3 ★★ Schottenloher **Theorem 10.10 没有超版**，且是作者自己说的（L1 逐字）
+
+读的是作者 LMU 主页的分章 PDF `…/LNP-cft-pdf/10_978-3-540-68625-5_Ch10_23-08-08.pdf`（549.7 KB / 42 页，
+**PDF 页 = 书页 − 170**）。**第 10 章最后一段（书 p.212）逐字**：
+
+> "In this way we obtain similarly the description of a Verma module with respect to given numbers `c, h ∈ C`
+> on p. 94, the representation of the string algebra on p. 119, the representation `V_c` of the Virasoro algebra
+> Vir used for the Virasoro vertex algebras on p. 193, the representation of the Kac–Moody algebras on p. 196,
+> and in a certain sense even the free boson representation on p. 136 where, however, the Hilbert space structure
+> has to be respected as well. **Analogously, the fermionic Fock space on p. 52 can be described as an induced
+> representation. To do this, we have to extend the consideration to the case of Lie superalgebras in order to
+> include the anticommutation relations.**"
+
+⇒ **这是作者本人对「本书不做超情形」的明确表态**，而且恰好落在"费米 Fock 空间 / 反对易关系"这个点上。
+**⇒ 任务问的「Schottenloher Thm 10.10 是否有超代数版」答案是否定的，且有 L1 证据，不是"我没找到"。**
+
+**本轮顺带补到的第 10 章编号（全 L1，`§11`/`§11A` 从未记录）：**
+
+- 章首（书 p.171）自陈：「The introduction to vertex algebras in this chapter intends to be self-contained
+  including essentially all proofs.」 + 「The presentation in these notes is based mainly on the course **[Kac98*]**
+  and to some extent also on the beginning sections of the book **[BF01*]**.」
+  ⇒ **Schottenloher 的第 10 章是 Kac 书的改写**，两者不是独立来源。
+- **§10.1 = "Formal Distributions"**（书 p.172 起）；**§10.7 = "Induced Representations"**（书 p.209 起，本章最后一节）。
+- **Theorem 10.36 = OPE 的结合性**（p.208 正文引用："the associativity of the OPE (Theorem 10.36)"）。
+- **Corollary 10.34** = `Y(Ta, z) = ∂Y(a, z)`。
+- **公理名**：`Locality Axiom V2`、`Vacuum Axiom V3`（p.208 逐字）。
+- **★ Proposition 10.48 = Poincaré–Birkhoff–Witt**（书 p.210，L1 逐字）：
+  > "**Proposition 10.48** (Poincaré–Birkhoff–Witt). *Let `(a_i)_{i∈I}` be an ordered basis of the Lie algebra `𝔤`.
+  > Then the elements `p(a_{i₁} ⊗ … ⊗ a_{i_m}), m ∈ ℕ, i₁ ≤ … ≤ i_m`, together with 1 form a basis of `U(𝔤)`.*"
+  ⚠ **原书不证**：紧邻上文逐字「using the construction of `U(𝔤)` this follows from the Poincaré–Birkhoff–Witt
+  theorem **which can be found in many books, e.g., [HN91]**. We state one essential consequence…」
+  ⇒ **这是 §33「PBW 的带编号来源」的一条新候选，但只有陈述没有证明**，
+  排序上仍在 `lakos-2024-pbw` Prop 6.1 之后；优点是它**不限有限维**（`(a_i)_{i∈I}` 任意指标集）且免费可取。
+  外包对象 **[HN91] = J. Hilgert and K.-H. Neeb, *Lie Gruppen und Lie Algebren*, Vieweg, Braunschweig, 1991**（德文）。
+- **Definition 10.45**（`U(𝔤)` 的泛性质）、**Lemma 10.46/10.47**、**Definition 10.49**（诱导表示 `Ind^𝔤_𝔟`）。
+- **第 10 章参考文献表（书 p.212，L1 逐字，12 条）**里对本项目最有用的两条：
+  **[Kac98*] V. Kac, *Vertex Algebras for Beginners*. University Lecture Series 10, AMS, Providence, RI, 2nd ed., 1998.**
+  （= 我们的 `kac-1998`，**版次与丛书号由此获 L1 独立佐证**）；
+  **[BF01*] D. Ben-Zvi and E. Frenkel, *Vertex Algebras and Algebraic Curves*. AMS, Providence, RI, 2001**
+  （⚠ **作者序与年份都与我们 bib 里的 `frenkel-benzvi-2004`（2nd ed. 2004）不同**，是**第 1 版**）。
+
+### 51.4 ★ 否定结论：**Bakalov–Kac `math/0402315` 不能当超版来源**（L1 复核，改写 §37.4 的口径）
+
+§37.4 记 (2.19)/(2.21)/Theorem 4.1 时没有查它的超设定。本轮补读 pp. 1–2：
+
+- **§2.1 开头逐字：「Let `V` be a vector space.」**（p.2）——**没有超空间、没有 parity、没有 ℤ/2 分次**。
+- **Definition 2.1（p.3）逐字：「A *vertex algebra* is a vector space `V` …」**——同样无 parity。
+- **(2.3) 的局域性、(2.4) 的对易子公式、(2.19) Borcherds 恒等式、(2.21) 对易子公式里
+  一个 `(−1)^{p(a)p(b)}` 都没有。**
+- **但 Theorem 4.1（p.9）却写「of parity 0」「of parity `p(e^α) = |α|² mod 2ℤ`」** ——
+  即**第 4 节默默切换到了超设定，而第 2 节的公理与恒等式是非超版**。
+
+⇒ **这是该文内部的一处口径跳变**（不是错误：按 Remark 1.4 那种"drop the adjective super"的通行约定可以自洽，
+但 **Bakalov–Kac 这篇没有写出那句约定**）。
+**⇒ 图里凡需要"超"的地方，不得引 `bakalov-kac-2004` 的 (2.19)/(2.21)；要引 `kac-2017-lectures` 的 (3.21)/(3.20)。**
+（§37.4 关于 Theorem 4.1 与 Definition 2.2(iii) 不相容的红旗**不受影响，仍然成立**。）
+
+顺带把 §37.4 漏记的两条补上（L1）：**Remark 3.1 的 (3.7)** 是扭转 Borcherds 恒等式的**模式版**
+（`a ∈ V_j, b ∈ V, c ∈ M, m ∈ (1/N)+ℤ, n ∈ ℤ, k ∈ (1/N)ℤ`），**同样不带 parity 符号**；
+**(3.12)** 是扭转对易子公式（场版）。
+
+### 51.5 图里建议怎么引（供 curator 取舍；researcher 不改 `graph/`）
+
+1. **新增数学卡 `math.mode-commutator-formula-super`**（或在既有「OPE ↔ 对易子字典」卡上加超分支）：
+   - 陈述：设 `𝔤` 是李**超**代数，`a(z), b(z) ∈ 𝔤[[z,z^{−1}]]` 局域，则
+     `[a_{(m)}, b_{(n)}] = Σ_{j≥0} C(m,j)(a_{(j)}b)_{(m+n−j)}`，其中 `[·,·]` 是超括号；
+     `a, b` 同为奇元时即 `{a_{(m)}, b_{(n)}} = …`。
+   - `sources`: `kac-2017-lectures`，`loc: "Remark 1.5, eq. (1.32), p. 7（超设定见 Remark 1.4, eq. (1.16), p. 6）"`。
+   - `status`: 该讲义给了完整证明（Theorem 1.2 + (1.24)），可标 **`rigorous`**；
+     ⚠ 但它是**学生记录的讲义**，reviewer 若要求同行评议来源，第二来源用
+     `gebert-nicolai-1995` (2.38)（**非超**）或 `kac-1998` §4.8（**编号只到 L2**）。
+2. **顶点（超）代数版**另立一张卡，`loc: "Corollary 3.2, eq. (3.20), p. 18"`，
+   并在 `depends_on` 上挂「`V` 是顶点超代数」这条前提。
+   ⚠ **本项目目前没有任何来源证明「世界面 `bc` 鬼场系统 + `ψ^μ` 构成顶点超代数」**（见 §14.2 的既有缺口），
+   **所以走 (1.32) 这条低门槛路线更现实**。
+3. **Borcherds 恒等式（超版）**：`loc: "Proposition 3.1, eq. (3.21), p. 18"`。
+   ⚠ **必须在 note 里写明它是"两项 + δ 函数"形式**，与 `borcherds-1986` Section 4 的 (v)、
+   `gebert-nicolai-1995` (2.36) 的三项模式形式**逐字不同**。
+4. **`worldsheet.free-fermion-*` 一类卡的数学对应物**：`loc: "Example 1.4, eqs. (1.37)–(1.41), p. 8"`。
+5. **禁令**：`schottenloher-2008` **不得**用作任何超/费米陈述的来源；
+   若已有卡片这么挂，改挂 `kac-2017-lectures`，并把 p.212 那句作者自陈写进 note。
+
+### 51.6 本节访问日志与未解决问题
+
+| 目标 | URL / 查询 | 结果 |
+|---|---|---|
+| Gibbons–Hull 书目+摘要 | INSPIRE `j Phys.Lett.B,109,190` | ✅ |
+| 「PLB 109 p.109 上有没有别的文章」 | INSPIRE `j Phys.Lett.B,109,109` | ✅ **零命中**（负面证据成立） |
+| Terao–Uehara | INSPIRE `j Phys.Lett.B,168,70` | ✅ |
+| Schwarz 1972 | INSPIRE `j Nucl.Phys.B,46,61` | ✅ |
+| Kac 讲义正文 | `arxiv.org/pdf/1512.00821` | ✅ 539.7 KB，读 pp.1–4, 6–9, 18–20 |
+| Bakalov–Kac 超设定复核 | `arxiv.org/pdf/math/0402315` | ✅ 读 pp.1–7 |
+| Schottenloher ch.10 超情形 | LMU 分章 PDF | ✅ 读 PDF pp.1–2, 38–42 |
+
+**未解决：**
+- **Q51.1** `kac-1998`（《Vertex Algebras for Beginners》2nd ed.）**§4.8 / Theorem 4.8 / (4.8.1) / Prop 4.8(b) 的逐字仍是 L0**
+  （编号只有作者勘误表 `kac-1999-corrections` 的 L2 背书）。本轮**没有**去碰它，因为 `kac-2017-lectures` 已足够。
+  若日后一定要用 Kac 书的编号，**注意作者本人在 1512.00821 p.6 说书里的 Extension Theorem 是 "a weaker version"**。
+- **Q51.2** Kac 讲义 **pp.10–17（§2.2–§3.1）与 §4 未读**，
+  其中 **§2.3「Bakalov's formula and Dong's lemma」** 与 Schottenloher `Lemma 10.11`（Dong 引理）应当可以对上，
+  但本轮没核。成本约 2 次 Read。
+- **Q51.3** 「世界面 `bc` 鬼场 / `ψ^μ` 满足 (1.32) 的局域性假设」这一步**在本项目仍无来源**
+  （与 §14.2 记的缺口同源）。这是费米侧唯一真正的缺口。
+- **Q51.4** Schottenloher 第 10 章 pp.173–207（PDF 3–37）本轮未通读，
+  故「`Theorem 10.36` 的确切陈述」「`Lemma 10.11` 是否就是 Dong 引理」等仍按 §11 的旧记录。
+
+---
+
+## 52. Humphreys GTM 9 §8（根空间分解）与 §23 的 L1 入口——第二轮（researcher，2026-09-11）
+
+**结论先说：L1 入口本轮仍未拿到（Q39 / Q50.1 未结案），但拿到了 §50 没有的四条新 L4，
+并且这次的 L4 带有一次成功的对照实验，可信度高于 §50 那批。**
+
+⚠ **本轮 `WebSearch` 额度在任务开始前即已耗尽（200/200，第二次）**，
+§50.5 列的第一条路线（找逐字引 `[Hum, §23.x]` 的论文/课程页扫描件）**又一次无法执行**。
+⇒ **这条路线连续两轮因同一原因未执行，不是"试过失败"。建议 lead 把它排到会话最前段。**
+
+### 52.1 本轮唯一可用的工具：Google Books 页码探针（含对照实验）
+
+卷 id **`mSD4DvUFa6QC`**（Springer 版 GTM 9），入口 `books.google.com/books?id=<VOL>&q=<短语>`。
+**该入口不返回 snippet，只把阅读器跳到命中页**；判读规则本轮首次钉死：
+
+| 查询 | 阅读器停在 | 判读 |
+|---|---|---|
+| **`"zzqxjkwmnbvpl"`（无意义串，对照）** | **Front Cover** | ✅ **无命中时停在封面，不停在内页** ⇒ 停在内页 = 真命中 |
+| `"Maximal Toral Subalgebras and Roots"` | **p. 35** | 与 §50 的 `"Root Space Decomposition"` → p.35 **相互印证** |
+| `"Corollary 8.2"` | **p. 38** | 新 |
+| `"Proposition 8.3"` | **p. 38** | 新 |
+| `"Harish-Chandra's Theorem"` | **p. 130** | 新 |
+| `"Theorem 23.1"` | **p. 135** | 新；与 §50 的 `"Harish-Chandra"` → p.135 同页 |
+
+**★ 对照实验是本轮方法论上的净收获**：§50 把 `"Generalities on characters"` 的"页面未交付结果区"
+记为「不是无命中，是没拿到」——**现在知道这个判据可以做实**：无命中 ⇒ 封面。
+⇒ **`"Generalities on characters"` 那次多半确实是"没拿到"，值得重试一次。**
+
+### 52.2 由这批 L4 能得到与不能得到的（严格分开）
+
+**能得到（升级为"有证据"）：**
+1. **GTM 9 确实使用 `N.M` 形式的结果标号**（`Corollary 8.2`、`Proposition 8.3`、`Theorem 23.1` 三个字符串都在书里）。
+   ⇒ §50 写的「不得写 `§23.x`」这条禁令的**理由要改**：不是"书里没有这种编号"，而是"我们不知道哪个号对应哪条陈述"。
+2. **§8 的结果标号落在 p.38 一带**，而 §8 起于 p.35（两条独立查询印证），**且 §8 在 Ch. II (pp.15–41) 内**（§50.1，L1）。
+3. **⚠ 任务书写的「§8 Thm 8.x」需要修正**：本轮命中的两个 §8 标号都**不是 Theorem**
+   （是 `Corollary 8.2` 与 `Proposition 8.3`）。**在拿到正文前，不得写 "Humphreys Theorem 8.x"。**
+4. **§23 一带的地标**：`"Invariant polynomial functions"` → p.126（§44.4）、
+   `"Harish-Chandra's Theorem"` → **p.130**、`"Harish-Chandra"` 与 `"Theorem 23.1"` → **p.135**。
+
+**不能得到（仍是 L0，禁止写进图）：**
+1. **哪个标号对应"根空间分解"这条陈述**。`Corollary 8.2` 与 `Proposition 8.3` 同页命中，**无法分辨**。
+2. **`Theorem 23.1` 在 p.135 是"定理本身"还是"交叉引用"**。
+   Humphreys 的体例是按**小节**给结果编号（`8.3` = §8.3 里的那条），
+   若 §23.1 在 p.126–130 一带，则 p.135 上的 `Theorem 23.1` **更像是从 §23.3 或 §24 回指的交叉引用**。
+   **本轮无法分辨，因此 §50 的禁令原样保留：不得写 `Theorem 23.1` 作为来源。**
+3. **§23 的标题与页范围**。`"Harish-Chandra's Theorem"`（p.130）可能是**小节标题**也可能只是正文里的一句话。
+4. **任何逐字陈述**。Google Books 不回 snippet ⇒ **原文措辞永远是 L0**，这条路线天花板就在这里。
+
+### 52.3 Q39 / Q50.1（Chevalley 限制定理）本轮无进展
+
+§50.3 的裁决**不变且再次确认**：「GTM 9 §23 = Chevalley **限制**定理」这个等式**无来源**，
+Humphreys 本人在 *Reflection Groups* p.56 的 Remark 说的是「由 Chevalley 定理**导出**关于 `Z(U(𝔤))` 的
+Harish-Chandra 定理」，两者是**输入**与**输出**的关系。
+本轮的 `"Harish-Chandra's Theorem"` → p.130 与该 Remark **一致**，
+但**仍然不能推出「Chevalley 限制定理在 §23」**。
+
+**⇒ 对 E₈ 卡的建议不变**（§44.7 / §50.4）：走「对 248 个权直接做幂和」，**绕开 Chevalley 限制定理**。
+
+### 52.4 下一轮该怎么打（按性价比）
+
+1. **有 `WebSearch` 时的第一枪**（连续两轮未执行）：
+   `"Humphreys" "Introduction to Lie Algebras" pdf "root space decomposition"`、
+   `site:edu "Humphreys" "Corollary 8.2"`、`"Humphreys, Theorem 23.3"`。
+2. **DNB 出版方目录扫描**（`d-nb.info/<IDN>/04`）——**本轮仍未找到 GTM 9 的 IDN**，
+   而该路线正是取"章节标题 + 印刷页码"最省事的方式（见 reading-list 备忘）。
+   入口 `services.dnb.de/sru/dnb?version=1.1&operation=searchRetrieve&query=...` **本轮未试**（额度用在别处）。
+3. **重试 `"Generalities on characters"`**（现在知道无命中会停在封面，判读不再含糊），
+   再补 `"Characters and invariant polynomial functions"`、`"Theorem 23.3"`、`"Proposition 8.4"`。
+   每条成本 1 次 fetch，可以把 §23 的小节边界夹逼出来。
+4. **Mathlib 侧**（§50.4 的 Q50.4 仍未做）：读
+   `Mathlib/Algebra/Lie/Weights/Cartan.lean` 里 `cartan_sup_iSup_rootSpace_eq_top` 的**完整签名**。
+   **这是唯一一条可能让根空间分解节点标 `formalized` 的路，成本 1 次 raw 文件读**，
+   而且**比继续追 Humphreys 的编号更值**——因为图里真正需要的是"有一条可引的严格陈述"，不是"Humphreys 的第几条"。
+
+---
+
+## 53. Ahlfors–Sario, *Riemann Surfaces*（1960）的登记（researcher，2026-09-11）
+
+对应 `sources.bib` 新条目 `ahlfors-sario-1960`。**正文完全未获取（L0）**；本节记的是书目数据与
+"Gallier–Xu 到底引了它的什么"。
+
+### 53.1 ★ Gallier–Xu References **[1]** 逐字（出版版书 **p. 170**，L1 页图）
+
+> "1. Lars V. Ahlfors and Leo Sario. *Riemann Surfaces*. **Princeton Math. Series, No. 2**. Princeton
+> University Press, 1960."
+
+**获取**：`https://www.cis.upenn.edu/~jean/surfclassif-root.pdf`（3.5 MB）→ `Read(pages=178-183)`；
+**PDF 页 = 书页 + 10**（本轮再次验证：PDF 180 = 书 p.170）。
+
+⚠⚠ **丛书号存疑**：GX 印 "No. 2"。Princeton Mathematical Series 到 1960 年早已过二十号，
+**"No. 2" 极可能是 GX 的排印错误**。OpenLibrary 检索（L2）确认
+「Lars Valerian Ahlfors / Leo Sario, *Riemann surfaces*, Princeton University Press, 1960, 约 398 页」，
+**但 `series` 字段为空** ⇒ **本项目没有第二来源可核丛书号**。
+⇒ **bib 里刻意不写 `number`；引用时只写 "Princeton Mathematical Series"。**
+
+### 53.2 ★★ Note F.9（书 **p. 169**，L1 逐字）——**GX 唯一一处交代 A–S 内部结构的地方**
+
+> "*Note F.9.* For the benefit of the reader, we compare the proof given here (due to Ahlfors and Sario [1]) to
+> other proofs, in particular, the proof given in Seifert and Threlfall [9] (**Chapter VI**). The first point is
+> that **Ahlfors and Sario's proof applies to surfaces with boundaries** whereas Seifert and Threlfall first give
+> a proof for surfaces without boundaries in **Section 38** and then they show how to modify this proof to deal
+> with boundaries in **Section 40**. As we said earlier, Ahlfors and Sario use the same elementary transformations
+> as Seifert and Threlfall. Unlike Seifert and Threlfall, who begin by gluing cells sharing a common edge using
+> `(P2)^{−1}` to obtain a complex with a single cell (their Step 1), Ahlfors and Sario reduce the complex to a
+> single cell at the beginning of their **Step 3**. **Step 1** of Ahlfors and Sario (eliminating strings `aa^{−1}`)
+> is identical to Step 2 of Seifert and Threlfall. **Step 2** of Ahlfors and Sario (reduction to a single vertex)
+> is similar to Step 3 of Seifert and Threlfall, except that Ahlfors and Sario deal with border vertices.
+> **Step 3** of Ahlfors and Sario (cross-cap introduction) is analogous to Step 4 of Seifert and Threlfall and also
+> preserves loops. **Step 4** of Ahlfors and Sario (handle introduction) is analogous to Step 5 of Seifert and
+> Threlfall and also preserves loops. **Step 5** of Ahlfors and Sario (transformation of handles into cross-caps)
+> is analogous to Step 6 of Seifert and Threlfall. Finally, **Step 6** of Ahlfors and Sario consists in grouping
+> loops together. This step is achieved by Seifert and Threlfall in **Section 40**."
+
+**★★ 由此得到的三条硬结论：**
+
+1. **GX 的 `Lemma 6.1` 的六个 Step（§49.3 已逐字记）就是 Ahlfors–Sario 自己的 Step 1–6。**
+   两侧的对应是逐 Step 的，`loc` 可以写成「A–S 的 Step `k`」，**但页码/节号仍然未知**。
+2. **⚠ 任务书要的「Gallier–Xu 引用的章节号」：对 Ahlfors–Sario 而言不存在。**
+   GX 在**三处**（References [1]、Prop 6.1 证明末、Lemma 6.1 证明首句）**以及 Note F.9 全段**里，
+   **从不给 A–S 的章号、节号或定理号**；给节号的只有对照组 **Seifert–Threlfall [9]：Chapter VI, Section 38 / Section 40**。
+3. **A–S 的证明覆盖带边曲面**（GX 逐字），这正是图里 `math.classification-of-compact-surfaces`
+   需要「含带边」版本的那一支的**真正出处**。
+
+### 53.3 ★ 副产品：GX References 全表（书 p.170，L1 逐字，9 条）——**两条对图有直接价值**
+
+> 1. Lars V. Ahlfors and Leo Sario. *Riemann Surfaces*. Princeton Math. Series, No. 2. Princeton University Press, 1960.
+> 2. Henry Roy Brahana. Systems of circuits on two-dimensional manifolds. *The Annals of Mathematics*, **23**(2):144–168, 1921.
+> 3. Glen E Bredon. *Topology and Geometry*. GTM No. 139. Springer Verlag, first edition, 1993.
+> 4. Maurice Fréchet and Ky Fan. *Invitation to Combinatorial Topology*. Dover, first edition, 2003.
+> 5. D. Hilbert and S. Cohn–Vossen. *Anschauliche Geometrie*. Springer Verlag, second edition, 1996.
+> 6. D. Hilbert and S. Cohn–Vossen. *Geometry and the Imagination*. Chelsea Publishing Co., 1952.
+> 7. William S. Massey. *Algebraic Topology: An Introduction*. GTM No. 56. Springer Verlag, second edition, 1987.
+> 8. James R. Munkres. *Elements of Algebraic Topology*. Addison-Wesley, first edition, 1984.
+> 9. H. Seifert and W. Threlfall. *A Textbook of Topology*. Academic Press, first edition, 1980.
+
+- **[9] Seifert–Threlfall** 是**第二个可登记的候选一手来源**：GX 明确指出它的分类定理证明在
+  **Chapter VI, Section 38（无边）+ Section 40（带边）** —— **这是本项目目前唯一一条"带节号"的分类定理证明位置**，
+  比 A–S 那条更可引。**建议 lead 考虑把它排进 reading-list。**
+- **[7] Massey 是 GTM 56 第 2 版 1987**，**不是** `sources.bib` 里登记的 `massey-1967`
+  （Harcourt/Brace 1967 初版）。**§39.3 的跨版本风险由此再获一条 L1 佐证**：
+  GX 的 `Theorem 6.2` 一带若转引 Massey，转引的是**第 2 版**的编号。
+- **[2] Brahana 1921** 是 GX 正文（Note F.9 续，书 p.170）指认的「切割法 (P2) 的最早出处」，
+  并说 Brahana 自陈方法源自 **Veblen 1915 年的一次 Seminar**；且 **Brahana 只处理无边曲面**。
+  ⇒ 若图里要"分类定理的最早证明"这条历史边，这是 L1 的转述来源。
+
+### 53.4 本节访问日志与未解决
+
+| 目标 | URL | 结果 |
+|---|---|---|
+| GX 出版版全书 | `www.cis.upenn.edu/~jean/surfclassif-root.pdf` | ✅ 3.5 MB；读 PDF pp.178–183 = 书 pp.168–173 |
+| A–S 书目（第二来源） | `openlibrary.org/search.json?q=Ahlfors+Sario+Riemann+Surfaces&fields=…` | ✅ L2：1960 / PUP / 约 398 页；**series 为空** |
+
+- **Q53.1** **丛书号**：GX 印 "No. 2"，真值未知。取一次 PUP 目录或书本身即可结清。
+- **Q53.2** **A–S 的 Step 1–6 在书里的页码/节号**——**要正文才能拿到**。
+  A–S 1960 无 arXiv、无 DOI；archive.org 是否有开放扫描**本轮未查**（`WebSearch` 额度耗尽）。
+- **Q53.3** **Seifert–Threlfall *A Textbook of Topology*（Academic Press 1980，Ch. VI §38/§40）未登记**。
+  它有节号、有英译本，**比 A–S 更可能取到**，建议下一轮优先。
+
+
 
 

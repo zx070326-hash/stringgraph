@@ -5000,6 +5000,239 @@ The prime on the functional determinant denotes omission of zero eigenvalues.」
 
 ---
 
+## 17. ★ E33/E34 复核（2026-09-11，researcher 第十一轮）——(2.4.24) 附近「为什么反常项只能是 `∂³v`」的原文措辞
+
+**只加不改**：本节不修改 §2 的 E33/E34、也不修改 §12.1 的任何一行；那里已 L1 落定的式号（(2.4.22)–(2.4.27)）本轮**逐一重读并全部复核无误**。
+本节补的是 §12.1 **没有转录的那三句散文**，即任务问的「原书如何论证 `TT` OPE / `δT` 的反常项只能是 `∂³v`」。
+
+### 17.0 获取路线与版本锚定
+
+- Cambridge Core 章级 PDF，ch.2 = `9780511816079c2_p32-76_CBO.pdf`，item hash `5CA151E88B12C248825A262624ADC7D6`，**418 KB / 45 页**，文件名直接推出一次命中。
+- **PDF 页 = 印刷页 − 31**。本轮读 PDF pp.15–18 = **印刷 pp.46–49**。
+- 页脚逐字（版本锚定）：`Downloaded from https://www.cambridge.org/core. Zhejiang University, on 11 Sep 2026 at 03:29:23, subject to the Cambridge Core terms of use, available at https://www.cambridge.org/core/terms. https://doi.org/10.1017/CBO9780511816079.005`
+  → **ch.2 的 DOI 后缀是 `.005`**（再次印证「别用 DOI 后缀推章号」）。版本 = Cambridge Books Online 2005 平装，已含 2000 年 "with corrections"。
+- 证据等级：本节全部为 **L1（原书页图逐字）**，除非另行标注。
+
+### 17.1 ★★ 直接回答：原书给的是**四条理由的组合**，且**既不是幺正性，也不是真空唯一性**
+
+印刷 **p.48**，(2.4.24) 正下方，逐字（这段在 §12.1 里只转录了前两句，第三句起是本轮新增）：
+
+> "with `c` a constant known as the *central charge*. The central charge of a free scalar is 1; for `D` free
+> scalars it is `D`. **The transformation (2.4.24) is the most general form that is linear in `v`, is consistent
+> with the symmetry of the `T T` OPE, and has three lower `z` indices as required by rigid scale and rotation
+> invariance. The scale, rotation, and translation symmetries determine the coefficients of the second and third
+> terms.** Further, by considering the commutator of two such transformations one can show that `∂_a c = 0`, and
+> it is a general result in quantum field theory that an operator that is independent of position must be a
+> c-number.⁵"
+
+**拆成四条（这是抽取者的拆分，括号内是原文用词）：**
+
+| # | 理由 | 原文用词 | 管住的是什么 |
+|---|---|---|---|
+| (i) | **线性于 `v`** | "linear in `v`" | 排除 `v²∂v`、`(∂v)²` 等 |
+| (ii) | **与 `TT` OPE 的对称性相容** | "consistent with the symmetry of the `T T` OPE" | `T(z)T(0)` 交换两算符的对称性 |
+| (iii) | **三个下 `z` 指标**（= 刚性标度+转动不变性要求） | "has three lower `z` indices as required by rigid scale and rotation invariance" | **这才是把反常项钉死成 `∂³_z v` 的那一条**（`δT` 权 2、`v` 权 −1 ⇒ 差三个导数） |
+| (iv) | 第二、三项的系数由标度/转动/平移对称性定出 | "The scale, rotation, and translation symmetries determine the coefficients" | 只管 `−2∂vT` 与 `−v∂T` 的系数 `2` 和 `1`，**不管 `−c/12`** |
+
+**⇒ 任务书列的三个候选答案里，命中的是「权计数」那一条**（(iii) 的 "three lower `z` indices … rigid scale and rotation invariance"）。
+**★★ 否定结论（逐页确认，pp.46–49）：原书这一段既不提 unitarity / positivity，也不提真空唯一性 / vacuum，也不提 `SL(2,C)` 不变真空。**
+`−c/12` 这个**系数本身**在此处**不被论证**，只是把未定常数命名为 `c`。
+
+### 17.2 `c` 是常数（不是算符）的论证：靠**平移 + 局域性**，与 §3.4 的 WZ 相容性是两条独立论证
+
+上引段末句 + **p.48 脚注 5**，逐字：
+
+> "⁵ The argument is this. Suppose that `𝒜(σ)` is independent of position, and consider its equal time commutator
+> with any other local operator `ℬ(σ')`. These commute at spacelike separation, by locality. Since `𝒜(σ)` is
+> actually independent of position it also commutes at zero separation. Therefore `𝒜(σ)` commutes with all local
+> operators, and so must be a c-number."
+
+- **这是一条典型的物理学家论证**（用了「等时对易子」「类空分离对易」「因此与一切局域算符对易」），
+  **原书不讨论算符定义域、不讨论「与一切局域算符对易 ⇒ c 数」需要何种不可约性/完备性假设**。
+  ⇒ 若图里要为「中心荷是常数」建节点，`status` 上限 **`physical-argument`**。
+- **§12.1 已指出「中心荷是常数在本书出现两次」**（§2.4 这一处 vs §3.4 (3.4.31) 的 Weyl 反常 WZ 相容性）。
+  本轮**逐字取到了 §2.4 这一处的完整论证**（上面的脚注 5），可以据此建卡了。
+
+### 17.3 与之配套、本轮顺带逐字取到的四句（都在 pp.47–48，此前记录未转录）
+
+1. **`T` 与 `T̃` 的 OPE 必须非奇异，理由是全纯/反全纯**（印刷 p.47 末 → p.48 首，跨页）：
+   > "A similar result holds for `T̃`. The `T(z)T̃(z̄')` OPE must be nonsingular. It cannot have poles in `(z − z')`
+   > because it is antiholomorphic in `z'` at nonzero separation; similarly it cannot have poles in `(z̄ − z̄')`
+   > because it is holomorphic in `z` at nonzero separation.⁴ The same holds for any OPE between a holomorphic
+   > and an antiholomorphic operator."
+2. **p.48 脚注 4（OPE 的 delta 函数约定，很重要，图里 OPE 卡应带）**，逐字：
+   > "⁴ Unless otherwise stated OPEs hold only at *nonzero* separation, ignoring possible delta functions. For our
+   > applications the latter will not matter. Occasionally it is useful to include the delta functions, but in
+   > general these depend partly on definitions so one must be careful."
+   ⇒ **本书的 `∼` 不仅"略去非奇异项"（Notation p.xviii），还默认"略去接触项/delta 函数"** —— 这是第二层约定，Notation 页没写。
+3. **`T` 不是张量这一步的逻辑方向**（p.48 首段）：
+   > "Thus `T` is *not* a tensor. Rather, the OPE (2.4.22) implies the transformation law `(2.4.23)`."
+   ⇒ **(2.4.22) ⇒ (2.4.23) 是原书明写的依赖方向**（OPE 在前、变换律在后），curator 建边不必标 `inferred`。
+4. **有限形式 (2.4.26) 的验证方式**（p.48，(2.4.27) 下方）：
+   > "One can check this by verifying that it has the correct infinitesimal form and that it composes correctly
+   > under successive transformations (so that one can integrate the infinitesimal transformation). The
+   > corresponding forms hold for `T̃`, possibly with a different central charge `c̃` in the general CFT."
+   ⇒ (a) 原书**不证明** (2.4.26)，只说「可以验证」；(b) **`c ≠ c̃` 在一般 CFT 里是允许的**，这句是本书对 `(c, c̃)` 独立性的唯一直接表态。
+
+### 17.4 顺带复核、与既有记录一致或需要微调的条目
+
+| 条目 | 既有记录 | 本轮页图 | 结论 |
+|---|---|---|---|
+| (2.4.22) `∼ D/2z⁴ + (2/z²)T(0) + (1/z)∂T(0)`，前面带 `η^μ_μ/2z⁴ − (2/α'z²):∂X^μ∂X_μ: + :TT:` | §12.1 逐字 | 逐字相同 | ✅ 无误 |
+| (2.4.23)/(2.4.24)/(2.4.25)/(2.4.26)/(2.4.27) 的内容与式号 | §12.1 表 | 逐字相同 | ✅ 无误 |
+| 「free scalar 是 1、`D` 个是 `D`」在 **p.48，(2.4.24) 下方**，无式号 | §12.1 | 逐字相同 | ✅ 无误 |
+| `∂_a c = 0` 由「两次这种变换的对易子」得出 | §12.1 已转录该句 | 逐字相同，**并补上脚注 5 的完整论证** | ✅ 升级 |
+| (2.4.20) 的「主场决定一切场的 OPE，推迟到第 15 章」 | §13.4 表 | 逐字相同 | ✅ 无误 |
+| (2.4.20) 前提「所有权在下方有界」 | 此前未记 | **新增逐字**：「In all cases of interest the weights appearing on the right-hand side of the OPE (2.4.20) are bounded below, and so the degree of singularity in the operator product is bounded.」 | **新** |
+| (2.4.21) 标 "(naive)"，正规序乘积不继承朴素变换律 | §13.4 | 逐字相同，**并补原因**：「the subtraction `ln\|z₁₂\|²` in `: :` makes explicit reference to the coordinate frame」 | ✅ 补充 |
+
+### 17.5 对图的建议（researcher 不改 `graph/`，仅列）
+
+1. **`worldsheet.virasoro-central-charge` / `conv.virasoro-standard` 一系的 note 可以加一句**：
+   原书对「反常项只能是 `∂³v`」给出的是 **(i) 线性 + (ii) `TT` OPE 对称性 + (iii) 三个下 `z` 指标（刚性标度/转动）** 的组合论证，
+   **不使用幺正性、不使用真空唯一性**；loc = **§2.4, p.48, (2.4.24) 下方正文（无式号）**。
+   ⚠ 陈述里不要写「由幺正性/真空唯一性定出」——那是别的教材（如 BPZ 路线）的说法，**不是 Polchinski**。
+2. **建议新增节点 `worldsheet.central-charge-is-a-c-number`**（或并入既有卡的 note）：
+   陈述「若一个局域算符与位置无关，则它是 c 数；由此 `c` 是常数」，
+   loc = **§2.4, p.48 正文 + 脚注 5**，`status = physical-argument`（等时对易 + 类空对易 + 「因此与一切局域算符对易」，
+   无算符定义域/不可约性假设）。**与 §3.4 (3.4.31) 的 WZ 相容性论证是两条独立 derivation，挂同一张卡。**
+3. **OPE 约定卡（`conv.ope-tilde-notation`）建议补第二层**：`∼` 还默认**略去 delta 函数/接触项**，
+   loc = **§2.4, p.48 脚注 4**（Notation p.xviii 只写了「略去非奇异项」）。
+4. **`(c, c̃)` 可以不相等**：loc = **§2.4, p.48，(2.4.27) 下方**（"possibly with a different central charge `c̃`"）。
+   图里若有「`c = c̃`」的隐含假设，须显式化为一条约定或假设。
+5. **(2.4.22) → (2.4.23) 的边不必标 `inferred`**（原书 p.48 明写 "the OPE (2.4.22) implies the transformation law"）。
+
+### 17.6 本轮 negative evidence（逐页通读印刷 pp.46–49）
+
+1. **pp.46–49 上没有 "unitary"/"unitarity"、没有 "vacuum"、没有 "positivity"。**
+2. **没有 "Virasoro"**（Virasoro 代数在 §2.6）。
+3. **没有任何文献引用**（与 §12 观察到的「正文零引文是全书体例」一致）。
+4. **`c ≥ 0` 或 `c` 的任何不等式在此处不出现**（幺正性下界 `h ≥ 0` 在 §2.9 (2.9.14)）。
+
+### 17.7 遗留
+
+- **Q17.1** (2.4.24) 的「the most general form」在原书里**没有证明**，只是断言 + 三条约束的罗列。
+  若要为它建 `rigorous` 节点，需要一条数学侧的「Virasoro 是 `Diff(S¹)` 的万有中心扩张 / `H²(Witt) = ℂ`」来源
+  —— 本项目已有：`math-sources.md` **§25 Feldvoss–Siciliano arXiv:2501.15560 Lemma 2.6**。
+  **⇒ 建议 curator 把 `(2.4.24) 的唯一性` 这条边指向 §25 那条数学定理，而不是指向 Polchinski 的断言。**
+- **Q17.2** 印刷 pp.32–45 与 pp.50–76 本轮未逐页通读（只读 pp.46–49），
+  故「本书何处首次给出 `c ≥ 0`」「§2.6 的 Virasoro 代数推导是否用到本节的论证」仍未核。
+
+---
+
+## 18. ★★ Q16.1 复核（2026-09-11，researcher 第十一轮）——exercise 3.6 与 exercise 3.2 的题面逐字
+
+**只加不改**：本节不修改 §16 的任何一行。§16.4 把 (5.3.19) 的反常系数「外包给 exercise 3.6」列为
+`physical-argument` 定级的第一条理由，但**题面当时没读**。本轮读到了，结论比原来的说法更强也更精确。
+
+### 18.0 获取与页码
+
+Cambridge Core ch.3 = `9780511816079c3_p77-120_CBO.pdf`，item hash `606E849133B4EE45657DF6128FD1C8C1`，
+**408 KB / 44 页**，**PDF 页 = 印刷页 − 76**。习题在印刷 **pp.118–120**（PDF 42–44）。
+页脚逐字：`Downloaded from https://www.cambridge.org/core. Zhejiang University, on 11 Sep 2026 at 03:34:18 … https://doi.org/10.1017/CBO9780511816079.006`（**ch.3 的 DOI 后缀 `.006`**，与 §15.0 记录一致）。
+**第 3 章习题编号为 3.1–3.14**（印刷 p.118 起，小标题居中斜体 *Exercises*；末题 3.14 在 p.120，其后即本章结束）。
+
+### 18.1 ★★ exercise 3.6 逐字（印刷 p.119，L1）
+
+> "**3.6** On dimensional grounds, a current that is conserved on a flat world-sheet has the possible anomaly
+>
+> `∇_a j^a = aR` .
+>
+> By comparing the Weyl transformations of the two sides, show that the sum of the coefficients of `z^{−3}` in
+> `T j` and of `z̄^{−3}` in `T̃ j̃` is `4a`."
+
+**★★★ 这道题的题面里没有数字 3、没有 `λ`、没有 `bc` 系统、没有 `(1−2λ)/4`。**
+它给出的是一条**换算规则**：
+> 「`∇_a j^a = aR` 里的 `a`」 ⟷ 「`T(z)j(0)` 的 `z^{−3}` 系数 + `T̃(z̄)j̃(0)` 的 `z̄^{−3}` 系数 = `4a`」。
+
+⇒ **§16.4 那句「反常系数被外包给习题 exercise 3.6」要收窄成：
+「**换算规则**被外包给 exercise 3.6；把它用到 `bc` 系统上（即代入 `Tj` 的 OPE 并取全纯部分）得到 (5.3.19) 的 `a = (1−2λ)/4`
+这一步，正文与习题都不写。」**
+
+**三条独立的缺口，逐条都是 L1（比 §16.4 原来列的三条更细）：**
+
+| # | 缺口 | 证据（逐字） |
+|---|---|---|
+| (a) | **反常的"可能形式" `∇_a j^a = aR` 本身是"由量纲论证"给出的，不是推导出来的** | 题面首句 "**On dimensional grounds**, a current that is conserved on a flat world-sheet has the **possible** anomaly" |
+| (b) | **换算规则 `4a` 的证明留给读者**（"show that"） | 题面末句 |
+| (c) | **从换算规则到 `(1−2λ)/4` 还缺一步**：需要 `bc` 系统的 `Tj` OPE 的 `z^{−3}` 系数，且需要「本系统只有全纯部分 ⇒ `T̃j̃` 项为零」 | (5.3.19) 上文只说 "For the ghost current of a holomorphic `bc` system (without `b̃, c̃`), the current conservation anomaly derived in exercise 3.6 is" |
+
+**⚠ 一致性自检（抽取者做的，不是原文）**：由 (5.3.19) 的 `a = (1−2λ)/4` 与题面的 `4a` 反推，
+`T(z)j(0)` 的 `z^{−3}` 系数应为 `1 − 2λ`（全纯系统 ⇒ `T̃j̃` 贡献 0）。
+**`Tj` OPE 的式号本轮未核实（在 §2.5 `bc` CFT 那一段，L0）**，
+⚠ 且 §2 的 E81 备注记过 [S] 的说法：**该习题在官方勘误表里有一处符号错误**（勘误表本项目仍未取得）。
+⇒ **符号方向不得写进图**，只写「系数的绝对值关系」。
+
+### 18.2 exercise 3.2 逐字（印刷 p.118，L1）——(5.3.22) 里 `P_n`/`P_n^T` 的全部定义
+
+> "**3.2** (a) Show that an `n`-index traceless symmetric tensor in two dimensions has exactly two independent
+> components. The traceless condition means that the tensor vanishes when any pair of indices is contracted
+> with `g^{ab}`.
+> (b) Find a differential operator `P_n` that takes `n`-index traceless symmetric tensors into `(n+1)`-index
+> traceless symmetric tensors.
+> (c) Find a differential operator `P_n^T` that does the reverse.
+> (d) For `u` an `(n+1)`-index traceless symmetric tensor and `v` an `n`-index traceless symmetric tensor, show
+> that with appropriate normalization `(u, P_n v) = (P_n^T u, v)`. The inner product of traceless symmetric
+> tensors of any rank is
+>
+> `(t, t') = ∫ d²σ g^{1/2} t · t'` ,
+>
+> the dot denoting contraction of all indices."
+
+**★ 三条对图直接有用的事实：**
+1. **`P_n` 与 `P_n^T` 在原书里没有显式表达式** —— 题面只说 "**Find** a differential operator"，
+   即**存在性由读者构造**，且**唯一性根本不提**。
+   ⇒ `(5.3.22) dim ker P_n − dim ker P_n^T = (2n+1)χ` 这条陈述里的 `P_n` **在本书中是一个未被唯一刻画的对象**。
+   建卡时 `P_n` 必须写成"某个满足 (b)(c)(d) 的算子"，或改挂一个给显式公式的数学来源。
+   （`n = 1` 的 `P₁` 在正文里**有**显式定义，见 §12.7 对 (5.2.4)/(3.3.17) 的核实——**只有 `n = 1` 这一档是正文给的**。）
+2. **(a) 的"恰好两个独立分量"是 Riemann–Roch 指标计数的算术起点**，且它同样是习题。
+3. **(d) 的伴随关系 `(u, P_n v) = (P_n^T u, v)` 依赖 "with appropriate normalization"** ——
+   原书不说归一化是什么。⇒ `ker P_n^T` 与 `ker P_n` 的配对在本书里**没有确定的归一化**。
+
+### 18.3 顺带逐字取到、与 §5/§16 相关的两条
+
+1. **exercise 3.1（p.118）** 逐字：
+   > "**3.1** (a) Evaluate the Euler number `χ` for a flat disk and for a disk with the metric of a hemisphere.
+   > (b) Show that the Euler number of a sphere with `b` holes is `2 − b`. You may take any convenient metric on
+   > the sphere. (c) Extend this to the result `2 − b − 2g` for the sphere with `b` holes and `g` handles."
+   ⇒ **`χ = 2 − b − 2g` 这条公式在 Vol.1 里只以习题形式出现**（配合 §15.1 已记的「`k` 的定义只在 exercise 1.3」）。
+   若图里有「亏格 `g`、`b` 个边界的 Euler 数」节点，**其唯一书内来源是 exercise 3.1(c)，不是正文**。
+2. **exercise 3.5（p.119）** 逐字末句：
+   > "In chapter 4 we will show this equivalence by a more abstract method, BRST symmetry."
+   ⇒ 「两种规范固定路径积分等价」的**直接（非 BRST）证明**在本书里是习题，不是正文。
+
+### 18.4 本轮 negative evidence（通读印刷 pp.117–120 四页）
+
+1. **exercise 3.6 的题面里没有 `bc`、没有 `λ`、没有 `3`、没有 `χ`、没有 "Riemann–Roch"。**
+2. **exercise 3.2 的题面里没有 "Riemann–Roch"、没有 `χ`、没有 `κ`/`μ`。**
+   ⇒ **两道习题都不是"把 Riemann–Roch 留作习题"，而是"把两块零件留作习题"**；拼装在 §5.3 正文里。
+3. 第 3 章的 14 道习题里**没有任何一道引用文献**。
+4. **印刷 p.117（§3.7 末）另有一条与图相关的逐字**：
+   「*Replace the 25 spatial `X^μ` fields with any unitary CFT having `c = c̃ = 25`.*」+
+   「The unitary (positive inner product) condition is necessary because there is only enough local symmetry to
+   remove the unphysical `X⁰` excitation」——
+   **这与 §12.3 记的 §4.4 假设（`d` 个自由 `X^μ` + 中心荷 `26−d` 的紧致幺正 CFT）是同一条约束的第一次出现**，
+   且这里原书把幺正性的**理由**讲了出来（§4.4 只是列为假设）。loc = **§3.7, p.117（无式号）**。
+
+### 18.5 对图的建议
+
+1. **`ghost-number-current-weyl-anomaly` 一类节点的 note 必须改写**：
+   系数 `3` 的来源链是 **exercise 3.6（换算规则，题面只给 `4a`，不给 `bc` 的值）→ §2.5 的 `Tj` OPE（式号未核）
+   → (5.3.19) `a = (1−2λ)/4` → 取 `λ = 2` → (5.3.20) 的 `3χ/2`**。
+   **不能写成「系数外包给习题 3.6」**，那会让审计以为习题里有那个数。
+2. **新增一条 note 到 (5.3.22) 对应的卡**：`P_n`/`P_n^T` 只由 exercise 3.2(b)(c)(d) 的**要求**刻画，
+   原书**不给显式公式、不谈唯一性**；`n = 1` 例外（正文有 `P₁`）。
+3. **`χ = 2 − b − 2g` 的 loc = exercise 3.1(c), p.118**（若图里已挂到正文某处，须改）。
+4. **`status` 不变**：§16.4 的 `physical-argument` 结论**依然成立**，理由换成 18.1 的 (a)(b)(c) 三条（更硬）。
+
+### 18.6 遗留
+
+- **Q18.1** `bc` 系统的 `T(z)j(0)` OPE 在 §2.5 的**式号与 `z^{−3}` 系数的符号**（本轮未读 pp.50–76）。
+  这是把 exercise 3.6 接到 (5.3.19) 的唯一缺环，**成本是 1 次单页 Read**（ch.3 PDF 已不适用，要 ch.2 PDF）。
+- **Q18.2** [S] 说 exercise 3.6 在官方勘误表里有符号错误 —— 勘误表仍未取得，**该说法本身仍是 L3**。
+
+---
+
 
 
 
