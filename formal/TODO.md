@@ -1931,11 +1931,61 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `conjFreeSlice`、`towerBigrade_le_conjFree_sup_spurious`、
     `finrank_towerPhys_inf_towerBigrade_le`。本文件完全不碰塔。
   - **公理登记**：49 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
+- [x] `general-n-pr4`（蓝图 §B′ 的 PR4）：**`b̃`-次数消元 + (P3) 上界** ——
+  `StringFormal/NoGhost/SpuriousElimination.lean`（85 条声明，约 1300 行）。分支
+  `agent/formalizer/general-n-pr4`。**`D = 26` 一次不出现**；截距只以 `a₀ = α'k²` 出现。
+  至此 §B′.2 的 **(P1)(P2)(P3) 全部在 Lean 里**，`ddf-spans` 只剩 (B-26)。
+  - **两个次数与归纳量**：`conjDeg`（β）、`conjWt`（ω）都用 `Finsupp.weight`（加性免费）；
+    `lcMeasure hD N d = β(d)(N+1) + ω(d)`；`conjFree` / **`conjFreeSlice`**；三个记账张成
+    `lcBound`（β ≤ β₀ 且 ω ≤ ω₀）、`lcLow`（测度 < M）、`lcSeed`（真空项的残差）。
+  - **`Lop_neg_apply_one`**：**任意 `n ≥ 1`** 的层真空 Sugawara 展开
+    `L_{−n}|0;p⟩ = α^p_{−n}|0;p⟩ + ½Σ_{l=1}^{n−1}Σ_μ η_μ α^μ_{−(n−l)}α^μ_{−l}|0;p⟩`。
+    仓库此前只有 `Fock.Lop_neg_{one,two}_apply_one`。
+  - **`oscPair_eq_lightCone`**：两个产生算子的度规收缩换成标架（单位分解的双线性化）。
+    证法是只在**第一个**槽里代入 `Pi.single μ 1` 的分解，第二个槽由
+    `Σ_μ (η_μ w_μ)•Pi.single μ (η μ) = w` 自动重组，不做双重求和展开。
+  - **`towerLop_neg_conjDegree_leading`**（§B′.9 点名的最可能卡点，**对每个 `n` 做成了**）：
+    `α^{b̃}_{−n}m(d′) = −L_{−n}m(d′) + （测度严格更小的光锥单项式）`。
+  - **`towerBigrade_le_conjFreeSlice_sup_towerSpurious`**：β-消元（对 `lcMeasure` 强归纳）。
+  - **非退化层**（关掉 `TowerNull.lean` 自报 gaps 第 2 条）：`Fock.monomialNorm_ne_zero`、
+    `Fock.eq_zero_of_pairing_left_eq_zero`、`Fock.eq_zero_of_towerPairing_left_eq_zero`
+    （`[NoZeroDivisors] [CharZero]`，**不需要序，也不需要域**）、
+    `eq_zero_of_mem_towerBigrade_of_orthogonal`（片上无根基）。
+  - **`towerPhys_inf_towerBigrade_eq_towerOrthComplement`**：反对角片上「物理」⟺「⊥ 全部伪态」。
+  - **(P3) `finrank_towerPhys_inf_towerBigrade_le`**：
+    `dim(H_phys ⊓ V_N) ≤ Fintype.card {d // level d = N ∧ conjDeg d = 0}`（= `p_{D−1}(N)`，永不求值）。
+  - **附赠**：`conjFreeSlice_le_towerKerK_inf_towerBigrade`（Goddard (6.2) 的 `⊇` 半边）。
+  - **对蓝图的订正（已追加到 `BLUEPRINT-noghost.md` 的「§B′ 订正（PR4 落地后）」）**：
+    1. **领头项引理不需要域，也不需要 `a₀ = 1`**。§B′.9 结尾担心
+       「`conj_eq_light_sub_momentum` 依赖 `a·a = 2`，领头项引理要重写」——**这条判断是错的**：
+       依赖 `a·a` 的是 `α^b_{−n}` 前的系数 `1 + j`，而那一项整个落进余项，从不被求值。
+       `lcCrea_towerMomentum` 只用 `b·p_j = 1`（(F2)+(F3)），全链 `[CommRing R] [Algebra ℚ R]`。
+    2. **`L_{−n}` 不在一般单项式上计算，而是穿过去**。§B′.9 第 1(a) 条担心的「两个模指标都为负
+       的正规序要手工做」根本不出现：`[L_{−n}, α^w_{−r}] = r α^w_{−(n+r)}`
+       （`Fock.Lop_apply_mode`）把 `L_{−n}` 移过每个因子，剩下的 Sugawara 计算只在真空上，
+       那里只有 `−n ≤ m ≤ 0` 存活，**湮灭算子从不作用在光锥单项式上**。这是 PR4 可行的关键。
+    3. 蓝图要的「片上型非退化 + `BilinForm.finrank_orthogonal`」走不通（那条要有限维**环境**
+       空间，`TowerFock` 不是）。实际只需要整塔上的非退化
+       `∀ Y, ⟨Y, L_m x⟩ = 0 → L_m x = 0`，而这从 `Fock.pairing_monomial_left` 加
+       `monomialNorm η d ≠ 0` 三行就得到。
+    4. (P3) 用**嵌入对偶**证（`x ↦ ⟨x,·⟩|_{conjFreeSlice}` 单射 ⇒
+       `dim ≤ dim (conjFreeSlice)^* = dim conjFreeSlice ≤ #{b̃-free d}`），不用正交分解。
+    5. `p_{D−1}(N)` 的指标集是 `{d : Osc D →₀ ℕ // level d = N ∧ β(d) = 0}`，与 `p_D(N)`、
+       `p_{D−2}(N)` **同一个指标类型**；有限性直接用 `Fock.finite_setOf_level_eq`，不必新建编码。
+    6. 行数：实际约 1300 行（蓝图估 500）。超出主要在三套记账张成的脚手架与非退化层。
+  - **仍未做**：(B-26)（PR5，`D = 26` 的唯一入口）；`conjFreeSlice ⊓ towerSpurious = ⊥`
+    与 `towerKerK ⊓ towerBigrade = conjFreeSlice` 的 `⊆` 半边（都要光锥单项式线性无关，
+    §B′.9 第 2 条）。
+  - **公理登记**：85 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
       `(−N, N)`」）；`N ≤ 1` 已整块关闭（`ddfSpansOn_towerLevelLE_one`，任意 `D`）。
-      **下一步就是 `N = 2`**。
+      **2026-09-12 更新**：蓝图 §B′.2 的 (P1)(P2)(P3) 已全部落地
+      （`SliceRank.lean` / `SliceDim.lean` / `SpuriousElimination.lean`），且**三条里 `D = 26`
+      一次不出现**。剩下的唯一缺口是 **(B-26)**：`D = 26`、`a₀ = 1` 时
+      `dim(H_null ⊓ V_N) ≥ p_{D−1}(N) − p_{D−2}(N)`（蓝图 PR5，未开工）。
+      `N = 2` 的直接路线（`noghost-n2`）仍然可行但不再是唯一选择。
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。

@@ -1321,3 +1321,84 @@ PR3 由两条并行分支共同落地，分在两个文件里（文件名冲突�
 PR4/PR5 仍未动。§B′.9 的三条自我攻击中，第 2 条（光锥单项式线性无关没有免费午餐）被
 本轮**间接印证**：`levelSubmodule_eq_span_lcMonomial` 只做到张成，且张成的证明
 完全用不上任何基数比较，正说明「张成」与「基」之间隔着的确实是另一件事。
+
+### §B′ 订正（PR4 落地后，2026-09-12）
+
+PR4 落在 `NoGhost/SpuriousElimination.lean`（85 条声明，约 1300 行，`check_axioms --all` 全 `ok`）。
+`D = 26` 不出现。**§B′.2 的 (P1)(P2)(P3) 至此全部在 Lean 里**，`ddf-spans` 只剩 (B-26)。
+
+11. **§B′.9 结尾那条「领头项引理真的需要 `a₀ = 1`」是错的**。原文说：「`conj_eq_light_sub_momentum`
+    依赖 `a·a = 2`，即 `a₀ = 1`——这不是可有可无的归一化：`a·a ≠ 2` 时 `b̃` 与 `b − a` 差一个标量，
+    B′.5 的领头项引理要重写。」实际不用重写。把 `p_j` 沿标架分解，`b̃` 分量恒为 `−1`
+    （只用 `b·p_j = 1`，即 (F2)+(F3)），而 `b` 分量 `−(b̃·p_j)` **随 rung 变且依赖 `a·a`**——
+    但它乘的是 `α^b_{−n}`，`β` 比目标低一，**整项落进余项，从不被求值**。
+    于是 `lcCrea_towerMomentum` 只给出「存在 lam 使 `α^{p_j}_{−n} = lam·α^b_{−n} − α^{b̃}_{−n}`」，
+    全链在 `[CommRing R] [Algebra ℚ R]` 上成立：不需要 `conj_eq_light_sub_momentum`、
+    不需要 `dotVec_self_eq_two`、不需要 `(2:R) ≠ 0`、不需要 `a·a = 2`。
+    （§B′.9 第 1(b) 条关于「零模系数随 rung 变、写成常数会得到错引理」的警告本身是对的，
+    只是结论相反：正因为它随 rung 变，才必须把它**推进余项**而不是写进领头项。）
+
+12. **`L_{−n}` 不在一般单项式上计算，而是穿过去**。§B′.9 第 1(a) 条把「正规序在 `m` 与 `−n−m`
+    都为负时的配对要手工做」列为三大风险之一。这一步根本不存在：
+    `[L_{−n}, α^w_{−r}] = r α^w_{−(n+r)}`（`Fock.Lop_apply_mode`，仓库早就有）把 `L_{−n}`
+    移过光锥单项式的**每个因子**，剩下的 Sugawara 计算只在**层真空**上，那里只有
+    `−n ≤ m ≤ 0` 存活、每个存活算子都是产生算子或零模，端点 `m = 0` 与 `m = −n` 由
+    `nordPair_comm` 相等（`½` 正是花在这里）。**湮灭算子从头到尾没有作用在光锥单项式上。**
+    这是 PR4 在预算内做完的唯一原因；蓝图设想的「先做 `n = 1, 2` 验证形状再推一般 `n`」
+    因此不必要，一般 `n` 与 `n = 1, 2` 一样便宜。副产品：`Lop_neg_apply_one`
+    （任意 `n ≥ 1` 的层真空展开）补上了 `LightCone.lean` 的 Gaps 自报的
+    「`n = 1, 2` 是唯一可用的层真空公式」。
+
+13. **领头项引理的陈述比草案短**：余项里不必写出 `Σ_{l=1}^{n−1} u_{n−l}ũ_l`。那些项的 `β`
+    与目标相同而 `ω` 严格更小（`l < n`），所以它们和「`β` 更小」的项一样满足同一个测度不等式，
+    统一进 `lcLow`。实际陈述是
+    `α^{b̃}_{−n}·m(d′) + L_{−n}(m(d′)) ∈ lcLow F N (μ_N(d′ + (b̃,n)))`。
+
+14. **「片上型非退化」这条前置走不通，但也不需要**。§B′.4 末尾要求用
+    `LinearMap.BilinForm.finrank_orthogonal`（需要 `Nondegenerate` 与**有限维环境空间**）。
+    `TowerFock` 不是有限维，那条定理用不上。实际需要的只有整塔上的非退化
+    `(∀ Y, ⟨Y, Z⟩ = 0) → Z = 0`，而 `Fock.pairing` 在单项式基上就是
+    `monomialNorm η d • lcoeff d`，所以配上 `monomialNorm η d ≠ 0`（特征零、无零因子、`η_μ² = 1`）
+    三行就得到。新声明 `Fock.monomialNorm_ne_zero` / `Fock.eq_zero_of_pairing_left_eq_zero` /
+    `Fock.eq_zero_of_towerPairing_left_eq_zero` 顺便关掉 `TowerNull.lean` 自报 gaps 的第 2 条
+    「没有非退化陈述」。**不需要序，也不需要域**（`[CommRing] [NoZeroDivisors] [CharZero]` 足够）。
+
+15. **`towerPhys_inf_towerBigrade_eq_orthogonal` 的两半各自更便宜**。`⊆` 是
+    `towerSpuriousSubmodule_le_towerOrthComplement` 加型的对称性；`⊇` 的 `L_m Ψ = 0`（`m ≥ 1`）
+    由 `L_m† = L_{−m}` 加上面的非退化得到，而 `L_0` 条件在反对角片上**自动**
+    （`towerLop_zero_apply_of_mem_towerBigrade` 给本征值 `α'k² + j + N`，`j = −N`）。
+    整条定理**不需要光锥标架**，类型类只有 `[CommRing] [Algebra ℚ] [NoZeroDivisors] [CharZero]`。
+
+16. **(P3) 用嵌入对偶证，不用余维数**。有了「每个片上型无根基」
+    （`eq_zero_of_mem_towerBigrade_of_orthogonal`，靠 `towerPairing_towerBigradeProj_left`
+    把「⊥ 一个片」升级成「⊥ 一切」），映射 `x ↦ ⟨x, ·⟩|_{conjFreeSlice}` 在物理片上单射，
+    于是 `dim(H_phys ⊓ V_N) ≤ dim (conjFreeSlice)^* = dim conjFreeSlice ≤ #{b̃-free d}`。
+    只用到消元的**包含**方向，不需要 `conjFreeSlice ⊓ spurious = ⊥`。
+    技术坑：Mathlib 的 `Subspace.dual_finrank_eq` 里 `Module.Dual K V` 走
+    `AddCommGroup.toAddCommMonoid`，而 `↥W →ₗ[K] K`（`W` 是 `Submodule`）走
+    `Submodule.addCommMonoid`，两者只 defeq 不同构；把辅助引理的 `W` 声明成
+    `Submodule K M` 而不是抽象类型才能通过统一。
+
+17. **`p_{D−1}(N)` 的指标集不必新建**：就是 `{d : Osc D →₀ ℕ // level d = N ∧ β(d) = 0}`，
+    与 `p_D(N)`、`p_{D−2}(N)` 同一个指标类型（延续 PR3 订正第 8 条），有限性直接用
+    `NoGhost/Fock.lean` 已有的 `Fock.finite_setOf_level_eq`。PR2 那套 `ddfLevelEncode` 编码
+    在这里用不上，分拆数依旧一次都没求值（§B′.8 成立）。
+
+18. **附赠的 Goddard (6.2) 桥比估的 80 行还便宜**（实际约 90 行），因为它不需要新的
+    Fock 层计算：乘以 `α^w_{−r}` 在塔上**就是** `towerModeVec η a b w (−r)`
+    （`towerModeVec_neg_single`），而 `⁅K_n, towerModeVec w (−r)⁆ = 0` 当 `b·w = 0`
+    （`lie_towerModeVec_towerModeVec`，已有），配 `kOp_apply_single_vacuum_of_pos` 归纳即可。
+    `b·frameVec t = 0` 对除 `b̃` 外的每个方向成立（(F2) 与 (F5)）。
+    **反向包含仍未做**，§B′.9 第 2 条的判断未被动摇。
+
+19. **行数**：PR4 实际约 1300 行，蓝图估 500。超出的 800 行里，约 250 行是三套记账张成
+    （`lcBound` / `lcLow` / `lcSeed`）的单调性与乘法脚手架，约 200 行是非退化层
+    （蓝图假定它来自 Mathlib 的 `BilinForm` API，见第 14 条），约 150 行是 `Lop_neg_apply_one`
+    的有限求和记账，其余是文档。PR0–PR4 合计实际约 2700 行，蓝图估 1290。
+
+20. **§B′.9 的三条自我攻击，结算**：第 1 条（领头项引理超预算 / 形状不对）**被证伪**
+    ——形状是对的，预算超了约 2.6 倍，但机制比设想的简单（第 12 条）。第 2 条（线性无关没有
+    免费午餐）**仍然成立且未被绕过**，它现在恰好是两条未完成包含的唯一障碍，且仍不在关键路径上。
+    第 3 条（(B-26) 可能不落在本架构里）**未被触及**：本轮把 `ddf-spans` 压到只剩 (B-26)，
+    但没有对 (B-26) 本身做任何工作，§B′.9 关于「零态不是逐 `N` 的奇异向量」的硬事实依然是
+    下一步唯一的路标。

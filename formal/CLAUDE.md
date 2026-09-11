@@ -348,6 +348,42 @@ StringFormal/
                             另有 `dotVec_conj_towerMomentum`（`b̃·p_j = −1 − j`，**随 rung 变**，
                             §B′.9 第 1(b) 条的陷阱）与 `dotVec_trans_towerMomentum`（`ε_i·p_j = 0`）。
                             `D = 26` 与整个塔（rung / `towerBigrade`）在本文件一次不出现
+  NoGhost/SpuriousElimination.lean  **蓝图 §B′ PR4**：`b̃`-次数消元与 (P3) 上界。
+                            **`D = 26` 一次不出现**，截距只以 `a₀ = α'k²` 出现。85 条声明。
+                            (1) **两个次数**：`conjDeg`（β，`b̃` 行总次数）与 `conjWt`（ω，加权次数），
+                            都用 `Finsupp.weight` 实现故加性免费；归纳量
+                            `lcMeasure hD N d = β(d)(N+1) + ω(d)`；三个记账张成
+                            `lcBound` / `lcLow` / `lcSeed` 与 `conjFree` / **`conjFreeSlice`**。
+                            (2) **Sugawara 输入**：`oscPair_eq_lightCone`（两个产生算子的度规收缩
+                            换成标架：`Σ_μ η_μ α^μ_{−r}α^μ_{−s} = −α^b_{−r}α^{b̃}_{−s}
+                            − α^{b̃}_{−r}α^b_{−s} + Σ_i α^{ε_i}_{−r}α^{ε_i}_{−s}`）与
+                            **`Lop_neg_apply_one`**（**任意 `n ≥ 1`** 的层真空公式
+                            `L_{−n}|0;p⟩ = α^p_{−n}|0;p⟩ + ½Σ_{l=1}^{n−1}Σ_μ η_μ α^μ_{−(n−l)}α^μ_{−l}|0;p⟩`；
+                            仓库此前只有 `n = 1, 2`）。
+                            (3) **领头项引理** `towerLop_neg_conjDegree_leading` /
+                            `lcMonomial_conj_add_Lop_mem_lcLow`：`α^{b̃}_{−n}m(d′) = −L_{−n}m(d′)
+                            + （测度严格更小的光锥单项式）`，**对每个 `n`**（§B′.9 点名的最可能卡点）。
+                            **关键简化**：不去算 `L_{−n}` 作用在一般单项式上，而是用
+                            `[L_{−n}, α^w_{−r}] = r α^w_{−(n+r)}` 把它**穿过**所有产生算子，
+                            于是唯一的 Sugawara 计算落在真空上，**湮灭算子从不作用在光锥单项式上**。
+                            (4) **消元** `towerBigrade_le_conjFreeSlice_sup_towerSpurious`：
+                            反对角片模伪态由不含 `b̃` 的光锥单项式张成（对 `lcMeasure` 强归纳）。
+                            (5) **非退化**：`Fock.monomialNorm_ne_zero`、
+                            `Fock.eq_zero_of_pairing_left_eq_zero`、
+                            `Fock.eq_zero_of_towerPairing_left_eq_zero`（特征零、无零因子），
+                            关掉 `TowerNull.lean` 自报的 gaps 第 2 条；`eq_zero_of_mem_towerBigrade_of_orthogonal`
+                            （片上无根基）。
+                            (6) **`towerPhys_inf_towerBigrade_eq_towerOrthComplement`**：反对角片上
+                            「物理」⟺「与全部伪态正交」（`L_0` 条件在反对角上自动；不需要光锥标架）。
+                            (7) **(P3)** `finrank_towerPhys_inf_towerBigrade_le`：
+                            `dim(H_phys ⊓ V_N) ≤ #{d | level d = N ∧ β(d) = 0}`（即 `p_{D−1}(N)`，
+                            **永不求值**）。证法是**嵌入对偶**（`x ↦ ⟨x,·⟩|_{conjFreeSlice}` 单射），
+                            不用 `BilinForm.finrank_orthogonal`（那条要有限维环境空间，塔不是）。
+                            (8) **附赠**（Goddard (6.2) 的一半）`single_lcMonomial_mem_towerKerK` /
+                            `conjFreeSlice_le_towerKerK_inf_towerBigrade`：不含 `b̃` ⟹ 满足 K-条件
+                            （`K_n` 与 `α^w_{−r}` 对易当 `b·w = 0`）。**反向包含未做**（要线性无关，
+                            §B′.9 第 2 条）。
+                            未做：(B-26)（PR5，`D = 26` 唯一入口）、`conjFreeSlice ⊓ spurious = ⊥`
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
