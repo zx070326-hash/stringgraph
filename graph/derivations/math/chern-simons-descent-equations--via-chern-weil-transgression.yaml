@@ -53,20 +53,23 @@ summary: |
 gaps:
   - "★ **局部性（本轮新发现，GS 链上此前未被记录的限定）**：来源 p.16 末逐字「Equations such as (2.24) and (2.26) are **really valid only locally, in some finite neighborhood in x-space**. It is however well known that they can be given a global meaning by using a connection on a principal fibre bundle, rather than a vector potential on the base (x-space).」本推导只证局部/代数版本；**全局版本本图无来源、未证**。⚠ green-schwarz-1984 全文没有这句话，GS 直接在整个十维时空上使用 (4)–(8)(14)–(16)。"
   - "★ **k² = 0 未证**：来源引入同伦算子 k := ∫₀¹ ℓ_t（(2.44)，满足 kd + dk = 1）时，对 k² = 0 逐字写「Actually, it is not difficult to show that this is a general fact, when k is defined by means of the family (2.48). **We leave the proof as an exercise to the reader.**」⇒ 本文无证明。**说明**：目标卡的 (i)(ii)(iii) 三条都不使用 k² = 0（k 只在来源 §3 推导有限规范变换下的 α_{2n−2} 时用到，那部分不在本卡范围内），故这条不影响本推导；记录在此是为了不让下游误以为来源的整套装置已闭合。"
-  - "**(3.28) → (3.29) 只有断言**：来源对 (3.28) 逐字「as easily verified」、对 (3.29) 逐字「This implies that」，**未给中间步骤**；本图未复算。本推导 status 取 rigorous 的依据是「该结果是标准的已发表数学定理」，**不是**「来源的书写完整」——见 notes 第 1 条。"
-  - "**canonical 数学来源尚未核实**：chern-1979 / kobayashi-nomizu-1963 / nakahara-2003 三条均为 **L0（本项目一字未取到）**，只凭 zumino-1983-les-houches 参考文献 [0] 的逐字指认登记。⇒ 若 auditor 认为 rigorous 必须由**已核实**的数学来源支撑，本推导应降为 physical-argument。**本 gap 就是那次裁决所需的全部信息。**"
+  - "**[已关闭 2026-09-11] (3.28) → (3.29) 在来源里只有断言**：来源对 (3.28) 逐字「as easily verified」、对 (3.29) 逐字「This implies that」，**未给中间步骤**。reviewer-batch10 已独立复算第三步（Δ = d + δ、Δ² = 0、ℱ = Δ(𝒜+v) + (𝒜+v)²、按 v 幂次比较系数），判定为有限步分次代数计算且自足；故这处跳步不再是本推导的缺口，见 notes 第 1 条。"
+  - "**canonical 数学来源仍未核实**：chern-1979 / kobayashi-nomizu-1963 / nakahara-2003 三条均为 **L0（本项目一字未取到）**，只凭 zumino-1983-les-houches 参考文献 [0] 的逐字指认登记。⇒ 这三条至今只是候选，**不得**据以写任何式号。**不再影响档位**：reviewer-batch10（2026-09-11）逐行复核三步后判定论证自足，本推导的 rigorous 走 docs/STATUS_LEVELS.md 的「有限步初等计算 + reviewer 复核」例外条款，不再靠这些未核实来源支撑（见 notes 第 1 条）。"
   - "**ω¹ 的一般积分公式不入图**：来源 (3.36) 的前置因子与末项指数读图不可靠（抽取记录 §3.2），故目标卡只收 n = 2、n = 3 两个显式特例，**一般 n 的 ω¹ 在本图里没有显式表达式**。"
   - "**绝对归一化不入图**：来源 §5 的 (5.13) 是唯一给出 ω¹ 绝对归一的式子，但 (a) 读图不可靠（(4π)^{n−1} 的底数与指数），(b) 原文在该式上方有**手写插注「(up to a sign)」**。⇒ 本图的 ω 全部未归一。"
 notes: |
+  reviewer-verified: reviewer-batch10, 2026-09-11（第一步 Bianchi + 迹循环性、第二步 A_t = tA 的 transgression 积分、第三步 Δ = d + δ 按 v 幂次比较系数——三步逐行复核，判定论证自足，不依赖三条 L0 数学来源）
+
   【1. ★ status 为什么取 rigorous，以及它到底断言了什么】
-  断言的是：**目标卡 (i)(ii)(iii) 是纯微分几何（Chern–Weil transgression + 代数下降）的标准结果，
-  在数学界有已发表且被接受的完整证明**（docs/STATUS_LEVELS.md 第 4 级的主判据）。
-  **不**断言的是：本图已逐页核实那份数学证明。本图核实到的是
+  断言的是：**目标卡 (i)(ii)(iii) 的论证在本卡内自足**——三步都是微分分次代数里的有限步计算，
+  且已由 reviewer 独立逐行复核（上面那行记录）。档位依据是 docs/STATUS_LEVELS.md
+  的「有限步初等计算 + reviewer 复核」例外条款，**不是**「canonical 数学文献已核实」
+  （chern-1979 / kobayashi-nomizu-1963 / nakahara-2003 三条至今是 L0，见 gaps 第 4 条）。
+  **不**断言的是：本图已逐页核实数学界那份标准证明。本图逐页核实到的是
   zumino-1983-les-houches 的逐步推导（L1），它对第一、二步给了完整两行到十行的计算并逐字自称
-  「and have thus verified that」，对第三步则有一处「as easily verified / This implies that」的跳步。
-  ⇒ 若把 rigorous 的门槛定为「已核实的数学文献」，本推导应降为 physical-argument；
-  gaps 第 3、4 条就是给 auditor 的裁决材料。**本推导没有引用 docs/STATUS_LEVELS.md 的
-  「有限步初等计算 + reviewer 复核」例外条款**（未经 reviewer 复核）。
+  「and have thus verified that」，对第三步有一处「as easily verified / This implies that」的跳步——
+  该跳步由 reviewer 的复算补上（gaps 第 3 条已关闭）。
+  ⚠ 仍然成立的限定是 gaps 第 1 条：只证局部/代数版本，全局版本本图无来源。
 
   【2. 与 Lean 的关系】来源 p.17 末给了一条**对形式化极其有利的逐字许可**：
   「in defining the operators d, ℓ and k and in studying their properties (from formula (2.36) on)
