@@ -1,0 +1,80 @@
+id: worldsheet.ocq-null-state-two-families--via-blueprint-hand-computation
+target: worldsheet.ocq-null-state-two-families
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    note: 塔 T(k;k_0)、层间正交型 ⟨·,·⟩_T 的定义来源，本卡【设定】段逐字沿用。
+  - id: worldsheet.virasoro-generators-free-boson
+    note: L_m 的定义与其上的对易关系代数（本推导的全部验证方程都是 Virasoro 代数的直接推论）。
+  - id: worldsheet.free-boson-central-charge-d
+    note: 中心荷 c = D，本卡 (2) 的 L_2χ₂(φ) = (26h+c)φ 公式里的 c 就是这个 D。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    note: H_phys(a₀) := ker(L_0−a₀) ∩ ⋂_{m≥1} ker L_m 的定义，本卡 (1)(2) 断言"χ 被 L_1/L_2
+      湮灭 ⟹ χ ∈ H_phys(a₀)"用到的正是这条定义（配合 towerBigrade 齐次性给出的自动质壳）。
+  - id: worldsheet.tower-physical-quotient-form
+    note: H_spur := Σ_{n≥1}L_{−n}T(k;k_0)、H_null(a₀) := H_phys(a₀) ∩ H_phys(a₀)^⊥ 的定义，
+      以及断言 (2)（H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，formalized，"易方向"）——本卡 (3) 唯一
+      的非平凡输入，把"χ₁、χ₂ ∈ H_phys 且显然 ∈ H_spur"提升到"∈ H_null"。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §B″.2、§B″.2.1（约 1489-1607 行）、§B″.4（约 1666-1701 行）"
+    note: |
+      本推导的全部四条验证方程（L_1χ₁、L_nχ₁ (n≥2)、L_1χ₂、L_2χ₂、L_nχ₂ (n≥3) 的显式系数）
+      逐字取自该蓝图 §B″ 的手算。**取证等级**：formal/BLUEPRINT-noghost.md §B″ 开篇自述
+      "本节所有数值与代数式都是**手算**……**未经 Lean 校验**"（两个具名例外——kacDet2 的定义、
+      Fock.pairing_levelTwoScalar_physical 的判别式——均与本推导的验证方程无关）。
+      **本推导亦未经 reviewer 复核**。因此 status 只能是 physical-argument，不得更高——
+      这与"手算"本身对不对无关（curator 已独立复核过代数，见下），而是按
+      docs/STATUS_LEVELS.md 的等级定义，"未经 Lean/reviewer 复核的推导链"上限即
+      physical-argument。
+summary: |
+  取 D = 26、a₀ = 1（唯二的两条外部假设，(N)(S) 恒定沿用 worldsheet.ddf-operators-v6）。
+  对固定 N ≥ 2，rung r := −N，Q_M 与 𝒟₂ 依目标卡【设定】定义。
+
+  **Type 1**：对 φ ∈ Q_{N−1}（L_0-本征值 h_{r,N−1}），用 Virasoro 对易关系
+  [L_m, L_{−1}] = (m+1)L_{m−1}（对一切 m）展开 L_mL_{−1}φ = (m+1)L_{m−1}φ + L_{−1}L_mφ：
+    · m ≥ 2：第二项因 φ 准物理为零；第一项 (m+1)L_{m−1}φ 中 m−1 ≥ 1，同样因 φ 准物理为零。
+      ⇒ L_mχ₁(φ) = 0 对一切 m ≥ 2，不需任何额外假设。
+    · m = 1：第二项为零；第一项 2L_0φ = 2h_{r,N−1}φ。取 a₀ = 1 时 h_{r,N−1} = a₀ − N + (N−1)
+      = a₀ − 1 = 0，故 L_1χ₁(φ) = 0。
+
+  **Type 2**：对 φ ∈ Q_{N−2}（L_0-本征值 h_{r,N−2} = a₀ − 2，取 a₀=1 时为 −1），逐项展开
+  L_mD₂φ = 2L_mL_{−2}φ + 3L_mL_{−1}²φ，用 [L_m,L_{−2}] = (m+2)L_{m−2}（m≠2）、
+  [L_m,L_{−1}] = (m+1)L_{m−1}、[L_2,L_{−2}] = 4L_0 + (c/2)·id：
+    · m ≥ 3：两项各自展开后的中间项都因 φ 准物理（L_kφ = 0，k ≥ 1）逐一消去
+      （具体：m−2 ≥ 1、m−1 ≥ 2 ⇒ L_{m−2}φ = L_{m−1}φ = 0；L_{−1}L_mL_{−1}φ 与
+      L_{−1}L_{m}φ 一侧的中间对易子同样落在 φ 的湮灭区）。⇒ L_mχ₂(φ) = 0 对一切 m ≥ 3，
+      不需任何额外假设。
+    · m = 1：得 L_1D₂φ = 12(h_{r,N−2}+1)L_{−1}φ；取 a₀=1（h_{r,N−2}=−1）时系数为零。
+    · m = 2：先算 L_2L_{−2}φ = (4h_{r,N−2}+c/2)φ、L_2L_{−1}²φ = 6h_{r,N−2}φ
+      （中间步 L_2L_{−1}φ = 3L_1φ + L_{−1}L_2φ = 0 用了 φ 准物理），合并得
+      L_2D₂φ = (26h_{r,N−2}+c)φ。h_{r,N−2}=−1 时为 (c−26)φ，故 L_2χ₂(φ) = 0
+      **当且仅当** c = 26 = D。
+
+  **落在 H_null**：χ₁(φ) = L_{−1}φ、χ₂(φ) = 2L_{−2}φ + 3L_{−1}(L_{−1}φ) 都是 L_{−1}、L_{−2}
+  像之和，manifestly ∈ H_spur；配合上面已证的 ∈ H_phys(a₀=1)，由
+  worldsheet.tower-physical-quotient-form 断言 (2)（H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，
+  formalized，"易方向"）直接得 χ₁(φ)、χ₂(φ) ∈ H_null(a₀=1)。
+
+  **N = 2 数值核对**：dim Q_0 = 1（层真空）、dim Q_1 = D−1 = 25（L_1 : F_1→F_0 典型满射，
+  核维数 D−1），Type 1 给 25 个、Type 2 给 1 个，合计 26，与
+  worldsheet.ddf-spanning-rank-inequality notes (i) 独立算出的答案吻合（数值核对，
+  非恒等式证明——两处的显式基未做变换比对）。
+gaps:
+  - "全部四条验证方程（L_1χ₁=2h·φ、L_nχ₁=0(n≥2)、L_1χ₂=12(h+1)L_{-1}φ、L_2χ₂=(26h+c)φ、
+    L_nχ₂=0(n≥3)）是手算，未经 Lean 形式化，未经 Lean 校验；curator 已独立用 Virasoro
+    对易关系逐项复核了代数（见目标卡 sources 的 note），但这不构成 Lean 或 reviewer 复核，
+    不提升本推导 status。"
+  - "未经 graph-reviewer 复核（本推导落地时 reviewer 未审阅）。"
+  - "一般 N 的 dim Q_{N-1}、dim Q_{N-2} 未证；只在 N=2 特例给出具体数值（dim Q_1 = D−1
+    的'典型满射'论证也是手算式的、非严格的线性代数论断，未排除退化情形）。"
+  - "χ₁(Q_{N-1})、χ₂(Q_{N-2}) 是否张成 H_null(a₀) ∩ towerBigrade(r,N)（对一般 N）未证；
+    这正是 worldsheet.ddf-spanning-rank-inequality notes (iv) 记录的、N≥5 起失败
+    （Euler 五边形数超额）的开放问题，本推导不解决它、不绕过它。"
+  - "χ₁、χ₂ 的单射性、像是否相交（im(χ₁) ∩ im(χ₂) = 0）未证，仅在 N=2 有维数吻合的
+    间接证据（25+1=26），非证明。"
+  - "N=2 与 worldsheet.ddf-spanning-rank-inequality notes (i) 的'D+1 个生成元的 2×2
+    Gram 子块'描述之间未做显式基变换核对，只是数值巧合。"
+author: curator
+created: "2026-09-12"

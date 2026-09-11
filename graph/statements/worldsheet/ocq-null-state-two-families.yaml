@@ -1,0 +1,141 @@
+id: worldsheet.ocq-null-state-two-families
+kind: proposition
+title: 动量塔上零态的两族映射构造（Type 1：L_{-1} 像；Type 2：𝒟₂ 像）；两族的"能被 L_1/L_2 湮灭"条件恰给 a₀=1 与 D=26
+statement: |
+  【设定】记号沿用 worldsheet.momentum-tower-fock-space、worldsheet.ddf-operators-preserve-physical-states
+  与 worldsheet.tower-physical-quotient-form：D ∈ N；系数环 R 是交换 Q-代数；对角度规分量
+  η_μ 满足 η_μ² = 1（conv.metric-mostly-plus）；基点动量 k 与类光参考向量 k_0，重标度
+  a := (2α')^{1/2} k、b := (2α')^{1/2} k_0（conv.alpha-prime-regge）；动量塔
+  T(k;k_0) = ⊕_{j∈Z} F(k+jk_0)；L_m 是逐层用该层动量的 Sugawara 生成元
+  （worldsheet.virasoro-generators-free-boson，中心荷 c = D，worldsheet.free-boson-central-charge-d）；
+  a₀ := α'k² = ½η(a,a)；条件 (N) η(b,b) = 0、(S) η(b,a) = 1（worldsheet.ddf-operators-v6 记法）；
+  H_phys(a₀)、H_spur、H_null(a₀) 逐字取自 worldsheet.tower-physical-quotient-form。
+
+  固定 N ≥ 2，记 r := −N（目标反对角片的 rung）。towerBigrade(r,M) 是该 rung 上第 M 能级的
+  齐次子空间；L_0 在其上恒取值 h_{r,M} := a₀ − N + M（由 (N)(S) 与 η(a,a) = 2a₀ 代入
+  η(a−Nb, a−Nb)/2 + M 直接算出，towerBigrade 本身双分次齐次，L_0 无需额外假设即在其上
+  是标量算子——这是 worldsheet.ddf-spanning-hypothesis 已记录的"物理态条件双分次齐次"的
+  同一事实在非质壳态上的推广）。对每个 M ≥ 0 定义**准物理子空间**
+    Q_M := towerBigrade(r,M) ∩ ⋂_{n≥1} ker L_n
+  （只要求被全部正模湮灭，**不**要求在 a₀ 质壳上；Q_M 上 L_0 = h_{r,M}·id）。
+  记二阶算子 𝒟₂ := 2L_{−2} + 3L_{−1}²。
+
+  【断言：两族映射，及其被 L_1/L_2 湮灭的条件】设 (N)(S)。则对一切 N ≥ 2：
+
+  (1) **Type 1（L_{-1} 像）**：映射 χ₁ : Q_{N−1} → towerBigrade(r,N)、χ₁(φ) := L_{−1}φ。
+      对一切 φ ∈ Q_{N−1}：
+        L_n χ₁(φ) = 0  （对一切 n ≥ 2，只用 φ 准物理，纯代数恒等式，对一切 c 成立）；
+        L_1 χ₁(φ) = 2 h_{r,N−1} φ 。
+      ⇒ χ₁(φ) 被 L_1 湮灭（从而 χ₁(φ) ∈ H_phys(a₀)）**当且仅当 h_{r,N−1} = 0，
+        等价 a₀ = 1**——与 N 无关的同一个条件。
+
+  (2) **Type 2（𝒟₂ 像）**：映射 χ₂ : Q_{N−2} → towerBigrade(r,N)、χ₂(φ) := 𝒟₂φ。
+      对一切 φ ∈ Q_{N−2}：
+        L_n χ₂(φ) = 0  （对一切 n ≥ 3，只用 φ 准物理）；
+        L_1 χ₂(φ) = 12 (h_{r,N−2} + 1) L_{−1}φ ；
+        L_2 χ₂(φ) = (26 h_{r,N−2} + c) φ 。
+      ⇒ 在 a₀ = 1（此时 h_{r,N−2} = −1，与 (1) 同一个条件，使 L_1χ₂(φ) = 0 自动成立）之下，
+      χ₂(φ) 被 L_2 湮灭（从而 χ₂(φ) ∈ H_phys(a₀)）**当且仅当 26h_{r,N-2}+c = c-26 = 0，
+      等价 c = D = 26**——本断言两条验证方程组里**唯一**含 D 的一条，对一切 N ≥ 2 一致。
+
+  (3) **两族的像落在 H_null(a₀) 而不只是 H_phys(a₀) 里**：设 a₀ = 1 且 D = 26。
+      χ₁(φ)、χ₂(φ) 均属于 H_spur（分别是 L_{−1}φ 与 2L_{−2}φ+3L_{−1}(L_{−1}φ) 的形状，
+      逐字落在 worldsheet.tower-physical-quotient-form 的 H_spur := Σ_{n≥1}L_{−n}T(k;k_0) 定义里）；
+      配合 (1)(2) 已证的"属于 H_phys(a₀)"，由该卡断言 (2)（H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，
+      formalized）得
+        χ₁(Q_{N−1}) ⊆ H_null(a₀) ∩ towerBigrade(r,N)，
+        χ₂(Q_{N−2}) ⊆ H_null(a₀) ∩ towerBigrade(r,N) 。
+
+  【N = 2 特例，与另一条独立计算吻合】此时 Q_0 是 rung r 的层真空本身（dim = 1，层真空自动被
+  一切正模湮灭），Q_1 是 level 1 上被 L_1 湮灭的子空间（一般 dim = D − 1，因 L_1 : F_1 → F_0
+  典型是满射）。D = 26 时 Type 1 给出 D−1 = 25 个零态，Type 2 给出 1 个（𝒟₂ 作用于层真空），
+  合计 **25 + 1 = 26** —— 与 worldsheet.ddf-spanning-rank-inequality notes (i) 独立算出的
+  N = 2 秩不等式两边吻合（该处用"D+1 个生成元的 2×2 Gram 子块"给出同一个 26，是同一空间的
+  另一种基底描述，两处未做过显式基变换核对，是数值吻合不是恒等式证明）。
+
+  【本卡明确不断言】
+  (a) **不断言一般 N 的完备性/张成性**：本卡只给出两族映射并证明它们的像落在 H_null 中，
+      **不**断言 χ₁(Q_{N−1}) + χ₂(Q_{N−2}) 张成 H_null(a₀) ∩ towerBigrade(r,N)，也不断言
+      与 worldsheet.ddf-spanning-rank-inequality 的零态维数下界 dim Z_N ≥ p_{D−1}(N)−p_{D−2}(N)
+      吻合——那正是该卡 notes (iv) 记录的、从 N ≥ 5 起失败（Euler 五边形数超额）的断言，
+      本卡不重复、不修补、不绕过。
+  (b) **不断言 χ₁、χ₂ 在一般 N 单射，也不断言 im(χ₁) ∩ im(χ₂) = 0**：N=2 时两个维数
+      (D−1) 与 1 相加恰为 D，且与另一条独立计算的答案吻合，但这本身**不是**"像不相交"或
+      "映射单射"的证明，只是与一条独立计算数值吻合，见上文措辞。
+  (c) **本卡的 Type1/Type2 拆分是本项目的重新组织，不是文献里现成的说法**：文献
+      （goddard-2008 §6）只给一般 N 的定性刻画（(6.2)(6.3) 的 K_n 代数），不含这个
+      按"作用几次 L_{-1}/一次 𝒟₂"分类的显式构造。𝒟₂ := 2L_{−2}+3L_{−1}² 的具体系数是
+      从"c=26 时 N=2 的 2×2 Kac 子式退化"这一事实（worldsheet.kac-determinant-v2 在 N=2
+      的特例）反解出来的，文献未给出一般 N 版本的这个算子，本卡也不断言这是唯一可能的
+      二阶算子选择。
+  (d) **不断言与 worldsheet.gt-longitudinal-k-algebra 的 K_n 代数或 A^L_n 构造的任何直接
+      关系**：本卡只用 Virasoro 代数自身的对易关系（[L_m,L_{−1}]、[L_m,L_{−2}]、[L_2,L_{−2}]），
+      不引入 DDF 算子或纵向算子。
+  (e) **不断言 Q_{N−1}、Q_{N−2} 对一般 N 的维数公式**：N=2 特例用到的
+      dim Q_1 = D−1（"L_1 : F_1 → F_0 典型满射"）与 dim Q_0 = 1 未在本卡证明对一般 N 的
+      类比（那是 formal/BLUEPRINT-noghost.md §B″.4.1 的 dim Q_M = p_{D−1}(M) 计数，
+      本卡不重复其论证）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+sources:
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §B″.2、§B″.2.1（约 1489-1607 行，N=2 的显式 Gram 矩阵与
+      D+1 个生成元）与 §B″.4（约 1666-1701 行，一般 N 的 Q_M、𝒟₂ 机制陈述）"
+    note: |
+      【⚠ 全部⟨手算⟩，未经 Lean 校验、未经 reviewer 复核，本卡 status 因此只能是
+      physical-argument，不得更高】formalizer（分支 agent/formalizer/blueprint-B-double-prime，
+      2026-09-12）在规划 PR5a/PR5b（VirasoroPBWBasis.lean / NullSeeds.lean）前，用手算给出
+      本卡 (1)(2) 的验证方程与 N=2 特例的具体维数核对；§B″.13 结论段称其为"D=26 只提供一个
+      二阶算子 𝒟₂，在每个 N 上作用在一族 (N−2)-level 准物理态上"这一机制的证据。
+      **curator（本卡撰写者）已独立用 Virasoro 对易关系代数逐项核对了 (1)(2) 的四条
+      验证方程**（用 [L_m,L_{−1}]=(m+1)L_{m−1}、[L_m,L_{−2}]=(m+2)L_{m−2}（m≠2）、
+      [L_2,L_{−2}]=4L_0+c/2·id 逐步展开 L_1χ₁、L_nχ₁(n≥2)、L_1χ₂、L_2χ₂、L_nχ₂(n≥3)），
+      结果与蓝图逐字吻合；**这一步核对不构成 Lean 或 reviewer 复核，只是 curator 自己的
+      代数演算，不提升本卡 status，也不改变"未经 Lean/reviewer 复核"的判定**。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不含本卡的 Type1/Type2 显式构造或 𝒟₂ 算子"
+    note: |
+      **不承载论证**。goddard-2008 只给一般 N 的 K_n 代数刻画 (6.2)(6.3)（见
+      worldsheet.gt-longitudinal-k-algebra），不含逐 N 的显式零态构造；本卡是本项目为
+      worldsheet.ddf-spanning-rank-inequality 的开放内容找到的一个具体、可核的生成机制，
+      登记此条只为给本卡一个文献方位，不代表文献本身给出了这个构造。
+tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, null-state, momentum-tower, open]
+notes: |
+  【为什么立卡（curator，分支 agent/curator/b26-findings；依派活任务交付物 #4）】
+  worldsheet.ddf-spanning-rank-inequality notes (iii) 订正了"D=26 无通用机制"的旧读法，
+  指出真正的机制是"同一个二阶算子 𝒟₂ 逐层作用"；本卡把那条订正展开成一张独立的、可核的
+  陈述卡，承载 Type1/Type2 两族映射的具体验证方程，供任何日后想攻克该卡 notes (iv) 的
+  "N≥5 重叠"问题的人从这里起步。
+
+  【查重】`uv run stringgraph search "null state"`、`search quasi-physical`、
+  `search ocq-null`、`search descTwo` 均无同内容命中（"ocq-null" 模糊命中的是
+  worldsheet.ddf-spanning-rank-inequality 本身，因其正文含"零态"字样，非重复卡；
+  "null state" 命中的是 worldsheet.ocq-spurious-states-v2 等既有卡，内容不重叠，见下）。
+
+  【与 worldsheet.ocq-spurious-states-v2 的关系，不是同一对象】本卡的对象活在**动量塔**
+  T(k;k_0)（worldsheet.tower-physical-quotient-form 的设定），是后者"单个 Fock 空间 F(k) 上
+  的伪态/零态"定义（S(k)、N(k)）在塔上、按"种子准物理态 + 具体算子"组织的一个特例化展开，
+  不是同一对象的换代或不同定义，两卡互不 supersede。
+
+  【第 (3) 条的关键输入：worldsheet.tower-physical-quotient-form (2)，formalized】
+  本卡最初的规划（未落地在此文件的草稿）曾打算只断言"χ₁、χ₂ 被全部正模湮灭"（即
+  ∈ H_phys），但这**不**自动给出 ∈ H_null（零态要求额外与全体物理态正交）。
+  curator 核对后发现补上这一步只需引用已 formalized 的
+  worldsheet.tower-physical-quotient-form 断言 (2)（H_spur ∩ H_phys(a₀) ⊆ H_null(a₀)，
+  "易方向"，Lean `towerSpurious_inf_towerPhys_le_towerNull`）：χ₁(φ)、χ₂(φ) 按构造就是
+  L_{−n}（n=1,2）像之和，manifestly ∈ H_spur；配合 (1)(2) 已证的 ∈ H_phys(a₀)，直接得
+  ∈ H_null(a₀)。**本卡因此在 depends_on 里正式挂了这条边（非 inferred，来源是该卡断言 (2)
+  的逐字内容与本卡 (3) 的显式引用）**，而不是把"落在 H_null"当成不言自明的断言。
+
+  【与 gt-longitudinal-k-algebra notes 的 A^L 反例核对：两套记账未裁决的 1 之差】
+  gt-longitudinal-k-algebra.yaml 的 2026-09-12 追记按 A^L 单项式记账在 N=2 给出 24+1=25
+  （24 个 A^L_{−1}A^i_{−1} 加纵向 Verma 根基 1 个），比本卡的 25+1=26 少 1；两条记账用的是
+  **不同的基**（A^L 单项式 vs 本卡的 Q_1/Q_0 准物理种子），差的那 1 在哪一侧的哪一部分
+  暂未逐项核对——这是一条**尚未裁决**的记账细节，留给任何要合并两套记账的人；本卡不裁决。
+
+  【本卡不是 (B-26) 的解，只是把已知开放内容前移一步】本卡证明了两族映射的像落在 H_null
+  内，这只是构造零态的**充分**方式之一；worldsheet.ddf-spanning-rank-inequality 仍然 open，
+  其 notes (iv) 记录的 N≥5 重叠问题**不受本卡影响**——本卡对 N≥5 未验证任何新内容，只是
+  把 N=2 的具体计算抽象成一般 N 的映射定义（"像落在 H_null 内"这件事对一切 N≥2 成立，
+  但"像是否张成/是否够大"这件事，恰是 (B-26) 本身，本卡刻意不碰，见【本卡明确不断言】(a)）。
+author: curator
+created: "2026-09-12"
