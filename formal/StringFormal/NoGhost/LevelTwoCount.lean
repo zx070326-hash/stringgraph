@@ -649,4 +649,238 @@ lemma alphaTwoCoeff_descTwo_single (hη : ∀ μ, η μ * η μ = 1) (ν : Fin D
 
 end States
 
+/-! ### The Type-1 states are null on the slice -/
+
+section TypeOneNull
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b : Fin D → R}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (haa : Fock.zeroModeSq η a = 2)
+
+include hη in
+/-- A transverse level-one state is annihilated by every positive Virasoro mode: `L_1` gives
+the transversality `e · p_j`, and `L_n` for `n ≥ 2` dies by the grading. -/
+lemma towerLop_apply_single_polState_eq_zero_of_pos {e : Fin D → R} {j : ℤ}
+    (he : dotVec η e (towerMomentum a b j) = 0) {n : ℤ} (hn : 0 < n) :
+    towerLop η a b n (Finsupp.single j (Fock.polState η e)) = 0 := by
+  rcases eq_or_lt_of_le (show (1 : ℤ) ≤ n by omega) with h1 | h1
+  · rw [← h1, towerLop_single, Fock.Lop_one_apply_polState η _ hη e]
+    have hsum : (∑ μ : Fin D, η μ * e μ * towerMomentum a b j μ) = 0 := he
+    rw [hsum, zero_smul, Finsupp.single_zero]
+  · exact towerLop_apply_eq_zero_of_mem_towerBigrade_of_lt η a b
+      (single_mem_towerBigrade (Fock.polState_mem_levelSubmodule_one e)) (by exact_mod_cast h1)
+
+include hη hbb hba haa in
+/-- **The Type-1 level-two null states.**  For every polarisation `e` transverse to the rung
+momentum `p_{-2}`, `L_{-1}((e·α_{-1})|0;p_{-2}⟩)` is a null physical state of the antidiagonal
+slice `(rung -2, level 2)`.  `D` does not appear. -/
+theorem typeOneTwo_mem_towerNullSubmodule {e : Fin D → R}
+    (he : dotVec η e (towerMomentum a b (-2)) = 0) :
+    typeOneTwo η a b e ∈ towerNullSubmodule η a b (1 : R) ⊓ towerBigrade D R (-2) 2 :=
+  towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade η a b hη hbb hba haa
+    (j := -2) (N := 1) (by norm_num)
+    (single_mem_towerBigrade (Fock.polState_mem_levelSubmodule_one e))
+    (fun _ hn => towerLop_apply_single_polState_eq_zero_of_pos hη he hn)
+
+end TypeOneNull
+
+/-! ### The `D` null states of the level-two slice, and their independence -/
+
+section Independence
+
+open MvPolynomial
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- `p_{-2} · p_{-2} = -2`: the level-two tachyonic shell. -/
+lemma dotVec_momentum_neg_two_self (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    dotVec η (towerMomentum a b (-2)) (towerMomentum a b (-2)) = -2 := by
+  rw [← zeroModeSq_eq_dotVec, zeroModeSq_towerMomentum, zeroModeSq_eq_dotVec,
+    F.dotVec_self_eq_two hD, F.hba, F.frame.isotropic]
+  push_cast
+  ring
+
+/-- `a · p_{-2} = 0`: the base momentum is transverse to the rung-`(-2)` momentum, because
+`a·a = 2` and `a·b = 1`.  This is the extra Type-1 polarisation beyond the `D - 2` transverse
+ones (blueprint §B″.2.1's cross-check: `b - b̃ = a`). -/
+lemma dotVec_base_momentum_neg_two (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    dotVec η a (towerMomentum a b (-2)) = 0 := by
+  rw [dotVec_vec_towerMomentum, F.dotVec_self_eq_two hD, dotVec_comm η a b, F.hba]
+  push_cast
+  ring
+
+/-- `p_{-2} · b = 1`, rung-independently. -/
+lemma dotVec_momentum_neg_two_light (F : DDFLightConeFrame η a b) :
+    dotVec η (towerMomentum a b (-2)) b = 1 := by
+  rw [dotVec_comm, dotVec_vec_towerMomentum, F.hba, F.frame.isotropic, mul_zero, add_zero]
+
+/-- **The `D` null states of the antidiagonal slice `(rung -2, level 2)`**: the Type-2 state
+`𝒟₂|0;p_{-2}⟩` (index `none`), the Type-1 state with polarisation `a` (index `some none`), and
+the `D - 2` Type-1 states with the transverse polarisations (index `some (some i)`).
+
+Blueprint §B″.2.1's `25 + 1 = 26`, with the `25` split as `1 + 24`: the extra Type-1
+polarisation is `a = b - b̃`, the one direction of the orthogonal complement of `p_{-2}` outside
+the transverse frame. -/
+noncomputable def nullFamilyTwo (F : DDFLightConeFrame η a b) :
+    Option (Option (Fin (D - 2))) → TowerFock D K
+  | none => descTwo η a b (Finsupp.single (-2) (1 : Fock D K))
+  | some none => typeOneTwo η a b a
+  | some (some i) => typeOneTwo η a b (F.trans.vec i)
+
+/-- **The `D` level-two null states are linearly independent.**
+
+`D = 26` is **not** needed here: independence is a statement about the `α_{-2}` components,
+which are `5 p_{-2}` for the Type-2 state and the polarisation itself for the Type-1 states.
+The argument is the triangularity of blueprint §B″: pair with `p_{-2}` to kill the Type-2
+coefficient (using `p·p = -2 ≠ 0`), then with the frame to kill the Type-1 ones. -/
+theorem linearIndependent_nullFamilyTwo (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    LinearIndependent K (nullFamilyTwo F) := by
+  classical
+  rw [Fintype.linearIndependent_iff]
+  intro g hg
+  set p : Fin D → K := towerMomentum a b (-2) with hpdef
+  set u : Fin D → K :=
+    g (some none) • a + (∑ i : Fin (D - 2), g (some (some i)) • F.trans.vec i)
+      + (5 * g none) • p with hudef
+  -- Step 1: the `α_{-2}` component of the relation says that `u` vanishes.
+  have hu : u = 0 := by
+    funext ν
+    have h : ∑ x : Option (Option (Fin (D - 2))),
+        g x * alphaTwoCoeff D K ν (nullFamilyTwo F x) = 0 := by
+      have h0 := congrArg (alphaTwoCoeff D K ν) hg
+      rw [map_sum, map_zero] at h0
+      exact (Finset.sum_congr rfl fun x _ => by rw [map_smul, smul_eq_mul]).trans h0
+    rw [Fintype.sum_option, Fintype.sum_option] at h
+    simp only [nullFamilyTwo, alphaTwoCoeff_descTwo_single F.hη,
+      alphaTwoCoeff_typeOneTwo F.hη] at h
+    have hS : ∑ i : Fin (D - 2), g (some (some i)) * (η ν * F.trans.vec i ν)
+        = η ν * ∑ i : Fin (D - 2), g (some (some i)) * F.trans.vec i ν := by
+      rw [Finset.mul_sum]
+      exact Finset.sum_congr rfl fun i _ => by ring
+    rw [hS] at h
+    simp only [hudef, Pi.add_apply, Pi.smul_apply, Finset.sum_apply, smul_eq_mul, Pi.zero_apply]
+    linear_combination (η ν) * h
+      - (g (some none) * a ν + (∑ i : Fin (D - 2), g (some (some i)) * F.trans.vec i ν)
+          + 5 * g none * p ν) * F.hη ν
+  -- Step 2: pair `u = 0` against `p`, `b` and the transverse frame.
+  have hexp : ∀ w : Fin D → K, g (some none) * dotVec η a w
+      + (∑ i : Fin (D - 2), g (some (some i)) * dotVec η (F.trans.vec i) w)
+      + (5 * g none) * dotVec η p w = 0 := by
+    intro w
+    have h0 : dotVec η u w = 0 := by rw [hu]; simp [dotVec]
+    rw [hudef, dotVec_add_left, dotVec_add_left, dotVec_smul_left, dotVec_smul_left,
+      dotVec_sum_left] at h0
+    rw [← h0]
+    congr 2
+    exact Finset.sum_congr rfl fun i _ => (dotVec_smul_left η _ w _).symm
+  have hnone : g none = 0 := by
+    have h := hexp p
+    rw [hpdef, dotVec_base_momentum_neg_two hD F,
+      dotVec_momentum_neg_two_self hD F] at h
+    simp only [F.dotVec_trans_towerMomentum, mul_zero, Finset.sum_const_zero, add_zero,
+      zero_add] at h
+    have h10 : (10 : K) ≠ 0 := by norm_num
+    have hg10 : (10 : K) * g none = 0 := by linear_combination -h
+    exact (mul_eq_zero.1 hg10).resolve_left h10
+  intro i
+  match i with
+  | none => exact hnone
+  | some none =>
+      have h := hexp b
+      rw [dotVec_comm η a b, F.hba, hpdef, dotVec_momentum_neg_two_light F] at h
+      simp only [F.trans.transverse, mul_zero, Finset.sum_const_zero, add_zero, hnone,
+        mul_zero, zero_mul] at h
+      linear_combination h
+  | some (some j) =>
+      have h := hexp (F.trans.vec j)
+      rw [dotVec_comm η a (F.trans.vec j), F.hεa j, hpdef,
+        dotVec_comm η p (F.trans.vec j), F.dotVec_trans_towerMomentum j (-2)] at h
+      simp only [F.trans.orthonormal, mul_ite, mul_one, mul_zero, Finset.sum_ite_eq',
+        Finset.mem_univ, if_true, mul_zero, zero_mul, zero_add, add_zero] at h
+      exact h
+
+end Independence
+
+/-! ### `B26 2` at `D = 26`, and the level-two slice of the DDF spanning lemma -/
+
+section Closing
+
+variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+
+/-- All `D` members of `nullFamilyTwo` really are null states of the slice.  This is the only
+statement of the file that uses `(D : K) = 26`, and it uses it only for the single Type-2
+member (`NullSeedsTwo.descTwo_single_mem_towerNullSubmodule`). -/
+theorem nullFamilyTwo_mem_towerNullSubmodule (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) (x : Option (Option (Fin (D - 2)))) :
+    nullFamilyTwo F x ∈ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-2) 2 := by
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD
+  match x with
+  | none =>
+      exact descTwo_single_mem_towerNullSubmodule η a b F.hη F.frame.isotropic F.hba haa hD26
+  | some none =>
+      exact typeOneTwo_mem_towerNullSubmodule F.hη F.frame.isotropic F.hba haa
+        (dotVec_base_momentum_neg_two hD F)
+  | some (some i) =>
+      exact typeOneTwo_mem_towerNullSubmodule F.hη F.frame.isotropic F.hba haa
+        (F.dotVec_trans_towerMomentum i (-2))
+
+/-- **`dim (H_null ⊓ V_2) ≥ D` at `D = 26`.**  Blueprint §B″.2's `r_2 = D`: the `D - 1` Type-1
+states and the one Type-2 state are independent (`linearIndependent_nullFamilyTwo`, which needs
+no hypothesis on `D`) and all null (`nullFamilyTwo_mem_towerNullSubmodule`, which needs
+`(D : K) = 26` for the Type-2 one). -/
+theorem le_finrank_towerNullSubmodule_inf_towerBigrade_two (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    D ≤ finrank K ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-2) 2) := by
+  classical
+  have hfin : FiniteDimensional K
+      ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-2) 2) :=
+    Submodule.finiteDimensional_of_le inf_le_right
+  have hspan : Submodule.span K (Set.range (nullFamilyTwo F))
+      ≤ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-2) 2 := by
+    rw [Submodule.span_le]
+    rintro _ ⟨x, rfl⟩
+    exact nullFamilyTwo_mem_towerNullSubmodule hD F hD26 x
+  have hrank : finrank K ↥(Submodule.span K (Set.range (nullFamilyTwo F)))
+      = Fintype.card (Option (Option (Fin (D - 2)))) :=
+    finrank_span_eq_card (linearIndependent_nullFamilyTwo hD F)
+  have hcard : Fintype.card (Option (Option (Fin (D - 2)))) = D := by
+    simp only [Fintype.card_option, Fintype.card_fin]
+    omega
+  have hmono := Submodule.finrank_mono hspan
+  rw [hrank, hcard] at hmono
+  exact hmono
+
+/-- ⭐ **`B26 2` holds at `D = 26`.**
+
+This is the first slice on which the critical dimension is actually consumed by a
+machine-checked spanning result.  The two halves are:
+
+* counting (`finrank_towerPhys_inf_towerBigrade_two_le`, `D`-independent):
+  `dim (H_phys ⊓ V_2) ≤ dim (ddfSpan ⊓ V_2) + D`;
+* null states (`le_finrank_towerNullSubmodule_inf_towerBigrade_two`, **`D = 26`**):
+  `dim (H_null ⊓ V_2) ≥ D`.
+
+The intercept is `a₀ = invTwo K * η(a,a) = 1`, which the frame fixes
+(`DDFLightConeFrame.dotVec_self_eq_two`). -/
+theorem b26_two_of_D26 (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    B26 η a b F.hη F.trans 2 := by
+  have hint : invTwo K * Fock.zeroModeSq η a = 1 := by
+    rw [zeroModeSq_eq_dotVec, F.dotVec_self_eq_two hD, invTwo_mul_two]
+  refine b26_two_of_finrank_towerNull hD F ?_
+  rw [hint, show (-((2 : ℕ) : ℤ)) = (-2 : ℤ) by norm_num]
+  exact le_finrank_towerNullSubmodule_inf_towerBigrade_two hD F hD26
+
+/-- ⭐⭐ **The DDF spanning lemma on the level-two slice `(rung -2, level 2)`, at `D = 26`.**
+
+`H_phys ⊓ V_2 ≤ ddfSpan ⊔ H_null`.  Together with `Assembly.ddfSpans_bigrade_neg_one_one`
+(level one, unconditional in `D`) and `Glue.ddfSpansOn_towerLevelLE_one` this is the second
+antidiagonal slice of `ddf-spans` to be closed, and the **first one that consumes `D = 26`**. -/
+theorem ddfSpans_bigrade_neg_two_two (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) :
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((2 : ℕ) : ℤ)) 2) :=
+  ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_two_of_D26 hD F hD26)
+
+end Closing
+
 end StringFormal.NoGhost
