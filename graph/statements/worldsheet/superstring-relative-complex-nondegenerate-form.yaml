@@ -1,0 +1,135 @@
+id: worldsheet.superstring-relative-complex-nondegenerate-form
+kind: proposition
+title: RNS 相对 BRST 复形上的厄米型 ⟨,⟩_rel 良定义且非退化（Lian–Zuckerman 1989 Definition 2.11 正上方的过渡句，承载者 Proposition 2.10(i)(iii) + Theorem 2.7）
+statement: |
+  **设定**（数学侧表述，照 lian-zuckerman-1989 的记号；与
+  worldsheet.superstring-relative-complex-character-signature 的 (H1)–(H5) 同口径，
+  故意重写以使本卡自足）。取 N = 1 超 Virasoro 代数（math.super-virasoro-algebra），
+  扇区标号 κ = ½（Neveu–Schwarz）与 κ = 0（Ramond）。
+    (H1) **临界维数**：物质部门 D = 10 个自由 X^μψ^μ（LZ p.308 逐字 "From now on, we will take D = 10"），
+         鬼部门 λ = 2 的 bcβγ 一阶 SCFT。
+    (H2) **动量**：固定 p，**p ≠ 0**（LZ p.303 逐字 "p will always be assumed non-zero until Sect. 5"）。
+    (H3) **三个空间**（LZ Definition 2.2）：
+           ℬ(p,κ) := Ker b₀（κ = ½）／ Ker b₀ ∩ Ker β₀（κ = 0）；
+           ℱ(p,κ) := ℬ(p,κ) ∩ Ker K，其中 K := π(L₀) + ρ(L₀)（总 L₀）；
+           C_rel(p,κ) := ℱ(p,κ)（κ = ½）／ ℱ(p,0) ∩ Ker D_R（κ = 0），其中 D_R := π(G₀) + ρ(G₀)（总 G₀）。
+    (H4) **全复形上的厄米型 ⟨,⟩_C**：C(p,κ) = R(p,κ) ⊗ U(κ) ⊗ Λ_∞ ⊗ T 上由 LZ **Definition 1.3**
+         给出的厄米型（物质旋量因子 R(p,0) 上的 ⟨,⟩_R 由 p·d₀ 定出；鬼零模因子 T 上的 ⟨,⟩_T 使
+         **⟨T₁, T₁⟩_T = 0**，见 LZ p.310）。
+    (H5) **ℬ 上的型 ⟨,⟩_ℬ**：按 LZ 的用法，⟨,⟩_ℬ 是 **⟨·, c₀χ_κ·⟩_C 在 ℬ(p,κ) 上的限制**
+         （p.312 式 (1) 与 p.314 Lemma 2.14.2 的证明里被写死：⟨Ω,Ω'⟩_ℬ ≡ ⟨Ω, c₀χ_{1/2}Ω'⟩_C）。
+         ⚠ **算符 χ_κ 的定义本图未取得（L0）**：本卡只把 c₀χ_κ 当作 LZ 记号，不代入任何读法。
+    (H6) **R 扇区零模表示**取 LZ p.306 (7)(8) 的 T₀ ⊕ T₁（NS 取 T_{1/2}）。
+    (H7) **收缩同伦**：κ = 0 时 C_rel(p,0) = D_R ℱ(p,0)，且存在 ε : ℱ(p,0) → ℱ(p,0) 使
+         {D_R|_ℱ, ε} = 1（worldsheet.superstring-ramond-zero-mode-cohomology-trivial = LZ Theorem 2.7）。
+
+  **断言**（LZ p.311，Definition 2.11 正上方的过渡句逐字：'Now using Theorem 2.7 and Proposition 2.10,
+  we have the following **well-defined non-degenerate** hermitian form on C_rel(p,κ).'）：
+  在 (H1)–(H7) 之下，Definition 2.11 的
+
+      ⟨u,v⟩_rel := ⟨u,v⟩_ℬ                     （κ = ½）
+      ⟨u,v⟩_rel := √−1 ⟨u, v̂⟩_ℬ，其中 v = D_R v̂ （κ = 0）
+
+  是 **C_rel(p,κ) 上良定义的非退化厄米型**。具体两扇区：
+
+    **(i) κ = ½**：C_rel(p,½) = ℱ(p,½)，⟨,⟩_rel = ⟨,⟩_ℬ 在其上**非退化**
+        （这一条与 Proposition 2.10(iii) 逐字同内容：'⟨·, c₀χ_{1/2}·⟩_C restricted to
+        C_rel(p,½) = ℱ(p,½) is non-degenerate.'）。
+    **(ii) κ = 0**：每个 v ∈ C_rel(p,0) 都有原像 v̂ ∈ ℱ(p,0) 使 v = D_R v̂（(H7)）；
+        √−1⟨u, v̂⟩_ℬ **与 v̂ 的选择无关**，等价地 ⟨u,v⟩_rel = √−1 ⟨u, εv⟩_ℬ 且**与 ε 的选择无关**；
+        所得的 ⟨,⟩_rel 在 C_rel(p,0) 上**非退化**。
+
+  **本命题不断言**：
+    (a) 不断言**正定性**。⟨,⟩_rel 在 C_rel(p,κ) 上一般是**不定**的；正定性只在**上同调** H⁰_rel 上成立，
+        那是 Corollary 2.15(ii)（worldsheet.no-ghost-theorem-superstring-cohomological-v2）。
+    (b) 不断言 Proposition 2.10 的三条本身作为独立命题上图：**(i)**（⟨·, c₀χ₀·⟩_C 在 ℱ(p,0) 上非退化）
+        与 **(ii)**（D_R|*_ℱ = −D_R|_ℱ，故朴素型 ⟨·, c₀χ₀·⟩_C 在 C_rel(p,0) 上**恒零**）是本卡论证的
+        内部输入，本图未单独立卡；**(iii)** 与本卡的 (i) 逐字同内容，本卡把它放在 ⟨,⟩_rel 的名目下重述。
+        ⚠ 特别地，**「R 扇区朴素内积恒零」不是本卡的断言**，它是 LZ 用 D_R 原像定义 ⟨,⟩_rel 的**理由**
+        （p.310 逐字：'⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'）。
+    (c) 不断言 Q* = Q（那是 Proposition 2.14(i)，本图未立卡）；也不断言任何特征标/号差公式
+        （那是 Proposition 2.14(ii)，worldsheet.superstring-relative-complex-character-signature）。
+    (d) 不断言 χ_κ 的定义或显式形式（(H5)，本图未取得，L0），也不断言 Definition 1.3 的 ⟨,⟩_R 的
+        显式公式（LZ 抽取记录 §4 Q4 标为「引用前须复核 √−1 的位置」）。
+    (e) 不断言 p = 0 的情形。
+    (f) 不断言公式对其他 R 扇区零模表示（FOK / Henneaux 的 C[γ₀] 等）成立——(H6) 的 T₀ ⊕ T₁ 是
+        本卡断言成立的前提之一（⟨T₁,T₁⟩_T = 0 正是 R 扇区必须绕道的原因）。
+    (g) 不断言 C^n_rel(p,κ) 的**有限维性**与**次数上方有界性**。这两条与非退化性并列，是 LZ
+        **Definition 2.12(i)** 里 sign 有定义的三条前提；本卡只承担其中的非退化那一条。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+  - conv.superstring-ghost-number-zero
+  - conv.intercept-sign-a
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**§2, p.311，Definition 2.11 正上方的过渡句**，逐字：'Now using Theorem 2.7 and Proposition 2.10, we have the following well-defined non-degenerate hermitian form on C_rel(p,κ).'"
+    note: |
+      literature/extractions/lian-zuckerman-1989.md **§10.1**（researcher 第四轮页图，期刊 pp.311–317 七页一次取全，L1 逐字）。
+      ★ **这是本卡断言的 canonical 出处**。它**不是**一条带编号的陈述，而是 Definition 2.11 之前的过渡句；
+      其两条依据由这句话本身点名：**Theorem 2.7** 与 **Proposition 2.10**。
+      ★ ⚠ **不要**把非退化性记在 Proposition 2.14 名下（§10.6 negative evidence：Prop 2.14 的陈述与证明里
+      没有出现除 'non-degenerate' 散文用法外的任何关于 ⟨,⟩_rel 的性质断言，'non-degenerate' 一词只在 (i) 的
+      证明里以 'By non-degeneracy we have Q* = Q' 的形式**被使用**）。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.10**, p.311，逐字：'(i) ⟨·, c₀χ₀·⟩_C restricted to ℱ(p,0) is non-degenerate. (ii) D_R|*_ℱ = −D_R|_ℱ. Thus ⟨·, c₀χ₀·⟩_C = 0 when restricted to C_rel(p,0) = ℱ(p,0) ∩ Ker D_R. (iii) ⟨·, c₀χ_{1/2}·⟩_C restricted to C_rel(p,½) = ℱ(p,½) is non-degenerate.'；**证明同页**：(i) 用 ℱ(p,0) = ℬ(p,0) ∩ Ker K 与 'Since Ku = 0 and K* = K with respect to ⟨,⟩_C, we can choose v ∈ Ker K'；(iii) 'Since ℱ(p,½) = ℬ(p,½) ∩ Ker K, the argument for (i) applies here.'"
+    note: |
+      L1 逐字（extraction §10.1）。★ **非退化性的真正承载者**。
+      ⚠ **(ii) 的证明句有扫描件疑点**：原文印作 'Now D_R|*_ℱ = K acts like zero in ℱ(p,0)'，
+      按上下文应为 **D_R²|_ℱ = K**（Prop 1.7(ix)），平方上标在 1989 CMP 扫描件上极易丢失
+      （extraction §10.1 明写「引用 Prop 2.10(ii) 的证明句前请 auditor 复核」）。
+      **本卡的 statement 不引用该句**，只引 (i)(iii) 的陈述与过渡句；(ii) 的**陈述**（D_R 反自伴 +
+      朴素型恒零）写在本卡「不断言 (b)」里，作为背景不作断言。
+      ⚠ (ii) 的证明还引 **Proposition 2.9**，本图**未取得其内容**（extraction 无 E 条）；见推导 gaps。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 2.11**, p.311，逐字：'Define the hermitian form ⟨,⟩_rel on C_rel(p,κ) as follows: for u, v ∈ C_rel(p,κ), let ⟨u,v⟩_rel = ⟨u,v⟩_ℬ if κ = ½；= √−1 ⟨u, v̂⟩_ℬ if κ = 0 where v = D_R v̂.'；**紧随的 Remark**（良定义性的证明）逐字：'… is independent of the choice of v̂. For if v = D_R v̂ = D_R ṽ, then ⟨u, v̂ − ṽ⟩_ℬ = −⟨û, D_R(v̂ − ṽ)⟩_ℬ = 0. Recall that (Theorem 2.7) there is a contracting homotopy ε : ℱ → ℱ such that {D_R, ε} = 1. Then one finds that ⟨u, εv⟩_ℬ = ⟨u, εD_R v̂⟩_ℬ = ⟨u, v̂⟩_ℬ. Thus ⟨u,v⟩_rel = √−1 ⟨u, εv⟩_ℬ. It is remarkable that the right-hand side of this equation is independent of the choice ε.'"
+    note: |
+      L1 逐字（extraction §10.2）。★ **本条是断言 (ii) 里「良定义」那一半的出处**：
+      κ = 0 支的 v̂-无关性是 **Remark 证的**，不是 Definition 2.11 本身证的；用到
+      D_R* = −D_R（= Prop 2.10(ii)）与 **Theorem 2.7** 的收缩同伦 ε。
+      ⚠ **转录可信度分层**（extraction §10.2）：**高可信**——两支的形式、√−1 因子、{D_R, ε} = 1、
+      结论式 ⟨u,v⟩_rel = √−1⟨u, εv⟩_ℬ、末句 'It is remarkable…'；**需复核**——
+      ⟨u, v̂ − ṽ⟩_ℬ = −⟨û, D_R(v̂ − ṽ)⟩_ℬ 这一行里 u 何时带 hat（本卡 statement 不含该行）。
+  - ref: lian-zuckerman-1989
+    loc: "**p.310**（R 扇区必须绕道的理由，逐字：'⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'）；**Definition 1.3** 与其 Remark, p.305（R(p,0) 上的 ⟨,⟩_R 由 p·d₀ 定义，p·p = 0 时分半；半空间假设 {p^D > 0}）；**Definition 2.2**, pp.308–309（ℬ / ℱ / C_rel）；**Definition 1.6 / Proposition 1.7**, pp.307–308（K、D_R 的显式模式和；'(iii) D_R* = −D_R'、'(ix) D_R² = K'）；**p.303**（C(p,κ) 的张量因子与 Bose-sea charge）；**p.306 (7)(8)**（T_{1/2} / T₀ ⊕ T₁）；**p.312 (1)、p.314 Lemma 2.14.2 的证明**（⟨,⟩_ℬ ≡ ⟨·, c₀χ_κ·⟩_C 的身份）"
+    note: |
+      L1（extraction §1 / E1 / E2 / E5 / §10.2 / §10.4）。供给 (H3)–(H6) 的记号语境。
+      ★ **(H5) 的写法是 extraction §10.2 的明确要求**：「建卡时 ⟨,⟩_ℬ 必须写成
+      『⟨·, c₀χ_κ·⟩_C 在 ℬ(p,κ) 上的限制』，不能当作未定义记号」。
+      ⚠ **χ_κ 本身的定义本图未取得**，故 (H5) 只到「记号身份」为止，见「不断言 (d)」。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 2.12(i)**, pp.311–312，逐字：'If T is a ½Z-graded vector space … **with a non-degenerate hermitian form** ⟨,⟩_T, then we call T hermitian. Suppose dim T^n < +∞ for all n and T^n = 0 for all large enough positive n. Then the character and signature of T are respectively …'"
+    note: |
+      L1 逐字（extraction §10.2）。★ **本条说明本卡为什么必要**：LZ 把「非退化」写进了
+      sign 有定义的**前提**里，故下游 worldsheet.superstring-relative-complex-character-signature
+      的 (H4) 需要本卡。三条前提中本卡只承担非退化那一条，另两条（每层有限维、次数上方有界）
+      见本卡「不断言 (g)」，仍记在那张卡推导的 gaps 里。
+tags: [superstring, brst, rns, ramond-sector, hermitian-form, nondegeneracy, lian-zuckerman]
+notes: |
+  【为什么立卡（curator 2026-09-11，lz-thm27）】
+  literature/extractions/lian-zuckerman-1989.md §10.7 的建议逐字：「**(H4)「⟨,⟩_rel 非退化」的来源**：
+  §2, p. 311，Definition 2.11 正上方一句（"well-defined non-degenerate hermitian form"），
+  依赖 Theorem 2.7 + Proposition 2.10。**新建一卡 superstring-relative-form-nondegenerate 更干净**，
+  因为它同时被 Prop 2.14(i) 的证明与 Definition 2.12 的良定义性使用。」
+  本卡即该建议的落实（id 取 ...-relative-complex-nondegenerate-form，与同族卡
+  worldsheet.superstring-relative-complex-character-signature 的命名对齐）。
+
+  【一个节点一个命题：为什么「良定义」与「非退化」写在一起】
+  LZ 的过渡句把两者写成一句（'well-defined non-degenerate hermitian form'），
+  且两者由同一对输入（Theorem 2.7 + Proposition 2.10）在同一处给出：
+  κ=0 支的良定义性（v̂-无关）与非退化性都要用 ε 与 Prop 2.10。按「文献把两件事写在一个定理里
+  **而它们被分别推导**时才拆」的判据，此处不拆。⚠ 但两半的**论证强度不同**：良定义有印出的证明
+  （p.311 Remark），κ=0 的非退化只有过渡句的一句话；差别记在推导 gaps 首条。
+
+  【与 Proposition 2.14 的关系（方向别搞反）】
+  非退化性是 **Prop 2.14(i) 的输入**，不是它的结论：Prop 2.14(i) 的证明逐字
+  'By non-degeneracy we have Q* = Q'（extraction §10.4）。本卡是上游。
+  同理 Prop 2.14(ii)（特征标/号差）经 **Definition 2.12** 的「hermitian 分次空间」要求用到本卡。
+
+  【本卡与 Definition 1.3 的关系】
+  (H4) 里 ⟨,⟩_C 的旋量因子 ⟨,⟩_R 出自 LZ **Definition 1.3**，**本图没有对应卡**
+  （search「厄米型」「hermitian」只命中 worldsheet.fock-indefinite-form，那是**玻色**弦的 Fock 型，
+  只有 α^μ_n，不含 d 模与旋量因子）。本卡推导对那张玻色卡拉的是 **inferred 边**，
+  与特征标/号差推导的同名边同款。⇒ 立 Definition 1.3 的卡是后续工作。
+author: curator
+created: "2026-09-11"
