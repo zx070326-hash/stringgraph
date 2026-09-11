@@ -1665,6 +1665,55 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
        「DDF 态 = 横向 Fock 态」写成命题，应改成「在 `ddfSpan ⊕ spurious` 的意义下」。
     3. `ψ = levelTwoGen η v w` 的表示**不唯一**（只有 `v` 的对称部分被定死），
        所以 (b) 的刻画是 `∃` 形，不是典范形式；做 (c) 时需要注意别默认唯一性。
+- [ ] `noghost-n2`：**蓝图 §B.6 `N = 2` 卡点 (c) 消元 —— 起步，未完成**。
+  `StringFormal/NoGhost/LevelTwoSpan.lean`（新增 1 条声明）与新文件
+  `StringFormal/NoGhost/LevelTwoElim.lean`（4 条声明），共 5 条，均 `lake build` 通过、
+  无 `sorry`，`check_axioms --all` 全 `ok`（公理集只有 `propext`/`Classical.choice`/
+  `Quot.sound`）。分支 `agent/formalizer/noghost-n2-span`。
+  - **`Fock.Lop_neg_one_apply_polState`**（`LevelTwoSpan.lean`）：`L_{−1}` 作用在**任意**
+    level-1 态 `ζ·α_{−1}|k⟩`（不只是真空）上的精确公式
+    `L_{−1}(ζ·α_{−1}|k⟩) = (ζ·α_{−2})|k⟩ + (ζ·α_{−1})(k·α_{−1})|k⟩`。这是
+    `Fock.Lop_neg_two_apply_one`（只在真空上）的"产生方向搭档"，`LightCone.lean` /
+    `LevelTwo.lean` 之前都没有。初等证法：`polState_eq_sum_mode` 展开 + `Lop_apply_mode`
+    （`n=−1,p=−1`）+ `Lop_neg_one_apply_one` + `mode_neg_one/two_apply`，不走更重的
+    `VertexWeightNeg.lean` 的 `Lop_apply_creaExp_of_neg` 路线。
+  - **`towerLop_neg_one_apply_single_polState`** 与
+    **`towerLop_neg_one_apply_single_polState_mem_towerSpuriousSubmodule`**
+    （`LevelTwoElim.lean`）：上一条的塔上提升，刻画 `towerSpuriousSubmodule` 在
+    level-2、任意 rung `j` 上 `n = 1` 那一部分的**全部**贡献（`e : Fin D → R` 任意，
+    不需限制在光锥标架的某个方向上）。
+  - **`X_one_eq_polState_single`** 与 **`sum_X_one_mul_polState_eq_sum_polState_mul_polState`**
+    （`LevelTwoElim.lean`）：**数学上最有价值的发现**——`α^μ_{−1} = polState η
+    (Pi.single μ (η μ))`，因此 `Fock.levelTwoGen` 的二次部分 `Σ_μ α^μ_{−1}(v_μ·α_{−1})`
+    可以重写成 `Σ_μ polState η (…) * polState η (v_μ)`，即**纯粹是 `Fin D → R` 上的一个
+    双线性对称配对**。这**推翻了**上一轮（`noghost-b2`）遗留的推测——即 (c) 需要蓝图 §B.4
+    那种在**整个 `MvPolynomial` 生成元集合**上做 `AlgEquiv` 换基（该节估计 400–700 行，
+    是全蓝图最贵的一节）。实际上 (c) 只需要在**系数空间 `Fin D → R`** 上对这个双线性配对
+    换基到光锥标架 `{b, b̃, ε_i}`，这是纯线性代数，不需要环自同构。
+  - **仍未做（(c) 真正的卡点，改在数值代数，不是基变换本身）**：
+    1. 需要一条比 `FrameSpansOrthogonal`（只断言某向量的正交补被张成）更强的假设——
+       `{b, b̃, ε_1,…,ε_{D-2}}` 是 `Fin D → R` 的一组基（暂名 `hFullSpan`，未命名/未写入代码）——
+       并从中对**每一行** `v_μ`（`μ` 取遍 `Fin D`）取系数，重新打包成系数**函数**
+       `c c' : Fin D → R`、`c_i : Fin (D−2) → Fin D → R`（需要逐点 `Classical.choose` 再
+       重新装成函数，繁琐但直接）。
+    2. 把双线性配对通过这个分解推出去，落到 6 个显式配对
+       `(b,b) (b,b̃) (b,ε_i) (b̃,b̃) (b̃,ε_i) (ε_i,ε_j)` 上（`Finset.sum` 重指标 +
+       `polState_add`/`polState_smul`/`polState_sum`）。
+    3. **真正难的一步**：`ε_i·ε_j` 配对对应 `single_ddfPair_mem_ddfSpan`（可直接吸收进
+       `ddfSpan`），但沾 `b`/`b̃` 的配对**不能**简单地各自吸收成一个 `L_{−1}` 生成元——
+       `towerLop_neg_one_apply_single_polState` 在 rung `j` 给出的是
+       `polState η x * polState η(p_j)`，其中 `p_j` 的 `b`、`b̃` 分量是**固定混合**
+       （`conjCoeff_towerMomentum` 钉死 `b̃` 分量 = −1），不能自由地把 `b` 项和 `b̃` 项分开
+       各配一个生成元。要把它们拆开，必须**联立** `Fock.levelTwoL1 = 0`、
+       `Fock.levelTwoL2 = 0`（`mem_towerPhys_bigrade_two_iff`）与质壳一起解一个线性方程组，
+       这正是蓝图 §B.6 标"中等难度"的部分，本轮没有开工，估计还需要一到两百行。
+    4. 最终还要接到 `ddfSpansOn_towerLevelLE_of_antidiagonal`（仿照 `N=1` 的
+       `ddfSpans_bigrade_neg_one_one`）才能把 (c) 接进 `DDFSpansOn`。
+  - **图接线建议（本分支未碰 `graph/`）**：上面第 3 点是给 `worldsheet.no-ghost-theorem-v4`
+    的一个具体、可核查的数学缺口——「DDF 张成」这条陈述如果已经在图上写成 `physical-argument`
+    或更高状态，其 `gaps`/`notes` 应记录「(c) 消元未在 Lean 里完成；已确认不需要环自同构换基，
+    但需要解一个联立线性方程组，量级约 100–200 行」，避免下一个 formalizer 重新掉进
+    §B.4 换基的误判（本条目本身就是上一轮误判的更正）。
 - [x] `noghost-c4`（⚠ 未做：`ddfMonomial d` 落在 rung −N(d) 的定位（DDFGram.lean:297 自报），派 `formalizer-ddfgram-level`；spurious→null 桥 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 已由 Assembly.lean 提供）（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
   `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
   （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。
