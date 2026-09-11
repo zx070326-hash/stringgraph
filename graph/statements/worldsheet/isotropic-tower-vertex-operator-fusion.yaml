@@ -1,0 +1,153 @@
+id: worldsheet.isotropic-tower-vertex-operator-fusion
+kind: proposition
+title: 类光动量塔上顶点算子的同点乘积融合为一个顶点算子：k_0² = 0 ⟹ Σ_{J+K=L} V^{(m)}_J V^{(n)}_K = V^{(m+n)}_L（含层移位零模）
+statement: |
+  【设定】按 worldsheet.momentum-tower-fock-space 取沿参考向量 k_0 的动量塔
+    T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)，
+  系数环 R 是交换 ℚ-代数，对角时空度规分量 η_μ，收缩 x·y := Σ_μ η_μ x^μ y^μ
+  （conv.metric-mostly-plus 的收缩约定）。按 conv.alpha-prime-regge 记重标度向量
+    a^μ := (2α')^{1/2} p^μ,   b^μ := (2α')^{1/2} k_0^μ。
+  ⚠ **本卡不需要归一化 η_μ² = 1，也不需要 DDF 归一化 2α' k_0·p = 1**（见【不断言】(c)）。
+
+  对每个 n ∈ Z 记 V^{(n)}_K（K ∈ Z）为塔上顶点算子 :e^{i n k_0·X(z)}: 的 z^K 洛朗系数
+  （z^K-系数约定，与 worldsheet.ddf-operators-v6 同一约定；Lean 侧 `towerVertex η b n K`）。
+  按那张卡，V^{(n)}_K 是两个因子的复合：
+    · **零模半**：层移位 e^{i n k_0·x}，把第 j 层送到第 j+n 层；
+    · **振子半**：worldsheet.exponential-vertex-operator-modes 意义下的 V^{(n k_0)}_{K−n}，
+      其洛朗指标移位 −n 就是单值因子 z^{2α' n k_0·p} = z^n 的记账。
+  再记 towerLevelBound(x) := max_j levelBound(x_j)（x ∈ T 只有限多层非零）。
+
+  【断言】设
+
+      k_0² = 0        （等价 b·b = 0）。
+
+  则对一切 m, n, L ∈ Z：
+
+  **(1) 局部有限性（与内层指标一致）。** 对每个 x ∈ T(p; k_0)，
+  V^{(m)}_A ( V^{(n)}_B x ) = 0 只要 A < m − towerLevelBound(x)，
+  **且这个界与内层指标 B 无关**。特别地，Σ_{J+K=L} 里只有限多项非零。
+
+  **(2) 融合公式。** 作为 T(p; k_0) 上的算子恒等式
+
+      **Σ_{J + K = L} V^{(m)}_J V^{(n)}_K  =  V^{(m+n)}_L** ，   ∀ m, n, L ∈ Z。
+
+  有限和形式：任何包含窗口 n − towerLevelBound(x) ≤ K ≤ L − m + towerLevelBound(x) 的
+  有限指标集都算得对。
+
+  【两个半各自为什么融合】
+  · **零模半**：两个层移位复合成一个，e^{i m k_0·x} e^{i n k_0·x} = e^{i(m+n) k_0·x}
+    （层标签 j + n + m = j + (m+n)）。
+  · **振子半**：塔上两个顶点算子的动量都与 k_0 成比例，
+      (m k_0)·(n k_0) = m n k_0² = 0，
+    故它们正交，由 worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators
+    的同点乘积公式得 V^{(m k_0)} 与 V^{(n k_0)} 的卷积 = V^{((m+n) k_0)}；
+    动量相加是 m k_0 + n k_0 = (m+n) k_0，洛朗指标记账 L − m − n = L − (m+n)。
+
+  【类光性在这里是**必要**的（记录为限制，本卡不断言其证明）】
+  若 k_0² ≠ 0，上面的正交性条件破坏，缩并给出单值因子
+
+      (1 − w/z)^{−m n (b·b)} ≠ 1 ，
+
+  其展开把所有洛朗指标混起来：K-求和不再局部有限（(1) 失效），乘积也不是**单个**顶点算子
+  （(2) 失效）。这是"类光参考矢量"这个假设在 DDF 构造里**第三处**真正承重的地方；
+  前两处是塔上的共形权（worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+  的塔上版本，那里 k_0² ≠ 0 会让系数含塔的层指标 j）与塔上顶点算子的对易
+  （worldsheet.isotropic-tower-vertex-operators-commute）。
+  ⚠ 该"为假"的判断本身**未被证明**，见【不断言】(a)。
+
+  【本节点明确不断言】
+  (a) **k_0² ≠ 0 时的任何结论**，包括"融合公式为假"这一否定命题本身。
+      本图与 Lean 都没有（Lean 侧连该形式级数都没有定义）。
+  (b) **[A^ε_m, A^δ_n] = m(ε·δ)δ_{m+n,0}**。本卡是那条链的第 (5a) 步（塔上版本），
+      见 worldsheet.ddf-transverse-oscillator-algebra-v2 与 notes。
+  (c) **DDF 归一化 2α' k_0·p = 1 与 η_μ² = 1**。两者都**不被本卡使用**；
+      归一化在 worldsheet.tower-vertex-weighted-mode-sum 才第一次承重。
+  (d) **加权和** Σ_j j V^{(m)}_j V^{(n)}_{−j} = m δ_{m+n,0}（那是
+      worldsheet.tower-vertex-weighted-mode-sum；它**不是**本卡的推论，见那张卡）。
+  (e) **余循环 / Klein 因子 / 一般动量格**。本卡的零模只是塔的层移位（Z 的表示），
+      塔建在**固定的** p 与 k_0 上，不是全动量空间；[x^μ, p^ν] 未出现。
+      一般格上的顶点算子见 math.lattice-vertex-algebra。
+  (f) **OPE 形式、收敛性、完化、幺正性、号差**。T(p;k_0) 是代数直和，逐向量是有限和。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic
+  lean_file: StringFormal/NoGhost/VertexProduct.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexProduct.lean :: StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic（本卡 formal.lean_decl，断言 (2) 的任意塔矢量版）与单层版 StringFormal.NoGhost.sum_towerVertex_towerVertex_single_of_isotropic；动量算术 StringFormal.NoGhost.vertexMomentum_add（m k_0 + n k_0 = (m+n) k_0）与 StringFormal.NoGhost.dotVec_vertexMomentum；断言 (1) 的塔上形式是 formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.towerVertex_towerVertex_apply_eq_zero_of_lt；单 Fock 输入 StringFormal.NoGhost.Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero；塔与顶点算子来自 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{TowerFock, towerVertex, towerVertex_single, towerVertex_apply_eq_zero_of_lt, towerLevelBound, vertexMomentum, towerShift, towerDiag, dotVec, sum_single_eq}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。formalizer 2026-09-11 完成
+      （文件 547 行 / 17 条声明，自述用 `--import StringFormal.NoGhost.VertexProduct --all`
+      复核公理只有标准三条）；lead 以 **2c873fa**（"merge: same-point product of
+      orthogonal-momentum vertex operators (VertexProduct.lean)"）合入 main。
+      `sum_towerVertex_towerVertex_of_isotropic` 语句逐字（去掉隐式参数）：
+        `(η b : Fin D → R) (hbb : dotVec η b b = 0) (m n L : ℤ) (x : TowerFock D R)
+         {s : Finset ℤ} (hs : ∀ K : ℤ, n - (towerLevelBound x : ℤ) ≤ K →
+           K ≤ L - m + (towerLevelBound x : ℤ) → K ∈ s) :
+         ∑ K ∈ s, (towerVertex η b m (L - K) * towerVertex η b n K) x
+           = towerVertex η b (m + n) L x`，
+      **除窗口假设 `hs` 外只有 `hbb`**——没有 `hη`、没有 `dotVec η b a = 1`、
+      没有 m, n, L 的限制。与本卡断言 (2) 逐字一致。
+      断言 (1)「界与内层指标 B 无关」的逐字对应物在姊妹文件里：
+      `towerVertex_towerVertex_apply_eq_zero_of_lt (hbb) (m n A B : ℤ) (x) (hA : A < m -
+      towerLevelBound x) : towerVertex η b m A (towerVertex η b n B x) = 0`（**B 自由**），
+      其 docstring 逐字「vanishes as soon as the *outer* Laurent index is low enough,
+      **uniformly in the inner index**. This is the tower form of
+      `Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt` and it needs `k_0² = 0`.」
+      ⚠ **本卡【类光性必要】一段在 Lean 里只是数学注记，不是定理**。
+      `sum_towerVertex_towerVertex_single_of_isotropic` 的 docstring 逐字：
+      「The hypothesis `k_0² = 0` is essential and enters exactly as in
+      `Fock.vertexProduct_eq_vertexOsc_add`: for `k_0² ≠ 0` the contraction of the two
+      exponentials produces the monodromy factor `(w/z)^{mn k_0²}`, the sum over `K` is no
+      longer locally finite, and the product is not a single vertex operator.」
+      本卡据此写该段并在【不断言】(a) 明确它**未被证明**。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      **不承载本卡的论证**（论证是 Lean 的），只作对照：DDF 构造里 k_0 取类光正是为了让
+      e^{i m k_0·X} 与 e^{i n k_0·X} 的同点乘积干净地等于 e^{i(m+n) k_0·X}。
+      核实等级沿用 worldsheet.ddf-operators-v6：章节页码 L4/L2，**式号与正文 L0**。
+      GSW 用 mostly-minus（已按 conv.metric-mostly-plus 转写）、取 α' = 1/2，
+      **不写洛朗模形式的融合陈述**，也不区分正交性与类光性。
+tags: [cft, vertex-operator, bosonic-string, spectrum-generating-algebra, ddf, momentum-tower, formalized]
+notes: |
+  【立卡理由与与姊妹卡的分工】本卡是 formal/TODO.md `ddf-operators` 子项 (5a) 的**塔版本**
+  （formalizer 自述「**塔版本**（超出原计划）」）。拆成两张卡的理由与
+  worldsheet.orthogonal-momentum-vertex-operators-commute ↔
+  worldsheet.isotropic-tower-vertex-operators-commute 那一对完全平行：
+  · 单 Fock 卡（worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators）：
+    **任意**正交动量 b·b′ = 0，无零模；
+  · 本卡：动量全部与 k_0 成比例，**必须** k_0² = 0，含层移位零模。
+  本卡把单 Fock 卡当输入使用（(m k_0)·(n k_0) = mn k_0²），反向不成立。
+
+  【"类光性第三处承重"这句话的精确含义——请 reviewer 核对】
+  类光性 k_0² = 0 在 DDF 链上目前被 Lean 记录为不可去的地方有**三处**（按 formalizer
+  在 formal/TODO.md 的编号）：
+  (1) **塔上共形权**（(3e)）：单 Fock 的系数在第 j 层含 j（乘 k_0²），
+      故 k_0² ≠ 0 时 ⁅L_m, V^{(n)}_K⁆ 在整条塔上不是 V^{(n)}_{K−m} 的标量倍；
+  (2) **塔上顶点算子对易**（(5)）：worldsheet.isotropic-tower-vertex-operators-commute；
+  (3) **本卡**（(5a)）：同点乘积的局部有限性与"结果是单个顶点算子"。
+  ⚠ 之后 worldsheet.tower-vertex-weighted-mode-sum 的 notes 记 (5b) 里 k_0² = 0 又用了**三次**
+  （权恒等式本身、电流与顶点算子的对易、由后者给出的局部有限窗口）。
+  这些计数是 formalizer 的记账，本卡照实转录，**不**断言它是穷尽的。
+
+  【本卡为什么不需要 2α' k_0·p = 1】同 worldsheet.isotropic-tower-vertex-operators-commute
+  的说明：归一化 (S) 的作用是让单值指数 2α' n k_0·p 是整数，从而洛朗指标移位 K ↦ K−n 是
+  整数移位；在本仓库的实现里这个移位**已经写进 `towerVertex` 的定义**，即定义层面就取了 (S)。
+  ⚠ **这不是说 (S) 可以丢**：丢掉 (S) 时 `towerVertex` 这个定义本身就不对应
+  :e^{i n k_0·X}: 的洛朗展开。参见 worldsheet.ddf-operators-v6 的【三个条件及其地位】。
+
+  【这条链还剩什么】(5)(5a)(5b) 三块**全部已做**（分别是
+  worldsheet.isotropic-tower-vertex-operators-commute、本卡、
+  worldsheet.tower-vertex-weighted-mode-sum）；只剩把它们接到 A^ε_n 上的
+  **双重局部有限和的 Leibniz 组装**，formal/TODO.md「[A,A] 的整条链」段估 150–250 行，
+  「主要工作量在窗口对齐，不再有新的数学内容」。故
+  worldsheet.ddf-transverse-oscillator-algebra-v2 仍**不得**标 formalized。
+
+  【查重】2026-09-11 跑 `uv run stringgraph search fusion / "same-point" / 对易 / isotropic`。
+  最接近的既有节点：worldsheet.isotropic-tower-vertex-operators-commute（塔上 [V,V] = 0）、
+  worldsheet.vertex-operator-adjoint（塔上 V 的伴随）、
+  worldsheet.momentum-tower-fock-space（定义卡）。**没有**塔上同点乘积的节点，本卡不重复。
+author: curator
+created: "2026-09-11"

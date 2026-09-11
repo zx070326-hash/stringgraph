@@ -1,0 +1,137 @@
+id: worldsheet.exponential-vertex-operator-current-weight-identity--via-lean
+target: worldsheet.exponential-vertex-operator-current-weight-identity
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      **被求和的顶点算子就是这张卡定义的 V^{(b)}_J**（`Fock.vertexOsc η b J`，z^J-系数约定），
+      本推导还直接使用该卡列出的两条基本性质（分级 / 真空值 V^{(b)}_J(1) = E₋(b)_J）与
+      该卡对应 Lean 文件 `VertexOperator.lean` 里的**刚性引理**
+      `Fock.eq_zero_of_vertex_recursion`（满足产生模态递推且真空值为零的算子族必为零），
+      后者是本推导的骨架，以及产生递推 `Fock.vertexOsc_X_mul`。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+  - id: worldsheet.bosonic-fock-space
+    inferred: false
+    note: |
+      提供**代数** Fock 空间 F = R[X_{μ,l}]、产生/湮灭算子 α^μ_{∓l}（l ≥ 1）的显式实现
+      （α^μ_{−l} = 乘 X_{(μ,l)}、α^μ_l = (l η^{μμ})∂/∂X_{(μ,l)}）与 level / modeBound 记账。
+      本推导的电流 (b·α_{−J}) = Σ_μ η_μ b^μ α^μ_{−J} 逐项就是这些算子的线性组合
+      （Lean `Fock.dotMode` 由 `Fock.mode` 求和而成），
+      湮灭截断 `dotMode_apply_eq_zero_of_modeBound_lt` 与
+      产生递推 `dotMode_X_mul`（⁅b·α_{−J}, α^μ_{−k}⁆ = k b^μ δ_{J,−k}）都是该卡的对易关系。
+      ⚠ 该卡明确**不含零模** α^μ_0，故 J = 0 的那一项另挂下一条边。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      **只为零模 α^μ_0 = a^μ 这一条**。本推导需要 J = 0 时 (b·α_0) = (b·a)·id
+      （Lean `Fock.mode_zero` / `Fock.dotMode_zero`），而 worldsheet.bosonic-fock-space
+      的缺口 (i) 明确说该卡不含 α^μ_0。图上写下"α^μ_0 在整个 F 上就是标量 (2α')^{1/2}k^μ 乘法"
+      的地方是这张卡：其 statement 给出 α^μ_0|0;k⟩ = √(2α') k^μ|0;k⟩，notes 里逐字论证
+      「[α^μ_0, α^ν_n] = 0 对**一切** n …… **α^μ_0 在整个 F 上就是标量 √(2α') k^μ 乘法**」。
+      Lean 侧 `Fock.mode`（含 j = 0）也正是定义在该卡的 lean_file `Sugawara.lean` 里。
+      ⚠ 本推导**不使用** L_m 本身，也不使用 Virasoro 括号或中心荷；只用零模的标量值。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+  - id: worldsheet.exponential-vertex-operator-mode-weight-identity-v2
+    inferred: true
+    note: |
+      **inferred: true，且是"零件级"依赖——请勿读成"本卡是 [L_m, V] 的推论"。**
+      本推导**不调用**那张卡断言的命题（`Fock.lie_Lop_vertexOsc`）；目标卡【不断言】(b) 明说
+      两者逻辑独立，Lean 文件头 "Mathematical remarks" 第 1 条也逐字记下 L_0-Leibniz 那条路
+      **走不通**（「gives `T_L + U_L = L S_L` with two unknowns, and degenerates to `0 = 0` at
+      `L = 0`」）。
+      本推导用的是那张卡的 Lean 文件家族（`VertexWeight.lean`）里的一个**零件**：
+      欧拉型递推 `Fock.sum_mode_creaExp_eq_smul`（等价形式 `Fock.creaExp_euler`），
+      即 M·Φ_M = Σ_{l=1}^{M} (b·α_{−l}) Φ_{M−l}，本推导用它算真空值
+      （`vertexCurrent_apply_one` 的 htail 分支逐字 `rw [← sum_mode_creaExp_eq_smul …]`）。
+      该欧拉递推在图上**没有自己的卡**。
+      ⇒ 这条边指向的是"承载那个 Lean 零件的卡"，不是那张卡的命题内容，故标 inferred。
+      ⚠ 正确的修法（提请 lead）：把欧拉递推 `creaExp_euler` 单立一张 formalized 卡
+      （「相干态系数的欧拉型递推」，它同时是 orthogonal-momentum-vertex-operators-commute、
+      本卡、(5a) 三处的共同零件），本推导改挂到它，这条 inferred 边即可撤销。
+      ⚠ 那张卡是 formalized，故这条边不压低本推导的有效状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.Fock.vertexCurrent_eq（目标断言 (2)，亦即目标卡的 formal.lean_decl）、StringFormal.NoGhost.Fock.sum_dotMode_vertexOsc（有限和形式）；目标断言 (1)：StringFormal.NoGhost.Fock.{currentIdx, dotMode_vertexOsc_apply_eq_zero_of_notMem}；电流：StringFormal.NoGhost.Fock.{dotMode, dotMode_apply, dotMode_vertexMomentum, dotMode_zero, dotMode_apply_eq_zero_of_modeBound_lt, dotMode_X_mul, dotMode_vertexOsc_comm, lie_dotMode_vertexOsc_of_dotVec_zero}；组装：StringFormal.NoGhost.Fock.{vertexCurrent, vertexCurrent_apply, vertexCurrent_apply_one, vertexCurrent_X_mul}；调用的外部零件：formal/StringFormal/NoGhost/VertexOperator.lean :: StringFormal.NoGhost.Fock.{vertexOsc, vertexOsc_apply_one, vertexOsc_X_mul, eq_zero_of_vertex_recursion, vertexOsc_apply_eq_zero_of_levelBound_lt, lsumLocFin, lsumLocFin_apply, annihilation_creaExp, modeBound_one, levelBound_one}、formal/StringFormal/NoGhost/VertexWeight.lean :: StringFormal.NoGhost.Fock.sum_mode_creaExp_eq_smul（欧拉递推）、formal/StringFormal/NoGhost/Sugawara.lean :: StringFormal.NoGhost.Fock.{mode, mode_zero, mode_apply_eq_zero_of_modeBound_lt}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；所在文件 799 行 / 35 条声明，
+      formalizer 自述 2026-09-11 用 `--import StringFormal.NoGhost.VertexWeightedSum --all`
+      复核公理只有标准三条。lead 以 **28bc556** 合入 main
+      （formal 侧提交链 e7909ad「prove the vertex-operator weight identity (b.alpha current),
+      step 5b core」→ 7c8024d）。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112"
+    note: |
+      **不承载本推导的任何一步**（论证全部是 Lean 的），只记录该步骤在文献里的位置：
+      教科书以"对 z 分部积分/全导数"的形式默认使用这条恒等式，不写洛朗系数形式。
+      式号与正文未核实（L0）。
+summary: |
+  机器检查的证明，走**刚性**（不是对易子计算）。
+
+  **为什么不能走对易子。** 目标左端 Σ_J (b·α_{−J}) V^{(b)}_{L−J} 是**乘积**不是李括号，
+  所以 `Fock.lie_*` 系列（含 `lie_Lop_vertexOsc`、`lie_mode_vertexOsc`）全都用不上；
+  文件头第 1 条还独立复核了"由 ⁅L_0, V⁆ + 同点乘积 (5a) 推出本卡"这条路**走不通**
+  （L_0 按 Leibniz 只见两因子权之和，L = 0 时退化成 0 = 0）。
+  因此必须引入新对象 `Fock.dotMode`（电流的洛朗模）。
+
+  **第一块（目标 (1)，局部有限性）。** 上端直接是
+  `vertexOsc_apply_eq_zero_of_levelBound_lt`（levelBound P + (L − J) < 0 ⟹ V^{(b)}_{L−J}P = 0）。
+  下端需要**先把电流换到右边**：`dotMode_vertexOsc_comm`（收缩向量与顶点动量正交，
+  此处两者都是 b，故用掉 `hbb`）把 (b·α_{−J}) 移过 V^{(b)}_{L−J}，
+  再用 `dotMode_apply_eq_zero_of_modeBound_lt`（modeBound P < −J 时为零）。
+  两端合成窗口 `currentIdx L P = Finset.Icc (-(modeBound P)) (L + levelBound P)`
+  （`dotMode_vertexOsc_apply_eq_zero_of_notMem`），于是 `lsumLocFin` 可用，
+  得到算子 `Fock.vertexCurrent`（`hη`、`hbb` 是定义的参数）。
+
+  **第二块（真空值，`vertexCurrent_apply_one`）。** 在 {0} ∪ Ioc 0 (max L 0) 上求和：
+  · J = 0 项：`dotMode_zero` 给 (b·a) • Φ_L；
+  · J ≥ 1 的尾：`vertexOsc_apply_one` 把 V^{(b)}_{L−J}(1) 写成 Φ_{L−J}，
+    整条尾正好是欧拉型递推 `sum_mode_creaExp_eq_smul`，给 L • Φ_L；
+  · J < 0 的湮灭尾不出现（`annihilation_creaExp` 给出 (b·b) Φ = 0，这里 b·b = 0）。
+  合计 (L + b·a) • Φ_L，与右端在真空上相同。
+  ⇒ **这解释了常数为什么是 L + b·a**：b·a 全部来自 J = 0 那一项，即零模。
+
+  **第三块（组装，刚性）。** `vertexCurrent_X_mul` 证明左端满足产生模态递推，
+  它比 `vertexOsc_X_mul` 多一项 k b^μ V_{L+k}（来源 `dotMode_X_mul`：
+  ⁅b·α_{−J}, α^μ_{−k}⁆ = k b^μ δ_{J,−k}）；而右端 (L + b·a) V_L 的前缀 L 在递推里
+  也恰好多出**同一项**。两者相消，故两边满足同一条递推；配上第二块的真空值，
+  由 `eq_zero_of_vertex_recursion` 得两边之差为零（`sub_eq_zero`）。
+
+  **假设核对**：恰好 `hη : ∀ μ, η μ * η μ = 1` 与 `hbb : dotVec η b b = 0` 两条。
+  **没有** DDF 归一化 `dotVec η b a = 1`（那只在塔上形式里出现，见目标 notes），
+  没有对 L 的限制，没有 a 的任何条件。
+gaps:
+  - |
+    (i) **「b·b ≠ 0 时恒等式带反常项」未被证明**。目标【不断言】(a) 与
+    【b·b = 0 用在哪三处】(i)：那只是 Lean 文件头 "Mathematical remarks" 第 2 条的注记
+    （逐字引在目标 sources 的 note 里），**不是定理**；Lean 侧没有 b²/z 型缩并的形式级数。
+    可核对的部分是 (ii)(iii)：`hbb` 在本文件里确实只经"电流与顶点算子对易"这一条进入
+    （`dotMode_vertexOsc_comm`），以及由它给出的窗口下端。
+  - |
+    (ii) **欧拉递推在图上没有自己的卡**，本推导对
+    worldsheet.exponential-vertex-operator-mode-weight-identity-v2 的那条边因此标 inferred，
+    且**不得**被读成"本卡依赖 [L_m, V]"（目标【不断言】(b)）。已在 depends_on 里提请 lead 拆卡。
+  - |
+    (iii) **塔上形式不在本推导的目标里**。m Σ_J (k_0·α_{−J}) V^{(m)}_{K−J} = K V^{(m)}_K
+    （Lean `towerCurrentVertex_eq`）额外需要 2α' k_0·p = 1，按"一个节点一个命题"
+    不写进目标卡；它作为 worldsheet.tower-vertex-weighted-mode-sum--via-lean 的一步出现。
+  - |
+    (iv) **本推导不支持 worldsheet.ddf-transverse-oscillator-algebra-v2 的任何部分**，
+    它只是 (5b) 的原子输入；(5b) 本身见 worldsheet.tower-vertex-weighted-mode-sum。
+  - |
+    (v) **一般交换 ℚ-代数，无实结构、无幺正性、无解析结构、无零模算符**（零模只是参数 a）。
+    ℚ-代数是必需的：真空值那一步的欧拉递推要除以 M。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【本推导最值得记住的一点】"权恒等式"在纸上是一行（把 z∂_z 作用到正规序指数上），
+  在形式化里是约 250 行的独立原子，且**不能**由已形式化的 [L_m, V] 恒等式导出。
+  formal/TODO.md (5b) 逐字称它为「真正缺的原子事实（本文件的核心）」。
+  这是本项目"纸上一步 ≠ 图上一条边"的又一个数据点。
+author: curator
+created: "2026-09-11"

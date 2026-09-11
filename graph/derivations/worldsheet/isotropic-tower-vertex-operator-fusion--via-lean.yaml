@@ -1,0 +1,121 @@
+id: worldsheet.isotropic-tower-vertex-operator-fusion--via-lean
+target: worldsheet.isotropic-tower-vertex-operator-fusion
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators
+    inferred: false
+    note: |
+      **振子半的全部内容，命题级依赖。** Lean 侧 `sum_towerVertex_towerVertex_single_of_isotropic`
+      在逐层化归后直接调用
+      `Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero η (vertexMomentum b m) (vertexMomentum b n)
+       hdot (L - m - n) P …`，即那张卡断言 (2) 的有限和形式本身，
+      其中 `hdot` 由 `dotVec_vertexMomentum` + `hbb` 得到。
+      ⚠ 该卡是 formalized，故这条边不压低本推导的有效状态。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      提供塔 T(p;k_0) = ⊕_{N∈Z} F(p + N k_0)（Lean 侧 `TowerFock D R = ℤ →₀ Fock D R`）
+      与**层移位算子** e^{i n k_0·x}（`towerShift n`，该卡 (1)：S_0 = id、S_m S_n = S_{m+n}），
+      以及逐层算子的装配 `towerDiag`。本推导的"零模半融合"那一步就是该卡 (1)(i) 的实例
+      （j + n + m = j + (m+n)），逐层化归用的是该卡"代数（外部）直和、只有限多层非零"这一条
+      （Lean 的 `sum_single_eq` + `Finset.sum_comm`），而 towerLevelBound 的逐层比较用
+      `Finset.le_sup` 取遍 `x.support`。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+  - id: worldsheet.ddf-operators-v6
+    inferred: true
+    note: |
+      **inferred: true。** 本推导用到 `towerVertex` 这个**定义**（塔上顶点算子的 z^K 洛朗系数，
+      含把洛朗指标移 −n 的单值因子记账：
+      `towerVertex η b n K w j = vertexOsc η (n·b) (K−n) (w (j−n))`）。
+      图上唯一写下这个定义的地方是该卡的【顶点算子的模】一段，但该卡的 `formal.lean_decl`
+      指向 `ddfOp`（DDF 算子），**不是** `towerVertex`；后者在该卡里只是定义 A^ε_n 时
+      顺带引入的记号，没有自己的节点。
+      ⇒ 这条边指向的是"该卡文本里的一段记号约定"，不是该卡 formal 声明的内容，故标 inferred。
+      ⚠ 正确的修法（提请 lead；worldsheet.isotropic-tower-vertex-operators-commute--via-lean
+      的 gaps (iv) 与 worldsheet.vertex-operator-adjoint--via-lean 已两次提请，本推导第三次）：
+      把 `towerVertex` 拆成一张 formalized 定义卡，与单 Fock 的
+      worldsheet.exponential-vertex-operator-modes 配对。
+      ⚠ 该卡是 formalized 定义卡，故这条边不压低本推导的有效状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/VertexProduct.lean :: StringFormal.NoGhost.sum_towerVertex_towerVertex_of_isotropic（目标断言 (2)，亦即目标卡的 formal.lean_decl）、StringFormal.NoGhost.sum_towerVertex_towerVertex_single_of_isotropic（单层版）、StringFormal.NoGhost.vertexMomentum_add、StringFormal.NoGhost.dotVec_vertexMomentum；调用 StringFormal.NoGhost.Fock.sum_vertexOsc_vertexOsc_of_dotVec_zero；目标断言 (1)（界与内层指标一致）在 formal/StringFormal/NoGhost/VertexWeightedSum.lean :: StringFormal.NoGhost.towerVertex_towerVertex_apply_eq_zero_of_lt，其内部调用 StringFormal.NoGhost.Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt；塔侧 formal/StringFormal/NoGhost/DDF.lean :: StringFormal.NoGhost.{towerVertex, towerVertex_single, towerVertex_apply_eq_zero_of_lt, towerLevelBound, towerShift, towerDiag, vertexMomentum, vertexMomentum_apply, dotVec, sum_single_eq}"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry；VertexProduct.lean 547 行 / 17 条声明，
+      VertexWeightedSum.lean 799 行 / 35 条声明，formalizer 自述 2026-09-11 分别用
+      `--import … --all` 复核公理只有标准三条。lead 分两次合入 main：
+      **2c873fa**（VertexProduct.lean）与 **28bc556**（VertexWeightedSum.lean）。
+      ⚠ **目标断言 (1) 与 (2) 在两个不同文件里**：(2) 在 VertexProduct.lean，
+      (1)（uniformly in the inner index）在 VertexWeightedSum.lean。这不是缺口，
+      只是 formalizer 在需要它的时候才证；两者都已合入 main。
+      **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112"
+    note: |
+      **不承载本推导的任何一步**，只记录该步骤在文献里的位置（教科书把
+      e^{i m k_0·X} e^{i n k_0·X} = e^{i(m+n) k_0·X} 当作一句话）。式号与正文未核实（L0）。
+summary: |
+  机器检查的证明。主定理本体三步，全部力气已由被依赖的单 Fock 卡出完。
+
+  **第一步：动量算术（`dotVec_vertexMomentum` + `vertexMomentum_add`）。**
+  塔上第 n 个顶点算子的动量是 `vertexMomentum b n = n·b`（逐分量 (n : R) * b μ），故
+    (m k_0)·(n k_0) = (m n)(k_0·k_0)，  m k_0 + n k_0 = (m+n) k_0。
+  代入 `hbb : dotVec η b b = 0` 得 `hdot : dotVec η (n·b) (m·b) = 0`。
+  ⇒ 这一步是把"类光性"翻译成"正交性"的全部内容（`funext` + `push_cast` + `ring`）。
+
+  **第二步：单层版（`sum_towerVertex_towerVertex_single_of_isotropic`）。**
+  在 `Finsupp.single j P` 上，两次 `towerVertex_single` 把被求和项写成
+    single (j + n + m) ( V^{(m k_0)}_{L−m−n−(K−n)} ( V^{(n k_0)}_{K−n} P ) )。
+  层标签与 K 无关，故可用 `Finsupp.single_finsetSum` 把 single 提到外面；
+  内层求和经 `Finset.sum_image`（K ↦ K − n，单射）重标后正好是单 Fock 卡的有限和形式，
+  以窗口 `hs (K + n)` 调用，得 V^{(m k_0 + n k_0)}_{L−m−n} P。
+  最后 `vertexMomentum_add`、`towerVertex_single`，加两条指标恒等式
+  `j + n + m = j + (m+n)`、`L − m − n = L − (m+n)`（都是 `by ring`）收尾。
+
+  **第三步：任意塔矢量（`sum_towerVertex_towerVertex_of_isotropic`）。**
+  x = Σ_{j ∈ x.support} single j (x j)（`sum_single_eq`），两个求和交换（`Finset.sum_comm`），
+  逐层用第二步，窗口由 `Finset.le_sup` 给出的
+  levelBound (x j) ≤ towerLevelBound x 放大（`omega`）。
+
+  **目标断言 (1)（界与内层指标一致）** 是姊妹文件的
+  `towerVertex_towerVertex_apply_eq_zero_of_lt`：同样逐层化归，内层调用
+  `Fock.vertexOsc_vertexOsc_apply_eq_zero_of_gt`（即单 Fock 卡断言 (1) 的上端），
+  注意它**对内层洛朗指标 B 完全自由**——这正是单 Fock 卡"上端界与 K 无关"那条的塔上继承。
+
+  **假设核对**：除窗口假设外全程只有 `hbb : dotVec η b b = 0`。**没有** `hη : η_μ² = 1`，
+  **没有** DDF 归一化 `dotVec η b a = 1`，没有 m, n, L 的限制，没有 b ≠ 0。
+gaps:
+  - |
+    (i) **「k_0² ≠ 0 时融合公式为假」未被证明**。目标【不断言】(a)：那只是
+    `sum_towerVertex_towerVertex_single_of_isotropic` 的 docstring（逐字引在目标 sources 的
+    note 里），**不是定理**；Lean 侧没有定义单值因子 (w/z)^{mn k_0²} 所需的形式级数。
+    ⇒ 「类光性第三处承重」这句话的地位是 **formalizer 的断言 + 一条可核对的机制说明**
+    （正交性确实在局部有限性与真空值两处被用掉），不是机器检查的否定结论。
+  - |
+    (ii) **零模只是层移位，没有真正的 Heisenberg 零模**。目标【不断言】(e)：
+    x^μ 只以 e^{i n k_0·x}（`towerShift`）的形式出现，[x^μ, p^ν] 未形式化；
+    塔建在**固定的** p 与 k_0 上，不是全动量空间；没有余循环/Klein 因子。
+    ⇒ 本推导**不**支持"一般动量格上的顶点算子融合"（那属于 math.lattice-vertex-algebra）。
+  - |
+    (iii) **`towerVertex` 在图上没有自己的定义卡**，本推导对 worldsheet.ddf-operators-v6
+    的那条边因此标 inferred。已第三次提请 lead 补定义卡。
+  - |
+    (iv) **本推导不支持 worldsheet.ddf-transverse-oscillator-algebra-v2 的任何部分**，
+    只是其 (5a) 块。(5b) 见 worldsheet.tower-vertex-weighted-mode-sum；把 (5)(5a)(5b)
+    接到 A^ε_n 上的**双重局部有限和 Leibniz 组装**仍未做
+    （formal/TODO.md `ddf-operators` 的「[A,A] 的整条链」段，formalizer-ddf-algebra 进行中）。
+  - |
+    (v) **一般交换 ℚ-代数，无实结构、无幺正性、无解析结构**；η_μ 是 R 中任意一族元素。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  【本推导的"短"是有意义的信号，与姊妹对完全平行】
+  三步里两步是记账（Finsupp 逐层、指标重标与层标签加法），真正的数学全在
+  worldsheet.same-point-product-of-orthogonal-momentum-vertex-operators 里。
+  这与 worldsheet.isotropic-tower-vertex-operators-commute--via-lean 的 notes 说的同一件事：
+  **把"正交动量无缩并"与"塔上动量都与 k_0 成比例"分开之后，
+  类光性的作用就只剩一行算术 (m k_0)·(n k_0) = mn k_0²**。
+author: curator
+created: "2026-09-11"
