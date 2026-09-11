@@ -1,0 +1,223 @@
+id: worldsheet.superstring-relative-cohomology-vanishing--via-lian-zuckerman-1989
+target: worldsheet.superstring-relative-cohomology-vanishing
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.super-virasoro-algebra
+    convention_map: |
+      本图的中心荷归一化是 c/12：[L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ、
+      {G_r,G_s} = 2L_{r+s} + (c/12)(4r²−1)δ。
+      **LZ 用 c/8 与 c/2**（p.302 逐字）：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ_{m+n}、
+      {G_{m+κ}, G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ_{m+n}。换算两条：
+        (1) **中心荷**：c_本图 = (3/2)·c_LZ ⇒ LZ 的 c_LZ = D = 10 ↔ 本图 c^m = 15；
+            LZ 的鬼表示 ρ(c) = −10（Proposition 1.2）↔ 本图 c^g = −15。
+        (2) **R 扇区 (κ = 0) 的 L₀ 零点**：LZ 的 {G₀,G₀} = 2L₀（无中心项），本图是
+            2L₀ − c/12 ⇒ **L₀^LZ = L₀^本图 − c/24**。这与 LZ Definition 2.16 要求
+            π(L₀)v = κv（NS 取 ½、R 取 0）的截距记法一致。
+            NS 扇区 (κ = ½) 两侧的 [L,L] 中心项同 ∝ (m³ − m)，无额外平移。
+      ⚠ 本定理的断言（哪些鬼数上上同调为零）**不受这两条换算影响**：它们只改 c 与 L₀ 的
+      标定，不改复形的鬼数分次。但 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 这一步必须经过 (1)。
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给本图一侧的 Q_B 与两条定义性关系 {Q_B, b_n} = L_n、[Q_B, β_r] = G_r，
+      即"本卡说的相对 BRST 上同调是本图哪个算符的上同调"。
+      LZ 一侧的对应物是 **Definition 1.6** 的显式模式和（p.307，记号引 GSW [19]）、
+      **Proposition 1.7(i)**（逐字 'All the operator sums above are well-defined on C'）
+      与 **Proposition 2.1**（逐字 '[13] {Q, b₀} = K, [Q, β₀] = D_R.'，其中
+      K = π(L₀) + ρ(L₀)、D_R = π(G₀) + ρ(G₀)），两侧逐项同型。
+      ⚠ 本边是本推导有效状态被封顶在 physical-argument 的**主要原因**：该定义卡自身
+      status 为 physical-argument（其上游是 OPE / 路径积分链）。**这不降低本推导自身的
+      rigorous**——LZ 在自己的框架里把 Q 定义为一个良定义算子，不依赖路径积分。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给相对复形 (H3) 的定义（NS：b₀ = L₀ = 0；R：另加 β₀ = G₀ = 0）。
+      与 LZ **Definition 2.2** 逐条对应：B^r(p,κ) = Ker b₀（κ=½）/ Ker b₀ ∩ Ker β₀（κ=0）；
+      F^n = B^{n−κ} ∩ Ker K；C^n_rel = F^n（κ=½）/ F^n ∩ Ker D_R（κ=0）。
+      本定理断言的对象就是这个复形的上同调，故本边是本推导最核心的一条对象对接边。
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
+    note: |
+      供给 Q_B² = 0（上同调有定义的前提）。LZ 一侧的对应陈述是 **Proposition 1.7(ii)**
+      逐字 'Q² = 0 iff D = 10.'
+      ⚠ **LZ 自己不证 (ii)**：证明逐字 '(ii) is done in [13, 15].'（[13] = ohta-1986，
+      [15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）。故这条前提在 LZ 一侧也是外包的；
+      显式系数公式见 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10)。
+      本推导只需要 ⟸ 方向（c^m = 15 ⟹ Q_B² = 0），故指向单向弱卡；双向卡的 ⟹ 方向
+      在本图是 conjecture，不经过本边。
+  - id: worldsheet.superconformal-ghost-central-charge
+    note: |
+      供给 c^g = −15，即 (H1) 的"总中心荷为零 ⟺ c^m = 15"。
+      LZ 一侧是 **Proposition 1.2** ρ(c) = −10·Id（LZ 归一化，换算见上面的 convention_map）。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式、对易/反对易关系与基态。LZ 一侧是 p.303 (1)–(4)
+      （[γ_{m+κ}, β_{n−κ}] = δ_{m+n}、{c_m, b_n} = δ_{m+n}）与 Bose-sea charge q_B 的定义
+      （p.303–304，引 Friedan–Martinec–Shenker，并注 'q_B here differs from that in [6]
+      by a constant'）。
+      ★ 本边同时承载断言 (1)(2) 里"表示的选择"：LZ p.306 (7) 选 T_{1/2}（κ=½）与
+      **T₀ ⊕ T₁**（κ=0），理由逐字 'Fortunately, for each sector κ = ½, 0, there is a
+      unique such space in which deg is bounded above'——**deg 有上界正是 Proposition 3.2
+      的有限过滤能建立的前提**，故这条表示选择在本推导里不是装饰，是证明的技术输入。
+  - id: worldsheet.superconformal-ghost-unit-operator-vacuum
+    note: |
+      供给 (H5)：βγ 的真空选择不唯一（本图一侧的证词是 |1⟩ ≠ |0⟩_NS 且 |1⟩ 上的 Fock 空间
+      里没有 |0⟩_NS）。LZ 一侧是 p.304 逐字 'Representations corresponding to distinct
+      charges are inequivalent.' ⇒ 断言 (2) 必须写成存在量词。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: |
+      供给物质部门 L^m_n、G^m_r 的显式模式表达式（本图一侧）。LZ 一侧是 Proposition 1.1
+      与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)，其中 U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩、
+      R(p,½) = C、R(p,0) 是 Spin(D−1,1) 旋量表示（p.303）。
+      ★ 本边同时供给证明链里**唯一用到 p ≠ 0 的地方**的对象：Corollary 2.19(iii)
+      "V(p,κ) 是自由 Vir_κ^- 模"，其反面（p = 0）就是 Proposition 5.5 的失效机制。
+  - id: worldsheet.fock-indefinite-form
+    inferred: true
+    note: |
+      供给"物质 Fock 空间上的双线性型因 η^{00} = −1 而不定"这一背景——本图把 RNS 物质
+      Fock 空间作为**带不定型的**表示空间的记账入口。
+      **标 inferred，理由与
+      worldsheet.no-ghost-theorem-superstring-cohomological--via-lian-zuckerman-1989 同**：
+      该卡是**玻色**弦的 Fock 形式（只有 α^μ_n），LZ 的 V(p,κ) 还含 d^μ_{−n+κ} 与 R 扇区的
+      旋量因子 R(p,0)（其上的形式由 p·d₀ 定义，LZ Definition 1.3(ii)）；由玻色版到 RNS 版的
+      推广在本图与 LZ 都没有作为一条独立陈述写出。
+      ⚠ 附带说明（本推导特有）：本定理的证明**不用**任何厄米形式（见 gaps 与目标卡
+      "本命题不断言 (a)"），故本边在本推导里只是"复形是哪个空间"的记账，比在正定性那张卡的
+      同名边更弱。有效状态不受影响：该卡的有效状态已是 physical-argument。
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.4**, p.309（陈述）/ **Corollary 3.4**, p.323（证明），逐字：'Suppose p ≠ 0: then H^n_rel(p,κ) = 0 unless n = 0.'，紧随逐字 'This is the analogue of the vanishing theorem proven by FGZ.'；作者自评 p.335 逐字 'The only mathematically non-trivial result is the vanishing theorem (2.4).'"
+    note: |
+      L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md E3）。
+      ⚠ **编号陷阱**：p.305 **Lemma** 1.4 与 p.306 **Definition** 1.4 同号，引用必须带类型词；
+      各章公式号重起（§1 的 (1)–(8)、§2 的 (1)–(42)、§3 的 (1)–(40) …），引用公式必须带章号。
+  - ref: lian-zuckerman-1989
+    loc: "§3 全节（pp.321–323）的证明链：**Lemma 3.1**（Poincaré 对偶 H^m_rel ≅ (H^{−m}_rel)*）、**Proposition 3.2**（有限过滤）、**Proposition 3.3**（伴随分次复形的 H^m = 0 对 m < 0）、**Theorem 3.3.1**（超李代数同调的正合序列，§3 的 (40)）、**Corollary 3.4**（= Theorem 2.4）；外加 §2 的 **Corollary 2.19(iii)**, p.321（V(p,κ) 是自由 Vir_κ^- 模）"
+    note: |
+      L1。Theorem 3.3.1 自述是经典李代数同调定理的推广，逐字：'a generalization of a theorem
+      in the theory of classical Lie algebra homology (a good exposition is given in [18];
+      see also [23])'。
+      ⚠ 证明的两条表示论输入在本图**都没有卡**（见 gaps）：
+      (a) Corollary 2.19(iii) 的证明（经 Proposition 2.18）用**超 Virasoro 的 Kac 行列式**
+          （[22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性（[7, 9, 10]）；
+      (b) Theorem 3.3.1 的正合序列本身。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 5.5**, p.333（p = 0 的例外情形），逐字：'For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not Vir_κ^- -free'；显式列出 H^n_rel(0,κ)（κ=0：n = 0, ±1；κ=½：n = ±½, ±3/2）与 H^n(0,κ)"
+    note: |
+      L1。本条给出 (H2) 的**必要性**：p ≠ 0 不是为方便加的，去掉它结论就假。
+      失效点在证明链上是精确定位的——Corollary 2.19(iii)（Vir_κ^- 自由性）不再成立，
+      Proposition 3.3 的伴随分次复形计算随之断掉。
+  - ref: lian-zuckerman-1989
+    loc: "p.306 (7)（零模表示：κ=½ 取 T_{1/2}、**κ=0 取 T₀ ⊕ T₁**，逐字 'Fortunately, for each sector κ = ½, 0, there is a unique such space in which deg is bounded above'）、p.306 (8)（复形 C(p,κ) 的显式张量积形式）、p.304（逐字 'Representations corresponding to distinct charges are inequivalent.'）、p.308（逐字 'From now on, we will take D = 10'）、p.303（逐字 'p will always be assumed non-zero until Sect. 5'）"
+    note: |
+      L1。前提的逐字定位 + 断言 (2) 的存在量词见证（T₀ ⊕ T₁）。
+      ⚠ **p.305 Remark 的半空间假设 {p^D > 0} 不在本推导的前提链里**：auditor 2026-09-11
+      的裁决 (c) 逐条核对过'Theorem 2.4 / Corollary 3.4 与 Proposition 3.3 的前提只写
+      "p ≠ 0"（p.309、p.323），证明是有限过滤 + 长正合列，不涉及任何厄米形式'。
+      这是本卡与正定性那张卡的一处实质差别：那张卡的 R 扇区正定性要靠 ⟨,⟩_R 的取向，
+      本卡完全不用。
+summary: |
+  LZ 1989 把 RNS 弦的 BRST 复形认作**超 Virasoro 代数的半无限上同调复形**，消灭定理
+  （Theorem 2.4，证明为 §3 的 Corollary 3.4）的证明是"**有限过滤 + 长正合列 + Poincaré
+  对偶**"三步：
+
+  1. **复形与分次**：复形是 p.306 (8) 的 C(p,κ) = R(p,κ) ⊗ U(κ) ⊗ Λ_∞ ⊗ T，鬼数为 U + κ
+     的本征值；零模空间 T 按 p.306 (7) 选为使能量分次 **deg 有上界**的那一个
+     （κ=½ 取 T_{1/2}、κ=0 取 T₀ ⊕ T₁）。相对复形按 Definition 2.2 取 Ker b₀ ∩ Ker K
+     （NS）、再交 Ker β₀ ∩ Ker D_R（R）；由 Proposition 2.1 的 {Q, b₀} = K、[Q, β₀] = D_R
+     知 Q 保持之。
+  2. **Poincaré 对偶（Lemma 3.1）**：H^m_rel ≅ (H^{−m}_rel)*。⇒ 只需证 **m < 0 时消灭**，
+     正次数由对偶自动跟上。这是"集中在**一个**次数"而非"集中在非负次数"的来源。
+  3. **有限过滤（Proposition 3.2）+ 伴随分次（Proposition 3.3）**：deg 有上界使相对复形上
+     存在有限过滤，其伴随分次复形的上同调可直接算，结果是 H^m = 0 对 m < 0。这一步用
+     **Theorem 3.3.1**（超李代数同调的正合序列，§3 的 (40)，自述是经典李代数同调定理的
+     推广）与 **Corollary 2.19(iii)**（V(p,κ) 是**自由** Vir_κ^- 模）。
+  4. **合并（Corollary 3.4）**：过滤的谱序列/正合列把伴随分次的消灭抬到相对复形本身，
+     得 m < 0 的消灭；与第 2 步的对偶合并即 H^n_rel = 0 除 n = 0。
+
+  **p ≠ 0 进入哪一步**：只进第 3 步的 Corollary 2.19(iii)。Proposition 5.5 逐字给出反面
+  （'For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not
+  Vir_κ^- -free'），故 (H2) 是**本质前提**而非便利假设——这与 p.305 Remark 的半空间假设
+  {p^D > 0}（只定 R 扇区厄米型的整体符号、本定理不用）形成对照。
+
+  【为什么标 rigorous】四条：
+  (1) 结论是**带编号的定理**（Theorem 2.4）且有**独立编号的完整证明**（§3 全节，
+      Corollary 3.4），不是断言加骨架；
+  (2) 论证全在有定义的模范畴里：过滤有限（Prop 3.2）、deg 有上界（p.306 的表示选择）、
+      算子和逐项有限（Prop 1.7(i)）；**不涉及路径积分、不涉及厄米形式**，
+      是本图超弦区最接近纯代数的一条论证；
+  (3) 作者自评这是全文唯一非平凡的数学结果（p.335），即论文的审稿分量正落在此处；
+  (4) 期刊是 Communications in Mathematical Physics。
+  与 worldsheet.no-ghost-theorem-brst--via-fgz 的记账口径一致。
+
+  【有效状态为什么仍是 physical-argument】依赖里的 worldsheet.superstring-brst-charge、
+  worldsheet.superstring-brst-additional-conditions 等定义卡自身是 physical-argument
+  （上游是 OPE / 路径积分链），按 docs/STATUS_LEVELS.md 的 min 规则封顶。
+  **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经由那些卡
+  记账的后果。要抬高 effective 必须先把超弦 BRST 设定写成数学上自足的定义卡（Lean 岛候选）。
+gaps:
+  - "**Theorem 2.4 的证明用到两条本图没有卡的表示论输入**：
+     (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——其证明（Proposition 2.18）用
+         **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性
+         （[7, 9, 10]）。本图只有玻色 Virasoro 的 worldsheet.kac-determinant-v2，
+         **没有超 Virasoro 版**，故这条输入未上图。
+     (b) **Theorem 3.3.1** 的正合序列（§3 的 (40)），LZ 自述是经典李代数同调定理的推广
+         （'a generalization of a theorem in the theory of classical Lie algebra homology'），
+         本图无对应卡。
+     ⇒ 本推导的 rigorous 是「按已核实的编号定理与其证明梗概」给的，与
+     worldsheet.no-ghost-theorem-brst--via-fgz 的记账口径相同。"
+  - "**本推导 summary 第 3–4 步的过滤论证细节（谱序列 vs 长正合列）未逐字复核。**
+     抽取记录 E3 只给出证明链的结点（Prop 3.2 → Prop 3.3 → Thm 3.3.1 + Cor 2.19(iii)
+     → Cor 3.4）与 §3 的 (40) 这一公式号，**没有逐字转录过滤的定义与收敛性论证**。
+     故 summary 第 3–4 步的措辞（「过滤的谱序列/正合列把伴随分次的消灭抬到相对复形本身」）
+     是按标准同调代数补的连接词，**不是 LZ 的逐字表述**。要把本推导升到 formalized
+     必须先逐字复核 pp.321–323。"
+  - "**R 扇区零模表示的见证不唯一，本推导只见证 T₀ ⊕ T₁。** 目标卡断言 (2) 是存在量词，
+     本推导用 LZ p.306 (7) 的 T₀ ⊕ T₁ 见证；FOK 1989 与 IMNU 1986 用的是 C[γ₀]（单个
+     Bose-sea charge，FOK 称 'Henneaux 表示'）。**LZ 的 T₀ ⊕ T₁ 与 C[γ₀] 给出的相对上同调
+     是否同构，本图未核实**：FOK (5.1) 只证了它自己的两种表示（Schrödinger 与 Henneaux）
+     同构，且逐字限定 'the isomorphism is only an isomorphism of **ungraded** vector spaces'
+     ——而本卡断言的恰是**分次**信息（哪些鬼数上为零），故那条同构即便成立也不能直接搬运。
+     ⇒ 若日后要把断言 (2) 从存在量词升为「对一切可接受表示」，本推导不够。"
+  - "**FOK 1989 是本定理的第二条（独立）候选来源，本轮未建推导。**
+     figueroa-ofarrill-kimura-1989 的标题逐字就含 'vanishing … theorems'，两个消灭定理是
+     **(3.19)** `H^{m≠0}_∞(NS, L₀; H) = 0`（NS，p.114，半整数过滤 + Künneth 型谱序列 +
+     附录 A 的 `H^b_∞(NS_−; M) = 0, b ≠ 0` + Poincaré 对偶引作者预印本 [4]）与
+     **(4.17)** `H^{m≠0}_∞(R, R₀; H) = 0`（R，p.117–118，双复形 + `{F₀, K} = 1` 引
+     Henneaux [12]，脚注 9 限 `p ≠ 0`）。两篇互不引用（LZ p.335 Note added in proof 逐字
+     'we received preprints from J. Figueroa-O'Farrill and T. Kimura, whose work appears to
+     be similar to ours.'）。
+     ⚠ 两点使 FOK 版推导若上图会**弱于**本推导：
+     (a) FOK 的 NS 路线以 **Brower–Friedman 完全可约性**为出发点（p.111 逐字 'It was proven
+         by Brower and Friedman [11] that this representation is fully reducible'），而 LZ
+         p.320 Remark 明证 `V(p,κ)` 一般**不是** Verma 模直和 ⇒ FOK 版须显式 depends_on
+         争议卡 worldsheet.nsr-fock-space-verma-decomposition；
+     (b) FOK 的 R 扇区见证是 **Henneaux 表示 C[γ₀]**（单个 Bose-sea charge），不是本推导的
+         T₀ ⊕ T₁ ⇒ 它给目标卡断言 (2) 的存在量词提供的是**另一个**见证，不是同一个。
+     ⇒ 本轮不建 FOK 推导（工作量与本次积压不匹配），已列入报告。"
+  - "**Proposition 1.7(ii)（Q² = 0 iff D = 10）的证明在 LZ 是外包的**：逐字 '(ii) is done
+     in [13, 15].'（[13] = ohta-1986，正文本图未取得；[15] = Terao–Uehara, Phys. Lett.
+     168B (1986) 70，**本图连 bib 都未登记**）。故 (H1) 里「上同调有定义」这一前提的
+     可追溯性止于 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10) 的显式系数公式
+     （L1，但那是物理侧的形式计算）。"
+notes: |
+  【本推导与两条下游推导的关系】
+  本卡是下列两条推导的**共同上游**，它们自 2026-09-11 起显式 depends_on 目标卡
+  （**非 inferred**：LZ 在两处证明里都明确引用 Theorem 2.4）：
+    - worldsheet.no-ghost-theorem-superstring-cohomological--via-lian-zuckerman-1989
+      （Corollary 2.15(ii) = 本定理 + Euler–Poincaré + Proposition 2.14(ii) 的 char = sign）；
+    - worldsheet.brst-cohomology-equals-ocq-physical-superstring--via-lian-zuckerman-1989
+      （Theorem 2.20 用本定理使 H⁰_rel 是唯一非零者、λ 的等距性质有意义，再用
+      Corollary 2.15(i) 与 Corollary 2.19(i) 的维数相等收尾）。
+  ⚠ **不构成循环**：本定理的证明（§3）不用 Corollary 2.15、不用 Theorem 2.20、
+  不用任何厄米形式；方向是 Theorem 2.4 → Corollary 2.15 → Theorem 2.20，与图上的边同向。
+
+  【与玻色弦一侧的对应】
+  LZ 1989 Theorem 2.4 ↔ FGZ 1986 Theorem 2.7(i)。LZ 逐字自述 'This is the analogue of the
+  vanishing theorem proven by FGZ.'（Theorem 2.4 紧随句）。
+  ⚠ 玻色弦一侧的消灭定理在本图**也没有独立卡**（只在
+  worldsheet.no-ghost-theorem-brst--via-fgz 的 sources 里），是同型的记账缺口，已列入报告。
+
+  按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md E3（含 §4 Q1、
+  §5 第一条对 curator 的建议「建议单建 worldsheet.superstring-relative-cohomology-vanishing」）
+  建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
