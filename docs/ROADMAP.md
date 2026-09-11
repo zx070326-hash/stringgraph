@@ -90,6 +90,16 @@
   3. Thorn 1985 Santa Barbara 42 页报告（自述"improved version of the Goddard–Thorn proof"）：`https://inis.iaea.org/records/szqhd-hct30`，需免费注册——是否注册请船长决定
   下载后放 `literature/raw/`（gitignore）并告知，researcher 即可逐页抽取。
 
+## 待落地的 reviewer 必修项（2026-09-11，lead 记账；派工中）
+
+- **branes（reviewer-branes）**：(13.3.12) 因子写反（∫F = 2κ₁₀²μ_{6−p}，非 /2κ₁₀²）——换代 `branes.rr-charge-quantization` v2；抽取记录 ch13 第 417 行同错，**researcher 须核印刷页 148**。五条 TODO 边现可建实；tension 卡递推式位置漂移换代 v2；n=1 推导可升 rigorous（reviewer-verified）。建议：rr-coupling 卡四命题应拆；圆柱三推导可挂玻色弦圆柱卡为二级上游。
+- **batch15（ch8-fix）**：(8.6.11) 不存在；dual-coordinate 柱面字典误标平面约定；dilaton-shift「原书 (8.3.31) 写法」误归属（原书是 e^{Φ'} 形式，e^{−Φ} 形式是 Schrans）。
+- **batch16**：G–N 两条推导实质用共形向量 ω 与 L_(n)=ω_{n+1}，桥接卡 (N4) 明写不断言 ω——须建 `worldsheet.free-boson-vertex-algebra-conformal-vector`（physical-argument，G–N §2.2 Sugawara 页未读）并改指；`--via-zero-mode-bracket` 因此降 physical-argument，但 v2 卡 best 已是 `--via-lean`。ShapovalovLevelThree.lean:34 注释符号笔误。
+- **reviewer-v2-ch10b 残余**：tadpole 前缀 (8π²α')^5 换代；bosonic-v2→v3 边；(10.8.12)/(10.2.15) 来源。Q_B²=0 ⟺ c=15 已拆单向（9ff17d1）。
+- **gkpw**：d=4 拆卡已落地（gkpw-ads5）。
+- **去重事故**：`branes.bps-bound-point-particle-d4` / `branes.brane-charges-in-susy-algebra` 与 `susy.*` 同名命题并行建卡，保留 susy.*，branes.* superseded（派工中）。**教训：同一命题不得同时派给两个 curator。**
+- **researcher 五项**（派工中）：η S 变换数学来源（Apostol Thm 3.1 / Siegel 1954——ch7 子图最集中的单点缺口）；Polchinski v1 p.159 页图；LZ 1989 p.320 Remark 反例的 p；Gallier–Xu Lemma 6.1/Prop 6.1 逐字；Humphreys GTM 9 §23/§8 入口。
+
 ## 瓶颈分析（2026-09-10，`stringgraph why`）
 
 - **光锥路线**（critical-dimension-light-cone）：瓶颈是 ζ 正规化、振子对易关系的无穷模式重排、光锥规范可达性、Polyakov–Nambu–Goto 经典等价，四处 physical-argument。
