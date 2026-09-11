@@ -209,6 +209,16 @@ StringFormal/
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
                             D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
+  NoGhost/LevelTwoSpan.lean **蓝图 §B.6 的 N = 2 两条卡点**：(a) 产生指数的显式分量
+                            `creaExp_one`（Φ₁ = b·α₋₁）、`two_smul_creaExp_two`（2Φ₂ = (b·α₋₁)²+b·α₋₂），
+                            `vertexOsc_apply_polState`，由此 **A^ε_{−2}|0;k⟩ = [ε·α₋₂ − 2(ε·α₋₁)(k₀·α₋₁)]|…⟩**
+                            与 **A^ε_{−1}A^δ_{−1}|0;k⟩ = [(ε·α₋₁)(δ·α₋₁) + ½(ε·δ)((k₀·α₋₁)²−k₀·α₋₂)]|…⟩**
+                            （窗口是 {−2,−1,0,1}，j=1 项就是 DDF 代数的中心项；修正对 ε↔δ 对称）；
+                            (b) **level-2 物理态的完整刻画**：`level_two_cases`（单项式两形，靠删一个振子
+                            降到 level 1）、`levelTwoGen`/`exists_levelTwoGen_of_mem_levelSubmodule_two`、
+                            `Lop_one/two_apply_levelTwoGen` ⇒ `mem_physSubmodule_inf_levelSubmodule_two_iff`
+                            与塔版 `mem_towerPhys_bigrade_two_iff`（质壳 + D 条 + 1 条线性约束）。
+                            **N = 2 的张成 (c) 未做**（缺消元）；`ε·k = 0` 在 N = 2 仍是必需的额外假设
   NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family；rung 分次：`ddfOp` 移 rung +n（纯运动学，只需 hη/hεb），`|d⟩` 在 rung −N(d)（`frameMonomial_mem_towerRungSubmodule`），`ddfSpan_eq_iSup_rung`；rung 与 level 联动未做
                             实例化到 A^ε_n。补上两条小引理 **Fock.towerPairing_towerVacuum_self**（(H3)）与
                             **ddfOp_towerVacuum_of_pos**（(H4)，一行：ddfWindow n vac = Icc n 0 = ∅）；

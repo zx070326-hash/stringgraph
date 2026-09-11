@@ -1554,19 +1554,67 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     2. **`TransverseFrame`（正交归一 + 横向）推不出完备性。** 「`D−2` 个横向向量连同 `p_{−1}`
        张成 `p_{−1}^⊥`」是独立假设（`FrameSpansOrthogonal`），对显式见证已验证
        （`witness_frameSpansOrthogonal`），但一般情形不成立。GT 的计数论证默认了它。
-  - **`N = 2` 未做，卡点具体到两条**：
-    (a) `ddfOp_neg_one_apply_towerVacuum` 的 `n = 2` 版与 `A^ε_{−1}A^δ_{−1}` 版：窗口变成
-        `{−2,−1,0}`，顶点算子的 level-1/level-2 系数 `Φ_1`、`Φ_2` 真的贡献，
-        需要 `Fock.creaExp η c 1` 与 `creaExp η c 2` 的显式展开（`coeff_creaExp` 有，
-        但没有「`creaExp` 的 level-1 分量 = `c·α_{−1}`」这种可用形状的引理）。
-    (b) level-2 版的 `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff`，即
-        `L_1`/`L_2` 条件在 level 2 上的**完整**解——`NoGhost/LevelTwo.lean` 只覆盖
-        `SO(D−1)` 标量试探族（它自己的 docstring 已声明），不是 level-2 物理态的全部。
-    做完 (a)(b) 之后，`N = 2` 的组装与 `N = 1` 同构（分次 + 完备性 + 逐项代入）。
+  - **`N = 2` 的两条卡点已解决**（分支 `agent/formalizer/noghost-b2`，
+    `StringFormal/NoGhost/LevelTwoSpan.lean`，54 条顶层声明，见下面的 `noghost-b2` 条）；
+    **`N = 2` 的组装（张成）仍未做**。
   - **图接线建议（本分支不碰 `graph/`）**：`worldsheet.ddf-operators-v6` 的 notes 补第 1 条缺口；
     `massShell_of_mem_towerBigrade` 可作为 `worldsheet.no-ghost-theorem-v4` (1b) 中
     「`N = a − α'p²`」子句的 `lean_decl`；`noghost_hypotheses_satisfiable_int` 可挂在
     可满足性见证卡上（若 `Witness.lean` 的「需要 ℚ」写进了某张卡的 notes，应订正）。
+- [x] `noghost-b2`：**蓝图 §B.6 `N = 2` 的两条卡点 (a)(b)** ——
+  `StringFormal/NoGhost/LevelTwoSpan.lean`（54 条顶层声明，无 sorry，
+  `check_axioms --all` 全 `ok`，公理集只有 `propext`/`Classical.choice`/`Quot.sound`）。
+  分支 `agent/formalizer/noghost-b2`。
+  - **(a) 产生指数的显式分量 + 两条 DDF 态的精确展开**：
+    `Fock.creaExp_one`（`Φ_1 = b·α_{−1}`，就是 `polState η b`，由 `creaExp_euler` 在 `M = 1`）、
+    `Fock.two_smul_creaExp_two`（**去分母形**：`2Φ_2 = (b·α_{−1})² + (b·α_{−2})`）与
+    `Fock.creaExp_two`（`invTwo` 形）；`Fock.vertexOsc_apply_polState`
+    （`V_K (ζ·α_{−1})|k⟩ = (ζ·α_{−1})Φ_K − (ζ·c)Φ_{K+1}`，横向时第二项消失）。
+    由此：
+    * **`ddfOp_neg_two_apply_towerVacuum`**：
+      `A^ε_{−2}|0;k⟩ = [ε·α_{−2} − 2(ε·α_{−1})(k_0·α_{−1})]|0;k−2k_0⟩`。
+      窗口 `{−2,−1,0}`，`j = −1` 项正是 `Φ_1`（在顶点动量 `−2k_0` 上）。
+    * **`ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum`**：
+      `A^ε_{−1}A^δ_{−1}|0;k⟩ = [(ε·α_{−1})(δ·α_{−1}) + ½(ε·δ)((k_0·α_{−1})² − k_0·α_{−2})]
+      |0;k−2k_0⟩`。窗口是 `{−2,−1,0,1}`（**不是** `{−2,−1,0}`，任务书原话的猜测偏小）：
+      `j = 1` 项非零，给出的正是 DDF 代数的中心项 `(ε·δ)Φ_2`。修正项对 `ε ↔ δ` 对称，
+      与 `⁅A^ε_{−1},A^δ_{−1}⁆ = −(ε·δ)δ_{−2,0} = 0` 一致（一条独立的正确性自检）。
+    * `single_ddfSecond_mem_ddfSpan` / `single_ddfPair_mem_ddfSpan`：上面两族作为
+      `ddfSpan` 的显式成员（level-2 的 `(D−2) + (D−2)(D−1)/2` 个生成元）。
+  - **(b) level-2 物理态的完整刻画**（不再限于 `SO(D−1)` 标量族）：
+    * `Fock.level_two_cases`：level-2 单项式只有 `α^μ_{−2}` 与 `α^μ_{−1}α^ν_{−1}` 两形。
+      证明用「删一个振子」：`level_sub_single_add` 把 level 降到 1 或 0，再接
+      `exists_eq_single_of_level_eq_one`，**不需要**对 support 做组合枚举。
+    * `Fock.levelTwoGen η v w = Σ_μ α^μ_{−1}(v_μ·α_{−1})|k⟩ + (w·α_{−2})|k⟩` 与
+      `Fock.exists_levelTwoGen_of_mem_levelSubmodule_two`（满射；用
+      `MvPolynomial.support_sum_monomial_coeff` + 子模 `levelTwoRange`，逐单项式）。
+    * `Fock.Lop_one_apply_levelTwoGen`：`L_1ψ = polState η (levelTwoL1 η a v w)`，其中
+      `levelTwoL1 = Σ_μ k^μ v_μ + (μ ↦ η_μ (v_μ·k)) + 2w`（**D 个**线性方程）；
+      `Fock.Lop_two_apply_levelTwoGen`：`L_2ψ = (levelTwoL2 η a v w)|k⟩`，
+      `levelTwoL2 = Σ_μ v_μ^μ + 2(w·k)`（**1 个**方程）；`n ≥ 3` 自动（level 分级）。
+    * **`Fock.mem_physSubmodule_inf_levelSubmodule_two_iff`**（单 Fock）与
+      **`mem_towerPhys_bigrade_two_iff`**（塔上 `(rung j, level 2)`）：质壳 + 上述 `D+1` 条。
+      `⇒` 方向用 `Fock.polState_eq_zero_iff`（`η² = 1` ⇒ 偏振映射单射，本轮新证）。
+  - **未做 / 卡点（(c) `towerPhys_bigrade_two_le_ddfSpan_sup_spurious`）**：
+    两侧现在都是显式向量，缺的是**消元**——给定满足 `D+1` 条约束的 `(v,w)`，把 `ψ` 写成
+    `(D−2)+(D−2)(D−1)/2` 个 DDF 向量与 `D+1` 个伪态（`L_{−1}(level 1)`、`L_{−2}|0;p_{−2}⟩`）
+    的组合。这一步需要光锥分解（`b`, `b̃`, `ε_i`，因而需要 `FrameSpansOrthogonal`）以及
+    `L_{−1}`、`L_{−2}` 在塔上 rung `−2` 的显式作用，工作量与 `N = 1` 不同量级
+    （level-2 的维度是 `D(D+3)/2`），本轮没有开工。计数上是相容的：
+    物理态维数 `(D+2)(D−1)/2`，右端 `≤ D(D+1)/2`，差 1，且 **`D = 26` 不出现**
+    （与 `N = 1` 同，`D = 26` 只在「零态/正定性」那一半才进来）。
+  - **发现的数学缺口（建议写进图）**：
+    1. **`ε·k = 0` 在 `N = 2` 再次是必需的**（`hεa : dotVec η ε a = 0`）：
+       `A^ε_{−2}` 与 `A^ε_{−1}A^δ_{−1}` 的精确展开都用它把 `j = 0` 项杀掉。
+       这与 `noghost-b` 记的第 1 条缺口是同一条，但此处是**独立的第二个证据**：
+       它不是 `N = 1` 的偶然，而是 DDF 岛四条标准假设的系统性不足。
+       `worldsheet.ddf-operators-v6` 的约定/notes 应写明。
+    2. **`A^ε_{−1}A^δ_{−1}|0;k⟩ ≠ α^ε_{−1}α^δ_{−1}|0;k−2k_0⟩`**：差一个
+       `½(ε·δ)[(k_0·α_{−1})² − k_0·α_{−2}]`。物理文献常把 DDF 态与横向振子态等同，
+       这个等同**从 `N = 2` 起就不成立**（`N = 1` 时恰好精确）。若图里有卡把
+       「DDF 态 = 横向 Fock 态」写成命题，应改成「在 `ddfSpan ⊕ spurious` 的意义下」。
+    3. `ψ = levelTwoGen η v w` 的表示**不唯一**（只有 `v` 的对称部分被定死），
+       所以 (b) 的刻画是 `∃` 形，不是典范形式；做 (c) 时需要注意别默认唯一性。
 - [x] `noghost-c4`（⚠ 未做：`ddfMonomial d` 落在 rung −N(d) 的定位（DDFGram.lean:297 自报），派 `formalizer-ddfgram-level`；spurious→null 桥 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 已由 Assembly.lean 提供）（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
   `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
   （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。

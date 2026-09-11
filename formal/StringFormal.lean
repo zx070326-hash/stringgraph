@@ -58,3 +58,4 @@ import StringFormal.NoGhost.DDFGram
 import StringFormal.NoGhost.Assembly
 import StringFormal.NoGhost.Glue
 import StringFormal.Virasoro.FockFreeLowLevel
+import StringFormal.NoGhost.LevelTwoSpan
