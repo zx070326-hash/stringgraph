@@ -472,4 +472,188 @@ theorem lcCrea_mem_span_range_frameVec (hD : 2 ≤ D) (F : DDFLightConeFrame η 
 
 end FrameVec
 
+/-! ### Light-cone monomials span each level fiber -/
+
+section LcMonomial
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- **A light-cone monomial**: `∏_{(t,n)} (α^{w_t}_{-n})^{d(t,n)}`, where `w_t = frameVec F t`
+runs over `b`, `b̃`, `ε_1, …, ε_{D-2}`.
+
+The index type is `Osc D →₀ ℕ`, *the same* as for the standard monomials `MvPolynomial.monomial
+d 1`; only the meaning of the first component of the index changes (a light-cone direction
+instead of a coordinate direction).  Blueprint §B′.8's counting comparison therefore compares
+two `Fintype.card`s of the same index set. -/
+noncomputable def lcMonomial (F : DDFLightConeFrame η a b) (d : Osc D →₀ ℕ) : Fock D R :=
+  d.prod fun v k => lcCrea η (frameVec F v.1) v.2 ^ k
+
+@[simp]
+lemma lcMonomial_zero (F : DDFLightConeFrame η a b) :
+    lcMonomial F (0 : Osc D →₀ ℕ) = (1 : Fock D R) :=
+  Finsupp.prod_zero_index
+
+lemma lcMonomial_single (F : DDFLightConeFrame η a b) (v : Osc D) (k : ℕ) :
+    lcMonomial F (Finsupp.single v k) = lcCrea η (frameVec F v.1) v.2 ^ k :=
+  Finsupp.prod_single_index (pow_zero _)
+
+/-- Light-cone monomials multiply by adding exponents, exactly as ordinary monomials do.
+This is what makes the level grading multiplicative on them. -/
+lemma lcMonomial_add (F : DDFLightConeFrame η a b) (d e : Osc D →₀ ℕ) :
+    lcMonomial F (d + e) = lcMonomial F d * lcMonomial F e :=
+  Finsupp.prod_add_index' (fun _ => pow_zero _) (fun _ _ _ => pow_add _ _ _)
+
+/-- **The span of the light-cone monomials of level `N`.**  (`levelSubmodule_eq_lcSpan` says
+this is the whole level-`N` fiber.) -/
+noncomputable def lcSpan (F : DDFLightConeFrame η a b) (N : ℕ) : Submodule R (Fock D R) :=
+  Submodule.span R (lcMonomial F '' {d : Osc D →₀ ℕ | Fock.level D d = N})
+
+lemma lcMonomial_mem_lcSpan (F : DDFLightConeFrame η a b) {d : Osc D →₀ ℕ} {N : ℕ}
+    (hd : Fock.level D d = N) : lcMonomial F d ∈ lcSpan F N :=
+  Submodule.subset_span ⟨d, hd, rfl⟩
+
+lemma one_mem_lcSpan (F : DDFLightConeFrame η a b) : (1 : Fock D R) ∈ lcSpan F 0 := by
+  have h := lcMonomial_mem_lcSpan F (d := (0 : Osc D →₀ ℕ)) (N := 0) (Fock.level_zero D)
+  rwa [lcMonomial_zero] at h
+
+lemma lcSpan_mul_lcSpan_le (F : DDFLightConeFrame η a b) (M N : ℕ) :
+    lcSpan F M * lcSpan F N ≤ lcSpan F (M + N) := by
+  rw [lcSpan, lcSpan, Submodule.span_mul_span, Submodule.span_le, Set.mul_subset_iff]
+  rintro _ ⟨d, hd, rfl⟩ _ ⟨e, he, rfl⟩
+  rw [← lcMonomial_add]
+  exact lcMonomial_mem_lcSpan F (by rw [Fock.level_add, hd, he])
+
+lemma mul_mem_lcSpan (F : DDFLightConeFrame η a b) {M N : ℕ} {x y : Fock D R}
+    (hx : x ∈ lcSpan F M) (hy : y ∈ lcSpan F N) : x * y ∈ lcSpan F (M + N) :=
+  lcSpan_mul_lcSpan_le F M N (Submodule.mul_mem_mul hx hy)
+
+lemma pow_mem_lcSpan (F : DDFLightConeFrame η a b) {M : ℕ} {x : Fock D R}
+    (hx : x ∈ lcSpan F M) (k : ℕ) : x ^ k ∈ lcSpan F (k * M) := by
+  induction k with
+  | zero => simpa using one_mem_lcSpan F
+  | succ k ih =>
+      have h := mul_mem_lcSpan F ih hx
+      rw [pow_succ]
+      rwa [show k * M + M = (k + 1) * M by ring] at h
+
+lemma prod_mem_lcSpan {ι : Type*} (F : DDFLightConeFrame η a b) (f : ι → Fock D R) (m : ι → ℕ)
+    (h : ∀ i, f i ∈ lcSpan F (m i)) (s : Finset ι) :
+    (∏ i ∈ s, f i) ∈ lcSpan F (∑ i ∈ s, m i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using one_mem_lcSpan F
+  | @insert x s ha ih =>
+      rw [Finset.prod_insert ha, Finset.sum_insert ha]
+      exact mul_mem_lcSpan F (h _) ih
+
+/-! The two inclusions. -/
+
+lemma lcCrea_frameVec_mem_lcSpan (F : DDFLightConeFrame η a b) (t : Fin D) (n : ℕ+) :
+    lcCrea η (frameVec F t) n ∈ lcSpan F (n : ℕ) := by
+  have h := lcMonomial_mem_lcSpan F (d := Finsupp.single ((t, n) : Osc D) 1) (N := (n : ℕ))
+    (by simp)
+  rwa [lcMonomial_single, pow_one] at h
+
+/-- **Every coordinate creation operator is a light-cone one.**  `X_eq_lcCrea_single` turns
+`α^μ_{-n}` into `lcCrea` of a polarisation, and `lcCrea_mem_span_range_frameVec` expands that
+polarisation along the frame. -/
+theorem X_mem_lcSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1)
+    (v : Osc D) : (X v : Fock D R) ∈ lcSpan F (Fock.oscLevel D v) := by
+  have hle : Submodule.span R (Set.range fun t : Fin D => lcCrea η (frameVec F t) v.2)
+      ≤ lcSpan F (Fock.oscLevel D v) := by
+    rw [Submodule.span_le]
+    rintro _ ⟨t, rfl⟩
+    exact lcCrea_frameVec_mem_lcSpan F t v.2
+  rw [show v = (v.1, v.2) from rfl, X_eq_lcCrea_single η hη v.1 v.2]
+  exact hle (lcCrea_mem_span_range_frameVec hD F (Pi.single v.1 (η v.1)) v.2)
+
+/-- Each ordinary monomial is a combination of light-cone monomials of the same level.
+`MvPolynomial.prod_X_pow_eq_monomial` writes it as a product of powers of the `X v`, and
+`lcSpan` is multiplicative in the level. -/
+theorem monomial_one_mem_lcSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (d : Osc D →₀ ℕ) :
+    (monomial d (1 : R) : Fock D R) ∈ lcSpan F (Fock.level D d) := by
+  classical
+  rw [← MvPolynomial.prod_X_pow_eq_monomial, Fock.level_apply, Finsupp.sum]
+  exact prod_mem_lcSpan F (fun v => (X v : Fock D R) ^ d v)
+    (fun v => d v * Fock.oscLevel D v)
+    (fun v => pow_mem_lcSpan F (X_mem_lcSpan hD F hη v) (d v)) d.support
+
+theorem levelSubmodule_le_lcSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (N : ℕ) : Fock.levelSubmodule D R N ≤ lcSpan F N := by
+  classical
+  intro P hP
+  rw [MvPolynomial.as_sum P]
+  refine Submodule.sum_mem _ fun d hd => ?_
+  have hlevel : Fock.level D d = N :=
+    (Fock.mem_levelSubmodule D R N P).mp hP (MvPolynomial.mem_support_iff.mp hd)
+  have hmon : (monomial d (MvPolynomial.coeff d P) : Fock D R)
+      = MvPolynomial.coeff d P • (monomial d (1 : R) : Fock D R) := by
+    rw [MvPolynomial.smul_monomial, smul_eq_mul, mul_one]
+  rw [hmon, ← hlevel]
+  exact Submodule.smul_mem _ _ (monomial_one_mem_lcSpan hD F hη d)
+
+/-! The easy inclusion: light-cone monomials are level-homogeneous. -/
+
+lemma Fock.pow_mem_levelSubmodule {M : ℕ} {P : Fock D R}
+    (hP : P ∈ Fock.levelSubmodule D R M) (k : ℕ) :
+    P ^ k ∈ Fock.levelSubmodule D R (k * M) := by
+  induction k with
+  | zero => simpa using Fock.one_mem_levelSubmodule D R
+  | succ k ih =>
+      have h : P ^ k * P ∈ Fock.levelSubmodule D R (k * M + M) :=
+        MvPolynomial.IsWeightedHomogeneous.mul ih hP
+      rw [pow_succ]
+      rwa [show k * M + M = (k + 1) * M by ring] at h
+
+lemma Fock.prod_mem_levelSubmodule {ι : Type*} (f : ι → Fock D R) (m : ι → ℕ)
+    (h : ∀ i, f i ∈ Fock.levelSubmodule D R (m i)) (s : Finset ι) :
+    (∏ i ∈ s, f i) ∈ Fock.levelSubmodule D R (∑ i ∈ s, m i) := by
+  classical
+  induction s using Finset.induction_on with
+  | empty => simpa using Fock.one_mem_levelSubmodule D R
+  | @insert x s ha ih =>
+      rw [Finset.prod_insert ha, Finset.sum_insert ha]
+      exact MvPolynomial.IsWeightedHomogeneous.mul (h _) ih
+
+lemma lcMonomial_mem_levelSubmodule (F : DDFLightConeFrame η a b) (d : Osc D →₀ ℕ) :
+    lcMonomial F d ∈ Fock.levelSubmodule D R (Fock.level D d) := by
+  classical
+  rw [lcMonomial, Finsupp.prod, Fock.level_apply, Finsupp.sum]
+  exact Fock.prod_mem_levelSubmodule (fun v => lcCrea η (frameVec F v.1) v.2 ^ d v)
+    (fun v => d v * Fock.oscLevel D v)
+    (fun v => Fock.pow_mem_levelSubmodule (lcCrea_mem_levelSubmodule η (frameVec F v.1) v.2)
+      (d v)) d.support
+
+theorem lcSpan_le_levelSubmodule (F : DDFLightConeFrame η a b) (N : ℕ) :
+    lcSpan F N ≤ Fock.levelSubmodule D R N := by
+  rw [lcSpan, Submodule.span_le]
+  rintro _ ⟨d, hd, rfl⟩
+  exact hd ▸ lcMonomial_mem_levelSubmodule F d
+
+/-- **The light-cone monomials of level `N` span the level-`N` Fock fiber** (blueprint §B′.4,
+PR3, the last item).  This is the statement that replaces step 1 of blueprint §B.4: no
+`AlgEquiv` on the `MvPolynomial` generators, no determinant, no linear independence — the
+expansion of a single `X_{(μ,n)}` along the frame plus multiplicativity of the level grading
+is all it takes. -/
+theorem levelSubmodule_eq_lcSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (N : ℕ) : Fock.levelSubmodule D R N = lcSpan F N :=
+  le_antisymm (levelSubmodule_le_lcSpan hD F hη N) (lcSpan_le_levelSubmodule F N)
+
+/-- `levelSubmodule_eq_lcSpan` in the blueprint's phrasing, with the spanning family indexed
+by the subtype of level-`N` exponent vectors.
+
+**Spanning only**: the family is *not* claimed to be linearly independent, and it is not
+(blueprint §B′.9 item 2 explains why that has no cheap proof and why the critical path does
+not need it). -/
+theorem levelSubmodule_eq_span_lcMonomial (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (N : ℕ) :
+    Fock.levelSubmodule D R N
+      = Submodule.span R (Set.range fun d : {d : Osc D →₀ ℕ // Fock.level D d = N} =>
+          lcMonomial F (d : Osc D →₀ ℕ)) := by
+  rw [levelSubmodule_eq_lcSpan hD F hη N, lcSpan, Set.image_eq_range]
+  rfl
+
+end LcMonomial
+
 end StringFormal.NoGhost
