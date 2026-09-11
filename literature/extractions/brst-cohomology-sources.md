@@ -675,3 +675,101 @@ Thm 2.7 负责「把它用到 `V(E,p)` 上，并把那个常数项算成 `p_{(24
 | 目标 | URL / 手法 | 结果 |
 |---|---|---|
 | FGZ p.8445 | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0018.png`（**直接 fetch cdn，未走 `articles/instance/…` 的 301 中转**） | ✅ 137.5 KB PNG 落盘，`Read` 读图，整页两栏可辨 |
+
+---
+
+## 10. ★★ FGZ 参考文献表全 14 条逐字（p.8446，2026-09-11，researcher 第四轮页图）
+
+> 触发（lead 派工单第 2 项）：「抄 FGZ 参考表 refs 10、11 条目逐字（PNAS p.8446）」，为的是给玻色 Kac 行列式定上游。
+> 取件：`pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-**0019**.png`
+> **301 →** `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/**2d14d6150a94**/pnas00326-0019.png`（133.5 KB PNG，`Read` 读图）。
+> ⚠ **页映射与 hash 两条新坐标**：**期刊 p.8446 = 扫描页 `-0019`**（与 §9 记的「p.8445 = `-0018`」相容，偏移 8427）；
+> **但 hash 段 `275fe5e6b989` 只对 `-0018` 有效** —— `-0019` 的 hash 是 **`2d14d6150a94`**，
+> 直接把 `-0018` 的 URL 改个页号会 **HTTP 404**（本轮实测）。⇒ **hash 是每页一个，不能类推；必须走 `articles/instance/…` 拿 301。**
+> 只追加，不改 §1.5 任何一行。证据等级 **L1**。
+
+### 10.1 ★★★ 派工单的前提被推翻：**FGZ 的 refs 10、11 不是「Kac 1979 / Kac–Wakimoto」**
+
+派工单写「**Kac 1979 / Kac–Wakimoto**（FGZ refs 10, 11：玻色 Kac 行列式）」。**页图逐字显示不是。**
+
+> 「10. Kac, V. (1978) *Proceedings of the International Congress of Mathematicians* (ASF, Helsinki, Finland), Vol. 1, pp. 299–304.」
+>
+> 「11. Feigin, B. & Fuks, D. (1982) *Funkt. Anal. Prilozheniya* **16**, 47–63 (English translation: *Functional Analysis and Its Application* **16**, 114–126).」
+
+⇒ **FGZ ref 10 = Kac 的 ICM Helsinki 那篇（本 bib 的 `kac-1980-icm`），ref 11 = Feigin–Fuchs 1982（本 bib 的 `feigin-fuchs-1982`）。**
+⇒ **FGZ 全表 14 条里没有 Kac–Wakimoto，也没有 LNP 94（`kac-1979`）。**
+⇒ 混淆的来源几乎可以肯定是 **`lian-zuckerman-1989` 的 `[9]`/`[10]`**：LZ 那边才是
+`[9] = Kac, Lecture Notes in Phys. vol. 94 (1979)`、`[10] = Kac, Wakimoto`（见 extractions/lian-zuckerman-1989.md §8.3）。
+**两篇的编号完全不同，转述前必须分清是 FGZ 的号还是 LZ 的号。**
+
+**三条附带读数：**
+
+1. FGZ 把 ICM 那篇的年份印成 **(1978)**（会议年），而本 bib 的 `kac-1980-icm` 取出版年 **1980**；
+   FGZ 另给了 **"Vol. 1"** 这个卷次信息（作者本人出版目录只给 "Proceedings of ICM, Helsinki 1978 (1980), 299-304"）。
+   **两种年份都合法，引用时写清取的是哪个。**
+2. ref 11 给出的俄文起止页 **47–63** 与本 bib `feigin-fuchs-1982`（Math-Net.Ru 核实的俄文原刊 16:2, 47–63）**逐位一致**；
+   英译刊名 FGZ 印作单数 **"Functional Analysis and Its Application"**（通行是 Applications）。
+3. ⇒ **§1.5 记的两条（ref 10 = ICM、ref 11 = FF）本轮第二次 L1 确认，无更正。**
+
+### 10.2 全表 14 条逐字（p.8446 右栏下部）
+
+> 「 1. Feigin, B. (1984) *Usp. Mat. Nauk* **39**, 195–196 (English translation: *Russian Math Surveys* **39**, 155–156).
+>  2. Kumar, S. (1984) *J. Differ. Geom.* **20**, 384–431.
+>  3. Banks, T. & Peskin, M. (1986) *Nucl. Phys. B* **264**, 513–547.
+>  4. Witten, E. (1986) *Nucl. Phys. B* **268**, 253–294.
+>  5. Kato, M. & Ogawa, K. (1983) *Nucl. Phys. B* **212**, 443–460.
+>  6. Griffiths, P. & Harris, J. (1978) *Principles of Algebraic Geometry* (Wiley, New York).
+>  7. Koszul, J. L. (1950) *Bull. Soc. Math. France* **78**, 5–127.
+>  8. Goddard, P. & Thorn, C. (1972) *Phys. Lett. B* **40**, 235–238.
+>  9. Brower, R. (1972) *Phys. Rev. D* **6**, 1655–1662.
+> 10. Kac, V. (1978) *Proceedings of the International Congress of Mathematicians* (ASF, Helsinki, Finland), Vol. 1, pp. 299–304.
+> 11. Feigin, B. & Fuks, D. (1982) *Funkt. Anal. Prilozheniya* **16**, 47–63 (English translation: *Functional Analysis and Its Application* **16**, 114–126).
+> 12. Wallach, N. (1984) *Invent. Math.* **78**, 131–141.
+> 13. Frenkel, I. (1985) *Lect. Math. Appl. Math.* **21**, 325–353.
+> 14. Borcherds, R. (1986) *Proc. Natl. Acad. Sci. USA* **83**, 3068–3071.」
+
+**对图有用的五条：**
+
+1. **[1] = Feigin 1984（Usp. Mat. Nauk 39, 195–196）** —— 与本 bib 的 `feigin-fuchs-1984`
+   （Funct. Anal. Appl. 17(3) 241–242）**不是同一篇**；FGZ 的 [1] 是 Feigin **单作者**的那篇 Uspekhi 短文。
+   ⚠ 本 bib 目前**没有**这一条，且 `feigin-fuchs-1984` 的 note 里也没提到它 —— **是个干净的新增目标（本轮未登记，因内容未核实）**。
+2. **[5]/[8]/[9]** 与 §1.5 记录一致（Kato–Ogawa、Goddard–Thorn、Brower），本轮复核无误；
+   **注意 FGZ 把 Goddard–Thorn 的卷号印成 `Phys. Lett. B 40`**，而通行著录是 `Phys. Lett. 40B`。
+3. **[12] = Wallach, Invent. Math. 78, 131–141 (1984)** —— 正文 p.8446 的 Remark 逐字
+   「The reader should compare with **Wallach's argument in ref. 12**」，**这是 FGZ 自己给出的、与其第二个无鬼证明
+   最接近的数学对照**，本 bib 未登记。
+4. **[14] = Borcherds 1986 PNAS 83, 3068–3071** = 本 bib 的 `borcherds-1986`（同一期刊同一年）。
+5. **全表没有 Thorn 1984、没有 Meurman–Rocha-Caridi、没有 Kac–Kazhdan、没有 Kac LNP 94。**
+   ⇒ **FGZ 的玻色 Kac 行列式上游只有两条：[10] ICM + [11] Feigin–Fuchs。**
+   这与 `meurman-rocha-caridi-1986` 的证词（[13] ICM + [14] LNP 94 都有该公式）**不冲突但不重合**：
+   **FGZ 不引 LNP 94，MRC 引两篇**。详见 extractions/math-sources.md §55.5。
+
+### 10.3 顺带：p.8446 正文里此前未转录的两句（L1，与 `Theorem 2.8` 同页）
+
+> 「The second isomorphism of **Theorem 2.8** is known as the no-ghost theorem in the physics literature (**8, 9**).
+> (The reader should compare our arguments for **Theorems 2.7 and 2.8** with the different arguments in **ref. 5**.)」
+
+⇒ (a) **FGZ 把「无鬼定理」这个名字归给物理文献 (8, 9) = Goddard–Thorn 1972 与 Brower 1972**（逐字，L1）；
+(b) **FGZ 自陈其 Thm 2.7/2.8 的论证与 ref. 5 = Kato–Ogawa 1983 的论证「different」** ——
+这是「FGZ 与 KO 是两条独立推导」的**作者自证**，可直接支撑图里两条并列 derivation。
+
+> 「The signature (25, 1) is very special because of the no-ghost theorem, but there is also an amazing coherence
+> between the Hermitian structure of the ℒ-modules `V(R^{25,1}, p)` and `Λ^∞_*(ℒ/ℒ₀)`.」
+
+⇒ **FGZ 明确把号差写成 `(25, 1)`**（与 §9.2 记的 `(D−1, 1)` 一致，`D = 26`）。
+
+### 10.4 negative evidence（仅覆盖 p.8446）
+
+- **全页不出现 "Kac determinant" 字样**；Kac 行列式只以 refs 10/11 的形式出现在参考表里（正文引用点在 p.8445 的 `Prop 2.6` 证明，见 §9.10.3）。
+- **全页不出现 Kac–Wakimoto、不出现 Meurman、不出现 Rocha-Caridi。**
+- 致谢段逐字提到 **「the workshop on "Superstring Theories and the Mathematical Structure of Infinite-Dimensional Lie Algebras"」**
+  与 **E. Witten** 的一条具体贡献：「**In particular he first noticed that the vanishing theorem does not hold in the exceptional case.**」
+  ⇒ **`p = 0` 例外情形的发现权，FGZ 自己归给 Witten**（对照：`lian-zuckerman-1989` `Prop 5.5` 是超弦版的例外情形）。
+
+### 10.5 访问日志（本节）
+
+| 目标 | URL / 手法 | 结果 |
+|---|---|---|
+| FGZ p.8446（首试，按 `-0018` 的 hash 类推） | `cdn.ncbi.nlm.nih.gov/pmc/blobs/a950/386946/275fe5e6b989/pnas00326-0019.png` | ❌ **HTTP 404**（hash 不能跨页类推） |
+| FGZ p.8446（改走 301 中转） | `pmc.ncbi.nlm.nih.gov/articles/instance/386946/bin/pnas00326-0019.png` → `cdn…/2d14d6150a94/pnas00326-0019.png` | ✅ 133.5 KB PNG 落盘，`Read` 读图，参考表 14 条全可辨 |
+
