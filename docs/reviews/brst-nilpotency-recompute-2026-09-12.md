@@ -421,3 +421,58 @@ L 序 `L^g` 的中心项应是 `(−26/12)(m³−m) − 2m` 而不是 `(−26/12
 - `Q_B` 按 (P6) 逐项实现：`Σ_n c_n L^m_{−n}`、`Σ_{p,q}((p−q)/2) : c_p c_q b_{−p−q} :`（按 scheme
   排序并记符号）、`a^g c_0`；模式截断 |index| ≤ 9，已验证再放大不改变结果。
 - 检验量：`Q_B²` 作用在 `b_{−j}|0⟩` 上 `c_{−j}|0⟩` 分量的系数，与 (7.1) 的 f(j) 比较（有理数精确相等）。
+
+---
+
+## 13. 升级与工具输出
+
+复算通过 ⇒ 按 `docs/STATUS_LEVELS.md` 等级 4 例外条款，把
+`worldsheet.critical-dimension-brst-v2--via-mode-computation` 的
+`status: physical-argument → rigorous`、`kind: physical-argument → proof`（该卡 notes 要求两者同改），
+gaps 第 1 条按「已关闭 + 历史原文照录」处理，notes 留 `reviewer-verified: reviewer-brst-nilpotency, 2026-09-12`。
+
+```
+$ uv run stringgraph validate --hide-history
+624 statements, 516 derivations, 4 milestones, 22 conventions: 0 errors, 71 warnings (25 history)
+```
+
+```
+$ uv run stringgraph status worldsheet.critical-dimension-brst-v2
+id: worldsheet.critical-dimension-brst-v2
+kind: proposition
+title: BRST 荷幂零 Q_B^2 = 0 当且仅当物质中心荷 c^m = 26（陈述只到 c^m，不含 c^m = D 那一步）
+own_status: rigorous
+effective: rigorous
+best_derivation: worldsheet.critical-dimension-brst-v2--via-mode-computation
+assumes:
+conjectures_depended_on:
+derivations:
+  worldsheet.critical-dimension-brst-v2--via-mode-computation  [proof] own=rigorous effective=rigorous
+  worldsheet.critical-dimension-brst-v2--via-nilpotency  [physical-argument] own=physical-argument effective=physical-argument
+```
+
+升级前（同一命令）：`own_status: physical-argument`、`effective: physical-argument`、
+`best_derivation` 相同（两条推导当时同为 physical-argument）。
+
+```
+$ uv run stringgraph report | grep -A 6 '^milestones:'
+milestones:
+  ms.critical-dimension-bosonic -> worldsheet.critical-dimension-bosonic-v3  audit=back-translated  effective=physical-argument
+  ms.critical-dimension-brst-nilpotency -> worldsheet.critical-dimension-brst-v2  audit=draft  effective=rigorous
+  ms.ddf-commute-with-virasoro -> worldsheet.ddf-commute-with-virasoro  audit=back-translated  effective=formalized
+  ms.no-ghost-theorem -> worldsheet.no-ghost-theorem-v4  audit=back-translated  effective=rigorous
+```
+
+升级前 `ms.critical-dimension-brst-nilpotency` 的 `effective` 是 **physical-argument**；
+升级后为 **rigorous**（`audit=draft` 不变——approved 只断言陈述忠实性，须 auditor 回译 + 船长确认）。
+`ms.critical-dimension-bosonic` 仍是 physical-argument：它指向 `critical-dimension-bosonic-v3`，
+被 (I)(IV)(V) 三条路线与该推导自身的 status 封顶，与本次升级无关。
+
+### 13.1 附带的工具侧改动（须 lead 过目）
+`tests/test_graph.py::test_why_seed_critical_dimension_names_three_routes` 原先断言
+`worldsheet.critical-dimension-brst-v2` **出现在** `worldsheet.critical-dimension-bosonic` 的瓶颈树里。
+本次升级后它 rigorous，按定义不再是瓶颈，故从 `why` 树中消失——这正是 `docs/ROADMAP.md` R3
+预言的「(III) 整条从瓶颈树消失」。该测试因此失败（pre-commit 的 pytest 会挡住提交）。
+处理：把断言改成「light-cone-v2 仍在树里」且「brst-v2 **不**在树里」，并在测试里写明日期与原因。
+单独提交（`tools: …`），与图数据提交分开。**这是本次唯一一处 reviewer 改到 `graph/` 之外的代码，
+请 lead 确认该测试的新形状是想要的**（另一种改法是删掉这条对活数据的断言，本次未采用）。
