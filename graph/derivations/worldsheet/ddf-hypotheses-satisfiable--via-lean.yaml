@@ -14,6 +14,26 @@ depends_on:
       **非 inferred**：Witness.lean 文件头逐字 'Graph nodes: `worldsheet.ddf-operators-v6`,
       `worldsheet.no-ghost-theorem-v4`'，且 Lean 定理的六个合取项逐字是该卡字典里的
       `hη`/`hbb`/`hba`/`hεb` 加 `dotVec η ε ε = 1` 与 `invTwo R * zeroModeSq η a = 1`。
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      **接口边，非机检环节**：供给标架定义。目标陈述里被证可满足的四条 (η)(N)(S)(T) 逐条是该定义卡的
+      (F1)(F2)(F3)(F5)，而目标卡【不断言】(c) 逐字点名的「共轭类光方向 b̃（b·b̃ = −1、b̃² = 0）」
+      正是该卡的 (F4)——那张卡就是「这些假设属于哪个几何对象」的承载处，并把目标卡刻意不覆盖的
+      (F4)(F6)(F8) 一并写出。本推导用的见证（η = diag(−1,+1,…)、b = (1,1,0,…)、a = (1/2,3/2,0,…)、
+      ε = e_2）与该定义卡【非空性】一段写的是同一组向量。
+      桥层声明：`StringFormal.NoGhost.{noghost_lightcone_frame_satisfiable,
+      noghost_transverse_gram_satisfiable, witnessConjugate, witnessLightConeFrame}`（Witness.lean /
+      LightCone.lean）。
+      ⚠ **机检链不经过它**：`noghost_hypotheses_satisfiable` 的证明只用 `witnessLight/Momentum/
+      Polarization` 与六条计算引理，不引任何标架结构。
+      ⚠ **三条同类边里这条最弱**：目标陈述本身不点名「标架」，只点名四条条件加 (U)(M)。
+      curator 判断它仍属「供给陈述里点名的对象」（(F1)–(F3)(F5) 与【不断言】(c) 的 b̃），
+      但若 reviewer/lead 认为这已越过 docs/STATUS_LEVELS.md「只提供原书语境的边不得存在」那条线，
+      **删掉本边是安全的**（目标卡即回到 effective = formalized）。
+      ⚠ **状态副作用（诚实登记）**：该定义卡 status 是 `rigorous`，按 min 规则本推导 effective
+      从 formalized 降为 rigorous，目标卡随之；并经 `transverse-frame-spans-orthogonal-complement--via-lean`
+      的那条依赖再传一层。`lean_decl` 与其无 sorry 事实未变。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/Witness.lean :: StringFormal.NoGhost.noghost_hypotheses_satisfiable（目标卡 formal.lean_decl）；见证 StringFormal.NoGhost.{witnessLight, witnessMomentum, witnessPolarization}（标架指标 frameTime = 0、frameSpace = 1、frameTrans = 2）；六个合取项的证明 StringFormal.NoGhost.{minkowski_sq, dotVec_witnessLight_self, dotVec_witnessLight_witnessMomentum, dotVec_witnessPolarization_witnessLight, dotVec_witnessPolarization_witnessPolarization, invTwo_mul_zeroModeSq_witnessMomentum}；工具引理 dotVec_add_left/right、dotVec_single_left、dotVec_single_single、dotVec_pair、dotVec_single_pair_of_ne"
@@ -51,5 +71,13 @@ notes: |
   按蓝图 §C.2 的说法，没有它「every theorem of the DDF island is a conditional whose hypothesis
   set is not known to be non-empty」。它没有文献对应物（文献把可满足性视为显然），
   故 sources 只有本仓库 + 一条语境引用。
+
+  【2026-09-11（lightcone-frame，curator）：第二条依赖与由此而来的降级】
+  新增接口边 worldsheet.ddf-light-cone-frame（definition，**rigorous**）。按 min 规则，本推导
+  effective 从 formalized 降为 rigorous，目标卡随之，并沿
+  `transverse-frame-spans-orthogonal-complement--via-lean` 再传一层。
+  ⚠ **记账后果，不是数学后果**：`noghost_hypotheses_satisfiable` 一字未动。
+  ⚠ **这条边是本轮三条同类边里最弱的一条**（理由写在该 depends_on 的 note 里），
+  lead/reviewer 如判定它越线，删它即可复原，且不影响另外两条。
 author: curator
 created: "2026-09-11"
