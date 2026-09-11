@@ -1,0 +1,214 @@
+id: worldsheet.super-virasoro-kac-determinant
+kind: proposition
+title: 超 Virasoro（Neveu–Schwarz 与 Ramond）Kac 行列式公式（MRC 1986 Sect. 3, eqs. (7)–(9)；原文无定理号）
+statement: |
+  **全部记号与归一化按 conv.super-virasoro-central-charge-mrc（MRC 1986 自己的一套），
+  不是本图 conv.virasoro-standard 的 c/12 变量。**
+
+  设 𝔤 是 Neveu–Schwarz 代数 n̂s 或 Ramond 代数 r̂，λ ∈ 𝔥*，
+  h := λ(e₀⁺)、c := λ(e₀')。设 ( , )_λ 是最高权模 M(V(λ)) 上的逆变形式，
+  ( , )_{h,c,n} 记其在权空间 M(V(λ))^{λ−nδ} 上的限制（𝔤 = n̂s，省略 γ），
+  ( , )_{h,c,n,γ} 记其在 ℤ₂-齐次分量 M(V(λ))^{λ−nδ}_γ 上的限制（𝔤 = r̂，γ ∈ ℤ₂）。
+
+  ---
+  **(A) 零点多项式。** 设 r, s ∈ ½ℕ、r ≦ s。
+  （此处 ℕ **不含** 0；**这是本图的解读，MRC 未明写**，理由见 notes【ℕ 是否含 0】。）
+
+    𝔤 = n̂s：
+      h^±_{r,s}(c) = −(1/8)[ (r²+s²)(5−c) ± √(c²−10c+9) (r²−s²) − 8rs − ½ + ½c ]        … (7)
+
+    𝔤 = r̂：
+      h^±_{r,s}(c) = −(1/8)[ (r²+s²)(5−c) ± √(c²−10c+9) (r²−s²) − 8rs − ½ + ½c ] − 1/16  … (7')
+
+  并置（对 r ≠ s，两个 𝔤 都用）
+
+      ψ_{r,s}(h,c) = (h − h⁺_{r,s}(c))(h − h⁻_{r,s}(c)) ,
+
+  以及（**只对 𝔤 = n̂s 定义**）
+
+      ψ_{r,r}(h,c) = h + (1/16)(1−c)(4r²−1) 。
+
+  ---
+  **(B) 重数函数 p̂（MRC Proposition 3.6）。两个扇区的 p̂ 是两个不同的函数，必须分开读。**
+
+  先约定分拆计数记号（MRC p.270 定义段）：p(n) 是 n 的分拆数；对全体分拆之子集 S，
+  p(S, n) 是 n 的、属于 S 的分拆数；对正整数子集 H，"H" 记所有部分都落在 H 中的分拆之集，
+  "H"(≦ d) 记所有部分都落在 H 中、且没有部分出现超过 d 次的分拆之集；
+  H₀ 是正偶数之集、H₁ 是正奇数之集；p(𝒟, n) 是把 n 分拆成互不相同的部分的分拆数。
+
+    𝔤 = n̂s（Prop 3.6 (1)）：  p̂(n) = p̃(2n) ,
+        其中 p̃(0) = 1 ,  p̃(s) = Σ_{i=0}^{s} p("H₀", i) · p("H₁"(≦1), s−i)   (s > 0) 。
+
+    𝔤 = r̂（Prop 3.6 (2)）：   p̂(0) = 1 ,
+        p̂(n) = Σ_{i=0}^{n} p(i) · p(𝒟, n−i)   (n > 0) 。
+
+  ---
+  **(C) 行列式公式。**
+
+    **(8)  𝔤 = n̂s，n ∈ ½ℤ₊：**
+
+        det( , )_{h,c,n}  =  ∏_{2rs ≦ n,  r − s ∈ ℤ}  ψ_{r,s}(h,c)^{p̂(n−2rs)} ,
+
+      乘积取遍满足 r, s ∈ ½ℕ、r ≦ s、2rs ≦ n、**r − s ∈ ℤ** 的全部 (r,s)；p̂ 取 (B) 的 NS 定义。
+
+    **(9)  𝔤 = r̂，n ∈ ℤ 且 n ≥ 1，γ ∈ ℤ₂：**
+
+        det( , )_{h,c,n,γ}  =  ( h + c/16 )^{½ p̂(n)}  ∏_{2rs ≦ n,  r − s ∈ ½+ℤ}  ψ_{r,s}(h,c)^{p̂(n−2rs)} ,
+
+      乘积取遍满足 r, s ∈ ½ℕ、r ≦ s、2rs ≦ n、**r − s ∈ ½ + ℤ** 的全部 (r,s)；p̂ 取 (B) 的 R 定义。
+      **前因子的指数是 ½ p̂(n)，其上没有 ±**：γ = 0̄ 与 γ = 1̄ 两支用同一个指数。
+      **n = 0 的两个值单列**，不由 (9) 给出：
+
+        det( , )_{h,c,0,0̄} = 1 ,   det( , )_{h,c,0,1̄} = h + c/16 。
+
+      （原文在 (9) 后印的是「if n ≧ 0」；本卡写 n ≥ 1，理由见 notes【n ≧ 0 与 n ≥ 1】。）
+
+  ---
+  **(D) 常数。** (8) 与 (9) 两式**各相差一个依 M(V(λ)) 的基底选择而定的非零常数，该常数已被省略**
+  （原文 Note 逐字：「The nonzero constant depending on the choice of a basis of M(V(λ))
+  has been omitted in (8), (9).」）。
+
+  ---
+  **本卡不断言的内容：**
+    (1) 不断言 (7)–(9) 在 conv.virasoro-standard 的 c/12 变量下的形态。两套变量间的字典
+        （c^{MRC} = (2/3)c^{std} 等）是 auditor 自算，登记在 conv.super-virasoro-central-charge-mrc 的
+        notes (D) 里，**本卡的陈述不依赖它，也不承担它**。
+    (2) 不断言 M(V(λ)) 的构造、逆变形式 ( , )_λ 的存在性与唯一性（那是 MRC Proposition 3.14），
+        也不断言「Rad( , )_λ = 极大真子模」（Prop 3.14(c)）。
+    (3) 不断言 (D) 里那个常数的值或正负号；**任何形如 det = α_N ∏… 的写法在本卡里没有来源背书**。
+    (4) 不断言 h = λ(e₀⁺) 就是标准 L₀ 在最高权向量上的本征值（MRC Sect. 2 对 e₀^± 的定义本项目未读）。
+    (5) 不断言公式的任何推论（可约性判据、幺正性区域、linkage 定理 Theorem 5.1、
+        character sum 公式 Proposition 5.2）。
+uses_conventions:
+  - conv.super-virasoro-central-charge-mrc
+sources:
+  - ref: meurman-rocha-caridi-1986
+    loc: "**Sect. 3, eqs. (7), (7'), (8), (9), p. 274**（**原文无定理号**：这四个是 Sect. 3 末尾的无编号显示公式）；重数函数 p̂ / p̃ 的定义在 **Proposition 3.6, p. 270**（(1)(2)(3) 三条）与其紧邻上文的分拆记号段；省略常数的 Note 紧接 (9) 之下"
+    note: |
+      **L1 逐字**（physics-auditor 2026-09-12 页图复核，
+      literature/extractions/page-check-rulings-2026-09-12.md §1.1 与 §1.2；
+      同一裁决的摘要追加在 literature/extractions/math-sources.md §55.9）。
+
+      **(a) 「无定理号」是作者自证的**：p.264 章节导览逐字「In Sect. 3 we present some basic
+      results on the Neveu-Schwarz and Ramond algebras and their highest weight representations.
+      **The determinant formulas are stated at the end of this section.** In Sect. 4 … We conclude
+      this section with the proof of the determinant formulas which consists of two parts: the
+      degree computation (Proposition 4.10) and the proof of the vanishing of the determinant on
+      the variety of its irreducible factors (Proposition 4.13).」
+      ⇒ **本图任何地方写「Meurman–Rocha-Caridi, Theorem X（超 Virasoro Kac 行列式）」都是编造的号。**
+
+      **(b) (9) 的指数逐字读数**：`( h + c/16 )^{½ p̂(n)}`，**没有 ±**。
+      math-sources.md §55.3 分层里记的 `±(1/2)p̃(n)` 与波浪号 `p̃` 两处读数**已作废**
+      （§55.9 表格逐条判定）：p.274 全部印 `p̂`（尖帽），「Let p̂(i) be as in Proposition 3.6」。
+
+      **(c) 引出句逐字**：「We now state the formulas for the determinant of ( , )_{h,c,n,γ}
+      (we omit the subscript γ if 𝔤 = n̂s). The formula for the Neveu-Schwarz algebra was conjectured
+      by Kac [14], and the one for the Ramond algebra was conjectured by D. Friedan, Z. Qiu, and
+      S. H. Shenker [7, 8]. Let r, s ∈ ½ℕ, r ≦ s. Set, for 𝔤 = n̂s」；
+      (8) 行末标 **[14]**，n = 0 两值行末标 **[7, 8]**。
+
+      **(d) Note 逐字**：「The nonzero constant depending on the choice of a basis of M(V(λ))
+      has been omitted in (8), (9).」——与 Feigin–Fuchs 玻色版「C 非零」同型，
+      **本卡 (D) 照此写，不写 α_N。**
+
+      **(e) Prop 3.6 逐字**（p.270）：「dim M(ℂ(λ))^{λ−nδ} = p̂(n) = p̃(2n), where p̃(0) = 1,
+      p̃(s) = Σ_{i=0}^{s} p("H₀", i) p("H₁"(≦1), s−i), s > 0; dim M(R(λ))^{λ−nδ}_γ = p̂(n),
+      where p̂(0) = 1, p̂(n) = Σ_{i=0}^{n} p(i) p(𝒟, n−i), n > 0, γ ∈ ℤ₂; If λ(e₀) = −λ(e₀⁺)/16,
+      then dim M(S(λ))^{λ−nδ}_γ = ½ p̂(n) for n > 0, p̂(n) as in (2).」
+      ⚠ **第 (3) 条里的 `λ(e₀) = −λ(e₀⁺)/16` 照 auditor 的逐字转录抄在这里**；
+      它与 §55.4 记的 Proposition 3.10 条件（`λ(e₀⁺) = −λ(e₀')/16`，即 h = −c/16）
+      **两处转录不一致**，本项目未再复核。本卡 statement **不使用 (3)**，故不受影响
+      （(3) 只是 auditor 解释 (9) 前因子指数 ½p̂(n) 来历的旁证，见 notes）。
+    # 取件：Project Euclid download/pdf_1/euclid.cmp/1104116024（需 Chrome UA + Accept: application/pdf + Referer）
+  - ref: meurman-rocha-caridi-1986
+    loc: "**p. 263, Introduction 首段**（n̂s 与 r̂ 的括号与指标集）；**p. 274 上半**逐字「Let λ ∈ 𝔥* and set h = λ(e₀⁺), c = λ(e₀')」"
+    note: |
+      L1（researcher 2026-09-11，math-sources.md §55.6 与 §55.3 末段）。
+      本条是 statement 里 h、c、𝔤 三个符号的定义出处，已提炼进
+      conv.super-virasoro-central-charge-mrc。**本卡不重复该约定卡的内容。**
+  - ref: kac-1979
+    loc: "pp. 441–445（**内部编号未核实，不得写 Theorem 1**）——MRC p.264 逐字「In [14] Kac also gave a brief introduction to the highest weight theory of the Neveu-Schwarz algebra, and **stated (without proof)** a formula for its Shapovalov determinant.」"
+    note: |
+      **归属证据，不是内容来源。** MRC 把 **NS** 公式的猜测权独归本条（= MRC 的 [14] = LNP 94, p.441），
+      并在 (8) 行末标 [14]。本卡 statement **不**断言首发权（见「本卡不断言的内容」(5) 的同类理由）。
+      ⚠ 本条正文本项目未获取（Springer 认证墙），内部编号 L0。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**p. 274** 逐字「the one for the Ramond algebra was conjectured by D. Friedan, Z. Qiu, and S. H. Shenker **[7, 8]**」（n = 0 两值行末亦标 [7, 8]）；**参考表 p. 294** 逐字「7. Friedan, D.: Private communication to A. Rocha-Caridi」「8. Friedan, D., Qiu, Z., Shenker, S.H.: Superconformal invariance in two dimensions and the tricritical Ising model. Phys. Lett. **151B**, 37 (1985)」"
+    note: |
+      **R 扇区公式的归属证据，不是内容来源。**
+      ⚠ **本条的 ref 故意仍是 meurman-rocha-caridi-1986，不是 Friedan–Qiu–Shenker 本身**：
+      本项目**没有**取到 PLB 151B (1985) 37 的正文（L0），按根 CLAUDE.md
+      「新文献必须先登记到 literature/sources.bib，ref 才能用」，不为一篇未读的论文建条目；
+      能逐字核实的只有「MRC 把 R 公式的猜测权归给它」这件事，而那句话印在 MRC 自己的 p.274 / p.294。
+      ⚠ MRC 的 [7] 是私人通信，本图不为它建 bib 条目。
+      逐字转录见 literature/extractions/math-sources.md §55.3 与 §55.5。
+  - ref: thorn-1984
+    loc: "Nucl. Phys. **B248**, 551 (1984)，标题即「Computing the Kac determinant using dual model techniques and more about the no-ghost theorem」；MRC p.264 **脚注 2** 逐字「After this work was completed, D. Friedan informed us that **Curtright and Thorn** had also succeeded to prove these formulas.」"
+    note: |
+      **独立证明线的线索，不是本卡任一断言的来源。** 「these formulas」在原文语境里指
+      **NS 与 R 两个扇区的行列式公式**（math-sources.md §55.5 第 4 点）。
+      ⚠ 该线是否就是本条、还是另有一篇 Curtright–Thorn 合作文章，**本项目未查（L0）**。
+      ⇒ 若日后取到，可为本卡加第二条推导；本轮不加。
+tags: [cft, representation-theory, super-virasoro, rns, kac-determinant]
+notes: |
+  【本卡与玻色版 worldsheet.kac-determinant-v2 的关系：两条不同的公式，不得互相顶替】
+  worldsheet.kac-determinant-v2 是**玻色 Virasoro** 的 Kac 行列式（Verma 模 V(c,h) 的
+  Shapovalov 行列式，指标 r,s ≥ 1 整数，重数 p(N−rs)）。本卡是**超 Virasoro** 的两扇区版本
+  （指标 r,s ∈ ½ℕ，重数 p̂，R 扇区多一个 (h+c/16) 前因子），且用的是完全不同的一套变量归一化。
+  两卡的上游文献也不同：玻色版是 Kac [13]/[14] 猜 + Feigin–Fuchs 证；
+  超版是 Kac [14]（NS）/ Friedan–Qiu–Shenker [7,8]（R）猜 + 本卡的来源证。
+  ⚠ **下游接线时不得把 worldsheet.kac-determinant-v2 当作超 Virasoro 的上游**——
+  worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989
+  的 gaps 里此前专门写了这条告诫，本卡建立后那条告诫仍然有效（只是「无卡可接」那一半已关）。
+
+  【为什么 NS 与 R 合成一卡，而不按「一节点一命题」拆开】
+  按根 CLAUDE.md 原则「文献把两件事写在一个定理里而它们**被分别推导**时，拆开」。
+  这里两件事**不是**分别推导的：MRC 的证明段「Proof of the Determinant Formulas」(pp. 286–287)
+  是**一个对 n 的归纳**同时给出 (8) 与 (9)，其两个输入 Proposition 4.10 与 Proposition 4.13
+  也各自一条命题里同时覆盖 𝔤 = n̂s 与 𝔤 = r̂ 两支。故合成一卡。
+  ⚠ 代价是 statement 里 p̂ 有两个定义；按 auditor 的指令（rulings §4）**两个定义已分开写在 (B) 里**，
+  任何引用本卡的下游必须指明用的是哪个扇区的 p̂。
+  ⇒ 若日后只需要单扇区（例如只做 NS 的形式化），应新建更窄的卡，**不要**改本卡。
+
+  【ℕ 是否含 0 —— 这是解读，不是原文】
+  MRC 写「Let r, s ∈ ½ℕ」，**没有**说明 ℕ 是否含 0。本卡 statement 按 **ℕ ∌ 0** 读，
+  依据是 auditor 的两条论证（rulings §1.2 末，标注为「解读，非原文明写」）：
+    (i) 若允许 r = 0，则 (8)(9) 对一切 n 都会多出伪因子 ψ_{0,s}^{p̂(n)}，
+        且 Proposition 4.10 里的 d̂(0) = #{(r,s) | 2rs = 0} 为无穷；
+    (ii) 反面校验：n = ½ 时 (8) 只剩 (r,s) = (½,½)，det = ψ_{½,½} = h，
+        与 Prop 3.6 给的 dim = p̃(1) = 1 及 (G_{−½}v, G_{−½}v) ∝ h 一致。
+  ⇒ **这一条是本卡陈述里唯一的非逐字成分**，已在 statement (A) 内联标注。
+
+  【「n ≧ 0」与本卡写的「n ≥ 1」】
+  原文在 (9) 之后印的是「if n ≧ 0」，紧接着又单列了 n = 0 的两个值。
+  auditor 2026-09-12 指出（rulings §1.1 末）：n = 0 时 (9) 的指数是 ½p̂(0) = ½，**非整数**，
+  故 (9) 在 n = 0 处**字面上不成立**，其实际适用范围是 **n ≥ 1**，n = 0 由单列的两个值给出。
+  本卡 statement 因此写 n ≥ 1 并把两个单列值一并写出。
+  ⚠ **这是对原文适用范围的一次收紧，不是对公式的改动**；原文印的「n ≧ 0」逐字记在此处备查。
+  ⚠ 对照：(8) 在 n = 0 处乘积为空、det = 1，与 M^λ = ℂv_λ、(v_λ,v_λ) = 1 一致，NS 侧无此问题。
+
+  【(9) 前因子指数 ½p̂(n) 的来历（auditor 的解释，本卡 statement 不承担）】
+  Prop 3.6 (3)：h = −c/16 时 R(λ) 的一维商 S(λ) 的每个 γ 分量维数是 ½p̂(n)；
+  且 Prop 4.10 的证明里逐字说「the number of such e_I v_λ is equal to the number of such
+  e_K e₀⁻ v_λ and is equal ½ p̂(n)」——(h + c/16) 因子来自含 e₀⁻ 的那一半基，
+  故指数 ½p̂(n)，两个 γ 相同、**无 ±**。
+  ⚠ 这段是**为什么**，不是**是什么**；本卡 statement 只写「指数是 ½p̂(n)，无 ±」这个事实。
+
+  【本卡之外的相关命题（**都还没有卡**，列此以免下次重复找）】
+  · **Proposition 3.14(c)**, p.273：Rad( , )_λ 是 M(V(λ)) 的极大真子模（超版的 Shapovalov 对应）。
+    这是「行列式为零 ⟺ 有奇异向量」那一步的正经上游，**有编号，比行列式好引**。
+  · **Proposition 4.10**, p.283（h-次数计数，含 d̂(i) 的定义）与 **Proposition 4.13**, p.286
+    （det 在簇 𝒱_{r,s} 上取零）：本卡推导的两条内部支柱，已写进推导的 sources，未单独立卡。
+  · **Theorem 5.1**（linkage）与 **Proposition 5.2**（character sum）：逐字未取（math-sources.md Q55.4）。
+
+  【形式化状态：本卡上限 rigorous，formalized 现在不可能】
+  与玻色版同理且更甚：本仓库 formal/ 里没有超 Virasoro 的任何声明；
+  Kytölä 的 VirasoroProject 连**玻色**的 ShapovalovForm / KacDeterminant 都没有
+  （math-sources.md §34.7 三条独立证据），PBW 是公开的硬瓶颈。
+  ⇒ **不要把本卡列进「formalization frontier」的待办**。
+
+  【查重记录】新增前跑过 `uv run stringgraph search 行列式 / Neveu / super-virasoro /
+  Shapovalov / contravariant`：图中此前**没有**任何超 Virasoro Kac 行列式节点
+  （命中的 worldsheet.kac-determinant{,-v2,-level-two,-level-three,-level-four} 全是玻色版）。
+author: curator
+created: "2026-09-12"

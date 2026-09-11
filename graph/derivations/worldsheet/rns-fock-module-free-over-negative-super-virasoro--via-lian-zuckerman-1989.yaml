@@ -30,6 +30,50 @@ depends_on:
       ⚠ 与玻色侧的对照：worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986 的同位边
       指的是已形式化的 worldsheet.fock-space-virasoro-representation，故那一侧 effective 是
       rigorous。**这正是本图把两侧拆成两卡的理由之一**（见两张目标卡的 notes）。
+  - id: worldsheet.super-virasoro-kac-determinant
+    inferred: false
+    convention_map: |
+      **三套归一化，本边跨的是第二与第三套。**
+        · 本图通用（目标卡与本推导声明的）：conv.virasoro-standard，
+          [L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ、{G_r,G_s} = 2L_{r+s} + (c/12)(4r²−1)δ；
+        · **LZ 1989**（p.302）：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ、
+          {G_{m+κ},G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ ⇒ **c_本图 = (3/2)·c_LZ**
+          （已写在本推导对 math.super-virasoro-algebra 那条边的 convention_map 里）；
+        · **MRC 1986**（依赖卡声明的 conv.super-virasoro-central-charge-mrc，p.263）：
+          [L_i,L_j] = (j−i)L_{i+j} + δ((i³−i)/8)L'₀、[G_i,G_j] = −2L_{i+j} + δ(½)(i²−¼)L'₀。
+
+      **MRC ↔ 本图通用**（auditor 自算，page-check-rulings-2026-09-12.md §1.4，**非原文**）：
+        L^{MRC}_i = −L^{std}_i , G^{MRC} = G^{std} , **c^{MRC} = (2/3) c^{std}** ,
+        h^{MRC} = −h^{std}（前提 e₀⁺ = L₀^{MRC}，**未核实**）, (r,s)^{MRC} = ½(r,s)^{std} 。
+      **MRC ↔ LZ**：两篇的中心项**同为 /8 与 /2**，但 [L,L] 的整体符号与 {G,G} 的领头项符号相反；
+      researcher 的验算是 L^{MRC} = −L^{LZ}、G^{MRC} = G^{LZ}、L'₀ ↔ c
+      （math-sources.md §55.6，明写「**是抽取者的验算，不是任何一篇的陈述**」）。
+
+      ⚠⚠ **本边不使用上面任何一条换算，也不断言它们成立。** 本边断言的是一个**文献事实**——
+      「LZ 在 Prop 2.18 的证明里用了 MRC 的那条行列式公式」（LZ 自己印的 [22] 引用），
+      而该事实与两篇各自用什么变量无关。换算表列在这里只为让下游看见**不可直接代入**：
+      谁要把 MRC 的 (7)–(9) 代进 LZ 或本图的变量，**必须另立节点并自带 inferred 的字典**。
+    note: |
+      **【2026-09-12 新增，落地 auditor 页图裁决；本边关闭 gaps 第一条 (a)】**
+      供给 LZ 证明链最上游的那条表示论输入：**超 Virasoro（NS/R）的 Kac 行列式**。
+
+      **这条边在原文里是显式的，故 `inferred: false`**，链路逐字可查：
+        · Corollary 2.19(iii)（p.320）的证明全文只有两句，逐字「Equations **(24), (25)** imply
+          that V(p,κ) is a direct sum of tensor products of free modules over Vir_κ^-. …」；
+        · (24)(25)（p.319，印在 Proposition 2.18 的证明体内）由该证明首段导出，
+          而首段逐字写「**By Kac's determinant [22] formula**, for h'' < 0 and h' > 0,
+          M_κ(h'',1), M_κ(h',9) have no (non-zero) proper ℤ₂-graded submodule.」；
+        · **[22] = meurman-rocha-caridi-1986**（math-sources.md §55.0），
+          即依赖卡 worldsheet.super-virasoro-kac-determinant 的唯一来源。
+      ⇒ 「Cor 2.19(iii) 的论证用到超 Virasoro Kac 行列式」是 **LZ 自己印在纸上的**，
+      不需要本图推断；本边因此**不**标 inferred。
+      ⚠ **归一化的不匹配走 convention_map，不走 inferred**：那是两个不同的轴
+      （「论证在不在来源里」vs「两卡的变量是不是同一套」），见上面的 convention_map。
+
+      ⚠ **本边供给的只是「行列式公式」本身**，不供给
+      「行列式非零 ⇒ M_κ(h,c) 无非零真 ℤ₂-分次子模」这一步——那一步 LZ 直接断言
+      （正经上游应是超版的 MRC Prop 3.14(c)「Rad( , )_λ = 极大真子模」，**本图无卡**），
+      仍记在 gaps 第一条 (a')。
 sources:
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.19(iii)**, p.320（researcher 第三轮页图定为 p.320，E7 旧记的 p.321 是相邻页），逐字：'(iii) V(p,κ) is a free Vir_κ^--module.'；其证明**全文只有两句**，逐字：'(iii) Equations **(24), (25)** imply that V(p,κ) is a direct sum of tensor products of free modules over Vir_κ^-. One can easily check that each of the tensor products is also Vir_κ^--free.'"
@@ -72,8 +116,16 @@ sources:
       ★ 这是 **lian-zuckerman-1989 的 [22]**，即本推导上游的超 Virasoro Kac 行列式。
       ⚠⚠ **引用纪律（本条只能这样写）**：该公式在 MRC 原文里**没有定理号**，
       只能按 `Sect. 3, eqs. (7)–(9), p. 274` 定位，证明在 Prop 4.10 / Prop 4.13。
-      ⚠⚠ **(9) 式的 ± 与指标条件待 auditor 页图复核**，故本图**不把公式写进任何 statement**，
-      也**不为它建卡**（见 gaps 第一条）。本条只承载「上游文献已登记、定位已确定」这件事。
+      **【2026-09-12 更新：已建卡，本条不再是「孤立的文献登记」】**
+      auditor 2026-09-12 页图复核结清了 (9) 式的 ± 与指标条件
+      （`literature/extractions/page-check-rulings-2026-09-12.md` §1，摘要在 math-sources.md §55.9）：
+      (9) 的指数是 **½ p̂(n)，无 ±**；指标条件 NS `r−s ∈ ℤ` / R `r−s ∈ ½+ℤ`；
+      `p̂`（尖帽，不是 §55.3 误记的 `p̃`）由 Prop 3.6 (1)(2) 定义、**依扇区而异**。
+      据此已建 **worldsheet.super-virasoro-kac-determinant**（推导
+      `--via-meurman-rocha-caridi-1986`，status rigorous），本推导已挂一条
+      **非 inferred** 的边指向它（见 depends_on 第三条）。
+      ⇒ 本条 source 从此只承载「LZ 的 [22] 就是这一篇」这个文献识别，
+      公式内容由那张卡承载；**本推导与目标卡仍然不把公式写进任何断言**。
   - ref: lian-zuckerman-1989
     loc: "**p.320 Remark**，逐字：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ **even though it is Vir_κ^- -free**.'"
     note: |
@@ -102,7 +154,9 @@ summary: |
   Prop 2.18 自述**不走谱生成代数（DDF）那条路**，而「照 FGZ 在玻色情形的做法」用表示论证明。
   ⇒ **本卡的自由性最终建立在超 Virasoro 的 Kac 行列式之上**，与玻色侧
   worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986（经**玻色** Kac 行列式）
-  **结构同源**；差别是玻色侧本图有卡可接线，超弦侧没有（见 gaps）。
+  **结构同源**；**〔2026-09-12 更新〕两侧现在都有卡可接线**：玻色侧接
+  worldsheet.kac-determinant-v2，超弦侧接新建的 worldsheet.super-virasoro-kac-determinant
+  （本条原写「超弦侧没有」，已过期）。仍存的差别见 gaps (a')。
   ⚠ 'One can easily check that each of the tensor products is also Vir_κ^--free' 这句是
   **一行代数的断言**（自由模的张量积在子代数上仍自由），按 docs/STATUS_LEVELS.md 的裁决属
   「有限步初等计算」，不触发降级；但本图**未独立复核**，记在 gaps。
@@ -122,23 +176,32 @@ summary: |
   这一步经由那张定义卡记账的后果。
 gaps:
   - |
-    **上游的超 Virasoro Kac 行列式已登记文献但图上无卡（本轮故意不建）**：
-     (a) **[22] = meurman-rocha-caridi-1986**（CMP 107 (1986) 263–294, 'Highest weight
-         representations of the Neveu-Schwarz and Ramond algebras'）——
-         **〔2026-09-11 更新〕bib 已登记（L1，元数据三源一致）**，旧 gap 写的「连 bib 都未登记」
-         已过期。**但图上仍没有超 Virasoro Kac 行列式的卡，且本轮不建**：该公式在 MRC 原文里
-         **没有定理号**（只能定位到 `Sect. 3, eqs. (7)–(9), p. 274`，证明在 Prop 4.10 / 4.13），
-         且 **(9) 式的 ± 与指标条件待 auditor 页图复核**，写进 statement 会立刻踩转录风险。
-         ⇒ **状态：待建**（先请 auditor 复核 (9) 式，再建卡并把本推导接上去）。
-         ⚠ 本图现有的 worldsheet.kac-determinant-v2 是**玻色** Virasoro 版，**不得**用来顶替。
+    **上游的超 Virasoro Kac 行列式**（**〔2026-09-12〕(a) 已关闭；(b)(c)(d) 仍开**）：
+     (a) **〔已关闭，2026-09-12〕** **[22] = meurman-rocha-caridi-1986**（CMP 107 (1986) 263–294,
+         'Highest weight representations of the Neveu-Schwarz and Ramond algebras'）。
+         本条历经三态：`连 bib 都未登记` → `bib 已登记但图上无卡、且因 (9) 式待复核而故意不建`
+         → **现状：auditor 2026-09-12 页图复核结清（rulings §1，(9) 的指数为 ½p̂(n)、无 ±；
+         指标条件 NS r−s ∈ ℤ / R r−s ∈ ½+ℤ；p̂ 由 Prop 3.6 依扇区定义），
+         卡已建为 worldsheet.super-virasoro-kac-determinant（推导 --via-meurman-rocha-caridi-1986，
+         rigorous），本推导已挂非 inferred 的边**。
+         ⚠ 本图现有的 worldsheet.kac-determinant-v2 是**玻色** Virasoro 版，**仍然不得**用来顶替
+         ——这条告诫不随 (a) 的关闭而失效。
+     (a') **〔(a) 关闭后新暴露的那一半，仍开〕** 本推导接上的是**行列式公式本身**；
+         LZ 用它的那一步是「**行列式非零 ⇒ M_κ(h,c) 无非零真 ℤ₂-分次子模**」
+         （Prop 2.18 证明首段逐字「By Kac's determinant [22] formula, for h'' < 0 and h' > 0,
+         M_κ(h'',1), M_κ(h',9) have no (non-zero) proper ℤ₂-graded submodule.」）。
+         **这一步 LZ 直接断言，本图无卡**：正经的上游应是超版的
+         **MRC Proposition 3.14(c)**（p.273，「Rad( , )_λ 是 M(V(λ)) 的极大真子模」，
+         **有编号**，math-sources.md §55.4 已逐字取），加上「h''<0, c=1 / h'>0, c=9 处
+         (7)(7') 的零点都不落在相关指标上」这一步计算。**两者本图都没有卡。**
+         ⇒ 关闭方式：建 Prop 3.14(c) 卡 + 把那步零点计算显式化。
      (b) **M_κ(h', 9) / M_κ(h'', 1) 的幺正性**（LZ [7, 9, 10] = Friedan–Qiu–Shenker /
          Kac LNP 94 / Kac–Wakimoto）——本图无对应卡。
      (c) **(24)(25) 本身未复核**：researcher 把 ⊔ 的指标集（(1/2)Z₊ vs Z₊）与 p'/p'' 的**撇号归属**
          列为需复核；本推导与目标卡都**不抄这两条公式**。
      (d) **收尾那句 'One can easily check…'（自由模的张量积仍自由）本图未独立复核。**
      ⇒ 本推导的 rigorous 是按「已核实的编号推论 + 其原文印出的两句证明 + 可定位的上游文献」给的，
-     不是按逐行复核给的。关闭方式：auditor 复核 MRC (9) 式 → 建超 Virasoro Kac 行列式卡 →
-     本推导接线；并逐行复核 LZ pp.318–320。
+     不是按逐行复核给的。关闭方式：逐行复核 LZ pp.318–320，并补 (a')(b) 两张卡。
   - "**扇区的对称性未复核**：Corollary 2.19(iii) 一句话同时覆盖 κ = ½ 与 κ = 0，
      但 R 扇区（κ = 0）的 V(p,0) 多一个旋量因子 R(p,0)，其上的结构与 NS 不同。
      LZ 是否对两个扇区分别论证、还是一笔带过，**本图未核实**（抽取记录 E7 只转录了结论）。"
@@ -162,8 +225,13 @@ notes: |
   **不是「有证明 vs 无证明」的对比**——researcher 第三轮页图显示 FGZ 也印了证明梗概，
   且**两侧的核心工具同为 Kac 行列式**（玻色版 FGZ refs 10/11 = Kac ICM 1978 + Feigin–Fuks 1982；
   超版 LZ [22] = meurman-rocha-caridi-1986）。真正的差别有两条：
-  (1) **图上的可接线性**：玻色版有 worldsheet.kac-determinant-v2 可接（已接，非 inferred），
-      超版没有卡（本轮不建，见 gaps 第一条）；
+  (1) **图上的可接线性**：**〔2026-09-12 更新：这条差别已消失〕** 玻色版接
+      worldsheet.kac-determinant-v2（非 inferred），超版现在接
+      worldsheet.super-virasoro-kac-determinant（同为非 inferred，本推导 depends_on 第三条）。
+      本条原写「超版没有卡（本轮不建）」，随 auditor 2026-09-12 页图裁决与建卡而作废。
+      **剩下的不对称在别处**：玻色侧 FGZ 的那一步（Verma 分解 ⇐ Kac 行列式）与超侧
+      LZ 的那一步（无真子模 ⇐ Kac 行列式）**都**没有中间卡，见本推导 gaps (a')
+      与玻色侧推导的 gaps (a)；
   (2) **证明的详尽度**：LZ 把不可约分解写成显式的 (24)(25)，FGZ 只写两条同构式。
   ⇒ 两卡仍**互不依赖**（两篇互不引用），但「Kac 行列式是共同上游」这句可以跨卡说。
 

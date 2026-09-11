@@ -1,0 +1,103 @@
+id: conv.super-virasoro-central-charge-mrc
+family: virasoro
+title: 超 Virasoro 括号与中心荷的 MRC 归一化（中心元 L'₀，系数 1/8 与 1/2；非 canonical）
+definition: |
+  **Meurman–Rocha-Caridi 1986（CMP 107, 263–294）所用的一套超 Virasoro 记号与归一化。**
+  凡陈述逐字照抄该文公式的节点声明本约定；本约定与 conv.virasoro-standard **互斥**
+  （同 family `virasoro`），一张卡不得同时按两套读同一个 c。
+
+  **(1) 载体与括号**（原文 p.263 Introduction 首段逐字）：
+
+    Neveu–Schwarz 代数 n̂s 的基是 {L'₀, L_i, G_j}（i ∈ ℤ，j ∈ ½ + ℤ），L'₀ 是中心元，
+    两个非中心生成元的括号为
+
+      [L_i, L_j] = (j − i) L_{i+j} + δ_{i,−j} ((i³ − i)/8) L'₀ ,
+      [G_i, G_j] = −2 L_{i+j} + δ_{i,−j} (1/2)(i² − ¼) L'₀ ,
+      [L_i, G_j] = (j − ½ i) G_{i+j} 。
+
+    Ramond 代数 r̂ 有相同的括号，但 G_j 的指标 j ∈ ℤ。
+
+  **(2) 三条与主流写法的差别**（本约定的全部内容就是这三条）：
+
+    (a) **中心项的归一化是 1/8 与 1/2**，不是主流的 c/12 与 c/3；中心元写作 L'₀，
+        它在最高权模上的标量值记作 c（见 (3)）。
+    (b) **[L_i, L_j] 的整体符号是 (j − i)**，不是主流的 (m − n)；
+        **{G,G} 的领头项是 −2L_{i+j}**，不是主流的 +2L_{r+s}。
+    (c) **奇-奇括号写成对易子记号 [G_i, G_j]**（原文如此），其内容是反对易关系。
+
+  **(3) 权的参数化与模的记号**（原文 p.274 上半逐字：「Let λ ∈ 𝔥* and set h = λ(e₀⁺), c = λ(e₀')」）：
+
+    · λ ∈ 𝔥*，**h := λ(e₀⁺)**、**c := λ(e₀')**；c 是中心元 L'₀ 的本征值。
+    · 最高权模记 **M(V(λ))**，其中 V(λ) 是「顶」：NS 取一维的 ℂ(λ)，R 取二维 ℤ₂-分次的 R(λ)，
+      在 h = −c/16 处另有一维商 S(λ)。**这与 conv.verma-module-notation 的 V(c,h) 不是同一套记号**：
+      本图的 V(c,h) 是玻色 Virasoro 的 Verma 模，MRC 的 M(V(λ)) 是超代数的、带 ℤ₂-分次与二维顶。
+    · 权空间记 M(V(λ))^{λ−nδ}，n ∈ ½ℤ₊（NS）或 n ∈ ℤ₊（R）；R 情形再按 γ ∈ ℤ₂ 分块。
+    · 逆变形式记 ( , )_λ，其在权空间上的限制记 ( , )_{h,c,n}（NS）/ ( , )_{h,c,n,γ}（R）。
+
+  **本约定不规定的东西**：p̂ / p̃ 的定义（那是 MRC Proposition 3.6 的内容，写在
+  worldsheet.super-virasoro-kac-determinant 的 statement 里）；逆变形式的构造与归一化
+  （MRC Proposition 3.14，(v_λ, v_λ)_λ = 1）；e₀⁺ / e₀' 在 Sect. 2 里的具体定义（本项目未读，见 notes）。
+canonical: false
+sources:
+  - ref: meurman-rocha-caridi-1986
+    loc: "p. 263, Introduction 首段（三条括号与 R/NS 的指标集）；p. 274 上半（h = λ(e₀⁺), c = λ(e₀')）"
+    note: |
+      **L1 逐字**。括号三条与 R/NS 指标集的逐字转录见
+      literature/extractions/math-sources.md §55.6（researcher 2026-09-11 页图）；
+      h/c 的参数化逐字见同文件 §55.3 末段。
+      取件路径：Project Euclid `download/pdf_1/euclid.cmp/1104116024`
+      （**裸 curl 被 Incapsula 拦，需 Chrome UA + Accept: application/pdf + Referer**）；
+      页映射 PDF 页 = 期刊页 − 262。
+  - ref: lian-zuckerman-1989
+    loc: "p. 302（LZ 自己的超 Virasoro 括号：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ、{G_{m+κ},G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ）"
+    note: |
+      **对照用，不是本约定的内容来源。** 列在这里是因为 LZ 1989 引 MRC 作为 [22]，
+      而两篇的中心项归一化**同为 /8 与 /2**（这在 Virasoro 文献里不是主流），
+      但 **[L,L] 的整体符号与 {G,G} 的领头项符号相反**（MRC 写 (j−i) 与 −2L，LZ 写 (m−n) 与 +2L）。
+      ⚠ 「两套记号可由 L^{MRC} = −L^{LZ}、G^{MRC} = G^{LZ}、L'₀ ↔ c 对上」是
+      **researcher 的验算，不是任何一篇的陈述**（math-sources.md §55.6 明写）；
+      本图任何跨两篇的边必须标 `inferred: true` 并带这条字典。
+notes: |
+  【为什么非 canonical，且为什么放在 family `virasoro`】
+  family `virasoro` 的 canonical 成员是 conv.virasoro-standard（c/12 归一化，
+  「自由玻色子 c = 1」）。本约定是同一件事（Virasoro 型括号的中心项归一化 + 整体符号）
+  的另一套取法，与之**真正互斥**：同一张卡里写的 c 不可能既是 MRC 的 λ(L'₀) 又是标准的 c。
+  故放同 family、标 canonical: false。
+  ⚠ 由此产生一条硬约束（validate 会查）：**里程碑陈述不得声明本约定**
+  （graph/CLAUDE.md 与 validate.py 都禁止 milestone 使用非 canonical 约定）。
+  若日后要把超 Virasoro Kac 行列式送进里程碑，必须先把它改写成 conv.virasoro-standard 的变量，
+  而那需要把下面 (D) 的字典从 inferred 抬成有来源的——本项目目前做不到。
+
+  ---
+  【(D) 与 conv.virasoro-standard 的换算字典 —— **auditor 自算，MRC 原文没有这张表**】
+
+  来源：literature/extractions/page-check-rulings-2026-09-12.md §1.4，
+  physics-auditor 2026-09-12 由 p.263 的三条括号与标准式
+    [L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ_{m+n,0} ,
+    {G_r,G_s} = 2L_{r+s} + (c/3)(r²−¼)δ_{r+s,0}
+  比对得到（**每一项都是推断，不是原文**）：
+
+    L^{MRC}_i = − L^{std}_i ,   G^{MRC} = G^{std} ,
+    **c^{MRC} = (2/3) c^{std}** ,
+    h^{MRC} = − h^{std}（**前提是 e₀⁺ = L₀^{MRC}，该前提本项目未核实**），
+    (r, s)^{MRC} = ½ (r, s)^{std} 。
+
+  auditor 给的四条独立校验（同样是自算，非原文）：
+    (i)   [L,L] 与 [G,G] 两条中心项都给 L'₀ = (2/3)c^{std}，彼此独立而一致；
+    (ii)  判别式 c² − 10c + 9 = (c−1)(c−9) 的分支点 c^{MRC} = 1, 9 ↔ c^{std} = 3/2, 27/2 ✓；
+    (iii) c^{MRC} = 1 时 (7) 给 h^{MRC}_{r,s} = −(r−s)²/2，标准 NS 公式的相应极限给
+          h^{std} = (r_std − s_std)²/8 = (r−s)²/2 ✓
+          （反向字典 L^M_i = L^s_{−i}、h^M = h^s、c^M = −(2/3)c^s 在此校验下 ✗）；
+    (iv)  R 扇区因子 h^M + c^M/16 = −(h^{std} − c^{std}/24) ✓。
+
+  ⚠ **auditor 自己标注的限制**：MRC Sect. 2 对 e₀^± 的定义本项目**未读**，
+  「h = λ(e₀⁺) 就是 L₀ 的最高权本征值」只由 (iii)(iv) 间接支撑，不是逐字证据。
+  ⇒ **凡用到这张字典的边一律标 `inferred: true`**，并在 note 里指回本段。
+  本图目前唯一这样用它的地方是
+  worldsheet.super-virasoro-kac-determinant--via-meurman-rocha-caridi-1986 对 conv.virasoro-standard 的边。
+
+  【查重】新增前跑过 `stringgraph search 行列式 / Neveu / Shapovalov / contravariant`：
+  graph/conventions/ 下此前没有任何超 Virasoro 归一化的约定卡（21 张里与 Virasoro 有关的
+  只有 conv.virasoro-standard 与 conv.verma-module-notation）。
+
+  【登记】由 curator 于 2026-09-12 建立（约定卡的 schema 无 author / created 字段，故记在此处）。

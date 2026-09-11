@@ -93,9 +93,19 @@ sources:
           而正文这句给了更宽的成立范围，**是原文自陈、非推断**。见 gaps。
       (4) **[2.4] 是 T 的显式构造式**，重数是 **p_{(D−2)}(k)**，而 V(E',p') 的重数是 **p_{(D−1)}(k)**
           ——**两个下标不同，别抄混**（§9.10.3 读数 4）。本推导不用 [2.4]。
-      ⚠ **转录疑点（§9.10.5，引用前须复核）**：Prop 2.6(ii) 的特征标印作 ch_q T = q^{p·p/2} φ(q)^{D−2}，
-      **指数前很可能丢了一个负号**（同页 ch_q V(E,p) = q^{p·p/2} φ(q)^{−D} 带明确负号，且
-      Thm 2.7(ii) 的答案是 φ(q)^{−24} 的系数）。本推导不把该特征标写进任何断言。
+      ⚠ **〔2026-09-12 已裁定，auditor 页图，rulings §2.3〕原刊漏负号**：Prop 2.6(ii) 的特征标
+      **印作** ch_q T = q^{p·p/2} φ(q)^{D−2}（8× 放大后 `D` 前确无负号；同页
+      ch_q V(E,p) = q^{p·p/2} φ(q)^{**−D**} 的负号清晰可见，排除扫描丢字），
+      **正确的是 ch_q T = q^{p·p/2} φ(q)^{−(D−2)}**。三条彼此独立的内证：
+        (1) φ(q)^{D−2}（D ≥ 3）的展开有负系数，不可能是分次向量空间的特征标；
+        (2) 由梗概里的 [2.4] 直接算：不可约 Verma 模的 ℒ⁺-不变子空间是一维的最高权向量，
+            故 ch_q T = Σ_k p_{(D−2)}(k) q^{p·p/2+k} = q^{p·p/2} φ(q)^{−(D−2)}；
+        (3) Thm 2.7(ii) 的 dim H⁰ = p_{(24)}(1 − p·p/2) 是 φ^{−24} 的系数，
+            与 Euler 特征标 q^{−1}φ²·q^{p·p/2}φ^{−D} = q^{p·p/2−1}φ^{−(D−2)} 一致。
+      **引用纪律**：`sources.loc` 里的逐字引文**保留原刊的 `φ(q)^{D−2}`**（本文件上一条 source
+      的 loc 即如此），凡写进 `statement` 的一律用 `φ(q)^{−(D−2)}`。
+      本推导仍**不把该特征标写进任何断言**（(ii) 不是本推导的目标）。
+      本条原写「转录疑点（§9.10.5，引用前须复核）…很可能丢了一个负号」，已由本裁定取代。
       ⚠ **negative evidence（§10.4）**：FGZ p.8446 全页不出现 "Kac determinant" 字样，
       该引用点只在 p.8445 的 Prop 2.6 证明里。
   - ref: fgz-1986
@@ -171,9 +181,20 @@ gaps:
   - |
     **号差 (D−1,1) 与 D ≥ 2 这两条前提在本图没有独立卡承载**：本推导把它们写在目标卡的 (H1) 里
      并靠 conv.metric-mostly-plus + worldsheet.fock-indefinite-form（inferred 边）记账。
-     ⚠ 证明梗概里 'This implies isomorphisms for **D > 2**' 这句表明 D 的下界在证明里确有作用
-     （FGZ 的语句写 D ≥ 2，梗概里写 D > 2，**两处不一致，本图未核实哪个是笔误**）。
-     ⇒ 这是一条新发现的转录/排印疑点，建议 auditor 用同一页图复核。
+     **〔2026-09-12 已核，auditor 页图裁决，rulings §2.2〕** 本条原写「梗概里 'This implies
+     isomorphisms for **D > 2**' 与语句的 D ≥ 2 **两处不一致，本图未核实哪个是笔误**，建议
+     auditor 复核」——**已复核：两处读数均清晰，不是排印错误，两处各指其物**：
+       · **`D > 2` 是梗概里那两条显式同构式的前提**，不是命题的前提：`V(E',p')` 的 Verma 分解
+         用的是「M(h,c) 对 h > 0, c > 1 不可约」，而 E' 号差 (D−1,0) 给 c = D − 1，
+         故 `c > 1 ⟺ D > 2`；D = 2 时 c = 1，M(h,1) 在 h = n²/4 处可约，梗概引的那句 Kac
+         事实不覆盖它（**auditor 推理，非原文**）。
+       · **`D ≥ 2`（语句）对 D = 2 也成立，路线由梗概末尾的括注给出**：'(in fact for any
+         r ≥ 2 **or s ≥ 1**)'——号差 (1,1) 有 s = 1 ≥ 1；因子 `V(E'',p'') ≅ M(p''·p''/2, 1)`
+         只用「h < 0, c = 1 不可约」，对任何 D ≥ 2 都成立。
+     ⇒ **本疑点关闭；目标卡 (H1) 的 D ≥ 2 不改。**
+     ⚠ **但 gaps 第一条 (a) 不随之关闭**：由「一个张量因子是自由 U(ℒ⁻)-模」推出「张量积在对角
+     作用下自由」是标准的 Hopf 代数张量恒等式（H ⊗ M ≅ H ⊗ M_triv），**FGZ 没印这一步**，
+     本轮只指出它**不依赖 D > 2**，**没有**替 FGZ 补证。
 notes: |
   【本推导在图上的作用】
   它把 worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 上那条指向
@@ -195,9 +216,16 @@ notes: |
       印在 p.319 **Proposition 2.18 的证明体内**（不是它的陈述！），由 **超 Virasoro 的
       Kac 行列式**（[22] = Meurman–Rocha-Caridi）与 [7,9,10] 的幺正性给出。
   ⇒ **两条链在「自由性 ← Kac 行列式 ← 不可约分解」这一点上结构同源**（§9.10.3 读数 2）。
-  ⚠ 但**本图只有玻色版的 Kac 行列式卡**（worldsheet.kac-determinant-v2，本推导已接线），
-  **超 Virasoro 版没有卡且本轮不建**（Meurman–Rocha-Caridi 的 NS/R 行列式无定理号、
-  (9) 式的 ± 与指标条件待 auditor 页图复核，写进 statement 会立刻踩转录风险）。
+  ⚠ **〔2026-09-12 更新〕两个 Kac 行列式现在都有卡**：玻色版 worldsheet.kac-determinant-v2
+  （本推导已接线），超 Virasoro 版 **worldsheet.super-virasoro-kac-determinant**
+  （MRC 1986 Sect. 3, eqs. (7)–(9)，auditor 2026-09-12 页图复核后建卡，
+  推导 --via-meurman-rocha-caridi-1986 为 rigorous），已被
+  worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989 接线。
+  本条原写「超 Virasoro 版没有卡且本轮不建（(9) 式的 ± 与指标条件待 auditor 复核）」，已作废。
+  ⚠⚠ **但两卡仍不得互相顶替**：玻色版的指标是整数 r,s ≥ 1、重数 p(N−rs)、变量按
+  conv.virasoro-standard；超版的指标是 r,s ∈ ½ℕ、重数 p̂（依扇区两个不同定义）、
+  R 扇区多一个 (h+c/16) 前因子、变量按非 canonical 的 conv.super-virasoro-central-charge-mrc。
+  **本推导依赖的是玻色版，与超版无边。**
   ⇒ 两卡仍互不依赖，各挂各的推导；**gaps 不可互相搬运**，但"Kac 行列式是共同上游"这句可以。
 
   【不构成循环】

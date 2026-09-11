@@ -83,13 +83,20 @@ sources:
       (2) 𝒪₀ 的定义在 §1，本图未回查（L0）。
       ★ 强度措辞 "This implies the following" ⇒ **Prop 2.4 自身不另给证明**。
   - ref: fgz-1986
-    loc: "**Proposition 1.3**, p.8443（Euler–Poincaré 原理）；**Theorem 1.12**, p.8444（V 是 n_--free 且带非退化厄米形式 ⇒ H^m_∞(g, g₀; V) = 0, m ≠ 0）；**Proposition 2.6**, p.8445 逐字 'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} […], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'"
+    loc: "**Proposition 1.3**, p.8443（Euler–Poincaré 原理）；**Theorem 1.12**, p.8444（V 是 n_--free 且带非退化厄米形式 ⇒ H^m_∞(g, g₀; V) = 0, m ≠ 0）；**Proposition 2.6**, p.8445 逐字 'PROPOSITION 2.6. Let E have signature (D − 1, 1), D ≥ 2 and p ≠ 0. Then (i) V(E, p) is a free ℒ^--module and (ii) there exists a positive definite subspace T ⊂ V(E, p)^{ℒ^+} […], such that ch_q T = q^{p·p/2}φ(q)^{D−2}.'（**原刊漏负号，正确为 φ(q)^{−(D−2)}**；auditor 2026-09-12 裁定，见 note）"
     note: |
       L1（Prop 2.6 逐字见 §9.2 表第 5 行；Thm 1.12 / Prop 1.3 的内容见 §1.4 编号表）。
       ⚠ **本图没有 Prop 1.3 / Thm 1.12 / Prop 2.4 的卡**（见 gaps）：本推导对这三条的
       可追溯性止于"数学期刊上署名的编号结果"。
       ⚠ 本推导只用 Prop 2.6 的**第一部分**；第二部分（横向空间 T，经 Kac 行列式 refs 10, 11）
       FGZ 派给了显式代表元的构造，目标卡"不断言 (h)"。
+      ★ **〔2026-09-12 auditor 裁定〕上面 loc 里逐字保留的 `ch_q T = q^{p·p/2}φ(q)^{D−2}`
+      是原刊的排印错误，正确的是 `φ(q)^{−(D−2)}`**（rulings §2.3，brst-cohomology-sources.md §9.12）。
+      三条内证：φ^{D−2} 有负系数不能是特征标；由 [2.4] 直接算得 Σ_k p_{(D−2)}(k) q^{p·p/2+k}；
+      **本推导自己算出的 Euler 特征标 q^{p·p/2−1}φ(q)^{2−D}（见 summary）在 D = 26 时是
+      φ^{−24}，与 Thm 2.7(ii) 的 p_{(24)} 一致——这正是第三条内证。**
+      ⇒ 本推导与目标卡的断言**不受影响**（两者都不从 (ii) 抄特征标）；
+      loc 的逐字引文按引用纪律保留原刊形态，statement 不改。
   - ref: fgz-1986
     loc: "**p.8445 左栏**（V(E,p) 的分次与形式特征标）逐字：'The module V(E, p) is also a graded ℒ-module under the following definition of grading: deg α^{μ₁}_{m₁} … |p⟩ = (Σ^N_{i=1} m_i) − (p·p/2). The formal character of V(E, p) is given by ch_q(V(E, p)) = q^{p·p/2}φ(q)^{−D}.'；**Theorem 2.7 之后一句** 'Theorem 2.7 implies that the cohomology groups are trivial except for a one-dimensional H^0_∞ in the positive-definite case, but H^0_∞ can be arbitrarily large in the indefinite case.'"
     note: |

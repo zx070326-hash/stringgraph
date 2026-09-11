@@ -90,6 +90,30 @@ sources:
       本卡只承担 "ℒ⁻-free" 这一半。
 tags: [worldsheet, bosonic-string, virasoro, fock-module, free-module, representation-theory]
 notes: |
+  ★【2026-09-12 auditor 页图裁定：原刊 `ch_q T = q^{p·p/2}φ(q)^{D−2}` 漏了负号】
+  本卡 statement 的「本卡不断言的内容 (c)」里**逐字引用**了 FGZ Prop 2.6(ii) 的
+  `ch_q T = q^{p·p/2}φ(q)^{D−2}`；sources 第一条的 loc 里也有同一句。
+  physics-auditor 于 2026-09-12 用 p.8445 页图 8× 放大复核后裁定
+  （`literature/extractions/page-check-rulings-2026-09-12.md` §2.3，摘要在
+  `brst-cohomology-sources.md` §9.12）：**`D` 前确无负号，这是原刊排印错误，
+  正确的是 `ch_q T = q^{p·p/2} φ(q)^{−(D−2)}`。** 三条彼此独立的内证：
+    (1) φ(q)^{D−2}（D ≥ 3）展开有负系数，不可能是分次向量空间的特征标；
+    (2) 由 [2.4] 直接算（不可约 Verma 模的 ℒ⁺-不变子空间是一维最高权向量）得
+        ch_q T = Σ_k p_{(D−2)}(k) q^{p·p/2+k} = q^{p·p/2} φ(q)^{−(D−2)}；
+    (3) Thm 2.7(ii) 的 dim H⁰ = p_{(24)}(1 − p·p/2) 是 φ^{−24} 的系数，与 Euler 特征标
+        q^{−1}φ²·q^{p·p/2}φ^{−D} = q^{p·p/2−1}φ^{−(D−2)} 一致。
+  同页 `ch_q V(E,p) = q^{p·p/2}φ(q)^{−D}` 的负号清晰可见，故可排除「扫描丢字」。
+
+  **本卡的处理（lead 裁决 2026-09-12）：statement 一字不改。** 理由有二：
+    (a) 原则 1（陈述文本不可变）——要改就得换代，而本卡的**命题内容是 (i) 自由性**，
+        那句话出现在「**本卡不断言**」的否定小节里，是对 FGZ (ii) 的逐字转引，
+        不是本卡的任何断言；为一处转引换代不成比例，且会沿图波及所有下游边。
+    (b) 逐字引文按引用纪律本就该保留原刊形态（与 sources.loc 同一口径）。
+  ⚠ **下游纪律**：**凡要把该特征标写进自己 statement 的新卡，一律写 `φ(q)^{−(D−2)}`**，
+  并在 sources.loc 的逐字引文里保留 `φ(q)^{D−2}` + 注明本裁定。
+  ⚠ 记账提醒：auditor 在 rulings §2.4 的表里把本卡第 33 行归为「sources.loc 里的逐字引文」，
+  **实际它在 statement 里**（否定小节内）。差别不影响裁定与处理，登记于此以免下次误判。
+
   ★★【为什么单建这张卡（curator，2026-09-11，small-backlog-10）】
   在此之前，"Fock 模在 ℒ⁻ 下自由"这条性质在图上**没有节点**，
   worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 只能把它挂在

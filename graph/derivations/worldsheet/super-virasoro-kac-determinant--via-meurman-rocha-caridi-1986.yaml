@@ -1,0 +1,200 @@
+id: worldsheet.super-virasoro-kac-determinant--via-meurman-rocha-caridi-1986
+target: worldsheet.super-virasoro-kac-determinant
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.super-virasoro-algebra
+    inferred: true
+    convention_map: |
+      **两张卡用的是两套不同的归一化，换算是 auditor 自算、MRC 原文没有这张表。**
+
+      本图的 math.super-virasoro-algebra 按 conv.virasoro-standard 写：
+        [L_m, L_n] = (m−n) L_{m+n} + (c/12)(m³−m) δ_{m,−n} ,
+        {G_r, G_s} = 2 L_{r+s} + (c/12)(4r²−1) δ_{r,−s} ,
+        [L_m, G_r] = ((m−2r)/2) G_{m+r} 。
+      （注：(c/12)(4r²−1) = (c/3)(r²−¼)，与常见写法恒等。）
+
+      目标卡按 conv.super-virasoro-central-charge-mrc（MRC p.263）写：
+        [L_i, L_j] = (j−i) L_{i+j} + δ_{i,−j} ((i³−i)/8) L'₀ ,
+        [G_i, G_j] = −2 L_{i+j} + δ_{i,−j} (1/2)(i²−¼) L'₀ ,
+        [L_i, G_j] = (j − ½i) G_{i+j} 。
+
+      字典（page-check-rulings-2026-09-12.md §1.4，**每一项都是推断**）：
+        L^{MRC}_i = − L^{std}_i ,  G^{MRC} = G^{std} ,  **c^{MRC} = (2/3) c^{std}** ,
+        h^{MRC} = − h^{std}（前提 e₀⁺ = L₀^{MRC}，该前提未核实），
+        (r, s)^{MRC} = ½ (r, s)^{std} 。
+      四条校验见 conv.super-virasoro-central-charge-mrc 的 notes (D)。
+
+      ⚠ **本推导的结论不依赖这张字典**：目标卡的 statement 整篇写在 MRC 变量里，
+      从头到尾没有出现 c^{std}。字典只用于回答「MRC 的 n̂s / r̂ 与本图的 SVir_{1/2} / SVir_0
+      是不是同一个代数」这个**对象识别**问题——而那正是本边标 inferred 的原因。
+    note: |
+      供给目标卡里的两个代数对象：MRC 的 n̂s（G 的指标在 ½+ℤ）与 r̂（G 的指标在 ℤ），
+      即本图的 math.super-virasoro-algebra 在 ν = ½ 与 ν = 0 两个分支。
+
+      **为什么标 `inferred: true`**：MRC **不**引用本图那张定义卡的来源（Polchinski Vol. 2
+      §10.2），两处的括号在**符号与归一化上都不同**（上面的 convention_map），
+      而「这两组括号定义的是同一个（同构的）李超代数」这一步在 MRC 原文里找不到论证——
+      它是 auditor 2026-09-12 用四条一致性校验**自算**出来的（rulings §1.4，
+      auditor 自己标注为「非原文」，并特别声明 MRC Sect. 2 对 e₀^± 的定义本项目未读）。
+      按根 CLAUDE.md 原则 5（每条边都要能在 sources.loc 指向的位置找到论证），
+      本边**必须**标 inferred。
+  - id: conv.virasoro-standard
+    inferred: true
+    convention_map: |
+      **c^{MRC} = (2/3) c^{std}**（以及 L^{MRC}_i = −L^{std}_i、G^{MRC} = G^{std}、
+      h^{MRC} = −h^{std}、(r,s)^{MRC} = ½(r,s)^{std}）。全表与四条校验见
+      conv.super-virasoro-central-charge-mrc 的 notes (D)。
+    note: |
+      按 lead 指令显式挂出的**约定边**：目标卡声明的是非 canonical 的
+      conv.super-virasoro-central-charge-mrc，本边把它与 family `virasoro` 的 canonical 成员
+      conv.virasoro-standard 之间的换算记在图上，使下游能查到「本卡的 c 不是本图通用的 c」。
+      **标 `inferred: true`**：该换算是 auditor 自算，**MRC 原文没有这张表**
+      （page-check-rulings-2026-09-12.md §1.4 逐字标注「auditor 自算，非原文」）。
+      ⚠ 约定节点不参与有效状态的 min 传播（docs/STATUS_LEVELS.md），
+      故本边不影响本推导的 effective；它只承载可追溯性。
+sources:
+  - ref: meurman-rocha-caridi-1986
+    loc: "**Sect. 3, eqs. (7), (7'), (8), (9), p. 274**（被证的陈述本身；**原文无定理号**）；重数函数 p̂ / p̃ 的定义 **Proposition 3.6, p. 270**"
+    note: |
+      L1 逐字（auditor 2026-09-12 页图，rulings §1.1–§1.2）。这是**目标卡陈述的出处**，
+      不是证明的出处；证明在 Sect. 4，见下面两条。
+      ⚠ **引用纪律**：该公式在原文里没有编号定理，只能按 `Sect. 3, eqs. (7)–(9), p. 274` 定位。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**Proposition 4.10, p. 283**（h-次数计数）逐字：「*For* i ∈ ½ℕ, *set* d̂(i) = #{(r,s) | 2rs = i, r,s ∈ ½ℕ, r − s ∈ ℤ} *if* 𝔤 = n̂s, *and* d̂(i) = #{(r,s) | 2rs = i, r,s ∈ ½ℕ, r − s ∈ ½ + ℤ} *if* 𝔤 = r̂. *Then* (1) h-deg det( , )_{h,c,n} = Σ_{i ∈ ½ℕ, i ≦ n} p̂(n−i) d̂(i) *if* 𝔤 = n̂s; (2) h-deg det( , )_{h,c,n,γ} = ½ p̂(n) + Σ_{i=1}^{n} p̂(n−i) d̂(i) *if* 𝔤 = r̂.」"
+    note: |
+      L1 逐字（auditor 2026-09-12，rulings §1.3）。**这是本推导「status: rigorous」的主判据之一**：
+      一条 CMP 编号命题，带印出的证明。
+      ★ 三条内部一致性（auditor 记，本图转录）：
+        · d̂ 数的是**有序对**（不带 r ≦ s），与 ψ_{r,s}（r < s）的 h-次数为 2、ψ_{r,r} 为 1 相符；
+        · (2) 里那个孤立的 **½ p̂(n)** 正是目标卡 (9) 的前因子 (h + c/16) 的指数，
+          两处独立出现、数值相同——这是「无 ±」读数的一条内证；
+        · 同一条命题同时覆盖 𝔤 = n̂s 与 𝔤 = r̂，是目标卡把两扇区合成一卡的依据之一。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**Proposition 4.13, p. 286**（det 在不可约因子的簇上取零）逐字：「*Let* h, c ∈ ℂ, γ ∈ ℤ₂. *Let* r, s ∈ ½ℕ, r ≦ s, *and* r − s ∈ ℤ *if* 𝔤 = n̂s, r − s ∈ ½ + ℤ *if* 𝔤 = r̂. *Then* det( , )_{h,c,2rs,γ} *vanishes on* 𝒱_{r,s}. *Furthermore, if* 𝔤 = r̂, n ∈ ℤ₊, *then* det( , )_{h,c,n,γ} *vanishes on* 𝒱_{0,0}.」"
+    note: |
+      L1 逐字（auditor 2026-09-12，rulings §1.3）。**status: rigorous 的第二条主判据。**
+      ★ 末句的 𝒱_{0,0}（只对 𝔤 = r̂）正是 (h + c/16) 这个额外因子的零点簇，
+      与 Prop 4.10 (2) 的 ½p̂(n) 配成 (9) 的前因子。
+      ⚠ 目标卡**不**抄 𝒱_{r,s} 的定义（MRC 对它的定义本项目未逐字取），
+      故本条只作为「证明存在且可定位」的依据，不向目标卡输送任何公式。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**「Proof of the Determinant Formulas」, pp. 286–287**（无编号段，Sect. 4 末），末句逐字：「This, (38) and Proposition 13 show that ψ_{r,s}(h,c)^{p̂(n−2rs)} divides det( , )_{h,c,n,γ}. The degree computation of Proposition 4.10 gives (8) and (9). Q.E.D.」"
+    note: |
+      L1 逐字（auditor 2026-09-12，rulings §1.3）。**这是「(8) 与 (9) 确实被证明了」的直接证据**，
+      也是本推导 summary 里那条论证骨架的出处：对 n 归纳 → 整除性（Prop 4.13）→ 次数配平（Prop 4.10）。
+      ⚠ **原文印的「Proposition 13」是「Proposition 4.13」的漏号**（auditor 判定）；
+      本图一律写 4.13 并在此注明，**不得**在图里出现「Proposition 13」。
+      ⚠ **(38) 本项目未逐字取**，故「归纳的每一步都成立」本图未逐行复核（见 gaps）。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**p. 264** 章节导览逐字：「… We conclude this section with the proof of the determinant formulas which consists of two parts: the degree computation (**Proposition 4.10**) and the proof of the vanishing of the determinant on the variety of its irreducible factors (**Proposition 4.13**).」"
+    note: |
+      L1 逐字（researcher 2026-09-11，math-sources.md §55.2）。
+      **作者自陈的证明结构**，与上面三条 Sect. 4 的读数一致。
+      ⚠ 同一段也是「行列式公式无定理号」的作者自证（「The determinant formulas are **stated at the
+      end of this section**」），故本条同时锁死本推导与目标卡的 loc 写法。
+  - ref: meurman-rocha-caridi-1986
+    loc: "**p. 264 脚注 2** 逐字：「After this work was completed, D. Friedan informed us that **Curtright and Thorn** had also succeeded to prove these formulas.」"
+    note: |
+      **旁证，不承担本推导的任何步骤。** 记录「NS/R 行列式至少有两条独立证明线」这一事实
+      （MRC 的顶点算子路线 vs Curtright–Thorn 的对偶模型路线）。
+      ⚠ 该线是否就是 thorn-1984、还是另有一篇 Curtright–Thorn 合作文章，**本项目未查（L0）**；
+      故本图**不**为它建第二条推导（math-sources.md Q55.5）。
+summary: |
+  本推导没有独立的论证步骤：目标卡的陈述**逐字就是** Meurman–Rocha-Caridi 1986
+  Sect. 3 的公式 (7)(7')(8)(9)（p. 274）配 Proposition 3.6（p. 270）对 p̂ / p̃ 的定义。
+  本推导做的是两件事：(1) 把 MRC 的两个代数对象接到本图的 math.super-virasoro-algebra；
+  (2) 把 MRC 的变量与本图 conv.virasoro-standard 的关系记到图上（两条边都标 inferred，
+  理由见各自 note）。
+
+  **MRC 一侧的证明链（本图只转录，不复核）**，全在 Sect. 4，作者在 p. 264 自陈为两部分：
+
+    (a) **Proposition 4.13（p. 286）**：对每个满足指标条件的 (r,s)，
+        det( , )_{h,c,2rs,γ} 在簇 𝒱_{r,s} 上取零；𝔤 = r̂ 时还对一切 n ∈ ℤ₊ 在 𝒱_{0,0} 上取零。
+        ⇒ 每个 ψ_{r,s} 都整除行列式（𝔤 = r̂ 另加 (h + c/16) 这个因子）。
+    (b) **Proposition 4.10（p. 283）**：行列式的 h-次数等于 Σ p̂(n−i) d̂(i)
+        （𝔤 = r̂ 另加一项 ½ p̂(n)）。
+    (c) **「Proof of the Determinant Formulas」（pp. 286–287）**：对 n 归纳，
+        由 (a) 得到整除性（末句逐字「This, (38) and Proposition 13 show that
+        ψ_{r,s}(h,c)^{p̂(n−2rs)} divides det( , )_{h,c,n,γ}」——原文漏印「4.」），
+        再由 (b) 的次数配平断定不多不少，得 (8) 与 (9)。
+
+  ⇒ **整除性 + 次数配平**这条标准路线把行列式定到相差一个常数为止；
+  那个常数正是目标卡 (D) 说的「依基底选择的非零常数，原文已省略」。
+  **这解释了为什么目标卡不能、也不该写 α_N**：MRC 的证明结构本身就不定出它。
+
+  【为什么 status: rigorous】四条：
+  (1) 证明的两根支柱是**带编号的 CMP 命题**（Proposition 4.10 / Proposition 4.13），
+      两条的语句都已逐字核实（L1 页图，auditor 2026-09-12），且各自**带印出的证明**；
+  (2) 收尾的归纳段（pp. 286–287）也印在文中，末句显式说「gives (8) and (9). Q.E.D.」，
+      不是「imply the following」式的一笔带过；
+  (3) 论证全在有定义的表示论范畴里（最高权模、逆变形式、行列式的零点簇、h-次数计数），
+      不涉及路径积分、不涉及收敛性；
+  (4) 期刊是 Communications in Mathematical Physics，且作者自陈另有一条独立证明线
+      （Curtright–Thorn，p. 264 脚注 2）。
+  ⚠ 与 worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989
+  的记账口径一致（「已核实的编号命题 + 其原文印出的证明 + 可定位的上游」），
+  **不是**按逐行复核给的——见 gaps。
+gaps:
+  - |
+    **归纳段的中间步骤未逐行复核。** 「Proof of the Determinant Formulas」(pp. 286–287) 的末句引了
+    **(38)**，而 (38) 本项目**未逐字取**；Proposition 4.10 与 4.13 各自的**证明体**也只取了语句，
+    没有逐行读。⇒ 本推导的 rigorous 是按「两条编号命题 + 一段印出的归纳 + 作者自陈的结构」给的。
+    关闭方式：取 pp. 283–287 全部页图并逐行复核（math-sources.md 的 Q55.3 已结清**语句**，
+    **证明体**仍是 L0）。
+  - |
+    **ℕ 是否含 0 未由原文定。** 目标卡 statement (A) 按 ℕ ∌ 0 读，依据是 auditor 的两条论证
+    （伪因子 / d̂(0) 无穷；n = ½ 的反面校验），auditor 自己标注为「解读，非原文明写」。
+    ⇒ 这是**目标卡陈述里唯一的非逐字成分**。关闭方式：在 MRC 全文里找到 ℕ 的约定句
+    （本项目读过 p.263–268、270–276、283、286–287、293–294，未见）。
+  - |
+    **原文印「if n ≧ 0」而目标卡写「n ≥ 1」。** auditor 判定 (9) 在 n = 0 处字面不成立
+    （指数 ½p̂(0) = ½ 非整数），实际适用范围是 n ≥ 1，n = 0 由原文单列的两个值给出。
+    ⇒ 这是对**原文适用范围的一次收紧**，属 auditor 的推理而非原文，本图照其裁定落地。
+    若日后发现 MRC 别处对 n = 0 另有约定，须回头改目标卡（按原则 1 即换代）。
+  - |
+    **对象识别边是 inferred。** 「MRC 的 n̂s / r̂ 与本图 math.super-virasoro-algebra 的
+    ν = ½ / ν = 0 分支是同一个（同构的）李超代数」这一步**在 MRC 原文里没有论证**，
+    只有 auditor 自算的符号字典与四条一致性校验（rulings §1.4），
+    且其中 h^{MRC} = −h^{std} 依赖**未核实**的前提 e₀⁺ = L₀^{MRC}（MRC Sect. 2 本项目未读）。
+    ⇒ 关闭方式：读 MRC Sect. 2 对 e₀^± 的定义。**在那之前，任何把本卡的公式改写成
+    conv.virasoro-standard 变量的下游节点都必须自己标 inferred 并带这条字典。**
+  - |
+    **Prop 3.6 (3) 的条件在两处转录中不一致，本卡未用到但须记账。**
+    auditor 的逐字转录写「If λ(e₀) = −λ(e₀⁺)/16」，而 math-sources.md §55.4 记的
+    Proposition 3.10 条件是「λ(e₀⁺) = −λ(e₀')/16」（即 h = −c/16）。目标卡的 statement
+    **不使用 (3)**（(3) 只是解释 (9) 前因子指数来历的旁证），故两卡均不受影响；
+    但若日后要为 S(λ) 或 Prop 3.10 建卡，**必须先复核 p.270 的这一行**。
+  - |
+    **证明的第二条线（Curtright–Thorn）未登记。** MRC p.264 脚注 2 说 Curtright 与 Thorn
+    也证出了「these formulas」，但本项目不知道那是 thorn-1984（标题即「Computing the Kac
+    determinant using dual model techniques」）还是另有一篇合作文章（math-sources.md Q55.5，L0）。
+    ⇒ 本轮**不**为它建第二条推导。若日后取到，那将是本目标卡的一条**独立**推导，
+    可用于交叉检验本条的转录。
+notes: |
+  【本推导在图上的作用】
+  它让 worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989
+  的上游第一次可接线：LZ 1989 Proposition 2.18 的证明首段逐字用「By Kac's determinant **[22]**
+  formula」，而 [22] = meurman-rocha-caridi-1986 = 本推导的来源。
+  那条推导的 gaps 第一条 (a)（「超 Virasoro Kac 行列式待 auditor 复核 / 待建」）随本卡建立而关闭，
+  并已改为一条指向目标卡的**非 inferred** 边。
+
+  【与玻色侧 worldsheet.kac-determinant-v2 的分工】
+  两卡**互不依赖**，且**不得互相顶替**：玻色版是 Virasoro 的 Shapovalov 行列式
+  （指标 r,s ≥ 1 整数、重数 p(N−rs)、无 (h+c/16) 因子、变量按 conv.virasoro-standard），
+  超版是本卡。两条链在图上同型但平行：
+    · 玻色：FGZ Prop 2.6(i) → 玻色 Kac 行列式（worldsheet.kac-determinant-v2）；
+    · 超：  LZ Cor 2.19(iii) → (24)(25) → 超 Kac 行列式（本目标卡）。
+  ⚠ 两篇来源文献**互不引用**（FGZ 的 refs 10/11 = Kac ICM + Feigin–Fuks；LZ 的 [22] = MRC），
+  编号也完全不同（brst-cohomology-sources.md §10.1 专门警告）。
+
+  【一个 curator 的重算（非文献，登记备查）】
+  目标卡 (C) 的 (8) 在 n = ½ 处：指标条件 2rs ≦ ½、r ≦ s、r−s ∈ ℤ、r,s ∈ ½ℕ(∌0)
+  只允许 (r,s) = (½,½)，指数 p̂(½−½) = p̂(0) = p̃(0) = 1，
+  且 ψ_{½,½}(h,c) = h + (1/16)(1−c)(4·¼−1) = h。
+  ⇒ det( , )_{h,c,1/2} = h（相差省略的常数），与 Prop 3.6 (1) 给的
+  dim M(ℂ(λ))^{λ−(½)δ} = p̃(1) = 1 相容。
+  这与 auditor 在 rulings §1.2 里做的反面校验是同一条，本图独立重算一次，结果一致。
+  **这不是本推导的一个步骤**，只是转录可信度的一个数据点。
+author: curator
+created: "2026-09-12"

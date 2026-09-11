@@ -148,6 +148,25 @@ sources:
       **不如**超弦侧 LZ Proposition 5.5 的逐字反例陈述精确。
 tags: [bosonic-string, brst, cohomology, vanishing-theorem, semi-infinite-cohomology]
 notes: |
+  ★【2026-09-12 auditor 页图裁定：原刊 `ch_q T = q^{p·p/2}φ(q)^{D−2}` 漏了负号】
+  本卡 statement 的「不断言 (g)」与 sources 里 Prop 2.6 的 loc 都出现这条特征标。
+  physics-auditor 于 2026-09-12 用 p.8445 页图 8× 放大复核后裁定
+  （`literature/extractions/page-check-rulings-2026-09-12.md` §2.3，摘要在
+  `brst-cohomology-sources.md` §9.12）：**`D` 前确无负号，这是原刊排印错误，
+  正确的是 `ch_q T = q^{p·p/2} φ(q)^{−(D−2)}`**（三条内证：φ^{D−2} 有负系数不能是特征标；
+  由 [2.4] 直接算得 Σ_k p_{(D−2)}(k) q^{p·p/2+k}；Thm 2.7(ii) 的 p_{(24)} 是 φ^{−24} 的系数）。
+  **本卡 statement 一字不改**（lead 裁决 2026-09-12）：那句话在「**本卡不断言**」的否定小节里，
+  是对 FGZ (ii) 的逐字转引，而本卡的命题是 Theorem 2.7(i) 的消灭性，不涉及该特征标。
+  ⚠ **下游纪律**：要把该特征标写进自己 statement 的新卡一律写 `φ(q)^{−(D−2)}`，
+  sources.loc 的逐字引文则保留 `φ(q)^{D−2}` 并注明本裁定。
+
+  ★【同一轮的第二条裁定：FGZ 的 `D ≥ 2`（语句）与 `D > 2`（证明梗概）不是排印不一致】
+  两处页图均清晰、**各指其物**：`D > 2` 是梗概里 `V(E',p')` Verma 分解的前提
+  （E' 号差 (D−1,0) ⇒ c = D−1，用到的 Kac 事实要 c > 1）；`D = 2` 由梗概末尾括注
+  "(in fact for any r ≥ 2 **or s ≥ 1**)" 的 s = 1 分支覆盖。
+  ⇒ 引用 Prop 2.6 时 **D ≥ 2 照写，不要「订正」成 D > 2**。详见
+  worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986 的 gaps 末条。
+
   ★★【本卡为什么新建（curator，2026-09-11）】
   FGZ Theorem 2.7(i) 此前只以 **source** 的形式出现在 worldsheet.no-ghost-theorem-brst--via-fgz
   的 sources 里（"本节点断言 (1)「上同调集中在单一鬼数」的严格来源"），图上没有节点。
