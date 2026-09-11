@@ -306,4 +306,104 @@ theorem oscPair_eq_lightCone (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ
 
 end Completeness
 
+/-! ### `L_{-n}` on a rung vacuum, for every `n` -/
+
+section LopVacuum
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- `|i|` as a positive natural, for `i < 0`; definitionally the index produced by
+`Fock.mode_of_neg`. -/
+def negPNat (i : ℤ) : ℕ+ := (-i).toNat.toPNat'
+
+@[simp]
+lemma negPNat_neg_coe (n : ℕ+) : negPNat (-((n : ℕ) : ℤ)) = n := by
+  refine PNat.coe_injective ?_
+  rw [negPNat, Nat.toPNat'_coe, if_pos (by simp)]
+  simp
+
+/-- A normal-ordered pair of two strictly negative modes on the vacuum is just the product of
+the two variables; normal ordering is invisible because both factors are creation
+operators. -/
+lemma nordPair_apply_one_of_neg (η p : Fin D → R) {i j : ℤ} (hi : i < 0) (hj : j < 0) :
+    Fock.nordPair η p i j (1 : Fock D R)
+      = ∑ μ : Fin D, η μ •
+          ((X ((μ, negPNat i) : Osc D) : Fock D R) * X ((μ, negPNat j) : Osc D)) := by
+  rcases le_total i j with h | h
+  · rw [Fock.nordPair_apply_of_le η p h]
+    refine Finset.sum_congr rfl fun μ _ => ?_
+    rw [Fock.mode_of_neg η p hj, Fock.mode_of_neg η p hi]
+    simp [negPNat]
+  · rw [Fock.nordPair_comm, Fock.nordPair_apply_of_le η p h]
+    refine Finset.sum_congr rfl fun μ _ => ?_
+    rw [Fock.mode_of_neg η p hi, Fock.mode_of_neg η p hj]
+    simp only [Fock.creation_apply, mul_one, negPNat]
+    rw [mul_comm]
+
+/-- The zero-mode end of the Sugawara sum: `:α_{-n}·α_0:|0;p⟩ = α^p_{-n}|0;p⟩`. -/
+lemma nordPair_neg_zero_apply_one (η p : Fin D → R) (n : ℕ+) :
+    Fock.nordPair η p (-((n : ℕ) : ℤ)) 0 (1 : Fock D R) = lcCrea η p n := by
+  rw [Fock.nordPair_apply_of_le η p (by simp : (-((n : ℕ) : ℤ)) ≤ 0), lcCrea_def]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [Fock.mode_zero_apply, Fock.mode_neg_pnat, map_smul, Fock.creation_apply, mul_one,
+    smul_smul]
+
+variable [Algebra ℚ R]
+
+/-- **`L_{-n}` on the vacuum, for every `n ≥ 1`** (blueprint §B′.4; the repository previously
+had only `Fock.Lop_neg_one_apply_one` and `Fock.Lop_neg_two_apply_one`):
+
+`L_{-n}|0;p⟩ = α^p_{-n}|0;p⟩ + ½ ∑_{l=1}^{n-1} ∑_μ η_μ α^μ_{-(n-l)} α^μ_{-l}|0;p⟩`.
+
+Only the terms with both mode indices `≤ 0` survive on the vacuum, and the two endpoints of
+that range (`m = 0` and `m = -n`) are equal by symmetry of normal ordering, which is where the
+`½` is spent. -/
+theorem Lop_neg_apply_one (η p : Fin D → R) (n : ℕ+) :
+    Fock.Lop η p (-((n : ℕ) : ℤ)) (1 : Fock D R)
+      = lcCrea η p n
+        + invTwo R • ∑ m ∈ Finset.Ioo (-((n : ℕ) : ℤ)) 0,
+            ∑ μ : Fin D, η μ •
+              ((X ((μ, negPNat (-((n : ℕ) : ℤ) - m)) : Osc D) : Fock D R)
+                * X ((μ, negPNat m) : Osc D)) := by
+  classical
+  have hn : (0 : ℤ) < ((n : ℕ) : ℤ) := by exact_mod_cast n.2
+  have hs : ∀ j ∉ Finset.Icc (-((n : ℕ) : ℤ)) 0,
+      Fock.nordPair η p (-((n : ℕ) : ℤ) - j) j (1 : Fock D R) = 0 := by
+    intro j hj
+    rw [Finset.mem_Icc, not_and_or] at hj
+    refine Fock.nordPair_apply_eq_zero_of_modeBound_lt η p _ _ ?_
+    rw [Fock.modeBound_one, Nat.cast_zero]
+    rcases hj with h | h
+    · exact lt_of_lt_of_le (by omega) (le_max_left _ _)
+    · exact lt_of_lt_of_le (by omega) (le_max_right _ _)
+  rw [Fock.Lop_apply η p (-((n : ℕ) : ℤ)) 1 hs]
+  rw [← Finset.Ioc_insert_left (by omega : (-((n : ℕ) : ℤ)) ≤ 0),
+    ← Finset.Ioo_insert_right (by omega : (-((n : ℕ) : ℤ)) < 0),
+    Finset.sum_insert (by simp), Finset.sum_insert (by simp)]
+  have h0 : Fock.nordPair η p (-((n : ℕ) : ℤ) - 0) 0 (1 : Fock D R) = lcCrea η p n := by
+    rw [sub_zero]
+    exact nordPair_neg_zero_apply_one η p n
+  have hend : Fock.nordPair η p (-((n : ℕ) : ℤ) - (-((n : ℕ) : ℤ))) (-((n : ℕ) : ℤ))
+      (1 : Fock D R) = lcCrea η p n := by
+    rw [sub_self, Fock.nordPair_comm]
+    exact nordPair_neg_zero_apply_one η p n
+  have hmid : ∀ m ∈ Finset.Ioo (-((n : ℕ) : ℤ)) 0,
+      Fock.nordPair η p (-((n : ℕ) : ℤ) - m) m (1 : Fock D R)
+        = ∑ μ : Fin D, η μ •
+            ((X ((μ, negPNat (-((n : ℕ) : ℤ) - m)) : Osc D) : Fock D R)
+              * X ((μ, negPNat m) : Osc D)) := by
+    intro m hm
+    rw [Finset.mem_Ioo] at hm
+    exact nordPair_apply_one_of_neg η p (by omega) hm.2
+  rw [h0, hend, Finset.sum_congr rfl hmid]
+  rw [show lcCrea η p n + (lcCrea η p n + ∑ m ∈ Finset.Ioo (-((n : ℕ) : ℤ)) 0,
+        ∑ μ : Fin D, η μ • ((X ((μ, negPNat (-((n : ℕ) : ℤ) - m)) : Osc D) : Fock D R)
+          * X ((μ, negPNat m) : Osc D)))
+      = (2 : R) • lcCrea η p n + ∑ m ∈ Finset.Ioo (-((n : ℕ) : ℤ)) 0,
+        ∑ μ : Fin D, η μ • ((X ((μ, negPNat (-((n : ℕ) : ℤ) - m)) : Osc D) : Fock D R)
+          * X ((μ, negPNat m) : Osc D)) from by rw [two_smul]; abel]
+  rw [smul_add, smul_smul, invTwo_mul_two, one_smul]
+
+end LopVacuum
+
 end StringFormal.NoGhost
