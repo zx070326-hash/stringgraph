@@ -107,6 +107,12 @@ StringFormal/
   Math/E8Roots.lean       E₈ 240 根显式列表；幂和 Σ(α·x)^k = 60Σx² / 36(Σx²)² / 30(Σx²)³ 对**任意 x ∈ ℚ⁸**（分块 + 符号二项展开，避免 240 项 ring）；⇒ (12b′)(12c′)。**Tr₂₄₈ = 根幂和 + Chevalley 限制**是 docstring 假设不在 Lean 内
   Math/GreenSchwarzAlgebraGen.lean  GS 因子化在**任意交换 ℚ-代数**上（scope 修正：Ω 形式活在带幂零元的环，非域；技巧：`h48 : 48 * algebraMap ℚ R (1/48) = 1` 由 `map_ofNat`+`norm_num`，再 `linear_combination`）；`mixed_anomaly_so_each_gives_32`、`tr_f6_usp_ge_33`
   NoGhost/FockGram.lean            创生单项式 Gram 矩阵对角、`∏ n^d d!`；条件版 `pairing_creationMonomial_of_hypotheses`（任意双线性型 + (H2)(H3)(H4)）；`ZMod 2` 退化反例（需特征零）
+  NoGhost/HeisenbergGram.lean      **抽象** Heisenberg 族的 Gram（任意 R-模 M）：`gram_of_heisenberg_family`
+                            `⟨mono d, mono e⟩ = δ_{d,e} ∏ n^d d!`，只用 CCR/伴随/真空归一/真空湮灭；
+                            (H1) 由 CCR 推出（`commute_heisCreation`）；单项式用 `Multiset.noncommProd`；
+                            附 `finsupp_addSingle_induction`（Mathlib 缺）、`heisNorm_pos/_ne_zero`、
+                            `linearIndependent_heisMonomial`。**中心项归一成 `m δ_{ij}`（正交归一/横向）**，
+                            故 `FockGram.lean`（不定 η）**不是**它的实例，两者互补
   Virasoro/GenericIndependence.lean  `linearIndependent_of_gram_det_ne_zero`（任意交换整环、任意双线性型）；N≤4 Kac 行列式非零 ⇒ p(N) 个标准子态线性无关；**`finrank_levelSpan_{two,three,four}` = 2/3/5**（上界靠 `ordWord_sum_{three,four}` 枚举有序词，**不需要 `Nat.Partition` 计数**）；c=1,h=1/4 零向量 (L₋₂−L₋₁²)v
   NoGhost/Fock.lean         D 个玻色振子的代数 Fock 空间、level 分级、CCR、η 诱导的对称双线性型（无零模，见文件头 gaps）
   NoGhost/FockSigned.lean   有序环上 Fock 形式不定（D ≥ 2），每个 level 都有负模态
