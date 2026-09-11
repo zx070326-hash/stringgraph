@@ -60,6 +60,9 @@ worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止�
 StringFormal/
   Math/EulerPartition.lean  Euler 分拆生成函数 Σ p(N) X^N = ∏_{n≥1}(1-X^n)^{-1}（`PowerSeries`，
                             无逆元形式对任意交换环成立；域上给 `⁻¹` 形式）。独立小岛，不 import 其他子目录
+  Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
+  Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
+                            不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
