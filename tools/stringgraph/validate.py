@@ -169,7 +169,10 @@ def validate(g: Graph) -> list[Problem]:
             if node is None:
                 continue
             if node.superseded_by:
-                warn(where, f"depends on superseded statement '{dep.id}' (use {node.superseded_by})")
+                if node.kind == "proposition" and not g.derivations_for(dep.id):
+                    err(where, f"depends on superseded proposition '{dep.id}' which has no derivation left (effective open); retarget to {node.superseded_by} or restore the old derivation as history")
+                else:
+                    warn(where, f"depends on superseded statement '{dep.id}' (use {node.superseded_by})")
             # convention conflict: same family, different convention, no map
             for c in node.uses_conventions:
                 fam = conv_family(c)

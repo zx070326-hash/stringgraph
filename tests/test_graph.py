@@ -1247,3 +1247,40 @@ def test_validate_warns_when_derivation_target_is_superseded():
     msgs = [p.message for p in validate(g) if p.severity == "warning" and "is superseded by" in p.message]
     # duality.ads-cft is superseded by holography.ads5-cft4-duality-v2 and still has a derivation
     assert any("duality.ads-cft" in m for m in msgs)
+
+
+def test_validate_errors_when_dep_is_superseded_proposition_without_derivation(mini: Path):
+    """2026-09-11 事故：ch10-residuals 把旧推导 git mv 到新卡，旧卡（仍被 10 条推导依赖）
+    没有任何推导，effective 变 open，波及 40 个下游节点。这种情形一定是错的：
+    要么活边改指新卡，要么按 STATUS_LEVELS 把旧推导保留为历史。升为 error。"""
+    from stringgraph.validate import validate
+
+    _write(mini, "graph/statements/worldsheet/old-prop.yaml", """
+        id: worldsheet.old-prop
+        kind: proposition
+        title: old
+        statement: old
+        superseded_by: worldsheet.new-prop
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/statements/worldsheet/new-prop.yaml", """
+        id: worldsheet.new-prop
+        kind: proposition
+        title: new
+        statement: new
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/derivations/worldsheet/new-prop--via-x.yaml", """
+        id: worldsheet.new-prop--via-x
+        target: worldsheet.new-prop
+        kind: physical-argument
+        status: physical-argument
+        summary: s
+        depends_on: [{id: worldsheet.old-prop}]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    g = load_graph(mini)
+    errs = [p.message for p in validate(g) if p.severity == "error"]
+    assert any("has no derivation left" in m and "worldsheet.old-prop" in m for m in errs)
