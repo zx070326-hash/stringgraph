@@ -1,0 +1,51 @@
+id: math.euler-poincare-principle--via-rank-nullity
+target: math.euler-poincare-principle
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15 的证明**, p.317，逐字 'We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ).'"
+    note: |
+      L1 逐字（literature/extractions/lian-zuckerman-1989.md §9.2）。LZ 以 'We recall' 引入，**不证**；
+      本推导的证明是本图补的标准线性代数。
+  - ref: fgz-1986
+    loc: "**Proposition 1.3**, p.8443（Euler–Poincaré 原理，形式特征标版；陈述只有抽取记录 §1.4 编号表的一句话转述）"
+    note: |
+      页码/编号 L1，陈述内容非逐字。FGZ 在 PNAS 公告体裁里对 Prop 1.3 是否给证明本图**未核**。
+  - ref: hatcher-2002
+    loc: "§2.2 'Euler Characteristic'，Theorem 2.44 的证明（有限生成自由链复形的 rank 交错和 = 同调 rank 交错和；定理号凭记忆，L0）"
+    note: |
+      教科书里同一论证的整系数版本（rank 代替 dim），**未翻页核对**。
+summary: |
+  设 (C^•, d) 满足目标卡 (1) 的前提。对每个 n，秩–零化度定理给
+    dim C^n = dim Z^n + dim B^{n+1}      （Z^n = ker d_n，B^{n+1} = im d_n），
+  而按定义
+    dim H^n = dim Z^n − dim B^n          （B^n ⊆ Z^n，因 d² = 0）。
+  于是
+    Σ_n (−1)^n dim C^n = Σ_n (−1)^n dim Z^n + Σ_n (−1)^n dim B^{n+1}
+                       = Σ_n (−1)^n dim Z^n − Σ_n (−1)^n dim B^n        （指标平移 n+1 ↦ n 带出一个负号）
+                       = Σ_n (−1)^n dim H^n。
+  所有和都是有限和（只有有限多个 n 使 C^n ≠ 0，且 Z^n、B^n、H^n 的维数都以 dim C^n 为界），
+  故各步的重排合法。这证明 (1)。「特别地」一支是 (1) 在 H^n = 0（n ≠ 0）时的直接读数。
+
+  (2)：d 保持分次，故 Z^n、B^n、H^n 都按 λ 分解（ker 与 im 逐分量取），H^n(C) = ⊕_λ H^n(C_λ)；
+  对每个 λ 用 (1)，再对 λ 形式求和即得形式特征标的等式。对固定的 λ 与 n，
+  dim C^n_λ 有限，形式和逐系数有定义，不涉及收敛。
+
+  【为什么暂标 physical-argument】论证是完整的有限步线性代数，按 docs/STATUS_LEVELS.md
+  的例外条款（lead 裁决 2026-09-10）可标 rigorous，**前提是 reviewer 独立复核并在本 notes 登记
+  `reviewer-verified: <agent>, <date>`**。当前没有，故按「不确定选低一级」暂标 physical-argument。
+  复核后把本推导改为 kind: proof / status: rigorous 即可，目标卡与三条下游边不需要动。
+gaps:
+  - "**待 reviewer 复核升 rigorous**：summary 的证明是标准线性代数（秩–零化度 + 交错和伸缩），无文献逐行核对；按 docs/STATUS_LEVELS.md 例外条款需 `reviewer-verified: <agent>, <date>` 才可标 rigorous。"
+  - "**教科书定位未核**：hatcher-2002 的定理号 2.44 凭记忆；任一同调代数教科书第一章均有此陈述，researcher 可顺手补一条 L1 定位。"
+  - "**FGZ Prop 1.3 的陈述非逐字**：只有抽取记录 §1.4 表的一句话转述；FGZ 是否给证明未核。"
+notes: |
+  本推导没有依赖：命题只用向量空间的维数与线性映射的秩–零化度，本图对这些没有卡，也不该有
+  （与 math.euler-beta-integral--via-gamma-product 等纯数学底层卡同一处理）。
+  `validate` 对此报 "derivation has no dependencies" warning，是预期的。
+
+  curator，2026-09-11，small-backlog-12。
+author: curator
+created: "2026-09-11"

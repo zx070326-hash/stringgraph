@@ -1,0 +1,73 @@
+id: math.euler-poincare-principle
+kind: proposition
+title: Euler–Poincaré 原理（特征标版）：有限维复形的分次维数交错和等于其上同调的分次维数交错和，Σ_n (−1)^n dim C^n = Σ_n (−1)^n dim H^n(C)；逐权应用即形式特征标的交错和相等
+statement: |
+  设 k 是域，(C^•, d) 是 k-向量空间的上链复形：C^n（n ∈ Z）是 k-向量空间，
+  d_n : C^n → C^{n+1} 是 k-线性映射，d_{n+1} ∘ d_n = 0。记
+    Z^n := ker d_n，  B^n := im d_{n−1}，  H^n(C) := Z^n / B^n。
+
+  (1) **有限维版**。设每个 C^n 有限维，且只有有限多个 n 使 C^n ≠ 0。则
+        Σ_{n ∈ Z} (−1)^n dim_k C^n  =  Σ_{n ∈ Z} (−1)^n dim_k H^n(C)。
+      两端都是有限和。**特别地**：若 H^n(C) = 0 对一切 n ≠ 0，则
+        dim_k H^0(C) = Σ_{n ∈ Z} (−1)^n dim_k C^n。
+
+  (2) **分次版（(1) 逐权应用，不是独立断言）**。设 C^• 另带一个由 d 保持的分次
+        C^n = ⊕_{λ ∈ Λ} C^n_λ，  d_n(C^n_λ) ⊆ C^{n+1}_λ   （Λ 是任意指标集），
+      且对每个 λ，复形 (C^•_λ, d) 满足 (1) 的前提（每个 C^n_λ 有限维、只有有限多个 n 使
+      C^n_λ ≠ 0）。则 H^n(C) = ⊕_λ H^n(C_λ)，并对每个 λ 有 (1)；于是以形式特征标
+        ch C^n := Σ_λ (dim_k C^n_λ) q^λ,   ch H^n(C) := Σ_λ (dim_k H^n(C_λ)) q^λ
+      （Λ ⊆ Z 或 ½Z 时是形式 Laurent 级数，一般是 Λ 上的形式和）写出，有
+        Σ_{n} (−1)^n ch C^n  =  Σ_{n} (−1)^n ch H^n(C)。
+      左端在 FGZ 的记法里叫「形式 Euler 特征标」。
+
+  【本卡明确不断言】
+  (a) **不断言号差版**（Lian–Zuckerman 1989 p.317 逐字 'the Euler–Poincaré Principle for signature
+      states that Σ_n sign H^n = Σ_n sign C^n'）：那需要复形上的非退化厄米型与 d 的自伴性，
+      是另一条命题，本图尚无卡。
+  (b) 不断言 (1) 的前提可以放宽到「每个 C^n 有限维但无限多个非零」——那时两端都可能发散。
+  (c) 不断言任何关于具体复形（BRST 复形、半无限上同调复形）的事：把 (1)(2) 用到
+      C_rel(p,κ) 或 V ⊗ Λ^∞ 上时，「该复形满足前提」由引用它的推导各自负责。
+sources:
+  - ref: fgz-1986
+    loc: "**Proposition 1.3**, p.8443（§1.1 'Definitions and Basic Results'）：Euler–Poincaré 原理，Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ_m (−1)^m ch_q H^m_∞(g, V)（本卡 (2) 在半无限上同调复形上的实例）；**p.8445 左栏**逐字 'To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. The formal Euler character is …'"
+    note: |
+      页码与编号 L1（literature/extractions/brst-cohomology-sources.md §1.4 编号表：
+      'Prop. 1.3 | p.8443 | Euler–Poincaré：Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ (−1)^m ch_q H^m_∞(g, V)'）。
+      ⚠ **Prop 1.3 的陈述本图只有该表的一句话转述，不是逐字**；p.8445 那句是逐字（§9.9.3）。
+      FGZ 在 Theorem 2.7 正上方把 'the Euler–Poincaré principle (Proposition 1.3)' 明写为输入（§9.3 逐字）。
+      本卡 (2) 是 FGZ 用法的一般形式（半无限复形 V ⊗ Λ^∞ 按权分次，每个权空间是有限维复形）。
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.15 的证明**, p.317，逐字：'We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ).'；**Proposition 4.3(ii) 的证明**, p.330，逐字：'By the Euler–Poincaré Principle, we have Σ_{n∈Z}(−1)^n dim P̄_+C_rel = dim H^0(P̄_+C_rel).'"
+    note: |
+      L1 逐字（literature/extractions/lian-zuckerman-1989.md §9.2、§7.3）。
+      ★ **这是本图对本卡 (1) 唯一的逐字文献陈述**（LZ 以 'We recall' 引入，视为标准事实，不证）。
+      p.330 那句是 (1) 的「特别地」一支（先用 Theorem 2.4 消灭 n ≠ 0）。
+  - ref: hatcher-2002
+    loc: "§2.2 'Euler Characteristic' 小节，Theorem 2.44 及其证明里对有限生成自由链复形的 rank 交错和恒等式（定理号凭记忆，**未核实，L0**）"
+    note: |
+      教科书来源，只为说明本卡是标准线性代数事实；**本轮未翻页核对**（bib 条目登记时只读了 Ch.1）。
+      Hatcher 的版本是对有限 CW 复形的整系数链复形（rank 而非 dim），本卡取域上向量空间的上链版，
+      证明逐字相同（秩–零化度 + 交错和伸缩）。任何一本同调代数教科书的第一章都有此陈述。
+tags: [homological-algebra, linear-algebra, euler-characteristic, brst, cohomology]
+notes: |
+  【为什么立卡（curator 2026-09-11，small-backlog-12）】
+  三条推导逐字引用同一条原理而图里没有卡：
+    · worldsheet.bosonic-relative-cohomology-dimension--via-fgz-1986（FGZ Prop 1.3 → Prop 2.4 → Thm 2.7(ii)）；
+    · worldsheet.superstring-relative-cohomology-dimension--via-lian-zuckerman-1989（LZ Cor 2.15(i) 证明第 1 步）；
+    · worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989（LZ Prop 4.3(ii) 证明第 4 步）。
+  三条的 gaps 各记着「Euler–Poincaré 原理在本图无节点」（reviewer-batch23 首记），本卡关闭它们，
+  三条推导同批加边（非 inferred：各自原文逐字 'By the Euler–Poincaré Principle' / 'the Euler–Poincaré
+  principle (Proposition 1.3)'）。
+
+  【状态】推导 --via-rank-nullity 当前 **physical-argument**，理由不是论证弱，而是按
+  docs/STATUS_LEVELS.md 的 rigorous 例外条款：有限步初等计算可标 rigorous，**但须 reviewer 独立复核并
+  在推导 notes 写 `reviewer-verified: <agent>, <date>`**。复核后升 rigorous（届时改推导的 kind/status，
+  本卡不动）。三条下游推导的 effective 本已被各自的接口卡封在 physical-argument，
+  本卡当前状态**不改变**它们的 effective。
+
+  【号差版另立】LZ Cor 2.15(ii)（worldsheet.no-ghost-theorem-superstring-cohomological-v2 的推导）
+  用的是 signature 版：Σ sign H^n = Σ sign C^n，前提多一个非退化厄米型与 Q* = Q。
+  本卡「不断言 (a)」；建议另立 `math.euler-poincare-principle-signature`，届时该推导加边。
+  本轮该推导在 reviewer 的 claim（#349）内，未动。
+author: curator
+created: "2026-09-11"

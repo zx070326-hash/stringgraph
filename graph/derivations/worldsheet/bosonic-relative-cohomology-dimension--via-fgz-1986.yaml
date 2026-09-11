@@ -23,6 +23,21 @@ depends_on:
       worldsheet.brst-quantization-v2、worldsheet.brst-nilpotent-at-c26 三条接口边，
       本推导**不重复挂**，以免同一条论证被记两次（与 researcher §9.9.4 对 FGZ 四条输入
       逻辑冗余的订正同一精神）。
+  - id: math.euler-poincare-principle
+    inferred: false
+    note: |
+      【2026-09-11 新增，small-backlog-12】供给第 1 步「dim H⁰ = Eq. [2.3] 常数项」里把上同调维数
+      换成复形分次维数交错和的那一环（目标卡 (2) 分次版：形式 Euler 特征标 = 上同调特征标交错和）。
+      **非 inferred**：FGZ 在 Theorem 2.7 正上方逐字把 'the Euler–Poincaré principle (**Proposition 1.3**)'
+      列为输入（sources 第二条，§9.3），Prop 2.4 的紧邻上文逐字 'we apply the Euler–Poincaré principle'
+      （§9.9.3）。
+      ⚠ **有效状态后果**：该卡自身当前 physical-argument（待 reviewer 复核升 rigorous），
+      而本推导此前 effective = rigorous（notes【有效状态】：两条依赖都是 rigorous），
+      故本边把目标卡**压到 physical-argument**，`why` 的瓶颈只有这一支。
+      这是把此前隐含的输入显式化的正常代价（此前 gaps 自报「本图没有 Prop 1.3 的卡」）；
+      reviewer 复核该卡的秩–零化度证明并登记 `reviewer-verified` 后本推导自动回到 rigorous。
+      ⚠ 重复计数说明：FGZ 的四条输入里 Prop 1.3 既直接进入 Thm 2.7 又经 Prop 2.4 间接进入（§9.9.4）；
+      本图只挂这一条边，Prop 2.4 仍无卡。
   - id: worldsheet.fock-module-free-over-negative-virasoro
     note: |
       供给 **Proposition 2.4** 的核心假设："V 是 𝒪₀ 里的**厄米 ℒ⁻-自由** ℒ-模"——
@@ -135,11 +150,14 @@ gaps:
      四条输入、(c) 每条输入本身都是该文的编号命题。**未做**的是：逐行复核 Theorem 1.12 的证明
      （p.8444，用 Kähler 恒等式 Theorem 1.9 与谱序列滤过 Prop 1.10/1.11）与 Proposition 1.3
      （Euler–Poincaré）。researcher 未能定位 FGZ 的后续长文。"
-  - "**本图没有 Proposition 1.3（Euler–Poincaré 原理）的卡**：本推导第 1 步靠它把上同调维数
+  - "**〔2026-09-11 关闭，small-backlog-12〕本图没有 Proposition 1.3（Euler–Poincaré 原理）的卡**：本推导第 1 步靠它把上同调维数
      换成复形的分次维数交错和。同一缺口在超弦侧也有——
      worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989 的 gaps 第一条
      （reviewer-batch23）已记 'Euler–Poincaré 原理在本图无节点'，
-     `search` 无命中。⇒ 这是**跨卡的同一条缺口**，值得单建一张数学卡后一并接线。"
+     `search` 无命中。⇒ 这是**跨卡的同一条缺口**，值得单建一张数学卡后一并接线。
+     **已建卡 math.euler-poincare-principle（推导 --via-rank-nullity，待 reviewer 复核升 rigorous），
+     本推导与超弦侧两条推导同批加边（非 inferred）。** 残留：FGZ Prop 1.3 的陈述本图仍只有转述，
+     Prop 2.4 / Thm 1.12 仍无卡（下一条）。"
   - "**本图没有 Proposition 2.4 与 Theorem 1.12 的卡**：本推导把 Prop 2.4 的两半分开记账——
      消灭那一半经 worldsheet.bosonic-relative-cohomology-vanishing 上图，维数那一半
      （'coefficient of 1 in Eq. 2.3'）**只在本推导的 summary 与 sources 里以逐字形式存在**，
@@ -191,6 +209,12 @@ notes: |
   ⇒ 两条边，不重复记账。对象接口边（Virasoro 代数、BRST 量子化、幂零性）同样经消灭卡继承，
   本推导不重挂——这与 docs/STATUS_LEVELS.md「接口边」那节的精神一致：
   接口边应当挂在**第一次需要那个对象**的推导上，而不是每张下游卡各挂一份。
+
+  【2026-09-11 small-backlog-12：接 Euler–Poincaré 卡后 effective 暂降为 physical-argument】
+  新依赖 math.euler-poincare-principle（非 inferred，FGZ 明写 Prop 1.3 为输入）当前是
+  physical-argument——不是论证弱，而是按 docs/STATUS_LEVELS.md 例外条款等 reviewer 复核登记
+  `reviewer-verified` 后才可标 rigorous。复核完成后本推导自动回到 rigorous。
+  下面【有效状态（2026-09-11 实测）】一段自本段起过时（原文保留）。
 
   【有效状态（2026-09-11 实测）】
   两条依赖当日的 effective 都是 rigorous，故本卡 effective = rigorous，

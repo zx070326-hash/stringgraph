@@ -51,6 +51,15 @@ depends_on:
       ★ **指 v2**：目标侧那张卡 2026-09-11 换代为 -v2（(H3)「次数是鬼数」改为相对次数
       n = 鬼数 + κ ∈ Z），与本推导目标卡 (H2) 及 worldsheet.superstring-relative-cohomology-vanishing-v2
       的 (H4) 同款订正。
+  - id: math.euler-poincare-principle
+    inferred: false
+    note: |
+      【2026-09-11 新增，small-backlog-12】供给 summary 第 4 步（Σ_n (−1)^n dim P̄_+C_rel = dim H⁰(P̄_+C_rel)，
+      即该卡 (1) 的「特别地」一支，先经第 3 步的消灭把 n ≠ 0 清零）。
+      **非 inferred**：Prop 4.3(ii) 的证明逐字 'By the **Euler–Poincaré Principle**, we have
+      Σ_{n∈Z}(−1)^n dim P̄_+C_rel = dim H^0(P̄_+C_rel)'（sources 第一条，§7.3）。
+      ⚠ 该卡当前 physical-argument（待 reviewer 复核升 rigorous）；本推导的 effective 本已由
+      worldsheet.superstring-brst-charge 等接口卡封在 physical-argument，无新压低。
   - id: worldsheet.superstring-brst-charge
     note: |
       供给 Q（本图一侧），以及 Prop 4.3 证明里 **[Q, P̄_±] = 0** 这一步所说的"哪个算符与投影子
@@ -175,7 +184,7 @@ summary: |
   **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经由那些卡
   记账的后果。
 gaps:
-  - "**Euler–Poincaré 原理在本图无节点**（reviewer-batch23）：证明 (ii) 逐字 'By the Euler–Poincaré Principle'（LZ 用它把上同调维数换成复形的分次维数差），`search` 无命中；本推导与 `no-ghost-theorem-superstring-cohomological-*--via-lian-zuckerman-1989` 同样隐含使用。"
+  - "**〔2026-09-11 关闭，small-backlog-12〕Euler–Poincaré 原理在本图无节点**（reviewer-batch23）：证明 (ii) 逐字 'By the Euler–Poincaré Principle'（LZ 用它把上同调维数换成复形的分次维数差），`search` 无命中；本推导与 `no-ghost-theorem-superstring-cohomological-*--via-lian-zuckerman-1989` 同样隐含使用。**已建卡 math.euler-poincare-principle（特征标版），本推导已加边（非 inferred）。** 残留：正定性那条推导用的是**号差版**，该卡不断言，需另立 `math.euler-poincare-principle-signature` 后再接。"
   - "**Proposition 4.2（char P̄_+C_rel = 8p₀^{(8)}(−p·p/2)）在本图没有卡**，它用的
      **Jacobi 公式**（theta 函数恒等式，LZ p.328 引 GSW Chap. 4）本图也没有卡。
      ⇒ 目标卡断言 (2) 的**数值**完全落在一条未上图的命题上；断言 (1) 与「n ≠ 0 时为零」不受影响。

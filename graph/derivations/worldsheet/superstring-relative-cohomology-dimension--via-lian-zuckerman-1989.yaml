@@ -25,6 +25,16 @@ depends_on:
       ⚠ **LZ 与本图的中心荷/L₀ 归一化换算也随本边继承**（c_本图 = (3/2)c_LZ；R 扇区
       L₀^LZ = L₀^本图 − c/24），逐条写在那条推导的 convention_map 里。本推导需要它是因为
       目标卡 (H1) 的 "c^m = 15 ⟺ LZ 的 D = 10" 与 (H7) 的 "a = κ" 都经过该换算。
+  - id: math.euler-poincare-principle
+    inferred: false
+    note: |
+      【2026-09-11 新增，small-backlog-12】供给 summary 第 1 步（特征标版 Euler–Poincaré：
+      Σ_n (−1)^n dim H^n_rel = Σ_n (−1)^n dim C^n_rel）。
+      **非 inferred**：Corollary 2.15 的证明逐字 'We recall the Euler–Poincaré Principle for characteristics'
+      （sources 第二条，§9.2）。**该卡 (1) 的逐字文献陈述正是这一句**。
+      ⚠ 该卡当前 physical-argument（待 reviewer 复核升 rigorous）；本推导的 effective 本已由接口卡
+      封在 physical-argument（notes【有效状态】），无新压低。
+      ⚠ 只取特征标版；号差版（Cor 2.15(ii) 用）该卡「不断言 (a)」，正定性卡的推导不在本轮。
   - id: worldsheet.rns-fock-module-free-over-negative-super-virasoro
     inferred: true
     note: |
@@ -146,11 +156,12 @@ gaps:
      与超弦侧另一处同型：worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989
      的 gaps 第二条（Proposition 4.2 无卡，dim H⁰ 的数值全落在它上面）。
      关闭方式：取 pp.312–317 的页图，为 Prop 2.14(ii) 单建卡。"
-  - "**Euler–Poincaré 原理在本图无节点**（reviewer-batch23 已在别处记过同一条）：
+  - "**〔2026-09-11 关闭，small-backlog-12〕Euler–Poincaré 原理在本图无节点**（reviewer-batch23 已在别处记过同一条）：
      本推导第 1 步逐字 'We recall the Euler–Poincaré Principle for characteristics'，
      `search` 无命中。**玻色侧 worldsheet.bosonic-relative-cohomology-dimension--via-fgz-1986
      第 1 步（经 FGZ Proposition 1.3）与 worldsheet.superstring-gso-covariant-equivalent--via-lian-zuckerman-1989
-     都隐含使用同一条原理。** ⇒ 这是**跨三条推导的同一条缺口**，值得单建一张数学卡后一并接线。"
+     都隐含使用同一条原理。** ⇒ 这是**跨三条推导的同一条缺口**，值得单建一张数学卡后一并接线。
+     **已建卡 math.euler-poincare-principle，三条推导同批加边（非 inferred）；该卡待 reviewer 复核升 rigorous。**"
   - "**计数记号 p^{(8)}_κ(·) 的定义本图未逐字取得（L0）**。目标卡 (H6) 已声明只照抄记号。
      合理猜测 p^{(8)}_κ(n) = [q^n] φ_κ(q)^{−8}（旁证：Proposition 2.18 的
      ch_q T(p,κ) = dim R(p,κ) q^{p·p/2} φ_κ(q)^{−8}），与 FGZ 的 p_{(D)}(n) = [q^n] φ(q)^{−D}
