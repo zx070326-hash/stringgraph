@@ -1,3 +1,5 @@
+> ✅ **修订完成（2026-09-12，分支 `agent/lead/captain-packet-fix`）**：reviewer-captain-packet 核出的 9 处 CONFIRMED + 6 处 PLAUSIBLE 问题均已逐条回原始文件（`graph/milestones/*.yaml` 的 audit/diff_notes 块、两条推导 yaml 的 `depends_on`/`sources`、现场重跑的 `stringgraph status/why`、`ls formal/StringFormal/NoGhost/`、`literature/extractions/` 相关章节）核实后修订，处理结果见文末「修订记录」表。**末尾的 worktree 清理脚本已重写**：SAFE 判定现同时要求「分支已并入 main」与「工作区无未提交改动」，脚本只生成清单、不自动执行删除，`--force` 建议已整段删除。
+
 # 船长审批包 — 2026-09-12
 
 三个里程碑（`ms.ddf-commute-with-virasoro`、`ms.critical-dimension-bosonic`、`ms.no-ghost-theorem`）均已完成回译审计，`audit.status: back-translated`。以下每节的"当前有效状态"一栏均为**本次现场重跑** `uv run stringgraph status/why` 的结果（2026-09-11），不是抄旧记录。
@@ -8,7 +10,7 @@
 
 ## 1. `ms.ddf-commute-with-virasoro` → `worldsheet.ddf-commute-with-virasoro`
 
-**规范陈述（canonical_text 逐字）**：
+**规范陈述（canonical_text 节录，未改动引用文字，仅省略部分约定记账）**：
 > 【对象】D 维自由玻色开弦的振子 Fock 空间……给定基点动量 p、参考向量 k_0、偏振向量 ε，满足三个条件：(T) 横向性 ε·k_0 = 0；(N) 类光性 k_0² = 0；(S) 归一化 2α' k_0·p = 1……DDF 算子按 worldsheet.ddf-operators-v6 的**模态和**定义：A^ε_n := Σ_{j∈Z} (ε·α_j) V^{(n)}_j……
 > 【命题】在 (T)(N)(S) 之下，作为 T(p; k_0) 上的算子恒等式，[L_m, A^ε_n] = 0 对**每一个** m ∈ Z（含 m = 0）与每一个 n ∈ Z \ {0}。
 > 【直接推论，属本陈述】若 Ψ 是旧协变物理态，则 A^ε_n Ψ 也是。
@@ -47,7 +49,7 @@ git commit -m "graph: captain approves ms.ddf-commute-with-virasoro"
 
 ## 2. `ms.critical-dimension-bosonic` → `worldsheet.critical-dimension-bosonic-v3`
 
-**规范陈述（canonical_text 逐字节录，五条路线核心结论；完整版另含逐段记账历史，未删改核心断言原文，仅省略过程性旁注，标 […]）**：
+**规范陈述（canonical_text 节录，五条路线核心结论；完整版另含逐段记账历史，未删改核心断言原文，仅省略过程性旁注，标 […]）**：
 > 【本里程碑断言什么】D = 26 不是由单一论证得到的：它是四条**论证方式互不相同**的路线各自挑出 D = 26……本里程碑**不**断言四条路线互相等价。
 > (I) 光锥路线：[J^{i−}, J^{j−}] = …，Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]，闭合**当且仅当** D=26 且 a=1。本条另设前提 **D ≥ 4**。这是四条路线中**唯一**同时定出 D 与 a 的一条。
 > (II) 旧协变路线：**若** D=26 且 a=1，则 H_phys 半正定、H_phys/H_0 与 24 个横向振子 Fock 空间等距同构；**且** D>26（a=1、非零动量）存在负模物理态。D ≤ 25 不作断言。
@@ -57,20 +59,23 @@ git commit -m "graph: captain approves ms.ddf-commute-with-virasoro"
 > 【各路线的非严格步骤】只有 (II) 各推导节点**自身** status 是 rigorous；(I)(III)(IV)(V) 封顶在 physical-argument（ζ 正规化、OPE 收敛未证、Q_B²=0⟹c^m=26 无数学来源等）。
 > 【本里程碑不断言什么】(1) 四条路线互相蕴含；(2) D≤25 情形；(3) 闭弦截距/紧化背景；(4) D=26 是一致性的充分条件；(5) a=1 与 D=26 有蕴含关系；(6) "(I) 是唯一以当且仅当给出 D 的路线"。
 
-**回译审计**：**三轮**。第一轮、第二轮均裁定 **drift**（可修，无物理错误：第一轮问题集中在多余元断言与两处方向写反的记账；第二轮发现 canonical 与 v2 卡"a 是否待定"前提相反等 6 项，判定修法只能换代）；每次 drift 均导致陈述换代（v→v2→v3）。**第三轮（physics-auditor，2026-09-11）裁定 faithful**，`audit.status: back-translated`。船长须知两处不阻塞批准的记账尾巴：**F1**（闭弦截距节点已建但一行记账文字过时）、**F2**（应删去"(I)(V) 共享 ζ 正规化处方"一句，因 (I) 已明说 ζ 值不是其前提）——curator 处理中。
+（节录说明：完整版 `graph/milestones/critical-dimension-bosonic.yaml` 的 canonical_text 首段另有一句"(II) 的有效状态亦为 physical-argument"的插注，此处未摘录；该插注本身**已过时**——现场核验 `critical-dimension-old-covariant-v3` 的 own/effective 均为 rigorous，插注留待下次换代同步，不影响本节其余摘录内容的准确性。）
 
-**当前有效状态**（现场核验）：`own = physical-argument`，`effective = physical-argument`，`best_derivation = --via-four-routes`（该推导本身 `kind: physical-argument`，是并列陈述四条路线的汇总卡而非证明）。`conjectures_depended_on: []`。**关键认识论点**：即便五条依赖全部升到 rigorous/formalized，按 `effective = min(own, min(deps))`，effective **也不会超过 physical-argument**——这是 `via-four-routes` 自身状态封顶，是 STATUS_LEVELS 设计的预期形态，不是缺陷（拆卡才是唯一升级路径）。
+**回译审计**：**三轮**。第一轮、第二轮均裁定 **drift**（可修，无物理错误：第一轮问题集中在多余元断言，以及记账中的方向问题——准确地说只有 **B1** 一处是方向写反，另一处 **B2**「(I) 是唯一同时定出 D 与 a 的路线」是措辞本身不成立（需改写），不是"写反"；第二轮发现 canonical 与 v2 卡"a 是否待定"前提相反等 6 项，判定修法只能换代）；每次 drift 均导致陈述换代（v→v2→v3）。**第三轮（physics-auditor，2026-09-11）裁定 faithful**，`audit.status: back-translated`。此前记账提到的两处尾巴**已处理完毕**（非"curator 处理中"）：**F1**（闭弦截距节点的记账文字已同步更新）、**F2**（"(I)(V) 共享 ζ 正规化处方"一句已删除）——见该里程碑 YAML `diff_notes`【第三轮修订记】约 L348–375。
 
-**why 瓶颈树（前 3 层，共 5 个一级依赖）**：
+**当前有效状态**（现场核验）：`own = physical-argument`，`effective = physical-argument`，`best_derivation = --via-four-routes`（该推导本身 `kind: physical-argument`，是并列陈述四条路线的汇总卡而非证明）。`conjectures_depended_on: []`。**关键认识论点**：`--via-four-routes` 的 `depends_on` 实际有 **7** 条（对应五条路线的一级依赖，外加 `free-boson-central-charge-d`、`bc-ghost-central-charge` 两条公共输入；下面 `why` 瓶颈树只展示对 effective 有压低作用的 5 条，不代表 `depends_on` 只有 5 条）。即便全部 7 条都升到 rigorous/formalized，按 `effective = min(own, min(deps))`，effective **也不会超过 physical-argument**——这是 `via-four-routes` 自身状态封顶，是 STATUS_LEVELS 设计的预期形态，不是缺陷（拆卡才是唯一升级路径）。
+
+**why 瓶颈树（前 3–4 层；`depends_on` 共 7 条一级依赖，下面只列对 effective 有压低作用的 5 条）**：
 - 层1：`critical-dimension-light-cone-v2`[PA]、`critical-dimension-brst-v2`[PA]、`critical-dimension-weyl-anomaly-v2`[PA]、`open-string-intercept-v2`[PA]、`bc-ghost-central-charge`[PA]。
 - 层2：light-cone → `light-cone-normal-ordering-constant`[PA]（ζ 正规化）、`open-string-mass-shell`[PA]；brst → `bc-ghost-central-charge`[PA]；weyl-anomaly → `weyl-anomaly-trace`[PA]、`weyl-anomaly-central-charge-constant`[PA]、`faddeev-popov-ghost-action`[PA]、`conformal-gauge-fixing`[PA]；open-string-intercept → `open-string-mass-shell`、`transverse-oscillator-commutators`[PA]。
-- 层3：ζ 正规化 → `zeta-regularized-sum-of-integers`[PA]、`transverse-oscillator-commutators`[PA]；`bc-ghost-central-charge` → `bc-ghost-cft`[rigorous]、`operator-product-expansion`[PA]、`tt-ope-central-charge-v2`[rigorous]、`conformal-normal-ordering-v2`[rigorous]。
+- 层3：ζ 正规化 → `zeta-regularized-sum-of-integers`[PA]、`transverse-oscillator-commutators`[PA]；`bc-ghost-central-charge` → `bc-ghost-cft`[own rigorous / effective PA]、`operator-product-expansion`[PA]、`tt-ope-central-charge-v2`[own rigorous / effective PA]（三者是 `bc-ghost-central-charge--via-ope` 的直接依赖；标 own 是因为这两个定义/命题节点自身论证严格，但 effective 被同层 `operator-product-expansion`[PA] 压到 physical-argument——这是 own≠effective 的正常记账，不是标法混用）。
+- 层4：`bc-ghost-cft` 链条更深处才出现 `conformal-normal-ordering-v2`[own rigorous]——它是 `bc-ghost-cft` 的依赖（经 `energy-momentum-tensor-free-scalar` 等），不是 `bc-ghost-central-charge` 的直接依赖，此前误标在层3。
 
 真实瓶颈汇聚到两个根：ζ 正规化（无算子层定义）与 OPE 收敛（未证）。DDF/无鬼一侧**已不在**本里程碑瓶颈中。
 
-**Lean 覆盖**：**无**。`--via-four-routes` 本身是 physical-argument，永不可能标 formalized；已核对瓶颈树内全部节点（`energy-momentum-tensor-free-scalar`、`conformal-normal-ordering-v2`、`primary-field-v2`、`tt-ope-central-charge-v2`、`bc-ghost-cft`）均**无** `lean_decl`。已形式化的旁支节点（`free-boson-central-charge-d`、`virasoro-generators-free-boson`）不在这条汇聚路径上，对本里程碑 effective 无提升作用。
+**Lean 覆盖**：**无**。`--via-four-routes` 本身是 physical-argument，永不可能标 formalized；已核对瓶颈树内全部节点（`energy-momentum-tensor-free-scalar`、`conformal-normal-ordering-v2`、`primary-field-v2`、`tt-ope-central-charge-v2`、`bc-ghost-cft`）均**无** `lean_decl`。已形式化的 `free-boson-central-charge-d` 其实是 `--via-four-routes` `depends_on` 七条之一的**直接依赖**（并非旁支）；另有已形式化的旁支节点 `virasoro-generators-free-boson` 确实不在推导路径上。二者对本里程碑 effective 均无提升作用——`free-boson-central-charge-d` 是因为它不在瓶颈链（ζ 正规化/OPE 收敛）上，`virasoro-generators-free-boson` 是因为它根本不参与本推导。
 
-**批准操作**：
+**批准操作**（务必保留 YAML 中已有的 `audit.back_translation` 记录，不要删除——`validate` 要求 `approved` 状态仍附带 `back_translation`，下方片段只示意新增字段）：
 ```yaml
 audit:
   status: approved
@@ -83,7 +88,7 @@ git add graph/milestones/critical-dimension-bosonic.yaml
 git commit -m "graph: captain approves ms.critical-dimension-bosonic"
 ```
 
-**仍缺一手文献**：本里程碑主要来源（Polchinski v1 §1.3/§2.4/§2.5/§3.4/§4.1/§4.3、GSW §2.3.1）均已获取核实，无专属缺口。GT 1972 只经 (II) 间接相关，缺口记在下一节。
+**仍缺一手文献**：本里程碑主要来源中 Polchinski v1 §1.3/§2.4/§2.5/§3.4/§4.1/§4.3 已获取核实；**GSW 一侧仍有专属缺口**——`literature/extractions/gsw-1987-v1.md` §1：GSW §2.3.3（含 (2.3.32)）正文仍**未获取（L0）**，ch.2 被 WebFetch 13 MB 上限卡住（`docs/ROADMAP.md` L89）；canonical_text (I) 光锥路线的 Δ_n 公式目前**只由 GSW 单一来源支撑**，尚无第二来源交叉核验；`kato-ogawa-1983` 正文也未核实（该里程碑 YAML `canonical_text` 内约 L545 处有记账）。GT 1972 只经 (II) 间接相关，缺口记在下一节。已把 GSW v1 ch.2 加入船长点击清单第 6 项。
 
 ---
 
