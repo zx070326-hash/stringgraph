@@ -1,7 +1,7 @@
 id: spectrum.torus-measure-modular-invariant--via-sl2z-action
 target: spectrum.torus-measure-modular-invariant
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: worldsheet.modular-group-psl2z
     note: |
@@ -45,6 +45,7 @@ gaps:
      若把测度理解成 |dτ ∧ dτ̄| 或 dτ₁dτ₂，结论相同但需一句取向说明，原书与本推导都不写。"
   - "**不变密度的唯一性未论证**：目标卡 (e) 已把它排除在断言之外。"
 notes: |
+  reviewer-verified: reviewer-batch21, 2026-09-11（独立复算：dτ'/dτ = (ad−bc)/(cτ+d)²；Im τ' = (ad−bc)Im τ/|cτ+d|²；相除；cτ+d ≠ 0 由 τ∉ℝ ⇒ c=0 ⇒ d=0 与 ad−bc=1 矛盾。前提完整、有限步初等计算，走 STATUS_LEVELS 例外条款。lead 落地。）
   由 curator（small-backlog-6）于 2026-09-11 建立，随 spectrum.one-loop-torus-amplitude-modular-invariant
   的换代把该卡第 (2) 条拆出。本推导的内容与旧推导
   spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 summary 第 (2) 步

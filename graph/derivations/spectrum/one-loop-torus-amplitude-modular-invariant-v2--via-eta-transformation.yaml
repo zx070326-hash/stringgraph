@@ -58,6 +58,7 @@ gaps:
      上游 math.eta-modular-invariant-combination 虽 own=formalized，但其 effective 被两张 rigorous
      定义卡压到 rigorous，**不是**本链的瓶颈。"
 notes: |
+  reviewer-verified: reviewer-batch21, 2026-09-11（**只签配平步 (3)**：(1/4τ₂)(4π²α'τ₂)^{−13}|η|^{−48} = (1/4)(4π²α')^{−13}τ₂^{−2}[τ₂|η|⁴]^{−12}，幂次 −14 = −2−12、−48 = 4·(−12)；隐含 η ≠ 0 由定义卡「H 上无零点」供给。status 不变：仍被 spectrum.one-loop-torus-amplitude（physical-argument）封顶。lead 落地。）
   由 curator（small-backlog-6）于 2026-09-11 建立，是
   spectrum.one-loop-torus-amplitude-modular-invariant--via-eta-transformation 的 v2 版：
   **目标改指 v2 卡；(1) 的两条生成元边合并为一条 math.eta-modular-invariant-combination 边；
