@@ -1,5 +1,5 @@
-id: worldsheet.no-ghost-theorem-superstring-cohomological--via-ohta-imnu
-target: worldsheet.no-ghost-theorem-superstring-cohomological
+id: worldsheet.no-ghost-theorem-superstring-cohomological-v2--via-ohta-imnu
+target: worldsheet.no-ghost-theorem-superstring-cohomological-v2
 kind: physical-argument
 status: physical-argument
 depends_on:
@@ -302,5 +302,17 @@ notes: |
 
   按 researcher 第七轮抽取记录 literature/extractions/ito-morozumi-nojiri-uehara-1986.md
   （E1–E8）、ohta-1986.md（E1–E4、§3 表、§5）、henneaux-1987.md §5.1 表建立。curator，2026-09-11。
+
+  ★【本推导为何改指 v2（curator，2026-09-11，small-backlog-10）】
+  目标卡由 worldsheet.no-ghost-theorem-superstring-cohomological 换代到 -v2，
+  唯一实质改动是 (H3)：旧卡写 H^n_rel 的「次数是鬼数」，而 Lian–Zuckerman 的鬼数取值在
+  Z + κ（NS 半整数、R 整数），LZ Definition 2.2 的上标是**相对次数** n = 鬼数 + κ ∈ Z；
+  按旧卡字面，NS 扇区的「鬼数 0」不可达。
+  这是**纯换名式换代**（陈述只改分次的名目、论证链一字未动），按 graph/CLAUDE.md 2026-09-12
+  细则，本推导随目标卡改名并改指新目标；旧卡不再留推导（也无活推导依赖旧卡）。
+  **依赖边、来源、summary、gaps 全部未动**；本推导里凡写 H⁰_rel / 「鬼数 0」处，
+  一律按 v2 (H3) 的相对次数读（NS 的 n = 0 ↔ 鬼数 −½；R 的 n = 0 ↔ 鬼数 0）。
+  ⚠ 本推导自身的来源（IMNU 1986 / Ohta 1986，物理侧不用上同调分次语言）**不用 LZ 的分次约定**，其次数字典见下方 gaps；
+  换代只涉目标卡的措辞，不改变本推导与目标卡的对接关系。
 author: curator
 created: "2026-09-11"

@@ -1,5 +1,5 @@
-id: worldsheet.no-ghost-theorem-superstring-cohomological--via-lian-zuckerman-1989
-target: worldsheet.no-ghost-theorem-superstring-cohomological
+id: worldsheet.no-ghost-theorem-superstring-cohomological-v2--via-lian-zuckerman-1989
+target: worldsheet.no-ghost-theorem-superstring-cohomological-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -235,5 +235,16 @@ notes: |
 
   按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md
   （E3/E4/E5/E6/E7/E8、§4 Q1–Q4、§5）建立。curator，2026-09-11。
+
+  ★【本推导为何改指 v2（curator，2026-09-11，small-backlog-10）】
+  目标卡由 worldsheet.no-ghost-theorem-superstring-cohomological 换代到 -v2，
+  唯一实质改动是 (H3)：旧卡写「次数是鬼数」，而 LZ 的鬼数取值在 Z + κ（NS 半整数），
+  Corollary 2.15(ii) 的 H⁰_rel 用的是 Definition 2.2 的**相对次数** n = 鬼数 + κ ∈ Z。
+  这是**纯换名式换代**（陈述只改分次的名目、论证链一字未动），按 graph/CLAUDE.md 2026-09-12
+  细则，本推导随目标卡改名并改指新目标；旧卡不再留推导（也无活推导依赖旧卡）。
+  **依赖边、来源、summary、gaps 全部未动**；本推导里凡写 H⁰_rel / 「鬼数 0」处，
+  一律按 v2 (H3) 的相对次数读（NS 的 n = 0 ↔ 鬼数 −½；R 的 n = 0 ↔ 鬼数 0）。
+  ★ 本推导是三条里唯一以 LZ 为来源的一条，故 v2 的分次订正直接适用于它；
+  与已换代的 worldsheet.superstring-relative-cohomology-vanishing-v2（同病、同一轮）口径一致。
 author: curator
 created: "2026-09-11"

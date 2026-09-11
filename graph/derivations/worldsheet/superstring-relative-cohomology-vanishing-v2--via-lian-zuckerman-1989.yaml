@@ -67,8 +67,27 @@ depends_on:
       供给物质部门 L^m_n、G^m_r 的显式模式表达式（本图一侧）。LZ 一侧是 Proposition 1.1
       与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)，其中 U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩、
       R(p,½) = C、R(p,0) 是 Spin(D−1,1) 旋量表示（p.303）。
-      ★ 本边同时供给证明链里**唯一用到 p ≠ 0 的地方**的对象：Corollary 2.19(iii)
+      ★ 本边原先还兼管证明链里**唯一用到 p ≠ 0 的地方**：Corollary 2.19(iii)
       "V(p,κ) 是自由 Vir_κ^- 模"，其反面（p = 0）就是 Proposition 5.5 的失效机制。
+      ⇒ 〔2026-09-11，small-backlog-10〕**那一条已单独立卡并另挂实边**
+      （worldsheet.rns-fock-module-free-over-negative-super-virasoro，见下一条 depends_on），
+      本边此后只管"物质部门的生成元与 Fock 空间是哪个对象"。
+  - id: worldsheet.rns-fock-module-free-over-negative-super-virasoro
+    note: |
+      供给 §3 证明链里的**核心表示论输入**：**Corollary 2.19(iii)**（p.321）
+      "V(p,κ) is a free Vir_κ^- module"。它与 **Theorem 3.3.1**（超李代数同调的正合序列，
+      §3 的 (40)）一起，构成 **Proposition 3.3**（伴随分次复形的 H^m = 0, m < 0）那一步的两个输入。
+      **本边非 inferred**：LZ 在 §3 的证明里显式引用 Corollary 2.19(iii)
+      （抽取记录 lian-zuckerman-1989.md E3 逐条转录了这条证明链）。
+      ★ **本边是本推导前提 (H2)「p ≠ 0」的唯一落点**：Proposition 5.5, p.333 逐字
+      "For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not
+      Vir_κ^- -free" —— 即 p ≠ 0 不是在消灭定理那一步用的，而是在**验证自由性**这一步用的。
+      ⇒ 这条边把"前提用在哪里"变成图上可查的一条边，而不是散在 note 里。
+      ⚠ 与玻色侧同型：worldsheet.bosonic-relative-cohomology-vanishing--via-fgz-1986 自同日起
+      挂 worldsheet.fock-module-free-over-negative-virasoro（FGZ Prop 2.6(i)），
+      两条边**互不依赖**（两篇文献互不引用，各自独立证明自己那一侧）。
+      ⚠ 该卡的 effective 是 physical-argument（其对象卡 worldsheet.rns-super-virasoro-generators
+      的上游是 OPE/模式展开链），与本推导已有的封顶来源相同，**不改变本推导的有效状态**。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -156,15 +175,18 @@ summary: |
   **这不是 LZ 的论证有缺口**，而是本图把"LZ 的对象 = Polchinski 的对象"这一步经由那些卡
   记账的后果。要抬高 effective 必须先把超弦 BRST 设定写成数学上自足的定义卡（Lean 岛候选）。
 gaps:
-  - "**Theorem 2.4 的证明用到两条本图没有卡的表示论输入**：
-     (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——其证明（Proposition 2.18）用
-         **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性
-         （[7, 9, 10]）。本图只有玻色 Virasoro 的 worldsheet.kac-determinant-v2，
-         **没有超 Virasoro 版**，故这条输入未上图。
+  - "**Theorem 2.4 的证明用到两条表示论输入，其中一条已上图、另一条仍无卡**：
+     (a) **Corollary 2.19(iii)** V(p,κ) 是自由 Vir_κ^- 模——**〔2026-09-11，small-backlog-10〕
+         这一条已单独立卡**（worldsheet.rns-fock-module-free-over-negative-super-virasoro，
+         推导 --via-lian-zuckerman-1989），本推导已挂一条**非 inferred** 的实边指向它。
+         **仍未关闭的是它下面那一层**：其证明（Proposition 2.18）用**超 Virasoro 的 Kac 行列式**
+         （LZ [22] = Meurman–Rocha，本图连 bib 都未登记）与 M_κ(h', 9) 的幺正性（[7, 9, 10]）；
+         本图只有玻色 Virasoro 的 worldsheet.kac-determinant-v2，**没有超 Virasoro 版**。
+         ⇒ 那一层的缺口现在记在新卡的推导 gaps 上，不再由本推导承担。
      (b) **Theorem 3.3.1** 的正合序列（§3 的 (40)），LZ 自述是经典李代数同调定理的推广
          （'a generalization of a theorem in the theory of classical Lie algebra homology'），
-         本图无对应卡。
-     ⇒ 本推导的 rigorous 是「按已核实的编号定理与其证明梗概」给的，与
+         本图无对应卡。**这一条未变。**
+     ⇒ 本推导的 rigorous 仍是「按已核实的编号定理与其证明梗概」给的，与
      worldsheet.no-ghost-theorem-brst--via-fgz 的记账口径相同。"
   - "**本推导 summary 第 3–4 步的过滤论证细节（谱序列 vs 长正合列）未逐字复核。**
      抽取记录 E3 只给出证明链的结点（Prop 3.2 → Prop 3.3 → Thm 3.3.1 + Cor 2.19(iii)

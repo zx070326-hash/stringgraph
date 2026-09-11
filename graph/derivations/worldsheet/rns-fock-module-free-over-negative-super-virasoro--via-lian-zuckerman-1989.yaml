@@ -1,0 +1,108 @@
+id: worldsheet.rns-fock-module-free-over-negative-super-virasoro--via-lian-zuckerman-1989
+target: worldsheet.rns-fock-module-free-over-negative-super-virasoro
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.super-virasoro-algebra
+    convention_map: |
+      本图的中心荷归一化是 c/12：[L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ、
+      {G_r,G_s} = 2L_{r+s} + (c/12)(4r²−1)δ。
+      **LZ 用 c/8 与 c/2**（p.302 逐字）：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ_{m+n}、
+      {G_{m+κ}, G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ_{m+n}。换算两条：
+        (1) **中心荷**：c_本图 = (3/2)·c_LZ ⇒ LZ 的 c_LZ = D = 10 ↔ 本图 c^m = 15；
+        (2) **R 扇区 (κ = 0) 的 L₀ 零点**：LZ 的 {G₀,G₀} = 2L₀（无中心项），本图是 2L₀ − c/12
+            ⇒ L₀^LZ = L₀^本图 − c/24。NS 扇区 (κ = ½) 无额外平移。
+      ⚠ **本卡的断言不受这两条换算影响**：U(Vir_κ⁻) 里根本不出现中心元与 L₀ 的标定，
+      自由性是纯粹的模论性质。换算只用于把 (H1) 的 "D = 10" 读成本图的 c^m = 15。
+    note: |
+      供给 Vir_κ 与其负模子超代数 Vir_κ⁻ = span{L_{−n} (n ≥ 1), G_{−r} (r > 0, r ∈ Z+κ)}，
+      即本卡断言里"自由模"所对的那个环 U(Vir_κ⁻)。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: |
+      供给 (H2) 的模：RNS **物质**部门的 Fock 空间与其上的 L^m_n、G^m_r 作用。
+      LZ 一侧是 Proposition 1.1 与 p.303 的 V(p,κ) = R(p,κ) ⊗ U(κ)，
+      U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩，R(p,½) = C、R(p,0) 是 Spin(D−1,1) 旋量表示。
+      两侧逐项同型（LZ 的 d^μ_{−n+κ} ↔ 本图的 ψ^μ_{−r}）。
+      ⚠ **本边是本推导有效状态被封顶在 physical-argument 的唯一原因**：该定义卡自身 status
+      为 rigorous 但其 effective 是 physical-argument（上游是 OPE / 模式展开 / 路径积分链）。
+      **这不降低本推导自身的 rigorous**——LZ 在自己的框架里把 V(p,κ) 定义为一个具体的模，
+      不依赖路径积分。要抬高 effective 必须先把 RNS 物质部门写成数学上自足的定义卡。
+      ⚠ 与玻色侧的对照：worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986 的同位边
+      指的是已形式化的 worldsheet.fock-space-virasoro-representation，故那一侧 effective 是
+      rigorous。**这正是本图把两侧拆成两卡的理由之一**（见两张目标卡的 notes）。
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Corollary 2.19(iii)**, p.321：'(iii) V(p,κ) is a free Vir_κ^- module.'；证明经 **Proposition 2.18**, pp.317–320（逐字 'we will prove their existence the way FGZ did in the bosonic case'，用超 Virasoro 的 Kac 行列式 [22] = Meurman–Rocha 与 M_κ(h', 9) 的幺正性 [7, 9, 10]）"
+    note: |
+      L1（全文 35 页逐页读图，literature/extractions/lian-zuckerman-1989.md E7）。
+      **本推导的全部内容就是这一条编号推论**，它在 CMP 上有印出的证明链（不同于玻色侧的 FGZ
+      公告体裁）。⚠ 但那条证明链的两个输入（超 Virasoro Kac 行列式、M_κ(h', 9) 的幺正性）
+      在本图**都没有卡**，见 gaps。
+  - ref: lian-zuckerman-1989
+    loc: "**p.320 Remark**，逐字：'V(p,κ) is in general not a direct sum of Verma modules of Vir_κ **even though it is Vir_κ^- -free**.'"
+    note: |
+      L1。作为 Corollary 2.19(iii) 的旁证（同一性质在另一处被逐字复述），
+      同时**把自由性与 Verma 直和显式分开**——这正是目标卡"本命题不断言 (a)"的依据，
+      也是本卡与争议卡 worldsheet.nsr-fock-space-verma-decomposition 不得互相依赖的理由。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 5.5**, p.333，逐字：'For p = 0, the vanishing theorem does not hold because the Fock space V(p,κ) is not Vir_κ^- -free'；p.303 逐字 'p will always be assumed non-zero until Sect. 5'；p.308 逐字 'From now on, we will take D = 10'"
+    note: |
+      L1。(H1)(H3) 的逐字定位 + (H3) 的**必要性**（p = 0 时断言为假，不是未讨论）。
+      ⚠ 注意 Proposition 5.5 的措辞把因果写清楚了：**自由性失效 ⇒ 消灭定理失效**，
+      方向与图上的边同向（本卡 → 消灭定理卡）。
+summary: |
+  本推导没有独立的论证步骤：目标卡的断言**逐字就是** lian-zuckerman-1989 Corollary 2.19(iii)，
+  三条量词（D = 10、p ≠ 0、两个扇区 κ = ½/0）分别由 p.308、p.303 与推论本身给出。
+  本推导做的只有对象对接与归一化换算两件事（见 depends_on 两条边）。
+
+  **LZ 一侧的证明链**（本图只转录，不复核）：Corollary 2.19 由 **Proposition 2.18**（pp.317–320）
+  推出；Prop 2.18 自述**不走谱生成代数（DDF）那条路**，而"照 FGZ 在玻色情形的做法"用表示论证明，
+  工具是**超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）与 M_κ(h', 9) 的幺正性（[7, 9, 10]）。
+
+  【为什么标 rigorous】四条：
+  (1) 结论是**带编号的推论**（Corollary 2.19(iii)），陈述已逐字核实（L1 页图）；
+  (2) 它在原文里有**印出的证明链**（经 Proposition 2.18，pp.317–320），不是"imply the following"
+      式的一笔带过——这是本条与玻色侧 --via-fgz-1986 的**实质差别**；
+  (3) 论证全在有定义的模范畴里（泛包络代数上的自由模、Kac 行列式、幺正模），
+      不涉及路径积分、不涉及收敛性；
+  (4) 期刊是 Communications in Mathematical Physics。
+  与 worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989 的记账口径一致。
+
+  【有效状态为什么仍是 physical-argument】依赖里的 worldsheet.rns-super-virasoro-generators
+  的 effective 是 physical-argument（上游是 OPE / 模式展开链），按 docs/STATUS_LEVELS.md 的 min
+  规则封顶。**这不是 LZ 的论证有缺口**，而是本图把"LZ 的 V(p,κ) = 本图的 RNS 物质 Fock 空间"
+  这一步经由那张定义卡记账的后果。
+gaps:
+  - "**Proposition 2.18 的证明未逐行复核，且其两个输入在本图都没有卡**：
+     (a) **超 Virasoro 的 Kac 行列式**（LZ [22] = Meurman–Rocha）——本图只有玻色版
+         worldsheet.kac-determinant-v2，**没有超版**，连 bib 都未登记 Meurman–Rocha；
+     (b) **M_κ(h', 9) 的幺正性**（LZ [7, 9, 10]）——本图无对应卡。
+     ⇒ 本推导的 rigorous 是按『已核实的编号推论 + 其原文印出的证明链梗概』给的，
+     不是按逐行复核给的。关闭方式：登记 Meurman–Rocha 并逐行复核 pp.317–320。"
+  - "**扇区的对称性未复核**：Corollary 2.19(iii) 一句话同时覆盖 κ = ½ 与 κ = 0，
+     但 R 扇区（κ = 0）的 V(p,0) 多一个旋量因子 R(p,0)，其上的结构与 NS 不同。
+     LZ 是否对两个扇区分别论证、还是一笔带过，**本图未核实**（抽取记录 E7 只转录了结论）。"
+  - "**'自由模'的秩与生成元空间未记录**：LZ 只说 free，不说秩；下游若要做特征标计数
+     （Corollary 2.15(i) / 2.19(i) 的维数公式），用的是 Proposition 2.18 的特征标等式，
+     不是本卡。本卡不承担那一步。"
+notes: |
+  【本推导在图上的作用】
+  它是 worldsheet.superstring-relative-cohomology-vanishing-v2--via-lian-zuckerman-1989 的
+  **一条实输入**：LZ 的消灭定理证明（§3：Prop 3.2 有限过滤 → Prop 3.3 伴随分次 → Thm 3.3.1
+  正合序列 + **Corollary 2.19(iii)** → Cor 3.4）显式用到本卡。
+  本卡建立后，那条推导已挂一条**非 inferred** 的边指向本卡，其 gaps 第一条 (a)
+  （"Corollary 2.19(iii) 未上图"）随之只剩"超 Virasoro Kac 行列式未上图"这一半。
+
+  【不构成循环】
+  本推导的依赖只有超 Virasoro 代数与 RNS 物质部门两张对象卡，
+  **不经过任何 BRST / 鬼场 / 上同调节点**；下游的消灭定理卡依赖本卡，方向单向。
+  ⚠ 特别地：本卡**不依赖** worldsheet.nsr-fock-space-verma-decomposition（争议卡），
+  也不被它依赖——"自由"与"Verma 直和"是 LZ 用 "even though" 显式分开的两件事。
+
+  【与玻色版推导的分工】
+  worldsheet.fock-module-free-over-negative-virasoro--via-fgz-1986（FGZ Prop 2.6(i)）与本推导
+  **互不依赖**：两篇文献互不引用，LZ 只说方法"照 FGZ 在玻色情形的做法"，结论是在超版上另证的。
+  两条推导的 gaps 因此不可互相搬运：玻色侧缺的是"命题无印出的证明"，本侧缺的是
+  "证明链的两个表示论输入未上图"。
+author: curator
+created: "2026-09-11"
