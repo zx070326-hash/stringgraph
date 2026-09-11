@@ -135,6 +135,363 @@ lemma secondState_vertexMomentum (b : Fin D → R) (n : ℤ) :
 end VecLinear
 
 
+
+/-! ### (b) The general level-two state -/
+
+section LevelTwoGeneral
+
+variable (η : Fin D → R)
+
+omit [Algebra ℚ R]
+
+/-- Only the zero monomial has level `0`. -/
+lemma eq_zero_of_level_eq_zero {d : Osc D →₀ ℕ} (hd : level D d = 0) : d = 0 := by
+  classical
+  refine Finsupp.ext fun v => ?_
+  by_contra hv
+  have hmem : v ∈ d.support := Finsupp.mem_support_iff.mpr (by simpa using hv)
+  have hle := mode_le_of_mem_support_of_level_eq hd hmem
+  have := v.2.pos
+  omega
+
+/-- **The two shapes of a level-two monomial**: a single `α^μ_{-2}`, or a product
+`α^μ_{-1} α^ν_{-1}` (the case `μ = ν` being the square).  Proved by deleting one oscillator
+and appealing to `Fock.exists_eq_single_of_level_eq_one`. -/
+lemma level_two_cases {d : Osc D →₀ ℕ} (hd : level D d = 2) :
+    (∃ μ : Fin D, d = Finsupp.single ((μ, 2) : Osc D) 1) ∨
+      ∃ μ ν : Fin D, d = Finsupp.single ((μ, 1) : Osc D) 1
+          + Finsupp.single ((ν, 1) : Osc D) 1 := by
+  classical
+  obtain ⟨v, hv⟩ : ∃ v : Osc D, v ∈ d.support := by
+    by_contra hc
+    simp only [not_exists] at hc
+    have hz : d = 0 := Finsupp.ext fun u => Finsupp.notMem_support_iff.mp (hc u)
+    rw [hz, level_zero] at hd
+    exact absurd hd (by norm_num)
+  have hdv : d v ≠ 0 := Finsupp.mem_support_iff.mp hv
+  have hcancel : (d - Finsupp.single v 1) + Finsupp.single v 1 = d :=
+    Finsupp.sub_add_single_one_cancel hdv
+  have hlev := level_sub_single_add d hdv
+  rw [hd] at hlev
+  have hpos := v.2.pos
+  have hub := mode_le_of_mem_support_of_level_eq hd hv
+  rcases (show (v.2 : ℕ) = 1 ∨ (v.2 : ℕ) = 2 by omega) with h1 | h2
+  · have hl1 : level D (d - Finsupp.single v 1) = 1 := by omega
+    obtain ⟨μ, hμ⟩ := exists_eq_single_of_level_eq_one hl1
+    refine Or.inr ⟨μ, v.1, ?_⟩
+    have hvv : ((v.1, (1 : ℕ+)) : Osc D) = v :=
+      Prod.ext rfl (PNat.coe_injective (by simpa using h1.symm))
+    rw [← hcancel, hμ, hvv]
+  · have hl0 : level D (d - Finsupp.single v 1) = 0 := by omega
+    refine Or.inl ⟨v.1, ?_⟩
+    have hvv : ((v.1, (2 : ℕ+)) : Osc D) = v :=
+      Prod.ext rfl (PNat.coe_injective (by simpa using h2.symm))
+    rw [← hcancel, eq_zero_of_level_eq_zero hl0, zero_add, hvv]
+
+/-- **The general level-two state**
+`ψ = Σ_μ α^μ_{-1} (v_μ · α_{-1}) |k⟩ + (w · α_{-2}) |k⟩`.
+The family `v : Fin D → Fin D → R` is the symmetric-tensor part written with its first index
+spelled out, `w` the `α_{-2}` part; no symmetry is imposed on `v`, and the representation is
+correspondingly not unique. -/
+noncomputable def levelTwoGen (v : Fin D → Fin D → R) (w : Fin D → R) : Fock D R :=
+  (∑ μ : Fin D, (X ((μ, 1) : Osc D) : Fock D R) * polState η (v μ)) + secondState η w
+
+@[simp]
+lemma levelTwoGen_zero : levelTwoGen η (0 : Fin D → Fin D → R) (0 : Fin D → R) = 0 := by
+  rw [levelTwoGen, secondState_zero, add_zero]
+  exact Finset.sum_eq_zero fun μ _ => by
+    rw [show (0 : Fin D → Fin D → R) μ = 0 from rfl, polState_zero, mul_zero]
+
+lemma levelTwoGen_add (v v' : Fin D → Fin D → R) (w w' : Fin D → R) :
+    levelTwoGen η (v + v') (w + w') = levelTwoGen η v w + levelTwoGen η v' w' := by
+  rw [levelTwoGen, levelTwoGen, levelTwoGen, secondState_add]
+  have h : ∀ μ : Fin D, (X ((μ, 1) : Osc D) : Fock D R) * polState η ((v + v') μ)
+      = (X ((μ, 1) : Osc D) : Fock D R) * polState η (v μ)
+        + (X ((μ, 1) : Osc D) : Fock D R) * polState η (v' μ) := fun μ => by
+    rw [show (v + v') μ = v μ + v' μ from rfl, polState_add, mul_add]
+  rw [Finset.sum_congr rfl fun μ _ => h μ, Finset.sum_add_distrib]
+  abel
+
+lemma levelTwoGen_smul (c : R) (v : Fin D → Fin D → R) (w : Fin D → R) :
+    levelTwoGen η (c • v) (c • w) = c • levelTwoGen η v w := by
+  rw [levelTwoGen, levelTwoGen, secondState_smul, smul_add, Finset.smul_sum]
+  congr 1
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [show (c • v) μ = c • v μ from rfl, polState_smul, mul_smul_comm]
+
+/-- The submodule of states of the general level-two shape. -/
+noncomputable def levelTwoRange : Submodule R (Fock D R) where
+  carrier := {P | ∃ (v : Fin D → Fin D → R) (w : Fin D → R), P = levelTwoGen η v w}
+  add_mem' := by
+    rintro P Q ⟨v, w, rfl⟩ ⟨v', w', rfl⟩
+    exact ⟨v + v', w + w', (levelTwoGen_add η v v' w w').symm⟩
+  zero_mem' := ⟨0, 0, (levelTwoGen_zero η).symm⟩
+  smul_mem' := by
+    rintro c P ⟨v, w, rfl⟩
+    exact ⟨c • v, c • w, (levelTwoGen_smul η c v w).symm⟩
+
+lemma mem_levelTwoRange {P : Fock D R} :
+    P ∈ levelTwoRange η ↔ ∃ (v : Fin D → Fin D → R) (w : Fin D → R), P = levelTwoGen η v w :=
+  Iff.rfl
+
+variable {η}
+
+/-- A polarisation concentrated on one direction gives back a single oscillator. -/
+lemma polState_pi_single (hη : ∀ μ, η μ * η μ = 1) (ν : Fin D) (c : R) :
+    polState η (Pi.single ν (η ν * c)) = c • (X ((ν, 1) : Osc D) : Fock D R) := by
+  classical
+  rw [polState, Finset.sum_eq_single ν]
+  · rw [Pi.single_eq_same, ← mul_assoc, hη ν, one_mul]
+  · intro μ _ hμ
+    rw [Pi.single_eq_of_ne hμ, mul_zero, zero_smul]
+  · intro h
+    exact absurd (Finset.mem_univ ν) h
+
+lemma secondState_pi_single (hη : ∀ μ, η μ * η μ = 1) (ν : Fin D) (c : R) :
+    secondState η (Pi.single ν (η ν * c)) = c • (X ((ν, 2) : Osc D) : Fock D R) := by
+  classical
+  rw [secondState, Finset.sum_eq_single ν]
+  · rw [Pi.single_eq_same, ← mul_assoc, hη ν, one_mul]
+  · intro μ _ hμ
+    rw [Pi.single_eq_of_ne hμ, mul_zero, zero_smul]
+  · intro h
+    exact absurd (Finset.mem_univ ν) h
+
+lemma smul_X_two_mem_levelTwoRange (hη : ∀ μ, η μ * η μ = 1) (ν : Fin D) (c : R) :
+    c • (X ((ν, 2) : Osc D) : Fock D R) ∈ levelTwoRange η := by
+  refine ⟨0, Pi.single ν (η ν * c), ?_⟩
+  rw [levelTwoGen, secondState_pi_single hη ν c,
+    Finset.sum_eq_zero fun μ _ => by
+      rw [show (0 : Fin D → Fin D → R) μ = 0 from rfl, polState_zero, mul_zero],
+    zero_add]
+
+lemma smul_X_one_mul_X_one_mem_levelTwoRange (hη : ∀ μ, η μ * η μ = 1) (μ ν : Fin D) (c : R) :
+    c • ((X ((μ, 1) : Osc D) : Fock D R) * X ((ν, 1) : Osc D)) ∈ levelTwoRange η := by
+  classical
+  refine ⟨Pi.single μ (Pi.single ν (η ν * c)), 0, ?_⟩
+  rw [levelTwoGen, secondState_zero, add_zero, Finset.sum_eq_single μ]
+  · rw [Pi.single_eq_same, polState_pi_single hη ν c, mul_smul_comm]
+  · intro ρ _ hρ
+    rw [Pi.single_eq_of_ne hρ, polState_zero, mul_zero]
+  · intro h
+    exact absurd (Finset.mem_univ μ) h
+
+/-- **Every level-two state has the general shape** (blocker (b) of `formal/TODO.md`,
+first half): the classification of level-two monomials plus closure of `levelTwoRange` under
+sums. -/
+theorem exists_levelTwoGen_of_mem_levelSubmodule_two (hη : ∀ μ, η μ * η μ = 1)
+    {ψ : Fock D R} (hψ : ψ ∈ levelSubmodule D R 2) :
+    ∃ (v : Fin D → Fin D → R) (w : Fin D → R), ψ = levelTwoGen η v w := by
+  classical
+  have hmem : (∑ d ∈ ψ.support, (monomial d (coeff d ψ) : Fock D R)) ∈ levelTwoRange η := by
+   refine Submodule.sum_mem _ fun d hd => ?_
+   have hlev : level D d = 2 := hψ (MvPolynomial.mem_support_iff.mp hd)
+   have hsm : (monomial d (coeff d ψ) : Fock D R) = coeff d ψ • (monomial d 1 : Fock D R) := by
+     rw [MvPolynomial.smul_monomial, smul_eq_mul, mul_one]
+   rcases level_two_cases hlev with ⟨μ, rfl⟩ | ⟨μ, ν, rfl⟩
+   · rw [hsm, show (monomial (Finsupp.single ((μ, 2) : Osc D) 1) (1 : R) : Fock D R)
+       = X ((μ, 2) : Osc D) from rfl]
+     exact smul_X_two_mem_levelTwoRange hη μ _
+   · rw [hsm, show (monomial (Finsupp.single ((μ, 1) : Osc D) 1
+         + Finsupp.single ((ν, 1) : Osc D) 1) (1 : R) : Fock D R)
+       = (X ((μ, 1) : Osc D) : Fock D R) * X ((ν, 1) : Osc D) by
+         rw [show ((X ((μ, 1) : Osc D) : Fock D R) * X ((ν, 1) : Osc D))
+           = monomial (Finsupp.single ((μ, 1) : Osc D) 1) (1 : R)
+               * monomial (Finsupp.single ((ν, 1) : Osc D) 1) (1 : R) from rfl,
+           MvPolynomial.monomial_mul, mul_one]]
+     exact smul_X_one_mul_X_one_mem_levelTwoRange hη μ ν _
+  obtain ⟨v, w, hvw⟩ := hmem
+  exact ⟨v, w, (MvPolynomial.support_sum_monomial_coeff ψ).symm.trans hvw⟩
+
+end LevelTwoGeneral
+
+/-! ### The Virasoro conditions on the general level-two state -/
+
+section LevelTwoLop
+
+variable (η a : Fin D → R)
+
+omit [Algebra ℚ R] in
+/-- The coefficient of `α^μ_{-1}` in `ζ · α_{-1}|k⟩` is `η_μ ζ^μ`. -/
+lemma coeff_polState (e : Fin D → R) (μ : Fin D) :
+    coeff (Finsupp.single ((μ, 1) : Osc D) 1) (polState η e) = η μ * e μ := by
+  classical
+  rw [polState, coeff_sum, Finset.sum_eq_single μ]
+  · rw [coeff_smul, smul_eq_mul, coeff_X, if_pos rfl, mul_one]
+  · intro ν _ hν
+    rw [coeff_smul, smul_eq_mul, coeff_X, if_neg, mul_zero]
+    intro hc
+    exact hν (congrArg Prod.fst (Finsupp.single_left_injective (b := (1 : ℕ)) one_ne_zero hc))
+  · intro h
+    exact absurd (Finset.mem_univ μ) h
+
+omit [Algebra ℚ R] in
+/-- `ζ · α_{-1}|k⟩ = 0` exactly when the polarisation vanishes (the metric is invertible). -/
+lemma polState_eq_zero_iff (hη : ∀ μ, η μ * η μ = 1) {e : Fin D → R} :
+    polState η e = 0 ↔ e = 0 := by
+  constructor
+  · intro h
+    funext μ
+    have hc := congrArg (coeff (Finsupp.single ((μ, 1) : Osc D) 1)) h
+    rw [coeff_polState η e μ, coeff_zero] at hc
+    calc e μ = (η μ * η μ) * e μ := by rw [hη μ, one_mul]
+      _ = η μ * (η μ * e μ) := by ring
+      _ = 0 := by rw [hc, mul_zero]
+  · rintro rfl
+    exact polState_zero η
+
+omit [Algebra ℚ R] in
+/-- Raising the index on the polarisation: `polState` of `η_μ c^μ` is `Σ_μ c^μ α^μ_{-1}`. -/
+lemma polState_raise (hη : ∀ μ, η μ * η μ = 1) (c : Fin D → R) :
+    polState η (fun μ => η μ * c μ) = ∑ μ : Fin D, c μ • (X ((μ, 1) : Osc D) : Fock D R) := by
+  rw [polState]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [← mul_assoc, hη μ, one_mul]
+
+omit [Algebra ℚ R] in
+lemma secondState_eq_sum_mode_gen (w : Fin D → R) :
+    secondState η w = ∑ μ : Fin D, (η μ * w μ) • mode η a μ (-2) (1 : Fock D R) := by
+  rw [secondState]
+  exact Finset.sum_congr rfl fun μ _ => by rw [mode_neg_two_apply η a, mul_one]
+
+omit [Algebra ℚ R] in
+lemma levelTwoGen_mem_levelSubmodule_two (v : Fin D → Fin D → R) (w : Fin D → R) :
+    levelTwoGen η v w ∈ levelSubmodule D R 2 := by
+  refine Submodule.add_mem _ (Submodule.sum_mem _ fun μ _ => ?_)
+    (secondState_mem_levelSubmodule_two η w)
+  exact (X_mem_levelSubmodule_one μ).mul (polState_mem_levelSubmodule_one (v μ))
+
+/-- `L_1 (α^μ_{-1} (ζ·α_{-1})|k⟩) = k^μ (ζ·α_{-1})|k⟩ + (ζ·k) α^μ_{-1}|k⟩`. -/
+lemma Lop_one_apply_X_one_mul_polState (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) (e : Fin D → R) :
+    Lop η a 1 ((X ((μ, 1) : Osc D) : Fock D R) * polState η e)
+      = a μ • polState η e + dotVec η e a • (X ((μ, 1) : Osc D) : Fock D R) := by
+  rw [← mode_neg_one_apply η a, Lop_apply_mode η a hη 1 μ (-1),
+    show (1 : ℤ) + -1 = 0 by ring, mode_zero_apply, Lop_one_apply_polState η a hη,
+    map_smul, mode_neg_one_apply η a, mul_one, smul_smul]
+  congr 2
+  push_cast
+  ring
+
+/-- `L_2 (α^μ_{-1} (ζ·α_{-1})|k⟩) = ζ^μ |k⟩`. -/
+lemma Lop_two_apply_X_one_mul_polState (hη : ∀ μ, η μ * η μ = 1) (μ : Fin D) (e : Fin D → R) :
+    Lop η a 2 ((X ((μ, 1) : Osc D) : Fock D R) * polState η e) = e μ • (1 : Fock D R) := by
+  rw [← mode_neg_one_apply η a, Lop_apply_mode η a hη 2 μ (-1),
+    show (2 : ℤ) + -1 = 1 by ring, mode_one_apply_polState η a hη,
+    Lop_apply_polState_of_two_le η a hη (le_refl (2 : ℤ)), map_zero, add_zero, smul_smul]
+  congr 1
+  push_cast; ring
+
+/-- `L_1 ((w·α_{-2})|k⟩) = 2 (w·α_{-1})|k⟩`. -/
+lemma Lop_one_apply_secondState_gen (hη : ∀ μ, η μ * η μ = 1) (w : Fin D → R) :
+    Lop η a 1 (secondState η w) = (2 : R) • polState η w := by
+  rw [secondState_eq_sum_mode_gen η a w, map_sum, polState_eq_sum_mode η a, Finset.smul_sum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 1) μ (-2),
+    show (1 : ℤ) + -2 = -1 by ring, smul_smul, smul_smul]
+  congr 1
+  push_cast; ring
+
+/-- `L_2 ((w·α_{-2})|k⟩) = 2 (w·k) |k⟩`. -/
+lemma Lop_two_apply_secondState_gen (hη : ∀ μ, η μ * η μ = 1) (w : Fin D → R) :
+    Lop η a 2 (secondState η w) = (2 * dotVec η w a) • (1 : Fock D R) := by
+  rw [secondState_eq_sum_mode_gen η a w, map_sum, dotVec, Finset.mul_sum, Finset.sum_smul]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [map_smul, Lop_apply_mode_one η a hη (by norm_num : (0 : ℤ) < 2) μ (-2),
+    show (2 : ℤ) + -2 = 0 by ring, mode_zero_apply, smul_smul, smul_smul]
+  congr 1
+  push_cast; ring
+
+/-- **The `L_1` constraint vector** of the general level-two state: `L_1 ψ` is the level-one
+state with this polarisation.  Its vanishing is `D` linear equations on `(v, w)`. -/
+def levelTwoL1 (v : Fin D → Fin D → R) (w : Fin D → R) : Fin D → R :=
+  (∑ μ : Fin D, a μ • v μ) + (fun μ => η μ * dotVec η (v μ) a) + (2 : R) • w
+
+/-- **The `L_2` constraint scalar** of the general level-two state.  Its vanishing is the
+single remaining linear equation. -/
+def levelTwoL2 (v : Fin D → Fin D → R) (w : Fin D → R) : R :=
+  (∑ μ : Fin D, v μ μ) + 2 * dotVec η w a
+
+/-- **`L_1` on the general level-two state.** -/
+theorem Lop_one_apply_levelTwoGen (hη : ∀ μ, η μ * η μ = 1) (v : Fin D → Fin D → R)
+    (w : Fin D → R) :
+    Lop η a 1 (levelTwoGen η v w) = polState η (levelTwoL1 η a v w) := by
+  rw [levelTwoGen, map_add, map_sum,
+    Finset.sum_congr rfl fun μ _ => Lop_one_apply_X_one_mul_polState η a hη μ (v μ),
+    Lop_one_apply_secondState_gen η a hη, Finset.sum_add_distrib, levelTwoL1,
+    polState_add, polState_add, polState_sum, polState_raise η hη, polState_smul]
+  congr 2
+  exact Finset.sum_congr rfl fun μ _ => (polState_smul η (a μ) (v μ)).symm
+
+/-- **`L_2` on the general level-two state.** -/
+theorem Lop_two_apply_levelTwoGen (hη : ∀ μ, η μ * η μ = 1) (v : Fin D → Fin D → R)
+    (w : Fin D → R) :
+    Lop η a 2 (levelTwoGen η v w) = levelTwoL2 η a v w • (1 : Fock D R) := by
+  rw [levelTwoGen, map_add, map_sum,
+    Finset.sum_congr rfl fun μ _ => Lop_two_apply_X_one_mul_polState η a hη μ (v μ),
+    Lop_two_apply_secondState_gen η a hη, levelTwoL2, ← Finset.sum_smul, add_smul]
+
+/-- `L_n` annihilates a level-two state for `n ≥ 3`. -/
+theorem Lop_apply_levelTwoGen_of_three_le (v : Fin D → Fin D → R) (w : Fin D → R) {n : ℤ}
+    (hn : 3 ≤ n) : Lop η a n (levelTwoGen η v w) = 0 :=
+  Lop_apply_eq_zero_of_level_lt η a (levelTwoGen_mem_levelSubmodule_two η v w)
+    (by push_cast; omega)
+
+end LevelTwoLop
+
+/-! ### The complete level-two slice of the physical subspace -/
+
+section LevelTwoPhys
+
+variable (η a : Fin D → R)
+
+/-- **The level-two slice of `H_phys`, completely** (`formal/TODO.md` item `noghost-b`,
+blocker (b)).
+
+Writing the most general level-two state as
+`ψ = Σ_μ α^μ_{-1} (v_μ · α_{-1}) |k⟩ + (w · α_{-2}) |k⟩`
+(`Fock.levelTwoGen`; always possible by
+`Fock.exists_levelTwoGen_of_mem_levelSubmodule_two`), membership in `H_phys` is equivalent to
+
+* the mass shell `α' k² + 2 = a₀`;
+* the `D` equations `Σ_μ k^μ v_μ + η_μ (v_μ · k) + 2 w = 0` (`Fock.levelTwoL1`, the
+  polarisation of `L_1 ψ`);
+* the single equation `Σ_μ v_μ^μ + 2 (w·k) = 0` (`Fock.levelTwoL2`, the scalar `L_2 ψ`).
+
+The conditions `L_n ψ = 0` for `n ≥ 3` are automatic by the level grading.  This is the
+level-two analogue of `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff`, and unlike
+`NoGhost/LevelTwo.lean` it covers **all** level-two states, not the `SO(D-1)`-scalar trial
+family. -/
+theorem mem_physSubmodule_inf_levelSubmodule_two_iff (hη : ∀ μ, η μ * η μ = 1) (a₀ : R)
+    {ψ : Fock D R} :
+    ψ ∈ physSubmodule η a a₀ ⊓ levelSubmodule D R 2 ↔
+      ∃ (v : Fin D → Fin D → R) (w : Fin D → R), ψ = levelTwoGen η v w ∧
+        (invTwo R * zeroModeSq η a + 2 - a₀) • ψ = 0 ∧
+          levelTwoL1 η a v w = 0 ∧ levelTwoL2 η a v w = 0 := by
+  constructor
+  · intro hmem
+    rw [Submodule.mem_inf] at hmem
+    obtain ⟨v, w, hvw⟩ := exists_levelTwoGen_of_mem_levelSubmodule_two hη hmem.2
+    obtain ⟨h0, hpos⟩ := (mem_physSubmodule_iff_of_mem_levelSubmodule η a a₀ hη hmem.2).mp
+      hmem.1
+    refine ⟨v, w, hvw, by simpa using h0, ?_, ?_⟩
+    · have h1 := hpos 1 (by norm_num)
+      rw [hvw, Lop_one_apply_levelTwoGen η a hη] at h1
+      exact (polState_eq_zero_iff η hη).mp h1
+    · have h2 := hpos 2 (by norm_num)
+      rw [hvw, Lop_two_apply_levelTwoGen η a hη, smul_eq_C_mul, mul_one] at h2
+      exact MvPolynomial.C_eq_zero.mp h2
+  · rintro ⟨v, w, rfl, h0, h1, h2⟩
+    refine Submodule.mem_inf.mpr ⟨?_, levelTwoGen_mem_levelSubmodule_two η v w⟩
+    refine (mem_physSubmodule_iff_of_mem_levelSubmodule η a a₀ hη
+      (levelTwoGen_mem_levelSubmodule_two η v w)).mpr ⟨by simpa using h0, fun n hn => ?_⟩
+    rcases lt_or_ge n 3 with h | h
+    · rcases (show n = 1 ∨ n = 2 by omega) with rfl | rfl
+      · rw [Lop_one_apply_levelTwoGen η a hη, h1, polState_zero]
+      · rw [Lop_two_apply_levelTwoGen η a hη, h2, zero_smul]
+    · exact Lop_apply_levelTwoGen_of_three_le η a v w h
+
+end LevelTwoPhys
+
 end Fock
 
 /-! ### The exact expansion of `A^ε_{-2}` on the ground state -/
