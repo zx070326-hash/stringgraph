@@ -25,6 +25,62 @@ the last theorem, through the Type-1 null lemma of `NoGhost/NullSeedsTwo.lean`.
   Only the `K`-algebra is used: `⁅L_{-1}, K_1⁆ = -K_0 = -1` gives
   `L_{-1} K_1^{k+1} x = -(k+1) K_1^k x` for `L_{-1} x = 0`, and `K_1^{M+1} x = 0` on level `M`
   forces `x = 0` by descent.  Needs only a `ℚ`-algebra (no `CharZero` hypothesis).
+* `straighten` / `apply_mem_ordSpanOn_of_mem` — **straightening for an arbitrary family**
+  `L : ℤ → Module.End R W` satisfying the negative-mode Witt relations (`IsNegWitt`), applied
+  to an arbitrary vector: `Virasoro/VermaPBW.lean`'s induction, freed from the Verma module.
+  `isNegWitt_towerLop` instantiates it on the tower.
+* `towerBigrade_le_ordSeedSpan` — **(F-1), spanning half** (blueprint §B″.4.1): every bigraded
+  piece `(j, M)` is spanned by `L_{-λ} m(c)`, `λ` an ordered partition, `c` `b̃`-free,
+  `|λ| + level c = M`.  Nested induction: strong induction on `M`, inside it the measure
+  induction of PR4's elimination, with the spurious term kept instead of discarded.
+* `seedIndexPosEmbed_injective` / `finrank_ordSeedSpanPos_le` — **(F-2), injective half**:
+  `(λ, c) ↦ c + wordOcc λ` is injective into `{d | level d = M, β(d) ≥ 1}`, so the non-empty
+  part of the family has dimension `≤ p_D(M) − p_{D−1}(M)`.
+* `finrank_towerBigrade` — `dim V_{j,M} = #{d | level d = M}` (Mathlib `basisRestrictSupport`).
+* `towerSeed` / **`le_finrank_towerSeed`** — the seed space
+  `Q_{j,M} = towerPositiveModeSubmodule ⊓ towerBigrade j M` has `dim ≥ p_{D−1}(M)`, on every
+  rung and level.  Rank–nullity for `V_{j,M} → (non-empty seed family)^*`, whose kernel
+  consists of seeds; **no nondegeneracy of the form on the slice is used** for this direction.
+  With `SpuriousElimination.finrank_towerPositiveMode_inf_towerBigrade_le` this is an equality
+  `dim Q_{j,M} = p_{D−1}(M)` — blueprint §B″.4.1's (F-4) second line, without a basis.
+* **`le_finrank_towerNull_inf_towerBigrade_succ`** — the **`D`-independent null lower bound**
+  `dim (H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)` for **every** `N`: `L_{-1}` embeds `Q_{-(N+1),N}` into
+  the null states of the antidiagonal slice (`typeOneMap`).  `le_finrank_towerNull_inf_towerBigrade`
+  is the blueprint's `N - 1` phrasing (for `1 ≤ N`).
+
+## Deviations from blueprint §B‴.9 (also appended to the blueprint's "§B‴ 订正")
+
+1. **`le_finrank_towerNull_inf_towerBigrade` as drafted is false at `N = 0`**: the draft reads
+   `p_{D−1}(N−1) ≤ dim (H_null ⊓ V_N)` with natural-number subtraction, so at `N = 0` it claims
+   `1 ≤ dim (H_null ⊓ V_0)`, but `|0;0⟩` is physical and not null.  Stated at `N + 1`
+   (`_succ`), with the `N − 1` form under `1 ≤ N`.
+2. **`towerLop_neg_one_injective` needs no `CharZero`**: in a `ℚ`-algebra `k • y = 0 ⇒ y = 0`
+   for `k ≠ 0` (`eq_zero_of_natCast_smul_eq_zero`), so the descent runs over `[Algebra ℚ R]`.
+3. **The (F-1)+(F-2) lower bound does not need "`S_M = S ⊓ V_M`" or projections of spurious
+   states.**  The dual map is taken against the non-empty seed family `ordSeedSpanPos` directly
+   (not against `towerSpuriousSubmodule ⊓ V_M`); its kernel lies in `Q_{j,M}` because
+   `⟨L_n x, y⟩ = ⟨x, L_{-n} y_{(j,M-n)}⟩` and `L_{-n} V_{j,M-n} ⊆ ordSeedSpanPos` by (F-1) plus
+   straightening.  So `towerBigradeProj_mem_towerSpuriousSubmodule` was never needed.
+4. **Straightening had to be re-proved.**  `VermaPBW.straighten` is stated on `V(c,h)` acting on
+   the highest-weight vector; (F-1) needs it on `TowerFock` acting on `m(c)`.  Rather than
+   transporting, the induction is redone once for an arbitrary `IsNegWitt` family (≈ 110 lines,
+   verbatim structure).  The blueprint's "(F-1) 不需要抽象 PBW" is right, but it does need the
+   PBW *spanning* induction, which is exactly `straighten`.
+5. **(F-2) only in the injective direction**, as the lower bound needs
+   (`nat_card_seedIndexPos_le`); the bijection of §B″.4.1 (c1) is not built.  Sorted lists are
+   recovered from multiplicities via `List.Perm.eq_of_pairwise'` + `List.perm_iff_count`.
+6. **Line count** ≈ 940 against the estimate 700–850 (the seed-index bookkeeping and the
+   dimension lemmas `finrank_towerBigrade` / `nat_card_level_split` were not itemised).
+
+## Scope and gaps
+
+* This bound is the **`D ≠ 26` answer** (blueprint §B‴.8): the missing
+  `p_{D−1}(N+1) − p_{D−2}(N+1) − p_{D−1}(N)` null states are the Type-2 family and, from
+  `N + 1 ≥ 12`, further singular-vector families — all `D = 26`-dependent, none here.  So
+  `B26 N` is **not** closed for `N ≥ 3`; see the TODO `noghost-pr6` and blueprint §B‴.9's
+  "(B-26) 剩余部分".
+* `ordSeedSpan` is only known to *contain* `V_{j,M}`; linear independence of the family
+  (the PBW basis, (F-3)) is not proved, and `conjFree ⊓ spurious = ⊥` remains open.
 -/
 
 namespace StringFormal.NoGhost

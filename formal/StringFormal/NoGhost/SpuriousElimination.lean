@@ -68,6 +68,17 @@ file**, and neither does the intercept beyond the normalisation `a₀ = α'k²`.
 * `finrank_conjFree_le`, `finrank_conjFreeSlice_le` and
   **`finrank_towerPhys_inf_towerBigrade_le`** — (P3).
 
+### The same on an arbitrary bigraded piece `(j, M)` (blueprint §B‴.9, PR6′ prerequisite)
+
+* `conjFreeSliceAt`, `towerBigrade_le_conjFreeSliceAt_sup_towerSpurious` — the elimination on
+  any rung `j` (the proof never used the rung).
+* `towerPositiveMode_inf_towerBigrade_eq_towerOrthComplement` — `Q_{j,M} = S^⊥ ⊓ V_{j,M}` for
+  the quasi-physical space `Q_{j,M} = towerPositiveModeSubmodule ⊓ towerBigrade j M`
+  (blueprint §B‴.3): the `L_0` condition dropped on both sides.
+* `finrank_towerPositiveMode_inf_towerBigrade_le` — (P3) for `Q_{j,M}`:
+  `dim Q_{j,M} ≤ p_{D−1}(M)`.  The matching lower bound is
+  `TypeOneFamily.le_finrank_towerSeed`, so `dim Q_{j,M} = p_{D−1}(M)` exactly.
+
 ### Bonus: half of Goddard (6.2)
 
 * `single_lcMonomial_mem_towerKerK`, `conjFreeSlice_le_towerKerK_inf_towerBigrade` — a
@@ -122,9 +133,9 @@ file**, and neither does the intercept beyond the normalisation `a₀ = α'k²`.
   and would need linear independence of the light-cone monomials.
 * For the same reason `towerKerK ⊓ towerBigrade = conjFreeSlice` is available only in the
   direction `⊇` (blueprint §B′.9 item 2).
-* **(B-26) is untouched.**  This file gives the upper bound on `dim (H_phys ⊓ V_N)`; the
-  lower bound on `dim (H_null ⊓ V_N)` — the one place where `D = 26` enters — is blueprint
-  PR5 and is not started.
+* **(B-26) is untouched here.**  This file gives the upper bound on `dim (H_phys ⊓ V_N)`; the
+  lower bound on `dim (H_null ⊓ V_N)` is `NoGhost/LevelTwoCount.lean` (`N = 2`, uses `D = 26`)
+  and, `D`-independently, `NoGhost/TypeOneFamily.lean` (`≥ p_{D−1}(N−1)` for every `N`).
 * `finrank_towerPhys_inf_towerBigrade_le` is stated at the intercept
   `a₀ = invTwo R * Fock.zeroModeSq η a` only, because that is the value for which the `L_0`
   condition is automatic on the antidiagonal; at any other intercept the slice consists of
