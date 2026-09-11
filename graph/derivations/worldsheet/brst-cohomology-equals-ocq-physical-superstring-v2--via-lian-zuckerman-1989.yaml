@@ -112,6 +112,25 @@ depends_on:
       而按 researcher 第三轮 §9.4，**Corollary 2.19(iii) 的证明并不经 Prop 2.18 的陈述**，
       只经其证明体内的 (24)(25)。两条路径不可合并，见 gaps。
       ⚠ 该卡的 effective 是 physical-argument，与本推导已有的封顶来源相同，**不改变有效状态**。
+  - id: worldsheet.superstring-ramond-zero-mode-cohomology-trivial
+    note: |
+      供给 **LZ Theorem 2.7**（p.310，R 扇区 (ℱ(p,0), D_R|_ℱ) 上同调为零，逐字
+      'Thus C_rel(p,0) = D_R F(p,0).'）。**本推导的 sources 第三条早已把它列在 loc 里**，
+      此前因本图无卡而只能写在 note 里（见 worldsheet.no-ghost-theorem-superstring-cohomological-v2
+      那条边的 note 逐字「其合法性由 **Theorem 2.7** 保证」）；卡已建（curator 2026-09-11，lz-thm27），
+      本轮补上这条边。
+      **它在本推导里承担的是「酉」这个字**：目标卡断言 (1)(2) 是**酉**同构，要求两侧的厄米型良定义；
+      R 扇区相对复形上的型是 LZ **Definition 2.11** 用 D_R 的**原像**定义的（朴素型在那里恒零，
+      p.310 逐字 '⟨·, c₀·⟩_C ≡ 0 when restricted to C_rel(p,0) … because ⟨T₁, T₁⟩_T = 0'），
+      **原像存在** = C_rel(p,0) = D_R ℱ(p,0) 就是 Theorem 2.7，**与 v̂ 的选择无关**则用它的收缩同伦 ε
+      （p.311 Remark 逐字 'Recall that (Theorem 2.7) there is a contracting homotopy ε : ℱ → ℱ
+      such that {D_R, ε} = 1'）。
+      **非 inferred，但引用是间接的**（与本推导 worldsheet.superstring-relative-cohomology-vanishing-v2
+      那条边同款口径）：链条 2.7 → Definition 2.11（⟨,⟩_rel 良定义）→ 2.20（'unitary isomorphisms'）
+      的每一环都在论文内部显式写出，不是本图补的推断；但 Theorem 2.20 的证明段落本身没有点名 2.7。
+      ⚠ **只在 R 扇区承重**：NS 扇区 ℱ(p,½) = C_rel(p,½)，⟨,⟩_rel = ⟨,⟩_ℬ 直接良定义，用不到本边。
+      ⚠ 编号陷阱：**LZ 1989 Theorem 2.7 ≠ FGZ 1986 Theorem 2.7**（后者是玻色弦消灭定理 + 维数公式，
+      已立卡 worldsheet.bosonic-relative-cohomology-vanishing / -dimension）。
   - id: worldsheet.ddf-operators-v6
     inferred: true
     note: |
