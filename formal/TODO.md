@@ -578,7 +578,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     正是被整序消掉的非标准词。`three_le_finrank_levelSpan_three`、`five_le_finrank_levelSpan_four`
     保留为等式的 `≥` 半边推论。
     原先记录的障碍（`Fintype.card (Nat.Partition 3) = 3`，Mathlib 没有基数引理且 `decide`
-    化不开 `Fintype.ofSurjective` 实例）**因此被绕过而非解决**：`Nat.Partition` 的计数仍然缺。
+    化不开 `Fintype.ofSurjective` 实例）在该文件里是被**绕过**的；**计数本身已于 2026-09-11 补上**，
+    见下一条 `partition-card`，于是 `finrank_levelSpan_le_card_partition` 可对 `N ≤ 5` 取数值
+    （`GenericIndependence.lean` 末尾的 `finrank_levelSpan_{three,four,five}_le`，无条件）。
     `N ≥ 5` 同法可做，但需要该层 Kac 行列式（`ShapovalovLevelFive.lean` 不存在）；
     有序词枚举本身在 `N = 5` 是 7 个情形、长度 ≤ 5，`match` 分支数随 `N` 线性增长，
     不是瓶颈——**瓶颈是 Gram 行列式**。
@@ -597,6 +599,25 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `V(c,h) ≠ 0` 是 (b) 的推论；在 (b) 之前 `Verma.lean` / `VermaPBW.lean` 里的一切都可能是空洞真，
   `dim V_N = p(N)` 除 generic `N = 2,3,4` 外只证到 `≤`。这一项是 `shapovalov-form` 与
   `kac-determinant` 的前提。
+- [x] `partition-card`：`p(n) = Fintype.card (Nat.Partition n)` 的显式值（`n = 2,3,4,5` 为
+  `2,3,5,7`）。见 `StringFormal/Math/PartitionCard.lean`（无 sorry，公理只有标准三条；只 import
+  三个 Mathlib 模块，不 import 本项目其他模块）。Mathlib v4.33.1 有 `Nat.Partition` 与它的
+  `Fintype` 实例，但**没有任何基数引理**。
+  - 为什么不能 `decide`：`#eval Fintype.card (Nat.Partition 4)` 确实打印 `5`（实例是可计算的），
+    但内核化不开——实例是 `Fintype.ofSurjective (Nat.Partition.ofComposition n) _`，而
+    `Fintype (Composition n)` 经 `compositionEquiv` → `CompositionAsSet.blocks` →
+    `Finset.orderEmbOfFin` → `Finset.sort` → `List.mergeSort`，后者是良基递归，`whnf` 停在
+    `match h : (Fintype.card (Nat.Partition 2)).beq 2 with ...`。`native_decide` 会引入
+    `Lean.ofReduceBool`，本项目禁止。
+  - `Nat.Partition.toFinsuppAntidiag` **只是单射**，不是到 `(Finset.Icc 1 n).finsuppAntidiag n`
+    的双射（`n = 2` 时右边有 3 个元素而 `p(2) = 2`：值向量 `(1,1)` 不是 `i ↦ count i · i` 的形状），
+    所以不能用那个 Finset 来数。
+  - 做法：`card_partition_eq_card` 把计数搬到显式的 `Finset (Multiset ℕ)` 字面量上
+    （那里 `decide` 可用，`DecidableEq (Multiset ℕ)` 经 `List.decidablePerm` 归约），
+    穷尽性由 `exists_cons_of_sum_succ`（剥一个部分）+ 对总和递归给出
+    （`multiset_sum_eq_{one,two,three,four,five}`）。
+  - 这是**可复用的**：`card_partition_eq_card` 对任意 `n` 成立，加一个 `multiset_sum_eq_six`
+    就能得 `p(6) = 11`，机械工作量随分拆数线性增长。
 - [x] `shapovalov-form`：Shapovalov（逆变）形式。见 `StringFormal/Virasoro/Shapovalov.lean`
   （无 sorry，公理只有标准三条）：
   - `VirasoroAlgebra.antiInvolution`：反对合 `σ : L_n ↦ L_{-n}`、`C ↦ C`，
@@ -807,7 +828,9 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   公理检查：25 条声明全部 `ok`，只用 `propext` / `Classical.choice` / `Quot.sound`
   （`--import StringFormal.NoGhost.FockGram --all`，2026-09-11）。
   **数学缺口（对图）**：(a) 本文件把 (H1)–(H4) 证成了*定理*，因此证明了图卡的结论并说明假设集自洽，
-  但**没有**证明 DDF 算子满足 (H1)–(H4)——那是无鬼岛里另一项义务；
+  但**没有**证明 DDF 算子满足 (H1)–(H4)——那是无鬼岛里另一项义务。
+  **(a) 已关闭**：抽象侧见 `noghost-c3`（`HeisenbergGram.lean`），DDF 侧见 `noghost-c4`
+  （`DDFGram.lean` 的 `ddfFamily_ccr` / `_adj` / `_ann` 与 `Fock.towerPairing_towerVacuum_self`）；
   (b) 正定性要求 η 逐分量为正，mostly-plus Minkowski 的类时方向不成立
   （`Fock.pairing_X_X_minkowski_timelike`），这正是无鬼定理只谈**横向**扇区的原因；
   (c) 零模（动量 `k`）、完化、复埃尔米特版本的缺口与 `Fock.lean` 文件头相同，未新增。
@@ -1326,7 +1349,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `noghost_transverse_gram_satisfiable`（`D-2` 个横向方向，Gram = `δ_{ij}`）。
     工具引理 `dotVec_add_left/right`、`dotVec_single_left`、`dotVec_single_single`、`dotVec_pair`
     可复用。**数学结论**：`b·a = 1` 与 `a·a = 2` 一起**强制** `a = (1/2,3/2,0,…)`，
-    所以这套见证在 ℤ 上不存在，ℚ-代数假设不是偷懒而是必需。
+    所以这套见证在 ℤ 上不存在，ℚ-代数假设不是偷懒而是必需。**【已推翻，reviewer-batch26 / WitnessInt.lean】**：换标架 a=(0,1,1,0,…) 在 ℤ 上满足全部假设（`noghost_hypotheses_satisfiable_int`）；ℚ 只因 (M) 的 invTwo 写法；DDF 算子本身仍需 [Algebra ℚ R]。
   - **`Longitudinal.lean`（§A.1/§A.2）**：`K_m = k_0·α_m` **就是** `towerModeVec η a b b m`
     （偏振取 `b` 自身；类光条件 `b·b = 0` 就是「`b` 对自己横向」），于是 Goddard 2008 (6.3)
     的整套代数是既有引理在 `ε := b` 处的特例：
@@ -1400,9 +1423,10 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   - **数学缺口（应写进图卡 notes）**：本文件是**正交归一（横向）情形**，中心项被归一成
     `m δ_{ij}`；世界面振子 `⁅α^μ_m, α^ν_n⁆ = m η^{μν} δ_{m+n,0}` 的 `η` 不定，
     **`FockGram.lean` 不是本定理的实例**，两者覆盖互补情形。卡片应说明用的是哪套归一化。
-  - **仍缺**：(i) DDF 实例化（§C.4）未做，还差 `⟨towerVacuum,towerVacuum⟩ = 1`、
-    `A^ε_n towerVacuum = 0 (n>0)` 两条小引理与横向正交归一标架，所以 `fock-gram` 项的缺口 (a)
-    只在抽象侧关闭；(ii) 无完备性（单项式张成 M 是 `ddf-spans`）；
+  - **DDF 实例化已补上**（`noghost-c4` / `StringFormal/NoGhost/DDFGram.lean`）：`fock-gram` 项
+    自报的缺口 (a)「本文件没有证明 DDF 算子满足 (H1)–(H4)」**现已关闭**，
+    见 `ddfFamily_ccr` / `_adj` / `_ann` 与 `Fock.towerPairing_towerVacuum_self`。
+  - **仍缺**：(ii) 无完备性（单项式张成 M 是 `ddf-spans`）；
     (iii) `hcomm` 作为定义参数四处传递，未打包成结构；(iv) 未重构 `FockGram.lean`（见上条）。
   - **公理登记**：19 条公开声明经 `check_axioms --all` 全部 `ok`，公理集只有
     `propext`、`Classical.choice`、`Quot.sound`（2026-09-11）。
@@ -1451,21 +1475,150 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     2. **`TransverseFrame`（正交归一 + 横向）推不出完备性。** 「`D−2` 个横向向量连同 `p_{−1}`
        张成 `p_{−1}^⊥`」是独立假设（`FrameSpansOrthogonal`），对显式见证已验证
        （`witness_frameSpansOrthogonal`），但一般情形不成立。GT 的计数论证默认了它。
-  - **`N = 2` 未做，卡点具体到两条**：
-    (a) `ddfOp_neg_one_apply_towerVacuum` 的 `n = 2` 版与 `A^ε_{−1}A^δ_{−1}` 版：窗口变成
-        `{−2,−1,0}`，顶点算子的 level-1/level-2 系数 `Φ_1`、`Φ_2` 真的贡献，
-        需要 `Fock.creaExp η c 1` 与 `creaExp η c 2` 的显式展开（`coeff_creaExp` 有，
-        但没有「`creaExp` 的 level-1 分量 = `c·α_{−1}`」这种可用形状的引理）。
-    (b) level-2 版的 `Fock.mem_physSubmodule_inf_levelSubmodule_one_iff`，即
-        `L_1`/`L_2` 条件在 level 2 上的**完整**解——`NoGhost/LevelTwo.lean` 只覆盖
-        `SO(D−1)` 标量试探族（它自己的 docstring 已声明），不是 level-2 物理态的全部。
-    做完 (a)(b) 之后，`N = 2` 的组装与 `N = 1` 同构（分次 + 完备性 + 逐项代入）。
+  - **`N = 2` 的两条卡点已解决**（分支 `agent/formalizer/noghost-b2`，
+    `StringFormal/NoGhost/LevelTwoSpan.lean`，54 条顶层声明，见下面的 `noghost-b2` 条）；
+    **`N = 2` 的组装（张成）仍未做**。
   - **图接线建议（本分支不碰 `graph/`）**：`worldsheet.ddf-operators-v6` 的 notes 补第 1 条缺口；
     `massShell_of_mem_towerBigrade` 可作为 `worldsheet.no-ghost-theorem-v4` (1b) 中
     「`N = a − α'p²`」子句的 `lean_decl`；`noghost_hypotheses_satisfiable_int` 可挂在
     可满足性见证卡上（若 `Witness.lean` 的「需要 ℚ」写进了某张卡的 notes，应订正）。
+- [x] `noghost-b2`：**蓝图 §B.6 `N = 2` 的两条卡点 (a)(b)** ——
+  `StringFormal/NoGhost/LevelTwoSpan.lean`（54 条顶层声明，无 sorry，
+  `check_axioms --all` 全 `ok`，公理集只有 `propext`/`Classical.choice`/`Quot.sound`）。
+  分支 `agent/formalizer/noghost-b2`。
+  - **(a) 产生指数的显式分量 + 两条 DDF 态的精确展开**：
+    `Fock.creaExp_one`（`Φ_1 = b·α_{−1}`，就是 `polState η b`，由 `creaExp_euler` 在 `M = 1`）、
+    `Fock.two_smul_creaExp_two`（**去分母形**：`2Φ_2 = (b·α_{−1})² + (b·α_{−2})`）与
+    `Fock.creaExp_two`（`invTwo` 形）；`Fock.vertexOsc_apply_polState`
+    （`V_K (ζ·α_{−1})|k⟩ = (ζ·α_{−1})Φ_K − (ζ·c)Φ_{K+1}`，横向时第二项消失）。
+    由此：
+    * **`ddfOp_neg_two_apply_towerVacuum`**：
+      `A^ε_{−2}|0;k⟩ = [ε·α_{−2} − 2(ε·α_{−1})(k_0·α_{−1})]|0;k−2k_0⟩`。
+      窗口 `{−2,−1,0}`，`j = −1` 项正是 `Φ_1`（在顶点动量 `−2k_0` 上）。
+    * **`ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum`**：
+      `A^ε_{−1}A^δ_{−1}|0;k⟩ = [(ε·α_{−1})(δ·α_{−1}) + ½(ε·δ)((k_0·α_{−1})² − k_0·α_{−2})]
+      |0;k−2k_0⟩`。窗口是 `{−2,−1,0,1}`（**不是** `{−2,−1,0}`，任务书原话的猜测偏小）：
+      `j = 1` 项非零，给出的正是 DDF 代数的中心项 `(ε·δ)Φ_2`。修正项对 `ε ↔ δ` 对称，
+      与 `⁅A^ε_{−1},A^δ_{−1}⁆ = −(ε·δ)δ_{−2,0} = 0` 一致（一条独立的正确性自检）。
+    * `single_ddfSecond_mem_ddfSpan` / `single_ddfPair_mem_ddfSpan`：上面两族作为
+      `ddfSpan` 的显式成员（level-2 的 `(D−2) + (D−2)(D−1)/2` 个生成元）。
+  - **(b) level-2 物理态的完整刻画**（不再限于 `SO(D−1)` 标量族）：
+    * `Fock.level_two_cases`：level-2 单项式只有 `α^μ_{−2}` 与 `α^μ_{−1}α^ν_{−1}` 两形。
+      证明用「删一个振子」：`level_sub_single_add` 把 level 降到 1 或 0，再接
+      `exists_eq_single_of_level_eq_one`，**不需要**对 support 做组合枚举。
+    * `Fock.levelTwoGen η v w = Σ_μ α^μ_{−1}(v_μ·α_{−1})|k⟩ + (w·α_{−2})|k⟩` 与
+      `Fock.exists_levelTwoGen_of_mem_levelSubmodule_two`（满射；用
+      `MvPolynomial.support_sum_monomial_coeff` + 子模 `levelTwoRange`，逐单项式）。
+    * `Fock.Lop_one_apply_levelTwoGen`：`L_1ψ = polState η (levelTwoL1 η a v w)`，其中
+      `levelTwoL1 = Σ_μ k^μ v_μ + (μ ↦ η_μ (v_μ·k)) + 2w`（**D 个**线性方程）；
+      `Fock.Lop_two_apply_levelTwoGen`：`L_2ψ = (levelTwoL2 η a v w)|k⟩`，
+      `levelTwoL2 = Σ_μ v_μ^μ + 2(w·k)`（**1 个**方程）；`n ≥ 3` 自动（level 分级）。
+    * **`Fock.mem_physSubmodule_inf_levelSubmodule_two_iff`**（单 Fock）与
+      **`mem_towerPhys_bigrade_two_iff`**（塔上 `(rung j, level 2)`）：质壳 + 上述 `D+1` 条。
+      `⇒` 方向用 `Fock.polState_eq_zero_iff`（`η² = 1` ⇒ 偏振映射单射，本轮新证）。
+  - **未做 / 卡点（(c) `towerPhys_bigrade_two_le_ddfSpan_sup_spurious`）**：
+    两侧现在都是显式向量，缺的是**消元**——给定满足 `D+1` 条约束的 `(v,w)`，把 `ψ` 写成
+    `(D−2)+(D−2)(D−1)/2` 个 DDF 向量与 `D+1` 个伪态（`L_{−1}(level 1)`、`L_{−2}|0;p_{−2}⟩`）
+    的组合。这一步需要光锥分解（`b`, `b̃`, `ε_i`，因而需要 `FrameSpansOrthogonal`）以及
+    `L_{−1}`、`L_{−2}` 在塔上 rung `−2` 的显式作用，工作量与 `N = 1` 不同量级
+    （level-2 的维度是 `D(D+3)/2`），本轮没有开工。计数上是相容的：
+    物理态维数 `(D+2)(D−1)/2`，右端 `≤ D(D+1)/2`，差 1，且 **`D = 26` 不出现**
+    （与 `N = 1` 同，`D = 26` 只在「零态/正定性」那一半才进来）。
+  - **发现的数学缺口（建议写进图）**：
+    1. **`ε·k = 0` 在 `N = 2` 再次是必需的**（`hεa : dotVec η ε a = 0`）：
+       `A^ε_{−2}` 与 `A^ε_{−1}A^δ_{−1}` 的精确展开都用它把 `j = 0` 项杀掉。
+       这与 `noghost-b` 记的第 1 条缺口是同一条，但此处是**独立的第二个证据**：
+       它不是 `N = 1` 的偶然，而是 DDF 岛四条标准假设的系统性不足。
+       `worldsheet.ddf-operators-v6` 的约定/notes 应写明。
+    2. **`A^ε_{−1}A^δ_{−1}|0;k⟩ ≠ α^ε_{−1}α^δ_{−1}|0;k−2k_0⟩`**：差一个
+       `½(ε·δ)[(k_0·α_{−1})² − k_0·α_{−2}]`。物理文献常把 DDF 态与横向振子态等同，
+       这个等同**从 `N = 2` 起就不成立**（`N = 1` 时恰好精确）。若图里有卡把
+       「DDF 态 = 横向 Fock 态」写成命题，应改成「在 `ddfSpan ⊕ spurious` 的意义下」。
+    3. `ψ = levelTwoGen η v w` 的表示**不唯一**（只有 `v` 的对称部分被定死），
+       所以 (b) 的刻画是 `∃` 形，不是典范形式；做 (c) 时需要注意别默认唯一性。
+- [x] `noghost-c4`（⚠ 未做：`ddfMonomial d` 落在 rung −N(d) 的定位（DDFGram.lean:297 自报），派 `formalizer-ddfgram-level`；spurious→null 桥 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 已由 Assembly.lean 提供）（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
+  `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
+  （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。
+  - **两条「缺，小」的引理**（`HeisenbergGram.lean` 自报的 gap 1）：
+    `Fock.towerPairing_towerVacuum_self`（⟨0;k|0;k⟩ = 1，(H3)）与
+    **`ddfOp_towerVacuum_of_pos`**（`A^ε_n|0;k⟩ = 0`，`n > 0`，(H4)）——后者确如蓝图所料是
+    一行推论：`towerLevelBound = towerModeBound = 0` ⇒ `ddfWindow n vac = Icc n 0 = ∅`。
+  - **打包**：`ddfFamily η a b ε hη hεb i n = A^{ε_i}_n`（指标类型 `ι` 任意），四条前件
+    `ddfFamily_ccr`（由 `lie_ddfOp_ddfOp` + 标架正交归一）、`ddfFamily_adj`
+    （由 `Fock.towerPairing_ddfOp_left`）、`ddfFamily_ann`，(H1) 由 `commute_heisCreation` 推出。
+  - **主定理 `ddf_gram_diagonal`**：`⟨mono d, mono e⟩ = δ_{d,e} ∏ n^{d(i,n)} d(i,n)!`，
+    对**任意交换 ℚ-代数**成立（`heisNorm`）；`ddf_gram_pos`（有序环，对角元 > 0）、
+    `linearIndependent_ddfMonomial`（特征 0 域）。
+  - **`ddfMonomial_mem_towerPhysSubmodule`**：DDF 单项式都是物理态，截距
+    `a₀ = invTwo·zeroModeSq η a = α'k²`——由真空定死，**不是自由参数**。
+  - **标架层**（用 `LightCone.lean` 的 `TransverseFrame`，`ι = Fin (D−2)`）：`frameMonomial`、
+    `towerPairing_frameMonomial`（蓝图字面陈述）、**`ddfSpan_eq_span_range_frameMonomial`**
+    （`ddfSpan` 的列表生成集 = 占据数生成集，桥由 `frameMonomial_toFinsupp` 给出）与
+    **`ddf_span_pos`**（全序域上 `ddfSpan` 中非零向量模长 > 0）——这是蓝图 §C.5
+    `no_ghost_semidefinite` 需要的正定性输入，已就位。
+  - **数学判断（应写进图卡 notes）**：`lie_ddfOp_ddfOp` 给的中心项是 `m (ε·δ) δ_{m+n,0}`，
+    对**任意**一对横向偏振成立；把它化成 Heisenberg 归一 `m δ_{ij}` **必须**额外假设
+    标架正交归一 `ε_i·ε_j = δ_{ij}`。卡 `worldsheet.transverse-ddf-fock-gram-matrix`
+    应把「正交归一横向标架」列为前件，而不是只写「横向」。`D = 26` 在本项里**完全不出现**：
+    Gram 的对角性与正定性只用到 `D ≥ 3`（标架存在性，见 `Witness.lean`）。
+  - **仍缺**：无鬼定理的组装还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（即 `ddf-spans`）。
+  - **公理登记**：28 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+- [x] `noghost-c5`（蓝图 §C.5）：**无鬼定理的条件版组装** ——
+  `StringFormal/NoGhost/Assembly.lean`（10 条顶层声明）。分支 `agent/formalizer/noghost-c5`。
+  - **假设化的张成引理**：`DDFSpans η a b hη Ε : Prop`（`H_phys ≤ ddfSpan ⊔ H_null`，截距取
+    基态的 `a₀ = invTwo·zeroModeSq η a = α'k²`）与分片版 `DDFSpansOn … W`
+    （`H_phys ⊓ W ≤ …`），两者由 `DDFSpansOn_top_iff` / `DDFSpans.ddfSpansOn` 相连。
+  - **主定理 `no_ghost_of_spans`**：有序域上，给定 `DDFSpans`，`towerQuotientPairing` 在
+    `TowerPhysQuot = H_phys ⧸ H_null` 上**正定**（`0 ≤ ⟨x,x⟩` 且 `⟨x,x⟩ = 0 → x = 0`），
+    由 `towerPhysMk_surjective` 降到代表元。
+  - 中间两条：`towerPairing_self_nonneg_of_mem_towerPhys_of_spans`（(1a) 无负模）与
+    `towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans`（(1b) 零模 ⟺ 零模态）。
+    机制正如蓝图所料是两行：`towerPairing_add_null` 把 `⟨d+χ,d+χ⟩` 压成 `⟨d,d⟩`
+    （提出为 `towerPairing_self_eq_of_spans`，对任意交换 ℚ-代数成立），再用
+    `ddf_span_pos` 的严格正性（非零 ⇒ > 0）两头夹。
+  - **`mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious`**：把「模掉伪态」升级成「模掉零模态」
+    的通用引理（`S ≤ towerSpurious` + 物理 ⇒ 伪态分量自己是物理的 ⇒ 落进 null）。
+    §B.6 的各个分片结论都是「模伪态」形，这条是它们接进 `DDFSpansOn` 的唯一接口。
+  - **`ddfSpans_bigrade_neg_one_one`**：用上一条把 `LightCone.lean` 的
+    `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 转成 `DDFSpansOn … (towerBigrade D R (-1) 1)`，
+    即 `DDFSpans` 在光子那一片上**已被证明**，且**对任意 `D`**。仍带 §B.6 的两条额外前件
+    `hεa`（`ε_i·k = 0`）与 `FrameSpansOrthogonal`。
+  - **数学判断（应写进图卡 notes）**：`D = 26` **完全不出现在本文件**——它整个被吸收进
+    `DDFSpans`。即 Goddard–Thorn 里除张成引理外的一切（Gram、正定性、零模态正交性、商形式
+    良定义）都与维数无关，本文件把这点钉死了：所有结论对任意 `D` 成立。反过来说，
+    `worldsheet.no-ghost-theorem-v4` 的**全部**猜想负担落在 `ddf-spans` 一条上。
+  - **未做**：蓝图的 `noGhostEquiv : ddfSpan ≃ₗ TowerPhysQuot`。单射性确实由 `ddf_span_pos`
+    给出，但满射性**就是** `DDFSpans` 本身，所以这条等距同构不携带超出上述定理的信息，
+    判断为不值得写。
+  - **公理登记**：10 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+  - [x] **卡 (3) 后半句已关闭**（2026-09-11，分支 `agent/formalizer/ddfgram-level`，
+    只追加了一个新 section，既有声明未动）：`|d⟩` 确实落在第 `N(d)` 层。
+    - 方向由 `DDF.lean` 的定义定死：`towerVertex η b n K = towerShift n ∘ (对角振子部分)`，
+      故 `V^{(n)}_K` 把 rung `j` 送到 `j + n`，而 `towerMode`/`towerModeVec` 是对角的、不动 rung。
+      因此 **`A^ε_n` 把 rung 移 `+n`**，创生算子 `A^ε_{−n}` 移 `−n`，`ddfMonomial d` 在
+      rung `−N(d)`（动量 `k − N(d)k₀`）。与 `LightCone.ddfOp_neg_one_apply_towerVacuum`
+      （`A^ε_{−1}|0;k⟩` 支撑在 rung `−1`）一致。
+    - 新声明：`eq_single_of_mem_towerRungSubmodule`、`single_mem_towerRungSubmodule`、
+      `towerVacuum_mem_towerRungSubmodule`、`towerPairing_eq_zero_of_mem_towerRungSubmodule`、
+      `towerModeVec_mem_towerRungSubmodule`、`towerVertex_mem_towerRungSubmodule`、
+      `ddfSummand_mem_towerRungSubmodule`、**`ddfOp_mem_towerRungSubmodule`**、
+      `ddfLevel_add_single`、**`ddfMonomial_mem_towerRungSubmodule`**、
+      `ddf_gram_of_level_ne_of_rung`、**`frameMonomial_mem_towerRungSubmodule`**、
+      **`ddfSpan_eq_iSup_rung`**（`ddfSpan = ⨆_N (ddfSpan ⊓ rung(−N))`）。13 条经
+      `check_axioms --all` 全 `ok`（标准三公理）。
+    - **数学判断（应写进图卡 notes）**：`ddf_gram_of_level_ne` 原先由「`N(d) ≠ N(e) ⇒ d ≠ e`
+      + Gram 对角」得到，因而暗中依赖标架正交归一与 Heisenberg 递推；
+      `ddf_gram_of_level_ne_of_rung` 给出**不依赖这两者**的证明：不同 rung 本来就正交
+      （`Fock.towerPairing_single_single_of_ne`，动量守恒）。卡
+      `worldsheet.transverse-ddf-fock-gram-matrix` 的 (3) 应注明「按层正交」只是
+      「按动量层正交」的特例，前件比 (1)(2) 弱。
+    - `ddfOp_mem_towerRungSubmodule` **不需要** `hbb`/`hba`/正交归一，只用定义 `A^ε_n` 本来
+      就要的 `hη`、`hεb`；即 rung 平移是纯运动学的。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
-- [ ] `no_ghost_theorem`：组装。
+      **现在是唯一缺口**：条件版组装见 `noghost-c5`，`N = 1` 分片已由
+      `ddfSpans_bigrade_neg_one_one` 关闭。
+- [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
+      无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
   level-2 标量试探态 `ψ₂ = [α_{-1}·α_{-1} + c₂(a·α_{-2}) + c₃(a·α_{-1})²]|k⟩`
   （`Fock.levelTwoScalar`），其中 `a^μ = α^μ_0 = (2α')^{1/2}k^μ`，`s := zeroModeSq η a = 2α'k²`。

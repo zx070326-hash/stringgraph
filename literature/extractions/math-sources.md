@@ -8009,6 +8009,237 @@ p.273 的 **Proposition 3.14** 是**有编号的**，逐字（高可信）：
 - **Q55.6** 本条把 §34.1 的悬案**改写而非结清**：现在需要的是 `kac-1979`（LNP 94, p.441）与 `kac-1980-icm`
   （ICM Helsinki, 299–304）**两篇的正文**，去看各自到底印了什么公式。两条取件死路见那两个 bib 条目的 note。
 
+### 55.9 ★ auditor 页图复核（2026-09-12）——结清 Q55.1 / Q55.2 / Q55.3；§55.3 两处读数作废
+
+---
+
+# § Jacobi 三重乘积与 abstruse identity（供 `worldsheet.jacobi-abstruse-identity` 一带）
+
+## 56. Jacobi 三重乘积恒等式与 ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴ 的带编号数学来源（researcher，2026-09-11）
+
+**触发**：Polchinski Vol.1 (7.2.34)（三重乘积形式的 ϑ）、(7.2.38a–d)（四个乘积表示）、
+**(7.2.41)**（abstruse identity）与 Vol.2 **(10.7.16)** 在原书里**全部零证明**
+（v1 ch.7 抽取记录 E15 逐字：「全部无证明」）。本节找数学侧带编号的可引来源。
+
+### 56.0 结论表（先看这张）
+
+| 图里要的陈述 | 本轮找到的可引来源 | 证据等级 | 陷阱 |
+|---|---|---|---|
+| **(A) Jacobi 三重乘积**（Polchinski v1 **(7.2.34)**、(7.2.38a–d)） | **Whittaker–Watson `§21.3`（书 pp. 469–470）＋ `§21.42`（书 p. 473）** | **L1 页图逐字** | ⚠ **必须两节并引**：§21.3 只把乘积表示定到常数 `G`，`G = ∏(1−q^{2n})` 要到 §21.42 才定出来 |
+| **(B) abstruse identity `ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴`**（Polchinski v1 **(7.2.41)**、v2 **(10.7.16)**） | **Whittaker–Watson `§21.2` 的 `Corollary`（书 p. 467）**，**带完整证明** | **L1 页图逐字** | ⚠ W–W **没有定理编号**；这条的标签就是 "Corollary"，挂在 §21.2 末 |
+| (B′) 一般宗量版 `ϑ₁⁴(z)+ϑ₃⁴(z)=ϑ₂⁴(z)+ϑ₄⁴(z)` | W–W `§21.22, Example 4`（书 p. 469） | L1 页图逐字 | 是**习题**（"Shew that"），**不带证明** |
+| (B″) 乘积形式 + Jacobi 的原话 | W–W `§21.3` 末的 `Example`（书 p. 470）+ 该页脚注 | L1 页图逐字 | 同样是**习题**；脚注是 "aequatio identica satis abstrusa" 的**一手出处指引**（Jacobi, *Fund. Nova*, p. 90） |
+| Mumford, *Tata Lectures on Theta I* | **本轮未取（L0）** | — | 任务书猜的 "Thm 1.x" 未核实，**不得写入图** |
+
+**⚠⚠ 全节最重要的版本警告：本轮实际读到的是 1920 年第三版**（archive.org `courseofmodernan00whit`），
+**不是物理文献惯引的 1927 年第四版**。第四版的 1946 重印件（`courseofmodernan0000unse`）是**借阅制**，
+`fulltext/inside.php` 端点返回 **HTTP 403**，本轮取不到。
+⇒ **上表所有页码只对 1920 第三版有效；节号在第四版是否相同，本项目为 L0。**
+⇒ **建议图里只写节号（`§21.3`、`§21.2 Corollary`），不写页码**，并在 `sources.bib` 的 note 里保留版本说明。
+`sources.bib` 已按实际核实的版本登记为 **`whittaker-watson-1920`**（不是任务书说的 `-1927`），理由同上。
+
+### 56.1 需求侧：图里到底要哪两条陈述
+
+- Polchinski **Vol.1 §7.2** 把 θ 函数工具箱整段写出来，**一条都不证**
+  （`polchinski-1998-v1-ch7.md` E15 逐字：「全部无证明」；本轮 §6 已复核）。
+- Polchinski **Vol.2 (10.7.16)** 把 abstruse identity 写成 `Z^0_0⁴ − Z^0_1⁴ − Z^1_0⁴ = 0`，
+  引导语只有「the 'abstruse identity' of Jacobi」，**零证明零引文**（`polchinski-1998-v2.md` §5.4）。
+- ⇒ 两卷合起来**都不构成严格来源**。要让 `worldsheet.superstring-total-fermionic-partition-function-vanishes`
+  一带不被压到 `physical-argument`，必须给这两条数学事实各接一条**数学侧 `proven` 的 derivation**。
+
+### 56.2 ★★ Whittaker–Watson：逐字转录（L1 页图，1920 第三版）
+
+**取件**：`archive.org/download/courseofmodernan00whit/page/n<leaf>.jpg`
+→ 302 跳到 `ia801601.us.archive.org/BookReader/BookReaderImages.php?id=…&page=n<leaf>.jpg`，
+落盘后 `Read` 读页图。**leaf = 书页 + 13**（书 p.470 = `n483`，已用四页验证）。
+定位靠 archive.org 的全文检索端点：
+`ia601601.us.archive.org/fulltext/inside.php?item_id=courseofmodernan00whit&doc=…&path=/6/items/…&q=abstrusa`
+（返回 JSON，给 `page` 与命中句）。
+
+#### (a) ★★★ **`§21.2` 的 `Corollary`（书 p. 467 顶部）—— 这就是 abstruse identity，且带证明**
+
+`§21.2` 本身（书 **p. 466**）标题逐字：
+> **21·2. *The relations between the squares of the Theta-functions.***
+
+其论证骨架（逐字节录）：
+> 「Each of the four functions `ϑ₁²(z), ϑ₂²(z), ϑ₃²(z), ϑ₄²(z)` is analytic for all values of `z` and has
+> periodicity factors `1, q^{−2}e^{−4iz}` associated with the periods `π, πτ`; and each has a double zero
+> (and no other zeros) in any cell. … is a *doubly-periodic function* (with periods `π, πτ`) having at most
+> only a *simple* pole in each cell. **By § 20·13, such a function is merely a constant**; …」
+
+得到的四条关系（书 p. 466 末，**无编号显示式**）：
+> `ϑ₂²(z)ϑ₄² = ϑ₄²(z)ϑ₂² − ϑ₁²(z)ϑ₃²` ,　`ϑ₃²(z)ϑ₄² = ϑ₄²(z)ϑ₃² − ϑ₁²(z)ϑ₂²` .
+> 「If we write `z + ½π` for `z`, we get the additional relations」
+> `ϑ₁²(z)ϑ₄² = ϑ₃²(z)ϑ₂² − ϑ₂²(z)ϑ₃²` ,　`ϑ₄²(z)ϑ₄² = ϑ₃²(z)ϑ₃² − ϑ₂²(z)ϑ₂²` .
+
+**然后是本轮要找的那条（书 p. 467 第一行起，逐字）**：
+
+> ***Corollary.*** 「Writing `z = 0` in the last relation, we have」
+> **`ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴` ,**
+> 「that is to say」
+> `16q(1 + q^{1·2} + q^{2·3} + q^{3·4} + …)⁴ + (1 − 2q + 2q⁴ − 2q⁹ + …)⁴ = (1 + 2q + 2q⁴ + 2q⁹ + …)⁴ .`
+
+★ **三条对建卡最要紧的观察：**
+1. **这是一条带完整证明的严格数学陈述**，证明链是：θ² 的周期性因子与零点 →（§20.13 Liouville 型定理）
+   商为常数 → 四条平方关系 → 令 `z = 0`。**全部在 W–W 书内、全部有出处。**
+   ⇒ 对应的 derivation own status 可写 **`proven`**（形式化状态另说，见 §56.4）。
+2. **它没有定理号**，标签就是 `Corollary`，位置是「§21.2 末、§21.21 开始之前」。
+   `loc` 建议写死为 `§21.2, Corollary (following the four squared relations), p. 467 (3rd ed., 1920)`。
+3. **W–W 的记法 `ϑ₂, ϑ₃, ϑ₄` 无宗量时表示零宗量值**（书 p. 464 逐字：「`ϑ₂(0), ϑ₃(0), ϑ₄(0)` will be replaced
+   by `ϑ₂, ϑ₃, ϑ₄` respectively; and `ϑ₁′` will denote the result of making `z` equal to zero in the derivate
+   of `ϑ₁(z)`」）。**所以 `ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴` 是零宗量恒等式，正是 Polchinski (7.2.41)。**
+
+**⚠ 同一条在书里还有一处用处（避免以后误判为循环论证）**：书 **p. 468**（§21.22 证明中）逐字
+「`Aϑ₃⁴ = ϑ₂⁴ + ϑ₃⁴ + ϑ₄⁴`; and so, **by § 21·2 corollary**, we see that `A = 2`.」
+⇒ **§21.22（Jacobi's fundamental formulae）依赖 §21.2 Corollary，不是反过来**。方向别搞反。
+
+#### (b) ★★★ **`§21.3`（书 pp. 469–470）= Jacobi 三重乘积**
+
+标题与首句逐字（书 **p. 469**）：
+> **21·3. *Jacobi's expressions for the Theta-functions as infinite products*\*.**
+> 「We shall now establish the result
+> `ϑ₄(z) = G ∏_{n=1}^{∞} (1 − 2q^{2n−1} cos 2z + q^{4n−2})` ,
+> (where `G` is independent of `z`), and three similar formulae.」
+>
+> （页脚 `*` 逐字：「Cf. *Fundamenta Nova*, p. 145.」）
+
+证明骨架（逐字节录，同页）：
+> 「Let `f(z) = ∏_{n=1}^{∞}(1 − q^{2n−1}e^{2iz}) ∏_{n=1}^{∞}(1 − q^{2n−1}e^{−2iz})`; each of the two products
+> converges absolutely and uniformly in any bounded domain of values of `z`, **by § 3·341**, on account of the
+> absolute convergence of `Σ q^{2n−1}`; hence `f(z)` is analytic throughout the finite part of the `z`-plane,
+> and so it is an integral function. … so that `f(z)` and `ϑ₄(z)` have the same zeros; … *That is to say `f(z)`
+> and `ϑ₄(z)` have the same periodicity factors* (**§ 21·11 example 3**). Therefore `ϑ₄(z)/f(z)` is a
+> doubly-periodic function with no zeros or poles, and so (**§ 20·12**) it is a constant `G`, say;」
+
+**⇒ 关键的一句（书 p. 469，方括号内，逐字）：**
+> **「[It will appear in § 21·42 that `G = ∏_{n=1}^{∞} (1 − q^{2n})`.]」**
+
+同页与次页给出另外三条：
+> `ϑ₃(z) = G ∏_{n=1}^{∞}(1 + 2q^{2n−1} cos 2z + q^{4n−2})`（p. 469 末，由 `z → z + ½π`）
+> `ϑ₁(z) = 2Gq^{1/4} sin z ∏_{n=1}^{∞}(1 − 2q^{2n} cos 2z + q^{4n})`（p. 470）
+> `ϑ₂(z) = 2Gq^{1/4} cos z ∏_{n=1}^{∞}(1 + 2q^{2n} cos 2z + q^{4n})`（p. 470）
+
+**`G` 的值（书 p. 473 顶部，§21.42 的结论，逐字）**：
+> 「To determine the ambiguity in sign, we observe that `G` is an analytic function of `q` (and consequently
+> one-valued) throughout the domain `|q| < 1`; and from the product for `ϑ₃(z)`, we see that `G → 1` as
+> `q → 0`. Hence the plus sign must always be taken; and so we have established the result
+> `G = ∏_{n=1}^{∞}(1 − q^{2n})` .」
+
+同页 `§21.42` 的 **Example 3**（逐字）正是三重乘积的 `z = 0` 特例：
+> `1 + 2 Σ_{n=1}^{∞} q^{n²} = ∏_{n=1}^{∞} {(1 − q^{2n})(1 + q^{2n−1})²}` .
+
+★ **对建卡最要紧的两点：**
+1. **`§21.3` 单独引是不完整的**——它只给出「存在一个与 `z` 无关的常数 `G`」。
+   把它当「Jacobi 三重乘积」引，**必须同时引 `§21.42`**。这是本节最容易踩的坑。
+2. **`§21.42` 的论证用到 `§21.41`（`ϑ₁′(0) = ϑ₂ϑ₃ϑ₄`）**，而 W–W 对 §21.41 的脚注逐字说
+   「**Several proofs of this important proposition have been given, but none are simple.** Jacobi's original
+   proof (*Ges. Werke*, i. pp. 515–517), though somewhat more difficult than the proof given here, is well
+   worth study.」⇒ **三重乘积那条链的长度比想象的长**，形式化时要算进去。
+
+#### (c) `§21.3` 末的 `Example`（书 p. 470）——abstruse identity 的乘积形式 + Jacobi 原话
+
+> ***Example.*** 「Shew that\*
+> `{∏_{n=1}^{∞}(1 − q^{2n−1})}⁸ + 16q{∏_{n=1}^{∞}(1 + q^{2n})}⁸ = {∏_{n=1}^{∞}(1 + q^{2n−1})}⁸ .`　(Jacobi.)」
+>
+> 页脚 `*` 逐字：**「Jacobi describes this result (*Fund. Nova*, p. 90) as 'aequatio identica satis abstrusa.'」**
+
+**★ 这是 "abstruse identity" 这个名字的一手出处指引**（Jacobi, *Fundamenta Nova*, p. 90）。
+**抽取者的推算（不是 W–W 原文）**：由 §21.3 的四条乘积表示取 `z = 0` 得
+`ϑ₄ = G∏(1−q^{2n−1})²`、`ϑ₃ = G∏(1+q^{2n−1})²`、`ϑ₂ = 2Gq^{1/4}∏(1+q^{2n})²`，
+代入本 Example 两端同除 `G⁴` 即得 `ϑ₄⁴ + ϑ₂⁴ = ϑ₃⁴` ⇒ **本 Example 与 (a) 的 Corollary 是同一条恒等式**。
+**W–W 自己没有把这两处联系起来。**
+
+#### (d) `§21.22, Example 4`（书 p. 469）——一般宗量版
+
+> ***Example 4.*** 「Shew that `ϑ₁⁴(z) + ϑ₃⁴(z) = ϑ₂⁴(z) + ϑ₄⁴(z)` .」
+
+`z = 0` 时 `ϑ₁(0) = 0`（W–W §21.12 的零点定位给出），即回到 (a)。
+⚠ **这是习题，W–W 不证** ⇒ **不要用它当 `proven` 的来源**，用 (a) 的 Corollary。
+
+#### (e) 记号对照表（**引用时必须带，否则式子对不上**）
+
+| | Whittaker–Watson | Polchinski v1 §7.2 |
+|---|---|---|
+| 宗量 | `z`，准周期 `π, πτ` | `v`，准周期 `1, τ` ⇒ **`z = πv`** |
+| 展开参数 | `q = exp(πiτ)`（**注意**：`ϑ₃(z)=1+2Σq^{n²}cos2nz`） | `q = exp(2πiτ)`（(7.2.35)）⇒ **两书的 `q` 差一次方** |
+| 四个 θ | `ϑ₁, ϑ₂, ϑ₃, ϑ₄` | `ϑ₁₁ = −ϑ₁`、`ϑ₁₀ = ϑ₂`、`ϑ₀₀ = ϑ₃`、`ϑ₀₁ = ϑ₄`（(7.2.37a–d)） |
+| 零宗量 | `ϑ₂, ϑ₃, ϑ₄`（省略 `(0)`，书 p. 464 逐字） | `ϑ₁₀(0,τ)` 等 |
+
+⇒ **(a) 的 `ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴` 与 Polchinski (7.2.41) 的 `ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0` 是同一条**（移项即得）。
+⚠ **`q` 的定义差一次方这件事，在零宗量恒等式里不影响等式成立**（两边同一个 `q`），
+但**在抄乘积公式时会咬人**（W–W 的 `q^{2n−1}` ↔ Polchinski 的 `q^{m−1/2}`）。
+
+### 56.3 Mumford, *Tata Lectures on Theta I*：备选入口（**本轮未取，L0**）
+
+- 任务书给的备选是「Jacobi triple product 是 Thm 1.x」。**本轮完全没查**，
+  因为 W–W 一路顺利，且 Mumford 是 Birkhäuser/Springer 书，按既有记录 Springer 在本环境全封。
+- **不得凭印象写 `Thm 1.x` 进图**。若将来要补，建议入口顺序：
+  (i) Crossref `query.container-title=Tata Lectures on Theta` + `filter=type:book-chapter` 拿章标题与页范围；
+  (ii) 作者本人或课程页的 PDF。
+
+### 56.4 `sources.bib` 登记建议与图里怎么引
+
+**已登记**：`whittaker-watson-1920`（本轮新增，note 里写死了全部已核实定位与版本警告）。
+
+建议的 `loc` 写法（供 curator 直接抄，**只写节号**）：
+
+```
+# (A) Jacobi 三重乘积
+ref: whittaker-watson-1920
+loc: "§21.3 (Jacobi's expressions for the Theta-functions as infinite products) together with §21.42 (the value of G)"
+# ⚠ 两节缺一不可；§21.3 只定到常数 G
+
+# (B) abstruse identity
+ref: whittaker-watson-1920
+loc: "§21.2, Corollary"
+# status: 该 derivation 的 own status 可写 proven（W-W 给了完整证明，依赖 §20.12/§20.13 的 Liouville 型定理）
+# ⚠ 不得写 formalized：Mathlib 有 JacobiTheta（ϑ 的定义与 τ→τ+2 / τ→−1/τ 的变换），
+#   但本轮未核实 Mathlib 是否有 ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴ 或三重乘积 ⇒ 形式化状态为 L0，见 §56.5
+```
+
+**两条禁令：**
+1. **不得写「Whittaker–Watson Theorem 21.3」之类**——全书没有编号定理（L1，逐页确认四页均无 "Theorem"）。
+2. **不得引 1927 第四版的页码**（本项目未核实；见 §56.0 的版本警告）。
+
+### 56.5 访问日志与未解决问题
+
+| 目标 | 入口 | 结果 |
+|---|---|---|
+| 找 W–W 的可用扫描件 | `archive.org/advancedsearch.php?q=title:(course of modern analysis) AND creator:(Whittaker)&output=json` | ✅ 15 条；选 `courseofmodernan00whit`（1920，608 pp.） |
+| 拿 server/dir | `archive.org/metadata/courseofmodernan00whit` | ✅ `d1=ia601601`, `dir=/6/items/courseofmodernan00whit`；**PDF 41.5 MB（远超 WebFetch 10 MB 上限，不可用）**，djvu.txt 1.46 MB（会被截断） |
+| **定位「abstrusa」** | `ia601601…/fulltext/inside.php?item_id=…&doc=…&path=/6/items/…&q=abstrusa` | ✅ **唯一命中，`page: 484`**，返回命中句原文 |
+| 读页图 | `archive.org/download/courseofmodernan00whit/page/n<leaf>.jpg` → **302 跨主机**，按提示再 fetch 一次 → 落盘 → `Read` | ✅ 读了 `n477/n478/n479/n480/n481/n482/n483/n484/n486` = 书 pp. 464/465/466/467/468/469/470/471/473 |
+| 1927 第四版（1946 重印） | `archive.org/metadata/courseofmodernan0000unse` → `access-restricted-item: true`；再试 `fulltext/inside.php` | ❌ **HTTP 403**（借阅制 item 一律 403，与既有记录一致） |
+
+**★ 两条可复用的取件情报（写给后人）：**
+1. **archive.org 公有领域书的最佳读法不是 djvu.txt，也不是整本 PDF，而是「全文检索端点定位 + 单页图」**：
+   `fulltext/inside.php?item_id=<id>&doc=<id>&path=<dir>&q=<词>` 给 `page`（= leaf 号），
+   再 `archive.org/download/<id>/page/n<leaf>.jpg`（**会 302 跨主机，按返回提示再 fetch 一次**）。
+   单页图约 0.4–0.6 MB，`Read` 直接出可读页面。**整本 PDF 常常 >10 MB，djvu.txt 会被截断，这两条路都别走。**
+2. **leaf 号与书页号的偏移要用一次已知命中标定**（本书 = 书页 + 13），标定后可直接跳页。
+
+**未解决：**
+- **Q56.1** 1927 第四版的节号是否与 1920 第三版相同？（本项目 **L0**。借阅制 item 403，本轮无法核实。
+  下一轮可试：(i) 找 1927/1962/1996 重印本的公开目录页；(ii) 用 DLMF 或近期论文里带节号的引用做旁证。）
+- **Q56.2** **Mathlib 的 `JacobiTheta` 里有没有 `ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴` 或三重乘积？** 本轮未查。
+  这直接决定 (B) 能不能写 `formalized`。（参照 §48.4 的教训：`DedekindEta.lean` 存在但**不含** S 变换。）
+- **Q56.3** Mumford *Tata I* 的编号（§56.3），完全未查。
+- **Q56.4** Jacobi *Fundamenta Nova* (1829) p. 90 / p. 145 是否可取到？若能取到，
+  「abstruse identity」与「三重乘积」就各有了真正的一手原始出处（W–W 已给出精确页码，取件成本很低）。
 
 
+> 只追加，不改 §55.1–§55.8 任何一行。全文裁决与逐字见 `page-check-rulings-2026-09-12.md` §1。
+> 取件：同一 PDF（`download/pdf_1/euclid.cmp/1104116024`，**裸 curl 被 Incapsula 拦，需 Chrome UA + `Accept: application/pdf` + Referer**），PyMuPDF 4× 渲染后局部放大，p.270、271、274、283、286、287 各读两遍。L1。
+
+| §55.3 待复核项 | 页图读数 | 裁定 |
+|---|---|---|
+| (a) (9) 指数 `±(1/2)p̃(n)` | 指数是 **`½ p̂(n)`，无 ±**；γ = 0̄/1̄ 同一指数 | **作废**，删 ± |
+| (b) 指标条件 | (8) `2rs ≦ n, r−s ∈ ℤ`；(9) `2rs ≦ n, r−s ∈ ½+ℤ` | 一致 |
+| (c) (7) 尾项 | `− 8rs − ½ + ½c ]`，(7′) 方括号外 `− 1/16` | 一致（且与 ψ_{r,r} 定义互锁：r=s 时 h−h_{r,r} = ψ_{r,r}） |
+| (d) `p̃` 波浪号 | p.274 全部印 **`p̂`（尖帽）**："Let p̂(i) be as in Proposition 3.6"；(8)(9) 指数亦 `p̂` | **作废**；`p̃` 是 Prop 3.6 里另一个函数 |
+
+- **Q55.2 结清**：Prop 3.6（p.270）逐字：(1) `dim M(ℂ(λ))^{λ−nδ} = p̂(n) = p̃(2n)`，`p̃(0)=1, p̃(s) = Σ_{i=0}^{s} p("H₀",i) p("H₁"(≦1), s−i)`；(2) `dim M(R(λ))^{λ−nδ}_γ = p̂(n)`，`p̂(0)=1, p̂(n) = Σ_{i=0}^{n} p(i) p(𝒟, n−i)`；(3) `λ(e₀) = −λ(e₀⁺)/16` 时 `dim M(S(λ))^{λ−nδ}_γ = ½ p̂(n)`。**p̂ 依扇区取 (1) 或 (2)**；(3) 即 (9) 前因子指数 `½ p̂(n)` 的来源。
+- **Q55.3 结清**：Prop 4.10（p.283，h-degree 计数，含 d̂(i) 定义）与 Prop 4.13（p.286，det 在 𝒱_{r,s} 上取零）逐字已取；「Proof of the Determinant Formulas」pp.286–287 末句印 "Proposition 13"（漏 "4."）。
+- **新发现**：(9) 后印「if n ≧ 0」，但 n = 0 时 (9) 指数 ½p̂(0) = ½ 非整数且原文单列了 n = 0 两值 ⇒ (9) 实际适用 n ≥ 1。
+- **裁定：可建卡**。loc、statement 必含项、约定字典（`c^{MRC} = (2/3)c^{std}`、`L^{MRC}_i = −L^{std}_i`，inferred）见 rulings 文件 §1.5。
 

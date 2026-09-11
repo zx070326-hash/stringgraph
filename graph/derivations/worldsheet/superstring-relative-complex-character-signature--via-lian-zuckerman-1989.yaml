@@ -59,6 +59,17 @@ sources:
       ★ **证明是印出的**：§9.2 读数 4 逐字「真正的工作量在 Theorem 2.4（消灭定理，§3 全章）与
       Proposition 2.14(ii)（特征标/号差计算，pp.312–317）」；auditor 的 p.313–314 转录证实那几页是
       分情形计算。**但本图没有逐字转录这五页**，见 gaps 第一条。
+      ★ **【2026-09-11 更新】**：researcher 第四轮页图（§10，期刊 pp.311–317 七页一次取全）已把陈述逐字核完
+      （与 E5 一致）并转录证明的引用清单与步骤表；见下一条 source 与 summary 的「证明结构」段。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.14**, p.312 逐字：'(i) Q* = Q with respect to ⟨,⟩_rel. (ii) char C_rel(p,κ) = ½(2κ + 1) dim R(p,κ) p_κ^{(8)}(κ − (p·p/2)) = sign C_rel(p,κ).'；**证明 pp.312–317**（含证明体内的 Lemma 2.14.1–2.14.5）；**Definition 2.12(i)**, pp.311–312（char/sign 的定义与三条前提）；**Definition 2.13**, p.312（φ(q)、φ₀、φ_{1/2} 与 p_κ^{(N)}，引 [10] = Kac–Wakimoto）"
+    note: |
+      L1 逐字，extraction §10.3（陈述）/ §10.4（证明的引用清单与步骤表）/ §10.2（Def 2.12、2.13）。
+      ★ 三条读数：(1) **陈述与 E5 转录一致，无更正**；(2) **Prop 2.14 的语句里没有任何量词**——
+      没有 p ≠ 0、没有 D = 10、没有 κ ∈ {0,½}，这些都是 §1 的全局设定（目标卡把它们写成 (H1)(H2)）；
+      (3) 证明**明写引用的编号结果只有 Definition 1.3、Definition 2.2、Theorem 2.7 三条**，
+      **不引 Theorem 2.4**，不引任何外部文献。
+      ⚠ 排印差：p.312 印 p_κ^{(8)}(κ − (p·p/2))（带内层括号），p.317 的 Cor 2.15(i) 印 p_κ^{(8)}(κ − p·p/2)。
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.15 的证明**, p.317，逐字（见目标卡 sources 第二条）：'… the right-hand side is char C_rel(p,κ). Hence (i) follows from Proposition 2.14 (ii). (ii) Similarly, … the right-hand side is sign C_rel(p,κ). Thus (ii) follows from Proposition 2.14(ii) also.'"
     note: |
@@ -89,24 +100,56 @@ summary: |
   要经 Euler–Poincaré 原理（特征标版 math.euler-poincare-principle；号差版本图无卡）与
   Theorem 2.4，那是 Corollary 2.15(i)(ii) 两张卡的事。
 
+  **★ 证明结构（2026-09-11 补：researcher 第四轮页图逐字，extraction §10.3/§10.4，期刊 pp.312–317 六页）**：
+
+  原文明写引用的编号结果**只有三条**：**Definition 1.3**（R 扇区旋量空间 R(p,0) 上的厄米型 ⟨,⟩_R）、
+  **Definition 2.2**（ℬ/ℱ/C_rel 的定义，逐字 'Recall also that ℱ(p,κ) = ℬ(p,κ) ∩ Ker K (Definition 2.2)'）、
+  **Theorem 2.7**（R 扇区 ℱ(p,0) 上 D_R 上同调平凡 ⇒ 收缩同伦 ε；两次使用：dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)，
+  以及 Lemma 2.14.3 的基计数）。外加**证明体内自造的五条带编号引理 Lemma 2.14.1–2.14.5**（印在 Prop 2.14 的
+  证明里，pp.313–316，与 Theorem 3.3.1 同一体例）与定义 2.11 / 2.12 / 2.13。步骤：
+    (a) 写出 ℬ(p,κ) 的典范基 Ω（p.312 式 (3)，含归一化常数 N_Ω）；
+    (b) Σ_n(−1)^n dim ℱ^n(p,κ) = const term Tr⟨(−1)^{U+κ}q^K(A)⟩（(4)），并用 U 与 K 的显式表达式化为
+        q^{(p·p/2)−κ} φ_κ(q)^{−8} dim R(p,κ)（(5)，φ_κ 由 **Definition 2.13** 给出，Def 2.13 引 [10] = Kac–Wakimoto）；
+    (c) κ=½ 由 (4)(5) 直接得 char；κ=0 另需 dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)（(6)，'Theorem 2.7 implies that …'）；
+    (d) **Lemma 2.14.1**：若基 A 有「典范配对性质」则 sign W = Tr⟨1(A)⟩_W（自证，附 Remark 与 Counter Example
+        W = R²，说明**任意基不行**）；**Lemma 2.14.2**：ℬ(p,½) 的基 A_s 有该性质 ⇒ (7)(8) 给出 sign C_rel(p,½)；
+    (e) κ=0 分两种情形：**Case 1 p·p = 0**（C_rel(p,0) 由 16 个 Ψ^i_± 张成，'Using Definition 1.3, 2.11' 直接读出
+        sign C_rel(p,0) = Σ_{i=1..16} √−1(Ψ^i_+, Ψ^i_−)_R = **16**）；**Case 2 p·p/2 为负整数**（(9) ℬ(p,0) = R(p,0) ⊗ 𝒮，
+        由 Definition 1.3 造 p·d₀ 的本征基使同号配对为零，(13) ( , )_ℬ = ( , )_R ⊗ ( , )_𝒮，
+        **Lemma 2.14.3/2.14.4/2.14.5** ⇒ (17)(18)(19)）。
+  ★ **证明里没有任何一步引用 Theorem 2.4（消灭定理）**，也不引 Prop 2.18 / Cor 2.19 / §3 的任何内容，
+  **不引任何外部文献**。⇒ **Prop 2.14 独立于消灭定理，方向是 Corollary 2.15 = Theorem 2.4 + Prop 2.14(ii)**，
+  不是 Prop 2.14 依赖 Theorem 2.4。本推导据此**不挂** worldsheet.superstring-relative-cohomology-vanishing-v2
+  的边（见 notes）。
+  ★ **非退化性在证明里是被用的**：(i) 的证明逐字 'By non-degeneracy we have Q* = Q'；其来源是 p.311
+    Definition 2.11 正上方的过渡句（承载者 Proposition 2.10(i)(iii)），见目标卡 sources 第四条。
+  ★ pp.313–316 **没有出现 D = 10 这个数字**：临界维数只以「横向维数 8」（φ_κ(q)^{−8}）与「旋量维数 16/32」
+    （R(p,0) 侧）的形式露面。
+
   【为什么标 rigorous】按 lead 指示「rigorous 若有印出证明，否则 physical-argument」：
   (1) 结论是**带编号的命题**（Proposition 2.14(ii)），期刊是 Communications in Mathematical Physics；
   (2) **证明是印出的**（pp.312–317，五页分情形计算；auditor 转录过其中的 (4)(5)(6) 与 Case 1），
       不是「一点思考就知道」式的断言；
   (3) 论证全在有限维分次向量空间与其上的厄米型里（维数计数、惯性指数），不涉路径积分、不涉收敛性。
-  ⚠ **限制（与 GT 推导同型的可追溯性弱点）**：本图对陈述只有转录（E5 未标逐字）、对证明只有骨架
-  与 auditor 的两处转录；rigorous 是按「数学期刊上带编号、带印出证明的命题」给的，
-  不是按逐行复核给的。若 researcher 取 pp.312–317 页图后发现陈述或证明与 E5 转录不符，本推导降级。
+  ⚠ **限制（2026-09-11 收紧后的版本）**：此前的限制是「陈述只有转录、证明只有骨架」，且附带一条降级条件
+  「若 researcher 取 pp.312–317 页图后发现与 E5 转录不符则降级」。**该条件已检验并满足**：§10.3 逐字复核
+  与 E5 一致、无更正 ⇒ **维持 rigorous**，且可追溯性从「L1 页级 + 转录」升到「L1 逐字（陈述）+ L1 步骤表（证明）」。
+  仍未逐行复核的是 Lemma 2.14.1–2.14.5 的证明与三个迹计算的中间步骤（gaps 第一条），
+  以及 §10.5 标为「需复核」的两行下标（Case 1 的 (Ψ^i_+, Ψ^i_−)_R 孰左孰右、Case 2 的本征基构造式）——
+  这两行**都没有写进目标卡的 statement**，故不影响本卡断言。
 
   【有效状态为什么被封顶】接口卡 worldsheet.superstring-brst-additional-conditions、
   worldsheet.superconformal-ghost-modes 等自身 physical-argument（上游 OPE / 路径积分链），
   按 min 规则封顶。**这不是 LZ 的论证有缺口**，而是本图把「LZ 的对象 = Polchinski 的对象」
   经那些卡记账的后果，与消灭卡、维数卡同口径。
 gaps:
-  - "**陈述与证明均未逐字转录**：E5 对 2.14(ii) 的公式是转录（未标「逐字」），第三轮页图复核只重读 pp.316–321，**pp.311–316 未第二次核**；证明 pp.312–317 本图只有骨架与 auditor 的两处转录（(4)(5)(6)、Case 1 的 16）。关闭方式：researcher 取 pp.311–317 页图，逐字核陈述并转录分情形计算的结构（各 Case 的条件与结果）。"
+  - "**LZ Theorem 2.7（R 扇区 D_R 上同调平凡 / 收缩同伦）无卡、无边**（reviewer-batch29）：Prop 2.14 的证明两次显式引用它（§10.4），本推导只在 summary/notes 提及；建卡后应加非 inferred 边。"
+  - "**（2026-09-11 已关闭大半）陈述与证明的逐字状态**：researcher 第四轮页图（extraction §10.3/§10.4，期刊 pp.311–317 七页）已逐字核 Prop 2.14 的陈述（**与 E5 转录一致，无更正**）并转录证明的引用清单与分步骤（见 summary）。**仍未转录的**：Lemma 2.14.1–2.14.5 各自证明的逐行细节、(5)(8)(19) 三个迹计算的中间步骤、Case 2 里 Ψ^i_± 本征基的构造式（§10.5 标为「需复核」：p.315 的 Ψ^i_± = (1/√2)(m^{−1}Ψ^i_+ ± √−1 Ψ^i_−) 一行里 1/m 的位置与 δ_{ij} 前的符号）。"
+  - "**sign / char 有定义所需的前提，Prop 2.14(ii) 的语句里一条都没印**：LZ 把它们全放在 **Definition 2.12(i), pp.311–312**（逐字：'with a non-degenerate hermitian form ⟨,⟩_T … Suppose dim T^n < +∞ for all n and T^n = 0 for all large enough positive n'）。三条之中 (a) 非退化性现有来源（p.311 过渡句 + Prop 2.10(i)(iii)，见目标卡 sources 第四条）；**(b)「每层有限维」与 (c)「次数上方有界」在本图只作为目标卡 (H3) 的断言存在**（「固定 p 下每个 C^n_rel 有限维、只有有限多个 n 非零」），LZ 没有为 C_rel(p,κ) 逐条验证，本图也未补证。⇒ 本卡等式右端有定义这件事，依赖一条未被任一方证明的有限性。"
+  - "**char 与 ch_q 是两种对象，Definition 2.12 同段并列**：(i) 的 ch_q T = Σ dim T^{−n} q^n 是母函数（不带符号），(ii) 的 char C = Σ_k (−1)^k dim C^k 是**交错和**。Prop 2.14(ii) 用的是交错和那个。本图目标卡 (H6) 写对了，但 Prop 2.18 的 ch_q（旁证 p^{(8)}_κ）是另一种，两者不可互推——**p^{(8)}_κ 与 φ_κ 的关系由 Definition 2.13（p.312，引 [10] = Kac–Wakimoto）给出，本图仍未把 Def 2.13 立卡或写进任何陈述**（§10.2 提醒：φ_{1/2}(q) = φ(q^{1/2})φ(q²)φ(q)^{−1} 的三个自变量字号极小，写进 statement 前须 auditor 复核）。"
   - "**p^{(8)}_κ 的定义本图未取得（L0）**：右端是符号表达式，不可数值化；旁证只有 Prop 2.18 的 φ_κ(q)^{−8}。与维数卡 gaps 第三条同一缺口。"
   - "**dim R(p,0) 的数值未核**：D = 10 时读成 32（Dirac 旋量）使 ½·32 = 16 与 auditor 转录的 'Case 1 sign C_rel(p,0) = 16' 一致，但这是本图算术，不是 LZ 的字。"
-  - "**「char = sign」的机制未记录**：它等价于「负惯性指数的交错和为零」；LZ 如何在每个 Case 里得到它，本图无转录。目标卡「不断言 (f)」。"
+  - "**「char = sign」的机制只有骨架**：它等价于「负惯性指数的交错和为零」。2026-09-11 已取得机制的**形状**——两边都被化成同一个迹 const term Tr⟨q^K(A)⟩（char 侧带 (−1)^{U+κ}，sign 侧不带），靠的是 Lemma 2.14.1 的「典范配对性质」使 sign 可写成迹（见 summary (d)(e)）；**但两个迹为何相等的逐行计算本图仍无转录**。目标卡「不断言 (f)」维持。"
   - "**⟨,⟩_rel 的 RNS 版本在本图无卡**：本推导对 worldsheet.fock-indefinite-form 拉的是 inferred 边（玻色卡），LZ 的 Definition 1.3（含 d 模与旋量因子上由 p·d₀ 定义的型）与 Definition 2.11 都没有本图对应卡。号差那一半的对象接口因此比特征标那一半弱。"
   - "**Proposition 2.14(i)（Q* = Q）未立卡**：它是「sign H^n 有定义」的背景条件，但不进本卡；Cor 2.15 的证明也一字未引它。"
   - "**R 扇区零模表示的依赖未检验**：公式绑定在 T₀ ⊕ T₁ 上，换成 FOK / Henneaux 的 C[γ₀] 后右端是否不变本图未核（目标卡「不断言 (d)」）。"
@@ -120,6 +163,16 @@ notes: |
 
   【为什么不挂 Theorem 2.4 / 消灭卡】Prop 2.14(ii) 是复形层面的计算，不用消灭定理；
   LZ 的顺序是 2.11 → 2.14 → 2.15，消灭定理只在 2.15 进入。挂了会把上同调层面的前提提前搬进本卡。
+  ★ **2026-09-11 页图证实**（extraction §10.3/§10.4/§10.6 negative evidence）：Prop 2.14 的证明六页里
+  **一次都没有引用 Theorem 2.4**。⇒ 本推导**确实不挂** worldsheet.superstring-relative-cohomology-vanishing-v2
+  的边（已核，depends_on 里没有这条），方向是 **Cor 2.15 = Thm 2.4 + Prop 2.14(ii)**，两者在图上互相独立。
+  若将来有人据「LZ 同一节」把消灭卡挂进本推导，那是错的。
+
+  【未建的两条边，及其理由】(1) **Theorem 2.7**（R 扇区 D_R 上同调平凡 / 收缩同伦 ε）被证明明写引用两次，
+  但**本图没有对应卡**（search「Theorem 2.7」只命中 FGZ 玻色侧的 bosonic-relative-cohomology-* 两卡，
+  那是 FGZ 的 Thm 2.7，与 LZ 的同号不同物）。⇒ 记在 summary 与本注，不建边；立卡是后续工作。
+  (2) **Prop 1.7(v)（{Q, D_R} = 0）** 在 Prop 2.14(i) 的证明里以 'Qv = −D_R Q v̂' 的形式被用，
+  **原文此处没有点名 1.7(v)**；若将来建边须标 `inferred: true`（§10.4 明记）。本卡不断言 (i)，故本轮不建。
 
   【为什么不挂 worldsheet.superstring-brst-charge】Q 只在 2.14(**i**)（Q* = Q）出现；
   (ii) 的 char 与 sign 都是复形上的量，与 Q 无关。R 扇区 ⟨,⟩_rel 定义里的 D_R = 总 G₀

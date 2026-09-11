@@ -125,5 +125,33 @@ notes: |
   文献路线更通用（它对振子与 L_m 之外的场也给规则，这正是
   worldsheet.vertex-operator-adjoint 与 worldsheet.ddf-operators-adjoint 不得不走它的原因）。
   同一判断也适用于 worldsheet.virasoro-generators-adjoint。
+
+  【2026-09-11（五）：TowerNull.lean 对本卡两个对象的两条观察（curator，small-backlog-14；
+  **只加 notes，陈述与 formal 块一字未动**；记在这里是给后续 formalizer 看的，本卡不认领它们）】
+  formal/StringFormal/NoGhost/TowerNull.lean（提交 c985285，合并 43d7d54，无 sorry；
+  图上由 worldsheet.tower-physical-quotient-form 认领）在建塔上的正交补与商型时，
+  顺带记下两条关于**单个 Fock 空间**这一侧的事实：
+
+  (1) **`Fock.orthComplement_eq_orthogonal`**：PhysicalStates.lean 里手写的正交补
+      `Fock.orthComplement η W` 与 Mathlib 的 `LinearMap.BilinForm.orthogonal`
+      **是同一个对象**（该引理就是这条等式；塔上的 `towerOrthComplement` 干脆直接*定义*成
+      Mathlib 的那个，只用 `mem_towerOrthComplement` 把被测向量挪到左边以配合本图的写法）。
+      ⇒ 本卡下游凡用到「⊥」的地方（worldsheet.spurious-subspace-orthogonal-to-physical、
+      worldsheet.physical-states-level-one 等）都可以放心当作 Mathlib 的 `orthogonal` 读，
+      不是本项目自造的概念。配套的还有 `Fock.pairing_isRefl`：本卡的型自反
+      （由对称性得），这是 Mathlib 那套正交补 API 的标准前提。
+
+  (2) **QuotientForm.lean 可由 TowerNull.lean 的通用层重构（未做）**：TowerNull.lean 的
+      Part 1（`StringFormal.{radicalIn, QuotRadical, quotRadicalForm, quotRadicalForm_mk}`）
+      对**任意** R-模 M、**任意**自反双线性型 B（`LinearMap.IsRefl`，比对称弱）与任意子模 P
+      做了 P/rad_P 与其上的诱导型。该文件头 Gaps 第 5 条逐字：单 Fock 的 QuotientForm.lean
+      「is literally the `M := Fock D R`, `B := Fock.pairing η`, `P := Fock.physSubmodule η a a₀`
+      instance」，按通用层重构可删掉 `Fock.nullInPhys` / `Fock.physPairing` /
+      `Fock.quotientPairingAux` / `Fock.quotientPairing` 四个声明。
+      **这一支没做**（formalizer 有意把该分支限制在一个关注点上），故目前两处代码并存。
+      ⚠ 重构**不会改变本卡或任何下游卡的断言**，只是换实现；若将来做了，
+      受影响的 loc 是 worldsheet.spurious-orthogonal-to-physical 与本卡推导里指向
+      QuotientForm.lean 的那些声明名。**在做之前，不要因为「看起来重复」而删掉任何一边。**
+
 author: curator
 created: "2026-09-10"

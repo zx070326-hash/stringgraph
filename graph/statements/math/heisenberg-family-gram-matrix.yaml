@@ -1,0 +1,154 @@
+id: math.heisenberg-family-gram-matrix
+kind: proposition
+title: 抽象 Heisenberg 族的 Gram 矩阵（条件命题，任意 R-模）：正交归一 CCR + 互伴 + 真空归一化 + 真空湮灭 ⟹ 产生单项式两两正交、对角元 ∏ n^{d(i,n)} · d(i,n)!
+statement: |
+  这是一条**纯代数的条件命题**，载体是**任意** R-模——没有 Fock 空间、没有多项式环、
+  没有基、没有度规。它把「自由振子的 Gram 矩阵」这段标准计算剥离到只剩四条假设。
+
+  【设定】设 R 是交换环，M 是 R-模，ι 是带可判定相等的指标集（横向方向的指标），
+  B : M × M → R 是 R-**双线性**型（不是半双线性），Ω ∈ M 是一个向量（"真空"），
+  A : ι → Z → End_R(M) 是一族 R-线性算子（记 A^i_n := A i n）。
+
+  【四条假设】
+    (H1) **正交归一的正则对易关系（CCR）**：对一切 i, j ∈ ι 与 m, n ∈ Z，
+           [A^i_m, A^j_n] = ( m · δ_{m+n,0} · δ_{ij} ) · id_M
+         （右端的整数 m 经 Z → R 的典范同态读入 R；δ 是 Kronecker 记号）。
+         ⚠ **"正交归一"指 δ_{ij}**：没有度规、没有不定号差。见【不断言】(d)。
+    (H2) **互为伴随**：对一切 i ∈ ι、n ∈ Z 与一切 x, y ∈ M，
+           B( A^i_n x , y ) = B( x , A^i_{−n} y )。
+    (H3) **真空湮灭**：A^i_n Ω = 0，对一切 i ∈ ι 与一切 n > 0。
+    (H4) **真空归一化**：B(Ω, Ω) = 1。
+
+  【被断言的对象】记 P := ι × Z_{>0}（产生算子的标号：A^i_{−n}，n ≥ 1）。
+  由 (H1)，两个产生算子的模式之和 (−n) + (−m) ≤ −2 ≠ 0，故中心项为零、二者**对易**
+  （这不是额外假设，见【不断言】(a)）。于是对每个**有限支撑**的 d : P → N，乘积
+    |{d}⟩ := ∏_{(i,n) ∈ P} (A^i_{−n})^{d(i,n)} Ω
+  与因子次序无关，是 M 中良定义的向量。记
+    ‖d‖ := ∏_{(i,n) ∈ P} n^{d(i,n)} · d(i,n)!   ∈ R（只有有限多个因子 ≠ 1）。
+
+  则在 (H1)–(H4) 之下：
+
+  (1) **Gram 矩阵（任意交换环 R）**：对一切有限支撑的 d, e : P → N，
+        B( |{d}⟩ , |{e}⟩ ) = δ_{d,e} · ‖d‖ 。
+      两半分别是：d ≠ e ⟹ B(|{d}⟩,|{e}⟩) = 0（正交性）；B(|{d}⟩,|{d}⟩) = ‖d‖（对角元）。
+
+  (2) **对角元的符号与非零性**：
+      (2a) R 是有序环（严格有序）时 ‖d‖ > 0；
+      (2b) R 是**特征零的域**时 ‖d‖ ≠ 0。
+      ⚠ (2b) 的特征零假设**承重**：ZMod 2 上 d = (单个 (i,1) 取 2) 给 ‖d‖ = 2! = 0。
+
+  (3) **线性无关（特征零域）**：K 是特征零域、V 是 K-向量空间时，由 (1)(2b) 得
+      { |{d}⟩ : d 有限支撑 } 线性无关。
+
+  【本命题明确不断言】
+  (a) **"产生算子两两对易"不是假设**：它是 (H1) 的推论（见【被断言的对象】）。
+      陈述里之所以要提，是因为它是 |{d}⟩ 良定义的理由。
+  (b) **不断言 { |{d}⟩ } 张成 M**，也不断言 M 有基、自由、或分次。完备性是另一回事
+      （在弦论侧就是无鬼定理里困难的"DDF 张成"那一半）。
+  (c) **不断言 (H1)–(H4) 在任何具体设定下成立**，尤其不断言 DDF 算子 A^ε_n 满足它们
+      （见 notes【与 DDF 的距离】）。
+  (d) **不覆盖不定号差的情形**：(H1) 的中心项是 m δ_{ij}，没有 η^{μν}。世界面协变振子
+      α^μ_m 满足的是 [α^μ_m, α^ν_n] = m η^{μν} δ_{m+n,0}，**不是本卡的实例**
+      （见 notes【与 FockGram.lean 的互补】）。
+  (e) **不断言 B 对称、非退化或正定**；(H2) 之外对 B 无任何要求。
+  (f) **不断言 A^i_0 的任何性质**：零模从未被使用（产生标号只跑 n ≥ 1，(H3) 只管 n > 0）。
+  (g) **不断言 |{d}⟩ ≠ 0**（(3) 只在特征零域上给出线性无关，从而给出非零）。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.gram_of_heisenberg_family
+  lean_file: StringFormal/NoGhost/HeisenbergGram.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/HeisenbergGram.lean。本卡 formal.lean_decl = StringFormal.gram_of_heisenberg_family（结论 (1)），两半分别是 gram_of_heisenberg_family_of_ne 与 gram_of_heisenberg_family_self；对象 StringFormal.{heisCreation, heisMonomialOp, heisMonomial, heisNorm}（+ heisMonomial_zero, heisMonomial_add_single, heisNorm_zero, heisNorm_add_single）；(a) 的推论 StringFormal.commute_heisCreation（配 heis_apply_apply、pairwise_commute_heisCreation_map）；Leibniz 步 StringFormal.heisAnnihilation_heisMonomial；(2a) heisNorm_pos，(2b) heisNorm_ne_zero，(3) linearIndependent_heisMonomial；辅助 StringFormal.finsupp_addSingle_induction"
+    note: |
+      本仓库，formalizer 提交 **5b35c04**（"formal: prove the Gram matrix of an abstract Heisenberg
+      family"，分支 agent/formalizer/noghost-c），由 lead 以 **43d7d54** 合入 main。
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build` / `check-axioms`**；
+      本分支只改 graph/。文件头自述这是 `formal/BLUEPRINT-noghost.md` 的 §C.3。
+
+      主定理逐字（去掉隐式参数）：
+        `theorem gram_of_heisenberg_family {Ω : M} {B : LinearMap.BilinForm R M}
+           (hccr : ∀ (i j : ι) (m n : ℤ), ⁅A i m, A j n⁆
+             = (if m + n = 0 ∧ i = j then (m : R) else 0) • (LinearMap.id : Module.End R M))
+           (hadj : ∀ (i : ι) (n : ℤ) (x y : M), B (A i n x) y = B x (A i (-n) y))
+           (hvac : B Ω Ω = 1)
+           (hann : ∀ (i : ι) (n : ℤ), 0 < n → A i n Ω = 0)
+           (hcomm : ∀ u v : ι × ℕ+, Commute (heisCreation A u) (heisCreation A v))
+           (d e : (ι × ℕ+) →₀ ℕ) :
+           B (heisMonomial A Ω hcomm d) (heisMonomial A Ω hcomm e)
+             = if d = e then heisNorm R d else 0`
+      逐条对齐：`hccr` = (H1)（注意 `if m + n = 0 ∧ i = j` 就是 δ_{m+n,0}δ_{ij}），
+      `hadj` = (H2)，`hann` = (H3)，`hvac` = (H4)；`(ι × ℕ+) →₀ ℕ` 就是本卡的"有限支撑 d : P → N"；
+      `heisNorm R d = ∏ n^{d(i,n)} · d(i,n)!` 就是 ‖d‖。
+      ⚠ `hcomm` 是 `heisMonomial` 这个**定义**的参数（有序乘积经 `Multiset.noncommProd` 定义，
+      要求两两对易才与次序无关），**不是额外假设**：`commute_heisCreation hccr` 直接供给它。
+      本卡【不断言】(a) 说的正是这件事（文件头逐字："**hypothesis (H1) of the card is a theorem**,
+      not an assumption"）。
+      (2a) `heisNorm_pos` 需 `[PartialOrder R] [IsStrictOrderedRing R]`；
+      (2b) `heisNorm_ne_zero` 需 `[Field K] [CharZero K]`；
+      (3) `linearIndependent_heisMonomial` 经 Mathlib 的 `BilinForm.linearIndependent_of_iIsOrtho`。
+  - ref: gsw-1987-v1
+    loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
+    note: |
+      文献侧「横向振子 Fock 空间的内积由自由振子标准计算给出」这句话的所在处。
+      **教科书不写本卡这条抽象形式**（不谈任意 R-模、不列 (H1)–(H4)、不写 Gram 矩阵的递推）；
+      本卡是本项目为可形式化而做的剥离。核实等级沿用 worldsheet.ddf-operators-v5：
+      章节页码 L4/L2（literature/extractions/brst-cohomology-sources.md §5.2–5.3），
+      **式号与正文 L0**。GSW 用 mostly-minus、α' = 1/2，本卡无度规故无需转写。
+tags: [algebra, heisenberg-algebra, gram-matrix, fock-space, no-ghost, lean]
+notes: |
+  【为什么立卡（curator 2026-09-11，small-backlog-14）】
+  formal/StringFormal/NoGhost/HeisenbergGram.lean 已在 main 上（提交 5b35c04，合并 43d7d54），
+  图上无节点认领。它**不是** worldsheet.bosonic-fock-gram-matrix 的重复：那张卡的载体是
+  `Fock D R = MvPolynomial (Osc D) R`（多项式环，有基），本卡的载体是**任意 R-模**，
+  这正是能在动量塔上实例化的前提（塔不是多项式环）。
+  查重：2026-09-11 跑 `uv run stringgraph search Gram / Heisenberg / 商空间`，
+  命中 worldsheet.bosonic-fock-gram-matrix、worldsheet.transverse-ddf-fock-gram-matrix、
+  worldsheet.fock-indefinite-form 三张，**都绑定在具体载体上**；没有抽象 R-模版本。
+
+  【为什么归到 math.*】陈述里没有 D、没有 α'、没有 k_0、没有度规、没有临界维数；
+  ι 只是一个指标集。与 math.gram-determinant-nonzero-implies-linear-independence 同一处理。
+  **本卡不声明 uses_conventions**：(H1) 的归一化 [A^i_m, A^j_n] = m δ_{ij} δ_{m+n,0} 是
+  **本卡自己写出的假设**，不是外部约定；把它实例化到弦论侧时，"m" 这个系数与
+  conv.alpha-prime-regge / conv.virasoro-standard 的读法之间如何对应，由实例化那张卡负责。
+
+  【(H1) 的"正交归一"与 FockGram.lean 的互补关系（必读，防止误合并）】
+  本文件与 formal/StringFormal/NoGhost/FockGram.lean **覆盖互补，互不蕴含**：
+    · FockGram.lean（图上是 worldsheet.bosonic-fock-gram-matrix）做的是**世界面协变振子**
+      α^μ_m，中心项是 m η^{μν} δ_{m+n,0}，**η 不定**（η^{00} = −1）；它的条件版定理
+      `pairing_creationMonomial_of_hypotheses` 经 `Fock.pairing_unique` 走，
+      即**先用唯一性把任意满足假设的型归约到那一个型**，这一步实质依赖"载体是多项式环、
+      单项式是基"。
+    · 本卡（HeisenbergGram.lean）做的是**正交归一**的 δ_{ij}，但**载体任意**，
+      递推是重做的，不经任何唯一性、不需要基。
+  ⇒ 世界面的 α^μ_m **不是本卡的实例**（本卡【不断言】(d)）；反过来本卡也不是 FockGram 的
+  推论（载体更一般）。两个文件都该留着。Lean 文件头逐字："the two files cover complementary
+  situations, and the card should say which normalisation it means" —— 本段就是那句话的落实。
+  ⇒ **正交归一正是横向方向的情形**：取横向标架 ε^i·ε^j = δ^{ij} 时 DDF 算子满足的就是
+  [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}，这也是"DDF 扇区正定"的代数根源。
+
+  【与 DDF 的距离：**已补齐**（2026-09-11 当日更新）】
+  本段原文（写于同日稍早）说「把本卡实例化到动量塔上的 DDF 算子 A^ε_n 还缺三件」——
+  **三件已由 formal/StringFormal/NoGhost/DDFGram.lean 一次补齐**（分支 agent/formalizer/noghost-c4，
+  无 sorry，已合入 main；蓝图 §C.4）：
+    (i)   真空归一化 ⇒ `StringFormal.NoGhost.Fock.towerPairing_towerVacuum_self`（= 本卡 (H4)）；
+    (ii)  真空湮灭 ⇒ `StringFormal.NoGhost.ddfOp_towerVacuum_of_pos`（n > 0）（= 本卡 (H3)）；
+    (iii) 横向正交归一标架 ⇒ `TransverseFrame`（LightCone.lean）+ `ddfFamily_ccr`，
+          把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij}（= 本卡 (H1)）。
+  (H2) 互伴 ⇒ `ddfFamily_adj` = `Fock.towerPairing_ddfOp_left`（图上 worldsheet.ddf-operators-adjoint-v2，
+  **已 formalized**；原文写的「仍是 physical-argument」指的是旧卡 worldsheet.ddf-operators-adjoint，已过时）。
+  ⇒ **本卡的主定理经 `StringFormal.NoGhost.ddfFamily` 实例化出 `ddf_gram_diagonal`**，
+  于是 **worldsheet.transverse-ddf-fock-gram-matrix 已于同日升 formalized**
+  （新推导 worldsheet.transverse-ddf-fock-gram-matrix--via-lean）。本卡是那条推导的第一条依赖。
+  ⚠ 实例化带来的两处收紧，记在那条推导的 notes（引用前必读）：
+    · 本卡 (H1)(H2) 量化到**全部** ℤ（含 0），比那张卡的 m,n ≠ 0 强；证明未在 0 处用，**可放宽未放宽**；
+    · `ddf_gram_diagonal` 需 `[Algebra ℚ R]`（`ddfOp` 构造的代价），
+      而**本卡对任意交换环成立**——那张卡 (1) 的「任意交换环」那一半由**本卡**承载，不由 DDFGram.lean 承载。
+
+  【特征零的角色】(2b) 与 (3) 需要特征零：ZMod 2 上 2! = 0 使型退化
+  （worldsheet.transverse-ddf-fock-gram-matrix 的 notes【2026-09-11（三）】记的同一条反例，
+  Lean 侧是 `Fock.pairing_creationMonomial_self_eq_zero_zmod_two`）。结论 (1) 不需要它。
+  ⚠ 与 worldsheet.bosonic-fock-gram-matrix 的一处差别：那里线性无关可以经载体的**自由性**
+  绕过特征零；**本卡不能**（载体任意，没有自由性可用），只能走 (2b) → (3) 这条路。
+author: curator
+created: "2026-09-11"

@@ -16,6 +16,9 @@ class Problem:
     severity: str  # "error" | "warning"
     where: str
     message: str
+    # "live" = something to act on; "history" = an expected trace of a superseded card
+    # (see docs/STATUS_LEVELS.md「旧推导的去留」). Errors are always "live".
+    kind: str = "live"
 
     def __str__(self) -> str:
         return f"[{self.severity}] {self.where}: {self.message}"
@@ -36,7 +39,7 @@ def validate(g: Graph) -> list[Problem]:
     root = g.root
     problems: list[Problem] = []
     err = lambda where, msg: problems.append(Problem("error", where, msg))  # noqa: E731
-    warn = lambda where, msg: problems.append(Problem("warning", where, msg))  # noqa: E731
+    warn = lambda where, msg, kind="live": problems.append(Problem("warning", where, msg, kind))  # noqa: E731
 
     for e in g.load_errors:
         err("load", e)
@@ -141,7 +144,7 @@ def validate(g: Graph) -> list[Problem]:
         elif tgt.kind != "proposition":
             err(where, f"target '{d.target}' is a {tgt.kind}; derivations only target propositions")
         elif tgt.superseded_by:
-            warn(where, f"target '{d.target}' is superseded by {tgt.superseded_by} (stale derivation; retarget or delete)")
+            warn(where, f"target '{d.target}' is superseded by {tgt.superseded_by} (stale derivation; retarget or delete)", "history")
         if d.kind == "proof" and d.status not in ("formalized", "rigorous"):
             err(where, "kind: proof requires status formalized or rigorous (else use physical-argument)")
         if d.kind == "physical-argument" and d.status != "physical-argument":
@@ -155,6 +158,9 @@ def validate(g: Graph) -> list[Problem]:
             if s.ref not in g.bib_keys:
                 err(where, f"source ref '{s.ref}' not in literature/sources.bib")
         seen: set[str] = set()
+        # A derivation whose own target is superseded is itself history: its dependencies are
+        # frozen as a record, so a superseded dep there is an expected trace, not work to do.
+        tgt_is_history = bool(tgt is not None and tgt.superseded_by)
         tgt_fams = {conv_family(c): c for c in (tgt.uses_conventions if tgt else [])}
         for dep in d.depends_on:
             if dep.id in seen:
@@ -172,7 +178,8 @@ def validate(g: Graph) -> list[Problem]:
                 if node.kind == "proposition" and not g.derivations_for(dep.id):
                     err(where, f"depends on superseded proposition '{dep.id}' which has no derivation left (effective open); retarget to {node.superseded_by} or restore the old derivation as history")
                 else:
-                    warn(where, f"depends on superseded statement '{dep.id}' (use {node.superseded_by})")
+                    warn(where, f"depends on superseded statement '{dep.id}' (use {node.superseded_by})",
+                         "history" if tgt_is_history else "live")
             # convention conflict: same family, different convention, no map
             for c in node.uses_conventions:
                 fam = conv_family(c)

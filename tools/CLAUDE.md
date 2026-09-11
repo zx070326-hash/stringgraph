@@ -19,6 +19,7 @@
 - 校验规则的每一条改动都要在 `tests/` 加对应用例。
 - 传播算法改动必须同步改 `docs/STATUS_LEVELS.md`。
 - `validate` 的退出码是 pre-commit 的依据，不要把 error 降级成 warning 来"让它过"。
+- `Problem.kind` 区分 `live`（要处理）与 `history`（已换代卡的预期痕迹，见 `docs/STATUS_LEVELS.md`「旧推导的去留」）；`validate --hide-history` 只打 live，汇总行始终报 `(K history)`，`--json` 每条带 `kind`。新增 warning 默认 `live`。
 - 输出面向 agent 消费：`--json` 选项要保持稳定的键名。
 - `check-axioms` 要起 Lean 子进程（`cwd=formal/`，需先 `lake build`），**不进 `validate`、不进 pre-commit**。
   测试里一律 mock `runner`，pytest 不许真跑 Lean。

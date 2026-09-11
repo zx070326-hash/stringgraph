@@ -63,6 +63,9 @@ statement: |
   (e) **不**覆盖退化扇区 k_0·k = 0（含 k = 0）：那里 A^i_n 本身没有定义
       （worldsheet.ddf-operators-v5）。
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddf_gram_diagonal
+  lean_file: StringFormal/NoGhost/DDFGram.lean
 sources:
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
@@ -109,6 +112,25 @@ sources:
       Fock.lean 的合并提交 2fcf86a。均无 sorry；formalizer 已跑
       `--import StringFormal.NoGhost.FockGram --all` 的公理检查（25 条 ok）；
       curator 未自行重跑 `lake build`。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/DDFGram.lean。本卡 formal.lean_decl = StringFormal.NoGhost.ddf_gram_diagonal（结论 (1)，DDF 实例）；(H1)–(H4) 的供给 StringFormal.NoGhost.{ddfFamily, ddfFamily_ccr, ddfFamily_adj, ddfFamily_ann, Fock.towerPairing_towerVacuum_self, ddfOp_towerVacuum_of_pos, commute_heisCreation_ddfFamily}；对象 StringFormal.NoGhost.{ddfMonomial, frameMonomial}（+ ddfMonomial_zero / ddfMonomial_add_single / frameMonomial_toFinsupp）；(1) 的两半 ddf_gram_of_ne / ddf_gram_self 与 bundled 版 towerPairing_frameMonomial；(2) linearIndependent_ddfMonomial（特征零域）、ddf_gram_pos（严格有序环，逐态）、**ddf_span_pos**（线性序域，逐字『0 ≠ v ∈ ddfSpan ⇒ ⟨v,v⟩ > 0』）、求和公式 towerPairing_linearCombination_frameMonomial、H^⊥(k) 的识别 ddfSpan_eq_span_range_frameMonomial（+ frameMonomial_mem_ddfSpan）；(3) 的正交半 ddf_gram_of_level_ne（能级 ddfLevel）；另 ddfMonomial_mem_towerPhysSubmodule（DDF 态是物理态，**只在 a₀ = ½α_0² = α'k² 下**）。抽象母定理见 formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family（图上 math.heisenberg-family-gram-matrix）"
+    note: |
+      本仓库，formalizer 提交（分支 agent/formalizer/noghost-c4，含 noghost-b 的 7 个提交；
+      reviewer 在总线消息 1086 通报 c4 是 b 的超集），由 lead 合入 main。
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build` / `check-axioms`**。
+      文件头自述这是 `formal/BLUEPRINT-noghost.md` 的 §C.4，
+      即 §C.3 的抽象递推 `gram_of_heisenberg_family` 在 DDF 算子上的**实例化**。
+
+      ★ **本条使本卡可以标 formalized**（此前三条缺口——真空归一化、真空湮灭、正交归一标架——
+      全部补齐，见 notes【2026-09-11（五）】）。逐条对照与四条前件收紧写在推导
+      worldsheet.transverse-ddf-fock-gram-matrix--via-lean 的 notes，不在此重复。
+      ⚠ 两处必须随引用一起带上的限定：
+      (i) **本卡 (3) 只有正交那一半被形式化**：`ddf_gram_of_level_ne` 证的是 N(d) ≠ N(e) ⇒ 配对为零；
+          「|{d}⟩ 落在塔的第 N(d) 层（动量 k − N(d) k_0）」那句**未形式化**，
+          Lean 的 `ddfLevel` docstring 逐字 "that placement is *not* proved here"。
+      (ii) `ddf_gram_diagonal` 需 `[Algebra ℚ R]`（因 `ddfOp` 的构造用到 1/2 等），
+          而本卡 (1) 写的是「任意交换环」。**这不是缺口**：完全一般的条件命题由
+          `StringFormal.gram_of_heisenberg_family`（任意交换环）承载，ℚ-代数只是 DDF 实例的构造代价。
 tags: [bosonic-string, spectrum-generating-algebra, fock-space, gram-matrix, positive-definite, no-ghost]
 notes: |
   【本卡的来历：worldsheet.ddf-operators-adjoint 的拆卡（2026-09-11，curator，lead 裁决）】
@@ -159,6 +181,57 @@ notes: |
   同分支新建的 worldsheet.bosonic-fock-gram-matrix 就是这条路线在**协变振子**上的完整样板，
   其推导 --via-lean 的 summary 逐步列出了五步，可作为 DDF 版的施工图。）
   剩余两步仍在 formal/TODO.md 的 `ddf-operators` 之后。
+
+  【2026-09-11（四）：升级路径改指 math.heisenberg-family-gram-matrix（curator，small-backlog-14；
+  **只加 notes，陈述文本未动**；上面那段【升级路径】的施工图已过时，以本段为准）】
+  formalizer 已在 formal/StringFormal/NoGhost/HeisenbergGram.lean（提交 5b35c04，合并 43d7d54，
+  无 sorry）证出**本卡 (1)(2)(3) 的抽象版本**，图上由新卡 **math.heisenberg-family-gram-matrix**
+  （proposition，formalized，lean_decl `StringFormal.gram_of_heisenberg_family`）承载。
+  那条定理的载体是**任意 R-模**（不是多项式环、不需要基），四条假设与本卡的 (H1)–(H4) 逐条同型，
+  结论就是本卡的 (1)，另有 (2a) 有序环上对角元为正、(2b) 特征零域上非零、(3) 线性无关。
+  ⇒ **本卡不再需要"先证塔上的型唯一、再照搬 FockGram.lean 的条件版"那条路线**：
+  抽象版已经做完，剩下的是**实例化**。
+
+  ⚠ **归一化区别（不可混）**：新卡的 (H1) 是**正交归一**的 [A^i_m, A^j_n] = m δ_{ij} δ_{m+n,0}，
+  与本卡 (H1) 逐字相同（本卡的横向偏振按 ε^i·ε^j = δ^{ij} 取）；而 **FockGram.lean /
+  worldsheet.bosonic-fock-gram-matrix 是协变振子 α^μ_m 的版本，中心项带不定的 η^{μν}**，
+  走的是 `Fock.pairing_unique`（实质依赖"单项式是多项式环的基"）。三者的关系是：
+  新卡（抽象、δ_{ij}）⊃ 本卡所需的代数内容；FockGram（具体、η^{μν}）与新卡**互补而非包含**
+  （HeisenbergGram.lean 文件头 Mathematical notes 第 1 条逐字："the two files cover
+  complementary situations"）。本卡属于**正交归一**那一支。
+
+  ⇒ **本卡仍不标 formalized**，因为实例化没做完。按 HeisenbergGram.lean 文件头 Gaps 第 1 条，
+  把新卡用到塔上的 A^ε_n 还差三件：
+    (i)   `Fock.towerPairing η towerVacuum towerVacuum = 1`（本卡 (H4)）；
+    (ii)  `A^ε_n towerVacuum = 0`（n > 0，本卡 (H3)）；
+    (iii) 一个**横向正交归一标架**，把 `lie_ddfOp_ddfOp` 现给的 m (ε·δ) δ_{m+n,0}
+          变成 m δ^{ij}（本卡 (H1)）——即把 ε^i·ε^j = δ^{ij} 这条选择在 Lean 里落实。
+  （本卡 (H2) 互伴在塔上对应 worldsheet.ddf-operators-adjoint 的 (1)，图上仍 physical-argument；
+  但注意：本卡是**条件命题**，(H2) 是假设不是依赖，故它不压低本卡状态，只挡实例化。）
+  这三件是 formal/BLUEPRINT-noghost.md §C.4。补齐后本卡可直接引新卡 + 三条实例化引理接线。
+
+  【2026-09-11（五）：本卡升 formalized（curator，small-backlog-14 追加项；**陈述文本仍一字未动**，
+  只加 formal 块、一条 source 与本段）】
+  ⚠ **上面那段（四）的结论「本卡仍不标 formalized」已作废**：它列的三条缺口在同日被 DDFGram.lean
+  一次补齐（formal/StringFormal/NoGhost/DDFGram.lean，分支 agent/formalizer/noghost-c4，无 sorry）：
+    (i)   真空归一化 ⇒ `Fock.towerPairing_towerVacuum_self`（⟨0;k|0;k⟩ = 1）＝本卡 (H4)；
+    (ii)  真空湮灭 ⇒ `ddfOp_towerVacuum_of_pos`（n > 0 时 A^ε_n|0;k⟩ = 0）＝本卡 (H3)；
+    (iii) 横向正交归一标架 ⇒ `TransverseFrame`（LightCone.lean）与 `ddfFamily_ccr`，
+          把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij} δ_{m+n,0} ＝本卡 (H1)；
+    另 (H2) 互伴 ⇒ `ddfFamily_adj`（= `Fock.towerPairing_ddfOp_left`，图上 worldsheet.ddf-operators-adjoint-v2，
+    该卡已 formalized——**故 (H2) 在本卡里仍是假设，但它在 DDF 实例上已是定理，不再是 physical-argument 的短板**）。
+  于是 `StringFormal.gram_of_heisenberg_family` 直接实例化出 **`ddf_gram_diagonal`**（本卡 (1)），
+  并给出 (2) 的三条：`linearIndependent_ddfMonomial`（特征零域）、`ddf_gram_pos`（逐态正定）、
+  **`ddf_span_pos`**（线性序域上 0 ≠ v ∈ H^⊥ ⇒ ⟨v,v⟩ > 0，即本卡 (2) 末句那条不等式），
+  配套 `towerPairing_linearCombination_frameMonomial`（Σ c_d² ∏ n^d d! 的求和公式）与
+  `ddfSpan_eq_span_range_frameMonomial`（Lean 的 `ddfSpan` 就是本卡的 H^⊥(k)，
+  列表生成集与占据数生成集一致——**没有这条，(2) 的『限制到 H^⊥(k) 上正定』读不出来**）。
+  (3) 由 `ddf_gram_of_level_ne` 给出**正交那一半**；末句的层归属未形式化，见 source note (i)。
+  ⇒ `formal.lean_decl` 填 `StringFormal.NoGhost.ddf_gram_diagonal`，新增推导
+  worldsheet.transverse-ddf-fock-gram-matrix--via-lean（formalized）。
+  **`--via-oscillator-recursion` 保留**（两条推导并存，工具取高者；那条是本图自补的手写递推，
+  是 Lean 版的前身与独立复核物，按 docs/STATUS_LEVELS.md「多条推导取最强」不删）。
+  ⚠ 四条前件收紧（量词比卡更强 / 比卡更窄的地方）逐条写在新推导的 notes，引用前必读。
 
   【2026-09-11（三）：结论 (2) 的一条缺口——「正整数故非零」需特征零（curator，
   分支 agent/curator/lean-wire-5；**只加 notes，陈述文本未动**）】

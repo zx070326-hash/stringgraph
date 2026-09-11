@@ -1,0 +1,144 @@
+id: worldsheet.tower-physical-quotient-form--via-lean
+target: worldsheet.tower-physical-quotient-form
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **承载塔本身、塔上的双线性型、以及 (1) 的唯一输入**。该卡 formal.lean_decl
+      `StringFormal.NoGhost.Fock.towerPairing` 就是本推导里的 ⟨·,·⟩_T；本推导逐字调用它的
+      三条声明（均已登记在该卡 sources 第二条）：
+        · `Fock.towerPairing`（+ `towerPairing_apply`）—— 目标 (1)–(4) 里的型；
+        · `Fock.towerPairing_comm`（对称性）—— 目标 (4) 的 `towerQuotientPairing_comm` 直接由它得到；
+        · **`Fock.towerPairing_towerLop_left`（L_m^† = L_{−m}）—— 目标 (1) 的唯一输入**，
+          Lean 证明 `towerSpuriousSubmodule_le_towerOrthComplement` 只有三行，其中一行就是它。
+      另外 `towerLop`（逐层 Sugawara L_m，该卡 (3)）既定义了伪态子模 H_spur = Σ_{n≥1} im L_{−n}，
+      也定义了物理态的正模条件。
+      ⚠ 该卡是 status: formalized 的定义卡，不压低本推导状态。
+      ⚠ **该卡的「层间正交是约定不是定理」这条风险原样传到本卡**：目标 (1)–(4) 里的一切内积都是
+      塔上的型，而它有一半内容（跨层为零）是那张卡规定的。本推导不改善这一点。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerPhysSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
+      **承载塔上的物理子模 H_phys(a₀) 这个对象**（陈述接口边，见 docs/STATUS_LEVELS.md「接口边」裁决）。
+      该卡陈述里的
+        H_phys(p;k_0;a₀) = { Ψ : (L_0 − a₀)Ψ = 0 且 L_mΨ = 0 ∀ m ≥ 1 }
+      与其 Lean 侧 `StringFormal.NoGhost.towerPhysSubmodule`（= `towerL0Submodule ⊓
+      towerPositiveModeSubmodule`，展开引理 `mem_towerPhysSubmodule`）逐字就是本目标 (1)–(4) 里的
+      H_phys(a₀)：TowerNull.lean 直接 `import StringFormal.NoGhost.TowerPhysical` 并对同一个
+      `towerPhysSubmodule` 取正交补与商。**a₀ 是塔上统一常数**这件事也由该卡承载（那张卡的 ⚠ 段）。
+      ⚠ 本边供给对象与记号，**不出现在 towerQuotientPairing 的机检证明链上**（DDF 算子一次都没进来）；
+      按接口边裁决标 inferred: false，桥层声明即 `towerPhysSubmodule` 本身。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.ddf-operators-preserve-positive-mode-conditions
+    inferred: false
+    note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerPositiveModeSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
+      **承载 H_phys 的正模那一半 P = { Ψ : L_mΨ = 0 ∀ m ≥ 1 }**，即 Lean 的
+      `StringFormal.NoGhost.towerPositiveModeSubmodule`（展开引理 `mem_towerPositiveModeSubmodule`），
+      定义在同一个文件 TowerPhysical.lean 里。**目标 (1) 只用到这一半**——
+      `towerSpuriousSubmodule_le_towerOrthComplement` 的证明取的是 `mem_towerPhysSubmodule.mp hΦ).2`，
+      即物理态的正模条件，质量壳条件在 (1) 里一次没用（目标 (1) 末句「不用质量壳条件」）。
+      ⚠ 同为接口边（供给子模对象），不在机检链上的是该卡的 DDF 保持性断言本身。
+      ⚠ 该卡 effective = formalized，不压低本推导状态。
+  - id: worldsheet.spurious-subspace
+    inferred: false
+    note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerSpuriousSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
+      **承载伪态子模的定义**（无壳版 S = Σ_{n≥1} L_{−n}F）。目标里的塔版
+      H_spur = Σ_{n≥1} L_{−n} T(p;k_0) 是同一个公式逐字装在塔上，Lean 侧是
+      `StringFormal.NoGhost.towerSpuriousSubmodule := ⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range
+      (towerLop η a b (-n))`，其 docstring 逐字写着「As in the single-Fock case
+      (`Fock.spuriousSubmodule`) this does not depend on the intercept.」
+      ⇒ 对接关系由来源（TowerNull.lean 的 docstring）明写，故 inferred: false。
+      ⚠ **两者是不同的 Lean 对象**（`Fock.spuriousSubmodule` 住在 F(D,R) 上，塔版住在
+      `TowerFock D R` 上），本边供给的是「伪态是哪个公式」这一识别，不是同一个对象的复用。
+      ⚠ Lean docstring 里写的图节点名是 `worldsheet.ocq-spurious-states`（v1，已 superseded by v2）；
+      与塔版逐字对应的那一半是**无壳**卡 worldsheet.spurious-subspace（v2 把带壳条件的那一半
+      留在 ocq-spurious-states-v2，塔上没有带壳版，见目标「不断言 (d)」）。
+      ⚠ 该卡是 status: formalized 的定义卡，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/TowerNull.lean（全文；主声明 StringFormal.NoGhost.towerQuotientPairing 与通用层 StringFormal.quotRadicalForm）；依赖 formal/StringFormal/NoGhost/TowerPairing.lean :: Fock.{towerPairing, towerPairing_comm, towerPairing_towerLop_left}、formal/StringFormal/NoGhost/TowerPhysical.lean :: {towerPhysSubmodule, mem_towerPhysSubmodule, towerPositiveModeSubmodule}、Mathlib.LinearAlgebra.BilinearForm.Orthogonal :: LinearMap.BilinForm.orthogonal"
+    note: |
+      本仓库，formalizer 提交 **c985285**（分支 agent/formalizer/noghost-c），lead 以 **43d7d54** 合入 main。
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。
+      **curator 未自行重跑 `lake build` / `check-axioms`**：本分支只改 graph/，不含 Lean 改动；
+      按项目纪律，公理检查在含 formal/ 改动的分支合并前由 lead 执行，该文件随 43d7d54 已走过一次。
+      目标陈述逐条对应哪个 Lean 声明，列在目标卡 sources 第一条（不在此重复）。
+  - ref: polchinski-1998-v1
+    loc: "§4.1，eq. (4.1.8)/(4.1.9)，p.122"
+    note: |
+      文献对应（单 Fock、固定动量）。**不承载本推导**：本推导的论证是 Lean 侧的机器证明，
+      不是对 Polchinski 这两式的复述；塔、正交补、商模在那里都不出现。
+summary: |
+  本推导是**图侧接线**：目标陈述的每一条都由 formal/StringFormal/NoGhost/TowerNull.lean 中
+  一条无 sorry 的 Lean 声明逐字承载（对应表见目标卡 sources 第一条）。论证结构如下，
+  按 Lean 文件的顺序：
+
+  **第一步（通用层，目标 (5)）**：对任意 R-模 M、任意双线性型 B、任意子模 P，定义
+  `radicalIn B P := { χ ∈ P : B χ φ = 0 ∀ φ ∈ P }`（Lean 里写成 `(B.domRestrict₁₂ …).ker` 式的
+  限制核），`QuotRadical B P := P ⧸ radicalIn B P`。要在商上诱导型，只需证
+  `radicalIn ≤ ker (B|_P)` 与其 flip 版，然后两次 `Submodule.liftQ`；**唯一的假设是
+  `LinearMap.IsRefl B`**（自反：B x y = 0 ⟹ B y x = 0），用来把「左根基」与「右根基」对上。
+  计算规则 `quotRadicalForm_mk`（两个类的型 = 任意代表元的型）就是**良定义性**本身。
+
+  **第二步（塔上的三个子模）**：`towerOrthComplement η W` 直接**定义为** Mathlib 的
+  `LinearMap.BilinForm.orthogonal`（`mem_towerOrthComplement` 只是把被测向量挪到左边，
+  以配合 `Fock.orthComplement` 的写法）；`towerSpuriousSubmodule := ⨆_{n>0} range (L_{−n})`；
+  `towerNullSubmodule := towerPhysSubmodule ⊓ towerOrthComplement towerPhysSubmodule`。
+
+  **第三步（目标 (1)）**：`towerSpuriousSubmodule_le_towerOrthComplement`。证明只有三行：
+  取 Χ = L_{−n}Ψ（n ≥ 1）与任意物理 Φ，用 `Fock.towerPairing_towerLop_left`
+  把 ⟨L_{−n}Ψ, Φ⟩_T 变成 ⟨Ψ, L_nΦ⟩_T，再用物理态的正模条件 L_nΦ = 0（n ≥ 1）得零。
+  **质量壳条件与 a₀ 的取值在这一步完全没用到**，这正是目标 (1) 末句的来源。
+
+  **第四步（目标 (2)）**：`towerSpurious_inf_towerPhys_le_towerNull` = 第三步 + 定义
+  （H_null = H_phys ⊓ H_phys^⊥）的一行合成；`towerPairing_self_eq_zero_of_mem_towerNullSubmodule`
+  把「零态范数为零」读出来；`towerLop_neg_apply_mem_towerNullSubmodule` 是它的具体形式。
+
+  **第五步（目标 (3)）**：`towerPairing_eq_zero_of_mem_towerNullSubmodule`（零态与物理态配对为零，
+  两个方向各一条，用 `Fock.towerPairing_comm`）⇒ `towerPairing_add_null_left/right` ⇒
+  `towerPairing_add_null` ⇒ `towerPairing_eq_of_sub_mem_towerNullSubmodule`。
+
+  **第六步（目标 (4)）**：把第一步的通用层实例化到 M := `TowerFock D R`、
+  B := `Fock.towerPairing η`、P := `towerPhysSubmodule η a b a₀`，自反性由
+  `towerPairing_isRefl`（从 `towerPairing_comm` 得）供给：
+  `TowerPhysQuot := QuotRadical …`，`towerQuotientPairing := quotRadicalForm …`，
+  良定义性 = `towerQuotientPairing_mk`，对称性 = `towerQuotientPairing_comm`，
+  满射 = `towerPhysMk_surjective`；另有两条「代表元为零态 / 为伪态则整行为零」的推论。
+  `mem_towerNullInPhys` 证实第一步的抽象 `radicalIn` 与第二步的 `towerNullSubmodule` 在
+  H_phys 内是同一个子模——这条等同是 (4) 能被读成目标 (4) 的关键，不是装饰。
+
+  【为什么标 formalized】目标卡每一条断言都有一条具名、无 sorry 的 Lean 声明逐字对应，
+  且四条依赖卡的 effective 全部是 formalized（momentum-tower-fock-space、
+  ddf-operators-preserve-physical-states、ddf-operators-preserve-positive-mode-conditions、
+  spurious-subspace）。目标卡里**不断言**的那些（反包含、非退化、正定、DDF 关系）
+  正是 Lean 文件头 "## Gaps" 明列而未做的那些，二者逐条对齐。
+gaps:
+  - "**只有易方向**：Lean 证的是 `towerSpurious_inf_towerPhys_le_towerNull`（伪态 ∩ 物理 ⊆ 零态），反包含「零态 ⊆ 伪态」没有，因此 `TowerPhysQuot` 是**按正交根基取的商**，与「物理态模伪态」的等同**尚未建立**（文件头 Gaps 第 1 条逐字）。反方向要 DDF/光锥分解，即 formal/TODO.md 的 `ddf-spans`。目标卡「不断言 (a)」。"
+  - "**非退化未抽出**：`towerQuotientPairing` 按构造非退化，但 `∀ q, (∀ q', towerQuotientPairing q q' = 0) → q = 0` 没有具名引理（文件头 Gaps 第 2 条，与 QuotientForm.lean 的同名缺口同一条）。目标卡「不断言 (b)」。"
+  - "**无正定性**：一般交换环上没有序，D = 26 / a₀ = 1 处的正定性一字未碰（文件头 Gaps 第 3 条）。目标卡「不断言 (c)」。"
+  - "**伪态与 DDF 无联系、无 on-shell 细化**：塔上没有 `SpuriousShell.lean` 的 S ⊓ ker(L_0 − a₀) 对应物，也没有任何把 `towerSpuriousSubmodule` 与 DDF 算子联系起来的引理（文件头 Gaps 第 4 条）。目标卡「不断言 (d)」。"
+  - "**层间正交仍是约定**：目标 (1)–(4) 的一切内积都是 `Fock.towerPairing`，其跨层为零是 worldsheet.momentum-tower-fock-space (2) 规定的、不是证明的。本推导把更多结论建在这条约定上（商型的每一个值都经过它），但不改善它。收紧仍需「离散塔模型 ↔ 连续动量模型」的独立陈述，本图无此节点。"
+  - "**QuotientForm.lean 未按通用层重构**：单 Fock 版仍是手写的 `Fock.nullInPhys` / `Fock.physPairing` / `Fock.quotientPairingAux` / `Fock.quotientPairing`，文件头 Gaps 第 5 条逐字承认它「literally is」通用层的实例。重构不影响本卡任何断言，只是两处代码并存；记在 worldsheet.fock-indefinite-form 的 notes 供 formalizer 参考。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是该文件随合并提交 43d7d54 进入 main（按项目纪律含 formal/ 改动的分支合并前由 lead 跑两者）。本分支不含 Lean 改动。"
+notes: |
+  【本推导不挂 worldsheet.spurious-subspace-orthogonal-to-physical 的边】
+  那张卡（S ⊆ H_phys^⊥，单 Fock，formalized，lean_decl `Fock.spuriousSubmodule_le_orthComplement`）
+  是目标 (1) 的**单动量版本**，但塔上的 `towerSpuriousSubmodule_le_towerOrthComplement`
+  **不是**它的推论，也不 import 它的证明：Lean 侧是在塔上重证的（唯一输入是
+  `Fock.towerPairing_towerLop_left`）。挂边会谎报论证路径。两张卡的关系写在目标卡 notes。
+
+  【与 worldsheet.no-ghost-theorem-v4 的关系】那张卡 (1b) 断言的正定性住在
+  ⊕_{N≥0} H_phys(k − N k_0) 上，正是本卡 (4) 商型的对象（在 D = 26、a₀ = 1 且取塔的一半时）。
+  本卡**不**触碰正定性，只把「商」这个对象在塔上定义清楚并证明其良定义。
+  no-ghost-theorem-v4--via-goddard-thorn 的 gaps 里记着「H_null = H_spurious ∩ H_phys
+  只有易方向」这条缺口——**本卡是那条缺口在图上的落点**（易方向现已 formalized，
+  难方向仍缺），下次修那条推导的 gaps 时可以改指本卡而不必重述。
+
+  curator，2026-09-11，small-backlog-14。
+author: curator
+created: "2026-09-11"

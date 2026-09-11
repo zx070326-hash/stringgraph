@@ -78,6 +78,46 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第九轮记账（2026-09-12）】physics-auditor，分支 agent/auditor/noghost-r9。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R8。
+
+      R9-1. 〔条件版无鬼定理已 Lean〕`StringFormal/NoGhost/Assembly.lean` `no_ghost_of_spans`（TODO noghost-c5 已勾，10 条声明，无 sorry）：给定 `DDFSpans`
+            （H_phys ≤ ddfSpan ⊔ H_null，截距 a₀ = α'k²），`towerQuotientPairing` 在 H_phys ⧸ H_null 上正定（0 ≤ ⟨x,x⟩ 且 ⟨x,x⟩ = 0 → x = 0）；
+            对**任意 D**、任意有序域 K（`Field`+`LinearOrder`+`IsStrictOrderedRing`+`Algebra ℚ`）；Assembly.lean 的声明与证明中 D = 26 一次不出现（只在 docstring 里）。
+
+      R9-2. 〔与 canonical_text 断言的对应〕(1a) 半正定 = `towerPairing_self_nonneg_of_mem_towerPhys_of_spans`，(1b) 正定 = `no_ghost_of_spans`，两者都在 DDFSpans 之下；
+            (1b) 的等距同构 `ddfSpan ≃ₗ H_phys⧸H_null` 未构造（满射性即 DDFSpans，单射性由 `ddf_span_pos`）。(2) D > 26 负模 = `LevelTwo.lean`
+            `exists_mem_physSubmodule_pairing_self_neg'`，独立见证，不经 DDFSpans（R8 已记）。
+
+      R9-3. 〔**船长须知**〕整条链的全部猜想负担现集中于 `DDFSpans`（= R8-3 的 (B-26)）：它是唯一未机检、且 D = 26 唯一进入的命题。文献支撑仅 Goddard 2008 §6 (6.4)
+            一句无证明结论转引 GT 1972（正文未获取）。已证片：`ddfSpans_bigrade_neg_one_one`（rung −1、level 1，任意 D，带前件 hεa 与 FrameSpansOrthogonal）；
+            N = 2 进行中（总线有 formalizer 对 LevelTwoSpan.lean 的 claim，本 worktree 未见文件）。TODO `ddf-spans` 仍未勾。
+
+      R9-4. 〔有效状态〕`status` / `why` 本轮实测：own rigorous，effective **rigorous**，best_derivation --via-goddard-thorn；瓶颈树单支
+            kac-determinant-v2 → verma-module-free-over-negative-part → pbw-theorem，全部 rigorous（纯数学）。与 R8-1 一致。
+            注意：effective rigorous 是图对 GT 1972 数学证明的登记，不是 Lean 结论；Lean 侧的 formalized 要等 DDFSpans 关闭。
+
+      【第八轮记账（2026-09-12）】physics-auditor，分支 agent/auditor/noghost-r8。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6/R7。
+
+      R8-1. 〔有效状态〕`status` / `why`（本轮实测）：own rigorous，effective **rigorous**，best_derivation --via-goddard-thorn，
+            瓶颈树无压低依赖（transverse-ddf-fock-gram-matrix、kac-determinant-v2 ← verma-module-free ← pbw 均 rigorous）。与 R7-3 一致。
+
+      R8-2. 〔Lean 侧新进展，TODO noghost-a/b/c1/c3 已勾〕K_n 六关系含 [K_m, A^ε_n] = 0（Longitudinal）；假设集见证（Witness/WitnessInt）；塔上零模态/商形式
+            （TowerNull）；抽象 Heisenberg Gram（HeisenbergGram）；光锥标架代数与 **N=1 张成** `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`（LightCone）。
+            N=2 卡在两条具名引理（creaExp level-1/2 分量展开；level-2 物理态完整解）；C.4 DDF Gram 实例化进行中（TODO 仍记未做，本轮未见文件）。
+
+      R8-3. 〔**(B-26)**，推导 gaps 末条 + 蓝图 §B.5〕D = 26 唯一进入之处是「H_phys 中 H^⊥ 之外的 p_{D−1}(N) − p_{D−2}(N) 个方向恰为零模态」；
+            DDF 代数、伴随、横向 Gram、K_n 代数、特征标计数均与 D 无关。文献支撑只有 Goddard 2008 (6.4) 一句无证明结论转引 GT 1972（正文未获取）。
+            **船长批准时应知：此为整条链真正承重点，未形式化，且形式化尚需在 GT 机制与 Brower 机制之间做未做出的选择。**
+
+      R8-4. 〔对 DDF 设定的订正，均不影响 canonical_text 忠实性（陈述不写这些）〕(a) ddf-operators-v6 缺 ε·k = 0 假设：A^ε_{−1}|0;k⟩ = α^ε_{−1}|0;k−k_0⟩
+            需要它，仅横向 ε·k_0 = 0 不够（TODO noghost-b 缺口 1）；(b) 标架完备性（D−2 个横向向量连同 p 张成 p^⊥）是独立假设，GT 计数默认了它；
+            (c) 「ℤ 上无见证」为假：a = (0,1,1,0,…) 是整数见证（WitnessInt，ddf-hypotheses-satisfiable 已更正）。
+
+      R8-5. 〔K 算子选择〕GT 路线用 K_n = k_0·α_n（Goddard 2008 §6 (6.2)(6.3)，L1），而非 Brower 的 A^L_n = Ã_n + F_n；
+            「GT 1972 真正用的是 K_n」仅为 Goddard 2008 自述，对 GT 1972 为 L3 转引。本图与 Lean 均走 K_n（gt-longitudinal-k-algebra，蓝图 §A.0）。
+
       【第七轮记账】2026-09-11，physics-auditor，分支 agent/auditor/noghost-contour。kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；statement_id 与 canonical_text 均未动，**不重做回译**。条目仍记在 diff_notes 顶部（schema 无 history 字段，同 R6）。
 
