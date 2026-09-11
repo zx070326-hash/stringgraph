@@ -27,6 +27,16 @@ depends_on:
     note: 供给物质部门 L^m_n、G^m_r 与物质 Fock 空间（光锥/横向谱那一侧的对象）。
   - id: worldsheet.no-ghost-theorem-brst
     inferred: true
+    convention_map: |
+      鬼数零点跨约定（reviewer-batch17 CONFIRMED #1，2026-09-11 补）：
+      玻色卡 worldsheet.no-ghost-theorem-brst 沿 Polchinski v1 §4.4 把物理态放在鬼数 **1**
+      （|↓⟩ 鬼数 −1/2 的相对复形约定下为 1；该卡 uses_conventions 无 ghost-number 约定卡，
+      零点由其 statement 文本固定）。本卡与 conv.superstring-ghost-number-zero（canonical =
+      Lian–Zuckerman 1989）把相对上同调放在鬼数 **0**；Dedushenko 自己用 (A+1) ± ½。
+      换算：玻色侧鬼数 g_Pol ↦ 本约定 g_LZ = g_Pol − 1（常数平移，对本边只借用的
+      "S^{-1} 级数模板"无影响）。lead 裁定（2026-09-11）：玻色弦一侧暂不单建 ghost-number
+      约定卡；等玻色 BRST 卡换代时按 conv.superstring-ghost-number-zero notes 末段
+      作为同 family 非 canonical 成员补入。
     note: |
       供给本推导 §6 显式代表元构造所仿的**模板**：Dedushenko §6 的
       Ω = 1 − S^{−1}U + … 逐字仿 Polchinski §4.4（本图这张卡的推导
