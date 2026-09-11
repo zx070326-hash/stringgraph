@@ -1,0 +1,179 @@
+id: worldsheet.ddf-spans-physical-states-level-two
+kind: proposition
+title: DDF 张成假设在 (rung −2, 振子能级 2) 一片上成立，且需要 D = 26：H_phys ∩ V_2 ⊆ D(Ε) + H_null——第一个消费 D = 26 的机检张成片
+statement: |
+  【设定】记号沿用 worldsheet.ddf-spanning-hypothesis（同一张塔 T(k;k_0)、系数域 K）与
+  worldsheet.ddf-light-cone-frame（标架对象 F : DDFLightConeFrame η a b，D ≥ 2 由 F 内部
+  的假设保证）：系数域 K 满足 [Field K][LinearOrder K][IsStrictOrderedRing K][Algebra ℚ K]
+  （有序域，与 worldsheet.ddf-spanning-rank-inequality 的记号一致）；截距
+  a₀ := α'k² = ½η(a,a) 由 F 钉死为 1（`DDFLightConeFrame.dotVec_self_eq_two`，
+  worldsheet.ddf-light-cone-frame 【curator 手算】(ii) 的机检版本）；
+  V_2 := towerBigrade(−2, 2)（rung −2、振子能级 2 的双分次片）；
+  H_phys、D(Ε)、H_null 三个子空间逐字取自 worldsheet.ddf-spanning-hypothesis
+  （H_phys ∩ V_2、D(Ε) ∩ V_2、H_null ∩ V_2 即该卡与
+  worldsheet.ddf-spanning-rank-inequality 记号里的 H_2、D_2、Z_2）。
+
+  【断言】设 hD : 2 ≤ D，F : DDFLightConeFrame η a b。若 **(D : K) = 26**，则
+
+      **H_phys ∩ V_2  ⊆  D(Ε) + H_null** 。
+
+  用 worldsheet.ddf-spanning-hypothesis 的分片记号：这就是 DDFSpansOn(V_2)，即 DDF 张成
+  假设限制在 (rung −2, 振子能级 2) 这一片上成立——且**只在 D = 26 时**成立（本卡不断言
+  D ≠ 26 时的情形，见【本卡明确不断言】(b)）。
+
+  【与 worldsheet.ddf-spans-physical-states-level-one-modulo-null 的关系（姊妹卡，但条件不同）】
+  那张卡是 (rung −1, level 1) 片，**对一切 D 成立**，不需要 D = 26（N = 1 处的占据数计数
+  (D−1) = (D−2) + 1 对一切 D 平衡）。本卡是 (rung −2, level 2) 片，是同一族 DDFSpansOn
+  分片结果里**第一个真正需要 D = 26 才成立**的片——N = 2 起占据数计数出现非零差额
+  p_{D−1}(2) − p_{D−2}(2) = D（math.level-two-partition-difference），零态必须补上这个差额，
+  而"补得上"这件事本身在 N = 2 处被证明需要且仅需要 D = 26
+  （worldsheet.level-two-null-state-requires-d26 (3)）。两卡形状同构（都是 DDFSpansOn 在
+  单个反对角片上的实例），是"逐 N 攻克 worldsheet.ddf-spanning-hypothesis"这条路线上并列的
+  两个已关闭片，不是彼此的推论或换代。
+
+  【本卡不需要的假设】不需要 R 是 Q-代数意义之外的额外结构（K 已经是有序 Q-代数域）；
+  不需要横向标架的显式基（F 只需满足 DDFLightConeFrame 的八条，见
+  worldsheet.ddf-light-cone-frame）。
+
+  【本卡明确不断言】
+  (a) **不断言一般 N 的任何片**：本卡只做 N = 2。N ≥ 3 的对应片是否可类似关闭是
+      worldsheet.ddf-spanning-rank-inequality 与 worldsheet.ocq-null-state-two-families notes
+      记录的开放问题（两族零态像的重叠从 N ≥ 5 起是 Euler 五边形数障碍），本卡不触及。
+  (b) **不断言 D ≠ 26 时片上不成立（不证否命题）**：本卡只证 D = 26 ⟹ DDFSpansOn(V_2)
+      这一个方向；"D ≠ 26 时 H_phys ∩ V_2 ⊄ D(Ε) + H_null"（即 B26 2 的尖锐性/必要性）
+      未被证明，登记为未来工作，见配套推导的 gaps。
+  (c) **不断言全体 H_phys**（那是 worldsheet.ddf-spanning-hypothesis 本身）：一片一片地
+      关闭不自动给出全体，"逐片 ⇒ 全体"的拼装引理是另一条已 formalized 的独立引理
+      （Glue.lean，该卡 notes 已记录），本卡不重复它。
+  (d) **不断言两族零态（Type 1 / Type 2）在一般 N 的构造**：那是
+      worldsheet.ocq-null-state-two-families 的内容（一般 N，physical-argument）。
+      本卡消费的是该构造在 N = 2 这一个特例上的机检版本（`NullSeedsTwo.lean` /
+      本卡 lean_file 里的 `typeOneTwo`、`descTwo`），不重新断言一般 N 的机制。
+  (e) **不断言 26 个零态的具体身份对读者可读**：`nullFamilyTwo` 的索引类型是
+      `Option (Option (Fin (D−2)))`（D − 2 个横向 Type-1 + 1 个沿 a = b−b̃ 方向的 Type-1 +
+      1 个 Type-2），本卡只断言其像落在 H_null ∩ V_2 里且线性无关，具体索引编码是
+      Lean 侧的实现细节，不是本卡陈述的一部分。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfSpans_bigrade_neg_two_two
+  lean_file: StringFormal/NoGhost/LevelTwoCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelTwoCount.lean :: StringFormal.NoGhost.ddfSpans_bigrade_neg_two_two
+      （本卡 formal.lean_decl，section Closing，约第 908 行起）；紧邻的
+      StringFormal.NoGhost.b26_two_of_D26（同 section，约第 895 行起，⭐ 标记的中间结果）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry。**curator 未自行重跑 `lake build` 与
+      `check-axioms`**；本分支只改 graph/，合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。这是本卡 status formalized 的依据。
+
+      **逐字核对**：`ddfSpans_bigrade_neg_two_two (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+      (hD26 : (D:K) = 26) : DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-2) 2)`——
+      与本卡【断言】逐字一致（`DDFSpansOn … (towerBigrade …)` 就是「H_phys ∩ V_2 ⊆
+      D(Ε) + H_null」的 Lean 展开，同 worldsheet.ddf-spanning-hypothesis 的逐句字典）。
+
+      文件头模块 docstring 逐字："**This is the first slice on which `D = 26` is consumed
+      by a machine-checked spanning result.** `N ≤ 1` was closed unconditionally in `D`
+      (`Glue.ddfSpansOn_towerLevelLE_one`); `N = 2` is not."
+
+      **证明链（逐层核对，供审计）**：`ddfSpans_bigrade_neg_two_two` 直接调用
+      `ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_two_of_D26 hD F hD26)`
+      （`ddfSpansOn_bigrade_of_b26` 是 `SliceRank.lean` 里 `B26 N → DDFSpansOn` 的通用、
+      D-无关引理，对任意 N 成立，不是任何图上节点的论证内容，只是把 `B26 2`
+      翻译成分片张成陈述的纯逻辑步骤——不建 depends_on 边）；`b26_two_of_D26` 调用
+      `b26_two_of_finrank_towerNull`，其唯一非平凡输入是
+      `finrank_towerPhys_inf_towerBigrade_two_le`（D-无关的维数不等式，见下）与
+      `le_finrank_towerNullSubmodule_inf_towerBigrade_two`（**唯一用到 `(D:K)=26` 的一步**）。
+
+      **`finrank_towerPhys_inf_towerBigrade_two_le` 的三个输入**（本卡 depends_on 的
+      前四条边由此逐一对应）：
+      (i) `finrank_towerPhys_inf_towerBigrade_le`（worldsheet.physical-slice-bounded-by-transverse-count
+          的 formal.lean_decl，逐字调用，给 dim H_2 ≤ p_{D−1}(2)）；
+      (ii) `finrank_ddfSpan_inf_towerBigrade`（worldsheet.transverse-ddf-fock-gram-matrix
+          一侧的定理，**不是**该卡 formal.lean_decl `ddf_gram_diagonal`，是同一文件
+          `SliceDim.lean` 里的维数版本，给 dim D_2 = p_{D−2}(2)；精确对照见本卡
+          depends_on 该条的 note）；
+      (iii) `levelTwo_count_identity`（math.level-two-partition-difference 的
+          formal.lean_decl，逐字调用，给 p_{D−1}(2) = p_{D−2}(2) + D）；
+      加上本文件内部两条纯计数引理 `card_conjFree_two_le`、`card_ddfLevel_two_ge`
+      （占据数的显式上下界，不对应图上任何既有节点，是本推导自身的组成部分，不建
+      depends_on 边——它们与 `levelTwo_count_identity` 一起构成
+      math.level-two-partition-difference notes 里记录的"两条单侧计数不是独立等式定理"
+      那段说明的 Lean 侧全部内容）。
+
+      **`le_finrank_towerNullSubmodule_inf_towerBigrade_two` 的两个输入**：
+      (iv) `linearIndependent_nullFamilyTwo`（**D-独立**：文件头 docstring 逐字
+          "Independence does not use `D = 26`"；本文件内部引理，不对应既有图节点，
+          不建边）；
+      (v) `nullFamilyTwo_mem_towerNullSubmodule`（**唯一使用 `(D:K)=26` 的引理**，文件头
+          docstring 逐字"This is the only statement of the file that uses `(D:K)=26`,
+          and it uses it only for the single Type-2 member"）：三支模式匹配中，`none`
+          分支（Type-2 成员）调用 `descTwo_single_mem_towerNullSubmodule`
+          （worldsheet.level-two-null-state-requires-d26 的 sources 已登记的机检引理族
+          之一，**不是**该卡 formal.lean_decl `descTwo_mem_towerPhysSubmodule_iff`，是
+          `NullSeedsTwo.lean` 同一批引理里"落在 H_null"那半，精确对照见本卡 depends_on
+          该条的 note）；另两支（`some none`、`some (some i)`）调用
+          `typeOneTwo_mem_towerNullSubmodule`（D-独立，Type-1 族，本文件内部引理，
+          不对应既有图节点）。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.4)（arXiv:0802.3249v1）：'|ψ⟩ = |f⟩ + |n⟩'，对 D = 26 断言"
+    note: |
+      **不承载本卡的论证**（无证明，转引 GT 1972，正文未获取）。本卡与 (6.4) 的形式**逐字
+      相同**（D = 26、|n⟩ 是零态），差别只剩一处：文献对一切能级断言，本卡只做
+      (rung −2, level 2) 这一片。与 worldsheet.ddf-spans-physical-states-level-one-modulo-null
+      引用同一条文献锚点，理由同该卡。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, critical-dimension, formalized]
+notes: |
+  【为什么立卡（curator，分支 agent/curator/b26-two-wire，依派活任务交付物 #1）】
+  formal/StringFormal/NoGhost/LevelTwoCount.lean（后台 agent `a95e434cd6c263ae9`，
+  "Lean: level-2 occupation counting (B26 2)"）把 N = 2 这一片的 DDF 张成第一次做成机器
+  验证的定理，且是**第一个真正消费 D = 26 的机检张成结果**（N = 1 那张姊妹卡对一切 D 成立，
+  不消费 D = 26）。本卡承载这一结果，形状与 worldsheet.ddf-spans-physical-states-level-one-modulo-null
+  逐字对齐（同一个"DDFSpansOn 分片实例"模式），供 report/查重时被当作同族节点识别。
+
+  【查重】2026-09-12 跑 `uv run stringgraph search "level two" / "level-two" / "N=2" /
+  "rung -2" / ddfSpans_bigrade_neg_two`，均无同内容命中；`search ddf-spans` 命中的是
+  worldsheet.ddf-spanning-hypothesis 与 worldsheet.ddf-spans-physical-states-level-one(-modulo-null)
+  两族既有卡，形状相同但片不同，不重复。
+
+  【三件需要显式记录的事（依派活任务交付物 #1 的要求）】
+  (a) **本卡是第一个片，其上 D = 26 被消费于一条机检的张成结果**（N ≤ 1 对一切 D 成立，
+      见 worldsheet.ddf-spanning-hypothesis notes 的【已证片】一节；本卡是 N = 2，
+      LevelTwoCount.lean 文件头 docstring 逐字确认这一点，见 sources）。
+  (b) **D 只通过一件事进入**：26 个候选零态中，唯一依赖 `(D:K)=26` 的是 Type-2 后代
+      `𝒟₂|0;p_{−2}⟩` 的物理性（`descTwo_single_mem_towerNullSubmodule`，来自
+      worldsheet.level-two-null-state-requires-d26 的机检引理族）——其余 D−1 个 Type-1
+      候选（D−2 个横向 + 1 个沿 a−b̃ 方向）的物理性、以及全部 D 个候选的线性无关性，
+      **都不用 D=26**（`typeOneTwo_mem_towerNullSubmodule`、`linearIndependent_nullFamilyTwo`
+      对一切 D 成立）。
+  (c) **26 个零态的线性无关性本身是 D-无关的**：`linearIndependent_nullFamilyTwo` 不带
+      `hD26` 假设，对任意 D（满足 `hD : 2 ≤ D` 与标架存在性）都成立；D = 26 只决定
+      "这 D 个候选是否都落在 H_null 里"，不决定"它们是否独立"。这与
+      worldsheet.ddf-spanning-rank-inequality 的既有 notes (ii)（"计数一步永远看不见 26"）
+      是同一个洞察的另一面："独立性一步也看不见 26，只有其中一个候选的物理性看得见"。
+
+  【depends_on 的取舍：为什么不挂 worldsheet.ddf-spanning-rank-inequality】
+  证明链里出现的 `ddfSpansOn_bigrade_of_b26`（`SliceRank.lean`）是"`B26 N ⟹ DDFSpansOn`"
+  这条对任意 N 成立的、D-无关的纯逻辑翻译引理（`ddfSpansOn_bigrade_iff_b26` 的一半，
+  该卡 sources 已记录其为"等价改写"）。本卡消费的是这条通用翻译工具，**不是**
+  worldsheet.ddf-spanning-rank-inequality 所断言的内容本身（该卡断言"∀N, B26 N"，仍
+  open）——本卡只在 N=2 这一个具体实例上证明了 `B26 2`（`b26_two_of_D26`），这恰恰是把
+  该卡尚未关闭的猜想在 N=2 处**关闭**的结果，不是引用该卡未证的内容。故不建这条边；
+  该卡的 notes 已相应更新（见本次交付物 #4）。
+
+  【depends_on 的取舍：为什么不挂 worldsheet.ocq-null-state-two-families】
+  那张卡是一般 N 的手算（physical-argument），本卡消费的 `typeOneTwo_*`、
+  `linearIndependent_nullFamilyTwo`、`descTwo_*` 是 `NullSeedsTwo.lean`/本文件对 N=2
+  的独立机检构造，不是把那张卡的手算内容"翻译"成 Lean（该手算卡本身没有 formal.lean_decl）。
+  两者是"同一机制的两个独立呈现"（一般 N 手算 vs N=2 机检），已在
+  worldsheet.level-two-null-state-requires-d26 与 worldsheet.ocq-null-state-two-families
+  的 notes 里互相指过对方，本卡不重复建边，只在此记一句指针。
+
+  【与 worldsheet.no-ghost-theorem-v4 的关系：不改变其瓶颈】
+  本卡不改变 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (B-26) gap 判定——
+  该 gap 仍然只在"∀N"版本上开放（N=2 现已关闭，但 N≥3 仍未知，且尖锐性/N=2 的必要性
+  未证），故该推导的 `why` 瓶颈树不因本卡而改变，见该推导本次的追记（依派活任务
+  交付物 #4 part 3）。
+author: curator
+created: "2026-09-12"
