@@ -166,8 +166,10 @@ notes: |
   ⇒ 读本节点 (1b) 时应知道：**它比 (1a) 半正定强得多，而多出来的那部分（等距同构，即秩恰为 p_{24}(N)）
   正是 (B-26)**。这也是本节点与 worldsheet.no-ghost-theorem-subcritical 的差别所在：
   D ≤ 25 时秩更大但仍半正定，D > 26 时多出的方向有负模（第 (2) 条的 Lean 见证）。
-  **有效状态**：本次接线后本节点 effective 由 rigorous 降为 physical-argument，
-  瓶颈是新卡 worldsheet.gt-longitudinal-k-algebra（文献无证明、Lean 未落地）；细节见推导 notes【（八）】。
+  **有效状态**：本次接线后本节点 effective 一度由 rigorous 降为 physical-argument
+  （瓶颈是新卡 worldsheet.gt-longitudinal-k-algebra）；**同日** formalizer-noghost-a 的
+  Longitudinal.lean 合入 main（6ed1638），该卡升 formalized，本节点 **回到 rigorous**。
+  细节见推导 notes【（八）】。⚠ rigorous 不等于 (B-26) 已证：它仍是 gaps 里的无证明承重点。
 
   【2026-09-11（四）补注：第 (2) 条已有机器验证的独立见证节点；第 (1) 条仍待 DDF】
   （curator，本次**只加本段 notes**，statement 文本、kind、tags、sources 一字未动。）

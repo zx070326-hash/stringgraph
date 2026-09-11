@@ -131,6 +131,10 @@ depends_on:
       这是把此前隐含的输入显式化的正常代价，不是新弱点；Lean 的 `towerK`
       （formal/StringFormal/NoGhost/Longitudinal.lean，formalizer-noghost-a 进行中）落地后该卡
       升 formalized，本边不再压低。
+      **【同日更新】已落地**：formalizer-noghost-a 合入 main（6ed1638），该卡接上 --via-lean
+      （`StringFormal.NoGhost.lie_towerLop_kOp` 等，Longitudinal.lean 里 `towerK` 改名 `kOp`），
+      effective = **formalized**，本推导回到 **rigorous**。上两句的「降为 physical-argument」只在
+      同一天的两次提交之间成立过。
   - id: worldsheet.kac-determinant-v2
     inferred: true
     note: |
@@ -253,7 +257,11 @@ notes: |
   这不是新弱点：【（七）】段末已自报「[K_m, A^ε_n] = 0 与领头项结构在图内均无节点」，
   本次只是把那条隐含输入显式化并让它按规则参与传播。Lean 的 `towerK`（Longitudinal.lean，
   formalizer-noghost-a）落地后该卡升 formalized，本推导回到 rigorous。
-  ⚠ 上文【（七）】段「撤边后 effective = rigorous」一句自本段起过时（原文保留）。
+  **【同日更新，同一分支的后一提交】已落地**：6ed1638 合入 Longitudinal.lean（`kOp`），
+  该卡挂 --via-lean 升为 formalized，本推导 **effective = rigorous**（`why` 无压低依赖），
+  与【（七）】段末的结论重新一致；本段上文的「降为 physical-argument」只是过渡状态。
+  ⚠ 但「张成步的承重点 (B-26) 无证明」这一条**不因此改变**：K_n 代数 formalized 只关闭了
+  「[K_m, A^ε_n] = 0 无节点」，(B-26) 仍在 gaps 末条。
 
   【2026-09-11（七）：撤 worldsheet.ddf-contour-equals-mode-sum 依赖边——它是溯源记账，不是证明步骤
   （auditor 裁决，ms.no-ghost-theorem 第七轮 R7-1；分支 agent/auditor/noghost-contour；

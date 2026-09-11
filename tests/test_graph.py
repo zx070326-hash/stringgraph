@@ -213,17 +213,18 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     新卡 **worldsheet.gt-longitudinal-k-algebra**（Goddard 2008 (6.2)(6.3) 的 K_n = k_0·α_n 代数，
     推导 --via-mode-algebra 为 physical-argument：文献无证明、Lean 的 `towerK` 尚未落地）
     被接为 --via-goddard-thorn 的**非 inferred** 依赖（Goddard §6 逐字用 K_n 表述张成步）。
-    无鬼定理 v4 的 effective 因此回到 **physical-argument**，瓶颈只有这一支。
+    无鬼定理 v4 的 effective 因此一度回到 physical-argument，瓶颈只有这一支。
     这是把此前隐含的输入显式化（推导 notes【（七）】早已自报「[K_m, A^ε_n] = 0 在图内无节点」），
-    不是新弱点；Longitudinal.lean 落地后该卡升 formalized，v4 回到 rigorous。
+    不是新弱点。**同日 formalizer-noghost-a 合入 main（6ed1638，Longitudinal.lean 的 `kOp` 与
+    `lie_towerLop_kOp` 等）**，该卡接上 --via-lean 升为 **formalized**，无鬼定理 v4 回到 **rigorous**。
     同批在 --via-goddard-thorn 的 gaps 登记了 (B-26)：D = 26 唯一进入之处。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
-    # 2026-09-11 第八轮：唯一压低 v4 的是 K_n 代数卡（见 docstring 末段）
-    assert effs["worldsheet.gt-longitudinal-k-algebra"].name == "physical-argument"
+    # 2026-09-11 第八轮：K_n 代数卡经 Longitudinal.lean 为 formalized，不压低 v4（见 docstring 末段）
+    assert effs["worldsheet.gt-longitudinal-k-algebra"].name == "formalized"
     gt8 = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     k_edge = [d for d in gt8.depends_on if d.id == "worldsheet.gt-longitudinal-k-algebra"]
     assert len(k_edge) == 1 and not k_edge[0].inferred
@@ -1240,15 +1241,20 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     # effective=physical-argument), on a node whose best derivation (--via-lean) is formalized —
     # which also re-checks "strongest derivation wins" with a throttled sibling present.
     # 2026-09-11 round 8 (branch agent/curator/small-backlog-12): --via-goddard-thorn now
-    # depends (non-inferred) on worldsheet.gt-longitudinal-k-algebra (physical-argument until
-    # Longitudinal.lean lands), so own=rigorous > effective=physical-argument is exposed on
-    # this derivation again; the Mobius example below stays as the second throttled case.
+    # depends (non-inferred) on worldsheet.gt-longitudinal-k-algebra; that card is formalized
+    # via Longitudinal.lean (merged 6ed1638), so no-ghost v4 stays rigorous end to end and the
+    # Mobius example below remains the throttled case.
     rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
     d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
-    assert d2["effective"] == "physical-argument"
-    assert rep2["effective"] == "physical-argument"
+    assert d2["effective"] == "rigorous"
+    assert rep2["effective"] == "rigorous"
+    rep_k = status_report(g, "worldsheet.gt-longitudinal-k-algebra")
+    ders_k = {d["id"]: d for d in rep_k["derivations"]}
+    assert ders_k["worldsheet.gt-longitudinal-k-algebra--via-lean"]["effective"] == "formalized"
+    assert ders_k["worldsheet.gt-longitudinal-k-algebra--via-mode-algebra"]["effective"] == "physical-argument"
+    assert rep_k["effective"] == "formalized"
 
     rep_mob = status_report(g, "math.mobius-three-point-fixing-jacobian")
     ders_mob = {d["id"]: d for d in rep_mob["derivations"]}

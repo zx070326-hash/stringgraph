@@ -1,0 +1,80 @@
+id: worldsheet.gt-longitudinal-k-algebra--via-lean
+target: worldsheet.gt-longitudinal-k-algebra
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **K_n 的定义本身与 (5) 里的 DDF 算子**：该卡的 `towerModeVec η a b ε n`（偏振收缩模）在
+      ε := b 处就是 `kOp η a b n`（`kOp_eq_towerModeVec`），该卡的 `ddfOp η a b ε hη hεb n` 就是
+      (5) 里的 A^ε_n；(5) 的证明用该卡的 `ddfOp_apply`（任意够大的窗口都算得对）与
+      `ddfSummand_apply_eq_zero_of_notMem_window`。条件 (N)(S)(T) 的 Lean 名 `hbb`/`hba`/`hεb`
+      沿用该卡的字典。该卡 formalized，不压低本推导。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **承载对象的空间、塔上型与逐层零模**：`TowerFock D R`、`towerMomentum a b j = a + j·b`
+      （(3) 的逐层标量 η(b, a + N b) 就是 `dotVec η b (towerMomentum a b j)`，
+      `dotVec_towerMomentum_right_of_isotropic` 用 `hbb` 把它化为 `dotVec η b a`）、
+      `Fock.towerPairing`（(4) 的 ⟨·,·⟩_T）与 `towerPairing_towerMode_left`。该卡 formalized。
+  - id: worldsheet.virasoro-generators-free-boson
+    inferred: false
+    note: |
+      **(1) 里的 L_m 与 (2)(4) 的振子代数**：`towerLop η a b m` 是该卡 `Fock.Lop` 的逐层版，
+      (1) 是 `lie_towerLop_towerModeVec`（← `lie_towerLop_towerMode` ← 该卡的 Sugawara 定义与
+      `Fock.lie_mode_mode`）在 ε := b 处的特化；(2) 是 `lie_towerModeVec_towerModeVec` 的特化，
+      其中心项 m (b·b) δ 由 `hbb` 消去。该卡 formalized。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Longitudinal.lean :: StringFormal.NoGhost.lie_towerLop_kOp（目标 (1)，目标卡 formal.lean_decl）；StringFormal.NoGhost.lie_kOp_kOp（(2)）；StringFormal.NoGhost.kOp_zero_eq_id 与 kOp_zero_eq_one（(3)）；StringFormal.NoGhost.towerPairing_kOp_left（(4)）；StringFormal.NoGhost.lie_kOp_ddfOp 与 kOp_mul_ddfOp（(5)）；定义 StringFormal.NoGhost.{kOp, kOp_eq_towerModeVec}；辅助 kOp_mul_towerVertex（K 穿过 V^{(n)}_K，用 hbb）、kOp_mul_towerModeVec（K 穿过 α^ε_j，用 hεb）、kOp_mul_ddfSummand（逐项对易）"
+    note: |
+      本仓库，formalizer-noghost-a，formal 侧提交 **ab9bb10**（Longitudinal.lean），lead 以 **6ed1638**
+      合入 main；Lean 4 + Mathlib v4.33.1，无 sorry。formal/TODO.md `noghost-a` 项逐字登记
+      「两文件 21 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）」（Witness.lean + Longitudinal.lean），
+      公理只有 propext / Classical.choice / Quot.sound。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本推导 status formalized 的唯一依据。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.2)–(6.3)（文献侧的结论 (1)(2)；无证明）"
+    note: |
+      只承载「Lean 证的是文献那条代数」的溯源，不承载论证（L1 逐字见目标卡 sources 与
+      --via-mode-algebra）。Lean 文件头自述 'Source: Goddard, … (2008) §6, equations (6.2)–(6.3),
+      recorded as extraction E7'。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/Longitudinal.lean 内完成，
+  是本仓库既有 DDF 引理在偏振 ε := b 处的特化（蓝图 §A.1 的观察）：
+
+  0. **定义**：`kOp η a b m := towerModeVec η a b b m`，即 K_m = Σ_μ η_μ b^μ α^μ_m。
+  1. **(1) [L_m, K_n] = −n K_{m+n}**：`lie_towerLop_kOp hη m n` 逐字就是
+     `lie_towerLop_towerModeVec η a b b hη m n`。**只用 hη**。
+  2. **(2) [K_m, K_n] = 0**：`lie_kOp_kOp hη hbb m n`——`lie_towerModeVec_towerModeVec` 给出
+     `(if m + n = 0 then m * dotVec η b b else 0) • id`，`hbb` 把它化为零。
+  3. **(3) K_0 = id**：`kOp_zero_eq_id hbb hba`——在每个 `single j P` 上，K_0 作用为标量
+     `dotVec η b (towerMomentum a b j)`，由 `dotVec_towerMomentum_right_of_isotropic hbb` 等于
+     `dotVec η b a`，再由 `hba` 等于 1；`Finsupp.lhom_ext` 延拓到整条塔。
+  4. **(4) K_m† = K_{−m}**：`towerPairing_kOp_left m v w` 逐字就是
+     `Fock.towerPairing_towerModeVec_left η a b b m v w`。**无假设**。
+  5. **(5) [K_m, A^ε_n] = 0**：`lie_kOp_ddfOp hη hbb hεb m n`——先证 K_m 与每个单项
+     α^ε_j V^{(n)}_j 对易（`kOp_mul_ddfSummand`：`kOp_mul_towerVertex` 用 `hbb`，
+     `kOp_mul_towerModeVec` 用 `hεb`），再取窗口 `ddfWindow n x ∪ ddfWindow n (kOp η a b m x)`
+     用 `ddfOp_apply` 把 A^ε_n 在 x 与 K_m x 上都展成同一有限和，逐项比对。
+     **没有望远镜求和、没有边界项**（与 [L_m, A^ε_n] = 0 的证明不同）。
+
+  【Lean 比目标卡更一般的地方（目标卡是特例，故 formalized 成立）】
+  · `kOp` 对**任意** b 有定义，(N)(S) 只是 (2)(3)(5) 的定理假设；
+  · (5) 对一切 m, n ∈ Z 含 n = 0；
+  · 系数环是任意交换 Q-代数（(1)(5) 需 `[Algebra ℚ R]`，(2)(3)(4) 连这个都不需要）。
+  【Lean 给出而目标卡不断言的】`towerKerK`、`ddfCharacterization`（定义）与三条「DDF 算子保持
+  K 条件」的引理（`ddfOp_mem_towerKerK` 等）——它们是 `ddf-spans` 的基础设施，见目标卡 notes。
+gaps:
+  - "**check-axioms 由 formalizer 登记，curator 未自行重跑**：formal/TODO.md 记 21 条声明全 ok；lead 合并前跑 `uv run stringgraph check-axioms`。"
+  - "**目标卡 formal.lean_decl 只能指一条声明**，取 (1) 的 `lie_towerLop_kOp`；(2)–(5) 的声明列在 sources loc 与本 summary，`check-axioms` 若只查 lean_decl 一条，其余四条需按 loc 逐条查。"
+  - "**(6.2) 读成等式（DDF 态张成）未做**：`ddfCharacterization` 是定义不是定理（`ddf-spans`，蓝图 §B）；这不在目标卡断言内，按 lead 指示不另立刻画定理卡。"
+notes: |
+  【2026-09-11，curator，small-backlog-12 追加（lead 指示：formalizer-noghost-a 已合 main）】
+  目标卡同日先以 --via-mode-algebra（physical-argument）立卡，本推导随 Longitudinal.lean 合入 main
+  而接上；工具按「最强推导」取本推导，目标卡 effective 升为 formalized，
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 因本卡而降的 effective 随之回到 rigorous
+  （见该推导 notes【（八）】的预告）。--via-mode-algebra 保留为文献侧记录。
+author: curator
+created: "2026-09-11"
