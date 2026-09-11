@@ -315,7 +315,13 @@ StringFormal/
                             **`ddfLevelFintype`**（level 固定的占据函数有限，编码进
                             `ι × Fin N → Fin (N+1)`，`min` 只为避开依值证明）与
                             `finrank_ddfSpan_inf_towerBigrade`（= 指标集基数 = `p_{D−2}(N)`，
-                            **永不求值**，与 §B′.8 一致）。`D = 26` 不出现
+                            **永不求值**，与 §B′.8 一致）。另有**片间正交**
+                            `towerPairing_towerBigradeProj_left/_right`（新原子
+                            `Fock.pairing_levelComponent_right`）与由它得到的齐次性
+                            `towerBigradeProj_mem_ddfSpan` / `_mem_towerNullSubmodule`，
+                            据此给出 PR1 那条 `iff` 的「⟹」半边
+                            （`b26_of_ddfSpansOn_bigrade`）与 **`ddfSpansOn_bigrade_iff_b26`**
+                            ——`B26` 是 (B-26) 的**等价改写**，不是加强。`D = 26` 不出现
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

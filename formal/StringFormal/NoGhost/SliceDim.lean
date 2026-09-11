@@ -36,6 +36,14 @@ indexing subtype, never evaluated (blueprint §B′.8: *no partition number is e
   level `N`.
 * `ddfLevelFintype` — the level-`N` DDF occupation functions form a finite type.
 * `finrank_ddfSpan_inf_towerBigrade` — `dim (ddfSpan ⊓ V_N) = #{d | N(d) = N}` (`= p_{D−2}(N)`).
+* `towerPairing_towerBigradeProj_left` / `_right` — **distinct slices are orthogonal**, in the
+  form "the form only couples a projected vector to the matching projection".
+* `towerBigradeProj_mem_ddfSpan`, `towerBigradeProj_mem_towerNullSubmodule` — `ddfSpan` and
+  `H_null` are homogeneous for the bigrading.
+* `b26_of_ddfSpansOn_bigrade`, **`ddfSpansOn_bigrade_iff_b26`** — the converse of
+  `SliceRank.ddfSpansOn_bigrade_of_b26` and the resulting equivalence: `B26 N` loses no
+  information relative to the slice spanning lemma, so it is a faithful rewriting of the
+  `(B-26)` gap and not a strengthening of it.
 
 ## Deviation from blueprint §B′
 
@@ -247,5 +255,146 @@ theorem finrank_ddfSpan_inf_towerBigrade (N : ℕ) :
     ((linearIndependent_frameMonomial hη hbb hba Ε).comp _ Subtype.val_injective)
 
 end Dim
+
+/-! ### Slices are mutually orthogonal, and `ddfSpan` / `H_null` are homogeneous
+
+These are the ingredients of the converse of `SliceRank.ddfSpansOn_bigrade_of_b26`: a
+decomposition `x = d + z` valid in the whole tower has to be pushed back onto the slice. -/
+
+section Homogeneity
+
+namespace Fock
+
+open MvPolynomial
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- Against a vector of pure level `N`, only the level-`N` part of the other argument
+contributes.  Immediate from the diagonal formula `Fock.pairing_apply`: the sum runs over the
+support of `P`, on which the level is constantly `N`. -/
+theorem pairing_levelComponent_right (η : Fin D → R) {N : ℕ} {P : Fock D R}
+    (hP : P ∈ levelSubmodule D R N) (Q : Fock D R) :
+    pairing η P (levelComponent D R N Q) = pairing η P Q := by
+  classical
+  rw [pairing_apply, pairing_apply]
+  refine Finset.sum_congr rfl fun d hd => ?_
+  have hlev : level D d = N := hP (mem_support_iff.mp hd)
+  rw [coeff_levelComponent, if_pos hlev]
+
+end Fock
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- **Distinct bigraded slices are orthogonal**, in the form needed below: pairing against a
+projected vector only sees the corresponding projection of the other argument.  Rung
+orthogonality is `Fock.towerPairing_single_single`, level orthogonality is
+`Fock.pairing_levelComponent_right`. -/
+theorem towerPairing_towerBigradeProj_left (η : Fin D → R) (j : ℤ) (N : ℕ)
+    (x y : TowerFock D R) :
+    Fock.towerPairing η (towerBigradeProj D R j N x) y
+      = Fock.towerPairing η (towerBigradeProj D R j N x) (towerBigradeProj D R j N y) := by
+  rw [towerBigradeProj_apply, towerBigradeProj_apply, Fock.towerPairing_single_left,
+    Fock.towerPairing_single_left, Finsupp.single_eq_same]
+  exact (Fock.pairing_levelComponent_right η (Fock.levelComponent_mem N (x j)) (y j)).symm
+
+/-- The right-hand version of `towerPairing_towerBigradeProj_left`, by symmetry of the
+form. -/
+theorem towerPairing_towerBigradeProj_right (η : Fin D → R) (j : ℤ) (N : ℕ)
+    (x y : TowerFock D R) :
+    Fock.towerPairing η x (towerBigradeProj D R j N y)
+      = Fock.towerPairing η (towerBigradeProj D R j N x) (towerBigradeProj D R j N y) := by
+  rw [Fock.towerPairing_comm η x, towerPairing_towerBigradeProj_left,
+    Fock.towerPairing_comm η (towerBigradeProj D R j N y)]
+
+variable [Algebra ℚ R]
+
+/-- **The null states are homogeneous for the bigrading.**  `towerNullSubmodule` is
+`H_phys ⊓ H_phys^⊥`; physicality of the components is `Glue`, and orthogonality survives
+because the form only couples a projected vector to the matching projection. -/
+theorem towerBigradeProj_mem_towerNullSubmodule (η a b : Fin D → R) {a₀ : R} (j : ℤ) (N : ℕ)
+    {z : TowerFock D R} (hz : z ∈ towerNullSubmodule η a b a₀) :
+    towerBigradeProj D R j N z ∈ towerNullSubmodule η a b a₀ := by
+  rw [mem_towerNullSubmodule] at hz ⊢
+  refine ⟨towerBigradeProj_mem_towerPhysSubmodule η a b hz.1 j N, fun Ψ hΨ => ?_⟩
+  rw [towerPairing_towerBigradeProj_left, ← towerPairing_towerBigradeProj_right]
+  exact hz.2 _ (towerBigradeProj_mem_towerPhysSubmodule η a b hΨ j N)
+
+end Homogeneity
+
+section DdfHomogeneity
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] [NoZeroDivisors R] [CharZero R]
+variable {η a b : Fin D → R}
+variable (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+variable (Ε : TransverseFrame η b)
+
+include hη hbb hba in
+/-- **`ddfSpan` is homogeneous for the bigrading.**  Its generators are, by
+`frameMonomial_mem_towerBigrade`, so the projection either fixes a generator or kills it. -/
+theorem towerBigradeProj_mem_ddfSpan (j : ℤ) (M : ℕ) {x : TowerFock D R}
+    (hx : x ∈ ddfSpan η a b hη Ε) :
+    towerBigradeProj D R j M x ∈ ddfSpan η a b hη Ε := by
+  classical
+  rw [ddfSpan_eq_span_range_frameMonomial hη hbb hba Ε] at hx ⊢
+  obtain ⟨c, hc⟩ := Finsupp.mem_span_range_iff_exists_finsupp.mp hx
+  rw [← hc, Finsupp.sum, map_sum]
+  refine Submodule.sum_mem _ fun d _ => ?_
+  rw [map_smul]
+  by_cases hjm : j = -(ddfLevel d : ℤ) ∧ M = ddfLevel d
+  · obtain ⟨rfl, rfl⟩ := hjm
+    rw [towerBigradeProj_of_mem_self (frameMonomial_mem_towerBigrade hη hbb hba Ε d)]
+    exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨d, rfl⟩)
+  · rw [towerBigradeProj_of_mem_ne (frameMonomial_mem_towerBigrade hη hbb hba Ε d)
+      (not_and_or.mp hjm), smul_zero]
+    exact Submodule.zero_mem _
+
+end DdfHomogeneity
+
+/-! ### The converse of `ddfSpansOn_bigrade_of_b26`, and the equivalence -/
+
+section Converse
+
+variable {D : ℕ} {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K} {hη : ∀ μ, η μ * η μ = 1} {Ε : TransverseFrame η b}
+variable (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+
+include hη hbb hba in
+/-- **The slice spanning lemma implies the rank inequality.**  The decomposition
+`x = d + z` supplied by `DDFSpansOn` is projected onto the slice; both summands survive the
+projection by `towerBigradeProj_mem_ddfSpan` and `towerBigradeProj_mem_towerNullSubmodule`. -/
+theorem le_sup_inf_of_ddfSpansOn_bigrade {N : ℕ}
+    (h : DDFSpansOn η a b hη Ε (towerBigrade D K (-(N : ℤ)) N)) :
+    towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a) ⊓ towerBigrade D K (-(N : ℤ)) N
+      ≤ (ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N : ℤ)) N)
+        ⊔ (towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+            ⊓ towerBigrade D K (-(N : ℤ)) N) := by
+  intro x hx
+  obtain ⟨d, hd, z, hz, hdz⟩ := Submodule.mem_sup.1 (h hx)
+  have hproj : towerBigradeProj D K (-(N : ℤ)) N x = x :=
+    towerBigradeProj_of_mem_self (Submodule.mem_inf.1 hx).2
+  have hsplit : x = towerBigradeProj D K (-(N : ℤ)) N d + towerBigradeProj D K (-(N : ℤ)) N z := by
+    rw [← map_add, hdz, hproj]
+  rw [hsplit]
+  exact Submodule.add_mem _
+    (Submodule.mem_sup_left (Submodule.mem_inf.2
+      ⟨towerBigradeProj_mem_ddfSpan hη hbb hba Ε _ _ hd, towerBigradeProj_mem _ _ _⟩))
+    (Submodule.mem_sup_right (Submodule.mem_inf.2
+      ⟨towerBigradeProj_mem_towerNullSubmodule η a b _ _ hz, towerBigradeProj_mem _ _ _⟩))
+
+include hη hbb hba in
+/-- The converse of `ddfSpansOn_bigrade_of_b26`. -/
+theorem b26_of_ddfSpansOn_bigrade {N : ℕ}
+    (h : DDFSpansOn η a b hη Ε (towerBigrade D K (-(N : ℤ)) N)) : B26 η a b hη Ε N :=
+  le_trans (Submodule.finrank_mono (le_sup_inf_of_ddfSpansOn_bigrade hbb hba h))
+    (Submodule.finrank_add_le_finrank_add_finrank _ _)
+
+include hη hbb hba in
+/-- **`B26 N` is exactly the slice spanning lemma** (blueprint §B′.3): the rank form of the
+critical-dimension input loses no information. -/
+theorem ddfSpansOn_bigrade_iff_b26 {N : ℕ} :
+    DDFSpansOn η a b hη Ε (towerBigrade D K (-(N : ℤ)) N) ↔ B26 η a b hη Ε N :=
+  ⟨b26_of_ddfSpansOn_bigrade hbb hba, ddfSpansOn_bigrade_of_b26 hbb hba⟩
+
+end Converse
 
 end StringFormal.NoGhost
