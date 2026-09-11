@@ -7,7 +7,7 @@ depends_on:
     note: |
       提供 Ω 的定义与它在闭弦上交换左右行模（Ω α_n Ω^{-1} = ᾱ_n）这一性质，
       即 (8.8.1) 的 X_L ↔ X_R。
-  - id: duality.dual-coordinate
+  - id: duality.dual-coordinate-v2
     note: 提供对偶坐标 X' = X_L − X_R 的定义（本条只需要这个定义，不需要两个理论等价）。
   - id: duality.t-duality-is-cft-isomorphism
     note: |

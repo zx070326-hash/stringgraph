@@ -17,7 +17,7 @@ depends_on:
       ⚠ 该卡自身带一条原书的赤裸断言（括号里那句 (and they are) 不加论证），
       status 为 physical-argument，故本边不抬高本推导的等级。
       （2026-09-11 新增：原 gaps 里「main 上没有节点（ch10 分支未合）」的说法已过时。）
-  - id: duality.dual-coordinate
+  - id: duality.dual-coordinate-v2
     note: |
       供给 (13.1.1) X'^9_R = −X^9_R 这一步（T 对偶 = 只反射右动部分），
       即「T 对偶是只作用在世界面一侧的时空宇称」这一命题的坐标部分。

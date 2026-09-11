@@ -1,0 +1,76 @@
+id: duality.dual-coordinate-v2
+kind: definition
+status: rigorous
+title: 对偶坐标 X' ≡ X_L − X_R 及其与 X 的导数关系 ∂_σX = −i∂_τX'（v2：导数换算改标柱面坐标 z = e^{−iw}）
+statement: |
+  设闭弦的一个坐标在欧氏世界面复坐标下分解为左行与右行部分
+    X(z, z̄) = X_L(z) + X_R(z̄)
+  （worldsheet.closed-string-mode-expansion；紧化情形见 conv.compactification-radius）。
+  **定义**该方向的**对偶坐标**为
+    **X'(z, z̄) ≡ X_L(z) − X_R(z̄)**.
+  在模式语言中这等价于在右行部分作替换 ᾱ_m ⟼ −ᾱ_m（m ≠ 0）、x_R ⟼ −x_R、p_R ⟼ −p_R。
+
+  在**柱面坐标** z = e^{−iw}、w = σ¹ + iσ²（即来源 §8.6 与 Schrans [8.469]–[8.471]
+  实际使用的那套）下，世界面导数与全纯/反全纯导数的换算取
+    ∂_σ = −i(∂ − ∂̄),   ∂_τ = ∂ + ∂̄
+  （∂ 只作用在 X_L、∂̄ 只作用在 X_R）。由此立得两条**恒等式**：
+    **∂_σ X = − i ∂_τ X'**,    **∂_σ X' = − i ∂_τ X**.
+  这两条只是变量替换的结果，对任何左右行分解成立，不含动力学输入。
+  ⚠ 上面那对换算**不是** conv.worldsheet-complex-coords 的平面坐标 z = σ^1 + iσ^2 下的换算
+  （在那套里 ∂_1 = ∂ + ∂̄、∂_2 = i(∂ − ∂̄)）；本卡声明 conv.worldsheet-complex-coords
+  只是为了固定 ∂ ≡ ∂_z、∂̄ ≡ ∂_z̄ 与欧氏号差这些记号，**不**用它的 d²z / δ² 归一化，
+  也不主张 σ/τ 与 σ^1/σ^2 的对应关系（见 notes）。
+
+  **本卡的边界**：它只定义对偶坐标并给出上述换算，**不**断言 X 与 X' 描述同一个理论
+  （那是 duality.t-duality-is-cft-isomorphism），**不**断言半径取倒
+  （那是 duality.t-duality-spectrum-equivalence），也不涉及边界条件
+  （那是 duality.t-duality-exchanges-neumann-dirichlet）。
+uses: [worldsheet.closed-string-mode-expansion]
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.worldsheet-euclidean, conv.worldsheet-complex-coords, conv.worldsheet-coordinate-length]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§8.3, eq. (8.3.28)（X' = X_L − X_R 的定义），p.247–248；导数关系见 §8.6, eq. (8.6.15)，p.266"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1.md#E133（(8.3.28)）与 #E151（(8.6.15)）。
+      **(8.3.28) 是定义式，这一点已按原书核实（§12.10 表 A 的 Q20，L1，2026-09-11）。**
+      (8.6.15) 的复现见 Schrans §8.106（笔记 p.521，[8.469]–[8.471]，L1）。
+      ⚠ 第二条恒等式 ∂_σX' = −i∂_τX 由同一换算把 X ↔ X' 互换得到，
+      **原书没有逐字写出这一条**；它在 §8.6 的端点差计算里被使用
+      （branes.wilson-line-eigenvalues-are-brane-positions 的推导）。
+tags: [t-duality, dual-coordinate, definition, worldsheet, compactification, phase2]
+notes: |
+  ★★【v2 改了什么（curator，2026-09-11，依 reviewer-batch15/ch8-fix）】
+  **只改了那对导数换算的坐标标签，公式一字未改。**
+  v1 写「由 conv.worldsheet-complex-coords 的换算 ∂_σ = −i(∂ − ∂̄)、∂_τ = ∂ + ∂̄」，
+  这是**错的归属**：该约定定义的是平面坐标 z = σ^1 + iσ^2、∂ = ½(∂_1 − i∂_2)，
+  在那套里 ∂_1 = ∂ + ∂̄ 而 ∂_2 = i(∂ − ∂̄)，与本卡写的那对既不同形也差一个符号。
+  来源（Polchinski §8.6 / Schrans [8.469]–[8.471]）用的是**柱面坐标 z = e^{−iw}、w = σ^1 + iσ^2**，
+  v2 照此改标。
+  ⚠ **本图没有柱面坐标的约定节点**：z = e^{−iw} 目前只在若干推导的 convention_map 里以散文出现
+  （如 duality.t-duality-exchanges-neumann-dirichlet--via-dual-coordinate）。
+  → 给 lead 的建议：建一条 family: worldsheet-cylinder-coords 的约定（z = e^{−iw}、w = σ^1 + iσ^2、
+  以及 σ/τ 与 σ^1/σ^2 的对应），然后把本卡与那几条推导改挂到它。本卡不先挂，以免引用不存在的 id。
+  ⚠⚠ **σ 与 τ 到底对应 σ^1 还是 σ^2、以及那个 −i 的来源（欧氏延拓 τ → −iσ^2）本图未核**：
+  本卡只按来源照抄这对换算与由它得到的两条恒等式；恒等式本身（∂_σX = −i∂_τX'）有 (8.6.15) 的
+  一手依据，换算那一行没有。
+
+  **为什么单建这张卡**（reviewer-ch8 建议，2026-09-11）：对偶坐标原先被嵌在
+  duality.t-duality-is-cft-isomorphism 里，导致凡是只需要「X' 的定义 + 导数换算」
+  的下游节点（N ↔ D 交换、无取向理论的宇称、Wilson 线与膜位置）都被迫依赖
+  那条带 physical-argument 档位与多条未核实措辞的命题。拆出本卡后，
+  那些节点可以只依赖本卡承载的纯运动学内容。
+
+  ⚠ 本卡的 status 是 `rigorous`（给定模式展开后，定义与换算在数学上精确），
+  但有效状态不会高于 worldsheet.closed-string-mode-expansion。
+
+  ⚠⚠ **`uses` 里那条边是凑合的**：本图目前唯一的闭弦展开卡
+  worldsheet.closed-string-mode-expansion 写的是**光锥规范下的横向坐标**（(1.4.4)），
+  而本卡需要的是**紧化方向在欧氏世界面复坐标下的展开**（原书 (8.2.16)，含绕数项）。
+  两者的左右行分解结构相同，但规范、坐标与零模内容都不同。
+  duality.t-duality-is-cft-isomorphism 的推导里有同一条凑合边与同样的说明。
+  **→ 给 lead 的建议**：建一张 compact.circle-closed-string-mode-expansion（(8.2.16)）卡，
+  然后把本卡的 `uses` 改挂到它。本卡不先改，以免引用不存在的 id。
+  ⚠ 原书明记 X 与 X' 这两组场的关系**在世界面上是非局域的**（p.248，抽取记录 Q20）；
+  这不影响本卡的定义，但在把 X' 当作局域场使用时（开弦上的 doubling trick）必须留意。
+author: curator-polchinski-ch8
+created: "2026-09-11"
