@@ -64,7 +64,9 @@ depends_on:
           IMNU 的横向算子含 RNS 的费米横向模，推广未上图；
       (2) IMNU 把横向态空间的正定性引 [21]，**不在原地论证**（(4.21) 末句逐字
           'where the last inequality follows from the positive definiteness of the transverse
-          state space.²¹⁾'），而 brower-friedman-1973 本项目 bib **未登记、正文未取得**。
+          state space.²¹⁾'），而 brower-friedman-1973 **正文本项目未取得（L0）**
+          （**2026-09-11 更新**：该文已登记到 sources.bib、抽取记录已存在，但只到**摘要级**；
+          摘要只承载「NS 无鬼定理 + 谱生成代数 (A_n, B_s)」，**不含横向态空间正定性的任何细节**）。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -99,6 +101,21 @@ sources:
       L1。这一组是本推导的**设定**（相对复形、零模表示、内积）。
       ⚠ 抽取记录 §4 Q3 记下一条未决问题：**(3.19) 的 δ(ζ₀) 度规下 Q̃_B^R 是否厄米，
       IMNU 未讨论**（FOK 对 Henneaux 表示的同一批评适用）。见 gaps。
+  - ref: brower-friedman-1973
+    loc: "abstract（正文本项目未取得，L0；read_depth 保持 abstract，不得升）"
+    note: |
+      IMNU 的 [21]。**摘要逐字全文**（L1，INSPIRE 出版方摘要）："The no-ghost theorem of Brower
+      for the conventional dual model (intercept `α₀=1`) is extended to the Neveu-Schwarz model,
+      and its spectrum-generating algebra is constructed. These conformally invariant generators
+      (`A_n`, `B_s`) are obtained by a systematic use of the gauges `G_r`. As a consequence it is
+      demonstrated that particular dual models having resonances with positive-definite norms and
+      masses are possible."
+      ⇒ 摘要**只承载**「NS 扇区无鬼定理 + 谱生成代数 (A_n, B_s)」，
+      **不含横向态空间正定性的任何可引用细节**，也**没有 "reducible"/"Verma"/"direct sum"**。
+      ⚠ **标题与摘要都是 NS-only，完全没有 Ramond** —— 而 IMNU 引它恰恰是在 **R 扇区**的
+      横向算子 (A.7) 与 (4.21) 处。这一点本图记录在案，**不据此下判断**（正文未读）。
+      ⚠ 文献里这条引文会被抄错卷号（hep-th/9901116 的 [29] 印成 "Phys. Rev. D3 (1973) 535"）；
+      正确是 **PRD 7, 535（1973）**，由 Crossref 与 Schwarz hep-th/0011078 [59] 两方 L1 佐证。
   - ref: ohta-1986
     loc: "全文；摘要（L2）。摘要逐字：'A manifestly covariant quantization of the superstring is presented in the Neveu-Schwarz-Ramond formalism on the basis of the Becchi-Rouet-Stora (BRS) invariance principle. The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge. A modified form of the subsidiary condition of Kugo and Ojima Q_B‖phys〉=0 to define the physical subspace is sufficient to demonstrate the no-ghost theorem.'"
     note: |
@@ -180,7 +197,8 @@ summary: |
   (2) **正半定 ≠ 正定**：IMNU 证的是物理态子空间上 ≥ 0，目标卡要的是相对上同调上的正定，
       差一步取商（见 gaps）；
   (3) **NS 扇区没有显式证明**：IMNU 只有评论；Ohta 正文未取得（只有摘要 L2）；
-  (4) 横向态空间的正定性外包给 Brower–Friedman（本项目 bib 未登记、正文未取得）。
+  (4) 横向态空间的正定性外包给 Brower–Friedman（**已登记，但正文未取得、只到摘要级 L0/L1**；
+      其摘要不含任何可引用的正定性细节）。
   ⚠ 本推导**不因为"结论公认"而升级**（根 CLAUDE.md 原则 2）。要 rigorous 看
   --via-lian-zuckerman-1989。
 gaps:
@@ -214,11 +232,21 @@ gaps:
     **横向态空间的正定性外包，且被引文献本项目未登记**：(4.21) 末句逐字 'where the last
     inequality follows from the positive definiteness of the transverse state space.²¹⁾'，
     [21] = **Brower–Friedman, Phys. Rev. D 7 (1973) 535**；横向算子 (A.7) 也引 [21]。
-    该文 **literature/sources.bib 尚未登记、正文未取得**。
-    ⚠ 同一篇文献还是 figueroa-ofarrill-kimura-1989 与 lian-zuckerman-1989 之间那处
-    **真矛盾**的裁决对象（FOK 说它证明了完全可约性，LZ p.320 Remark 用 Kac 行列式说 V 一般
-    不是 Verma 模直和）。⇒ **登记并取得 Brower–Friedman 1973 是本区一条高优先级文献任务**，
-    已列入报告交 researcher/lead。
+    **2026-09-11 更新（reviewer-batch17b 指出原文字已过期）**：该文**已登记到
+    literature/sources.bib，抽取记录 extractions/brower-friedman-1973.md 也已存在**；
+    但**正文仍未取得（L0）**，摘要 L1 逐字、元数据 L1（Crossref/INSPIRE），
+    **read_depth 保持 abstract，不得升**。
+    该摘要**只承载**「Brower 的（α₀=1）无鬼定理被推广到 NS 模型」+「构造了谱生成代数 (A_n, B_s)，
+    方法是 systematic use of the gauges G_r」+「正定范数共振态存在」，
+    **不含横向态空间正定性的任何可引用细节**。⇒ **本条缺口未关闭**：IMNU (4.21) 的末不等号
+    目前仍只能追到一篇正文未读的 1973 年论文的摘要。
+    ⚠ 同一篇文献还是 figueroa-ofarrill-kimura-1989 与 lian-zuckerman-1989 之间那处**真矛盾**的
+    裁决对象；该矛盾已单独建卡 **worldsheet.nsr-fock-space-verma-decomposition**（争议卡）。
+    ⚠ **但那条争议与本推导无关**：IMNU 引 [21] 是为了**横向态空间的正定性**，
+    **不是**为了 Verma 模分解，故**本推导不依赖那张争议卡**。
+    ⇒ 剩余文献任务：取得 Brower–Friedman 正文（5 页，剩余唯一路线是 WebSearch 找 .edu 扫描件
+    或人工从 APS 下载）；另可登记 Schwarz, Nucl. Phys. **46** (1972) 61 作为 NS 无鬼定理的
+    第二条独立物理来源（Schwarz 自述，L3，本项目未登记）。
   - |
     **p⁺ ≠ 0（d ≥ 2）是结构性限制，且与目标卡的 (H2) p ≠ 0 不是同一条件。**
     IMNU (4.3)–(4.5) 的光锥参考系要求 p⁺ 固定非零；Dedushenko 2015 §1 p.2 逐字把这条路线
