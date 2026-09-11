@@ -217,3 +217,38 @@ and submodule `P` — `radicalIn`, `QuotRadical`, `quotRadicalForm`) and instant
 second, rather than working with the quotient instance directly on `TowerFock`. This is
 tracked as a reproducible Mathlib-level issue (TODO tag `noghost-c1`,
 `formal/MATHLIB-ISSUE-quotient-finsupp.md`).
+
+## 5. What remains for the no-ghost theorem
+
+The blueprint (`formal/BLUEPRINT-noghost.md`) splits the remaining work into a
+longitudinal-operator track, a spanning/light-cone track, and an assembly step.
+
+**Longitudinal operators: done.** The project uses Goddard–Thorn's `K_m = k_0·α_m`
+rather than Brower's `A^L_n`, because `K_m` is "almost free" — most of its algebra
+follows by specializing existing DDF lemmas to the polarization `ε := b`. All six
+relations are proved with no `sorry`: `⁅L_m,K_n⁆ = -nK_{m+n}`, `⁅K_m,K_n⁆ = 0`, `K_0 = 1`,
+`K_m^† = K_{-m}`, and — the one requiring genuine new work rather than specialization —
+`⁅K_m,A^ε_n⁆ = 0` (`lie_kOp_ddfOp`, `NoGhost/Longitudinal.lean`).
+
+**Spanning: partial.** `NoGhost/LightCone.lean` defines the DDF-span submodule
+`ddfSpan` and proves the `N = 1` case of the spanning statement,
+`towerPhys_bigrade_one_le_ddfSpan_sup_spurious` (physical states at bigrade 1 lie in
+`ddfSpan ⊔ spurious`), with `D = 26` not appearing anywhere in this argument. The general
+spanning lemma — a unitriangular change of basis between the naive oscillator basis and
+the DDF+longitudinal+transverse basis, at every level `N` — is open.
+[verify: exact current frontier beyond N=1; several background Lean agents were active
+on adjacent files (`DDFGram.lean`, `TowerNull.lean`) at the time this outline was written
+and may have advanced this further.]
+
+**Assembly and the `(B-26)` step: open.** The final assembly combining spanning,
+positivity of the transverse Gram matrix, and the quotient by null/spurious states is not
+yet written; `NoGhost/Statement.lean` remains a stub for exactly this reason. Critically,
+`D = 26` enters the no-ghost argument at exactly one step — the blueprint's `(B-26)` —
+where, outside the transverse subspace, the `p_{D-1}(N) - p_{D-2}(N)` extra directions
+are shown to be exactly the null states. This step is sourced only to Goddard 2008
+(6.4)'s one-line, unproven citation of Goddard–Thorn 1972 and Brower 1972 (primary texts
+not obtained, see §6); formalizing it requires committing to one of the two original
+mechanisms (Brower's, needing `A^L_n`, or GT's, needing a K-condition balancing argument)
+neither of which the current codebase implements. `D = 26` does **not** appear in
+character/dimension counting, the DDF algebra, DDF adjoints, or transverse-Gram
+positivity — only at this one step.
