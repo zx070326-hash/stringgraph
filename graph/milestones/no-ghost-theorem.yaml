@@ -78,6 +78,65 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第七轮记账】2026-09-11，physics-auditor，分支 agent/auditor/noghost-contour。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；statement_id 与 canonical_text 均未动，**不重做回译**。条目仍记在 diff_notes 顶部（schema 无 history 字段，同 R6）。
+
+      R7-1. 〔裁决：worldsheet.no-ghost-theorem-v4--via-goddard-thorn 对 worldsheet.ddf-contour-equals-mode-sum 的依赖边是
+            证明步骤还是溯源记账〕**裁定：溯源记账，不承重，已撤边（选项 (a)）。** 独立核对方法：把推导 summary 第 (1)(2) 条
+            逐句拆成对 A^i_n 的性质引用，再查每条性质由哪张卡承载、那张卡以哪个定义为对象：
+            · [L_m, A^i_n] = 0 ← ddf-commute-with-virasoro（formalized，对象 v6 模态和）；
+            · [A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0} ← ddf-transverse-oscillator-algebra-v2（rigorous，推导 depends_on 指 v6）；
+            · (A^i_n)† = A^i_{−n} ← ddf-operators-adjoint-v2（formalized，v6）；Gram 矩阵 ← transverse-ddf-fock-gram-matrix（rigorous）；
+            · 动量移位 p → p + n k_0 与能级 N = Σ n_j ← ddf-operators-v6 的 V^{(n)}_K 层移记账 + momentum-tower-fock-space（formalized）；
+            · 张成步「塔上物理态 = DDF 态 + 零模态」← sources（GT 1972 / GSW §2.3.3 / Goddard 2008），图内无节点；文献的张成论证是
+              对满足上列代数性质的算子族做 Fock 空间计数（另用 K_n = k_0·α_n 与 A^ε_{−n} 的领头项），不引用 A 的围道表达式；
+            · 第 (2) 条：纵向算子构造（无节点）+ negative-norm-physical-state-above-26（formalized），不经过横向 DDF 的任何写法。
+            一条「定义 A = 定义 B」的等式在证明里唯一能起的作用是把 A 侧证得的性质搬到 B 侧；本图不存在「只在围道侧证得、
+            本推导又用到」的性质（围道路线 --via-conformal-weight 不是任何一条 DDF 性质卡的 best_derivation）。故该边不是逻辑依赖。
+            curator 加边时的 note 自己也只说「本推导 summary 与 notes 逐字自称走解析围道路线，故把一直隐含的一步显式化」——
+            「自称」是措辞，不是步骤；summary 正文（第 195–219 行）grep 无「围道」「∮」「contour」。
+            边的 note 逐字承认「有效状态不因此再降」「改变的是可审计性：ms.no-ghost-theorem 的回译审计从此有一个明确的地方读这条缺口」
+            ——这正是本轮把它移到审计记录的理由：可审计性由里程碑 diff_notes 承担，depends_on 只放证明用到的前提（根 CLAUDE.md 原则 5）。
+            与 worldsheet.ddf-commute-with-virasoro--via-lean gaps 第 1 条「代价必须由下游承担：回译成文献陈述的下游必须显式引用
+            worldsheet.ddf-contour-equals-mode-sum 及其 gaps」一致：承担处即本条 R7-2。
+            改动：推导 depends_on 删该条；gaps 末条加【（七）更新】；notes 顶部加【（七）】说明。status / sources / summary 未动。
+
+      R7-2. 〔canonical_source 忠实性：本图证的是不是文献那条定理——围道字典的溯源记账〕
+            canonical_source goddard-thorn-1972（围道写法，正文未获取，L2 摘要）与 goddard-2008 §5 (5.1)
+            A^μ_n = (1/2πi)∮ P^μ(z) V(nk, z) dz（L1 逐字，gsw-1987-v1.md §2 E1）定义的 A^i_n 是**围道积分**；
+            statement v4 (1b) 的 H^⊥(k) 由「worldsheet.ddf-operators-v4 的 DDF 算子」生成，v4 → v5（围道）→ v6（模态和）为
+            superseded_by 换代，按 lead 2026-09-12 裁决（graph/CLAUDE.md 末段）正文内嵌指针解析到 v6；canonical_text 只写
+            「24 个横向 DDF 算子 A^i_{−n}」不带写法（R6-2 已核）。**故 canonical_text 与 statement 之间无漂移**（两侧都不指定写法）；
+            写法差异只存在于「本图（模态和）↔ canonical_source（围道）」之间，属**定义换代的忠实性备注**，
+            与 ms.ddf-commute-with-virasoro 第四轮 R4 的裁定同口径（「定义换代非漂移，但要说清它站在哪里」）。
+            **船长批准的是模态和版本 A^ε_n 生成的 H^⊥(k)；「它与文献围道定义的 A^i_n 是同一算子」在图中只有 physical-argument 级论证**
+            （worldsheet.ddf-contour-equals-mode-sum --via-laurent-coefficient-extraction），三条缺口均未关闭：
+            (a) 形式级数乘积按幂次重排在算子层面未论证；(b) 围道读作形式留数 [z^{−1}]，非复平面积分；
+            (c) 正规序 :e^{i n k_0·X}: 的展开与 Lean 的 E₋E₊ 拆分未对接。
+            此外对 (1b) 的等距同构而言，写法差异**不改变命题内容**：H^⊥(k) 作为 F(k;k_0) 的子空间由算子族 {A^i_{−n}} 的像决定，
+            两种写法若相等则子空间相同；若不等（缺口 (a)–(c) 出岔），则本图与文献证的是两个不同子空间上的同构，
+            这是 R7-2 登记的唯一风险，不是 (1a)(2) 的风险（(1a) 不提 DDF；(2) 不用 DDF）。
+            本条不改 verdict：忠实性比对对象是 canonical_text ↔ statement，两侧一致；canonical_source 覆盖不足的问题
+            （只覆盖 (1a)、摘要级）第二轮 D5 起已登记，本轮只多一层「写法」备注。
+
+      R7-3. 〔有效状态瓶颈链更新，`uv run stringgraph why worldsheet.no-ghost-theorem-v4`〕
+            撤边前（main dfc8bc0）：own rigorous，effective **physical-argument**，limited by 1 dep = worldsheet.ddf-contour-equals-mode-sum
+            （own physical-argument，--via-laurent-coefficient-extraction）。
+            撤边后：own rigorous，effective **rigorous**，无压低依赖；三条非 formalized 的依赖全是 rigorous——
+            ddf-transverse-oscillator-algebra-v2（← G–N 顶点代数：formal-distribution-locality / vertex-algebra-commutator-formula /
+            borcherds-identity / free-boson-vertex-algebra-with-lightlike-momentum-tower ← lattice-vertex-algebra (Li–Wang)）、
+            transverse-ddf-fock-gram-matrix（← 前者）、kac-determinant-v2（inferred 边；← verma-module-free-over-negative-part ← pbw-theorem）。
+            连带：worldsheet.critical-dimension-old-covariant-v3 effective 同步升为 rigorous（同一条 --via-no-ghost）；
+            ms.critical-dimension-bosonic 第 346 行那句「瓶颈已移至 … ddf-contour-equals-mode-sum」自本轮起过时，归该里程碑下轮处理。
+            **船长须知**：effective = rigorous 现在恰好等于推导**自报**的 status，不是新增证据。该推导 gaps 第 3 条自陈
+            「可追溯性仍弱于 rigorous 通常要求的水平」（GT 1972 / Brower 1972 正文均未获取，GSW 式号 L0）；张成步与
+            [K_m, A^ε_n] = 0、纵向算子构造在图内均无节点，Lean 张成定理未做（formal/TODO.md `ddf-spans`）。
+            这些缺口与围道字典无关，撤边既不掩盖也不放大它们；docs/STATUS_LEVELS.md 已裁定 approved 只断言忠实性，
+            effective 高低都不改变批准的含义。
+
+      R7-4. 本轮未改 canonical_text、canonical_source、statement_id、verdict、back_translation.text、audit.status；
+            里程碑只加本块。ROADMAP 第 83 行船长说明（「剩余上限只剩 … ddf-contour-equals-mode-sum」）由 lead 改。
+
       【第六轮记账】2026-09-11，physics-auditor。history 条目：round 6，kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；statement_id 与 canonical_text 均未动，**不重做回译**。
       说明：里程碑 schema（graph/schema/milestone.schema.json）对根与 audit 均设 additionalProperties: false，
