@@ -234,3 +234,233 @@ theorem ddfSpan_le_towerKerK ... : ddfSpan η a b hη Ε ≤ towerKerK η a b
    （`ring` 一行），但它不构成做 `A^L_n` 的理由。
 
 **估计：`A^L_n` 是 1–2 个月的独立项目，且不在无鬼定理第 (1) 条的关键路径上。建议搁置。**
+
+---
+
+## B. 张成引理（`ddf-spans`）
+
+这是整个工程的核心，也是唯一真正困难的一节。
+
+### B.0 目标陈述
+
+无鬼定理 v4 (1b) 的 Lean 形式（`a₀ = 1`，快子壳 `α'k² = 1`，`D = 26`）：
+
+```lean
+/-- **Goddard–Thorn 分解**（Goddard 2008 (6.4)：`|ψ⟩ = |f⟩ + |n⟩`）。 -/
+theorem towerPhysSubmodule_le_ddfSpan_sup_null
+    (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1)
+    (hshell : invTwo R * Fock.zeroModeSq η a = 1) (hD : D = 26) (Ε : TransverseFrame η b) :
+    towerPhysSubmodule η a b 1 ≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b 1
+```
+
+反包含 `ddfSpan ≤ towerPhysSubmodule` **已经有了**（`ddfOp_mem_towerPhysSubmodule` +
+真空是物理态 + 对张成集归纳），所以 (1b) 的等距同构等价于上面这一条加上 §C 的正定性。
+
+### B.1 先补的基础设施（与路线无关，一定要做）
+
+```lean
+/-- 塔上的真空 `|0;k⟩`。 -/
+noncomputable def towerVacuum (D : ℕ) (R : Type*) [CommRing R] : TowerFock D R :=
+  Finsupp.single 0 (Fock.vacuum D R)
+
+theorem towerVacuum_mem_towerPhysSubmodule (hη : ∀ μ, η μ * η μ = 1)
+    (hshell : invTwo R * Fock.zeroModeSq η a = 1) :
+    towerVacuum D R ∈ towerPhysSubmodule η a b 1
+
+/-- 塔上的双分级：层 `j`、振子 level `N`。 -/
+noncomputable def towerBigrade (η a b : Fin D → R) (j : ℤ) (N : ℕ) :
+    Submodule R (TowerFock D R)
+
+/-- **质量壳把双分级压成单分级**：`towerPhysSubmodule` 落在反对角线 `j + N = a₀ - α'k²` 上。
+这是 `invTwo_mul_zeroModeSq_towerMomentum` 的子模版本，图卡 no-ghost-theorem-v4 (1b) 的
+「能级 `N = a - α'p²`」那句。 -/
+theorem towerPhys_le_iSup_antidiagonal ...
+
+/-- 每个双分级片有限维（`Fock.levelSubmodule_finite` 逐层）。 -/
+instance : Module.Finite R (towerBigrade η a b j N)
+```
+
+难度：**中**。`towerBigrade` 与有限性是 `Fock.levelSubmodule` + `Finsupp` 的直接搬运；
+反对角线那条是 `mem_physSubmodule_iff_of_mem_levelSubmodule` 的塔版，需要 `NoZeroDivisors`。
+
+```lean
+/-- 一组横向标架：`D - 2` 个偏振，彼此 `η`-正交、模为 1、且都与 `k_0` 横向。 -/
+structure TransverseFrame (η b : Fin D → R) where
+  vec : Fin (D - 2) → (Fin D → R)
+  transverse : ∀ i, dotVec η (vec i) b = 0
+  orthonormal : ∀ i j, dotVec η (vec i) (vec j) = if i = j then 1 else 0
+
+/-- **DDF 态张成的子模**：`A^{ε_{i_1}}_{-n_1} ⋯ A^{ε_{i_r}}_{-n_r} |0;k⟩`。 -/
+noncomputable def ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) : Submodule R (TowerFock D R) :=
+  Submodule.span R
+    {x | ∃ l : List ((Fin (D - 2)) × ℕ+),
+          x = l.foldr (fun p y => ddfOp η a b (Ε.vec p.1) hη (Ε.transverse p.1)
+                                   (-(p.2 : ℤ)) y) (towerVacuum D R)}
+```
+
+难度：**小**（定义）+ **小**（`ddfSpan ≤ towerPhysSubmodule`，由 `ddfOp_mem_towerPhysSubmodule`
+对 `foldr` 归纳）。注意 `ddfOp` 的横向性假设是**定义的参数**，所以 `TransverseFrame` 必须
+把 `transverse` 打包进去，不能事后补。
+
+### B.2 路线 (i)：FGZ Prop 2.6(i)（Fock 模在 ℒ⁻ 下自由）—— **判定为死路，不要走**
+
+图节点 `worldsheet.fock-module-free-over-negative-virasoro`（FGZ 1986 Prop 2.6(i)）。
+它在 Lean 里的成本：
+
+1. FGZ 的证明本身引 Kac 行列式（卡自己的 notes (c) 逐字：「其证明另引 Kac 行列式（FGZ refs 10, 11）」）。
+2. 本仓库的 Kac 行列式只有 **`N ≤ 4` 的显式 Gram**（`Shapovalov.lean`、
+   `ShapovalovLevelThree.lean`、`ShapovalovLevelFour.lean`），且 `Virasoro/GenericIndependence.lean`
+   的文件头明说这是「*conditional* generic PBW (b), not PBW (b)」。
+3. **一般 `N` 的 Kac 行列式公式在 Mathlib 里没有，在本仓库里也没有**，
+   `formal/TODO.md` 的 `kac-determinant` 项仍未打勾，并自评「可能很长」。
+   而且 PBW (b)（Verma 模的 PBW 基线性无关）本身也未做（`pbw-verma` (b)）。
+4. 即便有了 Kac 行列式，FGZ Prop 2.6(i) 到 `ddf-spans` 还隔着 Theorem 1.12（消灭定理）
+   与相对上同调，那是另一个岛（BRST 那条链）。
+
+**结论：路线 (i) 的前置（一般 `N` 的 Kac 行列式 + PBW (b) + 相对上同调）本身就是三个独立的
+大项目，且都不在无鬼定理这条链上。不要走。** 这条判断应写进
+`worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的 gaps：本图的 GT 推导与 FGZ/LZ 的
+上同调推导是两条独立路线，形式化时不能互相借力。
+
+### B.3 路线 (ii)：GT 原始的计数论证 —— 可行，但成本不在「计数」上
+
+计数论证的骨架是特征标等式（`φ(q) = ∏_{n≥1}(1-q^n)`）：
+
+```
+ch F          = φ(q)^{-D}          （D 个振子的 Fock 空间）
+ch U(Vir⁻)    = φ(q)^{-1}
+ch R[K_{-n}]  = φ(q)^{-1}
+ch H^⊥        = φ(q)^{-(D-2)}
+```
+
+于是 `φ(q)^{-1} · φ(q)^{-1} · φ(q)^{-(D-2)} = φ(q)^{-D}`，即
+
+```
+U(Vir⁻) ⊗ R[K_{-n}] ⊗ H^⊥  ≅  F      （作为分级向量空间）
+```
+
+**这个等式对任意 `D` 成立，`26 = 1 + 1 + 24` 只是 `D = 1 + 1 + (D-2)` 的实例。**
+所以**计数一步根本看不见 26**（见 §B.5）。
+
+计数所需的 Lean 件：
+
+| # | 引理 | 难度 | Mathlib |
+|---|---|---|---|
+| B3.1 | `Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N} = p_D(N)`（`D` 色分拆） | **中** | **缺**：Mathlib 有 `Nat.Partition` 但**无基数引理**（`GenericIndependence.lean` 文件头逐字记了这一点，并说 `decide` 不归约 `Fintype.ofSurjective`）。建议绕开 `Nat.Partition`，直接做生成函数：`Σ_N (card …) X^N = ∏_{n≥1}(1-X^n)^{-D}`，即 `Math/EulerPartition.lean` 的 `partitionGF_mul_tprod_one_sub_X_pow` 的 `D` 次幂 |
+| B3.2 | `ch H^⊥ = φ(q)^{-(D-2)}`（需要 DDF 态线性无关，即 §C.1 的 Gram 正定 ⇒ 无关） | **中** | 有（`linearIndependent_of_gram_det_ne_zero`） |
+| B3.3 | 「张成 + 维数相等 ⇒ 双射」的逐层版本 | **小** | 有（`Submodule.eq_top_of_finrank_eq` 一类） |
+
+**真正的成本在「张成」那一步**（B3.3 的前件），见 B.4。计数只是把「张成」升级成「双射」的
+最后一步，本身不难。
+
+### B.4 路线 (iii)：幺三角基变换 —— **推荐**，并且它把 (ii) 的「张成」也一并解决
+
+思路：不做维数计数，直接证「DDF/K/L 单项式」到「振子单项式」的转移矩阵是幺三角的。
+
+**第 1 步：光锥标架下的振子基变换。**
+
+```lean
+/-- 把偏振换成任意一组基：`α^{v}_{-n}` 随 `v` 线性，若 `{v_a}` 是 `R^D` 的基且 `η` 可逆，
+则 `{α^{v_a}_{-n}}` 与 `{α^{μ}_{-n}}` 张成同一空间，且作用在真空上给出 Fock 空间的另一组基。 -/
+theorem basis_change_creation (v : Fin D → (Fin D → R))
+    (hv : IsUnit (Matrix.of (fun a μ => η μ * v a μ)).det) : ...
+```
+
+难度：**中–大**。数学上平凡（多项式变量的可逆线性代换），Lean 上要把
+`MvPolynomial (Osc D) R` 上的线性变量代换做成 `AlgEquiv`。
+**Mathlib 缺**：没有现成的「可逆线性变量代换 ⇒ `MvPolynomial` 的代数同构」。
+要用 `MvPolynomial.aeval` 造两个方向再用 `AlgEquiv.ofAlgHom` 对生成元验证，约 100–150 行。
+
+**注意一个结构性限制**：本仓库的 `Fock D R` 把度规钉成对角 `η : Fin D → R` 且假设 `η_μ² = 1`，
+**不能**直接改成光锥基（光锥基下度规非对角）。上面的做法是**不动 `Fock` 的定义**，
+只在算子层面换基（`towerModeVec η a b v p` 对任意 `v` 都有定义），这是唯一不需要重构
+`Fock.lean` / `Sugawara.lean` 的走法。**重构共享基础（把 `η` 换成一般对称型）会波及
+Sugawara、PhysicalStates、整个顶点算子链，必须先 `agora_send` 通知 lead，不建议。**
+
+**第 2 步：三条领头项引理**（这才是数学内容）。取光锥标架 `{b, b̃, ε_i}`，
+`dotVec η b b̃ = -1`，`b̃·b̃ = 0`，`ε_i` 是 `TransverseFrame`。
+
+```lean
+/-- `K_{-n}` **没有**修正项：它就是乘以变量 `α^b_{-n}`。 -/
+theorem towerK_neg_eq_creation ... : towerK η a b (-n) = towerModeVec η a b b (-n)   -- rfl
+
+/-- `A^ε_{-n} = α^ε_{-n} + （含至少一个 b 方向产生算子或至少一个湮灭算子的项）`。
+领头项来自 `ddfSummand` 的 `j = -n` 那一项的 `Φ_0 Ψ_0 = 1` 分量。 -/
+theorem ddfOp_neg_leading ...
+
+/-- `L_{-n} = -α^{b̃}_{-n} + （≥ 2 个振子的项，且每项至多含一个 b̃）`。
+系数 `-1` 来自 `hba`：`a` 在光锥标架下的 `b̃`-分量由 `b·a = 1`、`b·b̃ = -1` 定死为 `-1`。
+「至多一个 b̃」来自 `b̃·b̃ = 0`（`α·α` 在光锥基下是 `-2α^b α^{b̃} + Σ α^i α^i`）。 -/
+theorem Lop_neg_leading ...
+```
+
+难度：`towerK_neg_eq_creation` **小**；`ddfOp_neg_leading` **中**（要把
+`vertexOsc` 的 `Φ/Ψ` 分解摊开，`VertexProduct.lean` 里有现成的 `levelBound` 工具）；
+`Lop_neg_leading` **中**（Sugawara 的五段分法已在 `VertexWeight.lean` 里用熟；
+`a·α_{-n}` 这一项来自 `j = 0` 与 `j = n` 两段各出 `½`，见 TODO (3c) 的记录）。
+
+**第 3 步：幺三角 ⇒ 基。** 在固定的双分级片（有限维）上，按字典序
+`(b̃-振子个数, 振子总个数)` 排列两组单项式，转移矩阵上三角、对角线为 `±1`，故可逆。
+Mathlib 侧有 `Matrix.det_of_upperTriangular` / `Matrix.BlockTriangular.det`，
+**没有**「无穷族的幺三角 ⇒ 基」——但因为逐片有限维，用有限矩阵就够。
+
+难度：**大**。这是整条链上最贵的一块，估计 400–700 行，且需要先把分级上的序关系设计对。
+
+### B.5 `D = 26` 究竟在哪里进来 —— 一条应写进图的数学结论
+
+把 B.3 / B.4 走完，得到的是
+
+```
+F ≅ U(Vir⁻) ⊗ R[K_{-n}] ⊗ H^⊥,   ch H_phys = φ(q)^{-(D-1)},   ch H^⊥ = φ(q)^{-(D-2)}
+```
+
+**这些对任意 `D` 都成立。** 独立核算（可作为 Lean 里的小 sanity 检查）：
+`N = 1`、`a₀ = 1` 时 `H_phys` 是横向极化 `ζ·k = 0`，维数 `D - 1 = 25`
+（`mem_physSubmodule_inf_levelSubmodule_one_iff` 已证）；
+`span{A^i_{-1}|k⟩ (24 个), K_{-1}|k⟩ (1 个)}` 维数也是 25；零模态是 `L_{-1}|k⟩`（1 维，
+`Lop_neg_one_apply_one_mem_nullSubmodule` 已证），`25 - 1 = 24 = p_{24}(1)` ✓。
+`N = 2`、`D = 26` 时 `dim H_phys(2) = D(D+1)/2 - 1 = 350 = p_{25}(2)` ✓。
+
+于是**剩下的、也是唯一含 26 的断言**是：
+
+> **(B-26)** `H_phys` 里 `H^⊥` 之外的那 `p_{D-1}(N) - p_{D-2}(N)` 个方向，在 `D = 26` 时恰好是零模态。
+
+等价说法：`H_phys` 上双线性型的秩恰为 `p_{D-2}(N)`。`D < 26` 时秩更大但仍半正定
+（这正是 `worldsheet.no-ghost-theorem-subcritical` 只断言正定性、**不**断言与 24 个横向振子
+同构的原因）；`D > 26` 时多出的方向有负模（`LevelTwo.lean` 的
+`Fock.pairing_levelTwoScalar_intercept_one`：`⟨ψ₂,ψ₂⟩ = -2(D-26)(D-1)/25`，`N = 2` 上的显式见证）。
+
+**两条已知机制，都还没有可形式化的证明：**
+
+* **Brower 机制**：纵向算子 `A^L_{-n}` 生成那些多余方向，其 Gram 正比于 `(26 - D)`，
+  `D = 26` 时整体为零。**需要 `A^L_n`**，成本见 §A.3。
+* **GT 机制**（Goddard 2008 (6.2)）：物理态再加 `K_n|ψ⟩ = 0`（`n > 0`）就恰好是 DDF 态；
+  对一般物理态要减掉一个伪态把 `K` 条件配平，可解性用到 `D = 26`、`a = 1`。
+  **Goddard 2008 只给结论 (6.4)，不给证明**（原话是 "we were able to prove the No-Ghost
+  Theorem [45]"，[45] = GT 1972，而 GT 1972 正文本项目从未获取，推导 gaps 已记
+  「两篇 1972 年论文的正文都未获取……这是本推导目前最大的问题」）。
+
+**对图的建议（重要）**：(B-26) 是整条 GT 链的**真正承重点**，而它现在的文献支撑只有
+一篇未获取正文的 1972 年论文里的一句无证明结论。建议在
+`worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的 gaps 里把这一点单独列出来，
+措辞不要与已有的「两篇 1972 论文正文未获取」那条合并——那条讲的是**可追溯性**，
+这条讲的是**论证结构**：即使拿到正文，形式化仍需在 Brower 机制（要 `A^L`）与 GT 机制
+（要一个本项目尚未理解其细节的配平论证）之间做一次选择。
+
+### B.6 增量交付：先做 `N ≤ 2`
+
+在 (B-26) 的一般证明落地之前，**逐层版本是真实的部分成果**，建议先做：
+
+```lean
+theorem noGhost_level_le_two (hD : D = 26) ... :
+    ∀ ψ ∈ towerPhysSubmodule η a b 1, ∀ N ≤ 2, ψ ∈ towerBigrade η a b (-N) N →
+      ψ ∈ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b 1
+```
+
+`N = 0, 1` 已有全部件（`mem_physSubmodule_inf_levelSubmodule_one_iff`、
+`Lop_neg_one_apply_one_mem_nullSubmodule`）；`N = 2` 的全部代数在 `LevelTwo.lean` 里
+（但注意 `LevelTwo.lean` 的 `未做` 一节：它只覆盖 `SO(D-1)` 标量试探态族，
+不是 level-2 物理态的全部，要补 `L_1/L_2` 条件的完整求解）。
+难度 **中**，价值：给图一个 `worldsheet.no-ghost-theorem-low-levels` 型的 formalized 节点，
+并在真做大工程前验证 B.1 的基础设施设计。
