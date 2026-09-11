@@ -98,6 +98,7 @@ gaps:
     **本推导不涉及 `Vir_κ^-`-自由性**：那是较弱的性质，**两方都同意**
     （LZ Corollary 2.19(iii)，LZ 的无鬼定理只用它）。本卡说的是比它强的完全可约性。
 notes: |
+  【约定换算（reviewer-batch19，2026-09-11，lead 落地）】目标卡 statement 与本推导所引 LZ Remark 写「超 Virasoro c = 10」「M(h, 10)」，这是 LZ 1989 的 **c/8 归一化**（lian-zuckerman-1989.md L17）；本图 `conv.verma-module-notation` → `conv.virasoro-standard` 用 c/12，同一代数在本图约定下为 **c = 15**（= (3/2)·10，与 `worldsheet.rns-matter-central-charge` 一致）。statement 按原则 1 不改，读者对照时按此换算。另：LZ Remark 末句「This was also pointed out in [5] in the bosonic case」（[5] = FGZ）见 brower-friedman-1973.md §6.4。
   from: literature/extractions/brower-friedman-1973.md §2–§3（裁决记录）、
   figueroa-ofarrill-kimura-1989.md §3 第 1 条 / §4 Q1、lian-zuckerman-1989.md Q1。
 

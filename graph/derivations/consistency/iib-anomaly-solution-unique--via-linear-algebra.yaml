@@ -1,7 +1,7 @@
 id: consistency.iib-anomaly-solution-unique--via-linear-algebra
 target: consistency.iib-anomaly-solution-unique
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: consistency.iib-gravitational-anomaly-cancels
     inferred: false
@@ -96,6 +96,7 @@ gaps:
     [3] = Alvarez-Gaumé–Witten 1984，但**不给式号**，且 AGW 本身不固定整体归一。
     ⇒ **不得**把 alvarez-gaume-witten-1984 写成本卡系数的来源。
 notes: |
+  reviewer-verified: reviewer-batch19, 2026-09-11（精确整数复算：2r₁+3r₂−5r₃ = 0；det A = 0；r₁,r₂ 前两列子式 −720 ≠ 0 ⇒ rank 2；A·(2,−2,1) = 0 且由 r₁,r₂ 取 x₃ = 1 解出 (2,−2,1)；Smith 不变量 (1,144,0)。前提完整、有限步初等线性代数，走 STATUS_LEVELS 例外条款。lead 落地。）
   from: literature/extractions/green-schwarz-1984.md §11.2/§11.3/§11.4（researcher 第五轮 L1）
   + polchinski-1998-v2-ch12.md E10/E11。
 
