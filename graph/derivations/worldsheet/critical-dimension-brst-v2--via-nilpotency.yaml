@@ -15,6 +15,20 @@ depends_on:
       bc-ghost-central-charge 的有效状态 physical-argument 与本推导自身相同）。）
   - id: worldsheet.virasoro-algebra-v2
   - id: worldsheet.bc-ghost-central-charge-lambda-two
+    convention_map: |
+      **跨 family `ghost-normal-ordering` 的边（2026-09-12 physics-auditor 补）。**
+      本推导的目标 worldsheet.critical-dimension-brst-v2 声明 **conv.ghost-normal-ordering-level**
+      （能级序，canonical；与 a^g = −1 成对）；本依赖卡 worldsheet.bc-ghost-central-charge-lambda-two
+      声明同 family 的 **conv.ghost-normal-ordering-sl2c**（SL(2,C) 序，非 canonical；与 a^g = 0 成对）。
+      **本边搬运的只有一件东西：中心项里 (m³ − m) 的系数，即 c^g/12 = −26/12。**
+      该系数**与正规序无关**：两套序之差是 L_0 的常数平移 L′_0 = L_0 + α（此处 α = ±1），
+      而平移只给中心项添一个 m 线性项 −2mα，不改 m³ 的系数
+      （逐步论证见 conv.ghost-normal-ordering-level 的 definition (2)(3)；
+      reviewer 独立复算见 docs/reviews/brst-nilpotency-recompute-2026-09-12.md §2/§4）。
+      **不得跨本边搬运的**：中心项的 m 线性项（依赖序，两套相差 2m）；L^g_0 的零点
+      （SL(2,C) 序下 L^g_0|↓⟩ = −|↓⟩，能级序下为 0）；以及把 `: :` 与 a^g 拆开混搭的任何写法
+      （SL(2,C) 序配 a^g = −1 得到的算子对任何 c^m 都不幂零）。
+      ⇒ 本边不改变依赖卡与目标卡各自陈述的真值，也不改变任何 status。
     inferred: true
     note: |
       本推导的目标陈述把鬼场中心荷**写死为 c^g = -26**（「{Q_B,Q_B} = Σ ((c^m - 26)/12)(m^3-m) c_{-m}c_m」
