@@ -1494,8 +1494,39 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     Gram 的对角性与正定性只用到 `D ≥ 3`（标架存在性，见 `Witness.lean`）。
   - **仍缺**：无鬼定理的组装还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（即 `ddf-spans`）。
   - **公理登记**：28 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+- [x] `noghost-c5`（蓝图 §C.5）：**无鬼定理的条件版组装** ——
+  `StringFormal/NoGhost/Assembly.lean`（10 条顶层声明）。分支 `agent/formalizer/noghost-c5`。
+  - **假设化的张成引理**：`DDFSpans η a b hη Ε : Prop`（`H_phys ≤ ddfSpan ⊔ H_null`，截距取
+    基态的 `a₀ = invTwo·zeroModeSq η a = α'k²`）与分片版 `DDFSpansOn … W`
+    （`H_phys ⊓ W ≤ …`），两者由 `DDFSpansOn_top_iff` / `DDFSpans.ddfSpansOn` 相连。
+  - **主定理 `no_ghost_of_spans`**：有序域上，给定 `DDFSpans`，`towerQuotientPairing` 在
+    `TowerPhysQuot = H_phys ⧸ H_null` 上**正定**（`0 ≤ ⟨x,x⟩` 且 `⟨x,x⟩ = 0 → x = 0`），
+    由 `towerPhysMk_surjective` 降到代表元。
+  - 中间两条：`towerPairing_self_nonneg_of_mem_towerPhys_of_spans`（(1a) 无负模）与
+    `towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans`（(1b) 零模 ⟺ 零模态）。
+    机制正如蓝图所料是两行：`towerPairing_add_null` 把 `⟨d+χ,d+χ⟩` 压成 `⟨d,d⟩`
+    （提出为 `towerPairing_self_eq_of_spans`，对任意交换 ℚ-代数成立），再用
+    `ddf_span_pos` 的严格正性（非零 ⇒ > 0）两头夹。
+  - **`mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious`**：把「模掉伪态」升级成「模掉零模态」
+    的通用引理（`S ≤ towerSpurious` + 物理 ⇒ 伪态分量自己是物理的 ⇒ 落进 null）。
+    §B.6 的各个分片结论都是「模伪态」形，这条是它们接进 `DDFSpansOn` 的唯一接口。
+  - **`ddfSpans_bigrade_neg_one_one`**：用上一条把 `LightCone.lean` 的
+    `towerPhys_bigrade_one_le_ddfSpan_sup_spurious` 转成 `DDFSpansOn … (towerBigrade D R (-1) 1)`，
+    即 `DDFSpans` 在光子那一片上**已被证明**，且**对任意 `D`**。仍带 §B.6 的两条额外前件
+    `hεa`（`ε_i·k = 0`）与 `FrameSpansOrthogonal`。
+  - **数学判断（应写进图卡 notes）**：`D = 26` **完全不出现在本文件**——它整个被吸收进
+    `DDFSpans`。即 Goddard–Thorn 里除张成引理外的一切（Gram、正定性、零模态正交性、商形式
+    良定义）都与维数无关，本文件把这点钉死了：所有结论对任意 `D` 成立。反过来说，
+    `worldsheet.no-ghost-theorem-v4` 的**全部**猜想负担落在 `ddf-spans` 一条上。
+  - **未做**：蓝图的 `noGhostEquiv : ddfSpan ≃ₗ TowerPhysQuot`。单射性确实由 `ddf_span_pos`
+    给出，但满射性**就是** `DDFSpans` 本身，所以这条等距同构不携带超出上述定理的信息，
+    判断为不值得写。
+  - **公理登记**：10 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
-- [ ] `no_ghost_theorem`：组装。
+      **现在是唯一缺口**：条件版组装见 `noghost-c5`，`N = 1` 分片已由
+      `ddfSpans_bigrade_neg_one_one` 关闭。
+- [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
+      无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
   level-2 标量试探态 `ψ₂ = [α_{-1}·α_{-1} + c₂(a·α_{-2}) + c₃(a·α_{-1})²]|k⟩`
   （`Fock.levelTwoScalar`），其中 `a^μ = α^μ_0 = (2α')^{1/2}k^μ`，`s := zeroModeSq η a = 2α'k²`。

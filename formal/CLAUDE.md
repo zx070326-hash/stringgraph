@@ -197,6 +197,16 @@ StringFormal/
                             标架层：frameMonomial（ι = Fin (D−2)，用 LightCone 的 TransverseFrame）、
                             **ddfSpan_eq_span_range_frameMonomial**（列表生成集 = 占据数生成集）与
                             **ddf_span_pos**（全序域上 ddfSpan 里非零向量模长 > 0 —— 蓝图 §C.5 的正定性输入）
+  NoGhost/Assembly.lean     **无鬼定理的条件版组装（蓝图 §C.5）**：`DDFSpans`（`H_phys ≤ ddfSpan ⊔ H_null`，
+                            截距 `a₀ = α'k²`）**作为假设不证**，分片版 `DDFSpansOn … W`；
+                            `towerPairing_self_nonneg_…_of_spans`（无负模）、
+                            `towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans`（零模 ⟺ null）、
+                            **`no_ghost_of_spans`（`TowerPhysQuot` 上的形式正定）**。
+                            `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 把 §B.6 的
+                            「模伪态」结论升级成「模 null」，据此
+                            **`ddfSpans_bigrade_neg_one_one`** 在光子片 `(rung −1, level 1)` 上
+                            **无条件于 `D`** 关闭 `DDFSpansOn`。**`D = 26` 在本文件一次都不出现**——
+                            它全部被吸收进 `DDFSpans`（蓝图 §B.5）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
