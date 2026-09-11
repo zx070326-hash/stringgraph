@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-11 深夜 2）：main 564 statements / 461 derivations / 3 milestones / 21 conventions；effective formalized 59 / rigorous 107 / physical-argument 338 / conjecture 29 / open 30（大部分是换代后无推导的旧卡；活推导依赖此类卡已被 validate 判 error）；Lean 62 声明公理干净（2180 jobs）。**`worldsheet.no-ghost-theorem-v4` effective = rigorous**；超弦 D=10 链经平坦卡 `superstring-brst-nilpotency-requires-d10-flat` 回到 physical-argument；一般 SCFT 形式 `critical-dimension-superstring-brst-v2` 保留 conjecture。
+- 计数（2026-09-11 深夜 3）：main 567 statements / 465 derivations / 3 milestones / 21 conventions；effective formalized 60 / rigorous 107 / physical-argument 339 / conjecture 29 / open 31（换代后无推导的旧卡 + 1 条刻意无推导的 OPE 瓶颈根）；Lean 63 声明公理干净（3498 jobs）。**`worldsheet.no-ghost-theorem-v4` effective = rigorous**；η 的 S、T 变换均已 Lean 无假设证出（DedekindEtaS/T.lean），τ₂|η|⁴ 全模群不变性只差「S、T 生成 SL(2,ℤ)」；IIB 反常解唯一性 formalized；Verma 层 N≤4 维数等式 formalized。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
@@ -100,6 +100,7 @@
 - **gkpw**：d=4 拆卡已落地（gkpw-ads5）。
 - **去重事故**：`branes.bps-bound-point-particle-d4` / `branes.brane-charges-in-susy-algebra` 与 `susy.*` 同名命题并行建卡，保留 susy.*，branes.* superseded（派工中）。**教训：同一命题不得同时派给两个 curator。**
 - **lead 裁决（2026-09-11，three-checks）**：(a) `consistency.iib-gravitational-anomaly-cancels` **不**为「无规范群」换代——statement 已以「三个规范迹为零」写出前提；(b) `worldsheet.nsr-fock-space-verma-decomposition` 维持 conjecture 不降 refuted——LZ 反例区 p·p<0 真含于 FOK 的 p≠0，是不利证据，但 LZ 不给层数不写显式反例，不满足「被接受的反例」；(c) 超弦无鬼两卡 (H2) 只写 p≠0、LZ p.305 另设「p 未来向」——**待裁**，先由下一轮 auditor 在回译时判定是否本质前提；(d) 2 待登记文献：Gibbons–Hull PLB 109 (1982) 109、Terao–Uehara PLB 168B (1986) 70、Schwarz NPB 46 (1972) 61。
+- **lead 裁决（2026-09-11，small-backlog-5）**：Kac 2015 (1.32) 的费米型模式对易公式立为独立 `math.mode-commutator-formula-super`（rigorous），**不**挂到围道语言卡 `worldsheet.ope-anticommutator-dictionary-fermionic`（形式分布证明不得抬高径向排序陈述，同 reviewer-batch3 对玻色侧的先例）。待办：`worldsheet.weyl-anomaly-central-charge-constant` statement 把 ∂^aC = 0 归给 (3.4.31)（实为 ansatz，结论是 p.97 无式号散文）——纯改名式换代 v2；Seifert–Threlfall Ch. VI §38/§40 待登记 bib（带节号的曲面分类来源）；`worldsheet.critical-dimension-superstring` (I) 文本为一般 SCFT ⟺，two-routes 只覆盖「⟸ 一般 + ⟹ 平坦」——应按此收窄换代 v2。
 - **researcher 五项**（派工中）：η S 变换数学来源（Apostol Thm 3.1 / Siegel 1954——ch7 子图最集中的单点缺口）；Polchinski v1 p.159 页图；LZ 1989 p.320 Remark 反例的 p；Gallier–Xu Lemma 6.1/Prop 6.1 逐字；Humphreys GTM 9 §23/§8 入口。
 
 ## 瓶颈分析（2026-09-10，`stringgraph why`）
