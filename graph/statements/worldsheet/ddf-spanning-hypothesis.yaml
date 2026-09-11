@@ -170,5 +170,37 @@ notes: |
     「+」（子模的和）⇒ `⊔`；「⊆」⇒ `≤`；
     横向标架 Ε 的两条 ⇒ `TransverseFrame.transverse` / `TransverseFrame.orthonormal`。
   ⚠ 卡面【设定】写了 k_0 类光，Lean 的 `DDFSpans` 本身不带 `hbb`/`hba`——见 sources 第二条的 ⚠。
+
+  【2026-09-12 追记（curator）：(B-26) 的三种等价写法，与秩不等式推导的接线】
+  formal/BLUEPRINT-noghost.md §B′.11 第 1 条建议记一段「(B-26) 的三种等价写法」，如下：
+    (i) **整塔张成**（本卡逐字）：H_phys ⊆ D(Ε) + H_null。
+    (ii) **逐片张成**（等价于 (i)，见上面【分片版与拼装缺口】）：对每个 N ≥ 1，
+         H_phys ∩ towerBigrade(−N,N) ⊆ (D(Ε) ∩ towerBigrade(−N,N)) + (H_null ∩ towerBigrade(−N,N))，
+         Lean `DDFSpansOn η a b hη Ε (towerBigrade D R (-N) N)`。
+    (iii) **秩不等式**（等价于 (ii)，`ddfSpansOn_bigrade_iff_b26`，**等价改写不是加强/减弱**）：
+         对每个 N，dim(H_phys∩V_N) ≤ dim(D(Ε)∩V_N) + dim(H_null∩V_N)，
+         Lean `B26 η a b hη Ε N`——即新卡 worldsheet.ddf-spanning-rank-inequality。
+         这是**建议的动手形式**：dim(D(Ε)∩V_N) = p_{D−2}(N) 已 formalized 求出
+         （worldsheet.transverse-ddf-fock-gram-matrix 一侧），故 (iii) 的困难被压到
+         「dim(H_phys∩V_N) 的上界」与「dim(H_null∩V_N) 的下界」两块，后者配一条
+         **种子计数恒等式**（零态 = DDF 后代 × 纵向种子，种子按普通分拆计数）：
+           p_{D−1}(N) − p_{D−2}(N) = Σ_{m≥1} p_{D−2}(N−m)·p(m) 。
+         这条恒等式在 Lean 里**未使用**（`SliceDim.lean` 全程不求值任何分拆数，
+         §B′.8），登记在此仅供任何想走「显式造 p_{D−1}(N)−p_{D−2}(N) 个零态」路线的人参考；
+         它不是本卡任何推导的一部分。
+
+  【链条现状】worldsheet.ddf-spanning-hypothesis--via-rank-inequalities（本卡新增的推导，
+  formalized，Lean `ddfSpans_of_forall_b26`）把本卡的 effective 从「无推导、open」
+  改记为「own=formalized、effective=open（因前提 open）」，链条现在逐字是：
+
+      ∀N，worldsheet.ddf-spanning-rank-inequality(N)  ⟹  本卡（DDFSpans）
+        ⟹  worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+        ⟹  worldsheet.no-ghost-theorem-v4 的 (B-26) 半。
+
+  三个 ⟹ 全部机检（各自的推导 own=formalized）；唯一未证的环节精确定位到
+  worldsheet.ddf-spanning-rank-inequality——一条对每个自然数 N 的、无穷多条的、
+  逐 N 有限维秩不等式族，且已知不存在「每个 N 一个层真空奇异向量」的捷径
+  （该卡 notes 的 Kac 退化点硬事实）。这不是本卡的新猜想，是**同一个**猜想
+  （「D=26 时零态够多」）换了一种可被逐 N 攻克的形状。
 author: curator
 created: "2026-09-11"
