@@ -4,6 +4,7 @@ import StringFormal.Math.GreenSchwarzAlgebra
 import StringFormal.Math.GreenSchwarzAlgebraGen
 import StringFormal.Math.FiniteCounts
 import StringFormal.Math.AnomalyPolynomial
+import StringFormal.Math.IIBAnomalyUnique
 import StringFormal.Math.E8Roots
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
