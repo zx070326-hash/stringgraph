@@ -1,0 +1,85 @@
+id: worldsheet.ope-anticommutator-dictionary-fermionic
+kind: proposition
+title: OPE ↔ 反对易子字典（费米型）：两个 Grassmann 奇的全纯算子，其 OPE 极点经围道变形给出模的**反**对易关系；奇偶混合给对易关系
+statement: |
+  在径向量子化（径向排序 R）中，设 A(z)、B(w) 是全纯算子，各带确定的 Grassmann 宇称
+  ε_A, ε_B ∈ {0, 1}（0 = 玻色型/偶，1 = 费米型/奇），权分别为 h_A、h_B，模为
+    A_m = ∮ (dz/2πi) z^{m+h_A-1} A(z)，  B_n = ∮ (dw/2πi) w^{n+h_B-1} B(w)
+  （半整数权时指标 m、n 取相应的半整数，围道积分的被积函数因而单值）。
+  径向排序对奇算子带符号：
+    R{A(z)B(w)} = A(z)B(w)  （|z| > |w|），   R{A(z)B(w)} = (−1)^{ε_A ε_B} B(w)A(z)  （|z| < |w|）。
+  则模的**分次**对易子
+    [A_m, B_n}  ≡  A_m B_n − (−1)^{ε_A ε_B} B_n A_m
+  可化为一个绕内点的小围道积分：
+    [A_m, B_n} = ∮_{C_0} (dw/2πi) w^{n+h_B-1} ∮_{C_w} (dz/2πi) z^{m+h_A-1}  R{A(z)B(w)}，
+  其中 C_w 是绕 w 的小围道；做法与玻色型字典（worldsheet.ope-commutator-dictionary）**逐字相同**：
+  「|z| > |w| 的围道」减去「|z| < |w| 的围道」，差为绕 z = w 的闭围道，
+  唯一的差别是第二项前面的符号 (−1)^{ε_A ε_B} 正好被 R 排序里的符号抵消，
+  使得两个围道之差仍是**同一个**全纯函数 R{A(z)B(w)} 的两条围道之差。
+  于是 A(z)B(w) 的 OPE 中 (z−w)^{−k} 的极点系数经留数积分直接给出：
+    · ε_A = ε_B = 1（两个费米型算子）：模的**反对易子** {A_m, B_n}；
+    · ε_A ε_B = 0（至少一个玻色型）：模的**对易子** [A_m, B_n]，退化为玻色型字典。
+  留数规则本身与玻色型字典相同；差别只在 (a) 左端是分次括号，(b) OPE 系数本身已按
+  worldsheet.conformal-normal-ordering-v2 的费米换序符号算出。
+
+  **本图用到的三个实例**（均在来源中以结果形式出现，不展示围道）：
+    (1) bc 系统：b(z)c(0) ∼ 1/z（权 λ、1−λ）⟹ {b_m, c_n} = δ_{m+n,0}（Polchinski (2.7.17)）；
+    (2) BRST 流：j_B(z)j_B(0) 的单极点 ⟹ {Q_B, Q_B}（Polchinski (4.3.10) → (4.3.9)）；
+    (3) RNS 超流：T_F(z)T_F(0) 的极点 ⟹ {G_r, G_s}（Vol.2 §10.1，由 worldsheet.rns-modes-satisfy-super-virasoro 承载）。
+
+  **本卡不断言什么**：不断言 OPE 的收敛性或围道变形的合法性（与玻色型字典共享同一缺口）；
+  不断言任何具体 OPE 的系数或符号（那分别是各 CFT 定义卡与 worldsheet.conformal-normal-ordering-v2 的事）；
+  不处理 R 扇区半整数权场的分支切割（见 worldsheet.rns-modes-satisfy-super-virasoro 推导的 gaps）。
+uses_conventions: [conv.worldsheet-complex-coords]
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§2.6, eq. (2.6.14) 与 Fig. 2.3，p.55（原书逐字只写**对易子** [Q_1,Q_2]_{C_2} = ∮_{C_2}(dz_2/2πi) Res_{z_1→z_2} j_1(z_1)j_2(z_2)；费米型/反对易子版本原书**未单列**，本卡是对该围道论证的推广）"
+    note: |
+      【L1，researcher 第六轮】(2.6.14) 逐字 `[Q_1,Q_2]{C_2} = ∮_{C_2}(dz_2/2πi)Res_{z_1→z_2}j_1(z_1)j_2(z_2)`，
+      Fig. 2.3 是围道变形的图示。原书在 §2.6 对奇算子的情形**没有单独的公式或段落**；
+      本卡的 loc 只能指向最近的玻色型段落。见 literature/extractions/polchinski-1998-v1.md §12.1（E39/E40 配套表）。
+  - ref: polchinski-1998-v1
+    loc: "§2.7, eq. (2.7.16)–(2.7.17), p.61（bc 模式展开与反对易关系 {b_m, c_n} = δ_{m,−n}——原书直接给出结果，不展示由 b(z)c(0) ∼ 1/z 经围道得到它的步骤）"
+    note: |
+      式号经 schrans-2020 目录（`2.55 p 61: Eq. (2.7.17) The bc Ghost Commutators`）与 headrick-2008 Problem 2.13
+      的引用交叉核实；表达式 {b_m, c_n} = δ_{m,−n} 见抽取记录 E43。这是本卡实例 (1) 的来源，也是原书
+      第一次**使用**费米型字典的地方（尽管没有点名）。
+  - ref: polchinski-1998-v1
+    loc: "§4.3, eq. (4.3.10), p.132–133（j_B j_B OPE；原书逐字「This requires a bit of calculation, being careful about minus signs from anticommutation. The single pole implies that {Q_B,Q_B} = 0 when c^m = 26.」）"
+    note: |
+      【L1，抽取记录 §12.3 表】这是原书**最明确地使用**「OPE 单极点 ⟹ 反对易子」的一处：
+      j_B 是费米型，「the single pole implies that {Q_B, Q_B} = 0」正是本卡在 A = B = j_B、m = n = 0 处的实例，
+      且原书自己点出了「minus signs from anticommutation」。本卡实例 (2) 的来源。
+tags: [cft, ope, radial-quantization, contour-deformation, fermionic, bc-system, brst, anticommutator]
+notes: |
+  由 curator-small-backlog-3 于 2026-09-11 新建，关闭 bc/βγ 部门与 BRST 部门的一处共同缺口：
+  worldsheet.ope-commutator-dictionary 的 statement 写在「全纯算子」上、结论写成对易子
+  （括号里带了一句「（反对易）」但没有给符号规则），其 notes (b) 明说「费米推广……本轮未核实」；
+  worldsheet.ope-pole-mode-commutator-dictionary（形式分布版）明确只覆盖玻色型。
+  于是图上所有「由 OPE 推鬼场/BRST/超流代数」的推导都在 gaps 里写着「费米版符号规则本图未单独核实」。
+  本卡把那条规则立成命题，让这些 gaps 有所指。
+
+  **本卡的定位与命名**：worldsheet.rns-modes-satisfy-super-virasoro--via-contour 的 gaps 曾写
+  「待建 worldsheet.ope-anticommutator-dictionary」；本卡采用 lead 派工指定的 id
+  `ope-anticommutator-dictionary-fermionic`，是同一张卡。
+
+  **原书未单列**：Polchinski Vol.1 §2.6 只写玻色型 (2.6.14)；费米型版本在 §2.7 (2.7.17)、§4.3 (4.3.10)
+  与 Vol.2 §10.1 被**直接使用**而不被陈述。本卡 sources 只能指最近段落，推导的 kind 为 physical-argument。
+
+  **为什么不并入 worldsheet.ope-commutator-dictionary**：那张卡的 statement 不可改（原则 1），
+  而它的 statement 已把 R 排序写成不带符号的形式；本卡是它的推广而不是替代——玻色型情形
+  逐字退化为它，故不写 superseded_by。
+
+  **改指本卡的 gaps 文字**（2026-09-11，**不加边**，待 reviewer 判定是否承重）：
+    worldsheet.conformal-ordered-modes-satisfy-virasoro--via-ope-contour（gaps 第 3 条 (a)）、
+    worldsheet.bc-ghost-normal-ordering-constant--via-virasoro-algebra（gaps 末条 (b)）、
+    worldsheet.bc-ghost-central-charge--via-ope（gaps 第 1 条）、
+    worldsheet.brst-charge-mode-expansion--via-contour-and-laurent（gaps 第 1 条）、
+    worldsheet.ope-pole-mode-commutator-dictionary--via-locality-theorem（gaps 第 3 条）、
+    worldsheet.rns-modes-satisfy-super-virasoro--via-contour（gaps 第 2 条）、
+    以及 worldsheet.ope-commutator-dictionary 的 notes (b)。
+  **严格路线的对应物**：Schottenloher Thm 10.10 的超代数版（或 Kac《Vertex Algebras for Beginners》
+  的超顶点代数 Borcherds 恒等式）能给本卡的形式分布版，编号本轮未核实；
+  若日后立卡，应仿 worldsheet.ope-pole-mode-commutator-dictionary 另建「费米型形式分布版」而不是挂在本卡上。
+author: curator-small-backlog-3
+created: "2026-09-11"
