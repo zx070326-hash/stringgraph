@@ -1,0 +1,113 @@
+id: worldsheet.ddf-spanning-rank-inequality
+kind: proposition
+title: (B-26) 的秩不等式改写：每个反对角片 (rung −N, level N) 上 dim H_N ≤ dim D_N + dim Z_N
+statement: |
+  记号沿用 worldsheet.ddf-spanning-hypothesis（同一张塔 T(k;k_0)、同一横向标架 Ε、
+  同一截距 a₀ := α'k² = ½η(a,a)）与 worldsheet.transverse-ddf-fock-gram-matrix
+  的双分次 towerBigrade（rung, level）。系数环这里换成一个域 K（交换 Q-代数的特殊情形，
+  finrank 需要域）。
+
+  【记号：反对角片与三个片内子空间】对每个 N ∈ N，令
+    V_N  := towerBigrade(−N, N)  （rung −N、振子能级 N 的双分次片，K-有限维）
+    H_N  := H_phys ∩ V_N
+    D_N  := D(Ε) ∩ V_N
+    Z_N  := H_null ∩ V_N
+  （H_phys、D(Ε)、H_null 三者的定义逐字取自 worldsheet.ddf-spanning-hypothesis）。
+
+  【断言（本卡的全部内容，即 (B-26)）】对**一切** N ∈ N：
+
+      dim_K H_N  ≤  dim_K D_N + dim_K Z_N 。
+
+  【本卡明确不断言】
+  (a) **不断言存在性构造**：本卡不提供任何造出 D_N 或 Z_N 里具体向量的方法，
+      只陈述维数比较。
+  (b) **不断言这条不等式对哪些 D 为真**——与 worldsheet.ddf-spanning-hypothesis 边界 (c)
+      同型：本卡是一条逐 (D, N, k, k_0, Ε) 的断言，D = 26 在此**首次也是唯一一次**
+      进入无鬼定理链条（见 notes【D = 26 在哪里进入】）。
+  (c) **不断言反向不等式**。反向 dim_K H_N ≥ dim_K D_N + dim_K Z_N **恒成立**且不需要
+      D 的任何取值（D_N、Z_N 都是 H_N 的子空间且只交于零，见推导），
+      故合起来才是「H_N = D_N ⊕ Z_N」；本卡只承担困难的那一半。
+  (d) **不断言「逐 N 成立 ⇒ worldsheet.ddf-spanning-hypothesis」**；那是本卡与另外三张
+      formalized 卡拼起来才能给出的结论，见 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities。
+  (e) **不断言 K 上有序结构**。本卡的陈述本身（finrank 不等式）只需要 K 是域且
+      2α'k₀·k = 1 等标度式良定义所需的 ℚ-代数结构；序仅在**证明**「(B-26) ⇒ 张成」
+      这一方向时才用到（`ddf_span_pos`），不进入本卡陈述本身（见 sources 的 §B′ 订正说明）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.B26
+  lean_file: StringFormal/NoGhost/SliceRank.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SliceRank.lean :: StringFormal.NoGhost.B26（本卡 formal.lean_decl，第 156 行；section B26 起于第 140 行）"
+    note: |
+      **本条不是一条定理，是一个 `Prop` 的定义**——与 worldsheet.ddf-spanning-hypothesis 的
+      `DDFSpans` 同型（该卡 sources 的 stringformal-2026 条已说明这一模式）。逐字：
+        `def B26 (η a b : Fin D → K) (hη : ∀ μ, η μ * η μ = 1) (Ε : TransverseFrame η b)
+           (N : ℕ) : Prop :=
+           finrank K ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                         ⊓ towerBigrade D K (-(N:ℤ)) N)
+             ≤ finrank K ↥(ddfSpan η a b hη Ε ⊓ towerBigrade D K (-(N:ℤ)) N)
+               + finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+                               ⊓ towerBigrade D K (-(N:ℤ)) N)`
+      与本卡陈述逐字一致（H_N/D_N/Z_N 分别是三个 `finrank` 项里的子模）。
+      **类型类比封闭 `section` 的 `variable` 行窄**：该 section 的 `variable` 声明写了
+      `[Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]`，但 `B26` 的陈述里
+      不出现任何序结构（只有 `Submodule` 的 `⊓`/`finrank`/`ddfSpan`/`towerBigrade`/
+      `towerNullSubmodule`/`towerPhysSubmodule`，均不要求序），Lean 的 `variable` 自动包含
+      机制只拉入陈述**类型**真正用到的实例，故 `B26` 实际elaborate 出来的签名只有
+      `[Field K] [Algebra ℚ K]`——这一点由 `formal/BLUEPRINT-noghost.md` 的
+      「B′ 订正（PR0/PR1/PR2 落地后，2026-09-12）」第 4 条明文确认：
+      「`B26` 的类型类比 §B′.3 的草案窄：实际签名只有 `[Field K] [Algebra ℚ K]`——
+      序、`CharZero`、`NoZeroDivisors` 都**不**进 `B26` 的陈述。序只出现在
+      `ddfSpansOn_bigrade_of_b26` 的证明（经 `ddf_span_pos`），`CharZero`/`NoZeroDivisors`
+      只出现在 PR2（经 `massShell_of_mem_towerBigrade`）」。
+      注：`B26` 是**等价改写**而非加强或减弱——`ddfSpansOn_bigrade_iff_b26`
+      （SliceDim.lean）证明 `DDFSpansOn η a b hη Ε (towerBigrade D K (-N) N) ↔ B26 η a b hη Ε N`，
+      故本卡与「片 V_N 上 H_phys ⊆ D(Ε) + H_null」逐字等价。
+      **curator 未自行重跑 `lake build`**；本卡不标 formalized（`B26` 是定义不是定理），
+      故也不依赖 `check-axioms`。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15，(6.4) 上下文；文献不含分片/秩不等式的表述"
+    note: |
+      **不承载论证**。文献直接断言整塔上的张成（worldsheet.ddf-spanning-hypothesis 的表述），
+      不经过逐片秩不等式这一中间步骤；秩改写是本项目（`formal/BLUEPRINT-noghost.md` §B′）
+      为形式化引入的等价重述，登记此条只为给本卡一个文献方位。
+tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, gap, bottleneck, open]
+notes: |
+  【立卡理由】把 worldsheet.ddf-spanning-hypothesis 的整塔张成压成逐 N 的秩不等式后，
+  这条不等式本身值得独立成卡：(1) 它是 (B-26) 唯一含 D = 26 的地方（下面详述），
+  (2) 它是 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities 的显式前提，
+  该推导的 effective 因此正确地继承本卡的 open（见该推导 notes）。
+
+  查重：`uv run stringgraph search "rank inequality"` 与 `search b26` 均无命中；
+  `search spanning` 只命中 worldsheet.ddf-spanning-hypothesis 族，均不含本卡的秩不等式表述。
+
+  【D = 26 在哪里进入，与 Kac 退化点的硬事实（formal/BLUEPRINT-noghost.md §B′.9 第 3 条）】
+  `dim D_N = p_{D−2}(N)`（worldsheet.transverse-ddf-fock-gram-matrix 一侧，formalized，
+  Lean `finrank_ddfSpan_inf_towerBigrade`，**从不求值分拆数**）而 `dim H_N` 上界待定
+  （待 formal/BLUEPRINT-noghost.md PR3/PR4 完成后才有 `dim H_N ≤ p_{D−1}(N)` 的机检版本，
+  目前未形式化）。**不存在**「对每个 N 找一个层真空上的奇异向量」这条捷径：
+  `c = 26` 的 Kac 退化点 `h_{1,s}(26) = −(s+4)(s−1)/6` 与质壳 `h = 1 − N` 只在
+  `N = 1, 2, 5, 7, …`（对应 `s = 1, 2, 4, 5, …`）相交；`N = 3, 4` 处 `V(26, 1−N)` 的
+  Kac 行列式**不为零**——与 `formal/StringFormal/Virasoro/FockFreeLowLevel.lean` 的
+  `kacDet₃_massShell_26 = 2304 ≠ 0`、`kacDet₄_massShell_26 = 2649563136 ≠ 0` 一致
+  （`kacDet₁_massShell_26 = kacDet₂_massShell_26 = 0` 对应 `N = 1, 2` 处退化点确实命中）。
+  ⇒ 零态在一般 N **不是**「层真空上的奇异向量下降」，而是**整片 V_N 上的解空间**：
+  N = 2 的 26 个零态里只有 1 个来自层真空奇异向量
+  （`(2L_{−2}+3L_{−1}²)|0;p_{−2}⟩`，物理性靠 `9α−6β = 3(3α−2β)` 这一条比例关系，
+  用到 `c=26, h=−1`），24 个是 DDF 后代，1 个是 `L_{−1}((b−b̃)·α_{−1})|0;p_{−2}⟩`。
+  任何「对每个 N 造一个奇异向量」的证明计划都会在 N = 3, 4 处撞墙；
+  本卡的秩不等式表述刻意不预设这条捷径存在。
+
+  【与 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 (B-26) gap 的关系】
+  同一条缺口的另一种措辞：那条 gap 说「H_phys 中 H^⊥ 之外的 p_{D−1}(N) − p_{D−2}(N) 个
+  方向在 D = 26 时恰为零模态」，本卡是它的秩不等式形式。两者**不合并**——那条 gap
+  记账在推导内部（--via-goddard-thorn 的 gaps 数组），本卡是可被独立 depends_on 的陈述节点。
+
+  【与 worldsheet.ddf-spanning-hypothesis 的关系】本卡逐 N 成立当且仅当该卡在对应反对角片上
+  的分片版 `DDFSpansOn` 成立（`ddfSpansOn_bigrade_iff_b26`，等价不是加强）；
+  该卡 notes 的【分片版与拼装缺口】已记录「逐片 ⇒ 全体」的拼装引理（`Glue.lean`）已就位，
+  故「本卡对一切 N 成立」与该卡的断言（对全塔成立）现在**逐字等价**（modulo `CharZero R`
+  把片索引从 `(rung j, level N)` 压缩到反对角线 `j = −N` 这一步，`Glue.lean` 已处理）。
+author: curator
+created: "2026-09-12"
