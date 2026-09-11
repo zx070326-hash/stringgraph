@@ -74,6 +74,7 @@ StringFormal/
   Math/MobiusJacobian.lean   Möbius 三点固定 Jacobian（Vandermonde n=3，det = −z₁₂z₁₃z₂₃）；Mandelstam s+t+u = Σm²（任意对称双线性型）
   Math/FiniteCounts.lean    六边形奇数扭转数 Σ_{k odd} C(6,k) = 32（GS (12c) 的"32"）；**GSO 扇区穷举**（Polchinski §10.6 (a)(b)(c) 字面有 10 解，maximal 者恰 6 个 = IIA/IIB/IIA′/IIB′/0A/0B——"maximality" 是原书未明说的第四条件）
   Math/AnomalyPolynomial.lean  Polchinski (12.2.27)+(12.2.28) ≡ (12.2.11)+(12.2.12)（`ring`，同时验证 ADT (7)）；IIB 引力反常整数解 (2,−2,1) 射线（三式秩 2 非 3）；GS (20) = −96 × Polchinski 引力部分
+  Math/IIBAnomalyUnique.lean  Bilal (12.4) 的 3×3 整数矩阵 A（行 = tr R⁶ / tr R⁴tr R² / (tr R²)³ 的系数）：**显式线性关系 2r₁+3r₂−5r₃ = 0**（两本书都只说"线性相关"不给关系）、det = 0、2×2 子式 −720（三者对**任意交换环**）、**ker A = ℚ·(2,−2,1)** 与整数版 ker_ℤ A = ℤ·(2,−2,1)、`rank_ℚ A = 2`（秩–零化度，非子式）。独立于 AnomalyPolynomial.lean 重证核，只 import Mathlib
   Math/E8Roots.lean       E₈ 240 根显式列表；幂和 Σ(α·x)^k = 60Σx² / 36(Σx²)² / 30(Σx²)³ 对**任意 x ∈ ℚ⁸**（分块 + 符号二项展开，避免 240 项 ring）；⇒ (12b′)(12c′)。**Tr₂₄₈ = 根幂和 + Chevalley 限制**是 docstring 假设不在 Lean 内
   Math/GreenSchwarzAlgebraGen.lean  GS 因子化在**任意交换 ℚ-代数**上（scope 修正：Ω 形式活在带幂零元的环，非域；技巧：`h48 : 48 * algebraMap ℚ R (1/48) = 1` 由 `map_ofNat`+`norm_num`，再 `linear_combination`）；`mixed_anomaly_so_each_gives_32`、`tr_f6_usp_ge_33`
   NoGhost/FockGram.lean            创生单项式 Gram 矩阵对角、`∏ n^d d!`；条件版 `pairing_creationMonomial_of_hypotheses`（任意双线性型 + (H2)(H3)(H4)）；`ZMod 2` 退化反例（需特征零）

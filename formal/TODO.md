@@ -192,7 +192,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   IIB 超引力实现的小整数 `(2, −2, 1)` 上。建议写进
   `consistency.iib-gravitational-anomaly-cancels` 的 `gaps` 或 `notes`。
 
-- [ ] **A8′ —— IIB 引力反常抵消的完整线性代数（唯一性）**。图侧接口已建：
+- [x] **A8′ —— IIB 引力反常抵消的完整线性代数（唯一性）**。图侧接口已建：
   陈述 `consistency.iib-anomaly-solution-unique`，推导 `--via-linear-algebra`
   （physical-argument，待 reviewer 复核后升 rigorous）。
   设 `A : Matrix (Fin 3) (Fin 3) ℤ` 的行为 `(−495, 1, 992)`、`(225, 1, −448)`、`(−63, 1, 128)`
@@ -215,6 +215,31 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   - 附带已复算（**不必进 Lean，也不是图上的断言**）：`A` 的 Smith 不变因子是 `(1, 144, 0)`。
   - 形式化后：把 `formal.lean_decl` 挂到**陈述卡** `consistency.iib-anomaly-solution-unique`，
     并按本图惯例**新增**一条 `--via-lean` 推导（不覆盖纸上的 `--via-linear-algebra`）。
+
+  **已完成（2026-09-11）**，新文件 `StringFormal/Math/IIBAnomalyUnique.lean`（独立小岛，只 import
+  Mathlib；**不** import `AnomalyPolynomial.lean`，(iii) 在本文件内自成一体地重证，不从 A8 借）。
+  矩阵与解向量对任意 `CommRing R` 定义：`iibAnomalyMatrix R`、`iibSolutionVector R = ![2, -2, 1]`。
+  - **(i)** `iib_rows_relation (R) : (2:R) • A 0 + (3:R) • A 1 - (5:R) • A 2 = 0`——
+    **任意交换环**上成立（系数关系是整数恒等式，与基环无关）。
+  - **(ii)** `iib_det_zero (R) : (iibAnomalyMatrix R).det = 0`（任意交换环）；
+    `iib_rank_eq_two : (iibAnomalyMatrix ℚ).rank = 2`。秩走**秩–零化度**，不是子式：
+    先证 `iib_ker_mulVecLin : ker (mulVecLin A) = span ℚ {(2,-2,1)}`，
+    再 `finrank_span_singleton` + `LinearMap.finrank_range_add_finrank_ker` + `omega`。
+    见证子式另存为 `iib_minor_01_01_det (R) : A 0 0 * A 1 1 - A 0 1 * A 1 0 = -720`（任意交换环）。
+  - **(iii)** `iib_kernel_eq (x : Fin 3 → ℚ) : A *ᵥ x = 0 ↔ ∃ t : ℚ, x = t • ![2,-2,1]`，
+    以及整数版 `iib_kernel_eq_int`（同一陈述换成 ℤ，`omega`）。
+    ⇒ 卡片 (iii) 的 `ker_ℚ` 与 `ker_ℤ` 两句**都**有独立 Lean 定理，不必只靠 A8 的重述。
+  - 辅助：`iib_mulVec_apply`（`A *ᵥ x` 的显式三分量）、`iib_mulVec_eq_zero_iff`
+    （`A *ᵥ x = 0` ↔ Bilal (12.4) 的三条标量方程，任意交换环）、`iibSolutionVector_ne_zero`。
+  - 公理检查：10 条声明全部 `ok`，只有 `propext` / `Classical.choice` / `Quot.sound`。
+  - ⚠ **给图的两条提醒**（本轮未改 `graph/`）：
+    (a) `--via-lean` 推导的 `depends_on` **不需要**指向
+        `consistency.iib-gravitational-anomaly-cancels`：Lean 侧把 (i)(ii)(iii) 一并证了，
+        对那张卡只剩「三行系数取自何处」的**来源**关系，那属于 `sources` 而非 `depends_on`
+        （纸上的 `--via-linear-algebra` 那条依赖照旧保留，两条推导本就独立）。
+    (b) 卡片 (ii) 写「等价地，在任何特征零的域上秩为 2」——Lean 只证了 `ℚ`。
+        推广到任意特征零域是直接的（同一秩–零化度论证，`720 ≠ 0` 即可），但**未写进 Lean**，
+        接线时 `lean_decl` 只能担保 `ℚ` 那一句；若要担保全称版本需再加一条定理。
 
 - [x] （附带，不属 A8/A9）`gs_gravitational_twelve_form_eq_polchinski`：
   Polchinski (12.2.27) 的**纯引力部分**（令三个规范迹为零）等于 `−1/96` 乘 GS 1984 (20)，
