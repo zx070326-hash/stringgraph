@@ -1,0 +1,137 @@
+id: worldsheet.ddf-spanning-hypothesis--via-rank-inequalities
+target: worldsheet.ddf-spanning-hypothesis
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-spanning-rank-inequality
+    inferred: false
+    note: |
+      **条件命题的前件，不是证明步骤——本推导真正的量词方向是 ∀N。** Lean 声明
+      `ddfSpans_of_forall_b26 (h : ∀ N : ℕ, B26 η a b hη Ε N) : DDFSpans η a b hη Ε`
+      把「本卡对每个 N 成立」逐字作为假设参数 `h`，证明体第一步就是
+      `ddfSpansOn_bigrade_of_b26 hbb hba (h N)`（对每个 N 代入 `h N`）。**非 inferred**。
+      ⚠ **该卡 open（刻意无推导）会把本推导的 effective 压到 open——这是刻意且正确的记账**：
+      与 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean 对
+      worldsheet.ddf-spanning-hypothesis 本身的处理同型，本推导自身 status 仍是 formalized
+      （Lean 无 sorry），工具会同时显示 own=formalized / effective=open，两者都对。
+      **不要**为抬高 effective 而删这条边或给前件挂弱推导——那正是本推导存在的意义：
+      把「困难的整塔张成假设」逐字压成「困难的逐 N 秩不等式假设」，猜想负担搬了位置，
+      没有被抹去。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **DDF 态是物理态**：`ddfSpan_le_towerPhysSubmodule`（LightCone.lean），在
+      `ddfSpansOn_bigrade_of_b26` 的证明里给出 `hS : ddfSpan ⊓ V_N ≤ H_phys ⊓ V_N`
+      （`inf_le_inf_right _ (ddfSpan_le_towerPhysSubmodule …)`）。
+      与 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean 的同名边
+      引用同一条 Lean 引理、同一映射关系。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      **两条引理都来自这张卡记录的零态结构**：(1) `towerNullSubmodule_le_towerPhysSubmodule`
+      （TowerNull.lean）给出 `hT : towerNullSubmodule ⊓ V_N ≤ H_phys ⊓ V_N`；
+      (2) `towerPairing_self_eq_zero_of_mem_towerNullSubmodule`（同文件）在
+      `ddfSpan_inf_towerNullSubmodule_eq_bot` 的证明里把零态的自配对判零，
+      与 `ddf_span_pos` 的假设为正矛盾，逼出 `hdisj : D_N ⊓ Z_N = ⊥`。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    inferred: false
+    note: |
+      **DDF 扇区正定**：`ddf_span_pos`（DDFGram.lean，该卡 --via-lean 推导 summary 第四步
+      登记的同一条结论）在 `ddfSpan_inf_towerNullSubmodule_eq_bot` 的证明里给出
+      「0 ≠ x ∈ ddfSpan ⇒ ⟨x,x⟩ > 0」，是判定 `D_N ⊓ Z_N = ⊥` 的另一半（配合上面
+      的零态自配对为零）。⚠ 这是本推导链条上**唯一用到序结构**（`[LinearOrder K]
+      [IsStrictOrderedRing K]`）的地方——`B26` 本身（上一条边）不含序，`ddfSpansOn_bigrade_of_b26`
+      的结论也不含序，序只出现在这一步的证明内部，与 `formal/BLUEPRINT-noghost.md`
+      「B′ 订正」第 4 条的记账逐字一致。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/SliceRank.lean :: StringFormal.NoGhost.ddfSpans_of_forall_b26（目标声明，第 200 行，依赖 ddfSpansOn_bigrade_of_b26 第 172 行、ddfSpan_inf_towerNullSubmodule_eq_bot 第 126 行、eq_sup_of_finrank_le 第 98 行）；消耗 formal/StringFormal/NoGhost/Glue.lean :: StringFormal.NoGhost.ddfSpans_of_forall_antidiagonal_slice_int（拼装引理，把逐片结论组装成整塔 DDFSpans）"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（分支 agent/formalizer/general-n-pr012，
+      经提交 9328c03 合入 main）。**curator 未自行重跑 `lake build`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+      **`eq_sup_of_finrank_le`（第 98 行）是纯抽象线性代数**（`S,T ≤ H`、`S⊓T=⊥`、
+      `dim H ≤ dim S + dim T` ⇒ `H = S⊔T`，只用 `Submodule.finrank_sup_add_finrank_inf_eq` 与
+      `Submodule.eq_of_le_of_finrank_le`），**不对应图上任何物理陈述卡**，不单列为依赖边——
+      它与 Mathlib 的秩–零化度定理属于同一层级的背景数学，不是本项目的物理论证内容。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献直接断言整塔张成，不经过逐片秩不等式"
+    note: |
+      **不承载本推导的论证**。逐片秩不等式改写是本项目为形式化引入的中间步骤
+      （`formal/BLUEPRINT-noghost.md` §B′），文献没有对应表述。
+summary: |
+  机器检查的证明，两层，全部在 formal/StringFormal/NoGhost/SliceRank.lean（消耗 Glue.lean 一条引理）。
+
+  **第 1 层（单片：`ddfSpansOn_bigrade_of_b26`，`B26 N` ⇒ 片 V_N 上张成）。**
+  给定 `h : B26 η a b hη Ε N`（即 dim H_N ≤ dim D_N + dim Z_N），构造三个输入：
+    hS : D_N ≤ H_N（`ddfSpan_le_towerPhysSubmodule` 逐点交集单调化）；
+    hT : Z_N ≤ H_N（`towerNullSubmodule_le_towerPhysSubmodule` 同样单调化）；
+    hdisj : D_N ⊓ Z_N = ⊥（`ddfSpan_inf_towerNullSubmodule_eq_bot`：非零 DDF 态范数 > 0
+      由 `ddf_span_pos`，零态自范数 = 0 由 `towerPairing_self_eq_zero_of_mem_towerNullSubmodule`，
+      两者矛盾排除交集非零元）。
+  抽象判据 `eq_sup_of_finrank_le hS hT hdisj h` 给出 H_N = D_N ⊔ Z_N，
+  两边分别用 `le_sup_of_le_left` / `le_sup_of_le_right` 塞进 `DDFSpansOn` 的定义
+  （H_N ≤ D_N ⊔ Z_N 的宽松版，实际拿到的是等式）。
+
+  **第 2 层（拼装：`ddfSpans_of_forall_b26`，∀N 片张成 ⇒ 整塔张成）。**
+  给定 `h : ∀ N, B26 η a b hη Ε N`，对每个 N 代入第 1 层得到片 V_N 上的 `DDFSpansOn`；
+  再调用 `Glue.ddfSpans_of_forall_antidiagonal_slice_int hbb hba (fun N => …)`
+  把「对每个反对角片 (−N, N) 都张成」组装成整塔的 `DDFSpans`
+  （`Glue.lean` 的拼装机制：物理子模 = 其双分次齐次分量之上确界 + `CharZero R` 下
+  只剩反对角线一条自由指标，见 worldsheet.ddf-spanning-hypothesis notes 的
+  【分片版与拼装缺口】一节，2026-09-11 已关闭）。
+
+  【关于 `ddfSpansOn_bigrade_iff_b26`（本推导不用它，但需要记一句）】
+  `SliceDim.lean` 另证 `ddfSpansOn_bigrade_iff_b26 : DDFSpansOn … V_N ↔ B26 … N`。
+  这是**等价改写，不是加强或减弱**——`B26` 与「片 V_N 上张成」逐字互相蕴含。
+  本推导只用了「⟸」方向（`ddfSpansOn_bigrade_of_b26`），因为拼装只需要单向；
+  「⟹」方向（`b26_of_ddfSpansOn_bigrade`）在这条推导链上未被消费，
+  它的意义是确认 `B26` 没有比原始分片张成假设**丢失任何信息**
+  ——即秩不等式改写是忠实的，不会不小心引入一条更强或更弱的假设。
+gaps:
+  - |
+    **本推导的 effective 正确地是 open，因为它的核心前提是 open。** 这不是缺口，是记账：
+    worldsheet.ddf-spanning-hypothesis 原本唯一的非机检假设「整塔 H_phys ⊆ D(Ε)+H_null」，
+    经本推导后变成唯一的非机检假设「∀N，B26 N」（worldsheet.ddf-spanning-rank-inequality）。
+    **猜想负担的位置变了，大小没有变。**
+  - |
+    **`Glue.ddfSpans_of_forall_antidiagonal_slice_int` 没有对应的图节点**。它是
+    `formal/StringFormal/NoGhost/Glue.lean` 的拼装引理（把 worldsheet.ddf-spanning-hypothesis
+    notes 记录的「逐片 ⇒ 全体」缺口关闭掉的那条定理），但图上从未为 `Glue.lean` 的任何单条
+    定理单独立卡——`Glue.lean` 里的引理被当作 worldsheet.ddf-spanning-hypothesis 本身
+    notes 的一部分记录（【分片版与拼装缺口】一节），而非独立的可 depends_on 陈述节点。
+    本推导直接消费它但**不**把它列为 depends_on（它不是一条独立的物理断言，是纯粹的
+    「直和分解」格论引理，性质上与 `eq_sup_of_finrank_le` 类似）；如果将来需要单独追踪
+    `CharZero R` 这一额外类型类假设在哪里进入，应该在此处或 worldsheet.ddf-spanning-hypothesis
+    的 notes 里补一张定义卡，而不是回填本推导的 depends_on。
+  - |
+    **`D = 26` 完全不出现在本推导自身**（`SliceRank.lean`、`Glue.lean` 均如此），
+    它整体被吸收进 worldsheet.ddf-spanning-rank-inequality 这一张卡（`B26` 的 `Prop` 内容）。
+    这与 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean 的记账风格一致：
+    「D=26 全部在前件里」这句话现在对本推导链条也成立，只是前件从
+    `DDFSpans` 换成了 `∀N, B26 N`。
+  - |
+    **一般交换 Q-代数搭配单独一层序**：`B26` 本身不含序（见该卡 sources 的 §B′ 订正引用），
+    序只在 `ddfSpan_inf_towerNullSubmodule_eq_bot` 这一步的证明内部使用
+    （worldsheet.transverse-ddf-fock-gram-matrix 那条边的 note 已指明）。
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **`worldsheet.ddf-operators-v6` 不单列为边**：`ddfSpan`（B26 定义里的 D_N）由 v6 的
+  模态和算子生成，但本推导的证明体不直接调用任何 `ddfOp_*` 引理——ddfSpan 的构造已经
+  打包进 worldsheet.ddf-spanning-rank-inequality（B26 本身）与
+  worldsheet.transverse-ddf-fock-gram-matrix（ddf_span_pos）两条边，按
+  worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean 已确立的接口边裁决
+  （「只提供语境不承担论证的边不得存在」），不再重复列出。
+
+  **本推导与 worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean 是姊妹推导**：
+  后者把「给定 DDFSpans」的无鬼定理压成机检，前者把「DDFSpans 本身」压成机检
+  （只剩 ∀N B26 N 未证）。两条推导拼起来，无鬼定理链条目前唯一剩余的非机检输入变成了
+  **worldsheet.ddf-spanning-rank-inequality**，而不再是整条 worldsheet.ddf-spanning-hypothesis
+  ——猜想负担被本推导**精确定位**到了一条逐 N 的有限维秩不等式上，
+  且该不等式已知不能靠「每个 N 一个层真空奇异向量」这条捷径解决
+  （见 worldsheet.ddf-spanning-rank-inequality notes 的 Kac 退化点硬事实）。
+author: curator
+created: "2026-09-12"
