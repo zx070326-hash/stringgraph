@@ -5,6 +5,7 @@ Authors: stringgraph lean-formalizer
 
 Written from scratch against Mathlib `v4.33.1`; not a port of any existing formalisation.
 -/
+import Mathlib.Data.ZMod.Basic
 import StringFormal.NoGhost.Fock
 
 /-!
@@ -53,6 +54,9 @@ unconditional theorem.
 * `Fock.linearIndependent_creationMonomial` -- the creation monomials are linearly
   independent (over any ground ring; in particular over an ordered field, where it also
   follows from positive definiteness).
+* `Fock.pairing_creationMonomial_self_eq_zero_zmod_two` -- a degeneracy witness: over
+  `ZMod 2` the state `(α^1_{-1})^2 |0⟩` has norm `2! = 0`, so the card's "ordered field"
+  hypothesis in conclusion (2) is doing real work (it forces characteristic zero).
 
 ## Mathematical notes (for the dependency graph)
 
@@ -67,7 +71,12 @@ unconditional theorem.
    *theorems*.  So this file certifies the card's conclusion, and shows the hypothesis set is
    consistent, but it does not certify that (H1)-(H4) hold for the *DDF* operators -- that is
    a separate obligation discharged elsewhere in the no-ghost island.
-3. Positivity needs `η > 0` componentwise.  With the mostly-plus Minkowski metric this fails
+3. Conclusion (1) of the card (orthogonality plus the diagonal formula) holds over an
+   arbitrary commutative ring; conclusion (2) (orthogonal basis, positive definiteness) does
+   not.  Beyond an order on `R` it needs the diagonal entries `∏ n^{d} d!` to be nonzero in
+   `R`, i.e. characteristic zero: see
+   `pairing_creationMonomial_self_eq_zero_zmod_two`.  The card should record this.
+4. Positivity needs `η > 0` componentwise.  With the mostly-plus Minkowski metric this fails
    in the timelike direction (`Fock.pairing_X_X_minkowski_timelike`), which is precisely why
    the no-ghost theorem is about the *transverse* sector.
 
@@ -363,6 +372,35 @@ theorem foldr_creation_vacuum (l : List (Osc D)) (d : Osc D →₀ ℕ)
         conv_lhs => rw [← hadd]
         rw [creationMonomial_add_single]
       rw [List.foldr_cons, ih _ hcount, key]
+
+/-! ### A degeneracy witness in positive characteristic
+
+Conclusion (1) of the graph card holds over an arbitrary commutative ring, but conclusion
+(2) — nonvanishing diagonal entries, hence an orthogonal *basis* and positive definiteness —
+needs more than "the diagonal entries are positive integers": it needs those integers to be
+nonzero *in* `R`.  Over an ordered field this is automatic (characteristic zero), but in
+characteristic `p` the form genuinely degenerates, already at level `2`:
+`(α^μ_{-1})^2 |0⟩` has norm `2! = 2`, which vanishes over `ZMod 2`.
+-/
+
+theorem monomialNorm_single (η : Fin D → R) (v : Osc D) (k : ℕ) :
+    monomialNorm η (Finsupp.single v k) = oscWeight η v ^ k * (k.factorial : R) :=
+  Finsupp.prod_single_index (by simp)
+
+/-- **The positivity half of the card fails in positive characteristic.**  Over `ZMod 2`,
+with the positive-definite metric `η = 1`, the creation monomial `(α^1_{-1})^2 |0⟩` is a
+nonzero vector of norm `0`, so the Gram matrix of creation monomials is degenerate and the
+family, though still linearly independent, is not an orthogonal basis for a nondegenerate
+form.  The hypothesis "`R` is an ordered field" in the graph card's conclusion (2) is
+therefore doing real work (it forces characteristic zero); orthogonality and the diagonal
+formula, conclusion (1), are unaffected. -/
+theorem pairing_creationMonomial_self_eq_zero_zmod_two :
+    pairing (1 : Fin 2 → ZMod 2)
+        (creationMonomial (ZMod 2) (Finsupp.single ((1 : Fin 2), (1 : ℕ+)) 2))
+        (creationMonomial (ZMod 2) (Finsupp.single ((1 : Fin 2), (1 : ℕ+)) 2)) = 0 := by
+  rw [pairing_creationMonomial_self, monomialNorm_single]
+  simp only [oscWeight, Pi.one_apply, mul_one, Nat.factorial_two]
+  decide
 
 end Fock
 

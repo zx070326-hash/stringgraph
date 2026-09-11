@@ -412,6 +412,45 @@ A8/A9 对应 Polchinski 抽取记录 `literature/extractions/polchinski-1998-v2-
   注意：Mathlib v4.33.1 **已无** `LinearOrderedField` 类，有序域写作
   `[Field K] [LinearOrder K] [IsStrictOrderedRing K]`；证明只需有序环，域与全序都用不上。
   公理检查：全部声明只用 propext / Classical.choice / Quot.sound。
+- [x] `fock-gram`：振子 Fock 空间上**产生单项式的 Gram 矩阵**，即图卡
+  `worldsheet.transverse-ddf-fock-gram-matrix`（(H1)–(H4) 下的条件命题）在 `Fock D R` 上的实例。
+  见 `StringFormal/NoGhost/FockGram.lean`（不改 `Fock.lean`，只加新文件）：
+  - `creationMonomial R d`（`d : Osc D →₀ ℕ`）= `∏_{(μ,n)} (α^μ_{-n})^{d(μ,n)} |0⟩`；
+    `creationMonomial_eq_monomial`（= `monomial d 1`）、`creationMonomial_zero` /
+    `_single` / `_add_single`（递归刻画：逐个作用产生算子）、
+    `creationMonomial_mem_levelSubmodule`（level = `Σ n·d(μ,n)`）。
+  - (H1)：`commute_creation`（`Module.End` 里的 `Commute`）与
+    **`foldr_creation_vacuum`**——沿**任意**枚举多重集 `d` 的列表逐个作用产生算子，结果相同，
+    这是「乘积只依赖多重集」的精确含义（用 `List.count` 表述列表枚举 `d`）。
+  - 第 (1) 步 Leibniz：**`annihilation_creationMonomial`**
+    `α^μ_n ∏(α_{-m})^d |0⟩ = n η^{μμ} d(μ,n) · ∏(α_{-m})^{d-δ} |0⟩`，
+    以及 `annihilation_creationMonomial_add_single`（递归形，系数 `n η^{μμ}(d(μ,n)+1)`）、
+    `annihilation_creationMonomial_of_apply_eq_zero`。
+  - 第 (2) 步：`pairing_creationMonomial_add_single`（由伴随性 + 第 (1) 步得到的递推）与主结论
+    **`pairing_creationMonomial`**：`⟨mono d, mono e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} d(μ,n)!`
+    （`monomialNorm`），加 `_of_ne` / `_self`；`monomialNorm_one` 与
+    `pairing_creationMonomial_one` 给 η ≡ 1（横向/正定）时图卡字面的 `∏ n^{d} d!`。
+  - **`pairing_creationMonomial_of_hypotheses`**：条件版，对**任意**满足 `⟨0|0⟩ = 1`(H4) 与
+    产生/湮灭互为伴随 (H2)(H3) 的双线性型 `B` 成立（经 `Fock.pairing_unique`）。
+    这条才是图卡的忠实 Lean 对应——**`Fock.pairing` 是按单项式基对角地*定义*的**，
+    所以 `pairing_creationMonomial` 本身廉价，数学内容在 `pairing_unique` 与这条条件版里。
+    图侧推导应引这条，不要引对角那条。
+  - 第 (3) 步：`monomialNorm_pos` / `pairing_creationMonomial_self_pos`（有序环，需 `∀ μ, 0 < η μ`）、
+    `pairing_self_pos_of_ne_zero`（全序环上**正定**：η > 0 时整个 Fock 空间无零/负模态）；
+    `linearIndependent_creationMonomial` 与 `basisMonomials_eq_creationMonomial`
+    （线性无关对**任意**基环成立，比「有序域上由正定推出」更强）。
+  - **正特征退化（新发现）**：`monomialNorm_single` 与
+    **`pairing_creationMonomial_self_eq_zero_zmod_two`**——`ZMod 2` 上（η ≡ 1）
+    `(α^1_{-1})²|0⟩` 的模为 `2! = 0`。图卡结论 (1) 对**任意交换环**成立，
+    但结论 (2)（正交基 + 正定）除了序之外还需要对角元 `∏ n^d d!` 在 R 中非零，
+    即**特征 0**（有序域自动满足）。图卡应将此记入 notes/边界。
+  公理检查：25 条声明全部 `ok`，只用 `propext` / `Classical.choice` / `Quot.sound`
+  （`--import StringFormal.NoGhost.FockGram --all`，2026-09-11）。
+  **数学缺口（对图）**：(a) 本文件把 (H1)–(H4) 证成了*定理*，因此证明了图卡的结论并说明假设集自洽，
+  但**没有**证明 DDF 算子满足 (H1)–(H4)——那是无鬼岛里另一项义务；
+  (b) 正定性要求 η 逐分量为正，mostly-plus Minkowski 的类时方向不成立
+  （`Fock.pairing_X_X_minkowski_timelike`），这正是无鬼定理只谈**横向**扇区的原因；
+  (c) 零模（动量 `k`）、完化、复埃尔米特版本的缺口与 `Fock.lean` 文件头相同，未新增。
 - [x] `physical-states`：`H_phys` 子模与零模态。
   见 `StringFormal/NoGhost/PhysicalStates.lean`（约 800 行，无 sorry，公理只有标准三条）。
   截距记作 `a₀ : R`（`a` 已被零模参数占用；符号按 `conv.intercept-sign-a`）。做到：
