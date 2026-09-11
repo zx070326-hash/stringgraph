@@ -182,5 +182,40 @@ notes: |
   · worldsheet.ddf-hypotheses-satisfiable（proposition, formalized）：断言 (F1)(F2)(F3)(F5) 加
     ε·ε = 1 与质壳可同时满足。本卡的【非空性】比它多要 (F4)(F6)(F8)，少要「ε 是单个向量」；
     两者的见证是同一组向量。**没有重复**：那张卡是可满足性命题，本卡是定义。
+
+  【2026-09-12 追记（curator，分支 agent/curator/pr34-wire，PR3 落地后）：【不断言】(c) 的
+  「线性无关/基/系数唯一」三件事，其中两件半现已在 Lean 里有定理，但仍不构成对 (c) 的推翻】
+  formal/StringFormal/NoGhost/LightConeResolutionGen.lean（蓝图 §B′ PR3）新增两条定理，
+  都建在本卡的标架对象 `DDFLightConeFrame η a b`（本卡 formal.lean_decl）之上：
+  · **`DDFLightConeFrame.frame_decomp_coeff`**（任意 `[CommRing R]`，**不需要** `[Field R]`、
+    `[Algebra ℚ R]`、`hD : 2 ≤ D` 中的任何一条）：若 e = λ•b + μ•b̃ + Σᵢ cᵢ•εᵢ，
+    则系数**唯一且有显式公式** λ = −(b̃·e)、μ = −(b·e)、cⱼ = εⱼ·e（配对读出，六个收缩
+    (F2)(F4)(F5)(F7)(F9) 够用，不涉及除法）。
+  · **`span_range_frameVec_eq_top`**（同样 `[CommRing R]`，只额外要 `hD : 2 ≤ D`）：
+    {b, b̃, ε_1, …, ε_{D−2}} 的 R-张成是全空间——即张成本身现在**是定理**（(F8) 完备性
+    的一个更强、去范围限制的版本：本卡 (F8) 只要求 (a−b)^⊥ 里的向量可分解，这条定理是
+    **任意** e ∈ Fin D → R 可分解，走 `DDFLightConeFrame.exists_frame_decomp`+`towerMomentum_neg_one_eq`
+    从 (F8) 推出，不是独立假设）。
+  ⇒ **这把 (c) 精确拆成了三件事，两件已解决**：「分解系数一旦给定就唯一」（frame_decomp_coeff，
+  已证）与「标架张成全空间」（span_range_frameVec_eq_top，已证）都不再是空白；剩下**唯一没有
+  的**是「{b, b̃, ε_i} **线性无关**」本身（即张成映射 `frameVec F : Fin D → (Fin D → R)` 是单射
+  ——不能仅从上面两条定理导出：唯一分解系数定理只说「若某分解存在则系数唯一」，不排除
+  frameVec 的值域比预期低维、系数式在秩亏时仍可能对某些 e 给出「唯一但错误」的读数）。
+  ⚠ **本条不改动 (c) 的文字**（陈述不可变）：(c) 原文「不断言线性无关或构成基」仍然为真，
+  只是现在能更精确地说**哪一部分**尚缺——「构成基」= 张成（已证）+ 线性无关（仍缺）。
+  【与 b̃ = b − a 的关系】(F4) 只给 b̃ ∈ span{a,b} 与配对条件，**不**单独钉死 b̃ 的具体系数；
+  `DDFLightConeFrame.two_mul_conjSpan_coeff_right` 证 2γ = η(a,a)（γ 是 b̃ 的 b-系数），
+  故 **b̃ = b − a**（γ=1，配合 β=−1）需要 **`(2:R)` 可逆或至少非零因子**（char ≠ 2）**且**
+  η(a,a) = 2（快子壳，见本卡【curator 手算】(ii)）两个条件同时成立；`frame_decomp_coeff`/
+  `span_range_frameVec_eq_top`（分解唯一性与张成本身）**不需要这两条中的任何一条**——
+  这是本卡「张成/唯一性」与「b̃ 的具体值」两件事在类型类需求上的又一处分离
+  （呼应上面【为什么曾经不是 formalized】一节记录的 (F4) span-only vs. `conj_eq_light_sub_momentum`
+  的 `[Field][Algebra ℚ]` 版本之间的落差；`LightConeResolutionGen.lean` 文件头把这一点
+  写成了独立的「deviation 1」）。
+  【图上不新建卡】上述两条定理都以本卡的标架对象为前提对象，不引入本卡未声明的新数据，
+  故记为本卡 notes 的补充而非新节点；worldsheet.light-cone-monomials-span-fock-level 是
+  另一条相关但不同的张成定理（它是 Fock 空间 level-N 分量被光锥**单项式**张成，本条是
+  标架**向量本身**（`Fin D → R` 里 D 个方向向量）张成整个坐标空间 `Fin D → R`——前者在
+  MvPolynomial 层，本条在线性代数层，两者不可合并）。
 author: curator
 created: "2026-09-11"
