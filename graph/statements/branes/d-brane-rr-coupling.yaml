@@ -7,15 +7,16 @@ statement: |
     **∫_{世界体} C_{p+1}**                                             (13.2.7)
   （原书 (13.2.7) 不带系数；系数 μ_p 在 (13.3.5) 才引入，其值见 branes.d-brane-rr-charge-value）。
   由于 T 对偶可以把 Dp 膜变成任意 p 的 D 膜，
-    IIA（p 偶）需要 C_1, C_3, C_5, C_7, C_9；IIB（p 奇）需要 C_0, C_2, C_4, C_6, C_8, C_10。
-  其中前四个（IIA 的 C_1, C_3 及其磁对偶 C_7, C_5；IIB 的 C_0, C_2, C_4 及其磁对偶 C_8, C_6）
-  对应传播的 R–R 态；**C_10 无传播自由度**，其存在与耦合 (13.2.7)（积分跑遍全时空）
-  由 §10.8 的 type I 发散分析推出，并解释为 D9 膜；**C_9 无传播自由度**（有质量 IIA 超引力，§12.1），
-  由 D8 膜的存在要求。
+    IIA（p 偶）需要 C_1, C_3, C_5, C_7, C_9；IIB（p 奇）需要 C_2, C_4, C_6, C_8, C_10。
+  两组各自的**前四个**来自传播 R–R 态的电或磁描述（原文：「The first four arise in either the electric
+  or magnetic description of the propagating R–R states」）；**C_10 无传播自由度**，其存在与耦合 (13.2.7)
+  （积分跑遍全时空）由 §10.8 的 type I 发散分析推出，并解释为 D9 膜；**C_9 无传播自由度**
+  （有质量 IIA 超引力，§12.1），由 D8 膜的存在要求。
   Dp 膜是 F_{p+2} = dC_{p+1} 的**电源**，同时是 ∗F_{p+2} = F_{8−p} = dC_{7−p} 的**磁源**
   ——即 Dp 膜与 D(6−p) 膜互为电–磁对偶（(13.2.8a)(13.2.8b)）；在磁源处 Bianchi 恒等式失效，
   势不能整体定义，须引入 Dirac 弦或分片势。
-  IIB 另有 C_0 耦合的「(−1)-膜」= D-instanton（全部方向 Dirichlet，含时间）。
+  IIB 另有 0-形式势 C_0 耦合的「(−1)-膜」= D-instanton（全部方向 Dirichlet，含时间；
+  原文逐字（p. 142）「This should couple to a '(−1)-brane.'」；它不在上面由 T 对偶得到的表里）。
 
   **本命题不断言**：
   (a) μ_p 的数值（branes.d-brane-rr-charge-value）；

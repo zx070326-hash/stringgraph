@@ -22,6 +22,9 @@ sources:
       逐字（(13.3.5) 之后）：动能项正则归一 ⇒ 传播子 2κ₁₀²i/k²。
       ⚠ κ 与 κ₁₀ 不是同一个数（§1.3：「this differs from the physically measured κ because the latter
       depends on the dilaton background」）——本卡的 μ_p 用 κ₁₀、τ_p 用 κ，二者相差 e^{Φ₀}。
+  - ref: polchinski-1998-v2
+    loc: "§13.3, (13.3.17) 之后一句，pp. 149–150：「We are not keeping track of the normalization but one could, with the result μ_p = μ_{p−1}/2πα'^{1/2} in agreement with the explicit calculation.」（R–R 荷的 T 对偶递推）"
+    note: 抽取记录 #E21（L1）。递推本身在原书是 Chern–Simons 耦合小节的副产品，归一化「not keeping track」。
 tags: [d-brane, rr-charge, ramond-ramond, tension, type-ii, bps]
 notes: |
   【为什么从 branes.d-brane-tension 拆出】τ_p 由 NS–NS 交换 (13.3.1) 与 (13.3.3) 对照定出，
