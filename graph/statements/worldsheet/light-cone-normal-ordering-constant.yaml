@@ -40,5 +40,17 @@ notes: |
   与 D 无关）。两者合起来才给 D = 26，那是既有节点
   worldsheet.critical-dimension-light-cone / worldsheet.critical-dimension-bosonic 的内容，
   本节点不重复。
+
+  **2026-09-11（curator zeta-wire）：本卡不标 formalized。**
+  `formal/StringFormal/Math/MathlibBridges.lean` 新增
+  `StringFormal.Bridge.lightCone_normalOrderingConstant (D : ℂ) :
+  (D - 2) / 2 * riemannZeta (-1) = -(D - 2) / 24`，机检的只是把 ζ(-1) = -1/12
+  代入后的**纯算术恒等式**（(D-2)/2 · (-1/12) = -(D-2)/24），不涉及任何物理内容。
+  本卡正文承载的实质步骤——「D-2 个横向坐标各贡献零点能 (1/2)Σn，
+  且这个发散和按处方取值 -1/12」——是 worldsheet.zeta-regularized-sum-of-integers
+  （physical-argument）提供的，Lean 侧完全没有触及「Σn ⟶ -1/12 就是零点能」这一步。
+  故本卡 own status 维持 physical-argument（由推导 --via-zeta-regularization 决定），
+  不因这条 Lean 算术恒等式而上调；该 Lean 声明也未新增为本卡的 depends_on
+  （它不是本卡论证链条实际引用的来源，只是同一个数值代入的算术复核）。
 author: curator-polchinski-ch1
 created: "2026-09-10"
