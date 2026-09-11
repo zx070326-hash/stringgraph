@@ -47,3 +47,4 @@ import StringFormal.NoGhost.VertexAdjoint
 import StringFormal.NoGhost.VertexWeightedSum
 import StringFormal.NoGhost.DDFAlgebra
 import StringFormal.NoGhost.Witness
+import StringFormal.NoGhost.Longitudinal
