@@ -338,4 +338,195 @@ theorem isNegWitt_towerLop (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ =
 
 end TowerNegWitt
 
+/-! ### Ordered Virasoro words on `b̃`-free seeds (blueprint §B″.4.1 (F-1)) -/
+
+section SeedFamily
+
+open StringFormal.Virasoro
+
+variable {D : ℕ}
+
+/-- **The index set of (F-1)**: pairs `(l, c)` with `l` an ordered word in the negative modes,
+`c` a `b̃`-free light-cone occupation function, and total level `level c − l.sum = M`. -/
+def SeedIndex (hD : 2 ≤ D) (M : ℕ) : Type :=
+  {lc : List ℤ × (Osc D →₀ ℕ) //
+    IsOrdWord lc.1 ∧ conjDeg hD lc.2 = 0 ∧ (Fock.level D lc.2 : ℤ) - lc.1.sum = M}
+
+/-- The index set of (F-1) restricted to **non-empty** words: these are the ones that index
+the spurious part (blueprint §B″.4.1's "`λ ≠ ∅` half"). -/
+def SeedIndexPos (hD : 2 ≤ D) (M : ℕ) : Type :=
+  {lc : List ℤ × (Osc D →₀ ℕ) //
+    IsOrdWord lc.1 ∧ lc.1 ≠ [] ∧ conjDeg hD lc.2 = 0 ∧ (Fock.level D lc.2 : ℤ) - lc.1.sum = M}
+
+variable {R : Type*} [CommRing R] [Algebra ℚ R] {η a b : Fin D → R}
+
+/-- The vector `L_{-λ} · m(c)` on rung `j` indexed by `(l, c)`. -/
+noncomputable def seedWord (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ)
+    (p : SeedIndex hD M) : TowerFock D R :=
+  wordApply (towerLop η a b) p.1.1 (Finsupp.single j (lcMonomial F p.1.2))
+
+/-- The same, for non-empty words. -/
+noncomputable def seedWordPos (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ)
+    (p : SeedIndexPos hD M) : TowerFock D R :=
+  wordApply (towerLop η a b) p.1.1 (Finsupp.single j (lcMonomial F p.1.2))
+
+/-- **(F-1)'s spanning family**: the span of `L_{-λ} m(c)` over ordered `λ` and `b̃`-free `c`
+with `|λ| + level c = M`, on rung `j`. -/
+noncomputable def ordSeedSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Submodule R (TowerFock D R) :=
+  Submodule.span R (Set.range (seedWord hD F j M))
+
+/-- The part of `ordSeedSpan` with `λ ≠ ∅`. -/
+noncomputable def ordSeedSpanPos (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Submodule R (TowerFock D R) :=
+  Submodule.span R (Set.range (seedWordPos hD F j M))
+
+lemma wordApply_mem_ordSeedSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) {M : ℕ}
+    {l : List ℤ} (hl : IsOrdWord l) {c : Osc D →₀ ℕ} (hc : conjDeg hD c = 0)
+    (hlev : (Fock.level D c : ℤ) - l.sum = M) :
+    wordApply (towerLop η a b) l (Finsupp.single j (lcMonomial F c)) ∈ ordSeedSpan hD F j M :=
+  Submodule.subset_span ⟨⟨(l, c), hl, hc, hlev⟩, rfl⟩
+
+lemma wordApply_mem_ordSeedSpanPos (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) {M : ℕ}
+    {l : List ℤ} (hl : IsOrdWord l) (hne : l ≠ []) {c : Osc D →₀ ℕ} (hc : conjDeg hD c = 0)
+    (hlev : (Fock.level D c : ℤ) - l.sum = M) :
+    wordApply (towerLop η a b) l (Finsupp.single j (lcMonomial F c))
+      ∈ ordSeedSpanPos hD F j M :=
+  Submodule.subset_span ⟨⟨(l, c), hl, hne, hc, hlev⟩, rfl⟩
+
+lemma ordSeedSpanPos_le_ordSeedSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    (M : ℕ) : ordSeedSpanPos (R := R) hD F j M ≤ ordSeedSpan hD F j M := by
+  refine Submodule.span_le.2 ?_
+  rintro _ ⟨⟨⟨l, c⟩, hl, _, hc, hlev⟩, rfl⟩
+  exact wordApply_mem_ordSeedSpan hD F j hl hc hlev
+
+/-- **`L_{-n}` maps the seed family of level `M'` into the non-empty seed family of level
+`M' + n`** — this is where straightening is used.  An ordered word of total mode
+`-n + l.sum < 0` is automatically non-empty. -/
+theorem towerLop_neg_mem_ordSeedSpanPos (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (n : ℕ+) {M' : ℕ} {y : TowerFock D R}
+    (hy : y ∈ ordSeedSpan hD F j M') :
+    towerLop η a b (-((n : ℕ) : ℤ)) y ∈ ordSeedSpanPos hD F j (M' + n) := by
+  rw [ordSeedSpan] at hy
+  induction hy using Submodule.span_induction with
+  | mem z hz =>
+    obtain ⟨⟨⟨l, c⟩, hl, hc, hlev⟩, rfl⟩ := hz
+    simp only at hl hc hlev
+    have hn1 : (0 : ℕ) < (n : ℕ) := n.pos
+    have hn : (-((n : ℕ) : ℤ)) < 0 := by omega
+    have hmem : towerLop η a b (-((n : ℕ) : ℤ)) (seedWord hD F j M' ⟨(l, c), hl, hc, hlev⟩)
+        ∈ ordSpanOn (towerLop η a b) (Finsupp.single j (lcMonomial F c))
+          (-((n : ℕ) : ℤ) + l.sum) :=
+      apply_mem_ordSpanOn_of_mem (isNegWitt_towerLop η a b hη) _ hn
+        (mem_ordSpanOn (towerLop η a b) _ hl rfl)
+    rw [ordSpanOn] at hmem
+    refine Submodule.span_le.2 ?_ hmem
+    rintro _ ⟨l', hl', hsum, rfl⟩
+    have hsl := sum_nonpos_of_neg hl.neg
+    have hne : l' ≠ [] := by
+      intro hnil
+      rw [hnil, List.sum_nil] at hsum
+      omega
+    exact wordApply_mem_ordSeedSpanPos hD F j hl' hne hc (by rw [hsum]; push_cast; omega)
+  | zero => rw [map_zero]; exact Submodule.zero_mem _
+  | add y z _ _ hy hz => rw [map_add]; exact Submodule.add_mem _ hy hz
+  | smul r y _ hy => rw [map_smul]; exact Submodule.smul_mem _ _ hy
+
+/-- **(F-1), the spanning half** (blueprint §B″.4.1): every light-cone monomial of level `M`
+on rung `j` is a combination of ordered Virasoro words applied to `b̃`-free monomials.
+
+Outer strong induction on the level `M`, inner induction on the measure
+`μ(d) = β(d)(M+1) + ω(d)` exactly as in `single_lcMonomial_mem_conjFreeSlice_sup_towerSpurious`;
+the difference is that the spurious term `-L_{-n} m(d₀)` is no longer discarded: `m(d₀)` has
+level `M - n < M`, so it lies in the seed family by the outer hypothesis, and `L_{-n}` maps
+that family into the level-`M` family by straightening. -/
+theorem single_lcMonomial_mem_ordSeedSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (M : ℕ) (d : Osc D →₀ ℕ) (hd : Fock.level D d = M) :
+    Finsupp.single j (lcMonomial F d) ∈ ordSeedSpan hD F j M := by
+  classical
+  induction M using Nat.strong_induction_on generalizing d with
+  | _ M ihM =>
+  suffices h : ∀ K : ℕ, ∀ e : Osc D →₀ ℕ, Fock.level D e = M → lcMeasure hD M e ≤ K →
+      Finsupp.single j (lcMonomial F e) ∈ ordSeedSpan hD F j M from
+    h (lcMeasure hD M d) d hd le_rfl
+  intro K
+  induction K with
+  | zero =>
+      intro e he hK
+      simp only [lcMeasure] at hK
+      have hz : conjDeg hD e * (M + 1) = 0 := by omega
+      have hc : conjDeg hD e = 0 := by
+        rcases Nat.mul_eq_zero.mp hz with h' | h'
+        · exact h'
+        · omega
+      exact wordApply_mem_ordSeedSpan hD F j Virasoro.isOrdWord_nil hc (by simp [he])
+  | succ K ih =>
+      intro e he hK
+      by_cases hc : conjDeg hD e = 0
+      · exact wordApply_mem_ordSeedSpan hD F j Virasoro.isOrdWord_nil hc (by simp [he])
+      obtain ⟨v, hvmem, hv1⟩ : ∃ v ∈ e.support, v.1 = conjIdx D hD := by
+        by_contra hcon
+        refine hc ?_
+        rw [conjDeg, Finsupp.weight_apply]
+        refine Finset.sum_eq_zero fun v hv => ?_
+        show (e v) • (if v.1 = conjIdx D hD then (1 : ℕ) else 0) = 0
+        rw [if_neg (fun h => hcon ⟨v, hv, h⟩), smul_zero]
+      obtain ⟨t, n⟩ := v
+      simp only at hv1
+      subst hv1
+      set e₀ := e - Finsupp.single ((conjIdx D hD, n) : Osc D) 1 with he₀
+      have hsplit : e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1 = e := by
+        rw [he₀, add_comm]
+        exact Fock.single_add_tsub_single (Finsupp.mem_support_iff.mp hvmem)
+      have hlev : Fock.level D e₀ + (n : ℕ) = M := by
+        rw [← he, ← hsplit, Fock.level_add, Fock.level_single, Fock.oscLevel, one_mul]
+      have hmeas : lcMeasure hD M e
+          = lcMeasure hD M e₀ + lcMeasure hD M (Finsupp.single ((conjIdx D hD, n) : Osc D) 1) := by
+        rw [← hsplit, lcMeasure_add]
+      have hZ : Submodule.map (Finsupp.lsingle (M := Fock D R) (R := R) j)
+            (lcLow hD F M (lcMeasure hD M
+              (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)))
+          ≤ ordSeedSpan hD F j M := by
+        rw [lcLow, Submodule.map_span, Submodule.span_le]
+        rintro _ ⟨_, ⟨f, ⟨h1, h2⟩, rfl⟩, rfl⟩
+        rw [hsplit] at h2
+        exact ih f h1 (by omega)
+      have hlead := towerLop_neg_conjDegree_leading hD F hη n j e₀ hlev
+      have hAB : Finsupp.single j (lcMonomial F e)
+          = (Finsupp.single j
+                (lcMonomial F (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))
+              + towerLop η a b (-((n : ℕ) : ℤ)) (Finsupp.single j (lcMonomial F e₀)))
+            - towerLop η a b (-((n : ℕ) : ℤ)) (Finsupp.single j (lcMonomial F e₀)) := by
+        rw [hsplit]
+        abel
+      rw [hAB]
+      refine Submodule.sub_mem _ (hZ hlead) ?_
+      have hn : (0 : ℕ) < (n : ℕ) := n.pos
+      have hseed : Finsupp.single j (lcMonomial F e₀) ∈ ordSeedSpan hD F j (M - n) :=
+        ihM (M - n) (by omega) e₀ (by omega)
+      have hL := towerLop_neg_mem_ordSeedSpanPos hD F hη j n hseed
+      rw [show M - (n : ℕ) + (n : ℕ) = M by omega] at hL
+      exact ordSeedSpanPos_le_ordSeedSpan hD F j M hL
+
+/-- **(F-1) as an inclusion of submodules**: the bigraded piece `(j, M)` is spanned by the
+ordered Virasoro words on `b̃`-free light-cone monomials. -/
+theorem towerBigrade_le_ordSeedSpan (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (M : ℕ) :
+    towerBigrade D R j M ≤ ordSeedSpan hD F j M := by
+  classical
+  rw [towerBigrade, levelSubmodule_eq_lcSpan hD F hη M, lcSpan, Submodule.map_span,
+    Submodule.span_le]
+  rintro _ ⟨_, ⟨f, hf, rfl⟩, rfl⟩
+  exact single_lcMonomial_mem_ordSeedSpan hD F hη j M f hf
+
+/-- `L_{-n}` maps the whole bigraded piece `(j, M')` into the non-empty seed family of level
+`M' + n`: (F-1) followed by straightening. -/
+theorem towerLop_neg_mem_ordSeedSpanPos_of_mem_towerBigrade (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (n : ℕ+) {M' : ℕ}
+    {y : TowerFock D R} (hy : y ∈ towerBigrade D R j M') :
+    towerLop η a b (-((n : ℕ) : ℤ)) y ∈ ordSeedSpanPos hD F j (M' + n) :=
+  towerLop_neg_mem_ordSeedSpanPos hD F hη j n (towerBigrade_le_ordSeedSpan hD F hη j M' hy)
+
+end SeedFamily
+
 end StringFormal.NoGhost
