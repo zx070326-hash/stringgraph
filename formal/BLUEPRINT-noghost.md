@@ -2138,3 +2138,72 @@ Fock.kacDet2_massShell_two :  kacDet2 c ((1 : R) - 2) = 2 * (c - 26)
   ⇒ **建议在 §B″.7 的 PR5b 与 PR5c 之间插一条独立的「level-2 占据函数计数」PR**
   （`#{d | level d = 2} = m + m(m+1)/2` 形式的双射，`m` = 参与的振子方向数），
   否则 `N = 2` 这一片也关不掉，而它是唯一有希望关掉的一片。
+
+### B″ 订正（2026-09-12 第二轮，formalizer，分支 `agent/formalizer/b26-two-count`）
+
+**⭐ 结论先行：`B26 2` 与 `ddfSpans_bigrade_neg_two_two` 已关闭。** 新文件
+`NoGhost/LevelTwoCount.lean`（34 条声明，`check_axioms` 全 `ok`），主定理
+
+```lean
+b26_two_of_D26 (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    B26 η a b F.hη F.trans 2
+ddfSpans_bigrade_neg_two_two … : DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-2) 2)
+```
+
+这是整条无鬼定理链上**第一处**被机检的张成结论真正消费 `D = 26`（`N ≤ 1` 是无条件于 `D` 的）。
+上一轮订正列的三条缺口 (a)(b)(c) 全部补上。以下是与 §B″ 文本的差异与新的数学结论。
+
+1. ⭐ **`p_{D−1}(2) − p_{D−2}(2) = D` 是一条 Pascal 恒等式，不是巧合。**
+   在 Lean 里它逐字是 `(D−1) + C(D,2) = ((D−2) + C(D−1,2)) + D`，由
+   `C(D,2) = C(D−1,1) + C(D−1,2)` 与 `C(D−1,1) = D−1` 立得，**对一切 `D ≥ 2` 成立**。
+   `p_m(2) = m + C(m+1,2)` 的组合内容是：level-2 占据函数只有
+   `single (i,2) 1` 与 `single (i,1)1 + single (j,1)1` 两形，故指标集是 `ι ⊕ Sym2 ι`。
+   ⇒ **这把 §B′.8 / §B″.5「计数一步永远看不见 26」从一句判断变成了一条定理**：
+   两边之差恒等于 `D`，与 `D` 取什么值无关。
+
+2. **两侧各只需单向，所以不必造双射。** 左边（`p_{D−1}`）要上界 ⇒ 一个**满射**
+   `κ ⊕ Sym2 κ ↠ {d | level d = 2 ∧ β(d) = 0}`（`κ = {μ | μ ≠ b̃}`），只用分类引理的
+   「穷尽性」；右边（`p_{D−2}`）要下界 ⇒ 一个**单射** `ι ⊕ Sym2 ι ↪ {d | N(d) = 2}`，
+   只用「无重复」。`Fintype.card_le_of_surjective` / `_of_injective` 直接给结论。
+   §B″.14 建议的「双射」是多余的成本。**两个 `Fintype.card` 仍然没有被求值**，
+   只是被互相比较——§B′.8 的纪律保持不变。
+
+3. ⭐ **`D − 1` 个 Type-1 种子的正确取法是 `{ε_1,…,ε_{D−2}} ∪ {a}`，不需要构造
+   `p_{−2}^⊥` 的一般基。** `a · p_{−2} = a·a − 2 a·b = 2 − 2 = 0`（用 (F3) 与
+   `dotVec_self_eq_two`），而 `ε_i · p_j = 0` 是既有的 `dotVec_trans_towerMomentum`。
+   §B″.2.1 的交叉核对说「`L_{−1}((b−b̃)·α_{−1})|0;p₋₂⟩` 是一个 Type-1 零态」——`b − b̃ = a`，
+   所以那条注记其实**就是**这里缺的第 `D−1` 个方向，只是没人指出它恰好补满整个族。
+
+4. ⭐ **线性无关不需要 `D = 26`**（`linearIndependent_nullFamilyTwo` 里 `D` 不出现）。
+   证法是 §B″.11 第 1 条 (ii) 建议的三角性，但配对对象不是 `C_N` 而是**动量与标架**：
+   取 `α^ν_{−2}` 分量（线性泛函 `alphaTwoCoeff`），关系 `Σ c_i f_i = 0` 压成向量方程
+   `Σ c_i v_i + 5t·p₋₂ = 0`；与 `p₋₂` 配对，`p·p = −2 ≠ 0` 给 `t = 0`；
+   再与 `b`（`a·b = 1`、`ε_i·b = 0`）与 `ε_j`（正交归一、`a·ε_j = 0`）配对给其余系数为零。
+   **`D = 26` 只在「这 `D` 个向量确实是零态」那一步进入**，即只经
+   `NullSeedsTwo.towerLop_two_apply_descTwo`——与 §B″.8 的预测逐字一致。
+
+5. **`𝒟₂|0;p₋₂⟩ ≠ 0` 已证**（`descTwo_single_neg_two_ne_zero`），走的正是上一轮建议的
+   `MvPolynomial` 系数路线。关键的可复用原子是
+   `coeff_single_two_mul_of_mem_levelSubmodule_one`：**两个 level-1 态之积没有 `α_{−2}` 分量**
+   ——而且只需要**左**因子 level 齐次（`coeff_mul` 的反对角求和里 `d ≤ single (ν,2) 1`
+   逼出 `d` 只支撑在 `(ν,2)`，故 level ∈ {0,2}，永远不是 1）。
+   这条对一般 `n ≥ 2` 的 `α_{−n}` 分量的推广是免费的。
+
+6. **`decide` 的确化不开，但根本不需要。** §B″ 订正 (c) 担心的 `Osc D →₀ ℕ` 上的判定问题
+   被「显式分类 + 只比较不求值」绕开了；`Math/PartitionCard.lean` 在本路线上仍然用不到
+   （与 §B″.5 的判断一致）。
+
+7. **「`D = 26` 是必要的」目前只到算子层。** `descTwo_single_mem_towerPhysSubmodule_iff`：
+   具体态 `𝒟₂|0;p₋₂⟩` 物理 ⟺ `(D:K) = 26`（`𝒟₂y ≠ 0` 现在有了，所以这条不再有悬空前提）。
+   **维数层的 `¬ B26 2`（`D ≠ 26`）没做**，它需要
+   (i) 把 `finrank_towerPhys_inf_towerBigrade_le` 与 `card_conjFree_two_le` 都升成**等式**
+   （前者要 `conjFreeSlice` 的线性无关，正是 §B′.9 第 2 条），
+   (ii) 给 `dim(H_null ⊓ V_2)` 一个**上界**，即真的算 §B″.2 那张 `(D+1)×(D+1)` 伪态 Gram 的秩。
+   ⇒ **建议登记为 PR5b″，成本估计 300–500 行，信心中等**；它是「26 是必要的」最干净的
+   可机检形式，但不在无鬼定理的关键路径上。
+
+8. **对一般 `N` 的可移植性**：本文件三块里，**零态两族与三角性独立性的机制对一般 `N`
+   原样成立**（`typeOneTwo` 只要 `e · p_{−N} = 0`，`descTwo` 只要种子落在 `j + N = −2` 的片上）。
+   真正 `N = 2` 专用的只有两条：(i) `oscWeight_eq_two_cases` 是 level-2 的分类；
+   (ii) 「`D−1` 个方向恰好张成 `p₋₂^⊥` 的像」在一般 `N` 上要换成 §B″.11 的重叠维数问题。
+   所以 §B″.11 第 1 条的五边形数断点**仍然是断点**，本轮没有触及它。

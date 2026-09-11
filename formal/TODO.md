@@ -1993,24 +1993,50 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     ——整环上、种子非零时 `D = 26` 是**必要**条件，不只是充分。另有片上版本
     （`k·k = 2` 求值截距）与具体态 `descTwo_single_mem_towerNullSubmodule`（`𝒟₂|0;p₋₂⟩`）。
     全部 26 条 `check_axioms --all` 为 `ok`（只有标准三条）。
-  - **仍未做（`B26 2` 与 `ddfSpans_bigrade_neg_two_two` 未关闭）**，三条，都在计数一侧：
-    (a) 25 个 Type-1 种子 `(v·α_{−1})|0;p₋₂⟩`（`v·p₋₂ = 0`）与 26 个零态的线性无关；
-    (b) `𝒟₂y ≠ 0`。**Gram 判据在此处必然空转**：`kacDet2 26 (1−2) = 0`，
-    `Fock.linearIndependent_fockDesc2` 在该点无内容——**这个消失正是零态存在的原因**。
-    要走 `MvPolynomial` 系数：`𝒟₂|0;p⟩` 的 `X_{(μ,2)}` 系数是 `5η_μp^μ`，由 `p·p = −2 ≠ 0`
-    知某个 `μ` 非零（特征零）；
-    (c) `p_{D−1}(2) − p_{D−2}(2) = D`，即 `SpuriousElimination`/`SliceDim` 里那两个
-    「永不求值」的 `Fintype.card` 之差。这是真正的 `Finsupp` 计数，不是 `decide`。
-    ⇒ 下一步仍按蓝图：PR5b 全量（一般 `N` 的两族）与 PR5a（Virasoro × 光锥 PBW 基）。
-- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），唯一剩余是 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
+  - **2026-09-12 formalizer（分支 `agent/formalizer/b26-two-count`）：⭐ `B26 2` 与
+    `ddfSpans_bigrade_neg_two_two` 已关闭**，新文件 `NoGhost/LevelTwoCount.lean`（约 900 行，
+    34 条声明，全部 `check_axioms` 为 `ok`）。这是全链**第一处**被机检的张成结论真正消费
+    `D = 26`（`N ≤ 1` 是无条件于 `D` 的）。上一轮列的三条缺口全部补上：
+    (a) Type-1 种子取成 **`ε_i`（`D−2` 个）加 `a`（1 个）**，共 `D−1` 个：
+    `a·p₋₂ = a·a − 2a·b = 2 − 2 = 0`（`dotVec_base_momentum_neg_two`），
+    `ε_i·p₋₂ = 0`（既有 `dotVec_trans_towerMomentum`）。**不需要造 `p₋₂^⊥` 的一般基**。
+    线性无关走三角性（`linearIndependent_nullFamilyTwo`，**不需要 `D = 26`**）：
+    `α^ν_{−2}` 分量把关系压成向量方程 `Σc_i v_i + 5t·p = 0`，与 `p` 配对（`p·p = −2`）给 `t = 0`，
+    再与 `b`（`a·b = 1`、`ε_i·b = 0`）与 `ε_j`（正交归一、`a·ε_j = 0`）配对给其余系数为零。
+    (b) **`descTwo_single_neg_two_ne_zero`**：`𝒟₂|0;p₋₂⟩ ≠ 0`，正是按上一轮建议的
+    `MvPolynomial` 系数路线（`alphaTwoCoeff`，`α^ν_{−2}` 分量 `= 5η_ν p^ν`；关键小引理
+    `coeff_single_two_mul_of_mem_levelSubmodule_one`——两个 `α_{−1}` 之积没有 `α_{−2}` 分量，
+    **只需左因子 level 齐次**）。附带 `descTwo_single_mem_towerPhysSubmodule_iff`
+    （该具体态物理 ⟺ `(D:K) = 26`）。
+    (c) **计数**：`Finsupp.oscWeight_eq_two_cases`（level-2 占据函数只有两形，任意指标类型）+
+    `card_ddfLevel_two_ge`（`ι ⊕ Sym2 ι ↪ …`）+ `card_conjFree_two_le`（`κ ⊕ Sym2 κ ↠ …`，
+    `κ = {μ | μ ≠ b̃}`）+ **`levelTwo_count_identity`**。
+    ⭐ **数学结论（对图有用）**：`p_{D−1}(2) = p_{D−2}(2) + D` 是 **Pascal 恒等式
+    `C(D,2) = C(D−1,1) + C(D−1,2)`，对一切 `D` 成立**——坐实蓝图 §B′.8/§B″.5「计数一步永远
+    看不见 26」。`D = 26` 只在 `nullFamilyTwo_mem_towerNullSubmodule` 的 `none` 分支进入，
+    即只经 `towerLop_two_apply_descTwo`，与蓝图 §B″.8 的预测完全一致。
+    **两侧各只需单向**（左边上界、右边下界），所以只造了一个单射和一个满射，**没有造双射**，
+    也**没有求值任何 `Fintype.card`**（两个 card 仍是抽象的，只比较）。
+  - **仍未做**：
+    (a) `¬ B26 2` 在 `D ≠ 26` 的**维数版**（"26 是必要的"最干净形式）。**不便宜**：需要把
+    `finrank_towerPhys_inf_towerBigrade_le`（PR4）与 `card_conjFree_two_le` 升成等式，
+    并给 `dim(H_null ⊓ V_2)` 一个**上界**（= §B″.2 那张 `(D+1)×(D+1)` 伪态 Gram 的秩计算）。
+    目前只有**算子层**的必要性：`NullSeedsTwo.descTwo_mem_towerPhysSubmodule_iff` 与新增的
+    `LevelTwoCount.descTwo_single_mem_towerPhysSubmodule_iff`。
+    (b) 一般 `N`：本文件的三块里，**零态两族与独立性的机制对一般 `N` 原样成立**，
+    真正只对 `N = 2` 的是计数（`oscWeight_eq_two_cases` 是 level-2 专用的分类）与
+    「`D−1` 个 Type-1 种子恰好张成 `p₋N^⊥`」。⇒ 下一步仍按蓝图：PR5b 全量与 PR5a
+    （Virasoro × 光锥 PBW 基），以及 §B″.11 第 1 条的五边形数断点（`N ≥ 5`）。
+- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），且 **`N ≤ 2` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 在 `D = 26` 下由 `LevelTwoCount.ddfSpans_bigrade_neg_two_two` 关闭）。剩余是 `N ≥ 3` 的 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
       `(−N, N)`」）；`N ≤ 1` 已整块关闭（`ddfSpansOn_towerLevelLE_one`，任意 `D`）。
       **2026-09-12 更新**：蓝图 §B′.2 的 (P1)(P2)(P3) 已全部落地
       （`SliceRank.lean` / `SliceDim.lean` / `SpuriousElimination.lean`），且**三条里 `D = 26`
       一次不出现**。剩下的唯一缺口是 **(B-26)**：`D = 26`、`a₀ = 1` 时
-      `dim(H_null ⊓ V_N) ≥ p_{D−1}(N) − p_{D−2}(N)`（蓝图 PR5，未开工）。
-      `N = 2` 的直接路线（`noghost-n2`）仍然可行但不再是唯一选择。
+      `dim(H_null ⊓ V_N) ≥ p_{D−1}(N) − p_{D−2}(N)`（蓝图 PR5）——**`N = 2` 已证**
+      （`LevelTwoCount.le_finrank_towerNullSubmodule_inf_towerBigrade_two`），`N ≥ 3` 未做。
+
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
 - [x] `negative-norm-above-26`：D > 26 时显式负模态 —— `StringFormal/NoGhost/LevelTwo.lean`。
