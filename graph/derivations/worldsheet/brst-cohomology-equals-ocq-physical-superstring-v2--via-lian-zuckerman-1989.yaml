@@ -1,5 +1,5 @@
-id: worldsheet.brst-cohomology-equals-ocq-physical-superstring--via-lian-zuckerman-1989
-target: worldsheet.brst-cohomology-equals-ocq-physical-superstring
+id: worldsheet.brst-cohomology-equals-ocq-physical-superstring-v2--via-lian-zuckerman-1989
+target: worldsheet.brst-cohomology-equals-ocq-physical-superstring-v2
 kind: proof
 status: rigorous
 depends_on:
@@ -238,10 +238,26 @@ notes: |
         本图 worldsheet.no-ghost-theorem-brst 的断言 (2)）。
   ⚠ **命名差异要记住**：FGZ 把"第二个同构"叫无鬼定理，LZ 1989 把"H⁰_rel 正定"
   （Corollary 2.15(ii)）叫无鬼定理。本图按各自作者的自命名分卡：
-  正定性 → worldsheet.no-ghost-theorem-superstring-cohomological；
+  正定性 → worldsheet.no-ghost-theorem-superstring-cohomological-v2；
   两个同构 → 本卡。
 
   按 researcher 第七轮抽取记录 literature/extractions/lian-zuckerman-1989.md
   （E7/E8、§4 Q4、§5）建立。curator，2026-09-11。
+
+  ★【本推导为何改指 v2（curator，2026-09-11，small-backlog-10）】
+  目标卡由 worldsheet.brst-cohomology-equals-ocq-physical-superstring 换代到 -v2，两处实质改动：
+  **(1)** 设定段删去「（并按 lian-zuckerman-1989 的假设取 p 在未来半光锥）」——"未来半光锥" 是对
+      LZ p.305 Remark 的**半空间** {p: p^D > 0} 的误译，且按 auditor 2026-09-11 裁决它只固定
+      R(p,0) 上 ⟨,⟩_R 的整体符号：**本推导的论证完全不用它**（Theorem 2.20 的证明只用 λ 的等距性、
+      Corollary 2.19(ii) 的定号性与 Corollary 2.15(i)/2.19(i) 两条维数相等；p^D < 0 时
+      T∩P 与 H⁰_rel(p,0) 一同变负定，rad P、λ、两个同构一字不变）。⇒ 新陈述把前提放宽到
+      「一切 p ≠ 0」，而**本推导原样证明这个更宽的版本**，故按 graph/CLAUDE.md 2026-09-12 细则
+      随卡改名并改指 v2，不另留旧推导。
+  **(2)** 次数由「鬼数」改为 LZ Definition 2.2 的**相对次数** n = 鬼数 + κ ∈ Z——纯换名，
+      本推导里凡写 H⁰_rel / 「鬼数 0」处一律按相对次数读（NS 的 n = 0 ↔ 鬼数 −½；R 的 n = 0 ↔ 鬼数 0）。
+  **依赖边、来源、summary、gaps 全部未动**（其中 depends_on 姊妹卡那条已于同一轮改指
+  worldsheet.no-ghost-theorem-superstring-cohomological-v2）。
+  ⚠ 本推导 gaps / notes 里若仍有「本图未判定 p 未来向是否本质」一类措辞，自 auditor 2026-09-11
+  裁决起已过时，以本段与目标卡 v2 的 notes 为准。
 author: curator
 created: "2026-09-11"

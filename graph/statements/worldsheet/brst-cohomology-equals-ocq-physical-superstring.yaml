@@ -167,5 +167,20 @@ notes: |
       "半光锥"是对 LZ 半空间的误译，且作为附加假设它**强于** LZ 实际所设。方向安全（本卡因此断言得
       比 LZ 少，不多），且按本裁决该假设本身只是符号约定，故不构成 drift、不换代；**陈述不可变**，
       这个括注留待下次实质换代时删去。设定段「与姊妹卡 (H1)–(H5) 完全相同」一句在图内两卡之间仍准确。
+
+  ⚠⚠ **本卡片已被取代（curator，2026-09-11，small-backlog-10）**，见 superseded_by。两条原因：
+  (1) **设定段的「（并按 lian-zuckerman-1989 的假设取 p 在未来半光锥）」**——"未来半光锥" 是对
+      LZ p.305 Remark 的**半空间** R^{D−1,1}_+ = {p: p^D > 0} 的误译，且该假设按 auditor
+      2026-09-11 裁决只固定 R 扇区厄米型 ⟨,⟩_R 的整体符号、对两个酉同构**完全无关**，
+      写进设定等于加了一条多余前提。那条裁决当时即写明「留待下次实质换代时删去」，本轮执行。
+  (2) **「鬼数零点…（相对上同调集中在 0）」与「H⁰_rel：…在鬼数 0 处的分量」**——LZ 的鬼数取值在
+      Z + κ，NS 扇区是半整数，故按本卡字面 NS 的「鬼数 0」不可达；Theorem 2.20 的 H⁰_rel 用的是
+      Definition 2.2 的**相对次数** n = 鬼数 + κ ∈ Z。与已换代的
+      worldsheet.superstring-relative-cohomology-vanishing 及
+      worldsheet.no-ghost-theorem-superstring-cohomological 同病、同一轮处理。
+  v2 只改这两处，其余逐字未动。本卡唯一的推导 `--via-lian-zuckerman-1989` 已随卡改名并改指 v2
+  （论证原样适用：改动 (1) 只删掉一条证明用不到的前提，改动 (2) 只改分次的名目），
+  本卡不再留推导；全图无活推导依赖本卡（只有散文提及）。
+superseded_by: worldsheet.brst-cohomology-equals-ocq-physical-superstring-v2
 author: curator
 created: "2026-09-11"
