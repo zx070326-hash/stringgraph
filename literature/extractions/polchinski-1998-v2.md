@@ -1360,3 +1360,204 @@ E51 里 Table 11.1 的**前三行**（`N = 0, 1, 2`，`c^g = −26, −15, −6`
   (a) 用 Cambridge Core 取 Vol.1 §2.5 的页图（§3.3 路线，Vol.1 BOOK_HASH 已记）；
   (b) 直接引 Vol.2 **(11.1.2a)**（**已 L1 核实**）作为该公式的来源。
   **建议 curator 优先用 (b)**——同一本教材、同一套约定、带式号的一手读数，且比 Vol.1 的分立写法更一般。
+
+
+---
+
+## 5. §10.7 复核（researcher，2026-09-11）—— 只加不改，不修订 §2 的 E47
+
+**触发**：图上正在建 `worldsheet.superstring-total-fermionic-partition-function-vanishes` 与
+`worldsheet.ramond-trace-with-fermion-number-vanishes`，需要 §10.7 若干句的**逐字**，而 E47 只做了要点摘录。
+**取件**：Cambridge Books Online 章级 PDF，ch.10 = `9780511618123c1_p1-44_CBO.pdf`
+（item hash `E69C35DC077FD0BAD6B39479144D4A12`），**PDF 页 = 书页**。页脚下载戳见 §5.6。
+
+### 5.0 本轮结论表
+
+| 任务书问的 | 本轮结论 | 证据等级 |
+|---|---|---|
+| (10.7.6) 费米配分函数乘积迹 | 逐字到手，与 E47 摘录**一致** | L1（书 p.32） |
+| (10.7.9)「`Z_ψ^± = 0`？」 | ❌ **前提有误**：(10.7.9) 是 `Z_ψ^±` 的**定义式**，不是消没陈述。**全书没有写出 `Z_ψ^± = 0` 这个等式** | L1（书 p.33） |
+| (10.7.16) abstruse identity | 逐字到手，与 E47 一致；原书**只叫它 "the 'abstruse identity' of Jacobi"，不给证明、不给引文** | L1（书 p.35） |
+| `Z^1_1 = 0` 的那句 | 逐字到手，在 **p.34**（(10.7.14) 下方，无式号）。**理由是「两个 R 扇区基态相消」，不是 ϑ₁₁(0,τ)=0** | L1 |
+| 脚注 7 "This is not sufficient" | 逐字到手，在 **§10.8 p.39**（不是 §10.7），E48 备注已有，本轮**复核无误** | L1 |
+| 「without using the vanishing of `Z^1_1` or the abstruse identity」 | 逐字到手，**p.35**，E47 备注 3 已有，本轮复核无误 | L1 |
+| ⚠ 新发现的读数分歧 | **(10.7.10) 末因子本轮读作 `Z_ψ^±(τ)*`，E47 记的是 `Z_ψ^+(τ)*`** | 见 §5.2(c) |
+
+**本节只做 §10.7 的逐字补录与复核，不改 §2 的 E47 正文。** 上表第 7 行是唯一一处与 E47 不一致的读数，
+按本项目纪律留作 `Q5.1` 交 auditor，**不擅自改 E47**。
+
+### 5.1 (10.7.6) 逐字（书 **p.32**，L1 页图）
+
+上文（同页，无式号）：
+
+> 「For the `ψ`s, the mode sum in each sector depends on the spatial periodicity `α` and includes a projection
+> operator `½[1 + exp(πiF)]`. Although for the present we are interested only in R and NS periodicities, let us
+> work out the partition function for the more general periodicity (10.3.20),」
+
+> `ψ(w + 2π) = exp[πi(1 − α)] ψ(w)`　　(10.7.4)
+
+> 「where again `α = 1 − 2ν`. By the definition (10.3.23) of the ground state, the raising operators are」
+
+> `ψ_{−m+(1−α)/2} , ψ̄_{−m+(1+α)/2} , m = 1, 2, … .`　　(10.7.5)
+
+> 「**The ground state weight was found to be `α²/8`. Then**」
+
+> **(10.7.6)**　`Tr_α( q^H ) = q^{(3α²−1)/24} ∏_{m=1}^{∞} [ 1 + q^{m−(1−α)/2} ] [ 1 + q^{m−(1+α)/2} ] .`
+
+- 与 E47 的摘录逐字一致（E47 写的 `Π` 与 `Tr_α(q^H)` 无误）。
+- **原书对 (10.7.6) 不给推导**：它是把 (10.7.5) 的升算符谱直接乘起来，基态权重 `α²/8` 是「was found to be」（回指 §10.3）。
+- ⚠ **这条是「一对维度」之前的单个复费米子**；「a *pair* of dimensions」那句在下一页 (10.7.8) 之后。
+
+### 5.2 (10.7.7)–(10.7.10)：`Z_ψ^±` 是**定义**，不是消没（书 **p.33**，L1 页图）
+
+**(a) 逐字：**
+
+> 「Thus we can define the more general trace」
+> `Z^α_β(τ) = Tr_α[ q^H exp(πiβQ) ]`　　(10.7.7a)
+> `= q^{(3α²−1)/24} exp(πiαβ/2) × ∏_{m=1}^{∞} [1 + exp(πiβ) q^{m−(1−α)/2}][1 + exp(−πiβ) q^{m−(1+α)/2}]`　　(10.7.7b)
+> `= (1/η(τ)) ϑ[ α/2 ; β/2 ](0, τ) .`　　(10.7.7c)
+>
+> 「The notation in the final line was introduced in section 7.2, **but our discussion of these functions in the
+> present volume will be self-contained.**」
+>
+> 「The charge `Q` modulo 2 is the fermion number `F` that appears in the GSO projection. Thus the traces that
+> are relevant for the ten-dimensional superstring are」
+> `Z^0_0(τ) = Tr_NS[q^H]`　(10.7.8a)；`Z^0_1(τ) = Tr_NS[exp(πiF) q^H]`　(10.7.8b)；
+> `Z^1_0(τ) = Tr_R[q^H]`　(10.7.8c)；`Z^1_1(τ) = Tr_R[exp(πiF) q^H]`　(10.7.8d)。
+>
+> 「We should emphasize that these traces are for a *pair* of dimensions.」
+>
+> 「**Tracing over all eight fermions, the GSO projection keeps states with `exp(πiF) = +1`. This is `Z_ψ^+(τ)`, where**」
+>
+> **(10.7.9)**　`Z_ψ^±(τ) = ½ [ Z^0_0(τ)⁴ − Z^0_1(τ)⁴ − Z^1_0(τ)⁴ ∓ Z^1_1(τ)⁴ ] .`
+>
+> 「The half is from the projection operator, the minus sign in the second term is from the ghost contribution to
+> `exp(πiF)`, and the minus signs in the third and fourth (R sector) terms are from spacetime spin-statistics.
+> For `ψ̃` in the IIB theory one obtains the conjugate `Z_ψ^+(τ)*`. In the IIA theory, `F̃ = −1` in the R sector so
+> the result is `Z_ψ^−(τ)*`. In all,」
+>
+> **(10.7.10)**　`Z_{T₂} = i V_{10} ∫_F (d²τ / 16π²α'τ₂²) Z_X⁸ Z_ψ^+(τ) Z_ψ^±(τ)* .`
+
+**(b) ★ 对建卡最要紧的一条（否定结论）：**
+**任务书里问的「(10.7.9)：`Z_ψ^± = 0`？」在原书里不成立。** (10.7.9) 是 `Z_ψ^±` 的**定义式**（`∓` 号把 IIB/IIA 两种情形
+写在一条里）。**§10.7 全节没有把 `Z_ψ^± = 0` 写成一条显示等式**；原书说的是 `Z_{T₂}` 应当消没（见 §5.4 逐字）。
+⇒ 若图上要建「总费米配分函数消没」这条陈述，**它是抽取者/curator 由 (10.7.9) + (10.7.16) + `Z^1_1 = 0`
+合成的推论**，不是原书的显式陈述，`sources[].loc` 只能写「(10.7.9) 与 (10.7.16) 与 p.34 的无式号句」，
+并在 note 里写明「原书未写出该等式」。
+
+**(c) ⚠ Q5.1（读数分歧，交 auditor）：** 本轮读 (10.7.10) 末因子为 **`Z_ψ^±(τ)*`**，
+而 §2 的 E47 记作 `Z_ψ^+(τ)*`。**上文「IIB 得 `Z_ψ^+(τ)*`、IIA 得 `Z_ψ^−(τ)*`」+「In all」这个措辞，
+逻辑上要求这里是 `±`**（否则 (10.7.10) 只覆盖 IIB，与 "In all" 矛盾）。
+但上下标是小字号（见 researcher 记忆里的「排版字号陷阱」），**本条不自行改 E47**，请 auditor 单页复读一次。
+
+### 5.3 `Z^1_1 = 0` 的那句（书 **p.34**，(10.7.14) 下方，**无式号**，L1 页图）
+
+> 「The `τ → τ + 1` transformation follows from the explicit form (10.7.7b), the phase coming from the zero-point
+> energy with the given boundary conditions. The absence of a phase in `τ → −1/τ` can be seen at once for `τ = i`.
+> **Note that `Z^1_1` actually vanishes due to cancellation between the two R sector ground states, but we have
+> assigned a formal transformation law for a reason to be explained below.**」
+
+**三条建卡要点：**
+1. **位置是无式号散文**，`loc` 只能写 `§10.7, p.34, unnumbered sentence below (10.7.14)`。
+2. **原书给的理由是「两个 R 扇区基态之间相消」**（`cancellation between the two R sector ground states`），
+   **不是** Vol.1 (7.2.42) 的 `ϑ₁₁(0,τ) = 0`。§10.7 全节**没有**把 `Z^1_1 = 0` 与 `ϑ₁₁(0,τ) = 0` 联系起来
+   （虽然经 (10.7.7c) 两者等价）。⇒ 若 curator 想把 `ramond-trace-with-fermion-number-vanishes` 接到
+   `math.jacobi-theta-11-vanishes`，**那条边是 `inferred: true`**，Polchinski Vol.2 没写。
+3. **原书零证明**：没有给出 R 基态相消的计数（`Tr_R[exp(πiF)]` 对 16 个 R 基态的 `±` 配平），
+   也不引文献 ⇒ 节点 own status 封顶 `physical-argument`。
+   ⚠ 同句还明说：即便 `Z^1_1 = 0`，原书仍**故意保留一条形式的模变换律**（(10.7.14) 里的 `α=β=1` 项），
+   理由在 p.35 给出（见 §5.5）。这一点必须随卡片一起带，否则「`Z^1_1=0` 所以可以扔掉」是错的。
+
+### 5.4 (10.7.16) abstruse identity 与 `Z_{T₂}` 的消没（书 **p.35**，L1 页图）
+
+> 「**The type II theories have spacetime supersymmetry. This implies equal numbers of bosons and fermions at
+> each mass level, and so `Z_{T₂}` should *vanish* in these theories by cancellation between bosons and fermions.
+> Indeed it does, as a consequence of `Z^1_1 = 0` and the 'abstruse identity' of Jacobi,**」
+>
+> **(10.7.16)**　`Z^0_0(τ)⁴ − Z^0_1(τ)⁴ − Z^1_0(τ)⁴ = 0 .`
+>
+> 「The same cancellation occurs in the open and unoriented theories.」
+
+**四条要点：**
+1. **原书的逻辑方向是「超对称 ⇒ 应当消没；确实消没，因为 `Z^1_1 = 0` 与 (10.7.16)」**——
+   (10.7.16) 与 `Z^1_1=0` 是**理由**，`Z_{T₂} = 0` 是**结论**。建卡时别反过来。
+2. **(10.7.16) 在本卷零证明、零引文**，只有引号里的名字 "the 'abstruse identity' of Jacobi"。
+   Vol.1 的对应式 **(7.2.41)**（`ϑ⁴₀₀ − ϑ⁴₀₁ − ϑ⁴₁₀ = 0`）也零证明，只说「a special case of a quartic identity of
+   Riemann」（见 `polchinski-1998-v1-ch7.md` E15）。⇒ **两卷合起来都不构成一条严格来源**，
+   数学侧来源见 `math-sources.md` §56。
+3. ⚠ **(10.7.16) 与 Vol.1 (7.2.41) 是同一条恒等式的两种写法，但不是同一个式子**：
+   (10.7.16) 的 `Z^α_β` 按 (10.7.7c) 等于 `ϑ[α/2;β/2]/η`，所以 (10.7.16) = `η^{−4}×`[(7.2.41) 的三项]。
+   **这一步换算原书没写**（原书只说 "The notation in the final line was introduced in section 7.2"）⇒ 边要标 `inferred`。
+4. 前一段的 type 0 迹 **(10.7.15)** `½[|Z^0_0|^N + |Z^0_1|^N + |Z^1_0|^N ∓ |Z^1_1|^N]`，
+   逐字「with `N = 8`. This is known as the *diagonal modular invariant*, and **it is invariant for any `N`
+   because the phases cancel in the absolute values**.」——注意这里**三项全是加号**，与 (10.7.9) 结构不同。
+
+### 5.5 「without using …」那句（p.35）+ 脚注 7「This is not sufficient」（p.39）
+
+**(a) p.35，紧接 (10.7.16) 段之后，逐字：**
+
+> 「Although we have focused on the path integral without vertex operators, amplitudes with vertex operators
+> must also be modular-invariant. In the present case the essential issue is the path integral measure, and
+> **one can show by explicit calculation (or by indirect arguments)** that the modular properties are the same
+> with or without vertex operators. **However, with a general vertex operator insertion the `α = β = 1` path
+> integral will no longer vanish, nor will the sum of the other three. The general amplitude will then be
+> modular-invariant provided that the vacuum is modular-invariant *without* using the vanishing of `Z^1_1` or
+> the abstruse identity (10.7.16) — as we have required.**」
+
+→ 这就是 §5.3 要点 3 里「为什么还要给 `Z^1_1` 一条形式变换律」的答案，**原书自己在 p.34 预告、p.35 兑现**。
+→ 对图的硬约束：**「环面振幅模不变」这条陈述不得把 `Z^1_1 = 0` 或 (10.7.16) 当作依赖**，
+   否则就与原书要求相反。这两条只能挂在「`Z_{T₂} = 0`」那条陈述上。
+→ 「one can show by explicit calculation (or by indirect arguments)」= 又一处**不给出的论证**（顶点算子情形）。
+
+**(b) 同页更前面，模不变性本身的强度措辞（逐字，补 E47）：**
+
+> 「**The reader can verify** that with the transformations (10.7.14), the combinations `Z_ψ^±` are invariant under
+> `τ → −1/τ` and are multiplied by `exp(2πi/3)` under `τ → τ + 1`. Combined with the conjugates from the
+> right-movers, the result is modular-invariant and the torus amplitude consistent. **It is necessary for the
+> construction of this invariant that there be a multiple of *eight* transverse fermions.** Recall from section 7.2
+> that invariance under `τ → τ + 1` requires that `L_0 − L̃_0` be an integer for all states. For a single real
+> fermion the difference in ground state energies is `1/16`. For eight fermions this becomes `½`, so that states
+> with an odd number of NS excitations (as required by the GSO projection) are level-matched. **Note also that
+> modular invariance forces the minus signs in the combination (10.7.9), in particular the relative sign of
+> `(Z^0_0)⁴` and `(Z^1_0)⁴` which corresponds to Fermi statistics for the R sector states.**」
+
+★ **本轮新增（E47 未记）**：「8 的倍数」这条的**理由**在原书里是**级配（level matching）数字论证**——
+单个实费米子 NS/R 基态能差 `1/16`，八个给 `½`，配上 GSO 要求的奇数个 NS 激发才级配。
+⇒ 若 curator 要把它当 `D = 10` 的第三条 derivation，**依赖里必须含 Vol.1 §7.2 的 `L_0 − L̃_0 ∈ Z`**（原书明引）。
+
+**(c) §10.8 脚注 7（书 **p.39**，L1 页图，**复核 E48 备注无误**）：**
+
+> 「⁷ In the vacuum amplitude the sum of the NS–NS and R–R divergences is zero for each topology separately
+> because the trace vanishes by supersymmetry. **This is not sufficient, because they will no longer cancel when
+> vertex operators are added near one end of each surface. The NS–NS and R–R tadpoles must vanish separately
+> when summed over topologies.**」
+
+⚠ **它在 §10.8 不在 §10.7**（任务书把它列在 §10.7 项下）。正文挂点是 p.39「The relative size of the two tadpoles
+depends on the Chan–Paton factors, and cancels for a particular gauge group.⁷」
+→ 与 (a) 是**同一个方法论模式的两次出现**：「真空振幅里的相消不够，插入顶点算子后必须逐项成立」。
+   这是本书里质量最高的两处「别把偶然相消当成一致性条件」的自我警告，建议 curator 让两条卡互相 `see_also`。
+
+**(d) 顺带 L1 复核的两条（补 E47 的强度措辞）：**
+- §10.7 开头（p.31）逐字：「**We make the guess, correctly it will turn out**, that the torus amplitude is again given
+  by the Coleman–Weinberg formula (7.3.24) with the region of integration replaced by the fundamental region
+  for the moduli space of the torus」——E47 已记，复核无误。
+- p.34 脚注 6 逐字：「The phase factor is a holomorphic function of `τ`, because the `Z^α_β` are. Since it has
+  magnitude 1, this implies that it is actually independent of `τ`.」——E47 已记，复核无误。
+
+### 5.6 访问日志与遗留问题
+
+| 目标 | 入口 | 结果 |
+|---|---|---|
+| Vol.2 ch.10 全章 PDF | `www.cambridge.org/core/services/aop-cambridge-core/content/view/E69C35DC077FD0BAD6B39479144D4A12/9780511618123c1_p1-44_CBO.pdf` | ✅ 607.4 KB / 44 页；**PDF 页 = 书页** |
+| §10.7 正文 | `Read(pages=31-37)` 分两次 | ✅ L1 |
+| §10.8 脚注 7 | `Read(pages=39)` | ✅ L1 |
+
+**页脚下载戳（版本锚定，逐字）**：`Downloaded from https://www.cambridge.org/core. … Cambridge Books Online © Cambridge University Press, 2010 … https://doi.org/10.1017/CBO9780511618123.004`
+⇒ **ch.10 的 DOI 后缀是 `.004`**（此前记录未记过）。
+
+**遗留：**
+- **Q5.1**（§5.2(c)）：(10.7.10) 末因子 `Z_ψ^±(τ)*` vs E47 的 `Z_ψ^+(τ)*`，需 auditor 单页复读定夺。
+- **Q5.2**：`Z^1_1 = 0` 的「两个 R 扇区基态相消」原书不展开。要给这条一个 `proven` 级来源，
+  需要的是 R 扇区基态在 `exp(πiF)` 下的本征值计数（Vol.2 §10.2/§10.3 的 Table 10.1 一带），本轮未查。
+- **Q5.3**：(10.7.16) ⇔ Vol.1 (7.2.41) 的换算（差一个 `η^{−4}`）原书未写，**本记录 §5.4 要点 3 是抽取者的推算**，
+  不是原文；建卡时须标 `inferred`。

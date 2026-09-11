@@ -1,0 +1,187 @@
+id: worldsheet.closed-superstring-worldsheet-parity-action
+kind: definition
+status: rigorous
+title: 世界面宇称 Ω 在**闭超弦**世界面费米子上的作用：Ωψ(w)Ω^{−1} = ψ̃(w̄)、Ωψ̃(w̄)Ω^{−1} = ψ(w)（Ω 交换左右移），一般插入 R = Ω exp(πiβF + πiβ̃F̃) 时带相位 exp(πiβ) / exp(πiβ̃)；Ω² 与 ψ、ψ̃ 对易
+statement: |
+  **设定（是陈述的一部分）**：**闭**超弦（RNS 形式），世界面柱面坐标 w = σ¹ + iσ²，
+  w ≅ w + 2π（Vol.2 §10.2 的取法，见 worldsheet.rns-fermion-periodicity）；
+  ψ^μ(w) 为左移（全纯）世界面费米子、ψ̃^μ(w̄) 为右移（反全纯）世界面费米子；
+  F、F̃ 为左右两侧的世界面费米数（worldsheet.rns-fermion-number-operator），
+  β、β̃ ∈ {0, 1} 标记迹里是否插入 exp(πiF) / exp(πiF̃)。
+  Ω 在闭弦**玻色**部门上的作用按 worldsheet.worldsheet-parity
+  （闭弦 σ ↦ −σ，Ω α_n^i Ω^{−1} = ᾱ_n^i、Ω ᾱ_n^i Ω^{−1} = α_n^i，Ω² = 1）。
+  **本卡给出它在闭超弦费米部门上的作用。**
+
+  **定义与断言**：
+    **(1) 一般插入的伴随作用（原书 (10.8.8a,b) 的中间一项，逐字）**：取
+          R = Ω exp(πiβF + πiβ̃F̃)，则
+            R ψ(w) R^{−1}  = exp(πiβ)  ψ̃(w̄) ,
+            R ψ̃(w̄) R^{−1} = exp(πiβ̃) ψ(w) 。
+        ⇒ **R 把左移费米子送到右移费米子、把右移送到左移，各带一个由 β / β̃ 定的相位**。
+    **(2) Ω 本身（β = β̃ = 0 的特例）**：
+            **Ω ψ(w) Ω^{−1} = ψ̃(w̄) ,   Ω ψ̃(w̄) Ω^{−1} = ψ(w)** 。
+        即 **Ω 在闭超弦费米部门上的作用就是交换左移与右移**，与它在玻色部门上交换
+        α_n ↔ ᾱ_n（worldsheet.worldsheet-parity）**同款**。
+    **(3) 迭代一次（原书 (10.8.9) 的代数内容）**：把 (1) 用两次得
+            R² ψ(w) R^{−2} = exp[πi(β + β̃)] ψ(w) ,
+        取 β = β̃ = 0：
+            **Ω² ψ(w) Ω^{−2} = ψ(w) ,   Ω² ψ̃(w̄) Ω^{−2} = ψ̃(w̄)**
+        ——即 **Ω² 与两侧的世界面费米子都对易**。
+        ⚠⚠ **这与开超弦截然不同**：开弦上 Ω 把 ψ^μ(w) 送到**同一个场**的平移
+        ψ^μ(w − π) 并带相位 exp(−πir)，其平方是 **Ω² = exp(πiF) ≠ 1**
+        （(10.8.14)，见 worldsheet.superstring-worldsheet-parity-action）。
+        **闭弦这里是「交换两次回到原处」，开弦那里是「同一个场转两次相位」。**
+    **(4) 路径积分边界条件的写法（原书 (10.8.8a,b) 全式，逐字）**：在 Klein 瓶（σ² 方向周长
+        2πt，迹里插入 R）上，
+            ψ(w + 2πit)  = − R ψ(w) R^{−1}  = − exp(πiβ)  ψ̃(w̄) ,
+            ψ̃(w̄ + 2πit) = − R ψ̃(w̄) R^{−1} = − exp(πiβ̃) ψ(w) ,
+        原书对最前面那个额外负号的全部说明逐字只有一句：
+        '**with the usual extra sign for fermionic fields**'。
+        迭代得 (10.8.9)：ψ(w + 4πit) = exp[πi(β + β̃)] ψ(w)。
+
+  **本定义不断言**：
+    (a) ⚠⚠ **不断言 Ω 在 R–R 顶点算子上的作用，也不断言 (10.6.17)**。
+        §10.6 (10.6.16) 把闭超弦的 R–R 顶点算子写作 **V_s Ṽ_{s'}**（按 8 × 8 = [0] + [2] + [4]_+
+        变换），(10.6.17) 逐字是 **Ṽ_{s'} V_s = − V_s Ṽ_{s'}**，
+        'where the final sign comes from the fermionic nature of the R vertex operators'。
+        **这一条已在 worldsheet.type-i-unoriented-closed-spectrum 的断言里**，本卡不重复。
+        ⚠ 而「**Ω 把 V_s Ṽ_{s'} 送到 Ṽ_{s'} V_s**」这句本身——即把断言 (2) 的「交换左右」
+        搬到**自旋场**上——**在原书 §10.6 没有逐字出处**（抽取记录 #E45 是**转述**：
+        「世界面宇称给 Ṽ_{s'}V_s = −V_sṼ_{s'}」；本图的
+        worldsheet.type-i-unoriented-closed-spectrum--via-omega-projection 的 summary
+        第 (2) 步把它写作「Ω 交换左右，即把 V_sṼ_{s'} 变成 Ṽ_{s'}V_s」，那是**本图的读法**）。
+        ⇒ 本卡**不把它写进断言**。V_s 是**自旋场**（R 扇区基态算子），不是 ψ 的多项式，
+        断言 (2) 的「Ω 交换 ψ ↔ ψ̃」**不自动**给出它在 V_s 上的作用。
+        **这是本卡自觉留下的缺口**，见 notes。
+    (b) **不断言投影到 Ω = +1 挑出什么**，也不断言 type I 无取向闭弦谱
+        [0] + [2] + (2) + 8′ + 56（那是 worldsheet.type-i-unoriented-closed-spectrum）。
+    (c) **不断言 Ω² = 1 作为算符等式**。断言 (3) 只说 Ω² **与世界面费米子对易**；
+        原书在闭弦一侧**从不写** Ω² = 1（玻色卡 worldsheet.worldsheet-parity 写了 Ω² = 1，
+        但那是**玻色弦**语境）。⇒ 闭超弦上 Ω 的阶是 2 还是 4，本卡不表态。
+    (d) **不断言模层面的版本**。原书在闭弦一侧只给场层面的 (10.8.8)，
+        **不给** Ω 在 ψ_r、ψ̃_r 上的作用（对照开弦有 (10.8.13)
+        Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ）。本卡照此只到场层面。
+    (e) **不断言 Ω 在超共形鬼场 β、γ 上的作用**（原书本处不提）。
+    (f) **不断言 Klein 瓶振幅本身**（那是
+        worldsheet.superstring-klein-bottle-amplitude-closed-channel），
+        也不断言 (10.8.10a,b) 两个迹的整体符号（脚注 8：一个由引力子定、一个由 (10.6.17) 定）。
+    (g) **不断言 (4) 里那个「usual extra sign for fermionic fields」的来源**。
+        原书只有这一句，不给理由；本图的 worldsheet.fermion-periodicity-and-minus-one-to-f
+        是**相邻但不同**的事实（周期路径积分给 Tr[(−1)^F e^{−HU}]），**不能**替代。
+    (h) **不断言 Ω 在开超弦上的作用**（那是 worldsheet.superstring-worldsheet-parity-action，
+        含 Ω² = exp(πiF) 与四项投影算符 (1+Ω+Ω²+Ω³)/4）。**两张卡分别覆盖开、闭两侧。**
+uses:
+  - worldsheet.worldsheet-parity
+  - worldsheet.rns-fermion-periodicity
+  - worldsheet.rns-fermion-number-operator
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+  - conv.worldsheet-complex-coords
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.8「The Klein bottle」, eqs. **(10.8.8a,b)** 与 **(10.8.9)**, p. 40；逐字：'With R = Ω exp(πiβF + πiβ̃F̃) in the trace, the path integral boundary conditions are  ψ(w + 2πit) = −Rψ(w)R^{−1} = −exp(πiβ) ψ̃(w̄),  ψ̃(w̄ + 2πit) = −Rψ̃(w̄)R^{−1} = −exp(πiβ̃) ψ(w),  **with the usual extra sign for fermionic fields.** As indicated by the arrows in figure 10.3, these imply that  ψ(w + 4πit) = exp[πi(β + β̃)] ψ(w).'"
+    note: |
+      **L1 原书页图**，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E69**
+      （该条已单页重渲染复核）。
+      ★★ **这是本项目里「Ω 在闭超弦费米子上如何作用」的唯一一手带式号来源**。
+      ★ 断言 (1)(2) 取的是 (10.8.8a,b) 链条里的**中间一项** Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)
+      ——它是一条**算符等式**，写在路径积分边界条件的句子里；
+      断言 (4) 把整条链（含最前面那个额外负号）照录。
+      ★ 断言 (3) 的 β = β̃ = 0 特例是把 (1) 用两次，这一步在原书里对应 (10.8.9)
+      （原书给的是路径积分的周期性，本卡取其代数内容）。
+  - ref: polchinski-1998-v1
+    loc: "§1.4, eq. (1.4.19) 附近（玻色弦的世界面宇称：**闭弦** σ ↦ −σ、Ω α_n^i Ω^{−1} = ᾱ_n^i、Ω ᾱ_n^i Ω^{−1} = α_n^i、Ω² = 1、无取向投影 (1+Ω)/2）"
+    note: |
+      本图对应节点 **worldsheet.worldsheet-parity**（本卡 uses 之一）。
+      ★ **两张卡的关系（也是本卡存在的理由）**：玻色部门上 Ω 交换 α_n ↔ ᾱ_n，
+      费米部门上交换 ψ ↔ ψ̃——**结构同款**，但玻色卡对 ψ 什么也没说，
+      而本图此前所有需要「闭超弦的 Ω」的推导都只能挂到玻色卡上并标 **inferred**。
+      ⚠ 玻色卡写了 **Ω² = 1**；本卡**不**把它搬到费米部门上（见「不断言 (c)」）。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eqs. (10.2.19)–(10.2.24), pp. 8–9（exp(πiF) 的构造；闭弦两侧各一份 F、F̃）"
+    note: |
+      本图对应节点 **worldsheet.rns-fermion-number-operator**（本卡 uses 之一）。
+      供给断言 (1) 里 R = Ω exp(πiβF + πiβ̃F̃) 中的 F、F̃。
+  - ref: polchinski-1998-v2
+    loc: "§10.2（RNS 费米子的 R / NS 周期条件与左右两侧的 ψ、ψ̃；柱面周长取 2π）"
+    note: |
+      本图对应节点 **worldsheet.rns-fermion-periodicity**（本卡 uses 之一）。
+      供给被 Ω 交换的那两个对象（左移 ψ(w) 与右移 ψ̃(w̄)）与坐标约定。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eqs. **(10.6.16)**、**(10.6.17)**, pp. 29–30（R–R 顶点算子 V_s Ṽ_{s'}；Ṽ_{s'}V_s = −V_sṼ_{s'}，'where the final sign comes from the fermionic nature of the R vertex operators'）"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md **#E45**）。
+      ⚠⚠ **本条只作定位，不支撑任何断言**：本卡「不断言 (a)」已声明这一层不在本卡
+      （它在 worldsheet.type-i-unoriented-closed-spectrum 的断言里），
+      而「Ω 把 V_sṼ_{s'} 送到 Ṽ_{s'}V_s」这句在原书 §10.6 **没有逐字出处**。
+      ⇒ 列在此处是为了让后人一眼看到「闭弦 Ω 的另一层在哪里、为什么不在本卡」。
+tags: [superstring, type-i, worldsheet-parity, closed-string, orientifold-projection, definition]
+notes: |
+  ★★★【本卡为什么存在（curator，2026-09-11，small-backlog-13）】
+  本图此前有**三处**记着同一个缺口，逐字：
+    · worldsheet.superstring-worldsheet-parity-action 的「不断言 (c)」：
+      「⚠⚠ **不断言 Ω 在闭超弦上的作用**。闭弦那一支在本图分散在两处、且都不在本卡 …
+        世界面费米子层面：原书只以 Klein 瓶的边界条件 (10.8.8a,b) 给出 … **本卡只覆盖开弦。**」
+    · worldsheet.superstring-klein-bottle-amplitude-closed-channel--via-closed-string-trace-with-omega
+      的 gaps 第三条：「⇒ **待建：闭超弦上的 Ω 作用卡**（(10.8.8) 与 §10.6 (10.6.16)–(10.6.17)
+      合起来才够）。」
+    · worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences 的
+      gaps「Ω 在超弦上的作用本图无节点」(b)：「**闭弦一侧仍空** … 本推导的
+      worldsheet.worldsheet-parity 边因此**仍标 inferred**，理由改为『闭弦超弦 Ω 无节点』。」
+  **本卡把「世界面费米子层面」这一半合上**，两条 inferred 边因此改指本卡并去掉 inferred。
+
+  ⚠⚠【本卡**没有**合上的那一半，以及为什么（**必读**）】
+  上面第二条待建项说的是「(10.8.8) **与** §10.6 (10.6.16)–(10.6.17) **合起来才够**」。
+  本卡只建了 (10.8.8) 这一半，(10.6.16)–(10.6.17) 那一半**有意不进本卡**，两条理由：
+    **(i) 内容上**：那一层已经在 **worldsheet.type-i-unoriented-closed-spectrum** 的断言里
+      （逐字含 V_sṼ_{s'}、8 × 8 = [0]+[2]+[4]_+、Ṽ_{s'}V_s = −V_sṼ_{s'} 与符号来源那句从句）。
+      在本卡重述会造出一对**同一引理的两处表述**，违反「先搜索再新增」的本意。
+    **(ii) 结构上（这一条是硬约束）**：那张卡的推导
+      worldsheet.type-i-unoriented-closed-spectrum--via-omega-projection **需要**「Ω 在超弦上
+      怎么作用」——它现在正挂着一条指向玻色卡的 **inferred** 边，并在 gaps 里写着
+      「**Ω 在超弦上的作用未在图中定义**」。**那条边的正解就是改指本卡。**
+      若本卡反过来 `uses` 那张卡，就会成环（本卡 → 那张卡 → 本卡）。
+      ⇒ 本卡**不** `uses` worldsheet.type-i-unoriented-closed-spectrum，(10.6.17) 只作 sources 定位。
+  ⇒ **交 lead 的建议（本轮未做，因该文件不在本轮 claim 内）**：把
+    worldsheet.type-i-unoriented-closed-spectrum--via-omega-projection 的
+    worldsheet.worldsheet-parity **inferred** 边改指本卡并去 inferred，
+    同时关闭它 gaps 里「Ω 在超弦上的作用未在图中定义」那一条。**改完不会成环。**
+  ⚠ 仍会剩一条**真缺口**：「Ω 在**自旋场** V_s 上的作用」——原书 §10.6 不写，本卡「不断言 (a)」
+    已登记。它与 §10.4 末的 cocycle / §10.6 的自旋-统计讨论（抽取记录 #E44）相连，本图都没建。
+
+  ★【为什么 status 取 rigorous】断言 (1) 是原书写出的**算符等式**（Rψ(w)R^{−1} = exp(πiβ)ψ̃(w̄)），
+  (2) 是它在 β = β̃ = 0 的直接代入，(3) 是把 (1) 用两次的两行代数。
+  这符合 docs/STATUS_LEVELS.md 对 definition 的 `rigorous` 判据（数学上精确但未形式化）。
+  ⚠ **三处照实登记的保留**（不因此降级，但必须写明，与开弦那张姊妹卡同款）：
+    (i) 原书是在**路径积分边界条件**的句子里写出这条算符等式的，且最前面那个额外负号
+        只有一句 'with the usual extra sign for fermionic fields'，**不给理由**（「不断言 (g)」）；
+    (ii) 原书**不给模层面**的版本（对照开弦有 (10.8.13)）（「不断言 (d)」）；
+    (iii) 原书**不写** Ω 在闭弦上的平方等于什么（「不断言 (c)」）——本卡只断言 Ω² 与 ψ、ψ̃ 对易。
+  ⇒ 本卡的 effective 由 uses 的最低级压下来（worldsheet.rns-fermion-periodicity 与
+  worldsheet.rns-fermion-number-operator 都被上游压到 physical-argument），这是有意的。
+
+  ★★【开 / 闭两侧的 Ω 现在成对了，差别必须记住】
+    · **开超弦**（worldsheet.superstring-worldsheet-parity-action，(10.8.12)–(10.8.15)）：
+      Ω ψ^μ(w) Ω^{−1} = ψ^μ(w − π)（**同一个场**的平移，由 doubling trick 得到），
+      模上 Ωψ_r^μΩ^{−1} = exp(−πir)ψ_r^μ，**Ω² = exp(πiF)**，
+      与 GSO 合成的投影算符是**四项** (1+Ω+Ω²+Ω³)/4；
+    · **闭超弦**（本卡，(10.8.8)–(10.8.9)）：
+      Ω ψ(w) Ω^{−1} = ψ̃(w̄)（**交换左右两个场**），**Ω² 与 ψ、ψ̃ 对易**，
+      无取向投影仍是玻色弦式的两项 (1+Ω)/2（原书在 Klein 瓶处用的就是它，
+      与 (10.8.7) 的 GSO 投影算符相乘给出 dt/8t 里的两个 ½）。
+  ⚠ **两张卡不得互相替代**，这正是 Klein 瓶推导此前把 Ω 边标 inferred 时写的理由。
+
+  【下游（本卡建立时接的两条边）】
+    1. worldsheet.superstring-klein-bottle-amplitude-closed-channel--via-closed-string-trace-with-omega
+       的 worldsheet.worldsheet-parity **inferred** 边 ⇒ 改指本卡，去 inferred；
+    2. worldsheet.type-i-tadpole-cancellation-so32-v2--via-one-loop-divergences
+       的 worldsheet.worldsheet-parity **inferred** 边 ⇒ 改指本卡，去 inferred
+       （该边此前的 inferred 理由逐字就是「闭弦超弦 Ω 无节点」）。
+  ⚠ **圆柱推导那条 worldsheet.worldsheet-parity 的 inferred 边本轮不改**：它要的只是
+    「Ω 投影贡献一个 ½」这条**计数**（该推导自己写明「本边的 inferred 程度比在 tadpole 卡上轻」），
+    而圆柱是**开弦**迹，用不到本卡的「交换左右」。**那条边的正解是开弦一侧的 Ω 卡**，
+    不是本卡。已列入交 lead 的报告。
+author: curator
+created: "2026-09-11"

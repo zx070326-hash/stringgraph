@@ -3,7 +3,7 @@ target: swampland.heterotic-spectral-flow-substates
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.primary-field
+  - id: worldsheet.primary-field-v2
     inferred: true
     note: >-
       原文用到"J(z) 是 (1,0) 主场，故可构造 (1,1) 顶点算子 J(z)∂̄X_μ e^{ikX}"这一步。

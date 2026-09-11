@@ -1,0 +1,139 @@
+id: worldsheet.open-superstring-gso-projection
+kind: definition
+status: rigorous
+title: 开超弦的 GSO 投影：在 NS 与 R 两个扇区上各投影到 exp(πiF) 的一个固定本征值；与闭超弦相容的两个选择是 I（NS+, R+）与 Ĩ（NS+, R−），投影算符 (1 + ε exp(πiF))/2 在迹里各贡献一个 ½
+statement: |
+  **设定（是陈述的一部分）**：**开**超弦（RNS 形式，D = 10）。
+  世界面费米数算符 exp(πiF) 按 worldsheet.rns-fermion-number-operator
+  （含鬼场部分；原书逐字提醒 'this definition is based on **spin** rather than statistics'）；
+  扇区标号 (α, F) 按 worldsheet.superstring-sector-labels——**开弦共四个扇区**
+  **NS+、NS−、R+、R−**，其中 ± 指 exp(πiF) = ±1，且 α、F **都只 mod 2 有定义**。
+
+  **定义与断言**：
+    **(1) 什么叫开超弦的 GSO 投影**：在 **NS 扇区**与 **R 扇区**上**各**把 Hilbert 空间投影到
+        exp(πiF) 的**一个固定本征值**上，即从四个扇区里各留一个 NS 与一个 R。
+    **(2) 原书列出的两个选择（§10.6 p. 30，逐字，无式号）**：
+          **I** ：  **NS+ , R+**
+          **Ĩ** ：  **NS+ , R−**
+        即两者都保留 **NS+**，区别**只在 R 扇区**取 exp(πiF) = +1 还是 −1。
+        ⚠ 原书把这两个称作 'The **two possibilities**'，而这句话的**前提**在它前面一句里：
+        'Closure of the OPE in open + open → closed scattering implies that any open string that
+        **couples consistently to type I or type II closed superstrings** must have a GSO
+        projection in the open string sector.'——**「两个」是在这个前提下的枚举**，
+        不是「开超弦的 GSO 投影一共只有两种」（见「本定义不断言 (c)」）。
+    **(3) 投影算符与它在迹里的因子**：在每个扇区上，投影算符是
+          ( 1 + ε · exp(πiF) ) / 2 ,  ε = 该扇区保留的本征值（±1），
+        故它在单圈迹里**贡献一个因子 ½**。原书 §10.8 p. 38 逐字：
+        '**Note that the GSO and Ω projection operators each contribute a factor of ½.**'
+        ⚠ 这是本卡被 §10.8 三个面的振幅推导直接引用的那一条。
+
+  **本定义不断言**：
+    (a) ⚠ **不断言「开弦必须做 GSO 投影」**。那是一条 **proposition**，在
+        worldsheet.type-i-open-string-gauge-multiplet 的断言 (1) 前半，理由是上面引的那句
+        OPE 闭合（原书只给一句话，不展开）。**本卡只给算符层面的定义**，
+        「必须」这一步的强度由那张卡承载。
+    (b) **不断言两个选择各自的无质量谱**。'I : NS+, R+ = **8_v + 8**'、
+        'Ĩ : NS+, R− = **8_v + 8′**' 在同一张卡的断言 (1) 后半；本卡只给扇区标号，不给表示。
+    (c) ⚠⚠ **不断言「只有两个选择」是无条件的**。四个扇区里各取一个 NS 与一个 R，
+        组合本有 2 × 2 = 4 种；原书只列 I 与 Ĩ，是因为它已经加上了「与 type I 或 type II
+        闭超弦一致耦合」这个前提（断言 (2) 的 ⚠）。**本卡不断言含 NS− 的两种为什么被排除**
+        （原书在此处不给理由）。
+    (d) **不断言任何物理后果**：不断言 NS+ 去掉了快子（NS 基态有 exp(πiF) = −1，见
+        worldsheet.open-superstring-low-level-spectrum 与 worldsheet.gso-removes-tachyon），
+        不断言时空超对称，不断言 Chan–Paton 与规范群。
+    (e) ⚠ **不断言与闭弦 GSO 投影的关系**。worldsheet.gso-projection 是**闭弦**
+        （IIA/IIB/type 0）的 GSO，其论证来路**不同**：闭弦的来自三条扇区一致性条件的解，
+        开弦的来自 open + open → closed 的 OPE 闭合。**两张卡不得互相替代**
+        （reviewer-batch23 正是因为这个区别把圆柱推导上那条指向闭弦 GSO 卡的边改标 inferred）。
+    (f) **不断言含 Ω 的联合投影算符**。(10.8.15) 的 (1 + Ω + Ω² + Ω³)/4 是 Ω 与 GSO
+        **合成**的算符，属 worldsheet.superstring-worldsheet-parity-action；
+        本卡只给 GSO 单独的那一半。
+    (g) **不断言 exp(πiF) 的本征值只有 ±1**（那由 F mod 2 与 (10.2.24) 给出，
+        照录在 worldsheet.superstring-sector-labels）。
+uses:
+  - worldsheet.type-i-open-string-gauge-multiplet
+  - worldsheet.superstring-sector-labels
+  - worldsheet.rns-fermion-number-operator
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.worldsheet-euclidean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.6「Unoriented and open superstrings」, p. 30（**本段无式号**）；逐字：'Closure of the OPE in open + open → closed scattering implies that any open string that couples consistently to type I or type II closed superstrings must have a GSO projection in the open string sector. **The two possibilities and their massless spectra are**'  I : NS+, R+ = 8_v + 8 ；  Ĩ : NS+, R− = 8_v + 8′"
+    note: |
+      L1 原书页图，抽取记录 literature/extractions/polchinski-1998-v2.md **#E45**
+      （两行谱与全部逐字措辞逐页读到原书页图）。
+      ⚠ **本段无式号**：(10.6.16)–(10.6.18) 属闭弦部分，开弦这两行在原书里是正文表格式排版
+      （与 worldsheet.type-i-open-string-gauge-multiplet 的 sources 同一条告警）。
+      ★ 本卡从该段里拆出的只有**扇区标号这一层**（NS+/R±），谱与「必须」两层留在那张卡上。
+  - ref: polchinski-1998-v2
+    loc: "§10.8, p. 38（紧跟 (10.8.2) 之下）逐字：'Note that the GSO and Ω projection operators each contribute a factor of ½.'"
+    note: |
+      L1，抽取记录 literature/extractions/polchinski-1998-v2-sec10-8.md **#E65** / **§1** 的归一化条。
+      ★★ **这是断言 (3) 后半的唯一来源，也是本卡的主要下游用途**：
+      §10.8 三个面的振幅都用 dt/**8**t，相对玻色弦 (7.4.1) 的 dt/2t 多出的两个 ½
+      正是 GSO 与 Ω 各一个。
+  - ref: polchinski-1998-v2
+    loc: "§10.6, eqs. (10.6.1)–(10.6.3), pp. 25–26（开弦扇区记作 (α, F)，四个；α = 1 − 2ν；逐字 'Both α and F are defined only mod 2'）"
+    note: |
+      本图对应节点 **worldsheet.superstring-sector-labels**（本卡 uses 之一）。
+      供给 NS±/R± 这套记号本身。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eqs. (10.2.19)–(10.2.24), pp. 8–9（exp(πiF) 的构造、含鬼场的推广、exp(πiF)|0⟩_NS = −|0⟩_NS）"
+    note: |
+      本图对应节点 **worldsheet.rns-fermion-number-operator**（本卡 uses 之一）。
+      供给被投影的那个算符。⚠ 那张卡自身 status = physical-argument
+      （鬼场部分的推广理由是一句物理论证），故本卡的 effective 被它压到 physical-argument，
+      这是有意的，见 notes。
+tags: [superstring, open-string, gso, type-i, projection, definition]
+notes: |
+  ★★【本卡为什么存在（curator，2026-09-11，small-backlog-13）】
+  本图此前**没有「开弦 GSO 投影」的节点**，后果在两处可见：
+    · worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling
+      把「GSO 投影贡献的那个 ½」挂在 **worldsheet.gso-projection**（**闭弦** IIA/IIB 的 GSO）上，
+      被 reviewer-batch23 裁定「对象不完全同一」而**改标 inferred**（lead 已落地）；
+    · worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
+      改把它挂在 **worldsheet.type-i-open-string-gauge-multiplet** 上（非 inferred），
+      但那张卡**同时**承载着「必须做 GSO」「两个谱」「Chan–Paton 与规范群」「规范微子在伴随表示」
+      四件事——**一条边借一件、剩下三件搭便车**。该推导的 notes 已写下正解，逐字：
+        「⇒ 若日后为『开弦 GSO 投影』单建一张窄卡，三条推导应一起改指它。」
+  **本卡就是那张窄卡。**
+
+  ★【本卡与 worldsheet.type-i-open-string-gauge-multiplet 的分工（一句话）】
+  那张卡 = **命题**（开弦**必须**做 GSO；两个选择各自的**谱**；Chan–Paton 与规范群）；
+  本卡 = **定义**（GSO 投影是什么算符、两个选择的**扇区标号**、投影算符给一个 ½）。
+  ⇒ 本卡 `uses` 那张卡：断言 (2) 里 I / Ĩ 这两个**名字**与「恰是这两个」这个枚举
+  都是从那张卡（即原书同一段）继承的，本卡不重新论证。
+
+  ★【为什么 status 取 rigorous】断言 (1)(3) 是在一个已明确定义的算符 exp(πiF)
+  （本征值 ±1，F mod 2）上做的**正交投影**，(1 + ε exp(πiF))/2 是幂等自伴算符、迹上给 ½——
+  这是有限步初等线性代数，符合 docs/STATUS_LEVELS.md 对 definition 的 `rigorous` 判据
+  （数学上精确但未形式化）。
+  ⚠ **但本卡的 effective 会被 uses 压到 physical-argument**，这是有意的：
+    (i) worldsheet.rns-fermion-number-operator 是 physical-argument（鬼场部分的推广只有一句
+        物理理由，且该卡自己记着「基于自旋而非统计」这条约定选择）；
+    (ii) worldsheet.type-i-open-string-gauge-multiplet 是 physical-argument
+        （原书对「必须」「两个」「谱」每条只给一句话）。
+  ⇒ 断言 (2) 的**枚举性**确实只有物理论证支撑，被压下来是正确的记账。
+
+  ⚠⚠【断言 (2) 的「两个」是有前提的——这是本卡最容易被误引的一处】
+  原书写 'The two possibilities'，紧接在「与 type I 或 type II 闭超弦一致耦合」之后。
+  四个扇区里各取一 NS、一 R 本有四种组合；含 **NS−** 的两种在原书这里被**默默排除**，
+  原书**不给理由**（可对照：闭弦一侧的 type 0 理论就含 NS− 扇区，见
+  worldsheet.superstring-sector-consistency-solutions 的 0A / 0B）。
+  ⇒ 「本定义不断言 (c)」把这一点写死。**不要**把本卡引作「开超弦的 GSO 投影只有两种」。
+
+  【下游（本卡建立时应接的三条边）】
+    1. worldsheet.superstring-mobius-strip-amplitude-closed-channel--via-open-string-trace-with-omega
+       ——原先从 type-i-open-string-gauge-multiplet 边上借的「开弦 GSO 的 ½」改指本卡；
+    2. worldsheet.superstring-cylinder-amplitude-closed-channel-v2--via-open-string-trace-doubling
+       ——原先指向闭弦 gso-projection 的 **inferred** 边改指本卡并**去 inferred**；
+    3. worldsheet.superstring-worldsheet-parity-action 的 uses 里「exp(πiF) = 1 by the GSO
+       projection」那一条**暂不改**：那是 statement 正文里的字面引用，按 graph/CLAUDE.md
+       2026-09-12 裁决，正文指针留待该卡下次实质换代时同步；本轮只改依赖边。
+       ⚠ 该卡的 uses 仍列 worldsheet.type-i-open-string-gauge-multiplet，**本轮不动**
+       （改 uses 属该卡的实质修改，且它是 definition，uses 变动会改 effective 的算法输入）。
+       已列入交 lead 的报告。
+author: curator
+created: "2026-09-11"
