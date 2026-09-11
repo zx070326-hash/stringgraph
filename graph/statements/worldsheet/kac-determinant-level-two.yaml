@@ -165,6 +165,10 @@ notes: |
     而它等价于 V(c,h) ≠ 0，后者是 PBW 的推论。
   图侧承载：**worldsheet.verma-level-basis-generic-low-levels**（同分支新建，formalized），
   N = 3, 4 的对应结论只到 dim ≥ p(N)，原因见那张卡的【不断言】(d)(e)。
+  ⚠ **2026-09-11 lean-wire-7 更新**：上一行已过时。formalizer 分支 agent/formalizer/pbw-n34
+  （lead 以 1b3a6e3 合入 main）证出 `finrank_levelSpan_three = 3`、`finrank_levelSpan_four = 5`，
+  N = 3, 4 现在同样是等式；那张卡已 superseded_by **worldsheet.verma-level-basis-generic-low-levels-v2**，
+  level-three / level-four 卡的 notes 各有对应的「局部解除」段。
   ⚠ 按项目原则 1，本卡的 statement（含【不断言】(a) 与标题里的「张成集的 Gram，非基的 Gram」）
   **不改**：那句话对 Kac 零点与一般基环仍然正确，本段只登记「泛型点上更强的话已可说」。
 
