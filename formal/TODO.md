@@ -1522,6 +1522,29 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     给出，但满射性**就是** `DDFSpans` 本身，所以这条等距同构不携带超出上述定理的信息，
     判断为不值得写。
   - **公理登记**：10 条声明经 `check_axioms --all` 全 `ok`（2026-09-11）。
+  - [x] **卡 (3) 后半句已关闭**（2026-09-11，分支 `agent/formalizer/ddfgram-level`，
+    只追加了一个新 section，既有声明未动）：`|d⟩` 确实落在第 `N(d)` 层。
+    - 方向由 `DDF.lean` 的定义定死：`towerVertex η b n K = towerShift n ∘ (对角振子部分)`，
+      故 `V^{(n)}_K` 把 rung `j` 送到 `j + n`，而 `towerMode`/`towerModeVec` 是对角的、不动 rung。
+      因此 **`A^ε_n` 把 rung 移 `+n`**，创生算子 `A^ε_{−n}` 移 `−n`，`ddfMonomial d` 在
+      rung `−N(d)`（动量 `k − N(d)k₀`）。与 `LightCone.ddfOp_neg_one_apply_towerVacuum`
+      （`A^ε_{−1}|0;k⟩` 支撑在 rung `−1`）一致。
+    - 新声明：`eq_single_of_mem_towerRungSubmodule`、`single_mem_towerRungSubmodule`、
+      `towerVacuum_mem_towerRungSubmodule`、`towerPairing_eq_zero_of_mem_towerRungSubmodule`、
+      `towerModeVec_mem_towerRungSubmodule`、`towerVertex_mem_towerRungSubmodule`、
+      `ddfSummand_mem_towerRungSubmodule`、**`ddfOp_mem_towerRungSubmodule`**、
+      `ddfLevel_add_single`、**`ddfMonomial_mem_towerRungSubmodule`**、
+      `ddf_gram_of_level_ne_of_rung`、**`frameMonomial_mem_towerRungSubmodule`**、
+      **`ddfSpan_eq_iSup_rung`**（`ddfSpan = ⨆_N (ddfSpan ⊓ rung(−N))`）。13 条经
+      `check_axioms --all` 全 `ok`（标准三公理）。
+    - **数学判断（应写进图卡 notes）**：`ddf_gram_of_level_ne` 原先由「`N(d) ≠ N(e) ⇒ d ≠ e`
+      + Gram 对角」得到，因而暗中依赖标架正交归一与 Heisenberg 递推；
+      `ddf_gram_of_level_ne_of_rung` 给出**不依赖这两者**的证明：不同 rung 本来就正交
+      （`Fock.towerPairing_single_single_of_ne`，动量守恒）。卡
+      `worldsheet.transverse-ddf-fock-gram-matrix` 的 (3) 应注明「按层正交」只是
+      「按动量层正交」的特例，前件比 (1)(2) 弱。
+    - `ddfOp_mem_towerRungSubmodule` **不需要** `hbb`/`hba`/正交归一，只用定义 `A^ε_n` 本来
+      就要的 `hη`、`hεb`；即 rung 平移是纯运动学的。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`，`N = 1` 分片已由
       `ddfSpans_bigrade_neg_one_one` 关闭。
