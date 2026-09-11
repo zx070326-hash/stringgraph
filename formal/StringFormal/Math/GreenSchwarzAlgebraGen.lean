@@ -109,6 +109,20 @@ theorem gs_factorization_e8_alg (x : R) :
     rw [← map_sub, ← map_mul]; norm_num
   rw [h]; ring
 
+/-- The nested form of the factorisation and the expanded form
+`Ω₁₂ = (1/48) Ω₄ Ω₈ − (1/14400) Ω₄³` agree over any commutative `ℚ`-algebra, for arbitrary
+`Ω₄`, `Ω₈`. Generalises `gs_factorization_nested_eq_expanded`.
+
+GS (1984) write the nested form; the expanded form is the one usually quoted second-hand.
+The whole content is `1/14400 = (1/48)(1/300)` inside `ℚ`. -/
+theorem gs_factorization_nested_eq_expanded_alg (Ω₄ Ω₈ : R) :
+    algebraMap ℚ R (1 / 48) * Ω₄ * (Ω₈ - algebraMap ℚ R (1 / 300) * Ω₄ ^ 2)
+      = algebraMap ℚ R (1 / 48) * Ω₄ * Ω₈ - algebraMap ℚ R (1 / 14400) * Ω₄ ^ 3 := by
+  have h : algebraMap ℚ R (1 / 14400)
+      = algebraMap ℚ R (1 / 48) * algebraMap ℚ R (1 / 300) := by
+    rw [← map_mul]; norm_num
+  rw [h]; ring
+
 end FactorizationAlg
 
 end StringFormal.Math
