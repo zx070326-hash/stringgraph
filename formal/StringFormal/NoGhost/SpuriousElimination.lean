@@ -1062,11 +1062,114 @@ theorem finrank_conjFree_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : �
   rw [hrange]
   exact finrank_range_le_card _
 
+instance conjFreeSlice_finiteDimensional (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    FiniteDimensional K ↥(conjFreeSlice hD F N) :=
+  Submodule.finiteDimensional_of_le (conjFreeSlice_le_towerBigrade hD F N)
+
 theorem finrank_conjFreeSlice_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
     Module.finrank K ↥(conjFreeSlice hD F N)
       ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} :=
   le_trans (Submodule.finrank_map_le _ _) (finrank_conjFree_le hD F N)
 
 end CountingField
+
+/-! ### (P3): the physical slice is no bigger than the `b̃`-free span -/
+
+section P3
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+omit [CharZero K] [Algebra ℚ K] in
+/-- If a space embeds into the dual of a finite-dimensional space, it is no bigger.  Stated on
+abstract vector spaces so that the `AddCommMonoid` instance path of `Module.Dual` matches
+Mathlib's `Subspace.dual_finrank_eq` (on a `Submodule` coercion the two paths are only
+defeq). -/
+private theorem finrank_le_of_injective_toDualHom {V : Type*} [AddCommGroup V] [Module K V]
+    {M : Type*} [AddCommGroup M] [Module K M] (W : Submodule K M) [FiniteDimensional K ↥W]
+    {f : V →ₗ[K] (↥W →ₗ[K] K)} (hf : Function.Injective f) :
+    Module.finrank K V ≤ Module.finrank K ↥W := by
+  have hfin : Module.Finite K (↥W →ₗ[K] K) :=
+    (inferInstance : FiniteDimensional K (Module.Dual K ↥W))
+  exact le_trans (LinearMap.finrank_le_finrank_of_injective hf)
+    (le_of_eq (Subspace.dual_finrank_eq (K := K) (V := ↥W)))
+
+/-- A physical state on the slice that is orthogonal to every `b̃`-free light-cone monomial is
+zero: it is orthogonal to the spurious states by
+`towerPhys_inf_towerBigrade_eq_towerOrthComplement`, hence — by the `β`-elimination — to the
+whole slice, hence zero by `eq_zero_of_mem_towerBigrade_of_orthogonal`. -/
+theorem eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (N : ℕ) {x : TowerFock D K}
+    (hxH : x ∈ towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+      ⊓ towerBigrade D K (-(N : ℤ)) N)
+    (hxC : ∀ c ∈ conjFreeSlice hD F N, Fock.towerPairing η x c = 0) : x = 0 := by
+  have hxV : x ∈ towerBigrade D K (-(N : ℤ)) N := (Submodule.mem_inf.mp hxH).2
+  have hxS : ∀ s ∈ towerSpuriousSubmodule η a b, Fock.towerPairing η x s = 0 := by
+    have heq := towerPhys_inf_towerBigrade_eq_towerOrthComplement η a b F.hη
+      F.frame.isotropic F.hba N
+    rw [heq] at hxH
+    rw [← mem_towerOrthComplement]
+    exact (Submodule.mem_inf.mp hxH).1
+  refine eq_zero_of_mem_towerBigrade_of_orthogonal F.hη (-(N : ℤ)) N hxV fun y hy => ?_
+  obtain ⟨c, hc, s, hs, rfl⟩ := Submodule.mem_sup.mp
+    (towerBigrade_le_conjFreeSlice_sup_towerSpurious hD F F.hη N hy)
+  rw [map_add, hxC c hc, hxS s hs, add_zero]
+
+/-- The pairing of the physical slice against the `b̃`-free span, packaged as a linear map into
+the dual of that span.  Named rather than inlined so that its codomain is elaborated once and
+the `Module.Finite` instance for it is found. -/
+noncomputable def physSliceToDual (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-(N : ℤ)) N) →ₗ[K] (↥(conjFreeSlice hD F N) →ₗ[K] K) :=
+  LinearMap.domRestrict ((Fock.towerPairing η).compl₂ (conjFreeSlice hD F N).subtype) _
+
+omit [CharZero K] in
+@[simp]
+lemma physSliceToDual_apply (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ)
+    (x : ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-(N : ℤ)) N)) (c : ↥(conjFreeSlice hD F N)) :
+    physSliceToDual hD F N x c
+      = Fock.towerPairing η (x : TowerFock D K) (c : TowerFock D K) := rfl
+
+/-- **(P3)** (blueprint §B′.4's `finrank_towerPhys_inf_towerBigrade_le`):
+
+`dim (H_phys ⊓ V_N) ≤ p_{D−1}(N)`,
+
+the right-hand side being the number of `b̃`-free level-`N` light-cone occupation functions.
+
+The pairing against the `b̃`-free span embeds `H_phys ⊓ V_N` into the dual of that span, by the
+previous lemma; the dual has the same dimension, and the span has at most `p_{D−1}(N)`
+generators.
+
+`D = 26` does not appear.  Together with `SliceDim.finrank_ddfSpan_inf_towerBigrade`
+(`= p_{D−2}(N)`) this is the whole `D`-independent input of blueprint §B′.2; what is left is
+(B-26), the statement that `H_null ⊓ V_N` makes up the difference. -/
+theorem finrank_towerPhys_inf_towerBigrade_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (N : ℕ) :
+    Module.finrank K ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-(N : ℤ)) N)
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} := by
+  classical
+  refine le_trans ?_ (finrank_conjFreeSlice_le hD F N)
+  refine finrank_le_of_injective_toDualHom
+    (V := ↥(towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+      ⊓ towerBigrade D K (-(N : ℤ)) N)) (conjFreeSlice hD F N)
+    (f := physSliceToDual hD F N) ?_
+  intro u v huv
+  refine Subtype.ext (sub_eq_zero.mp ?_)
+  have hmem : (u : TowerFock D K) - (v : TowerFock D K)
+      ∈ towerPhysSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+        ⊓ towerBigrade D K (-(N : ℤ)) N := Submodule.sub_mem _ u.2 v.2
+  refine eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice hD F N hmem
+    fun c hc => ?_
+  have h1 := congrArg (fun g : ↥(conjFreeSlice hD F N) →ₗ[K] K => g ⟨c, hc⟩) huv
+  simp only [physSliceToDual_apply] at h1
+  have h2 : Fock.towerPairing η ((u : TowerFock D K) - (v : TowerFock D K)) c
+      = Fock.towerPairing η (u : TowerFock D K) c
+        - Fock.towerPairing η (v : TowerFock D K) c := by
+    simp
+  rw [h2]
+  simpa using sub_eq_zero.mpr h1
+
+end P3
 
 end StringFormal.NoGhost
