@@ -51,7 +51,7 @@ summary: |
   且本推导没有图内依赖（见 notes），故不被任何上游封顶。
 gaps:
   - "**载体上没有完备性**：Lean 不说 { |{d}⟩ } 张成 M，也不说 M 自由。完备性是无鬼定理里困难的『DDF 张成』那一半（formal/TODO.md 的 `ddf-spans`），本文件一字未涉。目标卡【不断言】(b)。"
-  - "**DDF 实例化未做**（Lean 文件头 Gaps 第 1 条）：要把本卡用到塔上的 A^ε_n，还缺 (i) `Fock.towerPairing η towerVacuum towerVacuum = 1`、(ii) `A^ε_n towerVacuum = 0` (n > 0) 两条小引理，以及 (iii) 一个横向正交归一标架把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij}。这是 blueprint §C.4。⇒ worldsheet.transverse-ddf-fock-gram-matrix 目前**仍不能**标 formalized。"
+  - "**DDF 实例化未做**（Lean 文件头 Gaps 第 1 条）：要把本卡用到塔上的 A^ε_n，还缺 (i) `Fock.towerPairing η towerVacuum towerVacuum = 1`、(ii) `A^ε_n towerVacuum = 0` (n > 0) 两条小引理，以及 (iii) 一个横向正交归一标架把 `lie_ddfOp_ddfOp` 的 m (ε·δ) δ_{m+n,0} 变成 m δ_{ij}。这是 blueprint §C.4。**【2026-09-12 已关闭】** 三件均由 `NoGhost/DDFGram.lean` 补齐（`Fock.towerPairing_towerVacuum_self`、`ddfOp_towerVacuum_of_pos`、`ddfFamily_ccr/_adj/_ann` + `TransverseFrame`），`worldsheet.transverse-ddf-fock-gram-matrix` 已 formalized（`--via-lean`）。"
   - "**没有 canonical 的 `heisMonomial` API**（文件头 Gaps 第 3 条）：对易性证明 `hcomm` 是定义的显式参数，故每条语句都拖着它；把 (A, Ω, B) 连同假设打包成 structure 会更整洁，未做。这只影响可用性，不影响正确性。"
   - "**不定号差的情形不在覆盖内**：(H1) 的中心项是 m δ_{ij}，世界面协变振子的 m η^{μν} δ_{m+n,0} 不是本卡实例；那一侧由 FockGram.lean / worldsheet.bosonic-fock-gram-matrix 承载，且走的是另一条路（`pairing_unique`，实质用到多项式环的基）。两者互不蕴含（文件头 Mathematical notes 第 1 条）。"
   - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是该文件随合并提交 43d7d54 进入 main。本分支不含 Lean 改动。"
@@ -64,7 +64,7 @@ notes: |
   `validate` 因此报 "derivation has no dependencies" warning，是预期的。
   ⚠ 特别地**不挂** worldsheet.ddf-transverse-oscillator-algebra-v2（[A^i_m,A^j_n] = m δ^{ij} δ_{m+n,0}）
   的边：那张卡是塔上 DDF 算子**满足** (H1) 的断言，属于本卡的**实例化**方向，
-  挂上去会把条件命题写成无条件命题，方向反了。实例化还缺三件，见 gaps 第二条。
+  挂上去会把条件命题写成无条件命题，方向反了。实例化已由 DDFGram.lean 完成（gaps 第二条已关闭）。
 
   curator，2026-09-11，small-backlog-14。
 author: curator

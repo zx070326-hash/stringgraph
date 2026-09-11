@@ -21,6 +21,7 @@ depends_on:
   - id: worldsheet.ddf-operators-preserve-physical-states
     inferred: false
     note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerPhysSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
       **承载塔上的物理子模 H_phys(a₀) 这个对象**（陈述接口边，见 docs/STATUS_LEVELS.md「接口边」裁决）。
       该卡陈述里的
         H_phys(p;k_0;a₀) = { Ψ : (L_0 − a₀)Ψ = 0 且 L_mΨ = 0 ∀ m ≥ 1 }
@@ -34,6 +35,7 @@ depends_on:
   - id: worldsheet.ddf-operators-preserve-positive-mode-conditions
     inferred: false
     note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerPositiveModeSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
       **承载 H_phys 的正模那一半 P = { Ψ : L_mΨ = 0 ∀ m ≥ 1 }**，即 Lean 的
       `StringFormal.NoGhost.towerPositiveModeSubmodule`（展开引理 `mem_towerPositiveModeSubmodule`），
       定义在同一个文件 TowerPhysical.lean 里。**目标 (1) 只用到这一半**——
@@ -44,6 +46,7 @@ depends_on:
   - id: worldsheet.spurious-subspace
     inferred: false
     note: |
+      【接口边，非机检环节】（STATUS_LEVELS 2026-09-12 裁决；reviewer-batch29 补字面标签）供给 `towerSpuriousSubmodule` 的定义/识别，不在 `towerQuotientPairing` 的机检证明链上。
       **承载伪态子模的定义**（无壳版 S = Σ_{n≥1} L_{−n}F）。目标里的塔版
       H_spur = Σ_{n≥1} L_{−n} T(p;k_0) 是同一个公式逐字装在塔上，Lean 侧是
       `StringFormal.NoGhost.towerSpuriousSubmodule := ⨆ n : ℤ, ⨆ _ : 0 < n, LinearMap.range

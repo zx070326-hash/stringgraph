@@ -1328,7 +1328,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `noghost_transverse_gram_satisfiable`（`D-2` 个横向方向，Gram = `δ_{ij}`）。
     工具引理 `dotVec_add_left/right`、`dotVec_single_left`、`dotVec_single_single`、`dotVec_pair`
     可复用。**数学结论**：`b·a = 1` 与 `a·a = 2` 一起**强制** `a = (1/2,3/2,0,…)`，
-    所以这套见证在 ℤ 上不存在，ℚ-代数假设不是偷懒而是必需。
+    所以这套见证在 ℤ 上不存在，ℚ-代数假设不是偷懒而是必需。**【已推翻，reviewer-batch26 / WitnessInt.lean】**：换标架 a=(0,1,1,0,…) 在 ℤ 上满足全部假设（`noghost_hypotheses_satisfiable_int`）；ℚ 只因 (M) 的 invTwo 写法；DDF 算子本身仍需 [Algebra ℚ R]。
   - **`Longitudinal.lean`（§A.1/§A.2）**：`K_m = k_0·α_m` **就是** `towerModeVec η a b b m`
     （偏振取 `b` 自身；类光条件 `b·b = 0` 就是「`b` 对自己横向」），于是 Goddard 2008 (6.3)
     的整套代数是既有引理在 `ε := b` 处的特例：
@@ -1467,7 +1467,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     `massShell_of_mem_towerBigrade` 可作为 `worldsheet.no-ghost-theorem-v4` (1b) 中
     「`N = a − α'p²`」子句的 `lean_decl`；`noghost_hypotheses_satisfiable_int` 可挂在
     可满足性见证卡上（若 `Witness.lean` 的「需要 ℚ」写进了某张卡的 notes，应订正）。
-- [x] `noghost-c4`（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
+- [x] `noghost-c4`（⚠ 未做：`ddfMonomial d` 落在 rung −N(d) 的定位（DDFGram.lean:297 自报），派 `formalizer-ddfgram-level`；spurious→null 桥 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 已由 Assembly.lean 提供）（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
   `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
   （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。
   - **两条「缺，小」的引理**（`HeisenbergGram.lean` 自报的 gap 1）：

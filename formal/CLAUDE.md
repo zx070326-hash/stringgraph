@@ -161,7 +161,7 @@ StringFormal/
                             光锥标架 η=diag(−1,1,…)、b=(1,1,0,…)、a=(1/2,3/2,0,…)、b̃=(1/2,−1/2,0,…)、
                             ε_i=Pi.single i 1 同时满足 hη∧hbb∧hba∧hεb（外加 b·b̃=−1、b̃·b̃=0、
                             横向 Gram = δ_ij、快子壳 α'k²=1）。**b·a=1 与 a·a=2 一起强制 a=(1/2,3/2,…)**，
-                            所以 ℚ-代数不是偷懒。含可复用的 dotVec 双线性/Pi.single 收缩引理
+                            所以 ℚ-代数不是偷懒（⚠ 只对该标架成立；WitnessInt.lean 给出 ℤ 见证，ℚ 只因 (M) 写法与 ddfOp 构造）。含可复用的 dotVec 双线性/Pi.single 收缩引理
   NoGhost/Longitudinal.lean **纵向 GT 算子 K_m = k_0·α_m = towerModeVec η a b b m**（偏振取 b 自身；
                             蓝图 §A.1/§A.2，Goddard 2008 (6.2)(6.3)）：⁅L_m,K_n⁆=−n K_{m+n}（只需 hη）、
                             ⁅K_m,K_n⁆=0（hbb 消中心项）、**K_0 = 1**（逐层，靠 k_0·p 沿塔不变 + hba）、

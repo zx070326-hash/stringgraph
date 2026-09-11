@@ -143,6 +143,7 @@ summary: |
   按 min 规则封顶。**这不是 LZ 的论证有缺口**，而是本图把「LZ 的对象 = Polchinski 的对象」
   经那些卡记账的后果，与消灭卡、维数卡同口径。
 gaps:
+  - "**LZ Theorem 2.7（R 扇区 D_R 上同调平凡 / 收缩同伦）无卡、无边**（reviewer-batch29）：Prop 2.14 的证明两次显式引用它（§10.4），本推导只在 summary/notes 提及；建卡后应加非 inferred 边。"
   - "**（2026-09-11 已关闭大半）陈述与证明的逐字状态**：researcher 第四轮页图（extraction §10.3/§10.4，期刊 pp.311–317 七页）已逐字核 Prop 2.14 的陈述（**与 E5 转录一致，无更正**）并转录证明的引用清单与分步骤（见 summary）。**仍未转录的**：Lemma 2.14.1–2.14.5 各自证明的逐行细节、(5)(8)(19) 三个迹计算的中间步骤、Case 2 里 Ψ^i_± 本征基的构造式（§10.5 标为「需复核」：p.315 的 Ψ^i_± = (1/√2)(m^{−1}Ψ^i_+ ± √−1 Ψ^i_−) 一行里 1/m 的位置与 δ_{ij} 前的符号）。"
   - "**sign / char 有定义所需的前提，Prop 2.14(ii) 的语句里一条都没印**：LZ 把它们全放在 **Definition 2.12(i), pp.311–312**（逐字：'with a non-degenerate hermitian form ⟨,⟩_T … Suppose dim T^n < +∞ for all n and T^n = 0 for all large enough positive n'）。三条之中 (a) 非退化性现有来源（p.311 过渡句 + Prop 2.10(i)(iii)，见目标卡 sources 第四条）；**(b)「每层有限维」与 (c)「次数上方有界」在本图只作为目标卡 (H3) 的断言存在**（「固定 p 下每个 C^n_rel 有限维、只有有限多个 n 非零」），LZ 没有为 C_rel(p,κ) 逐条验证，本图也未补证。⇒ 本卡等式右端有定义这件事，依赖一条未被任一方证明的有限性。"
   - "**char 与 ch_q 是两种对象，Definition 2.12 同段并列**：(i) 的 ch_q T = Σ dim T^{−n} q^n 是母函数（不带符号），(ii) 的 char C = Σ_k (−1)^k dim C^k 是**交错和**。Prop 2.14(ii) 用的是交错和那个。本图目标卡 (H6) 写对了，但 Prop 2.18 的 ch_q（旁证 p^{(8)}_κ）是另一种，两者不可互推——**p^{(8)}_κ 与 φ_κ 的关系由 Definition 2.13（p.312，引 [10] = Kac–Wakimoto）给出，本图仍未把 Def 2.13 立卡或写进任何陈述**（§10.2 提醒：φ_{1/2}(q) = φ(q^{1/2})φ(q²)φ(q)^{−1} 的三个自变量字号极小，写进 statement 前须 auditor 复核）。"
