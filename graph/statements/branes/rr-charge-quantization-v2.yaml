@@ -1,0 +1,51 @@
+id: branes.rr-charge-quantization-v2
+kind: proposition
+title: R–R 荷的 Dirac 量子化条件：μ_p μ_{6−p} = π n / κ₁₀²，n ∈ Z（v2：(13.3.12) 订正为 ∫F = 2κ₁₀² μ_{6−p}）
+statement: |
+  设 type II 超弦中 Dp 膜与 D(6−p) 膜分别是 F_{p+2} 与 F_{8−p} = ∗F_{p+2} 的电源
+  （branes.d-brane-rr-coupling），荷 μ_p、μ_{6−p} 按 (13.3.5) 归一化（branes.d-brane-rr-charge-value）。
+  则两者必须满足广义 Dirac 量子化条件
+    **μ_p μ_{6−p} = π n / κ₁₀²,    n ∈ Z**.                                (13.3.13)
+  这是四维 Dirac 条件 μ_e μ_m = 2πn（(13.3.11)，由「Dirac 弦必须不可观测」得出）的推广：
+  Dp 膜世界体与 D(6−p) 膜世界体在十维中 Poincaré 对偶，围绕 D(6−p) 膜的 (p+2)-球面上的磁通为
+    ∫_{S_{p+2}} F_{p+2} = 2κ₁₀² μ_{6−p},                                      (13.3.12)
+  对 Dp 膜施加同一条「Dirac 弦不可观测」的要求即得 (13.3.13)。
+
+  **本命题不断言**：n 的取值（那是 branes.d-brane-charge-minimal-dirac-quantum）；
+  (13.3.12) 中 2κ₁₀² 的因子来源之外的任何归一化细节；
+  p = 3 自对偶情形（μ_3² = πn/κ₁₀²）的额外微妙之处（原书未讨论）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.string-coupling-tension-ratio]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「Dirac quantization condition」, eqs. (13.3.8)（∫_{S_2}F_2 = μ_m）、(13.3.9)（相位 exp(iμ_e∮_P A_1) = exp(iμ_e∫_D F_2)）、(13.3.10)、(13.3.11)（μ_eμ_m = 2πn，「The Dirac string must be invisible, so this phase must be 1」）、(13.3.12)（∫_{S_{p+2}}F_{p+2}，本卡按内部自洽写作 2κ₁₀²μ_{6−p}，见 notes）、(13.3.13)（μ_pμ_{6−p} = πn/κ₁₀²），pp. 147–149；fig. 13.3, p. 148"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E19，证据等级 L1（原书页图）。
+      ⚠ 逻辑方向：这是**一致性条件**，不是 μ_p 的推导（μ_p 由 (13.3.7) 的振幅计算给出）。
+      ⚠ **(13.3.12) 的系数取本图复算值**：抽取记录 #E19 第 417 行按页图记作 μ_{6−p}/2κ₁₀²，
+      与 (13.3.13) 及 (13.3.5) 的动能项归一化不自洽（见 notes 的【v2 改了什么】）。
+      该行已加一行 reviewer-branes 复核批注，原行保留不动，待 researcher 核印刷页 148。
+tags: [d-brane, rr-charge, dirac-quantization, electric-magnetic-duality, type-ii]
+notes: |
+  ★★【v2 改了什么（curator，2026-09-11，依 reviewer-branes）】
+  **唯一的改动是 (13.3.12) 的系数**：v1 写 ∫_{S_{p+2}}F_{p+2} = μ_{6−p}/2κ₁₀²，
+  v2 写 ∫_{S_{p+2}}F_{p+2} = **2κ₁₀² μ_{6−p}**。两条独立理由：
+  · **与 (13.3.13) 自洽**：Dirac 弦不可观测要求 exp(iμ_p ∫_{S_{p+2}}F_{p+2}) = 1，
+    即 μ_p · (∫F) = 2πn。代 ∫F = 2κ₁₀²μ_{6−p} 得 2κ₁₀²μ_pμ_{6−p} = 2πn，
+    **正是 (13.3.13) 的 μ_pμ_{6−p} = πn/κ₁₀²** ✓；
+    代 v1 的 μ_{6−p}/2κ₁₀² 则得 μ_pμ_{6−p} = 4πnκ₁₀²，与 (13.3.13) 差 4κ₁₀⁴ ✗。
+  · **与 (13.3.5) 的归一化自洽**：动能项 −(1/4κ₁₀²)∫|F_{p+2}|² 加源项 μ∫C_{p+1} 的场方程是
+    (1/2κ₁₀²) d∗F = μ δ，故环绕源的球面积分给 ∫∗F = 2κ₁₀²μ，κ₁₀² 在分子而非分母。
+    同一归一化在 (13.3.6) 的传播子 2κ₁₀²i/k² 里也是 κ₁₀² 在分子。
+  ⇒ v1 卡片上的 1/2κ₁₀² 是抽取记录第 417 行按页图读数转过来的，本图判为误读；
+  **(13.3.13) 与「n = 1 最小量子」这两个下游结论不受影响**（它们只用 (13.3.13)）。
+  ⚠ 本条订正是本图的复算结论，**不是**一手核过的印刷页读数；已请 researcher 核 p. 148。
+  v1 卡片按规则保留不动并写 superseded_by。
+
+  本卡只承载**条件**本身。「(13.3.7) 的荷恰好以最小量子 n = 1 满足它」是另一条命题
+  branes.d-brane-charge-minimal-dirac-quantum（原书「Remarkably」句），分开建卡是因为
+  前者是 Dirac 弦不可观测的一般论证，后者是把已算出的荷代入的一步代数。
+
+  【本图缺的上游】四维 Dirac 量子化条件本身在 math/ 区无节点；Poincaré 对偶、Dirac 弦、分片势等
+  拓扑语言在图上无支撑。本卡的推导只能记录原书的论证骨架。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

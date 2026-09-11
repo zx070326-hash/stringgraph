@@ -1,12 +1,15 @@
 id: branes.d-brane-charge-minimal-dirac-quantum--via-substitution
 target: branes.d-brane-charge-minimal-dirac-quantum
-kind: physical-argument
-status: physical-argument
+kind: proof
+status: rigorous
 depends_on:
   - id: branes.d-brane-rr-charge-value
     note: 供给 μ_p² = (π/κ₁₀²)(4π²α')^{3−p}（(13.3.7)），对 p 与 6−p 各用一次。
-  - id: branes.rr-charge-quantization
-    note: 供给条件 μ_pμ_{6−p} = πn/κ₁₀²（(13.3.13)），被代入后读出 n。
+  - id: branes.rr-charge-quantization-v2
+    note: |
+      供给条件 μ_pμ_{6−p} = πn/κ₁₀²（(13.3.13)），被代入后读出 n。
+      （2026-09-11 由 branes.rr-charge-quantization 改指 v2；v2 只订正了 (13.3.12) 的系数，
+      (13.3.13) 本身一字未改，故本推导的代入完全不受影响。）
 sources:
   - ref: polchinski-1998-v2
     loc: "§13.3, (13.3.13) 之后一句，p. 149（「Remarkably, … with the minimum quantum n = 1」）；输入式 (13.3.7) p. 147"
@@ -15,11 +18,23 @@ summary: |
   μ_p = (π/κ₁₀²)^{1/2}(4π²α')^{(3−p)/2}，μ_{6−p} = (π/κ₁₀²)^{1/2}(4π²α')^{(3−(6−p))/2} = (π/κ₁₀²)^{1/2}(4π²α')^{(p−3)/2}。
   相乘：μ_pμ_{6−p} = (π/κ₁₀²)(4π²α')^{(3−p)/2 + (p−3)/2} = π/κ₁₀²。
   与 (13.3.13) πn/κ₁₀² 比较得 n = 1。
-  （取 μ_p > 0 的平方根。(13.3.13) 右端是 πn/κ₁₀² 而非 2πn/κ₁₀²，因为 (13.3.12) 带因子 1/2κ₁₀²；
-  这一记账在上游卡 branes.rr-charge-quantization 完成，本推导只做代入。）
+  （取 μ_p > 0 的平方根。(13.3.13) 右端是 πn/κ₁₀² 而非 2πn/κ₁₀²，因为 (13.3.12) 带因子 2κ₁₀²
+  ——exp(iμ_p·2κ₁₀²μ_{6−p}) = 1 给 2κ₁₀²μ_pμ_{6−p} = 2πn；这一记账在上游卡
+  branes.rr-charge-quantization-v2 完成，本推导只做代入。）
 gaps:
-  - "**代入本身无缺口**（两行代数，researcher 已复算，抽取记录 §0.3(b)）。按 STATUS_LEVELS 的 rigorous 例外，需 reviewer 独立复核并记 reviewer-verified 方可把本推导升为 rigorous；本 curator 未标。"
-  - "**有效状态受上游压制**：两条依赖均为 physical-argument（μ_p 来自超对称断言 (13.3.2)，Dirac 条件来自弦不可观测的物理论证），故本卡有效状态为 physical-argument，与推导自身的严格程度无关。"
+  - "**代入本身无缺口**：两行精确代数（抽取者复算见 #§0.3(b)，reviewer-branes 2026-09-11 独立复核），按 docs/STATUS_LEVELS.md 的 rigorous 例外已升 proof/rigorous，见 notes 的 reviewer-verified。"
+  - "**有效状态受上游压制**：两条依赖本身都是 physical-argument（μ_p 来自超对称断言 (13.3.2)，Dirac 条件来自弦不可观测的物理论证）；再往上，整条超弦链自 2026-09-11 起被 worldsheet.critical-dimension-superstring-brst-v2（BRST 幂零 ⟹ c^m = 15 这一方向，本卷无来源，status = conjecture）压到 **conjecture**。故本卡的 effective 是 conjecture，与本推导自身的严格程度无关。"
   - "**平方根的符号**：原书取 μ_p > 0；D 膜与反 D 膜（μ_p < 0）的情形 n = −1，原书未讨论。"
+notes: |
+  reviewer-verified: reviewer-branes, 2026-09-11
+  【升级理由（curator，2026-09-11，依 reviewer-branes 的必修项）】
+  按 docs/STATUS_LEVELS.md 的 rigorous 例外（lead 裁决 2026-09-10）：本推导的前提已完整写出
+  （μ_p² = (π/κ₁₀²)(4π²α')^{3−p} 与 μ_pμ_{6−p} = πn/κ₁₀²），证明是有限步初等代数
+  （两次开方 + 一次指数相加 (3−p)/2 + (p−3)/2 = 0 + 一次比较），且已由 reviewer 独立复核。
+  ⚠ **升级只改本推导自身的 status，不改目标卡的有效状态**：两条依赖
+  （branes.d-brane-rr-charge-value、branes.rr-charge-quantization-v2）都是 physical-argument，
+  且整条超弦链被 worldsheet.critical-dimension-superstring-brst-v2 压到 conjecture
+  （uv run stringgraph why branes.d-brane-charge-minimal-dirac-quantum，2026-09-11）。
+  升级的意义是把「代数这一步可疑」从瓶颈清单里去掉，不是抬高有效状态。
 author: curator-polchinski-v2-ch13
 created: "2026-09-11"
