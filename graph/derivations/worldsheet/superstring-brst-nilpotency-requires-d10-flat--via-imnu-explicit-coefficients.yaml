@@ -1,0 +1,189 @@
+id: worldsheet.superstring-brst-nilpotency-requires-d10-flat--via-imnu-explicit-coefficients
+target: worldsheet.superstring-brst-nilpotency-requires-d10-flat
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.rns-action
+    note: |
+      供给目标陈述的前提 (a)：物质部门是 **D 个平坦的 X^μψ^μ**（D 个玻色子 + D 对 Majorana 费米子）。
+      IMNU 一侧的对应物是 (2.1)（二维超引力耦合的标量超多重态 [A^μ, χ^μ, F^μ]）加规范 (2.7)
+      e^a_m = η^a_m, ψ_m = 0，号差 p.935 逐字 η_{μν} = diag(−1, 1, ⋯, 1)（= conv.metric-mostly-plus）。
+      ⚠ **只对接"物质场内容"这一层**：IMNU 的规范固定路径与 Polchinski 不同
+      （IMNU 从超引力耦合作用量出发，Polchinski §10.5 不从规范不变作用量出发），
+      两者的 Q_B 是否逐字同一个算符本图未核实（见 gaps 末条）。
+  - id: worldsheet.superstring-brst-charge
+    note: |
+      供给 Q_B。IMNU 一侧是 (3.2)（NS）与 (3.4)（R）的零模分解
+        Q_B^NS = η₀L^NS + η̄₀M^NS + √(κ/π)Q̃_B^NS，
+        Q_B^R  = η₀L^R + η̄₀M^R + ζ₀F + ζ̄₀K + √(κ/π)Q̃_B^R − (1/√π)η̄₀ζ₀²
+      （η₀ ~ c₀、η̄₀ ~ b₀、ζ₀ ~ γ₀、ζ̄₀ ~ β₀），与 lian-zuckerman-1989 Proposition 1.7(x)(xi)
+      逐项同型（LZ 把该计算归给 ohta-1986）。
+  - id: worldsheet.rns-super-virasoro-generators
+    note: |
+      供给物质 L^m、G^m 的模式表达式。IMNU 一侧是 (3.3)(3.5)，其正规序常数按末项 −α₀/√π 进入，
+      p.943 逐字 'The parameters, α₀^NS and α₀^R, are undetermined so far.'
+      ——即 α₀ 在 IMNU 的框架里是**待定参数**，由 (3.10) 的幂零条件定出。
+      这正是本卡把「D = 10 与 α₀ 同时被定出」写成一个命题的原因。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式与（反）对易关系。IMNU 一侧是 (2.17) 的模展开与 (2.20)
+      {η₀, η̄₀} = 1、[ζ_k, ζ̄_l] = δ_{k,−l}。
+      ★ (3.8)(3.9) 的右端是按**鬼场数算符** η_n†η_n 与 ζ_r†ζ_r 展开写的，
+      故"系数逐个为零"这一步用的正是目标陈述前提 (d) 的线性无关性。
+  - id: math.super-virasoro-algebra
+    note: |
+      供给超 Virasoro 括号（{Q_B, Q_B} 的代数输入）。
+      约定：本图用 c/12 归一化（conv.virasoro-standard）；IMNU 不用中心荷语言，
+      其中心项以 (D − 10) 的形式直接出现在 (3.8)(3.9) 的系数里。
+  - id: worldsheet.superconformal-ghost-central-charge
+    inferred: true
+    note: |
+      供给目标陈述前提 (b) 里写死的 **c^g = −15**。
+      **标 inferred 的理由**：IMNU (3.8)–(3.10) 全程不使用中心荷语言——
+      鬼场的反常贡献已经被吸收进系数里的 (D − 10)（即 (3/2)(D − 10) = c^m + c^g 的 2/3 倍），
+      该文**不在原地论证** c^g = −15，也不把它作为可引用的输入写出。
+      c^g = −15 的论证在 worldsheet.superconformal-ghost-central-charge
+      （Polchinski Vol.2 (10.1.19) 与 §11.1 (11.1.2a,b)）。
+      ⇒ 与玻色弦一侧完全同型：worldsheet.critical-dimension-brst-v2--via-nilpotency 出于
+      同样的理由把 worldsheet.bc-ghost-central-charge（c^g = −26）标 inferred。
+      有效状态不受影响：该卡有效状态 physical-argument，与本推导自身相同。
+sources:
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3, pp. 941–943：**(3.8)** (Q_B^NS)² = (1/π)Σ_{n=1}^∞ [((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n] η_n†η_n + (1/π)Σ_{r=1/2}^∞ [((D−10)/2)r² + (16α₀^NS − D + 2)/8] ζ_r†ζ_r；**(3.9)** (Q_B^R)² = (1/π)Σ_{n=1}^∞ [((D−10)/8)n³ + 2α₀^R n] η_n†η_n + (1/π)Σ_{n=1}^∞ [((D−10)/2)n² + 2α₀^R] ζ_n†ζ_n + (1/π)α₀^R ζ₀²；**(3.10)** 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the conformal anomaly, demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and α₀^R = 0 for the R model.'，紧随逐字 'These conditions are necessary to prove the no-ghost theorem in the next section.'；另 (2.1)(2.7) 平坦作用量与规范、(2.17)(2.20) 鬼场模式、(3.2)(3.4) 零模分解、(3.3)(3.5) 物质生成元与 α₀"
+    note: |
+      L1（全文 19 页逐页读图；literature/extractions/ito-morozumi-nojiri-uehara-1986.md E1/E2）。
+      ★★ **本推导的唯一实质来源**，也是本图现有来源里唯一写出超弦 Q_B² 显式系数的位置。
+      ⚠ 三条使用限制，全部与目标陈述的写法相符：
+        (a) 方向是 ⟹（'demands'、'are necessary'）——目标陈述也只写 ⟹；
+        (b) 用 **D** 而非 c^m，且**只算平坦 D 个 X^μψ^μ**——目标陈述的前提 (a) 已限平坦，
+            结论也直接写 D = 10，故**不需要** c^m = (3/2)D 的翻译边
+            （对照：worldsheet.critical-dimension-superstring-brst-v2--via-explicit-nilpotency-coefficients
+            因目标用 c^m 而必须挂那条 inferred 边）；
+        (c) 量子化方案与 Polchinski 不同（(2.1)(2.7)）——见 gaps 末条。
+      ★ R 扇区 (3.9) 末项 (1/π)α₀^R ζ₀² 含 βγ 零模——α₀^R = 0 同时消掉它。
+  - ref: ohta-1986
+    loc: "全文；摘要（L2）。摘要逐字：'The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge.'"
+    note: |
+      **正文未取得（L0）**（literature/extractions/ohta-1986.md §0.4）；**loc 不得写页码或式号**。
+      ⚠ 方向同为 ⟹，且同样把维数与截距一并归给幂零性，但摘要不给截距数值。
+      本条是 lian-zuckerman-1989 Proposition 1.7(ii) 证明外包的对象之一。
+      IMNU p.952 Note added 逐字：'we received a preprint from Ohta, in which the same subject
+      is treated. However, the quantization method of the lagrangian is a little different and
+      he did not present the proof of the no-ghost theorem in the Ramond sector.'
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 1.7(ii)**, p. 307–308，逐字 'Q² = 0 iff D = 10.'；证明逐字 '(ii) is done in [13, 15].'（[13] = ohta-1986；[15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）。另 Proposition 1.7(i) 逐字 'All the operator sums above are well-defined on C'"
+    note: |
+      L1（全文 35 页逐页读图；literature/extractions/lian-zuckerman-1989.md E1、§4 Q3）。
+      ★ 唯一带「iff」的编号陈述，且它用的正是 **D**，形式上对应本卡这一侧（平坦）。
+      ⚠⚠ **LZ 自己不证**（外包给 ohta-1986 与 Terao–Uehara，后者本项目 bib 未登记）。
+      ⚠ Proposition 1.7(i) 的 'well-defined on C' 是本图所知唯一显式处理算子和良定义性的地方，
+      但那是 LZ 自己的复形（含 T₀ ⊕ T₁ 等选择），**不能**直接用来补 IMNU 的缺口（见 gaps）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字 'one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) whenever the total central charge vanishes'）；§10 Exercises, exercise 10.13, p. 43"
+    note: |
+      **反面对照，不承载本推导的论证**：本卷只给 ⟸，且不给计算、无式号、推给习题。
+      ⇒ 本推导相对 worldsheet.superstring-brst-nilpotent-at-c15--via-nilpotency 的实质差别
+      就在这里：IMNU 把原书推给习题的那个 Q_B² 显式写了出来（以 D 与 α₀ 为参数），
+      故本推导可以逐系数核对。
+summary: |
+  目标陈述限在**平坦**情形（物质部门恰为 D 个 X^μψ^μ SCFT），这正是
+  ito-morozumi-nojiri-uehara-1986 §3 实际计算的情形。论证四步：
+
+  1. **零模分解**：(3.2)/(3.4) 把 Q_B 写成鬼零模项 + Q̃_B
+     （R 扇区多出 ζ₀F + ζ̄₀K 与末项 −(1/√π)η̄₀ζ₀²）。
+  2. **直接算 Q_B²**：(3.8)（NS）与 (3.9)（R）的右端是**鬼场数算符**的线性组合，
+     系数是 D 与正规序常数 α₀ 的显式多项式：
+       NS： ((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n     与  ((D−10)/2)r² + (16α₀^NS − D + 2)/8；
+       R ： ((D−10)/8)n³ + 2α₀^R n                    与  ((D−10)/2)n² + 2α₀^R，
+            **外加末项 (1/π)α₀^R ζ₀²**（含 βγ 零模）。
+  3. **系数逐个为零**：由目标陈述前提 (d) 的线性无关性（η_n†η_n、ζ_r†ζ_r、ζ₀² 在 V 上线性无关），
+     Q_B² = 0 ⟹ 上列每个系数为零。NS 的第一个系数对一切 n ≥ 1 为零，
+     其中 **n³ 与 n 的系数各给一个方程**：(D−10)/8 = 0 与 (16α₀^NS − D + 2)/8 = 0，
+     解得 **D = 10 且 α₀^NS = 1/2**（第二个系数给同一组解）。
+     R 扇区同法得 **D = 10 且 α₀^R = 0**，而末项 ζ₀² 的系数 α₀^R = 0 与之一致。
+     ⇒ 维数与 α₀ 是**同一组耦合方程**的解，这是目标陈述把两者写在一张卡上的依据。
+  4. **不需要换算**：IMNU 的结论逐字就是 D = 10，与目标陈述同形；
+     由 D = 10 到 c^m = 15 那一步**不在本推导范围内**（目标陈述已声明不断言 c^m）。
+
+  【为什么 kind/status 是 physical-argument（不是 rigorous，也不是 conjecture）】
+  · 不是 rigorous：(3.8)(3.9) 是**形式算子平方**——无穷模式和的重排、正规序的处理、
+    算子在何种模上良定义，IMNU 一概不论；受限模与线性无关性是本图补进陈述的，来源未声明。
+    另有两条外包：LZ Prop 1.7(ii) 的 iff 自己不证（推给 ohta-1986 与 Terao–Uehara），
+    ohta-1986 正文未取得、Terao–Uehara 本项目 bib 未登记。
+  · 不是 conjecture：按 docs/STATUS_LEVELS.md「断言 + 骨架」的裁决（2026-09-11），
+    "论证不完整"用 gaps 记录，不压成 conjecture；且本推导覆盖的范围与目标陈述**逐字相符**
+    （都限平坦、都用 D、都只要 ⟹），不含任何外推。
+  ⇒ 与玻色弦一侧 worldsheet.critical-dimension-brst-v2--via-nilpotency 同型同档：
+    两者都是"显式 Q_B² 系数 + 线性无关性 ⇒ 临界值"，都限在可算的物质部门，
+    都因形式算子操作与良定义性缺口封顶在 physical-argument。
+
+  【本推导与 worldsheet.critical-dimension-superstring-brst-v2--via-explicit-nilpotency-coefficients 的关系】
+  两者用**同一段来源**（IMNU (3.8)–(3.10)），差别只在目标陈述的宽度：
+    · 本推导的目标限平坦、结论写 D ⇒ 与来源逐字同范围 ⇒ physical-argument；
+    · 那条推导的目标是一般正范数 SCFT、结论写 c^m ⇒ 需要"平坦特例 ⇒ 一般 SCFT"的外推
+      与一条 inferred 的 c^m = (3/2)D 翻译边 ⇒ 按 lead 裁决标 conjecture。
+  那条推导**保留不动**（一般形式仍是本图的推测），只在其 notes 加了指向本卡的一行。
+gaps:
+  - |
+    **形式算子平方**：(3.8)(3.9) 的得出过程 IMNU 未展开，且无穷模式和的重排与正规序处理
+    没有论证。与玻色弦一侧同型（worldsheet.critical-dimension-brst-v2--via-nilpotency 的
+    同名 gap：Polchinski §4.3 是"教科书式形式模式计算"，原书另在 p.133 对一般约束代数逐字写
+    'We have neglected central charge terms; these need to be checked by hand'）。
+  - |
+    **良定义性 / 受限模在 IMNU 一侧完全未讨论。** 目标陈述的前提 (c)（受限模）与 (d)（线性无关性）
+    是本图补进去的，IMNU 直接做形式算子平方。
+    ⚠ 尤其 βγ 是**对易**场、占据数无上界（Polchinski §10.4 逐字），且 IMNU (3.14) 逐字说
+    ζ₀、ζ̄₀ 的表示 'is infinitely degenerate'，保证 Q_B² 逐项有限的模条件在超弦情形
+    可能与玻色弦不同；本图未核实 Fock 模在两扇区都满足前提 (c)。
+    对照：lian-zuckerman-1989 Proposition 1.7(i) 在**其自己的**复形上显式断言算子和良定义，
+    但那不是 IMNU 的空间，不能替 IMNU 作证。
+  - |
+    **「iff」措辞的唯一编号来源自己不证，且两个外包对象都不可核。**
+    lian-zuckerman-1989 Proposition 1.7(ii) 逐字 'Q² = 0 iff D = 10.'，证明逐字
+    '(ii) is done in [13, 15].'：[13] = ohta-1986（**正文未取得 L0**，只有摘要），
+    [15] = Terao–Uehara, Phys. Lett. 168B (1986) 70（**本项目 literature/sources.bib 未登记**）。
+    ⇒ 本推导只走 ⟹ 方向（与目标陈述一致），故这条外包不影响结论的方向性；
+    但它意味着"这条计算被第三方独立复核过"这件事在本图**不可核**。
+    **Terao–Uehara 的登记与获取已列入报告交 researcher/lead**（与 v2 推导的同名 gap 是同一条）。
+  - |
+    **本推导顺带定出的 α₀ 与本图截距记号的换算未核实。**
+    (3.10) 给的是 α₀^NS = 1/2、α₀^R = 0，其中 α₀ 按 (3.3)(3.5) 以末项 −α₀/√π 进入 L；
+    与 conv.intercept-sign-a 的 a（(L_0 − a)|ψ⟩ = 0）之间的换算本图未核实
+    （lian-zuckerman-1989 的 L₀ 归一化又是第三种）。目标陈述已把这条限制写进正文，
+    并声明不与 worldsheet.open-superstring-mass-shell 连边；本推导**不**主张两者相等。
+  - |
+    **NS 与 R 两扇区在 IMNU 的处理深度不同**：本推导用的 (3.8)(3.9) 两扇区都有显式系数，
+    这一步两扇区对称；但该文 §4 的无鬼定理只证 R 扇区、NS 只有一段评论（p.947，
+    抽取记录 Q1）。⇒ 本推导不受影响（它只用 §3），此条仅作使用该文其他结论时的提醒。
+  - |
+    **IMNU 的量子化方案与 Polchinski 不同**：IMNU (2.1) 从二维超引力耦合的标量超多重态出发、
+    规范 (2.7) e^a_m = η^a_m, ψ_m = 0；Polchinski §10.5 **不**从规范不变作用量出发
+    （worldsheet.ocq-superstring-physical-states 的方法论限定）。
+    ⇒ 两者的 Q_B 是否逐字同一个算符，本图未核实。目标陈述已把这条写进
+    【本命题不断言什么】(6)。这条 gap 同时限制了 worldsheet.rns-action 与
+    worldsheet.superstring-brst-charge 两条边的对接强度。
+notes: |
+  【本推导的来历（lead 裁决，2026-09-11：修超弦链相对玻色弦链的档位不对称）】
+  本推导是 worldsheet.critical-dimension-superstring-brst-v2--via-explicit-nilpotency-coefficients
+  的**平坦特例版本**：同一段 IMNU 来源，但目标陈述被收窄到与来源逐字同范围，
+  因而不含"平坦 ⇒ 一般 SCFT"的外推，可以老实标 physical-argument。
+  那条推导（一般形式）**保留为 conjecture，理由不变**，本推导不取代它。
+  两条推导并存是有意的：它们的目标是两个不同的命题（宽度不同），不是同一命题的两条论证。
+
+  【与玻色弦一侧的逐条对应】
+    worldsheet.critical-dimension-brst-v2（陈述限自由玻色子 + 受限模 + c_{−m}c_m 线性无关）
+      ← --via-nilpotency（physical-argument；Polchinski Vol.1 (4.3.9)/(4.3.10) 显式系数
+        + Kato–Ogawa 摘要；bc-ghost-central-charge 边标 inferred）
+    **本卡**（陈述限平坦 X^μψ^μ + 受限模 + 鬼场数算符线性无关）
+      ← **本推导**（physical-argument；IMNU (3.8)–(3.10) 显式系数
+        + Ohta 摘要；superconformal-ghost-central-charge 边标 inferred）
+  两侧唯一的实质差别：玻色弦卡只取 c^m = 26（把截距 a = 1 拆出去，因为 Kato–Ogawa
+  没有显式系数公式可据以判断两者是否耦合），本卡把 D = 10 与 α₀ 写在一起
+  （因为 IMNU 的显式系数表明它们由同一组方程耦合定出，无法分别推导）。
+  这个差别是**来源结构的差别**，不是记账口径的差别。
+
+  按 literature/extractions/ito-morozumi-nojiri-uehara-1986.md（E1/E2、§5 第 2 条建议
+  「超弦 Q² = 0 ⟺ D = 10, α₀：(3.8)–(3.10) 是显式系数公式的 L1 来源……可挂
+  physical-argument（形式算子平方，未处理良定义性）」）建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"

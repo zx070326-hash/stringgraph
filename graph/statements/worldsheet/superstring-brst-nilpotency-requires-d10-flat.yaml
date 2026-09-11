@@ -1,0 +1,149 @@
+id: worldsheet.superstring-brst-nilpotency-requires-d10-flat
+kind: proposition
+title: 平坦 RNS 弦的 BRST 幂零要求 D = 10（单向 ⟹；陈述限平坦情形，同时定出 IMNU 记号的 α₀^NS = 1/2、α₀^R = 0）
+statement: |
+  【记号】中心荷一律写上标 c^m（物质）、c^g（鬼场），以免与鬼场模式 c_n 撞号
+  （同 worldsheet.critical-dimension-brst-v2 的记号规定）。D 是平坦时空维数。
+  α₀^NS 与 α₀^R 是 ito-morozumi-nojiri-uehara-1986 的正规序常数，按该文 (3.3)(3.5)
+  以末项 −α₀/√π 进入 L^NS、L^R；⚠ 本卡**不**断言它与本图截距记号 conv.intercept-sign-a
+  的 a 是同一个量（见【本命题不断言什么】(3)）。
+
+  【前提】
+    (a) **平坦情形**：物质部门恰是 **D 个平坦的 X^μψ^μ SCFT**
+        （worldsheet.rns-action 的 RNS 作用量，闵氏号差，无紧化、无内部 SCFT、
+        不含任何被替换进来的一般正范数 SCFT）；
+    (b) 鬼场是 λ = 2 的 bcβγ 超共形鬼场（c^g = −15），Q_B 如
+        worldsheet.superstring-brst-charge 所定义；β、γ 的周期性与 T_F 相同（同一个扇区，NS 或 R）；
+    (c) **受限模**：Q_B 作用在模 V 上，且对每个 v ∈ V 存在 N = N(v) 使
+          L^m_n v = G^m_r v = b_n v = c_n v = β_r v = γ_r v = 0   （对一切下标 > N）。
+        该条件保证 Q_B 与 Q_B² 的模式和逐项有限，从而两者都是良定义算子；
+        物质与鬼场的 Fock 模满足它。
+    (d) **线性无关性**：出现在 Q_B² 展开式中的鬼场数算符
+          η_n†η_n（n ≥ 1）、ζ_r†ζ_r（NS：r ∈ 1/2 + Z_{≥0}；R：r = n ≥ 1），
+        以及 R 扇区的 ζ₀²，在 V 上线性无关（对忠实的 Fock 型受限模成立）。
+        （η ~ c、η̄ ~ b、ζ ~ γ、ζ̄ ~ β，IMNU (2.17)(2.20) 的记号。
+         把线性无关性写进陈述是本图的做法，与玻色弦一侧 worldsheet.critical-dimension-brst-v2
+         把「诸 c_{−m}c_m 在 V 上线性无关」写进陈述完全同型；**IMNU 不声明这一条**。）
+
+  【结论】在前提 (a)–(d) 下，
+      **Q_B² = 0  ⟹  D = 10**，
+    且同一组条件把正规序常数一并定出：
+      NS 扇区：D = 10 **且** α₀^NS = 1/2；
+      R  扇区：D = 10 **且** α₀^R  = 0。
+  即：平坦 RNS 弦的 BRST 幂零性**挑出**临界维数，且与 α₀ 同时被挑出。
+
+  【为什么维数与 α₀ 写在同一张卡上（与「一个节点一个命题」的关系）】
+  IMNU (3.8)(3.9) 把 (Q_B)² 写成鬼场数算符的线性组合，系数是 D 与 α₀ 的多项式；
+  例如 NS 的 η_n†η_n 系数是 ((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n。
+  令它对一切 n ≥ 1 为零，**n³ 与 n 两个幂给出两个方程**，二者耦合地同时定出 D 与 α₀：
+  既不能只由其中一个方程得到 D = 10，也不能在不定 D 的情况下得到 α₀。
+  故这里的「D = 10 且 α₀ 取该值」是**一个**命题，不是两个被分别推导的命题，
+  按 graph/CLAUDE.md 的拆分判据（"文献把两件事写在一个定理里**而它们被分别推导**时才拆开"）
+  不拆。对照：玻色弦一侧 Kato–Ogawa 摘要把 D = 26 与 α_0 = 1 并列，但本图未见其显式系数公式，
+  故那边按拆分处理（worldsheet.critical-dimension-brst-v2 只取 c^m = 26）。
+
+  【本命题不断言什么】
+    (1) **不断言 ⟸**（D = 10 ⟹ Q_B² = 0）。⟸ 那一半由
+        worldsheet.superstring-brst-nilpotent-at-c15 承载（它的陈述更强：对任意正范数 SCFT
+        只要 c^m = c̃^m = 15 即幂零，平坦 D = 10 是其特例）。
+    (2) ★ **不断言一般 SCFT 形式**。本卡的前提 (a) 把物质部门钉死为平坦 D 个 X^μψ^μ。
+        「把若干 X^μψ^μ 换成任意正范数 SCFT 后仍有 Q_B² = 0 ⟹ c^m = 15」是另一张卡
+        worldsheet.critical-dimension-superstring-brst-v2，它在本图**没有**来源支撑
+        （status = conjecture），本卡不蕴含它，也不被它蕴含。
+    (3) **不断言 α₀ 与本图截距 a 的换算**。IMNU 的 α₀ 按 (3.3)(3.5) 以 −α₀/√π 进入 L，
+        与 conv.intercept-sign-a 的 a（物理态条件 (L_0 − a)|ψ⟩ = 0）之间的换算**本图未核实**；
+        本卡的 uses_conventions 因此**不**列 conv.intercept-sign-a。
+        数值上 IMNU 的 (1/2, 0) 与本图 worldsheet.open-superstring-mass-shell 的
+        NS 截距 1/2、R 截距 0 恰好相同，本图把这记为**待核的巧合**，不作为两者等同的依据，
+        也不据此在两卡之间连边。
+    (4) **不断言 c^m = 15**。本卡的结论是 D = 10 这个**数**，IMNU 全程用 D、不出现中心荷；
+        由 D = 10 到 c^m = 15（或反向）需要 worldsheet.rns-matter-central-charge 的
+        c^m = (3/2)D，那一步不是本命题的产物（这也是本卡相对
+        worldsheet.critical-dimension-superstring-brst-v2 少一条 inferred 边的原因）。
+    (5) **不断言 D = 10 是一致性的充分条件**，也不断言无鬼定理
+        （后者是 worldsheet.no-ghost-theorem-superstring 与其上同调版本）。
+    (6) **不断言 IMNU 的 Q_B 与 Polchinski Vol.2 §10.5 的 Q_B 是逐字同一个算符**
+        （量子化方案不同：IMNU (2.1) 从二维超引力耦合的标量超多重态出发并取规范 (2.7)；
+        Polchinski §10.5 不从规范不变作用量出发）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.virasoro-standard
+sources:
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3, pp. 941–943：**(3.8)**（(Q_B^NS)² = (1/π)Σ_{n≥1}[((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n] η_n†η_n + (1/π)Σ_{r≥1/2}[((D−10)/2)r² + (16α₀^NS − D + 2)/8] ζ_r†ζ_r）；**(3.9)**（(Q_B^R)² = (1/π)Σ_{n≥1}[((D−10)/8)n³ + 2α₀^R n] η_n†η_n + (1/π)Σ_{n≥1}[((D−10)/2)n² + 2α₀^R] ζ_n†ζ_n + (1/π)α₀^R ζ₀²）；**(3.10)** 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the conformal anomaly, demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and α₀^R = 0 for the R model.'，紧随逐字 'These conditions are necessary to prove the no-ghost theorem in the next section.'"
+    note: |
+      L1（全文 19 页逐页读图；literature/extractions/ito-morozumi-nojiri-uehara-1986.md E2）。
+      ★★ **本卡的主来源，也是本图现有来源里唯一写出超弦 Q_B² 显式系数的位置。**
+      方向逐字是 ⟹（'demands'、'are necessary'），与本卡陈述的方向一致。
+      ★ 该文用的是 **D**，不是中心荷；且**只算平坦 D 个 X^μψ^μ**——这正是本卡把前提 (a)
+      写成"平坦"的理由，也是本卡与 worldsheet.critical-dimension-superstring-brst-v2
+      （一般正范数 SCFT）的分界线。
+      ★ R 扇区 (3.9) 末项 (1/π)α₀^R ζ₀² 含 βγ 零模——α₀^R = 0 同时消掉它。
+      ⚠ IMNU 不声明受限模，也不声明前提 (d) 的线性无关性；这两条是本图的补充
+      （与玻色弦 v2 卡同样写进陈述）。
+  - ref: ohta-1986
+    loc: "全文；摘要（L2）。摘要逐字：'The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge.'"
+    note: |
+      **正文未取得（L0）**（literature/extractions/ohta-1986.md §0.4）；
+      **loc 只能写「全文；摘要（L2）」，不得写页码或式号。**
+      ⚠ 方向同为 ⟹（'are shown to follow from'），且同样把**维数与截距一并**归给幂零性
+      ——这与本卡把两者写在一张卡上的做法一致；但摘要不给截距数值。
+      Ohta 处理的同样是（平坦）NSR 模型。IMNU p.952 的 Note added 逐字说明两者的
+      量子化方法 "a little different"，且 Ohta 未给 R 扇区无鬼定理的证明。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 1.7(ii)**, p. 307–308，逐字 'Q² = 0 iff D = 10.'；证明逐字 '(ii) is done in [13, 15].'（[13] = ohta-1986；[15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）"
+    note: |
+      L1（全文 35 页逐页读图；literature/extractions/lian-zuckerman-1989.md E1、§4 Q3）。
+      ★ **文献中唯一带「iff」的编号陈述，而且它用的正是 D（不是中心荷）**
+      ——就形式而言它对应的是本卡这一侧（平坦、以 D 为参数），不是一般 SCFT 那一侧。
+      ⚠⚠ **LZ 自己不证**：外包给 ohta-1986（正文未取得）与 Terao–Uehara（本项目 bib 未登记）。
+      ⇒ 「iff」的可追溯性止于 LZ 的陈述；其证明的可追溯性止于 IMNU (3.8)(3.9)。
+      ⚠ LZ 的中心荷归一化是 c/8 (m³ − 2κm)，其 D = 10 对应本图 c^m = 15；
+      其 Proposition 1.2 给鬼表示 ρ(c) = −10（= 本图 c^g = −15）。
+      ⚠ **编号陷阱**：LZ p.305 有 Lemma 1.4、p.306 又有 Definition 1.4，引用必须带类型词。
+      ⚠ **反向禁令**：**不得**把本条当作玻色弦 c^m = 26 的 iff 来源（那是 RNS 超弦）。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字 'one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) **whenever** the total central charge vanishes'）"
+    note: |
+      ⚠ **反面对照，不是本卡（⟹ 方向）的来源**：这句只给 ⟸。列在这里是为了让读者看到
+      「本卷没有 ⟹ 方向」这件事有原句支撑，以及本卡为什么必须靠 IMNU。
+      ⟸ 那一半（且是一般 SCFT 形式）见 worldsheet.superstring-brst-nilpotent-at-c15。
+tags: [superstring, brst, critical-dimension, nilpotency, flat-background, rns]
+notes: |
+  【本卡为什么存在（lead 裁决，2026-09-11）——修超弦链相对玻色弦链的"档位不对称"】
+  玻色弦一侧的 worldsheet.critical-dimension-brst-v2 把陈述限在"物质部门为自由玻色子的
+  受限模、诸 c_{−m}c_m 线性无关"这一可算情形，因而它的唯一推导 --via-nilpotency
+  稳稳落在 **physical-argument**。超弦一侧此前的对应卡
+  worldsheet.critical-dimension-superstring-brst-v2 却把陈述写成**一般正范数 SCFT**，
+  而其唯一推导的来源 IMNU **只算平坦** D 个 X^μψ^μ ⇒ 那条推导按"实话实说"只能标
+  **conjecture**（从特例外推到一般 SCFT 无来源），于是整条超弦 D = 10 链
+  （critical-dimension-superstring → open-superstring-mass-shell → … → D 膜电荷）
+  被拉到 conjecture，而同构的玻色弦链是 physical-argument。
+  **不对称的根源不在证据而在陈述的宽度**：两侧的实际计算是同一种（显式系数 + 线性无关性），
+  玻色弦卡限了范围，超弦卡没限。本卡把超弦侧的**平坦特例单列**，使两侧同型：
+    玻色弦：critical-dimension-brst-v2（限自由玻色子）  ← --via-nilpotency（physical-argument）
+    超弦　：**本卡**（限平坦 X^μψ^μ）　　　　　　　　　← --via-imnu-explicit-coefficients（physical-argument）
+  一般形式的 ⟹ 仍留在 worldsheet.critical-dimension-superstring-brst-v2 上，
+  **保留为 conjecture，理由不变**（没有任何来源对一般正范数 SCFT 做过这个方向）。
+
+  【与相邻三张卡的分工（引用前请先读这一段）】
+    · 只需要「Q_B² = 0，上同调有定义」的下游推导 → 依赖
+      worldsheet.superstring-brst-nilpotent-at-c15（⟸，一般 SCFT，本卷有原句）。
+    · 需要「BRST 幂零**定出** D = 10」且背景是平坦 RNS 弦的 → 依赖**本卡**。
+    · 需要「BRST 幂零定出 c^m = 15」且允许任意正范数 SCFT 的 → 依赖
+      worldsheet.critical-dimension-superstring-brst-v2（**conjecture**，会拖低有效状态）。
+    · 需要由 c^m = 15 换到 D = 10（或反向）的那一步 → 依赖
+      worldsheet.rns-matter-central-charge（c^m = (3/2)D）。
+
+  【本卡与 v2 卡的记账差别（为什么本卡少一条 inferred 边）】
+  v2 卡的陈述用 c^m = 15，而 IMNU 全程用 D，故 v2 的推导必须挂一条 inferred 的
+  worldsheet.rns-matter-central-charge 把 D-形式翻成 c^m-形式。本卡的陈述**直接用 D**，
+  与来源逐字同形，那条翻译边随之消失。这不是取巧：本卡因此也**不**断言任何关于 c^m 的事
+  （见【本命题不断言什么】(4)）。
+
+  【本卡不是换代】本卡**不** supersede 任何卡：
+  worldsheet.critical-dimension-superstring-brst-v2 的陈述（一般形式）与本卡的陈述
+  （平坦形式）是两个不同的命题，前者不被后者取代，其 statement 文本与 status 均不动。
+  两卡的关系已写进 v2 卡推导的 notes（"平坦特例已单列为 …-flat 卡"）。
+author: curator
+created: "2026-09-11"
