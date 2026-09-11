@@ -874,4 +874,83 @@ theorem le_finrank_towerSeed (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : 
 
 end SeedBound
 
+/-! ### The `D`-independent null lower bound (blueprint §B‴.9's
+`le_finrank_towerNull_inf_towerBigrade`, PR6′-c) -/
+
+section NullLowerBound
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- **`L_{-1}` embeds the seed space `Q_{-(N+1), N}` into the null states of the antidiagonal
+slice `V_{N+1}`**, as a linear map (Type 1 of `NullSeedsTwo.lean`, packaged). -/
+noncomputable def typeOneMap (F : DDFLightConeFrame η a b) (haa : Fock.zeroModeSq η a = 2)
+    (N : ℕ) :
+    ↥(towerSeed η a b (-((N + 1 : ℕ) : ℤ)) N)
+      →ₗ[K] ↥(towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1)) :=
+  (towerLop η a b (-1)).restrict fun y hy => by
+    obtain ⟨hpos, hbig⟩ := mem_towerSeed.1 hy
+    exact towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη
+      F.frame.isotropic F.hba haa (by push_cast; ring) hbig hpos
+
+omit [CharZero K] in
+lemma typeOneMap_apply (F : DDFLightConeFrame η a b) (haa : Fock.zeroModeSq η a = 2) (N : ℕ)
+    (y : ↥(towerSeed η a b (-((N + 1 : ℕ) : ℤ)) N)) :
+    (typeOneMap F haa N y : TowerFock D K) = towerLop η a b (-1) (y : TowerFock D K) := rfl
+
+omit [CharZero K] in
+theorem typeOneMap_injective (F : DDFLightConeFrame η a b) (haa : Fock.zeroModeSq η a = 2)
+    (N : ℕ) : Function.Injective (typeOneMap (K := K) F haa N) := by
+  intro u v huv
+  have h : (typeOneMap F haa N u : TowerFock D K) = (typeOneMap F haa N v : TowerFock D K) := by
+    rw [huv]
+  simp only [typeOneMap_apply] at h
+  refine Subtype.ext (sub_eq_zero.mp ?_)
+  refine towerLop_neg_one_injective η a b F.hη F.frame.isotropic F.hba
+    (M := N) (j := -((N + 1 : ℕ) : ℤ)) (Submodule.sub_mem _ (mem_towerSeed.1 u.2).2
+      (mem_towerSeed.1 v.2).2) ?_
+  rw [map_sub, h, sub_self]
+
+/-- **The `D`-independent lower bound on the null states** (blueprint §B‴.9, PR6′-c; stated
+at level `N + 1` so that no natural-number subtraction is involved):
+
+`dim (H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)`,
+
+the right-hand side being the number of `b̃`-free level-`N` light-cone occupation functions.
+Proof: `L_{-1}` is injective on the piece `(-(N+1), N)` (`towerLop_neg_one_injective`) and sends
+its seed space `Q_{-(N+1),N}` into `H_null ⊓ V_{N+1}` (Type 1), so
+`dim (H_null ⊓ V_{N+1}) ≥ dim Q_{-(N+1),N} ≥ p_{D−1}(N)` (`le_finrank_towerSeed`).
+
+`D = 26` does not appear.  The intercept enters only through `haa : k·k = 2` (i.e. `a₀ = 1`),
+which is what makes `L_0` vanish on the seeds and hence `L_{-1}(seed)` physical; this is the
+one place PR6′ is not intercept-free (blueprint §B‴.10).  Compare
+`LevelTwoCount.le_finrank_towerNullSubmodule_inf_towerBigrade_two` (`N + 1 = 2`), which gets
+`D` rather than `p_{D−1}(1) = D − 1`: the missing one is the Type-2 state `𝒟₂|0;p_{-2}⟩`, the
+only place `D = 26` is consumed — exactly the gap §B‴.3 predicts. -/
+theorem le_finrank_towerNull_inf_towerBigrade_succ (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) (N : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = N ∧ conjDeg hD c = 0}
+      ≤ Module.finrank K
+          ↥(towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1)) := by
+  refine le_trans (le_finrank_towerSeed hD F (-((N + 1 : ℕ) : ℤ)) N) ?_
+  have hVfin : FiniteDimensional K ↥(towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1)) :=
+    towerBigrade_finite _ _
+  have hfin : FiniteDimensional K
+      ↥(towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1)) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1))
+      (S₂ := towerBigrade D K (-((N + 1 : ℕ) : ℤ)) (N + 1)) inf_le_right
+  exact LinearMap.finrank_le_finrank_of_injective (typeOneMap_injective F haa N)
+
+/-- The same bound in the blueprint's `N - 1` phrasing, for `1 ≤ N`.  (At `N = 0` the
+blueprint's statement is false: `p_{D−1}(0) = 1` but the vacuum `|0;0⟩` is physical and not
+null.) -/
+theorem le_finrank_towerNull_inf_towerBigrade (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) {N : ℕ} (hN : 1 ≤ N) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = N - 1 ∧ conjDeg hD c = 0}
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-(N : ℤ)) N) := by
+  obtain ⟨N, rfl⟩ : ∃ N', N = N' + 1 := ⟨N - 1, by omega⟩
+  simpa using le_finrank_towerNull_inf_towerBigrade_succ hD F haa N
+
+end NullLowerBound
+
 end StringFormal.NoGhost
