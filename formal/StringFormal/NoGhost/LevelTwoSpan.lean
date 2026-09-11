@@ -137,4 +137,81 @@ end VecLinear
 
 end Fock
 
+/-! ### The exact expansion of `A^ε_{-2}` on the ground state -/
+
+section DDFLevelTwo
+
+variable {D : ℕ} {R : Type*} [CommRing R]
+
+/-- `α^ε_{-1}` on a rung vector is multiplication by the level-one state `ε·α_{-1}`. -/
+lemma towerModeVec_neg_one_apply_single (η a b ε : Fin D → R) (j : ℤ) (P : Fock D R) :
+    towerModeVec η a b ε (-1) (Finsupp.single j P)
+      = Finsupp.single j (Fock.polState η ε * P) := by
+  rw [towerModeVec, LinearMap.sum_apply, Fock.polState, Finset.sum_mul,
+    Finsupp.single_finsetSum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [LinearMap.smul_apply, towerMode_single, Fock.mode_neg_one_apply, Finsupp.smul_single,
+    smul_mul_assoc]
+
+/-- `α^ε_{-2}` on a rung vector is multiplication by the level-two state `ε·α_{-2}`. -/
+lemma towerModeVec_neg_two_apply_single (η a b ε : Fin D → R) (j : ℤ) (P : Fock D R) :
+    towerModeVec η a b ε (-2) (Finsupp.single j P)
+      = Finsupp.single j (Fock.secondState η ε * P) := by
+  rw [towerModeVec, LinearMap.sum_apply, Fock.secondState, Finset.sum_mul,
+    Finsupp.single_finsetSum]
+  refine Finset.sum_congr rfl fun μ _ => ?_
+  rw [LinearMap.smul_apply, towerMode_single, Fock.mode_neg_two_apply, Finsupp.smul_single,
+    smul_mul_assoc]
+
+variable [Algebra ℚ R]
+
+/-- **The exact expansion of `A^ε_{-2}` on the ground state** (blueprint §B.4, the `n = 2`
+leading-term lemma; `formal/TODO.md` item `noghost-b`, blocker (a)):
+
+`A^ε_{-2}|0; k⟩ = [ε·α_{-2} - 2 (ε·α_{-1})(k_0·α_{-1})] |0; k - 2k_0⟩`.
+
+Unlike the `n = 1` case there *is* a correction term: the DDF window on the ground state is
+`{-2, -1, 0}` and the middle term is the level-one coefficient `Φ_1` of the creation
+exponential at vertex momentum `-2 k_0` (`Fock.creaExp_one`,
+`Fock.polState_vertexMomentum`).  The `j = 0` term still drops out, and again **only**
+because of the extra hypothesis `hεa : ε·k = 0` (see
+`ddfOp_neg_one_apply_towerVacuum`). -/
+theorem ddfOp_neg_two_apply_towerVacuum (η a b ε : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (hεb : dotVec η ε b = 0) (hεa : dotVec η ε a = 0) :
+    ddfOp η a b ε hη hεb (-2) (towerVacuum D R)
+      = Finsupp.single (-2) (Fock.secondState η ε
+          - (2 : R) • (Fock.polState η ε * Fock.polState η b)) := by
+  classical
+  have hs : ∀ j ∉ ({-2, -1, 0} : Finset ℤ),
+      ddfSummand η a b ε (-2) j (towerVacuum D R) = 0 := by
+    intro j hj
+    simp only [Finset.mem_insert, Finset.mem_singleton, not_or] at hj
+    obtain ⟨h1, h2, h3⟩ := hj
+    rcases lt_or_ge j 0 with h | h
+    · exact ddfSummand_apply_single_vacuum_eq_zero_of_lt η a b ε (-2) j 0 (by omega)
+    · exact ddfSummand_apply_single_vacuum_eq_zero_of_pos η a b ε hη hεb (-2) j 0 (by omega)
+  have hm2 : ddfSummand η a b ε (-2) (-2) (towerVacuum D R)
+      = Finsupp.single (-2) (Fock.secondState η ε) := by
+    rw [ddfSummand, Module.End.mul_apply, towerVacuum, towerVertex_apply_single_vacuum,
+      show (0 : ℤ) + -2 = -2 by ring, show (-2 : ℤ) - -2 = 0 by ring, Fock.creaExp_zero,
+      towerModeVec_neg_two_apply_single, mul_one]
+  have hm1 : ddfSummand η a b ε (-2) (-1) (towerVacuum D R)
+      = Finsupp.single (-2) ((-2 : R) • (Fock.polState η ε * Fock.polState η b)) := by
+    rw [ddfSummand, Module.End.mul_apply, towerVacuum, towerVertex_apply_single_vacuum,
+      show (0 : ℤ) + -2 = -2 by ring, show (-1 : ℤ) - -2 = 1 by ring,
+      towerModeVec_neg_one_apply_single, Fock.creaExp_one, Fock.polState_vertexMomentum,
+      mul_smul_comm]
+    norm_num
+  have hz : ddfSummand η a b ε (-2) 0 (towerVacuum D R) = 0 := by
+    rw [ddfSummand, Module.End.mul_apply, towerVacuum, towerVertex_apply_single_vacuum,
+      towerModeVec_zero_apply_single, dotVec_vec_towerMomentum, hεa, hεb, mul_zero, add_zero,
+      zero_smul]
+  rw [ddfOp_apply η a b ε hη hεb (-2) (towerVacuum D R) hs,
+    Finset.sum_insert (by decide), Finset.sum_insert (by decide), Finset.sum_singleton,
+    hm2, hm1, hz, add_zero, ← Finsupp.single_add]
+  congr 1
+  module
+
+end DDFLevelTwo
+
 end StringFormal.NoGhost
