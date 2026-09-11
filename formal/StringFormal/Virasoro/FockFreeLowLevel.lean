@@ -502,6 +502,66 @@ theorem linearIndependent_fockDesc4_massShell_26 [NoZeroDivisors R] [CharZero R]
 
 end MassShell
 
+/-! ### `V(c,h) ≠ 0` for every integer `c ≥ 2` and every `h`
+
+`Verma.lean` records that nothing in it rules out `V(c,h) = 0` (that would make `pbw-verma` (a),
+`VermaPBW.lean` and the `≤` half of `dim V_N = p(N)` vacuously true).  The Fock realisation
+settles this for `c` a natural number `≥ 2` and **arbitrary** `h`: take the Lorentzian sign
+vector `η = diag(-1, 1, …, 1)` and the zero mode `a = (h - ½, h + ½, 0, …)`, for which
+`½ α₀² = ½(-(h - ½)² + (h + ½)²) = h`.  Indefiniteness of `η` is essential: with a positive
+definite `η` only `h` of the form `½ ∑ aμ²` would be reachable.
+-/
+
+section Nonvacuity
+
+variable (D R)
+
+/-- The Lorentzian sign vector `η = diag(-1, 1, …, 1)`. -/
+def lorentzSign : Fin D → R := fun μ => if (μ : ℕ) = 0 then -1 else 1
+
+omit [Algebra ℚ R] in
+lemma lorentzSign_sq (μ : Fin D) : lorentzSign D R μ * lorentzSign D R μ = 1 := by
+  unfold lorentzSign
+  split <;> ring
+
+variable {D R}
+
+set_option linter.unusedVariables false in
+/-- The zero mode realising the weight `h`: `a = (h - ½, h + ½, 0, …)`.  The hypothesis
+`2 ≤ D` is carried so that indices `0` and `1` of `Fin D` exist in the lemmas below. -/
+noncomputable def weightZeroMode (hD : 2 ≤ D) (hw : R) : Fin D → R := fun μ =>
+  if (μ : ℕ) = 0 then hw - invTwo R else if (μ : ℕ) = 1 then hw + invTwo R else 0
+
+lemma vacuumWeight_weightZeroMode (hD : 2 ≤ D) (hw : R) :
+    vacuumWeight (lorentzSign D R) (weightZeroMode hD hw) = hw := by
+  classical
+  have hne : (⟨0, by omega⟩ : Fin D) ≠ ⟨1, by omega⟩ := by simp [Fin.ext_iff]
+  have hsum : zeroModeSq (lorentzSign D R) (weightZeroMode hD hw)
+      = ∑ μ ∈ ({⟨0, by omega⟩, ⟨1, by omega⟩} : Finset (Fin D)),
+          lorentzSign D R μ * weightZeroMode hD hw μ * weightZeroMode hD hw μ := by
+    refine (Finset.sum_subset (Finset.subset_univ _) ?_).symm
+    intro μ _ hμ
+    simp only [Finset.mem_insert, Finset.mem_singleton, not_or, Fin.ext_iff] at hμ
+    simp [weightZeroMode, hμ.1, hμ.2]
+  rw [vacuumWeight, hsum, Finset.sum_pair hne]
+  simp only [lorentzSign, weightZeroMode, if_pos, one_ne_zero, if_false]
+  have h2 : (2 : R) * invTwo R = 1 := two_mul_invTwo R
+  linear_combination (hw * (2 * invTwo R + 1)) * h2
+
+/-- **`V(c, h) ≠ 0` for every natural number `c ≥ 2` and every weight `h`.**  Witnessed by the
+Fock space of `c` free bosons with Lorentzian metric at the momentum with `α'k² = h`.  This
+removes the "possibly vacuous" caveat on `Verma.lean` / `VermaPBW.lean` for these `(c,h)`;
+`c` is still restricted to the image of `ℕ → R`.  Indefiniteness of `η` is essential: with a
+positive definite `η` only weights of the form `½ ∑ aμ²` would be reachable. -/
+theorem hwv_ne_zero_of_two_le [Nontrivial R] (hD : 2 ≤ D) (hw : R) :
+    hwv R (D : R) hw ≠ 0 := by
+  have hval := vacuumWeight_weightZeroMode hD hw
+  have hmain := hwv_ne_zero (η := lorentzSign D R) (a := weightZeroMode hD hw)
+    (lorentzSign_sq D R)
+  rwa [hval] at hmain
+
+end Nonvacuity
+
 end Fock
 
 end StringFormal.NoGhost
