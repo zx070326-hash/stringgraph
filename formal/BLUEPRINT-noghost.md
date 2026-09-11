@@ -1258,3 +1258,66 @@ PR3 顺带删掉 `noghost-n2` 自报的 `hFullSpan` / `Classical.choose` 那一�
    「Lean 里不要求值任何分拆数」。
 
 PR3/PR4/PR5 未动，§B′ 对它们的判断（含 §B′.9 的三条自我攻击）未被本轮工作证实或证伪。
+
+### §B′ 订正（PR3 落地后，2026-09-12）
+
+PR3 由两条并行分支共同落地，分在两个文件里（文件名冲突是并发的产物，不是设计）：
+
+* `NoGhost/LightConeResolution.lean`（分支 `noghost-n2-finish`）：`b̃ = b − a`
+  （`DDFLightConeFrame.conj_eq_light_sub_momentum`）与显式单位分解
+  （`DDFLightConeFrame.resolution`），均在 `[Field R] [Algebra ℚ R]` 与 `hD : 2 ≤ D` 下，
+  并把 `LevelTwoElim.lean` 的 `FrameSpansFull` 从假设升为定理。
+* `NoGhost/LightConeResolutionGen.lean`（分支 `general-n-pr3`）：PR3 的其余部分
+  （`lcCrea`、`X_eq_lcCrea_single`、`frameVec`、`lcMonomial`、`levelSubmodule_eq_span_lcMonomial`）
+  加下面第 6、7 条的两处推广。它 `import` 前者，**不重复那两条声明**。
+
+6. **单位分解不需要域，也不需要 `2 ≤ D`**（订正 §B′.4 的 PR3 草案与上面第一个文件的取值）。
+   §B′.4 的证明路线是「先 `b̃ = b − a`（要 `dotVec_self_eq_two`，要域、要 `2 ≠ 0`、要 `2 ≤ D`），
+   再用 (F8)」。这个弯路可以完全省掉：(F4) 的张成半边 `b̃ = β•a + γ•b` 与 (F3) `b·a = 1`
+   直接给 `β = −1`（`DDFLightConeFrame.conjSpan_coeff_left`，无任何附加假设），于是
+   ```
+   a − b = (γ − 1)•b − b̃            (DDFLightConeFrame.towerMomentum_neg_one_eq)
+   ```
+   **不需要知道 `γ` 是多少**——而 (F8) 恰恰只是关于 `(a−b)^⊥` 的陈述，所以它能直接用。
+   系数再靠与 `b`、`b̃`、`ε_j` 配对定死（六个收缩全部来自 (F2)(F4)(F5)(F7)(F9)），全程无除法。
+   结果：`DDFLightConeFrame.exists_frame_decomp` 与 `DDFLightConeFrame.frame_decomp_coeff`
+   在 **任意 `[CommRing R]`、任意 `D`** 上成立；两者合起来就是 `resolution`，
+   所以 `resolution` 本身的 `[Field]`/`[Algebra ℚ]`/`hD` 三条假设都是可去的。
+   （非空洞：`NoGhost/WitnessInt.lean` 给了 `ℤ` 上满足这些条件的标架。）
+   **对 §B′.9 末尾那条次级风险的回应**：那里担心「`conj_eq_light_sub_momentum` 依赖 `a·a = 2`，
+   即 `a₀ = 1`，不是可有可无的归一化」。对 `b̃ = b − a` 这条本身，担心是对的；
+   但**单位分解不继承这个依赖**，`a·a ≠ 2` 时 `exists_frame_decomp` 照常成立
+   （`γ` 只是不再等于 1）。真正需要 `a₀ = 1` 的是 §B′.5 的领头项引理，不是 PR3。
+
+7. **`conj_eq_light_sub_momentum` 真的要 `(2 : R) ≠ 0`**（§B′.4 的草案签名只写 `[Field K]`）。
+   标架数据给出的恰好是
+   ```
+   2 γ = η(a,a)                     (DDFLightConeFrame.two_mul_conjSpan_coeff_right)
+   ```
+   （无附加假设），配上 `dotVec_self_eq_two` 才是 `2 γ = 2`。特征 2 的域上
+   `η(a,a) = 2 = 0`，方程对每个 `γ` 都成立，(F1)–(F8) 定不死 `b̃`。把这条单独拆出来，
+   是为了让特征 2 的障碍变成一个看得见的等式而不是一句注释。
+
+8. **`lcMonomial` 的指标类型就是 `Osc D = Fin D × ℕ+` 本身**（§B′.4 的括注说要「照抄
+   `LightCone.transIdx` 的指标搬运」）。`frameVec` 用的是对下标数值的 `dite`
+   （`0 ↦ b`、`1 ↦ b̃`、`μ ↦ ε_{μ−2}`），只要 `2 ≤ D`，比 `transIdx` 的 `3 ≤ D` 还松；
+   而且**全程不建双射 `Fin D ≃ Unit ⊕ Unit ⊕ Fin (D−2)`**——张成只需要
+   `span (range (frameVec F)) = ⊤`，为此只要 `b`、`b̃`、`ε_i` 各自**落在**值域里就够。
+   副作用很大：光锥单项式与普通单项式**共用同一个指标集**，于是 §B′.8 要比较的两个
+   `Fintype.card` 是同一个集合上的，不必展开 `p_D(N)` 的任何闭式。
+
+9. **张成的证法不是「把乘积展开成和」**。直接对 `∏ X_v^{d v}` 用分配律会得到一个对
+   `Finset.pi` 的和，再要把结果重排成占据数形式，很贵。实际用的是乘法结构：
+   `lcSpan F M * lcSpan F N ≤ lcSpan F (M + N)`（由 `lcMonomial (d + e) = lcMonomial d * lcMonomial e`
+   与 `Submodule.span_mul_span` 得），然后 `MvPolynomial.prod_X_pow_eq_monomial` 把
+   `monomial d 1` 写成 `∏_{v ∈ d.support} X_v^{d v}`，逐因子套 `X_mem_lcSpan`。
+   level 分次的可乘性用 Mathlib 的 `IsWeightedHomogeneous.mul`。全程没有 `Finsupp.induction`。
+
+10. **PR3 的行数估计（350）偏低**：实际约 520 行（含文档），其中标架层约 180 行、
+    `lcCrea` 层约 90 行、`frameVec`/`lcMonomial`/张成约 180 行。多出来的主要是
+    第 9 条那套乘法结构的脚手架（`mul_mem_lcSpan` / `pow_mem_lcSpan` / `prod_mem_lcSpan`
+    以及它们在 `Fock.levelSubmodule` 一侧的镜像），蓝图没有预见到需要**两套**这样的脚手架。
+
+PR4/PR5 仍未动。§B′.9 的三条自我攻击中，第 2 条（光锥单项式线性无关没有免费午餐）被
+本轮**间接印证**：`levelSubmodule_eq_span_lcMonomial` 只做到张成，且张成的证明
+完全用不上任何基数比较，正说明「张成」与「基」之间隔着的确实是另一件事。

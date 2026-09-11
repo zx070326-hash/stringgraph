@@ -1887,6 +1887,50 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     所以图卡 `worldsheet.ddf-spanning-hypothesis` 的 gap (B-26) 可以改写成这条 Lean 里的
     秩不等式而不丢信息。
   - **公理登记**：22 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
+- [x] `general-n-pr3`（蓝图 §B′ 的 PR3）：**光锥单位分解 + 光锥单项式张成每个 level 片** ——
+  `StringFormal/NoGhost/LightConeResolutionGen.lean`。分支 `agent/formalizer/general-n-pr3`。
+  **`D = 26` 不出现；`ddfOp` / 塔 / rung 一概不出现（全部活在单个 `Fock D R` 纤维里）。**
+  - **文件名**：蓝图叫 `NoGhost/LightConeResolution.lean`，那个名字被并行的 `noghost-n2-finish`
+    占了（它落地了 `DDFLightConeFrame.conj_eq_light_sub_momentum` 与
+    `DDFLightConeFrame.resolution`，均需 `[Field R] [Algebra ℚ R]` 与 `hD : 2 ≤ D`）。
+    本文件 `import` 那一个，**不重复这两条**，只补 PR3 的其余部分与两处推广。
+  - **标架层**：`DDFLightConeFrame.conjSpan_coeff_left`（`β = −1`，无任何附加假设）、
+    `towerMomentum_neg_one_eq`（`a − b = (γ−1)•b − b̃`，**不需要知道 `γ`**）、
+    **`exists_frame_decomp`**（任意 `e` 可沿 `{b, b̃, ε_i}` 分解）、
+    **`frame_decomp_coeff`**（该分解唯一，系数显式 `lam = −(b̃·e)`、`mu = −(b·e)`、`c j = ε_j·e`）、
+    `two_mul_conjSpan_coeff_right`（`2γ = η(a,a)`）、
+    `dotVec_conj_towerMomentum`（`b̃·p_j = −1 − j`，在 rung `−N` 是 `N − 1`；**随 rung 变**，
+    与 rung 无关的是另一侧 `−(b·p_j) = −1`，§B′.9 第 1(b) 条点名这里最容易写错）、
+    `dotVec_trans_towerMomentum`（`ε_i·p_j = 0`，与 rung 无关）。
+  - **光锥产生算子**：`lcCrea η w n = Σ_μ η_μ w^μ X_{(μ,n)}`（`n = 1` 就是 `Fock.polState`，
+    `rfl`）、`lcCrea_add/_smul/_sum/_zero` 与打包的线性映射 `lcCreaₗ`、
+    **`X_eq_lcCrea_single`**（`LevelTwoElim.X_one_eq_polState_single` 的一般 `n`）、
+    `lcCrea_mem_levelSubmodule`。
+  - **方向表与张成**：`frameVec`（`0 ↦ b`、`1 ↦ b̃`、`μ ↦ ε_{μ−2}` 的 `dite`，只要 `2 ≤ D`，
+    **不建 `Fin D ≃ Unit ⊕ Unit ⊕ Fin (D−2)` 的双射**）、`span_range_frameVec_eq_top`、
+    `lcCrea_mem_span_range_frameVec`、`lcMonomial` / `lcSpan` 与它们的乘法性
+    （`lcMonomial_add`、`lcSpan_mul_lcSpan_le`、`pow_mem_lcSpan`、`prod_mem_lcSpan`）、
+    **`levelSubmodule_eq_lcSpan` / `levelSubmodule_eq_span_lcMonomial`**——
+    level `N` 的光锥单项式张成 `Fock.levelSubmodule D R N`。
+    **只做张成，不做线性无关**（§B′.9 第 2 条：无免费证明，且不在关键路径上）。
+  - **对蓝图的订正（已追加到 `BLUEPRINT-noghost.md` 的「§B′ 订正」节）**：
+    1. **单位分解不需要域，也不需要 `2 ≤ D`**。蓝图（与 `LightConeResolution.lean`）都走
+       `conj_eq_light_sub_momentum`（→ `dotVec_self_eq_two` → `[Field]` + `(2:R) ≠ 0` + `hD`）。
+       绕开的办法：(F4) 的张成半边加 `b·a = 1` 直接给 `β = −1`，于是
+       `a − b = (γ−1)•b − b̃` 已经落在 `span{b, b̃}` 里，**不需要知道 `γ`**，而 (F8)
+       （陈述在 `(a−b)^⊥` 上）只要这一点。系数再靠与 `b`、`b̃`、`ε_j` 配对定死，全程无除法。
+       故 `exists_frame_decomp` / `frame_decomp_coeff` 在 `[CommRing R]` 上成立。
+    2. `conj_eq_light_sub_momentum` 确实要 `(2:R) ≠ 0`（蓝图草案只写 `[Field K]`）：
+       标架数据给出的恰好是 `2γ = η(a,a)`（`two_mul_conjSpan_coeff_right`），
+       配上 `dotVec_self_eq_two` 才是 `2γ = 2`。特征 2 下 (F1)–(F8) 真的定不死 `b̃`。
+    3. `lcMonomial` 的指标类型就是 `Osc D = Fin D × ℕ+` 本身（与普通单项式**同一个**指标集），
+       所以 §B′.8 要比较的两个 `Fintype.card` 是同一个集合上的，不必展开分拆数。
+    4. `levelSubmodule_eq_span_lcMonomial` 在任意 `[CommRing R]` 上成立（蓝图只要 `[Field K]`）；
+       非空洞：`NoGhost/WitnessInt.lean` 给了 `ℤ` 上的标架见证。
+  - **未做（PR4）**：`towerLop_neg_conjDegree_leading`、`b̃`-次数/加权次数 `(β, ω)`、
+    `conjFreeSlice`、`towerBigrade_le_conjFree_sup_spurious`、
+    `finrank_towerPhys_inf_towerBigrade_le`。本文件完全不碰塔。
+  - **公理登记**：46 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片

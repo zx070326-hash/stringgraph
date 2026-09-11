@@ -322,6 +322,32 @@ StringFormal/
                             据此给出 PR1 那条 `iff` 的「⟹」半边
                             （`b26_of_ddfSpansOn_bigrade`）与 **`ddfSpansOn_bigrade_iff_b26`**
                             ——`B26` 是 (B-26) 的**等价改写**，不是加强。`D = 26` 不出现
+  NoGhost/LightConeResolution.lean  **蓝图 §B′ PR3 的标架半边**（分支 `noghost-n2-finish`）：
+                            `DDFLightConeFrame.conj_eq_light_sub_momentum`（`b̃ = b − a`）与
+                            `DDFLightConeFrame.resolution`（显式单位分解），均需
+                            `[Field R] [Algebra ℚ R]` 与 `hD : 2 ≤ D`；把 `LevelTwoElim.lean` 的
+                            `FrameSpansFull`（`hFullSpan`）从假设升为定理
+  NoGhost/LightConeResolutionGen.lean  **蓝图 §B′ PR3 的一般 `N` 半边**：光锥产生算子
+                            `lcCrea η w n = Σ_μ η_μ w^μ X_{(μ,n)}`（`n = 1` 就是 `Fock.polState`，
+                            `rfl`；`lcCreaₗ` 是打包的线性映射）、`X_eq_lcCrea_single`
+                            （`LevelTwoElim.X_one_eq_polState_single` 的一般 `n`）、方向表
+                            `frameVec`（`0 ↦ b`、`1 ↦ b̃`、`μ ↦ ε_{μ−2}` 的 `dite`，只要 `2 ≤ D`，
+                            **不建 `Fin D ≃ Unit ⊕ Unit ⊕ Fin (D−2)` 的双射**，故光锥单项式与
+                            普通单项式**共用指标集 `Osc D`**）、`span_range_frameVec_eq_top`、
+                            `lcMonomial` / `lcSpan` 的乘法性与主定理
+                            **`levelSubmodule_eq_span_lcMonomial`**（level `N` 的光锥单项式张成
+                            `Fock.levelSubmodule D R N`，**任意 `[CommRing R]`**）。
+                            **只做张成，不做线性无关**（§B′.9 第 2 条）。
+                            **推广**：`DDFLightConeFrame.exists_frame_decomp` 与
+                            `frame_decomp_coeff`（分解存在 + 系数唯一且显式）在**任意交换环、
+                            任意 `D`** 上成立——`resolution` 的 `[Field]`/`[Algebra ℚ]`/`hD`
+                            三条假设全部可去，因为 (F4)+(F3) 直接给 `β = −1`，于是
+                            `a − b = (γ−1)•b − b̃` 已落在 `span{b, b̃}` 里，**不必知道 `γ`**。
+                            真正要 `(2:R) ≠ 0` 的只有 `b̃ = b − a` 那一条（标架只给
+                            `2γ = η(a,a)`，见 `two_mul_conjSpan_coeff_right`）。
+                            另有 `dotVec_conj_towerMomentum`（`b̃·p_j = −1 − j`，**随 rung 变**，
+                            §B′.9 第 1(b) 条的陷阱）与 `dotVec_trans_towerMomentum`（`ε_i·p_j = 0`）。
+                            `D = 26` 与整个塔（rung / `towerBigrade`）在本文件一次不出现
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
