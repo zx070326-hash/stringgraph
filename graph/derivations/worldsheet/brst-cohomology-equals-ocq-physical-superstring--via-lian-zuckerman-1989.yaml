@@ -71,18 +71,26 @@ depends_on:
       ⚠ **不构成循环**：LZ 的 Corollary 2.15(ii)（正定）证明**不用** T 与 Theorem 2.20，
       而 Theorem 2.20 的证明**要用** Corollary 2.15(i) 的维数公式（与 2.15(ii) 同一计算）
       与 Corollary 2.19(i)(ii)。方向是 2.15 → 2.20，与本边方向一致。
-  - id: worldsheet.superstring-relative-cohomology-vanishing
+  - id: worldsheet.superstring-relative-cohomology-vanishing-v2
     note: |
-      供给 Theorem 2.20 证明里的一条**显式引用的**上游：消灭定理（LZ **Theorem 2.4**，p.309 /
+      供给 Theorem 2.20 证明所依赖的上游：消灭定理（LZ **Theorem 2.4**，p.309 /
       **Corollary 3.4**，p.323）。它在本推导里承担两件事：
         (a) 使 H⁰_rel 是相对复形**唯一**非零的上同调群，故"λ 诱导 P → H⁰_rel"这一句里的
             H⁰_rel 承载了全部信息，等距性质的陈述才有意义；
         (b) 与 Proposition 2.14(ii) 的 char = sign 合起来给出 Corollary 2.15(i) 的维数公式
             dim H⁰_rel = ½(2κ+1) dim R(p,κ) p^{(8)}_κ(κ − p·p/2)，而 Theorem 2.20 的收尾正是
             拿它与 Corollary 2.19(i) 的 dim T∩P 比对得同构。
-      **非 inferred**：LZ 在 Corollary 2.15 与 Theorem 2.20 的证明里都明确引用 Theorem 2.4。
+      **非 inferred，但引用是间接的**（2026-09-11 依 reviewer-batch22 PLAUSIBLE 订正措辞）：
+      抽取记录 lian-zuckerman-1989.md E8 列出的 Theorem 2.20 证明输入是
+      **Corollary 2.19(ii)、Corollary 2.15(i)、Corollary 2.19(i)**；
+      **Theorem 2.4 是经 Corollary 2.15(i) 间接进入**的（2.15 的证明才直接引 2.4）。
+      本边原先写「Thm 2.20 证明明确引用 Thm 2.4」，按抽取记录不成立，已改。
+      保持非 inferred 的理由：间接引用仍是论文内部显式的证明链（2.4 → 2.15(i) → 2.20），
+      不是本图补的推断。
       ⚠ **不构成循环**：Theorem 2.4 的证明（§3）不用 T、不用 Corollary 2.15、不用 Theorem 2.20，
       也不用任何厄米形式；方向是 2.4 → 2.15 → 2.20，与图上的边同向。
+      ★ **2026-09-11 改指 v2**：旧卡 (H4) 把 Theorem 2.4 的上标 n 说成「鬼数」，而 LZ 的鬼数
+      在 Z + κ（NS 半整数），该定理用的是 Definition 2.2 的**相对次数**。纯换名式换代。
   - id: worldsheet.ddf-operators-v6
     inferred: true
     note: |

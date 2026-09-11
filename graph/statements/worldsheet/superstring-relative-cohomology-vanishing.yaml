@@ -126,5 +126,14 @@ notes: |
   （用本卡 + Euler–Poincaré + Proposition 2.14(ii) 的 char = sign）。
   这正是 graph/CLAUDE.md "一个节点一个命题"的拆法：LZ 自己也把两者分成
   Theorem 2.4 与 Corollary 2.15(ii) 两条编号结果。
+
+  ⚠⚠ **本卡片已被取代（curator，2026-09-11，依 reviewer-batch22 CONFIRMED + lead 裁决）**，
+  见 superseded_by。原因只有一条：(H4) 写「n 是鬼数」是**陈述漂移**——LZ 的鬼数取值在 Z + κ，
+  NS 扇区是半整数，故按本卡字面 NS 的 n = 0 不可达；Theorem 2.4 用的是 Definition 2.2 的
+  **相对次数**（F^n = B^{n−κ} ∩ Ker K，即 n = 鬼数 + κ ∈ Z）。
+  v2 只改 (H4) 一条并补了换算与来源，其余逐字未动。
+  本卡的推导 `--via-lian-zuckerman-1989` 已 git mv 改指 v2（纯换名式换代，论证原样适用），
+  本卡不再留推导；无活推导依赖本卡。
+superseded_by: worldsheet.superstring-relative-cohomology-vanishing-v2
 author: curator
 created: "2026-09-11"

@@ -64,7 +64,7 @@ depends_on:
       供给物质部门 L^m_n、G^m_r 的显式模式表达式（本图一侧）。LZ 一侧是 Proposition 1.1
       与物质 Fock 空间 V(p,κ) = R(p,κ) ⊗ U(κ)，其中 U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩、
       R(p,½) = C、R(p,0) 是 Spin(D−1,1) 旋量表示（p.303）。
-  - id: worldsheet.superstring-relative-cohomology-vanishing
+  - id: worldsheet.superstring-relative-cohomology-vanishing-v2
     note: |
       供给本推导的**核心上游步骤**：消灭定理（LZ **Theorem 2.4**，p.309 陈述 / **Corollary 3.4**，
       p.323 证明，逐字 'Suppose p ≠ 0: then H^n_rel(p,κ) = 0 unless n = 0.'）。
@@ -75,6 +75,11 @@ depends_on:
       **不用**任何厄米形式、不用 Corollary 2.15、不用 Theorem 2.20；方向是 2.4 → 2.15，与本边同向。
       ⚠ 该卡与本卡的前提逐条相同（D = 10、p ≠ 0、相对复形、R 扇区表示的存在量词），
       故本边不需要 convention_map。
+      ★ **2026-09-11 改指 v2**（依 reviewer-batch22 + lead 裁决）：旧卡 (H4) 把 Theorem 2.4 的
+      上标 n 说成「鬼数」，而 LZ 的鬼数在 Z + κ（NS 半整数），Theorem 2.4 用的是 Definition 2.2 的
+      **相对次数** n = 鬼数 + κ ∈ Z。纯换名式换代，论证与本边一字未变。
+      ⚠ **本卡（目标）的 (H3) 也写「次数是鬼数」**，是同款措辞；本卡未在本轮换代
+      （不在本次 claim 内），已列入报告交 lead 排期。
   - id: worldsheet.fock-indefinite-form
     inferred: true
     note: |
@@ -167,8 +172,9 @@ gaps:
   - "**〔2026-09-11 已结清〕消灭定理（Theorem 2.4）此前在本图没有独立陈述卡。**
      它是本推导的核心步骤、也是 LZ 自评唯一非平凡的一步（p.335 逐字 'The only mathematically
      non-trivial result is the vanishing theorem (2.4).'），原先只以 source 的形式出现在这里。
-     现已单建 **worldsheet.superstring-relative-cohomology-vanishing**（推导
-     --via-lian-zuckerman-1989），本推导已加 depends_on 该卡（非 inferred）。
+     现已单建 **worldsheet.superstring-relative-cohomology-vanishing-v2**（推导
+     --via-lian-zuckerman-1989；2026-09-11 由 v1 换代到 v2，v1 的 (H4) 把相对次数误称鬼数），
+     本推导已加 depends_on 该卡（非 inferred）。
      ⚠ **剩余部分**：--via-figueroa-ofarrill-kimura-1989 尚未改指它，FOK 侧的消灭定理
      （(3.19) NS、(4.17) R，Henneaux 表示）也还没有对应的推导卡；两篇的**独立性**因此仍只落在
      notes 里，没落在图的结构上。已列入报告交 lead。"

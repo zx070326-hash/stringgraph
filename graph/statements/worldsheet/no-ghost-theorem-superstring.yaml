@@ -131,5 +131,21 @@ notes: |
     - 真正把结论抬到 rigorous 的是本轮取得全文的两篇数学论文
       **lian-zuckerman-1989**（CMP 125, 301）与 **figueroa-ofarrill-kimura-1989**（CMP 124, 105），
       两篇互不引用、独立完成（LZ p.335 Note added in proof）。
+
+  ★★【断言 (4) 的唯一 rigorous 候选来源（2026-09-11 新建，**本卡的边不改**，lead 指示留 reviewer）】
+  本卡断言 (4)（"无鬼定理在 exp(πiF) 的每个本征子空间上分别成立"）在原书里的全部论证仍是
+  §10.5 末那一句 'The proof is a direct imitation of the bosonic argument of chapter 4.'。
+  数学文献一侧的对应物现已建卡：**worldsheet.superstring-gso-covariant-equivalent**
+  （= Lian–Zuckerman 1989 **Proposition 4.3**，rigorous）——在相对 BRST 复形上造
+  P̄_± = ½(1 ± (−1)^{U+κ}Ḡ_κ)，证 H*_rel ≅ H*(P̄_+C_rel) ⊕ H*(P̄_−C_rel) 是**正交**分解、
+  等距由 [ω] ↦ [P̄_+ω] + [P̄_−ω] 显式给出，且 dim H^n(P̄_+C_rel) 只在 n = 0 非零。
+  ⚠⚠ **为什么本轮不给本卡加边**：两侧的 Z₂ 算子**不是同一个对象**——本卡 (4) 用世界面费米数
+  exp(πiF)（不含鬼场），LZ 的 (−1)^{U+κ}Ḡ_κ **含鬼场贡献**（p.329 Remark 列出两个 bc、
+  两个 βγ 对合因子）。LZ 全文不写 exp(πiF)，Polchinski 不写 Ḡ_κ，**字典本图未核实**。
+  ⇒ 这是"断言 (4) 有一条更强的文献对应物，但两者的同一性未核"这个局面的如实记账；
+  要接线必须先核字典（新卡的 gaps 第六条与"不断言 (g)"已列明）。
+  ⚠ 另记：LZ Prop 4.3 的动词是 **achieved**（p.330，引号只包 "covariant" 一个词），
+  且 GSO 截断的原始提案 LZ 明确归 **gliozzi-scherk-olive-1977**（"old covariant" 形式）
+  ⇒ **不得**把新卡读成"LZ 证明了 GSO 投影"。
 author: curator
 created: "2026-09-11"
