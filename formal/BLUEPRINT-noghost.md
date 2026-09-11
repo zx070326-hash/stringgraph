@@ -2460,3 +2460,78 @@ h_{p,q}(26) = [25 − (3p + 2q)²] / 24           （p,q ≥ 1）
 
 ⇒ **§B″.11 第 1 条的断点被本节确证并锐化**：它不是"计数上碰巧多出五边形数"，
 而是 `c = 26`、`h = 1−s` 处 Kac 行列式零点的算术。绕开它等于绕开 BGG/Feigin–Fuks。
+
+### B‴.8 裁决
+
+> ⭐ **三角性路线不关闭一般 `N`，而且它被一条更便宜的路线严格支配。** 三条理由，按重要性排序：
+>
+> 1. **它能达到的上限恰是 `dim Z_N ≥ p_{D−1}(N−1)`**（§B‴.3），而这正是 `D ≠ 26` 时的真实维数
+>    （`N = 2` 核对：`D − 1` ✓）。`D = 26` 的全部内容在 `𝒟₂` 族，而 `𝒟₂` 的领头指标
+>    **被 `L_{−1}` 族整族占满**（§B‴.3 的表），任何 `(β,ω)`-相容序都看不见它。
+> 2. **同一个界有 3 倍便宜的证法**（§B‴.9 的 PR6′）：`L_{−1}` 在每个 level 片上单射，
+>    这由 `K` 代数三行推出（下面 `towerLop_neg_one_injective`），**不需要** `σ`-Gram、
+>    不需要"带指定领头项的种子"、不需要光锥单项式线性无关。
+> 3. **它并不绕开线性无关**（任务书希望的收益）。"每个 `b`-free 指标配一个种子"这条前提 (C)
+>    等价于 `conjFree ⊓ spurious = ⊥`（§B‴.3），即 §B″.4.1 的 (F-4)，
+>    只能由 PR5a 的 PBW 基给出。**三角性需要 PR5a，而 PR5a 一旦有了，三角性就多余了。**
+>
+> 收益不是零：`σ`-反对角 Gram（§B‴.2）是一条独立有用的新引理
+> （它把"读系数"换成"配对"），但它的消费者不是 (B-26)。
+
+### B‴.9 引理清单（Lean 伪代码，草案，未编译）
+
+命名空间 `StringFormal.NoGhost`。分三块：**PR6′（推荐做）**、PR6（三角性，不推荐）、(B-26) 剩余。
+
+#### PR6′ `NoGhost/TypeOneFamily.lean`（`D`-无关下界，≈ 500 行，**推荐**）
+
+```lean
+/-- `L_{−1}` 在每个 level 片上单射。证明只用 `K_0 = 1` 与 `⁅L_{−1}, K_1⁆ = −K_0`：
+置 `x_k := K_1^k x`，归纳得 `L_{−1} x_k = −k • x_{k−1}`；`x_{M+1} = 0`（level 掉到负）
+逆推给 `x_M = ⋯ = x_0 = 0`。需 `CharZero`。**仓库里 `kOp_zero_eq_id` 与
+`lie_towerLop_kOp` 都已有** [Lean, Longitudinal.lean]。 -/
+theorem towerLop_neg_one_injective [CharZero K] (hη) (hbb) (hba) {j : ℤ} {M : ℕ}
+    {x : TowerFock D K} (hx : x ∈ towerBigrade D K j M) :
+    towerLop η a b (-1) x = 0 → x = 0
+
+/-- 种子空间（**不含 `L_0` 条件**，故对任意 rung/level 有定义）。 -/
+noncomputable def towerSeed (η a b) (j : ℤ) (M : ℕ) : Submodule K (TowerFock D K) :=
+  towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M
+
+/-- (F-1)+(F-2) 的**下界半边**（§B″.7 已指出只需这一半）：`dim Q_M ≥ p_{D−1}(M)`。
+`Q = S^⊥ ∩ 片` 的秩–零化度 + `finrank_span_le_card`，**不需要非退化、不需要基**。 -/
+theorem le_finrank_towerSeed (hD) (F) (j : ℤ) (M : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = M ∧ conjDeg hD c = 0}
+      ≤ Module.finrank K ↥(towerSeed η a b j M)
+
+/-- 主结论：`D`-无关的零态下界。`L_{−1}(Q_{N−1}) ≤ Z_N` 是既有的
+`towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade` [Lean]。 -/
+theorem le_finrank_towerNull_inf_towerBigrade (hD) (F) (haa : dotVec η a a = 2) (N : ℕ) :
+    Fintype.card {c : Osc D →₀ ℕ // Fock.level D c = N - 1 ∧ conjDeg hD c = 0}
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b 1 ⊓ towerBigrade D K (-(N : ℤ)) N)
+```
+
+**前置**（§B″.11 第 2 条已估）：把 PR4 的 `conjFreeSlice` / 消元 / `Q = S^⊥` 从反对角推广到
+**任意 rung `j`、任意 level `M`**。好消息：最贵的领头项引理
+`lcMonomial_conj_add_Lop_mem_lcLow` **已经带 `j` 参数** [Lean]，真正要改的只有
+`towerBigrade_le_conjFreeSlice_sup_towerSpurious` 与 `finrank_conjFreeSlice_le`（≈ 150 行）。
+
+#### PR6 `NoGhost/LightConeGram.lean`（`σ`-反对角 Gram，≈ 400 行，**独立价值**）
+
+```lean
+/-- 行对合：交换 `lightIdx` 与 `conjIdx` 两行。 -/
+def oscSwapLC (hD : 2 ≤ D) : (Osc D →₀ ℕ) ≃ (Osc D →₀ ℕ)
+theorem level_oscSwapLC (hD) (d) : Fock.level D (oscSwapLC hD d) = Fock.level D d
+theorem conjDeg_oscSwapLC (hD) (d) : conjDeg hD (oscSwapLC hD d) = lightDeg hD d
+
+/-- ⭐ **光锥单项式的 Gram 是反对角的**：`⟨m d, m e⟩ ≠ 0` 仅当 `e = σ d`。
+Wick：`b·b = 0` 禁止 `b`–`b` 配对，`b·b̃ = −1` 强制 `b` 与 `b̃` 配对，横向按 `δ_ij`。
+`HeisenbergGram.gram_of_heisenberg_family` **不能直接用**（它要求中心项 `m δ_ij`，
+即正交归一），要么推广成"带号置换 Gram"的族，要么直接归纳。 -/
+theorem Fock.pairing_lcMonomial (hD) (F) (hη) (d e : Osc D →₀ ℕ) :
+    Fock.pairing η (lcMonomial F d) (lcMonomial F e)
+      = if e = oscSwapLC hD d then lcNorm η d else 0
+theorem Fock.lcNorm_ne_zero [CharZero K] (hD) (F) (d) : lcNorm η d ≠ 0
+```
+
+**用途**：把"读 `m(d)` 的系数"换成"与 `m(σ d) ∈ conjFreeSlice` 配对"，于是任何
+"领头项"论证都不再需要光锥单项式线性无关（§B′.9 第 2 条）。**但它不能独力产出 `𝒟₂` 族**。
