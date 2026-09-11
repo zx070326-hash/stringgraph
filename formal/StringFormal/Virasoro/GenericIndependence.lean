@@ -365,6 +365,70 @@ theorem IsContravariant.five_le_finrank_levelSpan_four (hB : IsContravariant K c
 
 end FinrankField
 
+/-! ### The unitary region at level 2 -/
+
+section Positivity
+
+variable {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] {c h : K}
+
+omit [LinearOrder K] [IsStrictOrderedRing K] in
+/-- Completing the square: `16 · (16h² + 2h(c-5) + c) = (16h + c - 5)² + (c-1)(25-c)`.  The
+discriminant of the level-2 Kac quadratic in `h` is `4(c-1)(c-25)`, so the quadratic has no real
+root exactly for `1 < c < 25`. -/
+lemma kac_level_two_square (c h : K) :
+    16 * (16 * h ^ 2 + 2 * h * (c - 5) + c)
+      = (16 * h + c - 5) ^ 2 + (c - 1) * (25 - c) := by ring
+
+/-- **The level-2 Kac determinant is strictly positive for `h > 0`, `c > 1`.**  Necessary (not
+sufficient) for unitarity of `V(c,h)` in the standard region `c > 1`, `h > 0`.
+
+Two regimes, and note that there is *no* upper restriction on `c`: for `c ≥ 5` positivity is
+term-by-term, while for `1 < c < 5` it comes from the completed square, `(c-1)(25-c) > 0`.  For
+`c > 25` the Kac quadratic does have two real roots `h₁₂, h₂₁`, but their sum `(5-c)/8` is
+negative and their product `c/16` positive, so both are negative and irrelevant to `h > 0`. -/
+lemma kac_level_two_pos (hh : 0 < h) (hc : 1 < c) :
+    0 < 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) := by
+  rcases le_or_gt 5 c with hc5 | hc5
+  · have : 0 < 16 * h ^ 2 + 2 * h * (c - 5) + c := by nlinarith
+    positivity
+  · have : 0 < 16 * h ^ 2 + 2 * h * (c - 5) + c := by
+      nlinarith [sq_nonneg (16 * h + c - 5), kac_level_two_square c h]
+    positivity
+
+omit [LinearOrder K] [IsStrictOrderedRing K] in
+/-- At `c = 1` the level-2 Kac determinant degenerates to `2h(4h-1)²`: the two Kac weights
+`h₁₂, h₂₁` collide at `h = 1/4`, so the determinant vanishes there and is otherwise `> 0` for
+`h > 0`.  This is the `c = 1`, `h = 1/4` null vector `(L₋₁² - 2L₋₂)|c,h⟩`. -/
+lemma kac_level_two_at_c_one (h : K) :
+    2 * h * (16 * h ^ 2 + 2 * h * ((1 : K) - 5) + 1) = 2 * h * (4 * h - 1) ^ 2 := by ring
+
+/-- **The level-2 Kac determinant is nonnegative on the whole closed region `h > 0`, `c ≥ 1`**,
+and it vanishes there only at `c = 1, h = 1/4` (see `kac_level_two_at_c_one`). -/
+lemma kac_level_two_nonneg (hh : 0 < h) (hc : 1 ≤ c) :
+    0 ≤ 2 * h * (16 * h ^ 2 + 2 * h * (c - 5) + c) := by
+  rcases eq_or_lt_of_le hc with rfl | hc1
+  · rw [kac_level_two_at_c_one]
+    positivity
+  · exact (kac_level_two_pos hh hc1).le
+
+variable {B : VermaModule K c h →ₗ[K] VermaModule K c h →ₗ[K] K}
+
+/-- **Generic PBW at level 2 on the unitary region.**  For `h > 0` and `c > 1` the two level-2
+descendants are linearly independent and `dim V₂ = 2 = p(2)`: the hypothesis of
+`IsContravariant.linearIndependent_descFamily2` is automatic there. -/
+theorem IsContravariant.linearIndependent_descFamily2_of_pos (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1) (hh : 0 < h) (hc : 1 < c) :
+    LinearIndependent K (descFamily2 K c h) :=
+  hB.linearIndependent_descFamily2 hB1 (kac_level_two_pos hh hc).ne'
+
+/-- `dim V₂ = 2 = p(2)` for `h > 0`, `c > 1`. -/
+theorem IsContravariant.finrank_levelSpan_two_of_pos (hB : IsContravariant K c h B)
+    (hB1 : B (hwv K c h) (hwv K c h) = 1) (hh : 0 < h) (hc : 1 < c) :
+    Module.finrank K (levelSpan K c h 2) = 2 :=
+  hB.finrank_levelSpan_two hB1 (kac_level_two_pos hh hc).ne'
+
+end Positivity
+
 end Virasoro
 
 end StringFormal
