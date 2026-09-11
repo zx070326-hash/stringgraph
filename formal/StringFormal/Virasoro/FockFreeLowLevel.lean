@@ -51,6 +51,19 @@ Not a new Gram computation.  The whole point is to *reuse* the Verma-side Kac de
    determinant of the standard descendants *is* the Kac determinant at `(D, ½α₀²)`, and
    `linearIndependent_of_gram_det_ne_zero` finishes.
 
+## Two by-products
+
+* **Non-vacuity of the Verma module.**  `Fock.hwv_ne_zero_of_two_le`: `V(c,h) ≠ 0` for every
+  natural number `c ≥ 2` and **every** `h`, witnessed by the Lorentzian Fock space at the
+  momentum with `α'k² = h`.  `Verma.lean` flags that without PBW everything there could be
+  vacuously true; this removes the caveat on that family of weights (`c` is still restricted
+  to the image of `ℕ → R`).  Indefiniteness of `η` is what makes all `h` reachable.
+* **The criterion is vacuous exactly on the low mass shells.**  At `D = c = 26` with intercept
+  `a₀ = 1`, a level-`N` physical state has `h = 1 - N`, and `Fock.kacDet{1,2,3,4}_massShell_26`
+  give `det₁ = det₂ = 0` but `det₃ = 2304`, `det₄ = 2649563136`.  So the criterion proves
+  nothing at `N = 1, 2` — precisely the levels carrying the bosonic string's null states — and
+  is decisive at `N = 3, 4` (`Fock.linearIndependent_fockDesc{3,4}_massShell_26`).
+
 ## Mathematical gaps (for the dependency graph)
 
 1. **Low levels only.**  `N ≤ 4`, because the Verma-side Kac determinant is only formalised for

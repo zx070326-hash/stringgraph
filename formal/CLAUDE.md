@@ -197,6 +197,16 @@ StringFormal/
                             标架层：frameMonomial（ι = Fin (D−2)，用 LightCone 的 TransverseFrame）、
                             **ddfSpan_eq_span_range_frameMonomial**（列表生成集 = 占据数生成集）与
                             **ddf_span_pos**（全序域上 ddfSpan 里非零向量模长 > 0 —— 蓝图 §C.5 的正定性输入）
+  Virasoro/FockFreeLowLevel.lean  **Fock 模在 `Vir⁻` 下于层 `N ≤ 4` 自由**（固定动量）。`FockVir` 把
+                            Sugawara `virRep` 做成 `LieRingModule/LieModule` 实例（类型同义词必需：
+                            作用依赖 `η,a`）；真空是权 `(D, α'k²)` 的最高权向量，Verma 万有性质给
+                            `vermaToFock`，拉回 `pairing` 得 Verma 上的归一化逆变型，故 Fock Gram 行列式
+                            = `(D, α'k²)` 处 Kac 行列式（`gram_det_fockDesc{1,2,3,4}`）⇒
+                            `linearIndependent_fockDesc{1,2,3,4}`。副产品：**`hwv_ne_zero_of_two_le`**
+                            （`V(c,h) ≠ 0` 对任意自然数 `c ≥ 2` 与任意 `h`，洛伦兹见证）与
+                            **`kacDet{1,2,3,4}_massShell_26`**（`D=26, a₀=1` 下 `h = 1-N`：
+                            `N=1,2` 行列式为零——判据在零模态所在层空转；`N=3,4` 为 `2304` / `2649563136`）。
+                            一般 `N` 仍需 Kac 行列式（见蓝图 §B.2），对无鬼瓶颈无影响
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

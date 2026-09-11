@@ -591,6 +591,24 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     （即一般奇异向量 `(L₋₂ − 3/(2(2h+1)) L₋₁²)|c,h⟩` 在 `h = 1/4` 的系数恰为 1）。
     **由此也说明 Gram 判据不可逆**：`det = 0` **不**蕴含向量线性相关（按 PBW 它们对所有 `(c,h)`
     都独立），只说明形式在其张成上退化。
+    **Fock 实例（2026-09-11）**：`StringFormal/Virasoro/FockFreeLowLevel.lean` 把上面的 generic
+    `N ≤ 4` 搬到 **Fock 空间**上。路线不是重算 Gram：`FockVir` 把 Sugawara 表示 `Fock.virRep`
+    做成真正的 `LieRingModule/LieModule` 实例（类型同义词不可避：作用依赖 `η, a`，它们在
+    `Fock D R` 的类型里不可见），真空 `1` 是权 `(c,h) = (D, α'k²)` 的最高权向量，于是
+    Verma 的万有性质给出等变 `vermaToFock`；把 `Fock.pairing` 沿它拉回就得到 Verma 上的
+    **归一化逆变型**，Gram 矩阵逐字搬运，故 Fock 侧 Gram 行列式就是 `(D, α'k²)` 处的 Kac 行列式
+    （`gram_det_fockDesc{1,2,3,4}`），不为零时 `L_{-λ}|k⟩` 在 Fock 里线性无关
+    （`linearIndependent_fockDesc{1,2,3,4}`）。**两个副产品**：
+    （i）`hwv_ne_zero_of_two_le`：`V(c,h) ≠ 0` 对**任意自然数 `c ≥ 2` 与任意 `h`** 成立
+    （洛伦兹 `η = diag(-1,1,…)` 与 `a = (h-½, h+½, 0,…)` 为见证；`η` 的不定性是关键，
+    正定 `η` 只能取到 `½∑aμ²` 形的 `h`）。这取消了 `Verma.lean` / `VermaPBW.lean`
+    “可能空洞真”的保留（仅限这类 `(c,h)`，`c` 仍限于 `ℕ → R` 的像）。
+    （ii）**判据在低层质壳上恰好空转**：`D = c = 26`、截距 `a₀ = 1` 时层-`N` 物理态有
+    `h = 1 - N`，而 `kacDet{1,2,3,4}_massShell_26` 给出 `det₁ = det₂ = 0`、`det₃ = 2304`、
+    `det₄ = 2649563136`。即这条判据在 `N = 1, 2`（正是玻色弦零模态所在的两层）**什么也证不出**，
+    在 `N = 3, 4` 才决定（`linearIndependent_fockDesc{3,4}_massShell_26`）。
+    对 `no-ghost-theorem-v4` 瓶颈**没有影响**：一般 `N` 仍缺。
+
     **仍未做**：真正的 (b)。generic 版**不是** PBW：它假设存在归一化逆变型（等价于 `hwv ≠ 0`，
     见 `exists_isContravariant_iff_hwv_ne_zero`），而这正是 (b) 的推论；且在 Kac 零点处失效
     （那里向量可能仍独立，只是形式退化）。所以这是 `dim V_N = p(N)` 的**条件**、**一般点**版本。
