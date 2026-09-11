@@ -3,8 +3,23 @@ target: worldsheet.critical-dimension-superstring
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: worldsheet.critical-dimension-superstring-brst
-    note: 供给 (I)（Q_B² = 0 ⟺ c^m = c̃^m = 15，以及可换成任意正范数 SCFT 的推广）。
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
+    note: |
+      供给 (I) 的 **⟸ 半**（c^m = c̃^m = 15 ⟹ Q_B² = 0），以及「可把若干平坦 X^μψ^μ SCFT
+      换成任何满足该中心荷条件的正范数 SCFT」与「超流须与 ψ^μ、β、γ 同周期」两条。
+      这一半是 Polchinski Vol.2 §10.5 (10.5.23) 下方那段的原话方向（'verify nilpotence …
+      **whenever** the total central charge vanishes'），状态 physical-argument。
+  - id: worldsheet.critical-dimension-superstring-brst-v2
+    note: |
+      供给 (I) 的 **⟹ 半**（Q_B² = 0 ⟹ c^m = c̃^m = 15），即「BRST 幂零**定出**临界中心荷」。
+      本卡 (I) 写的是 **⟺**，故两半都要挂。
+      ⚠ **这条边压低本推导的有效状态**：该卡在 Polchinski Vol.2 里**没有**来源（本卷只有 ⟸），
+      现有支撑是 ito-morozumi-nojiri-uehara-1986 (3.8)–(3.10) 的**平坦情形**显式系数
+      加一步向「任意正范数 SCFT」的外推，其推导 status = conjecture。
+      ⇒ 本推导（自身 physical-argument）的有效状态被拉到 conjecture。**这是实话**：
+      目标卡片 (I) 的 ⟺ 中那一半在本图现有来源下确实只到猜想级。
+      （2026-09-11 curator 依 lead 指示改指：原边指 worldsheet.critical-dimension-superstring-brst，
+      该卡已被 ch10-residuals 分支拆成上述两张单向卡并标 superseded_by。）
   - id: worldsheet.critical-dimension-superstring-anomaly
     note: |
       供给 (II)（c^tot = 0 ⟺ c^m = 15）。⚠ 该卡自身把这条前提记为**被假定**的一致性条件，
@@ -57,7 +72,9 @@ sources:
 summary: |
   本推导把 worldsheet.critical-dimension-superstring 的合取拆成它的各个合取项，
   逐条指到已有节点：
-    (I)   worldsheet.critical-dimension-superstring-brst      Q_B² = 0 ⟺ c^m = 15（不给 D，不给截距）
+    (I)   worldsheet.superstring-brst-nilpotent-at-c15       c^m = 15 ⟹ Q_B² = 0（⟸ 半；本卷原话方向）
+          worldsheet.critical-dimension-superstring-brst-v2  Q_B² = 0 ⟹ c^m = 15（⟹ 半；本卷无来源，conjecture）
+                                                            两半合起来才是目标卡片 (I) 的 ⟺（不给 D，不给截距）
     (II)  worldsheet.critical-dimension-superstring-anomaly   c^m + c^g = 0 ⟺ c^m = 15（前提被假定）
     (III) worldsheet.modular-invariance-requires-eight-transverse-fermions
                                                              横向费米子数 ≡ 0 mod 8（必要条件，非路线）
@@ -81,6 +98,7 @@ summary: |
   ——后者在超弦一侧存在但只是一句「direct imitation」，见 worldsheet.no-ghost-theorem-superstring，
   本卡**不**把它列为定出 D 的路线，因为原书没有用它定 D）。
 gaps:
+  - "**(I) 的 ⟺ 只有一半有本卷来源**：⟸（c^m = 15 ⟹ Q_B² = 0）是 Vol.2 §10.5 (10.5.23) 下方那段的原话方向；⟹（Q_B² = 0 ⟹ c^m = 15）**本卷没有**，只有 IMNU 1986 (3.8)–(3.10) 的平坦情形显式系数（用 D 而非 c^m）加一步向任意正范数 SCFT 的外推，以及 Lian–Zuckerman 1989 Prop. 1.7(ii) 那条自己不证的 iff。本推导因此挂了两张单向卡，并被 ⟹ 那张（status = conjecture）拉到 conjecture。⚠ 目标卡片 (I) 的文本仍写 ⟺ 并在括号里指向已 superseded 的 worldsheet.critical-dimension-superstring-brst；按 graph/CLAUDE.md 的裁决，statement 正文里的 id 指针不就地改，留待该卡下次实质换代时同步。"
   - "**目标卡片中关于「路线之间关系」的断言没有文献来源**：「(II) 的前提在本卷不被论证」「(I)(II) 共享两个输入」「本卷没有光锥路线」「本卷没有 Q_B² 的显式公式」等，都是对本图现有节点与本卷内容的比较与分类，不是来源中的陈述。它们随图与抽取的演化而可能失效。这是本推导标 physical-argument 的主要理由之一。"
   - "**(I) 的论证被两次推给习题且无式号**：Vol.2 §10.5 只有一段正文（(10.5.23) 下方），论证指向 Vol.1 exercise 4.3 与 Vol.2 exercise 10.13(b)。与玻色弦一侧的 Vol.1 (4.3.10)（式号与内容均已核实、有显式 Q_B² 公式）相比，这是本图中定位明显更弱的一处。"
   - "**(II) 的前提「总中心荷必须为零」在本卷完全没有论证**：Vol.2 §10.5 开头明说不走超-diff × 超-Weyl 规范固定那条路。故本卷对 D = 10 实质上只有一条论证（(I)）加一条重述（(II)）。"
