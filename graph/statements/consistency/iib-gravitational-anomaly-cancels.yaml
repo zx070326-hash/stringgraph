@@ -1,0 +1,107 @@
+id: consistency.iib-gravitational-anomaly-cancels
+kind: proposition
+title: 十维纯引力反常十二形式恒为零的充要条件 n_{3/2} = 2n_A、n_{1/2} = −2n_A；IIB 的净含量 (2, −2, 1) 是 n_A = 1 的实例（Polchinski (12.2.14)）
+statement: |
+  **记号与前提（这一段是陈述的一部分，不是注释）。**
+  把 tr R₂²、tr R₂⁴、tr R₂⁶ 当作**三个互相独立的标量**，取值在一个特征零的域中；
+  楔号省略（conv.gauge-trace-normalization，tr 是切空间 10 × 10 矩阵的迹）。
+  按 Polchinski §12.2 逐字转录三个纯引力十二形式：
+
+      Î₈(R₂)  = tr R₂⁶/725760 + tr R₂⁴ tr R₂²/552960 + (tr R₂²)³/1327104
+                                                （(12.2.11) 取 n = 1、三个规范迹为零）
+      Î₅₆(R₂) = −495 tr R₂⁶/725760 + 225 tr R₂⁴ tr R₂²/552960 − 63 (tr R₂²)³/1327104   (12.2.12)
+      Î_SD(R₂) = 992 tr R₂⁶/725760 − 448 tr R₂⁴ tr R₂²/552960 + 128 (tr R₂²)³/1327104   (12.2.13)
+
+  设整数 (n_{3/2}, n_{1/2}, n_A) 为 **56**（引力微子）、**8**（Majorana–Weyl 费米子）、
+  `[5]₊`（自对偶五形式场强）的**净**个数（每种都已减去其宇称共轭伙伴的个数：宇称交换每对中的
+  两个场，二者对反常的贡献相反），并令
+
+      Î(n_{3/2}, n_{1/2}, n_A) := n_{1/2} Î₈ + n_{3/2} Î₅₆ + n_A Î_SD 。
+
+  **命题。** Î **作为三个独立标量的多项式恒为零**，当且仅当
+
+      n_{3/2} = 2 n_A   且   n_{1/2} = −2 n_A 。
+
+  等价地（把三个单项 tr R₂⁶、tr R₂⁴ tr R₂²、(tr R₂²)³ 的系数分别置零）：
+
+      −495 n_{3/2} + n_{1/2} + 992 n_A = 0
+       225 n_{3/2} + n_{1/2} − 448 n_A = 0
+      − 63 n_{3/2} + n_{1/2} + 128 n_A = 0 。
+
+  **特别地**，Polchinski 所述 IIB 超引力的手征含量「two **8′**s, two **56**s, and one `[5]₊`」
+  即 (n_{3/2}, n_{1/2}, n_A) = (2, −2, 1)（8′ 是 8 的宇称共轭，故净计 −2），
+  是 n_A = 1 的实例，于是 Î = 0——这就是 (12.2.14) 的
+  `Î_IIB(R₂) = −2Î₈(R₂) + 2Î₅₆(R₂) + Î_SD(R₂) = 0`。
+
+  **中性场那一步的读法（本卡采用的转录约定）**：上面 Î₈ 取 n = 1，依据是 (12.2.11) 上方
+  「n = Tr(1) 是表示维数」而中性场处在平凡表示。**Polchinski 没有写出这一步**
+  （见 sources 的 note 与推导的 gaps）。
+
+  **本卡不断言**：
+  (a) 这三个多项式**是**相应手征场的引力反常——那是 Alvarez-Gaumé–Witten 的指标定理计算，
+      本书明说只引用不重做；
+  (b) IIB 超引力的手征谱确实是 two **8′**s、two **56**s、one `[5]₊`——那是 §12.1 的超引力内容，
+      本图未建卡；
+  (c) 「十维反常 ↔ 形式十二形式」这条升维字典（consistency.anomaly-descent-to-twelve-form）；
+  (d) IIB 超引力或 IIB 弦论作为量子理论一致；
+  (e) 自对偶五形式的量子化处理（Polchinski 明记这是未解决的，见 notes）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.iib_gravitational_anomaly_free_iff
+  lean_file: StringFormal/Math/AnomalyPolynomial.lean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.2, p. 98：(12.2.11)(12.2.12)(12.2.13) 与 (12.2.14)；(12.2.14) 上方逐字「In type IIB supergravity there are two **8′**s, two **56**s, and one `[5]₊`, giving the total anomaly polynomial … There are no gauge fields so only the three purely gravitational terms enter, and the coefficients of these conspire to produce zero total anomaly.」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E10）。
+      ★ **原书只断言 "conspire to produce zero"，不展示算术**，也**不给充要条件**——
+      「⟺ n_{3/2} = 2n_A ∧ n_{1/2} = −2n_A」这一半是本图补出并机检的。
+      ⚠ **n = Tr(1) = 1（中性场处在平凡表示）这一步原书没有明写**，抽取记录 E10 已标注
+      「转卡须标 inferred」。本卡把这个读法写进 statement，缺口记在推导的 gaps。
+  - ref: bilal-2008
+    loc: "§12, (12.4)(12.5) 一带的三条整数条件（如 −495 n_{3/2} + n_{1/2} + 992 n_A = 0），与本卡同型同归一化"
+    note: |
+      对照来源。**本项目对 bilal-2008 §12.4 已有 L1 逐页核实记录**（见
+      consistency.h-field-strength-definition 的 sources），但**本条引用的 (12.4)(12.5)
+      具体式号未逐页复核**，只在 formal/TODO.md 的 A8 条目里被 formalizer 记为「同型」。
+      ⚠ 因此本条按 L2 处理：它只用来说明归一化与 Polchinski 一致，**不承载本卡的任何断言**。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/AnomalyPolynomial.lean :: StringFormal.Math.{IhatIIB, iib_gravitational_anomaly_cancels, iib_gravitational_anomaly_solutions, iib_anomaly_polynomial_vanishes_iff, iib_gravitational_anomaly_free_iff}"
+    note: |
+      本仓库。`IhatIIB n32 n12 nA trR2 trR4 trR6 = n12 * Ihat8 1 … 0 0 0 + n32 * Ihat56 … + nA * IhatSD …`
+      逐字对应本卡的 Î；`iib_gravitational_anomaly_free_iff` 是本卡的充要条件命题
+      （`formal.lean_decl` 取这条），`iib_gravitational_anomaly_cancels` 是 (2, −2, 1) 的实例。
+tags: [anomaly, gravitational-anomaly, twelve-form, d10, type-iib, polchinski, lean-island-2, formalized]
+notes: |
+  【★ 「miraculous」的记账修正：三式秩 2 而非 3】Polchinski 在 p. 98 逐字自评
+  「From the point of view of the low energy theory, this is somewhat **miraculous**. In fact, it seems
+  **accidental** that there are any consistent chiral theories at all. There are three anomaly terms that
+  must vanish and three free parameters … Barring a numerical coincidence the only solution would be that
+  all these differences vanish, a nonchiral theory.」（抽取记录 E11）。
+  但本卡的充要条件表明：**三条线性条件的秩是 2，不是 3**——解空间是一维的
+  {(2c, −2c, c) : c ∈ ℤ}，任取两条条件已经蕴含第三条。
+  ⇒ 「三个条件、三个参数 ⇒ 除非巧合否则只能全零」这个记账**对巧合略微高估**：
+  两个条件约束三个参数，一维解空间是**应该**出现的，不是奇迹。
+  ⇒ 真正非平凡的、也确实值得叫"巧合"的，是**这条解射线恰好穿过 IIB 超引力实现的小整数点
+  (2, −2, 1)**（而且解集是不含整除障碍的整格：(2,−2,1) 的每个整数倍都是解，别的都不是）。
+  ⚠ 「秩 2」与「任取两条蕴含第三条」这两句话本身**不是**单独的 Lean 定理，
+  它们是 `iib_gravitational_anomaly_solutions` 的解集形状的直接读出；记在推导的 gaps。
+  这条修正也写在 AnomalyPolynomial.lean 的 `iib_gravitational_anomaly_solutions` docstring 里。
+
+  【与 consistency.d10-n1-anomaly-polynomial-factorized-form 的分工】那张卡是 N = 1 一路
+  （56 + 中性 8′ + 伴随 gaugino，含规范迹）的**两种写法相同**；本卡是 IIB 一路
+  （无规范场，含自对偶张量）的**为零的充要条件**。两者共用 (12.2.11)(12.2.12) 的转录与
+  同一个 Lean 文件，但命题不同。
+
+  【(e) 那条排除的来历】Polchinski 在别处（抽取记录 E30）记 IIB 自对偶 5-形的量子化未解决；
+  本卡的 Î_SD 只是把 (12.2.13) 当作给定多项式，不碰这个问题。
+
+  【建议的后续卡（本轮未建）】一张真正物理的
+  `consistency.iib-supergravity-is-anomaly-free`（status: physical-argument），
+  depends_on 本卡 + IIB 手征谱卡 + AGW 系数卡 + 升维字典卡。本卡刻意不承担那些。
+
+  【查重】`uv run stringgraph search IIB / gravitational` 命中的都是 holography 区与
+  consistency.gravitational-anomaly-polynomial-d10（GS (20)，N = 1 一路），无同内容者。
+author: curator
+created: "2026-09-11"

@@ -1,0 +1,89 @@
+id: consistency.anomaly-twelve-form-d10-v2
+kind: definition
+status: physical-argument
+title: GS 1984 记号下的十维反常十二形式：Ω_{4n} := Tr F^{2n}（纯记号卡，不含任何反常论断）
+statement: |
+  **场论设定（本卡把它当作给定，不断言超引力谱确实如此）**：十维 N = 1 超引力与超 Yang–Mills 的
+  耦合理论。手征费米子含量为超引力部分的一个左手 spin-3/2 引力微子与一个右手 spin-1/2 场，
+  加上物质部分的 n 个左手 spin-1/2 场（n = 规范群维数，因为无质量费米子在伴随表示）。
+
+  **记号（本卡的全部内容）**。在 conv.gauge-trace-normalization 下（Tr 是**伴随**表示的迹，
+  楔号省略），记
+
+      **Ω_{4n} := Tr F^{2n}**    (n = 1, 2, 3)                                       (GS (11))
+
+  即 Ω₄ = Tr F²、Ω₈ = Tr F⁴、Ω₁₂ = Tr F⁶（原文 (11) 印作小写 tr 的读图存疑见 notes 第 1 条）。
+  **「（纯规范的）反常十二形式」在本图中就指 Ω₁₂ 这一层**——它是形式上的十二维规范不变多项式，
+  与 D = 10 的六边形反常处在下降链的同一族。
+
+  从 Ω₁₂ 回到十维的**记号**约定（consistency.descent-forms-gs-notation）：
+
+      Ω₁₂  ⇝  ω⁰_{11}  ⇝  ω¹_{10}，  十维反常写成 ∫ ω¹_{10} 。
+
+  **本卡不断言**（每一条都另有节点或明记为缺口）：
+  (a) 「外线多于六条的反常由六边形图唯一决定，其形式可由 Wess–Zumino 相容条件定出」
+      —— consistency.higher-point-anomalies-fixed-by-hexagon；
+  (b) 「2n 维反常 ↔ 2n+2 维不变多项式」这条**升维字典**，以及由此把 ∫ω¹_{10} 认同为十维反常
+      —— consistency.anomaly-descent-to-twelve-form；
+  (c) 任何**数值总归一化**（GS 把常数 c 与各反常之间的相对归一化外包给 Alvarez-Gaumé–Witten）；
+  (d) 引力部分与混合部分的十二形式（分别见 consistency.gravitational-anomaly-polynomial-d10
+      与 consistency.anomaly-cancellation-so32-effective-theory 里引用的 (22)）；
+  (e) 后世的 X₈ / ∫B ∧ X₈ 打包写法——**那不是 GS 1984 的记号**
+      （见 consistency.gs-counterterms-1984 notes；X₈ 的一手教科书来源是 polchinski-1998-v2 (12.2.28b)）；
+  (f) 「Ω_{4n} 用基本迹的表达式」——那是纯代数命题
+      math.so-usp-adjoint-fundamental-trace-identities 与 math.e8-adjoint-trace-identities。
+uses:
+  - consistency.descent-forms-gs-notation
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 及其上一段（引导句逐字见 consistency.anomaly-descent-to-twelve-form 与 consistency.higher-point-anomalies-fixed-by-hexagon 的 sources；本卡只取 (11) 这一行与「the gauge-invariant twelve-form Ω₁₂」这一措辞）"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/green-schwarz-1984.md E6）。
+      本卡只承载**记号**：Ω_{4n} 的定义与「十二形式」指哪一层。
+      同一段里的两条论断（六边形唯一决定高点反常、反常 ↔ 十二形式的字典）**已移出本卡**。
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.28a,b) p. 101（Y₄ 与 X₈ 的显式定义）；(12.2.19a-c) p. 99（Tr_a 与 Tr_v 的关系）"
+    note: |
+      **L1**（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E12/E14）。
+      列在这里只为一件事：**Polchinski 的 Tr_a 与本卡的 Tr 是同一个量**（伴随迹），
+      且他同样省略楔号，故 conv.gauge-trace-normalization 可以跨两本文献使用。
+      ⚠ 他的整体归一化含 (12.2.10) 的 −i/(2π)⁵，GS 侧则把整体常数 c 外包给 AGW；
+      **两家的整体归一化本图未认同**（consistency.gravitational-anomaly-polynomial-d10 的
+      notes 记了一条已机检的桥：GS (20) = −1/96 × Polchinski (12.2.27) 的引力部分）。
+tags: [anomaly, twelve-form, d10, notation, supergravity, super-yang-mills, green-schwarz]
+notes: |
+  【0. ★ 本卡是 consistency.anomaly-twelve-form-d10 的换代（2026-09-11）】
+  旧卡是一张 `definition`，却在 statement 里内嵌了**两条命题**：
+  (i) 「外线多于六条的反常由六边形图唯一决定」；
+  (ii) 「按 Zumino–Wu–Zee 的分析，反常与一个形式上的十二维规范不变十二形式相联系」。
+  按「一个节点一个命题」，本轮拆成三张：
+  · **本卡（v2）** ← 旧卡的记号部分（Ω_{4n} := Tr F^{2n}、"十二形式"指 Ω₁₂、下降记号）；
+  · consistency.higher-point-anomalies-fixed-by-hexagon ← (i)；
+  · consistency.anomaly-descent-to-twelve-form ← (ii)（**升维字典，本图无已核实来源**）。
+  旧卡 `superseded_by` 指向本卡，statement 文本不动（CLAUDE.md 原则 1）。
+  ⇒ 拆分的**实际收益**：旧卡的 notes 第 5、6 条记了两条来源缺口（唯一性无支撑、升维字典无来源），
+  但它们只是散文；拆出独立节点后，这两条缺口成为图里**可被 `why` 追踪的瓶颈节点**。
+
+  【1. 原文 (11) 的 tr/Tr】GS 的 (11) 在影印件上印作小写 `Ω_{4n} = tr F^{2n}`，
+  但语义上必须是**伴随**迹（否则紧接的 (12a) 就是废话）。本图统一按语义写 **Tr**，
+  这一判读登记在 conv.gauge-trace-normalization 的 notes 第 1 条与抽取记录 §3.1。
+  转引本卡时不要把这当成原文字面。
+
+  【2. 为什么 status 仍是 physical-argument 而不是 rigorous】即使剥掉两条命题，本卡定义的
+  Ω₁₂ 仍是一个**形式上的**十二维对象（GS 逐字 "a formal expression in twelve dimensions"），
+  且它 `uses` 只定到恰当形式、且其数学来源只在局部成立的 descent 卡。
+  ⇒ 本卡自身也无法取 rigorous。若将来要一张真正 rigorous 的记号卡，应把 Ω_{4n} := Tr F^{2n}
+  单独立成不 `uses` descent 的纯记号卡；本轮不做（会再生出一层几乎空的节点）。
+
+  【3. 不叫 I₁₂】现代文献（bilal-2008、adams-dewolfe-taylor-2010、polchinski-1998-v2）
+  把这个对象写作 Î₁₂ 或 I₁₂ 并打包成 B ∧ X₈；
+  **GS 1984 既没有 I₁₂ 也没有 X₈ 这两个记号**，只有 Ω_{4n} 与三段分开的 S₁ + S₂ + S₃。
+  本卡的标题保留 GS 记号，是为了让「后世打包写法」与「原文写法」在图里可分辨。
+  与 Polchinski 侧 Î₁₂ 的桥见 consistency.d10-n1-anomaly-polynomial-factorized-form（formalized）。
+
+  【4. n 的角色】n 只通过规范群维数进入反常多项式，这一点在
+  consistency.gravitational-anomaly-polynomial-d10 里才真正用到（那里 n − 496 出现在系数里）。
+author: curator
+created: "2026-09-11"

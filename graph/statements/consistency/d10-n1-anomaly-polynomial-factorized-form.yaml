@@ -1,0 +1,107 @@
+id: consistency.d10-n1-anomaly-polynomial-factorized-form
+kind: proposition
+title: Polchinski (12.2.27)+(12.2.28a,b) 的因子化形与 (12.2.11)+(12.2.12) 的逐项展开形是同一多项式（= ADT 2010 (7)+(8)）
+statement: |
+  **记号与前提（这一段是陈述的一部分，不是注释）。**
+  把六个迹单项
+
+      tr R₂²,  tr R₂⁴,  tr R₂⁶,  Tr_a F₂²,  Tr_a F₂⁴,  Tr_a F₂⁶
+
+  当作**六个互相独立的标量**，把规范生成元总数 n 当作**第七个独立标量**，
+  取值在一个特征零的域中（系数全是有理数）。
+  ⚠ 这七个符号在真实的微分形式与具体李代数上**并不独立**；本命题不使用它们之间的任何关系，
+  这正是它能被当作纯代数恒等式的原因。楔号一律省略（conv.gauge-trace-normalization）。
+
+  按 Polchinski §12.2 逐字转录四个多项式：
+
+      Î₈(n; F₂,R₂) = − Tr_a F₂⁶/1440
+                     + Tr_a F₂⁴ tr R₂²/2304 − Tr_a F₂² tr R₂⁴/23040 − Tr_a F₂² (tr R₂²)²/18432
+                     + n tr R₂⁶/725760 + n tr R₂⁴ tr R₂²/552960 + n (tr R₂²)³/1327104   (12.2.11)
+
+      Î₅₆(R₂) = −495 tr R₂⁶/725760 + 225 tr R₂⁴ tr R₂²/552960 − 63 (tr R₂²)³/1327104     (12.2.12)
+
+      Y₄ = tr R₂² − (1/30) Tr_a F₂²                                                       (12.2.28a)
+
+      X₈ = tr R₂⁴ + (tr R₂²)²/4 − Tr_a F₂² tr R₂²/30 + Tr_a F₂⁴/3 − (Tr_a F₂²)²/900       (12.2.28b)
+
+  **命题。** 对七个符号的一切取值，
+
+      Î₅₆(R₂) − Î₈(1; R₂, 规范迹置零) + Î₈(n; F₂,R₂)
+        = (1/1440)[ − Tr_a F₂⁶ + (1/48) Tr_a F₂² Tr_a F₂⁴ − (Tr_a F₂²)³/14400 ]
+          + (n − 496)[ tr R₂⁶/725760 + tr R₂⁴ tr R₂²/552960 + (tr R₂²)³/1327104 ]
+          + Y₄ X₈/768 .                                                                   (12.2.27)
+
+  即：**(12.2.27)+(12.2.28a,b) 的因子化形，与 (12.2.11)+(12.2.12) 按 (12.2.27) 第一行
+  Î_I = Î₅₆ − Î₈ + Î₈ 组装出的逐项展开形，是同一个多项式。**
+
+  由于 Adams–DeWolfe–Taylor 2010 (7)(8) 与 (12.2.27)(12.2.28a,b) **逐项逐系数完全相同**
+  （差别只是记号 Tr_a → Tr、F₂,R₂ → F,R，以及把 Tr_a F₂² Tr_a F₂⁴ 写成 Tr F⁴ Tr F²），
+  同一条恒等式**同时**验证了 ADT (7)+(8) 对 (12.2.11)+(12.2.12) 的相容性。
+
+  **中性费米子那一项的读法（本卡采用的转录约定）**：(12.2.27) 第一行里的 Î₈(R₂) 指中性费米子
+  **8′**，本卡按「n = Tr(1) 是表示维数、中性场处在平凡表示 ⇒ n = 1」并令三个规范迹为零，
+  代入 (12.2.11)。**Polchinski 没有写出这一步**（见 sources 的 note 与推导的 gaps）；
+  它被他自己对 n 的定义所迫，也正是 (12.2.27) 里 n − 496 的记账来源（(n − 1) − 495 = n − 496）。
+
+  **本卡不断言**：
+  (a) 这些多项式**是**相应手征场的反常——那是 Alvarez-Gaumé–Witten 的指标定理计算，
+      Polchinski 逐字「we will not repeat it here but just quote the result」；
+  (b) 「十维反常 ↔ 形式上的十二形式」这条升维字典（见 consistency.anomaly-descent-to-twelve-form）；
+  (c) 微分形式、楔积、以及 (12.2.10) 的 −i/(2π)⁵ 整体归一化；
+  (d) 任何具体李代数的迹恒等式——因而**不断言任何规范群的反常抵消或因子化**；
+  (e) 十维 N = 1 的手征场含量（gravitino 56、中性 8′、伴随 8 gaugino）确实如此，
+      那是 §12.1 的超引力谱，本图未建卡。
+uses_conventions:
+  - conv.gauge-trace-normalization
+formal:
+  lean_decl: StringFormal.Math.anomaly_polynomial_factorized_eq_expanded
+  lean_file: StringFormal/Math/AnomalyPolynomial.lean
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§12.2, (12.2.11)(12.2.12) p. 98；(12.2.27)(12.2.28a,b) p. 101；引入句 p. 100 末逐字「The chiral fields of N = 1 supergravity with gauge group g are the gravitino **56**, a neutral fermion **8′**, and an **8** gaugino in the adjoint representation, for total anomaly」"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/polchinski-1998-v2-ch12.md E9/E14）。
+      ★ **原书一个字都没说 (12.2.27) 是 (12.2.11)+(12.2.12) 的恒等重排**，只写
+      「The anomaly has been organized into a sum of three terms」，直接给出重排后的形式。
+      本卡断言的就是那句"organized"背后的代数事实。
+      ⚠ **n = 1（中性 8′ 处在平凡表示）这一步原书没有明写**，是按 (12.2.11) 上方
+      「n = Tr(1)」的定义推出的（抽取记录 E10 的同一处标注）。本卡把它写进 statement，
+      并在推导的 gaps 里记为来源缺口。
+  - ref: adams-dewolfe-taylor-2010
+    loc: "arXiv:1006.1352**v2**, p. 2, eqs. (7)(8) 及其上方引文句「…following the presentation of Polchinski [11], can be arranged to the form」"
+    note: |
+      L1（抽取记录 polchinski-1998-v2-ch12.md E15）。**独立第二来源**：
+      ADT (7) ≡ Polchinski (12.2.27)，ADT (8) ≡ (12.2.28a,b)，逐项逐系数相同。
+      ⚠ 版本必须写死 v2：ADT 致谢自陈 v1 的 (7)(8) 系数有错（由 Tachikawa 指出）。
+      ADT 把公式出处归给 Alvarez-Gaumé–Witten（其 ref. [5]），把**这个特定排布方式**归给
+      Polchinski（其 ref. [11]）；本卡验证的正是这个"排布"的代数正确性。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/AnomalyPolynomial.lean :: StringFormal.Math.anomaly_polynomial_factorized_eq_expanded"
+    note: |
+      本仓库。四个多项式在 Lean 里分别是 `Ihat8`、`Ihat56`、`Y4`、`X8`，
+      组装式是 `IhatN1Expanded` 与 `IhatN1Factorized`，逐字对应本卡 statement 里的转录。
+      七个符号是 `n trR2 trR4 trR6 TrF2 TrF4 TrF6 : K`，`[Field K] [CharZero K]`。
+tags: [anomaly, twelve-form, d10, polynomial-identity, green-schwarz, polchinski, adt, lean-island-2, formalized]
+notes: |
+  【为什么这条值得单独建卡】它是 Green–Schwarz 反常链上**可完全机检的核心代数事实**之一
+  （另一条是 GS 1984 (19)，见 math.anomaly-twelve-form-factorization）。
+  两本独立文献（Polchinski 与 ADT）都把 (12.2.27) 那个重排**当作显然**直接写出，
+  没有任何一方展示验算；而它其实靠三处在印刷式子里看不见的相消才成立：
+  · Tr_a F₂² Tr_a F₂⁴：+(1/1440)(1/48) = +1/69120 与 Y₄X₈/768 里的 −1/(30·3·768) = −1/69120；
+  · (Tr_a F₂²)³：−(1/1440)(1/14400) 与 +1/(30·900·768)，都是 1/20736000；
+  · (Tr_a F₂²)² tr R₂²：Y₄X₈ **内部**的 +1/900 与 −1/900 自相消——这正是 (12.2.27) 里
+    正确地**没有**这一项的原因。
+
+  【与 consistency.d10-four-groups-satisfy-anomaly-conditions 的分工】那张卡说四个群满足
+  「伴随迹组合为零 + n = 496」两条 properties；本卡只说**多项式的两种写法相同**，
+  不碰任何群。两者都不断言「恰有四个」（见那张卡与 consistency.d10-anomaly-conditions-completeness-claim）。
+
+  【本卡为什么能是 formalized 而 consistency 区大多数卡不能】因为它的 statement 被刻意写成
+  纯代数：物理（这些多项式是反常、升维字典、超引力谱、整体归一化）全部列在「本卡不断言」里，
+  各自另有节点或明记为缺口。Lean 文件 AnomalyPolynomial.lean 的头部 docstring 作了同样的划界
+  （"What is a variable here, and what is not"）。
+
+  【查重】`uv run stringgraph search "anomaly polynomial" / factoriz / IIB` 无同内容命中；
+  最接近的 consistency.anomaly-twelve-form-d10 是 GS 记号的**定义**卡，不含本命题。
+author: curator
+created: "2026-09-11"

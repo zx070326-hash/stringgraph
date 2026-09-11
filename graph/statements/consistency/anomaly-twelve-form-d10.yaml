@@ -29,6 +29,7 @@ statement: |
   (d) 「Ω_{4n} 用基本迹的表达式」——那是纯代数命题
       math.so-usp-adjoint-fundamental-trace-identities 与 math.e8-adjoint-trace-identities，
       与本卡的物理内容分开记账。
+superseded_by: consistency.anomaly-twelve-form-d10-v2
 uses:
   - consistency.descent-forms-gs-notation
 uses_conventions:
@@ -62,6 +63,19 @@ sources:
       那一句在 Zumino 一侧没有支撑**，见 notes 第 5 条。
 tags: [anomaly, hexagon, twelve-form, d10, supergravity, super-yang-mills, green-schwarz]
 notes: |
+  【0. ★ 本卡已换代（2026-09-11）：拆成三张】
+  本卡是一张 `definition`，却在 statement 里内嵌了**两条命题**：
+  (i) 「外线多于六条的反常由六边形图唯一决定，其形式可由 Wess–Zumino 相容条件定出」；
+  (ii) 「按 Zumino–Wu–Zee 的分析，反常与一个形式上的十二维规范不变十二形式相联系」（升维字典）。
+  按「一个节点一个命题」拆成：
+  · **consistency.anomaly-twelve-form-d10-v2** ← 记号部分（`superseded_by` 指向它）；
+  · **consistency.higher-point-anomalies-fixed-by-hexagon** ← (i)；
+  · **consistency.anomaly-descent-to-twelve-form** ← (ii)。
+  ⇒ 拆分的实际收益：本卡 notes 第 5、6 条记的两条来源缺口（唯一性无支撑、升维字典无来源）
+  原本只是散文，现在成了图里可被 `stringgraph why` 追踪的**瓶颈节点**。
+  按 CLAUDE.md 原则 1，本卡的 `statement` 文本**不动**；依赖本卡的 `depends_on` 已按各自
+  用到的是哪一部分改指新卡。
+
   【1. 原文 (11) 的 tr/Tr】GS 的 (11) 在影印件上印作小写 `Ω_{4n} = tr F^{2n}`，
   但语义上必须是**伴随**迹（否则紧接的 (12a) 就是废话）。本图统一按语义写 **Tr**，
   这一判读登记在 conv.gauge-trace-normalization 的 notes 第 1 条与抽取记录 §3.1。

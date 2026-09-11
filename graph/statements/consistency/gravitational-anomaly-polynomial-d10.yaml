@@ -38,6 +38,30 @@ notes: |
   三项比值一致说明两者只差整体归一，这提高了对 (20) 的信心，但**不构成对 AGW 的核实**。
   该核验是 Lean 候选 A5（三个 ℚ 上的等式，`norm_num` 即可），价值中等，本轮未建 math 节点。
 
+  【★ 2026-09-11：与 Polchinski (12.2.27) 的交叉核验已机检，且比上表更强】
+  formal/StringFormal/Math/AnomalyPolynomial.lean 的
+
+      StringFormal.Math.gs_gravitational_twelve_form_eq_polchinski (n trR2 trR4 trR6 : K) :
+          IhatN1Factorized n trR2 trR4 trR6 0 0 0 = -(1 / 96) * GS20Gravitational n trR2 trR4 trR6
+
+  证明（`unfold; ring`，无 sorry，公理只有标准三条；curator 2026-09-11 跑过 check-axioms）：
+  **把 Polchinski (12.2.27) 的三个规范迹置零得到的纯引力部分，等于 −1/96 乘本卡的 GS (20)。**
+  · 这里的 `GS20Gravitational` 就是本卡 statement 里那三行，逐字转录；
+  · **五个系数全部对上**——包括两个 **n 无关**项（GS 侧写作 1/32 与 1/8，Polchinski 侧
+    来自 Y₄X₈/768，在他的排布里根本看不出是常数项）；
+  · ⇒ 这比上表的「与 Bilal 括号内容之比都是 3/4」**严格更强**：那个比较对括号整体重标度，
+    因而**不检验** n 无关项与 n 相关项在同一整体归一下是否相容；这里**一个常数 −1/96**
+    就把五个系数全部对上。Lean 候选 A5 由此闭合并加强。
+
+  ⚠ **本卡不因此加 `formal.lean_decl`、也不加 `--via-lean` 推导**：本卡的 statement 是
+  **物理**断言（「只有外引力子的六边形及更高图所对应的洛伦兹反常由这个十二形式刻画」），
+  而 Lean 证的是两个**多项式**相等，二者不是同一件事。按 docs/STATUS_LEVELS.md，
+  挂上去会让本卡显示成 formalized 而其物理内容并未被机检。
+  被机检的那一半已由 consistency.d10-n1-anomaly-polynomial-factorized-form（formalized）承载，
+  上面那条 decl 是它与本卡之间的桥，登记在此备查。
+  ⚠ 它**仍不构成对 AGW 的核实**：两侧的系数都来自 AGW，Polchinski 与 GS 不是独立计算，
+  只是独立**转录 + 重排**。这条等式排除的是转录/重排错误，不是原始指标定理计算的错误。
+
   【易误引】(20) 的**前两项在 n = 496 时不为零**，它们要靠反项 S₂ 抵消。
   不要写成「496 使引力反常整体为零」。
 author: curator

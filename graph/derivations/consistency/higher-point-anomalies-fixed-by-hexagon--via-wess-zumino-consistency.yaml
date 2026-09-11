@@ -1,0 +1,50 @@
+id: consistency.higher-point-anomalies-fixed-by-hexagon--via-wess-zumino-consistency
+target: consistency.higher-point-anomalies-fixed-by-hexagon
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: consistency.descent-omega1-is-consistent-anomaly
+    inferred: true
+    note: |
+      提供「相容条件有一族由下降链给出的解 ω¹_{2n−2}」这一**存在性**一侧
+      （来源 zumino-1983-les-houches，L1）。
+      ⚠ 标 inferred: true 的理由：本卡真正需要的是**唯一性**（高点反常被六边形唯一决定），
+      而该依赖卡只给存在性，且其来源 p.29 逐字把「最一般解」排除在讨论之外。
+      ⇒ **这条边支撑不了目标卡的 (2)**，只支撑「相容条件确实约束反常的形式」这个较弱的意思。
+  - id: conv.gauge-trace-normalization
+    note: 记号（迹的表示、楔号省略）。本推导不涉及任何系数。
+sources:
+  - ref: green-schwarz-1984
+    loc: "PLB p.119（重印 610），(11) 上一段（逐字见目标卡 sources）"
+    note: |
+      L1（抽取记录 literature/extractions/green-schwarz-1984.md E6）。
+      **这是本图对目标卡三条断言的唯一来源，且 GS 三条都不证**：
+      (1) 无引用；(2) 「uniquely determined」无出处；(3) 「can be deduced by」+ 引 [8]。
+  - ref: wess-zumino-1971
+    loc: "全文（GS ref. [8]）"
+    note: 本项目未取得（L0）。只承载 (3) 里「相容条件」这个名字的出处。
+summary: |
+  **本推导没有论证，只有转录。** GS 在 (11) 上一段用三句话给出目标卡的 (1)(2)(3)，
+  其中 (3) 引 Wess–Zumino 1971，(1)(2) 无引用。本图掌握的相关内容只有
+  consistency.descent-omega1-is-consistent-anomaly：下降链给出的 ω¹ **是**相容条件的一个解。
+  从「是一个解」到「唯一决定」缺一个**分类定理**（相容反常的局部 BRS 上同调），
+  本图没有它的任何已核实来源。
+
+  ⇒ 本推导的作用是把 GS 的断言登记为图内节点并**把缺口显式化**，
+  而不是提供论证。status 取 physical-argument 已是能给的最高档（GS 的断言 + 一条只给存在性的边）。
+gaps:
+  - "★ **「uniquely determined」无任何已核实来源**：GS 不给出处；wess-zumino-1971 未取得（L0）；zumino-1983-les-houches p.29 逐字「The problem of finding the most general solution of the consistency condition will not be discussed here.」；manes-stora-zumino-1985（相容反常的上同调分类）本项目正文一字未取到。⇒ 目标卡的 (2) 在本图里是**纯断言**。"
+  - "**(1) 的维数计数（2n 维反常来自 n+1 点函数，D = 10 给 6）本图无节点**，GS 也不证。"
+  - "**(3) 的「can be deduced by」是 GS 的自称**，本图未核实任何一步实施过程。"
+  - "**依赖边标 inferred: true**：consistency.descent-omega1-is-consistent-anomaly 只给存在性，不给唯一性；它支撑不了目标卡的 (2)。"
+notes: |
+  【为什么不标 conjecture】按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位裁决
+  （lead 2026-09-11）：来源给出论证骨架但关键步骤只有断言的，标 **physical-argument** 并把
+  断言处逐条写进 gaps；conjecture 保留给来源本身把它当猜想提出、或结论真伪在文献中未定的命题。
+  高点反常被六边形决定在文献中**无人怀疑其真伪**，缺的是本图手里的证明链，故取 physical-argument。
+
+  【给后续 curator / researcher 的具体任务】取到 manes-stora-zumino-1985 (CMP 102 (1985) 157)
+  正文后，本推导应改写为 `--via-brs-cohomology-classification` 或新增一条平行推导，
+  届时 gaps 第一条可撤，`inferred` 也可撤。
+author: curator
+created: "2026-09-11"
