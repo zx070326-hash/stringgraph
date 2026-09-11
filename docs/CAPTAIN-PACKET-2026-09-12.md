@@ -1,4 +1,4 @@
-> ⚠ **草案，修订中（2026-09-12）**：reviewer-captain-packet 核出 9 处与源文件不符（回译轮次、Lean 覆盖、来源计数等），修订分支 `agent/lead/captain-packet-fix` 进行中。**末尾的 worktree 清理脚本在本版本会把有未提交改动的 worktree 误判为安全，且带 `--force`——修订前请勿运行。**
+> ✅ **修订完成（2026-09-12，分支 `agent/lead/captain-packet-fix`）**：reviewer-captain-packet 核出的 9 处 CONFIRMED + 6 处 PLAUSIBLE 问题已逐条核实并修订，详见文末「修订记录」表。修订过程中合并了 main 的后续进展，第 3 节的现场数据已按合并后状态重新核验（`uv run stringgraph validate` 在本 worktree 现场重跑：611 statements, 504 derivations, 3 milestones, 21 conventions, 0 errors, 68 warnings；与 lead 报告的 main 611/504 一致。lead 另报告 main 有 82 条 Lean 声明且 `check-axioms` 全绿，本次未重跑 `lake build`/`check-axioms`，该数字未独立复核），不是修订前的旧快照。worktree 清理脚本已按 CONFIRMED-9 重写（SAFE 需同时满足「已合并」与「工作区无未提交改动」，不再提示 `--force`）。
 
 # 船长审批包 — 2026-09-12
 
@@ -10,7 +10,7 @@
 
 ## 1. `ms.ddf-commute-with-virasoro` → `worldsheet.ddf-commute-with-virasoro`
 
-**规范陈述（canonical_text 逐字）**：
+**规范陈述（canonical_text 节录，未改动引用文字，仅省略部分约定记账）**：
 > 【对象】D 维自由玻色开弦的振子 Fock 空间……给定基点动量 p、参考向量 k_0、偏振向量 ε，满足三个条件：(T) 横向性 ε·k_0 = 0；(N) 类光性 k_0² = 0；(S) 归一化 2α' k_0·p = 1……DDF 算子按 worldsheet.ddf-operators-v6 的**模态和**定义：A^ε_n := Σ_{j∈Z} (ε·α_j) V^{(n)}_j……
 > 【命题】在 (T)(N)(S) 之下，作为 T(p; k_0) 上的算子恒等式，[L_m, A^ε_n] = 0 对**每一个** m ∈ Z（含 m = 0）与每一个 n ∈ Z \ {0}。
 > 【直接推论，属本陈述】若 Ψ 是旧协变物理态，则 A^ε_n Ψ 也是。
@@ -30,7 +30,7 @@
 - `StringFormal.NoGhost.ddfOp_mem_towerPhysSubmodule`（同文件）— 覆盖"推论"部分，任意统一截距 a₀。
 - **未覆盖**：围道积分定义 ≡ 模态和定义（无形式留数对象）；因此"文献 A^i_n 与本图 A^ε_n 是同一算子"；(S) 单值性的物理来由；实数域上合适 k_0 的存在性；横向振子代数 [A,A]（属另一张卡）；DDF 态张成横向谱；G–N 路线"共形向量=Sugawara"的识别（本证明直接用 Sugawara 绕开它）。
 
-**批准操作**：
+**批准操作**：（批准只对 `audit.status`/`canonical_text` 生效，不改写 `back_translation` 字段——round 1-N 的历史记录原样保留，供以后审计追溯）
 ```yaml
 audit:
   status: approved
@@ -49,7 +49,7 @@ git commit -m "graph: captain approves ms.ddf-commute-with-virasoro"
 
 ## 2. `ms.critical-dimension-bosonic` → `worldsheet.critical-dimension-bosonic-v3`
 
-**规范陈述（canonical_text 逐字节录，五条路线核心结论；完整版另含逐段记账历史，未删改核心断言原文，仅省略过程性旁注，标 […]）**：
+**规范陈述（canonical_text 节录，五条路线核心结论；完整版另含逐段记账历史，未删改核心断言原文，仅省略过程性旁注，标 […]）**：
 > 【本里程碑断言什么】D = 26 不是由单一论证得到的：它是四条**论证方式互不相同**的路线各自挑出 D = 26……本里程碑**不**断言四条路线互相等价。
 > (I) 光锥路线：[J^{i−}, J^{j−}] = …，Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]，闭合**当且仅当** D=26 且 a=1。本条另设前提 **D ≥ 4**。这是四条路线中**唯一**同时定出 D 与 a 的一条。
 > (II) 旧协变路线：**若** D=26 且 a=1，则 H_phys 半正定、H_phys/H_0 与 24 个横向振子 Fock 空间等距同构；**且** D>26（a=1、非零动量）存在负模物理态。D ≤ 25 不作断言。
@@ -59,20 +59,23 @@ git commit -m "graph: captain approves ms.ddf-commute-with-virasoro"
 > 【各路线的非严格步骤】只有 (II) 各推导节点**自身** status 是 rigorous；(I)(III)(IV)(V) 封顶在 physical-argument（ζ 正规化、OPE 收敛未证、Q_B²=0⟹c^m=26 无数学来源等）。
 > 【本里程碑不断言什么】(1) 四条路线互相蕴含；(2) D≤25 情形；(3) 闭弦截距/紧化背景；(4) D=26 是一致性的充分条件；(5) a=1 与 D=26 有蕴含关系；(6) "(I) 是唯一以当且仅当给出 D 的路线"。
 
-**回译审计**：**三轮**。第一轮、第二轮均裁定 **drift**（可修，无物理错误：第一轮问题集中在多余元断言与两处方向写反的记账；第二轮发现 canonical 与 v2 卡"a 是否待定"前提相反等 6 项，判定修法只能换代）；每次 drift 均导致陈述换代（v→v2→v3）。**第三轮（physics-auditor，2026-09-11）裁定 faithful**，`audit.status: back-translated`。船长须知两处不阻塞批准的记账尾巴：**F1**（闭弦截距节点已建但一行记账文字过时）、**F2**（应删去"(I)(V) 共享 ζ 正规化处方"一句，因 (I) 已明说 ζ 值不是其前提）——curator 处理中。
+（节录说明：完整版 `graph/milestones/critical-dimension-bosonic.yaml` 的 canonical_text 首段另有一句"(II) 的有效状态亦为 physical-argument"的插注，此处未摘录；该插注本身**已过时**——现场核验 `critical-dimension-old-covariant-v3` 的 own/effective 均为 rigorous，插注留待下次换代同步，不影响本节其余摘录内容的准确性。）
 
-**当前有效状态**（现场核验）：`own = physical-argument`，`effective = physical-argument`，`best_derivation = --via-four-routes`（该推导本身 `kind: physical-argument`，是并列陈述四条路线的汇总卡而非证明）。`conjectures_depended_on: []`。**关键认识论点**：即便五条依赖全部升到 rigorous/formalized，按 `effective = min(own, min(deps))`，effective **也不会超过 physical-argument**——这是 `via-four-routes` 自身状态封顶，是 STATUS_LEVELS 设计的预期形态，不是缺陷（拆卡才是唯一升级路径）。
+**回译审计**：**三轮**。第一轮、第二轮均裁定 **drift**（可修，无物理错误：第一轮问题集中在多余元断言，以及记账中的方向问题——准确地说只有 **B1** 一处是方向写反，另一处 **B2**「(I) 是唯一同时定出 D 与 a 的路线」是措辞本身不成立（需改写），不是"写反"；第二轮发现 canonical 与 v2 卡"a 是否待定"前提相反等 6 项，判定修法只能换代）；每次 drift 均导致陈述换代（v→v2→v3）。**第三轮（physics-auditor，2026-09-11）裁定 faithful**，`audit.status: back-translated`。此前记账提到的两处尾巴**已处理完毕**（非"curator 处理中"）：**F1**（闭弦截距节点的记账文字已同步更新）、**F2**（"(I)(V) 共享 ζ 正规化处方"一句已删除）——见该里程碑 YAML `diff_notes`【第三轮修订记】约 L348–375。
 
-**why 瓶颈树（前 3 层，共 5 个一级依赖）**：
+**当前有效状态**（现场核验）：`own = physical-argument`，`effective = physical-argument`，`best_derivation = --via-four-routes`（该推导本身 `kind: physical-argument`，是并列陈述四条路线的汇总卡而非证明）。`conjectures_depended_on: []`。**关键认识论点**：`--via-four-routes` 的 `depends_on` 实际有 **7** 条（对应五条路线的一级依赖，外加 `free-boson-central-charge-d`、`bc-ghost-central-charge` 两条公共输入；下面 `why` 瓶颈树只展示对 effective 有压低作用的 5 条，不代表 `depends_on` 只有 5 条）。即便全部 7 条都升到 rigorous/formalized，按 `effective = min(own, min(deps))`，effective **也不会超过 physical-argument**——这是 `via-four-routes` 自身状态封顶，是 STATUS_LEVELS 设计的预期形态，不是缺陷（拆卡才是唯一升级路径）。
+
+**why 瓶颈树（前 3–4 层；`depends_on` 共 7 条一级依赖，下面只列对 effective 有压低作用的 5 条）**：
 - 层1：`critical-dimension-light-cone-v2`[PA]、`critical-dimension-brst-v2`[PA]、`critical-dimension-weyl-anomaly-v2`[PA]、`open-string-intercept-v2`[PA]、`bc-ghost-central-charge`[PA]。
 - 层2：light-cone → `light-cone-normal-ordering-constant`[PA]（ζ 正规化）、`open-string-mass-shell`[PA]；brst → `bc-ghost-central-charge`[PA]；weyl-anomaly → `weyl-anomaly-trace`[PA]、`weyl-anomaly-central-charge-constant`[PA]、`faddeev-popov-ghost-action`[PA]、`conformal-gauge-fixing`[PA]；open-string-intercept → `open-string-mass-shell`、`transverse-oscillator-commutators`[PA]。
-- 层3：ζ 正规化 → `zeta-regularized-sum-of-integers`[PA]、`transverse-oscillator-commutators`[PA]；`bc-ghost-central-charge` → `bc-ghost-cft`[rigorous]、`operator-product-expansion`[PA]、`tt-ope-central-charge-v2`[rigorous]、`conformal-normal-ordering-v2`[rigorous]。
+- 层3：ζ 正规化 → `zeta-regularized-sum-of-integers`[PA]、`transverse-oscillator-commutators`[PA]；`bc-ghost-central-charge` → `bc-ghost-cft`[own rigorous / effective PA]、`operator-product-expansion`[PA]、`tt-ope-central-charge-v2`[own rigorous / effective PA]（三者是 `bc-ghost-central-charge--via-ope` 的直接依赖；标 own 是因为这两个定义/命题节点自身论证严格，但 effective 被同层 `operator-product-expansion`[PA] 压到 physical-argument——这是 own≠effective 的正常记账，不是标法混用）。
+- 层4：`bc-ghost-cft` 链条更深处才出现 `conformal-normal-ordering-v2`[own rigorous]——它是 `bc-ghost-cft` 的依赖（经 `energy-momentum-tensor-free-scalar` 等），不是 `bc-ghost-central-charge` 的直接依赖，此前误标在层3。
 
 真实瓶颈汇聚到两个根：ζ 正规化（无算子层定义）与 OPE 收敛（未证）。DDF/无鬼一侧**已不在**本里程碑瓶颈中。
 
-**Lean 覆盖**：**无**。`--via-four-routes` 本身是 physical-argument，永不可能标 formalized；已核对瓶颈树内全部节点（`energy-momentum-tensor-free-scalar`、`conformal-normal-ordering-v2`、`primary-field-v2`、`tt-ope-central-charge-v2`、`bc-ghost-cft`）均**无** `lean_decl`。已形式化的旁支节点（`free-boson-central-charge-d`、`virasoro-generators-free-boson`）不在这条汇聚路径上，对本里程碑 effective 无提升作用。
+**Lean 覆盖**：**无**。`--via-four-routes` 本身是 physical-argument，永不可能标 formalized；已核对瓶颈树内全部节点（`energy-momentum-tensor-free-scalar`、`conformal-normal-ordering-v2`、`primary-field-v2`、`tt-ope-central-charge-v2`、`bc-ghost-cft`）均**无** `lean_decl`。已形式化的 `free-boson-central-charge-d` 其实是 `--via-four-routes` `depends_on` 七条之一的**直接依赖**（并非旁支）；另有已形式化的旁支节点 `virasoro-generators-free-boson` 确实不在推导路径上。二者对本里程碑 effective 均无提升作用——`free-boson-central-charge-d` 是因为它不在瓶颈链（ζ 正规化/OPE 收敛）上，`virasoro-generators-free-boson` 是因为它根本不参与本推导。
 
-**批准操作**：
+**批准操作**（务必保留 YAML 中已有的 `audit.back_translation` 记录，不要删除——`validate` 要求 `approved` 状态仍附带 `back_translation`，下方片段只示意新增字段）：
 ```yaml
 audit:
   status: approved
@@ -85,41 +88,47 @@ git add graph/milestones/critical-dimension-bosonic.yaml
 git commit -m "graph: captain approves ms.critical-dimension-bosonic"
 ```
 
-**仍缺一手文献**：本里程碑主要来源（Polchinski v1 §1.3/§2.4/§2.5/§3.4/§4.1/§4.3、GSW §2.3.1）均已获取核实，无专属缺口。GT 1972 只经 (II) 间接相关，缺口记在下一节。
+**仍缺一手文献**：本里程碑主要来源中 Polchinski v1 §1.3/§2.4/§2.5/§3.4/§4.1/§4.3 已获取核实；**GSW 一侧仍有专属缺口**——`literature/extractions/gsw-1987-v1.md` §1：GSW §2.3.3（含 (2.3.32)）正文仍**未获取（L0）**，ch.2 被 WebFetch 13 MB 上限卡住（`docs/ROADMAP.md` L89）；canonical_text (I) 光锥路线的 Δ_n 公式目前**只由 GSW 单一来源支撑**，尚无第二来源交叉核验；`kato-ogawa-1983` 正文也未核实（该里程碑 YAML `canonical_text` 内约 L545 处有记账）。GT 1972 只经 (II) 间接相关，缺口记在下一节。已把 GSW v1 ch.2 加入船长点击清单第 6 项。
 
 ---
 
 ## 3. `ms.no-ghost-theorem` → `worldsheet.no-ghost-theorem-v4`
 
-**规范陈述（canonical_text 逐字）**：
+**规范陈述（canonical_text 节录，引用文字未改动，仅省略部分记账括注）**：
 > 对 D 维自由玻色开弦……物理态 (L_0−a)|ψ⟩=0、L_n|ψ⟩=0 (n>0)……【全局动量限定】一律排除 p=0；固定 k_0 语境下进一步排除 k_0·p=0。
-> (1) 当 D=26 且 a=1 时：(a) 对扇区 {p : k_0·p≠0} 内每个 p 与每个 |ψ⟩∈H_phys(p)，⟨ψ|ψ⟩≥0；(b) 对快子壳上 k_0·k≠0 的动量 k，H_phys(k;k_0)/H_0(k;k_0) 与 24 个横向 DDF 算子生成的 H^⊥(k) **等距同构**，保持**能级 N** 分级（不是 L_0 分级，L_0≡1 在 H_phys 上是常数）。
+> (1) 当 D=26 且 a=1 时：(a) 对扇区 {p : k_0·p≠0} 内每个 p 与每个 |ψ⟩∈H_phys(p)，⟨ψ|ψ⟩≥0；(b) 对快子壳上 k_0·k≠0 的动量 k，把物理态限制到动量塔上得到 H_phys(k;k_0)，**模掉其零模态子空间 H_0(k;k_0) 后诱导内积正定**（canonical_text 原文分句，本文档此前的节录漏收了这半句，现补回）；并且商空间与 24 个横向 DDF 算子生成的 H^⊥(k) **等距同构**，保持**能级 N** 分级（不是 L_0 分级，L_0≡1 在 H_phys 上是常数）。
 > (2) 当 D>26 时，**至少在 a=1 的情形**存在 p≠0 上的负模物理态（p=0 一律不算，因为 α^0_{−1}|0;0⟩ 对任意 D 都物理且模为负，会使命题失去区分力）。
 > 本里程碑不对 D≤25 或 D=26、a≠1 作断言。
 
 **canonical_source**：`goddard-thorn-1972`，"无编号定理；结论见摘要末句 'absence of ghosts for d ⩽ 26'。**正文未获取**"。
 
-**回译审计**：四轮回译裁定 **faithful**（v2→v3→v4 演进只是修正量词歧义，不是漂移）；第五/六/七轮为**记账更新**（不重做回译，verdict 维持 faithful）：
+**回译审计**：**四轮**回译，**前三轮均裁定 drift**（各自触发换代 v→v2、v2→v3、v3→v4；分歧点是量词歧义与记账疏漏，非物理错误，第三轮唯一阻塞项 B1 已在 v4 修正）；**第四轮（2026-09-10，针对 v4）首次裁定 faithful**，`audit.status: back-translated`。第五至第九轮为**记账更新**（不重做回译，verdict 维持 faithful）：
 - **第五轮（2026-09-11）R5-3**：船长关切"effective=physical-argument 时 approved 是否与里程碑定义冲突"——**裁定不冲突，建议可批**；approved/effective 是设计上正交的两根轴，此裁决后来写入 `docs/STATUS_LEVELS.md`（即本文件开头引用的那段）。
 - **第六轮 R6**：DDF-Virasoro 对易关系转 rigorous 后，瓶颈转移到"伴随层"两节点：`ddf-operators-adjoint`（(A^i_n)†=A^i_{−n}）与被其封顶的 `transverse-ddf-fock-gram-matrix`。
 - **第七轮（分支 agent/auditor/noghost-contour）R7**：(a) 裁定 `--via-goddard-thorn` 对 `worldsheet.ddf-contour-equals-mode-sum` 的依赖边是"**溯源记账，不承重**"，撤边；(b) `canonical_source` 仍是 GT1972 的**围道**表述，但图对象已是**模态和**版本（v6），"**船长批准的是模态和版本 A^ε_n 生成的 H^⊥(k)**；'它与文献围道定义的 A^i_n 是同一算子'在图中只有 physical-argument 级论证"（三处未闭合缺口：形式级数重排、留数 vs 围道读法、正规序 E±分裂不匹配）；(c) 撤边后 effective 回升为 rigorous。
+- **第八轮 R8**：`[K_m,A^ε_n]=0` 与纵向算子完整代数落地为图节点 `worldsheet.gt-longitudinal-k-algebra`（**formalized**，`Longitudinal.lean`），已接入 `--via-goddard-thorn` 的 `depends_on`；D>26 负模见证同样落地为 `worldsheet.negative-norm-physical-state-above-26`（**formalized**，`LevelTwo.lean`）。R8-3 明确记录：**(B-26)**（"H^⊥ 之外方向恰为零模态"）是整条链**唯一还未形式化、且 D=26 唯一进入之处**，文献支撑仅 Goddard 2008 (6.4) 一句转引 GT1972（正文未获取），形式化还需在 GT 机制与 Brower 机制之间做尚未做出的选择。
+- **第九轮 R9**：`formal/StringFormal/NoGhost/Assembly.lean` 的 `no_ghost_of_spans`（10 条声明，无 sorry）把无鬼定理**条件化组装完成**——给定张成假设 `DDFSpans`（H_phys ≤ ddfSpan ⊔ H_null）即可对任意 D、任意有序域推出 (1a)(1b)；`DDFSpans` 在 **N=1** 已被 `ddfSpans_bigrade_neg_one_one` 证完（D=26 不进入），N=2 据总线消息由 formalizer 进行中。R9-3：**整条链现在全部的"未证明"负担都集中于 `DDFSpans` 这一个命题**，它就是 (B-26) 的等价物。
 
-**(B-26) 船长须知（`docs/ROADMAP.md`「发表路线」，Lean 蓝图 `formal/BLUEPRINT-noghost.md`）**：即便下面现场核验 effective=rigorous，这是**记账意义**上的 rigorous（推导链没有被图内已知节点压低），**不代表 GT 定理的核心张成步骤已被证明或形式化**。蓝图逐字标注：「**D = 26 只在 (B-26)「H^⊥ 之外的 p_{D−1}(N)−p_{D−2}(N) 个方向恰为零模态」一步进入**，DDF 代数/伴随/Gram 均与 D 无关——这是整条 GT 链的**真正承重点**，文献支撑只有 Goddard 2008 (6.4) 一句转引」。图内**目前没有节点**承载 (B-26)、张成引理本身、`[K_m,A]=0`、纵向算子构造；Lean 也未证完（`formal/TODO.md` 的 `ddf-spans` 待办；蓝图 B.1/A 已合 main，B.6/C.4 由背景 agent 正在做，未完成）。这是当前记账体系下的**已知盲点**，不阻塞本次批准（批准只断言忠实性），但建议船长批准时在 note 里留一句提醒。
+**(B-26) 船长须知（内容见上第八/九轮记账 R8-3/R9-3；「发表路线」出自 `docs/ROADMAP.md`，非 `formal/BLUEPRINT-noghost.md` 逐字引用——蓝图另有相近措辞但点击清单编号与 ROADMAP 不完全对应，详见文末 PLAUSIBLE-f 记录）**：即便下面现场核验 effective=rigorous，这是**记账意义**上的 rigorous（GT 1972 论证链没有被图内已知节点压低），**不代表 GT 定理的核心张成步骤已被证明或形式化**。D = 26 唯一进入之处是「H_phys 中 H^⊥ 之外的 p_{D−1}(N) − p_{D−2}(N) 个方向恰为零模态」，等价于上面第九轮提到的 `DDFSpans` 假设；这是当前记账体系下**唯一**还没有图内节点、也没有 Lean 通用（对任意 N）证明的缺口（N=1 已证，D=26 不进入这一步；一般 N 未做，`formal/TODO.md` 的 `ddf-spans` 待办项未勾）。这是当前记账体系下的**已知盲点**，不阻塞本次批准（批准只断言忠实性），但建议船长批准时在 note 里留一句提醒。
 
 **当前有效状态**（现场核验）：`own = rigorous`，`effective = rigorous`，`best_derivation = --via-goddard-thorn`。`conjectures_depended_on: []`。
 
-**why 瓶颈树（全树仅 3 层，已到底，无压低依赖）**：
-- 层1：`no-ghost-theorem-v4`[rigorous] via `--via-goddard-thorn`（2 deps）
-- 层2：`transverse-ddf-fock-gram-matrix`[rigorous] via `--via-oscillator-recursion`；`kac-determinant-v2`[rigorous] via `--via-feigin-fuchs`（1 dep）
-- 层3：`math.verma-module-free-over-negative-part`[rigorous] via `--via-pbw-theorem` → `math.pbw-theorem`[rigorous]（Humphreys）
+**why 瓶颈树（现场重跑；`--via-goddard-thorn` 实挂 11 条 `depends_on`，但 `why` 只沿有效状态最低的支路展开——其余 10 条均已是 formalized 或更高，不构成瓶颈，不出现在树里；全树 4 层，已到底，无进一步压低）**：
+- 层1：`no-ghost-theorem-v4`[rigorous] via `--via-goddard-thorn`——瓶颈依赖 `kac-determinant-v2`。
+- 层2：`kac-determinant-v2`[rigorous] via `--via-feigin-fuchs`——瓶颈依赖 `math.verma-module-free-over-negative-part`。
+- 层3：`math.verma-module-free-over-negative-part`[rigorous] via `--via-pbw-theorem`——瓶颈依赖 `math.pbw-theorem`。
+- 层4：`math.pbw-theorem`[rigorous] via `--via-humphreys`（叶节点，无依赖）。
 
-注意：GT 论证的核心步骤（张成引理、[K_m,A]=0、纵向算子构造）**在图内根本没有节点**——`--via-goddard-thorn` 的 `summary` 直接断言它们、`sources` 只挂 GT1972 摘要，这是"缺一手文献"而非"缺 rigorous 判定"，船长须知。
+**版本更新**：本文档此前的草稿写"层1（2 deps）：`transverse-ddf-fock-gram-matrix`……与 `kac-determinant-v2`……并列"，那是本轮修订前的现场快照；`transverse-ddf-fock-gram-matrix` 现已有第二条推导 `--via-lean`（`own=effective=formalized`，`lean_decl: StringFormal.NoGhost.ddf_gram_diagonal`，`DDFGram.lean`），不再是 rigorous 层级的瓶颈，因此从瓶颈树里退出——这是**好消息**（Gram 矩阵正定性这一步已被机器检验），不是记账错误，但确实使旧版树形与当前不一致，特此更正。
+
+注意：GT 论证的核心步骤里，`[K_m,A^ε_n]=0` 与纵向算子构造**已有图内节点并已形式化**（`worldsheet.gt-longitudinal-k-algebra`，见上第八轮记账，`Longitudinal.lean`）；D>26 负模见证也已形式化（`worldsheet.negative-norm-physical-state-above-26`，`LevelTwo.lean`）。**仍在图内没有节点**的只剩张成引理本身（即一般 N 的 (B-26)/`DDFSpans`）。`--via-goddard-thorn` 本身的 `sources` 有 **7 条**（Goddard–Thorn 1972、Brower–Thorn 1971、Goddard 2008、FGZ 1986、Brower 1972、GSW 1987 v1、Polchinski 1998 v1）；但给出张成引理这一步**论证本身**的一手来源只到 GT1972 摘要级别（正文未获取），这是"缺一手文献深度核实"而非"缺 rigorous 判定"，船长须知。
 
 **Lean 覆盖**（均在 `formal/StringFormal/NoGhost/`）：
-- 已机检：DDF 算子定义 `ddfOp`（`DDFOperator.lean`）；`[L_m,A^ε_n]=0` 对全部 m,n `lie_towerLop_ddfOp`（`DDFOperatorAll.lean`）；DDF 保持旧协变物理态 `ddfOp_mem_towerPhysSubmodule`（同文件）；横向 DDF 代数 `[A^ε_m,A^δ_n]=m(ε·δ)δ` 的 `lie_ddfOp_ddfOp`（`DDFAlgebra.lean`）；顶点算子伴随与 DDF 伴随 `towerPairing_towerVertex_left` / `towerPairing_ddfOp_left`（`VertexAdjoint.lean`）；动量塔 Fock 空间与 Sugawara 基础设施（`Fock.lean`/`DDF.lean`/`Sugawara.lean`）。
-- **未机检 / 图内无节点**：`transverse-ddf-fock-gram-matrix` 本身（登记"不填 lean_decl、不标 formalized"）；`kac-determinant-v2`（Feigin–Fuchs 路线）；GT 张成引理、`[K_m,A]=0`、纵向算子 K_m 构造（图内无节点，Lean 未做）；**(B-26)** 本身（图内无节点；蓝图 B.6/C.4 进行中，未合并）。
+- 已机检：DDF 算子定义 `ddfOp`（`DDFOperator.lean`）；`[L_m,A^ε_n]=0` 对全部 m,n `lie_towerLop_ddfOp`（`DDFOperatorAll.lean`）；DDF 保持旧协变物理态 `ddfOp_mem_towerPhysSubmodule`（同文件）；横向 DDF 代数 `[A^ε_m,A^δ_n]=m(ε·δ)δ` 的 `lie_ddfOp_ddfOp`（`DDFAlgebra.lean`）；顶点算子伴随与 DDF 伴随 `towerPairing_towerVertex_left` / `towerPairing_ddfOp_left`（`VertexAdjoint.lean`）；动量塔 Fock 空间与 Sugawara 基础设施（`Fock.lean`/`DDF.lean`/`Sugawara.lean`）；**横向 DDF Gram 矩阵正定性** `ddf_gram_diagonal`（`DDFGram.lean`，对应图节点 `worldsheet.transverse-ddf-fock-gram-matrix` 的新增 `--via-lean` 推导，formalized，见上 why 树更新）；`[K_m,A^ε_n]=0` 及纵向算子完整代数 `lie_towerLop_kOp`/`lie_kOp_ddfOp` 等（`Longitudinal.lean`，对应图节点 `worldsheet.gt-longitudinal-k-algebra`，formalized）；D>26 负模物理态显式见证 `exists_mem_physSubmodule_pairing_self_neg'`（`LevelTwo.lean`，对应图节点 `worldsheet.negative-norm-physical-state-above-26`，formalized）；DDF 张成引理在 **N=1** 的实例 `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`（`LightCone.lean`，对应图节点 `worldsheet.ddf-spans-physical-states-level-one`，formalized；**D=26 不进入这一步**）。
+- **Lean 已有但图内尚无对应卡**：`Assembly.lean` 的 `no_ghost_of_spans`（10 条声明，无 sorry）——给定张成假设 `DDFSpans` 即把无鬼定理条件化组装完成，对任意 D、任意有序域成立；这一步把「无鬼定理」和「张成引理」之间的推导关系也机器验证了，但该条件化定理本身还没有对应的图节点，因此不出现在上面 why 树里。
+- **未机检 / 图内无节点**：`kac-determinant-v2`（Feigin–Fuchs 路线，当前 why 树的实际瓶颈）；一般 N 的 DDF 张成引理本身（`DDFSpans`/(B-26)，`formal/TODO.md` 的 `ddf-spans` 待办，N=1 已证、N=2 进行中、一般 N 未做）。`transverse-ddf-fock-gram-matrix`、`[K_m,A^ε_n]=0`、纵向算子构造、D>26 负模见证**已移出此列**（见上，均已形式化）。
 
-**批准操作**：
+**批准操作**：（批准只对 `audit.status`/`canonical_text` 生效，不改写 `back_translation` 字段——round 1-9 的历史记录原样保留，供以后审计追溯）
 ```yaml
 audit:
   status: approved
@@ -147,27 +156,60 @@ git commit -m "graph: captain approves ms.no-ghost-theorem"
    `https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F2BEB1F0811FE1D8458547AAB73D12AF/9781139248570c6_p307-362_CBO.pdf/low-energy-effective-action.pdf`
 4. Thorn 1985 Santa Barbara 42 页报告（需免费注册，是否注册请船长决定）：`https://inis.iaea.org/records/szqhd-hct30`
 5. GGRT 1973 正文（CDS 394307，MARC PUBLIC 但反爬拦截；Wayback 快照存在）：`https://cds.cern.ch/record/394307/files/CM-P00058492.pdf`
+6. **GSW Vol.1 ch.2 §2.3.3「The no-ghost theorem and the spectrum-generating algebra」，pp.102–112（ISBN 9781107029118）**：与第 2 节 critical-dimension-bosonic canonical_text (I) 的 Δ_n 公式、第 3 节 no-ghost-theorem 的 GT 论证交叉引用均相关，目前 L0（`literature/extractions/gsw-1987-v1.md` §1）——WebFetch 卡在 13 MB 上限（`docs/ROADMAP.md` L89），`assets.cambridge.org` frontmatter 链接连续 3 次 `Socket is closed`，本轮**未找到可用的 Cambridge Core 单章内容页链接**（不同于第 3 项 Vol.2 ch.13 那样能定位到具体 content/view 哈希 URL）。请船长在机构订阅（Cambridge Core / 图书馆）里按 ISBN 搜 *Superstring Theory Vol. 1: Introduction* 并取 pp.102–112。
 
 下载后放 `literature/raw/`（已 gitignore）并告知，researcher 即可逐页抽取。
 
 ## worktree 清理
 
-当前 `.claude/worktrees/` 下有约 248 个 worktree、`main` 已有约 484 条已合并分支，规模太大且几分钟内就会过期，**不在本文档里逐条枚举快照**。安全清理建议用下面的脚本先生成"已合并、可删"清单，人工过一眼再执行，不要盲目 `-D`/`--force`：
+当前 `.claude/worktrees/` 下有约 248 个 worktree、`main` 已有约 484 条已合并分支，规模太大且几分钟内就会过期，**不在本文档里逐条枚举快照**。安全清理建议用下面的脚本先生成"已合并、可删"清单，人工过一眼再执行，不要盲目删除：
 
 ```bash
-# 只列出分支已合并到 main 的 worktree（安全可删的候选）
+# 只列出「分支已合并到 main」且「工作区无未提交改动」两个条件同时满足的 worktree（SAFE = 可删候选）。
+# 只满足其一（例如已合并但还有未提交改动）会单独列进 REVIEW，需要人工看一眼再决定，脚本不判它 SAFE。
 git worktree list | grep -v '\[main\]' | while IFS= read -r line; do
   wtpath=$(echo "$line" | awk '{print $1}')
   branch=$(echo "$line" | sed -n 's/.*\[\(.*\)\]$/\1/p')
-  if git branch --merged main --format='%(refname:short)' | grep -qx "$branch"; then
+  merged=false
+  git branch --merged main --format='%(refname:short)' | grep -qx "$branch" && merged=true
+  dirty=$(git -C "$wtpath" status --porcelain 2>/dev/null)
+  if $merged && [ -z "$dirty" ]; then
     echo "SAFE: $wtpath  ($branch)"
+  elif $merged; then
+    echo "REVIEW（已合并但有未提交改动，不判 SAFE）: $wtpath  ($branch)"
   fi
 done
 ```
 
-对清单里每一行，确认后依次：
+**这只生成一份清单，脚本本身不执行任何删除。** 对清单里 `SAFE:` 开头的每一行，确认后手动依次执行：
 ```bash
-git worktree remove <wtpath>        # 无未提交改动时；若有改动且确认可丢弃，加 --force
-git branch -d <branch>              # 已合并用 -d（安全删），不要用 -D
+git worktree remove <wtpath>        # SAFE 行已保证无未提交改动，不需要、也不要加 --force
+git branch -d <branch>              # 已合并用 -d（安全删，拒绝删未合并分支），不要用 -D
 ```
-**不要** `git worktree remove --force` 或 `git branch -D` 任何未出现在上面 SAFE 清单里的条目——它们可能是还在跑的 agent 分支，删了就是丢工作。
+**不要**对 `REVIEW:` 行或任何未出现在清单里的条目执行 `git worktree remove --force` 或 `git branch -D`——`--force`/`-D` 会绕开"未提交改动"与"未合并"两道保护，`REVIEW` 行之所以没被判 SAFE，往往就是因为还有未提交的工作，删了就是丢工作；它们也可能是还在跑的 agent 分支。
+
+---
+
+## 修订记录（本轮，对照 `review-captain-packet.md`，main 54674d3 reviewer 只读快照）
+
+逐条核实源文件后修订；全部 15 项（9 CONFIRMED + 6 PLAUSIBLE）均属实并已采纳，无拒绝项。
+
+| # | 类别 | 原文位置（旧行号） | 问题摘要 | 处理 |
+|---|---|---|---|---|
+| 1 | CONFIRMED | 原 L100（第 3 节） | "四轮回译裁定 faithful" 掩盖了前三轮均 drift | 改为"前三轮均裁定 drift（各致换代 v→v2→v3→v4），第四轮首次 faithful"；并补记第五至第九轮记账（R5–R9） |
+| 2 | CONFIRMED | 原 L105/L114/L118（第 3 节） | 误称 `[K_m,A]=0`/纵向算子构造/D>26 负模见证"图内无节点、Lean 未做" | 三处均改正：`worldsheet.gt-longitudinal-k-algebra`（formalized，`Longitudinal.lean`）与 `worldsheet.negative-norm-physical-state-above-26`（formalized，`LevelTwo.lean`）已补入"(B-26) 船长须知"与 Lean 覆盖 bullets |
+| 3 | CONFIRMED | 原 L114（第 3 节） | "sources 只挂 GT1972 摘要"——该推导实有 7 条来源 | 改为"sources 有 7 条；但张成引理这一步论证本身的一手来源只到 GT1972 摘要级" |
+| 4 | CONFIRMED | 原 L86（第 2 节） | 误称 GSW §2.3.1 已获取核实、无专属缺口 | 已在前序提交改写（第 2 节"仍缺一手文献"段），列出 (2.3.32) L0、ch.2 13 MB WebFetch 上限、Δ_n 单一来源、kato-ogawa-1983 未核实；并把 GSW v1 ch.2 §2.3.3 加入船长点击清单第 6 项 |
+| 5 | CONFIRMED | 原 L60（第 2 节） | "F1、F2 curator 处理中"已过时 | 已在前序提交改为 F1/F2 均已处理完成（diff_notes 第三轮修订记 L348–375） |
+| 6 | CONFIRMED | 原 L62/L64（第 2 节） | 误称"五条依赖/共 5 个一级依赖"，实为 7 条，why 只显示 5 条压低支路 | 已在前序提交改正为 7 deps，并说明 why 树只展示压低支路 |
+| 7 | CONFIRMED | 原 L118（第 3 节） | 误称 "C.4 进行中，未合并"；`DDFGram.lean` 已在 main（c56ccf5） | 随第 2 项一并改正；本轮进一步核实 `transverse-ddf-fock-gram-matrix` 已新增 `--via-lean` 推导（formalized），从 why 瓶颈树中退出，Lean 覆盖 bullets 同步更新 |
+| 8 | CONFIRMED | 原 L12/L50/L92（三节标题） | 三节 canonical_text 均标"逐字"，实为节录改写；no-ghost (1b) 漏"商上内积正定"半句 | 三节标题改为"节录"；no-ghost 第 3 节补回漏收的"模掉零模态子空间后诱导内积正定"分句 |
+| 9 | CONFIRMED | 原 L153–171（worktree 清理脚本） | `--merged main` 把 0 提交的新分支也算 merged；未提交改动的 worktree 会被误判 SAFE；配合 `--force` 提示构成丢工作路径 | 脚本重写：SAFE 判定改为"已合并 **且** `git status --porcelain` 为空"两条件同时满足；不满足两者之一的单列 REVIEW，人工判断；删除 `--force` 提示，明确"脚本只生成清单，不执行删除" |
+| a | PLAUSIBLE | 原 L67（第 2 节 why 树） | `conformal-normal-ordering-v2` 挂错层级；`bc-ghost-cft`/`tt-ope-central-charge-v2` own/effective 标法混用 | 已在前序提交移至 layer 4（挂在 `bc-ghost-cft` 下），并区分 own 与 effective 标注 |
+| b | PLAUSIBLE | 原 L57（第 2 节） | 未提示 canonical_text 首段"(II) 有效状态亦为 PA"插注已过时（`old-covariant-v3` 现 rigorous） | 已在前序提交加"节录说明"括注，指出该插注本身已过时 |
+| c | PLAUSIBLE | 原 L60（第 2 节） | "两处方向写反"表述不准；实际只有第一轮 B1 写反，B2 是"唯一性"不成立（不是方向写反） | 已在前序提交改为仅 B1 方向写反的准确表述 |
+| d | PLAUSIBLE | 原 L71（第 2 节 Lean 覆盖） | `free-boson-central-charge-d` 被称"旁支"，实为直接依赖 | 已在前序提交改为直接依赖 |
+| e | PLAUSIBLE | 原 L32–37（第 1 节批准 YAML 片段） | 未注明批准时须保留 `audit.back_translation` 记录（`validate` 要求 approved 状态仍附带回译记录） | 三节批准操作段均已补充该提示（第 1、3 节本轮补，第 2 节前序提交已带类似措辞） |
+| f | PLAUSIBLE | 原 L105（第 3 节） | "蓝图逐字标注"实出自 `docs/ROADMAP.md`（约 L193），非 `formal/BLUEPRINT-noghost.md`；点击清单编号与 ROADMAP 不同（URL 五条一致） | 改为注明出自 ROADMAP.md，非蓝图逐字；点击清单编号独立维护，不与 ROADMAP 对齐 |
+
+**本轮修订之外的额外核验**（非评审项，属现场重新核实，一并记录）：合并 main 59 个提交后，第 3 节的"当前有效状态"与 why 瓶颈树已按合并后状态重新现场核验（`uv run stringgraph why worldsheet.no-ghost-theorem-v4`），确认瓶颈从"层1 2 deps 并列 transverse-ddf-fock-gram-matrix/kac-determinant-v2"变为单支路"kac-determinant-v2 → verma-module-free-over-negative-part → pbw-theorem"（4 层），因为前者已升级为 formalized；同时补记 `formal/StringFormal/NoGhost/Assembly.lean` 的条件化无鬼定理 `no_ghost_of_spans` 与 `worldsheet.ddf-spans-physical-states-level-one`（N=1 张成，formalized）——两者均是本轮修订前不存在或未接线的新事实，不在原评审的 15 项之列，但直接影响第 3 节内容的准确性，故一并写入。

@@ -58,7 +58,7 @@ depends_on:
       ⚠ 该卡 effective = formalized，不压低本推导状态。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/DDFGram.lean（全文；主声明 StringFormal.NoGhost.ddf_gram_diagonal）；抽象母定理 formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family；依赖 formal/StringFormal/NoGhost/{DDFAlgebra.lean :: lie_ddfOp_ddfOp, VertexAdjoint.lean :: Fock.towerPairing_ddfOp_left, DDFOperatorAll.lean :: ddfOp_mem_towerPhysSubmodule, LightCone.lean :: TransverseFrame / towerVacuum / ddfSpan / towerVacuum_mem_towerPhysSubmodule / ddfSpan_le_towerPhysSubmodule, Witness.lean :: noghost_transverse_gram_satisfiable}"
+    loc: "formal/StringFormal/NoGhost/DDFGram.lean（全文；主声明 StringFormal.NoGhost.ddf_gram_diagonal；rung 定位 §RungGrading/§DDFRung/§FrameRung :: ddfOp_mem_towerRungSubmodule / ddfMonomial_mem_towerRungSubmodule / frameMonomial_mem_towerRungSubmodule / ddf_gram_of_level_ne_of_rung / ddfSpan_eq_iSup_rung）；抽象母定理 formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family；依赖 formal/StringFormal/NoGhost/{DDFAlgebra.lean :: lie_ddfOp_ddfOp, VertexAdjoint.lean :: Fock.towerPairing_ddfOp_left, DDFOperatorAll.lean :: ddfOp_mem_towerPhysSubmodule, LightCone.lean :: TransverseFrame / towerVacuum / ddfSpan / towerVacuum_mem_towerPhysSubmodule / ddfSpan_le_towerPhysSubmodule, Witness.lean :: noghost_transverse_gram_satisfiable}"
     note: |
       本仓库，分支 agent/formalizer/noghost-c4（reviewer 在总线消息 1086 通报该分支已并入
       agent/formalizer/noghost-b 的 7 个提交，是其超集），由 lead 合入 main。
@@ -105,7 +105,9 @@ summary: |
   没有这条，(2) 的「⟨·,·⟩ 限制到 H^⊥(k) 上正定」在 Lean 侧读不出来。
 
   **第五步：目标 (3)。** `ddfLevel d := Σ n·d(i,n)`，`ddf_gram_of_level_ne`：N(d) ≠ N(e) ⇒ 配对为零
-  （由 (1) 加 N(d) ≠ N(e) ⇒ d ≠ e）。**只覆盖 (3) 的正交那一半**，末句的层归属未形式化（见 gaps）。
+  （由 (1) 加 N(d) ≠ N(e) ⇒ d ≠ e）。**2026-09-11 追记**：末句的层归属现已形式化——
+  `frameMonomial_mem_towerRungSubmodule`（|{d}⟩ ∈ rung −N(d)）与 `ddf_gram_of_level_ne_of_rung`
+  （同一正交性改由层间正交证出，前件更弱，见 notes (e)）；只剩 rung ↔ 振子能级的联动未做（见 gaps）。
 
   【为什么标 formalized】目标 (1)(2) 与 (3) 的主断言各有具名无 sorry 的 Lean 声明；
   五条依赖卡 effective 全为 formalized。`--via-oscillator-recursion`（手写递推，rigorous）
@@ -127,7 +129,7 @@ summary: |
   不参与传播），指针仍在图里，状态不受影响。若 lead 要传播效果，见 commit 1152cbf 的原文，
   并须同步改那条测试断言（工具侧改动，单独提交，由 lead 裁决）。
 gaps:
-  - "**(3) 的末句未形式化**：Lean 的 `ddf_gram_of_level_ne` 只给「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」。目标 (3) 末句「这与『|{d}⟩ 落在塔的第 N(d) 层（动量 k − N(d) k_0）』是同一件事，也可由塔的层间正交直接读出」**没有对应声明**——`ddfLevel` 的 docstring 逐字 'that placement is *not* proved here'。⇒ 本推导覆盖 (3) 的正交半，不覆盖层归属的识别。"
+  - "**(3) 的末句已关闭（2026-09-11 追记，DDFGram rung 定位合入 main 后）**：原 gap 写「|{d}⟩ 落在塔的第 N(d) 层……没有对应声明」。现在有了：`ddfMonomial_mem_towerRungSubmodule` / `frameMonomial_mem_towerRungSubmodule` 给 |{d}⟩ ∈ towerRungSubmodule(−N(d))（即动量 k − N(d) k_0；塔的层指标取 +j·k_0，故是 **rung −N(d)**），`ddf_gram_of_level_ne_of_rung` 把「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」**改由层间正交**（`towerPairing_eq_zero_of_mem_towerRungSubmodule`）证出，逐字兑现目标 (3) 末句「也可由塔的层间正交直接读出」。`ddfSpan_eq_iSup_rung` 另给 ddfSpan = ⨆_N (ddfSpan ⊓ rung −N)，使 Gram 矩阵成为分块对角。**仍缺**：「rung 与振子能级的联动」——|{d}⟩ ∈ towerBigrade(−N(d), N(d))（即振子能级恰为 N(d)）**未做**；只有 rung 那一半，没有 level 那一半。"
   - "**目标 (1) 的『任意交换环』由母卡承载，不由本文件承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`（`ddfOp` 的构造需要 1/2 一类的有理数）。完全一般的条件命题是 `StringFormal.gram_of_heisenberg_family`（任意交换环，图上 math.heisenberg-family-gram-matrix）。见 notes (d)。"
   - "**(H1)–(H4) 在本卡里仍是假设**（目标卡边界 (a)）：Lean 把它们在 DDF 上证出来了，但那是 `ddfFamily_*` 四条定理的内容，不是本卡的断言；本卡的机检链之所以经过它们，只因 lean_decl 取的是 DDF 实例。两种读法的分界写在 notes 与两条 depends_on 的 note 里。"
   - "**无张成**（Lean 文件头 Mathematical notes 第 4 条 / Gaps 第 1 条）：没有任何声明说 DDF 态穷尽横向物理谱。`ddf_span_pos` + `ddfSpan_le_towerPhysSubmodule` 只给「DDF 扇区是物理子空间里的一个正定子空间」；整条无鬼定理还差 `hspan : H_phys ≤ ddfSpan ⊔ H_null`（`ddf-spans`，蓝图 §B）。目标卡边界 (b) 同款。"
@@ -169,6 +171,18 @@ notes: |
       ℚ-代数是构造 DDF 算子（顶点算子的指数、1/2 一类系数）才需要的。
       ⇒ 记账读法：目标卡 (1) 的一般性由**母卡**承载，本文件承载的是「DDF 族确实满足 (H1)–(H4)」
       这一实例化。两条边（math.heisenberg-family-gram-matrix 与本文件）合起来才覆盖卡面。
+
+  (e) **(3) 的层间正交证明前件比 (1)(2) 弱（2026-09-11 追记）。**
+      `ddf_gram_of_level_ne_of_rung` 的证明**只用动量守恒**：`ddfOp_mem_towerRungSubmodule`
+      （A^ε_n 把 rung j 送到 j + n）逐因子归纳给 |{d}⟩ ∈ rung −N(d)，再用不同 rung 本来正交。
+      它**不用**正交归一 `horth`、不用 Heisenberg 递推、不用 (H2)(H4)（DDFGram.lean docstring 逐字：
+      'it needs neither the orthonormality of the frame nor the Heisenberg recursion, only momentum
+      conservation'）。⚠ 但 Lean 语句里 `horth` 仍出现：`ddfMonomial` 这个**对象**的定义用
+      `commute_heisCreation_ddfFamily hη hbb hba hεb horth` 保证因子次序无关，故签名带着它；
+      是对象带前件，不是证明用前件。
+      更底层的 `ddfOp_mem_towerRungSubmodule` 是**纯运动学**：只需 `hη`、`hεb`（定义 A^ε_n 本身所需的
+      那两条），**不需要** `hbb`/`hba`/正交归一——这是 worldsheet.ddf-operators-v6 那个对象的一条独立性质
+      （「A^ε_n 把动量 k + j k_0 移到 k + (j+n) k_0」），该卡目前未登记；那张卡在另一 claim 下，已报告 lead。
 
   【与 --via-oscillator-recursion 并存】那条是本图自补的手写递推（rigorous，走
   docs/STATUS_LEVELS.md 的例外条款），**保留不删**：它是 Lean 版的前身与独立复核物，

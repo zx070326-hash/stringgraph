@@ -243,9 +243,10 @@ notes: |
   （Lean docstring 把它写作「ε·k = 0」，那里的 k 是塔的基点动量，本卡记作 p、重标度后记作 a；
   与参考向量 k_0（重标度 b）不是一回事。）
   **本卡的四条常设假设 (η)(N)(S)(T) 不蕴含 (T′)**：(T) 只说 ε·k_0 = 0。
-  · **反例（机检存在性，不是手算）**：formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 整数见证
-    η = diag(−1,+1,+1)、b = (1,1,0)、a = (0,1,1)、ε = e_2 满足 (η)(N)(S)(T) 与 ε·ε = 1
-    （`noghost_hypotheses_satisfiable_int`），却有 **ε·a = 1 ≠ 0**。
+  · **反例（见证机检满足四条常设假设；ε·a = 1 为一行手算）**：formal/StringFormal/NoGhost/WitnessInt.lean 的 D = 3 整数见证
+    η = diag(−1,+1,+1)、b = (1,1,0)、a = (0,1,1)、ε = e_2 机检满足 (η)(N)(S)(T) 与 ε·ε = 1、a·a = 2
+    （`noghost_hypotheses_satisfiable_int`），而 **ε·a = 1 ≠ 0** 是一行手算（reviewer-batch30 复核，2026-09-11）：
+    WitnessInt.lean **没有**这条的 Lean 声明（只有 D ≥ 4 的 ε·a = 0 版本），docstring 提到它但不机检。
     D ≥ 4 时改取 ε = e_3 即可同时满足 (T′)（`noghost_hypotheses_satisfiable_int_transverse_momentum`），
     Witness.lean 的 Q-代数见证也满足它（`dotVec_witnessTransverseFrame_witnessMomentum`）。
     故「横向性足够」是**假的**，而不是「暂时没证」。

@@ -1,0 +1,113 @@
+id: worldsheet.no-ghost-theorem-conditional-on-ddf-spanning--via-lean
+target: worldsheet.no-ghost-theorem-conditional-on-ddf-spanning
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-spanning-hypothesis
+    inferred: false
+    note: |
+      **条件命题的前件，不是证明步骤。** 这是 Lean 声明 `no_ghost_of_spans (hspan : DDFSpans η a b hη Ε)`
+      里显式的假设参数；证明体的第一步就是 `Submodule.mem_sup.1 (hspan hv)`（把物理态 Ψ 拆成
+      DDF 态 d 加零态 χ）。来源逐字可在 Assembly.lean 读到，故 **非 inferred**；它也**不是**
+      docs/STATUS_LEVELS.md 意义下的「接口边」（接口边不在机检链上，`hspan` 在链上）。
+      ⚠ **该卡 open（刻意无推导）会把本推导的 effective 压到 open——这是实话**：
+      条件版的有效状态就该由前件决定。本推导自身 status 仍是 formalized（Lean 无 sorry），
+      工具会同时显示 own=formalized / effective=open，两者都对，读卡时请都看。
+      **不要**为抬高 effective 而删这条边或给前件挂弱推导。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    inferred: false
+    note: |
+      **DDF 扇区正定**：`StringFormal.NoGhost.ddf_span_pos`（DDFGram.lean；该卡 --via-lean 推导
+      summary 第四步登记的那条）——有序域上 0 ≠ d ∈ ddfSpan ⇒ ⟨d, d⟩_T > 0。
+      在 (1a) 的证明里给 ⟨d,d⟩ ≥ 0（`(ddf_span_pos …).le`，d = 0 时用 `simp`）；
+      在 (1b) 的证明里由 ⟨d,d⟩ = 0 逼出 d = 0（`absurd hdd (ne_of_gt (ddf_span_pos …))`）。
+      ⚠ 该卡的 formal.lean_decl 是 `ddf_gram_diagonal`，`ddf_span_pos` 是同一文件里由它推出的
+      结论（卡面 (2) 末句的不等式），该卡的 --via-lean 推导已逐字登记它。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      **零态与商型**（TowerNull.lean）。用到四条：
+      `towerPairing_add_null`（(3)：⟨d + χ, d + χ⟩_T = ⟨d, d⟩_T，d 物理、χ 零态）——
+        是 `towerPairing_self_eq_of_spans` 与 (1b) 证明里的范数计算；
+      `towerPairing_self_eq_zero_of_mem_towerNullSubmodule`（(2) 的「零态自身范数为零」）——(1b) 的 ⇐ 方向；
+      `TowerPhysQuot` / `towerPhysMk_surjective` / `towerQuotientPairing_mk` / `mem_towerNullInPhys`
+        （(4) 的商、商映射满射、计算规则）——把 (1a)(1b) 抬到商上得到 (2)。
+      该卡的 formal.lean_decl `towerQuotientPairing` 逐字是目标卡断言 (2) 里的型。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **DDF 态是物理态**：`ddfSpan_le_towerPhysSubmodule`（LightCone.lean），其证明是对 DDF 单项式
+      归纳、每步用该卡的 formal.lean_decl `ddfOp_mem_towerPhysSubmodule`，基态物理由
+      `towerVacuum_mem_towerPhysSubmodule`。在本推导的三条定理里各被调用两次
+      （`towerPairing_add_null` 的两个「物理」前提都要 d ∈ H_phys）。
+      没有它，交叉项 ⟨d, χ⟩ 不能被零态的定义消掉（零态只与**物理态**正交）。
+      ⚠ 这条边不在任务给的四条清单里，是 curator 对照 Assembly.lean 证明体补的：
+      它是真实的机检环节，不是语境边。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **载体与型**：塔 `TowerFock D K`、塔上的双线性型 `Fock.towerPairing η`（目标卡的 ⟨·,·⟩_T）
+      与「层间正交」这条约定式定义。目标卡断言 (1a)(1b) 里的每个配对都是这个型；
+      `ddf_span_pos` 与 `towerPairing_add_null` 都是关于它的陈述。该卡是 formalized 定义卡。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.no_ghost_of_spans（目标声明，§NoGhost）；同节 towerPairing_self_eq_of_spans、towerPairing_self_nonneg_of_mem_towerPhys_of_spans、towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans；前件 DDFSpans（§Spanning）。调用的外部声明：DDFGram.lean :: ddf_span_pos；TowerNull.lean :: towerPairing_add_null / towerPairing_self_eq_zero_of_mem_towerNullSubmodule / TowerPhysQuot / towerPhysMk_surjective / towerQuotientPairing_mk / mem_towerNullInPhys；LightCone.lean :: ddfSpan_le_towerPhysSubmodule"
+    note: |
+      本仓库，formalizer 分支 agent/formalizer/noghost-c5（lead 以 34b67ef 合入 main），
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build` 与 `check-axioms`**；
+      本分支只改 graph/。
+  - ref: goddard-2008
+    loc: "§6, p.15, (6.4) 之后的一句：由 |ψ⟩ = |f⟩ + |n⟩ 得 ⟨ψ|ψ⟩ = ⟨f|f⟩ ≥ 0"
+    note: |
+      文献侧对应。**不承载本推导**——那里只有一句话；本推导的论证是 Lean 证明。
+summary: |
+  机器检查的证明，formal/StringFormal/NoGhost/Assembly.lean §NoGhost（蓝图 §C.5）。
+  整个文件是「若 DDFSpans 则 …」的形式；**D = 26 一次不出现**，有序域是唯一的额外结构
+  （「正定」需要序）。四步：
+
+  **第 1 步（范数计算，`towerPairing_self_eq_of_spans`）。** 设 Ψ ∈ H_phys。
+  由前件 `hspan` 拆 Ψ = d + χ，d ∈ ddfSpan、χ ∈ H_null。d 是物理态
+  （`ddfSpan_le_towerPhysSubmodule`），χ 与一切物理态正交，故
+  `towerPairing_add_null` 给 ⟨Ψ, Ψ⟩_T = ⟨d, d⟩_T（两个交叉项与 ⟨χ,χ⟩ 都为零）。
+
+  **第 2 步（(1a)，`towerPairing_self_nonneg_of_mem_towerPhys_of_spans`）。**
+  ⟨Ψ,Ψ⟩_T = ⟨d,d⟩_T；d = 0 时为 0，否则 `ddf_span_pos` 给 > 0。故 ≥ 0。
+
+  **第 3 步（(1b)，`towerPairing_self_eq_zero_iff_mem_towerNullSubmodule_of_spans`）。**
+  ⇐：零态自身范数为零（`towerPairing_self_eq_zero_of_mem_towerNullSubmodule`）。
+  ⇒：⟨Ψ,Ψ⟩ = 0 ⇒ ⟨d,d⟩ = 0（第 1 步）⇒ d = 0（否则 `ddf_span_pos` 给 > 0，矛盾）⇒ Ψ = χ ∈ H_null。
+
+  **第 4 步（(2)，`no_ghost_of_spans`）。** 取商中任意类 x，用 `towerPhysMk_surjective` 取代表元 Ψ，
+  `towerQuotientPairing_mk` 把 ⟨x,x⟩_quot 化为 ⟨Ψ,Ψ⟩_T；(1a) 给 ≥ 0；若 = 0 则由 (1b) Ψ ∈ H_null，
+  `mem_towerNullInPhys` + `Submodule.Quotient.mk_eq_zero` 给 x = 0。∎
+
+  【为什么标 formalized（own）而 effective 会是 open】
+  目标声明无 sorry；五条依赖里四条 effective = formalized，
+  **一条（前件 worldsheet.ddf-spanning-hypothesis）effective = open**。
+  按 effective = min 规则本推导与目标卡的有效状态为 open。这是条件命题的正确记账，
+  见目标卡 notes 与上面前件那条边的 note。
+gaps:
+  - "**前件未证**：worldsheet.ddf-spanning-hypothesis 无推导（刻意）。这不是本推导的缺口——本推导对前件的使用是逐字的——而是整条无鬼定理**唯一**剩余的非机检内容。它在 D = 26 之外的真伪本图不断言。"
+  - "**没有 `noGhostEquiv`**（Assembly.lean Gaps 第 2 条）：不构造 ddfSpan ≃ₗ H_phys ⧸ H_null。单射由 `ddf_span_pos` 得，满射逐字 = 前件；同构不比本推导的结论 + 前件多任何信息，故不写。目标卡边界 (c) 同款。"
+  - "**假设集非空性未证**（Assembly.lean Gaps 第 3 条）：Witness.lean / WitnessInt.lean 兑现四条几何假设与一个标架，但**没有**任何 (D, k, k_0, Ε) 上 `DDFSpans` 的见证。即本推导目前是一条**空条件命题**可能性未被排除的陈述——不过这与「26 只在前件里」的记账无关。"
+  - "**有序域是额外结构**：`[LinearOrder K] [IsStrictOrderedRing K]`。目标卡把它写进设定；在一般交换 Q-代数上 (1a)(2) 的「≥ 0」无意义，(1b) 与第 1 步的范数计算则不需要序（Lean 侧 `towerPairing_self_eq_of_spans` 带 `omit [LinearOrder K] [IsStrictOrderedRing K]`）。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是 noghost-c5 由 lead 合入 main。本分支不含 Lean 改动。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目
+  （lake build 通过、目标声明无 sorry、公理仅 propext / Classical.choice / Quot.sound）。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+  **`worldsheet.ddf-operators-v6` 不单列为边**：目标卡设定里的 A^ε_n 与 ddfSpan 这两个对象
+  已由 worldsheet.transverse-ddf-fock-gram-matrix（其 --via-lean 推导依赖 v6）与
+  worldsheet.ddf-operators-preserve-physical-states（目标陈述逐字用 v6 记号）两条边传递供给；
+  Assembly.lean 的证明体不直接调用任何 `ddfOp_*` 引理。按 docs/STATUS_LEVELS.md 接口边裁决
+  「只提供语境不承担论证的边不得存在」，不另立。
+
+  **`worldsheet.old-covariant-physical-states` 不单列为边**：H_phys 的两条条件由
+  worldsheet.tower-physical-quotient-form 与 worldsheet.ddf-operators-preserve-physical-states
+  的目标陈述逐字装在塔上，本推导不直接展开物理态条件（只用 `hv : Ψ ∈ towerPhysSubmodule …` 作为
+  黑箱传给 `hspan` 与 `towerPairing_add_null`）。
+
+  curator，2026-09-11，noghost-conditional（分支 agent/curator/noghost-conditional）。
+author: curator
+created: "2026-09-11"

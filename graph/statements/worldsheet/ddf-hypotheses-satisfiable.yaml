@@ -79,7 +79,7 @@ notes: |
   （已由本段与首段更正取代），但它给出的计算本身没错：它证的是
   「在 a 支撑于 {0,1} 的标架下 ½ 被强制」，那是对**该标架**的正确论断。
   ⚠ D = 3 的那个整数见证**不满足** (T′) ε·p = 0（ε·a = 1 ≠ 0），因此它同时是
-  worldsheet.ddf-operators-v6 notes 里「(T) 不蕴含 (T′)」的机检反例；
+  worldsheet.ddf-operators-v6 notes 里「(T) 不蕴含 (T′)」的反例（四条假设机检，ε·a = 1 手算，无 Lean 声明）；
   D ≥ 4 时取 ε = e_3 可同时满足两者（`noghost_hypotheses_satisfiable_int_transverse_momentum`）。
 
   【为什么立卡（curator 2026-09-11，small-backlog-12 追加，lead 指示；依蓝图 §C.2）】

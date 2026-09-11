@@ -66,6 +66,23 @@ StringFormal/
                             良基递归）。桥引理 `card_partition_eq_card` 把计数搬到显式
                             `Finset (Multiset ℕ)` 字面量上（那里 `decide` 可用），穷尽性靠剥一个
                             部分 + 对总和递归。使 `finrank_levelSpan_le_card_partition` 可在 N ≤ 5 取数值
+  Math/EulerPoincare.lean   **Euler–Poincaré 原理** Σ(−1)ⁿ dim Cⁿ = Σ(−1)ⁿ dim Hⁿ（图卡 `math.euler-poincare-principle`）。
+                            **Mathlib 只有定义没有定理**：`Algebra/Homology/EulerCharacteristic.lean` 给了
+                            `eulerChar` / `homologyEulerChar` 与它们的 finsum↔Finset 搬运，**没有**
+                            `eulerChar = homologyEulerChar`，所以不走桥层。索引照 `HomologicalComplex`
+                            用**双索引** `d m n : C m →ₗ C n`（`n ≠ m+1` 时为 0），使
+                            `cocycles = ker (d n (n+1))` 与 `coboundaries = range (d (n-1) n)` 同为
+                            `Submodule K (C n)`，**全程无 cast**；`IsComplex.comp_eq_zero` 故意对**任意三元组**
+                            `l m n` 陈述（非相邻时由 shape 自动成立），这样在 `(n-1,n,n+1)` 处用它不需任何指标运算。
+                            **分次是真的 ℤ**：符号用 Mathlib 的 `Int.negOnePow`，求和在 `Finset.Ico a b`，
+                            电报项 `F n = (−1)ⁿ dim Bⁿ`。`n+1-1 = n` 这一步用
+                            `congrArg (fun m => range (d m (n+1)))`（该函数的值域 `Submodule K (C (n+1))`
+                            不依赖 m，故无需 dependent rewrite；`simp only [h]` 在此处会失败）。
+                            声明：`euler_poincare`（卡面 (1)，前件 `Subsingleton (C (a-1))` 与 `Subsingleton (C b)`）、
+                            `euler_poincare_finsum`（全分次 `∑ᶠ`，前件是卡面的「只有有限多个 Cⁿ ≠ 0」）、
+                            `finrank_cohomology_zero_eq`（卡面「特别地」）、`euler_poincare_graded`
+                            （卡面 (2)，特征标等式在 `Λ → ℤ` 里）。**不做**号差版（卡面 (a) 自己排除）、
+                            `Hⁿ(C) = ⊕_λ Hⁿ(C_λ)` 的分解、与 Mathlib `HomologicalComplex.homology` 的桥
   Math/DedekindEtaS.lean    η 的 S 变换 `η(−1/τ) = (−iτ)^{1/2}η(τ)`（把 Mathlib 的 `(√i)⁻¹√z` 归一化到弦论形状）
   Math/DedekindEtaT.lean    η 的 T 变换 `η(τ+1) = e^{iπ/12}η(τ)`（Mathlib 无；从定义直接证）。**无条件成立，
                             不需要 Im z > 0**；含 `τ₂|η|⁴` 的 T 不变性，与 S 版合成两个生成元
@@ -88,12 +105,26 @@ StringFormal/
                             `volume_eq_lintegral_inv_im_sq` 把 Mathlib 权重 `(1/‖y‖₊)²` 钉成 `1/τ₂²`。
                             η-free；**取向版（带符号的 2-形式 dτ ∧ dτ̄）未形式化**
   Math/MathlibBridges.lean  **桥层**（`namespace StringFormal.Bridge`）：`math.dedekind-eta-function`
-                            与 `worldsheet.modular-group-psl2z` 两张定义卡。η 侧把 Mathlib 的
+                            与 `worldsheet.modular-group-psl2z` 两张定义卡，外加 **ζ(−1) 节**。η 侧把 Mathlib 的
                             `ModularForm.eta` 逐字展开成 `q^{1/24}∏(1−q^n)` 并接上分支约定
                             `q = e^{2πiτ}`、`q^{1/24} = e^{πiτ/12}`；PSL 侧给出 `(aτ+b)/(cτ+d)`、
                             `Im(γτ) = Imτ/|cτ+d|²`、S/T 的作用、**`Z(SL(2,ℤ)) = {±I}`**
                             （`center_eq_pm_one`，Mathlib 与本项目此前都没有）与作用降到
-                            `PSL(2,ℤ)`（`MulAction PSL2Z ℍ`）
+                            `PSL(2,ℤ)`（`MulAction PSL2Z ℍ`）；ζ 侧 **`riemannZeta_neg_one : ζ(−1) = −1/12`**
+                            （Mathlib 只有一般式 `riemannZeta_neg_nat_eq_bernoulli`，**没有**具名的 ζ(−1)）
+                            与卡 `worldsheet.light-cone-normal-ordering-constant` 的算术部分
+                            `lightCone_normalOrderingConstant : ((D−2)/2)·ζ(−1) = −(D−2)/24`（D=26 版给 −1）。
+                            ⚠ 这些**不**触及 `worldsheet.zeta-regularized-sum-of-integers`：那张卡多主张
+                            「有限部分就是物理零点能」，Lean 里无对应物，不因此升档
+  Math/RegulatedSum.lean    指数截断和（图卡 `worldsheet.regulated-sum-laurent-expansion`）：
+                            闭式 `Σ_{n≥1} n e^{−un} = e^{−u}/(1−e^{−u})² = 1/(4 sinh²(u/2))`（`u>0`）、
+                            **sinh 的三阶 Taylor 界** `|sinh x −(x+x³/6)| ≤ |x|⁵/100`（|x|≤1，由 Mathlib
+                            `Real.exp_bound` n=5，偶次项在 sinh 里抵消）、**Laurent 常数项**
+                            `Σ_{n≥1} n e^{−un} − 1/u² → −1/12 (u→0⁺)`（精确分解
+                            `1/(4s²)−1/u² = [(u−2s)/u³]·[1+2s/u]·[(2s/u)⁻¹]²`，三因子极限 −1/24、2、1，
+                            只用一次 squeeze）、形式幂级数版 `(Σ n Xⁿ)(1−X)² = X`（任意交换环，
+                            由 Mathlib `mk_add_choose_mul_one_sub_pow_eq_one` d=1 加位移）。
+                            **未做**：`O(u²)` 余项（只给极限）、u 的 `LaurentSeries` 版、θ-推广
   Virasoro/Witt.lean        Witt 代数（`ℤ →₀ R` 上的 LieRing/LieAlgebra 实例，任意交换环）
   Virasoro/Basic.lean       Virasoro 代数（Witt 的中心扩张，基于 Mathlib `LieAlgebra.ofTwoCocycle`）
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
@@ -192,6 +223,16 @@ StringFormal/
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
                             D ≥ 4 版另给 ε·a = 0。**只说假设集可满足**；DDF 算子本身仍需 Algebra ℚ
+  NoGhost/LevelTwoSpan.lean **蓝图 §B.6 的 N = 2 两条卡点**：(a) 产生指数的显式分量
+                            `creaExp_one`（Φ₁ = b·α₋₁）、`two_smul_creaExp_two`（2Φ₂ = (b·α₋₁)²+b·α₋₂），
+                            `vertexOsc_apply_polState`，由此 **A^ε_{−2}|0;k⟩ = [ε·α₋₂ − 2(ε·α₋₁)(k₀·α₋₁)]|…⟩**
+                            与 **A^ε_{−1}A^δ_{−1}|0;k⟩ = [(ε·α₋₁)(δ·α₋₁) + ½(ε·δ)((k₀·α₋₁)²−k₀·α₋₂)]|…⟩**
+                            （窗口是 {−2,−1,0,1}，j=1 项就是 DDF 代数的中心项；修正对 ε↔δ 对称）；
+                            (b) **level-2 物理态的完整刻画**：`level_two_cases`（单项式两形，靠删一个振子
+                            降到 level 1）、`levelTwoGen`/`exists_levelTwoGen_of_mem_levelSubmodule_two`、
+                            `Lop_one/two_apply_levelTwoGen` ⇒ `mem_physSubmodule_inf_levelSubmodule_two_iff`
+                            与塔版 `mem_towerPhys_bigrade_two_iff`（质壳 + D 条 + 1 条线性约束）。
+                            **N = 2 的张成 (c) 未做**（缺消元）；`ε·k = 0` 在 N = 2 仍是必需的额外假设
   NoGhost/DDFGram.lean      **DDF 态的 Gram（蓝图 §C.4）**：把 HeisenbergGram 的 gram_of_heisenberg_family；rung 分次：`ddfOp` 移 rung +n（纯运动学，只需 hη/hεb），`|d⟩` 在 rung −N(d)（`frameMonomial_mem_towerRungSubmodule`），`ddfSpan_eq_iSup_rung`；rung 与 level 联动未做
                             实例化到 A^ε_n。补上两条小引理 **Fock.towerPairing_towerVacuum_self**（(H3)）与
                             **ddfOp_towerVacuum_of_pos**（(H4)，一行：ddfWindow n vac = Icc n 0 = ∅）；
@@ -213,6 +254,31 @@ StringFormal/
                             **`ddfSpans_bigrade_neg_one_one`** 在光子片 `(rung −1, level 1)` 上
                             **无条件于 `D`** 关闭 `DDFSpansOn`。**`D = 26` 在本文件一次都不出现**——
                             它全部被吸收进 `DDFSpans`（蓝图 §B.5）
+  NoGhost/Glue.lean         **蓝图 §B 的「逐片 ⇒ 全体」**：双分次投影 `towerBigradeProj j N`
+                            （`x ↦ single j ((x j)_N)`，基于 `Fock.levelComponent`；**刻意不建
+                            `DirectSum.Decomposition`**，直和性从未被断言）；`L_m` 的双分次齐次性
+                            （`(j,N) ↦ (j,N−m)`，level `< m` 被杀）与交换关系
+                            `towerBigradeProj_towerLop`；**`towerBigradeProj_mem_towerPhysSubmodule`**
+                            （物理态的每个双分次分量仍物理，对 η,a,b 无假设）⇒
+                            **`towerPhys_le_iSup_bigrade`**；主引理 **`ddfSpans_of_forall_slice`**
+                            （每片 `DDFSpansOn` ⇒ `DDFSpans`；非格论平凡，因为 `⨆` 不对 `⊓` 分配）、
+                            质壳压缩量词的 `ddfSpans_of_forall_antidiagonal_slice(_int)`
+                            （`CharZero` 下只剩单条反对角线 `j = −N`）与 level 截断版
+                            `towerLevelLESubmodule` / `ddfSpansOn_towerLevelLE(_of_antidiagonal)`
+                            （§B.6 部分归纳的可陈述全局形式）；**`ddfSpansOn_towerLevelLE_one`**
+                            ——level `≤ 1` 整块（所有 rung）上张成引理**无条件于 `D`** 成立
+                            （`(0,0)` 片由新引理 `Fock.eq_C_of_mem_levelSubmodule_zero`
+                            「level-0 = 常数」给出）。**`D = 26` 同样一次不出现**
+  Virasoro/FockFreeLowLevel.lean  **Fock 模在 `Vir⁻` 下于层 `N ≤ 4` 自由**（固定动量）。`FockVir` 把
+                            Sugawara `virRep` 做成 `LieRingModule/LieModule` 实例（类型同义词必需：
+                            作用依赖 `η,a`）；真空是权 `(D, α'k²)` 的最高权向量，Verma 万有性质给
+                            `vermaToFock`，拉回 `pairing` 得 Verma 上的归一化逆变型，故 Fock Gram 行列式
+                            = `(D, α'k²)` 处 Kac 行列式（`gram_det_fockDesc{1,2,3,4}`）⇒
+                            `linearIndependent_fockDesc{1,2,3,4}`。副产品：**`hwv_ne_zero_of_two_le`**
+                            （`V(c,h) ≠ 0` 对任意自然数 `c ≥ 2` 与任意 `h`，洛伦兹见证）与
+                            **`kacDet{1,2,3,4}_massShell_26`**（`D=26, a₀=1` 下 `h = 1-N`：
+                            `N=1,2` 行列式为零——判据在零模态所在层空转；`N=3,4` 为 `2304` / `2649563136`）。
+                            一般 `N` 仍需 Kac 行列式（见蓝图 §B.2），对无鬼瓶颈无影响
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1

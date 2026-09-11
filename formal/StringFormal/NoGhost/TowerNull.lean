@@ -39,10 +39,14 @@ construction elaborates at `M := TowerFock D R` at all:
 
 > **Elaboration note (a real Mathlib-level obstruction, not a style choice).**  For
 > `M = ℤ →₀ k` with `k` a semiring — which is what `TowerFock D R = ℤ →₀ Fock D R` is —
-> instance synthesis for `HasQuotient ↥P (Submodule R ↥P)` **fails**, because `ℤ →₀ k` is
-> also an `AddMonoidAlgebra` and the two routes to `AddCommMonoid (ℤ →₀ k)`
-> (`AddCommGroup.toAddCommMonoid ∘ Finsupp.instAddCommGroup` versus
-> `Finsupp.instAddCommMonoid`) are not reducibly defeq.  Minimal repro against plain Mathlib:
+> instance synthesis for `HasQuotient ↥P (Submodule R ↥P)` **fails**.  Root cause (see
+> `formal/MATHLIB-ISSUE-quotient-finsupp.md` and `Scratch/QuotientInstanceRepro.lean`):
+> `Submodule.addCommGroup` only accepts a submodule whose `AddCommMonoid` slot is syntactically
+> `AddCommGroup.toAddCommMonoid ?G`, but `p.addCommMonoid` for `p : Submodule R (ℤ →₀ R)` is built
+> on `Finsupp.instAddCommMonoid`, which is not syntactically the monoid projection of
+> `Finsupp.instAddCommGroup` (the two are not reducibly defeq).  An earlier version of this note
+> blamed `ℤ →₀ k` also being an `AddMonoidAlgebra`; that is false (`AddMonoidAlgebra` is a
+> one-field structure, not a synonym, and contributes no instances).  Minimal repro against plain Mathlib:
 > `example (R : Type) [CommRing R] (p : Submodule R (ℤ →₀ R)) (q : Submodule R p) : Type :=
 > p ⧸ q` fails, while the same statement with `ℤ →₀ M` for an abstract `[AddCommGroup M]`
 > `[Module R M]`, or with `MvPolynomial ℕ R` in place of `ℤ →₀ R`, succeeds.  Forcing the

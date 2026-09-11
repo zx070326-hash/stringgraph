@@ -1,3 +1,4 @@
+import StringFormal.Math.EulerPoincare
 import StringFormal.Math.EulerPartition
 import StringFormal.Math.PartitionCard
 import StringFormal.Math.MobiusJacobian
@@ -13,6 +14,7 @@ import StringFormal.Math.DedekindEtaModular
 import StringFormal.Math.ModularGroupGenerators
 import StringFormal.Math.MathlibBridges
 import StringFormal.Math.TorusMeasure
+import StringFormal.Math.RegulatedSum
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
@@ -55,3 +57,6 @@ import StringFormal.NoGhost.LightCone
 import StringFormal.NoGhost.WitnessInt
 import StringFormal.NoGhost.DDFGram
 import StringFormal.NoGhost.Assembly
+import StringFormal.NoGhost.Glue
+import StringFormal.Virasoro.FockFreeLowLevel
+import StringFormal.NoGhost.LevelTwoSpan
