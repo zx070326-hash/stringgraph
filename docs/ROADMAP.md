@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-12 下午）：main 600 statements / 494 derivations / 3 milestones / 21 conventions；effective formalized 73 / rigorous 107 / physical-argument 354 / conjecture 29；Lean 77 声明公理干净（3508 jobs）。type I tadpole 推导现**零条 inferred 边**（三个面 + 开弦/闭弦 Ω 作用 + 开弦 GSO + §10.7 总费米配分函数为零各有卡）；无鬼蓝图 A/C.1/C.2/C.3 完成，B/C.4 进行中。
+- 计数（2026-09-12 傍晚）：main 600 statements / 494 derivations / 3 milestones / 21 conventions；effective formalized 73 / rigorous 107；Lean 77 声明公理干净（3510 jobs；NoGhost 岛现有 Witness/WitnessInt/Longitudinal/TowerNull/HeisenbergGram/LightCone/DDFAlgebra 等）。validate 最后一条活的 stale 边已改指（primary-field-v2）；余下 warning 全为裁决保留的历史推导与无依赖数学推导。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
