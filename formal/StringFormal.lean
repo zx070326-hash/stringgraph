@@ -54,6 +54,7 @@ import StringFormal.NoGhost.Longitudinal
 import StringFormal.NoGhost.TowerNull
 import StringFormal.NoGhost.HeisenbergGram
 import StringFormal.NoGhost.LightCone
+import StringFormal.NoGhost.LightConeFrame
 import StringFormal.NoGhost.WitnessInt
 import StringFormal.NoGhost.DDFGram
 import StringFormal.NoGhost.Assembly

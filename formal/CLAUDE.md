@@ -219,6 +219,17 @@ StringFormal/
                             witnessLightConeFrame / witnessTransverseFrame（**非空性**）与
                             witness_frameSpansOrthogonal ⟹ 显式标架上 N = 1 无条件。
                             **FrameSpansOrthogonal（标架完备性）不是 TransverseFrame 的推论**，是独立假设
+  NoGhost/LightConeFrame.lean **DDFLightConeFrame**：把 worldsheet.ddf-light-cone-frame 卡的 (F1)–(F8)
+                            打包成单个结构（frame : LightConeFrame + trans : TransverseFrame 承担
+                            F2/F4 一半/F5/F7；hη/hba/hconjSpan/hεa/hspan 分别是 F1/F3/F4 另一半/F6/F8）；
+                            witnessDDFLightConeFrame 用 Witness.lean 的显式标架实例化（非空性），
+                            期间补了 witnessConjugate 的三条分量引理与
+                            witnessConjugate_eq_neg_witnessMomentum_add_witnessLight（该标架上 b̃=b−a）；
+                            **(F9) bonus**：dotVec_polarization_conj_eq_zero（纯双线性，η(ε,b̃)=0）+
+                            DDFLightConeFrame.lie_conjOp_transOp（**从标架数据直接消去 lie_conjOp_transOp
+                            原本松散的 hεconj 假设**）。**bonus (ii)**：DDFLightConeFrame.dotVec_self_eq_two
+                            （`[Field R]`）证出卡 notes 里 (F6)(F7)(F8)⟹η(a,a)=2，走秩零化度
+                            （v^⊥ 余维一 + {ε_i} 张成维数 ≤ D−2 的界）；不改卡的条件表，(F8) 仍是假设
   NoGhost/WitnessInt.lean   **整数见证**（reviewer-batch26）：η=diag(−1,1,…)、b=(1,1,0,…)、a=(0,1,1,0,…)、
                             ε=e₂ 在**任意交换环（含 ℤ）**上满足四条假设 + ε·ε=1 + 质壳的去分母形式
                             zeroModeSq η a = 2。Witness.lean 的「ℚ-代数不是偷懒」只对**它那个**标架成立。
