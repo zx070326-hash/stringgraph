@@ -3,7 +3,7 @@ target: branes.d-brane-rr-charge-value
 kind: physical-argument
 status: physical-argument
 depends_on:
-  - id: branes.d-brane-tension
+  - id: branes.d-brane-tension-v2
     note: 供给 τ_p² = (π/κ²)(4π²α')^{3−p}（(13.3.4)）；(13.3.7) 的第二个等号 μ_p² = e^{2Φ₀}τ_p² 由此与 κ = e^{Φ₀}κ₁₀ 得到。
   - id: branes.d-brane-bps-no-force
     note: 供给 𝒜_R–R = −𝒜_NS–NS（(13.3.2)）：弦论侧 R–R 交换振幅的大小完全由它给出。

@@ -15,7 +15,7 @@ depends_on:
       (13.2.10) β^{μ1}⋯β^{μp} = β^⊥Γ^0 正是把 (13.2.9c) 的中心项与 (13.2.5) 对上。
   - id: branes.d-brane-rr-coupling
     note: 供给 Q^R 的定义：与 R–R (p+1)-形式势耦合的 Dp 膜荷（(13.2.7)）；IIA 偶 p / IIB 奇 p 的求和范围亦由此来。
-  - id: branes.d-brane-tension
+  - id: branes.d-brane-tension-v2
     note: 供给 (13.2.9c) 显式出现的 τ_p（荷按单位世界体归一化后，张力作为系数出现）。
 sources:
   - ref: polchinski-1998-v2
