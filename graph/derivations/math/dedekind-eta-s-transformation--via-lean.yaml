@@ -20,12 +20,12 @@ depends_on:
       `eta_ne_zero`），但本推导只用到「η = 那个乘积」这一条。
       ⚠ Mathlib 的 `ModularForm.eta` 在 **全 ℂ** 上有定义（ℍ 外是垃圾值）；本定理的假设
       `0 < z.im` 把讨论限回 H，与定义卡的定义域一致。
-      ⚠⚠ **这条边目前是本推导有效状态的瓶颈**：定义卡 own status 是 rigorous（未标 formalized），
-      按 docs/STATUS_LEVELS.md 的 min 规则，本推导 own=formalized 但 effective=rigorous。
-      这是**有意保留**的诚实记账，不是疏漏：解开它的正确做法是让定义卡自己成为 formalized
-      （它的四条断言在 Mathlib 里全有），而那需要 lead 裁定「lean_decl 能否指向 Mathlib 声明」
-      ——本图现有 67 条 lean_decl 全部指向 `StringFormal.*`，且 validate 要求 `formal.lean_file`
-      存在于 `formal/` 下。见本推导 notes 末尾提给 lead 的一条。
+      ⚠⚠ **（已解除，2026-09-11）这条边曾是本推导有效状态的瓶颈**：定义卡 own status 当时是
+      rigorous，按 docs/STATUS_LEVELS.md 的 min 规则，本推导 own=formalized 但 effective=rigorous。
+      notes 末尾「给 lead 的一条」提的两条出路里的第一条已落地：formalizer 建了桥层
+      `formal/StringFormal/Math/MathlibBridges.lean`，定义卡挂上
+      `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod` 并升为 formalized（curator lean-wire-10）
+      ⇒ 本边不再压低任何东西，本推导 effective = formalized。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/DedekindEtaS.lean :: StringFormal.DedekindEta.eta_neg_inv；支撑链 csqrt_neg_I → csqrt_neg_I_mul → eta_neg_inv → {eta_S, eta_modular_S_smul}；推论链 csqrt_sq(private) → norm_eta_neg_inv_sq → norm_eta_neg_inv_pow_four → {im_mul_norm_eta_pow_four_S_invariant, im_mul_norm_eta_pow_four_modular_S_smul}"
@@ -42,7 +42,9 @@ sources:
       不是自然数幂也不是实数幂）；这正是目标卡「(−iτ)^{1/2} 取主分支」那一句。
       前提只有 `0 < z.im`（= τ ∈ H），**无其它假设**。
       伴随声明：`eta_S`（`τ : ℍ` 版）、`eta_modular_S_smul`（`η(S • τ) = (−iτ)^{1/2} η(τ)`，
-      为将来接 worldsheet.modular-group-generated-by-s-and-t 备的形状）、
+      **原写「为将来接生成定理备的形状」，2026-09-11 起已兑现**：它与
+      `im_mul_norm_eta_pow_four_modular_S_smul` 被 math.eta-modular-invariant-combination--via-lean
+      的 `Subgroup.closure_induction` 在 `x = ModularGroup.S` 分支逐字调用）、
       `im_mul_norm_eta_pow_four_S_invariant`（目标卡「推论」的 S 半）。
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/DedekindEtaS.lean 文件头 docstring（\"What is actually proved here, and where the content comes from\"）"
@@ -94,13 +96,19 @@ gaps:
     **只覆盖 S 这一个生成元。** 本推导（与目标卡）不含 T 变换
     （math.dedekind-eta-t-transformation，2026-09-11 起也已形式化，见
     StringFormal/Math/DedekindEtaT.lean），也不含 η 对一般 (a b; c d) ∈ SL(2,ℤ) 的乘子系统
-    （Dedekind 和）——Mathlib 也没有后者。
-    ⇒ **τ₂|η|⁴ 的「完整模不变性」仍不可标 formalized**：S 半与 T 半都有了，唯一缺的是
-    worldsheet.modular-group-generated-by-s-and-t（模群由 S、T 生成）的形式化。
+    （Dedekind 和）——Mathlib 也没有后者。这一半**未变**，仍是本推导的真实边界。
+    ★ **但本条此前的结论句「τ₂|η|⁴ 的完整模不变性仍不可标 formalized，唯一缺生成定理的形式化」
+    已过时，2026-09-11 刷新作废（curator small-backlog-9）。** 生成定理已形式化
+    （`StringFormal.ModularGroupGen.sl_closure_S_T`，卡
+    worldsheet.modular-group-generated-by-s-and-t-v2，lean-wire-11），
+    完整模不变性由 **math.eta-modular-invariant-combination** 承载，
+    own = effective = **formalized**（lean-wire-9/10/11 接线）。
   - |
-    **有效状态被定义卡卡住。** depends_on 的 math.dedekind-eta-function 是 rigorous 的定义卡，
-    故本推导 own=formalized 而 effective=rigorous（目标卡 effective 仍是 rigorous，
-    与 --via-siegel-1954 同级）。这不是论证缺口，而是记账缺口，见那条边的 note。
+    **（2026-09-11 已解除）有效状态曾被定义卡卡住。** depends_on 的 math.dedekind-eta-function
+    当时是 rigorous 的定义卡，故本推导 own=formalized 而 effective=rigorous。
+    该定义卡同日经桥层 `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod`（提交 674946a，
+    合并 845b9b9，curator lean-wire-10）升为 formalized ⇒ 本推导与目标卡的 effective 现均为
+    **formalized**。这一直是记账缺口，不是论证缺口。
   - |
     **Mathlib 的证明本图未审计。** 真正的解析内容（E₂ 的拟模性 → logDeriv η 的变换 → 定常数）
     在 Mathlib 的 `Discriminant.lean` 里，本图既不为它建节点也不复核其论证；

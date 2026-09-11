@@ -85,10 +85,16 @@ notes: |
   以及模群作用形 `im_mul_norm_eta_pow_four_modular_S_smul`），中间件
   `norm_eta_neg_inv_sq`、`norm_eta_neg_inv_pow_four`（|η(−1/τ)|⁴ = |τ|²|η(τ)|⁴）同样有声明。
   **T 半也已形式化**（math.dedekind-eta-t-transformation 的
-  `im_mul_norm_eta_pow_four_T_invariant`，2026-09-11）。⇒ **S 版 + T 版合起来，
-  τ₂|η|⁴ 的完整模不变性只差一件：worldsheet.modular-group-generated-by-s-and-t
-  （模群由 S、T 生成）尚未形式化。** 在它落地之前，**不得**把「τ₂|η|⁴ 在整个模群下不变」
-  标为 formalized——本卡的 lean_decl 只覆盖 S 这一个生成元上的等式。
+  `im_mul_norm_eta_pow_four_T_invariant`，2026-09-11）。
+  ⚠⚠ **此处此前写的「完整模不变性只差一件：生成定理尚未形式化，在它落地之前不得标 formalized」
+  已过时，2026-09-11 刷新作废（curator small-backlog-9）。** 生成定理当日即已形式化
+  （`StringFormal.ModularGroupGen.sl_closure_S_T` / `psl_closure_S_T`，承载卡
+  worldsheet.modular-group-generated-by-s-and-t-v2，curator lean-wire-11），
+  完整模不变性由**新卡 math.eta-modular-invariant-combination** 承载
+  （lean_decl `StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant`，
+  接线 lean-wire-9/10/11），own = effective = **formalized**。
+  仍然成立的那一句：**本卡的 lean_decl 只覆盖 S 这一个生成元上的等式**，
+  要引「全群不变」请引那张新卡，不要引本卡。
   ⚠ Mathlib 的 `discriminant_S_invariant` / `discriminant_T_invariant`（`Discriminant.lean`）
   是判别式 Δ = η²⁴ 的不变性，**推不出 η 自身的相位**（24 次根的分支信息在 Δ 里丢掉了），
   因此对本卡与 T 卡都不是可用的替代品。

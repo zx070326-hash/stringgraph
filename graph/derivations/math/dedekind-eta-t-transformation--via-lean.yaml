@@ -16,9 +16,11 @@ depends_on:
       ⚠ **分支约定是本推导的承重件**：没有 q^{1/24} ≡ exp(πiτ/12) 这一条，
       「相位恰是 e^{iπ/12}」就无意义（多值符号下 τ ↦ τ+1 可差任意 24 次单位根）。
       Lean 侧这一条由 `qParam_24_add_one` 逐字承担。
-      ⚠⚠ **这条边是本推导有效状态的瓶颈**：定义卡 own status 是 rigorous，
-      故本推导 own=formalized 而 effective=rigorous（与 --via-product-definition 同级）。
-      诚实记账，不是疏漏；解法见 math.dedekind-eta-s-transformation--via-lean 的 notes 末段。
+      ⚠⚠ **（已解除，2026-09-11）这条边曾是本推导有效状态的瓶颈**：定义卡 own status 当时是
+      rigorous，故本推导 own=formalized 而 effective=rigorous。
+      math.dedekind-eta-s-transformation--via-lean 的 notes 末段提的解法（桥层）已落地：
+      定义卡挂上 `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod` 并升为 formalized
+      （curator lean-wire-10）⇒ 本边不再压低任何东西。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/DedekindEtaT.lean :: StringFormal.DedekindEta.eta_add_one；支撑链 qParam_one_add_one → eta_q_add_one 与 qParam_24_add_one → eta_add_one_eq → {eta_add_one, eta_T, eta_modular_T_smul}；推论链 norm_exp_pi_I_div_twelve → norm_eta_add_one → {im_mul_norm_eta_pow_four_T_invariant, im_mul_norm_eta_pow_four_modular_T_smul}"
@@ -74,11 +76,19 @@ gaps:
   - |
     **只覆盖 T 这一个生成元。** 不含 S 变换（math.dedekind-eta-s-transformation，
     同日也已形式化），不含 η 对一般 (a b; c d) ∈ SL(2,ℤ) 的乘子系统（Dedekind 和；Mathlib 也没有）。
-    ⇒ **τ₂|η|⁴ 的「完整模不变性」仍不可标 formalized**：两个生成元上的等式都有了，
-    唯一缺的是 worldsheet.modular-group-generated-by-s-and-t 的形式化。
+    这一半**未变**，仍是本推导的真实边界。
+    ★ **但本条此前的结论句「τ₂|η|⁴ 的完整模不变性仍不可标 formalized，唯一缺生成定理」
+    已过时，2026-09-11 刷新作废（curator small-backlog-9）。** 生成定理已形式化
+    （`StringFormal.ModularGroupGen.sl_closure_S_T`，卡
+    worldsheet.modular-group-generated-by-s-and-t-v2，lean-wire-11），
+    完整模不变性由 **math.eta-modular-invariant-combination** 承载，
+    own = effective = **formalized**（lean-wire-9/10/11 接线）。
+    本推导的 `im_mul_norm_eta_pow_four_modular_T_smul` 正是那条归纳的 `x = ModularGroup.T` 分支。
   - |
-    **有效状态被定义卡卡住。** depends_on 的 math.dedekind-eta-function 是 rigorous 的定义卡，
-    故 own=formalized 而 effective=rigorous。记账缺口，不是论证缺口。
+    **（2026-09-11 已解除）有效状态曾被定义卡卡住。** depends_on 的 math.dedekind-eta-function
+    当时是 rigorous 的定义卡，故 own=formalized 而 effective=rigorous；该卡同日经桥层
+    `StringFormal.Bridge.dedekindEta_eq_exp_mul_tprod` 升为 formalized（curator lean-wire-10）
+    ⇒ 本推导与目标卡的 effective 现均为 formalized。记账缺口，不是论证缺口。
   - |
     **Lean 声明比目标卡强，卡面没有跟上。** `eta_add_one_eq` 对一切 z ∈ ℂ 成立，
     而目标卡（和所有教科书）只对 τ ∈ H 断言。本推导**刻意**把 lean_decl 指向带假设的

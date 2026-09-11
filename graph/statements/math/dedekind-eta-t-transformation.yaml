@@ -55,13 +55,19 @@ notes: |
   （陈述更强），不是改本卡正文。这与 S 半形成对照：那里 Im z > 0 是本质的
   （它把 −iz 推进右半平面、使主对数可加）。
 
-  **与 S 半合起来还差什么**：S 半 math.dedekind-eta-s-transformation 也已于同日形式化
-  （`StringFormal.DedekindEta.eta_neg_inv`）。⇒ **τ₂|η|⁴ 的完整模不变性只差一件：
-  worldsheet.modular-group-generated-by-s-and-t（模群由 S、T 生成）尚未形式化。**
-  两个生成元上的等式都有 Lean 声明
+  **与 S 半合起来还差什么 → 已补齐（2026-09-11 刷新，curator small-backlog-9）**：
+  S 半 math.dedekind-eta-s-transformation 也已于同日形式化
+  （`StringFormal.DedekindEta.eta_neg_inv`）。两个生成元上的等式都有 Lean 声明
   （`im_mul_norm_eta_pow_four_T_invariant` / `..._S_invariant`，及其 ℍ 作用形
-  `..._modular_T_smul` / `..._modular_S_smul`），但在生成定理落地前**不得**把
-  「τ₂|η|⁴ 在整个模群下不变」标为 formalized。
+  `..._modular_T_smul` / `..._modular_S_smul`）。
+  ⚠⚠ **本段此前写的「worldsheet.modular-group-generated-by-s-and-t 尚未形式化 ⇒ 在它落地前
+  不得把『τ₂|η|⁴ 在整个模群下不变』标为 formalized」已过时，作废。** 生成定理当日即已形式化
+  （`StringFormal.ModularGroupGen.sl_closure_S_T` / `psl_closure_S_T`，承载卡
+  worldsheet.modular-group-generated-by-s-and-t-v2，curator lean-wire-11），
+  完整模不变性由**新卡 math.eta-modular-invariant-combination** 承载
+  （lean_decl `StringFormal.DedekindEta.im_mul_norm_eta_pow_four_modular_invariant`，
+  接线 lean-wire-9/10/11），own = effective = **formalized**。
+  本卡自身的断言范围不变：仍只管 T 这一个生成元上的等式。
 
   ⚠ **statement 正文里「那是 math.dedekind-eta-s-transformation，强度低两级」已过时**：
   S 半 2026-09-11 先由 siegel-1954-eta 升到 rigorous、再由 --via-lean 拿到 own=formalized
