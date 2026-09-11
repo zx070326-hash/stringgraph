@@ -1,0 +1,37 @@
+id: swampland.finite-number-of-matter-fields--via-cohomology-bound
+target: swampland.finite-number-of-matter-fields
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: math.cy3-cohomology-bounded
+    inferred: false
+    note: >-
+      原文把物质场数目的界直接压在上同调维数上，并自陈"It is not known if this is actually a true
+      mathematical fact"——即第二步是一个未解决的数学问题，本图单列为该节点。
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3, p.5（猜想句）；§3, p.5–p.6（6 维 A_{N-1} / K3 秩 ≤ 20 的对照例）"
+summary: |
+  原文的论证是两段的：
+  (a) 紧化流形上的无质量物质场与某些上同调类相关，故其数目"directly bounded by the dimension of
+      the relevant cohomology of the manifold"——这一步是构造性的；
+  (b) 该上同调维数有限：证据是"In all the examples we know in string theory"，且原文明说
+      "we do not know of a sequence of Calabi-Yau threefolds for which the dimension of
+      cohomologies can get unboundedly large"，随即自陈"It is not known if this is actually a
+      true mathematical fact, but experience with various examples in string theory gives one a
+      strong feeling that this is going to be finite."
+
+  §3 的对照例说明该有限性与引力绑定：6 维 IIA 在 A_{N-1} 奇点上给 U(N)，N 无界；要在 6 维得到
+  非零 Newton 常数就必须嵌进紧几何，而 K3 中"the rank of the matter field gauge group would be
+  bounded by 20"。
+gaps:
+  - "第二步是未解决的数学问题，原文逐字承认（vafa-2005#E12）；这是本图 math.cy3-cohomology-bounded"
+  - "★ **2026-09-11 结案**：该数学问题**截至 2026-06 仍开放**（Anderson–Gray–Nally–Taylor, arXiv:2606.08427v1 §I 逐字）。已解决的只有子族：椭圆纤维化 CY3 有界（math.cy3-elliptic-fibered-bounded）、Kreuzer–Skarke 超曲面 h^{1,1} ≤ 491（math.cy3-hypersurface-h11-max-kreuzer-skarke）。**本推导不改挂到这两张卡上**——Vafa 的判据是对一般紧化说的，子族的定理不覆盖它**"
+  - "原文自称的强度是全文最弱的一处：'gives one a strong feeling'"
+  - "K3 中秩 ≤ 20 只写 'it is known that'，**无来源**（#E13、#U5）"
+  - "第一步只对'与上同调相关的无质量模'成立；原文没有讨论不由上同调给出的物质场"
+  - "方法论自陈：判据来自'弦论里能不能造出来'，不是独立的一致性论证（#E17）"
+notes: |
+  from: vafa-2005#E12、#E13；2026-09-11 补 math.cy3-cohomology-bounded 的三层拆分记账。
+author: curator
+created: "2026-09-11"

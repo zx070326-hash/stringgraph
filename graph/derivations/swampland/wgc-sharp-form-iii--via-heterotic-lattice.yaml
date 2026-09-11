@@ -1,0 +1,31 @@
+id: swampland.wgc-sharp-form-iii--via-heterotic-lattice
+target: swampland.wgc-sharp-form-iii
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.heterotic-t6-substates-below-extremality
+    inferred: false
+    note: "§4 的格论检验就是那条命题；本推导把它作为对普遍猜想 (III) 的证据。"
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4 Evidence for the conjecture, eqs. (20)–(25), p.12–p.14"
+summary: |
+  原文把 SO(32) 杂化弦 on T⁶ 的格论检验作为 sharp 版本的非平凡检验：一般模空间点处
+  U(1)^28 中大部分不是中心荷，故 BPS 饱和不是平凡答案；而弦谱保证沿电荷空间的一组基方向总能找到
+  质荷比小于极端黑洞的态（(25)）。
+
+  **本推导只把该背景下的事实当作普遍猜想 (III) 的证据，不宣称它证明了 (III)**：目标是对**任何**
+  一致量子引力理论的断言，而证据是**一个**背景族。故 status 取 conjecture，
+  而 swampland.heterotic-t6-substates-below-extremality 自身保持 physical-argument。
+gaps:
+  - "一族背景的检验不构成对普遍断言的论证；原文自陈是 'Evidence for the conjecture'"
+  - "极端黑洞侧外包给 Sen 1995（未抽取）；杂化弦谱公式本图无节点"
+  - "原文自陈本支支持的是 (III)（或更准确说是'沿一组基方向'的版本），**不是** (II)（#E22 备注 3、#E20）"
+  - "α' = 4 归一化与本图 canonical 的 conv.alpha-prime-regge 不同（见目标命题卡的 notes）"
+notes: |
+  from: arkani-hamed-2006#E22。
+  本推导与 --via-worldsheet-spectral-flow、--via-finite-stable-states、--via-form-ii 并列；
+  工具取最强者，四条目前都给 conjecture。
+author: curator
+created: "2026-09-11"

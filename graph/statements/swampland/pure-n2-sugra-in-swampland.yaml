@@ -1,0 +1,44 @@
+id: swampland.pure-n2-sugra-in-swampland
+kind: proposition
+title: 4 维纯 N=2 超引力不作为一致量子理论的有效理论出现（Vafa 2005 的下界猜想）
+statement: |
+  Vafa 2005 §3.1 "A Lower Bound Conjecture" (p.6) 全节，逐字：
+
+    "In the above discussion we have considered upper bounds on the number of fields. In this
+     section we discuss the opposite restriction, namely that in some theories there should be
+     *some* scalar fields, which is not demanded by naive consistency of the effective field
+     theory. This again is going to be hard to prove. But let us present one potential
+     candidate: Consider N = 2 supersymmetric theories in 4d and ask if there are any
+     consistent theories which have, as the low energy limit, only the supergravity multiplet
+     and nothing else. Recall that the pure N = 2 supergravity multiplet has no scalar. There
+     is no known construction within string theory which accomplishes this. All known examples
+     have extra scalars, such as the string coupling constant or the volume of the internal
+     manifold etc. It is natural to conjecture that there is at least one such scalar in any
+     such theory and that pure N = 2 supergravity does not arise as the effective theory of a
+     fully consistent quantum theory. It would be interesting to verify or disprove this."
+
+  本图取的陈述（保持原文的单一猜想形式，"and"连接的两半不拆）：
+  在 4 维 N=2 超对称理论中，任何完全一致的量子理论的低能极限里**至少有一个标量场**；
+  等价地，**纯 N=2 超引力不作为完全一致量子理论的有效理论出现**。
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3.1, p.6（整节；本文无编号公式、无编号猜想）"
+tags: [swampland, conjecture, supergravity, lower-bound, four-dimensional]
+notes: |
+  from: vafa-2005#E14。
+
+  【原文自称的强度】"It is natural to conjecture that" + "This again is going to be hard to
+  prove" + "It would be interesting to verify or disprove this."
+
+  【证据形式极弱】"There is no known construction within string theory" —— 这是**否定式经验
+  证据**（造不出来），不是正面检验。
+
+  【反例方向：原文明确邀请】"It would be interesting to verify or disprove this."
+  构造出一个低能极限只有 N=2 超引力多重态的一致理论即构成反驳。本轮无反例，故不建
+  refutation 推导文件；此处留占位记录。
+
+  【为什么不拆两卡】原文用 "and" 把 (a)"至少有一个标量"与 (b)"纯 N=2 超引力不出现"连成一条
+  猜想。(b) 是 (a) 的推论，若后续要拆，拆出的边必须标 inferred: true（抽取记录 #E14 备注 1）。
+author: curator
+created: "2026-09-11"

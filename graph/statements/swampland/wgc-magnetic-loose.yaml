@@ -1,0 +1,31 @@
+id: swampland.wgc-magnetic-loose
+kind: proposition
+title: "AMNV 松版磁荷不等式 m_mag ≲ g_mag M_Pl ~ (1/g_el) M_Pl（eq. (2)）"
+statement: |
+  Arkani-Hamed–Motl–Nicolis–Vafa 2006 §2.1 (p.4) 的 eq. (2)，逐字：
+
+    "This statement should also hold for magnetic monopoles,
+       m_mag ≲ g_mag M_Pl ~ (1/g_el) M_Pl .    (2)"
+
+  三条限定：
+  (1) 原文措辞是 **"should also hold"**（把电版本外推到磁版本），比 eq. (1) 的 "we claim" 略弱；
+  (2) 磁耦合与电耦合的关系逐字只写 **g_mag ~ 1/g_el**，是量级关系，**不带任何系数**
+      （原文没有 2π 之类）；
+  (3) 与电版本一样，断言是"存在这样的磁单极子"，BPS 情形为饱和。
+uses_conventions: [conv.extremality-normalization]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.1, eq. (2), p.4"
+tags: [swampland, conjecture, weak-gravity, monopole, amnv]
+notes: |
+  from: arkani-hamed-2006#E6（另见 #E7）。
+
+  【"Weak Gravity Conjecture"这个名字不出自本文】id 前缀 wgc- 只是本项目的记号（抽取记录 #Q3、#U8）。
+
+  【禁止补系数】见 swampland.wgc-electric-loose 的同名条目。
+
+  【与 Λ ≲ gM_Pl 的关系】原文由 (2) 加上 "monopole masses are a probe of the ultraviolet
+  cutoff"（m_mag ~ Λ/g²_el，eq. (3)）推出 eq. (4) Λ ≲ gM_Pl。**两步都是量级估计。**
+  该截断节点本轮未建。
+author: curator
+created: "2026-09-11"

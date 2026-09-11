@@ -1,0 +1,65 @@
+id: swampland.heterotic-spectral-flow-substates
+kind: proposition
+title: 任意微扰杂化紧化：左移 U(1) 的谱流算子给出 N_L = 0 的亚极端态
+statement: |
+  断言：对任意微扰杂化弦紧化（含 K3 与任意 Calabi–Yau 三折），若某个整荷 U(1) 规范对称性来自
+  左移部分，则谱中存在对应的 N_L = 0 态，其质量满足 M² = ½Q_L² − 1，从而**亚极端**
+  （极端黑洞为 M² = ½Q_L²）。
+
+  Arkani-Hamed 等 2006 §4.1（p.14–p.15）的论证，逐字节选：
+
+    "It is possible to generalize this argument to *any* perturbative heterotic string
+     compactification, including compactifications on K3 and arbitrary Calabi-Yau threefolds, as
+     a straightforward generalization of the familiar argument that all global symmetries in this
+     theory are gauged. For any integral U(1) gauge symmetry coming from the left-movers of
+     heterotic string, there is a worldsheet current J(z). Because it is a (1,0) primary field,
+     one can construct the (1,1) vertex operator J(z) d-bar X_mu e^{ikX}(z,z-bar) with k² = 0 for
+     a spacetime gauge field and prove that the corresponding symmetry is a gauge symmetry. …
+     We can bosonize the current with level k as
+       J(z) ~ sqrt(k) d phi(z) .    (26)
+     Then, the operator
+       O(z) = :e^{i sqrt(k) phi(z)}:    (27)
+     is always in the CFT. There are a number of ways to see this. One way is to note that this
+     operator has local OPE with all the operators in the theory. … Therefore, the completeness of
+     the CFT spectrum (i.e. the statement that the operator content of the theory is maximal
+     consistent with local OPE, as follows from modular invariance) forces us to have O(z) as an
+     allowed operator in the theory.
+     Another way to understand the existence of the operator O(z) is to note that it corresponds
+     to spectral flow by 1 unit in the U(1). …
+     We thus see that the state corresponding to O(z) exists in the spectrum of CFT. Since by
+     assumption this is a left-mover state, this corresponds to N_L = 0 and so M² = ½Q_L² − 1,
+     while asymptotically, the excited strings correspond to extremal black holes with
+     M² = ½Q_L², so our string state is indeed *sub*-extremal."
+
+  归一化同 swampland.heterotic-t6-substates-below-extremality（M_Pl = 1，α' = 4；
+  见 conv.amnv-2006-units）。
+uses_conventions: [conv.extremality-normalization, conv.amnv-2006-units]
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4.1, eqs. (26)–(27), p.14–p.15"
+tags: [swampland, weak-gravity, heterotic, spectral-flow, worldsheet-cft, amnv]
+notes: |
+  from: arkani-hamed-2006#E23（另见 #U7）。
+
+  【归一化声明（2026-09-11 补，reviewer-swampland-b）】本卡的 M² = ½Q_L² − 1 与
+  swampland.heterotic-t6-substates-below-extremality 的 (24)(25) 同属 AMNV §4 的单位
+  （α' = 4、M_Pl = 1），那个 −1 同样只在该单位下成立。本卡此前未声明任何 alpha-prime 族约定，
+  现已声明 **conv.amnv-2006-units**。⚠ 本卡的跨区依赖（worldsheet 的主场 / OPE / 态-算子同构）
+  若声明了 conv.alpha-prime-regge，相应的边必须写 convention_map。
+
+  【★ 关键缺口：模不变性 ⇒ 算子谱完备】"the completeness of the CFT spectrum (i.e. … as follows
+  from modular invariance)" 在原文里**只有这一个括号，没有引用、没有证明**（抽取记录 #U7）。
+  本图中也**没有**模不变性或谱完备性的节点（cft 区尚未建立）。该步写进推导 gaps。
+
+  【本卡是 swampland 区与 worldsheet 区之间唯一的技术性连线】用到 (1,0) 主场、顶点算子、
+  OPE 局域性、玻色化。推导 --via-spectral-flow 的跨区依赖指向 worldsheet.primary-field、
+  worldsheet.operator-product-expansion、worldsheet.state-operator-isomorphism，
+  三条边都标 inferred: true（原文没有引本图这些节点的来源）。
+
+  【覆盖面比 T⁶ 例子广得多】原文自陈覆盖"any perturbative heterotic string compactification"，
+  但仍限于**微扰杂化**弦，不覆盖 I 型 / II 型 / M 理论背景。
+
+  【原文用了 "prove" 一次】"prove that the corresponding symmetry is a gauge symmetry"——
+  那只针对"该对称性是规范对称性"这一步，不针对本卡的结论。
+author: curator
+created: "2026-09-11"

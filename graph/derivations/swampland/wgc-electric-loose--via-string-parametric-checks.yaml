@@ -1,0 +1,27 @@
+id: swampland.wgc-electric-loose--via-string-parametric-checks
+target: swampland.wgc-electric-loose
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.3 Simple parametric checks, eqs. (6)–(13), p.6–p.8"
+summary: |
+  §2.3 的量级检验（原文 "It is easy to check the conjecture in a few familiar examples"）：
+  - 闭杂化弦紧化到 4 维：gM_Pl ~ M_s（(6)），弦标度以下确有带电轻粒子；
+  - Kaluza–Klein 理论：gM_Pl ~ 1/R（(7)），该标度处有带电粒子并同时是 4 维 EFT 的截断；
+    由 T 对偶同样适用于缠绕数规范对称性；
+  - 4 维 I 型弦：gM_Pl ~ M_s/√g_s（(8)），弱耦合时甚至大于弦标度；
+  - Dp 膜上的 U(1)：gM_Pl ~ M_s/√(g_s(RM_s)^{9-p})（(9)），(RM_s) ≪ 1 时改用 T 对偶描述；
+  - n 个大维数中移动的 D3 膜：m_W/(gM_Pl) ~ √(g_s/(M_sR)^{n-2})（(10)），
+    磁单极子（连到膜上的长 D 弦）给 (11)；n > 2、g_s < 1、R > l_s 时比值小于 1。
+gaps:
+  - "**n = 2 时 'parametrically marginal'，n = 1 时 'look like they might be violated'**——原文自己划出的判据最可能失效之处（arkani-hamed-2006#E14）"
+  - "AdS₅ × X 情形（(12)(13)）与 large-N species problem 两条压力测试的结论都只是 'We aren't aware of any examples'——**这是'未找到反例'而非'验证成功'**，按抽取记录红线不得作为支持证据（#E15）"
+  - "全部为量级关系（~、≲），无一处精确"
+  - "所有检验都在弦论背景内；对'其他一致量子引力理论'无检验"
+notes: |
+  from: arkani-hamed-2006#E14、#E15。
+author: curator
+created: "2026-09-11"

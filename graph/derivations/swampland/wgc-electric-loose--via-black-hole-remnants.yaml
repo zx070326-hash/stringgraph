@@ -1,0 +1,35 @@
+id: swampland.wgc-electric-loose--via-black-hole-remnants
+target: swampland.wgc-electric-loose
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §2.2 Black holes and global symmetries, p.5–p.6（含 Figure 2 图题；本节除 (5) 外无编号公式）"
+summary: |
+  原文的动机型论证（自称 "One motivation"）：
+  1. 规范对称性在 g → 0 时与全局对称性物理上不可区分；"Something should stop this from
+     happening, and our conjecture provides an answer. As the gauge coupling goes to zero g → 0,
+     the cutoff on the effective theory Λ → 0 as well, so that the limit g → 0 can not be taken
+     smoothly."
+  2. 具体化：取 g ~ 10^{-100} 与质量 ~10 M_Pl 的黑洞，其电荷可在 0 到 ~10^{100} 之间任取而仍满足
+     M ≥ QM_Pl；若没有很轻的带电粒子，Hawking 蒸发到 Planck 标度时电荷无法辐射掉，于是留下
+     10^{100} 个 Planck 标度残余——"suffering from the same problems that lead us to conclude
+     quantum gravity shouldn't have global symmetries (see e.g. [4])"。
+  3. 由极端黑洞可衰变的要求得出（§2.2, p.6，逐字）："Since extremal black holes have M = QM_Pl,
+     in order for them to be able to decay into elementary particles, these particles should have
+     m < qM_Pl."（Figure 2 图题："An extremal black hole can decay only if there exist particles
+     whose charge exceeds their mass."）
+  4. 原文并把猜想归于 Gell-Mann 的极权原理："there should not exist a large number of exactly
+     stable objects (extremal black holes) whose stability is not protected by any symmetries"。
+gaps:
+  - "'极端黑洞必须能衰变'本身是猜想，动机是 remnant 问题与 Gell-Mann 极权原理，原文不证明它（arkani-hamed-2006#E12）"
+  - "'量子引力无全局对称性'是被**引用**的前提（[4] = Susskind hep-th/9501106），本文不论证；本图无相应节点，故本推导 depends_on 中没有它"
+  - "该论证给出的形式是 m < qM_Pl（用电荷 q），与 eq. (1) 的 m_el ≲ g_el M_Pl（用规范耦合 g）**不是同一个式子**，原文没有给出 g 与 q 的换算（#Q1）"
+  - "极端性关系在本节写作 M = QM_Pl，与 §4 的 M² = ½Q² 不换算（conv.extremality-normalization 记有此事）"
+  - "全部为量级估计，'imagine that we have g ~ 10^{-100}' 式的启发式"
+notes: |
+  from: arkani-hamed-2006#E11、#E12。
+author: curator
+created: "2026-09-11"

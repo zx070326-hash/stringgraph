@@ -1,0 +1,27 @@
+id: swampland.wgc-sharp-form-iii--via-worldsheet-spectral-flow
+target: swampland.wgc-sharp-form-iii
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.heterotic-spectral-flow-substates
+    inferred: false
+    note: "§4.1 的一般化论证就是那条命题；本推导把它作为对普遍猜想 (III) 的证据。"
+  - id: conv.extremality-normalization
+sources:
+  - ref: arkani-hamed-2006
+    loc: "arXiv:hep-th/0601001v2, §4.1, eqs. (26)–(27), p.14–p.15"
+summary: |
+  §4.1 把 §4 的 T⁶ 特例推广到**任意微扰杂化紧化**（含 K3 与任意 Calabi–Yau 三折）：左移整荷 U(1)
+  的流玻色化后给出谱流算子 O(z) = :e^{i√kφ}:，由 CFT 谱完备性它必在谱中，对应 N_L = 0 的态，
+  质量 M² = ½Q_L² − 1，故亚极端。这是本文覆盖面最广的一条正面证据。
+
+  **仍只是证据，不是证明**：覆盖面虽广，但限于微扰杂化弦，且关键的"模不变性 ⇒ 谱完备"一步无证明。
+gaps:
+  - "'模不变性 ⇒ 算子谱完备'在原文只有一个括号，无引用无证明（arkani-hamed-2006#U7）"
+  - "只覆盖微扰杂化弦紧化；I 型 / II 型 / M 理论 / 非微扰背景不在内"
+  - "对'其他一致量子引力理论（若存在）'没有任何检验"
+  - "本支支持的是 (III)，不是 (II)（原文 §3 逐字 'most of our evidence only supports the weaker conjecture (III)'）"
+notes: |
+  from: arkani-hamed-2006#E23、#E20。
+author: curator
+created: "2026-09-11"

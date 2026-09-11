@@ -1,0 +1,30 @@
+id: swampland.gauge-rank-restricted--via-string-constructability
+target: swampland.gauge-rank-restricted
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.finiteness-criteria-fail-without-gravity
+    inferred: false
+    note: >-
+      "关闭引力则判据可放松"在原文里与判据同级（§1, p.2 斜体强调），且 §3 的
+      A_{N-1} / K3 对照例正是本判据的证据形式：非紧时秩无界，紧化后被卡死。
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §1, p.2（三条判据总纲）；§3, p.5–p.6（A_{N-1} 与 K3 秩 ≤ 20）；§4, p.6–p.7（规范场受限）"
+summary: |
+  证据形式与另两条有限性判据同型：弦论中造得出来的规范群比"半经典一致"允许的少得多。
+  原文给的最干净实例（§3, p.5–6）：6 维 IIA 在 A_{N-1} 奇点上给 U(N) 规范理论，N 无界
+  （"There is no bound on N and so we can have an arbitrarily large rank gauge group, in
+  accordance with field theoretic semiclassical consistency conditions"）；但要在 6 维有非零
+  Newton 常数就必须嵌进紧几何，而"it is known that this cannot be done for arbitrarily large N
+  in K3 (indeed the rank of the matter field gauge group would be bounded by 20)"。
+  §4 又给出 10 维与 9 维的例子（见 swampland.u1-496-and-u1-248-e8-in-swampland）。
+gaps:
+  - "原文对本判据的措辞只到 'We view these finiteness crieteria as a universal feature'（观点陈述，无证明动词）"
+  - "K3 中秩 ≤ 20 只写 'it is known that'，无来源（vafa-2005#U5）"
+  - "9 维的受限列表引 [7] de Boer 等 hep-th/0103170，本项目未抽取；原文对该支的措辞是 'it is difficult to imagine'（#E16）"
+  - "判据的一般形式（秩的上界是多少）原文没有给出，只说'有限/受限'"
+notes: |
+  from: vafa-2005#E5、#E13、#E16。
+author: curator
+created: "2026-09-11"

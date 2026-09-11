@@ -1,0 +1,58 @@
+id: swampland.ov-conjecture-2-light-tower
+kind: proposition
+title: "Ooguri–Vafa Conjecture 2 第一部分：无穷远处出现质量起于 e^{-αT} 的无穷轻粒子塔"
+statement: |
+  Ooguri–Vafa 2006 §2 (p.3) 的 Conjecture 2 的**第一句**（原文自称 "the first part of the
+  conjecture 2"），逐字：
+
+    "Conjecture 2: Compared to the theory at p₀ ∈ M, the theory at p with d(p,p₀) > T has an
+     infinite tower of light particles starting with mass of the order of e^{-αT} for some
+     α > 0."
+
+  前置句逐字："More strongly, we claim that the limit d(p,p₀) → ∞ is correlated with a
+  breakdown of the low energy effective theory in a particular way:"
+
+  原文对第一部分的说明逐字："In the first part of the conjecture 2, we are claiming that the low
+  energy effective theory defined on a particular point on the moduli space makes sense only in
+  a domain in a finite diameter from the point."
+
+  两条不得省略的限定：
+  (1) **α 只满足 α > 0，不普适**。同文 §3.1 Example i 末逐字："Note that as this example
+      demonstrates the coefficient of the exponent is not universal (9/8 and 3/8 in this case)
+      even for a given dimension."；Example iii 又给出 8/7 与 6/7。
+      **"α 是 O(1) 普适常数"不在本文里。**
+  (2) 逐字是 **"starting with"** mass of the order of e^{-αT}：只约束塔的**起点**（最轻的那个），
+      **不**约束塔内的质量间距。
+
+  适用域见 swampland.applicability-domain。
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 2（第一句）, p.3；§3.1 Example i, p.6（9/8 与 3/8）；§3.1 Example iii, p.7（8/7 与 6/7）"
+tags: [swampland, conjecture, moduli-space, light-tower, ooguri-vafa]
+notes: |
+  from: ooguri-vafa-2006#E10、#E15、#E17（另见 #Q3、#Q4）。
+
+  【"Swampland Distance Conjecture"这个名字不在原文】本条（连同其第二部分）是后来常被称作
+  "距离猜想"的原始出处，但**原文只叫它 Conjecture 2**（抽取记录 #E10 备注 1）。
+
+  【为什么拆两卡】原文自己把 Conjecture 2 分成 "the first part" 与 "the second part"，并给了
+  **不同的动机**（第一部分见 §4 的物理动机；第二部分见 §4.1 的一圈论证）。拆卡不需标 inferred，
+  因为拆分依据是原文自己的措辞（抽取记录 #E10 备注 3）。第二部分见
+  swampland.ov-conjecture-2-infinitely-many-below-fixed-mass。
+
+  【★ 与 Conjecture 1 相互独立】§4.1 末逐字 "it is possible to show that these are independent
+  conjectures and one conjecture does not follow from the other"。=> 图中禁止在本条与
+  ov-conjecture-1-unbounded-diameter 之间加任一方向的边。
+
+  【方向红线】§4.1 给出的例子（M 理论在 CY 三折上、内部 P² 收缩到点）是"**无穷塔但有限距离**"，
+  即"无穷塔 ⇏ 无穷距离"的反例，且它发生在**有引力**的情形；但它**不反驳本条**——本条断言的是
+  无穷距离 ⇒ 无穷塔，不是其逆（抽取记录 #E27 备注 3，原文称这类点为 conformal fixed points）。
+
+  【未讨论的问题】α 是否有下界，本文没有讨论（抽取记录 #Q3）。
+
+  【暴胀推论写在原文同段】"We cannot have a slow roll inflation where the distance in the scalar
+  moduli space is much bigger than Planck length and still use the same effective field theory."
+  本轮不建暴胀节点。
+author: curator
+created: "2026-09-11"

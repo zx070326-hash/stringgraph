@@ -1,0 +1,31 @@
+id: swampland.ov-conjecture-2-infinitely-many-below-fixed-mass--via-one-loop-metric
+target: swampland.ov-conjecture-2-infinitely-many-below-fixed-mass
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+  - id: swampland.moduli-space-distance
+    inferred: false
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §4.1, p.13（公式无编号）；§2, p.3（第二部分的动机段）"
+summary: |
+  §4.1 的一圈场论论证（原文自称 "This is consistent with the following field theory fact"）：
+  设重场质量 m 依赖模场，一圈图给出模空间度规的修正
+    g^{one-loop}_{ij} = m^{d-4} (∂m/∂φ^i)(∂m/∂φ^j)，
+  于是到 m = ε 处的量子修正距离为
+    ∫_ε m^{(d-4)/2} dm = −(2/(d−2)) ε^{(d-2)/2} + finite，
+  即"a finite number of light particles does not generate infinite distance for d > 2"；
+  费米子情形（L_int = m ψ̄ψ）结果相同。反之，无穷塔轻粒子的一圈效应求和**可以**产生距离发散。
+  §2 的动机段把这一事实作为第二部分的理由。
+gaps:
+  - "该论证只说明'无穷塔**可以**产生距离发散'，**没有证明'必须**有无穷塔'（充分性 ≠ 必要性）"
+  - "一圈计算的形式化程度：原文不给正规化方案、不给耦合归一化，是量级论证"
+  - "记号风险：§4.1 用 varphi 表重场、phi 表模场，纯文本转录易混；此处 d 是**时空**维数（§4.2 的 d 是空间维数）（#U6、§1.1）"
+  - "本条的正面例子与 ov-conjecture-2-light-tower 共用 §3.1，未单列"
+notes: |
+  from: ooguri-vafa-2006#E26、#E10。
+author: curator
+created: "2026-09-11"

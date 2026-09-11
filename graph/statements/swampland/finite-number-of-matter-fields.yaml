@@ -1,0 +1,48 @@
+id: swampland.finite-number-of-matter-fields
+kind: proposition
+title: 紧化后无质量物质场数目有限（Vafa 2005 第二条有限性判据）
+statement: |
+  Vafa 2005 §3 (p.5) 的猜想，逐字（原文无编号）：
+
+    "Consider compactifying string theory on a manifold. The massless modes of the
+     compactified theory, apart from the gravity multiplet, will have a number of other
+     fields which get related to certain cohomology classes, or certain cohomology
+     computations on the manifold. The number of such matter fields is thus directly bounded
+     by the dimension of the relevant cohomology of the manifold. In all the examples we know
+     in string theory, the dimension of cohomology of the manifold is finite. For example, we
+     do not know of a sequence of Calabi-Yau threefolds for which the dimension of
+     cohomologies can get unboundedly large. It is not known if this is actually a true
+     mathematical fact, but experience with various examples in string theory gives one a
+     strong feeling that this is going to be finite."
+
+  本图取的陈述：在一致的量子引力理论（Newton 常数非零）中，除引力多重态外的无质量物质场
+  数目有限。
+
+  原文给出的逻辑是两段的：
+  (a) 紧化几何上的物质场数目**被相关上同调的维数所界**（构造性、可算的一步）；
+  (b) 该上同调维数有限——原文自陈 **"It is not known if this is actually a true mathematical
+      fact"**，即 (b) 是一个未解决的数学问题（本图另建 math.cy3-cohomology-bounded）。
+
+  与之配套的"引力开启才有此限制"的证据（§3, p.5–6）：6 维 IIA 在 A_{N-1} 奇点上给 U(N)
+  规范理论，N 无界；但要在 6 维得到非零 Newton 常数就必须嵌进紧几何，而在 K3 中做不到任意大
+  的 N（原文逐字 "the rank of the matter field gauge group would be bounded by 20"）。
+uses_conventions: []
+sources:
+  - ref: vafa-2005
+    loc: "arXiv:hep-th/0509212v2, §3, p.5（猜想句）；§3, p.5–p.6（A_{N-1} / K3 秩 ≤ 20 的对照例）"
+tags: [swampland, conjecture, finiteness, matter-fields, compactification]
+notes: |
+  from: vafa-2005#E12、#E13（另见 #E5、#U5）。
+
+  【原文自称的强度是本文最弱的一处】"gives one a strong feeling" —— 比 §2 的 "the conjecture
+  is that" 还弱。故本卡的支持推导只能是 conjecture-support / conjecture。
+
+  【K3 中秩 ≤ 20 无来源】原文只写 "it is known that"，不给引用（抽取记录 vafa-2005#U5）。
+  本图不据此建独立命题，只在推导 gaps 中记。
+
+  【与 AMNV 的同族关系】Arkani-Hamed 等 2006 §1 (p.2) 逐字说自己的"精确稳定粒子数有限"判据
+  "nicely extends some of the finiteness criteria discussed in [1,2]"，[1] 即本文。
+  但 AMNV 对本文判据的总结**不完整**：只提"无质量场数目有限"，未提标量模空间体积
+  （抽取记录 vafa-2005#Q6）。两者是同族但独立的判据，图中不加推导边。
+author: curator
+created: "2026-09-11"

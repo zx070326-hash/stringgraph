@@ -1,0 +1,55 @@
+id: math.cy3-hypersurface-h11-max-kreuzer-skarke--via-database-enumeration
+target: math.cy3-hypersurface-h11-max-kreuzer-skarke
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: kreuzer-skarke-2000
+    loc: "arXiv:hep-th/0002240, 摘要"
+    note: >-
+      ⚠⚠ **491 不在本文里**（researcher 逐字核对 ar5iv 正文："491"、"502"、"11" 全篇未出现）。
+      本文只给这一族的定义与规模：473,800,776 个四维反射多面体、30,108 个不同的 Hodge 数对。
+      491 的证据是**四条独立的 arXiv 摘要逐字片段（L3）**，那四篇尚未登记进 sources.bib，
+      逐条抄录于目标陈述卡的 sources.note 与 literature/extractions/math-sources.md §46.5。
+  - ref: demirtas-2020
+    loc: "arXiv:2008.01730v1, 摘要（逐字 'including the extremal case $h^{1,1}=491$'）"
+    note: >-
+      2026-09-11 登记，L2（摘要全文由 arXiv API 逐字取回，正文未读）。这是 491 在本图中唯一的
+      登记来源。⚠ 该摘要称 491 为 "the extremal case"，**没有说它是最大值**；"maximum/maximal"
+      的字样出自尚未登记的 2309.13145v3 与 2405.08871v4。故本推导的 status 不变。
+summary: |
+  论证形式是**穷举分类的数据库读数**，不是证明：
+
+  1. Kreuzer–Skarke 完全分类了四维反射多面体（473,800,776 个），由它们给出环面簇中的光滑
+     Calabi–Yau 三折超曲面，共 30,108 个不同的 Hodge 数对（本文摘要，L2 逐字）。
+  2. 该 Hodge 数表中 h^{1,1} 的最大值是 **491** —— 这一步**不出自 Kreuzer–Skarke 本文**，
+     而出自四篇后世论文的摘要，其中两篇明确用 "maximum"/"maximal" 字样。
+     四篇中 **2008.01730 已于 2026-09-11 登记为 `demirtas-2020`**（L2，摘要全文经 arXiv API
+     逐字核对），其余三篇仍未登记（L3）。
+
+  故本推导实质上是"四个独立小组读同一个数据库读出同一个极值"。
+gaps:
+  - "★ **491 不在被引原文（Kreuzer–Skarke）里**：本项目逐字核对其摘要与 ar5iv 正文，该数字全篇未出现"
+  - "★ **本项目没有读过 KS 的原始数据，也没有读过那四篇的正文，更没有人复算**；证据全部是二手摘要（demirtas-2020 为 L2，其余三篇 L3）"
+  - "★ **已登记的那条来源只说 'the extremal case h^{1,1}=491'，没有说'最大值'**；'maximum/maximal' 字样只在未登记的 2309.13145v3 与 2405.08871v4 里"
+  - "**h^{1,1} + h^{2,1} ≤ 502 完全无出处**：KS 摘要、KS 正文、那四篇摘要里都没有这个数。**不得写入本图**"
+  - "'最大值被取到'这一点由 'the extremal case h^{1,1}=491' / 'the maximal polytope with Hodge numbers h^{1,1} = 491' 两句支持，但本项目未核实取到该值的那个多面体"
+  - "光滑性/构造细节（多面体到光滑 CY3 超曲面的解消选择）本项目完全未核实；不同解消可给不同 h^{1,1}，KS 摘要说的是 'smooth Calabi-Yau threefolds that are hypersurfaces in toric varieties'，本卡照抄这个刻画而未追究其精确含义"
+notes: |
+  from: literature/extractions/math-sources.md §46.5。
+
+  【为什么不是 rigorous】这是一条**有限枚举/数据库**事实，原则上可判定，但本项目的证据是四条
+  二手摘要，谁都没有读原始数据或复算。本图的状态阶梯里没有"计算机验证的枚举"这一档；
+  按"不确定选低一级"取 physical-argument。**这不是对 491 的怀疑**，而是溯源深度的记账。
+
+  【升级路径（2026-09-11 更新）】arXiv:2008.01730 已**登记**为 `demirtas-2020`（L2，摘要），
+  但**正文仍未读**——下一步就是读它的正文（标题就叫 "Bounding the Kreuzer-Skarke Landscape"，
+  是最有希望的一枪），或直接查 Kreuzer 的 CY 数据库；并登记 2309.13145 与 2405.08871
+  （"maximum/maximal" 字样的唯一出处）。
+  ⚠ 顺带的否定结论：`demirtas-2020` 的**摘要全文逐字检索不含 "502"**，故 Q46.1
+  （h^{1,1}+h^{2,1} ≤ 502 的一手出处）**仍未解决**，下一枪必须是正文而不是摘要。
+
+  【★ 本推导没有出边，不会把任何东西抬高】特别是**不与 math.cy3-cohomology-bounded 建边**：
+  KS 超曲面只是 CY3 的一个子族，一般情形的有限性截至 2026-06 仍开放。
+author: curator
+created: "2026-09-11"

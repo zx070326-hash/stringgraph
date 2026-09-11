@@ -1,0 +1,30 @@
+id: swampland.ov-conjecture-4-no-minimal-length-cycle--via-no-global-charges
+target: swampland.ov-conjecture-4-no-minimal-length-cycle
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, Conjecture 4 的第二条动机, p.5"
+summary: |
+  全局荷论证，逐字："Suppose we compactify the theory further down to (1+1) dimensions and choose
+  the space to be a circle. If there is a non-trivial 1-cycle in M with minimum length, we can use
+  it to define a state with a non-zero global charge by going over the corresponding path on the
+  circle. Since there are no global charges in a gravitational theory (to be consistent with
+  no-hair theorems for black holes), this cannot happen. This suggests that at least the center of
+  π₁ is trivial."
+
+  **注意结论强度**：本条只给出 π₁ 的**中心**平凡，比 Conjecture 4 本身弱，也比不动点论证弱；
+  原文自己写了 "at least"。
+gaps:
+  - "**结论比目标弱**：只给 π₁ 中心平凡，不给'无最小长度 1-cycle'；原文自陈 'This suggests that at least …'"
+  - "'引力理论中没有全局荷'被当作已知前提使用，本文不论证它、也不给引用（本图无相应节点；Arkani-Hamed 等 2006 §2.2 把它引给 Susskind hep-th/9501106）"
+  - "'无毛定理'同样只被引用，未给出处"
+  - "从'最小长度 1-cycle'到'非零全局荷态'的构造只有一句话，没有写出构造细节"
+notes: |
+  from: ooguri-vafa-2006#E12 备注 2。
+author: curator
+created: "2026-09-11"

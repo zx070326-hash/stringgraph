@@ -1,0 +1,57 @@
+id: swampland.applicability-domain
+kind: definition
+status: physical-argument
+title: 沼泽地几何猜想的适用域（有限 Planck 质量、≥ 4 维、dim M ≠ 0）
+statement: |
+  Ooguri–Vafa 2006 §2 开头对其 Conjecture 0–4 的适用域声明，逐字（p.2）：
+
+    "We claim that our conjectures apply to consistent quantum theories of gravity with
+     finite Planck mass in 4 and higher spacetime dimensions. We do not consider 3 or lower
+     dimensions as gravity does not contain propagating degrees of freedom in these
+     dimensions, though some of our conjectures may be applicable to 3 dimensional cases
+     as well. Our conjectures should apply to string theories compactified to 4 and higher
+     dimensions. But they should also apply to other consistent quantum gravity theories in
+     these dimensions if they exist."
+
+  第三个条件在 §2 (p.3) Conjecture 1 之前给出，逐字：
+
+    "Let us assume that the dimension of M is not zero."
+
+  （摘要的对应措辞是 "moduli spaces with finite non-zero diameter belong to the swampland"，
+  其中 "non-zero" 即此条件。）
+
+  第四条（适用对象的扩张，§1, p.2 逐字）：
+
+    "Our conjectures apply both to the moduli space of scalars, as well as the subspaces
+     parameterizing minimum loci for the potentials defined on such spaces."
+
+  故本图中挂 Ooguri–Vafa Conjecture 0–4 的每条陈述，其适用域为：
+    (D1) 一致的量子引力理论，**Planck 质量有限**（等价于 Newton 常数非零）；
+    (D2) 时空维数 ≥ 4（3 维及以下不在适用域内，原文只说"其中一些猜想或许也适用"）；
+    (D3) 模空间 M 的维数 ≠ 0；
+    (D4) M 可以是标量模空间，也可以是势能极小轨迹所参数化的子空间。
+
+  **不满足 (D1)–(D3) 的模型给出的违反例不构成对这些猜想的反驳**（见
+  swampland.finiteness-criteria-fail-without-gravity）。
+uses: []
+uses_conventions: [conv.moduli-metric-planck-units]
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §2, p.2（≥ 4 维与有限 Planck 质量）；§2, p.3（dim M ≠ 0，Conjecture 1 之前）；§1, p.2（势能极小轨迹）；Abstract（'finite non-zero diameter'）"
+tags: [swampland, definition, applicability, moduli-space]
+notes: |
+  from: ooguri-vafa-2006#E5、#E8、#E4、#E1。
+
+  【status = physical-argument 的理由】"consistent quantum theories of gravity"与"moduli
+  space M"在本图中都不是已定义的数学对象；本卡是对适用条件的忠实记录，不是数学定义。
+  按"不确定选低一级"取 physical-argument。
+
+  【与 Vafa 2005 的关系】Vafa 2005 的三条有限性判据也以"Newton 常数非零 / M_p ≠ ∞"为前提
+  （§1 p.2、§2 p.3、§2 p.4、§3 p.5–6），与本卡的 (D1) 是同一件事，**但那是另一篇论文的
+  另一套判据**，本卡不覆盖它们；Vafa 的前提写在各自陈述卡的正文里。
+
+  【原文自身的一处张力（未裁决）】Conjecture 0 的说明段说"参数固定且不能局部变化的引力理论
+  属于 swampland"，这似乎在说 dim M = 0 本身有问题；而 (D3) 又把 dim M = 0 排除在
+  Conjecture 1 的适用域外。**原文没有裁决**（抽取记录 ooguri-vafa-2006#Q1）。
+author: curator
+created: "2026-09-11"

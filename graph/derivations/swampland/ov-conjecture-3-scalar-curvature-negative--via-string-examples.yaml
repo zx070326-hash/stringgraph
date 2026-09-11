@@ -1,0 +1,44 @@
+id: swampland.ov-conjecture-3-scalar-curvature-negative--via-string-examples
+target: swampland.ov-conjecture-3-scalar-curvature-negative
+kind: conjecture-support
+status: conjecture
+depends_on:
+  - id: swampland.applicability-domain
+    inferred: false
+  - id: swampland.hypermultiplet-moduli-negative-curvature
+    inferred: true
+    note: >-
+      原文在给出这条支撑时把编号印成 "satisfying the conjecture 2"（§3.1, 第一个 Example v, p.9）；
+      按内容应为 conjecture 3（Conjecture 2 讲轻粒子塔，与曲率无关）。**该判定是本项目的，非原文**，
+      故本边标 inferred（抽取记录 ooguri-vafa-2006#Q2、#U4）。
+      ⚠ **第二个 inferred 的理由（2026-09-11 补）**：依赖卡的内容（据两条 L3 转引）是
+      "constant negative scalar curvature"（**处处**常负），而 Conjecture 3 断言的是**无穷远处非正**；
+      **量词不同，互不蕴含**。且依赖卡只覆盖 4d N=2 超多重态耦合超引力，不是一般量子引力模空间。
+      见 literature/extractions/bagger-witten-1983.md Q3。
+  - id: conv.moduli-metric-planck-units
+sources:
+  - ref: ooguri-vafa-2006
+    loc: "arXiv:hep-th/0605264v1, §3.1, Example ii), p.6–p.7（常负曲率）；§3.1, Example iv), p.7–p.8；§3.1, 第一个 Example v（Calabi–Yau threefolds）, p.8–p.9（曲率积分估计与超多重态）"
+summary: |
+  §3.1 给出的三类支撑：
+  - Example ii) IIB dilaton-axion：度规 (3.1) 有**常负曲率**，且商掉 SL(2,Z) 后曲率积分与体积
+    积分都有限。
+  - Example iv) 16 超荷的陪集空间："These spaces have negative curvatures, satisfying the
+    conjecture 3."
+  - Example v)（CY 三折）：向量多重态模空间的曲率**不必为负**，但标量曲率在无穷远奇点处渐近为负；
+    原文用 [12] Lu–Sun 的结果把 Einstein 作用量写成 ∫_M √g R ~ ∫ c₁ ∧ k^{n-1}，并称
+    "One can show that infinite distance singularities always give strictly negative contributions
+    to the integral"（脚注致谢 Z. Lu 协助该估计）；单 Kähler 模的 CY 在大体积极限总给常负曲率。
+    超多重态一支由局部 N=2 超对称给出负标量曲率（本图
+    swampland.hypermultiplet-moduli-negative-curvature，源自 Bagger–Witten 1983）。
+gaps:
+  - "★ 原文在 §3.1 Example v 有**两处**把 'conjecture 3' 印作 'conjecture 2'（曲率语境），本项目判为误植（ooguri-vafa-2006#Q2）"
+  - "曲率积分估计外包给 [12] Lu–Sun (CMP 261, 297 (2006))，本项目未抽取；原文只说 'One can show that'"
+  - "超多重态那一支的实质来源 Bagger–Witten 1983 本项目未获取（L0）"
+  - "向量多重态的曲率符号不必为负，仅渐近为负；本条陈述已限定在'无穷远点附近'"
+  - "4d N=1 例子**无法检验**本条：原文逐字 'it is difficult to test the conjecture 3 about the curvature of M'（#E20）"
+  - "更强的截面曲率版本被原文自己否定（弦论中有正截面曲率的点）（#E11）"
+notes: |
+  from: ooguri-vafa-2006#E11、#E16、#E18、#E19。
+author: curator
+created: "2026-09-11"
