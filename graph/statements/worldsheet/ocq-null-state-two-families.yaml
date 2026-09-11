@@ -171,5 +171,39 @@ notes: |
   ⇒ 本卡（一般 N，(1)(2)(3) 全部）与其推导的 status 仍是 physical-argument，
   不受这次 Lean 化影响；只有它的 N=2、Type-2 特例现在有了一个独立、更严格（formalized）
   的旁证。
+
+  【2026-09-12（二）：N=2 的完整实例（Type 1 + Type 2 + 计数 + 线性无关 + 落在 H_null）
+  现已全部 Lean 化，但本卡 status 仍不升级（curator，分支 agent/curator/b26-two-wire，
+  依派活任务交付物 #3）】
+  formal/StringFormal/NoGhost/LevelTwoCount.lean（合入 main，无 sorry）在上面【2026-09-12】
+  一段记录的三条缺口——(i) Type 1 族无 Lean 对应、(ii) 25 个 Type-1 种子的线性无关、
+  (iii) 占据数计数 p_{D−1}(2) − p_{D−2}(2) = D——现已**全部**补齐：
+    (i) Type 1 族 ⇒ `typeOneTwo`、`typeOneTwo_mem_towerNullSubmodule`（本卡 (1) 在 N=2、
+        且不限于层真空的准物理种子上的显式构造：`L_{−1}((e·α_{−1})|0;p_{−2}⟩)`，
+        `e·p_{−2}=0`）；
+    (ii) 线性无关 ⇒ **`linearIndependent_nullFamilyTwo`**（D 个候选——D−2 个横向 Type-1、
+        1 个沿 a−b̃ 方向的 Type-1、1 个 Type-2——联合线性无关，**不用 D=26**，文件头
+        docstring 逐字"Independence does not use `D = 26`"）；
+    (iii) 占据数计数 ⇒ **`levelTwo_count_identity`**（math.level-two-partition-difference
+        的 Pascal 恒等式 p_{D−1}(2) − p_{D−2}(2) = D，对一切 D 成立）。
+  三者拼上 worldsheet.level-two-null-state-requires-d26 的 `descTwo_single_mem_towerNullSubmodule`
+  （Type-2 后代的物理性，**唯一用到** `(D:K)=26` 的一步），给出
+  **`descTwo_single_mem_towerNullSubmodule` 是本卡 (2)(3) 在 N=2 处的完整机检版本**，
+  D−1 个 Type-1 种子的具体身份是 **{ε_i} ∪ {a}**（D−2 个横向偏振方向 ε_i，加一个沿
+  基点动量方向 a 的种子，满足 a·p_{−2}=0——即本卡 (1) 里"φ ∈ Q_{N−1}"在 N=2 时的
+  D−1 维具体张成基），图上承载完整结果的新卡是
+  **worldsheet.ddf-spans-physical-states-level-two**（formalized，配套推导
+  `--via-lean`）。
+
+  ⚠ **本卡 status 仍是 physical-argument，不因此升级**：本卡断言的是**一般 N**
+  的 (1)(2)(3)（含一般 N 的 Type1/Type2 构造、验证方程与落在 H_null 内），
+  LevelTwoCount.lean 只做了 **N=2 这一个特例**的机检——按项目原则 1/2
+  （陈述不可变、status 只能实话实说自身论证的严格程度），一般 N 命题的 status
+  不能因为某个特例被形式化而就地升档。本卡与
+  worldsheet.ddf-spans-physical-states-level-two（N=2、formalized）是**并列**关系
+  （后者是前者在 N=2 的独立、更强旁证，不是前者的推导，也不 supersede 前者），
+  与上面【2026-09-12】一段登记的分工原则一致。一般 N（尤其 N≥5 起两族零态像的
+  重叠，即本卡【明确不断言】(a) 与 worldsheet.ddf-spanning-rank-inequality notes
+  (iv) 记录的 Euler 五边形数障碍）仍完全开放，不受本次 N=2 工作影响。
 author: curator
 created: "2026-09-12"
