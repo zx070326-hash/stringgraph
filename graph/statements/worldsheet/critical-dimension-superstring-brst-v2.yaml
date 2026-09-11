@@ -1,0 +1,107 @@
+id: worldsheet.critical-dimension-superstring-brst-v2
+kind: proposition
+title: 超弦 BRST 荷幂零要求物质中心荷 c^m = c̃^m = 15（单向 ⟹；本卷无来源，只有外部文献的平坦情形）
+statement: |
+  设 Q_B 如 worldsheet.superstring-brst-charge 所定义（λ = 2 的 bcβγ 超共形鬼场，
+  c^g = −15），作用在受限模上（定义见 worldsheet.superstring-brst-nilpotent-at-c15）。则
+
+    **Q_B² = 0 ⟹ c^m = c̃^m = 15**（等价地，总中心荷 c^m + c^g 必须为零）。
+
+  即：BRST 幂零性**挑出**临界中心荷，这是"由 BRST 定出临界维数"这句话的实际内容。
+  在物质部门取 D 个平坦 X^μψ^μ SCFT 这一情形下，配合 c^m = (3/2)D
+  （worldsheet.rns-matter-central-charge）即得 **D = 10**。
+
+  ⚠⚠ **本卡的证据状况（必须与陈述一起读，否则会高估本卡）**：
+    (1) **Polchinski Vol.2 没有这个方向**。§10.5 (10.5.23) 下方那段逐字只写
+        'one can verify nilpotence … **whenever** the total central charge vanishes'，
+        即 ⟸。本卷再无第二处。⇒ 本卡**不能**以 Polchinski 为来源。
+    (2) **有显式系数的来源只覆盖平坦情形**：ito-morozumi-nojiri-uehara-1986 (3.8)(3.9)
+        把 (Q_B^NS)²、(Q_B^R)² 写成鬼场数算符的线性组合，系数是 D 与正规序常数 α₀ 的多项式，
+        (3.10) 逐字 'demands D = 10 and α₀^NS = 1/2 … D = 10 and α₀^R = 0'。
+        那里用的是 **D**，不是中心荷；且只算平坦 D 个 X^μψ^μ，
+        **不覆盖**"任意正范数 SCFT"这一般情形。
+    (3) **唯一带 iff 的编号陈述自己不证**：lian-zuckerman-1989 Proposition 1.7(ii)
+        逐字 'Q² = 0 iff D = 10.'，证明逐字 '(ii) is done in [13, 15].'
+        （[13] = ohta-1986，正文未取得；[15] = Terao–Uehara PLB 168B，本项目 bib 未登记）。
+    (4) ohta-1986 只有摘要（L2），方向也是 ⟹（'are shown to follow from'）。
+  ⇒ 本卡的一般形式（任意正范数 SCFT）在现有来源里**没有**论证，只有平坦特例加一步外推。
+  这是本卡状态低于 worldsheet.superstring-brst-nilpotent-at-c15 的原因。
+
+  **本命题不断言**：
+    (1) 不断言 ⟸（那是 worldsheet.superstring-brst-nilpotent-at-c15，来源与状态都更强）；
+    (2) 不断言 D = 10 本身——由 c^m = 15 到 D = 10 还要 c^m = (3/2)D 那一步公共输入；
+    (3) 不断言任何截距。⚠ 来源把两者绑在一起：IMNU (3.10) 与 ohta-1986 摘要都把临界维数
+        **与截距**一并归给 Q_B² = 0（IMNU 的值 α₀^NS = 1/2、α₀^R = 0）。
+        本图按"一个节点一个命题"只取中心荷那一半；截距见
+        worldsheet.open-superstring-mass-shell。
+    (4) 不断言 IMNU / LZ / Ohta 的 Q_B 与本卷 §10.5 的 Q_B 是逐字同一个算符
+        （量子化方案不同，本图未核实）。
+uses_conventions:
+  - conv.metric-mostly-plus
+  - conv.alpha-prime-regge
+  - conv.virasoro-standard
+sources:
+  - ref: ito-morozumi-nojiri-uehara-1986
+    loc: "§3, pp.941–943：**(3.8)**（(Q_B^NS)² 的显式系数：((D−10)/8)n³ + ((16α₀^NS − D + 2)/8)n 与 ((D−10)/2)r² + (16α₀^NS − D + 2)/8）、**(3.9)**（(Q_B^R)²：((D−10)/8)n³ + 2α₀^R n、((D−10)/2)n² + 2α₀^R，**外加末项 (1/π)α₀^R ζ₀²**）、**(3.10)** 逐字 'Thus the nilpotency of the BRS charges, which means the vanishing of the conformal anomaly, demands D = 10 and α₀^NS = 1/2 for the NS model, D = 10 and α₀^R = 0 for the R model.'"
+    note: |
+      L1（全文 19 页逐页读图；literature/extractions/ito-morozumi-nojiri-uehara-1986.md E2）。
+      ★★ **本图现有来源里唯一写出超弦 Q_B² 显式系数的位置**，也是本卡（⟹ 方向）的主来源。
+      ⚠ 三条使用限制：(a) 方向确是 ⟹（'demands'、紧随 'These conditions are **necessary**
+      to prove the no-ghost theorem in the next section.'）；(b) 用 **D** 而非 c^m，
+      且**只算平坦 D 个 X^μψ^μ**；(c) 量子化方案与 Polchinski 不同（IMNU (2.1)(2.7)）。
+      ★ R 扇区 (3.9) 末项 α₀^R ζ₀² 含 βγ 零模——α₀^R = 0 同时消掉它。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 1.7(ii)**, p.307–308，逐字 'Q² = 0 iff D = 10.'；证明逐字 '(ii) is done in [13, 15].'（[13] = ohta-1986；[15] = Terao–Uehara, Phys. Lett. 168B (1986) 70）"
+    note: |
+      L1（全文 35 页逐页读图；literature/extractions/lian-zuckerman-1989.md E1、§4 Q3）。
+      ★ 文献中唯一带「iff」的编号陈述，即"⟺"这个措辞的唯一编号来源；
+      ⚠⚠ **LZ 自己不证**，外包给 ohta-1986（正文未取得）与 Terao–Uehara（bib 未登记）。
+      ⇒ 「iff」的可追溯性止于 LZ 的陈述；其**证明**的可追溯性止于 IMNU (3.8)(3.9)。
+      ⚠ LZ 的中心荷归一化是 c/8 (m³ − 2κm)，其 D = 10 对应本图 c^m = 15；
+      其 Proposition 1.2 给鬼表示 ρ(c) = −10（= 本图 c^g = −15）。
+      ⚠ **编号陷阱**：LZ p.305 有 Lemma 1.4、p.306 又有 Definition 1.4，引用必须带类型词。
+      ⚠ **反向禁令**：**不得**把本条当作玻色弦 c^m = 26 的 iff 来源（那是 RNS 超弦）。
+  - ref: ohta-1986
+    loc: "全文；摘要（L2）。摘要逐字：'The critical dimension D=10 and the correct Regge intercept are shown to follow from the requirement of the nilpotency Q_B²=0 of the BRS charge.'"
+    note: |
+      **正文未取得（L0）**；获取失败留痕见 literature/extractions/ohta-1986.md §0.4。
+      **loc 只能写「全文；摘要（L2）」，不得写页码或式号。**
+      ⚠ 方向只有 ⟹；摘要不给截距数值。本条是 lian-zuckerman-1989 Prop 1.7(ii)
+      证明外包的对象之一，与上一条是同一条证据链的两端。
+  - ref: polchinski-1998-v2
+    loc: "§10.5, p. 24, **(10.5.23) 下方一段（无式号）**（逐字 'one can verify nilpotence by the same steps as in the bosonic case (exercise 4.3) **whenever** the total central charge vanishes'）"
+    note: |
+      ⚠ **反面对照，不是本卡的来源**：这句只给 ⟸。列在这里是为了让读者看到
+      「本卷没有 ⟹」这件事有原句支撑。⟸ 那一半见
+      worldsheet.superstring-brst-nilpotent-at-c15。
+tags: [superstring, brst, critical-dimension, central-charge, nilpotency]
+notes: |
+  【本卡的来历】旧卡 worldsheet.critical-dimension-superstring-brst 把两个方向写成一条
+  「Q_B² = 0 ⟺ c^m = 15」，并以 Polchinski §10.5 为主来源。
+  reviewer-v2-ch10b（2026-09-11）指出 §10.5 原句只给 ⟸，故把双向卡拆开换代：
+    ⟸（更强、有本卷来源）→ worldsheet.superstring-brst-nilpotent-at-c15
+    ⟹（本卡，本卷无来源，只有 IMNU 平坦特例 + LZ 的无证明 iff + Ohta 摘要）
+  旧卡 superseded_by 本卡。
+
+  【为什么本卡的推导标 conjecture 而不是 physical-argument】
+  IMNU (3.8)(3.9) 的形式算子平方**确实**给出平坦情形的 ⟹，若只断言平坦情形，
+  physical-argument 是合适的。但本卡陈述的是**一般形式**（任意正范数 SCFT，与旧卡一致，
+  也与 ⟸ 卡的范围一致），而**没有任何来源**对一般 SCFT 做过这个方向；
+  从平坦特例外推到一般 SCFT 是本图的猜测。故 --via-explicit-nilpotency-coefficients
+  在改指本卡后按 lead 裁决（2026-09-11）标 conjecture-support / conjecture。
+  ⇒ **凡是只需要"Q_B² = 0（上同调有定义）"的下游推导，都应依赖
+  worldsheet.superstring-brst-nilpotent-at-c15，不要依赖本卡**，否则会被本卡的
+  conjecture 状态拖低。六条既有推导（no-ghost 超弦两支、BRST≅OCQ、picture independence 等）
+  已按此改指。
+
+  【若要把本卡抬到 physical-argument，需要的一件事】
+  把陈述收窄到"平坦 D 个 X^μψ^μ"，即另立一张
+  worldsheet.superstring-brst-nilpotency-requires-d10-flat 之类的卡，由 IMNU 直接支撑；
+  本卡则保留为一般形式的猜测。**本轮不做**（会再生一张卡，需 lead 裁）。
+
+  【与玻色弦一侧的不对称】玻色弦侧 worldsheet.critical-dimension-brst-v2 保留了双向陈述，
+  理由是 Vol.1 (4.3.9)/(4.3.10) 有**显式 Q_B² 公式**，两个方向出自同一个计算；
+  超弦侧本卷没有那个公式，故必须拆。反过来，iff 型编号陈述只有超弦侧有
+  （LZ Prop 1.7(ii)），玻色弦侧连陈述都没有。两侧的证据结构正好错开。
+author: curator
+created: "2026-09-11"

@@ -1,7 +1,7 @@
-id: worldsheet.critical-dimension-superstring-brst--via-explicit-nilpotency-coefficients
-target: worldsheet.critical-dimension-superstring-brst
-kind: physical-argument
-status: physical-argument
+id: worldsheet.critical-dimension-superstring-brst-v2--via-explicit-nilpotency-coefficients
+target: worldsheet.critical-dimension-superstring-brst-v2
+kind: conjecture-support
+status: conjecture
 depends_on:
   - id: worldsheet.superstring-brst-charge
     note: |
@@ -100,7 +100,18 @@ summary: |
      c^m = (3/2)D 一步（该步由 depends_on 里标 inferred 的
      worldsheet.rns-matter-central-charge 供给，IMNU 不提供）。
 
-  【status: physical-argument 的理由（三条）】
+  【2026-09-11 改指与降级（reviewer-v2-ch10b 必修 + lead 裁决）】
+  原 target 是双向卡 worldsheet.critical-dimension-superstring-brst（⟺）。该卡已被拆开换代：
+    ⟸（c^m = 15 ⟹ Q_B² = 0）→ worldsheet.superstring-brst-nilpotent-at-c15（本卷有原句，physical-argument）
+    ⟹（Q_B² = 0 ⟹ c^m = 15）→ worldsheet.critical-dimension-superstring-brst-v2（**本推导现在的 target**）
+  本推导支撑的是 ⟹ 那一半（IMNU (3.10) 'demands'）。但 v2 卡的陈述是**一般形式**
+  （任意正范数 SCFT），而 IMNU **只算平坦 D 个 X^μψ^μ**，从特例到一般 SCFT 是本图的外推，
+  无来源。故本推导按 lead 裁决标 **conjecture-support / conjecture**，
+  即「IMNU 使 ⟺ 可见，但一般形式仍是推测」。
+  ⚠ 因此**不要**让只需要 Q_B² = 0 的下游推导经过 v2；它们应依赖
+  worldsheet.superstring-brst-nilpotent-at-c15（六条既有推导已改指）。
+
+  【原 status 理由（仍然成立，现在是「即使收窄到平坦情形也不会更高」的理由）】
   (1) (3.8)(3.9) 是**形式算子平方**的结果：无穷模式和的重排、正规序的处理、算子在何种模上良定义
       ——IMNU 一概不论（对照 lian-zuckerman-1989 Proposition 1.7(i) 才显式断言
       'All the operator sums above are well-defined on C'，但那是 LZ 的框架）；
@@ -108,8 +119,9 @@ summary: |
       IMNU 只算平坦 D 个 X^μψ^μ（见 gaps）；
   (3) 「⟺」的编号来源（lian-zuckerman-1989 Prop 1.7(ii)）**自己不证**，
       外包给 ohta-1986（正文未取得）与 Terao–Uehara（bib 未登记）。
-  ⇒ 本推导**不**把本卡抬离 physical-argument；它的价值是把"按同样的步骤（习题）"换成
-  可逐系数核对的显式公式，并把 ⟹ / ⟸ 两个方向的证据分开记清。
+  ⇒ 即使把 v2 的陈述收窄到平坦情形，本推导也只能给到 physical-argument；
+  在一般形式下它是 conjecture。它的价值是把"按同样的步骤（习题）"换成可逐系数核对的
+  显式公式，并把 ⟹ / ⟸ 两个方向的证据分开记清。
 gaps:
   - |
     ★ **本推导只覆盖"平坦 D 个 X^μψ^μ"这一特例，不覆盖本卡陈述的一般形式。**

@@ -7,8 +7,12 @@ depends_on:
     note: |
       供给 Q_B（本卡上同调的微分）与 {Q_B, b_n} = L_n、[Q_B, β_r] = G_r。
       Dedushenko 用的是同一套 RNS BRST 荷（其 [2] = polchinski-1998-v1 是他明写的模板之一）。
-  - id: worldsheet.critical-dimension-superstring-brst
-    note: 供给 Q_B² = 0（D = 10 / c^m = 15），使上同调有定义。
+  - id: worldsheet.superstring-brst-nilpotent-at-c15
+    note: |
+      供给 Q_B² = 0（D = 10 / c^m = 15），使上同调有定义。
+      ⚠ 2026-09-11（reviewer-v2-ch10b）：本边原指双向卡
+      worldsheet.critical-dimension-superstring-brst（已换代）。本推导只需要 Q_B² = 0，
+      故改指单向弱卡（c^m = 15 ⟹ Q_B² = 0）；⟹ 方向的卡是 conjecture，不经过本边。
   - id: worldsheet.superconformal-ghost-modes
     note: |
       供给 βγ 与 bc 的模式。**picture number A 就是 βγ 真空的标号**：
