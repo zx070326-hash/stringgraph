@@ -35,6 +35,8 @@ statement: |
       ——Lean 同文件另有 `noghost_lightcone_frame_satisfiable`、`noghost_transverse_gram_satisfiable`
       两条，内容更多，本卡不覆盖（一个节点一个命题）。
   (d) 不断言任何 D ≤ 2 的事。
+uses:
+  - worldsheet.ddf-light-cone-frame
 uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.intercept-sign-a]
 formal:
   lean_decl: StringFormal.NoGhost.noghost_hypotheses_satisfiable
@@ -103,5 +105,17 @@ notes: |
   b·b̃ = −1、b̃² = 0，即 Brower 纵向算子与蓝图 §B.4 幺三角基变换用的光锥对）与
   `noghost_transverse_gram_satisfiable`（D − 2 个横向偏振 e_i（i ≥ 2）全横向且 Gram = δ_{ij}，
   有序域上即横向 Gram 正定）。需要时各自立卡。
+
+  【2026-09-11（lightcone-frame，curator）：上一段的「需要时各自立卡」已部分落地】
+  那两条 Lean 定理描述的对象现在有定义卡了：**`worldsheet.ddf-light-cone-frame`**
+  （definition，status rigorous）把类光 b、动量 a、共轭类光 b̃ 与 D−2 个横向 ε_i 的条件
+  合成 (F1)–(F8)，其中 (F4) 就是本卡【不断言】(c) 点名的 b̃ 那一条，(F7) 是横向 Gram = δ_{ij}。
+  本卡 `uses` 加它作指针。
+  ⚠ **本卡断言与 status 不变**，(c) 的「本卡不覆盖」仍然成立——新卡是**定义**，
+  不是「那两条可满足性命题」的卡；那两条命题（b̃ 与横向 Gram 的可满足性）**仍未立命题卡**，
+  只作为新卡【非空性】一段的见证依据被引用。
+  ⚠ 指针用 `uses` 而**不是**在 --via-lean 推导上加 `depends_on`：本卡陈述不点名标架，
+  加边属 docs/STATUS_LEVELS.md 禁止的「只提供语境」，且会把本卡 effective 压到 rigorous
+  并沿 transverse-frame-spans 再传一层（实测三条同类边合计 77 → 73）。详见 --via-lean 的 notes。
 author: curator
 created: "2026-09-11"
