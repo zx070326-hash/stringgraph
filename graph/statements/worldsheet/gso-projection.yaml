@@ -50,5 +50,22 @@ notes: |
   是局域时空超对称的标志）见 worldsheet.type-ii-spacetime-supersymmetry。
   ⚠ 那张卡的 status 受原书一句赤裸断言影响（'if all requirements for a consistent string
   theory are met (and they are)'）。
+
+  ★★【数学文献一侧的对应物（2026-09-11 新建，**本卡未接线**，lead 指示留 reviewer）】
+  **worldsheet.superstring-gso-covariant-equivalent**（= Lian–Zuckerman 1989 **Proposition 4.3**）
+  是本图目前**唯一** rigorous 的"GSO 之后"候选来源：它在相对 BRST 复形上造出投影子
+  P̄_± = ½(1 ± (−1)^{U+κ}Ḡ_κ)，证明 H*_rel ≅ H*(P̄_+C_rel) ⊕ H*(P̄_−C_rel) 是正交分解
+  且 dim H^n(P̄_+C_rel) 只在 n = 0 非零。
+  ⚠⚠ **为什么不接边**：两侧的投影算子**不是同一个对象**——本卡用世界面费米数 exp(πiF)、
+  exp(πiF̃)（不含鬼场），LZ 用含**鬼场贡献**的 (−1)^{U+κ}Ḡ_κ（p.329 Remark 列出四个鬼场对合
+  因子）。文献里公认两者对应同一件事，但**这个字典本图未核实，LZ 也不写 exp(πiF)**。
+  ⇒ 要接线必须先核字典；硬接一条 inferred 边不如把缺口写明。
+  ⚠ 另两点不对齐（都写在新卡的"本命题不断言"里）：
+    (1) LZ §4 处理**单侧**（开弦型）复形，**没有** IIA/IIB/type 0 的三分与手征性；
+    (2) LZ 的动词是 **achieved**（p.330 'Thus we have achieved the "covariant" equivalent of
+        the GSO projection.'，引号只包 covariant），即**协变重述**，不是证明 GSO 投影；
+        原始提案 LZ 明确归 **Gliozzi–Scherk–Olive 1977**，且说那是在 "old covariant" 形式下提的
+        ——这与本卡"GSO 不是独立公设"的逻辑方向**同向**（本卡由一致性条件解出，LZ 由代数截断
+        协变化），两者都不把 GSO 当作额外公设。
 author: curator
 created: "2026-09-11"

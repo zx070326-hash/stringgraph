@@ -159,6 +159,13 @@ notes: |
   ⚠ 该约定卡 (A) 段有同款措辞「相对上同调集中在鬼数 0」，其 definition 正文按
   「约定卡不因下游换代而改字」不动，已在其 notes 补一段澄清。
 
+  ★【"本命题不断言 (e)" 的状态更新（2026-09-11）】(e) 的正文写「LZ §4 Proposition 4.3，
+  **本图未建卡**」——**该卡已建**：worldsheet.superstring-gso-covariant-equivalent
+  （推导 --via-lian-zuckerman-1989，rigorous）。按 graph/CLAUDE.md「换代时陈述正文内嵌 id /
+  状态描述不就地改字」，(e) 的正文**不动**，在此记账：本卡**仍然不断言** GSO 之后的版本
+  （这一点不因新卡出现而改变），只是那个版本现在在图上有了节点，且它 **depends_on 本卡**
+  （Prop 4.3(ii) 的证明逐字 'Combining (i) and Theorem 2.4'）。
+
   【与 no-ghost-theorem-superstring-cohomological 的分工】
   本卡 = "上同调集中在一个次数"（纯上同调，无度量）；那张卡 = "该次数上的形式正定"
   （用本卡 + Euler–Poincaré + Proposition 2.14(ii) 的 char = sign）。
