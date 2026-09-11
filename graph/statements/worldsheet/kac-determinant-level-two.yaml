@@ -75,6 +75,18 @@ sources:
       文件头 Status 段自述「No `sorry`, no new axioms」，其第 2 条 gap 逐字说明
       「Gram matrix entries are stated for the *specific vectors* …, not for a basis of `V_N`」。
       **curator 未自行重跑 `lake build`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/GenericIndependence.lean :: StringFormal.Virasoro.{kac_level_two_square, kac_level_two_pos, kac_level_two_nonneg, kac_level_two_at_c_one, IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two, levelSpan_two_eq_span_descFamily2, composition_two_blocks, IsContravariant.gram_det_descFamily2, IsContravariant.linearIndependent_descFamily2, IsContravariant.finrank_levelSpan_two, IsContravariant.linearIndependent_descFamily2_of_pos, IsContravariant.finrank_levelSpan_two_of_pos}"
+    note: |
+      **只支持本卡 notes 的两段【2026-09-11（三）】，不承载陈述的任何条款**（陈述未改）。
+      内容分两组：(i) 本卡 (3) 右端那个多项式的符号结论（h > 0、c > 1 ⇒ det₂ > 0，c 无上界；
+      c = 1 时 det₂ = 2h(4h−1)²；c = 1, h = 1/4 处 (L₋₂ − L₋₁²)v 与整个 V₂ 正交）；
+      (ii) 在 det₂ ≠ 0 处把本卡【不断言】(a) 局部解除的那条链
+      （V₂ = span{a,b} 无条件，加 Gram 判据得线性无关与 dim V₂ = 2）。
+      图侧承载在 worldsheet.verma-level-basis-generic-low-levels（同分支新建，formalized）。
+      提交：0c47c84 与 f4df390（分支 agent/formalizer/generic-pbw），由 lead 以 **ff1a7d6** 合入 main；
+      Lean 4 + Mathlib v4.33.1，无 sorry；公理检查由 formalizer 跑过
+      （formal/TODO.md 的 `pbw-verma` (b) 项）。**curator 未自行重跑 `lake build`**。
   - ref: schottenloher-2008
     loc: "Ch. 6 §6.3, Theorem 6.12, p. 98（h_{p,q}(c) 的显式公式）；Gram 矩阵定义 Definition 6.11, p. 97（LNP 759, pp. 91-102）"
     note: |
@@ -128,5 +140,57 @@ notes: |
   【(1) 的物理读法（本卡不断言，见【不断言】(d)）】h = 0 时 ⟨L₋₁v, L₋₁v⟩ = 0，
   这是真空模 (c, 0) 的 level-1 零向量；Lean 的 `gram_level_one` docstring 也这么写。
   把它接到奇异向量/不可约商需要另立节点。
+
+  【2026-09-11（三）：【不断言】(a) 在 det₂ ≠ 0 处**局部解除**（curator，分支
+  agent/curator/lean-wire-5；**只加 notes，陈述文本一字未动**）】
+  本卡【不断言】(a) 与上面【本卡与 worldsheet.kac-determinant 的关系】写着
+  「在 PBW 之前，本卡 (3) 的右端只是一个**恒等式**，不是『Kac 行列式在 N = 2 的值』」，
+  理由是 {a, b} = {L₋₂v, L₋₁²v} 的**线性无关**没有证。这一限定现在可以**在泛型点上**解除，
+  且**不需要** PBW：
+  · **张成（无条件）**：V₂ = span{a, b}。已形式化：
+    `StringFormal.Virasoro.levelSpan_two_eq_span_descFamily2`
+    （用 `composition_two_blocks`：2 的合成只有 [2] 与 [1,1]，故 V₂ 的定义性张成集就是这两个向量；
+    N = 2 不需要 straightening）。这比本卡当时写的「张成性是 V_2 定义的直接读出」更明确：
+    它现在是一条机器验证过的等式，而不是口头读出。
+  · **线性无关（det₂ ≠ 0 处）**：`IsContravariant.linearIndependent_descFamily2`
+    —— 本卡 (3) 的行列式非零即蕴含 {a,b} 线性无关（整环上的 Gram 判据，
+    math.gram-determinant-nonzero-implies-linear-independence）。
+  · **合起来**：特征零域上，若 det₂(c,h) ≠ 0 则 dim V₂ = 2 = p(2)
+    （`IsContravariant.finrank_levelSpan_two`），即 {a,b} 确实是 V₂ 的一组**基**，
+    ⇒ **本卡 (3) 在这些 (c,h) 处就是 level-2 的 Kac 行列式本身**，不只是一个恒等式。
+  · **仍未解除的部分**：Kac 零点（h = 0 或 16h²+2h(c−5)+c = 0）处本判据不给信息——
+    det₂ = 0 **不**蕴含 {a,b} 线性相关（Gram 判据单向）。那里要真正的 PBW
+    （math.verma-module-free-over-negative-part，rigorous、未形式化）。
+    另外整条论证仍以「存在归一化逆变型 B」为前提（本卡【不断言】(b)），
+    而它等价于 V(c,h) ≠ 0，后者是 PBW 的推论。
+  图侧承载：**worldsheet.verma-level-basis-generic-low-levels**（同分支新建，formalized），
+  N = 3, 4 的对应结论只到 dim ≥ p(N)，原因见那张卡的【不断言】(d)(e)。
+  ⚠ 按项目原则 1，本卡的 statement（含【不断言】(a) 与标题里的「张成集的 Gram，非基的 Gram」）
+  **不改**：那句话对 Kac 零点与一般基环仍然正确，本段只登记「泛型点上更强的话已可说」。
+
+  【2026-09-11（三）：det₂ 的符号与 c = 1 的零向量（同上，只加 notes）】
+  形式化侧另证了三条关于本卡 (3) 右端的**符号**结论（均在
+  formal/StringFormal/Virasoro/GenericIndependence.lean 的 `Positivity` / `NullVector` 节，
+  提交 0c47c84 与 f4df390，经 ff1a7d6 合入 main；无 sorry）：
+  · **`kac_level_two_pos`**：h > 0、c > 1 ⇒ det₂ = 2h(16h² + 2h(c−5) + c) > 0。
+    **注意 c 没有上界**：证明分两段，c ≥ 5 时逐项为正（`nlinarith`），
+    1 < c < 5 时用配方 `kac_level_two_square`：16(16h² + 2h(c−5) + c) = (16h+c−5)² + (c−1)(25−c)，
+    后一项在 1 < c < 25 为正。c > 25 时二次因子确有两个实根 h₁₂、h₂₁，
+    但其**和** (5−c)/8 < 0、**积** c/16 > 0，故两根皆负，与 h > 0 无关——
+    所以「1 < c < 25」这个通常出现在酉性讨论里的上界对本不等式是多余的。
+  · **`kac_level_two_nonneg`**：h > 0、c ≥ 1 ⇒ det₂ ≥ 0；闭区域里唯一的零点是 c = 1, h = 1/4，
+    因为 `kac_level_two_at_c_one`：c = 1 时 det₂ = 2h(4h − 1)²（两个 Kac 权在 h = 1/4 相撞）。
+  · **该零点处的零向量**：`IsContravariant.desc2_sub_desc11_orthogonal_levelSpan_two`
+    —— c = 1、h = 1/4 时本卡 (2) 的三个 Gram 元全部等于 **3/2**（⟨a,a⟩ = 4h + c/2 = 3/2、
+    ⟨a,b⟩ = 6h = 3/2、⟨b,b⟩ = 8h² + 4h = 3/2），故 2×2 Gram 矩阵是常数矩阵、det₂ = 0，
+    且 **(L₋₂ − L₋₁²)v 与整个 V₂ 正交**。它是一般 level-2 奇异向量
+    (L₋₂ − 3/(2(2h+1)) L₋₁²)v 在 h = 1/4 处（系数恰为 1）的特例。
+    两条读法：(i) Kac 零点处的退化是**型**的真退化，不是基选得不好的假象；
+    (ii) Gram 判据不可反用（见上一段末）。
+  ⚠ 这三条都是关于本卡 (3) 右端这个**多项式**的陈述，不改变 (3) 本身，故**陈述未动**；
+  它们与本卡【不断言】(e)（本卡不谈正定性/酉性）不冲突：det₂ > 0 是**行列式的符号**，
+  不是型在 V₂ 上正定（后者还需两个特征值都正，本卡与那三条都没做）。
+  ⚠ 与本卡【不断言】(f)（不断言一般 N 的 α_N 正性）同样不冲突：这里说的是 N = 2 的行列式
+  在 (h, c) 的一个区域上为正，与常数 α_N 的正性是两件事。
 author: curator
 created: "2026-09-11"

@@ -42,19 +42,32 @@ depends_on:
       本推导目标的 effective 现由 (H2) 那一线（worldsheet.ddf-operators-adjoint，physical-argument）封顶。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/NoGhost/Fock.lean :: StringFormal.NoGhost.Fock.{pairing_monomial_monomial, pairing_creation_left, pairing_creation_right, pairing_eq_zero_of_level_ne}"
+    loc: "formal/StringFormal/NoGhost/FockGram.lean :: StringFormal.NoGhost.Fock.{pairing_creationMonomial_of_hypotheses, annihilation_creationMonomial, pairing_creationMonomial_add_single, foldr_creation_vacuum, pairing_self_pos_of_ne_zero, linearIndependent_creationMonomial}；底层的型与唯一性见 formal/StringFormal/NoGhost/Fock.lean :: Fock.{pairing_unique, pairing_monomial_monomial, pairing_creation_left, pairing_creation_right, pairing_eq_zero_of_level_ne}"
     note: |
       **同型的机器验证对照**（不是本推导的形式化）。协变振子 α^μ_n 在单个 Fock 空间上的
-      同一段递推已在 Lean 中无 sorry 走通：`pairing_monomial_monomial` 就是本推导第 3 步的结论
-      ⟨X^d, X^e⟩ = δ_{d,e} ∏ (n η^{μμ})^{d(μ,n)} d(μ,n)!，把 η^{μμ} 取横向的 +1 即得目标 (1)。
-      这条 source 的作用是**为本推导的算术提供一份已被机器检查过的同型样板**：
-      本推导的归纳（对创生算符个数 |d| 归纳、把湮灭算符对易穿过创生算符串）与该文件的证明逐步同构。
+      同一段递推已在 Lean 中无 sorry 走通，图侧由 **worldsheet.bosonic-fock-gram-matrix**
+      （formalized）承载。
+      【2026-09-11（三）更新，curator，分支 agent/curator/lean-wire-5】原 loc 指
+      `Fock.pairing_monomial_monomial`，现改指 **条件版** `pairing_creationMonomial_of_hypotheses`：
+      `pairing_monomial_monomial` 只说**那一个**型 `Fock.pairing` 是对角的，而该型是按单项式基
+      **对角地定义**的，故它不是本推导的同型对照（本推导的型不预设对角，只假设 (H2)(H3)(H4)）；
+      条件版才是「任意满足真空归一化 + 互伴的双线性型都有这个 Gram 矩阵」，
+      与本推导第 2 步的结论逻辑形状相同（formal/TODO.md 的 `fock-gram` 项要求图侧引条件版）。
+      逐步对照：本推导第 0 步的「次序无关」← `foldr_creation_vacuum`；
+      第 1 步的 (★) ← `annihilation_creationMonomial`；
+      第 2 步的归纳 ← `pairing_creationMonomial_add_single` + 条件版主定理；
+      第 3 步的正定 ← `pairing_self_pos_of_ne_zero`（比本推导第 3 步强：对整个 Fock 空间成立）。
+      ⚠ 一条**订正**：本推导第 3 步由正定推出「{|{d}⟩} 线性无关」，该论证只在特征零下有效；
+      Lean 侧 `linearIndependent_creationMonomial` 表明线性无关其实来自 Fock 空间的**自由性**，
+      对任意基环成立。相关的特征零缺口见目标卡 notes【2026-09-11（三）】。
       **但目标对象不同**：Lean 里的单项式是 α^μ_{−n} 的、在单个 Fock 空间上；
-      目标是 A^i_{−n} 的、在动量塔上，而 A^i_n 与塔上的双线性型在 Lean 中都还不存在
-      （DDF.lean 文件头 "What is NOT here" 第 1 条；DDF.lean 全文 grep `pairing` 零命中，
-      2026-09-11 curator 核）。故本推导 status 是 rigorous 而**不是** formalized。
-      合并提交 2fcf86a，Lean 4 + Mathlib v4.33.1，公理仅 propext / Classical.choice / Quot.sound；
-      curator 未自行重跑 `lake build`。
+      目标是 A^i_{−n} 的、在动量塔上。A^i_n 现已有 Lean 定义
+      （`StringFormal.NoGhost.ddfOp`，见 worldsheet.ddf-operators-v6），
+      但**塔上的双线性型仍然没有**，故本推导 status 是 rigorous 而**不是** formalized。
+      FockGram.lean 的提交 f3603a1（分支 agent/formalizer/fock-gram），lead 以 05afdea 合入 main；
+      Fock.lean 的合并提交 2fcf86a。Lean 4 + Mathlib v4.33.1，公理仅
+      propext / Classical.choice / Quot.sound（formalizer 跑
+      `--import StringFormal.NoGhost.FockGram --all`，25 条 ok）；curator 未自行重跑 `lake build`。
   - ref: gsw-1987-v1
     loc: "§2.3.3 'The no-ghost theorem and the spectrum-generating algebra', p.102–112（DDF 首现 p.103；式号未核实）"
     note: |
@@ -158,15 +171,26 @@ gaps:
     这两件事的区分是本次拆卡的**全部目的**，不要混读。
   - |
     **(iv) 未形式化。** Lean 侧同型的那段（协变振子、单个 Fock 空间）已无 sorry 走通
-    （`Fock.pairing_monomial_monomial`），但 A^i_n 未定义、塔上的双线性型未定义，
-    故本目标在 Lean 中**没有目标声明**。升级到 formalized 需要三步：
-    塔上的型 → A^i_n 的定义（formal/TODO.md 的 `ddf-operators` 项）→ 照搬本推导的归纳。
+    （原文写 `Fock.pairing_monomial_monomial`；**2026-09-11（三）订正**：应引条件版
+    `Fock.pairing_creationMonomial_of_hypotheses`，图侧新卡 worldsheet.bosonic-fock-gram-matrix
+    已承载它），但塔上的双线性型未定义，
+    故本目标在 Lean 中**没有目标声明**。
+    升级到 formalized 需要：塔上的型 → 照搬条件版的证明（**A^i_n 的定义已完成**，
+    `StringFormal.NoGhost.ddfOp`，见 worldsheet.ddf-operators-v6；原文写「A^i_n 未定义」已过时）。
   - |
     **(v) (H3) 在本卡里是假设，其理由写在目标 notes 而非本推导。** 「A^i_n|0;k⟩ = 0 (n > 0)」
     实际由能级记账推出（A^i_n 降低能级 n，Fock 能级分级非负），
     这用到 worldsheet.ddf-commute-with-virasoro 与 worldsheet.bosonic-fock-space；
     本推导**不**把它们列为依赖（(H3) 是前提，不是被证的东西）。
     若日后有人要把本卡读成「无条件断言」，必须先把这两条边补上。
+  - |
+    **(vi) 第 3 步「由正定推线性无关」隐含特征零（2026-09-11（三）补，curator）。**
+    该步说「一个非平凡组合的自配对为正，不可能是零向量」，用到对角元 G_d ≠ 0；
+    在有序域上没问题（有序域必特征零），但这一步不是纯粹的「正整数之积」记账：
+    ZMod 2 上 G = 2! = 0（机器反例 `Fock.pairing_creationMonomial_self_eq_zero_zmod_two`）。
+    目标结论 (2) 的「有序域」假设因此承重（它逼出特征零），
+    且线性无关有一条**更强**的来路：Fock 空间在单项式上自由
+    （`Fock.linearIndependent_creationMonomial`，任意基环）。详见目标 notes【2026-09-11（三）】。
 notes: |
   **status 定级理由（docs/STATUS_LEVELS.md 的 rigorous 例外条款）**：
   前提完整（四条假设 (H1)–(H4) 全部写在目标陈述里，不留隐含条件），
