@@ -177,5 +177,28 @@ notes: |
 
   【查重】`uv run stringgraph search Brower / Verma` 命中的是玻色弦 DDF/Kac 行列式一系与
   Shapovalov 形式卡，无同内容者。
+
+  ★★【2026-09-11 小结（curator，small-backlog-10）：反方现在是**两篇互相独立的数学文献**】
+  本卡的反方证言此前只有 LZ 一篇，本轮（依 lead 指示，reviewer 落地于 45a27d5）加入了 FGZ 的
+  玻色版 Remark 后，**两篇独立数学文献（lian-zuckerman-1989 p.320 Remark 与 fgz-1986
+  Proposition 2.6 之后的 Remark）均否认 Fock 模是 Verma 模的直和**，且措辞同构
+  （都强调"**尽管**在负部下自由"、都用 "not **in general** a direct sum of Verma modules"），
+  各自给出的反例条件同向但不同条（LZ：p·p < 0 且命中 M(h,10) 的可约点；FGZ：p·p 为非正偶整数）。
+  正方仍然只有一条证言（FOK 1989，且其 1989 年另一篇的同款两句经核实**不是**独立第二条）。
+  ⚠ **status 维持 `conjecture`，不降 `refuted`**：理由不变——两篇反方都**不写出显式的反例向量或层**
+  （LZ 是 Kac 行列式的定性推论、FGZ 只给"可取 p·p 为非正偶整数"一句），按 docs/STATUS_LEVELS.md
+  「refuted 要求存在被接受的反例」且需一条 kind: refutation 的推导，本图尚不够格；
+  按根 CLAUDE.md 原则 2「不确定时选低的那级」，本轮仍只记为争议。
+  ⚠ 另一条作用域限定不变：**FGZ 说的是玻色 Virasoro 与玻色 Fock 模**，本卡说的是超版，
+  由玻色到超没有成文的一步（见该 source 的 note）。⇒ 两篇同向，但只有 LZ 那篇是对本卡命题的直接反证。
+
+  ★【与新卡 worldsheet.rns-fock-module-free-over-negative-super-virasoro 的分界（2026-09-11 新建）】
+  本卡"不断言 (c)"里写的那条较弱性质（`Vir_κ^-`-自由性，LZ Corollary 2.19(iii)）**已单独立卡**。
+  两张卡的关系必须记清楚：
+    · 新卡（自由性）**无争议**：LZ 逐字断言它，FOK 与 FGZ 也都不否认；effective = physical-argument。
+    · 本卡（完全可约 / Verma 直和）**有争议**：status = conjecture。
+  LZ 那句 "even though it is Vir_κ⁻-free" 正是把两者分开的原文依据。
+  ⇒ **本卡与新卡互不依赖**：新卡不得引本卡为据，本卡也不得把新卡当作支持。
+  （按 graph/CLAUDE.md「换代时正文指针不就地改字」，本卡 statement 的 (c) 段原文不动，此处记账。）
 author: curator
 created: "2026-09-11"
