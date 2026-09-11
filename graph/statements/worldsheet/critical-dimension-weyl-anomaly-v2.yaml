@@ -81,6 +81,21 @@ notes: |
   （本次由 curator 于 2026-09-11 随 worldsheet.critical-dimension-bosonic-v3 的换代一并落实，
   陈述文本一字未动）。
 
+  【★ 同页的一条作者自承缺口（2026-09-11 补记，reviewer-batch10 D；抽取记录
+  literature/extractions/polchinski-1998-v1.md §12.10 表 C 第 4 条，L1 原书页图逐字）】
+  本卡 sources 引的 **p.95** 那一页上，紧邻「iff total central charge c is zero」的地方，
+  原书还有一句**无引文的充分性断言**：
+  > 「The paradox shows that `c = c̃` is necessary for a CFT to be free of gravitational anomalies,
+  >  and **it can also be shown that this is sufficient**」
+  三点记账：
+  (a) 这条断言说的是 **c = c̃（全纯 = 反全纯中心荷）对无引力反常的充分性**，
+      与本卡断言的「c^{tot} = c^m + c^g = 0 ⟺ c^m = 26」**是两条不同的命题**；
+  (b) **本卡不依赖它**：本卡的论证链是 Weyl 反常 ∝ 中心荷 (3.4.15) + c^g = −26 (2.5.12)，
+      整条不经过 c = c̃；
+  (c) 但**引用 p.95 时必须知道这一页上有这么一条无证明、无引文的断言**——
+      本图**没有**节点承载「c = c̃ ⟺ 无引力反常」，若日后有人要用它（例如处理手征 CFT
+      或 (c, c̃) 不等的背景），那是一张新卡，且其来源在这里只有 "it can also be shown"。
+
   **这是 D = 26 的第四条路线**，与图中已有的三条并列：
     (i)   worldsheet.critical-dimension-light-cone      光锥洛伦兹代数闭合
     (ii)  worldsheet.critical-dimension-old-covariant-v2 旧协变：(26,1) 处等距同构、D > 26 有负模态
