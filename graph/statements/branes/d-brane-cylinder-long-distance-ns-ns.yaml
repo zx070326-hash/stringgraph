@@ -75,13 +75,25 @@ notes: |
   理由是「Q3 未关闭时完整前缀不进节点」。Q3 已于 2026-09-11 关闭（抽取记录 §7.3），
   故本卡把**完整两行**都写进陈述，并把 §7.3(c) 的谨慎保留原样搬进"本命题不断言 (4)"。
 
-  【与 branes.d-brane-tension-v2 的关系（未接线，已列入报告）】
-  branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的 summary (1) 逐字重算了
-  同一条 (13.3.1)，却没有 depends_on 本卡（本卡此前不存在）。建议 lead 派一轮把那条边补上，
-  本轮未做（不在本次积压的 claim 范围内）。
+  【与 branes.d-brane-tension-v2 的关系：已接线（2026-09-11）】
+  branes.d-brane-tension-v2--via-cylinder-ns-ns-exchange-matching 的 summary (1) 原先逐字重算了
+  同一条 (13.3.1) 却没有 depends_on 本卡（本卡此前不存在）。**现已改**：那条推导 depends_on 本卡
+  （非 inferred），summary (1) 缩为引用，且它原先指 worldsheet.type-i-tadpole-cancellation-so32-v2
+  的那条边（用来归账母式 (10.8.4)）已被本卡取代。⇒ (13.3.1) 在图上只算一次。
 
-  【(10.8.4) 在图上没有独立节点】本卡的母式 (10.8.4) 只出现在
-  worldsheet.type-i-tadpole-cancellation-so32-v2 的推导里，图上无单独的陈述卡。
-  这是旧卡推导 gaps 已记的残留缺口，本卡继承之。
+  【(10.8.4) 已有独立节点（2026-09-11）】
+  旧 notes 记的「本卡的母式 (10.8.4) 只出现在 worldsheet.type-i-tadpole-cancellation-so32-v2 的
+  推导里，图上无单独的陈述卡」**已不成立**：现已单建
+  **worldsheet.superstring-cylinder-amplitude-closed-channel**（(10.8.1)–(10.8.4) 全部，
+  推导 --via-open-string-trace-doubling，physical-argument），本卡的推导 depends_on 它
+  （**非 inferred**：原书 p.146 点名引用 eq. (10.8.4)）。
+  ⚠⚠ **同时查明一条必须带上的限定**：(10.8.4) **不是"type I 无关"的**——它含 n²（圆柱两条边界的
+  Chan–Paton 指标）与一个来自 **Ω 投影**的 ½（原书 p.38 逐字 'the GSO and Ω projection operators
+  each contribute a factor of ½'）。(13.3.1) 是在它上面做了**四处**修改：n² → Chan–Paton 权重 2、
+  去掉 Ω 的 ½、去掉 Dirichlet 方向动量积分、加 exp(−t y²/2πα')。
+  ⇒ 本卡是那张卡的**下游但不是它的特例**；四处修改的记账见本卡推导的 depends_on 注释。
+  ★ 附带收益：接到新卡后，本卡**不再经过** §10.8 最弱的一环（C₁₀ 悖论那段
+  'One can guess the resolution of this as follows' + 一个本书不给的 'more detailed analysis'，
+  抽取记录 polchinski-1998-v2-sec10-8.md #E67）。
 author: curator
 created: "2026-09-11"
