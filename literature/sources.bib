@@ -30,13 +30,15 @@
                extractions/polchinski-1998-v2-sec10-8.md（**§10.8 单节深读，E64--E75，续 E63 编号**，
                引用写 `-sec10-8#E<n>`；它是前者 E48 的展开版并含对 E48 的订正）、
                extractions/polchinski-1998-v2-ch12.md（**ch.12，E 编号独立从 E1 起**，引用须写 `-ch12#E<n>`）与
-               extractions/polchinski-1998-v2-ch13.md（**ch.13 D-branes，E 编号独立从 E1 起**，引用须写 `-ch13#E<n>`）。
+               extractions/polchinski-1998-v2-ch13.md（**ch.13 D-branes，E 编号独立从 E1 起**，引用须写 `-ch13#E<n>`）与
+               extractions/polchinski-1998-v2-appB.md（**Appendix B 旋量与超对称，E 编号独立从 E1 起**，引用须写 `-appB#E<n>`）。
                **本项目实读的是 Cambridge Books Online 版**：© Cambridge University Press 2001, 2005，
                DOI 10.1017/CBO9780511618123，即 2005 平装本数字化，**已含 1999/2000 两次 "with corrections"**。
                引用式号时按此版；1998 初印本个别公式内容可能不同。书 hash `2D456468D20AA8A9CE10CEB08B95B9DC`。
-               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)、ch.13 (pp.136--177)。
-               **未读**：Notation (xviii--xx)、ch.14 及以后、Appendix B、References (467--487)。
-               ⚠ 六条使用限制：
+               已 L1 逐页读毕：ch.10 (pp.1--44)、ch.11 (pp.45--83)、ch.12 (pp.84--135)、ch.13 (pp.136--177)、
+               **Appendix B (pp.430--466，item hash `872CC69E98F684AFA1019EB2A955BD11`，文件名 `9780511618123apx1_p430-466_CBO.pdf`，DOI 后缀 `.014`)**。
+               **未读**：Notation (xviii--xx)、ch.14--19、References (467--487)。
+               ⚠ 八条使用限制：
                (1) **§12.2 p.101 脚注 1 提到 `E8 x U(1)^248` 与 `U(1)^496`，但只说两条 properties "hold"，
                    既无 "cancel"/"factorize" 的动词，也无任何唯一性/完备分类主张** ——
                    不得据此写「十维 N=1 反常自由规范群恰有四个」；
@@ -56,7 +58,16 @@
                    ⇒ **不得把「SO(32) = 32 张 D9 膜」这句通行说法归给本书**；要用该表述须另找来源；
                (6) **ch.13 与 §10.8 的依赖方向是 §10.8 -> ch.13**：ch.13 三处（pp.141/142/147）都把 tadpole 相消
                    当已知输入，p.147 逐字「We deduced from the cancellation of divergences that ...」；
-                   唯一可能的独立路线（D 膜--O 面之间的力）被明写推给读者。**ch.13 不是 SO(32) 的独立推导**。}
+                   唯一可能的独立路线（D 膜--O 面之间的力）被明写推给读者。**ch.13 不是 SO(32) 的独立推导**；
+               (7) **★ App. B 的 BPS 界 (B.2.39) `m >= q_i` 只对点粒子中心荷**：p.448 逐字
+                   「this is the most general algebra if we include only charges that can be carried by point particles.
+                   Including charges that can be carried by *extended objects*, additional terms appear ... The same caveat
+                   applies to the higher-dimensional algebras」⇒ D 膜 BPS 性须经 §13.2 (13.2.9)（而 ch.13 自承它 "still not complete"），
+                   **不得把 (B.2.39) 直接当作 `tau_p = mu_p` 的依据**（见 -appB#Q3）；
+               (8) **★ App. B 不含 SO(8) 三重性、`8_s`/`8_c`、SO(8) 意义的 `56`、`psi_0` 零模、膜荷代数、「四解」、任何文献引用或编号定理**；
+                   附录的 SO(8) 记号只有 `8_v`/`8`/`8'`，且 p.457 写 `8_v + 8'`、习题 B.5 写 `8_v + 8`（同一多重态，见 -appB#Q1）；
+                   p.457「anomalies unless g = SO(32) or E8 x E8」是 §12.2 的转述且只列两个群（见 -appB#Q4）。
+                   ⇒ **`worldsheet.so8-triality` 不得以 App. B 为 source；Table B.1 (p.434) 凭 App. B 只能 `physical-argument`**。}
 }
 
 @book{gsw-1987-v1,
@@ -3506,3 +3517,52 @@
                见 extractions/math-sources.md §47.4(d)。}
 }
 
+
+@misc{bering-2011,
+  author = {Bering, Klaus},
+  title  = {A Note on Angular Momentum Commutators in Light-Cone Formulation of Open Bosonic String Theory},
+  year   = {2011},
+  eprint = {1104.4446},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 curator-v1-sec15 于 2026-09-11 登记，抽取记录 extractions/ggrt-1973.md §3 E-L3-1（researcher 逐页读图 pp.1--2, 7--11，**L1**）。
+            **★ 版本必须写死 v2**：页边条纹逐字 `arXiv:1104.4446v2 28 Feb 2012`；标题页日期栏印的 `April 29, 2022` 是 arXiv 重编译日期，
+            **不是论文日期**。11 页，Masaryk University。**期刊发表信息本项目未查。**
+            登记理由：这是「光锥洛伦兹代数 ⇒ D = 26, a = 1」这条路线上**本项目目前唯一能核实到公式级的来源**
+            （goddard-goldstone-rebbi-thorn-1973 正文仍是 L0）。
+            **可引用的硬内容（p.7，加框的 (7.1)，L1 逐字）**：
+            `[J^{-i}, J^{-j}] = (2 hbar^2/(alpha_0^+)^2) Sum_{n != 0} : alpha^i_{-n} alpha^j_n : kappa^{|n|} [ n((D-2)/24 - 1) - (1/n)((D-2)/24 - a) ] + O(kappa-1)`，
+            紧接逐字 "which, in the limit `kappa -> 1`, **precisely vanishes for `D = 26` and `a = 1`**"。
+            ⚠⚠ **三条引用纪律**：
+            (1) **原文措辞是 "precisely vanishes for"，不是 "if and only if"、也不是 "necessary"**。
+                括号里两个系数相互独立 ⇒ 必要性在数学上显然，**但那是本项目的推断，不得写成原文措辞**。
+            (2) **`kappa` 是 Bering 自创的记账/正规化参数**（摘要逐字 "a novel bookkeeping/regularization parameter"），
+                `kappa -> 1` 是取极限；引用 (7.1) 必须带这个前提。
+            (3) **状态上限 `physical-argument`**：物理式算符计算 + 自创正规化，不是数学定理。
+            另外三条元信息（都 L1，p.2）：四条检测 D=26 的路线的分类（光锥洛伦兹协变 [3,4]、无鬼 [5]、Weyl 反常 [6]、BRST 幂零 [7]）；
+            对 GGRT 的评价「**are sparse on details**」（与 Polchinski 的 "careful treatment" 方向相反，见 goddard-goldstone-rebbi-thorn-1973 的 note）；
+            对 GSW 证明的批评（脚注 †：GSW「gives a proof by **sandwiching** [J^{-i},J^{-j}] between a bra and a ket, **which depend on the choice of vacuum**」）。}
+}
+
+@article{goddard-rebbi-thorn-1972,
+  author  = {Goddard, Peter and Rebbi, Claudio and Thorn, Charles B.},
+  title   = {Lorentz Covariance and the Physical States in Dual-Resonance Models},
+  journal = {Nuovo Cimento A},
+  volume  = {12},
+  pages   = {425--441},
+  year    = {1972},
+  note    = {由 curator-v1-sec15 于 2026-09-11 登记。**书目数据等级 L1 但是转抄**：逐字抄自 bering-2011 参考文献 [3]
+            （arXiv:1104.4446v2, p.11：「P. Goddard, C. Rebbi and C.B. Thorn, *Lorentz Covariance and the Physical States in
+            Dual-Resonance Models*, Nuovo Cimento **12A** (1972) 425-441.」），**未与出版方/INSPIRE 交叉核对**（DOI 未取）。
+            **正文完全未获取（内容等级 L0）。**
+            登记理由：bering-2011 p.2 把「Preservation of Lorentz covariance in the light-cone formulation」这条 D = 26 路线
+            **同时**归给本文与 goddard-goldstone-rebbi-thorn-1973（其 [3, 4]），而本项目此前只知道后者。
+            ⇒ 本文**可能才是 [J^{i-}, J^{j-}] 反常的首次出处**（ggrt-1973.md Q-G5，**未裁决**）。
+            ⚠⚠ **极易混淆的三兄弟，登记时已各自分开**：
+            - `goddard-rebbi-thorn-1972`（本条，**三作者**，Nuovo Cimento 12A 425--441）：光锥洛伦兹协变；
+            - `goddard-thorn-1972`（**两作者**，Phys. Lett. B40 235--238）：无鬼定理；
+            - `goddard-goldstone-rebbi-thorn-1973`（**四作者**，Nucl. Phys. B56 109--135）：弦的量子动力学。
+            ⚠ **在读到正文之前，不得给任何节点挂本 key 作为论证来源**，也不得据此升级
+            worldsheet.critical-dimension-light-cone-v2 一系的状态（与另两个 key 同一禁令）。
+            见 extractions/ggrt-1973.md §3 E-L3-1(b) 与 §5 B2。}
+}

@@ -1,0 +1,56 @@
+id: branes.d-brane-rr-coupling
+kind: proposition
+title: Dp 膜带 R–R 荷：世界体与 R–R (p+1)-形式势有拓扑耦合 ∫ C_{p+1}；IIA/IIB 各需哪些 R–R 势
+statement: |
+  type II 超弦中的 Dp 膜（branes.d-brane-bps-half-susy）**携带守恒的 R–R 荷**：
+  其世界体与 R–R (p+1)-形式势 C_{p+1} 有拓扑耦合
+    **∫_{世界体} C_{p+1}**                                             (13.2.7)
+  （原书 (13.2.7) 不带系数；系数 μ_p 在 (13.3.5) 才引入，其值见 branes.d-brane-rr-charge-value）。
+  由于 T 对偶可以把 Dp 膜变成任意 p 的 D 膜，
+    IIA（p 偶）需要 C_1, C_3, C_5, C_7, C_9；IIB（p 奇）需要 C_2, C_4, C_6, C_8, C_10。
+  两组各自的**前四个**来自传播 R–R 态的电或磁描述（原文：「The first four arise in either the electric
+  or magnetic description of the propagating R–R states」）；**C_10 无传播自由度**，其存在与耦合 (13.2.7)
+  （积分跑遍全时空）由 §10.8 的 type I 发散分析推出，并解释为 D9 膜；**C_9 无传播自由度**
+  （有质量 IIA 超引力，§12.1），由 D8 膜的存在要求。
+  Dp 膜是 F_{p+2} = dC_{p+1} 的**电源**，同时是 ∗F_{p+2} = F_{8−p} = dC_{7−p} 的**磁源**
+  ——即 Dp 膜与 D(6−p) 膜互为电–磁对偶（(13.2.8a)(13.2.8b)）；在磁源处 Bianchi 恒等式失效，
+  势不能整体定义，须引入 Dirac 弦或分片势。
+  IIB 另有 0-形式势 C_0 耦合的「(−1)-膜」= D-instanton（全部方向 Dirichlet，含时间；
+  原文逐字（p. 142）「This should couple to a '(−1)-brane.'」；它不在上面由 T 对偶得到的表里）。
+
+  **本命题不断言**：
+  (a) μ_p 的数值（branes.d-brane-rr-charge-value）；
+  (b) 除 C_{p+1} 之外的 R–R 耦合（B_2、F_2 的混入见 branes.chern-simons-coupling）；
+  (c) 带电磁双荷系统的局域协变作用量——原书脚注 2 逐字：「there is no local covariant action for a
+      system with both electric and magnetic charges, even though the physics is covariant and
+      presumably satisfies the axioms of local quantum field theory」；
+  (d) 「每个 Chan–Paton 自由度都是一张 9 膜」这一计数（见 notes 与 branes.o9-d9-charge-cancellation-so32 的 Q1）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, eq. (13.2.7)（∫ C_{p+1}）与其前后两段，p. 141；逐字「BPS states, which are discussed in section B.2, must carry conserved charges. In the present case there is a natural set of charges with the correct Lorentz properties, namely the antisymmetric R–R charges.」；「The existence of the 10-form was deduced in section 10.8, from the study of type I divergences.」；「All the other R–R couplings follow from this one by T-duality, since each time we T-dualize in an additional direction the dimension of the p-branes goes down by one and the R–R form loses an index.」；(13.2.8a)(13.2.8b) 与脚注 2，p. 141；D-instanton p. 142、p. 145"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E8、#E9、#E10，证据等级 L1（原书页图）。
+      ⚠ 依赖方向：**§10.8 → 本卡**（§10.8 论证了 10-形式耦合的存在，本章把它解释成 D9 膜），
+      不是本章重新推出 §10.8 的结论（抽取记录 Q5）。
+  - ref: polchinski-1998-v2
+    loc: "§13.1, eq. (13.1.4)（R–R 顶点算子 𝒱̄ Γ^{μ1…μp} 𝒱̃ 右乘 Γ^9 Γ）与 (13.1.5a,b,c)（C_9 → C，C_μ, C_{μν9} → C_{μ9}, C_{μν}，C_{μνλ} → C_{μνλ9}），pp. 137–138"
+    note: 抽取记录 #E2（L1）；原书明说 (13.1.5) 只到「up to signs」。
+tags: [d-brane, rr-charge, ramond-ramond, type-ii, t-duality, electric-magnetic-duality, d-instanton]
+notes: |
+  【Q1 的一半在这里】同一页（p. 141）另有一句逐字：「This fits with a point made in chapter 8, that it is
+  natural to interpret each Chan–Paton degree of freedom in the fully Neumann theory as a 9-brane
+  filling spacetime.」——type I 有 32 个 Chan–Paton 指标，这句蕴含 **32 张 D9**；而同节 p. 143/p. 144
+  的计数是 **16 张 D 膜 / 16 D9-branes**。原书从不调和。本卡**不采**这一句作为陈述内容，
+  只在此记录；裁决见 branes.o9-d9-charge-cancellation-so32 的 notes 与抽取记录 Q1。
+
+  【本图缺的上游】
+  1. **C_10 的存在**（§10.8 的 type I 发散 ⇒ 10-形式势）：main 上无节点；ch10 分支有
+     worldsheet.type-i-tadpole-cancellation-so32（任务书写作 spectrum.*，分支实际 id 是 worldsheet.*），
+     合入后本卡推导须加 depends_on。
+  2. **R–R 场的 T 对偶 (13.1.4)(13.1.5)**：本图无 R–R 顶点算子节点，也无 type II 无质量谱节点
+     （ch10 分支 worldsheet.type-ii-massless-spectrum 未合）。
+  3. **App. B.2「BPS ⇒ 带守恒荷」**：未抽。
+  4. **§12.1 有质量 IIA 超引力与 C_9**：抽取记录 -ch12 是否含该段未核（§3.3）。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

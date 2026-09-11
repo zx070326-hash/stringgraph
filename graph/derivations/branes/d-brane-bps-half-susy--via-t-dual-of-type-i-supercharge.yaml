@@ -1,0 +1,45 @@
+id: branes.d-brane-bps-half-susy--via-t-dual-of-type-i-supercharge
+target: branes.d-brane-bps-half-susy
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.d-brane-from-t-duality
+    note: |
+      供给 Dp 膜这一对象（开弦端点被钉住的超平面）。⚠ 该卡是玻色弦的定义；
+      原书 p. 138 逐字把超弦版外包：「leads to D-branes and orientifold planes by the same arguments
+      as for the bosonic string in chapter 8, which the reader should review」。
+  - id: duality.dual-coordinate
+    note: |
+      供给 (13.1.1) X'^9_R = −X^9_R 这一步（T 对偶 = 只反射右动部分），
+      即「T 对偶是只作用在世界面一侧的时空宇称」这一命题的坐标部分。
+  - id: branes.massless-open-string-gauge-field-and-collective-coordinates
+    note: |
+      供给 (13.2.1) 的玻色部分（原书逐字「As in the bosonic theory, the bosonic states are a gauge field
+      living on the D-brane and the collective coordinates for the D-brane」）；goldstino 论证是
+      「集体坐标 ↔ 破缺的平移」这一对应向费米部门的类比推广（(13.2.3) ↔ (13.2.4)）。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, pp. 139–140：(13.2.2) → 脚注 1 → (13.2.3)（集体坐标顶点算子 = 破缺平移的荷）→ (13.2.4)（goldstino 顶点算子 = 破缺超对称的荷）→ (13.2.5)(13.2.6)；逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E6/#E7（L1）。
+  - ref: polchinski-1998-v2
+    loc: "§13.1, (13.1.1)–(13.1.3)、(13.1.6)，pp. 136–138（T 对偶对右动费米子与自旋场的作用）"
+    note: 抽取记录 #E2（L1）；符号「up to signs」。
+summary: |
+  (1) type I 只有总荷 Q_α + Q̃_α 守恒。对 X^9 作 T 对偶 = 只反射右动部分（(13.1.1)），
+      由超共形不变性 ψ̃^9 也反射（(13.1.2)），于是右动自旋场变为 β^9 𝒱̃（(13.1.3)）；
+      守恒的组合变成 Q'_α + (β^9 Q̃')_α（(13.2.2)）。
+  (2) 闭弦从 D 膜散射的振幅只在这 16 个组合下不变。破缺的 16 个由边界积分
+      (13.2.4) ∫_{∂M} ds 𝒱'_α = −∫_{∂M} ds (β^9 𝒱̃')_α 度量，而这正是膜上无质量开弦 R 态
+      |α; k⟩_R 的顶点算子 ⇒ 该态是 goldstino，与「(13.2.3) 的 ∂_n X'^9 边界积分 = 集体坐标顶点算子 =
+      破缺平移的 Goldstone 玻色子」完全平行。
+  (3) 「We conclude by analogy」：D 膜自发破缺 32 个超对称中的 16 个、保留另 16 个 ⇒ BPS 态。
+  (4) 多个 Dirichlet 方向时 β^9 → ∏_m β^m（(13.1.6)），未破缺组合为 (13.2.5)(13.2.6)，对一切 p 成立。
+gaps:
+  - "**类比而非计算**：原书逐字「We conclude by analogy that the D-brane also spontaneously breaks 16 of the 32 spacetime supersymmetries」（抽取记录 §3.1 第 3 条）。「闭弦散射振幅只在这 16 个超对称下不变」没有在本章由振幅显式验证。"
+  - "**符号未定**：(13.1.5)/(13.1.6) 的符号原书自陈「up to signs」，「should not distract attention from the main physical point」（§3.1 第 2 条）。β^⊥ 的整体符号因此在本卡中不作断言。"
+  - "**本图无 type II 时空超对称节点**：「32 个超荷 Q、Q̃」在 main 上没有节点（ch10 分支 worldsheet.type-ii-spacetime-supersymmetry 未合）；待合入后应加边。"
+  - "**App. B §B.2（BPS 态的定义与性质）本项目未抽**：「BPS 态」一词在本卡只按原书斜体句使用，其代数含义（超对称代数中心荷、质量下界饱和）在图上无支撑（抽取记录 §3.3）。"
+  - "**Dp 膜定义卡是玻色弦的**：超弦 D 膜的构造被原书外包给 Vol.1 第 8 章（p. 138）；超弦特有的部分（费米子边界条件、(13.1.2)）本图无节点。"
+  - "**T 对偶的费米部分 (13.1.2)(13.1.3) 本图无节点**：只有玻色对偶坐标 duality.dual-coordinate；「由超共形不变性必须同时反射 ψ̃^9」这一步在图上悬空。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

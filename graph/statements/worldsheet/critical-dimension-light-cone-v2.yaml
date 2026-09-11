@@ -75,6 +75,54 @@ sources:
       Polyakov 作用量的发现者 "Brink, Di Vecchia, and Howe" **不是同一篇**
       （Polchinski 书末字母表 Brink 名下只有 Brink & Nielsen 一条）。
       见 literature/extractions/polchinski-1998-v1.md §13.2(d) 与 §13.9 B#10/#11。
+
+      **【2026-09-11 第九轮跟进（curator-v1-sec15，抽取记录 extractions/ggrt-1973.md）——
+      GGRT 仍是 L0，上面的禁令继续有效，但外包链现在多了一个可核实的替代来源】**
+      1. **`goddard-goldstone-rebbi-thorn-1973` 正文仍未取得（内容等级 L0）。** 本轮把取文路线穷尽到
+         只剩一条：CDS recid **394307**，MARC 963 = **PUBLIC**（出版方标公开），全文
+         `https://cds.cern.ch/record/394307/files/CM-P00058492.pdf` 被 **Anubis 反爬**挡住
+         （逐字 "Making sure you're not a bot!"）；Wayback 快照 **20220710054516** 存在且
+         status 200，但 web.archive.org 对本项目工具是封锁的。报告号 `CERN-TH-1578`。
+         OSTI purl 404、S2 报 `"isOpenAccess": false`、无 KEKSCAN、无重印文集。
+         ⇒ **仍不得据 GGRT 新增任何推导或升级本节点状态**（禁令与 sources.bib 一致）。
+      2. **Q-G4 未裁决**：Polchinski（p.349，L1）说 GGRT "include a **careful treatment** of Lorentz
+         invariance"；**Bering（arXiv:1104.4446v2, p.2，L1）逐字说** "The original papers of Goddard,
+         Goldstone, Rebbi and Thorn [3, 4], who splits in creation and annihilation parts, **are sparse
+         on details**"。**两条一手证据对同一篇文章的严格度评价方向相反，本轮不裁决**
+         （这本身是不得据 GGRT 升级状态的第二个理由）。
+      3. **Bering 还把这条路线同时归给 `goddard-rebbi-thorn-1972`**（Nuovo Cimento 12A (1972) 425–441，
+         **三作者**，本轮已登记进 sources.bib，正文同样 L0）——它**可能才是 [J^{i−},J^{j−}] 反常的
+         首次出处**（ggrt-1973.md Q-G5，未裁决）。⚠ 与 `goddard-thorn-1972`（两作者，无鬼定理）
+         和 `goddard-goldstone-rebbi-thorn-1973`（四作者）是三篇不同的文章。
+  - ref: bering-2011
+    loc: "**§7, 加框的 (7.1), p.7**（L1 逐页读图）：`[J^{−i}, J^{−j}] = (2ℏ²/(α₀⁺)²) Σ_{n≠0} : α^i_{−n} α^j_n : κ^{|n|} [ n( (D−2)/24 − 1 ) − (1/n)( (D−2)/24 − a ) ] + O(κ−1)`，紧接逐字「which, in the limit `κ → 1`, **precisely vanishes for `D = 26` and `a = 1`**」；§7 的证明分 Part 1 / Part 2，以 □ 收尾；记号约定在 (2.1)/(2.2)"
+    note: |
+      **【2026-09-11 新增第二来源（curator-v1-sec15，抽取记录 extractions/ggrt-1973.md §3 E-L3-1(c)）】**
+      本节点此前 `Δ_n` 的显式形式**只有 gsw-1987-v1 §2.3.1 (2.3.32) 一个来源**
+      （Polchinski 只支撑同一结论的表示论形状，且自陈是 heuristic）。Bering 2011 是本项目
+      **第二个能核实到公式级**的来源，且是**独立重算**（摘要逐字："We recalculate in a systematic and
+      pedagogical way … the `[J^{−i}, J^{−j}]` commutators"）。
+
+      ⚠⚠ **四条引用纪律，缺一不可**：
+      1. **原文措辞是 "precisely vanishes for"，不是 "if and only if"、也不是 "necessary"。**
+         本节点 statement 断言的是**当且仅当**；(7.1) 括号里的两个系数相互独立 ⇒ 必要性在数学上
+         是显然的，**但那是本图的推断，不是 Bering 的措辞**。本源因此只支撑「**充分**方向 +
+         Δ_n 的显式形式」，**不**支撑本节点 statement 里那个 ⟺ 的逆向（逆向仍靠本卡 notes (2)
+         记的线性无关一步，那是 curator 补的）。
+      2. **`κ` 是 Bering 自创的记账/正规化参数**，`κ → 1` 是取极限、且 (7.1) 带 `O(κ−1)` 余项。
+         引用 (7.1) 必须带这个前提；它与 GSW 的处理**不是同一套正规化**。
+      3. **状态上限 `physical-argument`**（物理式算符计算 + 自创正规化，非数学定理）。
+         本源**不改变**本节点任何推导的状态，也**不**构成新推导：本轮只加来源，
+         `--via-lorentz-algebra` 未动。是否新建一条 `--via-bering` 留给后续（见 notes 末）。
+      4. **系数形状与本卡 statement 的 `Δ_n` 不是逐字同形**：本卡写
+         `Δ_n = n(26−D)/12 + (1/n)[(D−26)/12 + 2(1−a)]`，Bering 写
+         `n((D−2)/24 − 1) − (1/n)((D−2)/24 − a)`（还差 `2ℏ²/(α₀⁺)²` 的整体因子与求和范围
+         `n ≠ 0` vs `n ≥ 1` 的写法）。两者在 `D = 26, a = 1` 处同时为零，**逐项相等本图未验算**。
+      ⚠ **Q-G4 未裁决**：Bering 说 GGRT "sparse on details"、Polchinski 说 GGRT "careful treatment"，
+      方向相反；本轮不裁决，见上一条 source 的 note 第 2 点。
+      另记 Bering 对 GSW 的批评（p.2 脚注 †，L1 逐字）：GSW「gives a proof by **sandwiching**
+      `[J^{−i}, J^{−j}]` between a bra and a ket, **which depend on the choice of vacuum**」——
+      这条直接指向本节点**第一来源** gsw-1987-v1 的论证方式，reviewer 值得留意。
 tags: [bosonic-string, critical-dimension, light-cone, lorentz-invariance]
 notes: |
   **【换代理由（2026-09-11）】**本卡换代自 worldsheet.critical-dimension-light-cone。
@@ -98,6 +146,14 @@ notes: |
   下游 worldsheet.critical-dimension-bosonic-v3--via-four-routes 的 (I) 边已改指本卡；
   指向旧卡的两条历史推导（--via-three-routes 对 v1、--via-four-routes 对 v2）保持不动，
   它们的目标本身也已被换代。
+
+  **【2026-09-11 记账（curator-v1-sec15）：本轮只加来源，不加推导】**
+  新增的 bering-2011 (7.1) 是本节点 `Δ_n` 的**第二个公式级来源**，但本轮**没有**新建
+  `--via-bering` 推导，理由有三：(a) Bering 的措辞是 "precisely vanishes for" 而非 iff，
+  单独支撑不起本卡 statement 的 ⟺；(b) 他的 `κ` 正规化与 GSW 不是同一套，
+  两者的 `Δ_n` 逐项相等本图未验算；(c) 即使新建，状态仍封顶 physical-argument，
+  对本节点的有效状态没有提升。**真正能提升本节点的仍然只有 GGRT 1973 正文**（仍 L0，
+  取文路线只剩「人工点击 CDS/Wayback」一条，见 sources note）。
 
   **【与汇总卡 v3 的关系】**worldsheet.critical-dimension-bosonic-v3 的 (I) 早已带 D ≥ 4，
   此前它比路线卡**弱**（多一条前提），方向安全；本次换代后两侧前提一致，该记账差异消失。

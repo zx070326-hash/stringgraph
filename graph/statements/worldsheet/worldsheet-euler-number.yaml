@@ -12,7 +12,7 @@ uses: []
 uses_conventions: [conv.metric-mostly-plus, conv.worldsheet-lorentzian]
 sources:
   - ref: polchinski-1998-v1
-    loc: "**§3.2, eq. (3.2.3b)**（带边界项的完整表达式；本节点 statement 的那个式子）。⚠ **§1.2 的 (1.2.31)（p.15）不含边界项**，逐字只是 `χ = (1/4π)∫_M dτdσ(−γ)^{1/2}R`；第 1 章里带边界项的版本是 **exercise 1.3**，不是正文"
+    loc: "**§3.2, eq. (3.2.3b), p.82**（带边界项的完整表达式，L1 页图逐字：`χ = (1/4π) ∫_M d²σ g^{1/2} R + (1/2π) ∫_{∂M} ds k`）。⚠ 三处逐字细节：(i) 边界积分里的顺序是 **`ds k`**（先 `ds` 后 `k`），不是常见转写的 `∫_∂ k ds`；(ii) 系数是体项 **1/4π**、边界项 **1/2π**；(iii) 体项测度写作 `d²σ g^{1/2} R`。⚠ **§1.2 的 (1.2.31)（p.15）不含边界项**，逐字只是 `χ = (1/4π)∫_M dτdσ(−γ)^{1/2}R`；第 1 章里带边界项的版本是 **exercise 1.3**，不是正文"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E9。
       **★【重大订正 2026-09-11（curator-v1-sec13，researcher 第七轮 L1 页图逐字，p.15）】**
@@ -28,16 +28,49 @@ sources:
       本节点 statement 写的是带边界项的完整式子，故其 §1.2 挂载**必须撤销**，
       正文出处改挂 **§3.2 (3.2.3b)**（抽取记录 E48）。
 
-      ⚠ **诚实标注**：**(3.2.3b) 本身本项目尚未取页图**（抽取记录 §13.9 D#3 明列为下一轮任务），
-      现有依据只是 Schrans 伴读笔记转引（L2）。即本节点 statement 里的**边界项部分
-      目前没有 L1 一手支撑**；`χ = 2 − 2g − b` 那半句本来就标注为 Gauss–Bonnet 的背景知识，
-      不出自 Polchinski。
+      ⚠ ~~**诚实标注**：(3.2.3b) 本身本项目尚未取页图（抽取记录 §13.9 D#3 明列为下一轮任务），
+      现有依据只是 Schrans 伴读笔记转引（L2）。即本节点 statement 里的边界项部分
+      目前没有 L1 一手支撑~~ —— **此段于 2026-09-11 作废，见下方 §15 记账。**
+      `χ = 2 − 2g − b` 那半句本来就标注为 Gauss–Bonnet 的背景知识，不出自 Polchinski。
       见 literature/extractions/polchinski-1998-v1.md §13.3(d) 与 §13.9 A#4。
+
+      **★【2026-09-11 升级为 L1（curator-v1-sec15，researcher 第九轮 ch.3 页图，印刷 p.82）】**
+      (3.2.3b) 的页图已到手，上一段「尚未取页图 / 只有 Schrans 转引（L2）」**作废**：
+      本节点 statement 的边界项现在有**原书正文**的一手支撑，等级 **L1**。逐字见上方 loc。
+      随之落实三条限定：
+
+      1. ★★ **号差前提必须一起搬，且与本卡不一致。** (3.2.3b) 所在整节是**欧氏世界面**：
+         p.82 §3.2 开篇逐字「**We make one change from chapter 1: the Minkowskian world-sheet
+         metric `γ_ab` is replaced with a Euclidean world-sheet metric `g_ab(σ¹,σ²)`, of
+         signature `(+,+)`.**」⇒ 原书那一行写的是 `g^{1/2}`，**本卡 statement 写的是
+         `(−γ)^{1/2}` 且 uses_conventions 取 conv.worldsheet-lorentzian**。
+         两者在 conv.worldsheet-euclidean 的字典下对应（`(−γ)^{1/2} ↔ g^{1/2}`），
+         但**「与 (3.2.3b) 逐字一致」的说法只对表达式结构成立，对号差不成立**。
+         抽取记录 §15.1(b) 的警告原话是「**不要把 (3.2.3b) 挂到闵氏号差的卡片上**」——
+         本轮按项目原则 1 不改 statement 文本，故采取的折中是：
+         **(3.2.3b) 作为「带边界项的 Euler 数表达式」这一内容的一手来源，
+         号差差异在此显式记账**；若日后要一张与 (3.2.3b) 逐字对应的卡，
+         应新建欧氏版 `worldsheet-euler-number-euclidean` 并在本卡写 superseded_by/并存说明，
+         而不是改本卡。
+      2. ⚠ **`k` 的定义原书正文没有。** (3.2.3b) 下方逐字「**The geodesic curvature `k` was defined
+         in exercise 1.3; note that the boundary is now always spacelike.**」
+         ⇒ 「测地曲率 `k` 是什么」在 Polchinski 全书只出现在**习题 1.3**，正文不给定义；
+         本卡 statement 里「k 是边界的测地曲率」这句的原书支撑仍然只有习题指路。
+         另记：原书同句说**边界现在总是类空的**（欧氏化的后果）。
+      3. **`χ` = Euler 数（拓扑不变）这半句不在 §3.2。** p.83 原书只是回指：
+         「**We have noted that `χ` is locally a total derivative in two dimensions and therefore
+         depends only on the topology of the world-sheet — it is the Euler number of the
+         world-sheet.**」——「We have noted」指回第 1 章，§3.2 **不重证、不引 Gauss–Bonnet、
+         不引任何文献**。故本卡 statement 后半的 `χ = 2 − 2g − b` 仍无 Polchinski 侧论证。
+      见 literature/extractions/polchinski-1998-v1.md §15.1(a)(b)(e)。
 tags: [bosonic-string, geometry, topology, euler-number]
 notes: |
-  ⚠ **【2026-09-11 记账】本卡 statement 里的边界项 `(1/2π)∫_{∂M} ds k` 在 Polchinski
-  第 1 章是 exercise 1.3，不在正文（(1.2.31) 无边界项）；正文出处应是 §3.2 (3.2.3b)，
-  而 (3.2.3b) 本项目尚未取页图。** 详见上方 sources note。按项目原则 1 不改 statement 文本。
+  ⚠ **【2026-09-11 记账，本轮更新】本卡 statement 里的边界项 `(1/2π)∫_{∂M} ds k` 在 Polchinski
+  第 1 章是 exercise 1.3，不在正文（(1.2.31) 无边界项）；正文出处是 §3.2 (3.2.3b), p.82，
+  该式本轮已取得页图（L1），「尚未取页图」的旧记账作废。** 详见上方 sources note。
+  按项目原则 1 不改 statement 文本，因此本卡与 (3.2.3b) 之间**号差不一致**
+  （本卡闵氏 `(−γ)^{1/2}`，原书欧氏 `g^{1/2}`，signature (+,+)），这一点在 sources note 里记账，
+  凡引用本卡去对照 (3.2.3b) 的节点须知。
 
   Gauss–Bonnet 给出的 χ = 2 - 2g - b 是标准微分几何结果，不出自 Polchinski 的论证，
   这里作为定义的背景说明列出；本图不为它单列节点（属 math area，Phase 1 之外）。

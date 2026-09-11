@@ -1,0 +1,47 @@
+id: branes.dbi-action-d-brane
+kind: proposition
+title: type II Dp 膜的 Dirac–Born–Infeld 作用量（显式形式，系数 μ_p e^{−Φ}）：S = −μ_p ∫ d^{p+1}ξ Tr{e^{−Φ}[−det(G_{ab} + B_{ab} + 2πα'F_{ab})]^{1/2}}
+statement: |
+  type II 超弦中 Dp 膜的低能有效作用量（玻色部分、NS–NS 背景 G、B、Φ）是
+    **S_{Dp} = − μ_p ∫ d^{p+1}ξ  Tr{ e^{−Φ} [ − det( G_{ab} + B_{ab} + 2πα' F_{ab} ) ]^{1/2} }**,   (13.3.14)
+  其中 G_{ab}、B_{ab} 是时空 NS–NS 场平行于膜的分量（拉回到世界体坐标 ξ^a，a = 0, …, p），
+  F_{ab} 是膜上规范场的场强；B 与 F 只通过规范不变组合 B_{ab} + 2πα'F_{ab} 出现
+  （branes.dbi-action-is-born-infeld-type）。
+  **整体系数是 R–R 荷 μ_p，配合 e^{−Φ}**：由 μ_p = e^{Φ₀}τ_p（branes.d-brane-rr-charge-value），
+  dilaton 取背景值 Φ = Φ₀ 时 μ_p e^{−Φ₀} = τ_p，即化为张力 τ_p 乘世界体体积（Nambu–Goto 型）。
+  n 张重合 Dp 膜时 X^m(ξ)、A_a(ξ)、费米子 λ(ξ) 都成为 n × n 矩阵，Tr 在此空间取；
+  势中另有 O([X^m, X^n]²) 项（(13.3.15)），平坦方向上集体坐标对角化、可解释为 n 个对象的
+  普通集体坐标，「At small separation the full matrix dynamics is crucial」。
+
+  **本命题不断言**（每条都有原文依据）：
+  (a) 推导——原书逐字「The argument leading to this form is exactly as in the bosonic case, section 8.7」
+      （整体外包给 Vol.1 §8.7，本图对 §8.7 只有 [S] 二手源、表达式 L0）；
+  (b) 为什么系数是 μ_p 而不是 Vol.1 (8.7.2) 的 τ_p——原书不解释这个切换（抽取记录 Q6）；
+  (c) 非阿贝尔情形下行列式内矩阵值场的排序/对称化（原书未给）；
+  (d) 费米项 (13.3.19) −i∫d^{p+1}ξ Tr(λ̄Γ^aD_aλ) 之外的完整非线性超对称形式
+      ——原书逐字「The full nonlinear supersymmetric form is left to the references」；
+  (e) 曲率修正与 R–R 耦合（后者见 branes.chern-simons-coupling）；
+  (f) 膜上规范耦合 g²_{Dp} = 1/((2πα')²τ_p)（(13.3.25)，由本式展开得到，本图未建卡）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「D-brane actions」, eq. (13.3.14)（S_{Dp}）、(13.3.15)（O([X^m,X^n]²)）、(13.3.19)（费米项），p. 149；逐字「The argument leading to this form is exactly as in the bosonic case, section 8.7.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E20、#E21 与 Q6，证据等级 L1（原书页图）。
+      ⚠ (13.3.14) 用 μ_p 而不是 τ_p 做整体系数（与 Vol.1 §8.7 的 τ_p 写法不同）；两者靠 e^{−Φ} 的
+      dilaton 背景值换算，只在 Φ = Φ₀ 处等价。**本卡写死用 μ_p，并把 (13.3.7) 挂上。**
+tags: [d-brane, dbi, born-infeld, effective-action, type-ii, nonabelian]
+notes: |
+  【与 branes.dbi-action-is-born-infeld-type（ch8 弱卡）的关系——不合并】
+  那张卡是 Vol.1 §8.7 的**弱陈述**（只断言 Born–Infeld 型与规范不变组合，不含系数与张力），
+  因为其表达式对原书是 L0、伴读者自陈复现不出原书推导。**本卡是 Vol.2 (13.3.14) 的显式形式**，
+  表达式与系数均 L1 从原书页图抄出。两卡陈述内容不同、来源不同，互指不合并：
+  本卡的推导以那张卡为上游（原书把论证外包给 §8.7），故本卡有效状态不高于它。
+  那张卡 notes 里「仅供参考、标 L0」的 S_p = −T_p∫e^{−Φ}[−det(G+B+2πα'F)]^{1/2} 与本卡形式一致，
+  但系数记号不同（T_p vs μ_p）且那里的 T_p 归一化与原书不同——**不得**用本卡去「核实」那一行。
+
+  【规范不变组合的写法】本卡按原书 (13.3.14) 写 B_{ab} + 2πα'F_{ab}；ch8 弱卡的 statement 写
+  𝓕 = 2πα'F − B（Schrans 写法），其 notes 已记原书 §8.7 用的是 F + B/(2πα')。三者只差整体因子与
+  B 的符号约定；本卡不断言 B 的符号约定与 Vol.1 一致。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

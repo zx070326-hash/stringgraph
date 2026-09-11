@@ -147,6 +147,21 @@ notes: |
   (4) **顶点算子的伴随 V(b)_J† = V(−b)_{−J} 未做**（需 E_+ E_- 重排序，且 Lean 侧目前只有
       R-双线性型，无 sesquilinear 结构）；**x^μ 与 [x^μ, p^ν] 未做**（塔上只有 e^{i n k_0·x}
       这一个移位，且塔建在固定的 a、b 上，不是全动量空间）。
+      【⚠ 已消解 2026-09-12：VertexAdjoint.lean（fb006f5）；本卡已 superseded，
+      **只加本段 notes，陈述文本与其余 notes 一字未动**】
+      (4) 的前半句**已完成且括号里的理由是错的**：
+      `StringFormal.NoGhost.Fock.pairing_vertexOsc_left` 证出
+      ⟨V(b)_K v, w⟩ = ⟨v, V(−b)_{−K} w⟩ **对任意 b**，
+      `Fock.towerPairing_towerVertex_left` 给塔上版本，
+      `Fock.towerPairing_ddfOp_left` 给 (A^ε_n)† = A^ε_{−n}。
+      **「需 E_+ E_- 重排序」这一步不存在**：V(b)_K = E₋(b)E₊(b) 已是正规序，
+      其伴随 E₊(b)†E₋(b)† = E₋(−b)E₊(−b) **本身就是正规序**（产生因子自动落在左边），
+      不需要换序、不产生 c-数自缩并因子、**不需要 k_0² = 0**。
+      括号里的后半句「Lean 侧只有 R-双线性型，无 sesquilinear 结构」**仍然成立**，
+      是这一族结论至今唯一的结构性限制。
+      (4) 的后半句（x^μ 与 [x^μ, p^ν] 未做）**也仍然成立**。
+      承载卡：worldsheet.vertex-operator-adjoint（formalized）与
+      worldsheet.ddf-operators-adjoint-v2（formalized）。
 
   【2026-09-11（二）：偏振 ε^i 与 ∂X^i 的记号关系（auditor 第五轮精确性观察，
   lead 已同意只补 notes、不建 v6；curator 转录，陈述文本未动）】

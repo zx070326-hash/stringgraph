@@ -1,0 +1,50 @@
+id: branes.dbi-action-d-brane--via-bosonic-argument-of-section-8-7
+target: branes.dbi-action-d-brane
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.dbi-action-is-born-infeld-type
+    note: |
+      供给 Born–Infeld 型与规范不变组合 B + 2πα'F 的论证——原书逐字「The argument leading to this form is
+      exactly as in the bosonic case, section 8.7」。⚠ 那张卡是弱陈述（无系数、表达式对原书 L0）。
+  - id: branes.massless-open-string-gauge-field-and-collective-coordinates
+    note: |
+      供给作用量中的场：世界体规范场 A_a 与膜位置 X^m（(13.2.1) 逐字「As in the bosonic theory, the bosonic
+      states are a gauge field living on the D-brane and the collective coordinates for the D-brane」）。
+  - id: branes.d-brane-rr-charge-value
+    inferred: true
+    note: |
+      供给系数 μ_p = e^{Φ₀}τ_p（(13.3.7)），把 (13.3.14) 的 μ_p e^{−Φ} 在 Φ = Φ₀ 处读成张力 τ_p。
+      **标 inferred**：原书 (13.3.14) 直接写 μ_p，既不说明为什么不用 Vol.1 的 τ_p，也不在此处引用 (13.3.7)
+      （抽取记录 Q6：「原书不解释这个切换」）。这条边是本图为使系数可追溯而补的。
+  - id: branes.d-brane-tension
+    inferred: true
+    note: |
+      供给 τ_p 本身（规范场为零、Φ = Φ₀ 时 (13.3.14) 化为 −τ_p × 世界体体积）。
+      **标 inferred**：同上，原书在 (13.3.14) 处不引用 (13.3.4)/(13.3.23)。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「D-brane actions」, (13.3.14)(13.3.15)，p. 149（逐字「The argument leading to this form is exactly as in the bosonic case, section 8.7.」）；(13.3.19) 与「The full nonlinear supersymmetric form is left to the references」p. 150"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E20/#E21/Q6（L1）。
+  - ref: polchinski-1998-v1
+    loc: "§8.7, eq. (8.7.2)（玻色 Dp 膜作用量，τ_p 系数）与 (8.7.10)（规范不变组合），p. 270"
+    note: |
+      ⚠ 本图对 §8.7 只有 [S] 二手源（polchinski-1998-v1#E154/Q25），表达式对原书 L0；
+      伴读者自陈看不懂原书 (8.7.20) 附近的推导，改用外部文献。
+summary: |
+  (1) 玻色弦 §8.7 的论证（弱卡）：膜上无质量开弦的低能有效作用量由常场强背景中的开弦配分函数/散射
+      振幅定出，是 Born–Infeld 型行列式平方根；B 场规范变换须由 A 的平移补偿，故 B 与 F 只以
+      B + 2πα'F 组合出现；规范场为零时化为世界体体积泛函。
+  (2) 超弦：「exactly as in the bosonic case」——形式不变，系数改写为 μ_p e^{−Φ}（(13.3.14)）。
+      按 (13.3.7) μ_p = e^{Φ₀}τ_p，Φ = Φ₀ 时系数即张力 τ_p；e^{−Φ} 因子反映圆盘振幅 ∝ 1/g。
+  (3) n 张重合膜：场提升为 n × n 矩阵，Tr 在此空间取；由膜间拉伸弦的质量得 O([X^m, X^n]²) 势（(13.3.15)）。
+  (4) 费米部分 (13.3.19) 只给最低阶；完整非线性超对称形式留给文献。
+gaps:
+  - "**整条推导外包给 Vol.1 §8.7**，而本图对 §8.7 的卡是弱陈述、表达式对原书 L0（伴读者自陈复现不出原书推导，改用两篇未登记的外部文献）。本卡因此只能以「原书这样写」为据。"
+  - "**μ_p 与 τ_p 的切换未解释**（Q6）：(13.3.14) 用 μ_p，Vol.1 (8.7.2) 用 τ_p；两者只在 Φ = Φ₀ 处等价。补的两条 inferred 边只是把系数接到已有的卡上，不是原书的论证。"
+  - "**非阿贝尔排序**：行列式内矩阵值场如何排序/对称化，原书未给。"
+  - "**完整非线性超对称形式**：原书逐字「left to the references」，本章零文献引用，无法补链。"
+  - "**曲率修正**：原书逐字「can be obtained from a string calculation」，本章不做。"
+  - "**继承 ch8 弱卡的缺口**：decompactification 极限（duality.t-duality-in-decompactification-limit）等。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

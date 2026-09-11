@@ -51,8 +51,25 @@ sources:
       推导是 heuristic 的。**本节点及其下游任何以 Polyakov 路径积分为根的链，
       在 Polchinski 侧封顶 `physical-argument`，这是作者自己写的，不是本图的判断。**
 
-      ⚠ **未读**：App. A pp.339–346（§A.2 起，推测费米场/Grassmann）；`bc` 鬼场路径积分测度的
-      一手依据仍缺。见 literature/extractions/polchinski-1998-v1.md §13.1(d)(e)。
+      ⚠ ~~**未读**：App. A pp.339–346（§A.2 起，推测费米场/Grassmann）；`bc` 鬼场路径积分测度的
+      一手依据仍缺。~~
+      **【2026-09-11 关闭（curator-v1-sec15，researcher 第九轮，App. A pp.339–346 读毕）】**
+      §A.2 确是 Grassmann（Berezin）积分与费米路径积分。对本节点的净结果是**两条**：
+      1. **(A.2.4) 逐字 `∫dθ (d/dθ)(a+θb) = ∫dθ b = 0`（"the integral of a total derivative is zero"）**，
+         且 p.342 逐字说 "**all of the properties of ordinary integrals that were used are also true for
+         the Berezin integral: linearity, invariance (except for a sign) under change of order of
+         integration, and integration by parts**" ⇒ 本节点用的那套论证（测度对场重定义不变 ⇒ 运动方程
+         作为算子方程）**对费米场同样可做**，规则在 math.berezin-integral。
+      2. ⚠ **「`bc` 鬼场路径积分测度的一手依据」现在有了，但措辞必须准确**：A.2 给的是**一般** Grassmann
+         测度与行列式规则 **(A.2.24)–(A.2.27), pp.344–345**，**不是 `bc` 系统本身**
+         （A.2 通篇不出现 `b`/`c` 作鬼场名，也不写 `bc` 作用量；`bc` 系统在 §3.3 / §4.3）。
+         落点见 worldsheet.genus-g-ghost-path-integral 与
+         worldsheet.faddeev-popov-ghost-action--via-fp-procedure 的对应 source。
+      3. ⚠ 本节点上面记的两条作者自承缺口（路径积分连续极限 "rather heuristically"、
+         "we will evaluate explicitly only a few Gaussian path integrals"）都在 **A.1, p.332**，
+         **不是 A.2**；§A.2 里没有这类措辞（抽取记录 §15.2(g) 第 1 条的 negative evidence）。
+         **不要把 A.1 的自陈搬到 A.2 头上。**
+      见 literature/extractions/polchinski-1998-v1.md §13.1(d)(e) 与 §15.2(a)(c)(e)(g)。
 tags: [cft, free-field, equation-of-motion, contact-term]
 notes: |
   这条是「算子方程」概念在本图中的落点：它把经典运动方程升级为对所有关联函数成立的陈述，

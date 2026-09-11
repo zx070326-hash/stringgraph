@@ -10,7 +10,7 @@ depends_on:
       「|{d}⟩ 落在第 N(d) 层」以及由此直接读出的分级正交，用的是该卡规定的**层间正交**。
       ⚠ 该卡 (2) 逐字声明「层间正交是本定义规定的，不是被证明的」，本推导继承这条限定
       （见 gaps 第 1 条）。该卡 status: rigorous，不构成本推导的状态上限。
-  - id: worldsheet.ddf-operators-adjoint
+  - id: worldsheet.ddf-operators-adjoint-v2
     note: |
       **非 inferred**：目标假设 (H2)（⟨A^i_n v, w⟩ = ⟨v, A^i_{−n} w⟩）在 DDF 设定下由该节点的
       第 (1) 条供给。目标陈述把 (H2) 写成**假设**，故本推导的算术不依赖它成立；
@@ -19,6 +19,15 @@ depends_on:
       换句话说：**本推导自身的严格程度（rigorous）说的是那步蕴含，
       目标节点的 effective 说的是蕴含加上前件在 DDF 设定下的兑现程度**，两者不同，
       本条边保证后者不被高估。
+      【2026-09-12 换代，curator，分支 agent/curator/adjoint-wire】原指
+      worldsheet.ddf-operators-adjoint（已 superseded）。v2 只含伴随关系 (1)
+      （旧卡的 (2) 正是本推导的目标，留在旧卡上是循环的记账），
+      并把量词放宽为 n ∈ Z（含 0）、ε 只需横向，且**不**以 k_0² = 0 与 2α' k_0·p = 1 为前提。
+      (H2) 要的正是 v2 的 (1)，逐字对上。
+      ⚠ **上面 note 末尾「effective = physical-argument」已过时**：v2 现为 **formalized**
+      （推导 --via-lean，lean_decl `StringFormal.NoGhost.Fock.towerPairing_ddfOp_left`，fb006f5）。
+      ⇒ (H2) 这一侧不再是本目标的上限；本目标 effective 现由 own status rigorous 与
+      worldsheet.ddf-transverse-oscillator-algebra-v2（rigorous）共同决定，为 **rigorous**。
   - id: worldsheet.ddf-transverse-oscillator-algebra-v2
     note: |
       **非 inferred**：目标假设 (H1)（[A^i_m, A^j_n] = m δ^{ij} δ_{m+n,0}）在 DDF 设定下由该节点供给。

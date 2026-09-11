@@ -1,0 +1,41 @@
+id: branes.d-brane-tension
+kind: proposition
+title: Dp 膜的张力：τ_p² = (π/κ²)(4π²α')^{3−p}，显式 τ_p = 1/(g (2π)^p α'^{(p+1)/2})
+statement: |
+  type II 超弦中 Dp 膜（branes.d-brane-bps-half-susy）的张力 τ_p 满足
+    **τ_p² = (π / κ²) (4π²α')^{3−p}**,                                    (13.3.4)
+  其中 κ 是**物理测得**的十维引力耦合（依赖 dilaton 背景）。它满足与玻色弦相同的 T 对偶递推
+    τ_p / τ_{p−1} = 1 / (2π α'^{1/2}) = (4π²α')^{−1/2}。
+  在 g ≡ τ_F1/τ_D1 与 κ² = ½(2π)^7 g² α'^4 的约定（conv.string-coupling-tension-ratio）下显式为
+    **τ_p = 1 / ( g (2π)^p α'^{(p+1)/2} ) = (2κ²)^{−1/2} (2π)^{(7−2p)/2} α'^{(3−p)/2}**.   (13.3.23)
+  特别地 τ_0 = 1/(g α'^{1/2})，τ_1 = 1/(2π g α')，τ_F1/τ_D1 = g。
+
+  **本命题不断言**：
+  (a) R–R 荷 μ_p 的值（branes.d-brane-rr-charge-value）；
+  (b) 膜上规范耦合 g²_{Dp} = 1/((2πα')² τ_p)（(13.3.25)，需要 DBI 作用量的展开，本图未建卡）；
+  (c) (13.3.1) 圆柱振幅的完整前缀系数（页图读数与复算相差一个 π 的幂，见 notes）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.string-coupling-tension-ratio]
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3, eq. (13.3.4)，p. 146（τ_p²；其后逐字「This satisfies the same T-duality relation as in the bosonic string.」）；§13.3「Coupling constants」, eq. (13.3.23)，p. 150（显式 τ_p 的两种写法）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E17、#E22，证据等级 L1（原书页图）。
+      抽取者已独立复算：(13.3.4) 与 (13.3.22)+(13.3.23) 逐位自洽；(13.3.23) 两种写法互验通过（§0.3(a)）。
+      ⚠ 原书说「the same T-duality relation as in the bosonic string」但**不写出该关系**；
+      Vol.1 §8.7 的递推 τ_p = τ_{p−1}/(4π²α')^{1/2}（polchinski-1998-v1#E156，二手源）
+      与本章 (13.3.23) 给出的 τ_p/τ_{p−1} = 1/(2πα'^{1/2}) 相同（抽取记录 Q7 已验，不是矛盾）。
+tags: [d-brane, tension, type-ii, string-coupling, t-duality]
+notes: |
+  【与 Vol.1 §8.7 的关系】玻色弦 D 膜张力 (8.7.26) 在本图无卡
+  （polchinski-1998-v1#E156 是二手源，且 branes.dbi-action-is-born-infeld-type 明令不写张力）。
+  本卡是本图第一张给出 τ_p 数值的卡，且只对 type II 超弦。
+
+  【(13.3.1) 的前缀，抽取记录 Q3】本卡陈述只用 (13.3.1) 的**末行** iV_{p+1}·2π(4π²α')^{3−p}G_{9−p}(y)，
+  它被 (13.3.3)+(13.3.4) 独立背书（2iκ²τ_p² = 2iπ(4π²α')^{3−p}）。完整前缀
+  「iV_{p+1}·4×16 / (8π(8π²α'^?)⁵)」页图读作 α'²、纯 α' 幂次记账要求 α'（跨章佐证 -sec10-8#Q1），
+  且 π 的幂次差一次（Q3 未裁）。**前缀不进本卡**；须由人复核印刷页 146。
+
+  【与 spectrum.gravitational-coupling-kappa 的关系】那张卡的 κ = πα'g'_c 是 D = 26 玻色弦的量，
+  与本卡十维的 κ 不是同一个归一化，不得互相代入。
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"

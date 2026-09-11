@@ -1,0 +1,35 @@
+id: conv.string-coupling-tension-ratio
+family: string-coupling-normalization
+title: 闭弦耦合 g 的乘法归一化：g ≡ τ_F1 / τ_D1（Polchinski Vol.2 (13.3.21)）
+definition: |
+  闭弦耦合 g = e^Φ 的**乘法归一化**（等价地，dilaton 场 Φ 的加法归一化）取为
+    **g ≡ τ_F1 / τ_D1**,                                   (13.3.21)
+  即基本弦（F 弦）张力 τ_F1 = 1/(2πα') 与 D 弦张力 τ_D1 之比。
+  把 D 弦张力 (13.3.4)（p = 1）代入，该比值为
+    τ_F1 / τ_D1 = (1/2πα') · (κ / 4π^{5/2}α') = κ / (8π^{7/2}α'²),   (13.3.20)
+  于是在本约定下，**物理测得的**引力耦合是
+    **κ² = ½ (2π)^7 g² α'^4**,                              (13.3.22)
+  而低能有效作用量（§12.1）里的常数
+    **κ₁₀² = ½ (2π)^7 α'^4**                                (13.3.24)
+  与之相差 dilaton 背景值：κ = e^{Φ₀} κ₁₀ = g κ₁₀。原文逐字：
+  「this differs from the physically measured κ because the latter depends on the dilaton background.」
+
+  凡引用 Polchinski Vol.2 中 g、κ、κ₁₀、τ_p、μ_p、g_{Dp} 的**数值系数**
+  （如 τ_p = 1/(g (2π)^p α'^{(p+1)/2})），必须声明使用本约定；
+  换用别的 g 归一化时这些系数会整体改变。
+canonical: true
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.3「Coupling constants」, eqs. (13.3.20)(13.3.21)(13.3.22)(13.3.24), pp. 150–151；逐字「Up to now there has been no natural convention for defining the additive normalization of the dilaton field or the multiplicative normalization of the closed string coupling g = e^Φ. The dimensionless ratio (13.3.20) is proportional to the closed string coupling, and it turns out to be very convenient to take it as the definition of the coupling.」"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v2-ch13.md §1.2、§1.3 与 #E22，证据等级 L1（原书页图）。
+      抽取者已独立复算 (13.3.4)/(13.3.20)/(13.3.22)/(13.3.23)/(13.3.25) 五式互相自洽（抽取记录 §0.3(a)）。
+notes: |
+  由 curator 在转写 Polchinski Vol.2 第 13 章时新增（2026-09-11）。
+  本 family 目前只有这一个成员。它记录的是「g 的乘法常数由 F 弦/D 弦张力比定死」这一选择；
+  与「g_c ∼ e^λ 只定到一个常数」（worldsheet.euler-number-weights-string-coupling）或
+  「g'_c 由 Vol.1 §6.6 的三点振幅归一化」（spectrum.gravitational-coupling-kappa，D = 26 玻色弦的 κ = πα'g'_c）
+  是**不同的归一化选择**，不得互相换算——后者是玻色弦 26 维的量，与本约定的十维 κ 没有直接关系。
+
+  ⚠ 原书自陈这是本章才定下的约定（「Up to now there has been no natural convention」），
+  故 Vol.2 第 10–12 章中出现的 g、κ 若被赋以数值，须回查它们是否已经隐含本约定。

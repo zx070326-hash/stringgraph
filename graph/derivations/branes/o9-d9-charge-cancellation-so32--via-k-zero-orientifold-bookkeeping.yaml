@@ -1,0 +1,37 @@
+id: branes.o9-d9-charge-cancellation-so32--via-k-zero-orientifold-bookkeeping
+target: branes.o9-d9-charge-cancellation-so32
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: branes.orientifold-plane-rr-charge
+    note: 取 k = 0：一张 O9 面，荷 −2^{4−0} = −16；16 张 D9 膜。总荷 −16 + 16 = 0。
+  - id: branes.d-brane-rr-coupling
+    note: 供给「D9 膜是 10-形式势 C_10 的源、耦合 (13.2.7) 积分跑遍全时空」——把 §10.8 的 μ_10 ∫ C_10 读成 D9 膜。
+  - id: spectrum.chan-paton-gauge-group
+    inferred: true
+    note: |
+      供给「type I 的规范群 SO(32) 是 Ω 投影下的 Chan–Paton 群」。原书此处把「type I SO(32) theory」当作
+      已知名词使用，不在本节论证 SO(32) 的 CP 来源；且那张卡是玻色弦 Vol.1 §6.5 的
+      （超弦版 worldsheet.type-i-open-string-gauge-multiplet 在 ch10 分支，未合）。故标 inferred。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§13.2, p. 144（总结句，16 D9-branes + orientifold 9-plane）；pp. 142–143（O 面荷记账，k 任意）；p. 141–142（§10.8 的 10-形式与发散，「unaffected by toroidal compactification」）"
+    note: 抽取记录 literature/extractions/polchinski-1998-v2-ch13.md#E11/#E12/#E13（L1）。
+summary: |
+  (1) §10.8：type I 的 R–R tadpole 是 10-形式势 C_10 的源 μ_10 ∫ C_10，只对 SO(32) 相消。
+  (2) 本章把 μ_10 ∫ C_10 读成 D9 膜的 R–R 耦合 (13.2.7)（积分跑遍全时空），
+      把 cross-cap 的贡献读成 orientifold 9-面的 R–R 荷（O 面是荷的汇）。
+  (3) 一般 k 的记账（上游卡）：2^k 张 O 面各带 −2^{4−k}，16 张 D 膜各带 +1。
+      k = 0：一张 O9 面带 −16，16 张 D9 膜带 +16，总荷零 ⇔ §10.8 的 tadpole 相消。
+  (4) 原书的总结句：type I 是「含 16 张 D9 膜（与一张 orientifold 9-面）、看起来像 type I」的态。
+  (5) 环面紧化只增加绕周期方向的世界面 = 交换有绕数的（有质量）闭弦，无危险 tadpole，
+      故相消条件不受紧化影响（原书断言，未验证）。
+gaps:
+  - "★ **本推导的真正输入是 §10.8 的 tadpole 相消，该卡在 main 上不存在**（ch10 分支 worldsheet.type-i-tadpole-cancellation-so32；任务书写作 spectrum.*）。⇒ **TODO：合入后加 depends_on（不 inferred，三处逐字）**，本卡有效状态必须不高于它。在此之前 (1) 在图上悬空。"
+  - "★ **计数单位未声明**（Q1 未裁）：p. 144 写 16 张 D9，p. 141 的「each Chan–Paton degree of freedom … as a 9-brane」蕴含 32 张；原书不调和。本推导按 16 记账。"
+  - "**环面紧化不改变相消**：原书逐字「it is not hard to verify explicitly that this does not happen」——未验证（抽取记录 §3.1 第 5 条）。"
+  - "**「O 面是荷的汇」是从 tadpole 相消倒推的**（p. 147「We deduced from the cancellation of divergences」），本章不独立计算 O 面荷。"
+  - "**继承 branes.orientifold-plane-rr-charge 的全部缺口**（App. B 的 BPS 线性、玻色弦 T 对偶卡外包等）。"
+  - "**禁止的边**：不与 consistency.type-i-hexagon-so32-iff 建边（本章无 anomaly/hexagon；与 -sec10-8 裁决一致）。"
+author: curator-polchinski-v2-ch13
+created: "2026-09-11"
