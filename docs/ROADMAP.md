@@ -19,7 +19,7 @@
 同步：Lean 岛 1 无鬼定理形式化。
 
 ### Phase 1 进度（2026-09-11 深夜）
-- 计数（2026-09-12 晚）：main 602 statements / 496 derivations / 3 milestones / 21 conventions；**effective formalized 75** / rigorous 107。无鬼蓝图：**C.4 已合 main（DDFGram.lean 31 条：DDF Gram 对角、有序域正定 `ddf_span_pos`、线性无关、DDF 单项式是物理态）——正定性半边全部机检**；剩 B（N≥2 张成，N=2 两条引理派工中）与 C.5 组装。教训：合并冲突脚本对「HEAD 侧为空」的 hunk 失效，曾把冲突标记提交进 main（1470637 修复）——合并后必须 grep 标记。
+- 计数（2026-09-12 晚）：main 602 statements / 496 derivations / 3 milestones / 21 conventions；**effective formalized 75** / rigorous 107；Lean **79** 声明公理干净（3511 jobs）。ms.no-ghost-theorem 第八轮记账已入（R8-1…R8-5）。无鬼蓝图：**C.4 已合 main（DDFGram.lean 31 条：DDF Gram 对角、有序域正定 `ddf_span_pos`、线性无关、DDF 单项式是物理态）——正定性半边全部机检**；剩 B（N≥2 张成，N=2 两条引理派工中）与 C.5 组装。教训：合并冲突脚本对「HEAD 侧为空」的 hunk 失效，曾把冲突标记提交进 main（1470637 修复）——合并后必须 grep 标记。
 - 玻色弦：Polchinski v1 §1–6 全部入图并经 reviewer 审查（§5 moduli/CKV/Riemann–Roch/S 矩阵母公式；§6 树级振幅 spectrum 区 23 节点，Veneziano/Virasoro–Shapiro/Chan–Paton）；§8（T 对偶、Narain、D 膜）分支在审。**原书页核实**（Cambridge Core）关闭 13 条疑问、30 条 loc 修正、15 条作者自承缺口——落图中。
 - 超弦：v2 §10–11 抽取完成（61 条 L1）；§10 RNS/GSO/超共形代数/D=10 分支已交付（41 statements + 28 derivations，`critical-dimension-superstring` 汇总卡 (I)–(IV) 明确本卷对 D=10 只有一条实质论证），在审。
 - 里程碑：`ms.no-ghost-theorem` 五轮回译 faithful，等船长 approved；`ms.critical-dimension-bosonic` v3 已换代（(I) a 待定 + D ≥ 4；(V) "一致性要求 a = 1"），第三轮回译进行中；`ms.critical-dimension-superstring` 待 §10 入图后起草。
