@@ -6,12 +6,14 @@ depends_on:
   - id: branes.d-brane-bps-half-susy
     note: |
       供给「Dp 膜是 BPS 态」；原书由此推「BPS states … must carry conserved charges」（p. 141）。
-  - id: branes.bps-bound-point-particle-d4
+  - id: susy.bps-bound-point-particle-d4
     note: |
       供给「BPS 态必须带守恒荷」：(B.2.36) 的中心项 Z^{AB} 是守恒荷，短表示要求 q_i = m ≠ 0（(B.2.39) 之后）。
       原文背书：p. 141「BPS states, which are discussed in section B.2, must carry conserved charges」。
       ⚠ App. B 只覆盖点粒子荷；对 Dp 膜（p ≥ 1）这句是**类比**——广延物体荷的代数 (13.2.9) 在本卡之后
-      （branes.brane-charges-in-susy-algebra）。
+      （susy.brane-charges-in-susy-algebra）。
+      〔2026-09-11 去重：本边原指 `branes.bps-bound-point-particle-d4`，该卡与本边现指的卡是并行重复建卡，
+      lead 裁决保留 susy 版，故改指；note 内容与 inferred 状态（非 inferred）未变。〕
   - id: branes.t-duality-changes-brane-dimension
     note: |
       供给「每对一个方向作 T 对偶，p 减 1」；原书 p. 141 逐字「each time we T-dualize in an additional
