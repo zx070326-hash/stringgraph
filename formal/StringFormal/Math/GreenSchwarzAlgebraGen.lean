@@ -184,4 +184,17 @@ theorem mixed_anomaly_so_each_gives_32 (N : ℤ) :
     (N + 8 * (-1) = 24 ↔ N = 32) ∧ (N + 2 * (-1) = 30 ↔ N = 32) := by
   omega
 
+/-! ### The `usp` `tr F⁶` coefficient is `≥ 33`, not merely `> 0` -/
+
+/-- `usp(N)` branch (`l = +1`) of graph node `math.tr-f6-coefficient-vanishing`: the
+`tr F⁶` coefficient `N + 32l = N + 32` is at least `33` for every `N ≥ 1`.
+
+`tr_f6_usp_positive` only records `0 < N + 32`, which is all that is needed to conclude
+"the offending anomaly never cancels". The bound `33 ≤ N + 32` is the statement the graph
+node's text actually makes ("`≥ 33 > 0`"), so it is recorded here verbatim; `0 < N + 32`
+follows from it. `N ≥ 1` is the standing hypothesis that the gauge algebra is non-trivial
+(`usp(2N)` in the other common convention — the bound is only stronger there). -/
+theorem tr_f6_usp_ge_33 (N : ℤ) (hN : 1 ≤ N) : 33 ≤ N + 32 := by
+  omega
+
 end StringFormal.Math
