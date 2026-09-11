@@ -1352,3 +1352,115 @@ def test_report_frontier_hides_ruled_out_cards(mini: Path) -> None:
         """)
     rep = full_report(load_graph(mini))
     assert "worldsheet.prop-b" not in rep["formalization_frontier"]
+
+
+# ------------------------------------------------- history vs live warnings
+
+
+@pytest.fixture
+def mini_history(mini: Path) -> Path:
+    """`mini` plus a superseded card A (whose old derivation is kept as history per
+    docs/STATUS_LEVELS.md) and its replacement B, whose live derivation still points at A."""
+    _write(mini, "graph/statements/worldsheet/old-def.yaml", """
+        id: worldsheet.old-def
+        kind: definition
+        status: rigorous
+        title: old def
+        statement: superseded definition
+        superseded_by: worldsheet.def-a
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/statements/worldsheet/prop-a.yaml", """
+        id: worldsheet.prop-a
+        kind: proposition
+        title: A
+        statement: superseded proposition
+        superseded_by: worldsheet.prop-a-v2
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/derivations/worldsheet/prop-a--via-x.yaml", """
+        id: worldsheet.prop-a--via-x
+        target: worldsheet.prop-a
+        kind: physical-argument
+        status: physical-argument
+        summary: kept as history
+        depends_on: [{id: worldsheet.old-def}]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/statements/worldsheet/prop-a-v2.yaml", """
+        id: worldsheet.prop-a-v2
+        kind: proposition
+        title: B
+        statement: replacement proposition
+        uses_conventions: [conv.metric-plus]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    _write(mini, "graph/derivations/worldsheet/prop-a-v2--via-y.yaml", """
+        id: worldsheet.prop-a-v2--via-y
+        target: worldsheet.prop-a-v2
+        kind: physical-argument
+        status: physical-argument
+        summary: live derivation that still points at the old card
+        depends_on: [{id: worldsheet.prop-a}]
+        sources: [{ref: ref-a, loc: p.1}]
+        """)
+    return mini
+
+
+def test_superseded_target_warning_is_history_but_live_dep_edge_stays_live(mini_history: Path) -> None:
+    """旧推导保留为历史是裁决（docs/STATUS_LEVELS.md），其 warning 是提醒不是错误：
+    target 已 superseded ⇒ kind=history；活推导依赖已换代陈述 ⇒ kind=live（这是要改指的）。"""
+    problems = validate(load_graph(mini_history))
+    assert not [p for p in problems if p.severity == "error"]
+    by_where: dict[str, list] = {}
+    for p in problems:
+        if "superseded" in p.message:
+            by_where.setdefault(p.where, []).append(p)
+
+    old = by_where["graph/derivations/worldsheet/prop-a--via-x.yaml"]
+    target_warn = [p for p in old if "target 'worldsheet.prop-a'" in p.message]
+    assert [p.kind for p in target_warn] == ["history"]
+    # (b) the history derivation's own superseded dependency is history too
+    dep_warn = [p for p in old if "depends on superseded statement 'worldsheet.old-def'" in p.message]
+    assert [p.kind for p in dep_warn] == ["history"]
+
+    new = by_where["graph/derivations/worldsheet/prop-a-v2--via-y.yaml"]
+    assert [p.kind for p in new] == ["live"]
+    assert "depends on superseded statement 'worldsheet.prop-a'" in new[0].message
+
+
+def test_validate_cli_hide_history_drops_only_history_lines(mini_history: Path, capsys) -> None:
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini_history), "validate"]) == 0
+    full = capsys.readouterr().out
+    assert "prop-a--via-x.yaml" in full
+    assert "prop-a-v2--via-y.yaml" in full
+    assert "2 history)" in full.splitlines()[-1]
+
+    assert main(["--root", str(mini_history), "validate", "--hide-history"]) == 0
+    hidden = capsys.readouterr().out
+    assert "prop-a--via-x.yaml" not in hidden
+    assert "prop-a-v2--via-y.yaml" in hidden
+    # the summary still reports the totals, so hidden lines stay accounted for
+    assert "2 history)" in hidden.splitlines()[-1]
+
+
+def test_validate_cli_json_carries_kind(mini_history: Path, capsys) -> None:
+    import json as _json
+
+    from stringgraph.cli import main
+
+    assert main(["--root", str(mini_history), "validate", "--json"]) == 0
+    rep = _json.loads(capsys.readouterr().out)
+    assert rep["counts"]["errors"] == 0
+    assert rep["counts"]["history"] == 2
+    assert {p["kind"] for p in rep["problems"]} == {"live", "history"}
+    assert all({"severity", "where", "message", "kind"} <= set(p) for p in rep["problems"])
+
+    assert main(["--root", str(mini_history), "validate", "--json", "--hide-history"]) == 0
+    rep2 = _json.loads(capsys.readouterr().out)
+    assert {p["kind"] for p in rep2["problems"]} == {"live"}
+    assert rep2["counts"]["history"] == 2
