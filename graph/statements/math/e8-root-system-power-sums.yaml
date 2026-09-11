@@ -1,0 +1,89 @@
+id: math.e8-root-system-power-sums
+kind: proposition
+title: E₈ 根系的幂和：Σ_α (α·x)² = 60|x|²、Σ_α (α·x)⁴ = 36|x|⁴、Σ_α (α·x)⁶ = 30|x|⁶，故 P₄ = P₂²/100、P₆ = P₂³/7200（对一切 x ∈ ℚ⁸）
+statement: |
+  设 Φ ⊂ ℚ⁸ 是 math.e8-root-system 的那 **240 个显式向量**，即
+
+  · ±ε_i ± ε_j（1 ≤ i < j ≤ 8，符号独立；112 个），
+  · ½(s₁, …, s₈)，s_i ∈ {+1, −1} 且负号个数为偶数（128 个）。
+
+  对 x = (x₁, …, x₈) ∈ ℚ⁸ 记 α·x := Σ_i α_i x_i（ℚ⁸ 上的标准双线性配对），
+  |x|² := Σ_i x_i²，并定义 **根幂和** P_k(x) := Σ_{α ∈ Φ} (α·x)^k。则对**一切** x ∈ ℚ⁸：
+
+      P₂(x) = 60 |x|²
+      P₄(x) = 36 |x|⁴
+      P₆(x) = 30 |x|⁶
+
+  从而（消去 |x|²，两侧同次齐次）
+
+      **P₄(x) = (1/100) · P₂(x)²**
+      **P₆(x) = (1/7200) · P₂(x)³**
+
+  这两条就是 Green–Schwarz 1984 (12b′)(12c′) 与 van Ritbergen–Schellekens–Vermaseren (176)(177)
+  中的**纯数字** 1/100、1/7200 的来路——但本卡只谈根幂和，**不谈迹**。
+
+  **本卡不断言**：
+  (a) P_k 与李代数 𝔢₈ 的伴随迹 Tr_248 F^k 之间的任何关系（那是 math.adjoint-weights-are-roots-and-zero
+      与 math.chevalley-restriction-theorem 两张桥卡的内容，接线在
+      math.e8-adjoint-trace-identities--via-root-power-sums）；
+  (b) 「这 240 个向量是 E₈ 根系」——那是 math.e8-root-system 的定义内容，本卡只对显式列表做算术；
+  (c) k ∉ {2, 4, 6} 的任何幂和（奇数 k 时 P_k = 0 是显然的但本卡不写；k = 8 及以上不成立
+      「P_k ∝ |x|^k」，vRSV (178) 给出 k = 10 的非平凡形状）；
+  (d) 任何关于反常的事。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.Math.E8.e8_trace_identities
+  lean_file: StringFormal/Math/E8Roots.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/E8Roots.lean :: StringFormal.Math.E8.e8_trace_identities（P₄ = P₂²/100 ∧ P₆ = P₂³/7200）；三条显式幂和 StringFormal.Math.E8.{e8_power_sum_two, e8_power_sum_four, e8_power_sum_six}；分条 {e8_trace_four, e8_trace_six}；Finset 形式 e8RootSet_power_sums；幂和定义 e8PowerSum；根表 e8Roots"
+    note: |
+      本仓库，主分支合并提交 **fb489ee**（"merge: E8 root-system power sums k=2,4,6 for arbitrary x
+      (E8Roots.lean, 51 decls)"），Lean 4 + Mathlib v4.33.1，只 import Mathlib（岛 2 算术角）。
+      逐句对应：Φ → `e8Roots`（112 条 `e8VectorRoots` + 128 条 `e8SpinorRoots`）；α·x → `∑ i, α i * x i`；
+      P_k → `e8PowerSum k x`；三条幂和 → `e8_power_sum_two/four/six`（对任意 `x : Fin 8 → ℚ`）；
+      两条比值 → `e8_trace_four/six`，合成 `e8_trace_identities`（本卡 formal.lean_decl）。
+      文件 docstring 自述本卡「不断言」的 (a)(b) 两条：「The step from the adjoint trace … to the root
+      power sum … is a mathematical *hypothesis* here, not a theorem」「"these 240 vectors are exactly
+      the roots of E₈" is here a *definition*」。
+  - ref: humphreys-1990-reflection
+    loc: "§2.10, pp. 42–43（E₈ 的 240 根列表——本卡求和范围 Φ 的出处）"
+    note: |
+      L1 逐字（见 math.e8-root-system）。**只承载 Φ 的列表，不承载任何幂和**：Humphreys 不算幂和。
+  - ref: van-ritbergen-1998
+    loc: "App. A.5「Indices and trace identities for E₈」, eqs. (176)(177)，PDF p. 35；Table 3, PDF p. 16（E₈ 伴随的二阶指标 I₂ = 60）"
+    note: |
+      L1 逐字（抽取记录 literature/extractions/math-sources.md §44.5）。原文以**迹**写：
+      「Tr F⁴ = 36 (1/60 Tr F²)²」(176)、「Tr F⁶ = 30 (1/60 Tr F²)³」(177)。
+      按本卡的对应 Tr F² ↔ P₂ = 60|x|²，(176)(177) 化为 P₄ = 36|x|⁴、P₆ = 30|x|⁶，
+      **与本卡三条幂和的数字 60、36、30 逐位一致**——独立的数值对照，不是本卡的证明来源
+      （vRSV 的 Tr 是李代数伴随迹，从迹到幂和的桥不在本卡）。
+tags: [algebra, arithmetic, root-system, e8, trace-identity, anomaly, phase2, lean-island-2, formalized]
+notes: |
+  【为什么另立此卡而不是给 math.e8-adjoint-trace-identities 挂 lean_decl】
+  Lean 证的是**显式 240 元列表的有理数幂和**；math.e8-adjoint-trace-identities 陈述的是
+  **𝔢₈ 取值二形式的伴随迹**。两者之间隔着两步 Lean 没做的李理论
+  （伴随权 = 根 ∪ 零权；Chevalley 限制），reviewer 已裁定不得把 lean_decl 直接挂到迹恒等式卡。
+  按 docs/STATUS_LEVELS.md 的拆卡原则，本卡就是 Lean 逐句对应的那一半。
+
+  【Lean 核了什么、没核什么】
+  · 核了：对**任意** x ∈ ℚ⁸（不是数值实例）的三条幂和与两条比值；240 条根两两不同（`e8Roots_nodup`）、
+    每条长度平方 2（`e8Roots_normSq`）。
+  · 没核：**根表的完备性**——「格 L 中长度平方为 2 的向量都在表里」只有 ⊆ 方向（`e8Roots_normSq`），
+    没有 ⊇。对本卡这不构成缺口：本卡的求和范围**就是**那张显式列表；
+    「这 240 个向量是 E₈ 的根」是 math.e8-root-system 的定义，不是本卡的断言。
+
+  【证明技术（供复核者参考，来自 formal/TODO.md A11 条）】六次幂 240 项直接 `ring` 会爆；
+  把 128 条旋量根写成 {偶}×{偶} ∪ {奇}×{奇}，内层先对 8 个符号型做二项展开
+  （`inner_ev_six` 等），外层再合并。两块分别为
+  vec_k = 28p₂ / 16p₄ + 12p₂² / 60p₂p₄ − 32p₆，spin_k = 32p₂ / 24p₂² − 16p₄ / 30p₂³ − 60p₂p₄ + 32p₆
+  （p_k := Σ x_i^k），**单独任一块都不是 |x|^k 的倍数，只有和是**——与
+  literature/extractions/math-sources.md §44.7 的手算逐项一致。
+
+  【与 Humphreys Table 1 的关系】W(E₈) 基本不变量次数 2, 8, 12, 14, 18, 20, 24, 30
+  （humphreys-1990-reflection §3.7 Table 1, p. 59）解释了「为什么 P₄、P₆ 必是 |x|² 的幂」，
+  但本卡的证明**不用**它——幂和直接算出来就是。次数表在本图暂未立卡。
+
+  【查重】`uv run stringgraph search e8` 无幂和卡；`search root-system` 只命中 math.e8-root-system（本轮新建）。
+author: curator
+created: "2026-09-11"
