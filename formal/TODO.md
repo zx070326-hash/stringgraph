@@ -1665,6 +1665,26 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
        「DDF 态 = 横向 Fock 态」写成命题，应改成「在 `ddfSpan ⊕ spurious` 的意义下」。
     3. `ψ = levelTwoGen η v w` 的表示**不唯一**（只有 `v` 的对称部分被定死），
        所以 (b) 的刻画是 `∃` 形，不是典范形式；做 (c) 时需要注意别默认唯一性。
+- [x] `worldsheet.ddf-light-cone-frame` 打包：**`structure DDFLightConeFrame`**，把卡的 (F1)–(F8)
+  凑成单个 Lean 声明（此前卡是 `rigorous` 而非 `formalized`，因为八条条件散在
+  `LightConeFrame` / `TransverseFrame` / 松散前提里，没有一个声明等于它们的合取）——
+  `StringFormal/NoGhost/LightConeFrame.lean`（6 条顶层声明，无 sorry，`check_axioms` 全 `ok`，
+  公理集只有 `propext`/`Classical.choice`/`Quot.sound`）。分支 `agent/formalizer/lightcone-struct`。
+  - `DDFLightConeFrame η a b`：`frame : LightConeFrame η b` + `trans : TransverseFrame η b`
+    覆盖 F2/F4 的迷向配对一半/F5/F7；`hη`(F1)/`hba`(F3)/`hconjSpan`(F4 张成一半，
+    `∃ β γ, b̃ = β•a + γ•b`)/`hεa`(F6)/`hspan`(F8, `FrameSpansOrthogonal`)。
+  - `witnessDDFLightConeFrame`：`Witness.lean` 的显式标架实例化，证非空。顺带给
+    `witnessConjugate` 补了三条分量引理与 `witnessConjugate_eq_neg_witnessMomentum_add_witnessLight`
+    （该标架上 `b̃ = b − a`，与卡 notes 手算一致）。
+  - **bonus (i) 已做**：`dotVec_polarization_conj_eq_zero`（(F9) `ε·b̃ = 0`，纯双线性，只需
+    `CommRing`）与 `DDFLightConeFrame.lie_conjOp_transOp`（**从标架数据直接消去
+    `LightCone.lean` 里 `lie_conjOp_transOp` 原本松散的 `hεconj` 前提**）。
+  - **bonus (ii) 未做**：卡 notes 手算「(F6)(F7)(F8) 在域上 ⟹ η(a,a) = 2」需要
+    `v^⊥`（`v = a − b`）余维一（秩零化度）+ `{ε_i}` 张成维数 `≤ D−2` 的界，
+    是比本文件的打包重得多的一段有限维线性代数（需要 `Module.Finite` + 特征化域），
+    评估后判断这是独立的、值得单开一张任务的工作，本轮不做。
+  - **图接线**：卡 `formal.lean_decl` 填 `StringFormal.NoGhost.DDFLightConeFrame`，
+    `status: rigorous → formalized`（结构字段与卡的八条逐条对应，验证过是精确匹配，无缺项无多余）。
 - [x] `noghost-c4`（⚠ 未做：`ddfMonomial d` 落在 rung −N(d) 的定位（DDFGram.lean:297 自报），派 `formalizer-ddfgram-level`；spurious→null 桥 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 已由 Assembly.lean 提供）（蓝图 §C.4）：**DDF 态的 Gram、正定性与线性无关** ——
   `StringFormal/NoGhost/DDFGram.lean`（28 条顶层声明）。分支 `agent/formalizer/noghost-c4`
   （已并入 `agent/formalizer/noghost-b`，因为 `towerVacuum` 在 `LightCone.lean` 里）。
