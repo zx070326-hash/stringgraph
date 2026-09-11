@@ -31,11 +31,25 @@ sources:
   - ref: fgz-1986
     loc: "**Proposition 1.3**, p.8443（§1.1 'Definitions and Basic Results'）：Euler–Poincaré 原理，Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ_m (−1)^m ch_q H^m_∞(g, V)（本卡 (2) 在半无限上同调复形上的实例）；**p.8445 左栏**逐字 'To find the dimension of the zero degree cohomology group we apply the Euler–Poincaré principle. The formal Euler character is …'"
     note: |
-      页码与编号 L1（literature/extractions/brst-cohomology-sources.md §1.4 编号表：
-      'Prop. 1.3 | p.8443 | Euler–Poincaré：Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ (−1)^m ch_q H^m_∞(g, V)'）。
-      ⚠ **Prop 1.3 的陈述本图只有该表的一句话转述，不是逐字**；p.8445 那句是逐字（§9.9.3）。
-      FGZ 在 Theorem 2.7 正上方把 'the Euler–Poincaré principle (Proposition 1.3)' 明写为输入（§9.3 逐字）。
-      本卡 (2) 是 FGZ 用法的一般形式（半无限复形 V ⊗ Λ^∞ 按权分次，每个权空间是有限维复形）。
+      **L1 逐字**（extraction `brst-cohomology-sources.md` §9.11.1，researcher 第五轮页图 p.8443 左栏最下方）：
+      「**PROPOSITION 1.3.** *For* `V` *in* `𝒪₀`, `Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ (−1)^m ch_q H^m_∞(g, V)`.」
+      ★ **唯一的量词是 `V ∈ 𝒪₀`**（不是更大的 `𝒪`）。`𝒪₀` 在同页定义，须展开为
+      「每个分次层有限维 + 分次在上方有界」（逐字：'dim Λ^{m,n}_∞ < +∞ for every n ∈ Z and for some n₀ ∈ Z
+      is 0 for n > n₀. The g-modules with these properties compose a category 𝒪₀.'）——与本卡 (1)(2) 的前提
+      逐点同型，也与 LZ Definition 2.12(i) 对 char/sign 的前提逐点同型。
+      ★ **陈述是特征标层面的交错和**（`ch_q H^m_∞(g,V) = Σ_n dim H^{m,−n}_∞(g,V) q^n`，定义在 Prop 1.3 正上方一句），
+      即本卡 (2)，不是 (1)；(1) 是它在单个 q 幂次上的读数。
+      ★ 「每层有限维」不是 Prop 1.3 的额外假设，而是由 `V ∈ 𝒪₀` 推出（同页逐字 'turns V ⊗ Λ*_∞ into a
+      graded space, finite-dimensional in each level'）。⚠ 上同调是无穷乘积 `H^m_∞(g,V) = Π_n H^{m,n}_∞(g,V)`，
+      不是直和——转述时别写成 ⊕。
+      ★ **"Euler–Poincaré principle" 这个名字是 FGZ 自己在 Prop 1.3 正上方给的**（'The Euler–Poincaré principle
+      for each graded level can be contained in the following statement.'），与 Thm 2.7 上方
+      'the Euler–Poincaré principle (Proposition 1.3)'（§9.3 逐字）呼应，归属自洽。
+      ⚠⚠ **FGZ 没有印出 Prop 1.3 的证明**（§9.11.1 读数 3：Prop 1.3 与 Prop 1.4 之间没有 Proof、没有 □、
+      没有 'see ref. N'、没有 'straightforward'；通读 p.8443/p.8444 两页全栏无回补）。
+      ⇒ **fgz-1986 对本卡只能给「陈述 + 编号 + 量词」，给不了证明**；本卡推导的 rigorous 不靠它，见 notes。
+      ⚠ 引用格式陷阱：同页的**微分定义式印作 `[1.3]`（方括号）**，与 `Proposition 1.3` 同号不同物；
+      引用时必须写全类型词。
   - ref: lian-zuckerman-1989
     loc: "**Corollary 2.15 的证明**, p.317，逐字：'We recall the Euler–Poincaré Principle for characteristics: Σ_{n∈Z}(−1)^n dim H^n_rel(p,κ) = Σ_{n∈Z}(−1)^n dim C^n_rel(p,κ).'；**Proposition 4.3(ii) 的证明**, p.330，逐字：'By the Euler–Poincaré Principle, we have Σ_{n∈Z}(−1)^n dim P̄_+C_rel = dim H^0(P̄_+C_rel).'"
     note: |
@@ -43,11 +57,19 @@ sources:
       ★ **这是本图对本卡 (1) 唯一的逐字文献陈述**（LZ 以 'We recall' 引入，视为标准事实，不证）。
       p.330 那句是 (1) 的「特别地」一支（先用 Theorem 2.4 消灭 n ≠ 0）。
   - ref: hatcher-2002
-    loc: "§2.2 'Euler Characteristic' 小节，Theorem 2.44 及其证明里对有限生成自由链复形的 rank 交错和恒等式（定理号凭记忆，**未核实，L0**）"
+    loc: "**Theorem 2.44**, Ch. 2 §2.2 小标题 'Euler Characteristic'，书上 **p. 146**，证明跨 **pp. 146–147**（证明标题印作 'Proof of 2.44'）。逐字：'**Theorem 2.44.** χ(X) = Σ_n (−1)^n rank H_n(X).'"
     note: |
-      教科书来源，只为说明本卡是标准线性代数事实；**本轮未翻页核对**（bib 条目登记时只读了 Ch.1）。
-      Hatcher 的版本是对有限 CW 复形的整系数链复形（rank 而非 dim），本卡取域上向量空间的上链版，
-      证明逐字相同（秩–零化度 + 交错和伸缩）。任何一本同调代数教科书的第一章都有此陈述。
+      **L1 逐字**（extraction `math-sources.md` §39.5 追加段，researcher 2026-09-11；全书 PDF
+      `pi.math.cornell.edu/~hatcher/AT/AT.pdf`，**PDF 页 = 书页 + 9**）。定理号 2.44 **已核实**，
+      此前「凭记忆、L0」的标注作废。
+      ★ **量词写在定理正上方的定义句里，不在定理语句内**：'For a finite CW complex X, the Euler
+      characteristic χ(X) is defined to be the alternating sum Σ_n(−1)^n c_n where c_n is the number of
+      n-cells of X …' ⇒ 引用时必须把 **finite CW complex** 一起带上。
+      ★ **证明唯一的外包步骤**是「0→A→B→C→0 正合 ⇒ rank B = rank A + rank C」，Hatcher 逐字
+      'whose proof we leave as an exercise'；其余（含把结论应用到 C_n = H_n(X^n, X^{n−1})）都印全。
+      ⚠ Hatcher 的版本是**有限 CW 复形的整系数链复形**（rank 而非 dim），本卡取域上向量空间的上链版；
+      两者的论证同型（秩–零化度 + 交错和伸缩），但**不是同一条命题**——本卡不把 Hatcher 当作
+      自身陈述的逐字来源，只当作「同一论证在教科书里印全了」的旁证。
 tags: [homological-algebra, linear-algebra, euler-characteristic, brst, cohomology]
 notes: |
   【为什么立卡（curator 2026-09-11，small-backlog-12）】
@@ -59,11 +81,15 @@ notes: |
   三条推导同批加边（非 inferred：各自原文逐字 'By the Euler–Poincaré Principle' / 'the Euler–Poincaré
   principle (Proposition 1.3)'）。
 
-  【状态】推导 --via-rank-nullity 当前 **physical-argument**，理由不是论证弱，而是按
-  docs/STATUS_LEVELS.md 的 rigorous 例外条款：有限步初等计算可标 rigorous，**但须 reviewer 独立复核并
-  在推导 notes 写 `reviewer-verified: <agent>, <date>`**。复核后升 rigorous（届时改推导的 kind/status，
-  本卡不动）。三条下游推导的 effective 本已被各自的接口卡封在 physical-argument，
-  本卡当前状态**不改变**它们的 effective。
+  【状态（2026-09-11 更新，此前的「暂 physical-argument」段已过时）】推导 --via-rank-nullity 现为
+  **rigorous**，走的是 docs/STATUS_LEVELS.md 的例外条款：有限步初等计算 + reviewer 独立复核，
+  签名 `reviewer-verified: reviewer-batch26, 2026-09-11` 写在该推导 notes 里。
+  ★ **这条 rigorous 的承重墙是本图自己补的证明 + reviewer 签名，不是文献**：
+  **FGZ 没有印出 Proposition 1.3 的证明**（§9.11.1 读数 3，页图逐字确认 Prop 1.3 与 Prop 1.4 之间无 Proof），
+  LZ 以 'We recall' 引入也不证。⇒ 若有人日后想把本卡的严格性追到 fgz-1986 身上，追不到；
+  数学侧印全证明的现成参照是 hatcher-2002 Theorem 2.44（pp.146–147，但那是有限 CW 复形的整系数版，
+  不是本卡的域上上链版，只作旁证）。
+  三条下游推导的 effective 本已被各自的接口卡封在 physical-argument，本卡状态不改变它们的 effective。
 
   【号差版另立】LZ Cor 2.15(ii)（worldsheet.no-ghost-theorem-superstring-cohomological-v2 的推导）
   用的是 signature 版：Σ sign H^n = Σ sign C^n，前提多一个非退化厄米型与 Q* = Q。

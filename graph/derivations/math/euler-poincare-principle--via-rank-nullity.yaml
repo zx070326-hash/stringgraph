@@ -10,13 +10,25 @@ sources:
       L1 逐字（literature/extractions/lian-zuckerman-1989.md §9.2）。LZ 以 'We recall' 引入，**不证**；
       本推导的证明是本图补的标准线性代数。
   - ref: fgz-1986
-    loc: "**Proposition 1.3**, p.8443（Euler–Poincaré 原理，形式特征标版；陈述只有抽取记录 §1.4 编号表的一句话转述）"
+    loc: "**Proposition 1.3**, p.8443，逐字：'For V in 𝒪₀, Σ_m (−1)^m ch_q(V ⊗ Λ^m_∞) = Σ (−1)^m ch_q H^m_∞(g, V).'（形式特征标版，即目标卡 (2)）"
     note: |
-      页码/编号 L1，陈述内容非逐字。FGZ 在 PNAS 公告体裁里对 Prop 1.3 是否给证明本图**未核**。
+      **L1 逐字**（extraction `brst-cohomology-sources.md` §9.11.1）。此前「陈述非逐字、是否给证明未核」的
+      标注作废，两点都已核：
+      (1) 陈述逐字如上，**唯一量词是 V ∈ 𝒪₀**（同页定义 = 每层有限维 + 分次上方有界）；
+      (2) ⚠⚠ **证明没有印出**——Prop 1.3 与紧随其后的 Prop 1.4 之间没有 Proof、没有 □、没有 'see ref. N'、
+          没有 'straightforward'，通读 p.8443/p.8444 两页全栏也无回补。
+      ⇒ **本推导的 rigorous 不来自本条 source**：fgz-1986 在这里只提供「陈述 + 编号 + 量词」与「这条原理
+      在弦论文献中的标准归属」。严格性来自 summary 里本图自己补的秩–零化度证明 + reviewer-batch26 的签名
+      （见 notes）。这与「命题为真」无关——它是标准同调代数事实——只是记账要诚实。
   - ref: hatcher-2002
-    loc: "§2.2 'Euler Characteristic'，Theorem 2.44 的证明（有限生成自由链复形的 rank 交错和 = 同调 rank 交错和；定理号凭记忆，L0）"
+    loc: "**Theorem 2.44**, Ch. 2 §2.2（小标题 'Euler Characteristic'），书上 **p. 146**，证明 **pp. 146–147**（标题印作 'Proof of 2.44'）；逐字 'χ(X) = Σ_n (−1)^n rank H_n(X)'，量词 'finite CW complex' 在定理正上方的定义句里"
     note: |
-      教科书里同一论证的整系数版本（rank 代替 dim），**未翻页核对**。
+      **L1 已核**（extraction `math-sources.md` §39.5 追加段；全书 PDF `pi.math.cornell.edu/~hatcher/AT/AT.pdf`，
+      PDF 页 = 书页 + 9）。此前「定理号凭记忆、L0、未翻页核对」的标注作废。
+      ★ 该证明**唯一的外包步骤**是「0→A→B→C→0 正合 ⇒ rank B = rank A + rank C」（逐字 'whose proof we
+      leave as an exercise'）；在本推导的域上向量空间设定里，这一步就是秩–零化度定理，summary 里直接用了。
+      ⚠ Hatcher 是**有限 CW 复形的整系数链复形**（rank），目标卡是域上向量空间的上链复形（dim），
+      **不是同一条命题**；本条只作「同型论证在教科书里印全」的旁证，不是目标卡陈述的来源。
 summary: |
   设 (C^•, d) 满足目标卡 (1) 的前提。对每个 n，秩–零化度定理给
     dim C^n = dim Z^n + dim B^{n+1}      （Z^n = ker d_n，B^{n+1} = im d_n），
@@ -33,14 +45,18 @@ summary: |
   对每个 λ 用 (1)，再对 λ 形式求和即得形式特征标的等式。对固定的 λ 与 n，
   dim C^n_λ 有限，形式和逐系数有定义，不涉及收敛。
 
-  【为什么暂标 physical-argument】论证是完整的有限步线性代数，按 docs/STATUS_LEVELS.md
-  的例外条款（lead 裁决 2026-09-10）可标 rigorous，**前提是 reviewer 独立复核并在本 notes 登记
-  `reviewer-verified: <agent>, <date>`**。当前没有，故按「不确定选低一级」暂标 physical-argument。
-  复核后把本推导改为 kind: proof / status: rigorous 即可，目标卡与三条下游边不需要动。
+  【rigorous 的依据（2026-09-11 更新；此前写的「暂标 physical-argument」已过时，本推导现为 rigorous）】
+  走 docs/STATUS_LEVELS.md 的例外条款：论证是完整的有限步线性代数（秩–零化度 + 交错和伸缩），
+  且 reviewer 已独立复核并签名（见 notes 首行 `reviewer-verified: reviewer-batch26, 2026-09-11`）。
+  ★ **承重墙是上面这条自证 + 签名，不是文献**：researcher 2026-09-11 的页图确认
+  **FGZ 根本没有印出 Proposition 1.3 的证明**（§9.11.1 读数 3），LZ 以 'We recall' 引入也不证。
+  两条文献 source 只承担「陈述、编号、量词与归属」。教科书侧印全证明的是 hatcher-2002 Theorem 2.44
+  （pp.146–147），但那是有限 CW 复形的整系数版，只作同型旁证。
 gaps:
-  - "**待 reviewer 复核升 rigorous**：summary 的证明是标准线性代数（秩–零化度 + 交错和伸缩），无文献逐行核对；按 docs/STATUS_LEVELS.md 例外条款需 `reviewer-verified: <agent>, <date>` 才可标 rigorous。"
-  - "**教科书定位未核**：hatcher-2002 的定理号 2.44 凭记忆；任一同调代数教科书第一章均有此陈述，researcher 可顺手补一条 L1 定位。"
-  - "**FGZ Prop 1.3 的陈述非逐字**：只有抽取记录 §1.4 表的一句话转述；FGZ 是否给证明未核。"
+  - "**（2026-09-11 已关闭）待 reviewer 复核升 rigorous**：`reviewer-verified: reviewer-batch26, 2026-09-11` 已登记在 notes 首行，本推导现为 rigorous。"
+  - "**（2026-09-11 已关闭）教科书定位未核**：hatcher-2002 **Theorem 2.44**, p. 146，证明 pp. 146–147，已 L1 核实（量词 'finite CW complex' 在定理上方的定义句里，唯一外包步骤是 rank B = rank A + rank C 留作习题）。"
+  - "**★ 两条文献来源都不印证明（本推导最实质的记账事实，2026-09-11 确认）**：**FGZ Proposition 1.3 的证明没有印出**（Prop 1.3 与 Prop 1.4 之间无 Proof/□/'see ref. N'/'straightforward'，通读 p.8443–8444 无回补，§9.11.1 读数 3）；**LZ 以 'We recall' 引入，也不证**。⇒ 本推导的 rigorous **完全靠本图自补的证明 + reviewer 签名**，不靠文献。任何想把本卡严格性追溯到 fgz-1986 的记账都是错的。"
+  - "**FGZ 版与本卡 (2) 的对象差一层**：FGZ 的 `H^m_∞(g,V) = Π_n H^{m,n}_∞(g,V)` 是无穷**乘积**（半无限上同调的特有现象，§9.11.2），本卡 (2) 写的是按 λ 的直和分解 `H^n(C) = ⊕_λ H^n(C_λ)`。两者在「逐权（逐 q 幂次）成立」这一点上一致，但**本图没有核对「乘积 vs 直和」这一步在 FGZ 的用法里是否需要额外论证**。引用 FGZ Prop 1.3 作为本卡实例时须留意。"
 notes: |
   reviewer-verified: reviewer-batch26, 2026-09-11（复核：dim Cⁿ = dim Zⁿ + dim Bⁿ⁺¹（秩–零化度）、dim Hⁿ = dim Zⁿ − dim Bⁿ（d² = 0）、指标平移带负号、全有限和、(2) 逐权分解——完整无缺；陈述与 FGZ Prop 1.3、LZ p.317 一致；不断言号差版正确。走 STATUS_LEVELS 例外条款。lead 落地。）
   本推导没有依赖：命题只用向量空间的维数与线性映射的秩–零化度，本图对这些没有卡，也不该有
