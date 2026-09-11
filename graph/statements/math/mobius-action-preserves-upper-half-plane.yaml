@@ -40,11 +40,21 @@ sources:
 
       **卡面两条与该声明的对应**：
       (1) → 声明的等式本身，(c, d) = (g 1 0, g 1 1)，‖·‖ 是 ℂ 的模，故 ‖cτ+d‖² = |cτ+d|²；
-      (2) → **由声明的类型承担**：`g • τ` 的类型是 `ℍ = UpperHalfPlane = {z : ℂ // 0 < z.im}`，
-           即「作用落在 H 内」是这条定理能通过类型检查的前提（Mathlib 的
-           `MulAction SL(2,ℝ) ℍ` 实例在构造时就证了正性）；把它取出来的那一步是
-           `UpperHalfPlane.im_pos (g • τ)`。**桥层没有为 (2) 单独立一条重述定理**，见
-           --via-lean 的 gaps 第一条（记账，已提请 reviewer 裁定）。
+      (2) → **有自己的具名桥层声明** `StringFormal.Bridge.psl2z_im_pos`（同一文件）：
+
+               theorem psl2z_im_pos (g : SL(2, ℤ)) (τ : ℍ) : 0 < (g • τ).im :=
+                 (g • τ).im_pos
+
+           ★ **原记账「桥层没有为 (2) 单独立一条重述定理」于 2026-09-11 撤销**
+           （curator lean-wire-12）：--via-lean 的 gaps 第一条曾提请 reviewer 裁定，
+           并写明「正确修法是请 formalizer 在桥层补一行 psl2z_im_pos」——formalizer
+           （bridge-2，桥层提交 **3a36c36**，合并 **930b265**）已照此补上。
+           现在卡面 (2) 不再只活在 `psl2z_im_smul_eq` 的**类型**里，而是一条可被
+           `check-axioms` 单独点名的命题。
+           本卡 `lean_decl` **仍取 `psl2z_im_smul_eq`**（它是卡面主断言 (1) 的等式，
+           且其类型里的 `g • τ : ℍ` 本来就蕴含 (2)）；(2) 的具名声明由本 note 点名。
+           数学内容仍全是 Mathlib 的：`psl2z_im_pos` 的证明体就是 `UpperHalfPlane.im_pos`
+           （ℍ = `{z : ℂ // 0 < z.im}`，`MulAction SL(2,ℝ) ℍ` 实例在构造时已证正性）。
       桥层只做逐字重述，数学内容是 Mathlib 的 `ModularGroup.im_smul_eq_div_normSq`
       （证明体：`rw [ModularGroup.im_smul_eq_div_normSq, Complex.normSq_eq_norm_sq];
       simp [ModularGroup.denom_apply]`，即把 Mathlib 的 `normSq` 形状换成 `‖·‖²` 形状）。
