@@ -42,18 +42,25 @@ depends_on:
       ⚠ 那张卡给的是 **NS–NS** 项 Z_{K₂,0}；本推导第 (4) 步用的是 R–R 侧
       （Z_{K₂,1} = −Z_{K₂,0}），而**那条相消关系不在该卡的断言里**（它的「不断言 (b)」已声明，
       属 §10.7 的超对称论证）。⇒ 见 gaps 里新增的那一条。
-  - id: worldsheet.superstring-mobius-strip-amplitude-closed-channel
+  - id: worldsheet.superstring-mobius-strip-amplitude-closed-channel-v2
     note: |
-      供给本推导**第 (3) 步的全部内容**：Möbius 带这一个拓扑的 **R–R** 项，从 (10.8.16)(10.8.17)
+      供给本推导**第 (3) 步的全部内容**：Möbius 带这一个拓扑的 **R–R** 项，从 (10.8.16)
       到闭弦通道的 **(10.8.18)**（含系数 **±2n·2⁵**、**上号对应 SO(n)**、前缀 V₁₀/(8π(8π²α')⁵)、
       以及长柱展开 [16 + O(e^{−2s})]）。
       **非 inferred**：(10.8.18) 就是本推导第 (3) 步所引的那一式，原书 §10.8 同节；
       (10.8.19) 明写是三个面之和，Möbius 的 ±2n·2⁵ 正是 (n ∓ 32)² 的交叉项 ∓2·32·n。
       ★ **2026-09-11 新建该卡并接线（klein-mobius）**。收益：
         (1) summary 第 (3) 步缩为引用；
-        (2) 该卡把 **Ω 在开超弦上的作用**（(10.8.12)–(10.8.15)）经新卡
-            worldsheet.superstring-worldsheet-parity-action 接成**非 inferred** 的链，
+        (2) 该卡把 **Ω 在开超弦上的作用**（(10.8.12)–(10.8.15)）经
+            worldsheet.open-superstring-omega-squared-is-fermion-parity →
+            worldsheet.superstring-worldsheet-parity-action-v2 接成**非 inferred** 的链，
             本推导下面那条 worldsheet.worldsheet-parity 的 inferred 边因此**只剩闭弦一侧**的缺口。
+      ★★【2026-09-11 改指 v2，batch27-fix】本边原先指向
+      worldsheet.superstring-mobius-strip-amplitude-closed-channel（v1）。
+      reviewer-batch27 F1 判定 v1 的断言 (2)（对 (10.8.17) 的转录）作为等式恒为假
+      （左端印 −16、右端复算为 +16），v1 换代为 -v2（把 (10.8.17) 整条移出断言）。
+      ⚠ **本推导第 (3) 步取用的是 (10.8.18)，不经过 (10.8.17)**，故改指后论证不变；
+      **(n ∓ 32)² 与 SO(32) 这条主结论不受那处排印错误影响**（见 v2 卡 notes 的隔离说明）。
       ⚠ 那张卡给的是 **R–R** 项（与圆柱、Klein 瓶两张卡给 NS–NS 项**不对称**，
       原书逐字 'It is slightly easier to focus on the R–R exchange'）；
       本推导第 (4) 步正是把它与另外两支的 R–R 侧相加。
