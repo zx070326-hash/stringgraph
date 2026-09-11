@@ -17,14 +17,30 @@ uses_conventions:
   - conv.virasoro-standard
 sources:
   - ref: polchinski-1998-v1
-    loc: "§5.3, eq. (5.3.19), p.158；T j 的 OPE 见 §2.5 的 (2.5.15)；Weyl 反常的一般形式见 §3.4 的 (3.4.9)；系数的读出用到习题 3.6"
+    loc: "§5.3, eq. (5.3.19), p.158；T j 的 OPE 见 §2.5 的 (2.5.15)；Weyl 反常的一般形式见 §3.4 的 (3.4.9)；换算规则「z^{−3} 系数之和 = 4a」出自 exercise 3.6, p.119（题面只给规则，证明留读者；题面不含 bc、λ 或任何具体数值）"
     note: |
       抽取记录 literature/extractions/polchinski-1998-v1.md#E81，L1（读到 schrans-2020 §5.21，
       笔记 p.260–261）。
       **★ 2026-09-11 补：(5.3.19) 已核到原书印刷 p.158 页图（L1 逐字，抽取记录 §16.2）**：
       「For the ghost current of a holomorphic bc system (without b̃, c̃), the current conservation
       anomaly derived in exercise 3.6 is ∇_a j^a = (1 − 2λ)/4 · R. (5.3.19)」——
-      式子与本卡逐字一致；系数在正文零推导，逐字外包给 exercise 3.6（题面本项目未读，§16 Q16.1）。
+      式子与本卡逐字一致；系数在正文零推导，逐字外包给 exercise 3.6。
+      **★ 2026-09-11 补（curator-small-backlog-5，依 researcher §18「Q16.1 复核」，印刷 p.119 页图 L1）**：
+      exercise 3.6 的题面已读到，逐字为
+      「On dimensional grounds, a current that is conserved on a flat world-sheet has the possible anomaly
+      ∇_a j^a = aR. By comparing the Weyl transformations of the two sides, show that the sum of the
+      coefficients of z^{−3} in T j and of z̄^{−3} in T̃ j̃ is 4a.」
+      **题面里没有数字 3、没有 λ、没有 bc 系统、没有 (1−2λ)/4**；它只给一条换算规则
+      「∇_a j^a = aR 的 a」⟷「Tj 的 z^{−3} 系数 + T̃j̃ 的 z̄^{−3} 系数 = 4a」，证明留给读者（"show that"），
+      而 ∇_a j^a = aR 这个「可能形式」本身是「由量纲论证」（"On dimensional grounds … the possible anomaly"）给出的。
+      因此本卡系数 (1−2λ)/4 的完整来源链是：
+        exercise 3.6（换算规则，证明留读者）
+        → §2.5 的 T(z)j(0) OPE (2.5.15)，其 z^{−3} 系数为 (1−2λ)（式号与形式见抽取记录 E36 表「原书核实 2026-09-11」，L1；
+          ⚠ §18 那一轮未复读 pp.50–76，故其 Q18.1 把式号记为 L0——以 E36 为准，但 z^{−3} 系数的**符号**仍受下文勘误依赖影响）
+        → 全纯 bc 系统无 T̃j̃ 项，故 4a = (1−2λ)，即 (5.3.19) 的 a = (1−2λ)/4
+        → 取 λ = 2 得 −3/4
+        → (5.3.20) 的 (2λ−1)/2 = 3/2，即 3χ/2。
+      其中「把换算规则用到 bc 系统上」这一步（代入 (2.5.15) 并取全纯部分）正文与习题都不写。
       ⚠⚠ **勘误依赖（抽取记录 Q14 的第 2 条）**：伴读者逐字「Note there there is a sign error on
       exercise 3.6, as per Joe's errata page.」——即本式系数的读出所依据的习题 3.6
       在印刷版里有符号错。
@@ -42,5 +58,14 @@ notes: |
   ⇒ **本式的系数对下游是承重的**：worldsheet.riemann-roch-kappa-minus-mu-v2--via-ghost-number-anomaly
   与 -nonorientable--via-ghost-number-anomaly 的结论系数直接继承本卡系数的全部保留
   （习题 3.6 勘误依赖、归一化未核）。
+
+  **2026-09-11 再订正（curator-small-backlog-5）**：此前 sources note 与下游 gaps 写「系数外包给习题 3.6」，
+  会让审计以为习题里有那个数。**不是**：exercise 3.6 题面（p.119，L1）只给换算规则「z^{−3} 系数之和 = 4a」，
+  且开头就说反常的形式 ∇_a j^a = aR 是「On dimensional grounds … the possible anomaly」；
+  规则的证明留给读者（"show that"）。系数 (1−2λ)/4 是把规则用到 §2.5 (2.5.15) 的 Tj OPE
+  （z^{−3} 系数 (1−2λ)，全纯系统无 T̃j̃ 项）上得到的，这一步正文与习题都不写。完整链见 sources note。
+  由此本卡的三条独立缺口是：(a) 反常的可能形式 ∇_a j^a = aR 只由量纲论证给出；(b) 换算规则 4a 的证明留读者；
+  (c) 从规则到 (1−2λ)/4 需代入 (2.5.15) 并取全纯部分，无处书写。勘误依赖（[S] 称习题 3.6 有符号错）只影响符号方向，
+  故本卡与下游只应把「系数的绝对值关系」当作有来源的内容。
 author: curator-polchinski-ch5
 created: "2026-09-11"

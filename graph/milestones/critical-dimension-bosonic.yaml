@@ -838,4 +838,26 @@ audit:
             （对忠实的 Fock 型受限模成立）"——⟹ 方向需要它。
         R4. v2 (II) 对 D ≤ 25 不作断言，但路线节点 old-covariant 的 statement 有 D < 26 的断言
             （半正定但 (c) 不成立）；v2 比路线节点弱，方向安全。
+
+      【2026-09-11 记账（physics-auditor，分支 agent/auditor/rulings-3；kind: bookkeeping。只加本段，不动 canonical、
+      不动 audit.status、不重做回译；verdict 仍为 faithful）】本 diff_notes 上方 2026-09-11「curator 记账」那一行所写
+      「(II) 的有效状态**仍为** physical-argument，但瓶颈已移至 no-ghost-theorem-v4 的另三条边（… ddf-contour-equals-mode-sum）」
+      **自 ms.no-ghost-theorem 第七轮（提交 3286e5f）起过时**，本段为其当前状态的替代读法，原行按记账规则保留不改：
+        · 第七轮撤去 no-ghost-theorem-v4--via-goddard-thorn 对 worldsheet.ddf-contour-equals-mode-sum 的边（裁定为溯源记账、
+          不承重）；ddf-operators-adjoint 已拆为 -v2（formalized）；transverse-ddf-fock-gram-matrix 与 kac-determinant-v2 均 rigorous。
+          `stringgraph why worldsheet.no-ghost-theorem-v4`（本日实跑）：own rigorous，**effective rigorous**，无压低依赖。
+        · 由此路线 (II) 的节点 worldsheet.critical-dimension-old-covariant-v3 **effective 已为 rigorous**（--via-no-ghost），
+          与上方那行「仍为 physical-argument」相反。
+        · 里程碑本身：`stringgraph status/why worldsheet.critical-dimension-bosonic-v3`（本日实跑）：own physical-argument，
+          **effective physical-argument**，唯一推导 --via-four-routes 的 kind/status 本身即 physical-argument（它是把四条路线
+          并列陈述的汇总卡，不是证明），故**即使全部依赖升到 rigorous，effective 也不会高于 physical-argument**；这不是缺陷，
+          是 STATUS_LEVELS「approved 只断言忠实性」所预期的形态。
+        · 当前**真实瓶颈**（why 树首层，7 条依赖）：(I) critical-dimension-light-cone-v2 PA ← light-cone-normal-ordering-constant
+          （ζ 正规化）与 transverse-oscillator-commutators（正则量子化 ← light-cone-gauge-lagrangian ← Polyakov–Nambu–Goto）；
+          (III) critical-dimension-brst-v2 PA ← bc-ghost-central-charge ← OPE / 路径积分链；(IV) critical-dimension-weyl-anomaly-v2 PA
+          ← weyl-anomaly-trace、faddeev-popov-ghost-action、conformal-gauge-fixing 等；(V) open-string-intercept-v2 PA ←
+          open-string-mass-shell ← 同一 ζ / 正则量子化链；公共输入 bc-ghost-central-charge PA；free-boson-central-charge-d
+          formalized；(II) old-covariant-v3 rigorous。⇒ DDF/无鬼一侧已不在瓶颈里，瓶颈全在光锥量子化与 OPE/路径积分两条定义链。
+        · canonical【各路线的非严格步骤】首段「只有 (II) 在图中是 rigorous … (II) 的有效状态亦为 physical-argument」那句括注，
+          按上方记账规则仍留待 v4 换代同步；本段只登记事实，不改 canonical。
 phase: 1

@@ -66,11 +66,15 @@ notes: |
   原书 v1 卡的措辞「因 T 的对称性而缺席」指的就是这一玻色对称性论证。
 
   **前提 (2.4.24) 的地位**：原书把它当作一般 CFT 中 T 的变换律给出，「c 是常数」有脚注 5 的
-  CFT 内部论证（∂_a c = 0，靠两个变换的对易子 + 「与位置无关的算子必为 c-数」）；
-  「反常项只有 ∂³v 一项」的一般性论证抽取记录未转录。本卡因此把 (2.4.24) 写成**前提**，
-  不把它当作被本卡证明的东西；若日后要把「(2.4.24) 是最一般形式」立卡，
-  标准论证是权计数（z^{−n} 项系数的权为 4 − n，n ≥ 5 需负权算子，幺正 CFT 中不存在；
-  n = 4 的系数权 0，在真空唯一的 CFT 中只能是恒等算子的倍数）——那需要额外的幺正性/真空唯一性前提，
-  本卡不引入。
+  CFT 内部论证（∂_a c = 0，靠两个变换的对易子 + 「与位置无关的算子必为 c-数」）——
+  2026-09-11 起立卡 worldsheet.central-charge-is-a-c-number（两条推导：§2.4 脚注 5 与 §3.4 (3.4.31)），
+  本卡的推导已对它加边。
+  「反常项只有 ∂³v 一项」的一般性论证，原书 p.48 (2.4.24) 正下方逐字给的是（researcher §17.1，L1）：
+  「the most general form that is linear in v, is consistent with the symmetry of the T T OPE, and has three
+  lower z indices as required by rigid scale and rotation invariance」——即线性于 v + TT OPE 对称 + 三个下 z 指标；
+  **不是**幺正性、**不是**真空唯一性（pp.46–49 无这两个词，§17.6）。此段旧文写的「标准论证是权计数 +
+  幺正性 + 真空唯一性」是别的教材的路线，不是 Polchinski 的，已撤；本卡仍把 (2.4.24) 写成**前提**，
+  因为原书对「most general」只有断言，没有证明（§17.7 Q17.1；数学侧对应物是 H²(Witt) = ℂ，
+  见 worldsheet.virasoro-unique-central-extension 一带）。
 author: curator-small-backlog-3
 created: "2026-09-11"

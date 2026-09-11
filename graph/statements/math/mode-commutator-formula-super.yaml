@@ -1,0 +1,89 @@
+id: math.mode-commutator-formula-super
+kind: proposition
+title: 李超代数中局域形式分布对的模式（超）对易子公式：[a_(m), b_(n)] = Σ_{j≥0} C(m,j) (a_(j)b)_(m+n−j)，奇–奇时为反对易子（Kac Remark 1.5, (1.32)）
+statement: |
+  **设定**（全部在形式级数层面，z, w 是形式变量）：
+  - 𝔤 是一个李超代数（Lie superalgebra），𝔤 = 𝔤_0̄ ⊕ 𝔤_1̄，括号是**超括号**：对齐次元
+      [x, y] = xy − (−1)^{p(x)p(y)} yx   （当 𝔤 ⊂ End V 为算子超代数时；一般李超代数直接取其括号），
+    即两个奇元之间的括号是反对易子 {x, y}，其余情形是对易子。
+  - 𝔤 上的形式分布记 a(z) = Σ_{n ∈ Z} a_(n) z^{−n−1} ∈ 𝔤[[z, z^{−1}]]，a_(n) ∈ 𝔤
+    （模指标记号与 math.formal-distribution-locality 相同）；a(z) 齐次指所有 a_(n) 同宇称 p(a)。
+  - 一对齐次形式分布 a(z), b(z) 称为**局域对**，若 [a(z), b(w)]（超括号，逐系数为 [a_(m), b_(n)]）
+    是 z, w 的局域形式分布，即存在 N 使 (z − w)^N [a(z), b(w)] = 0 于 𝔤[[z^{±1}, w^{±1}]]。
+  - 对 j ≥ 0 定义 j 次积
+      (a(w)_(j) b(w)) := Res_z (z − w)^j [a(z), b(w)] ∈ 𝔤[[w, w^{−1}]]，
+    其模记 (a_(j)b)_(k)，即 a(w)_(j)b(w) = Σ_k (a_(j)b)_(k) w^{−k−1}。
+  - C(m, j) = binom(m, j) 是二项式系数（m ∈ Z、j ≥ 0，按 m(m−1)⋯(m−j+1)/j! 理解）。
+
+  **命题**：若 a(z), b(z) ∈ 𝔤[[z, z^{−1}]] 是齐次局域对，则对一切 m, n ∈ Z
+      [a_(m), b_(n)] = Σ_{j≥0} C(m, j) (a_(j)b)_(m+n−j) ，
+  其中求和有限（j < N），左端是 𝔤 的超括号。特别地：
+    · p(a) = p(b) = 1̄（两个奇元）：{a_(m), b_(n)} = Σ_{j≥0} C(m, j) (a_(j)b)_(m+n−j)；
+    · p(a)p(b) = 0：[a_(m), b_(n)] 是通常对易子，退化为玻色型公式（math.locality-ope-equivalences-v2 第 5 条）。
+
+  **本命题不含的内容**（划界）：
+  - 不需要顶点（超）代数结构：前提只有「𝔤 是李超代数 + 一对局域形式分布」，不要求 𝔤 = End V 上有真空、
+    平移算子或态–场对应。顶点超代数版本（Lie_V ⊂ End V 的 (3.20)）是本命题在 𝔤 = End V、
+    ℱ = {Y(a,z)} 上的实例，本卡不断言。
+  - 不断言任何收敛性、径向排序或围道变形；「OPE 极点系数」在本卡里就是 j 次积 a_(j)b，
+    即 [a(z), b(w)] 的 delta 分解系数（Kac Theorem 1.2 / Schottenloher Prop 10.6），不是解析函数的留数。
+  - 不断言世界面 bc 鬼场或 ψ^μ 满足局域性前提（见 notes：那是使用方的前提，本图目前无来源）。
+uses_conventions: []
+sources:
+  - ref: kac-2017-lectures
+    loc: "Remark 1.5, eq. (1.32), p. 7（超设定见 Remark 1.4「Super version」, eq. (1.16), p. 6）；配 (1.30)(1.31)（[a(z),b(w)] 的 delta 分解与 j 次积的定义）、(1.24) 与 Theorem 1.2 (Decomposition theorem), eqs. (1.25)(1.26)"
+    note: |
+      **L1（researcher 2026-09-11 全文读图，math-sources.md §51.2 (a)(d)；arXiv:1512.00821v2 [math-ph] 30 Jan 2017，PDF 页 = 文章页）**。
+      Remark 1.5 逐字：「If we have a local pair a(z), b(z) ∈ 𝔤[[z, z^{−1}]], where 𝔤 is a Lie (super)algebra
+      (i.e. [a(z), b(w)] is a local formal distribution in z and w), then, by the Decomposition theorem, we have:
+      [a(z), b(w)] = Σ_{j≥0} (a(w)_(j)b(w)) ∂_w^j δ(z,w)/j!, (1.30) where the sum over j is finite, and
+      𝔤[[w,w^{−1}]] ∋ a(w)_(j)b(w) := Res (z−w)^j[a(z),b(w)]dz (= c^j(w)). (1.31)
+      Using (1.24) and comparing the coefficients of z^m w^n on both sides of (1.30), we find
+      [a_(m), b_(n)] = Σ_{j≥0} C(m,j) (a_(j)b)_(m+n−j), ∀m, n ∈ Z. (1.32)」
+      **⚠ 必须同引 Remark 1.4 (1.16), p. 6**：该讲义 Definition 1.1/1.3 正文无 parity、(1.11) 的 locality 不带符号，
+      超设定只在 Remark 1.4 一次性声明——逐字「the commutator is understood in the "super" sense, i.e.
+      [a(z), b(w)] = a(z)b(w) − (−1)^{p(a)p(b)} b(w)a(z)」+ Koszul–Quillen 规则 +
+      「It is a general convention to drop the adjective "super" in the case of vertex superalgebras.」
+      不引 Remark 1.4 就漏了符号。
+      ⚠ 本条是**学生记录、作者致谢并修订的讲义**，不是同行评议论文（记稿人见 bib note）；版本写死 v2。
+  - ref: kac-2017-lectures
+    loc: "Corollary 3.2, eqs. (3.18)–(3.20), p. 18（顶点超代数版：Lie_V ⊂ End V 是 Lie superalgebra 的子代数，(3.20) 即本命题在 𝔤 = End V 上的实例）；Example 1.4 (Free fermion), eqs. (1.37)–(1.41), p. 8（(1.39) [φ_(m), φ_(n)] = δ_{m,−n−1}、(1.40) [φ(z), φ(w)] = δ(z,w)，φ 为「the odd quantum field」，故两条括号都是反对易子）"
+    note: |
+      只作旁证与实例：(3.20) 是同一公式在顶点超代数层次的陈述（§51.2 (b)），本卡不依赖它；
+      Example 1.4 是「奇–奇 ⇒ 反对易子」的最小实例，原文把 φ(z) 称为 odd quantum field。
+      「两个奇元 ⇒ 反对易子」这一步是 Koszul–Quillen 规则的直接代入，Remark 1.4 明写了规则本身，
+      但 (1.32)/(3.20) 下面没有把反对易子单独写出（§51.2 (b) 末）。
+tags: [math, formal-distribution, locality, lie-superalgebra, anticommutator, mode-algebra, fermionic]
+notes: |
+  由 curator-small-backlog-5 于 2026-09-11 新建（researcher math-sources.md §51.5 建议 1）。
+
+  **本卡为什么存在、为什么不挂在 worldsheet.ope-anticommutator-dictionary-fermionic 上**：
+  那张卡是围道版（径向排序 R{A(z)B(w)}、|z|>|w| 减 |z|<|w| 的围道差、OPE 极点的留数），其 statement 明说
+  「不断言 OPE 的收敛性或围道变形的合法性」，推导 --via-contour-deformation 是 physical-argument。
+  本卡是同一字典的**形式分布版**：z, w 是形式变量，「极点系数」= delta 分解系数，无收敛、无围道。
+  两者是不同对象；玻色型的先例是 math.locality-ope-equivalences-v2（一般定理）与
+  worldsheet.ope-pole-mode-commutator-dictionary（弦论实例化），reviewer-batch3 曾裁定「把形式分布版的
+  rigorous 推导挂在围道版卡上」是「推导证的东西比目标弱」，故本卡按先例另立。
+  围道版卡的 notes 与 gaps 已指向本卡（不加边：两张卡之间差的正是「径向排序围道 = 形式分布残数」这一解析步骤）。
+
+  **相对 worldsheet.ope-pole-mode-commutator-dictionary 的两处不同**：
+  (1) 本卡是一般李超代数的定理，**不**实例化到弦论的 (V, E)，故不依赖 worldsheet.string-cft-is-a-vertex-algebra-v2
+      （该卡 open）；代价是「bc 鬼场 / ψ^μ 两两超局域」要由使用方另行建立——本图目前**无来源**
+      （math-sources.md Q51.3，与 §14.2 记的缺口同源）；string-cft-is-a-vertex-algebra-v2 (i) 断言了 bc 的情形但无推导。
+  (2) 本卡用 Kac 的形式分布模指标 a_(n)（z^{−n−1}），不做物理侧 A_m（z^{−m−h_A}）的重标；重标是有限步指标改写，
+      见 worldsheet.ope-pole-mode-commutator-dictionary--via-locality-theorem 的 summary (1)，本卡不重复。
+
+  **★ 禁令（math-sources.md §51.3–§51.5）**：
+  - `schottenloher-2008` **不得**作任何超/费米陈述的来源：Theorem 10.10 没有超版，作者本人在书 p.212 末段明写
+    「the fermionic Fock space … we have to extend the consideration to the case of Lie superalgebras in order to
+    include the anticommutation relations」——即该书不做超情形。
+  - `bakalov-kac-2004` **不得**作超版来源：其 §2 的 Definition 2.1、(2.3)(2.4)(2.19)(2.21) 全无 parity 符号
+    （「Let V be a vector space」），第 4 节才默默切换到超设定且不写「drop the adjective super」那句约定。
+  - 若要同行评议的第二来源：`gebert-nicolai-1995` (2.38) 是**非超**版；`kac-1998` §4.8 的编号只到 L2（Q51.1）。
+  以上是本卡目前**只有一条来源**的原因；status 不因「讲义非同行评议」降级（证明完整、自足），事实记在推导 gaps。
+
+  **与 Borcherds 恒等式的关系**：Kac Proposition 3.1 (3.21) 是带显式 (−1)^{p(a)p(b)} 的超版 Borcherds 恒等式，
+  但它是「两项 + δ 函数」形式，与 math.vertex-algebra-borcherds-identity（Gebert–Nicolai (2.36) 三项模式形式）逐字不同，
+  loc 不可互换；本卡不经 (3.21)，走 (1.32) 这条不需要顶点代数结构的低门槛路线。
+author: curator-small-backlog-5
+created: "2026-09-11"

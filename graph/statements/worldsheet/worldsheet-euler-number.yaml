@@ -74,6 +74,12 @@ notes: |
 
   Gauss–Bonnet 给出的 χ = 2 - 2g - b 是标准微分几何结果，不出自 Polchinski 的论证，
   这里作为定义的背景说明列出；本图不为它单列节点（属 math area，Phase 1 之外）。
+  **2026-09-11 补（curator-small-backlog-5，依 researcher polchinski-1998-v1.md §18.3，印刷 p.118 页图 L1）**：
+  `χ = 2 − b − 2g` 在 Polchinski Vol.1 里的**唯一**出处是 **exercise 3.1(c), p.118**，不是正文——题面逐字
+  「(b) Show that the Euler number of a sphere with b holes is 2 − b. … (c) Extend this to the result 2 − b − 2g for
+  the sphere with b holes and g handles.」（(a) 是平坦圆盘与半球面圆盘的 χ 计算）。
+  本卡 statement 里这半句此前未挂任何 Polchinski 位置（正确，正文没有），今后若要挂书内位置只能写 exercise 3.1(c)；
+  与 k 的定义只在 exercise 1.3 同型：两者都是「习题承载、正文不证」。
   χ 的 Weyl 不变性是一条独立命题，见 worldsheet.euler-number-weyl-invariance。
   χ 进入弦微扰论作为世界面拓扑展开的权重（e^{-λχ}），那属第 3 章，不在本节点范围。
 author: curator-polchinski-ch1

@@ -75,8 +75,12 @@ gaps:
      这是本推导封顶在 physical-argument 的主因。"
   - "**半整数权场的分支处理未展开**：statement 只说「指标取相应的半整数使被积函数单值」，R 扇区
      （指标整数、被积函数带 z^{1/2} 分支）不在本卡范围内；见 worldsheet.rns-modes-satisfy-super-virasoro--via-contour 的 gaps。"
-  - "**严格路线缺席**：玻色型有 worldsheet.ope-pole-mode-commutator-dictionary（Schottenloher Thm 10.10 的形式分布版），
-     费米型需要该定理的超代数版，编号本轮未核实；若立卡应另建「费米型形式分布版」卡而不挂在本卡上。"
+  - "**严格路线在形式分布层已有，但不覆盖本卡的围道层**（2026-09-11 更新）：玻色型有
+     worldsheet.ope-pole-mode-commutator-dictionary（Schottenloher Thm 10.10 的形式分布版）；费米型现有
+     math.mode-commutator-formula-super（Kac arXiv:1512.00821v2 Remark 1.5 (1.32) + Remark 1.4 (1.16)，proof/rigorous，
+     不需要顶点代数结构）。它证的是形式分布版（无收敛、无围道），**不是**本推导的目标（径向排序围道）；
+     两者之间的「径向排序围道 = 形式分布残数」一步本图无卡，故不加边，本推导仍是 physical-argument。
+     ⚠ schottenloher-2008 / bakalov-kac-2004 不得作超版来源（见目标卡 notes 的禁令）。"
 notes: |
   由 curator-small-backlog-3 于 2026-09-11 建立。本推导与玻色型的
   worldsheet.ope-commutator-dictionary--via-contour-deformation 平行；那条的 gaps 三条在本条全部继承，

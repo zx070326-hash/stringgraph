@@ -76,12 +76,20 @@ sources:
       `uv run stringgraph check-axioms`**；且 formal/TODO.md 的 `negative-norm-above-26` 条目
       （与该文件其余条目不同）**没有逐字登记「公理只有标准三条」**，见推导节点 notes。
   - ref: polchinski-1998-v1
-    loc: "§4.1，level 2 的分析，落在 (4.1.19)–(4.1.28) 区间，p.124（式号未核实）"
+    loc: "§4.1 末式 (4.1.23)，p.124–125；(4.1.24)–(4.1.28) 不存在；level-2 推导是习题 4.1（p.143），正文 p.124 明言 \"The derivation is left to the reader\""
     note: |
-      **文献侧只有定性结论，不是本命题的来源**：Polchinski 处理一般 level-2 态
-      (E_{μν}α^μ_{−1}α^ν_{−1} + e_μ α^μ_{−2})|0;k⟩，只结论性地给出「A = −1 且 D = 26 时
-      才出现额外零态」，不给一般 (D, a) 的闭式。抽取记录
-      literature/extractions/polchinski-1998-v1.md#E57 的位置栏为 [页码已核实/式号未核实]。
+      **文献侧只有定性结论，不是本命题的来源**：Polchinski p.124 正文只断言
+      「Restricting to the value A = −1 found at the first excited level, the spectrum only agrees
+      with the light-cone spectrum if in addition D = 26. If D > 26, there are negative-norm states;
+      if D < 26 the OCQ spectrum has positive norm but more states than in light-cone quantization.
+      The derivation is left to the reader.」，一般 level-2 态 (E_{μν}α^μ_{−1}α^ν_{−1} + e_μ α^μ_{−2})|0;k⟩
+      的联立方程与一般 (D, a) 的闭式**都不在原书正文**，而是习题 4.1（"Extend the OCQ, for A = −1
+      and general D, to the second excited level of the open string. Verify the assertions made in
+      the text about extra positive- and negative-norm states."）。
+      ⚠ 本卡旧 loc 写「(4.1.19)–(4.1.28) 区间，p.124；式号未核实」，2026-09-11 researcher 原书核实
+      （literature/extractions/polchinski-1998-v1.md §12.3「E57」）订正：§4.1 的最后一个式号是
+      (4.1.23)，§4.2 从 p.126 开始，**(4.1.24)–(4.1.28) 不存在**；旧记录转述的那套 level-2 联立方程
+      是二手笔记 [S] 自己做的习题解答，不能引 [S] 的方括号编号当原书式号。
   - ref: gsw-1987-v1
     loc: "§2.2.2–2.2.3（第二能级伪态与 zero-norm 条件）"
     note: |
@@ -128,5 +136,17 @@ notes: |
   本卡沿用图中的记号：截距写 a、零模写 α_0。质量壳在 Lean 里写作
   `invTwo R * zeroModeSq η a + 2 = a₀`（第 (2) 条的形式）或
   `zeroModeSq η a = 2 * a₀ - 4`（第 (3)(4) 条的形式），两者在 ℚ-代数上等价。
+
+  【(4) 末句「判别式为 4(D−1)(D−25)」在 Lean 里只是 docstring（2026-09-11，curator，lean-wire-7）】
+  推导 --via-lean 的 gaps (ii) 已登记：这句话在 LevelTwo.lean 中只出现在文档注释，不是定理。
+  待 formalizer 补一行环上恒等式
+      64·(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D − 74)² − 4(D−1)(D−25)
+  （`linear_combination`/`ring` 一行；curator 手展两边都是 1024a₀² + (128D − 4736)a₀ − 192D + 5376），
+  它是「配方 + 判别式」的清分母形式，在任意交换 ℚ-代数上成立，补上后 (4) 整条即逐字 formalized。
+  在此之前 (4) 的 formalized 只覆盖闭式本身，判别式那句按 gaps (ii) 读。
+
+  【Polchinski loc 订正（2026-09-11，curator，lean-wire-7；依 researcher 原书核实）】
+  旧 source loc「(4.1.19)–(4.1.28) 区间，p.124；式号未核实」已改；详见该 source 的 note。
+  订正不改变本卡任何结论：Polchinski 从来只是「平行的定性断言」，本卡的来源是 Lean。
 author: curator
 created: "2026-09-11"

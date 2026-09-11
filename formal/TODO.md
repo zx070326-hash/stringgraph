@@ -321,15 +321,23 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     ⇒ 卡片 (iii) 的 `ker_ℚ` 与 `ker_ℤ` 两句**都**有独立 Lean 定理，不必只靠 A8 的重述。
   - 辅助：`iib_mulVec_apply`（`A *ᵥ x` 的显式三分量）、`iib_mulVec_eq_zero_iff`
     （`A *ᵥ x = 0` ↔ Bilal (12.4) 的三条标量方程，任意交换环）、`iibSolutionVector_ne_zero`。
-  - 公理检查：10 条声明全部 `ok`，只有 `propext` / `Classical.choice` / `Quot.sound`。
+  - 公理检查：10 条声明全部 `ok`，只有 `propext` / `Classical.choice` / `Quot.sound`
+    （2026-09-11 扩到 16 条，含下述任意域版本，仍全 `ok`）。
   - ⚠ **给图的两条提醒**（本轮未改 `graph/`）：
     (a) `--via-lean` 推导的 `depends_on` **不需要**指向
         `consistency.iib-gravitational-anomaly-cancels`：Lean 侧把 (i)(ii)(iii) 一并证了，
         对那张卡只剩「三行系数取自何处」的**来源**关系，那属于 `sources` 而非 `depends_on`
         （纸上的 `--via-linear-algebra` 那条依赖照旧保留，两条推导本就独立）。
-    (b) 卡片 (ii) 写「等价地，在任何特征零的域上秩为 2」——Lean 只证了 `ℚ`。
-        推广到任意特征零域是直接的（同一秩–零化度论证，`720 ≠ 0` 即可），但**未写进 Lean**，
-        接线时 `lean_decl` 只能担保 `ℚ` 那一句；若要担保全称版本需再加一条定理。
+    (b) 卡片 (ii) 写「等价地，在任何特征零的域上秩为 2」——**已补齐（2026-09-11）**：
+        `iib_rank_eq_two_of_field {K} [Field K] [CharZero K] : (iibAnomalyMatrix K).rank = 2`，
+        连同 `iib_kernel_eq_of_field`、`iib_ker_mulVecLin_of_field`（同一秩–零化度论证）；
+        `ℚ` 版三条现在是它们的推论，`lean_decl` 可安全担保全称版本。
+        真正用到的只有 `(720 : K) ≠ 0`，故另有假设形 `iib_kernel_eq_of_720_ne_zero` /
+        `iib_ker_mulVecLin_of_720_ne_zero` / `iib_rank_eq_two_of_720_ne_zero`。
+        **数学注记（值得进图 notes）**：`CharZero` 充分但不必要。特征 2 时三行都退化成 `(1,1,0)`、
+        特征 3 时都退化成 `(0,1,2)`，秩掉到 1、核变成平面，结论**真的假**；特征 5 虽整除 720，
+        但第 0、2 行仍无关，秩 2 与核都成立（只是这条证明走不通）。锐化条件是
+        `ringChar K ∉ {2,3}`，未形式化。
 
 - [x] （附带，不属 A8/A9）`gs_gravitational_twelve_form_eq_polchinski`：
   Polchinski (12.2.27) 的**纯引力部分**（令三个规范迹为零）等于 `−1/96` 乘 GS 1984 (20)，
@@ -1206,6 +1214,11 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   - 闭式（图节点 `worldsheet.ocq-level-two-scalar-norm`）：`Fock.pairing_levelTwoScalar_physical`，
     `(4a₀-9)² ⟨ψ₂,ψ₂⟩ = 2(D-1)[16a₀² + (2D-74)a₀ + 84 - 3D]`（分母已清；括号内判别式 `4(D-1)(D-25)`）。
     非空性：`Fock.exists_levelTwoScalar_mem_physSubmodule`（域上，`4a₀ ≠ 9` 且 `k² ≠ 0`）。
+  - 判别式（`worldsheet.ocq-level-two-scalar-norm-closed-form` 第 (4) 条，2026-09-11 补）：
+    `Fock.levelTwo_norm_discriminant`，任意交换环上 `64[16a₀²+(2D-74)a₀+84-3D] =
+    (32a₀+2D-74)² - 4(D-1)(D-25)`（配方形式，`ring` 一行；`ok`，标准三公理）。
+    从此判别式 `4(D-1)(D-25)` 是定理而非 docstring。**注意**：由它推出「`1 ≤ D ≤ 25` 时括号恒非负、
+    `D > 25` 时取负值」需要有序域上的符号分析，Lean 里没做，只有代数恒等式。
   - `a₀ = 1`：`Fock.pairing_levelTwoScalar_intercept_one`，`⟨ψ₂,ψ₂⟩ = -2(D-26)(D-1)/25`，
     系数 `c₂ = (D-1)/5`、`c₃ = (D+4)/10`。
   - **鬼**（no-ghost-theorem-v4 第 (2) 条）：`Fock.exists_mem_physSubmodule_pairing_self_neg`，

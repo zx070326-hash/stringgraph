@@ -39,6 +39,11 @@ of the three independent monomials `tr R₂⁶`, `tr R₂⁴ tr R₂²`, `[tr R�
   ray through the IIB content, nothing else.
 * `iib_ker_mulVecLin` — the same as an equality of submodules, `ker A = span {(2,−2,1)}`.
 * `iib_rank_eq_two` — `A.rank = 2`.
+* `iib_kernel_eq_of_field` / `iib_ker_mulVecLin_of_field` / `iib_rank_eq_two_of_field` — the
+  same three statements over an arbitrary field of characteristic zero, of which the `ℚ`
+  versions are instances.  The proofs need only `(720 : K) ≠ 0`
+  (`iib_kernel_eq_of_720_ne_zero`, `iib_rank_eq_two_of_720_ne_zero`); see the note before
+  the `Field` section for what happens in small characteristic.
 * `iib_minor_01_01_det` — a witnessing nonvanishing 2×2 minor, `−720`.
 
 ## Why this is worth stating
@@ -131,6 +136,100 @@ theorem iib_mulVec_eq_zero_iff {R : Type*} [CommRing R] (x : Fin 3 → R) :
     · simpa using h2
     · simpa using h3
 
+/-! ### Over an arbitrary field
+
+Nothing in the argument is about `ℚ`.  Rows `0` and `1` differ by `-720 · (x₀ - 2x₂)`, so the
+whole computation goes through over any field in which `720 = 2⁴·3²·5` is invertible, and the
+`CharZero` hypothesis below is only a convenient sufficient condition for that.
+
+The restriction is not vacuous: in characteristic `2` all three rows reduce to `(1, 1, 0)` and
+in characteristic `3` all three reduce to `(0, 1, 2)`, so there the rank is `1` and the kernel
+is a *plane*, strictly bigger than the line through `(2, -2, 1)` — both statements below are
+genuinely false in characteristics `2` and `3`.  Characteristic `5`, on the other hand, divides
+`720` but is harmless: rows `0` and `2` stay independent mod `5`, so rank `2` and the kernel
+still hold, just not by this proof.  Hence `(720 : K) ≠ 0` is sufficient but not necessary; the
+sharp condition is `ringChar K ∉ {2, 3}`, which is not formalised here. -/
+
+section Field
+
+variable {K : Type*} [Field K]
+
+/-- **The kernel over any field where `720` is invertible.**  The only division performed in the
+uniqueness argument is by `720`, the `(0,1)`-minor of `A` (see `iib_minor_01_01_det`): the
+difference of the first two conditions is `-720 · (x₀ - 2x₂)`. -/
+theorem iib_kernel_eq_of_720_ne_zero (h720 : (720 : K) ≠ 0) (x : Fin 3 → K) :
+    iibAnomalyMatrix K *ᵥ x = 0 ↔ ∃ t : K, x = t • iibSolutionVector K := by
+  rw [iib_mulVec_eq_zero_iff]
+  constructor
+  · rintro ⟨h1, h2, h3⟩
+    refine ⟨x 2, ?_⟩
+    have hsub : (720 : K) * (x 0 - 2 * x 2) = 0 := by linear_combination h2 - h1
+    have hx0 : x 0 = 2 * x 2 := by
+      have h := (mul_eq_zero.mp hsub).resolve_left h720
+      linear_combination h
+    have hx1 : x 1 = -2 * x 2 := by linear_combination h2 - 225 * hx0
+    funext i
+    fin_cases i <;> simp [hx0, hx1] <;> ring
+  · rintro ⟨t, rfl⟩
+    refine ⟨by simp; ring, by simp; ring, by simp; ring⟩
+
+/-- `(2, -2, 1)` is nonzero over any field (only `(1 : K) ≠ 0` is used). -/
+theorem iibSolutionVector_ne_zero_of_field : iibSolutionVector K ≠ 0 := by
+  intro h
+  have h2 := congrFun h 2
+  simp at h2
+
+/-- The kernel as a submodule, over any field where `720` is invertible. -/
+theorem iib_ker_mulVecLin_of_720_ne_zero (h720 : (720 : K) ≠ 0) :
+    LinearMap.ker (iibAnomalyMatrix K).mulVecLin
+      = Submodule.span K {iibSolutionVector K} := by
+  ext x
+  rw [LinearMap.mem_ker, Matrix.mulVecLin_apply, iib_kernel_eq_of_720_ne_zero h720,
+    Submodule.mem_span_singleton]
+  exact ⟨fun ⟨t, ht⟩ => ⟨t, ht.symm⟩, fun ⟨t, ht⟩ => ⟨t, ht.symm⟩⟩
+
+/-- **Rank two over any field where `720` is invertible**, by rank–nullity: the kernel is a line
+by `iib_ker_mulVecLin_of_720_ne_zero`, and `3 - 1 = 2`.  No minor computation is used (though
+`iib_minor_01_01_det` gives the same bound directly). -/
+theorem iib_rank_eq_two_of_720_ne_zero (h720 : (720 : K) ≠ 0) :
+    (iibAnomalyMatrix K).rank = 2 := by
+  have hker : Module.finrank K (LinearMap.ker (iibAnomalyMatrix K).mulVecLin) = 1 := by
+    rw [iib_ker_mulVecLin_of_720_ne_zero h720]
+    exact finrank_span_singleton iibSolutionVector_ne_zero_of_field
+  have h := (iibAnomalyMatrix K).mulVecLin.finrank_range_add_finrank_ker
+  rw [hker] at h
+  have h3 : Module.finrank K (Fin 3 → K) = 3 := by simp
+  rw [h3] at h
+  rw [Matrix.rank]
+  omega
+
+section CharZero
+
+variable [CharZero K]
+
+/-- In characteristic zero `720` is invertible. -/
+theorem iib_720_ne_zero : (720 : K) ≠ 0 := by norm_num
+
+/-- **Main result over an arbitrary characteristic-zero field.**  The solutions of Bilal (12.4)
+are exactly the multiples of the IIB content `(2, -2, 1)`. -/
+theorem iib_kernel_eq_of_field (x : Fin 3 → K) :
+    iibAnomalyMatrix K *ᵥ x = 0 ↔ ∃ t : K, x = t • iibSolutionVector K :=
+  iib_kernel_eq_of_720_ne_zero iib_720_ne_zero x
+
+/-- `iib_kernel_eq_of_field` as an equality of submodules. -/
+theorem iib_ker_mulVecLin_of_field :
+    LinearMap.ker (iibAnomalyMatrix K).mulVecLin
+      = Submodule.span K {iibSolutionVector K} :=
+  iib_ker_mulVecLin_of_720_ne_zero iib_720_ne_zero
+
+/-- **The rank is two, not three**, over any characteristic-zero field. -/
+theorem iib_rank_eq_two_of_field : (iibAnomalyMatrix K).rank = 2 :=
+  iib_rank_eq_two_of_720_ne_zero iib_720_ne_zero
+
+end CharZero
+
+end Field
+
 /-- **Main result (rational version).** The solutions of the IIB gravitational anomaly
 cancellation conditions are *exactly* the multiples of the type IIB content `(2, -2, 1)`.
 
@@ -140,17 +239,8 @@ the uniqueness that neither Bilal nor Polchinski states: rows `0` and `1` alone 
 force `x₀ = 2x₂` (their difference is `-720·(x₀ - 2x₂)`), and then `x₁ = -2x₂`, after
 which row `2` is automatic by `iib_rows_relation`. -/
 theorem iib_kernel_eq (x : Fin 3 → ℚ) :
-    iibAnomalyMatrix ℚ *ᵥ x = 0 ↔ ∃ t : ℚ, x = t • iibSolutionVector ℚ := by
-  rw [iib_mulVec_eq_zero_iff]
-  constructor
-  · rintro ⟨h1, h2, h3⟩
-    refine ⟨x 2, ?_⟩
-    have hx0 : x 0 = 2 * x 2 := by linarith
-    have hx1 : x 1 = -2 * x 2 := by linarith
-    funext i
-    fin_cases i <;> simp [hx0, hx1] <;> ring
-  · rintro ⟨t, rfl⟩
-    refine ⟨by simp; ring, by simp; ring, by simp; ring⟩
+    iibAnomalyMatrix ℚ *ᵥ x = 0 ↔ ∃ t : ℚ, x = t • iibSolutionVector ℚ :=
+  iib_kernel_eq_of_field x
 
 /-- **Main result (integer version).** Bilal's `n`'s are net counts of fields, hence
 integers. The integer solutions are exactly `ℤ · (2, -2, 1)`: the solution ray meets the
@@ -170,32 +260,19 @@ theorem iib_kernel_eq_int (x : Fin 3 → ℤ) :
     refine ⟨by simp; ring, by simp; ring, by simp; ring⟩
 
 /-- `(2, -2, 1)` is not the zero vector. -/
-theorem iibSolutionVector_ne_zero : iibSolutionVector ℚ ≠ 0 := by
-  intro h
-  have h2 := congrFun h 2
-  simp at h2
+theorem iibSolutionVector_ne_zero : iibSolutionVector ℚ ≠ 0 :=
+  iibSolutionVector_ne_zero_of_field
 
 /-- `iib_kernel_eq` as an equality of submodules: the kernel of the IIB anomaly matrix
 is the line spanned by the IIB field content. -/
 theorem iib_ker_mulVecLin :
     LinearMap.ker (iibAnomalyMatrix ℚ).mulVecLin
-      = Submodule.span ℚ {iibSolutionVector ℚ} := by
-  ext x
-  rw [LinearMap.mem_ker, Matrix.mulVecLin_apply, iib_kernel_eq,
-    Submodule.mem_span_singleton]
-  exact ⟨fun ⟨t, ht⟩ => ⟨t, ht.symm⟩, fun ⟨t, ht⟩ => ⟨t, ht.symm⟩⟩
+      = Submodule.span ℚ {iibSolutionVector ℚ} :=
+  iib_ker_mulVecLin_of_field
 
 /-- **The rank is two, not three.** Hence "three conditions on three unknowns" is the
 wrong count: a one-parameter solution family is forced, and is not a coincidence. -/
-theorem iib_rank_eq_two : (iibAnomalyMatrix ℚ).rank = 2 := by
-  have hker : Module.finrank ℚ (LinearMap.ker (iibAnomalyMatrix ℚ).mulVecLin) = 1 := by
-    rw [iib_ker_mulVecLin]
-    exact finrank_span_singleton iibSolutionVector_ne_zero
-  have h := (iibAnomalyMatrix ℚ).mulVecLin.finrank_range_add_finrank_ker
-  rw [hker] at h
-  have h3 : Module.finrank ℚ (Fin 3 → ℚ) = 3 := by simp
-  rw [h3] at h
-  rw [Matrix.rank]
-  omega
+theorem iib_rank_eq_two : (iibAnomalyMatrix ℚ).rank = 2 :=
+  iib_rank_eq_two_of_field
 
 end StringFormal.Math

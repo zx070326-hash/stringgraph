@@ -46,11 +46,15 @@ sources:
       本仓库，Lean 4 + Mathlib v4.33.1；形式化提交 0f1143a、fad4944、eba9cab、f94bdc9、
       3963281、ea303c5，合并进 main 的提交 c32f026。全文 grep `sorry` 零命中。
   - ref: polchinski-1998-v1
-    loc: "§4.1，level 2 的物理条件与伪态条件，(4.1.19)–(4.1.28) 区间，p.124；式号未核实"
+    loc: "§4.1 末式 (4.1.23)，p.124–125；(4.1.24)–(4.1.28) 不存在；level-2 推导是习题 4.1（p.143），正文 p.124 明言 \"The derivation is left to the reader\""
     note: |
-      **文献侧的平行论证，不是本推导的形式化证据**：Polchinski 只结论性地断言
-      「A = −1 且 D = 26 时才出现额外零态」，不给一般 (D, a) 的闭式。抽取记录
-      literature/extractions/polchinski-1998-v1.md#E57。
+      **文献侧的平行论证，不是本推导的形式化证据**：Polchinski p.124 正文只结论性地断言
+      「A = −1 且 D = 26 时谱才与光锥一致；D > 26 有负模态；D < 26 正模但态数过多」，
+      随后一句「The derivation is left to the reader」——推导本身是习题 4.1，不给一般 (D, a) 的闭式。
+      ⚠ 旧 loc「(4.1.19)–(4.1.28) 区间，p.124；式号未核实」于 2026-09-11 按 researcher 原书核实
+      订正（literature/extractions/polchinski-1998-v1.md §12.3「E57」）：§4.1 的最后一个式号是
+      (4.1.23)，(4.1.24)–(4.1.28) 不存在；旧记录转述的 level-2 联立方程来自二手笔记 [S]，
+      不能引 [S] 的方括号编号当原书式号。
 summary: |
   机器检查的证明，全部在 formal/StringFormal/NoGhost/LevelTwo.lean 内完成。路线：
 
@@ -135,5 +139,10 @@ notes: |
   - 更强：第 (4) 条在**任意交换 ℚ-代数**上成立（不需要域、不需要 4a ≠ 9、不需要 s ≠ 0），
     因为分母已清；原卡写成 ⟨ψ₂,ψ₂⟩ = (D−1)[…]·2/(4a−9)² 时必须先设 4a ≠ 9。
   - 更弱：第 (1)(2) 条要求 η^{μμ}η_{μμ} = 1（`hη`），mostly-plus 满足；原卡的手算同样默认这一点。
+
+  【gaps (ii) 的最小补法（2026-09-11，curator，lean-wire-7）】目标 (4) 末句「判别式为 4(D−1)(D−25)」
+  要成为定理，只需 LevelTwo.lean 补一行环上恒等式
+  64·(16a₀² + (2D−74)a₀ + 84 − 3D) = (32a₀ + 2D − 74)² − 4(D−1)(D−25)（`ring` 可闭），
+  已在目标卡 notes 登记、提请 formalizer。补上前 gaps (ii) 照旧。
 author: curator
 created: "2026-09-11"
