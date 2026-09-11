@@ -56,23 +56,6 @@ depends_on:
       不再是旧 worldsheet.ddf-operators-adjoint 的 physical-argument——这正是本卡能整体升到
       formalized 的原因之一。
       ⚠ 该卡 effective = formalized，不压低本推导状态。
-  - id: worldsheet.ddf-light-cone-frame
-    inferred: false
-    note: |
-      **接口边，非机检环节**：供给标架定义。目标陈述【设定】一段点名的「横向偏振 ε^i 满足
-      ε^i·k_0 = 0 **且 ε^i·ε^j = δ^{ij}**」逐字就是该定义卡的 (F5)(F7)；该卡把它们连同
-      (T′) ε·p = 0、完备性与共轭类光方向打包成「DDF 光锥标架」这一个对象，并给出文献侧的取法
-      （ε_i ∈ span{k_0,p}^⊥）与显式见证。本推导 notes (b) 逐字强调「正交归一是一条真前件，
-      不是横向性的推论」——该定义卡就是那条前件的承载处。
-      桥层声明：`StringFormal.NoGhost.{TransverseFrame, witnessTransverseFrame}`（LightCone.lean），
-      以及 `Witness.lean :: noghost_transverse_gram_satisfiable`（本推导 sources 已列）。
-      ⚠ **机检链用的是 `TransverseFrame` 与 `witness*`，不经过该定义卡多出来的 (F4)(F6)(F8)(F9)**；
-      `ddf_gram_diagonal` 对一切 `TransverseFrame` 成立，DDF 光锥标架只是其特例，
-      故 Lean 定理**比卡面更强**，本边不削弱机检结论。
-      ⚠ **状态副作用（诚实登记）**：该定义卡 status 是 `rigorous`（八条条件没有单个 Lean 声明打包），
-      按 min 规则本推导 effective 从 formalized 降为 rigorous（`--via-oscillator-recursion` 本来
-      就是 rigorous，故目标卡仍是 rigorous，不掉到更低）。恢复的正路是把 (F1)–(F8) 在 Lean 里
-      打包成结构，见该定义卡 notes。
 sources:
   - ref: stringformal-2026
     loc: "formal/StringFormal/NoGhost/DDFGram.lean（全文；主声明 StringFormal.NoGhost.ddf_gram_diagonal）；抽象母定理 formal/StringFormal/NoGhost/HeisenbergGram.lean :: StringFormal.gram_of_heisenberg_family；依赖 formal/StringFormal/NoGhost/{DDFAlgebra.lean :: lie_ddfOp_ddfOp, VertexAdjoint.lean :: Fock.towerPairing_ddfOp_left, DDFOperatorAll.lean :: ddfOp_mem_towerPhysSubmodule, LightCone.lean :: TransverseFrame / towerVacuum / ddfSpan / towerVacuum_mem_towerPhysSubmodule / ddfSpan_le_towerPhysSubmodule, Witness.lean :: noghost_transverse_gram_satisfiable}"
@@ -132,6 +115,17 @@ summary: |
   formalized」已过时，本推导 **effective = rigorous**。`status: formalized` 是本推导自身论证的
   等级（Lean 声明无 sorry，未变）；effective 由工具计算，两者不一致正是 min 规则的预期表现。
   详见那条依赖的 note。
+  ⚠【同日改判（同一分支，commit 1152cbf 之后）：该 depends_on 边**已撤回**】
+  上一段描述的状态**不再是现状**：本推导仍是五条依赖，effective 回到 formalized。
+  撤回理由两条：(1) 目标陈述把 ε^i·k_0 = 0 与 ε^i·ε^j = δ^{ij} 逐字写在【设定】里，
+  `ddf_gram_diagonal` 的假设与之一一对应，读懂 lean_decl 不需要那张定义卡——按
+  docs/STATUS_LEVELS.md「接口边（2026-09-12 裁决）」末句，只提供语境的边**不得存在**；
+  (2) `tests/test_graph.py::test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split`
+  第 271 行钉死本目标卡 effective = formalized，加边后 pytest 变红（该测试的 docstring 末段
+  逐字记录了本卡升到 formalized 的来历，属于项目刻意保护的不变量）。
+  ⇒ 改为在目标陈述卡上加 `uses: worldsheet.ddf-light-cone-frame`（proposition 的 `uses`
+  不参与传播），指针仍在图里，状态不受影响。若 lead 要传播效果，见 commit 1152cbf 的原文，
+  并须同步改那条测试断言（工具侧改动，单独提交，由 lead 裁决）。
 gaps:
   - "**(3) 的末句未形式化**：Lean 的 `ddf_gram_of_level_ne` 只给「N(d) ≠ N(e) ⇒ ⟨{d},{e}⟩ = 0」。目标 (3) 末句「这与『|{d}⟩ 落在塔的第 N(d) 层（动量 k − N(d) k_0）』是同一件事，也可由塔的层间正交直接读出」**没有对应声明**——`ddfLevel` 的 docstring 逐字 'that placement is *not* proved here'。⇒ 本推导覆盖 (3) 的正交半，不覆盖层归属的识别。"
   - "**目标 (1) 的『任意交换环』由母卡承载，不由本文件承载**：`ddf_gram_diagonal` 带 `[Algebra ℚ R]`（`ddfOp` 的构造需要 1/2 一类的有理数）。完全一般的条件命题是 `StringFormal.gram_of_heisenberg_family`（任意交换环，图上 math.heisenberg-family-gram-matrix）。见 notes (d)。"
