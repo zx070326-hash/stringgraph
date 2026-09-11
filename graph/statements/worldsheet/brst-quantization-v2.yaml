@@ -150,5 +150,46 @@ notes: |
   若日后 reviewer 认为这仍是命题埋进定义，应建 v3 把 a^g 也符号化，
   并让 brst-charge-on-ghost-ground-state 一类需要 a^g = -1 的推导各自挂那条命题
   （它们**已经**挂了：--via-contour-and-laurent 有该边）。
+
+  ---
+  【2026-09-12 auditor 注记：本卡的 `: :` 没有定义，且与 bc-ghost-central-charge-lambda-two
+  的同一字符串要求互斥。statement 不可变，本条只入 notes；修法见下】
+  （physics-auditor，ms.critical-dimension-brst-nilpotency 第一轮回译审计 R1-3；
+  独立复核并确认 reviewer 复算文档 docs/reviews/brst-nilpotency-recompute-2026-09-12.md 的 F2。）
+
+  **事实**：本卡写 `L^g_n = Σ_m (2n − m) : b_m c_{n−m} :`；worldsheet.bc-ghost-central-charge-lambda-two
+  写 `L^g_m = Σ_n (m − n) : b_{m+n} c_{−n} :`。换指标（本卡取 m = n + j）后两式**逐字相同**。
+  但两卡对 `: :` 的要求互斥：
+    · 本卡断言「L_n = L^m_n + L^g_n + a^g δ_{n,0} 在 (m³ − m) 形式下中心荷为 c^m + c^g」，
+      这只在 `: :` 取**能级序**（相对鬼场基态 |↓⟩ = c_1|0⟩，湮灭算符为 b_n (n ≥ 0)、c_n (n ≥ 1)）时成立；
+    · 那张卡断言「[L^g_m, L^g_n] = (m − n) L^g_{m+n} + (−26/12) m(m² − 1) δ_{m+n,0}」（纯 (m³ − m)
+      形式、无 m 线性项），这只在 `: :` 取 **SL(2,C) 序**（湮灭算符为 b_n (n ≥ −1)、c_n (n ≥ 2)，
+      即本卡正文里零化 |0⟩ 的那些）时成立。
+  两序的 L^g_0 相差 1（SL(2,C) 序下 L^g_0|↓⟩ = −|↓⟩，能级序下为 0）。一般地，L′_n = L_n + α δ_{n,0}
+  给出 [L′_m, L′_{−m}] = 2m L′_0 + C(m) − 2mα，故平移把中心项改掉一个 m 线性项 −2mα；
+  α = ±1 即 F2 所说的「相差 2m」。⇒ **把两卡的公式逐字拼接会把 m 线性项算错 2m。**
+
+  **本卡受影响的具体断言**：正文那句「等价地，总 Virasoro L_n = L^m_n + L^g_n + a^g δ_{n,0}
+  在 (m³ − m) 形式下的中心荷为 c = c^m + c^g」。它为真当且仅当本卡的 `: :` 读作能级序。
+  同样地，本卡把 a^g = −1 写进 Q_B 的定义：复算文档 §4 证明 Q_B = A + B_S + (1 + a^g) c_0，
+  即 **a^g 与正规序规定是成对的**——能级序配 a^g = −1，SL(2,C) 序配 a^g = 0，两种写法给出**同一个**
+  算子 Q_B。所以 a^g = −1 不是一条可与序分离的独立约定，本卡上一段把它称作「Q_B 归一化约定的一部分」
+  在这个意义上是对的，但**必须连同序一起写出**才可核验。
+  （附带：独立卡片 worldsheet.bc-ghost-normal-ordering-constant 断言 a^g = −1，其取值同样隐含依赖序；
+  该卡不在本次审计范围，仅记此供 curator 下次换代时一并检查。）
+
+  **不受影响的**：c^g 的**取值** −26 与序无关（序只改 m 线性项，不改 (m³ − m) 的系数），
+  故经依赖边从 lambda-two 卡搬运到 BRST 幂零推导里的那个 −26 是对的；
+  worldsheet.critical-dimension-brst-v2 的结论与其 --via-mode-computation 复算亦不受影响
+  （复算未逐字拼接两卡公式，见 F2 与该复算文档 §6.4）。这是**欠定**，不是假。
+
+  **修法（交 curator / lead，本 auditor 不改 statement）**：
+  (i) 建 v3 时把 `: :` 的规定写进 statement（最小改动：在 L^g_n 那一行后加一句「`: :` 取相对 |↓⟩
+      的能级序，即 b_n (n ≥ 0)、c_n (n ≥ 1) 为湮灭算符」）；或
+  (ii) 在 graph/conventions/ 加一条鬼场正规序约定并由本卡 uses_conventions 声明——
+      目前 conventions 里**没有**对应 family（`normal-ordering-constant` 装的是截距符号
+      conv.intercept-sign-a，是常数符号约定不是算符排序约定）。
+      conv. 卡草案见 docs/drafts/brst-normal-ordering-convention.md。
+  在两者之一落地前，ms.critical-dimension-brst-nilpotency 的回译审计判 drift，不予 back-translated。
 author: curator
 created: "2026-09-11"
