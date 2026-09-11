@@ -15,20 +15,67 @@ This file removes the two blockers recorded in `formal/TODO.md` (item `noghost-b
 `N = 2` increment of the spanning lemma (blueprint §B.6):
 
 * **(a)** the level-one and level-two Laurent coefficients of the creation exponential
-  `E_-(z) = Σ_M Φ_M z^M` in a shape one can `rw` with, and the resulting exact expansion of
-  `A^ε_{-2}|0;k⟩`;
-* **(b)** the *complete* solution of `L_1 ψ = L_2 ψ = 0` on the level-two slice of a single
-  Fock space (not just the `SO(D-1)` scalar family of `NoGhost/LevelTwo.lean`).
+  `E_-(z) = Σ_M Φ_M z^M` in a shape one can `rw` with, and the resulting exact expansions of
+  `A^ε_{-2}|0;k⟩` and `A^ε_{-1} A^δ_{-1}|0;k⟩`;
+* **(b)** the *complete* solution of `L_1 ψ = L_2 ψ = 0` on the level-two slice, both for a
+  single Fock space and on the momentum tower — not just the `SO(D-1)` scalar trial family
+  of `NoGhost/LevelTwo.lean`.
+
+The `N = 2` spanning statement itself (`towerPhys_bigrade_two_le_ddfSpan_sup_spurious`) is
+**not** proved here; see the gaps section below.
 
 ## Conventions
 
-Inherited verbatim from `Sugawara.lean` / `PhysicalStates.lean` / `LightCone.lean`.
+Inherited verbatim from `Sugawara.lean` / `PhysicalStates.lean` / `LightCone.lean`:
+`conv.metric-mostly-plus` (`hη : ∀ μ, η μ * η μ = 1`), `conv.alpha-prime-regge`
+(`a^μ = α^μ_0 = (2α')^{1/2} k^μ`, `b^μ = (2α')^{1/2} k_0^μ`), `conv.virasoro-standard`,
+`conv.intercept-sign-a`.
 
 ## Main results
 
+### (a) The creation exponential and the level-two DDF states
+
 * `Fock.creaExp_one` — `Φ_1 = b·α_{-1}` (i.e. `Fock.polState η b`).
-* `Fock.two_smul_creaExp_two` — `2 Φ_2 = (b·α_{-1})² + (b·α_{-2})`, and `Fock.creaExp_two`
-  for the divided form.
+* `Fock.two_smul_creaExp_two` — `2 Φ_2 = (b·α_{-1})² + (b·α_{-2})`; `Fock.creaExp_two` is
+  the divided form.
+* `Fock.vertexOsc_apply_polState` — `V_K (ζ·α_{-1})|k⟩ = (ζ·α_{-1}) Φ_K - (ζ·c) Φ_{K+1}`.
+* `ddfOp_neg_two_apply_towerVacuum` —
+  `A^ε_{-2}|0;k⟩ = [ε·α_{-2} - 2 (ε·α_{-1})(k_0·α_{-1})]|0;k-2k_0⟩`.
+* `ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum` —
+  `A^ε_{-1}A^δ_{-1}|0;k⟩ = [(ε·α_{-1})(δ·α_{-1}) + ½(ε·δ)((k_0·α_{-1})² - k_0·α_{-2})]
+  |0;k-2k_0⟩`.  The correction is symmetric in `ε ↔ δ`, as `⁅A^ε_{-1},A^δ_{-1}⁆ = 0`
+  demands.
+* `single_ddfSecond_mem_ddfSpan`, `single_ddfPair_mem_ddfSpan` — those two families as
+  explicit members of `ddfSpan`.
+
+### (b) The level-two physical states
+
+* `Fock.level_two_cases` — a monomial of level `2` is `α^μ_{-2}` or `α^μ_{-1}α^ν_{-1}`.
+* `Fock.exists_levelTwoGen_of_mem_levelSubmodule_two` — every level-two state is
+  `Σ_μ α^μ_{-1}(v_μ·α_{-1})|k⟩ + (w·α_{-2})|k⟩` (`Fock.levelTwoGen`).
+* `Fock.Lop_one_apply_levelTwoGen`, `Fock.Lop_two_apply_levelTwoGen` — `L_1 ψ` is the
+  level-one state with polarisation `Fock.levelTwoL1`, and `L_2 ψ` is the scalar
+  `Fock.levelTwoL2`; `L_n ψ = 0` for `n ≥ 3`.
+* `Fock.mem_physSubmodule_inf_levelSubmodule_two_iff` — hence the level-two slice of
+  `H_phys` is cut out by the mass shell plus the `D` equations `levelTwoL1 = 0` and the one
+  equation `levelTwoL2 = 0`.
+* `mem_towerPhys_bigrade_two_iff` — the same on the bigraded piece `(rung j, level 2)` of
+  the momentum tower.
+
+## Gaps
+
+* **`N = 2` spanning is not done.**  What is missing is the linear algebra: given `(v, w)`
+  satisfying the `D + 1` constraints, exhibit the physical state as a combination of the
+  `(D-2) + (D-2)(D-1)/2` DDF vectors above and the `D + 1` spurious vectors
+  `L_{-1}(level 1)`, `L_{-2}|0;p_{-2}⟩`.  Both sides are now explicit, but the elimination
+  (which needs the light-cone decomposition `b`, `b̃`, `ε_i` and hence
+  `FrameSpansOrthogonal`) is not carried out.
+* **`ε·k = 0` is used again.**  As at `N = 1` (`ddfOp_neg_one_apply_towerVacuum`), the
+  exact expansions of `A^ε_{-2}` and `A^ε_{-1}A^δ_{-1}` need `hεa : dotVec η ε a = 0`, which
+  the four standing DDF hypotheses do **not** imply.
+* The representation `ψ = levelTwoGen η v w` is **not unique** (only the symmetric part of
+  `v` and the trace-shift are determined); the characterisation is an `∃`, so this is
+  harmless, but no canonical form is provided.
 -/
 
 namespace StringFormal.NoGhost
@@ -773,6 +820,42 @@ theorem ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum (η a b ε δ : Fin D 
     creaExp_two_vertexMomentum_neg_one]
 
 end DDFProduct
+
+/-! ### The level-two DDF states, explicitly -/
+
+section DDFSpanLevelTwo
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **The `A^ε_{-2}` DDF state at level two, explicitly.**  Together with
+`single_ddfPair_mem_ddfSpan` these are the `(D-2) + (D-2)(D-1)/2` generators of the
+level-two part of `ddfSpan` (blueprint §B.5's counting), now available as concrete vectors
+in the Fock space. -/
+theorem single_ddfSecond_mem_ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (hεa : ∀ i, dotVec η (Ε.vec i) a = 0) (i : Fin (D - 2)) :
+    (Finsupp.single (-2) (Fock.secondState η (Ε.vec i)
+        - (2 : R) • (Fock.polState η (Ε.vec i) * Fock.polState η b)) : TowerFock D R)
+      ∈ ddfSpan η a b hη Ε := by
+  have h := ddfOp_towerVacuum_mem_ddfSpan η a b hη Ε i 2
+  rwa [show (-(((2 : ℕ+) : ℕ) : ℤ)) = -2 by norm_num,
+    ddfOp_neg_two_apply_towerVacuum η a b (Ε.vec i) hη (Ε.transverse i) (hεa i)] at h
+
+/-- **The `A^ε_{-1} A^δ_{-1}` DDF states at level two, explicitly.**  The frame
+orthonormality turns the correction term of
+`ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum` into a Kronecker delta. -/
+theorem single_ddfPair_mem_ddfSpan (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1)
+    (Ε : TransverseFrame η b) (hεa : ∀ i, dotVec η (Ε.vec i) a = 0) (i j : Fin (D - 2)) :
+    (Finsupp.single (-2) (Fock.polState η (Ε.vec i) * Fock.polState η (Ε.vec j)
+        + (if i = j then (1 : R) else 0) • (invTwo R • (Fock.polState η b * Fock.polState η b
+            - Fock.secondState η b))) : TowerFock D R)
+      ∈ ddfSpan η a b hη Ε := by
+  have h := mem_ddfSpan_of_list η a b hη Ε [(i, 1), (j, 1)]
+  simp only [List.foldr_cons, List.foldr_nil] at h
+  rwa [show (-(((1 : ℕ+) : ℕ) : ℤ)) = -1 by norm_num,
+    ddfOp_neg_one_mul_ddfOp_neg_one_apply_towerVacuum η a b (Ε.vec i) (Ε.vec j) hη
+      (Ε.transverse i) (Ε.transverse j) (hεa i) (hεa j), Ε.orthonormal i j] at h
+
+end DDFSpanLevelTwo
 
 /-! ### The complete level-two slice of the tower physical subspace -/
 
