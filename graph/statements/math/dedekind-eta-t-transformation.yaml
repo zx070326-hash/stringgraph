@@ -13,6 +13,9 @@ statement: |
   math.dedekind-eta-s-transformation，强度低两级）；不断言 τ₂|η|⁴ 的**完整**模不变性
   （那还需要 S 那一半）；不断言 η 作为权 1/2 模形式的一般乘子系统（含 Dedekind 和）。
 uses_conventions: []
+formal:
+  lean_decl: StringFormal.DedekindEta.eta_add_one
+  lean_file: StringFormal/Math/DedekindEtaT.lean
 sources:
   - ref: polchinski-1998-v1
     loc: "§7.2, eq. (7.2.44a), p.216（原文逐字只有一句「It has the modular transformations」，随后直接列出两式）"
@@ -21,7 +24,7 @@ sources:
       ⚠ **原书对 (7.2.44a) 零证明、零引用**；本卡的 rigorous 定级**不来自原书**，
       而来自 docs/STATUS_LEVELS.md 的 rigorous 例外条款（前提完整 + 有限步初等计算 +
       reviewer 独立复核），见本卡唯一一条推导的 notes。
-tags: [math, modular-forms, dedekind-eta, modular-invariance, formalization-candidate]
+tags: [math, modular-forms, dedekind-eta, modular-invariance, formalized]
 notes: |
   由 curator 于 2026-09-11 从 math.dedekind-eta-modular-transformation **拆分**而来
   （lead 依 reviewer-v1-ch7 的裁定）。旧卡把 (7.2.44a) 与 (7.2.44b) 合在一张，
@@ -33,7 +36,36 @@ notes: |
   `superseded_by: math.dedekind-eta-s-transformation`（指向承载真正缺口的那一半），
   并在其 notes 里记明拆成了两张。
 
-  **形式化目标**：本卡是 Lean 岛的低垂果实（两行：q 不变 + 前因子出相位）。
-  S 半才是需要 Mathlib DedekindEta / Poisson 求和的部分。
+  **形式化目标 → 已完成**（2026-09-11，formalizer 分支 `eta-t`，curator lean-wire-9 接线）：
+  果然是两行（q 不变 + 前因子出相位）。本卡挂
+  `formal.lean_decl = StringFormal.DedekindEta.eta_add_one`
+  （`formal/StringFormal/Math/DedekindEtaT.lean`），新增推导
+  math.dedekind-eta-t-transformation--via-lean（status **formalized**）；
+  原推导 --via-product-definition（rigorous，两位 reviewer 签名）保留，工具取高者。
+  ⚠ **Mathlib v4.33.1 没有 `eta_T`**（formalizer 逐文件读源码，L1），所以这条是从
+  Mathlib 的 η **定义**直接证的，不像 S 半那样只是把 Mathlib 的现成定理换个归一化。
+  ⚠ Mathlib 的 `discriminant_T_invariant`（`ModularForms/Discriminant.lean`）是判别式
+  Δ = η²⁴ 的 T 不变性，**推不出 η 自身的相位 e^{iπ/12}**（24 次根的分支信息在 Δ 里丢掉），
+  故它不是本卡的替代品。
+
+  **Lean 侧比本卡强：前提 Im τ > 0 是多余的。** `eta_add_one_eq (z : ℂ)` 对**一切** z ∈ ℂ 成立
+  （Mathlib 的 `ModularForm.eta` 在 H 外按同一公式有定义，q 的 1-周期性与逐项比较 tprod
+  都不看 Im z）。挂在本卡上的 `eta_add_one` 是带 `hz : 0 < z.im` 的版本，
+  **假设未被用到，只为与卡面逐字对齐**。⇒ 若日后要一张「对一切 z ∈ ℂ」的卡，那是**新卡**
+  （陈述更强），不是改本卡正文。这与 S 半形成对照：那里 Im z > 0 是本质的
+  （它把 −iz 推进右半平面、使主对数可加）。
+
+  **与 S 半合起来还差什么**：S 半 math.dedekind-eta-s-transformation 也已于同日形式化
+  （`StringFormal.DedekindEta.eta_neg_inv`）。⇒ **τ₂|η|⁴ 的完整模不变性只差一件：
+  worldsheet.modular-group-generated-by-s-and-t（模群由 S、T 生成）尚未形式化。**
+  两个生成元上的等式都有 Lean 声明
+  （`im_mul_norm_eta_pow_four_T_invariant` / `..._S_invariant`，及其 ℍ 作用形
+  `..._modular_T_smul` / `..._modular_S_smul`），但在生成定理落地前**不得**把
+  「τ₂|η|⁴ 在整个模群下不变」标为 formalized。
+
+  ⚠ **statement 正文里「那是 math.dedekind-eta-s-transformation，强度低两级」已过时**：
+  S 半 2026-09-11 先由 siegel-1954-eta 升到 rigorous、再由 --via-lean 拿到 own=formalized
+  （其 effective 因定义卡 math.dedekind-eta-function 仍是 rigorous 而停在 rigorous）。
+  按原则 1 与 graph/CLAUDE.md 的裁决不改正文，只在此记明。
 author: curator-v1-ch7
 created: "2026-09-11"

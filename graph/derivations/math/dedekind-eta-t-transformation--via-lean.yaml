@@ -1,0 +1,118 @@
+id: math.dedekind-eta-t-transformation--via-lean
+target: math.dedekind-eta-t-transformation
+kind: proof
+status: formalized
+depends_on:
+  - id: math.dedekind-eta-function
+    inferred: false
+    note: |
+      **本推导的全部输入就是这张定义卡**（和 --via-product-definition 一样）：Lean 侧的 η 是 Mathlib 的
+        `ModularForm.eta (z : ℂ) : ℂ := 𝕢 24 z * ∏' n, (1 - ModularForm.eta_q n z)`，
+        `Function.Periodic.qParam h z = Complex.exp (2 * π * I * z / h)`，
+        `ModularForm.eta_q n z = (𝕢 1 z) ^ (n + 1)`，
+      即 𝕢 1 z = exp(2πiz) = q，𝕢 24 z = exp(2πiz/24) = exp(πiz/12) = 定义卡指定的那个
+      **单值分支** q^{1/24}，∏' n:ℕ (1 − q^{n+1}) = ∏_{n≥1}(1 − q^n)（指标平移）。
+      ⇒ 与定义卡 statement 逐字一致，无约定转换，不需要 convention_map。
+      ⚠ **分支约定是本推导的承重件**：没有 q^{1/24} ≡ exp(πiτ/12) 这一条，
+      「相位恰是 e^{iπ/12}」就无意义（多值符号下 τ ↦ τ+1 可差任意 24 次单位根）。
+      Lean 侧这一条由 `qParam_24_add_one` 逐字承担。
+      ⚠⚠ **这条边是本推导有效状态的瓶颈**：定义卡 own status 是 rigorous，
+      故本推导 own=formalized 而 effective=rigorous（与 --via-product-definition 同级）。
+      诚实记账，不是疏漏；解法见 math.dedekind-eta-s-transformation--via-lean 的 notes 末段。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Math/DedekindEtaT.lean :: StringFormal.DedekindEta.eta_add_one；支撑链 qParam_one_add_one → eta_q_add_one 与 qParam_24_add_one → eta_add_one_eq → {eta_add_one, eta_T, eta_modular_T_smul}；推论链 norm_exp_pi_I_div_twelve → norm_eta_add_one → {im_mul_norm_eta_pow_four_T_invariant, im_mul_norm_eta_pow_four_modular_T_smul}"
+    note: |
+      本仓库，形式化侧提交 **d8f56d2**（"formal: prove Dedekind eta T-transformation
+      eta(z+1) = e^{i pi/12} eta(z)"），合并提交 **f061e5c**（"Merge branch
+      'agent/formalizer/eta-t'"）；Lean 4 + Mathlib **v4.33.1**。
+      本卡 `formal.lean_decl` 指的那条，全文与目标卡 statement 逐字对应：
+
+          theorem eta_add_one {z : ℂ} (hz : 0 < z.im) :
+              ModularForm.eta (z + 1) = Complex.exp (π * I / 12) * ModularForm.eta z
+
+      ⚠ **它的假设 `hz` 未被使用**（文件里为此加了 `set_option linter.unusedVariables false`），
+      因为它就是无条件版 `eta_add_one_eq (z : ℂ)` 的直接特化；保留假设**只为与卡面对齐**。
+      伴随声明：`eta_T`（`τ : ℍ` 版）、`eta_modular_T_smul`（`η(T • τ) = e^{iπ/12} η(τ)`，
+      与 S 半的 `eta_modular_S_smul` 配对）、`norm_eta_add_one`（|η(τ+1)| = |η(τ)|）、
+      `im_mul_norm_eta_pow_four_T_invariant`（目标卡「推论」的 T 半）及其 ℍ 作用形。
+      ⚠ Mathlib v4.33.1 **没有** `eta_T`（formalizer 逐文件读源码，L1），
+      故本文件只 import Mathlib 的 η 定义（`ModularForms/DedekindEta.lean`）、
+      `UpperHalfPlane/MoebiusAction`、`Analysis.Complex.Trigonometric`，其余自己证。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. (7.2.44a), p.216（物理侧转述：原书逐字只有「It has the modular transformations」+ 两式，零证明）"
+    note: |
+      抽取记录 literature/extractions/polchinski-1998-v1-ch7.md#E16，L1。
+      本条**不承载本推导的任何步骤**，只登记弦论教材在何处用本式、以及本式的物理侧写法
+      （e^{iπ/12} 的相位约定）与 Lean 声明一致。本推导的 formalized 由 stringformal-2026 承载。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/Math/DedekindEtaT.lean（约 80 行，含 docstring）内完成，
+  Mathlib 只提供 η 的定义与 exp 的基本引理。两步，与 --via-product-definition 的两步逐行同构：
+
+  **(1) 乘积部分逐因子不变**（`qParam_one_add_one` + `eta_q_add_one`）：
+     𝕢 1 (z+1) = exp(2πi(z+1)) = exp(2πiz)·exp(2πi) = 𝕢 1 z（`Complex.exp_two_pi_mul_I`），
+  故每个因子 1 − (𝕢 1 z)^{n+1} 不变，`tprod_congr` 给 ∏' 不变。
+  ⚠ **这一步不需要任何收敛性输入**：`tprod_congr` 是逐项比较，两个 tprod 即使都不收敛也相等
+  （Mathlib 的 tprod 对不可乘族取默认值 1）。这比 --via-product-definition 的论证还弱一个前提
+  ——那条推导用了定义卡里的「H 紧子集上一致收敛」。
+
+  **(2) 前因子出相位**（`qParam_24_add_one`）：
+     𝕢 24 (z+1) = exp(2πi(z+1)/24) = exp(2πi/24)·exp(2πiz/24) = exp(πi/12)·𝕢 24 z
+  （`← Complex.exp_add` 后 `push_cast; ring`；2π/24 = π/12）。
+
+  (1)(2) 相乘（`simp only [ModularForm.eta, hprod, qParam_24_add_one, mul_assoc]`）得
+  `eta_add_one_eq (z : ℂ) : η(z+1) = e^{iπ/12} η(z)`，**对一切 z ∈ ℂ**；
+  目标卡那条 `eta_add_one {z} (hz : 0 < z.im)` 是它的特化。
+
+  **推论（目标卡 statement 的第二段）**：`norm_exp_pi_I_div_twelve`
+  （‖exp(πi/12)‖ = 1，由 `Complex.norm_exp_ofReal_mul_I`）给 `norm_eta_add_one`：|η(z+1)| = |η(z)|；
+  配 Im(z+1) = Im z（`Complex.add_im` + `Complex.one_im`）得
+  `im_mul_norm_eta_pow_four_T_invariant`：(z+1)₂|η(z+1)|⁴ = z₂|η(z)|⁴，即 τ₂|η|⁴ 在 **T** 下不变。
+  模群作用形 `eta_modular_T_smul` / `im_mul_norm_eta_pow_four_modular_T_smul` 由
+  `UpperHalfPlane.modular_T_smul`（T • τ = 1 +ᵥ τ）改写而得。
+gaps:
+  - |
+    **只覆盖 T 这一个生成元。** 不含 S 变换（math.dedekind-eta-s-transformation，
+    同日也已形式化），不含 η 对一般 (a b; c d) ∈ SL(2,ℤ) 的乘子系统（Dedekind 和；Mathlib 也没有）。
+    ⇒ **τ₂|η|⁴ 的「完整模不变性」仍不可标 formalized**：两个生成元上的等式都有了，
+    唯一缺的是 worldsheet.modular-group-generated-by-s-and-t 的形式化。
+  - |
+    **有效状态被定义卡卡住。** depends_on 的 math.dedekind-eta-function 是 rigorous 的定义卡，
+    故 own=formalized 而 effective=rigorous。记账缺口，不是论证缺口。
+  - |
+    **Lean 声明比目标卡强，卡面没有跟上。** `eta_add_one_eq` 对一切 z ∈ ℂ 成立，
+    而目标卡（和所有教科书）只对 τ ∈ H 断言。本推导**刻意**把 lean_decl 指向带假设的
+    `eta_add_one` 以保证「Lean 陈述 = 卡面陈述」逐字对齐；那条多余假设因此是
+    **有意保留的冗余**，不是 Lean 侧的缺陷。要把更强的版本入图需新建一张卡。
+notes: |
+  由 curator（lean-wire-9，lead 追加的第 6 项）于 2026-09-11 建立，接的是 formalizer 分支
+  `agent/formalizer/eta-t`（合并提交 f061e5c）。
+
+  **check-axioms 运行记录（curator, 2026-09-11）**：本 worktree 无 `.lake`，
+  故在 formalizer 的构建树 `.claude/worktrees/agent-adab9fd4d76756731`（其
+  `DedekindEtaT.olean` 时间戳 2026-09-11 12:03，晚于源文件 12:02）上跑
+
+      uv run stringgraph --root .claude/worktrees/agent-adab9fd4d76756731 \
+        check-axioms --decl StringFormal.DedekindEta.eta_add_one --decl ... （本文件 11 个声明）
+
+  输出：**11 declarations checked: 11 ok, 0 non-standard, 0 missing; 0 errors**，
+  每条公理集合都只有 `propext Classical.choice Quot.sound`：
+  `qParam_one_add_one`、`eta_q_add_one`、`qParam_24_add_one`、`eta_add_one_eq`、`eta_add_one`、
+  `eta_T`、`eta_modular_T_smul`、`norm_exp_pi_I_div_twelve`、`norm_eta_add_one`、
+  `im_mul_norm_eta_pow_four_T_invariant`、`im_mul_norm_eta_pow_four_modular_T_smul`。
+  ⚠ 该构建树上的 `DedekindEtaT.lean` 与本分支（= main）那一份逐字相同
+  （去掉行尾 CR 后 sha256 = 9ee17a565b3c5c9ceaa994fdc4038e542114ebfb298486764f3de85d179c1aa8）。
+  ⚠ 主仓库工作树 D:\physics\string 的 `formal/.lake` 是 11:45 的旧构建，不含
+  `DedekindEtaT.olean`，那里跑不了本次检查；lead 合并前重跑 `lake build` + `check-axioms` 覆盖。
+
+  **与 --via-product-definition 的关系**：两条推导论证同构（同样的两步），
+  按 lead「旧推导保留」的裁决都留着。差别只在证据标准：那条走 STATUS_LEVELS 的 rigorous
+  **例外条款**（前提完整 + 有限步初等计算 + reviewer 复核，已有两位 reviewer 签名），
+  本条走机器检查。⇒ 本卡是图里少见的「同一两行计算既有人工复核记录又有 Lean 记录」的例子，
+  对校准那条例外条款有用：例外条款这次给出的判断是对的。
+
+  **不要把 Mathlib 的 `discriminant_T_invariant` 当作本卡的 Lean 目标**：那是 Δ = η²⁴ 的
+  T 不变性，取 24 次幂时 η 的相位 e^{iπ/12} 正好被抹掉（(e^{iπ/12})²⁴ = e^{2πi} = 1），
+  所以它**推不出**本卡。同理 `discriminant_S_invariant` 推不出 S 半。
+author: curator-lean-wire-9
+created: "2026-09-11"
