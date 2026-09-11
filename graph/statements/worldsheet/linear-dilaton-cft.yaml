@@ -15,7 +15,7 @@ uses:
   - worldsheet.free-scalar-cft-action
   - worldsheet.energy-momentum-tensor-free-scalar
   - worldsheet.conformal-normal-ordering-v2
-  - worldsheet.tt-ope-central-charge
+  - worldsheet.tt-ope-central-charge-v2
 uses_conventions:
   - conv.metric-mostly-plus
   - conv.alpha-prime-regge
@@ -53,5 +53,6 @@ notes: |
   也是后续弦论中 dilaton 背景、Liouville 理论与非临界弦的入口。
   在本图中它的作用是**限定** worldsheet.free-boson-central-charge-d 的适用范围：
   c = D 只对 V_μ = 0 的标准能动张量成立。
+  **2026-09-11 `uses` 换代改指（curator-small-backlog-3）**：worldsheet.tt-ope-central-charge（v1）→ worldsheet.tt-ope-central-charge-v2。v1 把「TT OPE 极点结构由共形不变性确定」这条命题内嵌在定义卡里，现拆为定义卡 v2 + 命题卡 worldsheet.tt-ope-pole-structure-from-conformal-invariance；本卡 `uses` 里用的是**定义半**（中心荷 c 的定义与归一化），故改指 v2。statement 正文里对 v1 id 的字面引用按 graph/CLAUDE.md 的裁决不就地改。
 author: curator-polchinski-ch2-3
 created: "2026-09-10"
