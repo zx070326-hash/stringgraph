@@ -102,6 +102,61 @@ theorem creationMonomial_eq_monomial (d : Osc D →₀ ℕ) :
 theorem creationMonomial_zero : creationMonomial R (0 : Osc D →₀ ℕ) = vacuum D R :=
   Finsupp.prod_zero_index
 
+theorem creationMonomial_single (v : Osc D) (k : ℕ) :
+    creationMonomial R (Finsupp.single v k) = (X v : Fock D R) ^ k :=
+  Finsupp.prod_single_index (pow_zero _)
+
+/-- Adjoining one more creation operator.  Together with `creationMonomial_zero` this is the
+recursive characterisation of `creationMonomial` as an iterated application of creation
+operators to the vacuum. -/
+theorem creationMonomial_add_single (d : Osc D →₀ ℕ) (v : Osc D) :
+    creationMonomial R (d + Finsupp.single v 1)
+      = creation R v.1 v.2 (creationMonomial R d) := by
+  rw [creationMonomial_eq_monomial, creationMonomial_eq_monomial, creation_monomial]
+
+/-- The level of `∏ (α^μ_{-n})^{d(μ,n)} |0⟩` is `Σ n · d(μ,n)`. -/
+theorem creationMonomial_mem_levelSubmodule (d : Osc D →₀ ℕ) :
+    creationMonomial R d ∈ levelSubmodule D R (level D d) := by
+  classical
+  rw [mem_levelSubmodule]
+  intro e he
+  rw [creationMonomial_eq_monomial, coeff_monomial] at he
+  by_cases h : d = e
+  · rw [h]
+  · rw [if_neg h] at he
+    exact absurd rfl he
+
+/-! ### Commuting an annihilation operator through a creation monomial -/
+
+/-- **Step (1)** of the Gram-matrix argument: the Leibniz rule for `α^μ_n` acting on a string
+of creation operators.  Because the commutator `[α^μ_n, α^ν_{-m}] = n η^{μν} δ_{nm}` is
+central, only the terms in which the annihilator is contracted with one of the `d(μ,n)`
+factors `α^μ_{-n}` survive, each contributing `n η^{μμ}`. -/
+theorem annihilation_creationMonomial (η : Fin D → R) (v : Osc D) (d : Osc D →₀ ℕ) :
+    annihilation η v.1 v.2 (creationMonomial R d)
+      = (oscWeight η v * (d v : R)) • creationMonomial R (d - Finsupp.single v 1) := by
+  rw [annihilation_apply, creationMonomial_eq_monomial, pderiv_monomial,
+    creationMonomial_eq_monomial, smul_monomial, smul_monomial]
+  simp [smul_eq_mul]
+
+/-- The recursion form of step (1): `d + δ_v` carries one more `α_{-v}`. -/
+theorem annihilation_creationMonomial_add_single (η : Fin D → R) (v : Osc D) (d : Osc D →₀ ℕ) :
+    annihilation η v.1 v.2 (creationMonomial R (d + Finsupp.single v 1))
+      = (oscWeight η v * ((d v : R) + 1)) • creationMonomial R d := by
+  classical
+  have hsub : (d + Finsupp.single v 1) - Finsupp.single v 1 = d := by
+    ext u
+    by_cases h : u = v <;> simp [h]
+  have hval : (d + Finsupp.single v 1 : Osc D →₀ ℕ) v = d v + 1 := by simp
+  rw [annihilation_creationMonomial, hsub, hval, Nat.cast_add, Nat.cast_one]
+
+/-- An annihilator whose mode is absent from the monomial kills it. -/
+theorem annihilation_creationMonomial_of_apply_eq_zero (η : Fin D → R) (v : Osc D)
+    {d : Osc D →₀ ℕ} (h : d v = 0) :
+    annihilation η v.1 v.2 (creationMonomial R d) = 0 := by
+  rw [annihilation_creationMonomial, h]
+  simp
+
 end Fock
 
 end StringFormal.NoGhost
