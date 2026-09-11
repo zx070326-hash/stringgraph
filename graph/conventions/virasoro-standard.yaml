@@ -26,3 +26,22 @@ notes: |
   「中心荷归一化使自由玻色子 c=1」这一句在原书的落点是 p.48（(2.4.24) 下方正文，无式号）
   逐字「The central charge of a free scalar is 1; for D free scalars it is D」，
   带式号的锚点是 (2.4.22)（D/2z⁴ 项）——见 worldsheet.free-boson-central-charge-d。
+
+  **★ 与 Polchinski (2.6.19) 的关系：恒等但非逐字**（curator-small-backlog-3，2026-09-11，
+  落实 literature/extractions/polchinski-1998-v1.md §12.10 表 B 第 3 项的「待改」）。
+  本卡 definition 写
+    [L_m, L_n] = (m−n) L_{m+n} + (c/12) m(m²−1) δ_{m+n,0} ；
+  原书 §2.6 eq. (2.6.19), p.56 逐字写
+    [L_m, L_n] = (m − n)L_{m+n} + (c/12)(m³ − m)δ_{m,−n} 。
+  两处差异都是恒等改写、**不是**物理或归一化上的差别：
+    (1) m³ − m = m(m² − 1)（多项式恒等式）；
+    (2) δ_{m,−n} = δ_{m+n,0}（同一个 Kronecker 符号的两种写法）。
+  因此本卡的归一化与原书**完全相同**，但**任何节点都不得声称本卡「与原书逐字一致」**，
+  只能说「与 (2.6.19) 等价改写」。
+  按不可违背原则 1，definition 是被大量节点引用的规范文本，此处**不**改写它。
+
+  **逐字版本在哪里**（要引原书排版时引这些，不要引本卡）：
+    · 本卡 sources[0].loc 与 sources[0].note（L1 页图逐字，researcher 第六轮）；
+    · worldsheet.conformal-ordered-modes-satisfy-virasoro 的 statement——该卡正文
+      **照原书写 (m³ − m)**，是本图里「(2.6.19) 逐字形态」的规范落点；
+    · literature/extractions/polchinski-1998-v1.md §12.1（E40）与 §12.10 表 B 第 3 项。
