@@ -71,10 +71,19 @@ sources:
       「两个 8′、两个 56」的重数计数）。
       ⇒ **本卡的三行整数在两本书里是同一批数**，这不是转述，是两条独立核实。
       ⚠ Polchinski 同样只断言 "the coefficients of these conspire to produce zero"，**不展示算术**。
-tags: [anomaly, gravitational-anomaly, twelve-form, d10, type-iib, linear-algebra, lean-island-2, lean-candidate]
+tags: [anomaly, gravitational-anomaly, twelve-form, d10, type-iib, linear-algebra, lean-island-2, formalized]
 notes: |
   from: literature/extractions/green-schwarz-1984.md §11.2、§11.3、§11.4（researcher 第五轮，L1）
   + polchinski-1998-v2-ch12.md E10/E11。
+
+  ⚠⚠ **读 (ii) 的括号句「等价地，在任何特征零的域上秩为 2」时必看**（2026-09-11，
+  formalizer 在形式化中发现，curator lean-wire-9 记入）：「**特征零**」这三个字是必需的，
+  **换成「任何域」这句话就是假的**——特征 2 时三行全化为 (1, 1, 0)，特征 3 时全化为 (0, 1, 2)，
+  秩掉到 1、核变成一张平面，(ii)(iii) 都不成立。反过来特征 5 虽整除子式 −720 却无害
+  （第 0、2 行模 5 仍无关，秩 2 与核照旧）。⇒ Lean 证明里的假设 `(720 : K) ≠ 0` 是证明技巧，
+  **真实边界是 `ringChar K ∉ {2, 3}`**，该锐化版本未形式化。
+  逐条见 --via-lean 的 notes 与 `StringFormal/Math/IIBAnomalyUnique.lean` 的
+  `### Over an arbitrary field` 段。本卡正文不因此改动（它写的是特征零，正确）。
 
   【★ 为什么值得单独建卡】Polchinski 在 p.98 逐字自评这件事 "somewhat **miraculous**" /
   "it seems **accidental** that there are any consistent chiral theories at all"，

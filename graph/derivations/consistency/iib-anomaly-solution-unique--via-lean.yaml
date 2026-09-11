@@ -17,7 +17,7 @@ depends_on:
       本身只挂这一条约定、不挂图内命题的做法一致（formal/TODO.md A8′「给图的两条提醒」(a)）。
 sources:
   - ref: stringformal-2026
-    loc: "formal/StringFormal/Math/IIBAnomalyUnique.lean :: StringFormal.Math.{iibAnomalyMatrix, iibSolutionVector, iib_rows_relation, iib_det_zero, iib_minor_01_01_det, iib_mulVec_apply, iib_mulVec_eq_zero_iff, iib_kernel_eq, iib_kernel_eq_int, iibSolutionVector_ne_zero, iib_ker_mulVecLin, iib_rank_eq_two}"
+    loc: "formal/StringFormal/Math/IIBAnomalyUnique.lean :: StringFormal.Math.{iibAnomalyMatrix, iibSolutionVector, iib_rows_relation, iib_det_zero, iib_minor_01_01_det, iib_mulVec_apply, iib_mulVec_eq_zero_iff, iib_kernel_eq, iib_kernel_eq_int, iibSolutionVector_ne_zero, iib_ker_mulVecLin, iib_rank_eq_two}；任意域一路（2026-09-11 追加）StringFormal.Math.{iib_kernel_eq_of_720_ne_zero, iibSolutionVector_ne_zero_of_field, iib_ker_mulVecLin_of_720_ne_zero, iib_rank_eq_two_of_720_ne_zero, iib_720_ne_zero, iib_kernel_eq_of_field, iib_ker_mulVecLin_of_field, iib_rank_eq_two_of_field}"
     note: |
       本仓库，Lean 4 + Mathlib，独立小岛（只 import Mathlib），无 sorry。
       两个定义 + 十条声明与目标 (i)(ii)(iii) 的对应（`R` 为任意 `CommRing`）：
@@ -38,8 +38,18 @@ sources:
           —— **`ker_ℤ A = ℤ · (2, −2, 1)`**，即目标加粗的整数唯一性；
         · 辅助：`iib_mulVec_apply`（`A *ᵥ x` 的显式三分量）、`iib_mulVec_eq_zero_iff`
           （`A *ᵥ x = 0` ↔ Bilal (12.4) 的三条标量方程，任意交换环）、`iibSolutionVector_ne_zero`。
+      **2026-09-11 追加（formalizer small-2，合并提交 6853ad8）：目标 (ii) 括号里那句
+      「等价地，在任何特征零的域上秩为 2」现在有 Lean 定理担保**：
+        · `iib_rank_eq_two_of_field {K} [Field K] [CharZero K] : (iibAnomalyMatrix K).rank = 2`；
+        · `iib_kernel_eq_of_field (x : Fin 3 → K) : A *ᵥ x = 0 ↔ ∃ t : K, x = t • ![2,-2,1]`；
+        · `iib_ker_mulVecLin_of_field : ker (mulVecLin A) = span K {(2,−2,1)}`。
+      **ℚ 版三条现在是它们的推论**（`iib_rank_eq_two`、`iib_kernel_eq`、`iib_ker_mulVecLin`
+      改写成对 K = ℚ 的特化），故本卡 `formal.lean_decl` 仍取 ℚ 版是**逐字对齐卡面主句**，
+      不再意味着「只担保 ℚ」。证明实际只用 `(720 : K) ≠ 0`，故另有假设形
+      `iib_kernel_eq_of_720_ne_zero` / `iib_ker_mulVecLin_of_720_ne_zero` /
+      `iib_rank_eq_two_of_720_ne_zero`，`CharZero` 只是经由 `iib_720_ne_zero` 的方便充分条件。
       formal/TODO.md「A8′」记 **已完成（2026-09-11）**，「公理检查：10 条声明全部 ok，
-      只有 propext / Classical.choice / Quot.sound」。
+      只有 propext / Classical.choice / Quot.sound（2026-09-11 扩到 16 条，含任意域版本，仍全 ok）」。
   - ref: bilal-2008
     loc: "§12.2, (12.4)(12.5)，印刷 p.97 = PDF p.100（v1）"
     note: |
@@ -78,12 +88,14 @@ summary: |
   「无规范群」一概不在其中，与目标卡「本卡不断言」(a)–(d) 一致。
 gaps:
   - |
-    ★ **目标 (ii) 的「等价地，在任何特征零的域上秩为 2」一句超出 Lean 担保。**
-    `iib_rank_eq_two` 只证 `(iibAnomalyMatrix ℚ).rank = 2`；`iib_kernel_eq` / `iib_ker_mulVecLin`
-    也只在 ℚ 上。推广到任意特征零域（乃至任何 `720 ≠ 0` 的域）是同一秩–零化度论证
-    （只用到 `720 ≠ 0`，见 `iib_minor_01_01_det` 的 docstring），但**未写进 Lean**；
-    `formal.lean_decl` 只担保 ℚ 那一句。若日后要担保全称版本，需再加一条
-    `[Field K] [CharZero K]`（或 `NeZero (720 : K)`）的定理（formal/TODO.md A8′ 提醒 (b)）。
+    ~~★ 目标 (ii) 的「等价地，在任何特征零的域上秩为 2」一句超出 Lean 担保。~~
+    **✅ 已关闭（2026-09-11，formalizer small-2，合并提交 6853ad8）**：
+    `iib_rank_eq_two_of_field {K} [Field K] [CharZero K] : (iibAnomalyMatrix K).rank = 2`
+    连同 `iib_kernel_eq_of_field`、`iib_ker_mulVecLin_of_field` 已写进 Lean，
+    ℚ 版反过来成为它们的推论。卡面 (ii) 的括号句现在**逐字有定理**。
+    **仍未形式化的只剩「锐化的特征条件」**：Lean 的假设是 `720 ≠ 0`（或更强的 `CharZero`），
+    而真正的充要条件是 `ringChar K ∉ {2, 3}`（见 notes 的数学注记）——那一句无 Lean 定理，
+    也**不是卡面的断言**，故只作记账，不算卡面缺口。
   - |
     **物理全部在外**：三行系数来自 Alvarez-Gaumé–Witten 的指标定理，两本书都只引用不重做
     （Polchinski 逐字 "we will not repeat it here but just quote the result"；Bilal (12.1)–(12.3)
@@ -103,8 +115,25 @@ notes: |
   **公理检查记录**：formalizer 2026-09-11 在其分支 agent/formalizer/iib-unique 上跑
   `uv run stringgraph check-axioms`，记入 formal/TODO.md A8′「公理检查：10 条声明全部 ok，
   只有 propext / Classical.choice / Quot.sound」（总线消息 #917 同述 "10 decls, no sorry, axioms
-  clean"）。该分支已于 6ac646a 合入 main。**本接线 worktree 无 .lake 构建产物，curator 未在本分支
-  重跑 check-axioms**；按根 CLAUDE.md，lead 合并前统一跑。本分支未改动 formal/ 下任何文件。
+  clean"）。该分支已于 6ac646a 合入 main。**2026-09-11 第二轮**（formalizer small-2，
+  合并提交 6853ad8）把任意域版本加进同一文件，TODO.md 记「扩到 16 条，仍全 ok」。
+  **两轮都是 formalizer 自报；curator（lean-wire-9）未在本分支重跑**——本接线 worktree 无 .lake，
+  且主仓库 D:\physics\string 的 `formal/.lake`（11:45 构建）尚不含 `IIBAnomalyUnique.olean`。
+  按根 CLAUDE.md，lead 合并前统一跑 `lake build` + `check-axioms` 覆盖。
+  本分支未改动 formal/ 下任何文件。
+
+  ★★ **formalizer 在形式化过程中发现的锐化边界（2026-09-11，值得记住）**：
+  卡面 (ii) 写的是「在**任何特征零的域**上秩为 2」，这是对的；但**若写成「任何域」就是假的**。
+    · **特征 2**：三行全部化为 `(1, 1, 0)`；
+    · **特征 3**：三行全部化为 `(0, 1, 2)`。
+  两种情形下 `rank A = 1`、`ker A` 是一张**平面**，严格大于过 `(2, −2, 1)` 的直线
+  ⇒ (ii)(iii) 在特征 2、3 上**确实为假**，不是「证明走不通」而是「结论不成立」。
+  反过来，**特征 5 整除 720 却无害**：第 0、2 行模 5 仍线性无关，秩 2 与核都照旧成立，
+  只是 Lean 里那条「用 −720 除」的证明走不通。
+  ⇒ `(720 : K) ≠ 0` 是**证明技巧的产物，不是真实边界**；锐化条件是 `ringChar K ∉ {2, 3}`，
+  本轮未形式化。⚠ 日后若有人想把卡面 (ii) 的括号句放宽成「任何域」，**必须先看这一条**。
+  （出处：`IIBAnomalyUnique.lean` 的 `### Over an arbitrary field` 段落 docstring，
+  与 formal/TODO.md A8′ 提醒 (b) 的「数学注记」。）
 
   **比目标卡强的三处（Lean 侧给的比卡片断言的多）**：
     (i) `iib_rows_relation` 对**任意交换环**成立，卡片只在 ℤ 上写；
