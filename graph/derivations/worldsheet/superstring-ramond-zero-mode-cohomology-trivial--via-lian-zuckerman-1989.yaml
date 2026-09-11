@@ -1,0 +1,159 @@
+id: worldsheet.superstring-ramond-zero-mode-cohomology-trivial--via-lian-zuckerman-1989
+target: worldsheet.superstring-ramond-zero-mode-cohomology-trivial
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.super-virasoro-algebra
+    convention_map: |
+      本图的中心荷归一化是 c/12：[L_m,L_n] = (m−n)L_{m+n} + (c/12)(m³−m)δ、
+      {G_r,G_s} = 2L_{r+s} + (c/12)(4r²−1)δ。
+      **LZ 用 c/8 与 c/2**（p.302 逐字）：[L_m,L_n] = (m−n)L_{m+n} + (c/8)(m³ − 2κm)δ_{m+n}、
+      {G_{m+κ}, G_{n−κ}} = 2L_{m+n} + (c/2)(m² + 2κm)δ_{m+n}。换算两条（与
+      worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989 的同名边同）：
+        (1) **中心荷**：c_本图 = (3/2)·c_LZ ⇒ LZ 的 c_LZ = D = 10 ↔ 本图 c^m = 15。
+        (2) **R 扇区 (κ = 0) 的 L₀ 零点**：LZ 的 {G₀,G₀} = 2L₀（**无**中心项），本图是
+            2L₀ − c/12 ⇒ **L₀^LZ = L₀^本图 − c/24**。
+      ★ 换算 (2) 在本卡**承重**：设定 (H6) 的 D_R² = K 正是 R 扇区的 {G₀,G₀} = 2L₀ 在
+      「物质 + 鬼场总量、总中心荷为零」下的写法。若按本图的 c/12 归一化读，
+      {G₀,G₀} = 2L₀ − c/12 的中心项要靠物质 (c=15) 与鬼场 (c=−15) 相消才为零。
+      ⚠ 本卡的断言（上同调平凡 / 收缩同伦）本身不含中心荷，两条换算只影响 (H3)(H6) 的读法。
+    note: |
+      对象接口边：LZ 的 Vir_κ（N = 1 超 Virasoro 代数，κ = 0 即 Ramond 模式集）就是本图这张卡的对象；
+      本卡的微分 D_R 就是它的 G₀（物质 + 鬼场总量）。
+  - id: worldsheet.superstring-brst-additional-conditions
+    note: |
+      供给设定 (H4) 的两个空间：ℱ(p,0) = Ker b₀ ∩ Ker β₀ ∩ Ker K 与 C_rel(p,0) = ℱ(p,0) ∩ Ker D_R，
+      与 LZ **Definition 2.2** 逐条对应（该卡逐字：b₀|ψ⟩ = L₀|ψ⟩ = 0 两扇区都加，
+      β₀|ψ⟩ = G₀|ψ⟩ = 0 只在 R 扇区）；**本卡的 D_R = π(G₀) + ρ(G₀) 就是这张卡的总 G₀，
+      K = π(L₀) + ρ(L₀) 就是这张卡的总 L₀**。本边是最核心的对象对接边。
+      ★ 本卡断言的内容恰是「把 (H4) 的两个条件分成两步加」时第二步的结构：
+      先加 b₀ = β₀ = L₀ = 0 得 ℱ，再加 G₀ = 0 得 C_rel；Theorem 2.7 说第二步的 Ker 恰等于 Im。
+      ⚠ 该定义卡自身 physical-argument（上游 OPE / 路径积分链），是本推导 effective 被封顶的原因；
+      **不降低本推导自身的 rigorous**（LZ 在自己的框架里把这两个空间定义为良定义对象）。
+  - id: worldsheet.superconformal-ghost-modes
+    note: |
+      供给 bc 与 βγ 的模式与（反）对易关系（LZ p.303 (1)–(4)：[γ_{m+κ}, β_{n−κ}] = δ_{m+n}、
+      {c_m, b_n} = δ_{m+n}），因而供给 (H4) 里 Ker b₀ ∩ Ker β₀ 的两个零模 b₀、β₀；
+      并供给 (H5) 的 R 扇区零模表示语境（LZ p.306 (7)：κ = 0 取 **T₀ ⊕ T₁**）。
+      ★ 本卡的证明还用到 ε = d¹₀/p¹ 把 ℱ 映到 ℱ，这需要 d¹₀ 与 b₀、β₀ 反/对易——
+      即物质费米零模与鬼场零模属于互相独立的部门，这一点由本卡（鬼场侧）与
+      worldsheet.rns-super-virasoro-generators（物质侧）合起来供给；LZ 未明写（见 gaps 第二条）。
+  - id: worldsheet.rns-super-virasoro-generators
+    convention_map: |
+      本图（Polchinski Vol.2）的 G_r = Σ_n α^μ_n ψ_{μ, r−n}，故 **G₀ = Σ_n α^μ_n ψ_{μ,−n}
+      含零模项 α^μ₀ ψ_{μ0}**；开弦归一化 α^μ₀ = (α'/2)^{1/2} p^μ（conv.alpha-prime-regge）。
+      **LZ 取 α₀ = p**（p.303 的 U(κ) = C[α^μ_{−n}, d^μ_{−n+κ}]|p⟩ 与 p.310 证明里的 {D_R, d¹₀/p¹} = 1
+      逐字要求分母正好是 p¹）。⇒ 两侧的零模项差一个 (α'/2)^{1/2} 因子；LZ 的 ε = d¹₀/p¹ 在本图归一化下是
+      ε = ψ^1₀ / [(α'/2)^{1/2} p^1]。**这个因子只改 ε 的归一化，不改「存在 ε 使 {D_R, ε} = 1」这个断言。**
+      正规序常数：本图把 a^m 写在 L_m 内部（Vol.2），Vol.1 写 (L₀ + A)；conv.intercept-sign-a 的 a = −A。
+      LZ 的 K = π(L₀) + ρ(L₀) 是「常数已吸进去」的那种，与 Vol.2 同款。
+    note: |
+      供给物质部门的 G₀ 与费米零模 d^μ₀（= 本图的 ψ^μ₀）：**LZ 证明里的 d¹₀ 就住在这里**，
+      且 D_R 的 p·d₀ 项来自这张卡的 G₀ 零模项 α^μ₀ψ_{μ0}。同时供给物质 Fock 空间
+      V(p,0) = R(p,0) ⊗ U(0)（LZ p.303）。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    inferred: true
+    note: |
+      供给 R 扇区费米零模的 Clifford 关系 {ψ^μ₀, ψ^ν₀} = η^{μν}（该卡逐字，取自
+      {ψ^μ_r, ψ^ν_s} = η^{μν}δ_{r,−s} 的 r = s = 0），**这是 LZ 那条一行公式
+      {D_R|_ℱ, d¹₀/p¹} = 1 成立的算术根据**：{p·d₀, d¹₀} = p_μ {d^μ₀, d¹₀} = p_μ g^{μ1} = p¹，
+      而 G₀ 的其余项与鬼场项都与 d¹₀ 反对易为零。
+      **标 inferred**：LZ **只写出结果公式 {D_R|_ℱ, d¹₀/p¹} = 1，没有写这一步计算**
+      （p.310 的证明全文只有两句，见 sources 第一条）；把它归到 Clifford 关系是本图的补线。
+      ⚠ 另一处 inferred 成分：该卡是 **Polchinski 的 ψ^μ₀ 与 η^{μν}**，LZ 写 d^μ₀ 与 g^{μν}
+      （p.302「g^{μν} is the inverse of the Lorentz metric with signature ((D−1)+, 1−)」，
+      与 conv.metric-mostly-plus 一致），两侧记号的等同也是本图所加。
+sources:
+  - ref: lian-zuckerman-1989
+    loc: "**Theorem 2.7**, p.310：陈述逐字 'Assume p ≠ 0: the above complex has zero cohomology. Thus C_rel(p,0) = D_R F(p,0).'；**证明**同页逐字（全文两句）：'For p ≠ 0, say p¹ ≠ 0, we have {D_R|_F, d¹₀/p¹} = 1. Applying this formula on Ω ∈ Ker D_R|_F, one sees that Ω ∈ Im D_R|_F.'"
+    note: |
+      literature/extractions/lian-zuckerman-1989.md **E4**（L1，陈述与证明**都标逐字**）。
+      ★ **证明是印出的、且显式构造收缩同伦**（ε = d¹₀/p¹）——这是本推导标 rigorous 的直接依据
+      （lead 2026-09-11 的口径：「rigorous 若记录显示有印出证明（收缩同伦显式构造），否则 physical-argument」）。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 2.11 之后的 Remark**, p.311，逐字：'Recall that (Theorem 2.7) there is a contracting homotopy ε : ℱ → ℱ such that {D_R, ε} = 1.'"
+    note: |
+      L1 逐字（extraction §10.2）。★ **这是「收缩同伦形式」进入目标卡断言的依据**：原作者自己
+      把 Theorem 2.7 引用成「存在 ε 使 {D_R, ε} = 1」。⇒ 目标卡把两种说法写在一起不是本图的加工。
+  - ref: lian-zuckerman-1989
+    loc: "**Definition 1.6** 与 **Proposition 1.7**, pp.307–308（K = π(L₀) + ρ(L₀)、D_R = π(G₀) + ρ(G₀) 的显式模式和；逐字 '(ix) D_R² = K'、'(iii) D_R* = −D_R'、'(v) {Q, D_R} = 0'）；**Definition 2.2**, pp.308–309（ℬ / ℱ / C_rel）；**p.302**（超 Virasoro 关系与 g^{μν} 号差）；**p.303**（V(p,κ) = R(p,κ) ⊗ U(κ)；'p will always be assumed non-zero until Sect. 5'）；**p.306 (7)(8)**（T₀ ⊕ T₁）；**p.308**（'From now on, we will take D = 10'）"
+    note: |
+      L1（extraction §1 / E1 / E2）。供给设定 (H1)–(H7)。
+      ⚠ **Prop 1.7 的证明大半外包**（E1 逐字：'(iv) to (viii) are obtained by straightforward computations,
+      some of which are done in [13, 15, 19]'，[13] = Ohta PRD 33、[15] = Terao–Uehara PLB 168B）；
+      (ix) D_R² = K 属该批。目标卡把它写成设定 (H6) 而非断言，即因此；见 gaps 第三条。
+  - ref: lian-zuckerman-1989
+    loc: "**Proposition 2.14 的证明**, p.313 与 p.315，两处逐字引用本定理：'**Theorem 2.7** implies that dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)'（式 (6)）与 Lemma 2.14.3 处 'By **Theorem 2.7** …'、'But **Theorem 2.7** implies that 2 dim C_rel(p,0) = dim ℱ(p,0) = 32(N(s)+M(s))'"
+    note: |
+      L1（extraction §10.4 的步骤表）。**不是本推导的输入**，而是本卡**被使用的方式**：
+      它记录下游 worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989
+      对本卡那条边的原文依据（两次点名引用 ⇒ 该边不标 inferred）。
+summary: |
+  **LZ 的论证（两句，逐字见 sources 第一条；本图逐字转录，未加工）**：
+
+  1. **对象**：固定 p ≠ 0、R 扇区 κ = 0。ℱ(p,0) = Ker b₀ ∩ Ker β₀ ∩ Ker K（Definition 2.2），
+     其上 D_R|_ℱ 平方为零（D_R² = K，Prop 1.7(ix)，而 ℱ ⊂ Ker K），故 (ℱ(p,0), D_R|_ℱ) 是复形，
+     且按定义 Ker D_R|_ℱ = ℱ(p,0) ∩ Ker D_R = C_rel(p,0)。
+  2. **一行公式**：p ≠ 0 ⇒ 存在坐标方向使 p¹ ≠ 0，于是在 ℱ 上
+         **{ D_R|_ℱ , d¹₀ / p¹ } = 1**。
+     （本图补的算术：D_R 的零模项是 p·d₀，{p·d₀, d¹₀} = p_μ g^{μ1} = p¹；G₀ 的非零模项与鬼场项
+     与 d¹₀ 的反对易子为零。**这一步 LZ 未印出**，见 depends_on 的 inferred 边与 gaps 第一条。）
+  3. **收缩**：设 Ω ∈ Ker D_R|_ℱ。把 2 的公式作用在 Ω 上：
+         Ω = D_R (d¹₀Ω/p¹) + (d¹₀/p¹)(D_RΩ) = D_R (d¹₀Ω/p¹)，
+     故 Ω ∈ Im D_R|_ℱ。⇒ **Ker D_R|_ℱ ⊂ Im D_R|_ℱ**；反向包含由 (D_R|_ℱ)² = 0 得。
+     ⇒ 上同调为零，且 **C_rel(p,0) = D_R ℱ(p,0)**。
+  4. **收缩同伦形式**：2 的公式就是 ε := d¹₀/p¹ 满足 {D_R|_ℱ, ε} = 1，即 ε 是收缩同伦。
+     LZ 在 p.311 的 Remark 里正是这样回指本定理的（sources 第二条逐字）。
+
+  **这一步不做**：
+  · 不碰 Q_B 上同调。本卡的微分是 **D_R = 总 G₀**，是零模方向的微分；
+    Q_B 的消灭定理是 Theorem 2.4（§3 全章，经 Prop 3.2/3.3 与超李代数同调的正合序列 Theorem 3.3.1），
+    与本卡在论证上毫无交集。两者在 LZ 的顺序里也是分开的（2.4 在 p.309，2.7 在 p.310）。
+  · 不做分次的事：由本定理到 dim ℱ^n(p,0) = 2 dim C^n_rel(p,0)（p.313 式 (6)）另需
+    「D_R 保持相对次数」，目标卡「不断言 (c)」照此排除。
+
+  【为什么标 rigorous】
+  (1) 结论是**带编号的定理**（Theorem 2.7），期刊是 Communications in Mathematical Physics；
+  (2) **证明是印出的**，且是**显式构造**（收缩同伦 ε = d¹₀/p¹ 当场写出），
+      不是「一点思考就知道」式的断言——这正是 docs/STATUS_LEVELS.md「断言 + 骨架」裁决要区分开的另一侧；
+  (3) 论证全在线性代数里（一个反对易子恒等式 + 一次代入），不涉路径积分、不涉收敛性、不涉维数计数。
+  ⚠ **限制**：证明只有两句，其中「{D_R|_ℱ, d¹₀/p¹} = 1」与「d¹₀/p¹ 把 ℱ 映到 ℱ」两步都是
+  **断言**（LZ 未印出计算）。两步都是一行的初等验算，但本图**没有**按
+  docs/STATUS_LEVELS.md 的 rigorous 例外流程走（无 reviewer 独立复核记录），
+  故本推导的 rigorous 是按「发表的数学文献 + 印出的证明」那一档给的，不是按例外条款。
+  两步逐条记在 gaps。
+
+  【有效状态为什么被封顶】接口卡 worldsheet.superstring-brst-additional-conditions
+  自身 physical-argument（上游 OPE / 路径积分链），按 min 规则封顶。**这不是 LZ 的论证有缺口**，
+  而是本图把「LZ 的对象 = Polchinski 的对象」经那张卡记账的后果，与消灭卡、维数卡、
+  特征标/号差卡同口径。
+gaps:
+  - "**「{D_R|_ℱ, d¹₀/p¹} = 1」这一步 LZ 未印出计算**：p.310 的证明把它当作已知（'we have {D_R|_F, d¹₀/p¹} = 1'）。本图在 summary 2 补了算术（D_R 的零模项 p·d₀ + Clifford 关系 {d^μ₀,d^ν₀} = g^{μν}），并据此对 worldsheet.rns-ramond-zero-modes-clifford 拉了 **inferred 边**。这一步依赖 D_R 的显式模式和（Definition 1.6）里零模项的系数，本图未逐字核该系数（extraction E1 的 Q 表达式里 π(G_{−n+κ})γ_{n+κ} 一项与 D_R 的关系未展开）。"
+  - "**「ε = d¹₀/p¹ 确实把 ℱ(p,0) 映到 ℱ(p,0)」未被任何一方写出**：收缩论证要求 ε 保持 Ker b₀ ∩ Ker β₀ ∩ Ker K。这需要 d¹₀ 与 b₀、β₀ 反/对易（物质与鬼场部门独立）且 [K, d¹₀] = 0（d₀ 在能级 0）。**LZ 一字未提**，本图也未补证；目标卡把 ε: ℱ → ℱ 照抄 LZ 在 p.311 Remark 的写法（'a contracting homotopy ε : ℱ → ℱ'），即依赖该断言。"
+  - "**设定 (H6) 的 D_R² = K 出处是 Proposition 1.7(ix)，而 Prop 1.7 的证明大半外包给物理文献**（E1 逐字：'(iv) to (viii) are obtained by straightforward computations, some of which are done in [13, 15, 19]'；[13] = Ohta PRD D33、[15] = Terao–Uehara PLB 168B，两篇本图**未登记 bib、未读**）。目标卡把它写成设定而非断言，代价是「(ℱ, D_R|_ℱ) 是复形」这件事在本图无独立来源。⇒ 若将来为 Prop 1.7 立卡，本推导应补一条边。"
+  - "**「p ≠ 0 ⇒ 存在 p¹ ≠ 0」用的是哪种非零**：LZ 的 p ∈ R^{D−1,1} 是 Lorentz 矢量，p ≠ 0 指分量不全为零（可以 p·p = 0）。原文写 'say p¹ ≠ 0' 即取某个**非零分量的方向**，本图读成「某个坐标方向」。⚠ 若该方向是类时方向，g^{11} 的符号会变（号差 ((D−1)+, 1−)），ε 的归一化差一个号；**LZ 用上标 1（空间方向）写，本图未核 LZ 是否隐含 p 的空间分量非零**。extraction §6 复核-1 记的 p.305 Remark 只给半空间 {p^D > 0}，不排除 p 的空间分量全为零（纯时间动量）。⇒ 这是一处**真实的边界情形缺口**：p = (0,…,0,p^D) 时 LZ 的写法要改取 d^D₀/p^D。"
+  - "**R 扇区零模表示的依赖未检验**：本卡绑定在 (H5) 的 T₀ ⊕ T₁ 上。换成 FOK / Henneaux 的 C[γ₀] 后 ℱ 的定义与本结论是否不变，本图未核（目标卡「不断言 (g)」）。LZ 选 T₀ ⊕ T₁ 的理由是 p.306 逐字「deg 上有界」，与本定理无直接关系。"
+  - "**与 Corrigan–Goddard / Henneaux 的物理版对应未入图**：extraction E4 备注说本定理是那批工作的数学版，但 LZ 正文**不引 Henneaux**（extraction §3 逐字），本图也未登记那两篇 bib。⇒ 本卡目前只有一条来源。"
+notes: |
+  【本卡关闭的 gap（curator 2026-09-11，lz-thm27）】
+  worldsheet.superstring-relative-complex-character-signature--via-lian-zuckerman-1989 的 gaps 首条
+  （reviewer-batch29）逐字：「LZ Theorem 2.7（R 扇区 D_R 上同调平凡 / 收缩同伦）无卡、无边 …
+  建卡后应加非 inferred 边。」本轮同批：该推导加一条指向本卡目标的**非 inferred** 边
+  （依据是 Prop 2.14 证明里两处点名引用，见 sources 第四条），并改写该 gap 为已关闭。
+
+  【编号陷阱】**LZ 1989 Theorem 2.7 ≠ FGZ 1986 Theorem 2.7**。后者是玻色弦 Q_B 上同调的消灭定理 +
+  维数公式，已立卡 worldsheet.bosonic-relative-cohomology-vanishing / -dimension。
+  本推导与那两条毫无关系，不得互引。
+
+  【为什么不挂 worldsheet.superstring-brst-charge】Q_B 在本定理里一次都不出现：微分是 D_R。
+  LZ 的 Prop 1.7(v) {Q, D_R} = 0 是另一条，属 Prop 2.14(i) 的证明（那里也未点名，
+  若建边须标 inferred，见特征标/号差推导的 notes）。
+
+  【为什么不挂 worldsheet.fock-indefinite-form】本定理不涉及任何内积/厄米型——它是纯粹的
+  「核 = 像」陈述。厄米型进入的是下一张卡
+  worldsheet.superstring-relative-complex-nondegenerate-form（Definition 2.11 的 ⟨,⟩_rel）。
+
+  按 literature/extractions/lian-zuckerman-1989.md E4（第一轮逐字）与 §10.2 / §10.4
+  （researcher 第四轮页图，L1 逐字）建立。curator，2026-09-11。
+author: curator
+created: "2026-09-11"
