@@ -571,4 +571,52 @@ theorem ddfOp_neg_two_apply_towerVacuum (η a b ε : Fin D → R) (hη : ∀ μ,
 
 end DDFLevelTwo
 
+/-! ### The complete level-two slice of the tower physical subspace -/
+
+section TowerLevelTwo
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- **Blueprint §B.6, the `N = 2` physical-state analysis on the momentum tower.**
+
+The bigraded piece `(rung j, level 2)` of `H_phys` consists exactly of the rung vectors
+`|ψ⟩ = Σ_μ α^μ_{-1}(v_μ·α_{-1})|0;p_j⟩ + (w·α_{-2})|0;p_j⟩` whose parameters satisfy the
+mass shell together with the `D + 1` linear equations `Fock.levelTwoL1 = 0`,
+`Fock.levelTwoL2 = 0` for the rung momentum `p_j = k + j k_0`.  This is
+`Fock.mem_physSubmodule_inf_levelSubmodule_two_iff` transported along
+`single_mem_towerPhysSubmodule_iff`. -/
+theorem mem_towerPhys_bigrade_two_iff (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (a₀ : R)
+    (j : ℤ) {x : TowerFock D R} :
+    x ∈ towerPhysSubmodule η a b a₀ ⊓ towerBigrade D R j 2 ↔
+      ∃ (v : Fin D → Fin D → R) (w : Fin D → R),
+        x = Finsupp.single j (Fock.levelTwoGen η v w) ∧
+          (invTwo R * Fock.zeroModeSq η (towerMomentum a b j) + 2 - a₀) • x = 0 ∧
+            Fock.levelTwoL1 η (towerMomentum a b j) v w = 0 ∧
+              Fock.levelTwoL2 η (towerMomentum a b j) v w = 0 := by
+  classical
+  constructor
+  · intro hmem
+    obtain ⟨hphys, hbig⟩ := Submodule.mem_inf.1 hmem
+    obtain ⟨hx1, hx2⟩ := mem_towerBigrade.1 hbig
+    rw [hx1] at hphys
+    rw [single_mem_towerPhysSubmodule_iff η a b a₀ j (x j)] at hphys
+    obtain ⟨v, w, hvw, h0, h1, h2⟩ :=
+      (Fock.mem_physSubmodule_inf_levelSubmodule_two_iff η (towerMomentum a b j) hη a₀).1
+        (Submodule.mem_inf.2 ⟨hphys, hx2⟩)
+    refine ⟨v, w, by rw [hx1, hvw], ?_, h1, h2⟩
+    rw [hx1, Finsupp.smul_single, h0, Finsupp.single_zero]
+  · rintro ⟨v, w, rfl, h0, h1, h2⟩
+    rw [Finsupp.smul_single] at h0
+    have h0' : (invTwo R * Fock.zeroModeSq η (towerMomentum a b j) + 2 - a₀)
+        • Fock.levelTwoGen η v w = 0 := by
+      have := congrArg (fun y : TowerFock D R => y j) h0
+      simpa using this
+    refine Submodule.mem_inf.2 ⟨?_, single_mem_towerBigrade
+      (Fock.levelTwoGen_mem_levelSubmodule_two η v w)⟩
+    rw [single_mem_towerPhysSubmodule_iff η a b a₀ j]
+    exact ((Fock.mem_physSubmodule_inf_levelSubmodule_two_iff η (towerMomentum a b j) hη
+      a₀).2 ⟨v, w, rfl, h0', h1, h2⟩).1
+
+end TowerLevelTwo
+
 end StringFormal.NoGhost
