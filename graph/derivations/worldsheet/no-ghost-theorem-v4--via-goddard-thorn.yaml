@@ -274,7 +274,31 @@ gaps:
     **本追记不改变任何判定**：本推导 `status: rigorous` 不变；目标
     worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化（(B-26) 这一支从「无 Lean 对应物
     的开放猜想」变成「有 Lean 对应物、逐 N 可陈述、仍是开放猜想」，猜想负担的形状变了，
-    存在与否没有变）；(B-26) **不关闭**。"
+    存在与否没有变）；(B-26) **不关闭**。
+
+    **【2026-09-12 再追记，curator，分支 agent/curator/pr34-wire：`∀N, B26 N` 的左边一半
+    （dim H_N 的独立上界）现有 Lean 定理，(B-26) 的开放内容被精确压缩到唯一一处，
+    但仍不关闭。本段之后一字未改上文，只追加。】**
+    formal/BLUEPRINT-noghost.md §B′ 的 PR3（`NoGhost/LightConeResolutionGen.lean`）与
+    PR4（`NoGhost/SpuriousElimination.lean`，85 条声明）落入 main 后，`B26 η a b hη Ε N`
+    右边的第一项 `finrank K ↥(H_phys ⊓ V_N)` 现有一条独立于 D 的上界：新图节点
+    **worldsheet.physical-slice-bounded-by-transverse-count**（formalized，Lean
+    `StringFormal.NoGhost.finrank_towerPhys_inf_towerBigrade_le`，蓝图 §B′.4 的 (P3)）证出
+    `dim H_N ≤ p_{D−1}(N)`，对一切 `D ≥ 2`、一切 N，`D = 26` 不出现。配合已 formalized 的
+    `dim D_N = p_{D−2}(N)`（worldsheet.transverse-ddf-fock-gram-matrix 一侧），
+    `∀N, B26 N` 现在**逐字等价于**一条更窄的命题：
+
+      ∀N,  dim Z_N  ≥  p_{D−1}(N) − p_{D−2}(N)
+
+    （即上文 (iii) 的构造式写法，只在 D = 26 处期望成立）——因为 `dim H_N ≤ p_{D−1}(N)
+    = dim D_N + (p_{D−1}(N) − p_{D−2}(N)) ≤ dim D_N + dim Z_N` 只要这条零态下界成立即自动
+    满足。详细记账在 worldsheet.ddf-spanning-rank-inequality 的 notes
+    【2026-09-12 追记】一节，此处不重复。
+    ⚠ **仍未关闭**：零态下界本身没有变化——它仍是零证据的开放猜想，Kac 退化点在
+    N = 3, 4 不命中的硬事实（上文已述）依旧排除「逐 N 找层真空奇异向量」的通用捷径。
+    本追记只是把 `∀N, B26 N` 里*已经*不再困难的那一半（H_N 上界）指名关闭，
+    使剩余的猜想负担有一个更精确的单一落点；**本推导 `status: rigorous` 不变**，
+    目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化，(B-26) **仍不关闭**。"
   - |
     【2026-09-11（lean-wire-13）新增，curator】**第 (1b) 步用到的领头项
     A^i_{−n}|0;k⟩ = α^i_{−n}|0;k−n k_0⟩ + … 需要一条本推导没写出的假设：(T′) ε_i·k = 0**
