@@ -154,5 +154,21 @@ notes: |
 
   【查重】`uv run stringgraph search free / Fock` 命中的是 DDF/Gram/Verma 一系与
   math.verma-module-free-over-negative-part（Verma 模，不是 Fock 模），无同内容者。
+
+  【2026-09-12 追记（curator，分支 agent/curator/b26-findings；依 formal/BLUEPRINT-noghost.md
+  §B″.6「PR5a 单独的价值」一段，⟨手算规划⟩，未经 Lean 校验、未经 reviewer 复核，
+  inferred-grade，仅记账，不改变本卡 status/effective）】
+  旧蓝图 §B.2 曾探索「借道 FGZ 本命题证明 dim V_N = p_{D-1}(N)」这条具体路线，结论是此路不通
+  （见 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的 gaps 与
+  worldsheet.physical-slice-bounded-by-transverse-count 的沿革）。**这条否定结论排除的是
+  「用 FGZ 的方法去证」这一具体证明路径，不是本卡命题本身**——本卡（V(E,p) 作为 U(ℒ⁻)-模自由）
+  在图上依旧只有 fgz-1986 Proposition 2.6(i) 这一条来源，未受影响，status 仍 rigorous。
+  §B″.6 规划的 PR5a（`VirasoroPBWBasis.lean`，D-无关，约 700 行，尚未落地）若真的写出，
+  会用 PBW 基 × 光锥基数数（§B″.4.1 的 `dim Q_M = p_{D-1}(M)` 一类计数，**不经过** Kac 行列式）
+  独立给出「Fock 模在 ℒ⁻ 下自由」这同一条命题的一个**counting 证明**——与 fgz-1986 的
+  证明路径（未印出，PNAS 公告体裁）完全不同，可作为本卡未来的第二条独立来源。
+  ⚠ **PR5a 目前只是规划**（蓝图 §B″.6 的六项 PR 拆分之一），未写代码、未验证；此追记只是
+  「若/当它落地，会给本卡什么」的记账，不构成新来源、不新增 sources 条目、不改动 status。
+  ⟨手算规划，inferred: true，来源 formal/BLUEPRINT-noghost.md §B″.6，约 1781-1785 行⟩
 author: curator
 created: "2026-09-11"
