@@ -1,0 +1,165 @@
+id: worldsheet.ramond-trace-with-fermion-number-vanishes--via-ramond-ground-state-cancellation
+target: worldsheet.ramond-trace-with-fermion-number-vanishes
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.modular-invariance-requires-eight-transverse-fermions
+    note: |
+      供给**被断言为零的那个对象**：Z^α_β(τ) = Tr_α[q^H exp(πiβQ)] 的定义与四个迹的标号
+      （§10.7 (10.7.7a–c)、(10.7.8a–d)），特别是 **(10.7.8d) Z¹₁ = Tr_R[exp(πiF)q^H]**，
+      以及「这些迹是**对一对维数**取的」这条归一化——后者是「**两个** R 扇区基态」这个数字
+      能读通的前提（一对维数上的 R 基态是二重简并）。
+      **非 inferred**：那张卡的 statement 逐字含 Z^α_β 的三种写法与 (10.7.9) 的组合；
+      原书 p.34 那句用的正是同一套记号，就印在同节。
+      ⚠⚠ **只借记号与对象，绝不借论证方向，且绝不得反向**：按目标卡 statement 引的 p.35 逐字，
+      原书**要求**模不变性的建立 '*without* using the vanishing of Z^1_1 or the abstruse
+      identity (10.7.16) — as we have required'。⇒ 那张卡**不得**依赖本推导的目标卡。
+      （同款纪律见 worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+       对同一张卡的 depends_on note。）
+  - id: worldsheet.rns-fermion-number-operator
+    note: |
+      供给**迹里插入的那个算符** exp(πiF)（§10.2 (10.2.19)–(10.2.24)），
+      包括它与全部 ψ^μ **反对易**这条性质，以及它在 R 基态上的作用
+      (10.2.24b) exp(πiF)|s⟩_R = |s'⟩_R Γ_{s's}。
+      **非 inferred**：Z¹₁ 的定义式 (10.7.8d) 里的 exp(πiF) 就是该卡定义的算符，
+      原书 §10.7 在 (10.7.7c) 之后逐字写明 'The charge `Q` modulo 2 is the fermion number `F`
+      that appears in the GSO projection.'（researcher 复核 §5.2(a) 逐字）。
+      ⚠ 该卡 own status = physical-argument（其鬼场部分经 βγ 玻色化），
+      ⇒ **本推导的有效状态由它封顶**，与本推导自身的 physical-argument 同级，不额外降级。
+  - id: worldsheet.rns-ramond-zero-modes-clifford
+    inferred: true
+    note: |
+      供给 summary 第 2 步（**本图补的标准论证**）里的对象：R 扇区有费米零模 ψ^μ_0，
+      它们实现 Clifford 代数 {ψ^μ_0, ψ^ν_0} = η^{μν}，R 基态构成其表示（故有简并）。
+      **标 inferred，两条理由**：
+        (i) 原书在 p.34 那句里**只说** 'cancellation between **the two R sector ground states**'
+            ——它**直接给出「两个」这个数**，既不推导、也不回指 (10.2.17)/(10.2.18) 的 Clifford 构造；
+        (ii) 那张卡讲的是**十维**的 ψ^μ_0（μ = 0…9）与「R 基态是时空旋量」，
+            而这里要的是**一对维数**上的 2 重简并；二者是同一构造的不同截断，
+            但**原书在此处不写这个截断**。
+      ⇒ 本边承担的是 summary 第 2 步（零模配对）的对象供给，而那一步**本身就是本图补的**
+        （原书不写，见 gaps 第一条）。
+  - id: math.jacobi-theta-functions
+    inferred: true
+    note: |
+      供给 summary **第 3 步（另一条路线，本图的读法，不是原书的）**里的对象 ϑ₁₁(0,τ)。
+      **标 inferred，这是 researcher 的硬裁定**（polchinski-1998-v2.md §5.3 要点 2 逐字）：
+        『原书给的理由是「两个 R 扇区基态之间相消」（`cancellation between the two R sector
+          ground states`），**不是** Vol.1 (7.2.42) 的 `ϑ₁₁(0,τ) = 0`。§10.7 全节**没有**把
+          `Z^1_1 = 0` 与 `ϑ₁₁(0,τ) = 0` 联系起来（虽然经 (10.7.7c) 两者等价）。
+          ⇒ 若 curator 想把 `ramond-trace-with-fermion-number-vanishes` 接到
+          `math.jacobi-theta-11-vanishes`，**那条边是 `inferred: true`**，Polchinski Vol.2 没写。』
+      ⚠ 还有第二层：**本图连 (7.2.42) 的节点都还没有**（θ 定义卡的「不断言 (c)」明写排除），
+      故第 3 步连对象都只到「ϑ₁₁ 的定义」为止，恒等式本身是从原书 (7.2.42) 导入的。
+      ⇒ 见 gaps 第二条。
+sources:
+  - ref: polchinski-1998-v2
+    loc: "§10.7, **p. 34, (10.7.14) 下方的无式号句**，逐字：'Note that `Z^1_1` actually vanishes due to cancellation between the two R sector ground states, but we have assigned a formal transformation law for a reason to be explained below.'"
+    note: |
+      **L1 页图逐字**，抽取记录 literature/extractions/polchinski-1998-v2.md **§5.3**
+      （researcher-theta，2026-09-11，Cambridge Books Online ch.10 PDF，PDF 页 = 书页）。
+      ★★★ **本推导 status = physical-argument 的全部依据就在这一句的写法里**：
+      原书**给了理由但不展开**——researcher 的判词逐字：『**原书零证明**：没有给出 R 基态相消的
+      计数（`Tr_R[exp(πiF)]` 对 16 个 R 基态的 `±` 配平），也不引文献 ⇒ 节点 own status
+      封顶 `physical-argument`。』
+      ⚠ **位置无式号**，loc 照 researcher 的要求写死，**不得编式号**。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, **p. 35**，逐字：'… the vacuum is modular-invariant *without* using the vanishing of `Z^1_1` or the abstruse identity (10.7.16) — as we have required.'"
+    note: |
+      L1，抽取记录 polchinski-1998-v2.md **§5.5(a)**。
+      ★ 目标卡 statement 里那条「必须一起带走」的限定的来源；同时它也是 p.34 那句
+      'for a reason to be explained below' 的兑现处。
+      ⚠ 对图的硬约束（researcher 逐字）：『**「环面振幅模不变」这条陈述不得把 `Z^1_1 = 0` 或
+      (10.7.16) 当作依赖**』⇒ 本推导的第一条 depends_on 只借记号。
+  - ref: polchinski-1998-v2
+    loc: "§10.2, eq. **(10.2.17)**（Γ^μ ≅ 2^{1/2}ψ^μ_0）、**(10.2.18)**（R 基态基 |s_0,…,s_4⟩）、**(10.2.24b)**（exp(πiF)|s⟩_R = |s'⟩_R Γ_{s's}）, pp. 8–9"
+    note: |
+      L1（抽取记录 polchinski-1998-v2.md E21/E22）。
+      ⚠⚠ **本条支撑的是 summary 第 2 步，而第 2 步是本图补的论证，不是原书在 p.34 写的**。
+      原书在 p.34 那句里**不引这三式**。⇒ 对应的 depends_on 边标 inferred。
+  - ref: polchinski-1998-v1
+    loc: "§7.2, eq. **(7.2.42)**, p. 215（ϑ₁₁(0,τ) = 0；原书无证明）"
+    note: |
+      L1（抽取记录 polchinski-1998-v1-ch7.md #E15；该节判词逐字「全部无证明」）。
+      ⚠⚠ **本条支撑的是 summary 第 3 步（另一条路线），而原书从不把它与 Z¹₁ = 0 连起来**
+      （researcher §5.3 要点 2）。⇒ 对应的 depends_on 边标 inferred，且本图尚无 (7.2.42) 的节点。
+summary: |
+  **第 1 步（原书实际写下的全部内容）**。§10.7 p.34，(10.7.14) 下方，无式号，逐字：
+  '**Note that `Z^1_1` actually vanishes due to cancellation between the two R sector ground
+  states**, but we have assigned a formal transformation law for a reason to be explained below.'
+  ⇒ **原书给的是一条带理由的断言**（理由 = 两个 R 扇区基态之间相消），**但不展开**：
+  不写这两个基态在 exp(πiF) 下的本征值、不写激发态层面为何逐级相消、不引文献。
+  **目标卡的断言与它引的理由逐字取自这里。**
+
+  **第 2 步（本图补的标准论证；原书不写——这是本推导的主要内容，也是它的主要缺口）**。
+  按「这些迹是对**一对维数**取的」这条归一化（(10.7.8) 之后逐字），R 扇区在一对维数上有
+  两个费米零模 ψ⁰_0、ψ¹_0（worldsheet.rns-ramond-zero-modes-clifford：{ψ^μ_0, ψ^ν_0} = η^{μν}），
+  它们**不改变 H**（零模），而 exp(πiF) 与全部 ψ^μ **反对易**
+  （worldsheet.rns-fermion-number-operator 的定义）。于是 R 基态空间是这两个零模生成的
+  二维 Clifford 模，两个基态被零模互相映射且 exp(πiF) 本征值相反（±1），
+  **在 Tr_R[exp(πiF) q^H] 里逐级成对相消** ⇒ 每个 q^H 本征值上的贡献为零 ⇒ Z¹₁ ≡ 0。
+  ⚠⚠ **上面这段在原书里一个字都没有**。它是「the two R sector ground states 如何相消」的标准
+  补全，本推导把它写出来是为了让缺口**可指认**，不是为了声称原书证过它。⇒ gaps 第一条。
+
+  **第 3 步（另一条路线，同样不是原书的路线；只作记账）**。由 (10.7.7c)
+  Z^α_β(τ) = ϑ[α/2;β/2](0,τ)/η(τ) 取 α = β = 1 得 Z¹₁(τ) = ϑ₁₁(0,τ)/η(τ)，
+  再由 Vol.1 **(7.2.42) ϑ₁₁(0,τ) = 0** 与 η ≠ 0（math.dedekind-eta-nonvanishing，formalized）
+  同样得 Z¹₁ = 0。
+  ⚠⚠ **§10.7 全节不把这两者联系起来**（researcher §5.3 要点 2 的硬裁定），
+  且 **(7.2.42) 在原书同样零证明**，本图也**还没有它的节点**。
+  ⇒ 第 3 步**不承担本推导的任何论证**，只是把「另一条路线存在且原书不走」记在案；
+    对应的两条 depends_on 边（math.jacobi-theta-functions）按裁定标 **inferred**。
+
+  **为什么标 physical-argument（三条）**
+  (1) ★ **原书给理由但不展开**（researcher 的判词逐字：「原书零证明 … ⇒ 节点 own status
+      封顶 `physical-argument`」）；本推导第 2 步的补全是**本图写的**，不是文献的。
+  (2) **上游 worldsheet.rns-fermion-number-operator 自身是 physical-argument**
+      （其鬼场部分的 F 经 βγ 玻色化定义），即使第 2 步被复核，有效状态也停在这一级。
+  (3) **整个对象是自由世界面费米子的单圈迹**，属形式计算。
+  ⇒ 即使日后建出 math.theta-11-vanishes-at-origin（rigorous）并补第二条推导，
+    那条推导对目标卡的边**仍要标 inferred**（原书不走那条路线），(2) 也仍在。
+gaps:
+  - "**「两个 R 基态如何相消」的计数在原书与本图都没有（本推导的主缺口）**：
+     原书 p.34 只说 'cancellation between the two R sector ground states'，
+     **不写**两个基态在 exp(πiF) 下的本征值（±1）、不写激发态层面的逐级配平、不引文献
+     （researcher §5.3 要点 3 逐字：『没有给出 R 基态相消的计数（`Tr_R[exp(πiF)]` 对 16 个
+      R 基态的 `±` 配平），也不引文献』）。
+     summary 第 2 步是**本图补的**标准论证，**未经 reviewer 独立复核**，
+     且它依赖的 worldsheet.rns-ramond-zero-modes-clifford 那条边按上面的理由标 inferred。
+     ⇒ **升级路径**：(i) reviewer 复核第 2 步并留 `reviewer-verified` 记录；
+       (ii) 更彻底的做法是建一张『一对维数上 R 扇区的 exp(πiF) 谱』的卡
+       （二重简并 + 本征值 ±1），把第 2 步变成图内可追溯的对象。"
+  - "**ϑ 路线在本图缺两个环节**：summary 第 3 步要的
+     (7.2.42) ϑ₁₁(0,τ) = 0 **本图无节点**（math.jacobi-theta-functions 的「不断言 (c)」明写排除，
+     其 notes 建议补建 `math.theta-11-vanishes-at-origin`，由 θ 定义卡两行可证、可标 rigorous）；
+     而 (10.7.7c) 的识别挂在 worldsheet.modular-invariance-requires-eight-transverse-fermions 上，
+     本身是自由场迹的形式计算（physical-argument）。
+     ⚠ **即使两者都补齐，这条路线对目标卡的边仍必须标 inferred**——原书不走它
+     （researcher §5.3 要点 2）。"
+  - "**「即便 Z¹₁ = 0 也不得把它扔掉」这条限定不在本推导的论证里，只在目标卡的断言里**：
+     原书 p.34 同句明说仍为 Z¹₁ 保留形式变换律，p.35 兑现理由（插入顶点算子后 α = β = 1
+     的路径积分不再为零）。**本推导不论证这条限定**，只把它随目标卡带走。
+     ⚠ 对图的硬约束由此而来：**worldsheet.modular-invariance-requires-eight-transverse-fermions
+     不得依赖目标卡**（否则与原书要求相反）。"
+  - "**本推导不碰任何下游**：Z_ψ^± = 0、Z_{T₂} = 0、逐拓扑 NS–NS / R–R 相消全部在
+     worldsheet.superstring-total-fermionic-partition-function-vanishes 一带；
+     目标卡只是那条链上的一件输入（另一件是 math.jacobi-abstruse-identity）。"
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立，依据是 researcher-theta 当日新取的
+  §10.7 p.34/p.35 页图（抽取记录 polchinski-1998-v2.md §5.3、§5.5(a)）。
+
+  ★★【本推导更正了图里此前的一处记载】
+  worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+  的 gaps 与 sources 里三处写着「**Z¹₁ = 0 的理由原书在此处也不写**（标准理由是 R 扇区带 (−1)^F
+  的迹上有费米零模，本图无节点）」。
+  **取到 p.34 页图后这句只对了一半**：原书**写了**理由（'cancellation between the two R sector
+  ground states'），只是**不展开**；而且原书给的理由**不是**「(−1)^F 的迹上有费米零模」这个
+  常见说法，更**不是** ϑ₁₁(0,τ) = 0。
+  ⇒ 本批次已在那条推导里把这一处更新（并把边改指目标卡）。
+
+  【researcher 建议的「两条卡互指」已落地】§5.5(c) 逐字：「建议 curator 让两条卡互相 `see_also`」。
+  本图 schema 无 see_also 字段 ⇒ 目标卡 notes 与
+  worldsheet.superstring-total-fermionic-partition-function-vanishes 的断言 (3)（§10.8 脚注 7）
+  以 notes 互指。两处说的是同一个方法论模式：**真空振幅里的相消不够，插入顶点算子后必须逐项成立。**
+author: curator
+created: "2026-09-11"

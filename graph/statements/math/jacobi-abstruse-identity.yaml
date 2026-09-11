@@ -1,0 +1,132 @@
+id: math.jacobi-abstruse-identity
+kind: proposition
+title: "Jacobi 的「abstruse identity」（零宗量四次恒等式）：ϑ₀₀(0,τ)⁴ − ϑ₀₁(0,τ)⁴ − ϑ₁₀(0,τ)⁴ = 0"
+statement: |
+  **设定（是陈述的一部分）**：τ ∈ H = { Im τ > 0 }；ϑ_{ab}(v, τ)（a, b ∈ {0,1}）按
+  math.jacobi-theta-functions 的级数定义，零宗量值写作 ϑ_{ab}(0, τ)。
+
+  **断言（Polchinski Vol.1 (7.2.41) 逐字）**：对一切 τ ∈ H，
+      **ϑ₀₀(0, τ)⁴ − ϑ₀₁(0, τ)⁴ − ϑ₁₀(0, τ)⁴ = 0** ，
+  等价地 **ϑ₀₀(0,τ)⁴ = ϑ₀₁(0,τ)⁴ + ϑ₁₀(0,τ)⁴**。
+  （在 Whittaker–Watson 的记号里这写作 **ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴**，见 notes 的记号字典。）
+
+  **本命题不断言什么**：
+    (a) ⚠⚠ **不断言 Polchinski Vol.2 (10.7.16) 的迹记号形式** Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0。
+        那是同一条恒等式除以 η(τ)⁴ 的结果（由 (10.7.7c) Z^α_β = ϑ[α/2;β/2](0,τ)/η(τ)，
+        并需 η ≠ 0），但 **原书从不写这一步换算**——researcher 的复核逐字裁定：
+        『(10.7.16) 与 Vol.1 (7.2.41) 是同一条恒等式的两种写法，**但不是同一个式子** …
+          **这一步换算原书没写** ⇒ 边要标 `inferred`』
+        （literature/extractions/polchinski-1998-v2.md §5.4 要点 3）。
+        ⇒ 需要迹记号形式的下游必须把边标 inferred，或等待
+          **待建卡 worldsheet.jacobi-abstruse-identity-trace-form**（见 notes）。
+    (b) **不断言一般宗量的版本** ϑ₁⁴(z) + ϑ₃⁴(z) = ϑ₂⁴(z) + ϑ₄⁴(z)。
+        它在 Whittaker–Watson 是 §21.22 的 **Example 4**，即**习题**（'Shew that'），**W–W 不证**
+        （math-sources.md §56.0 表逐字：「是**习题**，**不带证明**」）。
+    (c) **不断言乘积形式的版本**
+        {∏(1−q_W^{2n−1})}⁸ + 16q_W{∏(1+q_W^{2n})}⁸ = {∏(1+q_W^{2n−1})}⁸。
+        它是 W–W §21.3 末的 **Example**（同样是习题，不带证明）；
+        由它到本卡断言的换算是**抽取者做的**，W–W 自己不把两处联系起来
+        （math-sources.md §56.2(c) 逐字注明）。
+    (d) ⚠ **不断言它是「Riemann 四次恒等式的特例」**。Polchinski (7.2.41) 处逐字只有一句
+        'a special case of a quartic identity of Riemann'，**既不写出那条一般恒等式、也不证、也不引文献**
+        （抽取记录 polchinski-1998-v1-ch7.md #E15）。本卡不把这句读成断言。
+    (e) **不断言 θ 函数的任何其它性质**：周期性、模变换、零点、乘积表示（那是
+        math.jacobi-triple-product）全部不在本卡。
+    (f) **不断言任何物理内容**。超弦总费米配分函数为零、Z_{T₂} = 0、逐拓扑 NS–NS / R–R 相消，
+        全部在 worldsheet.superstring-total-fermionic-partition-function-vanishes 一带；
+        本卡只是那条链上的一件纯数学输入。
+uses_conventions: []
+sources:
+  - ref: polchinski-1998-v1
+    loc: "§7.2「Theta functions」, eq. **(7.2.41)**, p. 215（ϑ⁴₀₀(0,τ) − ϑ⁴₀₁(0,τ) − ϑ⁴₁₀(0,τ) = 0；引导语逐字「a special case of a quartic identity of Riemann」）"
+    note: |
+      **L1（原书页图逐字）**，抽取记录 literature/extractions/polchinski-1998-v1-ch7.md **#E15**。
+      ★ **本卡 statement 的式子形态取自这一处**（ϑ 记号、零宗量、三项差为零）。
+      ⚠⚠ **原书对它零证明、零引用**：#E15 的判词逐字「文献自称的严格程度：**全部无证明** …
+      零点唯一性、**Jacobi 恒等式都是断言**」，「文献列出的依赖：**无（数学工具，无外部引用）**」。
+      ⇒ **本卡的严格性不来自 Polchinski**，来自下面的 Whittaker–Watson（唯一的推导）。
+  - ref: polchinski-1998-v2
+    loc: "§10.7, eq. **(10.7.16)**, p. 35（迹记号形式 Z⁰₀(τ)⁴ − Z⁰₁(τ)⁴ − Z¹₀(τ)⁴ = 0；引导语逐字「as a consequence of Z^1_1 = 0 and **the 'abstruse identity' of Jacobi**」）"
+    note: |
+      L1，抽取记录 literature/extractions/polchinski-1998-v2.md **§5.4**（researcher，2026-09-11，
+      Cambridge Books Online 章级 PDF 页图；PDF 页 = 书页）。
+      ⚠⚠ **本条只作定位，不支撑本卡的断言**：本卡「不断言 (a)」已把迹记号形式排除在外。
+      ★ 它是「abstruse identity」这个**名字**在本项目里的出处（Polchinski 用引号引它），
+      也是本卡在物理侧的唯一用处的入口。
+      ⚠ 本卷对 (10.7.16) 同样**零证明、零引文**（§5.4 要点 2 逐字：「只有引号里的名字
+      "the 'abstruse identity' of Jacobi"」）。
+  - ref: whittaker-watson-1920
+    loc: "§21.2, Corollary（在 §21.2 末四条平方关系之后、§21.21 之前）"
+    note: |
+      **L1（archive.org 公有领域页图逐字，1920 年第三版）**，抽取记录
+      literature/extractions/math-sources.md **§56.2(a)**（researcher，2026-09-11）。
+      ★★★ **这是本卡唯一的严格来源，且 W–W 给了完整证明**。逐字：
+      「***Corollary.*** Writing `z = 0` in the last relation, we have **`ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴`**,
+        that is to say
+        `16q(1 + q^{1·2} + q^{2·3} + q^{3·4} + …)⁴ + (1 − 2q + 2q⁴ − 2q⁹ + …)⁴
+          = (1 + 2q + 2q⁴ + 2q⁹ + …)⁴`.」
+      ⚠ **W–W 全书没有编号定理**（researcher 逐页确认）；这一条的标签就是 `Corollary`
+      ⇒ **不得写成「Whittaker–Watson Theorem 21.2」**。
+      ⚠ **不得引 1927 第四版的页码**：本项目核实的是 1920 第三版，第四版节号是否相同为 **L0**
+      （Q56.1；1946 重印件是借阅制 item，端点 HTTP 403）。⇒ 本条 loc **只写节号**。
+      ⚠ **记号字典必带**（见 notes）：W–W 的 ϑ₂, ϑ₃, ϑ₄ = 本卡的 ϑ₁₀, ϑ₀₀, ϑ₀₁
+      （对照式是 Polchinski (7.2.37a–d)，L1 逐字）；W–W 省略宗量即表示零宗量（W–W 书 p.464 逐字）。
+tags: [math, theta-functions, jacobi, abstruse-identity, modular-forms, superstring, gso]
+notes: |
+  由 curator 于 2026-09-11（批次 theta-cards）建立，与 math.jacobi-theta-functions、
+  math.jacobi-triple-product 同批。
+
+  ★★★【本卡为什么存在】worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+  的 gaps 第一条逐字点名要它：
+    「**本推导真正用到的两条事实在本图都没有节点（主缺口）**：· **(10.7.16)** Jacobi 的
+      'abstruse identity' … · **Z¹₁ = 0** … ⇒ **待建（两条都是纯数学/自由场论，可做成较硬的卡）**：
+      · **math.jacobi-abstruse-identity**（ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0，θ 函数的经典恒等式；
+        注意本图连 θ 函数卡都还没有 …）；
+      · **worldsheet.ramond-trace-with-fermion-number-vanishes**（Z¹₁ = 0）。」
+  **本卡是其中第一条**（第二条同批建立）。
+
+  ★★【记号字典（引 W–W 时必须带；同时也是「同一条恒等式的三种写法」的对照）】
+  | | Whittaker–Watson (1920, 3rd ed.) | Polchinski v1 §7.2 / 本图 | Polchinski v2 §10.7 |
+  |---|---|---|---|
+  | 四个 θ | ϑ₁, ϑ₂, ϑ₃, ϑ₄ | ϑ₁₁ = −ϑ₁、ϑ₁₀ = ϑ₂、ϑ₀₀ = ϑ₃、ϑ₀₁ = ϑ₄（(7.2.37a–d) 逐字） | Z^α_β = ϑ[α/2;β/2](0,τ)/η(τ)（(10.7.7c)） |
+  | 本恒等式 | **ϑ₂⁴ + ϑ₄⁴ = ϑ₃⁴**（§21.2 Corollary） | **ϑ₀₀⁴ − ϑ₀₁⁴ − ϑ₁₀⁴ = 0**（(7.2.41)）= 本卡 | Z⁰₀⁴ − Z⁰₁⁴ − Z¹₀⁴ = 0（(10.7.16)） |
+  | 展开参数 | q_W = exp(πiτ) | q = exp(2πiτ) = q_W² | 同 Polchinski v1 |
+  ⚠ **q 差一次方这件事在本卡里不咬人**：本卡是**零宗量**恒等式，等式两端用同一个 τ，
+  且 math.jacobi-theta-functions 的级数写成 exp(πin²τ) 而不是 q 的幂，故无歧义。
+  （researcher 的警告 math-sources.md §56.2(e) 逐字：「**q 的定义差一次方这件事，在零宗量恒等式里
+   不影响等式成立**（两边同一个 q），但**在抄乘积公式时会咬人**」——后半句针对的是
+   math.jacobi-triple-product，不是本卡。）
+  ⚠ **第三列（迹记号）不在本卡断言里**，见「不断言 (a)」。
+
+  【为什么只建了一条推导（与姊妹卡 math.jacobi-triple-product 的不对称，这里说明理由）】
+  三重乘积那张卡有两条推导（--via-polchinski-assertion 与 --via-whittaker-watson），
+  原因是它**建卡在先、W–W 登记在后**，旧推导按 lead 2026-09-11 的裁决保留作历史记录。
+  本卡建卡时 whittaker-watson-1920 **已在 sources.bib 里**，故直接建 rigorous 的那一条；
+  「Polchinski 两卷都零证明」这一事实**记在本卡 sources 的前两条 note 里**，信息没有丢失，
+  再单建一条必被支配的 physical-argument 推导只会增加噪声。
+  ⇒ 若 reviewer 认为为对称起见也应补一条 --via-polchinski-assertion，那是一次低成本的补录。
+
+  ★【待建的相邻卡（本卡「不断言 (a)」的正解，交 lead 排期）】
+  **worldsheet.jacobi-abstruse-identity-trace-form**（(10.7.16) 的 Z 记号形式）。
+  它的推导应当依赖：本卡 + math.dedekind-eta-nonvanishing（η ≠ 0，formalized）
+  + (10.7.7c) 的识别（现在挂在
+  worldsheet.modular-invariance-requires-eight-transverse-fermions 的 statement 里），
+  论证是「两端同除 η⁴」。⚠ 该推导**不会是 rigorous**：(10.7.7c) 本身是自由场迹的形式计算
+  （那张卡是 physical-argument）。
+  **在它建成之前**，一切用到 (10.7.16) 的推导对本卡的边必须标 **inferred: true**
+  （researcher §5.4 要点 3 的硬裁定）。
+
+  【本卡在图上的下游（建卡时已知）】
+  worldsheet.superstring-total-fermionic-partition-function-vanishes--via-spacetime-supersymmetry-jacobi
+  ——本批次已为它加上指向本卡的边（按上面那条硬裁定标 inferred，并在 note 里写明换算缺口）。
+
+  【一手出处指引】W–W §21.3 末 Example 的页脚逐字：
+  「Jacobi describes this result (*Fund. Nova*, p. 90) as 'aequatio identica satis abstrusa.'」
+  ——**这是 "abstruse identity" 这个名字的一手出处指引**（Jacobi, *Fundamenta Nova*, 1829, p. 90）。
+  math-sources.md **Q56.4** 把「取 Fundamenta Nova p.90 页图」列为未办项，并注明取件成本很低。
+
+  【形式化情报】math-sources.md **Q56.2** 逐字：「**Mathlib 的 JacobiTheta 里有没有
+  ϑ₃⁴ = ϑ₂⁴ + ϑ₄⁴ 或三重乘积？本轮未查。**这直接决定 (B) 能不能写 formalized。」
+  ⇒ 本卡**不得**标 formalized，直到 formalizer 读过源码并在 formal/ 下建出桥层。
+author: curator
+created: "2026-09-11"
