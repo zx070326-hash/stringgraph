@@ -1,0 +1,51 @@
+id: math.even-unimodular-rank-divisible-by-8
+kind: proposition
+title: 正定偶幺模二次型（等价地：偶自对偶欧氏格）的秩必被 8 整除
+statement: |
+  **(二次型表述，与来源逐字对应)** 设 `Q : Z^m → Z` 是 m 元**正定偶幺模**二次型
+  （positive definite even unimodular quadratic form）。则 **m 被 8 整除**。
+
+  **(格论表述)** 设 `L ⊂ R^m` 是秩 m 的格，内积取 R^m 的欧氏正定内积，满足
+    (i) **偶**：`x·x ∈ 2Z` 对一切 `x ∈ L`；
+    (ii) **幺模**：Gram 行列式为 1（等价地 covolume = 1，等价地 `L = L*`，`L*` 为对偶格）。
+  则 `m ≡ 0 (mod 8)`。
+
+  **本命题不断言的内容**：
+    (1) **不**断言 16 维（或任何维数）的**分类**。「16 维恰有两个」是一条独立定理，
+        见 math.even-unimodular-rank-16-classification。⚠ 本卡**不蕴涵**那一条，
+        那一条也**不是**本卡的 n = 16 特例。
+    (2) 不断言 `m ≡ 0 (mod 8)` 时这样的格**存在**（存在性由 `E_8` 的 k 重直和给出，本卡不涉及）。
+    (3) 不断言不定号差（洛伦兹）情形的任何结论；本卡前提含**正定**。
+    (4) 不断言 Zagier Proposition 12 的第 (ii) 条（表示数的渐近公式 `R_Q(n)`），那是同一命题的另一半，
+        本图不需要，故不入卡（一节点一命题）。
+sources:
+  - ref: zagier-2008
+    loc: "§3.2 «Invariants of Even Unimodular Lattices», Proposition 12(i), p. 33（证明跨 pp. 33–34）"
+    note: |
+      L1（页图逐字；抽取记录 literature/extractions/math-sources.md §47.2）。原文逐字：
+      «Proposition 12. Let Q : Z^m → Z be a positive definite even unimodular quadratic form
+      in m variables. Then (i) the rank m is divisible by 8, and (ii) …»
+      获取路线：作者 MPIM 主页上的出版社排版 PDF（PDF 页码 = 书页码）。
+tags: [lattice, number-theory, modular-forms, quadratic-forms, heterotic]
+notes: |
+  【术语桥：even unimodular（数学）= even self-dual（物理）】
+  数学文献写 "even unimodular" / «réseau unimodulaire pair»，物理文献（Polchinski §11.6，(11.6.4b) 写 `Γ = Γ*`）
+  写 "even self-dual"。**对正定整格两者是同一件事**（`L = L*` ⟺ `det = 1` ⟺ unimodular）。
+  ⚠ 这条等同是抽取者做的术语比对（math-sources.md §47.0、§47.5），**不是 Zagier 原文的句子**；
+  依赖本卡的推导若要用物理侧措辞，应在该边上标 `inferred: true`。
+
+  【作者自陈：存在纯代数证明】Zagier 在 p. 34 逐字写：
+  «The first statement of Proposition 12 is purely algebraic, and purely algebraic proofs are known,
+  but they are not as simple or as elegant as the modular proof just given.
+  No non-modular proof of the asymptotic formula (38) is known.»
+  ⇒ 本卡**不必**把整套模形式机器拖进依赖图；本图现有的 `--via-zagier` 推导记录的是书上那条模形式证明，
+  但「存在纯代数证明」这一事实由作者背书，故本卡不因缺少模形式节点而降级。
+  （纯代数路线的标准出处是 Serre *A Course in Arithmetic* Ch. V 或 Milnor–Husemöller Ch. II，
+  ⛔ 但两书正文本项目**未取到**，**定理号一律不得写入图**，见 math-sources.md §47.4(a)(b) 与 §47.6(d)。）
+
+  【本卡不覆盖的第三条命题】杂化弦「规范群恰有两个」还要一条**物理桥**：
+  「一致的 16 维内部 CFT（局域 OPE + 模不变）⟺ 偶自对偶欧氏格」。
+  那条仍是 `physical-argument`（Polchinski §11.6，推给 v1 §8.4），**不在本卡内**，
+  也**不会**因本卡是 rigorous 而变严格。
+author: curator
+created: "2026-09-11"
