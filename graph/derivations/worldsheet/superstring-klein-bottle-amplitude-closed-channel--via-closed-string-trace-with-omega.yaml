@@ -77,12 +77,18 @@ depends_on:
       ⇒ 本边此后**只**承担 NS–NS 迹的整体正号这一条。
       ⚠ 本边不影响断言 (1)(2)(3) 的公式形式与 (4) 的前两行。
       ⇒ 正解不变：建一张「无质量闭弦谱含引力子」的窄卡后，本边改指它。
-  - id: spectrum.long-cylinder-lightest-state-count
+  - id: spectrum.type-i-long-cylinder-constant-term
     note: |
       供给 **(10.8.11) 第三行方括号里的 [16 + O(exp(−2s))]**——即
       η(is/π)^{−8}[Z⁰₀(is/π)⁴ − Z⁰₁(is/π)⁴] 在 s → ∞ 下的展开常数项等于 **16**。
       **非 inferred**：**16 是 (10.8.11) 第三行逐字印出的数**，不是本图补的识别；
-      且该方括号里的函数与圆柱 (10.8.4) **逐字相同**，那张卡的断言 (2) 一次覆盖两面。
+      且该方括号里的函数与圆柱 (10.8.4) **逐字相同**，那张卡的断言 **(1)** 一次覆盖两面。
+      ★★【2026-09-11 再次改指，batch28-supersede】下面那段写的是 2026-09-11 第一次拆出并改指
+      （到 spectrum.long-cylinder-lightest-state-count）；**那张卡随后被 reviewer-batch28 判为
+      「一卡两命题（玻色 24 与超弦 16）+ id 名不副实」并换代为
+      spectrum.type-i-long-cylinder-constant-term**，本边随之改指新卡。
+      **本边供给的内容一字未变**；新卡**断言 (1)** = 旧卡**断言 (2)**（圆柱与 Klein 瓶同一式），
+      「不断言」的字母 (a)–(f) 未改。下面保留的旧文字按历史记录读。
       ★★【2026-09-11 拆出并改指，small-backlog-13】此前这一条与上面那条正号一起挂在
       worldsheet.type-ii-massless-spectrum 上并整条标 inferred；本推导 gaps 与旧边 note
       各写过一句同样的正解，逐字：

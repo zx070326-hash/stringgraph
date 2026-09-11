@@ -117,11 +117,19 @@ depends_on:
       this becomes' 那句是**圆柱**处的，#E66）。⇒「Möbius 用的就是这两条模变换」是本图补的识别。
       ⚠ **换算**：那张卡的形式是 η(−1/τ) = (−iτ)^{1/2}η(τ)（主分支）；本处取 τ = 2it
       并配合 s = π/4t，本图**未逐步展开**这条链。⇒ 见 gaps 第二条。
-  - id: spectrum.long-cylinder-lightest-state-count
+  - id: spectrum.type-i-long-cylinder-constant-term
     note: |
       供给 **(10.8.18) 第三行方括号里的 [16 + O(exp(−2s))]**——即
       [Z⁰₁(2is/π)⁴Z¹₀(2is/π)⁴] / [η(2is/π)⁸Z⁰₀(2is/π)⁴] 在 s → ∞ 下的展开常数项等于 **16**。
       **非 inferred**：**16 是 (10.8.18) 第三行逐字印出的数**，不是本图补的识别。
+      ★★【2026-09-11 改指，batch28-supersede】下面那段写的是 2026-09-11 本边**新增**时的情形
+      （当时指 spectrum.long-cylinder-lightest-state-count）；**那张卡随后被 reviewer-batch28 判为
+      「一卡两命题（玻色 24 与超弦 16）+ id 名不副实」并换代为
+      spectrum.type-i-long-cylinder-constant-term**，本边随之改指新卡。
+      **本边供给的内容一字未变**；新卡**断言 (2)** = 旧卡**断言 (3)**（Möbius 这一支），
+      新卡**断言 (1)** = 旧卡**断言 (2)**（圆柱与 Klein 瓶），「不断言」的字母 (a)–(f) 未改；
+      新卡的推导现名 **spectrum.type-i-long-cylinder-constant-term--via-q-expansion**，
+      其**第 2 步**（换代前编号为第 3 步）就是本推导 gaps 要求的那次 Möbius 复算。
       ★★【2026-09-11 新增，small-backlog-13】本推导此前**没有**这条边：gaps 第七条逐字写着
       「本推导**不**为此加 worldsheet.type-ii-massless-spectrum 的 inferred 边（另外两张卡各有一条）
       … ⇒ 正解仍是为『长柱极限里最轻态的计数』单建一卡，届时三张卡一起改指它。」
