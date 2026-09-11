@@ -1,0 +1,64 @@
+id: worldsheet.ddf-spans-physical-states-level-one-modulo-null--via-lean
+target: worldsheet.ddf-spans-physical-states-level-one-modulo-null
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-spans-physical-states-level-one
+    inferred: false
+    note: |
+      **模伪态形，本推导的全部实质内容**：Lean `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`
+      （那张卡的 formal.lean_decl），给 H_phys ∩ T_{−1,1} ≤ ddfSpan ⊔ span{L_{−1}|0;k−k_0⟩}。
+      本推导只是把右端的伪态换成零态；(T′) 与 (C) 两条前件从这里逐字继承。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      **伪态 → 零态**（TowerNull.lean）：`towerSpurious_inf_towerPhys_le_towerNull`（该卡 (2)：
+      伪态 ∩ 物理态 ⊆ 零态）与 `towerLop_neg_mem_towerSpuriousSubmodule`
+      （L_{−n}Ψ ∈ H_spur，n ≥ 1；用于把 span{L_{−1}|0;k−k_0⟩} 放进 H_spur）。
+      这是 `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 的两个输入之一。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **DDF 态是物理态**：`ddfSpan_le_towerPhysSubmodule`（对该卡的 `ddfOp_mem_towerPhysSubmodule` 归纳）。
+      `mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 用它得出 d 物理，从而
+      s = x − d 物理，再与「伪态 ∩ 物理态 ⊆ 零态」合成。**(N)(S) 由这里进入本推导**。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      载体：塔 `TowerFock D R`、层分次 `towerRungSubmodule`（双分次 `towerBigrade` 的第一个指标）、
+      逐层 `towerLop`。本推导对它只做子模代数（`Submodule.mem_sup`、`sub_mem`）。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.ddfSpans_bigrade_neg_one_one（目标声明，§LevelOne）；StringFormal.NoGhost.mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious（§SpuriousToNull）；调用 LightCone.lean :: towerPhys_bigrade_one_le_ddfSpan_sup_spurious / ddfSpan_le_towerPhysSubmodule，TowerNull.lean :: towerSpurious_inf_towerPhys_le_towerNull / towerLop_neg_mem_towerSpuriousSubmodule"
+    note: |
+      本仓库，formalizer 分支 agent/formalizer/noghost-c5（lead 以 34b67ef 合入 main），
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build` 与 `check-axioms`**；
+      本分支只改 graph/。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.4)"
+    note: 不承载论证（无证明）；文献侧同形式。
+summary: |
+  机器检查的证明，Assembly.lean §SpuriousToNull + §LevelOne。两步：
+
+  **第 1 步（伪态 → 零态的通用引理，`mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious`）。**
+  设 x 物理，x = d + s，d ∈ ddfSpan，s ∈ S ⊆ H_spur。d 物理（`ddfSpan_le_towerPhysSubmodule`，需 (N)(S)），
+  故 s = (d + s) − d 物理；伪态 ∩ 物理态 ⊆ 零态（`towerSpurious_inf_towerPhys_le_towerNull`）
+  给 s ∈ H_null。于是 x ∈ ddfSpan ⊔ H_null。只用到 ddfSpan ≤ H_phys 与 spurious ⊓ phys ≤ null。
+
+  **第 2 步（套到 N = 1，`ddfSpans_bigrade_neg_one_one`）。**
+  设 x ∈ H_phys ⊓ T_{−1,1}。`towerPhys_bigrade_one_le_ddfSpan_sup_spurious`（需 (T′)(C)）给
+  x ∈ ddfSpan ⊔ span{L_{−1}|0;k−k_0⟩}；`towerLop_neg_mem_towerSpuriousSubmodule` 给
+  span{L_{−1}|0;k−k_0⟩} ≤ H_spur；第 1 步收尾。∎
+
+  **四条依赖全部 formalized**，故目标卡 effective = formalized。
+gaps:
+  - "**只是一片**：`DDFSpansOn … (towerBigrade D R (-1) 1)`，不是 `DDFSpans`。「逐片 ⇒ 全体」的拼装引理（物理子模由双分次分量生成）本图与 Lean 侧都没有，见 worldsheet.ddf-spanning-hypothesis 的 notes【分片版与拼装缺口】。"
+  - "**(T′)(C) 继承自 N = 1 卡，(N)(S) 由 DDF-态-物理那一步新加**：三条都不在 `DDFSpans` 的卡面上。"
+  - "**N = 2 未做**：见 worldsheet.ddf-spans-physical-states-level-one--via-lean 的 gaps 第 1 条；总线上 LevelTwoSpan.lean 进行中。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据是 noghost-c5 由 lead 合入 main。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  curator，2026-09-11，noghost-conditional。
+author: curator
+created: "2026-09-11"

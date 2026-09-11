@@ -1,0 +1,87 @@
+id: worldsheet.ddf-spans-physical-states-level-one-modulo-null
+kind: proposition
+title: DDF 张成假设在 (rung −1, 振子能级 1) 一片上成立（模零态形）：H_phys(a₀) ∩ T_{−1,1} ⊆ D(Ε) + H_null，对一切 D——worldsheet.ddf-spanning-hypothesis 唯一已证的片
+statement: |
+  【设定】记号逐字沿用 worldsheet.ddf-spans-physical-states-level-one（它又沿用
+  worldsheet.ddf-operators-v6、worldsheet.momentum-tower-fock-space、
+  worldsheet.old-covariant-physical-states、worldsheet.transverse-frame-spans-orthogonal-complement）
+  与 worldsheet.tower-physical-quotient-form：
+  D ∈ N；系数环 R 是交换 Q-代数；η_μ² = 1（conv.metric-mostly-plus）；
+  基点动量 p 与参考向量 k_0，重标度 a := (2α')^{1/2} p、b := (2α')^{1/2} k_0
+  （conv.alpha-prime-regge），满足
+    (N) η(b, b) = 0；   (S) η(b, a) = 1；
+  动量塔 T(p; k_0)，第 j 层动量 p_j := a + j·b；双分次片 T_{j,N}（第 j 层、振子能级 N）；
+  截距逐字取基态值 a₀ := α'p² = ½η(a,a)（conv.intercept-sign-a）；
+  H_phys(a₀)、H_null(a₀) := H_phys(a₀) ∩ H_phys(a₀)^⊥、D(Ε) 同 worldsheet.ddf-spanning-hypothesis。
+
+  【断言】设横向标架 Ε = (ε_1..ε_{D−2}) 满足
+    (T)  η(ε_i, b) = 0；  (O)  η(ε_i, ε_j) = δ_{ij}；
+    (T′) η(ε_i, a) = 0（偏振与基点动量正交）；
+    (C)  Ε 在 v^⊥ 上完备，v := p_{−1} = a − b（worldsheet.transverse-frame-spans-orthogonal-complement 的谓词）。
+  则
+      **H_phys(a₀) ∩ T_{−1,1}  ⊆  D(Ε) + H_null(a₀)** 。
+
+  用 worldsheet.ddf-spanning-hypothesis 的分片记号：这就是 DDFSpansOn(T_{−1,1})，
+  即 DDF 张成假设限制在 (rung −1, 振子能级 1) 这一片上成立。
+
+  【与 worldsheet.ddf-spans-physical-states-level-one 的关系（为什么是另一张卡）】
+  那张卡的结论是 ⊆ D(Ε) + R·L_{−1}|0; k − k_0⟩（**模伪态**）；本卡的结论是 ⊆ D(Ε) + H_null（**模零态**）。
+  伪态 L_{−1}|0;k−k_0⟩ 一般**不是**零态（那张卡【不断言】(c)），但「物理态 = DDF + 伪态」
+  ⇒「物理态 = DDF + 零态」：伪态部分 = 物理态 − DDF 态是物理态，而「伪态 ∩ 物理态 ⊆ 零态」
+  （worldsheet.tower-physical-quotient-form (2)）。故**本卡是那张卡的推论，严格更弱**
+  （它不再说出那个零态是谁），不是它的第二条推导；按「一个节点一个命题」分立。
+  本卡存在的理由：它的形状与 worldsheet.ddf-spanning-hypothesis 逐字一致（只多了 ∩ T_{−1,1}），
+  是那条 open 假设**唯一**已被机检的片。
+
+  【本卡不需要的假设】**不需要 D = 26**，不需要 a₀ = 1，不需要 R 上的序或正定性。
+  N = 1 处计数 (D−1) = (D−2) + 1 对一切 D 平衡（那张卡 notes 的【D = 26 为什么在 N = 1 不进入】）。
+
+  【本卡明确不断言】
+  (a) 不断言 N ≥ 2 的任何片，不断言全体 H_phys（那是 worldsheet.ddf-spanning-hypothesis）；
+      也不断言「逐片 ⇒ 全体」——本图与 Lean 侧都没有那条拼装引理（见那张卡 notes）。
+  (b) 不断言反包含，不断言 D(Ε) ∩ H_null = 0，不断言正定性。
+  (c) (T′) 与 (C) 是真前件，不可去（那张卡 notes 的两个反例）。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfSpans_bigrade_neg_one_one
+  lean_file: StringFormal/NoGhost/Assembly.lean
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Assembly.lean :: StringFormal.NoGhost.ddfSpans_bigrade_neg_one_one（本卡 formal.lean_decl，§LevelOne）；分片谓词 StringFormal.NoGhost.DDFSpansOn；伪态→零态 StringFormal.NoGhost.mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious（§SpuriousToNull）"
+    note: |
+      本仓库，formalizer 分支 agent/formalizer/noghost-c5（lead 以 34b67ef 合入 main），
+      Lean 4 + Mathlib v4.33.1，**无 sorry**。**curator 未自行重跑 `lake build`**；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本卡 status formalized 的依据。
+      **逐句字典**：断言 ⇒ `DDFSpansOn η a b hη Ε (towerBigrade D R (-1) 1)`，展开为
+        `towerPhysSubmodule η a b (invTwo R * Fock.zeroModeSq η a) ⊓ towerBigrade D R (-1) 1`
+          `≤ ddfSpan η a b hη Ε ⊔ towerNullSubmodule η a b (invTwo R * Fock.zeroModeSq η a)`；
+      (N)(S) ⇒ `hbb`、`hba`（本卡**需要**它们，`mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious` 用
+      `ddfSpan_le_towerPhysSubmodule`，后者需要 (N)(S)——这与 worldsheet.ddf-spans-physical-states-level-one
+      「不需要 (N)(S)」**不同**，见 notes）；
+      (T′) ⇒ `hεa : ∀ i, dotVec η (Ε.vec i) a = 0`；(C) ⇒ `hframe : FrameSpansOrthogonal η Ε (towerMomentum a b (-1))`。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.4)（arXiv:0802.3249v1）：'|ψ⟩ = |f⟩ + |n⟩'，|n⟩ 为零模态"
+    note: |
+      **不承载本卡的论证**（无证明，转引 GT 1972，正文未获取）。本卡与 (6.4) 的形式**逐字相同**
+      （|n⟩ 是零态，不再是伪态），差别只剩两处：(i) 文献在 D = 26 上断言，本卡对一切 D；
+      (ii) 文献对一切能级，本卡只做 (rung −1, level 1)。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, formalized]
+notes: |
+  【为什么立卡（curator 2026-09-11，noghost-conditional）】
+  任务原拟给 worldsheet.ddf-spans-physical-states-level-one 加第二条推导 `--via-lean-modulo-null`
+  （Lean `ddfSpans_bigrade_neg_one_one`）。对照后发现该 Lean 定理证的是**模零态**形，而那张卡的
+  statement 是**模伪态**形；伪态形 ⇒ 零态形（`mem_ddfSpan_sup_null_of_mem_ddfSpan_sup_spurious`），
+  反向不成立。给一张卡挂一条只证明其**推论**的推导会把 status 记错，故改立本卡。
+
+  【继承的两条额外前件（任务要求记录）】
+  (T′) η(ε_i, a) = 0 与 (C) `FrameSpansOrthogonal` 逐字从 `towerPhys_bigrade_one_le_ddfSpan_sup_spurious`
+  继承（Assembly.lean 的 docstring：'The two extra hypotheses are inherited verbatim from §B.6 and are
+  both genuine'）。两条在显式光锥见证上都成立（`witness_towerPhys_bigrade_one_le_ddfSpan_sup_spurious`
+  兑现），一般标架下不可去。
+  ⚠ 与那张卡不同的第三条：**本卡需要 (N)(S)**（`hbb`、`hba`）。它们不是被 N = 1 的计数用掉的，
+  而是被「伪态 → 零态」那一步用掉的（要证 DDF 态是物理态，`ddfSpan_le_towerPhysSubmodule` 需要 (N)(S)）。
+  这三条前件在 worldsheet.ddf-spanning-hypothesis 的卡面上都不出现（`DDFSpans` 只带 Ε 的 (T)(O)），
+  所以本卡即使推广到一切片，也**不会逐字给出**那张卡——除非先证明 (T′)(C) 可由 (T)(O)(N)(S) 在
+  实数上取到（光锥标架的存在性），那是另一张卡的事。
+author: curator
+created: "2026-09-11"
