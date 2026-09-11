@@ -18,7 +18,7 @@ depends_on:
     note: 供给无取向闭弦理论 (10.6.18)（type I 的闭弦部门）及其「单独不一致」的预告。
   - id: worldsheet.type-i-open-string-gauge-multiplet
     note: 供给开弦部门的两种可能（I / Ĩ）与 Chan–Paton 规范群。
-  - id: worldsheet.type-i-tadpole-cancellation-so32
+  - id: worldsheet.type-i-tadpole-cancellation-so32-v2
     note: |
       供给 (P4)：R–R 与 NS–NS tadpole 各自为零 ⟹ SO(32)。
       这是本推导中「除 SO(32) 外都不一致」的**唯一**在图支撑，
