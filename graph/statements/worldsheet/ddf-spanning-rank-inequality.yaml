@@ -322,5 +322,30 @@ notes: |
   ⚠ **本条不改变本卡的 effective 状态**：本卡依旧无推导，`∀N, B26 N` 仍是
   完全开放的猜想；上面的三分只是把"开放内容"这件事的**形状**描述得更精确，
   不构成对任何一段的证明。
+
+  【2026-09-12（四）：PR6′ 落地——`dim Z_{N+1} ≥ p_{D−1}(N)`（D-无关）现有 Lean 定理，
+  但只是上面(ii)所推荐路线的产出，本卡仍不关闭（curator，分支 agent/curator/pr6-wire）】
+  formal/StringFormal/NoGhost/TypeOneFamily.lean（无 sorry）把上面【2026-09-12（三）】(ii)
+  裁决推荐的路线（"仅用 L_{-1} 单射性，D-无关"）落地为机器验证的定理
+  `le_finrank_towerNull_inf_towerBigrade_succ`：对一切 N，
+  `dim(H_null ⊓ towerBigrade(−(N+1),N+1)) ≥ p_{D−1}(N)`（截距 a₀=1，D 不出现）。
+  图上承载见新卡 **worldsheet.null-states-lower-bound-type-one**（formalized，配套推导
+  `--via-lean`），其证明依赖新卡 **worldsheet.quasi-physical-slice-dimension**
+  （准物理子空间 Q_{j,M} 的维数下界 ≥ p_{D−1}(M)，同样 formalized）。
+  **与本卡目标的精确缺口，逐 N 核对**：
+    · **N = 1**（对应本卡 N=1 处 dim Z_1 ≥ p_{D−1}(1)−p_{D−2}(1) = 1）：
+      PR6′ 给 dim Z_1 ≥ p_{D−1}(0) = 1，缺口为 0——与上面(iii)"N≤4 精确相等"一致；
+    · **N = 2**（本卡目标 dim Z_2 ≥ p_{D−1}(2)−p_{D−2}(2) = D，见
+      math.level-two-partition-difference）：PR6′ 给 dim Z_2 ≥ p_{D−1}(1) = D−1，
+      缺口为 1，恰是 Type-2 态 𝒟₂|0;p_{−2}⟩ 那一个零态（与
+      worldsheet.level-two-null-state-requires-d26、
+      worldsheet.ddf-spans-physical-states-level-two 的 D 个零态账目逐字吻合：
+      D−1 个 Type-1 + 1 个 Type-2 = D）。
+  ⇒ PR6′ 给出的是**D≠26 时的真实答案**（Type-1 单族的最大值），不覆盖 Type-2 族，
+  也不断言两族像的重叠（N≥5 起的重叠问题，即上面(iii)段的开放内容，不受本次工作影响）。
+  **本条不改变本卡的 effective 状态**：本卡依旧无推导，`∀N, B26 N` 仍是零证据的开放猜想；
+  PR6′ 只是把"零态维数下界"这一条开放内容里**已知不含 D=26 信息的那一部分**（Type-1 单族
+  的贡献）做成了 Lean 定理，没有触及 D=26 本身进入的那个缺口（Type-2 族及其与 Type-1 族的
+  重叠），故不构成对本卡任何一段的关闭。
 author: curator
 created: "2026-09-12"
