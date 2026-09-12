@@ -1035,4 +1035,110 @@ theorem levelFour_count_identity (hD : 2 ≤ D) :
 
 end ConjFreeFour
 
+/-! ### The null lower bound and `B26 4` -/
+
+section NullBoundFour
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- `p_{-4} · p_{-4} = -6`: the level-four shell (`h = 1 - N = -3`). -/
+lemma dotVec_momentum_neg_four_self (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    dotVec η (towerMomentum a b (-4)) (towerMomentum a b (-4)) = -6 := by
+  rw [← zeroModeSq_eq_dotVec, zeroModeSq_towerMomentum, zeroModeSq_eq_dotVec,
+    F.dotVec_self_eq_two hD, F.hba, F.frame.isotropic]
+  push_cast
+  ring
+
+variable (η a b) in
+/-- The combined Type-1 ⊕ Type-2 map `(φ, ψ) ↦ L_{-1}φ + 𝒟₂ψ` on the level-four slice. -/
+noncomputable def typeTwoAugFour :
+    (↥(towerSeed η a b (-4) 3) × ↥(towerSeed η a b (-4) 2)) →ₗ[K] TowerFock D K :=
+  (towerLop η a b (-1)).comp
+      ((towerSeed η a b (-4) 3).subtype.comp (LinearMap.fst K _ _))
+    + (descTwo η a b).comp
+        ((towerSeed η a b (-4) 2).subtype.comp (LinearMap.snd K _ _))
+
+lemma typeTwoAugFour_apply (x : ↥(towerSeed η a b (-4) 3) × ↥(towerSeed η a b (-4) 2)) :
+    typeTwoAugFour η a b x = towerLop η a b (-1) (x.1 : TowerFock D K)
+      + descTwo η a b (x.2 : TowerFock D K) := by
+  simp only [typeTwoAugFour, LinearMap.add_apply, LinearMap.coe_comp, Function.comp_apply,
+    LinearMap.fst_apply, LinearMap.snd_apply, Submodule.subtype_apply]
+
+/-- The combined map is injective — this is `eq_zero_of_towerLop_neg_one_add_descTwo_at_four`
+packaged. -/
+theorem typeTwoAugFour_injective (hD : 3 ≤ D) (F : DDFLightConeFrame η a b) :
+    Function.Injective (typeTwoAugFour η a b (K := K)) := by
+  have hpp : dotVec η (towerMomentum a b (-4)) (towerMomentum a b (-4)) = -6 :=
+    dotVec_momentum_neg_four_self (by omega) F
+  have hDpos : 0 < D - 2 := by omega
+  let i : Fin (D - 2) := ⟨0, hDpos⟩
+  have hu : dotVec η (F.trans.vec i) (towerMomentum a b (-4)) = 0 :=
+    F.dotVec_trans_towerMomentum i (-4)
+  have huu : dotVec η (F.trans.vec i) (F.trans.vec i) = 1 := by
+    rw [F.trans.orthonormal i i, if_pos rfl]
+  have hker : ∀ x : ↥(towerSeed η a b (-4) 3) × ↥(towerSeed η a b (-4) 2),
+      typeTwoAugFour η a b (K := K) x = 0 → x = 0 := by
+    rintro ⟨⟨φ, hφ⟩, ⟨ψ, hψ⟩⟩ hx
+    rw [typeTwoAugFour_apply] at hx
+    obtain ⟨hψ0, hφ0⟩ := eq_zero_of_towerLop_neg_one_add_descTwo_at_four F.hη
+      F.frame.isotropic F.hba (mem_towerSeed.1 hφ).2 (mem_towerSeed.1 hψ).2
+      (by rw [hpp]; norm_num) (by rw [hpp]; norm_num) hu huu hx
+    simp only [Prod.mk_eq_zero, Submodule.mk_eq_zero]
+    exact ⟨hφ0, hψ0⟩
+  exact fun u v huv => sub_eq_zero.1 (hker _ (by rw [map_sub, huv, sub_self]))
+
+/-- ⭐ **The null lower bound on the level-four slice at `D = 26`**:
+
+`dim (H_null ⊓ V_4) ≥ dim Q_{-4,3} + dim Q_{-4,2}`.
+
+The first summand is the Type-1 family `L_{-1} Q_{-4,3}` of `TypeOneFamily`, the second the
+Type-2 family `𝒟₂ Q_{-4,2}`; the two are transverse by
+`eq_zero_of_towerLop_neg_one_add_descTwo_at_four`, and `D = 26` enters only through
+`NullSeedsTwo.towerLop_two_apply_descTwo` (via
+`LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`). -/
+theorem le_finrank_towerNull_inf_towerBigrade_four (hD : 3 ≤ D) (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) (hD26 : (D : K) = 26) :
+    Module.finrank K ↥(towerSeed η a b (-4) 3) + Module.finrank K ↥(towerSeed η a b (-4) 2)
+      ≤ Module.finrank K
+          ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-4) 4) := by
+  classical
+  have hVfin : FiniteDimensional K ↥(towerBigrade D K (-4) 4) := towerBigrade_finite _ _
+  have hWfin : FiniteDimensional K
+      ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-4) 4) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-4) 4)
+      (S₂ := towerBigrade D K (-4) 4) inf_le_right
+  have hQ3fin : FiniteDimensional K ↥(towerSeed η a b (-4) 3) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-4) 3) (S₂ := towerBigrade D K (-4) 3) inf_le_right
+  have hQ2fin : FiniteDimensional K ↥(towerSeed η a b (-4) 2) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-4) 2) (S₂ := towerBigrade D K (-4) 2) inf_le_right
+  have hmem : ∀ x : ↥(towerSeed η a b (-4) 3) × ↥(towerSeed η a b (-4) 2),
+      typeTwoAugFour η a b x
+        ∈ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-4) 4 := by
+    rintro ⟨⟨φ, hφ⟩, ⟨ψ, hψ⟩⟩
+    obtain ⟨hpos3, hbig3⟩ := mem_towerSeed.1 hφ
+    obtain ⟨hpos2, hbig2⟩ := mem_towerSeed.1 hψ
+    have h1 := towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη
+      F.frame.isotropic F.hba haa (j := -4) (N := 3) (by norm_num) hbig3 hpos3
+    have h2 := descTwo_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη F.frame.isotropic
+      F.hba haa hD26 (j := -4) (N := 2) (by norm_num) hbig2 hpos2 (N' := 4) (by norm_num)
+    rw [typeTwoAugFour_apply]
+    refine Submodule.add_mem _ ?_ h2
+    have h34 : (3 : ℕ) + 1 = 4 := by norm_num
+    rw [h34] at h1
+    exact h1
+  have hinj := typeTwoAugFour_injective (K := K) (η := η) (a := a) (b := b) hD F
+  have hcod : Function.Injective ((typeTwoAugFour η a b (K := K)).codRestrict _ hmem) :=
+    fun u v huv => hinj (congrArg Subtype.val huv)
+  have hle := LinearMap.finrank_le_finrank_of_injective hcod
+  have : Module.Free K ↥(towerSeed η a b (-4) 3) :=
+    Module.Free.of_divisionRing K ↥(towerSeed η a b (-4) 3)
+  have : Module.Free K ↥(towerSeed η a b (-4) 2) :=
+    Module.Free.of_divisionRing K ↥(towerSeed η a b (-4) 2)
+  rwa [Module.finrank_prod] at hle
+
+end NullBoundFour
+
 end StringFormal.NoGhost
