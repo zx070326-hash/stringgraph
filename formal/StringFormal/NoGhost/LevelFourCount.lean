@@ -640,4 +640,208 @@ theorem oscWeight_eq_four_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d =
 
 end Finsupp
 
+/-! ### The five index families of level four
+
+`ι ⊕ (ι × ι) ⊕ Sym ι 2 ⊕ (ι × Sym ι 2) ⊕ Sym ι 4` indexes the level-four occupation functions
+on `ι` directions, with cardinality `m + m² + binom(m+1,2) + m·binom(m+1,2) + binom(m+3,4)`.
+Two of the five shapes ( `[3,1]` and `[2,1,1]` ) mix modes, so their index is an *ordered* pair
+resp. a mode-2 direction together with an unordered pair; the other three are unordered.
+
+Injectivity is organised around the **mode-count invariant** `modeCount n d = Σ_i d(i,n)`: the
+five shapes have pairwise distinct profiles `(#1, #2, #3, #4)`, namely
+`(0,0,0,1)`, `(1,0,1,0)`, `(0,2,0,0)`, `(2,1,0,0)`, `(4,0,0,0)`, so twenty of the twenty-five
+cases are one line. -/
+
+section LevelFourIndex
+
+variable (ι : Type*) [DecidableEq ι]
+
+/-- The occupation function of an unordered family of mode-`n` oscillators. -/
+noncomputable def symModeIndex (n : ℕ+) {k : ℕ} (s : Sym ι k) : (ι × ℕ+) →₀ ℕ :=
+  Finsupp.mapDomain (fun i : ι => ((i, n) : ι × ℕ+)) (Multiset.toFinsupp (s : Multiset ι))
+
+/-- `modeCount n d = Σ_i d(i, n)`: the number of mode-`n` oscillators. -/
+noncomputable def modeCount (n : ℕ+) (d : (ι × ℕ+) →₀ ℕ) : ℕ :=
+  Finsupp.weight (fun v : ι × ℕ+ => if v.2 = n then 1 else 0) d
+
+variable {ι}
+
+@[simp]
+lemma modeCount_single (n : ℕ+) (v : ι × ℕ+) (k : ℕ) :
+    modeCount ι n (Finsupp.single v k) = k * (if v.2 = n then 1 else 0) :=
+  Finsupp.weight_single _ _ _
+
+lemma modeCount_add (n : ℕ+) (d e : (ι × ℕ+) →₀ ℕ) :
+    modeCount ι n (d + e) = modeCount ι n d + modeCount ι n e :=
+  map_add _ _ _
+
+/-- The mode-`m` occupation function built from a multiset has weight `m · card`. -/
+lemma oscWeight_mapDomain_mode (m : ℕ+) (s : Multiset ι) :
+    Finsupp.oscWeight
+        (Finsupp.mapDomain (fun i : ι => ((i, m) : ι × ℕ+)) (Multiset.toFinsupp s))
+      = Multiset.card s * (m : ℕ) := by
+  classical
+  induction s using Multiset.induction with
+  | empty => simp
+  | cons a s ih =>
+      rw [← Multiset.singleton_add, Multiset.toFinsupp_add, Finsupp.mapDomain_add,
+        Finsupp.oscWeight_add, Multiset.toFinsupp_singleton, Finsupp.mapDomain_single,
+        Finsupp.oscWeight_single, ih]
+      simp only [Multiset.card_add, Multiset.card_singleton]
+      ring
+
+/-- The mode-`m` occupation function built from a multiset has `modeCount n` equal to the
+cardinality when `n = m` and zero otherwise. -/
+lemma modeCount_mapDomain_mode (n m : ℕ+) (s : Multiset ι) :
+    modeCount ι n
+        (Finsupp.mapDomain (fun i : ι => ((i, m) : ι × ℕ+)) (Multiset.toFinsupp s))
+      = Multiset.card s * (if m = n then 1 else 0) := by
+  classical
+  induction s using Multiset.induction with
+  | empty => simp [modeCount]
+  | cons a s ih =>
+      rw [← Multiset.singleton_add, Multiset.toFinsupp_add, Finsupp.mapDomain_add,
+        modeCount_add, Multiset.toFinsupp_singleton, Finsupp.mapDomain_single,
+        modeCount_single, ih]
+      simp only [Multiset.card_add, Multiset.card_singleton]
+      ring
+
+@[simp]
+lemma oscWeight_symModeIndex (m : ℕ+) {k : ℕ} (s : Sym ι k) :
+    Finsupp.oscWeight (symModeIndex ι m s) = k * (m : ℕ) := by
+  rw [symModeIndex, oscWeight_mapDomain_mode]
+  rw [show Multiset.card (s : Multiset ι) = k from s.2]
+
+@[simp]
+lemma modeCount_symModeIndex (n m : ℕ+) {k : ℕ} (s : Sym ι k) :
+    modeCount ι n (symModeIndex ι m s) = k * (if m = n then 1 else 0) := by
+  rw [symModeIndex, modeCount_mapDomain_mode]
+  rw [show Multiset.card (s : Multiset ι) = k from s.2]
+
+lemma symModeIndex_injective (m : ℕ+) {k : ℕ} :
+    Function.Injective (symModeIndex ι m (k := k)) := by
+  intro s t h
+  rw [symModeIndex, symModeIndex] at h
+  exact Subtype.ext (Multiset.toFinsupp.injective
+    (Finsupp.mapDomain_injective
+      (fun _ _ hx => congrArg (fun v : ι × ℕ+ => v.1) hx) h))
+
+lemma symModeIndex_apply_of_ne (m : ℕ+) {k : ℕ} (s : Sym ι k) {v : ι × ℕ+} (hv : v.2 ≠ m) :
+    symModeIndex ι m s v = 0 := by
+  refine Finsupp.mapDomain_of_notMem_range _ _ fun ⟨i, hi⟩ => ?_
+  exact hv (congrArg (fun u : ι × ℕ+ => u.2) hi).symm
+
+variable (ι)
+
+/-- The level-four index type. -/
+abbrev LevelFourIdx : Type _ := ι ⊕ (ι × ι) ⊕ Sym ι 2 ⊕ (ι × Sym ι 2) ⊕ Sym ι 4
+
+/-- The level-four index map. -/
+noncomputable def levelFourIndex : LevelFourIdx ι → ((ι × ℕ+) →₀ ℕ)
+  | Sum.inl i => Finsupp.single (i, 4) 1
+  | Sum.inr (Sum.inl p) => Finsupp.single (p.1, 3) 1 + Finsupp.single (p.2, 1) 1
+  | Sum.inr (Sum.inr (Sum.inl s)) => symModeIndex ι 2 s
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) => Finsupp.single (p.1, 2) 1 + symModeIndex ι 1 p.2
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr t))) => symModeIndex ι 1 t
+
+/-- The mode profile `(#1, #2, #3, #4)` of each of the five shapes. -/
+def levelFourShape : LevelFourIdx ι → ℕ × ℕ × ℕ × ℕ
+  | Sum.inl _ => (0, 0, 0, 1)
+  | Sum.inr (Sum.inl _) => (1, 0, 1, 0)
+  | Sum.inr (Sum.inr (Sum.inl _)) => (0, 2, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl _))) => (2, 1, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr _))) => (4, 0, 0, 0)
+
+variable {ι}
+
+lemma oscWeight_levelFourIndex (x : LevelFourIdx ι) :
+    Finsupp.oscWeight (levelFourIndex ι x) = 4 := by
+  match x with
+  | Sum.inl i => simp [levelFourIndex]
+  | Sum.inr (Sum.inl p) => simp [levelFourIndex]
+  | Sum.inr (Sum.inr (Sum.inl s)) => simp [levelFourIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) => simp [levelFourIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr t))) => simp [levelFourIndex]
+
+lemma modeVec_levelFourIndex (x : LevelFourIdx ι) :
+    (modeCount ι 1 (levelFourIndex ι x), modeCount ι 2 (levelFourIndex ι x),
+        modeCount ι 3 (levelFourIndex ι x), modeCount ι 4 (levelFourIndex ι x))
+      = levelFourShape ι x := by
+  match x with
+  | Sum.inl i => simp [levelFourIndex, levelFourShape]
+  | Sum.inr (Sum.inl p) => simp [levelFourIndex, levelFourShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inl s)) => simp [levelFourIndex, levelFourShape]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) =>
+      simp [levelFourIndex, levelFourShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr t))) => simp [levelFourIndex, levelFourShape]
+
+end LevelFourIndex
+
+section LevelFourInjective
+
+variable {ι : Type*} [DecidableEq ι]
+
+private lemma single_apply_of_mode_ne (i j : ι) (m n : ℕ+) (hmn : m ≠ n) :
+    (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, m) : ι × ℕ+) = 0 := by
+  refine Finsupp.single_eq_of_ne fun hc => hmn ?_
+  have hc2 := congrArg (fun v : ι × ℕ+ => v.2) hc
+  simp only at hc2
+  first | exact hc2 | exact hc2.symm
+
+private lemma fst_eq_of_single_apply (i j : ι) (n : ℕ+)
+    (h : (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, n) : ι × ℕ+) = 1) : j = i := by
+  by_contra hc
+  rw [Finsupp.single_eq_of_ne (fun hcc => hc (by
+      have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+      simp only at hz
+      first | exact hz | exact hz.symm))] at h
+  exact zero_ne_one h
+
+/-- **The level-four parametrisation is injective.**  Twenty of the twenty-five cases are
+settled by the mode profile `levelFourShape`; the five diagonal ones by `Finsupp.single`
+injectivity resp. `symModeIndex_injective`. -/
+theorem levelFourIndex_injective : Function.Injective (levelFourIndex ι) := by
+  have h43 : (4 : ℕ+) ≠ 3 := by decide
+  have h41 : (4 : ℕ+) ≠ 1 := by decide
+  have h42 : (4 : ℕ+) ≠ 2 := by decide
+  have h31 : (3 : ℕ+) ≠ 1 := by decide
+  have h21 : (2 : ℕ+) ≠ 1 := by decide
+  intro x y h
+  have hs : levelFourShape ι x = levelFourShape ι y := by
+    rw [← modeVec_levelFourIndex x, ← modeVec_levelFourIndex y, h]
+  obtain i | p | s | ps | t := x <;> obtain j | q | u | qu | v := y <;>
+    simp only [levelFourShape, Prod.mk.injEq] at hs <;> try (exfalso; omega)
+  · -- `[4]` versus `[4]`
+    refine congrArg Sum.inl ?_
+    have h1 := DFunLike.congr_fun h ((i, 4) : ι × ℕ+)
+    rw [levelFourIndex, levelFourIndex, Finsupp.single_eq_same] at h1
+    exact (fst_eq_of_single_apply i j 4 h1.symm).symm
+  · -- `[3,1]` versus `[3,1]`
+    refine congrArg (Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((p.1, 3) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((p.2, 1) : ι × ℕ+)
+    rw [levelFourIndex, levelFourIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_of_mode_ne p.1 p.2 3 1 h31,
+      single_apply_of_mode_ne p.1 q.2 3 1 h31, add_zero, add_zero] at h1
+    rw [levelFourIndex, levelFourIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_of_mode_ne p.2 p.1 1 3 (Ne.symm h31),
+      single_apply_of_mode_ne p.2 q.1 1 3 (Ne.symm h31), zero_add, zero_add] at h2
+    exact Prod.ext (fst_eq_of_single_apply p.1 q.1 3 h1.symm).symm
+      (fst_eq_of_single_apply p.2 q.2 1 h2.symm).symm
+  · -- `[2,2]` versus `[2,2]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inl) (symModeIndex_injective 2 h)
+  · -- `[2,1,1]` versus `[2,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((ps.1, 2) : ι × ℕ+)
+    rw [levelFourIndex, levelFourIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 ps.2 (by simpa using h21),
+      symModeIndex_apply_of_ne 1 qu.2 (by simpa using h21), add_zero, add_zero] at h1
+    have hfst : qu.1 = ps.1 := fst_eq_of_single_apply ps.1 qu.1 2 h1.symm
+    rw [levelFourIndex, levelFourIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[1,1,1,1]` versus `[1,1,1,1]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr) (symModeIndex_injective 1 h)
+
+end LevelFourInjective
+
 end StringFormal.NoGhost
