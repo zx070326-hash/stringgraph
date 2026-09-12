@@ -223,4 +223,127 @@ lemma towerModeVec_three_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {ψ
 
 end ModeToolbox
 
+/-! ### The antisymmetrised `α_{-2}α_{-1}` functional
+
+The second separating functional of the module docstring.  All four lemmas are evaluations of
+`A_ε(2) A_δ(1)` on the two families; the *antisymmetrisation* in `(ε, δ)` is taken only in
+`typeTwoAug_injective`, where it matters. -/
+
+section AntisymFunctional
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b ε δ : Fin D → R}
+
+/-- Two polarised modes commute unless their indices sum to zero. -/
+lemma towerModeVec_apply_towerModeVec_of_add_ne_zero (η a b ε δ : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) {m p : ℤ} (hmp : m + p ≠ 0) (x : TowerFock D R) :
+    towerModeVec η a b ε m (towerModeVec η a b δ p x)
+      = towerModeVec η a b δ p (towerModeVec η a b ε m x) := by
+  have h := congrArg (fun T : Module.End R (TowerFock D R) => T x)
+    (lie_towerModeVec_towerModeVec η a b ε δ hη m p)
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    LinearMap.smul_apply, LinearMap.id_coe, id_eq, if_neg hmp, zero_smul] at h
+  exact sub_eq_zero.mp h
+
+/-- `A_δ(1) L_{-1} x = L_{-1} A_δ(1) x + (δ·p_j) x` on any slice. -/
+lemma towerModeVec_one_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ}
+    {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N) :
+    towerModeVec η a b δ 1 (towerLop η a b (-1) x)
+      = towerLop η a b (-1) (towerModeVec η a b δ 1 x)
+        + dotVec η δ (towerMomentum a b j) • x := by
+  rw [towerModeVec_apply_towerLop η a b δ hη (-1) 1, show (-1 : ℤ) + 1 = 0 by ring,
+    towerModeVec_zero_apply_of_mem_towerBigrade η a b δ hx]
+  norm_num
+
+/-- `A_ε(2) L_{-1} L_{-1} z = 2 (ε·p_j) z` for `z` of level zero. -/
+lemma towerModeVec_two_towerLop_neg_one_sq_of_level_zero (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {z : TowerFock D R} (hz : z ∈ towerBigrade D R j 0) :
+    towerModeVec η a b ε 2 (towerLop η a b (-1) (towerLop η a b (-1) z))
+      = ((2 : R) * dotVec η ε (towerMomentum a b j)) • z := by
+  have h2 : towerModeVec η a b ε 2 (towerLop η a b (-1) z) = 0 := by
+    rw [towerModeVec_apply_towerLop η a b ε hη (-1) 2,
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz (by norm_num), map_zero,
+      zero_add, show (-1 : ℤ) + 2 = 1 by ring,
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz (by norm_num), smul_zero]
+  have h1 : towerModeVec η a b ε 1 (towerLop η a b (-1) z)
+      = dotVec η ε (towerMomentum a b j) • z := by
+    rw [towerModeVec_apply_towerLop η a b ε hη (-1) 1,
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz (by norm_num), map_zero,
+      zero_add, show (-1 : ℤ) + 1 = 0 by ring,
+      towerModeVec_zero_apply_of_mem_towerBigrade η a b ε hz]
+    norm_num
+  rw [towerModeVec_apply_towerLop η a b ε hη (-1) 2, h2, map_zero, zero_add,
+    show (-1 : ℤ) + 2 = 1 by ring, h1, smul_smul]
+  norm_num
+
+/-- **Type 1 under the second functional**:
+`A_ε(2) A_δ(1) L_{-1} φ = 2 A_ε(1) A_δ(1) φ + (δ·p_j) A_ε(2) φ`.
+
+The first summand is symmetric in `(ε, δ)` (two modes of index `1` commute), so the
+antisymmetric part of the left-hand side is `(δ·p)A_ε(2)φ − (ε·p)A_δ(2)φ`. -/
+theorem towerModeVec_two_one_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {φ : TowerFock D R} (hφ : φ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 1 (towerLop η a b (-1) φ))
+      = (2 : R) • towerModeVec η a b ε 1 (towerModeVec η a b δ 1 φ)
+        + dotVec η δ (towerMomentum a b j) • towerModeVec η a b ε 2 φ := by
+  have hφ1 : towerModeVec η a b δ 1 φ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hφ (by norm_num)
+  rw [towerModeVec_one_towerLop_neg_one hη hφ, map_add, map_smul,
+    towerModeVec_apply_towerLop η a b ε hη (-1) 2,
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hφ1 (by norm_num), map_zero,
+    zero_add, show (-1 : ℤ) + 2 = 1 by ring]
+  norm_num
+
+/-- `A_ε(2) A_δ(1) L_{-2} ψ = 2 (ε·p_j) A_δ(1) ψ` for `ψ` of level one. -/
+theorem towerModeVec_two_one_towerLop_neg_two (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 1) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 1 (towerLop η a b (-2) ψ))
+      = ((2 : R) * dotVec η ε (towerMomentum a b j)) • towerModeVec η a b δ 1 ψ := by
+  have hz : towerModeVec η a b δ 1 ψ ∈ towerBigrade D R j 0 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  have hcomm : towerModeVec η a b ε 2 (towerModeVec η a b δ (-1) ψ) = 0 := by
+    rw [towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε δ hη (by norm_num),
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hψ (by norm_num), map_zero]
+  rw [towerModeVec_apply_towerLop η a b δ hη (-2) 1, show (-2 : ℤ) + 1 = -1 by ring, map_add,
+    map_smul, hcomm, smul_zero, add_zero, towerModeVec_apply_towerLop η a b ε hη (-2) 2,
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz (by norm_num), map_zero,
+    zero_add, show (-2 : ℤ) + 2 = 0 by ring,
+    towerModeVec_zero_apply_of_mem_towerBigrade η a b ε hz, smul_smul]
+  norm_num
+
+/-- `A_ε(2) A_δ(1) L_{-1}² ψ = 2 (ε·p_j) A_δ(1) ψ + 4 (δ·p_j) A_ε(1) ψ` for `ψ` of level one. -/
+theorem towerModeVec_two_one_towerLop_neg_one_sq (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 1) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 1
+        (towerLop η a b (-1) (towerLop η a b (-1) ψ)))
+      = ((2 : R) * dotVec η ε (towerMomentum a b j)) • towerModeVec η a b δ 1 ψ
+        + ((4 : R) * dotVec η δ (towerMomentum a b j)) • towerModeVec η a b ε 1 ψ := by
+  have hz : towerModeVec η a b δ 1 ψ ∈ towerBigrade D R j 0 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  have hψ2 : towerLop η a b (-1) ψ ∈ towerBigrade D R j 2 :=
+    towerLop_mem_towerBigrade η a b hψ (by norm_num)
+  have hstep : towerModeVec η a b δ 1 (towerLop η a b (-1) (towerLop η a b (-1) ψ))
+      = towerLop η a b (-1) (towerLop η a b (-1) (towerModeVec η a b δ 1 ψ))
+        + (2 * dotVec η δ (towerMomentum a b j)) • towerLop η a b (-1) ψ := by
+    rw [towerModeVec_one_towerLop_neg_one hη hψ2, towerModeVec_one_towerLop_neg_one hη hψ,
+      map_add, map_smul]
+    module
+  rw [hstep, map_add, map_smul, towerModeVec_two_towerLop_neg_one_sq_of_level_zero hη hz,
+    towerModeVec_two_towerLop_neg_one hη hψ, smul_smul]
+  module
+
+/-- **Type 2 under the second functional**:
+`A_ε(2) A_δ(1) 𝒟₂ ψ = 10 (ε·p_j) A_δ(1) ψ + 12 (δ·p_j) A_ε(1) ψ`, so the antisymmetric part is
+`−2 (ε·p) A_δ(1)ψ + 2 (δ·p) A_ε(1)ψ` — nonzero, which is exactly what the leading-index argument
+of blueprint §B‴.5 cannot see. -/
+theorem towerModeVec_two_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 1) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 1 (descTwo η a b ψ))
+      = ((10 : R) * dotVec η ε (towerMomentum a b j)) • towerModeVec η a b δ 1 ψ
+        + ((12 : R) * dotVec η δ (towerMomentum a b j)) • towerModeVec η a b ε 1 ψ := by
+  rw [descTwo_apply, map_add, map_smul, map_add, map_smul, map_smul, map_smul,
+    towerModeVec_two_one_towerLop_neg_two hη hψ, towerModeVec_two_one_towerLop_neg_one_sq hη hψ]
+  module
+
+end AntisymFunctional
+
 end StringFormal.NoGhost
