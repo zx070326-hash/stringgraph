@@ -922,4 +922,80 @@ theorem card_ddfLevel_three_ge (ι : Type*) [Fintype ι] [DecidableEq ι] :
   · intro x y hxy
     exact levelThreeIndex_injective (congrArg Subtype.val hxy)
 
+/-! ### The `b̃`-free count at level three -/
+
+section ConjFreeThree
+
+variable {D : ℕ}
+
+lemma ne_conjIdx_of_conjDeg_single_eq_zero (hD : 2 ≤ D) {v : Osc D}
+    (h : conjDeg hD (Finsupp.single v 1) = 0) : v.1 ≠ conjIdx D hD := by
+  intro hc
+  rw [conjDeg_single, if_pos hc, mul_one] at h
+  exact one_ne_zero h
+
+lemma conjFreeEmbed_single (hD : 2 ≤ D) (μ : {μ : Fin D // μ ≠ conjIdx D hD}) (n : ℕ+) :
+    conjFreeEmbed hD (Finsupp.single ((μ, n) : {μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) 1)
+      = Finsupp.single (((μ : Fin D), n) : Osc D) 1 :=
+  Finsupp.mapDomain_single
+
+/-- **`p_{D−1}(3) ≤ (D−1) + (D−1)² + binom(D+1, 3)`**: the classification says the
+parametrisation is onto the `b̃`-free level-three occupation functions.  This is the upper bound
+on `dim (H_phys ⊓ V_3)` needed by `B26 3`. -/
+theorem card_conjFree_three_le (hD : 2 ≤ D) :
+    Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 3 ∧ conjDeg hD d = 0}
+      ≤ (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3 := by
+  classical
+  have hκ : Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1 := by
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have hcard : Fintype.card ({μ : Fin D // μ ≠ conjIdx D hD}
+      ⊕ ({μ : Fin D // μ ≠ conjIdx D hD} × {μ : Fin D // μ ≠ conjIdx D hD})
+      ⊕ Sym {μ : Fin D // μ ≠ conjIdx D hD} 3)
+      = (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3 := by
+    rw [Fintype.card_sum, Fintype.card_sum, Fintype.card_prod, Sym.card_sym_eq_choose, hκ,
+      show D - 1 + 3 - 1 = D + 1 by omega]
+    ring
+  rw [← hcard]
+  refine Fintype.card_le_of_surjective
+    (fun x => (⟨conjFreeEmbed hD (levelThreeIndex _ x), ?_, conjDeg_conjFreeEmbed hD _⟩ :
+      {d : Osc D →₀ ℕ // Fock.level D d = 3 ∧ conjDeg hD d = 0})) ?_
+  · rw [level_conjFreeEmbed hD, ddfLevel_eq_oscWeight]
+    exact oscWeight_levelThreeIndex x
+  rintro ⟨d, hlev, hconj⟩
+  rw [level_eq_oscWeight] at hlev
+  rcases Finsupp.oscWeight_eq_three_cases hlev with ⟨μ, hd⟩ | ⟨μ, ν, hd⟩ | ⟨μ, ν, ρ, hd⟩
+  · subst hd
+    have hμ : μ ≠ conjIdx D hD := ne_conjIdx_of_conjDeg_single_eq_zero hD hconj
+    refine ⟨Sum.inl ⟨μ, hμ⟩, Subtype.ext ?_⟩
+    exact conjFreeEmbed_single hD ⟨μ, hμ⟩ 3
+  · subst hd
+    rw [conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 2) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 1) : Osc D)) (by omega)
+    refine ⟨Sum.inr (Sum.inl (⟨μ, hμ⟩, ⟨ν, hν⟩)), Subtype.ext ?_⟩
+    show conjFreeEmbed hD (Finsupp.single _ 1 + Finsupp.single _ 1) = _
+    rw [conjFreeEmbed, Finsupp.mapDomain_add, ← conjFreeEmbed, ← conjFreeEmbed,
+      conjFreeEmbed_single hD ⟨μ, hμ⟩ 2, conjFreeEmbed_single hD ⟨ν, hν⟩ 1]
+  · subst hd
+    rw [conjDeg_add, conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 1) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 1) : Osc D)) (by omega)
+    have hρ : ρ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ρ, 1) : Osc D)) (by omega)
+    have hc3 : Multiset.card
+        (({⟨μ, hμ⟩, ⟨ν, hν⟩, ⟨ρ, hρ⟩} : Multiset {μ : Fin D // μ ≠ conjIdx D hD})) = 3 := by
+      simp
+    refine ⟨Sum.inr (Sum.inr ⟨{⟨μ, hμ⟩, ⟨ν, hν⟩, ⟨ρ, hρ⟩}, hc3⟩), Subtype.ext ?_⟩
+    show conjFreeEmbed hD (symThreeIndex _ _) = _
+    rw [symThreeIndex_mk, conjFreeEmbed, Finsupp.mapDomain_add, Finsupp.mapDomain_add,
+      ← conjFreeEmbed, ← conjFreeEmbed, ← conjFreeEmbed,
+      conjFreeEmbed_single hD ⟨μ, hμ⟩ 1, conjFreeEmbed_single hD ⟨ν, hν⟩ 1,
+      conjFreeEmbed_single hD ⟨ρ, hρ⟩ 1]
+
+end ConjFreeThree
+
 end StringFormal.NoGhost
