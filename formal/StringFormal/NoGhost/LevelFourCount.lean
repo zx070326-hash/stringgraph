@@ -121,6 +121,47 @@ theorem Fock.eq_zero_of_annihilation_eq_zero {η : Fin D → R} (hη : ∀ μ, �
     have h1 := (mul_eq_zero.mp hkey.symm).resolve_left (Fock.oscWeight_ne_zero hη v)
     exact (mul_eq_zero.mp h1).resolve_right (Nat.cast_ne_zero.mpr (by omega))
 
+/-- A polarised mode with `ε = e_ν` is `η_ν` times the plain mode `α^ν_p`. -/
+lemma towerModeVec_pi_single (η a b : Fin D → R) (ν : Fin D) (p : ℤ) :
+    towerModeVec η a b (Pi.single ν 1) p = η ν • towerMode η a b ν p := by
+  classical
+  rw [towerModeVec]
+  refine (Finset.sum_eq_single_of_mem ν (Finset.mem_univ ν) ?_).trans ?_
+  · intro μ _ hμ
+    rw [Pi.single_apply, if_neg hμ, mul_zero, zero_smul]
+  · rw [Pi.single_apply, if_pos rfl, mul_one]
+
+/-- The plain mode at a positive integer index is the annihilation operator. -/
+lemma towerMode_natCast_single (η a b : Fin D → R) (ν : Fin D) (n : ℕ+) (j : ℤ)
+    (P : Fock D R) :
+    towerMode η a b ν ((n : ℕ) : ℤ) (Finsupp.single j P)
+      = Finsupp.single j (Fock.annihilation η ν n P) := by
+  have hn : (((n : ℕ) : ℤ)).toNat.toPNat' = n := by
+    refine PNat.coe_injective ?_
+    rw [Int.toNat_natCast, Nat.toPNat'_coe, if_pos n.pos]
+  rw [towerMode_single, Fock.mode_of_pos _ _ (by exact_mod_cast n.pos), hn]
+
+/-- **Moments determine a state on a slice.**  If every polarised mode `A_ε(p)` with `p ≥ 1`
+kills `x` and `x` lives on a slice of positive level, then `x = 0`.
+
+This is the nondegeneracy input of the level-four transversality argument (blueprint §B‴ 订正
+item 5, lemma (A)); it is stated for an arbitrary rung and an arbitrary positive level. -/
+theorem eq_zero_of_towerModeVec_eq_zero {η a b : Fin D → R} (hη : ∀ μ, η μ * η μ = 1)
+    {j : ℤ} {N : ℕ} (hN : N ≠ 0) {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N)
+    (h : ∀ (ε : Fin D → R) (p : ℤ), 0 < p → towerModeVec η a b ε p x = 0) : x = 0 := by
+  obtain ⟨hsing, hlev⟩ := mem_towerBigrade.1 hx
+  have hxj : x j = 0 := by
+    refine Fock.eq_zero_of_annihilation_eq_zero hη hN hlev fun ν n => ?_
+    have hpos : (0 : ℤ) < ((n : ℕ) : ℤ) := by exact_mod_cast n.pos
+    have h0 := h (Pi.single ν 1) ((n : ℕ) : ℤ) hpos
+    rw [towerModeVec_pi_single, LinearMap.smul_apply] at h0
+    have h1 : towerMode η a b ν ((n : ℕ) : ℤ) x = 0 := by
+      have := congrArg (fun y => η ν • y) h0
+      simpa [smul_smul, hη ν] using this
+    rw [hsing, towerMode_natCast_single] at h1
+    exact (Finsupp.single_eq_zero).1 h1
+  rw [hsing, hxj, Finsupp.single_zero]
+
 end MomentsDetermine
 
 end StringFormal.NoGhost
