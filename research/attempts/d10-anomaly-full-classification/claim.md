@@ -32,7 +32,8 @@
 **量词展开**：
 ∀ 紧致李代数 𝔤，若 dim 𝔤 = 496 且 [∀ F ∈ 𝔤, Tr F⁶ = (1/48) Tr F⁴ Tr F² − (Tr F²)³/14400 （作为 F 的多项式恒等式，即两边作为 Sym⁶(𝔤*) 中的元素相等）]，则 𝔤 ≅ so(32) 或 e₈⊕e₈ 或 e₈⊕u(1)²⁴⁸ 或 u(1)⁴⁹⁶。
 
-反过来"这四个确实满足 (i)(ii)"已经是图中 rigorous 节点 `consistency.d10-four-groups-satisfy-anomaly-conditions`，本命题不重复证明这一半，只证"没有第五个"。
+反过来"这四个确实满足 (i)(ii)"已经是图中节点 `consistency.d10-four-groups-satisfy-anomaly-conditions`
+（effective status: `physical-argument`，被二手系数表卡压低，见该卡 notes），本命题不重复证明这一半，只证"没有第五个"。
 
 ## 可以引用的已知砖块（图中 effective status = rigorous/formalized 的节点，可当引理直接用）
 
