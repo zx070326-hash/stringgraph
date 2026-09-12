@@ -4447,3 +4447,27 @@
                记号：W--W 的准周期是 `π, πτ`（Polchinski 是 `1, τ`），`ϑ₂,ϑ₃,ϑ₄` = Polchinski 的 `ϑ₁₀,ϑ₀₀,ϑ₀₁`。
                见 extractions/math-sources.md §56。}
 }
+
+@misc{stringgraph-research-2026,
+  author = {stringgraph contributors},
+  title  = {Original proof attempts of the stringgraph project (research/attempts)},
+  year   = {2026},
+  note   = {本仓库自身的 `research/` 原创证明轨道（见 research/CLAUDE.md）。
+            **这是一手来源，不是外部文献**：引用它等于引用我们自己写、并经 graph-reviewer
+            对抗性审查过的证明。与 `stringformal-2026` 同属「内部一手来源」一类，
+            是 literature/CLAUDE.md 规则 1（只登记公开可获取的文献）的**既有例外**：
+            该规则针对的是外部未发表草稿与私下获得的材料，不针对本仓库自产、
+            可逐行复核、随仓库公开的证明。research/CLAUDE.md 生命周期第 4 条
+            「毕业」明确要求 `sources` 指向 research/attempts/<slug>/proof.md，
+            而 validate 要求每个 `sources[].ref` 是 bib key，故必须有本条目。
+            `loc` 的写法固定为「仓库相对路径 :: §节号」，例如
+            `research/attempts/d10-anomaly-full-classification/proof.md :: §7`，
+            并在同一条 source 的 note 或推导节点的 notes 里给出**提交 sha**，
+            因为本仓库会继续变动，路径本身不构成不可变定位。
+            **引用前提**（缺一不可，引用者自查）：
+            (1) 该 attempt 的 status.yaml `state: verified`；
+            (2) note 里如实写明未经期刊发表、以及 `captain_confirmed` 的当前取值；
+            (3) 以本 ref 为唯一来源且 status 为 `rigorous` 的推导，必须满足
+            docs/STATUS_LEVELS.md 的 rigorous 例外裁决（前提完整、有限步初等计算、
+            reviewer 已独立复核），并在 notes 写 `reviewer-verified: <agent>, <date>`。}
+}
