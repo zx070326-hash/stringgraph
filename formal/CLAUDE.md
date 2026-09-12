@@ -480,6 +480,40 @@ StringFormal/
                             **订正**：蓝图 §B‴.9 的 `N−1` 陈述在 `N = 0` 为假（真空物理非零）。
                             **未做**：(B-26) 本身——缺的 `p_{D−1}(N+1) − p_{D−2}(N+1) − p_{D−1}(N)` 个零态是
                             Type-2 族（`N+1 ≥ 12` 起还要新奇异向量族），全是 `D = 26` 依赖；词族线性无关 (F-3)
+  NoGhost/LevelThreeCount.lean **蓝图 §B‴.5 的 `N = 3` 账——`B26 3` 与
+                            `ddfSpans_bigrade_neg_three_three` 关闭**（第三条反对角片；`N ≤ 1` 无条件、
+                            `N = 2` 见 `LevelTwoCount.lean`）。三块：
+                            (1) ⭐ **绕开 §B‴.5「领头指标撞车」的新分离泛函**：不是领头项，而是
+                            **反对称化的 `α_{-2}α_{-1}` 系数** `A_ε(2)A_δ(1)x − A_δ(2)A_ε(1)x`
+                            （`A_ε(p) = towerModeVec`）。`L_{-1}`-像的该张量是 `p ⊗ w + 2T` 而 `T`
+                            **对称**（两个 `α_{-1}` 对易），`𝒟₂`-像是 `5 p⊗v + 6 v⊗p`（`5 ≠ 6`），
+                            反对称部分不相消。与 `α_{-3}` 系数 `A_ε(3)` 联立消去 `φ` 得
+                            `(ε·p)(δ·e) = (δ·p)(ε·e)`，再由 `p_{-3}·p_{-3} = -4 ≠ 0` 得 `e = 0`：
+                            **`eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`**（对任意 rung，
+                            只要 `p_j·p_j ≠ 0`；**`D` 与「物理/零态」一次不出现**，纯振子对易子代数，
+                            无系数提取、无基）。工具箱 `towerModeVec_apply_towerLop`
+                            （`A_ε(p)L_n = L_n A_ε(p) + p A_ε(n+p)`）+ 四条 `A` 穿过 `L_{-1}/L_{-2}/𝒟₂`
+                            的求值引理。
+                            (2) **零态下界** `le_finrank_towerNull_inf_towerBigrade_three`：
+                            `dim(H_null ⊓ V_3) ≥ dim Q_{-3,2} + (D−1)`。Type-2 定义域取
+                            `ker(e ↦ e·p_{-3})`（`finrank_ker_transFunctional`，秩–零化度给 `D−1`，
+                            **不选基**——⚠ `a` 在 rung `-3` 上**不**横向，`a·p_{-3} = -1`，
+                            与 `N = 2` 不同）；`D = 26` 只经新的任意-rung 版
+                            `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`（条件 `j + N = -2`）
+                            → `NullSeedsTwo.towerLop_two_apply_descTwo`。
+                            (3) **计数**：`Finsupp.exists_peel`（剥一个振子 + 对 level 递归）使
+                            `oscWeight_eq_three_cases` 只要 12 行（`oscWeight_eq_two_cases` 用了 80）；
+                            指标 `ι ⊕ (ι×ι) ⊕ Sym ι 3`（`[2,1]` 是**有序**对）经
+                            `Multiset.toFinsupp` + `mapDomain`，`Sym.card_sym_eq_choose` 给 `C(m+2,3)`；
+                            **通用桥 `conjFreeEmbed`**（`κ = {μ ≠ b̃} ↪ Fin D` 的 `mapDomain`，保 level、
+                            `conjDeg = 0`、单射）给**每个 level** 的 `conjFree` 下界，其 `N = 2` 实例
+                            `card_conjFree_two_ge` 补上 §B″ 只做了的上界；主恒等式
+                            **`levelThree_count_identity`** `p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)`
+                            （Pascal，**对一切 `D`**；`D = 26` 时 `3575 = 3200 + 350 + 25`）——
+                            第二条证据支持 §B′.8「计数看不见 26」。
+                            **未做**：`B26 4`（见 TODO `noghost-pr8` 与蓝图 §B‴ 订正第 5 条：
+                            `N = 4` 的两条泛函不再截断、`α_{-2}α_{-1}` 张量无对称性，
+                            下一条要算 `A_ε(2)A_δ(1)A_ρ(1)`）；一般 `N`
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
