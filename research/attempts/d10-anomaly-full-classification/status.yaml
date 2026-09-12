@@ -1,4 +1,4 @@
-state: draft
+state: under-review
 reviewer: null
 verdict: null
 captain_confirmed: false
@@ -6,3 +6,39 @@ notes: |
   2026-09-12: claim.md 由 lead 起草（基于 Phase-0 researcher agent 的调研结论与证明骨架建议），
   precise 命题已给出，proof.md 尚未开始。下一步：派 theorem-prover 起草 proof.md，
   重点是独立核实骨架第 3-4 步的具体系数计算（不可照抄 antonelli-2015，其系数有误）。
+
+  2026-09-12 (theorem-prover): proof.md 完成，认为命题 (S) 已证。路线与 claim.md 骨架
+  有两处实质偏离，都是简化：
+
+  1. 骨架第 2 步（"至多两个非阿贝尔因子"）给的理由（Tr F² 正定所以不能恒为零）对阿贝尔
+     方向是错的。正确结构是 Lemma 1：u(1) 因子在**伴随**表示里 ad = 0，所以条件 (i) 对
+     阿贝尔部分完全不设限，(i) 只是半单部分 𝔤' 的条件，m = 496 − dim 𝔤' 由 (ii) 定死。
+     这正是 u(1)^496 与 e₈⊕u(1)^248 成为解的原因（平凡满足，非真抵消）。
+  2. 骨架第 3 步建议查 Okubo / van Ritbergen 的迹恒等式系数表。没有必要：由极大环面定理，
+     Tr H^k = Σ_{α∈Φ} α(H)^k，全部系数直接从根系算出，无需任何二手系数表，也完全避开了
+     antonelli-2015 的错误数据。同时 (i) 在 F → λF 下齐次（含 λ=i），所以归一化/厄米约定
+     无关，不需要 conv.gauge-trace-normalization 的细节。
+
+  关键收缩：dim 𝔤 = 496 ⟹ 每个单因子 dim ≤ 496 ⟹ Killing-Cartan 下恰好 66 个紧致单李
+  代数，是有限穷举。scripts/root_power_sums.py 用精确有理数（fractions，无第三方依赖）
+  逐个判定，结果：满足 (i) 的只有 so(32) 与 e₈；满足两因子所需更强条件 (P) 的只有 e₈。
+  配分后恰好四解，脚本末尾机器复现该配分。
+
+  独立自检（scripts/closed_forms_and_witnesses.py，全部通过）：
+  - 每个根系 |Φ| + rank = dim；
+  - S₂ 反推出对偶 Coxeter 数 h^∨（九个型各抽样，全部精确吻合）——同时验证坐标、重数、
+    幂和代码三者；
+  - A/B/C/D 四族的闭式 S₂,S₄,S₆ 与显式根表逐秩比对；
+  - proof.md 小秩表格（su(2..5), so(5)）逐条随机点复核。
+
+  发现一个对本命题有实质意义的陷阱并已写进 proof.md §6.1：在 p₃ = 0 的二参数 Cartan
+  切片 x=(a,−a,b,−b,0,…) 上检验 A_n，条件退化成两个关于 N 的方程，公共解 N = 30。即
+  su(30) 能通过该切片检验，只有 p₆/p₃² 项才能排除它。任何在 p₃=0 切片上论证 A_n 的证明
+  在 N=30 处有洞。（su(30) dim 899，被 (ii) 挡住，但这是论证结构的洞而非记账的洞。）
+
+  proof.md §9 列出四条 [GAP]，都是验证强度问题而非逻辑缺口：例外代数根表需 reviewer
+  独立复核至少一个；§6.5 的不变量次数论证引自 Bourbaki 指数表（逻辑上非必需，单点 witness
+  已足够）；未做 Lean 形式化；未逐行 diff antonelli-2015 的系数表。
+
+  请 graph-reviewer 做对抗性审查。重点建议：(a) Lemma 3/4 的多重次数分量提取是否穷尽；
+  (b) Lemma 2 从 𝔱 到 𝔱_ℝ 的实形式论证；(c) 例外代数的 Bourbaki 根坐标。
