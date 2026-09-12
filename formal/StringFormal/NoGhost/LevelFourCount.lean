@@ -590,4 +590,54 @@ theorem eq_zero_of_towerLop_neg_one_add_descTwo_at_four (hη : ∀ μ, η μ * �
 
 end Transversality
 
+/-! ### The classification of level-four occupation functions
+
+Five shapes: `α^i_{-4}`, `α^i_{-3}α^j_{-1}`, `α^i_{-2}α^j_{-2}`, `α^i_{-2}α^j_{-1}α^k_{-1}` and
+`α^i_{-1}α^j_{-1}α^k_{-1}α^l_{-1}`.  As at level three the proof is one application of
+`Finsupp.exists_peel` plus the level-≤ 3 classifications. -/
+
+namespace Finsupp
+
+variable {ι : Type*}
+
+/-- A `ℕ+` is determined by its coercion (the `Prod.ext` helper of the classification). -/
+private lemma pnat_eq {m n : ℕ+} (h : (m : ℕ) = (n : ℕ)) : m = n := PNat.coe_injective h
+
+/-- **The classification of level-four occupation functions.** -/
+theorem oscWeight_eq_four_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 4) :
+    (∃ i : ι, d = Finsupp.single (i, 4) 1) ∨
+      (∃ i j : ι, d = Finsupp.single (i, 3) 1 + Finsupp.single (j, 1) 1) ∨
+        (∃ i j : ι, d = Finsupp.single (i, 2) 1 + Finsupp.single (j, 2) 1) ∨
+          (∃ i j k : ι, d = Finsupp.single (i, 2) 1
+            + (Finsupp.single (j, 1) 1 + Finsupp.single (k, 1) 1)) ∨
+            (∃ i j k l : ι, d = Finsupp.single (i, 1) 1
+              + (Finsupp.single (j, 1) 1
+                + (Finsupp.single (k, 1) 1 + Finsupp.single (l, 1) 1))) := by
+  obtain ⟨v, d', hd, hw⟩ := exists_peel (N := 3) (by simpa using h)
+  have hpos : 0 < (v.2 : ℕ) := v.2.pos
+  have hle : (v.2 : ℕ) ≤ 4 := by omega
+  interval_cases hv : (v.2 : ℕ)
+  · -- `v₂ = 1`: the rest has weight three
+    have hv1 : ((v.1, 1) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq (by simpa using hv.symm))
+    rcases oscWeight_eq_three_cases (d := d') (by omega) with
+      ⟨i, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, k, hi⟩
+    · exact Or.inr (Or.inl ⟨i, v.1, by rw [hd, hi, hv1] ; abel⟩)
+    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨i, v.1, j, by rw [hd, hi, hv1]; abel⟩)))
+    · exact Or.inr (Or.inr (Or.inr (Or.inr ⟨v.1, i, j, k, by rw [hd, hi, hv1]; abel⟩)))
+  · -- `v₂ = 2`: the rest has weight two
+    have hv2 : ((v.1, 2) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq (by simpa using hv.symm))
+    rcases oscWeight_eq_two_cases (d := d') (by omega) with ⟨i, hi⟩ | ⟨i, j, hi⟩
+    · exact Or.inr (Or.inr (Or.inl ⟨v.1, i, by rw [hd, hi, hv2]⟩))
+    · exact Or.inr (Or.inr (Or.inr (Or.inl ⟨v.1, i, j, by rw [hd, hi, hv2]⟩)))
+  · -- `v₂ = 3`: the rest has weight one
+    have hv3 : ((v.1, 3) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq (by simpa using hv.symm))
+    obtain ⟨i, hi⟩ := oscWeight_eq_one_cases (d := d') (by omega)
+    exact Or.inr (Or.inl ⟨v.1, i, by rw [hd, hi, hv3]⟩)
+  · -- `v₂ = 4`: the rest is empty
+    have hv4 : ((v.1, 4) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq (by simpa using hv.symm))
+    have hd' : d' = 0 := eq_zero_of_oscWeight_eq_zero (by omega)
+    exact Or.inl ⟨v.1, by rw [hd, hd', add_zero, hv4]⟩
+
+end Finsupp
+
 end StringFormal.NoGhost
