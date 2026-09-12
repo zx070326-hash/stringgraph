@@ -14,6 +14,7 @@
 | `tools/stringgraph/` | Python 工具：校验、状态传播、报告、渲染 | 是 |
 | `formal/` | Lean 4 + Mathlib 形式化岛 | 是 |
 | `literature/` | 文献登记、抽取记录、模板 | 是 |
+| `research/` | 原创证明尝试草稿，未毕业前与 `graph/` 物理隔离 | 是 |
 | `docs/` | 愿景、方法论、状态定义、路线图 | 否 |
 | `tests/` | 工具的 pytest | 否 |
 | `.claude/agents/` | 本项目专用 agent 角色 | 否 |
@@ -31,6 +32,10 @@
 6. **约定显式化**。度规号差、α' 归一化、规范场归一化等由 `graph/conventions/` 统一定义，每条涉及公式的陈述声明使用哪套约定。
 7. **提交前必须过校验**。`uv run stringgraph validate` 不通过的改动不得提交；pre-commit hook 会强制执行。
 
+## 原创证明轨道（research/）
+
+本项目默认做法是整理+形式化**已发表**结果。但当图的审计发现某个关键命题**在任何公开文献里都找不到证明**（不是"我们没读到"，是"确认查无此证明"）时，可以在 `research/` 下开一条原创证明尝试，目标是把它变成真正新的数学/物理结果，而不只是记账。规则见 `research/CLAUDE.md`：草稿与已发表结果图物理隔离，未经 `graph-reviewer` 审查并（理想情况下）船长确认之前，不得进入 `graph/` 或被任何节点依赖。发起这条轨道前，必须先确认真的无源可查——不要在"其实有人证明过、只是没读到"的情况下重复造轮子。
+
 ## 多 agent 协作（agent teams / 子 agent）
 
 本项目会并行运行多个 agent。规则：
@@ -44,6 +49,7 @@
 | `auditor` | 60 | physics-auditor agent | 回译审计、里程碑确认；可抢占 curator 对 milestones 的写入 |
 | `curator` | 50 | graph-curator agent | 从文献抽取陈述与推导 |
 | `formalizer` | 50 | lean-formalizer agent | Lean 形式化 |
+| `prover` | 50 | theorem-prover agent | 原创证明尝试，只写 `research/**` |
 | `reviewer` | 40 | graph-reviewer agent | 对抗性审查，只读 |
 | `researcher` | 30 | researcher agent | 文献检索，只写 `literature/` |
 

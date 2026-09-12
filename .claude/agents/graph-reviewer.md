@@ -28,3 +28,13 @@ tools: Read, Grep, Glob, Bash, mcp__agora__agora_join, mcp__agora__agora_board, 
 ## 输出
 
 按严重度排序的 finding 列表。每条：一句话 + 文件:字段 + 具体错在哪 + CONFIRMED/PLAUSIBLE。没有问题就说"未发现问题"。不要为了显得有用编造 finding。
+
+## 审查对象在 research/attempts/ 下时（证明正确性审查，不是文献忠实性审查）
+
+`research/` 里没有 `canonical_source` 可回译——审查的是证明本身是否严格，不是"转录是否忠实原文"。流程不同：
+
+1. 读 `claim.md`（命题精确表述）和 `proof.md`（证明正文），逐步验证每一步是否真的从前提/已引用的已知结果（必须是图里 `effective status` 为 `rigorous`/`formalized` 的节点，不能是 conjecture/physical-argument）推出，而不是"显然"跳过。
+2. 专门找：量词范围是否偷换（比如证明只覆盖了某个子集却断言覆盖全体）、边界/退化情形是否漏掉、组合枚举是否真的穷尽（如果用脚本辅助枚举，检查脚本逻辑与其声称覆盖的范围是否一致）。
+3. 对抗性地找反例：试着构造一个满足前提但结论不成立的例子；找不到反例不等于证明对，但至少要尝试。
+4. 裁定写入该 attempt 的 `status.yaml`：`verified`（证明站得住，未发现漏洞）/ `refuted`（找到反例或致命漏洞，写明具体反例/漏洞）/ 打回 `draft`（不到拍板程度，列出需要补的 `[GAP]`）。**你可以裁 `verified`，但不要代填 `captain_confirmed`**——那仍是船長专属（效仿里程碑 `approved`）。
+5. 报告格式与上面一致：finding 列表，每条标 CONFIRMED（找到了具体反例/漏洞）或 PLAUSIBLE（怀疑但未能构造出反例）。
