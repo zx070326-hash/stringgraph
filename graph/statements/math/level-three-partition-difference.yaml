@@ -1,0 +1,111 @@
+id: math.level-three-partition-difference
+kind: proposition
+title: 三能级"不含一个方向"光锥占据数计数差恒等式 p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)——第二条支持"计数看不见 26"的 Pascal 恒等式
+statement: |
+  这是一条**纯组合恒等式**，不涉及弦论的任何算子、度规或质壳条件；D 只是一个自然数参数，
+  记号沿用 math.level-two-partition-difference（p_m(N) := 把振子能级 N 分配给 m 个可数
+  无穷模态槽的占据数个数）。
+
+  【断言：占据数的显式计数与差】设 D ≥ 2。则
+
+    p_{D−1}(3) = (D − 1) + (D − 1)² + C(D + 1, 3) ，
+    p_{D−2}(3) = (D − 2) + (D − 2)² + C(D, 3) ，
+
+  （level-3 占据函数唯一分成三形：单模态占据 3（贡献 m 个）、一模态占据 2 与另一模态
+  占据 1（贡献 m² 个，两模态编号有序区分因为幂次不同）、三个不同模态各占据 1
+  （贡献 C(m,3) 个），m 取 D−1 或 D−2；三种情形穷尽且不相交，是 Finsupp.oscWeight 在
+  能级 3 的完整分类）。故
+
+    **p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D − 1)** ，
+
+  其中 p_{D−1}(2) = (D−1) + C(D,2) 取自 math.level-two-partition-difference（同一恒等式
+  链的上一级）。展开形式（Pascal 恒等式，对一切 D ≥ 2 成立）：
+
+    (D−1) + (D−1)² + C(D+1,3)  =  [(D−2) + (D−2)² + C(D,3)] + [(D−1) + C(D,2)] + (D−1) 。
+
+  在 D = 26 处：3575 = 3200 + 350 + 25。
+
+  【本节点明确不断言】
+  (a) **不断言这与任何弦论对象的联系**：p_{D−1}(3)、p_{D−2}(3) 在本节点里只是显式计数
+      公式的值，"它们分别是 dim(H_phys ∩ V_3) 的上界 / dim(D(Ε) ∩ V_3)"是弦论侧节点
+      （worldsheet.physical-slice-bounded-by-transverse-count、
+      worldsheet.transverse-ddf-fock-gram-matrix）各自独立证明的事，本节点不重复、
+      不引用它们（与 math.level-two-partition-difference 明确不断言 (a) 同型）。
+  (b) **不断言一般 N 的类比**：一般 N 的差 p_{D−1}(N) − p_{D−2}(N) 需要一般的配分函数
+      生成函数论证，本节点只做 N = 3 这一个特例的初等展开。
+  (c) **不断言 D ≤ 1 的情形**：与 math.level-two-partition-difference (c) 同型，
+      C(D,3)、D−1、D−2 的自然数减法需要 D ≥ 2 才良定义。
+  (d) **不是一个新的组合学结果**：这是二项式系数 Pascal 递推 C(m+3,3) = C(m+2,2) + C(m+2,3)
+      的一个直接代入实例（m := D − 2），价值在于把它显式写成弦论计数需要的形状。
+  (e) **不断言两条单侧公式各自被独立证明为等式**：与 math.level-two-partition-difference
+      (与该卡 sources note 记录的情形同型) 一样，Lean 侧真正证明的是**差**恒等式本身，
+      两条单侧显式公式是记法铺垫，见 sources note。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.NoGhost.levelThree_count_identity
+  lean_file: StringFormal/NoGhost/LevelThreeCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean :: StringFormal.NoGhost.levelThree_count_identity
+      （本卡 formal.lean_decl，section Closing，第 1080 行起）；分类引理
+      `Finsupp.oscWeight_eq_three_cases`（section Cardinalities，将能级 3 的任意占据函数
+      唯一分成三类：single(i,3)、single(i,2)+single(j,1)、单射三元有序对 Sym ι 3；
+      文件头 docstring "the combinatorial content of `p_m(3) = m + m² + binom(m+2,3)`"）
+      是本卡两条单侧计数公式共同的底层依据。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-pr7，formal/TODO.md 记为已完成）。
+      **curator 未自行运行 `lake build` / `check-axioms`**（本 worktree 无构建缓存）；
+      结论基于直接读源码，未跑编译器验证；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      **逐字核对**：
+      ```
+      theorem levelThree_count_identity (hD : 2 ≤ D) :
+          (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3
+            = ((D - 2) + (D - 2) * (D - 2) + Nat.choose D 3) + ((D - 1) + Nat.choose D 2)
+              + (D - 1)
+      ```
+      ——与本卡【断言】的等式逐字一致（`Nat.choose (D+1) 3` = C(D+1,3) 等）。证明体
+      （`obtain ⟨m, rfl⟩ : ∃ m, D = m + 2`，`Nat.choose_succ_succ (m+2) 2` 给
+      `C(m+3,3) = C(m+2,2) + C(m+2,3)`，再 `simp`/`rw`/`ring` 收尾）**不用任何弦论对象**，
+      与 math.level-two-partition-difference 同一模式（Pascal 递推 + 自然数算术），只是
+      多一层（C(D+1,3) 而非 C(D,2)）。
+
+      两条单侧计数公式 p_{D−1}(3) = (D−1)+(D−1)²+C(D+1,3)、p_{D−2}(3) = (D−2)+(D−2)²+C(D,3)
+      本身**未**各自被单独证成等式：Lean 侧的 `card_conjFree_three_le`（上界）与
+      `card_ddfLevel_three_ge`（下界）分别只给单侧不等式（与 N=2 情形同型，见
+      math.level-two-partition-difference sources note 的对应说明），
+      `levelThree_count_identity` 直接在自然数算术层面证出两个等式的**差**。
+  - ref: stringformal-2026
+    loc: "formal/TODO.md，noghost-pr7 条目（2026-09-12 标记 [x] 已完成）"
+    note: "任务追踪记录，佐证本卡对应工作已在仓库主线合入（非孤立分支）。"
+tags: [combinatorics, number-theory, binomial-coefficients, partitions, formalized, math-input]
+notes: |
+  【为什么立卡】formal/StringFormal/NoGhost/LevelThreeCount.lean 的
+  `levelThree_count_identity` 与 math.level-two-partition-difference 的
+  `levelTwo_count_identity` 同一模式，是"计数一步永远看不见 26"（第一次由 level-2
+  版本证实）的**第二条独立证据**：level-3 处该恒等式对一切 D 成立，D=26 只是代入的
+  一个特殊值（3575 = 3200 + 350 + 25），恒等式本身不依赖 D 的取值。
+
+  【查重】2026-09-12 跑 `uv run stringgraph search "level-three-partition"`、
+  `search "level three partition"`、`search levelThree_count_identity` 均无命中；
+  `search "partition difference"` 命中 math.level-two-partition-difference（姊妹卡，
+  不重复，见下）。
+
+  【与 math.level-two-partition-difference 的关系，不合并】两卡是同一恒等式链
+  （p_{D−1}(N) 的 Pascal 展开）在 N=2、N=3 的两个独立实例，按【一个节点一个命题】
+  原则不合并——各自的具体系数（C(D,2) vs (D−1)²+C(D+1,3)）不同，各自被
+  worldsheet 侧不同的 N 片（level-two/level-three DDF-spans 卡）独立消费。
+  本卡陈述里引用 math.level-two-partition-difference 的 p_{D−1}(2) 记法（差恒等式
+  右端的一项），这是记法引用，不建 `uses`/`depends_on` 边——按 graph/CLAUDE.md 与
+  math.level-two-partition-difference 既有先例，纯数学卡之间如需要建正式依赖边，
+  留给配套推导判断；本卡证明本身（见 sources 的 Lean 逐字核对）是一步 Pascal 恒等式，
+  不实际调用 `levelTwo_count_identity` 作为前提（`levelThree_count_identity` 的证明
+  独立完整，只是数值上恰好把 p_{D−1}(2) 的展开式包含在右端），故不建边，配套推导
+  `depends_on: []`（与 math.level-two-partition-difference--via-lean 同一先例）。
+
+  【本卡不 depends_on 或 uses 任何 worldsheet 节点】同 math.level-two-partition-difference
+  明确不断言 (a) 的边界，见【本节点明确不断言】(a)。
+author: curator
+created: "2026-09-12"
