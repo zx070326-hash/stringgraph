@@ -340,7 +340,31 @@ gaps:
     问题里（N ≤ 4 时两族零态像\"恰好相等\"，见【三追记】数值核对）；`B26 2` 关闭并不缩小
     「两族零态像在 N ≥ 5 处的重叠」这一未解决的一般 N 问题的范围，一般 N 的 `∀N, B26 N`
     仍是零证据的开放猜想。**本追记不改变任何判定**：本推导 `status: rigorous` 不变；
-    目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。"
+    目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。
+
+    **【2026-09-12 五追记，curator，分支 agent/curator/pr6-wire：PR6′ 把零态维数下界的
+    Type-1-only 部分（D-无关，§B‴.8 裁决推荐的路线）机检完成，(B-26) 仍不关闭。
+    本段之后一字未改上文，只追加，status/sources/summary/论证步骤一字未动。】**
+    formal/StringFormal/NoGhost/TypeOneFamily.lean（无 sorry）把上一段【三追记】(iii) 段
+    描述的构造机制中\"L_{-1} 单族\"那一半、即 formal/BLUEPRINT-noghost.md §B‴.8 裁决
+    （见 worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（三）】(ii)：三角性路线
+    被证伪，推荐改走\"仅用 L_{-1} 单射性\"）推荐的路线，升级为机器验证的定理
+    `le_finrank_towerNull_inf_towerBigrade_succ`：对一切 N，
+    `dim(H_null ⊓ towerBigrade(−(N+1),N+1)) ≥ p_{D−1}(N)`（D 不出现，截距 a₀=1 是
+    唯一用到之处）。图上承载见新卡 **worldsheet.null-states-lower-bound-type-one**
+    （formalized，配套推导 `--via-lean`），其证明依赖新卡
+    **worldsheet.quasi-physical-slice-dimension**（准物理子空间 Q_{j,M} 的维数下界，
+    同样 formalized）。**这是 D≠26 时的真实答案**（Type-1 单族能给出的最大值），
+    **不覆盖 Type 2 族**（𝒟₂ 族，本卡目标仍需要的 D=26 处的额外贡献），
+    与上一段【四追记】的 N=2 数值核对完全一致：N=2 处 PR6′ 给 p_{D−1}(1)=D−1，
+    缺口为 1，恰是 Type-2 态 𝒟₂|0;p_{−2}⟩（`b26_two_of_D26` 已单独机检的那一个态）。
+    **仍未关闭**：上文【三追记】(iv) 段的重叠问题（N≥5 起两族零态像的重叠，等价于
+    c=26,h=1−N 处 Verma 模的 BGG/Feigin–Fuks 嵌入结构）不受本次工作影响——PR6′ 的
+    L_{-1}-单射性论证对一切 D 成立，不含 D=26 的信息，无法看见这个重叠；worldsheet.
+    ddf-spanning-rank-inequality notes【2026-09-12（四）】一段记录了同一批 Lean 结果
+    与本卡目标的逐 N 精确对账，此处不重复。**本追记不改变任何判定**：本推导
+    `status: rigorous` 不变；目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记
+    而变化；(B-26) **仍不关闭**。"
   - |
     【2026-09-11（lean-wire-13）新增，curator】**第 (1b) 步用到的领头项
     A^i_{−n}|0;k⟩ = α^i_{−n}|0;k−n k_0⟩ + … 需要一条本推导没写出的假设：(T′) ε_i·k = 0**
