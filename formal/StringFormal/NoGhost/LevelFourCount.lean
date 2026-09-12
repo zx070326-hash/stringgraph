@@ -164,4 +164,225 @@ theorem eq_zero_of_towerModeVec_eq_zero {η a b : Fin D → R} (hη : ∀ μ, η
 
 end MomentsDetermine
 
+/-! ### The four moment functionals at level four
+
+`A_ε(4)`, `A_ε(3)A_δ(1)`, `A_ε(2)A_δ(2)` and `A_ε(2)A_δ(1)A_ρ(1)`, evaluated on the Type-1
+family `L_{-1} V_{j,3}` and the Type-2 family `𝒟₂ V_{j,2}`.  Everything is commutator algebra,
+using `LevelThreeCount`'s toolbox plus two new atoms: the `A_ε(2) 𝒟₂` evaluation on a level-zero
+state, and the *central* commutator `⁅A_δ(1), A_ρ(-1)⁆ = (δ·ρ)`, which is the only place where
+the `α`-algebra's central term enters the level-four account. -/
+
+section MomentEquations
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b ε δ ρ : Fin D → R}
+
+/-- `A_ε(2) 𝒟₂ z = 10 (ε·p_j) z` for `z` of level zero. -/
+lemma towerModeVec_two_descTwo_of_level_zero (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {z : TowerFock D R} (hz : z ∈ towerBigrade D R j 0) :
+    towerModeVec η a b ε 2 (descTwo η a b z)
+      = ((10 : R) * dotVec η ε (towerMomentum a b j)) • z := by
+  rw [towerModeVec_two_descTwo hη hz,
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz (by norm_num),
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hz
+      (show ((0 : ℕ) : ℤ) < 1 by norm_num),
+    map_zero, map_zero, smul_zero, zero_add, zero_add]
+
+/-- **The central term**: `A_δ(1) A_ρ(-1) x = A_ρ(-1) A_δ(1) x + (δ·ρ) x`.  This is the only
+appearance of the oscillator central charge in the level-four moment equations. -/
+lemma towerModeVec_one_apply_towerModeVec_neg_one (η a b : Fin D → R)
+    (hη : ∀ μ, η μ * η μ = 1) (x : TowerFock D R) :
+    towerModeVec η a b δ 1 (towerModeVec η a b ρ (-1) x)
+      = towerModeVec η a b ρ (-1) (towerModeVec η a b δ 1 x) + dotVec η δ ρ • x := by
+  have h := congrArg (fun T : Module.End R (TowerFock D R) => T x)
+    (lie_towerModeVec_towerModeVec η a b δ ρ hη 1 (-1))
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    LinearMap.smul_apply, LinearMap.id_coe, id_eq, if_pos (show (1 : ℤ) + (-1) = 0 by ring),
+    Int.cast_one, one_mul] at h
+  rw [sub_eq_iff_eq_add'.mp h]
+
+/-- `A_ε(3) L_{-1} ψ = 3 A_ε(2) ψ` for `ψ` of level two. -/
+lemma towerModeVec_three_towerLop_neg_one_of_level_two (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 3 (towerLop η a b (-1) ψ) = (3 : R) • towerModeVec η a b ε 2 ψ := by
+  rw [towerModeVec_apply_towerLop η a b ε hη (-1) 3,
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hψ (by norm_num), map_zero,
+    zero_add, show (-1 : ℤ) + 3 = 2 by ring]
+  norm_num
+
+/-! #### `A_ε(4)` -/
+
+/-- `A_ε(4) L_{-1} φ = 4 A_ε(3) φ` for `φ` of level three. -/
+theorem towerModeVec_four_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {φ : TowerFock D R} (hφ : φ ∈ towerBigrade D R j 3) :
+    towerModeVec η a b ε 4 (towerLop η a b (-1) φ) = (4 : R) • towerModeVec η a b ε 3 φ := by
+  rw [towerModeVec_apply_towerLop η a b ε hη (-1) 4,
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hφ (by norm_num), map_zero,
+    zero_add, show (-1 : ℤ) + 4 = 3 by ring]
+  norm_num
+
+/-- `A_ε(4) 𝒟₂ ψ = 44 A_ε(2) ψ` for `ψ` of level two. -/
+theorem towerModeVec_four_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 4 (descTwo η a b ψ) = (44 : R) • towerModeVec η a b ε 2 ψ := by
+  have hψ3 : towerLop η a b (-1) ψ ∈ towerBigrade D R j 3 :=
+    towerLop_mem_towerBigrade η a b hψ (by norm_num)
+  have hL2 : towerModeVec η a b ε 4 (towerLop η a b (-2) ψ)
+      = (4 : R) • towerModeVec η a b ε 2 ψ := by
+    rw [towerModeVec_apply_towerLop η a b ε hη (-2) 4,
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hψ (by norm_num), map_zero,
+      zero_add, show (-2 : ℤ) + 4 = 2 by ring]
+    norm_num
+  have hL11 : towerModeVec η a b ε 4 (towerLop η a b (-1) (towerLop η a b (-1) ψ))
+      = (12 : R) • towerModeVec η a b ε 2 ψ := by
+    rw [towerModeVec_apply_towerLop η a b ε hη (-1) 4,
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hψ3 (by norm_num), map_zero,
+      zero_add, show (-1 : ℤ) + 4 = 3 by ring,
+      towerModeVec_three_towerLop_neg_one_of_level_two hη hψ, smul_smul]
+    norm_num
+  rw [descTwo_apply, map_add, map_smul, map_smul, hL2, hL11, smul_smul, smul_smul, ← add_smul]
+  norm_num
+
+/-! #### `A_ε(3) A_δ(1)` -/
+
+/-- `A_ε(3) A_δ(1) L_{-1} φ = 3 A_ε(2) A_δ(1) φ + (δ·p_j) A_ε(3) φ` for `φ` of level three. -/
+theorem towerModeVec_three_one_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {φ : TowerFock D R} (hφ : φ ∈ towerBigrade D R j 3) :
+    towerModeVec η a b ε 3 (towerModeVec η a b δ 1 (towerLop η a b (-1) φ))
+      = (3 : R) • towerModeVec η a b ε 2 (towerModeVec η a b δ 1 φ)
+        + dotVec η δ (towerMomentum a b j) • towerModeVec η a b ε 3 φ := by
+  have hφ1 : towerModeVec η a b δ 1 φ ∈ towerBigrade D R j 2 :=
+    towerModeVec_mem_towerBigrade η a b δ hφ (by norm_num)
+  rw [towerModeVec_one_towerLop_neg_one hη hφ, map_add, map_smul,
+    towerModeVec_three_towerLop_neg_one_of_level_two hη hφ1]
+
+/-- `A_ε(3) A_δ(1) 𝒟₂ ψ = 24 A_ε(1) A_δ(1) ψ + 18 (δ·p_j) A_ε(2) ψ` for `ψ` of level two. -/
+theorem towerModeVec_three_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 3 (towerModeVec η a b δ 1 (descTwo η a b ψ))
+      = (24 : R) • towerModeVec η a b ε 1 (towerModeVec η a b δ 1 ψ)
+        + ((18 : R) * dotVec η δ (towerMomentum a b j)) • towerModeVec η a b ε 2 ψ := by
+  have hψ1 : towerModeVec η a b δ 1 ψ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  have hmid : towerModeVec η a b ε 3 (towerModeVec η a b δ (-1) ψ) = 0 := by
+    rw [towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε δ hη (by norm_num),
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hψ (by norm_num), map_zero]
+  rw [towerModeVec_one_descTwo hη hψ, map_add, map_add, map_smul, map_smul, hmid, smul_zero,
+    towerModeVec_three_descTwo hη hψ1, towerModeVec_three_towerLop_neg_one_of_level_two hη hψ,
+    smul_smul]
+  push_cast
+  module
+
+/-! #### `A_ε(2) A_δ(2)` -/
+
+/-- `A_ε(2) A_δ(2) L_{-1} φ = 2 A_δ(2) A_ε(1) φ + 2 A_ε(2) A_δ(1) φ` for `φ` of level three:
+the symmetric combination `b_{εδ} + b_{δε}` of the module docstring. -/
+theorem towerModeVec_two_two_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {φ : TowerFock D R} (hφ : φ ∈ towerBigrade D R j 3) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 2 (towerLop η a b (-1) φ))
+      = (2 : R) • towerModeVec η a b δ 2 (towerModeVec η a b ε 1 φ)
+        + (2 : R) • towerModeVec η a b ε 2 (towerModeVec η a b δ 1 φ) := by
+  have hφ2 : towerModeVec η a b δ 2 φ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hφ (by norm_num)
+  have hstep : towerModeVec η a b δ 2 (towerLop η a b (-1) φ)
+      = towerLop η a b (-1) (towerModeVec η a b δ 2 φ)
+        + (2 : R) • towerModeVec η a b δ 1 φ := by
+    rw [towerModeVec_apply_towerLop η a b δ hη (-1) 2, show (-1 : ℤ) + 2 = 1 by ring]
+    norm_num
+  rw [hstep, map_add, map_smul, towerModeVec_two_towerLop_neg_one hη hφ2,
+    towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε δ hη
+      (show (1 : ℤ) + 2 ≠ 0 by norm_num)]
+
+/-- `A_ε(2) A_δ(2) 𝒟₂ ψ = 10 (ε·p_j) A_δ(2) ψ + 24 A_ε(1) A_δ(1) ψ + 10 (δ·p_j) A_ε(2) ψ`
+for `ψ` of level two. -/
+theorem towerModeVec_two_two_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 2 (towerModeVec η a b δ 2 (descTwo η a b ψ))
+      = ((10 : R) * dotVec η ε (towerMomentum a b j)) • towerModeVec η a b δ 2 ψ
+        + ((24 : R) • towerModeVec η a b ε 1 (towerModeVec η a b δ 1 ψ)
+          + ((10 : R) * dotVec η δ (towerMomentum a b j)) • towerModeVec η a b ε 2 ψ) := by
+  have hψ0 : towerModeVec η a b δ 2 ψ ∈ towerBigrade D R j 0 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  have hψ1 : towerModeVec η a b δ 1 ψ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  rw [towerModeVec_two_descTwo hη hψ, map_add, map_add, map_smul, map_smul,
+    towerModeVec_two_descTwo_of_level_zero hη hψ0, towerModeVec_two_towerLop_neg_one hη hψ1,
+    smul_smul]
+  push_cast
+  module
+
+/-! #### `A_ε(2) A_δ(1) A_ρ(1)` — the equation that is antisymmetrised -/
+
+/-- `A_ε(2) A_δ(1) A_ρ(1) L_{-1} φ = 2 A_ε(1)A_δ(1)A_ρ(1) φ + (δ·p_j) A_ε(2)A_ρ(1) φ
++ (ρ·p_j) A_ε(2)A_δ(1) φ` for `φ` of level three.  The first summand is totally symmetric
+(three modes of index `1` commute pairwise), so it drops out of the `ε ↔ δ` antisymmetrisation. -/
+theorem towerModeVec_two_one_one_towerLop_neg_one (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {φ : TowerFock D R} (hφ : φ ∈ towerBigrade D R j 3) :
+    towerModeVec η a b ε 2
+        (towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 (towerLop η a b (-1) φ)))
+      = (2 : R) • towerModeVec η a b ε 1
+            (towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 φ))
+        + (dotVec η δ (towerMomentum a b j)
+              • towerModeVec η a b ε 2 (towerModeVec η a b ρ 1 φ)
+          + dotVec η ρ (towerMomentum a b j)
+              • towerModeVec η a b ε 2 (towerModeVec η a b δ 1 φ)) := by
+  have hρ2 : towerModeVec η a b ρ 1 φ ∈ towerBigrade D R j 2 :=
+    towerModeVec_mem_towerBigrade η a b ρ hφ (by norm_num)
+  have hδρ1 : towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 φ) ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hρ2 (by norm_num)
+  rw [towerModeVec_one_towerLop_neg_one hη hφ]
+  simp only [map_add, map_smul]
+  rw [towerModeVec_one_towerLop_neg_one hη hρ2]
+  simp only [map_add, map_smul]
+  rw [towerModeVec_two_towerLop_neg_one hη hδρ1]
+  module
+
+/-- `A_ε(2) A_δ(1) A_ρ(1) 𝒟₂ ψ` for `ψ` of level two:
+
+`10(ε·p) A_δ(1)A_ρ(1)ψ + 12(δ·p) A_ε(1)A_ρ(1)ψ + 12(ρ·p) A_ε(1)A_δ(1)ψ
+  + [2(δ·ρ) + 6(δ·p)(ρ·p)] A_ε(2)ψ`.
+
+The `(δ·ρ)` term comes from the oscillator central term `⁅A_δ(1), A_ρ(-1)⁆`; it is the term
+that survives the `ε ↔ δ` antisymmetrisation together with the `(δ·p)(ρ·p)` one, and their
+relative coefficient is what makes `2 − (8/3)p²` appear. -/
+theorem towerModeVec_two_one_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
+    {ψ : TowerFock D R} (hψ : ψ ∈ towerBigrade D R j 2) :
+    towerModeVec η a b ε 2
+        (towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 (descTwo η a b ψ)))
+      = ((10 : R) * dotVec η ε (towerMomentum a b j))
+            • towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 ψ)
+        + (((12 : R) * dotVec η δ (towerMomentum a b j))
+              • towerModeVec η a b ε 1 (towerModeVec η a b ρ 1 ψ)
+          + (((12 : R) * dotVec η ρ (towerMomentum a b j))
+                • towerModeVec η a b ε 1 (towerModeVec η a b δ 1 ψ)
+            + ((2 : R) * dotVec η δ ρ
+                + (6 : R) * dotVec η δ (towerMomentum a b j)
+                    * dotVec η ρ (towerMomentum a b j))
+                • towerModeVec η a b ε 2 ψ)) := by
+  have hρ1 : towerModeVec η a b ρ 1 ψ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b ρ hψ (by norm_num)
+  have hδ1 : towerModeVec η a b δ 1 ψ ∈ towerBigrade D R j 1 :=
+    towerModeVec_mem_towerBigrade η a b δ hψ (by norm_num)
+  have hδρ0 : towerModeVec η a b δ 1 (towerModeVec η a b ρ 1 ψ) ∈ towerBigrade D R j 0 :=
+    towerModeVec_mem_towerBigrade η a b δ hρ1 (by norm_num)
+  have hzeroA : towerModeVec η a b ε 2
+      (towerModeVec η a b δ (-1) (towerModeVec η a b ρ 1 ψ)) = 0 := by
+    rw [towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε δ hη
+        (show (2 : ℤ) + (-1) ≠ 0 by norm_num),
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hρ1 (by norm_num), map_zero]
+  have hzeroB : towerModeVec η a b ε 2
+      (towerModeVec η a b ρ (-1) (towerModeVec η a b δ 1 ψ)) = 0 := by
+    rw [towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε ρ hη
+        (show (2 : ℤ) + (-1) ≠ 0 by norm_num),
+      towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b ε hδ1 (by norm_num), map_zero]
+  rw [towerModeVec_one_descTwo hη hψ]
+  simp only [map_add, map_smul]
+  rw [towerModeVec_one_descTwo hη hρ1, towerModeVec_one_apply_towerModeVec_neg_one η a b hη ψ,
+    towerModeVec_one_towerLop_neg_one hη hψ]
+  simp only [map_add, map_smul]
+  rw [towerModeVec_two_descTwo_of_level_zero hη hδρ0, hzeroA, hzeroB,
+    towerModeVec_two_towerLop_neg_one hη hρ1, towerModeVec_two_towerLop_neg_one hη hδ1]
+  module
+
+end MomentEquations
+
 end StringFormal.NoGhost
