@@ -51,7 +51,19 @@ never enter the transversality argument**; the only hypotheses are `p·p ≠ 0` 
 
 ## Status
 
-No `sorry`.  See the section headers for what is and is not proved.
+No `sorry`.  `b26_four_of_D26` and `ddfSpans_bigrade_neg_four_four` close the fourth
+antidiagonal slice, so `ddf-spans` is now machine-checked for `N ≤ 4`.
+
+**Not done**: `N ≥ 5`.  Both halves break there.  The transversality argument above needs
+*four* moment equations for two seed families; at `N = 5` the Type-2 seeds sit at level three
+and a third family appears in the counting, because the identity
+`p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)` is **false** from `N = 5` on (the excess is
+`1, 25, 351, …`, blueprint §B‴ 订正 item 7).  The moment machinery of the first two sections is
+`N`-independent and should carry over; the counting is not.
+
+⚠ `b26_four_of_D26` needs `3 ≤ D` (all earlier slices needed only `2 ≤ D`): the transversality
+argument uses one transverse polarisation `u` with `u·p = 0` and `u·u = 1`, which the frame
+supplies only when `Fin (D − 2)` is nonempty.
 -/
 
 namespace StringFormal.NoGhost

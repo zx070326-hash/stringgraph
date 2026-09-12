@@ -2056,29 +2056,31 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       `card_conjFree_two_ge`；分类的满射半 ⇒ `card_conjFree_three_le`；
       **`levelThree_count_identity`** `p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)`
       （Pascal，对一切 `D`；`D = 26` 时 `3575 = 3200 + 350 + 25`）。
-- [ ] `noghost-pr8`：**`B26 4`（蓝图「(B-26) 余下三段」的第一段剩余部分）**。两件独立的事：
-      (a) **`N = 4` 横截性——⭐ 已用手算证出，见蓝图 §B‴ 订正第 5 条（2026-09-12 本轮）**，
-      只差两条 Lean 引理：(A) 「力矩决定 level-`N` 态」（`x ∈ V_{j,N}`、`N ≥ 1`、所有
-      `A_ε(p)x = 0`（`p ≥ 1`）⟹ `x = 0`；走 `TowerPairing` 伴随 +
-      `levelSubmodule_eq_span_lcMonomial` + `Fock.eq_zero_of_towerPairing_left_eq_zero`，100–150 行）
-      与 (B) 四条力矩方程 `A_ε(4)` / `A_ε(3)A_δ(1)` / `A_ε(2)A_δ(2)` / **`A_ε(2)A_δ(1)A_ρ(1)`**
-      的求值（250–300 行；`towerModeVec_{one,two}_descTwo` 已在 `LevelThreeCount.lean`）。
-      关键是把 (4) 在 `ε↔δ` 下反对称化（`c` 全对称、`n` 对称同时消失），
-      系数 `2 − (8/3)p² = 18 ≠ 0` 是唯一的数值输入。
-      (b) **`N = 4` 计数**：`p_m(4) = m + m² + C(m+1,2) + m·C(m+1,2) + C(m+3,4)`（五形），
-      指标类型五个和项、单射要 25 个 case。恒等式是
-      `p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)`（`D = 26`：`29575 = 25650 + 3575 + 350`）。
-      估计 500–700 行，纯机械。⚠ **一般 `N` 的形式 `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)`
-      只在 `N ≤ 4` 成立**（`N ≥ 5` 起两族的像重叠，超出量是五边形数，见 §B‴.7）。
-- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），且 **`N ≤ 3` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 由 `LevelTwoCount.ddfSpans_bigrade_neg_two_two`、`N = 3` 由 `LevelThreeCount.ddfSpans_bigrade_neg_three_three` 在 `D = 26` 下关闭）。剩余是 `N ≥ 4` 的 (B-26) 零态下界，见 `noghost-pr8` 与蓝图 §B‴。
-      **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
-      （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
-      `(−N, N)`」）；`N ≤ 1` 已整块关闭（`ddfSpansOn_towerLevelLE_one`，任意 `D`）。
-      **2026-09-12 更新**：蓝图 §B′.2 的 (P1)(P2)(P3) 已全部落地
-      （`SliceRank.lean` / `SliceDim.lean` / `SpuriousElimination.lean`），且**三条里 `D = 26`
-      一次不出现**。剩下的唯一缺口是 **(B-26)**：`D = 26`、`a₀ = 1` 时
-      `dim(H_null ⊓ V_N) ≥ p_{D−1}(N) − p_{D−2}(N)`（蓝图 PR5）——**`N = 2` 已证**
-      （`LevelTwoCount.le_finrank_towerNullSubmodule_inf_towerBigrade_two`），`N ≥ 3` 未做。
+- [x] `noghost-pr8`：**`B26 4`** —— 已完成，见 `StringFormal/NoGhost/LevelFourCount.lean`
+      （`b26_four_of_D26`、`ddfSpans_bigrade_neg_four_four`，约 1240 行，`check_axioms` 全 `ok`）。
+      (a) **横截性**：蓝图 §B‴ 订正第 5 条的四条力矩方程**逐字复核通过，无订正**；反对称化恒等式
+      在 Lean 里写成 `3[(δ·ρ)m_ε−(ε·ρ)m_δ] = 4(ρ·p)[(δ·p)m_ε−(ε·p)m_δ]`（= 手算那条乘 3/2），
+      数值输入是 `3 − 4p² ≠ 0`（`p² = −6` 时 27）。引理 (A)「力矩决定 level-`N` 态」走
+      `Fock.coeff_annihilation` 提系数，**不必**经 `levelSubmodule_eq_span_lcMonomial`，
+      只要 60 行。⚠ **新增前件 `3 ≤ D`**（要一个 `u·p = 0`、`u·u = 1` 的横向偏振），
+      `N ≤ 3` 只要 `2 ≤ D`。
+      (b) **计数**：恒等式 `p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)` 已符号验证并
+      形式化（Pascal，对一切 `D`；`D = 26` 时 `29575 = 25650 + 3575 + 350`）。25 个单射 case
+      靠新的 `modeCount` 不变量压成 20 个一行 + 5 个真证明。
+
+- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：
+      D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），
+      且 **`N ≤ 4` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 由
+      `LevelTwoCount.ddfSpans_bigrade_neg_two_two`、`N = 3` 由
+      `LevelThreeCount.ddfSpans_bigrade_neg_three_three`、`N = 4` 由
+      `LevelFourCount.ddfSpans_bigrade_neg_four_four` 在 `D = 26` 下关闭；`N = 4` 另需 `3 ≤ D`）。
+      **剩余缺口是 `N ≥ 5`**，且它是**质变**而非量变：两族 `{L_{−1}, 𝒟₂}` 在计数上从 `N = 5`
+      起不再够用（恒等式 `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)` 只在 `N ≤ 4` 成立，
+      超出量 1, 25, 351, … 是五边形数，见蓝图 §B‴ 订正第 7 条），所以下一步**必须**先在纸上
+      决定第三族零态是什么（§B‴.7 的新奇异向量 / BGG）。`LevelFourCount.lean` 的力矩机器
+      （力矩非退化 + `A` 穿过 `L_{−1}`/`𝒟₂` 的求值）与 `N` 无关，可直接复用。
+      条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
+      （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片 `(−N, N)`」）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
