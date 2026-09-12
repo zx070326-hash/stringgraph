@@ -1,0 +1,31 @@
+id: math.tr-f6-coefficient-vanishing-u-n--via-coefficient-inspection
+target: math.tr-f6-coefficient-vanishing-u-n
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: 固定 n 是基本表示维数、tr 是基本迹。
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.1.2, p.149, (10.1.14)"
+    note: |
+      L1（抽取记录 gsw-1987-v2.md E4）。GSW 直接给出该系数公式，引导句
+      「it is easy to show that」不构成证明（与 SO(n)/USp(n) 两支同一处境）。
+summary: |
+  **U(n)（l = 0）**：系数 = n + 32·0 = n。对一切 n ≥ 1，n > 0，故恒不为零。
+  U(n) 族因此在纯规范反常因子化这一路上被排除（对任何维数的 U(n)，条件 (i) 都不满足，
+  除非 n = 0，但 U(0) 不是规范群）。
+
+  代数本身是一次多项式求根的平凡情形，和 math.tr-f6-coefficient-vanishing 的
+  SO(N)/USp(N) 两支计算结构完全一致；唯一差别是这里系数恒为正（l=0 时没有 ±32 的偏移），
+  不需要解方程，直接由 n ≥ 1 ⇒ n ≠ 0 得出。
+gaps:
+  - "GSW (10.1.14) 本身没有证明（'it is easy to show that'），本节点的来源强度与
+     SO(N)/USp(N) 两支（由 math.tr-f6-coefficient-vanishing 的 --via-coefficient-inspection
+     承载）完全一致——那边已由 reviewer-gs1984 做符号复核并升级为 rigorous；
+     本节点尚未经过同等复核，暂维持 physical-argument，留给 graph-reviewer 处理。"
+notes: |
+  与 math.tr-f6-coefficient-vanishing--via-coefficient-inspection 的推导结构平行，
+  但来源是 gsw-1987-v2 (10.1.14) 而非 green-schwarz-1984（GS 1984 原文没有 U(n) 支）。
+author: lead
+created: "2026-09-12"

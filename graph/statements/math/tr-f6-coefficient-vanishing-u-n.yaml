@@ -1,0 +1,51 @@
+id: math.tr-f6-coefficient-vanishing-u-n
+kind: proposition
+title: Ω₁₂ 中 tr F⁶ 的系数为 n：U(n) 时对一切 n ≥ 1 恒不为零
+statement: |
+  设 𝔤 = **u(n)**，F 是取值于 𝔤 的二形式（conv.gauge-trace-normalization）。
+  记 **tr** 为 n 维基本表示的迹，**Tr** 为伴随表示的迹，Ω₁₂ := Tr F⁶。则
+
+    Ω₁₂ = n · tr F⁶ + 15 · tr F² · tr F⁴
+
+  即 **tr F⁶ 的系数是 n 本身**，对一切 n ≥ 1 **恒不为零**。
+
+  这是 math.so-usp-adjoint-fundamental-trace-identities 里 Ω₁₂ = (N + 32l) tr F⁶ + 15 tr F² tr F⁴
+  在 **l = 0**（U(n) 支）时的特例，但该节点的陈述明写「u(N) 等未涉及」，
+  故本节点单独承载 U(n) 支（项目原则 1：一个节点一个命题）。
+
+  **本节点不断言**：
+  (a) 系数为零/不为零在物理上意味着什么（是否能被局域反项抵消）——那是物理判断；
+  (b) l = 0 与「U(n) 支」这一记号对应本身的来历（见 math.so-usp-adjoint-fundamental-trace-identities
+      notes 第 4 条关于 l = η 世界面扭转因子的讨论，本节点不重复）。
+uses_conventions:
+  - conv.gauge-trace-normalization
+sources:
+  - ref: gsw-1987-v2
+    loc: "§10.1.2, p.149, (10.1.14)：Tr t⁶ = n · tr λ⁶ + 15 · tr λ⁴ tr λ²（U(n)）"
+    note: |
+      L1 逐页读图（抽取记录 literature/extractions/gsw-1987-v2.md E4）。
+      GSW 同处三支 (10.1.12)(10.1.13)(10.1.14) 并列给出（SO(n)/USp(n)/U(n)），
+      引导句统一是「it is easy to show that」，**不给证明**——与 SO/USp 两支同样的处境，
+      故本节点 status 只能是 physical-argument（与 math.tr-f6-coefficient-vanishing 的
+      --via-coefficient-inspection 推导所依据的来源强度一致）。
+      此前本条只作为 math.so-usp-adjoint-fundamental-trace-identities notes 第 3 条的
+      备查记录（「⚠ 本条只列作交叉核验...不改本节点的陈述」），未单独建卡；
+      本节点是那条备查记录的正式落地。
+tags: [algebra, arithmetic, anomaly, u-n, phase2, lean-candidate]
+notes: |
+  【为什么现在建卡】2026-09-12 图谱审计（lead）发现 d10-anomaly-conditions-completeness-claim
+  的完备性证明缺口分析中，U(n) 族排除是"已知但从未单独建卡"的清理项，工作量小、来源明确，
+  与原创证明轨道（research/，见根 CLAUDE.md）无关，遂直接按 add-statement 流程补上。
+
+  【与 SO/USp 两支的平行关系】系数公式 N + 32l 统一覆盖三支（l = −1/+1/0），
+  但 so-usp-adjoint-fundamental-trace-identities 的陈述范围明确排除 U(n)，
+  math.tr-f6-coefficient-vanishing 的陈述范围也明确只管 SO(N)/USp(N)，
+  因此 U(n) 支必须新建节点承载，不能塞进既有两个节点（陈述文本不可变原则）。
+
+  【对 d10-anomaly-conditions-completeness-claim 的用处】该完备性猜想推导卡
+  （d10-anomaly-conditions-completeness-claim--via-unproven-literature-assertion）
+  目前对 U(n) 族排除引的是"未单独建卡，标注不改本节点陈述"的记录；
+  本节点建立后，该推导卡应更新 depends_on 指向本节点（由 curator 后续处理，
+  本次只建节点，不改动其他节点的 depends_on，避免一次提交混两件事）。
+author: lead
+created: "2026-09-12"
