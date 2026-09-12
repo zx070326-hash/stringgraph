@@ -1,0 +1,110 @@
+id: worldsheet.fock-state-determined-by-moments
+kind: proposition
+title: 动量塔上正能级片：被全体正模偏振算子湮灭的态为零（力矩非退化，N 与 rung 无关）
+statement: |
+  【设定】记号沿用 worldsheet.level-three-null-family-transversal（动量塔 T(a;b)、
+  towerModeVec η a b ε p 记作 A_ε(p)，极化模：沿偏振 ε 的第 p 个振子模，作用在塔上的
+  线性映射）。系数环 R 是交换 ℚ-代数。对角度规分量 η_μ 满足 η_μ²=1（conv.metric-mostly-plus）。
+  towerBigrade(j,N) 是 rung j、振子能级 N 的双分次片。
+
+  【断言】设 hη : ∀μ, η_μ²=1。设 N ∈ ℕ、N ≠ 0、j ∈ ℤ、x ∈ towerBigrade(j,N)。若对一切
+  偏振 ε : Fin D → R 与一切整数 p > 0：
+
+      A_ε(p) x = 0 ，
+
+  则 x = 0。
+
+  即：一个活在正能级片上的塔向量，若被全体正模偏振算子湮灭，则该向量本身为零
+  （"力矩决定态"，力矩指 A_ε(p)x 这些取值）。
+
+  【机制，供理解，不是陈述的一部分】证明沿单个 Fock 因子逐坐标展开：塔向量 x 限制在
+  rung j 上是一个 Fock 空间 F(k+jk_0) 中的多项式 P（振子占据数变量 X_{(μ,n)} 上的
+  多项式环 MvPolynomial (Osc D) R），α^μ_n = n η_μ ∂/∂X_{(μ,n)}（湮灭算子是关于对应
+  占据数变量的、按 n·η_μ 加权的偏导数，Fock.coeff_annihilation）。对 P 的任一非零单项式
+  e（e ≠ 0，因为 level N ≠ 0），取 e 支集里的一个振子模 v=(μ,n)（n≥1 存在，因为
+  level(e)=N≠0），用湮灭算子 α^μ_n 作用在 e 处降幂后取系数，配合"被 ε:=单位向量 e_μ
+  湮灭为零"这一假设，逼出 e 处系数本身为零（振子归一化因子 n·η_μ ≠ 0，因 hη 与 n≥1，
+  在特征零环上非零）；穷举一切非零单项式 e 得 P ≡ 0，故 x = 0。
+
+  【本卡明确不断言】
+  (a) **不是 iff**：本卡只证"力矩全零 ⇒ 态为零"这一个方向。反方向（态为零 ⇒ 力矩全零）
+      是平凡的（湮灭算子是线性映射，0 上取值为 0），本卡不单独陈述它，也不把本卡包装成
+      一条 iff。
+  (b) **N=0 时为假，本卡明确排除**：level-0 片是常数多项式（层真空的标量倍数），
+      不被任何正模湮灭却一般非零；hN : N≠0 是本断言的必需前提，不能去掉。
+  (c) **不涉及 D 的具体值、不涉及物理性/质壳条件**：本卡是纯 Fock 空间上的一条线性代数
+      事实，不使用 Virasoro 生成元、不使用 a₀ 或 D=26，对一切满足 hη 的 D、一切 rung j
+      成立。
+  (d) **不断言"力矩"的显式生成关系或维数公式**：本卡只给"全零 ⇒ 态零"，不断言力矩
+      A_ε(p)x（p 取遍正整数、ε 取遍 D 维向量空间）本身有多大的信息量、是否互相独立，
+      也不给出 towerBigrade(j,N) 的维数与力矩个数的关系。
+uses:
+  - worldsheet.level-three-null-family-transversal
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+formal:
+  lean_decl: StringFormal.NoGhost.eq_zero_of_towerModeVec_eq_zero
+  lean_file: StringFormal/NoGhost/LevelFourCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean :: StringFormal.NoGhost.eq_zero_of_towerModeVec_eq_zero
+      （本卡 formal.lean_decl，section MomentsDetermine，第 161 行；section 起于第 81 行）；
+      铺垫 Fock.eq_zero_of_annihilation_eq_zero（单个 Fock 空间版，第 107 行）与
+      Fock.oscWeight_ne_zero（第 98 行，振子归一化因子非零）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**（本 worktree 无构建缓存），
+      结论基于直接读源码。
+
+      **逐字核对陈述**：`eq_zero_of_towerModeVec_eq_zero {η a b : Fin D → R}
+      (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ} (hN : N ≠ 0) {x : TowerFock D R}
+      (hx : x ∈ towerBigrade D R j N)
+      (h : ∀ (ε : Fin D → R) (p : ℤ), 0 < p → towerModeVec η a b ε p x = 0) : x = 0`
+      ——与本卡【断言】逐字一致（towerModeVec η a b ε p 即 A_ε(p)）。
+
+      **单 Fock 版本的证明结构**（`Fock.eq_zero_of_annihilation_eq_zero`，第 107-134 行，
+      逐字核对）：对多项式 P 用 `MvPolynomial.ext` 逐单项式系数证零；e=0 的情形用
+      level 条件（N≠0）排除；e≠0 时取 v ∈ e.support（`Finsupp.mem_support_iff`），用
+      `Fock.coeff_annihilation`（湮灭算子的系数公式）在 `Finsupp.update e v (e v - 1)`
+      处求值，结合假设 h（湮灭为零）与 `Fock.oscWeight_ne_zero`（振子权重
+      `n·η_μ` 在特征零环、hη 下非零）逼出 `e v = 0` 与目标系数矛盾，实际逻辑是
+      对角提取系数为零。**docstring 自述**该证法"不需要
+      `levelSubmodule_eq_span_lcMonomial`，比蓝图估计的路线短得多"（比原计划走
+      「光锥单项式张成」的路线更直接）。
+
+      **塔版本**（`eq_zero_of_towerModeVec_eq_zero`，第 161-177 行）把上述单 Fock
+      结果通过 `mem_towerBigrade` 的奇点分解（`hsing`：塔向量集中在单个 rung；`hlev`：
+      该 rung 上的 Fock 分量 level = N）与 `towerModeVec_pi_single`
+      （`ε := Pi.single ν 1` 时 `A_ε(p)` 化为 `η_ν • α^ν_p`）搬运过去，只需把
+      塔上的 `∀ ε p, A_ε(p) x = 0` 特化到 `ε := e_ν`（坐标向量）即可精确对上单 Fock 版本
+      要求的"每个坐标湮灭算子都杀死"这一前件。
+
+      **N-独立、rung-独立**：签名对 j、N（只需 N≠0）、D、R（只需交换 ℚ-代数）无额外
+      限制，是本卡"N 与 rung 无关"这一表述的直接依据。
+  - ref: goddard-2008
+    loc: "文献不含此引理；这是本项目为 level-four 横截性证明搭建的纯 Fock 空间工具"
+    note: "不承载论证，只标注文献方位缺失——这是本项目内部的技术引理，非文献既有结果。"
+tags: [bosonic-string, fock-space, no-ghost, momentum-tower, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "moment"`、`search "annihilation"`、
+  `search "fock state"`、`search "coeff_annihilation"`、`search nondegenerate`，均无同内容
+  命中（"annihilation" 模糊命中的是 worldsheet.ddf-operators 系列，对象是 DDF 算子本身的
+  构造，不是本卡的"力矩决定态"非退化事实，不重复）。
+
+  【为什么立卡：level-four 横截性证明的新增依赖】worldsheet.level-three-null-family-transversal
+  的证明不需要这条一般性非退化引理——level-3 反对称化系数分离法直接分离出偏振分量 e=0
+  后，靠 L₋₁ 单射性一步收尾，不经过"力矩全零 ⇒ 态零"这一步。worldsheet.level-four-null-family-transversal
+  的证明（第 585、591 行）**两次**显式调用本卡的 `eq_zero_of_towerModeVec_eq_zero`，是
+  level-4 分析相对 level-3 姊妹论证在证明结构上的实质新增，值得独立成卡承载。
+
+  【N-独立性：本卡命题比它现在唯一的消费者更一般】本卡对一切 N≥1、一切 rung j 成立，
+  是纯 Fock 空间上的通用工具引理；目前图上唯一的消费边来自
+  worldsheet.level-four-null-family-transversal--via-lean（N=4 处的两次具体调用），
+  但本卡的陈述本身不限定于 N=4，未来 N≥5 的横截性分析（如果存在）大概率会复用同一条引理。
+
+  【uses 字段的选择：借用 worldsheet.level-three-null-family-transversal 的记号设定，
+  不代表依赖其论证】本卡【设定】段引用该卡的 towerModeVec/A_ε(p) 记号约定，纯粹是文本记号
+  复用（避免重复定义），不代表本卡的证明依赖该卡的断言内容——本卡是纯 Fock 空间上的独立
+  事实，两者在证明上无先后关系（配套推导 depends_on 为空，见该文件说明）。
+author: curator
+created: "2026-09-12"
