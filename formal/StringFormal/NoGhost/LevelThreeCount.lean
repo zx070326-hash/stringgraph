@@ -346,6 +346,71 @@ theorem towerModeVec_two_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
 
 end AntisymFunctional
 
+/-! ### Moving a polarised mode through `𝒟₂` (any level)
+
+These four identities hold on every slice, at every level, and say that `A_δ(p)` conjugates
+`𝒟₂` into `𝒟₂` on the level-`(N−p)` piece plus explicitly known lower terms.  They are the
+shape a general-`N` argument needs (blueprint §B‴ 订正, `N = 4` item): the `N = 3` proof above
+is the special case where the correction terms happen to vanish by grading. -/
+
+section DescTwoCommute
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] {η a b δ : Fin D → R}
+
+/-- `A_δ(1) L_{-1}² x = L_{-1}² A_δ(1) x + 2 (δ·p_j) L_{-1} x`. -/
+lemma towerModeVec_one_towerLop_neg_one_sq (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ}
+    {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N) :
+    towerModeVec η a b δ 1 (towerLop η a b (-1) (towerLop η a b (-1) x))
+      = towerLop η a b (-1) (towerLop η a b (-1) (towerModeVec η a b δ 1 x))
+        + ((2 : R) * dotVec η δ (towerMomentum a b j)) • towerLop η a b (-1) x := by
+  have hx1 : towerLop η a b (-1) x ∈ towerBigrade D R j (N + 1) :=
+    towerLop_mem_towerBigrade η a b hx (by push_cast; ring)
+  rw [towerModeVec_one_towerLop_neg_one hη hx1, towerModeVec_one_towerLop_neg_one hη hx,
+    map_add, map_smul]
+  module
+
+/-- `A_δ(1) 𝒟₂ x = 𝒟₂ (A_δ(1) x) + 2 A_δ(-1) x + 6 (δ·p_j) L_{-1} x`. -/
+theorem towerModeVec_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ}
+    {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N) :
+    towerModeVec η a b δ 1 (descTwo η a b x)
+      = descTwo η a b (towerModeVec η a b δ 1 x)
+        + ((2 : R) • towerModeVec η a b δ (-1) x
+          + ((6 : R) * dotVec η δ (towerMomentum a b j)) • towerLop η a b (-1) x) := by
+  rw [descTwo_apply, descTwo_apply, map_add, map_smul, map_smul,
+    towerModeVec_apply_towerLop η a b δ hη (-2) 1, show (-2 : ℤ) + 1 = -1 by ring,
+    towerModeVec_one_towerLop_neg_one_sq hη hx]
+  push_cast
+  module
+
+/-- `A_δ(2) L_{-1}² x = L_{-1}² A_δ(2) x + 4 L_{-1} A_δ(1) x + 2 (δ·p_j) x`. -/
+lemma towerModeVec_two_towerLop_neg_one_sq_gen (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ}
+    {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N) :
+    towerModeVec η a b δ 2 (towerLop η a b (-1) (towerLop η a b (-1) x))
+      = towerLop η a b (-1) (towerLop η a b (-1) (towerModeVec η a b δ 2 x))
+        + ((4 : R) • towerLop η a b (-1) (towerModeVec η a b δ 1 x)
+          + ((2 : R) * dotVec η δ (towerMomentum a b j)) • x) := by
+  rw [towerModeVec_apply_towerLop η a b δ hη (-1) 2, show (-1 : ℤ) + 2 = 1 by ring,
+    towerModeVec_apply_towerLop η a b δ hη (-1) 2, show (-1 : ℤ) + 2 = 1 by ring,
+    towerModeVec_one_towerLop_neg_one hη hx, map_add, map_smul]
+  push_cast
+  module
+
+/-- `A_δ(2) 𝒟₂ x = 𝒟₂ (A_δ(2) x) + 12 L_{-1} A_δ(1) x + 10 (δ·p_j) x`. -/
+theorem towerModeVec_two_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ} {N : ℕ}
+    {x : TowerFock D R} (hx : x ∈ towerBigrade D R j N) :
+    towerModeVec η a b δ 2 (descTwo η a b x)
+      = descTwo η a b (towerModeVec η a b δ 2 x)
+        + ((12 : R) • towerLop η a b (-1) (towerModeVec η a b δ 1 x)
+          + ((10 : R) * dotVec η δ (towerMomentum a b j)) • x) := by
+  rw [descTwo_apply, descTwo_apply, map_add, map_smul, map_smul,
+    towerModeVec_apply_towerLop η a b δ hη (-2) 2, show (-2 : ℤ) + 2 = 0 by ring,
+    towerModeVec_zero_apply_of_mem_towerBigrade η a b δ hx,
+    towerModeVec_two_towerLop_neg_one_sq_gen hη hx]
+  push_cast
+  module
+
+end DescTwoCommute
+
 /-! ### Transversality of the two families
 
 The new mathematical content of this file: the `𝒟₂`-images of the level-one seeds meet the
