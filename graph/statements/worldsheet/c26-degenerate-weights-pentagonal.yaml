@@ -134,5 +134,24 @@ notes: |
   与 math.euler-partition-generating-function notes 对同类标准事实的处理一致）；
   也**未**独立证明"k 奇偶 ⟺ (3p−2q)² ∈ {1} vs {25,49}"这一步的一般性（只核对了
   表格列出的 8 个数值点），这一步的一般证明仍完全在 blueprint 手算范围内，见 gaps。
+
+  【2026-09-12：与 worldsheet.ocq-null-state-two-families 的"N≤4 恰好相等/N=5
+  起差 1"是不同层次的命题，不要混淆（curator，分支 agent/curator/level3-wire，
+  只加 notes，不改 statement，本卡 status/effective 不变）】
+  worldsheet.ocq-null-state-two-families 新增 notes【2026-09-12（五）】记录了一条
+  与本卡断言 (2)(3) 的 s 分类**层次不同**的事实：两族计数恒等式本身
+  （p_{m+1}(N) = p_m(N)+p_{m+1}(N−1)+p_{m+1}(N−2)）对 N≤4 精确成立、N=5 起差 1
+  （D=26 处 33149 ≠ 33150），这是"两族**各自**贡献的维数之和是否精确抵消目标"
+  的问题。本卡断言 (2)(3) 的 s=1,2,5,7,12,15,… 分类回答的是一个不同的问题——
+  "哪些层需要（k 奇）或不需要（k 偶）第三、第四个产生子"，与两族计数是否精确
+  抵消是两件独立的事：s=5,7（k 偶）落在本卡断言 (2)(3) 覆盖的"两族内部重叠，
+  不需要新产生子"范围内，但 N=5 恰是两族计数恒等式本身开始出现 1 的偏差的地方——
+  **这不是巧合，是同一现象（两族像在 N=5 处开始重叠）的两种记账方式**：
+  worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（三）】(iv) 已把两者
+  统一到"Euler 五边形数障碍"这一个描述下，但"计数差几"（ocq 卡的问题）与
+  "该层是否存在于 k-奇列表"（本卡的问题）是两个不同的算术判据，不能相互替代
+  ——本卡的 s 分类本身不蕴含、也不由"两族计数何时开始差 1"推出。
+  ⚠ 本条不改变本卡的 status/effective，仍是本卡既有 status（依赖
+  worldsheet.kac-determinant-v2 标 inferred，见上）。
 author: curator
 created: "2026-09-12"
