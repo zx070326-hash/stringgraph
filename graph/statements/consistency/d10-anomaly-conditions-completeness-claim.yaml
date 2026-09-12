@@ -123,5 +123,28 @@ notes: |
   （见 root CLAUDE.md「原创证明轨道」）：目标是给出候选集上每个单因子族（A–G 型 + 阿贝尔）
   迹恒等式排除的完整、正确、机器可核验证明，验证通过后按 add-statement 流程把结论写回本卡
   （届时本卡 status 可能从 conjecture 上调，需新推导，不得手改）。
+
+  【7. 2026-09-12 原创证明毕业：effective status conjecture → rigorous】
+  上面【6】预告的原创证明已完成并经 `graph-reviewer` 对抗性审查裁定 `verified`
+  （research/attempts/d10-anomaly-full-classification/status.yaml）。按 research/CLAUDE.md
+  生命周期第 4 条毕业，新增推导
+  `consistency.d10-anomaly-conditions-completeness-claim--via-root-power-sums`
+  （`kind: proof`，`status: rigorous`）。`uv run stringgraph status` 确认本卡
+  effective status 由 conjecture 上调为 **rigorous**，由该推导承载；
+  本卡自身没有 `status` 字段（`kind: proposition`），全程未手改，符合原则 2。
+  · 旧推导 `--via-unproven-literature-assertion` **保留不动**：它记录的是文献态
+    （谁断言过、谁承认无证明、谁的表述冲突），与自证态是两件事。
+  · **rigorous 走的是例外通道**（docs/STATUS_LEVELS.md：前提完整 + 有限步初等计算 +
+    reviewer 独立复核），**不是**「有发表的、数学界接受的完整证明」。该证明
+    **未经期刊发表、未经同行评议**，且 `captain_confirmed: false`（船长尚未最终确认）。
+  · ⚠ **【2】【3】两条措辞红线不因此解除**：仍然只能说「只有这四个使十二形式因子化」，
+    **不能说「只有这四个反常抵消」**。
+  · ⚠ **本卡标题与陈述正文里的「文献断言，无已核实证明」现在已经过时**，但按原则 1
+    （陈述与标题不可变）**不就地修改**；要更新措辞须新建卡并在本卡写 `superseded_by`，
+    那是 lead/auditor 的裁决，不由 curator 自行发起。现状已在此留痕。
+  · ⚠ 正面方向「这四个确实满足条件」仍在
+    consistency.d10-four-groups-satisfy-anomaly-conditions，其 effective 仍是
+    `physical-argument`（被两张二手迹系数表卡压低）。**要把「恰有四个」当完整分类引用，
+    必须同时升级那张卡**，不能只引本卡。
 author: curator
 created: "2026-09-11"
