@@ -2037,7 +2037,38 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       （`dim(H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)` 对一切 `N`，`D = 26` 不出现，截距只经 Type-1 进入）。
       **订正**：蓝图 `N−1` 写法在 `N = 0` 为假（真空物理非零），故主定理取 `N+1`。
       σ-Gram 与三角性未启动（按裁决停）。**(B-26) 对 `N ≥ 3` 仍开**：缺的正是 Type-2/新奇异向量族。
-- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），且 **`N ≤ 2` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 在 `D = 26` 下由 `LevelTwoCount.ddfSpans_bigrade_neg_two_two` 关闭）。剩余是 `N ≥ 3` 的 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
+- [x] `noghost-pr7`（蓝图 **§B‴.5** 的 `N = 3` 账，2026-09-12，formalizer，
+      分支 `agent/formalizer/b26-n34`）：**`B26 3` 与 `ddfSpans_bigrade_neg_three_three` 关闭**
+      （`NoGhost/LevelThreeCount.lean`，约 1070 行，`check_axioms` 全 `ok`）。三块：
+      (1) **新的分离泛函**——§B‴.5 说领头指标（三角性）在 `N = 3` 上一定撞车（25 个指标被
+      `L₋₁` 族与 `𝒟₂` 族同时占据），本 PR 换成**反对称化的 `α_{-2}α_{-1}` 系数**
+      `x ↦ A_ε(2)A_δ(1)x − A_δ(2)A_ε(1)x`：`L₋₁`-像的该张量是 `p ⊗ w + 2T` 而 `T` **对称**，
+      `𝒟₂`-像是 `5 p ⊗ v + 6 v ⊗ p`，反对称部分不相消。配合 `α_{-3}` 系数消去 `φ` 得
+      `(ε·p)(δ·e) = (δ·p)(ε·e)`，再由 `p_{-3}·p_{-3} = -4 ≠ 0` 得 `e = 0`
+      （`eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`，**`D` 与物理性都不进入**）。
+      (2) **零态下界** `le_finrank_towerNull_inf_towerBigrade_three`：
+      `dim(H_null ⊓ V_3) ≥ dim Q_{-3,2} + (D − 1)`，`D = 26` 只经
+      `NullSeedsTwo.towerLop_two_apply_descTwo` 进入（新的任意-rung 版
+      `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`，条件是 `j + N = -2`）。
+      (3) **计数**：`Finsupp.exists_peel`（剥一个振子）⇒ `oscWeight_eq_three_cases`（三形），
+      `levelThreeIndex`（`ι ⊕ ι×ι ⊕ Sym ι 3`）+ 单射 ⇒ `card_ddfLevel_three_ge`；
+      `conjFreeEmbed`（κ ↪ Fin D 的 `mapDomain`，**对任意 level 通用**）⇒
+      `card_conjFree_two_ge`；分类的满射半 ⇒ `card_conjFree_three_le`；
+      **`levelThree_count_identity`** `p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)`
+      （Pascal，对一切 `D`；`D = 26` 时 `3575 = 3200 + 350 + 25`）。
+- [ ] `noghost-pr8`：**`B26 4`（蓝图「(B-26) 余下三段」的第一段剩余部分）**。两件独立的事：
+      (a) **`N = 4` 横截性**：种子换成 `Q_{-4,3} × Q_{-4,2}`，PR7 的两条泛函**不再截断**
+      （`A_ε(3)φ ≠ 0`，因为 `φ` 在 level 3），且 `α_{-2}α_{-1}` 张量在 `N = 4` 上**没有对称性**
+      可用（`(F4)` 只定出 `T` 的反对称部分）。⟨手算，2026-09-12⟩ 已备好三条力矩方程
+      `A_ε(4)`：`3w = -22u`；`A_ε(3)A_δ(1)`：`3·2[T(ε,δ)−T(δ,ε)] = 14[(ε·p)(δ·u)−(δ·p)(ε·u)]`；
+      `A_ε(2)A_δ(2)`（全对称，无信息）。**下一条要算的是 `A_ε(2)A_δ(1)A_ρ(1)`**，它的张量在
+      `(δ,ρ)` 上对称，是 `N = 3` 用过的那类约束的正确推广。估计 300–400 行。
+      (b) **`N = 4` 计数**：`p_m(4) = m + m² + C(m+1,2) + m·C(m+1,2) + C(m+3,4)`（五形），
+      指标类型五个和项、单射要 25 个 case。恒等式是
+      `p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)`（`D = 26`：`29575 = 25650 + 3575 + 350`）。
+      估计 500–700 行，纯机械。⚠ **一般 `N` 的形式 `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)`
+      只在 `N ≤ 4` 成立**（`N ≥ 5` 起两族的像重叠，超出量是五边形数，见 §B‴.7）。
+- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），且 **`N ≤ 3` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 由 `LevelTwoCount.ddfSpans_bigrade_neg_two_two`、`N = 3` 由 `LevelThreeCount.ddfSpans_bigrade_neg_three_three` 在 `D = 26` 下关闭）。剩余是 `N ≥ 4` 的 (B-26) 零态下界，见 `noghost-pr8` 与蓝图 §B‴。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片
       `(−N, N)`」）；`N ≤ 1` 已整块关闭（`ddfSpansOn_towerLevelLE_one`，任意 `D`）。
