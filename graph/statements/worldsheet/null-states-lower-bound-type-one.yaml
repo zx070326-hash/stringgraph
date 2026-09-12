@@ -1,0 +1,138 @@
+id: worldsheet.null-states-lower-bound-type-one
+kind: proposition
+title: 动量塔上零态维数的 D-无关下界（Type 1，L_{-1} 单射）：dim(H_null ∩ V_{N+1}) ≥ p_{D−1}(N)，对一切 N（D≠26 时的真实答案，不关闭 (B-26)）
+statement: |
+  【设定】记号沿用 worldsheet.ddf-spanning-rank-inequality（同一张塔 T(k;k_0)、反对角片
+  V_N := towerBigrade(−N, N)、H_null := H_null(a₀) ∩ V_N 记作 Z_N，H_null 逐字取自
+  worldsheet.ddf-spanning-hypothesis）与 worldsheet.physical-slice-bounded-by-transverse-count
+  的占据数记号 p_{D−1}(N)。另取 worldsheet.ddf-light-cone-frame 的标架对象
+  F : DDFLightConeFrame η a b（D ≥ 2）与截距条件 (haa) a₀ = α'k² = 1
+  （即 Fock.zeroModeSq η a = 2，等价于 worldsheet.ddf-spanning-hypothesis 里
+  a₀ = 1 的取值）。取 worldsheet.quasi-physical-slice-dimension 的准物理子空间
+  Q_{j,M} := towerBigrade(j,M) ∩ ⋂_{n≥1} ker L_n。
+
+  【断言】设 hD : 2 ≤ D、haa : a₀ = 1。则对一切 N ∈ N：
+
+      dim_K ( H_null ∩ towerBigrade(−(N+1), N+1) )  ≥  p_{D−1}(N) 。
+
+  证明机制（Type 1）：L_{-1} 在片 towerBigrade(−(N+1), N) 上单射（K-代数事实
+  ⁅L_{-1},K_1⁆ = −K_0、K_0 = 1，见 worldsheet.gt-longitudinal-k-algebra 断言 (1)(3)
+  在 m=−1,n=1 处的取值，对种子上的向量沿 K_1 的幂降级归纳排空），把该片的准物理子空间
+  Q_{−(N+1),N} 单射地送进 H_null ∩ towerBigrade(−(N+1),N+1)（Type 1 后代自动被 L_n
+  (n≥2) 湮灭、被 L_1 湮灭当且仅当 a₀=1，且落在 H_spur ⊆ 判定 H_null 的充分条件里，
+  这正是 worldsheet.ocq-null-state-two-families 断言 (1)(3) 在这里的具体实现）；
+  再用 worldsheet.quasi-physical-slice-dimension 给 dim Q_{−(N+1),N} ≥ p_{D−1}(N)。
+
+  【本卡明确不断言】
+  (a) **不是 (B-26) 的解**：worldsheet.ddf-spanning-rank-inequality 要求的零态下界是
+      dim Z_N ≥ p_{D−1}(N) − p_{D−2}(N)（相对于**同一个** N 的反对角片 V_N），本卡给出的是
+      dim Z_{N+1} ≥ p_{D−1}(N)（换了一个指标记法，对齐见下）。改写成同一记法：本卡在
+      N+1 处给出 dim Z_{N+1} ≥ p_{D−1}(N)，而目标需要 dim Z_{N+1} ≥ p_{D−1}(N+1) −
+      p_{D−2}(N+1)。**这两者一般不相等**——p_{D−1}(N) 恰是 D ≠ 26 时的真实答案
+      （worldsheet.ocq-null-state-two-families notes【三追记】(i) 的 §B‴.6 结果），
+      缺口 p_{D−1}(N+1) − p_{D−2}(N+1) − p_{D−1}(N) 由 Type 2（𝒟₂）族补上，本卡不覆盖
+      Type 2，也不断言两族之和达到目标（见【明确不断言】(b)）。
+  (b) **不覆盖 Type 2 族，不断言两族之和的下界，不断言 N ≥ 5 起两族像的重叠问题**：
+      𝒟₂ := 2L_{-2}+3L_{-1}² 族与本卡的 L_{-1} 族像是否相交、相交多少，是
+      worldsheet.ddf-spanning-rank-inequality notes【三追记】记录的独立开放问题，
+      本卡的 L_{-1}-单射论证对一切 D 成立（不含 D=26 的信息），无法看见这个重叠。
+  (c) **不断言这是紧的（tight）**：本卡只给下界，不断言 dim(H_null ∩ V_{N+1}) 恰等于
+      p_{D−1}(N)（一般地严格大于，因为 Type 2 族的贡献未计入）。
+  (d) **截距不是自由的**：本卡与 worldsheet.quasi-physical-slice-dimension 不同，
+      **需要** haa : a₀ = 1（用来保证 Type-1 后代的 L_0 本征值满足零态判据）；这是本卡
+      与其上游卡（intercept-free）的唯一差异，也是 PR6′ 唯一用到截距的地方。
+  (e) **N 从 0 起始的形式，不是蓝图原始的 "N−1" 形式**：蓝图 §B‴.9 原写法是
+      dim(H_null ∩ V_N) ≥ p_{D−1}(N−1)（N ≥ 1），但该形式在 N = 0 处为假——
+      p_{D−1}(0) = 1 而层真空 |0;0⟩ 是物理态且非零态（不在 H_null 里）。本卡采用
+      "N+1"形式以避免自然数减法与该反例；两个形式在 N ≥ 1 处逐字等价
+      （N ↦ N−1 的换元），Lean 侧两条定理都存在（本卡引用前者为 lean_decl，
+      后者以 notes 记账）。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.le_finrank_towerNull_inf_towerBigrade_succ
+  lean_file: StringFormal/NoGhost/TypeOneFamily.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/TypeOneFamily.lean ::
+      StringFormal.NoGhost.le_finrank_towerNull_inf_towerBigrade_succ
+      （本卡 formal.lean_decl，第 985 行起，section NullLowerBound 起于第 979 行）；
+      铺垫 typeOneMap（第 942 行，定义）、typeOneMap_apply（第 952 行）、
+      typeOneMap_injective（第 957 行，靠 towerLop_neg_one_injective 第 186 行）；
+      "N−1" 形式的姊妹定理 le_finrank_towerNull_inf_towerBigrade（第 1003 行，
+      本卡【明确不断言】(e) 提到的旧记法，等价、非本卡 lean_decl）。
+      L_{-1} 单射本身：towerLop_neg_one_injective（第 186 行，section LopNegOneInjective
+      起于第 140 行），靠 towerLop_neg_one_apply_kOp_one（第 148 行，K-代数三行关系）与
+      towerLop_neg_one_apply_kOp_one_pow（第 161 行，K_1 幂降级公式）。
+    note: |
+      本仓库，无 sorry。**类型类核实**：`le_finrank_towerNull_inf_towerBigrade_succ` 所在
+      `section NullLowerBound`（第 981 行起）声明
+      `variable {D}{K}[Field K][CharZero K][Algebra ℚ K]{η a b:Fin D→K}`；
+      定理本身前**没有** `omit` 标注，按完整签名记录。`towerLop_neg_one_injective` 所在
+      `section LopNegOneInjective`（第 140 行起）只需 `[CommRing R][Algebra ℚ R]`
+      （**不需要 `CharZero`、不需要域结构**——归纳排空只用"非零自然数在 ℚ-代数里可逆"，
+      见 `RatTorsion` 节的 `eq_zero_of_natCast_smul_eq_zero`），本卡陈述里的 K 是域，
+      是使用处（`le_finrank_towerSeed`/`finrank` 计数）加的更强要求，不是单射性本身所需。
+      **curator 未自行运行 `lake build` / `#check` 逐条核实**（本 worktree 无构建缓存），
+      结论基于直接读源码 `omit` 标注、`variable`/`section` 声明与调用链，未跑编译器验证。
+      **证明结构**（docstring 自述）：`typeOneMap : Q_{-(N+1),N} → H_null ⊓ V_{N+1}`
+      由 `L_{-1}` 限制而成（良定义靠 Type-1 后代的物理性判据，见
+      worldsheet.ocq-null-state-two-families 断言 (1)(3) 的机制）；`typeOneMap_injective`
+      归约到 `towerLop_neg_one_injective`（若 `L_{-1}u = L_{-1}v` 则 `L_{-1}(u-v)=0`，
+      `u-v` 落在片 `(-(N+1),N)` 上，单射性给 `u=v`）；最后用
+      `worldsheet.quasi-physical-slice-dimension` 的 `le_finrank_towerSeed` 给
+      `dim Q_{-(N+1),N} ≥ p_{D−1}(N)`，配单射线性映射不减维数
+      （`LinearMap.finrank_le_finrank_of_injective`）收尾。
+      **D 不出现，intercept 只通过 `haa` 进入**：docstring 逐字"The intercept enters only
+      through `haa : k·k = 2` (i.e. `a₀ = 1`), which is what makes `L_0` vanish on the
+      seeds and hence `L_{-1}(seed)` physical; this is the one place PR6′ is not
+      intercept-free"。
+      **与 N=2 特例（LevelTwoCount.lean）的显式数值比对**（docstring 逐字引用）：
+      `LevelTwoCount.le_finrank_towerNullSubmodule_inf_towerBigrade_two`（N+1=2 时）
+      给出 D 而非 p_{D−1}(1) = D−1；差的那 1 恰是 Type-2 态 𝒟₂|0;p_{-2}⟩，
+      与 §B‴.3 预测的缺口逐字一致——这是本卡【明确不断言】(a) 的具体印证。
+  - ref: stringformal-2026
+    loc: "formal/BLUEPRINT-noghost.md §B‴.9（PR6′ 的规划段，约 2470-2537 行）：
+      「三行」K-代数证明的手稿版本与本卡断言的原始表述（N 形式，后订正为 N+1 形式）"
+    note: |
+      蓝图段落先于 Lean 落地；本卡断言的具体形式（N+1，非 N−1）是 curator 依据 Lean
+      实际证出的定理反向核对后采用的，蓝图原文的 N 形式在 N=0 处的反例由 Lean 文件头
+      docstring【Deviations from blueprint §B‴.9】第几条自述（见 formal/CLAUDE.md
+      对 TypeOneFamily.lean 的摘要）。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15（不承载论证；文献不讨论逐 N 的零态维数下界，
+      更不讨论其 D-无关部分与 D=26 部分的拆分）"
+    note: "只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, critical-dimension, null-state, momentum-tower, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "null-states-lower-bound"`、
+  `search "type one"`、`search "typeOneMap"`，均无命中；本图此前没有承载
+  「零态维数 D-无关下界」这一命题的节点（worldsheet.ocq-null-state-two-families
+  承载的是"两族映射的像落在 H_null 内"这一存在性断言，不含维数下界）。
+
+  【与 worldsheet.ocq-null-state-two-families 的分工，不 supersede】那张卡（physical-argument，
+  全部⟨手算⟩）断言 Type 1/Type 2 两族映射的像落在 H_null 内，其证明机制的一部分
+  （L_{-1} 送准物理态到零态）与本卡相同，但那张卡**不给出维数下界**（【明确不断言】(a)
+  显式声明"不断言一般 N 的完备性/张成性"）；本卡是 Type 1 单族的维数下界，
+  已 formalized，是那张卡机制 (1) 的一个更精确、更强（有具体数字）但范围更窄
+  （只 Type 1，不含 Type 2）的独立命题。两卡并列，不合并、不 supersede
+  （与该卡与 worldsheet.ddf-spans-physical-states-level-two 的既有分工模式一致）。
+
+  【与 worldsheet.ddf-spanning-rank-inequality 的关系，本卡不为其挂依赖】(B-26) 那张卡
+  刻意保持 open、无推导（立卡理由已声明）；本卡不作为其 depends_on（那样会给一张刻意
+  留白的卡添加一条不足以关闭它的边，读者会误以为"部分进展"，而该卡的 notes 已经详细
+  记录了这条 D≠26 部分下界与目标的精确缺口，此处不重复建边，只在该卡 notes 追加
+  一段交叉引用（见下）。
+
+  【PR6′ 落地小结（curator，分支 agent/curator/pr6-wire）】
+  formal/StringFormal/NoGhost/TypeOneFamily.lean（约 1010 行，无 sorry）与
+  SpuriousElimination.lean 新增的任意片 (j,M) 版本（约 130 行，第 9 节）一并落地，
+  完成 worldsheet.ocq-null-state-two-families notes【2026-09-12（三）】(ii) 段裁决的
+  推荐路线（"仅用 L_{-1} 单射性，D-无关"），产出本卡（Type 1 维数下界）与姊妹卡
+  worldsheet.quasi-physical-slice-dimension（准物理子空间维数下界，本卡的直接输入）。
+  §B‴.8 裁决的三角性路线（PR6，另一候选）未被实现，本卡对应的是那次裁决明确推荐的
+  更便宜路线；三角性路线仍未开工，不受本次工作影响。
+author: curator
+created: "2026-09-12"
