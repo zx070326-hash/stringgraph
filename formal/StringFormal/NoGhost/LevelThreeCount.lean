@@ -760,4 +760,166 @@ theorem card_conjFree_two_ge (hD : 2 ≤ D) :
 
 end ConjFreeEmbed
 
+/-! ### The three index families of level three
+
+`ι ⊕ (ι × ι) ⊕ Sym ι 3` indexes the level-three occupation functions on `ι` directions:
+`α^i_{-3}`, `α^i_{-2}α^j_{-1}` (an *ordered* pair — the two modes are different, so there is no
+symmetrisation) and `α^i_{-1}α^j_{-1}α^k_{-1}` (an unordered triple).  Cardinality
+`m + m² + binom(m+2, 3)`. -/
+
+section LevelThreeIndex
+
+variable (ι : Type*) [DecidableEq ι]
+
+/-- The level-three occupation function of an unordered triple of mode-one oscillators. -/
+noncomputable def symThreeIndex (s : Sym ι 3) : (ι × ℕ+) →₀ ℕ :=
+  Finsupp.mapDomain (fun i : ι => ((i, 1) : ι × ℕ+)) (Multiset.toFinsupp (s : Multiset ι))
+
+/-- The level-three index map. -/
+noncomputable def levelThreeIndex : ι ⊕ (ι × ι) ⊕ Sym ι 3 → ((ι × ℕ+) →₀ ℕ)
+  | Sum.inl i => Finsupp.single (i, 3) 1
+  | Sum.inr (Sum.inl p) => Finsupp.single (p.1, 2) 1 + Finsupp.single (p.2, 1) 1
+  | Sum.inr (Sum.inr s) => symThreeIndex ι s
+
+variable {ι}
+
+lemma osc_one_injective : Function.Injective (fun i : ι => ((i, 1) : ι × ℕ+)) :=
+  fun _ _ h => congrArg (fun v : ι × ℕ+ => v.1) h
+
+/-- An unordered triple only occupies mode one. -/
+lemma symThreeIndex_apply_of_ne_one (s : Sym ι 3) {v : ι × ℕ+} (hv : v.2 ≠ 1) :
+    symThreeIndex ι s v = 0 := by
+  refine Finsupp.mapDomain_of_notMem_range _ _ fun ⟨i, hi⟩ => ?_
+  exact hv (congrArg (fun u : ι × ℕ+ => u.2) hi).symm
+
+/-- The triple `{i, j, k}` names the product of three mode-one oscillators. -/
+lemma symThreeIndex_mk (i j k : ι) (h : Multiset.card ({i, j, k} : Multiset ι) = 3) :
+    symThreeIndex ι ⟨{i, j, k}, h⟩
+      = Finsupp.single ((i, 1) : ι × ℕ+) 1 + Finsupp.single ((j, 1) : ι × ℕ+) 1
+        + Finsupp.single ((k, 1) : ι × ℕ+) 1 := by
+  have hm : ({i, j, k} : Multiset ι) = {i} + ({j} + {k}) := by
+    rw [Multiset.singleton_add, Multiset.singleton_add]
+    simp [Multiset.insert_eq_cons]
+  show Finsupp.mapDomain _ (Multiset.toFinsupp ({i, j, k} : Multiset ι)) = _
+  rw [hm, Multiset.toFinsupp_add, Multiset.toFinsupp_add, Multiset.toFinsupp_singleton,
+    Multiset.toFinsupp_singleton, Multiset.toFinsupp_singleton, Finsupp.mapDomain_add,
+    Finsupp.mapDomain_add, Finsupp.mapDomain_single, Finsupp.mapDomain_single,
+    Finsupp.mapDomain_single, ← add_assoc]
+
+lemma oscWeight_levelThreeIndex (x : ι ⊕ (ι × ι) ⊕ Sym ι 3) :
+    Finsupp.oscWeight (levelThreeIndex ι x) = 3 := by
+  match x with
+  | Sum.inl i => simp [levelThreeIndex]
+  | Sum.inr (Sum.inl p) => simp [levelThreeIndex]
+  | Sum.inr (Sum.inr s) =>
+      obtain ⟨i, j, k, hs⟩ := Multiset.card_eq_three.1 s.2
+      have : s = ⟨{i, j, k}, hs ▸ s.2⟩ := Subtype.ext hs
+      rw [levelThreeIndex, this, symThreeIndex_mk]
+      simp
+
+lemma symThreeIndex_injective : Function.Injective (symThreeIndex ι) := fun s t h =>
+  Subtype.ext (Multiset.toFinsupp.injective (Finsupp.mapDomain_injective osc_one_injective h))
+
+/-- **The level-three parametrisation is injective.** -/
+theorem levelThreeIndex_injective : Function.Injective (levelThreeIndex ι) := by
+  have hsingle : ∀ (i j : ι) (m n : ℕ+), m ≠ n →
+      (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, m) : ι × ℕ+) = 0 := by
+    intro i j m n hmn
+    refine Finsupp.single_eq_of_ne fun hc => hmn ?_
+    have hc2 := congrArg (fun v : ι × ℕ+ => v.2) hc
+    simp only at hc2
+    first | exact hc2 | exact hc2.symm
+  have h32 : (3 : ℕ+) ≠ 2 := by decide
+  have h31 : (3 : ℕ+) ≠ 1 := by decide
+  have h21 : (2 : ℕ+) ≠ 1 := by decide
+  intro x y h
+  match x, y with
+  | Sum.inl i, Sum.inl j =>
+      refine congrArg Sum.inl ?_
+      by_contra hc
+      have h1 := DFunLike.congr_fun h ((i, 3) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.single_eq_same,
+        Finsupp.single_eq_of_ne (fun hcc => hc (by
+          have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+          simp only at hz
+          first | exact hz | exact hz.symm))] at h1
+      exact one_ne_zero h1
+  | Sum.inl i, Sum.inr (Sum.inl p) =>
+      have := DFunLike.congr_fun h ((i, 3) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.single_eq_same, Finsupp.add_apply,
+        hsingle i p.1 3 2 h32, hsingle i p.2 3 1 h31] at this
+      exact absurd this (by norm_num)
+  | Sum.inl i, Sum.inr (Sum.inr s) =>
+      have := DFunLike.congr_fun h ((i, 3) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.single_eq_same,
+        symThreeIndex_apply_of_ne_one s (by simpa using h31)] at this
+      exact absurd this one_ne_zero
+  | Sum.inr (Sum.inl p), Sum.inl i =>
+      have := DFunLike.congr_fun h ((i, 3) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.single_eq_same, Finsupp.add_apply,
+        hsingle i p.1 3 2 h32, hsingle i p.2 3 1 h31] at this
+      exact absurd this (by norm_num)
+  | Sum.inr (Sum.inl p), Sum.inr (Sum.inl q) =>
+      have hq1 : q.1 = p.1 := by
+        by_contra hc
+        have h1 := DFunLike.congr_fun h ((p.1, 2) : ι × ℕ+)
+        rw [levelThreeIndex, levelThreeIndex, Finsupp.add_apply, Finsupp.add_apply,
+          hsingle p.1 p.2 2 1 h21, hsingle p.1 q.2 2 1 h21, add_zero, add_zero,
+          Finsupp.single_eq_same,
+          Finsupp.single_eq_of_ne (fun hcc => hc (by
+            have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+            simp only at hz
+            first | exact hz | exact hz.symm))] at h1
+        exact one_ne_zero h1
+      have hq2 : q.2 = p.2 := by
+        by_contra hc
+        have h2 := DFunLike.congr_fun h ((p.2, 1) : ι × ℕ+)
+        rw [levelThreeIndex, levelThreeIndex, Finsupp.add_apply, Finsupp.add_apply,
+          hsingle p.2 p.1 1 2 (Ne.symm h21), hsingle p.2 q.1 1 2 (Ne.symm h21), zero_add,
+          zero_add, Finsupp.single_eq_same,
+          Finsupp.single_eq_of_ne (fun hcc => hc (by
+            have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+            simp only at hz
+            first | exact hz | exact hz.symm))] at h2
+        exact one_ne_zero h2
+      rw [show p = q from Prod.ext hq1.symm hq2.symm]
+  | Sum.inr (Sum.inl p), Sum.inr (Sum.inr s) =>
+      have := DFunLike.congr_fun h ((p.1, 2) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.add_apply, Finsupp.single_eq_same,
+        hsingle p.1 p.2 2 1 h21, symThreeIndex_apply_of_ne_one s (by simpa using h21)] at this
+      exact absurd this (by norm_num)
+  | Sum.inr (Sum.inr s), Sum.inl i =>
+      have := DFunLike.congr_fun h ((i, 3) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.single_eq_same,
+        symThreeIndex_apply_of_ne_one s (by simpa using h31)] at this
+      exact absurd this.symm one_ne_zero
+  | Sum.inr (Sum.inr s), Sum.inr (Sum.inl p) =>
+      have := DFunLike.congr_fun h ((p.1, 2) : ι × ℕ+)
+      rw [levelThreeIndex, levelThreeIndex, Finsupp.add_apply, Finsupp.single_eq_same,
+        hsingle p.1 p.2 2 1 h21, symThreeIndex_apply_of_ne_one s (by simpa using h21)] at this
+      exact absurd this.symm (by norm_num)
+  | Sum.inr (Sum.inr s), Sum.inr (Sum.inr t) =>
+      exact congrArg (Sum.inr ∘ Sum.inr) (symThreeIndex_injective h)
+
+end LevelThreeIndex
+
+/-- **`p_m(3) ≥ m + m² + binom(m+2, 3)`** where `m = #ι`: the lower bound on
+`dim (ddfSpan ⊓ V_3)` needed by `B26 3`.  (Equality holds, but only this direction is used.) -/
+theorem card_ddfLevel_three_ge (ι : Type*) [Fintype ι] [DecidableEq ι] :
+    Fintype.card ι + Fintype.card ι * Fintype.card ι + Nat.choose (Fintype.card ι + 2) 3
+      ≤ Fintype.card {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 3} := by
+  classical
+  have hcard : Fintype.card (ι ⊕ (ι × ι) ⊕ Sym ι 3)
+      = Fintype.card ι + Fintype.card ι * Fintype.card ι
+        + Nat.choose (Fintype.card ι + 2) 3 := by
+    rw [Fintype.card_sum, Fintype.card_sum, Fintype.card_prod, Sym.card_sym_eq_choose,
+      show Fintype.card ι + 3 - 1 = Fintype.card ι + 2 by omega]
+    ring
+  rw [← hcard]
+  refine Fintype.card_le_of_injective
+    (fun x => (⟨levelThreeIndex ι x, ?_⟩ : {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 3})) ?_
+  · rw [ddfLevel_eq_oscWeight]; exact oscWeight_levelThreeIndex x
+  · intro x y hxy
+    exact levelThreeIndex_injective (congrArg Subtype.val hxy)
+
 end StringFormal.NoGhost
