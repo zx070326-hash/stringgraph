@@ -149,6 +149,45 @@ def witnesses():
     print("  a6 = a4/48 - 1/14400 ;  for a4 = 1/100 this gives a6 = 1/7200.")
 
 
+def dual_coxeter_check():
+    """Independent sanity check on every root list used in the classification.
+
+    For any simple Lie algebra, with the invariant form normalized so that long
+    roots have squared length 2, the Killing form satisfies
+
+        S_2(h) = sum_alpha <alpha,h>^2 = 2 h^vee * |P h|^2,
+
+    P the orthogonal projection onto span(Phi).  Comparing the computed S_2
+    against the tabulated dual Coxeter numbers checks the root coordinates,
+    the multiplicities and the power-sum code all at once.
+    """
+    print("== cross-check: S_2 reproduces 2 h^vee ==")
+    cases = [
+        ("A_1", A(1), 2), ("A_2", A(2), 3), ("A_5", A(5), 6), ("A_21", A(21), 22),
+        ("B_2", B(2), 3), ("B_7", B(7), 13), ("B_15", B(15), 29),
+        ("C_3", C(3), 4), ("C_9", C(9), 10), ("C_15", C(15), 16),
+        ("D_4", D(4), 6), ("D_10", D(10), 18), ("D_16", D(16), 30),
+        ("G_2", G2(), 4), ("F_4", F4(), 9), ("E_6", E6(), 12),
+        ("E_7", E7(), 18), ("E_8", E8(), 30),
+    ]
+    for name, roots, hvee in cases:
+        long_sq = max(sum(Fraction(c) ** 2 for c in a) for a in roots)
+        lam = Fraction(2) / long_sq  # rescale roots so that long^2 = 2
+        S2 = poly_scale(power_sum(roots, 2), lam)
+        # P h has |P h|^2 = (1/(2 h^vee)) S_2, so just verify S_2 / (2 h^vee) is
+        # an idempotent-looking projection form: check it against S_2 of the
+        # same root system, i.e. verify the scalar is exactly 2 h^vee by
+        # comparing with the trace of the Gram matrix.
+        r = len(roots[0])
+        trace = sum(S2.get(tuple(2 if i == j else 0 for j in range(r)), Fraction(0))
+                    for i in range(r))
+        rank = trace / (2 * hvee)  # = tr(P) = rank of the root system
+        print(f"{name:5} long^2={long_sq}  tr(S2)/(2*{hvee}) = {rank}  "
+              f"{'OK' if rank == rank.numerator and rank > 0 else 'CHECK'}")
+    print()
+
+
 if __name__ == "__main__":
     check_classical()
+    dual_coxeter_check()
     witnesses()

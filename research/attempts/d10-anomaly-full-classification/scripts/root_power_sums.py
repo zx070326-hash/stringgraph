@@ -241,20 +241,27 @@ def analyse(name, roots, rank, dim):
 
 
 def main():
+    # Complete non-redundant Killing-Cartan list of compact simple Lie algebras
+    # of dimension <= 496.  The ranges below are forced by dim <= 496:
+    #   A_n: n(n+2) <= 496  => n <= 21      B_n: n(2n+1) <= 496 => n <= 15
+    #   C_n: n(2n+1) <= 496 => n <= 15      D_n: n(2n-1) <= 496 => n <= 16
+    # (A_n n>=1, B_n n>=2, C_n n>=3, D_n n>=4 avoids the low-rank coincidences
+    #  B_1=C_1=A_1, C_2=B_2, D_2=A_1+A_1, D_3=A_3.)
     cases = []
-    for n in range(1, 13):
+    for n in range(1, 22):
         cases.append((f"A_{n} = su({n+1})", A(n), n, n * (n + 2)))
-    for n in range(2, 20):
+    for n in range(2, 16):
         cases.append((f"B_{n} = so({2*n+1})", B(n), n, n * (2 * n + 1)))
-    for n in range(3, 20):
+    for n in range(3, 16):
         cases.append((f"C_{n} = usp({2*n})", C(n), n, n * (2 * n + 1)))
-    for n in range(4, 20):
+    for n in range(4, 17):
         cases.append((f"D_{n} = so({2*n})", D(n), n, n * (2 * n - 1)))
     cases.append(("G_2", G2(), 2, 14))
     cases.append(("F_4", F4(), 4, 52))
     cases.append(("E_6", E6(), 6, 78))
     cases.append(("E_7", E7(), 7, 133))
     cases.append(("E_8", E8(), 8, 248))
+    assert all(dim <= 496 for _, _, _, dim in cases)
 
     print(f"{'algebra':16} {'dim':>5} {'#roots':>7}  cond(i)  strong-pair")
     sols_i, sols_pair = [], []
@@ -269,8 +276,25 @@ def main():
         if sat_pair:
             sols_pair.append((name, dim))
     print()
-    print("simple algebras satisfying (i)          :", sols_i)
-    print("simple algebras satisfying strong pair  :", sols_pair)
+    print(f"{len(cases)} compact simple Lie algebras of dim <= 496 examined")
+    print("satisfying (i)         :", sols_i)
+    print("satisfying strong pair :", sols_pair)
+    print()
+
+    # Final assembly: g = g_1 + ... + g_r + u(1)^m with dim = 496.
+    # r = 0, or r = 1 with g_1 satisfying (i), or r = 2 with both factors
+    # satisfying the strong pair (Lemmas 3 and 4 of proof.md).
+    answers = ["u(1)^496"]
+    for name, dim in sols_i:
+        answers.append(f"{name} + u(1)^{496 - dim}" if dim < 496 else name)
+    for i, (n1, d1) in enumerate(sols_pair):
+        for n2, d2 in sols_pair[i:]:
+            if d1 + d2 <= 496:
+                m = 496 - d1 - d2
+                answers.append(f"{n1} + {n2}" + (f" + u(1)^{m}" if m else ""))
+    print("solutions of (i) & (ii):")
+    for a in answers:
+        print("   ", a)
 
 
 if __name__ == "__main__":
