@@ -379,8 +379,11 @@ of this table is re-verified against the explicit root lists by
 
 *Warning, recorded because it is a live trap.*  The tempting shortcut of testing
 (A) only on the two-parameter slice `x = (a,−a,b,−b,0,…,0)` (where `p₃ = 0`)
-**does not** exclude `A_n`.  On that slice (A) reduces to the two equations
-`4N + 120 = N²/3 + 2N − N³/225` and `120 = N²/3 + 6N − N³/75`, whose common
+**does not** exclude `A_n`.  Writing `s = a²+b²`, `e = a²b²`, so that `p₂ = 2s`,
+`p₄ = 2(s²−2e)`, `p₆ = 2(s³−3se)`, equation (A) reduces on that slice to the two
+equations
+`4N + 120 = N²/3 + 2N − N³/225` (coefficient of `s³`; roots `30`, `60`, `−15`) and
+`12N + 240 = 2N²/3` (coefficient of `s·e`; roots `30`, `−12`), whose only common
 solution is `N = 30`.  So `su(30)` passes this slice test and is excluded only by
 the `p₆` (equivalently `p₃²`) terms.  Any proof of (S) that tests `A_n` on a
 Cartan slice with `p₃ = 0` has a hole at `N = 30`.  (`su(30)` has dimension 899,
