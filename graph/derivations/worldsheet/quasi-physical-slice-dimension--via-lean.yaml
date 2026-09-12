@@ -1,0 +1,52 @@
+id: worldsheet.quasi-physical-slice-dimension--via-lean
+target: worldsheet.quasi-physical-slice-dimension
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      供给标架对象 F（`DDFLightConeFrame η a b`）；本推导把它当黑箱使用，
+      只用其打包出的 (F1)(F2)(F3)（η_μ²=1、η(b,b)=0、η(a,b)=1），
+      不重新论证标架的其余部分。该卡 status/effective = formalized，不压低本推导状态。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/TypeOneFamily.lean :: StringFormal.NoGhost.le_finrank_towerSeed
+      （第 905 行起）；完整调用链见目标卡同名 source。
+    note: |
+      本仓库，无 sorry。类型类核实（section SeedBound 无 `omit` 标注，实际签名
+      `[Field K][CharZero K][Algebra ℚ K]`）详见目标卡 sources note，不在此重复。
+summary: |
+  证明走「张成的秩零化度」，与 physical-slice-bounded-by-transverse-count 的证明镜像但方向相反：
+
+  **第 1 步（张成半，`towerBigrade_le_ordSeedSpan`，第 569 行，F-1）**：片 V_{j,M}
+  里任何向量都能写成「有序种子族 `ordSeedSpanPos` 的元素 + 一个被 `L_{-1}` 生成的
+  可消去部分」（`straighten` 一族对负模 Witt 代数族的强归纳直接搬用
+  `Virasoro/VermaPBW.lean` 的排序机制）。
+
+  **第 2 步（种子族维数上界，`finrank_ordSeedSpanPos_le`，第 739 行，F-2 的单射半）**：
+  有序种子族的基数 ≤ p_D(M) − p_{D−1}(M)（靠 `seedIndexPosEmbed_injective` 把种子索引
+  嵌入到"含至少一个 b̃"的占据函数集合）。
+
+  **第 3 步（配对映射，`sliceToSeedDual`/`mem_towerSeed_of_mem_ker_sliceToSeedDual`，
+  第 848、863 行）**：把片对种子族的配对打包成线性映射
+  `Ψ : V_{j,M} → (ordSeedSpanPos)^*`，其核落在 Q_{j,M} 内——若 x 与整个种子族配对为零，
+  则对一切 0 < n ≤ M，`L_n x` 与任意 y 的配对可换位到 x 与 `L_{-n}y` 的配对（塔上型的
+  换位公式），而 `L_{-n}y` 落在种子族的张成里（`towerLop_neg_mem_ordSeedSpanPos_of_mem_
+  towerBigrade`），故为零；型非退化给出 `L_n x = 0`。
+
+  **第 4 步（秩零化度，`le_finrank_towerSeed`，第 905 行，即目标卡断言）**：
+  `dim ker Ψ = dim V_{j,M} − rank Ψ`，`dim V_{j,M} = p_D(M)`（`finrank_towerBigrade`），
+  `rank Ψ ≤ dim(种子族) ≤ p_D(M) − p_{D−1}(M)`（第 2 步），`ker Ψ ⊆ Q_{j,M}`（第 3 步）
+  ⇒ `dim Q_{j,M} ≥ dim ker Ψ ≥ p_D(M) − (p_D(M) − p_{D−1}(M)) = p_{D−1}(M)`。
+
+  **为什么标 formalized**：目标卡的全部断言由 `le_finrank_towerSeed` 这一条无 sorry 的
+  Lean 定理逐字给出；唯一的非接口依赖（DDF 光锥标架）effective 为 formalized，不压低本推导状态。
+gaps:
+  - "只给下界，不给紧性/等号条件（目标卡边界 (a) 本身声明的范围）：等号需要
+    SpuriousElimination.lean 的姊妹上界定理，本推导不做拼接（见目标卡 notes）。"
+  - "curator 未自行运行 lake build / #check 逐条核实类型类窄化说法（目标卡 sources 的核实段）；
+    结论基于直接读 omit 标注与调用链，未跑编译器验证。"
+author: curator
+created: "2026-09-12"

@@ -1,0 +1,68 @@
+id: worldsheet.null-states-lower-bound-type-one--via-lean
+target: worldsheet.null-states-lower-bound-type-one
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.quasi-physical-slice-dimension
+    inferred: false
+    note: |
+      `le_finrank_towerNull_inf_towerBigrade_succ`（第 985 行）的最后一步直接调用
+      `le_finrank_towerSeed`（本卡目标即该卡的 formal.lean_decl）给
+      `dim Q_{-(N+1),N} ≥ p_{D−1}(N)`，再配 `typeOneMap_injective` 的单射性收尾
+      （`LinearMap.finrank_le_finrank_of_injective`）。是本推导唯一的维数输入。
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      供给标架对象 F（`DDFLightConeFrame η a b`），`towerLop_neg_one_injective`
+      与 `typeOneMap` 均以 (η,a,b) 及 (F1)(F2)(F3) 为背景参数；本推导把它当黑箱使用。
+  - id: worldsheet.gt-longitudinal-k-algebra
+    inferred: false
+    note: |
+      `towerLop_neg_one_apply_kOp_one`（第 148 行，L_{-1} 单射性论证的第一步）证明体
+      逐字调用 `lie_towerLop_kOp η a b hη (-1) 1`（该卡 formal.lean_decl，断言 (1)
+      ⁅L_m,K_n⁆=−nK_{m+n} 在 m=−1,n=1 处的取值）与 `kOp_zero_eq_one`（该卡断言 (3)，
+      K_0=1）：`have h := congrArg (fun T => T v) (lie_towerLop_kOp η a b hη (-1) 1)`，
+      随后用 `kOp_zero_eq_one η a b hbb hba` 代入 K_0=1。这是一条真实的调用链依赖
+      （非仅主题关联）：K-代数两条恒等式是 L_{-1} 单射性证明的字面输入，而单射性
+      是 `typeOneMap_injective` 进而本卡目标的唯一机制。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/TypeOneFamily.lean ::
+      StringFormal.NoGhost.le_finrank_towerNull_inf_towerBigrade_succ
+      （本卡 target 的 formal.lean_decl，第 985 行起）；完整调用链见目标卡同名 source。
+    note: |
+      本仓库，无 sorry。类型类核实（section NullLowerBound 无 `omit` 标注，实际签名
+      `[Field K][CharZero K][Algebra ℚ K]`；`towerLop_neg_one_injective` 只需
+      `[CommRing R][Algebra ℚ R]`）详见目标卡 sources note，不在此重复。
+summary: |
+  证明分两条独立的线拼接：
+
+  **线 A（L_{-1} 单射性，`towerLop_neg_one_injective`，第 186 行）**：用 K-代数事实
+  ⁅L_{-1},K_1⁆=−K_0、K_0=1（`towerLop_neg_one_apply_kOp_one`，第 148 行，直接调用
+  worldsheet.gt-longitudinal-k-algebra 断言 (1)(3)）得到降级公式
+  `L_{-1} K_1^{k+1} x = -(k+1)·K_1^k x`（`towerLop_neg_one_apply_kOp_one_pow`，第 161 行，
+  对 K_1 的幂做归纳）；再证片 (j,M) 上任意向量 x 经 K_1 幂次升到 M+1 层之上必为零
+  （`kOp_eq_towerModeVec` 与占据数几何耗尽），从 `L_{-1}x=0` 出发沿 K_1^k x 反向归纳，
+  逐步"除以非零自然数"（`eq_zero_of_natCast_smul_eq_zero`，用到 `Algebra ℚ R`）排空到
+  x=0。全程 D 与截距均不出现。
+
+  **线 B（typeOneMap 及其维数下界，第 942-1003 行）**：把线 A 的单射性限制到映射
+  `typeOneMap : Q_{-(N+1),N} → H_null ⊓ V_{N+1}`（`(towerLop η a b (-1)).restrict`，
+  良定义靠截距条件 haa 使 Type-1 后代满足零态判据）；`typeOneMap_injective`
+  （第 957 行）把线 A 的单射性搬到这个限制映射上；配
+  worldsheet.quasi-physical-slice-dimension 给出的
+  `dim Q_{-(N+1),N} ≥ p_{D−1}(N)`（`le_finrank_towerSeed`），用单射线性映射不减维数
+  （`LinearMap.finrank_le_finrank_of_injective`）得到目标卡断言
+  `dim(H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)`。
+
+  **为什么标 formalized**：目标卡的全部断言由 `le_finrank_towerNull_inf_towerBigrade_succ`
+  这一条无 sorry 的 Lean 定理逐字给出；三条依赖（K-代数、光锥标架、准物理片维数下界）
+  effective 均为 formalized，不压低本推导状态。
+gaps:
+  - "只给 D-无关下界，不覆盖 Type 2 族，不关闭 (B-26)（目标卡【明确不断言】(a)(b) 本身
+    声明的范围）。"
+  - "curator 未自行运行 lake build / #check 逐条核实类型类窄化说法（目标卡 sources 的核实段）；
+    结论基于直接读 omit 标注与调用链，未跑编译器验证。"
+author: curator
+created: "2026-09-12"

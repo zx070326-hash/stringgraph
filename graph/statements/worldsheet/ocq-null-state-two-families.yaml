@@ -249,5 +249,23 @@ notes: |
   两段，不构成需要 supersede 的错误。
   ⚠ **本条不改变本卡的 status/effective**：本卡（一般 N，(1)(2)(3)）与其推导
   --via-blueprint-hand-computation 仍是 physical-argument。
+
+  【2026-09-12（四）：本卡断言 (1)（Type 1 族，一般 N）的一条更强、独立、已 formalized
+  的维数下界现有 Lean 落地，但仍不覆盖本卡断言 (2)(3) 或【明确不断言】(a)(b) 的范围
+  （curator，分支 agent/curator/pr6-wire）】
+  formal/StringFormal/NoGhost/TypeOneFamily.lean（无 sorry）证出：χ₁ 族（本卡断言 (1)
+  的映射 Q_{N−1} → towerBigrade(r,N)，φ ↦ L_{−1}φ）不仅像落在 H_null（本卡 (3) 已证
+  这一半），其像的维数还有一条 D-无关下界 dim(H_null ⊓ towerBigrade(−(N+1),N+1))
+  ≥ p_{D−1}(N)——本卡未断言维数（【明确不断言】(e) 明确排除了一般 N 的维数公式）。
+  图上承载见新卡 **worldsheet.null-states-lower-bound-type-one**（formalized，配套
+  推导 `--via-lean`）：那张卡是本卡机制 (1)(3) 的一个更精确、更强（有具体数字）但
+  范围更窄（只 Type 1，不含 Type 2，不含【明确不断言】(a)(b) 的重叠问题）的独立命题，
+  两卡并列，不 supersede、不合并（与本卡与
+  worldsheet.ddf-spans-physical-states-level-two 的既有分工模式一致，见上面
+  【2026-09-12（二）】一段）。
+  **本条不改变本卡的 status/effective**：本卡（一般 N，(1)(2)(3)）与其推导
+  --via-blueprint-hand-computation 仍是 physical-argument——新卡只对 (1) 单族的
+  维数做了 formalized 的旁证，不触及 (2)（Type 2 族）、(3) 的一般性，也不触及
+  【明确不断言】(a)(b) 记录的 N≥5 重叠问题。
 author: curator
 created: "2026-09-12"
