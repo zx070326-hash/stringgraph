@@ -2027,7 +2027,16 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     真正只对 `N = 2` 的是计数（`oscWeight_eq_two_cases` 是 level-2 专用的分类）与
     「`D−1` 个 Type-1 种子恰好张成 `p₋N^⊥`」。⇒ 下一步仍按蓝图：PR5b 全量与 PR5a
     （Virasoro × 光锥 PBW 基），以及 §B″.11 第 1 条的五边形数断点（`N ≥ 5`）。
-- [ ] `noghost-pr6`（蓝图 **§B‴**，2026-09-12 planner-b26-general-n）：**三角性路线否决**（其上界恰为 D ≠ 26 的答案 p_{D−1}(N−1)；𝒟₂ 族领头指标是 L₋₁ 族的子集；且它等价于 conjFree ⊓ spurious = ⊥，即依赖 PR5a）。**推荐 PR6′ `NoGhost/TypeOneFamily.lean`（700–850 行，D 无关）**：`towerLop_neg_one_injective`（K 代数：⁅L₋₁,K₁⁆ = −K₀、K₀ = 1 ⇒ L₋₁K₁^k x = −k K₁^{k−1} x，char 0，~60 行）、`towerSeed` + `le_finrank_towerSeed`（(F-1)(F-2) 下半，400–450）、`le_finrank_towerNull_inf_towerBigrade`（80）；前置：PR4 四条引理从反对角推广到任意 (j,M)（150–250）。到此得 `dim Z_N ≥ p_{D−1}(N−1)` 对所有 N，然后**停**，不做 σ-Gram。**新数学结果**：c = 26 时 `h_{p,q}(26) = [25 − (3p+2q)²]/24`，V(26, 1−s) 退化 ⟺ 24s+1 是完全平方 ⟺ s 是广义五边形数；奇 k（s = 1,2,12,15,35,…，1−φ 的 + 号）给权 s 的新零态生成元，偶 k（s = 5,7,22,26,…，− 号）给 L₋₁χ_{s−1} ∝ 𝒟₂χ_{s−2} 的**重叠**。⇒ §B″「每层只需 𝒟₂」对 N ≤ 11 成立，**N ≥ 12 起为假**（权 12/15 的新生成元各带自己的 c = 26 方程）。(B-26) 余下三段：N ≤ 4 横截性 / 5 ≤ N ≤ 11 两条 U(Vir⁻) 恒等式 / N ≥ 12 新族。
+- [x] `noghost-pr6`（蓝图 **§B‴**，2026-09-12 planner-b26-general-n）：**三角性路线否决**（其上界恰为 D ≠ 26 的答案 p_{D−1}(N−1)；𝒟₂ 族领头指标是 L₋₁ 族的子集；且它等价于 conjFree ⊓ spurious = ⊥，即依赖 PR5a）。**推荐 PR6′ `NoGhost/TypeOneFamily.lean`（700–850 行，D 无关）**：`towerLop_neg_one_injective`（K 代数：⁅L₋₁,K₁⁆ = −K₀、K₀ = 1 ⇒ L₋₁K₁^k x = −k K₁^{k−1} x，char 0，~60 行）、`towerSeed` + `le_finrank_towerSeed`（(F-1)(F-2) 下半，400–450）、`le_finrank_towerNull_inf_towerBigrade`（80）；前置：PR4 四条引理从反对角推广到任意 (j,M)（150–250）。到此得 `dim Z_N ≥ p_{D−1}(N−1)` 对所有 N，然后**停**，不做 σ-Gram。**新数学结果**：c = 26 时 `h_{p,q}(26) = [25 − (3p+2q)²]/24`，V(26, 1−s) 退化 ⟺ 24s+1 是完全平方 ⟺ s 是广义五边形数；奇 k（s = 1,2,12,15,35,…，1−φ 的 + 号）给权 s 的新零态生成元，偶 k（s = 5,7,22,26,…，− 号）给 L₋₁χ_{s−1} ∝ 𝒟₂χ_{s−2} 的**重叠**。⇒ §B″「每层只需 𝒟₂」对 N ≤ 11 成立，**N ≥ 12 起为假**（权 12/15 的新生成元各带自己的 c = 26 方程）。(B-26) 余下三段：N ≤ 4 横截性 / 5 ≤ N ≤ 11 两条 U(Vir⁻) 恒等式 / N ≥ 12 新族。
+      **PR6′ 完成**（2026-09-12，formalizer，分支 `agent/formalizer/noghost-pr6-typeone`，
+      `NoGhost/TypeOneFamily.lean` 约 1000 行 + `SpuriousElimination.lean` 的 `(j, M)` 节）：
+      `towerLop_neg_one_injective`（不需 `CharZero`）、通用 `straighten`（任意 `IsNegWitt` 族）、
+      (F-1) 张成半 `towerBigrade_le_ordSeedSpan`、(F-2) 单射半 `seedIndexPosEmbed_injective`、
+      `towerSeed` + **`le_finrank_towerSeed`**（与 `finrank_towerPositiveMode_inf_towerBigrade_le` 合成
+      `dim Q_{j,M} = p_{D−1}(M)` **精确**）、**`le_finrank_towerNull_inf_towerBigrade_succ`**
+      （`dim(H_null ⊓ V_{N+1}) ≥ p_{D−1}(N)` 对一切 `N`，`D = 26` 不出现，截距只经 Type-1 进入）。
+      **订正**：蓝图 `N−1` 写法在 `N = 0` 为假（真空物理非零），故主定理取 `N+1`。
+      σ-Gram 与三角性未启动（按裁决停）。**(B-26) 对 `N ≥ 3` 仍开**：缺的正是 Type-2/新奇异向量族。
 - [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），且 **`N ≤ 2` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 在 `D = 26` 下由 `LevelTwoCount.ddfSpans_bigrade_neg_two_two` 关闭）。剩余是 `N ≥ 3` 的 (B-26) 零态下界，见上条 `noghost-pr5` 与蓝图 §B″。
       **现在是唯一缺口**：条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片

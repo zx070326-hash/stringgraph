@@ -68,6 +68,17 @@ file**, and neither does the intercept beyond the normalisation `a₀ = α'k²`.
 * `finrank_conjFree_le`, `finrank_conjFreeSlice_le` and
   **`finrank_towerPhys_inf_towerBigrade_le`** — (P3).
 
+### The same on an arbitrary bigraded piece `(j, M)` (blueprint §B‴.9, PR6′ prerequisite)
+
+* `conjFreeSliceAt`, `towerBigrade_le_conjFreeSliceAt_sup_towerSpurious` — the elimination on
+  any rung `j` (the proof never used the rung).
+* `towerPositiveMode_inf_towerBigrade_eq_towerOrthComplement` — `Q_{j,M} = S^⊥ ⊓ V_{j,M}` for
+  the quasi-physical space `Q_{j,M} = towerPositiveModeSubmodule ⊓ towerBigrade j M`
+  (blueprint §B‴.3): the `L_0` condition dropped on both sides.
+* `finrank_towerPositiveMode_inf_towerBigrade_le` — (P3) for `Q_{j,M}`:
+  `dim Q_{j,M} ≤ p_{D−1}(M)`.  The matching lower bound is
+  `TypeOneFamily.le_finrank_towerSeed`, so `dim Q_{j,M} = p_{D−1}(M)` exactly.
+
 ### Bonus: half of Goddard (6.2)
 
 * `single_lcMonomial_mem_towerKerK`, `conjFreeSlice_le_towerKerK_inf_towerBigrade` — a
@@ -122,9 +133,9 @@ file**, and neither does the intercept beyond the normalisation `a₀ = α'k²`.
   and would need linear independence of the light-cone monomials.
 * For the same reason `towerKerK ⊓ towerBigrade = conjFreeSlice` is available only in the
   direction `⊇` (blueprint §B′.9 item 2).
-* **(B-26) is untouched.**  This file gives the upper bound on `dim (H_phys ⊓ V_N)`; the
-  lower bound on `dim (H_null ⊓ V_N)` — the one place where `D = 26` enters — is blueprint
-  PR5 and is not started.
+* **(B-26) is untouched here.**  This file gives the upper bound on `dim (H_phys ⊓ V_N)`; the
+  lower bound on `dim (H_null ⊓ V_N)` is `NoGhost/LevelTwoCount.lean` (`N = 2`, uses `D = 26`)
+  and, `D`-independently, `NoGhost/TypeOneFamily.lean` (`≥ p_{D−1}(N−1)` for every `N`).
 * `finrank_towerPhys_inf_towerBigrade_le` is stated at the intercept
   `a₀ = invTwo R * Fock.zeroModeSq η a` only, because that is the value for which the `L_0`
   condition is automatic on the antidiagonal; at any other intercept the slice consists of
@@ -1381,5 +1392,233 @@ theorem conjFreeSlice_le_towerKerK_inf_towerBigrade (hD : 2 ≤ D)
   exact single_lcMonomial_mem_towerKerK hD F _ hd
 
 end KerK
+
+/-! ### The elimination and (P3) on an arbitrary bigraded piece `(j, M)`
+
+Blueprint §B‴.9's prerequisite for PR6′: the four lemmas above were stated on the antidiagonal
+slice `(-N, N)` only because that is where the `L_0` condition is automatic.  Nothing in the
+elimination uses the rung, and the orthogonality characterisation survives once the `L_0`
+condition is dropped — i.e. for the *quasi-physical* (positive-mode) subspace
+`towerPositiveModeSubmodule ⊓ towerBigrade j M`, blueprint §B‴.3's `Q_M`.  The existing
+antidiagonal statements are left untouched; `conjFreeSlice hD F N` is definitionally
+`conjFreeSliceAt hD F (-N) N`. -/
+
+section GeneralRung
+
+variable {D : ℕ} {R : Type*} [CommRing R] {η a b : Fin D → R}
+
+/-- **`conjFreeSliceAt`**: the `b̃`-free light-cone monomials of level `M`, placed on an
+arbitrary rung `j`. -/
+noncomputable def conjFreeSliceAt (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Submodule R (TowerFock D R) :=
+  Submodule.map (Finsupp.lsingle (M := Fock D R) (R := R) j) (conjFree hD F M)
+
+lemma conjFreeSlice_eq_conjFreeSliceAt (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (N : ℕ) :
+    conjFreeSlice (R := R) hD F N = conjFreeSliceAt hD F (-(N : ℤ)) N := rfl
+
+lemma conjFreeSliceAt_le_towerBigrade (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    (M : ℕ) : conjFreeSliceAt (R := R) hD F j M ≤ towerBigrade D R j M :=
+  Submodule.map_mono (conjFree_le_levelSubmodule hD F M)
+
+variable [Algebra ℚ R]
+
+/-- `single_lcMonomial_mem_conjFreeSlice_sup_towerSpurious` on an arbitrary rung: the proof
+never looked at the rung. -/
+theorem single_lcMonomial_mem_conjFreeSliceAt_sup_towerSpurious (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (M : ℕ) (d : Osc D →₀ ℕ)
+    (hd : Fock.level D d = M) :
+    Finsupp.single j (lcMonomial F d)
+      ∈ conjFreeSliceAt hD F j M ⊔ towerSpuriousSubmodule η a b := by
+  classical
+  suffices h : ∀ K : ℕ, ∀ e : Osc D →₀ ℕ, Fock.level D e = M → lcMeasure hD M e ≤ K →
+      Finsupp.single j (lcMonomial F e)
+        ∈ conjFreeSliceAt hD F j M ⊔ towerSpuriousSubmodule η a b from
+    h (lcMeasure hD M d) d hd le_rfl
+  intro K
+  induction K with
+  | zero =>
+      intro e he hK
+      refine Submodule.mem_sup_left ⟨lcMonomial F e, lcMonomial_mem_conjFree hD F he ?_, rfl⟩
+      simp only [lcMeasure] at hK
+      have hz : conjDeg hD e * (M + 1) = 0 := by omega
+      rcases Nat.mul_eq_zero.mp hz with h' | h'
+      · exact h'
+      · omega
+  | succ K ih =>
+      intro e he hK
+      by_cases hc : conjDeg hD e = 0
+      · exact Submodule.mem_sup_left ⟨lcMonomial F e, lcMonomial_mem_conjFree hD F he hc, rfl⟩
+      obtain ⟨v, hvmem, hv1⟩ : ∃ v ∈ e.support, v.1 = conjIdx D hD := by
+        by_contra hcon
+        refine hc ?_
+        rw [conjDeg, Finsupp.weight_apply]
+        refine Finset.sum_eq_zero fun v hv => ?_
+        show (e v) • (if v.1 = conjIdx D hD then (1 : ℕ) else 0) = 0
+        rw [if_neg (fun h => hcon ⟨v, hv, h⟩), smul_zero]
+      obtain ⟨t, n⟩ := v
+      simp only at hv1
+      subst hv1
+      set e₀ := e - Finsupp.single ((conjIdx D hD, n) : Osc D) 1 with he₀
+      have hsplit : e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1 = e := by
+        rw [he₀, add_comm]
+        exact Fock.single_add_tsub_single (Finsupp.mem_support_iff.mp hvmem)
+      have hlev : Fock.level D e₀ + (n : ℕ) = M := by
+        rw [← he, ← hsplit, Fock.level_add, Fock.level_single, Fock.oscLevel, one_mul]
+      have hmeas : lcMeasure hD M e
+          = lcMeasure hD M e₀ + lcMeasure hD M (Finsupp.single ((conjIdx D hD, n) : Osc D) 1) := by
+        rw [← hsplit, lcMeasure_add]
+      have hZ : Submodule.map (Finsupp.lsingle (M := Fock D R) (R := R) j)
+            (lcLow hD F M (lcMeasure hD M
+              (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1)))
+          ≤ conjFreeSliceAt hD F j M ⊔ towerSpuriousSubmodule η a b := by
+        rw [lcLow, Submodule.map_span, Submodule.span_le]
+        rintro _ ⟨_, ⟨f, ⟨h1, h2⟩, rfl⟩, rfl⟩
+        rw [hsplit] at h2
+        exact ih f h1 (by omega)
+      have hlead := towerLop_neg_conjDegree_leading hD F hη n j e₀ hlev
+      have hAB : Finsupp.single j (lcMonomial F e)
+          = (Finsupp.single j
+                (lcMonomial F (e₀ + Finsupp.single ((conjIdx D hD, n) : Osc D) 1))
+              + towerLop η a b (-((n : ℕ) : ℤ)) (Finsupp.single j (lcMonomial F e₀)))
+            - towerLop η a b (-((n : ℕ) : ℤ)) (Finsupp.single j (lcMonomial F e₀)) := by
+        rw [hsplit]
+        abel
+      rw [hAB]
+      exact Submodule.sub_mem _ (hZ hlead)
+        (Submodule.mem_sup_right
+          (towerLop_neg_mem_towerSpuriousSubmodule (by exact_mod_cast n.2) _))
+
+/-- **`β`-elimination on an arbitrary bigraded piece** `(j, M)`. -/
+theorem towerBigrade_le_conjFreeSliceAt_sup_towerSpurious (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (M : ℕ) :
+    towerBigrade D R j M ≤ conjFreeSliceAt hD F j M ⊔ towerSpuriousSubmodule η a b := by
+  classical
+  rw [towerBigrade, levelSubmodule_eq_lcSpan hD F hη M, lcSpan, Submodule.map_span,
+    Submodule.span_le]
+  rintro _ ⟨_, ⟨f, hf, rfl⟩, rfl⟩
+  exact single_lcMonomial_mem_conjFreeSliceAt_sup_towerSpurious hD F hη j M f hf
+
+end GeneralRung
+
+section GeneralRungOrth
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R]
+
+/-- Spurious states are orthogonal to every state killed by all positive modes (no `L_0`
+condition needed): `⟨L_{-n} Ψ, Φ⟩ = ⟨Ψ, L_n Φ⟩ = 0`. -/
+theorem towerSpuriousSubmodule_le_towerOrthComplement_positiveMode (η a b : Fin D → R) :
+    towerSpuriousSubmodule η a b
+      ≤ towerOrthComplement η (towerPositiveModeSubmodule η a b) := by
+  refine iSup_le fun n => iSup_le fun hn => ?_
+  rintro Χ ⟨Ψ, rfl⟩
+  rw [mem_towerOrthComplement]
+  intro Φ hΦ
+  rw [Fock.towerPairing_towerLop_left η a b (-n) Ψ Φ, neg_neg,
+    mem_towerPositiveModeSubmodule.mp hΦ n hn, map_zero]
+
+/-- **`Q_{j,M} = S^⊥ ⊓ V_{j,M}`** (blueprint §B‴.3): on any bigraded piece, being killed by all
+positive modes is the same as being orthogonal to every spurious state.  This is
+`towerPhys_inf_towerBigrade_eq_towerOrthComplement` with the `L_0` condition dropped on both
+sides; consequently no light-cone frame and no hypothesis on `a`, `b` is needed. -/
+theorem towerPositiveMode_inf_towerBigrade_eq_towerOrthComplement [NoZeroDivisors R]
+    [CharZero R] (η a b : Fin D → R) (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (M : ℕ) :
+    towerPositiveModeSubmodule η a b ⊓ towerBigrade D R j M
+      = towerOrthComplement η (towerSpuriousSubmodule η a b) ⊓ towerBigrade D R j M := by
+  refine le_antisymm (fun x hx => ?_) (fun x hx => ?_)
+  · obtain ⟨hpos, hbig⟩ := Submodule.mem_inf.mp hx
+    refine Submodule.mem_inf.2 ⟨?_, hbig⟩
+    rw [mem_towerOrthComplement]
+    intro Ψ hΨ
+    have h := towerSpuriousSubmodule_le_towerOrthComplement_positiveMode η a b hΨ
+    rw [mem_towerOrthComplement] at h
+    rw [Fock.towerPairing_comm]
+    exact h x hpos
+  · obtain ⟨horth, hbig⟩ := Submodule.mem_inf.mp hx
+    rw [mem_towerOrthComplement] at horth
+    refine Submodule.mem_inf.2 ⟨mem_towerPositiveModeSubmodule.2 fun m hm => ?_, hbig⟩
+    refine Fock.eq_zero_of_towerPairing_left_eq_zero hη fun Y => ?_
+    rw [Fock.towerPairing_towerLop_left η a b m x Y]
+    exact horth _ (towerLop_neg_mem_towerSpuriousSubmodule hm Y)
+
+end GeneralRungOrth
+
+section GeneralRungCount
+
+variable {D : ℕ} {K : Type*} [Field K] {η a b : Fin D → K}
+
+instance conjFreeSliceAt_finiteDimensional (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    (M : ℕ) : FiniteDimensional K ↥(conjFreeSliceAt hD F j M) :=
+  Submodule.finiteDimensional_of_le (conjFreeSliceAt_le_towerBigrade hD F j M)
+
+theorem finrank_conjFreeSliceAt_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ)
+    (M : ℕ) :
+    Module.finrank K ↥(conjFreeSliceAt hD F j M)
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ conjDeg hD d = 0} :=
+  le_trans (Submodule.finrank_map_le _ _) (finrank_conjFree_le hD F M)
+
+variable [CharZero K] [Algebra ℚ K]
+
+/-- A quasi-physical state on the piece `(j, M)` orthogonal to every `b̃`-free light-cone
+monomial on that piece is zero (`eq_zero_of_mem_towerPhys_inf_towerBigrade_of_orthogonal_conjFreeSlice`
+without the `L_0` condition). -/
+theorem eq_zero_of_mem_towerPositiveMode_inf_towerBigrade_of_orthogonal_conjFreeSliceAt
+    (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) {x : TowerFock D K}
+    (hxQ : x ∈ towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M)
+    (hxC : ∀ c ∈ conjFreeSliceAt hD F j M, Fock.towerPairing η x c = 0) : x = 0 := by
+  have hxV : x ∈ towerBigrade D K j M := (Submodule.mem_inf.mp hxQ).2
+  have hxS : ∀ s ∈ towerSpuriousSubmodule η a b, Fock.towerPairing η x s = 0 := by
+    have heq := towerPositiveMode_inf_towerBigrade_eq_towerOrthComplement η a b F.hη j M
+    rw [heq] at hxQ
+    rw [← mem_towerOrthComplement]
+    exact (Submodule.mem_inf.mp hxQ).1
+  refine eq_zero_of_mem_towerBigrade_of_orthogonal F.hη j M hxV fun y hy => ?_
+  obtain ⟨c, hc, s, hs, rfl⟩ := Submodule.mem_sup.mp
+    (towerBigrade_le_conjFreeSliceAt_sup_towerSpurious hD F F.hη j M hy)
+  rw [map_add, hxC c hc, hxS s hs, add_zero]
+
+/-- The pairing of the quasi-physical piece `Q_{j,M}` against the `b̃`-free span, as a linear
+map into the dual of that span (compare `physSliceToDual`). -/
+noncomputable def posSliceToDual (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M)
+      →ₗ[K] (↥(conjFreeSliceAt hD F j M) →ₗ[K] K) :=
+  LinearMap.domRestrict ((Fock.towerPairing η).compl₂ (conjFreeSliceAt hD F j M).subtype) _
+
+omit [CharZero K] in
+@[simp]
+lemma posSliceToDual_apply (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ)
+    (x : ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M))
+    (c : ↥(conjFreeSliceAt hD F j M)) :
+    posSliceToDual hD F j M x c
+      = Fock.towerPairing η (x : TowerFock D K) (c : TowerFock D K) := rfl
+
+/-- **(P3) on an arbitrary bigraded piece**: `dim Q_{j,M} ≤ p_{D−1}(M)`, where
+`Q_{j,M} = towerPositiveModeSubmodule ⊓ towerBigrade j M` is blueprint §B‴.3's quasi-physical
+space.  Same dual-embedding proof as `finrank_towerPhys_inf_towerBigrade_le`.  Together with
+`TypeOneFamily.le_finrank_towerSeed` this pins `dim Q_{j,M} = p_{D−1}(M)` exactly. -/
+theorem finrank_towerPositiveMode_inf_towerBigrade_le (hD : 2 ≤ D)
+    (F : DDFLightConeFrame η a b) (j : ℤ) (M : ℕ) :
+    Module.finrank K ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M)
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = M ∧ conjDeg hD d = 0} := by
+  classical
+  refine le_trans ?_ (finrank_conjFreeSliceAt_le hD F j M)
+  refine finrank_le_of_injective_toDualHom
+    (V := ↥(towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M))
+    (conjFreeSliceAt hD F j M) (f := posSliceToDual hD F j M) ?_
+  intro u v huv
+  refine Subtype.ext (sub_eq_zero.mp ?_)
+  have hmem : (u : TowerFock D K) - (v : TowerFock D K)
+      ∈ towerPositiveModeSubmodule η a b ⊓ towerBigrade D K j M := Submodule.sub_mem _ u.2 v.2
+  refine eq_zero_of_mem_towerPositiveMode_inf_towerBigrade_of_orthogonal_conjFreeSliceAt hD F
+    j M hmem fun c hc => ?_
+  have h1 := congrArg (fun g : ↥(conjFreeSliceAt hD F j M) →ₗ[K] K => g ⟨c, hc⟩) huv
+  simp only [posSliceToDual_apply] at h1
+  have h2 : Fock.towerPairing η ((u : TowerFock D K) - (v : TowerFock D K)) c
+      = Fock.towerPairing η (u : TowerFock D K) c
+        - Fock.towerPairing η (v : TowerFock D K) c := by
+    simp
+  rw [h2]
+  simpa using sub_eq_zero.mpr h1
+
+end GeneralRungCount
 
 end StringFormal.NoGhost
