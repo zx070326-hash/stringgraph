@@ -47,20 +47,31 @@ sources:
       L1（researcher 2026-09-11 读 §12 全节 pp. 96–103）。
       **本项目可读来源中「没有别的」这一断言的唯一正面表述，且它本身只是一句「可以扫描」，无证明无引用。**
   - ref: antonelli-2015
-    loc: "§1.1, p.3（「no proof has explicitly been carried out」+ 出处指认）；§2.1, p.7（「It is often said that four groups cancel the anomaly」+ 496 维群还有很多）；摘要与 p.33（自称已证）"
+    loc: "§1.1, p.3（「no proof has explicitly been carried out」+ 出处指认）；§2.1, p.7（「It is often said that four groups cancel the anomaly」+ 496 维群还有很多）；摘要与 p.33（自称已证）；§2.3–3.4 证明主体"
     note: |
-      L1。**唯一自称给出证明的来源**，但是单作者预印本，本项目未核实发表记录、未复核证明
-      （只读了 pp. 1–8 与 pp. 33–36）。且该文对「anomaly cancelled」用的是**因子化**义，
+      L1。**唯一自称给出证明的来源**，但是单作者预印本（UTRIP 本科生暑期报告，非期刊发表）。
+      **2026-09-12 更新**：research agent 已完整复核 §2.3–3.4 证明主体（此前只读了 pp. 1–8、33–36）。
+      结论：该文**候选集本身取得对**（覆盖紧致李代数的 Killing-Cartan 分类，非人为限定的子集），
+      但**计算执行有实质性错误**：SU(3)/SU(4)/SU(5) 与 F₄/E₆ 的迹系数算错，F₄ 支所用方法本身无效，
+      另有若干笔误（如 p.15 关于「G₂ 无反常」的符号写反）。因此本文不能作为该命题在 rigorous
+      层级的来源，只能维持 physical-argument/anecdotal 层级引用（其候选集框架仍有参考价值，
+      但具体系数与结论需重新核算，见 research/attempts/d10-anomaly-full-classification/）。
+      且该文对「anomaly cancelled」用的是**因子化**义，
       与 adams-dewolfe-taylor-2010 的「抵消」不是同一件事（见 bib note 的三条使用限制）。
   - ref: gsw-1987-v2
     loc: "§13.5.3「Allowed gauge groups for N = 1 superstring theories」，pp. 353–358"
     note: |
-      ★★ **内容 L0：正文未取到**（位置是目录级 L1，抽取记录 literature/extractions/gsw-1987-v2.md E12）。
-      取不到的原因：Cambridge Core 章级 PDF 12 MB，超工具 10 MB 上限，需人类在浏览器点一次
-      （URL 见该记录 §0.4）。
+      ★★ **内容 L1 OCR（2026-09-12 更新，此前 L0）**：researcher agent 用 Google Books
+      `jscmd=SearchWithinVolume2` 逐段 OCR 拼出该节正文（无预览书籍的搜索片段检索技巧，
+      详见其报告；未取得可引用的整页扫描，故仍不满足"逐页读图"的 L1 标准图逐页要求，
+      标 L1 OCR 而非 L1）。
+      **确认内容**：GSW 正文只给出 SO(n) 与 E₈ 两支的具体验证，随后断言"这两个是仅有的候选"，
+      **但没有给出候选集之外排除的论证**——即完备性主张在原始出处本身就是**裸断言**，
+      不是"证明存在但本项目没读到"。
       两条独立二手证据把四解表的出处指向这一节（antonelli-2015 §1.1；adams-dewolfe-taylor-2010 第一节），
-      **但两者对 GSW 说了多强的话理解不一致**。
-      ⚠ **红线**：本图任何节点不得声称 GSW 第 13 章的式号或措辞（同记录 §3.1/§5.5）。
+      现已直接核实两者转述基本准确（GSW 确实只断言、不证明）。
+      ⚠ **红线维持**：本图任何节点仍不得声称已取得 GSW 第 13 章的逐页扫描件或精确式号
+      （OCR 片段拼接≠逐页读图，同记录 §3.1/§5.5 红线不解除，只降级措辞为"内容已知但非逐页核实"）。
   - ref: polchinski-1998-v2
     loc: "§12.2, p. 101 与脚注 1"
     note: |
@@ -101,5 +112,16 @@ notes: |
   ② 复核 antonelli-2015 §2–§3 的分类论证（36 页，本项目只读了 pp. 1–8、33–36）；
   ③ 若两者都指向「只是断言」，则本卡可长期停在 conjecture，并把 Schwarz 的冲突表述按
   「他只算非阿贝尔半单解」裁决。
+
+  【6. 2026-09-12 Phase-0 复核结论 + 原创证明轨道开工】①②已完成（见上方 sources 更新）：
+  GSW 正文确认只断言不证明；antonelli-2015 证明主体已读完，候选集框架正确但计算有多处实质性错误
+  （SU(3,4,5)/F₄/E₆ 系数、F₄ 方法本身无效），不能作为 rigorous 来源。
+  **重新界定缺口**：候选集限定（"496 维反常自由候选必是紧致李代数"）本身不是缺口——
+  这就是 Killing-Cartan 分类，经典定理，本卡不需要另证；真正缺口是**在这个经典候选集上
+  正确执行有限排除计算**，目前没有一份公开来源把这件事做对。
+  已按 `research/CLAUDE.md` 开工原创证明尝试 research/attempts/d10-anomaly-full-classification/
+  （见 root CLAUDE.md「原创证明轨道」）：目标是给出候选集上每个单因子族（A–G 型 + 阿贝尔）
+  迹恒等式排除的完整、正确、机器可核验证明，验证通过后按 add-statement 流程把结论写回本卡
+  （届时本卡 status 可能从 conjecture 上调，需新推导，不得手改）。
 author: curator
 created: "2026-09-11"
