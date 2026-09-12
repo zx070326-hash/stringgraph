@@ -511,9 +511,45 @@ StringFormal/
                             **`levelThree_count_identity`** `p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)`
                             （Pascal，**对一切 `D`**；`D = 26` 时 `3575 = 3200 + 350 + 25`）——
                             第二条证据支持 §B′.8「计数看不见 26」。
-                            **未做**：`B26 4`（见 TODO `noghost-pr8` 与蓝图 §B‴ 订正第 5 条：
-                            `N = 4` 的两条泛函不再截断、`α_{-2}α_{-1}` 张量无对称性，
-                            下一条要算 `A_ε(2)A_δ(1)A_ρ(1)`）；一般 `N`
+                            **未做**：一般 `N`（`B26 4` 已于 `NoGhost/LevelFourCount.lean` 关闭）
+  NoGhost/LevelFourCount.lean **蓝图 §B‴ 订正第 5 条的 `N = 4` 账——`B26 4` 与
+                            `ddfSpans_bigrade_neg_four_four` 关闭**（第四条反对角片；至此
+                            `ddf-spans` 在 `N ≤ 4` 上全部机检）。四块：
+                            (1) ⭐ **力矩非退化**（可复用，与 `N` 无关）：
+                            `Fock.eq_zero_of_annihilation_eq_zero`（level `N ≥ 1` 的多项式被全部
+                            `α^μ_n` 湮灭 ⟹ 为零；走 `Fock.coeff_annihilation` 提系数，**不需要**
+                            `levelSubmodule_eq_span_lcMonomial`，比蓝图估计的路线短得多）与塔版
+                            `eq_zero_of_towerModeVec_eq_zero`（`ε := e_ν` 把 `A_ε(p)` 变回
+                            `η_ν α^ν_p`，`towerModeVec_pi_single`）。
+                            (2) **四条力矩方程**（任意 rung、任意 `D`）：`towerModeVec_four_*`、
+                            `towerModeVec_three_one_*`、`towerModeVec_two_two_*`、
+                            **`towerModeVec_two_one_one_*`**（各两条，Type-1 / Type-2）。
+                            新原子两条：`towerModeVec_two_descTwo_of_level_zero`（`A_ε(2)𝒟₂z = 10(ε·p)z`）
+                            与 **`towerModeVec_one_apply_towerModeVec_neg_one`**
+                            （`⁅A_δ(1),A_ρ(-1)⁆ = (δ·ρ)`——振子中心项在 `N = 4` 的账里**首次**出现，
+                            正是它给出反对称化后的 `2(δ·ρ)m_ε` 项）。蓝图手算的四条方程
+                            **逐字复核通过，无订正**。
+                            (3) ⭐⭐ **横截性** `moment_relations_of_towerLop_neg_one_add_descTwo`
+                            （输出 `n` 的解出式与反对称化恒等式
+                            `3[(δ·ρ)m_ε−(ε·ρ)m_δ] = 4(ρ·p)[(δ·p)m_ε−(ε·p)m_δ]`，即蓝图那条乘 3/2）
+                            与 `eq_zero_of_towerLop_neg_one_add_descTwo_at_four`。消元全部由
+                            `linear_combination (norm := module)` 完成（三步解出式 `a = -11m`、
+                            `b = -8n - (7/3)(δ·p)m`、`n = (2/3)[(δ·p)m_ε+(ε·p)m_δ]`，再一条
+                            十项组合）。数值输入只有 `3 - 4p² ≠ 0`（`p² = -6` 时为 27）与 `p² ≠ 0`。
+                            **`D` 与物理性一次不出现**；⚠ 需要 `3 ≤ D`（要一个 `u·p = 0`、`u·u = 1`
+                            的横向偏振），这是与 `N ≤ 3` 的唯一前件差别。
+                            (4) **计数**：`Finsupp.oscWeight_eq_four_cases`（五形，靠 `exists_peel`
+                            只用 40 行）、指标 `ι ⊕ (ι×ι) ⊕ Sym ι 2 ⊕ (ι × Sym ι 2) ⊕ Sym ι 4`、
+                            **`modeCount`（模数计数不变量）**把 `levelFourIndex_injective` 的 25 个 case
+                            压成 20 个一行 + 5 个真证明（五形的模数轮廓
+                            `(0,0,0,1) (1,0,1,0) (0,2,0,0) (2,1,0,0) (4,0,0,0)` 两两不同）；
+                            `card_ddfLevel_four_ge` / `card_conjFree_four_le` /
+                            `card_conjFree_three_ge` 与主恒等式 **`levelFour_count_identity`**
+                            `p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)`（Pascal，**对一切 `D`**；
+                            `D = 26` 时 `29575 = 25650 + 3575 + 350`）——第三条证据支持
+                            §B′.8「计数看不见 26」。
+                            **未做**：`N ≥ 5`（两族在计数上不再够用，超出量是五边形数；力矩机器本身
+                            与 `N` 无关，可复用）；`¬ B26 N`（`D ≠ 26`）的维数版
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
