@@ -998,4 +998,73 @@ theorem card_conjFree_three_le (hD : 2 ≤ D) :
 
 end ConjFreeThree
 
+/-! ### `B26 3` -/
+
+section Closing
+
+variable {D : ℕ}
+
+/-- **The level-three counting identity**
+
+`p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D − 1)`,
+
+i.e. `(D−1) + (D−1)² + binom(D+1,3) = [(D−2) + (D−2)² + binom(D,3)] + [(D−1) + binom(D,2)]
++ (D−1)`.  Like `LevelTwoCount.levelTwo_count_identity` it is a Pascal identity valid for every
+`D` — the counting step never sees `26` (blueprint §B′.8).  At `D = 26` it reads
+`3575 = 3200 + 350 + 25`, the numbers of blueprint §B‴.5. -/
+theorem levelThree_count_identity (hD : 2 ≤ D) :
+    (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3
+      = ((D - 2) + (D - 2) * (D - 2) + Nat.choose D 3) + ((D - 1) + Nat.choose D 2)
+        + (D - 1) := by
+  obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+  have hp : Nat.choose (m + 3) 3 = Nat.choose (m + 2) 2 + Nat.choose (m + 2) 3 :=
+    Nat.choose_succ_succ (m + 2) 2
+  simp only [show m + 2 - 1 = m + 1 from rfl, show m + 2 - 2 = m from rfl,
+    show m + 2 + 1 = m + 3 from rfl]
+  rw [hp]
+  ring
+
+variable {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+
+/-- ⭐⭐ **`B26 3` at `D = 26`.**  Blueprint §B‴.5's level-three account, machine-checked:
+
+`dim (H_phys ⊓ V_3) ≤ p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)
+  ≤ dim (ddfSpan ⊓ V_3) + dim Q_{-3,2} + (D−1) ≤ dim (ddfSpan ⊓ V_3) + dim (H_null ⊓ V_3)`.
+
+The first `≤` is PR4, the identity is Pascal, `p_{D−2}(3) = dim (ddfSpan ⊓ V_3)` is PR2,
+`p_{D−1}(2) ≤ dim Q_{-3,2}` is PR6′, and the last `≤` is this file's
+`le_finrank_towerNull_inf_towerBigrade_three`, the only step that uses `D = 26`. -/
+theorem b26_three_of_D26 (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    B26 η a b F.hη F.trans 3 := by
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD
+  have hint : invTwo K * Fock.zeroModeSq η a = 1 := by rw [haa, invTwo_mul_two]
+  have hrung : (-((3 : ℕ) : ℤ)) = (-3 : ℤ) := by norm_num
+  have h1 := finrank_towerPhys_inf_towerBigrade_le (K := K) hD F 3
+  have h2 := card_conjFree_three_le (D := D) hD
+  have h3 := levelThree_count_identity (D := D) hD
+  have h4 := card_ddfLevel_three_ge (Fin (D - 2))
+  have h5 := card_conjFree_two_ge (D := D) hD
+  have h6 := le_finrank_towerSeed (K := K) hD F (-((3 : ℕ) : ℤ)) 2
+  have h7 : Module.finrank K ↥(towerSeed η a b (-((3 : ℕ) : ℤ)) 2) + (D - 1)
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+          ⊓ towerBigrade D K (-((3 : ℕ) : ℤ)) 3) := by
+    rw [hint, hrung]
+    exact le_finrank_towerNull_inf_towerBigrade_three hD F haa hD26
+  rw [Fintype.card_fin, show D - 2 + 2 = D by omega] at h4
+  refine le_trans h1 ?_
+  rw [finrank_ddfSpan_inf_towerBigrade F.hη F.frame.isotropic F.hba F.trans 3]
+  omega
+
+/-- ⭐⭐ **The DDF spanning lemma on the level-three slice `(rung -3, level 3)`, at `D = 26`.**
+
+The third antidiagonal slice of `ddf-spans`, after `Assembly.ddfSpans_bigrade_neg_one_one`
+(`N = 1`, unconditional in `D`) and `LevelTwoCount.ddfSpans_bigrade_neg_two_two` (`N = 2`). -/
+theorem ddfSpans_bigrade_neg_three_three (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) :
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((3 : ℕ) : ℤ)) 3) :=
+  ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_three_of_D26 hD F hD26)
+
+end Closing
+
 end StringFormal.NoGhost
