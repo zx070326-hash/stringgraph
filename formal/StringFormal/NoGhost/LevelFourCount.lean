@@ -844,4 +844,195 @@ theorem levelFourIndex_injective : Function.Injective (levelFourIndex ι) := by
 
 end LevelFourInjective
 
+/-! ### The level-four counts -/
+
+section LevelFourCounts
+
+variable {ι : Type*} [DecidableEq ι]
+
+/-- Peeling one element off a mode-`n` occupation multiset. -/
+lemma mapDomain_toFinsupp_cons (n : ℕ+) (a : ι) (s : Multiset ι) :
+    Finsupp.mapDomain (fun i : ι => ((i, n) : ι × ℕ+)) (Multiset.toFinsupp (a ::ₘ s))
+      = Finsupp.single ((a, n) : ι × ℕ+) 1
+        + Finsupp.mapDomain (fun i : ι => ((i, n) : ι × ℕ+)) (Multiset.toFinsupp s) := by
+  rw [← Multiset.singleton_add, Multiset.toFinsupp_add, Finsupp.mapDomain_add,
+    Multiset.toFinsupp_singleton, Finsupp.mapDomain_single]
+
+/-- The unordered pair `{a, b}` names the product of two mode-`n` oscillators. -/
+lemma symModeIndex_mk_two (n : ℕ+) (a c : ι) (h : Multiset.card ({a, c} : Multiset ι) = 2) :
+    symModeIndex ι n ⟨{a, c}, h⟩
+      = Finsupp.single ((a, n) : ι × ℕ+) 1 + Finsupp.single ((c, n) : ι × ℕ+) 1 := by
+  have hm : ({a, c} : Multiset ι) = a ::ₘ {c} := by simp [Multiset.insert_eq_cons]
+  show Finsupp.mapDomain _ (Multiset.toFinsupp ({a, c} : Multiset ι)) = _
+  rw [hm, mapDomain_toFinsupp_cons, Multiset.toFinsupp_singleton, Finsupp.mapDomain_single]
+
+/-- The unordered quadruple `{a, c, e, f}` names the product of four mode-`n` oscillators. -/
+lemma symModeIndex_mk_four (n : ℕ+) (a c e f : ι)
+    (h : Multiset.card ({a, c, e, f} : Multiset ι) = 4) :
+    symModeIndex ι n ⟨{a, c, e, f}, h⟩
+      = Finsupp.single ((a, n) : ι × ℕ+) 1
+        + (Finsupp.single ((c, n) : ι × ℕ+) 1
+          + (Finsupp.single ((e, n) : ι × ℕ+) 1 + Finsupp.single ((f, n) : ι × ℕ+) 1)) := by
+  have hm : ({a, c, e, f} : Multiset ι) = a ::ₘ (c ::ₘ (e ::ₘ {f})) := by
+    simp [Multiset.insert_eq_cons]
+  show Finsupp.mapDomain _ (Multiset.toFinsupp ({a, c, e, f} : Multiset ι)) = _
+  rw [hm, mapDomain_toFinsupp_cons, mapDomain_toFinsupp_cons, mapDomain_toFinsupp_cons,
+    Multiset.toFinsupp_singleton, Finsupp.mapDomain_single]
+
+/-- **`p_m(4) ≥ m + m² + binom(m+1,2) + m·binom(m+1,2) + binom(m+3,4)`** where `m = #ι`:
+the lower bound on `dim (ddfSpan ⊓ V_4)` needed by `B26 4`. -/
+theorem card_ddfLevel_four_ge (ι : Type*) [Fintype ι] [DecidableEq ι] :
+    Fintype.card ι + Fintype.card ι * Fintype.card ι + Nat.choose (Fintype.card ι + 1) 2
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 1) 2
+        + Nat.choose (Fintype.card ι + 3) 4
+      ≤ Fintype.card {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 4} := by
+  classical
+  have hcard : Fintype.card (LevelFourIdx ι)
+      = Fintype.card ι + Fintype.card ι * Fintype.card ι + Nat.choose (Fintype.card ι + 1) 2
+        + Fintype.card ι * Nat.choose (Fintype.card ι + 1) 2
+        + Nat.choose (Fintype.card ι + 3) 4 := by
+    show Fintype.card (ι ⊕ (ι × ι) ⊕ Sym ι 2 ⊕ (ι × Sym ι 2) ⊕ Sym ι 4) = _
+    rw [Fintype.card_sum, Fintype.card_sum, Fintype.card_sum, Fintype.card_sum,
+      Fintype.card_prod, Fintype.card_prod, Sym.card_sym_eq_choose, Sym.card_sym_eq_choose,
+      show Fintype.card ι + 2 - 1 = Fintype.card ι + 1 by omega,
+      show Fintype.card ι + 4 - 1 = Fintype.card ι + 3 by omega]
+    ring
+  rw [← hcard]
+  refine Fintype.card_le_of_injective
+    (fun x => (⟨levelFourIndex ι x, ?_⟩ : {d : (ι × ℕ+) →₀ ℕ // ddfLevel d = 4})) ?_
+  · rw [ddfLevel_eq_oscWeight]; exact oscWeight_levelFourIndex x
+  · intro x y hxy
+    exact levelFourIndex_injective (congrArg Subtype.val hxy)
+
+end LevelFourCounts
+
+/-! ### The `b̃`-free count at level four -/
+
+section ConjFreeFour
+
+variable {D : ℕ}
+
+/-- `conjFreeEmbed` commutes with sums, packaged for the surjectivity proof. -/
+lemma conjFreeEmbed_add (hD : 2 ≤ D)
+    (d e : ({μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) →₀ ℕ) :
+    conjFreeEmbed hD (d + e) = conjFreeEmbed hD d + conjFreeEmbed hD e :=
+  Finsupp.mapDomain_add
+
+/-- **`p_{D−1}(4) ≤ (D−1) + (D−1)² + binom(D,2) + (D−1)·binom(D,2) + binom(D+2,4)`**:
+the classification says the parametrisation is onto the `b̃`-free level-four occupation
+functions.  This is the upper bound on `dim (H_phys ⊓ V_4)` needed by `B26 4`. -/
+theorem card_conjFree_four_le (hD : 2 ≤ D) :
+    Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 4 ∧ conjDeg hD d = 0}
+      ≤ (D - 1) + (D - 1) * (D - 1) + Nat.choose D 2 + (D - 1) * Nat.choose D 2
+        + Nat.choose (D + 2) 4 := by
+  classical
+  set κ := {μ : Fin D // μ ≠ conjIdx D hD} with hκdef
+  have hκ : Fintype.card κ = D - 1 := by
+    show Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have hcard : Fintype.card (LevelFourIdx κ)
+      = (D - 1) + (D - 1) * (D - 1) + Nat.choose D 2 + (D - 1) * Nat.choose D 2
+        + Nat.choose (D + 2) 4 := by
+    show Fintype.card (κ ⊕ (κ × κ) ⊕ Sym κ 2 ⊕ (κ × Sym κ 2) ⊕ Sym κ 4) = _
+    rw [Fintype.card_sum, Fintype.card_sum, Fintype.card_sum, Fintype.card_sum,
+      Fintype.card_prod, Fintype.card_prod, Sym.card_sym_eq_choose, Sym.card_sym_eq_choose, hκ,
+      show D - 1 + 2 - 1 = D by omega, show D - 1 + 4 - 1 = D + 2 by omega]
+    ring
+  rw [← hcard]
+  refine Fintype.card_le_of_surjective
+    (fun x => (⟨conjFreeEmbed hD (levelFourIndex κ x), ?_, conjDeg_conjFreeEmbed hD _⟩ :
+      {d : Osc D →₀ ℕ // Fock.level D d = 4 ∧ conjDeg hD d = 0})) ?_
+  · rw [level_conjFreeEmbed hD, ddfLevel_eq_oscWeight]
+    exact oscWeight_levelFourIndex x
+  rintro ⟨d, hlev, hconj⟩
+  rw [level_eq_oscWeight] at hlev
+  rcases Finsupp.oscWeight_eq_four_cases hlev with
+    ⟨μ, hd⟩ | ⟨μ, ν, hd⟩ | ⟨μ, ν, hd⟩ | ⟨μ, ν, σ, hd⟩ | ⟨μ, ν, σ, τ, hd⟩
+  · subst hd
+    have hμ : μ ≠ conjIdx D hD := ne_conjIdx_of_conjDeg_single_eq_zero hD hconj
+    exact ⟨Sum.inl ⟨μ, hμ⟩, Subtype.ext (conjFreeEmbed_single hD ⟨μ, hμ⟩ 4)⟩
+  · subst hd
+    rw [conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 3) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 1) : Osc D)) (by omega)
+    refine ⟨Sum.inr (Sum.inl (⟨μ, hμ⟩, ⟨ν, hν⟩)), Subtype.ext ?_⟩
+    show conjFreeEmbed hD (Finsupp.single _ 1 + Finsupp.single _ 1) = _
+    rw [conjFreeEmbed_add, conjFreeEmbed_single hD ⟨μ, hμ⟩ 3, conjFreeEmbed_single hD ⟨ν, hν⟩ 1]
+  · subst hd
+    rw [conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 2) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 2) : Osc D)) (by omega)
+    have hc2 : Multiset.card (({⟨μ, hμ⟩, ⟨ν, hν⟩} : Multiset κ)) = 2 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inl ⟨{⟨μ, hμ⟩, ⟨ν, hν⟩}, hc2⟩)), Subtype.ext ?_⟩
+    show conjFreeEmbed hD (symModeIndex κ 2 _) = _
+    rw [symModeIndex_mk_two, conjFreeEmbed_add, conjFreeEmbed_single hD ⟨μ, hμ⟩ 2,
+      conjFreeEmbed_single hD ⟨ν, hν⟩ 2]
+  · subst hd
+    rw [conjDeg_add, conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 2) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 1) : Osc D)) (by omega)
+    have hσ : σ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((σ, 1) : Osc D)) (by omega)
+    have hc2 : Multiset.card (({⟨ν, hν⟩, ⟨σ, hσ⟩} : Multiset κ)) = 2 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inl (⟨μ, hμ⟩, ⟨{⟨ν, hν⟩, ⟨σ, hσ⟩}, hc2⟩)))),
+      Subtype.ext ?_⟩
+    show conjFreeEmbed hD (Finsupp.single _ 1 + symModeIndex κ 1 _) = _
+    rw [symModeIndex_mk_two, conjFreeEmbed_add, conjFreeEmbed_add,
+      conjFreeEmbed_single hD ⟨μ, hμ⟩ 2, conjFreeEmbed_single hD ⟨ν, hν⟩ 1,
+      conjFreeEmbed_single hD ⟨σ, hσ⟩ 1]
+  · subst hd
+    rw [conjDeg_add, conjDeg_add, conjDeg_add] at hconj
+    have hμ : μ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((μ, 1) : Osc D)) (by omega)
+    have hν : ν ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((ν, 1) : Osc D)) (by omega)
+    have hσ : σ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((σ, 1) : Osc D)) (by omega)
+    have hτ : τ ≠ conjIdx D hD :=
+      ne_conjIdx_of_conjDeg_single_eq_zero hD (v := ((τ, 1) : Osc D)) (by omega)
+    have hc4 : Multiset.card
+        (({⟨μ, hμ⟩, ⟨ν, hν⟩, ⟨σ, hσ⟩, ⟨τ, hτ⟩} : Multiset κ)) = 4 := by simp
+    refine ⟨Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      ⟨{⟨μ, hμ⟩, ⟨ν, hν⟩, ⟨σ, hσ⟩, ⟨τ, hτ⟩}, hc4⟩))), Subtype.ext ?_⟩
+    show conjFreeEmbed hD (symModeIndex κ 1 _) = _
+    rw [symModeIndex_mk_four, conjFreeEmbed_add, conjFreeEmbed_add, conjFreeEmbed_add,
+      conjFreeEmbed_single hD ⟨μ, hμ⟩ 1, conjFreeEmbed_single hD ⟨ν, hν⟩ 1,
+      conjFreeEmbed_single hD ⟨σ, hσ⟩ 1, conjFreeEmbed_single hD ⟨τ, hτ⟩ 1]
+
+/-- **The level-four counting identity**
+
+`p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)`.
+
+Like `LevelTwoCount.levelTwo_count_identity` and `LevelThreeCount.levelThree_count_identity`
+this is a Pascal identity valid for every `D` — the counting step never sees `26`
+(blueprint §B′.8).  At `D = 26` it reads `29575 = 25650 + 3575 + 350`.
+
+⚠ The analogous `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)` is **false** from `N = 5`
+on (blueprint §B‴ 订正 item 7): the two families' images start to overlap, the excess being
+the pentagonal numbers. -/
+theorem levelFour_count_identity (hD : 2 ≤ D) :
+    (D - 1) + (D - 1) * (D - 1) + Nat.choose D 2 + (D - 1) * Nat.choose D 2
+        + Nat.choose (D + 2) 4
+      = ((D - 2) + (D - 2) * (D - 2) + Nat.choose (D - 1) 2 + (D - 2) * Nat.choose (D - 1) 2
+          + Nat.choose (D + 1) 4)
+        + ((D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3)
+        + ((D - 1) + Nat.choose D 2) := by
+  obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+  have hp2 : Nat.choose (m + 2) 2 = Nat.choose (m + 1) 1 + Nat.choose (m + 1) 2 :=
+    Nat.choose_succ_succ (m + 1) 1
+  have hp4 : Nat.choose (m + 4) 4 = Nat.choose (m + 3) 3 + Nat.choose (m + 3) 4 :=
+    Nat.choose_succ_succ (m + 3) 3
+  simp only [show m + 2 - 1 = m + 1 from rfl, show m + 2 - 2 = m from rfl,
+    show m + 2 + 1 = m + 3 from rfl, show m + 2 + 2 = m + 4 from rfl]
+  rw [hp2, hp4, Nat.choose_one_right]
+  ring
+
+end ConjFreeFour
+
 end StringFormal.NoGhost
