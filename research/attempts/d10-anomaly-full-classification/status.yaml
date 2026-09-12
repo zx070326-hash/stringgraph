@@ -1,0 +1,8 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-12: claim.md 由 lead 起草（基于 Phase-0 researcher agent 的调研结论与证明骨架建议），
+  precise 命题已给出，proof.md 尚未开始。下一步：派 theorem-prover 起草 proof.md，
+  重点是独立核实骨架第 3-4 步的具体系数计算（不可照抄 antonelli-2015，其系数有误）。
