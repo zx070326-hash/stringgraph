@@ -187,7 +187,95 @@ def dual_coxeter_check():
     print()
 
 
+def check_small_rank_tables():
+    """Re-verify every hand-computed entry of the small-rank tables in proof.md
+    (sections 6.1 and 6.3) against the explicit root lists, at random rational
+    points of the Cartan."""
+    import random
+
+    random.seed(7)
+    print("== small-rank tables of proof.md sections 6.1 / 6.3 ==")
+
+    def pk(x, k):
+        return sum(Fraction(v) ** k for v in x)
+
+    rows = {
+        3: (
+            lambda p2, p3, p4: Fraction(33, 2) * p2**3 - 18 * p3**2,
+            lambda p2, p3, p4: Fraction(111, 100) * p2**3,
+        ),
+        4: (
+            lambda p2, p3, p4: 36 * p2 * p4 - Fraction(52, 3) * p3**2 - p2**3,
+            lambda p2, p3, p4: Fraction(4, 3) * p2 * p4 + Fraction(217, 225) * p2**3,
+        ),
+        5: (
+            lambda p2, p3, p4: Fraction(75, 2) * p2 * p4
+            - Fraction(50, 3) * p3**2
+            - Fraction(5, 4) * p2**3,
+            lambda p2, p3, p4: Fraction(25, 12) * p2 * p4 + Fraction(85, 72) * p2**3,
+        ),
+    }
+    for N, (lhs, rhs) in rows.items():
+        S2, S4, S6 = (power_sum(A(N - 1), k) for k in (2, 4, 6))
+        for _ in range(5):
+            x = [Fraction(random.randint(-6, 6)) for _ in range(N)]
+            x = [v - pk(x, 1) / N for v in x]  # project onto the Cartan p1 = 0
+            s2, s4, s6 = (evaluate(P, x) for P in (S2, S4, S6))
+            args = (pk(x, 2), pk(x, 3), pk(x, 4))
+            assert s6 == lhs(*args), ("LHS", N, x)
+            assert Fraction(1, 48) * s4 * s2 - Fraction(1, 14400) * s2**3 == rhs(*args)
+        print(f"su({N}) row OK")
+
+    S2, S4, S6 = (power_sum(A(1), k) for k in (2, 4, 6))
+    x = [Fraction(1), Fraction(-1)]
+    s2, s4, s6 = (evaluate(P, x) for P in (S2, S4, S6))
+    rhs2 = Fraction(1, 48) * s4 * s2 - Fraction(1, 14400) * s2**3
+    assert (s2, s4, s6, rhs2) == (8, 32, 128, Fraction(1192, 225))
+    print("su(2) row OK  (S2,S4,S6 = 8,32,128 ; RHS = 1192/225)")
+
+    S2, S4, S6 = (power_sum(B(2), k) for k in (2, 4, 6))
+    for _ in range(5):
+        x = [Fraction(random.randint(-6, 6)) for _ in range(2)]
+        s2, s4, s6 = (evaluate(P, x) for P in (S2, S4, S6))
+        p2, p4 = pk(x, 2), pk(x, 4)
+        assert s6 == 27 * p2**3 - 21 * p2 * p4
+        assert Fraction(1, 48) * s4 * s2 - Fraction(1, 14400) * s2**3 == (
+            Fraction(297, 200) * p2**3 - Fraction(3, 4) * p2 * p4
+        )
+    print("so(5) row OK")
+    print()
+
+
+def su30_slice_trap():
+    """Documents the trap flagged in section 6.1 of proof.md.
+
+    On the two-parameter Cartan slice x = (a,-a,b,-b,0,...,0), where p_3 = 0,
+    condition (i) reduces to two equations in N whose common root is N = 30.  So
+    su(30) *passes* that slice test and is excluded only by the p_3^2 / p_6
+    terms.  Any argument that checks A_n on a p_3 = 0 slice has a hole at N = 30.
+    """
+    print("== the su(30) slice trap (proof.md section 6.1) ==")
+    N = 30
+    S2, S4, S6 = (power_sum(A(N - 1), k) for k in (2, 4, 6))
+
+    def sat(x):
+        s2, s4, s6 = (evaluate(P, x) for P in (S2, S4, S6))
+        return s6 == Fraction(1, 48) * s4 * s2 - Fraction(1, 14400) * s2**3
+
+    on_slice = all(
+        sat([Fraction(a), Fraction(-a), Fraction(b), Fraction(-b)] + [Fraction(0)] * (N - 4))
+        for a, b in ((1, 2), (3, 5), (1, 7), (2, -3))
+    )
+    generic = sat([Fraction(v) for v in (1, 2, 3, 4, -5, -5) ] + [Fraction(0)] * (N - 6))
+    print(f"su(30) satisfies (i) on the (a,-a,b,-b) slice : {on_slice}")
+    print(f"su(30) satisfies (i) as a polynomial identity : {generic}")
+    assert on_slice and not generic
+    print()
+
+
 if __name__ == "__main__":
     check_classical()
+    check_small_rank_tables()
     dual_coxeter_check()
+    su30_slice_trap()
     witnesses()
