@@ -1,0 +1,118 @@
+id: worldsheet.quasi-physical-slice-dimension
+kind: proposition
+title: 任意 rung/level 片上准物理子空间的维数下界（≥ p_{D−1}(M)，配合已 formalized 的上界即为恰好等于，intercept-free，任意 D）
+statement: |
+  【设定】记号沿用 worldsheet.ocq-null-state-two-families 的准物理子空间定义与
+  worldsheet.physical-slice-bounded-by-transverse-count 的占据数计数：D ∈ N；系数域 K，
+  交换 Q-代数；对角度规分量 η_μ 满足 η_μ² = 1（conv.metric-mostly-plus）；重标度基点向量
+  a、参考向量 b（conv.alpha-prime-regge）；动量塔 T(k;k_0) 双分次为 towerBigrade(j, M)
+  （rung j ∈ Z、振子能级 M ∈ N）；另取一个 worldsheet.ddf-light-cone-frame 的标架对象
+  F : DDFLightConeFrame η a b（D ≥ 2；供给 η_μ² = 1、η(a,b) = 1、η(b,b) = 0）。
+
+  对**任意** rung j 与 level M（**不限于反对角线 j = −M，不要求任何 on-shell/质壳条件**），
+  定义**准物理子空间**
+    Q_{j,M} := towerBigrade(j, M) ∩ ⋂_{n ≥ 1} ker L_n
+  （只要求被全部正模 Virasoro 生成元湮灭；这与 worldsheet.ocq-null-state-two-families
+  【设定】段对 Q_M 的定义是同一个对象在任意 rung 上的版本，那里固定了反对角线
+  rung r = −N 并省去 j 记号）。沿用 worldsheet.physical-slice-bounded-by-transverse-count
+  的占据数记号
+    p_{D−1}(M) := Fintype.card { d : Osc(D) →₀ N | level(d) = M ∧ conjDeg(d) = 0 } 。
+
+  【断言】对一切 hD : 2 ≤ D、F : DDFLightConeFrame η a b、j ∈ Z、M ∈ N：
+
+      dim_K Q_{j,M}  ≥  p_{D−1}(M) 。
+
+  【本卡明确不断言】
+  (a) **不断言反向不等式（本卡不给出上界）**：反向 dim_K Q_{j,M} ≤ p_{D−1}(M) 是一条
+      独立命题（承载于 worldsheet.physical-slice-bounded-by-transverse-count 同一份
+      Lean 工作里的姊妹定理，见本卡 sources 的 note），两条合起来才给出
+      dim_K Q_{j,M} = p_{D−1}(M) **恰好相等**；本卡只承担较难的下界那一半。
+  (b) **不涉及任何特定 D，也不涉及截距 a₀**：对一切满足 hD : 2 ≤ D 的 D 成立，
+      与 j、M 的具体数值以及是否在反对角线 j = −M 上无关；Q_{j,M} 的定义本身不含
+      任何质壳条件（不要求 L_0 取特定本征值）。
+  (c) **不断言 Q_{j,M} 与 H_null 或 H_phys 的关系**：Q_{j,M} 只是"被全部正模湮灭"，
+      不要求在 a₀ 质壳上，因而一般既不是物理态子空间也不是零态子空间的子集；
+      Q_{j,M} 与 H_null/H_phys 之间的具体映射关系（例如 L_{-1} 把某个 Q_{j,M} 送进
+      某个反对角片的零态）由 worldsheet.null-states-lower-bound-type-one 承载，
+      本卡不重复。
+  (d) **不使用光锥单项式的线性无关性**：证明只用「Q_{j,M} 的补空间（配对映射的像）
+      维数不超过某个种子族的维数」这一秩零化度论证，不需要 {光锥单项式} 是一组基。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.NoGhost.le_finrank_towerSeed
+  lean_file: StringFormal/NoGhost/TypeOneFamily.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/TypeOneFamily.lean :: StringFormal.NoGhost.le_finrank_towerSeed
+      （本卡 formal.lean_decl，第 905 行起，section SeedBound 起于第 823 行）；铺垫
+      towerSeed（第 815 行，定义）、mem_towerSeed（第 820 行）、
+      finrank_range_toDualHom_le（第 835 行）、sliceToSeedDual / sliceToSeedDual_apply
+      （第 848、854 行）、mem_towerSeed_of_mem_ker_sliceToSeedDual（第 863 行）；再往下依赖
+      同文件 section Straightening / SeedIndex 的张成机制
+      towerBigrade_le_ordSeedSpan（第 569 行，F-1）与
+      finrank_ordSeedSpanPos_le（第 739 行，F-2 的单射半）。
+      姊妹上界定理（本卡【不断言】(a) 引用）：
+      formal/StringFormal/NoGhost/SpuriousElimination.lean ::
+      StringFormal.NoGhost.finrank_towerPositiveMode_inf_towerBigrade_le
+      （第 1598 行起，section GeneralRungCount）；该定理 docstring 原话
+      "Together with `TypeOneFamily.le_finrank_towerSeed` this pins
+      `dim Q_{j,M} = p_{D−1}(M)` exactly"，即两条 Lean 定理各自只给一半不等式，
+      本图**没有**为等式本身另立一条 Lean 定理去指——**不存在**合并两者的单一 `_eq` 声明
+      （已 grep 全文件确认，无 `finrank_towerSeed_eq` 或同类命名）。
+    note: |
+      本仓库，无 sorry。**类型类核实**：`le_finrank_towerSeed` 所在 `section SeedBound`
+      （第 823 行起）声明 `variable {D}{K}[Field K][CharZero K][Algebra ℚ K]{η a b:Fin D→K}`；
+      定理本身前**没有** `omit` 标注，故按完整的 `[Field K][CharZero K][Algebra ℚ K]` 记录。
+      追踪证明体：调用 `mem_towerSeed_of_mem_ker_sliceToSeedDual`（同样无 `omit`）与
+      `finrank_range_toDualHom_le`（该条前有 `omit [CharZero K] [Algebra ℚ K] in`，
+      比 section 变量表窄，但这是**辅助引理**，不改变 `le_finrank_towerSeed` 本身的签名）。
+      **curator 未自行运行 `lake build` / `#check` 逐条核实**（本 worktree 无构建缓存），
+      结论基于直接读源码 `omit` 标注与调用链，未跑编译器验证。
+      **证明结构**（docstring 自述）：秩零化度（rank–nullity）用于线性映射
+      `sliceToSeedDual : V_{j,M} → (ordSeedSpanPos)^*`（片对某个"有序种子族"的配对）：
+      `dim ker Ψ = dim V_{j,M} − rank Ψ ≥ p_D(M) − (p_D(M) − p_{D−1}(M)) = p_{D−1}(M)`，
+      用到 `finrank_towerBigrade`（= p_D(M)）、`rank Ψ ≤ dim(种子族) ≤ p_D(M) − p_{D−1}(M)`
+      （`finrank_ordSeedSpanPos_le`，即张成定理 F-1/F-2 里的单射一半）、以及
+      `ker Ψ ⊆ Q_{j,M}`（`mem_towerSeed_of_mem_ker_sliceToSeedDual`，靠塔上型非退化 +
+      L_n 与种子族配对的换位公式）。**这条证明与
+      worldsheet.physical-slice-bounded-by-transverse-count 的证明结构互为镜像**
+      （那条是"配对到 conjFreeSlice 的对偶给出单射 ⇒ 上界"，本卡是"配对到种子族的对偶
+      给出满射的秩零化度 ⇒ 下界"），但**不是同一个映射的两个方向**：两者对象不同
+      （H_phys∩V_N vs Q_{j,M}），不能互相化简。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15（不承载论证；文献不讨论'准物理子空间'这一
+      不要求在壳的中间对象，也不给逐 rung/level 的维数计数）"
+    note: "只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, spectrum-generating-algebra, fock-space, dimension-bound, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "quasi-physical"`（命中
+  worldsheet.ocq-null-state-two-families，内容不重叠，见下）、`search "towerSeed"`、
+  `search "type one"`、`search "seed space"`，除第一条外均无命中；本图此前没有
+  承载「Q_{j,M} 的维数下界」这一命题的独立节点。
+
+  【与 worldsheet.ocq-null-state-two-families 的关系，不是同一对象的重复】那张卡在
+  【设定】段固定反对角线 rung r = −N，把 Q_M 定义为该固定 rung 上的准物理子空间，
+  并且只承载"两族映射的像落在 H_null 内"这一构造性命题（physical-argument，全部⟨手算⟩）；
+  本卡是同一个准物理子空间对象在**任意** rung j 上的版本，只承载其**维数**的下界
+  （formalized，Lean 秩零化度论证），不涉及 L_{-1}/𝒟₂ 两族映射本身。两卡是"对象定义相同、
+  断言内容不同"的姊妹卡，不 supersede、不合并——按【一个节点一个命题】的原则，
+  "Q 的定义/两族映射的物理性"与"Q 的维数"是两件事，此前分别由那张卡的手算段落
+  （notes【明确不断言】(e)：dim Q_M 公式"未在本卡证明"）与本卡承载。
+
+  【本卡是 worldsheet.null-states-lower-bound-type-one 的直接输入】本卡断言的
+  dim Q_{j,M} ≥ p_{D−1}(M) 是那张卡的证明链的中间步骤（L_{-1} 把 Q_{-(N+1),N} 单射地
+  送进 H_null ∩ V_{N+1}，再用本卡给 Q_{-(N+1),N} 的维数下界）；那张卡的推导正式挂了
+  本卡为 depends_on（非 inferred，见其推导 sources 的调用链）。
+
+  【与 SpuriousElimination.lean 上界定理的分工，等式为何不单独立节点】docstring 逐字
+  "Together with … this is an equality"，但等式本身不是一条独立的 Lean 定理（无对应
+  `theorem`/`lemma` 声明），只是读者把两条不等式方向相反地叠在一起得到的推论。
+  按【一个节点一个命题】与"陈述不可变、status 只能实话实说自身论证"的原则，
+  本卡只断言 Lean 实际证明的那一半（≥），等式作为一条读者推论记在本条 notes 里，
+  不另立"quasi-physical-slice-dimension-eq"卡——如日后 SpuriousElimination.lean 或
+  某个新文件补上一条显式的 `_eq` 定理，再考虑是否需要新卡。
+author: curator
+created: "2026-09-12"
