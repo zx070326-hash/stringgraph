@@ -457,4 +457,141 @@ theorem eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed (hη : ∀ μ, η μ * �
 
 end Independence
 
+/-! ### The null lower bound on the level-three slice -/
+
+section NullBoundThree
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- `p_{-3} · p_{-3} = -4`: the level-three shell (`h = 1 - N = -2`). -/
+lemma dotVec_momentum_neg_three_self (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) :
+    dotVec η (towerMomentum a b (-3)) (towerMomentum a b (-3)) = -4 := by
+  rw [← zeroModeSq_eq_dotVec, zeroModeSq_towerMomentum, zeroModeSq_eq_dotVec,
+    F.dotVec_self_eq_two hD, F.hba, F.frame.isotropic]
+  push_cast
+  ring
+
+variable (η a b) in
+/-- The transversality functional `e ↦ e · p_j` on polarisations. -/
+noncomputable def transFunctional (j : ℤ) : (Fin D → K) →ₗ[K] K where
+  toFun e := dotVec η e (towerMomentum a b j)
+  map_add' x y := dotVec_add_left η x y _
+  map_smul' c x := by simpa using dotVec_smul_left η x (towerMomentum a b j) c
+
+variable (η) in
+/-- The level-one seeds as a linear map of the polarisation. -/
+noncomputable def oneSeedₗ (j : ℤ) : (Fin D → K) →ₗ[K] TowerFock D K where
+  toFun e := oneSeed η j e
+  map_add' x y := oneSeed_add j x y
+  map_smul' c x := oneSeed_smul j c x
+
+/-- `dim {e | e · p_j = 0} = D - 1` whenever `p_j · p_j ≠ 0`. -/
+theorem finrank_ker_transFunctional {j : ℤ}
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0) :
+    Module.finrank K ↥(LinearMap.ker (transFunctional η a b j)) = D - 1 := by
+  have hsurj : LinearMap.range (transFunctional η a b (K := K) j) = ⊤ := by
+    refine LinearMap.range_eq_top.2 fun c => ⟨(c * (dotVec η (towerMomentum a b j)
+      (towerMomentum a b j))⁻¹) • towerMomentum a b j, ?_⟩
+    show dotVec η _ _ = c
+    rw [dotVec_smul_left]
+    field_simp
+  have h := LinearMap.finrank_range_add_finrank_ker (transFunctional η a b (K := K) j)
+  rw [hsurj, finrank_top, Module.finrank_fin_fun, Module.finrank_self] at h
+  omega
+
+variable (η a b) in
+/-- The combined Type-1 ⊕ Type-2 map `(φ, e) ↦ L_{-1}φ + 𝒟₂((e·α_{-1})|0;p_{-3}⟩)`. -/
+noncomputable def typeTwoAugRaw :
+    (↥(towerSeed η a b (-3) 2) × ↥(LinearMap.ker (transFunctional η a b (-3))))
+      →ₗ[K] TowerFock D K :=
+  (towerLop η a b (-1)).comp
+      ((towerSeed η a b (-3) 2).subtype.comp (LinearMap.fst K _ _))
+    + (descTwo η a b).comp ((oneSeedₗ η (-3)).comp
+        ((LinearMap.ker (transFunctional η a b (-3))).subtype.comp (LinearMap.snd K _ _)))
+
+lemma typeTwoAugRaw_apply (x : ↥(towerSeed η a b (-3) 2)
+    × ↥(LinearMap.ker (transFunctional η a b (-3)))) :
+    typeTwoAugRaw η a b x = towerLop η a b (-1) (x.1 : TowerFock D K)
+      + descTwo η a b (oneSeed η (-3) (x.2 : Fin D → K)) := by
+  simp only [typeTwoAugRaw, LinearMap.add_apply, LinearMap.coe_comp, Function.comp_apply,
+    LinearMap.fst_apply, LinearMap.snd_apply, Submodule.subtype_apply, oneSeedₗ,
+    LinearMap.coe_mk, AddHom.coe_mk]
+
+/-- The combined map is injective — this is `eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`
+packaged. -/
+theorem typeTwoAugRaw_injective (hη : ∀ μ, η μ * η μ = 1) (hbb : dotVec η b b = 0)
+    (hba : dotVec η b a = 1)
+    (hpp : dotVec η (towerMomentum a b (-3)) (towerMomentum a b (-3)) ≠ 0) :
+    Function.Injective (typeTwoAugRaw η a b (K := K)) := by
+  have hker : ∀ x : ↥(towerSeed η a b (-3) 2)
+      × ↥(LinearMap.ker (transFunctional η a b (-3))),
+      typeTwoAugRaw η a b (K := K) x = 0 → x = 0 := by
+    rintro ⟨⟨φ, hφ⟩, ⟨e, he⟩⟩ hx
+    rw [typeTwoAugRaw_apply] at hx
+    have he' : dotVec η e (towerMomentum a b (-3)) = 0 := he
+    obtain ⟨he0, hφ0⟩ := eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed hη hbb hba
+      (mem_towerSeed.1 hφ).2 he' hpp hx
+    simp only [Prod.mk_eq_zero, Submodule.mk_eq_zero]
+    exact ⟨hφ0, he0⟩
+  exact fun u v huv => sub_eq_zero.1 (hker _ (by rw [map_sub, huv, sub_self]))
+
+/-- ⭐ **The null lower bound on the level-three slice at `D = 26`**:
+
+`dim (H_null ⊓ V_3) ≥ dim Q_{-3,2} + (D - 1)`.
+
+The `Q_{-3,2}` summand is the Type-1 family of `TypeOneFamily`; the `D - 1` summand is the
+Type-2 family `𝒟₂((e·α_{-1})|0;p_{-3}⟩)` over polarisations transverse to `p_{-3}`.  The two
+families are transverse by `eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`, which is where
+blueprint §B‴.5's leading-index collision is bypassed; `D = 26` enters only through
+`NullSeedsTwo.towerLop_two_apply_descTwo`. -/
+theorem le_finrank_towerNull_inf_towerBigrade_three (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) (hD26 : (D : K) = 26) :
+    Module.finrank K ↥(towerSeed η a b (-3) 2) + (D - 1)
+      ≤ Module.finrank K
+          ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-3) 3) := by
+  classical
+  have hpp : dotVec η (towerMomentum a b (-3)) (towerMomentum a b (-3)) ≠ 0 := by
+    rw [dotVec_momentum_neg_three_self hD F]
+    norm_num
+  have hVfin : FiniteDimensional K ↥(towerBigrade D K (-3) 3) := towerBigrade_finite _ _
+  have hWfin : FiniteDimensional K
+      ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-3) 3) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-3) 3)
+      (S₂ := towerBigrade D K (-3) 3) inf_le_right
+  have hQfin : FiniteDimensional K ↥(towerSeed η a b (-3) 2) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-3) 2) (S₂ := towerBigrade D K (-3) 2) inf_le_right
+  -- the range of the combined map lands in the null slice
+  have hmem : ∀ x : ↥(towerSeed η a b (-3) 2)
+      × ↥(LinearMap.ker (transFunctional η a b (-3))),
+      typeTwoAugRaw η a b x
+        ∈ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-3) 3 := by
+    rintro ⟨⟨φ, hφ⟩, ⟨e, he⟩⟩
+    obtain ⟨hpos, hbig⟩ := mem_towerSeed.1 hφ
+    have h1 := towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη
+      F.frame.isotropic F.hba haa (j := -3) (N := 2) (by norm_num) hbig hpos
+    have he' : dotVec η e (towerMomentum a b (-3)) = 0 := he
+    have h2 := descTwo_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη F.frame.isotropic
+      F.hba haa hD26 (j := -3) (N := 1) (by norm_num) (oneSeed_mem_towerBigrade (η := η) (-3) e)
+      (mem_towerSeed.1 (oneSeed_mem_towerSeed a b F.hη he')).1 (N' := 3) (by norm_num)
+    rw [typeTwoAugRaw_apply]
+    refine Submodule.add_mem _ ?_ h2
+    have : (2 : ℕ) + 1 = 3 := by norm_num
+    rw [this] at h1
+    exact h1
+  have hinj := typeTwoAugRaw_injective (K := K) (η := η) (a := a) (b := b) F.hη
+    F.frame.isotropic F.hba hpp
+  have hcod : Function.Injective ((typeTwoAugRaw η a b (K := K)).codRestrict _ hmem) := by
+    intro u v huv
+    exact hinj (congrArg Subtype.val huv)
+  have hle := LinearMap.finrank_le_finrank_of_injective hcod
+  haveI : Module.Free K ↥(towerSeed η a b (-3) 2) :=
+    Module.Free.of_divisionRing K ↥(towerSeed η a b (-3) 2)
+  haveI : FiniteDimensional K ↥(LinearMap.ker (transFunctional η a b (-3) (K := K))) :=
+    FiniteDimensional.finiteDimensional_submodule _
+  rwa [Module.finrank_prod, finrank_ker_transFunctional hpp] at hle
+
+end NullBoundThree
+
 end StringFormal.NoGhost
