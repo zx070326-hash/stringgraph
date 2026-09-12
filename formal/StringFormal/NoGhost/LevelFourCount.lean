@@ -385,4 +385,209 @@ theorem towerModeVec_two_one_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : 
 
 end MomentEquations
 
+/-! ### Transversality of the two families on the level-four slice
+
+The new mathematical content of this file (blueprint §B‴ 订正 item 5): `L_{-1} V_{j,3}` and
+`𝒟₂ V_{j,2}` meet only in `0`, on every rung whose momentum satisfies `p·p ≠ 0` and
+`3 − 4 p² ≠ 0`.  As at level three, `D` and physicality never enter. -/
+
+section Transversality
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- ⭐ **The moment relations at level four.**
+
+If `L_{-1}φ + 𝒟₂ψ = 0` with `φ` of level three and `ψ` of level two, then (1) the two-mode
+moments of `ψ` are determined by the one-mode ones,
+
+`A_ε(1)A_δ(1)ψ = (2/3)[(δ·p) A_ε(2)ψ + (ε·p) A_δ(2)ψ]`,
+
+and (2) — the **antisymmetrised** moment identity — for all polarisations
+
+`3 [(δ·ρ) A_ε(2)ψ − (ε·ρ) A_δ(2)ψ] = 4(ρ·p) [(δ·p) A_ε(2)ψ − (ε·p) A_δ(2)ψ]`.
+
+This is the blueprint's `−(8/3)(ρ·p)[(δ·p)m_ε − (ε·p)m_δ] + 2[(δ·ρ)m_ε − (ε·ρ)m_δ] = 0`
+cleared of denominators (multiplied by `3/2`).  The proof is the elimination of `a`, `b`, `c`
+and `n` from the four moment equations, with the `ε ↔ δ` antisymmetrisation killing the totally
+symmetric `c` and the symmetric `n`. -/
+theorem moment_relations_of_towerLop_neg_one_add_descTwo (hη : ∀ μ, η μ * η μ = 1)
+    {j : ℤ} {φ ψ : TowerFock D K} (hφ : φ ∈ towerBigrade D K j 3)
+    (hψ : ψ ∈ towerBigrade D K j 2)
+    (hzero : towerLop η a b (-1) φ + descTwo η a b ψ = 0) :
+    (∀ w v : Fin D → K, towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        = (2 / 3 * dotVec η v (towerMomentum a b j)) • towerModeVec η a b w 2 ψ
+          + (2 / 3 * dotVec η w (towerMomentum a b j)) • towerModeVec η a b v 2 ψ)
+      ∧ (∀ ε δ ρ : Fin D → K, (3 : K) • (dotVec η δ ρ • towerModeVec η a b ε 2 ψ
+          - dotVec η ε ρ • towerModeVec η a b δ 2 ψ)
+        = (4 * dotVec η ρ (towerMomentum a b j))
+            • (dotVec η δ (towerMomentum a b j) • towerModeVec η a b ε 2 ψ
+              - dotVec η ε (towerMomentum a b j) • towerModeVec η a b δ 2 ψ)) := by
+  -- the four moment equations
+  have E1 : ∀ w : Fin D → K, (4 : K) • towerModeVec η a b w 3 φ
+      + (44 : K) • towerModeVec η a b w 2 ψ = 0 := by
+    intro w
+    have h := congrArg (towerModeVec η a b w 4) hzero
+    rwa [map_add, map_zero, towerModeVec_four_towerLop_neg_one hη hφ,
+      towerModeVec_four_descTwo hη hψ] at h
+  have E2 : ∀ w v : Fin D → K,
+      (3 : K) • towerModeVec η a b w 2 (towerModeVec η a b v 1 φ)
+        + dotVec η v (towerMomentum a b j) • towerModeVec η a b w 3 φ
+        + (24 : K) • towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        + (18 * dotVec η v (towerMomentum a b j)) • towerModeVec η a b w 2 ψ = 0 := by
+    intro w v
+    have h := congrArg (fun x => towerModeVec η a b w 3 (towerModeVec η a b v 1 x)) hzero
+    simp only [map_add, map_zero] at h
+    rw [towerModeVec_three_one_towerLop_neg_one hη hφ, towerModeVec_three_one_descTwo hη hψ] at h
+    linear_combination (norm := module) h
+  have E3 : ∀ w v : Fin D → K,
+      (2 : K) • towerModeVec η a b v 2 (towerModeVec η a b w 1 φ)
+        + (2 : K) • towerModeVec η a b w 2 (towerModeVec η a b v 1 φ)
+        + (10 * dotVec η w (towerMomentum a b j)) • towerModeVec η a b v 2 ψ
+        + (24 : K) • towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        + (10 * dotVec η v (towerMomentum a b j)) • towerModeVec η a b w 2 ψ = 0 := by
+    intro w v
+    have h := congrArg (fun x => towerModeVec η a b w 2 (towerModeVec η a b v 2 x)) hzero
+    simp only [map_add, map_zero] at h
+    rw [towerModeVec_two_two_towerLop_neg_one hη hφ, towerModeVec_two_two_descTwo hη hψ] at h
+    linear_combination (norm := module) h
+  have E4 : ∀ w v z : Fin D → K,
+      (2 : K) • towerModeVec η a b w 1
+            (towerModeVec η a b v 1 (towerModeVec η a b z 1 φ))
+        + dotVec η v (towerMomentum a b j)
+            • towerModeVec η a b w 2 (towerModeVec η a b z 1 φ)
+        + dotVec η z (towerMomentum a b j)
+            • towerModeVec η a b w 2 (towerModeVec η a b v 1 φ)
+        + (10 * dotVec η w (towerMomentum a b j))
+            • towerModeVec η a b v 1 (towerModeVec η a b z 1 ψ)
+        + (12 * dotVec η v (towerMomentum a b j))
+            • towerModeVec η a b w 1 (towerModeVec η a b z 1 ψ)
+        + (12 * dotVec η z (towerMomentum a b j))
+            • towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        + (2 * dotVec η v z + 6 * dotVec η v (towerMomentum a b j)
+            * dotVec η z (towerMomentum a b j)) • towerModeVec η a b w 2 ψ = 0 := by
+    intro w v z
+    have h := congrArg
+      (fun x => towerModeVec η a b w 2 (towerModeVec η a b v 1 (towerModeVec η a b z 1 x))) hzero
+    simp only [map_add, map_zero] at h
+    rw [towerModeVec_two_one_one_towerLop_neg_one hη hφ,
+      towerModeVec_two_one_one_descTwo hη hψ] at h
+    linear_combination (norm := module) h
+  -- the two symmetries
+  have hnsym : ∀ w v : Fin D → K,
+      towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        = towerModeVec η a b v 1 (towerModeVec η a b w 1 ψ) := fun w v =>
+    towerModeVec_apply_towerModeVec_of_add_ne_zero η a b w v hη (by norm_num) ψ
+  have hcsym : ∀ w v z : Fin D → K,
+      towerModeVec η a b w 1 (towerModeVec η a b v 1 (towerModeVec η a b z 1 φ))
+        = towerModeVec η a b v 1 (towerModeVec η a b w 1 (towerModeVec η a b z 1 φ)) :=
+    fun w v z => towerModeVec_apply_towerModeVec_of_add_ne_zero η a b w v hη (by norm_num) _
+  -- solved forms
+  have hAsol : ∀ w : Fin D → K,
+      towerModeVec η a b w 3 φ = (-11 : K) • towerModeVec η a b w 2 ψ := by
+    intro w
+    linear_combination (norm := module) (1 / 4 : K) • E1 w
+  have hBsol : ∀ w v : Fin D → K,
+      towerModeVec η a b w 2 (towerModeVec η a b v 1 φ)
+        = (-8 : K) • towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+          + (-7 / 3 * dotVec η v (towerMomentum a b j)) • towerModeVec η a b w 2 ψ := by
+    intro w v
+    linear_combination (norm := module) (1 / 3 : K) • E2 w v
+      - (1 / 3 * dotVec η v (towerMomentum a b j)) • hAsol w
+  have hNsol : ∀ w v : Fin D → K,
+      towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ)
+        = (2 / 3 * dotVec η v (towerMomentum a b j)) • towerModeVec η a b w 2 ψ
+          + (2 / 3 * dotVec η w (towerMomentum a b j)) • towerModeVec η a b v 2 ψ := by
+    intro w v
+    linear_combination (norm := module) (-1 / 8 : K) • E3 w v + (1 / 4 : K) • hBsol w v
+      + (1 / 4 : K) • hBsol v w + (2 : K) • hnsym w v
+  refine ⟨hNsol, fun ε δ ρ => ?_⟩
+  linear_combination (norm := module) (3 / 2 : K) • E4 ε δ ρ - (3 / 2 : K) • E4 δ ε ρ
+    - (3 : K) • hcsym ε δ ρ - (6 * dotVec η ρ (towerMomentum a b j)) • hnsym ε δ
+    - (3 / 2 * dotVec η δ (towerMomentum a b j)) • hBsol ε ρ
+    - (3 / 2 * dotVec η ρ (towerMomentum a b j)) • hBsol ε δ
+    + (3 / 2 * dotVec η ε (towerMomentum a b j)) • hBsol δ ρ
+    + (3 / 2 * dotVec η ρ (towerMomentum a b j)) • hBsol δ ε
+    + (9 * dotVec η δ (towerMomentum a b j)) • hNsol ε ρ
+    - (9 * dotVec η ε (towerMomentum a b j)) • hNsol δ ρ
+
+/-- ⭐⭐ **Transversality of the Type-1 and Type-2 families at level four.**
+
+If `L_{-1}φ + 𝒟₂ψ = 0` with `φ ∈ V_{j,3}` and `ψ ∈ V_{j,2}`, then `ψ = 0` and `φ = 0`,
+provided the rung momentum satisfies `p·p ≠ 0` and `3 − 4 p² ≠ 0` and there is a unit
+polarisation transverse to it.
+
+On the antidiagonal slice `p_j·p_j = 2 − 2N`, so at `N = 4` the two numerical conditions read
+`-6 ≠ 0` and `27 ≠ 0`.  Neither `D` nor physicality of the seeds is used: like
+`LevelThreeCount.eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed` this is a statement about the
+oscillator algebra alone. -/
+theorem eq_zero_of_towerLop_neg_one_add_descTwo_at_four (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) {j : ℤ}
+    {φ ψ : TowerFock D K} (hφ : φ ∈ towerBigrade D K j 3) (hψ : ψ ∈ towerBigrade D K j 2)
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0)
+    (hcoef : (3 : K) - 4 * dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0)
+    {u : Fin D → K} (hu : dotVec η u (towerMomentum a b j) = 0) (huu : dotVec η u u = 1)
+    (hzero : towerLop η a b (-1) φ + descTwo η a b ψ = 0) : ψ = 0 ∧ φ = 0 := by
+  obtain ⟨hNsol, hstar⟩ :=
+    moment_relations_of_towerLop_neg_one_add_descTwo hη hφ hψ hzero
+  -- `(δ·p) m_ε = (ε·p) m_δ`, from `ρ := p` and `3 − 4p² ≠ 0`
+  have hm1 : ∀ ε δ : Fin D → K,
+      dotVec η δ (towerMomentum a b j) • towerModeVec η a b ε 2 ψ
+        = dotVec η ε (towerMomentum a b j) • towerModeVec η a b δ 2 ψ := by
+    intro ε δ
+    have h := hstar ε δ (towerMomentum a b j)
+    have h2 : ((3 : K) - 4 * dotVec η (towerMomentum a b j) (towerMomentum a b j))
+        • (dotVec η δ (towerMomentum a b j) • towerModeVec η a b ε 2 ψ
+          - dotVec η ε (towerMomentum a b j) • towerModeVec η a b δ 2 ψ) = 0 := by
+      linear_combination (norm := module) h
+    rcases smul_eq_zero.1 h2 with h3 | h3
+    · exact absurd h3 hcoef
+    · exact sub_eq_zero.1 h3
+  -- back-substituting, `(δ·ρ) m_ε = (ε·ρ) m_δ` for *all* `ρ`
+  have hg : ∀ ε δ ρ : Fin D → K,
+      dotVec η δ ρ • towerModeVec η a b ε 2 ψ
+        = dotVec η ε ρ • towerModeVec η a b δ 2 ψ := by
+    intro ε δ ρ
+    have h := hstar ε δ ρ
+    rw [hm1 ε δ, sub_self, smul_zero] at h
+    rcases smul_eq_zero.1 h with h3 | h3
+    · exact absurd h3 (by norm_num)
+    · exact sub_eq_zero.1 h3
+  -- the transverse unit polarisation kills the longitudinal moment
+  have hmp : towerModeVec η a b (towerMomentum a b j) 2 ψ = 0 := by
+    have h := hg (towerMomentum a b j) u u
+    rwa [huu, one_smul, dotVec_comm η (towerMomentum a b j) u, hu, zero_smul] at h
+  have hm0 : ∀ ε : Fin D → K, towerModeVec η a b ε 2 ψ = 0 := by
+    intro ε
+    have h := hm1 ε (towerMomentum a b j)
+    rw [hmp, smul_zero] at h
+    exact (smul_eq_zero.1 h).resolve_left hpp
+  -- hence the two-mode moments vanish, hence the one-mode ones, hence `ψ = 0`
+  have hn0 : ∀ w v : Fin D → K,
+      towerModeVec η a b w 1 (towerModeVec η a b v 1 ψ) = 0 := by
+    intro w v
+    rw [hNsol w v, hm0 w, hm0 v, smul_zero, smul_zero, add_zero]
+  have hone : ∀ v : Fin D → K, towerModeVec η a b v 1 ψ = 0 := by
+    intro v
+    have hv1 : towerModeVec η a b v 1 ψ ∈ towerBigrade D K j 1 :=
+      towerModeVec_mem_towerBigrade η a b v hψ (by norm_num)
+    refine eq_zero_of_towerModeVec_eq_zero (a := a) (b := b) hη (by norm_num) hv1
+      fun w q hq => ?_
+    rcases eq_or_lt_of_le (show (1 : ℤ) ≤ q from hq) with hq1 | hq1
+    · rw [← hq1]; exact hn0 w v
+    · exact towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b w hv1 (by exact_mod_cast hq1)
+  have hψ0 : ψ = 0 := by
+    refine eq_zero_of_towerModeVec_eq_zero (a := a) (b := b) hη (by norm_num) hψ
+      fun w q hq => ?_
+    rcases eq_or_lt_of_le (show (1 : ℤ) ≤ q from hq) with hq1 | hq1
+    · rw [← hq1]; exact hone w
+    · rcases eq_or_lt_of_le (show (2 : ℤ) ≤ q from hq1) with hq2 | hq2
+      · rw [← hq2]; exact hm0 w
+      · exact towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b w hψ
+          (by exact_mod_cast hq2)
+  refine ⟨hψ0, ?_⟩
+  rw [hψ0, map_zero, add_zero] at hzero
+  exact towerLop_neg_one_injective η a b hη hbb hba hφ hzero
+
+end Transversality
+
 end StringFormal.NoGhost
