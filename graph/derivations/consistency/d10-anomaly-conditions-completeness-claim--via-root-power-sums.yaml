@@ -1,0 +1,119 @@
+id: consistency.d10-anomaly-conditions-completeness-claim--via-root-power-sums
+target: consistency.d10-anomaly-conditions-completeness-claim
+kind: proof
+status: rigorous
+depends_on:
+  - id: conv.gauge-trace-normalization
+    note: |
+      固定条件 (i) 中 `Tr` = **伴随**迹。本推导只需要这一句，不需要该约定的任何归一化细节：
+      proof.md §1「Homogeneity remark」证明 (i) 两边在 `F ↦ λF` 下同为六次齐次（含 λ = i），
+      故 (i) 对厄米/反厄米约定与生成元整体归一化完全不敏感。
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/d10-anomaly-full-classification/proof.md :: §2（Lemma 1）、§3（Lemma 2）、§4（Lemma 3、Lemma 4、Cor 4.1）、§5–§6（66 例穷举与闭式）、§7（命题 (S) 的组装）"
+    note: |
+      ★ **本项目原创证明，2026-09-12，非公开发表文献。**
+      经 `graph-reviewer` 对抗性审查并裁定 `verified`（独立重建全部 66 个根系 + 绕过
+      Lemma 3/4 的暴力穷举交叉验证），裁定全文见
+      research/attempts/d10-anomaly-full-classification/status.yaml。
+      **未经期刊发表，未经人类船长最终确认**（该文件 `captain_confirmed: false`）。
+      提交 sha：证明正文 182686c，§6.1 印错方程的订正 6c28dfc。
+      辅助脚本 scripts/root_power_sums.py（66 例精确有理数判定 + 末尾机器复现配分）与
+      scripts/closed_forms_and_witnesses.py（|Φ|+rank、对偶 Coxeter 数、闭式与小秩表自检）。
+summary: |
+  证明满足条件 (i)(ii) 的紧致李代数**恰有**那四个，即目标卡所要的「没有第五个」。四步：
+
+  **1. 阿贝尔方向平凡（§2, Lemma 1）。** u(1) 因子在**伴随**表示里 ad = 0，故 `Tr F^k`
+  完全看不见中心。写 `𝔤 = 𝔤' ⊕ u(1)^m`，(i) ⟺ (i) 在半单部分 𝔤' 上成立，而 (ii) 把
+  `m = 496 − dim 𝔤'` 定死。这正是 u(1)⁴⁹⁶ 与 e₈ ⊕ u(1)²⁴⁸ 成为解的原因——**平凡满足，不是真抵消**。
+
+  **2. 化为根系幂和（§3, Lemma 2）。** 由极大环面定理与根空间分解，
+  `Tr H^k = Σ_{α∈Φ} α(H)^k`；再由「实形式在复化中 Zariski 稠密」两次把 𝔱 上的多项式恒等式
+  推到全代数。于是 (i) 变成根数据的显式多项式恒等式 (i′)，**所有迹系数直接从根系算出，
+  不引用任何二手迹恒等式系数表**（这是刻意的：antonelli-2015 的系数表有实质错误，见 §8）。
+
+  **3. 至多两个单因子（§4, Lemma 3 / Lemma 4 / Cor 4.1）。** 在 Sym(𝔱_ℝ*) 的**多重次数分级**下
+  取 (2,2,2) 分量：`S₆` 与 `S₄S₂` 的每一项支撑在至多两个 slot 上故贡献为零，而 `S₂³` 的该分量
+  是 `6 A_i A_j A_k`；Sym(𝔱_ℝ*) 是整环且每个 `A_l ≠ 0`（`Σ_α α(h)²` 是实数平方和，为零与单性矛盾），
+  故 `r ≤ 2`（Lemma 3）。`r = 2` 时逐次数比较把 (i) 拆成每个因子都要满足更强条件
+  `(P): S₄ = S₂²/100`（Lemma 4）。再由 (ii) 得每个单因子 `dim ≤ 496`，按 Killing–Cartan
+  分类**恰好 66 个**紧致单李代数（Cor 4.1：秩上界 21/15/15/16 + 低秩重合排除，21+14+13+13+5 = 66）。
+
+  **4. 有限穷举与组装（§5–§7）。** 66 个候选在精确有理数下逐个判定：满足 (i) 的只有
+  `so(32)` 与 `e₈`，满足 (P) 的只有 `e₈`。§6 另给 A/B/C/D 四族在任意秩的**闭式**与例外型的
+  单点 witness，使每条排除都可手算复核，不依赖脚本。配分后 r = 0/1/2 三种情形恰好给出
+  `u(1)⁴⁹⁶`、`so(32)`、`e₈ ⊕ u(1)²⁴⁸`、`e₈ ⊕ e₈`，**恰四解**。∎
+gaps:
+  - |
+    **未做 Lean 形式化**（proof.md §9 第三条）。论证是有限组合的，§6 是 ℚ 上的可判定计算，
+    Lemma 1/3/4 是多项式环上的初等代数，原则上可形式化；真正的硬进口是 Killing–Cartan
+    分类 (K) 与极大环面定理 (T)，两者目前都不在 Mathlib 中所需的形式。现实的形式化目标是
+    **条件化**陈述「给定 66 个型各自的根系，恰好 so(32) 与 e₈ 满足 (i)」，那部分是纯计算。
+  - |
+    **例外代数的根表来自 Bourbaki Planches I–IX 的显式坐标**（proof.md §9 第一条）。
+    §6.1–§6.4 的闭式使 A/B/C/D 四族在任意秩都可手算排除，故经典部分不依赖脚本；
+    但 §6.5 的五个例外型依赖 scripts/root_power_sums.py 里编码的坐标。
+    **此缺口已由 graph-reviewer 独立关闭**（从 Cartan 矩阵用 Weyl 反射闭包在单根基坐标下
+    重建全部 66 个根系，与 Bourbaki 坐标是不同的线性实现，判定结果完全一致），
+    保留登记是因为该复核本身也只有一位 agent 做过。
+  - |
+    **§6.5 的不变量次数论证引自 Bourbaki 指数表**（proof.md §9 第二条）：
+    「例外代数无本原四次不变量，故 `S₄ ∝ S₂²`」。**逻辑上非必需**——脚本把
+    `S₄ = a₄S₂²` 作为多项式恒等式直接验证，单点 witness 已足够排除 G₂/F₄/E₆/E₇，
+    E₈ 的成立也是直接的多项式恒等式检验。但 §6.5 **如所写**在论证**结构**上依赖该表。
+  - |
+    **未逐行 diff antonelli-2015 的系数表**（proof.md §8）。本证明刻意不参考该预印本的系数，
+    故只能说本处数值是独立导出并内部交叉验证的，**不能**指名该文哪几个数错在哪。
+  - |
+    **未经期刊发表、未经同行评议、未经船长确认**。`rigorous` 档位走的是
+    docs/STATUS_LEVELS.md 的**例外**通道（前提完整 + 有限步初等计算 + reviewer 独立复核），
+    不是「有发表的、数学界接受的完整证明」那条正路。
+  - |
+    本卡只管**代数条件** (i)(ii)。四个解中是否每个都对应自洽的弦论背景是另一个问题，
+    且对 u(1)⁴⁹⁶ 与 e₈ ⊕ u(1)²⁴⁸ 答案已知是微妙的
+    （consistency.abelian-factorization-is-not-cancellation）。proof.md §9 第四条同此。
+notes: |
+  reviewer-verified: graph-reviewer, 2026-09-12（裁定全文见
+  research/attempts/d10-anomaly-full-classification/status.yaml；档位依据
+  docs/STATUS_LEVELS.md 的「前提完整 + 有限步初等计算 + reviewer 独立复核」例外裁决）
+
+  【1. ★ 为什么 depends_on 里只有一条约定，没有挂 math.* 的李论卡】
+  本证明**不从图里进口任何命题**（proof.md §1「Imported from the stringgraph corpus. None of
+  the steps below *requires* a graph node.」）。三处看起来该挂边的地方，逐条说明：
+  · **math.adjoint-weights-are-roots-and-zero**（effective `physical-argument`）承载的正是
+    `Tr H^k = Σ_α α(H)^k`。本证明**不引用该卡**，而在 §3 Lemma 2 里从极大环面定理
+    （Bröcker–tom Dieck Ch. IV Thm 1.6）与根空间分解（Bourbaki Ch. VI）自证。
+    ⚠ 这不是为了绕开状态压制：那张卡自己的 notes 逐字写明「没有任何非严格的步骤；
+    status 之所以是 physical-argument，**只因来源内容在本项目 L0**」——即那是**来源取得**问题，
+    不是数学强度问题，而本证明给出的是已取得出处的独立论证。
+  · **math.tr-f6-coefficient-vanishing**（`rigorous`）与本证明 §6.2–§6.4 的 so(N)/usp(N) 排除重叠，
+    但 proof.md §1 逐字声明本处推导独立于它，两者结论一致。挂边会虚报一条不存在的依赖。
+  · **math.chevalley-restriction-theorem**、**math.e8-root-system(-power-sums)** 同理：内容重叠，
+    但本证明的对应步骤是自证或直接从根表算出。
+  经典进口 (K) Killing–Cartan 分类、(T) 极大环面定理、(R) 根空间分解按
+  math.pbw-theorem--via-humphreys 与 math.adjoint-weights-...--via-root-space-decomposition
+  的同一条纪律当**黑箱**处理（本图不为这些基础构造建节点），出处写在 proof.md §1。
+  **这是本推导最值得被挑战的一处判断**，故在此完整留痕。
+
+  【2. ★ 本推导与「四个群满足条件」那张卡的分工】
+  目标卡只断言**唯一性方向**（「没有第五个」）。正面方向（这四个确实满足 (i)(ii)）在
+  consistency.d10-four-groups-satisfy-anomaly-conditions，其 effective 是 `physical-argument`
+  （被 math.so-usp-adjoint-fundamental-trace-identities 与 math.e8-adjoint-trace-identities
+  两张二手系数表卡压低）。本推导**有意不挂那条边**：§7 的 r = 2 情形只用 Lemma 4 的
+  **正方向**（每个因子必满足 (P) ⇒ 必是 e₈），不需要逆方向；逆方向在 proof.md 里也另有自证，
+  但那是另一条命题，不属于本卡。两条命题逻辑独立，故唯一性可以是 rigorous 而正面方向
+  暂停在 physical-argument，这不是矛盾。
+  ⚠ **推论**：若日后有人想把「恰有四个」当成一条 rigorous 的完整分类引用，必须**同时**
+  升级那张卡（路径是给它补一条同样从根系自证的推导），不能只引本卡。
+
+  【3. ★★ 红线不因本推导解除】
+  目标卡 notes【2】【3】两条措辞红线**继续有效**：即使完备性现在有了 rigorous 推导，
+  也只能说「只有这四个使十二形式因子化」，**不能说「只有这四个反常抵消」**——
+  两个阿贝尔解连 GS 抵消项都写不下来（consistency.abelian-factorization-is-not-cancellation）。
+
+  【4. 与旧推导并存】
+  consistency.d10-anomaly-conditions-completeness-claim--via-unproven-literature-assertion
+  保留不动：它记录的是**文献态**（谁断言过、谁承认无证明、谁的表述冲突），与本推导记录的
+  **本项目自证态**是两件事，都有保存价值。effective status 取两者较高者。
+author: curator
+created: "2026-09-12"
