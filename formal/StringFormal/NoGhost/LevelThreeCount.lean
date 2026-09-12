@@ -689,4 +689,75 @@ theorem oscWeight_eq_three_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d 
 
 end Finsupp
 
+/-! ### Occupation functions on the `b̃`-free directions
+
+A single reusable bridge: `Finsupp.mapDomain` along the inclusion `κ ↪ Fin D` of the
+non-`b̃` directions is an injection from the level-`N` occupation functions on `κ` into the
+`b̃`-free level-`N` occupation functions on `Fin D`.  It supplies the *lower* bound on the
+`conjFree` count at every level (the upper bound needs the classification, see below). -/
+
+section ConjFreeEmbed
+
+variable {D : ℕ}
+
+/-- The inclusion of the non-`b̃` directions, at the level of occupation functions. -/
+noncomputable def conjFreeEmbed (hD : 2 ≤ D)
+    (d : ({μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) →₀ ℕ) : Osc D →₀ ℕ :=
+  Finsupp.mapDomain (fun v => (((v.1 : Fin D), v.2) : Osc D)) d
+
+lemma conjFreeEmbed_injective (hD : 2 ≤ D) : Function.Injective (conjFreeEmbed hD) := by
+  refine Finsupp.mapDomain_injective fun u v h => ?_
+  exact Prod.ext (Subtype.ext (congrArg (fun p : Osc D => p.1) h))
+    (congrArg (fun p : Osc D => p.2) h)
+
+lemma level_conjFreeEmbed (hD : 2 ≤ D)
+    (d : ({μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) →₀ ℕ) :
+    Fock.level D (conjFreeEmbed hD d) = ddfLevel d := by
+  classical
+  rw [level_eq_oscWeight, ddfLevel_eq_oscWeight, Finsupp.oscWeight_apply,
+    Finsupp.oscWeight_apply, conjFreeEmbed,
+    Finsupp.sum_mapDomain_index (h := fun (v : Osc D) (k : ℕ) => k * (v.2 : ℕ))
+      (fun _ => by ring) (fun _ _ _ => by ring)]
+
+lemma conjDeg_conjFreeEmbed (hD : 2 ≤ D)
+    (d : ({μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) →₀ ℕ) :
+    conjDeg hD (conjFreeEmbed hD d) = 0 := by
+  classical
+  rw [conjDeg, Finsupp.weight_apply, conjFreeEmbed,
+    Finsupp.sum_mapDomain_index
+      (h := fun (v : Osc D) (k : ℕ) => k • (if v.1 = conjIdx D hD then 1 else 0))
+      (fun _ => zero_smul _ _) (fun _ m₁ m₂ => add_smul m₁ m₂ _)]
+  rw [Finsupp.sum]
+  refine Finset.sum_eq_zero fun v _ => ?_
+  rw [if_neg v.1.2, smul_zero]
+
+/-- The level-`N` occupation functions on the non-`b̃` directions inject into the `b̃`-free
+level-`N` occupation functions. -/
+theorem card_ddfLevel_le_card_conjFree (hD : 2 ≤ D) (N : ℕ) :
+    Fintype.card {d : ({μ : Fin D // μ ≠ conjIdx D hD} × ℕ+) →₀ ℕ // ddfLevel d = N}
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0} := by
+  classical
+  refine Fintype.card_le_of_injective
+    (fun x => (⟨conjFreeEmbed hD (x : _), ?_, conjDeg_conjFreeEmbed hD _⟩ :
+      {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0})) ?_
+  · rw [level_conjFreeEmbed hD, x.2]
+  · intro x y hxy
+    exact Subtype.ext (conjFreeEmbed_injective hD (congrArg Subtype.val hxy))
+
+/-- **`p_{D−1}(2) ≥ (D−1) + binom(D, 2)`**, the lower bound companion to
+`LevelTwoCount.card_conjFree_two_le`.  It is what turns the Type-1 half of the level-three null
+bound into a number. -/
+theorem card_conjFree_two_ge (hD : 2 ≤ D) :
+    (D - 1) + Nat.choose D 2
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 2 ∧ conjDeg hD d = 0} := by
+  classical
+  have hκ : Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1 := by
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have h1 := card_ddfLevel_two_ge {μ : Fin D // μ ≠ conjIdx D hD}
+  have h2 := card_ddfLevel_le_card_conjFree hD 2
+  rw [hκ, show D - 1 + 1 = D by omega] at h1
+  omega
+
+end ConjFreeEmbed
+
 end StringFormal.NoGhost
