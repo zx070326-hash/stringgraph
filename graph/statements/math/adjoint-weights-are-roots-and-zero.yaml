@@ -31,19 +31,63 @@ statement: |
       本卡的 Tr_𝔤 就是 dim 𝔤 维向量空间上线性算子的迹，不含归一化选择）。
 uses_conventions: []
 sources:
-  - ref: humphreys-1972
-    loc: "§8「Root space decomposition」（小节号与标题来自通行目录；本项目未取得印本，内容 L0）"
+  - ref: kirillov-2008
+    loc: "preliminary version (liegroups.pdf), Ch. 7「Complex Semisimple Lie Algebras」, pp. 84–89：Definition 7.6、Theorem 7.7(1)、Definition 7.8、Theorem 7.11、Corollary 7.14、Theorem 7.16(1)(2)、Lemma 7.20、Theorem 7.21(2)(5)"
     note: |
-      **L0——只有目录级定位，内容未核实。** 按 sources.bib 该条的登记，本项目对 GTM 9 唯一核实过编号的
-      结果是 §17.3 的 PBW；§8 是标准教材里根空间分解所在的章（8.1 极大环面子代数与根、8.2 中心化子、
-      8.3 正交性、8.4 整性、8.5 有理性），**这些小节标题与编号本项目没有一手证据，故本卡 loc 只写 §8**，
-      不写 8.x，也不写 Proposition/Theorem 字母。(1) 中「dim 𝔤_α = 1」与「C_𝔤(𝔥) = 𝔥」在该章的具体
-      编号**禁写**。
+      **★ L1 页图逐字（researcher 2026-09-13，抽取记录 literature/extractions/math-sources.md §57）。**
+      本卡 (1) 的三句话逐条有出处：
+      · 同时对角化与分解 = **Theorem 7.7(1)**「Let 𝔥 ⊂ 𝔤 be a toroidal subalgebra. Then
+        𝔤 = ⊕_{α∈𝔥*} 𝔤_α, where 𝔤_α is a common eigenspace for all operators ad h, h ∈ 𝔥,
+        with eigenvalue α … In particular, 𝔥 ⊂ 𝔤_0.」＋ **Theorem 7.16(1)** 的 (7.1)(7.2)
+        「𝔤 = 𝔥 ⊕ ⊕_{α∈R} 𝔤_α」；
+      · 𝔤₀ = C_𝔤(𝔥) = 𝔥 = **Definition 7.8**（Cartan 子代数**定义**为「toroidal subalgebra which
+        coincides with its centralizer: C(𝔥) = {x | [x,𝔥] = 0} = 𝔥」）＋ **Theorem 7.11**
+        「Let 𝔥 ⊂ 𝔤 be a maximal toroidal subalgebra … Then 𝔥 is a Cartan subalgebra.」（带完整证明），
+        即本卡「Cartan 子代数（极大环面子代数）」这个等同在半单情形的出处；
+        Theorem 7.16 的证明逐字「This immediately follows from Theorem 7.7 and 𝔤_0 = 𝔥, which is the
+        definition of Cartan subalgebra.」
+      · **dim 𝔤_α = 1 = Theorem 7.21(2)**「For each α ∈ R, the root subspace 𝔤_α is one-dimensional.」；
+        **2α ∉ Φ = Theorem 7.21(5)**「For any root α, the only multiples of α which are also roots are ±α.」
+        （证明末逐字「In particular, 2α is not a root.」）。
+      本卡 (2) 里的「重数 = rank 𝔤」用 **Corollary 7.14**「rank(𝔤) = dim 𝔥」。
+      ⚠ **三条使用限制**：
+      (1) **编号只在 preliminary version 里有效**。印本（CUP 2008 精装 / 2017 平装）把同一章排成
+          **第 6 章 pp. 108–131**，且条目号一直排到 6.52，与 prelim 的 7.x **不是平移关系**
+          ⇒ **绝不许把本条 loc 改写成印本编号**；印本页图本项目尚未取得（Cambridge Core 2026-09-13 全站中断）。
+      (2) **Corollary 7.14 倚赖 Theorem 7.13（Cartan 子代数两两共轭），而原书对 7.13 逐字写
+          「we quote without proof」** ⇒ 「rank 良定义」这一点在本来源里没有证明。
+          本卡 (3) 的迹公式**不需要**它（只需固定一个 𝔥），(2) 里写 rank 时请记住这条。
+      (3) 本卡 (3) 的迹公式 **Kirillov 第 7 章一字未提**（我逐页读过 pp.83–90），
+          它是 (1) 给出对角化之后的初等线性代数，见推导 summary 第 (5) 步。
+  - ref: humphreys-1972
+    loc: "§8.2「Centralizer of H」, p. 36 的 Proposition（H = C_L(H)）；§8.4「Integrality properties」, p. 39 的 **Proposition 8.4(b)**（α 的根倍数只有 ±α）"
+    note: |
+      **L1⁻（逐字 OCR snippet，非页图；researcher 2026-09-13，抽取记录 §57.3）——本条目从 L0 升级。**
+      路线是 Google Books 的 `jscmd=SearchWithinVolume2` JSON 端点，返回**印刷页 OCR 的逐字文本 + 页号**；
+      §50/§52 两轮用的 `&q=` HTML 入口只回页号，故此前记「原文措辞永远 L0」，那条天花板现已作废。
+      诚实性对照本轮做实：四条查询各返回 `number_of_results:0`，该卷不回落到固定页。
+      **逐字**：p. 36「Proposition . Let H be a maximal toral subalgebra of L. Then H = C_L(H) . Proof .
+      We proceed in steps . Write C = C_L(H) .」；p. 39「… ( b ) If α ∈ Φ , the only scalar multiples of α
+      which are roots are α and −α . ( c ) If α , β ∈ Φ , then β(h_α) ∈ Z , and β − β(h_α)α ∈ Φ .」
+      ⚠ **三条使用限制**：
+      (1) 书上印的标题是**无编号的「Proposition.」**；「Proposition 8.2」「Proposition 8.4」是**本书他处的
+          引用形式**（各已逐字见到：8.2 在 p.37；8.4 在 p.39/40/45/73/74/88/145 共七处）。
+          §8.2 只有一条 Proposition，故「Proposition 8.2 = H = C_L(H)」是**高可信推断，不是逐字**
+          ⇒ loc 按上面那样写全，不要单写「Proposition 8.2」。
+      (2) **禁写「Proposition 8.4(a)」**：`dim L_α = 1` 的字面文本与部分字母本轮**没取到**（四次查询 0 命中）。
+          这一条请引 kirillov-2008 的 Theorem 7.21(2)。
+      (3) OCR 有伪影（`C1(H)` = `C_L(H)`、`O`/`Φ` 混淆、下标丢失、`±` 变乱码）
+          ⇒ **可照抄措辞与编号，不可照抄公式字符**。
+      **副产品**：本书 p. 100/101 确有印出的「dim L = dim H + Card Φ」，但那在 §18.4（Serre 定理的证明里），
+      **不是 §8 的独立命题**，不得写成 §8 的结论。
   - ref: fulton-harris-1991
     loc: "Lecture 14（一般半单李代数的结构分析：Cartan 子代数、根空间分解；讲次号来自通行目录，L0）"
     note: |
-      **L0——正文一页未取得**，按 sources.bib 该条的禁令只写到 Lecture 级、不写页码、不写任何编号。
-      列在这里是作为第二个标准出处备查，**不承载任何本卡的论证核实**。
+      **L0 不变——正文一页未取得，本轮 0 次调用（记「未执行」，不是「试过失败」）。**
+      按 sources.bib 该条的禁令只写到 Lecture 级、不写页码、不写任何编号。
+      本卡的论证核实现在由 kirillov-2008（L1）与 humphreys-1972（L1⁻）承担，
+      **本条不承载任何核实**，只作第三个标准出处备查。
+      （是否还值得留在这里，见抽取记录 §57.7 的 Q57.5，待 lead 裁决。）
 tags: [algebra, lie-algebra, root-system, adjoint, weights, trace-identity, phase2, math-input]
 notes: |
   【为什么立卡】math.e8-root-system-power-sums（Lean）证的是根幂和 Σ_α (α·x)^k；
@@ -51,10 +95,15 @@ notes: |
   在 Cartan 元 H 上，伴随迹就是根幂和。E8Roots.lean 的 docstring 把这一步明写为 Lean 之外的
   「mathematical *hypothesis*」，本卡把它做成图节点，让 `why` 能指到它。
 
-  【status 说明】本卡内容是任何半单李代数教材的标准定理（数学上 rigorous），但本项目对 GTM 9 §8 与
-  FH Lecture 14 的**内容都未核实（L0）**；按「不确定选低一级」与任务书的裁定，推导标
-  physical-argument，**直到 researcher 拿到 L1 来源**（升级路径：核实 GTM 9 §8 相应命题的编号，
-  或改引本项目已 L1 读到的其它教材）。
+  【status 说明（2026-09-13 更新）】本卡内容是任何半单李代数教材的标准定理（数学上 rigorous）。
+  2026-09-11 立卡时本项目对 GTM 9 §8 与 FH Lecture 14 的内容都是 L0，故推导被迫标 physical-argument。
+  **该理由已消失**：researcher 于 2026-09-13 取到两条独立来源——
+  kirillov-2008 的 preliminary version pp. 84–89（**L1 页图**，Theorem 7.7(1)/7.11/7.16(1)/7.21(2)(5) 等，
+  带完整证明）与 humphreys-1972 §8.2 p.36 / **Proposition 8.4(b)** p.39（**L1⁻ 逐字 OCR snippet**）。
+  推导 --via-root-space-decomposition 因此升为 kind: proof / status: rigorous。
+  **仍未升到 formalized**：Mathlib 侧是否有 `dim 𝔤_α = 1` 未查（抽取记录 §57.7 的 Q57.4）。
+  **本卡 (3) 的迹公式在两条来源里都没有**——那不是缺口，是因为它只是「对角算子取迹」这一步初等线性代数，
+  见推导 summary 第 (5) 步与抽取记录 §57.4。
 
   【坐标的说明（供下游使用）】(3) 里的 α(H) 是线性泛函在 H 上的取值，**不涉及任何内积**。
   把它写成 math.e8-root-system-power-sums 的 α·x 时，只需取 𝔥 的一组基使 𝔥* 的对偶基是 ε_i，

@@ -8243,3 +8243,246 @@ loc: "§21.2, Corollary"
 - **新发现**：(9) 后印「if n ≧ 0」，但 n = 0 时 (9) 指数 ½p̂(0) = ½ 非整数且原文单列了 n = 0 两值 ⇒ (9) 实际适用 n ≥ 1。
 - **裁定：可建卡**。loc、statement 必含项、约定字典（`c^{MRC} = (2/3)c^{std}`、`L^{MRC}_i = −L^{std}_i`，inferred）见 rulings 文件 §1.5。
 
+---
+
+## 57. 根空间分解：`dim 𝔤_α = 1` 与 `C_𝔤(𝔥) = 𝔥` 的带编号 L1 来源（researcher，2026-09-13）
+
+**触发**：`math.adjoint-weights-are-roots-and-zero` 及其唯一推导
+`--via-root-space-decomposition` 的 `status` 被迫标 `physical-argument`，
+原因**不是数学不严格**（内容是纯代数标准定理），而是本项目对 `humphreys-1972 §8` 与
+`fulton-harris-1991 Lecture 14` 的**内容都是 L0**。该 L0 还压低了两条下游推导
+（`math.e8-adjoint-trace-identities--via-root-power-sums`、
+`consistency.d10-anomaly-conditions-completeness-claim--via-root-power-sums`）的有效状态。
+
+**本轮结论：两条目标陈述 (a)(b) 全部升到 L1，来源两条且互相独立。**
+
+### 57.0 结论表（先看这张）
+
+| 目标陈述 | 本轮最强证据 | 等级 | 可写进图吗 |
+|---|---|---|---|
+| (b) `C_𝔤(𝔥) = 𝔥`（𝔥 极大环面） | **Kirillov, prelim., Theorem 7.11 + Definition 7.8**（页图逐字，带完整证明） | **L1** | ✅ |
+| (b) 同上，第二来源 | **Humphreys §8.2, p. 36 的 `Proposition. … Then H = C_L(H).`** | **L1⁻**（OCR snippet 逐字） | ✅（编号写法见 57.3） |
+| (a) `dim 𝔤_α = 1` | **Kirillov, prelim., Theorem 7.21(2)**（页图逐字，带证明） | **L1** | ✅ |
+| (a) 的 `2α ∉ Φ` 那半 | **Kirillov, prelim., Theorem 7.21(5)**（含「In particular, 2α is not a root.」） | **L1** | ✅ |
+| (a) 的 `2α ∉ Φ`，第二来源 | **Humphreys, Proposition 8.4(b), p. 39** | **L1⁻** | ✅（**可写部分字母 (b)**） |
+| (a) 的 `dim L_α = 1` 在 Humphreys 里的**部分字母** | 四次 OCR 猜词查询全 0 命中 | **L0** | ❌ **禁止写 `Proposition 8.4(a)`** |
+| `𝔤 = 𝔥 ⊕ ⨁ 𝔤_α`（可同时对角化） | **Kirillov, prelim., Theorem 7.7(1) + Theorem 7.16(1)** | **L1** | ✅ |
+| `rank 𝔤 = dim 𝔥` | **Kirillov, prelim., Corollary 7.14** | **L1**，但倚赖**无证明引用**的 Theorem 7.13 | ⚠ 见 57.2 |
+| `Tr_𝔤 (ad H)^k = Σ_α α(H)^k` | **两本书都没有这句** | **L0（是真实的「文献里没有」，不是没找到）** | 见 57.4 |
+| 印本（CUP 2008/2017）里 Kirillov 这些条目的**编号** | Cambridge Core 全站中断 | **L0** | ❌ 见 57.2 禁令 2 |
+| `fulton-harris-1991` | 本轮 **0 次调用**，状态不变 | **L0** | ❌ 不承载任何核实 |
+
+### 57.1 需求侧：图里要的到底是哪几句（避免跑偏）
+
+`math.adjoint-weights-are-roots-and-zero` 的 statement 有三段。逐段对照本轮取到的东西：
+
+| 卡里的段 | 内容 | 本轮 |
+|---|---|---|
+| (1) | `𝔤 = 𝔥 ⊕ ⨁_{α∈Φ} 𝔤_α`，`dim 𝔤_α = 1`，`𝔤₀ = C_𝔤(𝔥) = 𝔥` | **全部 L1** |
+| (2) | ad 的权 = Φ（各重数 1）∪ {0}（重数 = rank），`dim 𝔤 = |Φ| + rank` | (1) 的直接读数；`rank = dim 𝔥` 见 Cor 7.14 |
+| (3) | `Tr_𝔤 (ad H)^k = Σ_{α∈Φ} α(H)^k`（k ≥ 1） | **不在任何来源里**，是对角算子取迹的初等线性代数（见 57.4） |
+
+⚠ 注意卡里把「Cartan 子代数」与「极大环面子代数」当同一件事。**这个等同本身在 Kirillov 里是有出处的**：
+Definition 7.8 把 Cartan *定义*成「环面且自中心化」，Theorem 7.11 证「极大环面 ⇒ Cartan」；
+并且 **Remark 7.9 逐字声明了适用范围**：「This definition should only be used for semisimple Lie algebras:
+for general Lie algebras, Cartan subalgebras are defined in a slightly different way (see, e.g., [21]).
+However, it can be shown that for semisimple algebras our definition is equivalent to the usual one.」
+⇒ **对半单 𝔤 可以互换；卡的前提正是半单，所以没问题**，但引用时别把这条推广到非半单。
+
+### 57.2 ★★ 首选来源（L1 页图全读）：Kirillov, Jr., *Introduction to Lie Groups and Lie Algebras*，**preliminary version**
+
+- **取件**：`https://www.math.stonybrook.edu/~kirillov/mat552/liegroups.pdf`，WebFetch 落盘 **1 MB**，
+  `Read(pages=)` 读页图。**PDF 页 = 书页，无偏移**（扉页是 PDF p.1 但无页码；目录印 3、4；正文 p.7 起）。
+- **合法性**：作者书页 `.../liegroups/` 逐字「[Preliminary version](liegroups.pdf) of the book,
+  **posted here with publisher's permission**.」⇒ 作者主页 + 出版社许可。
+- **本轮读了**：p.1（扉页）、p.3-4（目录全）、p.6-8、**p.83-90（第 7 章「Complex Semisimple Lie Algebras」全部正文 + 习题）**。
+- **逐字关键句**（全部抄进了 `sources.bib` 的 `kirillov-2008` note，这里只列索引）：
+  Definition 7.6（toroidal）p.84 / **Theorem 7.7(1)-(4)** p.84 / Definition 7.8（Cartan）p.85 /
+  Remark 7.9 p.85 / Example 7.10（𝔰𝔩(n,ℂ)）p.85 / **Theorem 7.11**（极大环面 ⇒ Cartan，Step 1-4）p.85-86 /
+  Corollary 7.12 p.86 / Theorem 7.13（**无证明引用**）p.86 / **Corollary 7.14**（rank = dim 𝔥）p.86 /
+  Example 7.15 p.86 / **Theorem 7.16(1)(2)**（根分解 (7.1)(7.2)）p.86 / Example 7.17 p.87 /
+  Lemma 7.18 p.87 / Lemma 7.19 p.87 / **Lemma 7.20** p.88 / **Theorem 7.21(1)-(7)** p.88-89 / Theorem 7.22 p.89-90。
+- **⚠⚠ 禁令 1（本轮最重要的发现，差点写错）：preliminary version 的编号 ≠ 印本编号。**
+  - Cambridge Core 书目页（书 hash `98E68056F3EE57686421863E2B0B5DF4`）列出**印本只有 8 章**，
+    「**6** - Complex semisimple Lie algebras」占 **pp. 108-131**；
+    preliminary version 里同名内容是**第 7 章**（pp. 83-90）。
+    原因看目录就懂：preliminary 的第 5 章「Representations of sl(2,C) and Spherical Laplace Operator」
+    在印本里并入了第 4 章（印本 ch.4 = pp. 52-83，32 页；prelim ch.4+ch.5 = pp. 39-66，28 页）⇒ **整体错一章**。
+  - 章内编号也不平移：作者勘误表（`.../liegroups/errata.pdf`，页脚逐字「Date: Last updated Sept 30, 2009.」，
+    适用 2008 精装本）列「p. 128, proof of **Proposition 6.52**」「p. 131, **Exercise 6.7**」
+    ⇒ **印本 ch.6 的条目号排到 6.52**，而 prelim ch.7 只到 7.22。
+  - ⇒ **只许写「Kirillov, preliminary version (liegroups.pdf), Theorem 7.21(2)」这种形式。**
+- **⚠ 禁令 2：印本页图本轮取不到。** Cambridge Core（本环境有机构订阅，见
+  `reference_cambridge-core-licensed-book-pdfs` 那条经验）在 2026-09-13 **全站服务中断**：
+  章级 PDF 端点返回 HTML，页面逐字「We have implemented additional assurance measures to protect our
+  systems.」「we have suspended some of our systems and services.」；abs 页显示「Temporarily unavailable」。
+  **下一轮重试这条 URL 即可把编号升到印本级**：
+  `www.cambridge.org/core/services/aop-cambridge-core/content/view/DD97D4C9B8905978A400E37B12C5509A/9780511755156c6_p108-131_CBO.pdf`
+  （online ISBN 9780511755156 是从章 DOI `10.1017/CBO9780511755156.007` 反推的；印本 ch.6 = pp.108-131）。
+- **⚠ 引用 rank 时的限制**：Corollary 7.14 倚赖 Theorem 7.13（两个 Cartan 子代数共轭），
+  而原文对 7.13 逐字写「Finally, we **quote without proof** the following important result, proof of which
+  can be found in [21], [11].」⇒ **本书对「rank 是良定义的」不给证明**。
+  卡的 (2) 若要用 `dim 𝔥 = rank 𝔤`，要么标 inferred，要么改成「对固定的那个 𝔥 而言 dim 𝔥」——
+  后者对 (3) 的迹公式完全够用（迹公式只需要某一个 𝔥，不需要 rank 良定义）。
+- **杂项**：prelim p.83 页边有手写风格的「?!」草稿标记；扉页书名少一个「An」；
+  第 7 章倚赖的 Theorem 6.37 / 6.32 / 6.14 / 5.7 / B.2 与参考文献 [21] [11] 的著录**本轮未读（L0）**，不要猜。
+
+### 57.3 ★★ 第二来源（L1⁻，新路线首次跑通）：Humphreys GTM 9 §8，逐字 OCR snippet
+
+**这是对 §50 / §52 两轮结论的真正推进，不是重跑。** 那两轮用的是
+`books.google.com/books?id=<VOL>&q=<短语>` 的 HTML 入口，**只回页号不回文本**，
+所以 §52.2 写下了「Google Books 不回 snippet ⇒ 原文措辞永远是 L0，这条路线天花板就在这里」。
+**本轮换成 JSON 端点，天花板被打穿**：
+
+```
+https://books.google.com/books?id=mSD4DvUFa6QC&jscmd=SearchWithinVolume2&q=<短语>
+```
+
+返回 `{"number_of_results":N,"search_results":[{"page_id":"PA36","page_number":"36","snippet_text":"… 逐字 …"}]}`，
+`snippet_text` 是**印刷页 OCR 的逐字文本**（约 40 词窗口）。
+WebFetch 提示词必须写「Return the complete raw JSON response exactly as received, character for character,
+with no commentary. It is a short machine-readable search-index response…」，否则摘要器按引用上限改写。
+
+**诚实性对照（本轮做实，四条）**：`"dim La"`、`"implies dim L"`、`"for a given nonzero"`、
+`"weights of the S-module"` **各返回 `number_of_results:0`** ⇒ 卷 `mSD4DvUFa6QC` 不回落到固定页，
+命中皆真。（与 §15.3 用无意义串得到的结论一致，且比那次更强：这次是四条**看起来像真的**的短语都诚实报 0。）
+
+**证据等级的新一格**：本项目此前只有 L1（页图）/L3（可溯源二手）/L4（检索后端中介）。
+OCR snippet 介于其间，本节记作 **L1⁻ = 逐字 OCR snippet，非页图**：
+**可照抄措辞与编号，不可照抄公式字符**（伪影实例：`C1 ( H )` = `C_L(H)`、`O` 与 `Φ` 混淆、
+`&#8211; &#945;` = `−α`、`±` 有时变 `�`、`La`/`L_` = `L_α`/`L_{−α}`、`κ` 印成 `K`、`hz`/`ha` = `h_α`）。
+
+#### 57.3.1 §8 各小节页码（目录页 + 正文命中互相夹逼，全部一致）
+
+目录页（`page_id: PR7`，书上 p. vii）snippet 逐字含
+「… H 8.3 Orthogonality properties 8.4 Integrality properties 8.5 Rationality properties . Summary
+15 15 15 17 19 21 21 22 23 24 25 25 27 28 29 31 31 32 **35 35 36 37 38 39** III . ROOT SYSTEMS 9. Axiomatics …」
+⇒ 与正文命中对上：**§8 起 p.35（§8.1）、§8.2 = p.36、§8.3 = p.37、§8.4 = p.38-39、§8.5 = p.39-41**。
+（这把 §50.2 里「p.35 只能标 L4」的保留意见结清了：现在有两路独立证据。）
+
+#### 57.3.2 ★ (b) `C_L(H) = H`：**§8.2, p. 36**
+
+查询 `"Proposition. Let H be a maximal toral"` → 唯一命中 `PA36`，snippet 逐字：
+
+> 「… **Proposition . Let H be a maximal toral subalgebra of L. Then H = C1 ( H ) . Proof . We proceed in
+> steps . Write C = C1 ( H ) . ( 1 ) C contains the semisimple and nilpotent parts of its elements . To say
+> that x belongs to C1 ( H ) is to …」
+
+（`C1 ( H )` 是 `C_L(H)` 的 OCR 伪影。）另一条查询 `"Centralizer of H"` 命中 `PA36` 给出 §8.2 开头逐字：
+「… **Centralizer of H** We shall need a fact from linear algebra , whose proof is trivial : Lemma . If x , y
+are commuting endomorphisms of a finite dimensional vector space , with y nilpotent , then xy is nilpotent ;
+in particular , Tr ( xy ) …」；以及 `PA35`（§8.1）逐字
+「… centralizer of H ; it includes H , thanks to the lemma . The set of all nonzero α ∈ H * for which L_α ≠ 0
+is denoted by Φ ; the elements of Φ are called the roots of L relative to H ( and are finite in number ) .」
+
+**⚠ 编号写法的分寸（重要）**：书上印的标题是**无编号的「Proposition.」**。
+「Proposition 8.2」是**本书他处的引用形式**，已在 p.37 逐字见到：
+「… ( **Proposition 8.2** ) the restriction of K to H is nondegenerate . Proposition . ( a ) Φ spans H * . …」。
+§8.2 里只有这一条 Proposition，所以「Proposition 8.2 = `H = C_L(H)`」是**高可信推断，不是逐字**
+（p.37 那句里「Proposition 8.2」到底挂在「H = C_L(H)」还是挂在「κ|_H 非退化」这个从句上，
+snippet 窗口切断了主句，无法判定）。
+⇒ 图里推荐写法：`§8.2「Centralizer of H」, p. 36 的 Proposition「Let H be a maximal toral subalgebra of L.
+Then H = C_L(H)」（书中他处以「Proposition 8.2」引用，见 p. 37）`。**不要**单写 `Proposition 8.2` 了事。
+
+#### 57.3.3 ★ (a) 的 `2α ∉ Φ`：**Proposition 8.4(b), p. 39**（部分字母可写）
+
+查询 `"there exists a unique"` → `PA39` snippet 逐字：
+
+> 「… there exists a unique y_α ∈ L_{−α} satisfying [ x_α y_α ] = h_α … **( b ) If α ∈ Φ , the only scalar
+> multiples of α which are roots are α and −α .** ( c ) If α , β ∈ Φ , then β ( h_α ) ∈ Z , and
+> β − β ( h_α ) α ∈ Φ . ( The numbers β ( h_α ) are …」
+
+§8.4 的正文（`PA38`）另有逐字：
+「… L_α and L_{−α} ) , and the only multiples of a root α which are roots are ±α . Next we examine how S_α
+acts on root spaces L_β , β ≠ ±α . Set K = Σ_{i∈Z} …」
+
+**「Proposition 8.4」这个编号已由七处他引逐字确认**（查询 `"Proposition 8.4"` 返回 7 条）：
+(c) → p.39、p.40；(e) → p.45（「root strings are of length at most 4」）、p.145；
+(d) → p.74（`[L_γ L_δ] = L_{γ+δ}`）、p.88；(f) → p.73。
+⇒ **`Proposition 8.4(b)` 可以写进图。**
+
+**⚠⚠ 禁令 4（本轮唯一没拿下的一块）：`dim L_α = 1` 的字面文本与它的部分字母未取到。**
+它几乎必然是 **(a)**（p.39 snippet 里 (b) 之前那段「there exists a unique y_α …」在标准教材里与
+`dim L_α = 1` 同句），但**四次 OCR 猜词查询全部 0 命中**（`"dim La"`、`"implies dim L"`、
+`"for a given nonzero"`、`"weights of the S-module"`），`"dim L"` 的 10 条命中里没有一条落在 §8。
+⇒ **不得写 `Proposition 8.4(a)`**。这一条请改引 kirillov-2008 的 **Theorem 7.21(2)**。
+下一轮若想补：试 `"the only scalar multiples"`（把窗口往前挪）、`"S = L"`、`"h_α = ["`、
+或干脆用 Google Books 的 `PA38`/`PA39` 页面配合别的入口。
+
+#### 57.3.4 副产品：`dim L = dim H + Card Φ` 在书里确有印出
+
+查询 `"dim L"` 的命中里，`PA101` 逐字「… dim L = dim H + Card Φ = dim H' + Card Φ' = dim L' , we conclude
+that is an isomorphism .」，`PA100` 逐字「… dim L = l + Card Φ < ∞ . In view of ( 5 ) , this follows from
+( 10 ) , ( 11 ) . ( 13 ) L is semisimple .」
+⚠ **但这两处都在 §18.4（Serre 存在唯一性定理的证明里），不是 §8 的一条独立命题。**
+引用时不要写成「§8 给出 dim 𝔤 = |Φ| + rank」。
+
+#### 57.3.5 对 §52 三条旧结论的订正
+
+1. §52.2「Google Books 不回 snippet ⇒ 原文措辞永远是 L0」——**作废**，换端点即可（见 57.3）。
+2. §52.2「`Corollary 8.2` 与 `Proposition 8.3` 同页命中，无法分辨哪个是根空间分解」——**已分辨**：
+   `Proposition 8.3` 是 §8.3 的那条「(a) Φ spans H*, (b) −α ∈ Φ, (c) [xy] = κ(x,y)t_α, …」（p.37 印出），
+   p.38 上的是回指；根空间分解的自中心化部分是 §8.2 的 Proposition（p.36）。
+   `Corollary 8.2` 本轮**未直接命中**，内容仍未知（**继续禁止写**）。
+3. §52.2 第 3 条「不得写 Humphreys Theorem 8.x」——**维持**。§8 里见到的都是 `Proposition`，无 `Theorem 8.x`。
+
+### 57.4 ★ 迹公式 (3) 在两本书里都不存在——这是真实的「文献没有」
+
+`Tr_𝔤 (ad H)^k = Σ_{α∈Φ} α(H)^k`（k ≥ 1）：
+- **Kirillov 第 7 章全文（p.83-90）一字未提**（我逐页读过，包括习题 7.1-7.3）。
+- Humphreys 侧本轮未找到（`"dim L"`/`"one dimensional"`/`"Proposition 8.4"` 三组查询的 17 条命中里没有迹公式）。
+
+**这不是缺口，是分类问题**：它是「对角算子的 k 次幂取迹 = 特征值 k 次幂之和」这一条线性代数，
+在 (1) 已经给出对角化之后是一步。图里应当照 `docs/STATUS_LEVELS.md` 当作**初等自证步骤**处理，
+并在推导的 summary 里写明「这一步没有来源，因为它不需要来源」——而**不是**再去找第三本教材。
+
+### 57.5 图里建议怎么改（供 curator 取舍；本轮由 lead 授权 researcher 直接落地）
+
+- `math.adjoint-weights-are-roots-and-zero` 的 `sources`：
+  1. 新增 `kirillov-2008`，`loc` 写
+     `preliminary version (liegroups.pdf), §7.1-§7.3, pp. 84-89：Definition 7.6/7.8、Theorem 7.7(1)、Theorem 7.11、Corollary 7.14、Theorem 7.16(1)(2)、Lemma 7.20、Theorem 7.21(2)(5)`；
+  2. `humphreys-1972` 的 `loc` 从「§8（内容 L0）」升为
+     `§8.2「Centralizer of H」p.36 的 Proposition；§8.4「Integrality properties」pp.38-39 的 Proposition 8.4(b)`，
+     note 写明 L1⁻ 与禁令 4；
+  3. `fulton-harris-1991` **保留但注明 L0 不变、0 次调用、不承载核实**。
+- 推导 `--via-root-space-decomposition`：`kind: physical-argument → proof`、
+  `status: physical-argument → rigorous`；删掉 gaps 第 1 条（「来源内容未核实」），
+  换成两条新的、更小的保留意见（Humphreys 部分字母未核实；Kirillov 的 Theorem 7.13 是无证明引用）。
+- 顺手补 `depends_on: math.e8-root-system`（原 gaps 第 2 条的一半）。
+  **安全性已核**：`math.e8-root-system` 是 `kind: definition, status: rigorous`，挂这条边不会把推导压回去。
+  该 gap 的**另一半**（「𝔢₈ 相对 𝔥 的根集合与 Humphreys 的 240 元表同构」这一识别本图无卡）**保留**。
+
+### 57.6 访问日志（本节，供后人省事）
+
+| 目标 | 路线 | 结果 |
+|---|---|---|
+| Kirillov preliminary version 全文 | `math.stonybrook.edu/~kirillov/mat552/liegroups.pdf` | ✅ 1 MB 落盘，`Read(pages=)` 全可读，PDF 页 = 书页 |
+| Kirillov 书页（出版状态） | `math.stonybrook.edu/~kirillov/liegroups/` | ✅ 逐字拿到「posted here with publisher's permission」与两个版次 |
+| Kirillov 作者主页 | `math.stonybrook.edu/~kirillov/` | ⚠ 只有一句「my recent book」，无版本信息（该走 `/liegroups/`） |
+| Kirillov 勘误表 | `.../liegroups/errata.pdf` | ✅ 50.1 KB，`Read(pages=)` 读出全部 ~40 条；**Ghostscript 元数据的 2009-09-30 与页脚「Sept 30, 2009」一致** |
+| Kirillov **印本** ch.6 页图 | Cambridge Core `/services/aop-cambridge-core/content/view/…_CBO.pdf`（两种 URL 各一次） | ❌ **全站服务中断**，返回 HTML |
+| Cambridge Core 书目页 | `/core/books/<slug>/98E68056F3EE57686421863E2B0B5DF4/listing` | ✅ 17 个 item 的标题 + 页范围 + hash 全取到（**中断期间书目页仍可读**） |
+| Cambridge Core `identifier/<印本 ISBN>/type/book` | `/core/product/identifier/9780521889698/type/book` | ❌ **HTTP 400**（印本 ISBN 不能用于这个端点，要用 online ISBN） |
+| Humphreys §8 逐字 | Google Books `jscmd=SearchWithinVolume2`，**11 次查询** | ✅ 7 条有命中、4 条诚实报 0（见 57.3） |
+| Humphreys 的 `dim L_α = 1` 字面 | 同上，4 条猜词 | ❌ 全 0，仍 L0（禁令 4） |
+| `fulton-harris-1991` | **本轮 0 次调用** | 记「未执行」，不是「试过失败」 |
+
+### 57.7 未解决 / 留给下一轮
+
+- **Q57.1**：Kirillov **印本**（CUP 2008 精装 / 2017 平装）里 Theorem 7.21(2)(5)、Theorem 7.11
+  各自的印本编号是多少？→ 重试 Cambridge Core ch.6 PDF（URL 见 57.2 禁令 2）。
+  顺带：勘误表「p. 127, line 2: 𝔥 = C(𝔥) → 𝔥 = C(h)」落在印本 ch.6 内，说明印本里
+  Cartan 的定义式排在 p.127 附近，可用来核对编号。
+- **Q57.2**：Humphreys `Proposition 8.4(a)` 的字面文本（禁令 4）。查询建议见 57.3.3 末。
+- **Q57.3**：`Corollary 8.2` 的内容（§52 遗留，本轮仍未命中）。
+- **Q57.4**（**性价比最高，且比继续追编号更值**）：`math.adjoint-weights-are-roots-and-zero`
+  能否走到 `formalized`？§52.4 第 4 条点出的
+  `Mathlib/Algebra/Lie/Weights/Cartan.lean :: cartan_sup_iSup_rootSpace_eq_top`
+  **本轮仍未读**（一次 `raw.githubusercontent.com` 读文件即可）。
+  预判：Mathlib 大概率有「根空间之和 = 全空间」，但**没有 `dim 𝔤_α = 1`**（那需要 𝔰𝔩₂ 表示论），
+  所以卡整体大概率停在 `rigorous`；但若 Mathlib 真有，值得拆一张更窄的卡。
+- **Q57.5**：`fulton-harris-1991` 是否值得继续留在这张卡的 `sources` 里？它 L0、0 次调用、
+  且同一事实现在有两条更好的来源。建议 lead 裁决是否删除（本轮**保留**，只加注 L0）。
+
+
+

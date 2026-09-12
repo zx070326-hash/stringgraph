@@ -2253,7 +2253,51 @@
                S(g*)^g ≅ S(h*)^W；两者相关但不同，**别混**。
                ⚠⚠ **禁令 3：不得写 §23.1**。「§23.1 = Invariant polynomial functions」这一级本轮只有 L4
                （Google Books 卷 mSD4DvUFa6QC 查 "Invariant polynomial functions" 命中 **p.126**，该卷已验证诚实），
-               **小节标题与内容均未一手核实**。loc 最多写「§23」。见 extractions/math-sources.md §44.4、Q39。}
+               **小节标题与内容均未一手核实**。loc 最多写「§23」。见 extractions/math-sources.md §44.4、Q39。
+               ---- 2026-09-13 追加（researcher，§57）：★★ §8 的正文与编号首次核实到「逐字」一级 ----
+               **新路线（这是本条目此前三轮都没试过的）**：Google Books 的
+               `books.google.com/books?id=mSD4DvUFa6QC&jscmd=SearchWithinVolume2&q=<短语>`
+               返回 JSON，**含书页 OCR 的逐字 snippet（约 40 词）+ 印刷页号**。
+               此前 §50/§52 两轮用的是 `&q=` 的 HTML 入口，那个只回页号不回文本，所以「原文措辞永远 L0」
+               这条天花板**不成立了**——它只是旧入口的限制。
+               ⚠ **证据等级**：snippet 是出版方索引的**印刷页 OCR 逐字文本**，比 L3/L4 强，但不是页图，
+               有 OCR 伪影（`C1(H)` = `C_L(H)`、`O`/`Φ` 混淆、下标丢失、`±` 变 `�`），
+               本项目记作 **L1⁻（逐字 OCR snippet，非页图）**：**可照抄措辞与编号，不可照抄公式字符**。
+               本轮诚实性对照做实：`"dim La"`、`"implies dim L"`、`"for a given nonzero"`、`"weights of the S-module"`
+               四条查询**各返回 `number_of_results:0`** ⇒ 该卷不回落到固定页，命中皆真（与 §15.3 的结论一致）。
+               **新增可引用的编号结果（§8，全部 L1⁻ 逐字）**：
+               (1) **§8.2「Centralizer of H」，书上 p. 36** 逐字：
+               「**Proposition**. Let H be a maximal toral subalgebra of L. Then H = C_L(H). Proof. We proceed
+               in steps. Write C = C_L(H). (1) C contains the semisimple and nilpotent parts of its elements.」
+               ⇒ **「C_𝔤(𝔥) = 𝔥」这条陈述的正文与位置现在是逐字核实的**。
+               ⚠ 书上印的**标题是无编号的「Proposition.」**；「Proposition 8.2」是本书**他处的引用形式**，
+               已在 p. 37 逐字见到（「… (Proposition 8.2) the restriction of K to H is nondegenerate.」）。
+               §8.2 里只有这一条 Proposition，故「Proposition 8.2 = H = C_L(H)」是**高可信推断，不是逐字**
+               ——写进图时请照这个分寸写。
+               (2) **§8.3，书上 p. 37** 逐字：「Proposition. (a) Φ spans H*. (b) If α ∈ Φ, then −α ∈ Φ.
+               (c) Let α ∈ Φ, x ∈ L_α, y ∈ L_{−α}. Then [xy] = κ(x,y) t_α (t_α as in (8.2)). (d) If α …」
+               ⇒ 与 §52 记的「`Proposition 8.3` 在 p.38 命中」相容（p.38 上的是回指）。
+               (3) **§8.4「Integrality properties」，书上 pp. 38-39**。p. 38 正文逐字：
+               「… L_α and L_{−α}), and the only multiples of a root α which are roots are ±α. Next we examine
+               how S_α acts on root spaces L_β, β ≠ ±α.」；**p. 39 的 Proposition 逐字**：
+               「… there exists a unique y_α ∈ L_{−α} satisfying [x_α y_α] = h_α. **(b) If α ∈ Φ, the only scalar
+               multiples of α which are roots are α and −α.** (c) If α, β ∈ Φ, then β(h_α) ∈ Z, and
+               β − β(h_α)α ∈ Φ. (The numbers β(h_α) are …)」
+               ⇒ **「2α ∉ Φ」= Proposition 8.4(b)，这条现在可以写进图**（含部分字母）。
+               「Proposition 8.4」这个编号本身已由五处他引逐字确认：(c) 在 p.39 与 p.40、(e) 在 p.45 与 p.145、
+               (d) 在 p.74 与 p.88、(f) 在 p.73。
+               ⚠⚠ **仍然缺的一块（禁令 4）：`dim L_α = 1` 的字面文本与它的部分字母本轮没取到。**
+               它几乎必然是 Proposition 8.4 的 **(a)**（p.39 的 snippet 里 (b) 之前那段正是标准教材中与
+               `dim L_α = 1` 同句的「存在唯一 y_α」），但四次 OCR 猜词查询全部 0 命中
+               ⇒ **不得写「Proposition 8.4(a)」**；要引这一条请改引 kirillov-2008 的 Theorem 7.21(2)，
+               或写「§8.4, pp. 38-39（正文含该陈述，部分字母未核实）」。
+               (4) **副产品（L1⁻ 逐字，但在另一个语境）**：书上 p. 101 逐字
+               「dim L = dim H + Card Φ = dim H' + Card Φ' = dim L'」，p. 100 逐字「dim L = l + Card Φ」
+               ⇒ **「dim 𝔤 = |Φ| + rank」在本书里确有印出的显式等式**，但它出现在 §18.4
+               （Serre 存在唯一性定理的证明里），**不是 §8 的一条独立命题**，引用时不要写成 §8 的结论。
+               (5) §8 的**其余小节页码现已互相夹逼一致**（目录页 p. vii 的 snippet + 正文命中）：
+               §8 起于 p. 35（§8.1），§8.2 = p. 36，§8.3 = p. 37，§8.4 = p. 38-39，§8.5 = p. 39-41。
+               见 extractions/math-sources.md §57。}
 }
 
 @misc{ardizzoni-2010,
@@ -3423,6 +3467,105 @@
              loc 最多写到「Lecture 18 "Orthogonal Lie Algebras", pp. 267-281」。
              同一事实**有 L1 来源**：见 cvitanovic-2008 的 (10.12)-(10.14) 与 (12.8)-(12.10)。
              见 extractions/math-sources.md §43.3。}
+}
+
+% ---------------------------------------------------------------------------
+% 半单李代数根空间分解（dim 𝔤_α = 1、C_𝔤(𝔥) = 𝔥）的 L1 来源
+% researcher 2026-09-13 登记；抽取记录见 extractions/math-sources.md §57。
+% 用途：把 math.adjoint-weights-are-roots-and-zero 的来源从 L0 升到 L1。
+% ---------------------------------------------------------------------------
+
+@book{kirillov-2008,
+  author    = {Kirillov, Jr., Alexander},
+  title     = {An Introduction to Lie Groups and Lie Algebras},
+  series    = {Cambridge Studies in Advanced Mathematics},
+  volume    = {113},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge},
+  year      = {2008},
+  note      = {由 researcher 于 2026-09-13 登记。**本项目实际读到的是作者本人挂出的「preliminary version」PDF，
+             不是印本**——这一点决定了下面所有编号的适用范围，引用前务必读完禁令 1、2。
+             **取件路线**：`https://www.math.stonybrook.edu/~kirillov/mat552/liegroups.pdf`
+             （WebFetch 落盘 1 MB，`Read(pages=)` 读页图；**PDF 页 = 书页，无偏移**）。
+             合法性依据：作者书页 `https://www.math.stonybrook.edu/~kirillov/liegroups/` 逐字
+             「This page is about my textbook *Introduction to Lie groups and Lie algebras*,
+             Cambridge University Press, 2008.」/「[Preliminary version](liegroups.pdf) of the book,
+             **posted here with publisher's permission**.」/「Note that there are two editions:
+             hardcover (published in 2008) and paperback (published in 2017).」/
+             「all known errors and typos of the original edition were corrected in the paperback edition.」
+             ⇒ 作者主页 + 出版社许可，属 literature/CLAUDE.md 规则 1 的「公开可获取」，不是盗版扫描；
+             但它自称 preliminary，**lead 若认为「未定稿」不可进 sources[]，请按 garrett-2011-pbw 的先例处理**。
+             **本轮 L1 逐页读了 preliminary version 的 p.1（扉页）、p.3-4（目录）、p.6-8、p.83-90（第 7 章全部正文）。**
+             扉页逐字：「Introduction to Lie Groups and Lie Algebras / Alexander Kirillov, Jr. /
+             Department of Mathematics, SUNY at Stony Brook, Stony Brook, NY 11794, USA」
+             （⚠ 扉页书名**没有**印本的那个「An」）。
+             ⚠⚠ **禁令 1（版次编号陷阱，本轮实测发现）：preliminary version 的章号与条目号与印本不一致，
+             所以下列编号只许写成「Kirillov, preliminary version, Theorem 7.xx」，绝不许写成印本的编号。**
+             证据两条：(a) Cambridge Core 书目页（书 hash `98E68056F3EE57686421863E2B0B5DF4`，
+             online ISBN 9780511755156，取自章 DOI `10.1017/CBO9780511755156.007`）列出印本只有 8 章，
+             「6 - Complex semisimple Lie algebras」占 **pp. 108-131**，而 preliminary version 里
+             「Complex Semisimple Lie Algebras」是**第 7 章**（pp. 83-90）——preliminary 的第 5 章
+             「Representations of sl(2,C) and Spherical Laplace Operator」在印本里已并入第 4 章，故整体错一章；
+             (b) 作者勘误表（`.../liegroups/errata.pdf`，页脚逐字「Date: Last updated Sept 30, 2009.」，
+             适用 2008 精装本）列出「p. 127, line 2」「p. 128, proof of **Proposition 6.52**」「p. 131, **Exercise 6.7**」
+             ⇒ **印本第 6 章的条目号排到 6.52，而 preliminary 第 7 章只排到 7.22，章内编号也不是 1:1 平移。**
+             ⚠ **禁令 2：印本页图本轮未取得，故「印本里这条是第几号」仍是 L0。**
+             Cambridge Core（本环境有订阅）在 2026-09-13 **全站服务中断**，章级 PDF 端点返回 HTML 而非 PDF，
+             页面逐字「We have implemented additional assurance measures to protect our systems.」/
+             「we have suspended some of our systems and services.」
+             ⇒ 下一轮重试这条 URL 即可升到印本级：
+             `www.cambridge.org/core/services/aop-cambridge-core/content/view/DD97D4C9B8905978A400E37B12C5509A/9780511755156c6_p108-131_CBO.pdf`。
+             **可引用的编号结果（全部 L1 逐字页图，preliminary version 编号）**：
+             **Definition 7.6, p. 84**「A subalgebra 𝔥 ⊂ 𝔤 is called *toroidal* if it is commutative and
+             consists of semisimple elements.」；
+             **Theorem 7.7, p. 84**（带证明）「Let 𝔥 ⊂ 𝔤 be a toroidal subalgebra. Then
+             (1) 𝔤 = ⊕_{α∈𝔥*} 𝔤_α, where 𝔤_α is a common eigenspace for all operators ad h, h ∈ 𝔥,
+             with eigenvalue α: ad h.x = ⟨α,h⟩x, h ∈ 𝔥, x ∈ 𝔤_α. In particular, 𝔥 ⊂ 𝔤_0.
+             (2) [𝔤_α,𝔤_β] ⊂ 𝔤_{α+β}. (3) If α+β ≠ 0, then 𝔤_α, 𝔤_β are orthogonal with respect to the
+             Killing form K. (4) For any α, the Killing form gives a non-degenerate pairing
+             𝔤_α ⊗ 𝔤_{−α} → ℂ. In particular, restriction of K to 𝔤_0 is non-degenerate.」
+             （证明首句逐字「By definition, for each h ∈ 𝔥, the operator ad h is diagonalizable.
+             Since all operators ad h commute, they can be simultaneously diagonalized, which is exactly
+             the statement of the first part of the theorem.」）；
+             **Definition 7.8, p. 85**「Let 𝔤 be a semisimple Lie algebra. A *Cartan subalgebra* 𝔥 ⊂ 𝔤 is a
+             toroidal subalgebra which coincides with its centralizer: C(𝔥) = {x | [x,𝔥] = 0} = 𝔥.」
+             （紧随的 **Remark 7.9** 逐字「This definition should only be used for semisimple Lie algebras:
+             for general Lie algebras, Cartan subalgebras are defined in a slightly different way
+             (see, e.g., [21]). However, it can be shown that for semisimple algebras our definition is
+             equivalent to the usual one.」——**这条 Remark 很重要，它是「Cartan = 极大环面」这个等同在
+             本书里的适用范围声明**）；
+             **Theorem 7.11, p. 85**（带完整证明 Step 1-4，收于 p. 86）「Let 𝔥 ⊂ 𝔤 be a maximal toroidal
+             subalgebra, i.e. a toroidal subalgebra which is not properly contained in any other toroidal
+             subalgebra. Then 𝔥 is a Cartan subalgebra.」（证明末两句逐字「Thus, C(𝔥) is a toroidal subalgebra
+             which contains 𝔥. Since 𝔥 was chosen to be maximal, C(𝔥) = 𝔥.」）；
+             **Corollary 7.12, p. 86**「In every complex semisimple Lie algebra 𝔤, there exists a Cartan subalgebra.」；
+             **Corollary 7.14, p. 86**「Any two Cartan subalgebras in 𝔤 have the same dimension. This dimension
+             is called *rank* of 𝔤: rank(𝔤) = dim 𝔥.」（⚠ 它依赖的 **Theorem 7.13（两个 Cartan 子代数共轭）
+             是无证明引用**：原文逐字「Finally, we quote without proof the following important result, proof of
+             which can be found in [21], [11].」——引用 rank 时必须连这条限制一起写）；
+             **Theorem 7.16, p. 86**（带证明）「(1) We have the following decomposition for 𝔤, called the
+             *root decomposition* (7.1) 𝔤 = 𝔥 ⊕ ⊕_{α∈R} 𝔤_α, where (7.2) 𝔤_α = {x | [h,x] = ⟨α,h⟩x for all
+             h ∈ 𝔥}, R = {α ∈ 𝔥* − {0} | 𝔤_α ≠ 0}. The set R is called the *root system* of 𝔤, and subspaces
+             𝔤_α are called the *root subspaces*. (2) [𝔤_α,𝔤_β] ⊂ 𝔤_{α+β} (here and below, we let 𝔤_0 = 𝔥).」
+             （证明逐字全文只有一句：「This immediately follows from Theorem 7.7 and 𝔤_0 = 𝔥, which is the
+             definition of Cartan subalgebra.」）；
+             **Lemma 7.18 / Lemma 7.19, p. 87**（[e,f] = (e,f)H_α；h_α 与 𝔰𝔩(2,ℂ)_α 三元组）；
+             **Lemma 7.20, p. 88**（V = ℂh_α ⊕ ⊕_{k∈ℤ,k≠0} 𝔤_{kα} 是 𝔰𝔩(2,ℂ)_α 的不可约表示）；
+             **★ Theorem 7.21, pp. 88-89**（(1)-(7) 七条，带逐条完整证明），本项目要的两条逐字是
+             「(2) For each α ∈ R, the root subspace 𝔤_α is one-dimensional.」与
+             「(5) For any root α, the only multiples of α which are also roots are ±α.」。
+             (2) 的证明逐字「Immediate from Lemma 7.20 and the fact that in any irreducible representation of
+             𝔰𝔩(2,ℂ), weight subspaces are one-dimensional.」；(5) 的证明末段逐字「so the only integer multiples
+             of α which are roots are ±α. **In particular, 2α is not a root.**」（同条另给 c = ±1 的收尾）。
+             同定理 (1) 逐字「R spans 𝔥* as a vector space, and elements h_α, α ∈ R, span 𝔥 as a vector space」。
+             **本书没有的**：迹公式 Tr_𝔤 (ad H)^k = Σ_{α∈Φ} α(H)^k ——**第 7 章一字未提**
+             （它是 (7.1) + Theorem 7.21(2) 的初等线性代数读数，不是本书的定理）；
+             也没有 dim 𝔤 = |Φ| + rank 𝔤 这句显式等式（同样是 (7.1) 的直接读数）。
+             **杂项（供后人省事）**：preliminary version p. 83 页边有一个手写风格的「?!」草稿标记
+             （= 确实是未定稿）；第 7 章倚赖的 Theorem 6.37（Killing 型非退化）、Theorem 6.32（Cartan 判据）、
+             Theorem 6.14（Lie 定理）、Theorem 5.7（𝔰𝔩(2,ℂ) 表示论）、Theorem B.2（Jordan 分解）
+             本轮**未读（L0）**；参考文献 [21]、[11] 的著录本轮**未读（L0）**，不要猜。
+             见 extractions/math-sources.md §57。}
 }
 
 @book{bourbaki-lie-4-6,

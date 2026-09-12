@@ -1,19 +1,53 @@
 id: math.adjoint-weights-are-roots-and-zero--via-root-space-decomposition
 target: math.adjoint-weights-are-roots-and-zero
-kind: physical-argument
-status: physical-argument
-depends_on: []
-sources:
-  - ref: humphreys-1972
-    loc: "§8「Root space decomposition」（章级定位，内容 L0）"
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.e8-root-system
+    inferred: false
     note: |
-      **本推导的名义主来源，但本项目未取得印本、内容零核实（L0）。** 下面 summary 的论证是 curator
-      按标准教材叙述复述的骨架，**不是**从该书逐字抽取的；任何一步在该书里的编号都**禁写**。
-      按 sources.bib 该条：唯一可引编号是 §17.3（PBW），与本卡无关。
+      只供 summary 第 (6) 步（目标卡末尾的 **E₈ 实例**）：|Φ(E₈)| = 240 与 rank 8 的出处。
+      主体 (1)(2)(3) 对一般半单 𝔤 成立，**不**用这条边。
+      2026-09-13 补挂（此前记在 gaps 第 2 条）；做法与
+      math.e8-adjoint-trace-identities--via-root-power-sums 的同名边一致。
+      math.e8-root-system 是 kind: definition / status: rigorous，故这条边不压低本推导的有效状态。
+      ⚠ 这条边只搬运「那 240 个向量」，**不**搬运「𝔢₈ 相对 𝔥 的根集合与该列表同构」这一识别，
+      后者本图仍无卡，见 gaps 第 3 条。
+sources:
+  - ref: kirillov-2008
+    loc: "preliminary version (liegroups.pdf), pp. 84–89：Definition 7.6、Theorem 7.7(1)、Definition 7.8、Theorem 7.11（Step 1–4 完整证明）、Corollary 7.14、Theorem 7.16(1)(2)、Lemma 7.19/7.20、Theorem 7.21(1)(2)(5)"
+    note: |
+      **★ 本推导的主来源，L1 页图逐字（researcher 2026-09-13；抽取记录 literature/extractions/math-sources.md §57）。**
+      下面 summary 的前三步不再是「curator 按教材复述的骨架」，而是逐步对得上原书的带编号定理：
+      · summary (1) ↔ **Theorem 7.7(1)**（含证明首句「Since all operators ad h commute, they can be
+        simultaneously diagonalized, which is exactly the statement of the first part of the theorem.」）
+        ＋ **Theorem 7.16(1)** 的 (7.1)(7.2)；
+      · summary (2) ↔ **Definition 7.8 + Theorem 7.11**（证明末逐字「Since 𝔥 was chosen to be maximal,
+        C(𝔥) = 𝔥.」；证明用的正是 Killing 型非退化 + Jordan 分解，与 summary 括注一致）；
+      · summary (3) ↔ **Lemma 7.20 + Theorem 7.21(2)(5)**（(2) 的证明逐字「Immediate from Lemma 7.20 and
+        the fact that in any irreducible representation of 𝔰𝔩(2,ℂ), weight subspaces are one-dimensional.」，
+        与 summary 里「权 0 与权 2 只能各出现一次」是同一论证）。
+      ⚠ **编号只在 preliminary version 里有效**（印本把这一章排成第 6 章 pp. 108–131，条目号排到 6.52，
+      与 7.x 不是平移关系）；印本页图本项目未取得，见 sources.bib 该条的禁令 1、2。
+  - ref: humphreys-1972
+    loc: "§8.2「Centralizer of H」, p. 36 的 Proposition（H = C_L(H)）；§8.4「Integrality properties」, p. 39 的 **Proposition 8.4(b)**"
+    note: |
+      **第二条独立来源，L1⁻（逐字 OCR snippet，非页图；researcher 2026-09-13，抽取记录 §57.3）。**
+      覆盖 summary 的 (2) 与 (3) 的后半（2α ∉ Φ）：
+      p. 36 逐字「Proposition . Let H be a maximal toral subalgebra of L. Then H = C_L(H) .」；
+      p. 39 逐字「( b ) If α ∈ Φ , the only scalar multiples of α which are roots are α and −α .」。
+      ⚠ **禁写「Proposition 8.4(a)」**——`dim L_α = 1` 的字面文本与部分字母本轮没取到；
+      那一句由 kirillov-2008 Theorem 7.21(2) 承担。
+      ⚠ 书上印的是无编号的「Proposition.」，`8.2`/`8.4` 是本书他处的引用形式（均已逐字见到）。
+  - ref: humphreys-1990-reflection
+    loc: "§2.10, pp. 42–43（E₈ 根表，240 根）"
+    note: |
+      L1。只服务 summary 第 (6) 步的 E₈ 实例，经 math.e8-root-system 挂边（见 depends_on）。
+      与 math.e8-adjoint-trace-identities--via-root-power-sums 的同名来源条目用法一致。
   - ref: fulton-harris-1991
     loc: "Lecture 14（L0，讲次级定位）"
     note: |
-      同上，正文未取得。只作第二出处登记。
+      **L0 不变，本轮 0 次调用**（「未执行」，不是「试过失败」）。只作第三出处登记，不承载任何核实。
   - ref: stringformal-2026
     loc: "formal/StringFormal/Math/E8Roots.lean 模块 docstring「What is **not** in Lean」段；StringFormal.Math.E8.e8_dim_248"
     note: |
@@ -24,39 +58,73 @@ sources:
       「That dim E₈ *is* |Φ| + rank is Lie theory and is not proved here」。
       **这条来源只说明为什么需要本卡，不承载本卡的证明。**
 summary: |
-  标准教材论证的骨架（curator 复述，来源内容未核实）：
+  标准教材论证（各步与 kirillov-2008 preliminary version 的带编号定理逐条对应，见 sources）：
 
   (1) 𝔥 是环面子代数 ⇒ ad 𝔥 由两两交换的可对角化算子组成 ⇒ 可同时对角化，
       𝔤 = ⨁_{λ ∈ 𝔥*} 𝔤_λ，𝔤_λ := {X : [H, X] = λ(H) X ∀ H}。取 Φ := {λ ≠ 0 : 𝔤_λ ≠ 0}。
+      （= Theorem 7.7(1)；连同 (2) 给出 Theorem 7.16(1) 的 (7.1)(7.2)。）
   (2) 𝔥 极大环面 ⇒ 𝔤₀ = C_𝔤(𝔥) = 𝔥（教材里用 Killing 型非退化与 Jordan 分解证 C_𝔤(𝔥) 是交换的、
-      由半单元素组成、故等于 𝔥）。
+      由半单元素组成、故等于 𝔥）。（= Definition 7.8 + Theorem 7.11；Humphreys §8.2 p.36 的 Proposition。）
   (3) 对每个 α ∈ Φ，𝔤_α ⊕ 𝔤_{−α} ⊕ [𝔤_α, 𝔤_{−α}] 含一个 𝔰𝔩₂ 三元组；用 𝔰𝔩₂ 的有限维表示论
       （权 0 与权 2 只能各出现一次）得 dim 𝔤_α = 1 且 2α ∉ Φ。这给出目标卡 (1)。
+      （= Lemma 7.19/7.20 + Theorem 7.21(2)(5)；后半另见 Humphreys Proposition 8.4(b) p.39。）
   (4) (2) 是 (1) 的直接读数：ad 的权 = {α ∈ Φ}（各一维）∪ {0}（𝔥 那一块，维数 = rank）；
-      维数相加得 dim 𝔤 = |Φ| + rank 𝔤。
+      维数相加得 dim 𝔤 = |Φ| + rank 𝔤。（rank = dim 𝔥 见 Corollary 7.14，限制见 gaps 第 2 条。）
   (5) (3) 是线性代数：ad H 在 (1) 的基下是对角阵 diag(α(H) (α ∈ Φ), 0, …, 0)，
       (ad H)^k 的迹 = 特征值 k 次幂之和 = Σ_α α(H)^k + rank·0^k，k ≥ 1 时末项为零。
-  (6) E₈ 实例：|Φ(E₈)| = 240（math.e8-root-system）与 rank 8 代入。
+      **这一步两条来源都没有写**——不是缺口，是它在 (1) 给出对角化之后只是「对角算子取迹」一步初等
+      线性代数（抽取记录 §57.4）。
+  (6) E₈ 实例：|Φ(E₈)| = 240（math.e8-root-system，已挂 depends_on）与 rank 8 代入。
 
-  没有任何非严格的步骤；status 之所以是 physical-argument，**只因来源内容在本项目 L0**。
+  没有任何非严格的步骤。2026-09-11 立卡时 status 是 physical-argument，**理由只是来源在本项目 L0**；
+  该理由已于 2026-09-13 消失（两条独立来源，见 sources），故升为 proof / rigorous。
 gaps:
   - |
-    **来源内容未核实（L0）**。GTM 9 §8 与 FH Lecture 14 在本项目里都只有目录级定位；summary 的每一步
-    在这两本书里的具体编号与措辞本轮零证据。升级到 rigorous 需要 researcher 取到其中一本的该章
-    （或另一本已 L1 读到的教材），并把编号写进 loc。
+    **Humphreys 侧「dim L_α = 1」的部分字母未核实**。§8.4 的 Proposition 8.4 里，(b)(c)(d)(e)(f)
+    都已逐字确认，但 `dim L_α = 1` 的字面文本与它的部分字母本轮四次查询全部 0 命中（抽取记录 §57.3.3）。
+    **这不影响本推导的状态**——该句由 kirillov-2008 Theorem 7.21(2) 独立承担（L1 页图，带证明）——
+    只是「两条来源都覆盖 (3) 全部」这句话现在只对 2α ∉ Φ 那半成立。
   - |
-    **(6) 用到 math.e8-root-system 的 |Φ| = 240，但本推导没有把它挂成 depends_on**：
-    目标卡的主体 (1)(2)(3) 是对一般半单 𝔤 说的，E₈ 实例只是代入；而「𝔢₈ 相对 𝔥 的根集合与
-    Humphreys 表同构」这一识别本身不在本图（见 math.e8-root-system 不断言 (b)）。
-    这条边在下游 math.e8-adjoint-trace-identities--via-root-power-sums 里显式挂出并写 gap。
+    **rank 良定义这一点在主来源里是无证明引用**。kirillov-2008 的 Corollary 7.14
+    （rank 𝔤 = dim 𝔥）倚赖 Theorem 7.13（任两个 Cartan 子代数共轭），而原书对 7.13 逐字写
+    「we quote without proof … proof of which can be found in [21], [11]」。
+    目标卡 (3) 的迹公式**不需要**它（只需固定一个 𝔥）；(2) 里写「重数 = rank 𝔤」时用到。
+    要把这一点也做实，需另找 Cartan 子代数共轭定理的带编号来源。
+  - |
+    **E₈ 实例的根系识别仍无节点**：depends_on 的那条边只搬运 math.e8-root-system 的 240 个向量，
+    而「𝔢₈ 相对 𝔥 的根集合是 E₈ 型根系、故与该显式列表同构」这一识别（需要 Dynkin 分类 + 同型根系
+    唯一性）本图无卡，math.e8-root-system 自己也明写不断言 (b)。
+    与 math.e8-adjoint-trace-identities--via-root-power-sums 的 gaps 第 2 条是同一条缺口，
+    两处措辞保持一致。
+  - |
+    **未形式化**。Mathlib 侧是否已有根空间分解（§52.4 点出的
+    `Mathlib/Algebra/Lie/Weights/Cartan.lean :: cartan_sup_iSup_rootSpace_eq_top`）本轮未查
+    （抽取记录 §57.7 的 Q57.4）。即使有，`dim 𝔤_α = 1` 需要 𝔰𝔩₂ 表示论，大概率不在，
+    故本卡预计停在 rigorous。
 notes: |
-  **depends_on 为空是有意的**：输入只有半单李代数、Cartan 子代数、Killing 型、𝔰𝔩₂ 表示论这些
-  基础构造，本图没有也不打算为它们建节点（与 math.pbw-theorem--via-humphreys 的处理同一条纪律）。
-  validate 的「derivation has no dependencies」warning 是预期内的。
+  **depends_on 只有 E₈ 那一条是有意的**：本推导主体 (1)–(5) 的输入是半单李代数、Cartan 子代数、
+  Killing 型、Jordan 分解、𝔰𝔩₂ 表示论这些基础构造，本图没有也不打算为它们建节点
+  （与 math.pbw-theorem--via-humphreys 的处理同一条纪律；对应的教科书出处写在 sources 里）。
+  2026-09-13 之前 depends_on 完全为空，E₈ 那条边记在 gaps 里；现按
+  math.e8-adjoint-trace-identities--via-root-power-sums 的先例补挂，两处做法一致。
 
-  **kind 的选择**：schema 规定 kind: proof 只能配 rigorous/formalized；本推导 status 只能是
-  physical-argument（L0 来源），故 kind 也写 physical-argument。这不表示论证含物理输入——
-  summary 全是代数；只表示「本图掌握的论证强度」（同 math.e8-adjoint-trace-identities--via-casimir-structure
-  的 notes）。
-author: curator
-created: "2026-09-11"
+  **kind / status 的变更（2026-09-13，researcher，经 lead 派工授权）**：
+  physical-argument / physical-argument → **proof / rigorous**。
+  原 kind 的理由逐字是「schema 规定 kind: proof 只能配 rigorous/formalized；本推导 status 只能是
+  physical-argument（L0 来源）」——**这个前提已不成立**：本轮取到 kirillov-2008 的 L1 页图
+  （带完整证明的 Theorem 7.7/7.11/7.16/7.21）与 humphreys-1972 的 L1⁻ 逐字，两条独立。
+  summary 全是代数，无任何物理输入。
+
+  **⚠ 两处规则解释，请 lead / graph-reviewer 明确裁一次（researcher 不自行认定）**：
+  【R1】docs/STATUS_LEVELS.md 的 `rigorous` 判据是「有发表的、数学界接受的完整证明」。
+  本推导的 (1)(2)(3)(4)(6) 逐步对得上 kirillov-2008 的带编号定理与其证明，**满足该判据**；
+  但第 (5) 步（对角算子取迹）**两条来源都没有印出**——它是「对角阵的 k 次幂取迹 = 特征值 k 次幂之和」
+  这一条线性代数，本身也是数学界公认的标准事实，只是没有哪本李代数教材会为它单列一条编号命题
+  （抽取记录 §57.4 记录了这条否定结论的核实过程）。
+  裁定（graph-reviewer，2026-09-13）：走例外条款。核实内容：(a) 前提完整——对角化基由
+  (1)（Theorem 7.7(1)）给出，各 α∈Φ 的根空间 dim=1 由 (3)（Theorem 7.21(2)）给出，零权空间 = 𝔥
+  由 (2)（Definition 7.8 + Theorem 7.11）给出、维数 = rank 𝔤；(b) 第 (5) 步纯是“对角阵的 k 次幂
+  取迹 = 特征值 k 次幂之和”，特征值集合与重数在 (1)(2)(3) 已全部钉死，k≥1 时零权贡献 rank·0^k=0，
+  k=0 情形（迹=dim 𝔤）已被断言正确排除在外，没有藏跳步；(c) 与 §57.4 记录的检索结论一致——两条来源
+  确实都未印出这一句，这属于“无需引用的标准事实”而非缺口。
+  reviewer-verified: graph-reviewer, 2026-09-13
