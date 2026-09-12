@@ -1141,4 +1141,78 @@ theorem le_finrank_towerNull_inf_towerBigrade_four (hD : 3 ≤ D) (F : DDFLightC
 
 end NullBoundFour
 
+/-! ### `B26 4` -/
+
+section ClosingFour
+
+variable {D : ℕ}
+
+/-- **`p_{D−1}(3) ≥ (D−1) + (D−1)² + binom(D+1,3)`**, the lower-bound companion to
+`card_conjFree_three_le`.  It is what turns the Type-1 half of the level-four null bound into
+a number. -/
+theorem card_conjFree_three_ge (hD : 2 ≤ D) :
+    (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 3 ∧ conjDeg hD d = 0} := by
+  classical
+  have hκ : Fintype.card {μ : Fin D // μ ≠ conjIdx D hD} = D - 1 := by
+    rw [Fintype.card_subtype_compl, Fintype.card_subtype_eq, Fintype.card_fin]
+  have h1 := card_ddfLevel_three_ge {μ : Fin D // μ ≠ conjIdx D hD}
+  have h2 := card_ddfLevel_le_card_conjFree hD 3
+  rw [hκ, show D - 1 + 2 = D + 1 by omega] at h1
+  omega
+
+variable {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K] [Algebra ℚ K]
+variable {η a b : Fin D → K}
+
+/-- ⭐⭐ **`B26 4` at `D = 26`.**  Blueprint §B‴ 订正 item 5's level-four account,
+machine-checked:
+
+`dim (H_phys ⊓ V_4) ≤ p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)
+  ≤ dim (ddfSpan ⊓ V_4) + dim Q_{-4,3} + dim Q_{-4,2} ≤ dim (ddfSpan ⊓ V_4) + dim (H_null ⊓ V_4)`.
+
+The first `≤` is PR4, the identity is Pascal, `p_{D−2}(4) = dim (ddfSpan ⊓ V_4)` is PR2,
+`p_{D−1}(M) ≤ dim Q_{-4,M}` is PR6′, and the last `≤` is this file's
+`le_finrank_towerNull_inf_towerBigrade_four`, the only step that uses `D = 26`.
+
+Unlike `N = 3` the leftover after subtracting the two DDF counts is not a bare `D − 1` but a
+whole `p_{D−1}(2)`: at level four the Type-2 seeds form a level-**two** slice, not a
+level-one one. -/
+theorem b26_four_of_D26 (hD : 3 ≤ D) (F : DDFLightConeFrame η a b) (hD26 : (D : K) = 26) :
+    B26 η a b F.hη F.trans 4 := by
+  have hD2 : 2 ≤ D := by omega
+  have haa : Fock.zeroModeSq η a = 2 := F.dotVec_self_eq_two hD2
+  have hint : invTwo K * Fock.zeroModeSq η a = 1 := by rw [haa, invTwo_mul_two]
+  have hrung : (-((4 : ℕ) : ℤ)) = (-4 : ℤ) := by norm_num
+  have h1 := finrank_towerPhys_inf_towerBigrade_le (K := K) hD2 F 4
+  have h2 := card_conjFree_four_le (D := D) hD2
+  have h3 := levelFour_count_identity (D := D) hD2
+  have h4 := card_ddfLevel_four_ge (Fin (D - 2))
+  have h5 := card_conjFree_three_ge (D := D) hD2
+  have h6 := card_conjFree_two_ge (D := D) hD2
+  have h7 := le_finrank_towerSeed (K := K) hD2 F (-((4 : ℕ) : ℤ)) 3
+  have h8 := le_finrank_towerSeed (K := K) hD2 F (-((4 : ℕ) : ℤ)) 2
+  have h9 : Module.finrank K ↥(towerSeed η a b (-((4 : ℕ) : ℤ)) 3)
+        + Module.finrank K ↥(towerSeed η a b (-((4 : ℕ) : ℤ)) 2)
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b (invTwo K * Fock.zeroModeSq η a)
+          ⊓ towerBigrade D K (-((4 : ℕ) : ℤ)) 4) := by
+    rw [hint, hrung]
+    exact le_finrank_towerNull_inf_towerBigrade_four hD F haa hD26
+  rw [Fintype.card_fin, show D - 2 + 1 = D - 1 by omega,
+    show D - 2 + 3 = D + 1 by omega] at h4
+  refine le_trans h1 ?_
+  rw [finrank_ddfSpan_inf_towerBigrade F.hη F.frame.isotropic F.hba F.trans 4]
+  omega
+
+/-- ⭐⭐ **The DDF spanning lemma on the level-four slice `(rung -4, level 4)`, at `D = 26`.**
+
+The fourth antidiagonal slice of `ddf-spans`, after `Assembly.ddfSpans_bigrade_neg_one_one`
+(`N = 1`, unconditional in `D`), `LevelTwoCount.ddfSpans_bigrade_neg_two_two` and
+`LevelThreeCount.ddfSpans_bigrade_neg_three_three`. -/
+theorem ddfSpans_bigrade_neg_four_four (hD : 3 ≤ D) (F : DDFLightConeFrame η a b)
+    (hD26 : (D : K) = 26) :
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((4 : ℕ) : ℤ)) 4) :=
+  ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_four_of_D26 hD F hD26)
+
+end ClosingFour
+
 end StringFormal.NoGhost
