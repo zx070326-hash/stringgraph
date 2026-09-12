@@ -1,0 +1,26 @@
+id: worldsheet.fock-state-determined-by-moments--via-lean
+target: worldsheet.fock-state-determined-by-moments
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean :: StringFormal.NoGhost.eq_zero_of_towerModeVec_eq_zero
+      （第 161 行）与 StringFormal.NoGhost.Fock.eq_zero_of_annihilation_eq_zero（第 107 行）。
+      两条定理均无 sorry。
+summary: |
+  纯 Fock 空间线性代数：证明分两层。(1) 单 Fock 空间版
+  `Fock.eq_zero_of_annihilation_eq_zero`——多项式 P（level N≠0）被全体坐标湮灭算子杀死
+  ⇒ P=0，逐单项式系数用 `Fock.coeff_annihilation` 与振子权重非零性
+  （`Fock.oscWeight_ne_zero`，特征零 + hη 给出 n·η_μ≠0）证明。(2) 塔版
+  `eq_zero_of_towerModeVec_eq_zero`——用 `mem_towerBigrade` 把塔向量集中到单个 rung，
+  再用 `towerModeVec_pi_single`（ε:=坐标向量时 A_ε(p) 化为标量倍的坐标湮灭算子）把
+  塔上的假设特化到单 Fock 版本的前件，套用 (1) 得结论。
+
+  本推导不依赖任何其他图节点：这是一条自足的 Fock 空间事实，只用到多项式环上的
+  `MvPolynomial.ext`、`Finsupp` 的支集运算与 Mathlib 的基本代数引理，不引用
+  Virasoro 生成元、DDF 算子或任何物理性条件。
+gaps: []
+author: curator
+created: "2026-09-12"

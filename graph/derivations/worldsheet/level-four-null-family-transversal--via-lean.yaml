@@ -1,0 +1,72 @@
+id: worldsheet.level-four-null-family-transversal--via-lean
+target: worldsheet.level-four-null-family-transversal
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+  - id: worldsheet.fock-state-determined-by-moments
+    inferred: false
+  - id: worldsheet.null-states-lower-bound-type-one
+    inferred: true
+    note: |
+      共享同一条底层引理但不是字面调用链上的同一步：本推导第 7 步（hψ0 之后）
+      调用 `towerLop_neg_one_injective`（TypeOneFamily.lean 第 186 行）收尾得 φ=0，
+      与 worldsheet.null-states-lower-bound-type-one 的 sources.loc 里列举的
+      "L_{-1} 单射本身" 是同一条 Lean 定理；但该卡的头牌 formal.lean_decl 是
+      `le_finrank_towerNull_inf_towerBigrade_succ`（维数下界），不是
+      `towerLop_neg_one_injective` 本身——与 worldsheet.level-three-null-family-transversal--via-lean
+      对同一条引理的引用方式相同（"非头牌引理"模式），此处仍标 inferred: true
+      是因为该边此前在姊妹推导里就是按此标法记录的，保持一致。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean ::
+      StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_at_four（第 535 行起）；
+      第 585 行与第 591 行两次 `exact eq_zero_of_towerModeVec_eq_zero ...`
+      （worldsheet.fock-state-determined-by-moments 的 formal.lean_decl，第 161 行）；
+      末尾 `exact towerLop_neg_one_injective η a b hη hbb hba hφ hzero'`
+      （TypeOneFamily.lean 第 186 行，同 worldsheet.null-states-lower-bound-type-one）。
+    note: |
+      **hη/hbb/hba 的来源**：三条假设逐字是 worldsheet.ddf-light-cone-frame 的
+      (F1) η_μ²=1、(F2) η(b,b)=0、(F3) η(b,a)=1，本定理签名直接以裸假设形式接收，
+      不取完整的 `DDFLightConeFrame` 结构体参数——接口边，记法与
+      worldsheet.level-three-null-family-transversal--via-lean 对同一标架的引用一致。
+
+      **fock-state-determined-by-moments 的两次字面调用**：第 585 行（hone 步，
+      证明 m≡0∧n≡0 ⇒ A_v(1)ψ=0 对一切 v）与第 591 行（hψ0 步，证明 ψ 本身为零，
+      对指数 q=1,2,>2 分三种讨论），均逐字 `exact eq_zero_of_towerModeVec_eq_zero ...`
+      ——这是本推导相对 level-three-null-family-transversal--via-lean 在依赖结构上的
+      实质新增边（level-3 的证明不经过这一步，见目标卡 notes）。
+
+      **towerLop_neg_one_injective 的来源**：证明最后一步把 hzero 代回、消去
+      L₋₁φ 得 ψ 侧贡献为零后，直接 `exact towerLop_neg_one_injective ...` 收尾得 φ=0，
+      与 worldsheet.level-three-null-family-transversal--via-lean 收尾方式完全一致。
+
+      **curator 未自行运行 `lake build`/`#check`**；结论基于直接读源码。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不讨论本卡内容"
+    note: "不承载论证，只标注文献方位。"
+summary: |
+  七步纯振子代数论证（详见目标卡 statement 的【机制】段）：
+  (1)-(2) 四条力矩方程通过反对称化消去 a、b、c、n 贡献，得
+      3[(δ·ρ)m_ε−(ε·ρ)m_δ] = 4(ρ·p)[(δ·p)m_ε−(ε·p)m_δ]；
+  (3) 取 ρ:=p_j 用 3−4p²≠0 得 (δ·p)m_ε=(ε·p)m_δ 对一切 ε,δ；
+  (4) 回代得该式对一切 ρ 成立；
+  (5) 取 ρ:=u=δ（横向单位偏振）用 huu、hu 得纵向矩 m_{p_j}=0；
+  (6) 用 (3) 与 hpp（p·p≠0）解出 m_ε=0 对一切 ε；代回四条方程得 n≡0；
+  (7) m、n 全零 ⇒（两次调用 fock-state-determined-by-moments）ψ=0；
+      代回原方程用 towerLop_neg_one_injective 得 φ=0。
+gaps:
+  - |
+    本推导未证"该机制对任意满足 p_j·p_j≠0、3−4(p_j·p_j)≠0 且横向单位偏振存在的
+    rung/level 组合成立"这一更一般的陈述（目标卡【本卡明确不断言】(c) 已声明范围
+    只到 level-4 反对角片专属的具体系数）；level-5 起两族计数本身已知不再精确匹配
+    （worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（五）】），需要全新的
+    力矩方程组与全新的重叠分析，未来工作。
+notes: |
+  本推导只服务目标卡（横截性引理本身），不重复目标卡 sources.loc 已详细列出的
+  文件内部工具引理（section MomentEquations 的求值引理），那些是本文件私有的铺垫，
+  未单独立卡（与 worldsheet.level-three-null-family-transversal--via-lean 同一记法）。
+author: curator
+created: "2026-09-12"

@@ -1,0 +1,155 @@
+id: worldsheet.level-four-null-family-transversal
+kind: proposition
+title: 在 (rung j, level 4) 片上 Type-1（L₋₁ 像）与 Type-2（𝒟₂ 像）两族除零外横截——三次湮灭算子消元法，纯振子代数，D 不出现，需要一个横向单位偏振（3 ≤ D）
+statement: |
+  【设定】记号沿用 worldsheet.level-three-null-family-transversal（动量塔 T(a;b)、Sugawara L_m、
+  𝒟₂ := 2L₋₂ + 3L₋₁²、towerModeVec η a b ε n 记作 A_ε(n)）与 worldsheet.ddf-light-cone-frame
+  的记号 η、a、b（(F1) η_μ²=1，(F2) η(b,b)=0，(F3) η(b,a)=1）。系数域 K 是域、ℚ-代数、特征零。
+  对整数 j，记 p_j := towerMomentum(a,b,j)。
+
+  【断言】设 hη、hbb : η(b,b)=0、hba : η(b,a)=1。设 φ ∈ towerBigrade(j,3)（level-3 向量）、
+  ψ ∈ towerBigrade(j,2)（level-2 向量），rung j 任意，满足：
+  p_j·p_j ≠ 0（质壳非零）、3 − 4(p_j·p_j) ≠ 0（level-4 专属的数值条件，例如 j=−4 时
+  p₋₄·p₋₄ = −6，见 worldsheet.ddf-light-cone-frame 标架下的质壳公式，此时 3−4(−6)=27≠0），
+  且存在偏振 u : Fin D → K 满足 u·p_j = 0（横向）与 u·u = 1（单位模长）。若
+
+      L₋₁φ + 𝒟₂ψ = 0 ，
+
+  则 ψ = 0 且 φ = 0。
+
+  【机制，供理解，不是陈述的一部分】worldsheet.level-three-null-family-transversal 用的
+  反对称化 α₋₂α₋₁ 系数分离法在 level 4 上**不再直接可用**（φ 是 level-3 向量，A_ε(3)φ 一般
+  非零，α₋₂α₋₁ 型张量对 level-4 态不再有那套对称/反对称拆分）；本卡改用**把力矩推到三个
+  湮灭算子**的消元法。记 a_ε := A_ε(3)φ、b_{εδ} := A_ε(2)A_δ(1)φ、c_{εδρ} := A_ε(1)A_δ(1)A_ρ(1)φ
+  （全对称）、m_ε := A_ε(2)ψ、n_{εδ} := A_ε(1)A_δ(1)ψ（对称）。四条力矩方程（分别用
+  A_ε(4)、A_ε(3)A_δ(1)、A_ε(2)A_δ(2)、A_ε(2)A_δ(1)A_ρ(1) 作用于 L₋₁φ+𝒟₂ψ=0 得到）为：
+      4a_ε + 44m_ε = 0；
+      3b_{εδ} + (δ·p)a_ε + 24n_{εδ} + 18(δ·p)m_ε = 0；
+      2(b_{εδ}+b_{δε}) + 10(ε·p)m_δ + 10(δ·p)m_ε + 24n_{εδ} = 0；
+      2c_{εδρ} + (δ·p)b_{ερ} + (ρ·p)b_{εδ} + 10(ε·p)n_{δρ} + 12(δ·p)n_{ερ} + 12(ρ·p)n_{εδ}
+        + 2(δ·ρ)m_ε + 6(δ·p)(ρ·p)m_ε = 0 。
+  第四条对 ε↔δ 反对称化消去 c（全对称）与 n（对称），配合前三条消去 a、b，剩
+      3[(δ·ρ)m_ε − (ε·ρ)m_δ] = 4(ρ·p)[(δ·p)m_ε − (ε·p)m_δ] 。
+  取 ρ := p_j，用 3−4p² ≠ 0 得 (δ·p)m_ε = (ε·p)m_δ 对一切 ε,δ；回代得 (δ·ρ)m_ε = (ε·ρ)m_δ
+  对一切 ρ；取 ρ := u、δ := u（横向单位偏振）与 huu、hu 得 m_ε = 0 对一切 ε（用 p·p≠0 解出）；
+  m ≡ 0 ⇒（回代四条方程）n ≡ 0；m、n 全为零意味着 ψ 被全体正模湮灭
+  （worldsheet.fock-state-determined-by-moments 的非退化输入）⇒ ψ = 0；代回原方程用
+  L₋₁ 单射性（worldsheet.null-states-lower-bound-type-one 同一族论证的底层引理）得 φ = 0。
+
+  【本卡明确不断言】
+  (a) **不假设 φ、ψ 是准物理态**：与 worldsheet.level-three-null-family-transversal 同型，
+      不要求 L_nφ=0（n≥1）或 L_nψ=0（n≥2）。断言纯粹关于振子代数上何时一个线性组合为零。
+  (b) **D 不出现**：陈述与证明都不使用 D 的具体值、不使用 D=26、不使用中心荷 c。唯一涉及
+      D 的地方是**存在性假设**——需要一个横向单位偏振 u（u·p_j=0, u·u=1），这要求
+      Fin(D−2) 非空，即 **3 ≤ D**（比 worldsheet.level-three-null-family-transversal 与更早各片
+      只需 2 ≤ D 严格更强，见【为什么 3 ≤ D，与更早各片的关键新差别】）；这与"D 不出现"
+      并不矛盾——3 ≤ D 是一个关于 D 的**存在性**门槛，不是像 D=26 那样的**方程**，对一切
+      D ≥ 3 本断言同样成立。
+  (c) **不是任意 rung/level 通用**：本卡机制对满足 p_j·p_j≠0、3−4(p_j·p_j)≠0 且横向单位
+      偏振存在的任何 (j,3)→(j,4) 组合成立，但陈述里的具体数字系数（4,44,3,24,18,10,12,2,6 等）
+      是 level-4 反对角片专属的（level-5 起两族计数本身不再精确匹配，见
+      worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（五）】，需要全新的力矩方程组，
+      本卡不覆盖）。
+  (d) **不给出零态维数下界**：本卡只证"两族像除零外不相交"（横截性），维数下界拼接是
+      本卡与 worldsheet.level-two-null-state-requires-d26 的机制（Type-2 物理性）拼接后的
+      独立结论，见配套推导 gaps 与 worldsheet.ddf-spans-physical-states-level-four。
+  (e) **不断言 worldsheet.level-three-null-family-transversal 的分离法失败的证明细节**：
+      本卡只说该法"不再直接可用"（φ 的 level 比 level-3 情形高一层，反对称化 α₋₂α₋₁ 张量
+      失去 level-3 情形独有的对称结构），不逐项证伪它，只是改走一条新路线。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_at_four
+  lean_file: StringFormal/NoGhost/LevelFourCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean :: StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_at_four
+      （本卡 formal.lean_decl，section Transversality，第 535 行起；section 起于第 406 行）；
+      铺垫链：moment_relations_of_towerLop_neg_one_add_descTwo（第 425 行起，四条力矩方程的
+      消元与反对称化恒等式）；section MomentEquations（第 187-398 行，towerModeVec_four_*、
+      towerModeVec_three_one_*、towerModeVec_two_two_*、towerModeVec_two_one_one_*，
+      Type-1/Type-2 各两条求值引理；新原子 towerModeVec_one_apply_towerModeVec_neg_one，
+      振子中心项 ⁅A_δ(1),A_ρ(−1)⁆=(δ·ρ) 在本文件首次出现）；section MomentsDetermine
+      （第 81-177 行，Fock.eq_zero_of_annihilation_eq_zero 与 eq_zero_of_towerModeVec_eq_zero，
+      即 worldsheet.fock-state-determined-by-moments 的 formal.lean_decl）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**（本 worktree 无构建缓存），
+      结论基于直接读源码。
+
+      **逐字核对陈述**：定理签名
+      `(hη) (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) {j} {φ ψ}
+      (hφ : φ ∈ towerBigrade D K j 3) (hψ : ψ ∈ towerBigrade D K j 2)
+      (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0)
+      (hcoef : (3:K) - 4 * dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0)
+      {u} (hu : dotVec η u (towerMomentum a b j) = 0) (huu : dotVec η u u = 1)
+      (hzero : towerLop η a b (-1) φ + descTwo η a b ψ = 0) : ψ = 0 ∧ φ = 0`
+      ——与本卡【断言】逐字一致（hcoef 即本卡"3 − 4(p_j·p_j) ≠ 0"，hu/huu 即横向单位偏振）。
+
+      **证明结构**（逐行核对，第 541-601 行）：`moment_relations_of_towerLop_neg_one_add_descTwo`
+      给出 hNsol（两族一模矩之间的关系）与 hstar（反对称化恒等式，本卡【机制】段的
+      "3[(δ·ρ)m_ε−(ε·ρ)m_δ]=4(ρ·p)[(δ·p)m_ε−(ε·p)m_δ]"，逐字，是蓝图原始系数 −8/3 与 2
+      的等价形式乘 3/2 清分母）。第 1 步（hm1）取 ρ:=p_j，用 hcoef 排除退化因子，得
+      (δ·p)m_ε=(ε·p)m_δ。第 2 步（hg）回代得该式对一切 ρ 成立。第 3 步（hmp）取 ρ:=u=δ、
+      用 huu、hu（`dotVec_comm`）得纵向矩 m_{p_j}=0。第 4 步（hm0）用 hm1 与 hpp 解出
+      m_ε=0 对一切 ε。第 5 步（hn0）代回 hNsol 得两模矩 n_{wv}=0。第 6 步（hone）**逐字调用
+      `eq_zero_of_towerModeVec_eq_zero`**（本卡依赖边一，见下）证明单模矩全零 ⇒
+      A_v(1)ψ=0 对一切 v。第 7 步（hψ0）**再次逐字调用同一条 `eq_zero_of_towerModeVec_eq_zero`**
+      证明 ψ 本身为零（分三种指数 q=1,2,>2 讨论，>2 时用 `towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt`
+      的平凡消失性）。最后代回 hzero，**逐字调用 `towerLop_neg_one_injective`**
+      （本卡依赖边二，见下）得 φ=0。
+
+      **为什么 3 ≤ D，与更早各片的关键新差别**：文件头 docstring 逐字
+      "⚠ `b26_four_of_D26` needs `3 ≤ D` (all earlier slices needed only `2 ≤ D`): the
+      transversality argument uses one transverse polarisation `u` with `u·p = 0` and
+      `u·u = 1`, which the frame supplies only when `Fin (D − 2)` is nonempty."——本卡的证明
+      本身（`eq_zero_of_towerLop_neg_one_add_descTwo_at_four`）把 u 与 hu/huu 作为**裸假设**
+      接收，不内部构造它；3 ≤ D 只出现在**调用方** `typeTwoAugFour_injective`
+      （第 1081 行，`hD : 3 ≤ D`，取 `i : Fin (D-2) := ⟨0, hDpos⟩` 再用标架给出 hu/huu）。
+      本卡陈述因此把"存在这样的 u"作为前提列出，不是断言 3 ≤ D 本身。
+
+      **中心项为何不出现在最终结果里**：`towerModeVec_one_apply_towerModeVec_neg_one`
+      （⁅A_δ(1),A_ρ(−1)⁆=(δ·ρ)）在 section MomentEquations 的 E2/E3/E4 求值中出现，但
+      D 或中心荷 c 从未出现——这条中心项是**振子代数**的中心项（对易子系数 δ·ρ，度规
+      收缩，不含 D 或 Virasoro 中心荷），与 worldsheet.ocq-null-state-two-families 断言 (2)
+      的 Virasoro 中心项 c−26（那里才是 D=26 进入的地方）是两个不同层次的"中心项"，
+      不要混淆。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不讨论零态族之间的横截性，只断言整塔张成"
+    note: "不承载论证，只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, null-state, momentum-tower, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "level four"`、`search "level-four"`、
+  `search "eq_zero_of_towerLop_neg_one_add_descTwo_at_four"`、`search "moment_relations"`，
+  均无同内容命中；`search transversal` 命中 worldsheet.level-three-null-family-transversal
+  （姊妹卡，不同片，不重复）与 worldsheet.ddf-transversality-gives-local-finiteness
+  （完全不同对象：DDF 算子的横向性）。
+
+  【为什么立卡：level-three 的分离法在此失效，需要新机制】
+  formal/StringFormal/NoGhost/LevelFourCount.lean 文件头逐字："LevelThreeCount's separator
+  (the antisymmetrised α_{-2}α_{-1} coefficient) does not carry over: with φ of level three
+  A_ε(3)φ ≠ 0, and the α_{-2}α_{-1} tensor of a level-four state has no symmetry."
+  ⇒ 本卡承载的不是 worldsheet.level-three-null-family-transversal 机制的简单类比推广，
+  而是蓝图 §B‴ 订正 item 5 提出的一条**新**消元法（三次湮灭算子 + 反对称化 + 横向单位偏振），
+  值得独立成卡记录其证明结构。
+
+  【与 worldsheet.level-three-null-family-transversal 的关系，不合并】两卡都断言"两族
+  除零外横截"，但 (i) 使用的机制不同（level-3：反对称化 α₋₂α₋₁ 系数分离；level-4：三次
+  湮灭算子消元 + fock-state-determined-by-moments 非退化引理）；(ii) 本卡额外需要 3≤D
+  与横向单位偏振的存在性，level-3 只需 2≤D；(iii) 具体数值系数不同（level-3 的 18≠0
+  对应本卡的 27≠0，且分子结构不同）。两卡并列，互不 supersede。
+
+  【与 worldsheet.fock-state-determined-by-moments 的关系：本卡首次消费该非退化引理】
+  worldsheet.level-three-null-family-transversal 的证明**不需要**"力矩决定态"这条一般性
+  非退化引理——level-3 的证明直接用反对称化系数分离出 e=0 后，靠 L₋₁ 单射性一步收尾。
+  本卡的证明**两次**显式调用 `eq_zero_of_towerModeVec_eq_zero`（hone、hψ0 两步）——这是
+  本卡相对 level-3 姊妹卡在依赖结构上的实质新增，配套推导据此新增一条 depends_on 边。
+
+  【与 worldsheet.null-states-lower-bound-type-one 的关系，不合并】本卡证明内部**调用**
+  该卡底层的 L₋₁ 单射性引理（`towerLop_neg_one_injective`，同一条 Lean 定理，位于
+  TypeOneFamily.lean），与 worldsheet.level-three-null-family-transversal 对该引理的引用
+  方式相同（"非头牌引理"的既有引用模式）。
+author: curator
+created: "2026-09-12"

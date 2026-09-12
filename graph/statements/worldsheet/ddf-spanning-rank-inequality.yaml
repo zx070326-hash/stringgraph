@@ -368,5 +368,37 @@ notes: |
   ⚠ **本条不改变本卡的 effective 状态**：本卡依旧无推导，`∀N, B26 N` 仍是完全开放
   的猜想（现已知 N=1,2,3 三个具体实例成立，N≥4 未知，(iii) 段 N≥5/N≥12 的两个更深
   障碍不受影响）；本条只是把 N=3、N=4 两点的"还差什么"精确记录下来。
+
+  【2026-09-12（六）：`B26 4` 现已被逐个 D 判定式关闭——横截性机制与 N=3 同型，
+  唯一新增门槛是横向单位偏振存在性（3 ≤ D）；N ≥ 5 起的两大障碍（重叠、新奇异向量）
+  完全不受影响，本卡开放形状不变（curator，分支 agent/curator/level4-wire）】
+  formal/StringFormal/NoGhost/LevelFourCount.lean（noghost-pr8，无 sorry）证出
+  `b26_four_of_D26 (hD : 3 ≤ D) : D = 26 ⟹ B26 4`（本卡记号下 N=4 处 dim H_4 ≤ dim D_4 +
+  dim Z_4 在 D=26 处成立），配套 `ddfSpans_bigrade_neg_four_four`
+  （worldsheet.ddf-spans-physical-states-level-four）经上文【2026-09-12 追记】(iii) 等价
+  改写确认这就是本卡在 N=4 的目标实例。**横截性论证本身**（两族零态像除零外不相交）
+  用的是与 N=3（上一条追记，反对称化 α₋₂α₋₁ 系数分离法）**同一套机制的 N=4 实例**
+  （worldsheet.level-four-null-family-transversal：四条力矩方程反对称化消去后配三个
+  湮灭算子收尾），不是三角性/领头指标序法（那条已知在 N=3 撞车，见上文
+  【2026-09-12（三）】）——**证实了该反对称化机制确实 N-独立、可逐层重复使用**，
+  这是上一条追记末尾对 N=4 的预期（"横截性同一套反对称化机制已手证"）的机检落地。
+
+  **与 N=3 相比的唯一实质新增门槛**：横截性论证需要一个横向单位偏振 u（u·p=0, u·u=1）
+  存在，只有 Fin(D−2) 非空（即 3 ≤ D）才能供给——`b26_four_of_D26` 因此比
+  `b26_three_of_D26` 多一条前提 `hD : 3 ≤ D`（N≤3 只需 2 ≤ D）。这是**存在性门槛**，
+  不是新的 D=26 判据：D=26 仍只通过 Type-2 族（𝒟₂ 像）落在 H_null 里这一步进入
+  （`descTwo_mem_towerNullSubmodule`），与 N=2、N=3 完全同一模式（第三次确证，见
+  worldsheet.ddf-spans-physical-states-level-four notes）。
+
+  formal/TODO.md `noghost-pr8`（上一条追记登记的"横截性已手证但计数未完成，估计
+  500-700 行"）现已完全做完，用时与估计同量级。
+
+  ⚠ **N ≥ 5 起的两大障碍完全不受本次工作影响**：(i) 两族零态像的重叠（上文
+  【2026-09-12】(iv) 段，Euler 五边形数障碍，D=26 时数值上从 N=5 起两族计数已知差 1）
+  ——反对称化系数分离法要在 N≥5 继续用，需要全新的力矩方程组与全新的重叠分析
+  （worldsheet.level-four-null-family-transversal--via-lean 的 gaps 已登记）；
+  (ii) N ≥ 12 起需要全新的奇异向量族（上文【2026-09-12（三）】(iii) 段）。本卡
+  `∀N, B26 N` 仍是完全开放的猜想，本条只是把已知的 N=1,2,3,4 四个具体实例累加记录，
+  **本卡依旧无推导，effective 不变**。
 author: curator
 created: "2026-09-12"

@@ -392,7 +392,35 @@ gaps:
     （worldsheet.c26-degenerate-weights-pentagonal notes、
     worldsheet.ocq-null-state-two-families 断言 (2)(3) 的 k-奇分类）完全不受本次
     工作影响。**本追记不改变任何判定**：本推导 `status: rigorous` 不变；目标
-    worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。"
+    worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。
+
+    **【2026-09-12 七追记，curator，分支 agent/curator/level4-wire：`B26 4`（N = 4 秩不等式）
+    现由 Lean 机检关闭，用的是与【六追记】（N=3）同一套反对称化横截性机制的 N=4 实例，
+    (B-26) 本身（∀N 版本）仍不关闭。本段之后一字未改上文，只追加，status/sources/summary/
+    论证步骤一字未动。】**
+    formal/StringFormal/NoGhost/LevelFourCount.lean（noghost-pr8，无 sorry）证出
+    `b26_four_of_D26 : (hD : 3 ≤ D) → D = 26 ⟹ B26 4`。与【六追记】（N=3）同一模式：
+    Type-1（L₋₁ 像，定义域 Q_{−4,3}）与 Type-2（𝒟₂ 像，定义域 Q_{−4,2}）两族**一起**给出
+    零态维数下界，横截性（两族像除零外不相交）靠一条新的反对称化系数分离引理
+    （图上 worldsheet.level-four-null-family-transversal，formalized，四条力矩方程反对称化
+    消去后配三个湮灭算子收尾）证明。**与 N=3 相比的唯一实质新增**：横截性论证本身需要一个
+    横向单位偏振 u（u·p=0, u·u=1）存在，故 `b26_four_of_D26` 比 `b26_three_of_D26` 多一条
+    前提 `hD : 3 ≤ D`（N≤3 只需 2 ≤ D）——这是**存在性门槛**，不是新的 D=26 判据，
+    D=26 仍只通过 Type-2 族物理性这一步（`descTwo_mem_towerNullSubmodule`）进入，与 N=2、
+    N=3 完全同一模式（第三次确证）。图上新卡 **worldsheet.ddf-spans-physical-states-level-four**
+    （formalized）与既有 worldsheet.ddf-spanning-rank-inequality 的新 notes 记录了这一步的
+    细节；formal/TODO.md `noghost-pr8`（【六追记】登记的「横截性已手证、计数未完成」）现已完全
+    做完。
+    ⚠ **这不关闭 (B-26)**：上文【三追记】(iv) 段的重叠问题只在 N ≥ 5 出现，本次工作连同
+    【四追记】【六追记】把 N ≤ 4（一切 rung，D = 26）机检闭合，但一般 N 的 `∀N, B26 N`
+    仍是零证据的开放猜想；N ≥ 5 起两族像的重叠问题（【三追记】(iv)，Euler 五边形数障碍，
+    数值上 D=26 时 N=5 起两族计数已知差 1）、N ≥ 12 起需要新奇异向量的问题
+    （worldsheet.c26-degenerate-weights-pentagonal notes、
+    worldsheet.ocq-null-state-two-families 断言 (2)(3) 的 k-奇分类）完全不受本次工作影响，
+    反对称化系数分离法本身对 N ≥ 5 需要全新的力矩方程组与全新的重叠分析（未来工作，见
+    worldsheet.level-four-null-family-transversal--via-lean 的 gaps）。**本追记不改变任何
+    判定**：本推导 `status: rigorous` 不变；目标 worldsheet.no-ghost-theorem-v4 的 effective
+    不因本追记而变化；(B-26) **仍不关闭**。"
   - |
     【2026-09-11（lean-wire-13）新增，curator】**第 (1b) 步用到的领头项
     A^i_{−n}|0;k⟩ = α^i_{−n}|0;k−n k_0⟩ + … 需要一条本推导没写出的假设：(T′) ε_i·k = 0**

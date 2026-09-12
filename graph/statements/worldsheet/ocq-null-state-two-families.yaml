@@ -291,5 +291,28 @@ notes: |
   ⚠ **本条不改变本卡的 status/effective**：本卡（一般 N，(1)(2)(3)）仍是
   physical-argument，本条只是把（a）里"N≥5 起失败"的**计数细节**（差多少、
   第一次出现在哪个 N）精确记录，不构成新的证明或推进。
+
+  【2026-09-12（六）：N ≤ 4 现已全部机检；本卡（一般 N）仍是 physical-argument，
+  第三族零态的问题（N=5 起）不受本次工作影响（curator，分支 agent/curator/level4-wire）】
+  formal/StringFormal/NoGhost/LevelFourCount.lean（noghost-pr8，无 sorry）把本卡断言
+  (1)(2)(3) 在 N=4 这一个具体实例上全部升级为机检：Type-1（L₋₁ 像，定义域 Q_{−4,3}）
+  与 Type-2（𝒟₂ 像，定义域 Q_{−4,2}）两族的构造、其像落在 H_null 里（本卡 (3)）、
+  以及两族横截（除零外不相交，本卡未断言的额外内容）均已证出
+  （worldsheet.level-four-null-family-transversal，formalized）。图上
+  worldsheet.ddf-spans-physical-states-level-four（formalized）承载完整拼装结果。
+  与 N=3 相比的唯一实质新增：横截性证明需要一个横向单位偏振 u（u·p=0, u·u=1）
+  存在，多一条门槛假设 3 ≤ D（N≤3 只需 2 ≤ D），非新的 D=26 判据。
+  ⇒ 至此，本卡断言 (1)(2)(3) 在 N = 1, 2, 3, 4 四个具体实例上均已由独立的
+  formalized 结果确认（分别见 worldsheet.ddf-spans-physical-states-level-one-modulo-null、
+  worldsheet.ddf-spans-physical-states-level-two、-level-three、-level-four）。
+  ⚠ **本条不改变本卡的 status/effective**：本卡（一般 N，(1)(2)(3)）与其推导
+  --via-blueprint-hand-computation 仍是 physical-argument——N=4 只是又一个具体实例
+  升级为机检，不触及一般 N 的证明；上文【明确不断言】(a)(b) 记录的 N≥5 起两族像
+  重叠（Euler 五边形数障碍）与 N≥12 起需要第三、第四族新奇异向量（权 12、15，见上文
+  【2026-09-12（三）】s=12,15 一段）完全不受本次工作影响，这正是本卡区别于
+  worldsheet.ddf-spanning-rank-inequality（(B-26) 逐 N 秩不等式，同样只到 N=4）与
+  worldsheet.ddf-spanning-hypothesis（整塔张成，同样只到 N≤4）的地方——三张卡在
+  N≤4 现在互相独立确证，但各自对一般 N 的开放边界（Euler 五边形数重叠 / 第三族奇异
+  向量）是同一件事的不同侧面，不合并、不互相 supersede。
 author: curator
 created: "2026-09-12"

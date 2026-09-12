@@ -1,0 +1,61 @@
+id: math.level-four-partition-difference--via-lean
+target: math.level-four-partition-difference
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean :: StringFormal.NoGhost.levelFour_count_identity
+      （本卡 target 的 formal.lean_decl，第 1031 行起）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator 未自行运行 `lake build` / `check-axioms`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      `depends_on: []`：本恒等式是纯自然数算术（两次 Pascal 递推的一个代入实例），
+      不依赖任何外部图节点——与 math.level-two/-three-partition-difference--via-lean
+      同一先例。
+
+      **逐字证明**：
+      ```
+      theorem levelFour_count_identity (hD : 2 ≤ D) :
+          (D - 1) + (D - 1) * (D - 1) + Nat.choose D 2 + (D - 1) * Nat.choose D 2
+              + Nat.choose (D + 2) 4
+            = ((D - 2) + (D - 2) * (D - 2) + Nat.choose (D - 1) 2 + (D - 2) * Nat.choose (D - 1) 2
+                + Nat.choose (D + 1) 4)
+              + ((D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3)
+              + ((D - 1) + Nat.choose D 2) := by
+        obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+        have hp2 : Nat.choose (m + 2) 2 = Nat.choose (m + 1) 1 + Nat.choose (m + 1) 2 :=
+          Nat.choose_succ_succ (m + 1) 1
+        have hp4 : Nat.choose (m + 4) 4 = Nat.choose (m + 3) 3 + Nat.choose (m + 3) 4 :=
+          Nat.choose_succ_succ (m + 3) 3
+        simp only [show m + 2 - 1 = m + 1 from rfl, show m + 2 - 2 = m from rfl,
+          show m + 2 + 1 = m + 3 from rfl, show m + 2 + 2 = m + 4 from rfl]
+        rw [hp2, hp4, Nat.choose_one_right]
+        ring
+      ```
+      （逐字复述自源码，供审计。核心步骤是两条 Pascal 递推
+      `Nat.choose_succ_succ (m+1) 1 : C(m+2,2) = C(m+1,1) + C(m+1,2)` 与
+      `Nat.choose_succ_succ (m+3) 3 : C(m+4,4) = C(m+3,3) + C(m+3,4)`，代入
+      D = m+2 后两侧按目标卡【断言】的展开式相等，`ring` 收尾确认。）
+summary: |
+  纯自然数算术：设 D = m + 2（hD : 2 ≤ D 保证 m 存在）。两条二项式系数 Pascal 递推
+  `Nat.choose_succ_succ (m+1) 1 : C(m+2,2) = C(m+1,1) + C(m+1,2)` 与
+  `Nat.choose_succ_succ (m+3) 3 : C(m+4,4) = C(m+3,3) + C(m+3,4)`，代入
+  D−1 = m+1、D−2 = m、D+1 = m+3、D+2 = m+4 后，两侧按
+  `(D−1)+(D−1)²+C(D,2)+(D−1)·C(D,2)+C(D+2,4)` 与
+  `[(D−2)+(D−2)²+C(D−1,2)+(D−2)·C(D−1,2)+C(D+1,4)] + [(D−1)+(D−1)²+C(D+1,3)] +
+  [(D−1)+C(D,2)]` 展开，`ring` 收尾确认相等。不使用任何弦论对象。
+gaps:
+  - "两条单侧公式 p_{D−1}(4)=…、p_{D−2}(4)=… 本身未被单独证成等式（Lean 侧只有对应的单侧不等式 card_conjFree_four_le / card_ddfLevel_four_ge，见目标卡 sources note）；本推导只证两者的差恒等式，与 math.level-two/-three-partition-difference--via-lean 同一情形。"
+  - "curator 未自行运行 lake build 与 check-axioms；结论基于直接读源码，合并前应由 lead 验证。"
+  - "本恒等式从 N=5 起不再精确成立（目标卡明确不断言 (b)）；本推导不涉及、不预示这一断裂，是纯粹的 N=4 特例证明。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  本推导与 math.level-two/-three-partition-difference--via-lean 同一模式
+  （depends_on: []，纯 Nat 算术），是同一恒等式链在 N=4 的实例，也是该链目前的最后一环。
+  curator，2026-09-12，level4-wire。
+author: curator
+created: "2026-09-12"

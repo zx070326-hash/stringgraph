@@ -304,5 +304,24 @@ notes: |
   重叠、N ≥ 12 起需要新奇异向量）完全不受 N ≤ 3 的关闭影响。**本卡 effective 依旧
   open**：本卡仍无推导，链条现状不变，唯一未证环节 worldsheet.ddf-spanning-rank-inequality
   依旧对一般 N 开放，只是 N ≤ 3 这三个具体实例现在都有了独立的机检证据。
+
+  【2026-09-12（五）：N ≤ 4 现已关闭；N ≥ 5 仍完全开放（curator，分支
+  agent/curator/level4-wire；只加 notes，本卡 status/effective 不变，本卡仍无推导）】
+  formal/StringFormal/NoGhost/LevelFourCount.lean（noghost-pr8，无 sorry）把 N = 4 也
+  关闭了：`ddfSpans_bigrade_neg_four_four (hD : 3 ≤ D)` 给出 D = 26 时 `DDFSpansOn` 在
+  `towerBigrade(−4,4)` 上成立（图上 worldsheet.ddf-spans-physical-states-level-four，
+  formalized）。**用的是与 N=3 同一套**反对称化系数分离法（非三角性/领头指标序法），
+  只是这次的横截性引理（worldsheet.level-four-null-family-transversal）额外需要一个
+  横向单位偏振 u（u·p=0, u·u=1）存在，故比 N ≤ 3 多一条门槛假设 `3 ≤ D`（存在性门槛，
+  非新的 D=26 判据，D=26 仍只经 Type-2 族物理性一步进入）。结合
+  `ddfSpansOn_towerLevelLE_of_antidiagonal`（"能级 ≤ N 整块"归约到反对角单片的拼装
+  引理）：**N ≤ 4 整块（一切 rung，D = 26）现已由已 formalized 的结果闭合**。
+  ⚠ **N ≥ 5 完全未动**：反对称化系数分离法本身对 N ≥ 5 需要全新的力矩方程组与全新的
+  重叠分析（worldsheet.level-four-null-family-transversal--via-lean 的 gaps 已登记）；
+  worldsheet.ddf-spanning-rank-inequality 与 worldsheet.ocq-null-state-two-families
+  notes 记录的一般 N 障碍（N ≥ 5 起两族像重叠是 Euler 五边形数级数、N ≥ 12 起需要新
+  奇异向量）完全不受 N ≤ 4 的关闭影响。**本卡 effective 依旧 open**：本卡仍无推导，
+  链条现状不变，唯一未证环节 worldsheet.ddf-spanning-rank-inequality 依旧对一般 N
+  开放，只是 N ≤ 4 这四个具体实例现在都有了独立的机检证据。
 author: curator
 created: "2026-09-11"
