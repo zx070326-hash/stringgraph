@@ -346,4 +346,115 @@ theorem towerModeVec_two_one_descTwo (hη : ∀ μ, η μ * η μ = 1) {j : ℤ}
 
 end AntisymFunctional
 
+/-! ### Transversality of the two families
+
+The new mathematical content of this file: the `𝒟₂`-images of the level-one seeds meet the
+`L_{-1}`-images of the level-two slice only in `0`. -/
+
+section Independence
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+omit [CharZero K] in
+lemma oneSeed_eq_towerModeVec (j : ℤ) (e : Fin D → K) :
+    oneSeed η j e = towerModeVec η a b e (-1) (Finsupp.single j (1 : Fock D K)) := by
+  rw [oneSeed, towerModeVec_neg_one_apply_single, mul_one]
+
+omit [CharZero K] in
+/-- `A_δ(1) (e·α_{-1})|0;p_j⟩ = (δ·e) |0;p_j⟩`: the level-one seeds are read off by the
+first-mode functionals, the transition matrix being the frame Gram matrix. -/
+lemma towerModeVec_one_oneSeed (hη : ∀ μ, η μ * η μ = 1) (j : ℤ) (δ e : Fin D → K) :
+    towerModeVec η a b δ 1 (oneSeed η j e)
+      = dotVec η δ e • (Finsupp.single j (1 : Fock D K)) := by
+  have hvac : (Finsupp.single j (1 : Fock D K)) ∈ towerBigrade D K j 0 :=
+    single_mem_towerBigrade (Fock.one_mem_levelSubmodule D K)
+  have h := congrArg (fun T : Module.End K (TowerFock D K) => T (Finsupp.single j (1 : Fock D K)))
+    (lie_towerModeVec_towerModeVec η a b δ e hη 1 (-1))
+  simp only [LieRing.of_associative_ring_bracket, LinearMap.sub_apply, Module.End.mul_apply,
+    LinearMap.smul_apply, LinearMap.id_coe, id_eq] at h
+  rw [if_pos (by norm_num : (1 : ℤ) + -1 = 0),
+    towerModeVec_apply_eq_zero_of_mem_towerBigrade_of_lt η a b δ hvac (by norm_num), map_zero,
+    sub_zero] at h
+  rw [oneSeed_eq_towerModeVec (a := a) (b := b), h]
+  norm_num
+
+/-- ⭐ **Transversality of the Type-1 and Type-2 families on the level-three slice.**
+
+If `L_{-1}φ + 𝒟₂((e·α_{-1})|0;p_j⟩) = 0` for a level-two `φ` and a polarisation `e` transverse
+to the rung momentum, and `p_j·p_j ≠ 0`, then `e = 0` and `φ = 0`.
+
+No quasi-physicality of `φ` is used, and `D = 26` does not appear: this is a statement about the
+oscillator algebra alone.  Blueprint §B‴.5 shows that no `(β,ω)`-compatible leading-index order
+can prove it; what does prove it is that the `α_{-2}α_{-1}` tensor of an `L_{-1}`-image is
+`p ⊗ w + 2T` with `T` symmetric, so its antisymmetric part is determined by `w`, whereas for a
+`𝒟₂`-image the two coefficients are `5` and `6` and the antisymmetric part survives. -/
+theorem eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed (hη : ∀ μ, η μ * η μ = 1)
+    (hbb : dotVec η b b = 0) (hba : dotVec η b a = 1) {j : ℤ}
+    {φ : TowerFock D K} (hφ : φ ∈ towerBigrade D K j 2) {e : Fin D → K}
+    (he : dotVec η e (towerMomentum a b j) = 0)
+    (hpp : dotVec η (towerMomentum a b j) (towerMomentum a b j) ≠ 0)
+    (hzero : towerLop η a b (-1) φ + descTwo η a b (oneSeed η j e) = 0) :
+    e = 0 ∧ φ = 0 := by
+  have hψ : oneSeed η j e ∈ towerBigrade D K j 1 := oneSeed_mem_towerBigrade j e
+  have hvne : (Finsupp.single j (1 : Fock D K)) ≠ 0 := Finsupp.single_ne_zero.2 one_ne_zero
+  -- Step 1: the `α_{-3}` functional.
+  have hE1 : ∀ ε : Fin D → K, (3 : K) • towerModeVec η a b ε 2 φ
+      = (-24 * dotVec η ε e) • (Finsupp.single j (1 : Fock D K)) := by
+    intro ε
+    have h := congrArg (towerModeVec η a b ε 3) hzero
+    rw [map_add, map_zero, towerModeVec_three_towerLop_neg_one hη hφ,
+      towerModeVec_three_descTwo hη hψ, towerModeVec_one_oneSeed hη] at h
+    linear_combination (norm := module) h
+  -- Step 2: the antisymmetrised `α_{-2}α_{-1}` functional.
+  have hE3 : ∀ ε δ : Fin D → K,
+      dotVec η ε (towerMomentum a b j) * dotVec η δ e
+        = dotVec η δ (towerMomentum a b j) * dotVec η ε e := by
+    intro ε δ
+    have hεδ := congrArg (fun x => towerModeVec η a b ε 2 (towerModeVec η a b δ 1 x)) hzero
+    have hδε := congrArg (fun x => towerModeVec η a b δ 2 (towerModeVec η a b ε 1 x)) hzero
+    simp only [map_add, map_zero] at hεδ hδε
+    rw [towerModeVec_two_one_towerLop_neg_one hη hφ, towerModeVec_two_one_descTwo hη hψ,
+      towerModeVec_one_oneSeed hη, towerModeVec_one_oneSeed hη] at hεδ
+    rw [towerModeVec_two_one_towerLop_neg_one hη hφ, towerModeVec_two_one_descTwo hη hψ,
+      towerModeVec_one_oneSeed hη, towerModeVec_one_oneSeed hη] at hδε
+    have hcomm : towerModeVec η a b ε 1 (towerModeVec η a b δ 1 φ)
+        = towerModeVec η a b δ 1 (towerModeVec η a b ε 1 φ) :=
+      towerModeVec_apply_towerModeVec_of_add_ne_zero η a b ε δ hη (by norm_num) φ
+    have hkey : ((18 : K) * (dotVec η ε (towerMomentum a b j) * dotVec η δ e)
+        - 18 * (dotVec η δ (towerMomentum a b j) * dotVec η ε e))
+          • (Finsupp.single j (1 : Fock D K)) = 0 := by
+      linear_combination (norm := module) (3 : K) • hεδ - (3 : K) • hδε - (6 : K) • hcomm
+        - dotVec η δ (towerMomentum a b j) • hE1 ε + dotVec η ε (towerMomentum a b j) • hE1 δ
+    rcases smul_eq_zero.1 hkey with h | h
+    · have h' : (18 : K) * (dotVec η ε (towerMomentum a b j) * dotVec η δ e
+          - dotVec η δ (towerMomentum a b j) * dotVec η ε e) = 0 := by linear_combination h
+      rcases mul_eq_zero.1 h' with h2 | h2
+      · exact absurd h2 (by norm_num)
+      · exact sub_eq_zero.1 h2
+    · exact absurd h hvne
+  -- Step 3: `e = 0`, hence `φ = 0`.
+  have hE : e = 0 := by
+    funext i
+    have hηi : η i ≠ 0 := by
+      intro h0
+      have h1 := hη i
+      rw [h0, zero_mul] at h1
+      exact zero_ne_one h1
+    have h := hE3 (towerMomentum a b j) (Pi.single i 1)
+    rw [dotVec_single_left, dotVec_single_left,
+      dotVec_comm η (towerMomentum a b j) e, he, mul_zero] at h
+    rcases mul_eq_zero.1 h with h1 | h1
+    · exact absurd h1 hpp
+    · rcases mul_eq_zero.1 h1 with h2 | h2
+      · rcases mul_eq_zero.1 h2 with h3 | h3
+        · exact absurd h3 hηi
+        · exact absurd h3 one_ne_zero
+      · simpa using h2
+  refine ⟨hE, ?_⟩
+  rw [hE] at hzero
+  simp only [oneSeed, Fock.polState_zero, Finsupp.single_zero, map_zero, add_zero] at hzero
+  exact towerLop_neg_one_injective η a b hη hbb hba hφ hzero
+
+end Independence
+
 end StringFormal.NoGhost
