@@ -594,4 +594,99 @@ theorem le_finrank_towerNull_inf_towerBigrade_three (hD : 2 ≤ D) (F : DDFLight
 
 end NullBoundThree
 
+/-! ### The classification of level-three occupation functions
+
+Everything in this section is about `Finsupp`s on `ι × ℕ+`; no string theory.  Rather than
+redo `LevelTwoCount.Finsupp.oscWeight_eq_two_cases`'s case analysis one level up, we peel one
+oscillator off and recurse — `exists_peel` below — which keeps the level-three classification to
+a dozen lines and would keep any fixed level the same size. -/
+
+namespace Finsupp
+
+variable {ι : Type*}
+
+/-- **Peeling one oscillator**: an occupation function of positive weight is `α^v_{-v₂}` times
+one of weight smaller by `v₂`. -/
+lemma exists_peel {d : (ι × ℕ+) →₀ ℕ} {N : ℕ} (h : oscWeight d = N + 1) :
+    ∃ (v : ι × ℕ+) (d' : (ι × ℕ+) →₀ ℕ),
+      d = Finsupp.single v 1 + d' ∧ (v.2 : ℕ) + oscWeight d' = N + 1 := by
+  classical
+  obtain ⟨v, hv⟩ : ∃ v : ι × ℕ+, v ∈ d.support := by
+    by_contra hc
+    push_neg at hc
+    have : d = 0 := Finsupp.ext fun u => Finsupp.notMem_support_iff.1 (hc u)
+    rw [this, oscWeight_zero] at h
+    omega
+  have hdv : 1 ≤ d v := Nat.one_le_iff_ne_zero.2 (Finsupp.mem_support_iff.1 hv)
+  refine ⟨v, Finsupp.update d v (d v - 1), ?_, ?_⟩
+  · refine Finsupp.ext fun x => ?_
+    rw [Finsupp.add_apply, Finsupp.single_apply, Finsupp.update_apply]
+    by_cases hx : x = v
+    · rw [if_pos hx.symm, if_pos hx, hx]
+      omega
+    · rw [if_neg (fun hc => hx hc.symm), if_neg hx]
+      omega
+  · have := congrArg oscWeight
+      (show d = Finsupp.single v 1 + Finsupp.update d v (d v - 1) from Finsupp.ext fun x => by
+        rw [Finsupp.add_apply, Finsupp.single_apply, Finsupp.update_apply]
+        by_cases hx : x = v
+        · rw [if_pos hx.symm, if_pos hx, hx]; omega
+        · rw [if_neg (fun hc => hx hc.symm), if_neg hx]; omega)
+    rw [oscWeight_add, oscWeight_single, one_mul] at this
+    omega
+
+lemma eq_zero_of_oscWeight_eq_zero {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 0) : d = 0 := by
+  classical
+  have := card_support_le_oscWeight d
+  rw [h, Nat.le_zero, Finset.card_eq_zero, Finsupp.support_eq_empty] at this
+  exact this
+
+/-- A `ℕ+` whose coercion is `n` is `n` itself, packaged for the `Prod.ext` steps below. -/
+private lemma pnat_eq_of_coe_eq {m : ℕ+} {n : ℕ+} (h : (m : ℕ) = (n : ℕ)) : m = n :=
+  PNat.coe_injective h
+
+/-- **The classification of level-one occupation functions.** -/
+theorem oscWeight_eq_one_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 1) :
+    ∃ i : ι, d = Finsupp.single (i, 1) 1 := by
+  obtain ⟨v, d', hd, hw⟩ := exists_peel (N := 0) (by simpa using h)
+  have hpos : 0 < (v.2 : ℕ) := v.2.pos
+  have hv2 : (v.2 : ℕ) = 1 := by omega
+  have hd' : d' = 0 := eq_zero_of_oscWeight_eq_zero (by omega)
+  refine ⟨v.1, ?_⟩
+  rw [hd, hd', add_zero, show ((v.1, 1) : ι × ℕ+) = v from
+    Prod.ext rfl (pnat_eq_of_coe_eq (by simpa using hv2.symm))]
+
+/-- **The classification of level-three occupation functions**: three shapes, `α^i_{-3}`,
+`α^i_{-2}α^j_{-1}` and `α^i_{-1}α^j_{-1}α^k_{-1}`.  This is the combinatorial content of
+`p_m(3) = m + m² + binom(m+2, 3)`. -/
+theorem oscWeight_eq_three_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 3) :
+    (∃ i : ι, d = Finsupp.single (i, 3) 1) ∨
+      (∃ i j : ι, d = Finsupp.single (i, 2) 1 + Finsupp.single (j, 1) 1) ∨
+        (∃ i j k : ι, d = Finsupp.single (i, 1) 1 + Finsupp.single (j, 1) 1
+          + Finsupp.single (k, 1) 1) := by
+  obtain ⟨v, d', hd, hw⟩ := exists_peel (N := 2) (by simpa using h)
+  have hpos : 0 < (v.2 : ℕ) := v.2.pos
+  have hle : (v.2 : ℕ) ≤ 3 := by omega
+  interval_cases hv : (v.2 : ℕ)
+  · -- `v₂ = 1`: the rest has weight two
+    rcases oscWeight_eq_two_cases (d := d') (by omega) with ⟨i, hi⟩ | ⟨i, j, hi⟩
+    · refine Or.inr (Or.inl ⟨i, v.1, ?_⟩)
+      rw [hd, hi, show ((v.1, 1) : ι × ℕ+) = v from
+        Prod.ext rfl (pnat_eq_of_coe_eq (by simpa using hv.symm)), add_comm]
+    · refine Or.inr (Or.inr ⟨v.1, i, j, ?_⟩)
+      rw [hd, hi, show ((v.1, 1) : ι × ℕ+) = v from
+        Prod.ext rfl (pnat_eq_of_coe_eq (by simpa using hv.symm)), add_assoc]
+  · -- `v₂ = 2`: the rest has weight one
+    obtain ⟨j, hj⟩ := oscWeight_eq_one_cases (d := d') (by omega)
+    refine Or.inr (Or.inl ⟨v.1, j, ?_⟩)
+    rw [hd, hj, show ((v.1, 2) : ι × ℕ+) = v from
+      Prod.ext rfl (pnat_eq_of_coe_eq (by simpa using hv.symm))]
+  · -- `v₂ = 3`: the rest is empty
+    have hd' : d' = 0 := eq_zero_of_oscWeight_eq_zero (by omega)
+    refine Or.inl ⟨v.1, ?_⟩
+    rw [hd, hd', add_zero, show ((v.1, 3) : ι × ℕ+) = v from
+      Prod.ext rfl (pnat_eq_of_coe_eq (by simpa using hv.symm))]
+
+end Finsupp
+
 end StringFormal.NoGhost
