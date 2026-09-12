@@ -1,0 +1,162 @@
+id: worldsheet.ddf-spans-physical-states-level-three
+kind: proposition
+title: DDF 张成假设在 (rung −3, 振子能级 3) 一片上成立，且需要 D = 26：H_phys ∩ V_3 ⊆ D(Ε) + H_null——第二个消费 D = 26 的机检张成片
+statement: |
+  【设定】记号沿用 worldsheet.ddf-spanning-hypothesis（同一张塔 T(k;k_0)、系数域 K）与
+  worldsheet.ddf-light-cone-frame（标架对象 F : DDFLightConeFrame η a b，D ≥ 2 由 F 内部
+  的假设保证）：系数域 K 满足 [Field K][LinearOrder K][IsStrictOrderedRing K][Algebra ℚ K]
+  （有序域，与 worldsheet.ddf-spans-physical-states-level-two 记号一致）；截距
+  a₀ := α'k² = ½η(a,a) 由 F 钉死为 1；V_3 := towerBigrade(−3, 3)（rung −3、振子能级 3 的
+  双分次片）；H_phys、D(Ε)、H_null 三个子空间逐字取自 worldsheet.ddf-spanning-hypothesis
+  （H_phys ∩ V_3、D(Ε) ∩ V_3、H_null ∩ V_3 即 worldsheet.ddf-spanning-rank-inequality
+  记号里的 H_3、D_3、Z_3）。
+
+  【断言】设 hD : 2 ≤ D，F : DDFLightConeFrame η a b。若 **(D : K) = 26**，则
+
+      **H_phys ∩ V_3  ⊆  D(Ε) + H_null** 。
+
+  用 worldsheet.ddf-spanning-hypothesis 的分片记号：这就是 DDFSpansOn(V_3)，即 DDF 张成
+  假设限制在 (rung −3, 振子能级 3) 这一片上成立——且**只在 D = 26 时**成立（本卡不断言
+  D ≠ 26 时的情形，见【本卡明确不断言】(b)）。
+
+  【与 worldsheet.ddf-spans-physical-states-level-two 的关系（姊妹卡，同族第三片）】
+  两卡形状同构（都是 DDFSpansOn 在单个反对角片上的实例，都需要 D = 26），是"逐 N 攻克
+  worldsheet.ddf-spanning-hypothesis"这条路线上并列的两个已关闭片，不是彼此的推论或换代。
+  与 N=2 不同的关键新机制：N=2 处两族零态（L₋₁ 像与 𝒟₂ 像）的横截性靠三角性（领头指标）
+  就够；N=3 处蓝图 §B‴.5 证明三角性路线撞车（25 个领头指标被两族共同占满），需要新的
+  反对称化系数分离法，见 worldsheet.level-three-null-family-transversal。
+
+  【本卡不需要的假设】不需要 R 是 Q-代数意义之外的额外结构；不需要横向标架的显式基
+  （F 只需满足 DDFLightConeFrame 的八条）。
+
+  【本卡明确不断言】
+  (a) **不断言一般 N 的任何片**：本卡只做 N = 3。N ≥ 4 的对应片是否可类似关闭是
+      formal/TODO.md `noghost-pr8` 记录的开放工作（横截性已手证但计数未完成，约
+      500-700 行 Lean），worldsheet.ddf-spanning-rank-inequality 与
+      worldsheet.ocq-null-state-two-families notes 记录的一般 N 开放问题
+      （N ≥ 5 起两族像重叠、N ≥ 12 起需要新奇异向量）均不受本卡影响。
+  (b) **不断言 D ≠ 26 时片上不成立（不证否命题）**：本卡只证 D = 26 ⟹ DDFSpansOn(V_3)
+      这一个方向；尖锐性/必要性未被证明，登记为未来工作，见配套推导的 gaps。
+  (c) **不断言全体 H_phys**（那是 worldsheet.ddf-spanning-hypothesis 本身）：一片一片地
+      关闭不自动给出全体，"逐片 ⇒ 全体"的拼装引理是另一条已 formalized 的独立引理
+      （Glue.lean），本卡不重复它。
+  (d) **不断言两族零态在一般 N 的构造**：那是 worldsheet.ocq-null-state-two-families
+      的内容（一般 N，physical-argument）。本卡消费的是该构造在 N = 3 这一个特例上的
+      机检版本，不重新断言一般 N 的机制。
+  (e) **不断言零态的具体身份对读者可读**：零态族由 Type-1（L₋₁ 像，D−1 维，
+      经 finrank_ker_transFunctional 的秩零化度给出，取横向于 p₋₃ 的核）与 Type-2
+      （𝒟₂ 像，dim Q_{−3,2} 维）两部分组成，本卡只断言其像落在 H_null ∩ V_3 里且维数
+      之和达到目标，具体索引编码是 Lean 侧的实现细节，不是本卡陈述的一部分。
+  (f) **不断言 a 在 rung −3 横向**：与 N=2 不同（那里 a 沿 b−b̃ 方向仍参与 Type-1 族），
+      本卡证明取 Type-2 的定义域为 ker(e ↦ e·p₋₃)（对 p₋₃ 横向的偏振），a·p₋₃ = −1 ≠ 0，
+      a 本身不横向；这只是证明内部的技术选取，不改变本卡陈述。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfSpans_bigrade_neg_three_three
+  lean_file: StringFormal/NoGhost/LevelThreeCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean :: StringFormal.NoGhost.ddfSpans_bigrade_neg_three_three
+      （本卡 formal.lean_decl，section Closing，第 1128 行起）；紧邻的
+      StringFormal.NoGhost.b26_three_of_D26（同 section，第 1103 行起，⭐⭐ 标记的中间结果）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-pr7，formal/TODO.md 记为已完成）。
+      **curator 未自行重跑 `lake build` 与 `check-axioms`**（本 worktree 无构建缓存）；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本卡 status formalized
+      的依据。
+
+      **逐字核对**：`ddfSpans_bigrade_neg_three_three (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+      (hD26 : (D : K) = 26) : DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((3:ℕ):ℤ)) 3)`
+      ——与本卡【断言】逐字一致（`DDFSpansOn … (towerBigrade …)` 就是「H_phys ∩ V_3 ⊆
+      D(Ε) + H_null」的 Lean 展开）。
+
+      文件头模块 docstring 逐字："The third antidiagonal slice of `ddf-spans`, after
+      `Assembly.ddfSpans_bigrade_neg_one_one` (`N = 1`, unconditional in `D`) and
+      `LevelTwoCount.ddfSpans_bigrade_neg_two_two` (`N = 2`)."
+
+      **证明链（逐层核对，供审计）**：`ddfSpans_bigrade_neg_three_three` 直接调用
+      `ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_three_of_D26 hD F hD26)`
+      （同 N=2 一样，`ddfSpansOn_bigrade_of_b26` 是 D-无关、N-无关的纯逻辑翻译引理，
+      不建 depends_on 边）；`b26_three_of_D26` 的七个输入 h1-h7 逐一核对（docstring
+      第 1097-1101 行逐字自述）：
+      h1 = `finrank_towerPhys_inf_towerBigrade_le`
+        （worldsheet.physical-slice-bounded-by-transverse-count 的 formal.lean_decl，
+        逐字调用，给 dim H_3 ≤ p_{D−1}(3)）；
+      h2 = `card_conjFree_three_le`、h4 = `card_ddfLevel_three_ge`、h5 = `card_conjFree_two_ge`
+        （本文件内部纯计数引理，不对应图上既有节点，不建边）；
+      h3 = `levelThree_count_identity`
+        （math.level-three-partition-difference 的 formal.lean_decl，逐字调用，给
+        p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)）；
+      h6 = `le_finrank_towerSeed`
+        （worldsheet.quasi-physical-slice-dimension 的 formal.lean_decl，逐字调用，
+        给 dim Q_{−3,2} ≥ p_{D−1}(2)）；
+      h7 = `le_finrank_towerNull_inf_towerBigrade_three`
+        （worldsheet.level-three-null-family-transversal--via-lean 承载的横截性引理
+        所在的同一文件、同一 section 的姊妹定理——**唯一使用 (D:K)=26 的一步**，见下）；
+      最后 `rw [finrank_ddfSpan_inf_towerBigrade F.hη F.frame.isotropic F.hba F.trans 3]`
+        （worldsheet.transverse-ddf-fock-gram-matrix 一侧的维数版本，非该卡 headline
+        `ddf_gram_diagonal`，给 dim D_3 = p_{D−2}(3)，与 N=2 derivation 同一记法）。
+      七项经 `omega` 拼成 `b26_three_of_D26`。
+
+      **`le_finrank_towerNull_inf_towerBigrade_three` 的结构**（h7，第 470-527 行起）：
+      构造 `typeTwoAugRaw`（Type-1 ⊕ Type-2 的组合线性映射，定义域
+      `towerSeed η a b (-3) 2 × ker(transFunctional η a b (-3))`），证明其单射性
+      （`typeTwoAugRaw_injective`，核心是 worldsheet.level-three-null-family-transversal
+      的 `eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`），证明其像落在
+      `towerNullSubmodule ⊓ towerBigrade(-3,3)` 里（Type-1 半用
+      `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`——TypeOneFamily.lean/
+      NullSeedsTwo.lean 共享的铺垫引理，见下 depends_on 该边的 note；Type-2 半用本文件
+      新的任意-rung 版 `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`，其证明体
+      直接调用 `descTwo_mem_towerNullSubmodule`——NullSeedsTwo.lean 的一般充分性引理，
+      即 worldsheet.level-two-null-state-requires-d26 sources.loc 里已登记的同一条
+      引理，这是本卡与该卡之间可核实、非 inferred 的边，见下），最后用
+      `finrank_ker_transFunctional`（D−1，秩零化度）与
+      `LinearMap.finrank_le_finrank_of_injective` 收尾。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.4)（arXiv:0802.3249v1）：'|ψ⟩ = |f⟩ + |n⟩'，对 D = 26 断言"
+    note: |
+      **不承载本卡的论证**。本卡与 (6.4) 的形式**逐字相同**（D = 26、|n⟩ 是零态），
+      差别只剩一处：文献对一切能级断言，本卡只做 (rung −3, level 3) 这一片。
+      与 worldsheet.ddf-spans-physical-states-level-two 引用同一条文献锚点，理由同该卡。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, critical-dimension, formalized]
+notes: |
+  【为什么立卡】formal/StringFormal/NoGhost/LevelThreeCount.lean（formal/TODO.md
+  `noghost-pr7`，已完成）把 N = 3 这一片的 DDF 张成做成机器验证的定理，是继
+  worldsheet.ddf-spans-physical-states-level-two（N=2）之后第二个真正消费 D = 26 的
+  机检张成结果。本卡承载这一结果，形状与该卡逐字对齐（同一个"DDFSpansOn 分片实例"模式）。
+
+  【查重】2026-09-12 跑 `uv run stringgraph search "level three" / "level-three" / "N=3" /
+  "rung -3" / ddfSpans_bigrade_neg_three`，均无同内容命中；`search ddf-spans` 命中的是
+  worldsheet.ddf-spanning-hypothesis 与 worldsheet.ddf-spans-physical-states-level-two/
+  -level-one(-modulo-null) 等既有卡，形状相同但片不同，不重复。
+
+  【D 只通过一件事进入，与 N=2 的机制平行但不同】N=2 处 D 只经由单个具体向量
+  （𝒟₂|0;p₋₂⟩）的物理性进入；N=3 处 D 同样只经由 Type-2 族（this time 整族
+  Q_{−3,2} 大小的 𝒟₂ 像，不是单个向量）落在 H_null 里这一步进入，具体是
+  `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade` 内部调用的
+  `descTwo_mem_towerNullSubmodule`（NullSeedsTwo.lean 的一般充分性引理，D=26 假设
+  在此处使用）。**Type-1 族的物理性、两族的横截性（本卡消费的
+  worldsheet.level-three-null-family-transversal）、以及全部计数步骤，都不用 D=26**——
+  这与 worldsheet.ddf-spans-physical-states-level-two notes (b)(c) 是同一个洞察在
+  N=3 上的重复确证。
+
+  【depends_on 的取舍：为什么不挂 worldsheet.ddf-spanning-rank-inequality】
+  同 worldsheet.ddf-spans-physical-states-level-two 的既有理由：`ddfSpansOn_bigrade_of_b26`
+  是 D-无关、N-无关的纯逻辑翻译引理，本卡只在 N=3 这一个具体实例上证明 `B26 3`，不是引用
+  该卡尚未证的 "∀N" 内容。故不建这条边。
+
+  【depends_on 的取舍：为什么挂 worldsheet.null-states-lower-bound-type-one，标 inferred: true】
+  `le_finrank_towerNull_inf_towerBigrade_three`（h7）与
+  `le_finrank_towerNull_inf_towerBigrade_succ`（worldsheet.null-states-lower-bound-type-one
+  的 formal.lean_decl）**不是调用关系**（读过两者证明体确认：前者不调用后者），而是
+  **共享同一条更底层的铺垫引理** `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`
+  （定义于 NullSeedsTwo.lean 第 476 行，被 TypeOneFamily.lean 与 LevelThreeCount.lean
+  各自独立调用）。任务书要求本卡把 N=3 的 Type-1 族与该卡挂钩（"Type-1 family at level 3 =
+  L₋₁ of Q_{−3,2}"这一物理对应关系成立），但严格说这是"同一机制的姊妹实例"而非
+  "字面调用链"，故标 `inferred: true` 并在配套推导写清此区分，不算作可无条件核实的边。
+  （worldsheet.level-three-null-family-transversal--via-lean 挂的是同一条底层引理，
+  但那里是**字面调用**——`towerLop_neg_one_injective`——故标 `inferred: false`；
+  本卡这里挂的是"同一维数下界机制"的类比，不是字面调用，故标法不同，理由分别写清。）
+author: curator
+created: "2026-09-12"

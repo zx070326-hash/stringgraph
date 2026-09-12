@@ -347,5 +347,26 @@ notes: |
   PR6′ 只是把"零态维数下界"这一条开放内容里**已知不含 D=26 信息的那一部分**（Type-1 单族
   的贡献）做成了 Lean 定理，没有触及 D=26 本身进入的那个缺口（Type-2 族及其与 Type-1 族的
   重叠），故不构成对本卡任何一段的关闭。
+
+  【2026-09-12（五）：`B26 3` 本身现已被逐个 D 判定式关闭（不是"零态下界"这一半，
+  是完整的 (B-26)(i) 单点实例）；`B26 4` 的剩余成本现在精确到"计数"这一件事
+  （curator，分支 agent/curator/level3-wire）】
+  formal/StringFormal/NoGhost/LevelThreeCount.lean（noghost-pr7，无 sorry）证出
+  `b26_three_of_D26`：D = 26 时 `dim H_3 ≤ dim D_3 + dim Z_3`（即本卡记号下的
+  `B26 3` 在 D=26 处成立），配套 `ddfSpans_bigrade_neg_three_three`
+  （worldsheet.ddf-spans-physical-states-level-three）经等价改写 (iii)（本卡上文
+  【2026-09-12 追记】(iii)）确认这就是本卡在 N=3 的目标实例。**这次用的不是**
+  上面 (iii) 段列出的"两族横截"未解决半——横截性本身被
+  worldsheet.level-three-null-family-transversal 关闭了（反对称化系数分离法，
+  非领头指标/三角性）；`B26 3` 剩余的全部内容是纯计数（`h1`-`h6`，见该卡配套推导），
+  已用 `omega` 拼合。
+  **对 (iii) 段三分的精确定位**：这确认 (iii) 段"N ≤ 4：瓶颈只是单射 + 两族横截"
+  这句话对 N=3 现已可拆穿为"横截性已解决，计数也已解决"，`B26 3` 因此**完全关闭**，
+  不只是"目标形状已知"。`B26 4`（N=4，同属 (iii) 段"N ≤ 4"这一档）现状：
+  横截性同一套反对称化机制已手证（formal/TODO.md `noghost-pr8` 记录"已手证但计数
+  未完成"），剩余成本精确为**计数**，估计约 500-700 行 Lean（TODO 条目 `noghost-pr8`）。
+  ⚠ **本条不改变本卡的 effective 状态**：本卡依旧无推导，`∀N, B26 N` 仍是完全开放
+  的猜想（现已知 N=1,2,3 三个具体实例成立，N≥4 未知，(iii) 段 N≥5/N≥12 的两个更深
+  障碍不受影响）；本条只是把 N=3、N=4 两点的"还差什么"精确记录下来。
 author: curator
 created: "2026-09-12"

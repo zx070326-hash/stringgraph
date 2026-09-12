@@ -1,0 +1,65 @@
+id: worldsheet.level-three-null-family-transversal--via-lean
+target: worldsheet.level-three-null-family-transversal
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+  - id: worldsheet.null-states-lower-bound-type-one
+    inferred: false
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean ::
+      StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed（第 456 行起）；
+      第 521 行 `exact towerLop_neg_one_injective η a b hη hbb hba hφ hzero`
+      ——证明第 3 步逐字调用 `towerLop_neg_one_injective`
+      （TypeOneFamily.lean 第 186 行，即 worldsheet.null-states-lower-bound-type-one
+      的 sources 里登记的同一条底层单射性引理，见该卡 sources.loc 第二条 "L_{-1} 单射本身"）。
+    note: |
+      **hη/hbb/hba 的来源**：三条假设逐字是 worldsheet.ddf-light-cone-frame 的
+      (F1) η_μ²=1、(F2) η(b,b)=0、(F3) η(b,a)=1（该卡 formal.lean_decl
+      `DDFLightConeFrame` 的字段），本推导直接以裸假设形式使用，不需要完整的
+      `DDFLightConeFrame` 结构对象（本定理签名里没有 `F : DDFLightConeFrame ...`
+      参数，只有 hη/hbb/hba 三个独立命题）——这是一条**接口边**（inferred: false，
+      供给假设的确切定义处，不在 lean_decl 的显式调用链里，因为本定理直接取裸假设
+      而非取标架结构体），与 graph/CLAUDE.md 既有先例（“接口边”记法）一致。
+      **towerLop_neg_one_injective 的来源**：`eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`
+      第 3 步（第 521 行）直接 `exact towerLop_neg_one_injective ...`，是本定理证明体
+      里唯一被字面调用的、图上已有卡的 formal 引理（其余铺垫引理——模的换位公式、
+      反对称化系数求值——都是本文件内部工具，未单独立卡，见目标卡 sources 的铺垫链列举）。
+      `worldsheet.null-states-lower-bound-type-one` 的 formal.lean_decl 是
+      `le_finrank_towerNull_inf_towerBigrade_succ`（一条维数下界定理，不是
+      `towerLop_neg_one_injective` 本身），但该卡的 sources.loc 明确把
+      `towerLop_neg_one_injective` 列为其"铺垫"引理之一（"L_{-1} 单射本身：
+      towerLop_neg_one_injective（第 186 行 ...）"）——本推导消费的正是这一条被
+      列举的铺垫引理，不是该卡的头牌定理本身，记法与
+      worldsheet.ddf-spans-physical-states-level-two--via-lean 里
+      "精确调用的不是目标卡头牌 lean_decl 而是其 sources 里列举的铺垫引理"这一既有
+      模式一致。
+
+      **curator 未自行运行 `lake build`/`#check`**；结论基于直接读源码。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不讨论本卡内容"
+    note: "不承载论证，只标注文献方位。"
+summary: |
+  三步纯振子代数论证（详见目标卡 statement 的【机制】段与 sources.loc 的逐步复述）：
+  (1) 用 A_ε(3) 系数消去 φ 贡献，得 A_ε(2)φ 与 A_ε(1)e 的一条线性关系；
+  (2) 反对称化 A_ε(2)A_δ(1) − A_δ(2)A_ε(1) 作用两次并用模的对易性消去 φ，
+      得 (ε·p_j)(δ·e) = (δ·p_j)(ε·e)；
+  (3) 取 ε := p_j 用 p_j·p_j ≠ 0 与 hη 逐分量得 e = 0；代回原方程用
+      towerLop_neg_one_injective 得 φ = 0。
+gaps:
+  - |
+    本推导未证"该机制对任意满足 p_j·p_j≠0 的 rung/level 组合成立"这一更一般的陈述
+    （目标卡【本卡明确不断言】(c) 已声明范围只到 level-3 反对角片专属的具体系数）；
+    level-4 起需要新的系数组合，估计 ~350-450 行 Lean，是 formal/TODO.md
+    `noghost-pr8` (a) 的内容，未来工作。
+notes: |
+  本推导只服务目标卡（横截性引理本身），不重复目标卡 sources.loc 已详细列出的
+  文件内部工具引理（section ModeToolbox/AntisymFunctional/DescTwoCommute/OneSeed），
+  那些是本文件私有的铺垫，未单独立卡（与 worldsheet.ddf-spans-physical-states-level-two
+  既有推导同一记法：只对图上已有 depends_on 对象的卡挂边，内部工具引理写在
+  sources.loc 供审计，不升格为图节点）。
+author: curator
+created: "2026-09-12"

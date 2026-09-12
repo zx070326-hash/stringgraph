@@ -267,5 +267,29 @@ notes: |
   --via-blueprint-hand-computation 仍是 physical-argument——新卡只对 (1) 单族的
   维数做了 formalized 的旁证，不触及 (2)（Type 2 族）、(3) 的一般性，也不触及
   【明确不断言】(a)(b) 记录的 N≥5 重叠问题。
+
+  【2026-09-12（五）：两族"恰好穷尽"计数精确到 N ≤ 4，N=5 起差 1——与上面
+  【2026-09-12（三）】的"N≤11 结构够用"是两条不同的命题，不要混淆（curator，
+  分支 agent/curator/level3-wire）】
+  本卡断言 (1)(2) 的两族计数恒等式 p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)
+  （m := D−2，Type-1 贡献 p_{m+1}(N−1) 项、Type-2 贡献 p_{m+1}(N−2) 项）对 N=1,2,3
+  精确成立（分别见 worldsheet.ddf-spans-physical-states-level-one-modulo-null、
+  worldsheet.ddf-spans-physical-states-level-two、
+  math.level-three-partition-difference 的机检版本），§B‴.6（本卡上面
+  【2026-09-12（三）】引用同一批手算）记录 N=4 处仍恰好相等；**从 N=5 起该恒等式
+  本身不再精确成立**——两族计数之和比目标少 1（D=26 处具体数字 33149 ≠ 33150，
+  §B‴ 手算，inferred: true），这正是两族像开始重叠（一个方向被 Type-1、Type-2
+  两族共同覆盖，只算了一次）的计数印证，与
+  worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（三）】(iv) 记录的
+  Euler 五边形数障碍是同一件事的两种表述（"计数恒等式差 1" ⟺ "两族像交出一维"）。
+  **这条"N≤4 恰好相等/N=5 起差 1"与上面【2026-09-12（三）】段"N≤11 结构够用
+  （两族原则上能覆盖该范围内每一层新产生子）/N≥12 起需要新产生子"是两条不同
+  层次的命题，不要混淆**：前者是两族**各自内部**的计数恰好匹配到几维（"够不够
+  精确抵消"，N=4 是精确抵消的最后一层，N=5 起哪怕两族都在但已重叠），后者是
+  "该层是否存在两族之外的第三种新奇异向量来源"（N=12 是第一个需要新代数结构的层，
+  与两族本身是否重叠是独立的问题——N=5 到 N=11 两族已知重叠但仍无需新产生子）。
+  ⚠ **本条不改变本卡的 status/effective**：本卡（一般 N，(1)(2)(3)）仍是
+  physical-argument，本条只是把（a）里"N≥5 起失败"的**计数细节**（差多少、
+  第一次出现在哪个 N）精确记录，不构成新的证明或推进。
 author: curator
 created: "2026-09-12"

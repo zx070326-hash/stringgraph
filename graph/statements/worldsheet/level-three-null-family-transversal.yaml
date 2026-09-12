@@ -1,0 +1,142 @@
+id: worldsheet.level-three-null-family-transversal
+kind: proposition
+title: 在 (rung j, level 3) 片上 Type-1（L₋₁ 像）与 Type-2（𝒟₂ 像）两族除零外横截——反对称化 α₋₂α₋₁ 系数分离，纯振子代数，D 不出现
+statement: |
+  【设定】记号沿用 worldsheet.ocq-null-state-two-families（动量塔 T(a;b)、Sugawara L_m、
+  𝒟₂ := 2L₋₂ + 3L₋₁²）与 worldsheet.ddf-light-cone-frame 的记号 η、a、b（(F1) η_μ²=1，
+  (F2) η(b,b)=0，(F3) η(b,a)=1，本卡只用这三条，不需要标架的其余五条）。系数环 K 是域、
+  ℚ-代数。对整数 j，记 p_j := towerMomentum(a,b,j)（rung j 的重标度动量），
+  towerModeVec η a b ε n 是极化模 A_ε(n)（沿偏振 ε 的第 n 个振子模，作用在塔上的线性映射；
+  A_ε(1) 记号里的 1 与 towerModeVec 的第三个参数对齐）。取 j 处的**一维层一种子**
+  oneSeed(j,e) := (e·α₋₁)|0;p_j⟩（e : Fin D → K 是任一"偏振"）。
+
+  【断言】设 hη、hbb : η(b,b)=0、hba : η(b,a)=1。设 φ ∈ towerBigrade(j,2)（level-2 向量，
+  rung j 任意）、e : Fin D → K 满足 e·p_j = 0（横向于该 rung 动量），且 p_j·p_j ≠ 0
+  （质壳非零，例如 j=−3 时 p₋₃·p₋₃ = −4，见 worldsheet.ddf-light-cone-frame 标架下的
+  质壳公式）。若
+
+      L₋₁φ + 𝒟₂(oneSeed(j,e)) = 0 ，
+
+  则 e = 0 且 φ = 0。
+
+  【机制，供理解，不是陈述的一部分】证明分离两族靠**反对称化的 α₋₂α₋₁ 系数**
+  x ↦ A_ε(2)A_δ(1)x − A_δ(2)A_ε(1)x（对 x 在片 (j,3) 上）而不是任何领头指标序：
+  L₋₁ 像的该张量形如 p⊗w + 2T（T 对称），反对称部分只依赖 w；𝒟₂ 像的该张量形如
+  5p⊗v + 6v⊗p，反对称部分不为零（系数 5 ≠ 6）。配合 α₋₃ 系数 A_ε(3) 消去 φ 的贡献
+  （两族的 A_ε(3) 分量恰好按已知比例关联，见下【本卡明确不断言】(c)），得到
+  (ε·p_j)(δ·e) = (δ·p_j)(ε·e) 对一切 ε,δ；取 ε := p_j 并用 p_j·p_j ≠ 0 得 e = 0，
+  再由 L₋₁ 在片 (j,2)→(j,3) 上单射（worldsheet.null-states-lower-bound-type-one 同一族
+  论证在此的特例，本卡不重复其证明，只用该单射性收尾）得 φ = 0。
+
+  【本卡明确不断言】
+  (a) **不假设 φ、oneSeed(j,e) 是准物理态**：本卡不要求 L_nφ=0（n≥1）或
+      L_n(oneSeed(j,e))=0（n≥2，后者对 oneSeed 是自动成立的代数事实，但本卡陈述本身
+      不使用这条自动性，只用它在证明内部）。断言纯粹关于振子代数上何时一个线性组合为零，
+      不涉及"落在 H_null 里"这一物理判定。
+  (b) **D 不出现**：陈述与证明都不使用 D 的具体值、不使用 D=26、不使用中心荷 c
+      （对易关系 [L_m,L_n] 的中心项在本证明用到的所有对易子里都是 m,n 使中心项为零的情形，
+      或中心项贡献被反对称化抵消，具体核对见配套推导 sources）。这与
+      worldsheet.ocq-null-state-two-families 断言 (2) 的 D=26 条件（那里 D=26 判定
+      𝒟₂ 像是否物理）是**互补的两步**：本卡判定两族像"是否重叠"，那张卡判定
+      𝒟₂ 像"是否物理"，两步都需要各自独立成立才能拼出零态计数。
+  (c) **不是任意 rung/level 通用**：本卡的机制对任何满足 p_j·p_j≠0 的 j 与 level 组合
+      (j,2)→(j,3) 成立（同一套振子代数），但陈述里的具体数字系数（3, 24, 2, 6/5 等）
+      是 level-3 反对角片专属的（level-4 起需要新的系数组合，量子力学上仍是同一机制，
+      但本卡不覆盖，那是 formal/TODO.md `noghost-pr8` 的内容）。
+  (d) **不断言三角性（领头指标序）路线的可行性**：恰恰相反，蓝图 §B‴.5 证明**没有**
+      (β,ω)-相容的领头指标序能分离两族（level 3 上 25 个领头指标被两族共同占满）；
+      本卡的反对称化系数分离法是**绕开**三角性路线的替代方案，不是对它的加强或修补。
+  (e) **不给出零态维数下界**：本卡只证"两族像除零外不相交"（横截性），维数下界
+      （dim(H_null ∩ V_3) ≥ dim Q_{−3,2} + (D−1)）是本卡与
+      worldsheet.level-two-null-state-requires-d26 的机制（Type-2 物理性）拼接后
+      的独立结论，见配套推导 gaps 与 worldsheet.ddf-spans-physical-states-level-three。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed
+  lean_file: StringFormal/NoGhost/LevelThreeCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean :: StringFormal.NoGhost.eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed
+      （本卡 formal.lean_decl，section Independence，第 456 行起；section 起于第 419 行）；
+      铺垫链：section ModeToolbox（第 148-224 行，towerModeVec_apply_towerLop、
+      towerModeVec_three_towerLop_neg_one、towerModeVec_three_descTwo 等，把模移过
+      Virasoro 生成元与移过 L₋₁/𝒟₂ 的换位公式）；section AntisymFunctional
+      （第 232-347 行，towerModeVec_two_one_towerLop_neg_one、
+      towerModeVec_two_one_towerLop_neg_one_sq、towerModeVec_two_one_descTwo，
+      即反对称化系数在两族上的求值）；section DescTwoCommute（第 356-412 行，
+      towerModeVec_one_descTwo、towerModeVec_two_descTwo，模与 𝒟₂ 的换位公式，
+      系数 2、6、10、12 均在此出现）；section OneSeed（第 95-140 行，oneSeed 及其
+      towerLop_one_apply_oneSeed = e·p_j、towerLop_apply_oneSeed_of_two_le）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-pr7，分支
+      agent/formalizer/b26-n34，formal/TODO.md 记为已完成，"`check_axioms` 全 `ok`"）。
+      **curator 未自行重跑 `lake build` / `check-axioms`**（本 worktree 无构建缓存），
+      结论基于直接读源码。
+
+      **类型类核实**：`eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed` 所在
+      `section Independence`（第 419 行起）声明
+      `variable {D}{K}[Field K][Algebra ℚ K]{η a b:Fin D→K}`——**不需要 CharZero、
+      不需要 LinearOrder**，比 le_finrank_towerNull_inf_towerBigrade_three 所在
+      section NullBoundThree（[Field K][CharZero K][Algebra ℚ K]）更弱的类型类环境，
+      与 D 不出现这一事实一致（本定理不涉及任何维数计数，只是振子代数里的一个消去论证）。
+
+      **逐字核对陈述**：定理签名 `(hη) (hbb) (hba) {j} {φ} (hφ : φ ∈ towerBigrade D K j 2)
+      {e} (he : dotVec η e (towerMomentum a b j) = 0) (hpp : dotVec η (towerMomentum a b j)
+      (towerMomentum a b j) ≠ 0) (hzero : towerLop η a b (-1) φ + descTwo η a b (oneSeed η j e)
+      = 0) : e = 0 ∧ φ = 0`——与本卡【断言】逐字一致。
+
+      **证明结构**（docstring 自述，逐字）：分三步。第 1 步用 `A_ε(3)` 消去 `φ` 的贡献，
+      得 `3·A_ε(2)φ` 与 `24·A_ε(1)e` 的一条线性关系（towerModeVec_three_towerLop_neg_one、
+      towerModeVec_three_descTwo）。第 2 步用反对称化 `A_ε(2)A_δ(1) − A_δ(2)A_ε(1)`
+      作用两次（对 (ε,δ) 与 (δ,ε)）并结合第 1 步与模的对易性
+      （towerModeVec_apply_towerModeVec_of_add_ne_zero），线性组合消去所有 φ 的贡献，
+      得 `18·[(ε·p_j)(δ·e) − (δ·p_j)(ε·e)]·|0;p_j⟩ = 0`；层真空非零（Finsupp.single_ne_zero）
+      与 `18 ≠ 0` 给 `(ε·p_j)(δ·e) = (δ·p_j)(ε·e)`。第 3 步取 `ε := p_j`、`δ := 第 i 个坐标`，
+      用 `hpp`（p_j·p_j≠0）与 `hη`（η_μ≠0）逐分量得 `e = 0`；代回 `hzero` 用
+      `towerLop_neg_one_injective`（L₋₁ 单射性，worldsheet.null-states-lower-bound-type-one
+      同一条底层引理）得 `φ = 0`。
+      **中心荷/D 为何不出现**：docstring 自述用到的换位公式
+      （`[L_m,L_{-1}]`、`[L_2,L_{-2}]` 等）里含中心项的只有
+      `towerModeVec_two_one_descTwo`/`towerModeVec_two_descTwo` 这类需要 `[L_2,L_{-2}]`
+      的地方，但 `𝒟₂ := 2L_{-2}+3L_{-1}²` 与反对称化的组合方式使得**中心项在两族的
+      对称/反对称分解里各自贡献一个与 φ、e 无关的标量倍数，恰好在消去 φ 贡献的线性组合
+      （18· 那条等式）里被约掉**——这是本卡与 worldsheet.ocq-null-state-two-families
+      断言 (2)（那里中心项 c-26 恰恰**没有**被约掉，是判定 D=26 的地方）在同一组
+      Virasoro 换位公式上的两种不同线性组合。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不讨论零态族之间的横截性，只断言整塔张成"
+    note: "不承载论证，只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, null-state, momentum-tower, formalized]
+notes: |
+  【查重】2026-09-12 跑 `uv run stringgraph search "transversal"`、`search "eq_zero_of_towerLop_neg_one_add_descTwo"`、
+  `search "antisym"`、`search "leading index"`，均无同内容命中（"transversal" 模糊命中
+  worldsheet.ddf-transversality-gives-local-finiteness 等既有卡，对象是"DDF 算子的横向性"，
+  与本卡"两族零态像的横截性"是完全不同的命题，仅字面相似）。
+
+  【为什么立卡：三角性路线在此被绕开，不是被加强】蓝图 §B‴.5（formal/BLUEPRINT-noghost.md
+  §B‴，formalizer 分支 agent/formalizer/blueprint-B-triple-prime）先指出领头指标序法
+  在 level 3 上必然撞车（25 个领头指标被 L₋₁ 族与 𝒟₂ 族共同占满，见
+  worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（三）】(i)），
+  再给出本卡的反对称化系数分离法作为替代。本卡承载**这条替代法本身**（可独立于
+  "为什么三角性不行"这一否定性论证被引用），与 worldsheet.ocq-null-state-two-families
+  的一般 N 手算骨架是姊妹但不同层级的卡（本卡是 formalized 的、level-3 专属的横截性
+  引理；那张卡是 physical-argument 的、一般 N 的两族构造）。
+
+  【与 worldsheet.null-states-lower-bound-type-one 的关系，不合并】那张卡断言 L₋₁ 单射
+  给出的**维数**下界（dim(H_null ∩ V_{N+1}) ≥ p_{D−1}(N)），本卡断言的是**横截性**
+  （两族像除零外不相交），是维数下界之外的独立信息——两者结合（L₋₁ 族的维数 + 横截性
+  + 𝒟₂ 族每个元素的物理性）才拼出 worldsheet.ddf-spans-physical-states-level-three
+  的完整维数下界，见该卡与其推导。本卡证明内部**调用**
+  worldsheet.null-states-lower-bound-type-one 的底层单射性引理
+  （`towerLop_neg_one_injective`，同一条 Lean 定理，位于 TypeOneFamily.lean），
+  这条边记在配套推导的 depends_on 里（inferred: false，见该文件）。
+
+  【本卡不是"transversality"这个词在 DDF 文献里的既有用法】本卡标题与陈述里的"横截"
+  指两个线性子空间（L₋₁ 像与 𝒟₂ 像）在振子代数上除零外无交，是本项目内部的组织方式，
+  文献（goddard-2008、gebert-nicolai-1995）不讨论这一具体命题，见 sources 的
+  goddard-2008 条 note。
+author: curator
+created: "2026-09-12"

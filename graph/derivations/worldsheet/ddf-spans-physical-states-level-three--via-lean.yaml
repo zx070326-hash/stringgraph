@@ -1,0 +1,129 @@
+id: worldsheet.ddf-spans-physical-states-level-three--via-lean
+target: worldsheet.ddf-spans-physical-states-level-three
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      标架对象 `F : DDFLightConeFrame η a b` 是本卡三条主定理
+      （`b26_three_of_D26`、`ddfSpans_bigrade_neg_three_three`，以及 h7 引用的
+      `le_finrank_towerNull_inf_towerBigrade_three`）的共同参数；证明体使用
+      `F.hη`、`F.trans`、`F.hba`、`F.frame.isotropic`，以及**关键的**
+      `F.dotVec_self_eq_two hD`（给出 a₀ = 1）。
+  - id: worldsheet.physical-slice-bounded-by-transverse-count
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`finrank_towerPhys_inf_towerBigrade_le` 作为
+      `b26_three_of_D26` 的 `h1`，给出 dim(H_phys ⊓ V_3) ≤ p_{D−1}(3)，对一切 D、
+      一切 N 成立（该卡断言本身）。
+  - id: worldsheet.quasi-physical-slice-dimension
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`le_finrank_towerSeed` 作为 `b26_three_of_D26`
+      的 `h6`（`le_finrank_towerSeed (K := K) hD F (-((3:ℕ):ℤ)) 2`），给出
+      dim Q_{−3,2} ≥ p_{D−1}(2)。这是任务书未点名、curator 直接读证明体确认的
+      额外依赖（该卡断言"任意 rung/level 的准物理子空间维数下界"，此处用在 rung=−3,
+      level=2 的具体实例）。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl**：本推导调用的是 `finrank_ddfSpan_inf_towerBigrade`
+      （`SliceDim.lean`，`b26_three_of_D26` 结尾 `rw [finrank_ddfSpan_inf_towerBigrade
+      F.hη F.frame.isotropic F.hba F.trans 3]`），不是该卡 formal.lean_decl
+      `ddf_gram_diagonal`。与 worldsheet.ddf-spans-physical-states-level-two--via-lean
+      同一记法，给 dim D_3 = p_{D−2}(3)。
+  - id: math.level-three-partition-difference
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`levelThree_count_identity` 作为 `b26_three_of_D26`
+      的 `h3`，给出 p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)。
+  - id: worldsheet.level-three-null-family-transversal
+    inferred: false
+    note: |
+      **不是逐字调用同一条 decl，是其所在同一 section 的姊妹定理，且核心机制被字面
+      调用**：本卡 `h7`（`b26_three_of_D26` 内联证明块）字面等于
+      `le_finrank_towerNull_inf_towerBigrade_three`（同文件 section NullBoundThree，
+      紧邻横截性引理所在的 section Independence），其证明体内部构造的
+      `typeTwoAugRaw_injective` 直接调用横截性引理
+      `eq_zero_of_towerLop_neg_one_add_descTwo_oneSeed`（即本依赖目标卡的
+      formal.lean_decl）来证明 Type-1⊕Type-2 组合映射单射——这是本卡维数下界
+      h7 的核心步骤，非外围工具。
+  - id: worldsheet.null-states-lower-bound-type-one
+    inferred: true
+    note: |
+      **不是字面调用链，是共享底层引理的姊妹机制**：`le_finrank_towerNull_inf_towerBigrade_three`
+      不调用该卡 formal.lean_decl `le_finrank_towerNull_inf_towerBigrade_succ`；两者
+      各自独立调用同一条更底层的铺垫引理
+      `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`
+      （NullSeedsTwo.lean 第 476 行）来处理各自的 Type-1 半。任务书要求把"level-3 的
+      Type-1 族 = L₋₁ 作用于 Q_{−3,2}"这一物理对应关系挂到该卡，本卡据此照办，但因为
+      不是可核实的字面调用链，标 `inferred: true`（与
+      worldsheet.level-three-null-family-transversal--via-lean 里对同一条底层引理的
+      **字面**调用——`towerLop_neg_one_injective`——标 `inferred: false` 形成对照，
+      理由是那里的引理被直接 `exact`，这里是"两条 h7/该卡头牌定理各自独立调用同一
+      更深层引理"的结构类比，不是调用关系）。
+  - id: worldsheet.level-two-null-state-requires-d26
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl，经由一般化引理**：h7 内部的 Type-2 半调用
+      本文件的 `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`（任意 rung j、
+      level N 满足 j+N=−2 的版本），其证明体直接调用 `descTwo_mem_towerNullSubmodule`
+      （NullSeedsTwo.lean 的一般充分性引理：`hD26 : (D:R)=26` + `L₀y=−y` ⟹
+      `𝒟₂y ∈ towerNullSubmodule`）——这条引理正是该卡 sources.loc 已登记的 "descTwo_mem_towerNullSubmodule"
+      （该卡的铺垫链之一，非其 headline `descTwo_mem_towerPhysSubmodule_iff`）。
+      本卡消费的是这条被登记的铺垫引理本身，故 `inferred: false`。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean :: StringFormal.NoGhost.{
+        b26_three_of_D26 (第 1103 行), ddfSpans_bigrade_neg_three_three (第 1128 行),
+        le_finrank_towerNull_inf_towerBigrade_three (section NullBoundThree),
+        descTwo_mem_towerNullSubmodule_of_mem_towerBigrade}（目标卡 formal.lean_decl
+      是 `ddfSpans_bigrade_neg_three_three`）；内部纯计数引理 card_conjFree_three_le、
+      card_ddfLevel_three_ge、card_conjFree_two_ge（section ConjFreeThree，第 1010-1064
+      行区域）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-pr7）。**curator 未自行重跑
+      `lake build` 与 `check-axioms`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      **类型类核实**：`b26_three_of_D26`/`ddfSpans_bigrade_neg_three_three` 所在
+      section 声明 `variable {D:ℕ}{K:Type*}[Field K][LinearOrder K][IsStrictOrderedRing K]
+      [Algebra ℚ K]{η a b:Fin D→K}`——与目标卡【设定】的 K 逐字一致，与
+      worldsheet.ddf-spans-physical-states-level-two--via-lean 相同的类型类环境。
+      `le_finrank_towerNull_inf_towerBigrade_three` 所在 section NullBoundThree 只需
+      `[Field K][CharZero K][Algebra ℚ K]`（无序结构，序只在最终 `b26_three_of_D26`
+      使用处，经上面的合并才引入）。
+summary: |
+  七输入组装（逐层对应 LevelThreeCount.lean 的 section Closing）：
+
+  **h1-h6（D-无关的维数不等式与计数恒等式）**：
+  h1 = dim H_3 ≤ p_{D−1}(3)（worldsheet.physical-slice-bounded-by-transverse-count）；
+  h2/h4/h5 = 内部占据数上下界（不建边）；
+  h3 = p_{D−1}(3) = p_{D−2}(3) + p_{D−1}(2) + (D−1)（math.level-three-partition-difference）；
+  h6 = dim Q_{−3,2} ≥ p_{D−1}(2)（worldsheet.quasi-physical-slice-dimension）。
+
+  **h7（唯一用到 D=26 的一步）**：`le_finrank_towerNull_inf_towerBigrade_three` 给
+  dim(H_null ⊓ V_3) ≥ dim Q_{−3,2} + (D−1)，构造 Type-1⊕Type-2 组合映射
+  （定义域 towerSeed(−3,2) × ker(transFunctional(−3))），其单射性由
+  worldsheet.level-three-null-family-transversal 的横截性定理给出，其像落在
+  H_null ⊓ V_3 里的两半分别由（Type-1）NullSeedsTwo.lean 的共享铺垫引理与
+  （Type-2）本文件的 `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+  （经 worldsheet.level-two-null-state-requires-d26 已登记的一般充分性引理
+  `descTwo_mem_towerNullSubmodule`，D=26 在此进入）给出。
+
+  **收尾**：七项经 `omega` 拼成 `b26_three_of_D26`，再经 D-无关、N-无关的纯逻辑
+  翻译引理 `ddfSpansOn_bigrade_of_b26`（不建 depends_on 边）得目标卡断言
+  `ddfSpans_bigrade_neg_three_three`。
+gaps:
+  - "**内部三条占据数计数引理不建 depends_on 边**：`card_conjFree_three_le`、`card_ddfLevel_three_ge`、`card_conjFree_two_ge` 是 LevelThreeCount.lean 本文件内部的纯计数引理，不对应图上任何既有节点（math.level-three-partition-difference 只承载三者拼接后的 Pascal 恒等式本身）；本推导把它们当作自身证明内容的一部分。"
+  - "**尖锐性未证，登记为未来工作**：本推导只证 D=26 ⟹ B26 3 ⟹ DDFSpansOn(V_3)，不证反方向（D≠26 时 ¬B26 3）；与 worldsheet.ddf-spans-physical-states-level-two 同样未解决。"
+  - "**N=4 及以上未覆盖**：formal/TODO.md `noghost-pr8`——N=4 横截性已手证但计数未完成，估计 500-700 行 Lean；一般 N（N≥5 起两族像重叠、N≥12 起需要新奇异向量）完全未动，不受本次工作影响。"
+  - "**curator 未自行跑 `lake build` 与 `check-axioms`**：依据文件所在分支 agent/formalizer/b26-n34（noghost-pr7），由 lead 合入 main 前应验证。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  curator，2026-09-12，level3-wire。
+author: curator
+created: "2026-09-12"

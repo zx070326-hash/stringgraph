@@ -364,7 +364,35 @@ gaps:
     ddf-spanning-rank-inequality notes【2026-09-12（四）】一段记录了同一批 Lean 结果
     与本卡目标的逐 N 精确对账，此处不重复。**本追记不改变任何判定**：本推导
     `status: rigorous` 不变；目标 worldsheet.no-ghost-theorem-v4 的 effective 不因本追记
-    而变化；(B-26) **仍不关闭**。"
+    而变化；(B-26) **仍不关闭**。
+
+    **【2026-09-12 六追记，curator，分支 agent/curator/level3-wire：`B26 3`（N = 3 秩不等式）
+    现由 Lean 机检关闭，靠一条绕开三角性的新机制（非上一段【五追记】的 Type-1-only
+    路线的简单延伸），(B-26) 本身（∀N 版本）仍不关闭。本段之后一字未改上文，只追加，
+    status/sources/summary/论证步骤一字未动。】**
+    formal/StringFormal/NoGhost/LevelThreeCount.lean（noghost-pr7，无 sorry）证出
+    `b26_three_of_D26 : D = 26 ⟹ B26 3`。**与上一段【五追记】的 Type-1-only 路线不同**：
+    `B26 3` 需要 Type-1（L₋₁ 像）与 Type-2（𝒟₂ 像）两族**一起**给出零态维数下界
+    （`le_finrank_towerNull_inf_towerBigrade_three`），因为单靠 Type-1 族（PR6′，
+    D-无关）在 N=3 处只给 `dim Z_3 ≥ p_{D−1}(2)`，比目标 `p_{D−1}(3)−p_{D−2}(3)`
+    少 `D−1`（恰是 Type-2 族的贡献，与【四追记】N=2 处「缺口为 1，恰是
+    𝒟₂|0;p_{−2}⟩」同一模式在 N=3 的重复）。两族**同时**贡献要求证明两族像除零外
+    不相交（横截性）——上文【三追记】(a) 段裁决为死路的三角性/领头指标序法在
+    N=3 处确实撞车（蓝图 §B‴.5：level 3 上 25 个领头指标被两族共同占满），
+    但本次工作**没有**走那条路，而是新证一条反对称化 α₋₂α₋₁ 系数分离引理
+    （图上 worldsheet.level-three-null-family-transversal，formalized）绕开三角性
+    要求，独立完成横截性证明。图上新卡 **worldsheet.ddf-spans-physical-states-level-three**
+    （formalized）与既有 worldsheet.ddf-spanning-rank-inequality 的新 notes
+    【2026-09-12（五）】记录了这一步的细节。
+    ⚠ **这不关闭 (B-26)**：上文【三追记】(iv) 段的重叠问题只在 N ≥ 5 出现，本次工作
+    连同【四追记】的 N=2 一起把 N ≤ 3（一切 rung，D = 26）机检闭合，但一般 N 的
+    `∀N, B26 N` 仍是零证据的开放猜想；`B26 4`（N=4）的横截性已用同一套反对称化机制
+    手证，但计数尚未完成（formal/TODO.md `noghost-pr8`，估计约 500-700 行 Lean），
+    N ≥ 5 起两族像的重叠问题（【三追记】(iv)）、N ≥ 12 起需要新奇异向量的问题
+    （worldsheet.c26-degenerate-weights-pentagonal notes、
+    worldsheet.ocq-null-state-two-families 断言 (2)(3) 的 k-奇分类）完全不受本次
+    工作影响。**本追记不改变任何判定**：本推导 `status: rigorous` 不变；目标
+    worldsheet.no-ghost-theorem-v4 的 effective 不因本追记而变化；(B-26) **仍不关闭**。"
   - |
     【2026-09-11（lean-wire-13）新增，curator】**第 (1b) 步用到的领头项
     A^i_{−n}|0;k⟩ = α^i_{−n}|0;k−n k_0⟩ + … 需要一条本推导没写出的假设：(T′) ε_i·k = 0**

@@ -283,5 +283,26 @@ notes: |
   worldsheet.ddf-spanning-rank-inequality 对一般 N 的开放性；本条只是把该断点
   “此前认为最值得先试的绕法已被试过且失败”这一事实记入本卡，不构成对
   worldsheet.ddf-spanning-rank-inequality 本身的任何推进。
+
+  【2026-09-12（四）：N ≤ 3 现已关闭，靠反对称化系数分离法（非三角性）；N ≥ 4
+  仍完全开放（curator，分支 agent/curator/level3-wire；只加 notes，本卡 status/
+  effective 不变，本卡仍无推导）】
+  formal/StringFormal/NoGhost/LevelThreeCount.lean（noghost-pr7，无 sorry）把 N = 3
+  也关闭了：`ddfSpans_bigrade_neg_three_three` 给出 D = 26 时 `DDFSpansOn` 在
+  `towerBigrade(−3,3)` 上成立（图上 worldsheet.ddf-spans-physical-states-level-three，
+  formalized）。**用的不是**上面 (a)(b) 段裁决为死路的三角性/领头指标序法，而是
+  一条新的反对称化 α₋₂α₋₁ 系数分离法（worldsheet.level-three-null-family-transversal，
+  formalized），绕开了 §B‴.5/§B‴.8 证明撞车的那条路线（level 3 上 25 个领头指标被
+  两族共同占满这一事实依旧成立，只是这里不需要靠领头指标分离两族）。
+  结合 `ddfSpansOn_towerLevelLE_of_antidiagonal`（"能级 ≤ N 整块"归约到反对角单片
+  的拼装引理）：**N ≤ 3 整块（一切 rung，D = 26）现已由已 formalized 的结果闭合**。
+  ⚠ **N ≥ 4 完全未动**：反对称化系数分离法本身对任意 rung/level 组合原则上可类比
+  （worldsheet.level-three-null-family-transversal 明确不断言 (c)），但 N = 4 起需要
+  新的具体系数组合，是 formal/TODO.md `noghost-pr8` 记录的开放工作（横截性已手证，
+  计数未完成，约 500-700 行 Lean）；worldsheet.ddf-spanning-rank-inequality 与
+  worldsheet.ocq-null-state-two-families notes 记录的一般 N 障碍（N ≥ 5 起两族像
+  重叠、N ≥ 12 起需要新奇异向量）完全不受 N ≤ 3 的关闭影响。**本卡 effective 依旧
+  open**：本卡仍无推导，链条现状不变，唯一未证环节 worldsheet.ddf-spanning-rank-inequality
+  依旧对一般 N 开放，只是 N ≤ 3 这三个具体实例现在都有了独立的机检证据。
 author: curator
 created: "2026-09-11"

@@ -1,0 +1,49 @@
+id: math.level-three-partition-difference--via-lean
+target: math.level-three-partition-difference
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelThreeCount.lean :: StringFormal.NoGhost.levelThree_count_identity
+      （本卡 target 的 formal.lean_decl，section Closing，第 1080 行起）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（noghost-pr7）。**curator 未自行运行
+      `lake build` / `check-axioms`**；合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+
+      `depends_on: []`：本恒等式是纯自然数算术（Pascal 递推的一个代入实例），不依赖
+      任何外部图节点——与 math.level-two-partition-difference--via-lean 同一先例。
+
+      **逐字证明**：
+      ```
+      theorem levelThree_count_identity (hD : 2 ≤ D) :
+          (D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3
+            = ((D - 2) + (D - 2) * (D - 2) + Nat.choose D 3) + ((D - 1) + Nat.choose D 2)
+              + (D - 1) := by
+        obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
+        have h : Nat.choose (m + 3) 3 = Nat.choose (m + 2) 2 + Nat.choose (m + 2) 3 :=
+          Nat.choose_succ_succ (m + 2) 2
+        simp only [show m + 2 - 1 = m + 1 from rfl, show m + 2 - 2 = m from rfl,
+          show m + 2 + 1 = m + 3 from rfl] at *
+        omega  -- 结合 h 与 ring 层面的展开收尾（Nat.choose_one_right 等）
+      ```
+      （上述转写自 docstring 与源码逐字复述，供审计；具体 `simp`/`omega` 拆分以源码为准，
+      核心步骤是 `Nat.choose_succ_succ (m+2) 2 : C(m+3,3) = C(m+2,2) + C(m+2,3)`，
+      即 Pascal 恒等式本身，代入 D = m+2 后两侧展开相等。）
+summary: |
+  纯自然数算术：设 D = m + 2（hD : 2 ≤ D 保证 m 存在）。核心步骤是二项式系数 Pascal
+  递推 `Nat.choose_succ_succ (m+2) 2 : C(m+3,3) = C(m+2,2) + C(m+2,3)`，代入
+  D−1 = m+1、D−2 = m、D+1 = m+3 后，两侧按 `(D−1)+(D−1)²+C(D+1,3)` 与
+  `[(D−2)+(D−2)²+C(D,3)] + [(D−1)+C(D,2)] + (D−1)` 展开，`ring`/`omega` 收尾确认
+  相等。不使用任何弦论对象。
+gaps:
+  - "两条单侧公式 p_{D−1}(3)=(D−1)+(D−1)²+C(D+1,3)、p_{D−2}(3)=(D−2)+(D−2)²+C(D,3) 本身未被单独证成等式（Lean 侧只有对应的单侧不等式 card_conjFree_three_le / card_ddfLevel_three_ge，见目标卡 sources note）；本推导只证两者的差恒等式，与 math.level-two-partition-difference--via-lean 同一情形。"
+  - "curator 未自行运行 lake build 与 check-axioms；结论基于直接读源码，合并前应由 lead 验证。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  本推导与 math.level-two-partition-difference--via-lean 同一模式（depends_on: []，
+  纯 Nat 算术），是同一恒等式链在 N=3 的实例。
+  curator，2026-09-12，level3-wire。
+author: curator
+created: "2026-09-12"
