@@ -1,0 +1,137 @@
+id: math.level-four-partition-difference
+kind: proposition
+title: 四能级"不含一个方向"光锥占据数计数差恒等式 p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)——第三条支持"计数看不见 26"的 Pascal 恒等式
+statement: |
+  这是一条**纯组合恒等式**，不涉及弦论的任何算子、度规或质壳条件；D 只是一个自然数参数，
+  记号沿用 math.level-two-partition-difference、math.level-three-partition-difference
+  （p_m(N) := 把振子能级 N 分配给 m 个可数无穷模态槽的占据数个数）。
+
+  【断言：占据数的显式计数与差】设 D ≥ 2。则
+
+    p_{D−1}(4) = (D−1) + (D−1)² + C(D,2) + (D−1)·C(D,2) + C(D+2,4) ，
+    p_{D−2}(4) = (D−2) + (D−2)² + C(D−1,2) + (D−2)·C(D−1,2) + C(D+1,4) ，
+
+  （level-4 占据函数唯一分成五形：单模态占据 4（贡献 m 个）、一模态占据 3 与另一模态
+  占据 1（贡献 m² 个）、两个不同模态各占据 2（贡献 C(m,2) 个）、一模态占据 2 与另两个
+  不同模态各占据 1（贡献 m·C(m,2) 个）、四个不同模态各占据 1（贡献 C(m+3,4) 个），
+  m 取 D−1 或 D−2；五种情形穷尽且不相交，由"模数计数不变量"
+  （modeCount，把五形的模数轮廓 (0,0,0,1)(1,0,1,0)(0,2,0,0)(2,1,0,0)(4,0,0,0) 两两分开）
+  分类给出，是 Finsupp.oscWeight 在能级 4 的完整分类）。故
+
+    **p_{D−1}(4) = p_{D−2}(4) + p_{D−1}(3) + p_{D−1}(2)** ，
+
+  其中 p_{D−1}(3) = (D−1) + (D−1)² + C(D+1,3)（math.level-three-partition-difference）、
+  p_{D−1}(2) = (D−1) + C(D,2)（math.level-two-partition-difference）取自同一恒等式链
+  的上两级。展开形式（Pascal 恒等式，对一切 D ≥ 2 成立，由两次
+  C(m+2,2) = C(m+1,1)+C(m+1,2) 与 C(m+4,4) = C(m+3,3)+C(m+3,4) 型 Pascal 递推
+  加自然数环算术拼成）：
+
+    (D−1)+(D−1)²+C(D,2)+(D−1)·C(D,2)+C(D+2,4)
+      =  [(D−2)+(D−2)²+C(D−1,2)+(D−2)·C(D−1,2)+C(D+1,4)]
+       + [(D−1)+(D−1)²+C(D+1,3)]
+       + [(D−1)+C(D,2)] 。
+
+  在 D = 26 处：29575 = 25650 + 3575 + 350。
+
+  【本节点明确不断言】
+  (a) **不断言这与任何弦论对象的联系**：p_{D−1}(4)、p_{D−2}(4) 在本节点里只是显式计数
+      公式的值，"它们分别是 dim(H_phys ∩ V_4) 的上界 / dim(D(Ε) ∩ V_4)"是弦论侧节点
+      （worldsheet.physical-slice-bounded-by-transverse-count、
+      worldsheet.transverse-ddf-fock-gram-matrix）各自独立证明的事，本节点不重复、
+      不引用它们（与 math.level-two/-three-partition-difference 明确不断言 (a) 同型）。
+  (b) **不断言一般 N 的类比**：一般 N 的差 p_{D−1}(N) − p_{D−2}(N) 需要一般的配分函数
+      生成函数论证，本节点只做 N = 4 这一个特例的初等展开；且从 N=5 起该恒等式本身
+      **不再精确成立**（两族计数出现 Euler 五边形数超额，见
+      worldsheet.ddf-spanning-rank-inequality notes【2026-09-12（五）】），本节点不
+      涉及、不预示这一断裂。
+  (c) **不断言 D ≤ 1 的情形**：与 math.level-two/-three-partition-difference (c) 同型，
+      C(D,2)、C(D+2,4) 等的自然数减法需要 D ≥ 2 才良定义。
+  (d) **不是一个新的组合学结果**：这是两次二项式系数 Pascal 递推
+      C(m+2,2)=C(m+1,1)+C(m+1,2)、C(m+4,4)=C(m+3,3)+C(m+3,4)（m := D−2）的直接代入实例，
+      价值在于把它显式写成弦论计数需要的形状。
+  (e) **不断言两条单侧公式各自被独立证明为等式**：与 math.level-two/-three-partition-difference
+      同型，Lean 侧真正证明的是**差**恒等式本身，两条单侧显式公式是记法铺垫，见 sources note。
+uses_conventions: []
+formal:
+  lean_decl: StringFormal.NoGhost.levelFour_count_identity
+  lean_file: StringFormal/NoGhost/LevelFourCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFourCount.lean :: StringFormal.NoGhost.levelFour_count_identity
+      （本卡 formal.lean_decl，第 1031 行起）；分类引理
+      `Finsupp.oscWeight_eq_four_cases`（能级 4 的任意占据函数唯一分成五类，靠
+      `modeCount`——模数计数不变量——把五形的模数轮廓两两分开，文件头 docstring 逐字
+      "the combinatorial content of `p_m(4)`"）是本卡两条单侧计数公式共同的底层依据。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator 未自行运行 `lake build` / `check-axioms`**（本 worktree 无构建缓存）；
+      结论基于直接读源码，未跑编译器验证；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      **逐字核对**（第 1031-1037 行）：
+      ```
+      theorem levelFour_count_identity (hD : 2 ≤ D) :
+          (D - 1) + (D - 1) * (D - 1) + Nat.choose D 2 + (D - 1) * Nat.choose D 2
+              + Nat.choose (D + 2) 4
+            = ((D - 2) + (D - 2) * (D - 2) + Nat.choose (D - 1) 2 + (D - 2) * Nat.choose (D - 1) 2
+                + Nat.choose (D + 1) 4)
+              + ((D - 1) + (D - 1) * (D - 1) + Nat.choose (D + 1) 3)
+              + ((D - 1) + Nat.choose D 2)
+      ```
+      ——与本卡【断言】的等式逐字一致（`Nat.choose D 2` = C(D,2)、`Nat.choose (D+2) 4` =
+      C(D+2,4) 等）。证明体（第 1038-1046 行，逐字核对）：
+      `obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩`；
+      `hp2 : Nat.choose (m+2) 2 = Nat.choose (m+1) 1 + Nat.choose (m+1) 2`
+      （`Nat.choose_succ_succ (m+1) 1`）；
+      `hp4 : Nat.choose (m+4) 4 = Nat.choose (m+3) 3 + Nat.choose (m+3) 4`
+      （`Nat.choose_succ_succ (m+3) 3`）；`simp only` 化简下标算术后 `rw [hp2, hp4,
+      Nat.choose_one_right]; ring` 收尾。**不用任何弦论对象**，与
+      math.level-two/-three-partition-difference 同一模式（Pascal 递推 + 自然数算术），
+      只是多两层递推（C(D,2) 与 C(D+2,4) 两处）。
+
+      两条单侧计数公式 p_{D−1}(4)=…、p_{D−2}(4)=… 本身**未**各自被单独证成等式：
+      Lean 侧的 `card_conjFree_four_le`（上界）与 `card_ddfLevel_four_ge`（下界）分别
+      只给单侧不等式（与 N=2、N=3 情形同型），`levelFour_count_identity` 直接在自然数
+      算术层面证出两个等式的**差**。
+
+      **数值核对**：D=26 时代入得 29575 = 25650 + 3575 + 350（本卡 statement 段已列出）。
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/LevelFourCount.lean，文件头 docstring 第 (4) 块"
+    note: "文件头模块文档记录本引理是「第三条支持计数看不见 26 的 Pascal 恒等式」，佐证本卡对应工作已在仓库主线合入。"
+tags: [combinatorics, number-theory, binomial-coefficients, partitions, formalized, math-input]
+notes: |
+  【为什么立卡】formal/StringFormal/NoGhost/LevelFourCount.lean 的
+  `levelFour_count_identity` 与 math.level-two/-three-partition-difference 的两条
+  姊妹恒等式同一模式，是"计数一步永远看不见 26"的**第三条独立证据**：level-4 处该
+  恒等式对一切 D 成立，D=26 只是代入的一个特殊值（29575 = 25650 + 3575 + 350），
+  恒等式本身不依赖 D 的取值。
+
+  【查重】2026-09-12 跑 `uv run stringgraph search "level-four-partition"`、
+  `search "level four partition"`、`search levelFour_count_identity` 均无命中；
+  `search "partition difference"` 命中 math.level-two/-three-partition-difference
+  （姊妹卡，不重复，见下）。
+
+  【与 math.level-two/-three-partition-difference 的关系，不合并】三卡是同一恒等式链
+  （p_{D−1}(N) 的 Pascal 展开）在 N=2、N=3、N=4 的三个独立实例，按【一个节点一个命题】
+  原则不合并——各自的具体系数不同，各自被 worldsheet 侧不同的 N 片
+  （level-two/-three/-four DDF-spans 卡）独立消费。本卡陈述里引用
+  math.level-three-partition-difference、math.level-two-partition-difference 的
+  p_{D−1}(3)、p_{D−1}(2) 记法（差恒等式右端的两项），这是记法引用，不建
+  `uses`/`depends_on` 边——按 graph/CLAUDE.md 与两张姊妹卡既有先例，纯数学卡之间
+  如需要建正式依赖边，留给配套推导判断；本卡证明本身（见 sources 的 Lean 逐字核对）
+  是两步 Pascal 恒等式的直接拼接，不实际调用 `levelThree_count_identity` 或
+  `levelTwo_count_identity` 作为前提（`levelFour_count_identity` 的证明独立完整，
+  只是数值上恰好把 p_{D−1}(3)、p_{D−1}(2) 的展开式包含在右端），故不建边，配套推导
+  `depends_on: []`（与两张姊妹卡的配套推导同一先例）。
+
+  【本卡不 depends_on 或 uses 任何 worldsheet 节点】同 math.level-two/-three-partition-difference
+  明确不断言 (a) 的边界，见【本节点明确不断言】(a)。
+
+  【本卡是这条 Pascal 恒等式链目前的最后一环，N≥5 起断裂】与两张姊妹卡不同的是，
+  本卡明确记录（明确不断言 (b)）从 N=5 起同型恒等式不再精确成立——这条断裂正是
+  worldsheet.ddf-spanning-rank-inequality 与 worldsheet.ocq-null-state-two-families
+  两张 notes 反复强调的"Euler 五边形数障碍"的计数侧印证，本卡只记录事实、不给出
+  N≥5 的替代恒等式（那是完全不同的未来工作）。
+author: curator
+created: "2026-09-12"
