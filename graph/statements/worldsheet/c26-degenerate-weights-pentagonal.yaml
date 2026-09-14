@@ -153,5 +153,23 @@ notes: |
   ——本卡的 s 分类本身不蕴含、也不由"两族计数何时开始差 1"推出。
   ⚠ 本条不改变本卡的 status/effective，仍是本卡既有 status（依赖
   worldsheet.kac-determinant-v2 标 inferred，见上）。
+
+  【2026-09-14：N=5 张成片的关闭不经过本卡——本卡承载"结构/下界侧"，那片消费的是
+  纯计数的"上界侧"（lead，N=5 wire；只加 notes，本卡 status/effective 不变）】
+  worldsheet.ddf-spans-physical-states-level-five（N=5 片，formalized，2026-09-14）
+  关闭时用到的两族零态**重叠上界** dim ker T₅ ≤ 1
+  （worldsheet.level-five-null-family-kernel-bound）是一条**纯计数**事实（秩-零化度 +
+  κ₅=1 的 Pascal 恒等式 math.level-five-partition-difference），对一切 D ≥ 2、一切 rung
+  成立，**与 c=26、与 Kac 权退化、与本卡断言 (1)(2)(3) 的五边形数判据无关**（该核界卡
+  明确不断言 (b) 记"D 不出现"）。**本卡不是那片的 depends_on 依赖**：那片的边挂
+  worldsheet.level-five-null-family-kernel-bound 与 math.level-five-partition-difference，
+  均与 c=26 无关。本卡承载的是同一现象的**另一侧**——"为什么偏偏在五边形数层出现退化"
+  的**代数原因**（c=26 处 Kac 权退化 ⟺ 广义五边形数），以及"哪些层需要**新**奇异向量
+  产生子"这一结构判据（断言 (3)：k 奇 s=1,2,12,15,…；k 偶 s=5,7,22,26,…）。两侧的接触点
+  只在描述层面：断言 (3) 的 k-偶层 s=5（−q⁵ 项，k=2）正是 N=5 那"至多一维重叠"的算术
+  来源，但 **N=5 片的关闭只消费重叠的上界（计数），不消费本卡的退化判据**。
+  ⇒ 读者不要把"五边形数在 c=26 退化"（本卡，结构/下界侧，physical-argument）误当作
+  N=5 张成片关闭的依据——那是纯计数的上界侧，formalized，另有承载卡。本条不改本卡
+  status/effective。
 author: curator
 created: "2026-09-12"

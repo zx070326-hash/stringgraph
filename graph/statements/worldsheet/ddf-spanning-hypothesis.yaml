@@ -323,5 +323,33 @@ notes: |
   奇异向量）完全不受 N ≤ 4 的关闭影响。**本卡 effective 依旧 open**：本卡仍无推导，
   链条现状不变，唯一未证环节 worldsheet.ddf-spanning-rank-inequality 依旧对一般 N
   开放，只是 N ≤ 4 这四个具体实例现在都有了独立的机检证据。
+
+  【2026-09-14：N ≤ 5 现已关闭（单片＋整块）；关闭机制从"横截"变为"两个 +1 相消"，
+  未动前沿由 N ≥ 5 订正为 N ≥ 6（lead，N=5 wire；只加 notes，本卡 status/effective
+  不变，本卡仍无推导）】
+  formal/StringFormal/NoGhost/LevelFiveCount.lean（无 sorry）把 N = 5 也关闭了：
+  `ddfSpans_bigrade_neg_five_five (hD : 2 ≤ D)` 给出 D = 26 时 `DDFSpansOn` 在
+  `towerBigrade(−5,5)` 上成立（图上 worldsheet.ddf-spans-physical-states-level-five，
+  formalized；门槛回落到 2 ≤ D，因 N=5 靠计数上界而非需要横向单位偏振的横截性论证）。
+  结合 `ddfSpansOn_towerLevelLE_of_antidiagonal`：**N ≤ 5 整块（一切 rung，D = 26）现已
+  由已 formalized 的结果闭合**。
+  **对上文各条"N ≥ 5 障碍"记述的订正**：上面【2026-09-12（三）(iv)】【（四）】【（五）】
+  多处把"N ≥ 5 起两族零态像重叠是 Euler 五边形数障碍"记作一个笼统的开放断点。N=5
+  这一片现已表明该"障碍"在 N=5 是一个**已定位、且已关闭**的一维修正，不是拦路石：
+  (i) 重叠维数被纯计数上界 dim ker T₅ ≤ 1 卡死（worldsheet.level-five-null-family-
+      kernel-bound，秩-零化度 + κ₅=1，**与 D 无关、与 c=26 无关、与 Kac 退化无关**）；
+  (ii) 计数恒等式左端多出的那个 +1（κ₅=1，Euler 五边形数 −q⁵）与重叠多出的 +1 在
+      拼装 (B26 5) 时**恰好相消**（math.level-five-partition-difference），故 N=5 与
+      N ≤ 4 一样干净关闭，只是关闭机制从"两族横截（ker=0）"变为"两个 +1 相消（ker≤1）"。
+  ⚠ **真正未动的前沿现在是 N ≥ 6**（非 N ≥ 5）：worldsheet.ddf-spanning-rank-inequality
+  notes (iv)【2026-09-14】记录，N ≥ 6 处粗计数上界已宽于目标（κ_6 = 26 > τ_6 = 25），
+  需要把种子条件用进核的估计，可能才需 BGG / Feigin–Fuks 一类嵌入结构结果；而
+  **两族之外还需要新奇异向量族的门槛是 N ≥ 12**（s=12,15 的 k-奇五边形数，
+  worldsheet.c26-degenerate-weights-pentagonal 断言 (3) 与 worldsheet.ocq-null-state-
+  two-families notes【2026-09-14 §B⁗.8】），N=5 到 N=11 两族已知重叠但**无需**新产生子。
+  故上文并提的"N ≥ 5 重叠 / N ≥ 12 新产生子"里，"N ≥ 5"应订正为"N = 5 已关闭、
+  N ≥ 6 开放"，"N ≥ 12 新产生子"不变。**本卡 effective 依旧 open**：本卡仍无推导，
+  唯一未证环节 worldsheet.ddf-spanning-rank-inequality 依旧对一般 N 开放，只是
+  N ≤ 5 这五个具体实例现在都有了独立的机检证据。
 author: curator
 created: "2026-09-11"
