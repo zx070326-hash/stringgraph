@@ -1,0 +1,29 @@
+id: holography.phi10-wall-crossing-poles
+kind: proposition
+title: Φ₁₀ 的极点结构与留数因子化
+statement: |
+  Igusa 尖点形式 Φ₁₀(ρ,σ,v) 在 Siegel 上半空间中的零点（即 1/Φ₁₀ 的极点）满足：
+  (a) 极点位于超平面族 {mρ + nσ + lv ≡ 0 (mod ℤ)} 的 Sp(4,ℤ)-轨道上，
+      其中 (m,n,l) ∈ ℤ³，gcd(m,n,l)=1，判别式 4mn−l²=1，故极点为单零点；
+  (b) 在 {ρ=0} 超平面（标准代表元）附近，留数因子化为
+        Res_{ρ=0} (1/Φ₁₀) = f(σ,v) · g(σ,v)，
+      其中 f, g 是各自对应两个 1/2-BPS 子系统的权 −2 椭圆亏格函数（Jacobi 形式），
+      即 1/(η(σ)²⁴ · φ_{0,1}(σ,v)) 型结构（具体形式待原文核实，见来源注记）；
+  (c) 系数跳变（围道穿越极点）= 两个留数因子乘积，与两个半-BPS 简并度之积一致
+      （识别②的数学前提，但识别本身是 physical-argument）。
+uses:
+  - holography.igusa-cusp-form-phi10
+uses_conventions: []
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, discussion of poles of 1/Phi_10"
+  - ref: sen-2007-wall-crossing
+    loc: "§2, pole structure of Phi_10 and residue factorisation"
+notes: |
+  **数学部分（极点位置和留数因子化的计算）是 rigorous**；依赖 Φ₁₀ 作为 Sp(4,ℤ) 模形式的经典性质。
+  留数因子化本身是严格复分析，由模形式代数推出。
+  "这些留数 = 半-BPS 简并度之积"是识别②（physical-argument），记录在
+  holography.dvv-wall-crossing-identification 中，不在本节点。
+  注意：(b) 中的精确表达式需对照原文核实；本文抽取的留数形式取自 Sen 2007 §2 转述，
+  具体椭圆亏格函数可能有不同的归一化约定（标记 inferred: false，来源 Sen 2007 §2）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
