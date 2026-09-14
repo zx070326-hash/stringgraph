@@ -1,0 +1,34 @@
+id: holography.immortal-dyon-index-positive
+kind: proposition
+title: N=4 单心 dyon 指标正性（Sen 正性定理）
+statement: |
+  在 N=4 弦论（type II on K3×T²）中，设 d_F(m,n,l) 为经 DMZ 分解后 1/4-BPS 生成函数
+  有限部 φ_F 的傅里叶系数，对应 immortal（单心）dyon 的螺旋超迹。
+  则对所有满足以下条件的 (m,n,l)：
+    d = 4mn − l² > 0，  gcd(m,n,l) = 1，
+  有
+    d_F(m,n,l) > 0。
+  即：在 immortal chamber 中，所有允许的电荷构型的单心 1/4-BPS dyon 指标均为正整数。
+uses:
+  - holography.dmz-mock-jacobi-decomposition
+  - holography.dmz-single-center-identification
+uses_conventions: []
+sources:
+  - ref: rossello-2024
+    loc: "主定理（所有 d>0，gcd=1 的情形），引言比较讨论"
+  - ref: bringmann-murthy-2012
+    loc: "主定理（充分大判别式情形，圆法 + Kloosterman 估计）"
+notes: |
+  **数学部分：rigorous。**
+  两篇文献合并覆盖全部情形：
+  - Bringmann-Murthy 2012（rigorous）：用解析数论方法（圆法 + Kloosterman 和估计）
+    对充分大的判别式 d 证明正性；方法完全在 mock 模形式/分析数论框架内。
+  - Rosselló 2024（rigorous）：对**所有** d>0，gcd=1 的情形（包括小判别式）证明正性，
+    方法不同于 BM 2012（具体技术细节待核实，见 rossello-2024 抽取记录疑问 1）；
+    完全关闭 Sen positivity 猜想在 N=4 旗舰情形的所有剩余情形。
+  物理意义层：d_F(m,n,l)>0 的"物理解读"为对应黑洞微观简并度正性（Sen 猜想的内容），
+  依赖识别③（holography.dmz-single-center-identification，physical-argument）；
+  但正性本身的数学命题（mock Jacobi 系数 d_F>0）是纯数学结果。
+  本节点的有效状态由推导的最低状态决定：数学证明为 rigorous，但若将物理识别③链入，
+  有效状态降为 physical-argument（由图工具自动传播）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, sen-positivity]
