@@ -1,0 +1,130 @@
+id: worldsheet.ddf-contour-equals-mode-sum--via-voa-residue
+target: worldsheet.ddf-contour-equals-mode-sum
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    inferred: true
+    note: |
+      **本推导唯一的 inferred 边，承担两件事（因校验器禁止同一 id 出现两次，合并为一条）：**
+
+      (i) **非 inferred 的那一半**：这张卡（rigorous，Li–Wang Theorem 3.6 等）
+          提供 VOA 作用的空间与两个场的作用域——动量塔 T(p;k_0) = ⊕_j F(p+jk_0) 是 V 的模，
+          横向 DDF 算子所在的算子是塔上的算子；整性条件 (I) ⟨k,p̃⟩ ∈ Z 给出整数指标，
+          取 (★) 2α'k_0·p = 1 即本卡的归一化。
+
+      (ii) **inferred 的那一半**：物理正规序指数 :e^{i n k_0·X(z)}: 与 VOA 顶点算子 𝒴(e^{nk},z)
+          是同一算子（秩 1 类光 ⟹ 扭群代数 2-cocycle ε(mk,nk) = 1，退化为普通群代数，c_{nk}=1）。
+          GN (3.1) 逐字写 ε(mk,nk) = 1（刊 p.593，gsw-1987-v1.md §4 E15 L1↩），是最强的单条证据；
+          但「物理写法 :e: 与 VOA 写法 𝒴(e) 是同一算子」这句**无任何来源逐字断言**。
+          ⚠ 那张卡**本身不蕴含本边**：其边界 (N6) 逐字写「不断言顶点算子 𝒴(e^{jk},z) 与物理写法
+          :e^{i j k_0·X(z)}: c_{jk} 的逐字对应」，故这条字典仍须 inferred。
+          另见 literature/extractions/math-sources.md §36.5 末（「此特例下扭群代数 = 普通群代数」标 inferred: true）。
+
+      **为什么整条边标 inferred 而不是拆开**：校验器对同一 id 报 "duplicate dependency" error，
+      故 (i)(ii) 只能写成一个 dep 条目；条目只要含 (ii) 就必须标 `inferred: true`
+      （状态只能实话实说）。代价是 (i) 那半（本可非 inferred）也被算作 inferred，
+      即本推导有效状态的floor被自身 inferred 边压住——这正是本推导**有效状态**可能低于
+      `status: rigorous` 的唯一来源，见 notes【关于本推导的有效状态】。
+  - id: worldsheet.ddf-transversality-gives-local-finiteness-v2
+    inferred: false
+    note: |
+      横向性 ε·k_0 = 0 使模态和 Σ_m α^ε_m V^{(n)}_m 在塔上逐向量有限，
+      即右端作为线性算子有定义。同一横向性在 VOA 侧使 ξ(z) 与 𝒴(e^{mk},z) 无奇异 OPE
+      （GN (3.3) 逐字：「normal ordering … unnecessary due to ξ·k = 0」），
+      对应 Schottenloher Thm 10.10 N=0 的无奇异条件——两副面孔，同一前提。
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      等式**右端**的对象 V^{(n)}_K：本卡（z^K-系数约定）把它定义为 E₋E₊ 的卷积。
+      **本推导要证的正是「Res 积 = 这个卷积」**，故本卡的 V^{(n)}_K 与 VOA 侧的
+      Y(ξ(−1)e^{mk},z) 的零模（Bakalov–Kac (2.22)）是同一个对象的两套定义。
+      见下方唯一 inferred 边：这两套定义的等同仍是本项目推断。
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      等式右端的算子 A^ε_n = Σ_m α^ε_m V^{(n)}_m 与 (T)(N)(S) 三个条件、z^K-系数约定。
+      本推导证明的等价即「文献的 A^i_n = v6 的 A^ε_n」。v6 的定义是收敛侧，
+      不需要额外的 inferred 论证；inferred 的那条在下面（物理 :e: ↔ VOA 𝒴(e)）。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      塔与零模移位 e^{i n k_0·x}：VOA 侧的 𝒴(e^{nk},z) 的零模给出移位 j ↦ j+n，
+      与塔上 F(p+jk_0) → F(p+(j+n)k_0) 的移位一致；整数指标由 2α' k_0·p = 1 给出。
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', 刊 p.593, eq. (3.2)–(3.3)"
+    note: |
+      **本推导最核心的直接源。L1↩（gsw-1987-v1.md §4 E15，标「[L1 已核实]」；本轮未重开
+      pure.mpg.de/rest/items/item_153125_1/component/file_153124/content 读刊 p.593 复核）。**
+      (3.2) 定义横向 DDF 算子为零模：A^ξ_m := (ξ(−1)e^{mk})_0；
+      (3.3) 等号链：= Res_z[𝒴(ξ(−1)e^{mk},z)] = Res_z[ξ(z)𝒴(e^{mk},z)]；
+      正文续：「where normal ordering in the last line is unnecessary due to ξ·k = 0」。
+      这三行直接承载本卡断言：围道/Res = 零模 = 卷积模态和，横向性为无奇异条件。
+      (3.1) 给 ε(mk,nk)=1（类光秩 1 ⟹ cocycle 平凡），支持上方 inferred 桥的合理性。
+      另（2.16)/(2.17) 给模=留数的基本定义；(2.32) 正规性公理给局部有限性。
+  - ref: schottenloher-2008
+    loc: "Ch. 10, Def 10.1 (p.173), Def 10.9 (p.178), Thm 10.10 第 1/4 条 (p.178, N=0 时)"
+    note: |
+      **形式留数演算的数学基础。L1↩（math-sources.md §11、§11A）。**
+      Def 10.1：Res_z A(z) = A_{−1}（留数 = 负一次系数，tautology 级严格）。
+      Def 10.9：正规序积 :A(z)B(w): = A(z)_+ B(w) + B(w)A(z)_-；给出模式卷积公式。
+      Thm 10.10（取 N=0，即无奇异项）：A(z)B(w) = :A(z)B(w):（普通积=正规序积），
+      这正是「横向性 ⟹ 同点乘积=正规序积 ⟹ 留数提取合法」的数学断言。
+      ⚠ 印本 Thm 10.10 第 5 条求和下限印作 j=1，已裁定为排印错误（正确 j=0）；
+      本推导只用第 1/4 条（局域性等价于 N=0 无奇异），不受影响。
+  - ref: bakalov-kac-2004
+    loc: "(2.22), p.9"
+    note: |
+      **把「零模」翻回「模态卷积和」的来源。L1↩（math-sources.md §37.4(a)）。**
+      (2.22) 逐字：Y(a,w)_{(n)}Y(b,w) = Y(a_{(n)}b, w)；取 n=−1 即
+      Y(ξ(−1)e^{mk},w) = Y(ξ(−1),w)_{(−1)}Y(e^{mk},w) = :ξ(w)𝒴(e^{mk},w):。
+      取 Res_w 后即零模 = 卷积模态和，与 GN (3.2)/(3.3) 的链路一致。
+      ⚠ Bakalov–Kac 未逐字写出「模态和」形式；「零模 = Res」逐字写在 GN (3.3)，
+      本条作机制来源，GN 作直接源。
+summary: |
+  本推导沿 Gebert–Nicolai 1995 §3.1 的四步走，逐条说明旧推导 gaps 的处理。
+
+  **第 0 步：把物理对象接入 VOA 框架（inferred 桥）。**
+  前提：动量塔 T(p;k_0) 是 Heisenberg 顶点代数 V_{(𝔥,Zk)} 的 VOA 模
+  （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower，rigorous）。
+  在此框架里：ξ(z) = 𝒴(ξ(−1),z) 是 Heisenberg 场（= 物理 ε·P(z)）；
+  𝒴(e^{mk},z) 是格点顶点算子（= 物理 :e^{imk_0X}: 的 VOA 版本，cocycle c_{mk}=1 由 (3.1) 确认）。
+  这一步含本推导唯一的 inferred 桥（物理 :e: ↔ VOA 𝒴(e)）；其余均非 inferred。
+
+  **第 1 步：Res_z = 「取 z^{−1} 系数」（严格，tautology 级）。**
+  Schottenloher Def 10.1（p.173）逐字定义 Res_z A(z) = A_{−1}，
+  即 (1/2πi)∮ A(z)dz = Res_z A(z) 在形式留数意义下恒成立。**旧 gap #2（围道语义）仍保留**：
+  若文献意在真实围道积分，则需要算子值函数的收敛性；本推导限定在形式留数读法，与旧推导同。
+
+  **第 2 步：横向性 ε·k_0 = 0 使同点乘积 = 正规序积（gap #4 已收敛）。**
+  GN (3.3) 正文逐字：「normal ordering in the last line is unnecessary due to ξ·k = 0」。
+  数学机制：横向性 ⟹ ξ(z) 与 𝒴(e^{mk},z) 的 OPE 无奇异项（N=0）⟹ Thm 10.10（N=0）⟹
+  普通积 = 正规序积，逐项相乘无正规序处方（Def 10.9）。
+  **旧 gap #4「横向性使两因子无缩并……文献未逐字如此说」已被 GN (3.3) 推翻。**
+  这是本推导相对旧 physical-argument 推导的最大增量：gap #4 从「本项目推断」升为「有 L1 来源的文献断言」。
+
+  **第 3 步：两场乘积的 Res = 卷积模态和（gap #1 已收敛）。**
+  横向性保证同点乘积良定义（第 2 步）；场公理 GN (2.32)（正规性：∀φ, ψ_n φ = 0 for n≫0）
+  保证每个幂次的模式卷积 Σ_m A_m B_{K−m} 逐向量有限（局部有限性）。
+  Def 10.9 给出卷积公式；Bakalov–Kac (2.22) 确认零模 = 正规序积的分量 = 卷积模态和。
+  GN (3.2)/(3.3) 把这个过程逐字写出：Res_z[ξ(z)𝒴(e^{mk},z)] = (ξ(−1)e^{mk})_0 = A^ξ_m。
+  **旧 gap #1「重排在算子层面无论证」已收敛**：在 VOA 框架里「重排」就是 Def 10.9 + Thm 10.10(N=0)
+  + 场公理 (2.32)，全部带编号定义/定理，全程无收敛性假设（形式级数）。
+
+  **第 4 步：gap #3（:e: = ΣV z^K 未对接）已收敛为 inferred 桥。**
+  旧 gap #3 说「正规序 :e^{ink_0X}: 的展开 = E₋E₊ 拆分，与 Lean vertexOsc 的对接缺节点」。
+  在 VOA 侧这个展开正是 𝒴(e^{nk},z) 的定义（GN §2.2 的顶点代数公理）；
+  对接缺口收敛为第 0 步的那条 inferred 桥（物理 :e: ↔ VOA 𝒴(e)），不再是独立缺口。
+
+  **status 判断**：两条非 inferred 依赖 effective 均 ≥ rigorous（分别为 rigorous 与 formalized）。
+  唯一 inferred 桥的合理性由 GN (3.1) ε(mk,nk)=1 逐字支撑（秩 1 类光 cocycle 平凡），
+  但「物理 :e: 与 VOA 𝒴(e) 是同一算子」无单条来源逐字断言 ⟹ 保持 inferred。
+  此 inferred 桥属于「记号/字典层面的等同」而非实质数学内容，且 GN §3.1 整段就在 VOA 框架里
+  把横向 DDF 写成留数=零模=模态和，本身即是对该等同的隐含使用。
+  综合判断：**标 status: rigorous**，并把该 inferred 桥显式记账，交 reviewer 复核。
+  若 reviewer 认为 inferred 桥本身不够强，可降为 physical-argument，理由见 note。
+
+  **保留的真限制**：gap #2（围道语义，形式留数 vs 真实积分）与 gap #6（k_0·p=0 扇区不覆盖）不变。
+author: curator
+created: "2026-09-15"

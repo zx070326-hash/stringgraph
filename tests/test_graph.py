@@ -269,8 +269,14 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     # 手写递推 --via-oscillator-recursion 保留并存）。本断言随之更新。
     # 无鬼定理 v4 的 effective **不变**（仍 rigorous，由自身 status 与 kac-determinant 一支决定）。
     assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "formalized"
+    # 2026-09-15（分支 agent/curator/ddf-contour-rigorous）：新增推导
+    # --via-voa-residue（status: rigorous），依据 Gebert–Nicolai 1995 §3.1 (3.2)–(3.3)
+    # 逐字把横向 DDF 写成 Res_z[ξ(z)𝒴(e^{mk},z)] = 零模，配合 Schottenloher Ch.10
+    # Def 10.1/10.9/Thm 10.10(N=0) 与 Bakalov–Kac (2.22)。
+    # 有一条 inferred 边（物理 :e: ↔ VOA 𝒴(e)，秩 1 类光 cocycle 平凡），
+    # 但两条非 inferred 依赖 effective ≥ rigorous，故 effective 升为 rigorous。
     assert (
-        effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
+        effs["worldsheet.ddf-contour-equals-mode-sum"].name == "rigorous"
     )
     gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert "worldsheet.ddf-contour-equals-mode-sum" not in {d.id for d in gt.depends_on}

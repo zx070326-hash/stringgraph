@@ -89,7 +89,9 @@ notes: |
   (5.1) 的被积量是**两个算子在同一点 z 的乘积** ε·P(z) · V(n k_0, z)，
   一般地这种乘积需要正规序处方；而 ε·P 与 :e^{i n k_0·X}: 之间的缩并正比于 ε·k_0，
   **横向性使它们之间没有缩并**，乘积在同点自动有意义（这也是被积量成为权 1 primary 的原因）。
-  ⚠ 这一段是本项目的解读，**文献未逐字如此说**；已登记在本卡推导的 gaps 里。
+  **2026-09-15 更新**：gap #4（横向性使两因子无缩并……「文献未逐字如此说」）现有 L1 来源——
+  GN (3.3) 正文逐字「normal ordering in the last line is unnecessary due to ξ·k = 0」
+  （gsw-1987-v1.md §4 E15 L1↩）。详见 --via-voa-residue 推导。
 
   【本卡的状态为什么只能是 physical-argument】
   按 docs/STATUS_LEVELS.md：论证骨架清楚（洛朗展开 + 取 z^{−1} 系数，两行），
