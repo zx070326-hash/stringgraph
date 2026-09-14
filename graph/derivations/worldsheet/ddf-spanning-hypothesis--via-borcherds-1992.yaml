@@ -325,6 +325,26 @@ notes: |
   **effective = physical-argument 由工具经 worldsheet.ddf-contour-equals-mode-sum
   （标 inferred）算出，这是预期的、正确的**（见 gaps 第 1 条）。
 
+  【lead 裁决 2026-09-15：own = rigorous 维持（reviewer 争议点 Point 1）】
+  reviewer 审查本分支时提出唯一争议点：Thm 5.1 假设「L_0 本征空间有限维」本项目塔不满足
+  （gaps 第 5 条），是否应把 own 降为 physical-argument。**lead 裁定：own = rigorous 维持。**
+  依据本项目诚实架构——own = **被引论证本身**的严格程度（Borcherds Thm 5.1 是 Invent. Math.
+  编号定理、Lemmas 5.1–5.5 每步有理由，严格）；「塔 ↔ V ⊗ V_{II_{1,1}}」的对象识别缺口
+  （含有限维假设不满足、1 vs 2 条类光方向，gaps 第 3、5 条）是**对象识别缺口**，按原则 5
+  由 inferred 边 2/3 承载、gaps 登记，**不压低 own status level**（其"回译可信度"风险在里程碑
+  回译审计处受审，见 depends_on 第 2 条 note 末与 gaps 第 3 条）。把 own 降到 physical-argument
+  会抹掉「引用了严格已发表定理、差一部未成文对象字典」与「纯物理启发式」（如
+  ddf-contour-equals-mode-sum--via-laurent-coefficient-extraction，那条前提含未定义对象、
+  自身 own 不到 rigorous）之间的真实区别——两者认识论地位不同，status 应予区分。
+  ⚠ **未来重算警示（供后续 lead / auditor）**：若 worldsheet.ddf-contour-equals-mode-sum
+  经 VOA 形式留数路线升到 rigorous（该卡【补它的两条路】与 voa-residue-mode-sum-2026-09-15.md
+  裁定 (A) 文献可闭合已登记此路），则工具会把本推导 effective 随之抬到 rigorous；**但那份
+  rigorous 仍架在 inferred 边 2、3 上（对象字典在一手文献未成文）**。在任何**里程碑**消费
+  「ddf-spanning = rigorous」之前，必须由 auditor 对边 2、3 做回译审计、确认对象识别真闭合，
+  不得静默传播。当前 ddf-spanning **非里程碑**，且 ms.no-ghost-theorem 不经本链
+  （no-ghost-theorem-v4--via-goddard-thorn 已撤出 ddf-contour 边），故此刻无静默污染风险，
+  本裁决据此成立。
+
   【为什么 2026-09-15 才加这条推导：查无此证明 → proven-in-literature 的裁定链】
   目标卡 notes 逐字为过去的状态留痕：「谁要给本卡挂推导，必须先拿到 GT 1972 正文或
   Brower 1972 正文（两条已知机制见 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的
