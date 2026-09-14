@@ -200,6 +200,21 @@ def psi_series(C1, MMAX):
 # --------------------------------------------------------------------------- #
 # Appell-Lerch polar part
 # --------------------------------------------------------------------------- #
+def p24_list(K):
+    """p24(k) = coeff of q^k in prod_{n>=1}(1-q^n)^{-24};  1/Dl = sum_{n>=-1} p24(n+1) q^n."""
+    a = [0] * (K + 1)
+    a[0] = 1
+    for n in range(1, K + 1):
+        b = [0] * (K + 1)
+        for j in range(0, K // n + 1):
+            c = comb(j + 23, 23)
+            for k in range(0, K + 1 - n * j):
+                if a[k]:
+                    b[k + n * j] += c * a[k]
+        a = b
+    return a
+
+
 def inv_delta():
     """1/Delta_cusp(sigma) = sum_{n>=-1} p24(n+1) q^n."""
     f = {(-1, 0): 1}
@@ -244,7 +259,7 @@ def compute(MMAX, Nc=None):
     C1 = build_C1(Nc or (NMAX * (MMAX + 2) + 8))
     psis, phis = psi_series(C1, MMAX)
     iD = inv_delta()
-    p24 = {n + 1: v for (n, l), v in iD.items() if l == 0}
+    p24 = {k: v for k, v in enumerate(p24_list(MMAX + 2))}
     F, P = {}, {}
     for m in range(1, MMAX + 1):
         pol = smul({(0, 0): p24[m + 1]}, smul(iD, A2m_series(m)))

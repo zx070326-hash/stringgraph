@@ -1,0 +1,55 @@
+d_*(m,n,l) at small charges (reduced first):
+   d_*(1,1,0) =            50064   Delta=   4   reduced=(1, 1, 0)   naive mock=50064
+   d_*(1,1,1) =            25353   Delta=   3   reduced=(1, 1, 1)   naive mock=25353
+   d_*(1,2,0) =          1127472   Delta=   8   reduced=(1, 2, 0)   naive mock=1127472
+   d_*(1,2,1) =           561576   Delta=   7   reduced=(1, 2, 1)   naive mock=561576
+   d_*(2,2,0) =         32861184   Delta=  16   reduced=(2, 2, 0)   naive mock=32861184
+   d_*(2,2,1) =         18458000   Delta=  15   reduced=(2, 2, 1)   naive mock=18458000
+   d_*(2,2,2) =          3859456   Delta=  12   reduced=(2, 2, 2)   naive mock=3859456
+   d_*(5,1,4) =            50064   Delta=   4   reduced=(1, 1, 0)   naive mock=-2023536
+   d_*(4,1,2) =         16491600   Delta=  12   reduced=(1, 3, 0)   naive mock=16491600
+   d_*(9,1,3) =             None   Delta=  27   reduced=(1, 7, 1)   naive mock=70855696080
+
+--- total index vs immortal index: the divisor sum must act on the IMMORTAL part ---
+   (m,n,l,Delta, total, immortal) with total < 0 < immortal:
+      (1, 2, 2, 4, -2023536, 50064)
+      (1, 3, 2, 8, -15493728, 1127472)
+      (1, 4, 2, 12, -97722288, 16491600)
+      (2, 2, 2, 12, -16620544, 3859456)
+      (2, 3, 2, 20, -53249700, 110910300)
+      (2, 3, 4, 8, -327192528, 1127472)
+     count in range: 11
+
+--- where does  (-1)^{l+1} c_m^F(n,l) = d_*(m,n,l) ?  (scan) ---
+   agree: 92   disagree: 96
+   all disagreements have n < m ? True   (reduced forms need n >= m)
+   e.g. [(3, 1, 3, 130329, 25353), (4, 1, 3, 1598376, 561576), (4, 2, 5, 1598376, 561576), (5, 1, 3, 16844421, 8533821)]
+
+========================================================================================================
+Torsion divisor sums.  Domain: I^2|m, I|l, m,n>=1, Delta=4mn-l^2>0.
+========================================================================================================
+ I    m   n    l  Delta                (A) eq(52)               (B) eq(51)    A=B   A>0   B>0
+ 2    4   1    2     12                  16542306                 16440894  False  True  True
+ 2    4   2    2     28                2074973136               2072726832  False  True  True
+ 2    4   3    2     44              100690080906             100655945622  False  True  True
+ 2    4   3    6     12                  16542306                 16440894  False  True  True
+ 2    4   4    2     60             3093723905328            3093322344912  False  True  True
+ 2    4   4    6     28                2074973136               2072726832  False  True  True
+ 2    8   2    6     28                2074973136               2072726832  False  True  True
+ 2    8   4   10     28                2074973136               2072726832  False  True  True
+ 2   12   1    6     12                  16542306                 16440894  False  True  True
+ 2   12   3   10     44              100690080906             100655945622  False  True  True
+ 2   16   2   10     28                2074973136               2072726832  False  True  True
+ 2   16   4   14     60             3093723905328            3093322344912  False  True  True
+ 4   16   3   12     48              315647163684             315646960860  False  True  True
+
+rows tested: 219   (skipped, out of computed range: 451)
+rows with (A) != (B): 13
+rows with (A) <= 0  : 0   -> none  [Prop C]
+rows with (B) <= 0  : 0   -> none found in range
+
+Minimal witness that eq(52) and eq(51) give different integers:
+   I=2, (m,n,l)=(4,1,2), Delta=12
+   (A) eq(52) = 16542306
+   (B) eq(51) = 16440894
+   A - B      = 101412 = 4 * d_*(1,1,1) = 101412
