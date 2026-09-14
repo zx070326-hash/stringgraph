@@ -1,0 +1,46 @@
+id: math.level-five-partition-difference--via-lean
+target: math.level-five-partition-difference
+kind: proof
+status: formalized
+depends_on: []
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFiveCount.lean :: StringFormal.NoGhost.levelFive_count_identity
+      （本卡 target 的 formal.lean_decl = (I5) D−2 形，第 121 行起），经 m-型主恒等式
+      StringFormal.NoGhost.levelFive_count_identity_gen（第 95 行起）证出；姊妹形
+      StringFormal.NoGhost.levelFive_count_identity_full（κ₅=1 D−1 形，第 142 行起）同源。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator/lead 未自行运行 `lake build` / `check-axioms`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      `depends_on: []`：本恒等式是纯自然数算术（三次 Pascal 递推的一个代入实例），
+      不依赖任何外部图节点——与 math.level-two/-three/-four-partition-difference--via-lean
+      同一先例（levelFive_count_identity_gen 的证明不调用 levelFour/-Three_count_identity，
+      只是数值上把上两级展开包含在右端）。
+
+      **逐字证明**（主恒等式 levelFive_count_identity_gen，第 95-113 行）：
+      三条 Pascal 递推 `Nat.choose_succ_succ` 分别作用在 (m+1,1)、(m+2,2)、(m+4,4)，
+      加 `Nat.choose_one_right`，代入后 `ring` 收尾；levelFive_count_identity 由
+      `obtain ⟨m, rfl⟩ : ∃ m, D = m + 2` 代入后 `exact levelFive_count_identity_gen m`。
+      **关键区别于 N≤4**：等式左端带一个 **+ 1**（Euler 五边形数 −q⁵ 的系数 κ₅=1），
+      不是干净的差恒等式，见目标卡【这个 +1 是什么】段。
+summary: |
+  纯自然数算术：主恒等式 levelFive_count_identity_gen 对一切 m 成立，
+  p_{m+1}(5) + 1 = p_m(5) + p_{m+1}(4) + p_{m+1}(3)，由三条二项式系数 Pascal 递推
+  （`Nat.choose_succ_succ` 在 (m+1,1)、(m+2,2)、(m+4,4)）加 `Nat.choose_one_right` 与
+  `ring` 证出。(I5) 形（本卡 target）取 m := D−2；κ₅=1 形取 m := D−1，是同一引理相邻
+  两步。不使用任何弦论对象。与 N≤4 的关键结构差别：等式左端多一个 +1（κ₅=1，Euler
+  五边形数），这是干净差恒等式链在 N=5 首次断裂。
+gaps:
+  - "单侧计数公式 p_m(5)=… 本身未被单独证成等式（Lean 侧只有 card_conjFree_five_le 上界与 card_ddfLevel_five_eq 精确值，见目标卡 sources note）；本推导只证'差 + 1'恒等式，与 math.level-two/-three/-four-partition-difference--via-lean 同一情形。"
+  - "curator/lead 未自行运行 lake build 与 check-axioms；结论基于直接读源码，合并前应由 lead 验证。"
+  - "本恒等式是 N=5 特例；N ≥ 6 的对应恒等式与 κ_N 的一般行为需要 Euler 五边形数生成函数论证，本推导不涉及、不预示（目标卡明确不断言 (b)）。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  本推导与 math.level-two/-three/-four-partition-difference--via-lean 同一模式
+  （depends_on: []，纯 Nat 算术），是同一恒等式链在 N=5 的实例，也是该链的转折点
+  （N=5 起左端多 +1）。lead，2026-09-14，N=5 wire。
+author: lead
+created: "2026-09-14"

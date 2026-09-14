@@ -1,0 +1,133 @@
+id: worldsheet.ddf-spans-physical-states-level-five--via-lean
+target: worldsheet.ddf-spans-physical-states-level-five
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      标架对象 `F : DDFLightConeFrame η a b` 是本卡三条主定理
+      （`b26_five_of_D26`、`ddfSpans_bigrade_neg_five_five`，以及 h9 引用的
+      `le_finrank_towerNull_inf_towerBigrade_five`）的共同参数；证明体使用
+      `F.hη`、`F.trans`、`F.hba`、`F.frame.isotropic`，以及**关键的**
+      `F.dotVec_self_eq_two hD`（给出 a₀ = 1，第 839 行 `haa`）。与 level-four 不同的是
+      这里 `dotVec_self_eq_two` 只需 `hD : 2 ≤ D`（level-four 用 3 ≤ D）。
+  - id: worldsheet.physical-slice-bounded-by-transverse-count
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`finrank_towerPhys_inf_towerBigrade_le` 作为
+      `b26_five_of_D26` 的 `h1`（`finrank_towerPhys_inf_towerBigrade_le (K:=K) hD F 5`），
+      给出 dim(H_phys ⊓ V_5) ≤ p_{D−1}(5)，对一切 D、一切 N 成立（该卡断言本身）。
+  - id: worldsheet.quasi-physical-slice-dimension
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl 两次**：`le_finrank_towerSeed` 作为 `b26_five_of_D26`
+      的 `h7`（`le_finrank_towerSeed (K:=K) hD F (-((5:ℕ):ℤ)) 4`，level-4 实例，给
+      dim Q_{−5,4} ≥ p_{D−1}(4)）与 `h8`（同一引理，`level 3` 实例，给
+      dim Q_{−5,3} ≥ p_{D−1}(3)）。与 level-four derivation 同型：Type-1、Type-2 两半都经
+      这条同一引理，故本推导挂两次同一条边（此处一次性说明两次调用）。
+  - id: math.level-five-partition-difference
+    inferred: false
+    note: |
+      **逐字调用其 formal.lean_decl**：`levelFive_count_identity (D:=D) hD` 作为
+      `b26_five_of_D26` 的 `h3`，给出 p_{D−1}(5) + 1 = p_{D−2}(5) + p_{D−1}(4) + p_{D−1}(3)。
+      **与 level-four 的 h3 的结构差别**：左端多一个 +1（Euler 五边形数 κ₅=1），这个 +1
+      在最终 `omega` 里与 h9 内的 +1（两族重叠）相消。
+  - id: worldsheet.transverse-ddf-fock-gram-matrix
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl**：本推导调用的是 `finrank_ddfSpan_inf_towerBigrade`
+      （`SliceDim.lean`，`b26_five_of_D26` 结尾 `rw [finrank_ddfSpan_inf_towerBigrade
+      F.hη F.frame.isotropic F.hba F.trans 5]`），不是该卡 formal.lean_decl
+      `ddf_gram_diagonal`。与 worldsheet.ddf-spans-physical-states-level-two/-three/-four
+      --via-lean 同一记法，给 dim D_5 = p_{D−2}(5)。
+  - id: worldsheet.level-five-null-family-kernel-bound
+    inferred: false
+    note: |
+      **h9 的核心新输入，逐字调用其种子版 decl**：`b26_five_of_D26` 的 `h9`（内联证明块）
+      字面等于 `le_finrank_towerNull_inf_towerBigrade_five hD F haa hD26`（同文件 section
+      KernelFive），其证明体对 seedPair 用秩-零化度，核维数由
+      `finrank_ker_seedPair_five_le_one`（该依赖目标卡的 formal.lean_decl 的种子版推论，
+      即 dim ker T₅ ≤ 1）控制——这正是本片区别于 N=4 的地方：N=4 那里对应映射**单射**
+      （worldsheet.level-four-null-family-transversal，ker=0），N=5 这里核可以**一维**
+      （ker≤1），多出的 +1 与 h3 的 +1 相消。故本卡改挂此边（而非 N=4 的横截性卡）。
+  - id: worldsheet.level-two-null-state-requires-d26
+    inferred: false
+    note: |
+      **精确 decl 非该卡 formal.lean_decl，经由一般化引理**：h9 内部（
+      `le_finrank_towerNull_inf_towerBigrade_five` 的 `hmem` 证明块，第 788 行）的 Type-2 半
+      调用本文件的 `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`，其证明体直接调用
+      `descTwo_mem_towerNullSubmodule`（NullSeedsTwo.lean 的一般充分性引理：`hD26 : (D:R)=26`
+      + `L₀y=−y` ⟹ `𝒟₂y ∈ towerNullSubmodule`）——这条引理正是该卡 sources.loc 已登记的
+      "descTwo_mem_towerNullSubmodule"（该卡的铺垫链之一，非其 headline
+      `descTwo_mem_towerPhysSubmodule_iff`）。**这是本推导唯一让 (D:K)=26 进入的边**。
+      与 worldsheet.ddf-spans-physical-states-level-three/-four--via-lean 挂同一条边，理由
+      相同（各片共用同一条 D=26 入口）。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFiveCount.lean :: StringFormal.NoGhost.{
+        b26_five_of_D26 (第 837 行), ddfSpans_bigrade_neg_five_five (第 868 行),
+        le_finrank_towerNull_inf_towerBigrade_five (section KernelFive, 第 750 行),
+        finrank_ker_seedPair_five_le_one (第 734 行),
+        descTwo_mem_towerNullSubmodule_of_mem_towerBigrade}（目标卡 formal.lean_decl
+      是 `ddfSpans_bigrade_neg_five_five`）；内部纯计数引理 card_conjFree_five_le、
+      card_ddfLevel_five_ge、card_conjFree_four_ge、card_conjFree_three_ge。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator/lead 未自行重跑 `lake build` 与 `check-axioms`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。
+
+      **类型类核实**：`b26_five_of_D26`/`ddfSpans_bigrade_neg_five_five` 所在 section
+      ClosingFive 声明 `variable {D:ℕ}{K:Type*}[Field K][LinearOrder K]
+      [IsStrictOrderedRing K][Algebra ℚ K]{η a b:Fin D→K}`——与目标卡【设定】的 K
+      逐字一致，与 worldsheet.ddf-spans-physical-states-level-four--via-lean 相同的类型类环境。
+      **关键差别**：`b26_five_of_D26` 与 `le_finrank_towerNull_inf_towerBigrade_five` 都只需
+      `hD : 2 ≤ D`（level-four 的对应定理需 3 ≤ D）——因 N=5 关闭靠计数上界 (K5) 而非需要
+      横向单位偏振的横截性论证，该定理 docstring 逐字记录此弱化。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, eq. (6.4)（arXiv:0802.3249v1）"
+    note: |
+      **不承载论证**，只标注文献方位；文献对一切能级断言 |ψ⟩=|f⟩+|n⟩（D=26），本卡只做
+      (rung −5, level 5) 一片。与 worldsheet.ddf-spans-physical-states-level-four 同一锚点。
+summary: |
+  九输入组装（逐层对应 LevelFiveCount.lean 的 section ClosingFive）：
+
+  **h1-h6（D-无关的维数不等式与计数恒等式）**：
+  h1 = dim H_5 ≤ p_{D−1}(5)（worldsheet.physical-slice-bounded-by-transverse-count）；
+  h2/h4/h5/h6 = 内部占据数上下界（不建边）；
+  h3 = p_{D−1}(5) + 1 = p_{D−2}(5) + p_{D−1}(4) + p_{D−1}(3)（math.level-five-partition-difference，
+  **左端带 +1**，κ₅=1）。
+
+  **h7、h8（两次同一条引理）**：`le_finrank_towerSeed` 分别给
+  dim Q_{−5,4} ≥ p_{D−1}(4) 与 dim Q_{−5,3} ≥ p_{D−1}(3)
+  （worldsheet.quasi-physical-slice-dimension）。
+
+  **h9（唯一用到 D=26 的一步；本片区别于 N=4 的核心）**：
+  `le_finrank_towerNull_inf_towerBigrade_five` 给
+  dim Q_{−5,4} + dim Q_{−5,3} ≤ dim(H_null ⊓ V_5) + 1——对 seedPair 用秩-零化度，其像落在
+  H_null ⊓ V_5 里的两半分别由（Type-1）NullSeedsTwo.lean 的共享铺垫引理与（Type-2）本文件的
+  `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`（经 worldsheet.level-two-null-state-
+  requires-d26 已登记的 `descTwo_mem_towerNullSubmodule`，D=26 在此进入）给出，**核维数
+  ≤ 1** 由 worldsheet.level-five-null-family-kernel-bound 的种子版 `finrank_ker_seedPair_five_le_one`
+  控制（右端的 +1 就是两族重叠）。与 N=4 对照：N=4 那里对应映射单射（ker=0，横截），N=5
+  这里 ker≤1（重叠）。
+
+  **收尾**：九项经 `omega` 拼成 `b26_five_of_D26`——**h3 的 +1 与 h9 的 +1 相消**（该定理
+  docstring 逐字 "so the two `+ 1`s cancel"）；再经 D-无关、N-无关的纯逻辑翻译引理
+  `ddfSpansOn_bigrade_of_b26`（不建 depends_on 边）得目标卡断言 `ddfSpans_bigrade_neg_five_five`。
+gaps:
+  - "**内部四条占据数计数引理不建 depends_on 边**：`card_conjFree_five_le`、`card_ddfLevel_five_ge`、`card_conjFree_four_ge`、`card_conjFree_three_ge` 是 LevelFiveCount.lean 本文件内部的纯计数引理，不对应图上任何既有节点（math.level-five-partition-difference 只承载拼接后的 Pascal 恒等式本身）；本推导把它们当作自身证明内容的一部分。"
+  - "**尖锐性未证，登记为未来工作**：本推导只证 D=26 ⟹ B26 5 ⟹ DDFSpansOn(V_5)，不证反方向（D≠26 时 ¬B26 5）；与 N=2/3/4 同样未解决。"
+  - "**重叠只用上界，下界不承载**：h9 只用 dim ker T₅ ≤ 1（worldsheet.level-five-null-family-kernel-bound），不用 ker=1 的下界（syzygy，仍 ⟨手算⟩ 层面）；这足以给出 ⊆，但意味着若下界失败（不会，但本推导不验证），结论仍成立方向不受影响。"
+  - "**N≥6 未覆盖**：N=5 是 κ_N=1 的第一片；N≥6 的 κ_N 一般不再是 1，N≥12 起两族之外还需新奇异向量族（worldsheet.ocq-null-state-two-families notes）。这不是'尚未形式化'而是'已知机制需要扩充'，不受本次工作影响。"
+  - "**curator/lead 未自行跑 `lake build` 与 `check-axioms`**：结论基于直接读源码，由 lead 合入 main 前应验证。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  本推导是形式化前沿从 N≤4 推进到 N≤5 的图承载；与 level-four derivation 的两处结构差别：
+  (i) 门槛 2≤D（非 3≤D）；(ii) h9 挂 worldsheet.level-five-null-family-kernel-bound（重叠
+  上界 ker≤1）而非 worldsheet.level-four-null-family-transversal（横截 ker=0），且 h3 带 +1，
+  两个 +1 相消。lead，2026-09-14，N=5 wire。
+author: lead
+created: "2026-09-14"

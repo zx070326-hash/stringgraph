@@ -1,0 +1,66 @@
+id: worldsheet.level-five-null-family-kernel-bound--via-lean
+target: worldsheet.level-five-null-family-kernel-bound
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.ddf-light-cone-frame
+    inferred: false
+    note: |
+      标架对象 `F : DDFLightConeFrame η a b` 是本卡两条主定理
+      （整片版 `finrank_ker_descPair_five_le_one`、种子版 `finrank_ker_seedPair_five_le_one`）
+      的参数；证明体经 `finrank_ker_descPair_add_le hD F F.hη j 5 …` 使用 `F.hη`。
+      （通用核界只用 F.hη 与 D-无关的计数，不用标架的 isotropic/hba 等其余字段。）
+  - id: math.level-five-partition-difference
+    inferred: false
+    note: |
+      **逐字调用其姊妹 decl**：`finrank_ker_descPair_five_le_one` 的证明体第 729 行
+      `have h6 := levelFive_count_identity_full (D := D) (by omega)`——即
+      math.level-five-partition-difference 承载的同一条 Pascal 恒等式的 κ₅=1（D−1）形，
+      给出 p_D(5) + 1 = p_{D−1}(5) + p_D(4) + p_D(3)，是本卡核界 ≤ 1 里那个 +1 的唯一来源。
+      该卡 formal.lean_decl 是 (I5)（D−2）形 levelFive_count_identity，与此处的
+      levelFive_count_identity_full 是同一 m-型主恒等式相邻两步的代入，同源同文件，故挂
+      此边（inferred: false，消费的是该卡承载的同一条恒等式）。
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFiveCount.lean :: StringFormal.NoGhost.{
+        finrank_ker_descPair_five_le_one (第 720 行，本卡 target 的 formal.lean_decl),
+        finrank_ker_seedPair_five_le_one (第 734 行，种子版推论)}；
+      通用核界 finrank_ker_descPair_add_le（DescendantKernel.lean 第 280 行，§B⁗.3 (c)）；
+      κ₅=1 计数 levelFive_count_identity_full（第 142 行）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator/lead 未自行重跑 `lake build` 与 `check-axioms`**；合并前应由 lead 跑
+      `uv run stringgraph check-axioms`。这是本推导 status formalized 的依据。
+
+      **类型类环境**：section KernelFive 沿用文件的
+      `variable {D:ℕ}{K:Type*}[Field K][LinearOrder K][IsStrictOrderedRing K][Algebra ℚ K]
+      {η a b:Fin D→K}`——与目标卡【设定】的有序域 K 逐字一致。整片版只需 `hD : 2 ≤ D`
+      （比 worldsheet.level-four-null-family-transversal--via-lean 的 3 ≤ D 弱一档）。
+
+      **通用核界 finrank_ker_descPair_add_le 不建 depends_on 边**：它是 DescendantKernel.lean
+      内部的 §B⁗.3 (c) 引理（秩-零化度 + dim V_{j,M}=p_D(M) 精确 + b̃-free 覆盖上界拼成），
+      D-无关、rung-无关，图上目前无独立节点承载它；本推导把它当作自身证明内容的一部分
+      （与 N≤4 各片把内部计数引理当自身内容的先例一致）。
+summary: |
+  两步组装（section KernelFive）：
+  (1) 通用核界（§B⁗.3 (c)，`finrank_ker_descPair_add_le`，N=5 实例）给
+      dim ker T₅ + p_D(5) ≤ p_D(4) + p_D(3) + p_{D−1}(5)——**D-无关、rung-无关**，秩-零化度
+      加 dim V_{j,M}=p_D(M) 精确与 b̃-free 覆盖上界拼成；
+  (2) κ₅=1 计数（math.level-five-partition-difference 的 levelFive_count_identity_full，D−1 形）
+      给 p_{D−1}(5) + p_D(4) + p_D(3) = p_D(5) + 1，即右端 = p_D(5) + 1。
+  两者经 `omega` 得整片版 dim ker T₅ ≤ 1（目标卡整片断言）；种子版由
+  `finrank_ker_seedPair_le`（Q×Q 上核 ⊆ 整片核）经 `le_trans` 得到。
+  **D=26 从不出现**（该定理 docstring 逐字）；与 N=4 的对照是 κ₄=0 给横截（ker=0）、
+  κ₅=1 给重叠至多一维（ker≤1）。
+gaps:
+  - "**通用核界内部计数引理不建 depends_on 边**：finrank_ker_descPair_add_le 依赖的 finrank_towerBigrade（dim V=p_D）、finrank_conjFreeSliceAt_le（b̃-free 上界）、towerBigrade_le_conjFreeSliceAt_sup_range_descPair（覆盖）都是 DescendantKernel.lean 内部引理，不对应图上既有节点；本推导把它们当作自身证明内容的一部分。"
+  - "**只证上界 ≤ 1，不证下界 = 1**：ker T₅ 恰为一维（+1 确被实现）由 U(Vir⁻) syzygy 给出，仍停留在 worldsheet.ocq-null-state-two-families notes【2026-09-14 §B⁗.8】的 ⟨手算⟩ 层面，本推导不覆盖（目标卡明确不断言 (c)）。"
+  - "**只做 N=5 这一个 level**：≤ 1 是 κ₅=1 专属；N≥6 的 κ_N 一般不再是 1（Euler 五边形数），本推导不覆盖（目标卡明确不断言 (d)）。"
+  - "curator/lead 未自行跑 `lake build` 与 `check-axioms`；结论基于直接读源码，由 lead 合入 main 前应验证。"
+notes: |
+  status: formalized 的证据标准见 literature/sources.bib 的 stringformal-2026 条目。
+  合并前应由 lead 跑 `uv run stringgraph check-axioms`。
+  这是 N=5 工作流（agent/formalizer/b26-n5）交付的唯一新数学的图承载。lead，2026-09-14，N=5 wire。
+author: lead
+created: "2026-09-14"

@@ -1,0 +1,128 @@
+id: worldsheet.level-five-null-family-kernel-bound
+kind: proposition
+title: 在 (rung j, level 5) 片上 Type-1（L₋₁ 像）与 Type-2（𝒟₂ 像）两族的重叠至多一维：dim ker T₅ ≤ 1，纯计数（秩-零化度 + κ₅=1），D 不出现，对一切 rung、一切 D ≥ 2 成立——N=5 唯一的新数学输入
+statement: |
+  【设定】记号沿用 worldsheet.ocq-null-state-two-families（动量塔 T(a;b)、Sugawara L_m、
+  𝒟₂ := 2L₋₂ + 3L₋₁²）、worldsheet.ddf-light-cone-frame（标架对象 F : DDFLightConeFrame η a b）
+  与 worldsheet.ddf-spanning-rank-inequality（双分次片 V_{j,M} := towerBigrade(j,M)）。
+  系数域 K 是有序域、ℚ-代数。对整数 rung j 与能级 N ≥ 2，记
+
+    T_N : V_{j,N−1} × V_{j,N−2} → V_{j,N}，  T_N(φ, ψ) := L₋₁φ + 𝒟₂ψ
+
+  （即 descPair；不设种子条件、不设物理性、不设质壳条件），及其种子限制
+    T_N|_{Q×Q} : Q_{j,N−1} × Q_{j,N−2} → V_{j,N}（即 seedPair，Q_{j,M} 是准物理片
+    worldsheet.quasi-physical-slice-dimension 记号）。
+
+  【断言】设 hη（(F1) η_μ²=1）、F : DDFLightConeFrame η a b、D ≥ 2、rung j 任意。则
+
+      **dim ker T₅ ≤ 1**       （整片版，(K5)）
+
+  且因此
+
+      **dim ker(T₅|_{Q×Q}) ≤ 1**   （种子版，两族零态 L₋₁Q_{j,4} 与 𝒟₂Q_{j,3} 的重叠至多一维）。
+
+  【机制，供理解，不是陈述的一部分】对 descPair 用秩-零化度：
+    dim ker T_N + p_D(N) ≤ p_D(N−1) + p_D(N−2) + p_{D−1}(N)     （§B⁗.3 (c) 的通用核界，
+    由 dim V_{j,M} = p_D(M) 精确、dim(range 的 b̃-free 覆盖) ≤ p_{D−1}(N) 拼出，**D=26、
+    种子条件、物理性、p_j·p_j≠0 全不进入，对一切 rung 成立**）。
+  在 N=5 代入 math.level-five-partition-difference 的 κ₅=1 形
+    p_D(5) + 1 = p_{D−1}(5) + p_D(4) + p_D(3)，
+  即右端 = p_D(5) + 1，故 dim ker T₅ ≤ 1。种子版由 dim ker(seedPair) ≤ dim ker(descPair)
+  （§B⁗.0："Q×Q 上的核是整片上核的子空间"）得到。
+
+  【本卡明确不断言】
+  (a) **不假设 φ、ψ 是准物理态或物理态**：整片版 T_N 定义在全 V_{j,N−1} × V_{j,N−2} 上，
+      不要求 L_nφ=0；断言纯粹是这个线性映射核维数的一个上界。
+  (b) **D 不出现，D=26 不进入**：陈述与证明都不使用 D 的具体值、不使用 D=26、不使用中心荷 c；
+      唯一门槛是存在性假设 D ≥ 2（保证计数良定义与 §B⁗.3 (c) 通用界成立）。这与 N=4 的
+      横截性卡 worldsheet.level-four-null-family-transversal 关键不同：那里两族**单射/横截**
+      （ker = 0），且需要 3 ≤ D 提供一个横向单位偏振；本卡两族**不横截**（ker 可以是一维），
+      只断言重叠至多一维，且**只需 2 ≤ D**（比 N=4 弱）。
+  (c) **不断言 ker T₅ 恰为一维**：本卡只给上界 ≤ 1，不断言下界 = 1；下界（重叠确实是一维、
+      即 κ₅ 的 +1 确实被实现）由 worldsheet.ocq-null-state-two-families notes【2026-09-14
+      §B⁗.8 订正】记录的 U(Vir⁻) 万有 syzygy L₋₁x₄ + 𝒟₂y₃ = 0（y₃ = 12L₋₃ + 6L₋₂L₋₁ + L₋₁³，
+      与 (c,h) 无关）给出，本卡不承载该下界。
+  (d) **不是任意 level 通用**：本卡的核界对一切 rung、一切 N ≥ 2 的**通用形**成立（§B⁗.3 (c)），
+      但 ≤ 1 这个具体数字是 N=5 专属的（来自 κ₅=1）；N ≤ 4 时 κ_N=0 给 ker=0（这就是为什么
+      N ≤ 4 两族横截、seedPair 单射），N=5 起 κ₅=1，N ≥ 6 的 κ_N 一般不再是 1，本卡不覆盖。
+  (e) **不给出零态维数下界，不关闭 (B-26)**：本卡是 worldsheet.ddf-spans-physical-states-level-five
+      拼装 (B26 5) 时抵消那个 +1 的输入之一（本卡贡献"重叠至多一维 ⇒ 两族并集维数至少
+      = 各自维数之和 − 1"），不单独断言 dim(H_null ∩ V_5)，也不断言 D≠26 时的情形。
+uses:
+  - worldsheet.ddf-light-cone-frame
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard]
+formal:
+  lean_decl: StringFormal.NoGhost.finrank_ker_descPair_five_le_one
+  lean_file: StringFormal/NoGhost/LevelFiveCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFiveCount.lean :: StringFormal.NoGhost.finrank_ker_descPair_five_le_one
+      （本卡 formal.lean_decl = 整片版 (K5)，第 720 行起，section KernelFive）；种子版
+      StringFormal.NoGhost.finrank_ker_seedPair_five_le_one（第 734 行起，由整片版经
+      finrank_ker_seedPair_le 得到）。通用核界
+      StringFormal.NoGhost.finrank_ker_descPair_add_le（DescendantKernel.lean 第 280 行起，
+      §B⁗.3 (c)，D-无关、rung-无关，hN : 2 ≤ N）；κ₅=1 计数输入
+      StringFormal.NoGhost.levelFive_count_identity_full（第 142 行起，见
+      math.level-five-partition-difference）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator/lead 未自行重跑 `lake build` / `check-axioms`**（本 worktree 无构建缓存），
+      结论基于直接读源码。
+
+      **逐字核对陈述**（第 720-721 行）：
+      `theorem finrank_ker_descPair_five_le_one (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+        (j : ℤ) : Module.finrank K ↥(LinearMap.ker (descPair η a b j 5)) ≤ 1`
+      ——与本卡【断言】整片版逐字一致（hD : 2 ≤ D 即本卡门槛，比 N=4 横截性卡的 3 ≤ D 弱）。
+      种子版（第 734-736 行）：
+      `finrank_ker_seedPair_five_le_one … : Module.finrank K ↥(LinearMap.ker (seedPair η a b j 5)) ≤ 1`
+      `:= le_trans (finrank_ker_seedPair_le j 5) (finrank_ker_descPair_five_le_one hD F j)`。
+
+      **证明结构**（第 720-731 行，逐行核对）：
+      `have h1 := finrank_ker_descPair_add_le hD F F.hη j 5 (by norm_num)`（通用核界，N=5、
+      5−1=4、5−2=3 实例）；`have h6 := levelFive_count_identity_full (D := D) (by omega)`
+      （κ₅=1 计数，D−1 形，即右端 = p_D(5) + 1）；配合 `Fintype.card_fin` 归一化后 `omega`
+      收尾。**D=26 从未出现**——文件头 docstring 与该定理 docstring 逐字
+      "`D = 26` does not appear; the bound holds for every `D ≥ 2`, and `κ_5 = 1` is Euler's
+      pentagonal `−q⁵`"。
+
+      **与 N=4 的对照**（该定理 docstring 与 le_finrank_towerNull_inf_towerBigrade_five docstring
+      逐字）：N=4 处对应映射是**单射**（`LevelFourCount` 用力矩方程证，且因 κ₄=0 由
+      finrank_ker_descPair_add_le 免费重证）；N=5 处 κ₅=1 使 ker 可以一维，seedPair 不再单射。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15；文献不讨论两族零态的重叠维数，只断言整塔张成"
+    note: "不承载论证，只标注文献方位。"
+tags: [bosonic-string, no-ghost, ddf-spans, null-state, momentum-tower, pentagonal, formalized]
+notes: |
+  【为什么立卡：这是 N=5 唯一的新数学】N ≤ 4 的每片都靠"两族横截（seedPair 单射，ker=0）"
+  关闭，对应的机检卡是 worldsheet.level-three/-four-null-family-transversal（各自证 ker=0）。
+  N=5 处两族**不再横截**——κ₅=1 使它们重叠恰一维——所以 N=4 的横截性证明不能照搬，需要
+  一条**新的、更弱但正确的**输入："重叠至多一维"（dim ker T₅ ≤ 1）。这条界不是靠力矩方程
+  的横截性论证，而是靠一条对一切 rung、一切 D 成立的**纯计数**（秩-零化度 + κ₅=1），是本片
+  与更早各片在数学结构上的唯一实质区别，值得独立成卡。它是 worldsheet.level-three/-four-
+  null-family-transversal 在 N=5 上的对应位置（"两族相交结构"卡），但断言的是重叠上界而非
+  横截，故不 supersede、不合并那两张卡。
+
+  【查重】2026-09-14 跑 `uv run stringgraph search "level-five"`、`search "kernel bound"`、
+  `search finrank_ker_descPair`、`search descPair`、`search "level five"` 均无同内容命中；
+  `search transversal` 命中 worldsheet.level-three/-four-null-family-transversal（姊妹位置，
+  但那两张断言横截 ker=0，本卡断言重叠 ≤ 1，不同命题，不重复）。
+
+  【与 worldsheet.level-four-null-family-transversal 的关系，不合并】两卡占据"逐 N 攻克"路线
+  上同一个位置（该片两族零态的相交结构），但断言相反方向的事实：N=4 卡证 ker=0（横截，需
+  3≤D 供横向单位偏振，用力矩方程），本卡证 ker≤1（重叠至多一维，只需 2≤D，用纯计数）。
+  这正是 N=4→N=5 的结构转折：κ_N 从 0 变 1。两卡并列，互不 supersede。
+
+  【与 math.level-five-partition-difference 的关系】本卡的证明**逐字调用**该卡承载的
+  κ₅=1 计数恒等式（levelFive_count_identity_full）作为唯一的"+1 来源"，另一半是 §B⁗.3 (c)
+  的通用核界（D-无关，目前图上无独立节点，是 DescendantKernel.lean 内部引理，配套推导按
+  N≤4 先例不为其建边——它是本卡证明自身内容的一部分）。故配套推导 depends_on 挂
+  math.level-five-partition-difference 一条边（κ₅=1 输入）加标架 worldsheet.ddf-light-cone-frame。
+
+  【与 worldsheet.ocq-null-state-two-families notes【2026-09-14 §B⁗.8 订正】的关系】那段
+  订正记录：N=5 的开放内容是"重叠的上界"，已由 §B⁗.3 计数（κ₅=1、dim ker T₅ ≤ 1、与 D 无关）
+  关闭，Lean 化由 N=5 工作流进行中。本卡就是那条"Lean 化进行中"的落地承载：那段【订正】
+  预告的 dim ker T₅ ≤ 1 现已机检。重叠的**下界**（syzygy L₋₁x₄+𝒟₂y₃=0）本卡不承载（明确
+  不断言 (c)），仍停留在该 notes 的 ⟨手算⟩ 层面。
+author: lead
+created: "2026-09-14"

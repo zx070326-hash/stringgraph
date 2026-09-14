@@ -1,0 +1,167 @@
+id: worldsheet.ddf-spans-physical-states-level-five
+kind: proposition
+title: DDF 张成假设在 (rung −5, 振子能级 5) 一片上成立，需要 D = 26 但只需 2 ≤ D：H_phys ∩ V_5 ⊆ D(Ε) + H_null——第四个消费 D = 26 的机检张成片，也是两族零态首次重叠（κ₅=1）的一片
+statement: |
+  【设定】记号沿用 worldsheet.ddf-spanning-hypothesis（同一张塔 T(k;k_0)、系数域 K）与
+  worldsheet.ddf-light-cone-frame（标架对象 F : DDFLightConeFrame η a b）：系数域 K 满足
+  [Field K][LinearOrder K][IsStrictOrderedRing K][Algebra ℚ K]（有序域，与
+  worldsheet.ddf-spans-physical-states-level-four 记号一致）；截距 a₀ := α'k² = ½η(a,a)
+  由 F 钉死为 1；V_5 := towerBigrade(−5, 5)（rung −5、振子能级 5 的双分次片）；H_phys、D(Ε)、
+  H_null 三个子空间逐字取自 worldsheet.ddf-spanning-hypothesis（H_phys ∩ V_5、D(Ε) ∩ V_5、
+  H_null ∩ V_5 即 worldsheet.ddf-spanning-rank-inequality 记号里的 H_5、D_5、Z_5）。
+
+  【断言】设 hD : 2 ≤ D（**比 worldsheet.ddf-spans-physical-states-level-four 的 hD : 3 ≤ D
+  弱**，回到 N ≤ 3 各片的门槛，理由见【与...level-four 的关系】），F : DDFLightConeFrame η a b。
+  若 **(D : K) = 26**，则
+
+      **H_phys ∩ V_5  ⊆  D(Ε) + H_null** 。
+
+  用 worldsheet.ddf-spanning-hypothesis 的分片记号：这就是 DDFSpansOn(V_5)，即 DDF 张成假设
+  限制在 (rung −5, 振子能级 5) 这一片上成立——且**只在 D = 26 时**成立（本卡不断言 D ≠ 26
+  时的情形，见【本卡明确不断言】(b)）。
+
+  【与 worldsheet.ddf-spans-physical-states-level-four 的关系（姊妹卡，同族第五片；也是首个
+  两族重叠的片）】两卡形状同构（都是 DDFSpansOn 在单个反对角片上的实例，都需要 D = 26），
+  是"逐 N 攻克 worldsheet.ddf-spanning-hypothesis"这条路线上并列的第五个已关闭片，不是彼此
+  的推论或换代。与 N=4 的两处关键新差别：
+  (i) **门槛假设回落到 2 ≤ D**（level-four 需 3 ≤ D）——N=4 的关闭靠两族**横截**
+      （worldsheet.level-four-null-family-transversal，ker=0），横截性的力矩方程论证需要一个
+      横向单位偏振 u（u·p=0, u·u=1），故需 3 ≤ D；N=5 的关闭改靠两族重叠的**计数上界**
+      （worldsheet.level-five-null-family-kernel-bound，dim ker T₅ ≤ 1），该计数对一切 rung、
+      一切 D 成立，不需要横向偏振，故门槛回落到 2 ≤ D。
+  (ii) **两族零态首次重叠（κ₅=1），靠"两个 +1 相消"而非"横截"关闭**——N ≤ 4 处 Type-1
+      族 L₋₁Q_{−N,N−1} 与 Type-2 族 𝒟₂Q_{−N,N−2} 横截（并集维数 = 两维数之和），计数恒等式
+      p_{D−1}(N) = p_{D−2}(N) + p_{D−1}(N−1) + p_{D−1}(N−2) 干净成立。N=5 处计数恒等式左端
+      多一个 +1（math.level-five-partition-difference，Euler 五边形数 κ₅=1），同时两族零态的
+      并集维数因重叠也比"两维数之和"少 1（worldsheet.level-five-null-family-kernel-bound
+      给 dim ker T₅ ≤ 1）；**这两个 +1 在拼装 (B26 5) 时恰好相消**，故本片仍关闭。
+
+  【本卡不需要的假设】不需要 R 是 Q-代数意义之外的额外结构；不需要横向标架的显式基
+  （F 只需满足 DDFLightConeFrame 的八条，且**不再需要** N=4 的 3 ≤ D）。
+
+  【本卡明确不断言】
+  (a) **不断言一般 N 的任何片**：本卡只做 N = 5。N ≥ 6 的对应片是否可类似关闭完全开放
+      （κ_N 从 N=5 起不再为 0，N=5 是 κ_N=1 的第一片；N ≥ 12 起两族之外还需要新奇异向量族，
+      见 worldsheet.ocq-null-state-two-families notes【2026-09-12（三）】与【2026-09-14 §B⁗.8】），
+      均不受本卡影响。
+  (b) **不断言 D ≠ 26 时片上不成立（不证否命题）**：本卡只证 D = 26 ⟹ DDFSpansOn(V_5)
+      这一个方向；尖锐性/必要性未被证明，登记为未来工作，见配套推导的 gaps。
+  (c) **不断言全体 H_phys**（那是 worldsheet.ddf-spanning-hypothesis 本身）：一片一片地
+      关闭不自动给出全体，"逐片 ⇒ 全体"的拼装引理是另一条已 formalized 的独立引理
+      （Glue.lean），本卡不重复它。
+  (d) **不断言两族零态在一般 N 的构造或重叠维数**：那是 worldsheet.ocq-null-state-two-families
+      （一般 N，physical-argument）与 worldsheet.level-five-null-family-kernel-bound（N=5 的
+      重叠上界，formalized）的内容。本卡消费的是它们在 N = 5 这一个特例上的机检版本。
+  (e) **不断言零态的具体身份对读者可读**：零态族由 Type-1（L₋₁ 作用于 Q_{−5,4}）与
+      Type-2（𝒟₂ 作用于 Q_{−5,3}）两部分组成，本卡只断言其像落在 H_null ∩ V_5 里且（在重叠
+      至多一维的修正下）维数之和达到目标，具体索引编码是 Lean 侧实现细节，不是本卡陈述的一部分。
+  (f) **不断言 ker T₅ 恰为一维**：本卡只用重叠**上界** dim ker T₅ ≤ 1（这已足以让两个 +1 相消
+      给出 ⊆）；重叠下界 = 1 由 syzygy 给出，见 worldsheet.level-five-null-family-kernel-bound
+      明确不断言 (c)，本卡不依赖它。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge, conv.virasoro-standard, conv.intercept-sign-a]
+formal:
+  lean_decl: StringFormal.NoGhost.ddfSpans_bigrade_neg_five_five
+  lean_file: StringFormal/NoGhost/LevelFiveCount.lean
+sources:
+  - ref: stringformal-2026
+    loc: |
+      formal/StringFormal/NoGhost/LevelFiveCount.lean :: StringFormal.NoGhost.ddfSpans_bigrade_neg_five_five
+      （本卡 formal.lean_decl，section ClosingFive，第 868 行起）；紧邻的
+      StringFormal.NoGhost.b26_five_of_D26（同 section，第 837 行起，⭐⭐ 标记的中间结果）。
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1，无 sorry（文件头 docstring "No sorry"）。
+      **curator/lead 未自行重跑 `lake build` 与 `check-axioms`**（本 worktree 无构建缓存）；
+      合并前应由 lead 跑 `uv run stringgraph check-axioms`。这是本卡 status formalized 的依据。
+
+      **逐字核对**：`ddfSpans_bigrade_neg_five_five (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+      (hD26 : (D : K) = 26) : DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((5:ℕ):ℤ)) 5)`
+      ——与本卡【断言】逐字一致（hD : 2 ≤ D 即本卡回落的门槛，`DDFSpansOn … (towerBigrade …)`
+      就是「H_phys ∩ V_5 ⊆ D(Ε) + H_null」的 Lean 展开）。证明体
+      `ddfSpansOn_bigrade_of_b26 F.frame.isotropic F.hba (b26_five_of_D26 hD F hD26)`
+      （同 N=2/3/4 一样，`ddfSpansOn_bigrade_of_b26` 是 D-无关、N-无关的纯逻辑翻译引理，
+      不建 depends_on 边）。
+
+      文件头模块 docstring 逐字："This file closes `B26 5` and `ddfSpans_bigrade_neg_five_five`,
+      the fifth antidiagonal slice of `ddf-spans`."，并逐字记录 `2 ≤ D` 弱于 `b26_four_of_D26`
+      的 `3 ≤ D`："the level-five transversality input is the count (K5), which needs no
+      transverse polarisation, whereas the moment-equation proof at `N = 4` does."
+
+      **证明链（逐层核对，供审计）**：`b26_five_of_D26` 的九个输入 h1-h9（第 842-855 行逐字读取）：
+      h1 = `finrank_towerPhys_inf_towerBigrade_le (K:=K) hD F 5`
+        （worldsheet.physical-slice-bounded-by-transverse-count 的 formal.lean_decl，逐字调用，
+        给 dim H_5 ≤ p_{D−1}(5)）；
+      h2 = `card_conjFree_five_le`、h4 = `card_ddfLevel_five_ge`、h5 = `card_conjFree_four_ge`、
+      h6 = `card_conjFree_three_ge`
+        （本文件内部纯计数引理，不对应图上既有节点，不建边）；
+      h3 = `levelFive_count_identity (D:=D) hD`
+        （math.level-five-partition-difference 的 formal.lean_decl = (I5) 形，逐字调用，给
+        p_{D−1}(5) + 1 = p_{D−2}(5) + p_{D−1}(4) + p_{D−1}(3)——**注意左端的 +1**，这是与
+        level-four 的 h3 的结构差别）；
+      h7 = `le_finrank_towerSeed (K:=K) hD F (-((5:ℕ):ℤ)) 4`
+        （worldsheet.quasi-physical-slice-dimension 的 formal.lean_decl，逐字调用，给
+        dim Q_{−5,4} ≥ p_{D−1}(4)——level-4 的实例）；
+      h8 = `le_finrank_towerSeed (K:=K) hD F (-((5:ℕ):ℤ)) 3`
+        （同一条引理，level-3 的实例，给 dim Q_{−5,3} ≥ p_{D−1}(3)）；
+      h9 = 内联证明块，`rw [hint, hrung]; exact le_finrank_towerNull_inf_towerBigrade_five
+        hD F haa hD26`
+        （给 dim Q_{−5,4} + dim Q_{−5,3} ≤ dim(H_null ⊓ V_5) + 1——**唯一使用 (D:K)=26
+        的一步**，右端的 +1 正是两族重叠；其内部的 dim ker T₅ ≤ 1 由
+        worldsheet.level-five-null-family-kernel-bound 承载，见下）；
+      最后 `rw [finrank_ddfSpan_inf_towerBigrade F.hη F.frame.isotropic F.hba F.trans 5]`
+        （worldsheet.transverse-ddf-fock-gram-matrix 一侧的维数版本，非该卡 headline
+        `ddf_gram_diagonal`，给 dim D_5 = p_{D−2}(5)，与 N=2/3/4 derivation 同一记法）。
+      九项经 `omega` 拼成 `b26_five_of_D26`——**h3 的 +1 与 h9 的 +1 在 omega 里相消**
+      （该定理 docstring 逐字："so the two `+ 1`s cancel"）。
+
+      **`le_finrank_towerNull_inf_towerBigrade_five` 的结构**（h9，第 750 行起）：对 seedPair
+      用秩-零化度（`LinearMap.finrank_range_add_finrank_ker`），其像落在
+      `towerNullSubmodule ⊓ towerBigrade(-5,5)` 里（Type-1 半用
+      `towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade`；Type-2 半用
+      `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`——**唯一用到 (D:K)=26 的地方**，
+      经 worldsheet.level-two-null-state-requires-d26 已登记的一般充分性引理
+      `descTwo_mem_towerNullSubmodule`，与 N=3/4 同一条 D=26 入口），核维数由
+      `finrank_ker_seedPair_five_le_one`（worldsheet.level-five-null-family-kernel-bound
+      的种子版，dim ker ≤ 1）控制，`omega` 收尾。**这是本卡区别于 N=4 的核心**：N=4 那里
+      对应映射单射（ker=0），N=5 这里核可以一维（ker≤1），多出的 +1 与 h3 的 +1 相消。
+  - ref: goddard-2008
+    loc: "§6, p.15, eq. (6.4)（arXiv:0802.3249v1）：'|ψ⟩ = |f⟩ + |n⟩'，对 D = 26 断言"
+    note: |
+      **不承载本卡的论证**。本卡与 (6.4) 的形式**逐字相同**（D = 26、|n⟩ 是零态），
+      差别只剩一处：文献对一切能级断言，本卡只做 (rung −5, level 5) 这一片。
+      与 worldsheet.ddf-spans-physical-states-level-four 引用同一条文献锚点，理由同该卡。
+tags: [bosonic-string, spectrum-generating-algebra, no-ghost, ddf-spans, critical-dimension, pentagonal, formalized]
+notes: |
+  【为什么立卡】formal/StringFormal/NoGhost/LevelFiveCount.lean 把 N = 5 这一片的 DDF
+  张成做成机器验证的定理，是继 N=2/3/4 之后第四个真正消费 D = 26 的机检张成结果，也把
+  本项目的形式化前沿从 N ≤ 4 推进到 **N ≤ 5**。本卡承载这一结果，形状与三张姊妹卡逐字对齐
+  （同一个"DDFSpansOn 分片实例"模式），但 N=5 是**两族零态首次重叠**的一片，关闭机制从
+  "横截"（N≤4）变为"两个 +1 相消"（κ₅=1），这是本片相对更早各片的实质数学新意。
+
+  【查重】2026-09-14 跑 `uv run stringgraph search "level five" / "level-five" / "rung -5" /
+  ddfSpans_bigrade_neg_five`，均无同内容命中；`search ddf-spans` 命中的是既有的 N=1/2/3/4
+  系列卡与 worldsheet.ddf-spanning-hypothesis 本身，形状相同但片不同，不重复。
+
+  【D 只通过一件事进入，与 N=2/3/4 的机制平行】N=5 处 D 同样只经 Type-2 族（这次是 Q_{−5,3}
+  大小的 𝒟₂ 像）落在 H_null 里这一步进入，具体是 `descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+  内部调用的 `descTwo_mem_towerNullSubmodule`（同一条 NullSeedsTwo.lean 一般充分性引理，
+  四片共用同一条 D=26 入口）。**Type-1 族的物理性、两族重叠的上界（本卡消费的
+  worldsheet.level-five-null-family-kernel-bound）、以及全部计数步骤，都不用 D=26**——这与
+  N=2/3/4 notes 是同一个洞察在 N=5 上的第四次重复确证。**与 N=4 不同的是门槛回落到 2 ≤ D**
+  （N=5 不再需要横向单位偏振，因关闭机制从横截换成计数上界）。
+
+  【depends_on 的取舍：为什么挂 worldsheet.level-five-null-family-kernel-bound 而非
+  worldsheet.level-four-null-family-transversal 的类比】N=4 的 h9 靠横截性（ker=0）关闭，
+  挂 worldsheet.level-four-null-family-transversal；N=5 的 h9 靠重叠上界（ker≤1）关闭，
+  改挂 worldsheet.level-five-null-family-kernel-bound（其种子版 finrank_ker_seedPair_five_le_one
+  被 h9 内部逐字调用）。这是本片与 N=4 在依赖结构上的核心区别，反映 κ_N 从 0 到 1 的转折。
+
+  【depends_on 的取舍：为什么不挂 worldsheet.ddf-spanning-rank-inequality】
+  同 N=2/3/4 的既有理由：`ddfSpansOn_bigrade_of_b26` 是 D-无关、N-无关的纯逻辑翻译引理，
+  本卡只在 N=5 这一个具体实例上证明 `B26 5`，不是引用该卡尚未证的 "∀N" 内容。故不建这条边。
+
+  【depends_on 的取舍：Type-1、Type-2 两族在 N=5 都经 le_finrank_towerSeed 挂
+  worldsheet.quasi-physical-slice-dimension】与 level-four 同型：h7（level-4 实例）与 h8
+  （level-3 实例）用的是**同一条** formal.lean_decl `le_finrank_towerSeed`，两次调用同一条
+  引理，故挂两条边到 worldsheet.quasi-physical-slice-dimension（均 inferred: false，见配套推导）。
+author: lead
+created: "2026-09-14"
