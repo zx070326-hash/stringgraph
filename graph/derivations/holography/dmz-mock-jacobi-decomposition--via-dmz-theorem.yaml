@@ -1,0 +1,23 @@
+id: holography.dmz-mock-jacobi-decomposition--via-dmz-theorem
+target: holography.dmz-mock-jacobi-decomposition
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+sources:
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§3 Theorem 1.1（正则分解的存在性与唯一性），§4–§5（Appell-Lerch 和的构造与模变换证明）"
+summary: |
+  Dabholkar-Murthy-Zagier 2012 对指标 m 的亚纯 Jacobi 形式证明典范正则分解：
+  1. 存在性：对任意亚纯 Jacobi 形式 φ，构造 Appell-Lerch 极部 φ_P 使之极点与 φ 完全
+     吻合（显式公式），差 φ_F = φ − φ_P 无极点，即 mock Jacobi 形式；
+  2. 唯一性：若两个 Appell-Lerch 极部都可用，差为正则（全纯）Jacobi 形式；
+     当 J_{k,m}^{cusp} = 0 时分解唯一；对 N=4 弦论中 DVV 上下文所用的指标 m 情形，
+     该条件已被 DMZ 2012 核实（引文 §4 末尾备注）；
+  3. 全部论证使用 Fourier-Jacobi 展开、Appell-Lerch 和的 Jacobi 群变换律以及维数估计，
+     是严格代数/分析数论证明，不依赖物理输入。
+  对 1/Φ₁₀ 的应用：固定 n 后的 1/Φ₁₀（作为关于 τ,z 的亚纯 Jacobi 形式）满足上述假设，
+  因此分解定理直接适用；Φ₁₀ 的极点结构由 holography.igusa-cusp-form-phi10 给出。
+author: lead
+created: "2026-09-14"
