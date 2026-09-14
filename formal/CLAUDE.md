@@ -566,6 +566,27 @@ StringFormal/
                             §B′.8「计数看不见 26」。
                             **未做**：`N ≥ 5`（两族在计数上不再够用，超出量是五边形数；力矩机器本身
                             与 `N` 无关，可复用）；`¬ B26 N`（`D ≠ 26`）的维数版
+  NoGhost/Ghost.lean        **λ = 2 的 bc 鬼场系统中心荷 `c^g = −26`**（图卡
+                            `worldsheet.bc-ghost-central-charge-lambda-two`，`--via-lean`）。
+                            **抽象**设定：任意交换环 `R`（除 12 才要 `[Algebra ℚ R]`）、任意 `R`-模 `M`、
+                            `b c : ℤ → Module.End R M` 满足 `IsBCSystem`（`{b_m,c_n} = δ_{m+n,0}`、
+                            `{b,b} = {c,c} = 0`）与 `IsRestricted`（**单边**受限，
+                            即 auditor 注记 (B) 指出的正确写法）。`nord` 把 `: :` 定死为
+                            **SL(2,C) 序**（湮灭算符 `b_n (n ≥ −1)`、`c_n (n ≥ 2)` 右移带费米符号），
+                            `Lop = Σ_p (2k−p) :b_p c_{k−p}:`（`lsumLocFin`；`Lop_apply_shift` 给卡面
+                            指标 `Σ_n (k−n) :b_{k+n} c_{−n}:`）。主定理 `lie_Lop_Lop`；
+                            「c = −26」单独那条是 `ghostVirCoeff_eq`。
+                            ⚠ **不能**走 `Sugawara.lean` 的「刚性 + 2-上圈递推」——抽象受限模上
+                            「与全部模对易 ⟹ 标量」为假——故走**直接二重和**：`bc_mul_bc_sub`（gl(∞)，
+                            无中心项）→ `nord_bracket`（正规序反常 `δδ(χ(p)−χ(r))`，`χ(p) = [p ≥ −1]`）
+                            → 公共窗口两端各留 `|m|+|n|` 余量的二重和（两个 δ 各压掉一重，系数恒等式
+                            `(2m−p)(2n+m−p) − (2m+n−p)(2n−p) = (m−n)(2(m+n)−p)`，**指标无需平移**）
+                            → `six_mul_ghostAnom`（`6z(m) = −13(m³−m)`，两个符号分支同一闭式）。
+                            数值旁证 `ghostAnom_two = −13`（= c/2）等四条由 `decide` 关掉。
+                            **未做**：没有构造任何非零的 bc 受限模（Λ^∞_* 未形式化，故是条件式命题）；
+                            能级序下的 `L^g_n`、鬼场数流、BRST 荷 `Q`、一般 λ 公式全未做。
+                            `import ...Sugawara` **只**为通用工具 `lsumLocFin`，不用玻色 Fock 内容
+                            （解耦建议见 TODO 的 `bc-ghost-central-charge-26`）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
