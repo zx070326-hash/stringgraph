@@ -351,5 +351,71 @@ notes: |
   N ≥ 6 开放"，"N ≥ 12 新产生子"不变。**本卡 effective 依旧 open**：本卡仍无推导，
   唯一未证环节 worldsheet.ddf-spanning-rank-inequality 依旧对一般 N 开放，只是
   N ≤ 5 这五个具体实例现在都有了独立的机检证据。
+
+  【2026-09-15 追加（curator，分支 agent/curator/ddf-borcherds-1992）：加了
+  --via-borcherds-1992，「本卡无源 open」这个判断不再成立。**只追加，上面各段一字未删。**】
+  新推导 worldsheet.ddf-spanning-hypothesis--via-borcherds-1992（kind: proof，
+  own status **rigorous**）把 **Borcherds 1992 §5 Theorem 5.1 + Lemmas 5.1–5.5**
+  （Invent. Math. 109, 405–444；L1 一手已读，literature/extractions/borcherds-1992.md §E1/E2）
+  接为本卡的第一条**已发表完整证明**：Thm 5.1 证 P¹_r/(其双线性形式的零化空间) **自然同构**于
+  V^{1−(r,r)/2}（自然同构含满射 ⇒ 张成），Lemma 5.5 逐字给 **P¹ = T¹ ⊕ N¹**
+  （物理态 = 横向态 ⊕ 零态）；三空间字典 (P¹, T¹, N¹) ↔ (H_phys, D(Ε), H_null)，
+  D = 26 经 Lemma 5.4 的「c = 24 横向张 II_{1,1} 后 26」进入，
+  与下面【为什么 26 只在这里】的特征标计数判断完全吻合。
+
+  **(1) 本卡不再是「无源 open」。** 上面【本卡无推导、effective = open，这是刻意的】一节
+  留痕的条件「(1) 文献侧只有一句无证明结论」已被消除：本卡现在有一条 own = rigorous 的推导，
+  其论证体是期刊编号定理加一条逐步有理由的证明链（Lemmas 5.1–5.5），不再是 Goddard 2008 (6.4)
+  那样的一句转引。该节的第二个理由（挂 physical-argument 会掩盖条件版的记账）也不再适用——
+  挂上的是**严格**推导，且它的 effective 被工具经 inferred 边算作 physical-argument（见 (3)），
+  「条件版已机检、猜想负担集中」这个记账结果**没有被掩盖**，反而更精确：负担现在分成两块，
+  一块有文献严格来源、一块（逐 N 秩不等式）留给形式化。
+  ⚠ **本卡的 effective 现在由最强的推导决定，已不再是 open**（见 (3)）；
+  上面各段反复出现的「本卡 effective 依旧 open」是**当时**的记账，保留作历史痕迹，不再成立。
+
+  **(2) 两条路线互补正交（reviewer Risk 4）——后者价值不因前者而消失。**
+    · **--via-borcherds-1992**（本卡新增）：**整塔一次性**的抽象张成证明，来自 VOA 语言。
+      价值：把「无源 open」变成「有已发表严格来源」，且 D = 26 有一步可指认的证明来源
+      （Lemma 5.4）。代价：与本项目模态和算子 A^ε_n 的对接未在一手文献成文
+      （算子字典 K_i ↔ 围道 A^i_n ↔ 模态和 A^ε_n 标 `inferred`），故 effective 被压一级。
+      **它不产出任何 Lean 可消费的逐级别陈述。**
+    · **--via-rank-inequalities**（2026-09-12，formalized）：**逐级别 N 的秩不等式**路线，
+      把本卡压成「∀N，worldsheet.ddf-spanning-rank-inequality(N)」，
+      是 Lean 形式化真正消费的形状。价值：N ≤ 5 已机检闭合，N ≥ 6 是当前前沿
+      （上面【2026-09-14】一节的订正仍有效）。代价：对一般 N 开放，故 effective = open。
+  ⇒ **两条推导并存，后者不被前者替代**：Borcherds 路线的证明不逐级别、不在 Lean 里，
+  不能用来关闭 N ≥ 6 的形式化工作；rank-inequalities 路线依旧是形式化的唯一载体。
+  上面【链条现状】一节记的三段 ⟹ 链条**完全不变**，只是本卡现在多了一条独立的输入边。
+
+  **(3) 本卡 effective 的变化与瓶颈位置。**
+  工具输出：own_status = formalized（来自 rank-inequalities 那条推导的目标 formal 字段），
+  **effective = physical-argument**，best_derivation = --via-borcherds-1992。
+  `uv run stringgraph why` 在 --via-borcherds-1992 这一支上给出**唯一**瓶颈：
+  worldsheet.ddf-contour-equals-mode-sum（effective = physical-argument）。
+  ⇒ 本卡 effective 由最弱的一支决定的行为没有变：rank-inequalities 那支的瓶颈
+  （worldsheet.ddf-spanning-rank-inequality）仍在，**本卡对一般 N 的 open 性没有消失**；
+  变化的是本卡现在**不再只有一条路径**——一条被 open 前件压住，另一条被 physical-argument
+  字典压住，两条各自诚实。
+
+  **(4) 真正残留的 open 缺口现已精确定位到 worldsheet.ddf-contour-equals-mode-sum。**
+  该卡断言「围道积分形式的 DDF 算子 A^i_n = (1/2πi)∮P^μ(z)V(n k_0,z)dz ⟺ 本卡 D(Ε) 用的
+  模态和形式 A^ε_n = Σ_m α^ε_m V^{(n)}_m」（borcherds-1992 的 K_i 是同一族算子的第三种写法），
+  effective = physical-argument：它的 gaps 第 1 条逐字写「第 3 步的重排在算子层面没有论证」，
+  notes 逐字写「本推导的前提里含一个**未定义的对象**（围道积分的算子值被积量），故前提不完整」。
+  ⇒ **这是本卡通往文献回译的最后一道未闭合关口**：本卡的抽象张成已有 Borcherds 1992 §5
+  的发表证明（Lemma 5.5 逐字 P¹ = T¹ ⊕ N¹），但只要上面那条算子字典还是 physical-argument，
+  「Borcherds 证的 T¹ 就是本项目 D(Ε)」这一跳就同样只有 physical-argument 强度。
+  补它的路已在 worldsheet.ddf-contour-equals-mode-sum 的 notes【补它的两条路】登记
+  （在 Lean 里引入形式留数）；那条路线完成时，--via-borcherds-1992 的 effective 会随之抬到
+  rigorous。**在此之前，本卡的回译审计（首当其冲 ms.no-ghost-theorem 一类里程碑）
+  必须显式引用这条缺口**，另加桥接边 gaps 第 3 条的两条子缺口
+  （Borcherds 的 II_{1,1} 是二维格而本卡的塔只沿一条类光方向分片；
+  本卡塔上的型是约定式定义而 Borcherds 的形式是构造出来的）。
+
+  **(5) 上面各段「本卡仍无推导」的表述按本节订正，其余内容（各 N 片的关闭记录、
+  分片拼装、三种等价写法、N ≥ 6 前沿、三角性路线被证伪、26 只在这里、等距同构不多给东西、
+  逐句字典）全部一字未改地仍然有效。** 本节只加两条事实：本卡多了一条严格文献来源的推导；
+  它的瓶颈指向 worldsheet.ddf-contour-equals-mode-sum。
+  statement 正文（不可变的卡片内容）**一字未动**。
 author: curator
 created: "2026-09-11"
