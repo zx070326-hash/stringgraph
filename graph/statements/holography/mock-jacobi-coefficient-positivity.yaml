@@ -1,54 +1,72 @@
 id: holography.mock-jacobi-coefficient-positivity
 kind: proposition
-title: 1/Φ₁₀ 有限部 mock Jacobi 形式傅里叶系数的符号正性（Rosselló Thm 1 + Cor 1.1）
+title: 代表元范围内 mock Jacobi 系数符号正性（Thm 1）与全范围单心指标 d_∗>0（Cor 1.1）
 statement: |
   设 1/Φ₁₀ 按 σ 展开后、固定指标 m∈ℤ_{>0} 的那一层亚纯 Jacobi 形式经 DMZ 典范分解
   （holography.dmz-mock-jacobi-decomposition）得到有限部 φ_F = ψ_m^F（指标 m 的 mock
-  Jacobi 形式），并记其傅里叶展开系数为 c_m^F(n,ℓ)：
+  Jacobi 形式），记其傅里叶展开系数为 c_m^F(n,ℓ)：
     ψ_m^F(τ,z) = ∑_{n,ℓ} c_m^F(n,ℓ) q^n y^ℓ,   q = e^{2πiτ}, y = e^{2πiz}。
+  另记**单心（免死）指标** d_∗(m,n,ℓ) 为沿吸引子围道 𝒞_∗ 的积分（Rosselló (2.22)–(2.23)）
+    d_∗(m,n,ℓ) = ∫_{𝒞_∗} dρ dσ dv · e^{−2πi(mρ+nσ+ℓ(v+½))} / Φ₁₀(ρ,σ,v)，
+  即 1/Φ₁₀ 在电荷依赖点（吸引子点）处的傅里叶系数。**d_∗ 一般不等于 (−1)^{ℓ+1} c_m^F(n,ℓ)**：
+  后者只在下述代表元范围内与之相等，范围之外须减去多心留数（Rosselló §2.2 (2.34)–(2.35)）。
   则：
-  (a) （代表元范围）对所有整数 m>0、n≥m、0≤ℓ≤m 有
-        (−1)^{ℓ+1} c_m^F(n,ℓ) > 0。
-  (b) （全范围）这些系数在由 Φ₁₀ 的 Sp(4,ℤ) 模性诱导的 GL(2,ℤ) 算术作用下只依赖三元组
-      (m,n,ℓ) 的轨道，故由 (a) 推出：对所有 m,n,ℓ∈ℤ 满足
+  (a) （代表元范围，Rosselló Thm 1）对所有整数 m>0、n≥m、0≤ℓ≤m 有
+        (−1)^{ℓ+1} c_m^F(n,ℓ) > 0；
+      在代表元范围内（ℓ≤m≤n ⇒ ℓ<2m 且 ℓ<2n）多心贡献为零，此时
+        d_∗(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)。
+  (b) （全范围，Rosselló Cor 1.1）对所有 m,n,ℓ∈ℤ 满足
         m ≥ 1,  n ≥ 1,  Δ = 4mn − ℓ² > 0,  gcd(m,n,ℓ) = 1（Rosselló 记为算术不变量
         torsion I = 1；I>1 的三元组可归约到 I=1）
       有
-        (−1)^{ℓ+1} c_m^F(n,ℓ) > 0，
-      即带符号系数 d_*(m,n,ℓ) := (−1)^{ℓ+1} c_m^F(n,ℓ) 在整个 Δ>0、单位挠范围内严格为正。
-  本陈述是关于 mock Jacobi 形式傅里叶系数符号的纯数学命题，不含任何解释性内容。
+        d_∗(m,n,ℓ) > 0。
+  **不得把 (b) 误读为"全范围 (−1)^{ℓ+1} c_m^F(n,ℓ) > 0"——该命题为假**：Rosselló §2.2
+  给出 (m,n,ℓ)=(10,1,6)（Δ=4>0，满足 0≤ℓ<2m 但违反 ℓ<2n），此时
+  c_10^F(1,6) = 1393564656，(−1)^{6+1} c_10^F(1,6) < 0；减去多心留数后才得
+  d_∗(10,1,6) = 50064 > 0（等于代表元 d_∗(1,1,0) = (−1)c_1^F(1,0)）。
+  本陈述是纯数学命题，不含任何解释性内容。
 uses:
   - holography.dmz-mock-jacobi-decomposition
 uses_conventions: []
 sources:
   - ref: rossello-2024
-    loc: "Theorem 1（m>0, n≥m, 0≤ℓ≤m: (−1)^{ℓ+1} c_m^F(n,ℓ)>0）；Corollary 1.1（GL(2,ℤ) 不变性推广到全部 m,n≥1、Δ=4mn−ℓ²>0，torsion I=1）"
+    loc: "Thm 1（§1 eq. 1.5: m>0, n≥m, 0≤ℓ≤m ⇒ (−1)^{ℓ+1} c_m^F(n,ℓ)>0）；Cor 1.1（eq. 1.6: m,n≥1, Δ>0 ⇒ d_∗(m,n,ℓ)>0）；(2.22)–(2.23)（吸引子围道定义 d_∗）；§2.2 (2.34)–(2.35)（反例 (10,1,6) 与多心留数扣除）；§3.1（推广步：S-对偶约化到代表元 (3.1)）"
     note: "指标 m≥3 由本文证明（§3 一般 m≥6，Appendix A 的 m=3,4,5 显式）；m=1,2 引 Bringmann-Murthy"
   - ref: bringmann-murthy-2012
     loc: "主定理：指标 m=1,2 的情形（对这两个 m 覆盖全部 Δ>0，含小判别式）；圆法 + Kloosterman 和估计"
-    note: "定理编号未从原文独立核到（PDF 为压缩流），照实记为「主定理」，见 extractions/bringmann-murthy-2012.md E3"
+    note: "定理编号未从原文独立核到（PDF 为压缩流），照实记为「主定理」；覆盖范围见 extractions/bringmann-murthy-2012.md E3"
 notes: |
-  **纯数学命题。** 本卡只断言 mock Jacobi 系数的符号，不断言任何物理解读；
-  "c_m^F(n,ℓ) = immortal（单心）dyon 指标"的识别以及由此得到的"黑洞微观简并度为正"
-  记在 holography.immortal-dyon-index-positive（其推导须链入识别③
+  **纯数学命题。** 本卡的两个结论都是关于模形式系数/围道积分的数学陈述，不含物理解读；
+  "d_∗ = immortal（单心）dyon 简并度、c_m^F = 其生成函数系数"的识别记在
+  holography.immortal-dyon-index-positive（其推导须链入识别③
   holography.dmz-single-center-identification，physical-argument）。
+
+  **陈述对象的两分（task #20 修正 1，依据 extractions/rossello-2024.md R1–R4）**：
+  - (a) 的对象是 mock Jacobi 系数 c_m^F，范围是代表元 n≥m、0≤ℓ≤m。
+  - (b) 的对象是单心指标 d_∗（吸引子围道积分），范围是全部 Δ>0、gcd=1。
+  两者在代表元范围重合，离开代表元范围必须分开——(10,1,6) 的反例已写进 statement 正文。
+  本卡早先版本把 (b) 写成"全范围 (−1)^{ℓ+1}c_m^F>0"，与 Rosselló §2.2 (2.34)–(2.35) 直接矛盾，
+  已在进 main 之前修正（本卡当时无任何节点依赖，属落地前改草稿，非换代）。
 
   覆盖范围（task #17 核实，见 extractions/）：
   - Bringmann-Murthy 2012：mock Jacobi 形式**指标 m=1,2**；对这两个 m 覆盖全部 Δ>0
     （含小判别式）。**不是**"充分大判别式"——后者是本项目早期节点里的错误措辞，已订正。
-  - Rosselló 2024：补齐 m≥3（m=3,4,5 显式验证，m≥6 一般论证），故 Theorem 1 + Corollary 1.1
+  - Rosselló 2024：补齐 m≥3（m=3,4,5 显式验证，m≥6 一般论证），故 Thm 1 + Cor 1.1
     合并覆盖全部 m,n≥1、Δ>0、gcd=1。
-  符号约定：Rosselló 的正性带因子 (−1)^{ℓ+1}；本卡照抄该因子，不做符号吸收。
-  d_* 的记号沿用 Rosselló Corollary 1.1。
+  - gcd(m,n,ℓ)=1 与 torsion I=1：抽取记录 E1 写 gcd=1、E3 写 I=1，本卡按 gcd=1 表述；
+    I>1 的归约（Rosselló [52][53][54]）不在本卡范围内。
 
-  两处待 reviewer/auditor 复核的措辞（不影响 (a)，只涉及 (b) 的推广步）：
-  1. 抽取记录把 Corollary 1.1 的推广步记作"**单心简并度**的 S-对偶（GL(2,ℤ)）不变性"。
-     本卡把它读作系数层面的算术轨道不变性（源于 Φ₁₀ 的 Sp(4,ℤ) 模性 + DMZ 分解的典范性），
-     以保持纯数学。task #17 的裁定（extractions/rossello-2024.md E4）明确"正性证明本身完全是
-     纯数学，弦对偶未作为证明前提"，故按 rigorous 记；若原文 §1/§3 的推广步实际调用的是物理
-     S-对偶而非 Siegel 模性，则 (b) 应另立一卡并降级，届时 (a) 仍为 rigorous。
-  2. gcd(m,n,ℓ)=1 与 torsion I=1 在抽取记录中被当作同一条件（E1 写 gcd=1，E3 写 I=1）；
-     两者在单位挠情形一致，本卡按 gcd=1 表述。
+  **严格度分层（task #20 修正 2）**：
+  - (a)：Rosselló §2–§3 + Appendix A 的完整证明（S-对偶约化 + Rademacher 展开 +
+    Kloosterman/Bessel 显式定界），m=1,2 由 BM 2012 覆盖。rigorous。
+  - (b) 的推广步：'d_∗ 在 GL(2,ℤ) 下不变' 在 Rosselló §2 是**断言**（"It follows from the
+    definition of the contour 𝒞_∗ (2.22) that (2.23) is invariant under the duality group"），
+    本文未分步重证；其数学根据是 Φ₁₀ 的 Sp(4,ℤ) 模性 + 吸引子围道协变（既有背景结果），
+    SL(2,ℤ)→GL(2,ℤ) 的扩群依据是 Φ₁₀ 的**偶权**（原文自足理由："notice that the Igusa cusp
+    form has even weight"，[59] 仅作 Siegel 模形式数学手册引用）。该不变性是数学结论，
+    故 (b) 仍记 rigorous，但来源是"引用而非重证"，接线细节见推导节点。
+  - 待办（留待 reviewer/lead 裁定，不在本卡内）：把 (b) 依赖的"正定二元二次型的
+    Gauss/GL(2,ℤ) 约化"（代表域即 (3.1)）落成一张 math 卡，届时本推导应指向它。
 tags: [bh-entropy, mock-modular, cartography, number-theory]
 author: graph-curator
 created: "2026-09-14"
