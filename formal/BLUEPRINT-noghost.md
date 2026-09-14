@@ -3225,6 +3225,16 @@ N = 7 : 1593891 + 247312 − 9293050 + 7452225 = 378
 命名空间 `StringFormal.NoGhost`。两个新文件：一个**与 `N` 无关、`D`-无关**的核上界文件，
 一个 `N = 5` 的计数与收尾文件。
 
+记号：`P_N(m)` 是 `p_m(N)` 的闭式（按 `N` 的分拆逐形累加，`C` 是 `Nat.choose`）：
+
+```
+P₃(m) = m + m² + C(m+2,3)                                                  [Lean 已有，levelThree]
+P₄(m) = m + m² + C(m+1,2) + m·C(m+1,2) + C(m+3,4)                          [Lean 已有，levelFour]
+P₅(m) = m + 2m² + 2m·C(m+1,2) + m·C(m+2,3) + C(m+4,5)                      （新，七形）
+```
+
+（`m = 25`：`3575`、`29575`、`209405`；`m = 24`：`3200`、`25650`、`176256`。）
+
 #### PR9a `NoGhost/DescendantKernel.lean`（≈ 250–300 行，任意 `N`、任意 rung，`D = 26` 不出现）
 
 `import` `NoGhost/TypeOneFamily.lean`（要 (F-1) 与 `finrank_towerBigrade`）。
