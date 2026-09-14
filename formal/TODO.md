@@ -1978,6 +1978,11 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
     §B′.9 第 2 条）。
   - **公理登记**：85 条声明经 `check_axioms --all` 全 `ok`（2026-09-12）。
 - [ ] `noghost-pr5`（蓝图 **§B″**，2026-09-12 planner-b26-seeds）：(B-26) 零态下界。顺序：前置 `lie_towerLop_towerLop`（塔上 Virasoro 关系，~15 行）→ **`kacDet2_massShell_two : Fock.kacDet2 c (1 - 2) = 2 * (c - 26)`（一行 `ring`，把「26 处为零」加强为「零点只有 26」）** → PR5b′ `N = 2` 特例（`LevelTwoSpan.lean`，~120 行，整条路线唯一便宜的证伪点；`D = 26` 唯一消费点 `towerLop_two_apply_descTwo`，方程 `L_2(2L_{−2}+3L_{−1}²)φ = (c−26)φ`，`a₀ = 1` 只进 `L_1(…)φ = 12(h+1)L_{−1}φ`）→ PR5b `NullSeeds.lean`（Type 1 / Type 2 两族，~250 行）→ PR5a `VirasoroPBWBasis.lean`（每片 Virasoro × 光锥 PBW 基，~700 行；独立价值：关掉 PR4 全部非-(B-26) 缺口）。**致命断点**：两族像在 `N ≥ 5` 的重叠恰为 Euler 五边形数（超出 1, 25, 351），要下界须给 `dim(U ⊓ W)` 上界 = Verma 模 BGG 嵌入结构；建议绕法是按含 `b̃` 占据函数逐指标造零态、用与 `C_N` 配对矩阵三角性证独立。§B″.5 证明 (B-26) **不可能**由任何维数记账推出（候选 (c) 否决）。
+  - ⚠ **2026-09-14 订正「致命断点」那一句**：`dim(U ⊓ W)` 的上界**不需要** BGG 嵌入结构，
+    它由 (F-1) + 秩–零化度给出（`DescendantKernel.finrank_ker_descPair_add_le`），在 `N = 5`
+    处等于 `κ₅ = 1`，`D`-无关。BGG 只在「想证这个上界是紧的」时才需要，而 `N = 5` 的紧性
+    已由蓝图 §B⁗.2 的显式 syzygy `L_{−1}x₄ + 𝒟₂y₃ = 0` 手算给出（未入 Lean，也不需要）。
+    见 `noghost-pr9`。真正的断点从 `N ≥ 6` 开始，且形状不同（要**种子上**的核 `τ_N`）。
   - **2026-09-12 formalizer：PR5b′（`N = 2` 证伪点）已落地，`§B″.2` 的手算逐字复核通过，无订正。**
     三个提交（分支 `agent/formalizer/noghost-pr5-n2`）：
     (1) `Fock.kacDet2_massShell_two : kacDet2 c (1−2) = 2*(c−26)` 与
@@ -2068,19 +2073,44 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       形式化（Pascal，对一切 `D`；`D = 26` 时 `29575 = 25650 + 3575 + 350`）。25 个单射 case
       靠新的 `modeCount` 不变量压成 20 个一行 + 5 个真证明。
 
-- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-12 现状**：
+- [ ] `ddf-spans`：DDF 态张成 `H_phys / null`（D = 26, a = 1）。这是定理的核心。**2026-09-14 现状**：
       D 无关半边全部形式化（§B′ PR0–PR4：`B26 N ⟺` 逐片张成、`dim(H_phys ⊓ V_N) ≤ dim conjFreeSlice_N`），
-      且 **`N ≤ 4` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 由
+      且 **`N ≤ 5` 的反对角片已全部关闭**（`N ≤ 1` 无条件于 `D`；`N = 2` 由
       `LevelTwoCount.ddfSpans_bigrade_neg_two_two`、`N = 3` 由
       `LevelThreeCount.ddfSpans_bigrade_neg_three_three`、`N = 4` 由
-      `LevelFourCount.ddfSpans_bigrade_neg_four_four` 在 `D = 26` 下关闭；`N = 4` 另需 `3 ≤ D`）。
-      **剩余缺口是 `N ≥ 5`**，且它是**质变**而非量变：两族 `{L_{−1}, 𝒟₂}` 在计数上从 `N = 5`
-      起不再够用（恒等式 `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)` 只在 `N ≤ 4` 成立，
-      超出量 1, 25, 351, … 是五边形数，见蓝图 §B‴ 订正第 7 条），所以下一步**必须**先在纸上
-      决定第三族零态是什么（§B‴.7 的新奇异向量 / BGG）。`LevelFourCount.lean` 的力矩机器
-      （力矩非退化 + `A` 穿过 `L_{−1}`/`𝒟₂` 的求值）与 `N` 无关，可直接复用。
+      `LevelFourCount.ddfSpans_bigrade_neg_four_four`、`N = 5` 由
+      `LevelFiveCount.ddfSpans_bigrade_neg_five_five` 在 `D = 26` 下关闭；`N = 4` 另需 `3 ≤ D`，
+      其余只要 `2 ≤ D`）。
+      ⚠ **本条此前的表述有符号错误，2026-09-14 订正**（蓝图 §B⁗.0/§B⁗.4）：旧文说「两族
+      `{L_{−1}, 𝒟₂}` 从 `N = 5` 起在计数上**不再够用**，必须先在纸上决定第三族零态是什么」——
+      方向反了。两族在 `N = 5` 上比目标**多一维**（`p_{25}(4) + p_{25}(3) = 33150`，目标
+      `p_{25}(5) − p_{24}(5) = 33149`），缺的是两族像**重叠**的**上界**。没有第三族，
+      不需要权-3 的 `𝒟₃`（`24·3 + 1 = 73` 不是平方数 ⇒ `V(26,−2)` 不可约），
+      也不需要 BGG / Feigin–Fuks 正合性——只需要正合序列的一半，而那一半是
+      **一条与 `D` 无关的纯计数**：`DescendantKernel.finrank_ker_descPair_add_le` 给
+      `dim ker T_N ≤ κ_N`，Euler 五边形定理给 `κ_N = p_D(N−5) + p_D(N−7) − ⋯`，
+      于是 `N ≤ 4` 时 `κ_N = 0`（横截性免费，比力矩路线前件更弱），`N = 5` 时 `κ₅ = 1`。
+      **剩余缺口是 `N ≥ 6`**：整片上的计数不再够用（`κ₆ = p_D(1) = 26` 对目标 `p_{D−1}(1) = 25`，
+      `κ₇ = 378` 对 `351`），必须真正用上种子条件 `Q_{j,M}`；蓝图 §B⁗.7 给了候选路线
+      （`S_N : Q_{N−5} ⊕ Q_{N−7} → Q_{N−1} ⊕ Q_{N−2}`，`(u,w) ↦ (x₄u + x₆w, y₃u + y₅w)`，
+      要证 `S_N` 单射）。`LevelFourCount.lean` 的力矩机器与 `N` 无关，可直接复用。
       条件版组装见 `noghost-c5`；分片拼接见 `noghost-glue`
       （`ddfSpans_of_forall_antidiagonal_slice_int` 把它归约成「对每个 `N` 证反对角片 `(−N, N)`」）。
+
+- [x] `noghost-pr9`（蓝图 **§B⁗**，2026-09-14）：**`N = 5` 关闭**。两个新文件：
+      `StringFormal/NoGhost/DescendantKernel.lean`（PR9a，`N`-无关、`D`-无关、任意 rung：
+      整片版 `descPair (φ,ψ) ↦ L_{−1}φ + 𝒟₂ψ` 的核计数上界
+      `finrank_ker_descPair_add_le`，加种子限制 `seedPair` / `finrank_ker_seedPair_le`）与
+      `StringFormal/NoGhost/LevelFiveCount.lean`（PR9b：七形 level-5 计数、
+      `levelFive_count_identity`（(I5)，**对一切 `D`**，`D = 26` 时
+      `209405 + 1 = 176256 + 29575 + 3575`）、(K5) `finrank_ker_seedPair_five_le_one`、
+      (N5) `le_finrank_towerNull_inf_towerBigrade_five`、
+      `b26_five_of_D26`、`ddfSpans_bigrade_neg_five_five`）。
+      **`N = 5` 上力矩机器一次都不用**；`D = 26` 的唯一入口仍是
+      `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`。
+      副产品（此前没有的方向）：整体 level 计数的**上界**
+      `card_ddfLevel_{three,four}_le` / `card_ddfLevel_five_eq`，以及通用桥
+      `card_conjFree_le_card_ddfLevel`（`conjFreeEmbed` 的满射半边）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
