@@ -1,0 +1,27 @@
+id: holography.dmz-single-center-identification--via-dmz-argument
+target: holography.dmz-single-center-identification
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.dmz-mock-jacobi-decomposition
+    inferred: false
+  - id: holography.dvv-dyon-index-generating-function
+    inferred: false
+  - id: holography.dvv-wall-crossing-identification
+    inferred: false
+sources:
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§1–§2（物理背景与识别），§6（单心/多中心分离论证）"
+summary: |
+  DMZ 2012 的物理论证：
+  1. 从壁穿越识别②（dvv-wall-crossing-identification）已知，围道选择跳变
+     对应 chamber 跳变，Appell-Lerch 极部 φ_P 的 Fourier 系数随 chamber 变化；
+  2. 因此 φ_P 贡献来自"chamber 敏感"的多中心态；
+  3. 有限部 φ_F（mock Jacobi 形式）的 Fourier 系数 chamber 无关，
+     DMZ 将之识别为 immortal（单心）dyon 的贡献——该识别依赖 localization 分析
+     和 string/supergravity BPS 态分类，不是纯数学推论；
+  4. 原文称之为"the finite part conjecture"，2012 年对部分情形有理论支持，
+     被后续 Sen positivity（Bringmann-Murthy 2012、Rosselló 2024）等旁证加固。
+  全部论证为 physical-argument；数学分解定理本身（dmz-mock-jacobi-decomposition）是 rigorous。
+author: lead
+created: "2026-09-14"
