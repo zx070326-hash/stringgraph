@@ -1,0 +1,16 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-15 (theorem-prover, 开工): claim.md 完成。目标是前沿测绘「缝 A」——挠 I>1 的免死
+  dyon 指标正性。已完成独立查证（claim.md §0），确认公开文献无纯数学证明。
+
+  开工时的关键发现（尚待 proof.md 严格写出）：
+  1. 约定要害：Rosselló 把 Jacobi 指标挂在 ρ 上（1/Φ₁₀ = Σ ψ_m(σ,v)p^m），DMZ 挂在 σ 上。
+     DGM 除子和重标 ρ→s²ρ, v→sv，故作用在 (m,ℓ)→(m/s², ℓ/s)，n 不动。相应的 Eichler–Zagier
+     算子是 U_s（指标 m/s² → m），不是别的。
+  2. 疑似文献错误：DGM eq(51) 与 eq(52) 对偶数除子 s 差一个符号 (−1)^{ℓ−ℓ/s}。
+  3. 主路线不走 mock 分解，走吸引子围道协变性：Im Ω|_{C_*} = 2Λ·adj(T)，而
+     A_s adj(T) A_sᵀ = s² adj(A_s^{-1} T A_s^{-T})，故围道精确映到重标电荷的吸引子围道。
+</content>
