@@ -1,0 +1,137 @@
+id: worldsheet.physical-exponential-equals-voa-vertex-operator
+kind: proposition
+title: "物理正规序指数与 VOA 格点顶点算子是同一算子：在类光动量塔上 :e^{i n k_0·X(z)}: = 𝒴(e^{n k_0}, z)（秩 1 类光 ⟹ cocycle 平凡，c_{n k_0} = 1）"
+statement: |
+  【本卡要接的是哪一条缝】
+  本图有两套互不相同地构造出来的「指数顶点算子」：
+  · **物理侧**：:e^{i n k_0·X(z)}: ——由 X^μ(z) 的模展开做创生/湮灭正规序（E₋E₊ 拆分）
+    得到的形式级数，作用在**连续动量** Fock 塔 T(p;k_0) = ⊕_N F(p + N k_0) 上
+    （worldsheet.exponential-vertex-operator-modes 的振子部分 +
+    worldsheet.momentum-tower-fock-space 的零模移位）；
+  · **VOA 侧**：𝒴(e^{n k_0}, z) ——Li–Wang 格点顶点代数 V_(𝔥, Z k) = ℂ_ε[Z k] ⊗ M(1) 的
+    结构映射 𝒴 在格元 e^{n k} 上的取值（math.lattice-vertex-algebra (3.10)），
+    作用在 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 给出的
+    V-模 V_(𝔥,L)(U) = ⊕_j (e^{jk} ⊗ M(1, p̃)) 上。
+  「这两个是同一个算子」这句话在本图中**此前没有任何节点承载**：
+  free-boson 塔卡的边界 (N6) 逐字写「**不断言**顶点算子 𝒴(e^{jk},z) 与物理写法
+  :e^{i j k_0·X(z)}: c_{jk} 的逐字对应」；math-sources.md §36.5 末把它标为 inferred。
+  本卡就是那张卡。
+
+  【设定与记号】沿用 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower：
+  D 维时空，度规 conv.metric-mostly-plus，α' 按 conv.alpha-prime-regge；
+  𝔥 = ℂ^D 带 η 的复线性延拓（非退化）；α'-无量纲化字典 q̃ := (2α')^{1/2} q，
+  于是 ⟨q̃_1, q̃_2⟩ = 2α'(q_1·q_2)。
+  k_0 ∈ R^D 非零且**类光**（k_0² = 0），k := k̃_0 = (2α')^{1/2} k_0，**L := Z k**（秩 1）。
+  基点动量 p 满足整性条件 (I) ⟨k, p̃⟩ = 2α'(k_0·p) ∈ Z。
+  塔 T(p; k_0) = ⊕_{N ∈ Z} F(p + N k_0)，按 free-boson 塔卡 (3)(iii) 与 V-模
+  V_(𝔥,L)(U) = ⊕_{j ∈ Z} (e^{jk} ⊗ M(1, p̃)) 逐层等同。
+
+  【断言 (1)：cocycle 在本特例下平凡】对 α = m k、β = n k ∈ L 有
+    ⟨α, β⟩ = m n ⟨k,k⟩ = m n · 2α' k_0² = 0,
+  故 (3.8) 的右端 (−1)^{⟨α,β⟩} = 1，常值函数 ε ≡ 1 满足 (3.6)–(3.8)，
+  扭群代数退化为普通群代数 ℂ_ε[L] = ℂ[L] = ℂ[Z k]。
+  等价地：物理写法里的 cocycle 因子 c_{n k_0} 可取为 1。
+  Gebert–Nicolai §3.1 (3.1) 在同一设定下逐字写 **ε(mk, nk) = 1**。
+
+  【断言 (2)：两套算子相同】在上述数据之下，作为塔 T(p; k_0) 上的线性算子，
+  对每个 n ∈ Z 与每个 z 的幂次系数：
+
+    :e^{i n k_0·X(z)}:   =   𝒴(e^{n k_0}, z)  ,
+
+  其中左端按 z^K-系数约定展开为 Σ_K V^{(n)}_K z^K（V^{(n)}_K = 零模移位 ∘
+  worldsheet.exponential-vertex-operator-modes 的 V^{(b)}_K，b = (2α')^{1/2} n k_0），
+  右端按 math.lattice-vertex-algebra (3.10) 给出。特别地两端的模逐个相等。
+
+  【本卡明确不断言 —— 诚实登记这一步真正承载了什么】
+  (a) **不断言断言 (2) 有单一文献来源逐字给出。** 有来源的只有断言 (1)（cocycle 平凡：
+      GN (3.1) 逐字 ε(mk,nk)=1；math.lattice-vertex-algebra 正文亦记「⟨·,·⟩|_L ≡ 0 时
+      ε 可取常值 1」）。**cocycle 平凡是断言 (2) 的必要条件，不是充分条件**：
+      即使 cocycle 全平凡，「物理正规序指数 = VOA 结构映射在格元上的取值」
+      仍是两个**独立构造出来的对象**之间的识别。
+  (b) **不断言连续动量与离散格的对接已被文献处理。** 物理侧的 Fock 塔以**连续**动量 p 为基点
+      （p 的横向与纵向分量连续取值，只有 2α' k_0·p 被整性约束，见 free-boson 塔卡 (3)(iv)），
+      而 Li–Wang 的 V_(𝔥,L) 建在**离散**格 L = Z k 上；两者相接靠的是「p 固定、塔沿 k 离散」
+      这一取法。**这一取法的算子层面忠实性（含动量本征态的 δ-归一化是约定而非构造）
+      本图无来源。**
+  (c) **不断言 δ-归一化的选取。** 物理侧 ⟨p|p'⟩ = δ^D(p − p') 型归一化与 VOA 侧
+      e^{jk} 的「基元」归一化之间差一个标度；本卡把它当作约定对齐，不当作被证明的等式。
+      free-boson 塔卡边界 (N2) 逐字说 Li–Wang 对任何型不置一词。
+  (d) **不断言任何 DDF 算子的性质**，也不断言 [L_m, ·] 或 OPE。本卡只是两个写法之间的字典。
+  (e) **不断言 k_0² ≠ 0 或高秩格的情形。** 断言 (1) 的平凡性**只**来自秩 1 + 类光；
+      一般格上 cocycle 是实质结构（math.lattice-vertex-algebra 的「不断言」第 3 条逐字：
+      「不可把 ℂ_ε[L] 换成普通群代数 ℂ[L]」），且 worldsheet.vertex-operator-cocycle
+      记录了 Polchinski 侧的一般 C_k(α_0)。
+  (f) **不断言 k_0·p = 0 的扇区**（含 p = 0）：那里整性条件 (I) 的取法与塔的构造都失效。
+uses_conventions: [conv.metric-mostly-plus, conv.alpha-prime-regge]
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', 刊 p.593, eq. (3.1)（ε(mk, nk) = 1）；同节 (3.2)–(3.3)"
+    note: |
+      **断言 (1) 的来源，逐字。L1↩（gsw-1987-v1.md §4 E15 标「[L1 已核实]」；
+      本轮未重开 pure.mpg.de/rest/items/item_153125_1/component/file_153124/content
+      读刊 p.593 复核）。**
+      GN 在秩 1 类光设定下逐字给出 ε(mk, nk) = 1（= (−1)^{½ m n k²}，k²=0 时为 1），
+      并在其后的 (3.2)/(3.3) 里直接用 𝒴(e^{mk}, z) 做 DDF 构造，全程不写 cocycle 因子。
+      ⚠ **本条只承载断言 (1)。** GN 不讨论「物理 :e^{ikX}: 与 𝒴(e^k) 是同一算子」
+      ——它从一开始就工作在顶点代数框架内，不做物理侧到 VOA 侧的翻译，
+      故**不承载断言 (2)**（见【本卡明确不断言】(a)）。
+  - ref: li-wang-2008
+    loc: "(3.6)–(3.8)（ε 的三条条件）, p.12；(3.9)/(3.10)（V_(𝔥,L) 与 Y 的定义）, p.12；Theorem 3.6, p.13"
+    note: |
+      **VOA 侧对象 𝒴(e^{n k_0}, z) 的定义来源。L1↩（math-sources.md §36.3）。**
+      (3.10) 给出 Y(e^α ⊗ u, x) 的显式公式（含 ε(α,β) 因子与 x^{⟨α,β⟩}、E^-、Δ̄ 各项）。
+      本卡断言 (1) 说明本特例下 ε ≡ 1 且 x^{⟨α,β⟩} = x^0 = 1。
+      ⚠ Li–Wang **不写任何物理记号**（无 X^μ(z)、无正规序 :·:），
+      故同样**不承载断言 (2)**。
+  - ref: polchinski-1998-v2
+    loc: "§10.4 末, eq. (10.4.26)–(10.4.28)（物理侧一般格的 cocycle 因子 C_k(α_0)）, pp.19–20"
+    note: |
+      **对照用，说明「一般情形 cocycle 非平凡」，反衬本卡断言 (1) 的特例性。**
+      L1（polchinski-1998-v2.md E32，见 worldsheet.vertex-operator-cocycle）。
+      ⚠ Polchinski 的 C_k(α_0) 与 Li–Wang/GN 的 ε(α,β) 是**两套不同记号**的同一类对象，
+      两者的换算本图未做（worldsheet.vertex-operator-cocycle 的公开问题 Q1–Q3）。
+      **本条不承载本卡任何断言**，只提供「为什么秩 1 类光是特例」的背景。
+tags: [bosonic-string, vertex-operator, vertex-algebra, lattice, cocycle, lightlike, dictionary, bridge]
+notes: |
+  查重：2026-09-15 跑 `uv run stringgraph search "exponential vertex operator"`（no matches）、
+  `search cocycle`（命中 worldsheet.vertex-operator-cocycle 等 10 张，均非本卡）、
+  `search "lattice vertex algebra"`（no matches；math.lattice-vertex-algebra 需按 id 直查）。
+  最接近的三张卡都**不是**本卡：
+  · worldsheet.vertex-operator-cocycle：Polchinski 侧**一般格**的 C_k(α_0) 与由此得到的统计，
+    不涉及 VOA 结构映射 𝒴，也不做物理 ↔ VOA 的识别；
+  · math.lattice-vertex-algebra：VOA 侧的存在性定理，正文明说 ε ≡ 1 只在特例成立，
+    且完全不出现物理记号；
+  · worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower：其边界 (N6)
+    **逐字排除**本卡的内容，正是它点名要这张卡。
+
+  【本卡为什么必须单独立卡（lead + graph-reviewer 裁决，2026-09-15）】
+  本卡的内容此前藏在 worldsheet.ddf-contour-equals-mode-sum--via-voa-residue 的一条
+  `inferred: true` 边里。reviewer 指出这是**虚高**：工具在依赖两端都 rigorous 时
+  **忽略 inferred flag**（见 tools/stringgraph/propagate.py 的 `_combine_deps` 只看
+  依赖的 effective level），于是这条无源的实质识别既承重、又对 `uv run stringgraph why`
+  不可见。把它提成显式节点后，它的 physical-argument 会**正常沿图传播**，
+  `why` 树能指名它为瓶颈——这正是本项目「状态沿图传播」的设计意图。
+  ⚠ **一般教训**：`inferred: true` 只适合标「这条边的论证在来源里找不到，但被依赖的命题本身
+  是图内已有节点」；若那条边本身携带一条**图外的实质命题**，正确做法是把那条命题立成节点，
+  而不是塞进 flag。
+
+  【本卡的状态为什么只能是 physical-argument】
+  按 docs/STATUS_LEVELS.md：断言 (1)（cocycle 平凡）有 L1 来源且论证是两行初等计算，
+  单独看够 rigorous；但断言 (2)（两套算子相同）**没有任何来源逐字断言**，
+  且它要跨过【本卡明确不断言】(b)(c) 两条实质接缝（连续动量 ↔ 离散格；δ-归一化）。
+  一个节点一个命题的原则下，本卡的命题是断言 (2)（断言 (1) 是它的前置），
+  故整卡按最弱的那一步记账 = physical-argument。
+  ⚠ **不要因为「物理学家都这么用」就升 rigorous**：这正是原则 2
+  「status 写自身论证的严格程度，不写公认程度」所针对的情形。
+
+  【怎么把本卡升上去（供 lead 排 ROADMAP）】
+  (i) **读 Frenkel 1985**（literature/extractions/voa-residue-mode-sum-2026-09-15.md §bib 已登记
+      `frenkel-1985`，内容 L0，OCR 失败）。researcher 判断它是「把 DDF 算子当作顶点算子」的
+      历史源头；若能 L1 读到它把物理正规序指数与顶点算子对应起来的段落，本卡可直接升级。
+  (ii) **读 FLM 1988 Ch. 8 或 Frenkel–Ben-Zvi §5**（math-sources.md §38.2 记两者定理号目前全 L0）。
+      格点顶点算子的显式构造通常从物理写法出发，可能逐字含本卡断言 (2)。
+  (iii) 若查实**确无**公开文献做这一步识别，按根 CLAUDE.md 的「原创证明轨道」
+      在 research/ 下开一条，目标是把连续动量 Fock 表示与格点 VOA 模的算子识别写成定理。
+      ⚠ 发起前必须先确认 (i)(ii) 真的无源可查。
+author: curator
+created: "2026-09-15"
