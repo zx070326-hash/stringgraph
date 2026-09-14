@@ -1,8 +1,23 @@
-state: under-review
-reviewer: "graph-reviewer(证明逻辑+数值,2026-09-15)=VERIFIED; general-purpose(文献逐字,DGM/Rosselló 原文)=进行中"
-verdict: "内部数学与数值 VERIFIED（Thm 6.1，含一处可补形式缺口 F1；Prop 5.1 符号 CONFIRMED）。外部文献逐字腿未落地：Rosselló 围道转录/Cor 1.1 无 gcd、DGM eq(51)/(52) 是真矛盾还是约定误读——尚待第二路。state 因此保持 under-review。"
+state: verified
+reviewer: "graph-reviewer(证明逻辑+数值,2026-09-15)=VERIFIED; general-purpose(文献逐字,DGM/Rosselló/Alexandrov-Nampuri 原文,2026-09-15)=三条外部依赖(甲围道/乙Cor1.1无gcd/丙eq51-52真矛盾)全 SUPPORT"
+verdict: "两条独立审查腿均过。内部：Thm 6.1 VERIFIED（含一处可补形式缺口 F1；Prop 5.1 符号 CONFIRMED）。外部：DGM/Rosselló/Alexandrov-Nampuri 原文逐字核实——(甲) 吸引子围道转录忠实、(乙) Rosselló Cor 1.1 无 gcd 前提、(丙) DGM eq(51) 与 eq(52) 确为真矛盾（审查者穷力寻找自洽约定均失败，唯一自洽修正=偶除子半整平移=草稿 Prop 5.4，且被 A-N eq(2.11)+(2.13) 联立闭式独立佐证）。据研究轨道生命周期，state → verified。**边界（不得越界宣称）**：(1) 这不是 Sen 全正性猜想的证明，仅在挠 I>1 上把物理依赖压缩到单条前提 (P′)=DGM eq(52)；(2) F1 形式缺口待补（不影响 Thm 6.1）；(3) DGM eq(51)/(52) 矛盾虽经文献坐实，仍属对外声明，须船长确认后方可成文/联系原作者。captain_confirmed 保持 false 待船长最终拍板。"
 captain_confirmed: false
 notes: |
+  2026-09-15 (lead 汇总——两条审查腿均返回，state under-review -> verified):
+  第二路 general-purpose 文献逐字审查回来，三条外部依赖 (甲)(乙)(丙) 全 SUPPORT，
+  落盘 literature/extractions/dabholkar-gomes-murthy-2008.md（新）、rossello-2024.md（追加对抗复核）、
+  sources.bib（登记 DGM + Alexandrov-Nampuri）——commit 81793cf。要点：
+  - (甲) Rosselló (2.22)(2.23) 吸引子围道 𝒞_* 与判据 (2.23) 逐字核实，草稿转录忠实。
+  - (乙) Rosselló Cor 1.1 (1.6) 逐字确认**不含** gcd/coprime/primitive 前提，d_*(m,n,ℓ)>0 对 m,n≥1,Δ>0
+    全域成立 → [GAP 6.3] 关闭获原文级支撑（非仅靠 proof.md 内转录）。
+  - (丙) DGM eq(50)(51)(52) 逐字：(−1)^{Q·P+1} 为积分号外整体因子、eq(51) 第三自变量为 sv **无平移**
+    （二次定向 fetch 复核）、eq(52) Ω₁ 自变量 (m/s²,n,ℓ/s)。审查者独立展开确认逐项差 (−1)^{ℓ−ℓ/s}，
+    **穷举三类可能的自洽约定（符号归一/y↦−y 重标/编号版本）均失败**，未见 DGM erratum，
+    唯一能自洽者=eq(51) 补偶除子半整平移 (s−1)/2（=草稿 Prop 5.4），并被 A-N eq(2.11)+(2.13)
+    联立解出的闭式 Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ) 独立佐证。→ Prop 5.1 是真矛盾，非误读。
+  - **[F1' 已解决]**：前一轮 graph-reviewer 无联网、外部三依赖悬空的顾虑，本轮由联网审查腿逐字核实原文关闭。
+  - state 依生命周期升 verified；captain_confirmed 保持 false。诚实边界见上方 verdict 三条。
+
   2026-09-15 (graph-reviewer 第一轮对抗审查，lead 代为记录——reviewer 无 Write 权限):
   裁定 **Theorem 6.1 = VERIFIED**，**Prop 5.1 符号核算 = CONFIRMED**。逐条：
   - Lemma 3.1(b) 手算 A_s·adj(T)·A_sᵀ=s²·adj(T′)：CONFIRMED。
