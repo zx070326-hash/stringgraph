@@ -1,0 +1,34 @@
+id: holography.dmz-mock-jacobi-decomposition
+kind: proposition
+title: DMZ 正则分解：亚纯 Jacobi 形式 = mock Jacobi 形式 + Appell-Lerch 和
+statement: |
+  设 φ(τ,z) 是指标 m∈ℤ_{>0} 的亚纯 Jacobi 形式（weight k∈ℤ，对 SL(2,ℤ)×ℤ² 变换），
+  且极点仅在 z ∈ ℚτ+ℚ 处（即极点出现在 z=0 的 SL(2,ℤ)×ℤ² 轨道上，阶数 ≤ 2）。
+  则 φ 存在**唯一典范**正则分解：
+    φ(τ,z) = φ_F(τ,z) + φ_P(τ,z)，
+  其中：
+  (a) φ_F（有限部）是指标 m 的 mock Jacobi 形式（权 k），满足 Jacobi 群变换律；
+      其完成量（completion）φ̂_F 在非全纯修正项下满足模变换；
+  (b) φ_P（极部）是有限个 Appell-Lerch 和的线性组合，
+        A_{m,s}(τ,z) = e^{2πi s z} ∑_{r∈ℤ} q^{mr²+(2ms+1)r} y^{2mr+2ms+1} / (1−q^r y)，
+      与 φ 的极点结构精确吻合，也满足规范的 Jacobi 群变换律；
+  (c) 两部分之差由 Jacobi 尖点形式衡量：若换另一种 Appell-Lerch 极部，则差为一个正则
+      （全纯）Jacobi 形式；当空间 J_{k,m}^{cusp}=0 时分解在唯一性意义下严格唯一。
+  特别地，对 N=4 弦论中的 DVV 生成函数 1/Φ₁₀，令 φ = 1/Φ₁₀ 对 σ 的系数（固定 n 后的
+  指标 m 的 Jacobi 形式），则上述分解给出"单心 dyon 贡献 φ_F"与"多中心/极部贡献 φ_P"
+  的数学分离（物理意义识别见 holography.dmz-single-center-identification）。
+uses:
+  - holography.igusa-cusp-form-phi10
+uses_conventions: []
+sources:
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§3, Theorem 1.1（正则分解定理）；§4–§5（Appell-Lerch 和的构造与唯一性证明）"
+notes: |
+  **数学部分：rigorous。**
+  定理由 Dabholkar-Murthy-Zagier 2012 严格证明（Zagier 为 mock 模形式领域权威）；
+  证明使用 Fourier 展开、Appell-Lerch 和的模变换性质以及 Jacobi 形式维数论证。
+  唯一性：在 J_{k,m}^{cusp}=0 的情形（对 N=4 中的相关指标成立）分解严格唯一；
+  否则有 Jacobi 尖点形式的任意性，但该任意性本身可被追踪。
+  节点记录数学分解定理本身，不含物理识别。物理意义（φ_F = 单心 dyon 贡献）是
+  physical-argument，独立记录于 holography.dmz-single-center-identification。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
