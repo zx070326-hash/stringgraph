@@ -1,0 +1,27 @@
+id: holography.dvv-dyon-index-generating-function
+kind: proposition
+title: DVV 生成函数：1/Φ₁₀ 系数等于 1/4-BPS dyon 螺旋超迹
+statement: |
+  在 type II on K3×T²（或等价的 N=4 杂化弦论 on T⁶）中，
+  设 Ω = [[ρ,v],[v,σ]] 为 Siegel 上半空间变量（ρ,σ∈ℍ，v∈ℂ），
+  作傅里叶展开
+    1/Φ₁₀(Ω) = ∑_{m,n,l∈ℤ} d(m,n,l) · e^{2πi(mρ + nσ + lv)}。
+  则 d(m,n,l) 等于（在给定的 BPS chamber 中）电荷格元 (Q,P)（满足
+  Q²/2=m, P²/2=n, Q·P=l）的 1/4-BPS dyon 的第六螺旋超迹 −B₆(Q,P)。
+  特别地，d(m,n,l) 只依赖判别式组合 (m,n,l) 而非电荷向量本身。
+uses:
+  - holography.igusa-cusp-form-phi10
+uses_conventions: []
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§3, eqs. (3.6)–(3.8) and surrounding discussion"
+notes: |
+  **严格度：physical-argument（识别①）。**
+  傅里叶展开本身（给定 Φ₁₀ 的定义）是数学事实；但"这些系数等于 1/4-BPS dyon 的
+  螺旋超迹 −B₆"是物理识别：DVV 通过 4d-5d 提升 + SUSY 非重整化 + 对偶论证
+  以及低荷情形与直接 D-brane 计数的数值验证来支撑，原文用"我们提议"和"猜想"措辞。
+  文献并未从第一性原理给出严格数学证明。
+  d(m,n,l) 是有符号量（指标/超迹），不是简并度本身；可以为负（尽管 Sen positivity 在
+  immortal chamber 证明对应单心黑洞的情形为正，见 holography.immortal-dyon-index-positive）。
+  这一陈述是后续链（壁穿越识别②、DMZ 分解 mock 部分识别③）的枢纽输入。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, physical-identification]
