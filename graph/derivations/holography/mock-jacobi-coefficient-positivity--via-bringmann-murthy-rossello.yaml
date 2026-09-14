@@ -1,0 +1,47 @@
+id: holography.mock-jacobi-coefficient-positivity--via-bringmann-murthy-rossello
+target: holography.mock-jacobi-coefficient-positivity
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.dmz-mock-jacobi-decomposition
+    inferred: false
+    note: "系数 c_m^F(n,ℓ) 的定义域即 DMZ 典范分解给出的有限部 ψ_m^F；两篇文献都以该分解定理（及其收敛的整值 Rademacher 展开）为出发点"
+sources:
+  - ref: rossello-2024
+    loc: "Theorem 1（m≥3；§3 处理 m≥6，Appendix A 显式处理 m=3,4,5）；Corollary 1.1（GL(2,ℤ) 约化到代表元 n≥m, 0≤ℓ≤m，推广到全部 m,n≥1、Δ>0、torsion I=1）；§2 式 (2.36) Rademacher 展开、Lemma 2–3、Prop. 2、Lemma 7"
+    note: "方法：S-对偶（GL(2,ℤ)）约化 + 精确收敛 Rademacher 展开（Bessel I_{23/2}, I_{12}, I_{25/2} × 广义 Kloosterman 和 × 极系数）+ 把 γ=1、ℓ̃=m 的非-mock 项识别为恒正主项（式 3.5）并对其余无穷多项显式定界（界 5×10⁻⁴、0.015）"
+  - ref: bringmann-murthy-2012
+    loc: "主定理：指标 m=1,2 的情形（对这两个 m 覆盖全部 Δ=4mn−ℓ²>0，含小判别式）；方法为 mock 模形式的 Hardy–Ramanujan–Rademacher 圆法 + Kloosterman 和估计"
+    note: "定理编号未从 BM 原文独立核到（PDF 为压缩流），照实记为「主定理」；Rosselló 2024 逐字引用为「The cases m=1,2 of this theorem were proved in [30]」"
+summary: |
+  纯数学（解析数论）两阶段证明，全程不含物理输入：
+
+  1. **约化到代表元**：利用 1/Φ₁₀ 的 Siegel 模性诱导的 GL(2,ℤ) 算术作用（Rosselló 称 S-对偶
+     不变性），把任意满足 Δ=4mn−ℓ²>0、gcd(m,n,ℓ)=1 的三元组化到 n≥m、0≤ℓ≤m 的代表元范围
+     （Corollary 1.1 的推广步）。
+
+  2. **代表元范围内的符号估计**（Theorem 1）：把 c_m^F(n,ℓ) 写成精确收敛的 Rademacher 展开
+     （Rosselló 式 2.36）：修正 Bessel 函数 I_{23/2}, I_{12}, I_{25/2} × 广义 Kloosterman 和
+     （theta 乘子系）× 判别式为负的极系数 c_m^F(ñ,ℓ̃) 之和。其中 γ=1、ℓ̃=m 的非-mock 项的
+     Kloosterman 和退化为 (−1)^ℓ/√(2mi)，给出符号为 (−1)^{ℓ+1} 的无条件主项（式 3.5）；
+     Lemma 2 把 mock 贡献（C_{12}, C_{25/2}）相对主项定界（5×10⁻⁴、0.015），Lemma 3 用连分数
+     结构（式 2.43）与 d(n) 的 Rademacher 型界（Prop. 2）界住极系数，Lemma 7 组装得 m≥6 为正；
+     m=3,4,5 由 Appendix A 显式验证；m=1,2 由 Bringmann–Murthy 2012 的圆法 + Kloosterman 估计
+     给出（对这两个 m 覆盖全部 Δ>0）。两段合并覆盖全部 m≥1。
+
+  所用工具（模形式变换、Rademacher 收敛展开、Kloosterman 和与 Bessel 函数的显式估计）
+  均为严格数学定理，故本推导 status: rigorous。本推导**不**断言这些系数的任何物理意义；
+  "c_m^F = 单心（immortal）dyon 指标"的识别是 physical-argument，由
+  holography.dmz-single-center-identification 承担，并在
+  holography.immortal-dyon-index-positive--via-bringmann-murthy-rossello 中链入。
+notes: |
+  覆盖范围订正（task #17 核实）：BM 2012 的分界线是 mock Jacobi 形式的**指标 m∈{1,2}**，
+  不是"判别式充分大"；早期节点里的"充分大判别式"措辞是错的，本推导按核实结果书写。
+
+  待复核（不影响 Theorem 1，只涉及步骤 1）：抽取记录把 Corollary 1.1 的推广步记作
+  "单心简并度的 S-对偶（GL(2,ℤ)）不变性"。本推导按 task #17 的裁定
+  （extractions/rossello-2024.md E4：正性证明全程未把弦对偶/黑洞计数当作前提）
+  将其读作系数层面的算术轨道不变性（Φ₁₀ 的 Sp(4,ℤ) 模性 + DMZ 分解的典范性），
+  故整体记 rigorous；若原文该步实际调用物理 S-对偶，需把全范围结论单独降级。
+author: graph-curator
+created: "2026-09-14"
