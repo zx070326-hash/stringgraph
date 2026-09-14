@@ -13,7 +13,7 @@ sources:
   - ref: sen-2007-wall-crossing
     loc: "§2–§3, wall crossing formula and contour-chamber correspondence"
   - ref: denef-moore-2007
-    loc: "§2, §5, split states and BPS stability walls in N=4"
+    loc: "§2, §5, split states / halo BPS 束缚态与边缘稳定壁；原文主语境为 N=2 (type II on CY3)，N=4 (K3×T²) 为子案例（抽取记录 E3 明确 N=4 适用范围与 Sen 2007 一致）"
   - ref: dijkgraaf-verlinde-verlinde-1997
     loc: "§4, contour dependence of 1/Φ₁₀ Fourier expansion"
 summary: |

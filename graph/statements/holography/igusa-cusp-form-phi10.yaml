@@ -16,8 +16,12 @@ statement: |
 uses: []
 uses_conventions: []
 sources:
+  - ref: igusa-1962
+    loc: "Siegel 权 10 尖点形式 Φ₁₀ 的存在性与维数公式（一手数学来源，正文未获取，见 bib note）"
+  - ref: gritsenko-nikulin-1998
+    loc: "Φ₁₀ 的 Borcherds 乘积升举公式与零点结构（一手数学来源，正文未获取，见 bib note）"
   - ref: dijkgraaf-verlinde-verlinde-1997
-    loc: "§3, eqs. (3.1)–(3.3)（Borcherds 乘积定义）"
+    loc: "§3, eqs. (3.1)–(3.3)（Borcherds 乘积定义，物理应用出处）"
   - ref: dabholkar-murthy-zagier-2012
     loc: "§2（Siegel 模形式背景，引用 Igusa 1962 原始文献）"
 notes: |
