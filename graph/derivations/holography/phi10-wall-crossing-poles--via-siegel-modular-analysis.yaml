@@ -1,7 +1,7 @@
 id: holography.phi10-wall-crossing-poles--via-siegel-modular-analysis
 target: holography.phi10-wall-crossing-poles
-kind: proof
-status: rigorous
+kind: physical-argument
+status: physical-argument
 depends_on:
   - id: holography.igusa-cusp-form-phi10
     inferred: false

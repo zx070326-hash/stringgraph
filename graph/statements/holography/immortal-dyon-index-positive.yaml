@@ -11,7 +11,6 @@ statement: |
   即：在 immortal chamber 中，所有允许的电荷构型的单心 1/4-BPS dyon 指标均为正整数。
 uses:
   - holography.dmz-mock-jacobi-decomposition
-  - holography.dmz-single-center-identification
 uses_conventions: []
 sources:
   - ref: rossello-2024
