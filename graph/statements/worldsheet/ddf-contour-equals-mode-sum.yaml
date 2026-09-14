@@ -104,15 +104,29 @@ notes: |
   而本卡的前提里含一个未定义的对象（围道积分的算子值被积量）。
 
   【2026-09-15 更新：上面那一段描述的是 --via-laurent-coefficient-extraction 那条推导】
-  新增推导 worldsheet.ddf-contour-equals-mode-sum--via-voa-residue（status: rigorous）
-  后，**本卡 effective 由 physical-argument 升为 rigorous**。上面「只能是 physical-argument」
-  一段的依据（前提含未定义对象、重排无严格承载）是针对**旧的洛朗系数记账那条推导**说的，
-  那条推导原样保留、仍是 physical-argument；新的 VOA 留数推导改在**形式留数/VOA 框架**里工作
-  （Schottenloher Ch.10 全程停在形式级数层面，无收敛性假设），前提不再是未定义对象。
-  ⚠ 「不要因为两行显然就升 rigorous」这句**继续有效**：升 rigorous 靠的是新推导引到的
-  带编号定理（GN (3.2)–(3.3)、Def 10.1/10.9、Thm 10.10、Bakalov–Kac (2.22)），
-  不是靠「看起来显然」。新推导仍有一条 inferred 边（物理 :e: ↔ VOA 𝒴(e)），已逐字记账。
-  升级是否成立由 reviewer / auditor 裁决，不因本 notes 而自动生效。
+  新增推导 worldsheet.ddf-contour-equals-mode-sum--via-voa-residue，**own status = rigorous**
+  （GN 1995 §3.1 (3.2)–(3.3) 的留数演算，配合 Schottenloher Ch.10 Def 10.1/10.9/Thm 10.10(N=0)、
+  Bakalov–Kac (2.22)，全程形式级数、无收敛性假设）。上面「只能是 physical-argument」一段的依据
+  （前提含未定义对象、重排无严格承载）是针对**旧的洛朗系数记账那条推导**说的，
+  那条推导原样保留、仍是 physical-argument。
+
+  **但本卡 effective 仍是 physical-argument，不是 rigorous。**
+  新推导经显式桥节点 worldsheet.physical-exponential-equals-voa-vertex-operator
+  （effective = physical-argument）传播：那张卡断言「物理 :e^{i n k_0·X(z)}: =
+  VOA 𝒴(e^{n k_0}, z)」，其中 cocycle 平凡那一半有 GN (3.1) 逐字来源，
+  但**两套算子的识别本身无任何来源逐字断言**，且要跨连续动量 ↔ 离散格、δ-归一化两条实质接缝。
+  ⚠ **本卡与 rigorous 之间现在只剩这一条可升级的算子识别**——这是本轮重建模的主要收获：
+  缺口从旧推导的五处 gap 收敛成**一条具名命题**，有明确的补法
+  （读 frenkel-1985 / FLM 1988 Ch.8 / Frenkel–Ben-Zvi §5，见桥卡 notes）。
+
+  【为什么不用 inferred flag 而要立节点（lead + graph-reviewer 裁决 2026-09-15）】
+  --via-voa-residue 的首版（提交 4f46fde）把那条识别写成一条 `inferred: true` 边并标 rigorous，
+  使本卡 effective 一度显示 rigorous。reviewer 裁定**虚高**：
+  tools/stringgraph/propagate.py 的 `_combine_deps` 只按依赖的 effective level 取下界、
+  **不读 inferred 字段**，故依赖两端都 rigorous 时该 flag 对传播毫无影响——
+  那条无源的实质识别既承重、又对 `uv run stringgraph why` 不可见。
+  提成显式节点后它正常沿图传播。**本卡 effective 回到 physical-argument 是正确结果，不是退步。**
+  ⚠ 「不要因为两行显然就升 rigorous」这句继续有效。
 
   【本卡是回译审计的必经之处】
   worldsheet.ddf-commute-with-virasoro、worldsheet.ddf-operators-preserve-physical-states
