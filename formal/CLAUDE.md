@@ -130,6 +130,21 @@ StringFormal/
   Virasoro/Verma.lean       Verma 模 V(c,h)：U(Vir) 商构造、最高权向量、万有性质、L_0 分级（无 PBW 基，V≠0 未证，见 TODO `pbw-verma`）
   Virasoro/VermaPBW.lean    有序词（分拆）张成 Verma 模 level 片，dim V_N ≤ p(N)；线性无关（PBW）未做
   Virasoro/WittPerfect.lean  Witt 完美 ⟺ 2 可逆（derivedSeries_one_eq_top_iff）；ℚ-代数上 Witt 与 Virasoro 完美（isPerfect），C = 2[L₂,L₋₂] − 4[L₁,L₋₁]
+  Virasoro/WittCohomologyH1.lean  **H¹(W, k) = 0（平凡系数）+ 字典「完美 ⟺ H¹ = 0」**（图卡
+                            `math.witt-algebra-perfect` 的 (2) 与 (1)⟺(2)）。按卡面定义逐字做：
+                            `oneCocyclesTrivial` = {f : 𝓛 →ₗ k | f⁅x,y⁆ = 0}、`oneCoboundariesTrivial` = ⊥、
+                            `H1Trivial` = Z¹/B¹。**不是凭空定义**：补上 Mathlib 缺的 0 次
+                            Chevalley–Eilenberg 微分 `LieCohomology.d₀₁`（`Algebra/Lie/Cochain.lean`
+                            只有 `d₁₂`/`d₂₃`，上边缘与上同调在它自己的 TODO 里）与 `d₁₂ ∘ₗ d₀₁ = 0`，
+                            再证平凡模上 `d₀₁ = 0`、`ker d₁₂ = {f | f⁅x,y⁆=0}`，故两条卡面定义都是定理。
+                            字典半走 Mathlib 对偶：`Z¹ = ann[𝓛,𝓛]`、`h1TrivialEquivDualQuot`
+                            （`H¹ ≃ₗ (𝓛/[𝓛,𝓛])^*`）、**域上** `oneCocyclesTrivial_eq_bot_iff`。
+                            ⚠ **两条数学结论**：(i) `H¹ = 0` 只要 **2 是非零因子**，比完美性（2 可逆）弱；
+                            (ii) **字典在 ℤ 上为假**（`witt_int_h1_vanishes_but_not_perfect`：
+                            `Z¹(W(ℤ),ℤ) = 0` 但 `⁅W,W⁆ ≠ W`），故卡面「对任意李代数 𝓛 与平凡模 k」
+                            里的 **k 必须是域**。特征 2 反例是 `coord 0`。
+                            `↥Z ⧸ B` 的 `HasQuotient` 在 `L →ₗ[R] R` 上合成失败（同
+                            `MATHLIB-ISSUE-quotient-finsupp.md`），解法同 TowerNull：先抽象（`SubQuot`）再实例化
   Virasoro/DescendantGrading.lean  任意 Virasoro 模上 L_0 对词作用的本征值公式（只需 L_0 v = h v）；wordActOn、vermaLift_wordAct
   Virasoro/Shapovalov.lean   Shapovalov（逆变）形式：反对合 σ、唯一性/对称性/level 正交（无条件）、存在性 ⟺ V(c,h)≠0、N≤2 Gram（det₂ = 2h(16h²+2h(c−5)+c)）
   Virasoro/ShapovalovLevelThree.lean  N=3 Gram（3×3，det₃ = 48h²(…)(…)）**与 Kac 形式相等在 Lean 内**（清分母对称函数，与 √ 分支无关）
