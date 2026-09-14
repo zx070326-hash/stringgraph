@@ -1,0 +1,34 @@
+id: math.witt-algebra-perfect--via-h1-lean
+target: math.witt-algebra-perfect
+kind: proof
+status: formalized
+depends_on:
+  - id: math.witt-algebra
+    note: |
+      Lean 侧直接引用 StringFormal.Virasoro.WittAlgebra（Witt.lean）的括号结构。
+  - id: math.witt-algebra-derived-algebra
+    note: |
+      完美性半（(1)）逐字由该卡的 StringFormal.Virasoro.WittAlgebra.isPerfect 承载。
+      本推导的目标陈述 (2) H¹ = 0 与字典则由新文件 WittCohomologyH1.lean 覆盖。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/Virasoro/WittCohomologyH1.lean :: witt_perfect_iff_h1_vanishes（40 声明，lake build 通过，no sorry，公理 propext / Classical.choice / Quot.sound）"
+    note: |
+      formalizer agent（分支 agent/formalizer/witt-h1，2026-09-14，lead 以 0118fcd 合入 main）。
+      关键声明：
+        · witt_perfect_iff_h1_vanishes — (1)⟺(2) 的打包版，char-0 域设定，卡面逐字对应；
+        · subsingleton_H1Trivial_of_charZero — (2) 单独；
+        · h1TrivialEquivDualQuot — 字典 H¹(𝓛,k) ≃ₗ (𝓛/[𝓛,𝓛])^*（任意李代数，域）；
+        · witt_int_h1_vanishes_but_not_perfect — ℤ 上字典为假的机检反例。
+      **数学发现**（不改变现有节点状态，建议更新相关卡 notes）：
+        (i) H¹=0 只需 2 为非零因子，比完美性（2 可逆）弱；
+        (ii) 字典「(1)⟺(2)」在 ℤ 上为假（Z¹=0 但 [W,W]≠W），k 必须是域。
+summary: |
+  WittCohomologyH1.lean 在 char-0 域设定下机器验证目标陈述的全部三条内容：
+  (1) 完美性（由 isPerfect 承载）；
+  (2) H¹(W,k)=0（witt_perfect_iff_h1_vanishes 的一半，通过 oneCocyclesTrivial_eq_bot_of_charZero）；
+  (1)⟺(2) 字典（通过 h1TrivialEquivDualQuot：H¹ ≃ (𝓛/[𝓛,𝓛])^*，域上对偶为零当且仅当商为零）。
+  CE 微分 d₀₁ 补全了 Mathlib 的缺件；ℤ 反例 witt_int_h1_vanishes_but_not_perfect
+  机检了「k 必须是域」这条约束。
+author: lead
+created: "2026-09-14"

@@ -24,6 +24,9 @@ statement: |
       经 [ℓ_{−2}, ℓ_2] = 4ℓ_0 + (1/2)C 拉进导出代数，陈述对象也不同。
   (d) 关于**单边** Witt 代数 W_r = Der(k[x_1,…,x_r])。参见 math.witt-algebra 的 notes
       「单边 / 双边」一段：两者的 H² 相反，本节点只说双边版本。
+formal:
+  lean_decl: StringFormal.Virasoro.WittAlgebra.witt_perfect_iff_h1_vanishes
+  lean_file: StringFormal/Virasoro/WittCohomologyH1.lean
 uses_conventions:
   - conv.virasoro-standard
 sources:
@@ -87,6 +90,23 @@ notes: |
       这是正确记账，不是缺陷。
   ⚠ 本卡陈述【本节点不断言】(a)(b)(c)(d) 与新卡的分工不冲突：新卡同样不碰 H^1/H^2、
   不碰 Virasoro、不碰单边 Witt。
+
+  【(2) 与字典现已形式化——上一段「不填 formal.lean_decl」的裁决作废（2026-09-14，lead）】
+  formalizer（分支 agent/formalizer/witt-h1，lead 以 0118fcd 合入 main）在
+  formal/StringFormal/Virasoro/WittCohomologyH1.lean 机器验证了本卡陈述的**全部三条**：
+    · witt_perfect_iff_h1_vanishes（char-0 域）打包 (1) derivedSeries…=⊤、
+      (2) Subsingleton (H1Trivial …)（即 H¹=0，H1Trivial 即 Z¹/B¹，其中
+      Z¹={f | ∀x y, f⁅x,y⁆=0}、B¹=0 逐字对应本卡对 1-上循环/1-上边缘的描述）、
+      以及 (1)⟺(2) 的字典（subsingleton_H1Trivial_iff_derivedSeries_eq_top，任意李代数域上）。
+  因此本卡的 statement 与 Lean 陈述现在**逐句一致**（不再只覆盖 (1)），按 STATUS_LEVELS.md
+  的规定填 formal.lean_decl = …witt_perfect_iff_h1_vanishes，并新增推导
+  math.witt-algebra-perfect--via-h1-lean（status: formalized）。整卡有效状态由 rigorous 升为
+  **formalized**。上面【拆卡】一段「本卡不换代、statement 一字未动、不填 formal.lean_decl」
+  与「整卡有效状态仍是 rigorous（被 (2) 封顶）」两句是 2026-09-11 (2) 未形式化时的记账，现已被本段取代；
+  statement 依旧一字未动（原则 1），换代未发生，仅 notes 与 formal 字段更新。
+  **数学副产品**（不改变本卡陈述，仅记录）：(i) H¹=0 只需 2 为非零因子（弱于完美性要求的 2 可逆）；
+  (ii) 「(1)⟺(2)」在 ℤ 上为假（witt_int_h1_vanishes_but_not_perfect：Z¹=0 但 [W,W]≠W），
+  故 k 必须是域——这与【特征假设】一段的结论一致。
 
   【记号】来源用 [d_m, d_n] = (n − m) d_{m+n}，本图用 [ℓ_m, ℓ_n] = (m − n) ℓ_{m+n}
   （conv.virasoro-standard）。二者差一个生成元重标记（d_n ↦ ±ℓ_{±n}），是同一个李代数，
