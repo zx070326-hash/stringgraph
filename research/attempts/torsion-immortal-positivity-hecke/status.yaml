@@ -1,8 +1,28 @@
 state: under-review
-reviewer: null
-verdict: null
+reviewer: "graph-reviewer(证明逻辑+数值,2026-09-15)=VERIFIED; general-purpose(文献逐字,DGM/Rosselló 原文)=进行中"
+verdict: "内部数学与数值 VERIFIED（Thm 6.1，含一处可补形式缺口 F1；Prop 5.1 符号 CONFIRMED）。外部文献逐字腿未落地：Rosselló 围道转录/Cor 1.1 无 gcd、DGM eq(51)/(52) 是真矛盾还是约定误读——尚待第二路。state 因此保持 under-review。"
 captain_confirmed: false
 notes: |
+  2026-09-15 (graph-reviewer 第一轮对抗审查，lead 代为记录——reviewer 无 Write 权限):
+  裁定 **Theorem 6.1 = VERIFIED**，**Prop 5.1 符号核算 = CONFIRMED**。逐条：
+  - Lemma 3.1(b) 手算 A_s·adj(T)·A_sᵀ=s²·adj(T′)：CONFIRMED。
+  - Thm 4.1 Step1（虚部映射）/Step3（区域扩张+Jacobi 相消，极点 ℤ-周期性覆盖扩张域）：CONFIRMED。
+  - Prop 4.4 Step(3)（Sym₂(ℝ)/Sym₂(ℤ) 双射 + Jacobi=det(A)³=1）：CONFIRMED，独立替代对 Rosselló
+    "S-duality invariance" 的引用 → [GAP 6.3] 确认关闭（**但 Cor 1.1 逐字是拿草稿转录比对，非原文——见下 F1'**）。
+  - Thm 6.1 前提逐项（m/s²≥1、n≥1、Δ/s²>0、ℓ/s∈ℤ、权 s>0）：CONFIRMED。
+  - Prop 5.1 符号：(−1)^{ℓ+ℓ/s}=(−1)^{ℓ−ℓ/s} 推导正确；见证 I=2,(4,1,2) 差=101412=4·d_*(1,1,1)。
+  - **[F1]（唯一缺口，PLAUSIBLE，不影响主定理）**：Thm 4.1 case(b) 非整 T′ 的极点回避只在定理前提里
+    对 case(a) 声明，未对 case(b) 显式引用；应补"任意实正定 T′、大 Λ 下切片无 1/Φ₁₀ 极点（极点 ℤ-周期
+    + 虚部正定增长）"一句。可补，不影响 Thm 6.1。
+  - 数值独立复跑：脚本输出与 run_output.txt 逐行吻合；已发表值 50064/25353/1127472 全复现；
+    Φ₁₀·(1/Φ₁₀)=1、c_m^F 椭圆性尖锐检验通过；两处截断 bug 确认已修、无新 bug。
+    **诚实保留**：torsion_divisor_sum.py 仍 import 作者 coefficients 模块，非完全独立重建 Φ₁₀；
+    但三项独立自检 + 文献已知值复现给出高信度。
+  - **[F1' — lead 附注]**：graph-reviewer 无联网工具，其"Cor 1.1 无 gcd/围道转录"均是拿 proof.md 内
+    转录的逐字引文比对，**不是**核对 arXiv 原文。故 (甲) 围道转录忠实性、(乙) Cor 1.1 无 gcd、
+    (丙) DGM eq(50/51/52) 逐字（决定 Prop 5.1 是真矛盾还是约定误读）**三条外部依赖仍悬**，
+    由第二路 general-purpose 文献逐字裁定，未回。**DGM 矛盾在原文核实前不得对外宣称为定论。**
+
   2026-09-15 (theorem-prover, 第一轮): claim.md + proof.md + scripts 完成，state -> under-review。
   自评：主命题 (Theorem 6.1) 已证；唯一致命级引用依赖 [GAP 6.3] 本轮已自行关闭
   （逐字复核 + Prop 4.4 独立证出其桥梁）。仍剩的是"除子和公式本身 (eq 52)"这条物理前提，
