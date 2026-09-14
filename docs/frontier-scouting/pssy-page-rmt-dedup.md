@@ -44,9 +44,9 @@ MP 定律（设 G 为 k×L i.i.d. 复高斯，k/L → t，则 GG†/L 的经验�
 自由概率与随机矩阵的标准参考，覆盖 MP 定律、R-变换、自由熵等；Collins-Sniady 给出 Weingarten 函数和酉群积分的严格结果。
 **查重判断**：数学基础完备，但是工具书，不是专门论 PSSY-Page 曲线的定理。
 
-**arXiv:2403.05241（"Black Holes and Marchenko-Pastur Distribution"）**⟨待核⟩
-据摘要：明确把黑洞微态 Gram 矩阵的本征值分布认同为 MP 分布，并用于分析黑洞信息。
-**查重判断**：最接近的竞争者，需读原文。若该文显式写下了"ρ_R = GG†/tr(GG†) 的谱 → MP，熵 → Page 曲线公式"并给出严格证明，则直接构成查重。侦察员判断⟨judgment⟩：从摘要描述看该文更偏物理语境（黑洞微态计数），可能没有把整条从系综定义到熵封闭式的逻辑链写严格，但必须确认。
+**arXiv:2403.05241（"Black Holes and Marchenko-Pastur Distribution"）**⟨lit⟩（2026-09-14 已精读全文，见 §7）
+Wolfgang Mück（Napoli / INFN，物理学家，hep-th/gr-qc），Phys. Rev. D 109, 126001 (2024)。把 Balasubramanian–Lawrence–Magan–Sasieta 等人（thin-shell "bag of gold" 微态，refs [1–3]）算出的黑洞微态 **Gram 矩阵**谱密度**认同**为 MP 分布，进而**提议** MP 也给出黑洞能谱密度，构造 Krylov 空间算 **state complexity** 并验证饱和 Lloyd 界。
+**查重判断**：**不构成查重（(c)）**。见 §7 的逐条精读。要点：(i) 对象是微态 Gram 矩阵，不是 PSSY EOW-brane 辐射密度矩阵，全文**无 PSSY 引用**；(ii) **不计算** von Neumann 熵 S(ρ_R)、无 Page 曲线、无 E[S] 封闭式、无 Page 时间熵相变——它算的是 Krylov state complexity（另一个可观测量）；(iii) 不"证明" MP，而是**引用** MP 定理并**识别**物理路径积分给出的谱密度恰为 MP 密度。因此我们的组装陈述（§2）**仍未被写出**。
 
 ### 1.4 形式化（Lean/Isabelle/Coq）
 
@@ -173,6 +173,53 @@ Page 定理（Foong-Kanno 1994）工作在**固定有限维**（Hilbert 空间�
 
 ⟨lit⟩ Foong-Kanno 1994, PRL 72:1148 — Page 定理有限维精确证明。
 
-⟨待核⟩ arXiv:2403.05241 — 《Black Holes and Marchenko-Pastur Distribution》，据摘要直接连接黑洞微态与 MP 分布；需读全文确认是否覆盖 PSSY Page 曲线严格化。
+⟨lit⟩ arXiv:2403.05241 — 《Black Holes and Marchenko-Pastur Distribution》，Wolfgang Mück，Phys. Rev. D 109, 126001 (2024)。**2026-09-14 已精读全文**（见 §7）。识别黑洞微态 Gram 矩阵谱 = MP，但算的是 Krylov state complexity 而非熵 Page 曲线，且非 PSSY 系综。**裁定 (c)：不构成查重**。
 
 ⟨lit⟩ arXiv:2204.01754 — 随机约化密度矩阵的熵与主本征值的精确解析关系，提供处理 -λ log λ 积分的先例。
+
+---
+
+## §7 arXiv:2403.05241 精读与查重裁定（2026-09-14）
+
+> 阶段一任务：读透 Mück《Black Holes and Marchenko-Pastur Distribution》全文（pdftotext 全文，24 页），逐条判断是否使我们的 §2 组装陈述变成"已发表"。诚实标签：本节所有陈述均基于全文原文，标 ⟨lit⟩；侦察员判断标 ⟨judgment⟩。
+
+### 7.1 书目与背景
+
+- **作者**：Wolfgang Mück，单一作者，Università di Napoli "Federico II" / INFN Napoli。**物理学家**（hep-th 为主类，gr-qc 次类；**无 math-ph / math.PR 交叉列表**）。⟨lit⟩
+- **发表**：arXiv:2403.05241v3（2024-03-08 提交，2024-04-02 定稿）；Phys. Rev. D 109, 126001 (2024)。24 页，3 图。⟨lit⟩
+- **结构**：§1 引言；§2 Krylov state complexity（综述框架）；§3 MP 分布的 Krylov 空间；§4 黑洞系综（能谱提议 + 蒸发）；§5 结论。⟨lit⟩
+
+### 7.2 主结果（一句话）
+
+⟨lit⟩ **识别 + 提议，非定理**：把 Balasubramanian–Lawrence–Magan–Sasieta 及 Climent–Emparan 等人（refs [1–3]，thin-shell "bag of gold" 重壳微态，经引力路径积分算 Gram 矩阵矩）得到的黑洞微态 Gram 矩阵谱密度（式 1.1）**认出**为 MP 分布（式 1.4，参数 c = ℵ e^{−S}）；进而**提议** MP 也普适地给出黑洞（束缚）能谱密度，由此构造 Krylov 空间与一维 hopping 模型，计算 **state complexity**，并验证其晚期线性增长率饱和 Lloyd 界。附带用 c=1（s=0）阈值上"离散能级出现"给出 Hawking 辐射/蒸发的定性图像。
+
+### 7.3 逐条回答任务五问
+
+**问 1（主定理 / 作者背景）**：无"定理"。核心是"recognized"（识别 Gram 谱 = MP）+ "proposed"（提议 MP = 能谱密度）。作者是物理学家，论文是物理论证 + 已知数学定理的引用，非数学论文。⟨lit⟩
+
+**问 2（是否严格证明"辐射/微态密度矩阵谱 → MP"）**：**否**。两层原因：⟨lit⟩
+- **对象不对**：处理的是微态 Gram 矩阵 ⟨i|j⟩（refs [1–3] 的 bag-of-gold 重壳微态），**不是** PSSY EOW-brane 辐射约化密度矩阵。全文**无 PSSY（Penington–Shenker–Stanford–Yang）引用**。
+- **不证 MP**：§1 把 MP 定理作为**已知定理陈述并引用**（Marchenko–Pastur 1967 [5]，及数学证明 [8–11]：Haagerup–Thorbjørnsen、Ledoux、Yaskov、Lu–Murayama 的 Feynman 图证明）。对黑洞情形只是**识别**引力路径积分算出的谱密度（1.1）与 MP 密度（1.4）逐项相同——是"认出"，不是"对一个明确定义的随机矩阵系综证明 ESD 收敛"。
+
+**问 3（是否给 Page 曲线 E[S(ρ_R)] 封闭式 + t=1/2 相变）**：**否**，且这是最关键的不覆盖点。⟨lit⟩
+- 全文**不计算 von Neumann 熵 S(ρ_R)**，无 Page 曲线，无 E[S] 封闭式。
+- 它算的封闭量是 **Krylov state（spread）complexity** 的晚期线性增长率 C₀（式 3.12 / 3.14，用 Lanczos 系数 β_n=c, a_n=1+c 得到），以及饱和 Lloyd 界——这是**另一个可观测量**，与纠缠熵无关。
+- 唯一与 Page 曲线"内容"相邻的是 §1/§4.1 的**秩**陈述 d = min(e^S, ℵ)（独立微态数 = min），给出 B–H 熵的统计诠释——但这是**秩/维数**，从未转成归一化密度矩阵的熵。
+- 它讨论的"相变"是 s=0（c=1）阈值：MP 谱在 0 处的原子 / 离散能级在此出现（§4.2，解释为 Hawking 发射的开启），**不是** Page 熵相变。
+
+**问 4（系综 / 极限）**：Wishart 型（微态向量的 Gram / 重叠矩阵）。§1 把 MP 定理写成"X 为 M×N iid，A=(1/N)XX†，大 N 极限 M/N→c 固定"——即**大 N 固定比 c = ℵ e^{−S}**，非固定维 Haar。但黑洞侧的"系综"是引力微态重叠（矩由虫洞给出），被**识别**为 MP，而非显式定义的 Ginibre 矩阵。⟨lit⟩
+
+**问 5（查重裁定）**：**(c) 不构成查重**（附部分重叠说明）。⟨judgment⟩
+- 对象不同（微态 Gram 矩阵 vs PSSY EOW 辐射密度矩阵；无 PSSY 引用）；
+- 可观测量不同（state complexity + Lloyd 界，**不是**纠缠熵 Page 曲线；无 S(ρ_R)、无 E[S] 封闭式、无 Page 时间熵相变）；
+- 严格性：引用 MP（严格）+ 识别谱密度相等（物理）；下游能谱提议、complexity、Hawking 均显式"proposed" / 物理。
+- **部分重叠**仅在"MP 出现于黑洞 Gram 矩阵"这一观察上——但该观察在 refs [1–3] 已建立，且是标准自由概率事实，非本文首创。
+- ⇒ 我们的组装陈述"PSSY Ginibre → MP → E[S(ρ_R)] 封闭式 → Page 相变"**仍未被任何人写出**；Mück 走的是相邻但正交的方向。
+
+### 7.4 对 §2 候选陈述的影响与后续
+
+裁定 (c) 触发阶段二：已在 `research/attempts/pssy-page-mp-assembly.md` 写自足组装草稿。在把熵积分认真做出来的过程中发现 §2 草稿有两处需修正（详见该草稿），此处仅记指针：⟨judgment⟩
+- **(修正 A)** S(ρ_R) 不收敛到有限的 ∫(−λ log λ)dν_t，而是 **~ log k 发散**；有限量是次导修正 I(t)=∫λ log λ dν_t = t/2（Page 1993 / Foong–Kanno 1994 的 −m/2n 项）。
+- **(修正 B)** 以比值 t=k/L 参数化时，Page 秩/谱相变在 **t=1（k=L，即 k=e^{S_0}）**，与 Mück 的 c=1（s=0）阈值一致；"t=1/2"只在以"占总维对数的份额 f"参数化时才对。
+
+净结论不变：整条线是**接线（已发表定理的显式组装）**，原创数学增量≈0；建议以 `rigorous` graph 节点登记（来源指 MP 定律 + Page/Foong–Kanno），而非开正式 research 证明轨道。
