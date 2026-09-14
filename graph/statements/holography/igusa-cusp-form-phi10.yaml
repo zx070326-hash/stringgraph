@@ -1,0 +1,29 @@
+id: holography.igusa-cusp-form-phi10
+kind: definition
+status: rigorous
+title: Igusa 权 10 尖点形式 Φ₁₀
+statement: |
+  Igusa 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ)（整 Siegel 模群）的权 10 尖点形式，其中
+  Ω = [[ρ, v], [v, σ]] 为 Siegel 上半空间（度 2）中的变量（ρ,σ ∈ ℍ，v ∈ ℂ，Im Ω > 0）。
+  它由 Borcherds 升举公式给出：
+    Φ₁₀(Ω) = e^{2πi(ρ+σ+v)} ∏_{(m,n,l)>0} (1 − e^{2πi(mρ+nσ+lv)})^{c(4mn−l²)}，
+  其中 c(k) 为 K3 椭圆亏格 χ_{K3}(τ,z)（权 0 指标 1 弱 Jacobi 形式，满足 c(k)=24 对 k=0，
+  c(k)=EG K3 系数，c(k)=0 对 k<−1）的傅里叶系数，排列顺序 (m,n,l)>0 指：
+  m>0；或 m=0, n>0；或 m=n=0, l<0。
+  Φ₁₀ 在 Sp(4,ℤ) 权 10 尖点形式空间中（至多差标量倍数意义下）唯一；
+  其唯一零点（在 Siegel 上半空间中）位于超曲面 {mρ + nσ + lv ∈ ℤ，4mn−l²=1} 的
+  Sp(4,ℤ)-轨道上，为单零点。
+uses: []
+uses_conventions: []
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§3, eqs. (3.1)–(3.3)（Borcherds 乘积定义）"
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§2（Siegel 模形式背景，引用 Igusa 1962 原始文献）"
+notes: |
+  数学侧：Φ₁₀ 的存在性与唯一性（至标量）由 Siegel 模形式维数公式保证（Igusa 1962，
+  Gritsenko-Nikulin 1995）。Borcherds 升举公式的严格证明见 Borcherds 1995 和
+  Gritsenko-Nikulin 1995；这是严格数学定理，不依赖任何物理论证。
+  Lean 可行性：需要 Siegel 模形式（Sp(4,ℤ) 表示）和 Borcherds 乘积，Mathlib 无此基础设施，
+  近期不可形式化。在图中作为 rigorous 陈述卡即可（不入 formal/）。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
