@@ -316,4 +316,103 @@ lemma modeVec_levelFiveIndex (x : LevelFiveIdx ι) :
 
 end LevelFiveIndex
 
+/-! ### Injectivity and surjectivity of the level-five parametrisation -/
+
+section LevelFiveInjective
+
+variable {ι : Type*} [DecidableEq ι]
+
+private lemma single_apply_mode_ne (i j : ι) (m n : ℕ+) (hmn : m ≠ n) :
+    (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, m) : ι × ℕ+) = 0 := by
+  refine Finsupp.single_eq_of_ne fun hc => hmn ?_
+  have hc2 := congrArg (fun v : ι × ℕ+ => v.2) hc
+  simp only at hc2
+  first | exact hc2 | exact hc2.symm
+
+private lemma fst_of_single_apply (i j : ι) (n : ℕ+)
+    (h : (Finsupp.single ((j, n) : ι × ℕ+) (1 : ℕ)) ((i, n) : ι × ℕ+) = 1) : j = i := by
+  by_contra hc
+  rw [Finsupp.single_eq_of_ne (fun hcc => hc (by
+      have hz := congrArg (fun v : ι × ℕ+ => v.1) hcc
+      simp only at hz
+      first | exact hz | exact hz.symm))] at h
+  exact zero_ne_one h
+
+/-- **The level-five parametrisation is injective.**  Forty-two of the forty-nine cases are
+settled by the mode profile `levelFiveShape`; the seven diagonal ones by `Finsupp.single`
+injectivity resp. `symModeIndex_injective`. -/
+theorem levelFiveIndex_injective : Function.Injective (levelFiveIndex ι) := by
+  have h51 : (5 : ℕ+) ≠ 1 := by decide
+  have h41 : (4 : ℕ+) ≠ 1 := by decide
+  have h32 : (3 : ℕ+) ≠ 2 := by decide
+  have h31 : (3 : ℕ+) ≠ 1 := by decide
+  have h21 : (2 : ℕ+) ≠ 1 := by decide
+  have h12 : (1 : ℕ+) ≠ 2 := by decide
+  intro x y h
+  have hs : levelFiveShape ι x = levelFiveShape ι y := by
+    rw [← modeVec_levelFiveIndex x, ← modeVec_levelFiveIndex y, h]
+  obtain i | p | q | ps | sp | pt | t := x <;> obtain i' | p' | q' | ps' | sp' | pt' | t' := y <;>
+    simp only [levelFiveShape, Prod.mk.injEq] at hs <;> try (exfalso; omega)
+  · -- `[5]` versus `[5]`
+    refine congrArg Sum.inl ?_
+    have h1 := DFunLike.congr_fun h ((i, 5) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.single_eq_same] at h1
+    exact (fst_of_single_apply i i' 5 h1.symm).symm
+  · -- `[4,1]` versus `[4,1]`
+    refine congrArg (Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((p.1, 4) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((p.2, 1) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne p.1 p.2 4 1 h41,
+      single_apply_mode_ne p.1 p'.2 4 1 h41, add_zero, add_zero] at h1
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne p.2 p.1 1 4 (Ne.symm h41),
+      single_apply_mode_ne p.2 p'.1 1 4 (Ne.symm h41), zero_add, zero_add] at h2
+    exact Prod.ext (fst_of_single_apply p.1 p'.1 4 h1.symm).symm
+      (fst_of_single_apply p.2 p'.2 1 h2.symm).symm
+  · -- `[3,2]` versus `[3,2]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((q.1, 3) : ι × ℕ+)
+    have h2 := DFunLike.congr_fun h ((q.2, 2) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne q.1 q.2 3 2 h32,
+      single_apply_mode_ne q.1 q'.2 3 2 h32, add_zero, add_zero] at h1
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, single_apply_mode_ne q.2 q.1 2 3 (Ne.symm h32),
+      single_apply_mode_ne q.2 q'.1 2 3 (Ne.symm h32), zero_add, zero_add] at h2
+    exact Prod.ext (fst_of_single_apply q.1 q'.1 3 h1.symm).symm
+      (fst_of_single_apply q.2 q'.2 2 h2.symm).symm
+  · -- `[3,1,1]` versus `[3,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((ps.1, 3) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 ps.2 (by simpa using h31),
+      symModeIndex_apply_of_ne 1 ps'.2 (by simpa using h31), add_zero, add_zero] at h1
+    have hfst : ps'.1 = ps.1 := fst_of_single_apply ps.1 ps'.1 3 h1.symm
+    rw [levelFiveIndex, levelFiveIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[2,2,1]` versus `[2,2,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((sp.2, 1) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 2 sp.1 (by simpa using h12),
+      symModeIndex_apply_of_ne 2 sp'.1 (by simpa using h12), zero_add, zero_add] at h1
+    have hsnd : sp'.2 = sp.2 := fst_of_single_apply sp.2 sp'.2 1 h1.symm
+    rw [levelFiveIndex, levelFiveIndex, hsnd] at h
+    exact Prod.ext (symModeIndex_injective 2 (add_right_cancel h)) hsnd.symm
+  · -- `[2,1,1,1]` versus `[2,1,1,1]`
+    refine congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inl) ?_
+    have h1 := DFunLike.congr_fun h ((pt.1, 2) : ι × ℕ+)
+    rw [levelFiveIndex, levelFiveIndex, Finsupp.add_apply, Finsupp.add_apply,
+      Finsupp.single_eq_same, symModeIndex_apply_of_ne 1 pt.2 (by simpa using h21),
+      symModeIndex_apply_of_ne 1 pt'.2 (by simpa using h21), add_zero, add_zero] at h1
+    have hfst : pt'.1 = pt.1 := fst_of_single_apply pt.1 pt'.1 2 h1.symm
+    rw [levelFiveIndex, levelFiveIndex, hfst] at h
+    exact Prod.ext hfst.symm (symModeIndex_injective 1 (add_left_cancel h))
+  · -- `[1,1,1,1,1]` versus `[1,1,1,1,1]`
+    exact congrArg (Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr ∘ Sum.inr)
+      (symModeIndex_injective 1 h)
+
+end LevelFiveInjective
+
 end StringFormal.NoGhost
