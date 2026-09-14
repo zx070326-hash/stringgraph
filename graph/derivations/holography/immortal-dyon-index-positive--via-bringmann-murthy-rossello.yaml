@@ -5,10 +5,10 @@ status: physical-argument
 depends_on:
   - id: holography.mock-jacobi-coefficient-positivity
     inferred: false
-    note: "提供纯数学结论：(−1)^{ℓ+1} c_m^F(n,ℓ)>0 对全部 m,n≥1、Δ=4mn−ℓ²>0、gcd=1 成立（Rosselló Thm 1 + Cor 1.1，m=1,2 归 Bringmann-Murthy）"
+    note: "提供纯数学结论：单心指标 d_∗(m,n,ℓ)>0 对全部 m,n≥1、Δ=4mn−ℓ²>0、gcd=1 成立（Rosselló Cor 1.1，d_∗ 为吸引子围道积分；在代表元范围 n≥m、0≤ℓ≤m 内 d_∗=(−1)^{ℓ+1}c_m^F，见 Thm 1；m=1,2 归 Bringmann-Murthy）。**离开代表元范围 (−1)^{ℓ+1}c_m^F 可为负（反例 (10,1,6)），全范围为正的对象是 d_∗**"
   - id: holography.dmz-single-center-identification
     inferred: false
-    note: "提供物理一步（识别③）：DMZ 有限部 φ_F 的系数 d_F(m,n,l) 可读作 immortal（单心）dyon 的螺旋超迹；文献称之为 the finite part conjecture，故本推导整体只能是 physical-argument"
+    note: "提供物理一步（识别③）：单心（immortal）dyon 的螺旋超迹由吸引子围道积分 d_∗ 给出（在代表元范围等于 DMZ 有限部 φ_F 的系数 d_F=(−1)^{ℓ+1}c_m^F）；文献称有限部对应单心态为 the finite part conjecture，故本推导整体只能是 physical-argument"
 sources:
   - ref: rossello-2024
     loc: "Theorem 1 + Corollary 1.1（数学正性）；§1（immortal/单心指标的界定与 hair-mode 分解，含 'We assume that such frame exists for 1/4-BPS black holes'）"
@@ -23,11 +23,13 @@ summary: |
   本节点的目标陈述是**物理命题**：它把 d_F(m,n,l) 直接称为 immortal（单心）dyon 的螺旋超迹，
   并断言该指标为正。论证分两块，严格程度由较弱的一块决定：
 
-  1. **数学部分（rigorous，不在本推导内证明）**：mock Jacobi 系数的符号正性
-     (−1)^{ℓ+1} c_m^F(n,ℓ) > 0（全部 m,n≥1、Δ=4mn−ℓ²>0、gcd(m,n,l)=1）由
-     holography.mock-jacobi-coefficient-positivity 提供（Rosselló 2024 Theorem 1 +
-     Corollary 1.1，指标 m=1,2 归 Bringmann–Murthy 2012；方法为 GL(2,ℤ) 约化 +
-     Rademacher 展开 + Kloosterman/Bessel 显式定界，纯解析数论）。
+  1. **数学部分（rigorous，不在本推导内证明）**：单心指标的符号正性 d_∗(m,n,ℓ)>0
+     （全部 m,n≥1、Δ=4mn−ℓ²>0、gcd(m,n,l)=1）由
+     holography.mock-jacobi-coefficient-positivity 提供（Rosselló 2024 Corollary 1.1，
+     d_∗ 为吸引子围道积分；在代表元范围 n≥m、0≤ℓ≤m 内 d_∗=(−1)^{ℓ+1}c_m^F，见 Theorem 1；
+     指标 m=1,2 归 Bringmann–Murthy 2012；方法为 GL(2,ℤ) 约化 + Rademacher 展开 +
+     Kloosterman/Bessel 显式定界，纯解析数论）。**注意离开代表元范围 (−1)^{ℓ+1}c_m^F 可取负值
+     （反例 (10,1,6)：(−1)^7 c_10^F(1,6)<0，而 d_∗(10,1,6)=50064>0），全范围为正的对象是 d_∗**。
 
   2. **物理一步（physical-argument，本推导补的就是这一步）**：要把上述系数读作"单心 dyon 指标"，
      必须用识别③（holography.dmz-single-center-identification）——即 DMZ 2012 论证在 immortal
@@ -51,5 +53,10 @@ notes: |
      依据 extractions/bringmann-murthy-2012.md 订正 C1、extractions/rossello-2024.md E3–E5。
   3. 目标节点 holography.immortal-dyon-index-positive 的 notes 早已预告"若将物理识别③链入，
      有效状态降为 physical-argument"；本次改动使工具计算结果与该预告一致。
+  4. 自洽性修正（task #20 reservation-3，lead on behalf after API outage，2026-09-15）：
+     前版依赖 note 与 summary 步骤 1 写"math 卡提供 (−1)^{ℓ+1}c_m^F>0 全范围"，与修正后的
+     mock-jacobi-coefficient-positivity (b) 直接矛盾——全范围为正的对象是吸引子围道积分 d_∗，
+     (−1)^{ℓ+1}c_m^F 在代表元范围外可取负（反例 (10,1,6)）。已订正为 d_∗，并注明代表元范围内
+     d_∗=(−1)^{ℓ+1}c_m^F。识别③的物理陈述随之明确为"单心指标 = d_∗"。
 author: lead
 created: "2026-09-14"
