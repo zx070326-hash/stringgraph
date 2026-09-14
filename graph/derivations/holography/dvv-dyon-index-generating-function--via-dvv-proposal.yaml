@@ -1,0 +1,19 @@
+id: holography.dvv-dyon-index-generating-function--via-dvv-proposal
+target: holography.dvv-dyon-index-generating-function
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§3, eqs. (3.6)–(3.8)：提议 1/Φ₁₀ 傅里叶系数等于 dyon 螺旋超迹，并以低荷情形数值验证"
+summary: |
+  DVV 通过以下论证支撑识别①：
+  1. 计算 1/Φ₁₀ 的低次傅里叶系数 d(m,n,l)，与已知的 1/4-BPS 态直接计数吻合；
+  2. 用 4d-5d 提升（type II on K3×T² ↔ type II on K3×T³）和超对称非重整化论证，
+     将生成函数的形式约束到 Sp(4,ℤ) 模形式；
+  3. 通过对偶论证（S-对偶、T-对偶）推断生成函数整体必为 1/Φ₁₀。
+  原文措辞"我们提议"（we propose）和"猜想"，承认这是猜想级别而非证明。
+author: lead
+created: "2026-09-14"

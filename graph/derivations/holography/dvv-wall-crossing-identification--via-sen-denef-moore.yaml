@@ -1,0 +1,30 @@
+id: holography.dvv-wall-crossing-identification--via-sen-denef-moore
+target: holography.dvv-wall-crossing-identification
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+  - id: holography.phi10-wall-crossing-poles
+    inferred: false
+  - id: holography.dvv-dyon-index-generating-function
+    inferred: false
+sources:
+  - ref: sen-2007-wall-crossing
+    loc: "§2–§3, wall crossing formula and contour-chamber correspondence"
+  - ref: denef-moore-2007
+    loc: "§2, §5, split states and BPS stability walls in N=4"
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, contour dependence of 1/Φ₁₀ Fourier expansion"
+summary: |
+  识别②的论证路线：
+  1. 从 phi10-wall-crossing-poles（严格复分析）已知 1/Φ₁₀ 有留数因子化；
+  2. Sen 通过 S-对偶 + 弦论 BPS 态计数给出 wall crossing 公式
+     Δd = (−1)^{Q·P+1}(Q·P) d_{1/2}(Q²/2) d_{1/2}(P²/2)，
+     并将之与 dvv-dyon-index-generating-function 识别①所给出的"d(m,n,l)是dyon指标"
+     合用，论证：积分围道穿越 Φ₁₀ 极点 = 穿越模空间中 BPS stability wall；
+  3. Denef-Moore 从多中心超引力 BPS 解角度补充证实分裂态（split states）的 threshold，
+     与极点超平面吻合。
+  两步物理论证均依赖超引力 BPS 解的分析和 S-对偶，不是纯数学推论。
+author: lead
+created: "2026-09-14"

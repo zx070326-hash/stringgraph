@@ -1,0 +1,23 @@
+id: holography.immortal-dyon-index-positive--via-bringmann-murthy-rossello
+target: holography.immortal-dyon-index-positive
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.dmz-mock-jacobi-decomposition
+    inferred: false
+sources:
+  - ref: bringmann-murthy-2012
+    loc: "主定理，圆法 + Kloosterman 和估计，对充分大 d=4mn−l²>0 的情形"
+  - ref: rossello-2024
+    loc: "主定理，所有 d>0，gcd(m,n,l)=1 情形，完全关闭 Sen positivity 猜想"
+summary: |
+  两阶段数学证明：
+  1. Bringmann-Murthy 2012：用 Hardy-Ramanujan 圆法对 mock Jacobi 系数
+     d_F(m,n,l) 做精确渐近展开；结合 Kloosterman 和估计，证明对充分大的
+     判别式 d=4mn−l²≫1 有 d_F>0，方法完全在模形式/解析数论框架内。
+  2. Rosselló 2024：对所有 d>0，gcd=1 的情形（包括小判别式）证明 d_F>0，
+     弥补 BM 2012 对小情形的空缺，从而完全关闭该命题。
+  两篇均以严格数学（不依赖物理假设）证明 mock Jacobi 系数的正性；
+  物理意义（系数 = 单心 dyon 指标）依赖识别③，单独记录。
+author: lead
+created: "2026-09-14"

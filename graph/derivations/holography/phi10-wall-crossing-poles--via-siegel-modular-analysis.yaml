@@ -1,0 +1,21 @@
+id: holography.phi10-wall-crossing-poles--via-siegel-modular-analysis
+target: holography.phi10-wall-crossing-poles
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+sources:
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, 1/Φ₁₀ 的极点超平面族和留数结构"
+  - ref: sen-2007-wall-crossing
+    loc: "§2, Φ₁₀ 极点位置和留数因子化的明确计算"
+summary: |
+  从 Φ₁₀ 作为权 10 Sp(4,ℤ) 尖点形式的性质，严格推出：
+  1. Borcherds 乘积公式直接给出零点超曲面 {mρ+nσ+lv∈ℤ，4mn−l²=1}（单零点）；
+  2. 在 {ρ=0} 附近的 Laurent 展开：Res_{ρ=0}(1/Φ₁₀) 由 Φ₁₀ 对 ρ 的首阶系数给出，
+     该系数是 σ,v 的 Jacobi 形式（权 −12），可分解为两个椭圆亏格因子之积；
+  3. Sp(4,ℤ) 对称性将 {ρ=0} 的计算搬到所有极点超平面。
+  全部步骤在 Siegel 模形式的代数框架内严格进行，不依赖物理论证。
+author: lead
+created: "2026-09-14"
