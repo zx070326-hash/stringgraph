@@ -35,3 +35,42 @@
 1. "充分大的判别式"是否给出有效的数值界（使得所有小判别式情形可以有限计算机检验）？需核实 §4 的具体陈述。
 2. Kloosterman 和估计所依赖的 Weil 猜想（Deligne 定理）是本文的核心输入；这本身已是数学定理，但引用链应在图节点的 depends_on 中写明。
 3. 与 Rosselló 2024 的关系：本文处理 N=4 的一个子情形，Rosselló 处理完整 N=4 旗舰情形；图节点应同时引用并注明覆盖范围差异。
+
+---
+
+## 核实（researcher, task #17, 2026-09-14）
+
+来源：Rosselló 2024（arXiv:2403.19630）引言与 Theorem 1 处对 [30]（=本文）的**直接引用**，
+BM 摘要页 https://arxiv.org/abs/1208.3476 ，及 Murthy 综述 arXiv:2305.11732。上方 E1/E2 保留不动（审计痕迹）。
+
+### 订正 C1 覆盖范围的准确刻画（重要）
+- 初稿 E1/E2 及现有图节点把 BM 的覆盖范围写成"**判别式充分大**（Δ≫1）"。据一手核实，**这一刻画不准确**。
+- Rosselló 2024 逐字陈述："**The cases m=1,2 of this theorem were proved in [30]**"，随后"so in this
+  work we restrict ourselves to m≥3"。即 BM 证明的是 **mock Jacobi 形式指标 m=1、m=2 两个情形**
+  （m = 磁荷不变量 P²/2 一类），而**对这两个 m 值覆盖全部判别式 Δ>0**（n≥m 全部 n），并非"只对充分大 Δ"。
+- 分界线是**指标 m**，不是"判别式大小"：
+  - BM 2012：m=1,2（此二值下全部 Δ>0，含小判别式）。
+  - Rosselló 2024：m≥3（m=3,4,5 显式，m≥6 一般），补齐余下全部 m，从而 Corollary 覆盖所有 m,n≥1、Δ>0。
+- 机理：Rademacher 展开里"最极端极态（most polar state）的非-mock 项"给出主导且恒正的贡献，远大于其余项之和；
+  对 m=1,2 极系数已知，可对所有 n 完成定界。故"充分大 Δ 才为正"的说法对 m=1,2 并不成立——
+  该说法是初稿凭一般印象所写，应予订正。
+
+### E3 主结论（核实）
+- 位置：摘要 + 正文定理（具体编号未从 BM PDF 独立 OCR 核到；PDF 为压缩流，未能提取正文文本）。
+- 摘要逐字（分段）："Certain helicity trace indices of charged states in N=4 and N=8 superstring
+  theory have been computed exactly … These indices are expected to count the exact quantum
+  degeneracies of black holes … these indices should be positive integers. We prove this positivity
+  property for a class of four/five dimensional black holes in type II string theory compactified on
+  T^6/T^5 and on K3×T^2/S^1. The proof relies on the mock modular properties of the corresponding
+  generating functions."
+- 严格程度：Theorem（在所覆盖范围内）；方法为 mock 模形式 + 圆法（Rademacher 展开）+ Kloosterman 和估计，
+  **纯解析数论，无物理前提**（物理仅为动机：指标应=黑洞简并度，故须为正）。
+- 覆盖：N=4（K3×T²）的 m=1,2；N=8（T⁶）对应情形；不含完整 N=4（余下 m 由 Rosselló 2024 补齐）。
+
+### 疑问解决
+1.（原疑问1，"充分大 Δ"的有效数值界）**重新表述**：BM 的分界不是"Δ 是否够大"，而是指标 m∈{1,2}；
+   在这两个 m 下对所有 Δ>0 成立，无需数值界。故原疑问 1 的前提（"小判别式需有限计算机检验"）不适用于 BM——
+   小情形的空缺是"m≥3"，由 Rosselló 关闭。
+2.（原疑问2，Weil/Deligne 依赖）Kloosterman 和的估计属标准解析数论工具，本身为数学定理；curator 转节点时可在
+   depends_on 记明，但不影响 rigorous 定性。
+3.（原疑问3，与 Rosselló 关系）见 C1：BM=m=1,2；Rosselló=m≥3，合并覆盖全部 Δ>0、gcd=1。
