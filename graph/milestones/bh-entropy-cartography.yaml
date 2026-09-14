@@ -1,7 +1,7 @@
 id: ms.bh-entropy-cartography
-statement_id: holography.immortal-dyon-index-positive
+statement_id: holography.mock-jacobi-coefficient-positivity
 canonical_text: |
-  N=4 弦论黑洞熵计数的数学脊柱（Φ₁₀ → DMZ 分解 → Sen 正性）：
+  N=4 弦论黑洞熵计数的数学脊柱（Φ₁₀ → DMZ 分解 → mock Jacobi 系数正性）：
 
   **数学背景**：Igusa 权 10 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ) 的唯一（至标量）权 10 尖点形式，
   其倒数 1/Φ₁₀ 可作傅里叶展开 ∑ d(m,n,l) e^{2πi(mρ+nσ+lv)}。对固定 n，将 1/Φ₁₀
@@ -13,93 +13,135 @@ canonical_text: |
   其中 φ_F 是 mock Jacobi 形式（有限部），φ_P 是 Appell-Lerch 和（极部）。
   当 φ = 1/Φ₁₀ 时，分解定理直接适用。
 
-  **Sen 正性定理**（Bringmann-Murthy 2012 对充分大判别式 + Rosselló 2024 对所有情形）：
-  设 d_F(m,n,l) 为 φ_F 的傅里叶系数，则对所有满足
-    d = 4mn − l² > 0，  gcd(m,n,l) = 1
-  的整数三元组 (m,n,l)，有
-    d_F(m,n,l) > 0。
-  证明方法：解析数论（Hardy-Ramanujan 圆法、Kloosterman 和估计），完全在 mock 模形式框架内，
-  不依赖物理假设。
+  **mock Jacobi 系数正性定理**：设 ψ_m^F 为 DMZ 分解后的指标 m mock Jacobi 形式（有限部），
+  其傅里叶系数记为 c_m^F(n,ℓ)；另设 d_*(m,n,ℓ) 为沿吸引子围道 𝒞_* 的积分
+  （1/Φ₁₀ 在电荷依赖点的傅里叶系数，即单心指标）。则：
+
+  (a) **代表元范围**（Rosselló 2024 Thm 1）：对所有 m>0、n≥m、0≤ℓ≤m，
+      (−1)^{ℓ+1} c_m^F(n,ℓ) > 0。
+      在此范围内 d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)（多心贡献为零）。
+
+  (b) **全范围**（Rosselló 2024 Cor 1.1）：对所有 m,n≥1、Δ=4mn−ℓ²>0、gcd(m,n,ℓ)=1，
+      d_*(m,n,ℓ) > 0。
+      此处正性对象是**单心指标 d_***，不是 c_m^F——后者在全范围正性为假，
+      反例 (m,n,ℓ)=(10,1,6) 有 (−1)^{6+1} c_10^F(1,6) < 0，但 d_*(10,1,6) = 50064 > 0。
+
+  证明覆盖：Bringmann-Murthy 2012 覆盖 **mock Jacobi 指标 m=1,2**（对这两个 m 覆盖全部 Δ>0，
+  含小判别式，**不是**"充分大判别式"）；Rosselló 2024 补齐 m≥3，合并覆盖全部 m,n≥1、Δ>0、gcd=1。
+  证明方法：S-对偶约化到代表元 + Rademacher 展开 + Kloosterman/Bessel 定界，完全在 mock 模形式
+  与解析数论框架内，不依赖物理假设。
 
   **物理意义**（不在本里程碑审计范围内）：DVV（Dijkgraaf-Verlinde-Verlinde 1997）提议
-  d(m,n,l) = 1/4-BPS dyon 螺旋超迹，DMZ 识别 φ_F 系数 = 单心（immortal）dyon 贡献，
-  故 Sen 正性对应黑洞微观简并度正性。这些识别是 physical-argument（依赖 4d-5d 提升、
+  d(m,n,l) = 1/4-BPS dyon 螺旋超迹，DMZ 识别 φ_F 系数与 d_* = 单心（immortal）dyon 贡献，
+  故 d_* 正性对应黑洞微观简并度正性。这些识别是 physical-argument（依赖 4d-5d 提升、
   超对称非重整化、对偶论证、supergravity BPS 解分析），不是严格数学推论。
 
   **本里程碑审计的是纯数学脊柱**：Φ₁₀ 作为 Siegel 模形式的性质 → DMZ 分解定理 →
-  mock Jacobi 系数 d_F(m,n,l)>0 的解析数论证明。三者均为 rigorous 数学结果。
+  mock Jacobi 系数 c_m^F 在代表元范围的符号正性 + 单心指标 d_* 在全范围的正性。三者均为 rigorous 数学结果。
 canonical_source:
   ref: rossello-2024
-  loc: "主定理（所有 d>0，gcd=1 情形的完整证明，关闭 Sen positivity 猜想）"
+  loc: "Thm 1（代表元范围，m>0, n≥m, 0≤ℓ≤m）与 Cor 1.1（全范围，m,n≥1, Δ>0, gcd=1）；(2.22)–(2.23) 定义 d_*"
 audit:
   status: back-translated
   back_translation:
     by: physics-auditor
     text: |
-      【回译，第一轮，physics-auditor，2026-09-14。仅依据 holography.immortal-dyon-index-positive
-      及其依赖链（holography.dmz-mock-jacobi-decomposition, holography.igusa-cusp-form-phi10）
-      的 statement 字段写成；写此文时未读各节点的 notes、前人审计记录。无 formal/ Lean 声明。】
+      【回译，第二轮，physics-auditor，2026-09-15。task #20 拆卡后重锚至 holography.mock-jacobi-coefficient-positivity
+      + 订正 d_*/c_m^F 与 BM 覆盖范围。仅依据该卡及其依赖链（holography.dmz-mock-jacobi-decomposition,
+      holography.igusa-cusp-form-phi10）的 statement 字段写成；写此文时未读 canonical_text、各节点的 notes、
+      前人审计记录。无 formal/ Lean 声明。】
 
-      数学对象与定义。Igusa 权 10 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ) 整 Siegel 模群的权 10 尖点形式，
-      其中 Ω = [[ρ,v],[v,σ]] 为 Siegel 上半空间（度 2）变量（ρ,σ∈ℍ，v∈ℂ，Im Ω>0）。
-      Φ₁₀ 由 Borcherds 升举公式给出，在 Sp(4,ℤ) 权 10 尖点形式空间中（至标量倍）唯一，
-      唯一零点位于判别式 4mn−l²=1 的超平面族的 Sp(4,ℤ)-轨道上。
+      数学对象。Igusa 权 10 尖点形式 Φ₁₀(Ω) 是 Sp(4,ℤ)（整 Siegel 模群）的权 10 尖点形式，
+      Ω = [[ρ, v], [v, σ]] 为 Siegel 上半空间（度 2）变量（ρ,σ∈ℍ，v∈ℂ，Im Ω>0）。
+      由 Borcherds 升举公式定义，在 Sp(4,ℤ) 权 10 尖点形式空间中（至标量倍）唯一，
+      唯一零点位于超曲面 {mρ + nσ + lv ∈ ℤ，4mn−l²=1} 的 Sp(4,ℤ)-轨道上，为单零点。
 
-      DMZ 正则分解定理（数学，rigorous）。设 φ(τ,z) 是指标 m∈ℤ_{>0} 的亚纯 Jacobi 形式
+      DMZ 正则分解定理（rigorous）。设 φ(τ,z) 是指标 m∈ℤ_{>0} 的亚纯 Jacobi 形式
       （weight k∈ℤ，对 SL(2,ℤ)×ℤ² 变换），极点仅在 z∈ℚτ+ℚ 处（即极点在 z=0 的
-      SL(2,ℤ)×ℤ² 轨道上，阶数 ≤2）。则 φ 存在唯一典范正则分解
+      SL(2,ℤ)×ℤ² 轨道上，阶数≤2）。则 φ 存在唯一典范正则分解
         φ(τ,z) = φ_F(τ,z) + φ_P(τ,z)，
-      其中 φ_F（有限部）是指标 m 的 mock Jacobi 形式（权 k），满足 Jacobi 群变换律，
-      其完成量 φ̂_F 在非全纯修正下满足模变换；φ_P（极部）是有限个 Appell-Lerch 和
+      其中 (a) φ_F（有限部）是指标 m 的 mock Jacobi 形式（权 k），满足 Jacobi 群变换律，
+      其完成量 φ̂_F 在非全纯修正下满足模变换；(b) φ_P（极部）是有限个 Appell-Lerch 和
         A_{m,s}(τ,z) = e^{2πi s z} ∑_{r∈ℤ} q^{mr²+(2ms+1)r} y^{2mr+2ms+1} / (1−q^r y)
-      的线性组合，与 φ 的极点结构精确吻合。分解在 J_{k,m}^{cusp}=0 时严格唯一；
-      对 1/Φ₁₀（固定 n 后作为指标 m 的 Jacobi 形式）该条件成立。
-      证明：Dabholkar-Murthy-Zagier 2012 §3 Theorem 1.1，使用 Fourier 展开、
-      Appell-Lerch 和的模变换性质与 Jacobi 形式维数论证，是严格数学定理。
+      的线性组合，与 φ 的极点结构精确吻合；(c) 分解在 J_{k,m}^{cusp}=0 时严格唯一。
+      对 1/Φ₁₀（固定 n 后作为指标 m 的 Jacobi 形式），分解给出"单心 dyon 贡献 φ_F"与
+      "多中心贡献 φ_P"的数学分离。证明：Dabholkar-Murthy-Zagier 2012 §3 Theorem 1.1。
 
-      Sen 正性定理（数学，rigorous）。设 d_F(m,n,l) 为 DMZ 分解后有限部 φ_F 的傅里叶系数。
-      则对所有满足以下条件的整数三元组 (m,n,l)：
-        d = 4mn − l² > 0，  gcd(m,n,l) = 1，
-      有
-        d_F(m,n,l) > 0。
-      证明分两阶段：
-      (1) Bringmann-Murthy 2012：用 Hardy-Ramanujan 圆法对 d_F(m,n,l) 做精确渐近展开，
-          结合 Kloosterman 和估计，证明对充分大判别式 d≫1 有 d_F>0；
-      (2) Rosselló 2024：对所有 d>0、gcd=1 情形（包括小判别式）证明 d_F>0，
-          完全关闭 Sen positivity 猜想。
-      两篇均以严格数学（解析数论，不依赖物理假设）证明 mock Jacobi 系数正性。
+      mock Jacobi 系数正性定理（rigorous）。设 ψ_m^F 为 DMZ 分解后指标 m 的 mock Jacobi 形式
+      （有限部），其傅里叶系数记为 c_m^F(n,ℓ)：ψ_m^F(τ,z) = ∑ c_m^F(n,ℓ) q^n y^ℓ。
+      另设单心（免死）指标 d_*(m,n,ℓ) 为沿吸引子围道 𝒞_* 的积分
+        d_*(m,n,ℓ) = ∫_{𝒞_*} dρ dσ dv · e^{−2πi(mρ+nσ+ℓ(v+½))} / Φ₁₀(ρ,σ,v)，
+      即 1/Φ₁₀ 在电荷依赖点（吸引子点）的傅里叶系数。注意：d_* 一般不等于 (−1)^{ℓ+1} c_m^F(n,ℓ)，
+      后者只在代表元范围内与之相等，范围外须减多心留数。
 
-      物理识别（不在数学脊柱上）。以下三条物理识别是 physical-argument，不在本回译范围内：
-      识别①（DVV 1997）：d(m,n,l) = 1/4-BPS dyon 螺旋超迹 −B₆(Q,P)；
-      识别②（Sen 2007, Denef-Moore 2007）：围道选择 = 模空间壁穿越；
-      识别③（DMZ 2012）：φ_F 系数 = 单心（immortal）dyon 贡献。
-      这些识别依赖 4d-5d 提升、SUSY 非重整化、S-对偶、supergravity BPS 解分析，
-      不是纯数学推论。
+      则：
+      (a) 代表元范围正性（Rosselló Thm 1）：对所有整数 m>0、n≥m、0≤ℓ≤m，
+            (−1)^{ℓ+1} c_m^F(n,ℓ) > 0。
+          在此范围内（ℓ≤m≤n ⇒ ℓ<2m 且 ℓ<2n）多心贡献为零，此时 d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)。
 
-      陈述范围。本里程碑审计的是纯数学链：Φ₁₀ 存在与唯一性（Igusa 1962，Siegel 模形式维数公式）
-      → DMZ 分解定理（DMZ 2012 §3 Theorem 1.1，严格证明）→ Sen 正性定理
-      （BM 2012 + Rosselló 2024，解析数论）。三者均为 rigorous 数学结果，
-      不依赖弦论或对偶论证。物理意义（黑洞熵、dyon 简并度）由识别①②③单独承担，
-      是 physical-argument，不在里程碑陈述内。
+      (b) 全范围正性（Rosselló Cor 1.1）：对所有 m,n,ℓ∈ℤ 满足
+            m≥1,  n≥1,  Δ=4mn−ℓ²>0,  gcd(m,n,ℓ)=1（torsion I=1），
+          有
+            d_*(m,n,ℓ) > 0。
+          注意：对象是单心指标 d_*，不是全范围 (−1)^{ℓ+1} c_m^F(n,ℓ)——后者在全范围为假。
+          反例：(m,n,ℓ)=(10,1,6)，c_10^F(1,6)=1393564656，(−1)^7 c_10^F(1,6)<0，
+          但减去多心留数后 d_*(10,1,6)=50064>0（等于代表元 d_*(1,1,0)=(−1)c_1^F(1,0)）。
+
+      覆盖范围。Bringmann-Murthy 2012 覆盖 mock Jacobi 形式指标 m=1,2（对这两个 m 覆盖全部 Δ>0，
+      含小判别式）；Rosselló 2024 补齐 m≥3（m=3,4,5 显式验证，m≥6 一般论证），两者合并覆盖
+      全部 m,n≥1、Δ>0、gcd=1。证明方法：S-对偶约化到代表元 + Rademacher 展开 +
+      Kloosterman/Bessel 显式定界，纯解析数论，不依赖物理假设。
+
+      物理识别（不在审计范围）。"d_* = immortal dyon 简并度、c_m^F = 其生成函数系数"的识别
+      属于 physical-argument（依赖 4d-5d 提升、SUSY 非重整化、S-对偶、supergravity BPS 解分析），
+      不在本回译范围内。
+
+      陈述范围。本里程碑审计的纯数学脊柱：Φ₁₀ 的 Siegel 模形式性质 → DMZ 分解定理 →
+      mock Jacobi 系数 c_m^F 在代表元范围的符号正性（(a)）+ 单心指标 d_* 在全范围的正性（(b)）。
+      三者均为 rigorous 数学结果。
     verdict: faithful
     diff_notes: |
-      比对对象：canonical_text（本里程碑卡）↔ 回译（仅依据三个 statement 节点）。
+      比对对象：canonical_text（本里程碑，#20 修订后）↔ 回译（仅依据 holography.mock-jacobi-coefficient-positivity
+      及其依赖链的 statement 字段，未读 canonical_text）。
 
-      一致之处：
-      - 数学脊柱三步（Φ₁₀ → DMZ 分解 → Sen 正性）在 canonical_text 与回译中表述一致。
-      - DMZ 分解定理的条件（亚纯 Jacobi 形式、极点在有理格点、指标 m）精确对应。
-      - Sen 正性定理的条件（d>0、gcd=1）与结论（d_F>0）完全一致。
+      一致之处（核心命题）：
+      - 数学脊柱三步（Φ₁₀ → DMZ 分解 → mock Jacobi 系数正性）在两侧表述完全一致。
+      - Φ₁₀ 定义、唯一性、零点结构精确对应。
+      - DMZ 分解定理的前提（亚纯 Jacobi 形式、极点在有理格点、指标 m）、结论
+        （φ = φ_F + φ_P，唯一性条件 J_{k,m}^{cusp}=0）、严格度（rigorous，DMZ 2012）一致。
+      - mock Jacobi 系数正性定理的两个结论精确对应：
+        (a) 代表元范围（m>0, n≥m, 0≤ℓ≤m）：(−1)^{ℓ+1} c_m^F(n,ℓ) > 0；
+        (b) 全范围（m,n≥1, Δ>0, gcd=1）：d_*(m,n,ℓ) > 0。
+      - 两侧均明确指出对象分层：(a) 的对象是 c_m^F，(b) 的对象是 d_*（不是全范围 c_m^F），
+        并写明反例 (10,1,6)。
+      - 覆盖范围一致：Bringmann-Murthy 2012 覆盖指标 m=1,2（对这两个 m 覆盖全部 Δ>0，
+        含小判别式，**不是**"充分大判别式"）；Rosselló 2024 补齐 m≥3。
+      - 证明方法一致：S-对偶约化 + Rademacher 展开 + Kloosterman/Bessel 定界，纯解析数论。
       - 两侧均明确区分数学脊柱（rigorous）与物理识别（physical-argument），
-        并将识别①②③排除在里程碑审计范围外。
+        后者不在审计范围内。
 
-      措辞差异（不影响语义等价）：
-      - canonical_text 用"数学背景"、"DMZ 正则分解定理"、"Sen 正性定理"分段；
-        回译用"数学对象与定义"、"DMZ 正则分解定理"、"Sen 正性定理"、"物理识别"分段。
-      - canonical_text 对 Φ₁₀ 的 Borcherds 升举公式只提及存在，未写显式公式；
-        回译从 statement 读到完整的 Borcherds 乘积公式但在回译中未展开。
-      - canonical_text 写"不在本里程碑审计范围内"，回译写"不在数学脊柱上"、"不在本回译范围内"。
+      措辞差异（不影响语义）：
+      - canonical_text 分段标题："数学背景"、"DMZ 正则分解定理"、"mock Jacobi 系数正性定理"、
+        "物理意义"；回译用："数学对象"、"DMZ 正则分解定理"、"mock Jacobi 系数正性定理"、
+        "覆盖范围"、"物理识别"、"陈述范围"。
+      - canonical_text 在 Φ₁₀ 段提到"可作傅里叶展开 ∑ d(m,n,l) e^{2πi(mρ+nσ+lv)}"；
+        回译未写 1/Φ₁₀ 的傅里叶展开（但写了 Borcherds 升举公式的存在）。
+      - canonical_text 把 d_* 定义放在正性定理段首，紧接 c_m^F 定义；回译在同一位置给出同样定义，
+        措辞略有不同但数学内容相同（围道积分式逐项一致）。
+      - canonical_text 在 (b) 后用"此处正性对象是**单心指标 d_***，不是 c_m^F"强调；
+        回译在 (b) 开头用"注意：对象是单心指标 d_*，不是全范围 (−1)^{ℓ+1} c_m^F(n,ℓ)——
+        后者在全范围为假"完成同一强调。
+      - canonical_text 把"Bringmann-Murthy 覆盖 m=1,2"放在正性定理段的"证明覆盖"子段；
+        回译单列"覆盖范围"段落。结论表述一致。
 
-      裁定：faithful。canonical_text 与回译在命题内容上语义等价，措辞差异不改变陈述范围。
-      数学脊柱（Φ₁₀ → DMZ → Sen）均为 rigorous，物理识别（①②③）均为 physical-argument，
-      边界清晰。
+      已订正的两个错误（task #20 修正目标，在 canonical_text 与 statement 均已修正，回译一致）：
+      1. BM 覆盖范围：两侧均写"指标 m=1,2（对这两个 m 覆盖全部 Δ>0，含小判别式）"，
+         **不是**"充分大判别式"。订正依据：extractions/bringmann-murthy-2012.md C1、
+         extractions/rossello-2024.md E3。
+      2. 全范围正性对象：两侧均写"(b) 的对象是 d_*(m,n,ℓ)>0"，**不是**"全范围 c_m^F>0"；
+         并均写明反例 (10,1,6)。订正依据：extractions/rossello-2024.md R1–R4。
+
+      裁定：faithful。canonical_text 与回译在命题内容上语义等价，措辞差异只在分段标题与叙述顺序，
+      不改变陈述范围。数学脊柱（Φ₁₀ → DMZ → 正性）均 rigorous，物理识别（dyon 简并度）
+      为 physical-argument，边界清晰。两个已知错误已在两侧同步订正。
 phase: 1
