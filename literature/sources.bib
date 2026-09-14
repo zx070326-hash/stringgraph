@@ -1072,6 +1072,43 @@
              见 extractions/math-sources.md §36.2、§37.2。}
 }
 
+@article{borcherds-1992,
+  author  = {Borcherds, Richard E.},
+  title   = {Monstrous moonshine and monstrous {Lie} superalgebras},
+  journal = {Inventiones Mathematicae},
+  volume  = {109},
+  pages   = {405--444},
+  year    = {1992},
+  doi     = {10.1007/BF01232032},
+  note    = {由 researcher 于 2026-09-14 登记（task #18 DDF-spanning 查无此证明核实）。
+             **§5「The no-ghost theorem」全文已核实（L1，逐页读图）**。
+             获取途径：**作者本人主页重排本 `https://math.berkeley.edu/~reb/papers/monster/monster.pdf`
+             经 WebFetch 落盘后 Read 带 pages 读图**（裸 PDF 文本层是 FlateDecode 压缩、不可直接 grep，须走渲染读图）。
+             **⚠ 引用陷阱：这是作者重排 TeX 版，PDF 页码为 1,2,3,...（Theorem 5.1 落在重排本 p.19），
+             与期刊 Invent. Math. 109, 405-444 不对应。`loc:` 写节号/定理号，不要写页码。**
+             **★★ 无鬼定理 = §5 Theorem 5.1（L1 逐字要点）**：设 V 带非退化双线性形式、被 Virasoro 代数作用
+             （L_i 的伴随是 L_{-i}、中心元作用为乘 24、L_0 本征值非负整数且各本征空间有限维），
+             被保结构群 G 作用；令 V_{II_{1,1}} 为二维偶自对偶洛伦兹格 II_{1,1} 二重覆盖的顶点代数，
+             P¹ = {v ∈ V ⊗ V_{II_{1,1}} : L_0 v = v, L_i v = 0 (i>0)}，P¹_r 是其中 II_{1,1}-度数为 r 的子空间。
+             **结论：P¹_r 模去其双线性形式零化空间后，作为带不变形式的 G-模自然同构于
+             V^{1−(r,r)/2}（r ≠ 0）或 V¹ ⊕ R²（r = 0）。** 此同构断言 P¹_r/(零化空间) ≅ 横向 Fock 空间——
+             即 (B) DDF/横向态张成完整物理子空间（满射/维数配平）的 VOA 表述。
+             **★★ 证明（§5，L1）**：Borcherds 明写「The original proof of Goddard and Thorn [21] works for
+             the cases we need with only trivial modifications. For convenience we give a quick sketch of their proof.」
+             即本节的 Lemmas 5.1-5.5 就是 Goddard-Thorn 1972 原始证明的复述。链：
+             引入横向空间 T（被所有 K_i, i>0 湮灭；K_i 是由额外类光方向 w 造的 DDF 型算子 K_i = v_{i-1}, v = e^{-w}_{-2}e^w）、
+             零化空间 N = S ∩ P、Ve^r；Lemma 5.1（T 中非零范矢量经 L、K 生成的态线性独立、张成、形式非退化）→
+             Lemma 5.2（T 上形式非退化，K = T ⊕ K 的零化空间）→ Lemma 5.3（Ve^r ≅ T）→
+             Lemma 5.4（L_{i<0} 生成的结合代数由把 S¹ 映入 S 的元素生成）→ Lemma 5.5（P¹ = T¹ ⊕ N¹）
+             ==> 「The no ghost theorem now follows immediately, because by lemma 5.3 V^{1−(r,r)/2}e^r is
+             isomorphic to T¹, and by lemma 5.5 T¹ is isomorphic to the quotient of P¹ by its nullspace.」
+             **★ D=26 的地位**：Theorem 5.1 假设中心元作用为 24（= dim 横向）；张 V_{II_{1,1}} 后 L_i 的 Virasoro
+             中心荷为 26（原文 §5「The 26 comes from the 24 in theorem 5.1 plus the dimension of II_{1,1}」）。
+             Lemma 5.4 证明用到「center of the Virasoro algebra acts as 24 on V and therefore as 26 on H」——
+             D=26 是使横向态张成成立的关键假设，出现在这一步。
+             见 extractions/borcherds-1992.md 与 extractions/ddf-spanning-no-source-check-2026-09-14.md。}
+}
+
 @misc{li-wang-2008,
   author        = {Li, Haisheng and Wang, Qing},
   title         = {On vertex algebras and their modules associated with even lattices},
