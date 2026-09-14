@@ -9,10 +9,12 @@ import StringFormal.NoGhost.DescendantKernel
 import StringFormal.NoGhost.LevelFourCount
 
 /-!
-# The level-five antidiagonal slice: the counting half
+# The level-five antidiagonal slice
 
-Blueprint `formal/BLUEPRINT-noghost.md` §B⁗ (PR9b).  On the slice `(rung -5, level 5)` the
-Pascal identity that carried `N ≤ 4`,
+Blueprint `formal/BLUEPRINT-noghost.md` §B⁗ (PR9b).  This file closes `B26 5` and
+`ddfSpans_bigrade_neg_five_five`, the fifth antidiagonal slice of `ddf-spans`.
+
+On the slice `(rung -5, level 5)` the Pascal identity that carried `N ≤ 4`,
 
 `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)`,
 
@@ -26,16 +28,48 @@ At `m + 1 = 25` this reads `209405 + 1 = 176256 + 29575 + 3575`.  **The identity
 `m`** — as at `N = 2, 3, 4`, the counting step never sees `26` (blueprint §B′.8); what is new is
 only the `+ 1`.
 
-The same lemma is used twice: at `m = D − 2` it is (I5), the account of the level-five slice; at
-`m = D − 1` it says `κ₅ = 1`, the counting input to the kernel bound (K5) of
-`NoGhost/DescendantKernel.lean`.
+The same lemma is used twice: at `m = D − 2` it is (I5), the account of the level-five slice;
+at `m = D − 1` it says `κ₅ = 1`, which combined with
+`DescendantKernel.finrank_ker_descPair_add_le` gives **(K5)**
+`dim ker (T₅ : V_{j,4} × V_{j,3} → V_{j,5}) ≤ 1` — the one new mathematical input of `N = 5`,
+`D`-independent and valid on every rung.  The two null families `L_{−1}Q_{-5,4}` and
+`𝒟₂Q_{-5,3}` therefore overlap in at most one dimension, which is exactly the `+ 1` on the
+other side of (I5); the two cancel in `b26_five_of_D26`.
+
+## Contents
+
+* `levelFive_count_identity_gen` / `levelFive_count_identity` / `levelFive_count_identity_full`
+  — the arithmetic identity, in the `m`-form and in the two `D`-forms (I5) and `κ₅ = 1`.
+* `card_conjFree_four_ge` — the level-four companion of `card_conjFree_three_ge`.
+* `Finsupp.oscWeight_eq_five_cases` — the seven-shape classification.
+* `LevelFiveIdx` / `levelFiveIndex` / `levelFiveIndex_injective` / `levelFiveIndex_surjOn` /
+  `card_ddfLevel_five_eq` — the level-five parametrisation and the exact count `p_m(5)`.
+* `levelThreeIndex_surjOn`, `levelFourIndex_surjOn`, `card_ddfLevel_three_le`,
+  `card_ddfLevel_four_le` — the **upper** bounds on the full level counts `p_D(3)`, `p_D(4)`,
+  which the earlier files never needed and which (K5) does.
+* `card_conjFree_le_card_ddfLevel` — the surjective half of the `b̃`-free bridge, valid at every
+  level (`LevelThreeCount.card_ddfLevel_le_card_conjFree` is the injective half); with it
+  `card_conjFree_five_le` (U5) is a corollary of `card_ddfLevel_five_eq`.
+* `finrank_ker_descPair_five_le_one` / `finrank_ker_seedPair_five_le_one` — (K5).
+* `le_finrank_towerNull_inf_towerBigrade_five` — (N5), **the only place `D = 26` is used**.
+* `b26_five_of_D26`, `ddfSpans_bigrade_neg_five_five`.
 
 ## Status
 
-No `sorry`.
+No `sorry`.  `ddf-spans` is now machine-checked on the antidiagonal slices `N ≤ 5`.
 
-**Not done in this file**: `N ≥ 6` (the excess stops being `1`; see blueprint §B⁗.7).
+⚠ `b26_five_of_D26` needs only `2 ≤ D`, **weaker** than the `3 ≤ D` of `b26_four_of_D26`: the
+transversality input at `N = 5` is the count (K5), which needs no transverse polarisation.
+(The same remark applies to `N ≤ 4`: `κ_N = 0` there, so `finrank_ker_descPair_add_le` reproves
+the moment-equation transversality of `LevelThreeCount` / `LevelFourCount` for free, with the
+weaker hypothesis.  Those files are kept: their statements are strictly stronger, holding on
+every rung with only `p·p ≠ 0`.)
+
+**Not done in this file**: `N ≥ 6`.  There the count stops being enough — `κ_6 = p_D(1)` while
+the target is `p_{D−1}(1)`, a gap of `1` at `D = 26` — so the seed condition has to be used and
+the argument is a new piece of paper (blueprint §B⁗.7).
 -/
+
 
 namespace StringFormal.NoGhost
 

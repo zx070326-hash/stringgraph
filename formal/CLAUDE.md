@@ -550,6 +550,66 @@ StringFormal/
                             §B′.8「计数看不见 26」。
                             **未做**：`N ≥ 5`（两族在计数上不再够用，超出量是五边形数；力矩机器本身
                             与 `N` 无关，可复用）；`¬ B26 N`（`D ≠ 26`）的维数版
+                            （**`N = 5` 已于 `NoGhost/LevelFiveCount.lean` 关闭**，
+                            且订正了「两族不够用」——其实是**多一维**，见下）
+  NoGhost/DescendantKernel.lean **蓝图 §B⁗.3 PR9a：整片版两族合并映射的核上界，是一条纯计数**。
+                            `descPair η a b j N : V_{j,N−1} × V_{j,N−2} → TowerFock`，
+                            `(φ,ψ) ↦ L_{−1}φ + 𝒟₂ψ`（**无种子条件、无物理性**；
+                            `LevelFourCount.typeTwoAugFour` 是它的种子限制）。主定理
+                            **`finrank_ker_descPair_add_le`**：
+                            `dim ker T_N + p_D(N) ≤ p_D(N−1) + p_D(N−2) + p_{D−1}(N)`
+                            （即 `dim ker T_N ≤ κ_N`，`κ_N` 由 Euler 五边形定理给出：
+                            `N ≤ 4` 为 `0`、`N = 5` 为 `1`）。三步：(a)
+                            `ordSeedSpanPos ≤ range descPair`——`wordApply_mem_towerBigrade`
+                            （有序负模词把 level 抬高 `−l.sum`）+ **`towerLop_neg_map_le_range_descPair`**
+                            （对 `n` 强归纳，用 `⁅L_{−1},L_{−(n−1)}⁆ = (n−2)L_{−n}`，负模无中心项；
+                            `2L_{−2} = 𝒟₂ − 3L_{−1}²` 接上第二族）；(b)
+                            `ordSeedSpan_le_conjFreeSliceAt_sup_pos`（按词空/非空拆 (F-1)）；
+                            (c) 秩–零化度 + `finrank_towerBigrade` + `finrank_conjFreeSliceAt_le`。
+                            另有 `seedPair`（种子限制）与 `finrank_ker_seedPair_le`。
+                            ⭐ **`D = 26`、种子、物理性、`p·p ≠ 0` 一次都不出现**，且对**任意 rung** 成立；
+                            前件只有 `2 ≤ D`、ℚ-代数域、`hη`。副产品：`N ≤ 4` 的横截性（`κ_N = 0`）
+                            由此免费重证，前件比力矩路线的 `3 ≤ D` 弱。
+                            **未做**：反向不等式 `dim ker T_N ≥ κ_N`（BGG/Feigin–Fuks 那一半）。
+                            ⚠ `Prod` 上的 `Module.Finite`/`AddCommGroup` 实例路径与
+                            `FiniteDimensional` 对不上，TC 合成失败但 defeq 成立，一律用
+                            `inferInstanceAs` / 显式类型参数搭桥（需 `import
+                            Mathlib.RingTheory.Finiteness.Prod`）
+  NoGhost/LevelFiveCount.lean **蓝图 §B⁗ PR9b 的 `N = 5` 账——`B26 5` 与
+                            `ddfSpans_bigrade_neg_five_five` 关闭**（第五条反对角片；至此
+                            `ddf-spans` 在 `N ≤ 5` 上全部机检）。⭐ **订正 §B‴ 第三轮第 6 条**：
+                            `N = 5` 上两族零态**不是少一个，是多一个**，缺的是**重叠的上界**，
+                            没有第三族、不需要 `𝒟₃`、不需要 BGG 正合性。四块：
+                            (1) **计数恒等式** `levelFive_count_identity_gen`
+                            `p_{m+1}(5) + 1 = p_m(5) + p_{m+1}(4) + p_{m+1}(3)`（三次 Pascal + `ring`，
+                            **对一切 `m`**）——`N ≤ 4` 的干净 Pascal 恒等式从 `N = 5` 起多一个 `+1`，
+                            那个 `1` 就是 Euler 五边形展开 `1 − q − q² + q⁵ + ⋯` 里 `q⁵` 的系数。
+                            两个实例：`levelFive_count_identity`（`m = D−2`，(I5)，
+                            `D = 26` 时 `209405 + 1 = 176256 + 29575 + 3575`）与
+                            `levelFive_count_identity_full`（`m = D−1`，即 `κ₅ = 1`）。
+                            **第四条证据支持「计数看不见 26」**，但形状与前三条不同。
+                            (2) **七形计数**：`Finsupp.oscWeight_eq_five_cases`、指标
+                            `ι ⊕ (ι×ι) ⊕ (ι×ι) ⊕ (ι×Sym ι 2) ⊕ (Sym ι 2×ι) ⊕ (ι×Sym ι 3) ⊕ Sym ι 5`、
+                            `levelFiveIndex_injective`（`modeCount` 轮廓
+                            `(0,0,0,0,1) (1,0,0,1,0) (0,1,1,0,0) (2,0,1,0,0) (1,2,0,0,0) (3,1,0,0,0)
+                            (5,0,0,0,0)` 两两不同 ⇒ 49 个 case 里 42 个一行）、
+                            `levelFiveIndex_surjOn` ⇒ **精确** `card_ddfLevel_five_eq`。
+                            另补 `levelThree/FourIndex_surjOn` 与 `card_ddfLevel_{three,four}_le`
+                            ——(K5) 需要**整体** level 计数的**上界**，这是此前从没要过的方向；
+                            以及通用桥 **`card_conjFree_le_card_ddfLevel`**（`conjFreeEmbed` 的满射半边，
+                            Mathlib `Finsupp.mem_range_mapDomain_iff`），使 `card_conjFree_five_le` (U5)
+                            成为 `card_ddfLevel_five_eq` 的推论。
+                            (3) ⭐⭐ **(K5)** `finrank_ker_descPair_five_le_one` /
+                            `finrank_ker_seedPair_five_le_one`：`dim ker T₅ ≤ 1`，**对一切 `D`、
+                            任意 rung**，由 PR9a 加 `κ₅ = 1`。**`N = 5` 上力矩机器一次都不用。**
+                            (4) **(N5)** `le_finrank_towerNull_inf_towerBigrade_five`
+                            （秩–零化度：像落在零态里，核 ≤ 1）与主定理 `b26_five_of_D26` /
+                            `ddfSpans_bigrade_neg_five_five`。**`D = 26` 的唯一入口**仍是
+                            `LevelThreeCount.descTwo_mem_towerNullSubmodule_of_mem_towerBigrade`
+                            （条件 `j + N = −2`，这里 `−5 + 3`）。
+                            ⚠ 前件只要 `2 ≤ D`，**比 `b26_four_of_D26` 的 `3 ≤ D` 还弱**。
+                            **未做**：`N ≥ 6`——整片计数不再够用（`κ₆ = p_D(1) = 26` 对目标 25），
+                            必须真正用上种子条件，是新的纸上作业（蓝图 §B⁗.7）
   NoGhost/Statement.lean    无鬼定理陈述（待 Fock 空间、Sugawara、DDF 就绪）
 scripts/
   check_axioms.lean         公理审计：给定声明名输出其公理集合，出现非标准公理或声明不存在则退出 1
