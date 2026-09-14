@@ -85,7 +85,7 @@ sources:
 summary: |
   本推导沿 Gebert–Nicolai 1995 §3.1 的四步走，逐条说明旧推导 gaps 的处理。
 
-  **第 0 步：把物理对象接入 VOA 框架（inferred 桥）。**
+  **第 0 步：把物理对象接入 VOA 框架（显式桥节点）。**
   前提：动量塔 T(p;k_0) 是 Heisenberg 顶点代数 V_{(𝔥,Zk)} 的 VOA 模
   （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower，rigorous）。
   在此框架里：ξ(z) = 𝒴(ξ(−1),z) 是 Heisenberg 场（= 物理 ε·P(z)）；
