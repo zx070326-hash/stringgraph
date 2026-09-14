@@ -138,7 +138,8 @@ StringFormal/
                             只有 `d₁₂`/`d₂₃`，上边缘与上同调在它自己的 TODO 里）与 `d₁₂ ∘ₗ d₀₁ = 0`，
                             再证平凡模上 `d₀₁ = 0`、`ker d₁₂ = {f | f⁅x,y⁆=0}`，故两条卡面定义都是定理。
                             字典半走 Mathlib 对偶：`Z¹ = ann[𝓛,𝓛]`、`h1TrivialEquivDualQuot`
-                            （`H¹ ≃ₗ (𝓛/[𝓛,𝓛])^*`）、**域上** `oneCocyclesTrivial_eq_bot_iff`。
+                            （`H¹ ≃ₗ (𝓛/[𝓛,𝓛])^*`）、**域上** `oneCocyclesTrivial_eq_bot_iff`；
+                            卡面设定（char 0 域）的打包版是 **`witt_perfect_iff_h1_vanishes`**。
                             ⚠ **两条数学结论**：(i) `H¹ = 0` 只要 **2 是非零因子**，比完美性（2 可逆）弱；
                             (ii) **字典在 ℤ 上为假**（`witt_int_h1_vanishes_but_not_perfect`：
                             `Z¹(W(ℤ),ℤ) = 0` 但 `⁅W,W⁆ ≠ W`），故卡面「对任意李代数 𝓛 与平凡模 k」

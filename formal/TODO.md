@@ -626,7 +626,7 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   教科书里"任意交换环上 Witt 代数完美"的说法是错的。
 - [x] `witt-h1-trivial`：**`H¹(W, k) = 0`（平凡系数）与字典「(1) ⟺ (2)」**，即图节点
   `math.witt-algebra-perfect` 剩下的两块（(1) 完美性已由上一条承载）。
-  见 `StringFormal/Virasoro/WittCohomologyH1.lean`（37 个声明，无 sorry，
+  见 `StringFormal/Virasoro/WittCohomologyH1.lean`（41 个声明，无 sorry，
   `check_axioms --all` 全 `ok`，只有标准三条）。**按卡面的定义逐字形式化**，不引入一般的
   李代数上同调机器（本仓库与 Kytölä VirasoroProject 都没有可用的 H¹ 结果）。
 
@@ -659,7 +659,10 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   （特征 2 反例）、`oneCocyclesTrivial_eq_bot_iff_of_field` /
   `subsingleton_H1Trivial_iff_of_field`（域上 `H¹ = 0 ⟺ 2 ∈ k^×`，与
   `derivedSeries_one_eq_top_iff` 对齐）、`oneCocyclesTrivial_int_eq_bot`、
-  **`witt_int_h1_vanishes_but_not_perfect`**。
+  **`witt_int_h1_vanishes_but_not_perfect`**；卡面自己的设定（char 0 域）有
+  `oneCocyclesTrivial_eq_bot_of_charZero` / `subsingleton_H1Trivial_of_charZero` 与
+  **`witt_perfect_iff_h1_vanishes`（把卡面 (1)(2) 与「(1)⟺(2)」打包成一条，
+  是 `formal.lean_decl` 的首选候选）**。
 
   ⚠ **三条给图的数学结论**（本轮未改 `graph/`，留给 lead/curator 裁决接线与是否拆卡）：
   1. **H¹ = 0 比完美性要求更弱**。完美性充要条件是 `2 ∈ R^×`；而 Z¹ = 0 只要 **2 是非零因子**

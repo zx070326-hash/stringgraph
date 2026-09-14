@@ -65,6 +65,10 @@ Witt algebra (`namespace StringFormal.Virasoro.WittAlgebra`):
   `2` only has to be a non-zero-divisor.
 * `oneCocyclesTrivial_eq_bot_iff_of_field`, `subsingleton_H1Trivial_iff_of_field`:
   over a field, `H¹(W, k) = 0 ⟺ 2 ∈ k^×`, matching `WittPerfect.derivedSeries_one_eq_top_iff`.
+* `subsingleton_H1Trivial_of_charZero` and `witt_perfect_iff_h1_vanishes`: the card's own
+  setting (a field of characteristic zero). The latter packages all three parts of the card —
+  (1) `⁅W, W⁆ = W`, (2) `H¹(W, k) = 0`, and (1) ⟺ (2) — into a single statement, and is the
+  natural candidate for the card's `formal.lean_decl`.
 
 ## Mathematical findings (suggested for the graph card's `notes` / `gaps`)
 
@@ -400,6 +404,34 @@ explicit for the Witt algebra. -/
 theorem subsingleton_H1Trivial_iff_of_field (K : Type*) [Field K] :
     Subsingleton (H1Trivial K (WittAlgebra K)) ↔ IsUnit (2 : K) :=
   (subsingleton_H1Trivial_iff K _).trans (oneCocyclesTrivial_eq_bot_iff_of_field K)
+
+/-! ### The card's own setting: a field of characteristic zero -/
+
+/-- `Z¹(W(k), k) = 0` for a field of characteristic zero (the card's hypothesis). -/
+theorem oneCocyclesTrivial_eq_bot_of_charZero (K : Type*) [Field K] [CharZero K] :
+    oneCocyclesTrivial K (WittAlgebra K) = ⊥ :=
+  (oneCocyclesTrivial_eq_bot_iff_of_field K).mpr (isUnit_iff_ne_zero.mpr two_ne_zero)
+
+/-- **`H¹(W(k), k) = 0` for a field of characteristic zero** — part (2) of the graph card
+`math.witt-algebra-perfect` in exactly the card's setting. -/
+theorem subsingleton_H1Trivial_of_charZero (K : Type*) [Field K] [CharZero K] :
+    Subsingleton (H1Trivial K (WittAlgebra K)) :=
+  (subsingleton_H1Trivial_iff_of_field K).mpr (isUnit_iff_ne_zero.mpr two_ne_zero)
+
+/-- **The graph card `math.witt-algebra-perfect`, all three parts, over a field of
+characteristic zero**: (1) `⁅W, W⁆ = W`; (2) `H¹(W, k) = 0`; and the dictionary (1) ⟺ (2).
+
+Part (1) is `WittPerfect.derivedSeries_one_eq_top`; part (2) is
+`subsingleton_H1Trivial_of_charZero`; the dictionary is
+`LieCohomology.subsingleton_H1Trivial_iff_derivedSeries_eq_top`, which holds for an arbitrary
+Lie algebra over an arbitrary field. -/
+theorem witt_perfect_iff_h1_vanishes (K : Type*) [Field K] [CharZero K] :
+    derivedSeries K (WittAlgebra K) 1 = ⊤ ∧ Subsingleton (H1Trivial K (WittAlgebra K)) ∧
+      (derivedSeries K (WittAlgebra K) 1 = ⊤ ↔
+        Subsingleton (H1Trivial K (WittAlgebra K))) := by
+  refine ⟨(derivedSeries_one_eq_top_iff K).mpr (isUnit_iff_ne_zero.mpr two_ne_zero),
+    subsingleton_H1Trivial_of_charZero K,
+    (subsingleton_H1Trivial_iff_derivedSeries_eq_top K (WittAlgebra K)).symm⟩
 
 /-! ### The dictionary "(1) ⟺ (2)" fails over `ℤ` -/
 
