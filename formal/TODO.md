@@ -624,6 +624,68 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `⁅⊤,⊤⁆ = ⊤ ↔ IsUnit (2 : R)`；`ZMod 2` 与 `ℤ` 上不完美
   （`derivedSeries_one_ne_top_zmod_two` / `derivedSeries_one_ne_top_int`）。
   教科书里"任意交换环上 Witt 代数完美"的说法是错的。
+- [x] `witt-h1-trivial`：**`H¹(W, k) = 0`（平凡系数）与字典「(1) ⟺ (2)」**，即图节点
+  `math.witt-algebra-perfect` 剩下的两块（(1) 完美性已由上一条承载）。
+  见 `StringFormal/Virasoro/WittCohomologyH1.lean`（41 个声明，无 sorry，
+  `check_axioms --all` 全 `ok`，只有标准三条）。**按卡面的定义逐字形式化**，不引入一般的
+  李代数上同调机器（本仓库与 Kytölä VirasoroProject 都没有可用的 H¹ 结果）。
+
+  **忠实性怎么保证的**：卡面把 Z¹/B¹ 写死为「Z¹ = {f : 𝓛 →ₗ k | f⁅x,y⁆ = 0}，B¹ 只有 0」。
+  直接照抄会让 B¹ = 0 变成循环定义，所以本文件把这两条**对着 Mathlib 的 Chevalley–Eilenberg
+  复形核验**：`Mathlib/Algebra/Lie/Cochain.lean`（Carnahan，v4.33.1）有 `oneCochain` /
+  `twoCochain` / `d₁₂` / `d₂₃`，但**没有 0 次微分、没有上边缘、没有上同调**（该文件自己的
+  TODO 写明）。本文件补上 `LieCohomology.d₀₁`（`(d⁰m)(x) = ⁅x,m⁆`，任意李模）与
+  `d₁₂_comp_d₀₁ : d₁₂ ∘ₗ d₀₁ = 0`（Leibniz），再证
+  `d₀₁_eq_zero_of_isTrivial`（平凡模上 d⁰ = 0 ⇒ 卡面的「1-上边缘只有 0」是**定理**）与
+  `mem_ker_d₁₂_iff_of_isTrivial`（平凡模上 `ker d₁₂` 恰是 `{f | f⁅x,y⁆ = 0}` ⇒ 卡面的
+  Z¹ 描述是**定理**）。在 Mathlib 的类型同义词 `TrivialLieModule R L R` 上实例化得
+  `d₀₁_trivialLieModule_eq_zero` / `mem_ker_d₁₂_trivialLieModule_iff`。
+
+  **一般李代数层**（`namespace StringFormal.LieCohomology`）：`oneCocyclesTrivial`（卡面 Z¹）、
+  `zeroCoboundaryTrivial` / `oneCoboundariesTrivial`（= ⊥）、`H1Trivial`（= Z¹/B¹）、
+  `h1TrivialEquivOneCocycles`（B¹ = 0 ⇒ H¹ ≅ Z¹）、
+  **`oneCocyclesTrivial_eq_dualAnnihilator`**（Z¹ = ann[𝓛,𝓛]）、
+  **`h1TrivialEquivDualQuot`**（卡面字典前半：`H¹(𝓛,k) ≃ₗ (𝓛/[𝓛,𝓛])^*`，走 Mathlib
+  `Submodule.dualQuotEquivDualAnnihilator`）、
+  `oneCocyclesTrivial_eq_bot_of_derivedSeries_eq_top`（「(1) ⟹ (2)」，**任意交换环**）、
+  **`oneCocyclesTrivial_eq_bot_iff` / `subsingleton_H1Trivial_iff_derivedSeries_eq_top`**
+  （卡面字典后半：**域上** `H¹ = 0 ⟺ 𝓛 = [𝓛,𝓛]`，走 `Submodule.dualAnnihilator_eq_bot_iff`）。
+
+  **Witt 层**：`two_mul_apply_lgen_of_mem_oneCocyclesTrivial`（`2·f(ℓ_n) = 0`，任意交换环，
+  直接复用 `WittPerfect.two_smul_lgen_eq`）、
+  **`oneCocyclesTrivial_eq_bot` / `subsingleton_H1Trivial`（= 卡面的 (2)，需 2 可逆）**、
+  `oneCocyclesTrivial_eq_bot_of_two_regular` / `subsingleton_H1Trivial_of_two_regular`、
+  `coord_zero_mem_oneCocyclesTrivial_of_two_eq_zero` / `oneCocyclesTrivial_ne_bot_of_two_eq_zero`
+  （特征 2 反例）、`oneCocyclesTrivial_eq_bot_iff_of_field` /
+  `subsingleton_H1Trivial_iff_of_field`（域上 `H¹ = 0 ⟺ 2 ∈ k^×`，与
+  `derivedSeries_one_eq_top_iff` 对齐）、`oneCocyclesTrivial_int_eq_bot`、
+  **`witt_int_h1_vanishes_but_not_perfect`**；卡面自己的设定（char 0 域）有
+  `oneCocyclesTrivial_eq_bot_of_charZero` / `subsingleton_H1Trivial_of_charZero` 与
+  **`witt_perfect_iff_h1_vanishes`（把卡面 (1)(2) 与「(1)⟺(2)」打包成一条，
+  是 `formal.lean_decl` 的首选候选）**。
+
+  ⚠ **三条给图的数学结论**（本轮未改 `graph/`，留给 lead/curator 裁决接线与是否拆卡）：
+  1. **H¹ = 0 比完美性要求更弱**。完美性充要条件是 `2 ∈ R^×`；而 Z¹ = 0 只要 **2 是非零因子**
+     （`2·f(ℓ_n) = f(2ℓ_n) = 0` 就够）。所以卡面的 (1) 与 (2) 在一般基环上**不等价**。
+  2. **字典「(1) ⟺ (2)」在 ℤ 上为假**，`witt_int_h1_vanishes_but_not_perfect` 是机检反例：
+     `Z¹(W(ℤ),ℤ) = 0` 而 `⁅W(ℤ),W(ℤ)⁆ ≠ W(ℤ)`。原因是 `W(ℤ)/⁅W,W⁆` 是 2-挠的而
+     `Hom(ℤ/2, ℤ) = 0`，恰好卡住卡面那一步「域上一个向量空间的对偶为零当且仅当该空间为零」。
+     卡面设定是 char 0 域，结论不受影响；但卡面括号里「对任意李代数 𝓛 与平凡模 k」这句，
+     **k 必须读作域**（𝓛 可以任意）。建议写进卡的 notes。
+  3. **特征 2 两边都失效**：`coord 0`（ℓ_0 坐标泛函）在 `2 = 0` 时是非零 1-上循环。
+
+  **未做**（文件末 `## Status` 已标 [GAP]）：H²（另一张卡
+  `worldsheet.virasoro-unique-central-extension`）；伴随系数 `H¹(W, W)`；全次数的
+  Chevalley–Eilenberg 复形（Mathlib 只有 ≤ 2 次，本文件只补 0 次）；单边 Witt 代数。
+
+  **踩过的坑**：`↥Z ⧸ B` 的 `HasQuotient` 实例在环境模是 `L →ₗ[R] R` 时**合成失败**
+  （search 去追 `NonUnitalNonAssocRing (L →ₗ[R] R)` 然后把 `AddCommGroup ↥Z` 缓存成失败；
+  单独写 `(inferInstance : AddCommGroup ↥Z)` 反而成功）。这与
+  `MATHLIB-ISSUE-quotient-finsupp.md` / `NoGhost/TowerNull.lean` 记的是同一个缺陷，
+  解法也相同：先在环境模为抽象变量的 section 里取一次商（本文件的 `LieCohomology.SubQuot`），
+  再实例化。另外 `(derivedSeries R L 1 : Submodule R L)` 的类型归属走
+  `LieIdeal.toLieSubalgebra`，而 `.toSubmodule` 点记号走 `LieSubmodule.toSubmodule`，
+  两者 `rfl` 但 `rw` 认不出，桥是 `LieIdeal.toLieSubalgebra_toSubmodule`。
 - [x] `verma-module`：Verma 模 `V(c,h)` 的构造与分级；对应图节点 `worldsheet.verma-module`。
   见 `StringFormal/Virasoro/Verma.lean`（739 行，无 sorry，公理只有标准三条）。
   走的是**抽象路线**：`V(c,h) := U(Vir) ⧸ (L_n (n>0), L_0 - h, C - c 生成的左理想)`，

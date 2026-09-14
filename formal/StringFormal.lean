@@ -18,6 +18,7 @@ import StringFormal.Math.RegulatedSum
 import StringFormal.Virasoro.Witt
 import StringFormal.Virasoro.Basic
 import StringFormal.Virasoro.WittPerfect
+import StringFormal.Virasoro.WittCohomologyH1
 import StringFormal.Virasoro.Verma
 import StringFormal.Virasoro.VermaPBW
 import StringFormal.Virasoro.DescendantGrading
