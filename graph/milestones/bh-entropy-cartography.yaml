@@ -42,7 +42,14 @@ canonical_source:
   ref: rossello-2024
   loc: "Thm 1（代表元范围，m>0, n≥m, 0≤ℓ≤m）与 Cor 1.1（全范围，m,n≥1, Δ>0, gcd=1）；(2.22)–(2.23) 定义 d_*"
 audit:
-  status: back-translated
+  status: approved
+  captain: |
+    panguancheng（船长 2026-09-15 签字确认 #16）：canonical_text 与第二轮独立回译语义等价、
+    裁定 faithful；纯数学脊柱 Φ₁₀→DMZ→mock-Jacobi 正性三步均 rigorous，
+    物理识别 d_*=immortal-dyon 简并度明确划为 physical-argument 且不在审计范围；
+    #20 两处错误——BM 覆盖 m=1,2 全 Δ>0（非「充分大判别式」）、
+    全范围正性对象为单心指标 d_* 而非 c_m^F——已在 canonical_text/statement/回译三处同步订正。
+  approved_on: "2026-09-15"
   back_translation:
     by: physics-auditor
     text: |
