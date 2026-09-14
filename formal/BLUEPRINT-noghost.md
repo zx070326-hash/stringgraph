@@ -3214,3 +3214,185 @@ N = 7 : 1593891 + 247312 − 9293050 + 7452225 = 378
 | (3) | 重叠态是「对易子型」还是需要权-3 的新算子 `𝒟₃` | 对易子型。`𝒟₃` **不存在**：权-`s` 的零态产生子要求 `V(26, 1−s)` 在 level `s` 有奇异向量，即 `24s + 1` 是完全平方且 `(3p−2q)² = 1`；`s = 3` 给 `24·3+1 = 73`，不是平方数 ⇒ `V(26, −2)` 不可约。与 §B‴.7 的表一致：`s = 5` 对应的奇异向量在 level `3` 与 `4`，不在 level `5` |
 | (4) | `D = 26` 在哪里被消费 | **唯一**：`𝒟₂Q₃ ⊆ Z_5`（`towerLop_two_apply_descTwo`）。(K5)、(I5)、B⁗.3 的全部计数与 `D` 无关。另有两处非关键路径的露面：`x₄v ∈ Q₄ ⟺ c = 26`、`L_2(y₃φ) = 3(c−26)L_{−1}φ` |
 | (5) | 力矩机器能否扩到三族 | 问题不成立（没有第三族）。`N = 5` 上力矩机器**一次都不用**：两族的核由计数控制。`N ≥ 6` 要用种子条件，届时力矩机器（或 B⁗.7 的 syzygy 路线）才回来 |
+
+### B⁗.6 引理清单（Lean 伪代码，草案，未编译）
+
+命名空间 `StringFormal.NoGhost`。两个新文件：一个**与 `N` 无关、`D`-无关**的核上界文件，
+一个 `N = 5` 的计数与收尾文件。
+
+#### PR9a `NoGhost/DescendantKernel.lean`（≈ 250–300 行，任意 `N`、任意 rung，`D = 26` 不出现）
+
+`import` `NoGhost/TypeOneFamily.lean`（要 (F-1) 与 `finrank_towerBigrade`）。
+
+```lean
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- 两族合并映射（**整片版**，无种子条件）：`(φ, ψ) ↦ L_{−1}φ + 𝒟₂ψ`。
+`LevelFourCount.typeTwoAugFour` 是它限制到种子、`j = −4`、`N = 4` 的实例。 -/
+noncomputable def descPair (η a b) (j : ℤ) (N : ℕ) :
+    (↥(towerBigrade D K j (N - 1)) × ↥(towerBigrade D K j (N - 2))) →ₗ[K] TowerFock D K
+
+/-- B⁗.3 (a) 的归纳步：`L_{−n}V_{j,M} ≤ L_{−1}V_{j,M+n−1} ⊔ L_{−2}V_{j,M+n−2}`（`n ≥ 1`）。
+用 `lie_towerLop_towerLop`（`m + n ≠ 0`，无中心项）与 `(n − 2 : K) ≠ 0`。 -/
+theorem towerLop_neg_map_le_lopOneTwo (hη) (j : ℤ) (M n : ℕ) (hn : 1 ≤ n) :
+    (towerBigrade D K j M).map (towerLop η a b (-(n : ℤ)))
+      ≤ (towerBigrade D K j (M + n - 1)).map (towerLop η a b (-1))
+        ⊔ (towerBigrade D K j (M + n - 2)).map (towerLop η a b (-2))
+
+/-- `L_{−2}V_{N−2} ≤ range (descPair …)`：`2L_{−2} = 𝒟₂ − 3L_{−1}²`，`2` 可逆。 -/
+theorem lopTwo_map_le_range_descPair (hη) (j : ℤ) (N : ℕ) (hN : 2 ≤ N) :
+    (towerBigrade D K j (N - 2)).map (towerLop η a b (-2))
+      ≤ LinearMap.range (descPair η a b j N)
+
+/-- B⁗.3 (a)：`seedWordPos (n :: t, c) = L_n (wordApply t (m c))`，`n < 0`。 -/
+theorem ordSeedSpanPos_le_range_descPair (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (j : ℤ) (N : ℕ) (hN : 2 ≤ N) :
+    ordSeedSpanPos hD F j N ≤ LinearMap.range (descPair η a b j N)
+
+/-- B⁗.3 (b) 的拆分：按 `seedWord` 的词是否为空。 -/
+theorem ordSeedSpan_le_conjFreeSliceAt_sup_pos (hD) (F) (j : ℤ) (M : ℕ) :
+    ordSeedSpan hD F j M ≤ conjFreeSliceAt hD F j M ⊔ ordSeedSpanPos hD F j M
+
+/-- ⭐ B⁗.3 (c)：**核的计数上界**，`ℕ` 上无减法的形状（配 `omega` 用）。 -/
+theorem finrank_ker_descPair_add_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (hη)
+    (j : ℤ) (N : ℕ) (hN : 2 ≤ N) :
+    Module.finrank K ↥(LinearMap.ker (descPair η a b j N))
+        + Nat.card {d : Osc D →₀ ℕ // Fock.level D d = N}
+      ≤ Nat.card {d : Osc D →₀ ℕ // Fock.level D d = N - 1}
+        + Nat.card {d : Osc D →₀ ℕ // Fock.level D d = N - 2}
+        + Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = N ∧ conjDeg hD d = 0}
+-- 证明 = finrank_range_add_finrank_ker + Module.finrank_prod + finrank_towerBigrade ×3
+--      + towerBigrade_le_ordSeedSpan + 上面两条 + Submodule.finrank_add_le_finrank_add_finrank
+--      + finrank_conjFreeSliceAt_le。**`D = 26`、种子、物理性、`p·p ≠ 0` 一次都不出现。**
+
+/-- 种子上的核 ≤ 整片上的核（`ker (descPair ∘ incl) ↪ ker descPair`，`Submodule.finrank_mono`）。 -/
+theorem finrank_ker_seedPair_le (hD) (F) (j : ℤ) (N : ℕ) :
+    Module.finrank K ↥(LinearMap.ker (seedPair η a b j N))
+      ≤ Module.finrank K ↥(LinearMap.ker (descPair η a b j N))
+```
+
+`seedPair` 是 `descPair` 限制到 `towerSeed j (N−1) × towerSeed j (N−2)`。建议把
+`LevelFourCount.typeTwoAugFour` 改写成 `seedPair … (-4) 4`，但**不必**回退它的力矩证明。
+
+#### PR9b `NoGhost/LevelFiveCount.lean`（≈ 900–1100 行，绝大部分是机械计数）
+
+`import` `LevelFourCount.lean` 与 PR9a。
+
+```lean
+/-- level-5 占据函数的七形分类（`[5] [4,1] [3,2] [3,1,1] [2,2,1] [2,1,1,1] [1⁵]`），
+照 `oscWeight_eq_four_cases` 用 `Finsupp.exists_peel` 递归，估计 60 行。 -/
+theorem Finsupp.oscWeight_eq_five_cases {ι} (d : (ι × ℕ+) →₀ ℕ) (h : oscWeight d = 5) : …
+
+/-- 指标类型 `ι ⊕ (ι × ι) ⊕ (ι × ι) ⊕ (ι × Sym ι 2) ⊕ (Sym ι 2 × ι) ⊕ (ι × Sym ι 3) ⊕ Sym ι 5`，
+基数 `P₅(m) = m + 2m² + 2m·C(m+1,2) + m·C(m+2,3) + C(m+4,5)`。 -/
+theorem card_ddfLevel_five_ge (ι) [Fintype ι] [DecidableEq ι] : … ≤ Fintype.card {d // ddfLevel d = 5}
+theorem card_conjFree_five_le (hD : 2 ≤ D) : Fintype.card {d // level d = 5 ∧ conjDeg hD d = 0} ≤ …
+
+/-- **白送的一条**：`card_ddfLevel_four_ge` 已在 `LevelFourCount.lean`，
+`card_ddfLevel_le_card_conjFree` 是通用桥（`LevelThreeCount.lean`），照
+`card_conjFree_three_ge` 抄 6 行即可。 -/
+theorem card_conjFree_four_ge (hD : 2 ≤ D) :
+    (D-1) + (D-1)^2 + Nat.choose D 2 + (D-1) * Nat.choose D 2 + Nat.choose (D+2) 4
+      ≤ Fintype.card {d : Osc D →₀ ℕ // Fock.level D d = 4 ∧ conjDeg hD d = 0}
+
+/-- ⭐ (I5) = (K5)：**同一条恒等式**，`m = D − 1` 给 (I5)，`m = D` 给 `κ_5 = 1`。
+对一切 `D ≥ 2` 成立（`D = 26`：`209405 + 1 = 176256 + 29575 + 3575`）。 -/
+theorem levelFive_count_identity (hD : 2 ≤ D) :
+    ((D-1) + 2*(D-1)^2 + 2*(D-1)*Nat.choose D 2 + (D-1)*Nat.choose (D+1) 3
+      + Nat.choose (D+3) 5) + 1
+    = ((D-2) + 2*(D-2)^2 + 2*(D-2)*Nat.choose (D-1) 2 + (D-2)*Nat.choose D 3
+        + Nat.choose (D+2) 5)
+      + ((D-1) + (D-1)^2 + Nat.choose D 2 + (D-1)*Nat.choose D 2 + Nat.choose (D+2) 4)
+      + ((D-1) + (D-1)^2 + Nat.choose (D+1) 3)
+
+/-- ⭐⭐ (N5)：两族的像落在零态里，核最多一维。`D = 26` 的唯一入口。 -/
+theorem le_finrank_towerNull_inf_towerBigrade_five (hD : 2 ≤ D) (F) (haa) (hD26 : (D : K) = 26) :
+    Module.finrank K ↥(towerSeed η a b (-5) 4) + Module.finrank K ↥(towerSeed η a b (-5) 3)
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-5) 5) + 1
+
+theorem b26_five_of_D26 (hD : 2 ≤ D) (F) (hD26 : (D : K) = 26) : B26 η a b F.hη F.trans 5
+theorem ddfSpans_bigrade_neg_five_five (hD : 2 ≤ D) (F) (hD26 : (D : K) = 26) :
+    DDFSpansOn η a b F.hη F.trans (towerBigrade D K (-((5 : ℕ) : ℤ)) 5)
+```
+
+**成本结构**（这是本节对排期最有用的一条）：
+
+| 块 | 估行 | 性质 |
+|---|---|---|
+| PR9a 全部 | 250–300 | 新数学（但都是既有引理的组合），`N`-无关，一次写好永久复用 |
+| `oscWeight_eq_five_cases` + 两条基数引理 | 700–900 | **纯机械**；七形的 `modeCount` 轮廓 `(0,0,0,0,1) (1,0,0,1,0) (0,1,1,0,0) (2,0,1,0,0) (1,2,0,0,0) (3,1,0,0,0) (5,0,0,0,0)` 两两不同，于是 49 个单射 case 里 42 个各一行，只剩 7 个真证 |
+| `levelFive_count_identity` | 30–60 | `Nat.choose_succ_succ` + `omega`，照 `levelFour_count_identity` |
+| `card_conjFree_four_ge` | 6 | 白送 |
+| (N5) + 收尾两条 | 100–150 | 照 `b26_four_of_D26` 逐条替换 |
+
+⇒ **`N = 5` 的真正成本在 level-5 计数，不在 `N = 5` 的新数学**。若要先验证路线，
+建议顺序：PR9a（可独立 `#print axioms`，且立刻给出 `N ≤ 4` 横截性的第二条证明）→
+`levelFive_count_identity`（一条 `omega`，可单独核对 (I5)）→ 计数 → 收尾。
+
+### B⁗.7 `N ≥ 6`：计数不再够用，以及下一条纸上作业
+
+B⁗.3 推论 3 的差额是硬的：
+
+```
+N :              5     6      7       8
+κ_N（整片）      1    26     378    4004        （D = 26）
+目标 τ_N         1    25     351    3600        （= p_{25}(N−5) + p_{25}(N−7) − ⋯，§B″.14 的超出量）
+差               0     1      27     404
+```
+
+所以 `N ≥ 6` 必须把种子条件用进核的估计。⭐ **而且计数这一侧已经榨干了**：在 `U(Vir⁻)` 自己
+（「一种颜色」）上把同一个映射的核算出来（⟨脚本⟩，PBW 基，逐级高斯消元）
+
+```
+n（U(Vir⁻) 的 level）        2  3  4  5  6  7  8  9
+dim U_{n−1} + dim U_{n−2}   2  3  5  8 12 18 26 37
+dim U_n                     2  3  5  7 11 15 22 30
+rank                        2  3  5  7 11 15 22 30      ← 每一级都满秩（映射满）
+dim ker                     0  0  0  1  1  3  4  7
+p(n−5)+p(n−7)−p(n−12)−⋯     0  0  0  1  1  3  4  7      ✓ 逐项相等
+```
+
+即：`(x, y) ↦ L_{−1}x + 𝒟₂y` 在 `U(Vir⁻)` 上**逐级满射，核恰是五边形级数**（这是 `κ_N` 在
+`D → 1` 处的影子；`κ_N = [q^N] φ^{−(D−1)}·(q⁵+q⁷−⋯)` 正是「每个 `b̃`-free 生成元配一份」）。
+⇒ 只要 Fock 片在 `U(Vir⁻)` 上自由（即 (F-3)，`TypeOneFamily.lean` 自报的未决项），
+B⁗.3 的 `dim ker T_N ≤ κ_N` 就是**等式**，`N ≥ 6` 不可能靠改进计数救回来。`n = 7` 的核维数 `3`
+里有 `2` 维来自 `s = 5` 那一族右乘 `U_2`（`p(2) = 2`），只有 `1` 维是新的 `s = 7` 生成元 ✓
+与 §B‴.7 的表一致。
+
+⟨路线判断，未验证⟩ 推荐的下一步是**把整片上的核算准**而不是继续放大不等式：
+
+1. 定义 syzygy 映射 `S_N : V_{j,N−5} × V_{j,N−7} → V_{j,N−1} × V_{j,N−2}`，
+   `(u, w) ↦ (x₄u + x₆w, y₃u + y₅w)`，其中 `(x₄, y₃)` 是 B⁗.2 的 `s = 5` 对，
+   `(x₆, y₅)` 是尚未算的 `s = 7` 对（`V(26, −6)` 的奇异向量在 level `5` 与 `6`，§B‴.7 的表）。
+   由 syzygy，`range S_N ≤ ker T_N`。
+2. `6 ≤ N ≤ 11` 时 `κ_N = p_D(N−5) + p_D(N−7)` 恰是 `dim(V_{N−5} × V_{N−7})`，所以
+   **`S_N` 单射 ⟺ `ker T_N = range S_N`**（上界 B⁗.3 + 下界 `range S_N`）。单射性应当能由
+   `L_{−1}` 单射性一类的论证给出（`x₄` 的领头词是 `−3L_{−1}⁴`）。
+3. 于是 `τ_N = dim{(u,w) : S_N(u,w) ∈ Q_{N−1} × Q_{N−2}}`，要证的是**它等于
+   `p_{D−1}(N−5) + p_{D−1}(N−7)`**，即「`S_N(u,w)` 落在种子里 ⟹ `(u,w)` 落在种子里」。
+   这是一条 `L_1`、`L_2` 与 `x₄, y₃` 的对易子计算，`N` 无关，**是真正要做的新纸上作业**。
+
+⭐ **`N = 6` 是最便宜的下一个目标**：`p_D(N−7) = 0`，所以第 1 步里 `s = 7` 的那一对根本不出现，
+只需要 B⁗.2 已经写下的 `(x₄, y₃)`；要证的是「`x₄u ∈ Q_{−6,5}` 且 `y₃u ∈ Q_{−6,4}` ⟹ `u ∈ Q_{−6,1}`」，
+一条 level-1 的陈述。`N = 7` 才需要先把 `s = 7` 的 syzygy 算出来（`U(Vir⁻)` 的 level-7 计算，
+`U_5 × U_6 → U_7`，`15` 维目标，手算规模是 B⁗.2 的三倍左右，建议直接写脚本）。
+`N ≥ 12` 另有 §B‴.7 的新产生子问题，与本节无关。
+
+### B⁗.8 对图的建议（本节不碰 `graph/`）
+
+1. **`worldsheet.ocq-null-state-two-families`**（§B″.12 第 4 条建议过的卡）：补一条 `notes`
+   ——「两族在反对角片上的计数从 `N = 5` 起有一维重叠，重叠由 `U(Vir⁻)` 的恒等式
+   `L_{−1}x₄ + 𝒟₂y₃ = 0` 给出，`y₃ = 12L_{−3} + 6L_{−2}L_{−1} + L_{−1}³`，
+   与中心荷、最高权无关」。⚠ `inferred: true`：这是本蓝图的手算，不是任何来源的原话。
+2. **`worldsheet.ddf-spanning-hypothesis` / `worldsheet.ddf-spanning-rank-inequality`**：
+   把 gap 里「`N ≥ 5` 需要第三族零态 / BGG」的措辞改成「`N = 5` 只需两族的核 ≤ 1，
+   由 `U(Vir⁻)` 的 Hilbert 级数（(F-1) + 秩–零化度）给出；`N ≥ 6` 才需要种子条件」。
+   这是本节对图**最重要**的一条产出：它把一个被登记为「独立大项目（BGG）」的缺口
+   降级成「一条计数 + 一批机械的 level-5 分类」。
+3. **新卡候选 `worldsheet.virasoro-pentagonal-syzygy`**（⟨手算⟩，`inferred: true`）：
+   「在 `U(Vir⁻)` 中，`L_{−1}U_4 ∩ 𝒟₂U_3` 是一维的，生成元由上面的 `(x₄, y₃)` 给出；
+   它对任意中心荷成立，是 `c = 26, h = −4` 处两个奇异向量的万有影子」。
+   若不新建卡，至少记进 `worldsheet.ocq-null-state-two-families` 的 `notes`。
+4. **不要**把 §B‴.7 的 Kac 算术（`24s + 1` 是完全平方 ⟺ `s` 是广义五边形数）改成
+   「因此 `N = 5` 需要新奇异向量」。本节说明那条算术的正确读法是：`k` 偶的项标记**重叠**，
+   而重叠只需要上界，上界是计数。
