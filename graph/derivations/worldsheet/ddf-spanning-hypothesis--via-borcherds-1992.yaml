@@ -1,0 +1,395 @@
+id: worldsheet.ddf-spanning-hypothesis--via-borcherds-1992
+target: worldsheet.ddf-spanning-hypothesis
+kind: proof
+status: rigorous
+depends_on:
+  - id: worldsheet.ddf-operators-v6
+    inferred: false
+    note: |
+      **目标陈述右端的对象**：D(Ε) 逐字由 v6 的模态和算子生成，
+      `D(Ε) := span_R { A^{ε_{i_1}}_{−n_1} ⋯ A^{ε_{i_r}}_{−n_r} |0; k⟩ : r ≥ 0, i_j ∈ {1..D−2}, n_j ≥ 1 }`，
+      其中 A^ε_n = Σ_m α^ε_m V^{(n)}_m 是 v6 的定义（该卡 title 逐字「模态和版」）。
+      Borcherds 侧对应的算子族是 K_i = v_{i−1}（v = e^{−w}_{−2}e^w，w 为 II_{1,1} 中类光矢量，
+      见 borcherds-1992 §5 Lemma 5.1 前的子空间定义段）。
+      **非 inferred**：本边只是「把 v6 定义的对象装进目标陈述的 D(Ε)」，不涉及任何跨语言的等同
+      （跨语言的等同在同名推导第 2、3 两条边上，那两条标 inferred）。
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    inferred: true
+    note: |
+      **桥接边（VOA 模结构 ↔ 本项目的动量塔）。** Borcherds Thm 5.1 / Lemmas 5.1–5.5 全部
+      在顶点代数语言里做：工作空间是 V ⊗ V_{II_{1,1}}，物理态是其中 L_0 本征值为 1、
+      被所有 L_{i>0} 湮灭的向量（P¹），横向空间 T¹ 由 K_i (i>0) 的零化条件定义。
+      本项目的工作空间是动量塔 T(p; k_0) = ⊕_{j∈Z} F(p + j k_0)，物理子模由 Sugawara L_m 定义。
+      **「V_{II_{1,1}} 的 VOA 模结构与本项目的动量塔是同一个对象」这句话在一手文献里不成文**：
+      Borcherds 的 II_{1,1} 是二维偶自 unimodular 洛伦兹格（Gram 矩阵 ((0,−1),(−1,0))），
+      本图最接近的对应物是这条边指向的卡（Li–Wang Theorem 3.6 在退化格 L = Z k 上给出
+      V_{(𝔥,Zk)}-模 ⊕_j e^{jk} ⊗ M(1)，该卡 (3)(iii) 逐层识别到 F(p + j k_0)），
+      但**没有一篇文献逐字写下「它就是 Borcherds 的 V ⊗ V_{II_{1,1}} 的叶层」**。
+      ⚠ 该卡边界 (N2)(N4)(N5)(N6) 明写：不断言塔上的双线性型/伴随/正定性，
+      不建立不同塔之间的关系，不断言顶点算子 𝒴 与物理写法 :e^{i j k_0·X}: 的逐字对应，
+      不断言 DDF 算子的任何性质。**该卡确实不断言本条边需要的那句等同**。
+      ⇒ 按项目原则 5 标 `inferred: true`，桥接的两条具体缺口列入本推导 gaps 第 3 条
+      （格的维数 1 vs 2；塔上型是约定式定义而 Borcherds 的形式是构造出来的）。
+      **这条边不压低 effective**（该卡 effective = formalized）：它压低的是「本推导结论能否
+      逐字回译到 Borcherds 的 VOA 表述」的可信度，由 gaps 承担。
+  - id: worldsheet.ddf-contour-equals-mode-sum
+    inferred: true
+    note: |
+      **算子字典（本推导真正未闭合的缺口，也是压低 effective 的那条边）。**
+      Borcherds 的 K_i 是「由额外类光方向 w 造的 DDF 型激发算子」K_i = v_{i−1}
+      （v = e^{−w}_{−2}e^w），**在 VOA 语言里定义**；本项目 v6 的 A^ε_n 是**模态和**
+      Σ_m α^ε_m V^{(n)}_m；文献（GSW §2.3.3、goddard-2008 (5.1)–(5.3)）把 DDF 算子写成
+      **围道积分** A^μ_n = (1/2πi)∮P^μ(z)V(n k_0,z)dz。三者是同一族算子的三种写法：
+          K_i  (VOA 语言，Borcherds)
+          ↗   ↖
+        A^i_n (围道，GSW/GT/goddard-2008)  ⟷  A^ε_n (模态和，v6，本项目)
+      横向那条等号由本条边指向的卡承载（洛朗系数记账：幂次条件 (−m−1) + K = −1 恰给 K = m）。
+      **该卡 effective = physical-argument**：它的 gaps 第 1 条逐字写「第 3 步的重排在算子层面
+      没有论证」，notes 逐字写「本推导为什么不是 rigorous：rigorous 的例外条款要求「前提完整 +
+      有限步初等计算 + reviewer 已独立复核并记录」，本推导的前提里含一个**未定义的对象**
+      （围道积分的算子值被积量），故前提不完整，例外条款不适用」。
+      ⇒ (1) 标 `inferred: true` 的理由**不是**「本卡不引用它」——本推导**确实**引用它：
+      没有这条边，「Borcherds 张成的 T¹ 就是本项目张成的 D(Ε)」这句话在图上无节点可指。
+      标 inferred 的理由是**从 A^ε_n 到文献围道 A^i_n、再到 Borcherds 的 K_i 的逐字字典
+      在一手文献里未成文**（borcherds-1992.md §未解决的疑问第 2 条逐字：
+      「K_i ↔ DDF 算子 A^ε_n 的逐字对应……**属标准知识但非本文成文**」；
+      ddf-spanning-no-source-check-2026-09-14.md §5 第 1 条**强制**要求 curator 把这一步
+      标 `inferred: true` 并留 note）。
+      (2) **这就是把本推导 effective 压到 physical-argument 的那条边**——预期行为，
+      见 gaps 第 1 条与 notes【为什么 own = rigorous 而 effective = physical-argument】。
+  - id: worldsheet.ddf-operators-preserve-physical-states
+    inferred: false
+    note: |
+      **D(Ε) ⊆ H_phys 这一半（目标式里「+」两侧的语义）。** 目标卡边界 (a) 逐字：
+      「D(Ε) ⊆ H_phys 是 worldsheet.ddf-operators-preserve-physical-states 那一支
+      （已 formalized，Lean 侧 `ddfSpan_le_towerPhysSubmodule`）；H_null ⊆ H_phys 按定义。
+      **两个方向合起来才给「H_phys = D(Ε) + H_null」，本卡只断言困难的那一个方向**」。
+      Borcherds 侧的对应物是 T¹ ⊆ P¹（横向空间 ⊆ 物理空间，Lemma 5.1 的一部分）。
+      **非 inferred**：该卡逐字断言 D(Ε) ⊆ H_phys，与本推导需要的这一半完全一致，
+      且是本项目自己的 formalized 结果，不需要跨语言字典。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      **塔与零模（目标陈述的全部记号）。** 目标陈述【设定】逐字：「动量塔
+      T(k; k_0) = ⊕_{j ∈ Z} F(k + j k_0)（代数直和），其上有层间正交的 R-双线性型 ⟨·,·⟩_T；
+      L_m 是逐层用该层动量的 Sugawara 生成元……不移动层指标」——这些记号全部由本卡定义
+      （塔、移位算子 S_n、塔上的型、逐层作用的 α^μ_m 与 L_m）。
+      Borcherds 侧的对应物是 H = V ⊗ V_{II_{1,1}} 按 II_{1,1}-度数 r 分片（Lemma 5.1 前的
+      子空间定义段）；本项目按层的指标 j 分片。**非 inferred**：本边只提供对象与记号，
+      不含任何等式断言（跨语言的塔 ↔ V_{II_{1,1}} 等同在同名推导第 2 条边，那条标 inferred）。
+  - id: worldsheet.tower-physical-quotient-form
+    inferred: false
+    note: |
+      **H_null 与商型（目标陈述左端的「+ H_null」）。** 目标卡【三个子空间】第三条逐字：
+      「**零态** H_null := H_phys ∩ H_phys^⊥ = { Χ ∈ H_phys : ⟨Χ, Ψ⟩_T = 0 ∀ Ψ ∈ H_phys }
+      （worldsheet.tower-physical-quotient-form 的 H_null(a₀)）」。
+      Borcherds 侧的对应物是 N = S ∩ P（零化空间 = P 的双线性形式的根，Lemma 5.1 前的
+      子空间定义段）；Thm 5.1 结论里的「P¹_r 模去其双线性形式的零化空间」逐字就是这张卡的 (4)
+      （商模 H_phys(a₀)/H_null(a₀) 上的诱导型 ⟨·,·⟩_quot）。
+      **非 inferred**：H_null 的定义与商型的良定义性都是本卡的逐字内容，已 formalized
+      （Lean `towerNullSubmodule`、`towerQuotientPairing`），不需要跨语言字典。
+      ⚠ 该卡边界 (a) 明写「**不断言反包含 H_null(a₀) ⊆ H_spur**」，故本推导**不得**由本边
+      推出「商掉的是伪态而非正交根基」。Borcherds Lemma 5.5 的 N¹ 逐字是 P¹ 的根、
+      Lemma 5.1 前定义段逐字写「**N = S ∩ P = P 的双线性形式的根（radical）**」，
+      即 Borcherds 的 N¹ 与本项目 H_null 是同一个对象（正交根基），**不是**伪态空间——
+      两者在这一层反而吻合，记此备查（该卡的 (a) 是「本项目尚未证明 N ⊆ H_spur」，
+      Borcherds 的 Lemma 5.5 不提供那个方向，本推导不据此越界）。
+sources:
+  - ref: borcherds-1992
+    loc: "§5 'The no-ghost theorem'，Theorem 5.1 + Lemmas 5.1–5.5（含 Lemma 5.1 前的子空间定义段 H、P、S、N = S∩P、T、K = K_i 生成的空间、Ve^r），以及 §5 正文的 D=26 那句"
+    note: |
+      **本条承载本推导的全部论证。L1**（researcher 2026-09-14 逐页读图；
+      抽取记录 literature/extractions/borcherds-1992.md §E1/E2/E3）。
+      ⚠ **引用陷阱（该抽取记录首部逐字警告）**：作者主页重排本页码 1,2,3,… 与期刊
+      Invent. Math. 109, 405–444 **不对应**（Theorem 5.1 落在重排本 p.19），
+      故本条 loc **只写节号/定理号，不写页码**。
+
+      **E1 = Theorem 5.1（L1 逐字要点）**：设 V 带非退化双线性形式、被 Virasoro 代数作用
+      （L_i 的伴随是 L_{−i}、中心元作用为乘 24、L_0 本征值非负整数且各本征空间有限维），
+      被保结构群 G 作用；V_{II_{1,1}} 为二维偶自对偶洛伦兹格 II_{1,1} 二重覆盖的顶点代数；
+      P¹ := {v ∈ V ⊗ V_{II_{1,1}} : L_0 v = v, L_i v = 0 ∀ i > 0}，P¹_r 是其中
+      II_{1,1}-度数为 r 的子空间。**结论逐字**：
+        「Then the quotient of P¹_r by the nullspace of its bilinear form is **naturally
+        isomorphic**, as a G module with an invariant bilinear form, to V^{1−(r,r)/2}
+        if r ≠ 0 and to V¹ ⊕ R² if r = 0.」
+      同构是**双向**的：既是单射（正范数、无鬼）又是**满射**——V^{1−(r,r)/2} 的每个元素都
+      来自某物理态模零态，即横向/DDF 态**张成完整**物理子空间。**满射这一半逐字就是 (B)**。
+
+      **E2 = 证明链 Lemmas 5.1–5.5（L1 逐字）**。Borcherds 明写这是 Goddard–Thorn 1972
+      原始证明的复述（逐字：「The original proof of Goddard and Thorn [21] works for the
+      cases we need with only trivial modifications. For convenience we give a quick sketch
+      of their proof.」）：
+        1. **Lemma 5.1**：T 中非零范矢量 f 经 L_{m_1}…K_{n_1}…(f) 生成的态线性独立、
+           张成一个在 K_i/L_i 下不变、形式非退化的空间
+           （证明：**内积矩阵可排成上三角、对角非零**）。
+        2. **Lemma 5.2**：T 上双线性形式非退化；K = T ⊕ (K 的零化空间)。
+        3. **Lemma 5.3**：**Ve^r ≅ T**（自然同构）。
+        4. **Lemma 5.4**：L_{i<0} 生成的结合代数由把 S¹ 映入 S 的元素生成
+           （证明用到「Virasoro 中心在 V 上作用为 24、故在 H 上为 26」——**D = 26 在此步进入**）。
+        5. **Lemma 5.5**：**P¹ = T¹ ⊕ N¹**（直和分解：任一物理态 = 横向态 + 零态）。
+      收尾逐字：「The no ghost theorem now follows immediately, because by lemma 5.3
+      V^{1−(r,r)/2}e^r is isomorphic to T¹, and by lemma 5.5 T¹ is isomorphic to the quotient
+      of P¹ by its nullspace.」
+
+      **三空间字典**（borcherds-1992.md §约定末段，L1）：
+        Borcherds **P¹**（L_0 本征值 1、被 L_{i>0} 湮灭）↔ 本项目 **H_phys**；
+        Borcherds **T¹**（横向空间，被所有 K_i (i>0) 湮灭者）↔ 本项目 **D(Ε)**（DDF 张成）；
+        Borcherds **N¹ = P¹ 的双线性形式的根** ↔ 本项目 **H_null**。
+      **Lemma 5.5 逐字就是张成命题**：P¹ = T¹ ⊕ N¹，在直和意义下比目标卡的 ⊆ 更强。
+      ⚠ 这一步跨语言等同**不是** Borcherds 写的：全篇不出现 A^ε_n、不出现动量塔、不出现 α'。
+      字典缺口见同名推导 depends_on 第 2、3 条边与 gaps 第 1、3 条。
+      **本图不得把本条来源当成「Borcherds 逐字证了本项目命题」来引用。**
+
+      **E3 = D = 26 的地位（L1 逐字）**：§5 正文「The 26 comes from the 24 in theorem 5.1
+      plus the dimension of II_{1,1}.」；§6 Remark「it is only when this [conformal] vector has
+      dimension 24 that we can apply the no-ghost theorem to identify the homogeneous pieces of M
+      with those of V. … this need not be true if the conformal vector has dimension greater
+      than 24, even if the inner product on V is positive definite.」
+
+      **证据等级与严格程度**：L1（作者主页 TeX 重排本落盘后逐页读图）。Borcherds 自称
+      「quick sketch」，但每一步都给了证明理由（Lemma 5.1 给内积矩阵的上三角论证、
+      Lemma 5.4 指认 24/26 的来源），且这是发表在 Invent. Math. 的**编号定理**，
+      属 Borcherds 获 1998 Fields 奖的工作所含内容。
+      **本推导 own status = rigorous 即依据此条**（见 notes【为什么 own = rigorous】）。
+      ⚠ 重排本 vs 期刊印本逐字一致性为 **L0**（作者本人重排，风险低，但严格计属未与期刊扫描件
+      逐字复核）——该抽取记录 §未解决的疑问第 1 条已登记。
+  - ref: fgz-1986
+    loc: "Theorem 2.8 的**第二个同构**（PNAS 83, 8442–8446），配套 Theorem 2.7(ii)（维数 p_(24)(1 − p·p/2)）与 Theorem 1.12（消灭）"
+    note: |
+      **独立等价来源，不承载本推导的证明体。** FGZ Theorem 2.8 第二个同构（L1，
+      literature/extractions/brst-cohomology-sources.md §1.3）：
+        T ∩ P ≅ P / rad P     （横向空间 ≅ 物理态模零态），
+      三空间正定、维数 p_(24)(1 − p·p/2)；**FGZ 自己指认这就是无鬼定理**（原文逐字：
+      「The second isomorphism … is known as the no-ghost theorem in the physics literature
+      (8,9)」，其中 8 = Goddard–Thorn 1972、9 = Brower 1972）。
+      ⇒ 与 borcherds-1992 那条来源**相互独立**（半无限上同调 vs VOA 计数），
+      且给出同一结论的**维数版本**（维数配平即完整性即满射）。
+      ⚠ 列它的理由有二：(i) 独立性——本推导结论不依赖单篇文献的可靠性；
+      (ii) 维数版本把「张成」写成一条可核的等式 p_(24)(1 − p·p/2)，
+      与目标卡 notes【为什么 26 只在这里】记录的本项目特征标计数（φ(q)^{−(D−2)}
+      对 φ(q)^{−(D−1)} 减零态）是同一件事的两个算法。
+      ⚠ **本条不承载论证**：FGZ 的证明梗概在 PNAS 六页短文里，完整长文本项目未获取
+      （brst-cohomology-sources.md §1.3 的 L1 覆盖以定理陈述为限），故本推导的**证明体**
+      逐字只走 borcherds-1992 一条。
+      ⚠ bib key 是 `fgz-1986`，别名 `frenkel-garland-zuckerman-1986` 见 sources.bib 该条
+      note 的查重锚点段（改 key 会破坏 graph/ 全部已有引用，不要改）。
+  - ref: goddard-2008
+    loc: "§6 'No-Ghost Theorem', p.15, eq. (6.4)（arXiv:0802.3249v1）"
+    note: |
+      **不承载本推导的论证。列它是为记账目标卡 status 变化的前后关系**：
+      目标卡此前唯一引用的文献来源就是本条——一句无证明结论（逐字「For D = 26, if |ψ⟩ is a
+      physical state … it can be written in the form |ψ⟩ = |f⟩ + |n⟩」，|f⟩ 为 DDF 态、
+      |n⟩ 为零模态），转引 goddard-thorn-1972 [45]，而后者正文本项目未获取。
+      目标卡 sources 第一条与 notes 逐字：「文献侧只有一句结论（转引 GT 1972），
+      **连「骨架 + 断言」都算不上**（docs/STATUS_LEVELS.md 的「断言 + 骨架」档位要求来源给出
+      论证骨架）」——这正是它此前 status = open 的理由。
+      本推导补上的那份**论证骨架**来自 borcherds-1992 §5 的 Lemmas 5.1–5.5。
+      ⚠ 本推导**不**声称 Goddard 2008 (6.4) 与本推导结论在量词上逐字一致：
+      原文在 D = 26 上断言，目标卡按边界 (c) 不为任何 D 断言；原文的 |n⟩ 是零模态、
+      本项目的 H_null 逐字是零模态子模，**这一半一致**（目标卡 sources 第一条已记录这两处
+      措辞差别，本推导不改动它）。
+summary: |
+  Borcherds 1992 §5（Invent. Math. 109, 405–444）的 Theorem 5.1 连同证明链 Lemmas 5.1–5.5，
+  是目标命题 **(B) H_phys ⊆ D(Ε) + H_null** 的一条**已发表、带完整证明、期刊编号**的论证。
+  本推导把这条 VOA 语言的证明接进本项目的模态和 DDF 框架。
+
+  **论证骨架（borcherds-1992 §5，L1 逐字）**
+  Borcherds 在顶点代数 V ⊗ V_{II_{1,1}} 上取物理空间 P¹ = {v : L_0 v = v, L_i v = 0 (i>0)}，
+  横向空间 T¹ = P¹ 中被所有 K_i (i>0) 湮灭者（K_i = v_{i−1}，v = e^{−w}_{−2}e^w，
+  w 为 II_{1,1} 中类光矢量），零化空间 N¹ = P¹ 的双线性形式的根。链是：
+
+    **Thm 5.1 结论**：P¹_r 模去其双线性形式的零化空间，**自然同构**于 V^{1−(r,r)/2}（r ≠ 0）。
+    自然同构 ⇒ **满射** ⇒ V^{1−(r,r)/2} 的每个元素都来自某物理态模零态 ⇒ **横向态张成**。
+    这就是 (B) 的满射/完整性那一半。
+    **Lemma 5.5**：**P¹ = T¹ ⊕ N¹** —— 逐字就是张成分解：任一物理态 = 横向态 ⊕ 零态。
+    **Lemma 5.3**：Ve^r ≅ T —— 把 Thm 5.1 右端的 V^{1−(r,r)/2} 与左端的 T¹ 接上。
+    **Lemma 5.4**：L_{i<0} 生成的结合代数由把 S¹ 映入 S 的元素生成；证明用到
+    「Virasoro 中心在 V 上作用为 24、故在 H 上为 26」——**D = 26 在此步进入**。
+    **Lemma 5.1 / 5.2**：T 中非零范矢量经 L、K 生成的态线性独立且形式非退化（内积矩阵上三角、
+    对角非零）；T 上形式非退化且 K = T ⊕ (K 的零化空间)——5.3/5.5 的正交性输入。
+    收尾逐字：「The no ghost theorem now follows immediately, because by lemma 5.3
+    V^{1−(r,r)/2}e^r is isomorphic to T¹, and by lemma 5.5 T¹ is isomorphic to the quotient of
+    P¹ by its nullspace.」
+
+  **三空间字典（本项目的对应，borcherds-1992.md §约定末段 L1）**
+      (Borcherds P¹, T¹, N¹)  ↔  本项目 (H_phys, D(Ε), H_null)。
+  Lemma 5.5 由此读作 H_phys = D(Ε) + H_null——**比目标卡的 ⊆ 更强**（它是直和分解），
+  故目标卡的断言成立。**D = 26 经 Lemma 5.4 的「c = 24 横向张 II_{1,1} 后 26」进入**，
+  与目标卡 notes【为什么 26 只在这里】的判断（DDF 态特征标 φ(q)^{−(D−2)} 对物理态模零态的
+  φ(q)^{−(D−1)} 减零态，只在 D = 26、a₀ = 1 时相等）**完全吻合**。
+  这是本推导相对目标卡原有文献来源（goddard-2008 (6.4) 一句无证明结论）的实质增量：
+  **26 的来源现在有一步可指认的证明（Lemma 5.4），而不是一个假设。**
+
+  **独立等价来源（不承载论证）**
+  FGZ 1986 Theorem 2.8 的第二个同构 T ∩ P ≅ P/rad P，维数 p_(24)(1 − p·p/2)，
+  FGZ 自认这就是无鬼定理。与 Borcherds 一条独立（半无限上同调 vs VOA 计数），
+  给出同一结论的维数版本；列在 sources 但不走它的证明体（PNAS 六页只有梗概，
+  完整长文未获取）。
+
+  **本推导真正未闭合的缺口（见 gaps）**
+  算子字典：**从 Borcherds 的 K_i / 文献的围道 A^i_n 到本项目 v6 的模态和 A^ε_n 的等价**。
+  两条边标 `inferred`（VOA 模结构 ↔ 动量塔；K_i ↔ 围道 ↔ 模态和），其中
+  worldsheet.ddf-contour-equals-mode-sum 自身 effective = physical-argument，
+  **把本推导的 effective 压到 physical-argument**——这是预期且刻意正确的记账（见 gaps 第 1 条）。
+  **不要**为抬高 effective 而删这些 inferred 边：那会把「Borcherds 用 VOA 语言证的、
+  本项目用模态和语言写的，两者之间差一部未成文的算子字典」这个真实缺口抹掉。
+gaps:
+  - |
+    **【本推导 effective 正确地是 physical-argument——这是记账，不是缺陷】**
+    本推导 own status = rigorous（borcherds-1992 §5 Thm 5.1 是 Invent. Math. 编号定理，
+    证明链 Lemmas 5.1–5.5 每步给了理由，L1 一手已读）。但 `depends_on` 里
+    worldsheet.ddf-contour-equals-mode-sum 标了 `inferred: true`，该卡 effective =
+    physical-argument（它的 gaps 第 1 条逐字：「第 3 步的重排在算子层面没有论证」；
+    notes 逐字：「rigorous 的例外条款要求「前提完整 + 有限步初等计算 + reviewer 已独立复核并
+    记录」，本推导的前提里含一个**未定义的对象**（围道积分的算子值被积量），故前提不完整，
+    例外条款不适用」）。工具因此把本推导的 effective 算作 physical-argument，
+    同时显示 own = rigorous。**两个数都对，且正是本项目要的记账**：
+      「DDF 张成这一抽象张成命题在文献里已有严格证明」——own = rigorous；
+      「文献的证明用 VOA/围道语言，与本项目模态和的逐字对接未成文」——effective 被压一级。
+    与 worldsheet.ddf-spanning-hypothesis--via-rank-inequalities 的记账**同型但压的方向不同**
+    （那条推导 own = formalized / effective = open，因为它把困难逐字搬进前件
+    worldsheet.ddf-spanning-rank-inequality）。**两条路线各自被自己那一段未闭合的东西压住，
+    压出来的数不同**，这正说明它们不是一回事（见 notes【两条路线互补正交】）。
+  - |
+    **【围道 ⟺ 模态和等价本身是 physical-argument】** 目标卡的断言写在本项目 v6 的**模态和**
+    算子 A^ε_n 上（`D(Ε) := span { A^{ε}_{−n} ⋯ |0;k⟩ }`）。Borcherds 与 GSW/GT/goddard-2008
+    的 DDF 算子都是**围道积分** A^μ_n = (1/2πi)∮P^μ(z)V(n k_0,z)dz。
+    worldsheet.ddf-contour-equals-mode-sum--via-laurent-coefficient-extraction 给出的洛朗系数
+    记账（幂次条件 (−m−1) + K = −1 恰给 K = m）是**物理论证**而非严格证明——
+    它自己登记了至少三条未论证的步骤（第 3 步的重排、围道积分的语义未固定、
+    第 2 步正规序展开 ↔ E₋E₊ 拆分未被对接）。
+    ⇒ 本推导的结论「Borcherds 证的 T¹ 张成 = 本项目 D(Ε) 张成」在**这一跳上只有
+    physical-argument 强度**。
+    ⚠ **补它的路**：该卡 notes【补它的两条路】登记了把它升到 rigorous 的路线
+    （在 Lean 里引入形式留数）。那条路线一旦完成，本条边的 inferred 可以去掉、
+    本推导的 effective 会随之抬到 rigorous——**本推导是那条形式化工作最直接的受益者**，
+    登记在此。
+  - |
+    **【VOA 模结构 ⟺ 动量塔（桥接边，inferred）】** Borcherds 的工作空间是
+    V ⊗ V_{II_{1,1}}（II_{1,1} 二维偶自 unimodular 洛伦兹格，Gram 矩阵 ((0,−1),(−1,0))），
+    本项目的工作空间是动量塔 T(p;k_0) = ⊕_j F(p + j k_0)（代数直和，p 连续取值，
+    只有 2α' k_0·p = 1 的整性约束）。本图最佳对应物是
+    worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    （Li–Wang Theorem 3.6 在退化格 L = Z k 上给出 V_{(𝔥,Zk)}-模 ⊕_j e^{jk} ⊗ M(1)，
+    该卡 (3)(iii) 把逐层识别到 F(p + j k_0)）。**缺口有二，都在一手文献里不成文**：
+      (i) **格的维数**：Borcherds 的 II_{1,1} 是**二维**格（两个类光方向），本项目的塔只沿
+          **一条**类光方向 k_0 分片。Borcherds 造 K_i 用的那个「额外类光方向 w」在本项目的
+          记号里没有对应物（本项目的横向方向是 Ε 的 D−2 条**类空**方向）。
+          「w ↔ 本项目塔的 k_0」还是「w ↔ 另一条类光方向」这一步**未辨**；
+          本推导取前者（这是 K_i 与 A^ε_n 同族的标准读法，但仍属推断）。
+      (ii) **塔上的型**：worldsheet.momentum-tower-fock-space (2) 的层间正交是**约定式定义**
+          （该卡逐字：「⚠ **层间正交是本定义规定的，不是被证明的。**」；它对应连续动量本征态的
+          ⟨p|p'⟩ ∝ δ^D(p − p')，而本图中**没有任何节点**承载 δ 归一化）。
+          Borcherds 的 H 上的形式来自 V ⊗ V_{II_{1,1}} 的顶点代数结构，是**构造出来的**。
+          该卡 notes【层间正交这条约定的风险登记】逐字警告：「在连续动量的物理表述里这条对应
+          δ^D(p − p') 的正交性，是标准且无争议的；但在本图的离散代数模型里它是**输入而非结论**。」
+    ⇒ 本推导的**结论方向**（H_phys ⊆ D(Ε) + H_null，一个包含式）不因此致命
+    （包含式不需要型的等同），但**把它回译成 Borcherds 的「自然同构」时必须同时引用这两条
+    缺口**——回译审计（首当其冲 ms.no-ghost-theorem 一类里程碑）应显式引用本 gaps 条。
+  - |
+    **【Borcherds 自称 quick sketch，本推导的 rigorous 不建立在这句话上】**
+    §5 开头逐字：「The original proof of Goddard and Thorn [21] works for the cases we need
+    with only trivial modifications. For convenience we give a quick sketch of their proof.」
+    这是**作者自述的详尽程度**，不是严格程度的降低：Lemmas 5.1–5.5 每一条都给了证明理由
+    （Lemma 5.1 的内积矩阵上三角论证、Lemma 5.4 指认 24/26 的来源），且是期刊编号定理。
+    ⇒ 本推导 own = rigorous 依据的是「编号定理 + 每步有理由」，
+    **不是**「Borcherds 说这是完整的 GT 证明」——后者恰恰相反，他说的是 quick sketch，
+    并**背书** GT 1972 的原始证明经平凡修改即适用。
+    ⚠ 另一条相关缺口：**GT 1972 正文本项目仍未获取**（Phys. Lett. B40, 235–238），
+    故「DDF 框架下的原始逐字证明」仍缺；本条背书是本推导可以走 Borcherds 的授权依据。
+    这两件事登记在目标卡 sources 第三条与 literature/extractions/
+    ddf-spanning-no-source-check-2026-09-14.md §5 第 3 条。
+  - |
+    **【本推导不得声称「本项目对象逐字满足 Thm 5.1 的假设」】**
+    Thm 5.1 的假设逐字含「any vector of V is a sum of eigenvectors of L_0 with nonnegative
+    integral eigenvalues, and **all the eigenspaces of L_0 are finite dimensional**」。
+    本项目的塔 T(p;k_0) **不满足第二条**：
+    worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 边界 (N3)(b) 逐字：
+    「此处 L_0 在 e^{jk} 上的本征值 = ⟨jk,jk⟩/2 = 0，谱确实下有界，但每个 L_0 本征空间含
+    全部 j ∈ Z，故**无限维**，违反 VOA 的第二条附加条件」；该卡据此声明自己**不是**
+    顶点算子代数（边界 (N3)），且**不断言共形向量 ω、中心荷 c = D 或 Virasoro 生成元
+    L_n = ω_{n+1} 的存在**（边界 (N4)）。
+    ⚠ 这与本推导那条 `worldsheet.free-boson-vertex-algebra-conformal-vector` 边的关系要说清：
+    该**另一张**卡（conformal-vector）才断言 ω 与 L_n 的同一性，本条边指向它不是 (N3)(b) 那张。
+    能逐字对上 Thm 5.1 假设的是「D 个自由玻色子的 Heisenberg VOA 那一半」（有限维本征空间
+    由 Fock 结构给）；塔的**层指标 j 方向**是本项目为可形式化而引入的离散化——
+    Borcherds 的 P¹_r 按 II_{1,1}-度数分片、**每个 r 固定**（故本征空间有限维），
+    本项目按 j 分片（无限多个 rung 同时在场）。这与 gaps 第 3 条是同一件事的两个侧面，
+    一并登记，供回译审计核对。
+notes: |
+  【为什么 own = rigorous】依据是 sources 第一条：borcherds-1992 §5 Theorem 5.1 是
+  Invent. Math. 的**编号定理**，证明链 Lemmas 5.1–5.5 逐条给出理由（L1 一手已读），
+  作者另明写这是 Goddard–Thorn 1972 原始证明的复述。按 docs/STATUS_LEVELS.md，
+  rigorous 的标准是「有完整论证、可被独立复核的证明」——本推导的论证体逐字来自该定理，
+  不掺入本项目的推测步骤（推测性的对接全部标了 inferred 或写进 gaps）。
+  **effective = physical-argument 由工具经 worldsheet.ddf-contour-equals-mode-sum
+  （标 inferred）算出，这是预期的、正确的**（见 gaps 第 1 条）。
+
+  【为什么 2026-09-15 才加这条推导：查无此证明 → proven-in-literature 的裁定链】
+  目标卡 notes 逐字为过去的状态留痕：「谁要给本卡挂推导，必须先拿到 GT 1972 正文或
+  Brower 1972 正文（两条已知机制见 worldsheet.no-ghost-theorem-v4--via-goddard-thorn 的
+  (B-26) gap），或写出一条新证明。」——**第三选项（写新证明）的前提「无源可查」已被证伪**：
+  literature/extractions/ddf-spanning-no-source-check-2026-09-14.md §4 裁定
+  **proven-in-literature**，§2 逐源核对后确认 Borcherds 1992 Thm 5.1（L1）与
+  FGZ 1986 Thm 2.8 第二同构（L1）是**两条相互独立的已发表严格证明**，
+  且有 GT 1972 → {Borcherds 1992 / FGZ 1986 / Frenkel 1985 / LZ 1991} 的证明谱系；
+  该文 §4 据此**建议不开 `research/` 原创证明轨道**（会重复造 1972 年已证、
+  1992 年获 Fields 奖工作再证的定理）。本推导执行该裁定里「正确动作是策展」那一半，
+  并按该文 §5 第 1 条的强制要求把算子字典标 `inferred: true`。
+
+  【两条路线互补正交（reviewer Risk 4）——**不要**用本推导替换 --via-rank-inequalities】
+  worldsheet.ddf-spanning-hypothesis--via-rank-inequalities（2026-09-12，formalized）
+  与本推导是两条**互补正交**的路线，各自解决不同的问题：
+    · **本推导（Borcherds 1992 §5）**：**整塔一次性**的抽象张成证明。
+      价值：把「无源 open」变成「有已发表严格来源」；D = 26 的来源在 Lemma 5.4 有可指认的
+      一步。代价：走 VOA/围道语言，与本项目模态和的对接未成文（inferred），
+      故 effective 被压到 physical-argument；**它给不出任何 Lean 可消费的逐级别陈述**。
+    · **--via-rank-inequalities**：**逐级别 N 的秩不等式**路线，把目标卡压成
+      「∀N，dim H_N ≤ dim D_N + dim Z_N」（worldsheet.ddf-spanning-rank-inequality），
+      是 Lean 形式化真正消费的形状。价值：N ≤ 5 已机检闭合
+      （worldsheet.ddf-spans-physical-states-level-one … -five，配套
+      worldsheet.ddf-spanning-rank-inequality 的记法），N ≥ 6 是当前前沿；
+      代价：对一般 N 开放，故 effective = open。
+  ⇒ **后者的价值不因前者而消失**：本推导不能替代 --via-rank-inequalities（不产出 Lean 陈述），
+  --via-rank-inequalities 也不能替代本推导（它是 open 的）。两条推导**并存**，
+  目标卡由此首次同时持有「文献严格来源」与「可形式化的逐级别路线」两种记账。
+  ⚠ 由本推导**不得**推出「N ≥ 6 不用做了」：Borcherds 的证明不逐级别、不在 Lean 里，
+  且它自己的 effective 就是 physical-argument。
+
+  【两条推导的瓶颈指向不同节点】
+    --via-rank-inequalities：own = formalized / effective = **open**
+      （瓶颈 → worldsheet.ddf-spanning-rank-inequality）。
+    本推导：                own = rigorous   / effective = **physical-argument**
+      （瓶颈 → worldsheet.ddf-contour-equals-mode-sum）。
+  故 `uv run stringgraph why worldsheet.ddf-spanning-hypothesis` 会显示**两个不同的瓶颈分支**。
+  **这不是矛盾，是两条独立路线的诚实记账**；目标卡的 effective 由最弱的那一支决定
+  （open），本推导**不主张**改变目标卡的 effective，只主张「本卡无源 open」这个判断不再成立
+  ——见目标卡 notes 的 2026-09-15 追加段。
+
+  【D = 26 在本推导里的位置，以及**为什么不为它单列一条边**】
+  Borcherds 的 26 经 Lemma 5.4 进入：Thm 5.1 的假设是「Virasoro 中心元在 V 上作用为乘 24」，
+  Lemma 5.4 的证明用到「V 上 24、张 II_{1,1} 后 H 上 26」，§5 正文逐字：
+  「The 26 comes from the 24 in theorem 5.1 plus the dimension of II_{1,1}.」。
+  本项目里与「c = D」对应的是 worldsheet.free-boson-vertex-algebra-conformal-vector
+  （该卡断言 V_{(𝔥,Zk)} 的共形向量 ω 的中心荷 = D，且 L_n = ω_{n+1} 与 Sugawara L_n 同族）。
+  **那条边本推导刻意不连**：Borcherds 的证明体不调用该卡的任何声明，该卡也不承载
+  「H_phys ⊆ D(Ε)+H_null」这个包含式的任何一步——按本项目已确立的**接口边裁决**
+  （「只提供语境不承担论证的边不得存在」，先例见
+  worldsheet.no-ghost-theorem-v4--via-goddard-thorn 撤出 ddf-contour-equals-mode-sum 那条边、
+  以及 critical-dimension-light-cone-v2--via-lorentz-algebra 的 auditor 2026-09-12 裁定 R2），
+  连它会**多压出一个 physical-argument 瓶颈**（该卡 own = physical-argument），
+  使 `why` 的瓶颈树从「唯一的算子字典缺口」变成两枝，掩盖本推导真正未闭合的那一条。
+  ⇒ D = 26 的对应关系**记在这里**（并见 summary 的三空间字典段），不单列为 depends_on 边。
+  ⚠ 这与目标卡边界 (c)「D = 26 在无鬼定理链条上唯一进入本卡」不冲突：
+  那句话说的是 26 在**整条链**里的位置，本推导只是这条链上的一条推导。
+
+  【本推导不改动目标卡的任何 statement 文本，也不标 formalized】
+  目标卡 statement 是命题 (B) 的不可变卡片（项目原则 1），本推导只在同名目标卡的 `notes`
+  追加而不动正文（见目标卡 notes 【2026-09-15 追加】段）。
+  **不标 formalized**：Borcherds 的证明不在本仓库的 Lean 里，`formal.lean_decl` 无所指；
+  目标卡的 `formal.lean_decl = StringFormal.NoGhost.DDFSpans` 是一个 `def … : Prop`
+  而非定理（目标卡 sources 第二条 ⚠ 逐字已记录），本推导不能借用它。
+  ⚠ 本推导**没有**在 Lean 里做任何事，故不涉及 `lake build` / `check-axioms`；
+  合并前由 lead 按项目纪律决定是否额外跑。
+author: curator
+created: "2026-09-15"
