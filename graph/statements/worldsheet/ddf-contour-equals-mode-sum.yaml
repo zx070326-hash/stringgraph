@@ -103,6 +103,17 @@ notes: |
   「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」，
   而本卡的前提里含一个未定义的对象（围道积分的算子值被积量）。
 
+  【2026-09-15 更新：上面那一段描述的是 --via-laurent-coefficient-extraction 那条推导】
+  新增推导 worldsheet.ddf-contour-equals-mode-sum--via-voa-residue（status: rigorous）
+  后，**本卡 effective 由 physical-argument 升为 rigorous**。上面「只能是 physical-argument」
+  一段的依据（前提含未定义对象、重排无严格承载）是针对**旧的洛朗系数记账那条推导**说的，
+  那条推导原样保留、仍是 physical-argument；新的 VOA 留数推导改在**形式留数/VOA 框架**里工作
+  （Schottenloher Ch.10 全程停在形式级数层面，无收敛性假设），前提不再是未定义对象。
+  ⚠ 「不要因为两行显然就升 rigorous」这句**继续有效**：升 rigorous 靠的是新推导引到的
+  带编号定理（GN (3.2)–(3.3)、Def 10.1/10.9、Thm 10.10、Bakalov–Kac (2.22)），
+  不是靠「看起来显然」。新推导仍有一条 inferred 边（物理 :e: ↔ VOA 𝒴(e)），已逐字记账。
+  升级是否成立由 reviewer / auditor 裁决，不因本 notes 而自动生效。
+
   【本卡是回译审计的必经之处】
   worldsheet.ddf-commute-with-virasoro、worldsheet.ddf-operators-preserve-physical-states
   等卡的 formalized 都是相对**本图 v6 的模态和**成立的。凡要把这些结论回译成**文献**陈述
