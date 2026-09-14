@@ -18,6 +18,9 @@ statement: |
   （那一步由 worldsheet.faddeev-popov-ghost-action 承载，physical-argument），
   也**不**断言任何关于物质中心荷或 D 的事。
 uses_conventions: [conv.virasoro-standard, conv.worldsheet-complex-coords, conv.ghost-normal-ordering-sl2c]
+formal:
+  lean_decl: StringFormal.NoGhost.Ghost.lie_Lop_Lop
+  lean_file: StringFormal/NoGhost/Ghost.lean
 sources:
   - ref: fgz-1986
     loc: "Proposition 2.1, p.8444 右栏：(i) `ρ(c) = −26 Id_{Λ^∞_*}`；(ii) `ρ(L_m) = Σ_n (n−m) :c_{−n} b_{m+n}:`"
@@ -103,5 +106,21 @@ notes: |
     它与序无关（两套序之差只改中心项中 m 的一次项，不改 m³ 的系数）。
   · ⚠ FGZ Prop 2.1(ii) 本身**没有**给出 `: :` 的湮灭/产生清单；「FGZ 用的就是 SL(2,C) 序」是
     本项目的推断（理由即上面那条唯一性），已记在 conv.ghost-normal-ordering-sl2c 的 sources[0].note。
+
+  ---
+  【2026-09-14 formalizer 注记：本卡已形式化，statement 正文一字未动】
+  新增 `formal` 块指向 `StringFormal.NoGhost.Ghost.lie_Lop_Lop`
+  （formal/StringFormal/NoGhost/Ghost.lean），新推导 --via-lean（status: formalized）。
+  三条与上面两条 auditor 注记直接相关的落地结果：
+  · **(A) 的 `: :` 在 Lean 里被定死为 SL(2,C) 序**：`nord b c p q = if p ≤ -2 then b_p c_q
+    else -(c_q b_p)`，即湮灭算符（b_n, n ≥ −1）右移并带费米符号。机检结果确实是**纯**
+    (−26/12)(m³ − m)，无 m 线性项，与本卡断言逐字一致；这也反过来机检了 auditor 关于
+    「使中心项无 m 线性项的序唯一 = SL(2,C) 序」的判断在 λ = 2 处成立。
+  · **(B) 的「受限模」在 Lean 里取的是单边条件**（`IsRestricted`：∀ v, ∃ N, ∀ n > N,
+    b_n v = c_n v = 0），即 auditor 指出的正确写法，不是本卡括号里那句写松的 gloss。
+    形式化覆盖的是单边条件下的命题。
+  · **新缺口（不属本卡断言，但下游须知）**：Lean 里**没有构造任何非零的 bc 受限模**
+    （FGZ 的半无穷楔形 Λ^∞_* 未形式化），故 --via-lean 证的是「给定这样一个模，则……」。
+    详见该推导的 gaps。
 author: curator
 created: "2026-09-12"

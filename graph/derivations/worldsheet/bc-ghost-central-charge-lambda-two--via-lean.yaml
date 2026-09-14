@@ -1,0 +1,167 @@
+id: worldsheet.bc-ghost-central-charge-lambda-two--via-lean
+target: worldsheet.bc-ghost-central-charge-lambda-two
+kind: proof
+status: formalized
+depends_on:
+  - id: worldsheet.virasoro-algebra-v2
+    inferred: false
+    note: |
+      提供 conv.virasoro-standard 归一化下「中心荷」的读法。这条依赖在 Lean 里是**字面**的：
+      `StringFormal.NoGhost.Ghost.ghostVirCoeff_eq_centralTerm` 把机检出来的中心项写成
+      `-26 * StringFormal.Virasoro.centralTerm R m`，而 `Virasoro.centralTerm R m
+      = (1/12)(m³ − m)` 正是 formal/StringFormal/Virasoro/Basic.lean 里该卡的归一化
+      （Ghost.lean 经 Sugawara.lean 传递 import 了 Virasoro/Basic.lean）。
+      本卡的其余内容（反对易关系、L^g_m 的表达式、Virasoro 关系本身）都在 Ghost.lean 内
+      从头证出，不从别处取。
+sources:
+  - ref: stringformal-2026
+    loc: "formal/StringFormal/NoGhost/Ghost.lean :: StringFormal.NoGhost.Ghost.lie_Lop_Lop"
+    note: |
+      本仓库，Lean 4 + Mathlib v4.33.1。`cd formal && lake build` 全量通过（3539 jobs，
+      无 warning），目标声明无 sorry，`#print axioms` 对
+      `lie_Lop_Lop` / `ghostVirCoeff_eq` / `ghostVirCoeff_eq_centralTerm` / `lie_Lop_Lop_coeff`
+      / `six_mul_ghostAnom` 一律给
+      `[propext, Classical.choice, Quot.sound]`（formalizer 2026-09-14 亲自跑）。
+
+      机器验证的主声明逐字为
+        ⁅Lop hres m, Lop hres n⁆
+          = ↑(m - n) • Lop hres (m + n)
+            + (if m + n = 0 then (algebraMap ℚ R) (-26 / 12) * ↑(m ^ 3 - m) else 0) • 1,
+      前件 `IsBCSystem b c`（{b_m,c_n} = δ_{m+n,0}、{b_m,b_n} = {c_m,c_n} = 0）与
+      `IsRestricted b c`（∀ v, ∃ N, ∀ n > N, b_n v = c_n v = 0），设定是
+      `[CommRing R] [Algebra ℚ R]`、任意 `R`-模 `M`、`b c : ℤ → Module.End R M`。
+      因 m³ − m = m(m² − 1)，这正是本卡陈述的
+      [L^g_m, L^g_n] = (m − n) L^g_{m+n} + (−26/12) m(m² − 1) δ_{m+n,0}。
+
+      本推导链条上的全部声明（同一文件、同一命名空间 `StringFormal.NoGhost.Ghost`）：
+        · 算术核  `kd`, `chi`, `anomSummand`, `ghostAnom`；
+                  `sum_Icc_eq_sum_range`, `six_mul_sum_range_quad`,
+                  `six_mul_sum_window`, `six_mul_sum_window_neg`,
+                  `anomSummand_eq_zero_of_notMem_pos/_neg`,
+                  **`six_mul_ghostAnom`**（6 z(m) = −13(m³ − m)），
+                  数值旁证 `ghostAnom_one/_two/_three/_neg_two`（= 0 / −13 / −52 / 13，`decide`）
+        · 代数    `IsBCSystem`, `anticomm_bc'/_bb'/_cc'`, `nord`（SL(2,C) 正规序）,
+                  `nord_eq`（:b_p c_q: = b_p c_q − χ(p) δ_{p+q,0}）, `bc_mul_bc_sub`（gl(∞) 对易子）,
+                  **`nord_bracket`**（含正规序反常 χ(p) − χ(r)）
+        · 生成元  `IsRestricted`, `gbound`, `nordWindow`, `nord_apply_eq_zero_of_notMem`,
+                  `ghostTerm`, **`Lop`**（局部有限和）, `Lop_apply`,
+                  `ghostTerm_shift_apply` / `Lop_apply_shift`（本卡写法 Σ_n (m−n):b_{m+n}c_{−n}: 的字典）
+        · 二重和  `uTerm`/`vTerm`/`wTerm`, `sum_uTerm`, `sum_vTerm`, `sum_wTerm`,
+                  `sum_anomSummand_eq_ghostAnom`, `sum_sum_wTerm`, `sum_sub_sum_eq`
+        · 结论    `lie_Lop_Lop_apply` → `lie_Lop_Lop_coeff` → **`ghostVirCoeff_eq`**
+                  （中心系数 = (−26/12)(m³ − m) δ_{m+n,0}，即 c^g = −26）→
+                  `ghostVirCoeff_eq_centralTerm` → **`lie_Lop_Lop`**（本卡的 lean_decl）
+      文件头自述缺口见下面的 gaps。
+  - ref: fgz-1986
+    loc: "Proposition 2.1(i)(ii), p.8444 右栏"
+    note: |
+      **旁证，不承载本推导**：Ghost.lean 是从头写的，没有引用任何既有形式化，也没有把
+      FGZ 的半无穷楔形构造形式化。列在此处是为了记录两条独立论证给同一个 −26：
+      文献侧是 worldsheet.bc-ghost-central-charge-lambda-two--via-fgz-ghost-representation
+      （rigorous，缺口是 PNAS 公告体裁无印出证明），机检侧是本条。
+      本条因此**关掉了**那条推导的第一条 gap（「本项目未逐行复核该中心项的计算」）
+      ——现在中心项的计算被机器逐步复核过了，但见下面 gaps 的第一条：
+      两条推导覆盖的对象范围不同（FGZ 有具体模，本条只有前件）。
+summary: |
+  机器检查的证明，全部在 formal/StringFormal/NoGhost/Ghost.lean 内完成，走**直接二重和**路线
+  （不是 Sugawara 那条「刚性 + 2-上圈递推」——抽象受限模上没有不可约性可用，
+  「与全部模对易 ⟹ 标量」在这里为假，故中心项必须真的算出来）。六步：
+
+  0. 设定。`IsBCSystem b c` 逐字就是本卡的三条反对易关系（`1 : Module.End R M` 是恒等算符）；
+     `IsRestricted b c` 取**单边**条件（见 gaps）。SL(2,C) 正规序被定死为
+       `nord b c p q = if p ≤ -2 then b_p c_q else -(c_q b_p)`,
+     即湮灭算符（b_n, n ≥ −1；c_n, n ≥ 2）右移并带一个费米符号。等价形式
+     `nord_eq`：:b_p c_q: = b_p c_q − χ(p) δ_{p+q,0}·id，χ(p) = [p ≥ −1] 是「b_p 是湮灭算符」的指示函数。
+     生成元 L^g_k = Σ_p (2k − p) :b_p c_{k−p}: 由局部有限和（`lsumLocFin`）实现：
+     受限性给出窗口 `nordWindow = Icc (min (-1) (k − N(v))) (N(v))`，**两端都必需**
+     （p ≥ −1 时右边是 b_p，p 大则杀 v；p ≤ −2 时右边是 c_{k−p}，−p 大则杀 v）。
+     `Lop_apply_shift` 把它写回本卡的指标 Σ_n (k − n) :b_{k+n} c_{−n}:（p = k + n）。
+
+  1. gl(∞) 对易子（`bc_mul_bc_sub`，无中心项）：
+       [b_p c_q, b_r c_s] = δ_{q+r,0} b_p c_s − δ_{p+s,0} b_r c_q，
+     两个四次项 b_p b_r c_q c_s 与 b_r b_p c_s c_q 靠 {b,b} = {c,c} = 0 的**两个**符号相消。
+
+  2. 正规序反常（`nord_bracket`）：因为 :b_p c_q: 与 b_p c_q 只差一个中心元，对易子不变，
+     但把右边重新写成正规序时冒出 c-数：
+       [:b_p c_q:, :b_r c_s:] = δ_{q+r,0} :b_p c_s: − δ_{p+s,0} :b_r c_q:
+                                + δ_{q+r,0} δ_{p+s,0} (χ(p) − χ(r))·id。
+     **中心荷的全部来源就是这一项**（χ 的差）。
+
+  3. 二重和。对固定 v 取一个足够大的公共窗口 P = Icc (−K) K（K 显式取
+     N(v) + N(L_n v) + N(L_m v) + 2(|m| + |n|) + 2，两端各留 |m| + |n| 的余量使边界项自动为零），
+     则 L_m L_n v − L_n L_m v = Σ_{p,r ∈ P²} (2m−p)(2n−r) [:b_p c_{m−p}:, :b_r c_{n−r}:] v。
+     两个 δ 各把一重和压成一项：δ_{(m−p)+r,0} 给 r = p − m（`sum_uTerm`），
+     δ_{p+(n−r),0} 给 p = r − n（`sum_vTerm`，先 `Finset.sum_comm` 换序）。
+
+  4. 非中心部分。两项的系数差是**恒等式**
+       (2m−p)(2n+m−p) − (2m+n−p)(2n−p) = (m − n)(2(m+n) − p)，
+     而 (2(m+n) − p) 正是 L^g_{m+n} 第 p 项的系数，故这部分精确等于 (m − n) L^g_{m+n} v
+     （`sum_sub_sum_eq`）。指标从不需要平移，两项都已经落在同一个 P 上。
+
+  5. 中心部分。两个 δ 同时非零要求 p − m = n + p，即 **m + n = 0**；于是中心项
+       z(m) = Σ_p (2m − p)(−m − p)(χ(p) − χ(p − m))
+     （`sum_sum_wTerm`，窗口无关性由 `sum_anomSummand_eq_ghostAnom`）。
+     χ(p) − χ(p − m) 只在 −1 ≤ p ≤ m − 2（m ≥ 0）上等于 1、在 m − 1 ≤ p ≤ −2（m < 0）上等于 −1，
+     所以 z(m) 是一个**长度 |m| 的显式多项式和**。把区间搬到 `Finset.range` 后用一条闭式引理
+     `6 Σ_{j<N}(A+j)(B+j) = 6N·AB + 3(A+B)N(N−1) + N(N−1)(2N−1)`（对 N 归纳）得
+       **6 z(m) = −13 (m³ − m)**（`six_mul_ghostAnom`），两个符号分支给同一个闭式。
+     在 ℚ-代数里除以 6：z(m) = (−13/6)(m³ − m) = (−26/12)(m³ − m)，即
+     **c^g = −26**（`ghostVirCoeff_eq`；等价写法 `ghostVirCoeff_eq_centralTerm`：
+     中心项 = −26 · Virasoro.centralTerm）。
+gaps:
+  - |
+    **Lean 里没有构造任何非零的 bc 受限模**，故本条证的严格来说是
+    「给定满足 `IsBCSystem` + `IsRestricted` 的 (b, c, M)，则 Virasoro 关系与 c^g = −26 成立」。
+    前件是可满足的（M = 0 平凡满足），但**非平凡可满足性未机检**：
+    FGZ 的半无穷楔形 Λ^∞_* / 无穷多生成元上的外代数没有形式化。
+    因此 --via-fgz-ghost-representation **不能被本条取代**：那条有具体模（FGZ 构造了 Λ^∞_*），
+    本条只有条件式。两条并存，本条关掉的是那条的「中心项计算未复核」缺口。
+    这是本卡链条上最值得下一步补的一块（对照 worldsheet.bosonic-fock-space 在玻色侧的地位）。
+  - |
+    **「受限模」用的是单边条件**（∀ v, ∃ N, ∀ n > N, b_n v = c_n v = 0），
+    即 2026-09-12 auditor 注记 (B) 指出的正确写法，**不是**本卡 statement 括号里那句
+    写松的 gloss（按字面只剩平凡模）。形式化覆盖的是单边条件下的命题，
+    这与 worldsheet.brst-quantization-v2 / worldsheet.critical-dimension-brst-v2 的写法一致。
+  - |
+    **`R` 必须是交换 ℚ-代数**（`[Algebra ℚ R]`），只因为要除 12：
+    第 1–5 步（含 `six_mul_ghostAnom` 这条整数恒等式与 `nord_bracket`）对**任意交换环**成立，
+    `lie_Lop_Lop_coeff` 也是；只有 `ghostVirCoeff_eq` / `lie_Lop_Lop` 需要 1/12。
+    未要求 `CharZero`，未要求整环，`M` 上无任何双线性型/正定性假设。
+  - |
+    **没有 T(z)、没有 OPE、没有态-算子同构**：本条是**模式代数上的命题**，
+    与 worldsheet.bc-ghost-central-charge（一般 λ，--via-ope，physical-argument）之间
+    没有 Lean 侧的桥。本卡自己已声明不断言一般 λ 公式，也不断言这组模式就是 Polyakov
+    路径积分的 FP 鬼场（那步由 worldsheet.faddeev-popov-ghost-action 承载，仍是 physical-argument
+    且仍是 Weyl 反常路线的瓶颈）——本条一步也不改变这两件事。
+  - |
+    **鬼场数流、L^g_0 的具体本征值、鬼场真空 |↓⟩ = c_1|0⟩ 都不在 Lean 里。**
+    特别地本条**不**给出能级序（相对 |↓⟩）下的 L^g_n，故 auditor 注记 (A) 指出的
+    「逐字拼接本卡与 worldsheet.brst-quantization-v2 会把 m 线性项算错 2m」这一坑
+    **没有**被本条关掉：Lean 只覆盖 SL(2,C) 序这一侧。两序之差 α 只改中心项的 m 一次项，
+    不改 m³ 的系数，故经依赖边搬运 (m³ − m) 的系数（= c^g/12）仍然正确。
+  - |
+    **`lsumLocFin` 取自 formal/StringFormal/NoGhost/Sugawara.lean**（局部有限和的通用构造，
+    `import StringFormal.NoGhost.Sugawara` 的**唯一**用途；Ghost.lean 不用任何玻色 Fock 空间内容）。
+    这是复用而非重写，但使 Ghost.lean 形式上依赖玻色岛。
+    建议的后续重构：把 `lsumLocFin` / `lsumLocFin_apply` / `sum_apply_congr_of_eq_zero`
+    抽到 `StringFormal/NoGhost/LocFin.lean`（同命名空间，声明名不变，对下游零影响）。
+    本次没做是因为它会触发整个 NoGhost 树重编，属共享基础改动，需 lead 排期。
+notes: |
+  与 --via-fgz-ghost-representation 并存，两条**不是同一个论证**，覆盖范围也不同（见 gaps 第 1 条）。
+
+  **本条是本图第一条被机检的费米（Clifford）侧中心荷**，与玻色侧
+  worldsheet.free-boson-central-charge-d--via-lean（c = D）互补：
+  那条走「刚性 + 2-上圈递推」，本条走直接二重和——因为抽象受限模上**没有**不可约性，
+  Sugawara 那条路的第 2 步（「与全部模对易 ⟹ 标量」）在这里不成立。
+
+  卡的 `formal.lean_decl` 指 `lie_Lop_Lop`（= 卡面公式逐字），与
+  worldsheet.free-boson-central-charge-d 的先例一致。
+  「c^g = −26」单独的那条是 `ghostVirCoeff_eq`（schema 的 `formal` 只能填一个名字）。
+
+  reviewer-verified: TODO（建议独立复核两点：(a) `nord` 的符号约定确实是 SL(2,C) 序
+  ——判据是「χ(p) = [p ≥ −1] 即 b_p 为湮灭算符」，与 conv.ghost-normal-ordering-sl2c
+  的湮灭清单逐字一致，且在该序下 L^g_0 杀 SL(2,C) 真空；若把 χ 换成 1 − χ
+  机检结果会变成 +26，故这个符号是唯一有内容的输入；
+  (b) 二重和第 3 步窗口余量 2(|m| + |n|) + 2 足够——Lean 里这八条边界条件全部由 `omega` 关掉。)
+author: formalizer
+created: "2026-09-14"

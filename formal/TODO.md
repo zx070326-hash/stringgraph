@@ -2213,6 +2213,42 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   但图节点若要读作「level-2 标量物理态的模」，应在 `gaps` 里写明这一点。
   也没有证明 `D ≤ 26` 时模非负——那是无鬼定理本身。
 
+## 鬼场岛（bc 系统）
+
+- [x] `bc-ghost-central-charge-26`：**λ = 2 的 bc 鬼场系统中心荷 `c^g = −26`**
+  （图卡 `worldsheet.bc-ghost-central-charge-lambda-two`，推导 `--via-lean`，2026-09-14）。
+  见 `StringFormal/NoGhost/Ghost.lean`（无 sorry，`check-axioms` 输出 `ok`，只有标准三公理）。
+  设定是**抽象**的：任意交换环 `R`（最后除 12 那步要 `[Algebra ℚ R]`）、任意 `R`-模 `M`、
+  `b c : ℤ → Module.End R M` 满足 `IsBCSystem`（三条反对易关系）与 `IsRestricted`
+  （**单边**受限：`∀ v, ∃ N, ∀ n > N, b_n v = c_n v = 0`），
+  生成元 `Lop hres k = Σ_p (2k − p) :b_p c_{k−p}:`（`lsumLocFin`，
+  `Lop_apply_shift` 给卡面写法 `Σ_n (k − n) :b_{k+n} c_{−n}:`）。
+  主定理 `lie_Lop_Lop`：`⁅L_m, L_n⁆ = (m−n)•L_{m+n} + [m+n=0]·(−26/12)(m³−m)•1`；
+  「c = −26」单独那条是 `ghostVirCoeff_eq`，Virasoro 归一化版是 `ghostVirCoeff_eq_centralTerm`
+  （中心项 `= −26 * Virasoro.centralTerm R m`）。
+  **路线与玻色侧 `Sugawara.lean` 不同**：抽象受限模上**没有**不可约性，
+  「与全部模对易 ⟹ 标量」为假，故不能走「刚性 + 2-上圈递推」，中心项必须真的算出来。
+  实际做法：(1) `bc_mul_bc_sub` 给 gl(∞) 对易子（无中心项，两个四次项靠 {b,b}={c,c}=0 相消）；
+  (2) `nord_bracket` 给正规序反常 `δδ(χ(p) − χ(r))`，`χ(p) = [p ≥ −1]` = 「`b_p` 是 SL(2,C)
+  湮灭算符」；(3) 在留了 `2(|m|+|n|)+2` 余量的公共窗口上做二重和，两个 δ 各压掉一重，
+  系数恒等式 `(2m−p)(2n+m−p) − (2m+n−p)(2n−p) = (m−n)(2(m+n)−p)` 给出非中心部分
+  （**指标从不需要平移**）；(4) 中心部分退化成长度 `|m|` 的显式多项式和，
+  `six_mul_ghostAnom` 给 `6 z(m) = −13(m³−m)`（两个符号分支同一闭式，
+  经 `Finset.range` + 一条 `6 Σ_{j<N}(A+j)(B+j)` 的闭式引理）。
+  数值旁证 `ghostAnom_two = −13`（= `⟨0|L₂L₋₂|0⟩` = c/2）等四条由 `decide` 关掉。
+  **未做（按重要性）**：
+  (a) **没有构造任何非零的 bc 受限模**（FGZ 的半无穷楔形 Λ^∞_* 未形式化），
+      故本条是条件式命题；这是这个岛下一步最该补的（对标玻色侧的 `Fock.lean`）。
+  (b) 能级序（相对 `|↓⟩ = c₁|0⟩`）下的 `L^g_n` 没做，故 auditor 关于「逐字拼接本卡与
+      `brst-quantization-v2` 会把 m 线性项算错 2m」的坑没有被关掉；Lean 只覆盖 SL(2,C) 序。
+  (c) 鬼场数流、`L^g_0` 的本征值、BRST 荷 `Q` 与 `Q² = 0` 全未做。
+  (d) 一般 λ 的 `c = −3(2λ−1)² + 1` 未做（那需要 OPE 侧，图里仍是 physical-argument）。
+  **重构建议（需 lead 排期）**：`Ghost.lean` 只为一个通用工具 `lsumLocFin` 而
+  `import StringFormal.NoGhost.Sugawara`（不用任何玻色 Fock 内容）。
+  把 `lsumLocFin` / `lsumLocFin_apply` / `sum_apply_congr_of_eq_zero` 抽到
+  `StringFormal/NoGhost/LocFin.lean`（同命名空间 `StringFormal.NoGhost`，声明全名不变，
+  对下游六个使用者零影响）即可解耦；本次没做是因为会触发整个 NoGhost 树重编。
+
 ## 基础设施
 
 - [x] `scripts/check_axioms.lean`：给定声明名，输出其公理集合，非标准三公理则退出非零。
