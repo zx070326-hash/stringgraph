@@ -1,0 +1,33 @@
+id: holography.dmz-single-center-identification
+kind: proposition
+title: 识别③：DMZ 有限部 φ_F 等于单心（immortal）dyon 贡献
+statement: |
+  在 N=4 弦论（type II on K3×T²）中，对固定电荷 (Q,P)（判别式 d=Q²P²−(Q·P)²>0，
+  gcd=1），DVV 生成函数 1/Φ₁₀ 作为指标 m 的亚纯 Jacobi 形式经 DMZ 典范分解后：
+    1/Φ₁₀ = φ_F(τ,z) + φ_P(τ,z)，
+  其中 φ_F 是 mock Jacobi 形式（有限部），φ_P 是 Appell-Lerch 极部。
+  物理识别（Dabholkar-Murthy-Zagier 2012）：
+  (a) φ_F 的傅里叶系数 d_F(m,n,l) 等于**单心（immortal）dyon**的指标——
+      即在 immortal chamber 内稳定、不分裂为多中心束缚态的 1/4-BPS dyon 的螺旋超迹；
+  (b) φ_P（Appell-Lerch 极部）的傅里叶系数对应**多中心（壁穿越易受影响的）**部分；
+      其贡献随 chamber 变化，对应识别②中的壁穿越跳变；
+  (c) DMZ 分解因此实现了"单心贡献"与"多中心贡献"在生成函数层面的**解析分离**，
+      使 immortal dyon 指标 d_F(m,n,l) 成为 chamber 无关量。
+uses:
+  - holography.dmz-mock-jacobi-decomposition
+  - holography.dvv-dyon-index-generating-function
+  - holography.dvv-wall-crossing-identification
+uses_conventions: []
+sources:
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§1–§2（物理背景与识别），§6（单心/多中心分离的详细论证）"
+notes: |
+  **严格度：physical-argument（识别③）。**
+  数学分解（holography.dmz-mock-jacobi-decomposition）是严格的。
+  但"φ_F 的系数 = 单心 dyon 贡献"是物理识别：依赖 localization/supergravity 分析来
+  论证在 immortal chamber 里极部 φ_P 的贡献恰好是多中心态，而 φ_F 的 mock 结构来源于
+  对单心 dyon 做围道积分时非全纯补全的必要性。
+  这一识别是 DMZ 2012 的中心物理论证，文献称之为"the finite part conjecture"（在 2012 年
+  对一类情形尚属猜测，此后通过 Sen positivity 等旁证逐步加固）。
+  识别③与识别①②合用构成完整的"1/4-BPS dyon 指标 = mock Jacobi 系数（单心部分）"论证链。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, physical-identification]
