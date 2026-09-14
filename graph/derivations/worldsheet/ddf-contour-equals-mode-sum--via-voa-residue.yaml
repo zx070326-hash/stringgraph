@@ -4,28 +4,28 @@ kind: proof
 status: rigorous
 depends_on:
   - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
-    inferred: true
+    inferred: false
     note: |
-      **本推导唯一的 inferred 边，承担两件事（因校验器禁止同一 id 出现两次，合并为一条）：**
-
-      (i) **非 inferred 的那一半**：这张卡（rigorous，Li–Wang Theorem 3.6 等）
-          提供 VOA 作用的空间与两个场的作用域——动量塔 T(p;k_0) = ⊕_j F(p+jk_0) 是 V 的模，
-          横向 DDF 算子所在的算子是塔上的算子；整性条件 (I) ⟨k,p̃⟩ ∈ Z 给出整数指标，
-          取 (★) 2α'k_0·p = 1 即本卡的归一化。
-
-      (ii) **inferred 的那一半**：物理正规序指数 :e^{i n k_0·X(z)}: 与 VOA 顶点算子 𝒴(e^{nk},z)
-          是同一算子（秩 1 类光 ⟹ 扭群代数 2-cocycle ε(mk,nk) = 1，退化为普通群代数，c_{nk}=1）。
-          GN (3.1) 逐字写 ε(mk,nk) = 1（刊 p.593，gsw-1987-v1.md §4 E15 L1↩），是最强的单条证据；
-          但「物理写法 :e: 与 VOA 写法 𝒴(e) 是同一算子」这句**无任何来源逐字断言**。
-          ⚠ 那张卡**本身不蕴含本边**：其边界 (N6) 逐字写「不断言顶点算子 𝒴(e^{jk},z) 与物理写法
-          :e^{i j k_0·X(z)}: c_{jk} 的逐字对应」，故这条字典仍须 inferred。
-          另见 literature/extractions/math-sources.md §36.5 末（「此特例下扭群代数 = 普通群代数」标 inferred: true）。
-
-      **为什么整条边标 inferred 而不是拆开**：校验器对同一 id 报 "duplicate dependency" error，
-      故 (i)(ii) 只能写成一个 dep 条目；条目只要含 (ii) 就必须标 `inferred: true`
-      （状态只能实话实说）。代价是 (i) 那半（本可非 inferred）也被算作 inferred，
-      即本推导有效状态的floor被自身 inferred 边压住——这正是本推导**有效状态**可能低于
-      `status: rigorous` 的唯一来源，见 notes【关于本推导的有效状态】。
+      提供 VOA 作用的空间与两个场的作用域：动量塔 T(p;k_0) = ⊕_j F(p+jk_0) 是
+      Heisenberg 顶点代数 V_(𝔥, Z k) 的（不可约）模（Li–Wang Theorem 3.6 / Def 3.5 Condition C_L）；
+      整性条件 (I) ⟨k, p̃⟩ = 2α'(k_0·p) ∈ Z 给出顶点算子模的整数指标，
+      取 (★) 2α' k_0·p = 1 即本卡的归一化。
+      本推导「逐项相乘后逐向量有限」所用的场公理（GN 正规性公理 (2.32) /
+      Schottenloher Def 10.12）也在这张卡建立的框架里。
+      ⚠ 这条边**只**承载上述结构；「物理 :e: = VOA 𝒴(e)」那条字典**不**在这张卡里
+      （其边界 (N6) 逐字排除），已单列为下一条依赖。
+  - id: worldsheet.physical-exponential-equals-voa-vertex-operator
+    inferred: false
+    note: |
+      **本推导与文献之间那条实质字典，2026-09-15 由 inferred flag 提升为显式节点。**
+      断言：在类光动量塔上 :e^{i n k_0·X(z)}: = 𝒴(e^{n k_0}, z)
+      （秩 1 类光 ⟹ 扭群 2-cocycle ε(mk,nk) = 1，c_{n k_0} = 1）。
+      本推导第 0 步把物理对象接入 VOA 框架**全靠这一条**：
+      GN (3.2)–(3.3) 的留数演算是对 𝒴(e^{mk}, z) 说的，而本卡断言的左端
+      (1/2πi)∮ ε·P(z) V(n k_0, z) dz 里的 V 是物理正规序指数。
+      该节点 effective = physical-argument（cocycle 平凡有 GN (3.1) 逐字来源，
+      但两套算子的识别无任何来源逐字断言，且跨连续动量↔离散格、δ-归一化两条接缝）。
+      **本推导的 effective 因此诚实地落到 physical-argument**，见 notes。
   - id: worldsheet.ddf-transversality-gives-local-finiteness-v2
     inferred: false
     note: |
@@ -90,7 +90,11 @@ summary: |
   （worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower，rigorous）。
   在此框架里：ξ(z) = 𝒴(ξ(−1),z) 是 Heisenberg 场（= 物理 ε·P(z)）；
   𝒴(e^{mk},z) 是格点顶点算子（= 物理 :e^{imk_0X}: 的 VOA 版本，cocycle c_{mk}=1 由 (3.1) 确认）。
-  这一步含本推导唯一的 inferred 桥（物理 :e: ↔ VOA 𝒴(e)）；其余均非 inferred。
+  这一步**全靠显式桥节点** worldsheet.physical-exponential-equals-voa-vertex-operator
+  （effective = physical-argument）：GN 的留数演算是对 𝒴(e^{mk},z) 说的，
+  而本卡断言左端的 V(n k_0, z) 是物理正规序指数，两者的识别就是那张卡。
+  **2026-09-15 重建模**：此步此前是本推导的一条 `inferred: true` 边，
+  graph-reviewer 与 lead 裁定那是虚高（见 notes），已提成显式节点。
 
   **第 1 步：Res_z = 「取 z^{−1} 系数」（严格，tautology 级）。**
   Schottenloher Def 10.1（p.173）逐字定义 Res_z A(z) = A_{−1}，
@@ -112,19 +116,63 @@ summary: |
   **旧 gap #1「重排在算子层面无论证」已收敛**：在 VOA 框架里「重排」就是 Def 10.9 + Thm 10.10(N=0)
   + 场公理 (2.32)，全部带编号定义/定理，全程无收敛性假设（形式级数）。
 
-  **第 4 步：gap #3（:e: = ΣV z^K 未对接）已收敛为 inferred 桥。**
+  **第 4 步：gap #3（:e: = ΣV z^K 未对接）已收敛为显式桥节点。**
   旧 gap #3 说「正规序 :e^{ink_0X}: 的展开 = E₋E₊ 拆分，与 Lean vertexOsc 的对接缺节点」。
-  在 VOA 侧这个展开正是 𝒴(e^{nk},z) 的定义（GN §2.2 的顶点代数公理）；
-  对接缺口收敛为第 0 步的那条 inferred 桥（物理 :e: ↔ VOA 𝒴(e)），不再是独立缺口。
+  在 VOA 侧这个展开正是 𝒴(e^{nk},z) 的定义（Li–Wang (3.10)）；
+  对接缺口收敛为第 0 步的那条桥
+  worldsheet.physical-exponential-equals-voa-vertex-operator，不再是独立缺口——
+  **但那张卡是 physical-argument，所以这个缺口是「被命名并显式记账」，不是「被消除」。**
 
-  **status 判断**：两条非 inferred 依赖 effective 均 ≥ rigorous（分别为 rigorous 与 formalized）。
-  唯一 inferred 桥的合理性由 GN (3.1) ε(mk,nk)=1 逐字支撑（秩 1 类光 cocycle 平凡），
-  但「物理 :e: 与 VOA 𝒴(e) 是同一算子」无单条来源逐字断言 ⟹ 保持 inferred。
-  此 inferred 桥属于「记号/字典层面的等同」而非实质数学内容，且 GN §3.1 整段就在 VOA 框架里
-  把横向 DDF 写成留数=零模=模态和，本身即是对该等同的隐含使用。
-  综合判断：**标 status: rigorous**，并把该 inferred 桥显式记账，交 reviewer 复核。
-  若 reviewer 认为 inferred 桥本身不够强，可降为 physical-argument，理由见 note。
+  **status 判断（2026-09-15 重建模后）。**
+  · **own status 仍是 rigorous**，且这一条未变：本推导第 1–3 步的论证
+    （形式留数 = 取 z^{−1} 系数；横向性 ⟹ 无奇异 ⟹ 普通积 = 正规序积；
+    正规性公理 ⟹ 卷积逐向量有限；零模 = 卷积模态和）全部落在带编号的定义/定理上
+    （Schottenloher Def 10.1/10.9/Thm 10.10(N=0)、Bakalov–Kac (2.22)、GN (2.32)/(3.2)/(3.3)），
+    全程形式级数、无收敛性假设。**这些步骤本身确实是严格的。**
+  · **effective 是 physical-argument**，因为依赖里有一条 physical-argument 的显式桥
+    （worldsheet.physical-exponential-equals-voa-vertex-operator）。
+    这**不是**对上述论证的否定，而是「严格的推理作用在一个尚未严格建立的前提上」
+    的正确记账方式。
+  · **为什么不再用 inferred flag**：graph-reviewer 与 lead 于 2026-09-15 裁定，
+    把这条无源的实质识别藏进 inferred flag 是**虚高**——
+    tools/stringgraph/propagate.py 的 `_combine_deps` 只看依赖的 effective level，
+    两端都 rigorous 时 flag 被忽略，于是它既承重又对 `uv run stringgraph why` 不可见。
+    提成节点后它正常沿图传播，`why worldsheet.ddf-contour-equals-mode-sum` 能指名它。
+  · **本推导现在没有任何 inferred 边。**
 
   **保留的真限制**：gap #2（围道语义，形式留数 vs 真实积分）与 gap #6（k_0·p=0 扇区不覆盖）不变。
+notes: |
+  【2026-09-15 重建模：inferred flag ⟹ 显式桥节点（lead + graph-reviewer 裁决）】
+  本推导首版（提交 4f46fde）把「物理 :e^{i n k_0·X(z)}: = VOA 𝒴(e^{n k_0}, z)」
+  写成对 worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower 的一条
+  `inferred: true` 边，并标 status: rigorous，使目标卡 effective 升为 rigorous。
+  **graph-reviewer 与 lead 裁定这是虚高**，理由是工具层面的：
+  `tools/stringgraph/propagate.py` 的 `_combine_deps` 只按依赖的 **effective level** 取下界，
+  **不读 `inferred` 字段**（`inferred` 只在 validate 的「每条边要有来源」检查与 report 的
+  inferred-edge 清单里出现）。于是当依赖两端都是 rigorous 时，inferred flag
+  对状态传播**完全无影响**——这条无源的实质识别既承重，又对
+  `uv run stringgraph why worldsheet.ddf-contour-equals-mode-sum` 不可见。
+
+  修正办法**不是**降本推导的 own status（第 1–3 步的论证确实严格，降它等于谎报另一个方向），
+  而是把那条命题提成显式节点 worldsheet.physical-exponential-equals-voa-vertex-operator
+  并给它一条诚实的 physical-argument 推导。结果：
+  · 本推导 own = rigorous（不变），effective = physical-argument（由桥节点传播）；
+  · 目标卡 worldsheet.ddf-contour-equals-mode-sum 的 effective 回到 physical-argument；
+  · `why` 树能**指名**桥节点为瓶颈，旗舰链的回译审计看得见它。
+
+  【一般教训（建议 lead 考虑写进 graph/CLAUDE.md）】
+  `inferred: true` 的正确用法是标「**这条边的论证**在来源里找不到，但被依赖的**命题本身**
+  是图内已有节点」。若那条边实际携带一条**图外的、尚无节点的实质命题**，
+  正确做法是把那条命题立成节点。否则该命题会被 flag 掩盖：
+  它既不进 `why` 的瓶颈树，也不进 `status` 的 conjectures 集合。
+  本推导首版就是后一种误用的实例。
+
+  【本推导与旧 physical-argument 推导的分工（不变）】
+  worldsheet.ddf-contour-equals-mode-sum--via-laurent-coefficient-extraction 保留不动，
+  它锚定**文献的围道写法**（goddard-2008 (5.1)–(5.3) 逐字）；
+  本推导锚定 **VOA 侧**的 GN (3.2)–(3.3)。两条推导并存，卡的 effective 取 max。
+  重建模后两条的 effective 都是 physical-argument，但瓶颈不同：
+  旧推导的瓶颈是它自身的 status（重排无严格承载），本推导的瓶颈是桥节点（有源可查的待办）。
+  **本推导仍是更有价值的那条**：它把缺口从「五处 gap」收敛成「一条具名命题」。
 author: curator
 created: "2026-09-15"
