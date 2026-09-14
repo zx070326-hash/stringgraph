@@ -1,0 +1,36 @@
+id: holography.dvv-wall-crossing-identification
+kind: proposition
+title: 识别②：DVV 围道选择等价于模空间壁穿越
+statement: |
+  在 N=4 弦论（type II on K3×T²）的 1/4-BPS dyon 计数中，
+  DVV 生成函数 1/Φ₁₀(Ω) 的傅里叶展开依赖积分围道（在 Siegel 上半空间对
+  ρ,σ,v 虚部路径的选取）；不同围道给出不同 chamber 中的 dyon 指标 d(m,n,l)。
+  具体地：
+  (a) 当积分围道穿越 Φ₁₀ 的极点超平面
+      {m'ρ + n'σ + l'v ≡ 0 (mod ℤ)}（m',n',l'∈ℤ，gcd=1，4m'n'−l'²=1）
+      时，d(m,n,l) 的跳变由该极点处的留数给出，
+      Δd = (−1)^{Q·P+1} (Q·P) · d_{1/2}(Q²/2) · d_{1/2}(P²/2)，
+      其中 d_{1/2}(k) 是电荷平方 2k 的 1/2-BPS 态指标；
+  (b) 这一围道跳变被识别为弦论模空间中的**壁穿越**：荷向量 (Q,P) 的 1/4-BPS dyon
+      的边缘稳定壁（1/4-BPS 态分裂为两个 1/2-BPS 态处），与 Φ₁₀ 极点超平面一一对应。
+uses:
+  - holography.igusa-cusp-form-phi10
+  - holography.phi10-wall-crossing-poles
+  - holography.dvv-dyon-index-generating-function
+uses_conventions: []
+sources:
+  - ref: sen-2007-wall-crossing
+    loc: "§2–§3, wall crossing formula and contour identification"
+  - ref: denef-moore-2007
+    loc: "§2, §5, split states and wall crossing in N=4 context"
+  - ref: dijkgraaf-verlinde-verlinde-1997
+    loc: "§4, discussion of contour dependence"
+notes: |
+  **严格度：physical-argument（识别②）。**
+  留数跳变的数学计算（(a)）是严格复分析，依赖 holography.phi10-wall-crossing-poles。
+  但"围道选择 = 模空间壁穿越"（(b)）是物理识别：将数学积分围道的选取与弦论模参数空间
+  中的 BPS stability chamber 对应，依赖超引力 BPS 解的分析（Denef-Moore）和 S-对偶论证
+  （Sen），不是纯数学推论。
+  与 holography.dvv-dyon-index-generating-function（识别①）合用，共同构成"dyon 指标
+  随 chamber 变化"的物理论证。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, physical-identification]
