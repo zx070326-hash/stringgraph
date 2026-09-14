@@ -1,0 +1,133 @@
+id: worldsheet.physical-exponential-equals-voa-vertex-operator--via-cocycle-triviality
+target: worldsheet.physical-exponential-equals-voa-vertex-operator
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: worldsheet.free-boson-vertex-algebra-with-lightlike-momentum-tower
+    inferred: false
+    note: |
+      提供 VOA 侧的全部结构：V_(𝔥, Z k) = ℂ_ε[Z k] ⊗ M(1) 是顶点代数，
+      动量塔 ⊕_j F(p + j k_0) 是它的（不可约）模（Li–Wang Theorem 3.6 / Def 3.5）。
+      **该卡 (1) 已逐字做出本推导断言 (1) 的计算**：⟨jk, j'k⟩ = j j' · 2α' k_0² = 0，
+      故 ε ≡ 1 满足 (3.6)–(3.8)，ℂ_ε[L] = ℂ[L]。
+      ⚠ 该卡边界 (N6) **逐字排除**本卡的断言 (2)，故它只承载前置，不承载结论。
+  - id: math.lattice-vertex-algebra
+    inferred: false
+    note: |
+      VOA 侧算子 𝒴(e^{n k_0}, z) 的定义来源：(3.9) V_(𝔥,L) := ℂ_ε[L] ⊗ M(1)、
+      (3.10) Y(e^α ⊗ u, x) 的显式公式，以及 ε 的三条条件 (3.6)–(3.8)。
+      该卡正文逐字记「某些特例下 ε 可取为常值 1（例如 ⟨·,·⟩|_L ≡ 0 时），
+      但那是特例的性质，不是本命题的内容」——本推导断言 (1) 正是那个特例，
+      故这条边承载「ε ≡ 1 合法」这一半，**不**承载「物理 :e: = 𝒴(e)」那一半。
+  - id: worldsheet.exponential-vertex-operator-modes
+    inferred: false
+    note: |
+      物理侧算子 :e^{i n k_0·X(z)}: 的振子部分的定义（E₋E₊ 拆分，z^K-系数约定，
+      Lean `Fock.vertexOsc`）。本推导断言 (2) 的左端由这张卡 + 零模移位给出。
+      ⚠ 该卡边界 (e) **逐字排除**本卡的内容：「不断言本卡的 V 与文献围道写法下的
+      顶点算子是同一个对象」，并点名这属于 ddf-contour-equals-mode-sum 所处理的同一类问题。
+  - id: worldsheet.momentum-tower-fock-space
+    inferred: false
+    note: |
+      物理侧的零模那一半：塔上的移位算子 e^{i n k_0·x}（该卡 (1) 的 S_n），
+      与 VOA 侧 𝒴(e^{nk}, z) 的零模给出的移位 j ↦ j + n 相对应
+      （free-boson 塔卡 (3)(iii) 逐字指出这两个移位是同一个）。
+sources:
+  - ref: gebert-nicolai-1995
+    loc: "§3.1 'DDF vertex operators', 刊 p.593, eq. (3.1)（ε(mk, nk) = 1）"
+    note: |
+      **断言 (1) 的逐字来源。L1↩（gsw-1987-v1.md §4 E15 标「[L1 已核实]」；
+      本轮未重开刊 p.593 页图复核）。**
+      GN 在秩 1 类光设定下逐字写 ε(mk, nk) = 1，其后 (3.2)/(3.3) 直接用 𝒴(e^{mk}, z)
+      做 DDF 构造而不带任何 cocycle 因子。
+      ⚠ **不承载断言 (2)**：GN 全程在顶点代数框架内工作，从不写物理正规序指数 :e^{ik·X}:，
+      也从不做物理侧 → VOA 侧的翻译。
+  - ref: li-wang-2008
+    loc: "(3.6)–(3.8)（ε 的三条条件）, p.12；(3.9)/(3.10), p.12"
+    note: |
+      **ε ≡ 1 合法性的判据来源。L1↩（math-sources.md §36.3）。**
+      本推导只需验证常值 1 满足 (3.6)(3.7)(3.8)，其中 (3.8) 的右端
+      (−1)^{⟨α,β⟩} 在 ⟨·,·⟩|_L ≡ 0 时为 1——两行初等计算。
+      ⚠ **不承载断言 (2)**：Li–Wang 不写任何物理记号。
+  - ref: polchinski-1998-v2
+    loc: "§10.4 末, eq. (10.4.26)–(10.4.28), pp.19–20"
+    note: |
+      **对照，不承载论证。** 物理侧一般格的 cocycle 因子 C_k(α_0)，
+      说明「没有 cocycle 时朴素指数算子的统计不正确」，反衬秩 1 类光是特例。
+      与 GN/Li–Wang 的 ε(α,β) 之间的记号换算本图未做
+      （worldsheet.vertex-operator-cocycle 的公开问题 Q1–Q3）。
+summary: |
+  两段论证，强度不同；整条按弱的那段记账。
+
+  **第 1 段（有来源、初等）：秩 1 类光 ⟹ cocycle 平凡。**
+  对 α = m k、β = n k ∈ L = Z k（k = (2α')^{1/2} k_0，k_0² = 0）：
+    ⟨α, β⟩ = m n ⟨k, k⟩ = m n · 2α' k_0² = 0 。
+  代入 Li–Wang 的三条条件：(3.6) ε(α,0) = ε(0,α) = 1 对常值 1 平凡成立；
+  (3.7) 结合律对常值 1 平凡成立；(3.8) ε(α,β)ε(β,α)^{−1} = (−1)^{⟨α,β⟩} = (−1)^0 = 1
+  对常值 1 成立。故 ε ≡ 1 是合法的 cocycle，扭群代数退化为普通群代数
+  ℂ_ε[L] = ℂ[L] = ℂ[Z k]，且 (3.10) 里的 x^{⟨α,β⟩} = x^0 = 1。
+  Gebert–Nicolai (3.1) 在同一设定下**逐字**写出 ε(mk, nk) = 1，与此一致。
+  **这一段本身够 rigorous**（有 L1 来源 + 两行初等计算 + 图内 rigorous 依赖）。
+
+  **第 2 段（无来源，本推导的实际弱点）：两套算子相同。**
+  第 1 段消掉了 cocycle 这一个**已知的**障碍，于是 VOA 侧的 𝒴(e^{n k_0}, z) 与物理侧的
+  :e^{i n k_0·X(z)}: 在「形状」上一致：两者都是（零模移位）×（E₋ 型产生指数）×（E₊ 型湮灭指数），
+  Li–Wang (3.10) 里的 E^-(−α, x) 与 Δ̄(α, ±x) 正对应物理侧的两半，
+  x^{⟨α,β⟩} 对应物理侧的单值因子 z^{2α' n k_0·(p+Nk_0)}（由 k_0² = 0 与整性条件 (I) 等于 z^n）。
+  **但「形状一致」不等于「是同一个算子」**，还差两条实质接缝：
+  · **连续 ↔ 离散**：物理侧的塔以连续动量 p 为基点（横向/纵向分量连续，只有 2α' k_0·p 受整性约束），
+    Li–Wang 的 V_(𝔥,L) 建在离散格 L = Z k 上；两者相接靠「p 固定、沿 k 离散」这一取法，
+    该取法的算子层面忠实性本图无来源。
+  · **δ-归一化**：物理侧 ⟨p|p'⟩ = δ^D(p−p') 型归一化与 VOA 侧 e^{jk} 的基元归一化差一个标度；
+    这是约定对齐，不是被构造出来的等式（free-boson 塔卡边界 (N2)：Li–Wang 对任何型不置一词）。
+  这两条在物理与数学文献里都被当作「标准的、不值一提的」，但**本图查证后确认无单一来源逐字断言**
+  （GN 只在 VOA 内工作；Li–Wang 无物理记号；Polchinski 无 VOA 记号）。
+
+  **status 判断**：第 1 段 rigorous，第 2 段是「断言 + 骨架」（形状对应清楚，接缝只有断言）。
+  按 docs/STATUS_LEVELS.md 的「断言 + 骨架」档位（lead 2026-09-11 裁决）标 **physical-argument**，
+  **不**标 conjecture（结论在文献中并无争议，缺的是论证）。
+  按「一个节点一个命题」，本卡的命题是断言 (2)，故整条按第 2 段记账。
+gaps:
+  - |
+    **断言 (2) 无任何来源逐字断言。** 这是本推导的核心缺口，也是本卡存在的理由。
+    三类可能来源均已查过且均不承载：GN 1995 全程在顶点代数框架内（不写 :e^{ik·X}:）；
+    Li–Wang 2008 无物理记号；Polchinski §10.4 无 VOA 结构映射 𝒴。
+    候选未读来源见目标卡 notes【怎么把本卡升上去】(i)(ii)：frenkel-1985（内容 L0，OCR 失败）、
+    FLM 1988 Ch.8 / Frenkel–Ben-Zvi §5（定理号全 L0，math-sources.md §38.2）。
+  - |
+    **连续动量 Fock 表示与离散格 VOA 模的算子识别未成文。**
+    free-boson 塔卡 (3)(iv) 由 Li–Wang (3.17) 解决了「p 可以连续取值」的**模分类**问题，
+    但那是「哪些不可约模存在」，不是「物理侧那个具体写出来的算子等于 VOA 侧那个」。
+    两者差一层：前者是存在性/分类，后者是逐个算子的识别。
+  - |
+    **δ-归一化是约定而非构造。** 物理侧动量本征态的 δ-归一化在代数 Fock 空间上
+    根本没有定义（worldsheet.momentum-tower-fock-space 的型是「约定式」的），
+    故「两侧归一化相容」这句话在本图里目前只能是记号对齐。
+  - |
+    **Polchinski 的 C_k(α_0) 与 Li–Wang 的 ε(α,β) 之间的记号换算本图未做。**
+    worldsheet.vertex-operator-cocycle 的公开问题 Q1–Q3（Vol.1 §8.4 的 k∘k′、(8.2.22)、
+    n_α 与 α_{0β} 的含义）全部未解决，故本推导**不**引用那张卡作为依赖，
+    只在 sources 里作对照。若日后 Q1–Q3 解决，可考虑把两套 cocycle 记号接起来。
+  - |
+    **不覆盖 k_0·p = 0 的扇区**（含 p = 0）：那里整性条件 (I) 的取法与塔的构造都失效，
+    与 worldsheet.ddf-contour-equals-mode-sum 的同名缺口是同一条。
+  - |
+    **GN §3.1 (3.1) 的 L1 是转引**（gsw-1987-v1.md §4 E15 标「[L1 已核实]」，
+    本轮未重开 pure.mpg.de/rest/items/item_153125_1/component/file_153124/content
+    读刊 p.593 页图复核）。若 auditor 要求，应重开复核。
+notes: |
+  【本推导为什么不是 rigorous】
+  rigorous 的例外条款要求「前提完整 + 有限步初等计算 + reviewer 已独立复核并记录」。
+  第 1 段满足，第 2 段**前提不完整**（连续 ↔ 离散、δ-归一化两条接缝无来源），
+  故例外条款不适用。若只看第 1 段，本推导可以 rigorous——但那样就是把本卡的命题
+  偷换成断言 (1)，违反「一个节点一个命题」。**若 lead/reviewer 认为值得，
+  可以另立一张只讲断言 (1)（秩 1 类光 ⟹ ε ≡ 1）的 rigorous 卡**；
+  curator 判断不必：free-boson 塔卡 (1) 已经把那个计算写进正文了。
+
+  【本推导的下游】worldsheet.ddf-contour-equals-mode-sum--via-voa-residue 把本卡列为
+  **非 inferred** 依赖。那条推导自身 status 是 rigorous（GN (3.2)–(3.3) 的留数演算确实严格），
+  但经本卡传播后 effective 落到 physical-argument。**这是刻意的**：
+  旗舰链 worldsheet.no-ghost-theorem-v4 的回译审计要看到这一条瓶颈，
+  而不是被一个 inferred flag 掩盖（见目标卡 notes 的 lead + graph-reviewer 裁决）。
+author: curator
+created: "2026-09-15"

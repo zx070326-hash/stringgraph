@@ -269,9 +269,36 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     # 手写递推 --via-oscillator-recursion 保留并存）。本断言随之更新。
     # 无鬼定理 v4 的 effective **不变**（仍 rigorous，由自身 status 与 kac-determinant 一支决定）。
     assert effs["worldsheet.transverse-ddf-fock-gram-matrix"].name == "formalized"
+    # 2026-09-15（分支 agent/curator/ddf-contour-rigorous）：新增推导
+    # --via-voa-residue（own status: rigorous），依据 Gebert–Nicolai 1995 §3.1 (3.2)–(3.3)
+    # 逐字把横向 DDF 写成 Res_z[ξ(z)𝒴(e^{mk},z)] = 零模，配合 Schottenloher Ch.10
+    # Def 10.1/10.9/Thm 10.10(N=0) 与 Bakalov–Kac (2.22)。
+    #
+    # ⚠ 同日 graph-reviewer + lead 裁定首版的 effective=rigorous **虚高**并要求重建模：
+    # 首版把「物理 :e^{ink_0X}: = VOA 𝒴(e^{nk},z)」这条**无源的实质识别**藏在一条
+    # `inferred: true` 边里。但 propagate.py 的 _combine_deps 只按依赖的 effective level
+    # 取下界、**不读 inferred 字段**，故依赖两端都 rigorous 时该 flag 对传播毫无影响——
+    # 这条识别既承重又对 `why` 不可见。
+    # 修正不是降 own（第 1–3 步的留数演算确实严格），而是把它提成显式节点
+    # worldsheet.physical-exponential-equals-voa-vertex-operator（physical-argument：
+    # cocycle 平凡有 GN (3.1) 逐字来源，但两套算子的识别无来源，且跨连续动量↔离散格、
+    # δ-归一化两条接缝）。于是 effective **诚实落回 physical-argument**。
     assert (
         effs["worldsheet.ddf-contour-equals-mode-sum"].name == "physical-argument"
     )
+    # 桥节点本身：显式、可被 why/report 看见，而不是藏在 flag 里
+    assert (
+        effs["worldsheet.physical-exponential-equals-voa-vertex-operator"].name
+        == "physical-argument"
+    )
+    # --via-voa-residue 的 own 仍是 rigorous，但 effective 被桥节点压到 physical-argument。
+    # 这正是「严格的推理作用在尚未严格建立的前提上」的正确记账。
+    voa = g.derivations["worldsheet.ddf-contour-equals-mode-sum--via-voa-residue"]
+    assert voa.status == "rigorous"
+    assert not any(d.inferred for d in voa.depends_on)
+    assert "worldsheet.physical-exponential-equals-voa-vertex-operator" in {
+        d.id for d in voa.depends_on
+    }
     gt = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert "worldsheet.ddf-contour-equals-mode-sum" not in {d.id for d in gt.depends_on}
     # 旧卡保留其历史推导（--via-vertex-operator-adjoint 已改名改指 v2），
