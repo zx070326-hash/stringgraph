@@ -1,0 +1,61 @@
+id: holography.mock-jacobi-coefficient-positivity--via-bringmann-murthy-rossello
+target: holography.mock-jacobi-coefficient-positivity
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.dmz-mock-jacobi-decomposition
+    inferred: false
+    note: "系数 c_m^F(n,ℓ) 的定义域即 DMZ 典范分解给出的有限部 ψ_m^F（吸引子围道定义 d_∗ 时也从此分解出发）；两篇文献都以该分解定理及其收敛的整值 Rademacher 展开为出发点"
+  - id: holography.igusa-cusp-form-phi10
+    inferred: true
+    note: "推广步（Cor 1.1）依赖 Φ₁₀ 属于 Sp(4,ℤ) 权 10 尖点形式这一事实：(1) d_∗ 的吸引子围道在 SL(2,ℤ)⊂Sp(4,ℤ) 下的不变性由 Φ₁₀ 的 Sp(4,ℤ) 模性 + 围道定义保证（Rosselló §2 'It follows from the definition of the contour'）；(2) 进一步扩到 GL(2,ℤ) 的依据是 Φ₁₀ 偶权（原文 §3.1 'notice that the Igusa cusp form has even weight'）。这两步在 Rosselló 中是断言（以既有背景结果援引），非本文分步重证；图中最近的数学载体是 holography.igusa-cusp-form-phi10（status: rigorous，包含 Φ₁₀∈M_10(Sp(4,ℤ)) 偶权的陈述）。因找不到 Rosselló 原文中对这一步的明确逐步证明，标 inferred: true"
+sources:
+  - ref: rossello-2024
+    loc: "Thm 1（§1 eq.1.5: m>0, n≥m, 0≤ℓ≤m ⇒ (−1)^{ℓ+1}c_m^F(n,ℓ)>0）；§2 式(2.36) Rademacher 展开、Lemma 2–3、Prop. 2、Lemma 7；§3（m≥6 一般证明）；Appendix A（m=3,4,5 显式）；Cor 1.1（eq.1.6: m,n≥1, Δ>0, gcd=1 ⇒ d_∗>0）；§2.2 (2.22)–(2.23)（d_∗ 吸引子围道积分定义）；§3.1（推广步：'S-duality invariance of the single centered degeneracies'，'the Igusa cusp form has even weight'）"
+    note: "m≥3 由本文证明；m=1,2 引 Bringmann-Murthy [30]"
+  - ref: bringmann-murthy-2012
+    loc: "主定理：指标 m=1,2（对这两个 m 覆盖全部 Δ=4mn−ℓ²>0，含小判别式）；Hardy–Ramanujan–Rademacher 圆法 + Kloosterman 和估计"
+    note: "定理编号未从原文独立核到（PDF 压缩流）；Rosselló 2024 逐字引用为 'The cases m=1,2 of this theorem were proved in [30]'"
+summary: |
+  纯数学（解析数论）证明，两步结合：
+
+  **步骤 1：代表元范围内的符号估计（Theorem 1，m>0, n≥m, 0≤ℓ≤m）**
+  把 c_m^F(n,ℓ) 写成精确收敛的 Rademacher 展开（Rosselló 式 2.36）：修正 Bessel 函数
+  I_{23/2}, I_{12}, I_{25/2} × 广义 Kloosterman 和（theta 乘子系）× 极系数（Δ̃<0）之和。
+  其中 γ=1、ℓ̃=m 的非-mock 项 Kloosterman 和退化为 (−1)^ℓ/√(2mi)，给出符号为 (−1)^{ℓ+1}
+  的无条件正主项（式 3.5）；Lemma 2 把 mock 贡献（C_{12}, C_{25/2}）对主项定界
+  （5×10⁻⁴、0.015），Lemma 3 用连分数结构（式 2.43）+ d(n) 的 Rademacher 型界（Prop. 2）界住
+  极系数，Lemma 7 组装得 m≥6 为正；m=3,4,5 由 Appendix A 显式验证；m=1,2 由
+  Bringmann–Murthy 2012（对这两个 m 覆盖全部 Δ>0）覆盖。
+  在代表元范围内（ℓ≤m≤n，故 ℓ<2m 且 ℓ<2n），多心黑洞留数为零，故
+  d_∗(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ) > 0。
+
+  **步骤 2：GL(2,ℤ) 约化推广到全范围（Corollary 1.1）**
+  目标：对所有 m,n≥1、Δ=4mn−ℓ²>0、gcd(m,n,ℓ)=1 证明单心指标 d_∗(m,n,ℓ) > 0。
+  Rosselló §3.1 逐字："Since the single centered degeneracies are S-duality invariant, it is enough
+  to prove the positivity for the representatives of one S-duality equivalence class ... Furthermore,
+  since the invariance group can be enlarged to GL(2,ℤ) (notice that the Igusa cusp form has even
+  weight), it is enough to prove it for charge configurations satisfying n≥m, 0≤ℓ≤m."
+  逻辑：(i) d_∗ 在 SL(2,ℤ) 下不变——归因于 Φ₁₀ 的 Sp(4,ℤ) 模性 + 吸引子围道协变
+  （§2 断言"follows from the definition of the contour"，既有背景结果，非本文分步证明）；
+  (ii) 从 SL(2,ℤ) 扩到 GL(2,ℤ)——Φ₁₀ 偶权（Igusa §1 基本性质）保证反射对称；
+  (iii) 正定二元二次型（Δ>0 ⟺ 正定）的 GL(2,ℤ) Gauss 约化把任意三元组化到代表元 n≥m、0≤ℓ≤m，
+  然后由步骤 1 d_∗>0 推出全域结论。
+  **这两步均为数学推论，弦物理对偶未作证明前提**（Rosselló 用"S-duality invariance"是物理术语，
+  逻辑依据是 Φ₁₀ 模性和围道定义，见 extractions/rossello-2024.md R2–R4）；故整体 status: rigorous。
+  步骤 (i) 的来源是断言+引用而非本文原证，在 depends_on 中以 igusa-cusp-form-phi10 标 inferred 记录。
+
+  **步骤 2 的陈述对象是 d_∗，不是 c_m^F**：离开代表元范围 c_m^F 可取负值（Rosselló §2.2
+  反例 (m,n,ℓ)=(10,1,6)：(−1)^7 c_10^F(1,6) < 0；减多心留数后 d_∗(10,1,6)=50064>0）。
+notes: |
+  **修正 1 记录（task #20 coord message，2026-09-15）**：前版 (b) 把 d_∗ 定义为
+  "(−1)^{ℓ+1} c_m^F(n,ℓ)"并说全范围为正，与 Rosselló §2.2 (2.34)–(2.35) 的反例矛盾；
+  已订正：(b) 的对象是吸引子围道积分 d_∗（eq. 2.22–2.23），仅在代表元范围与带符号 c_m^F 相等。
+
+  **修正 2 记录（task #20 coord message，2026-09-15）**：前版推广步来源记为"Φ₁₀ Sp(4,ℤ) 模性诱导的
+  GL(2,ℤ) 算术作用"，但 Rosselló 实际是断言 + 援引背景结果。已在 depends_on 加
+  holography.igusa-cusp-form-phi10（inferred: true）以诚实记录这一步的数学根据，
+  并在 summary 中区分"Rosselló 原文断言（步骤 2(i)）"与"本文 §3 完整论证（步骤 1、步骤 2(ii)(iii)）"。
+  (b) 仍记 rigorous：d_∗ 的不变性是数学推论（Φ₁₀ 偶权 + 围道定义），弦对偶仅是物理动机。
+author: graph-curator
+created: "2026-09-14"

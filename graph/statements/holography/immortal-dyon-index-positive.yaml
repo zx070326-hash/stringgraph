@@ -14,20 +14,31 @@ uses:
 uses_conventions: []
 sources:
   - ref: rossello-2024
-    loc: "主定理（所有 d>0，gcd=1 的情形），引言比较讨论"
+    loc: "Theorem 1 + Corollary 1.1（数学正性：全部 m,n≥1、Δ=4mn−ℓ²>0、gcd=1）；§1（immortal/单心指标的界定与 hair-mode 分解假设）"
   - ref: bringmann-murthy-2012
-    loc: "主定理（充分大判别式情形，圆法 + Kloosterman 估计）"
+    loc: "主定理：mock Jacobi 形式指标 m=1,2 的情形（对这两个 m 覆盖全部 Δ>0，含小判别式）；圆法 + Kloosterman 和估计"
+  - ref: dabholkar-murthy-zagier-2012
+    loc: "§1–§2、§6（识别③：有限部 φ_F 的系数 = 单心 dyon 指标，'the finite part conjecture'）"
 notes: |
-  **数学部分：rigorous。**
-  两篇文献合并覆盖全部情形：
-  - Bringmann-Murthy 2012（rigorous）：用解析数论方法（圆法 + Kloosterman 和估计）
-    对充分大的判别式 d 证明正性；方法完全在 mock 模形式/分析数论框架内。
-  - Rosselló 2024（rigorous）：对**所有** d>0，gcd=1 的情形（包括小判别式）证明正性，
-    方法不同于 BM 2012（具体技术细节待核实，见 rossello-2024 抽取记录疑问 1）；
-    完全关闭 Sen positivity 猜想在 N=4 旗舰情形的所有剩余情形。
-  物理意义层：d_F(m,n,l)>0 的"物理解读"为对应黑洞微观简并度正性（Sen 猜想的内容），
-  依赖识别③（holography.dmz-single-center-identification，physical-argument）；
-  但正性本身的数学命题（mock Jacobi 系数 d_F>0）是纯数学结果。
-  本节点的有效状态由推导的最低状态决定：数学证明为 rigorous，但若将物理识别③链入，
-  有效状态降为 physical-argument（由图工具自动传播）。
+  **本卡是物理命题，有效状态 physical-argument。**
+  纯数学的系数正性已独立成卡：holography.mock-jacobi-coefficient-positivity（rigorous）。
+  本卡比它多一步物理识别③（holography.dmz-single-center-identification，physical-argument），
+  即"d_F(m,n,l) = immortal（单心）dyon 的螺旋超迹"；故本卡的推导
+  holography.immortal-dyon-index-positive--via-bringmann-murthy-rossello 是 physical-argument。
+
+  两篇数学文献的覆盖范围（task #17 核实订正，见 extractions/）：
+  - Bringmann-Murthy 2012（rigorous）：mock Jacobi 形式**指标 m=1,2**（对这两个 m 覆盖全部
+    Δ=4mn−ℓ²>0，含小判别式），方法为圆法 + Kloosterman 和估计。
+    **订正**：原写"对充分大的判别式 d"不准确——BM 的分界线是指标 m，不是判别式大小。
+  - Rosselló 2024（rigorous）：Theorem 1（代表元范围 n≥m、0≤ℓ≤m 的 (−1)^{ℓ+1} c_m^F(n,ℓ)>0，
+    m≥3 由本文证明：§3 一般 m≥6、Appendix A 显式 m=3,4,5）+ Corollary 1.1（GL(2,ℤ) 不变性
+    推广到全部 m,n≥1、Δ>0、gcd=1）。方法：S-对偶（GL(2,ℤ)）约化 + Rademacher 展开 +
+    Kloosterman/Bessel 显式定界；**纯数学，无物理前提**（extractions/rossello-2024.md E4）。
+    两篇合并关闭 Sen positivity 猜想在 N=4 旗舰情形（K3×T²）的全部情形。
+  符号：Rosselló 的正性含因子 (−1)^{ℓ+1}；本卡正文沿用 DMZ/Sen 的指标记号 d_F，
+  两者在单位挠约定下一致（细节见 mock-jacobi-coefficient-positivity）。
+
+  历史：本卡原先只挂一条 depends_on 为 DMZ 分解定理、status: rigorous 的推导，
+  等于把纯数学命题冒充为本卡的物理命题，造成有效状态虚高；task #20（2026-09-14）已按
+  本 notes 早先的预告拆分并链入识别③，工具计算结果降为 physical-argument。
 tags: [bh-entropy, mock-modular, n4-string-theory, cartography, sen-positivity]
