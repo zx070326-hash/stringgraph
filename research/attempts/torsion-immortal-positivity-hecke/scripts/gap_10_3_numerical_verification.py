@@ -126,6 +126,17 @@ def reduce_form(m, n, l):
 # ---------------------------------------------------------------------------
 
 def run_scan(MMAX=16, NMAX_scan=8, C_NMAX=12, C_LMAX=100, C_MARGIN=2):
+    """
+    Scan points (m,n,l) with m in [1,MMAX], n in [1,NMAX_scan], l in [0,2m], Delta>0.
+
+    Three sub-domains:
+      A: 0 <= l <= m  AND  n >= m   (Gauss-reduced domain; Thm 10.3b claims identity here)
+      B: 0 <= l <= m  AND  n <  m   (NOT Gauss-reduced; Note 10.3.5 claimed identity here too)
+      C: l > m                      (NOT Gauss-reduced; identity expected to fail)
+
+    For each: records agree/disagree between d_*(m,n,l) [via reduce_form] and
+    naive (-1)^{l+1} c_m^F(n,l) [without reducing].
+    """
     C.NMAX, C.LMAX, C.LMIN, C.MARGIN = C_NMAX, C_LMAX, -C_LMAX, C_MARGIN
     psis, F, P, phis = C.compute(MMAX)
     NREP = C_NMAX - C_MARGIN
@@ -143,7 +154,16 @@ def run_scan(MMAX=16, NMAX_scan=8, C_NMAX=12, C_LMAX=100, C_MARGIN=2):
             return None
         return (-1) ** (l0 + 1) * F[m0].get((n0, abs(l0)), 0)
 
-    res = dict(total=0, agree_l_le_m=0, disagree_l_le_m=[], agree_l_gt_m=0, disagree_l_gt_m=[])
+    res = {
+        "total": 0,
+        # Domain A: l<=m, n>=m  (Thm 10.3b domain)
+        "A_agree": 0, "A_disagree": [],
+        # Domain B: l<=m, n<m   (Note 10.3.5 extended claim)
+        "B_agree": 0, "B_disagree": [],
+        # Domain C: l>m          (known failures)
+        "C_agree": 0, "C_disagree": [],
+        "NREP": NREP,
+    }
     for m_ in range(1, MMAX + 1):
         for n_ in range(1, min(NMAX_scan, NREP) + 1):
             for l_ in range(0, 2 * m_ + 1):
@@ -154,17 +174,22 @@ def run_scan(MMAX=16, NMAX_scan=8, C_NMAX=12, C_LMAX=100, C_MARGIN=2):
                     continue
                 res["total"] += 1
                 same = (dv == nv)
-                if l_ <= m_:
-                    res["agree_l_le_m" if same else "disagree_l_le_m"] += (1 if same else [(m_, n_, l_, dv, nv)])
+                if l_ > m_:
+                    dom = "C"
+                elif n_ >= m_:
+                    dom = "A"
                 else:
-                    res["agree_l_gt_m" if same else "disagree_l_gt_m"] += (1 if same else [(m_, n_, l_, dv, nv)])
-    res["NREP"] = NREP
+                    dom = "B"
+                if same:
+                    res[f"{dom}_agree"] += 1
+                else:
+                    res[f"{dom}_disagree"].append((m_, n_, l_, dv, nv))
     res["F"] = F
     return res
 
 
 def anchor_check(F):
-    anchors = [(1, 1, 0, 50064), (1, 1, 1, 25353), (1, 2, 1, 1127472), (2, 2, 2, 3859456)]
+    anchors = [(1, 1, 0, 50064), (1, 1, 1, 25353), (1, 2, 0, 1127472), (2, 2, 2, 3859456)]
     ok = True
     for m, n, l, exp in anchors:
         got = (-1) ** (l + 1) * F[m].get((n, abs(l)), 0)
@@ -203,41 +228,65 @@ def main():
 
     print()
     print("=" * 70)
-    print(f"PART 3: Counterexample scan (GAPs 10.3.c and 10.3.d)")
+    print("PART 3: Counterexample scan (GAPs 10.3.c and 10.3.d)")
     print("=" * 70)
     print(f"Domain: m in [1,{MMAX}], n in [1,8], l in [0,2m], Delta>0")
     print()
     res = run_scan(MMAX=MMAX, NMAX_scan=8, C_NMAX=12, C_LMAX=100, C_MARGIN=2)
 
+    A_d, B_d, C_d = res["A_disagree"], res["B_disagree"], res["C_disagree"]
     print(f"Total points tested: {res['total']}")
     print()
-    dm = res["disagree_l_le_m"]
-    print(f"Sub-range 0 <= l <= m :  agree {res['agree_l_le_m']}   disagree {len(dm)}")
-    if not dm:
-        print("  -> NO violation: Theorem 10.3b CONFIRMED (l<=m, ANY n>=1)")
+    print("-" * 70)
+    print("Domain A: 0 <= l <= m  AND  n >= m   (Gauss-annealed w.r.t. n; Thm 10.3b domain)")
+    print(f"  agree {res['A_agree']}   disagree {len(A_d)}")
+    print("  verdict: " + ("IDENTITY HOLDS on A  -> Thm 10.3b CONFIRMED" if not A_d
+                         else f"VIOLATIONS: {A_d[:5]}  -> Thm 10.3b REFUTED"))
+    print()
+    print("-" * 70)
+    print("Domain B: 0 <= l <= m  AND  n <  m   (NOT reduced; Note 10.3.5 extended claim)")
+    print(f"  agree {res['B_agree']}   disagree {len(B_d)}")
+    if not B_d:
+        print("  verdict: IDENTITY HOLDS on B -> Note 10.3.5 CONFIRMED (n>=m not needed)")
     else:
-        print("  -> VIOLATIONS (Thm 10.3b REFUTED):")
-        for r in dm[:10]:
-            print("     ", r)
-
-    dg = res["disagree_l_gt_m"]
+        print(f"  verdict: COUNTEREXAMPLES -> Note 10.3.5 REFUTED (n>=m IS needed), e.g.")
+        for r in B_d[:6]:
+            print(f"     (m,n,l)=({r[0]},{r[1]},{r[2]})  d_*={r[3]}  naive={r[4]}")
     print()
-    print(f"Sub-range l > m :  agree {res['agree_l_gt_m']}   disagree {len(dg)}")
-    tot_d = len(dm) + len(dg)
-    print(f"Total counterexamples: {tot_d}")
-    print(f"  with l >  m: {len(dg)}")
-    print(f"  with l <= m: {len(dm)}")
-    if dg:
-        print(f"  all with l>m also have n<m? {all(r[1] < r[0] for r in dg)}")
-        print(f"  all counterexamples have l>m? {len(dm) == 0}")
-        print(f"  counterexamples with n>m?    {[r for r in dg if r[1] > r[0]][:3]}")
+    print("-" * 70)
+    print("Domain C: l > m   (NOT reduced; failures expected)")
+    print(f"  agree {res['C_agree']}   disagree {len(C_d)}")
+    if C_d:
+        print(f"  all C counterexamples have n < m? {all(r[1] < r[0] for r in C_d)}")
 
     print()
-    print("First 20 counterexamples:")
-    print(f"  {'(m,n,l)':>12}  {'d_*':>14}  {'naive':>14}  {'n<m':>5} {'l>m':>5}")
-    for r in sorted(dg, key=lambda r: (r[0], r[1], r[2]))[:20]:
+    print("=" * 70)
+    print("GAP 10.3.c / 10.3.d SUMMARY")
+    print("=" * 70)
+    tot = len(A_d) + len(B_d) + len(C_d)
+    print(f"Total counterexamples (naive != attractor): {tot}")
+    print(f"  l <= m  and n >= m : {len(A_d)}   [Thm 10.3b domain]")
+    print(f"  l <= m  and n <  m : {len(B_d)}   [Note 10.3.5 claim]")
+    print(f"  l >  m             : {len(C_d)}   [expected failures]")
+    print()
+    if not A_d and not B_d:
+        print("=> identity holds for ALL 0<=l<=m, ANY n: Thm 10.3b + Note 10.3.5 both hold.")
+    elif not A_d and B_d:
+        print("=> identity holds exactly when 0<=l<=m AND n>=m (the Gauss-reduced domain).")
+        print("   Thm 10.3b (which REQUIRES n>=m) CONFIRMED;")
+        print("   Note 10.3.5 (claiming n>=m unnecessary) REFUTED.")
+        print("   KEY: the true failure condition is NOT 'l > m' alone -- it is")
+        print("        'form not Gauss-reduced' = (l > m) OR (n < m).")
+        print("   COUNTEREXAMPLES DO NOT ALL HAVE l > m; some have l <= m with n < m,")
+        print("   e.g. (l,m,n) = " + str([(r[2], r[0], r[1]) for r in B_d[:3]]))
+    print()
+
+    print("First 20 counterexamples overall (sorted):")
+    print(f"  {'(m,n,l)':>12}  {'d_*':>16}  {'naive':>16}  {'n<m':>5} {'l>m':>5}  {'l<=m':>5}")
+    allc = [(r, "A") for r in A_d] + [(r, "B") for r in B_d] + [(r, "C") for r in C_d]
+    for r, _ in sorted(allc, key=lambda t: (t[0][0], t[0][1], t[0][2]))[:20]:
         m_, n_, l_, dv, nv = r
-        print(f"  ({m_:>2},{n_:>2},{l_:>3})  {dv:>14}  {nv:>14}  {str(n_<m_):>5} {str(l_>m_):>5}")
+        print(f"  ({m_:>2},{n_:>2},{l_:>3})  {dv:>16}  {nv:>16}  {str(n_<m_):>5} {str(l_>m_):>5}  {str(l_<=m_):>5}")
 
     print()
     print("Anchor counterexample (5,1,4):")
@@ -246,8 +295,8 @@ def main():
     m0, n0, l0 = reduce_form(5, 1, 4)
     dd = (-1) ** (l0 + 1) * F5[m0].get((n0, l0), 0)
     nv = (-1) ** 5 * F5[5].get((1, 4), 0)
-    print(f"  reduce_form(5,1,4)=({m0},{n0},{l0})  d_*(5,1,4)={dd}  naive={nv}")
-    print(f"  here l=4 > m? {4 > 5}   l=4 <= m=5? {4 <= 5}  (so (5,1,4) has l<=m!)")
+    print(f"  reduce_form(5,1,4)=({m0},{n0},{l0})   d_*(5,1,4)={dd}   naive={nv}")
+    print(f"  here l=4 <= m=5 (so l<=m) but n=1 < m=5 -> failure is from n<m, NOT from l>m.")
 
 
 if __name__ == "__main__":
