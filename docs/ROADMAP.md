@@ -4,7 +4,7 @@
 
 两条线并行推进（本节是给新 agent 的入口地图；权威进度在各 Phase 小节与各 `status.yaml`）：
 
-1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，N≤4 已闭。详见下方 Phase 1 进度日志。
+1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，**N≤5 已闭**（N=5 于 main：`DescendantKernel.lean` PR9a + `LevelFiveCount.lean` PR9b，`b26_five_of_D26` / `ddfSpans_bigrade_neg_five_five`，无 sorry）；**N=6 为当前前沿**（§B⁗.7：最便宜，p_D(−1)=0 故只需 B⁗.2 的 s=5 syzygy 对 (x₄,y₃)，要证 level-1 seed-membership τ₆=25，派工中）。详见下方 Phase 1 进度日志。
 2. **黑洞 / 原创证明线**（Phase 3 + `research/`）：N=4（type II on K3×T²）1/4-BPS 挠 dyon 免死指标。
    - **缝 A** `research/attempts/torsion-immortal-positivity-hecke`：state=**verified**（两条独立审查腿），`captain_confirmed=false`。Thm 6.1（挠 I>1 免死指标正性除子和，物理依赖压到单条前提 P′=DGM eq(52)）、Thm 4.1（吸引子围道协变性）、Prop 4.4（d_* 的 GL(2,ℤ) 不变性）已按 **physical-argument** 毕业进 `graph/statements/holography/`（commit 132120e）。**副产品**：DGM 0803.2692 eq(51)/(52) 互不相容（显式整数见证 I=2,(4,1,2)）——**这是对外声明，船长确认前不得公开宣称**（暂缓，等第三方交叉核）。
    - **缝 B** `research/attempts/bkm-shift-explanation`：state=draft。Prop B 从 Alexandrov–Nampuri eq(2.11)+(2.13) 初等推出半整平移 (d−1)/2（Lemmas B.1–B.3）。
