@@ -130,7 +130,9 @@ if __name__ == "__main__":
     print("(pointwise p-recursion from holomorphic phi_M; no |y|<1 vs |y|>1 choice)")
     print()
     cases = [
-        (1, 1, 0, "50064 reduced"),
+        # NB: l=0 has a pole at Re v=1/2 (|y|=1 on the shifted contour); this real
+        # Riemann sum does NOT converge for l=0 (K-dependent garbage below) -- expected.
+        (1, 1, 0, "50064 reduced -- l=0, DIVERGES here (pole at Re v=1/2)"),
         (1, 1, 1, "25353 reduced"),
         (2, 2, 2, "3859456 reduced"),
         (5, 1, 2, "185738352  (l^2=4<mn=5, identity holds)"),
@@ -140,10 +142,11 @@ if __name__ == "__main__":
         ev = PsiEvaluator(m, Nmax=8)
         print("-" * 72)
         print("  (m,n,l)=(%d,%d,%d)   expected %s" % (m, n, l, label))
-        for Lam in (0.30, 0.45, 0.60):
-            vals = []
-            for K in (64, 128):
+        # smaller Lam keeps |y|=e^{2*pi*l*Lam} moderate; large l needs small Lam
+        # or float cancellation swamps the Fourier extraction.
+        Lams = (0.12, 0.18) if l >= 3 else (0.20, 0.30)
+        for Lam in Lams:
+            for K in (128, 192):
                 val = dstar_honest(ev, n, l, Lam, K=K)
-                vals.append(val)
-                print("    Lam=%.2f K=%3d :  d_* = % 14.3f  %+.2e i"
+                print("    Lam=%.2f K=%3d :  d_* = % 16.3f  %+.2e i"
                       % (Lam, K, val.real, val.imag))
