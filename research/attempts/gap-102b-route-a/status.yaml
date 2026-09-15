@@ -1,0 +1,25 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-16（theorem-prover，本轮首次提交）。
+
+  已完成：
+  - claim.md 写就：委托书原始命题（0≤ℓ≤m）+ 修正命题 A（0<ℓ≤m）。
+  - 通过 WebFetch 下载 arXiv:0708.1270v4 PDF，用 Read 工具逐页核对 pp.159-169
+    （Appendix C 全文 + Appendix D 全文），拿到 eq (D.19) 逐字精确形式，
+    解决了此前抽取记录 sen-2008-precision-counting.md §S7 标记的
+    "本条公式是转述而非逐字引用"缺口。
+
+  进行中 / 待写 proof.md：
+  - Re(F)/Im(F) 在 attractor 点的精确（非渐近）分解已推导完毕（手算，待写入 proof.md）。
+  - ℓ 奇偶宇称论证（n₂=0 支）已推导完毕。
+  - ℓ=0 反例（围道恒过 v=0 零点，与 Λ 无关）已发现并验证。
+  - n₂=0, ℓ 偶, ℓ>0 情形：j=±1 排除的解析论证已推导完毕；一般 |j|≤2√(mn/Δ) 归约
+    已推导完毕；|j|≥3 情形留 [GAP]。
+  - n₂≠0 情形：仅完成初步的增长阶估计和"移位技巧"雏形，未闭合，留 [GAP]。
+
+  下一步：写 proof.md 正文，写数值验证脚本，更新上游 torsion-immortal-positivity-hecke
+  proof.md §10.5.4 的 Route A 条目（标记"部分进展"而非"已闭合"，因 n₂≠0 情形未解决，
+  且发现 ℓ=0 边界的反例需要上游 Theorem 10.5 的 0≤ℓ≤m 假设也做相应澄清）。
