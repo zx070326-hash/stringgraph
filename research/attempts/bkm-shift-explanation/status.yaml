@@ -74,6 +74,17 @@ notes: |
   - 遗留 TODO（不阻断 verified，交 prover/curator）：把 kawai-1997 eq(5.13)/(4.32) 引用接进
     proof.md §4/§7 正文并撤 [GAP-前提] 标注；GAP-BKM（F3）仍开放。
 
+  2026-09-15 (theorem-prover GAP-BKM S2+S3): S2 已证——Cartan 元素 H_r = f₃/2 ∈ M₁⊗ℚ ⊂ 𝔥
+  存在，由 GN1998 §5.1 Gram 矩阵（f₃,f₃）=2 直接推出 [H_r,e_{(n,l,m)}] = l·e_{(n,l,m)}；ω=exp(πi·ad(H_r))
+  阶恰为 2（由奇 l 根存在性，kawai-1997 eq.(4.32) c(−1)=2≠0 坐实）。S3 发现关键权重不匹配：
+  GN1998 代数 G 的分母函数是 ψ₅（权重 5），扭转分母 Den_ω = (−i)·ψ₅(τ,z+½,σ)，而 Φ₁₀ = ψ₅²
+  权重 10；原命题"Den_ω = C·Φ₁₀"权重差 5，不可能成立。正确等式为 Φ₁₀(τ,z+½,σ) = −Den_ω²。
+  故强命题原表述（Den_ω=C·Φ₁₀）对 GN1998 代数为假；代数侧与乘积侧通过 ψ₅² = Φ₁₀ 咬合。
+  proof.md §7 已更新：S1 标为已完成（GN1998 §5.1 抽取），S2 已证，S3 给出正确等式并诚实记录
+  原命题表述错误。[GAP-S2-ref] 仍需 Borcherds 1988 J.Algebra 定义号；[GAP-S3-扭转公式]
+  仍需 Borcherds 1992 Invent. Math. 定理号。不影响 state/verdict/captain_confirmed。
+  Commit: 8c3829a (branch agent/prover/bkm-shift-explanation)。
+
   2026-09-15 (theorem-prover): 开缝 B，claim.md 初稿。
   命题 B（(**) 式）可精确到完整严格证明：前提为 A-N eq(2.11)+(2.13)（文献逐字核实）
   加 Φ₁₀ 整周期性，推导为初等 Fourier 换元，无实质障碍。
