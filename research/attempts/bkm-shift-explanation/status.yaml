@@ -3,6 +3,11 @@ reviewer: "graph-reviewer(对抗审查 proof.md 逐引理,2026-09-15)=VERIFIED�
 verdict: "reviewer 对命题 B（(**) 式半整平移 Z_I=Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)）总裁定 VERIFIED：Lemma B.1（换元双射）、B.2（指数恒等式）、命题 B 第 1–5 步均 VERIFIED，无可构造反例。reviewer 设的唯一条件是两条 GAP-前提需逐字文献（A: Φ₁₀ 椭圆变量整周期性；B: Borcherds 乘积奇 ℓ 系数非零）——本轮由 researcher 腿以 Kawai hep-th/9710016 eq(5.13) 乘积式（每因子 y 指数为整数 r ⇒ 整周期性）与 eq(4.32) c(−1)=2≠0（判别式 −1，来自三元组 (0,1,1)，奇 ℓ=1 ⇒ 奇 ℓ 系数非零）逐字坐实，DMZ 1208.4074 eq(85) φ_{−2,1} 系数二重佐证。故 reviewer 的条件已满足，state draft→verified。**诚实边界（不得越界宣称）**：(1) proof.md §4/§7 正文仍带 [GAP-前提] 标注，待 prover/curator 把 kawai-1997 引用接进正文并撤标注（纯文档任务，不改数学）；(2) GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构的精确对应，F3）仍为开放问题，proof.md 已如实标注且明确不影响命题 B 严格性；(3) 命题 B 的物理前提根仍是 A-N eq(2.11)+(2.13)（文献逐字，非本尝试所证）——本尝试证的是「给定 A-N 两式 ⇒ 半整平移闭式」这一纯代数步。captain_confirmed 保持 false 待船长最终拍板。"
 captain_confirmed: false
 notes: |
+  2026-09-15 (船长决定 + lead): 缝B 推论 B1 涉及的 DGM eq(51)/(52) 差别——船长已确认该矛盾
+  **可对外声明**（见 memory / torsion 尝试 status）。另：reviewer 条件的两条 GAP-前提已由
+  kawai-1997 闭合，已派 theorem-prover 把引用接进 proof.md §4/§7 并撤 [GAP-前提] 标注
+  （GAP-BKM 仍开放）。captain_confirmed（命题 B）仍待船长 toggle。
+
   2026-09-15 (lead 汇总——reviewer 腿 + GAP-前提文献腿均返回，state draft -> verified):
   两条腿咬合闭环：graph-reviewer 对抗审查给命题 B 总裁定 VERIFIED，唯一附带条件是两条
   GAP-前提需逐字文献；researcher 腿（commit 2c7f258，并入 main 245337b）恰好用 Kawai
