@@ -295,22 +295,50 @@ kawai-1997 为物理综述转述。详见 `literature/extractions/phi10-periodic
 
 完整引用已接入 §1（整周期性来源）与 §4（Lemma B.3(b) 的矛盾论证支撑）。
 
-### [GAP-BKM]
+### [GAP-BKM]（确认无文献先例，2026-09-15）
 
-**内容：** 偶除子半整平移 (d−1)/2 与 BKM（Borcherds-Kac-Moody）代数根空间结构的精确对应。
+**文献查验（2026-09-15）：** 对以下文献做了定向检索（WebSearch + WebFetch）：
+Gritsenko-Nikulin (alg-geom/9611028)、Cheng-Verlinde (0806.2337)、Paquette-Persson-Volpato
+(1601.05412, 1701.05169, 2107.03507)、Gritsenko-Nikulin-Igusa (1108.0323)、Eichler-Zagier
+Jacobi forms 文献。均未发现以下精确命题被陈述或证明。确认属于开放问题，非"未读到"。
 
 **在本证明中的作用：** 无（不影响命题 B 的严格性，属于附加深层解释）。
 
-**当前状态（定性描述，非严格命题）：** 在 Borcherds 乘积公式中令 v → v+(d−1)/2（偶 d 时为
-半整平移），乘积因子由 (1−e^{2πiℓv})^{c(4mn−ℓ²)} 变为 (1−(−1)^ℓ e^{2πiℓv})^{c(4mn−ℓ²)}，
-即对奇 ℓ 的根翻号。这在形式上对应某种"扭转"操作（奇阶根符号翻转），
-与 BKM 代数的 Z/2Z 对称性（或某个 Γ_0(2) 陪集）有潜在联系，但精确陈述需查阅
-Gritsenko-Nikulin 原文对 Φ₁₀ 的自同构群分析。
+---
 
-**可攻方向：**
-- 候选 a）确认 z↦z+1/2 对 index-1 Jacobi 形式的已知效果（这是 Eichler-Zagier 框架内的标准引理）；
-- 候选 b）在 Gritsenko-Nikulin 中找平移后的 Φ₁₀ 对应哪个具名模形式（如 Φ₁₀ 在某 Sp(4,ℤ) 陪集的限制）；
-- 候选 c）半整平移与 Hecke 算子 U_2 在 Siegel 模形式上的余循环（参见 torsion-immortal-positivity-hecke §8 中对 Hecke 解释的否定性讨论）。
+**精确命题表述（GAP-BKM Conjecture）：**
+
+设 G 为以 Φ₁₀ 为分母函数所构造的 BKM 超代数（Gritsenko-Nikulin [alg-geom/9611028]），正根由
+三元组 (k,l,r)（对应变量 p^k q^l y^r，(k,l,r)>0 为 Borcherds 乘积指标集）参数化，根重数
+mult(k,l,r) = c(4kl−r²)（c(n) 为 K3 椭圆亏格系数）。
+
+**断言（量化形式）：**
+
+∃ 阶为 2 的代数自同构 ω: G → G，满足：
+  (i) ω 在根空间 g_{(k,l,r)} 上作用为乘以 (−1)^r；
+  (ii) 对应的扭转分母函数等于 Φ₁₀ 在半整平移处的取值：
+
+      Den_ω(τ,z,σ) = C · Φ₁₀(τ, z+1/2, σ)，
+
+  其中 C 是不依赖 (τ,z,σ) 的常数（通常为 ±1）。
+
+**等价的纯模形式表述：**
+
+上述断言的乘积侧等价于初等变量替换 y → −y（即 z → z+1/2）：
+
+    Φ₁₀(τ, z+1/2, σ) = pq(−y) ∏_{(k,l,r)>0} (1 − (−1)^r p^k q^l y^r)^{c(4kl−r²)}.
+
+弱命题（纯代数，已验）：上式是平凡恒等式——把 kawai-1997 eq.(5.13) 中 y 替换为 −y 立得，
+不依赖任何 BKM 结构。
+
+强命题（BKM 代数层面，开放）：(−1)^r 的奇偶分级能提升为 G 的代数自同构，即
+∃ Cartan 元素 H_r ∈ h 满足 [H_r, e_{(k,l,r)}] = r · e_{(k,l,r)}，
+使 ω = exp(πi · ad(H_r)) 在 G 上良定义且阶为 2。
+
+强命题所需步骤：
+[GAP-BKM-S1: 从 Gritsenko-Nikulin 原文逐字抽取 G 的 Cartan 矩阵、根系、Weyl 群——尚未完成。]
+[GAP-BKM-S2: 验证 r 坐标对应 Cartan 元素 H_r 存在（格型 BKM 中 H_r=(0,0,1) 应成立，但需逐字核实）。]
+[GAP-BKM-S3: 将 Borcherds 1992 扭转分母公式应用于 (G,ω)，核实 Weyl-Kac 侧与乘积侧咬合。]
 
 ---
 
