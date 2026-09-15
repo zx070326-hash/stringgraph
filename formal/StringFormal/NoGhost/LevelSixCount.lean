@@ -10,40 +10,56 @@ import StringFormal.NoGhost.LevelFiveCount
 /-!
 # The level-six counting identity
 
-This file establishes the counting identity for `N = 6`, correcting the skeleton's
-mathematically incorrect 9-shape formula.
+This file establishes the counting identity for `N = 6`, correcting two errors found by
+review in an earlier version of this file.
 
-## The correct 11-shape parametrisation
+## The correct 10-term, 11-shape parametrisation
 
-The partition function `p_m(6)` has **11 shapes**, not 9:
+`p_m(6)` has **eleven** partition shapes of `6` (`p(6) = 11`), but two of them — `5+1` and
+`4+2` — give the *same* colour-counting monomial `m²` (a single part of one colour and a
+single part of another, distinct, colour), so they combine into one algebraic term `2m²`.
+The correct closed form therefore has **ten** terms:
 
-1. Single `(μ,6)`: `m` terms
-2. Pair `(μ,3)²`: `C(m+1,2)` terms
-3. Product `(μ,1)(ν,5)`: `m·C(m+1,2)` terms
-4. Product `(μ,2)(ν,4)`: `m·C(m+1,2)` terms
-5. Triple `(μ,2)³`: `C(m+2,3)` terms
-6. Product `(μ,1)(ν,2)(ρ,3)`: `m·C(m+2,3)` terms
-7. **Cubic `(μ,1)³(ν,3)`: `m³` terms** ← **MISSING in skeleton**
-8. Quadruple `(μ,1)(ν,1)(ρ,2)²`: `m·C(m+3,4)` terms
-9. **Sym²(μ,2) = pair of pairs `(μ,2)(ν,2)(ρ,2)`: `C(m+1,2)²` terms** ← **MISSING**
-10. Product `(μ,1)⁴(ν,2)`: `m·C(m+4,5)` terms
-11. Sextuple `(μ,1)⁶`: `C(m+5,6)` terms
+`p_m(6) = m + 2m² + m·C(m+1,2) + C(m+1,2) + m³ + m·C(m+2,3) + C(m+2,3)
+          + C(m+1,2)² + m·C(m+3,4) + C(m+5,6)`
 
-The skeleton's error at `m = 2, 3`:
-- `m = 2`: gives 62, true value 65, **error -3** (missing `2³ = 8` from shape 7, but
-  miscounting elsewhere compensates partially)
-- `m = 3`: gives 206, true value 221, **error -15**
+matching the eleven shapes
+`[6] [5,1] [4,2] [4,1,1] [3,3] [3,2,1] [3,1,1,1] [2,2,2] [2,2,1,1] [2,1,1,1,1] [1⁶]`.
+
+**Reviewer finding**: an earlier version of this file had a spurious eleventh term
+`m·C(m+4,5)`, purportedly for a shape "one part of size `x` plus five parts of size `y`,
+`x ≠ y`" — but the only solution of `x + 5y = 6` in positive integers is `x = y = 1`, which
+is *not* `x ≠ y`; there is no such shape.  That term is simply removed (it is not replaced by
+anything: `1^6` is already counted once, by the `C(m+5,6)` term).
+
+Numerically: at `m = 1` every one of the ten terms evaluates to `1` except the `2m²` term
+(which evaluates to `2`), so `p_1(6) = 1·9 + 2 = 11 = p(6)`.  At `m = 2` the ten terms are
+`2, 8, 6, 3, 8, 8, 4, 9, 10, 7`, summing to `p_2(6) = 65`.  At `m = 3` they are
+`3, 18, 18, 6, 27, 30, 10, 36, 45, 28`, summing to `p_3(6) = 221`.
+
+## The recursive form
+
+Rather than proving the closed form directly (which is not needed anywhere else in the
+repository), this file states and proves the **recursive Pascal identity**
+
+`p_{m+1}(6) + (m + 1) = p_m(6) + p_{m+1}(5) + p_{m+1}(4)`,
+
+the `N = 6` analogue of `LevelFiveCount.levelFive_count_identity_gen`
+(`p_{m+1}(5) + 1 = p_m(5) + p_{m+1}(4) + p_{m+1}(3)`).  As at `N = 5`, the identity is *not*
+the "clean" Pascal recursion `p_{m+1}(N) = p_m(N) + p_{m+1}(N−1) + p_{m+1}(N−2)` that holds
+unconditionally for `N ≤ 4`: the excess grows from `1` (`N = 5`) to `m + 1` (`N = 6`).
+Verified numerically: at `m = 0`, `11 + 1 = 0 + 7 + 5`; at `m = 1`, `65 + 2 = 11 + 36 + 20`;
+at `m = 2`, `221 + 3 = 65 + 108 + 51`; at `m = 3`, `574 + 4 = 221 + 252 + 105`.
 
 ## Contents
 
-* `levelSix_count_identity_gen` — the corrected 11-shape identity, valid for all `m`.
+* `levelSix_count_identity_gen` — the corrected recursive identity, valid for all `m`.
 * `levelSix_count_identity` — specialization at `m = D − 2`.
 * `levelSix_count_identity_full` — specialization at `m = D − 1`.
 
 ## Status
 
-The three theorems compile with no `sorry`. Numerical verification at `m = 2, 3` confirms
-the correction.
+The three theorems compile with no `sorry`.
 
 **Not done**: `b26_six`, `ddfSpans_bigrade_neg_six_six`, or any other components of the
 level-six slice (out of scope for this fix).
@@ -53,38 +69,37 @@ namespace StringFormal.NoGhost
 
 /-! ### The level-six counting identity
 
-The corrected 11-shape formula. Everything here is arithmetic in `ℕ`; `D` never appears,
+The corrected recursive identity. Everything here is arithmetic in `ℕ`; `D` never appears,
 only the number `m` of directions. -/
 
 section CountIdentity
 
-/-- **The level-six counting identity** (corrected 11-shape formula), in the form free of
-natural subtraction. The correct formula is:
+/-- **The level-six counting identity**, in the recursive form free of natural subtraction:
 
-`p_m(6) = m + 2m² + m·C(m+1,2) + C(m+1,2) + m³ + m·C(m+2,3) + C(m+2,3)
-          + C(m+1,2)² + m·C(m+3,4) + m·C(m+4,5) + C(m+5,6)`
+`p_{m+1}(6) + (m + 1) = p_m(6) + p_{m+1}(5) + p_{m+1}(4)`
 
-The skeleton had only 9 shapes and was missing:
-- Shape 7: Cubic `(μ,1)³(ν,3)` contributing `m³`
-- Shape 9: Sym²(μ,2) = `(μ,2)(ν,2)(ρ,2)` contributing `C(m+1,2)²`
+with the corrected ten-term `p_m(6) = m + 2m² + m·C(m+1,2) + C(m+1,2) + m³ + m·C(m+2,3)
++ C(m+2,3) + C(m+1,2)² + m·C(m+3,4) + C(m+5,6)`, `p_m(5)` as in
+`LevelFiveCount.levelFive_count_identity_gen` and `p_m(4)` as in
+`LevelFourCount.levelFour_count_identity`.
 
-This causes the skeleton to give incorrect values:
-- At `m = 2`: skeleton gives 62, correct value is 65 (error -3)
-- At `m = 3`: skeleton gives 206, correct value is 221 (error -15)
-
-The proof follows the standard pattern: apply Pascal's rule to expand binomial coefficients,
-then use `ring` to verify the identity. -/
+The proof follows the standard pattern: apply Pascal's rule to expand the binomial
+coefficients `C(m+2,2) … C(m+6,6)` down to the primitive atoms `C(m+1,2), C(m+2,3), C(m+3,4),
+C(m+4,5), C(m+5,6)` shared with the level-five and level-four formulas, then `ring`. -/
 theorem levelSix_count_identity_gen (m : ℕ) :
-    (m + 1) + 2 * ((m + 1) * (m + 1)) + (m + 1) * Nat.choose (m + 2) 2
-      + Nat.choose (m + 2) 2 + (m + 1) * (m + 1) * (m + 1)
-      + (m + 1) * Nat.choose (m + 3) 3 + Nat.choose (m + 3) 3
-      + (Nat.choose (m + 2) 2) * (Nat.choose (m + 2) 2)
-      + (m + 1) * Nat.choose (m + 4) 4 + (m + 1) * Nat.choose (m + 5) 5
-      + Nat.choose (m + 6) 6
-    = m + 2 * (m * m) + m * Nat.choose (m + 1) 2 + Nat.choose (m + 1) 2
-      + m * m * m + m * Nat.choose (m + 2) 3 + Nat.choose (m + 2) 3
-      + (Nat.choose (m + 1) 2) * (Nat.choose (m + 1) 2)
-      + m * Nat.choose (m + 3) 4 + m * Nat.choose (m + 4) 5 + Nat.choose (m + 5) 6 := by
+    ((m + 1) + 2 * ((m + 1) * (m + 1)) + (m + 1) * Nat.choose (m + 2) 2
+        + Nat.choose (m + 2) 2 + (m + 1) * (m + 1) * (m + 1)
+        + (m + 1) * Nat.choose (m + 3) 3 + Nat.choose (m + 3) 3
+        + (Nat.choose (m + 2) 2) * (Nat.choose (m + 2) 2)
+        + (m + 1) * Nat.choose (m + 4) 4 + Nat.choose (m + 6) 6) + (m + 1)
+      = (m + 2 * (m * m) + m * Nat.choose (m + 1) 2 + Nat.choose (m + 1) 2
+          + m * m * m + m * Nat.choose (m + 2) 3 + Nat.choose (m + 2) 3
+          + (Nat.choose (m + 1) 2) * (Nat.choose (m + 1) 2)
+          + m * Nat.choose (m + 3) 4 + Nat.choose (m + 5) 6)
+        + ((m + 1) + 2 * ((m + 1) * (m + 1)) + 2 * ((m + 1) * Nat.choose (m + 2) 2)
+            + (m + 1) * Nat.choose (m + 3) 3 + Nat.choose (m + 5) 5)
+        + ((m + 1) + (m + 1) * (m + 1) + Nat.choose (m + 2) 2
+            + (m + 1) * Nat.choose (m + 2) 2 + Nat.choose (m + 4) 4) := by
   -- Expand binomial coefficients using Pascal's rule
   have h2 : Nat.choose (m + 2) 2 = (m + 1) + Nat.choose (m + 1) 2 := by
     rw [Nat.choose_succ_succ (m + 1) 1, Nat.choose_one_right]
@@ -104,24 +119,24 @@ variable {D : ℕ}
 
 /-- **(I6)**: `levelSix_count_identity_gen` at `m = D − 2`, the level-six account.
 
-At `D = 26` this reads:
-`p_{25}(6) = 25 + 2·625 + 25·300 + 300 + 15625 + 25·2300 + 2300 + 90000 + 25·12650 + 25·53130 + 230230`
-           `= 1542841` (correct)
+`p_{D−1}(6) + (D − 1) = p_{D−2}(6) + p_{D−1}(5) + p_{D−1}(4)`.
 
-The skeleton's 9-shape formula would give an incorrect value. -/
+At `D = 26`: `p_25(6) + 25 = p_24(6) + p_25(5) + p_25(4)`. -/
 theorem levelSix_count_identity (hD : 2 ≤ D) :
-    (D - 1) + 2 * ((D - 1) * (D - 1)) + (D - 1) * Nat.choose D 2
-      + Nat.choose D 2 + (D - 1) * (D - 1) * (D - 1)
-      + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 1) 3
-      + (Nat.choose D 2) * (Nat.choose D 2)
-      + (D - 1) * Nat.choose (D + 2) 4 + (D - 1) * Nat.choose (D + 3) 5
-      + Nat.choose (D + 4) 6
-    = (D - 2) + 2 * ((D - 2) * (D - 2)) + (D - 2) * Nat.choose (D - 1) 2
-      + Nat.choose (D - 1) 2 + (D - 2) * (D - 2) * (D - 2)
-      + (D - 2) * Nat.choose D 3 + Nat.choose D 3
-      + (Nat.choose (D - 1) 2) * (Nat.choose (D - 1) 2)
-      + (D - 2) * Nat.choose (D + 1) 4 + (D - 2) * Nat.choose (D + 2) 5
-      + Nat.choose (D + 3) 6 := by
+    ((D - 1) + 2 * ((D - 1) * (D - 1)) + (D - 1) * Nat.choose D 2
+        + Nat.choose D 2 + (D - 1) * (D - 1) * (D - 1)
+        + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 1) 3
+        + (Nat.choose D 2) * (Nat.choose D 2)
+        + (D - 1) * Nat.choose (D + 2) 4 + Nat.choose (D + 4) 6) + (D - 1)
+      = ((D - 2) + 2 * ((D - 2) * (D - 2)) + (D - 2) * Nat.choose (D - 1) 2
+          + Nat.choose (D - 1) 2 + (D - 2) * (D - 2) * (D - 2)
+          + (D - 2) * Nat.choose D 3 + Nat.choose D 3
+          + (Nat.choose (D - 1) 2) * (Nat.choose (D - 1) 2)
+          + (D - 2) * Nat.choose (D + 1) 4 + Nat.choose (D + 3) 6)
+        + ((D - 1) + 2 * ((D - 1) * (D - 1)) + 2 * ((D - 1) * Nat.choose D 2)
+            + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 3) 5)
+        + ((D - 1) + (D - 1) * (D - 1) + Nat.choose D 2
+            + (D - 1) * Nat.choose D 2 + Nat.choose (D + 2) 4) := by
   obtain ⟨m, rfl⟩ : ∃ m, D = m + 2 := ⟨D - 2, by omega⟩
   simp only [show m + 2 - 1 = m + 1 from rfl, show m + 2 - 2 = m from rfl,
     show m + 2 + 1 = m + 3 from rfl, show m + 2 + 2 = m + 4 from rfl,
@@ -129,18 +144,23 @@ theorem levelSix_count_identity (hD : 2 ≤ D) :
   exact levelSix_count_identity_gen m
 
 /-- `levelSix_count_identity_gen` at `m = D − 1`, for use in kernel bounds or similar
-applications. -/
+applications.
+
+`p_D(6) + D = p_{D−1}(6) + p_D(5) + p_D(4)`. -/
 theorem levelSix_count_identity_full (hD : 1 ≤ D) :
-    D + 2 * (D * D) + D * Nat.choose (D + 1) 2 + Nat.choose (D + 1) 2
-      + D * D * D + D * Nat.choose (D + 2) 3 + Nat.choose (D + 2) 3
-      + (Nat.choose (D + 1) 2) * (Nat.choose (D + 1) 2)
-      + D * Nat.choose (D + 3) 4 + D * Nat.choose (D + 4) 5 + Nat.choose (D + 5) 6
-    = (D - 1) + 2 * ((D - 1) * (D - 1)) + (D - 1) * Nat.choose D 2
-      + Nat.choose D 2 + (D - 1) * (D - 1) * (D - 1)
-      + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 1) 3
-      + (Nat.choose D 2) * (Nat.choose D 2)
-      + (D - 1) * Nat.choose (D + 2) 4 + (D - 1) * Nat.choose (D + 3) 5
-      + Nat.choose (D + 4) 6 := by
+    (D + 2 * (D * D) + D * Nat.choose (D + 1) 2 + Nat.choose (D + 1) 2
+        + D * D * D + D * Nat.choose (D + 2) 3 + Nat.choose (D + 2) 3
+        + (Nat.choose (D + 1) 2) * (Nat.choose (D + 1) 2)
+        + D * Nat.choose (D + 3) 4 + Nat.choose (D + 5) 6) + D
+      = ((D - 1) + 2 * ((D - 1) * (D - 1)) + (D - 1) * Nat.choose D 2
+          + Nat.choose D 2 + (D - 1) * (D - 1) * (D - 1)
+          + (D - 1) * Nat.choose (D + 1) 3 + Nat.choose (D + 1) 3
+          + (Nat.choose D 2) * (Nat.choose D 2)
+          + (D - 1) * Nat.choose (D + 2) 4 + Nat.choose (D + 4) 6)
+        + (D + 2 * (D * D) + 2 * (D * Nat.choose (D + 1) 2)
+            + D * Nat.choose (D + 2) 3 + Nat.choose (D + 4) 5)
+        + (D + D * D + Nat.choose (D + 1) 2
+            + D * Nat.choose (D + 1) 2 + Nat.choose (D + 3) 4) := by
   obtain ⟨m, rfl⟩ : ∃ m, D = m + 1 := ⟨D - 1, by omega⟩
   simp only [show m + 1 - 1 = m from rfl, show m + 1 + 1 = m + 2 from rfl,
     show m + 1 + 2 = m + 3 from rfl, show m + 1 + 3 = m + 4 from rfl,
