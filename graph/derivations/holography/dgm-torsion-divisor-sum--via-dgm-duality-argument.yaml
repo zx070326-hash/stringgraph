@@ -1,0 +1,47 @@
+id: holography.dgm-torsion-divisor-sum--via-dgm-duality-argument
+target: holography.dgm-torsion-divisor-sum
+kind: physical-argument
+status: physical-argument
+depends_on:
+  - id: holography.dvv-dyon-index-generating-function
+    inferred: false
+    note: "I=1 基点：eq(52) 的 Ω₁ 就是单位挠 dyon 指标，其生成函数 = 1/Φ₁₀ 系数（DVV 识别①）。DGM 的重标推导以 I=1 的围道积分 (45) 为出发点"
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "接口边，非论证环节：eq(52) 右端的 Ω₁(m/s²,n,ℓ/s) 在数学上就是 d_*(m/s²,n,ℓ/s)（Rosselló 定义），此识别使 eq(52) 与 Thm 6.1 的语言对齐"
+  - id: holography.igusa-cusp-form-phi10
+    inferred: true
+    note: "DGM 的推导链 (44)–(47) 从 I=1 的围道积分出发，重标 ρ→s²ρ, v→sv，再以对偶不变量重新打包。该重标在生成函数层的合法性依赖 Φ₁₀ 在 Sp(4,ℤ) 下的模性与 1/Φ₁₀ 的 Fourier 结构；DGM 原文未分步证明这一步，只是援引'duality arguments'，故标 inferred: true"
+sources:
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "§3, eq(44)–(47)（重标链条）→ eq(50)(51)(52)；脚注 5（(−1)^ℓ 因子的四维量子数 ↔ 五维自旋的来源）"
+    note: "原文用 4d-5d 提升 + fermionic zero mode 计数 + 对偶论证，非严格证明"
+summary: |
+  DGM 2008 §3 的物理论证链条：
+
+  1. **I=1 的围道积分**（eq 44–45）：单位挠单心 dyon 的简并度写成 Φ₁₀ 沿吸引子围道的
+     Fourier 系数（在 DVV 识别①下已知）。
+  2. **重标**（eq 46）：把电荷 (Q,P) 按挠 I 的除子结构重新标度，生成函数层面对应
+     ρ → s²ρ, v → sv（σ 不动）。这一步是"把挠 I 的配分函数写成单位挠配分函数的
+     正权除子和"的形式操作。
+  3. **丢掉 n、ℓ 的可除性条件**（eq 47，原文 "since the contour integral automatically
+     enforces them"）：这步是物理判断，非数学定理。
+  4. **用对偶不变量重新打包**（eq 50–52）：得到 Ω_I = Σ_{s|I} s·Ω₁(m/s²,n,ℓ/s)。
+
+  论证依赖 4d-5d 提升（type II on K3×T² ↔ type II on K3×T³）、S-对偶、
+  fermionic zero mode 计数，以及"单心 dyon 的多心态分离"这一物理结构。
+  原文未给出严格数学证明，故本推导 status: physical-argument。
+
+  额外佐证（不改变本推导的严格度）：Alexandrov-Nampuri 2020 eq(2.13) 独立表述了同一
+  除子和关系，且其 eq(2.11)+(2.13) 联立解出的生成函数闭式含半整平移 (d−1)/2，
+  与 eq(52) 自洽而与 DGM eq(51) 不符。
+gaps:
+  - "eq(47) 'the contour integral automatically enforces them' 是把 n、ℓ 可除性条件丢掉的关键一步，原文只给物理论断"
+  - "eq(51) 与 eq(52) 的不相容（本项目 Prop 5.1 已严格证明）未在原文献中解决；本推导选择 eq(52)，依据是物理自洽性 + A-N 2020 独立佐证，而非原文裁决"
+notes: |
+  **本推导为 physical-argument，是 Thm 6.1 唯一的物理前提来源。**
+  本项目 Thm 6.1（holography.torsion-immortal-positivity-thm6-1）的数学部分不依赖本卡，
+  但"挠 I 免死 dyon 指标为正"这一物理陈述依赖本卡。因此 Thm 6.1 的 effective status
+  应为 physical-argument。
+author: graph-curator
+created: "2026-09-15"

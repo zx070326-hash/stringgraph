@@ -1,0 +1,51 @@
+id: holography.torsion-immortal-positivity
+kind: proposition
+title: 挠 I>1 免死 dyon 指标正性（Thm 6.1）：d_*^{(I)} = 正权除子和 > 0
+statement: |
+  设 I ≥ 1，(m,n,ℓ) ∈ ℤ³ 满足 I²|m、I|ℓ、m ≥ 1、n ≥ 1、Δ := 4mn−ℓ² > 0。
+  沿用 holography.torsion-index-divisor-operator 的定义 D：
+    𝒢_I := −Σ_{s|I} s / Φ₁₀(s²ρ, σ, sv + 1/2)，
+    d_*^{(I)}(m,n,ℓ) := ∫_{C_*(m,n,ℓ;Λ)} dρdσdv · 𝒢_I(ρ,σ,v) · e^{−2πi(mρ+nσ+ℓv)}（Λ 充分大），
+  并记 d_*(m′,n′,ℓ′) 为单位挠免死指标（holography.mock-jacobi-coefficient-positivity）。
+  设 Ω_I(m,n,ℓ) 为挠 I 的单心（immortal）dyon 指标，其与 d_*^{(I)} 的等同为
+  holography.dgm-torsion-divisor-sum（DGM eq 52）的物理内容。则：
+  (a) **除子和恒等式**：d_*^{(I)}(m,n,ℓ) = Σ_{s|I} s · d_*(m/s², n, ℓ/s)；
+  (b) **正性**：d_*^{(I)}(m,n,ℓ) > 0；
+  (c) 在物理识别 Ω_I = d_*^{(I)} 之下，挠 I 的单心 dyon 指标 Ω_I(m,n,ℓ) > 0。
+  I = 1 时退化为 Rosselló Cor 1.1（holography.mock-jacobi-coefficient-positivity (b)）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §6（Theorem 6.1 及 Corollary 6.4），§10（物理前提 (P′) 的剩余内容）"
+    note: "本项目原创证明，非已发表文献。见 proof.md Thm 6.1。提交 sha: 322e5f9；status.yaml state: verified（reviewer: graph-reviewer 内部逻辑 + general-purpose 文献逐字，2026-09-15），captain_confirmed: false（尚未经船长确认）。"
+  - ref: rossello-2024
+    loc: "Cor 1.1（逐字：m,n≥1, Δ=4mn−ℓ²>0 ⇒ d_*(m,n,ℓ)>0，**不含** gcd 前提）；§2 (2.22)–(2.23)（d_* 定义）"
+    note: "Thm 6.1(b) 的唯一外部数学依赖：逐项套用 Cor 1.1"
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "eq(52)：Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I} s·Ω₁(Q²/2s²,P²/2,Q·P/s)"
+    note: "物理前提 (P′)：使 (a)(b) 的纯数学结论可读作物理陈述 (c)"
+notes: |
+  **本卡刻意把数学结论与物理前提分开陈列。**
+  数学部分 (a)(b) 是纯数学定理（proof.md §6 的完整证明）；物理部分 (c) 额外依赖
+  holography.dgm-torsion-divisor-sum（DGM eq 52 的正权除子和表示），是 physical-argument。
+  因此本卡的 effective status 为 physical-argument：`uv run stringgraph why` 的瓶颈链
+  应指向 dgm-torsion-divisor-sum。这正是 graph/CLAUDE.md 2026-09-15 裁决要求的形式——
+  物理前提必须立成节点、正常沿图传播，不得塞进 `inferred` flag 蒙混。
+
+  **(a)(b) 为何是纯数学**：
+  (a) 𝒢_I = Σ_{s|I} s·𝒱_s𝒢 是有限和，由 attractor-contour-covariance 的 Cor 4.2 逐项积分
+      （s|I ⟹ s²|I²|m 与 s|I|ℓ，Cor 4.2 前提满足）。
+  (b) 每项 d_*(m/s²,n,ℓ/s) > 0 由 Rosselló Cor 1.1 保证（m/s²≥1、n≥1、Δ/s²>0，无 gcd 前提），
+      权 s > 0 为正，故正和为正。
+  两部分的纯数学证明不经过 mock 分解，故不受 [GAP 9.4]/[GAP 10.2b] 影响。
+
+  **诚实边界（承 status.yaml verdict）**：本卡不是 Sen 全正性猜想的证明，
+  只是在挠 I>1 上把物理依赖压缩到单条前提 (P′) = DGM eq(52)。
+  DGM eq(51)/(52) 不相容是本项目原创发现，属对外声明，需船长确认后方可正式宣称；
+  (a)(b) 的数学结论及其对 (P′) 的依赖不受此限制。
+
+  **captain_confirmed: false** —— 见 research/attempts/torsion-immortal-positivity-hecke/status.yaml。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography, sen-positivity]
+author: graph-curator
+created: "2026-09-15"

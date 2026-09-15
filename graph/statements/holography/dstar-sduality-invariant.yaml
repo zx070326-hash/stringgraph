@@ -1,0 +1,40 @@
+id: holography.dstar-sduality-invariant
+kind: proposition
+title: d_* 的 GL(2,ℤ) 不变性（Prop 4.4）：单心指标只依赖正定二元二次型的等价类
+statement: |
+  沿用吸引子围道约定（proof.md §4 Prop 4.4）：
+    d_*(m,n,ℓ) := 𝔉[𝒢; T(m,n,ℓ); Λ]（吸引子围道积分，Λ 充分大）。
+  设 A ∈ GL(2,ℤ)，T′ := A^{−T}·T(m,n,ℓ)·A^{−1}，令 (m′,n′,ℓ′) 由 T′ 读出。则：
+    d_*(m′,n′,ℓ′) = d_*(m,n,ℓ)。
+  即：d_* 只依赖 T = [[m, ℓ/2],[ℓ/2, n]] 的 GL(2,ℤ)-轨道，与轨道内的代表元选取无关。
+  特别地（取 A = diag(1,−1)）：d_*(m,n,−ℓ) = d_*(m,n,ℓ)，即 d_* 关于 ℓ 为偶函数。
+  对任意 m,n≥1, Δ=4mn−ℓ²>0 的整数三元组，其等价类在 GL(2,ℤ)-Gauss 约化下存在唯一
+  满足 0≤ℓ≤m≤n 的代表元，故 d_* 在全域的正性 ⟺ 在约化域的正性（即 Rosselló Cor 1.1 的桥梁）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §4（Proposition 4.4 及 Note 4.5）"
+    note: "本项目原创证明，非已发表文献。见 proof.md Prop 4.4。提交 sha: 34701cf（S-对偶不变性证明，Rosselló 引用疑虑关闭）；status.yaml state: verified，captain_confirmed: false。"
+  - ref: rossello-2024
+    loc: "§3.1（'S-duality invariance of the single centered degeneracies'；'the Igusa cusp form has even weight'）；Cor 1.1（逐字：m,n≥1, Δ>0 ⇒ d_*>0，不含 gcd=1 前提）"
+    note: "Rosselló §3.1 断言不变性但未分步证明（引既有背景结果）；本节点给出独立纯数学证明（proof.md Prop 4.4），替代 Rosselló 的断言步"
+notes: |
+  **本项目原创证明，非已发表文献。** 见 research/attempts/torsion-immortal-positivity-hecke/proof.md Prop 4.4。
+
+  **证明核心（proof.md §4 Prop 4.4）**：
+  令 Ω′ = AΩAᵀ，T′ = A^{−T}TA^{−1}。三步：
+  (1) 相位：Tr(ΩT) = Tr(A^{−1}Ω′A^{−T}T) = Tr(Ω′T′)。
+  (2) 围道：Im Ω′ = A(2Λ adj T)Aᵀ；由 det A = ±1 得 A adj(T)Aᵀ = adj(T′)（对 SL(2,ℤ) 用 det A=1；
+      对 A = diag(1,−1) 直接算）；故 Im Ω′ = 2Λ adj(T′)，**Λ 不变**。
+  (3) 实部与 Jacobi 行列式：Sym₂(ℝ)/Sym₂(ℤ) 在 Ω↦AΩAᵀ 下双射（det A = ±1 保证整格映整格），
+      Jacobi 行列式 det(A)³ = ±1，被积函数周期性在新实部坐标下保持。
+  这是关于 𝒢 任意的纯数学结论，无需 mock 模形式结构。
+
+  **Note 4.5（关闭 Rosselló 引用疑虑）**：Rosselló 由 Thm 1 推 Cor 1.1 的桥梁句是
+  "as a consequence of the S-duality invariance of the single centered degeneracies"。
+  本节点的纯数学证明使 Cor 1.1 不再依赖物理 S-对偶，只依赖 Φ₁₀ 的 Sp(4,ℤ) 模性和围道定义。
+  GAP 6.3 于 2026-09-15 关闭（逐字抽取确认 Cor 1.1 陈述不含 gcd 前提）。
+tags: [bh-entropy, n4-string-theory, cartography, number-theory]
+author: graph-curator
+created: "2026-09-15"

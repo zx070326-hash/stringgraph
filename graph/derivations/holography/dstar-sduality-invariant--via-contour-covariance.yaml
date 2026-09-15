@@ -1,0 +1,38 @@
+id: holography.dstar-sduality-invariant--via-contour-covariance
+target: holography.dstar-sduality-invariant
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.attractor-contour-covariance
+    inferred: false
+    note: "Prop 4.4 是 Thm 4.1 的 GL(2,ℤ)（而非 diag(s,1)）推广版本：把 A_s=diag(s,1) 替换为一般 A∈GL(2,ℤ)，对应的伴随矩阵协变性 A·adj(T)·Aᵀ = det(A)²·adj(A^{−T}TA^{−1}) + 偶权使 Φ₁₀ 对 det=−1 也不变；证明结构完全平行"
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+    note: "Φ₁₀ 是 Sp(4,ℤ) 权 10（偶权）尖点形式：(i) Sp(4,ℤ) 模性使 det A=+1 时 S_A Φ₁₀=Φ₁₀；(ii) 偶权（even weight）使 det A=−1 时 S_A Φ₁₀ = det(A)^{10}Φ₁₀ = Φ₁₀，从而 S_A 𝒢 = 𝒢 对全部 A∈GL(2,ℤ) 成立（proof.md §7(a) 与 Prop 4.4 都需要这一点）"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §4（Proposition 4.4 及 Note 4.5）"
+    note: "本项目原创证明，非已发表文献。提交 sha: 34701cf；status.yaml state: verified（reviewer: graph-reviewer(Step(3) 实部环面+Jacobi 行列式 CONFIRMED)，2026-09-15），captain_confirmed: false。"
+  - ref: rossello-2024
+    loc: "Cor 1.1 的推广步桥梁句 §3.1：'as a consequence of the S-duality invariance of the single centered degeneracies … it is enough to prove it for representatives … furthermore, since the invariance group can be enlarged to GL(2,ℤ) (notice that the Igusa cusp form has even weight)'"
+    note: "Rosselló §3.1 断言不变性为 Cor 1.1 的推广步，本推导给出独立纯数学证明，替代这一断言"
+summary: |
+  **证明（proof.md §4 Prop 4.4）**：令 Ω′ = AΩAᵀ，T′ = A^{−T}TA^{−1}。
+  (1) **相位**：Tr(ΩT) = Tr(Ω′T′)（纯线性代数等式）。
+  (2) **围道**：Im Ω′ = A(2Λ adj T)Aᵀ。用 adj(X^{−1}) = adj(X)^{−1} 和 adj(AB) = adj(B)adj(A)：
+      adj(T′) = adj(A^{−T}TA^{−1}) = adj(A^{−1})adj(T)adj(A^{−T}) = det(A)^{−2}·A adj(T)Aᵀ。
+      对 det A = ±1 有 det(A)^{−2} = 1，故 A adj(T)Aᵀ = adj(T′)，**Λ 不变**。
+  (3) **实部与 Jacobi 行列式**：Ω↦AΩAᵀ 是 Sym₂(ℝ)/Sym₂(ℤ) 上的线性双射（det A = ±1 保整格），
+      Jacobi 行列式 det(A)³ = ±1。𝒢 的周期性在新坐标下保持（Tr(ST′)∈ℤ 对整对称 S）。
+      积分区域折叠后值不变。
+  **ℓ→−ℓ**：A=diag(1,−1)（det=−1），步骤(2)仍成立；S_A𝒢=𝒢 由 Φ₁₀ 偶权保证。
+  整个证明纯数学，无物理输入，reviewer-verified。
+
+  **Note 4.5 的意义**：本证明替换了 Rosselló §3.1"引 S-对偶不变性（物理动机）"的桥梁，
+  将 Cor 1.1 的推广步完全落实在 Φ₁₀ 的 Sp(4,ℤ) 模性 + 围道定义上。
+  GAP 6.3 于 2026-09-15 关闭（逐字确认 Cor 1.1 陈述不含 gcd=1 前提）。
+notes: |
+  reviewer-verified: graph-reviewer(2026-09-15)，Prop 4.4 Step(3)（Sym₂(ℝ)/Sym₂(ℤ) 双射 + Jacobi 行列式
+  det(A)³=1）独立确认（CONFIRMED），并确认它替代了对 Rosselló"S-duality invariance"一句的引用。
+author: graph-curator
+created: "2026-09-15"

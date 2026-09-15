@@ -1,0 +1,43 @@
+id: holography.attractor-contour-covariance
+kind: proposition
+title: 吸引子围道协变性（Thm 4.1）：重标 Ω↦A_sΩA_sᵀ 精确映射吸引子围道
+statement: |
+  沿用 research/attempts/torsion-immortal-positivity-hecke/proof.md §4 的约定：
+    T = T(m,n,ℓ) := [[m, ℓ/2],[ℓ/2, n]]，adj(T) = [[n, −ℓ/2],[−ℓ/2, m]]；
+    A_s := diag(s,1)，𝒱_s F := F ∘ (Ω ↦ A_s Ω A_sᵀ)；
+    C_*(m,n,ℓ;Λ) := { Ω ∈ ℍ₂ : Re ρ, Re σ, Re v ∈ [0,1]，Im Ω = 2Λ·adj(T(m,n,ℓ)) }（Rosselló (R5′)）；
+    𝔉[F; m,n,ℓ; Λ] := ∫_{C_*(m,n,ℓ;Λ)} F(Ω)·e^{−2πi(mρ+nσ+ℓv)} dρ dσ dv。
+  设 F 在 ℍ₂ 上亚纯且对一切整对称矩阵 S 满足 F(Ω+S) = F(Ω)。
+  设 (m,n,ℓ) 满足 m,n ≥ 1，Δ = 4mn−ℓ² > 0，s ≥ 1，Λ > 0。
+  记 (m′,n′,ℓ′) := (m/s², n, ℓ/s)，Λ′ := s²Λ。设 C_*(m′,n′,ℓ′;Λ′) 避开 F 的极点。则：
+  (a) 若 s²|m 且 s|ℓ（故 m′,ℓ′ ∈ ℤ）：
+        𝔉[𝒱_s F; m,n,ℓ; Λ] = 𝔉[F; m′, n′, ℓ′; Λ′]。
+  (b) 否则 𝔉[𝒱_s F; m,n,ℓ; Λ] = 0。
+  取 F = 𝒢（holography.torsion-index-divisor-operator），有推论（Cor 4.2）：
+    对 m,n≥1, Δ>0, s²|m, s|ℓ：𝔉[𝒱_s 𝒢; m,n,ℓ; Λ] = d_*(m/s², n, ℓ/s)。
+uses: []
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §4（Theorem 4.1 及 Corollary 4.2）"
+    note: "本项目原创证明，非已发表文献。见 research/attempts/torsion-immortal-positivity-hecke/proof.md §4。提交 sha: 322e5f9（F1 形式缺口已补，case(b) 极点回避论证在第 4 步）；status.yaml state: verified（reviewer: graph-reviewer + general-purpose 文献逐字，2026-09-15），captain_confirmed: false。"
+notes: |
+  **本项目原创证明，非已发表文献。** 见 research/attempts/torsion-immortal-positivity-hecke/proof.md Thm 4.1。
+
+  **证明核心（纯矩阵恒等式 + 围道变量替换）**：
+  作变量替换 Ω′ = A_sΩA_sᵀ（即 ρ′=s²ρ, σ′=σ, v′=sv）。
+  Step 1：虚部计算—— Im Ω′ = A_s(2Λ adj T)A_sᵀ = 2Λ·s²·adj(T′)（由 Lemma 3.1(b)），
+  其中 T′ = T(m/s²,n,ℓ/s)，Λ′ = s²Λ。像精确落在 C_*(m′,n′,ℓ′;Λ′) 的虚部切片上。
+  Step 2：Jacobi 行列式 s³ 与相位因子消去（det A_s = s，dρ′dσ′dv′ = s³ dρdσdv，
+  线性相位等式 mρ+nσ+ℓv = m′ρ′+n′σ′+ℓ′v′）。
+  Step 3（(a)整性情形）：m′,ℓ′ ∈ ℤ 时，积分区域可扩到 s²×1×s 再折叠（周期性）得 s³ 因子，与 s^{−3} 相消。
+  Step 4（(b)非整性情形）：由 Lemma 2.1(i)，𝒱_sF 有额外周期 1/s²（ρ 方向）和 1/s（v 方向），
+  Fourier 展开中非 s²|M 且 s|L 的分量系数为零；对 (m,n,ℓ) 的 Fourier 系数即为 0。
+  （case(b) 的极点回避：对任意实正定 T′，Im(Ψ_sΩ) = 2s²Λ adj(T′) ≻ 0 并随 Λ→∞ 均匀趋于无穷；
+  1/Φ₁₀ 极点上至少一个虚部分量受线性约束，故存在 Λ₀ 使大 Λ 时切片无极点。）
+
+  **依赖只需要 Lemma 3.1(b)（adj(T) 的协变性）+ F 的整周期性**，不需要任何 mock 模形式的结构。
+  这把测绘「缝 A」未闭合点 (i)（总简并度 vs 免死指标的投影是否与除子和交换）变成纯数学定理。
+tags: [bh-entropy, n4-string-theory, cartography, number-theory]
+author: graph-curator
+created: "2026-09-15"

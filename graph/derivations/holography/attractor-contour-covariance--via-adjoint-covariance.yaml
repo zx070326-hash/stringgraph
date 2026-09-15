@@ -1,0 +1,49 @@
+id: holography.attractor-contour-covariance--via-adjoint-covariance
+target: holography.attractor-contour-covariance
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "接口边：Thm 4.1 作用的函数 F = 𝒢（以及 𝒱_s F 的定义）均来自 torsion-index-divisor-operator 的定义；Cor 4.2 的结论 𝔉[𝒱_s𝒢;m,n,ℓ;Λ] = d_*(m/s²,n,ℓ/s) 直接定义了下游节点需要的围道系数"
+  - id: holography.igusa-cusp-form-phi10
+    inferred: false
+    note: "𝒢 = −1/Φ₁₀(ρ,σ,v+1/2) 的周期性 F(Ω+S)=F(Ω)（对整对称 S）来自 Φ₁₀ 的 Fourier 展开只含半整 T 这一事实（Tr(ST)∈ℤ），是 Thm 4.1 的周期性前提的来源"
+  - id: holography.mock-jacobi-coefficient-positivity
+    inferred: false
+    note: "d_*(m,n,ℓ) 的 Λ-无关性（充分大 Λ 下吸引子围道积分与 Λ 无关）是 Thm 4.1 中 Cor 4.2 合法性的前提（(R9)）；该性质由 Rosselló 的定义及系数独立性保证，最近的载体是 mock-jacobi-coefficient-positivity"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §3（Lemma 3.1），§4（Thm 4.1 完整证明，含 Cor 4.2）"
+    note: "本项目原创证明，非已发表文献。提交 sha: 322e5f9；status.yaml state: verified（reviewer: graph-reviewer，2026-09-15，Step1/Step3/Step4 均 CONFIRMED）；captain_confirmed: false。"
+  - ref: rossello-2024
+    loc: "(R4)–(R5′)（吸引子围道 C_* 的精确定义，Im Ω = 2Λ·adj(T)）；§2 (2.22)–(2.23)（d_* 的围道积分定义）"
+    note: "Thm 4.1 的围道定义、Cor 4.2 中 d_* 的来源"
+summary: |
+  证明的关键是伴随矩阵的 GL(2) 协变性（Lemma 3.1(b)）：
+
+  **Lemma 3.1(b)（伴随矩阵协变性）**：设 A_s = diag(s,1)，T′ = A_s^{−1}T A_s^{−T} = T(m/s²,n,ℓ/s)。则
+    A_s · adj(T) · A_sᵀ = s² · adj(T′)。
+  证明：对可逆 2×2 矩阵 adj(X)=det(X)·X^{−1}，直接计算或代入即得。
+
+  **Thm 4.1 主证明**：
+  作变量替换 (ρ′,σ′,v′) = (s²ρ, σ, sv)（即 Ψ_s）：
+  - 虚部：Im Ω′ = A_s(2Λ adj T)A_sᵀ = 2Λ·s²·adj(T′) = 2Λ′·adj(T(m′,n′,ℓ′))，
+    故像精确落在 C_*(m′,n′,ℓ′;Λ′) 的虚部切片上（Λ′ = s²Λ）。
+  - 相位：mρ+nσ+ℓv = m′ρ′+n′σ′+ℓ′v′（纯线性等式，无需整性）。
+  - Jacobi 行列式：dρ′dσ′dv′ = s³ dρdσdv。
+  - (a) 整性情形 s²|m, s|ℓ：m′,ℓ′∈ℤ，积分区域可在各方向折叠给 s³ 因子，与 s^{−3} 相消。
+  - (b) 非整性情形：𝒱_sF 有额外周期 1/s²（ρ方向）和 1/s（v方向），相应 Fourier 系数为零。
+    极点回避：对任意实正定 T′（不需要整值），Im(Ψ_sΩ)=2s²Λ adj(T′) ≻ 0 并随 Λ→∞ 均匀趋无穷；
+    Φ₁₀ 极点上虚部受约束，故存在 Λ₀ 使大 Λ 时切片无极点。
+
+  **Cor 4.2**：取 F=𝒢（满足周期性假设，由 Φ₁₀ 的 Fourier 结构保证），
+  合法性由 d_* 的 Λ-无关性（(R9)）保证（Λ′=s²Λ 充分大）。
+
+  整个证明只用伴随矩阵恒等式和围道变量替换，无需 mock 模形式结构。
+notes: |
+  reviewer-verified: graph-reviewer(2026-09-15)，Step1（虚部映射）、Step3（区域扩张+Jacobi消）、
+  Step4（非整性情形额外周期性 + case(b) 极点回避）均已独立逐步确认（CONFIRMED）。
+  proof.md 提交 sha: 322e5f9 包含 F1 形式缺口的补充论证（case(b) 极点回避）。
+author: graph-curator
+created: "2026-09-15"

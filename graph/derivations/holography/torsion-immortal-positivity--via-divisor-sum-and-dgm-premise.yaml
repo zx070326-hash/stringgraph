@@ -1,0 +1,55 @@
+id: holography.torsion-immortal-positivity--via-divisor-sum-and-dgm-premise
+target: holography.torsion-immortal-positivity
+kind: proof
+status: rigorous
+depends_on:
+  - id: holography.attractor-contour-covariance
+    inferred: false
+    note: "Cor 4.2：𝔉[𝒱_s𝒢; m,n,ℓ; Λ] = d_*(m/s²,n,ℓ/s)（当 s²|m, s|ℓ）。这是 (a) 的全部数学内容——𝒢_I = Σ_{s|I}s·𝒱_s𝒢 是有限和，逐项用 Cor 4.2 积分。s|I ⟹ s²|I²|m 与 s|I|ℓ，前提满足"
+  - id: holography.mock-jacobi-coefficient-positivity
+    inferred: false
+    note: "(b) 的每项正性来自 Rosselló Cor 1.1（该卡 (b) 部分）：m/s²≥1、n≥1、Δ/s²>0 时 d_*(m/s²,n,ℓ/s)>0，**无 gcd 前提**。这正是 Thm 6.1(b) 的唯一外部数学依赖"
+  - id: holography.dgm-torsion-divisor-sum
+    inferred: false
+    note: "**物理前提 (P′)（此条使 effective status 降为 physical-argument）**：DGM eq(52) 把物理量 Ω_I（挠 I 单心 dyon 指标）识别为正权除子和——即把 (a)(b) 的纯数学量 d_*^{(I)} 等同于物理指标 Ω_I，从而得到 (c)。本条依赖为 physical-argument，由 propagate.py 正常传播；本推导不对它做 inferred 标记（graph/CLAUDE.md 2026-09-15 裁决：携带实质命题的边必须立卡传播，不得藏入 inferred）"
+  - id: holography.torsion-index-divisor-operator
+    inferred: false
+    note: "接口边，非机检环节：d_*^{(I)}、𝒢_I、d_* 的数学定义（定义 D）来自该定义卡；本推导引用的对象由它提供"
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §6（Thm 6.1 证明 (a)(b)），§10.1（物理前提 (P′) 的最弱形式）"
+    note: "本项目原创证明，非已发表文献。提交 sha: 322e5f9；status.yaml state: verified（reviewer: graph-reviewer 内部逻辑 + general-purpose 文献逐字，2026-09-15），captain_confirmed: false。"
+  - ref: rossello-2024
+    loc: "Cor 1.1（eq.1.6：m,n≥1, Δ=4mn−ℓ²>0 ⇒ d_*(m,n,ℓ)>0，逐字确认不含 gcd 前提）"
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "eq(52)：Ω_I(Q²/2,P²/2,Q·P) = Σ_{s|I}s·Ω₁(Q²/2s²,P²/2,Q·P/s)"
+summary: |
+  **(a) 除子和恒等式（纯数学）**：𝒢_I = Σ_{s|I} s·𝒱_s𝒢 是有限和，积分线性，逐项用
+  attractor-contour-covariance 的 Cor 4.2。可用性检查：s|I ⟹ s²|I²|m（故 s²|m ✓）
+  且 s|I|ℓ（故 s|ℓ ✓），Cor 4.2 前提满足。每项给出 d_*(m/s²,n,ℓ/s)。求和得 (a)。
+
+  **(b) 正性（纯数学）**：对每个 s|I，重标三元组 (m/s², n, ℓ/s) 满足
+  m/s² ≥ 1（s²|m 且 m≥1）、n ≥ 1、Δ/s² = (4mn−ℓ²)/s² > 0。由 Rosselló Cor 1.1
+  （无 gcd 前提）得 d_*(m/s²,n,ℓ/s) > 0。权 s > 0 为正，有限个正数之和为正，得 (b)。
+  注 6.2：重标后三元组的 gcd 一般 > 1（例 I=2,(16,2,8)→s=2 项 (4,2,4) gcd=2），
+  故 Cor 1.1 无 gcd 前提是 (b) 成立的关键。
+
+  **(c) 物理陈述（依赖物理前提）**：在 DGM eq(52)（Ω_I = Σ_{s|I} s·Ω₁(m/s²,n,ℓ/s)，
+  即 Ω_I = d_*^{(I)}）之下，(a)(b) 的纯数学结论即读作挠 I 单心 dyon 指标 Ω_I > 0。
+
+  **数学部分不经过 mock 分解**，故 [GAP 9.4]（U_s 与 DMZ 分解交换）与 [GAP 10.2b]
+  （n≥m ⟹ mock 系数=免死指标）都不影响本推导。
+gaps:
+  - "(c) 依赖物理前提 (P′)=DGM eq(52)；该前提本身无纯数学证明（proof.md §8 表明它不可能是 Hecke 恒等式，只能是一个定义/物理输入）"
+  - "数值佐证（proof.md §12）：219 个挠电荷点上 eq(52) 读法恒正，13 个点两读法给出不同整数；数值不构成证明"
+notes: |
+  reviewer-verified: graph-reviewer(2026-09-15)，Thm 6.1 前提逐项（m/s²≥1、n≥1、Δ/s²>0、ℓ/s∈ℤ、权 s>0）
+  独立确认（CONFIRMED）；Prop 5.1 符号核算 CONFIRMED。
+
+  **本推导 status: rigorous 指其自身推断的严格度**（从依赖出发的演绎是严格的：Cor 4.2 逐项求和 + Cor 1.1 逐项正性）。
+  但依赖 holography.dgm-torsion-divisor-sum（physical-argument），故由 propagate.py 计算的有效状态为
+  physical-argument。这正是 graph/CLAUDE.md（lead + graph-reviewer 裁决，2026-09-15）要求的形式：
+  物理前提立成节点、正常传播、瓶颈可见（`uv run stringgraph why holography.torsion-immortal-positivity` 指向
+  dgm-torsion-divisor-sum）。
+author: graph-curator
+created: "2026-09-15"

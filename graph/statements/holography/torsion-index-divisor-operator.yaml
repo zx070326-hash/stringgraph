@@ -1,0 +1,45 @@
+id: holography.torsion-index-divisor-operator
+kind: definition
+status: rigorous
+title: 挠 I 免死指标的定义：𝒢_I 的吸引子围道系数（除子和算子）
+statement: |
+  沿用 Rosselló 2403.19630 的约定（半整 Gram 矩阵 T = [[m, ℓ/2],[ℓ/2, n]]，判别式 Δ = 4mn−ℓ²，
+  吸引子围道 C_*(m,n,ℓ;Λ)），并记
+    𝒢(ρ,σ,v) := −1/Φ₁₀(ρ,σ, v + 1/2)。
+  对 I ≥ 1 定义重标算子族与挠指标生成函数
+    A_s := diag(s,1)， 𝒱_s F := F ∘ (Ω ↦ A_s Ω A_sᵀ)， 即 (𝒱_s F)(ρ,σ,v) = F(s²ρ, σ, sv)；
+    𝒢_I := Σ_{s|I} s · 𝒱_s 𝒢 = −Σ_{s|I} s / Φ₁₀(s²ρ, σ, sv + 1/2)。
+  则**定义 D**：对 (m,n,ℓ) ∈ ℤ³ 满足 I²|m、I|ℓ、m,n ≥ 1、Δ = 4mn−ℓ² > 0，令
+    d_*^{(I)}(m,n,ℓ) := ∫_{C_*(m,n,ℓ;Λ)} dρ dσ dv · 𝒢_I(ρ,σ,v) · e^{−2πi(mρ+nσ+ℓv)}，
+  Λ 充分大（使围道避开 𝒢_I 的全部极点）；由 d_* 的 Λ-无关性（holography.mock-jacobi-coefficient-positivity）
+  该值与充分大的 Λ 无关。
+  I = 1 时 𝒢_1 = 𝒢，故 d_*^{(1)} = d_*，与 Rosselló 的定义一致。
+  注：𝒢_I ≠ [𝒯_I(1/Φ₁₀)]|_{v↦v+1/2}——半周期平移 v ↦ v+1/2 与重标 v ↦ sv 对偶数 s 不交换，
+  这是本定义与 DGM eq(51) 的差别所在（见 holography.dgm-torsion-divisor-sum）。
+uses:
+  - holography.igusa-cusp-form-phi10
+uses_conventions: []
+sources:
+  - ref: stringgraph-research-2026
+    loc: "research/attempts/torsion-immortal-positivity-hecke/proof.md :: §1.3–§1.4（定义 D；重标算子 (D1)(D2)）"
+    note: "本项目原创证明，非已发表文献。见 research/attempts/torsion-immortal-positivity-hecke/proof.md §1.4。提交 sha: 322e5f9；status.yaml state: verified（reviewer: graph-reviewer + general-purpose 文献逐字，2026-09-15），captain_confirmed: false（尚未经船长确认）。"
+  - ref: rossello-2024
+    loc: "§1（(R1)–(R3) 约定：1/Φ₁₀ 按 ρ 展开、指标挂 ρ）；§2 (2.22)–(2.23)（吸引子围道 C_* 与 d_* 的定义）；Γ(2.23) 的 Λ-无关性"
+notes: |
+  **纯数学定义，无物理输入。** 定义对象是 Φ₁₀（Siegel 尖点形式）、显式围道与显式算子 𝒯_I，
+  与「挠 I 的单心黑洞指标」的等同**不在本定义内**，是物理命题
+  holography.dgm-torsion-divisor-sum（physical-argument）。
+
+  **本节点只立定义，不立命题。** d_*^{(I)} 的除子和恒等式
+  d_*^{(I)}(m,n,ℓ) = Σ_{s|I} s·d_*(m/s²,n,ℓ/s) 与正性 d_*^{(I)} > 0 是命题，记在
+  holography.torsion-immortal-positivity-thm6-1。
+
+  **约定警告（记号要害）**：本节点沿用 Rosselló 的「指标挂在 ρ 上」约定（1/Φ₁₀ = Σ_m ψ_m(σ,v)p^m，p = e^{2πiρ}）。
+  DMZ 1208.4074 把指标挂在 σ 上；DGM 的除子和重标 ρ→s²ρ、v→sv 而 σ 不动，作用在 (m,ℓ) 上而非 (n,ℓ) 上。
+  任何约定混淆都会把除子和的作用位置搞反（proof.md §2 注 2.2）。
+
+  **R6′ 符号约定**：𝒢 := −1/Φ₁₀(ρ,σ,v+1/2)。整体负号是符号核算结果（proof.md §1），同时乘在等式两边，
+  不影响任何结论；它保证 𝒢 沿吸引子围道的 (m,n,ℓ) 系数恰为 d_*(m,n,ℓ) = (−1)^{ℓ+1}×(1/Φ₁₀ 的同名系数)。
+tags: [bh-entropy, mock-modular, n4-string-theory, cartography]
+author: graph-curator
+created: "2026-09-15"
