@@ -1,8 +1,17 @@
 state: verified
 reviewer: "graph-reviewer(对抗审查 proof.md 逐引理,2026-09-15)=VERIFIED（总裁定，无 CONFIRMED 致命 finding）; researcher(GAP-前提逐字文献,Kawai hep-th/9710016 + DMZ,2026-09-15)=两条 GAP-前提均坐实"
 verdict: "reviewer 对命题 B（(**) 式半整平移 Z_I=Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)）总裁定 VERIFIED：Lemma B.1（换元双射）、B.2（指数恒等式）、命题 B 第 1–5 步均 VERIFIED，无可构造反例。reviewer 设的唯一条件是两条 GAP-前提需逐字文献（A: Φ₁₀ 椭圆变量整周期性；B: Borcherds 乘积奇 ℓ 系数非零）——本轮由 researcher 腿以 Kawai hep-th/9710016 eq(5.13) 乘积式（每因子 y 指数为整数 r ⇒ 整周期性）与 eq(4.32) c(−1)=2≠0（判别式 −1，来自三元组 (0,1,1)，奇 ℓ=1 ⇒ 奇 ℓ 系数非零）逐字坐实，DMZ 1208.4074 eq(85) φ_{−2,1} 系数二重佐证。故 reviewer 的条件已满足，state draft→verified。**诚实边界（不得越界宣称）**：(1) proof.md §4/§7 正文仍带 [GAP-前提] 标注，待 prover/curator 把 kawai-1997 引用接进正文并撤标注（纯文档任务，不改数学）；(2) GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构的精确对应，F3）仍为开放问题，proof.md 已如实标注且明确不影响命题 B 严格性；(3) 命题 B 的物理前提根仍是 A-N eq(2.11)+(2.13)（文献逐字，非本尝试所证）——本尝试证的是「给定 A-N 两式 ⇒ 半整平移闭式」这一纯代数步。captain_confirmed 保持 false 待船长最终拍板。"
-captain_confirmed: false
+captain_confirmed: true
 notes: |
+  2026-09-15 (船长确认 captain_confirmed → true): 船长明确通过。确认对象=本尝试主命题
+  **命题 B**（(**) 式 Z_I=Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ) 半整平移闭式）——graph-reviewer
+  对抗审查总裁定 VERIFIED（无 CONFIRMED 致命 finding），两条 GAP-前提已由 kawai-1997
+  eq(5.13)/(4.32) + DMZ eq(85) 逐字闭合，state=verified，故 captain_confirmed → true。
+  **确认范围严格限定，不得越界**：(1) 确认的是「给定 A-N eq(2.11)+(2.13) ⇒ 半整平移闭式」
+  这一**纯代数步**，物理前提根（A-N 两式）为文献逐字、非本尝试所证；
+  (2) **GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构的精确对应）仍为开放问题，不在本次确认范围内**，
+  proof.md §7 已如实标注；(3) DGM eq(51)/(52) 矛盾可对外为船长 09-15 另一决定（≠本条）。
+
   2026-09-15 (theorem-prover bkm-cite-wiring): 把两条 GAP-前提引用接进 proof.md 与 claim.md：
   §1 整周期性来源替换为正式引用 kawai-1997 eq.(5.13)（含 gritsenko-nikulin-1998 原始严格来源注）；
   §4 Lemma B.3(b) 矛盾论证支撑替换为 kawai-1997 eq.(4.32) c(−1)=2≠0 与 DMZ eq.(85) φ_{−2,1}

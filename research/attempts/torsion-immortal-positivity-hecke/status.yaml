@@ -1,8 +1,17 @@
 state: verified
 reviewer: "graph-reviewer(证明逻辑+数值,2026-09-15)=VERIFIED; general-purpose(文献逐字,DGM/Rosselló/Alexandrov-Nampuri 原文,2026-09-15)=三条外部依赖(甲围道/乙Cor1.1无gcd/丙eq51-52真矛盾)全 SUPPORT"
 verdict: "两条独立审查腿均过。内部：Thm 6.1 VERIFIED（含一处可补形式缺口 F1；Prop 5.1 符号 CONFIRMED）。外部：DGM/Rosselló/Alexandrov-Nampuri 原文逐字核实——(甲) 吸引子围道转录忠实、(乙) Rosselló Cor 1.1 无 gcd 前提、(丙) DGM eq(51) 与 eq(52) 确为真矛盾（审查者穷力寻找自洽约定均失败，唯一自洽修正=偶除子半整平移=草稿 Prop 5.4，且被 A-N eq(2.11)+(2.13) 联立闭式独立佐证）。据研究轨道生命周期，state → verified。**边界（不得越界宣称）**：(1) 这不是 Sen 全正性猜想的证明，仅在挠 I>1 上把物理依赖压缩到单条前提 (P′)=DGM eq(52)；(2) F1 形式缺口待补（不影响 Thm 6.1）；(3) DGM eq(51)/(52) 矛盾：**船长 2026-09-15 已确认可对外声明**（三条佐证腿：本项目数值直接见证 + Alexandrov-Nampuri 2020 间接 + BSS 0802.0544/0802.1556 两篇独立、均早于 DGM 且互不引用的间接佐证；无来源支持 eq(51) 字面式、无 erratum），成文/联系原作者已解禁；此门≠captain_confirmed。captain_confirmed（本尝试主命题 Thm 6.1 的船长最终确认）仍保持 false 待船长最终拍板。"
-captain_confirmed: false
+captain_confirmed: true
 notes: |
+  2026-09-15 (船长确认 captain_confirmed → true): 船长明确通过。确认对象=本尝试主命题
+  **Theorem 6.1**（d_*^{(I)}(m,n,ℓ)=Σ_{s|I} s·d_*(m/s²,n,ℓ/s)>0，在 I²|m,I|ℓ,m,n≥1,Δ>0 域上，
+  前提为物理输入 (P′)=DGM eq(52)）——两条审查腿（graph-reviewer 证明逻辑+数值 / general-purpose
+  文献逐字）均过，state=verified，故 captain_confirmed → true。**确认范围严格限定，不得越界**：
+  (1) 确认的是上述**条件性**定理（给定 eq(52) ⇒ 挠 I>1 全正），**不是** Sen 全正性猜想的证明；
+  (2) F1 形式缺口已于 §4（Thm 4.1 第4步）补齐，不影响 Thm 6.1；
+  (3) §10.3（GAP 10.2b 部分进展草稿）仍为**未审草稿、5 条子 gap 开放**，**不在本次确认范围内**；
+  (4) DGM eq(51)/(52) 矛盾可对外声明为船长 09-15 另一决定（≠本条），诚实定性照旧。
+
   2026-09-14 (theorem-prover, GAP 10.2b 抢救性落盘): 新增 proof.md §10.3 = Theorem 10.3b 的
   骨架 + 主体证明（未润色，含 [GAP 10.3.a-e]）。核心 Lemma 10.3.1 已推出并完整写出：
   吸引子围道 Im v = −ℓΛ < 0 故 |y| = e^{2πℓΛ} → ∞（**下腔 |q|<1<|y|**，非写 ψ_m 的常用腔）；
