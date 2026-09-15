@@ -218,11 +218,27 @@ def test_seed_no_ghost_v4_drops_to_physical_argument_after_ddf_split() -> None:
     不是新弱点。**同日 formalizer-noghost-a 合入 main（6ed1638，Longitudinal.lean 的 `kOp` 与
     `lie_towerLop_kOp` 等）**，该卡接上 --via-lean 升为 **formalized**，无鬼定理 v4 回到 **rigorous**。
     同批在 --via-goddard-thorn 的 gaps 登记了 (B-26)：D = 26 唯一进入之处。
+
+    【2026-09-15 更新（分支 agent/curator/noghost-ddf-wiring）——(B-26) 接线，effective 回落
+    physical-argument】上面把 v4 拉回 rigorous 的每一步都只处理了 DDF／伴随／K_n 那一层。
+    (B-26) 本身（「塔上任意物理态 = DDF 态 + 零模态」，即 H_phys ⊆ D(Ε) + H_null）自始至终**没有
+    图内节点在 depends_on 里承载**：它只以文字形式记在 --via-goddard-thorn 的 gaps 与 summary 里，
+    而 propagate 只读 depends_on，故对工具不可见——effective 虚高。
+    本轮把该命题的已立陈述节点 worldsheet.ddf-spanning-hypothesis 接为本推导的
+    **非 inferred** 依赖（来源是本推导 sources 已登记的 goddard-2008 §6 (6.4) 逐字）。
+    该卡的 effective = physical-argument（最强推导 --via-borcherds-1992 被
+    worldsheet.ddf-contour-equals-mode-sum 封顶），于是 v4 的 effective 诚实降为
+    **physical-argument**，瓶颈链 = ddf-spanning-hypothesis → ddf-contour-equals-mode-sum。
+    **这不是论证退步，也不是推翻第七轮撤围道边的裁决**（那条仍然只走溯源记账）：
+    本边接入的是另一条此前只在 gaps 文字里的承重假设，里程碑 R8-3/R9-4 早已写明它就是猜想负担所在。
     """
     g = load_graph(ROOT)
     effs = compute_all(g)
-    assert effs["worldsheet.no-ghost-theorem-v4"].name == "rigorous"
+    # 2026-09-15：(B-26) 接线后，effective 由虚高的 rigorous 诚实落回 physical-argument。
+    assert effs["worldsheet.no-ghost-theorem-v4"].name == "physical-argument"
     assert effs["worldsheet.no-ghost-theorem-v4"].conjectures == set()
+    # 承接猜想负担的节点其 effective 也是 physical-argument（最强推导被围道字典封顶）
+    assert effs["worldsheet.ddf-spanning-hypothesis"].name == "physical-argument"
     # 2026-09-11 第八轮：K_n 代数卡经 Longitudinal.lean 为 formalized，不压低 v4（见 docstring 末段）
     assert effs["worldsheet.gt-longitudinal-k-algebra"].name == "formalized"
     gt8 = g.derivations["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
@@ -1320,12 +1336,18 @@ def test_status_report_lists_each_derivation_with_own_and_effective(tmp_path):
     # depends (non-inferred) on worldsheet.gt-longitudinal-k-algebra; that card is formalized
     # via Longitudinal.lean (merged 6ed1638), so no-ghost v4 stays rigorous end to end and the
     # Mobius example below remains the throttled case.
+    # 2026-09-15 (branch agent/curator/noghost-ddf-wiring): that is no longer true. The (B-26)
+    # spanning step was never carried by a depends_on edge — only by gap prose — so the tool
+    # could not see it. Wiring the already-existing card worldsheet.ddf-spanning-hypothesis
+    # (non-inferred, source goddard-2008 §6 (6.4), already listed) throttles --via-goddard-thorn
+    # to physical-argument again. no-ghost v4 is now a *second* own>effective example here
+    # (own=rigorous, effective=physical-argument), alongside the Mobius case below.
     rep2 = status_report(g, "worldsheet.no-ghost-theorem-v4")
     ders2 = {d["id"]: d for d in rep2["derivations"]}
     d2 = ders2["worldsheet.no-ghost-theorem-v4--via-goddard-thorn"]
     assert d2["own"] == "rigorous"
-    assert d2["effective"] == "rigorous"
-    assert rep2["effective"] == "rigorous"
+    assert d2["effective"] == "physical-argument"
+    assert rep2["effective"] == "physical-argument"
     rep_k = status_report(g, "worldsheet.gt-longitudinal-k-algebra")
     ders_k = {d["id"]: d for d in rep_k["derivations"]}
     assert ders_k["worldsheet.gt-longitudinal-k-algebra--via-lean"]["effective"] == "formalized"
