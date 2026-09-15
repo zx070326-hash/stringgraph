@@ -265,8 +265,13 @@ B1 = n2ΔΛ² + g                                          (g 同 §2 定义)
 B2 = Λ·b2,   b2 = n2[2nσ1−2mρ1+2ℓv1−ℓ²ρ1/n] + 2nm1+2mn1−n1ℓ²/n − jℓ
 B3 = j/2 + (ℓ/(2n))(n1+n2ρ1) − n2v1                      （Λ 无关！）
 ```
-（推导：直接代入并化简，与 §2 手法相同，过程见 scripts/verify_route_a.py 中的
-`compute_B1B2B3` 函数，已用符号代入交叉核对。）
+（推导：直接代入并化简，与 §2 手法相同；`scripts/verify_route_a.py` 中的
+`compute_B1B2B3()` 函数用 SymPy 独立符号代入，把 Sen (D.7) 的一般 B1,B2,B3
+表达式代入 attractor 坐标 ρ2=2nΛ,σ2=2mΛ,v2=ℓΛ，与本节所写的三条闭式逐项
+`simplify` 到恰好 0，交叉核对了这一步代入化简的代数；三项全部 PASS，见
+§6 运行记录开头的 "SymPy algebra check" 段。该核对只验证本证明自己的代入
+化简是否正确，不重新推导/验证 Sen (D.6)/(D.7) 本身——那是取自文献的已知
+恒等式，见 claim.md §3。）
 
 ### 5.2 关键恒等式：F=0 分支上 p_L²=1/2
 
@@ -296,14 +301,25 @@ Sen (D.6)：`m1n1+m2n2+j²/4 = (1/2)(p_L²−p_R²)`。我们的判别式条件�
 ### 5.4 由 (ii) 得到 m1 的一个界（Λ 无关，依赖 (J)）
 
 `n·b2 = n2[2n²σ1−(2mn+ℓ²)ρ1+2nℓv1] + 2n²m1+2mnn1−n1ℓ²−jnℓ`，`|n·b2|≤n√Δ`。
-用 ℓ≤m≤n（故 2mn≤2n², ℓ²≤n², nℓ≤n²）与 ρ1,σ1,v1≤1：
+用三角不等式把 `n1` 的系数 `2mn−ℓ²` 展开的两项**分别**取绝对值
+（`|2mn n1 − ℓ²n1| ≤ 2mn|n1| + ℓ²|n1|`，非用差本身的绝对值，是更保守但
+有效的界）与 ρ1,σ1,v1≤1：
 ```
 2n²|m1| ≤ n√Δ + |n2|(2n²+2mn+ℓ²+2nℓ) + 2mn|n1|+ℓ²|n1|+nℓ|j|
-        ≤ n√Δ + 7n²|n2| + 2n²|n1| + n²|j|
-⟹ |m1| ≤ √Δ/(2n) + 3.5|n2| + |n1| + |j|/2.                              (M)
 ```
-代入 (J)：`|m1| ≤ √Δ/(2n) + 3.5|n2| + |n1| + 0.5(1+|n1|+3|n2|)
-              = √Δ/(2n)+0.5 + 1.5|n1| + 5|n2|.`
+用 ℓ≤m≤n（故 2mn≤2n², ℓ²≤n², nℓ≤n²）逐项界定：
+`n2` 系数 `2n²+2mn+ℓ²+2nℓ ≤ 2n²+2n²+n²+2n²=7n²`；
+`j` 系数 `nℓ≤n²`；
+`n1` 系数 `2mn|n1|+ℓ²|n1| ≤ 2n²|n1|+n²|n1| = 3n²|n1|`
+**（注：不是 ≤2n²|n1|——在 m=n=ℓ 边界处 2mn=2n²、ℓ²=n²，两项之和恰为
+3n²，若只算 2n² 会在此边界处产生假的更紧的界；正确系数必须同时保留
+2mn≤2n² 与 ℓ²≤n² 两项，相加得 3n²）**。于是
+```
+2n²|m1| ≤ n√Δ + 7n²|n2| + 3n²|n1| + n²|j|
+⟹ |m1| ≤ √Δ/(2n) + 3.5|n2| + 1.5|n1| + |j|/2.                           (M)
+```
+代入 (J)：`|m1| ≤ √Δ/(2n) + 3.5|n2| + 1.5|n1| + 0.5(1+|n1|+3|n2|)
+              = √Δ/(2n)+0.5 + 2|n1| + 5|n2|.`
 
 ### 5.5 [GAP-n2] 未闭合的部分：n1 的界
 
@@ -354,9 +370,20 @@ GL(2,ℤ) 约化）对应的 Ω 落在 Sp(4,ℤ) 基本域的一个**固定紧�
 
 运行方式：`python scripts/verify_route_a.py`（Windows 环境下 `python3` 指向
 WindowsApps 的存根，会立即以 exit code 49 失败且不产生输出；须用 `python`，
-指向实际的 CPython 3.12 安装）。运行耗时 6 秒，退出码 0。
+指向实际的 CPython 3.12 安装；`sympy`（1.14.0）在该 `python` 下可导入，已
+确认）。运行耗时数秒，退出码 0。
 
-**结果摘要**（完整输出见下）：
+**SymPy 代数核对**（脚本 `__main__` 最先运行 `compute_B1B2B3()`，§5.1 引用）：
+```
+=== SymPy algebra check: proof.md section 5.1 B1/B2/B3 formulas ===
+compute_B1B2B3: B1 == n2*Delta*Lambda^2 + g          -- PASS (diff=0)
+compute_B1B2B3: B2 == Lambda*b2                       -- PASS (diff=0)
+compute_B1B2B3: B3 == j/2+(ell/2n)(n1+n2*rho1)-n2*v1  -- PASS (diff=0)
+```
+三者的符号化差全部 `simplify` 到恰好 0，确认 §5.1 从 Sen (D.7) 一般式代入
+attractor 坐标得到的三条闭式没有代数错误。
+
+**结果摘要**（数值网格搜索部分，完整输出见下）：
 - 3 个 ℓ=0 样本（(n,m,ℓ)=(2,2,0),(5,3,0),(10,1,0)）：**对全部 7 个 Λ 值，
   min|F|²=0 精确**，均在 argmin tuple=(0,0,0,0,−1)（即§3的平凡分支 F=∓v，
   j=−1 与 j=1 只差 F 的整体符号，不影响 |F|²=0）、点 (ρ1,σ1,v1)=(0,0,0) 达到
@@ -372,9 +399,14 @@ WindowsApps 的存根，会立即以 exit code 49 失败且不产生输出；须
   n2≠0 情形的证明，只是搜索范围内的健全性检查**（见脚本文档字符串的
   scope 声明）。
 
-**完整输出**：
+**完整输出**（含开头的 SymPy 代数核对段落）：
 
 ```
+=== SymPy algebra check: proof.md section 5.1 B1/B2/B3 formulas ===
+compute_B1B2B3: B1 == n2*Delta*Lambda^2 + g          -- PASS (diff=0)
+compute_B1B2B3: B2 == Lambda*b2                       -- PASS (diff=0)
+compute_B1B2B3: B3 == j/2+(ell/2n)(n1+n2*rho1)-n2*v1  -- PASS (diff=0)
+
 Route A numerical verification -- pure Python, no numpy/scipy.
 Lambda grid: [1, 2, 5, 10, 20, 50, 100]
 Tuple search bounds: |m1|,|n1|<=5, |n2|<=1, |j|<=5, m2 solved from discriminant (n2!=0) or scanned in [-3,3] (n2=0).

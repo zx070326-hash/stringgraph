@@ -40,9 +40,110 @@ SCOPE AND LIMITS OF THIS SCRIPT (read before interpreting output):
     closed, or a genuine counterexample exists outside these bounds. This
     is explicitly NOT proof of anything for n2!=0; it is a sanity check
     that nothing embarrassingly small is missed within the tested range.
+
+SEPARATE ALGEBRA CHECK (proof.md section 5.1): `compute_B1B2B3()` below is
+an independent SymPy symbolic verification that the attractor-coordinate
+forms of B1, B2, B3 quoted in proof.md section 5.1 are exactly (not just
+approximately) equal to Sen's general (D.7)-derived expressions after
+substituting rho2=2*n*Lambda, sigma2=2*m*Lambda, v2=ell*Lambda. This uses
+`sympy` (confirmed importable in this environment via `python`, unlike
+numpy/scipy; `python3` is the WindowsApps stub and must not be used -- see
+the note in the "运行记录" section of proof.md section 6). It is unrelated
+to, and independent of, the pure-Python numeric tuple/grid search in the
+rest of this file, which needs no external dependency. It is called from
+`__main__` before the numeric samples run.
 """
 
 import itertools
+
+try:
+    import sympy as _sp
+except ImportError:  # pragma: no cover - sympy is expected to be present
+    _sp = None
+
+
+def compute_B1B2B3():
+    """Symbolically verify the attractor-coordinate B1, B2, B3 formulas
+    quoted in proof.md section 5.1, by substituting
+    rho2 = 2*n*Lambda, sigma2 = 2*m*Lambda, v2 = ell*Lambda
+    into Sen's general (D.7)-derived expressions for B1, B2, B3 and
+    simplifying the difference against the claimed closed forms
+
+        B1 = n2*Delta*Lambda**2 + g
+        B2 = Lambda*b2
+        B3 = j/2 + (ell/(2*n))*(n1 + n2*rho1) - n2*v1
+
+    to exactly zero.
+
+    Returns True and prints "PASS" for each of B1, B2, B3 if the algebra
+    checks out exactly; raises AssertionError otherwise. This is a
+    cross-check of the *proof.md substitution algebra* in section 5.1,
+    not a re-derivation of Sen's (D.6)/(D.7) identities themselves (those
+    are taken as given from the literature, per claim.md section 3).
+    """
+    if _sp is None:
+        raise RuntimeError(
+            "sympy is required for compute_B1B2B3() but is not importable "
+            "in this environment"
+        )
+
+    m, n, ell, Lam = _sp.symbols("m n ell Lam", positive=True)
+    rho1, sigma1, v1 = _sp.symbols("rho1 sigma1 v1", real=True)
+    m1, n1, m2, n2, j = _sp.symbols("m1 n1 m2 n2 j", real=True)
+
+    rho2 = 2 * n * Lam
+    sigma2 = 2 * m * Lam
+    v2 = ell * Lam
+
+    # Sen's general B1, B2, B3 (D.7), before substituting attractor coords
+    # (proof.md section 5.1, "其中" block).
+    B1 = (
+        m2
+        + n2 * (sigma2 * rho2 + sigma1 * rho1 - v1**2 - v2**2)
+        - m1 * rho1
+        + n1 * sigma1
+        + j * v1
+    )
+    B2 = (
+        n2
+        * (
+            sigma1 * rho2
+            - sigma2 * rho1
+            + 2 * v1 * v2
+            - 2 * v2**2 * rho1 / rho2
+        )
+        + m1 * rho2
+        + n1 * (sigma2 - 2 * v2**2 / rho2)
+        - j * v2
+    )
+    B3 = _sp.Rational(1, 2) * j + n1 * (v2 / rho2) - n2 * v1 + n2 * (v2 * rho1 / rho2)
+
+    Delta = 4 * m * n - ell**2
+    g = n2 * (sigma1 * rho1 - v1**2) + j * v1 + n1 * sigma1 - m1 * rho1 + m2
+
+    claimed_B1 = n2 * Delta * Lam**2 + g
+    diff_B1 = _sp.simplify(B1 - claimed_B1)
+    assert diff_B1 == 0, f"B1 mismatch: {diff_B1}"
+    print("compute_B1B2B3: B1 == n2*Delta*Lambda^2 + g          -- PASS (diff=0)")
+
+    b2 = (
+        n2 * (2 * n * sigma1 - 2 * m * rho1 + 2 * ell * v1 - ell**2 * rho1 / n)
+        + 2 * n * m1
+        + 2 * m * n1
+        - n1 * ell**2 / n
+        - j * ell
+    )
+    claimed_B2 = Lam * b2
+    diff_B2 = _sp.simplify(B2 - claimed_B2)
+    assert diff_B2 == 0, f"B2 mismatch: {diff_B2}"
+    print("compute_B1B2B3: B2 == Lambda*b2                       -- PASS (diff=0)")
+
+    claimed_B3 = _sp.Rational(1, 2) * j + (ell / (2 * n)) * (n1 + n2 * rho1) - n2 * v1
+    diff_B3 = _sp.simplify(B3 - claimed_B3)
+    assert diff_B3 == 0, f"B3 mismatch: {diff_B3}"
+    print("compute_B1B2B3: B3 == j/2+(ell/2n)(n1+n2*rho1)-n2*v1  -- PASS (diff=0)")
+
+    return True
 
 
 def f_squared(n, m, ell, Lam, rho1, sigma1, v1, m1, n1, m2, n2, j):
@@ -156,6 +257,10 @@ def run_sample(n, m, ell, lambdas, grid_k=5, bound_lin=5, bound_n2=1, bound_j=5)
 
 
 if __name__ == "__main__":
+    print("=== SymPy algebra check: proof.md section 5.1 B1/B2/B3 formulas ===")
+    compute_B1B2B3()
+    print()
+
     lambdas = [1, 2, 5, 10, 20, 50, 100]
 
     samples = [
