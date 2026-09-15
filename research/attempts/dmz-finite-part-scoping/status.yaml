@@ -1,0 +1,17 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-15 (theorem-prover): DMZ 有限部猜想 scoping 完成。
+
+  无源查证结论：公开文献**查无**「φ_F 系数 = 单心 dyon 指标（对全部 I=1 电荷成立）」的严格数学证明。
+  关键附带发现：BSS 2311.16252 给出反例——naive 全电荷版本**为假**；识别只在电荷集 A/B 成立。
+  DMZ 原文分解定理（Thm 8.3）是严格的；「φ_F = 单心计数函数」是物理解读，非定理标签。
+
+  可行性裁定：(c)——必须先给「单心指标」一个数学替身（已有：吸引子围道积分 d_*），
+  取定替身后剩余内容（命题 F*/F†）是可攻的纯数学命题，属 (a) 型。
+
+  推荐路径：并入 torsion-immortal-positivity-hecke 的 [GAP 10.2b]
+  （把「n≥m ⟹ d_*=(−1)^{ℓ+1}c_m^F（多心留数为零）」从数值观察升级为定理），
+  不另起独立证明尝试——可攻目标与已有 attempt 完全重叠。
