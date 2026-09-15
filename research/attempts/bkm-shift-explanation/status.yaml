@@ -1,8 +1,50 @@
-state: draft
-reviewer: null
-verdict: null
+state: verified
+reviewer: "graph-reviewer(对抗审查 proof.md 逐引理,2026-09-15)=VERIFIED（总裁定，无 CONFIRMED 致命 finding）; researcher(GAP-前提逐字文献,Kawai hep-th/9710016 + DMZ,2026-09-15)=两条 GAP-前提均坐实"
+verdict: "reviewer 对命题 B（(**) 式半整平移 Z_I=Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)）总裁定 VERIFIED：Lemma B.1（换元双射）、B.2（指数恒等式）、命题 B 第 1–5 步均 VERIFIED，无可构造反例。reviewer 设的唯一条件是两条 GAP-前提需逐字文献（A: Φ₁₀ 椭圆变量整周期性；B: Borcherds 乘积奇 ℓ 系数非零）——本轮由 researcher 腿以 Kawai hep-th/9710016 eq(5.13) 乘积式（每因子 y 指数为整数 r ⇒ 整周期性）与 eq(4.32) c(−1)=2≠0（判别式 −1，来自三元组 (0,1,1)，奇 ℓ=1 ⇒ 奇 ℓ 系数非零）逐字坐实，DMZ 1208.4074 eq(85) φ_{−2,1} 系数二重佐证。故 reviewer 的条件已满足，state draft→verified。**诚实边界（不得越界宣称）**：(1) proof.md §4/§7 正文仍带 [GAP-前提] 标注，待 prover/curator 把 kawai-1997 引用接进正文并撤标注（纯文档任务，不改数学）；(2) GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构的精确对应，F3）仍为开放问题，proof.md 已如实标注且明确不影响命题 B 严格性；(3) 命题 B 的物理前提根仍是 A-N eq(2.11)+(2.13)（文献逐字，非本尝试所证）——本尝试证的是「给定 A-N 两式 ⇒ 半整平移闭式」这一纯代数步。captain_confirmed 保持 false 待船长最终拍板。"
 captain_confirmed: false
 notes: |
+  2026-09-15 (lead 汇总——reviewer 腿 + GAP-前提文献腿均返回，state draft -> verified):
+  两条腿咬合闭环：graph-reviewer 对抗审查给命题 B 总裁定 VERIFIED，唯一附带条件是两条
+  GAP-前提需逐字文献；researcher 腿（commit 2c7f258，并入 main 245337b）恰好用 Kawai
+  hep-th/9710016 把这两条坐实。落盘 literature/extractions/phi10-periodicity-and-product.md
+  （新）、sources.bib 登记 kawai-1997。据此升 verified，captain_confirmed 留 false。
+
+  graph-reviewer 对抗审查（lead 代记，reviewer 无 Write）——按严重度：
+  - [F1] Lemma B.3(a)/(b) 依赖 GAP-前提（中，文档缺口）— PLAUSIBLE：B.3(a) 奇 d 平移被 Φ₁₀
+    整周期性吸收、B.3(b) 反证（含奇 ℓ 项 ⟹ 1/2-周期不成立）两处依赖 Φ₁₀ 整周期性与 Borcherds
+    奇 ℓ 系数非零；标 PLAUSIBLE 因二者是 index-1 Jacobi/Siegel 形式的标准事实、找不到反例，但
+    本项目此前未逐字抽取。**仅影响 Lemma B.3 与推论 B1 奇 d 简化段，不影响主命题 (**) 推导
+    （第 1–5 步不用 B.3）**。→ 本轮已被 researcher 腿 kawai-1997 eq(5.13)/(4.32) 逐字闭合。
+  - [F2] 推论 B1 奇 d 段继承 F1（低）— PLAUSIBLE：偶 d 差别陈述不依赖任何 GAP，已单独核实正确。
+  - [F3] GAP-BKM（低，开放问题，已诚实标注）— PLAUSIBLE：半整平移与 BKM 根空间 Z/2Z 自同构
+    的精确对应尚无陈述，proof.md 已如实标为开放且声明不影响命题 B。审查确认标注准确，非扣分项。
+  - 无 CONFIRMED finding（未发现致命漏洞或可构造反例）。
+  逐引理裁定：
+  - Lemma B.1 换元双射：VERIFIED（φ_d/ψ_d 互逆；d²∤m 或 d∤ℓ ⇒ Ω_1=0 来自整数三元组定义域，
+    格点完整、无重复无遗漏）。
+  - Lemma B.2 指数恒等式：VERIFIED（四步展开正确；(−1)^{ℓ'+(d−1)ℓ'}=(−1)^{dℓ'} 初等；唯一性注
+    B.2.1「对所有 ℓ' 成立 ⟺ z_new−dz≡(d−1)/2 mod 1」无歧义）。
+  - Lemma B.3(a)(b)：PLAUSIBLE-with-gap（整除性/反证结构正确，化简依赖 GAP-前提，见 F1，已闭合）。
+  - 命题 B 第 1–5 步：VERIFIED（求和交换合法——d|I 有限和、形式幂级数层面无收敛障碍；第 2 步由
+    B.1、第 3 步由 B.2、第 4 步 Z_1=1/Φ₁₀ 由 A-N eq(2.11) 逐字抽取保障；d=2,I=2 对抗手算吻合）。
+  - 推论 B1：VERIFIED（偶 d 差别段）/ PLAUSIBLE-with-gap（奇 d 简化段，继承 F1，已闭合）。
+
+  researcher GAP-前提文献腿（commit 2c7f258 → main 245337b）：
+  - [GAP-前提-A Φ₁₀ 整周期性] 坐实：Kawai hep-th/9710016 eq(5.13)
+    χ₁₀(Ω)=pqy∏_{(k,l,r)>0}(1−p^k q^l y^r)^{c(4kl−r²)}，变量 eq(2.19) p=e[σ],q=e[τ],y=e[z]。
+    每因子 y 指数为整数 r、前因子 pqy 的 y 指数=1 ⇒ z→z+1（y→y）逐因子不变 ⇒ Φ₁₀(τ,z+1,σ)=Φ₁₀(τ,z,σ)，
+    直接从乘积得出，不必诉诸 Sp(4,ℤ) 变换理论。
+  - [GAP-前提-B 奇 ℓ 系数非零] 坐实，两套独立逐字来源：
+    (A) Kawai eq(4.32) c(0)=20,c(−1)=2,c(N)=0(N<−1)：乘积指标 (k,l,r)=(0,1,1) 判别式 4·0·1−1²=−1，
+        指数 c(−1)=2≠0 ⇒ 因子 (1−py)² 展开含非零 y^1（奇 ℓ=1）项。
+    (B) DMZ 1208.4074 §4.3 eq(85) φ_{−2,1}=(y−1)²/y−2(y−1)⁴/y² q+…，首项 y−2+y⁻¹ 直接显示非零
+        y^{±1} 系数；Table 1 C_{−2}(−1)=1≠0。
+    约定注（供 curator）：proof.md 的 c(k) 指 φ_{−2,1} 傅氏系数（对应 DMZ Table 1 C_{−2}(−1)=1）；
+    Kawai c(−1)=2 是 K3 椭圆亏格（=φ_{−2,1}×(−2)），二者均给非零 c(−1)，非平凡性结论与归一化无关。
+    原始严格来源为 gritsenko-nikulin-1998（alg-geom/9611028），kawai-1997 为其物理综述转述。
+  - 遗留 TODO（不阻断 verified，交 prover/curator）：把 kawai-1997 eq(5.13)/(4.32) 引用接进
+    proof.md §4/§7 正文并撤 [GAP-前提] 标注；GAP-BKM（F3）仍开放。
+
   2026-09-15 (theorem-prover): 开缝 B，claim.md 初稿。
   命题 B（(**) 式）可精确到完整严格证明：前提为 A-N eq(2.11)+(2.13)（文献逐字核实）
   加 Φ₁₀ 整周期性，推导为初等 Fourier 换元，无实质障碍。
