@@ -1,0 +1,82 @@
+state: under-review
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-16, prover agent (role=prover, branch agent/prover/level-n-generalization).
+
+  Task: derive a general N>=7 formula for p_m(N) (m-colored partition counts used by
+  formal/StringFormal/NoGhost/Level{Two..Six}Count.lean), verify numerically, and
+  prepare a Lean skeleton for N=7. All three deliverables (formula derivation, numerical
+  verification, Lean skeleton) completed this round; requesting graph-reviewer pass.
+  Note: could not agora_send this request myself (see administrative note below) --
+  lead should dispatch graph-reviewer manually.
+
+  Completed:
+    - Claim 1 (general closed form p_m(N) = sum over partitions lambda|-N of
+      prod C(m+r_s-1,r_s)): proved elementarily from the generating-function identity
+      P_R(X)^m = sum p_m(N) X^N, itself derived from the already-formalized graph node
+      math.euler-partition-generating-function (m=1 case) by an m-fold product /
+      "independent ordinary partition per direction" bijection argument. No gaps.
+    - Claim 2 (exact convolution recursion p_{m+1}(N) = sum_k p(k) p_m(N-k)): proved,
+      immediate corollary of the generating-function factorization P_R(X)^{m+1} =
+      P_R(X)^m * P_R(X). No gaps.
+    - Claim 3 (kappa_N(m) := p_m(N)+p_{m+1}(N-1)+p_{m+1}(N-2)-p_{m+1}(N)): general
+      bookkeeping formula kappa_N(m) = sum_s Delta(s) p_m(N-s) derived from Claim 2;
+      evaluated explicitly for N<=7 using only the 7 known small values p(0..7). Found
+      kappa_6(m) = m+1 (NOT constant -- new finding, first N where kappa depends on m)
+      and kappa_7(m) = C(m+3,2). Both triple/numerically verified.
+    - Claim 4 (N=7 explicit 10-shape closed form for p_m(7)): derived by hand from the
+      15 partitions of 7 grouped into 10 shapes, cross-checked against Claim 1's general
+      formula, and verified numerically for m=1..5 against three independent Python
+      computations (partition-grouping / generating-function DP / brute-force
+      recursion), all agreeing exactly.
+    - Numerical verification scripts: scripts/verify_level_n.py (three-way
+      cross-check, N=1..10, m=1..5) and scripts/find_kappa.py (kappa_N(m) table,
+      N=2..10, m=1..7, plus a direct check of the Claim-2 convolution identity).
+    - Lean skeleton: three theorem shells (levelSeven_count_identity_gen/_identity/
+      _identity_full), signatures-only / sorry bodies, importing LevelFiveCount (not
+      LevelSixCount, see bug finding below). IMPORTANT CORRECTION vs the original task
+      wording: written first as formal/StringFormal/NoGhost/LevelSevenCount.lean and
+      confirmed to `lake build` cleanly (1824 jobs, only 3 expected sorry warnings), but
+      committing that file was refused by this repo's own pre-commit hook
+      (scripts/pre-commit.sh -> scripts/check_sorry.py), which unconditionally bans any
+      `sorry` under formal/ with no override -- matches formal/CLAUDE.md's prose rule.
+      Per this project's agent-coordination rules, a task-assigning message cannot
+      authorize bypassing an enforced project rule, so I did NOT use --no-verify.
+      Relocated the (verified-still-compiling) content to
+      research/attempts/level-n-count-generalization/scratch.lean, per research/CLAUDE.md's
+      explicit allowance for sorry-laden Lean scratch drafts. formal/ itself has ZERO
+      changes from this attempt. lean-formalizer should copy scratch.lean's statements
+      into a genuinely new formal/ file once real proofs replace the sorrys (ideally one
+      theorem/commit). Caught and fixed one hand-transcription slip (wrong Nat.choose
+      shift in the p_{m+1}(5) summand) before building, via a fresh literal
+      term-by-term Python transcription check (scripts/check_lean_skeleton_literal.py)
+      run BEFORE `lake build` -- deliberate methodological fix in response to the
+      LevelSixCount.lean disaster (see below).
+
+  Important out-of-scope finding, prominently flagged in proof.md section 5:
+    formal/StringFormal/NoGhost/LevelSixCount.lean's `levelSix_count_identity_gen`
+    theorem is mathematically FALSE and the file currently FAILS `lake build`
+    (confirmed by direct build in this worktree, error trace recorded in proof.md
+    section 5). The bug is structural, not just an arithmetic slip: by Claim 3,
+    kappa_6(m) = m+1 != 0 for every m, so no fixed-shape formula F(x) := p_x(6) can
+    satisfy the file's claimed "F(m+1) = F(m)" identity. The mathematically correct
+    N=6 identity is the recursive form p_{m+1}(6) = p_m(6) + p_{m+1}(5) + p_{m+1}(4)
+    + (m+1), not a bare F(m+1)=F(m) equality. LevelSixCount.lean is also NOT listed
+    in formal/CLAUDE.md's directory map, suggesting it bypassed normal review. I did
+    NOT fix this file myself (out of scope for this task); recommend lead dispatch a
+    fix before merging any branch depending on it. My own LevelSevenCount.lean routes
+    around it by importing LevelFiveCount directly.
+
+  Open GAPs (see proof.md section 8 for full list): no general-N closed form for
+  kappa_N(m) (Euler pentagonal number theorem itself not established as a graph
+  brick, only used as unverified expository remark, not part of the logical chain);
+  N=8,9,10 explicit shape tables not written up (only numerically verified);
+  Lean proof bodies all `sorry` by design (task explicitly asked for skeleton only).
+
+  Administrative note: agora_join/agora_claim tools were not available in this
+  sub-agent's tool set (no MCP agora_* tools exposed) -- could not register on the
+  Agora bus. Branch was manually renamed to agent/prover/level-n-generalization.
+  Flagging this for the lead; work proceeded per task priority (math derivation)
+  regardless.
