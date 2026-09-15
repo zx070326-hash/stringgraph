@@ -1,6 +1,16 @@
 # 路线图
 
-## Phase 0：骨架与种子数据（当前）
+## 当前活跃（2026-09-15）
+
+两条线并行推进（本节是给新 agent 的入口地图；权威进度在各 Phase 小节与各 `status.yaml`）：
+
+1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，N≤4 已闭。详见下方 Phase 1 进度日志。
+2. **黑洞 / 原创证明线**（Phase 3 + `research/`）：N=4（type II on K3×T²）1/4-BPS 挠 dyon 免死指标。
+   - **缝 A** `research/attempts/torsion-immortal-positivity-hecke`：state=**verified**（两条独立审查腿），`captain_confirmed=false`。Thm 6.1（挠 I>1 免死指标正性除子和，物理依赖压到单条前提 P′=DGM eq(52)）、Thm 4.1（吸引子围道协变性）、Prop 4.4（d_* 的 GL(2,ℤ) 不变性）已按 **physical-argument** 毕业进 `graph/statements/holography/`（commit 132120e）。**副产品**：DGM 0803.2692 eq(51)/(52) 互不相容（显式整数见证 I=2,(4,1,2)）——**这是对外声明，船长确认前不得公开宣称**（暂缓，等第三方交叉核）。
+   - **缝 B** `research/attempts/bkm-shift-explanation`：state=draft。Prop B 从 Alexandrov–Nampuri eq(2.11)+(2.13) 初等推出半整平移 (d−1)/2（Lemmas B.1–B.3）。
+   - **下一个真空缺 scoping**：`research/open-gaps-survey.md`（DVV 生成函数 / DMZ 有限部 / CHL 推广三候选）；DMZ 一支已 scoping 完（`research/attempts/dmz-finite-part-scoping`，裁定并入缝 A 的 [GAP 10.2b]，因 BSS 2311.16252 已给全电荷版反例）。
+
+## Phase 0：骨架与种子数据（已完成）
 
 - [x] 目录结构、CLAUDE.md、agent 角色、skill
 - [x] 节点/边/里程碑 schema
