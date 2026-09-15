@@ -249,5 +249,91 @@ def to_dot(g: Graph) -> str:
     return "\n".join(out)
 
 
+def captain_queue(root: Path) -> dict:
+    """Scan for items awaiting captain decision.
+
+    Returns a dict with two lists:
+      "research": attempts where state=="verified" and captain_confirmed is falsy.
+      "milestones": milestones where audit.status != "approved".
+    Each entry is a plain dict with human-readable fields plus "path".
+    """
+    import yaml as _yaml
+
+    research_items: list[dict] = []
+    attempts_dir = root / "research" / "attempts"
+    if attempts_dir.is_dir():
+        for status_file in sorted(attempts_dir.glob("*/status.yaml")):
+            try:
+                raw = _yaml.safe_load(status_file.read_text(encoding="utf-8")) or {}
+            except Exception:  # noqa: BLE001
+                raw = {}
+            state = raw.get("state", "")
+            captain_confirmed = raw.get("captain_confirmed", False)
+            if state == "verified" and not captain_confirmed:
+                slug = status_file.parent.name
+                verdict = str(raw.get("verdict") or "").strip()
+                # Truncate very long verdict strings to a summary line
+                verdict_line = verdict.split("\n")[0][:120] if verdict else "(no verdict)"
+                research_items.append({
+                    "slug": slug,
+                    "state": state,
+                    "captain_confirmed": captain_confirmed,
+                    "verdict_summary": verdict_line,
+                    "path": str(status_file),
+                })
+
+    milestone_items: list[dict] = []
+    milestones_dir = root / "graph" / "milestones"
+    if milestones_dir.is_dir():
+        for milestone_file in sorted(milestones_dir.glob("*.yaml")):
+            try:
+                raw = _yaml.safe_load(milestone_file.read_text(encoding="utf-8")) or {}
+            except Exception:  # noqa: BLE001
+                raw = {}
+            audit = raw.get("audit") or {}
+            audit_status = audit.get("status", "") if isinstance(audit, dict) else ""
+            if audit_status != "approved":
+                milestone_items.append({
+                    "id": str(raw.get("id", milestone_file.stem)),
+                    "audit_status": audit_status or "(missing)",
+                    "path": str(milestone_file),
+                })
+
+    return {
+        "research": research_items,
+        "milestones": milestone_items,
+    }
+
+
+def format_captain_queue(data: dict) -> str:
+    lines: list[str] = []
+
+    research = data["research"]
+    lines.append(f"=== 待船长确认（research 尝试）: {len(research)} 条 ===")
+    if not research:
+        lines.append("  (无待办)")
+    else:
+        for item in research:
+            lines.append(f"  slug:              {item['slug']}")
+            lines.append(f"  state:             {item['state']}")
+            lines.append(f"  captain_confirmed: {item['captain_confirmed']}")
+            lines.append(f"  verdict:           {item['verdict_summary']}")
+            lines.append(f"  path:              {item['path']}")
+            lines.append("")
+
+    lines.append(f"=== 待船长审计（里程碑）: {len(data['milestones'])} 条 ===")
+    milestones = data["milestones"]
+    if not milestones:
+        lines.append("  (无待办)")
+    else:
+        for item in milestones:
+            lines.append(f"  id:           {item['id']}")
+            lines.append(f"  audit_status: {item['audit_status']}")
+            lines.append(f"  path:         {item['path']}")
+            lines.append("")
+
+    return "\n".join(lines)
+
+
 def to_json(obj: object) -> str:
     return json.dumps(obj, ensure_ascii=False, indent=2)
