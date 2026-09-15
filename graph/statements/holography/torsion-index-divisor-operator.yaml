@@ -28,7 +28,7 @@ sources:
 notes: |
   **纯数学定义，无物理输入。** 定义对象是 Φ₁₀（Siegel 尖点形式）、显式围道与显式算子 𝒯_I，
   与「挠 I 的单心黑洞指标」的等同**不在本定义内**，是物理命题
-  holography.torsion-immortal-index-physical-identification（physical-argument）。
+  holography.dgm-torsion-divisor-sum（physical-argument）。
 
   **本节点只立定义，不立命题。** d_*^{(I)} 的除子和恒等式
   d_*^{(I)}(m,n,ℓ) = Σ_{s|I} s·d_*(m/s²,n,ℓ/s) 与正性 d_*^{(I)} > 0 是命题，记在
