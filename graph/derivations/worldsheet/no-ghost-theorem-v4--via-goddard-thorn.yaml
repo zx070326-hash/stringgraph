@@ -144,6 +144,24 @@ depends_on:
       **2026-09-11：本边由 worldsheet.kac-determinant 改指其接替者
       worldsheet.kac-determinant-v2**（后者只把 α_N 的「正常数」改为「非零常数」，
       其余陈述与 sources 逐字相同）。本推导不使用 α_N 的符号，故换代对本边**无实质影响**。
+  - id: worldsheet.ddf-spanning-hypothesis
+    inferred: false
+    note: |
+      【2026-09-15 新增，curator，分支 agent/curator/noghost-ddf-wiring】
+      本推导 summary 第 (1) 条「再证塔上任意物理态可写成 DDF 态加零模态」即本节点的断言
+      H_phys ⊆ D(Ε) + H_null；推导 gaps 的 (B-26) 一条逐字写明「这是 D = 26 唯一进入之处」
+      且「剩余的非机检内容 = worldsheet.ddf-spanning-hypothesis 一条」（2026-09-11 noghost-conditional
+      追记），但该节点此前从未出现在 depends_on 中，工具不可见，导致 effective 虚高为 rigorous。
+      本边把这一隐含依赖显式化。
+      **非 inferred**：来源直接是本推导 sources 已登记的 goddard-2008 §6 (6.4)（逐字
+      'For D = 26, if |ψ⟩ is a physical state … it can be written in the form |ψ⟩ = |f⟩ + |n⟩'，
+      |f⟩ 为 DDF 态、|n⟩ 为零模态），正是 worldsheet.ddf-spanning-hypothesis 的 statement 断言。
+      不需要新文献；本推导的 sources 列表无需改动。
+      **有效状态后果**：worldsheet.ddf-spanning-hypothesis 的 effective = physical-argument
+      （最强推导 --via-borcherds-1992，被 worldsheet.ddf-contour-equals-mode-sum 封顶），
+      加入后本推导的 effective 由虚高的 rigorous 降为 **physical-argument**，
+      与推导 notes 和里程碑 R8-3/R9-4 记载的「(B-26) 未证」一致。这不是新弱点，
+      而是把此前被 gaps 文字承载却对工具不可见的猜想负担正确地接入图中。
 sources:
   - ref: goddard-thorn-1972
     loc: "无编号；摘要末句 'absence of ghosts for d ⩽ 26'，正文未获取"
