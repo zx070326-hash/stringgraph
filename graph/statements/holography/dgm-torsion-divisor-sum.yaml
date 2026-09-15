@@ -1,0 +1,50 @@
+id: holography.dgm-torsion-divisor-sum
+kind: proposition
+title: DGM eq(52)：挠 I 的单心（免死）dyon 指标等于正权除子和
+statement: |
+  在 N=4 弦论（type II on K3×T²，或等价的杂化弦论 on T⁶）中，
+  设 (Q,P) 为 1/4-BPS dyon 的电荷对，挠 I = gcd(Q∧P)，
+  电荷不变量 (m,n,ℓ) = (Q²/2, P²/2, Q·P)，满足 I²|m、I|ℓ、m,n ≥ 1、Δ = 4mn−ℓ² > 0。
+  记 Ω_I(m,n,ℓ) 为挠 I 的单心（immortal）dyon 指标（第六螺旋超迹），
+  Ω₁(m′,n′,ℓ′) 为对应的单位挠（I=1）指标（等于 d_*(m′,n′,ℓ′)，Rosselló 的定义）。
+  则：
+    Ω_I(m,n,ℓ) = Σ_{s|I} s · Ω₁(m/s², n, ℓ/s)。
+  即：挠 I 的单心 dyon 指标可由一组单位挠指标的正权除子和表示，
+  其中对 s|I 的每一项权 s 严格为正，且 Ω₁(m/s²,n,ℓ/s) = d_*(m/s²,n,ℓ/s)。
+  注：上式是 DGM arXiv:0803.2692 的 eq(52)，与同文 eq(50)+(51) 按字面写法**不相容**
+  （对偶数 s 且 ℓ/s 为奇数时相差因子 (−1)^{ℓ−ℓ/s} = −1）；
+  本项目判断 eq(52) 是物理上正确者，eq(51) 疑似漏了偶除子的半整平移
+  （详见 research/attempts/torsion-immortal-positivity-hecke/proof.md §5 及 extractions/dabholkar-gomes-murthy-2008.md）。
+uses: []
+uses_conventions: []
+sources:
+  - ref: dabholkar-gomes-murthy-2008
+    loc: "eq(52)：Ω_I(Q²/2, P²/2, Q·P) = Σ_{s|I} s·Ω₁(Q²/2s², P²/2, Q·P/s)；eq(44)–(47)（推导链：重标 ρ→s²ρ, v→sv）"
+    note: "eq(50)+(51) 与 eq(52) 在本项目复核中确认不相容（对偶数除子 s 且 ℓ/s 奇数差 (−1) 号；显式整数见证见 proof.md §5）；本节点只陈述 eq(52)，原因见 notes。无 erratum。"
+  - ref: alexandrov-nampuri-2020
+    loc: "eq(2.13)：Ω_I(n,m,ℓ) = Σ_{d|I} d·Ω₁(n,m/d²,ℓ/d)（符号约定下指标挂 p=e^{2πiσ}，与 eq(52) 同一命题）；eq(2.11)+(2.13) 联立解出的生成函数闭式 Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)（含半整平移，与 DGM eq(51) 不同而与 eq(52) 一致）"
+    note: "Alexandrov-Nampuri 2020 的 eq(2.13) 是对 eq(52) 的独立表述，且联立 eq(2.11)+(2.13) 得出的生成函数闭式含半整平移，佐证 eq(52) 而非 eq(51)"
+notes: |
+  **本卡是 physical-argument 命题。** DGM 的推导依赖 4d-5d 提升、S-对偶、fermionic zero mode
+  计数，以及挠 I > 1 的 dyon 配分函数的物理结构（多心态分离、hair mode）；
+  原文（§3）自称用"duality arguments"推出，未给出严格数学证明。
+
+  **为何只陈述 eq(52) 而非 eq(51)**：本项目在 research/attempts/torsion-immortal-positivity-hecke
+  通过吸引子围道协变性（Thm 4.1）和符号核算（Prop 5.1）严格证明了 eq(50)+(51) 与 eq(52)
+  逻辑不相容（最小整数见证：I=2, (m,n,ℓ)=(4,1,2)，差值 101412 = 4·d_*(1,1,1)）；
+  与 Alexandrov-Nampuri 2020 的 eq(2.11)+(2.13) 联立结果也与 eq(51) 不符而与 eq(52) 一致。
+  因此本节点陈述 eq(52)，把 eq(51) 的笔误状态单独记录在 proof.md §5。
+
+  **与 holography.dvv-dyon-index-generating-function 的关系**：DVV 那张卡陈述的是
+  I=1 时的生成函数识别（1/Φ₁₀ 系数 = 单位挠 dyon 指标），本卡陈述 I>1 的推广。
+
+  **与 holography.torsion-index-divisor-operator 的关系**：该定义卡定义了数学量 d_*^{(I)}，
+  本卡陈述物理识别：Ω_I = d_*^{(I)}（即 d_*^{(I)} 就是物理上所说的挠 I 免死指标）。
+  两张卡一起使得 Thm 6.1 的数学内容可被物理解读。
+
+  **captain_confirmed**：DGM eq(51)/(52) 矛盾是本项目原创发现，已由两路独立审查（graph-reviewer
+  内部逻辑 + general-purpose 文献逐字）确认，但属对外声明，需船长确认后方可正式宣称（见
+  status.yaml captain_confirmed: false）。本卡的物理前提 (P′) 本身不受该限制。
+tags: [bh-entropy, n4-string-theory, cartography, physical-identification]
+author: graph-curator
+created: "2026-09-15"
