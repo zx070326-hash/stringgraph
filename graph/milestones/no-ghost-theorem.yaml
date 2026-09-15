@@ -78,7 +78,7 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
-      【第十轮记账（2026-09-14）】physics-auditor，分支 agent/auditor/no-ghost-r10。kind: bookkeeping；verdict 不变 faithful；
+      【第十轮记账（2026-09-15）】physics-auditor，分支 agent/auditor/no-ghost-r10。kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R9。
 
       R10-1. 〔R9-4 关于有效状态的表述就此过时，仅此一点〕commit a2f1f0d（分支 agent/curator/noghost-ddf-wiring）把
