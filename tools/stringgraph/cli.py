@@ -7,7 +7,18 @@ from pathlib import Path
 
 from .axioms import check_axioms, format_axioms_report
 from .loader import find_project_root, load_graph
-from .report import format_report, format_why, full_report, search, status_report, to_dot, to_json, why_report
+from .report import (
+    captain_queue,
+    format_captain_queue,
+    format_report,
+    format_why,
+    full_report,
+    search,
+    status_report,
+    to_dot,
+    to_json,
+    why_report,
+)
 from .validate import validate
 
 
@@ -59,6 +70,12 @@ def main(argv: list[str] | None = None) -> int:
     p_report.add_argument("--json", action="store_true")
     p_search = sub.add_parser("search", help="keyword search over statements and conventions")
     p_search.add_argument("terms", nargs="+")
+    p_cq = sub.add_parser(
+        "captain-queue",
+        help="list items awaiting captain decision: verified-but-unconfirmed research attempts "
+             "and milestones whose audit status is not approved",
+    )
+    p_cq.add_argument("--json", action="store_true")
     sub.add_parser("dot", help="print Graphviz dot to stdout")
 
     args = ap.parse_args(argv)
@@ -130,6 +147,11 @@ def main(argv: list[str] | None = None) -> int:
             print("no matches")
         for score, sid, title in hits:
             print(f"{score:3d}  {sid}  —  {title}")
+        return 0
+
+    if args.cmd == "captain-queue":
+        q = captain_queue(root)
+        print(to_json(q) if args.json else format_captain_queue(q))
         return 0
 
     if args.cmd == "dot":
