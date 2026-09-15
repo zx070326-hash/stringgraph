@@ -66,6 +66,7 @@
 ### Git 纪律
 - **API 故障韧性**（2026-09-10/11 两次证书错误各杀死 6–10 个 agent）：所有子 agent **每完成一张卡/一个声明立刻 validate+commit**，不攒；worktree 上无提交会被自动删除，未提交的工作全部丢失。lead 在 agent 死亡后先查 `.claude/worktrees/<id>` 是否仍在、`git status` 是否有可 validate 的残留，能过校验就代为提交（提交信息注明「lead committed on behalf of … after API outage」），再重新派工。
 - 主分支 `main`。每个 agent 任务在自己的 worktree 上开分支：`agent/<role>/<slug>`，worktree 放在 `.claude/worktrees/`（已 gitignore）。
+- **写手 agent 必须在自己的独立 worktree 里工作，绝不在主工作树 `D:/physics/string` 上 `git checkout -b` 或直接改文件**（实测 graph-curator / general-purpose 有此行为，会挡住 lead 在主树的 merge/checkout）。派工时用 Agent 的 `isolation: "worktree"`；lead 在动任何 `git checkout` / `merge` 前先 `git status` 确认当前在 `main` 且无 sub 残留改动，有则等 sub 返回再动。
 - 只由 `lead` 合并到 `main`。合并前跑 `uv run stringgraph validate` 和 `uv run pytest`；含 `formal/` 改动的分支还要 `lake build` 与 `uv run stringgraph check-axioms`。
 - 禁止 `push --force`、`reset --hard`、改写历史。
 - 提交信息格式：`<scope>: <动词开头的一句话>`，scope 取 `graph|tools|formal|lit|docs|claude`。例：`graph: add no-ghost theorem chain (worldsheet)`。
