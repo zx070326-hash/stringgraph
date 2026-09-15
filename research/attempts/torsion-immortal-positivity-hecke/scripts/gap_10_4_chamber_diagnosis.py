@@ -327,10 +327,10 @@ if __name__ == "__main__":
     else:
         print("  psi_m^F is NOT chamber-independent.  Differences (m,n,l | STD | ANN | Delta):")
         for m, n, l, cs, ca, D in diffs[:30]:
-            tag = " <-- Delta<0 (l^2>mn)" if D < 0 else ""
+            tag = " <-- l^2>mn" if l * l > m * n else ""
             print("    (%d,%d,%d)  STD=%d  ANN=%d  Delta=%d%s" % (m, n, l, cs, ca, D, tag))
         print("  total differing entries:", len(diffs),
-              "| all with Delta<0 ?", all(d[5] < 0 for d in diffs))
+              "| all with l^2>mn ?", all(d[2] * d[2] > d[0] * d[1] for d in diffs))
 
     print()
     print("=" * 78)
@@ -387,5 +387,5 @@ if __name__ == "__main__":
     print()
     print("  attractor(ANN) vs reduced ground truth:  %d/%d match, %d differ"
           % (ntot - ndiff, ntot, ndiff))
-    print("  of the differing points, all have Delta = 4mn-l^2 < 0 (l^2>mn) ? %s"
-          % all(r[3] < 0 for r in rows if r[6] is not None and not r[7]))
+    print("  of the differing points, all have l^2>mn (charge still legal, Delta=4mn-l^2>0) ? %s"
+          % all(r[2] * r[2] > r[0] * r[1] for r in rows if r[6] is not None and not r[7]))
