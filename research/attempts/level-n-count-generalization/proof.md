@@ -286,19 +286,43 @@ once `p_{m+1}(6)` and `p_{m+1}(5)` are themselves expanded via Claim 1 — this 
 is a `ring`-checkable finite polynomial identity, not re-derived here since it is exactly
 analogous to the `h2..h6`/`ring` proof pattern already used successfully for N=2..5).
 
-## 7. Lean skeleton
+## 7. Lean skeleton — routed to `research/attempts/.../scratch.lean`, NOT `formal/`
 
-`formal/StringFormal/NoGhost/LevelSevenCount.lean` (new file): three theorem shells
-mirroring the `LevelFiveCount.lean` template
-(`levelSeven_count_identity_gen / _identity / _identity_full`), **signatures only, all
-proof bodies `sorry`** (per task instructions — actual Lean proofs are for
-`lean-formalizer`, not for this attempt). Statement content is the **recursive** form of
-§6 (`p_{m+1}(7) + C(m+3,2) = p_m(7) + p_{m+1}(6) + p_{m+1}(5)`, and its `m=D-2`/`m=D-1`
-specialisations), not the closed 10-shape form, so that the three theorems mirror
-`levelFive_count_identity_gen`'s exact shape (LHS = `p_{m+1}(N) + correction`, RHS = three
-summands `p_m(N) + p_{m+1}(N-1) + p_{m+1}(N-2)`) and hence give `lean-formalizer` the same
-`Nat.choose_succ_succ`-chain proof strategy to try. File imports
-`StringFormal.NoGhost.LevelFiveCount` (not `LevelSixCount`, per §5).
+**Important correction to the original plan**: the task asked for a new file
+`formal/StringFormal/NoGhost/LevelSevenCount.lean` with three `sorry`-bodied theorem
+shells. I wrote exactly that file first, and it compiled cleanly (`lake build
+StringFormal.NoGhost.LevelSevenCount` → `Build completed successfully (1824 jobs)`, only
+the three expected `sorry` warnings). **However, committing it was refused by this
+repo's own pre-commit hook** (`scripts/pre-commit.sh` → `scripts/check_sorry.py`), which
+unconditionally rejects any `sorry` in any `formal/*.lean` file, with no override flag
+and no path exemption. This is not an accident of tooling: `formal/CLAUDE.md` states the
+identical rule in prose ("禁止为了让 `validate` 通过而写带 `sorry` 的陈述。没准备好就不写声明"),
+and per this project's agent-coordination rules, a task-assigning message from another
+agent cannot authorize bypassing an enforced project rule (no `--no-verify`). So the
+`sorry`-bodied skeleton is **not** an admissible `formal/` artifact, regardless of task
+phrasing.
+
+`research/CLAUDE.md` names the correct home for exactly this situation: "允许 Lean
+scratch 实验……不受 `formal/` 的'不许 sorry'约束——这是草稿，不是正式产出。" The three theorem
+shells (identical mathematical content, docstring updated to explain the relocation) now
+live in `research/attempts/level-n-count-generalization/scratch.lean`. I re-verified it
+compiles cleanly by temporarily copying it into
+`formal/StringFormal/NoGhost/LevelSevenCount.lean` (uncommitted), running `lake build`
+again (`Build completed successfully (1824 jobs)`, three `sorry` warnings, no errors),
+then removing the temporary copy — so the *content* is a build-tested, ready-to-use
+blueprint, even though it cannot itself be committed under `formal/` in its current
+`sorry` state. **`lean-formalizer`'s job**: copy `scratch.lean`'s theorem statements into
+a genuinely new `formal/StringFormal/NoGhost/LevelSevenCount.lean`, replacing each
+`sorry` with an actual proof, ideally one theorem (one `sorry` closed) per commit, so
+that no single commit ever introduces a `sorry` into `formal/`.
+
+Statement content is the **recursive** form of §6 (`p_{m+1}(7) + C(m+3,2) = p_m(7) +
+p_{m+1}(6) + p_{m+1}(5)`, and its `m=D-2`/`m=D-1` specialisations), not the closed
+10-shape form, so that the three theorems mirror `levelFive_count_identity_gen`'s exact
+shape (LHS = `p_{m+1}(N) + correction`, RHS = three summands `p_m(N) + p_{m+1}(N-1) +
+p_{m+1}(N-2)`) and hence give `lean-formalizer` the same `Nat.choose_succ_succ`-chain
+proof strategy to try. File imports `StringFormal.NoGhost.LevelFiveCount` (not
+`LevelSixCount`, per §5).
 
 **Transcription-error discipline applied and paid off**: while hand-substituting `m -> D-2`
 /`m -> D-1` into the `_gen` statement to produce the `_identity`/`_identity_full` variants,
@@ -313,12 +337,6 @@ statements term-for-term (not re-derived from the closed forms — literally mir
 Lean source text) and checks LHS=RHS numerically for a range of `m`/`D`. Output: all
 `True` for `m=0..9` (`_gen`), `D=2..11` (`_identity`), `D=1..11` (`_identity_full`).
 
-**Build result**: `lake build StringFormal.NoGhost.LevelSevenCount` in this worktree —
-`Build completed successfully (1824 jobs)`, with only the three expected
-`declaration uses 'sorry'` warnings (lines 91/118/142) and no errors. The full dependency
-chain through `LevelFiveCount` rebuilt cleanly, confirming the skeleton typechecks and the
-import graph (deliberately excluding the broken `LevelSixCount`, §5) resolves correctly.
-
 ## 8. Open [GAP]s
 
 - **[GAP: general-N closed form for κ_N(m)]** I have not derived a single closed-form
@@ -332,13 +350,14 @@ import graph (deliberately excluding the broken `LevelSixCount`, §5) resolves c
   the scripts (16/18/24 shapes respectively) but not written up with the same care as
   N=7's table in `claim.md`/`proof.md`. Numerically verified only (§4's `verify_level_n.py`
   table covers N up to 10).
-- **[GAP: Lean proof bodies]** All three theorems in `LevelSevenCount.lean` are `sorry`
-  by task design (file compiles, `lake build StringFormal.NoGhost.LevelSevenCount` →
-  "Build completed successfully (1824 jobs)", only the three expected `sorry` warnings).
-  A `ring`-based proof analogous to `levelFive_count_identity_gen`'s (Pascal-rewrite
-  chain + `ring`) is expected to close `levelSeven_count_identity_gen` (the recursive
-  form used in the Lean statement expands, after ~6 `Nat.choose_succ_succ` rewrites
-  turning each `Nat.choose (m+k+1) (k+1)` on the RHS into
+- **[GAP: Lean proof bodies]** All three theorems in `scratch.lean` are `sorry` by task
+  design (the content build-tests cleanly when temporarily copied into `formal/`, see
+  §7, but per this repo's pre-commit hook cannot itself be committed under `formal/` in
+  `sorry` form). A `ring`-based proof analogous to `levelFive_count_identity_gen`'s
+  (Pascal-rewrite chain + `ring`) is expected to close `levelSeven_count_identity_gen`
+  (the recursive form used in the statement expands, after ~6 `Nat.choose_succ_succ`
+  rewrites turning each `Nat.choose (m+k+1) (k+1)` on the RHS into
   `Nat.choose (m+k) k + Nat.choose (m+k) (k+1)`, to a polynomial identity closable by
-  `ring`), but this was not attempted — left for `lean-formalizer`.
+  `ring`), but this was not attempted — left for `lean-formalizer`, who should land the
+  real (non-`sorry`) file directly under `formal/`.
 - **[GAP: LevelSixCount.lean itself]** Not fixed (out of scope, flagged to lead in §5).

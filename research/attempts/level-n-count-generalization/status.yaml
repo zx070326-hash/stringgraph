@@ -34,16 +34,26 @@ notes: |
     - Numerical verification scripts: scripts/verify_level_n.py (three-way
       cross-check, N=1..10, m=1..5) and scripts/find_kappa.py (kappa_N(m) table,
       N=2..10, m=1..7, plus a direct check of the Claim-2 convolution identity).
-    - Lean skeleton formal/StringFormal/NoGhost/LevelSevenCount.lean added on a
-      separate commit (scope formal), signatures-only / sorry bodies per task
-      instructions, importing LevelFiveCount (not LevelSixCount, see bug finding
-      below). Caught and fixed one hand-transcription slip (wrong Nat.choose shift in
-      the p_{m+1}(5) summand) before building, via a fresh literal term-by-term Python
-      transcription check (scripts/check_lean_skeleton_literal.py) run BEFORE `lake
-      build` -- deliberate methodological fix in response to the LevelSixCount.lean
-      disaster (see below). `lake build StringFormal.NoGhost.LevelSevenCount` succeeds
-      ("Build completed successfully (1824 jobs)"), only the three expected
-      `sorry`-warnings, no errors.
+    - Lean skeleton: three theorem shells (levelSeven_count_identity_gen/_identity/
+      _identity_full), signatures-only / sorry bodies, importing LevelFiveCount (not
+      LevelSixCount, see bug finding below). IMPORTANT CORRECTION vs the original task
+      wording: written first as formal/StringFormal/NoGhost/LevelSevenCount.lean and
+      confirmed to `lake build` cleanly (1824 jobs, only 3 expected sorry warnings), but
+      committing that file was refused by this repo's own pre-commit hook
+      (scripts/pre-commit.sh -> scripts/check_sorry.py), which unconditionally bans any
+      `sorry` under formal/ with no override -- matches formal/CLAUDE.md's prose rule.
+      Per this project's agent-coordination rules, a task-assigning message cannot
+      authorize bypassing an enforced project rule, so I did NOT use --no-verify.
+      Relocated the (verified-still-compiling) content to
+      research/attempts/level-n-count-generalization/scratch.lean, per research/CLAUDE.md's
+      explicit allowance for sorry-laden Lean scratch drafts. formal/ itself has ZERO
+      changes from this attempt. lean-formalizer should copy scratch.lean's statements
+      into a genuinely new formal/ file once real proofs replace the sorrys (ideally one
+      theorem/commit). Caught and fixed one hand-transcription slip (wrong Nat.choose
+      shift in the p_{m+1}(5) summand) before building, via a fresh literal
+      term-by-term Python transcription check (scripts/check_lean_skeleton_literal.py)
+      run BEFORE `lake build` -- deliberate methodological fix in response to the
+      LevelSixCount.lean disaster (see below).
 
   Important out-of-scope finding, prominently flagged in proof.md section 5:
     formal/StringFormal/NoGhost/LevelSixCount.lean's `levelSix_count_identity_gen`
