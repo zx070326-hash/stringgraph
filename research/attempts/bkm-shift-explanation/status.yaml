@@ -1,0 +1,13 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-15 (theorem-prover): 开缝 B，claim.md 初稿。
+  命题 B（(**) 式）可精确到完整严格证明：前提为 A-N eq(2.11)+(2.13)（文献逐字核实）
+  加 Φ₁₀ 整周期性，推导为初等 Fourier 换元，无实质障碍。
+  半整平移 (d−1)/2 的代数来源已在初步分析节定位：符号因子 (−1)^{(d−1)ℓ'}
+  在偶 d 时等于 (−1)^{ℓ'}，恰好对应椭圆变量加法平移 (d−1)/2。
+  主要开放障碍：BKM 乘积公式层面的深层解释（Gritsenko-Nikulin 原文乘积公式精确写法
+  未逐字核实；平移后 Φ₁₀ 对应哪个具名模形式未能精确陈述）。
+  建议下一步直接写 proof.md 完成命题 B 的初等代数证明，BKM 解释作为附注。
