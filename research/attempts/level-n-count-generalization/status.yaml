@@ -1,6 +1,49 @@
-state: under-review
-reviewer: null
-verdict: null
+state: verified
+reviewer: graph-reviewer
+verdict: |
+  verified-with-caveats (2026-09-16). Claims 1-4 are all independently
+  verified as mathematically correct with no logical gaps: the reviewer
+  re-derived p_m(N) from scratch via an independent DP, re-ran all 5
+  scripts under scripts/ (all pass), hand-checked Claim 3's re-indexing
+  algebra (coefficient of p_m(N-s) is [s=0]+p(s-1)+p(s-2)-p(s), correct
+  provided Delta(0):=0), and hand-enumerated the 15 partitions of 7 into
+  the 10 shapes of Claim 4, matching term-for-term. scratch.lean was
+  elaborated against the main-tree olean cache and compiles with exactly
+  the 3 expected sorry warnings. Caveats are wording/overclaim issues in
+  claim.md, not gaps in proof.md's derivations:
+    - claim.md:59-62 states Delta(s)=0 for 0<=s<=4 using the literal
+      formula p(s-1)+p(s-2)-p(s), which actually gives -1 at s=0 (needs
+      the explicit convention Delta(0):=0, which proof.md:131 already
+      states correctly -- claim.md should say so too).
+    - claim.md:62-65 folds the Euler-pentagonal-number expansion of
+      Delta(s) into Claim 3(a) itself; proof.md:164-172 explicitly does
+      NOT prove this and disowns it as unused expository remark.
+      claim.md should mark this a [GAP]/remark, not part of the proven
+      claim.
+    - The "kappa_6=m+1 / kappa_7=C(m+3,2), not previously recorded"
+      framing overclaims novelty: these values (at D=26, i.e. m=25)
+      already appear in formal/BLUEPRINT-noghost.md:3189,
+      formal/TODO.md:2155, and formal/StringFormal/NoGhost/
+      LevelFiveCount.lean:68; DescendantKernel.lean:25-26 even states
+      the general kappa_N=Sum Delta(s) p_D(N-s) via pentagonal numbers
+      in its docstring. The genuine new contribution is the
+      self-contained elementary derivation (no pentagonal theorem
+      needed) plus explicit closed-form m-polynomials -- claim.md
+      should reword to claim that, not raw novelty of the values.
+  Separately (out of scope for this attempt's own Claims 1-4, but
+  confirmed by the reviewer, and NOT stale despite later-looking
+  commits): the LevelSixCount.lean bug flagged in proof.md section 5 is
+  CONFIRMED CURRENT at HEAD. Commits e144b93/569c318 ("corrected
+  11-shape") are ancestors of, not fixes following, the prover's
+  finding; the file is byte-identical at 8eca783 and the reviewer
+  reproduced the exact `lake build` error. Root cause: LevelSixCount is
+  not imported from formal/StringFormal.lean, so a default `lake build`
+  never compiles it. Two independent defects found: kappa_6 != 0 makes
+  F(m+1)=F(m) structurally impossible, and F itself is missing/has a
+  spurious m*C(m+4,5) shape term. Needs a separate fix dispatch by the
+  lead; does not affect this attempt's own verified status since none
+  of Claims 1-4 depend on LevelSixCount.lean.
+  captain_confirmed still recommended before this graduates to graph/.
 captain_confirmed: false
 notes: |
   2026-09-16, prover agent (role=prover, branch agent/prover/level-n-generalization).
