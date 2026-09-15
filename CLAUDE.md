@@ -93,4 +93,6 @@ uv run stringgraph check-axioms       # 全图 lean_decl 的公理检查（需�
 
 ## 当前阶段
 
-见 `docs/ROADMAP.md`。Phase 0 已完成，现在处于 **Phase 1：世界面理论子图**。第一条形式化目标是 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem-v4`）。
+见 `docs/ROADMAP.md` 顶部「当前活跃」。两条线并行（细节全在 ROADMAP，本文件不复述）：
+- **形式化线**（Phase 1 世界面子图 + `formal/`）：第一形式化目标 Goddard–Thorn 无鬼定理（`worldsheet.no-ghost-theorem-v4`）。
+- **黑洞 / 原创线**（Phase 3 全息与黑洞 + `research/` 原创证明轨道）：N=4 挠 dyon 免死指标正性等原创结果正在 `research/attempts/` 推进与毕业。
