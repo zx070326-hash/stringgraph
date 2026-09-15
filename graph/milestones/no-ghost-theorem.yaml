@@ -78,6 +78,26 @@ audit:
       不断言的内容：D ≤ 25（任何 a）；D = 26 且 a ≠ 1；D > 26 且 a ≠ 1。
     verdict: faithful
     diff_notes: |
+      【第十轮记账（2026-09-14）】physics-auditor，分支 agent/auditor/no-ghost-r10。kind: bookkeeping；verdict 不变 faithful；
+      audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R9。
+
+      R10-1. 〔R9-4 关于有效状态的表述就此过时，仅此一点〕commit a2f1f0d（分支 agent/curator/noghost-ddf-wiring）把
+            `worldsheet.ddf-spanning-hypothesis` 接入推导 `worldsheet.no-ghost-theorem-v4--via-goddard-thorn` 的
+            `depends_on`（`inferred: false`，来源 goddard-2008 §6 (6.4)），紧接着 c3ec9b5 同步了 tests/test_graph.py 的断言。
+            后果（本轮 `uv run stringgraph status worldsheet.no-ghost-theorem-v4` 实测）：own status 仍 **rigorous**，
+            effective 由 **rigorous 降为 physical-argument**。瓶颈链（`uv run stringgraph why`）：
+            `worldsheet.ddf-spanning-hypothesis`（own rigorous / effective physical-argument，--via-borcherds-1992）
+            → `worldsheet.ddf-contour-equals-mode-sum`（own/effective physical-argument，--via-laurent-coefficient-extraction）。
+            因此 **R9-4 末句所述的「有效状态 = rigorous、瓶颈树单支全 rigorous」不再成立**；R9-4 其余内容
+            （own rigorous、best_derivation --via-goddard-thorn、以及「effective rigorous 只是图对 GT 1972 数学证明的登记、
+            不是 Lean 结论」这一提醒）无需改动。R8-1/R7-3 的同类表述同属历史记录，按 R5-1 同一理由原样保留。
+            记账性质：这正是 R8-3 / R9-3 早已登记的 (B-26) 猜想负担——此前由 gaps 文字承载、对工具不可见，导致 effective
+            虚高；a2f1f0d 把它显式接入图中。**不是新增弱点，是把既有负担如实反映**（与 0846013 的提交信息一致）。
+
+      R10-2. 〔本轮只加本块〕未改 canonical_text、canonical_source、statement_id、verdict、back_translation.text、
+            audit.status；里程碑只加本块。本轮不置 approved（该动作属人类船长）。回译裁定维持第四轮 faithful：
+            a2f1f0d/c3ec9b5 未触碰 statement 或 canonical_text，两者之间的语义等价关系不受影响。
+
       【第九轮记账（2026-09-12）】physics-auditor，分支 agent/auditor/noghost-r9。kind: bookkeeping；verdict 不变 faithful；
       audit.status 不变 back-translated；canonical_text、statement_id、back_translation 均未动，**不重做回译**。条目记在顶部，同 R6–R8。
 
