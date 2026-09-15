@@ -26,8 +26,16 @@
 
     Φ₁₀(ρ,σ,v+1) = Φ₁₀(ρ,σ,v).    (周期性)
 
-[GAP-前提: Φ₁₀ 的乘积公式精确写法（特别是 Gritsenko-Nikulin hep-th/9409021 原文版本）
-尚未从文献逐字核实；上式为标准文献记载，但 claim.md 诚实地标出这一前提尚待一次 verbatim fetch 确认。]
+**乘积公式的逐字来源（已核实）：** 上式即 `kawai-1997` eq.(5.13)（本 claim 记号 (ρ,σ,v) 对应
+kawai 的 (τ,σ,z)）：
+
+    χ₁₀(Ω) = pqy ∏_{(k,l,r)>0} (1 − p^k q^l y^r)^{c(4kl−r²)},
+
+变量 p=e[σ], q=e[τ], y=e[z] 见 kawai-1997 eq.(2.19)；系数 c(k) 来自 K3 椭圆亏格 eq.(4.28)。
+原始严格来源为 `gritsenko-nikulin-1998`（alg-geom/9611028），kawai-1997 为其物理综述转述。
+奇 ℓ 系数非零亦已坐实：`kawai-1997` eq.(4.32) c(−1)=2≠0（三元组 (0,1,1)，判别式 −1），
+并引 `dabholkar-murthy-zagier-2012` §4.3 eq.(85)（φ_{−2,1}=(y−2+y⁻¹)+O(q)，Table 1 C_{−2}(−1)=1≠0）。
+逐字抽取见 `literature/extractions/phi10-periodicity-and-product.md`。
 
 ---
 
