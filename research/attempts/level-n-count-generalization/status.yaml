@@ -1,4 +1,4 @@
-state: draft
+state: under-review
 reviewer: null
 verdict: null
 captain_confirmed: false
@@ -7,7 +7,10 @@ notes: |
 
   Task: derive a general N>=7 formula for p_m(N) (m-colored partition counts used by
   formal/StringFormal/NoGhost/Level{Two..Six}Count.lean), verify numerically, and
-  prepare a Lean skeleton for N=7.
+  prepare a Lean skeleton for N=7. All three deliverables (formula derivation, numerical
+  verification, Lean skeleton) completed this round; requesting graph-reviewer pass.
+  Note: could not agora_send this request myself (see administrative note below) --
+  lead should dispatch graph-reviewer manually.
 
   Completed:
     - Claim 1 (general closed form p_m(N) = sum over partitions lambda|-N of
@@ -34,7 +37,13 @@ notes: |
     - Lean skeleton formal/StringFormal/NoGhost/LevelSevenCount.lean added on a
       separate commit (scope formal), signatures-only / sorry bodies per task
       instructions, importing LevelFiveCount (not LevelSixCount, see bug finding
-      below).
+      below). Caught and fixed one hand-transcription slip (wrong Nat.choose shift in
+      the p_{m+1}(5) summand) before building, via a fresh literal term-by-term Python
+      transcription check (scripts/check_lean_skeleton_literal.py) run BEFORE `lake
+      build` -- deliberate methodological fix in response to the LevelSixCount.lean
+      disaster (see below). `lake build StringFormal.NoGhost.LevelSevenCount` succeeds
+      ("Build completed successfully (1824 jobs)"), only the three expected
+      `sorry`-warnings, no errors.
 
   Important out-of-scope finding, prominently flagged in proof.md section 5:
     formal/StringFormal/NoGhost/LevelSixCount.lean's `levelSix_count_identity_gen`

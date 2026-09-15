@@ -289,17 +289,35 @@ analogous to the `h2..h6`/`ring` proof pattern already used successfully for N=2
 ## 7. Lean skeleton
 
 `formal/StringFormal/NoGhost/LevelSevenCount.lean` (new file): three theorem shells
-mirroring the `LevelFiveCount.lean`/`LevelSixCount.lean` template
+mirroring the `LevelFiveCount.lean` template
 (`levelSeven_count_identity_gen / _identity / _identity_full`), **signatures only, all
 proof bodies `sorry`** (per task instructions — actual Lean proofs are for
-`lean-formalizer`, not for this attempt). Statement content is the closed form of §6
-(the direct 10-shape formula, chosen over the recursive form because it does not need to
-cite `p_{m+1}(6)`/`p_{m+1}(5)` as black boxes — it is fully self-contained arithmetic in
-`m`, verified correct in §4/§6, and does not risk repeating the LevelSixCount.lean
-mistake since I am not asserting any `F(m+1)=F(m)`-shaped claim). File imports
-`StringFormal.NoGhost.LevelFiveCount` (not `LevelSixCount`, per §5). Build attempted via
-`lake build StringFormal.NoGhost.LevelSevenCount` in this worktree; result recorded in
-the commit that adds the file.
+`lean-formalizer`, not for this attempt). Statement content is the **recursive** form of
+§6 (`p_{m+1}(7) + C(m+3,2) = p_m(7) + p_{m+1}(6) + p_{m+1}(5)`, and its `m=D-2`/`m=D-1`
+specialisations), not the closed 10-shape form, so that the three theorems mirror
+`levelFive_count_identity_gen`'s exact shape (LHS = `p_{m+1}(N) + correction`, RHS = three
+summands `p_m(N) + p_{m+1}(N-1) + p_{m+1}(N-2)`) and hence give `lean-formalizer` the same
+`Nat.choose_succ_succ`-chain proof strategy to try. File imports
+`StringFormal.NoGhost.LevelFiveCount` (not `LevelSixCount`, per §5).
+
+**Transcription-error discipline applied and paid off**: while hand-substituting `m -> D-2`
+/`m -> D-1` into the `_gen` statement to produce the `_identity`/`_identity_full` variants,
+I caught (during the hand re-derivation, *before* running `lake build`) that the `_gen`
+statement as first written had a slip in the `p_{m+1}(5)` summand's last term
+(`Nat.choose (m + 3) 5` instead of the correct `Nat.choose (m + 5) 5`, i.e. `C(m+5,5)` —
+since `p_m(5)`'s last term `C(m+4,5)` becomes `C(m+5,5)` under `m -> m+1`, matching the
+already-compiling `levelFive_count_identity_gen`'s literal `Nat.choose (m + 5) 5`). Fixed
+via `Edit` before building. To guard against any *other* such slip, I wrote
+`scripts/check_lean_skeleton_literal.py`, which transcribes **all three** Lean theorem
+statements term-for-term (not re-derived from the closed forms — literally mirroring the
+Lean source text) and checks LHS=RHS numerically for a range of `m`/`D`. Output: all
+`True` for `m=0..9` (`_gen`), `D=2..11` (`_identity`), `D=1..11` (`_identity_full`).
+
+**Build result**: `lake build StringFormal.NoGhost.LevelSevenCount` in this worktree —
+`Build completed successfully (1824 jobs)`, with only the three expected
+`declaration uses 'sorry'` warnings (lines 91/118/142) and no errors. The full dependency
+chain through `LevelFiveCount` rebuilt cleanly, confirming the skeleton typechecks and the
+import graph (deliberately excluding the broken `LevelSixCount`, §5) resolves correctly.
 
 ## 8. Open [GAP]s
 
@@ -315,9 +333,12 @@ the commit that adds the file.
   N=7's table in `claim.md`/`proof.md`. Numerically verified only (§4's `verify_level_n.py`
   table covers N up to 10).
 - **[GAP: Lean proof bodies]** All three theorems in `LevelSevenCount.lean` are `sorry`
-  by task design; a `ring`-based proof analogous to `levelFive_count_identity_gen`'s
-  (Pascal-rewrite chain + `ring`) is expected to close them but was not attempted (would
-  require care: 15-way case split or a chain of ~9 `Nat.choose_succ_succ` rewrites plus
-  possibly `Nat.choose` shift lemmas the existing files don't yet use for shapes like
-  `C(m+1,2)·C(m+2,3)` that mix two different binomial families multiplicatively).
+  by task design (file compiles, `lake build StringFormal.NoGhost.LevelSevenCount` →
+  "Build completed successfully (1824 jobs)", only the three expected `sorry` warnings).
+  A `ring`-based proof analogous to `levelFive_count_identity_gen`'s (Pascal-rewrite
+  chain + `ring`) is expected to close `levelSeven_count_identity_gen` (the recursive
+  form used in the Lean statement expands, after ~6 `Nat.choose_succ_succ` rewrites
+  turning each `Nat.choose (m+k+1) (k+1)` on the RHS into
+  `Nat.choose (m+k) k + Nat.choose (m+k) (k+1)`, to a polynomial identity closable by
+  `ring`), but this was not attempted — left for `lean-formalizer`.
 - **[GAP: LevelSixCount.lean itself]** Not fixed (out of scope, flagged to lead in §5).
