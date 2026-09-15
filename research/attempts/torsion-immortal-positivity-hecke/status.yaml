@@ -3,6 +3,15 @@ reviewer: "graph-reviewer(证明逻辑+数值,2026-09-15)=VERIFIED; general-purp
 verdict: "两条独立审查腿均过。内部：Thm 6.1 VERIFIED（含一处可补形式缺口 F1；Prop 5.1 符号 CONFIRMED）。外部：DGM/Rosselló/Alexandrov-Nampuri 原文逐字核实——(甲) 吸引子围道转录忠实、(乙) Rosselló Cor 1.1 无 gcd 前提、(丙) DGM eq(51) 与 eq(52) 确为真矛盾（审查者穷力寻找自洽约定均失败，唯一自洽修正=偶除子半整平移=草稿 Prop 5.4，且被 A-N eq(2.11)+(2.13) 联立闭式独立佐证）。据研究轨道生命周期，state → verified。**边界（不得越界宣称）**：(1) 这不是 Sen 全正性猜想的证明，仅在挠 I>1 上把物理依赖压缩到单条前提 (P′)=DGM eq(52)；(2) F1 形式缺口待补（不影响 Thm 6.1）；(3) DGM eq(51)/(52) 矛盾：**船长 2026-09-15 已确认可对外声明**（三条佐证腿：本项目数值直接见证 + Alexandrov-Nampuri 2020 间接 + BSS 0802.0544/0802.1556 两篇独立、均早于 DGM 且互不引用的间接佐证；无来源支持 eq(51) 字面式、无 erratum），成文/联系原作者已解禁；此门≠captain_confirmed。captain_confirmed（本尝试主命题 Thm 6.1 的船长最终确认）仍保持 false 待船长最终拍板。"
 captain_confirmed: false
 notes: |
+  2026-09-14 (theorem-prover, GAP 10.2b 抢救性落盘): 新增 proof.md §10.3 = Theorem 10.3b 的
+  骨架 + 主体证明（未润色，含 [GAP 10.3.a-e]）。核心 Lemma 10.3.1 已推出并完整写出：
+  吸引子围道 Im v = −ℓΛ < 0 故 |y| = e^{2πℓΛ} → ∞（**下腔 |q|<1<|y|**，非写 ψ_m 的常用腔）；
+  在该腔中 𝒜_{2,m}(σ, v+1/2) 的 y 幂 ∈ (−∞,−1] ∪ [2m+1,+∞)，故 gap [0,m] 上 y^ℓ 系数恒为 0
+  ⟹ 极部 ψ_m^P 对 0≤ℓ≤m 的 (n,ℓ) 系数无贡献；ψ_m^F 对 v 全纯 ⟹ 系数与腔无关 ⟹ 贡献 (−1)^ℓ c_m^F。
+  合并得 d_*(m,n,ℓ) = (−1)^{ℓ+1} c_m^F(n,ℓ)（0≤ℓ≤m，任意 n≥1）。**n≥m 实际未被等号证明用到**，
+  仅正性（Rosselló Thm 1）需要。未做：Lemma 的独立数值验证、ℓ=0 的 ε-处方一致可积、反例按 ℓ>m 重分类。
+  **不触碰 Thm 6.1**；state 保持 verified（本节未进入 graph、未被任何节点依赖）。
+
   2026-09-15 (船长决定 + lead): 船长确认 DGM eq(51)/(52) 矛盾**可对外声明**（BSS 第三方交叉核
   已并入 main b38da89/1d73147，与 A-N 2020、本项目数值共三条腿）；成文/联系原作者解禁。
   此门≠captain_confirmed（主命题仍待船长 toggle）。另：GAP 10.2b（n≥m ⟹ mock 系数=免死指标
