@@ -251,3 +251,21 @@ notes: |
   **Thm 6.1 完全不受影响**（只用 Cor 1.1 正性，从不用 mock 等号）。已写 proof.md §10.5 + 本条 notes。
   请 lead 决定：(1) 是否值得再派工（补 Route A 的 Humbert 几何 / Route B 的 mock 渐近细节）；
   (2) 或接受当前状态（机制识别 + 路线勘探完成，定理化 open）作为本 GAP 的阶段性产出。
+
+  2026-09-16 (lead, GAP 10.2b Route A 四路并行探索完成):
+  **[GAP 10.2b] Route A 探索完成，仍 OPEN，按诚实边界接受当前状态。** 派 1 lead + 3 helpers 并行勘探：
+  - **helper-humbert** (opus)：成功从 Gritsenko-Nikulin 1996 (alg-geom/9603010) 抽取 Humbert 几何
+    （literature/extractions/gritsenko-nikulin-1996-phi10.md，commit 32442c5）：Div(Δ₅)=H₁={z₂=0}，
+    Div(Φ₁₀)=2H₁（推断），一般零点机制（判别式 l²−4nm<0 ⟹ Humbert 面 H_D）。
+  - **helper-paramodular** (sonnet)：文献丰富（arXiv:2112.03797 quinary 对应、arXiv:1312.6332 Borcherds 乘积、
+    arXiv:2308.09824 数据库），但**关键缺口确认**：无文献直接证"Gauss 约化 = K(N) 基本域"。
+  - **helper-numerical** (sonnet)：48 点采样 Im σ∈[0.5,3.05]，锚点 (5,1,4)，min |Φ₁₀|=0.021，无近零点
+    ⟹ attractor 围道在固定 Λ 避开 Φ₁₀ 零点（几何设置健全）。
+  - **gap-102b-lead** (opus)：综合裁定——**坐标几何链接缺失**："Im ρ≥Im σ ⟹ z₂≠0（Siegel 坐标）⟹ 避 H₁"
+    这条链接不在 GN1996（不用 ρ,σ 坐标），可能在 Sen 物理文献（黑洞 attractor 几何，0708.1270/hep-th/0505094）。
+  **裁定理由**：GAP 10.2b 是**非承重观察深化**（§10.2 原创发现 #3 的定理化尝试），Thm 6.1 只用 Cor 1.1 正性、
+  从不用 mock 等号 ⟹ 继续攻 Sen 文献的 ROI 极低。**已获得的实质进展**：(a) 机制识别完成（§10.4.1）；
+  (b) Humbert 几何到手（Div(Φ₁₀)=2H₁，GN1996）；(c) 数值强支持（149/158 + 无近零点）；
+  (d) 三条路线障碍精确定位。**缺的是最后一公里**（坐标转换 + 形变安全性），需额外文献或技术引理，
+  非一轮能闭合。按诚实边界接受：**GAP 10.2b 状态 = 机制清晰 + 路线勘探完成 + 强数值支持 + 待坐标几何链接**。
+  不再派工追 Sen 文献。本次新增文献抽取（GN1996）已并入 main。**Thm 6.1/captain_confirmed 不受影响。**
