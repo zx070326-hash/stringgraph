@@ -11,6 +11,21 @@ lake build              # 构建全部
 lake build StringFormal.Virasoro.Basic   # 只构建一个模块
 ```
 
+### 新文件必须接进 `StringFormal.lean`
+
+`lakefile.lean` 的 `lean_lib` 只有一个 root（`StringFormal`），**`lake build` 只编译从
+`StringFormal.lean` 的 import 链可达的模块**。新建的 `.lean` 文件如果没有人 import 它，
+`lake build` 会照常打印 "Build completed successfully" 却**根本没碰过这个文件**——于是
+"我 lake build 过了"这句话对新文件毫无保证。2026-09-16 实测：`NoGhost/LevelSixCount.lean`
+与 `NoGhost/LevelSevenCount.lean` 两个文件都处于这种孤儿状态，两轮 agent 都报告了
+"lake build 3541 jobs 成功"，而 `.lake/build/.../LevelSixCount.olean` 根本不存在
+（接进 root 后 job 数变成 3543，正是这两个模块）。`scripts/check_sorry.py` 是**文本**扫描，
+也拦不住这种情况。
+
+所以：**新增模块后立刻在 `StringFormal.lean` 加一行 `import`**，并确认 `lake build` 的
+job 数比之前变大；或者至少 `lake build StringFormal.NoGhost.YourModule` 显式点名构建，
+并在报告里写明用的是显式构建而非默认目标。
+
 ### 在 worktree 里构建
 
 worktree 没有 `.lake/`，重新下载 Mathlib 不现实，而 sandbox 禁止建符号链接。做法：在 worktree 的 `formal/.lake/package-overrides.json` 里把全部依赖改成指向主仓库 `D:/physics/string/formal/.lake/packages/<name>` 的 path 包（该文件被 gitignore，不会提交）；编译产物仍写在 worktree 本地。**再把主仓库的 `formal/.lake/build/`（约 45 MB，StringFormal 自身的 olean）整目录复制到 worktree 的 `formal/.lake/build/`**，这样 `lake build` 只增量编译你新加的模块，几秒完成；否则要从头编 StringFormal 全部模块（约 10 分钟），两名 formalizer 曾因此在开工阶段停摆。
