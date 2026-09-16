@@ -76,4 +76,6 @@ import StringFormal.NoGhost.LevelThreeCount
 import StringFormal.NoGhost.LevelFourCount
 import StringFormal.NoGhost.DescendantKernel
 import StringFormal.NoGhost.LevelFiveCount
+import StringFormal.NoGhost.LevelSixCount
+import StringFormal.NoGhost.LevelSevenCount
 import StringFormal.NoGhost.Ghost
