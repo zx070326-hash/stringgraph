@@ -220,37 +220,54 @@ def vertex_height(n, m, ell, n2, j, n1_0, m1_0, rho1, v1):
         return n2 * (sigma1 * rho1 - v1 * v1) + j * v1 + n1 * sigma1 - m1 * rho1 + m2
 
     g_m1, g_0, g_p1 = g_real(-1), g_real(0), g_real(1)
-    A = (g_p1 + g_m1) / 2 - g_0
-    B = (g_p1 - g_m1) / 2
-    C = g_0
+    # Fit the parabola in Lambda^2 = g/(n2*Delta), NOT in g itself.  For n2<0 the
+    # leading coeff of g is A_g = -m*n/n2 > 0 (g opens UPWARD), while Lambda^2
+    # still opens downward since dividing by n2<0 flips the sign again:
+    #   leading coeff of Lambda^2 = -m*n/(n2^2*Delta) < 0 for BOTH signs of n2
+    # (part 1).  Testing the sign of A_g instead would silently discard every
+    # n2<0 orbit, leaving the negative branch untested.
+    scale = n2 * Delta
+    l_m1, l_0, l_p1 = g_m1 / scale, g_0 / scale, g_p1 / scale
+    A = (l_p1 + l_m1) / 2 - l_0
+    B = (l_p1 - l_m1) / 2
+    C = l_0
     if A >= 0:
-        return None  # shouldn't happen given part 1 (A = -m*n/n2 exactly)
+        return None  # shouldn't happen given part 1 (A = -m*n/(n2^2*Delta) exactly)
     t_star = -B / (2 * A)
-    g_star = A * t_star**2 + B * t_star + C
-    lam2_star = g_star / (n2 * Delta)
+    lam2_star = A * t_star**2 + B * t_star + C
     return lam2_star, t_star
 
 
-def part2b_vertex_sup():
-    print("=== Part 2b: sup of vertex height over the full (I)-slice ===")
-    print("  (continuous-t relaxation upper bound; grid over (rho1,v1) in [0,1]^2)")
-    samples = [
-        (2, 2, 2, 1, 1),
-        (2, 2, 2, -1, 1),
-        (2, 2, 2, 1, 3),
-        (5, 3, 2, 1, 1),
-        (5, 3, 2, 2, 1),
-        (5, 3, 2, -1, 3),
-        (10, 5, 4, 1, 1),
-        (10, 5, 4, -2, 3),
-        (7, 4, 3, 1, 1),
-        (7, 4, 3, -1, 5),
-    ]
-    grid1d = [i / 40.0 for i in range(41)]
+def part2b_vertex_sup(samples=None, window=2, grid_n=40, quiet=False):
+    """Sup of the vertex height over the (I)-slice.
+
+    Parameters exposed so the larger exploratory sweeps quoted in proof.md
+    Sec 5.6.2 are actually reproducible from this file:
+        python recon_n2_shift.py sweep
+    runs the n2/j sweep instead of the default fixed sample list.
+    """
+    if not quiet:
+        print("=== Part 2b: sup of vertex height over the full (I)-slice ===")
+        print("  (continuous-t relaxation upper bound; grid over (rho1,v1) in [0,1]^2)")
+    if samples is None:
+        samples = [
+            (2, 2, 2, 1, 1),
+            (2, 2, 2, -1, 1),
+            (2, 2, 2, 1, 3),
+            (5, 3, 2, 1, 1),
+            (5, 3, 2, 2, 1),
+            (5, 3, 2, -1, 3),
+            (10, 5, 4, 1, 1),
+            (10, 5, 4, -2, 3),
+            (7, 4, 3, 1, 1),
+            (7, 4, 3, -1, 5),
+        ]
+    grid1d = [i / float(grid_n) for i in range(grid_n + 1)]
+    results = []
     for (n, m, ell, n2, j) in samples:
         best = None
-        for n1_0 in range(-2, 3):
-            for m1_0 in range(-2, 3):
+        for n1_0 in range(-window, window + 1):
+            for m1_0 in range(-window, window + 1):
                 for rho1 in grid1d:
                     for v1 in grid1d:
                         res = vertex_height(n, m, ell, n2, j, n1_0, m1_0, rho1, v1)
@@ -260,15 +277,48 @@ def part2b_vertex_sup():
                         if best is None or lam2_star > best[0]:
                             best = (lam2_star, t_star, n1_0, m1_0, rho1, v1)
         if best is None:
-            print(f"  (n,m,ell,n2,j)={(n,m,ell,n2,j)}: no (I)-compatible "
-                  f"(rho1,v1) grid point found in cube (n1_0,m1_0 in [-2,2])")
+            results.append(((n, m, ell, n2, j), None))
+            if not quiet:
+                print(f"  (n,m,ell,n2,j)={(n,m,ell,n2,j)}: no (I)-compatible "
+                      f"(rho1,v1) grid point found in cube "
+                      f"(n1_0,m1_0 in [-{window},{window}])")
             continue
+        results.append(((n, m, ell, n2, j), best))
         lam2_star, t_star, n1_0, m1_0, rho1, v1 = best
         flag = " <-- POSITIVE (needs follow-up)" if lam2_star > 1e-9 else ""
-        print(f"  (n,m,ell,n2,j)={(n,m,ell,n2,j)}: "
-              f"sup over grid of vertex Lambda^2 = {lam2_star:.6f} "
-              f"at t*={t_star:.3f} (base n1_0={n1_0},m1_0={m1_0}, "
-              f"rho1={rho1:.3f}, v1={v1:.3f}){flag}")
+        if not quiet:
+            print(f"  (n,m,ell,n2,j)={(n,m,ell,n2,j)}: "
+                  f"sup over grid of vertex Lambda^2 = {lam2_star:.6f} "
+                  f"at t*={t_star:.3f} (base n1_0={n1_0},m1_0={m1_0}, "
+                  f"rho1={rho1:.3f}, v1={v1:.3f}){flag}")
+    if not quiet:
+        print()
+    return results
+
+
+def sweep_vertex_sup(n=5, m=3, ell=2, n2_max=10, j_max=15, window=6, grid_n=20):
+    """Does the vertex-height sup grow with |n2| or |j|?  (proof.md Sec 5.6.2)
+
+    This is the claim the whole 'quadratic wall' reconnaissance rests on, so it
+    needs to be runnable, not just asserted.  Reports max over the sweep.
+    """
+    print("=== Sweep: does sup(vertex Lambda^2) grow with |n2| or |j|? ===")
+    print(f"  (n,m,ell)=({n},{m},{ell})  n2 in +-1..{n2_max}  j in 1..{j_max} (odd)"
+          f"  base window +-{window}  grid {grid_n + 1}x{grid_n + 1}")
+    overall = 0.0
+    for n2 in [v for k in range(1, n2_max + 1) for v in (k, -k)]:
+        row = []
+        for j in range(1, j_max + 1, 2):
+            res = part2b_vertex_sup([(n, m, ell, n2, j)], window=window,
+                                    grid_n=grid_n, quiet=True)
+            best = res[0][1]
+            row.append("  n/a " if best is None else f"{best[0]:7.5f}")
+            if best is not None:
+                overall = max(overall, best[0])
+        print(f"  n2={n2:+3d}: " + " ".join(row))
+    print(f"  => max sup(vertex Lambda^2) over the whole sweep = {overall:.6f}")
+    print("  (no growth with |n2| or |j| => supports the 'quadratic wall';"
+          " NOT a proof -- the sup is a grid search, not an analytic maximum)")
     print()
 
 
@@ -404,8 +454,12 @@ def part4_broad_search():
 
 
 if __name__ == "__main__":
-    part1_symbolic_parabola()
-    part2_numeric_parabola()
-    part2b_vertex_sup()
-    part3_bound_W()
-    part4_broad_search()
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "sweep":
+        sweep_vertex_sup()
+    else:
+        part1_symbolic_parabola()
+        part2_numeric_parabola()
+        part2b_vertex_sup()
+        part3_bound_W()
+        part4_broad_search()
