@@ -67,40 +67,61 @@ def close(a, b, tol=1e-8):
     return abs(a - b) < tol * max(1.0, abs(a), abs(b))
 
 
+SAMPLES = [
+    (0.3 + 0.21j, 0.11 - 0.05j, 0.07 + 0.13j),
+    (0.5 + 0.40j, -0.20 + 0.30j, 0.90 + 0.60j),
+    (1.3 + 0.21j, 0.11 - 0.05j, 0.07 + 0.13j),  # tau -> tau+1 relative to sample 1
+    (0.17 + 0.55j, 0.31 + 0.12j, 0.44 + 0.29j),
+]
+
+
 def main():
-    tau = 0.3 + 0.21j
-    z = 0.11 - 0.05j
-    sigma = 0.07 + 0.13j
+    # (A) squared identity Phi10(z+1/2) = -Den_omega^2, at every sample point.
+    #     This is the branch-independent statement and the one the proof relies on.
+    print("(A) corrected (squared) identity  Phi10(tau,z+1/2,sigma) = -Den_omega(tau,z,sigma)^2")
+    squared_ok = True
+    for i, (tau, z, sigma) in enumerate(SAMPLES, 1):
+        phi10_shift = psi5(tau, z + 0.5, sigma) ** 2
+        neg_den2 = -den_omega(tau, z, sigma) ** 2
+        ok = close(phi10_shift, neg_den2)
+        squared_ok = squared_ok and ok
+        print(f"  point {i}: Phi10={phi10_shift!r}")
+        print(f"           -Den^2={neg_den2!r}   holds: {ok}")
+    print("  => squared identity holds at ALL sample points:", squared_ok)
 
-    lhs = den_omega(tau, z, sigma)
-    rhs = (-1j) * psi5(tau, z + 0.5, sigma)
-    print("Den_omega                =", lhs)
-    print("-i * psi5(z+1/2)         =", rhs)
-    print("[S3-result] Den_omega = -i*psi5(z+1/2):", close(lhs, rhs))
-
-    phi10_shift = psi5(tau, z + 0.5, sigma) ** 2
-    neg_den2 = -den_omega(tau, z, sigma) ** 2
+    # (B) UNsquared form Den_omega = eps * psi5(z+1/2): eps is NOT a universal constant.
+    #     psi5 carries the non-trivial quadratic character v (GN1996 §1 p.7), and the
+    #     (qrs)^(1/2) branch choice realizes that +-1 ambiguity, so eps flips between +-i.
     print()
-    print("Phi10(z+1/2) = psi5(z+1/2)^2 =", phi10_shift)
-    print("-Den_omega^2                 =", neg_den2)
-    print("corrected identity Phi10(z+1/2) = -Den_omega^2:", close(phi10_shift, neg_den2))
+    print("(B) unsquared form  Den_omega = eps * psi5(tau,z+1/2,sigma):  eps per point")
+    eps_values = []
+    for i, (tau, z, sigma) in enumerate(SAMPLES, 1):
+        eps = den_omega(tau, z, sigma) / psi5(tau, z + 0.5, sigma)
+        eps_values.append(eps)
+        label = "+i" if close(eps, 1j, tol=1e-6) else ("-i" if close(eps, -1j, tol=1e-6) else "??")
+        print(f"  point {i}: eps={eps!r}  ~ {label}")
+    all_same = all(close(e, eps_values[0], tol=1e-6) for e in eps_values)
+    print("  => eps is the same at every sample point:", all_same)
+    print("     (False is the EXPECTED outcome: see [GAP-S3-branch] in proof.md sec. 7)")
 
-    # Sanity check the ORIGINAL (refuted) claim Den_omega = C*Phi10(z+1/2), C constant:
-    # if true, Den_omega/Phi10(z+1/2) must be the same number at every (tau,z,sigma).
-    tau2, z2, sigma2 = 0.5 + 0.4j, -0.2 + 0.3j, 0.9 + 0.6j
-    ratio1 = den_omega(tau, z, sigma) / phi10_shift
-    ratio2 = den_omega(tau2, z2, sigma2) / psi5(tau2, z2 + 0.5, sigma2) ** 2
+    # (C) Sanity check the ORIGINAL (refuted) claim Den_omega = C*Phi10(z+1/2), C constant:
+    #     if true, Den_omega/Phi10(z+1/2) must be the same number at every (tau,z,sigma).
     print()
-    print("Den_omega/Phi10(z+1/2) at point 1:", ratio1)
-    print("Den_omega/Phi10(z+1/2) at point 2:", ratio2)
-    print(
-        "ratio constant across points (would support the REFUTED claim)?",
-        close(ratio1, ratio2, tol=1e-3),
-    )
-    print(
-        "\nExpected: [S3-result] and corrected identity both True; "
-        "'ratio constant' check False (confirms Den_omega=C*Phi10 cannot hold in general)."
-    )
+    print("(C) refuted claim  Den_omega = C * Phi10(tau,z+1/2,sigma), C a constant")
+    ratios = []
+    for i, (tau, z, sigma) in enumerate(SAMPLES, 1):
+        ratio = den_omega(tau, z, sigma) / psi5(tau, z + 0.5, sigma) ** 2
+        ratios.append(ratio)
+        print(f"  point {i}: Den_omega/Phi10(z+1/2) = {ratio!r}")
+    ratio_const = all(close(r, ratios[0], tol=1e-3) for r in ratios)
+    print("  => ratio constant across points:", ratio_const)
+
+    print()
+    print("Expected outcome:")
+    print("  (A) True   -- squared identity is the correct, branch-independent statement")
+    print("  (B) False  -- eps flips with the branch; NOT a universal constant")
+    print("  (C) False  -- weight 5 vs weight 10: Den_omega = C*Phi10 cannot hold")
+    print(f"Actual: (A)={squared_ok}  (B)={all_same}  (C)={ratio_const}")
 
 
 if __name__ == "__main__":
