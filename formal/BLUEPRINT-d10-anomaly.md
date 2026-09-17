@@ -20,11 +20,37 @@ restriction (both absent from Mathlib v4.33.1). This blueprint targets
 
 ## PR Sequence
 
-### PR0: Exceptional Algebra Exclusion ★ IN PROGRESS
+### PR0: Exceptional Algebra Exclusion ★ PARTIAL (G₂, F₄ only)
 
 **Goal**: Prove G₂, F₄, E₆, E₇ violate condition (i); E₈ satisfies it.
 
+**Current status**: 
+- ✓ G₂ violates anomaly (12 roots, `native_decide` works)
+- ✓ F₄ violates anomaly (48 roots, `native_decide` works)
+- ✗ E₆ NOT IMPLEMENTED (72 roots, brute-force approach produces incorrect values)
+- ✗ E₇ NOT IMPLEMENTED (126 roots, list literal times out during elaboration)
+- E₈ already done in `E8Roots.lean`
+
 **File**: `StringFormal/Math/ExceptionalAnomalyExclusion.lean`
+
+**What works**:
+- `g2_violates_anomaly`: existence proof with witness point H = (1, 0, -1)
+- `f4_violates_anomaly`: existence proof with witness point H = (1, 0, 0, 0)
+
+**What's needed for E₆ and E₇**:
+
+The brute-force list enumeration approach fails. Must follow `E8Roots.lean` pattern:
+
+1. **Programmatic root construction**: Define helper functions (like E8's `vroot`, `pairs28`) 
+   to build roots rather than enumerating all 72 or 126 vectors as list literals
+2. **Algebraic identities**: Prove power sum formulas for arbitrary Cartan elements
+   using the structure of the root system (block decomposition)
+3. **Witness specialization**: Only then evaluate at specific points for violations
+
+**Technical blockers encountered**:
+- E₇ root list (64-element half-root list) times out during elaboration even with 600k heartbeats
+- E₆ power sums computed via `native_decide` evaluate to incorrect values
+- List-based `powerSum` definitions don't generate usable equation theorems for rewrites
 
 **Dependencies**:
 - E₈ roots already in `E8Roots.lean` (e8_trace_four, e8_trace_six)
