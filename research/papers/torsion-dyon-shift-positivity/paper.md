@@ -243,7 +243,7 @@ This assumption rests on:
 2. **Fermionic zero mode counting** to extract the single-centered contribution from the total index [dgm-2008].
 3. **Wall-crossing invariance** of the immortal index, encoded in the attractor contour prescription [dmz-2012].
 
-These are standard ingredients of the microscopic derivation of black hole entropy in string theory. Assumption (P') is labeled "physical-argument" in our formalism because it involves supersymmetric quantum field theory and string duality, not just modular forms.
+These are standard ingredients of the microscopic derivation of black hole entropy in string theory. Assumption (P') rests on physical reasoning from supersymmetric quantum field theory and string duality rather than mathematical proof of the modular form structure.
 
 **What this paper proves mathematically.** Given (P'), our results show:
 - The correct divisor sum formula compatible with Alexandrov–Nampuri's framework has the half-integer shift (Proposition 4.1).
