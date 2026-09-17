@@ -6,9 +6,9 @@ We establish strict positivity of single-centered (immortal) BPS indices for all
 
 ## 1. Introduction
 
-The Sen positivity conjecture [reference] states that degeneracies of single-centered supersymmetric black holes in four-dimensional N=4 string theory are strictly positive integers. For the flagship case of type II on K3×T², the conjecture was fully resolved for unit torsion (I=1) by Rosselló [rossello-2024], building on the mock modular form framework of Dabholkar–Murthy–Zagier (DMZ) [dmz-2012]. However, the extension to torsion I>1—where the relevant generating functions involve divisor sums over s|I—remained open. 
+The Sen positivity conjecture states that degeneracies of single-centered supersymmetric black holes in four-dimensional N=4 string theory are strictly positive integers. For the flagship case of type II on K3×T², the conjecture was fully resolved for unit torsion (I=1) by Rosselló [rossello-2024], building on the mock modular form framework of Dabholkar–Murthy–Zagier (DMZ) [dmz-2012]. The extension to torsion I>1—where the relevant generating functions involve divisor sums over s|I—requires a physical input: the divisor sum formula itself, for which two incompatible versions appear in the literature (DGM 0803.2692 equations (51) and (52)).
 
-The obstruction was not merely technical: two competing divisor sum formulae appear in the literature (DGM 0803.2692 equations (51) and (52)), and it was unclear which, if either, is compatible with the known structure of the Igusa cusp form Φ₁₀ and its Fourier–Jacobi expansion. Moreover, the relationship between the "total degeneracy" divisor sum and the "immortal projection" to single-centered states lacked a rigorous mathematical proof, resting instead on physical arguments involving multi-centered wall-crossing.
+We show that under the assumption of DGM equation (52), strict positivity follows for all torsion classes via a rigorous mathematical proof requiring no mock modular form computations. The technical obstructions were: (i) the incompatibility between equations (51) and (52), and (ii) the lack of a mathematical proof that the divisor sum commutes with the immortal projection to single-centered states.
 
 This paper resolves both issues. We prove:
 
