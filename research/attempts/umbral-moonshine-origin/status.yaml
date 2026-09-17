@@ -1,0 +1,60 @@
+state: abandoned
+reviewer: null
+verdict: |
+  2026-09-18 (prover, 自评，非 graph-reviewer 审查——本轮任务性质是"命题形状调研"，
+  不是"完成一个证明后请求审查"，故没有请求 graph-reviewer 介入；下方是 prover 自己的
+  路线可行性裁定，供 lead/船长参考是否值得再投入)：
+
+  任务是给 Mathieu / umbral moonshine 的"概念起源"问题找一个锐利、可攻的命题形状。
+  已完成：三分类调研（已证/观察/开放，见 proof.md §1 引用的 claim.md 表格，8 条已证
+  定理 T1-T8、3 条观察 O1-O3、4 条开放问题 P1-P4 逐条判断是否有锐利形状），并写出两条
+  精确到量词、有终点线的候选命题（claim.md 候选 A：指定一个 Niemeier 根系 X_0 的显式
+  顶点代数构造存在性；候选 B：umbral 模不能是传统 C2-余有限有理 VOA 特征标的"不可能"
+  定理）。
+
+  两条候选命题在本项目框架下均判定为"此路不通"（proof.md §5 完整理由）：
+
+  - 候选 A 卡在两层：(a) 连"该攻哪个具体 X_0"都需要先做一轮独立文献核实（8+ 个已构造
+    案例的清单只来自二手摘要拼接，未逐篇核对覆盖范围）；(b) 即使锁定 X_0，现有先例
+    （A_1^24/E_8^3/D_4^⊕6 各自的构造）都是发明新自由场实现的独立论文级别工作，不是从
+    已有 rigorous 图砖块组合推出的——不是缺一步论证，是缺一整层基础设施（超 VOA、
+    轨道化构造、mock 模形式/Rademacher 和、稀有有限群表示论），图里一块都没有。
+  - 候选 B 数学含量单薄（本质是"两个权不同的模对象不能相等"的平凡论证），但必须引用
+    Zhu 1996 年定理（VOA 特征标模性质）作为砖块，图里没有对应节点，也不是本项目能在
+    合理范围内独立重证的深度定理——违反 research/CLAUDE.md"证明只能引用图里
+    rigorous/formalized 节点"的纪律。
+
+  这不是"我们没读到已有证明"的情况（原任务前提确认属实：三堆分类清楚显示这是真正的
+  开放问题，非文献遗漏），而是"问题本身对本项目当前资产而言无法攻克"。判定为 abandoned
+  指的是"作为本项目的一个可执行研究目标已排查、不建议继续投入"，不是对 umbral moonshine
+  本身这个数学问题下任何真假判断（该问题在专业文献里仍完全开放，多个专家团队仍在
+  持续推进，最近一篇相关论文是 2026 年的）。
+
+  与另一条 research 线（bkm-shift-explanation，处理 N=4 挠 dyon 免死指标 Φ_10 分母公式）
+  的交集已核查（proof.md §4）：两者共享"BKM 代数从格构造"技术家族，但 Φ_10 是全纯 Siegel
+  尖点形式，umbral moonshine 的 H^X_g 是权 1/2 非全纯 mock 模——本质区别，无已知文献架桥，
+  不构成同一开放问题的两个侧面。
+
+  唯一识别出的、比"直接攻 umbral moonshine"更现实（但明确**不在本次任务范围内**）的
+  替代方向：本项目无鬼定理资产（`worldsheet.no-ghost-theorem-v4`）完成后，理论上离
+  monstrous/Conway moonshine 的 BKM 代数构造（T7，Borcherds 1990 / Harrison-Paquette-Volpato
+  2018，无根格、权 0、全纯）更近，因为那正是无鬼定理的直接应用；umbral moonshine
+  （有根 Niemeier 格 + mock 模）比 monstrous/Conway 多两层障碍（根系带来的额外结构 +
+  mock 非全纯性）。是否开新线留给 lead/船长决定。
+captain_confirmed: false
+notes: |
+  2026-09-18 (prover)：本轮任务性质是"命题形状调研"（find a sharp claim shape），
+  不是从零证明。产出：claim.md（两条精确候选命题 + 三分类调研表 + 已知砖块盘点，
+  均带取证等级标记 ⟨lit,核实⟩/⟨lit,待核⟩/⟨analysis 2026-09-18⟩）、proof.md（逐候选
+  路线可行性分析，每条 [GAP] 具体点名缺什么，§4 回应与 bkm-shift-explanation 线的
+  交集要求，§5 最终裁定，§6 留给 researcher/curator 的未尽核实清单）。
+
+  state 定为 abandoned：不是"证明失败"（没有开始严格证明尝试，本轮任务就是要在开工前
+  先判断是否值得开工），是"排查后判定此路（在本项目当前资产下）不通"，如实记录以防
+  后续 agent 重复踩坑（research/CLAUDE.md §5 abandoned 语义）。captain_confirmed 留 false，
+  待船长看是否认可这个否定裁定、以及是否要在此基础上决定开新线（见 verdict 末尾的
+  monstrous/Conway 替代方向建议）。
+
+  环境限制：本次会话可用工具列表中没有 agora_join/agora_claim/agora_release 等 agora
+  总线函数（只有 Read/Grep/Glob/Bash/Write/Edit/WebSearch/WebFetch），故未能按角色要求
+  调用 agora 协调；已在最终报告中向 lead 说明，未强行调用不存在的工具。
