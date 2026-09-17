@@ -1,0 +1,58 @@
+state: draft
+reviewer: null
+verdict: null
+captain_confirmed: false
+notes: |
+  2026-09-18 (theorem-prover, 判定实验，非毕业证明尝试): 任务=判定"𝒱_d 重标度作用在
+  典范前因子 e^{2πi(ρ_W,Z)} 上是否恰好吐出 (d−1)/2 半整平移"这一假说。裁定：
+
+  **命题 P（字面版）判否**：把 𝒱_d 直接代入裸前因子只产生 Weyl 向量的**乘性**重标度
+  (d²/2, d/2, 1/2)，不产生任何加性平移（见 proof.md Lemma D.1，SymPy 精确符号验证）。
+
+  **命题 P′（精确化版）判是，且是对所有正整数 d 的一般证明（非仅 d=1..6 数值检验）**：
+  AN 的符号惯例 (−1)^ℓ 本身等于"椭圆方向平移 ρ_{W,z}=½"这一算子在 Fourier 系数上的
+  作用（Lemma D.2）；把这个固定的、内嵌于符号惯例中的平移用 𝒱_d 的椭圆伸缩 v↦dv
+  共轭，得到 d·ρ_{W,z}，再扣除"用 Z_1 而非裸生成函数表出等式右边"所需的原始 ρ_{W,z}，
+  净得到 δ_d=(d−1)·ρ_{W,z}=(d−1)/2（proof.md 定理D，纯初等 Fourier 代数，不引用任何
+  BKM 代数结构）。这与 bkm-shift-explanation/proof.md 已证的命题 B（Thm B）逐项精确
+  相符——本文给出了 Thm B 的第二条独立证明路径，并揭示了其 (d−1)/2 位移的 Weyl-向量
+  来源机制。
+
+  **交叉验证**：命题 P′的机制在"纯位移、无伸缩"极限下退化为已确立的 ε=−i
+  （bkm-shift-explanation/proof.md §7 S3，d=2 分支，2026-09-17 严格闭合的全纯函数
+  恒等式），精确吻合（ε=e^{−iπρ_{W,z}}=e^{−iπ/2}=−i）。
+
+  **附加验证**：用完全独立的第三条路径（截断 Laurent 级数逐系数展开，随机整值玩具
+  Ω_1 数组）核对 Thm B/定理D 本身，I∈{1,2,3,4,5,6,8,9,12}，各配 3 组随机种子（27 组
+  配置），全部精确相符（差恒为 0，非浮点近似）。
+
+  **附带发现（坐标约定审计，只读不改动）**：核实过程中发现
+  `bkm-shift-explanation/proof.md` §6 推论 B1 的 DGM 记号翻译公式有误——ρ 与 σ 的
+  缩放角色互换了。正确翻译（已独立核实于
+  `literature/extractions/dabholkar-gomes-murthy-2008.md` §X4 第71-73行逐字记录）
+  是 ρ_DGM↔σ_AN（被 d² 缩放）、σ_DGM↔τ_AN（不缩放），而非推论 B1 声称的 ρ_DGM↔τ_AN。
+  `torsion-dyon-shift-positivity/paper.md` §4 的最终公式本身正确（与文献抽取记录
+  一致），但其说明句"(ρ,v,σ)↔(τ,z,σ)"字面上有误导性。两处文件均按任务指令只读，
+  未作任何修改；此发现记录于本文 proof.md §7，供 lead/负责这两个文件的 agent 参考。
+
+  **GAP（诚实记录，不影响本文任何结论）**：定理D的机制是纯初等 Fourier-代数层面的
+  证明（不假设 BKM 代数结构），因此没有回答、也不试图回答 bkm-shift-explanation 已有
+  的 GAP-BKM 强命题（半整平移是否对应一般 d 下 BKM 超代数的真实自同构/Hecke 算子结构）
+  ——这仍然是开放问题，与既有 GAP-BKM 同级别保持开放，proof.md §8 已如实标注。
+
+  **本尝试性质澄清**：这是一次判定实验/诊断，产出是对既有 Thm B 的一条独立、更透彻的
+  证明路径 + 一个坐标约定审计发现，不是一个新的待毕业结论（Thm B 本身已在
+  bkm-shift-explanation 独立 verified）。state 保持 draft；是否需要 graph-reviewer
+  审查、是否应把此路径合并进 bkm-shift-explanation/proof.md 作为 Thm B 的补充证明，
+  留给 lead 决定（本 agent 按任务指令未触碰 bkm-shift-explanation/ 与
+  torsion-dyon-shift-positivity/ 任何文件）。
+
+  Commits (branch agent/prover/weyl-shift-check):
+  a36ed58 (SymPy 诊断脚本 scripts/weyl_shift_check.py)
+  本条 + claim.md + proof.md (claim.md/proof.md/status.yaml 初稿)
+
+  agora 说明：本次会话 mcp__agora__* 工具未出现在可用工具列表中（疑似 MCP server
+  未连接），未能调用 agora_join/agora_claim/agora_release。写入范围严格限于
+  research/attempts/weyl-shift-diagnostic/**（全新目录），与另一并行 agent 的三处
+  目录（bkm-shift-explanation/、torsion-immortal-positivity-hecke/、papers/）
+  无交集，未产生冲突。此限制已在最终报告中向用户/lead 说明。
