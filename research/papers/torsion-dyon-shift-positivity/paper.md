@@ -303,7 +303,7 @@ Note that the hypothesis of Corollary 7.1 is a condition on the charge pair, inv
 These are standard ingredients of the microscopic derivation of black hole entropy in string theory. Assumption (P'_ad) rests on physical reasoning from supersymmetric quantum field theory and string duality rather than mathematical proof, and we do not prove it here. It remains the single physical input of the paper. [GAP: (P'_ad) unproven.]
 
 **What this paper proves mathematically.** Independently of any physical assumption:
-- The correct divisor sum formula compatible with Alexandrov–Nampuri's framework has the half-integer shift (Proposition 4.1), and DGM equations (51) and (52) as printed are incompatible (Proposition 3.1).
+- The correct divisor sum formula compatible with Alexandrov–Nampuri's framework has the half-integer shift (Theorem 4.1), and DGM equations (51) and (52) as printed are incompatible (Proposition 3.1).
 - The divisor sum commutes with the immortal projection via contour covariance (Theorem 5.2).
 - Σ_{s|I} s·d_*(m/s², n, ℓ/s) > 0 on the domain of Theorem 6.1.
 - That same expression is not a function of (m,n,ℓ,I), with an explicit integer witness (Remark 6.3).
