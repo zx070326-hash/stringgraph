@@ -376,3 +376,11 @@ charge (b)
    identical invariants (m,n,l,I): True
    saturation classes:  (a) (1, 4, 0)   vs   (b) (2, 2, 0)   ->  isometric? False
    ((1,4,0) represents 1 and is primitive; (2,2,0) is imprimitive -- so the two saturations are NOT isometric.)
+  (D1,D2)    (m,n,l)        published            total         immortal   tot=imm  match
+   (2, 2)  (1, 1, 0)            50064            50064            50064      True   True
+   (4, 4)  (2, 2, 0)         32861184         32861184         32861184      True   True
+   (6, 4)  (3, 2, 0)        632078672        632078672        632078672      True   True
+   (8, 4)  (4, 2, 0)       9337042944       9337042944       9337042944      True   True
+  (10, 4)  (5, 2, 0)     113477152800     113477152800     113477152800      True   True
+
+ALL FIVE ENTRIES REPRODUCED AND total == immortal: True
