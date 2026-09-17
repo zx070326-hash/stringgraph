@@ -3,9 +3,9 @@ Copyright (c) 2026 stringgraph contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude (formalizer agent)
 -/
-import Mathlib.Data.Rat.Basic
+import Mathlib.Data.Rat.Defs
 import Mathlib.Data.Fintype.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 import Mathlib.Tactic
 
 /-!
@@ -54,6 +54,11 @@ def dot3 (v w : Fin 3 → ℚ) : ℚ := v 0 * w 0 + v 1 * w 1 + v 2 * w 2
 def powerSum (roots : List (Fin 3 → ℚ)) (H : Fin 3 → ℚ) (k : ℕ) : ℚ :=
   (roots.map (fun α => (dot3 α H) ^ k)).sum
 
+-- Helper to convert list sum to explicit computation
+private lemma list_sum_cons (x : ℚ) (xs : List ℚ) : (x :: xs).sum = x + xs.sum := List.sum_cons
+
+private lemma list_sum_nil : ([] : List ℚ).sum = 0 := List.sum_nil
+
 /-- G₂ witness point: H = (1, 0, -1) -/
 def g2Witness : Fin 3 → ℚ := ![1, 0, -1]
 
@@ -66,11 +71,10 @@ def g2PowerSumFour : ℚ := powerSum g2Roots g2Witness 4
 /-- G₂ power sum S₆ at witness point -/
 def g2PowerSumSix : ℚ := powerSum g2Roots g2Witness 6
 
-theorem g2_power_sum_two_value : g2PowerSumTwo = 48 := by norm_num [g2PowerSumTwo, powerSum, g2Roots, g2Witness, dot3]
-
-theorem g2_power_sum_four_value : g2PowerSumFour = 360 := by norm_num [g2PowerSumFour, powerSum, g2Roots, g2Witness, dot3]
-
-theorem g2_power_sum_six_value : g2PowerSumSix = 3048 := by norm_num [g2PowerSumSix, powerSum, g2Roots, g2Witness, dot3]
+-- G₂ computations use native_decide (12 roots, manageable)
+theorem g2_power_sum_two_value : g2PowerSumTwo = 48 := by native_decide
+theorem g2_power_sum_four_value : g2PowerSumFour = 360 := by native_decide
+theorem g2_power_sum_six_value : g2PowerSumSix = 3048 := by native_decide
 
 theorem g2_rhs_value : (1/48) * g2PowerSumFour * g2PowerSumTwo - (1/14400) * g2PowerSumTwo^3 = 8808/25 := by
   rw [g2_power_sum_two_value, g2_power_sum_four_value]
@@ -128,14 +132,10 @@ def f4PowerSumTwo : ℚ := powerSum4 f4Roots f4Witness 2
 def f4PowerSumFour : ℚ := powerSum4 f4Roots f4Witness 4
 def f4PowerSumSix : ℚ := powerSum4 f4Roots f4Witness 6
 
-theorem f4_power_sum_two_value : f4PowerSumTwo = 18 := by
-  norm_num [f4PowerSumTwo, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness, dot4]
-
-theorem f4_power_sum_four_value : f4PowerSumFour = 15 := by
-  norm_num [f4PowerSumFour, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness, dot4]
-
-theorem f4_power_sum_six_value : f4PowerSumSix = 57/4 := by
-  norm_num [f4PowerSumSix, powerSum4, f4Roots, f4RootsD4, f4RootsShort, f4RootsHalf, f4Witness, dot4]
+-- F₄ computations use native_decide (48 roots)
+theorem f4_power_sum_two_value : f4PowerSumTwo = 18 := by native_decide
+theorem f4_power_sum_four_value : f4PowerSumFour = 15 := by native_decide
+theorem f4_power_sum_six_value : f4PowerSumSix = 57/4 := by native_decide
 
 theorem f4_rhs_value : (1/48) * f4PowerSumFour * f4PowerSumTwo - (1/14400) * f4PowerSumTwo^3 = 261/50 := by
   rw [f4_power_sum_two_value, f4_power_sum_four_value]
@@ -206,14 +206,10 @@ def e6PowerSumTwo : ℚ := powerSum8 e6Roots e6Witness 2
 def e6PowerSumFour : ℚ := powerSum8 e6Roots e6Witness 4
 def e6PowerSumSix : ℚ := powerSum8 e6Roots e6Witness 6
 
-theorem e6_power_sum_two_value : e6PowerSumTwo = 24 := by
-  norm_num [e6PowerSumTwo, powerSum8, e6Roots, e6RootsShort, e6RootsHalf, e6Witness, dot8]
-
-theorem e6_power_sum_four_value : e6PowerSumFour = 18 := by
-  norm_num [e6PowerSumFour, powerSum8, e6Roots, e6RootsShort, e6RootsHalf, e6Witness, dot8]
-
-theorem e6_power_sum_six_value : e6PowerSumSix = 33/2 := by
-  norm_num [e6PowerSumSix, powerSum8, e6Roots, e6RootsShort, e6RootsHalf, e6Witness, dot8]
+-- E₆ computations use native_decide (72 roots)
+theorem e6_power_sum_two_value : e6PowerSumTwo = 24 := by native_decide
+theorem e6_power_sum_four_value : e6PowerSumFour = 18 := by native_decide
+theorem e6_power_sum_six_value : e6PowerSumSix = 33/2 := by native_decide
 
 theorem e6_rhs_value : (1/48) * e6PowerSumFour * e6PowerSumTwo - (1/14400) * e6PowerSumTwo^3 = 201/25 := by
   rw [e6_power_sum_two_value, e6_power_sum_four_value]
@@ -258,6 +254,7 @@ def e7RootsE7E8 : List (Fin 8 → ℚ) :=
   [ ![0, 0, 0, 0, 0, 0, 1, -1], ![0, 0, 0, 0, 0, 0, -1, 1] ]
 
 /-- E₇ half-roots (64 roots with odd parity) -/
+set_option maxHeartbeats 400000 in
 def e7RootsHalf : List (Fin 8 → ℚ) :=
   [ ![1/2, 1/2, 1/2, 1/2, 1/2, 1/2, 1/2, -1/2], ![-1/2, -1/2, -1/2, -1/2, -1/2, -1/2, -1/2, 1/2],
     ![1/2, 1/2, 1/2, 1/2, 1/2, -1/2, 1/2, -1/2], ![-1/2, -1/2, -1/2, -1/2, -1/2, 1/2, -1/2, 1/2],
@@ -311,14 +308,15 @@ def e7PowerSumTwo : ℚ := powerSum8 e7Roots e7Witness 2
 def e7PowerSumFour : ℚ := powerSum8 e7Roots e7Witness 4
 def e7PowerSumSix : ℚ := powerSum8 e7Roots e7Witness 6
 
-theorem e7_power_sum_two_value : e7PowerSumTwo = 36 := by
-  norm_num [e7PowerSumTwo, powerSum8, e7Roots, e7RootsShort, e7RootsE7E8, e7RootsHalf, e7Witness, dot8]
+-- E₇ computations use native_decide (126 roots, needs higher heartbeat limit)
+set_option maxHeartbeats 400000 in
+theorem e7_power_sum_two_value : e7PowerSumTwo = 36 := by native_decide
 
-theorem e7_power_sum_four_value : e7PowerSumFour = 24 := by
-  norm_num [e7PowerSumFour, powerSum8, e7Roots, e7RootsShort, e7RootsE7E8, e7RootsHalf, e7Witness, dot8]
+set_option maxHeartbeats 400000 in
+theorem e7_power_sum_four_value : e7PowerSumFour = 24 := by native_decide
 
-theorem e7_power_sum_six_value : e7PowerSumSix = 21 := by
-  norm_num [e7PowerSumSix, powerSum8, e7Roots, e7RootsShort, e7RootsE7E8, e7RootsHalf, e7Witness, dot8]
+set_option maxHeartbeats 400000 in
+theorem e7_power_sum_six_value : e7PowerSumSix = 21 := by native_decide
 
 theorem e7_rhs_value : (1/48) * e7PowerSumFour * e7PowerSumTwo - (1/14400) * e7PowerSumTwo^3 = 369/25 := by
   rw [e7_power_sum_two_value, e7_power_sum_four_value]
