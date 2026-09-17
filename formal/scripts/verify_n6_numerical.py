@@ -2,6 +2,17 @@
 """
 Numerical verification of the N=6 seed criterion.
 
+⚠⚠ 本脚本目前是**错的**，输出不可用作任何证据（lead, 2026-09-17）。
+`apply_virasoro_to_word` 至少有三个 bug：
+  1. `if new_mode <= 0` 吞掉了 `new_mode == 0`，下面的 `elif new_mode == 0` 是死代码；
+     当 `n == m1` 时会把一个 `0` 塞进词里。
+  2. 「pass-through」项直接 `sorted([m1] + res_word)` 重排，没有做正规序的对易子修正，
+     成套丢项。
+  3. `[L_n, L_{-n}]` 的中心项从未出现。
+它对 §B⁗.2 的 syzygy 恒等式报误差 ≈ 82，而该恒等式已由两个独立实现确认精确为零
+（见 `verify_syzygy.py`）——错的是脚本，不是数学。
+修好之后**必须**先跑 `verify_syzygy.py` 的恒等式作回归测试再用。
+
 We verify in small dimensions that the syzygy map u -> (x4*u, y3*u) on level-1 seeds
 is injective, which implies the criterion.
 
