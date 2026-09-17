@@ -4868,3 +4868,109 @@
                (2) c(−1)=2≠0 ⇒ 奇 ℓ 项系数非零**。抽取记录 extractions/phi10-periodicity-and-product.md。
                注意：原始严格来源为 gritsenko-nikulin-1998（alg-geom/9611028），本条目为其物理综述转述。}
 }
+
+@article{borcherds-1988,
+  author  = {Borcherds, Richard E.},
+  title   = {Generalized {Kac--Moody} algebras},
+  journal = {Journal of Algebra},
+  volume  = {115},
+  number  = {2},
+  pages   = {501--512},
+  year    = {1988},
+  doi     = {10.1016/0021-8693(88)90275-X},
+  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM T2）。**正文未取得**（L0）：
+             尝试 `https://math.berkeley.edu/~reb/papers/gkma/gkma.pdf` 时 WebFetch 返回 PDF 二进制流与
+             PostScript 字体定义，无可读数学文本（工具限制，非权限问题）。
+             **待核实（T2）**：交换关系 `[h, e_α] = (h,α)·e_α` 是否确为定义的一部分（research/attempts/bkm-shift-explanation
+             行 355 标记 (★)，[GAP-S2-ref]）；格型 BKM 代数中 h = L⊗ℂ 且作用由内积给出这一条是否为定义或需额外论证。
+             本文定义了 generalized Kac-Moody algebras（后称 BKM algebras），是 borcherds-1992 与 gritsenko-nikulin-1998
+             使用的代数框架基础。见 extractions/borcherds-1992-twisted.md §T2。}
+}
+
+@article{borcherds-1995,
+  author  = {Borcherds, Richard E.},
+  title   = {Automorphic forms on {$O_{s+2,2}(\mathbb{R})$} and infinite products},
+  journal = {Inventiones Mathematicae},
+  volume  = {120},
+  number  = {1},
+  pages   = {161--213},
+  year    = {1995},
+  doi     = {10.1007/BF01241126},
+  note    = {由 researcher 于 2026-09-17 登记（task GAP-BKM 候选文献）。**正文未取得**（L0）。
+             本文标题明确提到 infinite products 与自守形式，可能比 borcherds-1992 更直接相关于
+             ψ₅(z+½) 的模形式解释及扭转分母恒等式（research/attempts/bkm-shift-explanation [GAP-S3-扭转公式]）。
+             待验证是否包含：(1) 一般 BKM 代数在有限阶自同构下的扭转分母恒等式定理；
+             (2) 对内自同构 ω = exp(πi·ad H_r) 的适用性；(3) 和式侧扭转形式的显式陈述。
+             见 extractions/borcherds-1992-twisted.md 建议后续行动。}
+}
+
+@article{scheithauer-2000,
+  author  = {Scheithauer, Nils R.},
+  title   = {Twisted denominator identities of the fake monster superalgebra},
+  journal = {arXiv preprint},
+  year    = {2000},
+  note    = {arXiv:math/0007163。由 researcher 于 2026-09-17 登记（task GAP-BKM T3a）。
+             **正文未完整取得**（L4）：WebFetch 返回 PDF 二进制流不可读；arXiv HTML 版部分段落可读，
+             但定理编号与公式细节缺失。
+             **L4 证据**：Scheithauer 给出 fake monster algebra 与 superalgebra 在自同构群元素作用下的扭转分母恒等式，
+             方法为"applying elements of automorphism group to the denominator identity"并"using the no-ghost theorem"。
+             扭转恒等式形式：乘积侧插入本征值因子，和式侧有 det(w) 与 Weyl 群求和（§3.1, §4.1）。
+             **未找到**："扭转分母恒等式 = 另一 BKM 代数未扭转分母恒等式"这一转换机制的陈述。
+             见 extractions/borcherds-1992-twisted.md §T3a。}
+}
+
+@article{scheithauer-2008,
+  author  = {Scheithauer, Nils R. and Creutzig, Thomas and Klauer, Sonja},
+  title   = {The ten {Borcherds--Kac--Moody} algebras with purely imaginary simple roots},
+  journal = {arXiv preprint},
+  year    = {2008},
+  note    = {arXiv:0801.1829。由 researcher 于 2026-09-17 登记（task GAP-BKM T3a）。
+             **正文未取得**（L0）：WebFetch PDF 解析失败。
+             **L4 证据（Web 搜索摘要）**：讨论 10 个特定 BKM 代数的完全反射自守积。
+             未找到"扭转恒等式→未扭转恒等式"转换机制的陈述。
+             见 extractions/borcherds-1992-twisted.md §T3a。}
+}
+
+@article{govindarajan-krishna-2008,
+  author  = {Govindarajan, Suresh and Krishna, K. Gopala},
+  title   = {Generalized {Kac--Moody} Algebras from {CHL} dyons},
+  journal = {JHEP},
+  volume  = {04},
+  pages   = {032},
+  year    = {2009},
+  note    = {arXiv:0807.4451（2008 提交，JHEP 04 (2009) 032）。由 researcher 于 2026-09-17 登记（task GAP-BKM T3b）。
+             **正文未取得**（L0）：WebFetch 返回 PDF 二进制流（419 KB）不可读。
+             **L4 证据（Web 搜索）**：构造 GKM 超代数 G_N from (N,k) CHL 模型；轨道化作用在 G₁ 虚简单根上，实简单根不变。
+             **待核实**：(1) (N,k) = (1,10), (2,6), (3,4) 对应 Δ_{k/2} 的说法；(2) 轨道化作用与自同构扭转是否同一机制；
+             (3) 是否已给出 [GAP-BKM] 所需的"半整平移 ↔ Z/2Z 轨道化"对应。
+             见 extractions/borcherds-1992-twisted.md §T3b。}
+}
+
+@article{govindarajan-krishna-2019,
+  author  = {Govindarajan, Suresh and Krishna, K. Gopala},
+  title   = {{BKM} Lie superalgebras from counting twisted {CHL} dyons -- {II}},
+  journal = {JHEP},
+  volume  = {03},
+  pages   = {036},
+  year    = {2021},
+  note    = {arXiv:1905.06083（2019 提交，JHEP 03 (2021) 036）。由 researcher 于 2026-09-17 登记（task GAP-BKM T3b）。
+             **正文未取得**（L0）：WebFetch 返回 PDF 二进制流（410 KB）不可读。
+             **L4 证据（Web 搜索）**：讨论 Z₅ 和 Z₆ CHL 轨道化的 BKM 超代数，涉及半整指标 twisted indices 与 Jacobi 形式，
+             连接 dyon 配分函数与 BKM 分母公式。
+             **关键待核实**：半整指标、扭转扇形、Z/2Z 作用与 [GAP-S3-扭转公式] / [GAP-S3-分支] 的关系。
+             见 extractions/borcherds-1992-twisted.md §T3b。}
+}
+
+@article{clery-gritsenko-2011,
+  author  = {Cl{\'e}ry, Fabien and Gritsenko, Valery},
+  title   = {Modular forms of orthogonal type and {Jacobi} theta-series},
+  journal = {arXiv preprint},
+  year    = {2011},
+  note    = {arXiv:1106.4733。由 researcher 于 2026-09-17 登记（task GAP-BKM T3c）。
+             **正文未取得**（L0）：WebFetch 返回 PDF 二进制流（396 KB）不可读。
+             **L4 证据（Web 搜索）**：讨论任意正定格 L 的半整指标 Jacobi 形式及其 Jacobi 提升；
+             与 Igusa 尖点形式 χ₁₀（权重 10）和 theta 级数构造相关。
+             **关键待核实（[GAP-S3-分支]）**："非平凡二元特征 v_H 只在指标为半整数时出现"——
+             如果属实，可能直接解释 research/attempts/bkm-shift-explanation 中 ψ₅ 的特征 v 与 (d−1)/2 半整平移的关系。
+             见 extractions/borcherds-1992-twisted.md §T3c 与对 GAP-S3 的影响。}
+}
