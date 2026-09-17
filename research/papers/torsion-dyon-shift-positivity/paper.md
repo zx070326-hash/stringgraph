@@ -2,35 +2,41 @@
 
 **Abstract**
 
-We reduce the physical assumptions for torsion-I dyon positivity in N=4 string theory on K3×T² to a single premise—the divisor sum formula of Dabholkar–Gomes–Murthy equation (52)—under which strict positivity d_*^{(I)} > 0 follows for all I≥1. The proof combines three results: (A) an explicit incompatibility between two divisor sum formulae in the literature (Dabholkar–Gomes–Murthy 0803.2692 equations (51) and (52)), with an integer witness at torsion I=2; (B) an algebraic derivation showing the unique compatible generating function involves a half-integer elliptic shift (d−1)/2 on even divisors, obtained by solving Alexandrov–Nampuri's coupled equations; (C) a rigorous proof that attractor cycle contours are covariant under charge rescaling, allowing the divisor sum to commute with the immortal projection without relying on mock modular form decompositions. Combining these with Rosselló's recent positivity theorem for unit torsion yields d_*^{(I)}(m,n,ℓ) = Σ_{s|I} s·d_*(m/s²,n,ℓ/s) > 0 for all I≥1, requiring only a single physical input (the divisor sum itself). The mathematical content is self-contained; physical interpretation relies on standard BPS state counting assumptions.
+We reduce the physical assumptions for torsion-I dyon positivity in N=4 string theory on K3×T² to a single premise, and in the process show that the premise as usually stated cannot be correct. The proof combines four results: (A) an explicit incompatibility between two divisor sum formulae in the literature (Dabholkar–Gomes–Murthy 0803.2692 equations (51) and (52)), with an integer witness at torsion I=2; (B) an algebraic derivation showing the unique compatible generating function involves a half-integer elliptic shift (d−1)/2 on even divisors, obtained by solving Alexandrov–Nampuri's coupled equations; (C) a rigorous proof that attractor cycle contours are covariant under charge rescaling, allowing the divisor sum to commute with the immortal projection without relying on mock modular form decompositions; and (D) explicit integer witnesses showing that the divisor sum D_I(m,n,ℓ) = Σ_{s|I} s·d_*(m/s²,n,ℓ/s) is **not** a function of the invariants (m,n,ℓ,I) alone: one lattice with torsion I=2, presented in two SL(2,ℤ)-related bases each satisfying the hypotheses above, yields 7999541469408 and 7999235715072. Since the physical index is S-duality invariant, the naive identification of D_I with it is untenable, and we replace it by the strictly weaker premise (P′_ad), asserted only on adapted frames Q ∈ IΛ. Individual immortal indices d_* remain GL(2,ℤ)-invariant; the failure is confined to the divisor sum. Under (P′_ad), combining (C) with Rosselló's positivity theorem for unit torsion yields strict positivity for all I≥1, on a charge domain that is itself S-duality invariant and strictly larger than the triple domain previously used. The mathematical content is self-contained; physical interpretation relies on standard BPS state counting assumptions.
 
 ## 1. Introduction
 
 The Sen positivity conjecture states that degeneracies of single-centered supersymmetric black holes in four-dimensional N=4 string theory are strictly positive integers. For the flagship case of type II on K3×T², the conjecture was fully resolved for unit torsion (I=1) by Rosselló [rossello-2024], building on the mock modular form framework of Dabholkar–Murthy–Zagier (DMZ) [dmz-2012]. The extension to torsion I>1—where the relevant generating functions involve divisor sums over s|I—requires a physical input: the divisor sum formula itself, for which two incompatible versions appear in the literature (DGM 0803.2692 equations (51) and (52)).
 
-We show that under the assumption of DGM equation (52), strict positivity follows for all torsion classes via a rigorous mathematical proof requiring no mock modular form computations. The technical obstructions were: (i) the incompatibility between equations (51) and (52), and (ii) the lack of a mathematical proof that the divisor sum commutes with the immortal projection to single-centered states.
+We show that a suitable form of DGM equation (52) yields strict positivity for all torsion classes via a rigorous mathematical proof requiring no mock modular form computations. The technical obstructions were: (i) the incompatibility between equations (51) and (52), and (ii) the lack of a mathematical proof that the divisor sum commutes with the immortal projection to single-centered states. A third issue, which we did not anticipate and which turns out to be the more consequential one, is that the divisor sum is not a well-defined function of the charge at all.
 
-This paper resolves both issues. We prove:
+This paper resolves all three. We prove:
 
-**Proposition A** (§2): DGM equations (51) and (52) cannot both hold. For even s and odd ℓ/s, the two formulae differ by a sign factor (−1)^{ℓ−ℓ/s} = −1. We provide an explicit integer witness: at I=2, (m,n,ℓ)=(4,1,2), the two readings give 16542306 vs 16440894, differing by 4·d_*(1,1,1) = 101412.
+**Proposition A** (§3): DGM equations (51) and (52) cannot both hold. For even s and odd ℓ/s, the two formulae differ by a sign factor (−1)^{ℓ−ℓ/s} = −1. We provide an explicit integer witness: at I=2, (m,n,ℓ)=(4,1,2), the two readings give 16542306 vs 16440894, differing by 4·d_*(1,1,1) = 101412.
 
-**Proposition B** (§3): The unique generating function compatible with equation (52) and the Alexandrov–Nampuri coupled equations (2.11)+(2.13) is
+**Proposition B** (§4): The unique generating function compatible with equation (52) and the Alexandrov–Nampuri coupled equations (2.11)+(2.13) is
 
 Z_I^{(4|4)}(τ,z,σ) = Σ_{d|I} d / Φ₁₀(τ, dz + (d-1)/2, d²σ).
 
 For odd divisors d, the shift (d-1)/2 is an integer and cancelled by Φ₁₀'s periodicity; for even divisors, it is a genuine half-integer shift. This resolves the sign discrepancy in Proposition A.
 
-**Theorem C** (§4): Attractor cycle contours transform covariantly under the charge rescaling (ρ,σ,v) ↦ (s²ρ, σ, sv). Specifically, the contour C_*(m,n,ℓ) with imaginary part Im Ω = 2Λ·adj(T(m,n,ℓ)) is mapped precisely to C_*(m/s², n, ℓ/s) with Λ ↦ s²Λ, without crossing any walls or generating multi-centered corrections. This follows from the elementary identity A_s·adj(T)·A_s^T = s²·adj(T'), where T' corresponds to the rescaled charges.
+**Theorem C** (§5): Attractor cycle contours transform covariantly under the charge rescaling (ρ,σ,v) ↦ (s²ρ, σ, sv). Specifically, the contour C_*(m,n,ℓ) with imaginary part Im Ω = 2Λ·adj(T(m,n,ℓ)) is mapped precisely to C_*(m/s², n, ℓ/s) with Λ ↦ s²Λ, without crossing any walls or generating multi-centered corrections. This follows from the elementary identity A_s·adj(T)·A_s^T = s²·adj(T'), where T' corresponds to the rescaled charges.
 
-**Main Theorem** (§5): For all I≥1 and charges (m,n,ℓ) with I²|m, I|ℓ, m,n≥1, Δ=4mn-ℓ²>0, the torsion-I immortal dyon index satisfies
+**Main Theorem** (§6): For all I≥1 and triples (m,n,ℓ) with I²|m, I|ℓ, m,n≥1, Δ=4mn-ℓ²>0, the torsion-I immortal dyon index satisfies
 
 d_*^{(I)}(m,n,ℓ) = Σ_{s|I} s · d_*(m/s², n, ℓ/s) > 0.
 
-The proof uses only Theorem C (covariance) and Rosselló's Corollary 1.1 (positivity for I=1 without gcd restrictions), requiring no mock modular form computations. The physical assumption is isolated to a single input (P'): the divisor sum formula (equation 52) itself.
+The proof uses only Theorem C (covariance) and Rosselló's Corollary 1.1 (positivity for I=1 without gcd restrictions), requiring no mock modular form computations.
+
+**Proposition D** (Remark 6.3): The right-hand side above, call it D_I(m,n,ℓ), is not a function of the charge. One lattice L ⊆ U⊕U of torsion I=2, presented in two SL(2,ℤ)-related bases both of which satisfy I²|m and I|ℓ, has invariants (4,4,0) and (8,4,8) with
+
+D_2(4,4,0) = 7999541469408,  D_2(8,4,8) = 7999235715072.
+
+The individual immortal indices d_* *are* GL(2,ℤ)-invariant (Appendix A); the failure sits entirely in the s=2 term, where the two frames produce index-2 superlattices of discriminant 16 lying in different classes. Since the physical index is S-duality invariant, this rules out the usual reading of (52) as a statement about charges. §7 accordingly states the physical premise on *adapted* frames only (Q ∈ IΛ) and re-derives positivity on a charge domain that is S-duality invariant and strictly larger than the triple domain of the Main Theorem.
 
 ### Outline of the paper
 
-§2 establishes the incompatibility between DGM equations (51) and (52) through explicit computation and symmetry analysis. §3 derives the corrected generating function from first principles using Alexandrov–Nampuri's framework. §4 proves attractor cycle covariance via adjugate matrix transformation laws. §5 combines these to establish positivity. §6 isolates the remaining physical assumption. §7 discusses open problems, including the precise correspondence with BKM algebra automorphisms and the status of the mock/immortal equality beyond Gauss-reduced representatives.
+§2 fixes conventions and defines adapted frames. §3 establishes the incompatibility between DGM equations (51) and (52) through explicit computation and symmetry analysis, and notes why the natural small witness cannot see the frame dependence. §4 derives the corrected generating function from first principles using Alexandrov–Nampuri's framework, including an explicit variable dictionary. §5 proves attractor cycle covariance via adjugate matrix transformation laws. §6 combines these to establish positivity and exhibits the frame-dependence witness. §7 isolates and corrects the remaining physical assumption. §8 discusses open problems, including the precise correspondence with BKM algebra automorphisms and the status of the mock/immortal equality beyond Gauss-reduced representatives.
 
 The mathematical techniques are elementary: Fourier series manipulations, change of variables, and linear algebra on symmetric matrices. No deep modular form theory is required beyond citing Rosselló's result as a black box.
 
@@ -64,7 +70,9 @@ The torsion-I immortal index is defined by the same contour integral formula:
 
 d_*^{(I)}(m,n,ℓ) = ∫_{C_*(m,n,ℓ;Λ)} 𝒢_I(Ω) e^{-2πi(mρ+nσ+ℓv)} dρ dσ dv.
 
-**Physical assumption (isolated).** The identification of d_*^{(I)}(m,n,ℓ) with the physical BPS index of torsion-I dyons is the physical input (P'). It rests on duality arguments, 4d-5d lifts, and fermionic zero mode counting [dgm-2008, alexandrov-nampuri-2020]. The mathematical results (Propositions A, B, Theorem C, Main Theorem) do not depend on (P'); they are statements about Φ₁₀ and contour integrals.
+**Adapted frames.** A basis of the rank-2 sublattice L = ℤQ + ℤP ⊆ Λ is *adapted* (to the torsion I) if Q ∈ IΛ. Adapted bases exist iff the quotient M/L is cyclic, where M = (L ⊗ ℚ) ∩ Λ is the saturation — in particular whenever Q or P is primitive — and they form a single Γ₀(I) orbit. In an adapted basis the invariants automatically satisfy I²|m and I|ℓ, which is exactly the hypothesis domain of Theorem 6.1. The converse fails: (m,n,ℓ,I) does not determine the GL(2,ℤ) class of L, so "I²|m, I|ℓ" is a statement about a *frame*, not about a charge.
+
+**Physical assumption (isolated).** The identification of d_*^{(I)}(m,n,ℓ) with the physical BPS index of torsion-I dyons, asserted *on adapted frames*, is the physical input (P'_ad); see §7. It rests on duality arguments, 4d-5d lifts, and fermionic zero mode counting [dgm-2008, alexandrov-nampuri-2020]. The frame restriction is not a technicality: the unrestricted version (P') is false, with an explicit integer counterexample given in Remark 6.3. The mathematical results (Propositions A, B, Theorem C, Main Theorem) do not depend on (P'_ad); they are statements about Φ₁₀ and contour integrals.
 
 ## 3. Incompatibility of DGM equations (51) and (52)
 
@@ -98,7 +106,14 @@ But (-1)^{ℓ+ℓ/s} = (-1)^{ℓ-ℓ/s} (since ℓ = s·(ℓ/s) makes (-1)^{2ℓ
 Total: (52) gives 16491600 + 50706 = 16542306; (50)+(51) gives 16491600 - 50706 = 16440894.
 Difference: 101412 = 4·d_*(1,1,1).
 
-The numerical values are computed using scripts that implement the Fourier–Jacobi expansion of 1/Φ₁₀ with exact integer arithmetic, cross-checked against published degeneracy tables [reference].
+The numerical values are computed using scripts that implement the Fourier–Jacobi expansion of 1/Φ₁₀ with exact integer arithmetic. The implementation was calibrated against five charge points at which the total index coincides with the immortal index, so that they do test d_* itself:
+
+  d_*(1,1,0) = 50064,  d_*(2,2,0) = 32861184,  d_*(3,3,0) = 632078672,
+  d_*(2,3,1) = 9337042944,  d_*(3,4,2) = 113477152800,
+
+together with d_*(1,1,1) = 25353 and d_*(4,1,2) = 16491600 used above. These values are the ones that circulate in the literature on 1/4-BPS degeneracies; we have not been able to verify a specific table number in a citable published source, and state them here as computed values reproduced by our implementation rather than as quotations.
+
+**Remark 3.3 (why the witness above cannot detect frame dependence).** The witness (4,1,2) has Δ = 12, so the s=2 term of the divisor sum sees the form of discriminant Δ/s² = 3, and there is exactly one GL(2,ℤ) class of binary quadratic forms of discriminant 3. Consequently the divisor sum evaluated at this charge is insensitive to the choice of basis for L, and the sign discrepancy of Proposition 3.1 is the only pathology visible here. This is a blind spot, not a general feature: for Δ/s² with class number > 1 the divisor sum is genuinely basis-dependent, which is the content of Remark 6.3.
 
 **Remark 3.2.** No erratum or revision to [dgm-2008] addressing this discrepancy has been published. The most natural resolution is that equation (51) should include a half-integer shift on the elliptic variable for even divisors, as we derive in §4.
 
@@ -112,7 +127,15 @@ We now show that the unique generating function compatible with equation (52) an
 
 (AN-2)  Ω_I^{(4|4)}(n,m,ℓ) = Σ_{d|I} d · Ω_1^{(4|4)}(n, m/d², ℓ/d)
 
-Note: Their variable convention is (τ,z,σ) corresponding to our (ρ,v,σ), with index on σ; we translate back to our convention with index on ρ below.
+**Variable dictionary.** Alexandrov–Nampuri write their Siegel variables in the order (τ,z,σ) with the rescaled index carried by σ; we write ours in the order (ρ,σ,v) with the index carried by ρ. The correspondence is *not* the left-to-right one, and getting it wrong is easy: the two triples are ordered differently and the elliptic variable sits in different slots. It is fixed unambiguously by which variable the divisor s acts on, as follows.
+
+| role under 𝒱_s | this paper | Alexandrov–Nampuri | DGM |
+|---|---|---|---|
+| index variable, scaled by s² | ρ | σ | ρ |
+| elliptic variable, scaled by s (plus the shift) | v | z | v |
+| spectator, unscaled | σ | τ | σ |
+
+So the dictionary is ρ ↔ σ_AN, v ↔ z_AN, σ ↔ τ_AN. Our convention agrees with DGM's slot-by-slot; only the AN reference requires the reordering. In particular the AN formula (**) below, read literally, scales its *third* argument by d², and that third argument is our ρ.
 
 **Theorem 4.1 (Half-integer shift formula).** Solving equations (AN-1)+(AN-2) for Z_I gives
 
@@ -150,7 +173,7 @@ Z_I = Σ_{d|I} d · Σ_{n,m',ℓ'} (-1)^{ℓ'} Ω_1(n,m',ℓ') q^n y_new^{ℓ'} 
 - When d is odd: (d-1)/2 ∈ ℤ. By Φ₁₀'s integer periodicity in z (proven in [kawai-1997] via the Borcherds product formula, where all y-exponents are integers), the shift is cancelled.
 - When d is even: (d-1)/2 is a half-integer (e.g., 1/2, 3/2, 5/2 for d=2,4,6). The shift is genuine and non-trivial.
 
-**Translation to DGM notation.** In DGM's variables (ρ,v,σ) ↔ our (τ,z,σ), the rescaling acts as (ρ,σ,v) ↦ (s²ρ, σ, sv). Translating (**) gives
+**Translation to DGM notation.** Applying the dictionary of §4 (ρ ↔ σ_AN, v ↔ z_AN, σ ↔ τ_AN) to (**) — so that the argument scaled by d², namely AN's third slot, becomes our ρ, and AN's elliptic variable z becomes our v — the rescaling acts as (ρ,σ,v) ↦ (s²ρ, σ, sv) and (**) becomes
 
 𝒵_I(ρ,σ,v) = Σ_{s|I} s/Φ₁₀(s²ρ, σ, sv + (s-1)/2).
 
@@ -231,24 +254,61 @@ Therefore each term s·d_*(m/s², n, ℓ/s) is a positive weight times a positiv
 
 We provide an independent proof of S-duality invariance in Appendix A using the same contour covariance technique as Theorem 5.2.
 
+**Remark 6.3 (The divisor sum is not a function of the charge).** Theorem 6.1 is a statement about triples (m,n,ℓ) satisfying I²|m and I|ℓ. It is *not* a statement about charges, and the distinction is not vacuous. Write
+
+D_I(m,n,ℓ) := Σ_{s|I} s · d_*(m/s², n, ℓ/s)
+
+for the right-hand side of Theorem 6.1, which is the right-hand side of DGM equation (52). Then:
+
+- Each individual d_* is GL(2,ℤ)-invariant (Proposition A.1): d_* is a class function on binary quadratic forms.
+- D_I is **not**. Concretely, let L = ℤQ + ℤP ⊆ U⊕U with (Q²/2, P²/2, Q·P) = (4,4,0) and torsion I = 2 (take Q = 2w with w primitive). Change basis by U = [[-1,0],[-1,-1]] ∈ SL(2,ℤ), i.e. (Q,P) ↦ (-Q-P, -P). This is the *same lattice L* with the *same* torsion I = 2, and both frames satisfy the hypotheses of Theorem 6.1 (4|4 and 2|0; 4|8 and 2|8). The invariants become (8,4,8), and
+
+  D_2(4,4,0) = d_*(4,4,0) + 2·d_*(1,4,0) = 7999169992704 + 2·185738352 = 7999541469408,
+  D_2(8,4,8) = d_*(8,4,8) + 2·d_*(2,4,4) = 7999169992704 + 2·32861184  = 7999235715072,
+
+  differing by 305754336.
+
+The mechanism is transparent and localizes the failure exactly. The s=1 terms agree, because (4,4,0) and (8,4,8) have Δ=64 and lie in one GL(2,ℤ) class — this is just Proposition A.1. The discrepancy is entirely in the s=2 term: the index-2 superlattices ℤ(Q/2) + ℤP produced by the two frames have Δ/s² = 16, where the class number is 2, and the two frames land in *different* classes ((1,4,0) versus (2,4,4) ~ (2,2,0)). The divisor sum thus reads off data — the GL(2,ℤ) class of a sublattice of index s — that (m,n,ℓ,I) does not determine.
+
+Since the physical index is S-duality invariant, D_I cannot equal it as a function of (m,n,ℓ,I) alone. This is what forces the frame restriction in (P'_ad) of §7. It also explains why the discrepancy has gone unnoticed: it is invisible whenever every Δ/s² occurring has class number 1, which includes the Δ=12 witness of §3 (Remark 3.3) and all small examples typically tabulated. We emphasize that nothing in §§3–6 is affected: those are statements about triples, and they remain correct as stated.
+
 ## 7. Physical interpretation and remaining assumption
 
-The mathematical content (Propositions 3.1, 4.1, Theorem 5.2, Theorem 6.1) concerns the Igusa cusp form Φ₁₀ and contour integrals. To interpret these as physical BPS indices requires:
+The mathematical content (Propositions 3.1, 4.1, Theorem 5.2, Theorem 6.1) concerns the Igusa cusp form Φ₁₀ and contour integrals. To interpret these as physical BPS indices requires an identification of d_*^{(I)} with a degeneracy. The naive form of that identification is:
 
-**Physical assumption (P').** The quantity d_*^{(I)}(m,n,ℓ) defined by our contour integral equals the single-centered (immortal) BPS degeneracy of a torsion-I dyon with charges (Q²/2, P²/2, Q·P) = (m,n,ℓ), where I = gcd(Q∧P).
+**Physical assumption (P'), false as stated.** The quantity d_*^{(I)}(m,n,ℓ) defined by our contour integral equals the single-centered (immortal) BPS degeneracy of a torsion-I dyon with charges (Q²/2, P²/2, Q·P) = (m,n,ℓ), where I = gcd(Q∧P).
 
-This assumption rests on:
+By Theorem 6.1, d_*^{(I)}(m,n,ℓ) = D_I(m,n,ℓ) on the stated domain, and by Remark 6.3 the function D_I takes two different values on two SL(2,ℤ)-related presentations of one and the same charge lattice, both of which satisfy the hypotheses. The immortal index of a given dyon is a single number, and S-duality is an exact symmetry of the theory, so (P') is untenable. We therefore replace it by the following strictly weaker statement.
+
+**Physical assumption (P'_ad).** Let (Q,P) be a charge pair with torsion I = gcd(Q∧P), presented in an *adapted* frame, i.e. one in which Q ∈ IΛ (§2). Then d_*^{(I)}(Q²/2, P²/2, Q·P) equals the single-centered (immortal) BPS degeneracy of that dyon.
+
+Three remarks on why this is the right replacement rather than an ad hoc patch.
+
+1. **It is what the derivation actually supports.** The DGM route to equation (52) proceeds by the rescaling ρ ↦ s²ρ, v ↦ sv, which is the statement that Q is divisible by s inside Λ — an adapted-frame statement. Likewise Alexandrov–Nampuri's equation (2.16) and Banerjee–Sen [banerjee-sen-2008] work with the Γ₀(I) subgroup, and adapted frames form precisely one Γ₀(I) orbit (§2). The frame restriction was implicit in the sources; making it explicit is what removes the counterexample.
+2. **It costs nothing in generality of the conclusion.** Adapted frames exist whenever the saturation quotient M/L is cyclic, in particular whenever Q or P is primitive. So (P'_ad) still pins down the immortal index of essentially every charge of interest; it merely declines to assert that the triple (m,n,ℓ) read off from an arbitrary frame is a complete label.
+3. **It makes the positivity conclusion S-duality invariant.** See Corollary 7.1.
+
+**Corollary 7.1 (positivity, stated over charges).** Assume (P'_ad). Let (Q,P) be a charge pair in Λ with torsion I ≥ 1, write (m,n,ℓ) = (Q²/2, P²/2, Q·P) and Δ = 4mn - ℓ², and suppose m ≥ 1, n ≥ 1, Δ > 0, and that M/L is cyclic (automatic if Q or P is primitive). Then the single-centered degeneracy of (Q,P) is strictly positive.
+
+*Proof.* Cyclicity gives an adapted frame (§2), in which the invariants satisfy I²|m and I|ℓ. The hypotheses m,n ≥ 1 and Δ > 0 are GL(2,ℤ)-invariant, hence hold in that frame. Apply Theorem 6.1 there, then (P'_ad). ∎
+
+Note that the hypothesis of Corollary 7.1 is a condition on the charge pair, invariant under S-duality, whereas the hypothesis of Theorem 6.1 is a condition on a frame. The set of charges covered is strictly larger than the set of triples satisfying I²|m, I|ℓ: every charge with Q or P primitive qualifies, however its invariants happen to be presented.
+
+(P'_ad) rests on:
 
 1. **Duality arguments and 4d-5d lifts** relating torsion-I four-dimensional dyons to five-dimensional momentum sectors [dgm-2008, sen-2008].
 2. **Fermionic zero mode counting** to extract the single-centered contribution from the total index [dgm-2008].
 3. **Wall-crossing invariance** of the immortal index, encoded in the attractor contour prescription [dmz-2012].
 
-These are standard ingredients of the microscopic derivation of black hole entropy in string theory. Assumption (P') rests on physical reasoning from supersymmetric quantum field theory and string duality rather than mathematical proof of the modular form structure.
+These are standard ingredients of the microscopic derivation of black hole entropy in string theory. Assumption (P'_ad) rests on physical reasoning from supersymmetric quantum field theory and string duality rather than mathematical proof, and we do not prove it here. It remains the single physical input of the paper. [GAP: (P'_ad) unproven.]
 
-**What this paper proves mathematically.** Given (P'), our results show:
-- The correct divisor sum formula compatible with Alexandrov–Nampuri's framework has the half-integer shift (Proposition 4.1).
+**What this paper proves mathematically.** Independently of any physical assumption:
+- The correct divisor sum formula compatible with Alexandrov–Nampuri's framework has the half-integer shift (Proposition 4.1), and DGM equations (51) and (52) as printed are incompatible (Proposition 3.1).
 - The divisor sum commutes with the immortal projection via contour covariance (Theorem 5.2).
-- All torsion-I immortal indices are positive (Theorem 6.1).
+- Σ_{s|I} s·d_*(m/s², n, ℓ/s) > 0 on the domain of Theorem 6.1.
+- That same expression is not a function of (m,n,ℓ,I), with an explicit integer witness (Remark 6.3).
+
+Given (P'_ad), these yield strict positivity of single-centered degeneracies for all torsion classes (Corollary 7.1).
 
 The mathematical proofs do not reference string theory beyond the initial definition of d_* via the contour integral.
 
@@ -273,16 +333,21 @@ The failure mechanism is well-understood: performing the Fourier–Jacobi separa
 
 ## 9. Conclusion
 
-We have established strict positivity of single-centered BPS degeneracies for all torsion classes in N=4 string theory on K3×T², conditional only on the divisor sum formula itself (equation (52) of [dgm-2008]). The proof proceeds via:
+We have established strict positivity of single-centered BPS degeneracies for all torsion classes in N=4 string theory on K3×T², conditional on a single physical premise (P'_ad) — the identification of the contour integral d_*^{(I)} with a degeneracy, asserted on adapted frames. Along the way we showed that the unrestricted form of that premise, which is how the divisor sum formula is usually read, cannot hold. The proof proceeds via:
 
 1. Identifying an incompatibility between two formulas in the literature (§3).
 2. Deriving the correct generating function with half-integer elliptic shifts from the Alexandrov–Nampuri framework (§4).
 3. Proving that attractor cycle contours are covariant under charge rescaling, bypassing the need for mock modular form techniques (§5).
 4. Applying Rosselló's unit-torsion positivity theorem without gcd restrictions (§6).
+5. Exhibiting an integer witness showing the divisor sum is frame-dependent, and replacing (P') by (P'_ad) accordingly (Remark 6.3, §7).
 
-The mathematical techniques are elementary (Fourier series, linear algebra, contour integration), requiring no deep knowledge of Siegel modular forms beyond the definition of Φ₁₀ and its periodicity properties. The result reduces the physical assumptions in the torsion-I case to a single input—the divisor sum structure—which itself follows from string duality and fermionic zero modes.
+The mathematical techniques are elementary (Fourier series, linear algebra, contour integration), requiring no deep knowledge of Siegel modular forms beyond the definition of Φ₁₀ and its periodicity properties.
 
-Open questions include the BKM-algebraic interpretation of the half-integer shift, the behavior of divisor sums at the mock modular form level, and the precise domain of validity for mock coefficient identities. These are natural directions for further investigation but do not affect the core positivity result.
+Two features of the final statement deserve emphasis. First, the premise is *weaker* than the one it replaces, and the conclusion is *stronger*: Corollary 7.1 covers a charge set closed under S-duality, strictly containing the triples to which Theorem 6.1 literally applies. Second, the frame dependence exposed in Remark 6.3 is invisible exactly when the relevant discriminants Δ/s² have class number 1 — a condition satisfied by every small example we are aware of in the literature, which we believe accounts for the formula having stood unchallenged.
+
+That the invariants (Q²/2, P²/2, Q·P) are insufficient to label torsion-I dyons is not itself new: Banerjee and Sen observed in 2008 that for torsion r only the subgroup Γ⁰(r) of the S-duality group acts manifestly on these invariants [banerjee-sen-2008]. What is new here is the sharp form of the failure — an explicit pair of integers, a class-number criterion explaining when the failure is detectable, and the lattice-theoretic criterion Q ∈ IΛ that repairs it — together with the covariant rewriting under which positivity survives.
+
+Open questions include the BKM-algebraic interpretation of the half-integer shift, the behavior of divisor sums at the mock modular form level, the precise domain of validity for mock coefficient identities, whether the related fractional-shift summation formulae for torsion dyons in the literature are likewise frame-dependent (those rescale P rather than Q, so the analysis of Remark 6.3 does not transfer directly and would need to be redone), and of course a proof of (P'_ad) itself. These do not affect the core positivity result.
 
 ## Acknowledgments
 
@@ -317,6 +382,8 @@ This proves S-duality invariance independently of [rossello-2024], using only th
 ## References
 
 [alexandrov-nampuri-2020] S. Alexandrov, S. Nampuri, "Refinement and modularity of immortal dyons," arXiv:2009.01172, JHEP 01 (2021) 147.
+
+[banerjee-sen-2008] S. Banerjee, A. Sen, "Duality Orbits, Dyon Spectrum and Gauge Theory Limit of Heterotic String Theory on T^6," arXiv:0801.0149, JHEP 03 (2008) 022.
 
 [dgm-2008] A. Dabholkar, J. Gomes, S. Murthy, "Counting all dyons in N=4 string theory," arXiv:0803.2692, JHEP 05 (2011) 059.
 
