@@ -44,6 +44,30 @@ verdict: |
   lead; does not affect this attempt's own verified status since none
   of Claims 1-4 depend on LevelSixCount.lean.
   captain_confirmed still recommended before this graduates to graph/.
+
+  LEAD UPDATE (2026-09-18): the LevelSixCount.lean finding above is now
+  RESOLVED and the paragraph is stale as of commit f45fe14 ("formal: fix
+  LevelSixCount recursive form + remove spurious {1,5} term", 2026-09-16
+  02:55), which lands ABOVE 50b3ac1 (this attempt's review commit) in
+  `git log main` -- i.e. the fix followed the review, so the reviewer was
+  correct at the time of writing and is simply superseded now. Both
+  defects the prover identified were real and both are closed:
+    - The identity is no longer of the impossible shape F(m+1)=F(m). HEAD
+      states the recursive form p_{m+1}(6) + (m+1) = p_m(6) + p_{m+1}(5)
+      + p_{m+1}(4), i.e. exactly this attempt's kappa_6(m) = m+1.
+      Independently re-verified by the lead (fresh Python, not the
+      attempt's scripts): the three bracketed shape formulas in the Lean
+      file reproduce p_m(6)/p_m(5)/p_m(4) exactly for m=0..8, and the
+      full identity holds for m=0..14. D=26 instance:
+      1312675 + 25 = 1073720 + 209405 + 29575.
+    - The orphaned-module root cause is fixed: LevelSixCount is now
+      imported from formal/StringFormal.lean:79 (LevelSevenCount at :80),
+      and .lake/build/.../LevelSixCount.olean exists with mtime newer
+      than both the source and the fix commit, so it really was compiled.
+  So this attempt's Claim 3(b) (kappa_6(m) = m+1) stands vindicated, and
+  it is what the corrected Lean theorem now asserts. No fix dispatch is
+  needed. The three wording/overclaim caveats on claim.md above are
+  untouched and still pending before graduation.
 captain_confirmed: false
 notes: |
   2026-09-16, prover agent (role=prover, branch agent/prover/level-n-generalization).
