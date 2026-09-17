@@ -3,6 +3,23 @@ reviewer: "graph-reviewer(对抗审查 proof.md 逐引理,2026-09-15)=VERIFIED�
 verdict: "reviewer 对命题 B（(**) 式半整平移 Z_I=Σ_{d|I} d/Φ₁₀(τ,dz+(d−1)/2,d²σ)）总裁定 VERIFIED：Lemma B.1（换元双射）、B.2（指数恒等式）、命题 B 第 1–5 步均 VERIFIED，无可构造反例。reviewer 设的唯一条件是两条 GAP-前提需逐字文献（A: Φ₁₀ 椭圆变量整周期性；B: Borcherds 乘积奇 ℓ 系数非零）——本轮由 researcher 腿以 Kawai hep-th/9710016 eq(5.13) 乘积式（每因子 y 指数为整数 r ⇒ 整周期性）与 eq(4.32) c(−1)=2≠0（判别式 −1，来自三元组 (0,1,1)，奇 ℓ=1 ⇒ 奇 ℓ 系数非零）逐字坐实，DMZ 1208.4074 eq(85) φ_{−2,1} 系数二重佐证。故 reviewer 的条件已满足，state draft→verified。**诚实边界（不得越界宣称）**：(1) proof.md §4/§7 正文仍带 [GAP-前提] 标注，待 prover/curator 把 kawai-1997 引用接进正文并撤标注（纯文档任务，不改数学）；(2) GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构的精确对应，F3）仍为开放问题，proof.md 已如实标注且明确不影响命题 B 严格性；(3) 命题 B 的物理前提根仍是 A-N eq(2.11)+(2.13)（文献逐字，非本尝试所证）——本尝试证的是「给定 A-N 两式 ⇒ 半整平移闭式」这一纯代数步。captain_confirmed 保持 false 待船长最终拍板。"
 captain_confirmed: true
 notes: |
+  2026-09-17 (theorem-prover [GAP-S3-分支] 闭合): 本轮任务=精确定位未平方等式 Den_ω=ε·ψ₅(z+½)
+  中 ε∈{i,-i} 的来源——模形式特征 v vs (qrs)^{1/2} 主分支切割。方法：新独立数值脚本
+  `scripts/diagnose_epsilon_branch.py`（纯 Python+cmath，玩具有限乘积，未 import 既有代码），
+  对比两种计算：(a) ψ₅(z+½) 用多值 **0.5 平方根，(b) ψ₅(z+½) 用单值 exp(πi(τ+z+½+σ))。
+  结论（4 采样点，arg(q·(-r)·s) 跨 −108° 至 +151°，含分支切割）：
+  (a) ε 翻转于 {+i, −i}（点1=+i, 点2/3=−i, 点4=+i），(b) ε 恒为 **−i**（4点，误差<1e-6）。
+  **诊断：ε 的"不确定性"来自 proof.md line 400 vs 394 的定义不一致**（Den_ω 用单值 exp，
+  ψ₅ 用多值 sqrt），**不是模形式特征 v 的问题**。修正定义（两者均用 exp）后，普适常数
+  ε=−i。Cléry–Gritsenko 2011 Prop 1.3（"非平凡二元特征⇔半整指标"）适用正定格上 Jacobi 形式，
+  而 GN1998 ψ₅ 是洛伦兹格上 Siegel 形式，桥接需计算 Fourier–Jacobi 展开系数指标（未做）；
+  但本诊断表明**桥接非必需**——ε 在修正定义后为确定常数，不需诉诸特征理论。[GAP-S3-分支]
+  已闭合，proof.md §7 S3 段落已更新记录诊断与结论。平方后等式 Φ₁₀(z+½)=−Den_ω² 不受分支
+  影响（已由 verify_s3_weight_mismatch.py 数值验证），命题 B 及其 captain_confirmed 不变。
+  仍开放的 GAP：[GAP-S2-ref]（Borcherds 1988 定义号）、[GAP-S3-扭转公式]（Borcherds 1992
+  定理号）、GAP-BKM 强命题本身（BKM 代数自同构的精确对应）——均如实标注，均不影响命题 B。
+  Commits: 71ef817（新脚本）+ 045535e（proof.md 更新）+ 本条（status.yaml）。
+
   2026-09-16 (theorem-prover 续推进 GAP-BKM S3): 本轮任务=精确刻画 S3 权重不匹配、找修正
   表述、查下游影响、独立复核。结论：
   (1) 权重不匹配现象已由上一轮（8c3829a）钉死，本轮补上其中缺失的一环——`Φ₁₀=ψ₅²` 此前是
