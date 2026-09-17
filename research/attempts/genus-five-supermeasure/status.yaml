@@ -1,0 +1,54 @@
+state: draft
+reviewer: null
+verdict: null
+notes: |
+  2026-09-18 (theorem-prover, scoping round, 唯一一轮): 本尝试的性质是 `research/CLAUDE.md`
+  生命周期意义下的 **scoping**，不是证明推进。任务：判断"显式构造亏格 5 超弦测度"是否是本项目
+  可攻目标；若不是，找最小可攻子问题。
+
+  **结论**：本轮未能提出任何可被本项目工具（Lean 形式化 / 依赖图审计 / 精确有理数脚本）攻克的
+  精确数学命题。理由与完整调研见 proof.md（§1–§5），claim.md 给出反面记录（当前唯一开放且
+  有精确陈述的子问题：未紧化亏格 3 可投影性，专家自称"进行中"）。
+
+  **本轮主要发现（按重要性）**：
+  1. 亏格 4 可投影性问题**已被解决**（不可投影，Donagi–Noja arXiv:2608.24996v2，2026-08-25 首发，
+     2026-09-14 修订——本任务执行前 4 天），推翻了派工单"如果真开放，这是最重要发现"的预设分支；
+     但"过去一个月内刚解决、图完全没有覆盖"这件事本身值得记录。
+  2. Donagi–Witten 原定理的 g≥5 界经本轮直接读原文证明（pp.37–50）证实是**构造参数
+     （g₀=2, d≥3 覆盖）的产物，不是紧界**——与作者自己 "(We suspect... g≥3)" 的猜测吻合。
+  3. 紧化模空间的可投影性问题（更贴近物理实际需要的版本）**几乎已被完全解决**
+     （Corrêa–Noja arXiv:2606.06733，g≥2 除 g=2 奇分量外全部不可投影，摘要级核实）。
+  4. 派工单 Q3 印象"g=4 有失败尝试"**不成立**（g=4 ansatz 当时是成功的）；
+     "g=5 ansatz 失败"**基本属实**；"这与不可投影性有关"**未找到一手证据支持，判定为不成立**——
+     ansatz 路线与可投影性定理是两条独立技术线。
+  5. **2025 年最新进展**（arXiv:2505.02950，本轮 WebFetch 逐句核实摘要）指出 2008 年被广泛引用的
+     亏格 3 "显式解"（CDvG ansatz）**缺少 Witten 2015 证明的真测度必备的一个奇性**，
+     即亏格 3 "已解决"这个长期印象**现在也被同行重新打了问号**。
+  6. Q4 裁定：**不建议开原创证明轨道**。这里需要专业超代数几何训练（super Atiyah class 显式
+     Čech 计算、formal supergeometry），本项目在此毫无资产可用，且前沿正被专家团队以"周"
+     为单位推进，本项目无信息/技术优势可言。
+  7. Q5 裁定：**依赖图审计确实是更适合本项目的产出**——本轮调研本身就是证据：几次检索+原文
+     抽读就把一张写于 2026-09-11、只覆盖单篇 2013 论文的图节点串联到 7+ 篇 2021–2026 年
+     的完整现状。具体建议见 proof.md §5（新建 statement 登记 Donagi–Noja / Corrêa–Noja /
+     FKP 正则性 / Donagi–Ott / Wang 结果），**本 prover 未执行任何 graph/ 改动**，
+     严格遵守派工单"不碰 graph/"约束，留给 lead 指派 curator/researcher 执行。
+
+  **取证等级**：全文按 `⟨lit, 待核⟩` / `⟨analysis 2026-09-18⟩` 标注，未独立核实清单见
+  proof.md 末尾附录。直接读原文核实的：Donagi–Witten arXiv:1304.7798v2 pp.1–8、pp.16–19、
+  pp.37–50；Donagi–Noja arXiv:2608.24996v2 全文（16 页）。仅 WebFetch 摘要核实的：
+  Corrêa–Noja 2606.06733；Felder–Kazhdan–Polishchuk 2408.11136；Dunin-Barkowski–Fedorov–
+  Sleptsov 2505.02950。仅二手 WebSearch 综合、未独立核实的：CDvG 2008、Grushevsky 亏格 4、
+  Grushevsky–Salvati Manni 0809.1391、Dunin-Barkowski–Sleptsov–Stern 1208.2324。
+
+  **预期后续状态**：本尝试预计不会转 `under-review`（没有"证明"可供 graph-reviewer 对抗审查——
+  这是一份 scoping 记录，不含原创论证步骤）。建议下一步由 lead 判断是否将本文件标记
+  `abandoned`（诚实记录"此路对本项目不通"，不是失败），或保持 `draft` 供以后有超几何背景的
+  人力重新评估时参考。本 prover 不越权自行改成 abandoned（留给 lead/reviewer 确认）。
+
+  **Agora 总线**：本会话环境的实际工具列表里**不包含** `agora_join`/`agora_claim`/
+  `agora_release` 等总线调用（多次确认，仅有 Read/Grep/Glob/Bash/Write/Edit/WebSearch/WebFetch
+  可用）。未能执行派工单要求的 `agora_join`/`agora_claim`/`agora_release` 步骤——
+  这是环境限制，不是本 prover 选择跳过；已在最终报告中如实披露。已确认没有其他 agent
+  的并发写入冲突（只新建了 `research/attempts/genus-five-supermeasure/` 一个此前不存在的目录，
+  未改动任何既有文件）。
+captain_confirmed: false
