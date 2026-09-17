@@ -55,6 +55,14 @@ def torsion(Q, P):
     return g
 
 
+def gcd_list(v):
+    """content of a lattice vector; 1 means primitive."""
+    g = 0
+    for x in v:
+        g = gcd(g, x)
+    return g
+
+
 # ---------------------------------------------------------------- Smith normal form
 def smith(A):
     """Smith normal form of an integer matrix A (list of rows).
@@ -165,12 +173,14 @@ def report(name, Q, P):
     m, n, l = invariants(Q, P)
     I = torsion(Q, P)
     (u, v), idx = saturation(Q, P)
+    prim = (gcd_list(Q), gcd_list(P))
     print(f"\n{name}")
     print(f"   Q = {Q}   P = {P}")
     print(f"   (m,n,l) = {(m,n,l)}   Delta = {4*m*n-l*l}   class {reduce_form(m,n,l)}")
     print(f"   I = gcd(Q^P) = {I}      [M:L] from Smith normal form = {idx}      (V1) {I == idx}")
     print(f"   saturation basis  u = {u},  v = {v}")
     print(f"   Gram class of M  = {gram_class(u,v)}   (Delta/I^2 = {(4*m*n-l*l)//(I*I)})")
+    print(f"   content of Q, P (1 = primitive): {prim}")
     print(f"   admissible for I (I^2|m, I|l): {m % (I*I) == 0 and l % I == 0}")
     div = all(x % I == 0 for x in Q)
     print(f"   adapted (Q in I*Lattice):      {div}")
@@ -193,10 +203,11 @@ def main():
     P = add(e2, mul(4, f2))                 # e2 + 4 f2
     invA1, clsA1 = report("frame 1  (adapted)", Q, P)
 
-    # S-duality U = [[-1,-1],[1,0]] :  (Q,P) -> (-Q+P, -Q)
-    Q2 = add(mul(-1, Q), P)
-    P2 = mul(-1, Q)
-    invA2, clsA2 = report("frame 2  (admissible, NOT adapted)", Q2, P2)
+    # S-duality U = [[-1,0],[-1,-1]] :  (Q,P) -> (-Q-P, -P).  This basis of the SAME lattice L
+    # has BOTH charge vectors primitive (see primitive_frame_search.py).
+    Q2 = mul(-1, add(Q, P))
+    P2 = mul(-1, P)
+    invA2, clsA2 = report("frame 2  (admissible, NOT adapted, both charges primitive)", Q2, P2)
     print(f"\n   same lattice L in both frames: {sorted([Q2,P2]) != sorted([Q,P])} "
           f"(different bases)   same saturation class: {clsA1 == clsA2}")
     print(f"   invariants differ: {invA1} vs {invA2}, both admissible for I=2")

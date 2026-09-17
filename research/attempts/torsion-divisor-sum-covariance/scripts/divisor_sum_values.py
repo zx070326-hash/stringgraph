@@ -100,11 +100,17 @@ def main():
               f"   reduced {reduce_form(*T)}")
     print("=" * 96)
 
-    show(dstar, "Witness A  (minimal Delta, U = [[-1,-1],[1,0]] : (Q,P) -> (-Q+P, -Q))",
+    show(dstar, "Witness A  (minimal Delta; U = [[-1,0],[-1,-1]] : (Q,P) -> (-Q-P, -P);\n"
+                "            BOTH charge vectors primitive in frame 2, see primitive_frame_search.py)",
+         (4, 4, 0), (-1, 0, -1, -1), 2)
+    show(dstar, "Witness A' (same orbit, U = [[-1,-1],[1,0]] : (Q,P) -> (-Q+P, -Q); P not primitive)",
          (4, 4, 0), (-1, -1, 1, 0), 2)
     show(dstar, "Witness B  (S-transform  S = [[0,-1],[1,0]] : (Q,P) -> (P,-Q))",
          (4, 8, 0), (0, -1, 1, 0), 2)
-    show(dstar, "Witness C  (I = 3, U = [[-2,-1],[1,0]])",
+    show(dstar, "Witness C  (I = 3, M = (1,6,-1), U = [[-2,-1],[-1,-1]]; both charge vectors\n"
+                "            primitive in frame 2)",
+         (9, 6, -3), (-2, -1, -1, -1), 3)
+    show(dstar, "Witness C' (I = 3, U = [[-2,-1],[1,0]]; P not primitive)",
          (9, 6, 3), (-2, -1, 1, 0), 3)
 
     print("\n" + "=" * 96)
