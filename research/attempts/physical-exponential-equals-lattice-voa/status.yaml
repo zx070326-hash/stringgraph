@@ -131,6 +131,21 @@ notes: |
       notes 里逐字登记（[GAP-vac]）。
   C4. 目标卡 worldsheet.physical-exponential-equals-voa-vertex-operator 的 -v2 订正
       （docs/reviews/bridge-card-index-shift-2026-09-18.md 的处置意见，🔴 **状态不变**）。
+      ✅ **已由 lead/curator 完成**（main 上已有 physical-exponential-equals-voa-vertex-operator-v2）。
+      第二轮收尾时读了该卡（只读）：其断言 (2) 括注逐字为 V^{(n)}_K = S_n ∘ V^{(b)}_{K−nν}，
+      **与本尝试 claim.md (★P) 及 proof.md 全程使用的定义逐字一致**，且状态保持 physical-argument。
+      ⇒ [GAP-target-card] 视为已闭合，本尝试无进一步请求。
+  C6. ⚠ **-v2 卡的一处理由（非结论）不精确，建议 note 级订正**：
+      该卡 sources[li-wang-2008].note 逐字写「α(0) 在第 N 层的本征值是 ⟨nk, p̃+Nk⟩ = n(ν+N·0) = nν，
+      因 ⟨k,k⟩=0 使 N 依赖项消失」。但在 (3.14) 里 Δ̄(α,−x) 作用在**第二个张量因子 U 上**，
+      而层标号 e^β 住在 ℂ_ε[L] 因子里；故该处的 α(0) 是 M(1,p̃) 上的 Heisenberg 零模，
+      本征值是 **⟨nk, p̃⟩ = nν**，**不含 N**。层依赖项来自 (3.14) 的**显式因子 x^{⟨α,β⟩} = x^{⟨nk,Nk⟩}**，
+      是另一个来源（该卡把两者合并计入 α(0)，是把 Y_W 的零模 h_W(0)（(3.15)(3.16)：本征值 ⟨β,h⟩+h(0)）
+      与 (3.14) 内部的 α(0) 混为一谈）。
+      🔴 **总指数相同，故该卡在自身（类光）设定下的结论正确**；但这条**理由**在一般偶格上会给出错误的拆分
+      ——proof.md 定理 6.1/推论 6.2 正是把两个来源分开算的（x^{α(0)} 给 nν，x^{⟨α,β⟩} 给 2njs），
+      两者在 ⟨k,k⟩ ≠ 0 时各自非零。建议在 note 里把「⟨nk, p̃+Nk⟩」改成「⟨nk, p̃⟩，层依赖项另来自 x^{⟨α,β⟩}」。
+      ⚠ 这是 graph/ 路径，**本尝试不动手**，只报告。
   C5. 若将来要让 proof.md 定理 3.5 进图，(C2) 用到的对易关系需要一张承载卡——
       见下面 F2：Lean 侧已机器核验，但图中**刻意没有卡承载**，届时 (C2) 会变成无源前提。
 
