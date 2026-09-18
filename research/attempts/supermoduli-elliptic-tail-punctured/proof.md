@@ -347,8 +347,11 @@ $T_{\xi}S^{\varepsilon}_{1,1}$ 换成 $T_\xi S^{\delta}_{a;n+1,2r}$（维数随 
 > 构造的 Donagi–Witten 型一点障碍族 $X^{\circ}_\eta$。则
 > $$(X^{\circ}_\eta)_{\rm bos}=C^{\circ},\qquad H^1(C^{\circ},\mathcal F)=0\ \ \text{对一切凝聚层
 > }\mathcal F .$$
-> 特别地 $H^1(C^\circ,L^{-1})=0$，可取的障碍参数只有 $\eta=0$，于是 $\omega_2(X^\circ_\eta)=0$ 且
-> §1.5 的比较映射 $j_F$ 的源空间为零：**该测试族恒定地检测不到任何障碍。**
+> 特别地，主障碍类的**取值空间**为零：$\omega_2(X^\circ_\eta)\in H^1(C^\circ,\mathcal F^{\rm obs})=0$，
+> 于是 §1.5 的比较映射 $j_F$ 把它送到零：**该测试族恒定地检测不到任何障碍，对一切 $\eta$。**
+> ⚠ 注意结论**不是**"可取的 $\eta$ 只有 $0$"——恰恰相反，带穿孔时奇切空间
+> $H^1(C,L^{-1}(-\sum_i p_i))$ 的维数是 $2h-2+n$，比 CN 的 $2h-2$ **更大**。是**取值空间**为零，
+> 不是**参数空间**为零。（初稿在此处写反了，订正记录见下方证明第四步后。）
 
 *证明.* 分三步。
 
@@ -363,17 +366,37 @@ $T_{\xi}S^{\varepsilon}_{1,1}$ 换成 $T_\xi S^{\delta}_{a;n+1,2r}$（维数随 
 $\{p_1,\dots,p_n\}$ 上的丰沛除子即可）。
 
 **第三步（Serre 消没）。** 仿射概形上凝聚层的高阶上同调为零（Serre）：$H^i(C^\circ,\mathcal F)=0$，
-$i\ge1$。取 $\mathcal F=L^{-1}|_{C^\circ}$ 得 $H^1(C^\circ,L^{-1})=0$。
+$i\ge1$，**对一切凝聚层 $\mathcal F$**。
 
-由 §1.2，DW 障碍族的参数恰是 $\eta\in H^1(Y,L^{-1})$（$Y$ = 约化空间），且 $\omega_2(X_\eta)=\eta$。
-源空间为零蕴含 $\omega_2=0$，从而 $j_F(\omega_2)=0$，由 Lemma 2.6 只得到平凡等式
-$\iota_F(\omega_2(\text{目标}))=0$，给不出任何非消没信息。$\blacksquare$
+**第四步（结论：障碍类的取值空间为零）。** 按 §0，任何光滑 DM 超叠 $\mathfrak X$ 的主障碍类落在
+$$\omega_2(\mathfrak X)\in H^1\big(\mathfrak X_{\rm bos},\ \mathcal F^{\rm obs}_{\mathfrak X}\big),$$
+而这里 $(X^\circ_\eta)_{\rm bos}=C^\circ$ 由第一步是仿射曲线。故由第三步，**无论系数层是什么**，
+$$\omega_2(X^\circ_\eta)\in H^1\big(C^\circ,\ \mathcal F^{\rm obs}\big)=0 .$$
+于是 $j_F(\omega_2)=0$，由 Lemma 2.6 只得到平凡等式 $\iota_F(\omega_2(\text{目标}))=0$，
+给不出任何非消没信息。$\blacksquare$
+
+> ⚠ **订正记录（2026-09-18 对抗审查）**：本证明初稿在此处写的是"由 §1.2，DW 障碍族的参数恰是
+> $\eta\in H^1(Y,L^{-1})$（$Y$ = 约化空间），源空间为零蕴含 $\omega_2=0$"。**这句话是错的**，
+> 且错法有教益，故保留记录而非抹去。§1.2 的重述本身没错，但 CN 的无穿孔设定里
+> "约化空间 $=C$" 与 "奇切空间 $=H^1(C,L^{-1})$" 是**两件事碰巧算在同一条射影曲线上**；
+> 把这个巧合原样搬到带穿孔情形就错了——带穿孔时 $(C,L,p_1,\dots,p_n)$ 处的奇切空间是
+> $H^1\big(C,L^{-1}(-\textstyle\sum_i p_i)\big)$（仍算在**射影**曲线 $C$ 上），其维数由
+> $\deg L^{-1}(-\sum p_i)=1-h-n$、$\chi=2-2h-n$、$h^0=0$ 得
+> $$h^1\big(C,L^{-1}(-\textstyle\sum p_i)\big)=2h-2+n,$$
+> 与 $\mathfrak M_{h,n}$ 的奇维数 $2h-2+n$ 吻合。即：可取的 $\eta$ 比 CN 的情形**更多**，不是没有。
+> **命题 N 的结论不受影响，且论证反而更强**——不是"没有 $\eta$ 可试"，而是"$\eta$ 比 CN 还多，
+> 却依然一个都测不到"。上面第四步给出的是修正后的正确论证，它根本不需要谈 $\eta$ 的取值范围，
+> 只需要 $\omega_2$ 的**取值空间**为零。
+>
+> 等价的另一条写法（若要显式连回 $\eta$）：CN Proposition 2.2 逐字 **"It is compatible with étale
+> pullback"**，而开浸入 $C^\circ\hookrightarrow C$ 是étale，故 $\omega_2(X^\circ_\eta)=
+> \eta|_{C^\circ}\in H^1(C^\circ,L^{-1})=0$。两条写法都对，第四步那条更短且不依赖 $\eta$ 的形状。
 
 > **推论 N′（非分离粘接同样被杀死）。** FKP 的非分离 NS 粘接态射
 > $(7.9)\colon\overline{\mathfrak S}_{g;m+2,n}\to\overline{\mathfrak S}_{g+1;m,n}$
 > 要求被粘的两个 NS 穿孔在**同一条**曲线上。若用它承载本方法，两个被粘点中必须有一个是运动点 $p$、
-> 另一个是 $C$ 上的固定点 $q$，于是测试基是 $C\smallsetminus\{q\}$，仍是仿射曲线，命题 N 的第二、
-> 三步逐字适用。**故本方法无法使用非分离粘接。**
+> 另一个是 $C$ 上的固定点 $q$，于是测试基是 $C\smallsetminus\{q\}$，仍是仿射曲线，命题 N 的第二至
+> 第四步逐字适用。**故本方法无法使用非分离粘接。**
 
 > **推论 N″（"把 Ramond 穿孔放在运动分量上"同样被杀死）。** 同上，且额外地：亏格 $h$ 侧若带
 > Ramond 除子 $R\neq0$，则 $L^{\otimes2}\cong\omega_C(R)$，§1.2 的识别
@@ -513,14 +536,42 @@ $$i(p)=(C,L,p)\ \cup_{p=q}\ (F,N;y_\bullet;\rho_\bullet).$$
 
 *证明.*
 
-**(a) 法线公式在带穿孔的一般性下成立。** FKP-A §9.1 逐字：**"Let $\varphi:B\to\overline{\mathfrak S}$
+**(a) 法线公式在带穿孔的一般性下成立。** FKP-A §9.1（p.58）逐字：**"Let $\iota:B\to\overline S$
 be the standard gluing map covering an NS type boundary component, i.e., one of the maps (7.8) or
-(7.9), restricted to the locus of smooth supercurves"**，其结论（Theorem C，式 (9.6)）为
-$$N_{\mathcal B}\cong\Psi_1^{-1}\otimes\Psi_2^{-1}.$$
-我们的 $\Gamma$ 正是 (7.8)（见 §4.1），且 $\mathcal B$ 正是光滑超曲线轨迹。**故公式直接适用，
-无需任何推广。** 又由 FKP-A §9.1 逐字 **"in the case of a separating node, where $B=S_1\times S_2$,
-the line bundle […] is the exterior product of two similar line bundles on the factors"**，
-$\Psi_1$ 来自第一因子、$\Psi_2$ 来自第二因子。
+(7.9), restricted to the locus of smooth supercurves"**。我们的 $\Gamma$ 正是 (7.8)（见 §4.1），
+且 $\mathcal B$ 写成的是**未紧化**的两个因子，正落在"光滑超曲线轨迹"里，故 setup 逐字适用。
+
+🔴 **引用必须走哪一条路（2026-09-18 对抗审查后改正，改正前的引用是错的）**：FKP-A 把法丛公式给了
+**两次**，走两条独立路线，而**只有第二条**对带穿孔的靶成立——
+
+- **路线 1（p.58 底–p.59 顶，不可用）**：经超 Mumford 同构 (8.11)。该处的
+  $N_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$ 是**无编号显示式（p.59）**，不是 (9.6)。它确实能挺过穿孔，
+  但**不是免费的**：旁观穿孔的 $\Psi_j$ 会同时出现在两边（$B$ 侧来自两因子各自的 (8.11)，
+  $\overline S$ 侧来自粘接后曲线的 (8.11)，且 $\iota^*\Psi_j=\Psi_j$ 因为就是同一批穿孔）并相消，
+  此外还需额外论证 $\mathcal O(\Delta_R)|_B\cong\mathcal O_B$。本文**不走这条**。
+- **路线 2（p.60 底–p.61，本文所用）**：经 NS 边界线丛的定义 (7.6)。FKP-A p.61 逐字：
+  > "$\mathcal O(\Delta)|_B\simeq\operatorname{Ber}R\pi_*(j_*\Omega_{U/S})|_B\otimes
+  >  \operatorname{Ber}^{-1}R\pi_*(\Omega_{X/S}|_B)\simeq\Psi_1^{-1}\Psi_2^{-1}$."  (9.6)
+  这条路线整个跑在 **Lemma 9.1(iii)(iv)（p.59）**上，而该引理涉及的层 $\mathcal K$ 与
+  $\tilde{\mathcal C}$ 按 FKP-A 原文逐字是 **"supported on the node"**。**没有任何穿孔进入这条推导**，
+  故它是**真正与穿孔无关的**那一条。
+
+  ⚠ **不得引 Theorem C。** FKP-A p.2 的 Theorem C 陈述逐字是 "Let $B\to\overline{\mathcal S}_g$ be
+  the gluing map to one of the components of $\Delta_{NS}$ from a lower genus (uncompactified) moduli
+  space $B$"——靶是**无穿孔**的 $\overline{\mathcal S}_g$；对照同页 Theorem B 明写
+  "Let $\overline{\mathcal S}=\overline{\mathcal S}_{g,n_{NS},n_R}$"，可见 FKP-A 是**刻意区分**的。
+  Theorem C 允许**源** $B$ 带穿孔，但不允许**靶**带穿孔，而本文恰恰需要带穿孔的靶。
+  本文初稿误引 Theorem C，已改正为 §9.1 / Lemma 9.1(iii)(iv) / (9.6)（pp.59–61）。
+
+$\Psi_1$ 来自第一因子、$\Psi_2$ 来自第二因子，理由**不是**（初稿所引的）§9.1 那句 exterior product
+——那句话的主语被略去了，而略去的主语是 Berezinian 线丛 $\mathcal B(\mathcal O_{\tilde X})$，不是
+$\Psi$（FKP-A p.58 逐字："Note that in the case of a separating node, where $B=S_1\times S_2$,
+the line bundle $\mathcal B(\mathcal O_{\tilde X})$ is the exterior product of two similar line
+bundles on the factors $S_1$ and $S_2$."）。正确理由是 $\Psi$ **自身的定义**加平坦基变换：
+FKP-A p.57（Lemma 8.7 证明末）逐字 "$\Psi\simeq\tilde\Psi\simeq\pi_*(I_P/I_D)$" 与
+"$P^*\omega_{D/S}\simeq\operatorname{Ber}(\Psi)=\Psi^{-1}$"——定义里的每个对象都算在第 $i$ 个穿孔的
+除子 $D_i$ 上；对 $\mathcal B=S_1\times S_2$，万有曲线是
+$\tilde X=\mathrm{pr}_1^*\tilde X_1\sqcup\mathrm{pr}_2^*\tilde X_2$，故 $\Psi_2=\mathrm{pr}_2^*\Psi_{P_2}$。
 
 **(b) $\Psi_1$ 侧：与 CN 逐字相同。** 第一因子 $\mathfrak S^+_{h;1,0}$ 上**恰好一个 NS 穿孔、
 零个 Ramond 穿孔**，即 CN Lemma 6.2 处理的完全相同的情形。由 FKP-A Example 8.9（偶基上
@@ -561,8 +612,29 @@ node, the divisor $\Delta_{\rm NS}$ coincides with the schematic image of (7.8)"
 $$0\longrightarrow e^*\mathcal T\mathcal B_{\rm bos}\longrightarrow\mathcal T\longrightarrow
 e^*N_{\mathcal B}\longrightarrow0 .$$
 与引理 4.3 给出的 $0\to\mathcal T_C\to e^*\mathcal T\mathcal B_{\rm bos}\to W\otimes\mathcal O_C\to0$
-拼成 CN 的 $3\times3$ 交换图，蛇引理给出 $0\to W\otimes\mathcal O_C\to Q\to e^*N_{\mathcal B}\to0$。
+拼接。⚠ **这一步不是蛇引理**（初稿如此标注，2026-09-18 订正）：它是两步滤过
+$\mathcal T_C\subset e^*\mathcal T\mathcal B_{\rm bos}\subset\mathcal T$ 的**第三同构定理**，
+令 $Q:=\mathcal T/\mathcal T_C$、$Q_0:=e^*\mathcal T\mathcal B_{\rm bos}/\mathcal T_C
+\cong W\otimes\mathcal O_C$，即得 $0\to W\otimes\mathcal O_C\to Q\to e^*N_{\mathcal B}\to0$。
+（结论不变；本命题断言的本来就是一个**两步滤过**，不是分裂。）
 由引理 4.4，$e^*N_{\mathcal B}\cong L^{-1}\otimes\mathfrak n$。$\blacksquare$
+
+> ⭐ **[GAP-IMM] 已关闭（2026-09-18 对抗审查）。** 初稿担心上面那条切列需要 $\Gamma$ 是闭浸入才合法。
+> **不需要。** FKP-A Lemma 7.10（p.48）逐字：**"Both morphisms (7.8) and (7.9) induce embeddings of
+> codimension $1|0$ on tangent spaces and factor through the divisor $\Delta_{NS}$."** 故 $d\Gamma$ 有
+> **常余秩 $1|0$**，从而 $\operatorname{coker}(d\Gamma)$ 局部自由、秩 $1|0$；它与
+> $\mathcal O(\Delta_{NS})|_B=N_{\mathcal B}$ 的等同正是该引理证明（p.49）里那句逐字
+> **"Using the fact that the morphism on tangent spaces is an embedding with the image which is the
+> orthogonal to $dt$, we deduce that near this point $\Delta_{NS}$ is the schematic image of the
+> morphism."**（$t$ = $\Delta_{NS}$ 的局部方程）。**局部自由层短正合列沿 $e$ 的拉回是正合的**，
+> 故上面那条列无需任何闭浸入假设。闭浸入只有在要把 $\mathcal T$ 认同为某个真子概形的切层时才需要，
+> 而本文的 $\mathcal T$ 是**定义**为 $i^*\mathcal T_+\overline{\mathfrak S}$ 的拉回，
+> 不是任何像的内蕴对象。
+> ⚠ 另记：FKP-A Lemma 7.10 本身是**带穿孔一般性**的——其证明（p.48）开头逐字
+> "Let $X$ be a stable supercurve with punctures and a fixed NS-node $q\in X$"，并括注
+> "(where we take into account all the punctures on both sides)"；同页 (7.8) 的显示式
+> $\overline S_{g_1;m_1+1,n_1}\times\overline S_{g_2;m_2+1,n_2}\to\overline S_{g_1+g_2;m_1+m_2,n_1+n_2}$
+> 与本文 §4.1 的指标取法（$g_1=h,m_1=0,n_1=0$；$g_2=a,m_2=n,n_2=2r$）逐字吻合。
 
 ⟦修改点清单（相对 CN）⟧：仅两处，且都不影响论证结构——(i) $W$ 的第二个直和项换成
 $T_\xi S_{a;n+1,2r}$；(ii) $M_q^{-1}$ 换成抽象的一维空间 $\mathfrak n$。
@@ -683,9 +755,13 @@ $\overline{\mathfrak S}_{g;n,2r}$ 非投影（这在逻辑上是完备的：$\om
 
 合并：$\overline{\mathfrak S}_{g;n,2r}$ 非投影，只要 $g\ge3$，或（$g=2$ 且 $n+2r\ge2$）。
 
-**机器复核**：§5.1 的闭式判据、§5.3 的"$a\in\{0,1\}$ 已够"、以及 §6.1/§6.2 的两条自洽性检验，
-都是纯整数算术，已由 `scripts/thresholds.py` 在 $g\le8,\ n\le6,\ r\le4,\ a\le6$ 范围内穷举复核。
+**机器复核（范围要说准）**：§5.1 的闭式判据与 §5.3 的"$a\in\{0,1\}$ 已够"是纯整数算术，已由
+`scripts/thresholds.py` 在 $g\le8,\ n\le6,\ r\le4,\ a\le6$ 范围内穷举复核。
 运行方式与预期输出见该脚本头部与末尾注释（2026-09-18 实跑：`RESULT: ALL OK`，退出码 0）。
+⚠ **订正（2026-09-18 对抗审查）**：初稿把 §6.1/§6.2 的两条自洽性检验也算进"已由脚本穷举复核"，
+**这是夸大**——脚本只能核对整数算术，核不了 §6.1"构造退化到 CN"这一结构性断言，也核不了 §6.2
+关于奇分量的结构性断言。那两条是**人工核对**的（作者 + 2026-09-18 独立对抗审查各一次），
+脚本对它们只提供了必要条件层面的算术一致性。
 
 ### §5.2 为什么 $h\ge2$ 不能再降
 
