@@ -1,0 +1,11 @@
+Lemma 9.2: (rho_W, V_d Z) = d**2*sigma/2 + d*z/2 + tau/2
+  => effective Weyl vector (1/2, d/2, d^2/2): True
+
+Lemma 9.3 core identity (-1)^ell == exp(2 pi i * (1/2) * ell): True
+
+Theorem 9: z_new = d*w + d/2 - 1/2   target d*z+(d-1)/2 = d*w + d/2 - 1/2
+Match: True
+
+epsilon = exp(-i*pi*rho_Wz) with rho_Wz=1/2: -I   matches -i: True
+
+ALL SANITY CHECKS FOR MERGED THEOREM 9 PASSED.

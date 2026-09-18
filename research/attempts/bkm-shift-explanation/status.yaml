@@ -198,3 +198,43 @@ notes: |
   由 graph-reviewer (weyl-shift-check, 2026-09-18) 发现；镜像错误出现在
   research/papers/torsion-dyon-shift-positivity/paper.md §4 的散文（该处公式本身是对的），
   已于同日一并订正（commit 3fe1267）。
+
+  2026-09-18 (theorem-prover, agent/prover/weyl-shift-merge, 并入 Theorem B 第二证明):
+  按 lead 裁定，把 `research/attempts/weyl-shift-diagnostic/`（同日另一 theorem-prover
+  任务产出的判定实验）里对命题 B 的独立第二条证明路径（"Weyl 向量共轭"机制：把
+  A-N 符号惯例 (−1)^ℓ 识别为椭圆方向平移 ρ_{W,z}=½，用 𝒱_d 的伸缩共轭该平移得到
+  (d−1)/2）并入本文件，新增 **§9（命题 B 的第二条独立证明，Weyl 向量路线）**。
+
+  **命题 B 本身的 state/verdict/captain_confirmed 均未改动**（本轮只新增内容，未修改
+  §1–§8 任一步骤的陈述或证明）。§9 本身**尚未经 graph-reviewer 审查**——是否需要派审查、
+  是否要把 §9 的 state 也纳入 captain_confirmed 的确认范围，留给 lead/船长决定。
+
+  并入过程中做的三件事，如实记录：
+  1. **记号核对，发现并订正一处 bug**：diagnostic 的 Lemma D.1 用 DGM 矩阵形式
+     A_d=diag(d,1) 计算"𝒱_d 字面作用于裸前因子"的结果，但把该矩阵套在了 AN 自己
+     (τ,z,σ) 的书写顺序上（τ 在第一槛），而按本文件 §6 已订正的字典（ρ_DGM↔σ_AN 被
+     d² 缩放、σ_DGM↔τ_AN 不缩放），矩阵应该套在"σ 在第一槛"的排列上——这是与 §6
+     推论 B1、`paper.md` §4 散文**同一类**的槛位对齐错误。已用新脚本
+     `weyl-shift-diagnostic/scripts/check_lemma_d1_orientation.py`（SymPy 精确符号）
+     核实：正确的"有效 Weyl 向量"是 (½,d/2,d²/2)，不是原文的 (d²/2,d/2,½)（τ、σ
+     分量正好互换）。**定性结论不变**（仍是纯乘性重标，无加性平移，命题 P 判否）。
+     已在 `weyl-shift-diagnostic/proof.md` §2 加订正段（保留原文，未删除），本文件
+     §9.2/§9.3 直接用订正后的正确版本，从未使用 DGM 矩阵形式。
+  2. **独立性核实**：diagnostic 的 Lemma D.2/定理 D 部分（现为本文件 §9.4–§9.6 的
+     引理 9.3/9.4/定理 9）在推导"裸函数的除子和公式"时**曾经**显式引用了本文件的
+     "Lemma B.1"名字（原文写"用 Lemma B.1 的双射换元"）。合并时改为**就地重新证明**
+     同一条初等换元双射性事实（§9.2 引理 9.1），不再引用引理 B.1 的名字——因此
+     merged 后的第二证明（§9）**不引用**第一证明（§2–§5）的任何引理陈述或结论，
+     只共享 §1 的原始文献前提（A-N eq(2.11)+(2.13)）和 §7 已确立的 GN1998 Weyl
+     向量事实。诚实边界：两条证明**共享**"m=d²m′,ℓ=dℓ′ 是双射"这条不可避免的初等
+     算术事实（§9.1 已如实记录），这是任何正确路径都要用到的，不构成对第一证明
+     "中间结论"的实质依赖。
+  3. **可复现性**：diagnostic 的脚本 `weyl_shift_check.py` 已重新运行确认仍通过
+     （见 `weyl-shift-diagnostic/scripts/run_output_2026-09-18-merge.txt`）；原先只
+     内联运行、未落盘的 27 组随机种子鲁棒性测试已落盘为
+     `weyl-shift-diagnostic/scripts/robustness_sweep.py`，重跑确认 27/27 全部
+     `diff=0`；本文件 §9 的核心符号计算另用独立新脚本
+     `scripts/verify_theorem9_merge.py` 复核，全部通过。
+
+  `weyl-shift-diagnostic/status.yaml` 已改为 `state: abandoned`（内容已并入，非
+  "此路不通"，目录保留作历史记录），不影响本文件任何字段。

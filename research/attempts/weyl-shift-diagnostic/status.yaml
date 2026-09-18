@@ -1,4 +1,4 @@
-state: draft
+state: abandoned
 reviewer: null
 verdict: null
 captain_confirmed: false
@@ -56,3 +56,34 @@ notes: |
   research/attempts/weyl-shift-diagnostic/**（全新目录），与另一并行 agent 的三处
   目录（bkm-shift-explanation/、torsion-immortal-positivity-hecke/、papers/）
   无交集，未产生冲突。此限制已在最终报告中向用户/lead 说明。
+
+  2026-09-18 (theorem-prover, agent/prover/weyl-shift-merge, 内容并入并收尾):
+  按 lead 裁定，本目录对命题 B 的独立第二条证明路径（"Weyl 向量共轭"机制）已作为
+  新 **§9** 并入 `bkm-shift-explanation/proof.md`（该文件已单独 commit，状态见其
+  自身 status.yaml notes）。**state 由 draft 改为 abandoned**——不是"此路不通"
+  意义上的放弃，是"内容已被上游吸收，本目录任务完结"意义上的收尾：本目录本身
+  从未是一个独立待毕业的结论（见上条 note「本尝试性质澄清」），产出已完全转移
+  到 bkm-shift-explanation/proof.md §9，此处不再需要单独走 under-review→verified
+  流程。**目录本身保留、未删除**，作为该判定实验与所发现 bug 的历史记录。
+
+  并入过程中新增的工作，如实记录于此（本目录内文件）：
+  - 修正了本目录 proof.md §2 Lemma D.1 的一处 ρ↔σ/τ 槽位对齐 bug（把 A_d=diag(d,1)
+    套在了 AN 自己 (τ,z,σ) 书写顺序的矩阵上，而不是套在与 DGM ρ 对应槽位对齐后的
+    矩阵上），导致原文报告的"有效 Weyl 向量"数值三元组 (d²/2,d/2,1/2) 实为
+    (τ,z,σ 分量互换后的)错误版本，正确应为 (1/2,d/2,d²/2)。已在 proof.md §2 原位
+    追加订正块（保留原文，未删除、未静默修改），新增验证脚本
+    `scripts/check_lemma_d1_orientation.py`（SymPy 精确符号，已运行确认）。
+    **定性结论不受影响**：命题 P（字面版）判否的论证逐字照搬到正确三元组上依然
+    成立，仅需把"比较 τ-系数矛盾"换成"比较 σ-系数矛盾"。此 bug 不传播到 §3–§8
+    （全部直接用 AN 原生记号，未经过 Lemma D.1 的 DGM 矩阵翻译）。
+  - 新增 `scripts/robustness_sweep.py`：把此前只内联运行、未落盘的 27 组
+    （I∈{1,2,3,4,5,6,8,9,12}×3 随机种子）鲁棒性测试落盘为可独立重跑的脚本，
+    重跑确认 27/27 全部 `diff=0`。
+  - 重新运行 `scripts/weyl_shift_check.py` 确认原有结论仍精确成立，输出落盘为
+    `scripts/run_output_2026-09-18-merge.txt`。
+
+  合并后本目录与 bkm-shift-explanation/proof.md §9 的关系：§9 的推导**未采用**
+  DGM 矩阵形式（完全避开了产生上述 bug 的表述路径），直接在 AN 原生记号下重新
+  给出订正后的正确版本；§9 也**未引用**本目录 proof.md 曾经引用的"Lemma B.1"
+  （改为就地重新证明同一条初等双射事实），因此 §9 是自包含的，不依赖读者先读
+  本目录。本目录内容仍可作为该发现过程的第一手记录保留。
