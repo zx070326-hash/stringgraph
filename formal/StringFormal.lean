@@ -80,4 +80,5 @@ import StringFormal.NoGhost.LevelFiveCount
 import StringFormal.NoGhost.LevelSixCount
 import StringFormal.NoGhost.LevelSevenCount
 import StringFormal.NoGhost.SeedTransferSix
+import StringFormal.NoGhost.SingularVectorsSix
 import StringFormal.NoGhost.Ghost
