@@ -2279,17 +2279,41 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
       数值：`κ₆ = p_D(1) + p_D(−1) = D = 26`，种子版 `τ₆ = p_{D−1}(1) = D − 1 = 25`
       （`Σ τ_N q^N = P_{D−1} · (q⁵ + q⁷ − ⋯)`），差 **1**，与蓝图一致——也就是说
       **种子条件必须真的被用上**，而 `[GAP-N6-seed]` 正是用它的那一步。
-    - 但「最便宜」≠「便宜」。`b26_six` 还缺三块，都没开始：
-      (a) `Finsupp.oscWeight_eq_six_cases` —— level-6 的**十一种形状**
+    - 但「最便宜」≠「便宜」。`b26_six` 还缺三块。
+
+      **(b) 已完成**（`StringFormal/NoGhost/LevelSixCount.lean`，commits `e144b81`/`f45fe14`，
+      2026-09-16，**先于** `noghost-pr-d1`/`noghost-pr-d2`，之前漏记进本文件，
+      现补记；formalizer 2026-09-18 复核：`lake build StringFormal.NoGhost.LevelSixCount`
+      成功，`check_axioms` 对 `levelSix_count_identity_gen/_identity/_full` 三条全部 `ok`，
+      只有 `propext Classical.choice Quot.sound`）：
+      **不是**直接证 `p_{D−1}(5) + p_{D−1}(4) − (D−1) = p_{D−1}(6) − p_{D−2}(6)` 那个自然数减法
+      形式，而是与 `levelFive_count_identity_gen` 同款的**递推形式**
+      `p_{m+1}(6) + (m+1) = p_m(6) + p_{m+1}(5) + p_{m+1}(4)`（`levelSix_count_identity_gen`，
+      对一切 `m`，五次 Pascal 展开 + `ring`），在 `m = D−2`（`levelSix_count_identity`，(I6)）
+      与 `m = D−1`（`levelSix_count_identity_full`，即 `κ₆ = p_D(1) = D`）两处具体化，
+      都不含自然数减法陷阱。`p_m(6)` 用**十项**闭式覆盖十一个形状（`[5,1]` 与 `[4,2]`
+      的计数单项式同为 `m²`，合并成一项 `2m²`；文件头记录了一次 reviewer 订正：
+      早期草稿多算了一个不存在的形状 `x+5y=6, x≠y` 的虚假项 `m·C(m+4,5)`，已删除）。
+      旧的 `35b237c`/`ce46327`/`fff2c19`/`2c61885`/`9b39419` 五个提交（同一文件名，
+      经 `git merge-base --is-ancestor` 核实**不是** `main` 现有 HEAD 的祖先）是一条被放弃的
+      早期尝试（`fff2c19`/`2c61885` 的提交信息提到 `sorry`/`omega` 补丁，疑似
+      走了自然数减法或未清干净的路线），已被 `e144b81` 的「从头写、订正版」取代，
+      不再需要处理。
+
+      **(a) 未做**：`Finsupp.oscWeight_eq_six_cases` —— level-6 的**十一种形状**
           （6 / 5+1 / 4+2 / 4+1+1 / 3+3 / 3+2+1 / 3+1³ / 2³ / 2²+1² / 2+1⁴ / 1⁶），
           外加十一项的指标类型、`modeCount` 轮廓判别的单射性与 `surjOn`。
           照 `LevelFiveCount.oscWeight_eq_five_cases`（七形）的模板估计约 800–1000 行机械劳动。
-      (b) `levelSix_count_identity`：`p_{D−1}(5) + p_{D−1}(4) − (D−1) = p_{D−1}(6) − p_{D−2}(6)`
-          （形状同 `levelFive_count_identity_gen`，多一个 `−(D−1)` 的种子修正项）。
-      (c) 组装 `b26_six` / `ddfSpans_bigrade_neg_six_six`：要把 `[GAP-N6-seed]`（已有）
-          接成 `S₆ : Q_{−6,1} → Q_{−6,5} × Q_{−6,4}` 的单射，再走 `DescendantKernel` 的秩–零化度。
-    - 另外未做：`y₃`、`x₄` 的像**落在零态子模里**（本轮只证了「落在正模核里」，
-      即种子性；零态还要配 `L_0` 条件与配对论证）。
+          `grep` 确认 `oscWeight_eq_six_cases`/`LevelSixIdx`/`levelSixIndex`/`card_ddfLevel_six`
+          全仓库都不存在，是真正未动过的缺口。
+
+      **(c) 未做**：组装 `b26_six` / `ddfSpans_bigrade_neg_six_six`：要把 `[GAP-N6-seed]`
+          （已有）接成 `S₆ : Q_{−6,1} → Q_{−6,5} × Q_{−6,4}` 的单射，再走 `DescendantKernel`
+          的秩–零化度。
+    - 另外未做（记作 **(c0)**，`(c)` 的前置）：`y₃`、`x₄` 的像**落在零态子模里**
+      （本轮只证了「落在正模核里」，即种子性；零态还要配 `L_0` 条件与配对论证，
+      是 `LevelFourCount`/`LevelFiveCount` 里 (N4)/(N5) 那一步在 `N=6` 的类比，
+      目前完全没有对应引理）。
 
 - [x] `no_ghost_theorem`：组装 —— **条件版已完成**（`no_ghost_of_spans`，见 `noghost-c5`）；
       无条件版等 `ddf-spans`。
