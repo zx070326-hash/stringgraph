@@ -1,0 +1,35 @@
+id: math.supermoduli-compactified-genus-2-odd-split
+kind: proposition
+title: 紧化亏格二奇自旋分量超模叠是分裂的（Corrêa–Noja Theorem 1.1 item 1）：𝔐̄₂⁻ split
+statement: |
+  **对象**（Corrêa–Noja arXiv:2606.06733v1 §2，沿用 Donagi–Witten 障碍理论框架）：𝔐̄_g^± 表示无穿孔
+  超黎曼面模叠的 Deligne–Mumford 型紧化的两个宇称（自旋结构奇偶）分量。
+
+  **定理**（Theorem 1.1 item (1)，逐字，p.1）：
+  "The odd compactified genus-two component 𝔐̄₂⁻ is split."
+
+  （回忆：分裂 ⟹ 投影，见既有节点 `math.supermoduli-space-not-projected` 术语段"every split
+  supermanifold is projected"——本定理故亦蕴含 𝔐̄₂⁻ 可投影。）
+
+  **证明方法**（Theorem 3.5，§3）：典范的亏格二对合作用在障碍层（obstruction sheaf）上，作用方式是一个
+  非平凡特征标；这迫使第一障碍类在通过一个有限 étale 覆盖后必须消失，从而给出分裂性（惯性特征标判据，
+  §2 一般引理的具体应用）。
+
+  **本节点不断言**：紧化亏格二**偶**分量（见 `math.supermoduli-compactified-genus-2-even-not-projected`）
+  与 g≥3 情形（见 `math.supermoduli-compactified-genus-geq3-not-projected`）——那是本文 Theorem 1.1
+  的另外两项，依赖结构不同，分别单独建卡。
+uses_conventions: []
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1, p.1 Theorem 1.1 item (1)（逐字）；§3 Theorem 3.5（p.11，证明骨架：惯性特征标判据）；§8 p.21（'The first assertion is precisely Theorem 3.5'）"
+    note: |
+      L1 全文（24 页，含参考文献）逐页读取（researcher 2026-09-18，抽取记录
+      literature/extractions/correa-noja-2026.md E1, E3, E7）。**不依赖 FKP arXiv:2408.11136**——本项
+      是 Theorem 1.1 三项中唯一自成一体的一项，证明骨架完全在 §2–§3 内部完成。
+tags: [supermoduli, super-riemann-surface, split, compactified, genus-2, math-input, correa-noja]
+notes: |
+  与既有节点 `math.supermoduli-space-not-projected`（红线 4："不考虑 Deligne–Mumford 紧化"）的关系：
+  本节点正是该红线明确排除的紧化情形，是**正交的补充结果**，不修订那张卡（该卡红线 4 本身就是自我
+  限定的范围声明，不是"紧化情形不存在结果"的断言）。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

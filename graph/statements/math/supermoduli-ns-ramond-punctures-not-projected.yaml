@@ -1,0 +1,50 @@
+id: math.supermoduli-ns-ramond-punctures-not-projected
+kind: proposition
+title: 带 NS+Ramond 混合穿孔的未紧化超模叠不可投影（Wang, "preliminary draft"）：g≥n+5r+3 时 𝔐_{g,n,2r} 不可投影
+statement: |
+  **对象**：𝔐_{g,n,2r} 为亏格 g、带 n 个 Neveu–Schwarz 穿孔和 2r 个 Ramond 穿孔的未紧化超黎曼曲面
+  模叠（n=0 特例退化为 `math.supermoduli-ramond-punctures-not-projected` 的 𝔐_{g,0,2r}）。
+
+  **定理**（摘要，逐字，经 arXiv API 核验）：
+  "We study the supermoduli space 𝔐_{g,n,2r} of Super Riemann Surfaces (SRS) of genus g, with n
+  Neveu-Schwarz punctures and 2r Ramond punctures. We improve the result of Donagi, Witten, and Ott by
+  showing that the supermoduli space 𝔐_{g,n,2r} is not projected if g ≥ n + 5r + 3."
+
+  **"improve"一词的范围限定**（本项目独立核对量词，非论文自己写明，标记为推断）：n=0 时本文条件退化
+  为 g≥5r+3，比 Donagi–Ott（`math.supermoduli-ramond-punctures-not-projected`）的 g≥5r+1 更严格
+  （覆盖范围更小），**并非在 n=0 情形下的数值改进**。"improve"更可能指"把 Donagi–Ott 的纯 Ramond
+  穿孔结果推广到 NS+Ramond 混合穿孔（n>0）这一更一般的设置"，**不是"在同一设置下给出更宽松的量词
+  边界"**。任何"Wang 改进/优于 Donagi–Ott"的比较表述都必须加 n>0 限定，或者不作比较。
+
+  **本节点不断言**：紧化空间；证明的具体技术方法（本项目仅读 pp.1–3，主定理 Theorem 4.2 的完整
+  证明在 pp.4 起，未读）；本节点也不断言该结果与 Donagi–Witten/Donagi–Ott 的具体引理之间有结构性
+  依赖（引言只是背景回顾，未核实证明本身是否引用二者的具体引理）。
+
+  **文献自陈的严格程度标记**：本文 arXiv 元数据 `comment` 字段明确写 "preliminary draft"——作者
+  本人在提交时将此文标注为初步草稿，只有 v1（2025-12-05 提交），核实时未见期刊发表或 v2 修订版。
+uses_conventions: []
+sources:
+  - ref: wang-2025
+    loc: "arXiv:2512.15727v1, 摘要（逐字，经 export.arxiv.org API 核验）；§1 引言 p.1（背景回顾）；§2 预备定义至 Lemma 2.7，pp.2–3（结构性核实）；arXiv 元数据 comment 字段（'preliminary draft'）"
+    note: |
+      **部分 L1**：仅 pp.1–3（标题页、摘要、§1 引言、§2 预备定义直至 Lemma 2.7 与障碍类讨论开端）
+      已读（researcher 2026-09-18，抽取记录 wang-2025.md E1–E3）。**pp.4 起（含主定理 Theorem 4.2
+      的完整证明，占全文绝大部分）完全未读**——证明方法、是否有省略步骤、是否结构性依赖 Donagi-Ott
+      或 Donagi-Witten 的具体引理（而非仅"改进其结果范围"这一表层关系）均未核实。
+tags: [supermoduli, super-riemann-surface, non-projected, ns-puncture, ramond-puncture, math-input, wang, preliminary-draft]
+notes: |
+  **status 判定理由**（见对应 derivation）：本文 arXiv comment 自陈"preliminary draft"，且本项目
+  对占全文绝大部分的主定理证明（pp.4 起）完全未读，两点叠加——按"断言+骨架"准则（`docs/
+  STATUS_LEVELS.md`）：有明确断言（"we show"）但既无法核实完整证明骨架，源文献自身也未达到"完整/
+  已定稿证明"的严格程度（不同于已发表或长期挂出未撤稿的论文），故本节点对应推导标 physical-argument
+  而非 rigorous，是本项目对来源强度的诚实判断，不代表怀疑数学结论本身。
+
+  **与 `math.supermoduli-ramond-punctures-not-projected`（Donagi–Ott）的关系**：见 statement 正文
+  "improve"一词的范围限定；本节点不写"Wang 严格改进 Donagi-Ott"，任何比较需加 n>0 限定。
+
+  **覆盖范围地图**（据 correa-noja-2026 抽取记录"未解决的疑问"第2条交叉核实）：Donagi–Witten
+  2013（未紧化无穿孔）、Donagi–Noja 2026（未紧化无穿孔，g=4 偶分量）、Corrêa–Noja 2026（紧化无
+  穿孔）、Donagi–Ott 2023 + 本节点（未紧化带穿孔）四组结果覆盖互不重叠的象限，未见任何文献处理
+  "紧化+带穿孔"这一象限。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

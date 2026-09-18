@@ -1,0 +1,51 @@
+id: math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole
+kind: proposition
+title: CDvG 2008 亏格三测度 Ansatz 因全纯而不能是 π_*ψ_3/φ_3 的公式（条件性排除论证，前提为 Witten 2015 的超椭圆轨迹极点存在性结果）（Dunin-Barkowski–Fedorov–Sleptsov）
+statement: |
+  **对象**：[20]（Cacciatori–Dalla Piazza–van Geemen 2008 年提出的亏格三 RNS 超弦测度 Ansatz，具体
+  arXiv 号本节点不作判定，见下方"未决事项"）；π_*ψ_3/φ_3（亏格三真实超弦测度，Siegel 上半空间 H_3
+  上的截面，记号同 `math.supermoduli-genus-3-measure-linear-combination`）。
+
+  **论证**（p.5，逐字，经 L1 直接读取，未替作者加强）：
+  "the Ansatz of [20] is holomorphic everywhere on the Siegel upper half-space H_3, so this Ansatz
+  cannot be a formula for π_*ψ_3/φ_3."
+
+  **这是一条条件性排除论证，不是"CDvG 的计算本身有误"的断言**：其逻辑结构是——(前提 A，本文引用
+  Witten 2015 的既有结果) 真实测度 π_*ψ_3/φ_3 在超椭圆轨迹上必须有极点；(前提 B，本文自己的观察)
+  [20] 的 Ansatz 在整个 H_3 上处处全纯（无此极点）；(结论) 故 [20] 的 Ansatz 不能等于 π_*ψ_3/φ_3。
+  **本节点不断言前提 A（Witten 2015 极点存在性结果）本身的证明**——那是另一篇文献
+  （Witten, "The super period matrix with Ramond punctures", arXiv:1501.02499）的独立结果，**本
+  项目尚未把它登记为图节点**（见下方 gaps）。本节点也不断言 CDvG 的构造/计算过程本身存在错误，只
+  断言"[20] 的 Ansatz 不满足真实测度必须满足的一个额外解析性质（超椭圆轨迹处应有极点）"。
+
+  **未决事项（本节点不作判定）**：[20] 的确切 arXiv 号——DBFS 参考文献表本身未在该条目中直接标注
+  可核对的 arXiv 号字符串；候选为 arXiv:0801.2543（"Modular Forms and Three Loop Superstring
+  Amplitudes"，亏格三，语境更吻合）或 arXiv:0804.0457（"Genus four superstring measures"，亏格
+  四）。本项目未能在 DBFS 原文参考文献表 [20] 条目中直接核对到具体数字串，故此身份问题留待后续
+  补核，本节点不代替补核工作作出决定。
+uses_conventions: []
+sources:
+  - ref: dunin-barkowski-fedorov-sleptsov-2025
+    loc: "arXiv:2505.02950v2, p.5（§1 引言，条件性排除论证逐字）；摘要（对应表述，逐字，经 export.arxiv.org API 核验）；References [20]（arXiv 号未在条目原文核对到）、[27]（Witten 极点结果，arXiv:1501.02499，pp.48–52）"
+    note: |
+      **部分 L1**：摘要 + pp.1–10（Introduction，含本节点引用的 p.5 批评段落）+ pp.42–52（参考文献
+      列表）已读（researcher 2026-09-18，抽取记录 dunin-barkowski-fedorov-sleptsov-2025.md E1, E3）。
+      [20] 条目本身在参考文献表原文中未见明确 arXiv 号字符串，候选范围见 statement"未决事项"；
+      Witten 2015（[27] = arXiv:1501.02499）本身未被本项目独立读取或立卡，只作为本文引用的既有
+      结果记录在案。
+tags: [supermoduli, superstring-measure, genus-3, math-input, dunin-barkowski-fedorov-sleptsov, exclusion-argument]
+notes: |
+  **措辞纪律**：本节点严格保留原文限定性措辞"cannot be a formula for"，不强化为"is wrong"、"the
+  computation is incorrect"等更强断言；CDvG 本身的计算是否有误不在本文与本节点的断言范围内。
+
+  **与 `math.supermoduli-genus-3-measure-linear-combination` 的关系**：两者来自同一篇论文但是两个
+  独立命题（一个节点一个命题）——该节点是本文自己的正面结果（线性组合形式），本节点是本文对既有
+  文献 [20] 的条件性排除论证，不应合并。
+
+  **Witten 2015（arXiv:1501.02499，"The super period matrix with Ramond punctures"）未独立立卡**：
+  本节点的排除论证在逻辑上以该文献的极点存在性结果为前提，但该文献本身未被本项目读取、也未登记到
+  `literature/sources.bib`（登记 `literature/**` 不在本任务允许写入范围内）。这是一个应报告给 lead
+  的缺口：若后续要把"前提 A"接上真正的 depends_on 边（而不是留在本节点正文的文字记录里），需要先
+  由 researcher 补做该文献的抽取记录、curator 或 lead 再登记 bib 条目并立卡。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

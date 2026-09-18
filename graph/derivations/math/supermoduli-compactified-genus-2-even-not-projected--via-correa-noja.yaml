@@ -1,0 +1,32 @@
+id: math.supermoduli-compactified-genus-2-even-not-projected--via-correa-noja
+target: math.supermoduli-compactified-genus-2-even-not-projected
+kind: proof
+status: rigorous
+depends_on:
+  - id: math.supermoduli-compactified-genus-2-canonical-projection-fails
+    inferred: false
+    note: |
+      Corrêa–Noja 自陈"Our argument is not independent of [10] [=FKP] though, as it relies on their
+      boundary expansion of the superperiod map and the elementary hyperelliptic invariant-theoretic
+      vanishing entering their analysis of projections"（p.2，逐字）。这条依赖边记录的是"本推导重用
+      FKP 论文内部的具体技术引理（边界展开、不变量论消没）"这一作者自陈的技术依赖，**不是**"需要先
+      假设 FKP 的结论才能得到同一结论"这种循环意义上的逻辑依赖——目标节点与本依赖节点断言的是同一
+      底层事实的两种表述（见目标节点 notes）。边界展开/不变量消没本身未被抽取为独立图节点（researcher
+      抽取记录 pp.5+ 未读，无法逐字核实这两条引理），故此边指向 FKP 的结论节点作为可用的、来源可查的
+      最贴近对象。
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1, p.2（优先权/依赖声明，逐字）；§4（Lemmas 4.1/4.2, Theorem 4.3）；§8 p.21"
+    note: L1 全文逐页读取。
+summary: |
+  记账已发表数学论证：本文用直接计算法在分离 (−,−)-边界因子处求出第一 Green 障碍的法向主部分量非零，
+  独立于（但技术上不完全独立于）FKP 的原始证明得到同一结论。§8 逐字确认"this is precisely Theorem
+  4.3"，与 FKP Theorem 6.3 是同一结论的两条并行论证路径之一。
+gaps:
+  - |
+    本项目未逐行复核 §4 Lemmas 4.1/4.2/Theorem 4.3 的具体计算，只确认了证明骨架（直接在 (−,−) 边界
+    因子处计算障碍法向主部分）与作者自陈的依赖关系。
+  - |
+    depends_on 边指向的 FKP 结论节点本身也只有部分 L1（引言复述，§6 未读），见该节点 gaps。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

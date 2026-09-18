@@ -1,0 +1,26 @@
+id: math.supermoduli-compactified-genus-geq3-not-projected--via-correa-noja
+target: math.supermoduli-compactified-genus-geq3-not-projected
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1, §5–§7（pp.15–21）；§8 pp.21–24（'We now prove the higher-genus assertion'……逐字证明全文）"
+    note: L1 全文逐页读取。§2 内被引用的两条一般引理（Theorem 2.2/2.6）本身未逐字复核证明细节。
+summary: |
+  记账已发表数学论证。本文§8证明骨架对item(3)的论证明确不引用Theorem 3.5（item 1）、Theorem 4.3
+  （item 2）或FKP arXiv:2408.11136；只用§2一般引理（障碍消没⇒可投影的逆否；障碍类函子性比较）+
+  §5–§6本文自建的Donagi–Witten一点障碍族回顾与椭圆尾NS粘接构造 + §7的Riemann–Roch存在性引理，
+  是一条完全自足的独立证明路径。刻意不挂任何依赖边，以准确反映"item(3)不依赖FKP，也不依赖item(1)/(2)"
+  这一原文明示的事实（任务红线：最容易犯的错误是把FKP依赖边错挂在item(3)上）。
+gaps:
+  - |
+    本项目未逐字复核§2 Theorem 2.2/Theorem 2.6自身的证明（只核实了它们在§8中被引用的方式与结论文字，
+    见statement sources note与抽取记录"未解决的疑问"第1条）。rigorous档位依据来源强度（已发表数学
+    论证文章 + "we prove"完整定理编号结构 + 本抽取者逐页读完未发现跳步痕迹），非本图独立复核§2内部
+    证明。
+  - |
+    §6粘接映射构造（Lemmas 6.1/6.2, Proposition 6.3）与§7 Theorem 7.2的具体计算步骤本项目只做了
+    忠实转述级别的核实，未逐行验证Riemann–Roch与核维数计数的每一步代数。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

@@ -1,0 +1,52 @@
+id: math.supermoduli-compactified-genus-2-even-not-projected
+kind: proposition
+title: 紧化亏格二偶自旋分量超模叠不可投影（Corrêa–Noja Theorem 1.1 item 2 = Theorem 4.3；与 Felder–Kazhdan–Polishchuk Theorem 6.3 同一底层事实的独立确认）：ω₂(𝔐̄₂⁺)≠0
+statement: |
+  **对象**：记号同 `math.supermoduli-compactified-genus-2-odd-split`。
+
+  **定理**（Theorem 1.1 item (2)，逐字，p.1）：
+  "The even compactified genus-two component 𝔐̄₂⁺ is non-projected. More precisely, ω₂(𝔐̄₂⁺) ≠ 0."
+
+  **优先权与依赖归属**（p.2，紧跟定理之后，逐字）：
+  "The second item was first proved by Felder–Kazhdan–Polishchuk in [10]. Here we confirm their result
+  by computing directly the primary Green obstruction at the separating (−,−)-boundary divisor. Our
+  argument is not independent of [10] though, as it relies on their boundary expansion of the
+  superperiod map and the elementary hyperelliptic invariant-theoretic vanishing entering their
+  analysis of projections."
+  ——"[10]"即 Felder–Kazhdan–Polishchuk arXiv:2408.11136（见
+  `math.supermoduli-compactified-genus-2-canonical-projection-fails`）。**本文自陈"the second item"
+  指本节点（item 2），不是 g≥3 的 item 3**。
+
+  **证明方法**（§4，Lemmas 4.1/4.2, Theorem 4.3）：直接在分离 (−,−)-边界因子处计算第一 Green 障碍的
+  法向主部分量，证明该分量不能被消去。§8 组装证明逐字："The second assertion is the Felder–Kazhdan–
+  Polishchuk genus-two even non-projectedness theorem, recalled in the form needed here in Section 4.
+  In the notation of this paper, this is Theorem 4.3."
+
+  **本节点不断言**：紧化亏格二**奇**分量（split，见 `math.supermoduli-compactified-genus-2-odd-split`）
+  与 g≥3 情形（**不依赖本节点或 FKP**，见 `math.supermoduli-compactified-genus-geq3-not-projected`）。
+uses_conventions: []
+sources:
+  - ref: correa-noja-2026
+    loc: "arXiv:2606.06733v1, p.1 Theorem 1.1 item (2)（逐字）；p.2 优先权段落（逐字）；§4 pp.12–14（Lemmas 4.1/4.2, Theorem 4.3）；§8 p.21（'The second assertion is the Felder–Kazhdan–Polishchuk genus-two even non-projectedness theorem...In the notation of this paper, this is Theorem 4.3'）"
+    note: |
+      L1 全文逐页读取（researcher 2026-09-18，抽取记录 correa-noja-2026.md E1, E2, E4, E7）。
+  - ref: felder-kazhdan-polishchuk-2024
+    loc: "arXiv:2408.11136v1（原始证明所在，本项目未读；间接经 correa-noja-2026 的转述与优先权声明核实其存在）"
+    note: |
+      本项目对 FKP 原文只做了部分 L1（见 `math.supermoduli-compactified-genus-2-canonical-projection-
+      fails` 的 sources note），未读 §3/§4/§6 的具体技术引理（超周期映射边界展开、超椭圆不变量论
+      消没），故此依赖列在这里仅作文献学记录，实质依赖边见下方 derivation 的 depends_on。
+tags: [supermoduli, super-riemann-surface, non-projected, compactified, genus-2, math-input, correa-noja, felder-kazhdan-polishchuk]
+notes: |
+  **与 `math.supermoduli-compactified-genus-2-canonical-projection-fails`（FKP Theorem 6.3）的关系**：
+  两节点断言的是（据 Corrêa–Noja 自己的识别）同一个底层数学事实的两种表述——FKP 用"S̄₂ 的典范投影
+  在 (−,−) 边界因子处失效"的语言，Corrêa–Noja 用"ω₂(𝔐̄₂⁺)≠0"的障碍类语言。**本项目未独立核实
+  FKP 原文 §6 是否本身就用宇称分量表述**（见 FKP 卡 notes），因此保留两个节点分立，不合并成一张卡：
+  FKP 卡承载 FKP 自己的原始语言与优先权，本节点承载 Corrêa–Noja 自己的语言与独立确认，两者通过
+  depends_on 边连接，而不是等同为一个 statement。
+
+  **★★ 与 `math.supermoduli-compactified-genus-geq3-not-projected`（item 3）不构成同一条依赖链**：
+  Corrêa–Noja 论文正文"the second item was first proved by [FKP]"这句话里的"second item"指本节点，
+  **不指 g≥3 的 item 3**——item 3 的推导不挂 FKP 依赖边（见该节点）。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

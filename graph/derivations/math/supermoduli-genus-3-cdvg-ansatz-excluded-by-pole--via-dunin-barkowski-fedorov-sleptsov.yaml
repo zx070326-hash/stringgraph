@@ -1,0 +1,26 @@
+id: math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole--via-dunin-barkowski-fedorov-sleptsov
+target: math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: dunin-barkowski-fedorov-sleptsov-2025
+    loc: "arXiv:2505.02950v2, p.5（逐字排除论证）；References [27]（p.48–52，Witten 极点结果引用）"
+    note: 部分 L1，见 statement sources note。
+summary: |
+  记账已发表数学论证的一条逻辑推断步骤：给定"真实测度在超椭圆轨迹处有极点"（引用 Witten 2015 既有
+  结果作为前提）与"CDvG Ansatz 处处全纯"（本文自己的直接观察），逻辑上得出"CDvG Ansatz 不能是真实
+  测度公式"。这是一个完整、初等的条件性推断（若前提成立，结论必然成立），本身不涉及计算错误指控。
+  depends_on 留空，因为前提（Witten 2015 极点存在性结果）尚未被本项目登记为图节点（见 gaps）。
+gaps:
+  - |
+    **本论证的关键前提"Witten 2015 建立了超椭圆轨迹处的极点存在性"（arXiv:1501.02499，"The super
+    period matrix with Ramond punctures"）本身未被本项目独立读取，也未登记到 `literature/
+    sources.bib`（不在本任务允许写入的 literature/** 范围内）。** 这条边目前只以文字记录的形式留在
+    statement 正文与 notes 里，未接成真正的 depends_on 图边——若后续该文献被抽取并立卡，应回来给
+    本推导补一条 depends_on 边。
+  - |
+    [20]（CDvG 2008 原始 Ansatz 论文）的确切 arXiv 号本项目未核实到（0801.2543 vs 0804.0457 两候选
+    间未决），不影响本推导的逻辑本身，但影响未来若要给 [20] 单独立卡时的文献登记。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

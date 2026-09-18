@@ -1,0 +1,28 @@
+id: math.supermoduli-ns-ramond-punctures-not-projected--via-wang
+target: math.supermoduli-ns-ramond-punctures-not-projected
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: wang-2025
+    loc: "arXiv:2512.15727v1, 摘要；§1 引言 p.1；§2 pp.2–3；arXiv comment 字段"
+    note: 部分 L1（仅 pp.1–3），见 statement sources note。
+summary: |
+  记账一篇作者自称"preliminary draft"（arXiv comment 字段）的预印本给出的定理陈述。摘要用"we show"
+  的确定语气，但本项目未读 pp.4 起占全文绝大部分的主定理 Theorem 4.2 完整证明，也未见该文有期刊
+  发表或 v2 修订记录（核实时只有 v1，2025-12-05 提交）。status 定为 physical-argument（而非
+  rigorous）是对"作者自陈初步草稿 + 本项目未核实完整证明骨架"这一双重信号的诚实反映，依据
+  `docs/STATUS_LEVELS.md` 的"断言+骨架"准则：有明确断言但既无独立核实的证明骨架、源文献本身也
+  未达到已定稿/已发表的严格程度，应降至 physical-argument，而非用 conjecture（论文并未把此结果
+  自我框定为猜想或未决问题）。
+gaps:
+  - |
+    **pp.4 起（Theorem 4.2 主定理的完整证明，占全文绝大部分）完全未读**——未核实证明方法、是否有
+    省略步骤、是否结构性依赖 Donagi-Ott 或 Donagi-Witten 的具体引理。
+  - |
+    Lemma 2.7 的精确数学陈述与后续证明的具体技术内容本项目只做了结构性核实，未逐字核实。
+  - |
+    该论文未见期刊发表或后续修订版本记录（只有 v1），"preliminary draft"标注本身可能反映作者对
+    证明完整性的自我保留。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
