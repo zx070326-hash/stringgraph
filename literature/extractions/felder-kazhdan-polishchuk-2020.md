@@ -731,3 +731,79 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
   - ⚠ **本抽取不判定** "Theorem C 是否实际上对任意 $(n_{NS}, n_R)$ 成立"。逐字层面能确定的只有：
     **作者写下来的 Theorem C 的靶是 $\overline{\mathcal{S}}_g$**。要把它推广到带穿孔的靶，属于
     推断，留给 curator（若做，须标 `inferred: true`，并把上面"反面证据"三条一并带上）。
+
+### E12 ★ 粘接映射 (7.8) 与 (7.9)：**定义域/陪域都带一般穿孔指标 $(m,n)$**
+- 位置：**p.48 中段**（记号 $\overline{\mathcal{S}}_{g;m,n}$ 的定义 + (7.8) + (7.9)），在
+  §7.5 "**The NS node boundary components**"（该节起于 **p.47 下半页**）之内。L1（页图逐字；
+  (7.8)/(7.9) 的全部下标另用 `pdftoppm -r 500` 局部放大逐符号复核）。
+- 类型：definition
+- 原文陈述（逐字，p.48，含记号定义与两条映射，顺序照原文）：
+  > Let $\overline{\mathcal{S}}_{g;m,n}$ denote the moduli superspace of stable supercurves of genus
+  > $g$ with $m$ NS marked points and $n$ Ramond marked points. Then we can apply the above gluing
+  > construction to the pair of families of stable supercurves over
+  > $\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times \overline{\mathcal{S}}_{g_2;m_2+1,n_2}$, pulled
+  > back from each factor and using the last NS puncture on each of them. This leads to a morphism
+  > $$\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times \overline{\mathcal{S}}_{g_2;m_2+1,n_2} \to
+  >   \overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}. \qquad (7.8)$$
+  > Similarly, if $X/S$ is a stable supercurve with two disjoint NS-punctures $P, P' \subset X$, then
+  > we can glue $P$ with $P'$ and get a new stable supercurve with a non-separating node. This leads
+  > to a morphism
+  > $$\overline{\mathcal{S}}_{g;m+2,n} \to \overline{\mathcal{S}}_{g+1;m,n} \qquad (7.9)$$
+- **分离型 vs 非分离型的归属（逐字判定）**：
+  - **(7.8) = 分离型（separating）NS 节点**。逐字依据有两条：(a) (7.8) 的源是**两个**模空间的**乘积**，
+    靶的亏格与穿孔数是两者之和（$g_1+g_2$；$m_1+m_2$；$n_1+n_2$），正是分离型节点的形状；
+    (b) Lemma 7.10 的后半句逐字写 "*near a stable supercurve with a single **separating** (resp.,
+    **non-separating**) NS node, the divisor $\Delta_{NS}$ coincides with the schematic image of
+    (7.8) (resp., (7.9))*"——即作者**显式**把 separating 配给 (7.8)、non-separating 配给 (7.9)。
+  - **(7.9) = 非分离型（non-separating）NS 节点**。除上述 Lemma 7.10 的逐字配对外，(7.9) 前一句
+    也逐字写明 "*get a new stable supercurve with a **non-separating** node*"，且亏格从 $g$ 升到
+    $g+1$、NS 穿孔从 $m+2$ 降到 $m$（把两个 NS 穿孔粘掉），形状自洽。
+- **穿孔指标（本条的承重信息，逐字）**：
+  - (7.8) 的**源**是 $\overline{\mathcal{S}}_{g_1;m_1+1,n_1} \times
+    \overline{\mathcal{S}}_{g_2;m_2+1,n_2}$：两个因子各自带 $m_i+1$ 个 NS 穿孔与 $n_i$ 个 **Ramond**
+    穿孔；**陪域**是 $\overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}$，即**靶带 $m_1+m_2$ 个 NS
+    穿孔与 $n_1+n_2$ 个 Ramond 穿孔**——**靶不是无穿孔的 $\overline{\mathcal{S}}_g$**。
+  - (7.9) 的**源**是 $\overline{\mathcal{S}}_{g;m+2,n}$，**陪域**是
+    $\overline{\mathcal{S}}_{g+1;m,n}$——同样**靶带 $(m,n)$ 一般穿孔指标**。
+  - 两条映射的陈述中**都没有**"$m=n=0$"或类似的限制；$m_i, n_i, m, n$ 是自由的一般指标。
+- 文献自称的严格程度：正文构造（definition 级；粘接超概形的良定性由 §7.5 开头的一般构造 + Lemma 7.9
+  保证，见 E13）。
+- 文献列出的依赖：§7.5 开头的"沿闭子概形粘接两个超概形"的一般构造（p.47 下半页，逐字给出
+  $\mathcal{O}_X$ 作为 $j_*\mathcal{O}_X \oplus j'_*\mathcal{O}_{X'}$ 中对角线原像的子层的定义）；
+  Lemma 7.9（粘出来的 $Z/S$ 确实是稳定超曲线）。
+- 备注（**记号与判定**）：
+  - ⚠ **记号漂移（L1 逐字核实）**：§7.5 用**分号**写作 $\overline{\mathcal{S}}_{g;m,n}$（"genus $g$;
+    $m$ NS marked points, $n$ Ramond marked points"），而 Theorem A / Theorem B（§1、§5）用**逗号**
+    写作 $\overline{\mathcal{S}}_{g,n_{NS},n_R}$。按两处的文字说明这是**同一个对象的两套记号**
+    （$m \leftrightarrow n_{NS}$，$n \leftrightarrow n_R$），但**本文没有在任何地方写下一句
+    "$\overline{\mathcal{S}}_{g;m,n} = \overline{\mathcal{S}}_{g,m,n}$" 式的记号对照声明**。
+    curator 跨节引用时须自行注明这一点。另注 §7.5 这里用的措辞是 "**marked points**" 而
+    Definition 2.4 用的是 "**punctures**"。
+  - ⚠ **本条与 E11 的张力，如实并列**：**(7.8)/(7.9) 的靶逐字带一般穿孔指标**（本条），而
+    **Theorem C 的靶逐字是无穿孔的 $\overline{\mathcal{S}}_g$**（E11）、**§9.1 的比较论证与
+    Theorem 9.2 逐字写的也是无穿孔形式**（E7、E10）。两者**不矛盾**（Theorem C 是 setup 允许范围内
+    的一个特例写法），但**"作者是否证明了带穿孔靶的版本"这一问题，逐字层面在本文里没有答案**——
+    本抽取不判定，留给 curator（若判定，须标 `inferred: true`）。
+  - ⚠ Ramond 型节点的粘接**不在 §7.5**：§7.6 标题逐字是 "**The Ramond node boundary components**"，
+    开篇第一句逐字 "*Gluing along two Ramond punctures is more subtle.*"（p.49）。即 (7.8)/(7.9)
+    **只处理 NS 节点**。Ramond 的对应映射是 **(7.11)**（非分离型）与 **(7.12)**（分离型），位于
+    **p.51**，逐字（L1，400 dpi 复核）：
+    > $$\mathrm{Isom}(\mathcal{P}_{n+1}, [i]_*\mathcal{P}_{n+2}) \to
+    >   \overline{\mathcal{S}}_{g+1;m,n} \qquad (7.11)$$
+    > Similarly, we can glue the last Ramond punctures $R, R'$ on the stable supercurves $X, X'$ over
+    > the moduli space $\overline{\mathcal{S}}_{g_1;m_1,n_1+1} \times
+    > \overline{\mathcal{S}}_{g_2;m_2,n_2+1}$ pulled back from each factor. This gives a morphism
+    > $$\mathrm{Isom}(\mathcal{P}_R, [i]_*\mathcal{P}_{R'}) \to
+    >   \overline{\mathcal{S}}_{g_1+g_2;m_1+m_2,n_1+n_2}. \qquad (7.12)$$
+    > Note that in this case $n_1$ and $n_2$ are odd, so $n_1 + n_2 \geq 2$.
+
+    （(7.11) 的源是 $\overline{\mathcal{S}}_{g;m,n+2}$ 上的 $\mathbb{Z}/2 \ltimes
+    \mathbb{A}^{0|1}$-主丛 $\mathrm{Isom}(\cdot,\cdot)$，**不是模空间本身**——这就是 §7.6 开头所谓
+    "more subtle"、以及 p.3 引言所说 "*The components of the Ramond boundary divisor $\Delta_R$
+    have a more complicated relation to lower genus moduli spaces*" 的具体内容。逐字注意
+    (7.11)/(7.12) 的靶也**都带一般穿孔指标 $(m,n)$**。）
+  - ⚠ **原文编号疑点（本轮发现，L1）**：§9.1 setup（E7）逐字说 $\iota$ 是 "one of the maps (7.8) or
+    (7.9)"，与本条一致（两者都是 NS 粘接）；但 **§9.3（Ramond 边界分量，p.70）逐字写的是
+    "a gluing map for the Ramond boundary component, i.e., one of the maps **(7.9)**"**——而 (7.9)
+    是 **NS** 非分离粘接映射，Ramond 的应当是 (7.11)/(7.12)。**疑为编号笔误**（很可能想写
+    (7.11)、(7.12) 或 "(7.11) or (7.12)"）。本抽取如实记录，**不替作者改**，详见 E15。
