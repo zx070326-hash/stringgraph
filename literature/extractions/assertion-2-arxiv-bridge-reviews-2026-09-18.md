@@ -231,23 +231,53 @@
     "能否把这个对称性推广到更一般的格点/编码构造"，与"顶点算子记号是否相等"是完全不同的
     问题，不能作为判据条件 2 的证据。
 
-### E3–E6 候选 3–6（任务书标注"若时间不足可只标 L0 并简述"）—— 本轮判定为时间预算不足，未展开
+### E3 Gaberdiel 1999（arXiv:hep-th/9910156）—— 已获取并快速核实，判据条件 1 即不满足，快速排除
 
-按任务书的明确优先级指示（"候选 1、2 必须做透……否则不要六个都浅尝辄止，这正是第二轮
-散掉的失败模式"），本轮把全部核实时间用于候选 1（Gebert 1993，已做透，见 E1）与候选 2
-的获取（Dolan–Goddard–Montague，已下载但未读，见 E2）。候选 3–6 如实标记为 **L0**：
+- 文献：M. R. Gaberdiel, "An Introduction to Conformal Field Theory", Rept. Prog. Phys. 63
+  (2000) 607, arXiv:hep-th/9910156。
+- 位置：全文（`pdftotext -layout` 落盘 4282 行）。本条目 **L1（已获取并针对判据条件 1 做
+  全文关键词排查，未逐字精读全篇——因为判据条件 1 在排查阶段即已明确不满足，不需要更深入
+  核实）**。重点核对 §3.7.4 "Lattice Theories"（pdftotext 行 1575–1669，本文对格点 CFT 的
+  唯一构造性段落）与全文 `normal order`/`colons` 关键词命中处（行 1391, 1509）。
+- 类型：review article（物理学家写给物理学家的 CFT 教程综述，篇幅极长，公理化程度高）。
+- 原文陈述（逐字，§3.7.4 核心构造）：
+  > Suppose $\Lambda$ is an even Euclidean lattice with basis $e_j$ ... We define the theory
+  > associated to the lattice $\Lambda$ by taking a basis for $V$ to consist of the states
+  > $|k\rangle$, $k\in\Lambda$. For each $k$, the corresponding field $V(k,z)$ has conformal
+  > weight $\frac12 k^2$, and the amplitudes are given by
+  > $V(k_1,z_1)V(k_2,z_2)\cdots V(k_N,z_N) = \epsilon(k_1,\ldots,k_N)\prod_{i<j}(z_i-z_j)^{k_i\cdot k_j}$
+  > if $k_1+\cdots+k_N=0$ and zero otherwise.
+  且随后 Virasoro 场由自定义流 $H^i(z)$ 的 OPE $H^i(z)H^j(w)\sim \delta^{ij}/(z-w)^2$ (145)
+  构造，正规序 `: :` 在全文中**仅**用于流的模式双线性组合（如 (135)：
+  `: J^a_m J^b_l := J^a_m J^b_l` if $m<0$, else $J^b_l J^a_m$；Sugawara 构造 (133)–(134)），
+  从未出现在一个自由玻色场 `X^μ(z)`/Fubini–Veneziano 场的指数上。
+- 文献自称的严格程度：教程综述，§2–§3 用"振幅公理"（amplitude/OPE-based axioms，非 FLM/
+  Borcherds 的 `Y(v,z)` 公理，但精神近似）从零构造整套 CFT 形式化，§3.7.4 的格点理论是
+  该公理系统下的一个"例子"，顶点算子 $V(k,z)$ 直接由振幅公式 (140) **定义**，不经过任何
+  自由玻色场的正则量子化或模展开步骤。
+- 备注（判据核对）：**判据条件 1（写出 `X^μ(z)` 类对象 + 正规序指数）：不满足**——全文
+  搜索 `e\^\{i|exp\{i` 在 §3.7.4 附近**零命中**，格点顶点算子 $V(k,z)$ 从未写成
+  `:e^{ik·X(z)}:` 的形式，也没有引入携带时空/格点指标的模展开场；正规序记号确实存在（(135)
+  处显式定义）但只用于流的双线性组合，不用于指数化顶点算子。**因此本文在判据的第一道门槛
+  就未通过，不需要进一步核实条件 2**——这是三轮六个候选里第一个"连条件 1 都不满足"的
+  候选（Nikolov–Todorov、Gebert、DGM 均满足条件 1 但败在条件 2）。任务书原本认为本文
+  "获取成本低、可能是快速补充候选"，核实结果是它确实获取成本低，但结论也来得快：
+  **不适用**。
 
-- **候选 3：Goddard–Olive, "Algebras, Lattices and Strings", MSRI Publications vol. 3**
-  （*Vertex Operators in Mathematics and Physics*, Lepowsky–Mandelstam–Singer eds., Springer
-  1985, pp.51–96）。**L0，本轮未尝试获取渠道**（未查 msri.org、library.msri.org、
+### E4–E6 候选 4（原候选 4 已作为 E3 完成，此处编号顺延为 5–6）与候选 5、6 —— 本轮判定为
+时间预算不足，未展开
+
+- **候选 5（原候选 3）：Goddard–Olive, "Algebras, Lattices and Strings", MSRI Publications
+  vol. 3**（*Vertex Operators in Mathematics and Physics*, Lepowsky–Mandelstam–Singer eds.,
+  Springer 1985, pp.51–96）。**L0，本轮未尝试获取渠道**（未查 msri.org、library.msri.org、
   archive.org 镜像）。任务书标注为"物理学家与数学家当面对照记号的历史现场"，仍是本项目
-  一个真实的悬而未决的高价值目标，留给下一轮。
-- **候选 4：Gaberdiel, "An Introduction to Conformal Field Theory", arXiv:hep-th/9910156**。
-  **L0，本轮未获取**。arXiv 开放，获取成本低，是最容易"顺手"补的一条，留给下一轮。
-- **候选 5：FLM 1988 第八章的二手逐字转引**（搜索引用 FLM 并逐字摘录 (8.x.x) 式号的 arXiv
-  论文）。**L0，本轮未搜索**。
-- **候选 6：Kac–Raina–Rozhkovskaya Bombay Lectures 新公开 PDF 复核**。**L0，本轮未复核**
-  （bib 已登记为 L0 来源，本轮未尝试寻找新的公开镜像）。
+  一个真实的悬而未决的高价值目标，留给下一轮——**尤其是候选 1、2、4(E3) 三个 arXiv 开放
+  候选已全部核实为不满足判据后，候选 5 成为本项目"识别式是否真的存在于公开文献"这一问题
+  剩余最后一个未排查的高价值历史现场**。
+- **候选 6（原候选 5）：FLM 1988 第八章的二手逐字转引**（搜索引用 FLM 并逐字摘录 (8.x.x)
+  式号的 arXiv 论文）。**L0，本轮未搜索**。
+- **候选 7（原候选 6）：Kac–Raina–Rozhkovskaya Bombay Lectures 新公开 PDF 复核**。**L0，
+  本轮未复核**（bib 已登记为 L0 来源，本轮未尝试寻找新的公开镜像）。
 
 ## 结论
 
@@ -270,14 +300,20 @@ FLM 的**结果内容**（Monster module、triality 群论结构），从未把 
 谱系上"两层转引"式地提及受 FLM/Borcherds 启发，从未采用 VOA 公理系统本身。**失败模式：
 VOA 侧对象根本不在场，无从谈"识别"。**
 
-两个失败模式合起来构成了比前两轮更强的负面证据密度：**三篇被认为最有希望的"物理↔VOA 桥梁"
-文献（Nikolov–Todorov 2004、Gebert 1993、Dolan–Goddard–Montague 1994）分别以"定义式非识别式"、
-"物理侧非独立构造"、"VOA 侧记号根本不在场"三种不同方式全部未能满足断言 (2) 的严格判据**。
+**Gaberdiel 1999**（hep-th/9910156, §3.7.4）核实更快：本文格点顶点算子 `V(k,z)` 直接由
+振幅公理 (140) 定义，全文正规序记号只用于流的模式双线性组合（Sugawara 构造），**从未写出
+携带时空/格点指标的自由玻色场 `X^μ(z)` 或正规序指数 `:e^{ikX(z)}:`**——判据条件 1 本身
+即不满足，是三轮六个候选里第一个"第一道门槛都未过"的候选。
 
-候选 3–6（Goddard–Olive MSRI、Gaberdiel、FLM 二手转引、Kac–Raina 复核）本轮零进展，如实
-标记 L0，留给下一轮或 curator 判断是否值得继续追加检索预算，还是转而接受"断言 (2) 在
-公开数学物理文献里可能根本没有以'两个独立对象随后被等同'的强形式被写出过"这一假设，把图
-节点标注为 `physical-argument`/`inferred` 并附三轮检索的负面证据摘要。
+三个失败模式合起来构成了比前两轮更强的负面证据密度：**四篇被认为最有希望的"物理↔VOA 桥梁"
+文献（Nikolov–Todorov 2004、Gebert 1993、Dolan–Goddard–Montague 1994、Gaberdiel 1999）
+分别以"定义式非识别式"、"物理侧非独立构造"、"VOA 侧记号根本不在场"、"物理侧记号本身都不
+在场"四种不同方式全部未能满足断言 (2) 的严格判据**。
+
+候选 5–7（Goddard–Olive MSRI、FLM 二手转引、Kac–Raina 复核）本轮零进展，如实标记 L0，
+留给下一轮或 curator 判断是否值得继续追加检索预算，还是转而接受"断言 (2) 在公开数学物理
+文献里可能根本没有以'两个独立对象随后被等同'的强形式被写出过"这一假设，把图节点标注为
+`physical-argument`/`inferred` 并附三轮检索的负面证据摘要。
 
 ### 本轮明确未能核实/未完成的事项（残余风险，逐条列出）
 
@@ -285,19 +321,24 @@ VOA 侧对象根本不在场，无从谈"识别"。**
    推测 [40] 可能是 Goddard–Olive（本项目 Round 2 已判定该文献真正不可获取），但未逐一核对
    参考文献表条目号与书目细节，留待后续（若要核实，需读 gebert1993.txt 参考文献表全文，
    本轮已定位大致行号 3260–3340 附近但未逐条转录）。
-2. **候选 3（Goddard–Olive MSRI Publications vol.3）的获取渠道完全未尝试**——历史上"物理
-   学家与数学家当面对照记号"的最可能现场，任务书标注为高价值，本轮零进展，是下一轮的
-   最高优先级（因为候选 1、2 已双双确认失败，候选 3 是唯一"当面对照"历史现场的候选）。
-3. **候选 4（Gaberdiel hep-th/9910156）** —— arXiv 开放，获取成本低，本轮零进展，是下一轮
-   除候选 3 外的第二优先级。
-4. **候选 5、6** —— 本轮零进展，见上方候选清单说明。
-5. **本条目对 Gebert 1993 的"判据不满足"结论本身依赖对"formally"/"only has a meaning when
+2. **候选 5（原候选 3，Goddard–Olive MSRI Publications vol.3）的获取渠道完全未尝试**——
+   历史上"物理学家与数学家当面对照记号"的最可能现场，任务书标注为高价值，本轮零进展，
+   是下一轮的最高优先级（因为候选 1、2、E3 三个 arXiv 开放候选已全部确认失败，候选 5
+   是唯一"当面对照"历史现场且尚未排查获取渠道的候选）。
+3. **候选 6、7（FLM 二手转引、Kac–Raina 复核）** —— 本轮零进展，见上方候选清单说明。
+4. **本条目对 Gebert 1993 的"判据不满足"结论本身依赖对"formally"/"only has a meaning when
    exponentiated"两处措辞的解读**——抽取者判断这是作者自陈"记号装置而非独立构造"，但这是
    一个解释性判断（虽基于逐字原文，但涉及对论证结构的理解），按 `literature/CLAUDE.md`
    规则 2，若 curator 或 reviewer 认为这一解读过严，应重新审视原文（PDF pp.28–30，已给出
    精确页码，可独立复核），本条目的判定不应被当作不可挑战的定论。
-6. **DGM 1994 的"FLM 记号从未在正文出现"这一结论依赖对全文 3627 行 `pdftotext` 文本的
+5. **DGM 1994 的"FLM 记号从未在正文出现"这一结论依赖对全文 3627 行 `pdftotext` 文本的
    `Grep` 关键词扫描 + 三页图像核实（PDF pp.29–31）**——已排查"pdftotext 丢失符号导致误判"
    的风险（见 E2 备注），但**未对全文 65 页逐页做图像核实**（只核实了 §5.2 构造性核心的
    3 页），若 curator/reviewer 认为有必要，可对引言与 §6 triality 段落（pdftotext 行
    51–82、2777–2792）也做图像复核，本条目判断风险很低但不排除。
+6. **Gaberdiel 1999（E3）本轮未逐字精读全篇**——只针对判据条件 1 做关键词排查，一旦确认
+   条件 1 不满足即停止深入（任务书允许"若候选显然不适用可快速排除，不必逐字精读"的精神，
+   但本条目未做 PDF 图像核实，仅凭 `pdftotext` 文本判断，若 curator 认为 §3.7.4 附近存在
+   pdftotext 符号丢失掩盖了某个指数化正规序表达式的风险，应对 PDF 对应页（约 pdftotext
+   行 1575–1669 附近）做图像复核，本条目判断此风险较低（因为该段落逐字讨论振幅公理，
+   叙述连贯，非公式密集丢失区）但不排除。
