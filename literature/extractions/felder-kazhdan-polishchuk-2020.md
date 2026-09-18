@@ -452,3 +452,180 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
     $\overline{\mathcal{S}}$**。400 dpi 放大复核确认 (9.6) 里确实**无上划线**。按上下文这应指同一个
     $\overline{\mathcal{S}}$（(9.6) 就是 (7.6) 的限制），判为**排印上的上划线遗漏**，但本条如实记录
     原文形态，不替作者改。
+
+---
+
+# 第三轮抽取（2026-09-18）：补齐 E10–E15
+
+- 抽取者：researcher（agent/researcher/fkp-gluing-round3）
+- 日期：2026-09-18
+- 版本：arXiv:2006.13271**v3**（74 页，2023-03-07 编译，与第二轮同一份 PDF）
+- 页码约定与方法等级：**沿用第二轮小节的约定**（PDF 页码 = 页眉印刷页码；L0–L4 制）。本轮已在
+  pp.2、47、48、49、56、57、58、61、62、63、68、70、71 逐页核对页眉数字。
+- ⚠ **关于第二轮小节的覆盖范围声明**：第二轮开头自称覆盖 "E7–E15"，但实际只落地了 **E7、E8、E9**
+  三条（上一轮 agent 中途因 API 中断死亡）。**本轮不修改第二轮的任何既有文字**，只在此处如实说明：
+  **E10–E15 由本轮补齐**，编号接续。
+- 本轮所有逐字引文与公式均为 **L1**：用 `Read` 工具直接渲染 PDF 页图像逐字核对；关键公式
+  （(8.11)、Theorem C 的靶、Example 8.9 的量词、§9.3 的 "conjecture" 措辞）另用
+  `pdftoppm -r 400~500` 局部放大二次核对。`pdftotext -layout` **只用于定位行号与 ASCII 交叉校验**。
+- ⚠ **本轮未做**：Lemma 9.3 / 9.4 / 9.5 的**证明**逐行核对（只核对陈述与证明首句的局部性自陈）；
+  §9.2 里 Lemma 9.6 之后到 Theorem C 收尾的完整推导；§3/§6 变形理论；参考文献表书目核实。
+
+## 陈述（第三轮）
+
+### E10 Theorem 9.2：(9.6) 与两个超 Mumford 同构的**相容性**（已证，非猜想）
+- 位置：**p.61**（陈述与图表）；证明分散在 Lemma 9.3（p.61–62）、Lemma 9.4（p.62–63）、
+  Lemma 9.5（p.63–68）；"Proof of Theorem 9.2" 在 **p.68 上半页**。L1（页图逐字；Theorem 9.2 的
+  图表另用 400 dpi 局部放大复核）。
+- ⚠ **节号更正（与派工描述不符，如实记录）**：Theorem 9.2 **位于 §9.1 "NS boundary components"
+  之内**（§9.1 起于 p.58，一直延伸到 p.68 上半页），**不在 §9.2**。§9.2 的标题是
+  "**Splitting of the Kodaira-Spencer map at an NS boundary component**"，起于 **p.68 下半页**，
+  其首条结果是 Lemma 9.6（编号式 (9.27)）。§9.3 "Ramond boundary components" 起于 p.70。
+- 类型：proposition
+- 原文陈述（逐字，含紧邻其前定义两个 Mumford 同构的段落）：
+  > Now we can state a compatibility result between the super Mumford isomorphisms over
+  > $\overline{\mathcal{S}}$ and over the NS boundary component $B$. Recall that we have the super
+  > Mumford isomorphism
+  > $$\mu_{\overline{\mathcal{S}}} : \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})
+  >   \longrightarrow \mathcal{B}(\mathcal{O}_X)^5(-\Delta)$$
+  > near $B$ (see Prop. 8.5). We also have the super Mumford isomorphism for the family
+  > $\widetilde{X}/B$, over the smooth locus:
+  > $$\mu_B : \mathcal{B}(\omega^{-2}_{\widetilde{X}/B}(-D_1-D_2)) \xrightarrow{\ \sim\ }
+  >   \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2$$
+  > (see Lemma 8.11).
+  >
+  > **Theorem 9.2.** *The following diagram of isomorphisms of line bundles on $B$ is commutative up
+  > to a sign*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})|_B &
+  >     \xrightarrow{\ \mu_{\overline{\mathcal{S}}}|_B\ } &
+  >     \mathcal{B}(\mathcal{O}_X)^5(-\Delta)|_B \\
+  >   \big\downarrow{\scriptstyle (9.2)} & & \big\downarrow{\scriptstyle (9.6)} \\
+  >   \mathcal{B}(\omega^{-2}_{\widetilde{X}/B}(-D_1-D_2)) & \xrightarrow{\ \mu_B\ } &
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1 \otimes \Psi_2
+  >   \end{array}$$
+  紧随其后（p.61）作者说明证明的拆分方式，逐字：
+  > Recall that to get $\mu_{\overline{\mathcal{S}}}$ we used three isomorphisms: the
+  > Grothendieck-Serre duality isomorphism
+  > $$SD_{X/\overline{\mathcal{S}}} : \mathcal{B}(\omega^{-2}_{X/\overline{\mathcal{S}}})
+  >   \xrightarrow{\ \sim\ } \mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}),$$
+  > the isomorphism
+  > $$\mathcal{B}(\omega^3_{X/\overline{\mathcal{S}}}) \simeq
+  >   \mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}})^{-1} \otimes \mathcal{B}(\mathcal{O}_X)^2,$$
+  > and the isomorphism
+  > $$\mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}}) \simeq
+  >   \mathcal{B}(\omega_{X/\overline{\mathcal{S}}})^{-2} \otimes
+  >   \mathcal{B}(\mathcal{O}_X)^{-1}(\Delta)$$
+  > (see Sec. 8.3). Similarly, $\mu_B$ is a composition of similar three isomorphisms. So we can
+  > reduce the proof of Theorem 9.2 to separate compatibilities involving each of these three
+  > isomorphisms. We deal with this compatibilities in the next three lemmas.
+- 文献自称的严格程度：**编号定理，给出完整证明**（p.68 "Proof of Theorem 9.2 … $\square$"），
+  **无任何 "conjecture" / "one expects" 弱化措辞**。但注意结论本身只断言**相差一个符号**的交换性
+  （逐字 "commutative **up to a sign**"），不是无条件严格交换。
+- 文献列出的依赖（作者自列，逐字）：Prop. 8.5（$\mu_{\overline{\mathcal{S}}}$ 的存在，p.57–58）；
+  Lemma 8.11（$\mu_B$ 的存在，p.57）；(9.2)（= Lemma 9.1(i)，见 E8）；(9.6)（见 E9）；
+  Sec. 8.3（$\mu$ 的三段分解）；Lemma 9.3、Lemma 9.4、Lemma 9.5；(8.5)。
+
+- **Lemma 9.3 陈述（逐字，p.61）**——⚠ **本轮只核对陈述，未追进证明**（证明跨 p.61–62，用
+  Grothendieck–Serre 对偶的函子性 + 正合三角同构 (9.7)）：
+  > **Lemma 9.3.** *For any $m \in \mathbb{Z}$, the following diagram of isomorphisms between line
+  > bundles on $B$ is commutative:*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^{-2m}_{X/\overline{\mathcal{S}}})|_B &
+  >     \xrightarrow{\ SD_{X/\overline{\mathcal{S}}}|_B\ } &
+  >     \mathcal{B}(\omega^{2m+1}_{X/\overline{\mathcal{S}}})|_B \\
+  >   \big\downarrow{\scriptstyle (9.2)} & & \big\downarrow{\scriptstyle (9.4)} \\
+  >   \mathcal{B}(\omega^{-2m}_{\widetilde{X}/B}(-mD_1-mD_2)) &
+  >     \xrightarrow{\ SD_{\widetilde{X}/B}\ } &
+  >     \mathcal{B}(\omega^{2m+1}_{\widetilde{X}/B}(mD_1+mD_2))
+  >   \end{array}$$
+  > *where the horizontal arrows are given by Grothendieck-Serre duality.*
+
+  （与 Theorem 9.2 不同，本条逐字是**无条件交换**，没有 "up to a sign"。）
+
+- **Lemma 9.4 陈述（逐字，p.62）**——⚠ 本轮只核对陈述与证明首句，未追进证明全文：
+  > **Lemma 9.4.** *Let $\rho : Y \to X$ be a morphism of families of stable supercurves over $B$,
+  > which is a fiberwise resolution of the node $Q : B \to X$ (so it is an isomorphism away from
+  > $X \setminus Q(B)$). For any coherent sheaf $\mathcal{F}$ on $Y$ which is locally free of rank
+  > $1|0$ over the smooth locus, and any line bundle $L$ on $X$ with a trivialization of $Q^*L$, we
+  > have a commutative diagram of isomorphisms of line bundles on $B$,*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\rho_*\mathcal{F} \otimes L) & \xrightarrow{\ (8.5)\ } &
+  >     \mathcal{B}(\rho_*\mathcal{F}) \otimes \mathcal{B}(L) \otimes
+  >     \mathcal{B}(\mathcal{O}_X)^{-1} \\
+  >   \big\downarrow & & \big\downarrow \\
+  >   \mathcal{B}(\mathcal{F} \otimes \rho^*L) & \xrightarrow{\ (8.5)\ } &
+  >     \mathcal{B}(\mathcal{F}) \otimes \mathcal{B}(\rho^*L) \otimes
+  >     \mathcal{B}(\mathcal{O}_Y)^{-1}
+  >   \end{array}$$
+  > *where in the right vertical arrow we use isomorphisms
+  > $\mathcal{B}(\mathcal{O}_X) \simeq \mathcal{B}(\mathcal{O}_Y)$ and
+  > $\mathcal{B}(L) \simeq \mathcal{B}(\rho^*L)$ coming from the exact sequences*
+  > $$0 \to \mathcal{O}_X \to \rho_*\mathcal{O}_Y \to \mathcal{O}_Q \to 0$$
+  > $$0 \to L \to L \otimes \rho_*\mathcal{O}_Y \to L \otimes \mathcal{O}_Q \to 0$$
+  > *and the trivialization of $Q^*L$.*
+
+  证明首句（逐字，p.62，**局部性自陈**）：*"The question is local in the base, so we can assume
+  that we can choose a relative divisor $D \subset X$ supported in the smooth locus of
+  $\pi : X \to B$, and a global section $s$ of $L(D)$ such that the $E = \mathrm{div}(s)$ is also
+  supported in the smooth locus."* ⚠ 注意这句说的是"**在基底上局部**（local **in the base**）"，
+  **不是**"在节点的邻域里局部"——与 E8/E9 记录的那几处 "étale / formal neighborhood of the node"
+  是**不同类型**的局部性断言，引用时不可混为一谈。
+
+- **Lemma 9.5 陈述（逐字，p.63，图表编号 (9.8)）**——⚠ 证明跨 p.63–68（分 Step 1 起若干步），
+  本轮只核对陈述与证明首句：
+  > **Lemma 9.5.** *The following diagram is commutative up to a sign*
+  > $$\begin{array}{ccc}
+  >   \mathcal{B}(\omega^2_{X/\overline{\mathcal{S}}})|_B & \xrightarrow{\ \sim\ } &
+  >     \mathcal{B}(\omega_{X/\overline{\mathcal{S}}})^{-2}|_B \otimes
+  >     \mathcal{B}(\mathcal{O}_X)^{-1}(\Delta)|_B \\
+  >   \big\downarrow{\scriptstyle \sim} & & \big\downarrow{\scriptstyle \sim} \\
+  >   \mathcal{B}(\omega^2_{\widetilde{X}/B}(D_1+D_2)) & \xrightarrow{\ \sim\ } &
+  >     \mathcal{B}(\omega_{\widetilde{X}/B})^{-2} \otimes
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^{-1} \otimes \Psi_1^{-1}\Psi_2^{-1}
+  >   \end{array} \qquad (9.8)$$
+  > *Proof.* Note that it is enough to prove the commutativity of this diagram working in an étale
+  > neighborhood $S$ of a stable supercurve $X_s$ with **one NS node**. We also choose standard
+  > presentation of the node on $X_s$, and use constructions of Sec. 8.3.
+
+- **Proof of Theorem 9.2 的骨架（逐字，p.68）**：
+  > *Proof of Theorem 9.2.* Let us consider the diagram
+  > $$\begin{array}{ccccccc}
+  >   \mathcal{B}(\omega^{-2}_X)|_B & \to & \mathcal{B}(\omega^3_X)|_B & \to &
+  >     \mathcal{B}(\omega^2_X)^{-1}\mathcal{B}(\mathcal{O}_X)^2|_B & \to &
+  >     \mathcal{B}(\omega_X)^2\mathcal{B}(\mathcal{O}_X)^3(-B)|_B \\
+  >   \mathcal{B}(\omega^{-2}_{\widetilde{X}}(-D_1-D_2)) & \to &
+  >     \mathcal{B}(\omega^3_{\widetilde{X}}(D_1+D_2)) & \to &
+  >     \mathcal{B}(\omega^2_{\widetilde{X}}(D_1+D_2))^{-1}
+  >     \mathcal{B}(\mathcal{O}_{\widetilde{X}})^2 & \to &
+  >     \mathcal{B}(\omega_{\widetilde{X}})^2\mathcal{B}(\mathcal{O}_{\widetilde{X}})^3\Psi_1\Psi_2
+  >   \end{array}$$
+  > We claim that each square in this diagram is commutative. Indeed, the left square is commutative
+  > by Lemma 9.3, while the right square is commutative by Lemma 9.5. The commutativity of the
+  > middle square follows from the commutative diagram […]
+  > Here the lower square is commutative by Lemma 9.4 applied to the morphism
+  > $\rho : \widetilde{X} \to X_B$, the line bundle $\omega^2_{X_B/B}$ and the coherent sheaf
+  > $\omega_{\widetilde{X}/B}$. The commutativity of the upper square can be checked using the
+  > compatibility of the isomorphism (8.5) with the resolution
+  > $[\omega_{X_B/B} \to \mathcal{O}_Q]$ for $\rho_*\omega_{\widetilde{X}/B}$. $\square$
+
+  ⚠ **原文疑点（L1，500 dpi 复核）**：上面这个大图表的**右上角项**原文印作
+  $\mathcal{B}(\omega_X)^2\mathcal{B}(\mathcal{O}_X)^3(-B)|_B$，**括号里是 $-B$**。按上下文
+  （Sec. 8.3 的第三个同构里出现的是 $(\Delta)$，且 $B$ 在本节一直用作**边界分量/基底**的记号）
+  这疑为 $(-\Delta)$ 的**排印错误**。本条如实记录原文形态，**不替作者改**，留给 curator。
+- 备注（**穿孔判定，正反两侧逐字证据**）：
+  - **反面（限制条件）一侧的逐字证据**：Theorem 9.2 的图表**四个角全部是"只有两个 $\Psi$"的
+    形式**——$\mu_B$ 的靶逐字是 $\mathcal{B}(\mathcal{O}_{\widetilde{X}})^5 \otimes \Psi_1
+    \otimes \Psi_2$，**没有 $\bigotimes_{i=1}^{m}\Psi_i$ 因子**；$\mu_{\overline{\mathcal{S}}}$ 的
+    靶是 $\mathcal{B}(\mathcal{O}_X)^5(-\Delta)$，**也不带任何 $\Psi_i$ 因子，也不带 $\Delta_R$**。
+    即：**Theorem 9.2 逐字写的同样是 $m=0$（靶无额外穿孔）的情形**，与 E7 的比较论证完全一致。
+  - **支持"局部 / 与穿孔数无关"一侧的逐字证据**：
+    1. Lemma 9.3 的量词逐字是 "*For any $m \in \mathbb{Z}$*"——⚠ 这里的 $m$ 是 $\omega$ 的**幂次**，
+       **不是**穿孔数目，**切勿与 (8.11) 里的 $m$ 混淆**（同一篇论文里 $m$ 被复用于两个不同含义，
+       这是本轮发现的一个真实的记号陷阱）。
+    2. Lemma 9.5 的证明首句逐字自陈只需在"带**一个 NS 节点**的稳定超曲线的平展邻域"里做。
+    3. Lemma 9.4 的陈述对**任意**相干层 $\mathcal{F}$ 与**任意**线丛 $L$ 成立，没有任何与穿孔
+       数目相关的限制。
+  - ⚠ 本抽取**不判定**"把 $m$ 个额外 $\Psi_i$ 加到 Theorem 9.2 图表两侧后是否仍交换"。
+    **本轮没有追进 Lemma 9.3 / 9.4 / 9.5 的证明全文**（只读了陈述与证明首句），因此**不能**断言
+    "Theorem 9.2 的证明与穿孔数无关"。需要该断言者留给 curator，并须标 `inferred: true`。
