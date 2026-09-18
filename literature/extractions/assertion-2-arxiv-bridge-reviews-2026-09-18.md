@@ -121,22 +121,115 @@
     但严格讲这句话的语法主语是 `L(n)`，不是 `V(e^r,z)` 或 `:e^{ikX}:`，**不可**当作断言 (2)
     的额外支持证据引用。
 
-### E2 Dolan–Goddard–Montague 1994（arXiv:hep-th/9410029）—— 本轮次强候选，尚待深入核实
+### E2 Dolan–Goddard–Montague 1994（arXiv:hep-th/9410029）—— 已逐字核实，判定不满足（比 Gebert 更彻底地不满足）
 
-- 位置：全文 65 页（Commun. Math. Phys. 179 (1996) 61–120）。已下载并 `pdftotext -layout`
-  转换（65 页 PDF，3627 行文本），**本轮时间预算受限，未及深入分析**，标记为 **L0（未读）**，
-  仅记录获取状态与后续路线，供下一轮或 curator 优先处理。
-- 类型：review/research article（物理学家写作的格点 CFT 构造论文，作者组包含 Goddard，与
-  Goddard–Olive 系一脉相承，是本轮任务书标注的"第二强候选"）。
-- 获取状态：**全文已下载，可随时读取**（`arxiv.org/pdf/hep-th/9410029` 200，无付费墙），
-  本轮因时间预算优先给了 Gebert 1993 的逐字核实（任务书明确要求"候选 1、2 必须做透，宁可
-  不做候选 3–6"，本轮实际只做透了候选 1，候选 2 停在"已获取但未读"，如实记录，不强行
-  拼凑结论）。
-- 备注：任务书原文提示本文"明确写出 `:e^{ik·X}:` 类顶点算子**并与 FLM 构造对照**"——
-  若这一提示准确，本文可能是本轮乃至三轮里最有希望满足判据条件 2 的候选（因为"与 FLM
-  构造对照"暗示可能存在"物理侧独立构造 + 与数学侧 FLM 构造相比较/等同"这一结构，不同于
-  Gebert 单线构造再改写记号的模式）。**这是本条目留给下一轮的最高优先级任务**，不应因为
-  Gebert 已出结果就跳过。
+- 文献：L. Dolan, P. Goddard, P. Montague, "Conformal Field Theories, Representations and Lattice
+  Constructions", arXiv:hep-th/9410029（v1 1994-10-05）；Commun. Math. Phys. **179** (1996) 61–120。
+- 位置：全文 65 页。已下载 + `pdftotext -layout`（3627 行文本，符号丢失较严重，见下方"记号"
+  备注）+ **PDF 第 29–31 页原始图像核实**（`Read` 工具直接渲染，核实 (5.14)–(5.25) 全部公式），
+  另用 `Grep` 对全文做关键词扫描（`FLM`、`Y\(|Y_|vertex operator algebra|Jacobi identity|axiom`）。
+  本条目现为 **L1（全文关键段落已读，含图像核实的逐字公式）**。
+  重点通读：引言（p.1–2，pdftotext 行 1–82）、§2「Definitions and elementary properties」
+  开篇 Definition 2.1（pdftotext 行 92–122，图像未核实，纯文本清晰无需图像复核）、§5.2
+  「Untwisted construction of a conformal field theory」（pdftotext 行 1578–1730 ≈ PDF pp.29–31，
+  **图像逐式核实**）、triality 相关段落（pdftotext 行 2777–2792，PDF §6 附近）。
+- 类型：research article（不是综述——是 DGM 自己的原创格点 CFT 构造论文，作者组含 Goddard，
+  与 Goddard–Olive 系一脉相承，是本轮任务书标注的"第二强候选"）。
+- 原文陈述（逐字，节选，按出现顺序）：
+
+  **(a) 引言，交代与 FLM/Borcherds 的关系（pdftotext 行 67–72，纯文本无符号丢失）**：
+  > Our treatment is based on the approach of [12], which was inspired by the work of FLM and
+  > Borcherds' general approach to "vertex operator algebras"[13]. Results in a similar direction
+  > have also been independently described in [14].
+  （[12] = Goddard, "Meromorphic Conformal Field Theory", MSRI 1989；[13] = Borcherds 1986；
+  [14] = Frenkel–Huang–Lepowsky, "On axiomatic approaches to vertex operator algebras and
+  modules"，本条目核实 [14] 在全文**只在参考文献表出现一次**，见下方"判据核对"。）
+
+  **(b) §2 Definition 2.1，DGM 自建的"共形场论"公理（不是 FLM/Borcherds 的顶点代数公理）**：
+  > A conformal field theory $(H, F, V, |0\rangle, L)$ consists of a Hilbert space of states $H$,
+  > a dense subspace $F$ [typically the Fock space of states of finite occupation number for some
+  > set of harmonic oscillators] and a set $V$ of linear operators called vertex operators
+  > $V(\psi, z)$ in one-to-one correspondence with the states $\psi \in F$. ... The theory must
+  > satisfy the properties P1–6 detailed below, and is said to be a hermitian conformal field
+  > theory if it satisfies in addition property P7.
+
+  **(c) §5.2，物理场的模展开（(5.17)，PDF p.30 原始图像逐符号核实）**：
+  > $X^j(z) = q^j - ip^j \ln z + i\sum_{n\neq 0}\dfrac{a^j_n}{n}z^{-n}$   (5.17)
+
+  **(d) §5.2，顶点算子的定义（(5.18)，同页，`:=` 直接定义，非独立等式）**：
+  > $V(\psi, z) =: \left(\prod_{a=1}^M \dfrac{i}{(m_a-1)!}\dfrac{d^{m_a}X^{j_a}}{dz^{m_a}}(z)\right)
+  > \exp\{i\lambda\cdot X(z)\} : \hat\sigma_\lambda$   (5.18)
+
+  **(e) §5.2，正规序的显式定义（(5.19)–(5.20)，PDF p.31 原始图像逐符号核实）**：
+  > where the normal ordering denoted by the colons indicates that $q^j$ is written to the left of
+  > $p^j$ as well as the creation operators being written to the left of the annihilation
+  > operators, i.e. if $X^j_<(z) = i\sum_{n\gtrless 0}\dfrac{a^j_n}{n}z^{-n}$ (5.19), then
+  > $:\exp\{i\lambda\cdot X(z)\}: := \exp\{i\lambda\cdot X_<(z)\}e^{i\lambda\cdot q}z^{\lambda\cdot p}
+  > \exp\{i\lambda\cdot X_>(z)\}$   (5.20)
+
+  **(f) §5.2，构造归属：证明"外包"给作者自己更早的论文 [11]**：
+  > We have$^{[11]}$ Theorem 5.1 If $\Lambda$ is even, $\mathcal{H}(\Lambda)$, with the structure
+  > defined above, forms a conformal field theory with central charge $c=d$ ...
+  （[11] = L. Dolan, P. Goddard and P. Montague, *Nucl. Phys.* B338 (1990) 529 —— 即 DGM 自己
+  1990 年的更早论文，本文书目表第 11 条，本条目已核实。）
+
+  **(g) 全文对"FLM"的全部四处正文提及（`Grep` 全文核实，逐条列出，均为散文引用，无一处伴随
+  `Y(v,z)` 记号）**：
+  - 行 51–56（引言）：介绍 Monster module 构造背景（"constructed initially by Frenkel,
+    Lepowsky and Meurman (FLM)[5] from the Leech lattice"），叙述性历史陈述。
+  - 行 60（引言）：提到"the triality structure of the form exhibited by FLM"，仍是叙述 FLM
+    结果内容，不涉及记号。
+  - 行 67–72（引言，即 (a)）：交代方法论谱系，如上。
+  - 行 78–79（引言，路线图段落）："Section 6 gives the results of these constructions, and
+    discusses the connection with the Monster provided by the work of FLM"——预告 §6 会讨论
+    FLM 结果的**内容**（Monster 群的实现），不是记号对照。
+  - 行 2780、2789（§6/triality 附近）：两次提到"the triality structure of FLM"，同样是讨论
+    FLM 结果里"triality 这个群论结构"，与顶点算子记号无关。
+
+- 文献自称的严格程度：research article。§2 Definition 2.1–Proposition 2.16 是 DGM **自建的
+  一套物理学家式共形场论公理系统**（P1–P7 性质，Virasoro 表示 + 局域性/OPE 公理，见 (b)），
+  §5.2 是在这套自建公理系统下对格点 CFT 的具体构造（(5.14)–(5.31)），Theorem 5.1 的证明
+  归属 DGM 自己 1990 年的更早论文 [11]（见 (f)），不是本文原创证明。全文**没有一处**采用
+  FLM/Borcherds 的顶点代数（VOA）公理系统本身作为构造或验证的框架——DGM 自陈其方法"based
+  on the approach of [12]" 且"[12] was inspired by the work of FLM and Borcherds"（(a)），
+  即隔了两层："DGM 的方法" ← "被 [12] 启发" ← "[12] 被 FLM/Borcherds 启发"，从未把 FLM/
+  Borcherds 的 `Y(v,z)` 结构映射记号本身写入正文、更没有拿它与 (5.18) 的 `V(ψ,z)` 做逐符号
+  对照或证明等价。
+- 文献列出的依赖：Theorem 5.1（格点 CFT 存在性）依赖 [11]（DGM 自己 1990 年论文，证明外包，
+  见 (f)）；方法论谱系依赖 [12]（Goddard 1989 MSRI）、[13]（Borcherds 1986）、[14]
+  （Frenkel–Huang–Lepowsky "On axiomatic approaches to VOA", 1989，仅在参考文献表出现，
+  正文未展开引用其公理内容）。
+- 备注（判据核对，本条目的核心结论）：
+  - **判据条件 1（写出 `X^μ(z)` 类对象 + 正规序）：满足，且是三轮里写得最详尽的一版**。
+    (5.17) 携带格点指标 `j`，(5.19)–(5.20) 把正规序拆成 `X_<`、零模 `e^{iλ·q}z^{λ·p}`、`X_>`
+    三段并给出显式公式（比 Gebert 的口头正规序定义更精确，比 Nikolov–Todorov 更贴近教科书写法）。
+  - **判据条件 2（两个独立构造对象之间的等式）：不满足，且比 Gebert 1993 失败得更彻底**——
+    Gebert 至少存在"VOA 侧先给抽象公理（§3.1 Definition 1）、后验证具体构造满足公理"这一
+    结构，物理侧的失败在于"记号装置不是独立构造"；DGM 则**从未在正文写出 FLM/Borcherds 的
+    `Y(v,z)` 结构映射记号本身**——`Grep` 对全文 3627 行做 `Y\(|Y_|vertex operator
+    algebra|Jacobi identity|axiom` 检索只命中 3 处，其中与 VOA 记号最相关的一处（[14] 的
+    书目条目，pdftotext 行 3601）**只是参考文献表的一条书目引用**，不是正文使用。换言之，
+    本文根本**不存在"VOA 侧的独立构造"这一半**——它只用**自己的**共形场论公理系统
+    （Definition 2.1, P1–P7）来构造并验证 `V(ψ,z)`，FLM/Borcherds 的 VOA 形式化仅以历史
+    谱系的方式在引言散文中被提及三次（(g) 逐条列出），从未被写出记号、从未被拿来做逐符号
+    对照，更谈不上被证明与 `V(ψ,z)` 相等。这是一种"连尝试都没尝试"的不满足，比 Gebert
+    "尝试了但物理侧不独立"的不满足更彻底。
+  - **附带排查：pdftotext 符号丢失是否可能掩盖了被丢弃的 `Y(v,z)` 记号？**——已用 `Read`
+    工具直接渲染 PDF pp.29–31 原始图像核实 (5.14)–(5.25) 全部公式，图像中确认没有任何
+    `Y(·,·)` 记号出现（该页面全部顶点算子记号统一用 `V(ψ,z)`/`\hat\sigma_\lambda`）；
+    引言与 triality 段落（(g) 各行）纯文本清晰无符号丢失迹象（连续英文句子，非公式行），
+    `Y` 作为拉丁字母不属于 pdftotext 易丢失的希腊字母/花体符号类别，本条目判断"记号被
+    pdftotext 误删"的风险可以排除，圖像核實的頁面之外的正文段落用纯文本 grep 已足够可靠。
+  - **附带问题 (b) 连续动量↔离散格点接口**：与 Gebert 同型，本文全文构造只处理**离散**格点
+    `Λ`（偶格），完全没有连续动量的物理设定，未处理该接口问题。
+  - **附带问题 (c) δ 归一化**：本文 cocycle 算子 `σ_λ`、`\hat\sigma_λ`（(5.21)）处理仔细，
+    但因动量离散，**不需要**也**没有**出现 `δ(k-k')` 类型归一化，同 Gebert，此问题不适用。
+  - **triality 段落（(g) 最后两处，pdftotext 行 2777–2792）本条目判断不构成"记号对照"**：
+    通读该段（`H(C)^± = V_0^± \oplus \cdots`，"The triality structure of FLM is an involution
+    acting on `H(C)` which mixes the straight and twisted spaces..."）——这里"FLM 的 triality
+    结构"指的是 FLM 在 Monster module 构造里发现的一个**群论对称性/对合**，DGM 讨论的是
+    "能否把这个对称性推广到更一般的格点/编码构造"，与"顶点算子记号是否相等"是完全不同的
+    问题，不能作为判据条件 2 的证据。
 
 ### E3–E6 候选 3–6（任务书标注"若时间不足可只标 L0 并简述"）—— 本轮判定为时间预算不足，未展开
 
@@ -158,41 +251,53 @@
 
 ## 结论
 
-**(C) 部分结论，倾向于 (B) 但不满足自我设定的证据强度要求，不强行判定**。
+**(A) 结论明确：本轮（第三轮）两个优先候选（Gebert 1993、Dolan–Goddard–Montague 1994）
+均已逐字核实完毕，均不满足断言 (2) 的严格判据，且两者失败的方式不同、互相印证**。
 
-本轮唯一深入核实的候选（Gebert 1993, hep-th/9308151, §4.2）是**迄今三轮里结构上最接近
-断言 (2) 的文本**：它满足判据条件 1（写出带时空指标的物理场 `Q^μ(z)` 与显式正规序），
-且其 VOA 侧结构映射 `V(·,z)` 确实先经抽象公理独立定义（比 Nikolov–Todorov 更强的独立性）——
-但物理侧的 `Q^μ(z)` 本身缺乏独立构造，作者原文用"formally"与"which really only has a
-meaning when exponentiated"两处措辞**自陈**该场只是既有构造 (69) 的记号改写装置。因此，
-按照与前两轮完全一致的严格判据（定义式 ≠ 识别式），**本条不满足断言 (2)**，与
-Nikolov–Todorov 2004 属同一失败模式，但本条的"两侧独立性"程度确实比 N-T 更高（VOA 侧
-独立性强，物理侧独立性仍缺失），值得在图节点的 notes 里作为"目前读到的最强 near-miss"
-记录，供后续判断"识别式在数学物理文献里是否根本罕见/不存在"提供更强的负面证据密度。
+**Gebert 1993**（hep-th/9308151, §4.2）是**三轮里结构上最接近断言 (2) 的文本**：满足
+判据条件 1（写出带时空指标的物理场 `Q^μ(z)` 与显式正规序），且其 VOA 侧结构映射 `V(·,z)`
+确实先经抽象公理独立定义（§3.1 Definition 1，比 Nikolov–Todorov 更强的独立性）——但物理侧
+的 `Q^μ(z)` 本身缺乏独立构造，作者原文用"formally"与"which really only has a meaning when
+exponentiated"两处措辞**自陈**该场只是既有构造 (69) 的记号改写装置。**失败模式：VOA 侧
+独立，物理侧不独立（同一构造的两种记号写法）。**
 
-**本轮未能完成任务书要求的"候选 1、2 都做透"这一目标**——候选 2（Dolan–Goddard–Montague
-1994）虽已下载全文（无付费墙，可随时读取），但受限于本轮时间预算，**未及分析**，是本轮
-最大的遗留风险点。任务书特别提示该文"与 FLM 构造对照"，如果这一提示准确，候选 2 结构上
-可能与 Gebert 1993 不同（存在"物理侧独立构造 + 与数学侧比较"的机会），**不能仅凭候选 1
-的负面结果就推断候选 2 也会失败**，下一轮必须优先读它，而不是转向候选 3–6。
+**Dolan–Goddard–Montague 1994**（hep-th/9410029）失败得**更彻底**：全文构造了详尽的物理侧
+顶点算子（(5.17)–(5.20)，`X^j(z)` 模展开 + 显式正规序，判据条件 1 满足度是三轮最高），
+但**全文正文从未写出 FLM/Borcherds 的 VOA 结构映射 `Y(v,z)` 记号本身**——`Y(v,z)` 一类记号
+仅以书目引用的形式出现一次（参考文献表 [14]），FLM 的名字在正文出现 4 次但全部是叙述
+FLM 的**结果内容**（Monster module、triality 群论结构），从未把 `Y(v,z)` 与 `V(ψ,z)` 并列
+对照。DGM 用的是**自建的**物理学家式共形场论公理系统（Definition 2.1, P1–P7），只在方法论
+谱系上"两层转引"式地提及受 FLM/Borcherds 启发，从未采用 VOA 公理系统本身。**失败模式：
+VOA 侧对象根本不在场，无从谈"识别"。**
+
+两个失败模式合起来构成了比前两轮更强的负面证据密度：**三篇被认为最有希望的"物理↔VOA 桥梁"
+文献（Nikolov–Todorov 2004、Gebert 1993、Dolan–Goddard–Montague 1994）分别以"定义式非识别式"、
+"物理侧非独立构造"、"VOA 侧记号根本不在场"三种不同方式全部未能满足断言 (2) 的严格判据**。
+
+候选 3–6（Goddard–Olive MSRI、Gaberdiel、FLM 二手转引、Kac–Raina 复核）本轮零进展，如实
+标记 L0，留给下一轮或 curator 判断是否值得继续追加检索预算，还是转而接受"断言 (2) 在
+公开数学物理文献里可能根本没有以'两个独立对象随后被等同'的强形式被写出过"这一假设，把图
+节点标注为 `physical-argument`/`inferred` 并附三轮检索的负面证据摘要。
 
 ### 本轮明确未能核实/未完成的事项（残余风险，逐条列出）
 
-1. **Dolan–Goddard–Montague 1994（hep-th/9410029）全文未读**——已下载
-   （`C:\Users\charles\AppData\Local\Temp\a2r3\dgm1994.pdf` / `dgm1994.txt`，65 页/3627 行），
-   本轮唯一遗留的"高优先级、低获取成本"目标，**强烈建议下一轮第一件事就是读它**，而不是
-   六个候选平均分配时间。
-2. **Gebert 1993 §4.2 引用的 [39],[38],[40] 三篇"物理动机"文献的完整书目未核实**——本条目
+1. **Gebert 1993 §4.2 引用的 [39],[38],[40] 三篇"物理动机"文献的完整书目未核实**——本条目
    推测 [40] 可能是 Goddard–Olive（本项目 Round 2 已判定该文献真正不可获取），但未逐一核对
    参考文献表条目号与书目细节，留待后续（若要核实，需读 gebert1993.txt 参考文献表全文，
    本轮已定位大致行号 3260–3340 附近但未逐条转录）。
-3. **候选 3（Goddard–Olive MSRI Publications vol.3）的获取渠道完全未尝试**——历史上"物理
-   学家与数学家当面对照记号"的最可能现场，任务书标注为高价值，本轮零进展。
-4. **候选 4（Gaberdiel hep-th/9910156）** —— arXiv 开放，获取成本低，本轮零进展，是下一轮
-   除候选 2 外的第二优先级。
-5. **候选 5、6** —— 本轮零进展，见上方候选清单说明。
-6. **本条目对 Gebert 1993 的"判据不满足"结论本身依赖对"formally"/"only has a meaning when
+2. **候选 3（Goddard–Olive MSRI Publications vol.3）的获取渠道完全未尝试**——历史上"物理
+   学家与数学家当面对照记号"的最可能现场，任务书标注为高价值，本轮零进展，是下一轮的
+   最高优先级（因为候选 1、2 已双双确认失败，候选 3 是唯一"当面对照"历史现场的候选）。
+3. **候选 4（Gaberdiel hep-th/9910156）** —— arXiv 开放，获取成本低，本轮零进展，是下一轮
+   除候选 3 外的第二优先级。
+4. **候选 5、6** —— 本轮零进展，见上方候选清单说明。
+5. **本条目对 Gebert 1993 的"判据不满足"结论本身依赖对"formally"/"only has a meaning when
    exponentiated"两处措辞的解读**——抽取者判断这是作者自陈"记号装置而非独立构造"，但这是
    一个解释性判断（虽基于逐字原文，但涉及对论证结构的理解），按 `literature/CLAUDE.md`
    规则 2，若 curator 或 reviewer 认为这一解读过严，应重新审视原文（PDF pp.28–30，已给出
    精确页码，可独立复核），本条目的判定不应被当作不可挑战的定论。
+6. **DGM 1994 的"FLM 记号从未在正文出现"这一结论依赖对全文 3627 行 `pdftotext` 文本的
+   `Grep` 关键词扫描 + 三页图像核实（PDF pp.29–31）**——已排查"pdftotext 丢失符号导致误判"
+   的风险（见 E2 备注），但**未对全文 65 页逐页做图像核实**（只核实了 §5.2 构造性核心的
+   3 页），若 curator/reviewer 认为有必要，可对引言与 §6 triality 段落（pdftotext 行
+   51–82、2777–2792）也做图像复核，本条目判断风险很低但不排除。

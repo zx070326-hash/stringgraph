@@ -5609,3 +5609,44 @@
             p.31 附近，L(n) Virasoro 生成元与弦论已知表达式一致）——这是关于 Virasoro 生成元的确认句，
             不是关于顶点算子本身的确认句，不可误引为断言 (2) 的支持证据。}
 }
+
+@article{dolan-goddard-montague-1994,
+  author  = {Dolan, L. and Goddard, P. and Montague, P.},
+  title   = {Conformal Field Theories, Representations and Lattice Constructions},
+  journal = {Commun. Math. Phys.},
+  volume  = {179},
+  pages   = {61--120},
+  year    = {1996},
+  eprint  = {hep-th/9410029},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-18 第三轮"断言 (2)"检索登记（arXiv v1 1994-10-05 全文开放，
+            无付费墙；正式发表于 Commun. Math. Phys. 179 (1996) 61--120）。任务书标注的本轮"第二强
+            候选"，已逐字核实，本条 L1（`pdftotext -layout` 落盘 3627 行 + PDF pp.29--31 原始图像
+            核实 (5.14)--(5.25) 全部公式 + 全文 `Grep` 扫描 `FLM`、`Y\(|Y_|vertex operator
+            algebra|Jacobi identity|axiom` 关键词）。
+            **本文是 DGM 自己的原创格点 CFT 构造论文（非综述）**，§2 Definition 2.1 建立自建的
+            物理学家式共形场论公理系统 `(H,F,V,|0>,L)`（性质 P1--P7：Virasoro 表示 + 局域性/OPE），
+            §5.2 在此框架下具体构造格点 CFT：field `X^j(z)=q^j-ip^j ln z+i Σ_{n≠0}(a^j_n/n)z^{-n}`
+            (5.17)，顶点算子直接 `:=` 定义 `V(ψ,z)=:(Π...d^{m_a}X^{j_a}/dz^{m_a}(z))
+            exp{iλ·X(z)}:σ_λ` (5.18)，正规序显式拆分 `X_<`/零模`e^{iλq}z^{λp}`/`X_>` (5.19)--(5.20)，
+            Theorem 5.1（存在性）证明外包给作者自己更早的 Nucl.Phys. B338(1990)529 [11]。
+            **★★ 对断言 (2) 判据的严格核实结论：不满足，且比 Gebert 1993 失败得更彻底**——
+            (a) 判据条件 1 满足度是三轮最高（(5.17)--(5.20) 公式最完整、最教科书化）；
+            (b) 判据条件 2 **完全不满足**：`Grep` 全文 3627 行找 `Y\(|Y_|vertex operator
+            algebra|Jacobi identity|axiom` 只命中 3 处，唯一与 VOA 记号相关的一处
+            （Frenkel--Huang--Lepowsky "On axiomatic approaches to VOA" [14]）**只出现在参考文献
+            表**，正文从未写出 FLM/Borcherds 的结构映射 `Y(v,z)` 记号本身；"FLM"在正文出现 4 次
+            （引言 2 次、triality 段落 2 次）全部是叙述 FLM **结果内容**（Monster module 构造、
+            triality 群论对称）的历史性陈述，逐字例如"Our treatment is based on the approach of
+            [12], which was inspired by the work of FLM and Borcherds' general approach to 'vertex
+            operator algebras'[13]"——方法论谱系"隔了两层"提及，从未把 `Y(v,z)` 与 `V(ψ,z)` 并列
+            对照或证明相等。⇒ 本文根本不存在"VOA 侧独立构造"这一半，只用**自建的**物理公理系统
+            （非 FLM/Borcherds 公理）构造 `V(ψ,z)`，FLM 仅作历史谱系提及，是"连尝试都没尝试"的
+            不满足，比 Gebert 1993"尝试了但物理侧不独立"更彻底。已用图像核实排除"pdftotext 丢失
+            `Y(v,z)` 符号导致误判"的风险（PDF pp.29--31 图像中顶点算子记号统一为 `V(ψ,z)`，未见
+            任何 `Y(·,·)`）。详见 extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md E2。
+            **(b)(c) 两个附带问题**：与 Gebert 同型——本文全文只处理离散格点 Λ（偶格），不涉及
+            连续动量接口 (b)；cocycle 算子 `σ_λ`/`\hat σ_λ` (5.21) 处理仔细但无 δ 函数归一化 (c)
+            不适用。}
+}
