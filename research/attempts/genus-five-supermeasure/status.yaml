@@ -1,7 +1,18 @@
-state: draft
+state: abandoned
 reviewer: null
 verdict: null
 notes: |
+  2026-09-18 (lead 裁定)：按 prover 自己给出的两个选项取 **abandoned**。依据 `research/CLAUDE.md`
+  生命周期第 5 条——"此路不通或被证伪，如实记录，不要删除（负面结果也是结果）"。本尝试不是
+  被证伪，而是 scoping 判定**此路对本项目不通**（无超代数几何资产、前沿以周为单位推进、
+  本项目无信息或技术优势），且 prover 明确预期它不会转 `under-review`（没有可供对抗审查的
+  原创论证步骤）。保留 `draft` 会让它在活跃尝试列表里长期占位而永不推进，`abandoned` 才是
+  如实的状态。目录与全部调研内容**保留不删**，供日后有超几何背景的人力重新评估。
+
+  本轮的可执行产出（§5 的图审计建议：登记 Donagi–Noja 2608.24996 / Corrêa–Noja 2606.06733 /
+  FKP 2408.11136 / Donagi–Ott / Wang，以及 2505.02950 对亏格 3 "已解决"印象的重新质疑）
+  已由 lead 另行派 researcher + curator 执行，不在本尝试内完成。
+
   2026-09-18 (theorem-prover, scoping round, 唯一一轮): 本尝试的性质是 `research/CLAUDE.md`
   生命周期意义下的 **scoping**，不是证明推进。任务：判断"显式构造亏格 5 超弦测度"是否是本项目
   可攻目标；若不是，找最小可攻子问题。
