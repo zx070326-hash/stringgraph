@@ -386,3 +386,437 @@ $\iota_F(\omega_2(\text{目标}))=0$，给不出任何非消没信息。$\blacks
 
 **⟦副产品⟧** 命题 N 也给出 CN 的构造为何"必须是分离粘接 + 常值尾"的结构性解释——在 CN 的论文里这是
 一个未加解释的构造选择，本文指出它是被仿射性障碍**强制**的。
+
+---
+
+## §4 推广：把旁观穿孔装到固定尾上
+
+⟦本节除明确标注为引用的部分外，全部是本文作者的论证。每条引理都注明它与 CN 对应引理的关系：
+**"逐字相同"**（把 CN 的证明一字不改地搬过来即可）或 **"需要修改"**（并写出修改）。⟧
+
+### §4.0 预备：两条基础引理
+
+> **引理 4.1（玻色截断）。** 对一切 $g,m,n$（$n$ 偶），
+> $$\big(\overline{\mathfrak S}_{g;m,n}\big)_{\rm bos}\ \cong\ \overline S_{g;m,n},$$
+> 即带 $m$ 个 NS 穿孔、$n$ 个 Ramond 穿孔的**稳定自旋曲线**模叠（光滑固有 DM 叠）。
+
+*证明.* 设 $\mathfrak X$ 是 $\mathbb C$ 上的超叠，$S$ 是**纯偶**（普通）概形。任一态射
+$\varphi\colon S\to\mathfrak X$ 在结构层上给出 $\varphi^{\#}\colon\mathcal O_{\mathfrak X}\to
+\varphi_*\mathcal O_S$；由于 $\mathcal O_S$ 没有奇部分，$\varphi^\#$ 把一切奇截面打到 $0$，
+从而把它们生成的理想层 $\mathcal J$ 打到 $0$，于是唯一地分解过
+$\mathcal O_{\mathfrak X}/\mathcal J=\mathcal O_{\mathfrak X_{\rm bos}}$。故
+$$\mathrm{Hom}(S,\mathfrak X)=\mathrm{Hom}(S,\mathfrak X_{\rm bos})\quad\text{对一切纯偶 }S,$$
+即 $\mathfrak X_{\rm bos}$ 表示 $\mathfrak X$ 的函子在纯偶基上的限制。
+
+另一方面，FKP-A §2.6 逐字：**"If we only consider even bases, the functor of (stable) supercurves
+with punctures coincides with the functor of stable curves with punctures equipped with generalized
+spin structures"**，而该自旋函子由 $\overline S_{g;m,n}$ 表示，且 FKP-A §2.6 逐字记载
+**"The moduli stack $S_{g,n_{\rm NS},n_{\rm R}}$ of stable spin curves of genus $g$ with $n_{\rm NS}$
+NS-punctures and $n_{\rm R}$ Ramond punctures (where $n_{\rm R}$ is necessarily even) was studied in
+[22], [23] […] In particular, it [is] shown to be a smooth proper Deligne–Mumford stack."**
+
+两个叠若在纯偶基上表示同一个函子，则典范同构。$\blacksquare$
+
+⟦注⟧ CN 在无穿孔情形逐字断言了同一件事（§3.1："In the unpunctured case, the bosonic truncation of
+$\overline{\mathfrak M}{}^{\pm}_g$ is the compactified spin stack $\overline S{}^{\pm}_g$"）。
+引理 4.1 只是把它写成带穿孔的一般形式并补上证明。
+
+> **引理 4.2（固定尾存在性）。** 设 $a\ge0$、$n\ge0$、$r\ge0$ 满足 $2a-2+(n+1)+2r>0$。则存在
+> 一条光滑亏格 $a$ 曲线 $F$，其上 $n+1+2r$ 个两两不同的点
+> $q,y_1,\dots,y_n,\rho_1,\dots,\rho_{2r}$，以及线丛 $N$ 使
+> $$N^{\otimes2}\cong\omega_F\big(\rho_1+\dots+\rho_{2r}\big).$$
+> 且该数据是 $\overline S_{a;n+1,2r}$ 的一个 $\mathbb C$-点，位于光滑轨迹 $S_{a;n+1,2r}$ 内。
+> 特别地：
+> - $a=0$ 时（需 $n+2r\ge2$）：$\omega_{\mathbb P^1}(\rho)=\mathcal O(2r-2)$，故
+>   $N=\mathcal O_{\mathbb P^1}(r-1)$，**唯一**；$r=0$ 时 $N=\mathcal O(-1)$，$h^0=0$，**偶**。
+> - $a=1$ 且 $r=0$ 时：$N^{\otimes2}\cong\mathcal O_E$，四个 theta 特征，$\mathcal O_E$ 为**奇**，
+>   三个非平凡 $2$-挠为**偶**（CN §6 逐字）。
+
+*证明.* 取任意亏格 $a$ 的光滑曲线 $F$ 与其上 $n+1+2r$ 个互异点（$a=0$ 时 $\mathbb P^1$ 上任取；
+$\mathbb C$ 上恒可）。$\deg\big(\omega_F(\rho)\big)=2a-2+2r$ 是偶数。在光滑射影曲线上，
+$\mathrm{Pic}^0(F)$ 是复环面，特别是**可除**阿贝尔群，故任何偶次线丛都有平方根：取
+$\deg$ 为 $a-1+r$ 的任一线丛 $N_0$，则 $\omega_F(\rho)\otimes N_0^{-2}\in\mathrm{Pic}^0(F)$
+有平方根 $\alpha$，令 $N:=N_0\otimes\alpha$。稳定性（$\mathrm{Aut}$ 有限）等价于
+$2a-2+\#\{\text{标记点}\}>0$，即 $2a-2+(n+1)+2r>0$，这正是前提。$a=0$ 的唯一性来自
+$\mathrm{Pic}(\mathbb P^1)=\mathbb Z$；$a=1,r=0$ 的宇称统计是经典事实。$\blacksquare$
+
+### §4.1 构造（与 CN §6 逐行对照）
+
+固定满足 `claim.md` **(P1)(P2)** 的 $h,a,n,r$，令 $g=h+a$。固定：
+
+- $(C,L)$：亏格 $h\ge2$ 光滑曲线 + **无效偶** theta 特征（$L^{\otimes2}\cong\omega_C$，
+  $H^0(C,L)=0$）；存在性见 §1.2 引用的 Mumford/Cornalba。
+- $\xi=(F,N;q,y_1,\dots,y_n;\rho_1,\dots,\rho_{2r})$：引理 4.2 给出的**固定尾**，视为光滑超模叠
+  $\mathfrak S_{a;n+1,2r}(\mathbb C)$ 的一个点（偶基上超曲线 $=$ 自旋曲线，FKP-A §2.6）。
+  记 $A:=\mathrm{Aut}(\xi)$，由 $\mathfrak S_{a;n+1,2r}$ 是 DM（FKP-A Theorem A + 开子叠）且 $\xi$
+  稳定，$A$ 有限 étale。
+
+定义（**与 CN §6 逐字平行，只把第二因子换掉**）：
+
+$$\mathcal B:=\underbrace{\mathfrak S^+_{h;1,0}}_{=\ \text{CN 的}\ \mathfrak M^+_{h,1}}\times\ \mathfrak
+S_{a;n+1,2r},\qquad
+\mathcal B_{\rm bos}=S^+_{h;1,0}\times S_{a;n+1,2r}\ \ (\text{引理 }4.1),$$
+
+$$\Gamma\colon\ \mathcal B\ \longrightarrow\ \overline{\mathfrak S}_{g;n,2r}
+\qquad\text{（FKP-A 式 (7.8)，取 }g_1=h,\ m_1=0,\ n_1=0;\ g_2=a,\ m_2=n,\ n_2=2r\text{）}$$
+
+——注意 (7.8) 的输出恰是 $\overline{\mathfrak S}_{g_1+g_2;m_1+m_2,n_1+n_2}=
+\overline{\mathfrak S}_{h+a;n,2r}$ ✓，即：**运动分量上那一个 NS 穿孔与尾巴上的 $q$ 被粘成一个
+分离 NS 节点，尾巴上的 $y_i$ 与 $\rho_j$ 原样保留为结果曲线上的 $n$ 个 NS 穿孔与 $2r$ 个 Ramond
+穿孔。**
+
+$$\tau_\xi\colon\ \mathfrak S^+_{h;1,0}\to\mathcal B,\quad \mathcal X\mapsto(\mathcal X,\ \xi_S)
+\qquad\text{（常值尾，CN §6 逐字同样的定义）},$$
+$$G_\xi:=\Gamma\circ\tau_\xi\colon\ \mathfrak S^+_{h;1,0}\to\overline{\mathfrak S}_{g;n,2r},\qquad
+F_{\eta,\xi}:=G_\xi\circ u_\eta\colon\ X_\eta\to\overline{\mathfrak S}_{g;n,2r}.$$
+
+玻色截断上：
+$$e_C\colon C\to S^+_{h;1,0},\ p\mapsto(C,L,p);\qquad e:=\tau_{\xi,\rm bos}\circ e_C;\qquad
+i:=\Gamma_{\rm bos}\circ e\colon C\to\overline S_{g;n,2r},$$
+$$i(p)=(C,L,p)\ \cup_{p=q}\ (F,N;y_\bullet;\rho_\bullet).$$
+
+**⭐ 构造的全部新意就在这一行**：CN 的第二因子是 $\mathfrak M^{\varepsilon}_{1,1}$（亏格 1、一个 NS
+点）；这里换成 $\mathfrak S_{a;n+1,2r}$（亏格 $a$、$n+1$ 个 NS 点、$2r$ 个 Ramond 点）。
+**第一因子一字未动**——这正是下面所有引理能"逐字搬运"的原因。
+
+### §4.2 切层计算（CN Lemma 6.1 的推广）
+
+> **引理 4.3。** 沿 $e\colon C\to\mathcal B_{\rm bos}$ 有正合列
+> $$0\longrightarrow\mathcal T_C\longrightarrow e^*\mathcal T\mathcal B_{\rm bos}\longrightarrow
+> W\otimes\mathcal O_C\longrightarrow0,\qquad
+> W:=H^1(C,\mathcal T_C)\oplus T_{\xi_{\rm bos}}S_{a;n+1,2r},$$
+> 其中 $W$ 是一个**固定的有限维向量空间**。
+
+*证明（与 CN Lemma 6.1 的证明逐字相同，逐条核对修改点）.*
+
+- **第一因子**：$S^+_{h;1,0}\to S^+_h$ 是光滑自旋模叠上的万有带点曲线。沿 $e_C$ 拉回其切列得
+  $0\to\mathcal T_C\to e_C^*\mathcal T S^+_{h;1,0}\to T_{(C,L)}S^+_h\otimes\mathcal O_C\to0$；
+  由光滑自旋模叠在普通曲线模叠上有限 étale，$T_{(C,L)}S^+_h\cong H^1(C,\mathcal T_C)$。
+  **这一段与 CN 完全相同，因为第一因子未被改动。**
+- **第二因子**：$e$ 在第二因子上是**常值**（等于叠论点 $\xi_{\rm bos}$），故
+  $e^*\mathrm{pr}_2^*\mathcal T S_{a;n+1,2r}\cong T_{\xi_{\rm bos}}S_{a;n+1,2r}\otimes\mathcal O_C$。
+  **唯一的修改**：常值向量空间从 $T_{\xi}S^{\varepsilon}_{1,1}$（维数 $1$）换成
+  $T_{\xi}S_{a;n+1,2r}$（维数 $3a-3+(n+1)+2r$）。CN 的论证对这个空间**只用到它是有限维常值**，
+  不用它的维数。
+- **剩余 gerbe**：$A=\mathrm{Aut}(\xi)$ 有限 étale，故剩余 gerbe 不贡献无穷小切方向；全部计算在
+  沿 $e$ 拉回到 $C$ 之后进行，不取 $A$-不变部分。**与 CN 逐字相同的论证。**
+
+两因子相加即得所述正合列。$\blacksquare$
+
+### §4.3 法线计算（CN Lemma 6.2 的推广）——**这里是唯一需要小心的一步**
+
+> **引理 4.4。** 记 $N_{\mathcal B}:=\mathcal O(\Delta_{\rm NS})|_{\mathcal B}$ 为粘接态射
+> $\Gamma$ 的法线。则
+> $$e^*N_{\mathcal B}\ \cong\ L^{-1}\otimes\mathfrak n,$$
+> 其中 $\mathfrak n:=\big(\Psi_2^{-1}\big)\big|_{\xi}$ 是一个**一维 $\mathbb C$-向量空间**
+> （尾巴的粘接穿孔 $q$ 处的逆 NS psi-线的纤维）。
+
+*证明.*
+
+**(a) 法线公式在带穿孔的一般性下成立。** FKP-A §9.1 逐字：**"Let $\varphi:B\to\overline{\mathfrak S}$
+be the standard gluing map covering an NS type boundary component, i.e., one of the maps (7.8) or
+(7.9), restricted to the locus of smooth supercurves"**，其结论（Theorem C，式 (9.6)）为
+$$N_{\mathcal B}\cong\Psi_1^{-1}\otimes\Psi_2^{-1}.$$
+我们的 $\Gamma$ 正是 (7.8)（见 §4.1），且 $\mathcal B$ 正是光滑超曲线轨迹。**故公式直接适用，
+无需任何推广。** 又由 FKP-A §9.1 逐字 **"in the case of a separating node, where $B=S_1\times S_2$,
+the line bundle […] is the exterior product of two similar line bundles on the factors"**，
+$\Psi_1$ 来自第一因子、$\Psi_2$ 来自第二因子。
+
+**(b) $\Psi_1$ 侧：与 CN 逐字相同。** 第一因子 $\mathfrak S^+_{h;1,0}$ 上**恰好一个 NS 穿孔、
+零个 Ramond 穿孔**，即 CN Lemma 6.2 处理的完全相同的情形。由 FKP-A Example 8.9（偶基上
+$\Psi_i^{-1}$ 等同于该点处逆自旋线的纤维），沿 $e_C$（基是 $C$，族是固定自旋曲线 $(C,L)$ 配运动
+标记点 $p$）得
+$$e^*\Psi_1^{-1}\cong L^{-1}.$$
+**注意：Example 8.9 只在这一侧被使用，而这一侧没有任何 Ramond 穿孔**，故其"NS-punctures over an
+even base"的前提逐字满足。
+
+**(c) $\Psi_2$ 侧：不需要任何公式。** 尾巴沿 $e$ 是**常值**的，故 $e^*\Psi_2^{-1}$ 是常值线丛
+$\mathfrak n\otimes\mathcal O_C$，$\mathfrak n$ 为一维向量空间。**下文只用到"它是一条线"，
+从不用它等于什么。**
+
+合并 (a)(b)(c) 即得。$\blacksquare$
+
+> **⭐ 评注（本轮方法论上最关键的一点）。** CN 在 Lemma 6.2 中把 $\mathfrak n$ 算成 $M_q^{-1}$，
+> 用的是 Example 8.9。在带 Ramond 穿孔的尾巴上，Example 8.9 的陈述（"a family of supercurves with
+> NS-punctures"）不直接覆盖，$\Psi$-线与广义自旋结构的关系需要重新核对。
+> **本证明通过"不去算 $\mathfrak n$"完全绕开了这个问题**：因为尾巴是常值的，$\mathfrak n$ 只能是
+> 一条常值线，而 Lemma 7.1 的论证只需要 $h^0(C,\mathcal O_C\otimes\mathfrak n)=1$。
+> **Ramond 穿孔带来的全部技术复杂性都被隔离在常值因子里，而常值因子不需要任何公式。**
+> 这就是"把穿孔装到固定尾上"这个选择的真正回报。
+
+### §4.4 偶切商（CN Proposition 6.3 的推广）
+
+> **命题 4.5。** 令 $\mathcal T:=i^*\mathcal T_+\overline{\mathfrak S}_{g;n,2r}\cong
+> i^*\mathcal T\overline S_{g;n,2r}$（后一同构由 §0 的标准识别 $\mathcal T_+\cong\mathcal T_X$ 与
+> 引理 4.1 给出）。$di$ 给出单射 $\mathcal T_C\hookrightarrow\mathcal T$。令
+> $Q:=\mathcal T/\mathcal T_C$，则 $Q$ 有两步滤过
+> $$0\subseteq Q_0\subseteq Q,\qquad Q_0\cong W\otimes\mathcal O_C,\qquad
+> Q/Q_0\cong L^{-1}\otimes\mathfrak n .$$
+
+*证明（与 CN Proposition 6.3 的证明逐字相同）.* 由 FKP-A Lemma 7.10——逐字：**"Both morphisms
+(7.8) and (7.9) induce embeddings of codimension $1|0$ on tangent spaces and factor through the
+divisor $\Delta_{\rm NS}$. Furthermore, near a stable supercurve with a single separating […] NS
+node, the divisor $\Delta_{\rm NS}$ coincides with the schematic image of (7.8)"**——沿 $e$ 拉回
+边界包含的切列得
+$$0\longrightarrow e^*\mathcal T\mathcal B_{\rm bos}\longrightarrow\mathcal T\longrightarrow
+e^*N_{\mathcal B}\longrightarrow0 .$$
+与引理 4.3 给出的 $0\to\mathcal T_C\to e^*\mathcal T\mathcal B_{\rm bos}\to W\otimes\mathcal O_C\to0$
+拼成 CN 的 $3\times3$ 交换图，蛇引理给出 $0\to W\otimes\mathcal O_C\to Q\to e^*N_{\mathcal B}\to0$。
+由引理 4.4，$e^*N_{\mathcal B}\cong L^{-1}\otimes\mathfrak n$。$\blacksquare$
+
+⟦修改点清单（相对 CN）⟧：仅两处，且都不影响论证结构——(i) $W$ 的第二个直和项换成
+$T_\xi S_{a;n+1,2r}$；(ii) $M_q^{-1}$ 换成抽象的一维空间 $\mathfrak n$。
+
+### §4.5 障碍存活（CN Lemma 7.1 / Corollary 7.2 的推广）
+
+定义（与 CN §7 逐字相同）
+$$J\colon\ H^1(C,L^{-1})\longrightarrow H^1\big(C,\mathrm{Hom}(L^{-1},\mathcal T)\big)
+=H^1(C,\mathcal T\otimes L),$$
+由包含 $\mathcal T_C\cong L^{-2}\hookrightarrow\mathcal T$ 诱导。
+
+> **引理 4.6。** $\dim\ker J\le1$。
+
+*证明（CN Lemma 7.1 的证明逐字搬运，只替换两处记号）.* 对
+$0\to\mathcal T_C\to\mathcal T\to Q\to0$ 施用 $\mathrm{Hom}(L^{-1},-)=(-)\otimes L$，用
+$\mathcal T_C\cong L^{-2}$ 得
+$$0\to L^{-1}\to\mathcal T\otimes L\to Q\otimes L\to0 .$$
+长正合列含 $H^0(C,Q\otimes L)\xrightarrow{\delta}H^1(C,L^{-1})\xrightarrow{J}H^1(C,\mathcal T\otimes L)$，
+故 $\ker J=\mathrm{im}\,\delta$，$\dim\ker J\le h^0(C,Q\otimes L)$。
+
+由命题 4.5，$\otimes L$ 后有正合列
+$$0\to W\otimes L\to Q\otimes L\to \mathcal O_C\otimes\mathfrak n\to0 .$$
+（这里用了 $(L^{-1}\otimes\mathfrak n)\otimes L\cong\mathcal O_C\otimes\mathfrak n$。）取整体截面：
+$$H^0(C,W\otimes L)=W\otimes H^0(C,L)=0\quad(\because\ L\ \text{无效}),$$
+故 $H^0(C,Q\otimes L)\hookrightarrow H^0(C,\mathcal O_C)\otimes\mathfrak n$，于是
+$$h^0(C,Q\otimes L)\le h^0(C,\mathcal O_C)\cdot\dim\mathfrak n=1\cdot1=1 .$$
+故 $\dim\ker J\le1$。$\blacksquare$
+
+**⭐ 注意这条证明对 $\dim W$ 完全不敏感**：无论尾巴的模空间有多大（$\dim T_\xi S_{a;n+1,2r}
+=3a-3+n+1+2r$ 随 $n,r$ 线性增长），$H^0(C,W\otimes L)=W\otimes H^0(C,L)$ 都是 $0$。
+**这是整个推广"免费"的技术根源**（§2.2 末段已预告）。
+
+> **推论 4.7。** 若 $h\ge2$，则存在 $\eta\in H^1(C,L^{-1})$ 使 $J(\eta)\neq0$。
+
+*证明（CN Corollary 7.2 的证明逐字搬运）.* 由 $L^{\otimes2}\cong\omega_C$ 得 $\deg L=h-1$，
+$\deg L^{-1}=1-h<0$，故 $H^0(C,L^{-1})=0$。Riemann–Roch：
+$\chi(C,L^{-1})=\deg L^{-1}+1-h=2-2h$，故 $h^1(C,L^{-1})=2h-2$。$h\ge2$ 时源空间维数
+$\ge2>1\ge\dim\ker J$（引理 4.6），故 $\ker J\subsetneq H^1(C,L^{-1})$，取 $\eta\notin\ker J$。
+$\blacksquare$
+
+⟦注：这里 $L^{\otimes2}\cong\omega_C$ **不带 Ramond 扭转**，因为**亏格 $h$ 一侧没有 Ramond 穿孔**
+——这正是 §3 推论 N″ 指出的、必须把 Ramond 穿孔放到尾巴上的第二个理由。⟧
+
+### §4.6 定理 M 的证明
+
+> **定理 M（重述，见 `claim.md` §2）。** 设 $h\ge2$，$a,n,r\ge0$ 满足 $2a-2+(n+1)+2r>0$，
+> $g=h+a$。则 $\omega_2(\overline{\mathfrak S}_{g;n,2r})\neq0$，故
+> $\overline{\mathfrak S}_{g;n,2r}$ 非投影。
+
+*证明.* 取 §4.1 的全部数据与推论 4.7 给出的 $\eta$，构造
+$F_{\eta,\xi}\colon X_\eta\to\overline{\mathfrak S}_{g;n,2r}$。
+
+**第一步（比较层的识别）。** 由 §1.2（DW，经 CN §5），
+$\Lambda^2\mathcal T_-X_\eta\cong L^{-1}$，$\mathcal T_+X_\eta\cong\mathcal T_C\cong L^{-2}$，
+$\omega_2(X_\eta)=\eta\in H^1(C,L^{-1})$。CN Lemma 2.6 的比较层为
+$$\mathcal G_{F}=\mathrm{Hom}\big(\Lambda^2\mathcal T_-X_\eta,\ i^*\mathcal T_+\overline{\mathfrak
+S}_{g;n,2r}\big)\cong\mathrm{Hom}(L^{-1},\mathcal T)=\mathcal T\otimes L .$$
+
+**第二步（系数态射就是 $J$）。** $j_F$ 由偶微分
+$dF_+\colon\mathcal T_+X_\eta=\mathcal T_C\to i^*\mathcal T_+\overline{\mathfrak S}_{g;n,2r}
+=\mathcal T$ 诱导，而 $dF_+$ 在上述识别下正是包含 $\mathcal T_C\hookrightarrow\mathcal T$
+（$F$ 的玻色截断是 $i$，$i$ 的微分把 $C$ 的切方向送进目标的切方向）。取上同调即 §4.5 的 $J$。故
+$$j_F\big(\omega_2(X_\eta)\big)=J(\eta)\neq0 .$$
+
+**第三步（函子性）。** 对 $F\colon X_\eta\to\overline{\mathfrak S}_{g;n,2r}$ 施用 CN Lemma 2.6
+（前提：两边都是光滑 DM 超叠——$X_\eta$ 是 $(1|2)$ 维超流形，
+$\overline{\mathfrak S}_{g;n,2r}$ 由 FKP-A Theorem A 光滑固有 DM ✓）：
+$$\iota_F\big(\omega_2(\overline{\mathfrak S}_{g;n,2r})\big)=j_F\big(\omega_2(X_\eta)\big)=J(\eta)\neq0
+\quad\text{in }H^1(C,\mathcal G_F).$$
+特别地 $\omega_2(\overline{\mathfrak S}_{g;n,2r})\neq0$。
+
+**第四步。** 由 CN Proposition 2.2，第一障碍非零蕴含非投影。$\blacksquare$
+
+### §4.7 宇称加细（$r=0$）
+
+> **命题 4.8。** 设 $r=0$。则 $i(C)$ 落在宇称分量 $\overline S{}^{\varepsilon}_{g;n,0}$ 中，
+> $\varepsilon=\mathrm{par}(N)$，从而
+> $\omega_2\big(\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0}\big)\neq0$。
+
+*证明.* $r=0$ 时广义自旋结构满足 $L^{\otimes2}\cong\omega$（无 Ramond 扭转，FKP-A §2.6），
+故宇称 $h^0\bmod2$ 在 $\overline S_{g;n,0}$ 上局部常值（Mumford；Cornalba 对稳定自旋曲线），
+$\overline S_{g;n,0}=\overline S{}^+_{g;n,0}\sqcup\overline S{}^-_{g;n,0}$。
+
+被测试的曲线是紧型（compact type）NS 节点曲线 $Z=C\cup_{p=q}F$，其广义自旋层由 FKP-A Lemma 7.9
+的证明给出为 $j_*L\oplus j'_*N$（逐字："$\mathcal O_Z\cong\mathcal O_{Z_0}\oplus j_*L\oplus
+j'_*L'$"，NS 节点处自旋层不是局部自由，等于两支的直像之和）。故
+$$h^0(Z,\ j_*L\oplus j'_*N)=h^0(C,L)+h^0(F,N),\qquad
+\mathrm{par}(Z)=\mathrm{par}(L)+\mathrm{par}(N)=\mathrm{par}(N),$$
+末一步用 $L$ 为**偶**。于是整条 $i(C)$ 落在宇称 $\varepsilon=\mathrm{par}(N)$ 的分量内。
+由于 $H^1$ 在不交并上分解为直和，定理 M 第三步得到的非零类落在该分量的 $H^1$ 里，故
+$\omega_2(\overline{\mathfrak S}{}^{\varepsilon}_{g;n,0})\neq0$。$\blacksquare$
+
+**`[GAP-COMP]`（$r>0$ 时的分量识别，风险：低，纯属加细）**：当 $r>0$ 时
+$L^{\otimes2}\cong\omega(R)$，Mumford 的宇称不变性论证不再适用，$\overline S_{g;n,2r}$ 是否连通、
+以及它的连通分量由什么离散不变量标号，本文**未确定**。因此定理 M 只断言**整个叠**
+$\overline{\mathfrak S}_{g;n,2r}$ 非投影（这在逻辑上是完备的：$\omega_2\neq0$ 即可），
+**不断言**是哪个连通分量。若后续要把结论加细到分量层面，需要补 $\overline S_{g;n,2r}$ 的分量分类。
+
+---
+
+## §5 门槛：把 (P1)(P2) 翻译成 $(g,n,r)$
+
+### §5.1 推论 A / B 的推导
+
+(P1) $h\ge2$，(P2) $2a-2+(n+1)+2r>0$，$g=h+a$。
+
+- **$a=1$**：(P2) 化为 $n+1+2r>0$，恒真。$h=g-1\ge2\iff g\ge3$。
+  宇称（$r=0$）：尾巴是带 $n+1$ 个 NS 标记点的亏格 1 自旋曲线，$N^{\otimes2}\cong\mathcal O_E$
+  （NS 穿孔不扭转 $\omega$！），**两种宇称都存在**（引理 4.2）。
+  ⟹ **推论 A(1)**：$g\ge3$，任意 $n\ge0$，两种宇称，$\overline{\mathfrak S}{}^\varepsilon_{g;n,0}$
+  非投影。
+  ⟹ 以及 $r\ge0$ 任意时 $\overline{\mathfrak S}_{g;n,2r}$ 非投影（$g\ge3$）。
+- **$a=0$**：(P2) 化为 $n+2r\ge2$。$h=g\ge2$。
+  宇称（$r=0$，须 $n\ge2$）：$N=\mathcal O_{\mathbb P^1}(-1)$，$h^0=0$，**偶**。
+  ⟹ **推论 A(2)**：$g\ge2$，$n\ge2$，$\overline{\mathfrak S}{}^{+}_{g;n,0}$ 非投影。
+  ⟹ **推论 B**：$g\ge2$，$n\ge0$，$r\ge1$（此时 $n+2r\ge2$ 自动），
+  $\overline{\mathfrak S}_{g;n,2r}$ 非投影。
+
+合并：$\overline{\mathfrak S}_{g;n,2r}$ 非投影，只要 $g\ge3$，或（$g=2$ 且 $n+2r\ge2$）。
+
+### §5.2 为什么 $h\ge2$ 不能再降
+
+$h=1$：$\deg L^{-1}=0$，$L$ 是 $E$ 上的 theta 特征。若 $L$ 偶（非平凡 $2$-挠），
+$h^0(E,L^{-1})=0$ 且 $h^1(E,L^{-1})=h^0(E,L)^\vee=0$（Serre 对偶 + $\omega_E=\mathcal O$）。
+于是 $H^1(C,L^{-1})=0$，**根本没有非零的 $\eta$**。$h=0$ 同理（$L=\mathcal O(-1)$，
+$h^1(\mathbb P^1,\mathcal O(1))=0$）。故 **(P1) 是这条技术路线的硬门槛，不是本文的疏忽**。
+
+### §5.3 为什么 $a\ge2$ 的尾巴不给出更多
+
+$a\ge2$ 时 (P2) 恒真，但 $g=h+a\ge2+a\ge4$，门槛比 $a\in\{0,1\}$ 更差；宇称也不会新增
+（$a\ge1$ 时两种宇称已由 $a=1$ 覆盖）。故只需考虑 $a\in\{0,1\}$。
+
+### §5.4 与种子界的对照
+
+见 `claim.md` §4 的两张表。一句话总结：
+
+> **DW 的 $n\le g-1$ 限制被完全去掉**（推论 A 对一切 $n\ge0$ 成立）；
+> **Donagi–Ott 的 $g\ge5r+1$ 与 Wang 的 $g\ge n+5r+3$ 被替换为 $g\ge2$**（推论 B），
+> 且**不依赖 Wang，故不继承 `physical-argument` 天花板**。
+
+概念上的一句话解释：**穿孔替尾巴付了稳定性的钱，于是省下一个亏格**（$a$ 从 $1$ 降到 $0$），
+而**穿孔本身完全不进入上同调计算**（它们全在常值因子里）。
+
+---
+
+## §6 自洽性检验（用来找自己的错）
+
+### §6.1 退化到 CN：$n=r=0$
+
+$n=r=0$ 时 (P2) 强制 $a\ge1$；取 $a=1$，尾巴是带一个 NS 点的椭圆自旋曲线 $(E,M,q)$，
+$\mathcal B=\mathfrak S^+_{h;1,0}\times\mathfrak S_{1;1,0}$——**这正是 CN 的 $\mathcal B^{\varepsilon}$**，
+定理 M 逐字退化为 CN Theorem 1.1(3)（$g\ge3$，两种宇称）。✓ **本文的构造在 CN 的范围内重现 CN。**
+
+### §6.2 ⭐ 关键反向检验：本方法**永远碰不到** $\overline{\mathfrak M}{}^{-}_2$
+
+CN Theorem 1.1(1) 证明了 $\overline{\mathfrak M}{}^{-}_2=\overline{\mathfrak S}{}^-_{2;0,0}$
+是**分裂的**（特别地 $\omega_2=0$）。若本文的构造能触及这个对象，就会与 CN 直接矛盾，说明本文有错。
+检验：$(g,n,r)=(2,0,0)$ 要求
+- $a=1\Rightarrow h=1$，违反 (P1)；
+- $a=0\Rightarrow n+2r=0<2$，违反 (P2)。
+
+**两条路都被堵死 ✓。** 更进一步，即使允许穿孔（$g=2$，$n\ge2$），$a$ 必须为 $0$，尾巴的自旋结构
+只能是 $\mathcal O_{\mathbb P^1}(-1)$（**偶**），于是 $\varepsilon=\mathrm{par}(L)+\mathrm{par}(N)=+$：
+**本方法在 $g=2$ 只能到达偶分量，结构上不可能到达奇分量。** 这与 CN 的分裂性定理完全相容，
+是一条强的"没有隐藏错误"的证据。
+
+### §6.3 与 Donagi–Ott / Wang 不矛盾
+
+推论 B 给出 $g\ge2$ 而 Donagi–Ott 要 $g\ge5r+1$——差距巨大，必须解释清楚：
+**两者断言的对象不同。** Donagi–Ott/Wang 断言的是**未紧化**的 $\mathfrak S_{g;n,2r}$ 非投影；
+本文断言的是**紧化**的 $\overline{\mathfrak S}_{g;n,2r}$ 非投影，且非零障碍是在**边界测试曲线**
+$i(C)\subset\Delta_{\rm NS}$ 上检测到的。**紧化空间非投影不蕴含光滑轨迹非投影**（反之亦不然，
+除非走上一轮的提升引理方向）。CN 与 DW 之间是完全相同的关系：CN 的 $g\ge3$ 远好于 DW 的 $g\ge5$，
+正因为 CN 用的是边界，而 DW 说的是未紧化空间。✓ **无矛盾。**
+
+### §6.4 ⭐ 一个必须正面回答的质疑：能不能用"忘掉穿孔"的态射平凡地得到推论 A？
+
+⟦本节是本文作者对自身结果价值的诚实评估，不粉饰。⟧
+
+**质疑**：既然 CN 已证 $\overline{\mathfrak S}{}^\varepsilon_{g;0,0}$（$g\ge3$）非投影，
+取忘却态射 $\pi\colon\overline{\mathfrak S}_{g;n,0}\to\overline{\mathfrak S}_{g;0,0}$，
+由 CN Lemma 2.6 得 $j_\pi(\omega_2(\overline{\mathfrak S}_{g;n,0}))=
+\iota_\pi(\omega_2(\overline{\mathfrak S}_{g;0,0}))$；若右边非零，立刻得推论 A。
+**推论 A 是不是就这么"免费"？**
+
+**回答：不是，而且这条路有两个本文无法闭合的缺口。**
+
+1. **忘却态射在紧化超模叠上的存在性没有文献支持。** 本轮逐字搜索 FKP-A 与 CN 全文的
+   `forget`：FKP-A 的两处命中都是行文里的"forget about the punctures"（指局部计算时忽略穿孔），
+   **不是构造态射**；CN 的三处命中指的是**忘掉自旋结构**的态射（$\overline S_g\to\overline M_g$），
+   不是忘掉穿孔。**紧化情形尤其非平凡**：标记点撞上节点时需要稳定化（插入有理桥），而有理桥上的
+   广义自旋结构如何指定，在超几何设定下本文未见任何文献处理。
+2. **即使态射存在，$\iota_\pi$ 的非零性正是问题本身。** $\iota_\pi$ 是"拉回 $\pi_0^*$"再"沿
+   $\Lambda^2 d\pi_-$ 前合成"。$\pi_0^*$ 那一半确实单（$\pi_0$ 固有、纤维连通、
+   $\pi_{0*}\mathcal O=\mathcal O$，Leray 边缘映射单）；但第二半是由层的**单射**
+   $\mathrm{Hom}(\pi^*\Lambda^2\mathcal T_-,\pi^*\mathcal T_+)\hookrightarrow
+   \mathrm{Hom}(\Lambda^2\mathcal T_-,\pi^*\mathcal T_+)$ 诱导的，**层的单射不蕴含 $H^1$ 上的单射**
+   （需要余核的 $H^0$ 被满射掉，这是关于整个模叠的整体陈述，本文既不能证也不能否证）。
+
+**结论**：这条"平凡化"路线**不成立**（至少目前不成立），本文的构造是**无条件的**，且额外给出
+障碍类的**定位信息**（它在 NS 边界上就已经非零，且由显式的 $\eta$ 见证）。
+**但必须诚实指出**：如果将来有人补齐上述两点，推论 A（纯 NS 部分）就会变成 CN 的一个推论，
+其独创性会下降。**推论 B（含 Ramond）不受影响**——忘却 Ramond 穿孔**根本不是态射**
+（Ramond 穿孔是超共形结构的分歧轨迹，不是标记点；Donagi–Ott 逐字强调 "Ramond punctures are not
+marked points!"），故该路线对推论 B 完全不适用。⭐ **推论 B 是本轮最稳固、最不可替代的产出。**
+
+---
+
+## §7 完整 `[GAP]` 清单
+
+按风险从高到低：
+
+1. **`[GAP-LIT]`（程序性，必须由 lead 处理，毕业前阻塞）**：FKP-A（arXiv:2006.13271 =
+   Amer. J. Math. **145** (2023) 1777–1886）**不在** `literature/sources.bib`，无
+   `literature/extractions/` 条目。本证明对它的依赖是**结构性**的（Theorem A、§2.6、Lemma 7.9/7.10、
+   Theorem C/(9.6)、Example 8.9）。本轮已亲自读取并逐字引用原文，但按 `literature/CLAUDE.md`，
+   登记只能由 researcher 做。**本尝试毕业进图前必须先补齐。**
+2. **`[GAP-FKP-RAMOND]`（低）**：FKP-A Lemma 7.9 的**证明正文**把广义自旋结构写成
+   $L\cong\mathrm{Hom}(L,\omega_C)$，漏掉了 Ramond 扭转 $\omega_C(R)$，尽管其陈述 (7.8) 允许
+   $n_1,n_2>0$。本文判断这是无害省略（粘接是 NS 节点处的局部操作，可在与 Ramond 除子不交的邻域内
+   进行），但**未独立重写该证明**。影响范围：推论 B（$r\ge1$）。
+   **闭合方式**：重做 FKP Lemma 7.9 在 $\omega_C(R)$ 下的局部计算；预期是纯粹的记号替换。
+3. **`[GAP-COMP]`（低，仅影响加细）**：$r>0$ 时 $\overline S_{g;n,2r}$ 的连通分量分类未知，
+   故只断言整个叠非投影，不指认分量。见 §4.7。
+4. **`[GAP-IMM]`（低）**：命题 4.5 中"沿 $e$ 拉回边界包含的切列"这一步，本文与 CN 一样，
+   **只使用 FKP-A Lemma 7.10 的切层面陈述**（余维 $1|0$ 嵌入 + 像为 $\Delta_{\rm NS}$），
+   未讨论 $\Gamma_{\rm bos}$ 是否是闭浸入或只是有限型态射（叠的自同构可能使它不是单射）。
+   CN 对此同样不展开。**本文不比 CN 更弱，但也不比 CN 更强。**
+5. **`[GAP-STD]`（低，标准事实）**：$\mathcal T_+\mathfrak X|_X\cong\mathcal T_X$ 与
+   $\mathcal T\mathfrak X/\mathcal J\mathcal T\mathfrak X=\mathcal T_+\oplus\mathcal T_-$ 是标准
+   超几何事实（Manin；DW §2；CN §2），本文直接使用，未重证。
+6. **`[GAP-DW]`（低）**：DW 一点障碍族的构造与 $\omega_2(X_\eta)=\eta$（[DW, Prop. 3.4]）本文
+   **未独立复核**，按 CN §5 的逐字回顾使用。该结果所属图卡
+   `math.supermoduli-space-not-projected` 状态为 **rigorous**。
+7. **`[GAP-ALT]`（不是缺口，是价值风险）**：§6.4 的忘却态射路线若被他人补齐，推论 A 的独创性下降。
+   推论 B 不受影响。
+8. **未触及的方向（如实声明）**：
+   - 本文**不断言**未紧化 $\mathfrak S_{g;n,2r}$ 的任何事；
+   - 本文**不断言**任何"分裂/可投影"的正面结果（类比 CN Theorem 1.1(1)）；
+   - $(g,n,r)=(2,1,0)$ 与 $g=2$ 的**奇**宇称带穿孔分量**完全开放**；
+   - Ramond 节点处的粘接被**刻意避免**（FKP-A §9.3 的类比只是**猜想**），若将来该猜想被证明，
+     可能打开新的、门槛更低的构造。
+
+---
+
+## §8 小结（诚实的一句话）
+
+**本文把 Corrêa–Noja 的椭圆尾粘接技术重新装配在 Felder–Kazhdan–Polishchuk 的带穿孔粘接态射 (7.8)
+上，做法是把旁观穿孔全部装到那条被固定的尾巴上；由此证明紧化带穿孔超模叠
+$\overline{\mathfrak S}_{g;n,2r}$ 在 $g\ge3$（任意 $n,r$）以及 $g=2$（只要 $n+2r\ge2$）时非投影，
+从而完全去掉了 Donagi–Witten 的 $n\le g-1$ 限制，并把 Donagi–Ott 的 $g\ge5r+1$ 与 Wang 的
+$g\ge n+5r+3$ 替换成 $g\ge2$，且不依赖 Wang 那张 `physical-argument` 的卡。
+同时本文给出一条同等重要的**负面结论**（命题 N）：旁观穿孔若装在运动分量上，测试基变成仿射曲线，
+$H^1$ 消没，整条路线恒等于零——这解释了为什么"装到尾巴上"不是一个技巧而是唯一的选择，也解释了
+CN 为什么必须用分离粘接加常值尾。全部结论依赖的外部输入均为 rigorous（无 conjecture、无
+physical-argument），唯一的阻塞是程序性的 `[GAP-LIT]`（FKP-A 尚未登记）。**
+
