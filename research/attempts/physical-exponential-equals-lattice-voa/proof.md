@@ -1212,6 +1212,17 @@ Li–Wang Remark 3.13（p.19，L1 逐字）：`ℂL ≠ 𝔥` 时 `ℒ_1` 另有
 即使定理 5.7 通过审查，目标卡也**不能直接升级**：正确处置是新建 `-v2` 订正卡 + `superseded_by`。
 🔴 属 curator / lead 权限，本尝试不执行。
 
+> ✅ **【收尾时的更新】** `main` 上已有 `worldsheet.physical-exponential-equals-voa-vertex-operator-v2`，
+> 其断言 (2) 括注逐字为 `V^{(n)}_K = S_n ∘ V^{(b)}_{K−nν}`，与本文全程使用的定义**逐字一致**，
+> 且状态保持 `physical-argument`（该卡 notes 逐字：「不要因为「修了一个 bug」就顺手抬 status」）。
+> ⇒ `[GAP-target-card]` **已闭合**。
+> ⚠ 但该卡 `sources[li-wang-2008].note` 里对单值因子来源的**理由**不精确：它把层依赖项也记到
+> `Δ̄` 的 `α(0)` 头上（写「`α(0)` 在第 `N` 层的本征值是 `⟨nk, p̃+Nk⟩`」）。
+> 按 (3.14)，`Δ̄(α,−x)` 作用在**第二个张量因子 `U` 上**，其 `α(0)` 的本征值是 `⟨nk,p̃⟩ = nν`，**不含 `N`**；
+> 层依赖项来自 (3.14) 的**显式因子** `x^{⟨α,β⟩}`。总指数相同，故该卡在自身（类光）设定下**结论正确**，
+> 但这条理由在一般偶格上会给出错误的拆分——本文 §6.1 正是把两个来源分开算的
+> （`x^{α(0)}` 给 `nν`，`x^{⟨α,β⟩}` 给 `2njs`）。🔴 graph/ 路径，本尝试只报告，见 §8 与 `status.yaml` C6。
+
 ### §7.2 结算表：`claim.md` §5 的七条接缝在本文之后的状态
 
 | `claim.md` §5 | 内容 | 本文的处置 | 现状 |
@@ -1254,6 +1265,10 @@ Li–Wang Remark 3.13（p.19，L1 逐字）：`ℂL ≠ 𝔥` 时 `ℒ_1` 另有
    逐字登记（`[GAP-vac]`）。
 4. 目标卡 `worldsheet.physical-exponential-equals-voa-vertex-operator` 的 `-v2` 订正
    （`docs/reviews/bridge-card-index-shift-2026-09-18.md` 的处置意见，🔴 **状态不变**）。
+   ✅ **已完成**（`main` 上的 `-v2` 卡与本文定义逐字一致，状态未动）。
+4′. ⚠ `-v2` 卡 `sources[li-wang-2008].note` 的单值因子**理由**建议 note 级订正：
+   把「`α(0)` 在第 `N` 层的本征值是 `⟨nk, p̃+Nk⟩`」改为「`⟨nk, p̃⟩`；层依赖项另来自 (3.14) 的 `x^{⟨α,β⟩}`」。
+   结论不变，只是拆分方式在一般偶格上会出错（理由见 §7.1 `[GAP-target-card]` 条下的更新框）。
 
 **给 `lean-formalizer` / `formal/`（本尝试不写 `formal/`）**
 5. 本文推论 6.3 证明：Lean 的层无关 `towerVertex`（`towerDiag fun _ => …`）**只在类光情形**
