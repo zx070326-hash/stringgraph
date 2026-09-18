@@ -36,7 +36,7 @@
 | I3 | Donagi–Witten 一点障碍族 $X_\eta$，$\omega_2(X_\eta)=\eta$ | DW 2013 [Prop. 3.4]，经 CN §5 逐字回顾 | **rigorous**（图卡 `math.supermoduli-space-not-projected`） | |
 | I4 | $\overline{\mathfrak S}_{g;n,2r}$ 存在、光滑、固有 | FKP-A Theorem A | rigorous（已发表 Amer. J. Math. 145 (2023)）🟡 **未登记入 `literature/sources.bib`**，见 `[GAP-LIT]` | |
 | I5 | NS 粘接态射 (7.8)（**带任意穿孔**）：$\overline{\mathfrak S}_{g_1;m_1+1,n_1}\times\overline{\mathfrak S}_{g_2;m_2+1,n_2}\to\overline{\mathfrak S}_{g_1+g_2;m_1+m_2,n_1+n_2}$，及 Lemma 7.10（切层面余维 $1|0$ 嵌入、像 $=\Delta_{\rm NS}$） | FKP-A Lemma 7.9/7.10 | 同 I4 | |
-| I6 | 法丛公式 $\mathcal O(\Delta)|_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$，对 (7.8)/(7.9) **两者**成立 | FKP-A Theorem C + 式 (9.6)，§9.1 | 同 I4 | |
+| I6 | 法丛公式 $\mathcal O(\Delta)|_B\cong\Psi_1^{-1}\otimes\Psi_2^{-1}$，对 (7.8)/(7.9) **两者**成立 | FKP-A **§9.1 / Lemma 9.1(iii)(iv) / 式 (9.6)，pp.59–61** 🔴 **不是 Theorem C**——Theorem C (p.2) 的靶逐字是无穿孔的 $\overline{\mathcal S}_g$（对照同页 Theorem B 明写 $\overline{\mathcal S}_{g,n_{NS},n_R}$），本文需要带穿孔的靶；(9.6) 走 Lemma 9.1，其层"supported on the node"，与穿孔无关。2026-09-18 对抗审查订正 | 同 I4 | |
 | I7 | 偶基上 $\Psi_i^{-1}\cong p_i^*L^{-1}$ | FKP-A Example 8.9 | 同 I4 | 本证明**只在无穿孔的亏格 $h$ 侧**使用它 |
 | I8 | $h\ge2$ 的光滑曲线上存在**无效偶** theta 特征 | Mumford；Cornalba（CN §5 引） | 标准，rigorous | |
 | I9 | 仿射曲线上凝聚层 $H^1=0$ | Serre | 标准，rigorous | 只用于 §3 的**负面结论** |
@@ -164,9 +164,14 @@ $$\boxed{\ \overline{\mathfrak S}_{g;n,2r}\ \text{非投影，只要}\quad g\ge3
 > （即把 CN 的 $\mathfrak M^+_{h,1}$ 换成 $\mathfrak M^+_{h,n+1}$，其中 $n$ 个点固定、第 $n+1$ 个
 > 点运动）。则 Donagi–Witten 测试族的约化空间变成
 > $$C^\circ:=C\smallsetminus\{p_1,\dots,p_n\},$$
-> 这是**仿射**曲线，于是对任何凝聚层 $\mathcal F$ 有 $H^1(C^\circ,\mathcal F)=0$；特别地
-> $H^1(C^\circ,L^{-1})=0$，可用的障碍参数 $\eta$ 只有 $0$，映射 $J$ **恒等于零**。
+> 这是**仿射**曲线，于是对任何凝聚层 $\mathcal F$ 有 $H^1(C^\circ,\mathcal F)=0$；特别地主障碍类的
+> **取值空间** $H^1(C^\circ,\mathcal F^{\rm obs})$ 为零，故 $\omega_2(X^\circ_\eta)=0$ 对**一切**
+> $\eta$，映射 $J$ **恒等于零**。
 > **该路线给不出任何信息。**
+> ⚠ 注意结论**不是**"可用的 $\eta$ 只有 $0$"——恰恰相反，带穿孔时奇切空间
+> $H^1(C,L^{-1}(-\sum_i p_i))$ 维数为 $2h-2+n$，比 CN 的 $2h-2$ **更大**。是**取值空间**为零，
+> 不是**参数空间**为零。（初稿在此写反，2026-09-18 对抗审查订正，详见 `proof.md` §3 证明第四步后
+> 的订正记录。论证因此反而更强：$\eta$ 比 CN 还多，却依然一个都测不到。）
 >
 > **推论 N′。** 同一个仿射性障碍也杀死 FKP 的**非分离**粘接态射 (7.9)
 > $\overline{\mathfrak S}_{g;m+2,n}\to\overline{\mathfrak S}_{g+1;m,n}$ 作为本方法的载体：

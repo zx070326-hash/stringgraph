@@ -855,22 +855,30 @@ marked points!"），故该路线对推论 B 完全不适用。⭐ **推论 B �
 
 按风险从高到低：
 
-1. **`[GAP-LIT]`（程序性，必须由 lead 处理，毕业前阻塞）**：FKP-A（arXiv:2006.13271 =
-   Amer. J. Math. **145** (2023) 1777–1886）**不在** `literature/sources.bib`，无
-   `literature/extractions/` 条目。本证明对它的依赖是**结构性**的（Theorem A、§2.6、Lemma 7.9/7.10、
-   Theorem C/(9.6)、Example 8.9）。本轮已亲自读取并逐字引用原文，但按 `literature/CLAUDE.md`，
-   登记只能由 researcher 做。**本尝试毕业进图前必须先补齐。**
+1. **`[GAP-LIT]`（程序性，毕业前阻塞，**2026-09-18 部分关闭**）**：FKP-A（arXiv:2006.13271 =
+   Amer. J. Math. **145** (2023) 1777–1886）**现已登记** `literature/sources.bib`，且
+   `literature/extractions/felder-kazhdan-polishchuk-2020.md` 已存在（由另一条并行任务补上）。
+   ⚠ **但该抽取记录覆盖的是 Theorem A、Def 2.1/2.4、§2.6、§5.4——恰好一条本证明的承重依赖都不覆盖**，
+   且其条目 E6 自陈「**不建议 curator 直接引用本条目的 Theorem B 公式作为图节点来源**」。
+   **剩余阻塞（已派 researcher）**：把该抽取记录**追加**扩展到 §7.5 的 (7.8)/(7.9)、Lemma 7.9、
+   Lemma 7.10、§8.4 Example 8.9、§9.1 / Lemma 9.1 / (9.6)。本文 §4.3、§4.4、§4.5 的逐字引用
+   已由 2026-09-18 的对抗审查用**页图**独立核实（pp. 2, 48, 49, 57, 58, 59, 60, 61），
+   可直接交给 researcher 作为 append 的底稿。
 2. **`[GAP-FKP-RAMOND]`（低）**：FKP-A Lemma 7.9 的**证明正文**把广义自旋结构写成
    $L\cong\mathrm{Hom}(L,\omega_C)$，漏掉了 Ramond 扭转 $\omega_C(R)$，尽管其陈述 (7.8) 允许
    $n_1,n_2>0$。本文判断这是无害省略（粘接是 NS 节点处的局部操作，可在与 Ramond 除子不交的邻域内
    进行），但**未独立重写该证明**。影响范围：推论 B（$r\ge1$）。
    **闭合方式**：重做 FKP Lemma 7.9 在 $\omega_C(R)$ 下的局部计算；预期是纯粹的记号替换。
+   ✅ 2026-09-18 对抗审查逐字复核了 FKP-A p.48 该句（"Note that $L$ and $L'$ are generalized
+   spin-structures, i.e., we have an isomorphism $L\longrightarrow^{\!\!\sim}\mathrm{Hom}(L,\omega_C)$
+   …"，确无 $\omega_C(R)$），并同意"无害"这一判断，同时同意**不应**声称已重写该证明。
+   **保留本 GAP，保留诚实措辞。**
 3. **`[GAP-COMP]`（低，仅影响加细）**：$r>0$ 时 $\overline S_{g;n,2r}$ 的连通分量分类未知，
    故只断言整个叠非投影，不指认分量。见 §4.7。
-4. **`[GAP-IMM]`（低）**：命题 4.5 中"沿 $e$ 拉回边界包含的切列"这一步，本文与 CN 一样，
-   **只使用 FKP-A Lemma 7.10 的切层面陈述**（余维 $1|0$ 嵌入 + 像为 $\Delta_{\rm NS}$），
-   未讨论 $\Gamma_{\rm bos}$ 是否是闭浸入或只是有限型态射（叠的自同构可能使它不是单射）。
-   CN 对此同样不展开。**本文不比 CN 更弱，但也不比 CN 更强。**
+4. ✅ **`[GAP-IMM]`：已关闭（2026-09-18 对抗审查）。** 该切列**不需要**闭浸入假设——
+   $d\Gamma$ 常余秩 $1|0$（FKP-A Lemma 7.10, p.48）⟹ $\operatorname{coker}(d\Gamma)$ 局部自由，
+   而局部自由层短正合列的拉回是正合的；且 $\mathcal T$ 是**定义**为 $i^*\mathcal T_+\overline{\mathfrak S}$
+   的拉回，不是任何像的内蕴对象。完整论证见 §4.4 命题 4.5 证明末的关闭记录。
 5. **`[GAP-STD]`（低，标准事实）**：$\mathcal T_+\mathfrak X|_X\cong\mathcal T_X$ 与
    $\mathcal T\mathfrak X/\mathcal J\mathcal T\mathfrak X=\mathcal T_+\oplus\mathcal T_-$ 是标准
    超几何事实（Manin；DW §2；CN §2），本文直接使用，未重证。
