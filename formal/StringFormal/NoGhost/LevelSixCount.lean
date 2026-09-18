@@ -56,13 +56,26 @@ at `m = 2`, `221 + 3 = 65 + 108 + 51`; at `m = 3`, `574 + 4 = 221 + 252 + 105`.
 * `levelSix_count_identity_gen` — the corrected recursive identity, valid for all `m`.
 * `levelSix_count_identity` — specialization at `m = D − 2`.
 * `levelSix_count_identity_full` — specialization at `m = D − 1`.
+* `Finsupp.oscWeight_eq_six_cases` — the eleven-shape classification of level-six occupation
+  functions, added 2026-09-18.  Mirrors `LevelFiveCount.oscWeight_eq_five_cases` exactly: one
+  `Finsupp.exists_peel` to strip an oscillator of mode `v₂ ∈ {1,…,6}`, then dispatch to the
+  classification one level down (`oscWeight_eq_{five,four,three,two,one}_cases` /
+  `eq_zero_of_oscWeight_eq_zero`).  `D` never appears — this is pure combinatorics on an
+  arbitrary index type `ι`.
 
 ## Status
 
-The three theorems compile with no `sorry`.
+No `sorry`, no `native_decide`.  All declarations `check_axioms`-clean (only `propext`,
+`Classical.choice`, `Quot.sound`).
 
-**Not done**: `b26_six`, `ddfSpans_bigrade_neg_six_six`, or any other components of the
-level-six slice (out of scope for this fix).
+**Not done** (out of scope for this file so far): the level-six index family `LevelSixIdx` /
+`levelSixIndex` and the resulting exact count `card_ddfLevel_six_eq` (the analogue of
+`LevelFiveCount`'s `LevelFiveIdx` machinery — injectivity via a mode-count profile argument,
+surjectivity by case-by-case witnesses); and, further downstream, `b26_six` /
+`ddfSpans_bigrade_neg_six_six` themselves, which additionally need the images of `y₃`/`x₄`
+(on a seed `u ∈ Q_{-6,1}`) to land in the **null** submodule, not just the positive-mode kernel
+(the seed property `SeedCriterionSix.mem_towerSeed_neg_six_one_iff` only gives the latter).
+See `formal/TODO.md` (`noghost-pr-d2`, "未做（Goal B）") for the itemised gap list.
 -/
 
 namespace StringFormal.NoGhost
@@ -168,5 +181,128 @@ theorem levelSix_count_identity_full (hD : 1 ≤ D) :
   exact levelSix_count_identity_gen m
 
 end CountIdentity
+
+/-! ### The classification of level-six occupation functions
+
+Eleven shapes, `[6] [5,1] [4,2] [4,1,1] [3,3] [3,2,1] [3,1,1,1] [2,2,2] [2,2,1,1] [2,1,1,1,1]
+[1⁶]`.  As at levels three through five, the proof is one `Finsupp.exists_peel` plus the
+classifications at levels `≤ 5` (`LevelFiveCount.oscWeight_eq_five_cases` down to
+`LevelTwoCount.oscWeight_eq_two_cases` and `LevelThreeCount.oscWeight_eq_one_cases`). -/
+
+namespace Finsupp
+
+variable {ι : Type*}
+
+/-- A `ℕ+` is determined by its coercion (the `Prod.ext` helper of the classification). -/
+private lemma pnat_eq_six {m n : ℕ+} (h : (m : ℕ) = (n : ℕ)) : m = n := PNat.coe_injective h
+
+/-- **The classification of level-six occupation functions.** -/
+theorem oscWeight_eq_six_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 6) :
+    (∃ i : ι, d = Finsupp.single (i, 6) 1) ∨
+      (∃ i j : ι, d = Finsupp.single (i, 5) 1 + Finsupp.single (j, 1) 1) ∨
+        (∃ i j : ι, d = Finsupp.single (i, 4) 1 + Finsupp.single (j, 2) 1) ∨
+          (∃ i j k : ι, d = Finsupp.single (i, 4) 1
+            + (Finsupp.single (j, 1) 1 + Finsupp.single (k, 1) 1)) ∨
+            (∃ i j : ι, d = Finsupp.single (i, 3) 1 + Finsupp.single (j, 3) 1) ∨
+              (∃ i j k : ι, d = Finsupp.single (i, 3) 1 + Finsupp.single (j, 2) 1
+                + Finsupp.single (k, 1) 1) ∨
+                (∃ i j k l : ι, d = Finsupp.single (i, 3) 1
+                  + (Finsupp.single (j, 1) 1
+                    + (Finsupp.single (k, 1) 1 + Finsupp.single (l, 1) 1))) ∨
+                  (∃ i j k : ι, d = Finsupp.single (i, 2) 1 + Finsupp.single (j, 2) 1
+                    + Finsupp.single (k, 2) 1) ∨
+                    (∃ i j k l : ι, d = Finsupp.single (i, 2) 1 + Finsupp.single (j, 2) 1
+                      + (Finsupp.single (k, 1) 1 + Finsupp.single (l, 1) 1)) ∨
+                      (∃ i j k l m : ι, d = Finsupp.single (i, 2) 1
+                        + (Finsupp.single (j, 1) 1
+                          + (Finsupp.single (k, 1) 1
+                            + (Finsupp.single (l, 1) 1 + Finsupp.single (m, 1) 1)))) ∨
+                        (∃ i j k l m n : ι, d = Finsupp.single (i, 1) 1
+                          + (Finsupp.single (j, 1) 1
+                            + (Finsupp.single (k, 1) 1
+                              + (Finsupp.single (l, 1) 1
+                                + (Finsupp.single (m, 1) 1 + Finsupp.single (n, 1) 1))))) := by
+  obtain ⟨v, d', hd, hw⟩ := exists_peel (N := 5) (by simpa using h)
+  have hpos : 0 < (v.2 : ℕ) := v.2.pos
+  have hle : (v.2 : ℕ) ≤ 6 := by omega
+  interval_cases hv : (v.2 : ℕ)
+  · -- `v₂ = 1`: the rest has weight five
+    have hv1 : ((v.1, 1) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    rcases oscWeight_eq_five_cases (d := d') (by omega) with
+      ⟨i, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, k, hi⟩ | ⟨i, j, k, hi⟩ | ⟨i, j, k, l, hi⟩ |
+        ⟨i, j, k, l, n, hi⟩
+    · -- rest = [5] → [5,1]
+      right; left
+      exact ⟨i, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [4,1] → [4,1,1]
+      right; right; right; left
+      exact ⟨i, j, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [3,2] → [3,2,1]
+      right; right; right; right; right; left
+      exact ⟨i, j, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [3,1,1] → [3,1,1,1]
+      right; right; right; right; right; right; left
+      exact ⟨i, j, k, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [2,2,1] → [2,2,1,1]
+      right; right; right; right; right; right; right; right; left
+      exact ⟨i, j, k, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [2,1,1,1] → [2,1,1,1,1]
+      right; right; right; right; right; right; right; right; right; left
+      exact ⟨i, j, k, l, v.1, by rw [hd, hi, hv1]; try abel⟩
+    · -- rest = [1⁵] → [1⁶]
+      right; right; right; right; right; right; right; right; right; right
+      exact ⟨i, j, k, l, n, v.1, by rw [hd, hi, hv1]; try abel⟩
+  · -- `v₂ = 2`: the rest has weight four
+    have hv2 : ((v.1, 2) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    rcases oscWeight_eq_four_cases (d := d') (by omega) with
+      ⟨i, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, k, hi⟩ | ⟨i, j, k, l, hi⟩
+    · -- rest = [4] → [4,2]
+      right; right; left
+      exact ⟨i, v.1, by rw [hd, hi, hv2]; try abel⟩
+    · -- rest = [3,1] → [3,2,1]
+      right; right; right; right; right; left
+      exact ⟨i, v.1, j, by rw [hd, hi, hv2]; try abel⟩
+    · -- rest = [2,2] → [2,2,2]
+      right; right; right; right; right; right; right; left
+      exact ⟨i, j, v.1, by rw [hd, hi, hv2]; try abel⟩
+    · -- rest = [2,1,1] → [2,2,1,1]
+      right; right; right; right; right; right; right; right; left
+      exact ⟨i, v.1, j, k, by rw [hd, hi, hv2]; try abel⟩
+    · -- rest = [1,1,1,1] → [2,1,1,1,1]
+      right; right; right; right; right; right; right; right; right; left
+      exact ⟨v.1, i, j, k, l, by rw [hd, hi, hv2]; try abel⟩
+  · -- `v₂ = 3`: the rest has weight three
+    have hv3 : ((v.1, 3) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    rcases oscWeight_eq_three_cases (d := d') (by omega) with ⟨i, hi⟩ | ⟨i, j, hi⟩ | ⟨i, j, k, hi⟩
+    · -- rest = [3] → [3,3]
+      right; right; right; right; left
+      exact ⟨i, v.1, by rw [hd, hi, hv3]; try abel⟩
+    · -- rest = [2,1] → [3,2,1]
+      right; right; right; right; right; left
+      exact ⟨v.1, i, j, by rw [hd, hi, hv3]; try abel⟩
+    · -- rest = [1,1,1] → [3,1,1,1]
+      right; right; right; right; right; right; left
+      exact ⟨v.1, i, j, k, by rw [hd, hi, hv3]; try abel⟩
+  · -- `v₂ = 4`: the rest has weight two
+    have hv4 : ((v.1, 4) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    rcases oscWeight_eq_two_cases (d := d') (by omega) with ⟨i, hi⟩ | ⟨i, j, hi⟩
+    · -- rest = [2] → [4,2]
+      right; right; left
+      exact ⟨v.1, i, by rw [hd, hi, hv4]; try abel⟩
+    · -- rest = [1,1] → [4,1,1]
+      right; right; right; left
+      exact ⟨v.1, i, j, by rw [hd, hi, hv4]; try abel⟩
+  · -- `v₂ = 5`: the rest has weight one
+    have hv5 : ((v.1, 5) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    obtain ⟨i, hi⟩ := oscWeight_eq_one_cases (d := d') (by omega)
+    right; left
+    exact ⟨v.1, i, by rw [hd, hi, hv5]; try abel⟩
+  · -- `v₂ = 6`: the rest is empty
+    have hv6 : ((v.1, 6) : ι × ℕ+) = v := Prod.ext rfl (pnat_eq_six (by simpa using hv.symm))
+    have hd' : d' = 0 := eq_zero_of_oscWeight_eq_zero (by omega)
+    left
+    exact ⟨v.1, by rw [hd, hd', add_zero, hv6]⟩
+
+end Finsupp
 
 end StringFormal.NoGhost
