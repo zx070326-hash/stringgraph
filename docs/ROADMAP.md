@@ -14,6 +14,19 @@
 
 ### 本轮在途（2026-09-18，lead 派工中）
 
+- ✅ **无鬼定理瓶颈：诊断已结案，结论一半一半**（2026-09-18 合并 `agent/researcher/li-wang-vertex-operator`，图侧落盘 commit 见 `graph/statements/worldsheet/physical-exponential-equals-voa-vertex-operator.yaml` 的 notes）。下面那条"在途"项里 lead 写的「弱在**抽取偷工**而非开放数学」这一判断**只对了一半**，如实记账：
+  - **断言 (1)（cocycle 平凡）：确是抽取偷工，已修且升级。** (3.10) 的右端此前只列算子名不写公式，现已补全，连同 `E^±` (3.2) 与 `Δ̄` 的显式定义。更要紧的是 Li–Wang **§4 (p.21) 自己就逐字写了** `ε(α,β) = 1 for all α,β ∈ L`，且是对**任意** ⟨·,·⟩|_L = 0 的格陈述的（秩 1 类光只是特例）——此前本图以为只能靠 GN (3.1) 加本项目自补的退化推断步，现在是两个独立 L1 来源，自补步可撤。
+  - **断言 (2)（物理正规序指数 = VOA 结构映射）：不是偷工，是真开放。** 通读 pp.9–24 复核：Li–Wang **全文无任何物理记号**（无 X^μ(z)、无 `:·:`、无 worldsheet），不承载这句翻译。**故该节点 status 仍且只能是 `physical-argument`，整条无鬼链依旧被它一个点压着。**
+  - ⚠ **排期含义：Li–Wang 这条线已读到底，重读不会再推进。** 要动断言 (2) 只剩三条路：Frenkel 1985（L0，OCR 失败）、FLM 1988 Ch.8 / Frenkel–Ben-Zvi §5（均 L0）、或确认前两条真无源后开原创轨道。
+  - 附带两条**跨卡警告**（已写进卡的 source note）：`E^-`/`Δ̄` 的符号约定在 [Li3]/FLM/Li–Wang 之间**不一致**（Li–Wang 脚注 3），今后任何引用必须指明是谁的约定；Remark 3.13 说明 D>1 时 ℒ_1 还有别的 level-1 不可约模，free-boson 塔卡应写清取的是哪一个。
+
+- ✅ **超模空间可投影性 post-2024 已入图**（2026-09-18 合并 `agent/curator/supermoduli-post-2024`，9 陈述 + 9 推导；660→669 陈述，0 errors；已过 graph-reviewer 对抗审查，总裁定"可以合并"，五条红线逐条通过）。要点：
+  - **g=4 缺口只填了偶自旋半边**（Donagi–Noja Thm 1.1 逐字只到 𝔐₄⁺，"整个 𝔐₄"记为平凡不交并推论而非该文独立结果）；**g=3 未紧化情形至今开放**。
+  - **Corrêa–Noja 的 FKP 边只挂在第 (2) 项**：item (1)/(3) 的推导 `depends_on: []`，即最有分量的 **g≥3 那条不依赖 FKP**。
+  - Wang 卡诚实降级 `physical-argument`（源文自标 preliminary draft + 正文未读）；DBFS 排除论证保住条件式措辞"cannot be a formula for"，`[20]` 的 arXiv 号如实留作未定。
+  - 🔧 **reviewer 留的唯一待办（不阻塞合并，已派）**：DBFS 排除论证的承重前提 **Witten 2015（arXiv:1501.02499）超椭圆轨迹极点存在性**未入图、未登记 bib、无抽取记录，于是这条依赖对状态传播**完全隐形**——卡标 `rigorous` 而其严格性全系于一个本项目零验证的外部命题。已派 researcher 抽取 + 登记（分支 `agent/researcher/witten-2015-pole`，只写 `literature/**`），回来后由 curator 补 `depends_on` 边。
+  - 📌 **curator 报的图空白（供船长排期）**：**紧化 + 带穿孔**这个象限**至今无任何文献覆盖**——Donagi–Witten / Donagi–Noja / Corrêa–Noja / Donagi–Ott+Wang 四组论文各占一个互斥象限，Corrêa–Noja 抽取记录自陈检索无果。这是一个**有据可查的开放问题**，不是记账缺口。
+
 - **无鬼定理瓶颈已定位到单点**（lead 2026-09-18 用 `why`/`status` 逐级查出）：`worldsheet.no-ghost-theorem-v4` → `ddf-spanning-hypothesis` → `ddf-contour-equals-mode-sum` 这条链上**没有一个节点自身是 `physical-argument`**（三者 own 全是 `rigorous`），整条链被**唯一一个**节点 `worldsheet.physical-exponential-equals-voa-vertex-operator` 压成 `physical-argument`。而该节点弱在**抽取偷工**而非开放数学——现有 Li–Wang 抽取记录把公式 (3.10) 写成"含 ε(α,β) 因子与 x^{⟨α,β⟩}、E^-、Δ̄ 各项"，**算子名列了出来、公式本身没展开**。已派 researcher 重开 Li–Wang 2008（arXiv:0802.0173）§2–§3 抽 `E^-`/`Δ̄` 显式定义、(3.10) 完整右端与扭转模版本（分支 `agent/researcher/li-wang-vertex-operator`，只写 `literature/**`）。**反面结论同样是成功交付**：若 (3.10) 在本项目的秩 1 类光塔情形下确实需要额外条件，该节点就该老实留在 `physical-argument`，"抽取偷工"这一判断即不成立。同时要核实卡面"秩 1 类光 ⟹ cocycle 平凡"这一步是 Li–Wang 给的还是本项目自己补的。
 - **超模空间可投影性 post-2024 入图**：六篇 post-2024 文献已登记（commit 303d6d5），curator 正把 Donagi–Noja 2608.24996 / Corrêa–Noja 2606.06733 / FKP 2408.11136 / Donagi–Ott / Wang / DBFS 转成图节点（分支 `agent/curator/supermoduli-post-2024`，只写 `graph/statements/math/**` 与 `graph/derivations/math/**`）。**五条红线**（researcher 逐字核出，写进了派工书）：(1) Donagi–Noja 只覆盖 **𝔐₄^+（偶自旋）**，ω₂(𝔐₄^+)≠0，整个 𝔐₄ 是平凡的无交并推论；(2) Corrêa–Noja 三项拆三张卡，**FKP 边只挂在第 (2) 项、绝不挂第 (3) 项**；(3) FKP Thm 6.3 只到亏格 2，与他们的任意亏格**正则性**结果是两回事；(4) 不得写"Wang 严格改进 Donagi–Ott"（n=0 处 Wang 的界更严），且 Wang 自标"preliminary draft"；(5) DBFS 对 CDvG 的批评是**条件排除论证**，不是断言 CDvG 错，其 `[20]` 的 arXiv 编号仍待核。既有卡 `math.supermoduli-space-not-projected` 的五条红线里，**红线 (4)「不考虑 DM 紧化」仍然成立**（Corrêa–Noja 是紧化空间上的正交补充，不是对该卡的更正），红线 (1)「只到 g≥5」仅**部分**被超越（g=4 只有偶自旋半边，**g=3 未紧化情形至今开放**——Donagi–Noja 自述"work in progress"）；故该卡只准改 `notes:` 加交叉引用，不准动 `statement:`/`sources:`/`status`。
 - **协调总线已拆除**（2026-09-18，船长指令"走 2"）：`CLAUDE.md` 的 Agora 小节、`.claude/settings.json` 的 8 条 `mcp__agora__*` 权限、六个 agent 定义里的 agora 工具与散文全部移除，改为「无协调总线，靠分工不重叠 + worktree 隔离」——派工书必须逐字写明允许写入的路径，并行 agent 路径不得相交。图节点 `notes` 与 agent `status.yaml` 里"已 agora_send 通报 lead"之类的**历史审计记录按不可变卡纪律原样保留**，只有 `formal/BLUEPRINT-noghost.md:383` 那一条**活的**指令改成了"必须先停下来问 lead"。
