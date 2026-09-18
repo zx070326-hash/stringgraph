@@ -380,7 +380,7 @@ theorem basis_change_creation (v : Fin D → (Fin D → R))
 **不能**直接改成光锥基（光锥基下度规非对角）。上面的做法是**不动 `Fock` 的定义**，
 只在算子层面换基（`towerModeVec η a b v p` 对任意 `v` 都有定义），这是唯一不需要重构
 `Fock.lean` / `Sugawara.lean` 的走法。**重构共享基础（把 `η` 换成一般对称型）会波及
-Sugawara、PhysicalStates、整个顶点算子链，必须先 `agora_send` 通知 lead，不建议。**
+Sugawara、PhysicalStates、整个顶点算子链，必须先停下来问 lead，不建议。**
 
 **第 2 步：三条领头项引理**（这才是数学内容）。取光锥标架 `{b, b̃, ε_i}`，
 `dotVec η b b̃ = -1`，`b̃·b̃ = 0`，`ε_i` 是 `TransverseFrame`。
