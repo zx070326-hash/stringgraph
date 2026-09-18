@@ -20,14 +20,15 @@ restriction (both absent from Mathlib v4.33.1). This blueprint targets
 
 ## PR Sequence
 
-### PR0: Exceptional Algebra Exclusion ★ PARTIAL (G₂, F₄ only)
+### PR0: Exceptional Algebra Exclusion ★ PARTIAL (G₂, F₄, E₆ done; E₇ open)
 
 **Goal**: Prove G₂, F₄, E₆, E₇ violate condition (i); E₈ satisfies it.
 
-**Current status**: 
-- ✓ G₂ violates anomaly (12 roots, `native_decide` works)
-- ✓ F₄ violates anomaly (48 roots, `native_decide` works)
-- ✗ E₆ NOT IMPLEMENTED (72 roots, brute-force approach produces incorrect values)
+**Current status** (updated 2026-09-18):
+- ✓ G₂ violates anomaly (12 roots, kernel-checked `simp only [...]; norm_num`, no `native_decide`)
+- ✓ F₄ violates anomaly (48 roots, same kernel-checked approach)
+- ✓ E₆ violates anomaly (72 roots, same kernel-checked approach — **see postmortem below**,
+  a root-table bug, not a tooling bug, was blocking this)
 - ✗ E₇ NOT IMPLEMENTED (126 roots, list literal times out during elaboration)
 - E₈ already done in `E8Roots.lean`
 
@@ -36,20 +37,56 @@ restriction (both absent from Mathlib v4.33.1). This blueprint targets
 **What works**:
 - `g2_violates_anomaly`: existence proof with witness point H = (1, 0, -1)
 - `f4_violates_anomaly`: existence proof with witness point H = (1, 0, 0, 0)
+- `e6_violates_anomaly`: existence proof with witness point H = (1, 0, 0, 0, 0, 0, 0, 0)
 
-**What's needed for E₆ and E₇**:
+**Postmortem — the `native_decide`/E₆ misdiagnosis (2026-09-18)**:
 
-The brute-force list enumeration approach fails. Must follow `E8Roots.lean` pattern:
+An earlier round used `native_decide` for all six G₂/F₄ power-sum theorems. That is
+disallowed by project policy (`native_decide` introduces a fresh `Lean.ofReduceBool`-family
+axiom per invocation, which fails `check-axioms`'s "only `propext`, `Classical.choice`,
+`Quot.sound`" rule). All six were replaced with kernel-checkable
+`simp only [<definitional unfolds + List.map/sum_cons/nil + Matrix.cons_val*>]; norm_num`
+proofs — no block decomposition à la `E8Roots.lean` was needed because each goal is a
+*fixed numeric witness point*, not an identity for arbitrary `x`.
+
+Separately, the docstring claimed **E₆ (72 roots): `native_decide` computes incorrect
+values**, phrased as if the tool were unreliable. Auditing the root table (recovered from
+git history, commit `9565d95`) found the real cause: a root-table bug, specifically an
+off-by-one confusion between Bourbaki's 1-indexed range `i ≤ 5` (5 coordinates `1..5`) and
+a 0-indexed reading of the same string (wrongly suggesting 6 coordinates `0..5`):
+- the "D₅ block" `±eᵢ±eⱼ` used 10 pairs drawn from the wrong 6-coordinate index set
+  `{0,...,5}` (and even then covered only 10 of the 15 possible pairs there) instead of
+  *all* 10 pairs `i<j` among the correct 5 coordinates `{0,...,4}`;
+- the spinor block's alternating-sign sum ranged over 6 coordinates `i=0..5` with only 2
+  fixed coordinates, instead of 5 coordinates `i=0..4` with 3 fixed (`e₆,e₇,e₈` pinned at
+  `(-1/2,-1/2,+1/2)`).
+
+Both blocks had the *right length* (40 and 32 respectively, so the "72 roots" count looked
+fine) but the *wrong vectors* — hence non-standard power sums, which `native_decide`
+(and any other evaluator) reported faithfully. The E₆ embedding used here is the standard
+Bourbaki 8-dimensional one and is fully rational (coordinates ∈ {0, ±1, ±1/2}; no `√3` is
+needed — that only appears in the unrelated 6-dimensional presentation of E₆), so "E₆
+can't be written over ℚ" was never the issue. **Decision: option (a)** — the root table was
+fixed (`e6RootsD5`, `e6RootsHalf` in the Lean file) and the three E₆ power-sum theorems were
+added with the same kernel-checked method as G₂/F₄, no block decomposition required (72
+roots at a fixed witness elaborates in ~9s). As a sanity check, the corrected list reproduces
+*exactly* the power-sum values (S₂=24, S₄=18, S₆=33/2, anomaly RHS=201/25) that the old,
+never-successfully-checked docstring had already written down — the original author had the
+right target numbers, only the list that was supposed to produce them was mistyped.
+
+**What's needed for E₇** (unchanged, still open):
+
+The direct list enumeration approach times out for E₇'s 126 roots. Must follow `E8Roots.lean`
+pattern:
 
 1. **Programmatic root construction**: Define helper functions (like E8's `vroot`, `pairs28`) 
-   to build roots rather than enumerating all 72 or 126 vectors as list literals
+   to build roots rather than enumerating all 126 vectors as list literals
 2. **Algebraic identities**: Prove power sum formulas for arbitrary Cartan elements
    using the structure of the root system (block decomposition)
 3. **Witness specialization**: Only then evaluate at specific points for violations
 
 **Technical blockers encountered**:
 - E₇ root list (64-element half-root list) times out during elaboration even with 600k heartbeats
-- E₆ power sums computed via `native_decide` evaluate to incorrect values
 - List-based `powerSum` definitions don't generate usable equation theorems for rewrites
 
 **Dependencies**:
@@ -66,11 +103,11 @@ theorem e8_satisfies_anomaly_identity :
   ∀ x : Fin 8 → ℚ, 
   anomalyRHS (e8PowerSumTwo x) (e8PowerSumFour x) (e8PowerSumSix x)
 
--- Witnesses from proof.md table
-def g2Witness : Fin 2 → ℚ := ![1, -1]  -- S₂=48, S₆=3048, RHS=352.32
-def f4Witness : Fin 4 → ℚ := ![1,0,0,0] -- S₆=14.25, RHS=5.22
-def e6Witness : Fin 6 → ℚ := ![1,0,0,0,0,0]
-def e7Witness : Fin 7 → ℚ := ![1,0,0,0,0,0,0]
+-- Witnesses (matches the actual Lean file; g2/f4/e6 done, e7 still open)
+def g2Witness : Fin 3 → ℚ := ![1, 0, -1]  -- S₂=48, S₄=360, S₆=3048, RHS=8808/25
+def f4Witness : Fin 4 → ℚ := ![1,0,0,0]   -- S₂=18, S₄=15, S₆=57/4, RHS=261/50
+def e6Witness : Fin 8 → ℚ := ![1,0,0,0,0,0,0,0]  -- S₂=24, S₄=18, S₆=33/2, RHS=201/25
+def e7Witness : Fin 7 → ℚ := ![1,0,0,0,0,0,0]  -- not yet implemented
 
 -- Exclusions
 theorem g2_violates_anomaly : 
@@ -208,12 +245,13 @@ theorem d10_anomaly_classification_conditional
 
 ## Current Status
 
-**Active**: PR0 (this session)
+**Active**: PR0 (G₂, F₄, E₆ closed 2026-09-18; E₇ still open)
 
 **Target file**: `formal/StringFormal/Math/ExceptionalAnomalyExclusion.lean`
 
 **Approach for PR0**:
-1. Encode G₂, F₄, E₆, E₇ root lists (from proof.md scripts/Bourbaki coords)
+1. Encode G₂, F₄, E₆, E₇ root lists (from proof.md scripts/Bourbaki coords) — done for
+   G₂/F₄/E₆, still needed for E₇
 2. Compute power sums P₂, P₄, P₆ (same method as E8Roots.lean)
 3. Evaluate anomaly RHS at witness point for each
 4. Prove violations (exact rational arithmetic, `norm_num`)
