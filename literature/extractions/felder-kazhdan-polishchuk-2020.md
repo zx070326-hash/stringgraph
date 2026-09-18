@@ -807,3 +807,133 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
     "a gluing map for the Ramond boundary component, i.e., one of the maps **(7.9)**"**——而 (7.9)
     是 **NS** 非分离粘接映射，Ramond 的应当是 (7.11)/(7.12)。**疑为编号笔误**（很可能想写
     (7.11)、(7.12) 或 "(7.11) or (7.12)"）。本抽取如实记录，**不替作者改**，详见 E15。
+
+### E13 Lemma 7.9 与 Lemma 7.10：粘接的良定性与"(7.8)/(7.9) 的像 = $\Delta_{NS}$"
+- 位置：**Lemma 7.9** 陈述在 **p.47 末**，证明在 **p.48 上半页**；**Lemma 7.10** 陈述在 **p.48
+  中下部**（紧接 (7.9)），证明跨 **p.48 下半页–p.49 上半页**。L1（页图逐字）。
+- 类型：proposition（两条都是编号引理，均给出完整证明）
+
+#### (a) Lemma 7.9 —— 粘出来的东西**确实是**稳定超曲线
+- 原文陈述（逐字，p.47；连同其前定义 $Z/S$ 的两句）：
+  > We can apply this to gluing two stable supercurves along NS-punctures.
+  >
+  > Suppose $X/S$ and $X'/S$ is a pair of stable supercurves with NS-punctures $P \subset X$ and
+  > $P' \subset X'$. We have an isomorphism $P \simeq S \simeq P'$, so we can define a new
+  > superscheme $Z/S$ by gluing $X$ and $X'$ along $P \simeq P'$.
+  >
+  > **Lemma 7.9.** *The glued superscheme $Z/S$ has a natural stable supercurve structure such that
+  > the derivation $\delta$ on $Z$ is defined as the composition*
+  > $$\mathcal{O}_Z \to j_*\mathcal{O}_X \oplus j'_*\mathcal{O}_{X'}
+  >   \xrightarrow{\ (j_*\delta, j'_*\delta')\ }
+  >   j_*\omega_{X/S} \oplus j'_*\omega_{X'/S} \to \omega_{Z/S}.$$
+- 证明梗概（逐字要点，p.48）：
+  > *Proof.* If $U \subset X$, $U' \subset X'$ are smooth loci, then $(U \setminus P) \sqcup
+  > (U' \setminus P')$ is an open subset of $Z$, which is a smooth supercurve over $S$. Next, we need
+  > to check that in the case when $S$ is a point, $\delta^-$ induces an isomorphism of
+  > $\mathcal{O}_{\widetilde{Z}}$ with $\omega_{\widetilde{Z}}$. Since the base is even, we have
+  > identifications
+  > $$\mathcal{O}_X = \mathcal{O}_C \oplus L, \quad \mathcal{O}_{X'} = \mathcal{O}_{C'} \oplus L',$$
+  > […] Note that $L$ and $L'$ are generalized spin-structures, i.e., we have an isomorphism
+  > $L \xrightarrow{\ \sim\ } \underline{\mathrm{Hom}}(L, \omega_C)$ (which corresponds to $\delta^-$
+  > on $X$), and similarly, for $L'$. Furthermore, we know that $L$ (resp., $L'$) is locally free
+  > near $P$ (resp., $P'$).
+  >
+  > The glued superscheme $Z$ has the underlying nodal curve $Z_0$, which is glued from $C$ and $C'$
+  > along $P \simeq P'$, and
+  > $$\mathcal{O}_Z \simeq \mathcal{O}_{Z_0} \oplus j_*L \oplus j'_*L'.$$
+  > It is well known that the natural map
+  > $$j_*L \oplus j'_*L' \to \underline{\mathrm{Hom}}(j_*L \oplus j'_*L', \omega_{Z_0})$$
+  > is an isomorphism, i.e., $j_*L \oplus j'_*L'$ is a generalized spin-structure. It is easy to see
+  > that above map is precisely $\delta^-$, so this proves that $Z/S$ is a stable supercurve.
+  > $\square$
+- 文献自称的严格程度：编号引理 + 完整证明，唯一外包的一步逐字自称 "**It is well known that** the
+  natural map $j_*L \oplus j'_*L' \to \underline{\mathrm{Hom}}(j_*L \oplus j'_*L', \omega_{Z_0})$
+  is an isomorphism"——**这一步以"众所周知"引入，本文未给引文，也未自证**（经典自旋曲线上广义
+  自旋结构在节点处的标准事实）。如实记录。
+- 文献列出的依赖：§7.5 开头的一般粘接构造（p.47）；"广义自旋结构"的概念（本文 Lemma 2.6，
+  见 E4）；**上述 "well known" 的经典事实（无引文）**。
+- **对穿孔数目的依赖（逐字）**：Lemma 7.9 的陈述**只提到被粘的那一对 NS 穿孔 $P \subset X$、
+  $P' \subset X'$**，对 $X, X'$ 上**其余**穿孔的数目**不作任何限制，也不出现**。证明也只在
+  $P, P'$ 的邻域讨论。**即：本条对穿孔数目没有任何显式依赖。**（但同样地，作者也**没有**写下
+  "对任意穿孔数成立"这句话——只是陈述里根本没有出现穿孔数这个量。）
+
+#### (b) Lemma 7.10 —— 切空间余维 $1|0$ 的嵌入 + $\Delta_{NS}$ 就是 (7.8)/(7.9) 的概形像
+- 原文陈述（逐字，p.48；500 dpi 复核）：
+  > **Lemma 7.10.** *Both morphisms (7.8) and (7.9) induce embeddings of codimension $1|0$ on tangent
+  > spaces and factor through the divisor $\Delta_{NS}$. Furthermore, near a stable supercurve with a
+  > single separating (resp., non-separating) NS node, the divisor $\Delta_{NS}$ coincides with the
+  > schematic image of (7.8) (resp., (7.9)).*
+- 证明梗概（逐字要点，p.48–49）：
+  > *Proof.* The idea is to use exact sequences (3.9). Let $X$ be a stable supercurve with punctures
+  > and a fixed NS-node $q \in X$, and let $\rho : \widetilde{X} \to X$ be the normalization at $q$,
+  > equipped with the two NS punctures over $q$. Then by Proposition 3.11(i), we have
+  > $$\mathcal{A}_X \simeq \rho_*\mathcal{A}_{\widetilde{X}}$$
+  > (where we take into account all the punctures on both sides). Hence, the natural map
+  > $$H^1(\widetilde{X}, \mathcal{A}_{\widetilde{X}}) \to H^1(X, \mathcal{A}_X)$$
+  > is an isomorphism.
+  >
+  > Let $q_1, \dots, q_m$ be the nodes of $X$ different from $q$. Then we have a morphism of exact
+  > sequences
+  > $$\begin{array}{ccccccccc}
+  >   0 & \to & H^1(\widetilde{X}, \mathcal{A}_{\widetilde{X}}) & \to & T_{\mathrm{Def}(\widetilde{X})}
+  >     & \to & \bigoplus_{i=1}^{m} T_{\mathrm{Def}(\mathcal{O}_{X,q_i})} & \to & 0 \\
+  >   0 & \to & H^1(X, \mathcal{A}_X) & \to & T_{\mathrm{Def}(X)} & \to &
+  >     T_{\mathrm{Def}(\mathcal{O}_{X,q})} \oplus \bigoplus_{i=1}^{m}
+  >     T_{\mathrm{Def}(\mathcal{O}_{X,q_i})} & \to & 0
+  >   \end{array}$$
+  > in which the right vertical arrow is the natural inclusion of codimension $1|0$. Since the left
+  > vertical arrow is an isomorphism, the assertion about the map of tangent spaces follows.
+  >
+  > To check that our morphisms factor through $\Delta_{NS}$, we have to check that the pull-back of
+  > the morphism $\mathcal{O} \to \mathcal{O}(\Delta_{NS})$ is zero. Since the sources are smooth, it
+  > is enough to check this generically, so we can consider a neighborhood of the point corresponding
+  > to a supercurve with a single NS node. Then we know that the local equation of $\Delta_{NS}$ will
+  > be $(t = 0)$, where $t$ corresponds to the map to the universal deformation of the node. Since the
+  > deformation of the node given by the source of the maps (7.8) and (7.9) is trivial, this proves
+  > that the pull-back of $t$ with respect to one of these maps is zero. Using the fact that the
+  > morphism on tangent spaces is an embedding with the image which is the orthogonal to $dt$, we
+  > deduce that near this point $\Delta_{NS}$ is the schematic image of the morphism. $\square$
+- 文献自称的严格程度：编号引理 + 完整证明（"the assertion follows" / "we deduce that…"，无外包、
+  无弱化措辞）。
+- 文献列出的依赖（作者自列，逐字）：(3.9)（§3 的正合列）；**Proposition 3.11(i)**（$\mathcal{A}_X
+  \simeq \rho_*\mathcal{A}_{\widetilde{X}}$）；Proposition 7.8（$\Delta_{NS}$ 作为有效 Cartier
+  除子的存在与局部方程，见下）；节点的普适形变理论（§3.5/3.6）。
+- **对穿孔数目的依赖（★ 本条的承重信息，正反两侧逐字证据）**：
+  **支持"与穿孔数无关"的一侧：**
+  1. 证明第二句逐字：*"Let $X$ be a stable supercurve **with punctures** and a fixed NS-node
+     $q \in X$"*——**明确允许 $X$ 带（任意多个）穿孔**，没有任何数量限制。
+  2. Proposition 3.11(i) 的引用处作者**特意加了括注**，逐字：*"(where we take into account **all the
+     punctures on both sides**)"*——即同构 $\mathcal{A}_X \simeq \rho_*\mathcal{A}_{\widetilde{X}}$
+     是在"把两边**所有**穿孔都算进去"的意义下成立的。**这是本轮找到的、作者亲手写下的、最接近
+     "本论证对任意穿孔数成立"的一句话**，但注意它**只是对 Lemma 7.10 证明中 $\mathcal{A}$ 层这一步
+     的说明，不是对 (9.6)/Theorem C 的任何声明**。
+  3. Lemma 7.10 的陈述本身逐字只谈 (7.8)/(7.9) 与 $\Delta_{NS}$，而 (7.8)/(7.9) 的定义域/陪域
+     带一般 $(m,n)$ 指标（E12）——**故 Lemma 7.10 逐字就是"对任意穿孔数的 (7.8)/(7.9)"成立的**。
+     ⚠ 这是 E7–E11 各条里**唯一**一条陈述层面就覆盖一般穿孔指标的结果。
+  4. 证明里出现的 $m$ 是"**除 $q$ 以外的节点个数**"（$q_1,\dots,q_m$），**不是穿孔数**——⚠ 这是
+     本文第三处 $m$ 的不同用法（(8.11) 里 $m$ = NS 穿孔数，Lemma 9.3 里 $m$ = $\omega$ 的幂次，
+     这里 $m$ = 其余节点个数）。**记号陷阱，curator 引用时务必核对上下文。**
+
+  **反面 / 限制条件的一侧：**
+  1. Lemma 7.10 的第二句只断言"**在带单个（分离/非分离）NS 节点的稳定超曲线附近**，$\Delta_{NS}$
+     与 (7.8)（resp. (7.9)）的概形像重合"——**是局部（"near"）断言，不是全局等式**。
+  2. 证明中 "*Since the sources are smooth, it is enough to check this generically*" 一步用到了源的
+     光滑性（来自 Theorem A 对每个 $(g;m,n)$ 的光滑性），**即本条在逻辑上仍依赖 Theorem A**。
+  3. Lemma 7.10 **完全不涉及 Ramond 节点**——Ramond 的类比是 **Lemma 7.14**（p.51，逐字：
+     "*Both morphisms (7.11) and (7.12) induce embeddings of codimension $1|0$ on tangent spaces and
+     factor through the divisor $\Delta_R$. Furthermore, near a stable supercurve with a single
+     non-separating Ramond node the divisor $\Delta_R$ coincides with the schematic image of
+     (7.11).*"）。⚠ **注意 Lemma 7.14 的第二句只对 non-separating 一种情形断言概形像重合，
+     没有像 Lemma 7.10 那样给出 separating 的 "(resp., …)" 对应**——即 **(7.12)（分离型 Ramond）
+     的概形像与 $\Delta_R$ 的关系，Lemma 7.14 逐字没有断言**。这是原文里一处真实的不对称，如实
+     记录，不替作者补。
+- 备注：**Proposition 7.8(i)**（p.47，$\Delta_{NS}$ 的存在与"在只有 NS 节点的点邻域与 $\Delta$
+  重合"）是 Lemma 7.10 的前置，E9 备注 (b) 第 1 条已逐字抄录；其 (ii) 与其后一段逐字为：
+  > *(ii) There exists a unique effective Cartier divisor $\Delta_R$ supported on the locus of stable
+  > supercurves with at least one Ramond node, such that*
+  > $$\Delta = \Delta_{NS} + \Delta_R.$$
+  > *If $X_0$ is a stable supercurve with NS nodes $q_1,\dots,q_r$ and Ramond nodes
+  > $q_{r+1},\dots,q_k$, then there exists an étale neighborhood $B$ of $[X_0]$ in
+  > $\overline{\mathcal{S}}$ with a smooth morphism $t_1,\dots,t_k : B \to \mathbb{A}^k$ such that
+  > $t_1 \dots t_r$ is an equation of $\Delta_{NS}$ and $t_{r+1} \dots t_k$ is an equation of
+  > $\Delta_R$.*
