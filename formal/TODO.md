@@ -2290,3 +2290,32 @@ A11 对应 `literature/extractions/math-sources.md` §44（Humphreys §2.10 根�
   `Virasoro.Verma` 改成 `Virasoro.Basic`。`DescendantGrading.lean` **仍需** import Verma：
   它实际用了 `wordAct` / `vermaLift` / `VermaModule`（约 40 处），不是只为这几条。
   另记：`R = ℤ` 处 `Module ℤ (WittAlgebra ℤ)` 实例菱形，`rw` 会失败须写应用式。
+
+## D=10 反常排除岛（`StringFormal/Math/ExceptionalAnomalyExclusion.lean`）
+
+- [x] `d10-anomaly-g2-f4-e6`：G₂、F₄、E₆ 违反 D=10 反常抵消恒等式
+  `S₆ = (1/48)S₄S₂ − (1/14400)S₂³`（`g2_violates_anomaly` / `f4_violates_anomaly` /
+  `e6_violates_anomaly`，2026-09-18，见 `formal/BLUEPRINT-d10-anomaly.md` PR0）。
+  六个 G₂/F₄ 幂和定理原用 `native_decide`（引入非标准公理，`check-axioms` 不过），
+  已全部换成 `simp only [<定义展开 + List.map/sum_cons/nil + Matrix.cons_val*>]; norm_num`
+  的核检证明；单一见证点（非任意 `x`）不需要 `E8Roots.lean` 那种分块技巧。
+  `check_axioms.lean` 与 `uv run stringgraph check-axioms --decl` 对全部 13 条声明
+  （g2/f4/e6 各 3 条幂和 + rhs + violates，外加两条 rhs 未单列检查）均输出 `ok`，
+  公理集只有 `propext Classical.choice Quot.sound`。
+  **发现的根表 bug（非工具 bug）**：文件 docstring 曾写「E₆ (72 roots): `native_decide`
+  computes incorrect values」，读起来像是在怪工具。核查 git 历史（commit `9565d95`）后
+  发现真正的错误在根表本身：D₅ 块的 10 对指标取自错误的 6 坐标集合 `{0,...,5}`
+  （且只覆盖该集合里 15 对中的 10 对），而不是正确的 5 坐标集合 `{0,...,4}` 里的全部
+  10 对；半整数（spinor）块的交替符号和取遍 6 个坐标 `i=0..5` 且只固定 2 个坐标，
+  而不是取遍 5 个坐标 `i=0..4` 且固定 3 个坐标（`e₆,e₇,e₈` 应钉在 `(-1/2,-1/2,+1/2)`）。
+  两处都是同一个 Bourbaki 1-indexed `i≤5`（5 个坐标 `1..5`）被误读成 0-indexed
+  `i≤5`（6 个坐标 `0..5`）的差一错误——两块列表因此长度对（40、32）但向量错，幂和自然
+  对不上。E₆ 在这个 8 维嵌入下完全是有理数（分量只有 `0, ±1, ±1/2`，不需要 `√3`——
+  `√3` 只出现在另一套不相关的 6 维 E₆ 构造里），所以不存在「E₆ 在 ℚ 上写不出来」的障碍；
+  选择方案 (a)：修根表（`e6RootsD5`、`e6RootsHalf`）并补上三条 E₆ 幂和定理。修好后的表
+  精确复现了旧 docstring 早已写下的目标值（S₂=24, S₄=18, S₆=33/2, RHS=201/25），说明
+  原作者数值算对了，只是抄错了产生这些数值的根表。
+  **未做**：E₇（126 根）直接展开仍在 elaboration 阶段超时（600k+ heartbeats 不够），
+  需要按 `E8Roots.lean` 的分块/程序化构造路线重做，本轮未做；E₈ 已在 `E8Roots.lean` 完成。
+  此文件与对应 `graph/` 节点尚未建立 `formal.lean_decl` 链接（未发现引用该文件的图节点），
+  留给 curator/lead 判断是否要新建陈述卡。
