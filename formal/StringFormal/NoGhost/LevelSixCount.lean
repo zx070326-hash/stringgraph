@@ -348,4 +348,132 @@ theorem oscWeight_eq_six_cases {d : (ι × ℕ+) →₀ ℕ} (h : oscWeight d = 
 
 end Finsupp
 
+/-! ### The `LevelSixIdx` parametrisation
+
+Eleven branches, one per partition shape of `6`.  Mirrors `LevelFiveCount`'s `LevelFiveIdx`
+exactly: shapes with a **repeated** mode value use `Sym ι k` (the mode value no longer
+distinguishes which oscillator is which); shapes with **pairwise distinct** mode values use
+ordered products `ι × ι` / `ι × ι × ι` (the mode value itself already distinguishes the
+factors, so there is no overcount to quotient by).
+
+`[5,1]` and `[4,2]` both contribute `m²`; the other nine shapes are each their own monomial
+(`m`, `m·C(m+1,2)`, `C(m+1,2)`, `m³`, `m·C(m+2,3)`, `C(m+2,3)`, `C(m+1,2)²`, `m·C(m+3,4)`,
+`C(m+5,6)`), matching `levelSix_count_identity_full`'s ten-term formula exactly. -/
+
+section LevelSixIndex
+
+variable {ι : Type*} [DecidableEq ι]
+
+/-- Six mode-`n` oscillators from an unordered sextuple. -/
+lemma symModeIndex_mk_six (n : ℕ+) (a c e f g h : ι)
+    (hcard : Multiset.card ({a, c, e, f, g, h} : Multiset ι) = 6) :
+    symModeIndex ι n ⟨{a, c, e, f, g, h}, hcard⟩
+      = Finsupp.single ((a, n) : ι × ℕ+) 1
+        + (Finsupp.single ((c, n) : ι × ℕ+) 1
+          + (Finsupp.single ((e, n) : ι × ℕ+) 1
+            + (Finsupp.single ((f, n) : ι × ℕ+) 1
+              + (Finsupp.single ((g, n) : ι × ℕ+) 1
+                + Finsupp.single ((h, n) : ι × ℕ+) 1)))) := by
+  have hm : ({a, c, e, f, g, h} : Multiset ι)
+      = a ::ₘ (c ::ₘ (e ::ₘ (f ::ₘ (g ::ₘ {h})))) := by simp [Multiset.insert_eq_cons]
+  show Finsupp.mapDomain _ (Multiset.toFinsupp ({a, c, e, f, g, h} : Multiset ι)) = _
+  rw [hm, mapDomain_toFinsupp_cons, mapDomain_toFinsupp_cons, mapDomain_toFinsupp_cons,
+    mapDomain_toFinsupp_cons, mapDomain_toFinsupp_cons, Multiset.toFinsupp_singleton,
+    Finsupp.mapDomain_single]
+
+variable (ι)
+
+/-- The level-six index type. -/
+abbrev LevelSixIdx : Type _ :=
+  ι ⊕ (ι × ι) ⊕ (ι × ι) ⊕ (ι × Sym ι 2) ⊕ Sym ι 2 ⊕ (ι × ι × ι) ⊕ (ι × Sym ι 3) ⊕ Sym ι 3
+    ⊕ (Sym ι 2 × Sym ι 2) ⊕ (ι × Sym ι 4) ⊕ Sym ι 6
+
+/-- The level-six index map. -/
+noncomputable def levelSixIndex : LevelSixIdx ι → ((ι × ℕ+) →₀ ℕ)
+  | Sum.inl i => Finsupp.single (i, 6) 1
+  | Sum.inr (Sum.inl p) => Finsupp.single (p.1, 5) 1 + Finsupp.single (p.2, 1) 1
+  | Sum.inr (Sum.inr (Sum.inl p)) => Finsupp.single (p.1, 4) 1 + Finsupp.single (p.2, 2) 1
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) =>
+      Finsupp.single (p.1, 4) 1 + symModeIndex ι 1 p.2
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s)))) => symModeIndex ι 3 s
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p))))) =>
+      Finsupp.single (p.1, 3) 1 + Finsupp.single (p.2.1, 2) 1 + Finsupp.single (p.2.2, 1) 1
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))) =>
+      Finsupp.single (p.1, 3) 1 + symModeIndex ι 1 p.2
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s))))))) =>
+      symModeIndex ι 2 s
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))))) =>
+      symModeIndex ι 2 p.1 + symModeIndex ι 1 p.2
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inl p))))))))) => Finsupp.single (p.1, 2) 1 + symModeIndex ι 1 p.2
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inr t))))))))) => symModeIndex ι 1 t
+
+/-- The mode profile `(#1, #2, #3, #4, #5, #6)` of each of the eleven shapes. -/
+def levelSixShape : LevelSixIdx ι → ℕ × ℕ × ℕ × ℕ × ℕ × ℕ
+  | Sum.inl _ => (0, 0, 0, 0, 0, 1)
+  | Sum.inr (Sum.inl _) => (1, 0, 0, 0, 1, 0)
+  | Sum.inr (Sum.inr (Sum.inl _)) => (0, 1, 0, 1, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl _))) => (2, 0, 0, 1, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl _)))) => (0, 0, 2, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl _))))) => (1, 1, 1, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl _)))))) => (3, 0, 1, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl _))))))) =>
+      (0, 3, 0, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl _)))))))) =>
+      (2, 2, 0, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inl _))))))))) => (4, 1, 0, 0, 0, 0)
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inr _))))))))) => (6, 0, 0, 0, 0, 0)
+
+variable {ι}
+
+lemma oscWeight_levelSixIndex (x : LevelSixIdx ι) :
+    Finsupp.oscWeight (levelSixIndex ι x) = 6 := by
+  match x with
+  | Sum.inl i => simp [levelSixIndex]
+  | Sum.inr (Sum.inl p) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inl p)) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s)))) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p))))) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s))))))) =>
+      simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))))) =>
+      simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inl p))))))))) => simp [levelSixIndex]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inr t))))))))) => simp [levelSixIndex]
+
+lemma modeVec_levelSixIndex (x : LevelSixIdx ι) :
+    (modeCount ι 1 (levelSixIndex ι x), modeCount ι 2 (levelSixIndex ι x),
+        modeCount ι 3 (levelSixIndex ι x), modeCount ι 4 (levelSixIndex ι x),
+        modeCount ι 5 (levelSixIndex ι x), modeCount ι 6 (levelSixIndex ι x))
+      = levelSixShape ι x := by
+  match x with
+  | Sum.inl i => simp [levelSixIndex, levelSixShape]
+  | Sum.inr (Sum.inl p) => simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inl p)) => simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inl p))) =>
+      simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s)))) =>
+      simp [levelSixIndex, levelSixShape]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p))))) =>
+      simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))) =>
+      simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl s))))))) =>
+      simp [levelSixIndex, levelSixShape]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inl p)))))))) =>
+      simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inl p))))))))) => simp [levelSixIndex, levelSixShape, modeCount_add]
+  | Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr (Sum.inr
+      (Sum.inr (Sum.inr t))))))))) => simp [levelSixIndex, levelSixShape]
+
+end LevelSixIndex
+
 end StringFormal.NoGhost
