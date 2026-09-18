@@ -2128,7 +2128,19 @@
                这条陈述请改引 schottenloher-2008 的 Proposition 10.6（其正文明确归功于 Kac）与 Theorem 10.10。
                **注意 Kac 全书是形式分布演算**：勘误表 (4.11.6) 里的「associativity property in the domain |z| > |w|」
                指的是选 i_{z,w} 这种形式展开，**不是解析收敛域**，极易误读。
-               见 extractions/math-sources.md §10 与 §13。}
+               见 extractions/math-sources.md §10 与 §13。
+               **2026-09-18 追加（researcher，断言 (2) 第二轮候选 #2）**：本轮任务书点名的是
+               「§5（格点顶点代数）」——**经 WebSearch 核实该编号亦不对**：AMS 官方目录显示本书目录为
+               「1. Wightman axioms and vertex algebras / 2. Calculus of formal distributions /
+               3. Local fields / 4. Structure theory of vertex algebras / **5. Examples of vertex
+               algebras and their applications**」，格点顶点代数与自由场实现属于 §5 的一部分，但**具体
+               子节/定理号仍未核实**（与本条目此前已确认的 §2–§4 编号同样受限）。**正文仍完全无法
+               获取**：`bookstore.ams.org/ulect-10-r` 与 AMS 免费预览 `pspdf/` 路径均 403；本轮未找到
+               任何大学课程页挂出单章 PDF（WebSearch 未命中 .edu/.ac 域名的章节镜像）；Google Books
+               卷 `e-jxBwAAQBAJ` 的 `&q=` 检索本轮因 429/验证码无法执行（见 `goddard-olive-1986` 条目
+               同一次会话的 Google Books 故障记录，两者同源）。**§5 内容（含断言 (2) 可能所在的
+               free field realization / 物理正规序对应段落）本轮维持 L0**，无新进展。
+               见 extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md §候选2。}
 }
 
 % ---------------------------------------------------------------------------
@@ -5419,4 +5431,86 @@
              （axion-dilaton 平面）壁，与 Φ₁₀ 在 Siegel 空间的零点超曲面是不同几何对象，不可等同引用。抽取记录 extractions/sen-2008-precision-counting.md（S1--S9）。
              ⚠ 任务原文误将 hep-th/0505094 称为"Black Hole Attractors and the Topological String"——该 arXiv 号实际是
              Shih-Strominger-Yin "Recounting Dyons in N=4 String Theory"；对应标题的正确论文是 Ooguri-Strominger-Vafa hep-th/0405146。两者本轮均未抽取。}
+}
+
+% ---------------------------------------------------------------------------
+% 断言 (2) 第二轮候选（researcher 2026-09-18，见
+% extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md）
+% ---------------------------------------------------------------------------
+
+@article{goddard-olive-1986,
+  author  = {Goddard, Peter and Olive, David I.},
+  title   = {Kac-Moody and Virasoro Algebras in Relation to Quantum Physics},
+  journal = {International Journal of Modern Physics A},
+  volume  = {1},
+  number  = {2},
+  pages   = {303--414},
+  year    = {1986},
+  doi     = {10.1142/S0217751X86000149},
+  note    = {**正文完全未获取（L0）。本轮（2026-09-18）穷尽公开渠道，全部失败**：
+             (1) CERN Document Server `cds.cern.ch/record/168465` —— 该域名对本环境的一切请求
+             （含 `?ln=en`、`/files/*`、`/export/hx` 等路径）一律返回同一份 Anubis 反爬挑战页
+             （HTTP 200 但 title 为 "Making sure you're not a bot!"，需要 JS 工作量证明），
+             curl 与 WebFetch 均未能穿透，INSPIRE 记录（`inspirehep.net/literature/18583`）
+             证实该 CDS 记录对应的正是 report number **DAMTP-86-5**（Cambridge 预印本），但
+             INSPIRE 自己的 `documents`/`urls` 字段为空——**INSPIRE 也没有托管全文**；
+             (2) World Scientific 官方页（`worldscientific.com/doi/10.1142/9789812798398_0001` 即该文
+             重印为 *Kac-Moody and Virasoro Algebras: A Reprint Volume for Physicists* 的 Introduction 章，
+             以及 `worldscientific.com/worldscibooks/10.1142/0485` 书页）**均被 Cloudflare 质询页拦截**
+             （`Just a moment...`，托管在 `challenges.cloudflare.com`），无法穿透；
+             (3) Google Books 对该重印文集（volume id `Wpk6Q-gFTmwC`、`VXHFCwAAQBAJ`）的
+             `&q=<短语>` 检索本轮返回 `429`/验证码重定向（`google.com/sorry/index`），Google Books
+             Custom Search API 本轮配额已耗尽（`RESOURCE_EXHAUSTED`），**未能执行任何一次带控制组的
+             页码定位查询**；(4) Semantic Scholar API 逐字确认
+             `"isOpenAccess": false, "openAccessPdf": {"status": "CLOSED"}`（DOI 查询，2026-09-18）——
+             **这是全网索引层面对"无合法免费全文"的独立确认**，不只是本项目手气不好。
+             **登记理由**：本文是任务书本轮最高优先级候选（物理学家写的综述，格点顶点算子记号与
+             Kac-Moody 表示论并置，被判断为"最可能同时写出 :e^{ikX(z)}: 与 𝒴(e^α,z) 并划等号"的文献），
+             **但正文无法核实**，登记以便下一轮若拿到任何一条公开渠道（例如某高校图书馆代理、
+             作者身后档案公开）立即重查。见
+             extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md。}
+}
+
+@book{kac-raina-rozhkovskaya-2013,
+  author    = {Kac, Victor G. and Raina, Ashok K. and Rozhkovskaya, Natasha},
+  title     = {Bombay Lectures on Highest Weight Representations of Infinite Dimensional Lie Algebras},
+  edition   = {2},
+  series    = {Advanced Series in Mathematical Physics},
+  volume    = {29},
+  publisher = {World Scientific},
+  year      = {2013},
+  note      = {**正文完全未获取（L0）。** 本轮（2026-09-18）候选，因第 2 版新增「Part II: Vertex
+             algebras（2003 年 TIFR 讲座）」，据出版社简介覆盖「normal ordered product、untwisted and
+             twisted representations」，与断言 (2) 判据主题相符。但：作者本人共同作者 Rozhkovskaya 的
+             主页 `math.ksu.edu/~rozhkovs/book_bombay.html` **只有封面图与出版社链接，无任何 PDF/样章**；
+             `worldscientific.com/worldscibooks/10.1142/8882` 书页同样在 Cloudflare 拦截之列（未单独复测，
+             判定与 `goddard-olive-1986` 条目里同域名的 `10.1142/0485` 一致）。**版本陷阱**：本条是
+             **第 2 版**（2013，18 讲 + Part II），不要与第 1 版 `kac-raina-1987`（World Scientific,
+             1987，仅约 12 讲、无 Part II）混淆——已有条目 `kac-raina-1987` 的 note 已记录此陷阱。
+             见 extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md §候选5。}
+}
+
+@article{nikolov-todorov-2004,
+  author  = {Nikolov, Nikolay M. and Todorov, Ivan T.},
+  title   = {Lectures on Elliptic Functions and Modular Forms in Conformal Field Theory},
+  eprint  = {math-ph/0412039},
+  archivePrefix = {arXiv},
+  year    = {2004},
+  note    = {由 researcher 于 2026-09-18 意外命中并登记（检索断言 (2) 候选时，WebSearch 带出本文
+             §5.2 的公式作为"物理式 Y_α(z) 公式"的搜索摘要，遂全文核实）。**全文获取成功
+             （`arxiv.org/pdf/math-ph/0412039` 200，`pdftotext -layout` 落盘 5443 行）：L1**。
+             §5.2 "Lattice vertex algebras"（PDF 文本行 3266 起）用 Heisenberg 振子 `h_n` 构造
+             `Y(h,z) = Σ h_n z^{-n-1}`（(5.49)）与格点顶点算子
+             `Y_α(z) := E^α z^{α_0} :e^{φ_α(z)}:`（(5.51)/(5.53)，`φ_α(z)` 为 (5.52) 定义的"积分场"，
+             `φ_α(z) = -Σ_{n≠0} (α_n/n) z^{-n}`），并给出 OPE (5.55)、局域性 (5.57)–(5.58)、
+             Sugawara 应力张量 (5.59)–(5.61)。**结构上与断言 (2) 左端 `:e^{i n k₀·X(z)}:` 的
+             E₋·零模·E₊ 分解同构**（`φ_α(z)` 起的正是 `X(z)` 的作用），且**同时使用 VOA 结构映射
+             记号 `Y(·,z)`**——比 Li–Wang/Frenkel 更接近"两套记号并置"。**但不满足断言 (2) 判据**：
+             (i) `Y_α(z)` 是**被定义**为 `E^α z^{α_0}:e^{φ_α(z)}:`（单一构造），不是"独立构造出的物理
+             对象与 VOA 映射之间划等号"——没有先写出一个独立于此的 `X^μ(z)`/`:e^{ikX(z)}:` 再证明
+             两者相等；(ii) 全文无 `X^μ(z)`、无显式 spacetime 指标 `μ`、无"worldsheet"/"string theory"
+             正文出现（唯一涉及弦的段落是 Remark 5.3，p.57，只说"自对偶偶幺模格对应
+             (25,1)/(9,1) 型玻色/超弦"，未接回 `Y_α(z)` 与物理场的等式）。**结论：near miss，
+             不承载断言 (2)**，理由与 `frenkel-2000-bourbaki`/`li-wang-2008` 同类（VOA 侧内部构造，
+             非物理↔VOA 翻译句）。见 extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md §候选7。}
 }
