@@ -4050,6 +4050,52 @@
             判断继续成立（见上）。本文完全不涉及 Deligne-Mumford 紧化（红线(4)问题不适用/不受影响）。}
 }
 
+@misc{felder-kazhdan-polishchuk-2020,
+  author        = {Felder, Giovanni and Kazhdan, David and Polishchuk, Alexander},
+  title         = {The Moduli Space of Stable Supercurves and Its Canonical Line Bundle},
+  year          = {2020},
+  eprint        = {2006.13271},
+  archivePrefix = {arXiv},
+  primaryClass  = {math.AG},
+  note   = {⚠ **不要与 `felder-kazhdan-polishchuk-2024`（arXiv:2408.11136, "Superperiods and
+            Superstring Measure Near the Boundary of the Moduli Space of Supercurves"）混淆——
+            两篇是不同的论文，同三位作者。** 2408.11136 只处理**亏格 2**的 superperiod/supermeasure
+            边界行为；**本条（2006.13271）是紧化 + 任意穿孔数超模叠的存在性构造**，发表于
+            Amer. J. Math. **145** (2023) no.6, 1777--1886（v1 提交 2020-06-23，v2 2020-07-15，
+            v3 2023-03-06；本条抽取自 v3）。由 researcher 于 2026-09-18 登记（任务书指出本文
+            是 `research/attempts/supermoduli-compactified-punctured/` 原创轨道推论 A/B 的地基性
+            依赖，此前只被该轨道的 prover 读过 pp.1--6 做 prior-art 核查，未登记入本 bib，
+            未有独立 literature/ 抽取记录）。**全文（74 页 PDF，pdftotext -layout 落盘）L1**，
+            重点通读 §1 引言（Theorem A/B/C 陈述）、§2.2 Definition 2.1/2.4（穿孔与稳定性的精确
+            定义）、§2.6（与经典自旋曲线模叠的关系，含 "nR is necessarily even" 一句的准确归属）、
+            §5.1/§5.4（Theorem A 证明骨架：光滑性 = Corollary 3.20，固有性归约到偶部分 = 已知
+            Cornalba [11]/Jarvis [22] 结果）。详见 extractions/felder-kazhdan-polishchuk-2020.md。
+            **记号**：紧化叠写作 $\overline{S}_{g,n_{NS},n_R}$（PDF 第 1 页图像逐字核实带上划线，
+            `pdftotext` 纯文本抽取会丢失上划线，渲染为 "Sg,nNS,nR"——引用时务必用图像核实过的
+            带 bar 记号，不要照抄 pdftotext 输出）。
+            **Theorem A 逐字**："There exists a smooth and proper DM-stack
+            $\overline{S}_{g,n_{NS},n_R}$ over $\mathbb{C}$ representing the functor of families
+            of stable supercurves of genus $g$ with $n_{NS}$ NS punctures and $n_R$ Ramond
+            punctures."（p.1）。**量词**：$g, n_{NS}, n_R$ 均为非负整数，定理陈述本身**未写出**
+            显式数值约束；稳定性（从而隐含 $2g-2+n_{NS}+n_R>0$）由 Definition 2.4(ii) 定义
+            （逐字："stable...if X is proper over S and for every geometric fiber $X_s$, passing
+            to the bosonic truncation $(X_s)_{bos}$ with the marked points induced by $(P_i)$ and
+            $(R_i)$ one gets a usual stable...pointed curve."）——即通常的 $2g-2+n>0$ 型稳定性，
+            但本文正文**没有把它单独写成一条不等式**，是从"陈述句点定义中的稳定判据"间接得到的。
+            ⚠ **$n_R$ 奇偶性的归属易错**："$n_R$ is necessarily even" 这句（§2.6, 逐字）**只附着于
+            [22]/[23] 此前研究的经典"稳定自旋曲线模叠"** $S_{g,n_{NS},n_R}$（本文说这是限制到偶
+            基后与本文构造重合的对象），**不是本文 Theorem A 自身对 $\overline{S}_{g,n_{NS},n_R}$
+            明文重申的假设**——本文正文没有另外一处对自己的 Theorem A 重申 $n_R$ 须为偶数。
+            这一点是本条目抽取中发现的、容易被后续引用者读错的细节，已在抽取记录里单独立一条
+            "未解决的疑问"标注，不代自行判定 Theorem A 是否隐含同一约束。
+            **严格程度自称**：正文以 Theorem/Proof 形式给出完整证明（§3 变形理论、§4 相对丰满线丛、
+            §5 完成 Theorem A 的存在性论证），§5.4 显式承认固有性部分"归约到已知结果"
+            （Cornalba [11]、Jarvis [22]），非本文自证。**引言明确记录 Theorem A 的独立平行证明**：
+            "After we finished this work we learned about the work of Moosavian and Zhou [27], where
+            Theorem A is also proved."（p.1）——本文与 Moosavian--Zhou 互相独立地证明了同一条
+            Theorem A，本 bib 条目不涉及 Moosavian--Zhou 是否已登记。}
+}
+
 @misc{felder-kazhdan-polishchuk-2024,
   author        = {Felder, Giovanni and Kazhdan, David and Polishchuk, Alexander},
   title         = {Superperiods and Superstring Measure Near the Boundary of the Moduli Space of Supercurves},
@@ -5513,4 +5559,119 @@
              (25,1)/(9,1) 型玻色/超弦"，未接回 `Y_α(z)` 与物理场的等式）。**结论：near miss，
              不承载断言 (2)**，理由与 `frenkel-2000-bourbaki`/`li-wang-2008` 同类（VOA 侧内部构造，
              非物理↔VOA 翻译句）。见 extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md §候选7。}
+}
+
+@article{gebert-1993,
+  author  = {Gebert, Reinhold W.},
+  title   = {Introduction to Vertex Algebras, {B}orcherds Algebras and the {M}onster {L}ie Algebra},
+  journal = {Int. J. Mod. Phys. A},
+  volume  = {8},
+  pages   = {5441--5504},
+  year    = {1993},
+  eprint  = {hep-th/9308151},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-18 第三轮"断言 (2)"检索登记（arXiv 全文开放，无付费墙）。
+            **⚠ 与已登记的 `gebert-nicolai-1995`（不同论文，两位作者，只承载断言 (1) 的 cocycle
+            平凡性）严格区分**：本条是 Gebert 单作者 1993 年综述，55 页，全文 L1（`pdftotext -layout`
+            落盘 3442 行 + 关键页原始图像核实，PDF pp.27--30）。
+            **§3.1 Definition 1（p.9--10，原文页码，逐字，含轴 (15)--(21) 与 Jacobi 恒等式 (22 区）)**：
+            顶点代数被抽象公理化定义为"a linear map V: F -> (End F)[[z,z^{-1}]] which assigns to
+            each state ψ∈F a vertex operator V(ψ,z)"，满足 Regularity/Vacuum/Injectivity/Conformal
+            vector/Jacobi identity 五条公理——**这是独立于任何格点/物理构造的抽象定义**，先于 §4。
+            **§4.1 Theorem 5（PDF p.27）**："Associated with each nondegenerate even lattice Λ there
+            is a vertex algebra (F,V,1,ω)."——存在性定理，§4.2--4.3 给出构造并验证公理。
+            **§4.2（PDF p.29--30）核心链**：引入 Fubini--Veneziano 场
+            `Q^μ(z) ≡ q^μ - i p^μ ln z + i Σ_{m∈Z,m≠0} (1/m) α^μ_m z^{-m}`（原文页图逐字核实），
+            正规序记号显式定义（"colons indicate that ... q^ν is written to the left of p^μ, as well
+            as the creation operators are to be placed to the left of the annihilation operators"）；
+            先以 (69) **定义** `V(e^r,z) := exp(∫r_<(z)dz) e^r z^{r(0)} exp(∫r_>(z)dz)`（振子分裂记号），
+            再写"This can be written in a way more familiar to physicists by introducing FORMALLY the
+            Fubini-Veneziano field ... **which really only has a meaning when exponentiated**. We find
+            V(e^r,z) = :e^{i r·Q(z)}: c_r"。
+            **★★ 对断言 (2) 判据的严格核实结论：不满足，理由与 Round 2 的 Nikolov--Todorov 2004 同型
+            但更明确**——(a) 满足判据条件 1（写出带时空指标 μ 的 `Q^μ(z)`，正规序 `: :` 显式定义，
+            且整节明写"can be thought of as a bosonic string theory with d spacetime dimensions
+            compactified on a torus"）；(b) **不满足判据条件 2 的"独立构造后划等号"要求**——`V(e^r,z)`
+            虽然是先经 §3.1 Definition 1 抽象公理化（这点比 N-T 更强，VOA 侧是真独立定义的），但
+            **物理侧的 `Q^μ(z)` 本身没有独立于 (69) 的物理构造**：作者原文用"formally"（只是形式上
+            引入）与"which really only has a meaning when exponentiated"（只有指数化后才有意义）
+            两处措辞**自陈** Q(z) 只是把 (69) 的振子分裂表达式改写成物理记号的**记号装置**，不是先用
+            自由玻色场正则量子化等物理论证独立构造出 `X^μ(z)`/`:e^{ikX(z)}:` 再证明与 VOA 结构映射
+            相等。⇒ **"V(e^r,z)=:e^{ir·Q(z)}:c_r" 是单一构造的改写恒等式，不是两个独立构造对象之间
+            的识别（identification）**，与 N-T (5.51)/(5.53) 属同一缺陷模式，但本文作者用词更直白地
+            承认了这一点（"formally"）。**这是本轮读到的、结构上最接近断言 (2) 但仍不满足严格判据
+            的最强候选**，详见 extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md E1。
+            **(b)(c) 两个附带问题**：本文全文只处理离散格点动量 `r ∈ Λ`（Λ 为偶格），**不涉及连续
+            动量、无光滑到离散的极限论证**（(b) 未处理）；cocycle 因子 `c_r` 显式处理（§4.1
+            (63)--(67)），但**无 δ 函数归一化讨论**（本文动量离散，无需 δ(k-k')，(c) 不适用/未处理）。
+            **§4.3 逐字**："in agreement with the well-known expression from string theory"（PDF
+            p.31 附近，L(n) Virasoro 生成元与弦论已知表达式一致）——这是关于 Virasoro 生成元的确认句，
+            不是关于顶点算子本身的确认句，不可误引为断言 (2) 的支持证据。}
+}
+
+@article{dolan-goddard-montague-1994,
+  author  = {Dolan, L. and Goddard, P. and Montague, P.},
+  title   = {Conformal Field Theories, Representations and Lattice Constructions},
+  journal = {Commun. Math. Phys.},
+  volume  = {179},
+  pages   = {61--120},
+  year    = {1996},
+  eprint  = {hep-th/9410029},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-18 第三轮"断言 (2)"检索登记（arXiv v1 1994-10-05 全文开放，
+            无付费墙；正式发表于 Commun. Math. Phys. 179 (1996) 61--120）。任务书标注的本轮"第二强
+            候选"，已逐字核实，本条 L1（`pdftotext -layout` 落盘 3627 行 + PDF pp.29--31 原始图像
+            核实 (5.14)--(5.25) 全部公式 + 全文 `Grep` 扫描 `FLM`、`Y\(|Y_|vertex operator
+            algebra|Jacobi identity|axiom` 关键词）。
+            **本文是 DGM 自己的原创格点 CFT 构造论文（非综述）**，§2 Definition 2.1 建立自建的
+            物理学家式共形场论公理系统 `(H,F,V,|0>,L)`（性质 P1--P7：Virasoro 表示 + 局域性/OPE），
+            §5.2 在此框架下具体构造格点 CFT：field `X^j(z)=q^j-ip^j ln z+i Σ_{n≠0}(a^j_n/n)z^{-n}`
+            (5.17)，顶点算子直接 `:=` 定义 `V(ψ,z)=:(Π...d^{m_a}X^{j_a}/dz^{m_a}(z))
+            exp{iλ·X(z)}:σ_λ` (5.18)，正规序显式拆分 `X_<`/零模`e^{iλq}z^{λp}`/`X_>` (5.19)--(5.20)，
+            Theorem 5.1（存在性）证明外包给作者自己更早的 Nucl.Phys. B338(1990)529 [11]。
+            **★★ 对断言 (2) 判据的严格核实结论：不满足，且比 Gebert 1993 失败得更彻底**——
+            (a) 判据条件 1 满足度是三轮最高（(5.17)--(5.20) 公式最完整、最教科书化）；
+            (b) 判据条件 2 **完全不满足**：`Grep` 全文 3627 行找 `Y\(|Y_|vertex operator
+            algebra|Jacobi identity|axiom` 只命中 3 处，唯一与 VOA 记号相关的一处
+            （Frenkel--Huang--Lepowsky "On axiomatic approaches to VOA" [14]）**只出现在参考文献
+            表**，正文从未写出 FLM/Borcherds 的结构映射 `Y(v,z)` 记号本身；"FLM"在正文出现 4 次
+            （引言 2 次、triality 段落 2 次）全部是叙述 FLM **结果内容**（Monster module 构造、
+            triality 群论对称）的历史性陈述，逐字例如"Our treatment is based on the approach of
+            [12], which was inspired by the work of FLM and Borcherds' general approach to 'vertex
+            operator algebras'[13]"——方法论谱系"隔了两层"提及，从未把 `Y(v,z)` 与 `V(ψ,z)` 并列
+            对照或证明相等。⇒ 本文根本不存在"VOA 侧独立构造"这一半，只用**自建的**物理公理系统
+            （非 FLM/Borcherds 公理）构造 `V(ψ,z)`，FLM 仅作历史谱系提及，是"连尝试都没尝试"的
+            不满足，比 Gebert 1993"尝试了但物理侧不独立"更彻底。已用图像核实排除"pdftotext 丢失
+            `Y(v,z)` 符号导致误判"的风险（PDF pp.29--31 图像中顶点算子记号统一为 `V(ψ,z)`，未见
+            任何 `Y(·,·)`）。详见 extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md E2。
+            **(b)(c) 两个附带问题**：与 Gebert 同型——本文全文只处理离散格点 Λ（偶格），不涉及
+            连续动量接口 (b)；cocycle 算子 `σ_λ`/`\hat σ_λ` (5.21) 处理仔细但无 δ 函数归一化 (c)
+            不适用。}
+}
+
+@article{gaberdiel-1999,
+  author  = {Gaberdiel, Matthias R.},
+  title   = {An Introduction to Conformal Field Theory},
+  journal = {Rept. Prog. Phys.},
+  volume  = {63},
+  pages   = {607},
+  year    = {2000},
+  eprint  = {hep-th/9910156},
+  archivePrefix = {arXiv},
+  primaryClass  = {hep-th},
+  note   = {由 researcher 于 2026-09-18 第三轮"断言 (2)"检索登记（arXiv 全文开放，无付费墙）。
+            候选 4，本条已核实为 L1，但**核实速度快于 Gebert/DGM，因为在判据条件 1 的排查阶段
+            即已明确不满足**——不需要更深入的条件 2 核实。
+            **§3.7.4 "Lattice Theories"**：格点顶点算子 `V(k,z)` **直接由振幅公理定义**
+            （`V(k_1,z_1)...V(k_N,z_N)=ε(k_1,...,k_N)Π_{i<j}(z_i-z_j)^{k_i·k_j}`，本文 (140)），
+            Virasoro 场由自定义流 `H^i(z)` 的 OPE（(145)）构造，正规序 `: :` 全文**仅**用于流的
+            模式双线性组合（Sugawara 构造，(133)--(135)：`:J^a_m J^b_l:=J^a_m J^b_l` if m<0,
+            else `J^b_l J^a_m`），**从未**出现在自由玻色场 `X^μ(z)`/Fubini--Veneziano 场的指数上；
+            全文搜索 `e^{i·}`/`exp{i·}` 在格点构造附近零命中。
+            **★ 对断言 (2) 判据的核实结论：判据条件 1（写出 `X^μ(z)` 类对象+正规序指数）本身
+            即不满足**——三轮六候选里第一个"连条件 1 都不满足"的候选（Nikolov--Todorov、
+            Gebert、DGM 均满足条件 1 但败在条件 2）。详见
+            extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md E3。}
 }
