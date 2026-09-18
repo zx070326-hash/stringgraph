@@ -217,3 +217,32 @@ Bakalov–Kac (2.22)、GN 正规性公理 (2.32)）与图内已 rigorous 的「�
   真正逐字写「零模 = Res of product」的是 GN (3.3)，故直接源以 GN 为准，Bakalov–Kac/Schottenloher 作机制来源。
 - 未查 **FLM 1988 Ch. 8**（自由玻色/格点顶点算子的显式积）与 **Frenkel–Ben-Zvi §5**：它们大概率也含等价内容，
   但本仓库对二者的定理号一律 L0（math-sources.md §38.2），本轮不据它们下任何断言。裁定 (A) 不依赖它们。
+
+---
+
+## 追加（2026-09-18，任务：`worldsheet.physical-exponential-equals-voa-vertex-operator` 抽取偷工核查）
+
+新任务把 §Q4 表格最后一行（「物理 `:e^{i n k_0·X(z)}:` = VOA `𝒴(e^{n k_0}, z)`」标 `是（inferred）`）
+拆成了独立节点 `worldsheet.physical-exponential-equals-voa-vertex-operator`（2026-09-15 后，curator 已建卡，
+不再是本文件写作时那条挂在别处的 `inferred: true` 边）。本轮把 Li–Wang §3–§4 全文（pp.9–24）重新逐页读图，
+针对该节点的两条断言分别复核，见 `literature/extractions/math-sources.md` §36.6（新增小节，L1，完整逐字）。
+结论对本文件原有判断的更新如下——**只更新断言 (1) 的来源强度，不改变 Q4/裁定 (A) 对「留数=模态和」那部分的结论**：
+
+- **断言 (1)（cocycle 平凡，`ε(mk,nk)=1`）现在有比 GN (3.1) 更直接、更一般的来源**：
+  Li–Wang **Section 4**（p.21，紧接 Theorem 4.1 之前）逐字写「Note that the normalized 2-cocycle
+  `ε : L×L → ℂ^×` defined in Remark 3.4 is trivial in the sense that `ε(α,β) = 1` for all `α,β ∈ L`」，
+  这是对**任意**满足 `⟨·,·⟩|_L=0` 的 `L`（不只是秩 1）的陈述；秩 1 类光 `L=ℤk₀` 是它的特例。
+  本文件原 §Q4 只引了 GN (3.1)「`ε(mk,nk)=1`」并把「此特例下扭群代数退化为普通群代数」标成本项目自己的
+  bicharacter 双线性延拓推断（对应卡 `sources` 里 `li-wang-2008` 那条 note 的「⚠ 本条只承载 VOA 侧定义」）。
+  **这条推断现在有 Li–Wang 本人的逐字陈述兜底，不再需要经由本项目自己的延拓论证或绕道 GN。**
+- **断言 (2)（物理正规序指数 = VOA 结构映射 𝒴）依旧确认无源**：本轮通读 Li–Wang 全文 pp.9–24，
+  没有任何一处出现物理记号（`X^μ(z)`、`:e^{ikX}:`、normal ordering、worldsheet 等一概不出现）。
+  这与本文件此前的判断一致（§Q4 表格「隔的是记号翻译+一条已在别处登记的 inferred 桥」），**不因新读到
+  §4 的 ε≡1 陈述而改变**——那条陈述只加固了断言 (1) 的地基，没有触及「这是不是同一个算子」这句翻译。
+- **对本文件「裁定 (A) 文献可闭合」的影响**：**没有**。裁定 (A) 讲的是「留数 = 模态和」这一步（Q1–Q3），
+  该步骤的来源链条（GN (3.2)–(3.3)、Schottenloher Def 10.1/10.9/Thm 10.10、Bakalov–Kac (2.22)）不变。
+  本追加只影响 Q4 表格最后一行以及它现在对应的独立节点
+  `worldsheet.physical-exponential-equals-voa-vertex-operator` 的**断言 (1)** 那一半，
+  该节点的**断言 (2)** 仍是全图唯一真正开放的缝——`ddf-contour-equals-mode-sum--via-voa-residue`
+  的 effective 是否能从 physical-argument 升级，**取决于断言 (2) 而非断言 (1)**，
+  而断言 (2) 本轮复核后依然无源，故该链条的瓶颈本质**不因本次抽取改变**。
