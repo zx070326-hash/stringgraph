@@ -238,3 +238,129 @@ MSRI Publications **3**, Springer-Verlag New York, 1985（= 1983-11-10..17 Berke
   以统一记号为职责的文章，并确认它明确拒绝写记号」。
 
 ---
+
+## 候选 2：FLM 1988 *Vertex Operator Algebras and the Monster* 第 8 章的**后续论文转引路线**
+
+任务书本轮明令**不再试图拿原书**（前两轮五渠道全败，见第一轮 E11），改为寻找
+「后续论文里逐字转引 FLM (8.x.x) 公式」的段落。以下 E2.1–E2.5 是本轮沿这条路线的全部结果。
+
+### E2.1 ★ Andrew Ogg 的 Bull. AMS 书评（L1 全文）——**二手但一手引用的**「FLM 的 Y(e^α,z) 长什么样」
+- 文献：Andrew Ogg, *Review: Igor Frenkel, James Lepowsky and Arne Meurman,* Vertex Operator
+  Algebras and the Monster, **Bull. Amer. Math. Soc. (N.S.) 25 (1991), no. 2, 425–432**，
+  DOI `10.1090/S0273-0979-1991-16086-6`。新登记 bib key `ogg-1991`。
+- 获取：AMS 自家 Bulletin 免费 PDF（AMS 对 Bulletin 全刊开放），本轮下载成功，
+  **8 页、697 036 字节，`Read` 工具逐页渲染核对，L1**。
+  ⚠ 同一 URL 在本轮稍后复测返回 **HTTP 403**（疑为 AMS 速率限制），Project Euclid 侧的
+  `.../bams/1183657192.full` 页面标注为订阅内容。**如需复核请从 DOI 走 AMS 官方入口。**
+- 位置：**p. 430**（本条引文全部出自这一页；已用 `Read` 直接渲染页图核对，未只信 pdftotext）
+- 类型：（书评中的转述；**不是 FLM 原文**，是 FLM 同时代同行对 FLM 第 8 章构造的公开转述）
+- 原文陈述（逐字，`°...°` 表示原书评排版中的「开口冒号」正规序记号）：
+  > … The *current* defined by `α ∈ 𝔥` is `α(z) = Σ_{n∈Z} α(n) z^{-(n+1)}`, where the action of
+  > `α(0)` on `V_L` is suitably defined. Then, **very roughly, the vertex operator `Y(u, z)` of a
+  > "constant" vector `u = e^α` is** `°e^{∫α(z)dz/z}°` **where the open colons denote *normal
+  > ordering*, in which the operators indexed by `n < 0` are placed to the left of those indexed by
+  > `n > 0` (and we ignore here the considerable work required to deal with the case `n = 0`).**
+  > This notion of normal ordering is required in order to make the operator well defined (sums must
+  > be finite) and has many pleasant algebraic consequences; it is used frequently throughout the
+  > book. The definition is extended to general `u ∈ V_L` so that replacing `u` by `β(-m)·u` replaces
+  > `Y(u, z)` by `°(1/(m-1)!)(d/dz)^{m-1} β(z) Y(u, z)°`.
+- 另一处逐字（p. 429）：
+  > **The treatment in the book is entirely algebraic**; `z` is a formal variable, and there is no
+  > notion of convergence in `F` or in `V`.
+- 全篇唯一涉及物理的句子（逐字）：
+  > It seems that the theory of vertex algebras is equivalent to 2-dimensional conformal field
+  > theory; the Monster is the symmetry group of a particular conformal field theory and would have
+  > been discovered by physicists if the group theorists had not found it first.
+- 文献自称的严格程度：书评，作者自陈 "very roughly"、"we ignore here the considerable work
+  required to deal with the case `n = 0`"——**明确声明是粗略转述、且刻意略过零模那一段**。
+- 文献列出的依赖：FLM 原书（无具体章节号）。
+- 备注（三条判据逐条裁定）：
+  - **判据 1：不满足。** 有正规序记号（开口冒号）与模展开 `α(z)`，但 `α` 是格点/Heisenberg
+    抽象元素，**没有 `X^μ(z)`、没有时空指标 `μ`、没有任何弦论场记号**；
+    全篇唯一的物理句子（上引）是散文式的「顶点代数似乎等价于二维 CFT」，正是判据 1 逐字排除的
+    「散里提一句 free bosonic CFT 不算」那类。
+  - **判据 2：形式上有 `Y(u,z)`，但等号右边是同一构造的正规序指数展开，不是物理侧独立对象。**
+  - **判据 3：不满足，而且是本轮最有价值的一条否定情报**——书评逐字说这是 FLM 对
+    `Y(e^α, z)` 的**定义**（"The definition is extended to general `u ∈ V_L` …"），
+    即 FLM 是**先用正规序指数把 `Y(e^α,z)` 定义出来**，再往一般 `u` 上延拓。
+    **若此转述忠实，则 FLM 第 8 章里「正规序指数 = `Y(e^α,z)`」是 `:=` 而非跨框架恒等式**，
+    与 Nikolov–Todorov 2004 的失败模式（判据 3）**同型**。
+  - ⚠ **这条裁定的强度限制（必须写明）**：书评是**二手转述**（本项目 L 级里属 L3 的内容、
+    但载体本身是 L1 读到的一手出版物）。Ogg 自己说 "very roughly"。
+    **它不能替代 FLM 正文**，只能把「FLM 第 8 章大概率是定义式而非识别式」的置信度从
+    「完全未知」提到「有同时代同行的公开转述支持」。**FLM 正文仍为 L0。**
+
+### E2.2 从 Rosellen 的讲义回收到的 FLM 第 8 章**编号**（L3，编号而非公式）
+- 文献：Markus Rosellen, *A Course in Vertex Algebra*, arXiv:math/0607270（L1 全文下载，
+  `pdftotext` 11 365 行）。**本轮不登记 bib**（只用作编号来源，未从中取任何陈述）。
+- 位置：该讲义正文多处对 [FLM88] 的引用。
+- 类型：（元信息，二手编号转引）
+- 原文陈述（逐字摘引用句片段）：
+  > "… in detail [FLM88], sections **2.1–2.2 and 8.1–8.3**."
+  > "… this result for lattice vertex algebras [FLM88], **Remark 8.9.1**."
+  > "… invariant, symmetric bilinear form [FLM88], **Theorem 8.9.5**."
+  > "… rational functions in one and several variables [FLM88], equations **(8.1.5), (8.1.6), and
+  >   (8.10.37)**."
+  > "… [FLM88], **section 8.10**. It is the main axiom in their definition of a vertex …"
+  > "… `L_0` [FLM88], equations **(8.10.23) and (8.10.32)**, [FHL93], Definition 4.1.1."
+- 备注：本项目此前连 FLM 第 8 章的**小节标题**都未取得（第一轮 E11）。本条把已知的 FLM 第 8 章
+  编号从「无」扩充到 **§8.1–8.3、Remark 8.9.1、Theorem 8.9.5、§8.10、(8.1.5)、(8.1.6)、
+  (8.10.23)、(8.10.32)、(8.10.37)**。这是 **L3（二手转抄编号）**，**不是公式内容**——
+  **没有任何一条被转引的 FLM 公式正文被本轮找到**。对断言 (2) **不承载**，
+  仅供日后若拿到原书时直接翻页定位。
+
+### E2.3 ⚠ 重要纠偏：Dong–Mason–Nagatomo math/0004132 **并没有**说「FLM 没写明公式」
+- 文献：C. Dong, G. Mason, K. Nagatomo, *Quasi-modular forms and trace functions associated to
+  free boson and lattice vertex operator algebras*, arXiv:math/0004132v1（L1 全文，932 行）。
+  **本轮不登记 bib**（不承载任何断言）。
+- 位置：§4.1 "Vertex operator algebras associated to lattices"，PDF 第 10–11 页。
+- 类型：（判据核对 + 对检索摘要的纠偏）
+- 原文陈述（逐字）：
+  > **We now work in the setting of Chapter 8 of [FLM].** In particular, `L` is a positive definite
+  > lattice, and `𝔥 = L ⊗_Z C`. Let `C[L]` be the group algebra with a basis `{e^α | α ∈ L}`. Then
+  > the vertex operator algebra `V_L` associated to `L` is `V_L = M(1) ⊗ C[L]` as vector spaces.
+  > The vertex operator `Y(v, z)` for `v ∈ M(1)` is defined as in the case of `M(1)`
+  > (see formulas (3.1.1) and (3.1.2)). … **For the purposes of this paper we do not make explicit
+  > the expression for vertex operators `Y(v, z)` for general `v` except for those `v ∈ M(1)`.**
+- 备注：
+  - ⚠ **纠偏**：本轮检索后端（WebSearch 摘要）把最后这句转述成「该文指出 FLM 那里没有把顶点算子
+    的显式表达式写明」。**逐字核对后为误**——主语是 **"this paper"（即 Dong–Mason–Nagatomo
+    自己）不是 FLM**。作者说的是**他们自己**这篇文章用不着写显式公式，**没有**对 FLM 第 8 章
+    是否写了公式作任何陈述。**这是本轮发现的一处检索摘要曲解，记录在案以免日后被引为「FLM 没写」
+    的伪证据。**
+  - 该文本身：`Y(v,z)` 对 `v ∈ M(1)` 的公式在 (3.1.1)/(3.1.2)，是纯 VOA 侧展开
+    （`a(z) = Σ a(n) z^{-n-1}`，正规序乘积），**全文无 `X^μ(z)`、无弦论记号**。
+    判据 1 不满足，**不承载**。
+  - 附带正面价值：这是本轮找到的**唯一**一篇逐字写出「我们在 FLM 第 8 章的设定下工作」并
+    紧接着把该设定的**基本数据**（`V_L = M(1) ⊗ C[L]`、`a(0)e^β = (a,β)e^β` (4.1.1)）
+    复述出来的论文——**可作为 FLM 第 8 章设定的 L3 转引**，但它复述的是**设定**，不是断言 (2)
+    需要的那条公式。
+
+### E2.4 Runkel arXiv:1209.5554 §3.3：结构最接近、但两条判据同时失败
+- 文献：Ingo Runkel, *Algebra in Braided Tensor Categories and Conformal Field Theory*
+  （本轮 L1 下载）。**本轮不登记 bib**。
+- 位置：§3.3（自由玻色子 / Heisenberg VOA 与格点扩张），Definition 3.1、(3.28)、Lemma 3.6、
+  Theorem 3.12。
+- 备注：形式上**是对的形状**——先抽象公理化地定义一个对象，再显式构造一个对象，再证明二者一致。
+  但：**判据 1 不满足**（全文只有模 `J_m` 与抽象正规序，**没有 `X^μ(z)`、没有物理冒号指数**）；
+  **判据 2 不满足**（没有格点结构映射 `Y(e^α,z)` 这一半）。**不承载。**
+  登记于此是为了给 lead 一个「数学侧确实存在'两个独立构造再证相等'这种写法」的对照样本——
+  缺的从来不是数学写法，缺的是**把物理侧记号也写进来**的那一半。
+
+### E2.5 转引路线的渠道汇总与结论
+- 本轮为找「逐字转引 FLM (8.x.x) 公式」执行的检索：
+  1. arXiv 全文检索式关键词组合（`"Chapter 8 of [FLM]"`、`FLM` + `(8.4.` / `(8.6.` 等编号、
+     `Frenkel-Lepowsky-Meurman` + `normal ordering`）→ 命中 **math/0004132**（见 E2.3）；
+     其余命中均为只引章节号不抄公式的常规引用。
+  2. VOA 教科书/讲义级材料逐份下载核对：Dong q-alg/9504017（*Introduction to VOA I*）、
+     Lepowsky arXiv:0706.4072、Runkel 1209.5554、Rosellen math/0607270、Bakalov 1502.04756
+     —— **五份全部 L1 拿到全文**，**无一份逐字转抄 FLM 第 8 章的格点顶点算子公式**；
+     Rosellen 只给编号（E2.2），其余只给自己的记号版本。
+  3. 同时代书评 → 命中 Ogg 1991（E2.1），是本路线唯一拿到「FLM 的 `Y(e^α,z)` 长什么样」的
+     公开转述。
+- **结论：转引路线本轮「有产出但不命中」。** 产出是 E2.1 的定性情报（FLM 是**定义式**）
+  与 E2.2 的编号；**没有找到任何一篇论文把 FLM 第 8 章那条公式逐字抄出来**，
+  因此**没有任何二手 L1 证据能支撑「FLM 第 8 章承载断言 (2)」**。
+  **FLM 第 8 章正文维持完全 L0**（第一轮 E11 的结论不变）。
+
+---
