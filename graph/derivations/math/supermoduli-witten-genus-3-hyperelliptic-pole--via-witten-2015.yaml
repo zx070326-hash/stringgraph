@@ -1,0 +1,67 @@
+id: math.supermoduli-witten-genus-3-hyperelliptic-pole--via-witten-2015
+target: math.supermoduli-witten-genus-3-hyperelliptic-pole
+kind: physical-argument
+status: physical-argument
+depends_on: []
+sources:
+  - ref: witten-2015-ramond-period-matrix
+    loc: >-
+      arXiv:1501.02499, Appendix C.2 (C.6)–(C.11), pp.51–52；Appendix C.3, p.52；Appendix C.4
+      (C.19)–(C.25), pp.55–56；References [24], p.59.
+    note: |
+      L1，见 statement sources note；literature/extractions/witten-2015-super-period-matrix-ramond.md
+      E3/E5/E6/E7/E8。
+summary: |
+  记账 Witten 论文 Appendix C 全节给出的一条正文论证：一段有显式公式支撑的代数几何计算，建立在两类
+  严格数学对象上——(i) 超椭圆曲线的显式代数参数化与自旋结构的线丛全纯截面维数计数（C.1–C.2，纯代数
+  几何，本文自己完整给出，无外部依赖）；(ii) 超 Mumford 同构（引 [19]–[22] = Rosly–Schwarz–Voronov
+  / Baranov–Manin–Frolov–Schwarz / Baranov–Schwarz 的既有数学结果，本项目未独立核实这几篇的证明）+
+  D'Hoker–Phong 对超周期矩阵关于奇模数依赖的展开公式（C.19 及其后的显式代数操作）。
+
+  **判据（按 docs/STATUS_LEVELS.md 裁定，非默认虚高）**：
+  rigorous 的判据要求"有发表的、数学界接受的完整证明"。本文虽已发表（J. Geom. Phys.，DOI 见 bib
+  条目），且论证有具体公式支撑（不是"标准论证"式的口头带过），但同时满足"断言+骨架"档位
+  （docs/STATUS_LEVELS.md 57–59 行）描述的情形：论证骨架完整可见（(C.19)–(C.25) 逐式展开），但
+  多处关键判断只有断言，未在文中被独立证明或消解：
+  (a) **全篇（含 Appendix C 全节）无编号 Theorem/Proposition**——是叙述性正文计算，不是形式化定理
+      陈述结构。
+  (b) **"generically"限定未被消解**——支撑 D′ 支计算的关键中间结果 (C.14) 前一句原文明说
+      "generically along D′, this matrix is nondegenerate"，本文未证明该非退化性对 D′ 上所有点
+      成立，只论证了一般点上成立。若非退化性在 D′ 的非一般点失效，(C.19)–(C.22) 的极点阶数计算
+      在那些点的有效性不受本文保证。
+  (c) **D 支的结论作者自己降格为"expect"**——"we expect π_*(Υ) to vanish as ε⁴=q² along D"，不是
+      "we show"/"we prove"，是本文作者本人对论证完整性的自我保留。
+  (d) **D′ 支的方法论基础部分来自私人交流**——Appendix C.3（p.52）原文自陈"It is less obvious that
+      π has a pole along D′; this was essentially explained to the author by P. Deligne."，即支撑
+      D′ 支后续测度极点计算的这一步，其推理思路部分归功于与 P. Deligne 的私人交流，不是 Witten
+      本人独立推出、也未见诸任何可核查的公开文献（Deligne 本人未就此单独发表）。
+
+  **综合判断**：这是一段建立在严格数学对象之上、有显式公式支撑、比纯物理直觉论证强得多的正文计算，
+  但按 (a)–(d) 四条，它既不带定理编号，也未在自身文本内把"generically"与"we expect"两处限定消解
+  为无条件陈述，且 D′ 支的关键论证步骤部分依赖未公开发表的私人交流。这正是 docs/STATUS_LEVELS.md
+  "断言+骨架"准则针对的情形（有骨架，关键步骤只有断言）：按该准则应标 **physical-argument**，不标
+  rigorous（"论证不完整"用 gaps 记录，不因此降到 conjecture——本文从未把这条结果当作猜想提出，
+  D′ 支的结论用"thus"而非"we conjecture"）。
+
+  **本条推导判定诚实地把目标卡的 effective status 从依赖它的下游卡的角度定为 physical-argument
+  这一档，而不是为了让下游卡（`math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole`）保住
+  rigorous 而虚高**——这正是本任务要暴露的隐形承重前提：DBFS 的排除论证此前把这条前提藏在文字记录
+  里、未接成图边时，下游卡显示为 rigorous；现在前提被立成显式节点、诚实定级后，下游卡的 effective
+  会随之下调，这是设计意图，不是缺陷。
+gaps:
+  - |
+    **超 Mumford 同构（[19]–[22]）与 D'Hoker–Phong 公式（引用出处见 statement 正文）本身未被本项目
+    独立核实**——本推导记账的是 Witten 论文对这些既有结果的使用，不重新核实这些既有结果自身的证明。
+  - |
+    **genericity 假设未被消解**（见 summary (b)）：(C.14) 前"generically along D′ nondegenerate"
+    这一限定的精确适用范围（D′ 上具体哪些点是例外）本文未给出，本项目也未独立核实。
+  - |
+    **D′ 支的关键推理步骤部分归属于 P. Deligne 的私人交流**（见 summary (d)），不是可独立核查的公开
+    证明——若后续要把这一步单独审计，需要找到 Deligne 是否曾以其他形式公开发表过相关论证。
+  - |
+    **D 支的结论本身未被证明**（见 summary (c)），只是作者本人的"expect"。若下游推导只需要 D′ 支
+    （目前 `math.supermoduli-genus-3-cdvg-ansatz-excluded-by-pole` 的排除论证正是如此），D 支的
+    这条 gap 对该下游推导不构成实质影响；但任何未来把 D 支结论当作前提使用的推导，必须单独记这条
+    gap，不能借道本推导把它悄悄升级为"shown"。
+author: curator-witten2015-genus3-pole
+created: "2026-09-18"
