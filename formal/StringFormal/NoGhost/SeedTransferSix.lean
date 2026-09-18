@@ -54,17 +54,22 @@ in `NoGhost/NullSeedsTwo.lean` (reused here, not redefined).
   §B⁗.2 checked by hand (`-240`/`+240` on `L_{-5}`, `-180`/`+180` on `L_{-4}L_{-1}`, etc.).  The
   final arithmetic is closed by the `module` tactic.
 
+## Longitudinal half (bonus item, done)
+
+`towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five` proves `L_1 (y₃ (L_{-1}φ)) = 2h • y₃φ` for
+any seed `φ` of weight `h = -5` (any central charge).  **Discovered while proving it**: the
+identity is `h`-sharp (only true at `h = -5`, not for general `h`) but is *independent of the
+central charge* — see the section docstring above `Longitudinal` for the full explanation; this
+refines (does not contradict) blueprint §B⁗.9's framing of the computation as living "in `V(26,
+-5)`".
+
 ## What is **not** done here (explicitly out of scope for this PR)
 
 * The **transverse half**: that `x₄v`, `y₃v` are singular vectors of `V(26,-4)` (`v` the rung-`-5`
   Fock vacuum) is *not* formalised.  This is the bulk of the remaining work towards `b26_six` /
   `ddfSpans_bigrade_neg_six_six` per §B⁗.9's "下一步", and is out of scope for this file.
-* The **longitudinal half** (`L_1(y₃ L_{-1}v) = 2h·y₃v` at `h = -5`, `c = 26`) is *not* attempted:
-  it needs `L_1 y₃ φ = 0`/`L_2 y₃ φ = 3(c-26)L_{-1}φ` (§B⁗.2's "两条新的 `c-26` 方程", the level-3
-  twin of `NullSeedsTwo`'s intercept/critical-dimension equations), which are not in this file and
-  would roughly double its size; deferred to a follow-up PR.
 * The `N = 6` seed criterion itself (`x₄u ∈ Q_{-6,5} ∧ y₃u ∈ Q_{-6,4} ⟹ u ∈ Q_{-6,1}`, §B⁗.9's
-  main theorem) is untouched: this file only supplies its "前置事实 3".
+  main theorem) is untouched: this file only supplies its "前置事实 3" plus the longitudinal half.
 -/
 
 namespace StringFormal.NoGhost
@@ -195,5 +200,143 @@ theorem towerLop_neg_one_mul_x4_add_descTwo_mul_y3 :
   module
 
 end SyzygyIdentity
+
+/-! ### The longitudinal half of blueprint §B⁗.9: `L_1 (y₃ L_{-1}φ) = 2h • y₃φ`, sharp at `h = -5`
+
+This is the "time permitting" bonus item of this PR.  Direct hand computation (done before writing
+any Lean, mirroring `NullSeedsTwo`'s style) shows
+
+`L_1 (y₃ (L_{-1}φ)) = 24h • L_{-3}φ + (24h + 60) • L_{-2}(L_{-1}φ) + (8h + 30) • L_{-1}³φ`
+
+for **every** `h` (`φ` any seed of weight `h`), against `2h • y₃φ = 24h • L_{-3}φ + 12h •
+L_{-2}(L_{-1}φ) + 2h • L_{-1}³φ`.  The `L_{-3}φ` coefficients already agree identically; the other
+two force `h = -5` (`24h + 60 = 12h` and `8h + 30 = 2h` both solve to `h = -5`).  **No condition on
+the central charge ever appears**: every commutator used is `⁅L_1, L_{-1}⁆ = 2L_0` (zero central
+term, `centralTerm_one_eq_zero`), `⁅L_1, L_{-2}⁆ = 3L_{-1}`, or `⁅L_1, L_{-3}⁆ = 4L_{-2}` — none of
+them diagonal at `±2`, so the central charge never enters.  This refines blueprint §B⁗.9's remark
+that the identity is "算得干净的结果...在 Verma 模 `V(26,-5)`": the computation below shows `c = 26`
+plays no role in *this particular* identity, only `h = -5` does (the `c = 26` dependence of the
+overall `N = 6` argument enters elsewhere, e.g. through the syzygy identity's Kac-side use in the
+transverse half, which this file does not attempt). -/
+
+section Longitudinal
+
+variable {D : ℕ} {R : Type*} [CommRing R] [Algebra ℚ R] (η a b : Fin D → R)
+variable (hη : ∀ μ, η μ * η μ = 1)
+
+include hη in
+/-- `L_1 L_{-1} x = L_{-1} L_1 x + 2 L_0 x` for **any** vector `x` (no seed hypothesis needed):
+`⁅L_1, L_{-1}⁆ = 2L_0` has weight `0` in `m`, hence zero central term regardless of `x`
+(`centralTerm_one_eq_zero`). -/
+lemma towerLop_one_apply_towerLop_neg_one_of_any (x : TowerFock D R) :
+    towerLop η a b 1 (towerLop η a b (-1) x)
+      = towerLop η a b (-1) (towerLop η a b 1 x) + (2 : R) • towerLop η a b 0 x := by
+  have h := towerLop_apply_towerLop_neg η a b hη 1 x
+  rw [centralTerm_one_eq_zero, mul_zero, zero_smul, add_zero] at h
+  rw [h]
+  module
+
+variable {h : R} {φ : TowerFock D R}
+variable (hpos : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0)
+variable (h0 : towerLop η a b 0 φ = h • φ)
+
+include hη h0 in
+/-- `L_0 (L_{-1}²φ) = (h + 2) • L_{-1}²φ`. -/
+lemma towerLop_zero_apply_towerLop_neg_one_sq :
+    towerLop η a b 0 (towerLop η a b (-1) (towerLop η a b (-1) φ))
+      = (h + 2) • towerLop η a b (-1) (towerLop η a b (-1) φ) := by
+  rw [towerLop_zero_apply_towerLop_neg_one η a b hη
+    (towerLop_zero_apply_towerLop_neg_one η a b hη h0)]
+  match_scalars; ring
+
+include hη h0 in
+/-- `L_0 (L_{-1}³φ) = (h + 3) • L_{-1}³φ`. -/
+lemma towerLop_zero_apply_towerLop_neg_one_cube :
+    towerLop η a b 0
+        (towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ)))
+      = (h + 3) • towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ)) := by
+  rw [towerLop_zero_apply_towerLop_neg_one η a b hη
+    (towerLop_zero_apply_towerLop_neg_one_sq η a b hη h0)]
+  match_scalars; ring
+
+include hη hpos h0 in
+/-- `L_1 (L_{-1}²φ) = (4h + 2) • L_{-1}φ`. -/
+lemma towerLop_one_apply_towerLop_neg_one_sq :
+    towerLop η a b 1 (towerLop η a b (-1) (towerLop η a b (-1) φ))
+      = (4 * h + 2) • towerLop η a b (-1) φ := by
+  rw [towerLop_one_apply_towerLop_neg_one_of_any η a b hη (towerLop η a b (-1) φ),
+    towerLop_one_apply_towerLop_neg_one η a b hη hpos h0,
+    towerLop_zero_apply_towerLop_neg_one η a b hη h0, map_smul]
+  match_scalars; ring
+
+include hη hpos h0 in
+/-- `L_1 (L_{-1}³φ) = (6h + 6) • L_{-1}²φ`. -/
+lemma towerLop_one_apply_towerLop_neg_one_cube :
+    towerLop η a b 1
+        (towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ)))
+      = (6 * h + 6) • towerLop η a b (-1) (towerLop η a b (-1) φ) := by
+  rw [towerLop_one_apply_towerLop_neg_one_of_any η a b hη
+      (towerLop η a b (-1) (towerLop η a b (-1) φ)),
+    towerLop_one_apply_towerLop_neg_one_sq η a b hη hpos h0,
+    towerLop_zero_apply_towerLop_neg_one_sq η a b hη h0, map_smul]
+  match_scalars; ring
+
+include hη hpos h0 in
+/-- `L_1 (L_{-1}⁴φ) = (8h + 12) • L_{-1}³φ`. -/
+lemma towerLop_one_apply_towerLop_neg_one_pow_four :
+    towerLop η a b 1
+        (towerLop η a b (-1) (towerLop η a b (-1)
+          (towerLop η a b (-1) (towerLop η a b (-1) φ))))
+      = (8 * h + 12) • towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ)) := by
+  rw [towerLop_one_apply_towerLop_neg_one_of_any η a b hη
+      (towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ))),
+    towerLop_one_apply_towerLop_neg_one_cube η a b hη hpos h0,
+    towerLop_zero_apply_towerLop_neg_one_cube η a b hη h0, map_smul]
+  match_scalars; ring
+
+include hη hpos h0 in
+/-- `L_1 (L_{-3}(L_{-1}φ)) = 2h • L_{-3}φ + 4 • L_{-2}(L_{-1}φ)`. -/
+lemma towerLop_one_apply_towerLop_neg_three_towerLop_neg_one :
+    towerLop η a b 1 (towerLop η a b (-3) (towerLop η a b (-1) φ))
+      = (2 * h) • towerLop η a b (-3) φ
+        + (4 : R) • towerLop η a b (-2) (towerLop η a b (-1) φ) := by
+  have hc := towerLop_apply_towerLop_of_ne_zero η a b hη
+    (m := 1) (n := -3) (by decide) (towerLop η a b (-1) φ)
+  rw [show (1 : ℤ) + -3 = -2 by decide] at hc
+  rw [hc, towerLop_one_apply_towerLop_neg_one η a b hη hpos h0, map_smul]
+  match_scalars <;> ring
+
+include hη hpos h0 in
+/-- `L_1 (L_{-2}(L_{-1}²φ)) = (4h + 2) • L_{-2}(L_{-1}φ) + 3 • L_{-1}³φ`. -/
+lemma towerLop_one_apply_towerLop_neg_two_towerLop_neg_one_sq :
+    towerLop η a b 1
+        (towerLop η a b (-2) (towerLop η a b (-1) (towerLop η a b (-1) φ)))
+      = (4 * h + 2) • towerLop η a b (-2) (towerLop η a b (-1) φ)
+        + (3 : R) • towerLop η a b (-1) (towerLop η a b (-1) (towerLop η a b (-1) φ)) := by
+  have hc := towerLop_apply_towerLop_of_ne_zero η a b hη
+    (m := 1) (n := -2) (by decide) (towerLop η a b (-1) (towerLop η a b (-1) φ))
+  rw [show (1 : ℤ) + -2 = -1 by decide] at hc
+  rw [hc, towerLop_one_apply_towerLop_neg_one_sq η a b hη hpos h0, map_smul]
+  match_scalars <;> ring
+
+include hη hpos h0 in
+/-- ⭐⭐ **The longitudinal half of blueprint §B⁗.9**, at `h = -5` (any central charge):
+
+`L_1 (y₃ (L_{-1}φ)) = 2h • y₃φ`.
+
+`φ` is any seed of weight `h`; the hypothesis `hh : h = -5` is exactly the weight forced by
+`§B⁗.9`'s N = 6 construction (`φ` is the rung `-6` level-1 vacuum descendant, i.e. the
+highest-weight vector has `h = -5`).  As the module docstring above explains, this is a genuinely
+`h`-sharp identity — `L_{-3}φ`'s coefficient matches for every `h`, but `L_{-2}(L_{-1}φ)`'s and
+`L_{-1}³φ`'s only match at `h = -5` — and is independent of the central charge. -/
+theorem towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five (hh : h = -5) :
+    towerLop η a b 1 (y3 η a b (towerLop η a b (-1) φ)) = (2 * h) • y3 η a b φ := by
+  simp only [y3_apply, map_add, map_smul]
+  rw [towerLop_one_apply_towerLop_neg_three_towerLop_neg_one η a b hη hpos h0,
+    towerLop_one_apply_towerLop_neg_two_towerLop_neg_one_sq η a b hη hpos h0,
+    towerLop_one_apply_towerLop_neg_one_pow_four η a b hη hpos h0, hh]
+  match_scalars <;> ring
+
+end Longitudinal
 
 end StringFormal.NoGhost
