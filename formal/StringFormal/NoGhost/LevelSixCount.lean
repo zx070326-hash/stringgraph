@@ -779,4 +779,114 @@ theorem card_conjFree_six_le (hD : 2 ≤ D) :
 
 end ConjFreeSix
 
+/-! ### (K6): the two families overlap in at most `D` dimensions
+
+Mirrors `LevelFiveCount`'s (K5) exactly, substituting `N = 6`.  The generic bound
+`DescendantKernel.finrank_ker_descPair_add_le` gives
+`dim ker T₆ + p_D(6) ≤ p_D(5) + p_D(4) + p_{D−1}(6)`, and `levelSix_count_identity_full` says
+the right-hand side is `p_D(6) + D` (`κ₆ = D`, not the universal constant `κ₅ = 1`: this is the
+`+1` versus `+D` gap the module docstring records).  **`D = 26` does not appear.** -/
+
+section KernelSix
+
+variable {D : ℕ} {K : Type*} [Field K] [CharZero K] [Algebra ℚ K] {η a b : Fin D → K}
+
+/-- ⭐⭐ **(K6)**: `dim ker(T₆) ≤ D` on **every** rung, where
+`T₆(φ, ψ) = L_{−1}φ + 𝒟₂ψ` on the whole slice `V_{j,5} × V_{j,4}`. -/
+theorem finrank_ker_descPair_six_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) :
+    Module.finrank K ↥(LinearMap.ker (descPair η a b j 6)) ≤ D := by
+  have h1 := finrank_ker_descPair_add_le hD F F.hη j 6 (by norm_num)
+  simp only [show (6 : ℕ) - 1 = 5 from rfl, show (6 : ℕ) - 2 = 4 from rfl,
+    nat_card_level_eq_card_ddfLevel] at h1
+  have h2 := card_ddfLevel_six_eq (Fin D)
+  have h3 := (card_ddfLevel_five_eq (Fin D)).le
+  have h4 := card_ddfLevel_four_le (Fin D)
+  have h5 := card_conjFree_six_le (D := D) hD
+  have h6 := levelSix_count_identity_full (D := D) (by omega)
+  rw [Fintype.card_fin] at h2 h3 h4
+  omega
+
+/-- (K6) restricted to the seeds: `dim ker(T₆|_{Q×Q}) ≤ D`. -/
+theorem finrank_ker_seedPair_six_le (hD : 2 ≤ D) (F : DDFLightConeFrame η a b) (j : ℤ) :
+    Module.finrank K ↥(LinearMap.ker (seedPair η a b j 6)) ≤ D :=
+  le_trans (finrank_ker_seedPair_le j 6) (finrank_ker_descPair_six_le hD F j)
+
+/-- ⭐ **(N6)**, the null lower bound on the level-six slice at `D = 26`:
+
+`dim Q_{-6,5} + dim Q_{-6,4} ≤ dim (H_null ⊓ V_6) + D`.
+
+Rank–nullity for `seedPair` on `Q_{-6,5} × Q_{-6,4}`: the image is contained in the null states
+(Type 1 for the first factor, Type 2 for the second — again the only place `D = 26` is used),
+and the kernel is at most `D`-dimensional by (K6).
+
+⚠ This slack of `D` (as opposed to (N5)'s slack of `1`) is **exactly** the gap that keeps `B26 6`
+from closing by the generic route: the assembly needs the slack sharpened to `D − 1`, i.e. a
+genuine injectivity statement for `seedPair η a b (-6) 6` restricted to an appropriate summand,
+which is new mathematics (see the module docstring `⟨路线判断，未验证⟩` note). -/
+theorem le_finrank_towerNull_inf_towerBigrade_six (hD : 2 ≤ D) (F : DDFLightConeFrame η a b)
+    (haa : Fock.zeroModeSq η a = 2) (hD26 : (D : K) = 26) :
+    Module.finrank K ↥(towerSeed η a b (-6) 5) + Module.finrank K ↥(towerSeed η a b (-6) 4)
+      ≤ Module.finrank K
+          ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6) + D := by
+  classical
+  have hQ5fin : FiniteDimensional K ↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-6) ((6 : ℕ) - 1))
+      (S₂ := towerBigrade D K (-6) ((6 : ℕ) - 1)) inf_le_right
+  have hQ4fin : FiniteDimensional K ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerSeed η a b (-6) ((6 : ℕ) - 2))
+      (S₂ := towerBigrade D K (-6) ((6 : ℕ) - 2)) inf_le_right
+  have hQ5free : Module.Free K ↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) :=
+    Module.Free.of_divisionRing K ↥(towerSeed η a b (-6) ((6 : ℕ) - 1))
+  have hQ4free : Module.Free K ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)) :=
+    Module.Free.of_divisionRing K ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))
+  have hprod : FiniteDimensional K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))) :=
+    inferInstanceAs (Module.Finite K
+      (↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))))
+  have hWfin : FiniteDimensional K
+      ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6) :=
+    Submodule.finiteDimensional_of_le (K := K) (V := TowerFock D K)
+      (S₁ := towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6)
+      (S₂ := towerBigrade D K (-6) 6) inf_le_right
+  have hmem : ∀ x : ↥(towerSeed η a b (-6) ((6 : ℕ) - 1))
+        × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)),
+      seedPair η a b (-6) 6 x
+        ∈ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6 := by
+    rintro ⟨⟨φ, hφ⟩, ⟨ψ, hψ⟩⟩
+    have hpos5 : ∀ n : ℤ, 0 < n → towerLop η a b n φ = 0 := (mem_towerSeed.1 hφ).1
+    have hbig5 : φ ∈ towerBigrade D K (-6) 5 := (mem_towerSeed.1 hφ).2
+    have hpos4 : ∀ n : ℤ, 0 < n → towerLop η a b n ψ = 0 := (mem_towerSeed.1 hψ).1
+    have hbig4 : ψ ∈ towerBigrade D K (-6) 4 := (mem_towerSeed.1 hψ).2
+    have h1 := towerLop_neg_one_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη
+      F.frame.isotropic F.hba haa (j := -6) (N := 5) (by norm_num) hbig5 hpos5
+    have h2 := descTwo_mem_towerNullSubmodule_of_mem_towerBigrade η a b F.hη F.frame.isotropic
+      F.hba haa hD26 (j := -6) (N := 4) (by norm_num) hbig4 hpos4 (N' := 6) (by norm_num)
+    rw [seedPair_apply]
+    refine Submodule.add_mem _ ?_ h2
+    have h56 : (5 : ℕ) + 1 = 6 := by norm_num
+    rw [h56] at h1
+    exact h1
+  have hrk := LinearMap.finrank_range_add_finrank_ker
+    (V := ↥(towerSeed η a b (-6) ((6 : ℕ) - 1)) × ↥(towerSeed η a b (-6) ((6 : ℕ) - 2)))
+    (V₂ := TowerFock D K) (seedPair η a b (-6) 6)
+  rw [Module.finrank_prod] at hrk
+  have hrange : LinearMap.range (seedPair η a b (-6) 6)
+      ≤ towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6 := by
+    rintro _ ⟨x, rfl⟩
+    exact hmem x
+  have hle1 : Module.finrank K ↥(LinearMap.range (seedPair η a b (-6) 6))
+      ≤ Module.finrank K ↥(towerNullSubmodule η a b (1 : K) ⊓ towerBigrade D K (-6) 6) :=
+    Submodule.finrank_mono hrange
+  have hker := finrank_ker_seedPair_six_le (K := K) (η := η) (a := a) (b := b) hD F (-6)
+  have he : Module.finrank K ↥(towerSeed η a b (-6) ((6 : ℕ) - 1))
+      = Module.finrank K ↥(towerSeed η a b (-6) 5) := rfl
+  have hf : Module.finrank K ↥(towerSeed η a b (-6) ((6 : ℕ) - 2))
+      = Module.finrank K ↥(towerSeed η a b (-6) 4) := rfl
+  rw [he, hf] at hrk
+  omega
+
+end KernelSix
+
 end StringFormal.NoGhost
