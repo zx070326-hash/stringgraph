@@ -253,5 +253,43 @@ notes: |
   ——即 1983 年 Berkeley 那场物理学家与数学家当面对记号的会议文集，
   是断言 (2) 历史上最可能被写下的场合，且早期 MSRI 卷常有免费版；
   **Gaberdiel, arXiv:hep-th/9910156**；外加第二轮未尝试的 FLM (8.x.x) 转引路线。
+  【2026-09-18 第三轮清 (iv)：负面证据密度远超前两轮，出现**四种不同的失败模式**，仍判 (C)】
+  抽取记录 literature/extractions/assertion-2-arxiv-bridge-reviews-2026-09-18.md（E1–E3）。
+  本轮把判据写死为**三条**（前两轮只有两条，第三条是第二轮 Nikolov–Todorov 的教训）：
+  文献必须 (1) **写出**物理侧对象（`X^μ(z)` 或自由玻色模展开，**且**带正规序 `: :` 记号；
+  散文里提一句 "free bosonic CFT" 不算）；**且** (2) 把它与 VOA 结构映射 `Y(e^α, z)` 划等号；
+  **且** (3) 该等号是**两个独立构造出来的对象之间的等式**，不是定义式（`:=`）或记号改写。
+  · **Gebert, arXiv:hep-th/9308151：本轮最强，仍不合格（卡在判据 3）。**
+    判据 (1) 满足：逐字给出 `Q^μ(z) ≡ q^μ − i p^μ ln z + i Σ_{m≠0} (1/m) α^μ_m z^{−m}`，正规序显式定义；
+    VOA 侧也确实**独立公理化**（§3.1 Definition 1 先于任何格点构造出现——这一点比 Nikolov–Todorov 更强）。
+    但 `V(e^r, z) = :e^{i r·Q(z)}: c_r`（(69)）是**同一个构造的两种记号之间的恒等式**，判据 (3) 失败。
+    作者两处**自陈**逐字印证了这一点：「introducing **formally** the Fubini–Veneziano field」、
+    「which **really only has a meaning when exponentiated**」。
+    lead 独立佐证：`Q^μ(z)` 含零模 `q^μ` 与 `ln z` 项，**本身不是 Fock 空间上良定义的形式 Laurent 级数**，
+    良定义的只有 `:e^{i r·Q(z)}:`——故它不可能先被独立构造出来再与 VOA 侧比对。
+    ⚠ **护栏（防后来者误引）**：Gebert §4.3 有一句「in agreement with the well-known expression from
+    string theory」，其**语法主语是 Virasoro 生成元 `L(n)`，不是 `V(e^r,z)`**，不得引为断言 (2) 的支持。
+  · **Dolan–Goddard–Montague, arXiv:hep-th/9410029：判据 (1) 三轮最好，判据 (2) 直接缺席。**
+    物理侧 (5.17)–(5.20) 写得最完整；但 `Y(v,z)` 记号**全文正文一次都没出现**
+    （对 pdftotext 的 3627 行做 grep，只命中参考文献）。DGM 自建一套 CFT 公理（Definition 2.1, P1–P7），
+    不是在做「物理 ↔ VOA」的翻译。
+  · **Gaberdiel, arXiv:hep-th/9910156：判据 (1) 就不过。** `V(k,z)` 由振幅公理定义，
+    正规序只用于 Sugawara 流的双线性式，物理侧记号本身缺席。
+
+  ⚠ **本 lead 订正 agent 自报的轮级标签**：该 agent 把本轮结论标为「(A) definitive negative」，
+  但 (A) 在任务书判据里是「找到了」，且候选 5–7（Goddard–Olive MSRI vol.3 / FLM (8.x.x) 转引 /
+  Kac–Raina 复核）本轮**零进展、仍全 L0**——凡有未尝试项就**不是 definitive**。
+  按本项目三轮统一的判据，本轮仍是 **(C) 部分**——只是负面证据密度远强于前两轮。
+  agent 自己的抽取文件是诚实的（结论节逐条列出候选 5–7 零进展，并附六条残余风险，
+  含自陈「Gebert 的判定依赖对两个短语的解释性读法」）；标签的草率只出现在它的汇总里。
+
+  ⭐ **本轮真正的收获不是「又一次没找到」，而是四种失败模式本身（结构性论证）**：
+    Nikolov–Todorov 2004 = 定义不等于识别；
+    Gebert 1993 = VOA 侧独立，物理侧是记号改写；
+    Dolan–Goddard–Montague 1994 = VOA 侧记号在正文中根本不出现；
+    Gaberdiel 1999 = 物理侧记号本身缺席。
+  **没有任何一篇独立构造出两侧再证明相等**，且原因是可说明的：桥梁综述的作者**没有动机**这么做——
+  他们构造出一侧，然后给它改个名字。这是支持原创轨道 (iii) 的**正面结构性论证**，
+  不只是「我们没找到」。(iii) 的前提仍需候选 5–7 清完才算清干净。
 author: curator
 created: "2026-09-15"
