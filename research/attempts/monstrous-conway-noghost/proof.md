@@ -280,3 +280,58 @@ BKM 超代数的分母公式提升为时空 BPS 指标从而解释 Conway moonsh
    rigorous/formalized 节点，且（2）本身是一整层缺失的基础设施（超弦形式化），规模与
    `worldsheet.no-ghost-theorem-v4` 整个岛相当。**判据 3 失败，且失败程度是"缺整层
    基础设施"级别**，与上一轮 umbral moonshine 候选 A/B 的否决理由性质相同。
+
+---
+
+## 6. 最终裁定与后续建议
+
+### 6.1 三条候选的裁定汇总
+
+| 候选 | 判据 1（精确到量词） | 判据 2（有终点线） | 判据 3（砖块合规） | 判据 4（确认无源可查） | 结论 |
+|---|---|---|---|---|---|
+| C（瓶颈节点算子恒等式） | 通过 | 通过 | 通过（两侧对象已定义/半定义，比对是有限步计算） | **失败**——源大概率在已登记的 Li–Wang 2008 里，抽取不完整 | 不可作为 `research/` 对象 |
+| D（秩1→秩2翻译） | 可以写精确（"构造 `V_{II_{1,1}}` 并核实与 `V(Λ)`/`V^♮` 张量后满足 Thm 5.1 假设"） | 通过 | 通过（每一步都是 Li–Wang 定理的具体实例化，无未解决数学） | **失败**——纯粹是发表数学的工程实例化 | 不可作为 `research/` 对象（是 formalizer 的活） |
+| E（moonshine 物理解释） | 可以写精确（HPV 2018 式子层面已有雏形） | 通过（分母公式≟BPS指标是可核验命题） | **失败**——三块基础设施图里全无 | 通过（HPV 2018 自己标"suggestion"） | 不可作为 `research/` 对象（缺整层基础设施，规模堪比另开一个无鬼定理岛） |
+
+**没有一条候选同时通过全部四项判据。** 按任务书的判断标准，这构成一次诚实的"提不出来"交付。
+
+### 6.2 与上一轮 `umbral-moonshine-origin` 的裁定性质对比
+
+上一轮的否决理由主要是"缺整层基础设施"（候选 A：轨道化构造/mock 模形式论全无；候选 B：Zhu
+定理这块砖本身不在图里）。本轮的否决理由**更细致、更具体**：
+
+- 候选 C、D 的否决理由**不是**"缺基础设施"，而是**判据 4 本身失败**——文献已经把要用的
+  数学写清楚了（Li–Wang 2008 之于候选 C；Li–Wang 存在性定理 + Borcherds 1992 之于候选 D），
+  只是本项目**尚未抽取/实例化**。这是一个**更乐观**的发现：它把"任务不可攻"精化成了
+  "任务不该由 `research/` 攻，该由 `researcher`/`curator`/`lean-formalizer` 攻"——即
+  瓶颈节点 `worldsheet.physical-exponential-equals-voa-vertex-operator` 很可能可以在
+  **不开研究轨道**的情况下，被一次 Li–Wang 2008 §2–§3 的继续抽取 + 一条初等的逐项系数比对
+  推导直接升级为 `rigorous`。
+- 候选 E 的否决理由与上一轮候选 A/B 同构（缺整层基础设施），但本轮把"整层基础设施"的
+  具体清单钉得更细（超弦 BRST 层 + `V^{s♮}` 轨道化构造 + BPS-指标数学定义，三层分别列出）。
+
+### 6.3 给后续 agent 的具体建议（本轮不执行，仅指路）
+
+1. **【最具体、最可执行、优先级最高】** 一个 `researcher` 任务：重新打开 Li–Wang 2008
+   （arXiv:0802.0173）§2–§3，逐字抽取 `E^-(α,x)`、`Δ̄(β,x)` 的定义式，以及 Theorem 3.6
+   证明中 `Y` 在 `U`-模 `⊕_j e^{jk}⊗M(1,p̃)` 上作用的显式公式（即 twisted 版本的 (3.10)）。
+   抽出后，`curator` 补全 `math.lattice-vertex-algebra` 卡（或新立子卡），随后可能由
+   `prover` 或 `curator` 直接写一条 `rigorous` 推导，把公式与图内已 `formalized` 的
+   `worldsheet.exponential-vertex-operator-modes` 逐项比对，尝试关闭瓶颈节点
+   `worldsheet.physical-exponential-equals-voa-vertex-operator`。**这不是本轮 `research/`
+   轨道的产出，是留给下一个 `researcher`/`curator` 回合的具体任务。**
+2. **【次优先级，纯登记工作】** `curator` 可以把 Duncan–Mack-Crane 2015（Conway moonshine
+   模的存在性）和 Harrison–Paquette–Volpato 2018（超弦 BRST ⟹ Conway BKM 超代数）登记为
+   图内节点——它们都是已发表定理，属于常规 curator 抽取流程，不是 `research/` 对象。
+   若船长希望项目未来某天覆盖 monstrous/Conway moonshine 的完整链条，登记这两个节点是
+   自然的起点（但需要先有超弦 BRST 层的图基础设施，规模不小，是独立的 roadmap 决策）。
+3. **【文献登记维护】** 本轮用 `Read` 工具直接解析 PDF 页面图像的方式一手读完了 Frenkel
+   1985（15 页全文），建议 `researcher` 把这次阅读正式登记进 `literature/extractions/`，
+   把 `frenkel-1985` 的内容状态从 L0 升到 L1（书目数据本来就是 L1，内容此前是 L0/L3）。
+   同时建议在 `literature/` 层面记录这次方法论发现：遇到"WebFetch OCR 失败⟹L0"标记的
+   扫描版 PDF，应先尝试 `curl` 下载到本地 + 路径转换 + `Read(pages=...)`，而不是直接
+   判定"无法获取"——这对项目里其他类似标记的历史文献（如 FLM 1988）可能同样有效。
+4. **不建议**在近期开一条新的 `research/` 轨道专门攻 monstrous/Conway moonshine 的任何
+   子问题——本轮排查的三条候选都不满足判据，且没有发现第四条更有希望的候选。如果未来
+   Li–Wang 抽取完成、秩 2 翻译完成、超弦 BRST 层建立起来，届时"分母公式⟹BPS指标"这条
+   （候选 E 的核心）可能重新变得可攻——但那是数年后、依赖大量前置形式化工作完成之后的事。
