@@ -182,5 +182,41 @@ notes: |
   (iii) 若查实**确无**公开文献做这一步识别，按根 CLAUDE.md 的「原创证明轨道」
       在 research/ 下开一条，目标是把连续动量 Fock 表示与格点 VOA 模的算子识别写成定理。
       ⚠ 发起前必须先确认 (i)(ii) 真的无源可查。
+
+  【2026-09-18 第一轮清 (i)(ii)：断言 (2) 仍无来源，但前提**尚未**清干净，(iii) 不得发起】
+  lead 派 researcher 按上面 (i)(ii) 逐个清 L0，任务书预先写明「反面结论同样是成功交付」。
+  结果（抽取记录 literature/extractions/assertion-2-lattice-vertex-physical-identification-2026-09-18.md）：
+  · **Frenkel 1985：读完了，不承载。** 29 页全文 L1（Yale campuspress 镜像）。它**只有物理侧**
+    （eq. (3) p.326–327、eq. (2.3) p.332），**没有可与之对等的 VOA 结构映射**——本文早于
+    Borcherds 1986 造出 "vertex algebra" 一词，是物理侧与代数侧**分家之前**的共同祖先，
+    不是分家之后做识别的论文。上面 (i) 里「researcher 判断它是历史源头」这一判断本身没错，
+    但「历史源头」恰恰意味着它给不出断言 (2) 所要的**两侧对等**。
+  · **Frenkel–Ben-Zvi：定位写错了。** 格点顶点代数不在 §5（该章 "Vertex Algebra Bundles" 讲
+    Aut O 的几何重述，与本卡无关），而在 **Ch. 4 §4.2/§4.3/§4.4（pp.72/77/80）**。
+    上面 (ii) 的「Frenkel–Ben-Zvi §5」是**错的**，按本项目习惯原文保留、在此订正。
+    该书正文本身仍 L0；其公开前身 E. Frenkel 的 Bourbaki 综述（Exp. 875, arXiv:math/0007054）
+    41 页全文 L1 读完。
+  · ⚠ **全轮最接近的一次命中，判定不合格**：Bourbaki 综述 p.875-14 §3.4 例 (1) 末句逐字
+    「The vertex algebra V_L is the chiral symmetry algebra of the free bosonic conformal
+    field theory compactified on the torus W/L.」——这是全文**唯一**一次把 VOA 对象与物理对象
+    直接划等号。但它**只在散文里提及**"free bosonic CFT"，**没有写出** `X^μ(z)` 或正规序记号，
+    且**零论证、零引用**（比"well known"更简略）。按判据（须同时写出物理侧公式 + 划等号）不合格。
+    **记在这里是为了防止后来者把它当成来源引用。**
+  · **FLM 1988 Ch. 8：没拿到。** 五个渠道（archive.org/OpenLibrary、ScienceDirect 403、
+    Google Books 零预览、作者主页、图书馆目录）全部失败，**仍是完全 L0**。
+
+  ⭐ **lead 裁决（2026-09-18）：(iii) 原创轨道的前提尚未清掉，本轮不发起。** 两条理由：
+  (1) FLM Ch. 8 从未读到——那是「没读到」，不是「读了没有」，正是根 CLAUDE.md 警告的情形；
+  (2) **第一轮的候选名单方向本身选偏了**：Frenkel 1985 早于 "vertex algebra" 一词，
+      Frenkel–Ben-Zvi 与 Li–Wang 同型（纯代数，无物理记号）——三个候选里**没有一个**是
+      「两套记号同时出现」的文献。真正可能承载断言 (2) 的是**物理侧写的 VOA 文献**，
+      这一批本项目**一篇都没查过**。故新增升级路线：
+  (iv) **查物理侧写的 VOA / 数学物理桥梁文献**（2026-09-18 已派第二轮 researcher）：
+      **Goddard–Olive 1986**（Int. J. Mod. Phys. A1 303–414，物理学家写的 Kac–Moody/Virasoro
+      综述，最可能同时出现 `:e^{ik·X}:` 与格元记号）、**Kac《Vertex Algebras for Beginners》§5**
+      （Kac 一贯在数学正文里并写物理记号）、Goddard 1989 "Meromorphic conformal field theory"、
+      Dong–Lepowsky 1993、Kac–Raina Bombay Lectures，以及经后续论文**逐字转引**的 FLM (8.x.x)
+      公式（转引的公式本身可作二手 L1 证据）。
+      **(iii) 要等 (iv) 也清完才谈得上发起。**
 author: curator
 created: "2026-09-15"
