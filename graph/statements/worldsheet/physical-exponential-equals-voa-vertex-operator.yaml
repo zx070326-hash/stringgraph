@@ -218,5 +218,40 @@ notes: |
       Dong–Lepowsky 1993、Kac–Raina Bombay Lectures，以及经后续论文**逐字转引**的 FLM (8.x.x)
       公式（转引的公式本身可作二手 L1 证据）。
       **(iii) 要等 (iv) 也清完才谈得上发起。**
+
+  【2026-09-18 第二轮清 (iv)：方向对了，但**全部候选卡在付费墙**，判定 (C) 而非 (B)】
+  抽取记录 literature/extractions/assertion-2-physics-side-voa-bridge-2026-09-18.md（E1–E8）。
+  · **Goddard–Olive 1986：拿不到，L0。** 五个独立渠道全部失败（CERN Document Server 的
+    Anubis 反爬挑战、INSPIRE record 18583 的 `documents`/`urls` 字段为空、World Scientific
+    的 Cloudflare、Google Books 429+captcha），且 Semantic Scholar API **独立确认**
+    `isOpenAccess: false`、`openAccessPdf.status: CLOSED`。
+  · **Kac《Vertex Algebras for Beginners》§5：拿不到，L0。** 仅确认章标题
+    "5. Examples of vertex algebras and their applications"，正文 AMS 403。
+  · 候选 3–5（Goddard 1989 / Dong–Lepowsky 1993 / Kac–Raina）只做到浅触，均 L0；
+    Kac–Raina 已补登记 bib。**FLM Ch.8 的「经后续论文逐字转引」这条路本轮未尝试**，
+    agent 明确自报为未做。
+  · ⚠ **本轮的近似命中，同样判定不合格，记此防止后来者误引**：Nikolov–Todorov 2004
+    （arXiv:math-ph/0412039，全文 L1）§5.2 写 `Y_α(z) := E_α z^{α_0} :e^{φ_α(z)}:`
+    ——这是本项目迄今**结构上最接近**的一处（VOA 的 `Y(·,z)` 记号与 Wick 正规序指数
+    并排出现）。但它是**一个定义式**（用 `:=` 把 `Y_α` 定义成右端），**不是两个独立
+    构造出来的对象之间的等式**；且全文不写 `X^μ(z)`，推导中从不把 `φ_α(z)` 系到时空。
+    **教训（判据的第三条，此前只有两条）：定义不等于识别。** 断言 (2) 要的是物理侧
+    `:e^{ikX}:` 与 VOA 侧独立定义的 `𝒴(e^α,z)` 各自被构造出来**之后**被证明/断言相等；
+    把右端直接当作左端的定义，恰恰是把要证的那一步跳过去。
+  · agent 自评逐字：「Candidates 1 and 2 (the task's highest-priority picks) remain
+    **unresolved access failures**, which is a materially different epistemic state from
+    'checked and found absent'.」——**拒绝把 (C) 凑成 (B)**，本 lead 认可这一克制。
+
+  ⭐ **lead 裁决（2026-09-18，第二次）：(iv) 未清，(iii) 仍不得发起。** 理由同第一次：
+  「没拿到」不是「读了没有」。但**打法要改**——第二轮的失败不是方向错（方向是对的），
+  是**选了一批注定拿不到的期刊/专著**。故第三轮（已派）改打**arXiv 上免费的、物理学家写的
+  桥梁综述**，即那类以「把物理顶点算子翻译成数学顶点代数」为自觉目的的文献：
+  **Gebert, arXiv:hep-th/9308151**（⚠ 与本卡 sources 里的 gebert-nicolai-1995 是**不同**文献，
+  那篇只承载断言 (1)；这篇是 Gebert 单独的翻译型综述）、
+  **Dolan–Goddard–Montague, arXiv:hep-th/9410029**、
+  **Goddard–Olive "Algebras, Lattices and Strings"（MSRI Publications vol. 3, 1985）**
+  ——即 1983 年 Berkeley 那场物理学家与数学家当面对记号的会议文集，
+  是断言 (2) 历史上最可能被写下的场合，且早期 MSRI 卷常有免费版；
+  **Gaberdiel, arXiv:hep-th/9910156**；外加第二轮未尝试的 FLM (8.x.x) 转引路线。
 author: curator
 created: "2026-09-15"
