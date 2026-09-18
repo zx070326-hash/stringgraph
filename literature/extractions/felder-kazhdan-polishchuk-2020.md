@@ -937,3 +937,116 @@ A/B 的地基性依赖（紧化 + 任意穿孔数超模叠的存在性，即 The
   > $\overline{\mathcal{S}}$ with a smooth morphism $t_1,\dots,t_k : B \to \mathbb{A}^k$ such that
   > $t_1 \dots t_r$ is an equation of $\Delta_{NS}$ and $t_{r+1} \dots t_k$ is an equation of
   > $\Delta_R$.*
+
+### E14 ★ §8.4 全节：Lemma 8.7 / Cor 8.8 / **Example 8.9** / Remark 8.10 / Lemma 8.11 / (8.11) 定位
+- 位置：§8.4 "**Canonical line bundle on the moduli space of stable supercurves with punctures**"
+  起于 **p.56 下半页**（节标题 + $\Psi_i$ 的定义 + Lemma 8.7 陈述 + 证明起始），主体在 **p.57**
+  （Lemma 8.7 证明收尾、Corollary 8.8、Example 8.9、Remark 8.10、$\Phi_j$ 的定义、
+  $\mathcal{L}(X,P_\bullet,R_\bullet)$ 的定义、Lemma 8.11 陈述），Lemma 8.11 的证明与 **(8.11)**
+  在 **p.58 上半页**（(8.11) 出现在 "Proof of Theorem B" 里，即 **§8.4 的最后一个式子**，其后紧接
+  §9 的标题）。L1（页图逐字；§8.4 节首、Example 8.9、Lemma 8.11 另用 `pdftoppm -r 500` 放大复核）。
+- 类型：definition + proposition（混合）
+- **§8.4 的 setup（逐字，p.56，500 dpi 复核——这是 $m$、$n$ 的定义处）**：
+  > **8.4. Canonical line bundle on the moduli space of stable supercurves with punctures.**
+  > Let $\pi : X \to S$ be a stable supercurve with NS punctures $P_1, \dots, P_m$ and Ramond
+  > divisors $R_1, \dots, R_n$. We denote by $D_i \subset X$ the divisors associated with $P_i$ as in
+  > Sec. 2.5.
+  >
+  > For every $i = 1, \dots, m$, let us define a line bundle of rank $0|1$ on $S$,
+  > $$\Psi_i := P_i^*\omega_{X/S}.$$
+  ⚠ 注意基底逐字是 **$S$**（不是 $\overline{\mathcal{S}}$），且 **$m$ = NS 穿孔数、$n$ = Ramond
+  除子个数**——这就是 (8.11) 里 $\bigotimes_{i=1}^{m}$ 的 $m$ 的来源（见 E11 记号疑点）。
+
+- **Lemma 8.7（逐字，p.56）**：
+  > **Lemma 8.7.** *One has natural isomorphisms of line bundles of rank $0|1$ on $S$,*
+  > $$\Psi_i \simeq \pi_*\mathcal{O}_{D_i}/\mathcal{O}_S,$$
+  > $$\Psi_i^{-1} \simeq P_i^*\omega_{X/S}(D_i) \simeq P_i^*\omega_{D_i/S} \simeq
+  >   \mathrm{Ber}(\pi_*\mathcal{O}_{D_i}).$$
+  > *Hence, for any line bundle $L$ of rank $1|0$ on $X$, one has*
+  > $$\mathrm{Ber}(\pi_*L|_{D_i}) \simeq \Psi_i^{-1},$$
+  > *while for a line bundle $M$ of rank $0|1$, one has*
+  > $$\mathrm{Ber}(\pi_*M|_{D_i}) \simeq \Psi_i.$$
+  证明（p.56–57）用 Lemma 2.14、(8.2) 与 $\omega_{P/S} = \mathcal{O}_S$，**完整，无外包**。
+  ⚠ **Lemma 8.7 逐字只对 NS 穿孔的 $\Psi_i$ 陈述**（$D_i$ 是 $P_i$ 的伴随除子），**不提 Ramond**。
+
+- **Corollary 8.8（逐字，p.57，500 dpi 复核）**：
+  > **Corollary 8.8.** *The line bundle $P_i^*\omega^2_{X/S}(D_i)$ on $S$ is canonically trivialized.*
+  （这正是 Lemma 9.1(i) 里"$P_1$、$P_2$ 上的典范平凡化"的来源，见 E8。同样**只对 NS 穿孔**。）
+
+- **★ Example 8.9（逐字，p.57，500 dpi 逐字符复核）**：
+  > **Example 8.9.** Suppose $X \to S$, $(P_i)$, is a family of supercurves with **NS-punctures** over
+  > an *even* base $S$. Then $\mathcal{O}_X = \mathcal{O}_C \oplus L$, where $(C, L)$ is the
+  > underlying family of curves with spin-structures, and $\mathcal{I}_{P_i} = \mathcal{I}_{p_i}
+  > \oplus L$, where $p_i \subset C$ are marked points on $C$. We also have $\mathcal{I}_D =
+  > \mathcal{I}_{p_i} \otimes_{\mathcal{O}_C} \mathcal{O}_X$. Thus,
+  > $$\Psi_i^{-1} = P_i^*(\omega_{X/S}(D_i)) = P_i^*(L(p_i) \oplus \omega_{C/S}(p_i)) \simeq
+  >   p_i^*L(p_i) \simeq p_i^*L^{-1},$$
+  > where the last isomorphisms is induced by the trivialization of $L^2(p_i)|_{p_i} \simeq
+  > \omega_{C/S}(p_i)|_{p_i}$.
+
+- **Remark 8.10（逐字，p.57）**，以及紧随其后的 **Ramond 侧对应物 $\Phi_j$** 与
+  $\mathcal{L}(X,P_\bullet,R_\bullet)$ 的定义：
+  > *Remark 8.10.* Note that for an NS-puncture $P_i$ and the corresponding divisor $D_i$, the
+  > decomposition (2.11) can be rewritten as
+  > $$\pi_*\mathcal{O}_{D_i} = \mathcal{O}_S \oplus \Psi_i,$$
+  > where $\Psi_i$ is a square-zero ideal. For any line bundle $L$ over $D_i$ we have an exact
+  > sequence
+  > $$0 \to P_{i*}(\Psi_i \otimes P_i^*L) \to L \to P_{i*}P_i^*L \to 0$$
+  > In the case $L = \omega_{X/S}(D_i)|_{D_i} = \omega_{D_i/S}$, the induced exact sequence of
+  > push-forwards to $S$ has a splitting
+  > $$\pi_*(\omega_{X/S}(D_i)/\omega_{X/S}) \to \mathcal{O}_S$$
+  > given by the residue map for the $0|1$-dimensional superscheme $D_i/S$, so we have a
+  > decomposition
+  > $$\pi_*(\omega_{D_i/S}) = \Psi_i^{-1} \oplus \mathcal{O}_S.$$
+  >
+  > For every Ramond divisor $R_j \subset X$ let us consider the line bundle on the base,
+  > $$\Phi_j := \mathrm{Ber}(\pi_*\mathcal{O}_{R_j})^{-1} \simeq \mathrm{Ber}(\pi_*\omega_{R_j}).$$
+  > Note that $\Phi_j = \Phi_{R_j}$ (see (7.10)), so the line bundles $\Phi_j^2$ are canonically
+  > trivialized.
+  > Let us consider the line bundle of rank $1|0$ over $X$,
+  > $$\mathcal{L}(X, P_\bullet, R_\bullet) := \omega^{-2}_{X/S}\Big(-\sum_i D_i - 2\sum_j R_j\Big).$$
+
+- **Lemma 8.11（逐字，p.57，500 dpi 复核）**：
+  > **Lemma 8.11.** *One has a natural isomorphism*
+  > $$\mathcal{B}(\mathcal{L}(X, P_\bullet, R_\bullet)) \simeq \mathcal{B}(\omega^3_{X/S}) \otimes
+  >   \bigotimes_i \Psi_i$$
+  证明（p.58 上半页）逐字用 Grothendieck 对偶 + 正合列 (8.10) + (8.2) + Lemma 8.7，末句：
+  *"It remains to we use the trivializations of $\Phi_j^2$."* ⚠ 原文此处印作 "It remains to we use"，
+  **疑为排印/语法笔误**（应为 "It remains to use"），如实记录。
+- 文献自称的严格程度：Lemma 8.7 / Cor 8.8 / Lemma 8.11 均为编号引理并给出完整证明；
+  **Example 8.9 与 Remark 8.10 是 example / remark 环境**（不是定理），Example 8.9 无证明环境，
+  是一段直接计算。
+- 文献列出的依赖：Sec. 2.5（$P_i \leftrightarrow D_i$ 的对应）；(2.11)；Lemma 2.14；(8.2)；(8.5)；
+  (8.10)；(7.10)（$\Phi_R$ 的定义，见 E12 备注引 §7.6）；Grothendieck 对偶。
+- 备注（★★ **本轮第二个承重复核，裁定如下**）：
+
+  **裁定：SUPPORT（支持本项目既有判定 `[GAP-FKP-RAMOND]`）。Example 8.9 逐字**只**对 NS 穿孔陈述。
+  明确回答任务书的问题：**它不提及 Ramond 穿孔——全篇（两句话 + 一个显示式 + 一句脚注式说明）
+  没有出现 "Ramond" 一词，也没有出现 $R_j$、$\Phi_j$、$n$ 等任何 Ramond 侧记号。**
+
+  **逐字证据（支持一侧）：**
+  1. Example 8.9 首句逐字：*"Suppose $X \to S$, $(P_i)$, is a family of supercurves with
+     **NS-punctures** over an even base $S$."*——**假设里只列了 $(P_i)$ 这一族数据**，没有 $(R_j)$。
+     （500 dpi 放大逐字符确认 "NS-punctures" 带连字符、无 "and Ramond" 续接。）
+  2. Example 8.9 的结论式只算 $\Psi_i^{-1}$（**NS 穿孔的线丛**），得到经典的 $p_i^*L^{-1}$。
+     **Ramond 侧的对应量 $\Phi_j$ 在本 Example 里完全不出现**——$\Phi_j$ 直到**其后的**
+     Remark 8.10 尾段才被定义。
+  3. 论文里"Example 8.9 只讲 NS"与"§8.4 整节讲 NS + Ramond"是**并存的**：§8.4 的 setup（p.56）
+     逐字同时给了 $P_1,\dots,P_m$ 与 $R_1,\dots,R_n$，Lemma 8.11 与 (8.11) 也都带 Ramond
+     （$\mathcal{L}$ 的定义里有 $-2\sum_j R_j$，(8.11) 里有 $-\Delta_R$）。**即：作者在同一节里
+     处理了 Ramond，却唯独在 Example 8.9 这个"与经典自旋曲线对照"的例子里只写 NS。**
+  4. 对照支持：**Lemma 8.7 与 Corollary 8.8 同样只对 NS 穿孔陈述**（陈述里只有 $\Psi_i$、$D_i$、
+     $P_i$）。而 E8 记录的 Lemma 9.1(i) 正是引用 **Corollary 8.8** 取"$P_1, P_2$ 上的典范平凡化"
+     ——**即 §9 的 NS 粘接机器在这一步就已经只挂在 NS 侧的工具上**。
+
+  **反面 / 不利于该判定的一侧（同等记录）：**
+  1. 作者**从未写下**"Example 8.9 不适用于 Ramond 穿孔"这样的显式否定句；Example 8.9 只是**没提**
+     Ramond，**不是明确排除**。"未提及"与"不成立"是两回事——**本抽取只断言前者**。
+  2. Remark 8.10 的**尾段确实给出了 Ramond 侧的对应构造** $\Phi_j := \mathrm{Ber}
+     (\pi_*\mathcal{O}_{R_j})^{-1}$ 并指出 $\Phi_j^2$ 典范平凡，**Lemma 8.11 与 (8.11) 也都覆盖
+     Ramond**。所以"§8.4 缺 Ramond"的说法**不成立**；准确的说法是"**Example 8.9 这一条**缺
+     Ramond"。curator 措辞时须精确到 Example 8.9，不要扩大到整节。
+  3. Ramond 侧缺的具体是什么（逐字层面）：**$\Phi_j$ 只有"$\Phi_j^2$ 典范平凡"这一性质被用到，
+     没有像 Example 8.9 对 $\Psi_i$ 那样给出"偶基上退化到经典自旋曲线数据"的显式识别**。
+     ⚠ **本抽取不判定**这是否构成一个真实的数学缺口——那是推断，留给 curator（若做，须标
+     `inferred: true`）。
