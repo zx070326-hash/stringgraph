@@ -42,10 +42,14 @@ raise the level, landing on `(-6, 4)` and `(-6, 5)`.
 ## What is **not** done here
 
 The *converse* — §B⁗.9's actual criterion `x₄u ∈ Q_{-6,5} ∧ y₃u ∈ Q_{-6,4} ⟹ u ∈ Q_{-6,1}` — is
-**not** proved.  This file plus `SingularVectorsSix.lean` supply its transverse half and
-`SeedTransferSix.towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five` its longitudinal half;
-what is still missing is the Fock-space decomposition of a level-1 tower state on rung `-6` into
-its `c ⊥ p` and `c ∥ p` parts, plus `y₃|0; p_{-6}⟩ ≠ 0`.
+not proved in this file; it is `NoGhost/SeedCriterionSix.lean`
+(`mem_towerSeed_neg_six_one_of_towerLop_one_apply_y3_eq_zero`, packaged with this file's forward
+half as `mem_towerSeed_neg_six_one_iff`).  That converse turns out to be **central-charge free**
+and to need only the `y₃` half; `(D : R) = 26` is consumed *here*, in `y3_mem_towerSeed` /
+`x4_mem_towerSeed`, and nowhere else in the criterion.
+
+Still open: the `N = 6` count itself (`b26_six`, `ddfSpans_bigrade_neg_six_six`); see
+`formal/TODO.md` entry `noghost-pr-d2`.
 -/
 
 namespace StringFormal.NoGhost
@@ -153,7 +157,7 @@ is `c = 26`.  So this is the statement "`x₄v` and `y₃v` are the two singular
 `V(26, -4)`" transported onto the actual `N = 6` slice.
 
 ⚠ This is the **easy direction**.  §B⁗.9's criterion is the *converse*
-(`x₄u ∈ Q_{-6,5} ∧ y₃u ∈ Q_{-6,4} ⟹ u ∈ Q_{-6,1}`) and remains open; see the module docstring. -/
+(`x₄u ∈ Q_{-6,5} ∧ y₃u ∈ Q_{-6,4} ⟹ u ∈ Q_{-6,1}`), proved in `NoGhost/SeedCriterionSix.lean`. -/
 theorem x4_y3_mem_towerSeed_neg_six_one (hD26 : (D : R) = 26) {u : TowerFock D R}
     (hu : u ∈ towerSeed η a b (-6) 1) :
     x4 η a b u ∈ towerSeed η a b (-6) 5 ∧ y3 η a b u ∈ towerSeed η a b (-6) 4 :=
