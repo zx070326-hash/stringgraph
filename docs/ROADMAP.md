@@ -4,7 +4,7 @@
 
 两条线并行推进（本节是给新 agent 的入口地图；权威进度在各 Phase 小节与各 `status.yaml`）：
 
-1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，**N≤5 已闭**（N=5 于 main：`DescendantKernel.lean` PR9a + `LevelFiveCount.lean` PR9b，`b26_five_of_D26` / `ddfSpans_bigrade_neg_five_five`，无 sorry）；**N=6 为当前前沿**（§B⁗.7：最便宜，p_D(−1)=0 故只需 B⁗.2 的 s=5 syzygy 对 (x₄,y₃)，要证 level-1 seed-membership τ₆=25）。**2026-09-17：level-1 转移引理（判定层面）已关闭**——见 `formal/BLUEPRINT-noghost.md` §B⁗.9 [GAP-N6-seed]：判据为真，且**恰在 D=26** 解空间 = `Q_{-6,1}`（D≠26 时塌成 0），`formal/scripts/verify_n6_seed_criterion.py` 精确有理数验证；结构论证 = 横向 c⊥p 给出 `V(26,−4)` 的两个奇异矢量、纵向 c∥p 由 `L_1(y₃L_{−1}v) = 2h·y₃v ≠ 0` 排除。**尚未 Lean 形式化**，PR-D `SeedTransferSix.lean` 仍待写。详见下方 Phase 1 进度日志。
+1. **世界面形式化线**（Phase 1 + `formal/`）：Goddard–Thorn 无鬼定理的 Lean 形式化。条件版已机检（`no_ghost_of_spans`，任意 D、任意有序域），全部猜想负担集中在一张 `worldsheet.ddf-spanning-hypothesis`（= Lean `DDFSpans`，open）；一般 N 张成 (B-26) 分 N≤4 / 5–11 / ≥12 三段，**N≤5 已闭**（N=5 于 main：`DescendantKernel.lean` PR9a + `LevelFiveCount.lean` PR9b，`b26_five_of_D26` / `ddfSpans_bigrade_neg_five_five`，无 sorry）；**N=6 为当前前沿**（§B⁗.7：最便宜，p_D(−1)=0 故只需 B⁗.2 的 s=5 syzygy 对 (x₄,y₃)，要证 level-1 seed-membership τ₆=25）。**2026-09-17：level-1 转移引理（判定层面）已关闭**——见 `formal/BLUEPRINT-noghost.md` §B⁗.9 [GAP-N6-seed]：判据为真，且**恰在 D=26** 解空间 = `Q_{-6,1}`（D≠26 时塌成 0），`formal/scripts/verify_n6_seed_criterion.py` 精确有理数验证；结构论证 = 横向 c⊥p 给出 `V(26,−4)` 的两个奇异矢量、纵向 c∥p 由 `L_1(y₃L_{−1}v) = 2h·y₃v ≠ 0` 排除。**PR-D `SeedTransferSix.lean` 已在 main**（18 个声明，无 sorry，公理干净）：syzygy `L_{-1}x₄ + 𝒟₂y₃ = 0` 对一切 D、任意 ℚ-代数已机检，**纵向半边已闭**（`towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five`，即 §B⁗.9 那句 `L_1(y₃L_{−1}v) = 2h·y₃v` 的完整证明）。⭐ **副产品**：纵向这条恒等式**与中心荷无关**（只对 h 敏感），故 `c = 26` 必然从**横向**一侧进入——这是对 §B⁗.9「在 V(26,−5) 中算得」的细化而非否定。**仍未做**：横向半边（`x₄v`、`y₃v` 作为 `V(26,−4)` 的奇异矢量）与判据本身 `b26_six` / `ddfSpans_bigrade_neg_six_six`，本轮已派 formalizer。详见下方 Phase 1 进度日志。
 2. **黑洞 / 原创证明线**（Phase 3 + `research/`）：N=4（type II on K3×T²）1/4-BPS 挠 dyon 免死指标。
    - **缝 A** `research/attempts/torsion-immortal-positivity-hecke`：state=**verified**（两条独立审查腿），`captain_confirmed=false`。Thm 6.1（挠 I>1 免死指标正性除子和，物理依赖压到单条前提 P′=DGM eq(52)）、Thm 4.1（吸引子围道协变性）、Prop 4.4（d_* 的 GL(2,ℤ) 不变性）已按 **physical-argument** 毕业进 `graph/statements/holography/`（commit 132120e）。**副产品**：DGM 0803.2692 eq(51)/(52) 互不相容（显式整数见证 I=2,(4,1,2)）——**这是对外声明，船长确认前不得公开宣称**（暂缓，等第三方交叉核）。
    - **缝 B** `research/attempts/bkm-shift-explanation`：state=**verified**，`captain_confirmed=true`（2026-09-15 船长拍板，范围严格限定为「给定 A-N eq(2.11)+(2.13) ⇒ 半整平移闭式」这一纯代数步）。**2026-09-18 新增 §9：命题 B 的第二条独立证明**（Weyl 向量路线——把 A-N 符号惯例 (−1)^ℓ 识别为椭圆方向的 ½ 平移，用 𝒱_d 的伸缩共轭该平移得 d·½−½=(d−1)/2），由 `weyl-shift-diagnostic` 并入，已过 graph-reviewer 六攻击面对抗审查（攻击面 4/5 两处措辞已订正：ε=−i 的"交叉验证"降格为"一致性复核"、§9.9 末段改为显式**猜测 9.5（未证）**）。§9 **未纳入** captain_confirmed 范围。GAP-BKM（半整平移 ↔ BKM 根空间 Z/2Z 自同构）仍开放。
@@ -13,6 +13,14 @@
    - **下一个真空缺 scoping**：`research/open-gaps-survey.md`（DVV 生成函数 / DMZ 有限部 / CHL 推广三候选）；DMZ 一支已 scoping 完（`research/attempts/dmz-finite-part-scoping`，裁定并入缝 A 的 [GAP 10.2b]，因 BSS 2311.16252 已给全电荷版反例）。
 
 ### 本轮在途（2026-09-18，lead 派工中）
+
+- 🔁 **第五次 API 中断的善后（2026-09-18，lead 亲自处置）**。三个在途 agent 全部死亡，按「API 故障韧性」条逐一查残留：
+  - `agent/researcher/fkp-deep-gluing`：worktree 存活，**1 个提交**（E7 §9.1 setup、E8 Lemma 9.1(i)–(iv)、E9 式 (9.6)，全 L1 页图）已代为合并进 main。该抽取小节**自称覆盖 E7–E15，实际只写到 E9**——agent 恰好死在 E9 之后。
+  - `agent/prover/physical-exponential-equals-lattice-voa`：worktree 存活，**1 个提交**（`prior-art.md`，原创轨道 (iii) 的 prior-art gate）已代为合并。目录里因此**只有 `prior-art.md`，缺 `claim.md` / `status.yaml`**，按 `research/CLAUDE.md`「claim 必须先于 proof」该轨道尚未真正开始。
+  - `agent/formalizer/d10-anomaly-lean`：worktree 停在一个**已并入 main 的旧提交**（`8da9fc2..2b61e13` 已在 main），无残留可救，已清理。
+  - 📌 **教训（第三次印证同一条）**：两个存活分支都**恰好只有一个提交**，而任务书各要求 6–9 个条目——「每完成一条立刻 commit」这条规则每次都在救人，但 agent 仍倾向攒着。本轮三份派工书已把该要求提到**硬性要求**级别并写明上一轮的具体损失。
+  - **本轮三条续派**（写入路径互不相交）：researcher 补 FKP **E10–E15**（只写 `literature/extractions/felder-kazhdan-polishchuk-2020.md`，末尾追加，不改 E1–E9）；prover 写轨道 (iii) 的 **`claim.md` + `status.yaml`**（只写 `research/attempts/physical-exponential-equals-lattice-voa/**`，proof 本轮不写）；formalizer 推 **N=6 横向半边 + `b26_six`**（只写 `formal/**` 与图节点的 `formal:` 字段）。
+  - main 在合并两条残留后复验：`validate` **0 errors**（671 陈述 / 566 推导 / 5 里程碑 / 24 约定），`pytest` **64 passed**。
 
 - ⭐ **紧化+穿孔象限：从"记账搬运"升级为真结果（2026-09-18 合并 `agent/prover/supermoduli-elliptic-tail-punctured`）。** 上一轮 `supermoduli-compactified-punctured` 的 Compactification Lifting Lemma 只能复现种子门槛；本轮把 Corrêa–Noja 的椭圆尾粘接**推广到带穿孔情形**，得 **定理 M**：
   > 𝔖̄_{g;n,2r} 非投影，只要 **g ≥ 3，或（g = 2 且 n + 2r ≥ 2）**。
