@@ -409,6 +409,29 @@ theorem syzygy_five (h : IsNegWitt φ) : towerLop (-1) (x4 • v) + descTwo (y3 
 > ⚠ §B⁗.9 原稿建议的「先取 `D = 3` 做最小验证」是**误导性的**：`D = 3` 解空间为 `0`，
 > 看不出判据内容；必须在 `D = 26` 上测。
 
+> **`⟨2026-09-18⟩` 纵向半边与 syzygy 恒等式已形式化**（`formal/StringFormal/NoGhost/SeedTransferSix.lean`，
+> 18 条声明，`lake build` 3544 jobs，`check-axioms` 仅 `propext Classical.choice Quot.sound`）。
+> 上面那段**原文保留**，下面三条是对它的订正与细化：
+>
+> 1. **syzygy 恒等式 `L_{−1}x₄ + 𝒟₂y₃ = 0` 是 `U(Vir⁻)` 里的普遍算子恒等式**
+>    （`towerLop_neg_one_mul_x4_add_descTwo_mul_y3`）：对每个 `D`、每个 ℚ-代数 `R`、每个 `a, b` 成立，
+>    **不需要中心荷、不需要最高权、不需要种子条件**（唯一的前件是 `hη : ∀ μ, η μ * η μ = 1`，
+>    即度规是符号向量——就是约定本身）。证法是四条负模对易子当 `simp` 重写规则正规序化两边，`module` 收尾。
+> 2. ⭐ **纵向半边与中心荷无关**（`towerLop_one_apply_y3_towerLop_neg_one_of_eq_neg_five`）。
+>    上面写「`c = 26`」在这一步是**多余的**：直接计算给
+>    `L_1(y₃(L_{−1}φ)) = 24h•L_{−3}φ + (24h+60)•L_{−2}(L_{−1}φ) + (8h+30)•L_{−1}³φ`，对**一切** `h`；
+>    与 `2h•y₃φ` 比较，`L_{−3}φ` 的系数**恒等相等**，另外两个各自独立地逼出 `h = −5`。
+>    **中心荷从头到尾不出现**——用到的三个对易子 `⁅L_1,L_{−1}⁆=2L_0`、`⁅L_1,L_{−2}⁆=3L_{−1}`、
+>    `⁅L_1,L_{−3}⁆=4L_{−2}` 在权 `±2` 处全是非对角的，中心项没有入口。
+>    故这条恒等式是 **`h`-尖锐而 `c`-无关**的；`c = 26` 进入 `N = 6` 论证是在**别处**（横向半边），
+>    不在这里。上面「在 `V(26,−5)` 里算」的说法**细化**为「只有 `h = −5` 起作用」，不是推翻。
+> 3. **`towerLop_neg_one_injective` 用不上**。上面建议后一半走 §B‴ PR6′ 的单射性；实际实现改用
+>    自足的递归对易子工具箱（`towerLop_one_apply_towerLop_neg_one_of_any` 加沿 `L_{−1}^k`（`k=1..4`）
+>    逐级追踪 `L_0`/`L_1` 本征值），**不需要单射性**。
+>
+> **仍未做**（本 PR 明确不碰）：横向半边（`x₄v`、`y₃v` 作为 `V(26,−4)` 的奇异矢量）、
+> `b26_six`、`ddfSpans_bigrade_neg_six_six`。
+
 ```lean
 -- 草图，未编译
 theorem seed_transfer_six (hD26 : (D:K) = 26) (u : towerBigrade (-6) 1) :
