@@ -66,8 +66,43 @@ verdict: |
       than both the source and the fix commit, so it really was compiled.
   So this attempt's Claim 3(b) (kappa_6(m) = m+1) stands vindicated, and
   it is what the corrected Lean theorem now asserts. No fix dispatch is
-  needed. The three wording/overclaim caveats on claim.md above are
-  untouched and still pending before graduation.
+  needed.
+
+  LEAD UPDATE (2026-09-18, second): the three wording/overclaim caveats
+  on claim.md above are now ALL CLOSED (claim.md edited by the lead; no
+  change to proof.md, whose derivations the reviewer found gap-free).
+    (1) Delta(0) convention: Claim 3(a) now defines Delta(s) by the
+        literal formula only for s >= 1 and states `Delta(0) := 0` as a
+        SEPARATE, explicitly-flagged convention, with the reason spelled
+        out (at s=0 the literal formula gives p(-1)+p(-2)-p(0) = -1, not
+        0). Matches proof.md:131.
+    (2) Pentagonal expansion: moved OUT of the claim body into a marked
+        `[备注，非本 claim 的一部分]` block that states in terms that it
+        is neither proven here nor used by any derivation, that proof.md
+        :164-172 disowns it, and that readers must not cite it as
+        established. Claim 3(a) now asserts only the Delta recursion and
+        the summation formula.
+    (3) Novelty framing: the "new / not previously recorded in the
+        repository" phrase is DELETED and replaced by an explicit
+        narrowing that names the four places the D=26 values already
+        appear (BLUEPRINT:3189, TODO:2155, LevelFiveCount.lean:68, and
+        DescendantKernel.lean:25-26 which already gives the general
+        pentagonal form in its docstring), and restates the genuine
+        contribution as the two things it actually is: (i) a
+        self-contained elementary derivation using only Claim 2 and
+        p(0..7), needing NO Euler pentagonal number theorem (which this
+        project has not established as a brick), and (ii) lifting the
+        kappa's from single numbers at D=26 to explicit closed-form
+        polynomials in m, valid for all m and hence usable in Lean `_gen`
+        theorems.
+  Independently re-verified by the lead before editing (fresh Python, not
+  this attempt's scripts): with Delta(0):=0 the summation form of Claim
+  3(a) reproduces the kappa definition exactly for N=5,6,7 and m=0..6,
+  and both closed forms (m+1 and C(m+3,2)) match term for term; with the
+  literal s=0 formula instead (Delta(0) = -1) it does not. So the
+  convention is load-bearing, not cosmetic.
+  `captain_confirmed` remains false: graduation to `graph/` still needs
+  the captain's sign-off per research/CLAUDE.md lifecycle item 4.
 captain_confirmed: false
 notes: |
   2026-09-16, prover agent (role=prover, branch agent/prover/level-n-generalization).
