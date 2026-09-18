@@ -1,0 +1,101 @@
+state: abandoned
+reviewer: null
+verdict: |
+  2026-09-18 (prover, 自评，非 graph-reviewer 审查——本轮任务性质是"scoping：判定能否在
+  monstrous/Conway moonshine 方向提出一条锐利、有终点线、可用本项目已有资产攻的命题"，
+  不是"完成一个证明后请求审查"，故未请求 graph-reviewer 介入；下方是 prover 自己按任务书
+  给定的四项判据（1 精确到量词 / 2 有终点线 / 3 砖块合规 / 4 确认无源可查）做出的裁定，
+  供 lead/船长参考是否值得再投入)：
+
+  任务背景：上一轮 `research/attempts/umbral-moonshine-origin/`（abandoned）判定 umbral/
+  Mathieu moonshine 不可攻后，指出 monstrous/Conway moonshine（无根格、权 0、全纯）在结构
+  上比 umbral 少两层障碍，且与本项目最大的形式化资产——无鬼定理
+  （`worldsheet.no-ghost-theorem-v4`）——技术上直接相关（Borcherds 1990/1992 证明
+  monstrous moonshine 时把无鬼定理当核心工具），值得单独排查。
+
+  按任务书要求的三步顺序执行完毕：(1) 重读本项目无鬼定理资产全链条（`ddf-spanning-
+  hypothesis`、`ddf-contour-equals-mode-sum`、`physical-exponential-equals-voa-vertex-
+  operator`、`exponential-vertex-operator-modes`、`free-boson-vertex-algebra-with-
+  lightlike-momentum-tower`、`math.lattice-vertex-algebra`），并读取已存在但未合并的
+  `agent/formalizer/moonshine-bridge` 分支的 `formal/BLUEPRINT-moonshine-bridge.md`
+  （确认其"秩1→秩2结构缺口""DDF-spanning N≥6 开放"等结论与本轮独立读图一致，未重复
+  其工作）；(2) 核实 Borcherds 1992 §5 Theorem 5.1 用无鬼定理的确切方式（`H=V⊗V_{II_{1,1}}`，
+  D=26 经 Lemma 5.4 进入，真/假 Monster 用同一条定理）；(3) WebSearch 独立核实 Conway
+  moonshine 侧两条文献引用（Duncan–Mack-Crane 2015 arXiv:1409.3829；Harrison–Paquette–
+  Volpato 2018 arXiv:1803.10798），纠正/确认上一轮"HPV 2018"缩写引用的完整书目信息。
+
+  本轮排查了三条候选命题，逐一按四项判据判定（详见 claim.md §1、proof.md §2/§4/§5/§6.1
+  汇总表）：
+
+  - **候选 C**（瓶颈节点 `worldsheet.physical-exponential-equals-voa-vertex-operator` 断言
+    (2) 的精确重述："物理正规序指数塔算子 = Li–Wang 格点 VOA 结构映射"）：判据 1、2、3
+    通过，**判据 4 失败**。本轮把两侧公式摊开到显式层面比对（proof.md §2），发现 VOA 侧
+    公式 (3.10) 里的 `E^-`、`Δ̄` 算子在图内只是照抄 Li–Wang 2008 的占位记号，未被抽取为
+    显式公式；而 Li–Wang 2008 已经是本项目深度引用、多个编号结果都已 L1 核实的一手来源，
+    紧邻 (3.10) 之前的 §2–§3 几乎肯定包含这些算子的显式定义。三层论证（Li–Wang 已被深度
+    引用；标准格VOA顶点算子配方跨文献高度模式化，与本项目物理侧公式逐项同构；真正缺的是
+    两项具体抽取任务而非新数学）支持这一判断，但本轮**没有**重新独立打开 Li–Wang arXiv:
+    0802.0173 原文核实（诚实标注为 `[GAP]`，见 proof.md §2.4）。
+  - **候选 D**（Borcherds 秩2框架 `H=V⊗V_{II_{1,1}}` 所需的秩1→秩2结构翻译本身）：判据
+    1、2、3 通过，**判据 4 失败**——Li–Wang 存在性定理本身不限秩（含秩2情形），Borcherds
+    1992/1986 本身就是应用范例，真正要做的是具体实例化（构造 `V_{II_{1,1}}`、非平凡
+    cocycle、张两个 Li–Wang 实例）——是大规模但纯工程性质的形式化任务，不含未解决数学
+    问题，不属于 `research/` 对象。
+  - **候选 E**（Harrison–Paquette–Volpato 2018 论文结尾"建议"：把 Conway BKM 超代数分母
+    公式提升为时空 BPS 指标从而解释 genus-zero 性质）：判据 1、2、4 通过（这是本轮唯一
+    一条文献自己也承认未完成、货真价实"查无证明"的命题），**判据 3 失败**——需要三块
+    砖（Conway 模 `V^{s♮}` 的完整超 VOA 构造、超弦 BRST 同调物理态刻画、BPS 指标与分母
+    公式对应的精确数学表述），图里一块都不是 rigorous/formalized 节点，且第二块（超弦
+    BRST）是本项目完全没有的一整层基础设施（本项目 `no-ghost-theorem-v4` 全链条只覆盖
+    玻色弦），规模堪比另开一个无鬼定理岛。
+
+  **本轮判定：三条候选无一同时满足全部四项判据，构成一次诚实的"提不出来"交付**
+  （proof.md §6.1 汇总表）。与上一轮 umbral moonshine 的"缺整层基础设施故不可攻"不同，
+  本轮的诊断更精确：本项目资产"够得着"的部分（候选 C、D）全部在判据 4 落败——文献大概率
+  或确定已经覆盖，只是本项目抽取/实例化未完成，根本不该进 `research/`，该转交
+  `researcher`/`curator`/`lean-formalizer`；本项目资产"够不着"的部分（候选 E）在判据 3
+  落败——缺整层基础设施，性质与上一轮候选 A/B 相同。
+
+  **具体的、最可执行的后续建议**（本轮不执行，留给下一轮，详见 proof.md §6.3）：
+  (1) 【优先级最高】`researcher` 重新打开 Li–Wang 2008 §2–§3，抽取 `E^-`/`Δ̄` 的显式定义
+  与 twisted 模版本的 (3.10)，`curator` 补卡后尝试关闭瓶颈节点 `physical-exponential-
+  equals-voa-vertex-operator`；(2) `curator` 可将 Duncan–Mack-Crane 2015 与 Harrison–
+  Paquette–Volpato 2018 登记为图内节点（纯登记工作，非 research 对象）；(3) `researcher`
+  把本轮对 Frenkel 1985 的 L1 一手阅读（通过 `Read` 工具直接解析 PDF 页面图像达成，绕开
+  此前 `WebFetch`-OCR 失败留下的 L0 标记）正式登记进 `literature/extractions/`，升级
+  `frenkel-1985` 内容状态，并记录这一方法论发现（对其他扫描版 PDF，如 FLM 1988，可能
+  同样适用）；(4) 不建议近期开新的 `research/` 轨道专攻 monstrous/Conway moonshine 任何
+  子问题。
+
+  未尽核实的诚实局限（均已在 proof.md 内以 `[GAP]` 标注）：本轮未重新独立打开 Li–Wang
+  2008、Borcherds 1992 (Invent. Math. 109)、FLM 1988 原文核实page-level细节（Borcherds
+  1992 沿用图内既有 L1/L2 核实结果；Li–Wang 与 FLM 的判断基于结构性论证与跨文献模式匹配，
+  非逐字核对）；Conway moonshine 两条文献引用停留在 `⟨lit, 待核⟩`（WebSearch 摘要级），
+  未读原文全文。
+captain_confirmed: false
+notes: |
+  2026-09-18 (prover)：本轮任务性质是"scoping：判定能否提出一条锐利、有终点线、brick-
+  compliant、确认无源可查的候选命题"，不是从零开始证明。产出：claim.md（背景对象记号 §0，
+  三条候选命题的判据分析 §1，已知砖块盘点表 §2，最终判定 §3）、proof.md（六节：方法与执行
+  顺序 §1，候选C深挖含两侧公式逐项显式比对 §2，Frenkel 1985 独立一手阅读（`Read`工具直接
+  解析PDF页面图像，绕开此前WebFetch-OCR失败留下的L0标记）§3，候选D结构翻译工作量分析
+  §4，候选E砖块合规性分析 §5，最终裁定表+具体后续建议 §6）。
+
+  state 定为 abandoned：三条候选逐一核对任务书给定的四项判据，无一全部通过（详见
+  verdict）。这不是"证明失败"（本轮从未开始严格证明尝试，任务性质就是开工前先判断是否
+  值得开工），是"排查后判定：在本项目当前资产 + 当前文献登记状态下，找不到一条同时满足
+  判据1-4的候选"，如实记录以防后续 agent 重复踩坑（research/CLAUDE.md §5 abandoned 语义）。
+  captain_confirmed 留 false，待船长/lead 看是否认可这个否定裁定，以及是否要按 verdict
+  末尾给出的四条具体建议派发后续 researcher/curator 任务。
+
+  与上一轮 umbral-moonshine-origin 的关键区别：那一轮的否决理由是"缺整层基础设施"；本轮
+  对候选C、D的否决理由是更乐观的"判据4失败——文献大概率/确定已覆盖，只是本项目未抽取/
+  未实例化"，把瓶颈节点 `worldsheet.physical-exponential-equals-voa-vertex-operator` 的
+  修补路径从"可能需要开 research/ 轨道"精化为"应该派 researcher 继续抽取 Li–Wang 2008"。
+  这是本轮除三条候选的否定判定之外，最实质的正向产出。
+
+  环境限制：本次会话可用工具列表中没有 agora_join/agora_claim/agora_release 等 agora
+  总线函数（只有 Read/Grep/Glob/Bash/Write/Edit/WebSearch/WebFetch），故未能按角色要求
+  调用 agora 协调；已在最终报告中向 lead 说明，未强行调用不存在的工具。所有写入均严格
+  限制在本轮任务书指定的 `research/attempts/monstrous-conway-noghost/**` 路径内，未触碰
+  `graph/`、`formal/`、`literature/` 或其他 `research/` 子目录。
