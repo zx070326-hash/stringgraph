@@ -1,0 +1,22 @@
+id: math.supermoduli-compactified-genus-2-canonical-projection-fails--via-felder-kazhdan-polishchuk
+target: math.supermoduli-compactified-genus-2-canonical-projection-fails
+kind: proof
+status: rigorous
+depends_on: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2024
+    loc: "arXiv:2408.11136v1, §1.2.3 p.4（引言复述）；正文证明在 §6（未读）"
+    note: 仅部分 L1，见 statement sources note。
+summary: |
+  记账已发表数学论证："we show"、"we derive"，作者自称完整证明（§2–§5 建立超周期映射边界行为，§6
+  应用到典范投影）。本项目只读了引言对结论的复述，未读 §2–§6 本身。
+gaps:
+  - |
+    **§2 起正文完全未读**（本项目只读了摘要+目录+引言 pp.1–4），Theorem 6.3 的逐字陈述、证明步骤、
+    是否有省略均未核实。rigorous 档位依据来源强度（已发表预印本 + "we show/we derive" + 完整定理
+    编号结构），非本图独立复核。
+  - |
+    "S̄₂ 是否显式按宇称分量分解"这一点本项目未在 FKP 原文中核实到（见 statement notes）；本节点的
+    陈述文本因此不使用"𝔐̄₂⁺"记号，只用 FKP 自己的 S̄₂/边界因子语言。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"

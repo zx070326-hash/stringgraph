@@ -1,0 +1,42 @@
+id: math.supermoduli-compactified-genus-2-canonical-projection-fails
+kind: proposition
+title: 紧化亏格二超模空间的典范投影在分离 (−,−) 边界因子处失效，故 S̄₂ 不可投影（Felder–Kazhdan–Polishchuk Theorem 6.3）
+statement: |
+  **对象**（Felder–Kazhdan–Polishchuk arXiv:2408.11136v1 §1.2.3/§6；论文记号 𝒮_g/𝒮̄_g，与既有节点
+  `math.supermoduli-space-not-projected` 的 𝔐_g/𝔐̄_g 指称同一对象）：𝒮̄₂ 为亏格二稳定超曲线模空间的
+  Deligne–Mumford 型紧化；π^can: 𝒮₂ → 𝒮_{2,bos} 为超周期映射诱导的典范投影。
+
+  **定理**（§1.2.3，逐字，p.4，紧接目录中 Theorem 6.3 的引言复述）：
+  "We show that π^can extends to a regular projection on S̄₂ away from the (−,−) separating node
+  divisor D^{−,−}...In fact, we show that π^can is the unique projection regular at a generic point of
+  each boundary divisor corresponding to a non-separating node. As a consequence, we derive that S̄₂ is
+  not projected."
+
+  **本节点的范围红线**：
+  (1) **仅限亏格 2**。同页逐字："there seems to be no canonical projection for g > 2 (for g = 3 the
+      projection given by the superperiod map is only defined away from the hyperelliptic locus)"——
+      作者本人未在本文对 g≥3 做出断言。
+  (2) 本定理是"非投影性"（projectedness）结论，**不是**摘要所称"对任意亏格成立"的**正则性**
+      （regularity，测度延拓无极点/无多值）结论——那是本文（转述 Deligne 未发表论证）的另一条不同的
+      技术命题，范围是任意亏格，但断言的是不同的性质，本节点不承载它（不建混淆卡）。
+uses_conventions: []
+sources:
+  - ref: felder-kazhdan-polishchuk-2024
+    loc: "arXiv:2408.11136v1, 摘要；目录 §6 标题；§1.2.3 p.4（逐字引理陈述与 g>2 未解决声明）"
+    note: |
+      **仅部分 L1**：摘要 + 目录 + Introduction §1.1/§1.2（pp.1–4）已读（researcher 2026-09-18，
+      抽取记录 literature/extractions/felder-kazhdan-polishchuk-2024.md E1–E2）。**§2 起正文
+      （含 §6 Theorem 6.3 本身的逐字陈述与完整证明）未读**——本节点的定理文本取自引言对 Theorem 6.3
+      的**复述**（"(see Theorem 6.3)"），不是 §6 原文的逐字陈述；若需要精确定理编号/引理链，须先补读
+      §6。
+tags: [supermoduli, super-riemann-surface, non-projected, compactified, genus-2, math-input, felder-kazhdan-polishchuk]
+notes: |
+  Corrêa–Noja arXiv:2606.06733（`correa-noja-2026`）在其 Theorem 1.1 item (2)（见
+  `math.supermoduli-compactified-genus-2-even-not-projected`）中把本节点称为"the Felder–Kazhdan–
+  Polishchuk genus-two even non-projectedness theorem"，即把本节点的结论等同于紧化亏格二**偶自旋
+  分量** 𝔐̄₂⁺ 非投影（ω₂(𝔐̄₂⁺)≠0）。**这一"等同于偶分量"的措辞是 Corrêa–Noja 一方的识别/转译**，
+  本项目对 FKP 原文 §6 未读，无法独立确认 FKP 自己是否明确按宇称分量表述 Theorem 6.3——因此本节点
+  统一使用 FKP 引言自己的语言（S̄₂/边界因子），不写"𝔐̄₂⁺"字样；两者的等同关系记在
+  `math.supermoduli-compactified-genus-2-even-not-projected` 的 depends_on 边上。
+author: curator-supermoduli-post-2024
+created: "2026-09-18"
